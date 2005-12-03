@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %plugin.Name
+Bundle-SymbolicName: org.eclipse.jsf
+Bundle-Version: 1.0.0
+Bundle-Activator: org.eclipse.jsf.main.MainPlugin
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime
+Eclipse-AutoStart: true
+Bundle-Vendor: %plugin.Provider
