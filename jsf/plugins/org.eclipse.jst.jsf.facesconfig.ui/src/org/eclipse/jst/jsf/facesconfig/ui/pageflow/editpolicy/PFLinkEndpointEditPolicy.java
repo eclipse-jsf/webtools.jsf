@@ -1,0 +1,62 @@
+/*******************************************************************************
+ * Copyright (c) 2004, 2005 Sybase, Inc. and others.
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Sybase, Inc. - initial API and implementation
+ *******************************************************************************/
+
+package org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpolicy;
+
+import org.eclipse.draw2d.PolylineConnection;
+import org.eclipse.gef.GraphicalEditPart;
+import org.eclipse.gef.editpolicies.ConnectionEndpointEditPolicy;
+import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorPreferences;
+
+public class PFLinkEndpointEditPolicy extends ConnectionEndpointEditPolicy {
+	/**
+	 * 
+	 */
+	public PFLinkEndpointEditPolicy() {
+		super();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ConnectionEndpointEditPolicy#addSelectionHandles
+	 */
+	protected void addSelectionHandles() {
+		super.addSelectionHandles();
+		IPreferenceStore store = EditorPlugin.getDefault().getPreferenceStore();
+		int connectionWidth = store.getInt(EditorPreferences.LINE_WIDTH);
+		getConnectionFigure().setLineWidth(connectionWidth + 1);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ConnectionEndpointEditPolicy#getConnectionFigure
+	 */
+	protected PolylineConnection getConnectionFigure() {
+		return (PolylineConnection) ((GraphicalEditPart) getHost()).getFigure();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ConnectionEndpointEditPolicy#removeSelectionHandles
+	 */
+	protected void removeSelectionHandles() {
+		super.removeSelectionHandles();
+		IPreferenceStore store = EditorPlugin.getDefault().getPreferenceStore();
+		int connectionWidth = store.getInt(EditorPreferences.LINE_WIDTH);
+		getConnectionFigure().setLineWidth(connectionWidth);
+	}
+}

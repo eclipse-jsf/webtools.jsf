@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+<extension point="org.eclipse.ui.editors">
+		
+		<editor
+        class="org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor"
+        contributorClass="org.eclipse.emf.edit.ui.action.EditingDomainActionBarContributor"
+        default="false"
+        extensions="xml"
+        icon="icons/facesconfig/FacesConfig_Plugin.gif"
+        id="org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor"
+        name="FacesConfig Editor">
+			<contentTypeBinding
+				contentTypeId="org.eclipse.wtp.jsf.facesconfig.facesConfigFile" />
+		</editor>
+	</extension>
+	
+ 	<!-- ********** Introduction Page of PageFlow editor************** -->
+	<extension id="org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor"
+		name="%pageflow.editor.intro.name"
+		point="org.eclipse.jst.jsf.facesconfig.common.introductionPage">
+		<introductionpage name="Introduction"
+			description="%pageflow.editor.intro.description">
+			<introductionelement icon="icons/FacesConfig_Introduction.gif"
+				heading="The Faces Configuration Editor"
+				text="%pageflow.editor.intro.section.description"/>
+			<introductionelement
+				actionparameters="org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowEditor"
+				icon="icons/FacesConfig_GotoEditor.gif"
+				hyperlinkaction="org.eclipse.jst.jsf.facesconfig.common.actions.OpenPageAction"
+				text="%pageflow.editor.intro.start.text"
+				hyperlink="%pageflow.editor.intro.start.link"/>
+			<introductionelement
+				actionparameters="PageflowEditor.createCheatSheet"
+				icon="icons/FacesConfig_Tutorial.gif"
+				hyperlinkaction="org.eclipse.jst.jsf.facesconfig.common.actions.LoadCheatSheetAction"
+				text="%pageflow.editor.intro.cheatsheets.text"
+				hyperlink="%pageflow.editor.intro.cheatsheets.link"/>
+			<introductionelement actionparameters="com.sybase.stf.jmt.editors_pageflow_PageflowPage"
+				icon="icons/overview_obj.gif"
+				hyperlinkaction="org.eclipse.jst.jsf.facesconfig.common.actions.LoadHelpAction"
+				text="%pageflow.editor.intro.help.text"
+				hyperlink="%pageflow.editor.intro.help.link"/>
+		</introductionpage>		
+	</extension>
+	<!-- ********** End Introduction Page ************** -->
+		<!-- ************* properties view ************** -->
+	<extension point="org.eclipse.wst.common.ui.properties.propertyTabs">
+		<propertyTabs
+			contributorId="org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor">
+			<propertyTab label="%propertyTab.attribute" category="attribute"
+				id="com.sybase.stf.jmt.pageflow.attribute"/>
+			<propertyTab label="%propertyTab.general" category="general"
+				id="com.sybase.stf.jmt.pageflow.general"/>
+		</propertyTabs>
+	</extension>
+		<extension point="org.eclipse.wst.common.ui.properties.propertyContributor">
+		<propertyContributor
+			sectionDescriptorProvider="org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.PageflowSectionDescriptorProvider"
+			contributorId="org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor"
+			labelProvider="org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.PageflowSectionLabelProvider">
+			<propertyCategory category="attribute"/>
+			<propertyCategory category="general"/>
+		</propertyContributor>
+	</extension>
+</plugin>
