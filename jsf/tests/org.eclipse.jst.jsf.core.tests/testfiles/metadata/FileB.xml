@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:grammar-annotations xmlns:p="http://org.eclipse.jst.jsf.core/grammarAnnotationSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://org.eclipse.jst.jsf.core/grammarAnnotationSchema ../../../org.eclipse.jst.jsf.core/schema/grammar-annotations.xsd ">
+  <cm-element name="Foo">
+  	<cm-attribute name="Value">
+  		<property name="Type">
+  			<value>String2</value>
+  		</property>
+  	</cm-attribute>
+	<property name="Type">
+		<value>String2</value>
+	</property>
+  </cm-element>
+</p:grammar-annotations>
