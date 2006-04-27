@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.eclipse.jst.jsf.tests.feature"
+      label="%feature.name"
+      version="0.5.0.qualifier"
+      provider-name="%feature.provider">
+
+   <description>
+      %feature.description
+   </description>
+
+   <license url="license.html">
+      %feature.license
+   </license>
+
+   <plugin
+         id="org.eclipse.jst.jsf.core.tests"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+   <plugin
+         id="org.eclipse.jst.jsf.ui.tests"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+</feature>
