@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+   <extension-point id="jsfLibraries" name="jsfLibraries" schema="schema/jsfLibraries.exsd"/>
+   <extension-point id="annotationFiles" name="annotationFiles" schema="schema/annotationFiles.exsd"/>
+  <!-- JSF Project Facets -->
+	<extension
+       id="org.eclipse.jst.jsf.project.facet"
+       name="%plugin.facet.extension.name"
+       point="org.eclipse.wst.common.project.facet.core.facets">
+
+    <project-facet id="jst.jsf">
+      <label>JavaServer Faces</label>
+      <description>%plugin.facet.description</description>
+    </project-facet>
+
+    <project-facet-version facet="jst.jsf" version="1.1">
+       <constraint>
+        <and>
+          <requires facet="jst.web" version="[2.3"/>
+        </and>
+      </constraint>
+    </project-facet-version> 
+    
+    <project-facet-version facet="jst.jsf" version="1.2">
+     <constraint>
+        <and>
+          <requires facet="jst.web" version="[2.4"/>
+        </and>
+      </constraint>
+    </project-facet-version>    
+
+   	<action type="install" facet="jst.jsf" version="1.1,1.2">
+		<delegate
+        class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDelegate"/>
+		<config-factory class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDataModelProvider"/>
+	</action>
+    
+	<action type="uninstall" facet="jst.jsf" version="1.1,1.2">
+	 	<delegate
+         class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetUninstallDelegate"/>
+ 	</action>
+ 	
+	<preset id="preset.jst.jsf.v1_1">
+	    <label>JavaServer Faces v1.1 Project</label>
+	    <facet id="jst.java" version="1.4" />
+	    <facet id="jst.web" version="2.3"/>
+	    <facet id="jst.jsf" version="1.1" />
+	</preset>    
+ 	
+  </extension> 
+  
+  <extension point="org.eclipse.wst.common.project.facet.core.runtimes">
+    <supported>
+		<runtime-component any="true"/>
+       	<facet id="jst.jsf" version="1.1,1.2"/>
+    </supported>
+  </extension>
+    
+  <extension
+     name="JSF JSP File URL"
+     point="org.eclipse.jst.j2ee.web.fileURL">
+     <fileURL run="org.eclipse.jst.jsf.core.internal.launch.JSFFileURL"/>
+  </extension>
+  <extension
+        point="org.eclipse.wst.xml.core.catalogContributions">
+     <catalogContribution>
+        <system
+              systemId="http://org.eclipse.jst.jsf.core/grammarAnnotationSchema"
+              uri="schema/grammar-annotations.xsd"/>
+     </catalogContribution>
+  </extension>
+  
+</plugin>

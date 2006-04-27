@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2005, 2006 IBM Corporation and others"
+    modelDirectory="/org.eclipse.jst.jsf.facesconfig/facesconfig" editDirectory="/org.eclipse.jst.jsf.facesconfig.edit/src"
+    editorDirectory="/org.eclipse.jst.jsf.facesconfig.editor/src" modelPluginID="org.eclipse.jst.jsf.facesconfig"
+    templateDirectory="org.eclipse.jst.jsf.facesconfig/model/templates" dynamicTemplates="true"
+    redirection="" modelName="FacesConfig" modelPluginClass="" editPluginClass="org.eclipse.jst.jsf.facesconfig.emf.provider.FacesConfigEditPlugin"
+    editorPluginClass="org.eclipse.jst.jsf.facesconfig.emf.presentation.FacesConfigEditorPlugin"
+    rootImplementsInterface="" featureMapWrapperInterface="" featureMapWrapperInternalInterface=""
+    featureMapWrapperClass="" testSuiteClass="org.eclipse.jst.jsf.facesconfig.emf.tests.FacesConfigAllTests"
+    booleanFlagsField="">
+  <foreignModel>../../../com.ibm.etools.jsf/facesConfig.xsd</foreignModel>
+  <genPackages prefix="FacesConfig" basePackage="org.eclipse.jst.jsf" disposableProviderFactory="true"
+      interfacePackageSuffix="emf" classPackageSuffix="emf.impl" utilityPackageSuffix="emf.util"
+      providerPackageSuffix="emf.provider" presentationPackageSuffix="emf.presentation"
+      testsPackageSuffix="emf.tests" ecorePackage="FacesConfig.ecore#/">
+    <genClasses ecoreClass="FacesConfig.ecore#//ActionListenerType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ActionListenerType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ActionListenerType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//ApplicationFactoryType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ApplicationFactoryType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ApplicationFactoryType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//ApplicationType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ApplicationType/actionListener"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ApplicationType/defaultRenderKitId"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ApplicationType/messageBundle"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ApplicationType/navigationHandler"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ApplicationType/viewHandler"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ApplicationType/stateManager"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ApplicationType/propertyResolver"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ApplicationType/variableResolver"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ApplicationType/localeConfig"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ApplicationType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//AttributeClassType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//AttributeClassType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//AttributeClassType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//AttributeExtensionType">
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//AttributeExtensionType/mixed"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//AttributeExtensionType/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//AttributeExtensionType/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//AttributeExtensionType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//AttributeNameType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//AttributeNameType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//AttributeNameType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//AttributeType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//AttributeType/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//AttributeType/displayName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//AttributeType/icon"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//AttributeType/attributeName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//AttributeType/attributeClass"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//AttributeType/defaultValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//AttributeType/suggestedValue"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//AttributeType/attributeExtension"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//AttributeType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//ComponentClassType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ComponentClassType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ComponentClassType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//ComponentExtensionType">
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ComponentExtensionType/mixed"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ComponentExtensionType/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ComponentExtensionType/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ComponentExtensionType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//ComponentFamilyType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ComponentFamilyType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ComponentFamilyType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//ComponentType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ComponentType/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ComponentType/displayName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ComponentType/icon"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ComponentType/componentType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ComponentType/componentClass"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ComponentType/facet"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ComponentType/attribute"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ComponentType/property"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ComponentType/componentExtension"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ComponentType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//ComponentTypeType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ComponentTypeType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ComponentTypeType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//ConverterClassType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ConverterClassType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ConverterClassType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//ConverterForClassType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ConverterForClassType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ConverterForClassType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//ConverterIdType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ConverterIdType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ConverterIdType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//ConverterType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ConverterType/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ConverterType/displayName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ConverterType/icon"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//ConverterType/converterId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//ConverterType/converterForClass"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//ConverterType/converterClass"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ConverterType/attribute"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ConverterType/property"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ConverterType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//DefaultLocaleType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//DefaultLocaleType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//DefaultLocaleType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//DefaultRenderKitIdType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//DefaultRenderKitIdType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//DefaultRenderKitIdType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//DefaultValueType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//DefaultValueType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//DefaultValueType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//DescriptionType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//DescriptionType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//DescriptionType/lang"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//DescriptionType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//DisplayNameType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//DisplayNameType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//DisplayNameType/lang"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//DisplayNameType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//DocumentRoot">
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//DocumentRoot/mixed"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/xMLNSPrefixMap"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/xSISchemaLocation"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/actionListener"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/application"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/applicationFactory"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/attribute"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/attributeClass"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/attributeExtension"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/attributeName"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/component"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/componentClass"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/componentExtension"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/componentFamily"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/componentType"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/converter"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/converterClass"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/converterForClass"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/converterId"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/defaultLocale"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/defaultRenderKitId"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/defaultValue"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/description"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/displayName"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/facesConfig"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/facesContextFactory"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/facet"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/facetExtension"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/facetName"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/factory"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/fromAction"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/fromOutcome"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/fromViewId"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/icon"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/key"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/keyClass"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/largeIcon"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/lifecycle"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/lifecycleFactory"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/listEntries"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/localeConfig"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/managedBean"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/managedBeanClass"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/managedBeanName"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/managedBeanScope"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/managedProperty"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/mapEntries"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/mapEntry"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/messageBundle"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/navigationCase"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/navigationHandler"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/navigationRule"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/nullValue"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/phaseListener"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/property"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/propertyClass"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/propertyExtension"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/propertyName"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/propertyResolver"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/redirect"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/referencedBean"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/referencedBeanClass"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/referencedBeanName"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/renderer"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/rendererClass"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/rendererExtension"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/rendererType"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/renderKit"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/renderKitClass"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/renderKitFactory"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/renderKitId"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/smallIcon"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/stateManager"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/suggestedValue"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/supportedLocale"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/toViewId"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/validator"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/validatorClass"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/validatorId"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/value"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/valueClass"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/variableResolver"/>
+      <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/viewHandler"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//FacesConfigType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//FacesConfigType/application"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//FacesConfigType/factory"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//FacesConfigType/component"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//FacesConfigType/converter"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//FacesConfigType/managedBean"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//FacesConfigType/navigationRule"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//FacesConfigType/referencedBean"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//FacesConfigType/renderKit"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//FacesConfigType/lifecycle"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//FacesConfigType/validator"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//FacesConfigType/xmlns"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//FacesConfigType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//FacesContextFactoryType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//FacesContextFactoryType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//FacesContextFactoryType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//FacetExtensionType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//FacetExtensionType/mixed"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//FacetExtensionType/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//FacetExtensionType/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//FacetExtensionType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//FacetNameType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//FacetNameType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//FacetNameType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//FacetType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//FacetType/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//FacetType/displayName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//FacetType/icon"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//FacetType/facetName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//FacetType/facetExtension"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//FactoryType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//FactoryType/applicationFactory"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//FactoryType/facesContextFactory"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//FactoryType/lifecycleFactory"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//FactoryType/renderKitFactory"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//FactoryType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//FromActionType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//FromActionType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//FromActionType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//FromOutcomeType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//FromOutcomeType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//FromOutcomeType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//FromViewIdType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//FromViewIdType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//FromViewIdType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//IconType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//IconType/smallIcon"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//IconType/largeIcon"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//IconType/lang"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//IconType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//KeyClassType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//KeyClassType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//KeyClassType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//KeyType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//KeyType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//KeyType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//LargeIconType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//LargeIconType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//LargeIconType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//LifecycleFactoryType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//LifecycleFactoryType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//LifecycleFactoryType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//LifecycleType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//LifecycleType/phaseListener"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//LifecycleType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//ListEntriesType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//ListEntriesType/valueClass"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ListEntriesType/nullValue"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ListEntriesType/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ListEntriesType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//LocaleConfigType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//LocaleConfigType/defaultLocale"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//LocaleConfigType/supportedLocale"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//LocaleConfigType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//ManagedBeanClassType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ManagedBeanClassType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ManagedBeanClassType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//ManagedBeanNameType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ManagedBeanNameType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ManagedBeanNameType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//ManagedBeanScopeType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ManagedBeanScopeType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ManagedBeanScopeType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//ManagedBeanType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ManagedBeanType/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ManagedBeanType/displayName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ManagedBeanType/icon"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//ManagedBeanType/managedBeanName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//ManagedBeanType/managedBeanClass"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//ManagedBeanType/managedBeanScope"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ManagedBeanType/managedProperty"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ManagedBeanType/mapEntries"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ManagedBeanType/listEntries"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ManagedBeanType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//ManagedPropertyType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ManagedPropertyType/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ManagedPropertyType/displayName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ManagedPropertyType/icon"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//ManagedPropertyType/propertyName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//ManagedPropertyType/propertyClass"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ManagedPropertyType/mapEntries"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//ManagedPropertyType/nullValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//ManagedPropertyType/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ManagedPropertyType/listEntries"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ManagedPropertyType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//MapEntriesType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//MapEntriesType/keyClass"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//MapEntriesType/valueClass"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//MapEntriesType/mapEntry"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//MapEntriesType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//MapEntryType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//MapEntryType/key"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//MapEntryType/nullValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//MapEntryType/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//MapEntryType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//MessageBundleType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//MessageBundleType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//MessageBundleType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//NavigationCaseType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//NavigationCaseType/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//NavigationCaseType/displayName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//NavigationCaseType/icon"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//NavigationCaseType/fromAction"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//NavigationCaseType/fromOutcome"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//NavigationCaseType/toViewId"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//NavigationCaseType/redirect"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//NavigationCaseType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//NavigationHandlerType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//NavigationHandlerType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//NavigationHandlerType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//NavigationRuleType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//NavigationRuleType/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//NavigationRuleType/displayName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//NavigationRuleType/icon"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//NavigationRuleType/fromViewId"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//NavigationRuleType/navigationCase"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//NavigationRuleType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//NullValueType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//NullValueType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//PhaseListenerType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//PhaseListenerType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//PhaseListenerType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//PropertyClassType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//PropertyClassType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//PropertyClassType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//PropertyExtensionType">
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//PropertyExtensionType/mixed"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//PropertyExtensionType/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//PropertyExtensionType/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//PropertyExtensionType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//PropertyNameType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//PropertyNameType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//PropertyNameType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//PropertyResolverType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//PropertyResolverType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//PropertyResolverType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//PropertyType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//PropertyType/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//PropertyType/displayName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//PropertyType/icon"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//PropertyType/propertyName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//PropertyType/propertyClass"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//PropertyType/defaultValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//PropertyType/suggestedValue"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//PropertyType/propertyExtension"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//PropertyType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//RedirectType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//RedirectType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//ReferencedBeanClassType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ReferencedBeanClassType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ReferencedBeanClassType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//ReferencedBeanNameType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ReferencedBeanNameType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ReferencedBeanNameType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//ReferencedBeanType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ReferencedBeanType/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ReferencedBeanType/displayName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ReferencedBeanType/icon"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//ReferencedBeanType/referencedBeanName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//ReferencedBeanType/referencedBeanClass"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ReferencedBeanType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//RendererClassType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//RendererClassType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//RendererClassType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//RendererExtensionType">
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//RendererExtensionType/mixed"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//RendererExtensionType/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//RendererExtensionType/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//RendererExtensionType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//RendererType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//RendererType/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//RendererType/displayName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//RendererType/icon"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//RendererType/componentFamily"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//RendererType/rendererType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//RendererType/rendererClass"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//RendererType/facet"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//RendererType/attribute"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//RendererType/rendererExtension"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//RendererType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//RendererTypeType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//RendererTypeType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//RendererTypeType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//RenderKitClassType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//RenderKitClassType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//RenderKitClassType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//RenderKitFactoryType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//RenderKitFactoryType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//RenderKitFactoryType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//RenderKitIdType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//RenderKitIdType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//RenderKitIdType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//RenderKitType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//RenderKitType/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//RenderKitType/displayName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//RenderKitType/icon"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//RenderKitType/renderKitId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//RenderKitType/renderKitClass"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//RenderKitType/renderer"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//RenderKitType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//SmallIconType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//SmallIconType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//SmallIconType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//StateManagerType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//StateManagerType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//StateManagerType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//SuggestedValueType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//SuggestedValueType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//SuggestedValueType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//SupportedLocaleType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//SupportedLocaleType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//SupportedLocaleType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//ToViewIdType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ToViewIdType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ToViewIdType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//ValidatorClassType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ValidatorClassType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ValidatorClassType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//ValidatorIdType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ValidatorIdType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ValidatorIdType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//ValidatorType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ValidatorType/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ValidatorType/displayName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ValidatorType/icon"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//ValidatorType/validatorId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//ValidatorType/validatorClass"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ValidatorType/attribute"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ValidatorType/property"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ValidatorType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//ValueClassType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ValueClassType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ValueClassType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//ValueType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ValueType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ValueType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//VariableResolverType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//VariableResolverType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//VariableResolverType/id"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//ViewHandlerType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ViewHandlerType/textContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ViewHandlerType/id"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
