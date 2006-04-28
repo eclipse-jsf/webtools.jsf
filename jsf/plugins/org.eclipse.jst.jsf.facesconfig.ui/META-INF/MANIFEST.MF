@@ -31,9 +31,9 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.jst.j2ee.web,
  org.eclipse.jst.j2ee,
  org.eclipse.jst.j2ee.core,
- org.eclipse.wtp.jsf.facesconfig,
  org.eclipse.wst.common.emf,
  org.eclipse.jst.jsf.facesconfig.edit,
  org.eclipse.jem.util,
- org.eclipse.jst.jsf.facesconfig.common
+ org.eclipse.jst.jsf.facesconfig.common,
+ org.eclipse.jst.jsf.facesconfig
 Eclipse-LazyStart: true
