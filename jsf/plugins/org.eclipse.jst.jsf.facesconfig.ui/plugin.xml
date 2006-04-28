@@ -12,7 +12,7 @@
         id="org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor"
         name="FacesConfig Editor">
 			<contentTypeBinding
-				contentTypeId="org.eclipse.wtp.jsf.facesconfig.facesConfigFile" />
+				contentTypeId="org.eclipse.jst.jsf.facesconfig.facesConfigFile" />
 		</editor>
 	</extension>
 	
