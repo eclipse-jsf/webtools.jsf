@@ -37,3 +37,12 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.jst.jsf.facesconfig.common,
  org.eclipse.jst.jsf.facesconfig
 Eclipse-LazyStart: true
+Export-Package: org.eclipse.jst.jsf.facesconfig.ui,
+ org.eclipse.jst.jsf.facesconfig.ui.dialog,
+ org.eclipse.jst.jsf.facesconfig.ui.page,
+ org.eclipse.jst.jsf.facesconfig.ui.page.detail,
+ org.eclipse.jst.jsf.facesconfig.ui.pageflow.util,
+ org.eclipse.jst.jsf.facesconfig.ui.provider,
+ org.eclipse.jst.jsf.facesconfig.ui.section,
+ org.eclipse.jst.jsf.facesconfig.ui.util,
+ org.eclipse.jst.jsf.facesconfig.ui.wizard
