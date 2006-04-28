@@ -12,9 +12,9 @@
 package org.eclipse.jst.jsf.facesconfig.ui.util;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
+import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.jst.jsf.facesconfig.ui.IFacesConfigConstants;
-import org.eclipse.wtp.jsf.facesconfig.emf.FacesConfigPackage;
-import org.eclipse.wtp.jsf.facesconfig.emf.FacesConfigType;
 
 /**
  * @author Zhi-peng Zhang

@@ -26,6 +26,11 @@ import org.eclipse.jst.jsf.facesconfig.common.dialogfield.IDialogFieldApplyListe
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.IStringButtonAdapter;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.LayoutUtil;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.StringButtonDialogField;
+import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
+import org.eclipse.jst.jsf.facesconfig.emf.ListEntriesType;
+import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanType;
+import org.eclipse.jst.jsf.facesconfig.emf.ManagedPropertyType;
+import org.eclipse.jst.jsf.facesconfig.emf.MapEntriesType;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.IFacesConfigConstants;
 import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
@@ -40,11 +45,6 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.wtp.jsf.facesconfig.emf.FacesConfigFactory;
-import org.eclipse.wtp.jsf.facesconfig.emf.ListEntriesType;
-import org.eclipse.wtp.jsf.facesconfig.emf.ManagedBeanType;
-import org.eclipse.wtp.jsf.facesconfig.emf.ManagedPropertyType;
-import org.eclipse.wtp.jsf.facesconfig.emf.MapEntriesType;
 
 /**
  * The dialog is for adding and editing managed property.

@@ -25,6 +25,13 @@ import org.eclipse.jst.jsf.facesconfig.common.dialogfield.DialogField;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.IDialogFieldApplyListener;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.LayoutUtil;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.StringDialogField;
+import org.eclipse.jst.jsf.facesconfig.emf.DescriptionType;
+import org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType;
+import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
+import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
+import org.eclipse.jst.jsf.facesconfig.emf.ValidatorClassType;
+import org.eclipse.jst.jsf.facesconfig.emf.ValidatorIdType;
+import org.eclipse.jst.jsf.facesconfig.emf.ValidatorType;
 import org.eclipse.jst.jsf.facesconfig.ui.IFacesConfigConstants;
 import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
 import org.eclipse.jst.jsf.facesconfig.ui.page.IFacesConfigPage;
@@ -34,13 +41,6 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.widgets.FormToolkit;
-import org.eclipse.wtp.jsf.facesconfig.emf.DescriptionType;
-import org.eclipse.wtp.jsf.facesconfig.emf.DisplayNameType;
-import org.eclipse.wtp.jsf.facesconfig.emf.FacesConfigFactory;
-import org.eclipse.wtp.jsf.facesconfig.emf.FacesConfigPackage;
-import org.eclipse.wtp.jsf.facesconfig.emf.ValidatorClassType;
-import org.eclipse.wtp.jsf.facesconfig.emf.ValidatorIdType;
-import org.eclipse.wtp.jsf.facesconfig.emf.ValidatorType;
 
 /**
  * @author Bryan Yang
@@ -97,10 +97,10 @@ public class ValidatorGeneralSection extends AbstractFacesConfigSection {
 						String newDisplayNameValue = ((StringDialogField) field)
 								.getText().trim();
 						Command cmd = null;
-						ValidatorType Validator = (ValidatorType) getInput();
+						ValidatorType validator = (ValidatorType) getInput();
 						EditingDomain editingDomain = getEditingDomain();
-						if (Validator.getDisplayName().size() > 0) {
-							DisplayNameType displayName = (DisplayNameType) Validator
+						if (validator.getDisplayName().size() > 0) {
+							DisplayNameType displayName = (DisplayNameType) validator
 									.getDisplayName().get(0);
 							cmd = SetCommand.create(editingDomain, displayName,
 									FacesConfigPackage.eINSTANCE
@@ -113,7 +113,7 @@ public class ValidatorGeneralSection extends AbstractFacesConfigSection {
 							displayNameType.eAdapters().add(
 									getValidatorGeneralAdapter());
 
-							cmd = AddCommand.create(editingDomain, Validator,
+							cmd = AddCommand.create(editingDomain, validator,
 									FacesConfigPackage.eINSTANCE
 											.getValidatorType_DisplayName(),
 									displayNameType);
@@ -138,10 +138,10 @@ public class ValidatorGeneralSection extends AbstractFacesConfigSection {
 						newDescriptionValue = ModelUtil
 								.escapeEntities(newDescriptionValue);
 						Command cmd = null;
-						ValidatorType Validator = (ValidatorType) getInput();
+						ValidatorType validator = (ValidatorType) getInput();
 						EditingDomain editingDomain = getEditingDomain();
-						if (Validator.getDescription().size() > 0) {
-							DescriptionType description = (DescriptionType) Validator
+						if (validator.getDescription().size() > 0) {
+							DescriptionType description = (DescriptionType) validator
 									.getDescription().get(0);
 							cmd = SetCommand.create(editingDomain, description,
 									FacesConfigPackage.eINSTANCE
@@ -154,7 +154,7 @@ public class ValidatorGeneralSection extends AbstractFacesConfigSection {
 							description.eAdapters().add(
 									getValidatorGeneralAdapter());
 
-							cmd = AddCommand.create(editingDomain, Validator,
+							cmd = AddCommand.create(editingDomain, validator,
 									FacesConfigPackage.eINSTANCE
 											.getValidatorType_Description(),
 									description);
@@ -244,10 +244,10 @@ public class ValidatorGeneralSection extends AbstractFacesConfigSection {
 		super.refresh();
 		Object input = this.getInput();
 		if (input instanceof ValidatorType) {
-			ValidatorType Validator = (ValidatorType) input;
+			ValidatorType validator = (ValidatorType) input;
 
-			if (Validator.getDisplayName().size() > 0) {
-				DisplayNameType displayName = (DisplayNameType) Validator
+			if (validator.getDisplayName().size() > 0) {
+				DisplayNameType displayName = (DisplayNameType) validator
 						.getDisplayName().get(0);
 				displayNameField.setTextWithoutUpdate(displayName
 						.getTextContent());
@@ -255,8 +255,8 @@ public class ValidatorGeneralSection extends AbstractFacesConfigSection {
 				displayNameField.setTextWithoutUpdate("");
 			}
 
-			if (Validator.getDescription().size() > 0) {
-				DescriptionType description = (DescriptionType) Validator
+			if (validator.getDescription().size() > 0) {
+				DescriptionType description = (DescriptionType) validator
 						.getDescription().get(0);
 				String descriptionString = description.getTextContent();
 				descriptionString = ModelUtil
@@ -266,15 +266,15 @@ public class ValidatorGeneralSection extends AbstractFacesConfigSection {
 				descriptionField.setTextWithoutUpdate("");
 			}
 
-			if (Validator.getValidatorId() != null) {
-				validatorIDField.setTextWithoutUpdate(Validator
+			if (validator.getValidatorId() != null) {
+				validatorIDField.setTextWithoutUpdate(validator
 						.getValidatorId().getTextContent());
 			} else {
 				validatorIDField.setTextWithoutUpdate("");
 			}
 
-			if (Validator.getValidatorClass() != null) {
-				validatorClassField.setTextWithoutUpdate(Validator
+			if (validator.getValidatorClass() != null) {
+				validatorClassField.setTextWithoutUpdate(validator
 						.getValidatorClass().getTextContent());
 			} else {
 				validatorClassField.setTextWithoutUpdate("");

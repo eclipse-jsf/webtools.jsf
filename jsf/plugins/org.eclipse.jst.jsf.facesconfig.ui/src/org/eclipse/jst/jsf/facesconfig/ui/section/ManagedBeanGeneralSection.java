@@ -24,6 +24,12 @@ import org.eclipse.jst.jsf.facesconfig.common.dialogfield.IDialogFieldApplyListe
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.IDialogFieldChangeListener;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.LayoutUtil;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.StringDialogField;
+import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
+import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
+import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanClassType;
+import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanNameType;
+import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanScopeType;
+import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanType;
 import org.eclipse.jst.jsf.facesconfig.ui.IFacesConfigConstants;
 import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
 import org.eclipse.jst.jsf.facesconfig.ui.page.IFacesConfigPage;
@@ -32,12 +38,6 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.widgets.FormToolkit;
-import org.eclipse.wtp.jsf.facesconfig.emf.FacesConfigFactory;
-import org.eclipse.wtp.jsf.facesconfig.emf.FacesConfigPackage;
-import org.eclipse.wtp.jsf.facesconfig.emf.ManagedBeanClassType;
-import org.eclipse.wtp.jsf.facesconfig.emf.ManagedBeanNameType;
-import org.eclipse.wtp.jsf.facesconfig.emf.ManagedBeanScopeType;
-import org.eclipse.wtp.jsf.facesconfig.emf.ManagedBeanType;
 
 /**
  * 

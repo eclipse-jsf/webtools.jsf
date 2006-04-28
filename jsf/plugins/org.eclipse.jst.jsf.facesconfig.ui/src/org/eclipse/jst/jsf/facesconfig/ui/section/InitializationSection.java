@@ -17,6 +17,8 @@ import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.DialogField;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.IDialogFieldApplyListener;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.RadiosDialogField;
+import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
+import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanType;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.IFacesConfigConstants;
 import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
@@ -28,8 +30,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.part.PageBook;
-import org.eclipse.wtp.jsf.facesconfig.emf.FacesConfigPackage;
-import org.eclipse.wtp.jsf.facesconfig.emf.ManagedBeanType;
 
 /**
  * This section handles managed bean's initialization, including general class

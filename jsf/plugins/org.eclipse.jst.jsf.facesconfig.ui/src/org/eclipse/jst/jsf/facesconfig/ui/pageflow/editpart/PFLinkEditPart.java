@@ -28,6 +28,7 @@ import org.eclipse.gef.editparts.AbstractConnectionEditPart;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.text.source.Annotation;
+import org.eclipse.jst.jsf.facesconfig.emf.NavigationCaseType;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPreferences;
 import org.eclipse.jst.jsf.facesconfig.ui.IconResources;
@@ -45,7 +46,6 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.views.properties.IPropertySource;
-import org.eclipse.wtp.jsf.facesconfig.emf.NavigationCaseType;
 
 /**
  * <code>PFLinkEditPart</code> is the EditPart for PFLink model elements. The

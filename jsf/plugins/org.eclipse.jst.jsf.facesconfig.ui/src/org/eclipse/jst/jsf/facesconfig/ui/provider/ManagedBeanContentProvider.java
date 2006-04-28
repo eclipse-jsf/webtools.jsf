@@ -17,9 +17,9 @@ import java.util.List;
 
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
+import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanType;
 import org.eclipse.jst.jsf.facesconfig.ui.section.ManagedBeanScopeTreeItem;
-import org.eclipse.wtp.jsf.facesconfig.emf.FacesConfigType;
-import org.eclipse.wtp.jsf.facesconfig.emf.ManagedBeanType;
 
 /**
  * Managed bean Content Provider.

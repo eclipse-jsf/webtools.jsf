@@ -32,6 +32,16 @@ import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.DialogFieldGroup;
+import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
+import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
+import org.eclipse.jst.jsf.facesconfig.emf.ListEntriesType;
+import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanType;
+import org.eclipse.jst.jsf.facesconfig.emf.ManagedPropertyType;
+import org.eclipse.jst.jsf.facesconfig.emf.MapEntriesType;
+import org.eclipse.jst.jsf.facesconfig.emf.NullValueType;
+import org.eclipse.jst.jsf.facesconfig.emf.PropertyClassType;
+import org.eclipse.jst.jsf.facesconfig.emf.PropertyNameType;
+import org.eclipse.jst.jsf.facesconfig.emf.ValueType;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.IFacesConfigConstants;
 import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
@@ -49,16 +59,6 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.ui.forms.widgets.FormToolkit;
-import org.eclipse.wtp.jsf.facesconfig.emf.FacesConfigFactory;
-import org.eclipse.wtp.jsf.facesconfig.emf.FacesConfigPackage;
-import org.eclipse.wtp.jsf.facesconfig.emf.ListEntriesType;
-import org.eclipse.wtp.jsf.facesconfig.emf.ManagedBeanType;
-import org.eclipse.wtp.jsf.facesconfig.emf.ManagedPropertyType;
-import org.eclipse.wtp.jsf.facesconfig.emf.MapEntriesType;
-import org.eclipse.wtp.jsf.facesconfig.emf.NullValueType;
-import org.eclipse.wtp.jsf.facesconfig.emf.PropertyClassType;
-import org.eclipse.wtp.jsf.facesconfig.emf.PropertyNameType;
-import org.eclipse.wtp.jsf.facesconfig.emf.ValueType;
 
 /**
  * @author sfshi

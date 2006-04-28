@@ -32,6 +32,14 @@ import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
+import org.eclipse.jst.jsf.facesconfig.emf.ComponentFamilyType;
+import org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType;
+import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
+import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
+import org.eclipse.jst.jsf.facesconfig.emf.RenderKitType;
+import org.eclipse.jst.jsf.facesconfig.emf.RendererClassType;
+import org.eclipse.jst.jsf.facesconfig.emf.RendererType;
+import org.eclipse.jst.jsf.facesconfig.emf.RendererTypeType;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
 import org.eclipse.jst.jsf.facesconfig.ui.dialog.AddEditRendererDialog;
@@ -50,14 +58,6 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.widgets.FormToolkit;
-import org.eclipse.wtp.jsf.facesconfig.emf.ComponentFamilyType;
-import org.eclipse.wtp.jsf.facesconfig.emf.DisplayNameType;
-import org.eclipse.wtp.jsf.facesconfig.emf.FacesConfigFactory;
-import org.eclipse.wtp.jsf.facesconfig.emf.FacesConfigPackage;
-import org.eclipse.wtp.jsf.facesconfig.emf.RenderKitType;
-import org.eclipse.wtp.jsf.facesconfig.emf.RendererClassType;
-import org.eclipse.wtp.jsf.facesconfig.emf.RendererType;
-import org.eclipse.wtp.jsf.facesconfig.emf.RendererTypeType;
 
 /**
  * @author Bryan Yang

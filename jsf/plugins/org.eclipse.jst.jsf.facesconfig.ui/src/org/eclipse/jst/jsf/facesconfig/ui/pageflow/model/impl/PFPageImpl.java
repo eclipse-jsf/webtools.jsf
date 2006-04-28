@@ -21,18 +21,18 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.jst.jsf.facesconfig.emf.DescriptionType;
+import org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType;
+import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
+import org.eclipse.jst.jsf.facesconfig.emf.FromViewIdType;
+import org.eclipse.jst.jsf.facesconfig.emf.IconType;
+import org.eclipse.jst.jsf.facesconfig.emf.LargeIconType;
+import org.eclipse.jst.jsf.facesconfig.emf.NavigationRuleType;
+import org.eclipse.jst.jsf.facesconfig.emf.SmallIconType;
+import org.eclipse.jst.jsf.facesconfig.emf.ToViewIdType;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage;
-import org.eclipse.wtp.jsf.facesconfig.emf.DescriptionType;
-import org.eclipse.wtp.jsf.facesconfig.emf.DisplayNameType;
-import org.eclipse.wtp.jsf.facesconfig.emf.FacesConfigFactory;
-import org.eclipse.wtp.jsf.facesconfig.emf.FromViewIdType;
-import org.eclipse.wtp.jsf.facesconfig.emf.IconType;
-import org.eclipse.wtp.jsf.facesconfig.emf.LargeIconType;
-import org.eclipse.wtp.jsf.facesconfig.emf.NavigationRuleType;
-import org.eclipse.wtp.jsf.facesconfig.emf.SmallIconType;
-import org.eclipse.wtp.jsf.facesconfig.emf.ToViewIdType;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>PF Page</b></em>'.

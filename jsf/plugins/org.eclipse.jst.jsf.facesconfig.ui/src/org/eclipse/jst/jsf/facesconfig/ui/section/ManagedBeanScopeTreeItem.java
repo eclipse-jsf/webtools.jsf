@@ -15,9 +15,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
+import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanType;
 import org.eclipse.jst.jsf.facesconfig.ui.IFacesConfigConstants;
-import org.eclipse.wtp.jsf.facesconfig.emf.FacesConfigType;
-import org.eclipse.wtp.jsf.facesconfig.emf.ManagedBeanType;
 
 /**
  * @author Xiao-guang Zhang, sfshi

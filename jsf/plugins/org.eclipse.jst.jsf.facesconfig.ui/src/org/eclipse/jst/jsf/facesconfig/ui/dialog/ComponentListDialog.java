@@ -20,10 +20,10 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
+import org.eclipse.jst.jsf.facesconfig.emf.ComponentType;
+import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 import org.eclipse.jst.jsf.facesconfig.ui.page.IFacesConfigPage;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.wtp.jsf.facesconfig.emf.ComponentType;
-import org.eclipse.wtp.jsf.facesconfig.emf.FacesConfigPackage;
 
 /**
  * @author Bryan Yang

@@ -80,6 +80,7 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jst.jsf.facesconfig.common.actions.IOpenPage;
 import org.eclipse.jst.jsf.facesconfig.edit.provider.FacesConfigItemProviderAdapterFactory;
+import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.jst.jsf.facesconfig.ui.page.ComponentsPage;
 import org.eclipse.jst.jsf.facesconfig.ui.page.IntroductionPage;
 import org.eclipse.jst.jsf.facesconfig.ui.page.ManagedBeanPage;
@@ -93,6 +94,7 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.layout.PageflowLayoutManager;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.synchronization.FC2PFTransformer;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.FacesConfigModelAdapter;
 import org.eclipse.jst.jsf.facesconfig.ui.util.WebrootUtil;
+import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorActionBarContributor;
@@ -117,8 +119,6 @@ import org.eclipse.ui.views.properties.PropertySheet;
 import org.eclipse.wst.common.ui.properties.internal.provisional.ITabbedPropertySheetPageContributor;
 import org.eclipse.wst.common.ui.properties.internal.provisional.TabbedPropertySheetPage;
 import org.eclipse.wst.sse.ui.StructuredTextEditor;
-import org.eclipse.wtp.jsf.facesconfig.emf.FacesConfigType;
-import org.eclipse.wtp.jsf.facesconfig.util.FacesConfigArtifactEdit;
 
 /**
  * 

@@ -12,9 +12,9 @@
 
 package org.eclipse.jst.jsf.facesconfig.ui.pageflow.util;
 
+import org.eclipse.jst.jsf.facesconfig.emf.NavigationCaseType;
+import org.eclipse.jst.jsf.facesconfig.emf.NavigationRuleType;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink;
-import org.eclipse.wtp.jsf.facesconfig.emf.NavigationCaseType;
-import org.eclipse.wtp.jsf.facesconfig.emf.NavigationRuleType;
 
 /**
  * This class stores the relationship between link and navigation rules.

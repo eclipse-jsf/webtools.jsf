@@ -15,8 +15,8 @@ package org.eclipse.jst.jsf.facesconfig.ui.pageflow.util;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
-import org.eclipse.wtp.jsf.facesconfig.emf.FacesConfigType;
 
 /**
  * 

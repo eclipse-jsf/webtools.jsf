@@ -25,6 +25,13 @@ import org.eclipse.jst.jsf.facesconfig.common.dialogfield.DialogField;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.IDialogFieldApplyListener;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.LayoutUtil;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.StringDialogField;
+import org.eclipse.jst.jsf.facesconfig.emf.ComponentClassType;
+import org.eclipse.jst.jsf.facesconfig.emf.ComponentType;
+import org.eclipse.jst.jsf.facesconfig.emf.ComponentTypeType;
+import org.eclipse.jst.jsf.facesconfig.emf.DescriptionType;
+import org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType;
+import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
+import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 import org.eclipse.jst.jsf.facesconfig.ui.IFacesConfigConstants;
 import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
 import org.eclipse.jst.jsf.facesconfig.ui.page.IFacesConfigPage;
@@ -34,13 +41,6 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.widgets.FormToolkit;
-import org.eclipse.wtp.jsf.facesconfig.emf.ComponentClassType;
-import org.eclipse.wtp.jsf.facesconfig.emf.ComponentType;
-import org.eclipse.wtp.jsf.facesconfig.emf.ComponentTypeType;
-import org.eclipse.wtp.jsf.facesconfig.emf.DescriptionType;
-import org.eclipse.wtp.jsf.facesconfig.emf.DisplayNameType;
-import org.eclipse.wtp.jsf.facesconfig.emf.FacesConfigFactory;
-import org.eclipse.wtp.jsf.facesconfig.emf.FacesConfigPackage;
 
 /**
  * The sections that used for displaying and editing the general information of

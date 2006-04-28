@@ -25,19 +25,19 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
+import org.eclipse.jst.jsf.facesconfig.emf.FromActionType;
+import org.eclipse.jst.jsf.facesconfig.emf.FromOutcomeType;
+import org.eclipse.jst.jsf.facesconfig.emf.IconType;
+import org.eclipse.jst.jsf.facesconfig.emf.LargeIconType;
+import org.eclipse.jst.jsf.facesconfig.emf.NavigationCaseType;
+import org.eclipse.jst.jsf.facesconfig.emf.RedirectType;
+import org.eclipse.jst.jsf.facesconfig.emf.SmallIconType;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage;
-import org.eclipse.wtp.jsf.facesconfig.emf.FacesConfigFactory;
-import org.eclipse.wtp.jsf.facesconfig.emf.FromActionType;
-import org.eclipse.wtp.jsf.facesconfig.emf.FromOutcomeType;
-import org.eclipse.wtp.jsf.facesconfig.emf.IconType;
-import org.eclipse.wtp.jsf.facesconfig.emf.LargeIconType;
-import org.eclipse.wtp.jsf.facesconfig.emf.NavigationCaseType;
-import org.eclipse.wtp.jsf.facesconfig.emf.RedirectType;
-import org.eclipse.wtp.jsf.facesconfig.emf.SmallIconType;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>PF Link</b></em>'.

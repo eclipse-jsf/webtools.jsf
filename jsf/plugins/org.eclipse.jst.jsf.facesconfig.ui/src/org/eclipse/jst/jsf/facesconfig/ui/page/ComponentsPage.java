@@ -25,6 +25,11 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jface.viewers.ViewerSorter;
+import org.eclipse.jst.jsf.facesconfig.emf.AttributeType;
+import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
+import org.eclipse.jst.jsf.facesconfig.emf.FacetType;
+import org.eclipse.jst.jsf.facesconfig.emf.PropertyType;
+import org.eclipse.jst.jsf.facesconfig.emf.RendererType;
 import org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor;
 import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
 import org.eclipse.jst.jsf.facesconfig.ui.page.detail.ComponentDetailsPage;
@@ -43,11 +48,6 @@ import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
-import org.eclipse.wtp.jsf.facesconfig.emf.AttributeType;
-import org.eclipse.wtp.jsf.facesconfig.emf.FacesConfigPackage;
-import org.eclipse.wtp.jsf.facesconfig.emf.FacetType;
-import org.eclipse.wtp.jsf.facesconfig.emf.PropertyType;
-import org.eclipse.wtp.jsf.facesconfig.emf.RendererType;
 
 /**
  * The "Components" page of faces config editor.

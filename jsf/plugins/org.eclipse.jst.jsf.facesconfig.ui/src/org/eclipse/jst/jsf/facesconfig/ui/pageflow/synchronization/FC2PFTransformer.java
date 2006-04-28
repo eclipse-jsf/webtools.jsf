@@ -14,18 +14,18 @@ import java.util.Vector;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
+import org.eclipse.jst.jsf.facesconfig.emf.FromOutcomeType;
+import org.eclipse.jst.jsf.facesconfig.emf.FromViewIdType;
+import org.eclipse.jst.jsf.facesconfig.emf.NavigationCaseType;
+import org.eclipse.jst.jsf.facesconfig.emf.NavigationRuleType;
+import org.eclipse.jst.jsf.facesconfig.emf.ToViewIdType;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowTransform;
-import org.eclipse.wtp.jsf.facesconfig.emf.FacesConfigType;
-import org.eclipse.wtp.jsf.facesconfig.emf.FromOutcomeType;
-import org.eclipse.wtp.jsf.facesconfig.emf.FromViewIdType;
-import org.eclipse.wtp.jsf.facesconfig.emf.NavigationCaseType;
-import org.eclipse.wtp.jsf.facesconfig.emf.NavigationRuleType;
-import org.eclipse.wtp.jsf.facesconfig.emf.ToViewIdType;
 
 /**
  * Update and synchronize pageflow from faces config or vice-versa.

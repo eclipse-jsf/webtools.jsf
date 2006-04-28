@@ -38,6 +38,16 @@ import org.eclipse.jst.jsf.facesconfig.common.dialogfield.DialogFieldGroup;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.IDialogFieldApplyListener;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.LayoutUtil;
 import org.eclipse.jst.jsf.facesconfig.common.guiutils.SWTUtils;
+import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
+import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
+import org.eclipse.jst.jsf.facesconfig.emf.KeyClassType;
+import org.eclipse.jst.jsf.facesconfig.emf.KeyType;
+import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanType;
+import org.eclipse.jst.jsf.facesconfig.emf.MapEntriesType;
+import org.eclipse.jst.jsf.facesconfig.emf.MapEntryType;
+import org.eclipse.jst.jsf.facesconfig.emf.NullValueType;
+import org.eclipse.jst.jsf.facesconfig.emf.ValueClassType;
+import org.eclipse.jst.jsf.facesconfig.emf.ValueType;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
 import org.eclipse.jst.jsf.facesconfig.ui.dialog.AddEditMapEntryDialog;
@@ -53,16 +63,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.ui.forms.widgets.FormToolkit;
-import org.eclipse.wtp.jsf.facesconfig.emf.FacesConfigFactory;
-import org.eclipse.wtp.jsf.facesconfig.emf.FacesConfigPackage;
-import org.eclipse.wtp.jsf.facesconfig.emf.KeyClassType;
-import org.eclipse.wtp.jsf.facesconfig.emf.KeyType;
-import org.eclipse.wtp.jsf.facesconfig.emf.ManagedBeanType;
-import org.eclipse.wtp.jsf.facesconfig.emf.MapEntriesType;
-import org.eclipse.wtp.jsf.facesconfig.emf.MapEntryType;
-import org.eclipse.wtp.jsf.facesconfig.emf.NullValueType;
-import org.eclipse.wtp.jsf.facesconfig.emf.ValueClassType;
-import org.eclipse.wtp.jsf.facesconfig.emf.ValueType;
 
 /**
  * MapEntries Editing DialogFieldGroup

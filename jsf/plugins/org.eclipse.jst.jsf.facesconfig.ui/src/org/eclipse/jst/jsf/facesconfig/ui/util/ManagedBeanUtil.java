@@ -4,9 +4,9 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.wtp.jsf.facesconfig.emf.FacesConfigType;
-import org.eclipse.wtp.jsf.facesconfig.emf.ManagedBeanType;
-import org.eclipse.wtp.jsf.facesconfig.util.FacesConfigArtifactEdit;
+import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
+import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanType;
+import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
 
 /**
  * 

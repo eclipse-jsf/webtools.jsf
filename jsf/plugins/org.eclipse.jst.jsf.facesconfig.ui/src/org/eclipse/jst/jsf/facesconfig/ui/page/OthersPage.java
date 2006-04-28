@@ -33,6 +33,11 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.jst.jsf.facesconfig.common.CommonPlugin;
+import org.eclipse.jst.jsf.facesconfig.emf.ApplicationType;
+import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
+import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
+import org.eclipse.jst.jsf.facesconfig.emf.FactoryType;
+import org.eclipse.jst.jsf.facesconfig.emf.LifecycleType;
 import org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor;
 import org.eclipse.jst.jsf.facesconfig.ui.IconResources;
 import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
@@ -56,11 +61,6 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
-import org.eclipse.wtp.jsf.facesconfig.emf.ApplicationType;
-import org.eclipse.wtp.jsf.facesconfig.emf.FacesConfigPackage;
-import org.eclipse.wtp.jsf.facesconfig.emf.FacesConfigType;
-import org.eclipse.wtp.jsf.facesconfig.emf.FactoryType;
-import org.eclipse.wtp.jsf.facesconfig.emf.LifecycleType;
 
 /**
  * @author Zhi-peng Zhang, sfshi

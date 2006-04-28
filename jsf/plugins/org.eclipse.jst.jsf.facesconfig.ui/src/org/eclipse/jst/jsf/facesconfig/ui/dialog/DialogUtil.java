@@ -23,12 +23,12 @@ import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jface.window.Window;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.JavaUIHelper;
+import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
+import org.eclipse.jst.jsf.facesconfig.emf.RenderKitIdType;
+import org.eclipse.jst.jsf.facesconfig.emf.RenderKitType;
 import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.dialogs.SelectionDialog;
-import org.eclipse.wtp.jsf.facesconfig.emf.FacesConfigType;
-import org.eclipse.wtp.jsf.facesconfig.emf.RenderKitIdType;
-import org.eclipse.wtp.jsf.facesconfig.emf.RenderKitType;
 
 /**
  * @author Zhi-peng Zhang

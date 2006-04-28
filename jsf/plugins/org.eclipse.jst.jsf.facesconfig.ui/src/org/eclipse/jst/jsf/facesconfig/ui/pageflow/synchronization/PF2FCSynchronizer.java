@@ -12,25 +12,25 @@ import java.util.List;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.jst.jsf.facesconfig.emf.DescriptionType;
+import org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType;
+import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
+import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
+import org.eclipse.jst.jsf.facesconfig.emf.FromOutcomeType;
+import org.eclipse.jst.jsf.facesconfig.emf.FromViewIdType;
+import org.eclipse.jst.jsf.facesconfig.emf.IconType;
+import org.eclipse.jst.jsf.facesconfig.emf.LargeIconType;
+import org.eclipse.jst.jsf.facesconfig.emf.NavigationCaseType;
+import org.eclipse.jst.jsf.facesconfig.emf.NavigationRuleType;
+import org.eclipse.jst.jsf.facesconfig.emf.RedirectType;
+import org.eclipse.jst.jsf.facesconfig.emf.SmallIconType;
+import org.eclipse.jst.jsf.facesconfig.emf.ToViewIdType;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage;
-import org.eclipse.wtp.jsf.facesconfig.emf.DescriptionType;
-import org.eclipse.wtp.jsf.facesconfig.emf.DisplayNameType;
-import org.eclipse.wtp.jsf.facesconfig.emf.FacesConfigFactory;
-import org.eclipse.wtp.jsf.facesconfig.emf.FacesConfigType;
-import org.eclipse.wtp.jsf.facesconfig.emf.FromOutcomeType;
-import org.eclipse.wtp.jsf.facesconfig.emf.FromViewIdType;
-import org.eclipse.wtp.jsf.facesconfig.emf.IconType;
-import org.eclipse.wtp.jsf.facesconfig.emf.LargeIconType;
-import org.eclipse.wtp.jsf.facesconfig.emf.NavigationCaseType;
-import org.eclipse.wtp.jsf.facesconfig.emf.NavigationRuleType;
-import org.eclipse.wtp.jsf.facesconfig.emf.RedirectType;
-import org.eclipse.wtp.jsf.facesconfig.emf.SmallIconType;
-import org.eclipse.wtp.jsf.facesconfig.emf.ToViewIdType;
 
 /**
  * The class to synchronize modification in pageflow for faces config.

@@ -17,9 +17,9 @@ import java.util.List;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jst.jsf.facesconfig.common.IFileFolderConstants;
 import org.eclipse.jst.jsf.facesconfig.common.dialogs.ResourceOnClasspathDialog;
+import org.eclipse.jst.jsf.facesconfig.emf.MessageBundleType;
 import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.wtp.jsf.facesconfig.emf.MessageBundleType;
 
 /**
  * @author sfshi
