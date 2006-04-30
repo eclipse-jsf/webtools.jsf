@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
 <plugin>
+  <extension
+        point="org.eclipse.ui.preferencePages">
+     <page
+           category="org.eclipse.wst.sse.ui.internal.provisional.preferences"
+           class="org.eclipse.jst.jsf.facesconfig.ui.preference.GEMPreferences"
+           id="org.eclipse.jst.jsf.facesconfig.ui.preference.GEMPreferences"
+           name="JSF FacesConfig UI"/>
+  </extension>
 <extension point="org.eclipse.ui.editors">
 		
 		<editor
