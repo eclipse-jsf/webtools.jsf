@@ -16,9 +16,7 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.help.HelpSystem;
 import org.eclipse.help.IContext;
 import org.eclipse.help.IHelpResource;
-import org.eclipse.jst.jsf.facesconfig.common.CommonPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
-import org.eclipse.jst.jsf.facesconfig.ui.IconResources;
 import org.eclipse.jst.jsf.facesconfig.ui.page.IFacesConfigPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
@@ -42,7 +40,8 @@ import org.eclipse.ui.forms.widgets.Section;
  * 
  * @version 1.0
  */
-public abstract class AbstractFacesConfigSection extends SectionPart implements IFacesConfigSection {
+public abstract class AbstractFacesConfigSection extends SectionPart implements
+		IFacesConfigSection {
 	/** tool kit */
 	private FormToolkit toolkit;
 
@@ -58,8 +57,8 @@ public abstract class AbstractFacesConfigSection extends SectionPart implements 
 	private IFacesConfigPage page;
 
 	/** help image */
-	private final static Image HELP_IMAGE = CommonPlugin.getDefault().getImage(
-			IconResources.getString("Common.help")); //$NON-NLS-1$
+	private final static Image HELP_IMAGE = EditorPlugin.getDefault().getImage(
+			"help.gif"); //$NON-NLS-1$
 
 	/**
 	 * Constructor with help option.
@@ -71,9 +70,9 @@ public abstract class AbstractFacesConfigSection extends SectionPart implements 
 	 * @param helpContextId
 	 * @param helpTooltip
 	 */
-	public AbstractFacesConfigSection(Composite parent, IManagedForm managedForm,
-			IFacesConfigPage page, FormToolkit toolkit, String helpContextId,
-			String helpTooltip) {
+	public AbstractFacesConfigSection(Composite parent,
+			IManagedForm managedForm, IFacesConfigPage page,
+			FormToolkit toolkit, String helpContextId, String helpTooltip) {
 		super(parent, toolkit, ExpandableComposite.TITLE_BAR
 				| ExpandableComposite.TWISTIE | Section.DESCRIPTION
 				| ExpandableComposite.EXPANDED);

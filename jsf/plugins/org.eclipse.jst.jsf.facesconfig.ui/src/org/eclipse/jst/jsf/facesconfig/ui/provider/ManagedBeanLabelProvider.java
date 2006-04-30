@@ -18,7 +18,6 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanType;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
-import org.eclipse.jst.jsf.facesconfig.ui.IconResources;
 import org.eclipse.jst.jsf.facesconfig.ui.section.ManagedBeanScopeTreeItem;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.ISharedImages;
@@ -69,7 +68,7 @@ public class ManagedBeanLabelProvider extends LabelProvider {
 		if (obj instanceof ManagedBeanType) {
 
 			imageDesc = EditorPlugin.getDefault().getImageDescriptor(
-					IconResources.getString("Databinding.managedbeanType")); //$NON-NLS-1$
+					"facesconfig/FacesConfig_ManagedBean.gif"); //$NON-NLS-1$
 
 		} else if (obj instanceof ManagedBeanScopeTreeItem) {
 			imageDesc = EditorPlugin.getDefault().getImageDescriptor(
