@@ -12,8 +12,7 @@
 package org.eclipse.jst.jsf.facesconfig.ui.section;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
-import org.eclipse.jst.jsf.facesconfig.ui.EditorResourcesNLS;
+import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
 import org.eclipse.jst.jsf.facesconfig.ui.page.IFacesConfigPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -44,9 +43,9 @@ public class OverviewGeneralSection extends AbstractFacesConfigSection {
 		super(parent, managedForm, page, toolkit, null, null);
 
 		getSection().setText(
-				EditorResourcesNLS.OverviewPage_GeneralSection_name); //$NON-NLS-1$
+				NewEditorResourcesNLS.OverviewPage_GeneralSection_name); //$NON-NLS-1$
 		getSection().setDescription(
-				EditorResourcesNLS.OverviewPage_GeneralSection_description); //$NON-NLS-1$
+				NewEditorResourcesNLS.OverviewPage_GeneralSection_description); //$NON-NLS-1$
 	}
 
 	/*
@@ -63,14 +62,14 @@ public class OverviewGeneralSection extends AbstractFacesConfigSection {
 		IEditorInput editorInput = this.getPage().getEditor().getEditorInput();
 
 		toolkit.createLabel(container,
-				EditorResourcesNLS.OverviewPage_GeneralSection_label_name); //$NON-NLS-1$ 	 
+				NewEditorResourcesNLS.OverviewPage_GeneralSection_label_name); //$NON-NLS-1$ 	 
 		Text typeText = toolkit.createText(container, ((FileEditorInput)editorInput).getName());
 		typeText.setEditable(false);
 		GridData data = new GridData(GridData.FILL_HORIZONTAL);
 		typeText.setLayoutData(data);
 
 		toolkit.createLabel(container,
-				EditorResourcesNLS.OverviewPage_GeneralSection_label_version); //$NON-NLS-1$
+				NewEditorResourcesNLS.OverviewPage_GeneralSection_label_version); //$NON-NLS-1$
 		versionText = toolkit.createText(container, "");
 		versionText.setLayoutData(data);
 		versionText.setEditable(false);

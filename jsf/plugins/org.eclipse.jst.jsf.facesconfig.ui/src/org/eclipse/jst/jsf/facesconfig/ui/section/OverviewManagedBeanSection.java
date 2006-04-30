@@ -17,7 +17,7 @@ import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
-import org.eclipse.jst.jsf.facesconfig.ui.EditorResourcesNLS;
+import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
 import org.eclipse.jst.jsf.facesconfig.ui.page.IFacesConfigPage;
 import org.eclipse.jst.jsf.facesconfig.ui.page.ManagedBeanPage;
 import org.eclipse.swt.SWT;
@@ -46,8 +46,8 @@ public class OverviewManagedBeanSection extends AbstractOverviewSection {
 	public OverviewManagedBeanSection(Composite parent,
 			IManagedForm managedForm, IFacesConfigPage page, FormToolkit toolkit) {
 		super(parent, managedForm, page, toolkit, ManagedBeanPage.PAGE_ID,
-				EditorResourcesNLS.OverviewPage_ManagedBeanSection_name,
-				EditorResourcesNLS.OverviewPage_ManagedBeanSection_description,
+				NewEditorResourcesNLS.OverviewPage_ManagedBeanSection_name,
+				NewEditorResourcesNLS.OverviewPage_ManagedBeanSection_description,
 				null, null);
 
 	}
@@ -89,19 +89,19 @@ public class OverviewManagedBeanSection extends AbstractOverviewSection {
 
 		TableColumn namecol = new TableColumn(table, SWT.LEFT);
 		namecol
-				.setText(EditorResourcesNLS.OverviewPage_ManagedBeanSection_table_namecol);
+				.setText(NewEditorResourcesNLS.OverviewPage_ManagedBeanSection_table_namecol);
 		tablelayout.addColumnData(new ColumnWeightData(1, true));
 		namecol.setResizable(true);
 
 		TableColumn scopecol = new TableColumn(table, SWT.LEFT);
 		scopecol
-				.setText(EditorResourcesNLS.OverviewPage_ManagedBeanSection_table_scopecol);
+				.setText(NewEditorResourcesNLS.OverviewPage_ManagedBeanSection_table_scopecol);
 		tablelayout.addColumnData(new ColumnWeightData(1, true));
 		scopecol.setResizable(true);
 
 		TableColumn classcol = new TableColumn(table, SWT.LEFT);
 		classcol
-				.setText(EditorResourcesNLS.OverviewPage_ManagedBeanSection_table_classcol);
+				.setText(NewEditorResourcesNLS.OverviewPage_ManagedBeanSection_table_classcol);
 		tablelayout.addColumnData(new ColumnWeightData(1, true));
 		classcol.setResizable(true);
 

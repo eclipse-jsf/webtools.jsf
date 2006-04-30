@@ -17,7 +17,7 @@ import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
-import org.eclipse.jst.jsf.facesconfig.ui.EditorResourcesNLS;
+import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
 import org.eclipse.jst.jsf.facesconfig.ui.page.ComponentsPage;
 import org.eclipse.jst.jsf.facesconfig.ui.page.IFacesConfigPage;
 import org.eclipse.swt.SWT;
@@ -44,8 +44,8 @@ public class OverviewComponentsSection extends AbstractOverviewSection {
 	public OverviewComponentsSection(Composite parent,
 			IManagedForm managedForm, IFacesConfigPage page, FormToolkit toolkit) {
 		super(parent, managedForm, page, toolkit, ComponentsPage.PAGE_ID,
-				EditorResourcesNLS.OverviewPage_ComponentsSection_name,
-				EditorResourcesNLS.OverviewPage_ComponentsSection_description,
+				NewEditorResourcesNLS.OverviewPage_ComponentsSection_name,
+				NewEditorResourcesNLS.OverviewPage_ComponentsSection_description,
 				null, null);
 	}
 
@@ -93,13 +93,13 @@ public class OverviewComponentsSection extends AbstractOverviewSection {
 		TableColumn typecol = new TableColumn(table, SWT.LEFT);
 		tablelayout.addColumnData(new ColumnWeightData(1, true));
 		typecol
-				.setText(EditorResourcesNLS.OverviewPage_ComponentsSection_table_typecol);
+				.setText(NewEditorResourcesNLS.OverviewPage_ComponentsSection_table_typecol);
 		typecol.setResizable(true);
 
 		TableColumn namecol = new TableColumn(table, SWT.LEFT);
 		tablelayout.addColumnData(new ColumnWeightData(1, true));
 		namecol
-				.setText(EditorResourcesNLS.OverviewPage_ComponentsSection_table_namecol);
+				.setText(NewEditorResourcesNLS.OverviewPage_ComponentsSection_table_namecol);
 		namecol.setResizable(true);
 
 		return table;

@@ -30,7 +30,7 @@ import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.jst.jsf.facesconfig.emf.FactoryType;
 import org.eclipse.jst.jsf.facesconfig.emf.LifecycleType;
-import org.eclipse.jst.jsf.facesconfig.ui.EditorResourcesNLS;
+import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
 import org.eclipse.jst.jsf.facesconfig.ui.page.IFacesConfigPage;
 import org.eclipse.jst.jsf.facesconfig.ui.page.OthersPage;
 import org.eclipse.swt.SWT;
@@ -61,8 +61,8 @@ public class OverviewOthersSection extends AbstractOverviewSection {
 	public OverviewOthersSection(Composite parent, IManagedForm managedForm,
 			IFacesConfigPage page, FormToolkit toolkit) {
 		super(parent, managedForm, page, toolkit, OthersPage.PAGE_ID,
-				EditorResourcesNLS.OverviewPage_OthersSection_name,
-				EditorResourcesNLS.OverviewPage_OthersSection_description,
+				NewEditorResourcesNLS.OverviewPage_OthersSection_name,
+				NewEditorResourcesNLS.OverviewPage_OthersSection_description,
 				null, null);
 	}
 
@@ -113,13 +113,13 @@ public class OverviewOthersSection extends AbstractOverviewSection {
 		TableColumn valuecol = new TableColumn(table, SWT.NONE);
 		tablelayout.addColumnData(new ColumnWeightData(1, COLUMN_WITH, true));
 		valuecol
-				.setText(EditorResourcesNLS.OverviewPage_OthersSection_table_valuecol);
+				.setText(NewEditorResourcesNLS.OverviewPage_OthersSection_table_valuecol);
 		valuecol.setResizable(true);
 
 		TableColumn typecol = new TableColumn(table, SWT.NONE);
 		tablelayout.addColumnData(new ColumnWeightData(1, COLUMN_WITH, true));
 		typecol
-				.setText(EditorResourcesNLS.OverviewPage_OthersSection_table_typecol);
+				.setText(NewEditorResourcesNLS.OverviewPage_OthersSection_table_typecol);
 		typecol.setResizable(true);
 
 		return table;

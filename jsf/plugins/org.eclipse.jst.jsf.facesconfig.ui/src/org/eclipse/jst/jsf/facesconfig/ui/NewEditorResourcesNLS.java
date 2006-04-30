@@ -204,6 +204,8 @@ public final class NewEditorResourcesNLS extends NLS {
 
 	public static String OverviewPage_ManagedBeanSection_table_scopecol;
 
+	public static String OverviewPage_ManagedBeanSection_table_classcol;
+
 	public static String OverviewPage_ManagedBeanSection_managedbeanPageID;
 
 	public static String OverviewPage_ManagedBeanSection_Help_HelpContextID;
