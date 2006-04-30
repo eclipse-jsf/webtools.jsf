@@ -85,6 +85,7 @@ import org.eclipse.jst.jsf.facesconfig.ui.page.ComponentsPage;
 import org.eclipse.jst.jsf.facesconfig.ui.page.IntroductionPage;
 import org.eclipse.jst.jsf.facesconfig.ui.page.ManagedBeanPage;
 import org.eclipse.jst.jsf.facesconfig.ui.page.OthersPage;
+import org.eclipse.jst.jsf.facesconfig.ui.page.OverviewPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.DelegatingZoomManager;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.FacesConfigEditorActionBarContributor;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowEditor;
@@ -110,6 +111,7 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.dialogs.SaveAsDialog;
 import org.eclipse.ui.forms.editor.FormEditor;
 import org.eclipse.ui.forms.editor.FormPage;
+import org.eclipse.ui.forms.editor.IFormPage;
 import org.eclipse.ui.ide.IGotoMarker;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.views.contentoutline.ContentOutline;
@@ -142,7 +144,13 @@ public class FacesConfigEditor extends FormEditor implements
 	/** id of the pageflowPage */
 	private int pageflowPageID;
 
-//	private IEditorPart _prevPart;
+	private int managedBeanPageID;
+
+	private int componentsPageID;
+
+	private int othersPageID;
+
+	// private IEditorPart _prevPart;
 
 	/** The pageflow viewer */
 	private PageflowEditor pageflowPage;
@@ -417,28 +425,20 @@ public class FacesConfigEditor extends FormEditor implements
 		try {
 			IntroductionPage page1 = new IntroductionPage(this);
 			addPage(page1, null);
+			
+			IFormPage overviewPage = new OverviewPage(this);
+			addPage(overviewPage, null);
+			
 			// Page flow
 			createAndAddPageflowPage();
-			getFacesConfigAdapter().setFacesConfigEMFModel(getFacesConfig());
-			FC2PFTransformer.getInstance().setFacesConfig(getFacesConfig());
-			FC2PFTransformer.getInstance().setPageflow(
-					pageflowPage.getPageflow());
-			boolean fornew = getFacesConfigAdapter()
-					.updatePageflowFromFacesConfig();
-			pageflowPage.getGraphicalViewer().setContents(
-					pageflowPage.getPageflow());
-			if (fornew) {
-				PageflowLayoutManager.getInstance().layoutPageflow(
-						pageflowPage.getPageflow());
-			}
-			FC2PFTransformer.getInstance().setListenToNotify(true);
+			
 			// pages
-			ManagedBeanPage page3 = new ManagedBeanPage(this);
-			addPage(page3, null);
-			ComponentsPage page2 = new ComponentsPage(this);
-			addPage(page2, null);
-			OthersPage othersPage = new OthersPage(this);
-			addPage(othersPage, null);
+			IFormPage managedBeanPage = new ManagedBeanPage(this);
+			managedBeanPageID = addPage(managedBeanPage, null);
+			IFormPage componentsPage = new ComponentsPage(this);
+			componentsPageID = addPage(componentsPage, null);
+			IFormPage othersPage = new OthersPage(this);
+			othersPageID = addPage(othersPage, null);
 
 			sourcePage = new StructuredTextEditor();
 
@@ -469,7 +469,19 @@ public class FacesConfigEditor extends FormEditor implements
 
 		getFacesConfigAdapter().setPageflowManager(
 				pageflowPage.getPageflowManager());
-
+		getFacesConfigAdapter().setFacesConfigEMFModel(getFacesConfig());
+		FC2PFTransformer.getInstance().setFacesConfig(getFacesConfig());
+		FC2PFTransformer.getInstance().setPageflow(
+				pageflowPage.getPageflow());
+		boolean fornew = getFacesConfigAdapter()
+				.updatePageflowFromFacesConfig();
+//		pageflowPage.getGraphicalViewer().setContents(
+//				pageflowPage.getPageflow());
+		if (fornew) {
+			PageflowLayoutManager.getInstance().layoutPageflow(
+					pageflowPage.getPageflow());
+		}
+		FC2PFTransformer.getInstance().setListenToNotify(true);
 		// getFacesConfigAdapter().updatePageflowFromFacesConfig();
 	}
 
@@ -537,8 +549,8 @@ public class FacesConfigEditor extends FormEditor implements
 				TreeIterator children = next.eAllContents();
 				while (children.hasNext()) {
 					((EObject) children.next()).eAdapters().add(
-						FC2PFTransformer.getInstance());
-			}
+							FC2PFTransformer.getInstance());
+				}
 				next.eAdapters().add(FC2PFTransformer.getInstance());
 			}
 			facesConfig.eAdapters().add(FC2PFTransformer.getInstance());
@@ -1226,7 +1238,7 @@ public class FacesConfigEditor extends FormEditor implements
 			((FacesConfigEditorActionBarContributor) contributor)
 					.setActivePage(activeEditor);
 		}
-//		_prevPart = activeEditor;
+		// _prevPart = activeEditor;
 	}
 
 	/*
@@ -1300,8 +1312,8 @@ public class FacesConfigEditor extends FormEditor implements
 			TreeIterator children = next.eAllContents();
 			while (children.hasNext()) {
 				((EObject) children.next()).eAdapters().remove(
-					FC2PFTransformer.getInstance());
-		}
+						FC2PFTransformer.getInstance());
+			}
 			next.eAdapters().remove(FC2PFTransformer.getInstance());
 		}
 		getFacesConfig().eAdapters().remove(FC2PFTransformer.getInstance());
@@ -1406,8 +1418,8 @@ public class FacesConfigEditor extends FormEditor implements
 
 	public void gotoMarker(IMarker marker) {
 		// TODO Auto-generated method stub
-//			setActivePage(sourcePageId);
-//			IDE.gotoMarker(fTextEditor, marker);
+		// setActivePage(sourcePageId);
+		// IDE.gotoMarker(fTextEditor, marker);
 	}
 
 	public EditingDomainActionBarContributor getActionBarContributor() {
@@ -1490,19 +1502,15 @@ public class FacesConfigEditor extends FormEditor implements
 		}
 	}
 
-	public void setActiveEditorPage(String className) {
-		// TODO Auto-generated method stub
-		if (className.equals(PageflowEditor.PAGE_ID)) {
+	public void setActiveEditorPage(String pageID) {
+		if (pageID.equals(PageflowEditor.PAGE_ID)) {
 			setActivePage(pageflowPageID);
+		} else if (pageID.equals(ManagedBeanPage.PAGE_ID)) {
+			setActivePage(managedBeanPageID);
+		} else if (pageID.equals(ComponentsPage.PAGE_ID)) {
+			setActivePage(componentsPageID);
+		} else if (pageID.equals(OthersPage.PAGE_ID)) {
+			setActivePage(othersPageID);
 		}
-		// else if (className.equals(ManagedBeanPage.PAGE_ID)) {
-		// setActivePage(managedBeanPageID);
-		// } else if (className.equals(OthersPage.PAGE_ID)) {
-		// setActivePage(othersPageID);
-		// } else if (className.equals(ComponentsPage.PAGE_ID)) {
-		// setActivePage(componentsPageID);
-		// } else if (className.indexOf("StructuredTextEditor") > 0) {
-		// setActivePage(sourcePageID);
-		// }
 	}
 }
