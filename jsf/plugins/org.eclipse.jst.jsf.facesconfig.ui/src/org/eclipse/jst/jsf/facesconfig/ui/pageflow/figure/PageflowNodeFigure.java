@@ -27,7 +27,7 @@ import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceConverter;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
-import org.eclipse.jst.jsf.facesconfig.ui.EditorPreferences;
+import org.eclipse.jst.jsf.facesconfig.ui.preference.GEMPreferences;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Image;
@@ -156,17 +156,17 @@ public class PageflowNodeFigure extends Figure {
 	 */
 	private int getTextPlacement() {
 		IPreferenceStore store = EditorPlugin.getDefault().getPreferenceStore();
-		String s = store.getString(EditorPreferences.LABEL_PLACEMENT);
-		if (EditorPreferences.LABEL_PLACEMENT_TOP.equals(s)) {
+		String s = store.getString(GEMPreferences.LABEL_PLACEMENT);
+		if (GEMPreferences.LABEL_PLACEMENT_TOP.equals(s)) {
 			textPlacement = PositionConstants.NORTH;
 		}
-		if (EditorPreferences.LABEL_PLACEMENT_BOTTOM.equals(s)) {
+		if (GEMPreferences.LABEL_PLACEMENT_BOTTOM.equals(s)) {
 			textPlacement = PositionConstants.SOUTH;
 		}
-		if (EditorPreferences.LABEL_PLACEMENT_LEFT.equals(s)) {
+		if (GEMPreferences.LABEL_PLACEMENT_LEFT.equals(s)) {
 			textPlacement = PositionConstants.WEST;
 		}
-		if (EditorPreferences.LABEL_PLACEMENT_RIGHT.equals(s)) {
+		if (GEMPreferences.LABEL_PLACEMENT_RIGHT.equals(s)) {
 			textPlacement = PositionConstants.EAST;
 		}
 		return textPlacement;
@@ -190,8 +190,8 @@ public class PageflowNodeFigure extends Figure {
 		if (labelFgColor == null) {
 			IPreferenceStore store = EditorPlugin.getDefault()
 					.getPreferenceStore();
-			labelFgColor = EditorPreferences.getColor(store,
-					EditorPreferences.FIGURE_LABEL_FONT_COLOR);
+			labelFgColor = GEMPreferences.getColor(store,
+					GEMPreferences.FIGURE_LABEL_FONT_COLOR);
 		}
 		return labelFgColor;
 	}
@@ -206,7 +206,7 @@ public class PageflowNodeFigure extends Figure {
 			IPreferenceStore store = EditorPlugin.getDefault()
 					.getPreferenceStore();
 			labelFont = new Font(null, PreferenceConverter.getFontData(store,
-					EditorPreferences.FIGURE_LABEL_FONT));
+					GEMPreferences.FIGURE_LABEL_FONT));
 		}
 		return labelFont;
 	}

@@ -30,7 +30,6 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jst.jsf.facesconfig.emf.NavigationCaseType;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
-import org.eclipse.jst.jsf.facesconfig.ui.EditorPreferences;
 import org.eclipse.jst.jsf.facesconfig.ui.IconResources;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpolicy.PFLinkBendpointEditPolicy;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpolicy.PFLinkEditPolicy;
@@ -41,6 +40,7 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.PageflowElementPropertySource;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowAnnotationUtil;
+import org.eclipse.jst.jsf.facesconfig.ui.preference.GEMPreferences;
 import org.eclipse.jst.jsf.facesconfig.ui.util.WebrootUtil;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
@@ -508,9 +508,9 @@ public class PFLinkEditPart extends AbstractConnectionEditPart implements
 			IPreferenceStore store = EditorPlugin.getDefault()
 					.getPreferenceStore();
 			String connectionStyle = store
-					.getString(EditorPreferences.LINE_ROUTING);
+					.getString(GEMPreferences.LINE_ROUTING);
 
-			if (EditorPreferences.LINE_ROUTING_MANHATTAN
+			if (GEMPreferences.LINE_ROUTING_MANHATTAN
 					.equals(connectionStyle)) {
 				this.connectionStyle = ILayerPanePreference.LINE_ROUTING_MANHATTAN;
 			} else {

@@ -17,7 +17,7 @@ import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.editpolicies.ConnectionEndpointEditPolicy;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
-import org.eclipse.jst.jsf.facesconfig.ui.EditorPreferences;
+import org.eclipse.jst.jsf.facesconfig.ui.preference.GEMPreferences;
 
 public class PFLinkEndpointEditPolicy extends ConnectionEndpointEditPolicy {
 	/**
@@ -35,7 +35,7 @@ public class PFLinkEndpointEditPolicy extends ConnectionEndpointEditPolicy {
 	protected void addSelectionHandles() {
 		super.addSelectionHandles();
 		IPreferenceStore store = EditorPlugin.getDefault().getPreferenceStore();
-		int connectionWidth = store.getInt(EditorPreferences.LINE_WIDTH);
+		int connectionWidth = store.getInt(GEMPreferences.LINE_WIDTH);
 		getConnectionFigure().setLineWidth(connectionWidth + 1);
 	}
 
@@ -56,7 +56,7 @@ public class PFLinkEndpointEditPolicy extends ConnectionEndpointEditPolicy {
 	protected void removeSelectionHandles() {
 		super.removeSelectionHandles();
 		IPreferenceStore store = EditorPlugin.getDefault().getPreferenceStore();
-		int connectionWidth = store.getInt(EditorPreferences.LINE_WIDTH);
+		int connectionWidth = store.getInt(GEMPreferences.LINE_WIDTH);
 		getConnectionFigure().setLineWidth(connectionWidth);
 	}
 }

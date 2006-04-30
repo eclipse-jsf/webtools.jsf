@@ -31,17 +31,18 @@ import org.eclipse.ui.views.properties.IPropertySource;
 public class PageflowElementTreeEditPart extends AbstractTreeEditPart implements
 		Adapter {
 	/** Image descriptor of tree item for the different edit parts */
-	public static final ImageDescriptor IMG_ACTION = EditorPlugin.getDefault()
-			.getImageDescriptor(
-					IconResources.getString("Pageflow.action.small")); //$NON-NLS-1$
-
-	public static final ImageDescriptor IMG_BEGIN = EditorPlugin
-			.getDefault()
-			.getImageDescriptor(IconResources.getString("Pageflow.begin.small")); //$NON-NLS-1$
-
-	public static final ImageDescriptor IMG_END = EditorPlugin.getDefault()
-			.getImageDescriptor(IconResources.getString("Pageflow.end.small")); //$NON-NLS-1$
-
+	// public static final ImageDescriptor IMG_ACTION =
+	// EditorPlugin.getDefault()
+	// .getImageDescriptor(
+	// IconResources.getString("Pageflow.action.small")); //$NON-NLS-1$
+	// public static final ImageDescriptor IMG_BEGIN = EditorPlugin
+	// .getDefault()
+	// .getImageDescriptor(IconResources.getString("Pageflow.begin.small"));
+	// //$NON-NLS-1$
+	//
+	// public static final ImageDescriptor IMG_END = EditorPlugin.getDefault()
+	// .getImageDescriptor(IconResources.getString("Pageflow.end.small"));
+	// //$NON-NLS-1$
 	public static final ImageDescriptor IMG_PAGE = EditorPlugin.getDefault()
 			.getImageDescriptor(IconResources.getString("Pageflow.page.small")); //$NON-NLS-1$
 

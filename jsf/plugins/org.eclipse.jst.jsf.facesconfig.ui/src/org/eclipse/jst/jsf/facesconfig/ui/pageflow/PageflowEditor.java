@@ -70,7 +70,6 @@ import org.eclipse.jface.util.TransferDropTargetListener;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jst.jsf.facesconfig.common.logging.Logger;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
-import org.eclipse.jst.jsf.facesconfig.ui.EditorPreferences;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorResources;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.action.AlignmentAction;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.action.OpenEditorAction;
@@ -89,6 +88,7 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowAnnotationUtil;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowModelManager;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowResourceFactory;
+import org.eclipse.jst.jsf.facesconfig.ui.preference.GEMPreferences;
 import org.eclipse.jst.jsf.facesconfig.ui.util.EditPartMarkerUtil;
 import org.eclipse.jst.jsf.facesconfig.ui.util.WebrootUtil;
 import org.eclipse.swt.SWT;
@@ -418,7 +418,7 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 
 		// initialize the viewer with input
 		viewer.setEditPartFactory(new PageflowEditPartsFactory());
-		// viewer.setContents(getPageflow());
+		 viewer.setContents(getPageflow());
 
 		// support the resource drag&drop
 		viewer
@@ -956,57 +956,57 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 		IPreferenceStore store = EditorPlugin.getDefault().getPreferenceStore();
 
 		if (property != null
-				&& property.equals(EditorPreferences.USE_SYSTEM_COLORS)) {
+				&& property.equals(GEMPreferences.USE_SYSTEM_COLORS)) {
 			// reload all properties - it's easiest
 			property = null;
 		}
 
-		if (property == null || EditorPreferences.SNAP_TO_GRID.equals(property)) {
+		if (property == null || GEMPreferences.SNAP_TO_GRID.equals(property)) {
 			boolean bSnapToGrid = store
-					.getBoolean(EditorPreferences.SNAP_TO_GRID);
+					.getBoolean(GEMPreferences.SNAP_TO_GRID);
 			if (part instanceof ILayerPanePreference) {
 				((ILayerPanePreference) part).setGridVisible(bSnapToGrid);
 			}
 		}
 
-		if (property == null || EditorPreferences.GRID_WIDTH.equals(property)
-				|| EditorPreferences.GRID_HEIGHT.equals(property)) {
+		if (property == null || GEMPreferences.GRID_WIDTH.equals(property)
+				|| GEMPreferences.GRID_HEIGHT.equals(property)) {
 			Dimension gridSpacing = new Dimension(store
-					.getInt(EditorPreferences.GRID_WIDTH), store
-					.getInt(EditorPreferences.GRID_HEIGHT));
+					.getInt(GEMPreferences.GRID_WIDTH), store
+					.getInt(GEMPreferences.GRID_HEIGHT));
 			if (part instanceof ILayerPanePreference) {
 				((ILayerPanePreference) part).setGridSpacing(gridSpacing);
 			}
 		}
 
-		if (property == null || EditorPreferences.GRID_COLOR.equals(property)) {
-			Color gridFgColor = EditorPreferences.getColor(store,
-					EditorPreferences.GRID_COLOR);
+		if (property == null || GEMPreferences.GRID_COLOR.equals(property)) {
+			Color gridFgColor = GEMPreferences.getColor(store,
+					GEMPreferences.GRID_COLOR);
 			if (part instanceof ILayerPanePreference) {
 				((ILayerPanePreference) part)
 						.setGridForegroundColor(gridFgColor);
 			}
 		}
 
-		if (property == null || EditorPreferences.CANVAS_COLOR.equals(property)) {
-			Color containerBgColor = EditorPreferences.getColor(store,
-					EditorPreferences.CANVAS_COLOR);
+		if (property == null || GEMPreferences.CANVAS_COLOR.equals(property)) {
+			Color containerBgColor = GEMPreferences.getColor(store,
+					GEMPreferences.CANVAS_COLOR);
 			if (part instanceof IFigurePreference) {
 				((IFigurePreference) part).setBackgroundColor(containerBgColor);
 			}
 		}
 
-		if (property == null || EditorPreferences.LINE_WIDTH.equals(property)) {
-			int linkLineWidth = store.getInt(EditorPreferences.LINE_WIDTH);
+		if (property == null || GEMPreferences.LINE_WIDTH.equals(property)) {
+			int linkLineWidth = store.getInt(GEMPreferences.LINE_WIDTH);
 
 			if (part instanceof IConnectionPreference) {
 				((IConnectionPreference) part).setLineWidth(linkLineWidth);
 			}
 		}
 
-		if (property == null || EditorPreferences.LINE_COLOR.equals(property)) {
-			Color linkLineColor = EditorPreferences.getColor(store,
-					EditorPreferences.LINE_COLOR);
+		if (property == null || GEMPreferences.LINE_COLOR.equals(property)) {
+			Color linkLineColor = GEMPreferences.getColor(store,
+					GEMPreferences.LINE_COLOR);
 			if (part instanceof IConnectionPreference) {
 				((IConnectionPreference) part)
 						.setForegroundColor(linkLineColor);
@@ -1014,9 +1014,9 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 		}
 
 		if (property == null
-				|| EditorPreferences.SHOW_LINE_LABELS.equals(property)) {
+				|| GEMPreferences.SHOW_LINE_LABELS.equals(property)) {
 			boolean bLinkLabelVisible = store
-					.getBoolean(EditorPreferences.SHOW_LINE_LABELS);
+					.getBoolean(GEMPreferences.SHOW_LINE_LABELS);
 			if (part instanceof IConnectionPreference) {
 				((IConnectionPreference) part)
 						.setLabelVisible(bLinkLabelVisible);
@@ -1024,12 +1024,12 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 		}
 
 		if (property == null
-				|| EditorPreferences.LINE_LABEL_FONT.equals(property)
-				|| EditorPreferences.LINE_LABEL_FONT_COLOR.equals(property)) {
+				|| GEMPreferences.LINE_LABEL_FONT.equals(property)
+				|| GEMPreferences.LINE_LABEL_FONT_COLOR.equals(property)) {
 			Font linkLabelFont = new Font(null, PreferenceConverter
-					.getFontData(store, EditorPreferences.LINE_LABEL_FONT));
-			Color linkLabelFgColor = EditorPreferences.getColor(store,
-					EditorPreferences.LINE_LABEL_FONT_COLOR);
+					.getFontData(store, GEMPreferences.LINE_LABEL_FONT));
+			Color linkLabelFgColor = GEMPreferences.getColor(store,
+					GEMPreferences.LINE_LABEL_FONT_COLOR);
 			if (part instanceof IConnectionPreference) {
 				((IConnectionPreference) part).setFont(linkLabelFont);
 				((IConnectionPreference) part)
@@ -1038,20 +1038,20 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 		}
 
 		if (property == null
-				|| EditorPreferences.LINE_LABEL_COLOR.equals(property)) {
-			Color linkLabelBgColor = EditorPreferences.getColor(store,
-					EditorPreferences.LINE_LABEL_COLOR);
+				|| GEMPreferences.LINE_LABEL_COLOR.equals(property)) {
+			Color linkLabelBgColor = GEMPreferences.getColor(store,
+					GEMPreferences.LINE_LABEL_COLOR);
 			if (part instanceof IConnectionPreference) {
 				((IConnectionPreference) part)
 						.setLabelBackgroundColor(linkLabelBgColor);
 			}
 		}
 
-		if (property == null || EditorPreferences.LINE_ROUTING.equals(property)) {
+		if (property == null || GEMPreferences.LINE_ROUTING.equals(property)) {
 			String connectionStyle = store
-					.getString(EditorPreferences.LINE_ROUTING);
+					.getString(GEMPreferences.LINE_ROUTING);
 			int style;
-			if (EditorPreferences.LINE_ROUTING_MANHATTAN
+			if (GEMPreferences.LINE_ROUTING_MANHATTAN
 					.equals(connectionStyle)) {
 				style = ILayerPanePreference.LINE_ROUTING_MANHATTAN;
 			} else {
@@ -1066,12 +1066,12 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 		}
 
 		if (property == null
-				|| EditorPreferences.FIGURE_LABEL_FONT.equals(property)
-				|| EditorPreferences.FIGURE_LABEL_FONT_COLOR.equals(property)) {
+				|| GEMPreferences.FIGURE_LABEL_FONT.equals(property)
+				|| GEMPreferences.FIGURE_LABEL_FONT_COLOR.equals(property)) {
 			Font nodeLabelFont = new Font(null, PreferenceConverter
-					.getFontData(store, EditorPreferences.FIGURE_LABEL_FONT));
-			Color nodeLabelFgColor = EditorPreferences.getColor(store,
-					EditorPreferences.FIGURE_LABEL_FONT_COLOR);
+					.getFontData(store, GEMPreferences.FIGURE_LABEL_FONT));
+			Color nodeLabelFgColor = GEMPreferences.getColor(store,
+					GEMPreferences.FIGURE_LABEL_FONT_COLOR);
 
 			if (part instanceof INodePreference) {
 				((INodePreference) part).setFont(nodeLabelFont);
@@ -1080,20 +1080,20 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 		}
 
 		if (property == null
-				|| EditorPreferences.LABEL_PLACEMENT.equals(property)) {
+				|| GEMPreferences.LABEL_PLACEMENT.equals(property)) {
 			int placement = PositionConstants.SOUTH;
 			String nodeLabelPlacement = store
-					.getString(EditorPreferences.LABEL_PLACEMENT);
-			if (EditorPreferences.LABEL_PLACEMENT_TOP
+					.getString(GEMPreferences.LABEL_PLACEMENT);
+			if (GEMPreferences.LABEL_PLACEMENT_TOP
 					.equals(nodeLabelPlacement))
 				placement = PositionConstants.NORTH;
-			if (EditorPreferences.LABEL_PLACEMENT_BOTTOM
+			if (GEMPreferences.LABEL_PLACEMENT_BOTTOM
 					.equals(nodeLabelPlacement))
 				placement = PositionConstants.SOUTH;
-			if (EditorPreferences.LABEL_PLACEMENT_LEFT
+			if (GEMPreferences.LABEL_PLACEMENT_LEFT
 					.equals(nodeLabelPlacement))
 				placement = PositionConstants.WEST;
-			if (EditorPreferences.LABEL_PLACEMENT_RIGHT
+			if (GEMPreferences.LABEL_PLACEMENT_RIGHT
 					.equals(nodeLabelPlacement))
 				placement = PositionConstants.EAST;
 

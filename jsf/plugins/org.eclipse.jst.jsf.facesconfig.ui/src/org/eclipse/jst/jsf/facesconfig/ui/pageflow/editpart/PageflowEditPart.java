@@ -39,10 +39,10 @@ import org.eclipse.gef.editpolicies.SnapFeedbackPolicy;
 import org.eclipse.gef.rulers.RulerProvider;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
-import org.eclipse.jst.jsf.facesconfig.ui.EditorPreferences;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowAnnotationUtil;
+import org.eclipse.jst.jsf.facesconfig.ui.preference.GEMPreferences;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 
@@ -114,12 +114,12 @@ public class PageflowEditPart extends PageflowContainerEditPart implements
 			}
 
 			boolean bSnapToGeometry = store
-					.getBoolean(EditorPreferences.SNAP_TO_GEOMETRY);
+					.getBoolean(GEMPreferences.SNAP_TO_GEOMETRY);
 			if (bSnapToGeometry) {
 				snapStrategies.add(new SnapToGeometry(this));
 			}
 			boolean bSnapToGrid = store
-					.getBoolean(EditorPreferences.SNAP_TO_GRID);
+					.getBoolean(GEMPreferences.SNAP_TO_GRID);
 			if (bSnapToGrid) {
 				snapStrategies.add(new SnapToGrid(this));
 			}
@@ -254,9 +254,9 @@ public class PageflowEditPart extends PageflowContainerEditPart implements
 			IPreferenceStore store = EditorPlugin.getDefault()
 					.getPreferenceStore();
 			String connectionStyle = store
-					.getString(EditorPreferences.LINE_ROUTING);
+					.getString(GEMPreferences.LINE_ROUTING);
 
-			if (EditorPreferences.LINE_ROUTING_MANHATTAN
+			if (GEMPreferences.LINE_ROUTING_MANHATTAN
 					.equals(connectionStyle)) {
 				this.connectionStyle = ILayerPanePreference.LINE_ROUTING_MANHATTAN;
 			} else {

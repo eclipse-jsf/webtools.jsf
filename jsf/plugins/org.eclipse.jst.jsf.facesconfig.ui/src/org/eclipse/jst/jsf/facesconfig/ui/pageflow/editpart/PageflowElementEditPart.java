@@ -55,12 +55,12 @@ public abstract class PageflowElementEditPart extends AbstractGraphicalEditPart
 	public static final ImageDescriptor IMG_ACTION = EditorPlugin.getDefault()
 			.getImageDescriptor("facesconfig/Pageflow_Action16.gif"); //$NON-NLS-1$
 
-	public static final ImageDescriptor IMG_BEGIN = EditorPlugin
-			.getDefault()
-			.getImageDescriptor(IconResources.getString("Pageflow.begin.large")); //$NON-NLS-1$
-
-	public static final ImageDescriptor IMG_END = EditorPlugin.getDefault()
-			.getImageDescriptor(IconResources.getString("Pageflow.end.large")); //$NON-NLS-1$
+//	public static final ImageDescriptor IMG_BEGIN = EditorPlugin
+//			.getDefault()
+//			.getImageDescriptor(IconResources.getString("Pageflow.begin.large")); //$NON-NLS-1$
+//
+//	public static final ImageDescriptor IMG_END = EditorPlugin.getDefault()
+//			.getImageDescriptor(IconResources.getString("Pageflow.end.large")); //$NON-NLS-1$
 
 	public static final ImageDescriptor IMG_PAGE = EditorPlugin.getDefault()
 			.getImageDescriptor(IconResources.getString("Pageflow.page.large")); //$NON-NLS-1$

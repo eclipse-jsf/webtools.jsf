@@ -23,7 +23,6 @@ import org.eclipse.gef.requests.CreateConnectionRequest;
 import org.eclipse.gef.requests.ReconnectRequest;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
-import org.eclipse.jst.jsf.facesconfig.ui.EditorPreferences;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.action.OpenEditorAction;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.command.ConnectionCommand;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.command.OpenEditorCommand;
@@ -32,6 +31,7 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.figure.PageflowNodeFigure;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PageflowNodeImpl;
+import org.eclipse.jst.jsf.facesconfig.ui.preference.GEMPreferences;
 
 public class PageflowNodeEditPolicy extends GraphicalNodeEditPolicy {
 	/*
@@ -52,7 +52,7 @@ public class PageflowNodeEditPolicy extends GraphicalNodeEditPolicy {
 	 */
 	private int getLineWidth() {
 		IPreferenceStore store = EditorPlugin.getDefault().getPreferenceStore();
-		int lineWidth = store.getInt(EditorPreferences.LINE_WIDTH);
+		int lineWidth = store.getInt(GEMPreferences.LINE_WIDTH);
 		return lineWidth;
 	}
 

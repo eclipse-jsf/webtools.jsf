@@ -21,8 +21,8 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceConverter;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
-import org.eclipse.jst.jsf.facesconfig.ui.EditorPreferences;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowElementEditPart;
+import org.eclipse.jst.jsf.facesconfig.ui.preference.GEMPreferences;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Image;
@@ -186,7 +186,7 @@ public class PFLinkFigure extends PolylineConnection {
 			IPreferenceStore store = EditorPlugin.getDefault()
 					.getPreferenceStore();
 			labelFont = new Font(null, PreferenceConverter.getFontData(store,
-					EditorPreferences.LINE_LABEL_FONT));
+					GEMPreferences.LINE_LABEL_FONT));
 		}
 		return labelFont;
 	}
@@ -209,7 +209,7 @@ public class PFLinkFigure extends PolylineConnection {
 	 */
 	public int getLineWidth() {
 		IPreferenceStore store = EditorPlugin.getDefault().getPreferenceStore();
-		lineWidth = store.getInt(EditorPreferences.LINE_WIDTH);
+		lineWidth = store.getInt(GEMPreferences.LINE_WIDTH);
 		return lineWidth;
 	}
 
@@ -231,7 +231,7 @@ public class PFLinkFigure extends PolylineConnection {
 	 */
 	private boolean getLabelVisible() {
 		IPreferenceStore store = EditorPlugin.getDefault().getPreferenceStore();
-		bLabelVisible = store.getBoolean(EditorPreferences.SHOW_LINE_LABELS);
+		bLabelVisible = store.getBoolean(GEMPreferences.SHOW_LINE_LABELS);
 		return bLabelVisible;
 	}
 
@@ -255,8 +255,8 @@ public class PFLinkFigure extends PolylineConnection {
 		if (labelFgColor == null) {
 			IPreferenceStore store = EditorPlugin.getDefault()
 					.getPreferenceStore();
-			labelFgColor = EditorPreferences.getColor(store,
-					EditorPreferences.LINE_LABEL_FONT_COLOR);
+			labelFgColor = GEMPreferences.getColor(store,
+					GEMPreferences.LINE_LABEL_FONT_COLOR);
 		}
 		return labelFgColor;
 	}
@@ -281,8 +281,8 @@ public class PFLinkFigure extends PolylineConnection {
 		if (labelBgColor == null) {
 			IPreferenceStore store = EditorPlugin.getDefault()
 					.getPreferenceStore();
-			labelBgColor = EditorPreferences.getColor(store,
-					EditorPreferences.LINE_LABEL_COLOR);
+			labelBgColor = GEMPreferences.getColor(store,
+					GEMPreferences.LINE_LABEL_COLOR);
 		}
 		return labelBgColor;
 	}
@@ -293,8 +293,8 @@ public class PFLinkFigure extends PolylineConnection {
 	 */
 	public Color getForegroundColor() {
 		IPreferenceStore store = EditorPlugin.getDefault().getPreferenceStore();
-		fgColor = EditorPreferences.getColor(store,
-				EditorPreferences.LINE_COLOR);
+		fgColor = GEMPreferences.getColor(store,
+				GEMPreferences.LINE_COLOR);
 		return fgColor;
 	}
 
