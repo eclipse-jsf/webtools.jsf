@@ -57,6 +57,8 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
  */
 public class ComponentsPage extends FacesConfigMasterDetailPage {
 
+	public static final String PAGE_ID = "org.eclipse.jst.jsf.facesconfig.ui.page.ComponentsPage";
+
 	private IContentOutlinePage contentOutlinePage;
 
 	/**
@@ -204,10 +206,11 @@ public class ComponentsPage extends FacesConfigMasterDetailPage {
 					.addSelectionChangedListener(new ISelectionChangedListener() {
 						// This ensures that we handle selections correctly.
 						public void selectionChanged(SelectionChangedEvent event) {
-							handleContentOutlineSelection(event.getSelection());
+							setSelection(event.getSelection());
 						}
 					});
 
+			addSelectionChangedListener((ContentOutlinePage) contentOutlinePage);
 		}
 
 		return contentOutlinePage;
@@ -219,10 +222,18 @@ public class ComponentsPage extends FacesConfigMasterDetailPage {
 	 * 
 	 * @param selection
 	 */
-	protected void handleContentOutlineSelection(ISelection selection) {
+	public void setSelection(ISelection selection) {
 
 		if (selection instanceof IStructuredSelection) {
 			IStructuredSelection ss = (IStructuredSelection) selection;
+			IStructuredSelection currentSelection = (IStructuredSelection) this
+					.getSelection();
+			if ((!ss.isEmpty())
+					&& (!currentSelection.isEmpty())
+					&& (ss.getFirstElement() == currentSelection
+							.getFirstElement())) {
+				return;
+			}
 			EObject component = null;
 			if (ss.getFirstElement() instanceof AttributeType
 					|| ss.getFirstElement() instanceof PropertyType

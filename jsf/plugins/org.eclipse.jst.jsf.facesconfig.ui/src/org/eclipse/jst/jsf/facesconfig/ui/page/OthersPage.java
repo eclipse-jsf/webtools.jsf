@@ -18,6 +18,7 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
@@ -26,20 +27,20 @@ import org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jface.viewers.ViewerSorter;
-import org.eclipse.jst.jsf.facesconfig.common.CommonPlugin;
 import org.eclipse.jst.jsf.facesconfig.emf.ApplicationType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.jst.jsf.facesconfig.emf.FactoryType;
 import org.eclipse.jst.jsf.facesconfig.emf.LifecycleType;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor;
-import org.eclipse.jst.jsf.facesconfig.ui.IconResources;
 import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
 import org.eclipse.jst.jsf.facesconfig.ui.section.AbstractFacesConfigSection;
 import org.eclipse.jst.jsf.facesconfig.ui.section.ApplicationSection;
@@ -73,8 +74,10 @@ import org.eclipse.ui.views.properties.IPropertySheetPage;
 public class OthersPage extends FormPage implements IFacesConfigPage,
 		ISelectionProvider, ISelectionChangedListener {
 
-	private final static Image BANNER_IMAGE = CommonPlugin.getDefault()
-			.getImage(IconResources.getString("Common.formbanner"));
+	public static final String PAGE_ID = "org.eclipse.jst.jsf.facesconfig.ui.page.OthersPage";
+
+	private final static Image BANNER_IMAGE = EditorPlugin.getDefault()
+			.getImage("form_banner.gif");
 
 	private List leftSections;
 
@@ -450,12 +453,6 @@ public class OthersPage extends FormPage implements IFacesConfigPage,
 		selectionChangedListeners.remove(listener);
 	}
 
-	public void setSelection(ISelection selection) {
-		// TODO Auto-generated method stub
-		if (selection != null && getActiveSection() != null)
-			getActiveSection().setSelection(selection);
-	}
-
 	public void selectionChanged(SelectionChangedEvent event) {
 
 		if (event.getSource() instanceof OthersPageBaseSection) {
@@ -641,7 +638,7 @@ public class OthersPage extends FormPage implements IFacesConfigPage,
 					.addSelectionChangedListener(new ISelectionChangedListener() {
 						// This ensures that we handle selections correctly.
 						public void selectionChanged(SelectionChangedEvent event) {
-							handleContentOutlineSelection(event.getSelection());
+							setSelection(event.getSelection());
 						}
 					});
 
@@ -656,49 +653,76 @@ public class OthersPage extends FormPage implements IFacesConfigPage,
 	 * 
 	 * @param selection
 	 */
-	protected void handleContentOutlineSelection(ISelection selection) {
+	public void setSelection(ISelection selection) {
 
-		//TODO sfshi
-		
-		// if (selection instanceof IStructuredSelection) {
-		// IStructuredSelection ss = (IStructuredSelection) selection;
-		// EObject component = null;
-		// if (ss.getFirstElement() instanceof AttributeType
-		// || ss.getFirstElement() instanceof PropertyType
-		// || ss.getFirstElement() instanceof FacetType
-		// || ss.getFirstElement() instanceof RendererType) {
-		// component = ((EObject) ss.getFirstElement()).eContainer();
-		// } else if (ss.getFirstElement() instanceof EObject) {
-		// component = (EObject) ss.getFirstElement();
-		// }
-		//
-		// if (component != null) {
-		// FacesConfigMasterSection section = null;
-		// if (FacesConfigPackage.eINSTANCE.getComponentType().isInstance(
-		// component)) {
-		// section = facesConfigMasterSections[0];
-		// } else if (FacesConfigPackage.eINSTANCE.getConverterType()
-		// .isInstance(component)) {
-		// section = facesConfigMasterSections[1];
-		// } else if (FacesConfigPackage.eINSTANCE.getRenderKitType()
-		// .isInstance(component)) {
-		// section = facesConfigMasterSections[2];
-		// } else if (FacesConfigPackage.eINSTANCE.getValidatorType()
-		// .isInstance(component)) {
-		// section = facesConfigMasterSections[3];
-		// }
-		//
-		// if (!section.getSection().isExpanded()) {
-		// this.closeOtherSections(section);
-		// GridData gd = new GridData(GridData.FILL_BOTH);
-		// section.getSection().setLayoutData(gd);
-		// section.getSection().setExpanded(true);
-		// }
-		// IStructuredSelection newselection = new StructuredSelection(
-		// component);
-		// section.getStructuredViewer().setSelection(newselection);
-		// }
-		// }
+		if (selection instanceof IStructuredSelection) {
+			IStructuredSelection ss = (IStructuredSelection) selection;
+			if (ss.isEmpty())
+				return;
 
+			EObject object = (EObject) ss.getFirstElement();
+			OthersPageBaseSection section = null;
+
+			if (FacesConfigPackage.eINSTANCE.getActionListenerType()
+					.isInstance(object)) {
+				section = (OthersPageBaseSection) leftSections.get(0);
+			} else if (FacesConfigPackage.eINSTANCE.getDefaultRenderKitIdType()
+					.isInstance(object)) {
+				section = (OthersPageBaseSection) leftSections.get(1);
+			} else if (FacesConfigPackage.eINSTANCE.getLocaleConfigType()
+					.isInstance(object)) {
+				section = (OthersPageBaseSection) leftSections.get(2);
+			} else if (FacesConfigPackage.eINSTANCE.getDefaultLocaleType()
+					.isInstance(object)) {
+				section = (OthersPageBaseSection) leftSections.get(2);
+			} else if (FacesConfigPackage.eINSTANCE.getSupportedLocaleType()
+					.isInstance(object)) {
+				section = (OthersPageBaseSection) leftSections.get(2);
+			} else if (FacesConfigPackage.eINSTANCE.getMessageBundleType()
+					.isInstance(object)) {
+				section = (OthersPageBaseSection) leftSections.get(3);
+			} else if (FacesConfigPackage.eINSTANCE.getNavigationHandlerType()
+					.isInstance(object)) {
+				section = (OthersPageBaseSection) leftSections.get(4);
+			} else if (FacesConfigPackage.eINSTANCE.getPropertyResolverType()
+					.isInstance(object)) {
+				section = (OthersPageBaseSection) leftSections.get(5);
+			} else if (FacesConfigPackage.eINSTANCE.getStateManagerType()
+					.isInstance(object)) {
+				section = (OthersPageBaseSection) leftSections.get(6);
+			} else if (FacesConfigPackage.eINSTANCE.getVariableResolverType()
+					.isInstance(object)) {
+				section = (OthersPageBaseSection) leftSections.get(7);
+			} else if (FacesConfigPackage.eINSTANCE.getViewHandlerType()
+					.isInstance(object)) {
+				section = (OthersPageBaseSection) leftSections.get(8);
+			} else if (FacesConfigPackage.eINSTANCE.getApplicationFactoryType()
+					.isInstance(object)) {
+				section = (OthersPageBaseSection) rightSections.get(0);
+			} else if (FacesConfigPackage.eINSTANCE
+					.getFacesContextFactoryType().isInstance(object)) {
+				section = (OthersPageBaseSection) rightSections.get(1);
+			} else if (FacesConfigPackage.eINSTANCE.getLifecycleFactoryType()
+					.isInstance(object)) {
+				section = (OthersPageBaseSection) rightSections.get(2);
+			} else if (FacesConfigPackage.eINSTANCE.getRenderKitFactoryType()
+					.isInstance(object)) {
+				section = (OthersPageBaseSection) rightSections.get(3);
+			} else if (FacesConfigPackage.eINSTANCE.getPhaseListenerType()
+					.isInstance(object)) {
+				section = (OthersPageBaseSection) rightSections.get(4);
+			}
+			if (section != null) {
+				if (!section.getSection().isExpanded()) {
+					this.closeOtherSections(section);
+					GridData gd = new GridData(GridData.FILL_BOTH);
+					section.getSection().setLayoutData(gd);
+					section.getSection().setExpanded(true);
+				}
+				IStructuredSelection newselection = new StructuredSelection(
+						object);
+				section.getTableViewer().setSelection(newselection);
+			}
+		}
 	}
 }

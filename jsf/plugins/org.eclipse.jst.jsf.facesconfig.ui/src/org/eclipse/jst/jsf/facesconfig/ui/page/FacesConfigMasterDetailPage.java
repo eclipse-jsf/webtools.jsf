@@ -25,9 +25,8 @@ import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.jst.jsf.facesconfig.common.CommonPlugin;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor;
-import org.eclipse.jst.jsf.facesconfig.ui.IconResources;
 import org.eclipse.jst.jsf.facesconfig.ui.section.FacesConfigMasterSection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
@@ -58,8 +57,8 @@ public abstract class FacesConfigMasterDetailPage extends FormPage implements
 		IFacesConfigPage, IDetailsPageProvider, ISelectionChangedListener,
 		ISelectionProvider {
 
-	private final static Image BANNER_IMAGE = CommonPlugin.getDefault()
-			.getImage(IconResources.getString("Common.formbanner"));
+	private final static Image BANNER_IMAGE = EditorPlugin.getDefault()
+			.getImage("form_banner.gif");
 
 	protected FacesConfigMasterSection[] facesConfigMasterSections;
 
@@ -319,14 +318,11 @@ public abstract class FacesConfigMasterDetailPage extends FormPage implements
 
 	public void removeSelectionChangedListener(
 			ISelectionChangedListener listener) {
-		// TODO Auto-generated method stub
 		selectionChangedListeners.remove(listener);
 	}
 
 	public void setSelection(ISelection selection) {
 		// TODO Auto-generated method stub
-		if (selection != null && getActiveSection() != null)
-			getActiveSection().setSelection(selection);
 
 	}
 

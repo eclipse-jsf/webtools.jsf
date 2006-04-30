@@ -47,6 +47,8 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
  */
 public class ManagedBeanPage extends FacesConfigMasterDetailPage {
 
+	public static final String PAGE_ID = "org.eclipse.jst.jsf.facesconfig.ui.page.ManagedBeanPage";
+
 	private IContentOutlinePage contentOutlinePage;
 
 	public ManagedBeanPage(FacesConfigEditor editor) {
@@ -131,7 +133,7 @@ public class ManagedBeanPage extends FacesConfigMasterDetailPage {
 					.addSelectionChangedListener(new ISelectionChangedListener() {
 						// This ensures that we handle selections correctly.
 						public void selectionChanged(SelectionChangedEvent event) {
-							handleContentOutlineSelection(event.getSelection());
+							setSelection(event.getSelection());
 						}
 					});
 
@@ -148,7 +150,7 @@ public class ManagedBeanPage extends FacesConfigMasterDetailPage {
 	 * 
 	 * @param selection
 	 */
-	protected void handleContentOutlineSelection(ISelection selection) {
+	public void setSelection(ISelection selection) {
 
 		if (selection instanceof IStructuredSelection) {
 			IStructuredSelection ss = (IStructuredSelection) selection;

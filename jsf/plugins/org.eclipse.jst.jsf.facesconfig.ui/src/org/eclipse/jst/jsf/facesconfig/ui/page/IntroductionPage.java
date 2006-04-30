@@ -15,10 +15,9 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.jst.jsf.facesconfig.common.CommonPlugin;
 import org.eclipse.jst.jsf.facesconfig.common.guiutils.IntroductionSection;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor;
-import org.eclipse.jst.jsf.facesconfig.ui.IconResources;
 import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
 import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.editor.FormPage;
@@ -52,8 +51,7 @@ public class IntroductionPage extends FormPage implements ISelectionProvider{
 		FormToolkit toolkit = getEditor().getToolkit();
 		form.setText(NewEditorResourcesNLS.editor_pageflow_page_intro_title);
 
-		form.setBackgroundImage(CommonPlugin.getDefault().getImage(
-				IconResources.getString("Common.formbanner")));
+		form.setBackgroundImage(EditorPlugin.getDefault().getImage("form_banner.gif"));
 
 		// create a layout
 		TableWrapLayout layout = new TableWrapLayout();
