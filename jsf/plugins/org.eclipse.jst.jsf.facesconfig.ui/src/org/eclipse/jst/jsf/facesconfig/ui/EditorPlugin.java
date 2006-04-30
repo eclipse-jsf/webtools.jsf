@@ -24,6 +24,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.jst.jsf.facesconfig.common.guiutils.Alerts;
 import org.eclipse.jst.jsf.facesconfig.common.logging.Logger;
+import org.eclipse.jst.jsf.facesconfig.ui.preference.GEMPreferences;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
@@ -35,7 +36,7 @@ import org.osgi.framework.BundleContext;
 /**
  * The main plugin class to be used in the desktop.
  */
-public class EditorPlugin extends AbstractUIPlugin {
+public class EditorPlugin extends AbstractUIPlugin {//implements IStartup {
 
 	// The shared instance.
 	private static EditorPlugin plugin;
@@ -48,14 +49,14 @@ public class EditorPlugin extends AbstractUIPlugin {
 
 	private URL pluginBase;
 
-	private static IPreferenceStore preferenceStore;
-
 	/**
 	 * The constructor.
 	 */
 	public EditorPlugin() {
+		super();
 		plugin = this;
 	}
+	
 
 	/**
 	 * This method is called upon plug-in activation
@@ -72,7 +73,7 @@ public class EditorPlugin extends AbstractUIPlugin {
 			// set up logging for this plugin and everthing under it.
 			log = new Logger(this.getBundle(), resourceBundle);
 
-//			log.info("log.StartMessage", CommonPlugin.getVersion());
+			// log.info("log.StartMessage", CommonPlugin.getVersion());
 		} catch (Exception ee) {
 			// only log if the logger was configured correctly.
 			if (log != null) {
@@ -84,6 +85,7 @@ public class EditorPlugin extends AbstractUIPlugin {
 					.getSymbolicName(), IStatus.OK,
 					"Problems starting plug-in Faces Config Editor", ee));
 		}
+		
 	}
 
 	/**
@@ -271,11 +273,7 @@ public class EditorPlugin extends AbstractUIPlugin {
 		return getDefault().getBundle().getSymbolicName();
 	}
 
-	public IPreferenceStore getPreferenceStore() {
-		if (null == preferenceStore) {
-			preferenceStore = new EditorPreferenceStore();
-		}
-
-		return preferenceStore;
+	protected void initializeDefaultPluginPreferences() {
+		new GEMPreferences();
 	}
 }
