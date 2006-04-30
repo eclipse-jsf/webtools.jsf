@@ -9,7 +9,6 @@
  * Contributors:
  *     Sybase, Inc. - initial API and implementation
  *******************************************************************************/
-
 package org.eclipse.jst.jsf.facesconfig.ui.pageflow.layout;
 
 import java.util.ArrayList;
