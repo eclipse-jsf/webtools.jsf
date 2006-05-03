@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar-annotation 
+	xmlns="http://org.eclipse.jsf.core/grammarAnnotationSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+>
+
+  <cm-element name="MyTag">
+  	<cm-attribute name="MyBooleanAttr">
+  		<property name="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.metadata.tests.MyBooleanType</value>
+  		</property>
+  	</cm-attribute>
+  	  	<cm-attribute name="BooleanAttr">
+  		<property name="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.taglibprocessing.attributevalues.BooleanType</value>
+  		</property>
+  		<property name="barks">
+  			<value>woof</value>
+  			<value>ruff</value>
+  			<value>howllllllll</value>
+  		</property>
+  	</cm-attribute>
+  	<cm-attribute name="NutherBooleanAttr">
+  		<property name="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.taglibprocessing.attributevalues.BooleanType</value>
+  		</property>
+  		<property name="barks">
+  			<value>WOOF</value>
+  			<value>RUFF</value>
+  			<value>HOWLLL</value>
+  		</property>
+  	</cm-attribute>  	
+  	<cm-attribute name="MyValidValsAttr">
+  		<property name="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.metadata.tests.MyStringArrayType</value>
+  		</property>
+  		<property name="valid-values">
+  			<value>FirstVal</value>
+  			<value>SecondVal</value>
+  			<value>ThirdVal</value>
+  			<value>FourthVal</value>
+  		</property>
+  	</cm-attribute>
+  	<cm-attribute name="MyNonMetaDataEnabledAttr">
+  		<property name="valid-values">
+  			<value>FirstVal</value>
+  			<value>SecondVal</value>
+  			<value>ThirdVal</value>
+  			<value>FourthVal</value>
+  		</property>
+  	</cm-attribute>
+  	<cm-attribute name="MyNoImplMetaDataEnabledAttr">
+  	  	<property name="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.metadata.tests.NoImplType</value>
+  		</property>
+  		<property name="valid-values">
+  			<value>FirstVal</value>
+  			<value>SecondVal</value>
+  			<value>ThirdVal</value>
+  			<value>FourthVal</value>
+  		</property>
+  	</cm-attribute>
+  	<cm-attribute name="MyDualTypeAttr">
+  	  	<property name="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.metadata.tests.MyStringArrayType</value>
+  		</property>
+  		<property name="valid-values">
+  			<value>AFirstVal</value>
+  			<value>ASecondVal</value>
+  			<value>AThirdVal</value>
+  			<value>AFourthVal</value>
+  		</property>
+  	</cm-attribute>
+  	<cm-attribute name="MyLongAttr">
+  		<property name="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.metadata.tests.MyLongType</value>
+  		</property>
+  	</cm-attribute>
+  	<cm-attribute name="MyMissingType">
+  		<property name="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.metadata.tests.WhereIsIt</value>
+  		</property>
+  	</cm-attribute>
+  	<cm-attribute name="ValidatorID">
+	  	<property name="attribute-value-runtime-type">
+			<value>org.eclipse.jst.jsf.metadataprocessors.IdentifierType</value>
+		</property>
+	  	<property name="identifier-type">
+	  		<value>javax.faces.validator</value>
+	  	</property>
+  	</cm-attribute>
+  </cm-element>
+</grammar-annotation>

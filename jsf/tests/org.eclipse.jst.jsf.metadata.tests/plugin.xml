@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+   <extension
+         point="org.eclipse.jst.jsf.contentmodel.annotations.annotationFiles">
+      <annotationFile
+            location="/testfiles/metadata/jsf_test.xml"
+            uri="http://org.eclipse.jsf/test"/>
+      <annotationFile
+            location="/testfiles/metadata/jsf_test.xml"
+            uri="http://org.eclipse.jsf/test2"
+            parser="com.foobar.DifferentParser"/>
+      <annotationFile
+            location="/testfiles/metadata/FileA.xml"
+            uri="http://org.eclipse.jsf/dupeTest"/>
+      <annotationFile
+            location="/testfiles/metadata/FileB.xml"
+            uri="http://org.eclipse.jsf/dupeTest"/>  
+      <annotationFile
+            location="/testfiles/metadata/CaseInsensitive.xml"
+            uri="http://org.eclipse.jsf/caseInsensitiveTest"/>     
+      <annotationFile
+            location="/testfiles/metadata/doesntexist.xml"
+            uri=" http://org.eclipse.jsf/missingFile  "/>
+      <annotationFile
+            location="/testfiles/metadata/jsf_metadataprocessing.xml"
+            uri=" http://org.eclipse.jsf/metadataprocessing"/>
+      <annotationFile
+            location="/testfiles/metadata/jsf_tagprocessing.xml"
+            uri="http://org.eclipse.jsf/tagprocessing"/>                                                  
+   </extension>
+   <extension
+         point="org.eclipse.jst.jsf.metadataprocessors.AttributeValueRuntimeTypes">
+      <attributeValueRuntimeType
+            class="org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.StringType"
+            id="MyStringArrayType"/>
+      <attributeValueRuntimeType
+            class="org.eclipse.jst.jsf.metadata.tests.metadataprocessing.types.MyBooleanType"
+            id="MyBooleanType"/>
+      <attributeValueRuntimeType
+            class="org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.LongType"
+            id="MyLongType"/>
+      <attributeValueRuntimeType id="NoImplType"/>
+   </extension>
+   <extension
+         point="org.eclipse.jst.jsf.metadataprocessors.MetaDataEnabledFeatures">
+      <MetaDataEnabledFeature
+            class="org.eclipse.jst.jsf.metadata.tests.metadataprocessing.MetaDataEnabledBarkAdapter"
+            typeid="org.eclipse.jst.jsf.taglibprocessing.attributevalues.BooleanType"/>
+      <MetaDataEnabledFeature
+            class="org.eclipse.jst.jsf.metadata.tests.metadataprocessing.MetaDataEnabledBarkAdapter"
+            typeid="org.eclipse.jst.jsf.metadata.tests.MyBooleanType"/>
+      <MetaDataEnabledFeature
+            class="org.eclipse.wtp.jsf.core.tests.NoImplPossibleVals"
+            typeid="org.eclipse.jst.jsf.metadata.tests.NoImplType"/>
+   </extension>
+</plugin>

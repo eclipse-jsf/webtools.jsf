@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar-annotation 
+	xmlns="http://org.eclipse.jsf.core/grammarAnnotationSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+>
+
+  <cm-element name="MyTag">
+  	<cm-attribute name="MyDualTypeAttr">
+  	  	<property name="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.metadata.tests.NoImplType</value>
+  		</property>
+  		<property name="valid-values">
+  			<value>BFirstVal</value>
+  			<value>BSecondVal</value>
+  			<value>BThirdVal</value>
+  			<value>BFourthVal</value>
+  		</property>
+  	</cm-attribute>
+  </cm-element>
+</grammar-annotation>

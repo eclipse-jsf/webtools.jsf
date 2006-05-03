@@ -1,0 +1,21 @@
+package org.eclipse.jst.jsf.metadata.tests.annotations;
+
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
+public class AllAnnotationsTests {
+
+	public static Test suite() {
+		TestSuite suite = new TestSuite(
+				"Test for org.eclipse.jst.jsf.metadata.tests.annotations");
+		//$JUnit-BEGIN$
+		suite.addTestSuite(AnnotationMapTestCases.class);
+		suite.addTestSuite(DuplicateAnnotationsTestCases.class);
+		suite.addTestSuite(CaseInsensitiveAnnotationsTestCases.class);
+		suite.addTestSuite(AnnotationHelperTestCases.class);
+		suite.addTestSuite(NegativeAnnotationFileTestCases.class);
+		//$JUnit-END$
+		return suite;
+	}
+
+}

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar-annotation 
+	xmlns="http://org.eclipse.jsf.core/grammarAnnotationSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+>
+
+  <cm-element name="MyTag">
+  	<cm-attribute name="BooleanType">
+  		<property name="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.taglibprocessing.attributevalues.BooleanType</value>
+  		</property>
+  		<property name="default-value">
+  			<value>true</value>
+  		</property>
+  	</cm-attribute>  	
+  	<cm-attribute name="StringType">
+  		<property name="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.taglibprocessing.attributevalues.StringType</value>
+  		</property>
+  		<property name="valid-values">
+  			<value>A</value>
+  			<value>B</value>
+  			<value>C</value>
+  			<value>D</value>
+  		</property>
+  		<property name="displayed-values">
+  			<value>A FirstVal</value>
+  			<value>B SecondVal</value>
+  			<value>C ThirdVal</value>
+  			<value>D FourthVal</value>
+  		</property>  		
+  		<property name = "small-icon">
+  			<value>/icons/foo.gif</value>
+  		</property>
+  		<property name = "default-value">
+  			<value>A</value>
+  		</property>
+  	</cm-attribute> 
+  	<cm-attribute name="IntegerType">
+  		<property name="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.taglibprocessing.attributevalues.IntegerType</value>
+  		</property>
+  		<property name="valid-minimum"><value>0</value></property>
+  		<property name="default-value"><value>10</value></property>
+  	</cm-attribute> 
+  	<cm-attribute name="LongType">
+  		<property name="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.taglibprocessing.attributevalues.LongType</value>
+  		</property>
+	  	<property name="valid-minimum"><value>-1000</value></property>
+  		<property name="valid-maximum"><value>1000</value></property>
+  	</cm-attribute>    	
+  	<cm-attribute name="DoubleType">
+  		<property name="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.taglibprocessing.attributevalues.DoubleType</value>
+  		</property>
+  		<property name="valid-values">
+  			<value>188.23</value>
+  			<value>245.32</value>
+  			<value>1</value>
+  		</property>
+  	</cm-attribute>    	
+  	<cm-attribute name="JavaClassType">
+  		<property name="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.taglibprocessing.attributevalues.JavaClassType</value>
+  		</property>
+  	</cm-attribute>   
+  	<cm-attribute name="MethodBindingType">
+  		<property name="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.taglibprocessing.attributevalues.MethodBindingType</value>
+  		</property>
+  	</cm-attribute>   
+  </cm-element>
+</grammar-annotation>

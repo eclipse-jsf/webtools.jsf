@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar-annotations
+	xmlns="http://org.eclipse.wtp.jsf.core/grammarAnnotationSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://org.eclipse.wtp.jsf.core/grammarAnnotationSchema" 	
+	caseSensitive="false">
+	<cm-element name="Foo">
+		<cm-attribute name="Value">
+			<property name="Type">
+				<value>String1</value>
+			</property>
+		</cm-attribute>
+		<property name="Type">
+			<value>String1</value>
+		</property>
+	</cm-element>
+</grammar-annotations>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+   <extension
+         point="org.eclipse.jst.jsf.contentmodel.annotations.annotationFiles">
+      <annotationFile
+            location="/metadata/jsf_metadataprocessing2.xml"
+            uri=" http://org.eclipse.jsf/metadataprocessing"/>
+   </extension>
+   <extension
+         point="org.eclipse.jst.jsf.metadataprocessors.AttributeValueRuntimeTypes">
+      <attributeValueRuntimeType id="NoImplType"/>
+   </extension>
+   <extension
+         point="org.eclipse.jst.jsf.metadataprocessors.MetaDataEnabledFeatures">
+      <MetaDataEnabledFeature
+            class="org.eclipse.jst.jsf.metadataprocessingtests2.NoImplPossibleVals"
+            typeid="org.eclipse.jst.jsf.metadata.tests.NoImplType"/>
+   </extension>
+
+</plugin>

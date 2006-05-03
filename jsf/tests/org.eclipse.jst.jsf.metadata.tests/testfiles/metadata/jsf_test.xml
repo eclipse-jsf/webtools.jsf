@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar-annotations
+	xmlns="http://org.eclipse.wtp.jsf.core/grammarAnnotationSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://org.eclipse.wtp.jsf.core/grammarAnnotationSchema" >
+	<cm-element name="validator">
+		<cm-attribute name="validatorId">
+			<property name="attr-val-content-assistant">
+				<value>com.eclipse.wtp.jsf.ui.internal.ValidatorAttrValueContentAssistant</value>
+			</property>
+			<property name="attr-val-runtime-type">
+				<value>com.eclipse.wtp.jsf.core.internal.model.datatype.Validator</value>
+			</property>
+		</cm-attribute>
+	</cm-element>
+	<cm-element name="nopropsOrAttrs">
+	</cm-element>
+	<cm-element name="noAttrs">
+		<property name="A">
+			<value>a</value>
+		</property>
+		<property name="B"> 
+			<value>b</value>
+		</property>
+	</cm-element>
+	<cm-element name="loaded">
+		<cm-attribute name="att1">
+			<property name="A1">
+				<value>a1</value>
+			</property>
+			<property name="B1">
+				<value>b1</value>
+			</property>
+		</cm-attribute>
+		<cm-attribute name="att2">
+			<property name="A2">
+				<value>a2</value>
+			</property>
+			<property name="B2">
+				<value>b2</value>
+			</property>
+		</cm-attribute>
+		<cm-attribute name="att3">
+			<property name="A3">
+				<value>a3</value>
+			</property>
+			<property name="B3">
+				<value>b3</value>
+			</property>
+			<property name="multival"> 
+				<value>1</value>
+				<value>2</value>
+				<value>3</value>
+			</property>
+		</cm-attribute>	
+		<property name="A">
+			<value>a</value>
+		</property>
+		<property name="B"> 
+			<value>b</value>
+		</property>
+		<property name="multival"> 
+			<value>1</value>
+			<value>2</value>
+			<value>3</value>
+		</property>
+	</cm-element>
+	<cm-element name="NLS">	
+		<cm-attribute name="NLS">	
+			<property name="NLS1">
+				<value>%NLS1</value>
+			</property>
+			<property name="NLS2">
+				<value>%NLS2</value>
+			</property>  
+			<property name="NLS3">
+				<value>%NLS3</value>
+			</property>  			
+			<property name="multival"> 
+				<value>%NLS1</value>
+				<value>%NLS2</value>
+			</property>		
+		</cm-attribute>	
+		<property name="NLS1">
+			<value>%NLS1</value>
+		</property>
+		<property name="NLS2">
+			<value>%NLS2</value>
+		</property>  
+		<property name="NLS3">
+			<value>%NLS3</value>
+		</property>  			
+		<property name="multival"> 
+			<value>%NLS1</value>
+			<value>%NLS2</value>
+		</property>
+		<property name="NullVal">
+			<value></value>
+		</property>					
+	</cm-element>
+</grammar-annotations>
