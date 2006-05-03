@@ -2,7 +2,6 @@
 <?eclipse version="3.0"?>
 <plugin>
    <extension-point id="jsfLibraries" name="jsfLibraries" schema="schema/jsfLibraries.exsd"/>
-   <extension-point id="annotationFiles" name="annotationFiles" schema="schema/annotationFiles.exsd"/>
   <!-- JSF Project Facets -->
 	<extension
        id="org.eclipse.jst.jsf.project.facet"
