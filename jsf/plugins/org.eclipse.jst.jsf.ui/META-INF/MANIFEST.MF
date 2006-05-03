@@ -22,12 +22,11 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.jst.j2ee,
  org.eclipse.emf.common,
  org.eclipse.wst.common.frameworks.ui,
- org.eclipse.wst.common.navigator.views,
  org.eclipse.ui.ide,
  org.eclipse.jst.j2ee.core,
  org.eclipse.emf.ecore,
  org.eclipse.jem.util
-Eclipse-AutoStart: true
+Eclipse-LazyStart: true
 Export-Package: org.eclipse.jst.jsf.ui.internal;x-friends:="org.eclipse.jst.jsf.ui.tests",
  org.eclipse.jst.jsf.ui.internal.classpath;x-friends:="org.eclipse.jst.jsf.ui.tests",
  org.eclipse.jst.jsf.ui.internal.project.facet;x-friends:="org.eclipse.jst.jsf.ui.tests"
