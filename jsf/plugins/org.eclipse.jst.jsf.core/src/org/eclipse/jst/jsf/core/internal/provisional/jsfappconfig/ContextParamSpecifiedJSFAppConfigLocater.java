@@ -10,7 +10,7 @@
  *******************************************************************************/ 
 package org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig;
 
-import org.eclipse.core.resources.IProject;
+import java.util.List;
 
 /**
  * ContextParamSpecifiedJSFAppConfigLocater attempts to locate application
@@ -20,25 +20,29 @@ import org.eclipse.core.resources.IProject;
  */
 public class ContextParamSpecifiedJSFAppConfigLocater extends WebContentRelativeJSFAppConfigLocater {
 
-	/**
-	 * IProject instance obtained from the JSFAppConfigManager instance.
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.AbstractJSFAppConfigLocater#startLocating()
 	 */
-	protected IProject project = null;
+	public void startLocating() {
+		locateProviders();
+		//TODO: add adapter
+	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.IJSFAppConfigLocater#locateProviders(org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.JSFAppConfigManager)
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.AbstractJSFAppConfigLocater#stopLocating()
 	 */
-	public void locateProviders(JSFAppConfigManager manager) {
-		project = manager.getProject();
-		super.locateProviders(manager);
+	public void stopLocating() {
+		//TODO: remove adapter
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.WebContentRelativeJSFAppConfigLocater#getFilenames()
 	 */
-	protected String[] getFilenames() {
-		return JSFAppConfigUtils.getConfigFilesFromContextParam(project);
+	protected List getFilenames() {
+		return JSFAppConfigUtils.getConfigFilesFromContextParam(manager.getProject());
 	}
 
 }

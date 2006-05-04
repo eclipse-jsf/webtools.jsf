@@ -10,23 +10,40 @@
  *******************************************************************************/ 
 package org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig;
 
+import java.util.Set;
+
 /**
  * IJSFAppConfigLocater is the interface that Objects capable of locating
- * JSF application configuration resource files and creating
- * {@link IJSFAppConfigProvider} instances to add to a
- * {@link JSFAppConfigManager} instance must implement.
+ * and providing JSF application configuration resources must implement.
  * 
  * @author Ian Trimble - Oracle
  */
 public interface IJSFAppConfigLocater {
 
 	/**
-	 * Locates and adds {@link IJSFAppConfigProvider} instances to the passed
-	 * {@link JSFAppConfigManager} instance.
+	 * Sets the {@link JSFAppConfigManager} instance to which this locater
+	 * belongs.
 	 * 
-	 * @param manager {@link JSFAppConfigManager} instance to which
-	 * {@link IJSFAppConfigProvider} instances are added.
+	 * @param manager {@link JSFAppConfigManager} instance to be set.
 	 */
-	public void locateProviders(JSFAppConfigManager manager);
+	public void setJSFAppConfigManager(JSFAppConfigManager manager);
+
+	/**
+	 * Starts locating JSF application configuration resources.
+	 */
+	public void startLocating();
+
+	/**
+	 * Stops locating JSF application configuration resources.
+	 */
+	public void stopLocating();
+
+	/**
+	 * Gets the set of {@link IJSFAppConfigProvider} instances that this
+	 * locater has located.
+	 * 
+	 * @return set of {@link IJSFAppConfigProvider} instances.
+	 */
+	public Set getJSFAppConfigProviders();
 
 }

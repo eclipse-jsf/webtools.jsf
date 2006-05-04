@@ -13,6 +13,7 @@ package org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.resources.IProject;
@@ -48,108 +49,14 @@ public class JSFAppConfigManager {
 	protected IProject project = null;
 
 	/**
-	 * Set of {@link IJSFAppConfigProvider} instances.
+	 * Collection of {@link IJSFAppConfigLocater} instances.
 	 */
-	protected LinkedHashSet configProviders = null;
+	protected ArrayList configLocaters = null;
 
 	/**
 	 * Collection of {@link IJSFAppConfigProvidersChangeListener} instances.
 	 */
 	protected ArrayList configProvidersChangeListeners = null;
-
-	/**
-	 * Set of {@link IJSFAppConfigLocater} instances.
-	 */
-	protected LinkedHashSet configLocaters = null;
-
-	/**
-	 * Constructor is private to prevent direct instantiation; call
-	 * getInstance(IProject).
-	 * 
-	 * @param project IProject instance to which the new JSFAppConfigManager
-	 * instance is keyed.
-	 */
-	private JSFAppConfigManager(IProject project) {
-		this.project = project;
-		initialize();
-	}
-
-	/**
-	 * Gets this instance's IProject instance.
-	 * 
-	 * @return This instance's IProject instance.
-	 */
-	public IProject getProject() {
-		return project;
-	}
-
-	/**
-	 * Initializes instance by:
-	 * <ul>
-	 * 	<li>creating configProviders Set</li>
-	 * 	<li>creating configProvidersChangeListeners collection</li>
-	 * 	<li>creating and populating configLocaters Set</li>
-	 * 	<li>invoking the locateProviders(...) method on all configLocaters</li>
-	 * 	<li>setting instance as a session property of the IProject instance</li>
-	 * </ul>
-	 */
-	protected void initialize() {
-		//create collections
-		configProviders = new LinkedHashSet();
-		configProvidersChangeListeners = new ArrayList();
-		configLocaters = new LinkedHashSet();
-		//populate initial Set of locaters
-		populateConfigLocaters();
-		//locate config providers (no need to clear; collection just created)
-		locateConfigProviders(false);
-		//set as session property of project
-		setAsSessionProperty();
-	}
-
-	/**
-	 * Populates configLocaters Set with "built-in" set of
-	 * {@link IJSFAppConfigLocater} implementations.
-	 */
-	protected void populateConfigLocaters() {
-		configLocaters.add(new DefaultJSFAppConfigLocater());
-		configLocaters.add(new ContextParamSpecifiedJSFAppConfigLocater());
-		configLocaters.add(new RuntimeClasspathJSFAppConfigLocater());
-	}
-
-	/**
-	 * Optionally clears known {@link IJSFAppConfigProvider} instances then
-	 * invokes the locate(JSFAppConfigManager) method of all known
-	 * {@link IJSFAppConfigLocater} instances.
-	 * 
-	 * @param clearFirst If true, clears known {@link IJSFAppConfigProvider}
-	 * instances before invoking known {@link IJSFAppConfigLocater} instances
-	 */
-	public void locateConfigProviders(boolean clearFirst) {
-		//clear known providers if requested
-		if (clearFirst) {
-			disposeConfigProviders();
-			configProviders.clear();
-		}
-		//invoke locateProviders method on all known locaters
-		Iterator itConfigLocaters = configLocaters.iterator();
-		while (itConfigLocaters.hasNext()) {
-			IJSFAppConfigLocater configLocater = (IJSFAppConfigLocater)itConfigLocaters.next();
-			configLocater.locateProviders(this);
-		}
-	}
-
-	/**
-	 * Calls releaseFacesConfigModel() method on all known
-	 * {@link IJSFAppConfigProvider} instances, in preparation for clearing
-	 * of known instances.
-	 */
-	public void disposeConfigProviders() {
-		Iterator itConfigProviders = configProviders.iterator();
-		while (itConfigProviders.hasNext()) {
-			IJSFAppConfigProvider configProvider = (IJSFAppConfigProvider)itConfigProviders.next();
-			configProvider.releaseFacesConfigModel();
-		}
-	}
 
 	/**
 	 * Gets a JSFAppConfigManager instance that is keyed to the passed IProject
@@ -263,39 +170,88 @@ public class JSFAppConfigManager {
 	}
 
 	/**
-	 * Adds an instance of IJSFAppConfigProvider to the configProviders Set.
+	 * Constructor is private to prevent direct instantiation; call
+	 * getInstance(IProject).
 	 * 
-	 * @param configProvider Instance of IJSFAppConfigProvider.
-	 * @return true if instance was added (if it did not already exist in the
-	 * Set), else false.
+	 * @param project IProject instance to which the new JSFAppConfigManager
+	 * instance is keyed.
 	 */
-	public boolean addJSFAppConfigProvider(IJSFAppConfigProvider configProvider) {
-		boolean added = configProviders.add(configProvider);
-		if (added) {
-			notifyJSFAppConfigProvidersChangeListeners(
-					configProvider, JSFAppConfigProvidersChangeEvent.ADDED);
-		}
-		return added;
+	private JSFAppConfigManager(IProject project) {
+		this.project = project;
+		initialize();
 	}
 
 	/**
-	 * Removes an instance of IJSFAppConfigProvider from the configProviders
-	 * Set.
+	 * Gets this instance's IProject instance.
 	 * 
-	 * @param configProvider Instance of IJSFAppConfigProvider.
-	 * @return true if instance was removed (if it existed in the Set), else
-	 * false.
+	 * @return This instance's IProject instance.
 	 */
-	public boolean removeJSFAppConfigProvider(IJSFAppConfigProvider configProvider) {
-		if (configProvider != null) {
-			configProvider.releaseFacesConfigModel();
+	public IProject getProject() {
+		return project;
+	}
+
+	/**
+	 * Initializes instance by:
+	 * <ul>
+	 * 	<li>creating configProvidersChangeListeners collection</li>
+	 * 	<li>creating and populating configLocaters collection</li>
+	 * 	<li>invoking the startLocating() method on all configLocaters</li>
+	 * 	<li>setting instance as a session property of the IProject instance</li>
+	 * </ul>
+	 */
+	protected void initialize() {
+		//create collections
+		configProvidersChangeListeners = new ArrayList();
+		configLocaters = new ArrayList();
+		//populate initial set of locaters
+		populateConfigLocaters();
+		//instruct locaters to start locating
+		startConfigLocaters();
+		//set as session property of project
+		setAsSessionProperty();
+	}
+
+	/**
+	 * Populates configLocaters Set with "built-in" set of
+	 * {@link IJSFAppConfigLocater} implementations.
+	 */
+	protected void populateConfigLocaters() {
+		//default ("/WEB-INF/faces-config.xml") locater
+		IJSFAppConfigLocater defaultConfigLocater = new DefaultJSFAppConfigLocater();
+		defaultConfigLocater.setJSFAppConfigManager(this);
+		configLocaters.add(defaultConfigLocater);
+		//web.xml context-parameter specified locater
+		IJSFAppConfigLocater contextParamConfigLocater = new ContextParamSpecifiedJSFAppConfigLocater();
+		contextParamConfigLocater.setJSFAppConfigManager(this);
+		configLocaters.add(contextParamConfigLocater);
+		//runtime classpath locater
+		IJSFAppConfigLocater classpathConfigLocater = new RuntimeClasspathJSFAppConfigLocater();
+		classpathConfigLocater.setJSFAppConfigManager(this);
+		configLocaters.add(classpathConfigLocater);
+	}
+
+	/**
+	 * Instructs set of {@link IJSFAppConfigLocater} instances to start
+	 * locating JSF application configuration resources.
+	 */
+	protected void startConfigLocaters() {
+		Iterator itConfigLocaters = configLocaters.iterator();
+		while (itConfigLocaters.hasNext()) {
+			IJSFAppConfigLocater configLocater = (IJSFAppConfigLocater)itConfigLocaters.next();
+			configLocater.startLocating();
 		}
-		boolean removed = configProviders.remove(configProvider);
-		if (removed) {
-			notifyJSFAppConfigProvidersChangeListeners(
-				configProvider, JSFAppConfigProvidersChangeEvent.REMOVED);
+	}
+
+	/**
+	 * Instructs set of {@link IJSFAppConfigLocater} instances to stop
+	 * locating JSF application configuration resources.
+	 */
+	protected void stopConfigLocaters() {
+		Iterator itConfigLocaters = configLocaters.iterator();
+		while (itConfigLocaters.hasNext()) {
+			IJSFAppConfigLocater configLocater = (IJSFAppConfigLocater)itConfigLocaters.next();
+			configLocater.stopLocating();
 		}
-		return removed;
 	}
 
 	/**
@@ -326,7 +282,7 @@ public class JSFAppConfigManager {
 	 * changed
 	 * @param eventType Event type
 	 */
-	protected void notifyJSFAppConfigProvidersChangeListeners(IJSFAppConfigProvider configProvider, int eventType) {
+	public void notifyJSFAppConfigProvidersChangeListeners(IJSFAppConfigProvider configProvider, int eventType) {
 		JSFAppConfigProvidersChangeEvent event = new JSFAppConfigProvidersChangeEvent(configProvider, eventType);
 		Iterator itListeners = configProvidersChangeListeners.iterator();
 		while (itListeners.hasNext()) {
@@ -337,28 +293,38 @@ public class JSFAppConfigManager {
 	}
 
 	/**
-	 * Gets array of all FacesConfigType instances for read access.
+	 * Gets all {@link IJSFAppConfigProvider} instances from all
+	 * {@link IJSFAppConfigLocater} instances.
 	 * 
-	 * @return Array of all FacesConfigType instances for read access.
+	 * @return Set of all {@link IJSFAppConfigProvider} instances.
 	 */
-	public FacesConfigType[] getFacesConfigModelsForRead() {
-		ArrayList facesConfigList = new ArrayList();
-		Iterator itConfigProviders = configProviders.iterator();
+	public Set getJSFAppConfigProviders() {
+		Set allConfigProviders = new LinkedHashSet();
+		Iterator itConfigLocaters = configLocaters.iterator();
+		while (itConfigLocaters.hasNext()) {
+			IJSFAppConfigLocater configLocater = (IJSFAppConfigLocater)itConfigLocaters.next();
+			allConfigProviders.addAll(configLocater.getJSFAppConfigProviders());
+		}
+		return allConfigProviders;
+	}
+
+	/**
+	 * Gets all {@link FacesConfigType} instances from all
+	 * {@link IJSFAppConfigProvider} instances.
+	 * 
+	 * @return List of all {@link FacesConfigType} instances.
+	 */
+	public List getFacesConfigModels() {
+		ArrayList facesConfigModels = new ArrayList();
+		Iterator itConfigProviders = getJSFAppConfigProviders().iterator();
 		while (itConfigProviders.hasNext()) {
 			IJSFAppConfigProvider configProvider = (IJSFAppConfigProvider)itConfigProviders.next();
-			try {
-				FacesConfigType facesConfig = configProvider.getFacesConfigModel(false);
-				if (facesConfig != null) {
-					facesConfigList.add(facesConfig);
-				}
-			} catch (InvalidWriteAccessModeException iwame) {
-				//log error
-				JSFCorePlugin.log(IStatus.ERROR, iwame.getLocalizedMessage(), iwame);
+			FacesConfigType facesConfig = configProvider.getFacesConfigModel();
+			if (facesConfig != null) {
+				facesConfigModels.add(facesConfig);
 			}
 		}
-		FacesConfigType[] facesConfigs = new FacesConfigType[facesConfigList.size()];
-		facesConfigs = (FacesConfigType[])facesConfigList.toArray(facesConfigs);
-		return facesConfigs;
+		return facesConfigModels;
 	}
 
 	/*
@@ -368,12 +334,11 @@ public class JSFAppConfigManager {
 	protected void finalize() {
 		//remove session property from project
 		unsetAsSessionProperty();
+		//instruct locaters to stop locating
+		stopConfigLocaters();
 		//clear collections
 		configLocaters.clear();
 		configProvidersChangeListeners.clear();
-		//release all models from providers
-		disposeConfigProviders();
-		configProviders.clear();
 	}
 
 }

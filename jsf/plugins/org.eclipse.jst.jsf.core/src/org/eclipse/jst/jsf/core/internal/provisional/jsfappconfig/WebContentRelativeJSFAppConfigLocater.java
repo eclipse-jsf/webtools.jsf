@@ -10,52 +10,61 @@
  *******************************************************************************/ 
 package org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig;
 
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.wst.common.componentcore.resources.IVirtualFolder;
 import org.eclipse.wst.common.componentcore.resources.IVirtualResource;
 
 /**
- * WebContentRelativeJSFAppConfigLocater is an abstract base class that attempts
- * to locate specified application configuration files relative to a web
- * content folder. Clients must override the getFilenames() method to return an
- * array of filenames that this locateProviders() method will attempt to
- * locate.
+ * WebContentRelativeJSFAppConfigLocater is an abstract base class that
+ * attempts to locate specified application configuration files relative to a
+ * web content folder. Subclasses must override the getFilenames() method to
+ * return a list of filenames that the locateProviders() method will attempt to
+ * locate, and call locateProviders().
  * 
  * @author Ian Trimble - Oracle
  */
-public abstract class WebContentRelativeJSFAppConfigLocater implements IJSFAppConfigLocater {
+public abstract class WebContentRelativeJSFAppConfigLocater extends AbstractJSFAppConfigLocater {
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.IJSFAppConfigLocater#locateProviders(org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.JSFAppConfigManager)
+	/**
+	 * Locates application configuration resources specified by the filenames
+	 * (relative to the web content folder) returned by getFilenames(), and
+	 * updates the set of {@link IJSFAppConfigProvider} instances accordingly.
 	 */
-	public void locateProviders(JSFAppConfigManager manager) {
+	public void locateProviders() {
 		IProject project = manager.getProject();
 		IVirtualFolder webContentFolder = JSFAppConfigUtils.getWebContentFolder(project);
 		if (webContentFolder != null) {
-			String[] filenames = getFilenames();
-			if (filenames != null && filenames.length > 0) {
-				for (int i = 0; i < filenames.length; i++) {
-					IVirtualResource appConfigResource = webContentFolder.findMember(filenames[i]);
-					if (appConfigResource != null && appConfigResource.getType() == IVirtualResource.FILE) {
-						IFile file = (IFile)appConfigResource.getUnderlyingResource();
-						if (file != null && file.exists()) {
-							ArtifactEditJSFAppConfigProvider provider = new ArtifactEditJSFAppConfigProvider(file);
-							manager.addJSFAppConfigProvider(provider);
-						}
+			List filenames = getFilenames();
+			Iterator itFilenames = filenames.iterator();
+			Set newConfigProviders = new LinkedHashSet();
+			while (itFilenames.hasNext()) {
+				String filename = (String)itFilenames.next();
+				IVirtualResource appConfigResource = webContentFolder.findMember(filename);
+				if (appConfigResource != null && appConfigResource.getType() == IVirtualResource.FILE) {
+					IFile file = (IFile)appConfigResource.getUnderlyingResource();
+					if (file != null && file.exists()) {
+						ArtifactEditJSFAppConfigProvider configProvider = new ArtifactEditJSFAppConfigProvider(file);
+						newConfigProviders.add(configProvider);
 					}
 				}
 			}
+			updateConfigProviders(newConfigProviders);
 		}
 	}
 
 	/**
-	 * Gets an array of Strings representing the filenames (relative to the web
+	 * Gets a list of Strings representing the filenames (relative to the web
 	 * content folder) that locateProviders() will attempt to locate.
 	 * 
-	 * @return an array of Strings representing the filenames (relative to the
+	 * @return A list of Strings representing the filenames (relative to the
 	 * web content folder) that locateProviders() will attempt to locate.
 	 */
-	protected abstract String[] getFilenames();
+	protected abstract List getFilenames();
 
 }

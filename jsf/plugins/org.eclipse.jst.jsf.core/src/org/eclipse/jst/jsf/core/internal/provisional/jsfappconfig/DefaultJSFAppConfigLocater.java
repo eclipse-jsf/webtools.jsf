@@ -10,27 +10,42 @@
  *******************************************************************************/ 
 package org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * DefaultJSFAppConfigLocater attempts to locate the default application
- * configuration file, located at ".../WEB-INF/faces-config.xml".
+ * configuration file, located at "/WEB-INF/faces-config.xml".
  * 
  * @author Ian Trimble - Oracle
  */
 public class DefaultJSFAppConfigLocater extends WebContentRelativeJSFAppConfigLocater {
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.IJSFAppConfigLocater#locateProviders(org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.JSFAppConfigManager)
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.AbstractJSFAppConfigLocater#startLocating()
 	 */
-	public void locateProviders(JSFAppConfigManager manager) {
-		super.locateProviders(manager);
+	public void startLocating() {
+		locateProviders();
+		//TODO: add listener
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.AbstractJSFAppConfigLocater#stopLocating()
+	 */
+	public void stopLocating() {
+		//TODO: remove listener
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.WebContentRelativeJSFAppConfigLocater#getFilenames()
 	 */
-	protected String[] getFilenames() {
-		return new String[] {"WEB-INF/faces-config.xml"}; //$NON-NLS-1$
+	protected List getFilenames() {
+		List filenames = new ArrayList();
+		filenames.add("WEB-INF/faces-config.xml"); //$NON-NLS-1$
+		return filenames;
 	}
 
 }

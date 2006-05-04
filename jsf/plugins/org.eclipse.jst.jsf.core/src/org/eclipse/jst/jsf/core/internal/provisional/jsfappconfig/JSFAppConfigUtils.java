@@ -13,6 +13,7 @@ package org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.StringTokenizer;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -92,20 +93,19 @@ public class JSFAppConfigUtils {
 	}
 
 	/**
-	 * Gets array of application configuration file names as listed in the JSF
+	 * Gets list of application configuration file names as listed in the JSF
 	 * CONFIG_FILES context parameter ("javax.faces.CONFIG_FILES"). Will return
-	 * an empty array if WebArtifactEdit is null, if WebApp is null, if context
+	 * an empty list if WebArtifactEdit is null, if WebApp is null, if context
 	 * parameter does not exist, or if trimmed context parameter's value is
 	 * an empty String.
 	 * 
 	 * @param project IProject instance for which to get the context
 	 * parameter's value.
-	 * @return Array of application configuration file names as listed in the
-	 * JSF CONFIG_FILES context parameter ("javax.faces.CONFIG_FILES"); array
+	 * @return List of application configuration file names as listed in the
+	 * JSF CONFIG_FILES context parameter ("javax.faces.CONFIG_FILES"); list
 	 * may be empty.
 	 */
-	public static String[] getConfigFilesFromContextParam(IProject project) {
-		String[] files = null;
+	public static List getConfigFilesFromContextParam(IProject project) {
 		ArrayList filesList = new ArrayList();
 		WebArtifactEdit webArtifactEdit = WebArtifactEdit.getWebArtifactEditForRead(project);
 		if (webArtifactEdit != null) {
@@ -144,26 +144,23 @@ public class JSFAppConfigUtils {
 			}
 			webArtifactEdit.dispose();
 		}
-		files = new String[filesList.size()];
-		files = (String[])filesList.toArray(files);
-		return files;
+		return filesList;
 	}
 
 	/**
-	 * Gets array of JAR file names, where each file name represents a JAR on
+	 * Gets list of JAR file names, where each file name represents a JAR on
 	 * the classpath that contains a /META-INF/faces-config.xml entry. Will
-	 * return an empty array if no such JAR files are located.
+	 * return an empty list if no such JAR files are located.
 	 * 
 	 * @param project IProject instance for which to scan the classpath.
-	 * @return Array of JAR file names, where each file name represents a JAR
+	 * @return List of JAR file names, where each file name represents a JAR
 	 * on the classpath that contains a ...META-INF/faces-config.xml entry;
-	 * array may be empty.
+	 * list may be empty.
 	 * @throws CoreException Thrown when underlying calls into JavaCore fail.
 	 * @throws IOException Thrown when attempt to open JAR to determine if it
 	 * contains a /META-INF/faces-config.xml entry fails.
 	 */
-	public static String[] getConfigFileJARsFromClasspath(IProject project) throws CoreException, IOException {
-		String[] JARs = null;
+	public static List getConfigFileJARsFromClasspath(IProject project) throws CoreException, IOException {
 		ArrayList JARsList = new ArrayList();
 		if (project.hasNature(JavaCore.NATURE_ID)) {
 			IJavaProject javaProject = JavaCore.create(project);
@@ -195,9 +192,7 @@ public class JSFAppConfigUtils {
 				}
 			}
 		}
-		JARs = new String[JARsList.size()];
-		JARs = (String[])JARsList.toArray(JARs);
-		return JARs;
+		return JARsList;
 	}
 
 }

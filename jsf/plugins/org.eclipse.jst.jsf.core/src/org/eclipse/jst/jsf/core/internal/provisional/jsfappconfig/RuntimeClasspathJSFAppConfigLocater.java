@@ -11,8 +11,11 @@
 package org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig;
 
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
@@ -21,25 +24,45 @@ import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
  * RuntimeClasspathJSFAppConfigLocater attempts to locate application
  * configuration files in JAR files on the runtime classpath. The runtime
  * classpath includes the server runtime classpath and the JAR files that will
- * be deployed to the web application's .../WEB-INF/lib folder.
+ * be deployed to the web application's /WEB-INF/lib folder.
  * 
  * @author Ian Trimble - Oracle
  */
-public class RuntimeClasspathJSFAppConfigLocater implements IJSFAppConfigLocater {
+public class RuntimeClasspathJSFAppConfigLocater extends AbstractJSFAppConfigLocater {
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.IJSFAppConfigLocater#locateProviders(org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.JSFAppConfigManager)
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.AbstractJSFAppConfigLocater#startLocating()
 	 */
-	public void locateProviders(JSFAppConfigManager manager) {
-		IProject project = manager.getProject();
+	public void startLocating() {
+		locateProviders();
+		//TODO: add listener
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.AbstractJSFAppConfigLocater#stopLocating()
+	 */
+	public void stopLocating() {
+		//TODO: remove listener
+	}
+
+	/**
+	 * Locates application configuration resources specified in JAR files on
+	 * the runtime classpath, and updates the set of
+	 * {@link IJSFAppConfigProvider} instances accordingly.
+	 */
+	public void locateProviders() {
 		try {
-			String[] JARs = JSFAppConfigUtils.getConfigFileJARsFromClasspath(project);
-			if (JARs != null && JARs.length > 0) {
-				for (int i = 0; i < JARs.length; i++) {
-					JARFileJSFAppConfigProvider provider = new JARFileJSFAppConfigProvider(JARs[i]);
-					manager.addJSFAppConfigProvider(provider);
-				}
+			List JARs = JSFAppConfigUtils.getConfigFileJARsFromClasspath(manager.getProject());
+			Iterator itJARs = JARs.iterator();
+			Set newConfigProviders = new LinkedHashSet();
+			while (itJARs.hasNext()) {
+				String JARFilename = (String)itJARs.next();
+				JARFileJSFAppConfigProvider configProvider = new JARFileJSFAppConfigProvider(JARFilename);
+				newConfigProviders.add(configProvider);
 			}
+			updateConfigProviders(newConfigProviders);
 		} catch(CoreException ce) {
 			//log error
 			JSFCorePlugin.log(IStatus.ERROR, ce.getLocalizedMessage(), ce);

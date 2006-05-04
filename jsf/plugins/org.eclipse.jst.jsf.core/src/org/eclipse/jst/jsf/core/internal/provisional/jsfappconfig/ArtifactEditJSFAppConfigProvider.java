@@ -13,7 +13,6 @@ package org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.jst.jsf.core.internal.Messages;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
 
@@ -49,22 +48,15 @@ public class ArtifactEditJSFAppConfigProvider implements IJSFAppConfigProvider {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.IJSFAppConfigProvider#getFacesConfigModel(boolean)
+	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.IJSFAppConfigProvider#getFacesConfigModel()
 	 */
-	public FacesConfigType getFacesConfigModel(boolean forWrite) throws InvalidWriteAccessModeException {
+	public FacesConfigType getFacesConfigModel() {
 		FacesConfigType facesConfig = null;
 		if (appConfigFile != null) {
 			IProject project = appConfigFile.getProject();
 			IPath appConfigFilePath = JSFAppConfigUtils.getWebContentFolderRelativePath(appConfigFile);
 			if (appConfigFilePath != null) {
-				if (forWrite) {
-					if (!allowsWrite()) {
-						throw new InvalidWriteAccessModeException(Messages.JSFAppConfigManager_InvalidWriteAccess);
-					}
-					facesConfigArtifactEdit = FacesConfigArtifactEdit.getFacesConfigArtifactEditForWrite(project, appConfigFilePath.toString());
-				} else {
-					facesConfigArtifactEdit = FacesConfigArtifactEdit.getFacesConfigArtifactEditForRead(project, appConfigFilePath.toString());
-				}
+				facesConfigArtifactEdit = FacesConfigArtifactEdit.getFacesConfigArtifactEditForRead(project, appConfigFilePath.toString());
 				if (facesConfigArtifactEdit != null) {
 					facesConfig = facesConfigArtifactEdit.getFacesConfig();
 				}
@@ -82,11 +74,29 @@ public class ArtifactEditJSFAppConfigProvider implements IJSFAppConfigProvider {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.IJSFAppConfigProvider#allowsWrite()
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
-	public boolean allowsWrite() {
-		return true;
+	public boolean equals(Object otherObject) {
+		boolean equals = false;
+		if (otherObject != null && otherObject instanceof ArtifactEditJSFAppConfigProvider) {
+			IFile otherAppConfigFile = ((ArtifactEditJSFAppConfigProvider)otherObject).appConfigFile;
+			if (appConfigFile != null) {
+				equals = appConfigFile.equals(otherAppConfigFile);
+			} else {
+				equals = otherAppConfigFile == null;
+			}
+		}
+		return equals;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#finalize()
+	 */
+	protected void finalize() {
+		releaseFacesConfigModel();
 	}
 
 }

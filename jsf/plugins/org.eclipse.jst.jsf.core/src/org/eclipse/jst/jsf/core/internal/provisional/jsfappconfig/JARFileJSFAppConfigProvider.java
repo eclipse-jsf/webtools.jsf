@@ -18,7 +18,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
-import org.eclipse.jst.jsf.core.internal.Messages;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.jst.jsf.facesconfig.util.FacesConfigResourceFactory;
 import org.eclipse.wst.common.internal.emf.resource.EMF2SAXRendererFactory;
@@ -48,6 +47,11 @@ public class JARFileJSFAppConfigProvider implements IJSFAppConfigProvider {
 	protected String filename = null;
 
 	/**
+	 * Cached {@link FacesConfigType} instance.
+	 */
+	protected FacesConfigType facesConfig = null;
+
+	/**
 	 * Creates an instance, storing the passed IProject instance and file name
 	 * String to be used for subsequent processing.
 	 * 
@@ -60,32 +64,30 @@ public class JARFileJSFAppConfigProvider implements IJSFAppConfigProvider {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.IJSFAppConfigProvider#getFacesConfigModel(boolean)
+	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.IJSFAppConfigProvider#getFacesConfigModel()
 	 */
-	public FacesConfigType getFacesConfigModel(boolean forWrite) throws InvalidWriteAccessModeException {
-		FacesConfigType facesConfig = null;
-		if (forWrite && !allowsWrite()) {
-			throw new InvalidWriteAccessModeException(Messages.JSFAppConfigManager_InvalidWriteAccess);
-		}
-		if (filename != null) {
-			StringBuffer sb = new StringBuffer();
-			sb.append(JARFILE_URI_PREFIX);
-			sb.append(filename);
-			sb.append(FACES_CONFIG_IN_JAR_SUFFIX);
-			URI jarFileURI = URI.createURI(sb.toString());
-			FacesConfigResourceFactory resourceFactory = new FacesConfigResourceFactory(EMF2SAXRendererFactory.INSTANCE);
-			Resource resource = resourceFactory.createResource(jarFileURI);
-			try {
-				resource.load(Collections.EMPTY_MAP);
-				if (resource != null) {
-					EList resourceContents = resource.getContents();
-					if (resourceContents != null && resourceContents.size() > 0) {
-						facesConfig = (FacesConfigType)resourceContents.get(0);
+	public FacesConfigType getFacesConfigModel() {
+		if (facesConfig == null) {
+			if (filename != null) {
+				StringBuffer sb = new StringBuffer();
+				sb.append(JARFILE_URI_PREFIX);
+				sb.append(filename);
+				sb.append(FACES_CONFIG_IN_JAR_SUFFIX);
+				URI jarFileURI = URI.createURI(sb.toString());
+				FacesConfigResourceFactory resourceFactory = new FacesConfigResourceFactory(EMF2SAXRendererFactory.INSTANCE);
+				Resource resource = resourceFactory.createResource(jarFileURI);
+				try {
+					resource.load(Collections.EMPTY_MAP);
+					if (resource != null) {
+						EList resourceContents = resource.getContents();
+						if (resourceContents != null && resourceContents.size() > 0) {
+							facesConfig = (FacesConfigType)resourceContents.get(0);
+						}
 					}
+				} catch(IOException ioe) {
+					//log error
+					JSFCorePlugin.log(IStatus.ERROR, ioe.getLocalizedMessage(), ioe);
 				}
-			} catch(IOException ioe) {
-				//log error
-				JSFCorePlugin.log(IStatus.ERROR, ioe.getLocalizedMessage(), ioe);
 			}
 		}
 		return facesConfig;
@@ -95,14 +97,24 @@ public class JARFileJSFAppConfigProvider implements IJSFAppConfigProvider {
 	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.IJSFAppConfigProvider#releaseFacesConfigModel()
 	 */
 	public void releaseFacesConfigModel() {
-		//nothing to do
+		facesConfig = null;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.IJSFAppConfigProvider#allowsWrite()
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
-	public boolean allowsWrite() {
-		return false;
+	public boolean equals(Object otherObject) {
+		boolean equals = false;
+		if (otherObject != null && otherObject instanceof JARFileJSFAppConfigProvider) {
+			String otherFilename = ((JARFileJSFAppConfigProvider)otherObject).filename;
+			if (filename != null) {
+				equals = filename.equals(otherFilename);
+			} else {
+				equals = otherFilename == null;
+			}
+		}
+		return equals;
 	}
 
 }
