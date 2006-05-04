@@ -18,12 +18,13 @@ public class StringTypeTest extends TaglibProcessingTestCase {
 		
 		IPossibleValue val = (IPossibleValue)pv.getPossibleValues().get(0);
 		Assert.assertFalse(val.getDisplayValue().equals(val.getValue()));
-		Assert.assertTrue(val.getIcon().equals("/icons/foo.gif"));
+		Assert.assertNotNull(val.getIcon());
+		Assert.assertFalse(val.getIcon().getClass().getName().equals("org.eclipse.jface.resource.MissingImageDescriptor"));// equals("/testfiles/icons/attr_val.gif"));
+		Assert.assertTrue(val.getIcon().getClass().getName().equals("org.eclipse.jface.resource.URLImageDescriptor"));// equals("/icons/foo.gif"));
 		Assert.assertTrue(val.isDefaultValue());
 		
 		val = (IPossibleValue)pv.getPossibleValues().get(1);
 		Assert.assertFalse(val.getDisplayValue().equals(val.getValue()));
-		Assert.assertTrue(val.getIcon().equals("/icons/foo.gif"));
 		Assert.assertFalse(val.isDefaultValue());
 	}
 	

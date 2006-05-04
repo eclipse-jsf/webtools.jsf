@@ -21,7 +21,7 @@ public class NegativeAnnotationFileTestCases extends TestCase {
 
 	public void testMissingAnnotationFile(){
 		//missing uri
-		Assert.assertNull(CMAnnotationHelper.getCMElementProperties(missing_uri, cmElementName, meta_prop_name));
+		Assert.assertTrue(CMAnnotationHelper.getCMElementProperties(missing_uri, cmElementName, meta_prop_name).isEmpty());
 		//missing annotation file for uri - error should be logged
 		Assert.assertTrue(CMAnnotationHelper.getCMElementProperties(missing_file_uri, cmElementName, meta_prop_name).isEmpty());
 	

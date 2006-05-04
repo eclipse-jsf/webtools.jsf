@@ -15,6 +15,7 @@
   			<value>BThirdVal</value>
   			<value>BFourthVal</value>
   		</property>
+  		<property name="small-icon"><value>/icons/attr_val.gif</value></property>
   	</cm-attribute>
   </cm-element>
 </grammar-annotation>

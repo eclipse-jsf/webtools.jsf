@@ -30,7 +30,7 @@
   			<value>D FourthVal</value>
   		</property>  		
   		<property name = "small-icon">
-  			<value>/icons/foo.gif</value>
+  			<value>/testfiles/icons/attr_val.gif</value>
   		</property>
   		<property name = "default-value">
   			<value>A</value>
