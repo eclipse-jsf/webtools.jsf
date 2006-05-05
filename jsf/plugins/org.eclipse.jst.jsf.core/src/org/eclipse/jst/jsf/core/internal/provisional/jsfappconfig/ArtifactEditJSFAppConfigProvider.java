@@ -93,6 +93,29 @@ public class ArtifactEditJSFAppConfigProvider implements IJSFAppConfigProvider {
 
 	/*
 	 * (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	public int hashCode() {
+		return appConfigFile != null ? appConfigFile.hashCode() : 0;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		StringBuffer sb = new StringBuffer("ArtifactEditJSFAppConfigProvider["); //$NON-NLS-1$
+		if (appConfigFile != null) {
+			sb.append(appConfigFile.toString());
+		} else {
+			sb.append("null"); //$NON-NLS-1$
+		}
+		sb.append("]"); //$NON-NLS-1$
+		return sb.toString();
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * @see java.lang.Object#finalize()
 	 */
 	protected void finalize() {

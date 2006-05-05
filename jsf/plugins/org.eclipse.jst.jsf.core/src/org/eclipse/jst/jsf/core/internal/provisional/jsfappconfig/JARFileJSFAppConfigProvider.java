@@ -117,4 +117,27 @@ public class JARFileJSFAppConfigProvider implements IJSFAppConfigProvider {
 		return equals;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	public int hashCode() {
+		return filename != null ? filename.hashCode() : 0;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		StringBuffer sb = new StringBuffer("JARFileJSFAppConfigProvider["); //$NON-NLS-1$
+		if (filename != null) {
+			sb.append(filename);
+		} else {
+			sb.append("null"); //$NON-NLS-1$
+		}
+		sb.append("]"); //$NON-NLS-1$
+		return sb.toString();
+	}
+
 }
