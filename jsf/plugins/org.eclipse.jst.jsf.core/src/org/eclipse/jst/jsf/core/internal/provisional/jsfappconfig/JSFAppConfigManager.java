@@ -354,7 +354,7 @@ public class JSFAppConfigManager {
 		List facesConfigs = getFacesConfigModels();
 		Iterator itFacesConfigs = facesConfigs.iterator();
 		while (itFacesConfigs.hasNext()) {
-			FacesConfigType facesConfig = (FacesConfigType)itFacesConfigs;
+			FacesConfigType facesConfig = (FacesConfigType)itFacesConfigs.next();
 			EList managedBeans = facesConfig.getManagedBean();
 			allManagedBeans.addAll(managedBeans);
 		}
@@ -373,7 +373,7 @@ public class JSFAppConfigManager {
 		List facesConfigs = getFacesConfigModels();
 		Iterator itFacesConfigs = facesConfigs.iterator();
 		while (itFacesConfigs.hasNext()) {
-			FacesConfigType facesConfig = (FacesConfigType)itFacesConfigs;
+			FacesConfigType facesConfig = (FacesConfigType)itFacesConfigs.next();
 			EList validators = facesConfig.getValidator();
 			allValidators.addAll(validators);
 		}
@@ -392,7 +392,7 @@ public class JSFAppConfigManager {
 		List facesConfigs = getFacesConfigModels();
 		Iterator itFacesConfigs = facesConfigs.iterator();
 		while (itFacesConfigs.hasNext()) {
-			FacesConfigType facesConfig = (FacesConfigType)itFacesConfigs;
+			FacesConfigType facesConfig = (FacesConfigType)itFacesConfigs.next();
 			EList converters = facesConfig.getConverter();
 			allConverters.addAll(converters);
 		}
