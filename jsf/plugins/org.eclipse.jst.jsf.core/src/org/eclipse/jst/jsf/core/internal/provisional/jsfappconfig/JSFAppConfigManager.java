@@ -20,6 +20,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.QualifiedName;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.wst.common.project.facet.core.IFacetedProject;
@@ -315,7 +316,7 @@ public class JSFAppConfigManager {
 	 * @return List of all {@link FacesConfigType} instances.
 	 */
 	public List getFacesConfigModels() {
-		ArrayList facesConfigModels = new ArrayList();
+		List facesConfigModels = new ArrayList();
 		Iterator itConfigProviders = getJSFAppConfigProviders().iterator();
 		while (itConfigProviders.hasNext()) {
 			IJSFAppConfigProvider configProvider = (IJSFAppConfigProvider)itConfigProviders.next();
@@ -339,6 +340,63 @@ public class JSFAppConfigManager {
 		//clear collections
 		configLocaters.clear();
 		configProvidersChangeListeners.clear();
+	}
+
+	/**
+	 * Gets list of all ManagedBeanType instances from all known faces-config
+	 * models; list may be empty.
+	 * 
+	 * @return List of all ManagedBeanType instances from all known
+	 * faces-config models (list may be empty).
+	 */
+	public List getManagedBeans() {
+		List allManagedBeans = new ArrayList();
+		List facesConfigs = getFacesConfigModels();
+		Iterator itFacesConfigs = facesConfigs.iterator();
+		while (itFacesConfigs.hasNext()) {
+			FacesConfigType facesConfig = (FacesConfigType)itFacesConfigs;
+			EList managedBeans = facesConfig.getManagedBean();
+			allManagedBeans.addAll(managedBeans);
+		}
+		return allManagedBeans;
+	}
+
+	/**
+	 * Gets list of all ValidatorType instances from all known faces-config
+	 * models; list may be empty.
+	 * 
+	 * @return List of all ValidatorType instances from all known faces-config
+	 * models (list may be empty).
+	 */
+	public List getValidators() {
+		List allValidators = new ArrayList();
+		List facesConfigs = getFacesConfigModels();
+		Iterator itFacesConfigs = facesConfigs.iterator();
+		while (itFacesConfigs.hasNext()) {
+			FacesConfigType facesConfig = (FacesConfigType)itFacesConfigs;
+			EList validators = facesConfig.getValidator();
+			allValidators.addAll(validators);
+		}
+		return allValidators;
+	}
+
+	/**
+	 * Gets list of all ConverterType instances from all known faces-config
+	 * models; list may be empty.
+	 * 
+	 * @return List of all ConverterType instances from all known faces-config
+	 * models (list may be empty).
+	 */
+	public List getConverters() {
+		List allConverters = new ArrayList();
+		List facesConfigs = getFacesConfigModels();
+		Iterator itFacesConfigs = facesConfigs.iterator();
+		while (itFacesConfigs.hasNext()) {
+			FacesConfigType facesConfig = (FacesConfigType)itFacesConfigs;
+			EList converters = facesConfig.getConverter();
+			allConverters.addAll(converters);
+		}
+		return allConverters;
 	}
 
 }
