@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
@@ -30,7 +29,7 @@ import org.eclipse.core.runtime.Path;
  */
 public class FacesConfigUtil {
 	/** the singleton instance of face-config files manager */
-	private static ConfigurationManager facesConfigManager;
+//	private static ConfigurationManager facesConfigManager;
 
 	// private static final Logger log = EditorPlugin
 	// .getLogger(FacesConfigUtil.class);
@@ -194,16 +193,16 @@ public class FacesConfigUtil {
 	 * 
 	 * @return - configuration manager.
 	 */
-	public static ConfigurationManager getConfigurationManager(IProject project) {
-		if (facesConfigManager == null) {
-			facesConfigManager = new ConfigurationManager(project);
-		}
-
-		facesConfigManager.loadConfiguration(project);
-		// facesConfigManager.deriveManagedBeans();
-
-		return facesConfigManager;
-	}
+//	public static ConfigurationManager getConfigurationManager(IProject project) {
+//		if (facesConfigManager == null) {
+//			facesConfigManager = new ConfigurationManager(project);
+//		}
+//
+//		facesConfigManager.loadConfiguration(project);
+//		// facesConfigManager.deriveManagedBeans();
+//
+//		return facesConfigManager;
+//	}
 
 	// public static void addXMLNavigationRuleFromEMFModel(IStructuredModel
 	// model,

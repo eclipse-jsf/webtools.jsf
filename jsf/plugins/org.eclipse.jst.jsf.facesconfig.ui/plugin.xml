@@ -40,7 +40,7 @@
 				text="%pageflow.editor.intro.start.text"
 				hyperlink="%pageflow.editor.intro.start.link"/>
 			<introductionelement
-				actionparameters="PageflowEditor.createCheatSheet"
+				actionparameters="FacesConfigEditor.CheatSheet"
 				icon="icons/FacesConfig_Tutorial.gif"
 				hyperlinkaction="org.eclipse.jst.jsf.facesconfig.common.actions.LoadCheatSheetAction"
 				text="%pageflow.editor.intro.cheatsheets.text"
@@ -72,4 +72,12 @@
 			<propertyCategory category="general"/>
 		</propertyContributor>
 	</extension>
+  <extension
+        point="org.eclipse.ui.cheatsheets.cheatSheetContent">
+     <cheatsheet
+           composite="false"
+           contentFile="cheatsheets/facesconfigeditor.xml"
+           id="FacesConfigEditor.CheatSheet"
+           name="FacesConfigEditor CheatSheet"/>
+  </extension>
 </plugin>

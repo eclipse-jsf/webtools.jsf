@@ -398,25 +398,32 @@ public class FC2PFTransformer {
 				switch (featureId) {
 				case PageflowPackage.PF_PAGE:
 					removePage(notification, element);
+					updateAndNotify(notification);
 					break;
 				case PageflowPackage.PAGEFLOW_NODE__OUTLINKS:
 					removeOutLink(notification, element);
+					updateAndNotify(notification);
 					break;
 				case PageflowPackage.PAGEFLOW_NODE__INLINKS:
 					removeInLink(notification, element);
+					updateAndNotify(notification);
 					break;
-				case PageflowPackage.PAGEFLOW:
-					break;
+				// case PageflowPackage.PAGEFLOW:
+				// updateAndNotify(notification);
+				// break;
 				}
 				break;
 			}
 			}
+			isInEvent = false;
+		}
+
+		private void updateAndNotify(Notification notification) {
 			pageflow.notifyModelChanged(new ENotificationImpl(
 					(InternalEObject) notification.getNotifier(),
 					Notification.SET, PageflowPackage.PAGEFLOW, null, null));
 			refreshPFAdapter(pageflow);
 			refreshFCAdapter(facesConfig);
-			isInEvent = false;
 		}
 
 		public void dispose() {
@@ -481,17 +488,25 @@ public class FC2PFTransformer {
 				switch (type) {
 				case Notification.ADD: {
 					processAdd(notification);
+					updateAndNotify(notification);
 					break;
 				}
 				case Notification.SET: {
 					processSet(notification);
+					updateAndNotify(notification);
 					break;
 				}
 				case Notification.REMOVE:
 					processRemove(notification);
+					updateAndNotify(notification);
 					break;
 				}
 			}
+
+			isInEvent = false;
+		}
+
+		private void updateAndNotify(Notification notification) {
 			Assert
 					.isTrue(notification.getNotifier() instanceof InternalEObject);
 			refreshFCAdapter((EObject) notification.getNotifier());
@@ -499,8 +514,6 @@ public class FC2PFTransformer {
 			pageflow.notifyModelChanged(new ENotificationImpl(
 					(InternalEObject) notification.getNotifier(),
 					Notification.SET, PageflowPackage.PAGEFLOW, null, null));
-
-			isInEvent = false;
 		}
 
 		/**

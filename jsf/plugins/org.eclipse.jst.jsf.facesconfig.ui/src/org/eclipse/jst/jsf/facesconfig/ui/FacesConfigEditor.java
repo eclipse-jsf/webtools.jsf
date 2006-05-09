@@ -425,13 +425,13 @@ public class FacesConfigEditor extends FormEditor implements
 		try {
 			IntroductionPage page1 = new IntroductionPage(this);
 			addPage(page1, null);
-
+			
 			IFormPage overviewPage = new OverviewPage(this);
 			addPage(overviewPage, null);
-
+			
 			// Page flow
 			createAndAddPageflowPage();
-
+			
 			// pages
 			IFormPage managedBeanPage = new ManagedBeanPage(this);
 			managedBeanPageID = addPage(managedBeanPage, null);
@@ -452,7 +452,8 @@ public class FacesConfigEditor extends FormEditor implements
 		} catch (PartInitException e) {
 			EditorPlugin.getDefault().getLog().log(
 					new Status(IStatus.ERROR, EditorPlugin.getPluginId(),
-							IStatus.OK, e.getMessage(), e));
+							IStatus.OK, e.getMessage() == null ? "" : e
+									.getMessage(), e));
 		}
 
 	}
@@ -474,8 +475,7 @@ public class FacesConfigEditor extends FormEditor implements
 		FC2PFTransformer.getInstance().setPageflow(pageflowPage.getPageflow());
 		boolean fornew = getFacesConfigAdapter()
 				.updatePageflowFromFacesConfig();
-		pageflowPage.getGraphicalViewer().setContents(
-				pageflowPage.getPageflow());
+		pageflowPage.setGraphicalViewerContents(pageflowPage.getPageflow());
 		if (fornew) {
 			PageflowLayoutManager.getInstance().layoutPageflow(
 					pageflowPage.getPageflow());
@@ -601,7 +601,7 @@ public class FacesConfigEditor extends FormEditor implements
 	// // getFacesConfigAdapter(), inputStreamOfFacesConfig);
 	// //
 	// // updateCommand.execute();
-	// }
+		// }
 	/**
 	 * This class listens for command stack changes of the pages contained in
 	 * this editor and decides if the editor is dirty or not.
@@ -855,8 +855,9 @@ public class FacesConfigEditor extends FormEditor implements
 				} catch (Exception e) {
 					EditorPlugin.getDefault().getLog().log(
 							new Status(IStatus.ERROR, EditorPlugin
-									.getPluginId(), IStatus.OK, e.getMessage(),
-									e));
+									.getPluginId(), IStatus.OK,
+									e.getMessage() == null ? "" : e
+											.getMessage(), e));
 				}
 			}
 		};
@@ -968,20 +969,6 @@ public class FacesConfigEditor extends FormEditor implements
 		return tabbedPropertySheetPage;
 
 	}
-
-	// /**
-	// * Returns the <code>IContentOutlinePage</code> for this editor.
-	// *
-	// * @return - the <code>IContentOutlinePage</code>
-	// */
-	// protected IContentOutlinePage getOutlinePage() {
-	// // return (IContentOutlinePage)
-	// // _pageflowPage.getAdapter(IContentOutlinePage.class);
-	// if (null == outlinePage) {
-	// outlinePage = new MultiPageEditorOutlinePage();
-	// }
-	// return outlinePage;
-	// }
 
 	/** the delegating ZoomManager */
 	private DelegatingZoomManager delegatingZoomManager = null;
@@ -1249,8 +1236,6 @@ public class FacesConfigEditor extends FormEditor implements
 		super.pageChange(newPageIndex);
 
 		// refresh content depending on current page
-
-		// ((MultiPageEditorPropertySheetPage)getPropertySheetPage()).pagechange(this.getActiveEditor());
 		currentPageChanged();
 	}
 
@@ -1305,16 +1290,16 @@ public class FacesConfigEditor extends FormEditor implements
 	// }
 	public void dispose() {
 		FC2PFTransformer.getInstance().dispose();
-		// Iterator contents = getFacesConfig().getNavigationRule().iterator();
-		// while (contents.hasNext()) {
-		// EObject next = ((EObject) contents.next());
-		// TreeIterator children = next.eAllContents();
-		// while (children.hasNext()) {
-		// FC2PFTransformer.getInstance().unAdapt(
-		// (EObject) children.next());
-		// }
-		// FC2PFTransformer.getInstance().unAdapt((EObject) next);
-		// }
+//		Iterator contents = getFacesConfig().getNavigationRule().iterator();
+//		while (contents.hasNext()) {
+//			EObject next = ((EObject) contents.next());
+//			TreeIterator children = next.eAllContents();
+//			while (children.hasNext()) {
+//				FC2PFTransformer.getInstance().unAdapt(
+//						(EObject) children.next());
+//			}
+//			FC2PFTransformer.getInstance().unAdapt((EObject) next);
+//		}
 		// FC2PFTransformer.getInstance().unAdapt(getFacesConfig());
 
 		ResourcesPlugin.getWorkspace().removeResourceChangeListener(
@@ -1369,15 +1354,10 @@ public class FacesConfigEditor extends FormEditor implements
 	 * @return - the <code>IContentOutlinePage</code>
 	 */
 	protected IContentOutlinePage getOutlinePage() {
-		// return (IContentOutlinePage)
-		// _pageflowPage.getAdapter(IContentOutlinePage.class);
 		if (null == outlinePage) {
 			outlinePage = new MultiPageEditorOutlinePage();
 		}
 		return outlinePage;
-		// use the source page's outline.
-		// return (IContentOutlinePage) this.getEditor(sourcePageId).getAdapter(
-		// IContentOutlinePage.class);
 	}
 
 	public void addSelectionChangedListener(ISelectionChangedListener listener) {

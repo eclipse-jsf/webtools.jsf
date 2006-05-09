@@ -95,11 +95,11 @@ public class PageflowEditorContextMenuProvider extends ContextMenuProvider {
 			submenu.add(action);
 		}
 
-		action = getActionRegistry().getAction(
-				ShowPaletteViewAction.SHOW_PALETTE_VIEW);
-		if (null != action && action.isEnabled()) {
-			submenu.add(action);
-		}
+//		action = getActionRegistry().getAction(
+//				ShowPaletteViewAction.SHOW_PALETTE_VIEW);
+//		if (null != action && action.isEnabled()) {
+//			submenu.add(action);
+//		}
 
 		if (!submenu.isEmpty()) {
 			menuManager.appendToGroup(GEFActionConstants.GROUP_REST, submenu);

@@ -19,7 +19,6 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jem.util.emf.workbench.ProjectUtilities;
 
 /**
  * This utility class is used to make a bridge between the relative path from

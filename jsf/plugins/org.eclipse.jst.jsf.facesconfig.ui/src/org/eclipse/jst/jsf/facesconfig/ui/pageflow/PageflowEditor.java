@@ -308,7 +308,7 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 		addEditPartAction(new ShowPropertyViewAction((IWorkbenchPart) this));
 
 		// Allows showing property view for the pageflow
-		addEditPartAction(new ShowPaletteViewAction((IWorkbenchPart) this));
+		// addEditPartAction(new ShowPaletteViewAction((IWorkbenchPart) this));
 
 		// register alignment actions
 		addEditPartAction(new AlignmentAction((IWorkbenchPart) this,
@@ -430,7 +430,7 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 				});
 
 		// apply Editor's preferences
-		propertyChange(null);
+//		propertyChange(null);
 		// add listener to Editor's preferences changing
 		EditorPlugin.getDefault().getPreferenceStore()
 				.addPropertyChangeListener(this);
@@ -808,6 +808,11 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 	 */
 	public GraphicalViewer getGraphicalViewer() {
 		return viewer;
+	}
+	
+	public void setGraphicalViewerContents(Object contents){
+		viewer.setContents(contents);
+		propertyChange(null);
 	}
 
 	/*

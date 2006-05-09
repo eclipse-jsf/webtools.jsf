@@ -66,9 +66,11 @@ public class ManagedBeanScopeTreeItem {
 		for (Iterator it = managedBeans.iterator(); it.hasNext();) {
 			ManagedBeanType managedBean = (ManagedBeanType) it.next();
 
-			if (scope
-					.equals(managedBean.getManagedBeanScope().getTextContent())) {
-				result.add(managedBean);
+			if (managedBean.getManagedBeanScope() != null) {
+				if (scope.equals(managedBean.getManagedBeanScope()
+						.getTextContent())) {
+					result.add(managedBean);
+				}
 			}
 		}
 
