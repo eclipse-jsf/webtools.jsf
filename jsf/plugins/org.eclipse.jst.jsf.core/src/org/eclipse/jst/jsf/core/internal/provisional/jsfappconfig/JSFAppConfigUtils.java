@@ -185,6 +185,7 @@ public class JSFAppConfigUtils {
 									if (jarEntry != null) {
 										JARsList.add(libraryPathString);
 									}
+									jarFile.close();
 								}
 							}
 						}

@@ -18,6 +18,10 @@ import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.jdt.core.ElementChangedEvent;
+import org.eclipse.jdt.core.IElementChangedListener;
+import org.eclipse.jdt.core.IJavaElementDelta;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 
 /**
@@ -28,7 +32,8 @@ import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
  * 
  * @author Ian Trimble - Oracle
  */
-public class RuntimeClasspathJSFAppConfigLocater extends AbstractJSFAppConfigLocater {
+public class RuntimeClasspathJSFAppConfigLocater extends AbstractJSFAppConfigLocater
+	implements IElementChangedListener {
 
 	/*
 	 * (non-Javadoc)
@@ -36,7 +41,7 @@ public class RuntimeClasspathJSFAppConfigLocater extends AbstractJSFAppConfigLoc
 	 */
 	public void startLocating() {
 		locateProviders();
-		//TODO: add listener
+		JavaCore.addElementChangedListener(this);
 	}
 
 	/*
@@ -44,7 +49,7 @@ public class RuntimeClasspathJSFAppConfigLocater extends AbstractJSFAppConfigLoc
 	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.AbstractJSFAppConfigLocater#stopLocating()
 	 */
 	public void stopLocating() {
-		//TODO: remove listener
+		JavaCore.removeElementChangedListener(this);
 	}
 
 	/**
@@ -69,6 +74,45 @@ public class RuntimeClasspathJSFAppConfigLocater extends AbstractJSFAppConfigLoc
 		} catch(IOException ioe) {
 			//log error
 			JSFCorePlugin.log(IStatus.ERROR, ioe.getLocalizedMessage(), ioe);
+		}
+	}
+
+	/**
+	 * Called when a Java element has changed.
+	 * 
+	 * @param event ElementChangedEvent instance describing the change.
+	 */
+	public void elementChanged(ElementChangedEvent event) {
+		if (classpathChanged(event.getDelta())) {
+			locateProviders();
+		}
+	}
+
+	/**
+	 * Recursively tests if the passed IJavaElementDelta instance or any of its
+	 * descendents indicate a classpath change has occurred.
+	 * 
+	 * @param delta IJavaElement instance to be tested.
+	 * @return true if a claspath change has occurred, else false.
+	 */
+	protected boolean classpathChanged(IJavaElementDelta delta) {
+		int deltaFlags = delta.getFlags();
+		if (((deltaFlags & IJavaElementDelta.F_ADDED_TO_CLASSPATH) == IJavaElementDelta.F_ADDED_TO_CLASSPATH) ||
+				((deltaFlags & IJavaElementDelta.F_ARCHIVE_CONTENT_CHANGED) == IJavaElementDelta.F_ARCHIVE_CONTENT_CHANGED) ||
+				((deltaFlags & IJavaElementDelta.F_REMOVED_FROM_CLASSPATH) == IJavaElementDelta.F_REMOVED_FROM_CLASSPATH)) {
+			return true;
+		} else {
+			boolean changed = false;
+			IJavaElementDelta[] childDeltas = delta.getAffectedChildren();
+			if (childDeltas != null) {
+				for (int i = 0; i < childDeltas.length; i++) {
+					if (classpathChanged(childDeltas[i])) {
+						changed = true;
+						break;
+					}
+				}
+			}
+			return changed;
 		}
 	}
 
