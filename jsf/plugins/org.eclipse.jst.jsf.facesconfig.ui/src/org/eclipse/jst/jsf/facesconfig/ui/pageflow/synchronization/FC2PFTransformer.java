@@ -415,6 +415,8 @@ public class FC2PFTransformer {
 				break;
 			}
 			}
+			refreshPFAdapter(pageflow);
+			refreshFCAdapter(facesConfig);
 			isInEvent = false;
 		}
 
@@ -422,8 +424,6 @@ public class FC2PFTransformer {
 			pageflow.notifyModelChanged(new ENotificationImpl(
 					(InternalEObject) notification.getNotifier(),
 					Notification.SET, PageflowPackage.PAGEFLOW, null, null));
-			refreshPFAdapter(pageflow);
-			refreshFCAdapter(facesConfig);
 		}
 
 		public void dispose() {
@@ -502,6 +502,8 @@ public class FC2PFTransformer {
 					break;
 				}
 			}
+			refreshFCAdapter((EObject) notification.getNotifier());
+			refreshPFAdapter(pageflow);
 
 			isInEvent = false;
 		}
@@ -509,8 +511,6 @@ public class FC2PFTransformer {
 		private void updateAndNotify(Notification notification) {
 			Assert
 					.isTrue(notification.getNotifier() instanceof InternalEObject);
-			refreshFCAdapter((EObject) notification.getNotifier());
-			refreshPFAdapter(pageflow);
 			pageflow.notifyModelChanged(new ENotificationImpl(
 					(InternalEObject) notification.getNotifier(),
 					Notification.SET, PageflowPackage.PAGEFLOW, null, null));
