@@ -22,15 +22,15 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink#getPageflow <em>Pageflow</em>}</li>
- *   <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink#getTarget <em>Target</em>}</li>
- *   <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink#getSource <em>Source</em>}</li>
- *   <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink#getSmallicon <em>Smallicon</em>}</li>
- *   <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink#getLargeicon <em>Largeicon</em>}</li>
- *   <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink#getFromaction <em>Fromaction</em>}</li>
- *   <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink#getOutcome <em>Outcome</em>}</li>
- *   <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink#isRedirect <em>Redirect</em>}</li>
- *   <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink#getBendPoints <em>Bend Points</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#getPageflow <em>Pageflow</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#getTarget <em>Target</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#getSource <em>Source</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#getSmallicon <em>Smallicon</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#getLargeicon <em>Largeicon</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#getFromaction <em>Fromaction</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#getOutcome <em>Outcome</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#isRedirect <em>Redirect</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#getBendPoints <em>Bend Points</em>}</li>
  * </ul>
  * </p>
  * 
@@ -38,7 +38,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface PFLink extends PageflowElement {
+public interface PageflowLink extends PageflowElement {
 	/**
 	 * Returns the value of the '<em><b>Pageflow</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow#getLinks <em>Links</em>}'.
@@ -58,7 +58,7 @@ public interface PFLink extends PageflowElement {
 	Pageflow getPageflow();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink#getPageflow <em>Pageflow</em>}' container reference.
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#getPageflow <em>Pageflow</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Pageflow</em>' container reference.
@@ -86,7 +86,7 @@ public interface PFLink extends PageflowElement {
 	PageflowNode getTarget();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink#getTarget <em>Target</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#getTarget <em>Target</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Target</em>' reference.
@@ -114,7 +114,7 @@ public interface PFLink extends PageflowElement {
 	PageflowNode getSource();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink#getSource <em>Source</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#getSource <em>Source</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Source</em>' reference.
@@ -140,7 +140,7 @@ public interface PFLink extends PageflowElement {
 	String getSmallicon();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink#getSmallicon <em>Smallicon</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#getSmallicon <em>Smallicon</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Smallicon</em>' attribute.
@@ -166,7 +166,7 @@ public interface PFLink extends PageflowElement {
 	String getLargeicon();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink#getLargeicon <em>Largeicon</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#getLargeicon <em>Largeicon</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Largeicon</em>' attribute.
@@ -192,7 +192,7 @@ public interface PFLink extends PageflowElement {
 	String getFromaction();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink#getFromaction <em>Fromaction</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#getFromaction <em>Fromaction</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Fromaction</em>' attribute.
@@ -218,7 +218,7 @@ public interface PFLink extends PageflowElement {
 	String getOutcome();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink#getOutcome <em>Outcome</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#getOutcome <em>Outcome</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Outcome</em>' attribute.
@@ -244,7 +244,7 @@ public interface PFLink extends PageflowElement {
 	boolean isRedirect();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink#isRedirect <em>Redirect</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#isRedirect <em>Redirect</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Redirect</em>' attribute.
@@ -255,8 +255,8 @@ public interface PFLink extends PageflowElement {
 
 	/**
 	 * Returns the value of the '<em><b>Bend Points</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint#getLink <em>Link</em>}'.
+	 * The list contents are of type {@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint#getLink <em>Link</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Bend Points</em>' containment reference list isn't clear,
@@ -265,7 +265,7 @@ public interface PFLink extends PageflowElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Bend Points</em>' containment reference list.
 	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage#getPFLink_BendPoints()
-	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint#getLink
+	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint#getLink
 	 * @model type="org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint" opposite="link" containment="true"
 	 * @generated
 	 */
@@ -277,7 +277,7 @@ public interface PFLink extends PageflowElement {
 	 * 
 	 * @generated NOT
 	 */
-	public void insertBendpoint(int index, PFLinkBendpoint point);
+	public void insertBendpoint(int index, PageflowLinkBendpoint point);
 
 	/**
 	 * <!-- begin-user-doc --> remove the current bendpoint <!-- end-user-doc
@@ -292,7 +292,7 @@ public interface PFLink extends PageflowElement {
 	 * 
 	 * @generated NOT
 	 */
-	public void setBendpoint(int index, PFLinkBendpoint point);
+	public void setBendpoint(int index, PageflowLinkBendpoint point);
 
 	/**
 	 * <!-- begin-user-doc --> Set a group of bendpoints to reconstruct the link

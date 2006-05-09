@@ -17,6 +17,7 @@ import java.util.List;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -27,12 +28,15 @@ import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
 import org.eclipse.jst.jsf.facesconfig.emf.FromViewIdType;
 import org.eclipse.jst.jsf.facesconfig.emf.IconType;
 import org.eclipse.jst.jsf.facesconfig.emf.LargeIconType;
+import org.eclipse.jst.jsf.facesconfig.emf.NavigationCaseType;
 import org.eclipse.jst.jsf.facesconfig.emf.NavigationRuleType;
 import org.eclipse.jst.jsf.facesconfig.emf.SmallIconType;
 import org.eclipse.jst.jsf.facesconfig.emf.ToViewIdType;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.synchronization.FC2PFTransformer;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>PF Page</b></em>'.
@@ -40,16 +44,20 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PFPageImpl#getPath <em>Path</em>}</li>
- * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PFPageImpl#getSmallicon <em>Smallicon</em>}</li>
- * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PFPageImpl#getLargeicon <em>Largeicon</em>}</li>
+ * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PageflowPageImpl#getPath <em>Path</em>}</li>
+ * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PageflowPageImpl#getSmallicon <em>Smallicon</em>}</li>
+ * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PageflowPageImpl#getLargeicon <em>Largeicon</em>}</li>
  * </ul>
  * </p>
  * 
  * @generated
  */
-public class PFPageImpl extends PageflowNodeImpl implements PFPage {
+public class PageflowPageImpl extends PageflowNodeImpl implements PageflowPage {
 	private String path;
+
+	private String smallIcon;
+
+	private String largeIcon;
 
 	/**
 	 * The default value of the '{@link #getPath() <em>Path</em>}' attribute.
@@ -86,7 +94,7 @@ public class PFPageImpl extends PageflowNodeImpl implements PFPage {
 	 * 
 	 * @generated
 	 */
-	protected PFPageImpl() {
+	protected PageflowPageImpl() {
 		super();
 	}
 
@@ -99,15 +107,20 @@ public class PFPageImpl extends PageflowNodeImpl implements PFPage {
 		return PageflowPackage.eINSTANCE.getPFPage();
 	}
 
-	public NavigationRuleType resolveRule(Object object) {
+	public NavigationRuleType resolveRuleFromFCElement(Object object) {
 		if (object instanceof FromViewIdType) {
 			return (NavigationRuleType) ((FromViewIdType) object).eContainer();
 		}
 		return null;
 	}
 
-	public void setInitPath(String path) {
-		this.path = path;
+	public NavigationRuleType resolveRuleFromPFElement(Object object) {
+		if (object instanceof PageflowLink) {
+			NavigationCaseType caseType = (NavigationCaseType) ((PageflowLink) object)
+					.getFCElements().getData().get(0);
+			return (NavigationRuleType) caseType.eContainer();
+		}
+		return null;
 	}
 
 	/**
@@ -116,57 +129,98 @@ public class PFPageImpl extends PageflowNodeImpl implements PFPage {
 	 * @generated
 	 */
 	public String getPath() {
-		// String result = null;
-		// if (getFCElements().size() > 0) {
-		// for (int i = 0, n = getFCElements().size(); i < n; i++) {
-		// if (getFCElements().get(i) instanceof FromViewIdType) {
-		// result = ((FromViewIdType) getFCElements().get(i))
-		// .getTextContent();
-		// }
-		// }
-		// if (result == null) {
-		// result = ((ToViewIdType) getFCElements().get(0))
-		// .getTextContent();
-		// }
-		// }
-		// return result;
-		return path;
+		String result = null;
+		if (!getFCElements().isEmpty()) {
+			for (int i = 0, n = getFCElements().getData().size(); i < n; i++) {
+				if (getFCElements().getData().get(i) instanceof FromViewIdType) {
+					result = ((FromViewIdType) getFCElements().getData().get(i))
+							.getTextContent();
+					break;
+				}
+			}
+			if (result == null
+					&& getFCElements().getData().get(0) instanceof ToViewIdType) {
+				result = ((ToViewIdType) getFCElements().getData().get(0))
+						.getTextContent();
+			}
+		}
+		// Try to return reasonable result.
+		return result == null && getFCElements().isEmpty() ? path
+				: (result != null ? result : PATH_EDEFAULT);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @generated
+	 * @generated NOT
 	 */
-	public void setPath(String newPath) {
-		String oldPath = path;
-		if (getFCElements().size() > 0) {
-			for (int i = 0, n = getFCElements().size(); i < n; i++) {
-				if (getFCElements().get(i) instanceof FromViewIdType) {
-					((FromViewIdType) getFCElements().get(i))
-							.setTextContent(newPath);
-				} else {
-					((ToViewIdType) getFCElements().get(i))
-							.setTextContent(newPath);
+	public void setPath(String newValue) {
+		Object oldPath = null;
+		Object newPath = null;
+		path = newValue;
+		if (!getFCElements().isEmpty()) {
+			for (int i = 0, n = getFCElements().getData().size(); i < n; i++) {
+				if (getFCElements().getData().get(i) instanceof FromViewIdType) {
+					oldPath = getFCElements().getData().get(i);
+					((FromViewIdType) oldPath).setTextContent(newValue);
+				} else if (getFCElements().getData().get(i) instanceof FromViewIdType) {
+					oldPath = getFCElements().getData().get(i);
+					((ToViewIdType) oldPath).setTextContent(newValue);
 				}
 			}
 		}
-		this.path = newPath;
+		// Create new fromViewID or toViewID node as needed.
+		else if (newValue != null && !"*".equals(newValue)) {
+			if (getOutlinks().size() > 0) {
+				List links = getOutlinks();
+				for (int i = 0, n = links.size(); i < n; i++) {
+					PageflowLink link = (PageflowLink) links.get(i);
+					NavigationRuleType rule = resolveRuleFromPFElement(link);
+					newPath = FC2PFTransformer.getInstance()
+							.createRLFromViewID(newValue);
+					rule.setFromViewId((FromViewIdType) newPath);
+					getFCElements().add((EObject) newPath);
+				}
+				links = getInlinks();
+				for (int i = 0, n = links.size(); i < n; i++) {
+					PageflowLink link = (PageflowLink) links.get(i);
+					NavigationCaseType caseType = (NavigationCaseType) link
+							.getFCElements().getData().get(0);
+					newPath = FC2PFTransformer.getInstance().createFCToViewID(
+							newValue);
+					caseType.setToViewId((ToViewIdType) newPath);
+					getFCElements().add((EObject) newPath);
+				}
+			}
+		}
+
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PageflowPackage.PF_PAGE__PATH, oldPath, newPath));
+					PageflowPackage.PF_PAGE__PATH, oldPath, newValue));
 	}
 
-	public void setComment(String newComment) {
-		String oldComment = null;
-		if (getFCElements().size() > 0) {
-			for (int i = 0, n = getFCElements().size(); i < n; i++) {
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+
+	public void setComment(String newValue) {
+		DescriptionType oldComment = null;
+		DescriptionType description = null;
+		if (!getFCElements().isEmpty()) {
+			for (int i = 0, n = getFCElements().getData().size(); i < n; i++) {
 				NavigationRuleType rule = null;
-				if ((rule = resolveRule(getFCElements().get(i))) != null) {
+				if ((rule = resolveRuleFromFCElement(getFCElements().getData()
+						.get(i))) != null) {
+					if (rule.getDescription().size() > 0) {
+						oldComment = (DescriptionType) rule.getDescription()
+								.get(0);
+					}
 					rule.getDescription().clear();
-					DescriptionType description = FacesConfigFactory.eINSTANCE
+					description = FacesConfigFactory.eINSTANCE
 							.createDescriptionType();
-					description.setTextContent(newComment);
+					description.setTextContent(newValue);
 					rule.getDescription().add(description);
 				}
 			}
@@ -174,108 +228,143 @@ public class PFPageImpl extends PageflowNodeImpl implements PFPage {
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
 					PageflowPackage.PAGEFLOW_ELEMENT__COMMENT, oldComment,
-					comment));
+					description));
 
-	}
-
-	public String getComment() {
-		String result = null;
-		if (getFCElements().size() > 0) {
-			for (int i = 0, n = getFCElements().size(); i < n; i++) {
-				NavigationRuleType rule = null;
-				if ((rule = resolveRule(getFCElements().get(i))) != null) {
-					List descriptions = rule.getDescription();
-					if (descriptions.size() > 0) {
-						result = ((DescriptionType) descriptions.get(0))
-								.getTextContent();
-					}
-				}
-			}
-		}
-		return result;
-	}
-
-	public String getName() {
-		if (this.getOutlinks().size() == 0) {
-			return getPath();
-		} else {
-			String result = null;
-			if (getFCElements().size() > 0) {
-				for (int i = 0, n = getFCElements().size(); i < n; i++) {
-					NavigationRuleType rule = null;
-					if ((rule = resolveRule(getFCElements().get(i))) != null) {
-						List displaynames = rule.getDisplayName();
-						if (displaynames.size() > 0) {
-							result = ((DisplayNameType) displaynames.get(0))
-									.getTextContent();
-							break;
-						}
-					}
-				}
-			}
-			return result;
-		}
-	}
-
-	public void setName(String newName) {
-		String oldComment = null;
-		if (getOutlinks().size() == 0) {
-			super.setName(newName);
-		} else {
-			if (getFCElements().size() > 0) {
-				for (int i = 0, n = getFCElements().size(); i < n; i++) {
-					NavigationRuleType rule = null;
-					if ((rule = resolveRule(getFCElements().get(i))) != null) {
-						rule.getDisplayName().clear();
-						DisplayNameType dsiplayname = FacesConfigFactory.eINSTANCE
-								.createDisplayNameType();
-						dsiplayname.setTextContent(newName);
-						rule.getDisplayName().add(dsiplayname);
-					}
-				}
-			}
-			if (eNotificationRequired())
-				eNotify(new ENotificationImpl(this, Notification.SET,
-						PageflowPackage.PAGEFLOW_ELEMENT__COMMENT, oldComment,
-						comment));
-
-		}
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @generated
+	 * @generated NOT
+	 */
+
+	public String getComment() {
+		DescriptionType result = null;
+		if (!getFCElements().isEmpty()) {
+			for (int i = 0, n = getFCElements().getData().size(); i < n; i++) {
+				NavigationRuleType rule = null;
+				if ((rule = resolveRuleFromFCElement(getFCElements().getData()
+						.get(i))) != null) {
+					List descriptions = rule.getDescription();
+					if (descriptions.size() > 0) {
+						result = (DescriptionType) descriptions.get(0);
+						break;
+					}
+				}
+			}
+		}
+		return result == null && getFCElements().isEmpty() ? comment
+				: (result != null ? result.getTextContent()
+						: PageflowElementImpl.COMMENT_EDEFAULT);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+
+	public String getName() {
+		String result = null;
+		// To see if it is in navigation rule.
+		if (!getFCElements().isEmpty() && getOutlinks().size() > 0) {
+			for (int i = 0, n = getFCElements().getData().size(); i < n; i++) {
+				NavigationRuleType rule = null;
+				if ((rule = resolveRuleFromFCElement(getFCElements().getData()
+						.get(i))) != null) {
+					List displaynames = rule.getDisplayName();
+					if (displaynames.size() > 0) {
+						result = ((DisplayNameType) displaynames.get(0))
+								.getTextContent();
+						break;
+					}
+				}
+			}
+			if (result == null) {
+				result = getPath();
+			}
+		} else {
+			result = super.getName();
+		}
+		return result == null && getFCElements().isEmpty() ? PageflowElementImpl.NAME_EDEFAULT
+				: (result == null ? null : result);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+
+	public void setName(String newName) {
+		DescriptionType oldComment = null;
+		DisplayNameType newDisplayNameType = null;
+		super.setName(newName);
+		if (!getFCElements().isEmpty()) {
+			for (int i = 0, n = getFCElements().getData().size(); i < n; i++) {
+				NavigationRuleType rule = null;
+				if ((rule = resolveRuleFromFCElement(getFCElements().getData()
+						.get(i))) != null) {
+					oldComment = rule.getDescription().size() > 0 ? (DescriptionType) rule
+							.getDescription().get(0)
+							: null;
+					rule.getDisplayName().clear();
+					if (newName != null && newName.length() > 0) {
+						newDisplayNameType = FacesConfigFactory.eINSTANCE
+								.createDisplayNameType();
+						newDisplayNameType.setTextContent(newName);
+						rule.getDisplayName().add(newDisplayNameType);
+					}
+				}
+			}
+		}
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					PageflowPackage.PAGEFLOW_ELEMENT__COMMENT, oldComment,
+					newDisplayNameType));
+
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
 	 */
 	public String getSmallicon() {
 		SmallIconType result = null;
-		if (getFCElements().size() > 0) {
-			for (int i = 0, n = getFCElements().size(); i < n; i++) {
+		if (!getFCElements().isEmpty()) {
+			for (int i = 0, n = getFCElements().getData().size(); i < n; i++) {
 				NavigationRuleType rule = null;
-				if ((rule = resolveRule(getFCElements().get(i))) != null) {
+				if ((rule = resolveRuleFromFCElement(getFCElements().getData()
+						.get(i))) != null) {
 					List icons = rule.getIcon();
 					if (icons.size() > 0) {
 						result = ((IconType) icons.get(0)).getSmallIcon();
+						break;
 					}
 				}
 			}
 		}
-		return result == null ? null : result.getTextContent();
+		return result == null && getFCElements().isEmpty() ? smallIcon
+				: (result != null ? result.getTextContent()
+						: SMALLICON_EDEFAULT);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @generated
+	 * @generated NOT
 	 */
 	public void setSmallicon(String newValue) {
 		SmallIconType oldSmallicon = null;
 		SmallIconType newSmallIconType = null;
 		IconType icon = null;
-		if (getFCElements().size() > 0) {
-			for (int i = 0, n = getFCElements().size(); i < n; i++) {
+		smallIcon = newValue;
+		if (!getFCElements().isEmpty()) {
+			for (int i = 0, n = getFCElements().getData().size(); i < n; i++) {
 				NavigationRuleType rule = null;
-				if ((rule = resolveRule(getFCElements().get(i))) != null) {
+				if ((rule = resolveRuleFromFCElement(getFCElements().getData()
+						.get(i))) != null) {
 					List icons = rule.getIcon();
 					if (newValue == null || newValue.length() == 0) {
 						if (icons.size() > 0) {
@@ -310,45 +399,51 @@ public class PFPageImpl extends PageflowNodeImpl implements PFPage {
 
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PageflowPackage.PF_PAGE__SMALLICON, oldSmallicon, newValue));
+					PageflowPackage.PF_PAGE__SMALLICON, oldSmallicon,
+					newSmallIconType));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @generated
+	 * @generated NOT
 	 */
 	public String getLargeicon() {
 		LargeIconType result = null;
-		if (getFCElements().size() > 0) {
-			for (int i = 0, n = getFCElements().size(); i < n; i++) {
+		if (!getFCElements().isEmpty()) {
+			for (int i = 0, n = getFCElements().getData().size(); i < n; i++) {
 				NavigationRuleType rule = null;
-				if ((rule = resolveRule(getFCElements().get(i))) != null) {
+				if ((rule = resolveRuleFromFCElement(getFCElements().getData()
+						.get(i))) != null) {
 					List icons = rule.getIcon();
 					if (icons.size() > 0) {
 						result = ((IconType) icons.get(0)).getLargeIcon();
+						break;
 					}
 				}
 			}
 		}
-		return result == null ? null : result.getTextContent();
+		return result == null && getFCElements().isEmpty() ? largeIcon
+				: (result != null ? result.getTextContent()
+						: LARGEICON_EDEFAULT);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @generated
+	 * @generated NOT
 	 */
 	public void setLargeicon(String newValue) {
-		// String oldLargeicon = null;
-		// IconType icon = null;
+
 		LargeIconType oldLargeIcon = null;
 		LargeIconType newLargeIconType = null;
 		IconType icon = null;
-		if (getFCElements().size() > 0) {
-			for (int i = 0, n = getFCElements().size(); i < n; i++) {
+		largeIcon = newValue;
+		if (!getFCElements().isEmpty()) {
+			for (int i = 0, n = getFCElements().getData().size(); i < n; i++) {
 				NavigationRuleType rule = null;
-				if ((rule = resolveRule(getFCElements().get(i))) != null) {
+				if ((rule = resolveRuleFromFCElement(getFCElements().getData()
+						.get(i))) != null) {
 					List icons = rule.getIcon();
 					if (newValue == null || newValue.length() == 0) {
 						if (icons.size() > 0) {
@@ -383,7 +478,8 @@ public class PFPageImpl extends PageflowNodeImpl implements PFPage {
 
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PageflowPackage.PF_PAGE__LARGEICON, oldLargeIcon, newValue));
+					PageflowPackage.PF_PAGE__LARGEICON, oldLargeIcon,
+					newLargeIconType));
 	}
 
 	/**

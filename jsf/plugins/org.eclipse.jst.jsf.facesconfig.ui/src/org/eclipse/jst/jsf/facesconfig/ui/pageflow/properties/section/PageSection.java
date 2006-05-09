@@ -16,7 +16,7 @@ import org.eclipse.jst.jsf.facesconfig.common.dialogfield.DialogField;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.IDialogFieldApplyListener;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowNodeEditPart;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PageflowPackageImpl;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowValidation;
 import org.eclipse.swt.widgets.Composite;
@@ -34,7 +34,7 @@ public class PageSection extends AbstractEditPartSection {
 	private PageGroup group;
 
 	/** the emf model for Pageflow page */
-	private PFPage pfPage = null;
+	private PageflowPage pfPage = null;
 
 	/**
 	 * 
@@ -145,8 +145,8 @@ public class PageSection extends AbstractEditPartSection {
 
 		if (getInput() != null && getInput() instanceof PageflowNodeEditPart) {
 			Object model = ((PageflowNodeEditPart) getInput()).getModel();
-			if (model instanceof PFPage) {
-				pfPage = (PFPage) model;
+			if (model instanceof PageflowPage) {
+				pfPage = (PageflowPage) model;
 				refreshData();
 			}
 		}

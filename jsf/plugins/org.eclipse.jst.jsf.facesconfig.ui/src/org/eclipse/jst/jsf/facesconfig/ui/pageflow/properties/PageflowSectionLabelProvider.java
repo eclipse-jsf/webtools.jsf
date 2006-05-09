@@ -18,7 +18,7 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorResources;
 import org.eclipse.jst.jsf.facesconfig.ui.IconResources;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PFLinkEditPart;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowLinkEditPart;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowElementEditPart;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowElementTreeEditPart;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
@@ -61,7 +61,7 @@ public class PageflowSectionLabelProvider extends LabelProvider {
 			StructuredSelection structuredSelection = (StructuredSelection) object;
 			Object pageflow = structuredSelection.getFirstElement();
 			if (pageflow instanceof PageflowElementEditPart
-					|| pageflow instanceof PFLinkEditPart
+					|| pageflow instanceof PageflowLinkEditPart
 					|| pageflow instanceof PageflowElementTreeEditPart) {
 				String className = ((PageflowElement) ((AbstractEditPart) pageflow)
 						.getModel()).eClass().getName();

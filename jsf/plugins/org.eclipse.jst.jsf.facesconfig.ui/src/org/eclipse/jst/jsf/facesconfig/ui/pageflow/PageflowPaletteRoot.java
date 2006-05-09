@@ -24,8 +24,8 @@ import org.eclipse.gef.palette.ToolEntry;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorResources;
 import org.eclipse.jst.jsf.facesconfig.ui.IconResources;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.ModelCreationFactory;
 
 /**
@@ -77,7 +77,7 @@ public class PageflowPaletteRoot extends PaletteRoot {
 						"Pageflow.PaletteTool.Link.Label"), //$NON-NLS-1$
 				EditorResources.getInstance().getString(
 						"Pageflow.PaletteTool.Link.Description"), //$NON-NLS-1$
-				new ModelCreationFactory(PFLink.class),
+				new ModelCreationFactory(PageflowLink.class),
 				EditorPlugin.getDefault().getImageDescriptor(
 						IconResources.getString("Pageflow.link.small")), //$NON-NLS-1$
 				EditorPlugin.getDefault().getImageDescriptor(
@@ -102,7 +102,7 @@ public class PageflowPaletteRoot extends PaletteRoot {
 						"Pageflow.PaletteTool.Page.Label"), //$NON-NLS-1$
 				EditorResources.getInstance().getString(
 						"Pageflow.PaletteTool.Page.Description"), //$NON-NLS-1$
-				PFPage.class, new ModelCreationFactory(PFPage.class),
+				PageflowPage.class, new ModelCreationFactory(PageflowPage.class),
 				EditorPlugin.getDefault().getImageDescriptor(
 						IconResources.getString("Pageflow.page.small")), //$NON-NLS-1$
 				EditorPlugin.getDefault().getImageDescriptor(

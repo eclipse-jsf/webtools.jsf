@@ -83,7 +83,7 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.ILayerPanePreference
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.INodePreference;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowEditPartsFactory;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowNodeEditPart;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowAnnotationUtil;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowModelManager;
@@ -418,7 +418,7 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 
 		// initialize the viewer with input
 		viewer.setEditPartFactory(new PageflowEditPartsFactory());
-		 viewer.setContents(getPageflow());
+//		 viewer.setContents(getPageflow());
 
 		// support the resource drag&drop
 		viewer
@@ -1141,7 +1141,7 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 	 * @param fullPath
 	 */
 	public void webPageChanged(IPath fullPath) {
-		PFPage page = getPageflowManager().foundPage(
+		PageflowPage page = getPageflowManager().foundPage(
 				WebrootUtil.getWebPath(fullPath));
 
 		if (page != null && getGraphicalViewer() != null

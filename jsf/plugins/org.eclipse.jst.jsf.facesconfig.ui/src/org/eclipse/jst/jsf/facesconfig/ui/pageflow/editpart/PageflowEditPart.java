@@ -33,6 +33,7 @@ import org.eclipse.gef.SnapToGeometry;
 import org.eclipse.gef.SnapToGrid;
 import org.eclipse.gef.SnapToGuides;
 import org.eclipse.gef.SnapToHelper;
+import org.eclipse.gef.editparts.AbstractEditPart;
 import org.eclipse.gef.editparts.GridLayer;
 import org.eclipse.gef.editpolicies.RootComponentEditPolicy;
 import org.eclipse.gef.editpolicies.SnapFeedbackPolicy;
@@ -184,6 +185,7 @@ public class PageflowEditPart extends PageflowContainerEditPart implements
 
 		case Notification.SET:
 			refreshVisuals();
+			refreshChildren();
 			break;
 		}
 
@@ -197,6 +199,9 @@ public class PageflowEditPart extends PageflowContainerEditPart implements
 	 */
 	protected void refreshVisuals() {
 		super.refreshVisuals();
+		for (int i = 0; i < this.getChildren().size(); i++) {
+			((AbstractEditPart) getChildren().get(i)).refresh();
+		}
 		ConnectionLayer cLayer = (ConnectionLayer) getLayer(CONNECTION_LAYER);
 
 		if (cLayer.getConnectionRouter() == null) {

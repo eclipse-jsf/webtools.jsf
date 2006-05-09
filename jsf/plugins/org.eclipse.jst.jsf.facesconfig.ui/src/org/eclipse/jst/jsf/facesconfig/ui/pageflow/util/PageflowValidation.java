@@ -19,8 +19,8 @@ import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorResources;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
 import org.eclipse.jst.jsf.facesconfig.ui.util.WebrootUtil;
@@ -84,7 +84,7 @@ public class PageflowValidation {
 	 * @return - valid link or not.
 	 * 
 	 */
-	public boolean isValidLinkForProperty(PFLink link) {
+	public boolean isValidLinkForProperty(PageflowLink link) {
 		return true;
 	}
 
@@ -96,7 +96,7 @@ public class PageflowValidation {
 	 * @return - valid link or not.
 	 * 
 	 */
-	public boolean isValidLinkForNavigationRule(PFLink link) {
+	public boolean isValidLinkForNavigationRule(PageflowLink link) {
 		return true;
 	}
 
@@ -107,21 +107,21 @@ public class PageflowValidation {
 	 * @return - valid link or not.
 	 * 
 	 */
-	public String isValidLink(PFLink link) {
+	public String isValidLink(PageflowLink link) {
 		String errorMessage = null;
 		// action-page style
 		// TODO: it should guarantee that outcome should be defined in the
 		// managed bean's method.
 
-		if (link.getSource() instanceof PFPage
-				&& link.getTarget() instanceof PFPage) {
+		if (link.getSource() instanceof PageflowPage
+				&& link.getTarget() instanceof PageflowPage) {
 			String outcome = link.getOutcome();
 			if (outcome != null && outcome.length() >= 0) {
 				// if (isValidServiceOutcome(outcome))
 				// {
 				// return errorMessage;
 				// }
-				String webPath = ((PFPage) link.getSource()).getPath();
+				String webPath = ((PageflowPage) link.getSource()).getPath();
 				if (webPath != null) {
 					String projectPath = WebrootUtil.getProjectPath(link,
 							webPath);
@@ -157,7 +157,7 @@ public class PageflowValidation {
 	 * @param page
 	 * @return
 	 */
-	public boolean isExistedPage(Pageflow pageflow, PFPage page) {
+	public boolean isExistedPage(Pageflow pageflow, PageflowPage page) {
 		if (pageflow == null || page == null || page.getPath() == null) {
 			return false;
 		}
@@ -182,9 +182,9 @@ public class PageflowValidation {
 		while (iter.hasNext()) {
 			PageflowNode existedNode = (PageflowNode) iter.next();
 
-			if (existedNode instanceof PFPage) {
-				if (((PFPage) existedNode).getPath() != null
-						&& ((PFPage) existedNode).getPath().equalsIgnoreCase(
+			if (existedNode instanceof PageflowPage) {
+				if (((PageflowPage) existedNode).getPath() != null
+						&& ((PageflowPage) existedNode).getPath().equalsIgnoreCase(
 								pagePath)) {
 					return true;
 				}
@@ -203,7 +203,7 @@ public class PageflowValidation {
 	 * @param element
 	 * @return
 	 */
-	public String isValidPage(PFPage page) {
+	public String isValidPage(PageflowPage page) {
 		String errorMessage = null;
 		IWorkspaceRoot workspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
 		String pagePath = page.getPath();

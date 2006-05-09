@@ -45,7 +45,7 @@ public interface PageflowFactory extends EFactory {
 	 * @return a new object of class '<em>PF Link</em>'.
 	 * @generated
 	 */
-	PFLink createPFLink();
+	PageflowLink createPFLink();
 
 	/**
 	 * Returns a new object of class '<em>PF Page</em>'. <!-- begin-user-doc
@@ -54,7 +54,7 @@ public interface PageflowFactory extends EFactory {
 	 * @return a new object of class '<em>PF Page</em>'.
 	 * @generated
 	 */
-	PFPage createPFPage();
+	PageflowPage createPFPage();
 
 	/**
 	 * Returns a new object of class '<em>PF Link Bendpoint</em>'. <!--
@@ -63,7 +63,7 @@ public interface PageflowFactory extends EFactory {
 	 * @return a new object of class '<em>PF Link Bendpoint</em>'.
 	 * @generated
 	 */
-	PFLinkBendpoint createPFLinkBendpoint();
+	PageflowLinkBendpoint createPFLinkBendpoint();
 
 	/**
 	 * Returns the package supported by this factory. <!-- begin-user-doc -->

@@ -20,9 +20,9 @@ import java.util.Map;
 import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowFactory;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
@@ -109,7 +109,7 @@ public class PageflowLayoutManager {
 
 		if (pageflow.getLinks() != null) {
 			for (Iterator iter = pageflow.getLinks().iterator(); iter.hasNext();) {
-				PFLink link = (PFLink) iter.next();
+				PageflowLink link = (PageflowLink) iter.next();
 
 				if (link.getSource() == link.getTarget()) {
 					iter.remove();
@@ -132,7 +132,7 @@ public class PageflowLayoutManager {
 				&& selfLoopLinks.size() > 0) {
 			EList links = pageflow.getLinks();
 			for (Iterator iter = selfLoopLinks.iterator(); iter.hasNext();) {
-				PFLink link = (PFLink) iter.next();
+				PageflowLink link = (PageflowLink) iter.next();
 				updateSelfLoopLink(link);
 				links.add(link);
 			}
@@ -146,14 +146,14 @@ public class PageflowLayoutManager {
 	 * 
 	 * @param selfLoopLink
 	 */
-	public static void updateSelfLoopLink(PFLink selfLoopLink) {
+	public static void updateSelfLoopLink(PageflowLink selfLoopLink) {
 		PageflowNode sourceNode = selfLoopLink.getSource();
 		Rectangle rectNode = getPageflowNodeBounds(sourceNode);
 
 		EList outLinks = sourceNode.getOutlinks();
 		if (outLinks != null && outLinks.size() > 0) {
 			for (Iterator iter = outLinks.iterator(); iter.hasNext();) {
-				PFLink anotherSelfLoopLink = (PFLink) iter.next();
+				PageflowLink anotherSelfLoopLink = (PageflowLink) iter.next();
 				if (anotherSelfLoopLink != selfLoopLink
 						&& anotherSelfLoopLink.getTarget() == sourceNode) {
 					rectNode = getFitnessRectangle(rectNode,
@@ -163,9 +163,9 @@ public class PageflowLayoutManager {
 		}
 
 		PageflowFactory factory = PageflowModelManager.getFactory();
-		PFLinkBendpoint bpTop = factory.createPFLinkBendpoint();
-		PFLinkBendpoint bpLeftTop = factory.createPFLinkBendpoint();
-		PFLinkBendpoint bpLeft = factory.createPFLinkBendpoint();
+		PageflowLinkBendpoint bpTop = factory.createPFLinkBendpoint();
+		PageflowLinkBendpoint bpLeftTop = factory.createPFLinkBendpoint();
+		PageflowLinkBendpoint bpLeft = factory.createPFLinkBendpoint();
 
 		bpTop.setD1Height(-rectNode.height);
 		bpTop.setD2Height(-rectNode.height);
@@ -191,12 +191,12 @@ public class PageflowLayoutManager {
 	 * @param anotherSelfLoopLink
 	 */
 	private static Rectangle getFitnessRectangle(Rectangle rectDefault,
-			PFLink anotherSelfLoopLink) {
+			PageflowLink anotherSelfLoopLink) {
 		EList bendPoints = anotherSelfLoopLink.getBendPoints();
 		if (bendPoints != null && bendPoints.size() > 0) {
 			for (Iterator iterBendPoint = bendPoints.iterator(); iterBendPoint
 					.hasNext();) {
-				PFLinkBendpoint bendPoint = (PFLinkBendpoint) iterBendPoint
+				PageflowLinkBendpoint bendPoint = (PageflowLinkBendpoint) iterBendPoint
 						.next();
 				if (bendPoint.getD1Width() == -rectDefault.width
 						&& bendPoint.getD1Height() == -rectDefault.height) {
@@ -282,7 +282,7 @@ public class PageflowLayoutManager {
 			// get all edges in the pageflow
 			List pfLinks = pageflow.getLinks();
 			for (Iterator iter = pfLinks.iterator(); iter.hasNext();) {
-				PFLink link = (PFLink) iter.next();
+				PageflowLink link = (PageflowLink) iter.next();
 				PageflowNode source = link.getSource();
 				PageflowNode target = link.getTarget();
 				Node sourceNode = (Node) nodesMap.get(source);
@@ -366,7 +366,7 @@ public class PageflowLayoutManager {
 		if (oldPageflow.getLinks().size() > 0) {
 			for (Iterator iter = newPageflow.getLinks().iterator(); iter
 					.hasNext();) {
-				PFLink newLink = (PFLink) iter.next();
+				PageflowLink newLink = (PageflowLink) iter.next();
 
 				updatePFLink(newLink, oldPageflow);
 			}
@@ -391,9 +391,9 @@ public class PageflowLayoutManager {
 		for (Iterator iter = oldPageflow.getNodes().iterator(); iter.hasNext();) {
 			PageflowNode oldNode = (PageflowNode) iter.next();
 
-			if (oldNode instanceof PFPage && newNode instanceof PFPage) {
-				if (((PFPage) oldNode).getPath().trim().equals(
-						((PFPage) newNode).getPath().trim())) {
+			if (oldNode instanceof PageflowPage && newNode instanceof PageflowPage) {
+				if (((PageflowPage) oldNode).getPath().trim().equals(
+						((PageflowPage) newNode).getPath().trim())) {
 					updatePageflowNode(newNode, oldNode);
 					return true;
 				}
@@ -459,9 +459,9 @@ public class PageflowLayoutManager {
 	 * @param newLink
 	 * @param oldPageflow
 	 */
-	private void updatePFLink(PFLink newLink, Pageflow oldPageflow) {
+	private void updatePFLink(PageflowLink newLink, Pageflow oldPageflow) {
 		for (Iterator iter = oldPageflow.getLinks().iterator(); iter.hasNext();) {
-			PFLink oldLink = (PFLink) iter.next();
+			PageflowLink oldLink = (PageflowLink) iter.next();
 
 			if (_copiedLinks.get(oldLink) != null) {
 				continue;
@@ -481,7 +481,7 @@ public class PageflowLayoutManager {
 	 * @param oldLink
 	 * @return
 	 */
-	private boolean isSameLink(PFLink newLink, PFLink oldLink) {
+	private boolean isSameLink(PageflowLink newLink, PageflowLink oldLink) {
 		PageflowNode newSource = newLink.getSource();
 		PageflowNode newTarget = newLink.getTarget();
 
@@ -489,12 +489,12 @@ public class PageflowLayoutManager {
 		PageflowNode oldTarget = oldLink.getTarget();
 
 		// Page-Page
-		if (newSource instanceof PFPage && oldSource instanceof PFPage
-				&& newTarget instanceof PFPage && oldTarget instanceof PFPage) {
-			if (((PFPage) newSource).getPath().trim().equalsIgnoreCase(
-					((PFPage) oldSource).getPath().trim())
-					&& ((PFPage) newTarget).getPath().trim().equalsIgnoreCase(
-							((PFPage) oldTarget).getPath().trim())) {
+		if (newSource instanceof PageflowPage && oldSource instanceof PageflowPage
+				&& newTarget instanceof PageflowPage && oldTarget instanceof PageflowPage) {
+			if (((PageflowPage) newSource).getPath().trim().equalsIgnoreCase(
+					((PageflowPage) oldSource).getPath().trim())
+					&& ((PageflowPage) newTarget).getPath().trim().equalsIgnoreCase(
+							((PageflowPage) oldTarget).getPath().trim())) {
 				if ((newLink.getOutcome() == null && oldLink.getOutcome() == null)
 						|| (newLink.getOutcome() != null
 								&& oldLink.getOutcome() != null && newLink
@@ -515,14 +515,14 @@ public class PageflowLayoutManager {
 	 * @param object
 	 * @return
 	 */
-	private PFLink updatePFLink(PFLink newLink, PFLink link) {
+	private PageflowLink updatePFLink(PageflowLink newLink, PageflowLink link) {
 		PageflowFactory factory = PageflowModelManager.getFactory();
 
 		newLink.getBendPoints().clear();
 
 		for (Iterator iter = link.getBendPoints().iterator(); iter.hasNext();) {
-			PFLinkBendpoint bendPoint = (PFLinkBendpoint) iter.next();
-			PFLinkBendpoint newBendPoint = factory.createPFLinkBendpoint();
+			PageflowLinkBendpoint bendPoint = (PageflowLinkBendpoint) iter.next();
+			PageflowLinkBendpoint newBendPoint = factory.createPFLinkBendpoint();
 			newBendPoint.setD1Height(bendPoint.getD1Height());
 			newBendPoint.setD1Width(bendPoint.getD1Width());
 			newBendPoint.setD2Height(bendPoint.getD2Height());

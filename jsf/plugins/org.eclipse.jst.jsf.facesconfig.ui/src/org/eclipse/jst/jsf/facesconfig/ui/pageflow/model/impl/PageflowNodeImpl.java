@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage;
@@ -127,7 +127,7 @@ public abstract class PageflowNodeImpl extends PageflowElementImpl implements
 	 */
 	public EList getOutlinks() {
 		if (outlinks == null) {
-			outlinks = new EObjectWithInverseResolvingEList(PFLink.class, this,
+			outlinks = new EObjectWithInverseResolvingEList(PageflowLink.class, this,
 					PageflowPackage.PAGEFLOW_NODE__OUTLINKS,
 					PageflowPackage.PF_LINK__SOURCE);
 		}
@@ -141,7 +141,7 @@ public abstract class PageflowNodeImpl extends PageflowElementImpl implements
 	 */
 	public EList getInlinks() {
 		if (inlinks == null) {
-			inlinks = new EObjectWithInverseResolvingEList(PFLink.class, this,
+			inlinks = new EObjectWithInverseResolvingEList(PageflowLink.class, this,
 					PageflowPackage.PAGEFLOW_NODE__INLINKS,
 					PageflowPackage.PF_LINK__TARGET);
 		}
@@ -151,11 +151,11 @@ public abstract class PageflowNodeImpl extends PageflowElementImpl implements
 	/**
 	 * @generated NOT
 	 */
-	public PFLink findLinkTo(PageflowNode target) {
+	public PageflowLink findLinkTo(PageflowNode target) {
 		//
 		java.util.Iterator i = this.getOutlinks().iterator();
 		while (i.hasNext()) {
-			PFLink link = (PFLink) i.next();
+			PageflowLink link = (PageflowLink) i.next();
 			if (link.getTarget() == target)
 				return link;
 		}

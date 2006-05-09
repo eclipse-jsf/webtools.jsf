@@ -13,7 +13,7 @@
 package org.eclipse.jst.jsf.facesconfig.ui.pageflow.command;
 
 import org.eclipse.jst.jsf.facesconfig.ui.EditorResources;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint;
 
 /**
  * 
@@ -21,7 +21,7 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint;
 public class DeleteBendpointCommand extends BendpointCommand {
 
 	/** the deleting bendpoint */
-	private PFLinkBendpoint bendpoint;
+	private PageflowLinkBendpoint bendpoint;
 
 	public DeleteBendpointCommand() {
 
@@ -38,7 +38,7 @@ public class DeleteBendpointCommand extends BendpointCommand {
 	 */
 	public void execute() {
 		super.execute();
-		bendpoint = (PFLinkBendpoint) getPFLink().getBendPoints().get(
+		bendpoint = (PageflowLinkBendpoint) getPFLink().getBendPoints().get(
 				getIndex());
 		getPFLink().removeBendpoint(getIndex());
 	}

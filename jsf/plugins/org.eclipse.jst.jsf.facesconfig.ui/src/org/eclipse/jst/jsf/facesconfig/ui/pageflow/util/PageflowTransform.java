@@ -26,11 +26,11 @@ import org.eclipse.jst.jsf.facesconfig.emf.IconType;
 import org.eclipse.jst.jsf.facesconfig.emf.NavigationCaseType;
 import org.eclipse.jst.jsf.facesconfig.emf.NavigationRuleType;
 import org.eclipse.jst.jsf.facesconfig.emf.ToViewIdType;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowFactory;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.synchronization.FC2PFTransformer;
 import org.eclipse.jst.jsf.facesconfig.ui.util.WebrootUtil;
 import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
@@ -402,7 +402,7 @@ public class PageflowTransform {
 	 * @param navigationRuleFC
 	 * @author sfshi
 	 */
-	public void updatePageflowSourcePage(PFPage sourcePage,
+	public void updatePageflowSourcePage(PageflowPage sourcePage,
 			NavigationRuleType navigationRuleFC) {
 		// set the descriiption of link
 		if (navigationRuleFC.getDescription() != null
@@ -451,7 +451,7 @@ public class PageflowTransform {
 	 * @param navigationCaseFC
 	 * @author sfshi
 	 */
-	public void updatePageflowTargetPage(PFPage targetPage,
+	public void updatePageflowTargetPage(PageflowPage targetPage,
 			NavigationCaseType navigationCaseFC) {
 		// set the descriiption of link
 		if (navigationCaseFC.getDescription() != null
@@ -1124,7 +1124,7 @@ public class PageflowTransform {
 		if (rulesFC == null || rulesFC.isEmpty()) {
 			for (Iterator iterLink = pageflow.getLinks().iterator(); iterLink
 					.hasNext();) {
-				PFLink link = (PFLink) iterLink.next();
+				PageflowLink link = (PageflowLink) iterLink.next();
 				link.getSource().getOutlinks().remove(link);
 				link.getTarget().getInlinks().remove(link);
 			}
@@ -1142,8 +1142,8 @@ public class PageflowTransform {
 						.hasNext();) {
 					NavigationCaseType navigationCaseFC = (NavigationCaseType) iterCasesFC
 							.next();
-					isNew |= FC2PFTransformer.getInstance().createPFElements(
-							pageflow, navigationCaseFC);
+					isNew |= FC2PFTransformer.getInstance()
+							.updatePageflowElements(pageflow, navigationCaseFC);
 				}
 			}
 		}
@@ -1156,19 +1156,16 @@ public class PageflowTransform {
 		List links = pageflow.getLinks();
 		Iterator linksIterator = links.iterator();
 		while (linksIterator.hasNext()) {
-			PFLink link = (PFLink) linksIterator.next();
-			if (link.getTarget() instanceof PFPage) {
-				if (!FC2PFTransformer.getInstance().getMapLinks2Cases()
-						.containsKey(link)) {
-					linksIterator.remove();
-					if (link.getSource() != null) {
-						link.getSource().getOutlinks().remove(link);
-					}
-					if (link.getTarget() != null) {
-						link.getTarget().getInlinks().remove(link);
-					}
-					dirty = true;
+			PageflowLink link = (PageflowLink) linksIterator.next();
+			if (link.getFCElements().isEmpty()) {
+				linksIterator.remove();
+				if (link.getSource() != null) {
+					link.getSource().getOutlinks().remove(link);
 				}
+				if (link.getTarget() != null) {
+					link.getTarget().getInlinks().remove(link);
+				}
+				dirty = true;
 			}
 		}
 		return dirty;
@@ -1418,8 +1415,8 @@ public class PageflowTransform {
 	 *            page's from-view-id
 	 * @return
 	 */
-	public PFPage createPFPage(String fromViewID) {
-		PFPage page = getPageflowFactory().createPFPage();
+	public PageflowPage createPFPage(String fromViewID) {
+		PageflowPage page = getPageflowFactory().createPFPage();
 		if (fromViewID != null && fromViewID.length() > 0) {
 			page.setPath(fromViewID.trim());
 			page.setName(WebrootUtil.getPageNameFromWebPath(fromViewID.trim()));
@@ -1445,46 +1442,6 @@ public class PageflowTransform {
 	// pageflow.getNodes().add(action);
 	// return action;
 	// }
-	/**
-	 * create a new PFLink object according to fromOutcome attribute
-	 * 
-	 * @param fromOutcome -
-	 *            PFLink's fromOutcome attribute
-	 * @return - new PFLink object
-	 */
-	public PFLink createPFLink(String fromOutcome) {
-		PFLink link = null;
-		link = getPageflowFactory().createPFLink();
-		if (fromOutcome != null && fromOutcome.length() > 0) {
-			link.setOutcome(fromOutcome.trim());
-		}
-		pageflow.getLinks().add(link);
-		return link;
-	}
-
-	/**
-	 * create a new PFLink object according to fromOutcome attribute
-	 * 
-	 * @param fromOutcome -
-	 *            PFLink's fromOutcome attribute
-	 * @return - new PFLink object
-	 */
-	public PFLink createPFLink(PageflowNode start, PageflowNode target,
-			String action, String fromOutcome) {
-		PFLink link = null;
-		link = createPFLink(fromOutcome);
-		link.setFromaction(action);
-		link.setSource(start);
-		link.setTarget(target);
-		if (start != null) {
-			start.getOutlinks().add(link);
-		}
-		if (target != null) {
-			target.getInlinks().add(link);
-		}
-		return link;
-	}
-
 	/**
 	 * find an existing PFLink object according to source and target
 	 * 

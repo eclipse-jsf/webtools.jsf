@@ -21,7 +21,7 @@ import org.eclipse.jst.jsf.facesconfig.common.IFileFolderConstants;
 import org.eclipse.jst.jsf.facesconfig.common.dialogs.CommonResourceDialog;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorResources;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowValidation;
@@ -170,8 +170,8 @@ public class CreateNodeCommand extends Command implements IPreExecuteCommand {
 							return false;
 						}
 
-						((PFPage) (child)).setPath(jsfSelection);
-						((PFPage) (child)).setName(WebrootUtil
+						((PageflowPage) (child)).setPath(jsfSelection);
+						((PageflowPage) (child)).setName(WebrootUtil
 								.getPageNameFromWebPath(jsfSelection));
 					}
 
@@ -229,12 +229,12 @@ public class CreateNodeCommand extends Command implements IPreExecuteCommand {
 	public boolean preExecute() {
 		// note that the model adds the ports to the node in this call
 		// pop up the new the wizard to create the new jsf file
-		if (child instanceof PFPage) {
+		if (child instanceof PageflowPage) {
 			// if the new page's file path is not empty, i.e., drag a file from
 			// resource navigator view
-			if (null != ((PFPage) child).getPath()) {
+			if (null != ((PageflowPage) child).getPath()) {
 				if (PageflowValidation.getInstance().isExistedPage(parent,
-						(PFPage) child)) {
+						(PageflowPage) child)) {
 					// Pageflow.PageflowEditor.Alert.DNDResourceTitle = Pageflow
 					// Creation Error
 					// Pageflow.PageflowEditor.Alert.ExistingPage = The web page
@@ -242,7 +242,7 @@ public class CreateNodeCommand extends Command implements IPreExecuteCommand {
 					EditorPlugin.getAlerts().error(
 							"Pageflow.PageflowEditor.Alert.DNDResourceTitle",
 							"Pageflow.PageflowEditor.Alert.ExistingPage",
-							((PFPage) child).getPath());
+							((PageflowPage) child).getPath());
 					return false;
 				}
 			} else

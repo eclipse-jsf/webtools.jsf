@@ -15,9 +15,9 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
@@ -107,7 +107,7 @@ public class PageflowSwitch {
 			return result;
 		}
 		case PageflowPackage.PF_LINK: {
-			PFLink pfLink = (PFLink) theEObject;
+			PageflowLink pfLink = (PageflowLink) theEObject;
 			Object result = casePFLink(pfLink);
 			if (result == null)
 				result = casePageflowElement(pfLink);
@@ -117,7 +117,7 @@ public class PageflowSwitch {
 		}
 
 		case PageflowPackage.PF_PAGE: {
-			PFPage pfPage = (PFPage) theEObject;
+			PageflowPage pfPage = (PageflowPage) theEObject;
 			Object result = casePFPage(pfPage);
 			if (result == null)
 				result = casePageflowNode(pfPage);
@@ -129,7 +129,7 @@ public class PageflowSwitch {
 		}
 
 		case PageflowPackage.PF_LINK_BENDPOINT: {
-			PFLinkBendpoint pfLinkBendpoint = (PFLinkBendpoint) theEObject;
+			PageflowLinkBendpoint pfLinkBendpoint = (PageflowLinkBendpoint) theEObject;
 			Object result = casePFLinkBendpoint(pfLinkBendpoint);
 			if (result == null)
 				result = defaultCase(theEObject);
@@ -181,7 +181,7 @@ public class PageflowSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object casePFLink(PFLink object) {
+	public Object casePFLink(PageflowLink object) {
 		return null;
 	}
 
@@ -211,7 +211,7 @@ public class PageflowSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object casePFPage(PFPage object) {
+	public Object casePFPage(PageflowPage object) {
 		return null;
 	}
 
@@ -226,7 +226,7 @@ public class PageflowSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object casePFLinkBendpoint(PFLinkBendpoint object) {
+	public Object casePFLinkBendpoint(PageflowLinkBendpoint object) {
 		return null;
 	}
 

@@ -20,8 +20,8 @@ import org.eclipse.jst.jsf.facesconfig.common.dialogfield.DialogField;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.IStringButtonAdapter;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.LayoutUtil;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.StringButtonDialogField;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.ActionOutcomeSelectionDialog;
@@ -44,7 +44,7 @@ public class LinkGroup extends AbstractEditPartGroup {
 
 	private ComboDialogField redirectField;
 
-	private PFLink pfLink;
+	private PageflowLink pfLink;
 
 	/** Integer value for boolean type */
 	private static final Integer P_VALUE_TRUE = new Integer(0);
@@ -82,10 +82,10 @@ public class LinkGroup extends AbstractEditPartGroup {
 		 */
 		private String getPreviousJSPPath(PageflowElement element) {
 			String jspPath = null;
-			if (element instanceof PFLink) {
-				PageflowNode source = ((PFLink) element).getSource();
-				if (source instanceof PFPage) {
-					jspPath = ((PFPage) source).getPath();
+			if (element instanceof PageflowLink) {
+				PageflowNode source = ((PageflowLink) element).getSource();
+				if (source instanceof PageflowPage) {
+					jspPath = ((PageflowPage) source).getPath();
 				}
 			}
 			return jspPath;
@@ -166,7 +166,7 @@ public class LinkGroup extends AbstractEditPartGroup {
 
 	}
 
-	public void setPropertyProvider(PFLink elem) {
+	public void setPropertyProvider(PageflowLink elem) {
 		pfLink = elem;
 		this.refreshData();
 	}

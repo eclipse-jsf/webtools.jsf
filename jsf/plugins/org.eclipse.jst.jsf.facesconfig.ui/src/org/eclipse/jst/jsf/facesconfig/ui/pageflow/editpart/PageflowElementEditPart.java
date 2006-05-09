@@ -30,7 +30,7 @@ import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.IconResources;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.figure.PageflowNodeFigure;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage;
@@ -91,7 +91,7 @@ public abstract class PageflowElementEditPart extends AbstractGraphicalEditPart
 		if (image == null) {
 			ImageDescriptor imageDescriptor = null;
 
-			if (element instanceof PFPage) {
+			if (element instanceof PageflowPage) {
 				imageDescriptor = IMG_PAGE;
 			} else {
 				imageDescriptor = IMG_NODE;
@@ -120,7 +120,7 @@ public abstract class PageflowElementEditPart extends AbstractGraphicalEditPart
 	public static String getTypeName(PageflowElement element) {
 		if (element instanceof Pageflow) {
 			return "Pageflow"; //$NON-NLS-1$
-		} else if (element instanceof PFPage) {
+		} else if (element instanceof PageflowPage) {
 			return "Page"; //$NON-NLS-1$
 		}
 
@@ -278,9 +278,7 @@ public abstract class PageflowElementEditPart extends AbstractGraphicalEditPart
 	 */
 	protected void hookIntoPageflowElement(PageflowElement element) {
 		if (null != element) {
-			if (!element.eAdapters().contains(FC2PFTransformer.getInstance())) {
-				element.eAdapters().add(FC2PFTransformer.getInstance());
-			}
+			FC2PFTransformer.getInstance().adapt(element);
 			if (!element.eAdapters().contains(this)) {
 				element.eAdapters().add(this);
 			}
@@ -297,7 +295,7 @@ public abstract class PageflowElementEditPart extends AbstractGraphicalEditPart
 	protected void unhookFromPageflowElement(PageflowElement element) {
 		if (null != element) {
 			element.eAdapters().remove(this);
-			element.eAdapters().remove(FC2PFTransformer.getInstance());
+//			FC2PFTransformer.getInstance().unAdapt(element);
 		}
 	}
 

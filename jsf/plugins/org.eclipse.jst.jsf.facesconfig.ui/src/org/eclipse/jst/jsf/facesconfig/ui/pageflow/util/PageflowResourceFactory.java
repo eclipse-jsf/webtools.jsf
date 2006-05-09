@@ -15,7 +15,7 @@ package org.eclipse.jst.jsf.facesconfig.ui.pageflow.util;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.gef.requests.CreationFactory;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowFactory;
 import org.eclipse.jst.jsf.facesconfig.ui.util.WebrootUtil;
 
@@ -47,7 +47,7 @@ public class PageflowResourceFactory implements CreationFactory {
 		if (strWebPath.length() > 0) {
 			PageflowFactory factory = PageflowModelManager.getFactory();
 			Object result = factory.createPFPage();
-			PFPage page = (PFPage) result;
+			PageflowPage page = (PageflowPage) result;
 			page.setPath(strWebPath);
 			page.setName(WebrootUtil.getPageNameFromWebPath(strWebPath));
 			return page;

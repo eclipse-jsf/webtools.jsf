@@ -503,9 +503,8 @@ public class FacesConfigModelAdapter {// implements INodeAdapter {
 			// // PageflowLayoutManager.getInstance().updatePageflowLayout(
 			// // pageflow, pageflowManager.getModel());
 			// }
-			return pageflow;
 		}
-		return null;
+		return pageflow;
 	}
 
 	/**

@@ -28,7 +28,7 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.command.ConnectionCommand;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.command.OpenEditorCommand;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowNodeEditPart;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.figure.PageflowNodeFigure;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PageflowNodeImpl;
 import org.eclipse.jst.jsf.facesconfig.ui.preference.GEMPreferences;
@@ -80,7 +80,7 @@ public class PageflowNodeEditPolicy extends GraphicalNodeEditPolicy {
 	 */
 	protected Command getConnectionCreateCommand(CreateConnectionRequest request) {
 		ConnectionCommand command = new ConnectionCommand();
-		command.setPFLink((PFLink) request.getNewObject());
+		command.setPFLink((PageflowLink) request.getNewObject());
 		PageflowNode flowObject = getPageflowNode();
 		command.setSource(flowObject);
 		request.setStartCommand(command);
@@ -112,7 +112,7 @@ public class PageflowNodeEditPolicy extends GraphicalNodeEditPolicy {
 	 */
 	protected Command getReconnectTargetCommand(ReconnectRequest request) {
 		ConnectionCommand cmd = new ConnectionCommand();
-		cmd.setPFLink((PFLink) request.getConnectionEditPart().getModel());
+		cmd.setPFLink((PageflowLink) request.getConnectionEditPart().getModel());
 		cmd.setTarget(getPageflowNode());
 		return cmd;
 	}
@@ -124,7 +124,7 @@ public class PageflowNodeEditPolicy extends GraphicalNodeEditPolicy {
 	 */
 	protected Command getReconnectSourceCommand(ReconnectRequest request) {
 		ConnectionCommand cmd = new ConnectionCommand();
-		cmd.setPFLink((PFLink) request.getConnectionEditPart().getModel());
+		cmd.setPFLink((PageflowLink) request.getConnectionEditPart().getModel());
 		cmd.setSource(getPageflowNode());
 		return cmd;
 	}

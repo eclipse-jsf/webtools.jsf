@@ -35,8 +35,8 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpolicy.PFLinkBendpointEdi
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpolicy.PFLinkEditPolicy;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpolicy.PFLinkEndpointEditPolicy;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.figure.PFLinkFigure;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.PageflowElementPropertySource;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowAnnotationUtil;
@@ -56,7 +56,7 @@ import org.eclipse.ui.views.properties.IPropertySource;
  * 
  * 
  */
-public class PFLinkEditPart extends AbstractConnectionEditPart implements
+public class PageflowLinkEditPart extends AbstractConnectionEditPart implements
 		IConnectionPreference, IAnnotationEditPart {
 	/** adapter for notification */
 	private PFLinkAdapter adapter = new PFLinkAdapter();
@@ -78,7 +78,7 @@ public class PFLinkEditPart extends AbstractConnectionEditPart implements
 	/**
 	 * @param element
 	 */
-	public PFLinkEditPart(PFLink element) {
+	public PageflowLinkEditPart(PageflowLink element) {
 		super();
 		// element.getPageflow()
 		setModel(element);
@@ -121,8 +121,8 @@ public class PFLinkEditPart extends AbstractConnectionEditPart implements
 		return bendpointEditPolicy;
 	}
 
-	public PFLink getPFLink() {
-		return (PFLink) getModel();
+	public PageflowLink getPFLink() {
+		return (PageflowLink) getModel();
 	}
 
 	private class FCAdapter implements Adapter {
@@ -200,7 +200,8 @@ public class PFLinkEditPart extends AbstractConnectionEditPart implements
 				if (featureId == PageflowPackage.PF_LINK__OUTCOME
 						|| featureId == PageflowPackage.PF_LINK__SOURCE
 						|| featureId == PageflowPackage.PF_LINK__TARGET) {
-					PageflowAnnotationUtil.validateLink(PFLinkEditPart.this);
+					PageflowAnnotationUtil
+							.validateLink(PageflowLinkEditPart.this);
 				}
 
 				refreshVisuals();
@@ -226,10 +227,10 @@ public class PFLinkEditPart extends AbstractConnectionEditPart implements
 	 */
 	public void activate() {
 		getPFLink().eAdapters().add(adapter);
-		PFLink element = (PFLink) getModel();
-		if (element.getFCElements().size() > 0) {
+		PageflowLink element = (PageflowLink) getModel();
+		if (!element.getFCElements().isEmpty()) {
 			NavigationCaseType navCase = ((NavigationCaseType) element
-					.getFCElements().get(0));
+					.getFCElements().getData().get(0));
 			if (!navCase.eAdapters().contains(fcAdapter)) {
 				navCase.eAdapters().add(fcAdapter);
 				TreeIterator iterator = navCase.eAllContents();
@@ -250,15 +251,15 @@ public class PFLinkEditPart extends AbstractConnectionEditPart implements
 	 * @see EditPart#deactivate()
 	 */
 	public void deactivate() {
-		getPFLink().eAdapters().remove(adapter);
-		PFLink element = (PFLink) getModel();
-		NavigationCaseType navCase = ((NavigationCaseType) element
-				.getFCElements().get(0));
-		navCase.eAdapters().remove(fcAdapter);
-		TreeIterator iterator = navCase.eAllContents();
-		while (iterator.hasNext()) {
-			((EObject) iterator.next()).eAdapters().remove(fcAdapter);
-		}
+		// getPFLink().eAdapters().remove(adapter);
+		// PageflowLink element = (PageflowLink) getModel();
+		// NavigationCaseType navCase = ((NavigationCaseType) element
+		// .getFCElements().getData().get(0));
+		// navCase.eAdapters().remove(fcAdapter);
+		// TreeIterator iterator = navCase.eAllContents();
+		// while (iterator.hasNext()) {
+		// ((EObject) iterator.next()).eAdapters().remove(fcAdapter);
+		// }
 
 		super.deactivate();
 	}
@@ -315,7 +316,8 @@ public class PFLinkEditPart extends AbstractConnectionEditPart implements
 		// bendpoint constraint list
 		List figureConstraint = new ArrayList();
 		for (int i = 0; i < modelConstraint.size(); i++) {
-			PFLinkBendpoint wbp = (PFLinkBendpoint) modelConstraint.get(i);
+			PageflowLinkBendpoint wbp = (PageflowLinkBendpoint) modelConstraint
+					.get(i);
 			RelativeBendpoint rbp = new RelativeBendpoint(getConnectionFigure());
 			rbp.setRelativeDimensions(wbp.getFirstRelativeDimension(), wbp
 					.getSecondRelativeDimension());
@@ -392,12 +394,12 @@ public class PFLinkEditPart extends AbstractConnectionEditPart implements
 	}
 
 	private boolean needDrawingLabel() {
-		return (((PFLink) getModel()).getOutcome() != null && ((PFLink) getModel())
+		return (((PageflowLink) getModel()).getOutcome() != null && ((PageflowLink) getModel())
 				.getOutcome().trim().length() > 0);
 	}
 
 	private boolean needDrawingAction() {
-		return (((PFLink) getModel()).getFromaction() != null && ((PFLink) getModel())
+		return (((PageflowLink) getModel()).getFromaction() != null && ((PageflowLink) getModel())
 				.getFromaction().trim().length() > 0);
 	}
 
@@ -434,16 +436,17 @@ public class PFLinkEditPart extends AbstractConnectionEditPart implements
 		String tip = "";
 		if (needDrawingAction()) {
 			((PFLinkFigure) getFigure()).setActionImage();
-			tip = "fromAction:(" + ((PFLink) getModel()).getFromaction() + ") ";
+			tip = "fromAction:(" + ((PageflowLink) getModel()).getFromaction()
+					+ ") ";
 		} else if (((PFLinkFigure) getFigure()).getImage() != getImage(IMG_WARNING)) {
 			((PFLinkFigure) getFigure()).clearIcon();
 			tip = "";
 		}
 		if (needDrawingLabel()) {
-			((PFLinkFigure) getFigure()).setLabel(((PFLink) getModel())
+			((PFLinkFigure) getFigure()).setLabel(((PageflowLink) getModel())
 					.getOutcome());
 			tip += "fromOutcome:(";
-			tip += ((PFLink) getModel()).getOutcome() + ")";
+			tip += ((PageflowLink) getModel()).getOutcome() + ")";
 		} else {
 			((PFLinkFigure) getFigure()).clearOutcome();
 		}
@@ -510,8 +513,7 @@ public class PFLinkEditPart extends AbstractConnectionEditPart implements
 			String connectionStyle = store
 					.getString(GEMPreferences.LINE_ROUTING);
 
-			if (GEMPreferences.LINE_ROUTING_MANHATTAN
-					.equals(connectionStyle)) {
+			if (GEMPreferences.LINE_ROUTING_MANHATTAN.equals(connectionStyle)) {
 				this.connectionStyle = ILayerPanePreference.LINE_ROUTING_MANHATTAN;
 			} else {
 				this.connectionStyle = ILayerPanePreference.LINE_ROUTING_MANUAL;

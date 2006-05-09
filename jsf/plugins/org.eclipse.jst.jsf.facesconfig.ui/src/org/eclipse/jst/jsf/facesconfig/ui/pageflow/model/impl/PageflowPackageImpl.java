@@ -16,9 +16,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowFactory;
@@ -641,46 +641,46 @@ public class PageflowPackageImpl extends EPackageImpl implements
 				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
 
-		initEClass(pfLinkEClass, PFLink.class, "PFLink", !IS_ABSTRACT,
+		initEClass(pfLinkEClass, PageflowLink.class, "PFLink", !IS_ABSTRACT,
 				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPFLink_Pageflow(), this.getPageflow(), this
-				.getPageflow_Links(), "pageflow", null, 1, 1, PFLink.class,
+				.getPageflow_Links(), "pageflow", null, 1, 1, PageflowLink.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
 				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
 		initEReference(getPFLink_Target(), this.getPageflowNode(), this
-				.getPageflowNode_Inlinks(), "target", null, 1, 1, PFLink.class,
+				.getPageflowNode_Inlinks(), "target", null, 1, 1, PageflowLink.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
 				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
 		initEReference(getPFLink_Source(), this.getPageflowNode(), this
 				.getPageflowNode_Outlinks(), "source", null, 1, 1,
-				PFLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				PageflowLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
 				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPFLink_Outcome(), ecorePackage.getEString(),
-				"outcome", null, 0, 1, PFLink.class, !IS_TRANSIENT,
+				"outcome", null, 0, 1, PageflowLink.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPFLink_Redirect(), ecorePackage.getEBoolean(),
-				"redirect", null, 0, 1, PFLink.class, !IS_TRANSIENT,
+				"redirect", null, 0, 1, PageflowLink.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
 		initEReference(getPFLink_BendPoints(), this.getPFLinkBendpoint(), this
 				.getPFLinkBendpoint_Link(), "bendPoints", null, 0, -1,
-				PFLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				PageflowLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
 				IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPFLink_Smallicon(), ecorePackage.getEString(),
-				"smallicon", null, 0, 1, PFLink.class, !IS_TRANSIENT,
+				"smallicon", null, 0, 1, PageflowLink.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPFLink_Largeicon(), ecorePackage.getEString(),
-				"largeicon", null, 0, 1, PFLink.class, !IS_TRANSIENT,
+				"largeicon", null, 0, 1, PageflowLink.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPFLink_Fromaction(), ecorePackage.getEString(),
-				"fromaction", null, 0, 1, PFLink.class, !IS_TRANSIENT,
+				"fromaction", null, 0, 1, PageflowLink.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
 
@@ -721,47 +721,47 @@ public class PageflowPackageImpl extends EPackageImpl implements
 				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
 
-		initEClass(pfPageEClass, PFPage.class, "PFPage", !IS_ABSTRACT,
+		initEClass(pfPageEClass, PageflowPage.class, "PFPage", !IS_ABSTRACT,
 				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPFPage_Path(), ecorePackage.getEString(), "path",
-				null, 0, 1, PFPage.class, !IS_TRANSIENT, !IS_VOLATILE,
+				null, 0, 1, PageflowPage.class, !IS_TRANSIENT, !IS_VOLATILE,
 				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
 		initEAttribute(getPFPage_Smallicon(), ecorePackage.getEString(),
-				"smallicon", null, 0, 1, PFPage.class, !IS_TRANSIENT,
+				"smallicon", null, 0, 1, PageflowPage.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPFPage_Largeicon(), ecorePackage.getEString(),
-				"largeicon", null, 0, 1, PFPage.class, !IS_TRANSIENT,
+				"largeicon", null, 0, 1, PageflowPage.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
 
-		initEClass(pfLinkBendpointEClass, PFLinkBendpoint.class,
+		initEClass(pfLinkBendpointEClass, PageflowLinkBendpoint.class,
 				"PFLinkBendpoint", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPFLinkBendpoint_D1Width(), ecorePackage.getEInt(),
-				"d1Width", null, 0, 1, PFLinkBendpoint.class, !IS_TRANSIENT,
+				"d1Width", null, 0, 1, PageflowLinkBendpoint.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPFLinkBendpoint_D1Height(), ecorePackage.getEInt(),
-				"d1Height", null, 0, 1, PFLinkBendpoint.class, !IS_TRANSIENT,
+				"d1Height", null, 0, 1, PageflowLinkBendpoint.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPFLinkBendpoint_D2Width(), ecorePackage.getEInt(),
-				"d2Width", null, 0, 1, PFLinkBendpoint.class, !IS_TRANSIENT,
+				"d2Width", null, 0, 1, PageflowLinkBendpoint.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPFLinkBendpoint_D2Height(), ecorePackage.getEInt(),
-				"d2Height", null, 0, 1, PFLinkBendpoint.class, !IS_TRANSIENT,
+				"d2Height", null, 0, 1, PageflowLinkBendpoint.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPFLinkBendpoint_Weight(), ecorePackage.getEFloat(),
-				"weight", "0.5", 0, 1, PFLinkBendpoint.class, !IS_TRANSIENT,
+				"weight", "0.5", 0, 1, PageflowLinkBendpoint.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
 		initEReference(getPFLinkBendpoint_Link(), this.getPFLink(), this
 				.getPFLink_BendPoints(), "link", null, 1, 1,
-				PFLinkBendpoint.class, !IS_TRANSIENT, !IS_VOLATILE,
+				PageflowLinkBendpoint.class, !IS_TRANSIENT, !IS_VOLATILE,
 				IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

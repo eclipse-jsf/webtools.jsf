@@ -425,13 +425,13 @@ public class FacesConfigEditor extends FormEditor implements
 		try {
 			IntroductionPage page1 = new IntroductionPage(this);
 			addPage(page1, null);
-			
+
 			IFormPage overviewPage = new OverviewPage(this);
 			addPage(overviewPage, null);
-			
+
 			// Page flow
 			createAndAddPageflowPage();
-			
+
 			// pages
 			IFormPage managedBeanPage = new ManagedBeanPage(this);
 			managedBeanPageID = addPage(managedBeanPage, null);
@@ -471,12 +471,11 @@ public class FacesConfigEditor extends FormEditor implements
 				pageflowPage.getPageflowManager());
 		getFacesConfigAdapter().setFacesConfigEMFModel(getFacesConfig());
 		FC2PFTransformer.getInstance().setFacesConfig(getFacesConfig());
-		FC2PFTransformer.getInstance().setPageflow(
-				pageflowPage.getPageflow());
+		FC2PFTransformer.getInstance().setPageflow(pageflowPage.getPageflow());
 		boolean fornew = getFacesConfigAdapter()
 				.updatePageflowFromFacesConfig();
-//		pageflowPage.getGraphicalViewer().setContents(
-//				pageflowPage.getPageflow());
+		pageflowPage.getGraphicalViewer().setContents(
+				pageflowPage.getPageflow());
 		if (fornew) {
 			PageflowLayoutManager.getInstance().layoutPageflow(
 					pageflowPage.getPageflow());
@@ -542,18 +541,18 @@ public class FacesConfigEditor extends FormEditor implements
 	public FacesConfigType getFacesConfig() {
 		// return modelResource.getFacesConfig();
 		FacesConfigType facesConfig = facesConfigAtrifactEdit.getFacesConfig();
-		if (!facesConfig.eAdapters().contains(FC2PFTransformer.getInstance())) {
+		if (!FC2PFTransformer.getInstance().isAdapted(facesConfig)) {
 			Iterator contents = facesConfig.getNavigationRule().iterator();
 			while (contents.hasNext()) {
 				EObject next = ((EObject) contents.next());
 				TreeIterator children = next.eAllContents();
 				while (children.hasNext()) {
-					((EObject) children.next()).eAdapters().add(
-							FC2PFTransformer.getInstance());
+					FC2PFTransformer.getInstance().adapt(
+							(EObject) children.next());
 				}
-				next.eAdapters().add(FC2PFTransformer.getInstance());
+				FC2PFTransformer.getInstance().adapt(next);
 			}
-			facesConfig.eAdapters().add(FC2PFTransformer.getInstance());
+			FC2PFTransformer.getInstance().adapt(facesConfig);
 		}
 		return facesConfig;
 	}
@@ -574,36 +573,35 @@ public class FacesConfigEditor extends FormEditor implements
 	 * update the source editor to sychronize the saved pageflow.
 	 * 
 	 */
-	private void updateSourcePageFromPageflow() {
-		System.out
-				.println("FacesConfigEditor: update source page from page flow");
-		// InputStream inputStreamOfFacesConfig = null;
-		// try {
-		// ISourceEditingTextTools editingTools = (ISourceEditingTextTools)
-		// sourcePage
-		// .getAdapter(ISourceEditingTextTools.class);
-		//
-		// if (editingTools != null) {
-		// inputStreamOfFacesConfig = new ByteArrayInputStream(
-		// editingTools.getDocument().get().getBytes("UTF-8"));//$NON-NLS-1$
-		// }
-		//
-		// } catch (UnsupportedEncodingException e) {
-		// // PageflowEditor.Encoding.Unsupported = Unsupported Encoding.
-		// // log.error("PageflowEditor.Encoding.Unsupported", e);
-		// // //$NON-NLS-1$
-		// }
-		//
-		// if (inputStreamOfFacesConfig == null) {
-		// return;
-		// }
-		// UpdateFacesConfigCommand updateCommand = new
-		// UpdateFacesConfigCommand(
-		// getFacesConfigAdapter(), inputStreamOfFacesConfig);
-		//
-		// updateCommand.execute();
-	}
-
+	// private void updateSourcePageFromPageflow() {
+	// // System.out
+	// // .println("FacesConfigEditor: update source page from page flow");
+	// // InputStream inputStreamOfFacesConfig = null;
+	// // try {
+	// // ISourceEditingTextTools editingTools = (ISourceEditingTextTools)
+	// // sourcePage
+	// // .getAdapter(ISourceEditingTextTools.class);
+	// //
+	// // if (editingTools != null) {
+	// // inputStreamOfFacesConfig = new ByteArrayInputStream(
+	// // editingTools.getDocument().get().getBytes("UTF-8"));//$NON-NLS-1$
+	// // }
+	// //
+	// // } catch (UnsupportedEncodingException e) {
+	// // // PageflowEditor.Encoding.Unsupported = Unsupported Encoding.
+	// // // log.error("PageflowEditor.Encoding.Unsupported", e);
+	// // // //$NON-NLS-1$
+	// // }
+	// //
+	// // if (inputStreamOfFacesConfig == null) {
+	// // return;
+	// // }
+	// // UpdateFacesConfigCommand updateCommand = new
+	// // UpdateFacesConfigCommand(
+	// // getFacesConfigAdapter(), inputStreamOfFacesConfig);
+	// //
+	// // updateCommand.execute();
+	// }
 	/**
 	 * This class listens for command stack changes of the pages contained in
 	 * this editor and decides if the editor is dirty or not.
@@ -834,20 +832,21 @@ public class FacesConfigEditor extends FormEditor implements
 					// modelResource.save(Collections.EMPTY_MAP);
 					facesConfigAtrifactEdit.getDeploymentDescriptorResource()
 							.save(Collections.EMPTY_MAP);
-					if (getActiveEditor() == sourcePage) {
-						if (getFacesConfigAdapter().isFacesConfigDirty()) {
-							// if the faces-config file is updated in the source
-							// page,
-							// the pageflow should be updated!
-							updatePageflowPage(false, false);
-						}
-					} else if (getActiveEditor() == pageflowPage) {
-						if (getFacesConfigAdapter().isPageflowDirty()) {
-							// if the pageflow is modified in the pageflow page,
-							// the source editor should be updated.
-							updateSourcePageFromPageflow();
-						}
-					}
+					// if (getActiveEditor() == sourcePage) {
+					// if (getFacesConfigAdapter().isFacesConfigDirty()) {
+					// // if the faces-config file is updated in the source
+					// // page,
+					// // the pageflow should be updated!
+					// updatePageflowPage(false, false);
+					// }
+					// }
+					// else if (getActiveEditor() == pageflowPage) {
+					// if (getFacesConfigAdapter().isPageflowDirty()) {
+					// // if the pageflow is modified in the pageflow page,
+					// // the source editor should be updated.
+					// updateSourcePageFromPageflow();
+					// }
+					// }
 					IFile file = ((IFileEditorInput) getEditorInput())
 							.getFile();
 					pageflowPage.doSave(file, monitor);
@@ -1306,17 +1305,17 @@ public class FacesConfigEditor extends FormEditor implements
 	// }
 	public void dispose() {
 		FC2PFTransformer.getInstance().dispose();
-		Iterator contents = getFacesConfig().getNavigationRule().iterator();
-		while (contents.hasNext()) {
-			EObject next = ((EObject) contents.next());
-			TreeIterator children = next.eAllContents();
-			while (children.hasNext()) {
-				((EObject) children.next()).eAdapters().remove(
-						FC2PFTransformer.getInstance());
-			}
-			next.eAdapters().remove(FC2PFTransformer.getInstance());
-		}
-		getFacesConfig().eAdapters().remove(FC2PFTransformer.getInstance());
+		// Iterator contents = getFacesConfig().getNavigationRule().iterator();
+		// while (contents.hasNext()) {
+		// EObject next = ((EObject) contents.next());
+		// TreeIterator children = next.eAllContents();
+		// while (children.hasNext()) {
+		// FC2PFTransformer.getInstance().unAdapt(
+		// (EObject) children.next());
+		// }
+		// FC2PFTransformer.getInstance().unAdapt((EObject) next);
+		// }
+		// FC2PFTransformer.getInstance().unAdapt(getFacesConfig());
 
 		ResourcesPlugin.getWorkspace().removeResourceChangeListener(
 				resourceChangeListener);

@@ -16,7 +16,7 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorResources;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowFactory;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage;
 
@@ -43,7 +43,7 @@ public class CreateBendpointCommand extends BendpointCommand {
 		PageflowPackage pageflowPackage = (PageflowPackage) registry
 				.get(pageflowURI);
 		PageflowFactory factory = pageflowPackage.getPageflowFactory();
-		PFLinkBendpoint _newBendpoint = factory.createPFLinkBendpoint();
+		PageflowLinkBendpoint _newBendpoint = factory.createPFLinkBendpoint();
 
 		_newBendpoint.setRelativeDimensions(getFirstRelativeDimension(),
 				getSecondRelativeDimension());

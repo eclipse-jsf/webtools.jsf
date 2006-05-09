@@ -17,11 +17,11 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.IAnnotationEditPart;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PFLinkEditPart;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowLinkEditPart;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowElementEditPart;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowNodeEditPart;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 
 /**
  * This class can be used to add annotation for the current pageflow model and
@@ -55,9 +55,9 @@ public class PageflowAnnotationUtil {
 					.next();
 			String errorMessage = null;
 
-			if (element.getModel() instanceof PFPage) {
+			if (element.getModel() instanceof PageflowPage) {
 				errorMessage = PageflowValidation.getInstance().isValidPage(
-						(PFPage) element.getModel());
+						(PageflowPage) element.getModel());
 			}
 
 			if (errorMessage != null) {
@@ -69,7 +69,7 @@ public class PageflowAnnotationUtil {
 			// validate the connections.
 			Iterator iterLinks = element.getSourceConnections().iterator();
 			while (iterLinks.hasNext()) {
-				PFLinkEditPart link = (PFLinkEditPart) iterLinks.next();
+				PageflowLinkEditPart link = (PageflowLinkEditPart) iterLinks.next();
 
 				validateLink(link);
 			}
@@ -93,7 +93,7 @@ public class PageflowAnnotationUtil {
 		removeAnnotation(pagePart);
 
 		errorMessage = PageflowValidation.getInstance().isValidPage(
-				(PFPage) pagePart.getModel());
+				(PageflowPage) pagePart.getModel());
 
 		if (errorMessage != null) {
 			addAnnotation(pagePart, errorMessage);
@@ -102,7 +102,7 @@ public class PageflowAnnotationUtil {
 		// validate the connections.
 		Iterator iterLinks = pagePart.getSourceConnections().iterator();
 		while (iterLinks.hasNext()) {
-			PFLinkEditPart link = (PFLinkEditPart) iterLinks.next();
+			PageflowLinkEditPart link = (PageflowLinkEditPart) iterLinks.next();
 
 			validateLink(link);
 		}
@@ -114,14 +114,14 @@ public class PageflowAnnotationUtil {
 	 * @param linkPart -
 	 *            it can be null, then the edit part will not be updated
 	 */
-	public static void validateLink(PFLinkEditPart linkPart) {
+	public static void validateLink(PageflowLinkEditPart linkPart) {
 		if (linkPart != null) {
 			String errorMessage = null;
 
 			removeAnnotation(linkPart);
 
 			errorMessage = PageflowValidation.getInstance().isValidLink(
-					(PFLink) linkPart.getModel());
+					(PageflowLink) linkPart.getModel());
 
 			if (errorMessage != null) {
 				addAnnotation(linkPart, errorMessage);

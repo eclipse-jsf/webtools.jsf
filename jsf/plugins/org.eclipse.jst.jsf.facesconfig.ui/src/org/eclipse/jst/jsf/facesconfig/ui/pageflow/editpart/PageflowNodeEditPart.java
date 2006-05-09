@@ -37,11 +37,11 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpolicy.PageflowNodeDirect
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpolicy.PageflowNodeEditPolicy;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.figure.ILabelDecorator;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.figure.PageflowNodeFigure;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowAnnotationUtil;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
@@ -164,13 +164,12 @@ public class PageflowNodeEditPart extends PageflowElementEditPart implements
 	 */
 	public void notifyChanged(Notification notification) {
 		int type = notification.getEventType();
-		int featureId = notification.getFeatureID(PageflowPackage.class);
 		// FC2PFTransformer.getInstance().NotifyChanged(notification,
 		// (PageflowElement) getModel());
 		switch (type) {
 		case Notification.ADD:
 		case Notification.ADD_MANY:
-			if (notification.getNewValue() instanceof PFLink) {
+			if (notification.getNewValue() instanceof PageflowLink) {
 				refreshTargetConnections();
 				refreshSourceConnections();
 				validate();
@@ -179,7 +178,7 @@ public class PageflowNodeEditPart extends PageflowElementEditPart implements
 
 		case Notification.REMOVE:
 		case Notification.REMOVE_MANY:
-			if (notification.getOldValue() instanceof PFLink) {
+			if (notification.getOldValue() instanceof PageflowLink) {
 				refreshTargetConnections();
 				refreshSourceConnections();
 				validate();
@@ -188,6 +187,7 @@ public class PageflowNodeEditPart extends PageflowElementEditPart implements
 			break;
 
 		case Notification.SET:
+			int featureId = notification.getFeatureID(PageflowPackage.class);
 			if (needValidation(featureId)) {
 				validate();
 			}
@@ -197,7 +197,7 @@ public class PageflowNodeEditPart extends PageflowElementEditPart implements
 	}
 
 	private boolean needValidation(int featureId) {
-		if (getModel() instanceof PFPage) {
+		if (getModel() instanceof PageflowPage) {
 			if (featureId == PageflowPackage.PF_PAGE__PATH) {
 				return true;
 			}
@@ -206,7 +206,7 @@ public class PageflowNodeEditPart extends PageflowElementEditPart implements
 	}
 
 	private void validate() {
-		if (getModel() instanceof PFPage) {
+		if (getModel() instanceof PageflowPage) {
 			PageflowAnnotationUtil.validatePage(this);
 		}
 	}
@@ -236,7 +236,7 @@ public class PageflowNodeEditPart extends PageflowElementEditPart implements
 	 */
 	public ConnectionAnchor getSourceConnectionAnchor(
 			ConnectionEditPart connection) {
-		PFLink link = (PFLink) connection.getModel();
+		PageflowLink link = (PageflowLink) connection.getModel();
 		return getPageflowNodeFigure().getSourceConnectionAnchorAt(
 				new Point(link.getSource().getX(), link.getSource().getY()));
 	}
@@ -258,7 +258,7 @@ public class PageflowNodeEditPart extends PageflowElementEditPart implements
 	 */
 	public ConnectionAnchor getTargetConnectionAnchor(
 			ConnectionEditPart connection) {
-		PFLink link = (PFLink) connection.getModel();
+		PageflowLink link = (PageflowLink) connection.getModel();
 		return getPageflowNodeFigure().getTargetConnectionAnchorAt(
 				new Point(link.getTarget().getX(), link.getTarget().getY()));
 	}
@@ -294,14 +294,14 @@ public class PageflowNodeEditPart extends PageflowElementEditPart implements
 
 		it = getPageflowNode().getInlinks().iterator();
 		while (it.hasNext()) {
-			PFLink link = (PFLink) it.next();
+			PageflowLink link = (PageflowLink) it.next();
 
 			hookIntoPageflowElement(link);
 		}
 
 		it = getPageflowNode().getOutlinks().iterator();
 		while (it.hasNext()) {
-			PFLink link = (PFLink) it.next();
+			PageflowLink link = (PageflowLink) it.next();
 
 			hookIntoPageflowElement(link);
 		}
@@ -317,14 +317,14 @@ public class PageflowNodeEditPart extends PageflowElementEditPart implements
 
 		it = getPageflowNode().getInlinks().iterator();
 		while (it.hasNext()) {
-			PFLink link = (PFLink) it.next();
+			PageflowLink link = (PageflowLink) it.next();
 
 			unhookFromPageflowElement(link);
 		}
 
 		it = getPageflowNode().getOutlinks().iterator();
 		while (it.hasNext()) {
-			PFLink link = (PFLink) it.next();
+			PageflowLink link = (PageflowLink) it.next();
 
 			unhookFromPageflowElement(link);
 		}
@@ -349,7 +349,7 @@ public class PageflowNodeEditPart extends PageflowElementEditPart implements
 	 */
 	protected void performOpen() {
 		// only Page and Action support the double-click commands
-		if (getModel() instanceof PFPage) {
+		if (getModel() instanceof PageflowPage) {
 			// CommandStack stack =
 			// getViewer().getEditDomain().getCommandStack();
 			Command command = new OpenEditorCommand(this);

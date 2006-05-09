@@ -20,7 +20,7 @@ import org.eclipse.gef.requests.BendpointRequest;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.command.CreateBendpointCommand;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.command.DeleteBendpointCommand;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.command.MoveBendpointCommand;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 
 public class PFLinkBendpointEditPolicy extends BendpointEditPolicy {
 
@@ -45,7 +45,7 @@ public class PFLinkBendpointEditPolicy extends BendpointEditPolicy {
 
 		createCmd.setRelativeDimensions(p.getDifference(ref1), p
 				.getDifference(ref2));
-		createCmd.setPFLink((PFLink) request.getSource().getModel());
+		createCmd.setPFLink((PageflowLink) request.getSource().getModel());
 		createCmd.setIndex(request.getIndex());
 		return createCmd;
 	}
@@ -59,7 +59,7 @@ public class PFLinkBendpointEditPolicy extends BendpointEditPolicy {
 		DeleteBendpointCommand deleteCom = new DeleteBendpointCommand();
 		Point p = request.getLocation();
 		deleteCom.setLocation(p);
-		deleteCom.setPFLink((PFLink) request.getSource().getModel());
+		deleteCom.setPFLink((PageflowLink) request.getSource().getModel());
 		deleteCom.setIndex(request.getIndex());
 		return deleteCom;
 	}
@@ -86,7 +86,7 @@ public class PFLinkBendpointEditPolicy extends BendpointEditPolicy {
 
 		moveCmd.setRelativeDimensions(p.getDifference(ref1), p
 				.getDifference(ref2));
-		moveCmd.setPFLink((PFLink) request.getSource().getModel());
+		moveCmd.setPFLink((PageflowLink) request.getSource().getModel());
 		moveCmd.setIndex(request.getIndex());
 		return moveCmd;
 	}

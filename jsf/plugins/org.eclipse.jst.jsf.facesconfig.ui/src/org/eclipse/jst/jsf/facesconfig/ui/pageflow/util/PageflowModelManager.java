@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowFactory;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
@@ -235,16 +235,16 @@ public class PageflowModelManager {
 	 * @param webPath
 	 * @return
 	 */
-	public PFPage foundPage(String webPath) {
-		PFPage page = null;
+	public PageflowPage foundPage(String webPath) {
+		PageflowPage page = null;
 
 		if (getModel() != null) {
 			Iterator iterNodes = getModel().getNodes().iterator();
 			while (iterNodes.hasNext()) {
 				PageflowNode node = (PageflowNode) iterNodes.next();
-				if (node instanceof PFPage) {
-					if (((PFPage) node).getPath().equalsIgnoreCase(webPath)) {
-						page = (PFPage) node;
+				if (node instanceof PageflowPage) {
+					if (((PageflowPage) node).getPath().equalsIgnoreCase(webPath)) {
+						page = (PageflowPage) node;
 						break;
 					}
 				}

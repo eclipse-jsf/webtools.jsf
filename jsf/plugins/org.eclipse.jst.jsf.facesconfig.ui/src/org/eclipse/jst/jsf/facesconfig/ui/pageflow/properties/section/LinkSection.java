@@ -14,8 +14,8 @@ package org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.section;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.DialogField;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.IDialogFieldApplyListener;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PFLinkEditPart;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowLinkEditPart;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PageflowPackageImpl;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowValidation;
 import org.eclipse.swt.widgets.Composite;
@@ -33,7 +33,7 @@ public class LinkSection extends AbstractEditPartSection {
 	private LinkGroup group;
 
 	/** the emf model for Pageflow link */
-	private PFLink pfLink;
+	private PageflowLink pfLink;
 
 	/**
 	 * 
@@ -89,10 +89,10 @@ public class LinkSection extends AbstractEditPartSection {
 	public void setInput(IWorkbenchPart part, ISelection selection) {
 		super.setInput(part, selection);
 
-		if (getInput() != null && getInput() instanceof PFLinkEditPart) {
-			Object model = ((PFLinkEditPart) getInput()).getModel();
-			if (model instanceof PFLink) {
-				pfLink = (PFLink) model;
+		if (getInput() != null && getInput() instanceof PageflowLinkEditPart) {
+			Object model = ((PageflowLinkEditPart) getInput()).getModel();
+			if (model instanceof PageflowLink) {
+				pfLink = (PageflowLink) model;
 				if (PageflowValidation.getInstance().isValidLinkForProperty(
 						pfLink)) {
 					refreshData();

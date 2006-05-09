@@ -44,7 +44,7 @@ public class WebrootUtil extends
 	static public String getProjectPath(EObject model, String strPath) {
 		// String projectName = "";
 
-		IProject project = ProjectUtilities.getProject(model);
+		IProject project = getProject(model);
 		// if (project != null) {
 		// projectName = project.getName();
 		// }

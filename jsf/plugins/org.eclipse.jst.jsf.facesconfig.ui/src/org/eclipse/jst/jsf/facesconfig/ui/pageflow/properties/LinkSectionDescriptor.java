@@ -15,8 +15,8 @@ import java.util.List;
 
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PFLinkEditPart;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowLinkEditPart;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.section.LinkSection;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowValidation;
 import org.eclipse.ui.IWorkbenchPart;
@@ -86,8 +86,8 @@ public class LinkSectionDescriptor implements ISectionDescriptor {
 		if (selection instanceof StructuredSelection) {
 			StructuredSelection structuredSelection = (StructuredSelection) selection;
 			object = structuredSelection.getFirstElement();
-			if (object instanceof PFLinkEditPart) {
-				PFLink pfLink = (PFLink) ((PFLinkEditPart) object).getModel();
+			if (object instanceof PageflowLinkEditPart) {
+				PageflowLink pfLink = (PageflowLink) ((PageflowLinkEditPart) object).getModel();
 				if (PageflowValidation.getInstance().isValidLinkForProperty(
 						pfLink)) {
 

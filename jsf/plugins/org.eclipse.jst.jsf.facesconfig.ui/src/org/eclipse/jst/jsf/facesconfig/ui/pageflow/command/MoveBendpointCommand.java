@@ -16,7 +16,7 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorResources;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowFactory;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage;
 
@@ -27,7 +27,7 @@ public class MoveBendpointCommand extends BendpointCommand {
 	/**
 	 * old bend point of the link
 	 */
-	private PFLinkBendpoint oldBendpoint;
+	private PageflowLinkBendpoint oldBendpoint;
 
 	public MoveBendpointCommand() {
 		// Pageflow.Commands.MoveBendpointCommand.Label = Move Bendpoint
@@ -46,11 +46,11 @@ public class MoveBendpointCommand extends BendpointCommand {
 		PageflowPackage pageflowPackage = (PageflowPackage) registry
 				.get(pageflowURI);
 		PageflowFactory factory = pageflowPackage.getPageflowFactory();
-		PFLinkBendpoint _newBendpoint = factory.createPFLinkBendpoint();
+		PageflowLinkBendpoint _newBendpoint = factory.createPFLinkBendpoint();
 
 		_newBendpoint.setRelativeDimensions(getFirstRelativeDimension(),
 				getSecondRelativeDimension());
-		setOldBendpoint((PFLinkBendpoint) getPFLink().getBendPoints().get(
+		setOldBendpoint((PageflowLinkBendpoint) getPFLink().getBendPoints().get(
 				getIndex()));
 
 		getPFLink().setBendpoint(getIndex(), _newBendpoint);
@@ -62,7 +62,7 @@ public class MoveBendpointCommand extends BendpointCommand {
 	 * 
 	 * @return - old bend point
 	 */
-	protected PFLinkBendpoint getOldBendpoint() {
+	protected PageflowLinkBendpoint getOldBendpoint() {
 		return oldBendpoint;
 	}
 
@@ -72,7 +72,7 @@ public class MoveBendpointCommand extends BendpointCommand {
 	 * @param bp -
 	 *            old bend point
 	 */
-	public void setOldBendpoint(PFLinkBendpoint bp) {
+	public void setOldBendpoint(PageflowLinkBendpoint bp) {
 		oldBendpoint = bp;
 	}
 

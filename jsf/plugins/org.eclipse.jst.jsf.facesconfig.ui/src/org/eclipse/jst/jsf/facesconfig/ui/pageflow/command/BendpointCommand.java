@@ -15,7 +15,7 @@ package org.eclipse.jst.jsf.facesconfig.ui.pageflow.command;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.gef.commands.Command;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 
 /**
  * base class for bend point commands.
@@ -29,7 +29,7 @@ public abstract class BendpointCommand extends Command {
 	protected Point location;
 
 	/** the parent link */
-	protected PFLink link;
+	protected PageflowLink link;
 
 	/** relative dimension between the bendpoint with start point of the pflink */
 	private Dimension dimStart;
@@ -82,7 +82,7 @@ public abstract class BendpointCommand extends Command {
 	 * 
 	 * @return - parent link
 	 */
-	protected PFLink getPFLink() {
+	protected PageflowLink getPFLink() {
 		return link;
 	}
 
@@ -134,7 +134,7 @@ public abstract class BendpointCommand extends Command {
 	 * @param newLink -
 	 *            new parent pflink
 	 */
-	public void setPFLink(PFLink newLink) {
+	public void setPFLink(PageflowLink newLink) {
 		link = newLink;
 	}
 }

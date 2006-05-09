@@ -16,9 +16,9 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
@@ -86,7 +86,7 @@ public class PageflowAdapterFactory extends AdapterFactoryImpl {
 			return createPageflowNodeAdapter();
 		}
 
-		public Object casePFLink(PFLink object) {
+		public Object casePFLink(PageflowLink object) {
 			return createPFLinkAdapter();
 		}
 
@@ -94,11 +94,11 @@ public class PageflowAdapterFactory extends AdapterFactoryImpl {
 			return createPageflowElementAdapter();
 		}
 
-		public Object casePFPage(PFPage object) {
+		public Object casePFPage(PageflowPage object) {
 			return createPFPageAdapter();
 		}
 
-		public Object casePFLinkBendpoint(PFLinkBendpoint object) {
+		public Object casePFLinkBendpoint(PageflowLinkBendpoint object) {
 			return createPFLinkBendpointAdapter();
 		}
 
@@ -149,13 +149,13 @@ public class PageflowAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink <em>PF Link</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink <em>PF Link</em>}'.
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink
+	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink
 	 * @generated
 	 */
 	public Adapter createPFLinkAdapter() {
@@ -191,13 +191,13 @@ public class PageflowAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage <em>PF Page</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage <em>PF Page</em>}'.
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage
+	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage
 	 * @generated
 	 */
 	public Adapter createPFPageAdapter() {
@@ -233,13 +233,13 @@ public class PageflowAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint <em>PF Link Bendpoint</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint <em>PF Link Bendpoint</em>}'.
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint
+	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint
 	 * @generated
 	 */
 	public Adapter createPFLinkBendpointAdapter() {

@@ -20,8 +20,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage;
 
 /**
@@ -30,18 +30,18 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PFLinkBendpointImpl#getD1Width <em>D1 Width</em>}</li>
- * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PFLinkBendpointImpl#getD1Height <em>D1 Height</em>}</li>
- * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PFLinkBendpointImpl#getD2Width <em>D2 Width</em>}</li>
- * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PFLinkBendpointImpl#getD2Height <em>D2 Height</em>}</li>
- * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PFLinkBendpointImpl#getWeight <em>Weight</em>}</li>
- * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PFLinkBendpointImpl#getLink <em>Link</em>}</li>
+ * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PageflowLinkBendpointImpl#getD1Width <em>D1 Width</em>}</li>
+ * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PageflowLinkBendpointImpl#getD1Height <em>D1 Height</em>}</li>
+ * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PageflowLinkBendpointImpl#getD2Width <em>D2 Width</em>}</li>
+ * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PageflowLinkBendpointImpl#getD2Height <em>D2 Height</em>}</li>
+ * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PageflowLinkBendpointImpl#getWeight <em>Weight</em>}</li>
+ * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PageflowLinkBendpointImpl#getLink <em>Link</em>}</li>
  * </ul>
  * </p>
  * 
  * @generated
  */
-public class PFLinkBendpointImpl extends EObjectImpl implements PFLinkBendpoint {
+public class PageflowLinkBendpointImpl extends EObjectImpl implements PageflowLinkBendpoint {
 	/**
 	 * The default value of the '{@link #getD1Width() <em>D1 Width</em>}'
 	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -154,7 +154,7 @@ public class PFLinkBendpointImpl extends EObjectImpl implements PFLinkBendpoint 
 	 * 
 	 * @generated
 	 */
-	protected PFLinkBendpointImpl() {
+	protected PageflowLinkBendpointImpl() {
 		super();
 	}
 
@@ -287,10 +287,10 @@ public class PFLinkBendpointImpl extends EObjectImpl implements PFLinkBendpoint 
 	 * 
 	 * @generated
 	 */
-	public PFLink getLink() {
+	public PageflowLink getLink() {
 		if (eContainerFeatureID != PageflowPackage.PF_LINK_BENDPOINT__LINK)
 			return null;
-		return (PFLink) eContainer;
+		return (PageflowLink) eContainer;
 	}
 
 	/**
@@ -298,7 +298,7 @@ public class PFLinkBendpointImpl extends EObjectImpl implements PFLinkBendpoint 
 	 * 
 	 * @generated
 	 */
-	public void setLink(PFLink newLink) {
+	public void setLink(PageflowLink newLink) {
 		if (newLink != eContainer
 				|| (eContainerFeatureID != PageflowPackage.PF_LINK_BENDPOINT__LINK && newLink != null)) {
 			if (EcoreUtil.isAncestor(this, newLink))
@@ -309,7 +309,7 @@ public class PFLinkBendpointImpl extends EObjectImpl implements PFLinkBendpoint 
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newLink != null)
 				msgs = ((InternalEObject) newLink).eInverseAdd(this,
-						PageflowPackage.PF_LINK__BEND_POINTS, PFLink.class,
+						PageflowPackage.PF_LINK__BEND_POINTS, PageflowLink.class,
 						msgs);
 			msgs = eBasicSetContainer((InternalEObject) newLink,
 					PageflowPackage.PF_LINK_BENDPOINT__LINK, msgs);
@@ -373,7 +373,7 @@ public class PFLinkBendpointImpl extends EObjectImpl implements PFLinkBendpoint 
 			switch (eContainerFeatureID) {
 			case PageflowPackage.PF_LINK_BENDPOINT__LINK:
 				return ((InternalEObject) eContainer).eInverseRemove(this,
-						PageflowPackage.PF_LINK__BEND_POINTS, PFLink.class,
+						PageflowPackage.PF_LINK__BEND_POINTS, PageflowLink.class,
 						msgs);
 			default:
 				return eDynamicBasicRemoveFromContainer(msgs);
@@ -429,7 +429,7 @@ public class PFLinkBendpointImpl extends EObjectImpl implements PFLinkBendpoint 
 			setWeight(((Float) newValue).floatValue());
 			return;
 		case PageflowPackage.PF_LINK_BENDPOINT__LINK:
-			setLink((PFLink) newValue);
+			setLink((PageflowLink) newValue);
 			return;
 		}
 		eDynamicSet(eFeature, newValue);
@@ -458,7 +458,7 @@ public class PFLinkBendpointImpl extends EObjectImpl implements PFLinkBendpoint 
 			setWeight(WEIGHT_EDEFAULT);
 			return;
 		case PageflowPackage.PF_LINK_BENDPOINT__LINK:
-			setLink((PFLink) null);
+			setLink((PageflowLink) null);
 			return;
 		}
 		eDynamicUnset(eFeature);

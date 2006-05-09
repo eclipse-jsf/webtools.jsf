@@ -65,8 +65,8 @@ public interface PageflowNode extends PageflowElement {
 	/**
 	 * Returns the value of the '<em><b>Outlinks</b></em>' reference list.
 	 * The list contents are of type
-	 * {@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink}. It
-	 * is bidirectional and its opposite is '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink#getSource <em>Source</em>}'.
+	 * {@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink}. It
+	 * is bidirectional and its opposite is '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#getSource <em>Source</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Outlinks</em>' reference list isn't clear,
@@ -76,7 +76,7 @@ public interface PageflowNode extends PageflowElement {
 	 * 
 	 * @return the value of the '<em>Outlinks</em>' reference list.
 	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage#getPageflowNode_Outlinks()
-	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink#getSource
+	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#getSource
 	 * @model type="org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink"
 	 *        opposite="source"
 	 * @generated
@@ -86,8 +86,8 @@ public interface PageflowNode extends PageflowElement {
 	/**
 	 * Returns the value of the '<em><b>Inlinks</b></em>' reference list.
 	 * The list contents are of type
-	 * {@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink}. It
-	 * is bidirectional and its opposite is '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink#getTarget <em>Target</em>}'.
+	 * {@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink}. It
+	 * is bidirectional and its opposite is '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#getTarget <em>Target</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Inlinks</em>' reference list isn't clear,
@@ -97,7 +97,7 @@ public interface PageflowNode extends PageflowElement {
 	 * 
 	 * @return the value of the '<em>Inlinks</em>' reference list.
 	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage#getPageflowNode_Inlinks()
-	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink#getTarget
+	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#getTarget
 	 * @model type="org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink"
 	 *        opposite="target"
 	 * @generated
@@ -107,7 +107,7 @@ public interface PageflowNode extends PageflowElement {
 	/**
 	 * @generated NOT
 	 */
-	PFLink findLinkTo(PageflowNode target);
+	PageflowLink findLinkTo(PageflowNode target);
 
 }
 // PageflowNode

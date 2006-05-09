@@ -14,7 +14,7 @@ package org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart;
 
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartFactory;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
 
@@ -35,8 +35,8 @@ public class PageflowEditPartsFactory implements EditPartFactory {
 			return new PageflowEditPart((Pageflow) obj);
 		} else if (obj instanceof PageflowNode) {
 			return new PageflowNodeEditPart((PageflowNode) obj);
-		} else if (obj instanceof PFLink) {
-			return new PFLinkEditPart((PFLink) obj);
+		} else if (obj instanceof PageflowLink) {
+			return new PageflowLinkEditPart((PageflowLink) obj);
 		}
 		return null;
 	}

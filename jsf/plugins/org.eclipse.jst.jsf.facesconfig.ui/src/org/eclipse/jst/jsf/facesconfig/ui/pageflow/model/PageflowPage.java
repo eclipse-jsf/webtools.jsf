@@ -18,9 +18,9 @@ package org.eclipse.jst.jsf.facesconfig.ui.pageflow.model;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage#getPath <em>Path</em>}</li>
- * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage#getSmallicon <em>Smallicon</em>}</li>
- * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage#getLargeicon <em>Largeicon</em>}</li>
+ * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage#getPath <em>Path</em>}</li>
+ * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage#getSmallicon <em>Smallicon</em>}</li>
+ * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage#getLargeicon <em>Largeicon</em>}</li>
  * </ul>
  * </p>
  * 
@@ -28,7 +28,7 @@ package org.eclipse.jst.jsf.facesconfig.ui.pageflow.model;
  * @model
  * @generated
  */
-public interface PFPage extends PageflowNode {
+public interface PageflowPage extends PageflowNode {
 	/**
 	 * Returns the value of the '<em><b>Path</b></em>' attribute. <!--
 	 * begin-user-doc -->
@@ -46,10 +46,8 @@ public interface PFPage extends PageflowNode {
 	 */
 	String getPath();
 
-	void setInitPath(String path);
-
 	/**
-	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage#getPath <em>Path</em>}'
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage#getPath <em>Path</em>}'
 	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value
@@ -77,7 +75,7 @@ public interface PFPage extends PageflowNode {
 	String getSmallicon();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage#getSmallicon <em>Smallicon</em>}'
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage#getSmallicon <em>Smallicon</em>}'
 	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value
@@ -105,7 +103,7 @@ public interface PFPage extends PageflowNode {
 	String getLargeicon();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage#getLargeicon <em>Largeicon</em>}'
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage#getLargeicon <em>Largeicon</em>}'
 	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value

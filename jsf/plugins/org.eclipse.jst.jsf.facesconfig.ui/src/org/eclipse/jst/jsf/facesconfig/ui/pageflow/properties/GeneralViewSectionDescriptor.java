@@ -17,10 +17,10 @@ import java.util.List;
 import org.eclipse.jface.text.TextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PFLinkEditPart;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowLinkEditPart;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowElementEditPart;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowElementTreeEditPart;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowValidation;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.wst.common.ui.properties.internal.provisional.ISection;
@@ -102,8 +102,8 @@ public class GeneralViewSectionDescriptor implements ISectionDescriptor {
 			if (object instanceof PageflowElementEditPart
 					|| object instanceof PageflowElementTreeEditPart) {
 				return true;
-			} else if (object instanceof PFLinkEditPart) {
-				PFLink pfLink = (PFLink) ((PFLinkEditPart) object).getModel();
+			} else if (object instanceof PageflowLinkEditPart) {
+				PageflowLink pfLink = (PageflowLink) ((PageflowLinkEditPart) object).getModel();
 				if (PageflowValidation.getInstance().isValidLinkForProperty(
 						pfLink)) {
 					return true;

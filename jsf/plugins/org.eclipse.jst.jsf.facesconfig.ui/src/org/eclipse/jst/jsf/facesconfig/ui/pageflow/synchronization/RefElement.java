@@ -6,10 +6,15 @@
 package org.eclipse.jst.jsf.facesconfig.ui.pageflow.synchronization;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.StringTokenizer;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jst.jsf.facesconfig.emf.FromViewIdType;
+import org.eclipse.jst.jsf.facesconfig.emf.NavigationCaseType;
+import org.eclipse.jst.jsf.facesconfig.emf.NavigationRuleType;
+import org.eclipse.jst.jsf.facesconfig.emf.ToViewIdType;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
 import org.eclipse.wst.common.internal.emf.resource.CompatibilityXMIResource;
 
 /**
@@ -20,29 +25,56 @@ import org.eclipse.wst.common.internal.emf.resource.CompatibilityXMIResource;
  * 
  */
 public class RefElement {
-	private List elements = new ArrayList();
 
-	public RefElement(String reference) {
-		reset(reference);
+	private List data = new ArrayList();
+
+	private PageflowElement pageflowElement;
+
+	public RefElement(PageflowElement pageflowElement) {
+		this.pageflowElement = pageflowElement;
 	}
 
+	public RefElement(PageflowElement pageflowElement, EObject facesConfigObject) {
+		this(pageflowElement);
+		this.add(facesConfigObject);
+	}
+
+	/**
+	 * Add object to the list.
+	 * 
+	 * @param object
+	 */
 	public void add(EObject object) {
-		String resolveString = resolveURI(object);
-		if (!elements.contains(resolveString)) {
-			elements.add(resolveString);
+		if (!data.contains(object)) {
+			data.add(object);
+			// pageflowElement.notifyModelChanged(new ENotificationImpl(
+			// (PageflowElementImpl) pageflowElement,
+			// NotificationImpl.SET,
+			// PageflowPackage.PAGEFLOW__REFERENCE_LINK, null, null));
 		}
 	}
 
 	public void clear() {
-		elements.clear();
+		if (!data.isEmpty()) {
+			data.clear();
+			// pageflowElement.notifyModelChanged(new ENotificationImpl(
+			// (PageflowElementImpl) pageflowElement,
+			// NotificationImpl.SET,
+			// PageflowPackage.PAGEFLOW__REFERENCE_LINK, null, null));
+		}
 	}
 
 	public boolean contains(EObject object) {
-		String resolveString = resolveURI(object);
-		return elements.contains(resolveString);
+		return data.contains(object);
 	}
 
-	public static String resolveURI(EObject object) {
+	/**
+	 * The fragment path of a node.
+	 * 
+	 * @param object
+	 * @return
+	 */
+	public static String resolvePath(EObject object) {
 		if (object != null) {
 			((CompatibilityXMIResource) object.eResource())
 					.setFormat(CompatibilityXMIResource.FORMAT_EMF1);
@@ -53,15 +85,22 @@ public class RefElement {
 		}
 	}
 
-	public void remove(EObject object) {
-		String resolveString = resolveURI(object);
-		elements.remove(resolveString);
+	public boolean remove(EObject object) {
+		boolean result = data.remove(object);
+		if (result) {
+			// pageflowElement.notifyModelChanged(new ENotificationImpl(
+			// (PageflowElementImpl) pageflowElement,
+			// NotificationImpl.SET,
+			// PageflowPackage.PAGEFLOW__REFERENCE_LINK, null, null));
+
+		}
+		return result;
 	}
 
 	public String resolveReferenceString() {
 		String result = "";
-		for (int i = 0, n = elements.size(); i < n; i++) {
-			result += (String) elements.get(i) + "|";
+		for (int i = 0, n = data.size(); i < n; i++) {
+			result += resolvePath((EObject) data.get(i)) + "|";
 		}
 		if (result.length() > 0) {
 			result = result.substring(0, result.length());
@@ -69,14 +108,39 @@ public class RefElement {
 		return result;
 	}
 
-	public void reset(String referenceString) {
-		StringTokenizer token = new StringTokenizer(referenceString, "|");
-		while (token.hasMoreTokens()) {
-			elements.add(token.nextElement());
+	public List getPaths() {
+		List paths = new ArrayList();
+		for (int i = 0, n = data.size(); i < n; i++) {
+			paths.add(resolvePath((EObject) data.get(i)));
 		}
+		return paths;
 	}
 
-	public List getRefLinks() {
-		return elements;
+	public List getData() {
+		return data;
+	}
+
+	public boolean isEmpty() {
+		return data.isEmpty();
+	}
+
+	/**
+	 * Update when faces-config is modified.
+	 * 
+	 */
+	public void update() {
+		for (Iterator nodes = data.iterator(); nodes.hasNext();) {
+			Object next = nodes.next();
+			if (next instanceof FromViewIdType
+					|| next instanceof NavigationCaseType) {
+				if (!(((EObject) next).eContainer() instanceof NavigationRuleType)) {
+					nodes.remove();
+				}
+			} else if (next instanceof ToViewIdType) {
+				if (!(((EObject) next).eContainer() instanceof NavigationCaseType)) {
+					nodes.remove();
+				}
+			}
+		}
 	}
 }

@@ -13,8 +13,8 @@
 package org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties;
 
 import org.eclipse.jface.window.Window;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
 import org.eclipse.jst.jsf.facesconfig.ui.util.WebrootUtil;
@@ -72,11 +72,11 @@ public class ActionOutcomeDialogCellEditor extends EditableDialogCellEditor {
 	 */
 	private String getPreviousJSPPath(PageflowElement element) {
 		String jspPath = null;
-		if (element instanceof PFLink) {
-			PageflowNode source = ((PFLink) element).getSource();
+		if (element instanceof PageflowLink) {
+			PageflowNode source = ((PageflowLink) element).getSource();
 
-			if (source instanceof PFPage) {
-				jspPath = ((PFPage) source).getPath();
+			if (source instanceof PageflowPage) {
+				jspPath = ((PageflowPage) source).getPath();
 			}
 		}
 		return jspPath;

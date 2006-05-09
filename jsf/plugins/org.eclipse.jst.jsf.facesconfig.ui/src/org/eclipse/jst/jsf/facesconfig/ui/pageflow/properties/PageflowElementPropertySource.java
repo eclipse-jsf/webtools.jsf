@@ -26,8 +26,8 @@ import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorResources;
 import org.eclipse.jst.jsf.facesconfig.ui.IconResources;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowValidation;
 import org.eclipse.swt.graphics.Image;
@@ -144,7 +144,7 @@ public class PageflowElementPropertySource implements IPropertySource {
 		// property descriptors
 		List propertyDescriptors = new Vector();
 
-		if (element instanceof PFLink) {
+		if (element instanceof PageflowLink) {
 			return getLinkPropertyDescriptors();
 		}
 
@@ -259,12 +259,12 @@ public class PageflowElementPropertySource implements IPropertySource {
 			protected ICellEditorValidator getValidator() {
 				return new ICellEditorValidator() {
 					public String isValid(Object value) {
-						if (((PFPage) element).getPath() != null
+						if (((PageflowPage) element).getPath() != null
 								&& value != null
-								&& !((PFPage) element).getPath()
+								&& !((PageflowPage) element).getPath()
 										.equalsIgnoreCase((String) value)) {
 							if (PageflowValidation.getInstance().isExistedPage(
-									((PFPage) element).getPageflow(),
+									((PageflowPage) element).getPageflow(),
 									(String) value)) {
 								// Pageflow.PageflowEditor.Alert.DNDResourceTitle
 								// = Pageflow Creation Error

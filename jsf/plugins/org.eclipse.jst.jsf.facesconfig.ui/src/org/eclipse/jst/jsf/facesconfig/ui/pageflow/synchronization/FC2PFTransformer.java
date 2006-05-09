@@ -5,26 +5,40 @@
  */
 package org.eclipse.jst.jsf.facesconfig.ui.pageflow.synchronization;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.jface.util.Assert;
+import org.eclipse.jst.jsf.facesconfig.emf.DescriptionType;
+import org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType;
+import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
+import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.jst.jsf.facesconfig.emf.FromOutcomeType;
 import org.eclipse.jst.jsf.facesconfig.emf.FromViewIdType;
+import org.eclipse.jst.jsf.facesconfig.emf.IconType;
+import org.eclipse.jst.jsf.facesconfig.emf.LargeIconType;
 import org.eclipse.jst.jsf.facesconfig.emf.NavigationCaseType;
 import org.eclipse.jst.jsf.facesconfig.emf.NavigationRuleType;
+import org.eclipse.jst.jsf.facesconfig.emf.SmallIconType;
 import org.eclipse.jst.jsf.facesconfig.emf.ToViewIdType;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowModelManager;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowTransform;
 
 /**
@@ -34,47 +48,752 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowTransform;
  * 
  */
 
-public class FC2PFTransformer implements Adapter {
-	private boolean listenToNotify;
+public class FC2PFTransformer {
+	// For code debug.
+	private static final boolean DEBUG = false;
 
-	PF2FCSynchronizer pf2FCSynchronizer;
+	class PF2FCSynchronizer implements Adapter {
 
-	FC2PFSynchronizer fc2PFSynchronizer;
+		public PF2FCSynchronizer() {
+		}
 
-	private boolean isInEvent;
+		public Notifier getTarget() {
+			// TODO Auto-generated method stub
+			return null;
+		}
 
-	private Map mapCases2Links = new HashMap();
+		public boolean isAdapterForType(Object type) {
+			return type == PF2FCSynchronizer.class;
+		}
 
-	private Map mapLinks2Cases = new HashMap();
+		private void addPage(Notification notification, PageflowElement element) {
+		}
 
-	public Map getMapCases2Links() {
-		return mapCases2Links;
+		private String getFromViewID(NavigationRuleType rule) {
+			String result = "*";
+			if (rule.getFromViewId() != null) {
+				result = rule.getFromViewId().getTextContent();
+			}
+			return result;
+		}
+
+		private String getToViewID(NavigationCaseType navCase) {
+			String result = "*";
+			if (navCase.getToViewId() != null) {
+				result = navCase.getToViewId().getTextContent();
+			}
+			return result;
+		}
+
+		/**
+		 * All the fromViewID or toViewID
+		 * 
+		 * @param path
+		 * @return
+		 */
+		public List findFacesPages(String path) {
+			List rules = facesConfig.getNavigationRule();
+			List result = new ArrayList();
+			for (int i = 0; i < rules.size(); i++) {
+				NavigationRuleType rule = (NavigationRuleType) rules.get(i);
+				String fromViewID = getFromViewID(rule);
+				if (fromViewID.equals(path)) {
+					result.add(rule.getFromViewId());
+				}
+				List cases = rule.getNavigationCase();
+				for (int j = 0; j < cases.size(); j++) {
+					NavigationCaseType navCase = (NavigationCaseType) cases
+							.get(j);
+					String toViewID = getToViewID(navCase);
+					if (toViewID.equals(path)) {
+						result.add(navCase.getToViewId());
+					}
+				}
+			}
+			return result;
+		}
+
+		private void updateFacesRule(NavigationRuleType navigationRule,
+				PageflowPage pageSource) {
+			FacesConfigFactory factory = FacesConfigFactory.eINSTANCE;
+			if (pageSource.getComment() != null) {
+				DescriptionType description = factory.createDescriptionType();
+				description.setTextContent(pageSource.getComment());
+				navigationRule.getDescription().clear();
+				navigationRule.getDescription().add(description);
+			}
+			// set the navigation rule's icon
+			if (pageSource.getLargeicon() != null
+					|| pageSource.getSmallicon() != null) {
+				IconType icon = factory.createIconType();
+				if (pageSource.getLargeicon() != null) {
+					LargeIconType largeicon = factory.createLargeIconType();
+					largeicon.setTextContent(pageSource.getLargeicon());
+					icon.setLargeIcon(largeicon);
+				}
+
+				if (pageSource.getSmallicon() != null) {
+					SmallIconType smallicon = factory.createSmallIconType();
+					smallicon.setTextContent(pageSource.getSmallicon());
+					icon.setSmallIcon(smallicon);
+				}
+				navigationRule.getIcon().clear();
+				navigationRule.getIcon().add(icon);
+			}
+			if (pageSource.getName() != null) {
+				DisplayNameType displayName = factory.createDisplayNameType();
+				displayName.setTextContent(pageSource.getName());
+				navigationRule.getDisplayName().clear();
+				navigationRule.getDisplayName().add(displayName);
+			}
+		}
+
+		private void createFacesCase(PageflowLink link, PageflowPage source,
+				PageflowPage target) {
+			NavigationRuleType rule = FacesConfigFactory.eINSTANCE
+					.createNavigationRuleType();
+			FromViewIdType from = FacesConfigFactory.eINSTANCE
+					.createFromViewIdType();
+			from.setTextContent((source).getPath());
+			rule.setFromViewId(from);
+			NavigationCaseType navCase = FacesConfigFactory.eINSTANCE
+					.createNavigationCaseType();
+			ToViewIdType toView = FacesConfigFactory.eINSTANCE
+					.createToViewIdType();
+			toView.setTextContent((target).getPath());
+			navCase.setToViewId(toView);
+			rule.getNavigationCase().add(navCase);
+			facesConfig.getNavigationRule().add(rule);
+			updateFacesRule(rule, source);
+			source.getFCElements().add(from);
+			target.getFCElements().add(toView);
+			link.getFCElements().add(navCase);
+			mapCases2Links.put(navCase, link);
+		}
+
+		private void removePageToPageLink(PageflowPage start,
+				PageflowLink link, PageflowPage target) {
+			if (!link.getFCElements().isEmpty()) {
+				FC2PFTransformer.getInstance().unAdapt(link);
+				NavigationCaseType caseFC = (NavigationCaseType) link
+						.getFCElements().getData().get(0);// (NavigationCaseType)
+				link.getFCElements().remove(caseFC);
+				mapCases2Links.remove(caseFC);
+				removeCase(caseFC);
+			}
+		}
+
+		private void removeCase(NavigationCaseType navCase) {
+			NavigationRuleType rule = (NavigationRuleType) navCase.eContainer();
+			(rule).getNavigationCase().remove(navCase);
+			if (rule.getNavigationCase().size() == 0) {
+				facesConfig.getNavigationRule().remove(rule);
+			}
+		}
+
+		private void propertyChanged(Notification notification,
+				PageflowElement element) {
+			if (notification.getNewValue() != null) {
+				int value = notification.getFeatureID(PageflowPackage.class);
+				if (element instanceof PageflowPage) {
+					// setPageProperties(notification, element, value);
+				} else if (element instanceof PageflowLink) {
+					if (DEBUG)
+						System.out.println("The link property is changed");
+					// setLinkProperties(notification, element, value);
+				}
+			}
+		}
+
+		// private void setPageProperties(Notification notification,
+		// PageflowElement element, int value) {
+		// String path = ((PageflowPage) element).getPath();
+		// List list = findFacesPages(path);
+		// for (int i = 0; i < list.size(); i++) {
+		// if (list.get(i) instanceof FromViewIdType) {
+		// FromViewIdType fromViewID = ((FromViewIdType) list.get(i));
+		// NavigationRuleType rule = (NavigationRuleType) fromViewID
+		// .eContainer();
+		// switch (value) {
+		// case PageflowPackage.PF_PAGE__NAME:
+		// rule.getDisplayName().clear();
+		// DisplayNameType displayname = FacesConfigFactory.eINSTANCE
+		// .createDisplayNameType();
+		// displayname.setTextContent((String) notification
+		// .getNewValue());
+		// rule.getDisplayName().add(displayname);
+		// break;
+		// case PageflowPackage.PF_PAGE__COMMENT:
+		// rule.getDescription().clear();
+		// DescriptionType description = FacesConfigFactory.eINSTANCE
+		// .createDescriptionType();
+		// description.setTextContent((String) notification
+		// .getNewValue());
+		// rule.getDescription().add(description);
+		// break;
+		// case PageflowPackage.PF_PAGE__LARGEICON: {
+		// List icons = rule.getIcon();
+		// boolean did = false;
+		// for (int index = 0; index < icons.size(); index++) {
+		// IconType icon = (IconType) icons.get(index);
+		// if (icon.getLargeIcon() != null) {
+		// icon.getLargeIcon().setTextContent(
+		// (String) notification.getNewValue());
+		// did = true;
+		// }
+		// }
+		// if (!did) {
+		// IconType icon = FacesConfigFactory.eINSTANCE
+		// .createIconType();
+		// LargeIconType largeIconType = FacesConfigFactory.eINSTANCE
+		// .createLargeIconType();
+		// largeIconType.setTextContent((String) notification
+		// .getNewValue());
+		// icon.setLargeIcon(largeIconType);
+		// icons.add(icon);
+		// }
+		// break;
+		// }
+		// case PageflowPackage.PF_PAGE__SMALLICON: {
+		// List icons = rule.getIcon();
+		// boolean did = false;
+		// for (int index = 0; index < icons.size(); index++) {
+		// IconType icon = (IconType) icons.get(index);
+		// if (icon.getSmallIcon() != null) {
+		// icon.getSmallIcon().setTextContent(
+		// (String) notification.getNewValue());
+		// did = true;
+		// }
+		// }
+		// if (!did) {
+		// IconType icon = FacesConfigFactory.eINSTANCE
+		// .createIconType();
+		// SmallIconType smallIconType = FacesConfigFactory.eINSTANCE
+		// .createSmallIconType();
+		// smallIconType.setTextContent((String) notification
+		// .getNewValue());
+		// icon.setSmallIcon(smallIconType);
+		// icons.add(icon);
+		// }
+		// break;
+		// }
+		// }
+		// }
+		// }
+		// }
+
+		private void addPageToPageLink(PageflowPage source,
+				PageflowPage target, PageflowLink value) {
+			if (source != null && target != null && value != null) {
+				createFacesCase(value, (PageflowPage) source,
+						(PageflowPage) target);
+			}
+		}
+
+		private void addInLink(Notification notification,
+				PageflowElement element) {
+			Object value = notification.getNewValue();
+			PageflowLink link = (PageflowLink) value;
+			if (element instanceof PageflowPage) {
+				PageflowNode source = link.getSource();
+				if (source instanceof PageflowPage) {
+					addPageToPageLink((PageflowPage) source,
+							(PageflowPage) element, link);
+				}
+			}
+
+		}
+
+		private void addOutLink(Notification notification,
+				PageflowElement element) {
+			Object value = notification.getNewValue();
+			// for outLink remove, only target is referenced.
+			PageflowLink link = (PageflowLink) value;
+			if (element instanceof PageflowPage) {
+				PageflowNode target = link.getTarget();
+				// page->page
+				if (target instanceof PageflowPage) {
+					addPageToPageLink((PageflowPage) element,
+							(PageflowPage) target, link);
+				}
+			}
+		}
+
+		private void removePage(Notification notification,
+				PageflowElement element) {
+
+		}
+
+		private void removeInLink(Notification notification,
+				PageflowElement element) {
+			Object value = notification.getOldValue();
+			PageflowLink link = (PageflowLink) value;
+
+			if (element instanceof PageflowPage) {
+				PageflowNode source = link.getSource();
+				if (source instanceof PageflowPage) {
+					removePageToPageLink((PageflowPage) source, link,
+							(PageflowPage) element);
+				}
+			}
+		}
+
+		private void removeOutLink(Notification notification,
+				PageflowElement element) {
+			Object value = notification.getOldValue();
+			PageflowLink link = (PageflowLink) value;
+			if (element instanceof PageflowPage) {
+				PageflowNode target = link.getTarget();
+				// page->page
+				if (target instanceof PageflowPage) {
+					removePageToPageLink((PageflowPage) element, link,
+							(PageflowPage) target);
+				}
+			}
+		}
+
+		public void notifyChanged(Notification notification) {
+			if (!listenToNotify || isInEvent) {
+				return;
+			}
+			isInEvent = true;
+			PageflowElement element;
+			if (!(notification.getNotifier() instanceof PageflowElement)) {
+				return;
+			}
+			element = (PageflowElement) notification.getNotifier();
+			int type = notification.getEventType();
+			switch (type) {
+			case Notification.ADD: {
+				// Object feature = notification.getFeature();
+				// if (feature == PageflowPackage.eINSTANCE
+				// .getPageflowNode_Inlinks()) {
+				//
+				// }
+				int featureId = notification
+						.getFeatureID(PageflowPackage.class);
+				switch (featureId) {
+				case PageflowPackage.PAGEFLOW__NODES:
+					addPage(notification, element);
+					break;
+				case PageflowPackage.PAGEFLOW_NODE__OUTLINKS:
+					addOutLink(notification, element);
+					break;
+				case PageflowPackage.PAGEFLOW_NODE__INLINKS:
+					addInLink(notification, element);
+					break;
+				case PageflowPackage.PAGEFLOW:
+					break;
+				}
+				break;
+			}
+			case Notification.SET:
+				if (notification.getNewValue() != null) {
+					propertyChanged(notification, element);
+				}
+				break;
+			case Notification.REMOVE: {
+				int featureId = notification
+						.getFeatureID(PageflowPackage.class);
+				switch (featureId) {
+				case PageflowPackage.PF_PAGE:
+					removePage(notification, element);
+					break;
+				case PageflowPackage.PAGEFLOW_NODE__OUTLINKS:
+					removeOutLink(notification, element);
+					break;
+				case PageflowPackage.PAGEFLOW_NODE__INLINKS:
+					removeInLink(notification, element);
+					break;
+				case PageflowPackage.PAGEFLOW:
+					break;
+				}
+				break;
+			}
+			}
+			pageflow.notifyModelChanged(new ENotificationImpl(
+					(InternalEObject) notification.getNotifier(),
+					Notification.SET, PageflowPackage.PAGEFLOW, null, null));
+			refreshPFAdapter(pageflow);
+			refreshFCAdapter(facesConfig);
+			isInEvent = false;
+		}
+
+		public void dispose() {
+
+		}
+
+		public void setTarget(Notifier newTarget) {
+			// TODO Auto-generated method stub
+
+		}
+
 	}
 
-	public Map getMapLinks2Cases() {
-		return mapLinks2Cases;
+	class FC2PFSynchronizer implements Adapter {
+
+		public FC2PFSynchronizer() {
+		}
+
+		public Notifier getTarget() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		public boolean isAdapterForType(Object type) {
+			return type == FC2PFSynchronizer.class;
+		}
+
+		private void processAdd(Notification notification) {
+			Object feature = notification.getFeature();
+			if (feature == FacesConfigPackage.eINSTANCE
+					.getNavigationRuleType_NavigationCase()) {
+				if (DEBUG)
+					System.out.println("New navigation case");
+				NavigationCaseType newCase = (NavigationCaseType) notification
+						.getNewValue();
+				updatePageflowElements(pageflow, newCase);
+			} else if (feature == FacesConfigPackage.eINSTANCE
+					.getFacesConfigType_NavigationRule()) {
+				NavigationRuleType newRule = (NavigationRuleType) notification
+						.getNewValue();
+				if (newRule.getNavigationCase().size() > 0) {
+					for (int i = 0; i < newRule.getNavigationCase().size(); i++) {
+						updatePageflowElements(pageflow,
+								(NavigationCaseType) newRule
+										.getNavigationCase().get(i));
+					}
+				}
+				if (DEBUG)
+					System.out.println("New navigation rule");
+			} else if (DEBUG)
+				System.out.println("Something is added");
+		}
+
+		public void notifyChanged(Notification notification) {
+			if (!listenToNotify || isInEvent
+					|| !(notification.getNotifier() instanceof EObject)) {
+				return;
+			}
+			isInEvent = true;
+			if (checkSanity(notification)) {
+				int type = notification.getEventType();
+				switch (type) {
+				case Notification.ADD: {
+					processAdd(notification);
+					break;
+				}
+				case Notification.SET: {
+					processSet(notification);
+					break;
+				}
+				case Notification.REMOVE:
+					processRemove(notification);
+					break;
+				}
+			}
+			Assert
+					.isTrue(notification.getNotifier() instanceof InternalEObject);
+			refreshFCAdapter((EObject) notification.getNotifier());
+			refreshPFAdapter(pageflow);
+			pageflow.notifyModelChanged(new ENotificationImpl(
+					(InternalEObject) notification.getNotifier(),
+					Notification.SET, PageflowPackage.PAGEFLOW, null, null));
+
+			isInEvent = false;
+		}
+
+		/**
+		 * Avoid to process partial navigation rule or navigation case.
+		 * 
+		 * @param notification
+		 * @return
+		 */
+		private boolean checkSanity(Notification notification) {
+			// boolean result = false;
+			// int type = notification.getEventType();
+			// switch (type) {
+			// case Notification.ADD:
+			// Object newObject = notification.getNewValue();
+			// if (newObject instanceof ToViewIdType
+			// || newObject instanceof FromViewIdType) {
+			// result = isValidViewID(newObject);
+			// }
+			// break;
+			// case Notification.SET:
+			// result = true;
+			// newObject = notification.getNewValue();
+			// if (newObject instanceof ToViewIdType
+			// || newObject instanceof FromViewIdType) {
+			// result = isValidViewID(notification.getNewValue());
+			// }
+			// break;
+			// case Notification.REMOVE:
+			// result = true;
+			// }
+			// return result;
+			return true;
+		}
+
+		private boolean isValidViewID(Object object) {
+			boolean result = false;
+			if (object instanceof ToViewIdType) {
+				result = ((ToViewIdType) object).getTextContent() != null
+						&& ((ToViewIdType) object).getTextContent().trim()
+								.length() > 0;
+			} else if (object instanceof FromViewIdType) {
+				result = ((FromViewIdType) object).getTextContent() != null
+						&& ((FromViewIdType) object).getTextContent().trim()
+								.length() > 0;
+			}
+			return result;
+		}
+
+		private void processRemove(Notification notification) {
+			if (notification.getFeature() == FacesConfigPackage.eINSTANCE
+					.getNavigationRuleType_NavigationCase()) {
+				if (notification.getOldValue() instanceof NavigationCaseType) {
+					NavigationCaseType caseType = (NavigationCaseType) notification
+							.getOldValue();
+					PageflowLink link = (PageflowLink) mapCases2Links
+							.get(caseType);
+					removeLink(link);
+				}
+				if (DEBUG)
+					System.out.println("Navigation case");
+			} else if (notification.getFeature() == FacesConfigPackage.eINSTANCE
+					.getNavigationCaseType()) {
+				if (notification.getOldValue() instanceof NavigationRuleType) {
+					NavigationRuleType rule = (NavigationRuleType) notification
+							.getOldValue();
+					moveStartTo(rule, null, rule.getFromViewId());
+				}
+				if (DEBUG)
+					System.out.println("navigation rule");
+			} else if (notification.getFeature() == FacesConfigPackage.eINSTANCE
+					.getFacesConfigType_NavigationRule()) {
+				if (notification.getOldValue() instanceof NavigationRuleType) {
+					NavigationRuleType rule = (NavigationRuleType) notification
+							.getOldValue();
+					moveStartTo(rule, null, rule.getFromViewId());
+				}
+			}
+			if (DEBUG)
+				System.out.println("Something is removed");
+		}
+
+		private void processSet(Notification notification) {
+			Object feature = notification.getFeature();
+			if (feature == FacesConfigPackage.eINSTANCE
+					.getFromViewIdType_TextContent()
+					|| feature == FacesConfigPackage.eINSTANCE
+							.getNavigationRuleType_FromViewId()) {
+				fromViewIdChanged(notification);
+			} else if (feature == FacesConfigPackage.eINSTANCE
+					.getToViewIdType_TextContent()
+					|| feature == FacesConfigPackage.eINSTANCE
+							.getNavigationCaseType_ToViewId()) {
+				toViewIdChanged(notification);
+			}
+			if (DEBUG)
+				System.out.println("Something is set");
+		}
+
+		private void fromViewIdChanged(Notification notification) {
+			// remove
+			Object feature = notification.getFeature();
+			if (feature == FacesConfigPackage.eINSTANCE
+					.getNavigationRuleType_FromViewId()
+					&& notification.getNewValue() == null
+					&& notification.getOldValue() instanceof FromViewIdType) {
+				PageflowPage newStart = PageflowTransform.getInstance()
+						.createPFPage("*");
+				NavigationRuleType rule = (NavigationRuleType) notification
+						.getNotifier();
+				moveStartTo(rule, newStart, (FromViewIdType) notification
+						.getOldValue());
+			}
+			// add
+			else if (notification.getOldValue() == null
+					&& notification.getNewValue() instanceof String) {
+				String fromID = (String) notification.getNewValue();
+				PageflowPage newStart = findPage(fromID, pageflow);
+				newStart = newStart == null ? PageflowTransform.getInstance()
+						.createPFPage(fromID) : newStart;
+				NavigationRuleType rule = (NavigationRuleType) ((EObject) notification
+						.getNotifier()).eContainer();
+				moveStartTo(rule, newStart, (FromViewIdType) notification
+						.getNotifier());
+			}
+			// // change
+			// else if (notification.getOldValue() instanceof String &&
+			// notification.getNewValue() instanceof String)
+			// {
+			// mapPaths2PF.put(key, value)
+			// }
+		}
+
+		private void moveStartTo(NavigationRuleType rule,
+				PageflowPage newStart, FromViewIdType fromViewId) {
+			List cases = rule.getNavigationCase();
+			for (int i = 0, n = cases.size(); i < n; i++) {
+				NavigationCaseType caseFC = (NavigationCaseType) cases.get(i);
+				PageflowLink link = (PageflowLink) mapCases2Links.get(caseFC);
+				if (link.getSource() == newStart) {
+					continue;
+				}
+				PageflowPage start = (PageflowPage) link.getSource();
+				PageflowPage end = (PageflowPage) link.getTarget();
+				PageflowLink newLink = null;
+				if (newStart != null) {
+					newLink = createPFLink(newStart, end, caseFC);
+					mapCases2Links.put(caseFC, newLink);
+				}
+				// Remove old link
+				// link.getSource().getFCElements().remove(fromViewId);
+				// link.getTarget().getFCElements().remove(caseFC.getToViewId());
+				removeLink(link);
+				mapCases2Links.remove(caseFC);
+				if (newLink != null) {
+					mapCases2Links.put(caseFC, newLink);
+				}
+
+				if (start.getOutlinks().size() == 0
+						&& start.getInlinks().size() == 0) {
+					removePageflowPage(start);
+				}
+			}
+		}
+
+		private void toViewIdChanged(Notification notification) {
+			// remove
+			Object feature = notification.getFeature();
+			if (feature == FacesConfigPackage.eINSTANCE
+					.getNavigationCaseType_ToViewId()
+					&& notification.getNewValue() == null
+					&& notification.getOldValue() instanceof ToViewIdType) {
+				NavigationCaseType rule = (NavigationCaseType) ((EObject) notification
+						.getNotifier()).eContainer();
+				moveEndTo(rule, null, (ToViewIdType) notification.getOldValue());
+			}
+			// add
+			else if (feature == FacesConfigPackage.eINSTANCE
+					.getToViewIdType_TextContent()) {
+				String toViewId = (String) notification.getNewValue();
+				PageflowPage newEnd = findPage(toViewId, pageflow);
+				newEnd = newEnd == null ? PageflowTransform.getInstance()
+						.createPFPage(toViewId) : newEnd;
+				if (mapCases2Links.get(notification.getNotifier()) == null) {
+					// need to create new link:
+					updatePageflowElements(pageflow,
+							(NavigationCaseType) ((EObject) notification
+									.getNotifier()).eContainer());
+				} else {
+					NavigationCaseType rule = (NavigationCaseType) ((EObject) notification
+							.getNotifier()).eContainer();
+					moveEndTo(rule, newEnd, (ToViewIdType) notification
+							.getNotifier());
+				}
+			}
+		}
+
+		private void moveEndTo(NavigationCaseType caseFC, PageflowPage newEnd,
+				ToViewIdType toViewId) {
+			PageflowLink link = (PageflowLink) mapCases2Links.get(caseFC);
+			PageflowPage start = (PageflowPage) link.getSource();
+			PageflowPage end = (PageflowPage) link.getTarget();
+			PageflowLink newLink = null;
+			if (newEnd != null) {
+				newLink = createPFLink(start, newEnd, caseFC);
+			}
+			// Remove old link
+			link.getTarget().getFCElements().remove(toViewId);
+			removeLink(link);
+			mapCases2Links.remove(caseFC);
+			if (newLink != null) {
+				mapCases2Links.put(caseFC, newLink);
+			}
+
+			if (end.getOutlinks().size() == 0 && end.getInlinks().size() == 0) {
+				removePageflowPage(end);
+			}
+		}
+
+		private void removePageflowPage(PageflowPage source) {
+			Assert.isTrue(source.getOutlinks().size() == 0
+					&& source.getInlinks().size() == 0);
+			pageflow.getNodes().remove(source);
+		}
+
+		private void removeLink(PageflowLink pLink) {
+			// link
+			pLink.getPageflow().getLinks().remove(pLink);
+			pLink.getSource().getOutlinks().remove(pLink);
+			pLink.getTarget().getInlinks().remove(pLink);
+			pLink.getFCElements().clear();
+		}
+
+		public void dispose() {
+
+		}
+
+		public void setTarget(Notifier newTarget) {
+			// TODO Auto-generated method stub
+
+		}
+
 	}
 
-	public void facesConfigNotifyChanged(Notification notification) {
-		getFc2PFSynchronizer().notifyChanged(notification);
+	private void refreshPFAdapter(EObject object) {
+		TreeIterator rules = object.eAllContents();
+		while (rules.hasNext()) {
+			Object next = rules.next();
+			adapt((EObject) next);
+		}
+
+	}
+
+	private void refreshFCAdapter(EObject object) {
+		List rules = facesConfig.getNavigationRule();
+		for (int i = 0; i < rules.size(); i++) {
+			NavigationRuleType rule = (NavigationRuleType) rules.get(i);
+			adapt(rule);
+			TreeIterator children = rule.eAllContents();
+			while (children.hasNext()) {
+				adapt((EObject) children.next());
+			}
+		}
 	}
 
 	private static FC2PFTransformer _instance;
 
-	private Map mapPaths2FC = new HashMap();
+	/**
+	 * The listener is active.
+	 */
+	private boolean listenToNotify;
 
+	/**
+	 * Avoid redundent event.
+	 */
+	private boolean isInEvent;
+
+	boolean pageflowChanged = false;
+
+	/**
+	 * Catches
+	 */
 	private Map mapPaths2PF = new HashMap();
 
-	boolean newSource = false;
+	private Map mapCases2Links = new HashMap();
 
-	boolean newTarget = false;
-
-	boolean newAction = false;
-
-	boolean dirty = false;
-
+	/**
+	 * The pageflow model.
+	 */
 	private Pageflow pageflow;
 
+	/**
+	 * The faces-config model.
+	 */
 	FacesConfigType facesConfig;
 
 	public void setFacesConfig(FacesConfigType facesConfig) {
@@ -85,17 +804,53 @@ public class FC2PFTransformer implements Adapter {
 		this.pageflow = pageflow;
 	}
 
-	public void clearCaches() {
-		mapPaths2FC.clear();
-		mapPaths2PF.clear();
-		mapCases2Links.clear();
-		mapLinks2Cases.clear();
+	/**
+	 * Install compatible synchronization adapter for particular object.
+	 * 
+	 * @param object
+	 */
+	public void adapt(EObject object) {
+		if (object != null && !isAdapted(object)) {
+			if (object instanceof PageflowElement) {
+				object.eAdapters().add(new PF2FCSynchronizer());
+			} else {
+				object.eAdapters().add(new FC2PFSynchronizer());
+			}
+		}
 	}
 
 	/**
-	 * The map from PFLink - Cases Use case.getContainer to get rule.
+	 * Remove the synchronization adapter.
+	 * 
+	 * @param object
 	 */
-	private Map cases2LinksMap = new HashMap();
+	public void unAdapt(EObject object) {
+		Iterator adapters = object.eAdapters().iterator();
+		while (adapters.hasNext()) {
+			Object adapter = adapters.next();
+			if (adapter instanceof FC2PFSynchronizer
+					|| adapter instanceof PF2FCSynchronizer) {
+				adapters.remove();
+			}
+		}
+	}
+
+	public boolean isAdapted(EObject object) {
+		Iterator adapters = object.eAdapters().iterator();
+		while (adapters.hasNext()) {
+			Object adapter = adapters.next();
+			if (adapter instanceof FC2PFSynchronizer
+					|| adapter instanceof PF2FCSynchronizer) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public void clearCaches() {
+		mapPaths2PF.clear();
+		mapCases2Links.clear();
+	}
 
 	public static FC2PFTransformer getInstance() {
 		if (_instance == null) {
@@ -106,8 +861,6 @@ public class FC2PFTransformer implements Adapter {
 
 	public void dispose() {
 		clearCaches();
-		getFc2PFSynchronizer().dispose();
-		getPf2FCSynchronizer().dispose();
 		_instance = null;
 	}
 
@@ -123,36 +876,17 @@ public class FC2PFTransformer implements Adapter {
 		return false;
 	}
 
-	public void notifyChanged(Notification notification) {
-		if (listenToNotify && !isInEvent) {
-			isInEvent = true;
-			if (notification.getNotifier() instanceof PageflowElement) {
-				pageflowNotifyChanged(notification);
-			} else {
-				facesConfigNotifyChanged(notification);
-				// PageflowLayoutManager.getInstance().layoutPageflow(pageflow);
-			}
-			isInEvent = false;
-		}
-	}
-
 	public void setTarget(Notifier newTarget) {
 
 	}
 
-	public void pageflowNotifyChanged(Notification notification) {
-		getPf2FCSynchronizer().notifyChanged(notification);
-	}
-
-	public PFPage findPage(String path, Pageflow pageflow) {
+	public PageflowPage findPage(String path, Pageflow pageflow) {
 		List nodes = pageflow.getNodes();
 		for (int i = 0; i < nodes.size(); i++) {
-			if (nodes.get(i) instanceof PFPage) {
+			if (nodes.get(i) instanceof PageflowPage) {
 				if (path != null) {
-					RefElement element = new RefElement(((PFPage) nodes.get(i))
-							.getReferenceLink());
-					if (path.equals(((PFPage) nodes.get(i)).getPath())) {
-						return (PFPage) nodes.get(i);
+					if (path.equals(((PageflowPage) nodes.get(i)).getPath())) {
+						return (PageflowPage) nodes.get(i);
 					}
 				}
 			}
@@ -169,12 +903,12 @@ public class FC2PFTransformer implements Adapter {
 		return null;
 	}
 
-	public PageflowNode findCaseEnd(PFPage action, FromOutcomeType outcome,
-			Pageflow pageflow) {
+	public PageflowNode findCaseEnd(PageflowPage action,
+			FromOutcomeType outcome, Pageflow pageflow) {
 		// TODO: find a case end in pageflow model
 		List links = action.getOutlinks();
 		for (int i = 0; i < links.size(); i++) {
-			PFLink link = (PFLink) links.get(i);
+			PageflowLink link = (PageflowLink) links.get(i);
 			String outcomeStr = "";
 			if (outcome != null) {
 				outcomeStr = outcome.getTextContent();
@@ -186,286 +920,83 @@ public class FC2PFTransformer implements Adapter {
 		return null;
 	}
 
-	// public PFAction findCaseAction(PFPage page, String action, Pageflow
-	// pageflow) {
-	// // TODO: find an action in pageflow model
-	// // FromActionType action = caseFC.getFromAction();
-	// List links = page.getOutlinks();
-	// for (int i = 0; i < links.size(); i++) {
-	// PFLink link = (PFLink) links.get(i);
-	// if (link.getTarget() instanceof PFAction) {
-	// if (((PFAction) link.getTarget()).getName().equals(action)) {
-	// return (PFAction) link.getTarget();
-	// }
-	// }
-	// }
-	// return null;
-	// }
-
-	/**
-	 * Delete a pageflow rule.
-	 * 
-	 * @param rulePF
-	 */
-	public void deletePageflowRule(NavigationRuleType rulePF) {
-		NavigationCaseType casePF;
-		for (Iterator iterCasesPF = rulePF.getNavigationCase().iterator(); iterCasesPF
-				.hasNext();) {
-			casePF = (NavigationCaseType) iterCasesPF.next();
-			deletePageflowCase(casePF);
-		}
-	}
-
-	/**
-	 * Delete a pageflow case, the float node should be removed also.
-	 * 
-	 * @param rulePF
-	 */
-
-	public void deletePageflowCase(NavigationCaseType casePF) {
-		Object link = cases2LinksMap.get(casePF);
-		// if (link instanceof LinksBundle) {
-		// LinksBundle linkBundle = ((LinksBundle) link);
-		// if (!linkBundle.isPage2Page()) {
-		// removeLink(linkBundle.getFirst());
-		// PageflowNode sourcePage = linkBundle.getFirst().getSource();
-		// PageflowNode targetPage = linkBundle.getFirst().getTarget();
-		// // if it is float, remove it.
-		// removePageflowNode(sourcePage);
-		// removePageflowNode(targetPage);
-		// sourcePage.getPageflow().getLinks().remove(link);
-		// } else {
-		// removeLink(linkBundle.getFirst());
-		// removeLink(linkBundle.getSecond());
-		// PageflowNode action = linkBundle.getFirst().getTarget();
-		// if (action.getInlinks().size() == 0) {
-		// action.getPageflow().getLinks().remove(
-		// linkBundle.getSecond());
-		// }
-		// if (action.getOutlinks().size() == 0) {
-		// action.getPageflow().getLinks().remove(
-		// linkBundle.getFirst());
-		// }
-		// PageflowNode sourcePage = linkBundle.getFirst().getSource();
-		// PageflowNode targetPage = linkBundle.getSecond().getTarget();
-		// // if it is float, remove it.
-		// removePageflowNode(sourcePage);
-		// removePageflowNode(targetPage);
-		// removePageflowNode(action);
-		// }
-		// links2CasesMap.remove(linkBundle);
-		// }
-
-	}
-
-	// private boolean removePageflowNode(PageflowNode node) {
-	// if (node.getOutlinks().size() == 0 && node.getInlinks().size() == 0) {
-	// node.getPageflow().getNodes().remove(node);
-	// return true;
-	// }
-	// return false;
-	// }
-	//
-	// private void removeLink(PFLink link) {
-	// PageflowNode source = link.getSource();
-	// PageflowNode target = link.getTarget();
-	// source.getOutlinks().remove(link);
-	// target.getInlinks().remove(link);
-	// }
-	//
-	// /**
-	// * get the model creation factory of faces-config 1.0
-	// *
-	// * @return - the model creation factory of faces-config 1.0
-	// */
-	// private FacesConfigFactory getFacesConfigFactory() {
-	// return FacesConfigFactory.eINSTANCE;
-	// }
-
-	/**
-	 * check whether these two fromviewid is same or not.
-	 * 
-	 * @param fromViewID1
-	 * @param fromViewID2
-	 * @return
-	 */
-	// private boolean hasSameFromViewID(FromViewIdType fromViewID1,
-	// FromViewIdType fromViewID2) {
-	// String viewID1 = null;
-	// if (fromViewID1 == null) {
-	// viewID1 = "*";
-	// } else {
-	// viewID1 = fromViewID1.getTextContent().trim();
-	// }
-	//
-	// String viewID2 = null;
-	// if (fromViewID2 == null) {
-	// viewID2 = "*";
-	// } else {
-	// viewID2 = fromViewID2.getTextContent().trim();
-	// }
-	//
-	// if (viewID1.equalsIgnoreCase(viewID2)) {
-	// return true;
-	// }
-	// return false;
-	// }
-	/**
-	 * get or create a navigation rule
-	 * 
-	 * @param fromViewIdPath
-	 * @param navigationRulesInPageflow
-	 * @return
-	 */
-	// private NavigationRuleType getNavigationRule(String fromViewIdPath,
-	// List navigationRulesInPageflow) {
-	// // create or get a new navigation rule
-	// NavigationRuleType navigationRule = null;
-	//
-	// FacesConfigFactory factory = getFacesConfigFactory();
-	// // set the from-view-id
-	// FromViewIdType fromViewId = factory.createFromViewIdType();
-	// fromViewId.setTextContent(fromViewIdPath);
-	// // found the navigation rule with the same from-view-id
-	// boolean bFound = false;
-	// for (Iterator iter = navigationRulesInPageflow.iterator(); iter
-	// .hasNext()
-	// && !bFound;) {
-	// NavigationRuleType rule = (NavigationRuleType) iter.next();
-	// if (hasSameFromViewID(fromViewId, rule.getFromViewId())) {
-	// navigationRule = rule;
-	// bFound = true;
-	// }
-	// }
-	// // if not found, create a new one.
-	// if (!bFound) {
-	// // create a new navigation rule
-	// navigationRule = factory.createNavigationRuleType();
-	//
-	// // set the from-view-id
-	// FromViewIdType fromViewid = factory.createFromViewIdType();
-	// fromViewid.setTextContent(fromViewIdPath);
-	// navigationRule.setFromViewId(fromViewid);
-	//
-	// navigationRulesInPageflow.add(navigationRule);
-	// }
-	// return navigationRule;
-	// }
-	// private PFAction getOrCreateAction(NavigationCaseType caseFC, PFPage
-	// start,
-	// boolean oldRule) {
-	// PFAction pfAction = null;
-	// FromActionType action = caseFC.getFromAction();
-	// String actionPath = action.getTextContent();
-	// if (oldRule) {
-	// if (caseFC.getFromAction() != null) {
-	// // pfAction = (PFAction) mapPaths2PF.get(path);
-	// // try pageflow for valid action.
-	// if ((pfAction = findCaseAction(start, actionPath, pageflow)) == null) {
-	// System.out.println("Create a new action");
-	// pfAction = PageflowTransform.getInstance().createPFAction(
-	// action.getTextContent());
-	// newAction = true;
-	// Vector list = new Vector();
-	// list.add(action);
-	// mapPaths2PF.put(actionPath, pfAction);
-	// mapPaths2FC.put(actionPath, list);
-	// }
-	// }
-	// } else {
-	// System.out.println("new page, Create a new action");
-	// pfAction = PageflowTransform.getInstance().createPFAction(
-	// action.getTextContent());
-	// newAction = true;
-	// Vector list = new Vector();
-	// list.add(action);
-	// mapPaths2PF.put(actionPath, pfAction);
-	// mapPaths2FC.put(actionPath, list);
-	// }
-	// return pfAction;
-	// }
-	private PFPage getOrCreateStartPage(NavigationCaseType navCase) {// FromViewIdType
-		PFPage startPFNode = null;
+	private PageflowPage getOrCreateStartPage(NavigationCaseType navCase) {// FromViewIdType
+		PageflowPage startPageflowNode = null;
 		String path = "*";
 		NavigationRuleType rule = (NavigationRuleType) navCase.eContainer();
 		FromViewIdType source = getSource(navCase);
 		if (source != null) {
-			// ((CompatibilityXMIResource) source.eContainer().eResource())
-			// .setFormat(CompatibilityXMIResource.FORMAT_EMF1);
-			// uriSource = source.eContainer().eResource().getURIFragment(
-			// source.eContainer());
 			path = source.getTextContent();
 		}
-		if (!mapPaths2PF.containsKey(path)) {
-			startPFNode = findPage(path, pageflow);
+		if (!hasValidCache(path)) {
+			startPageflowNode = findPage(path, pageflow);
 
-			if (startPFNode == null) {
+			if (startPageflowNode == null) {
 				// not exist or is "*"
-				// System.out.println("Create new start page");
-				startPFNode = PageflowTransform.getInstance()
+				if (DEBUG)
+					System.out.println("Create new start page");
+				startPageflowNode = PageflowTransform.getInstance()
 						.createPFPage(path);
-				// PageflowTransform.getInstance().updatePageflowSourcePage(start,
-				// rule);
-				newSource = true;
+				pageflowChanged = true;
 			}
-			// FIXME: not only one!
-			// start.setReferenceLink(uriSource);
-			// mapLinks2PF.put(uriSource, start);
-			// start = PageflowTransform.getInstance().createPFPage(path);
-			// start.setReferenceLink("");
-			// mapLinks2URI.put(uriSource, path);
-			Vector list = new Vector();
-			list.add(source);
-			mapPaths2PF.put(path, startPFNode);
-			mapPaths2FC.put(path, list);
+			mapPaths2PF.put(path, startPageflowNode);
+			PageflowTransform.getInstance().updatePageflowSourcePage(
+					startPageflowNode, rule);
 		} else {
-			startPFNode = (PFPage) mapPaths2PF.get(path);
+			startPageflowNode = (PageflowPage) mapPaths2PF.get(path);
 		}
-		RefElement element = new RefElement(startPFNode.getReferenceLink());
-		element.add(source);
-		startPFNode.setReferenceLink(element.resolveReferenceString());
-		startPFNode.getFCElements().add(source);
-		startPFNode.setInitPath(path);
-		PageflowTransform.getInstance().updatePageflowSourcePage(startPFNode,
-				rule);
-		return startPFNode;
+		if (source != null) {
+			RefElement element = new RefElement(startPageflowNode);
+			element.add(source);
+			startPageflowNode
+					.setReferenceLink(element.resolveReferenceString());
+			startPageflowNode.getFCElements().add(source);
+		}
+		return startPageflowNode;
 	}
 
-	private PFPage getOrCreateEndPage(NavigationCaseType navCase) {// ToViewIdType
+	private boolean hasValidCache(Object key) {
+		EObject element = (EObject) mapPaths2PF.get(key);
+		boolean result = false;
+		while (element != null) {
+			if (element == pageflow) {
+				result = true;
+			}
+			element = element.eContainer();
+		}
+		return result;
+	}
+
+	private PageflowPage getOrCreateEndPage(NavigationCaseType navCase) {// ToViewIdType
 		// target) {
+		PageflowPage endPageflowNode = null;
 		ToViewIdType target = navCase.getToViewId();
 		if (target != null) {
 			String path = target.getTextContent();
-			PFPage endFCNode;
-			if (!mapPaths2PF.containsKey(path)) {
-				endFCNode = findPage(path, pageflow);
-				if (endFCNode == null) {
-					endFCNode = PageflowTransform.getInstance().createPFPage(
-							path);
-					// PageflowTransform.getInstance().updatePageflowTargetPage(end,
-					// navCase);
-					// System.out.println("Create new end page");
-					newTarget = true;
+			if (!hasValidCache(path)) {
+				endPageflowNode = findPage(path, pageflow);
+				if (endPageflowNode == null) {
+					endPageflowNode = PageflowTransform.getInstance()
+							.createPFPage(path);
+					if (DEBUG)
+						System.out.println("Create new end page");
+					pageflowChanged = true;
 				}
-				// FIXME: not only one!
-				mapPaths2PF.put(path, endFCNode);
-				// mapLinks2URI.put(uriTarget, path);
-				Vector list = new Vector();
-				list.add(target);
-				mapPaths2FC.put(path, list);
+				mapPaths2PF.put(path, endPageflowNode);
+				PageflowTransform.getInstance().updatePageflowTargetPage(
+						endPageflowNode, navCase);
 			} else {
-				endFCNode = (PFPage) mapPaths2PF.get(path);
+				endPageflowNode = (PageflowPage) mapPaths2PF.get(path);
 			}
-			RefElement element = new RefElement(endFCNode.getReferenceLink());
-			element.add(target);
-			endFCNode.setReferenceLink(element.resolveReferenceString());
-			endFCNode.getFCElements().add(target);
-			endFCNode.setInitPath(path);
-			PageflowTransform.getInstance().updatePageflowTargetPage(endFCNode,
-					navCase);
-			return endFCNode;
+			if (target != null) {
+				RefElement element = new RefElement(endPageflowNode);
+				element.add(target);
+				endPageflowNode.setReferenceLink(element
+						.resolveReferenceString());
+				endPageflowNode.getFCElements().add(target);
+			}
 		}
-		return null;
+		return endPageflowNode;
 	}
 
 	/**
@@ -473,150 +1004,155 @@ public class FC2PFTransformer implements Adapter {
 	 * might be corresponding to: 1. Page-action-page. 2. Page-page. 3. *-page.
 	 * 4. ? page-action-action-page?
 	 */
-	public boolean createPFElements(Pageflow pageflow, NavigationCaseType caseFC) {
-		this.newSource = false;
-		this.newAction = false;
-		this.newTarget = false;
+	public boolean updatePageflowElements(Pageflow pageflow,
+			NavigationCaseType caseFC) {
+		this.pageflowChanged = false;
 		this.pageflow = pageflow;
 		ToViewIdType target = caseFC.getToViewId();
 		if (target == null) {
 			return false;
 		}
 
-		PFPage start = null, end = null;
-		// ------------------------------------start page ------------------
+		PageflowPage start = null, end = null;
+		// start page
 		start = getOrCreateStartPage(caseFC);
 		String action = null;
-		// -------------------------------action--------------------------
+		// action
 		if (caseFC.getFromAction() != null) {
 			action = caseFC.getFromAction().getTextContent();
 		}
-		// -------------------------------------from outcome ---------
+		// from outcome
 		String fromOutCome = null;
 		if (caseFC.getFromOutcome() != null) {
 			fromOutCome = caseFC.getFromOutcome().getTextContent();
 		}
-		// ---------------------------------------end page------------------
+		// end page
 		end = getOrCreateEndPage(caseFC);
-		// ----------------------link------------------------
+		// link
 		// Is there a link in pageflow model?
-		PFLink link = null;
-		if ((link = findLink(start, end, action, fromOutCome, caseFC)) == null) {
-			link = PageflowTransform.getInstance().createPFLink(start, end,
-					action, fromOutCome);
-			dirty = true;
+		PageflowLink link = null;
+		if ((link = findUnmappedLink(start, end, caseFC)) == null) {
+			if (end != null) {
+				if (DEBUG)
+					System.out.println("Create new link");
+				link = createPFLink(start, end, action, fromOutCome);
+				pageflowChanged = true;
+			}
 		}
-		RefElement element = new RefElement(link.getReferenceLink());
-		element.add(caseFC);
-		link.setReferenceLink(element.resolveReferenceString());
-		link.getFCElements().add(caseFC);
-		mapCases2Links.put(caseFC, link);
-		mapLinks2Cases.put(link, caseFC);
-		dirty |= newTarget | newAction | newSource;
-		return dirty;
+		if (link != null) {
+			link.getFCElements().clear();
+			link.getFCElements().add(caseFC);
+			mapCases2Links.put(caseFC, link);
+		}
+		adapt(start);
+		adapt(end);
+		adapt(caseFC);
+		adapt(link);
+		return pageflowChanged;
 	}
 
-	// private PFLink findUnusedLink(List secondLinks) {
-	// PFLink link = null;
-	// for (int i = 0; i < secondLinks.size(); i++) {
-	// CaseLink cLink = new CaseLink((PFLink) secondLinks.get(i));
-	// if (!mapLinks2Cases.containsKey(cLink)) {
-	// link = (PFLink) secondLinks.get(i);
-	// break;
-	// }
-	// }
-	// return link;
-	// }
-
-	// private PFLink createLink(PageflowNode start, PageflowNode target,
-	// String fromAction, String fromOutcome) {
-	// PFLink result = null;
-	// if (target instanceof PFPage) {
-	// if (start instanceof PFAction) {
-	// result = PageflowTransform.getInstance().createPFLink(start,
-	// target, fromOutcome);
-	// result.set
-	// } else if (start instanceof PFPage) {
-	// result = PageflowTransform.getInstance().createPFLink(start,
-	// target, fromOutcome);
-	// }
-	// }
-	// // Page -> action
-	// else {
-	// result = PageflowTransform.getInstance().createPFLink(
-	// start, target, fromOutcome);
-	// }
-	// }
-
-	// private PFLink findPage2PageLink(PFPage start, PFPage target,
-	// String fromOutCome) {
-	// List links = start.getOutlinks();
-	// for (int i = 0, n = links.size(); i < n; i++) {
-	// if ((((PFLink) links.get(i)).getOutcome() == null && fromOutCome == null)
-	// || (((PFLink) links.get(i)).getOutcome() != null
-	// && fromOutCome != null && ((PFLink) links.get(i))
-	// .getOutcome().equals(fromOutCome))) {
-	// if (target.getPath().equals(
-	// ((PFPage) ((PFLink) links.get(i)).getTarget())
-	// .getPath())) {
-	// return (PFLink) links.get(i);
-	// }
-	// }
-	// }
-	// return null;
-	// }
-
-	private PFLink findLink(PFPage start, PFPage end, String action,
-			String fromOutCome, NavigationCaseType caseFC) {
+	/**
+	 * Find a pageflow link that is not linked to a faces-config element. Since
+	 * user might edit faces-config file with other editor, so the path is not
+	 * always valid, here we still try to match link and navigation case. FIXME:
+	 * should we always resolve mapping from referenceLink on PageflowElement?
+	 */
+	private PageflowLink findUnmappedLink(PageflowPage start, PageflowPage end,
+			NavigationCaseType caseFC) {
+		// Assert.isTrue(!mapCases2Links.containsKey(caseFC));
 		List links = start.getOutlinks();
 		for (int i = 0, n = links.size(); i < n; i++) {
-			PFLink link = (PFLink) links.get(i);
-			if (link.getReferenceLink() != null
-					&& link.getReferenceLink().length() > 0) {
-				String ref = link.getReferenceLink();
-				RefElement element = new RefElement(ref);
-				if (element.getRefLinks().get(0).equals(
-						RefElement.resolveURI(caseFC)))
-					// if (isSame(link.getOutcome(), fromOutCome)
-					// && isSame(action, link.getFromaction())) {
-					if (end.getPath() != null
-							&& end.getPath().equals(
-									((PFPage) link.getTarget()).getPath())
-							&& !mapLinks2Cases.containsKey(link)) {
-						return link;
-					}
+			PageflowLink link = (PageflowLink) links.get(i);
+			if (link.getSource() == start && link.getTarget() == end) {
+				if (link.getFCElements().isEmpty()) {
+					// if (isSame(link.getFromaction(),
+					// (caseFC.getFromAction() != null ? caseFC
+					// .getFromAction().getTextContent() : null))
+					// && isSame(link.getOutcome(), (caseFC
+					// .getFromOutcome() != null ? caseFC
+					// .getFromOutcome().getTextContent() : null)))
+					// return link;
+					// } else {
+					return link;
+				}
 			}
 		}
 		return null;
 	}
 
-	private boolean isSame(String first, String second) {
+	private boolean isSame(Object first, Object second) {
 		return (first == null && second == null || first != null
 				&& second != null && first.equals(second));
 	}
 
-	// private PFLink findFirstLink(PFPage start, PFAction end) {
-	// List links = start.getOutlinks();
-	// for (int i = 0, n = links.size(); i < n; i++) {
-	// PFLink link = (PFLink) links.get(i);
-	// if (link.getSource() == start && link.getTarget() == end) {
-	// return link;
-	// }
-	// }
-	// return null;
-	// }
-
-	public FC2PFSynchronizer getFc2PFSynchronizer() {
-		if (fc2PFSynchronizer == null) {
-			fc2PFSynchronizer = new FC2PFSynchronizer(pageflow, facesConfig);
-		}
-		return fc2PFSynchronizer;
+	public FromViewIdType createRLFromViewID(String value) {
+		FromViewIdType fromView = FacesConfigFactory.eINSTANCE
+				.createFromViewIdType();
+		((FromViewIdType) fromView).setTextContent(value);
+		return fromView;
 	}
 
-	public PF2FCSynchronizer getPf2FCSynchronizer() {
-		if (pf2FCSynchronizer == null) {
-			pf2FCSynchronizer = new PF2FCSynchronizer(pageflow, facesConfig);
+	public PageflowLink createPFLink(PageflowNode start, PageflowNode target,
+			NavigationCaseType caseFC) {
+		PageflowLink link = null;
+		String fromOutcome = caseFC.getFromOutcome() != null ? caseFC
+				.getFromOutcome().getTextContent() : null;
+		String action = caseFC.getFromAction() != null ? caseFC.getFromAction()
+				.getTextContent() : null;
+		NavigationRuleType rule = (NavigationRuleType) caseFC.eContainer();
+		link = createPFLink(fromOutcome);
+		link.setFromaction(action);
+		link.setSource(start);
+		link.setTarget(target);
+		start.getOutlinks().add(link);
+		target.getInlinks().add(link);
+		// The reference.
+		link.getFCElements().add(caseFC);
+		start.getFCElements().add(rule.getFromViewId());
+		target.getFCElements().add(caseFC.getToViewId());
+		return link;
+	}
+
+	/**
+	 * create a new PFLink object according to fromOutcome attribute
+	 * 
+	 * @param fromOutcome -
+	 *            PFLink's fromOutcome attribute
+	 * @return - new PFLink object
+	 */
+	public PageflowLink createPFLink(PageflowNode start, PageflowNode target,
+			String action, String fromOutcome) {
+		Assert.isTrue(start != null && target != null);
+		PageflowLink link = null;
+		link = createPFLink(fromOutcome);
+		link.setFromaction(action);
+		link.setSource(start);
+		link.setTarget(target);
+		start.getOutlinks().add(link);
+		target.getInlinks().add(link);
+		return link;
+	}
+
+	/**
+	 * create a new PFLink object according to fromOutcome attribute
+	 * 
+	 * @param fromOutcome -
+	 *            PFLink's fromOutcome attribute
+	 * @return - new PFLink object
+	 */
+	public PageflowLink createPFLink(String fromOutcome) {
+		PageflowLink link = null;
+		link = PageflowModelManager.getFactory().createPFLink();
+		if (fromOutcome != null && fromOutcome.length() > 0) {
+			link.setOutcome(fromOutcome.trim());
 		}
-		return pf2FCSynchronizer;
+		pageflow.getLinks().add(link);
+		return link;
+	}
+
+	public ToViewIdType createFCToViewID(String value) {
+		ToViewIdType toView = FacesConfigFactory.eINSTANCE.createToViewIdType();
+		toView.setTextContent(value);
+		return toView;
 	}
 }

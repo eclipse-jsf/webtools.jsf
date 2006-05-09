@@ -22,7 +22,7 @@ import org.eclipse.jst.jsf.facesconfig.common.logging.Logger;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorResources;
 import org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PageflowNodeImpl;
 import org.eclipse.jst.jsf.facesconfig.ui.util.WebrootUtil;
 import org.eclipse.swt.widgets.Display;
@@ -91,7 +91,7 @@ public class OpenEditorCommand extends org.eclipse.gef.commands.Command {
 	 */
 	private void executeOpenPFPage() {
 		IWorkspaceRoot workspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
-		String pagePath = ((PFPage) (part.getModel())).getPath();
+		String pagePath = ((PageflowPage) (part.getModel())).getPath();
 
 		// Check the fileName is empty or not
 		if (pagePath != null && pagePath.length() > 0) {
@@ -169,7 +169,7 @@ public class OpenEditorCommand extends org.eclipse.gef.commands.Command {
 		} else
 		// otherwise, pop-up a error message box
 		{
-			String pagePath = ((PFPage) (part.getModel())).getPath();
+			String pagePath = ((PageflowPage) (part.getModel())).getPath();
 			// Pageflow.PageflowEditor.Alert.errorOpenEditor4JSFTitle = Open JSF
 			// File Error
 			// Pageflow.PageflowEditor.Alert.errorOpenEditor4JSFInfo = The JSF
@@ -217,7 +217,7 @@ public class OpenEditorCommand extends org.eclipse.gef.commands.Command {
 	 * Executes the OpenEditorCommand and opens the editor
 	 */
 	public void execute() {
-		if (part.getModel() instanceof PFPage) {
+		if (part.getModel() instanceof PageflowPage) {
 			executeOpenPFPage();
 		}
 

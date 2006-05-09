@@ -13,8 +13,8 @@
 package org.eclipse.jst.jsf.facesconfig.ui.pageflow.util;
 
 import org.eclipse.gef.requests.CreationFactory;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowFactory;
 
 /**
@@ -40,10 +40,10 @@ public class ModelCreationFactory implements CreationFactory {
 
 		Object result = null;
 
-		if (targetClass.equals(PFLink.class)) {
+		if (targetClass.equals(PageflowLink.class)) {
 			result = factory.createPFLink();
 
-		} else if (targetClass.equals(PFPage.class)) {
+		} else if (targetClass.equals(PageflowPage.class)) {
 			result = factory.createPFPage();
 		}
 

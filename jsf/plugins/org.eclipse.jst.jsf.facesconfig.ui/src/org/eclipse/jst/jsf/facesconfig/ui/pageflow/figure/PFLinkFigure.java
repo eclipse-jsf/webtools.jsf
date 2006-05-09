@@ -86,6 +86,7 @@ public class PFLinkFigure extends PolylineConnection {
 				setForegroundColor(getForegroundColor());
 				add(textLabel, new MidpointLocator(this, 1));
 			}
+			// textLabel.setVisible(true);
 			textLabel.setText(strLabel);
 		}
 	}
@@ -293,8 +294,7 @@ public class PFLinkFigure extends PolylineConnection {
 	 */
 	public Color getForegroundColor() {
 		IPreferenceStore store = EditorPlugin.getDefault().getPreferenceStore();
-		fgColor = GEMPreferences.getColor(store,
-				GEMPreferences.LINE_COLOR);
+		fgColor = GEMPreferences.getColor(store, GEMPreferences.LINE_COLOR);
 		return fgColor;
 	}
 

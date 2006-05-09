@@ -21,7 +21,7 @@ import org.eclipse.gef.commands.CompoundCommand;
 import org.eclipse.gef.ui.actions.SelectionAction;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorResources;
 import org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.ui.IWorkbenchPart;
 
 /**
@@ -82,7 +82,7 @@ public class OpenEditorAction extends SelectionAction {
 				return false;
 			}
 			EditPart part = (EditPart) o;
-			if (!(part.getModel() instanceof PFPage)) {
+			if (!(part.getModel() instanceof PageflowPage)) {
 				return false;
 			}
 		}

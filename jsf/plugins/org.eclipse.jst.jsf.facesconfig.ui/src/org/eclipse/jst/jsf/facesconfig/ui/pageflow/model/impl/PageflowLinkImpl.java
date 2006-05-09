@@ -33,9 +33,9 @@ import org.eclipse.jst.jsf.facesconfig.emf.LargeIconType;
 import org.eclipse.jst.jsf.facesconfig.emf.NavigationCaseType;
 import org.eclipse.jst.jsf.facesconfig.emf.RedirectType;
 import org.eclipse.jst.jsf.facesconfig.emf.SmallIconType;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage;
 
@@ -45,21 +45,22 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PFLinkImpl#getPageflow <em>Pageflow</em>}</li>
- * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PFLinkImpl#getTarget <em>Target</em>}</li>
- * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PFLinkImpl#getSource <em>Source</em>}</li>
- * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PFLinkImpl#getOutcome <em>Outcome</em>}</li>
- * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PFLinkImpl#isRedirect <em>Redirect</em>}</li>
- * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PFLinkImpl#getBendPoints <em>Bend Points</em>}</li>
- * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PFLinkImpl#getSmallicon <em>Smallicon</em>}</li>
- * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PFLinkImpl#getLargeicon <em>Largeicon</em>}</li>
+ * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PageflowLinkImpl#getPageflow <em>Pageflow</em>}</li>
+ * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PageflowLinkImpl#getTarget <em>Target</em>}</li>
+ * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PageflowLinkImpl#getSource <em>Source</em>}</li>
+ * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PageflowLinkImpl#getOutcome <em>Outcome</em>}</li>
+ * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PageflowLinkImpl#isRedirect <em>Redirect</em>}</li>
+ * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PageflowLinkImpl#getBendPoints <em>Bend Points</em>}</li>
+ * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PageflowLinkImpl#getSmallicon <em>Smallicon</em>}</li>
+ * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PageflowLinkImpl#getLargeicon <em>Largeicon</em>}</li>
  * </ul>
  * </p>
  * 
  * @generated
  * 
  */
-public class PFLinkImpl extends PageflowElementImpl implements PFLink {
+public class PageflowLinkImpl extends PageflowElementImpl implements
+		PageflowLink {
 	/**
 	 * The cached value of the '{@link #getTarget() <em>Target</em>}'
 	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -145,7 +146,7 @@ public class PFLinkImpl extends PageflowElementImpl implements PFLink {
 	 * 
 	 * @generated
 	 */
-	protected PFLinkImpl() {
+	protected PageflowLinkImpl() {
 		super();
 	}
 
@@ -349,7 +350,7 @@ public class PFLinkImpl extends PageflowElementImpl implements PFLink {
 	public EList getBendPoints() {
 		if (bendPoints == null) {
 			bendPoints = new EObjectContainmentWithInverseEList(
-					PFLinkBendpoint.class, this,
+					PageflowLinkBendpoint.class, this,
 					PageflowPackage.PF_LINK__BEND_POINTS,
 					PageflowPackage.PF_LINK_BENDPOINT__LINK);
 		}
@@ -687,7 +688,7 @@ public class PFLinkImpl extends PageflowElementImpl implements PFLink {
 	 * 
 	 * @generated NOT
 	 */
-	public void insertBendpoint(int index, PFLinkBendpoint point) {
+	public void insertBendpoint(int index, PageflowLinkBendpoint point) {
 		getBendPoints().add(index, point);
 
 		if (eNotificationRequired())
@@ -710,7 +711,7 @@ public class PFLinkImpl extends PageflowElementImpl implements PFLink {
 	 * 
 	 * @generated NOT
 	 */
-	public void setBendpoint(int index, PFLinkBendpoint point) {
+	public void setBendpoint(int index, PageflowLinkBendpoint point) {
 		getBendPoints().set(index, point);
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
@@ -739,9 +740,9 @@ public class PFLinkImpl extends PageflowElementImpl implements PFLink {
 	 */
 	public boolean isRedirect() {
 		boolean result = false;
-		if (getFCElements().size() > 0) {
-			RedirectType outcome = ((NavigationCaseType) getFCElements().get(0))
-					.getRedirect();
+		if (!getFCElements().isEmpty()) {
+			RedirectType outcome = ((NavigationCaseType) getFCElements()
+					.getData().get(0)).getRedirect();
 			if (outcome != null) {
 				result = true;
 			}
@@ -757,9 +758,9 @@ public class PFLinkImpl extends PageflowElementImpl implements PFLink {
 	public void setRedirect(boolean newRedirect) {
 		RedirectType redirect = null;
 		RedirectType oldRedirect = null;
-		if (getFCElements().size() > 0) {
-			oldRedirect = ((NavigationCaseType) getFCElements().get(0))
-					.getRedirect();
+		if (!getFCElements().isEmpty()) {
+			oldRedirect = ((NavigationCaseType) getFCElements().getData()
+					.get(0)).getRedirect();
 			if (!newRedirect) {
 				redirect = null;
 			} else {
@@ -768,12 +769,12 @@ public class PFLinkImpl extends PageflowElementImpl implements PFLink {
 							.createRedirectType();
 				}
 			}
-			((NavigationCaseType) getFCElements().get(0)).setRedirect(redirect);
+			((NavigationCaseType) getFCElements().getData().get(0))
+					.setRedirect(redirect);
 		}
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PageflowPackage.PF_LINK__REDIRECT, oldRedirect,
-					new Boolean(newRedirect)));
+					PageflowPackage.PF_LINK__REDIRECT, oldRedirect, redirect));
 	}
 
 	/**
@@ -783,9 +784,9 @@ public class PFLinkImpl extends PageflowElementImpl implements PFLink {
 	 */
 	public String getOutcome() {
 		String result = null;
-		if (getFCElements().size() > 0) {
+		if (!getFCElements().isEmpty()) {
 			FromOutcomeType outcome = ((NavigationCaseType) getFCElements()
-					.get(0)).getFromOutcome();
+					.getData().get(0)).getFromOutcome();
 			if (outcome != null) {
 				result = outcome.getTextContent();
 			}
@@ -800,18 +801,19 @@ public class PFLinkImpl extends PageflowElementImpl implements PFLink {
 	 */
 	public void setOutcome(String newValue) {
 		FromOutcomeType oldOutcome = null;
-		if (getFCElements().size() > 0) {
-			oldOutcome = ((NavigationCaseType) getFCElements().get(0))
+		FromOutcomeType newOutcome = null;
+		if (!getFCElements().isEmpty()) {
+			oldOutcome = ((NavigationCaseType) getFCElements().getData().get(0))
 					.getFromOutcome();
 			if (newValue == null || newValue.length() == 0) {
-				((NavigationCaseType) getFCElements().get(0))
+				((NavigationCaseType) getFCElements().getData().get(0))
 						.setFromOutcome(null);
 			} else {
 				if (oldOutcome == null) {
-					FromOutcomeType newOutcome = FacesConfigFactory.eINSTANCE
+					newOutcome = FacesConfigFactory.eINSTANCE
 							.createFromOutcomeType();
 					newOutcome.setTextContent(newValue);
-					((NavigationCaseType) getFCElements().get(0))
+					((NavigationCaseType) getFCElements().getData().get(0))
 							.setFromOutcome(newOutcome);
 				} else {
 					oldOutcome.setTextContent(newValue);
@@ -820,7 +822,7 @@ public class PFLinkImpl extends PageflowElementImpl implements PFLink {
 		}
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PageflowPackage.PF_LINK__OUTCOME, oldOutcome, newValue));
+					PageflowPackage.PF_LINK__OUTCOME, oldOutcome, newOutcome));
 	}
 
 	/**
@@ -830,8 +832,8 @@ public class PFLinkImpl extends PageflowElementImpl implements PFLink {
 	 */
 	public String getSmallicon() {
 		SmallIconType result = null;
-		if (getFCElements().size() > 0) {
-			List icons = ((NavigationCaseType) getFCElements().get(0))
+		if (!getFCElements().isEmpty()) {
+			List icons = ((NavigationCaseType) getFCElements().getData().get(0))
 					.getIcon();
 			if (icons.size() > 0) {
 				result = ((IconType) icons.get(0)).getSmallIcon();
@@ -849,8 +851,8 @@ public class PFLinkImpl extends PageflowElementImpl implements PFLink {
 		SmallIconType oldSmallicon = null;
 		SmallIconType newSmallIconType = null;
 		IconType icon = null;
-		if (getFCElements().size() > 0) {
-			List icons = ((NavigationCaseType) getFCElements().get(0))
+		if (!getFCElements().isEmpty()) {
+			List icons = ((NavigationCaseType) getFCElements().getData().get(0))
 					.getIcon();
 			if (newValue == null || newValue.length() == 0) {
 				if (icons.size() > 0) {
@@ -880,7 +882,8 @@ public class PFLinkImpl extends PageflowElementImpl implements PFLink {
 		}
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PageflowPackage.PF_LINK__SMALLICON, oldSmallicon, newValue));
+					PageflowPackage.PF_LINK__SMALLICON, oldSmallicon,
+					newSmallIconType));
 	}
 
 	/**
@@ -890,8 +893,8 @@ public class PFLinkImpl extends PageflowElementImpl implements PFLink {
 	 */
 	public String getLargeicon() {
 		LargeIconType result = null;
-		if (getFCElements().size() > 0) {
-			List icons = ((NavigationCaseType) getFCElements().get(0))
+		if (!getFCElements().isEmpty()) {
+			List icons = ((NavigationCaseType) getFCElements().getData().get(0))
 					.getIcon();
 			if (icons.size() > 0) {
 				result = ((IconType) icons.get(0)).getLargeIcon();
@@ -909,8 +912,8 @@ public class PFLinkImpl extends PageflowElementImpl implements PFLink {
 		LargeIconType oldLargeIcon = null;
 		LargeIconType newLargeIconType = null;
 		IconType icon = null;
-		if (getFCElements().size() > 0) {
-			List icons = ((NavigationCaseType) getFCElements().get(0))
+		if (!getFCElements().isEmpty()) {
+			List icons = ((NavigationCaseType) getFCElements().getData().get(0))
 					.getIcon();
 			if (newValue == null || newValue.length() == 0) {
 				if (icons.size() > 0) {
@@ -940,7 +943,8 @@ public class PFLinkImpl extends PageflowElementImpl implements PFLink {
 		}
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PageflowPackage.PF_LINK__LARGEICON, oldLargeIcon, newValue));
+					PageflowPackage.PF_LINK__LARGEICON, oldLargeIcon,
+					newLargeIconType));
 	}
 
 	/**
@@ -950,9 +954,9 @@ public class PFLinkImpl extends PageflowElementImpl implements PFLink {
 	 */
 	public String getFromaction() {
 		String result = null;
-		if (getFCElements().size() > 0) {
+		if (!getFCElements().isEmpty()) {
 			FromActionType fromActionType = ((NavigationCaseType) getFCElements()
-					.get(0)).getFromAction();
+					.getData().get(0)).getFromAction();
 			if (fromActionType != null) {
 				result = fromActionType.getTextContent();
 			}
@@ -967,19 +971,20 @@ public class PFLinkImpl extends PageflowElementImpl implements PFLink {
 	 */
 	public void setFromaction(String newFromaction) {
 		FromActionType oldFromActionType = null;
-		if (getFCElements().size() > 0) {
-			oldFromActionType = ((NavigationCaseType) getFCElements().get(0))
-					.getFromAction();
+		FromActionType newFromActionType = null;
+		if (!getFCElements().isEmpty()) {
+			oldFromActionType = ((NavigationCaseType) getFCElements().getData()
+					.get(0)).getFromAction();
 			if (newFromaction == null || newFromaction.length() == 0) {
-				((NavigationCaseType) getFCElements().get(0))
+				((NavigationCaseType) getFCElements().getData().get(0))
 						.setFromAction(null);
 			} else {
 				if (oldFromActionType == null) {
-					oldFromActionType = FacesConfigFactory.eINSTANCE
+					newFromActionType = FacesConfigFactory.eINSTANCE
 							.createFromActionType();
-					oldFromActionType.setTextContent(newFromaction);
-					((NavigationCaseType) getFCElements().get(0))
-							.setFromAction(oldFromActionType);
+					newFromActionType.setTextContent(newFromaction);
+					((NavigationCaseType) getFCElements().getData().get(0))
+							.setFromAction(newFromActionType);
 				} else {
 					oldFromActionType.setTextContent(newFromaction);
 				}
@@ -988,7 +993,7 @@ public class PFLinkImpl extends PageflowElementImpl implements PFLink {
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
 					PageflowPackage.PF_LINK__FROMACTION, oldFromActionType,
-					newFromaction));
+					newFromActionType));
 	}
 
 }

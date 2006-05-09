@@ -16,7 +16,7 @@ import java.util.List;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowNodeEditPart;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PFPageImpl;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PageflowPageImpl;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.section.PageSection;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.wst.common.ui.properties.internal.provisional.ISection;
@@ -87,7 +87,7 @@ public class PageSectionDescriptor implements ISectionDescriptor {
 			object = structuredSelection.getFirstElement();
 			if (object instanceof PageflowNodeEditPart) {
 				Object model = ((PageflowNodeEditPart) object).getModel();
-				if (model instanceof PFPageImpl) {
+				if (model instanceof PageflowPageImpl) {
 					return true;
 				}
 			}

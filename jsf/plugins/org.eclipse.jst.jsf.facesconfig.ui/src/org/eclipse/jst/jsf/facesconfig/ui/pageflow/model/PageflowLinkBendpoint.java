@@ -21,12 +21,12 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint#getD1Width <em>D1 Width</em>}</li>
- * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint#getD1Height <em>D1 Height</em>}</li>
- * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint#getD2Width <em>D2 Width</em>}</li>
- * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint#getD2Height <em>D2 Height</em>}</li>
- * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint#getWeight <em>Weight</em>}</li>
- * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint#getLink <em>Link</em>}</li>
+ * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint#getD1Width <em>D1 Width</em>}</li>
+ * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint#getD1Height <em>D1 Height</em>}</li>
+ * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint#getD2Width <em>D2 Width</em>}</li>
+ * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint#getD2Height <em>D2 Height</em>}</li>
+ * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint#getWeight <em>Weight</em>}</li>
+ * <li>{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint#getLink <em>Link</em>}</li>
  * </ul>
  * </p>
  * 
@@ -34,7 +34,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface PFLinkBendpoint extends EObject {
+public interface PageflowLinkBendpoint extends EObject {
 	/**
 	 * Returns the value of the '<em><b>D1 Width</b></em>' attribute. <!--
 	 * begin-user-doc -->
@@ -53,7 +53,7 @@ public interface PFLinkBendpoint extends EObject {
 	int getD1Width();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint#getD1Width <em>D1 Width</em>}'
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint#getD1Width <em>D1 Width</em>}'
 	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value
@@ -81,7 +81,7 @@ public interface PFLinkBendpoint extends EObject {
 	int getD1Height();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint#getD1Height <em>D1 Height</em>}'
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint#getD1Height <em>D1 Height</em>}'
 	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value
@@ -109,7 +109,7 @@ public interface PFLinkBendpoint extends EObject {
 	int getD2Width();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint#getD2Width <em>D2 Width</em>}'
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint#getD2Width <em>D2 Width</em>}'
 	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value
@@ -137,7 +137,7 @@ public interface PFLinkBendpoint extends EObject {
 	int getD2Height();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint#getD2Height <em>D2 Height</em>}'
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint#getD2Height <em>D2 Height</em>}'
 	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value
@@ -165,7 +165,7 @@ public interface PFLinkBendpoint extends EObject {
 	float getWeight();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint#getWeight <em>Weight</em>}'
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint#getWeight <em>Weight</em>}'
 	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value
@@ -177,7 +177,7 @@ public interface PFLinkBendpoint extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Link</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink#getBendPoints <em>Bend Points</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#getBendPoints <em>Bend Points</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Link</em>' container reference isn't
@@ -186,16 +186,16 @@ public interface PFLinkBendpoint extends EObject {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Link</em>' container reference.
-	 * @see #setLink(PFLink)
+	 * @see #setLink(PageflowLink)
 	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage#getPFLinkBendpoint_Link()
-	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink#getBendPoints
+	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#getBendPoints
 	 * @model opposite="bendPoints" required="true"
 	 * @generated
 	 */
-	PFLink getLink();
+	PageflowLink getLink();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint#getLink <em>Link</em>}'
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint#getLink <em>Link</em>}'
 	 * container reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value
@@ -203,7 +203,7 @@ public interface PFLinkBendpoint extends EObject {
 	 * @see #getLink()
 	 * @generated
 	 */
-	void setLink(PFLink value);
+	void setLink(PageflowLink value);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->

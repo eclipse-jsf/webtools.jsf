@@ -17,7 +17,7 @@ import java.util.List;
 
 import org.eclipse.gef.commands.Command;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorResources;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
 
@@ -95,7 +95,7 @@ public class DeleteNodeCommand extends Command {
 			// Note:should save the source and target of the link, otherwise
 			// source and target will be lost,
 			// when the source and target node remove the link.
-			PFLink link = (PFLink) node.getOutlinks().get(0);
+			PageflowLink link = (PageflowLink) node.getOutlinks().get(0);
 			sourceConnections.add(link);
 			sourceConnectionSources.add(link.getSource());
 			sourceConnectionTargets.add(link.getTarget());
@@ -109,7 +109,7 @@ public class DeleteNodeCommand extends Command {
 			// Note: should save the source and target of the link, otherwise
 			// source and target will be lost,
 			// when the source and target node remove the link.
-			PFLink link = (PFLink) node.getInlinks().get(0);
+			PageflowLink link = (PageflowLink) node.getInlinks().get(0);
 			targetConnections.add(link);
 			targetConnectionSources.add(link.getSource());
 			targetConnectionTargets.add(link.getTarget());
@@ -140,7 +140,7 @@ public class DeleteNodeCommand extends Command {
 	private void restoreConnections(PageflowNode node) {
 		for (int i = 0; i < sourceConnections.size(); i++) {
 			// restore the link with the source and target
-			PFLink link = (PFLink) sourceConnections.get(i);
+			PageflowLink link = (PageflowLink) sourceConnections.get(i);
 			PageflowNode source = (PageflowNode) sourceConnectionSources.get(i);
 			PageflowNode target = (PageflowNode) sourceConnectionTargets.get(i);
 			link.setSource(source);
@@ -153,7 +153,7 @@ public class DeleteNodeCommand extends Command {
 		sourceConnections.clear();
 		for (int i = 0; i < targetConnections.size(); i++) {
 			// restore the link with the source and target
-			PFLink link = (PFLink) targetConnections.get(i);
+			PageflowLink link = (PageflowLink) targetConnections.get(i);
 			PageflowNode source = (PageflowNode) targetConnectionSources.get(i);
 			PageflowNode target = (PageflowNode) targetConnectionTargets.get(i);
 			link.setSource(source);

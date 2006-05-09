@@ -14,7 +14,7 @@ package org.eclipse.jst.jsf.facesconfig.ui.pageflow.util;
 
 import org.eclipse.jst.jsf.facesconfig.emf.NavigationCaseType;
 import org.eclipse.jst.jsf.facesconfig.emf.NavigationRuleType;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 
 /**
  * This class stores the relationship between link and navigation rules.
@@ -28,10 +28,10 @@ public class LinkNavigationRule {
 	private NavigationCaseType navigationCase = null;
 
 	/** the first pflink */
-	private PFLink firstLink = null;
+	private PageflowLink firstLink = null;
 
 	/** the second pflink, maybe is null */
-	private PFLink secondLink = null;
+	private PageflowLink secondLink = null;
 
 	/**
 	 * get the generated navigation rule for this link.
@@ -69,7 +69,7 @@ public class LinkNavigationRule {
 	 * @param link
 	 * @param nextLink
 	 */
-	public void setLinks(PFLink firstlink, PFLink secondLink) {
+	public void setLinks(PageflowLink firstlink, PageflowLink secondLink) {
 		this.firstLink = firstlink;
 		this.secondLink = secondLink;
 	}
@@ -79,7 +79,7 @@ public class LinkNavigationRule {
 	 * 
 	 * @return - the first link
 	 */
-	public PFLink getFirstLink() {
+	public PageflowLink getFirstLink() {
 		return firstLink;
 	}
 
@@ -88,7 +88,7 @@ public class LinkNavigationRule {
 	 * 
 	 * @return - the second link
 	 */
-	public PFLink getSecondLink() {
+	public PageflowLink getSecondLink() {
 		return secondLink;
 	}
 

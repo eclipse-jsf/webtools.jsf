@@ -389,10 +389,10 @@ public interface PageflowPackage extends EPackage {
 	int PAGEFLOW_NODE_FEATURE_COUNT = PAGEFLOW_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PFLinkImpl <em>PF Link</em>}'
+	 * The meta object id for the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PageflowLinkImpl <em>PF Link</em>}'
 	 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PFLinkImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PageflowLinkImpl
 	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PageflowPackageImpl#getPFLink()
 	 * @generated
 	 */
@@ -561,10 +561,10 @@ public interface PageflowPackage extends EPackage {
 	int PF_LINK_FEATURE_COUNT = PAGEFLOW_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PFPageImpl <em>PF Page</em>}'
+	 * The meta object id for the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PageflowPageImpl <em>PF Page</em>}'
 	 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PFPageImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PageflowPageImpl
 	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PageflowPackageImpl#getPFPage()
 	 * @generated
 	 */
@@ -697,10 +697,10 @@ public interface PageflowPackage extends EPackage {
 	int PF_PAGE_FEATURE_COUNT = PAGEFLOW_NODE_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PFLinkBendpointImpl <em>PF Link Bendpoint</em>}'
+	 * The meta object id for the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PageflowLinkBendpointImpl <em>PF Link Bendpoint</em>}'
 	 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PFLinkBendpointImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PageflowLinkBendpointImpl
 	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PageflowPackageImpl#getPFLinkBendpoint()
 	 * @generated
 	 */
@@ -856,76 +856,76 @@ public interface PageflowPackage extends EPackage {
 	EReference getPageflowNode_Inlinks();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink <em>PF Link</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink <em>PF Link</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>PF Link</em>'.
-	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink
+	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink
 	 * @generated
 	 */
 	EClass getPFLink();
 
 	/**
-	 * Returns the meta object for the container reference '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink#getPageflow <em>Pageflow</em>}'.
+	 * Returns the meta object for the container reference '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#getPageflow <em>Pageflow</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the container reference '<em>Pageflow</em>'.
-	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink#getPageflow()
+	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#getPageflow()
 	 * @see #getPFLink()
 	 * @generated
 	 */
 	EReference getPFLink_Pageflow();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink#getTarget <em>Target</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#getTarget <em>Target</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Target</em>'.
-	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink#getTarget()
+	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#getTarget()
 	 * @see #getPFLink()
 	 * @generated
 	 */
 	EReference getPFLink_Target();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink#getSource <em>Source</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#getSource <em>Source</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Source</em>'.
-	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink#getSource()
+	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#getSource()
 	 * @see #getPFLink()
 	 * @generated
 	 */
 	EReference getPFLink_Source();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink#getOutcome <em>Outcome</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#getOutcome <em>Outcome</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Outcome</em>'.
-	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink#getOutcome()
+	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#getOutcome()
 	 * @see #getPFLink()
 	 * @generated
 	 */
 	EAttribute getPFLink_Outcome();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink#isRedirect <em>Redirect</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#isRedirect <em>Redirect</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Redirect</em>'.
-	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink#isRedirect()
+	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#isRedirect()
 	 * @see #getPFLink()
 	 * @generated
 	 */
 	EAttribute getPFLink_Redirect();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink#getBendPoints <em>Bend Points</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#getBendPoints <em>Bend Points</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference list '<em>Bend Points</em>'.
-	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink#getBendPoints()
+	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#getBendPoints()
 	 * @see #getPFLink()
 	 * @generated
 	 */
@@ -1019,119 +1019,119 @@ public interface PageflowPackage extends EPackage {
 	EAttribute getPageflowElement_Id();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage <em>PF Page</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage <em>PF Page</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>PF Page</em>'.
-	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage
+	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage
 	 * @generated
 	 */
 	EClass getPFPage();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage#getPath <em>Path</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage#getPath <em>Path</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Path</em>'.
-	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage#getPath()
+	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage#getPath()
 	 * @see #getPFPage()
 	 * @generated
 	 */
 	EAttribute getPFPage_Path();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage#getSmallicon <em>Smallicon</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage#getSmallicon <em>Smallicon</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Smallicon</em>'.
-	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage#getSmallicon()
+	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage#getSmallicon()
 	 * @see #getPFPage()
 	 * @generated
 	 */
 	EAttribute getPFPage_Smallicon();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage#getLargeicon <em>Largeicon</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage#getLargeicon <em>Largeicon</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Largeicon</em>'.
-	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage#getLargeicon()
+	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage#getLargeicon()
 	 * @see #getPFPage()
 	 * @generated
 	 */
 	EAttribute getPFPage_Largeicon();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint <em>PF Link Bendpoint</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint <em>PF Link Bendpoint</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>PF Link Bendpoint</em>'.
-	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint
+	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint
 	 * @generated
 	 */
 	EClass getPFLinkBendpoint();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint#getD1Width <em>D1 Width</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint#getD1Width <em>D1 Width</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>D1 Width</em>'.
-	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint#getD1Width()
+	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint#getD1Width()
 	 * @see #getPFLinkBendpoint()
 	 * @generated
 	 */
 	EAttribute getPFLinkBendpoint_D1Width();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint#getD1Height <em>D1 Height</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint#getD1Height <em>D1 Height</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>D1 Height</em>'.
-	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint#getD1Height()
+	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint#getD1Height()
 	 * @see #getPFLinkBendpoint()
 	 * @generated
 	 */
 	EAttribute getPFLinkBendpoint_D1Height();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint#getD2Width <em>D2 Width</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint#getD2Width <em>D2 Width</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>D2 Width</em>'.
-	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint#getD2Width()
+	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint#getD2Width()
 	 * @see #getPFLinkBendpoint()
 	 * @generated
 	 */
 	EAttribute getPFLinkBendpoint_D2Width();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint#getD2Height <em>D2 Height</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint#getD2Height <em>D2 Height</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>D2 Height</em>'.
-	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint#getD2Height()
+	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint#getD2Height()
 	 * @see #getPFLinkBendpoint()
 	 * @generated
 	 */
 	EAttribute getPFLinkBendpoint_D2Height();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint#getWeight <em>Weight</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint#getWeight <em>Weight</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Weight</em>'.
-	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint#getWeight()
+	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint#getWeight()
 	 * @see #getPFLinkBendpoint()
 	 * @generated
 	 */
 	EAttribute getPFLinkBendpoint_Weight();
 
 	/**
-	 * Returns the meta object for the container reference '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint#getLink <em>Link</em>}'.
+	 * Returns the meta object for the container reference '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint#getLink <em>Link</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the container reference '<em>Link</em>'.
-	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint#getLink()
+	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint#getLink()
 	 * @see #getPFLinkBendpoint()
 	 * @generated
 	 */

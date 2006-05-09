@@ -11,9 +11,6 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -21,6 +18,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.synchronization.RefElement;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Element</b></em>'.
@@ -47,6 +45,8 @@ public abstract class PageflowElementImpl extends EObjectImpl implements
 	protected String id;
 
 	protected static int counter = 0;
+
+	private RefElement refElement;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -222,7 +222,7 @@ public abstract class PageflowElementImpl extends EObjectImpl implements
 	 * @generated
 	 */
 	public String getName() {
-		return name;
+		return name == null || name.length() == 0 ? NAME_EDEFAULT : name;
 	}
 
 	/**
@@ -566,11 +566,21 @@ public abstract class PageflowElementImpl extends EObjectImpl implements
 		return result.toString();
 	}
 
-	private List fcElements = new ArrayList();
-
-	public List getFCElements() {
-		// TODO Auto-generated method stub
-		return fcElements;
+	/**
+	 * The synchronizer will use this to notify adapters for the faces-config's
+	 * modification.
+	 */
+	public void notifyModelChanged(Notification notification) {
+		if (eNotificationRequired())
+			eNotify(notification);
 	}
+
+	public RefElement getFCElements() {
+		if (refElement == null) {
+			refElement = new RefElement(this);
+		}
+		return refElement;
+	}
+
 }
 // PageflowElementImpl

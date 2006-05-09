@@ -19,7 +19,7 @@ import org.eclipse.gef.editparts.AbstractTreeEditPart;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.IconResources;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.PageflowElementPropertySource;
 import org.eclipse.swt.graphics.Image;
@@ -65,7 +65,7 @@ public class PageflowElementTreeEditPart extends AbstractTreeEditPart implements
 	public static Image getImage(PageflowElement element) {
 		ImageDescriptor imageDescriptor = null;
 
-		if (element instanceof PFPage) {
+		if (element instanceof PageflowPage) {
 			imageDescriptor = IMG_PAGE;
 		} else {
 			imageDescriptor = IMG_NODE;

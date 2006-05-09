@@ -15,7 +15,7 @@ package org.eclipse.jst.jsf.facesconfig.ui.pageflow.command;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorResources;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.layout.PageflowLayoutManager;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowValidation;
@@ -39,7 +39,7 @@ public class ConnectionCommand extends Command {
 	protected PageflowNode target;
 
 	/** pageflow link */
-	protected PFLink link;
+	protected PageflowLink link;
 
 	public ConnectionCommand() {
 		// Pageflow.Commands.ConnectionCommand.Label = Connection
@@ -255,7 +255,7 @@ public class ConnectionCommand extends Command {
 	 * 
 	 * @return - the pageflow link.
 	 */
-	public PFLink getPFLink() {
+	public PageflowLink getPFLink() {
 		return link;
 	}
 
@@ -285,7 +285,7 @@ public class ConnectionCommand extends Command {
 	 * @param link -
 	 *            new pageflow link
 	 */
-	public void setPFLink(PFLink link) {
+	public void setPFLink(PageflowLink link) {
 		this.link = link;
 		oldSource = link.getSource();
 		oldTarget = link.getTarget();

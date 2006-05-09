@@ -14,9 +14,9 @@ package org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLinkBendpoint;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFPage;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowFactory;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage;
@@ -75,8 +75,8 @@ public class PageflowFactoryImpl extends EFactoryImpl implements
 	 * 
 	 * @generated
 	 */
-	public PFLink createPFLink() {
-		PFLinkImpl pfLink = new PFLinkImpl();
+	public PageflowLink createPFLink() {
+		PageflowLinkImpl pfLink = new PageflowLinkImpl();
 		return pfLink;
 	}
 
@@ -85,8 +85,8 @@ public class PageflowFactoryImpl extends EFactoryImpl implements
 	 * 
 	 * @generated
 	 */
-	public PFPage createPFPage() {
-		PFPageImpl pfPage = new PFPageImpl();
+	public PageflowPage createPFPage() {
+		PageflowPageImpl pfPage = new PageflowPageImpl();
 		return pfPage;
 	}
 
@@ -95,8 +95,8 @@ public class PageflowFactoryImpl extends EFactoryImpl implements
 	 * 
 	 * @generated
 	 */
-	public PFLinkBendpoint createPFLinkBendpoint() {
-		PFLinkBendpointImpl pfLinkBendpoint = new PFLinkBendpointImpl();
+	public PageflowLinkBendpoint createPFLinkBendpoint() {
+		PageflowLinkBendpointImpl pfLinkBendpoint = new PageflowLinkBendpointImpl();
 		return pfLinkBendpoint;
 	}
 

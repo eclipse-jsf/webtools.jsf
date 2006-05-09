@@ -55,8 +55,8 @@ public interface Pageflow extends PageflowElement {
 	/**
 	 * Returns the value of the '<em><b>Links</b></em>' containment
 	 * reference list. The list contents are of type
-	 * {@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink}. It
-	 * is bidirectional and its opposite is '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink#getPageflow <em>Pageflow</em>}'.
+	 * {@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink}. It
+	 * is bidirectional and its opposite is '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#getPageflow <em>Pageflow</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Links</em>' containment reference list
@@ -66,7 +66,7 @@ public interface Pageflow extends PageflowElement {
 	 * 
 	 * @return the value of the '<em>Links</em>' containment reference list.
 	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage#getPageflow_Links()
-	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink#getPageflow
+	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#getPageflow
 	 * @model type="org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink"
 	 *        opposite="pageflow" containment="true"
 	 * @generated
@@ -105,7 +105,7 @@ public interface Pageflow extends PageflowElement {
 	 * 
 	 * @generated NOT
 	 */
-	public void connect(PageflowNode source, PageflowNode target, PFLink link);
+	public void connect(PageflowNode source, PageflowNode target, PageflowLink link);
 
 	/**
 	 * 

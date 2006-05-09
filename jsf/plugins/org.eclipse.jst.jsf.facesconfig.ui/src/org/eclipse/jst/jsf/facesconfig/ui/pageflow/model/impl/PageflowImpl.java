@@ -18,14 +18,16 @@ import java.util.Iterator;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowValidation;
@@ -127,8 +129,8 @@ public class PageflowImpl extends PageflowElementImpl implements Pageflow {
 	 */
 	public EList getLinks() {
 		if (links == null) {
-			links = new EObjectContainmentWithInverseEList(PFLink.class, this,
-					PageflowPackage.PAGEFLOW__LINKS,
+			links = new EObjectContainmentWithInverseEList(PageflowLink.class,
+					this, PageflowPackage.PAGEFLOW__LINKS,
 					PageflowPackage.PF_LINK__PAGEFLOW);
 		}
 		return links;
@@ -229,7 +231,7 @@ public class PageflowImpl extends PageflowElementImpl implements Pageflow {
 			return getConfigfile();
 		}
 		return super.eGet(eFeature, resolve);// eDynamicGet(eFeature,
-												// resolve);
+		// resolve);
 	}
 
 	/**
@@ -372,7 +374,8 @@ public class PageflowImpl extends PageflowElementImpl implements Pageflow {
 	 * 
 	 * @generated NOT
 	 */
-	public void connect(PageflowNode source, PageflowNode target, PFLink link) {
+	public void connect(PageflowNode source, PageflowNode target,
+			PageflowLink link) {
 		if (link != null) {
 			if (PageflowValidation.getInstance().isValidLinkForCreation(source,
 					target)) {
@@ -400,7 +403,7 @@ public class PageflowImpl extends PageflowElementImpl implements Pageflow {
 	private HashMap getNodePrefixMap() {
 		if (mapNodePrefix == null) {
 			mapNodePrefix = new HashMap();
-			mapNodePrefix.put(PFPageImpl.class, new String("Page"));
+			mapNodePrefix.put(PageflowPageImpl.class, new String("Page"));
 		}
 		return mapNodePrefix;
 	}
@@ -449,5 +452,18 @@ public class PageflowImpl extends PageflowElementImpl implements Pageflow {
 	public void setSSEModel(IDOMModel model) {
 		_sseModel = model;
 	}
+
+	public void notifyModelChanged(Notification notification) {
+		TreeIterator children = eAllContents();
+		while (children.hasNext()) {
+			Object next = children.next();
+			if (next instanceof PageflowElement) {
+				((PageflowElement) next).getFCElements().update();
+			}
+		}
+		getFCElements().update();
+		super.notifyModelChanged(notification);
+	}
+
 }
 // PageflowImpl
