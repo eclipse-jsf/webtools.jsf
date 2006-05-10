@@ -212,7 +212,7 @@ public class GEMPreferences extends FieldEditorPreferencePage implements
 				.getFontData());
 		store.setDefault(LINE_WIDTH, 1);
 		store.setDefault(LINE_ROUTING, getLineRoutingLabels()[0][1]);
-		store.setDefault(SHOW_LINE_LABELS, false);
+		store.setDefault(SHOW_LINE_LABELS, true);
 		PreferenceConverter.setDefault(store, LINE_COLOR, new RGB(0, 0, 0));
 		PreferenceConverter.setDefault(store, LINE_LABEL_COLOR, new RGB(255,
 				255, 255));
