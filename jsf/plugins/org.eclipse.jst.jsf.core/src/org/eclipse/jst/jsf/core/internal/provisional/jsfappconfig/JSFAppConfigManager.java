@@ -217,6 +217,10 @@ public class JSFAppConfigManager {
 	 * {@link IJSFAppConfigLocater} implementations.
 	 */
 	protected void populateConfigLocaters() {
+		//implicit runtime-provided configuration
+		IJSFAppConfigLocater implicitRuntimeConfigLocater = new ImplicitRuntimeJSFAppConfigLocater();
+		implicitRuntimeConfigLocater.setJSFAppConfigManager(this);
+		configLocaters.add(implicitRuntimeConfigLocater);
 		//default ("/WEB-INF/faces-config.xml") locater
 		IJSFAppConfigLocater defaultConfigLocater = new DefaultJSFAppConfigLocater();
 		defaultConfigLocater.setJSFAppConfigManager(this);
