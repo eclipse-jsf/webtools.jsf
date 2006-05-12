@@ -10,7 +10,9 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
 import org.eclipse.jst.jsf.metadata.tests.Activator;
+import org.eclipse.jst.jsf.metadataprocessors.internal.AttributeValueRuntimeTypeFactory;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.IMetaDataEnabledFeature;
+import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.ITypeDescriptor;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.MetaDataEnabledProcessingFactory;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.ICreateValues;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IDefaultValue;
@@ -76,13 +78,17 @@ public class TaglibProcessingTestCase extends TestCase {
 		Iterator it = processors.iterator();
 		while(it.hasNext()){
 			IMetaDataEnabledFeature feature = (IMetaDataEnabledFeature)it.next();
-			if (feature.getFeatureImplementer().getBundleID().equals(bundleID)){
+			if (feature.getBundleID().equals(bundleID)){
 				ret = feature;
 				break;
 			}
 		}
 		return ret;
 	}
+	private ITypeDescriptor getType(String typeId){
+		return AttributeValueRuntimeTypeFactory.getInstance().getType(typeId);
+	}
+	
 	protected IMetaDataEnabledFeature getBarkProcessingBundle(List processors) {
 		return getProcessorForBundle(processors, barkerBundle);		
 	}

@@ -14,7 +14,9 @@ public class BooleanTypeTest extends TaglibProcessingTestCase {
 		Assert.assertFalse(possibleValueAdapters.isEmpty());
 		IPossibleValues pv =(IPossibleValues)getProcessorForTaglibProcessingBundle(possibleValueAdapters);
 		Assert.assertTrue(pv.getPossibleValues().size() == 2);
+	
 		
+		//why has this changed?
 		//as the tests have added a second impl of IPossibleVals check
 		pv =(IPossibleValues)getBarkProcessingBundle(possibleValueAdapters);
 		Assert.assertNotNull(pv);

@@ -19,9 +19,9 @@ public class AttributeValueRuntimeTypeFactoryTests extends TestCase {
 		
 		ITypeDescriptor atype = factory.getType(AttributeValueRuntimeTypesRegistryTests.BOOLEANTYPE_ID);
 		Assert.assertNotNull(atype);
-		Assert.assertNotNull(atype.getRuntimeType().getClassName());
-		Assert.assertTrue(atype.getRuntimeType().getBundleID().equals(Activator.ID_BUNDLE));		
-		Assert.assertTrue(atype.getRuntimeType().getTypeID().equals(AttributeValueRuntimeTypesRegistryTests.BOOLEANTYPE_ID));
+		Assert.assertNotNull(atype.getTypeExtension().getClassName());
+		Assert.assertTrue(atype.getTypeExtension().getBundleID().equals(Activator.ID_BUNDLE));		
+		Assert.assertTrue(atype.getTypeExtension().getTypeID().equals(AttributeValueRuntimeTypesRegistryTests.BOOLEANTYPE_ID));
 //		List features =  atype.getFeatureAdapters(IPossibleValues.class);
 //		Assert.assertNotNull(features);
 //		Assert.assertFalse(features.isEmpty());
@@ -29,9 +29,9 @@ public class AttributeValueRuntimeTypeFactoryTests extends TestCase {
 		
 		atype = factory.getType(AttributeValueRuntimeTypesRegistryTests.STRINGARRAYTYPE_ID);
 		Assert.assertNotNull(atype);
-		Assert.assertNotNull(atype.getRuntimeType().getClassName());
-		Assert.assertTrue(atype.getRuntimeType().getBundleID().equals(Activator.ID_BUNDLE));		
-		Assert.assertTrue(atype.getRuntimeType().getTypeID().equals(AttributeValueRuntimeTypesRegistryTests.STRINGARRAYTYPE_ID));
+		Assert.assertNotNull(atype.getTypeExtension().getClassName());
+		Assert.assertTrue(atype.getTypeExtension().getBundleID().equals(Activator.ID_BUNDLE));		
+		Assert.assertTrue(atype.getTypeExtension().getTypeID().equals(AttributeValueRuntimeTypesRegistryTests.STRINGARRAYTYPE_ID));
 
 	}
 	
@@ -41,8 +41,8 @@ public class AttributeValueRuntimeTypeFactoryTests extends TestCase {
 		
 		ITypeDescriptor atype = factory.getType(AttributeValueRuntimeTypesRegistryTests.NOIMPLTYPE_ID);
 		Assert.assertNotNull(atype);
-		Assert.assertNotNull(atype.getRuntimeType().getClassName());
-		Assert.assertTrue(atype.getRuntimeType().getBundleID().equals(Activator.ID_BUNDLE));	
+		Assert.assertNotNull(atype.getTypeExtension().getClassName());
+		Assert.assertTrue(atype.getTypeExtension().getBundleID().equals(Activator.ID_BUNDLE));	
 		
 	}
 
