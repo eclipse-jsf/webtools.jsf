@@ -30,6 +30,8 @@ Export-Package: org.eclipse.jst.jsf.core.internal;x-friends:="org.eclipse.jst.js
  org.eclipse.jst.jsf.core.internal.jsflibraryregistry.adapter;x-friends:="org.eclipse.jst.jsf.core.tests,org.eclipse.jst.jsf.ui,org.eclipse.jst.jsf.ui.tests",
  org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl;x-friends:="org.eclipse.jst.jsf.core.tests,org.eclipse.jst.jsf.ui,org.eclipse.jst.jsf.ui.tests",
  org.eclipse.jst.jsf.core.internal.jsflibraryregistry.util;x-friends:="org.eclipse.jst.jsf.core.tests,org.eclipse.jst.jsf.ui,org.eclipse.jst.jsf.ui.tests",
+ org.eclipse.jst.jsf.core.internal.launch,
  org.eclipse.jst.jsf.core.internal.project.facet;x-friends:="org.eclipse.jst.jsf.core.tests,org.eclipse.jst.jsf.ui,org.eclipse.jst.jsf.ui.tests",
  org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig,
+ org.eclipse.jst.jsf.core.internal.types,
  org.eclipse.jst.jsf.core.jsflibraryregistry

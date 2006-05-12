@@ -1,6 +1,7 @@
 package org.eclipse.jst.jsf.core.internal.types;
 
 
+
 /**
  * Encapsulates the runtime type or types of a JSF entity in a 
  * way that can be compared to other entities
@@ -10,6 +11,10 @@ package org.eclipse.jst.jsf.core.internal.types;
  */
 public class CompositeType 
 {
+    /**
+     * Type is none: it cannot be assigned to.  method binding.
+     */
+    public static int  ASSIGNMENT_TYPE_NONE = 0x0;
     /**
      * Type is lhs: it can be assigned to
      */
@@ -68,6 +73,20 @@ public class CompositeType
     {
         return matchesRHS(_assignmentType);
     }
-
     
+    public String toString(){
+    	StringBuffer buf = new StringBuffer();
+    	for(int i=0;i<_signatures.length;i++){
+    		buf.append(_signatures[i]).append(",");
+    		if (i != _signatures.length-1)
+    			buf.append(",");
+    	}
+    	if (isLHS())
+    		buf.append(":LHS ");
+    	if (isRHS())
+    		buf.append(":RHS ");
+
+    	return buf.append(super.toString()).toString() ;    	
+    		
+    }
 }
