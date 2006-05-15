@@ -16,13 +16,17 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.QualifiedName;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
+import org.eclipse.jst.jsf.facesconfig.emf.FromViewIdType;
+import org.eclipse.jst.jsf.facesconfig.emf.NavigationRuleType;
 import org.eclipse.wst.common.project.facet.core.IFacetedProject;
 import org.eclipse.wst.common.project.facet.core.IProjectFacet;
 import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
@@ -401,6 +405,80 @@ public class JSFAppConfigManager {
 			allConverters.addAll(converters);
 		}
 		return allConverters;
+	}
+
+	/**
+	 * Gets list of all NavigationRuleType instances from all known
+	 * faces-config models; list may be empty.
+	 * 
+	 * @return List of all NavigationRuleType instances from all known
+	 * faces-config models (list may be empty).
+	 */
+	public List getNavigationRules() {
+		List allNavigationRules = new ArrayList();
+		List facesConfigs = getFacesConfigModels();
+		Iterator itFacesConfigs = facesConfigs.iterator();
+		while (itFacesConfigs.hasNext()) {
+			FacesConfigType facesConfig = (FacesConfigType)itFacesConfigs.next();
+			EList navigationRules = facesConfig.getNavigationRule();
+			allNavigationRules.addAll(navigationRules);
+		}
+		return allNavigationRules;
+	}
+
+	/**
+	 * Gets list of all NavigationRuleType instances from all known
+	 * faces-config models where the navigation-rule's from-view-id value
+	 * matches the web content folder-relative value of the passed IFile
+	 * instance; list may be empty. Matching is performed in the same manner
+	 * as for a JSF implementation's default NavigationHandler.
+	 * 
+	 * @param pageFile IFile instance to match against the from-view-id value
+	 * of all NavigationRuleType instances. File is assumed to be relative to
+	 * the web content folder, but may be expressed in a more complete form;
+	 * its path will be calculated relative to the web content folder.
+	 * @return List of all NavigationRuleType instances from all known
+	 * faces-config models where the navigation-rule's from-view-id value
+	 * matches the web content folder-relative value of the passed IFile
+	 * instance (list may be empty).
+	 */
+	public List getNavigationRulesForPage(IFile pageFile) {
+		List navigationRulesForPage = new ArrayList();
+		IPath pageFilePath = JSFAppConfigUtils.getWebContentFolderRelativePath(pageFile);
+		String pageFileString = pageFilePath.toString();
+		if (!pageFileString.startsWith("/")) {
+			pageFileString = "/" + pageFileString;
+		}
+		List navigationRules = getNavigationRules();
+		Iterator itNavigationRules = navigationRules.iterator();
+		while (itNavigationRules.hasNext()) {
+			NavigationRuleType navigationRule = (NavigationRuleType)itNavigationRules.next();
+			FromViewIdType fromViewIdType = navigationRule.getFromViewId();
+			if (fromViewIdType != null) {
+				String fromViewId = fromViewIdType.getTextContent();
+				if (fromViewId != null && fromViewId.length() > 0) {
+					if (!fromViewId.equals("*")) { //$NON-NLS-1$
+						if (fromViewId.equals(pageFileString)) {
+							//exact match
+							navigationRulesForPage.add(navigationRule);
+						} else if (fromViewId.endsWith("*")) { //$NON-NLS-1$
+							String prefixFromViewId = fromViewId.substring(0, fromViewId.length() - 1);
+							if (pageFileString.startsWith(prefixFromViewId)) {
+								//prefix match
+								navigationRulesForPage.add(navigationRule);
+							}
+						}
+					} else {
+						//from-view-id == "*" - matches all pages
+						navigationRulesForPage.add(navigationRule);
+					}
+				}
+			} else {
+				//no from-view-id element - matches all pages
+				navigationRulesForPage.add(navigationRule);
+			}
+		}
+		return navigationRulesForPage;
 	}
 
 }
