@@ -161,7 +161,7 @@ public abstract class FacesConfigMasterDetailPage extends FormPage implements
 		detailsPart = new DetailsPart(managedForm, sashForm, SWT.NULL);
 		managedForm.addPart(detailsPart);
 
-		detailsPart.setPageLimit(10);
+		detailsPart.setPageLimit(4);
 		detailsPart.setPageProvider(this);
 
 		detailsPart.initialize(managedForm);
@@ -362,5 +362,12 @@ public abstract class FacesConfigMasterDetailPage extends FormPage implements
 
 		return propertySheetPage;
 
+	}
+
+	/**
+	 * @return the facesConfigMasterSections
+	 */
+	public FacesConfigMasterSection[] getFacesConfigMasterSections() {
+		return facesConfigMasterSections;
 	}
 }
