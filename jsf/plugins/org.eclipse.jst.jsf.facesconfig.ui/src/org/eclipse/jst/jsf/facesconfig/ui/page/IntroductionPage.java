@@ -31,7 +31,7 @@ import org.eclipse.ui.forms.widgets.TableWrapLayout;
  * 
  * @author jchoi
  */
-public class IntroductionPage extends FormPage implements ISelectionProvider{
+public class IntroductionPage extends FormPage implements IFacesConfigPage, ISelectionProvider{
 	/**
 	 * @param facesConfigEditor
 	 */
@@ -100,6 +100,30 @@ public class IntroductionPage extends FormPage implements ISelectionProvider{
 	}
 
 	public void setSelection(ISelection selection) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.jst.jsf.facesconfig.ui.page.IFacesConfigPage#getInput()
+	 */
+	public Object getInput() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.jst.jsf.facesconfig.ui.page.IFacesConfigPage#refresh()
+	 */
+	public void refresh() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.jst.jsf.facesconfig.ui.page.IFacesConfigPage#setInput(java.lang.Object)
+	 */
+	public void setInput(Object input) {
 		// TODO Auto-generated method stub
 		
 	}
