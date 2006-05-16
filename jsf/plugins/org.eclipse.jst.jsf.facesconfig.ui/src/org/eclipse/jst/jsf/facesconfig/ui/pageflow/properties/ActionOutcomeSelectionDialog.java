@@ -178,7 +178,7 @@ public class ActionOutcomeSelectionDialog extends Dialog {
 		// = Actions
 		actionSection.setText(actionListTitle);
 
-		actionTable = new Table(actionSection, SWT.BORDER);
+		actionTable = new Table(actionSection, SWT.BORDER | SWT.FULL_SELECTION);
 		actionTable.setLayoutData(new GridData(GridData.FILL_BOTH));
 		actionTable.setHeaderVisible(true);
 		actionTable.setLinesVisible(true);
