@@ -39,7 +39,7 @@ public class ShowPropertyViewAction extends SelectionAction {
 			.getLogger(ShowPropertyViewAction.class);
 
 	/** The ID of the action */
-	public static final String SHOW_PROPERTY_VIEW = "com.sybase.stf.jmt.editors.pageflow.ShowPropertyView"; //$NON-NLS-1$ 
+	public static final String SHOW_PROPERTY_VIEW = "org.eclipse.jst.jsf.facesconfig.ui.pageflow.action.ShowPropertyViewAction"; //$NON-NLS-1$ 
 
 	/**
 	 * The constructor
