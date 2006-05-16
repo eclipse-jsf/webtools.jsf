@@ -21,7 +21,6 @@ import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorResources;
 import org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.action.ShowPaletteViewAction;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.action.ShowPropertyViewAction;
 import org.eclipse.ui.actions.ActionFactory;
 
