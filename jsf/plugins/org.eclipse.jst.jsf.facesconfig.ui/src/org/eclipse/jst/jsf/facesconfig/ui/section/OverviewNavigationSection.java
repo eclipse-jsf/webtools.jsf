@@ -344,8 +344,10 @@ public class OverviewNavigationSection extends AbstractOverviewSection {
 
 				if (msg.getEventType() == Notification.ADD
 						|| msg.getEventType() == Notification.SET) {
-					EObject newObject = (EObject) msg.getNewValue();
-					addOverviewNavigationSectionAdapter(newObject);
+					if (msg.getNewValue() instanceof EObject) {
+						EObject newObject = (EObject) msg.getNewValue();
+						addOverviewNavigationSectionAdapter(newObject);
+					}
 				}
 				if (msg.getEventType() == Notification.ADD
 
@@ -373,7 +375,6 @@ public class OverviewNavigationSection extends AbstractOverviewSection {
 				}
 				return;
 			}
-
 
 		}
 	}
