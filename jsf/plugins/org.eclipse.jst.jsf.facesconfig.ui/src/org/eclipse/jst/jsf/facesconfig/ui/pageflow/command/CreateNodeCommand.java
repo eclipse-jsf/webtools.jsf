@@ -137,7 +137,9 @@ public class CreateNodeCommand extends Command implements IPreExecuteCommand {
 
 		dialog.setTitle(EditorResources.getInstance().getString(
 				"Pageflow.Commands.CreateNodeCommand.SelectJSPDialog.Title"));
-		dialog.setSuffixs(new String[] { IFileFolderConstants.EXT_JSP });
+		dialog.setSuffixs(new String[] { IFileFolderConstants.EXT_JSP,
+				IFileFolderConstants.EXT_JSV, IFileFolderConstants.EXT_JTPL,
+				IFileFolderConstants.EXT_JSPX });
 		dialog
 				.setResourceDescription(EditorResources
 						.getInstance()
