@@ -425,13 +425,13 @@ public class FacesConfigEditor extends FormEditor implements
 		try {
 			IntroductionPage page1 = new IntroductionPage(this);
 			addPage(page1, null);
-			
+
 			IFormPage overviewPage = new OverviewPage(this);
 			addPage(overviewPage, null);
-			
+
 			// Page flow
 			createAndAddPageflowPage();
-			
+
 			// pages
 			IFormPage managedBeanPage = new ManagedBeanPage(this);
 			managedBeanPageID = addPage(managedBeanPage, null);
@@ -601,7 +601,7 @@ public class FacesConfigEditor extends FormEditor implements
 	// // getFacesConfigAdapter(), inputStreamOfFacesConfig);
 	// //
 	// // updateCommand.execute();
-		// }
+	// }
 	/**
 	 * This class listens for command stack changes of the pages contained in
 	 * this editor and decides if the editor is dirty or not.
@@ -953,21 +953,13 @@ public class FacesConfigEditor extends FormEditor implements
 		return paletteViewerPage;
 	}
 
-	/** the undoable <code>IPropertySheetPage</code> */
-	private TabbedPropertySheetPage tabbedPropertySheetPage = null;
-
 	/**
 	 * Returns the <code>TabbedPropertySheetPage</code> for this editor.
 	 * 
 	 * @return - the <code>TabbedPropertySheetPage</code>
 	 */
 	protected IPropertySheetPage getPropertySheetPage() {
-		if (null == tabbedPropertySheetPage) {
-			tabbedPropertySheetPage = new TabbedPropertySheetPage(this);
-		}
-
-		return tabbedPropertySheetPage;
-
+		return new TabbedPropertySheetPage(this);
 	}
 
 	/** the delegating ZoomManager */
@@ -1290,16 +1282,16 @@ public class FacesConfigEditor extends FormEditor implements
 	// }
 	public void dispose() {
 		FC2PFTransformer.getInstance().dispose();
-//		Iterator contents = getFacesConfig().getNavigationRule().iterator();
-//		while (contents.hasNext()) {
-//			EObject next = ((EObject) contents.next());
-//			TreeIterator children = next.eAllContents();
-//			while (children.hasNext()) {
-//				FC2PFTransformer.getInstance().unAdapt(
-//						(EObject) children.next());
-//			}
-//			FC2PFTransformer.getInstance().unAdapt((EObject) next);
-//		}
+		// Iterator contents = getFacesConfig().getNavigationRule().iterator();
+		// while (contents.hasNext()) {
+		// EObject next = ((EObject) contents.next());
+		// TreeIterator children = next.eAllContents();
+		// while (children.hasNext()) {
+		// FC2PFTransformer.getInstance().unAdapt(
+		// (EObject) children.next());
+		// }
+		// FC2PFTransformer.getInstance().unAdapt((EObject) next);
+		// }
 		// FC2PFTransformer.getInstance().unAdapt(getFacesConfig());
 
 		ResourcesPlugin.getWorkspace().removeResourceChangeListener(
