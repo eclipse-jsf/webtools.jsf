@@ -349,11 +349,11 @@ public class JSFAppConfigManager {
 	}
 
 	/**
-	 * Notifies {@link IFacesConfigChangeListener} instances of model's
-	 * feature changes in which they registered interest.
+	 * Notifies {@link IFacesConfigChangeListener} instances of model changes
+	 * in which they registered interest.
 	 * 
 	 * @param notification EMF {@link Notification} instance that describes the
-	 * model's feature change.
+	 * model change.
 	 */
 	public void notifyFacesConfigChangeListeners(Notification notification) {
 		Object emfFeature = notification.getFeature();

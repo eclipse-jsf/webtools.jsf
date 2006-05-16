@@ -14,19 +14,19 @@ import org.eclipse.emf.common.notify.Notification;
 
 /**
  * IFacesConfigChangeListener is the interface that must be implemented by
- * objects interested in receiving notification of changes to features of
- * application configuration models.
+ * objects interested in receiving notification of changes to application
+ * configuration models.
  * 
  * @author Ian Trimble - Oracle
  */
 public interface IFacesConfigChangeListener {
 
 	/**
-	 * Called when a change in a feature of an application configuration model
-	 * for which this listener has been registered occurs.
+	 * Called when a change in an application configuration model for which
+	 * this listener has been registered occurs.
 	 * 
 	 * @param notification EMF {@link Notification} instance that describes the
-	 * model's feature change.
+	 * model change.
 	 */
 	public void notifyChanged(Notification notification);
 
