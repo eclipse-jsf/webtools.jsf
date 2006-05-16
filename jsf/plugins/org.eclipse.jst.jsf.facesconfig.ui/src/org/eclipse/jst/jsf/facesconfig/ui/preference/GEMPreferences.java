@@ -169,9 +169,9 @@ public class GEMPreferences extends FieldEditorPreferencePage implements
 
 	private ColorFontFieldEditor lineFont;
 
-	private ColorFieldEditor inputPortColor;
-
-	private ColorFieldEditor outputPortColor;
+	// private ColorFieldEditor inputPortColor;
+	//
+	// private ColorFieldEditor outputPortColor;
 
 	// CR392586: resource leaks
 	// at least keep leaks bounded...
@@ -278,14 +278,16 @@ public class GEMPreferences extends FieldEditorPreferencePage implements
 		addComboField(LABEL_PLACEMENT, EditorPlugin
 				.getResourceString("CanvasPreferenceTab.LABEL.LabelPlacement"), //$NON-NLS-1$
 				getLabelPlacementLabels(), iconGroup);
-		inputPortColor = addColorField(
-				INPUT_PORT_COLOR,
-				EditorPlugin
-						.getResourceString("CanvasPreferenceTab.LABEL.InputPortColor"), iconGroup); //$NON-NLS-1$
-		outputPortColor = addColorField(
-				OUTPUT_PORT_COLOR,
-				EditorPlugin
-						.getResourceString("CanvasPreferenceTab.LABEL.OutputPortColor"), iconGroup); //$NON-NLS-1$
+		// inputPortColor = addColorField(
+		// INPUT_PORT_COLOR,
+		// EditorPlugin
+		// .getResourceString("CanvasPreferenceTab.LABEL.InputPortColor"),
+		// iconGroup); //$NON-NLS-1$
+		// outputPortColor = addColorField(
+		// OUTPUT_PORT_COLOR,
+		// EditorPlugin
+		// .getResourceString("CanvasPreferenceTab.LABEL.OutputPortColor"),
+		// iconGroup); //$NON-NLS-1$
 
 		lineGroup.setText(EditorPlugin
 				.getResourceString("CanvasPreferenceTab.LABEL.LineGroup")); //$NON-NLS-1$
@@ -346,8 +348,8 @@ public class GEMPreferences extends FieldEditorPreferencePage implements
 		canvasColor.setEnabled(userColorsValue, canvasGroup);
 		gridColor.setEnabled(snapToGridValue && userColorsValue, canvasGroup);
 		iconFont.setEnabled(userColorsValue, iconGroup);
-		inputPortColor.setEnabled(userColorsValue, iconGroup);
-		outputPortColor.setEnabled(userColorsValue, iconGroup);
+		// inputPortColor.setEnabled(userColorsValue, iconGroup);
+		// outputPortColor.setEnabled(userColorsValue, iconGroup);
 		lineColor.setEnabled(userColorsValue, lineGroup);
 		lineLabelColor.setEnabled(showLineLabelsValue && userColorsValue,
 				lineGroup);
@@ -369,8 +371,10 @@ public class GEMPreferences extends FieldEditorPreferencePage implements
 								.setEnabled(snapToGridValue && userColorsValue,
 										canvasGroup);
 						iconFont.setEnabled(userColorsValue, iconGroup);
-						inputPortColor.setEnabled(userColorsValue, iconGroup);
-						outputPortColor.setEnabled(userColorsValue, iconGroup);
+						// inputPortColor.setEnabled(userColorsValue,
+						// iconGroup);
+						// outputPortColor.setEnabled(userColorsValue,
+						// iconGroup);
 						lineColor.setEnabled(userColorsValue, lineGroup);
 						lineLabelColor.setEnabled(showLineLabelsValue
 								&& userColorsValue, lineGroup);
