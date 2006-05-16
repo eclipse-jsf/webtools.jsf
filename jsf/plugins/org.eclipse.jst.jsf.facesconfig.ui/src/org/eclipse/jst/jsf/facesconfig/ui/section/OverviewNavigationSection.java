@@ -315,28 +315,65 @@ public class OverviewNavigationSection extends AbstractOverviewSection {
 
 		public void notifyChanged(Notification msg) {
 
-			if (msg.getFeature() == FacesConfigPackage.eINSTANCE
+			if ((msg.getFeature() == FacesConfigPackage.eINSTANCE
 					.getFacesConfigType_NavigationRule()
 					|| msg.getFeature() == FacesConfigPackage.eINSTANCE
 							.getNavigationRuleType_NavigationCase()
 					|| msg.getFeature() == FacesConfigPackage.eINSTANCE
-							.getNavigationRuleType_FromViewId()
-					|| msg.getFeature() == FacesConfigPackage.eINSTANCE
-							.getNavigationCaseType_FromOutcome()
+							.getNavigationRuleType_FromViewId() || msg
+					.getFeature() == FacesConfigPackage.eINSTANCE
+					.getFromViewIdType_TextContent())) {
+				if (msg.getEventType() == Notification.ADD
+						|| msg.getEventType() == Notification.SET) {
+					if (msg.getNewValue() instanceof EObject) {
+						EObject newObject = (EObject) msg.getNewValue();
+						addOverviewNavigationSectionAdapter(newObject);
+					}
+				}
+				if (msg.getEventType() == Notification.ADD
+						|| msg.getEventType() == Notification.REMOVE
+						|| msg.getEventType() == Notification.SET)
+					refreshAll();
+				return;
+			}
+
+			if (msg.getFeature() == FacesConfigPackage.eINSTANCE
+					.getNavigationCaseType_FromOutcome()
 					|| msg.getFeature() == FacesConfigPackage.eINSTANCE
 							.getNavigationCaseType_ToViewId()) {
 
-				if (msg.getEventType() == Notification.ADD) {
+				if (msg.getEventType() == Notification.ADD
+						|| msg.getEventType() == Notification.SET) {
 					EObject newObject = (EObject) msg.getNewValue();
 					addOverviewNavigationSectionAdapter(newObject);
 				}
+				if (msg.getEventType() == Notification.ADD
+
+				|| msg.getEventType() == Notification.REMOVE
+						|| msg.getEventType() == Notification.SET) {
+
+					NavigationCaseType navigationCase = (NavigationCaseType) msg
+							.getNotifier();
+					tableViewer.refresh(navigationCase);
+				}
+				return;
+			}
+
+			if (msg.getFeature() == FacesConfigPackage.eINSTANCE
+					.getFromOutcomeType_TextContent()
+					|| msg.getFeature() == FacesConfigPackage.eINSTANCE
+							.getToViewIdType_TextContent()) {
 
 				if (msg.getEventType() == Notification.ADD
 						|| msg.getEventType() == Notification.REMOVE
 						|| msg.getEventType() == Notification.SET) {
-					refreshAll();
+					NavigationCaseType navigationCase = (NavigationCaseType) ((EObject) msg
+							.getNotifier()).eContainer();
+					tableViewer.refresh(navigationCase);
 				}
+				return;
 			}
+
 
 		}
 	}
