@@ -135,9 +135,6 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 	/** the graphical viewer */
 	private GraphicalViewer viewer = null;
 
-	/** the overview outline page */
-	private PageflowEditorOutlinePage outlinePage = null;
-
 	/** the undoable <code>IPropertySheetPage</code> */
 	private PropertySheetPage undoablePropertySheetPage = null;
 
@@ -847,10 +844,9 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 	 * @return - the outline page
 	 */
 	protected PageflowEditorOutlinePage getOutlinePage() {
-		if (null == outlinePage) {
-			outlinePage = new PageflowEditorOutlinePage(this);
-			outlinePage.initialize(this);
-		}
+		PageflowEditorOutlinePage outlinePage = new PageflowEditorOutlinePage(
+				this);
+		outlinePage.initialize(this);
 		return outlinePage;
 	}
 
