@@ -41,6 +41,14 @@ public abstract class AbstractJSFAppConfigLocater implements IJSFAppConfigLocate
 		this.manager = manager;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.IJSFAppConfigLocater#getJSFAppConfigManager()
+	 */
+	public JSFAppConfigManager getJSFAppConfigManager() {
+		return manager;
+	}
+
 	/* (non-Javadoc)
 	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.IJSFAppConfigLocater#startLocating()
 	 */
@@ -70,6 +78,7 @@ public abstract class AbstractJSFAppConfigLocater implements IJSFAppConfigLocate
 	protected boolean addConfigProvider(IJSFAppConfigProvider configProvider) {
 		boolean added = configProviders.add(configProvider);
 		if (added && manager != null) {
+			configProvider.setJSFAppConfigLocater(this);
 			manager.notifyJSFAppConfigProvidersChangeListeners(
 					configProvider,
 					JSFAppConfigProvidersChangeEvent.ADDED);

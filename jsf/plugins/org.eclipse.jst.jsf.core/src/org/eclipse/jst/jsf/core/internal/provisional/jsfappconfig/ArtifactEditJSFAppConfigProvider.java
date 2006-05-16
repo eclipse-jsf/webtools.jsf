@@ -22,7 +22,7 @@ import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
  * 
  * @author Ian Trimble - Oracle
  */
-public class ArtifactEditJSFAppConfigProvider implements IJSFAppConfigProvider {
+public class ArtifactEditJSFAppConfigProvider extends AbstractJSFAppConfigProvider {
 
 	/**
 	 * IFile instance that represents an application configuration resource
@@ -35,6 +35,11 @@ public class ArtifactEditJSFAppConfigProvider implements IJSFAppConfigProvider {
 	 * configuration model.
 	 */
 	protected FacesConfigArtifactEdit facesConfigArtifactEdit = null;
+
+	/**
+	 * Cached {@link FacesConfigType} instance.
+	 */
+	protected FacesConfigType facesConfig = null;
 
 	/**
 	 * Creates an instance, storing the passed IFile instance for subsequent
@@ -51,14 +56,18 @@ public class ArtifactEditJSFAppConfigProvider implements IJSFAppConfigProvider {
 	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.IJSFAppConfigProvider#getFacesConfigModel()
 	 */
 	public FacesConfigType getFacesConfigModel() {
-		FacesConfigType facesConfig = null;
-		if (appConfigFile != null) {
-			IProject project = appConfigFile.getProject();
-			IPath appConfigFilePath = JSFAppConfigUtils.getWebContentFolderRelativePath(appConfigFile);
-			if (appConfigFilePath != null) {
-				facesConfigArtifactEdit = FacesConfigArtifactEdit.getFacesConfigArtifactEditForRead(project, appConfigFilePath.toString());
-				if (facesConfigArtifactEdit != null) {
-					facesConfig = facesConfigArtifactEdit.getFacesConfig();
+		if (facesConfig == null) {
+			if (appConfigFile != null) {
+				IProject project = appConfigFile.getProject();
+				IPath appConfigFilePath = JSFAppConfigUtils.getWebContentFolderRelativePath(appConfigFile);
+				if (appConfigFilePath != null) {
+					facesConfigArtifactEdit = FacesConfigArtifactEdit.getFacesConfigArtifactEditForRead(project, appConfigFilePath.toString());
+					if (facesConfigArtifactEdit != null) {
+						facesConfig = facesConfigArtifactEdit.getFacesConfig();
+						if (facesConfig != null) {
+							jsfAppConfigLocater.getJSFAppConfigManager().addFacesConfigChangeAdapter(facesConfig);
+						}
+					}
 				}
 			}
 		}
@@ -69,6 +78,7 @@ public class ArtifactEditJSFAppConfigProvider implements IJSFAppConfigProvider {
 	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.IJSFAppConfigProvider#releaseFacesConfigModel()
 	 */
 	public void releaseFacesConfigModel() {
+		jsfAppConfigLocater.getJSFAppConfigManager().removeFacesConfigChangeAdapter(facesConfig);
 		if (facesConfigArtifactEdit != null) {
 			facesConfigArtifactEdit.dispose();
 		}

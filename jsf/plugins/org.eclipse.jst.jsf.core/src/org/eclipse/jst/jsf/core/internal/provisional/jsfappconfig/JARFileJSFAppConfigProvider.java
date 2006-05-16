@@ -29,7 +29,7 @@ import org.eclipse.wst.common.internal.emf.resource.EMF2SAXRendererFactory;
  * 
  * @author Ian Trimble - Oracle
  */
-public class JARFileJSFAppConfigProvider implements IJSFAppConfigProvider {
+public class JARFileJSFAppConfigProvider extends AbstractJSFAppConfigProvider {
 
 	/**
 	 * Prefix required to turn filename into a JAR URI.
@@ -82,6 +82,9 @@ public class JARFileJSFAppConfigProvider implements IJSFAppConfigProvider {
 						EList resourceContents = resource.getContents();
 						if (resourceContents != null && resourceContents.size() > 0) {
 							facesConfig = (FacesConfigType)resourceContents.get(0);
+							if (facesConfig != null) {
+								jsfAppConfigLocater.getJSFAppConfigManager().addFacesConfigChangeAdapter(facesConfig);
+							}
 						}
 					}
 				} catch(IOException ioe) {
@@ -97,7 +100,7 @@ public class JARFileJSFAppConfigProvider implements IJSFAppConfigProvider {
 	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.IJSFAppConfigProvider#releaseFacesConfigModel()
 	 */
 	public void releaseFacesConfigModel() {
-		facesConfig = null;
+		jsfAppConfigLocater.getJSFAppConfigManager().removeFacesConfigChangeAdapter(facesConfig);
 	}
 
 	/*

@@ -29,6 +29,15 @@ public interface IJSFAppConfigLocater {
 	public void setJSFAppConfigManager(JSFAppConfigManager manager);
 
 	/**
+	 * Gets the {@link JSFAppConfigManager} instance to which this locater
+	 * belongs.
+	 * 
+	 * @return {@link JSFAppConfigManager} instance to which this locater
+	 * belongs.
+	 */
+	public JSFAppConfigManager getJSFAppConfigManager();
+
+	/**
 	 * Starts locating JSF application configuration resources.
 	 */
 	public void startLocating();

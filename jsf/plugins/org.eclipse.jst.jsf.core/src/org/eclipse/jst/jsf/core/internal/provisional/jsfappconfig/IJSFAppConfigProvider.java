@@ -21,6 +21,15 @@ import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 public interface IJSFAppConfigProvider {
 
 	/**
+	 * Sets the {@link IJSFAppConfigLocater} instance that located this
+	 * instance.
+	 * 
+	 * @param locater {@link IJSFAppConfigLocater} instance that located this
+	 * instance.
+	 */
+	public void setJSFAppConfigLocater(IJSFAppConfigLocater locater);
+
+	/**
 	 * Gets the root element of the application configuration model for read
 	 * access.
 	 * 

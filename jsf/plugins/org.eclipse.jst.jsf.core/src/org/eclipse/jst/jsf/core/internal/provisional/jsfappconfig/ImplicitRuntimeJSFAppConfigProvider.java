@@ -27,7 +27,7 @@ import org.eclipse.jst.jsf.facesconfig.emf.ValidatorType;
  * 
  * @author Ian Trimble - Oracle
  */
-public class ImplicitRuntimeJSFAppConfigProvider implements IJSFAppConfigProvider {
+public class ImplicitRuntimeJSFAppConfigProvider extends AbstractJSFAppConfigProvider {
 
 	/**
 	 * Cached {@link FacesConfigType} instance.
@@ -40,6 +40,9 @@ public class ImplicitRuntimeJSFAppConfigProvider implements IJSFAppConfigProvide
 	public FacesConfigType getFacesConfigModel() {
 		if (facesConfig == null) {
 			createModel();
+			if (facesConfig != null) {
+				jsfAppConfigLocater.getJSFAppConfigManager().addFacesConfigChangeAdapter(facesConfig);
+			}
 		}
 		return facesConfig;
 	}
@@ -48,6 +51,7 @@ public class ImplicitRuntimeJSFAppConfigProvider implements IJSFAppConfigProvide
 	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.IJSFAppConfigProvider#releaseFacesConfigModel()
 	 */
 	public void releaseFacesConfigModel() {
+		jsfAppConfigLocater.getJSFAppConfigManager().removeFacesConfigChangeAdapter(facesConfig);
 		facesConfig = null;
 	}
 

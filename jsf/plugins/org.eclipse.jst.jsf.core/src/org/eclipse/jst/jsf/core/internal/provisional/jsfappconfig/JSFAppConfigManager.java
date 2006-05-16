@@ -11,9 +11,11 @@
 package org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
@@ -22,7 +24,10 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.QualifiedName;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.jst.jsf.facesconfig.emf.FromViewIdType;
@@ -56,12 +61,23 @@ public class JSFAppConfigManager {
 	/**
 	 * Collection of {@link IJSFAppConfigLocater} instances.
 	 */
-	protected ArrayList configLocaters = null;
+	protected List configLocaters = null;
 
 	/**
 	 * Collection of {@link IJSFAppConfigProvidersChangeListener} instances.
 	 */
-	protected ArrayList configProvidersChangeListeners = null;
+	protected List configProvidersChangeListeners = null;
+
+	/**
+	 * Map of application configuration model EMF classes to
+	 * {@link IFacesConfigChangeListener} instances.
+	 */
+	protected Map facesConfigChangeListeners = null;
+
+	/**
+	 * Single {@link FacesConfigChangeAdapter} instance.
+	 */
+	protected FacesConfigChangeAdapter facesConfigChangeAdapter = null;
 
 	/**
 	 * Gets a JSFAppConfigManager instance that is keyed to the passed IProject
@@ -206,6 +222,7 @@ public class JSFAppConfigManager {
 	 */
 	protected void initialize() {
 		//create collections
+		facesConfigChangeListeners = new HashMap();
 		configProvidersChangeListeners = new ArrayList();
 		configLocaters = new ArrayList();
 		//populate initial set of locaters
@@ -302,6 +319,54 @@ public class JSFAppConfigManager {
 	}
 
 	/**
+	 * Adds an instance of {@link IFacesConfigChangeListener}. <br>
+	 * <br>
+	 * <b>NOTE:</b> Calling this method will cause all application
+	 * configuration models to be loaded, to ensure that a
+	 * {@link FacesConfigChangeAdapter} has been added to each model.
+	 * 
+	 * @param emfClass EMF class in which the listener is interested.
+	 * @param listener {@link IFacesConfigChangeListener} instance.
+	 * @return Previous {@link IFacesConfigChangeListener}, or null.
+	 */
+	public Object addFacesConfigChangeListener(Class emfClass, IFacesConfigChangeListener listener) {
+		/* 
+		 * Get all models, which will ensure that each one has had a
+		 * FacesConfigChangeAdapter added to it.
+		 */
+		getFacesConfigModels();
+		return facesConfigChangeListeners.put(emfClass, listener);
+	}
+
+	/**
+	 * Removes an instance of {@link IFacesConfigChangeListener}.
+	 * 
+	 * @param emfClass EMF class in which the listener was interested.
+	 * @return Removed {@link IFacesConfigChangeListener}, or null.
+	 */
+	public Object removeFacesConfigChangeListener(Class emfClass) {
+		return facesConfigChangeListeners.remove(emfClass);
+	}
+
+	/**
+	 * Notifies {@link IFacesConfigChangeListener} instances of model's
+	 * feature changes in which they registered interest.
+	 * 
+	 * @param notification EMF {@link Notification} instance that describes the
+	 * model's feature change.
+	 */
+	public void notifyFacesConfigChangeListeners(Notification notification) {
+		Object emfFeature = notification.getFeature();
+		if (emfFeature != null && emfFeature instanceof EStructuralFeature) {
+			Class emfClass = ((EStructuralFeature)emfFeature).getEType().getInstanceClass();
+			IFacesConfigChangeListener listener = (IFacesConfigChangeListener)facesConfigChangeListeners.get(emfClass);
+			if (listener != null) {
+				listener.notifyChanged(notification);
+			}
+		}
+	}
+
+	/**
 	 * Gets all {@link IJSFAppConfigProvider} instances from all
 	 * {@link IJSFAppConfigLocater} instances.
 	 * 
@@ -348,6 +413,7 @@ public class JSFAppConfigManager {
 		//clear collections
 		configLocaters.clear();
 		configProvidersChangeListeners.clear();
+		facesConfigChangeListeners.clear();
 	}
 
 	/**
@@ -479,6 +545,52 @@ public class JSFAppConfigManager {
 			}
 		}
 		return navigationRulesForPage;
+	}
+
+	/**
+	 * Adds this instance's {@link FacesConfigChangeAdapter} instance to the
+	 * passed application configuration model's adapters collection.
+	 * 
+	 * @param facesConfig Application configuration model's root object.
+	 */
+	public void addFacesConfigChangeAdapter(FacesConfigType facesConfig) {
+		if (facesConfig != null) {
+			if (facesConfigChangeAdapter == null) {
+				facesConfigChangeAdapter = new FacesConfigChangeAdapter();
+			}
+			facesConfig.eAdapters().add(facesConfigChangeAdapter);
+		}
+	}
+
+	/**
+	 * Removes this instance's {@link FacesConfigChangeAdapter} instance from
+	 * the passed application configuration model's adapters collection.
+	 * 
+	 * @param facesConfig Application configuration model's root object.
+	 */
+	public void removeFacesConfigChangeAdapter(FacesConfigType facesConfig) {
+		if (facesConfig != null && facesConfigChangeAdapter != null) {
+			facesConfig.eAdapters().remove(facesConfigChangeAdapter);
+		}
+	}
+
+	/**
+	 * FacesConfigChangeAdapter is an EMF adapter which provides a mechanism
+	 * for notification of changes to features in any application configuration
+	 * model for which {@link IFacesConfigChangeListener} instances have
+	 * registered an interest.
+	 * 
+	 * @author Ian Trimble - Oracle
+	 */
+	class FacesConfigChangeAdapter extends EContentAdapter {
+		/*
+		 * (non-Javadoc)
+		 * @see org.eclipse.emf.ecore.util.EContentAdapter#notifyChanged(org.eclipse.emf.common.notify.Notification)
+		 */
+		public void notifyChanged(Notification notification) {
+			super.notifyChanged(notification);
+			notifyFacesConfigChangeListeners(notification);
+		}
 	}
 
 }
