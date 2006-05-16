@@ -28,9 +28,11 @@ import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.geometry.Dimension;
@@ -64,6 +66,7 @@ import org.eclipse.gef.ui.parts.SelectionSynchronizer;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceConverter;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jface.util.TransferDropTargetListener;
@@ -73,7 +76,6 @@ import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorResources;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.action.AlignmentAction;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.action.OpenEditorAction;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.action.ShowPaletteViewAction;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.action.ShowPropertyViewAction;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.command.PreExecuteCommandStack;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.ConfigurableRootEditPart;
@@ -83,8 +85,8 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.ILayerPanePreference
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.INodePreference;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowEditPartsFactory;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowNodeEditPart;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowAnnotationUtil;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowModelManager;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowResourceFactory;
@@ -104,6 +106,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.ide.IGotoMarker;
 import org.eclipse.ui.part.FileEditorInput;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.PropertySheetPage;
@@ -305,8 +308,11 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 		addEditPartAction(new OpenEditorAction((IWorkbenchPart) this));
 
 		// Allows showing property view for the pageflow
-		addEditPartAction(new ShowPropertyViewAction((IWorkbenchPart) this));
-
+		SelectionAction action = new ShowPropertyViewAction(
+				(IWorkbenchPart) this);
+		action
+				.setImageDescriptor(getImageDescriptorForView("org.eclipse.ui.views.PropertySheet"));
+		addEditPartAction(action);
 		// Allows showing property view for the pageflow
 		// addEditPartAction(new ShowPaletteViewAction((IWorkbenchPart) this));
 
@@ -1157,6 +1163,29 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 			PageflowAnnotationUtil
 					.validatePage((PageflowNodeEditPart) pagePart);
 		}
+	}
+	
+	/**
+	 * Get the image desriptor from the view's id. 
+	 * @param viewid
+	 * @return
+	 */
+	 private ImageDescriptor getImageDescriptorForView(String viewid) {
+		IConfigurationElement[] elements = Platform.getExtensionRegistry()
+				.getConfigurationElementsFor("org.eclipse.ui.views");
+		for (int i = 0; i < elements.length; i++) {
+			String name = elements[i].getName();
+			String id = elements[i].getAttribute("id");
+			if ("view".equals(name) && viewid.equals(id)) {
+				String iconPath = elements[i].getAttribute("icon");
+				if (iconPath != null) {
+					return AbstractUIPlugin.imageDescriptorFromPlugin(
+							elements[i].getDeclaringExtension().getNamespace(),
+							iconPath);
+				}
+			}
+		}
+		return null;
 	}
 
 }
