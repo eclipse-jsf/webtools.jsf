@@ -18,6 +18,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanType;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
+import org.eclipse.jst.jsf.facesconfig.ui.IFacesConfigConstants;
 import org.eclipse.jst.jsf.facesconfig.ui.section.ManagedBeanScopeTreeItem;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.ISharedImages;
@@ -71,8 +72,27 @@ public class ManagedBeanLabelProvider extends LabelProvider {
 					"facesconfig/FacesConfig_ManagedBean.gif"); //$NON-NLS-1$
 
 		} else if (obj instanceof ManagedBeanScopeTreeItem) {
-			imageDesc = EditorPlugin.getDefault().getImageDescriptor(
-					"Scope.gif");
+			ManagedBeanScopeTreeItem scopeTreeItem = (ManagedBeanScopeTreeItem) obj;
+			if (IFacesConfigConstants.MANAGED_BEAN_SCOPE_SESSION
+					.equals(scopeTreeItem.getScope())) {
+				imageDesc = EditorPlugin.getDefault().getImageDescriptor(
+						"Scope_Session.gif");
+			} else if (IFacesConfigConstants.MANAGED_BEAN_SCOPE_REQUEST
+					.equals(scopeTreeItem.getScope())) {
+				imageDesc = EditorPlugin.getDefault().getImageDescriptor(
+						"Scope_Request.gif");
+			} else if (IFacesConfigConstants.MANAGED_BEAN_SCOPE_APPLICATION
+					.equals(scopeTreeItem.getScope())) {
+				imageDesc = EditorPlugin.getDefault().getImageDescriptor(
+						"Scope_Application.gif");
+			} else if (IFacesConfigConstants.MANAGED_BEAN_SCOPE_NONE
+					.equals(scopeTreeItem.getScope())) {
+				imageDesc = EditorPlugin.getDefault().getImageDescriptor(
+						"Scope_None.gif");
+			} else {
+				imageDesc = EditorPlugin.getDefault().getImageDescriptor(
+						"Scope.gif");
+			}
 		}
 
 		if (imageDesc != null) {
