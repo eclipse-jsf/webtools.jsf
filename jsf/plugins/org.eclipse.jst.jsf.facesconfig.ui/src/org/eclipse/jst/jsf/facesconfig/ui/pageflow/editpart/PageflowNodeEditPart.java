@@ -18,6 +18,7 @@ import java.util.List;
 import org.eclipse.draw2d.ConnectionAnchor;
 import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.geometry.Point;
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gef.ConnectionEditPart;
 import org.eclipse.gef.EditPolicy;
@@ -42,6 +43,7 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.synchronization.PFBatchAdapter;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowAnnotationUtil;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
@@ -60,13 +62,14 @@ import org.eclipse.swt.graphics.Image;
  * 
  */
 public class PageflowNodeEditPart extends PageflowElementEditPart implements
-		NodeEditPart, INodePreference {
+		NodeEditPart, INodePreference, PFValidator {
 
 	/** property source of pageflow node */
 	// private IPropertySource propertySource = null;
 	protected DirectEditManager editManager;
 
 	private class ImageDecorator implements ILabelDecorator {
+		private Image decrateImage = null;
 
 		/*
 		 * (non-Javadoc)
@@ -75,14 +78,15 @@ public class PageflowNodeEditPart extends PageflowElementEditPart implements
 		 *      java.lang.Object)
 		 */
 		public Image decorateImage(Image image, Object element) {
+			dispose();
 			int adornmentFlags = computeAdornmentFlags(element);
 			if (adornmentFlags != 0) {
 				ImageDescriptor baseImage = new ImageImageDescriptor(image);
 				org.eclipse.swt.graphics.Rectangle bounds = image.getBounds();
-				Image newImage = (new JavaElementImageDescriptor(baseImage,
+				decrateImage = (new JavaElementImageDescriptor(baseImage,
 						adornmentFlags, new org.eclipse.swt.graphics.Point(
 								bounds.width, bounds.height))).createImage();
-				return newImage;
+				return decrateImage;
 			}
 			return image;
 		}
@@ -93,6 +97,12 @@ public class PageflowNodeEditPart extends PageflowElementEditPart implements
 		 */
 		protected int computeAdornmentFlags(Object obj) {
 			return JavaElementImageDescriptor.WARNING;
+		}
+
+		public void dispose() {
+			if (decrateImage != null) {
+				decrateImage.dispose();
+			}
 		}
 
 		/*
@@ -106,6 +116,12 @@ public class PageflowNodeEditPart extends PageflowElementEditPart implements
 			return null;
 		}
 
+	}
+
+	public void dispose() {
+		if (imageDecorator != null) {
+			imageDecorator.dispose();
+		}
 	}
 
 	private ImageDecorator imageDecorator = null;
@@ -156,44 +172,42 @@ public class PageflowNodeEditPart extends PageflowElementEditPart implements
 		return (PageflowNodeFigure) getFigure();
 	}
 
-	/**
-	 * when ports are added to a PageflowNode, add this EditPart as a listener
-	 * on the port so that it gets notified of PFLinks being added or removed.
-	 * When links are added or removed from a port owned by the PageflowNode of
-	 * this EditPart, refresh the connections.
-	 */
-	public void notifyChanged(Notification notification) {
-		int type = notification.getEventType();
-		// FC2PFTransformer.getInstance().NotifyChanged(notification,
-		// (PageflowElement) getModel());
-		switch (type) {
-		case Notification.ADD:
-		case Notification.ADD_MANY:
-			if (notification.getNewValue() instanceof PageflowLink) {
-				refreshTargetConnections();
-				refreshSourceConnections();
-				validate();
-			}
-			break;
+	public Adapter createEMFAdapter() {
+		return new PFBatchAdapter() {
+			/**
+			 * when ports are added to a PageflowNode, add this EditPart as a
+			 * listener on the port so that it gets notified of PFLinks being
+			 * added or removed. When links are added or removed from a port
+			 * owned by the PageflowNode of this EditPart, refresh the
+			 * connections.
+			 */
+			public void doNotifyChanged(Notification notification) {
+				int type = notification.getEventType();
+				// FC2PFTransformer.getInstance().NotifyChanged(notification,
+				// (PageflowElement) getModel());
+				switch (type) {
+				case Notification.ADD:
+				case Notification.ADD_MANY:
+				case Notification.REMOVE:
+				case Notification.REMOVE_MANY:
+					if (notification.getNewValue() instanceof PageflowLink) {
+						refreshTargetConnections();
+						refreshSourceConnections();
+						validate();
+					}
+					break;
 
-		case Notification.REMOVE:
-		case Notification.REMOVE_MANY:
-			if (notification.getOldValue() instanceof PageflowLink) {
-				refreshTargetConnections();
-				refreshSourceConnections();
-				validate();
-			}
-
-			break;
-
-		case Notification.SET:
-			int featureId = notification.getFeatureID(PageflowPackage.class);
-			if (needValidation(featureId)) {
-				validate();
-			}
-			refreshVisuals();
-			break;
-		}
+				case Notification.SET:
+					int featureId = notification
+							.getFeatureID(PageflowPackage.class);
+					if (needValidation(featureId)) {
+						validate();
+					}
+					refreshVisuals();
+					break;
+				}
+			};
+		};
 	}
 
 	private boolean needValidation(int featureId) {
@@ -205,7 +219,7 @@ public class PageflowNodeEditPart extends PageflowElementEditPart implements
 		return false;
 	}
 
-	private void validate() {
+	public void validate() {
 		if (getModel() instanceof PageflowPage) {
 			PageflowAnnotationUtil.validatePage(this);
 		}
@@ -312,7 +326,7 @@ public class PageflowNodeEditPart extends PageflowElementEditPart implements
 	 */
 	public void deactivate() {
 		super.deactivate();
-
+		dispose();
 		Iterator it;
 
 		it = getPageflowNode().getInlinks().iterator();

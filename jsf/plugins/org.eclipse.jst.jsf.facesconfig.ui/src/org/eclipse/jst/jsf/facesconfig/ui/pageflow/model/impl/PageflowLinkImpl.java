@@ -12,7 +12,6 @@
 package org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Vector;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -25,14 +24,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
-import org.eclipse.jst.jsf.facesconfig.emf.FromActionType;
-import org.eclipse.jst.jsf.facesconfig.emf.FromOutcomeType;
-import org.eclipse.jst.jsf.facesconfig.emf.IconType;
-import org.eclipse.jst.jsf.facesconfig.emf.LargeIconType;
-import org.eclipse.jst.jsf.facesconfig.emf.NavigationCaseType;
-import org.eclipse.jst.jsf.facesconfig.emf.RedirectType;
-import org.eclipse.jst.jsf.facesconfig.emf.SmallIconType;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint;
@@ -739,16 +730,10 @@ public class PageflowLinkImpl extends PageflowElementImpl implements
 	 * @generated NOT
 	 */
 	public boolean isRedirect() {
-		boolean result = false;
-		if (!getFCElements().isEmpty()) {
-			RedirectType outcome = ((NavigationCaseType) getFCElements()
-					.getData().get(0)).getRedirect();
-			if (outcome != null) {
-				result = true;
+		Boolean result = (Boolean) getFCElements().get(
+				PageflowPackage.PF_LINK__REDIRECT);
+		return result.booleanValue();
 			}
-		}
-		return result;
-	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -756,25 +741,11 @@ public class PageflowLinkImpl extends PageflowElementImpl implements
 	 * @generated NOT
 	 */
 	public void setRedirect(boolean newRedirect) {
-		RedirectType redirect = null;
-		RedirectType oldRedirect = null;
-		if (!getFCElements().isEmpty()) {
-			oldRedirect = ((NavigationCaseType) getFCElements().getData()
-					.get(0)).getRedirect();
-			if (!newRedirect) {
-				redirect = null;
-			} else {
-				if (oldRedirect == null) {
-					redirect = FacesConfigFactory.eINSTANCE
-							.createRedirectType();
-				}
-			}
-			((NavigationCaseType) getFCElements().getData().get(0))
-					.setRedirect(redirect);
-		}
+		Boolean oldRedirect = new Boolean(isRedirect());
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PageflowPackage.PF_LINK__REDIRECT, oldRedirect, redirect));
+					PageflowPackage.PF_LINK__REDIRECT, oldRedirect,
+					new Boolean(newRedirect)));
 	}
 
 	/**
@@ -783,14 +754,9 @@ public class PageflowLinkImpl extends PageflowElementImpl implements
 	 * @generated NOT
 	 */
 	public String getOutcome() {
-		String result = null;
-		if (!getFCElements().isEmpty()) {
-			FromOutcomeType outcome = ((NavigationCaseType) getFCElements()
-					.getData().get(0)).getFromOutcome();
-			if (outcome != null) {
-				result = outcome.getTextContent();
-			}
-		}
+		String result = (String) getFCElements().get(
+				PageflowPackage.PF_LINK__OUTCOME);
+
 		return result;
 	}
 
@@ -800,29 +766,10 @@ public class PageflowLinkImpl extends PageflowElementImpl implements
 	 * @generated NOT
 	 */
 	public void setOutcome(String newValue) {
-		FromOutcomeType oldOutcome = null;
-		FromOutcomeType newOutcome = null;
-		if (!getFCElements().isEmpty()) {
-			oldOutcome = ((NavigationCaseType) getFCElements().getData().get(0))
-					.getFromOutcome();
-			if (newValue == null || newValue.length() == 0) {
-				((NavigationCaseType) getFCElements().getData().get(0))
-						.setFromOutcome(null);
-			} else {
-				if (oldOutcome == null) {
-					newOutcome = FacesConfigFactory.eINSTANCE
-							.createFromOutcomeType();
-					newOutcome.setTextContent(newValue);
-					((NavigationCaseType) getFCElements().getData().get(0))
-							.setFromOutcome(newOutcome);
-				} else {
-					oldOutcome.setTextContent(newValue);
-				}
-			}
-		}
+		String oldOutcome = getOutcome();
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PageflowPackage.PF_LINK__OUTCOME, oldOutcome, newOutcome));
+					PageflowPackage.PF_LINK__OUTCOME, oldOutcome, newValue));
 	}
 
 	/**
@@ -831,16 +778,10 @@ public class PageflowLinkImpl extends PageflowElementImpl implements
 	 * @generated NOT
 	 */
 	public String getSmallicon() {
-		SmallIconType result = null;
-		if (!getFCElements().isEmpty()) {
-			List icons = ((NavigationCaseType) getFCElements().getData().get(0))
-					.getIcon();
-			if (icons.size() > 0) {
-				result = ((IconType) icons.get(0)).getSmallIcon();
+		String result = (String) getFCElements().get(
+				PageflowPackage.PF_LINK__SMALLICON);
+		return result;
 			}
-		}
-		return result != null ? result.getTextContent() : null;
-	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -848,42 +789,10 @@ public class PageflowLinkImpl extends PageflowElementImpl implements
 	 * @generated NOT
 	 */
 	public void setSmallicon(String newValue) {
-		SmallIconType oldSmallicon = null;
-		SmallIconType newSmallIconType = null;
-		IconType icon = null;
-		if (!getFCElements().isEmpty()) {
-			List icons = ((NavigationCaseType) getFCElements().getData().get(0))
-					.getIcon();
-			if (newValue == null || newValue.length() == 0) {
-				if (icons.size() > 0) {
-					if (((IconType) icons.get(0)).getSmallIcon() != null) {
-						((IconType) icons.get(0)).setSmallIcon(null);
-					}
-				}
-			} else {
-				if (icons.size() == 0) {
-					icon = FacesConfigFactory.eINSTANCE.createIconType();
-					newSmallIconType = FacesConfigFactory.eINSTANCE
-							.createSmallIconType();
-					newSmallIconType.setTextContent(newValue);
-					icon.setSmallIcon(newSmallIconType);
-					icons.add(icon);
-				} else if (((IconType) icons.get(0)).getSmallIcon() == null) {
-					newSmallIconType = FacesConfigFactory.eINSTANCE
-							.createSmallIconType();
-					newSmallIconType.setTextContent(newValue);
-					icon = ((IconType) icons.get(0));
-					icon.setSmallIcon(newSmallIconType);
-				} else {
-					oldSmallicon = ((IconType) icons.get(0)).getSmallIcon();
-					oldSmallicon.setTextContent(newValue);
-				}
-			}
-		}
+		String oldSmallicon = getSmallicon();
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PageflowPackage.PF_LINK__SMALLICON, oldSmallicon,
-					newSmallIconType));
+					PageflowPackage.PF_LINK__SMALLICON, oldSmallicon, newValue));
 	}
 
 	/**
@@ -892,16 +801,11 @@ public class PageflowLinkImpl extends PageflowElementImpl implements
 	 * @generated NOT
 	 */
 	public String getLargeicon() {
-		LargeIconType result = null;
-		if (!getFCElements().isEmpty()) {
-			List icons = ((NavigationCaseType) getFCElements().getData().get(0))
-					.getIcon();
-			if (icons.size() > 0) {
-				result = ((IconType) icons.get(0)).getLargeIcon();
+		String result = (String) getFCElements().get(
+				PageflowPackage.PF_LINK__LARGEICON);
+
+		return result;
 			}
-		}
-		return result != null ? result.getTextContent() : null;
-	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -909,42 +813,10 @@ public class PageflowLinkImpl extends PageflowElementImpl implements
 	 * @generated NOT
 	 */
 	public void setLargeicon(String newValue) {
-		LargeIconType oldLargeIcon = null;
-		LargeIconType newLargeIconType = null;
-		IconType icon = null;
-		if (!getFCElements().isEmpty()) {
-			List icons = ((NavigationCaseType) getFCElements().getData().get(0))
-					.getIcon();
-			if (newValue == null || newValue.length() == 0) {
-				if (icons.size() > 0) {
-					if (((IconType) icons.get(0)).getLargeIcon() != null) {
-						((IconType) icons.get(0)).setLargeIcon(null);
-					}
-				}
-			} else {
-				if (icons.size() == 0) {
-					icon = FacesConfigFactory.eINSTANCE.createIconType();
-					newLargeIconType = FacesConfigFactory.eINSTANCE
-							.createLargeIconType();
-					newLargeIconType.setTextContent(newValue);
-					icon.setLargeIcon(newLargeIconType);
-					icons.add(icon);
-				} else if (((IconType) icons.get(0)).getLargeIcon() == null) {
-					newLargeIconType = FacesConfigFactory.eINSTANCE
-							.createLargeIconType();
-					newLargeIconType.setTextContent(newValue);
-					icon = ((IconType) icons.get(0));
-					icon.setLargeIcon(newLargeIconType);
-				} else {
-					oldLargeIcon = ((IconType) icons.get(0)).getLargeIcon();
-					oldLargeIcon.setTextContent(newValue);
-				}
-			}
-		}
+		String oldLargeIcon = getLargeicon();
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PageflowPackage.PF_LINK__LARGEICON, oldLargeIcon,
-					newLargeIconType));
+					PageflowPackage.PF_LINK__LARGEICON, oldLargeIcon, newValue));
 	}
 
 	/**
@@ -953,14 +825,8 @@ public class PageflowLinkImpl extends PageflowElementImpl implements
 	 * @generated NOT
 	 */
 	public String getFromaction() {
-		String result = null;
-		if (!getFCElements().isEmpty()) {
-			FromActionType fromActionType = ((NavigationCaseType) getFCElements()
-					.getData().get(0)).getFromAction();
-			if (fromActionType != null) {
-				result = fromActionType.getTextContent();
-			}
-		}
+		String result = (String) getFCElements().get(
+				PageflowPackage.PF_LINK__FROMACTION);
 		return result;
 	}
 
@@ -970,30 +836,19 @@ public class PageflowLinkImpl extends PageflowElementImpl implements
 	 * @generated NOT
 	 */
 	public void setFromaction(String newFromaction) {
-		FromActionType oldFromActionType = null;
-		FromActionType newFromActionType = null;
-		if (!getFCElements().isEmpty()) {
-			oldFromActionType = ((NavigationCaseType) getFCElements().getData()
-					.get(0)).getFromAction();
-			if (newFromaction == null || newFromaction.length() == 0) {
-				((NavigationCaseType) getFCElements().getData().get(0))
-						.setFromAction(null);
-			} else {
-				if (oldFromActionType == null) {
-					newFromActionType = FacesConfigFactory.eINSTANCE
-							.createFromActionType();
-					newFromActionType.setTextContent(newFromaction);
-					((NavigationCaseType) getFCElements().getData().get(0))
-							.setFromAction(newFromActionType);
-				} else {
-					oldFromActionType.setTextContent(newFromaction);
-				}
-			}
-		}
+		String oldFromActionType = getFromaction();
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
 					PageflowPackage.PF_LINK__FROMACTION, oldFromActionType,
-					newFromActionType));
+					newFromaction));
+	}
+
+	public ReferenceElement getFCElements() {
+
+		if (refElement == null) {
+			refElement = new LinkReferenceElement(this);
+}
+		return refElement;
 	}
 
 }

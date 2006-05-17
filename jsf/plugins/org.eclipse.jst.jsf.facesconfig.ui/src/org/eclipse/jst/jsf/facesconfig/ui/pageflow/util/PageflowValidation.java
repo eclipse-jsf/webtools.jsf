@@ -203,7 +203,7 @@ public class PageflowValidation {
 	 * @param element
 	 * @return
 	 */
-	public String isValidPage(PageflowPage page) {
+	public String getNotifyMessage(PageflowPage page) {
 		String errorMessage = null;
 		IWorkspaceRoot workspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
 		String pagePath = page.getPath();

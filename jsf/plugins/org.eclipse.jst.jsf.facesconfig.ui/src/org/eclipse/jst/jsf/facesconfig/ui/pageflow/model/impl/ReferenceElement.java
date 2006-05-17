@@ -3,38 +3,33 @@
  * (c) Copyright Sybase, Inc. 2004-2006. 
  * All rights reserved.
  */
-package org.eclipse.jst.jsf.facesconfig.ui.pageflow.synchronization;
+package org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jst.jsf.facesconfig.emf.FromViewIdType;
-import org.eclipse.jst.jsf.facesconfig.emf.NavigationCaseType;
-import org.eclipse.jst.jsf.facesconfig.emf.NavigationRuleType;
-import org.eclipse.jst.jsf.facesconfig.emf.ToViewIdType;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
 import org.eclipse.wst.common.internal.emf.resource.CompatibilityXMIResource;
 
 /**
- * The element holds reference information in pageflow node to faces config
- * node.
+ * The base class for mapping facesconfig node from pageflow node.
  * 
  * @author hmeng
  * 
  */
-public class RefElement {
+public abstract class ReferenceElement {
 
 	private List data = new ArrayList();
 
-	private PageflowElement pageflowElement;
+	protected PageflowElement pageflowElement;
 
-	public RefElement(PageflowElement pageflowElement) {
+	public ReferenceElement(PageflowElement pageflowElement) {
 		this.pageflowElement = pageflowElement;
 	}
 
-	public RefElement(PageflowElement pageflowElement, EObject facesConfigObject) {
+	public ReferenceElement(PageflowElement pageflowElement, EObject facesConfigObject) {
 		this(pageflowElement);
 		this.add(facesConfigObject);
 	}
@@ -47,20 +42,6 @@ public class RefElement {
 	public void add(EObject object) {
 		if (!data.contains(object)) {
 			data.add(object);
-			// pageflowElement.notifyModelChanged(new ENotificationImpl(
-			// (PageflowElementImpl) pageflowElement,
-			// NotificationImpl.SET,
-			// PageflowPackage.PAGEFLOW__REFERENCE_LINK, null, null));
-		}
-	}
-
-	public void clear() {
-		if (!data.isEmpty()) {
-			data.clear();
-			// pageflowElement.notifyModelChanged(new ENotificationImpl(
-			// (PageflowElementImpl) pageflowElement,
-			// NotificationImpl.SET,
-			// PageflowPackage.PAGEFLOW__REFERENCE_LINK, null, null));
 		}
 	}
 
@@ -87,13 +68,6 @@ public class RefElement {
 
 	public boolean remove(EObject object) {
 		boolean result = data.remove(object);
-		if (result) {
-			// pageflowElement.notifyModelChanged(new ENotificationImpl(
-			// (PageflowElementImpl) pageflowElement,
-			// NotificationImpl.SET,
-			// PageflowPackage.PAGEFLOW__REFERENCE_LINK, null, null));
-
-		}
 		return result;
 	}
 
@@ -108,6 +82,11 @@ public class RefElement {
 		return result;
 	}
 
+	/**
+	 * The EMF path of an element.
+	 * 
+	 * @return
+	 */
 	public List getPaths() {
 		List paths = new ArrayList();
 		for (int i = 0, n = data.size(); i < n; i++) {
@@ -116,8 +95,19 @@ public class RefElement {
 		return paths;
 	}
 
+	/**
+	 * The facesconfig elements that are referenced.
+	 * 
+	 * @return
+	 */
 	public List getData() {
 		return data;
+	}
+
+	public void clear() {
+		if (!data.isEmpty()) {
+			data.clear();
+		}
 	}
 
 	public boolean isEmpty() {
@@ -128,19 +118,9 @@ public class RefElement {
 	 * Update when faces-config is modified.
 	 * 
 	 */
-	public void update() {
-		for (Iterator nodes = data.iterator(); nodes.hasNext();) {
-			Object next = nodes.next();
-			if (next instanceof FromViewIdType
-					|| next instanceof NavigationCaseType) {
-				if (!(((EObject) next).eContainer() instanceof NavigationRuleType)) {
-					nodes.remove();
-				}
-			} else if (next instanceof ToViewIdType) {
-				if (!(((EObject) next).eContainer() instanceof NavigationCaseType)) {
-					nodes.remove();
-				}
-			}
-		}
-	}
+	abstract public void update();
+
+	abstract public Object get(int eFeature);
+
+	abstract public void set(EStructuralFeature eFeature, Object newValue);
 }

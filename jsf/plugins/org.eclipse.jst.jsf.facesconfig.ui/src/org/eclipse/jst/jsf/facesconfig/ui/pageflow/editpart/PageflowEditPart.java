@@ -25,7 +25,10 @@ import org.eclipse.draw2d.FreeformLayout;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.ManhattanConnectionRouter;
 import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.CompoundSnapToHelper;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.LayerConstants;
@@ -42,6 +45,8 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.synchronization.FC2PFTransformer;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.synchronization.PFBatchAdapter;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowAnnotationUtil;
 import org.eclipse.jst.jsf.facesconfig.ui.preference.GEMPreferences;
 import org.eclipse.swt.graphics.Color;
@@ -119,8 +124,7 @@ public class PageflowEditPart extends PageflowContainerEditPart implements
 			if (bSnapToGeometry) {
 				snapStrategies.add(new SnapToGeometry(this));
 			}
-			boolean bSnapToGrid = store
-					.getBoolean(GEMPreferences.SNAP_TO_GRID);
+			boolean bSnapToGrid = store.getBoolean(GEMPreferences.SNAP_TO_GRID);
 			if (bSnapToGrid) {
 				snapStrategies.add(new SnapToGrid(this));
 			}
@@ -167,29 +171,74 @@ public class PageflowEditPart extends PageflowContainerEditPart implements
 		return allChildren;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see Adapter#notifyChanged(Notification)
-	 */
-	public void notifyChanged(Notification notification) {
-		int type = notification.getEventType();
+	public Adapter createEMFAdapter() {
+		return new PFBatchAdapter() {
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see Adapter#notifyChanged(Notification)
+			 */
+			public void doNotifyChanged(Notification notification) {
+				int type = notification.getEventType();
 
-		// int featureId = notification.getFeatureID( PageflowPackage.class );
-		switch (type) {
-		case Notification.ADD:
-		case Notification.ADD_MANY:
-		case Notification.REMOVE:
-		case Notification.REMOVE_MANY:
-			break;
+				// int featureId = notification.getFeatureID(
+				// PageflowPackage.class );
+				switch (type) {
+				case Notification.ADD:
+				case Notification.ADD_MANY:
+				case Notification.REMOVE:
+				case Notification.REMOVE_MANY:
+					refreshChildren();
+					break;
 
-		case Notification.SET:
-			refreshVisuals();
-			refreshChildren();
-			break;
-		}
+				case Notification.SET:
+					refreshChildren();
+					refreshVisuals();
+					break;
+				case FC2PFTransformer.MY_NOTIFICATION_TYPE1:
+					restore((Pageflow) getModel());
+					refreshChildren();
+					refreshVisuals();
+					break;
+				// restore all children
+				case FC2PFTransformer.MY_NOTIFICATION_TYPE:
+					// stop all children
+					postPone((Pageflow) getModel());
+					break;
+				}
+			}
 
-		super.notifyChanged(notification);
+			protected void restore(Pageflow pageflow) {
+				TreeIterator nodes;
+				// restore
+				nodes = pageflow.eAllContents();
+				while (nodes.hasNext()) {
+					setPostpone((EObject) nodes.next(), false);
+				}
+				setPostpone(pageflow, false);
+			}
+
+			void setPostpone(EObject node, boolean enable) {
+				List adapters = node.eAdapters();
+				for (int i = 0; i < adapters.size(); i++) {
+					if (adapters.get(i) instanceof PFBatchAdapter) {
+						((PFBatchAdapter) adapters.get(i))
+								.setNeedPostpone(enable);
+					}
+				}
+			}
+
+			protected void postPone(Pageflow pageflow) {
+				TreeIterator nodes;
+				// postpone
+				nodes = pageflow.eAllContents();
+				while (nodes.hasNext()) {
+					setPostpone((EObject) nodes.next(), true);
+				}
+				setPostpone(pageflow, true);
+			}
+
+		};
 	}
 
 	/*
@@ -216,7 +265,6 @@ public class PageflowEditPart extends PageflowContainerEditPart implements
 	 */
 	protected void refreshChildren() {
 		super.refreshChildren();
-
 		PageflowAnnotationUtil.validatePageflow(this);
 	}
 
@@ -261,8 +309,7 @@ public class PageflowEditPart extends PageflowContainerEditPart implements
 			String connectionStyle = store
 					.getString(GEMPreferences.LINE_ROUTING);
 
-			if (GEMPreferences.LINE_ROUTING_MANHATTAN
-					.equals(connectionStyle)) {
+			if (GEMPreferences.LINE_ROUTING_MANHATTAN.equals(connectionStyle)) {
 				this.connectionStyle = ILayerPanePreference.LINE_ROUTING_MANHATTAN;
 			} else {
 				this.connectionStyle = ILayerPanePreference.LINE_ROUTING_MANUAL;

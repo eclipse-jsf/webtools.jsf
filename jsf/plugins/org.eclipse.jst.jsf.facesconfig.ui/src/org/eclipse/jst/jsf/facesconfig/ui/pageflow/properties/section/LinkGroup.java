@@ -20,10 +20,11 @@ import org.eclipse.jst.jsf.facesconfig.common.dialogfield.DialogField;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.IStringButtonAdapter;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.LayoutUtil;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.StringButtonDialogField;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
+import org.eclipse.jst.jsf.facesconfig.common.dialogfield.StringDialogField;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.ActionOutcomeSelectionDialog;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.ITabbedPropertiesConstants;
 import org.eclipse.jst.jsf.facesconfig.ui.util.WebrootUtil;
@@ -41,6 +42,8 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
  */
 public class LinkGroup extends AbstractEditPartGroup {
 	private StringButtonDialogField fromOutcomeField;
+
+	private StringDialogField fromActionField;
 
 	private ComboDialogField redirectField;
 
@@ -105,6 +108,10 @@ public class LinkGroup extends AbstractEditPartGroup {
 		fromOutcomeField.setButtonLabel("...");
 		fromOutcomeField
 				.setDialogFieldChangeListener(getDefaultChangeListener());
+		fromActionField = new StringDialogField();
+		fromActionField.setLabelText(resource.getString("property.fromAction"));
+		fromActionField
+				.setDialogFieldChangeListener(getDefaultChangeListener());
 		redirectField = new ComboDialogField(SWT.DROP_DOWN | SWT.READ_ONLY);
 		redirectField.setLabelText(resource.getString("property.redirect"));
 		redirectField
@@ -124,6 +131,7 @@ public class LinkGroup extends AbstractEditPartGroup {
 	public void refreshData() {
 		if (pfLink != null) {
 			fromOutcomeField.setTextWithoutUpdate(pfLink.getOutcome());
+			fromActionField.setTextWithoutUpdate(pfLink.getFromaction());
 			if (pfLink.isRedirect()) {
 				redirectField.setTextWithoutUpdate(Boolean.TRUE.toString());
 			} else {
@@ -153,6 +161,7 @@ public class LinkGroup extends AbstractEditPartGroup {
 		GridLayout layout = new GridLayout(numberOfColumns, false);
 		top.setLayout(layout);
 
+		fromActionField.doFillIntoGrid(toolkit, top, numberOfColumns);
 		fromOutcomeField.doFillIntoGrid(toolkit, top, numberOfColumns);
 		redirectField.doFillIntoGrid(toolkit, top, numberOfColumns);
 
@@ -173,6 +182,10 @@ public class LinkGroup extends AbstractEditPartGroup {
 
 	public StringButtonDialogField getFromOutcomeField() {
 		return fromOutcomeField;
+	}
+
+	public StringDialogField getFromActionField() {
+		return fromActionField;
 	}
 
 	public ComboDialogField getRedirectField() {

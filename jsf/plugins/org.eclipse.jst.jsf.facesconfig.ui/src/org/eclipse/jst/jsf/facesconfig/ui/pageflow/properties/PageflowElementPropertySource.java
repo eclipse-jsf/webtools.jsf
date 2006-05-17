@@ -26,9 +26,10 @@ import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorResources;
 import org.eclipse.jst.jsf.facesconfig.ui.IconResources;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowValidation;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
@@ -154,11 +155,12 @@ public class PageflowElementPropertySource implements IPropertySource {
 		it = cls.getEAllAttributes().iterator();
 		while (it.hasNext()) {
 			EAttribute attr = (EAttribute) it.next();
-
+			if (attr.isID()
+					|| attr.getFeatureID() == PageflowPackage.PAGEFLOW__REFERENCE_LINK) {
+				continue;
+			}
 			EDataType type = attr.getEAttributeType();
-			if (attr.isID()) {
-				// shouldn't be editable
-			} else if (type.getInstanceClass() == String.class) {
+			if (type.getInstanceClass() == String.class) {
 				PropertyDescriptor propertyDescriptor;
 				if (attr.getName().equalsIgnoreCase(PAGEFLOW_PATH)) {
 					propertyDescriptor = getPagePathPropertyDescriptor(attr);
@@ -201,12 +203,15 @@ public class PageflowElementPropertySource implements IPropertySource {
 		it = cls.getEAllAttributes().iterator();
 		while (it.hasNext()) {
 			EAttribute attr = (EAttribute) it.next();
+			if (attr.isID()
+					|| attr.getName().equalsIgnoreCase(PAGEFLOW_NAME)
+					|| attr.getName().equalsIgnoreCase(PAGEFLOW_COMMENT)
+					|| attr.getFeatureID() == PageflowPackage.PAGEFLOW__REFERENCE_LINK) {
+				continue;
+			}
 
 			EDataType type = attr.getEAttributeType();
-			if (attr.isID() || attr.getName().equalsIgnoreCase(PAGEFLOW_NAME)
-					|| attr.getName().equalsIgnoreCase(PAGEFLOW_COMMENT)) {
-				// shouldn't be editable
-			} else if (type.getInstanceClass() == String.class) {
+			if (type.getInstanceClass() == String.class) {
 				PropertyDescriptor propertyDescriptor;
 
 				propertyDescriptor = new TextPropertyDescriptor(Integer

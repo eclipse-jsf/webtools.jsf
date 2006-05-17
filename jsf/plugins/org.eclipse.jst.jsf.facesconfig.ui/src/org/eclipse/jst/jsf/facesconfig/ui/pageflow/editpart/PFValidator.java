@@ -9,24 +9,12 @@
  * Contributors:
  *     Sybase, Inc. - initial API and implementation
  *******************************************************************************/
-package org.eclipse.jst.jsf.facesconfig.ui.pageflow.synchronization;
+package org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart;
 
 /**
  * @author hmeng
  */
 
-public class Link2CaseTransformer {
-	public void createNewLink() {
-
-	}
-
-	public void createNewCase() {
-
-	}
-
-	public void removeLink() {
-	};
-
-	public void removeCase() {
-	};
+public interface PFValidator {
+	void validate();
 }

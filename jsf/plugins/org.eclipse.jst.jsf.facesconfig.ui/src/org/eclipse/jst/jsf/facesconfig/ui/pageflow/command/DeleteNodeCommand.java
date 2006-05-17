@@ -15,17 +15,16 @@ package org.eclipse.jst.jsf.facesconfig.ui.pageflow.command;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.gef.commands.Command;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorResources;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
 
 /**
  * This is the delete command for pageflow editpart
  * 
  */
-public class DeleteNodeCommand extends Command {
+public class DeleteNodeCommand extends AbstractBatchEditCommand {
 	/** the deleting pageflow node */
 	private PageflowNode child;
 
@@ -49,9 +48,9 @@ public class DeleteNodeCommand extends Command {
 
 	private List targetConnectionTargets = new ArrayList();
 
-	public DeleteNodeCommand() {
+	public DeleteNodeCommand(Pageflow pageflow) {
 		// Pageflow.Commands.DeleteNodeCommand.Label = Delete
-		super(EditorResources.getInstance().getString(
+		super(pageflow, EditorResources.getInstance().getString(
 				"Pageflow.Commands.DeleteNodeCommand.Label"));
 
 	}
@@ -61,7 +60,7 @@ public class DeleteNodeCommand extends Command {
 	 * 
 	 * @see Command#execute()
 	 */
-	public void execute() {
+	public void doExecute() {
 		primExecute();
 	}
 
@@ -70,7 +69,7 @@ public class DeleteNodeCommand extends Command {
 	 * 
 	 * @see Command#redo()
 	 */
-	public void redo() {
+	public void doRedo() {
 		primExecute();
 	}
 
@@ -79,7 +78,7 @@ public class DeleteNodeCommand extends Command {
 	 * 
 	 * @see Command#undo()
 	 */
-	public void undo() {
+	public void doUndo() {
 		parent.getNodes().add(index, child);
 		restoreConnections(child);
 	}

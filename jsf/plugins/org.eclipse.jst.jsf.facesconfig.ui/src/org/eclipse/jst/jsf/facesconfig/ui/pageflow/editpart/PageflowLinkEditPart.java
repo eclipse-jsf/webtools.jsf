@@ -18,17 +18,14 @@ import java.util.List;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.RelativeBendpoint;
-import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.editparts.AbstractConnectionEditPart;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.text.source.Annotation;
-import org.eclipse.jst.jsf.facesconfig.emf.NavigationCaseType;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.IconResources;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpolicy.PFLinkBendpointEditPolicy;
@@ -39,6 +36,7 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.PageflowElementPropertySource;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.synchronization.PFBatchAdapter;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowAnnotationUtil;
 import org.eclipse.jst.jsf.facesconfig.ui.preference.GEMPreferences;
 import org.eclipse.jst.jsf.facesconfig.ui.util.WebrootUtil;
@@ -57,11 +55,9 @@ import org.eclipse.ui.views.properties.IPropertySource;
  * 
  */
 public class PageflowLinkEditPart extends AbstractConnectionEditPart implements
-		IConnectionPreference, IAnnotationEditPart {
+		IConnectionPreference, IAnnotationEditPart, PFValidator {
 	/** adapter for notification */
 	private PFLinkAdapter adapter = new PFLinkAdapter();
-
-	private FCAdapter fcAdapter = new FCAdapter();
 
 	/** property source of the pflink */
 	private IPropertySource propertySource = null;
@@ -125,41 +121,7 @@ public class PageflowLinkEditPart extends AbstractConnectionEditPart implements
 		return (PageflowLink) getModel();
 	}
 
-	private class FCAdapter implements Adapter {
-
-		public Notifier getTarget() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		public boolean isAdapterForType(Object type) {
-			return getModel().getClass() == type;
-		}
-
-		public void notifyChanged(Notification notification) {
-			int type = notification.getEventType();
-			int featureId = notification.getFeatureID(PageflowPackage.class);
-			// FC2PFTransformer.getInstance().NotifyChanged(notification,
-			// getPFLink());
-			switch (type) {
-			case Notification.ADD:
-			case Notification.ADD_MANY:
-			case Notification.REMOVE:
-			case Notification.SET:
-				// FIXME: need the more detailed updation.
-				refreshVisuals();
-				break;
-			}
-		}
-
-		public void setTarget(Notifier newTarget) {
-			// TODO Auto-generated method stub
-
-		}
-
-	}
-
-	private class PFLinkAdapter implements Adapter {
+	private class PFLinkAdapter extends PFBatchAdapter {
 		private Notifier _newTarget = null;
 
 		// private IPropertySource _propertySource = null;
@@ -187,7 +149,7 @@ public class PageflowLinkEditPart extends AbstractConnectionEditPart implements
 		 * 
 		 * @see org.eclipse.emf.common.notify.Adapter#notifyChanged(org.eclipse.emf.common.notify.Notification)
 		 */
-		public void notifyChanged(Notification notification) {
+		public void doNotifyChanged(Notification notification) {
 			int type = notification.getEventType();
 			int featureId = notification.getFeatureID(PageflowPackage.class);
 			// FC2PFTransformer.getInstance().NotifyChanged(notification,
@@ -228,20 +190,6 @@ public class PageflowLinkEditPart extends AbstractConnectionEditPart implements
 	public void activate() {
 		getPFLink().eAdapters().add(adapter);
 		PageflowLink element = (PageflowLink) getModel();
-		if (!element.getFCElements().isEmpty()) {
-			NavigationCaseType navCase = ((NavigationCaseType) element
-					.getFCElements().getData().get(0));
-			if (!navCase.eAdapters().contains(fcAdapter)) {
-				navCase.eAdapters().add(fcAdapter);
-				TreeIterator iterator = navCase.eAllContents();
-				while (iterator.hasNext()) {
-					EObject next = (EObject) iterator.next();
-					if (!next.eAdapters().contains(fcAdapter)) {
-						next.eAdapters().add(fcAdapter);
-					}
-				}
-			}
-		}
 		super.activate();
 	}
 
@@ -522,4 +470,7 @@ public class PageflowLinkEditPart extends AbstractConnectionEditPart implements
 		return this.connectionStyle;
 	}
 
+	public void validate() {
+		PageflowAnnotationUtil.validateLink(this);
+	}
 }

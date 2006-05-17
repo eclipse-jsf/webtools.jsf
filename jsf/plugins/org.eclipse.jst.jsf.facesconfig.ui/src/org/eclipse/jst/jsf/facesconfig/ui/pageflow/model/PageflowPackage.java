@@ -910,6 +910,17 @@ public interface PageflowPackage extends EPackage {
 	EAttribute getPFLink_Outcome();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#getOutcome <em>Outcome</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the attribute '<em>Outcome</em>'.
+	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#getOutcome()
+	 * @see #getPFLink()
+	 * @generated
+	 */
+	EAttribute getPFLink_Fromaction();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#isRedirect <em>Redirect</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 

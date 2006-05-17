@@ -19,7 +19,6 @@ import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.Request;
@@ -30,12 +29,12 @@ import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.IconResources;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.figure.PageflowNodeFigure;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.PageflowElementPropertySource;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.synchronization.FC2PFTransformer;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.synchronization.PFBatchAdapter;
 import org.eclipse.jst.jsf.facesconfig.ui.util.WebrootUtil;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.views.properties.IPropertySource;
@@ -50,17 +49,37 @@ import org.eclipse.ui.views.properties.IPropertySource;
  * <code>org.eclipse.emf.common.notify.Adapter</code> interface
  */
 public abstract class PageflowElementEditPart extends AbstractGraphicalEditPart
-		implements Adapter, IAnnotationEditPart {
+		implements IAnnotationEditPart {
 	/** image description for different edit part */
 	public static final ImageDescriptor IMG_ACTION = EditorPlugin.getDefault()
 			.getImageDescriptor("facesconfig/Pageflow_Action16.gif"); //$NON-NLS-1$
 
-//	public static final ImageDescriptor IMG_BEGIN = EditorPlugin
-//			.getDefault()
-//			.getImageDescriptor(IconResources.getString("Pageflow.begin.large")); //$NON-NLS-1$
-//
-//	public static final ImageDescriptor IMG_END = EditorPlugin.getDefault()
-//			.getImageDescriptor(IconResources.getString("Pageflow.end.large")); //$NON-NLS-1$
+	protected Adapter adapter;
+
+	public Adapter createEMFAdapter() {
+		return new PFBatchAdapter() {
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see AbstractGraphicalEditPart#notifyChanged()
+			 */
+			public void doNotifyChanged(Notification notification) {
+				int type = notification.getEventType();
+				int featureId = notification
+						.getFeatureID(PageflowPackage.class);
+				if (type == Notification.SET) {
+					switch (featureId) {
+					case PageflowPackage.PAGEFLOW_ELEMENT__X:
+					case PageflowPackage.PAGEFLOW_ELEMENT__Y:
+					case PageflowPackage.PAGEFLOW_ELEMENT__WIDTH:
+					case PageflowPackage.PAGEFLOW_ELEMENT__HEIGHT:
+						refreshVisuals();
+						break;
+					}
+				}
+			};
+		};
+	}
 
 	public static final ImageDescriptor IMG_PAGE = EditorPlugin.getDefault()
 			.getImageDescriptor(IconResources.getString("Pageflow.page.large")); //$NON-NLS-1$
@@ -70,9 +89,6 @@ public abstract class PageflowElementEditPart extends AbstractGraphicalEditPart
 
 	/** property source of the pageflow element */
 	private IPropertySource propertySource = null;
-
-	/** notifer of the model modification */
-	private Notifier target = null;
 
 	private Image image = null;
 
@@ -171,33 +187,6 @@ public abstract class PageflowElementEditPart extends AbstractGraphicalEditPart
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see Adapter#getTarget()
-	 */
-	public Notifier getTarget() {
-		return target;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see Adapter#isAdapterForType(Object)
-	 */
-	public boolean isAdapterForType(Object type) {
-		return type.equals(getModel().getClass());
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see Adapter#setTarget(Notifier)
-	 */
-	public void setTarget(Notifier newTarget) {
-		target = newTarget;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see AbstractEditPart#refreshVisuals()
 	 */
 	protected void refreshVisuals() {
@@ -227,7 +216,12 @@ public abstract class PageflowElementEditPart extends AbstractGraphicalEditPart
 		if (key == IPropertySource.class) {
 			return getPropertySource();
 		}
-
+		if (key == Adapter.class) {
+			if (adapter == null) {
+				adapter = createEMFAdapter();
+			}
+			return adapter;
+		}
 		return super.getAdapter(key);
 	}
 
@@ -244,30 +238,6 @@ public abstract class PageflowElementEditPart extends AbstractGraphicalEditPart
 		return propertySource;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see AbstractGraphicalEditPart#notifyChanged()
-	 */
-	public void notifyChanged(Notification notification) {
-		int type = notification.getEventType();
-		int featureId = notification.getFeatureID(PageflowPackage.class);
-		// if (featureId == PageflowPackage.PAGEFLOW__LINKS) {
-		// FC2PFTransformer.getInstance().NotifyChanged(notification,
-		// (PageflowElement) getModel());
-		// }
-		if (type == Notification.SET) {
-			switch (featureId) {
-			case PageflowPackage.PAGEFLOW_ELEMENT__X:
-			case PageflowPackage.PAGEFLOW_ELEMENT__Y:
-			case PageflowPackage.PAGEFLOW_ELEMENT__WIDTH:
-			case PageflowPackage.PAGEFLOW_ELEMENT__HEIGHT:
-				refreshVisuals();
-				break;
-			}
-		}
-	}
-
 	/**
 	 * Registers this edit part as a listener for change notifications to the
 	 * specified pageflow element.
@@ -278,9 +248,8 @@ public abstract class PageflowElementEditPart extends AbstractGraphicalEditPart
 	 */
 	protected void hookIntoPageflowElement(PageflowElement element) {
 		if (null != element) {
-			FC2PFTransformer.getInstance().adapt(element);
-			if (!element.eAdapters().contains(this)) {
-				element.eAdapters().add(this);
+			if (!element.eAdapters().contains(getAdapter(Adapter.class))) {
+				element.eAdapters().add(getAdapter(Adapter.class));
 			}
 		}
 	}
@@ -294,8 +263,7 @@ public abstract class PageflowElementEditPart extends AbstractGraphicalEditPart
 	 */
 	protected void unhookFromPageflowElement(PageflowElement element) {
 		if (null != element) {
-			element.eAdapters().remove(this);
-//			FC2PFTransformer.getInstance().unAdapt(element);
+			element.eAdapters().remove(getAdapter(Adapter.class));
 		}
 	}
 

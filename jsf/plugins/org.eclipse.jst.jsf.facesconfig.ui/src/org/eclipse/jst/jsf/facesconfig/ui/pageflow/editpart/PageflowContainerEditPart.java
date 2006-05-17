@@ -13,11 +13,13 @@
 package org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart;
 
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpolicy.PageflowContainerEditPolicy;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpolicy.PageflowXYLayoutEditPolicy;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.synchronization.PFBatchAdapter;
 
 /**
  * abstract class for pageflow container.
@@ -53,26 +55,30 @@ abstract public class PageflowContainerEditPart extends PageflowElementEditPart 
 				new PageflowXYLayoutEditPolicy());
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see PageflowElementEditPart#notifyChanged(Notification)
-	 */
-	public void notifyChanged(Notification notification) {
-		int type = notification.getEventType();
+	public Adapter createEMFAdapter() {
+		return new PFBatchAdapter() {
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see PageflowElementEditPart#notifyChanged(Notification)
+			 */
+			public void doNotifyChanged(Notification notification) {
+				int type = notification.getEventType();
 
-		switch (type) {
-		case Notification.ADD:
-		case Notification.ADD_MANY:
-		case Notification.REMOVE:
-		case Notification.REMOVE_MANY:
-			refreshChildren();
-			break;
-		case Notification.SET:
-			refreshVisuals();
-			break;
-		}
-		super.notifyChanged(notification);
+				switch (type) {
+				case Notification.ADD:
+				case Notification.ADD_MANY:
+				case Notification.REMOVE:
+				case Notification.REMOVE_MANY:
+					refreshChildren();
+					break;
+				case Notification.SET:
+					refreshVisuals();
+					break;
+				}
+				super.notifyChanged(notification);
+			}
+		};
 	}
 
 }

@@ -13,7 +13,7 @@ package org.eclipse.jst.jsf.facesconfig.ui.pageflow.model;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.synchronization.RefElement;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.ReferenceElement;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Element</b></em>'.
@@ -40,7 +40,7 @@ public interface PageflowElement extends EObject {
 	/**
 	 * @generated NOT
 	 */
-	public RefElement getFCElements();
+	public ReferenceElement getFCElements();
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute. The

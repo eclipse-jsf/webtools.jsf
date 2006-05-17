@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.synchronization.RefElement;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Element</b></em>'.
@@ -46,7 +45,7 @@ public abstract class PageflowElementImpl extends EObjectImpl implements
 
 	protected static int counter = 0;
 
-	private RefElement refElement;
+	protected ReferenceElement refElement;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -575,11 +574,8 @@ public abstract class PageflowElementImpl extends EObjectImpl implements
 			eNotify(notification);
 	}
 
-	public RefElement getFCElements() {
-		if (refElement == null) {
-			refElement = new RefElement(this);
-		}
-		return refElement;
+	public ReferenceElement getFCElements() {
+		return null;
 	}
 
 }

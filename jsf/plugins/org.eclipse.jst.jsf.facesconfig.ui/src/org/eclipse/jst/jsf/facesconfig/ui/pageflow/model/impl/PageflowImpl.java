@@ -31,7 +31,6 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowValidation;
-import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Pageflow</b></em>'.
@@ -48,7 +47,6 @@ import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
  * @generated
  */
 public class PageflowImpl extends PageflowElementImpl implements Pageflow {
-	private IDOMModel _sseModel;
 
 	/**
 	 * The cached value of the '{@link #getNodes() <em>Nodes</em>}'
@@ -445,14 +443,6 @@ public class PageflowImpl extends PageflowElementImpl implements Pageflow {
 
 	}
 
-	public IDOMModel getSSEModel() {
-		return _sseModel;
-	}
-
-	public void setSSEModel(IDOMModel model) {
-		_sseModel = model;
-	}
-
 	public void notifyModelChanged(Notification notification) {
 		TreeIterator children = eAllContents();
 		while (children.hasNext()) {
@@ -461,7 +451,6 @@ public class PageflowImpl extends PageflowElementImpl implements Pageflow {
 				((PageflowElement) next).getFCElements().update();
 			}
 		}
-		getFCElements().update();
 		super.notifyModelChanged(notification);
 	}
 

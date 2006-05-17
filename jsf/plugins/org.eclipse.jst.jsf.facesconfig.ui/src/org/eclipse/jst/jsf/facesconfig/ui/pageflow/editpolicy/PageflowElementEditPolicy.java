@@ -27,7 +27,7 @@ public class PageflowElementEditPolicy extends
 	 */
 	protected Command createDeleteCommand(GroupRequest request) {
 		Object parent = getHost().getParent().getModel();
-		DeleteNodeCommand deleteCmd = new DeleteNodeCommand();
+		DeleteNodeCommand deleteCmd = new DeleteNodeCommand((Pageflow) parent);
 		deleteCmd.setParent((Pageflow) parent);
 		deleteCmd.setChild((PageflowNode) getHost().getModel());
 		return deleteCmd;

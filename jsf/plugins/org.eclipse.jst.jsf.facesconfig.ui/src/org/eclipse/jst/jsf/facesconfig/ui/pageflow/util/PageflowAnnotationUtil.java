@@ -17,8 +17,9 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.IAnnotationEditPart;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowLinkEditPart;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PFValidator;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowElementEditPart;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowLinkEditPart;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowNodeEditPart;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
@@ -53,25 +54,28 @@ public class PageflowAnnotationUtil {
 
 			PageflowElementEditPart element = (PageflowElementEditPart) iterChild
 					.next();
-			String errorMessage = null;
-
-			if (element.getModel() instanceof PageflowPage) {
-				errorMessage = PageflowValidation.getInstance().isValidPage(
-						(PageflowPage) element.getModel());
+			// String errorMessage = null;
+			if (element instanceof PFValidator) {
+				((PFValidator) element).validate();
 			}
+			// if (element.getModel() instanceof PageflowPage) {
+			// errorMessage = PageflowValidation.getInstance().getNotifyMessage(
+			// (PageflowPage) element.getModel());
+			// }
 
-			if (errorMessage != null) {
-				addAnnotation(element, errorMessage);
-			} else {
-				removeAnnotation(element);
-			}
+			// if (errorMessage != null) {
+			// addAnnotation(element, errorMessage);
+			// } else {
+			// removeAnnotation(element);
+			// }
 
 			// validate the connections.
 			Iterator iterLinks = element.getSourceConnections().iterator();
 			while (iterLinks.hasNext()) {
-				PageflowLinkEditPart link = (PageflowLinkEditPart) iterLinks.next();
-
-				validateLink(link);
+				PageflowLinkEditPart link = (PageflowLinkEditPart) iterLinks
+						.next();
+				link.validate();
+				// validateLink(link);
 			}
 		}
 
@@ -84,7 +88,7 @@ public class PageflowAnnotationUtil {
 	 *            it can be null, then the edit part will not be updated
 	 */
 	public static void validatePage(PageflowNodeEditPart pagePart) {
-		if (pagePart == null) {
+		if (pagePart == null && pagePart.getParent() != null) {
 			return;
 		}
 
@@ -92,20 +96,22 @@ public class PageflowAnnotationUtil {
 
 		removeAnnotation(pagePart);
 
-		errorMessage = PageflowValidation.getInstance().isValidPage(
+		errorMessage = PageflowValidation.getInstance().getNotifyMessage(
 				(PageflowPage) pagePart.getModel());
 
 		if (errorMessage != null) {
 			addAnnotation(pagePart, errorMessage);
+		} else {
+			removeAnnotation(pagePart);
 		}
 
 		// validate the connections.
-		Iterator iterLinks = pagePart.getSourceConnections().iterator();
-		while (iterLinks.hasNext()) {
-			PageflowLinkEditPart link = (PageflowLinkEditPart) iterLinks.next();
-
-			validateLink(link);
-		}
+		// Iterator iterLinks = pagePart.getSourceConnections().iterator();
+		// while (iterLinks.hasNext()) {
+		// PageflowLinkEditPart link = (PageflowLinkEditPart) iterLinks.next();
+		//
+		// validateLink(link);
+		// }
 	}
 
 	/**
@@ -115,7 +121,7 @@ public class PageflowAnnotationUtil {
 	 *            it can be null, then the edit part will not be updated
 	 */
 	public static void validateLink(PageflowLinkEditPart linkPart) {
-		if (linkPart != null) {
+		if (linkPart != null && linkPart.getParent() != null) {
 			String errorMessage = null;
 
 			removeAnnotation(linkPart);
@@ -125,6 +131,8 @@ public class PageflowAnnotationUtil {
 
 			if (errorMessage != null) {
 				addAnnotation(linkPart, errorMessage);
+			} else {
+				removeAnnotation(linkPart);
 			}
 		}
 	}

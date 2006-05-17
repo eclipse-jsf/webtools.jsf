@@ -40,9 +40,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.command.BasicCommandStack;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.ui.viewer.IViewerProvider;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
@@ -150,7 +148,7 @@ public class FacesConfigEditor extends FormEditor implements
 
 	private int othersPageID;
 
-	// private IEditorPart _prevPart;
+	private FC2PFTransformer modelsTransform;
 
 	/** The pageflow viewer */
 	private PageflowEditor pageflowPage;
@@ -465,23 +463,26 @@ public class FacesConfigEditor extends FormEditor implements
 		pageflowPage = new PageflowEditor(this);
 		pageflowPageID = addPage(pageflowPage, getEditorInput());
 		setPageText(pageflowPageID, "Navigation Rule");
-
 		addPageActionRegistry(pageflowPage);
-
 		getFacesConfigAdapter().setPageflowManager(
 				pageflowPage.getPageflowManager());
 		getFacesConfigAdapter().setFacesConfigEMFModel(getFacesConfig());
-		FC2PFTransformer.getInstance().setFacesConfig(getFacesConfig());
-		FC2PFTransformer.getInstance().setPageflow(pageflowPage.getPageflow());
-		boolean fornew = getFacesConfigAdapter()
-				.updatePageflowFromFacesConfig();
+		getModelsTransform().setFacesConfig(getFacesConfig());
+		getModelsTransform().setPageflow(pageflowPage.getPageflow());
+		boolean fornew = getModelsTransform().updatePageflowModelFromEMF();
 		pageflowPage.setGraphicalViewerContents(pageflowPage.getPageflow());
 		if (fornew) {
 			PageflowLayoutManager.getInstance().layoutPageflow(
 					pageflowPage.getPageflow());
 		}
-		FC2PFTransformer.getInstance().setListenToNotify(true);
-		// getFacesConfigAdapter().updatePageflowFromFacesConfig();
+		getModelsTransform().setListenToNotify(true);
+	}
+
+	private FC2PFTransformer getModelsTransform() {
+		if (modelsTransform == null) {
+			modelsTransform = new FC2PFTransformer();
+		}
+		return modelsTransform;
 	}
 
 	/**
@@ -541,19 +542,6 @@ public class FacesConfigEditor extends FormEditor implements
 	public FacesConfigType getFacesConfig() {
 		// return modelResource.getFacesConfig();
 		FacesConfigType facesConfig = facesConfigAtrifactEdit.getFacesConfig();
-		if (!FC2PFTransformer.getInstance().isAdapted(facesConfig)) {
-			Iterator contents = facesConfig.getNavigationRule().iterator();
-			while (contents.hasNext()) {
-				EObject next = ((EObject) contents.next());
-				TreeIterator children = next.eAllContents();
-				while (children.hasNext()) {
-					FC2PFTransformer.getInstance().adapt(
-							(EObject) children.next());
-				}
-				FC2PFTransformer.getInstance().adapt(next);
-			}
-			FC2PFTransformer.getInstance().adapt(facesConfig);
-		}
 		return facesConfig;
 	}
 
@@ -752,58 +740,29 @@ public class FacesConfigEditor extends FormEditor implements
 		return EDITOR_ID;
 	}
 
-	/**
-	 * Update the pageflow editor to sychronize with the source editor of
-	 * faces-config.
-	 * 
-	 */
-	public void updatePageflowPage(boolean addToCommandStack, boolean layout) {
-		// InputStream inputStreamOfFacesConfig = null;
-		// try {
-		// ISourceEditingTextTools editingTools = (ISourceEditingTextTools)
-		// sourcePage
-		// .getAdapter(ISourceEditingTextTools.class);
-		//
-		// if (editingTools != null) {
-		// inputStreamOfFacesConfig = new ByteArrayInputStream(
-		// editingTools.getDocument().get().getBytes("UTF-8"));//$NON-NLS-1$
-		// }
-		// } catch (UnsupportedEncodingException e) {
-		// // PageflowEditor.Encoding.Unsupported = Unsupported Encoding.
-		// log.error("PageflowEditor.Encoding.Unsupported", e); //$NON-NLS-1$
-		// }
-		//
-		// if (inputStreamOfFacesConfig == null) {
-		// return;
-		// }
-
-		// Pageflow pageflowFromFacesConfig = null;
-
-		try {
-
-			Assert.isTrue(getFacesConfigAdapter().getPageflowFromFacesConfig(
-					layout) != null);// getPageflowFromFacesConfig();
-		} catch (IOException e) {
-			// PageflowEditor.Transform.Error.GetPageflowFromFacesConfig =
-			// Failed to get pageflow model from faces-config'a navigation rule.
-			// log
-			// .error(
-			// "PageflowEditor.Transform.Error.GetPageflowFromFacesConfig",
-			// e);//$NON-NLS-1$
-		}
-
-		// if (null != pageflowFromFacesConfig) {
-		// UpdatePageflowCommand updateCommand = new UpdatePageflowCommand();
-		// // updateCommand.setPageflowUpdateDelta(pageflowPage.getPageflow(),
-		// // pageflowFromFacesConfig);
-		// if (addToCommandStack) {
-		// pageflowPage.getCommandStack().execute(updateCommand);
-		// } else {
-		// updateCommand.execute();
-		// }
-		// }
-		getFacesConfigAdapter().setPageflowSynchronizeState(true);
-	}
+	// /**
+	// * Update the pageflow editor to sychronize with the source editor of
+	// * faces-config.
+	// *
+	// */
+	// public void updatePageflowPage(boolean addToCommandStack, boolean layout)
+	// {
+	// try {
+	//
+	// Assert
+	// .isTrue(getFacesConfigAdapter()
+	// .getPageflowFromFacesConfig() != null);
+	// } catch (IOException e) {
+	// // PageflowEditor.Transform.Error.GetPageflowFromFacesConfig =
+	// // Failed to get pageflow model from faces-config'a navigation rule.
+	// // log
+	// // .error(
+	// // "PageflowEditor.Transform.Error.GetPageflowFromFacesConfig",
+	// // e);//$NON-NLS-1$
+	// }
+	//
+	// getFacesConfigAdapter().setPageflowSynchronizeState(true);
+	// }
 
 	/** the <code>CommandStackListener</code> */
 	private MultiPageCommandStackListener multiPageCommandStackListener = null;
@@ -1281,19 +1240,7 @@ public class FacesConfigEditor extends FormEditor implements
 	// return propertySheetPage;
 	// }
 	public void dispose() {
-		FC2PFTransformer.getInstance().dispose();
-		// Iterator contents = getFacesConfig().getNavigationRule().iterator();
-		// while (contents.hasNext()) {
-		// EObject next = ((EObject) contents.next());
-		// TreeIterator children = next.eAllContents();
-		// while (children.hasNext()) {
-		// FC2PFTransformer.getInstance().unAdapt(
-		// (EObject) children.next());
-		// }
-		// FC2PFTransformer.getInstance().unAdapt((EObject) next);
-		// }
-		// FC2PFTransformer.getInstance().unAdapt(getFacesConfig());
-
+		getModelsTransform().dispose();
 		ResourcesPlugin.getWorkspace().removeResourceChangeListener(
 				resourceChangeListener);
 

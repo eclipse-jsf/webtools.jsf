@@ -61,6 +61,14 @@ public class LinkSection extends AbstractEditPartSection {
 								.getRedirectValue());
 					}
 				});
+		group.getFromActionField().setDialogFieldApplyListener(
+				new IDialogFieldApplyListener() {
+					public void dialogFieldApplied(DialogField field) {
+						LinkSection.this.setValue(PageflowPackageImpl.eINSTANCE
+								.getPFLink_Fromaction().getName(), group
+								.getFromActionField().getText());
+					}
+				});
 	}
 
 	/*
