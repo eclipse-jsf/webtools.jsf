@@ -1,0 +1,64 @@
+package org.eclipse.jst.jsf.core.internal.types;
+
+
+/**
+ * Encodes a type signature and a string that has some literal value based on
+ * the type signature.  The class represents only a value object -- no attempt
+ * is made to assert that the literalValue is really of the type specified.
+ * 
+ * @author cbateman
+ *
+ */
+public abstract class LiteralType extends ValueType
+{
+    
+    /**
+     * Consider a new literal type
+     * 
+     * @param signature
+     * @param literalValue
+     */
+    protected LiteralType(final String signature)
+    {
+        super(signature, IAssignable.ASSIGNMENT_TYPE_RHS);
+    }
+
+    /**
+     * @return the literal value string (unparsed)
+     */
+    public abstract String getLiteralValue();
+
+    /**
+     * @return the type signature
+     */
+    public final String getSignature() {
+        return super.getSignature();
+    }
+    
+    /**
+     * @return a type signature for the kind of number this literal will coerce
+     * into when asked to become a number or null if this cannot be determined
+     * @throws TypeCoercionException if this literal has no legal coercion into
+     * a number
+     */
+    public String getNumberCoercion() throws TypeCoercionException
+    {
+       // always box before coercion 
+       return
+           TypeCoercer.coerceToNumber(
+                   TypeTransformer.transformBoxPrimitives(getSignature()));
+    }
+    
+    /**
+     * @param T
+     * @return a Number coercion of the literal's value, null if indeterminate
+     * @throws TypeCoercionException if the coercion is illegal
+     */
+    public abstract Number coerceToNumber(Class T) throws TypeCoercionException;
+    
+    /**
+     * @return a Boolean coercion of the literal's value, null if indeterminate
+     * @throws TypeCoercionException if the coercion is illegal
+     */
+    public abstract Boolean coerceToBoolean() throws TypeCoercionException;
+}
