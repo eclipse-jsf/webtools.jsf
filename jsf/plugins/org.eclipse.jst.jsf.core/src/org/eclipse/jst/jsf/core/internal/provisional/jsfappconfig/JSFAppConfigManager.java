@@ -86,12 +86,12 @@ public class JSFAppConfigManager {
 	 * a session property.
 	 * 
 	 * @param project IProject instance to which the returned
-	 * JSFAppConfigManager instance is keyed
-	 * @return JSFAppConfigManager instance, or null
+	 * JSFAppConfigManager instance is keyed.
+	 * @return JSFAppConfigManager instance, or null.
 	 */
 	public static JSFAppConfigManager getInstance(IProject project) {
 		JSFAppConfigManager manager = null;
-		if (isValidProject(project)) {
+		if (JSFAppConfigUtils.isValidJSFProject(project)) {
 			manager = getFromSessionProperty(project);
 			if (manager == null) {
 				manager = new JSFAppConfigManager(project);
@@ -101,50 +101,13 @@ public class JSFAppConfigManager {
 	}
 
 	/**
-	 * Tests if the passed IProject instance is valid in the following ways:
-	 * <ul>
-	 * <li>project is not null and is accessible</li>
-	 * <li>project has the "jst.jsf" facet set on it</li>
-	 * </ul>
-	 * 
-	 * @param project IProject instance to be tested
-	 * @return true if the IProject instance is valid, else false
-	 */
-	protected static boolean isValidProject(IProject project) {
-		boolean isValid = false;
-		//check for null or inaccessible project
-		if (project != null && project.isAccessible()) {
-			//check for "jst.jsf" facet on project
-			try {
-				IFacetedProject facetedProject = ProjectFacetsManager.create(project);
-				if (facetedProject != null) {
-					Set projectFacets = facetedProject.getProjectFacets();
-					Iterator itProjectFacets = projectFacets.iterator();
-					while (itProjectFacets.hasNext()) {
-						IProjectFacetVersion projectFacetVersion = (IProjectFacetVersion)itProjectFacets.next();
-						IProjectFacet projectFacet = projectFacetVersion.getProjectFacet();
-						if ("jst.jsf".equals(projectFacet.getId())) { //$NON-NLS-1$
-							isValid = true;
-							break;
-						}
-					}
-				}
-			} catch(CoreException ce) {
-				//log error
-				JSFCorePlugin.log(IStatus.ERROR, ce.getLocalizedMessage(), ce);
-			}
-		}
-		return isValid;
-	}
-
-	/**
 	 * Attempts to get a JSFAppConfigManager instance from a session property
 	 * of the passed IProject instance. Will return null if the session
 	 * property has not yet been set.
 	 * 
 	 * @param project IProject instance from which to retrieve the
-	 * JSFAppConfigManager instance
-	 * @return JSFAppConfigManager instance, or null
+	 * JSFAppConfigManager instance.
+	 * @return JSFAppConfigManager instance, or null.
 	 */
 	protected static JSFAppConfigManager getFromSessionProperty(IProject project) {
 		JSFAppConfigManager manager = null;
@@ -214,10 +177,11 @@ public class JSFAppConfigManager {
 	/**
 	 * Initializes instance by:
 	 * <ul>
-	 * 	<li>creating configProvidersChangeListeners collection</li>
-	 * 	<li>creating and populating configLocaters collection</li>
-	 * 	<li>invoking the startLocating() method on all configLocaters</li>
-	 * 	<li>setting instance as a session property of the IProject instance</li>
+	 *  <li>creating facesConfigChangeListeners collection, </li>
+	 * 	<li>creating configProvidersChangeListeners collection, </li>
+	 * 	<li>creating and populating configLocaters collection, </li>
+	 * 	<li>invoking the startLocating() method on all configLocaters, </li>
+	 * 	<li>setting instance as a session property of the IProject instance.</li>
 	 * </ul>
 	 */
 	protected void initialize() {
@@ -283,8 +247,8 @@ public class JSFAppConfigManager {
 	/**
 	 * Adds an instance of {@link IJSFAppConfigProvidersChangeListener}.
 	 * 
-	 * @param listener An instance of {@link IJSFAppConfigProvidersChangeListener}
-	 * @return true if added, else false
+	 * @param listener An instance of {@link IJSFAppConfigProvidersChangeListener}.
+	 * @return true if added, else false.
 	 */
 	public boolean addJSFAppConfigProvidersChangeListener(IJSFAppConfigProvidersChangeListener listener) {
 		return configProvidersChangeListeners.add(listener);
@@ -293,8 +257,8 @@ public class JSFAppConfigManager {
 	/**
 	 * Removes an instance of {@link IJSFAppConfigProvidersChangeListener}.
 	 * 
-	 * @param listener an instance of {@link IJSFAppConfigProvidersChangeListener}
-	 * @return true if removed, else false
+	 * @param listener an instance of {@link IJSFAppConfigProvidersChangeListener}.
+	 * @return true if removed, else false.
 	 */
 	public boolean removeJSFAppConfigProvidersChangeListener(IJSFAppConfigProvidersChangeListener listener) {
 		return configProvidersChangeListeners.remove(listener);
@@ -305,8 +269,8 @@ public class JSFAppConfigManager {
 	 * a change in the Set of {@link IJSFAppConfigProvider} instances.
 	 * 
 	 * @param configProvider {@link IJSFAppConfigProvider} instance that has
-	 * changed
-	 * @param eventType Event type
+	 * changed.
+	 * @param eventType Event type.
 	 */
 	public void notifyJSFAppConfigProvidersChangeListeners(IJSFAppConfigProvider configProvider, int eventType) {
 		JSFAppConfigProvidersChangeEvent event = new JSFAppConfigProvidersChangeEvent(configProvider, eventType);
@@ -545,6 +509,120 @@ public class JSFAppConfigManager {
 			}
 		}
 		return navigationRulesForPage;
+	}
+
+	/**
+	 * Gets list of all ApplicationType instances from all known
+	 * faces-config models; list may be empty.
+	 * 
+	 * @return List of all ApplicationType instances from all known
+	 * faces-config models (list may be empty).
+	 */
+	public List getApplications() {
+		List allApplications = new ArrayList();
+		List facesConfigs = getFacesConfigModels();
+		Iterator itFacesConfigs = facesConfigs.iterator();
+		while (itFacesConfigs.hasNext()) {
+			FacesConfigType facesConfig = (FacesConfigType)itFacesConfigs.next();
+			EList applications = facesConfig.getApplication();
+			allApplications.addAll(applications);
+		}
+		return allApplications;
+	}
+
+	/**
+	 * Gets list of all FactoryType instances from all known faces-config
+	 * models; list may be empty.
+	 * 
+	 * @return List of all FactoryType instances from all known faces-config
+	 * models (list may be empty).
+	 */
+	public List getFactories() {
+		List allFactories = new ArrayList();
+		List facesConfigs = getFacesConfigModels();
+		Iterator itFacesConfigs = facesConfigs.iterator();
+		while (itFacesConfigs.hasNext()) {
+			FacesConfigType facesConfig = (FacesConfigType)itFacesConfigs.next();
+			EList factories = facesConfig.getFactory();
+			allFactories.addAll(factories);
+		}
+		return allFactories;
+	}
+
+	/**
+	 * Gets list of all ComponentType instances from all known faces-config
+	 * models; list may be empty.
+	 * 
+	 * @return List of all ComponentType instances from all known faces-config
+	 * models (list may be empty).
+	 */
+	public List getComponents() {
+		List allComponents = new ArrayList();
+		List facesConfigs = getFacesConfigModels();
+		Iterator itFacesConfigs = facesConfigs.iterator();
+		while (itFacesConfigs.hasNext()) {
+			FacesConfigType facesConfig = (FacesConfigType)itFacesConfigs.next();
+			EList components = facesConfig.getComponent();
+			allComponents.addAll(components);
+		}
+		return allComponents;
+	}
+
+	/**
+	 * Gets list of all ReferencedBeanType instances from all known
+	 * faces-config models; list may be empty.
+	 * 
+	 * @return List of all ReferencedBeanType instances from all known
+	 * faces-config models (list may be empty).
+	 */
+	public List getReferencedBeans() {
+		List allReferencedBeans = new ArrayList();
+		List facesConfigs = getFacesConfigModels();
+		Iterator itFacesConfigs = facesConfigs.iterator();
+		while (itFacesConfigs.hasNext()) {
+			FacesConfigType facesConfig = (FacesConfigType)itFacesConfigs.next();
+			EList referencedBeans = facesConfig.getReferencedBean();
+			allReferencedBeans.addAll(referencedBeans);
+		}
+		return allReferencedBeans;
+	}
+
+	/**
+	 * Gets list of all RenderKitType instances from all known faces-config
+	 * models; list may be empty.
+	 * 
+	 * @return List of all RenderKitType instances from all known faces-config
+	 * models (list may be empty).
+	 */
+	public List getRenderKits() {
+		List allRenderKits = new ArrayList();
+		List facesConfigs = getFacesConfigModels();
+		Iterator itFacesConfigs = facesConfigs.iterator();
+		while (itFacesConfigs.hasNext()) {
+			FacesConfigType facesConfig = (FacesConfigType)itFacesConfigs.next();
+			EList renderKits = facesConfig.getRenderKit();
+			allRenderKits.addAll(renderKits);
+		}
+		return allRenderKits;
+	}
+
+	/**
+	 * Gets list of all LifecycleType instances from all known faces-config
+	 * models; list may be empty.
+	 * 
+	 * @return List of all LifecycleType instances from all known faces-config
+	 * models (list may be empty).
+	 */
+	public List getLifecycles() {
+		List allLifecycles = new ArrayList();
+		List facesConfigs = getFacesConfigModels();
+		Iterator itFacesConfigs = facesConfigs.iterator();
+		while (itFacesConfigs.hasNext()) {
+			FacesConfigType facesConfig = (FacesConfigType)itFacesConfigs.next();
+			EList lifecycles = facesConfig.getLifecycle();
+			allLifecycles.addAll(lifecycles);
+		}
+		return allLifecycles;
 	}
 
 	/**

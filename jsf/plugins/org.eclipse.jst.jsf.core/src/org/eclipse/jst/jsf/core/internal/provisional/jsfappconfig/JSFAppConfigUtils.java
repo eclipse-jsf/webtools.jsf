@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -24,6 +25,7 @@ import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
@@ -33,9 +35,14 @@ import org.eclipse.jst.j2ee.internal.J2EEVersionConstants;
 import org.eclipse.jst.j2ee.web.componentcore.util.WebArtifactEdit;
 import org.eclipse.jst.j2ee.webapplication.ContextParam;
 import org.eclipse.jst.j2ee.webapplication.WebApp;
+import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.wst.common.componentcore.ComponentCore;
 import org.eclipse.wst.common.componentcore.resources.IVirtualComponent;
 import org.eclipse.wst.common.componentcore.resources.IVirtualFolder;
+import org.eclipse.wst.common.project.facet.core.IFacetedProject;
+import org.eclipse.wst.common.project.facet.core.IProjectFacet;
+import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
+import org.eclipse.wst.common.project.facet.core.ProjectFacetsManager;
 
 /**
  * JSFAppConfigUtils provides utility methods useful in processing of a JSF
@@ -54,6 +61,45 @@ public class JSFAppConfigUtils {
 	 * Location in JAR file of application configuration resource file. 
 	 */
 	public static final String FACES_CONFIG_IN_JAR_PATH = "META-INF/faces-config.xml";
+
+	/**
+	 * Tests if the passed IProject instance is a valid JSF project in the
+	 * following ways:
+	 * <ul>
+	 * <li>project is not null and is accessible, </li>
+	 * <li>project has the "jst.jsf" facet set on it.</li>
+	 * </ul>
+	 * 
+	 * @param project IProject instance to be tested.
+	 * @return true if the IProject instance is a valid JSF project, else
+	 * false.
+	 */
+	public static boolean isValidJSFProject(IProject project) {
+		boolean isValid = false;
+		//check for null or inaccessible project
+		if (project != null && project.isAccessible()) {
+			//check for "jst.jsf" facet on project
+			try {
+				IFacetedProject facetedProject = ProjectFacetsManager.create(project);
+				if (facetedProject != null) {
+					Set projectFacets = facetedProject.getProjectFacets();
+					Iterator itProjectFacets = projectFacets.iterator();
+					while (itProjectFacets.hasNext()) {
+						IProjectFacetVersion projectFacetVersion = (IProjectFacetVersion)itProjectFacets.next();
+						IProjectFacet projectFacet = projectFacetVersion.getProjectFacet();
+						if ("jst.jsf".equals(projectFacet.getId())) { //$NON-NLS-1$
+							isValid = true;
+							break;
+						}
+					}
+				}
+			} catch(CoreException ce) {
+				//log error
+				JSFCorePlugin.log(IStatus.ERROR, ce.getLocalizedMessage(), ce);
+			}
+		}
+		return isValid;
+	}
 
 	/**
 	 * Gets an IVirtualFolder instance which represents the root context's
