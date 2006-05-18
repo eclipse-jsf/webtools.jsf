@@ -142,9 +142,13 @@ public class ContextParamSpecifiedJSFAppConfigLocater extends WebContentRelative
 					break;
 				}
 			} else if (objNotifier instanceof ContextParam) {
-				locateProviders();
+				if (notification.getEventType() != Notification.REMOVING_ADAPTER) {
+					locateProviders();
+				}
 			} else if (objNotifier instanceof ParamValue) {
-				locateProviders();
+				if (notification.getEventType() != Notification.REMOVING_ADAPTER) {
+					locateProviders();
+				}
 			}
 		}
 

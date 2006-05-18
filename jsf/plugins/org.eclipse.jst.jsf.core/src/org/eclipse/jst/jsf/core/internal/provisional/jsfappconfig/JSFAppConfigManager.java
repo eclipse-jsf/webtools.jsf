@@ -20,6 +20,12 @@ import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IResourceChangeEvent;
+import org.eclipse.core.resources.IResourceChangeListener;
+import org.eclipse.core.resources.IResourceDelta;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
@@ -40,7 +46,7 @@ import org.eclipse.jst.jsf.facesconfig.emf.NavigationRuleType;
  * 
  * @author Ian Trimble - Oracle
  */
-public class JSFAppConfigManager {
+public class JSFAppConfigManager implements IResourceChangeListener {
 
 	/**
 	 * Key that is used for the IProject instance's session property that
@@ -177,7 +183,8 @@ public class JSFAppConfigManager {
 	 * 	<li>creating configProvidersChangeListeners collection, </li>
 	 * 	<li>creating and populating configLocaters collection, </li>
 	 * 	<li>invoking the startLocating() method on all configLocaters, </li>
-	 * 	<li>setting instance as a session property of the IProject instance.</li>
+	 * 	<li>setting instance as a session property of the IProject instance, </li>
+	 *  <li>adding a resource change listener to the workspace.</li>
 	 * </ul>
 	 */
 	protected void initialize() {
@@ -191,6 +198,9 @@ public class JSFAppConfigManager {
 		startConfigLocaters();
 		//set as session property of project
 		setAsSessionProperty();
+		//add resource change listener
+		IWorkspace workspace = ResourcesPlugin.getWorkspace();
+		workspace.addResourceChangeListener(this, IResourceChangeEvent.POST_CHANGE);
 	}
 
 	/**
@@ -238,6 +248,44 @@ public class JSFAppConfigManager {
 			IJSFAppConfigLocater configLocater = (IJSFAppConfigLocater)itConfigLocaters.next();
 			configLocater.stopLocating();
 		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.core.resources.IResourceChangeListener#resourceChanged(org.eclipse.core.resources.IResourceChangeEvent)
+	 */
+	public void resourceChanged(IResourceChangeEvent event) {
+		IResourceDelta delta = event.getDelta();
+		if (delta.getKind() == IResourceDelta.CHANGED) {
+			IResourceDelta[] removedDeltas = delta.getAffectedChildren(IResourceDelta.REMOVED);
+			if (removedDeltas.length == 1) {
+				IResourceDelta removedDelta = removedDeltas[0];
+				IResource removedResource = removedDelta.getResource();
+				if (removedResource != null && removedResource == project) {
+					IResourceDelta[] addedDeltas = delta.getAffectedChildren(IResourceDelta.ADDED);
+					if (addedDeltas.length == 1) {
+						IResourceDelta addedDelta = addedDeltas[0];
+						IResource addedResource = addedDelta.getResource();
+						if (addedResource != null && addedResource instanceof IProject) {
+							changeProject((IProject)addedResource);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * Called to respond to a change in the IProject instance to which this
+	 * instance belongs. Changes the cached IProject instance, stops all config
+	 * locaters, starts all config locaters.
+	 * 
+	 * @param newProject New IProject instance to which this manager belongs.
+	 */
+	protected void changeProject(IProject newProject) {
+		this.project = newProject;
+		stopConfigLocaters();
+		startConfigLocaters();
 	}
 
 	/**
@@ -366,6 +414,9 @@ public class JSFAppConfigManager {
 	 * @see java.lang.Object#finalize()
 	 */
 	protected void finalize() {
+		//remove resource change listener
+		IWorkspace workspace = ResourcesPlugin.getWorkspace();
+		workspace.removeResourceChangeListener(this);
 		//remove session property from project
 		unsetAsSessionProperty();
 		//instruct locaters to stop locating
@@ -471,37 +522,39 @@ public class JSFAppConfigManager {
 	public List getNavigationRulesForPage(IFile pageFile) {
 		List navigationRulesForPage = new ArrayList();
 		IPath pageFilePath = JSFAppConfigUtils.getWebContentFolderRelativePath(pageFile);
-		String pageFileString = pageFilePath.toString();
-		if (!pageFileString.startsWith("/")) {
-			pageFileString = "/" + pageFileString;
-		}
-		List navigationRules = getNavigationRules();
-		Iterator itNavigationRules = navigationRules.iterator();
-		while (itNavigationRules.hasNext()) {
-			NavigationRuleType navigationRule = (NavigationRuleType)itNavigationRules.next();
-			FromViewIdType fromViewIdType = navigationRule.getFromViewId();
-			if (fromViewIdType != null) {
-				String fromViewId = fromViewIdType.getTextContent();
-				if (fromViewId != null && fromViewId.length() > 0) {
-					if (!fromViewId.equals("*")) { //$NON-NLS-1$
-						if (fromViewId.equals(pageFileString)) {
-							//exact match
-							navigationRulesForPage.add(navigationRule);
-						} else if (fromViewId.endsWith("*")) { //$NON-NLS-1$
-							String prefixFromViewId = fromViewId.substring(0, fromViewId.length() - 1);
-							if (pageFileString.startsWith(prefixFromViewId)) {
-								//prefix match
+		if (pageFilePath != null) {
+			String pageFileString = pageFilePath.toString();
+			if (!pageFileString.startsWith("/")) {
+				pageFileString = "/" + pageFileString;
+			}
+			List navigationRules = getNavigationRules();
+			Iterator itNavigationRules = navigationRules.iterator();
+			while (itNavigationRules.hasNext()) {
+				NavigationRuleType navigationRule = (NavigationRuleType)itNavigationRules.next();
+				FromViewIdType fromViewIdType = navigationRule.getFromViewId();
+				if (fromViewIdType != null) {
+					String fromViewId = fromViewIdType.getTextContent();
+					if (fromViewId != null && fromViewId.length() > 0) {
+						if (!fromViewId.equals("*")) { //$NON-NLS-1$
+							if (fromViewId.equals(pageFileString)) {
+								//exact match
 								navigationRulesForPage.add(navigationRule);
+							} else if (fromViewId.endsWith("*")) { //$NON-NLS-1$
+								String prefixFromViewId = fromViewId.substring(0, fromViewId.length() - 1);
+								if (pageFileString.startsWith(prefixFromViewId)) {
+									//prefix match
+									navigationRulesForPage.add(navigationRule);
+								}
 							}
+						} else {
+							//from-view-id == "*" - matches all pages
+							navigationRulesForPage.add(navigationRule);
 						}
-					} else {
-						//from-view-id == "*" - matches all pages
-						navigationRulesForPage.add(navigationRule);
 					}
+				} else {
+					//no from-view-id element - matches all pages
+					navigationRulesForPage.add(navigationRule);
 				}
-			} else {
-				//no from-view-id element - matches all pages
-				navigationRulesForPage.add(navigationRule);
 			}
 		}
 		return navigationRulesForPage;

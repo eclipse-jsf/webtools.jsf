@@ -128,12 +128,14 @@ public class JSFAppConfigUtils {
 	 */
 	public static IPath getWebContentFolderRelativePath(IFile file) {
 		IPath path = null;
-		IVirtualFolder webContentFolder = getWebContentFolder(file.getProject());
-		if (webContentFolder != null) {
-			IPath webContentPath = webContentFolder.getProjectRelativePath();
-			IPath filePath = file.getProjectRelativePath();
-			int matchingFirstSegments = webContentPath.matchingFirstSegments(filePath);
-			path = filePath.removeFirstSegments(matchingFirstSegments);
+		if (file != null) {
+			IVirtualFolder webContentFolder = getWebContentFolder(file.getProject());
+			if (webContentFolder != null) {
+				IPath webContentPath = webContentFolder.getProjectRelativePath();
+				IPath filePath = file.getProjectRelativePath();
+				int matchingFirstSegments = webContentPath.matchingFirstSegments(filePath);
+				path = filePath.removeFirstSegments(matchingFirstSegments);
+			}
 		}
 		return path;
 	}
@@ -153,42 +155,44 @@ public class JSFAppConfigUtils {
 	 */
 	public static List getConfigFilesFromContextParam(IProject project) {
 		ArrayList filesList = new ArrayList();
-		WebArtifactEdit webArtifactEdit = WebArtifactEdit.getWebArtifactEditForRead(project);
-		if (webArtifactEdit != null) {
-			WebApp webApp = webArtifactEdit.getWebApp();
-			if (webApp != null) {
-				String filesString = null;
-				//need to branch here due to model version differences (BugZilla #119442)
-				if (webApp.getVersionID() == J2EEVersionConstants.WEB_2_3_ID) {
-					EList contexts = webApp.getContexts();
-					Iterator itContexts = contexts.iterator();
-					while (itContexts.hasNext()) {
-						ContextParam contextParam = (ContextParam)itContexts.next();
-						if (contextParam.getParamName().equals(CONFIG_FILES_CONTEXT_PARAM_NAME)) {
-							filesString = contextParam.getParamValue();
-							break;
+		if (isValidJSFProject(project)) {
+			WebArtifactEdit webArtifactEdit = WebArtifactEdit.getWebArtifactEditForRead(project);
+			if (webArtifactEdit != null) {
+				WebApp webApp = webArtifactEdit.getWebApp();
+				if (webApp != null) {
+					String filesString = null;
+					//need to branch here due to model version differences (BugZilla #119442)
+					if (webApp.getVersionID() == J2EEVersionConstants.WEB_2_3_ID) {
+						EList contexts = webApp.getContexts();
+						Iterator itContexts = contexts.iterator();
+						while (itContexts.hasNext()) {
+							ContextParam contextParam = (ContextParam)itContexts.next();
+							if (contextParam.getParamName().equals(CONFIG_FILES_CONTEXT_PARAM_NAME)) {
+								filesString = contextParam.getParamValue();
+								break;
+							}
+						}
+					} else {
+						EList contextParams = webApp.getContextParams();
+						Iterator itContextParams = contextParams.iterator();
+						while (itContextParams.hasNext()) {
+							ParamValue paramValue = (ParamValue)itContextParams.next();
+							if (paramValue.getName().equals(CONFIG_FILES_CONTEXT_PARAM_NAME)) {
+								filesString = paramValue.getValue();
+								break;
+							}
 						}
 					}
-				} else {
-					EList contextParams = webApp.getContextParams();
-					Iterator itContextParams = contextParams.iterator();
-					while (itContextParams.hasNext()) {
-						ParamValue paramValue = (ParamValue)itContextParams.next();
-						if (paramValue.getName().equals(CONFIG_FILES_CONTEXT_PARAM_NAME)) {
-							filesString = paramValue.getValue();
-							break;
+					if (filesString != null && filesString.trim().length() > 0) {
+						StringTokenizer stFilesString = new StringTokenizer(filesString, ",");
+						while (stFilesString.hasMoreTokens()) {
+							String configFile = stFilesString.nextToken().trim();
+							filesList.add(configFile);
 						}
 					}
 				}
-				if (filesString != null && filesString.trim().length() > 0) {
-					StringTokenizer stFilesString = new StringTokenizer(filesString, ",");
-					while (stFilesString.hasMoreTokens()) {
-						String configFile = stFilesString.nextToken().trim();
-						filesList.add(configFile);
-					}
-				}
+				webArtifactEdit.dispose();
 			}
-			webArtifactEdit.dispose();
 		}
 		return filesList;
 	}
