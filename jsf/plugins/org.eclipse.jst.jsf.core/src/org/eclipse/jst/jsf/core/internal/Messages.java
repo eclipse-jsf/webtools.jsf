@@ -46,6 +46,8 @@ public class Messages extends NLS {
 	public static String JSFUtils_ErrorCreatingConfigFile;
 	public static String JSFUtils_ErrorClosingConfigFile;
 
+	public static String JARFileJSFAppConfigProvider_ErrorLoadingModel;
+
 	static {
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
 	}

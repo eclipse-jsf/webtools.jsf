@@ -18,8 +18,10 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
+import org.eclipse.jst.jsf.core.internal.Messages;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.jst.jsf.facesconfig.util.FacesConfigResourceFactory;
+import org.eclipse.osgi.util.NLS;
 import org.eclipse.wst.common.internal.emf.resource.EMF2SAXRendererFactory;
 
 /**
@@ -87,9 +89,18 @@ public class JARFileJSFAppConfigProvider extends AbstractJSFAppConfigProvider {
 							}
 						}
 					}
+				} catch(IllegalStateException ise) {
+					//log error
+					JSFCorePlugin.log(
+							IStatus.ERROR,
+							NLS.bind(Messages.JARFileJSFAppConfigProvider_ErrorLoadingModel, JARFILE_URI_PREFIX + filename + FACES_CONFIG_IN_JAR_SUFFIX),
+							ise);
 				} catch(IOException ioe) {
 					//log error
-					JSFCorePlugin.log(IStatus.ERROR, ioe.getLocalizedMessage(), ioe);
+					JSFCorePlugin.log(
+							IStatus.ERROR,
+							NLS.bind(Messages.JARFileJSFAppConfigProvider_ErrorLoadingModel, JARFILE_URI_PREFIX + filename + FACES_CONFIG_IN_JAR_SUFFIX),
+							ioe);
 				}
 			}
 		}
