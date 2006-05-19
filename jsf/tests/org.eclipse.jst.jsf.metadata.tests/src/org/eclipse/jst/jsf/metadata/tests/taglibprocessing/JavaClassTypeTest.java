@@ -12,7 +12,7 @@ public class JavaClassTypeTest extends TaglibProcessingTestCase {
 		Assert.assertFalse(possibleValueAdapters.isEmpty());
 		IPossibleValues pv = (IPossibleValues)possibleValueAdapters.get(0);
 		pv.setStructuredDocumentContext(docContext);
-		List vals = pv.getPossibleValues();
+//		List vals = pv.getPossibleValues();
 //		Assert.assertFalse(vals.isEmpty());
 	}
 }

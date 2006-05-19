@@ -21,12 +21,16 @@ public class IntegerTypeTest extends TaglibProcessingTestCase {
 		Assert.assertTrue(vv.isValidValue("255"));
 		Assert.assertFalse(vv.isValidValue("False"));
 		Assert.assertFalse(vv.getValidationMessages().size()==0);
+		vv.getValidationMessages().clear();
 		Assert.assertFalse(vv.isValidValue("-1"));
 		Assert.assertTrue(vv.getValidationMessages().size()==1);
+		vv.getValidationMessages().clear();
 		Assert.assertFalse(vv.isValidValue("555555555555555555"));
 		Assert.assertTrue(vv.getValidationMessages().size()==1);
+		vv.getValidationMessages().clear();
 		Assert.assertFalse(vv.isValidValue("555f9"));
 		Assert.assertTrue(vv.getValidationMessages().size()==1);
+		vv.getValidationMessages().clear();
 		Assert.assertFalse(vv.isValidValue("2e1"));
 		Assert.assertTrue(vv.getValidationMessages().size()==1);
 	}

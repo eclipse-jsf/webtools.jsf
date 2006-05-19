@@ -18,19 +18,25 @@ public class LongTypeTest extends TaglibProcessingTestCase {
 		IValidValues vv =(IValidValues)getProcessorForTaglibProcessingBundle(validValuesAdapters);
 		Assert.assertTrue(vv.isValidValue("0"));
 		Assert.assertTrue(vv.getValidationMessages().size()==0);
+		vv.getValidationMessages().clear();
 		Assert.assertTrue(vv.isValidValue("1000"));
 		Assert.assertTrue(vv.isValidValue("-1000"));
 		Assert.assertFalse(vv.isValidValue("-10L"));
 		Assert.assertFalse(vv.isValidValue("False"));
 		Assert.assertFalse(vv.getValidationMessages().size()==0);
+		vv.getValidationMessages().clear();
 		Assert.assertFalse(vv.isValidValue("-1001"));
 		Assert.assertTrue(vv.getValidationMessages().size()==1);
+		vv.getValidationMessages().clear();
 		Assert.assertTrue(vv.isValidValue("-1"));
 		Assert.assertTrue(vv.getValidationMessages().size()==0);
+		vv.getValidationMessages().clear();
 		Assert.assertFalse(vv.isValidValue("555555555555555555"));
 		Assert.assertTrue(vv.getValidationMessages().size()==1);
+		vv.getValidationMessages().clear();
 		Assert.assertFalse(vv.isValidValue("555f9"));
 		Assert.assertTrue(vv.getValidationMessages().size()==1);
+		vv.getValidationMessages().clear();
 		Assert.assertFalse(vv.isValidValue("2e1"));
 		Assert.assertTrue(vv.getValidationMessages().size()==1);
 	}

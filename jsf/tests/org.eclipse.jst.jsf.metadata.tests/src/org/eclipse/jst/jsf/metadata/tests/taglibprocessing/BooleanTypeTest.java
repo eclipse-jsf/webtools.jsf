@@ -29,13 +29,17 @@ public class BooleanTypeTest extends TaglibProcessingTestCase {
 		Assert.assertNotNull(validValuesAdapters);
 		Assert.assertFalse(validValuesAdapters.isEmpty());
 		IValidValues vv =(IValidValues)getProcessorForTaglibProcessingBundle(validValuesAdapters);
+		vv.getValidationMessages().clear();
 		Assert.assertTrue(vv.isValidValue("true"));
 		Assert.assertTrue(vv.getValidationMessages().size()==0);
+		vv.getValidationMessages().clear();
 		Assert.assertTrue(vv.isValidValue("false"));
-		Assert.assertFalse(vv.isValidValue("False"));
-		Assert.assertFalse(vv.getValidationMessages().size()==0);
-		Assert.assertFalse(vv.isValidValue("blue"));
-		Assert.assertTrue(vv.getValidationMessages().size()==1);
+		vv.getValidationMessages().clear();
+		Assert.assertTrue(vv.isValidValue("False"));
+		Assert.assertEquals(vv.getValidationMessages().size(), 0);
+		vv.getValidationMessages().clear();
+		Assert.assertEquals(vv.isValidValue("blue"), true);//valueOf("bougus") == false so it is a valid boolean
+		Assert.assertEquals(vv.getValidationMessages().size(), 0);
 	}
 	
 	public void testDefaultValues(){		
