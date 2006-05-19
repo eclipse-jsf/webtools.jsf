@@ -54,6 +54,11 @@ public class JARFileJSFAppConfigProvider extends AbstractJSFAppConfigProvider {
 	protected FacesConfigType facesConfig = null;
 
 	/**
+	 * Flag to track if load error has been logged at least once.
+	 */
+	protected boolean loadErrorLogged = false;
+
+	/**
 	 * Creates an instance, storing the passed IProject instance and file name
 	 * String to be used for subsequent processing.
 	 * 
@@ -91,16 +96,10 @@ public class JARFileJSFAppConfigProvider extends AbstractJSFAppConfigProvider {
 					}
 				} catch(IllegalStateException ise) {
 					//log error
-					JSFCorePlugin.log(
-							IStatus.ERROR,
-							NLS.bind(Messages.JARFileJSFAppConfigProvider_ErrorLoadingModel, JARFILE_URI_PREFIX + filename + FACES_CONFIG_IN_JAR_SUFFIX),
-							ise);
+					logLoadError(ise);
 				} catch(IOException ioe) {
 					//log error
-					JSFCorePlugin.log(
-							IStatus.ERROR,
-							NLS.bind(Messages.JARFileJSFAppConfigProvider_ErrorLoadingModel, JARFILE_URI_PREFIX + filename + FACES_CONFIG_IN_JAR_SUFFIX),
-							ioe);
+					logLoadError(ioe);
 				}
 			}
 		}
@@ -112,6 +111,22 @@ public class JARFileJSFAppConfigProvider extends AbstractJSFAppConfigProvider {
 	 */
 	public void releaseFacesConfigModel() {
 		jsfAppConfigLocater.getJSFAppConfigManager().removeFacesConfigChangeAdapter(facesConfig);
+	}
+
+	/**
+	 * Called to log a load error; load error will be logged once only per
+	 * instance, per VM session.
+	 * 
+	 * @param ex Throwable instance to be logged.
+	 */
+	protected void logLoadError(Throwable ex) {
+		if (!loadErrorLogged) {
+			JSFCorePlugin.log(
+					IStatus.ERROR,
+					NLS.bind(Messages.JARFileJSFAppConfigProvider_ErrorLoadingModel, JARFILE_URI_PREFIX + filename + FACES_CONFIG_IN_JAR_SUFFIX),
+					ex);
+			loadErrorLogged = true;
+		}
 	}
 
 	/*
