@@ -119,26 +119,20 @@ public class GEMPreferences extends FieldEditorPreferencePage implements
 			// { GEMPlugin.getResourceString("CanvasPreferences.LABEL.Direct"),
 			// LINE_ROUTING_DIRECT }, //$NON-NLS-1$ //$NON-NLS-2$
 			{
-					EditorPlugin
-							.getResourceString("CanvasPreferences.LABEL.Manual"), LINE_ROUTING_MANUAL }, //$NON-NLS-1$ //$NON-NLS-2$
+				PreferenceMessages.CanvasPreferences_LABEL_Manual, LINE_ROUTING_MANUAL }, //$NON-NLS-1$ //$NON-NLS-2$
 			{
-					EditorPlugin
-							.getResourceString("CanvasPreferences.LABEL.Manhattan"), LINE_ROUTING_MANHATTAN } //$NON-NLS-1$ //$NON-NLS-2$
+					PreferenceMessages.CanvasPreferences_LABEL_Manhattan, LINE_ROUTING_MANHATTAN } //$NON-NLS-1$ //$NON-NLS-2$
 	};
 
 	private final static String[][] m_labelPlacementLabels = {
 			{
-					EditorPlugin
-							.getResourceString("CanvasPreferences.LABEL.Top"), LABEL_PLACEMENT_TOP }, //$NON-NLS-1$ //$NON-NLS-2$
+				PreferenceMessages.CanvasPreferences_LABEL_Top, LABEL_PLACEMENT_TOP }, //$NON-NLS-1$ //$NON-NLS-2$
 			{
-					EditorPlugin
-							.getResourceString("CanvasPreferences.LABEL.Bottom"), LABEL_PLACEMENT_BOTTOM }, //$NON-NLS-1$ //$NON-NLS-2$
+					PreferenceMessages.CanvasPreferences_LABEL_Bottom, LABEL_PLACEMENT_BOTTOM }, //$NON-NLS-1$ //$NON-NLS-2$
 			{
-					EditorPlugin
-							.getResourceString("CanvasPreferences.LABEL.Left"), LABEL_PLACEMENT_LEFT }, //$NON-NLS-1$ //$NON-NLS-2$
+						PreferenceMessages.CanvasPreferences_LABEL_Left, LABEL_PLACEMENT_LEFT }, //$NON-NLS-1$ //$NON-NLS-2$
 			{
-					EditorPlugin
-							.getResourceString("CanvasPreferences.LABEL.Right"), LABEL_PLACEMENT_RIGHT } //$NON-NLS-1$ //$NON-NLS-2$
+							PreferenceMessages.CanvasPreferences_LABEL_Right, LABEL_PLACEMENT_RIGHT } //$NON-NLS-1$ //$NON-NLS-2$
 	};
 
 	private Group canvasGroup;
@@ -234,49 +228,38 @@ public class GEMPreferences extends FieldEditorPreferencePage implements
 	public void createFieldEditors() {
 		useSystemColors = addBooleanField(
 				USE_SYSTEM_COLORS,
-				EditorPlugin
-						.getResourceString("CanvasPreferenceTab.LABEL.UseSystemColors"),
+				PreferenceMessages.CanvasPreferenceTab_LABEL_UseSystemColors,
 				getFieldEditorParent());
 
 		canvasGroup = new Group(getFieldEditorParent(), SWT.NULL);
 		lineGroup = new Group(getFieldEditorParent(), SWT.NULL);
 		iconGroup = new Group(getFieldEditorParent(), SWT.NULL);
 
-		canvasGroup.setText(EditorPlugin
-				.getResourceString("CanvasPreferenceTab.LABEL.Canvas")); //$NON-NLS-1$
+		canvasGroup.setText(PreferenceMessages.CanvasPreferenceTab_LABEL_Canvas); //$NON-NLS-1$
 		canvasColor = addColorField(
 				CANVAS_COLOR,
-				EditorPlugin
-						.getResourceString("CanvasPreferenceTab.LABEL.BackgroundColor"), canvasGroup); //$NON-NLS-1$
+				PreferenceMessages.CanvasPreferenceTab_LABEL_BackgroundColor, canvasGroup); //$NON-NLS-1$
 		addBooleanField(
 				SNAP_TO_GEOMETRY,
-				EditorPlugin
-						.getResourceString("CanvasPreferenceTab.LABEL.SnapToGeometry"), canvasGroup); //$NON-NLS-1$
+				PreferenceMessages.CanvasPreferenceTab_LABEL_SnapToGeometry, canvasGroup); //$NON-NLS-1$
 		snapToGrid = addBooleanField(
 				SNAP_TO_GRID,
-				EditorPlugin
-						.getResourceString("CanvasPreferenceTab.LABEL.SnapToGrid"), canvasGroup); //$NON-NLS-1$
+				PreferenceMessages.CanvasPreferenceTab_LABEL_SnapToGrid, canvasGroup); //$NON-NLS-1$
 		gridColor = addColorField(
 				GRID_COLOR,
-				EditorPlugin
-						.getResourceString("CanvasPreferenceTab.LABEL.GridLineColor"), canvasGroup); //$NON-NLS-1$
+				PreferenceMessages.CanvasPreferenceTab_LABEL_GridLineColor, canvasGroup); //$NON-NLS-1$
 		gridWidth = addIntegerField(
 				GRID_WIDTH,
-				EditorPlugin
-						.getResourceString("CanvasPreferenceTab.LABEL.GridWidth"), canvasGroup); //$NON-NLS-1$
+				PreferenceMessages.CanvasPreferenceTab_LABEL_GridWidth, canvasGroup); //$NON-NLS-1$
 		gridHeight = addIntegerField(
 				GRID_HEIGHT,
-				EditorPlugin
-						.getResourceString("CanvasPreferenceTab.LABEL.GridHeight"), canvasGroup); //$NON-NLS-1$
+				PreferenceMessages.CanvasPreferenceTab_LABEL_GridHeight, canvasGroup); //$NON-NLS-1$
 
-		iconGroup.setText(EditorPlugin
-				.getResourceString("CanvasPreferenceTab.LABEL.IconGroup")); //$NON-NLS-1$
+		iconGroup.setText(PreferenceMessages.CanvasPreferenceTab_LABEL_IconGroup); //$NON-NLS-1$
 		iconFont = addFontField(
 				FIGURE_LABEL_FONT,
-				EditorPlugin
-						.getResourceString("CanvasPreferenceTab.LABEL.IconLabelFont"), iconGroup); //$NON-NLS-1$
-		addComboField(LABEL_PLACEMENT, EditorPlugin
-				.getResourceString("CanvasPreferenceTab.LABEL.LabelPlacement"), //$NON-NLS-1$
+				PreferenceMessages.CanvasPreferenceTab_LABEL_IconLabelFont, iconGroup); //$NON-NLS-1$
+		addComboField(LABEL_PLACEMENT, PreferenceMessages.CanvasPreferenceTab_LABEL_LabelPlacement, //$NON-NLS-1$
 				getLabelPlacementLabels(), iconGroup);
 		// inputPortColor = addColorField(
 		// INPUT_PORT_COLOR,
@@ -289,29 +272,22 @@ public class GEMPreferences extends FieldEditorPreferencePage implements
 		// .getResourceString("CanvasPreferenceTab.LABEL.OutputPortColor"),
 		// iconGroup); //$NON-NLS-1$
 
-		lineGroup.setText(EditorPlugin
-				.getResourceString("CanvasPreferenceTab.LABEL.LineGroup")); //$NON-NLS-1$
-		showLineLabels = addBooleanField(SHOW_LINE_LABELS, EditorPlugin
-				.getResourceString("CanvasPreferenceTab.LABEL.ShowLineLabels"),
+		lineGroup.setText(PreferenceMessages.CanvasPreferenceTab_LABEL_LineGroup); //$NON-NLS-1$
+		showLineLabels = addBooleanField(SHOW_LINE_LABELS, PreferenceMessages.CanvasPreferenceTab_LABEL_ShowLineLabels,
 				lineGroup);
 		lineFont = addFontField(
 				LINE_LABEL_FONT,
-				EditorPlugin
-						.getResourceString("CanvasPreferenceTab.LABEL.LineLabelFont"), lineGroup); //$NON-NLS-1$
+				 PreferenceMessages.CanvasPreferenceTab_LABEL_LineLabelFont, lineGroup); //$NON-NLS-1$
 		lineLabelColor = addColorField(
 				LINE_LABEL_COLOR,
-				EditorPlugin
-						.getResourceString("CanvasPreferenceTab.LABEL.LineLabelColor"), lineGroup); //$NON-NLS-1$
+				 PreferenceMessages.CanvasPreferenceTab_LABEL_LineLabelColor, lineGroup); //$NON-NLS-1$
 		lineColor = addColorField(
 				LINE_COLOR,
-				EditorPlugin
-						.getResourceString("CanvasPreferenceTab.LABEL.LineColor"), lineGroup); //$NON-NLS-1$
+				 PreferenceMessages.CanvasPreferenceTab_LABEL_LineColor, lineGroup); //$NON-NLS-1$
 		addIntegerField(
 				LINE_WIDTH,
-				EditorPlugin
-						.getResourceString("CanvasPreferenceTab.LABEL.LineWidth"), lineGroup); //$NON-NLS-1$
-		addComboField(LINE_ROUTING, EditorPlugin
-				.getResourceString("CanvasPreferenceTab.LABEL.LineRouting"), //$NON-NLS-1$
+				 PreferenceMessages.CanvasPreferenceTab_LABEL_LineWidth, lineGroup); //$NON-NLS-1$
+		addComboField(LINE_ROUTING,  PreferenceMessages.CanvasPreferenceTab_LABEL_LineRouting, //$NON-NLS-1$
 				getLineRoutingLabels(), lineGroup);
 	}
 
