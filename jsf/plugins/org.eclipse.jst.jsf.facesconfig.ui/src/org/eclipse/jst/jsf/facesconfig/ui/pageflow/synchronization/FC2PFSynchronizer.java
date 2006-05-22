@@ -18,11 +18,13 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jface.util.Assert;
+import org.eclipse.jst.jsf.facesconfig.common.logging.Logger;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 import org.eclipse.jst.jsf.facesconfig.emf.FromViewIdType;
 import org.eclipse.jst.jsf.facesconfig.emf.NavigationCaseType;
 import org.eclipse.jst.jsf.facesconfig.emf.NavigationRuleType;
 import org.eclipse.jst.jsf.facesconfig.emf.ToViewIdType;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage;
 
 /**
@@ -37,6 +39,8 @@ public class FC2PFSynchronizer extends AdapterImpl {
 	private final boolean DEBUG = false;
 
 	FC2PFTransformer transformer;
+	
+	private static final Logger logger = EditorPlugin.getLogger(FC2PFSynchronizer.class);
 
 	public FC2PFSynchronizer(FC2PFTransformer transformer) {
 		this.transformer = transformer;
@@ -79,7 +83,7 @@ public class FC2PFSynchronizer extends AdapterImpl {
 				break;
 			}
 		} catch (Exception e) {
-			System.out.println();
+			logger.error(e);
 		} finally {
 			if (notification.getEventType() != Notification.REMOVING_ADAPTER) {
 				transformer.refreshFCAdapter((EObject) notification

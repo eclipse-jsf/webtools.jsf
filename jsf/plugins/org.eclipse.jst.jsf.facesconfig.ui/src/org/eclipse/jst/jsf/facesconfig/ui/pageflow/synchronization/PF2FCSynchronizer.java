@@ -17,7 +17,9 @@ import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.jst.jsf.facesconfig.common.logging.Logger;
 import org.eclipse.jst.jsf.facesconfig.emf.NavigationCaseType;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
@@ -35,6 +37,9 @@ public class PF2FCSynchronizer extends AdapterImpl {
 	FC2PFTransformer tranformer;
 
 	private final boolean DEBUG = false;
+
+	private static final Logger logger = EditorPlugin
+			.getLogger(PF2FCSynchronizer.class);
 
 	public PF2FCSynchronizer(FC2PFTransformer tranformer) {
 		this.tranformer = tranformer;
@@ -65,7 +70,7 @@ public class PF2FCSynchronizer extends AdapterImpl {
 			}
 			processChange(notification);
 		} catch (Exception e) {
-			System.out.println();
+			logger.error(e);
 		} finally {
 			if (notification.getEventType() != Notification.REMOVING_ADAPTER) {
 				tranformer.refreshPFAdapter(tranformer.getPageflow());
