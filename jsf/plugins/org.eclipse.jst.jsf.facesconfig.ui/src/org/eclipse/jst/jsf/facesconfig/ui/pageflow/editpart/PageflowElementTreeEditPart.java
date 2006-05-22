@@ -18,9 +18,8 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.gef.editparts.AbstractTreeEditPart;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
-import org.eclipse.jst.jsf.facesconfig.ui.IconResources;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.PageflowElementPropertySource;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.views.properties.IPropertySource;
@@ -31,23 +30,11 @@ import org.eclipse.ui.views.properties.IPropertySource;
 public class PageflowElementTreeEditPart extends AbstractTreeEditPart implements
 		Adapter {
 	/** Image descriptor of tree item for the different edit parts */
-	// public static final ImageDescriptor IMG_ACTION =
-	// EditorPlugin.getDefault()
-	// .getImageDescriptor(
-	// IconResources.getString("Pageflow.action.small")); //$NON-NLS-1$
-	// public static final ImageDescriptor IMG_BEGIN = EditorPlugin
-	// .getDefault()
-	// .getImageDescriptor(IconResources.getString("Pageflow.begin.small"));
-	// //$NON-NLS-1$
-	//
-	// public static final ImageDescriptor IMG_END = EditorPlugin.getDefault()
-	// .getImageDescriptor(IconResources.getString("Pageflow.end.small"));
-	// //$NON-NLS-1$
 	public static final ImageDescriptor IMG_PAGE = EditorPlugin.getDefault()
-			.getImageDescriptor(IconResources.getString("Pageflow.page.small")); //$NON-NLS-1$
+			.getImageDescriptor("facesconfig/Pageflow_Page16.gif"); //$NON-NLS-1$
 
 	public static final ImageDescriptor IMG_NODE = EditorPlugin.getDefault()
-			.getImageDescriptor(IconResources.getString("Pageflow.node.small")); //$NON-NLS-1$
+			.getImageDescriptor("facesconfig/FacesConfig_Pageflow16.gif"); //$NON-NLS-1$
 
 	/** Property resource for shared property view */
 	private IPropertySource propertySource = null;

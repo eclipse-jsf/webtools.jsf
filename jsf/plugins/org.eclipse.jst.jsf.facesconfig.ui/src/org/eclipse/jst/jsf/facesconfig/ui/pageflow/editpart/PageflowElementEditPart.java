@@ -27,7 +27,6 @@ import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
-import org.eclipse.jst.jsf.facesconfig.ui.IconResources;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.figure.PageflowNodeFigure;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
@@ -82,10 +81,10 @@ public abstract class PageflowElementEditPart extends AbstractGraphicalEditPart
 	}
 
 	public static final ImageDescriptor IMG_PAGE = EditorPlugin.getDefault()
-			.getImageDescriptor(IconResources.getString("Pageflow.page.large")); //$NON-NLS-1$
+			.getImageDescriptor("facesconfig/Pageflow_Page.gif"); //$NON-NLS-1$
 
 	public static final ImageDescriptor IMG_NODE = EditorPlugin.getDefault()
-			.getImageDescriptor(IconResources.getString("Pageflow.node.large")); //$NON-NLS-1$
+			.getImageDescriptor("facesconfig/FacesConfig_Pageflow16.gif"); //$NON-NLS-1$
 
 	/** property source of the pageflow element */
 	private IPropertySource propertySource = null;

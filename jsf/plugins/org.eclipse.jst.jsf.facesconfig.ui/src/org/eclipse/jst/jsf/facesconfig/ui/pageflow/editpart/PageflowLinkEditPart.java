@@ -27,7 +27,6 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
-import org.eclipse.jst.jsf.facesconfig.ui.IconResources;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpolicy.PFLinkBendpointEditPolicy;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpolicy.PFLinkEditPolicy;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpolicy.PFLinkEndpointEditPolicy;
@@ -64,8 +63,7 @@ public class PageflowLinkEditPart extends AbstractConnectionEditPart implements
 
 	/** image description for different edit part */
 	public static final ImageDescriptor IMG_WARNING = EditorPlugin.getDefault()
-			.getImageDescriptor(
-					IconResources.getString("Pageflow.quickfixerrorobject"));
+			.getImageDescriptor("facesconfig/Pageflow_Quickfix_Error.gif");
 
 	private int connectionStyle = -1;
 
