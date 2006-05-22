@@ -85,6 +85,10 @@ public interface PageflowLink extends PageflowElement {
 	 */
 	PageflowNode getTarget();
 
+	void setTargetPath(String path);
+
+	void setSourcePath(String path);
+
 	/**
 	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink#getTarget <em>Target</em>}' reference.
 	 * <!-- begin-user-doc -->

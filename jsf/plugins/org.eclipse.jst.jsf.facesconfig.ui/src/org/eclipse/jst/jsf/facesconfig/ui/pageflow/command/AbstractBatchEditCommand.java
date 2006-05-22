@@ -53,7 +53,7 @@ public abstract class AbstractBatchEditCommand extends Command {
 	}
 
 	final public void redo() {
-		super.redo();
+		doRedo();
 	}
 
 	final public void undo() {

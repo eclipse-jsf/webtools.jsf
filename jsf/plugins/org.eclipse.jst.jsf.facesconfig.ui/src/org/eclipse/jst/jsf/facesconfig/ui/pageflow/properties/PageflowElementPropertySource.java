@@ -27,7 +27,6 @@ import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorResources;
 import org.eclipse.jst.jsf.facesconfig.ui.IconResources;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowValidation;
@@ -52,17 +51,17 @@ public class PageflowElementPropertySource implements IPropertySource {
 	/** attribute name of "path" and "action", which have special property editor */
 	private static final String PAGEFLOW_PATH = "path"; //$NON-NLS-1$    
 
-	private static final String PAGEFLOW_NAME = "name"; //$NON-NLS-1$
+	static final String PAGEFLOW_NAME = "name"; //$NON-NLS-1$
 
-	private static final String PAGEFLOW_COMMENT = "comment"; //$NON-NLS-1$
+	static final String PAGEFLOW_COMMENT = "comment"; //$NON-NLS-1$
 
 	private static final String PAGEFLOW_CONFIG_FILE = "configfile"; //$NON-NLS-1$
 
 	/** label's prefix for attribute definition name */
-	private static final String PAGEFLOW_MODEL_PREFIX = "Pageflow.Model.Attributes."; //$NON-NLS-1$
+	static final String PAGEFLOW_MODEL_PREFIX = "Pageflow.Model.Attributes."; //$NON-NLS-1$
 
 	/** pageflow elememt */
-	private PageflowElement element;
+	PageflowElement element;
 
 	/** boolean value's label */
 	private static final String P_VALUE_TRUE_LABEL = EditorResources
@@ -76,7 +75,7 @@ public class PageflowElementPropertySource implements IPropertySource {
 
 	private static final int P_VALUE_FALSE = 1;
 
-	static private class BooleanLabelProvider extends LabelProvider {
+	static class BooleanLabelProvider extends LabelProvider {
 		public String getText(Object element) {
 			String[] values = new String[] { P_VALUE_TRUE_LABEL,
 					P_VALUE_FALSE_LABEL };
@@ -92,7 +91,7 @@ public class PageflowElementPropertySource implements IPropertySource {
 		}
 	}
 
-	static private class PageflowLabelProvider extends LabelProvider {
+	static class PageflowLabelProvider extends LabelProvider {
 
 		public Image getImage(Object element) {
 			if (element instanceof String) {
@@ -145,9 +144,9 @@ public class PageflowElementPropertySource implements IPropertySource {
 		// property descriptors
 		List propertyDescriptors = new Vector();
 
-		if (element instanceof PageflowLink) {
-			return getLinkPropertyDescriptors();
-		}
+		// if (element instanceof PageflowLink) {
+		// return getLinkPropertyDescriptors();
+		// }
 
 		Iterator it;
 		EClass cls = element.eClass();
@@ -191,52 +190,6 @@ public class PageflowElementPropertySource implements IPropertySource {
 	}
 
 	/**
-	 * @return
-	 */
-	private IPropertyDescriptor[] getLinkPropertyDescriptors() {
-		// property descriptors
-		List propertyDescriptors = new Vector();
-
-		Iterator it;
-		EClass cls = element.eClass();
-
-		it = cls.getEAllAttributes().iterator();
-		while (it.hasNext()) {
-			EAttribute attr = (EAttribute) it.next();
-			if (attr.isID()
-					|| attr.getName().equalsIgnoreCase(PAGEFLOW_NAME)
-					|| attr.getName().equalsIgnoreCase(PAGEFLOW_COMMENT)
-					|| attr.getFeatureID() == PageflowPackage.PAGEFLOW__REFERENCE_LINK) {
-				continue;
-			}
-
-			EDataType type = attr.getEAttributeType();
-			if (type.getInstanceClass() == String.class) {
-				PropertyDescriptor propertyDescriptor;
-
-				propertyDescriptor = new TextPropertyDescriptor(Integer
-						.toString(attr.getFeatureID()),
-						getString(PAGEFLOW_MODEL_PREFIX + attr.getName()));
-
-				if (propertyDescriptor != null) {
-					propertyDescriptor
-							.setLabelProvider(new PageflowLabelProvider());
-					propertyDescriptors.add(propertyDescriptor);
-				}
-
-			} else if (type.getInstanceClass() == boolean.class) {
-				PropertyDescriptor propertyDescriptor;
-				propertyDescriptor = getBooleanTypePropertyDescriptor(attr);
-				propertyDescriptor.setLabelProvider(new BooleanLabelProvider());
-				propertyDescriptors.add(propertyDescriptor);
-			}
-		}
-
-		return (IPropertyDescriptor[]) propertyDescriptors
-				.toArray(new IPropertyDescriptor[] {});
-	}
-
-	/**
 	 * get the property descriptor for the attribute "path" of page component
 	 * 
 	 * @param attr -
@@ -248,7 +201,8 @@ public class PageflowElementPropertySource implements IPropertySource {
 				.toString(attr.getFeatureID()), getString(PAGEFLOW_MODEL_PREFIX
 				+ attr.getName())) {
 			public CellEditor createPropertyEditor(Composite parent) {
-				CellEditor editor = new PagePathDialogCellEditor(parent);
+				CellEditor editor = new PagePathDialogCellEditor(parent,
+						(PageflowPage) element);
 				if (getValidator() != null) {
 					editor.setValidator(getValidator());
 				}
@@ -367,7 +321,7 @@ public class PageflowElementPropertySource implements IPropertySource {
 	 *            EAttribute
 	 * @return
 	 */
-	private PropertyDescriptor getBooleanTypePropertyDescriptor(EAttribute attr) {
+	PropertyDescriptor getBooleanTypePropertyDescriptor(EAttribute attr) {
 		PropertyDescriptor propertyDescriptor;
 		propertyDescriptor = new ComboBoxPropertyDescriptor(Integer
 				.toString(attr.getFeatureID()), getString(PAGEFLOW_MODEL_PREFIX
@@ -401,7 +355,6 @@ public class PageflowElementPropertySource implements IPropertySource {
 				result = new Integer(P_VALUE_FALSE);
 			}
 		}
-
 		return result != null ? result : "";
 	}
 

@@ -26,8 +26,8 @@ import org.eclipse.jst.jsf.facesconfig.emf.ToViewIdType;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage;
 
 /**
- * The adapter that listens to modification of faces-config and updates
- * pageflow as needed.
+ * The adapter that listens to modification of faces-config and updates pageflow
+ * as needed.
  * 
  * @author hmeng
  * 
@@ -60,27 +60,34 @@ public class FC2PFSynchronizer extends AdapterImpl {
 			return;
 		}
 		transformer.setInEvent(true);
-		int type = notification.getEventType();
-		switch (type) {
-		case Notification.ADD: {
-			processAdd(notification);
-			notifyPageflow(notification);
-			break;
+		try {
+			int type = notification.getEventType();
+			switch (type) {
+			case Notification.ADD: {
+				processAdd(notification);
+				notifyPageflow(notification);
+				break;
+			}
+			case Notification.SET: {
+				processSet(notification);
+				notifyPageflow(notification);
+				break;
+			}
+			case Notification.REMOVE:
+				processRemove(notification);
+				notifyPageflow(notification);
+				break;
+			}
+		} catch (Exception e) {
+			System.out.println();
+		} finally {
+			if (notification.getEventType() != Notification.REMOVING_ADAPTER) {
+				transformer.refreshFCAdapter((EObject) notification
+						.getNotifier());
+				transformer.refreshPFAdapter(transformer.getPageflow());
+			}
+			transformer.setInEvent(false);
 		}
-		case Notification.SET: {
-			processSet(notification);
-			notifyPageflow(notification);
-			break;
-		}
-		case Notification.REMOVE:
-			processRemove(notification);
-			notifyPageflow(notification);
-			break;
-		}
-		transformer.refreshFCAdapter((EObject) notification.getNotifier());
-		transformer.refreshPFAdapter(transformer.getPageflow());
-
-		transformer.setInEvent(false);
 	}
 
 	private void processAdd(Notification notification) {
@@ -111,8 +118,7 @@ public class FC2PFSynchronizer extends AdapterImpl {
 	}
 
 	/**
-	 * Update pageflow model for the change, the editor will update nodes'
-	 * layout.
+	 * Notify pageflow the changes.
 	 * 
 	 * @param notification
 	 */
@@ -124,6 +130,11 @@ public class FC2PFSynchronizer extends AdapterImpl {
 						PageflowPackage.PAGEFLOW, null, null));
 	}
 
+	/**
+	 * Deal with the case when some element is removed.
+	 * 
+	 * @param notification
+	 */
 	private void processRemove(Notification notification) {
 		if (notification.getFeature() == FacesConfigPackage.eINSTANCE
 				.getNavigationRuleType_NavigationCase()) {
@@ -163,6 +174,11 @@ public class FC2PFSynchronizer extends AdapterImpl {
 			System.out.println("Something is removed");
 	}
 
+	/**
+	 * Deal with property change.
+	 * 
+	 * @param notification
+	 */
 	private void processSet(Notification notification) {
 		Object feature = notification.getFeature();
 		if (feature == FacesConfigPackage.eINSTANCE

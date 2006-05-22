@@ -13,7 +13,7 @@
 		
 		<editor
         class="org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor"
-        contributorClass="org.eclipse.emf.edit.ui.action.EditingDomainActionBarContributor"
+        contributorClass="org.eclipse.jst.jsf.facesconfig.ui.FacesConfigActionBarContributor"
         default="false"
         extensions="xml"
         icon="icons/facesconfig/FacesConfig_Plugin.gif"

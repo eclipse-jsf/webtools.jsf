@@ -38,6 +38,9 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.ReferenceElement;
  */
 public interface PageflowElement extends EObject {
 	/**
+	 * The pageflow model is based on faces-config model, its elements will
+	 * reference faces-config elements with ReferenceElement.
+	 * 
 	 * @generated NOT
 	 */
 	public ReferenceElement getFCElements();
@@ -267,6 +270,14 @@ public interface PageflowElement extends EObject {
 	 */
 	void setReferenceLink(String value);
 
+	/**
+	 * @generated NOT
+	 */
 	void notifyModelChanged(Notification nofitification);
+
+	/**
+	 * @generated NOT
+	 */
+	void dispose();
 }
 // PageflowElement

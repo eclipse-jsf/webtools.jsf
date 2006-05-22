@@ -30,8 +30,8 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.synchronization.TransformUtil;
 
 /**
- * The reference element represents a mapping from pageflow link to navigation
- * rule
+ * The reference element represents a mapping from pageflow link to a navigation
+ * case.
  * 
  * @author hmeng
  */

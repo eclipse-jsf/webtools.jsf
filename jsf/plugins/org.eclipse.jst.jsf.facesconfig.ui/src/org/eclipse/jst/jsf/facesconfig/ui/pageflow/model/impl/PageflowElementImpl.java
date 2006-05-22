@@ -568,14 +568,28 @@ public abstract class PageflowElementImpl extends EObjectImpl implements
 	/**
 	 * The synchronizer will use this to notify adapters for the faces-config's
 	 * modification.
+	 * 
+	 * @generated NOT
 	 */
 	public void notifyModelChanged(Notification notification) {
 		if (eNotificationRequired())
 			eNotify(notification);
 	}
 
+	/**
+	 * @generated NOT
+	 */
+
 	public ReferenceElement getFCElements() {
 		return null;
+	}
+
+	/**
+	 * @generated NOT
+	 */
+	public void dispose() {
+		getFCElements().dispose();
+		eAdapters.clear();
 	}
 
 }

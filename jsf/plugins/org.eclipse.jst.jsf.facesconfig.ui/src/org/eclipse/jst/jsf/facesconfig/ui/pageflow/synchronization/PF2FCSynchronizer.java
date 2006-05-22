@@ -59,13 +59,20 @@ public class PF2FCSynchronizer extends AdapterImpl {
 			return;
 		}
 		tranformer.setInEvent(true);
-		if (!(notification.getNotifier() instanceof PageflowElement)) {
-			return;
+		try {
+			if (!(notification.getNotifier() instanceof PageflowElement)) {
+				return;
+			}
+			processChange(notification);
+		} catch (Exception e) {
+			System.out.println();
+		} finally {
+			if (notification.getEventType() != Notification.REMOVING_ADAPTER) {
+				tranformer.refreshPFAdapter(tranformer.getPageflow());
+				tranformer.refreshFCAdapter(tranformer.getFacesConfig());
+			}
+			tranformer.setInEvent(false);
 		}
-		processChange(notification);
-		tranformer.refreshPFAdapter(tranformer.getPageflow());
-		tranformer.refreshFCAdapter(tranformer.getFacesConfig());
-		tranformer.setInEvent(false);
 	}
 
 	private void processChange(Notification notification) {
@@ -134,9 +141,23 @@ public class PF2FCSynchronizer extends AdapterImpl {
 
 	private void setProperties(Notification notification,
 			PageflowElement element, int value) {
-		element.getFCElements().set(
-				(EStructuralFeature) notification.getFeature(),
-				notification.getNewValue());
+		if (notification.getFeature() == PageflowPackage.eINSTANCE
+				.getPFLink_Source()) {
+			if (notification.getNewValue() instanceof String) {
+				tranformer.changePFLinkStart((PageflowLink) element,
+						(String) notification.getNewValue());
+			}
+		} else if (notification.getFeature() == PageflowPackage.eINSTANCE
+				.getPFLink_Target()) {
+			if (notification.getNewValue() instanceof String) {
+				tranformer.changePFLinkEnd((PageflowLink) element,
+						(String) notification.getNewValue());
+			}
+		} else {
+			element.getFCElements().set(
+					(EStructuralFeature) notification.getFeature(),
+					notification.getNewValue());
+		}
 	}
 
 	private void addInLink(Notification notification, PageflowElement element) {

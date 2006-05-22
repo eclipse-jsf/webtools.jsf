@@ -35,7 +35,7 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.figure.PFLinkFigure;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.PageflowElementPropertySource;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.PageflowLinkPropertySource;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.synchronization.PFBatchAdapter;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowAnnotationUtil;
 import org.eclipse.jst.jsf.facesconfig.ui.preference.GEMPreferences;
@@ -236,7 +236,7 @@ public class PageflowLinkEditPart extends AbstractConnectionEditPart implements
 	 */
 	protected IPropertySource getPropertySource() {
 		if (propertySource == null) {
-			propertySource = new PageflowElementPropertySource(getPFLink());
+			propertySource = new PageflowLinkPropertySource(getPFLink());
 		}
 		return propertySource;
 	}

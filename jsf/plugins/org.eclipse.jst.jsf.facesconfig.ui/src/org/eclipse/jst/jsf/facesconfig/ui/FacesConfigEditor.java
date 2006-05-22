@@ -49,7 +49,6 @@ import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
 import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
-import org.eclipse.emf.edit.ui.action.EditingDomainActionBarContributor;
 import org.eclipse.gef.EditDomain;
 import org.eclipse.gef.commands.CommandStack;
 import org.eclipse.gef.commands.CommandStackListener;
@@ -1185,7 +1184,7 @@ public class FacesConfigEditor extends FormEditor implements
 	 */
 	protected void pageChange(int newPageIndex) {
 		super.pageChange(newPageIndex);
-
+		getActionBarContributor().pageChanged(this);
 		// refresh content depending on current page
 		currentPageChanged();
 	}
@@ -1240,6 +1239,10 @@ public class FacesConfigEditor extends FormEditor implements
 	// return propertySheetPage;
 	// }
 	public void dispose() {
+		if (facesConfigAtrifactEdit != null)
+			facesConfigAtrifactEdit.dispose();
+		super.dispose();
+
 		getModelsTransform().dispose();
 		ResourcesPlugin.getWorkspace().removeResourceChangeListener(
 				resourceChangeListener);
@@ -1247,10 +1250,6 @@ public class FacesConfigEditor extends FormEditor implements
 		// getSite().getPage().removePartListener(partListener);
 
 		adapterFactory.dispose();
-
-		if (getActionBarContributor().getActiveEditor() == this) {
-			getActionBarContributor().setActiveEditor(null);
-		}
 
 		if (propertySheetPage != null) {
 			propertySheetPage.dispose();
@@ -1260,9 +1259,6 @@ public class FacesConfigEditor extends FormEditor implements
 			outlinePage.dispose();
 		}
 
-		if (facesConfigAtrifactEdit != null)
-			facesConfigAtrifactEdit.dispose();
-		super.dispose();
 	}
 
 	private IProject currentProject;
@@ -1340,8 +1336,8 @@ public class FacesConfigEditor extends FormEditor implements
 		// IDE.gotoMarker(fTextEditor, marker);
 	}
 
-	public EditingDomainActionBarContributor getActionBarContributor() {
-		return (EditingDomainActionBarContributor) getEditorSite()
+	public FacesConfigActionBarContributor getActionBarContributor() {
+		return (FacesConfigActionBarContributor) getEditorSite()
 				.getActionBarContributor();
 	}
 

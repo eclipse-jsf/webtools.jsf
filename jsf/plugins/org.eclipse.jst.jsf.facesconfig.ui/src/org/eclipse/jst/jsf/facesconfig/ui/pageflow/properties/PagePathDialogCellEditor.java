@@ -1,17 +1,13 @@
-/*******************************************************************************
- * Copyright (c) 2004, 2005 Sybase, Inc. and others.
- *
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *     Sybase, Inc. - initial API and implementation
- *******************************************************************************/
+/**
+ * Confidential Property of Sybase, Inc.
+ * (c) Copyright Sybase, Inc. 2004-2006.
+ * All rights reserved.
+ * 
+ */
 
 package org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties;
 
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 
@@ -21,6 +17,7 @@ import org.eclipse.swt.widgets.Control;
  * @author Xiao-guang Zhang
  */
 public class PagePathDialogCellEditor extends EditableDialogCellEditor {
+	PageflowPage element;
 
 	/*
 	 * (non-Javadoc)
@@ -36,8 +33,9 @@ public class PagePathDialogCellEditor extends EditableDialogCellEditor {
 	 * 
 	 * @see DialogCellEditor#DialogCellEditor(Composite parent)
 	 */
-	public PagePathDialogCellEditor(Composite parent) {
+	public PagePathDialogCellEditor(Composite parent, PageflowPage element) {
 		super(parent);
+		this.element = element;
 	}
 
 	/*
@@ -62,22 +60,6 @@ public class PagePathDialogCellEditor extends EditableDialogCellEditor {
 			// jsfSelection =
 			// PageflowModelManager.getProjectPath(getDefaultLabel().getText());
 		}
-		// IStructuredSelection selectionToPass = StructuredSelection.EMPTY;
-		// Create a new jsf Wizard
-		// TODO create a new jsf
-		/**
-		 * JSFFileSelectionWizard jsfSelectionWizard = new
-		 * JSFFileSelectionWizard();
-		 * jsfSelectionWizard.init(EditorPlugin.getDefault().getWorkbench(),
-		 * selectionToPass); jsfSelectionWizard.setJSFSelection(jsfSelection);
-		 * //using a wizard dialog to display the new jsf wizard WizardDialog
-		 * jsfSelectionWizardDialog = new
-		 * WizardDialog(cellEditorWindow.getShell(), jsfSelectionWizard); if
-		 * (jsfSelectionWizardDialog.open() == WizardDialog.OK) { jsfSelection =
-		 * jsfSelectionWizard.getJSFSelection(); } //jsfSelection =
-		 * PageflowModelManager.getWebPath(jsfSelection);
-		 */
-
 		return jsfSelection;
 	}
 

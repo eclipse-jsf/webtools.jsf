@@ -14,7 +14,9 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
 import org.eclipse.wst.common.internal.emf.resource.CompatibilityXMIResource;
 
 /**
- * The base class for mapping facesconfig node from pageflow node.
+ * The base class for mapping facesconfig node from pageflow node. The
+ * ReferenceElement could be extended later to enable other model to be
+ * referenced by pageflow.
  * 
  * @author hmeng
  * 
@@ -29,7 +31,8 @@ public abstract class ReferenceElement {
 		this.pageflowElement = pageflowElement;
 	}
 
-	public ReferenceElement(PageflowElement pageflowElement, EObject facesConfigObject) {
+	public ReferenceElement(PageflowElement pageflowElement,
+			EObject facesConfigObject) {
 		this(pageflowElement);
 		this.add(facesConfigObject);
 	}
@@ -71,6 +74,12 @@ public abstract class ReferenceElement {
 		return result;
 	}
 
+	/**
+	 * Resolve each referenced data's path and combine the result into one
+	 * string, the path will be seperated with '|'.
+	 * 
+	 * @return
+	 */
 	public String resolveReferenceString() {
 		String result = "";
 		for (int i = 0, n = data.size(); i < n; i++) {
@@ -83,7 +92,7 @@ public abstract class ReferenceElement {
 	}
 
 	/**
-	 * The EMF path of an element.
+	 * The EMF paths of all referenced elements.
 	 * 
 	 * @return
 	 */
@@ -114,13 +123,30 @@ public abstract class ReferenceElement {
 		return data.isEmpty();
 	}
 
+	public void dispose() {
+		clear();
+	}
+
 	/**
-	 * Update when faces-config is modified.
+	 * Update the referenced faces-config elements.
 	 * 
 	 */
 	abstract public void update();
 
+	/**
+	 * Return a pageflow property's value with referenced faces-config element.
+	 * 
+	 * @param eFeature
+	 * @return
+	 */
 	abstract public Object get(int eFeature);
 
+	/**
+	 * To set a pageflow property's value will result in seting a faces-config
+	 * element.
+	 * 
+	 * @param eFeature
+	 * @param newValue
+	 */
 	abstract public void set(EStructuralFeature eFeature, Object newValue);
 }

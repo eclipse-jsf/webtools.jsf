@@ -29,6 +29,7 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>PF Link</b></em>'.
@@ -203,6 +204,26 @@ public class PageflowLinkImpl extends PageflowElementImpl implements
 			}
 		}
 		return target;
+	}
+
+	public void setSourcePath(String path) {
+		if (getSource() != null
+				&& path.equals(((PageflowPage) getSource()).getPath())) {
+			return;
+		}
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					PageflowPackage.PF_LINK__SOURCE, getSource(), path));
+	}
+
+	public void setTargetPath(String path) {
+		if (getTarget() != null
+				&& path.equals(((PageflowPage) getTarget()).getPath())) {
+			return;
+		}
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					PageflowPackage.PF_LINK__TARGET, getTarget(), path));
 	}
 
 	/**
@@ -733,7 +754,7 @@ public class PageflowLinkImpl extends PageflowElementImpl implements
 		Boolean result = (Boolean) getFCElements().get(
 				PageflowPackage.PF_LINK__REDIRECT);
 		return result.booleanValue();
-			}
+	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -781,7 +802,7 @@ public class PageflowLinkImpl extends PageflowElementImpl implements
 		String result = (String) getFCElements().get(
 				PageflowPackage.PF_LINK__SMALLICON);
 		return result;
-			}
+	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -805,7 +826,7 @@ public class PageflowLinkImpl extends PageflowElementImpl implements
 				PageflowPackage.PF_LINK__LARGEICON);
 
 		return result;
-			}
+	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -843,11 +864,14 @@ public class PageflowLinkImpl extends PageflowElementImpl implements
 					newFromaction));
 	}
 
+	/**
+	 * @generated NOT
+	 */
 	public ReferenceElement getFCElements() {
 
 		if (refElement == null) {
 			refElement = new LinkReferenceElement(this);
-}
+		}
 		return refElement;
 	}
 

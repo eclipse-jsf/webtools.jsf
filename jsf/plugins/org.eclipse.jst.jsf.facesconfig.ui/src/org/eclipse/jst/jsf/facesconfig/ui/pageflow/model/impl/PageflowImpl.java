@@ -443,6 +443,12 @@ public class PageflowImpl extends PageflowElementImpl implements Pageflow {
 
 	}
 
+	/**
+	 * When faces-config has been changed, the pageflow model will be notified
+	 * to enable refresher do some update in pageflow.
+	 * 
+	 * @generated NOT
+	 */
 	public void notifyModelChanged(Notification notification) {
 		TreeIterator children = eAllContents();
 		while (children.hasNext()) {
@@ -454,5 +460,18 @@ public class PageflowImpl extends PageflowElementImpl implements Pageflow {
 		super.notifyModelChanged(notification);
 	}
 
+	/**
+	 * @generated NOT
+	 */
+	public void dispose() {
+		TreeIterator children = eAllContents();
+		while (children.hasNext()) {
+			Object next = children.next();
+			if (next instanceof PageflowElement) {
+				((PageflowElement) next).dispose();
+			}
+		}
+		eAdapters.clear();
+	}
 }
 // PageflowImpl
