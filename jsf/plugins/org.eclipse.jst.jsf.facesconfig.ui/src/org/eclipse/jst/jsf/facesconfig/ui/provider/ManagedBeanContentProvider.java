@@ -86,8 +86,12 @@ public class ManagedBeanContentProvider implements ITreeContentProvider {
 		if (element instanceof ManagedBeanScopeTreeItem) {
 			return ((ManagedBeanScopeTreeItem) element).getParent();
 		} else if (element instanceof ManagedBeanType) {
-			String scope = ((ManagedBeanType) element).getManagedBeanScope()
-					.getTextContent();
+			String scope = null;
+			if (((ManagedBeanType) element).getManagedBeanScope() != null) {
+				scope = ((ManagedBeanType) element).getManagedBeanScope()
+						.getTextContent();
+			}
+
 			if (scope != null) {
 				for (int i = 0; i < scopeItemList.size(); i++) {
 					if (((ManagedBeanScopeTreeItem) scopeItemList.get(i))
