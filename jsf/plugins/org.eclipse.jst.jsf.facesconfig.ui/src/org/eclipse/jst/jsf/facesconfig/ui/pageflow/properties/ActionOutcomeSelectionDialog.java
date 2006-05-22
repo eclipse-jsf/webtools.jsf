@@ -19,7 +19,7 @@ import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.viewers.ColumnPixelData;
 import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.Separator;
-import org.eclipse.jst.jsf.facesconfig.ui.EditorResources;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.FacesConfigUtil;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
@@ -47,8 +47,6 @@ import org.w3c.dom.Element;
  * @author Xiao-guang Zhang
  */
 public class ActionOutcomeSelectionDialog extends Dialog {
-	/** resource bundle */
-	private static EditorResources resource = EditorResources.getInstance();
 
 	/** property's name text control */
 	private Text actionText;
@@ -119,8 +117,7 @@ public class ActionOutcomeSelectionDialog extends Dialog {
 		// Pageflow.Property.Action.OutcomeSelectionDialog.Choice = Enter the
 		// outcome or select one from action list below:
 		choiceLabel
-				.setText(resource
-						.getString("Pageflow.Property.Action.OutcomeSelectionDialog.Choice"));//$NON-NLS-1$
+				.setText(PageflowMessages.Pageflow_Property_Action_OutcomeSelectionDialog_Choice);
 
 		createOutcomeSection(container);
 
@@ -168,8 +165,7 @@ public class ActionOutcomeSelectionDialog extends Dialog {
 		GridData gd = new GridData(GridData.FILL_BOTH);
 		actionSection.setLayoutData(gd);
 
-		String actionListTitle = resource
-				.getString("Pageflow.Property.Action.OutcomeSelectionDialog.ActionListTable.Title");//$NON-NLS-1$
+		String actionListTitle = PageflowMessages.Pageflow_Property_Action_OutcomeSelectionDialog_ActionListTable_Title;//$NON-NLS-1$
 
 		if (jspName != null && jspName.length() > 0) {
 			actionListTitle += " in " + jspName;
@@ -191,15 +187,13 @@ public class ActionOutcomeSelectionDialog extends Dialog {
 		// Pageflow.Property.Action.OutcomeSelectionDialog.ActionListTable.Component
 		// = Component ID
 		componentCol
-				.setText(resource
-						.getString("Pageflow.Property.Action.OutcomeSelectionDialog.ActionListTable.Component")); //$NON-NLS-1$
+				.setText(PageflowMessages.Pageflow_Property_Action_OutcomeSelectionDialog_ActionListTable_Component); //$NON-NLS-1$
 		TableColumn actionCol = new TableColumn(actionTable, SWT.NONE);
 
 		// Pageflow.Property.Action.OutcomeSelectionDialog.ActionListTable.Action
 		// = Action
 		actionCol
-				.setText(resource
-						.getString("Pageflow.Property.Action.OutcomeSelectionDialog.ActionListTable.Action"));//$NON-NLS-1$
+				.setText(PageflowMessages.Pageflow_Property_Action_OutcomeSelectionDialog_ActionListTable_Action);//$NON-NLS-1$
 
 		actionTable.addSelectionListener(new SelectionListener() {
 
@@ -261,8 +255,7 @@ public class ActionOutcomeSelectionDialog extends Dialog {
 		// Pageflow.Property.Action.OutcomeSelectionDialog.Title = Outcome
 		// Selection
 		newShell
-				.setText(resource
-						.getString("Pageflow.Property.Action.OutcomeSelectionDialog.Title")); //$NON-NLS-1$
+				.setText(PageflowMessages.Pageflow_Property_Action_OutcomeSelectionDialog_Title); //$NON-NLS-1$
 
 	}
 

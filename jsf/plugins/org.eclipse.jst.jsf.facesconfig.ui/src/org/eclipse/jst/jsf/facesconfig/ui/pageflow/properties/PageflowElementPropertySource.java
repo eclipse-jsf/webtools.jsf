@@ -24,8 +24,7 @@ import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ICellEditorValidator;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
-import org.eclipse.jst.jsf.facesconfig.ui.EditorResources;
-import org.eclipse.jst.jsf.facesconfig.ui.IconResources;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
@@ -57,18 +56,13 @@ public class PageflowElementPropertySource implements IPropertySource {
 
 	private static final String PAGEFLOW_CONFIG_FILE = "configfile"; //$NON-NLS-1$
 
-	/** label's prefix for attribute definition name */
-	static final String PAGEFLOW_MODEL_PREFIX = "Pageflow.Model.Attributes."; //$NON-NLS-1$
-
 	/** pageflow elememt */
 	PageflowElement element;
 
 	/** boolean value's label */
-	private static final String P_VALUE_TRUE_LABEL = EditorResources
-			.getInstance().getString("Pageflow.Label.True"); //$NON-NLS-1$
+	private static final String P_VALUE_TRUE_LABEL = PageflowMessages.Pageflow_Label_True;
 
-	private static final String P_VALUE_FALSE_LABEL = EditorResources
-			.getInstance().getString("Pageflow.Label.False"); //$NON-NLS-1$
+	private static final String P_VALUE_FALSE_LABEL = PageflowMessages.Pageflow_Label_False;
 
 	/** Integer value for boolean type */
 	private static final int P_VALUE_TRUE = 0;
@@ -83,11 +77,8 @@ public class PageflowElementPropertySource implements IPropertySource {
 		}
 
 		public Image getImage(Object element) {
-			return EditorPlugin
-					.getDefault()
-					.getImage(
-							IconResources
-									.getString("Pageflow.elementPropertySource.booleanValue")); //$NON-NLS-1$
+			return EditorPlugin.getDefault().getImage(
+					"facesconfig/Pageflow_BooleanValue.gif"); //$NON-NLS-1$
 		}
 	}
 
@@ -95,23 +86,14 @@ public class PageflowElementPropertySource implements IPropertySource {
 
 		public Image getImage(Object element) {
 			if (element instanceof String) {
-				return EditorPlugin
-						.getDefault()
-						.getImage(
-								IconResources
-										.getString("Pageflow.elementPropertySource.textValue"));//$NON-NLS-1$
+				return EditorPlugin.getDefault().getImage(
+						"facesconfig/Pageflow_TextValue.gif");//$NON-NLS-1$
 			} else if (element instanceof Integer) {
-				return EditorPlugin
-						.getDefault()
-						.getImage(
-								IconResources
-										.getString("Pageflow.elementPropertySource.integralValue"));//$NON-NLS-1$
+				return EditorPlugin.getDefault().getImage(
+						"facesconfig/Pageflow_IntegralValue.gif");//$NON-NLS-1$
 			} else {
-				return EditorPlugin
-						.getDefault()
-						.getImage(
-								IconResources
-										.getString("Pageflow.elementPropertySource.genericValue"));//$NON-NLS-1$
+				return EditorPlugin.getDefault().getImage(
+						"facesconfig/Pageflow_GenericValue.gif");//$NON-NLS-1$
 			}
 		}
 	}
@@ -168,9 +150,55 @@ public class PageflowElementPropertySource implements IPropertySource {
 					propertyDescriptor = null;
 				} else {
 					propertyDescriptor = new TextPropertyDescriptor(Integer
-							.toString(attr.getFeatureID()),
-							getString(PAGEFLOW_MODEL_PREFIX + attr.getName()));
+							.toString(attr.getFeatureID()), getString(attr
+							.getName()));
 				}
+				if (propertyDescriptor != null) {
+					propertyDescriptor
+							.setLabelProvider(new PageflowLabelProvider());
+					propertyDescriptors.add(propertyDescriptor);
+				}
+
+			} else if (type.getInstanceClass() == boolean.class) {
+				PropertyDescriptor propertyDescriptor;
+				propertyDescriptor = getBooleanTypePropertyDescriptor(attr);
+				propertyDescriptor.setLabelProvider(new BooleanLabelProvider());
+				propertyDescriptors.add(propertyDescriptor);
+			}
+		}
+
+		return (IPropertyDescriptor[]) propertyDescriptors
+				.toArray(new IPropertyDescriptor[] {});
+	}
+
+	/**
+	 * @return
+	 */
+	private IPropertyDescriptor[] getLinkPropertyDescriptors() {
+		// property descriptors
+		List propertyDescriptors = new Vector();
+
+		Iterator it;
+		EClass cls = element.eClass();
+
+		it = cls.getEAllAttributes().iterator();
+		while (it.hasNext()) {
+			EAttribute attr = (EAttribute) it.next();
+			if (attr.isID()
+					|| attr.getName().equalsIgnoreCase(PAGEFLOW_NAME)
+					|| attr.getName().equalsIgnoreCase(PAGEFLOW_COMMENT)
+					|| attr.getFeatureID() == PageflowPackage.PAGEFLOW__REFERENCE_LINK) {
+				continue;
+			}
+
+			EDataType type = attr.getEAttributeType();
+			if (type.getInstanceClass() == String.class) {
+				PropertyDescriptor propertyDescriptor;
+
+				propertyDescriptor = new TextPropertyDescriptor(Integer
+						.toString(attr.getFeatureID()), getString(attr
+						.getName()));
+
 				if (propertyDescriptor != null) {
 					propertyDescriptor
 							.setLabelProvider(new PageflowLabelProvider());
@@ -198,8 +226,7 @@ public class PageflowElementPropertySource implements IPropertySource {
 	 */
 	private PropertyDescriptor getPagePathPropertyDescriptor(EAttribute attr) {
 		PropertyDescriptor propertyDescriptor = new PropertyDescriptor(Integer
-				.toString(attr.getFeatureID()), getString(PAGEFLOW_MODEL_PREFIX
-				+ attr.getName())) {
+				.toString(attr.getFeatureID()), getString(attr.getName())) {
 			public CellEditor createPropertyEditor(Composite parent) {
 				CellEditor editor = new PagePathDialogCellEditor(parent,
 						(PageflowPage) element);
@@ -261,8 +288,7 @@ public class PageflowElementPropertySource implements IPropertySource {
 	 */
 	private PropertyDescriptor getActionPropertyDescriptor(EAttribute attr) {
 		PropertyDescriptor propertyDescriptor = new PropertyDescriptor(Integer
-				.toString(attr.getFeatureID()), getString(PAGEFLOW_MODEL_PREFIX
-				+ attr.getName())) {
+				.toString(attr.getFeatureID()), getString(attr.getName())) {
 			public CellEditor createPropertyEditor(Composite parent) {
 				CellEditor editor = new ActionDialogCellEditor(parent);
 				if (getValidator() != null) {
@@ -300,8 +326,7 @@ public class PageflowElementPropertySource implements IPropertySource {
 	private PropertyDescriptor getActionOutcomePropertyDescriptor(
 			EAttribute attr) {
 		PropertyDescriptor propertyDescriptor = new PropertyDescriptor(Integer
-				.toString(attr.getFeatureID()), getString(PAGEFLOW_MODEL_PREFIX
-				+ attr.getName())) {
+				.toString(attr.getFeatureID()), getString(attr.getName())) {
 			public CellEditor createPropertyEditor(Composite parent) {
 				CellEditor editor = new ActionOutcomeDialogCellEditor(parent,
 						element);
@@ -324,9 +349,8 @@ public class PageflowElementPropertySource implements IPropertySource {
 	PropertyDescriptor getBooleanTypePropertyDescriptor(EAttribute attr) {
 		PropertyDescriptor propertyDescriptor;
 		propertyDescriptor = new ComboBoxPropertyDescriptor(Integer
-				.toString(attr.getFeatureID()), getString(PAGEFLOW_MODEL_PREFIX
-				+ attr.getName()), new String[] { P_VALUE_TRUE_LABEL,
-				P_VALUE_FALSE_LABEL });
+				.toString(attr.getFeatureID()), getString(attr.getName()),
+				new String[] { P_VALUE_TRUE_LABEL, P_VALUE_FALSE_LABEL });
 		return propertyDescriptor;
 	}
 
@@ -334,7 +358,46 @@ public class PageflowElementPropertySource implements IPropertySource {
 	 * Get a translated string from the resource locator.
 	 */
 	protected String getString(String key) {
-		return EditorResources.getInstance().getString(key);
+		if ("comment".equals(key)) {
+			return PageflowMessages.Pageflow_Model_Attributes_comment;
+		}
+
+		if ("name".equals(key)) {
+			return PageflowMessages.Pageflow_Model_Attributes_name;
+		}
+
+		if ("largeicon".equals(key)) {
+			return PageflowMessages.Pageflow_Model_Attributes_largeicon;
+		}
+
+		if ("smallicon".equals(key)) {
+			return PageflowMessages.Pageflow_Model_Attributes_smallicon;
+		}
+
+		if ("fromaction".equals(key)) {
+			return PageflowMessages.Pageflow_Model_Attributes_fromaction;
+		}
+
+		if ("path".equals(key)) {
+			return PageflowMessages.Pageflow_Model_Attributes_path;
+		}
+		if ("begin".equals(key)) {
+			return PageflowMessages.Pageflow_Model_Attributes_begin;
+		}
+		if ("end".equals(key)) {
+			return PageflowMessages.Pageflow_Model_Attributes_end;
+		}
+		if ("configfile".equals(key)) {
+			return PageflowMessages.Pageflow_Model_Attributes_configfile;
+		}
+		if ("outcome".equals(key)) {
+			return PageflowMessages.Pageflow_Model_Attributes_outcome;
+		}
+		if ("redirect".equals(key)) {
+			return PageflowMessages.Pageflow_Model_Attributes_redirect;
+		}
+
+		return "";
 	}
 
 	/*
@@ -355,6 +418,7 @@ public class PageflowElementPropertySource implements IPropertySource {
 				result = new Integer(P_VALUE_FALSE);
 			}
 		}
+
 		return result != null ? result : "";
 	}
 

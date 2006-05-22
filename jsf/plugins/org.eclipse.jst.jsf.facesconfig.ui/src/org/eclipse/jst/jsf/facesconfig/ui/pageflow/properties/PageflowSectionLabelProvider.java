@@ -16,12 +16,12 @@ import org.eclipse.gef.editparts.AbstractEditPart;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
-import org.eclipse.jst.jsf.facesconfig.ui.EditorResources;
-import org.eclipse.jst.jsf.facesconfig.ui.IconResources;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowLinkEditPart;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowElementEditPart;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowElementTreeEditPart;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowLinkEditPart;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage;
 import org.eclipse.swt.graphics.Image;
 
 /**
@@ -31,8 +31,6 @@ import org.eclipse.swt.graphics.Image;
  * 
  */
 public class PageflowSectionLabelProvider extends LabelProvider {
-	/** prefix string for resource bundle */
-	private static final String PAGEFLOW_MODEL_ITEMS_PREFIX = "Pageflow.Model.Items.";
 
 	public PageflowSectionLabelProvider() {
 		super();
@@ -45,7 +43,7 @@ public class PageflowSectionLabelProvider extends LabelProvider {
 	 */
 	public Image getImage(Object object) {
 		Image result = EditorPlugin.getDefault().getImage(
-				IconResources.getString("Pageflow.pageflow.small"));
+				"facesconfig/FacesConfig_Pageflow16.gif");
 
 		return result;
 	}
@@ -63,10 +61,19 @@ public class PageflowSectionLabelProvider extends LabelProvider {
 			if (pageflow instanceof PageflowElementEditPart
 					|| pageflow instanceof PageflowLinkEditPart
 					|| pageflow instanceof PageflowElementTreeEditPart) {
-				String className = ((PageflowElement) ((AbstractEditPart) pageflow)
-						.getModel()).eClass().getName();
-				result = EditorResources.getInstance().getString(
-						PAGEFLOW_MODEL_ITEMS_PREFIX + className);
+
+				if (((PageflowElement) ((AbstractEditPart) pageflow).getModel())
+						.eClass() == PageflowPackage.eINSTANCE.getPageflow()) {
+					result = PageflowMessages.Pageflow_Model_Items_Pageflow;
+				} else if (((PageflowElement) ((AbstractEditPart) pageflow)
+						.getModel()).eClass() == PageflowPackage.eINSTANCE
+						.getPFPage()) {
+					result = PageflowMessages.Pageflow_Model_Items_PFPage;
+				} else if (((PageflowElement) ((AbstractEditPart) pageflow)
+						.getModel()).eClass() == PageflowPackage.eINSTANCE
+						.getPFLink()) {
+					result = PageflowMessages.Pageflow_Model_Items_PFLink;
+				}
 			}
 		}
 		return result;

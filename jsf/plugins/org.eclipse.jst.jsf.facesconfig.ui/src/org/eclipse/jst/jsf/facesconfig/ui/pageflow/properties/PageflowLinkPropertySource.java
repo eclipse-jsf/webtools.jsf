@@ -89,7 +89,7 @@ public class PageflowLinkPropertySource extends PageflowElementPropertySource {
 
 				propertyDescriptor = new TextPropertyDescriptor(Integer
 						.toString(attr.getFeatureID()),
-						getString(PAGEFLOW_MODEL_PREFIX + attr.getName()));
+						getString(attr.getName()));
 
 				if (propertyDescriptor != null) {
 					propertyDescriptor
@@ -134,8 +134,7 @@ public class PageflowLinkPropertySource extends PageflowElementPropertySource {
 	private PropertyDescriptor getExistingPagePathPropertyDescriptor(
 			EReference attr) {
 		PropertyDescriptor propertyDescriptor = new PropertyDescriptor(Integer
-				.toString(attr.getFeatureID()), getString(PAGEFLOW_MODEL_PREFIX
-				+ attr.getName())) {
+				.toString(attr.getFeatureID()), getString(attr.getName())) {
 			public CellEditor createPropertyEditor(Composite parent) {
 				CellEditor editor = new ExistingPagePathDialogCellEditor(
 						parent, (Pageflow) element.eContainer());
