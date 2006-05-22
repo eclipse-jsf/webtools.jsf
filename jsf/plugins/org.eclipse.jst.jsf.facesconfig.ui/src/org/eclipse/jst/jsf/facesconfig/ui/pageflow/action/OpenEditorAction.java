@@ -19,8 +19,8 @@ import org.eclipse.gef.Request;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.commands.CompoundCommand;
 import org.eclipse.gef.ui.actions.SelectionAction;
-import org.eclipse.jst.jsf.facesconfig.ui.EditorResources;
 import org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.ui.IWorkbenchPart;
 
@@ -32,9 +32,7 @@ import org.eclipse.ui.IWorkbenchPart;
  */
 public class OpenEditorAction extends SelectionAction {
 	/** The name of the request */
-	public static final String OPEN_EDITOR_REQUEST = EditorResources
-			.getInstance().getString(
-					"Pageflow.Commands.OpenEditorCommand.Label");
+	public static final String OPEN_EDITOR_REQUEST = PageflowMessages.Pageflow_Commands_OpenEditorCommand_Label;
 
 	/** The request */
 	Request request;
@@ -49,12 +47,10 @@ public class OpenEditorAction extends SelectionAction {
 		super(part);
 		request = new Request(OPEN_EDITOR_REQUEST);
 		// Pageflow.Action.OpenEditor.Label = Edit Page
-		setText(EditorResources.getInstance().getString(
-				"Pageflow.Action.OpenEditor.Label"));
+		setText(PageflowMessages.Pageflow_Action_OpenEditor_Label);
 		setId(FacesConfigEditor.EDITOR_ID);
 		// Pageflow.Action.OpenEditor.ToolTip = Edit this page
-		setToolTipText(EditorResources.getInstance().getString(
-				"Pageflow.Action.OpenEditor.ToolTip"));
+		setToolTipText(PageflowMessages.Pageflow_Action_OpenEditor_ToolTip);
 	}
 
 	/**

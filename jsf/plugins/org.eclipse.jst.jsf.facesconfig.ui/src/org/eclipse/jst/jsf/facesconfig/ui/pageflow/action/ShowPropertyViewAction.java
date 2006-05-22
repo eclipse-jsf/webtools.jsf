@@ -18,7 +18,7 @@ import org.eclipse.gef.EditPart;
 import org.eclipse.gef.ui.actions.SelectionAction;
 import org.eclipse.jst.jsf.facesconfig.common.logging.Logger;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
-import org.eclipse.jst.jsf.facesconfig.ui.EditorResources;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
@@ -50,12 +50,10 @@ public class ShowPropertyViewAction extends SelectionAction {
 	public ShowPropertyViewAction(IWorkbenchPart part) {
 		super(part);
 		// Pageflow.Action.ShowPropertyView.Label = Properties
-		setText(EditorResources.getInstance().getString(
-				"Pageflow.Action.ShowPropertyView.Label")); //$NON-NLS-1$
+		setText(PageflowMessages.Pageflow_Action_ShowPropertyView_Label); //$NON-NLS-1$
 		setId(SHOW_PROPERTY_VIEW);
 		// Pageflow.Action.ShowPropertyView.ToolTip = Show properties
-		setToolTipText(EditorResources.getInstance().getString(
-				"Pageflow.Action.ShowPropertyView.ToolTip")); //$NON-NLS-1$
+		setToolTipText(PageflowMessages.Pageflow_Action_ShowPropertyView_ToolTip); //$NON-NLS-1$
 	}
 
 	/**
