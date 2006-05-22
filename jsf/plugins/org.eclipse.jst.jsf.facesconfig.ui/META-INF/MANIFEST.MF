@@ -36,7 +36,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.jem.util,
  org.eclipse.jst.jsf.facesconfig.common,
  org.eclipse.jst.jsf.facesconfig,
- org.eclipse.ui.cheatsheets
+ org.eclipse.ui.cheatsheets,
+ org.apache.xerces
 Eclipse-LazyStart: true
 Export-Package: org.eclipse.jst.jsf.facesconfig.ui,
  org.eclipse.jst.jsf.facesconfig.ui.dialog,
