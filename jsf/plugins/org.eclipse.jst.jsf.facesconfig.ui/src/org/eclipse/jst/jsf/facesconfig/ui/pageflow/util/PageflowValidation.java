@@ -18,12 +18,13 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.jst.jsf.facesconfig.ui.EditorResources;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.util.WebrootUtil;
+import org.eclipse.osgi.util.NLS;
 
 /**
  * Pageflow's validation functions
@@ -33,8 +34,6 @@ import org.eclipse.jst.jsf.facesconfig.ui.util.WebrootUtil;
 public class PageflowValidation {
 	/** PageflowValidation singleton instance */
 	private static PageflowValidation instance;
-
-	private static EditorResources resources = EditorResources.getInstance();
 
 	/** constructor */
 	private PageflowValidation() {
@@ -135,15 +134,15 @@ public class PageflowValidation {
 					if (resource == null || !resource.exists()) {
 						// Pageflow.Validation.NotExistedSourcePage = The source
 						// page {0} is not existed.
-						errorMessage = resources.getString(
-								"Pageflow.Validation.UndefinedOutcome",
-								outcome, webPath);
+						errorMessage = NLS
+								.bind(
+										PageflowMessages.Pageflow_Validation_UndefinedOutcome,
+										outcome, webPath);
 					}
 				} else {
 					// Pageflow.Validation.MissingSourcePage = The source page
 					// should be specified.
-					errorMessage = resources
-							.getString("Pageflow.Validation.MissingSourcePage");
+					errorMessage = PageflowMessages.Pageflow_Validation_MissingSourcePage;
 				}
 			}
 		}
@@ -184,8 +183,8 @@ public class PageflowValidation {
 
 			if (existedNode instanceof PageflowPage) {
 				if (((PageflowPage) existedNode).getPath() != null
-						&& ((PageflowPage) existedNode).getPath().equalsIgnoreCase(
-								pagePath)) {
+						&& ((PageflowPage) existedNode).getPath()
+								.equalsIgnoreCase(pagePath)) {
 					return true;
 				}
 			}
@@ -221,21 +220,23 @@ public class PageflowValidation {
 					if (!WebrootUtil.isValidWebFile(resourcePath)) {
 						// Pageflow.Validation.InvalidWebPage = the file {0} is
 						// not valid web file.
-						errorMessage = resources.getString(
-								"Pageflow.Validation.InvalidWebPage", pagePath);
+						errorMessage = NLS
+								.bind(
+										PageflowMessages.Pageflow_Validation_InvalidWebPage,
+										pagePath);
 					}
 				}
 			} else {
 				// Pageflow.Validation.NotExitedWebPage = the web page {0} is
 				// not existed.
-				errorMessage = resources.getString(
-						"Pageflow.Validation.NotExitedWebPage", pagePath);
+				errorMessage = NLS.bind(
+						PageflowMessages.Pageflow_Validation_NotExitedWebPage,
+						pagePath);
 			}
 		} else {
 			// Pageflow.Validation.MissingWebPage = the web page's path should
 			// be specified.
-			errorMessage = resources
-					.getString("Pageflow.Validation.MissingWebPage");
+			errorMessage = PageflowMessages.Pageflow_Validation_MissingWebPage;
 		}
 		return errorMessage;
 	}
