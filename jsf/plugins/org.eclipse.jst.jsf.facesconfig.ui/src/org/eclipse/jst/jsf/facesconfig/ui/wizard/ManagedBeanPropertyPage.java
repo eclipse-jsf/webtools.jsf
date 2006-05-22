@@ -68,8 +68,8 @@ public class ManagedBeanPropertyPage extends WizardPage implements ISummaryDataS
 
 		this.defaultScope = defaultScope;
 		currentProject = project;
-		setTitle(WizardsResourcesNLS.ManagedBeanPropertyWizardPage_Title);
-		setDescription(WizardsResourcesNLS.ManagedBeanPropertyWizardPage_Description);
+		setTitle(WizardMessages.ManagedBeanPropertyWizardPage_Title);
+		setDescription(WizardMessages.ManagedBeanPropertyWizardPage_Description);
 	}
 
 	/*
@@ -109,7 +109,7 @@ public class ManagedBeanPropertyPage extends WizardPage implements ISummaryDataS
 
 		// ManagedBeanPropertyWizardPage.General = General
 		generalSection
-				.setText(WizardsResourcesNLS.ManagedBeanPropertyWizardPage_General);
+				.setText(WizardMessages.ManagedBeanPropertyWizardPage_General);
 
 		GridLayout gl = new GridLayout();
 		// gl.marginHeight = 20;
@@ -121,7 +121,7 @@ public class ManagedBeanPropertyPage extends WizardPage implements ISummaryDataS
 		SWTUtils
 				.createLabel(
 						generalSection,
-						WizardsResourcesNLS.ManagedBeanPropertyWizardPage_ManagedBeanName,
+						WizardMessages.ManagedBeanPropertyWizardPage_ManagedBeanName,
 						1);
 
 		managedBeanNameText = SWTUtils.createTextBox(generalSection, 1);
@@ -144,7 +144,7 @@ public class ManagedBeanPropertyPage extends WizardPage implements ISummaryDataS
 		SWTUtils
 				.createLabel(
 						generalSection,
-						WizardsResourcesNLS.ManagedBeanPropertyWizardPage_ManagedBeanScope,
+						WizardMessages.ManagedBeanPropertyWizardPage_ManagedBeanScope,
 						1); //$NON-NLS-1$
 
 		String[] items = {
@@ -162,7 +162,7 @@ public class ManagedBeanPropertyPage extends WizardPage implements ISummaryDataS
 		Label labelDesp = SWTUtils
 				.createLabel(
 						generalSection,
-						WizardsResourcesNLS.ManagedBeanPropertyWizardPage_ManagedBeanDescription,
+						WizardMessages.ManagedBeanPropertyWizardPage_ManagedBeanDescription,
 						1); //$NON-NLS-1$
 
 		gd = new GridData(GridData.VERTICAL_ALIGN_BEGINNING);
@@ -183,20 +183,20 @@ public class ManagedBeanPropertyPage extends WizardPage implements ISummaryDataS
 	private boolean isValidManagedBeanName(boolean reportError) {
 		if (managedBeanNameText.getText().length() == 0) {
 			if (reportError) {
-				setErrorMessage(WizardsResourcesNLS.ManagedBeanPropertyWizardPage_Warning_MissingManagedBeanName); //$NON-NLS-1$
+				setErrorMessage(WizardMessages.ManagedBeanPropertyWizardPage_Warning_MissingManagedBeanName); //$NON-NLS-1$
 			}
 			return false;
 		} else if (JavaClassUtils.hasIllegalCharacters(managedBeanNameText
 				.getText())) {
 			if (reportError) {
-				setErrorMessage(WizardsResourcesNLS.ManagedBeanPropertyWizardPage_Warning_InvalidManagedBeanName); //$NON-NLS-1$
+				setErrorMessage(WizardMessages.ManagedBeanPropertyWizardPage_Warning_InvalidManagedBeanName); //$NON-NLS-1$
 			}
 			return false;
 		} else {
 			if (ManagedBeanUtil.isBeanDuplicate(currentProject,
 					managedBeanNameText.getText())) {
 				if (reportError) {
-					setErrorMessage(WizardsResourcesNLS.ManagedBeanPropertyWizardPage_Warning_DuplicateManagedBeanName);
+					setErrorMessage(WizardMessages.ManagedBeanPropertyWizardPage_Warning_DuplicateManagedBeanName);
 				}
 				return false;
 			}
@@ -260,19 +260,19 @@ public class ManagedBeanPropertyPage extends WizardPage implements ISummaryDataS
 
 		data
 				.add(new String[] {
-						WizardsResourcesNLS.NewJavaManagedBeanWizard_Summary_ManagedBeanName,
+						WizardMessages.NewJavaManagedBeanWizard_Summary_ManagedBeanName,
 						getManagedBeanName() }); //$NON-NLS-1$
 		data
 				.add(new String[] {
-						WizardsResourcesNLS.NewJavaManagedBeanWizard_Summary_ManagedBeanScope,
+						WizardMessages.NewJavaManagedBeanWizard_Summary_ManagedBeanScope,
 						getManagedBeanScope() });
 		data.add(new String[] {
-				WizardsResourcesNLS.NewJavaManagedBeanWizard_Summary_ClassName,
+				WizardMessages.NewJavaManagedBeanWizard_Summary_ClassName,
 				getManagedBeanClass() });
 
 		data
 				.add(new String[] {
-						WizardsResourcesNLS.NewJavaManagedBeanWizard_Summary_Description,
+						WizardMessages.NewJavaManagedBeanWizard_Summary_Description,
 						getManagedBeanDescription() });
 		return data;
 	}

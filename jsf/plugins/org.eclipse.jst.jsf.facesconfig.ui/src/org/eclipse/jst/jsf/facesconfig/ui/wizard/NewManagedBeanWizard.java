@@ -71,7 +71,7 @@ public class NewManagedBeanWizard extends Wizard implements ISummaryDataSource {
 	 */
 	public NewManagedBeanWizard(IProject project) {
 		super();
-		setWindowTitle(WizardsResourcesNLS.NewManagedBeanWizardBase_Title);
+		setWindowTitle(WizardMessages.NewManagedBeanWizardBase_Title);
 		this.project = project;
 	}
 
@@ -98,7 +98,7 @@ public class NewManagedBeanWizard extends Wizard implements ISummaryDataSource {
 		SummaryPage summaryPage = new SummaryPage(this);
 		addPage(summaryPage);
 		summaryPage
-				.setDescription(WizardsResourcesNLS.NewJavaManagedBeanWizard_SummaryPage_Description);
+				.setDescription(WizardMessages.NewJavaManagedBeanWizard_SummaryPage_Description);
 	}
 
 	/**

@@ -40,8 +40,8 @@ public class SummaryPage extends WizardPage
 	public SummaryPage()
 	{
 		super( WIZARD_SUMMARY_PAGE );
-		setTitle( WizardsResourcesNLS.WizardSummaryPage_Title_WizardSummary );
-		setDescription( WizardsResourcesNLS.WizardSummaryPage_Summary_SummaryDesc );
+		setTitle( WizardMessages.WizardSummaryPage_Title_WizardSummary );
+		setDescription( WizardMessages.WizardSummaryPage_Summary_SummaryDesc );
 	}
 
 	/**
@@ -89,11 +89,11 @@ public class SummaryPage extends WizardPage
 		layout.addColumnData( new ColumnPixelData( 350 ) );
 
 		TableColumn keyCol = new TableColumn( table, SWT.NONE );
-		keyCol.setText( WizardsResourcesNLS.WizardSummaryPage_Label_Field );
+		keyCol.setText( WizardMessages.WizardSummaryPage_Label_Field );
 
 		TableColumn valueCol = new TableColumn( table, SWT.NONE );
 		valueCol
-				.setText( WizardsResourcesNLS.WizardSummaryPage_Label_Value );
+				.setText( WizardMessages.WizardSummaryPage_Label_Value );
 
 		setControl( composite );
 		setPageComplete( true );

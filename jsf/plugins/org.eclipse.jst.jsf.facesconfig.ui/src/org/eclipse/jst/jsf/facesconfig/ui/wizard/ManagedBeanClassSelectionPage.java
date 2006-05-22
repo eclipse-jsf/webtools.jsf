@@ -69,8 +69,8 @@ public class ManagedBeanClassSelectionPage extends WizardPage {
 		super("JavaSelectionWizardPage"); //$NON-NLS-1$
 
 		currentProject = project;
-		setTitle(WizardsResourcesNLS.JavaSelectionWizardPage_Title);
-		setDescription(WizardsResourcesNLS.JavaSelectionWizardPage_Description);
+		setTitle(WizardMessages.JavaSelectionWizardPage_Title);
+		setDescription(WizardMessages.JavaSelectionWizardPage_Description);
 	}
 
 	/*
@@ -100,7 +100,7 @@ public class ManagedBeanClassSelectionPage extends WizardPage {
 		setPageComplete(classSearchDialogField.getText().length() > 0);
 		EditorPlugin.getDefault().getWorkbench().getHelpSystem().setHelp(
 				container,
-				WizardsResourcesNLS.JavaSelectionWizardPage_HelpContextID);
+				WizardMessages.JavaSelectionWizardPage_HelpContextID);
 	}
 
 	/**
@@ -124,7 +124,7 @@ public class ManagedBeanClassSelectionPage extends WizardPage {
 		searchRadioButton = new Button(parent, SWT.RADIO);
 		// JavaSelectionWizardPage.Search = Using an existing Java class
 		searchRadioButton
-				.setText(WizardsResourcesNLS.JavaSelectionWizardPage_Search);
+				.setText(WizardMessages.JavaSelectionWizardPage_Search);
 		searchRadioButton.setSelection(true);
 		searchRadioButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
@@ -156,7 +156,7 @@ public class ManagedBeanClassSelectionPage extends WizardPage {
 
 		// JavaSelectionWizardPage.Search.ClassName = Qulified class name:
 		classSearchDialogField
-				.setLabelText(WizardsResourcesNLS.JavaSelectionWizardPage_Search_ClassName);
+				.setLabelText(WizardMessages.JavaSelectionWizardPage_Search_ClassName);
 
 		LayoutUtil.setHorizontalGrabbing(classSearchDialogField.getTextControl(
 				null, searchSection));
@@ -172,7 +172,7 @@ public class ManagedBeanClassSelectionPage extends WizardPage {
 
 		Label searchDesp = new Label(searchSection, SWT.NONE);
 		searchDesp
-				.setText(WizardsResourcesNLS.JavaSelectionWizardPage_Search_Description);
+				.setText(WizardMessages.JavaSelectionWizardPage_Search_Description);
 
 		gd = new GridData();
 		gd.horizontalSpan = numberOfControls;
@@ -190,7 +190,7 @@ public class ManagedBeanClassSelectionPage extends WizardPage {
 	private void createGenerateSection(Composite parent) {
 		createRadioButton = new Button(parent, SWT.RADIO);
 		createRadioButton
-				.setText(WizardsResourcesNLS.JavaSelectionWizardPage_Create);
+				.setText(WizardMessages.JavaSelectionWizardPage_Create);
 		createRadioButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				searchRadioButton.setSelection(!createRadioButton
@@ -209,7 +209,7 @@ public class ManagedBeanClassSelectionPage extends WizardPage {
 
 		Label createDesp = new Label(createSection, SWT.NONE);
 		createDesp
-				.setText(WizardsResourcesNLS.JavaSelectionWizardPage_Create_Description);
+				.setText(WizardMessages.JavaSelectionWizardPage_Create_Description);
 
 		GridData gd = new GridData();
 		gd.horizontalIndent = HORIZONTAL_INDENT_DEFAULT;
@@ -255,7 +255,7 @@ public class ManagedBeanClassSelectionPage extends WizardPage {
 					-1,
 					NLS
 							.bind(
-									WizardsResourcesNLS.JavaSelectionWizardPage_Error_ClassIsEmpty,
+									WizardMessages.JavaSelectionWizardPage_Error_ClassIsEmpty,
 									classSearchDialogField.getText()), null);
 		} else {
 			// ensure the name follows the java conventsions.
@@ -271,7 +271,7 @@ public class ManagedBeanClassSelectionPage extends WizardPage {
 							-1,
 							NLS
 									.bind(
-											WizardsResourcesNLS.JavaSelectionWizardPage_Error_ClassIsNotDefined,
+											WizardMessages.JavaSelectionWizardPage_Error_ClassIsNotDefined,
 											classSearchDialogField.getText()),
 							null);
 				}

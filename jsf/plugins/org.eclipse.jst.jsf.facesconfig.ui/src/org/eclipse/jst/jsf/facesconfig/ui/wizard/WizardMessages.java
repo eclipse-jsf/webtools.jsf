@@ -2,16 +2,16 @@ package org.eclipse.jst.jsf.facesconfig.ui.wizard;
 
 import org.eclipse.osgi.util.NLS;
 
-public final class WizardsResourcesNLS extends NLS {
+public final class WizardMessages extends NLS {
 
-	private static final String BUNDLE_NAME = "org.eclipse.jst.jsf.facesconfig.ui.wizard.WizardsResourcesNLS";
+	private static final String BUNDLE_NAME = "org.eclipse.jst.jsf.facesconfig.ui.wizard.WizardMessages";
 
-	private WizardsResourcesNLS() {
+	private WizardMessages() {
 		// Do not instantiate
 	}
 
 	static {
-		NLS.initializeMessages(BUNDLE_NAME, WizardsResourcesNLS.class);
+		NLS.initializeMessages(BUNDLE_NAME, WizardMessages.class);
 	}
 
 	public static String NewManagedBeanWizardBase_Type;
