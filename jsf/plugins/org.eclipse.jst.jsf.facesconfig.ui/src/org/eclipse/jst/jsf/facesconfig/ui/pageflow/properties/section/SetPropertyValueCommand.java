@@ -14,12 +14,10 @@ package org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.section;
 import java.text.MessageFormat;
 
 import org.eclipse.gef.commands.Command;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.PropertyResources;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.PropertyMessages;
 import org.eclipse.ui.views.properties.IPropertySource;
 
 public class SetPropertyValueCommand extends Command {
-	protected static PropertyResources resource = PropertyResources
-			.getInstance();
 
 	protected Object propertyValue;
 
@@ -37,7 +35,7 @@ public class SetPropertyValueCommand extends Command {
 
 	public SetPropertyValueCommand(String propLabel) {
 		super(MessageFormat.format(
-				resource.getString("property.Command.SetValue"),
+				PropertyMessages.property_Command_SetValue,
 				new Object[] { propLabel }).trim());
 	}
 

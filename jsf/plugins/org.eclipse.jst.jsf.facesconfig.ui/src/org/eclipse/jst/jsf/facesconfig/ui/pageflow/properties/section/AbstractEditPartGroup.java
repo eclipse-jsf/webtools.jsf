@@ -15,7 +15,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.DialogFieldGroup;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.StringDialogField;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.PropertyResources;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.PropertyMessages;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
@@ -24,8 +24,6 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
  * @version
  */
 public abstract class AbstractEditPartGroup extends DialogFieldGroup {
-	protected static PropertyResources resource = PropertyResources
-			.getInstance();
 
 	private StringDialogField descField;
 
@@ -38,13 +36,12 @@ public abstract class AbstractEditPartGroup extends DialogFieldGroup {
 	 */
 	public void initialize() {
 		displayNameField = new StringDialogField();
-		displayNameField.setLabelText(resource
-				.getString("property.displayName"));
+		displayNameField.setLabelText(PropertyMessages.property_displayName);
 		displayNameField
 				.setDialogFieldChangeListener(getDefaultChangeListener());
 		descField = new StringDialogField();
 		;
-		descField.setLabelText(resource.getString("property.description"));
+		descField.setLabelText(PropertyMessages.property_description);
 		descField.setDialogFieldChangeListener(getDefaultChangeListener());
 
 	}

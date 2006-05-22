@@ -19,6 +19,7 @@ import org.eclipse.jst.jsf.facesconfig.common.dialogfield.StringDialogField;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.ITabbedPropertiesConstants;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.PropertyMessages;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
@@ -84,16 +85,16 @@ public class PageGroup extends AbstractEditPartGroup {
 	 */
 	public void initialize() {
 		fromViewField = new StringButtonDialogField(new StringButtonAdapter());
-		fromViewField.setLabelText(resource.getString("property.fromView"));
+		fromViewField.setLabelText(PropertyMessages.property_fromView);
 		fromViewField.setButtonLabel("...");
 		fromViewField.setDialogFieldChangeListener(getDefaultChangeListener());
 
 		largeIconField = new StringDialogField();
-		largeIconField.setLabelText(resource.getString("property.largeIcon"));
+		largeIconField.setLabelText(PropertyMessages.property_largeIcon);
 		largeIconField
 				.setDialogFieldChangeListener((getDefaultChangeListener()));
 		smallIconField = new StringDialogField();
-		smallIconField.setLabelText(resource.getString("property.smallIcon"));
+		smallIconField.setLabelText(PropertyMessages.property_smallIcon);
 		smallIconField
 				.setDialogFieldChangeListener((getDefaultChangeListener()));
 		super.initialize();

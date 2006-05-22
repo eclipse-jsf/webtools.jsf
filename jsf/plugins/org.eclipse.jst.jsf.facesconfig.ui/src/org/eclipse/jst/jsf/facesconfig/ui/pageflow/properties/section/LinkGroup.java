@@ -27,6 +27,7 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.ActionOutcomeSelectionDialog;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.ITabbedPropertiesConstants;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.PropertyMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.util.WebrootUtil;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
@@ -103,17 +104,16 @@ public class LinkGroup extends AbstractEditPartGroup {
 	public void initialize() {
 		fromOutcomeField = new StringButtonDialogField(
 				new StringButtonAdapter());
-		fromOutcomeField.setLabelText(resource
-				.getString("property.fromOutcome"));
+		fromOutcomeField.setLabelText(PropertyMessages.property_fromOutcome);
 		fromOutcomeField.setButtonLabel("...");
 		fromOutcomeField
 				.setDialogFieldChangeListener(getDefaultChangeListener());
 		fromActionField = new StringDialogField();
-		fromActionField.setLabelText(resource.getString("property.fromAction"));
+		fromActionField.setLabelText(PropertyMessages.property_fromAction);
 		fromActionField
 				.setDialogFieldChangeListener(getDefaultChangeListener());
 		redirectField = new ComboDialogField(SWT.DROP_DOWN | SWT.READ_ONLY);
-		redirectField.setLabelText(resource.getString("property.redirect"));
+		redirectField.setLabelText(PropertyMessages.property_redirect);
 		redirectField
 				.setDialogFieldChangeListener((getDefaultChangeListener()));
 		List redirectList;
