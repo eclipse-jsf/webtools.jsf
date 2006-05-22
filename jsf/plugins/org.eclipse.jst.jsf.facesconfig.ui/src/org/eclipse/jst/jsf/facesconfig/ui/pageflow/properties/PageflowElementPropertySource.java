@@ -373,6 +373,14 @@ public class PageflowElementPropertySource implements IPropertySource {
 		if ("smallicon".equals(key)) {
 			return PageflowMessages.Pageflow_Model_Attributes_smallicon;
 		}
+		
+		if ("source".equals(key)) {
+			return PageflowMessages.Pageflow_Model_Attributes_source;
+		}
+		
+		if ("target".equals(key)) {
+			return PageflowMessages.Pageflow_Model_Attributes_target;
+		}
 
 		if ("fromaction".equals(key)) {
 			return PageflowMessages.Pageflow_Model_Attributes_fromaction;

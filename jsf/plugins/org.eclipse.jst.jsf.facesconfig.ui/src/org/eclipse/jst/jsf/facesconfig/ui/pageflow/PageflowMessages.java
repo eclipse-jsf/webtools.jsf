@@ -124,6 +124,10 @@ public final class PageflowMessages extends NLS {
 
 	public static String Pageflow_Model_Attributes_configfile;
 
+	public static String Pageflow_Model_Attributes_source;
+
+	public static String Pageflow_Model_Attributes_target;
+
 	public static String Pageflow_Model_Attributes_outcome;
 
 	public static String Pageflow_Model_Attributes_redirect;
@@ -134,13 +138,7 @@ public final class PageflowMessages extends NLS {
 
 	public static String Pageflow_Model_Items_Pageflow;
 
-	public static String Pageflow_Model_Items_PFBegin;
-
-	public static String Pageflow_Model_Items_PFEnd;
-
 	public static String Pageflow_Model_Items_PFPage;
-
-	public static String Pageflow_Model_Items_PFAction;
 
 	public static String Pageflow_Model_Items_PFLink;
 
