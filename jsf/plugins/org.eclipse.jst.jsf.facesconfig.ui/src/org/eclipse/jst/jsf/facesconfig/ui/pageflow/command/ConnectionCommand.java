@@ -13,10 +13,10 @@
 package org.eclipse.jst.jsf.facesconfig.ui.pageflow.command;
 
 import org.eclipse.gef.commands.Command;
-import org.eclipse.jst.jsf.facesconfig.ui.EditorResources;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.layout.PageflowLayoutManager;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowValidation;
 
@@ -43,8 +43,7 @@ public class ConnectionCommand extends Command {
 
 	public ConnectionCommand() {
 		// Pageflow.Commands.ConnectionCommand.Label = Connection
-		super(EditorResources.getInstance().getString(
-				"Pageflow.Commands.ConnectionCommand.Label"));
+		super(PageflowMessages.Pageflow_Commands_ConnectionCommand_Label);
 	}
 
 	/*

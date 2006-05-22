@@ -16,7 +16,7 @@ import java.util.List;
 
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.gef.commands.Command;
-import org.eclipse.jst.jsf.facesconfig.ui.EditorResources;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
 
@@ -40,8 +40,7 @@ public class OrphanChildCommand extends Command {
 
 	public OrphanChildCommand() {
 		// Pageflow.Commands.OrphanChildCommand.Label = Orphan Child
-		super(EditorResources.getInstance().getString(
-				"Pageflow.Commands.OrphanChildCommand.Label"));
+		super(PageflowMessages.Pageflow_Commands_OrphanChildCommand_Label);
 	}
 
 	/*

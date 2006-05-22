@@ -22,8 +22,6 @@ import org.eclipse.gef.palette.PaletteSeparator;
 import org.eclipse.gef.palette.SelectionToolEntry;
 import org.eclipse.gef.palette.ToolEntry;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
-import org.eclipse.jst.jsf.facesconfig.ui.EditorResources;
-import org.eclipse.jst.jsf.facesconfig.ui.IconResources;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.ModelCreationFactory;
@@ -42,17 +40,16 @@ public class PageflowPaletteRoot extends PaletteRoot {
 
 		// a group of default control tools
 		// Pageflow.PaletteTool.Group.Controls = Controls
-		PaletteGroup controls = new PaletteGroup(EditorResources.getInstance()
-				.getString("Pageflow.PaletteTool.Group.Controls")); //$NON-NLS-1$
+		PaletteGroup controls = new PaletteGroup(
+				PageflowMessages.Pageflow_PaletteTool_Group_Controls); //$NON-NLS-1$
 		add(controls);
 
 		// the selection tool
 		// Pageflow.PaletteTool.Select.Label = Select
 		// Pageflow.PaletteTool.Select.Description = Select one or more items
-		ToolEntry tool = new SelectionToolEntry(EditorResources.getInstance()
-				.getString("Pageflow.PaletteTool.Select.Label"), //$NON-NLS-1$
-				EditorResources.getInstance().getString(
-						"Pageflow.PaletteTool.Select.Description")); //$NON-NLS-1$
+		ToolEntry tool = new SelectionToolEntry(
+				PageflowMessages.Pageflow_PaletteTool_Select_Label,
+				PageflowMessages.Pageflow_PaletteTool_Select_Description); //$NON-NLS-1$
 
 		controls.add(tool);
 
@@ -62,10 +59,9 @@ public class PageflowPaletteRoot extends PaletteRoot {
 		// the marquee selection tool
 		// Pageflow.PaletteTool.Marquee.Label = Marquee
 		// Pageflow.PaletteTool.Marquee.Description = Marquee one or more items
-		controls.add(new MarqueeToolEntry(EditorResources.getInstance()
-				.getString("Pageflow.PaletteTool.Marquee.Label"), //$NON-NLS-1$
-				EditorResources.getInstance().getString(
-						"Pageflow.PaletteTool.Marquee.Description"))); //$NON-NLS-1$
+		controls.add(new MarqueeToolEntry(
+				PageflowMessages.Pageflow_PaletteTool_Marquee_Label, //$NON-NLS-1$
+				PageflowMessages.Pageflow_PaletteTool_Marquee_Description));
 
 		controls.add(new PaletteSeparator());
 
@@ -73,23 +69,21 @@ public class PageflowPaletteRoot extends PaletteRoot {
 		// Pageflow.PaletteTool.Link.Label = Link
 		// Pageflow.PaletteTool.Link.Description = Creates an link
 		ConnectionCreationToolEntry linkEntry = new ConnectionCreationToolEntry(
-				EditorResources.getInstance().getString(
-						"Pageflow.PaletteTool.Link.Label"), //$NON-NLS-1$
-				EditorResources.getInstance().getString(
-						"Pageflow.PaletteTool.Link.Description"), //$NON-NLS-1$
-				new ModelCreationFactory(PageflowLink.class),
+				PageflowMessages.Pageflow_PaletteTool_Link_Label,
+				PageflowMessages.Pageflow_PaletteTool_Link_Description,
+				new ModelCreationFactory(PageflowLink.class), EditorPlugin
+						.getDefault().getImageDescriptor(
+								"facesconfig/Pageflow_Link.gif"), //$NON-NLS-1$
 				EditorPlugin.getDefault().getImageDescriptor(
-						IconResources.getString("Pageflow.link.small")), //$NON-NLS-1$
-				EditorPlugin.getDefault().getImageDescriptor(
-						IconResources.getString("Pageflow.link.mid"))); //$NON-NLS-1$
+						"facesconfig/Pageflow_Link24.gif")); //$NON-NLS-1$
 		linkEntry.setUserModificationPermission(PERMISSION_FULL_MODIFICATION);
 		controls.add(linkEntry);
 
 		controls.add(new PaletteSeparator());
 
 		// Pageflow.PaletteTool.Group.Nodes = Nodes
-		PaletteDrawer nodes = new PaletteDrawer(EditorResources.getInstance()
-				.getString("Pageflow.PaletteTool.Group.Nodes")); //$NON-NLS-1$
+		PaletteDrawer nodes = new PaletteDrawer(
+				PageflowMessages.Pageflow_PaletteTool_Group_Nodes); //$NON-NLS-1$
 		add(nodes);
 
 		// use CombinedTemplateCreationEntry which can be also dragged
@@ -98,15 +92,14 @@ public class PageflowPaletteRoot extends PaletteRoot {
 		// Pageflow.PaletteTool.Page.Label = Page
 		// Pageflow.PaletteTool.Page.Description = Creates a pageflow page
 		entry = new CombinedTemplateCreationEntry(
-				EditorResources.getInstance().getString(
-						"Pageflow.PaletteTool.Page.Label"), //$NON-NLS-1$
-				EditorResources.getInstance().getString(
-						"Pageflow.PaletteTool.Page.Description"), //$NON-NLS-1$
-				PageflowPage.class, new ModelCreationFactory(PageflowPage.class),
+				PageflowMessages.Pageflow_PaletteTool_Page_Label,
+				PageflowMessages.Pageflow_PaletteTool_Page_Description,
+				PageflowPage.class,
+				new ModelCreationFactory(PageflowPage.class), EditorPlugin
+						.getDefault().getImageDescriptor(
+								"facesconfig/Pageflow_Page16.gif"), //$NON-NLS-1$
 				EditorPlugin.getDefault().getImageDescriptor(
-						IconResources.getString("Pageflow.page.small")), //$NON-NLS-1$
-				EditorPlugin.getDefault().getImageDescriptor(
-						IconResources.getString("Pageflow.page.mid"))); //$NON-NLS-1$
+						"facesconfig/Pageflow_Page24.gif")); //$NON-NLS-1$
 		nodes.add(entry);
 	}
 }

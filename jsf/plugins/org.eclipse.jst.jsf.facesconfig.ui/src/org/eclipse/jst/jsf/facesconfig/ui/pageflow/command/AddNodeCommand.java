@@ -13,7 +13,7 @@
 package org.eclipse.jst.jsf.facesconfig.ui.pageflow.command;
 
 import org.eclipse.gef.commands.Command;
-import org.eclipse.jst.jsf.facesconfig.ui.EditorResources;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
 
@@ -33,8 +33,7 @@ public class AddNodeCommand extends Command {
 
 	public AddNodeCommand() {
 		// Pageflow.Commands.AddNodeCommand.Label = add
-		super(EditorResources.getInstance().getString(
-				"Pageflow.Commands.AddNodeCommand.Label"));
+		super(PageflowMessages.Pageflow_Commands_AddNodeCommand_Label);
 	}
 
 	/*

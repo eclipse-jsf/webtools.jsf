@@ -20,10 +20,10 @@ import org.eclipse.jface.window.Window;
 import org.eclipse.jst.jsf.facesconfig.common.IFileFolderConstants;
 import org.eclipse.jst.jsf.facesconfig.common.dialogs.CommonResourceDialog;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
-import org.eclipse.jst.jsf.facesconfig.ui.EditorResources;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowValidation;
 import org.eclipse.jst.jsf.facesconfig.ui.util.WebrootUtil;
 import org.eclipse.swt.SWT;
@@ -51,8 +51,7 @@ public class CreateNodeCommand extends Command implements IPreExecuteCommand {
 	// private int _index = -1;
 	public CreateNodeCommand() {
 		// Pageflow.Commands.CreateNodeCommand.Label = Create new node
-		super(EditorResources.getInstance().getString(
-				"Pageflow.Commands.CreateNodeCommand.Label"));
+		super(PageflowMessages.Pageflow_Commands_CreateNodeCommand_Label);
 
 	}
 
@@ -135,16 +134,13 @@ public class CreateNodeCommand extends Command implements IPreExecuteCommand {
 		CommonResourceDialog dialog = new CommonResourceDialog(shell, project,
 				SWT.NONE);
 
-		dialog.setTitle(EditorResources.getInstance().getString(
-				"Pageflow.Commands.CreateNodeCommand.SelectJSPDialog.Title"));
+		dialog
+				.setTitle(PageflowMessages.Pageflow_Commands_CreateNodeCommand_SelectJSPDialog_Title);
 		dialog.setSuffixs(new String[] { IFileFolderConstants.EXT_JSP,
 				IFileFolderConstants.EXT_JSV, IFileFolderConstants.EXT_JTPL,
 				IFileFolderConstants.EXT_JSPX });
 		dialog
-				.setResourceDescription(EditorResources
-						.getInstance()
-						.getString(
-								"Pageflow.Commands.CreateNodeCommand.SelectJSPDialog.Description"));
+				.setResourceDescription(PageflowMessages.Pageflow_Commands_CreateNodeCommand_SelectJSPDialog_Description);
 
 		if (dialog.open() == Window.OK) {
 			Object[] result = dialog.getResult();

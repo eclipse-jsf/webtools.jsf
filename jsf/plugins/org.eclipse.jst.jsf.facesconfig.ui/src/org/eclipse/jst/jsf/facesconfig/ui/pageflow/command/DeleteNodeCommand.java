@@ -15,7 +15,7 @@ package org.eclipse.jst.jsf.facesconfig.ui.pageflow.command;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.jst.jsf.facesconfig.ui.EditorResources;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
@@ -50,8 +50,7 @@ public class DeleteNodeCommand extends AbstractBatchEditCommand {
 
 	public DeleteNodeCommand(Pageflow pageflow) {
 		// Pageflow.Commands.DeleteNodeCommand.Label = Delete
-		super(pageflow, EditorResources.getInstance().getString(
-				"Pageflow.Commands.DeleteNodeCommand.Label"));
+		super(pageflow, PageflowMessages.Pageflow_Commands_DeleteNodeCommand_Label);
 
 	}
 

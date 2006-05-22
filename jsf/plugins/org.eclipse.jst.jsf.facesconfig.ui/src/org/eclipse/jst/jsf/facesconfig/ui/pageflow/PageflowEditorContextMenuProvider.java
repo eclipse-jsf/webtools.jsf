@@ -19,7 +19,6 @@ import org.eclipse.gef.ui.actions.GEFActionConstants;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
-import org.eclipse.jst.jsf.facesconfig.ui.EditorResources;
 import org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.action.ShowPropertyViewAction;
 import org.eclipse.ui.actions.ActionFactory;
@@ -85,8 +84,8 @@ public class PageflowEditorContextMenuProvider extends ContextMenuProvider {
 	 */
 	private void appendShowViewSubmenu(IMenuManager menuManager) {
 		// Show View Actions
-		MenuManager submenu = new MenuManager(EditorResources.getInstance()
-				.getString("Pageflow.Contextmenu.ShowView.Label"));
+		MenuManager submenu = new MenuManager(
+				PageflowMessages.Pageflow_Contextmenu_ShowView_Label);
 
 		IAction action = getActionRegistry().getAction(
 				ShowPropertyViewAction.SHOW_PROPERTY_VIEW);
@@ -94,11 +93,11 @@ public class PageflowEditorContextMenuProvider extends ContextMenuProvider {
 			submenu.add(action);
 		}
 
-//		action = getActionRegistry().getAction(
-//				ShowPaletteViewAction.SHOW_PALETTE_VIEW);
-//		if (null != action && action.isEnabled()) {
-//			submenu.add(action);
-//		}
+		// action = getActionRegistry().getAction(
+		// ShowPaletteViewAction.SHOW_PALETTE_VIEW);
+		// if (null != action && action.isEnabled()) {
+		// submenu.add(action);
+		// }
 
 		if (!submenu.isEmpty()) {
 			menuManager.appendToGroup(GEFActionConstants.GROUP_REST, submenu);
@@ -113,8 +112,8 @@ public class PageflowEditorContextMenuProvider extends ContextMenuProvider {
 	 */
 	private void appendAlignmentSubmenu(IMenuManager menuManager) {
 		// Alignment Actions
-		MenuManager submenu = new MenuManager(EditorResources.getInstance()
-				.getString("Pageflow.Contextmenu.Align.Label"));
+		MenuManager submenu = new MenuManager(
+				PageflowMessages.Pageflow_Contextmenu_Align_Label);
 
 		IAction action = getActionRegistry().getAction(
 				GEFActionConstants.ALIGN_LEFT);

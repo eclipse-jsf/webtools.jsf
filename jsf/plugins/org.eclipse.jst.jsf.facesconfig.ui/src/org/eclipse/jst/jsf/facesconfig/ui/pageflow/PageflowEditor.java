@@ -73,7 +73,6 @@ import org.eclipse.jface.util.TransferDropTargetListener;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jst.jsf.facesconfig.common.logging.Logger;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
-import org.eclipse.jst.jsf.facesconfig.ui.EditorResources;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.action.AlignmentAction;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.action.OpenEditorAction;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.action.ShowPropertyViewAction;
@@ -485,8 +484,7 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 			progressMonitor = new NullProgressMonitor();
 		}
 		// Pageflow.Label.Saving = Saving
-		progressMonitor.beginTask(EditorResources.getInstance().getString(
-				"Pageflow.Label.Saving")
+		progressMonitor.beginTask(PageflowMessages.Pageflow_Label_Saving
 				+ " " + file.getFullPath(), 2);
 
 		if (null == getPageflowManager()) {
@@ -857,7 +855,6 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 	 */
 	protected IPropertySheetPage getPropertySheetPage() {
 		if (null == undoablePropertySheetPage) {
-			// _undoablePropertySheetPage = new PropertySheetPage();
 			undoablePropertySheetPage = new PropertySheetPage();
 
 			/** set the property source for property sheet page */

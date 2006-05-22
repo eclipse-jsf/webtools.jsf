@@ -33,7 +33,6 @@ import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
-import org.eclipse.jst.jsf.facesconfig.ui.IconResources;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowTreePartFactory;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
 import org.eclipse.swt.SWT;
@@ -134,8 +133,7 @@ public class PageflowEditorOutlinePage extends Page implements
 			}
 		};
 		showOutlineAction.setImageDescriptor(EditorPlugin.getDefault()
-				.getImageDescriptor(
-						IconResources.getString("Pageflow.outline.outline"))); //$NON-NLS-1$
+				.getImageDescriptor("facesconfig/Pageflow_Outline.gif")); //$NON-NLS-1$
 		tbm.add(showOutlineAction);
 		showOverviewAction = new Action() {
 			public void run() {
@@ -143,8 +141,7 @@ public class PageflowEditorOutlinePage extends Page implements
 			}
 		};
 		showOverviewAction.setImageDescriptor(EditorPlugin.getDefault()
-				.getImageDescriptor(
-						IconResources.getString("Pageflow.outline.overview"))); //$NON-NLS-1$
+				.getImageDescriptor("facesconfig/Pageflow_Outline_Overview.gif")); //$NON-NLS-1$
 		tbm.add(showOverviewAction);
 
 		// initialize outline page

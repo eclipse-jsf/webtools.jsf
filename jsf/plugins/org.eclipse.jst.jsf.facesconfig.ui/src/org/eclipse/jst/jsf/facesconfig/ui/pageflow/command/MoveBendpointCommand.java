@@ -15,9 +15,9 @@ package org.eclipse.jst.jsf.facesconfig.ui.pageflow.command;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.jst.jsf.facesconfig.ui.EditorResources;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowFactory;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage;
 
 /**
@@ -31,8 +31,7 @@ public class MoveBendpointCommand extends BendpointCommand {
 
 	public MoveBendpointCommand() {
 		// Pageflow.Commands.MoveBendpointCommand.Label = Move Bendpoint
-		super(EditorResources.getInstance().getString(
-				"Pageflow.Commands.MoveBendpointCommand.Label"));
+		super(PageflowMessages.Pageflow_Commands_MoveBendpointCommand_Label);
 	}
 
 	/*

@@ -20,8 +20,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPart;
 import org.eclipse.jst.jsf.facesconfig.common.logging.Logger;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
-import org.eclipse.jst.jsf.facesconfig.ui.EditorResources;
 import org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PageflowNodeImpl;
 import org.eclipse.jst.jsf.facesconfig.ui.util.WebrootUtil;
@@ -65,8 +65,7 @@ public class OpenEditorCommand extends org.eclipse.gef.commands.Command {
 	 */
 	public OpenEditorCommand(EditPart part) {
 		// Pageflow.Commands.OpenEditorCommand.Label = Open Editor
-		super(EditorResources.getInstance().getString(
-				"Pageflow.Commands.OpenEditorCommand.Label"));
+		super(PageflowMessages.Pageflow_Commands_OpenEditorCommand_Label);
 		this.part = part;
 	}
 
