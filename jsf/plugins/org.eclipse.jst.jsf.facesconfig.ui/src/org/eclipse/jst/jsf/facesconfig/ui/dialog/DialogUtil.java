@@ -35,7 +35,7 @@ import org.eclipse.ui.dialogs.SelectionDialog;
  * @version
  */
 public class DialogUtil {
-	
+
 	public static String openClassDialog(Shell shell, IProject project,
 			String superType, int tyle) {
 		SelectionDialog dialog = (SelectionDialog) JavaUIHelper
@@ -50,7 +50,8 @@ public class DialogUtil {
 		return null;
 	}
 
-	public static String openRenderKitDialog(Shell shell, FacesConfigType facesConfig) {
+	public static String openRenderKitDialog(Shell shell,
+			FacesConfigType facesConfig) {
 		if (facesConfig != null) {
 			EList list = facesConfig.getRenderKit();
 			ArrayList ids = new ArrayList();
@@ -65,7 +66,10 @@ public class DialogUtil {
 			}
 			String[] idArray = (String[]) ids.toArray(new String[ids.size()]);
 			Arrays.sort(idArray);
-			ListChoiceDialog dialog = new ListChoiceDialog(shell, idArray);
+			ListChoiceDialog dialog = new ListChoiceDialog(
+					shell,
+					idArray,
+					NewEditorResourcesNLS.DefaultRenderKitIDSection_Wizard_Page_LabelText);
 			if (dialog.open() == SelectionDialog.OK) {
 				String result = dialog.getResult();
 				if (!"".equals(result)) {
@@ -105,8 +109,7 @@ public class DialogUtil {
 
 		if (dialog.open() == SelectionDialog.OK) {
 			String newValue = (String) dialog.getResult()[0];
-			if(!"".equalsIgnoreCase(newValue))
-			{
+			if (!"".equalsIgnoreCase(newValue)) {
 				return newValue;
 			}
 		}

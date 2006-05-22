@@ -172,4 +172,6 @@ public final class PageflowMessages extends NLS {
 
 	public static String Pageflow_Validation_MissingAction;
 
+	public static String ExistingPagePathDialogCellEdito_LabelText;
+
 }

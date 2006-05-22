@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.eclipse.jface.window.Window;
 import org.eclipse.jst.jsf.facesconfig.ui.dialog.ListChoiceDialog;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.swt.widgets.Composite;
@@ -47,7 +48,8 @@ public class ExistingPagePathDialogCellEditor extends EditableDialogCellEditor {
 			jsfSelection = getDefaultText().getText();
 		}
 		ListChoiceDialog dialog = new ListChoiceDialog(cellEditorWindow
-				.getShell(), getPagePaths());
+				.getShell(), getPagePaths(),
+				PageflowMessages.ExistingPagePathDialogCellEdito_LabelText);
 
 		if (dialog.open() == Window.OK) {
 			jsfSelection = dialog.getResult();
