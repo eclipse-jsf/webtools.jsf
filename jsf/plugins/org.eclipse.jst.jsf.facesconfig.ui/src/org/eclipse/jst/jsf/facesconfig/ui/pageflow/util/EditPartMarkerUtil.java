@@ -10,7 +10,7 @@
  *     Sybase, Inc. - initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.jst.jsf.facesconfig.ui.util;
+package org.eclipse.jst.jsf.facesconfig.ui.pageflow.util;
 
 import java.util.Iterator;
 
@@ -20,6 +20,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
+import org.eclipse.jst.jsf.facesconfig.ui.util.WebrootUtil;
 
 /**
  * 

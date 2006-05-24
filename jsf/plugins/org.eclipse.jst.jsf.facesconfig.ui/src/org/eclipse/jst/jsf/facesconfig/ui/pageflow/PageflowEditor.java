@@ -89,11 +89,11 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowEditPartsFac
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowNodeEditPart;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.EditPartMarkerUtil;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowAnnotationUtil;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowModelManager;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowResourceFactory;
 import org.eclipse.jst.jsf.facesconfig.ui.preference.GEMPreferences;
-import org.eclipse.jst.jsf.facesconfig.ui.util.EditPartMarkerUtil;
 import org.eclipse.jst.jsf.facesconfig.ui.util.WebrootUtil;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
@@ -613,28 +613,12 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 	 * @return
 	 */
 	private IPath getPageflowFilePath(IFile file) {
-		IPath pageflowFilePath;// = (IPath)
-		// getPageflowFileRegistry().get(file);
-		// if (pageflowFilePath == null)
-		// {
+		IPath pageflowFilePath;
 		pageflowFilePath = PageflowModelManager.makePageflowPath(file
 				.getFullPath());
 		return pageflowFilePath;
 	}
 
-	/**
-	 * get the pageflow file's registry
-	 * 
-	 * @return
-	 */
-	// private HashMap getPageflowFileRegistry()
-	// {
-	// if (_pageflowFileRegistry == null)
-	// {
-	// _pageflowFileRegistry = new HashMap();
-	// }
-	// return _pageflowFileRegistry;
-	// }
 	/**
 	 * Returns the pageflow object from the specified file.
 	 * 
