@@ -58,9 +58,9 @@
 		<propertyTabs
 			contributorId="org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor">
 			<propertyTab label="%propertyTab.attribute" category="attribute"
-				id="com.sybase.stf.jmt.pageflow.attribute"/>
+				id="org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.attribute"/>
 			<propertyTab label="%propertyTab.general" category="general"
-				id="com.sybase.stf.jmt.pageflow.general"/>
+				id="org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.general"/>
 		</propertyTabs>
 	</extension>
 		<extension point="org.eclipse.wst.common.ui.properties.propertyContributor">
