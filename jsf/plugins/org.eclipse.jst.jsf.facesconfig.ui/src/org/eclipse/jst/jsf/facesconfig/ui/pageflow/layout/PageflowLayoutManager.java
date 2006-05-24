@@ -52,9 +52,9 @@ public class PageflowLayoutManager {
 	/** node's default padding */
 	private static final int DEFAULT_PADDING = 30;
 
-	private static PageflowLayoutManager _manager;
+	private static PageflowLayoutManager manager;
 
-	private Map _copiedLinks = null;
+	private Map copiedLinks = null;
 
 	/**
 	 * constructor of PageflowDirectedGraphAdapter
@@ -70,10 +70,10 @@ public class PageflowLayoutManager {
 	 * @return - the singleton instance of PageflowDirectedGraphAdapter
 	 */
 	static public PageflowLayoutManager getInstance() {
-		if (_manager == null) {
-			_manager = new PageflowLayoutManager();
+		if (manager == null) {
+			manager = new PageflowLayoutManager();
 		}
-		return _manager;
+		return manager;
 	}
 
 	/**
@@ -348,7 +348,7 @@ public class PageflowLayoutManager {
 	public void updatePageflowLayout(Pageflow newPageflow, Pageflow oldPageflow) {
 		List notUpdatedNodes = new ArrayList();
 
-		_copiedLinks = new HashMap();
+		copiedLinks = new HashMap();
 
 		if (oldPageflow.getNodes().size() > 0) {
 			for (Iterator iter = newPageflow.getNodes().iterator(); iter
@@ -463,7 +463,7 @@ public class PageflowLayoutManager {
 		for (Iterator iter = oldPageflow.getLinks().iterator(); iter.hasNext();) {
 			PageflowLink oldLink = (PageflowLink) iter.next();
 
-			if (_copiedLinks.get(oldLink) != null) {
+			if (copiedLinks.get(oldLink) != null) {
 				continue;
 			}
 
@@ -530,7 +530,7 @@ public class PageflowLayoutManager {
 			newLink.getBendPoints().add(newBendPoint);
 		}
 
-		_copiedLinks.put(link, link);
+		copiedLinks.put(link, link);
 		return newLink;
 	}
 
