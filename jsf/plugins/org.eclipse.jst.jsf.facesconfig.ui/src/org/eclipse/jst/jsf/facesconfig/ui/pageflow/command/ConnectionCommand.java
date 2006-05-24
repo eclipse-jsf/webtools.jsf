@@ -14,18 +14,15 @@ package org.eclipse.jst.jsf.facesconfig.ui.pageflow.command;
 
 import org.eclipse.gef.commands.Command;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowMessages;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.layout.PageflowLayoutManager;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowValidation;
 
 /**
  * This is the connection command for pageflow editpart
  * 
- * @author Xiao-guang Zhang
+ * @author Xiao-guang Zhang, hmeng
  */
-public class ConnectionCommand extends Command {
+public abstract class ConnectionCommand extends Command {
 	/** Old source pageflow node */
 	protected PageflowNode oldSource;
 
@@ -52,51 +49,11 @@ public class ConnectionCommand extends Command {
 	 * @see Command#canExecute()
 	 */
 	public boolean canExecute() {
-		// if user don't set PFLink object before, this command can't be
-		// executed.
-		if (link == null) {
-			return false;
-		}
+		return false;
+	}
 
-		// It is a connection create command
-		if (oldSource == null && oldTarget == null) {
-			// It is a connection create command
-			// Source and target must be pointing to some
-			// real connection point
-			if (pageflowNode == null || target == null) {
-				return false;
-			}
+	protected void doExecute() {
 
-			if (!PageflowValidation.getInstance().isValidLinkForCreation(
-					pageflowNode, target)) {
-				return false;
-			}
-		}
-		// It is a reconnect both of source and target command
-		if (oldSource != null && pageflowNode != null && oldTarget != null
-				&& target != null) {
-			if (!PageflowValidation.getInstance().isValidLinkForCreation(
-					pageflowNode, target)) {
-				return false;
-			}
-		}
-
-		// It is a reconnect only source command
-		if (oldSource != null && pageflowNode != null) {
-			if (!PageflowValidation.getInstance().isValidLinkForCreation(
-					pageflowNode, oldTarget)) {
-				return false;
-			}
-		}
-		// It is a reconnect only target command
-		if (oldTarget != null && target != null) {
-			if (!PageflowValidation.getInstance().isValidLinkForCreation(
-					oldSource, target)) {
-				return false;
-			}
-		}
-
-		return true;
 	}
 
 	/*
@@ -104,53 +61,29 @@ public class ConnectionCommand extends Command {
 	 * 
 	 * @see Command#execute()
 	 */
-	public void execute() {
-		// It is a delete connection command
-		if (pageflowNode == null && target == null) {
-			oldSource.getOutlinks().remove(link);
-			oldTarget.getInlinks().remove(link);
-			oldSource.getPageflow().getLinks().remove(link);
-			// deleteNavigationRule(oldSource, oldTarget);
-		}
-		// It is a reconnect source command
-		if (oldSource != null && pageflowNode != null) {
-			// The link is still linked to the oldSource
-			if (link.getSource() != null) {
-				link.getSource().getOutlinks().remove(link);
+	public final void execute() {
+		if (canExecute()) {
+			String outcome = null, action = null, largeIcon = null, smallIcon = null;
+			boolean isRedirect = false;
+			// XXX: if the event that is sent is customized later, this would be
+			// not necessary.
+			if (link != null) {
+				outcome = link.getOutcome();
+				action = link.getFromaction();
+				isRedirect = link.isRedirect();
+				largeIcon = link.getLargeicon();
+				smallIcon = link.getSmallicon();
 			}
-			// No containment link between link and input and output port
-			// Two add method need to be called
-			link.setSource(pageflowNode);
-			pageflowNode.getOutlinks().add(link);
-		}
-		// It is a reconnect target command
-		if (oldTarget != null && target != null) {
-			// The target is still linked to the oldTarget
-			if (link.getTarget() != null) {
-				link.getTarget().getInlinks().remove(link);
+			doExecute();
+			if (link != null) {
+				link.setOutcome(outcome);
+				link.setFromaction(action);
+				link.setLargeicon(largeIcon);
+				link.setSmallicon(smallIcon);
+				link.setRedirect(isRedirect);
 			}
-			// No containment link between link and input and output port
-			// Two add method need to be called
-			link.setTarget(target);
-			target.getInlinks().add(link);
-		}
-
-		// It is a connection create command
-		if (oldSource == null && oldTarget == null) {
-			Pageflow pageflow = null;
-			// Get a reference to the pageflow
-			if (pageflowNode != null) {
-				pageflow = pageflowNode.getPageflow();
-			} else if (target != null) {
-				pageflow = target.getPageflow();
-			}
-			// Need to modify the SSE model directly.
-			pageflow.connect(pageflowNode, target, link);
-
-			// self loop link
-			if (pageflowNode == target) {
-				PageflowLayoutManager.updateSelfLoopLink(link);
-			}
+		} else {
+			link = null;
 		}
 	}
 
@@ -169,66 +102,66 @@ public class ConnectionCommand extends Command {
 	 * @see ommand#undo()
 	 */
 	public void undo() {
-		if (link == null) {
-			return;
-		}
-		// It is a delete connection command
-		if (pageflowNode == null && target == null) {
-			oldSource.getOutlinks().add(link);
-			oldTarget.getInlinks().add(link);
-			oldSource.getPageflow().getLinks().add(link);
-		}
+		// if (link == null) {
+		// return;
+		// }
+		// // It is a delete connection command
+		// if (pageflowNode == null && target == null) {
+		// oldSource.getOutlinks().add(link);
+		// oldTarget.getInlinks().add(link);
+		// oldSource.getPageflow().getLinks().add(link);
+		// }
 
-		// It was a reconnect source command
-		if (oldSource != null && pageflowNode != null) {
-			// The link source must be replaced by the oldSource
-			if (link.getSource() != null) {
-				link.getSource().getOutlinks().remove(link);
-			}
-			// Source should not know link anymore
-			pageflowNode.getOutlinks().remove(link);
-			// Re-link with oldSource
-			// No containment link between link and input and output
-			// Two add method need to be called
-			link.setSource(oldSource);
-			oldSource.getOutlinks().add(link);
-		}
-		// It was a reconnect target command
-		if (oldTarget != null && target != null) {
-			// The link target must be replaced by the oldTarget
-			if (link.getTarget() != null) {
-				link.getTarget().getInlinks().remove(link);
-			}
-			// Target should not know link anymore
-			target.getInlinks().remove(link);
-			// Re-link with oldTarget
-			// No containment link between link and input and output port
-			// Two add method need to be called
-			link.setTarget(oldTarget);
-			oldTarget.getInlinks().add(link);
-		}
+		// // It was a reconnect source command
+		// if (oldSource != null && pageflowNode != null) {
+		// // The link source must be replaced by the oldSource
+		// if (link.getSource() != null) {
+		// link.getSource().getOutlinks().remove(link);
+		// }
+		// // Source should not know link anymore
+		// pageflowNode.getOutlinks().remove(link);
+		// // Re-link with oldSource
+		// // No containment link between link and input and output
+		// // Two add method need to be called
+		// link.setSource(oldSource);
+		// oldSource.getOutlinks().add(link);
+		// }
+		// // It was a reconnect target command
+		// if (oldTarget != null && target != null) {
+		// // The link target must be replaced by the oldTarget
+		// if (link.getTarget() != null) {
+		// link.getTarget().getInlinks().remove(link);
+		// }
+		// // Target should not know link anymore
+		// target.getInlinks().remove(link);
+		// // Re-link with oldTarget
+		// // No containment link between link and input and output port
+		// // Two add method need to be called
+		// link.setTarget(oldTarget);
+		// oldTarget.getInlinks().add(link);
+		// }
 
-		// It was a connection create command
-		if (oldSource == null && oldTarget == null) {
-
-			Pageflow pageflow = null;
-			// Get a reference to the pageflow
-			if (pageflowNode != null) {
-				pageflow = pageflowNode.getPageflow();
-			} else if (target != null) {
-				pageflow = target.getPageflow();
-			}
-
-			// Remove all reference to the link
-			pageflowNode.getOutlinks().remove(link);
-			target.getInlinks().remove(link);
-
-			// Ensure that link knows nothing about nodes anymore.
-			link.setSource(null);
-			link.setTarget(null);
-			// Remove link from pageflow
-			pageflow.getLinks().remove(link);
-		}
+		// // It was a connection create command
+		// if (oldSource == null && oldTarget == null) {
+		//
+		// Pageflow pageflow = null;
+		// // Get a reference to the pageflow
+		// if (pageflowNode != null) {
+		// pageflow = pageflowNode.getPageflow();
+		// } else if (target != null) {
+		// pageflow = target.getPageflow();
+		// }
+		//
+		// // Remove all reference to the link
+		// pageflowNode.getOutlinks().remove(link);
+		// target.getInlinks().remove(link);
+		//
+		// // Ensure that link knows nothing about nodes anymore.
+		// link.setSource(null);
+		// link.setTarget(null);
+		// // Remove link from pageflow
+		// pageflow.getLinks().remove(link);
+		// }
 	}
 
 	/**

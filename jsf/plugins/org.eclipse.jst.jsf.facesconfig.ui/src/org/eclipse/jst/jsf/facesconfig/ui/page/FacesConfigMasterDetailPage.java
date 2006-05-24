@@ -18,6 +18,7 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
+import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage;
 import org.eclipse.jface.viewers.ISelection;
@@ -55,7 +56,7 @@ import org.eclipse.ui.views.properties.IPropertySheetPage;
  */
 public abstract class FacesConfigMasterDetailPage extends FormPage implements
 		IFacesConfigPage, IDetailsPageProvider, ISelectionChangedListener,
-		ISelectionProvider {
+		ISelectionProvider, IEditingDomainProvider {
 
 	private final static Image BANNER_IMAGE = EditorPlugin.getDefault()
 			.getImage("form_banner.gif");
@@ -82,6 +83,10 @@ public abstract class FacesConfigMasterDetailPage extends FormPage implements
 	public FacesConfigMasterDetailPage(FacesConfigEditor editor, String id,
 			String title) {
 		super(editor, id, title);
+	}
+
+	public EditingDomain getEditingDomain() {
+		return ((FacesConfigEditor) getEditor()).getEditingDomain();
 	}
 
 	/**

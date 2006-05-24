@@ -15,7 +15,6 @@ package org.eclipse.jst.jsf.facesconfig.ui.pageflow;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.EventObject;
 import java.util.Iterator;
 import java.util.List;
 
@@ -46,7 +45,8 @@ import org.eclipse.gef.KeyHandler;
 import org.eclipse.gef.KeyStroke;
 import org.eclipse.gef.RootEditPart;
 import org.eclipse.gef.commands.CommandStack;
-import org.eclipse.gef.commands.CommandStackListener;
+import org.eclipse.gef.commands.CommandStackEvent;
+import org.eclipse.gef.commands.CommandStackEventListener;
 import org.eclipse.gef.editparts.ScalableFreeformRootEditPart;
 import org.eclipse.gef.editparts.ScalableRootEditPart;
 import org.eclipse.gef.editparts.ZoomManager;
@@ -55,7 +55,10 @@ import org.eclipse.gef.requests.CreationFactory;
 import org.eclipse.gef.ui.actions.ActionRegistry;
 import org.eclipse.gef.ui.actions.DeleteAction;
 import org.eclipse.gef.ui.actions.GEFActionConstants;
+import org.eclipse.gef.ui.actions.RedoAction;
 import org.eclipse.gef.ui.actions.SelectionAction;
+import org.eclipse.gef.ui.actions.StackAction;
+import org.eclipse.gef.ui.actions.UndoAction;
 import org.eclipse.gef.ui.actions.UpdateAction;
 import org.eclipse.gef.ui.actions.ZoomInAction;
 import org.eclipse.gef.ui.actions.ZoomOutAction;
@@ -148,7 +151,7 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 	/** the selection listener */
 	private ISelectionListener selectionListener = new ISelectionListener() {
 		public void selectionChanged(IWorkbenchPart part, ISelection selection) {
-			updateActions(editPartActionIDs);
+			updateActions();
 		}
 	};
 
@@ -167,23 +170,26 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 	/** the command stack of this page */
 	private CommandStack commandStack;
 
+	List stackActions = new ArrayList();
+
+	public void updateActions() {
+		updateActions(stackActions);
+		updateActions(editPartActionIDs);
+	}
+
 	/**
 	 * This class listens for command stack changes of the page and decides if
 	 * the editor is dirty or not.
 	 * 
 	 */
-	private class PageCommandStackListener implements CommandStackListener {
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see CommandStackListener#commandStackChanged(java.util.EventObject)
-		 */
-		public void commandStackChanged(EventObject event) {
+	private class PageCommandStackListener implements CommandStackEventListener {
+		public void stackChanged(CommandStackEvent event) {
 			if (((CommandStack) event.getSource()).isDirty()) {
 				// at least one command stack is dirty,
 				// so the multi page editor is dirty too
 				setDirty(true);
 			}
+			updateActions();
 		}
 	}
 
@@ -293,12 +299,29 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 	}
 
 	/**
+	 * Adds an <code>CommandStack</code> action to this editor.
+	 * <p>
+	 * <code>CommandStack</code> actions are actions that depend and work on
+	 * the <code>CommandStack</code>.
+	 * 
+	 * @param action -
+	 *            the <code>CommandStack</code> action
+	 */
+	protected void addStackAction(StackAction action) {
+		getActionRegistry().registerAction(action);
+		stackActions.add(action.getId());
+	}
+
+	/**
 	 * Creates different kinds of actions and registers them to the
 	 * ActionRegistry.
 	 */
 	protected void createActions() {
 		// register delete action
 		addEditPartAction(new DeleteAction((IWorkbenchPart) this));
+		// register undo/redo action
+		addStackAction(new UndoAction(this));
+		addStackAction(new RedoAction(this));
 
 		// Allows opening of JSP files from the pageflow
 		addEditPartAction(new OpenEditorAction((IWorkbenchPart) this));
@@ -387,7 +410,7 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 	 * 
 	 * @return - the action registry
 	 */
-	protected ActionRegistry getActionRegistry() {
+	public ActionRegistry getActionRegistry() {
 		if (null == actionRegistry) {
 			actionRegistry = new ActionRegistry();
 		}
@@ -420,7 +443,7 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 
 		// initialize the viewer with input
 		viewer.setEditPartFactory(new PageflowEditPartsFactory());
-//		 viewer.setContents(getPageflow());
+		// viewer.setContents(getPageflow());
 
 		// support the resource drag&drop
 		viewer
@@ -432,7 +455,7 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 				});
 
 		// apply Editor's preferences
-//		propertyChange(null);
+		// propertyChange(null);
 		// add listener to Editor's preferences changing
 		EditorPlugin.getDefault().getPreferenceStore()
 				.addPropertyChangeListener(this);
@@ -484,8 +507,8 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 			progressMonitor = new NullProgressMonitor();
 		}
 		// Pageflow.Label.Saving = Saving
-		progressMonitor.beginTask(PageflowMessages.Pageflow_Label_Saving
-				+ " " + file.getFullPath(), 2);
+		progressMonitor.beginTask(PageflowMessages.Pageflow_Label_Saving + " "
+				+ file.getFullPath(), 2);
 
 		if (null == getPageflowManager()) {
 			// Pageflow.PageflowEditor.Alert.nullModelManager = No model manager
@@ -678,7 +701,7 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 		if (commandStack == null) {
 			commandStack = new PreExecuteCommandStack();
 			commandStack
-					.addCommandStackListener(new PageCommandStackListener());
+					.addCommandStackEventListener(new PageCommandStackListener());
 		}
 		return commandStack;
 	}
@@ -810,8 +833,8 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 	public GraphicalViewer getGraphicalViewer() {
 		return viewer;
 	}
-	
-	public void setGraphicalViewerContents(Object contents){
+
+	public void setGraphicalViewerContents(Object contents) {
 		viewer.setContents(contents);
 		propertyChange(null);
 	}
@@ -966,8 +989,7 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 		}
 
 		if (property == null || GEMPreferences.SNAP_TO_GRID.equals(property)) {
-			boolean bSnapToGrid = store
-					.getBoolean(GEMPreferences.SNAP_TO_GRID);
+			boolean bSnapToGrid = store.getBoolean(GEMPreferences.SNAP_TO_GRID);
 			if (part instanceof ILayerPanePreference) {
 				((ILayerPanePreference) part).setGridVisible(bSnapToGrid);
 			}
@@ -1027,8 +1049,7 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 			}
 		}
 
-		if (property == null
-				|| GEMPreferences.LINE_LABEL_FONT.equals(property)
+		if (property == null || GEMPreferences.LINE_LABEL_FONT.equals(property)
 				|| GEMPreferences.LINE_LABEL_FONT_COLOR.equals(property)) {
 			Font linkLabelFont = new Font(null, PreferenceConverter
 					.getFontData(store, GEMPreferences.LINE_LABEL_FONT));
@@ -1055,8 +1076,7 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 			String connectionStyle = store
 					.getString(GEMPreferences.LINE_ROUTING);
 			int style;
-			if (GEMPreferences.LINE_ROUTING_MANHATTAN
-					.equals(connectionStyle)) {
+			if (GEMPreferences.LINE_ROUTING_MANHATTAN.equals(connectionStyle)) {
 				style = ILayerPanePreference.LINE_ROUTING_MANHATTAN;
 			} else {
 				style = ILayerPanePreference.LINE_ROUTING_MANUAL;
@@ -1083,22 +1103,18 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 			}
 		}
 
-		if (property == null
-				|| GEMPreferences.LABEL_PLACEMENT.equals(property)) {
+		if (property == null || GEMPreferences.LABEL_PLACEMENT.equals(property)) {
 			int placement = PositionConstants.SOUTH;
 			String nodeLabelPlacement = store
 					.getString(GEMPreferences.LABEL_PLACEMENT);
-			if (GEMPreferences.LABEL_PLACEMENT_TOP
-					.equals(nodeLabelPlacement))
+			if (GEMPreferences.LABEL_PLACEMENT_TOP.equals(nodeLabelPlacement))
 				placement = PositionConstants.NORTH;
 			if (GEMPreferences.LABEL_PLACEMENT_BOTTOM
 					.equals(nodeLabelPlacement))
 				placement = PositionConstants.SOUTH;
-			if (GEMPreferences.LABEL_PLACEMENT_LEFT
-					.equals(nodeLabelPlacement))
+			if (GEMPreferences.LABEL_PLACEMENT_LEFT.equals(nodeLabelPlacement))
 				placement = PositionConstants.WEST;
-			if (GEMPreferences.LABEL_PLACEMENT_RIGHT
-					.equals(nodeLabelPlacement))
+			if (GEMPreferences.LABEL_PLACEMENT_RIGHT.equals(nodeLabelPlacement))
 				placement = PositionConstants.EAST;
 
 			if (part instanceof INodePreference) {
@@ -1157,13 +1173,14 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 					.validatePage((PageflowNodeEditPart) pagePart);
 		}
 	}
-	
+
 	/**
-	 * Get the image desriptor from the view's id. 
+	 * Get the image desriptor from the view's id.
+	 * 
 	 * @param viewid
 	 * @return
 	 */
-	 private ImageDescriptor getImageDescriptorForView(String viewid) {
+	private ImageDescriptor getImageDescriptorForView(String viewid) {
 		IConfigurationElement[] elements = Platform.getExtensionRegistry()
 				.getConfigurationElementsFor("org.eclipse.ui.views");
 		for (int i = 0; i < elements.length; i++) {

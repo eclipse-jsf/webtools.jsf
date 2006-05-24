@@ -377,13 +377,15 @@ public class PageflowImpl extends PageflowElementImpl implements Pageflow {
 		if (link != null) {
 			if (PageflowValidation.getInstance().isValidLinkForCreation(source,
 					target)) {
+				this.getLinks().add(link);
+				link.setSource(source);
+				link.setTarget(target);
 				// Add the link to the pageflow, to benefit
 				// of the containment link between pageflow and link
-				this.getLinks().add(link);
 
 				// Link input and output to the link
-				target.getInlinks().add(link);
-				source.getOutlinks().add(link);
+				// target.getInlinks().add(link);
+				// source.getOutlinks().add(link);
 			}
 		}
 	}

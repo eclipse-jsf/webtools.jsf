@@ -12,8 +12,6 @@
 package org.eclipse.jst.jsf.facesconfig.ui;
 
 import org.eclipse.emf.edit.ui.action.EditingDomainActionBarContributor;
-import org.eclipse.gef.ui.actions.ActionBarContributor;
-import org.eclipse.gef.ui.actions.ActionRegistry;
 import org.eclipse.jface.action.ICoolBarManager;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IStatusLineManager;
@@ -21,49 +19,74 @@ import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowActionBarContributor;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowEditor;
 import org.eclipse.ui.IActionBars;
-import org.eclipse.ui.IActionBars2;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.forms.editor.FormEditor;
 import org.eclipse.ui.part.EditorActionBarContributor;
+import org.eclipse.ui.part.MultiPageEditorActionBarContributor;
 import org.eclipse.wst.sse.ui.StructuredTextEditor;
+import org.eclipse.wst.xml.ui.internal.tabletree.SourcePageActionContributor;
 
 /**
  * @author hmeng
  */
 
-public class FacesConfigActionBarContributor extends ActionBarContributor {
-	protected SourceActionBarContributor sourceActionContributor = null;
+public class FacesConfigActionBarContributor extends
+		MultiPageEditorActionBarContributor {
+	protected SourcePageActionContributor sourceActionContributor = null;
 
 	protected PageflowActionBarContributor pageflowActionContributor = null;
 
 	protected EditingDomainActionBarContributor formbasedPageActionContributor = null;
 
-	private EditorActionBarContributor activeContributor;
+	// private EditorActionBarContributor activeContributor;
+
+	private IEditorPart activeNestedEditor;
 
 	public FacesConfigActionBarContributor() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+	public void setActivePage(IEditorPart activeEditor) {
+		if (activeEditor != activeNestedEditor) {
+			if (getActionContributor(activeNestedEditor) != null) {
+				getActionContributor(activeNestedEditor).setActiveEditor(
+						activeEditor);
+			}
+			activeNestedEditor = activeEditor;
+			EditorActionBarContributor activeContributor = getActionContributor(activeEditor);
+			if (activeContributor != null)
+				activeContributor.setActiveEditor(activeEditor);
+			else
+				super.setActiveEditor(activeEditor);
+			getActionBars().updateActionBars();
+			update();
+		}
+	}
+
 	public void contributeToCoolBar(ICoolBarManager coolBarManager) {
+		EditorActionBarContributor activeContributor = getActionContributor(activeNestedEditor);
 		if (activeContributor != null)
 			activeContributor.contributeToCoolBar(coolBarManager);
 	}
 
 	public void contributeToMenu(IMenuManager menuManager) {
+		EditorActionBarContributor activeContributor = getActionContributor(activeNestedEditor);
 		if (activeContributor != null) {
 			activeContributor.contributeToMenu(menuManager);
 		}
 	}
 
 	public void contributeToStatusLine(IStatusLineManager statusLineManager) {
+		EditorActionBarContributor activeContributor = getActionContributor(activeNestedEditor);
 		if (activeContributor != null) {
 			activeContributor.contributeToStatusLine(statusLineManager);
 		}
 	}
 
 	public void contributeToToolBar(IToolBarManager toolBarManager) {
+		EditorActionBarContributor activeContributor = getActionContributor(activeNestedEditor);
 		if (activeContributor != null) {
 			activeContributor.contributeToToolBar(toolBarManager);
 		}
@@ -76,6 +99,7 @@ public class FacesConfigActionBarContributor extends ActionBarContributor {
 	}
 
 	public IActionBars getActionBars() {
+		EditorActionBarContributor activeContributor = getActionContributor(activeNestedEditor);
 		if (activeContributor != null) {
 			return activeContributor.getActionBars();
 		} else {
@@ -95,82 +119,60 @@ public class FacesConfigActionBarContributor extends ActionBarContributor {
 		super.init(bars, page);
 	}
 
-	public void init(IActionBars bars) {
-		// getPageflowActionContributor().init(bars);
-		// getSourceActionContributor().init(bars);
-		// getFormbasedPageActionContributor().init(bars);
-		super.init(bars);
-	}
-
 	public void setActiveEditor(IEditorPart targetEditor) {
-		if (activeContributor != null)
-			activeContributor.setActiveEditor(targetEditor);
-		else
-			super.setActiveEditor(targetEditor);
+		if (activeNestedEditor != getActiveNestedEditor(targetEditor)) {
+			activeNestedEditor = getActiveNestedEditor(targetEditor);
+			setActivePage(activeNestedEditor);
+		}
 	}
 
-	public void pageChanged(IEditorPart targetEditor) {
-		IEditorPart activeNestedEditor = null;
+	private IEditorPart getActiveNestedEditor(IEditorPart targetEditor) {
+		IEditorPart activeNestedEditor;
 		if (targetEditor instanceof FormEditor) {
 			activeNestedEditor = ((FormEditor) targetEditor).getActiveEditor();
+		} else {
+			activeNestedEditor = targetEditor;
 		}
-		if (activeNestedEditor == null) {
-			return;
-		}
+		return activeNestedEditor;
+	}
+
+	// public void pageChanged(IEditorPart targetEditor) {
+	// if (targetEditor instanceof FormEditor) {
+	// activeNestedEditor = ((FormEditor) targetEditor).getActiveEditor();
+	// }
+	// if (activeNestedEditor != null) {
+	// if (activeContributor instanceof EditingDomainActionBarContributor) {
+	// ((EditingDomainActionBarContributor) activeContributor)
+	// .deactivate();
+	// }
+	// getActionContributor(activeNestedEditor);
+	// setActiveEditor(activeNestedEditor);
+	// }
+	// }
+
+	private EditorActionBarContributor getActionContributor(
+			IEditorPart activeNestedEditor) {
+		EditorActionBarContributor activeContributor = null;
 		if (activeNestedEditor instanceof PageflowEditor) {
 			activeContributor = getPageflowActionContributor();
 		} else if (activeNestedEditor instanceof StructuredTextEditor) {
 			activeContributor = getSourceActionContributor();
-			getSourceActionContributor().active(true);
-			getSourceActionContributor().setActiveEditor(activeNestedEditor);
-		} else {
+		} else if (activeNestedEditor != null) {
 			activeContributor = getFormbasedPageActionContributor();
 		}
-		if (activeNestedEditor != getSourceActionContributor()) {
-			getSourceActionContributor().active(false);
-			ActionRegistry registry = (ActionRegistry) activeNestedEditor
-					.getAdapter(ActionRegistry.class);
-
-			if (registry != null) {
-				activeContributor.setActiveEditor(activeNestedEditor);
-			} else {
-				getActionBars().updateActionBars();
-			}
-		}
-		IActionBars bars = targetEditor.getEditorSite().getActionBars();
-		// bars.getToolBarManager().getItems()
-		// bars.getMenuManager().removeAll();
-		// bars.getToolBarManager().removeAll();
-		// bars.getStatusLineManager().removeAll();
-		if (bars instanceof IActionBars2) {
-			// ((IActionBars2) bars).getCoolBarManager().removeAll();
-			// activeContributor.contributeToCoolBar(((IActionBars2) bars)
-			// .getCoolBarManager());
-			// ((IActionBars2) bars).getCoolBarManager().update(false);
-		}
-		// activeContributor.contributeToMenu(bars.getMenuManager());
-		// activeContributor.contributeToStatusLine(bars.getStatusLineManager());
-		// activeContributor.contributeToToolBar(bars.getToolBarManager());
-		// bars.updateActionBars();
-		// // bars.getMenuManager().updateAll(false);
-		// // bars.getStatusLineManager().update(false);
-		// bars.getToolBarManager().update(true);
+		return activeContributor;
 	}
 
-	protected void buildActions() {
-		// getPageflowActionContributor().buildActions();
-	}
-
-	public SourceActionBarContributor getSourceActionContributor() {
+	public SourcePageActionContributor getSourceActionContributor() {
 		if (sourceActionContributor == null) {
-			sourceActionContributor = new SourceActionBarContributor();
+			sourceActionContributor = new SourcePageActionContributor();
 		}
 		return sourceActionContributor;
 	}
 
 	public EditingDomainActionBarContributor getFormbasedPageActionContributor() {
 		if (formbasedPageActionContributor == null) {
-			formbasedPageActionContributor = new EditingDomainActionBarContributor();
+			formbasedPageActionContributor = new MyEditingDomainActionContributor();
 		}
 		return formbasedPageActionContributor;
 	}
@@ -188,4 +190,8 @@ public class FacesConfigActionBarContributor extends ActionBarContributor {
 
 	}
 
+	public void update() {
+		EditorActionBarContributor activeContributor = getActionContributor(activeNestedEditor);
+		((NestedActionContributor) activeContributor).update();
+	}
 }

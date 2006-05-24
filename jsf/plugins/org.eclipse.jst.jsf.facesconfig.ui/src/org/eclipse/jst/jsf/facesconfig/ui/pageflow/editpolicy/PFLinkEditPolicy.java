@@ -16,6 +16,7 @@ import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.editpolicies.ConnectionEditPolicy;
 import org.eclipse.gef.requests.GroupRequest;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.command.ConnectionCommand;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.command.DeleteConnectionCommand;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 
 public class PFLinkEditPolicy extends ConnectionEditPolicy {
@@ -30,7 +31,7 @@ public class PFLinkEditPolicy extends ConnectionEditPolicy {
 	 * @see ConnectionEditPolicy#getDeleteCommand
 	 */
 	protected Command getDeleteCommand(GroupRequest request) {
-		ConnectionCommand c = new ConnectionCommand();
+		ConnectionCommand c = new DeleteConnectionCommand();
 		c.setPFLink((PageflowLink) getHost().getModel());
 		return c;
 	}

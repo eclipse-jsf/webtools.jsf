@@ -27,10 +27,15 @@ import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
+import org.eclipse.jst.jsf.facesconfig.ui.NestedActionContributor;
+import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.actions.ActionFactory;
 
-public class PageflowActionBarContributor extends ActionBarContributor {
+public class PageflowActionBarContributor extends ActionBarContributor
+		implements NestedActionContributor {
+
+	IEditorPart activeEditor;
 
 	/*
 	 * (non-Javadoc)
@@ -57,7 +62,37 @@ public class PageflowActionBarContributor extends ActionBarContributor {
 	 * 
 	 * @see ActionBarContributor#declareGlobalActionKeys()
 	 */
-	protected void declareGlobalActionKeys() {
+	public void declareGlobalActionKeys() {
+		if (getActionBars() != null && activeEditor instanceof PageflowEditor) {
+			// ActionRegistry registry = ((PageflowEditor) activeEditor)
+			// .getActionRegistry();
+			// getActionBars().clearGlobalActionHandlers();
+			// Iterator actions = registry.getActions();
+			// while (actions.hasNext()) {
+			// IAction action = (IAction) actions.next();
+			// getActionBars().setGlobalActionHandler(action.getId(), action);
+			// }
+			// getActionBars().setGlobalActionHandler(
+			// ActionFactory.DELETE.getId(),
+			// registry.getAction(ActionFactory.DELETE.getId()));
+			// getActionBars().setGlobalActionHandler(ActionFactory.UNDO.getId(),
+			// registry.getAction(ActionFactory.UNDO.getId()));
+			// getActionBars().setGlobalActionHandler(ActionFactory.REDO.getId(),
+			// registry.getAction(ActionFactory.REDO.getId()));
+			// getActionBars().setGlobalActionHandler(
+			// GEFActionConstants.ALIGN_LEFT,
+			// registry.getAction(GEFActionConstants.ALIGN_LEFT));
+			// getActionBars().setGlobalActionHandler(
+			// GEFActionConstants.ALIGN_LEFT,
+			// registry.getAction(GEFActionConstants.ALIGN_LEFT));
+			// getActionBars().setGlobalActionHandler(
+			// GEFActionConstants.ALIGN_LEFT,
+			// registry.getAction(GEFActionConstants.ALIGN_LEFT));
+		}
+	}
+
+	public void updateActionKeys() {
+		declareGlobalActionKeys();
 	}
 
 	/*
@@ -96,94 +131,17 @@ public class PageflowActionBarContributor extends ActionBarContributor {
 		menubar.insertAfter(IWorkbenchActionConstants.M_EDIT, viewMenu);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.part.EditorActionBarContributor#init(org.eclipse.ui.IActionBars) //
-	 */
-	// public void init(IActionBars bars) {
-	// super.init(bars);
-	// // _sourceActionContributor = new ActionContributorXML();
-	// // _sourceActionBars = new SubActionBars(bars);
-	// // _sourceActionContributor.init(_sourceActionBars);
-	// }
-	//
-	// /*
-	// * (non-Javadoc)
-	// *
-	// * @see org.eclipse.ui.IEditorActionBarContributor#dispose()
-	// */
-	// public void dispose() {
-	// if (_sourceActionContributor != null) {
-	// _sourceActionContributor.dispose();
-	// }
-	// if (_sourceActionBars != null) {
-	// _sourceActionBars.dispose();
-	// }
-	// super.dispose();
-	// }
-	/*
-	 * (non-JavaDoc) Method declared on EditorActionBarContributor Registers the
-	 * contributor with the multi-page editor for future editor action
-	 * redirection when the active page is changed, and sets the active page. //
-	 */
-	// public void setActiveEditor(IEditorPart part) {
-	// IEditorPart activeNestedEditor = null;
-	// if (part instanceof FormEditor) {
-	// activeNestedEditor = ((FormEditor) part).getActiveEditor();
-	// }
-	// setActivePage(activeNestedEditor);
-	// }
-	/**
-	 * Sets the active page of the the multi-page editor to be the given editor.
-	 * Redirect actions to the given editor if actions are not already being
-	 * sent to it.
-	 * <p>
-	 * This method is called whenever the page changes. Subclasses must
-	 * implement this method to redirect actions to the given editor (if not
-	 * already directed to it).
-	 * </p>
-	 * 
-	 * @param activeEditor
-	 *            the new active editor, or <code>null</code> if there is no
-	 *            active page, or if the active page does not have a
-	 *            corresponding editor
-	 */
-	// public void setActivePage(IEditorPart activeEditor) {
-	// if (activeEditor instanceof StructuredTextEditor) {
-	// _sourceActionContributor.setActiveEditor(activeEditor);
-	// setSourceActionBarsActive(true);
-	// } else {
-	// setSourceActionBarsActive(false);
-	// ActionRegistry registry = (ActionRegistry) activeEditor
-	// .getAdapter(ActionRegistry.class);
-	//
-	// if (registry != null) {
-	// super.setActiveEditor(activeEditor);
-	// } else {
-	// getActionBars().updateActionBars();
-	// }
-	// }
-	// }
-	// private void setSourceActionBarsActive(boolean active) {
-	// IActionBars rootBars = getActionBars();
-	// if (active) {
-	// _sourceActionBars.activate();
-	// } else {
-	// _sourceActionBars.deactivate(true);
-	// }
-	// rootBars.clearGlobalActionHandlers();
-	// if (active) {
-	// Map handlers = _sourceActionBars.getGlobalActionHandlers();
-	// if (handlers != null) {
-	// Set keys = handlers.keySet();
-	// for (Iterator iter = keys.iterator(); iter.hasNext();) {
-	// String id = (String) iter.next();
-	// rootBars.setGlobalActionHandler(id, (IAction) handlers
-	// .get(id));
-	// }
-	// }
-	// }
-	// rootBars.updateActionBars();
-	// }
+	public void setActiveEditor(IEditorPart editor) {
+		if (editor instanceof PageflowEditor) {
+			activeEditor = editor;
+			// updateActionKeys();
+			super.setActiveEditor(editor);
+		}
+	}
+
+	public void update() {
+		if (activeEditor != null) {
+			((PageflowEditor) activeEditor).updateActions();
+		}
+	}
 }

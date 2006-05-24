@@ -25,6 +25,7 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.action.OpenEditorAction;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.command.ConnectionCommand;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.command.ConnectionCommandFactory;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.command.OpenEditorCommand;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowNodeEditPart;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.figure.PageflowNodeFigure;
@@ -79,7 +80,8 @@ public class PageflowNodeEditPolicy extends GraphicalNodeEditPolicy {
 	 * @see GraphicalNodeEditPolicy#getConnectionCreateCommand()
 	 */
 	protected Command getConnectionCreateCommand(CreateConnectionRequest request) {
-		ConnectionCommand command = new ConnectionCommand();
+		ConnectionCommand command = ConnectionCommandFactory
+				.createCommand(request);
 		command.setPFLink((PageflowLink) request.getNewObject());
 		PageflowNode flowObject = getPageflowNode();
 		command.setSource(flowObject);
@@ -111,8 +113,10 @@ public class PageflowNodeEditPolicy extends GraphicalNodeEditPolicy {
 	 * @see GraphicalNodeEditPolicy#getReconnectTargetCommand()
 	 */
 	protected Command getReconnectTargetCommand(ReconnectRequest request) {
-		ConnectionCommand cmd = new ConnectionCommand();
-		cmd.setPFLink((PageflowLink) request.getConnectionEditPart().getModel());
+		ConnectionCommand cmd = ConnectionCommandFactory.createCommand(request);
+		cmd
+				.setPFLink((PageflowLink) request.getConnectionEditPart()
+						.getModel());
 		cmd.setTarget(getPageflowNode());
 		return cmd;
 	}
@@ -123,8 +127,10 @@ public class PageflowNodeEditPolicy extends GraphicalNodeEditPolicy {
 	 * @see GraphicalNodeEditPolicy#getReconnectSourceCommand()
 	 */
 	protected Command getReconnectSourceCommand(ReconnectRequest request) {
-		ConnectionCommand cmd = new ConnectionCommand();
-		cmd.setPFLink((PageflowLink) request.getConnectionEditPart().getModel());
+		ConnectionCommand cmd = ConnectionCommandFactory.createCommand(request);
+		cmd
+				.setPFLink((PageflowLink) request.getConnectionEditPart()
+						.getModel());
 		cmd.setSource(getPageflowNode());
 		return cmd;
 	}
