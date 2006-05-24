@@ -20,7 +20,7 @@ import org.eclipse.jface.viewers.ColumnPixelData;
 import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.Separator;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowMessages;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.FacesConfigUtil;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.JSPUtil;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -323,7 +323,7 @@ public class ActionOutcomeSelectionDialog extends Dialog {
 	 * 
 	 */
 	private void addActionsInJSP() {
-		List actionNodes = FacesConfigUtil.getActionListInJSPFile(jspName);
+		List actionNodes = JSPUtil.getActionListInJSPFile(jspName);
 
 		if (actionNodes != null) {
 			for (int i = 0; i < actionNodes.size(); i++) {
@@ -347,12 +347,6 @@ public class ActionOutcomeSelectionDialog extends Dialog {
 				}
 			}
 		}
-		// // add service actions
-		// for (int j=0; j<IJMTConstants.SERVICE_OUTCOMES.length;j++)
-		// {
-		// addActionTableItem("Service
-		// Invocation",IJMTConstants.SERVICE_OUTCOMES[j]);
-		// }
 	}
 
 	public static boolean isValidEL(String expressionString) {
