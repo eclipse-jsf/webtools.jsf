@@ -41,12 +41,8 @@ public class WebrootUtil extends
 	 * @return - project path from "/projectname/webroot"
 	 */
 	static public String getProjectPath(EObject model, String strPath) {
-		// String projectName = "";
 
 		IProject project = getProject(model);
-		// if (project != null) {
-		// projectName = project.getName();
-		// }
 
 		String strProjectPath = "";
 		if (strPath != null) {
@@ -58,9 +54,6 @@ public class WebrootUtil extends
 					if (webContentPath != null)
 						strProjectPath = webContentPath.toString() + strPath;
 
-					// strProjectPath = IFileFolderConstants.PATH_SEPARATOR
-					// + projectName + IFileFolderConstants.PATH_SEPARATOR
-					// + IFileFolderConstants.FOLDER_WEBROOT + strPath;
 				}
 			} else
 			// jsp folder
@@ -70,10 +63,6 @@ public class WebrootUtil extends
 				IPath webContentPath = getWebContentPath(project);
 				if (webContentPath != null)
 					strProjectPath = webContentPath.toString() + strPath;
-				// strProjectPath = IFileFolderConstants.PATH_SEPARATOR
-				// + projectName + IFileFolderConstants.PATH_SEPARATOR
-				// + IFileFolderConstants.FOLDER_WEBROOT + strPath;
-				// //$NON-NLS-1$
 			}
 		}
 		return strProjectPath;
