@@ -28,7 +28,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.wst.common.frameworks.ui
 Eclipse-LazyStart: true
 Export-Package: org.eclipse.jst.jsf.core.internal;x-friends:="org.eclipse.jst.jsf.core.tests,org.eclipse.jst.jsf.ui,org.eclipse.jst.jsf.ui.tests",
- org.eclipse.jst.jsf.core.internal.jsflibraryconfig,
+ org.eclipse.jst.jsf.core.internal.jsflibraryconfig;x-friends:="org.eclipse.jst.jsf.ui",
  org.eclipse.jst.jsf.core.internal.jsflibraryregistry;x-friends:="org.eclipse.jst.jsf.core.tests,org.eclipse.jst.jsf.ui,org.eclipse.jst.jsf.ui.tests",
  org.eclipse.jst.jsf.core.internal.jsflibraryregistry.adapter;x-friends:="org.eclipse.jst.jsf.core.tests,org.eclipse.jst.jsf.ui,org.eclipse.jst.jsf.ui.tests",
  org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl;x-friends:="org.eclipse.jst.jsf.core.tests,org.eclipse.jst.jsf.ui,org.eclipse.jst.jsf.ui.tests",
