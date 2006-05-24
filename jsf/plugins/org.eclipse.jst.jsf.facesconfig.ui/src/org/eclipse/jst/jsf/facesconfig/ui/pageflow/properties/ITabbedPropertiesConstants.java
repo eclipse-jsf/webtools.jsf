@@ -20,9 +20,9 @@ public interface ITabbedPropertiesConstants {
 
 	public static int BROWSE_WIDTH = 20;
 
-	public static final String GENERAL_TAB_ID = "com.sybase.stf.jmt.pageflow.general";
+	public static final String GENERAL_TAB_ID = "org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.general";
 
-	public static final String ATTRIBUTE_TAB_ID = "com.sybase.stf.jmt.pageflow.attribute";
+	public static final String ATTRIBUTE_TAB_ID = "org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.attribute";
 
 	public static final String OPTIONAL_SECTION = "attribute.optional"; // 5
 
