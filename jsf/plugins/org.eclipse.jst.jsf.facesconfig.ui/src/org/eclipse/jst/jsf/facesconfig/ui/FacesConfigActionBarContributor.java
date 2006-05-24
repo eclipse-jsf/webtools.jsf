@@ -136,20 +136,6 @@ public class FacesConfigActionBarContributor extends
 		return activeNestedEditor;
 	}
 
-	// public void pageChanged(IEditorPart targetEditor) {
-	// if (targetEditor instanceof FormEditor) {
-	// activeNestedEditor = ((FormEditor) targetEditor).getActiveEditor();
-	// }
-	// if (activeNestedEditor != null) {
-	// if (activeContributor instanceof EditingDomainActionBarContributor) {
-	// ((EditingDomainActionBarContributor) activeContributor)
-	// .deactivate();
-	// }
-	// getActionContributor(activeNestedEditor);
-	// setActiveEditor(activeNestedEditor);
-	// }
-	// }
-
 	private EditorActionBarContributor getActionContributor(
 			IEditorPart activeNestedEditor) {
 		EditorActionBarContributor activeContributor = null;
@@ -192,6 +178,7 @@ public class FacesConfigActionBarContributor extends
 
 	public void update() {
 		EditorActionBarContributor activeContributor = getActionContributor(activeNestedEditor);
-		((NestedActionContributor) activeContributor).update();
+		if (activeContributor instanceof INestedActionContributor)
+			((INestedActionContributor) activeContributor).update();
 	}
 }

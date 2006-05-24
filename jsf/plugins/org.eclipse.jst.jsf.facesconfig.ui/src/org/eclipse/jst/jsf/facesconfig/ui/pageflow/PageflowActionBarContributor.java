@@ -27,13 +27,13 @@ import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
-import org.eclipse.jst.jsf.facesconfig.ui.NestedActionContributor;
+import org.eclipse.jst.jsf.facesconfig.ui.INestedActionContributor;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.actions.ActionFactory;
 
 public class PageflowActionBarContributor extends ActionBarContributor
-		implements NestedActionContributor {
+		implements INestedActionContributor {
 
 	IEditorPart activeEditor;
 
@@ -63,32 +63,7 @@ public class PageflowActionBarContributor extends ActionBarContributor
 	 * @see ActionBarContributor#declareGlobalActionKeys()
 	 */
 	public void declareGlobalActionKeys() {
-		if (getActionBars() != null && activeEditor instanceof PageflowEditor) {
-			// ActionRegistry registry = ((PageflowEditor) activeEditor)
-			// .getActionRegistry();
-			// getActionBars().clearGlobalActionHandlers();
-			// Iterator actions = registry.getActions();
-			// while (actions.hasNext()) {
-			// IAction action = (IAction) actions.next();
-			// getActionBars().setGlobalActionHandler(action.getId(), action);
-			// }
-			// getActionBars().setGlobalActionHandler(
-			// ActionFactory.DELETE.getId(),
-			// registry.getAction(ActionFactory.DELETE.getId()));
-			// getActionBars().setGlobalActionHandler(ActionFactory.UNDO.getId(),
-			// registry.getAction(ActionFactory.UNDO.getId()));
-			// getActionBars().setGlobalActionHandler(ActionFactory.REDO.getId(),
-			// registry.getAction(ActionFactory.REDO.getId()));
-			// getActionBars().setGlobalActionHandler(
-			// GEFActionConstants.ALIGN_LEFT,
-			// registry.getAction(GEFActionConstants.ALIGN_LEFT));
-			// getActionBars().setGlobalActionHandler(
-			// GEFActionConstants.ALIGN_LEFT,
-			// registry.getAction(GEFActionConstants.ALIGN_LEFT));
-			// getActionBars().setGlobalActionHandler(
-			// GEFActionConstants.ALIGN_LEFT,
-			// registry.getAction(GEFActionConstants.ALIGN_LEFT));
-		}
+		
 	}
 
 	public void updateActionKeys() {

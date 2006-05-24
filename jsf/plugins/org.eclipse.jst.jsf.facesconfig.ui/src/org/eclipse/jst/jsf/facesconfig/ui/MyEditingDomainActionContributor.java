@@ -13,7 +13,7 @@ import org.eclipse.ui.actions.ActionFactory;
  * 
  */
 public class MyEditingDomainActionContributor extends
-		EditingDomainActionBarContributor implements NestedActionContributor {
+		EditingDomainActionBarContributor implements INestedActionContributor {
 	public void setActiveEditor(IEditorPart part) {
 		super.setActiveEditor(part);
 		if (getActiveEditor() != null) {
