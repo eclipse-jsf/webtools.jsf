@@ -34,7 +34,6 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
  */
 public class OverviewManagedBeanSection extends AbstractOverviewSection {
 
-	// private static EditorResources resource = EditorResources.getInstance();
 
 	/**
 	 * 

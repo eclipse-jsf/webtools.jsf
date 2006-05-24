@@ -215,32 +215,4 @@ public class PF2FCSynchronizer extends AdapterImpl {
 	public void dispose() {
 
 	}
-	// /**
-	// * All the fromViewID or toViewID
-	// *
-	// * @param path
-	// * @return
-	// */
-	// public List findFacesPages(String path) {
-	// List rules = facesConfig.getNavigationRule();
-	// List result = new ArrayList();
-	// for (int i = 0; i < rules.size(); i++) {
-	// NavigationRuleType rule = (NavigationRuleType) rules.get(i);
-	// String fromViewID = TransformUtil.getFromViewID(rule);
-	// if (fromViewID.equals(path)) {
-	// result.add(rule.getFromViewId());
-	// }
-	// List cases = rule.getNavigationCase();
-	// for (int j = 0; j < cases.size(); j++) {
-	// NavigationCaseType navCase = (NavigationCaseType) cases
-	// .get(j);
-	// String toViewID = TransformUtil.getToViewID(navCase);
-	// if (toViewID.equals(path)) {
-	// result.add(navCase.getToViewId());
-	// }
-	// }
-	// }
-	// return result;
-	// }
-
 }

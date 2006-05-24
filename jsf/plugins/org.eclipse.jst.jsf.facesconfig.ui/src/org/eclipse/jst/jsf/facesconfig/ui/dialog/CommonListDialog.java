@@ -25,8 +25,6 @@ import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jst.jsf.facesconfig.common.guiutils.SWTUtils;
 import org.eclipse.jst.jsf.facesconfig.ui.page.IFacesConfigPage;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -101,16 +99,6 @@ public class CommonListDialog extends Dialog implements
 		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.widthHint = TEXT_MINI_WIDTH;
 		inputText.setLayoutData(gd);
-
-		inputText.addModifyListener(new ModifyListener() {
-			public void modifyText(ModifyEvent e) {
-				// _componentFamily = _inputText.getText();
-				// if (isCurrentPage())
-				// {
-				// getContainer().updateButtons();
-				// }
-			}
-		});
 
 		structuredViewer = createViewer(composite);
 		structuredViewer.addSelectionChangedListener(this);

@@ -124,11 +124,6 @@ public class OpenEditorCommand extends org.eclipse.gef.commands.Command {
 			EditorPlugin.getAlerts().error(
 					"Pageflow.PageflowEditor.Alert.errorOpenEditor4JSFTitle",
 					"Pageflow.PageflowEditor.Alert.confirmCreateNewJSFFile");// )
-			// {
-			// return;
-			// }
-
-			// createNewJSFFile();
 		}
 	}
 
@@ -180,38 +175,6 @@ public class OpenEditorCommand extends org.eclipse.gef.commands.Command {
 		}
 	}
 
-	/**
-	 * create a new jsf file and open it in a new editor
-	 * 
-	 */
-	// private void createNewJSFFile() {
-	// IStructuredSelection selectionToPass = StructuredSelection.EMPTY;
-	// // Create a new jsf Wizard
-	// NewJSPWizard jsfWizard = new NewJSPWizard();
-	// jsfWizard.init(EditorPlugin.getDefault().getWorkbench(),
-	// selectionToPass);
-	// // using a wizard dialog to display the new jsf wizard
-	// CommonWizardDialog jsfSelectionWizardDialog = new CommonWizardDialog(
-	// EditorPlugin.getDefault().getWorkbench()
-	// .getActiveWorkbenchWindow().getShell(), jsfWizard);
-	// jsfSelectionWizardDialog.open();
-	// if (jsfSelectionWizardDialog.open() == Window.OK)
-	// {
-	// IFile jsfFile = (IFile) jsfWizard.getNewObject();
-	// if (jsfFile != null)
-	// {
-	// //get the project path for the new created file, i.e.,
-	// /project/webroot/*.jsp
-	// String jsfSelection = jsfFile.getFullPath().toString();
-	// //get the web path for the project path, i.e, /*.jsp
-	// jsfSelection = WebrootUtil.getWebPath(jsfSelection);
-	// if (jsfSelection != null && jsfSelection.length() > 0)
-	// {
-	// ((PFPage) (part.getModel())).setPath(jsfSelection);
-	// }
-	// }
-	// }
-	// }
 	/**
 	 * Executes the OpenEditorCommand and opens the editor
 	 */

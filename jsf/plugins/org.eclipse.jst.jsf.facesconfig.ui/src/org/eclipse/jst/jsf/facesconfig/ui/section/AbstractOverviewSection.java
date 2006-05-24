@@ -94,7 +94,6 @@ public abstract class AbstractOverviewSection extends
 		tableViewer.setContentProvider(new AdapterFactoryContentProvider(
 				getAdapterFactory()));
 		ComposedAdapterFactory factory = (ComposedAdapterFactory)getAdapterFactory();
-//		factory.addAdapterFactory(new OverviewTableViewerAdapterFactory());
 		tableViewer.setLabelProvider(new AdapterFactoryLabelProvider(factory));
 		configTableViewer(tableViewer);
 	}
