@@ -24,6 +24,11 @@ public interface IJSFFacetInstallDataModelProperties extends IFacetInstallDataMo
 	 public static final String SERVLET_NAME = "IJSFFacetInstallDataModelProperties.SERVLET_NAME"; //$NON-NLS-1$
 	 public static final String SERVLET_URL_PATTERNS = "IJSFFacetInstallDataModelProperties.SERVLET_URL_PATTERNS"; //$NON-NLS-1$
 	 public static final String WEBCONTENT_DIR = "IJSFFacetInstallDataModelProperties.WEBCONTENT_DIR"; //$NON-NLS-1$
+	 
+	 public static final String DEFAULT_IMPLEMENTATION_LIBRARY = "IJSFFacetInstallDataModelProperties.DEFAULT_IMPLEMENTATION_LIBRARY";
+	 public static final String IMPLEMENTATION_LIBRARIES = "IJSFFacetInstallDataModelProperties.IMPLEMENTATION_LIBRARIES";	
+	 public static final String COMPONENT_LIBRARIES = "IJSFFacetInstallDataModelProperties.COMPONENT_LIBRARIES";	//$NON-NLS-1$	 
+	 
 }
 
  

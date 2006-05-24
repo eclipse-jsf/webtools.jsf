@@ -21,6 +21,8 @@ import org.eclipse.osgi.util.NLS;
 public class Messages extends NLS {
 	private static final String BUNDLE_NAME = "org.eclipse.jst.jsf.ui.internal.messages"; //$NON-NLS-1$
 
+	public static String JSFFacetInstallPage_JSFLibraryLabel0;
+
 	public static String JSFFacetInstallPage_title;
 	public static String JSFFacetInstallPage_description;
 	public static String JSFFacetInstallPage_JSFImplLabel;
@@ -47,6 +49,28 @@ public class Messages extends NLS {
 	public static String JSFLibrariesPreferencePage_Description;
 	public static String JSFLibrariesPreferencePage_CannotModifyPluginProvidedTitle;
 	public static String JSFLibrariesPreferencePage_CannotModifyPluginProvidedMessage;
+
+	public static String JSFLibraryConfigControl_Add;
+
+	public static String JSFLibraryConfigControl_AddAll;
+
+	public static String JSFLibraryConfigControl_ComponentLibrary;
+
+	public static String JSFLibraryConfigControl_DeployJAR;
+
+	public static String JSFLibraryConfigControl_ImplementationLibrary;
+
+	public static String JSFLibraryConfigControl_NewComponentLibrary;
+
+	public static String JSFLibraryConfigControl_NewImplementationLibrary;
+
+	public static String JSFLibraryConfigControl_Remove;
+
+	public static String JSFLibraryConfigControl_RemoveAll;
+
+	public static String JSFLibraryConfigControl_TH_Deploy;
+
+	public static String JSFLibraryConfigControl_TH_LibraryName;
 
 	public static String JSFLibraryContainerWizardPage_PageName;
 	public static String JSFLibraryContainerWizardPage_Title;

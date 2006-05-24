@@ -41,4 +41,17 @@
            name="New JSF Library"
            preferredPerspectives="org.eclipse.jst.j2ee.J2EEPerspective"/>
   </extension>
+  <extension 
+  		point="org.eclipse.ui.propertyPages">
+     <page
+           adaptable="true"
+           class="org.eclipse.jst.jsf.ui.internal.jsflibraryconfig.JSFLibraryPropertyPage"
+           id="org.eclipse.jst.jsf.ui.properties.jsfLibraryPropertyPage"
+           name="%jsf.library.reference"
+           objectClass="org.eclipse.core.resources.IProject">
+        <filter
+              name="nature"
+              value="org.eclipse.wst.common.project.facet.core.nature"/>
+     </page>
+  </extension>  
 </plugin>

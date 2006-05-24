@@ -83,6 +83,8 @@ public class JSFLibraryWizard extends Wizard implements INewWizard {
 	private static final String DESCRIPTION = Messages.JSFLibraryWizard_DESCRIPTION;
 	private static final String IMPLS_ONLY_DESC = Messages.JSFLibraryWizard_IMPLS_ONLY_DESC;
 
+	private boolean nonimplOnly = false;	
+	
 	public JSFLibraryWizard(boolean b) {
 		super();
 		implsOnly = b;
@@ -107,7 +109,10 @@ public class JSFLibraryWizard extends Wizard implements INewWizard {
 			setWindowTitle(isNew ? Messages.JSFLibraryWizard_CreateJSFLibrary : Messages.JSFLibraryWizard_EditJSFLibrary);
 		}
 	}
-
+	public void init(IWorkbench workbench, IStructuredSelection selection, boolean nonimplonly) {
+		init(workbench, selection);
+		this.nonimplOnly = nonimplonly;
+	}
 	public boolean performFinish() {
 		final String name = txtName.getText().trim();
 		final boolean isDeployed = chkDeploy.getSelection();
@@ -223,7 +228,11 @@ public class JSFLibraryWizard extends Wizard implements INewWizard {
 				chkImpl.setSelection(true);
 				chkImpl.setEnabled(false);
 			}
-
+			
+			if (nonimplOnly) {
+				chkImpl.setSelection(false);
+				chkImpl.setEnabled(false);				
+			}
 			jars.setInput(workingCopyLibrary);
 
 			initing = false;

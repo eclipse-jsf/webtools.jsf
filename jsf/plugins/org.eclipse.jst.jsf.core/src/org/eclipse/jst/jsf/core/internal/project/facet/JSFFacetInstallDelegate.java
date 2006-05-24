@@ -26,7 +26,9 @@ import org.eclipse.jst.j2ee.web.componentcore.util.WebArtifactEdit;
 import org.eclipse.jst.j2ee.webapplication.Servlet;
 import org.eclipse.jst.j2ee.webapplication.WebApp;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
-import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.J2EEModuleDependencyDelegate;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfigModelAdapter;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryDecorator;
 import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
 import org.eclipse.wst.common.project.facet.core.IDelegate;
 import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
@@ -72,8 +74,26 @@ public class JSFFacetInstallDelegate implements IDelegate {
 			// tbd
 
 			// Add JSF Impls to WEB-INF/lib
-			deployJSFLibraries(project, config, monitor);
-
+			//deployJSFLibraries(project, config, monitor);
+			
+			// Update Model
+			java.util.List implLibs = (List) config.getProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION_LIBRARIES);
+			java.util.List compLibs = (List) config.getProperty(IJSFFacetInstallDataModelProperties.COMPONENT_LIBRARIES);			
+			JSFLibraryConfigModelAdapter provider = new JSFLibraryConfigModelAdapter(project);
+			provider.saveData(implLibs, compLibs);
+			
+			// Update J2EE Module dependency for deployment and add JARs into project build path.
+			J2EEModuleDependencyDelegate modulesDep = new J2EEModuleDependencyDelegate(project);
+			JSFLibraryDecorator selJSFImplLib = (JSFLibraryDecorator)implLibs.get(0);
+			modulesDep.addProjectDependency(selJSFImplLib.getLibrary(), selJSFImplLib.checkForDeploy(), monitor);
+			JSFLibraryDecorator jsfLibItem;
+			for(int i = 0; i < compLibs.size(); i++) {
+				jsfLibItem = (JSFLibraryDecorator)compLibs.get(i);
+				if (jsfLibItem.isSelected()) {
+					modulesDep.addProjectDependency(jsfLibItem.getLibrary(), jsfLibItem.checkForDeploy(), monitor);
+				}				
+			}	
+			
 			// Create config file
 			createConfigFile(project, fv, config, monitor);
 
@@ -90,7 +110,8 @@ public class JSFFacetInstallDelegate implements IDelegate {
 			}
 		}
 	}
-
+	
+	/** Obsoleted M1 approach
 	private void deployJSFLibraries(IProject project,
 			final IDataModel config, IProgressMonitor monitor) {
 		
@@ -102,7 +123,7 @@ public class JSFFacetInstallDelegate implements IDelegate {
 			}
 		}
 	}
-
+	*/
 	
 	private void createConfigFile(final IProject project,
 			final IProjectFacetVersion fv, final IDataModel config,
@@ -182,7 +203,7 @@ public class JSFFacetInstallDelegate implements IDelegate {
 
 		return mappings;
 	}
-	
+	/*
 	private IPath getWebContentPath(IProject project) {
 		WebArtifactEdit web = null;
 		try {
@@ -197,7 +218,7 @@ public class JSFFacetInstallDelegate implements IDelegate {
 			}
 		}
 	}
-	
+	*/
 	private IPath resolveConfigPath(IProject project, String jsfConfigPath) {
 		// TODO: fix me
 		WebArtifactEdit web = null;
@@ -214,6 +235,5 @@ public class JSFFacetInstallDelegate implements IDelegate {
 				web.dispose();
 		}
 	}
-
-
+	
 }

@@ -22,6 +22,8 @@ import java.util.List;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.jst.j2ee.common.CommonFactory;
 import org.eclipse.jst.j2ee.common.ParamValue;
 import org.eclipse.jst.j2ee.web.componentcore.util.WebArtifactEdit;
@@ -34,6 +36,8 @@ import org.eclipse.jst.j2ee.webapplication.WebApp;
 import org.eclipse.jst.j2ee.webapplication.WebapplicationFactory;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.Messages;
+import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.ArchiveFile;
+import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
 
 /**
@@ -47,6 +51,17 @@ public class JSFUtils {
 	public static final String JSF_CONFIG_CONTEXT_PARAM = "javax.faces.CONFIG_FILES"; //$NON-NLS-1$
 	public static final String JSF_DEFAULT_CONFIG_PATH = "/WEB-INF/faces-config.xml"; //$NON-NLS-1$
 
+	public static final String PP_JSF_FACET_INSTALLED = "is.jsf.project";
+	public static final String PP_JSF_DEPLOY_ME = "deploy.jsf.libraries";
+	public static final String PP_JSF_IMPL_LIB = "jsf.impl.lib";
+	public static final String PP_JSF_NONIMPL_LIB = "jsf.nonimpl.lib";
+	public static final String PP_JSF_AVAIL_COMP_LIB = "jsf.comp.lib.avail";
+	public static final String PP_JSF_SEL_COMP_LIB = "jsf.comp.lib.selected";
+	
+	public static final String PP_JSF_IMPLEMENTATION_LIBRARIES = "jsf.implementation.libraries";
+	public static final String PP_JSF_COMPONENT_LIBRARIES = "jsf.component.libraries";
+	
+	
 	/**
 	 * Convenience method for getting writeable WebApp model
 	 * @param IProject
@@ -311,4 +326,16 @@ public class JSFUtils {
 		}
 	}
 
+	public static IPath[] getJARPathforJSFLib(JSFLibrary jsfLib) {		
+		EList archiveFiles = jsfLib.getArchiveFiles();
+		int numJars = archiveFiles.size();
+		String name = null;		
+		IPath[] elements = new IPath[numJars];				
+		for (int i= 0; i < numJars; i++) {
+			name = ((ArchiveFile)archiveFiles.get(i)).getName();
+			elements[i] = new Path(((ArchiveFile)archiveFiles.get(i)).getPath() + IPath.SEPARATOR + name).makeAbsolute();	
+		}			
+		return elements;
+	}		
+	
 }

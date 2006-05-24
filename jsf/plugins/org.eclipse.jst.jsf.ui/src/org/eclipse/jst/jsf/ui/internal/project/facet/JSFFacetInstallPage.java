@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResourceChangeEvent;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.EList;
@@ -39,6 +42,9 @@ import org.eclipse.jst.jsf.core.internal.project.facet.IJSFFacetInstallDataModel
 import org.eclipse.jst.jsf.ui.internal.JSFUiPlugin;
 import org.eclipse.jst.jsf.ui.internal.Messages;
 import org.eclipse.jst.jsf.ui.internal.classpath.JSFLibraryWizard;
+import org.eclipse.jst.jsf.ui.internal.jsflibraryconfig.IJSFImplLibraryCreationListener;
+import org.eclipse.jst.jsf.ui.internal.jsflibraryconfig.JSFLibraryConfigControl;
+import org.eclipse.jst.jsf.ui.internal.jsflibraryconfig.JSFImplLibraryCreationEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -70,9 +76,9 @@ import org.eclipse.wst.common.project.facet.ui.IWizardContext;
 public class JSFFacetInstallPage extends DataModelWizardPage implements IJSFFacetInstallDataModelProperties, IFacetWizardPage {
 	// UI
 	private Label lblJSFImpl;
-	private ComboViewer cboJSFImplViewer;
-	private Button chkDeployImpl;
-	private Button btnAddJSFImpl;
+	//private ComboViewer cboJSFImplViewer;
+	//private Button chkDeployImpl;
+	//private Button btnAddJSFImpl;
 	private Label lblJSFConfig;
 	private Text txtJSFConfig;
 	private Label lblJSFServletName;
@@ -92,6 +98,10 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements IJSFFace
 	private static final String SETTINGS_URL_PATTERN = "pattern"; //$NON-NLS-1$
 	private static final String SETTINGS_DEPLOY_IMPL = "deployImplementation"; //$NON-NLS-1$
 
+	private JSFLibraryConfigControl jsfLibCfgComp = null;
+	private String projectName = null;
+	private Composite composite = null;	
+	
 	/**
 	 * Zero argument constructor
 	 */
@@ -109,96 +119,48 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements IJSFFace
 	 */
 	protected Composite createTopLevelComposite (final Composite parent) {
 		initializeDialogUnits(parent);
-		final Composite composite = new Composite(parent, SWT.NONE);
-		composite.setLayout(new GridLayout(3, false));
+		composite = new Composite(parent, SWT.NONE);
+		final GridLayout jsfCompositeLayout = new GridLayout(3, false);
+		jsfCompositeLayout.marginLeft = 0;
+		composite.setLayout(jsfCompositeLayout);
 
-		lblJSFImpl = new Label(composite, SWT.None);
-		lblJSFImpl.setText(Messages.JSFFacetInstallPage_JSFImplLabel);
-		lblJSFImpl.setLayoutData(new GridData(GridData.BEGINNING));
-
-		cboJSFImplViewer = new ComboViewer(composite, SWT.BORDER | SWT.READ_ONLY);
-		cboJSFImplViewer.getCombo().setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		cboJSFImplViewer.setContentProvider(new IStructuredContentProvider(){
-			private java.util.List jsfImpls = new ArrayList(Collections.EMPTY_LIST);
-
-			public void dispose() {
-			}
-
-			public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
-				if (newInput == null)
-					jsfImpls = Collections.EMPTY_LIST;
-				else {
-					jsfImpls.clear();
-					jsfImpls.addAll((EList)newInput);
-				}
-			}			
-			public Object[] getElements(Object inputElement) {				
-				return jsfImpls.toArray(); 
-			}			
-		});
-		cboJSFImplViewer.setLabelProvider(new ILabelProvider(){
-			private JSFLibrary defaultImpl = null;
-
-			public String getText(Object element) {
-				if (element instanceof JSFLibrary){
-					StringBuffer nameBuf = new StringBuffer(((JSFLibrary)element).getName());
-					if (((JSFLibrary)element) == getDefaultImpl())
-						nameBuf.append(" ").append(JSFLibraryRegistry.DEFAULT_IMPL_LABEL); //$NON-NLS-1$
-					return nameBuf.toString() ;
-				}
-				return null;
-			}
-
-			private JSFLibrary getDefaultImpl() {
-				if (defaultImpl == null){
-					defaultImpl = JSFCorePlugin.getDefault().getJSFLibraryRegistry().getDefaultImplementation();
-				}
-				return defaultImpl;
-			}
-
-			public Image getImage(Object element) {return null;}
-			public void addListener(ILabelProviderListener listener) {}
-			public void dispose() {}
-			public boolean isLabelProperty(Object element, String property) {return false;}
-			public void removeListener(ILabelProviderListener listener) {}			
-		});
-
-		btnAddJSFImpl = new Button(composite, SWT.COMMAND);
-		btnAddJSFImpl.setText(Messages.JSFFacetInstallPage_Add1);
-		btnAddJSFImpl.setLayoutData(new GridData(GridData.END));
-		btnAddJSFImpl.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				JSFLibraryWizard wizard = new JSFLibraryWizard(true);
-				IWorkbench wb = PlatformUI.getWorkbench();
-				wizard.init(wb, null);
-				WizardDialog dialog = new WizardDialog(wb
-						.getActiveWorkbenchWindow().getShell(), wizard);
-				int ret = dialog.open();
-				if (ret == Window.OK) {
-					loadJSFImplList();
-					//select the new item
-					cboJSFImplViewer.setSelection(new StructuredSelection(wizard.getJSFLibrary()), true);
-//					addItemToList(wizard.getJSFLibrary().getName(), true);
+		lblJSFImpl = new Label(composite, SWT.None);		
+		lblJSFImpl.setLayoutData(new GridData(GridData.BEGINNING, GridData.BEGINNING, false, false));
+		//lblJSFImpl.setText(Messages.JSFFacetInstallPage_JSFImplLabel);
+		lblJSFImpl.setText(Messages.JSFFacetInstallPage_JSFLibraryLabel0);
+		
+		((GridLayout)composite.getLayout()).marginLeft = 0;		
+		IProject project = getProjectHandle();
+		jsfLibCfgComp = new JSFLibraryConfigControl(composite, SWT.NONE, project);
+		
+		// JC Test
+		   ResourcesPlugin.getWorkspace().addResourceChangeListener(jsfLibCfgComp,
+				      IResourceChangeEvent.PRE_CLOSE
+				      | IResourceChangeEvent.PRE_DELETE
+				      | IResourceChangeEvent.PRE_AUTO_BUILD
+				      | IResourceChangeEvent.POST_AUTO_BUILD
+				      | IResourceChangeEvent.POST_CHANGE);
+		// End of JC Test
+		
+		
+		jsfLibCfgComp.addOkClickedListener(new IJSFImplLibraryCreationListener() {
+			public void okClicked(JSFImplLibraryCreationEvent event) {
+				if (((JSFImplLibraryCreationEvent) event).isLibraryCreated()) {
 					validatePage();
-				}
-			}
+				}				
+			}			
 		});
-
-		Label lblSpacer = new Label(composite, SWT.NONE);
-		lblSpacer.setLayoutData(new GridData(GridData.BEGINNING));
-
-		chkDeployImpl = new Button(composite, SWT.CHECK);
-		chkDeployImpl.setText(Messages.JSFFacetInstallPage_DeployJarsLabel);
-		GridData gdd = new GridData(GridData.FILL_HORIZONTAL);
-		gdd.horizontalSpan = 2;
-		chkDeployImpl.setLayoutData(gdd);
+				
+		GridData gd_comp = new GridData(GridData.FILL, GridData.FILL, true, true);
+		gd_comp.horizontalSpan = 2;
+		((GridLayout)jsfLibCfgComp.getLayout()).marginLeft = 0;
+		jsfLibCfgComp.setLayoutData(gd_comp);
 
 		lblJSFConfig = new Label(composite, SWT.NONE);
 		lblJSFConfig.setText(Messages.JSFFacetInstallPage_JSFConfigLabel);
 		lblJSFConfig.setLayoutData(new GridData(GridData.BEGINNING));
 
 		txtJSFConfig = new Text(composite, SWT.BORDER);
-		// txtJSFConfig.setText(config.getDefaultJSFConfigPath());
 		GridData gd1 = new GridData(GridData.FILL_HORIZONTAL);
 		gd1.horizontalSpan = 2;
 		txtJSFConfig.setLayoutData(gd1);
@@ -208,7 +170,6 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements IJSFFace
 		lblJSFServletName.setLayoutData(new GridData(GridData.BEGINNING));
 
 		txtJSFServletName = new Text(composite, SWT.BORDER);
-		// txtJSFServletName.setText(config.getDefaultJSFServletName());
 		GridData gd2 = new GridData(GridData.FILL_HORIZONTAL);
 		gd2.horizontalSpan = 2;
 		txtJSFServletName.setLayoutData(gd2);
@@ -219,7 +180,7 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements IJSFFace
 				| GridData.VERTICAL_ALIGN_BEGINNING));
 		lstJSFServletURLPatterns = new List(composite, SWT.BORDER);
 		GridData gd3 = new GridData(GridData.FILL_HORIZONTAL);
-		gd3.heightHint = convertHeightInCharsToPixels(10);
+		gd3.heightHint = convertHeightInCharsToPixels(5);
 		lstJSFServletURLPatterns.setLayoutData(gd3);
 		lstJSFServletURLPatterns.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
@@ -227,7 +188,7 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements IJSFFace
 						.getSelectionCount() > 0);
 			}
 		});
-
+		
 		Composite btnComposite = new Composite(composite, SWT.NONE);
 		GridLayout gl = new GridLayout(1, false);
 		// gl.marginBottom = 0;
@@ -274,30 +235,16 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements IJSFFace
 			}
 		});
 
-		loadJSFImplList();
 		addModificationListeners();
-
+		
+		//parent.pack(true);  Resized to show all controls.		
+		this.getContainer().getShell().pack();
+		
 		return composite;
 	}
 
 	private void initializeValues() {
 		IDialogSettings root = dialogSettings.getSection(SETTINGS_ROOT);
-
-		JSFLibrary impl = (JSFLibrary)model.getDefaultProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION);
-		if (impl != null){
-			cboJSFImplViewer.setSelection(new StructuredSelection(impl), true);
-		} else {
-			cboJSFImplViewer.setSelection(StructuredSelection.EMPTY);
-		}
-
-		boolean deploy = ((Boolean)model.getDefaultProperty(IJSFFacetInstallDataModelProperties.DEPLOY_IMPLEMENTATION)).booleanValue();
-		String deployStr = null;
-		if (root != null)
-			deployStr = root.get(SETTINGS_DEPLOY_IMPL);
-		if (deployStr != null && !deployStr.equals("")) { //$NON-NLS-1$
-			deploy = Boolean.valueOf(deployStr).booleanValue();
-		}
-		chkDeployImpl.setSelection(deploy);
 
 		String conf = null;
 		if (root != null)
@@ -331,7 +278,10 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements IJSFFace
 	}
 
 	private boolean getDeployJSFImpl() {
-		return chkDeployImpl.getSelection();
+		if (jsfLibCfgComp.getSelectedJSFLibImplementation() == null) {
+			return false;
+		}
+		return jsfLibCfgComp.getSelectedJSFLibImplementation().checkForDeploy();
 	}
 
 	private String getJSFConfig() {
@@ -372,20 +322,26 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements IJSFFace
 //		config.setStringProperty(IJSFFacetInstallDataModelProperties.CONFIG_PATH, getJSFConfig());
 //		config.setStringProperty(IJSFFacetInstallDataModelProperties.SERVLET_NAME, getJSFServletName());
 //		config.setProperty(IJSFFacetInstallDataModelProperties.SERVLET_URL_PATTERNS, getJSFPatterns());
+		
+		java.util.List implLibs = new ArrayList(); 
+		implLibs.add(jsfLibCfgComp.getSelectedJSFLibImplementation());
+		java.util.List compLibs = jsfLibCfgComp.getSelectedJSFLibComponents();		
+		model.setProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION_LIBRARIES, implLibs);
+		model.setProperty(IJSFFacetInstallDataModelProperties.COMPONENT_LIBRARIES, compLibs);				
 	}
 
 	private void addModificationListeners() {
 //		119330 - enhancement request for ComboViewer support.  Manually update model for now
-		addJSFImplComboListeners();
+//		addJSFImplComboListeners();
 //		synchHelper.synchComboViewer(cboJSFImplViewer, IMPLEMENTATION, null);
 		synchHelper.synchText(txtJSFConfig, CONFIG_PATH, null);
 		synchHelper.synchText(txtJSFServletName, SERVLET_NAME, null);
-		synchHelper.synchCheckbox(chkDeployImpl, DEPLOY_IMPLEMENTATION, null);
+//		synchHelper.synchCheckbox(chkDeployImpl, DEPLOY_IMPLEMENTATION, null);
 //		Until 119321 is fixed, need to comment out below and handle model updates 'manually'.  
 //		This is being done on Add and Remove, currently
 //		synchHelper.synchList(lstJSFServletURLPatterns, SERVLET_URL_PATTERNS, null);
 	}
-
+/*
 	private void addJSFImplComboListeners() {
 		cboJSFImplViewer.addSelectionChangedListener(new ISelectionChangedListener(){
 			public void selectionChanged(SelectionChangedEvent event) {
@@ -401,7 +357,7 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements IJSFFace
 			}			
 		});
 	}
-
+*/
 	private String isValidPattern(String value) {
 		if (value == null || value.trim().equals(""))  //$NON-NLS-1$
 			return Messages.JSFFacetInstallPage_PatternEmptyMsg;
@@ -449,17 +405,19 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements IJSFFace
 	private void updateModelForURLPattern() {
 		model.setProperty(IJSFFacetInstallDataModelProperties.SERVLET_URL_PATTERNS, lstJSFServletURLPatterns.getItems());
 	}
-
+/*
 	private void loadJSFImplList() {
 		cboJSFImplViewer.setInput(JSFCorePlugin.getDefault().getJSFLibraryRegistry()
 			.getImplJSFLibraries());		
 	}
-
+*/
 	protected String[] getValidationPropertyNames() {
 		return new String[]{IMPLEMENTATION, DEPLOY_IMPLEMENTATION, CONFIG_PATH, SERVLET_NAME};
 	}
 
 	public void setWizardContext(IWizardContext context) {
+		projectName = context.getProjectName();
+		
 		//hook into web datamodel if new project wizard.
 		Iterator it = context.getSelectedProjectFacets().iterator();
 		IProjectFacetVersion webFacetVersion = null;
@@ -505,4 +463,11 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements IJSFFace
 	protected void restoreDefaultSettings() {
 		initializeValues();
 	}
+	
+	private IProject getProjectHandle() {
+		if (projectName != null) {
+			return ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
+		}
+		return null;
+	}	
 }

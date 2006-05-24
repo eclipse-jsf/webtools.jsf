@@ -29,4 +29,5 @@ Require-Bundle: org.eclipse.ui,
 Eclipse-LazyStart: true
 Export-Package: org.eclipse.jst.jsf.ui.internal;x-friends:="org.eclipse.jst.jsf.ui.tests",
  org.eclipse.jst.jsf.ui.internal.classpath;x-friends:="org.eclipse.jst.jsf.ui.tests",
+ org.eclipse.jst.jsf.ui.internal.jsflibraryconfig,
  org.eclipse.jst.jsf.ui.internal.project.facet;x-friends:="org.eclipse.jst.jsf.ui.tests"

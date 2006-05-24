@@ -10,6 +10,9 @@
  *******************************************************************************/ 
 package org.eclipse.jst.jsf.core.internal.project.facet;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.resources.IProject;
@@ -20,6 +23,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.jst.j2ee.web.componentcore.util.WebArtifactEdit;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.Messages;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryDecorator;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.wst.common.componentcore.datamodel.FacetInstallDataModelProvider;
@@ -48,6 +52,11 @@ public class JSFFacetInstallDataModelProvider extends
 		names.add(SERVLET_NAME);
 		names.add(SERVLET_URL_PATTERNS);
 		names.add(WEBCONTENT_DIR);
+		
+		names.add(IMPLEMENTATION_LIBRARIES);
+		names.add(COMPONENT_LIBRARIES);
+		names.add(DEFAULT_IMPLEMENTATION_LIBRARY);
+		
 		return names;
 	}
 
@@ -68,6 +77,12 @@ public class JSFFacetInstallDataModelProvider extends
 			return JSFCorePlugin.FACET_ID;
 		} else if (propertyName.equals(WEBCONTENT_DIR)){
 			return "WebContent";  //not sure I need this
+		} else if (propertyName.equals(COMPONENT_LIBRARIES)) {
+			return getDefaultJSFComponentLibraries();
+		} else if (propertyName.equals(IMPLEMENTATION_LIBRARIES)) {
+			return getDefaultJSFImplementationLibraries();
+		} else if (propertyName.equals(DEFAULT_IMPLEMENTATION_LIBRARY)) {
+			return getDefaultImplementationLibrary();
 		}
 		return super.getDefaultProperty(propertyName);
 	}
@@ -200,4 +215,40 @@ public class JSFFacetInstallDataModelProvider extends
 
 	}
 
+	
+	private List getDefaultJSFComponentLibraries() {
+		List list = new ArrayList();		
+		JSFLibraryDecorator prjJSFLib = null;
+		JSFLibrary jsfLib = null;
+		if (JSFCorePlugin.getDefault().getJSFLibraryRegistry() != null) {
+			Iterator it = JSFCorePlugin.getDefault().getJSFLibraryRegistry().getNonImplJSFLibraries().iterator();
+			boolean selected = false;	// not selected when project is created
+			while (it.hasNext()) {
+				jsfLib = (JSFLibrary)it.next(); 
+				prjJSFLib = new JSFLibraryDecorator(jsfLib, selected, jsfLib.isDeployed());
+			}
+		}
+		return list;
+	}	
+
+	private List getDefaultJSFImplementationLibraries() {	
+		List list = new ArrayList();		
+		JSFLibraryDecorator prjJSFLib = null;
+		JSFLibrary jsfLib = null;
+		if (JSFCorePlugin.getDefault().getJSFLibraryRegistry() != null) {
+			JSFCorePlugin.getDefault().getJSFLibraryRegistry().getDefaultImplementation();
+			prjJSFLib = new JSFLibraryDecorator(jsfLib, true, jsfLib.isDeployed());
+			list.add(prjJSFLib);			
+		}
+		return list;
+	}	
+	
+	private JSFLibraryDecorator getDefaultImplementationLibrary() {		
+		if (JSFCorePlugin.getDefault().getJSFLibraryRegistry() != null) {
+			JSFLibrary jsfLib = JSFCorePlugin.getDefault().getJSFLibraryRegistry().getDefaultImplementation();
+			return new JSFLibraryDecorator(jsfLib, true, jsfLib.isDeployed());	// default to be selected
+		}
+		return null;	
+	}	
+	
 }
