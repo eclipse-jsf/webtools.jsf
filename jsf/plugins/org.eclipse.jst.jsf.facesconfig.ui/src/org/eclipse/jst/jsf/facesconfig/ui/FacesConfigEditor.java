@@ -39,7 +39,6 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.command.BasicCommandStack;
 import org.eclipse.emf.common.notify.AdapterFactory;
-import org.eclipse.emf.common.ui.viewer.IViewerProvider;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -49,29 +48,20 @@ import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
 import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
-import org.eclipse.gef.EditDomain;
 import org.eclipse.gef.commands.CommandStack;
 import org.eclipse.gef.commands.CommandStackListener;
-import org.eclipse.gef.dnd.TemplateTransferDragSourceListener;
 import org.eclipse.gef.editparts.ZoomManager;
 import org.eclipse.gef.ui.actions.ActionRegistry;
 import org.eclipse.gef.ui.actions.EditorPartAction;
 import org.eclipse.gef.ui.actions.SaveAction;
 import org.eclipse.gef.ui.actions.UpdateAction;
-import org.eclipse.gef.ui.palette.PaletteViewer;
-import org.eclipse.gef.ui.palette.PaletteViewerProvider;
-import org.eclipse.gef.ui.views.palette.PalettePage;
-import org.eclipse.gef.ui.views.palette.PaletteViewerPage;
 import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.action.IMenuListener;
-import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jst.jsf.facesconfig.common.actions.IOpenPage;
 import org.eclipse.jst.jsf.facesconfig.edit.provider.FacesConfigItemProviderAdapterFactory;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
@@ -87,7 +77,6 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.command.DelegatingCommandStac
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.command.EMFCommandStackGEFAdapter;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.layout.PageflowLayoutManager;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.synchronization.FC2PFTransformer;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.FacesConfigModelAdapter;
 import org.eclipse.jst.jsf.facesconfig.ui.util.WebrootUtil;
 import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
 import org.eclipse.swt.custom.CTabFolder;
@@ -97,8 +86,6 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.IFileEditorInput;
-import org.eclipse.ui.IPartListener;
-import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
@@ -106,12 +93,11 @@ import org.eclipse.ui.dialogs.SaveAsDialog;
 import org.eclipse.ui.forms.editor.FormEditor;
 import org.eclipse.ui.forms.editor.FormPage;
 import org.eclipse.ui.forms.editor.IFormPage;
+import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.ide.IGotoMarker;
 import org.eclipse.ui.part.FileEditorInput;
-import org.eclipse.ui.views.contentoutline.ContentOutline;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
-import org.eclipse.ui.views.properties.PropertySheet;
 import org.eclipse.wst.common.ui.properties.internal.provisional.ITabbedPropertySheetPageContributor;
 import org.eclipse.wst.common.ui.properties.internal.provisional.TabbedPropertySheetPage;
 import org.eclipse.wst.sse.ui.StructuredTextEditor;
@@ -122,9 +108,8 @@ import org.eclipse.wst.sse.ui.StructuredTextEditor;
  * 
  */
 public class FacesConfigEditor extends FormEditor implements
-		IEditingDomainProvider, ISelectionProvider, IMenuListener,
-		IViewerProvider, IGotoMarker, ITabbedPropertySheetPageContributor,
-		IOpenPage {
+		IEditingDomainProvider, ISelectionProvider{
+
 	/**
 	 * editing domain that is used to track all changes to the model
 	 */
@@ -144,16 +129,14 @@ public class FacesConfigEditor extends FormEditor implements
 
 	private int othersPageID;
 
+	private int sourcePageId;
+
 	private FC2PFTransformer modelsTransform;
 
-	/** The pageflow viewer */
 	private PageflowEditor pageflowPage;
 
-	/**
-	 * model resource
-	 */
-	// private FacesConfigResourceImpl modelResource;
-	private IPropertySheetPage propertySheetPage;
+	/** The source text editor. */
+	private StructuredTextEditor sourcePage;
 
 	protected Collection selectionChangedListeners = new ArrayList();
 
@@ -165,10 +148,7 @@ public class FacesConfigEditor extends FormEditor implements
 
 	private IContentOutlinePage outlinePage;
 
-	/**
-	 * the index of source page.
-	 */
-	private int sourcePageId;
+	private IProject currentProject;
 
 	public FacesConfigEditor() {
 		initializeEMF();
@@ -247,43 +227,14 @@ public class FacesConfigEditor extends FormEditor implements
 						changedResources.addAll(visitor.getChangedResources());
 					}
 				} catch (CoreException exception) {
-					// TODO log it.
-					// FacesConfigEditorPlugin.INSTANCE.log(exception);
+					// log it.
+					EditorPlugin.getDefault().getLog().log(
+							new Status(IStatus.ERROR, EditorPlugin
+									.getPluginId(), IStatus.OK, exception
+									.getMessage() == null ? "" : exception
+									.getMessage(), exception));
 				}
 			}
-		}
-	};
-
-	protected IPartListener partListener = new IPartListener() {
-		public void partActivated(IWorkbenchPart p) {
-			if (p instanceof ContentOutline) {
-				// if (((ContentOutline)p).getCurrentPage() ==
-				// contentOutlinePage) {
-				// getActionBarContributor().setActiveEditor(FacesConfigEditor.this);
-				//
-				// setCurrentViewer(contentOutlineViewer);
-				// }
-			} else if (p instanceof PropertySheet) {
-				if (((PropertySheet) p).getCurrentPage() == propertySheetPage) {
-					getActionBarContributor().setActiveEditor(
-							FacesConfigEditor.this);
-					handleActivate();
-				}
-			} else if (p == FacesConfigEditor.this) {
-				handleActivate();
-			}
-		}
-
-		public void partBroughtToTop(IWorkbenchPart p) {
-		}
-
-		public void partClosed(IWorkbenchPart p) {
-		}
-
-		public void partDeactivated(IWorkbenchPart p) {
-		}
-
-		public void partOpened(IWorkbenchPart p) {
 		}
 	};
 
@@ -338,12 +289,6 @@ public class FacesConfigEditor extends FormEditor implements
 		// create the editing domain with a special command stack
 		editingDomain = new AdapterFactoryEditingDomain(adapterFactory,
 				commandStack, new HashMap());
-		// editingDomain.getResourceSet().getResourceFactoryRegistry()
-		// .getExtensionToFactoryMap().put(
-		// "xml", //$NON-NLS-1$
-		// new FacesConfigResourceFactory(
-		// EMF2DOMRendererFactoryDefaultHandler.INSTANCE
-		// .getDefaultRendererFactory()));
 	}
 
 	/*
@@ -363,21 +308,8 @@ public class FacesConfigEditor extends FormEditor implements
 			return;
 		}
 
-		// ensure the visibility of the palette view and property veiw.
-		// IWorkbenchWindow dw = PlatformUI.getWorkbench()
-		// .getActiveWorkbenchWindow();
-		// IWorkbenchPage page = dw.getActivePage();
-		// if (page != null) {
-		// page.showView("org.eclipse.gef.ui.palette_view");
-		// }
 		createActions();
 
-		// we want to listen for our own activation
-		// IWorkbenchWindow window = getSite().getWorkbenchWindow();
-		// window.getPartService().addPartListener(getPartListener());
-		// window.getShell().addShellListener(getPartListener());
-		// site.setSelectionProvider(this);
-		// site.getPage().addPartListener(partListener);
 		ResourcesPlugin.getWorkspace().addResourceChangeListener(
 				resourceChangeListener, IResourceChangeEvent.POST_CHANGE);
 	}
@@ -392,7 +324,6 @@ public class FacesConfigEditor extends FormEditor implements
 		if (inputFile != null) {
 			IProject project = inputFile.getProject();
 			IPath inputPath = inputFile.getFullPath();
-			// loadModel(inputPath, inputFile.isReadOnly());
 			loadModel(project, inputPath);
 		}
 	}
@@ -461,9 +392,6 @@ public class FacesConfigEditor extends FormEditor implements
 		pageflowPageID = addPage(pageflowPage, getEditorInput());
 		setPageText(pageflowPageID, "Navigation Rule");
 		addPageActionRegistry(pageflowPage);
-		getFacesConfigAdapter().setPageflowManager(
-				pageflowPage.getPageflowManager());
-		getFacesConfigAdapter().setFacesConfigEMFModel(getFacesConfig());
 		getModelsTransform().setFacesConfig(getFacesConfig());
 		getModelsTransform().setPageflow(pageflowPage.getPageflow());
 		boolean fornew = getModelsTransform().updatePageflowModelFromEMF();
@@ -515,29 +443,12 @@ public class FacesConfigEditor extends FormEditor implements
 		return actionRegistry;
 	}
 
-	/** the faces-config model adapter */
-	private FacesConfigModelAdapter facesConfigAdapter;
-
-	/**
-	 * get the faces config model and pageflow model 's adapter.
-	 * 
-	 * @return - <code>FacesConfigModelAdapter</code>
-	 */
-	private FacesConfigModelAdapter getFacesConfigAdapter() {
-		if (facesConfigAdapter == null) {
-			facesConfigAdapter = new FacesConfigModelAdapter();
-		}
-		return facesConfigAdapter;
-	}
-
-	// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 	/**
 	 * Returns the root object of the configuration model.
 	 * 
 	 * @return the root object
 	 */
 	public FacesConfigType getFacesConfig() {
-		// return modelResource.getFacesConfig();
 		FacesConfigType facesConfig = facesConfigAtrifactEdit.getFacesConfig();
 		return facesConfig;
 	}
@@ -551,42 +462,6 @@ public class FacesConfigEditor extends FormEditor implements
 				|| super.isDirty();
 	}
 
-	/** The source text editor. */
-	private StructuredTextEditor sourcePage;
-
-	/**
-	 * update the source editor to sychronize the saved pageflow.
-	 * 
-	 */
-	// private void updateSourcePageFromPageflow() {
-	// // System.out
-	// // .println("FacesConfigEditor: update source page from page flow");
-	// // InputStream inputStreamOfFacesConfig = null;
-	// // try {
-	// // ISourceEditingTextTools editingTools = (ISourceEditingTextTools)
-	// // sourcePage
-	// // .getAdapter(ISourceEditingTextTools.class);
-	// //
-	// // if (editingTools != null) {
-	// // inputStreamOfFacesConfig = new ByteArrayInputStream(
-	// // editingTools.getDocument().get().getBytes("UTF-8"));//$NON-NLS-1$
-	// // }
-	// //
-	// // } catch (UnsupportedEncodingException e) {
-	// // // PageflowEditor.Encoding.Unsupported = Unsupported Encoding.
-	// // // log.error("PageflowEditor.Encoding.Unsupported", e);
-	// // // //$NON-NLS-1$
-	// // }
-	// //
-	// // if (inputStreamOfFacesConfig == null) {
-	// // return;
-	// // }
-	// // UpdateFacesConfigCommand updateCommand = new
-	// // UpdateFacesConfigCommand(
-	// // getFacesConfigAdapter(), inputStreamOfFacesConfig);
-	// //
-	// // updateCommand.execute();
-	// }
 	/**
 	 * This class listens for command stack changes of the pages contained in
 	 * this editor and decides if the editor is dirty or not.
@@ -628,11 +503,7 @@ public class FacesConfigEditor extends FormEditor implements
 		 *            true or false
 		 */
 		private void setEditorDirty(IEditorPart editor, boolean dirty) {
-			if (editor != null) {
-				if (editor == pageflowPage) {
-					getFacesConfigAdapter().setPageflowDirty(dirty);
-				}
-			}
+
 		}
 
 		/** the list of action ids that are to CommandStack actions */
@@ -661,7 +532,6 @@ public class FacesConfigEditor extends FormEditor implements
 		public void commandStackChanged(EventObject event) {
 			// enable or disable the actions
 			updateActions(stackActionIDs);
-			getFacesConfigAdapter().setFacesConfigDirty(true);
 			if (((CommandStack) event.getSource()).isDirty()) {
 				// set the editor's model dirty status
 				setEditorDirty((IEditorPart) mapEditorCommandStack
@@ -733,34 +603,6 @@ public class FacesConfigEditor extends FormEditor implements
 		}
 	}
 
-	public String getContributorId() {
-		return EDITOR_ID;
-	}
-
-	// /**
-	// * Update the pageflow editor to sychronize with the source editor of
-	// * faces-config.
-	// *
-	// */
-	// public void updatePageflowPage(boolean addToCommandStack, boolean layout)
-	// {
-	// try {
-	//
-	// Assert
-	// .isTrue(getFacesConfigAdapter()
-	// .getPageflowFromFacesConfig() != null);
-	// } catch (IOException e) {
-	// // PageflowEditor.Transform.Error.GetPageflowFromFacesConfig =
-	// // Failed to get pageflow model from faces-config'a navigation rule.
-	// // log
-	// // .error(
-	// // "PageflowEditor.Transform.Error.GetPageflowFromFacesConfig",
-	// // e);//$NON-NLS-1$
-	// }
-	//
-	// getFacesConfigAdapter().setPageflowSynchronizeState(true);
-	// }
-
 	/** the <code>CommandStackListener</code> */
 	private MultiPageCommandStackListener multiPageCommandStackListener = null;
 
@@ -788,21 +630,6 @@ public class FacesConfigEditor extends FormEditor implements
 					// modelResource.save(Collections.EMPTY_MAP);
 					facesConfigAtrifactEdit.getDeploymentDescriptorResource()
 							.save(Collections.EMPTY_MAP);
-					// if (getActiveEditor() == sourcePage) {
-					// if (getFacesConfigAdapter().isFacesConfigDirty()) {
-					// // if the faces-config file is updated in the source
-					// // page,
-					// // the pageflow should be updated!
-					// updatePageflowPage(false, false);
-					// }
-					// }
-					// else if (getActiveEditor() == pageflowPage) {
-					// if (getFacesConfigAdapter().isPageflowDirty()) {
-					// // if the pageflow is modified in the pageflow page,
-					// // the source editor should be updated.
-					// updateSourcePageFromPageflow();
-					// }
-					// }
 					IFile file = ((IFileEditorInput) getEditorInput())
 							.getFile();
 					pageflowPage.doSave(file, monitor);
@@ -875,47 +702,19 @@ public class FacesConfigEditor extends FormEditor implements
 		return true;
 	}
 
-	/** the delegating PaletteViewPage */
-	private PaletteViewerPage paletteViewerPage = null;
-
-	/**
-	 * Returns the <code>DelegatingPaletteViewPage</code> for this editor.
-	 * 
-	 * @return - the <code>DelegatingPaletteViewPage</code>
-	 */
-	protected PaletteViewerPage getPaletteViewerPage() {
-		if (null == paletteViewerPage) {
-			if (pageflowPage != null) {
-				EditDomain domain = pageflowPage.getEditDomain();
-				PaletteViewerProvider pvProvider = new PaletteViewerProvider(
-						domain) {
-					/*
-					 * (non-Javadoc)
-					 * 
-					 * @see org.eclipse.gef.ui.palette.PaletteViewerProvider#configurePaletteViewer(org.eclipse.gef.ui.palette.PaletteViewer)
-					 */
-					protected void configurePaletteViewer(PaletteViewer viewer) {
-						super.configurePaletteViewer(viewer);
-
-						// enable the palette as source for drag operations
-						viewer
-								.addDragSourceListener(new TemplateTransferDragSourceListener(
-										viewer));
-					}
-				};
-				paletteViewerPage = new PaletteViewerPage(pvProvider);
-			}
-		}
-		return paletteViewerPage;
-	}
-
 	/**
 	 * Returns the <code>TabbedPropertySheetPage</code> for this editor.
 	 * 
 	 * @return - the <code>TabbedPropertySheetPage</code>
 	 */
 	protected IPropertySheetPage getPropertySheetPage() {
-		return new TabbedPropertySheetPage(this);
+		return new TabbedPropertySheetPage(
+				new ITabbedPropertySheetPageContributor() {
+
+					public String getContributorId() {
+						return EDITOR_ID;
+					}
+				});
 	}
 
 	/** the delegating ZoomManager */
@@ -997,18 +796,20 @@ public class FacesConfigEditor extends FormEditor implements
 		if (adapter == ZoomManager.class) {
 			return getDelegatingZoomManager();
 		}
-		if (adapter == PalettePage.class) {
-			return getPaletteViewerPage();
-		}
+
 		if (adapter == ActionRegistry.class) {
 			return getActionRegistry();
 		}
 		if (adapter == IGotoMarker.class) {
-			return getGotoMarker();
+			return new IGotoMarker() {
+				public void gotoMarker(IMarker marker) {
+					FacesConfigEditor.this.gotoMarker(marker);
+				}
+			};
 		}
-		// if (adapter == StructuredTextEditor.class) {
-		// return sourcePage;
-		// }
+		if (adapter == StructuredTextEditor.class) {
+			return sourcePage;
+		}
 
 		if (adapter == IContentOutlinePage.class) {
 			return getOutlinePage();
@@ -1025,18 +826,28 @@ public class FacesConfigEditor extends FormEditor implements
 		if (adapter == CTabFolder.class) {
 			return getContainer();
 		}
+
+		if (adapter == IOpenPage.class) {
+			return new IOpenPage() {
+
+				public void setActiveEditorPage(String pageID) {
+					FacesConfigEditor.this.setActiveEditorPage(pageID);
+
+				}
+			};
+		}
+
 		return super.getAdapter(adapter);
 	}
 
 	private EMFCommandStackGEFAdapter sourceCommandStack;
 
-	//
-	// /**
-	// * get or create the source page's GEF command stack based on its EMF
-	// * command stack.
-	// *
-	// * @return
-	// */
+	/**
+	 * get or create the source page's GEF command stack based on its EMF
+	 * command stack.
+	 * 
+	 * @return
+	 */
 	private CommandStack getSourcePageCommandStack() {
 		if (sourceCommandStack == null) {
 			sourceCommandStack = new EMFCommandStackGEFAdapter(
@@ -1073,20 +884,6 @@ public class FacesConfigEditor extends FormEditor implements
 		addEditorAction(new SaveAction(this));
 	}
 
-	/**
-	 * Updates the specified actions.
-	 * 
-	 * @param actionIds -
-	 *            the list of ids of actions to update
-	 */
-	private void updateActions(List actionIds) {
-		for (Iterator ids = actionIds.iterator(); ids.hasNext();) {
-			IAction action = getActionRegistry().getAction(ids.next());
-			if (null != action && action instanceof UpdateAction) {
-				((UpdateAction) action).update();
-			}
-		}
-	}
 
 	/**
 	 * Indicates that the current page has changed.
@@ -1102,23 +899,6 @@ public class FacesConfigEditor extends FormEditor implements
 
 		// update command stack
 		CommandStack cmdStack = null;
-
-		// if (activeEditor == this.overviewPage) {
-		// overviewPage.refreshAll();
-		// // }
-		// if (activeEditor == pageflowPage && _prevPart == sourcePage) {
-		// if (getFacesConfigAdapter().isFacesConfigDirty()) {
-		// // if the faces-config file is updated in the source page,
-		// // the pageflow editor and databinding page should be updated!
-		// updatePageflowPage(true, true);
-		// }
-		// } else if (activeEditor == sourcePage) {
-		// if (getFacesConfigAdapter().isPageflowDirty()) {
-		// // if the pageflow is modified in the pageflow page,
-		// // the source editor should be updated.
-		// updateSourcePageFromPageflow();
-		// }
-		// }
 
 		if (activeEditor == pageflowPage) {
 			cmdStack = (CommandStack) activeEditor
@@ -1153,7 +933,6 @@ public class FacesConfigEditor extends FormEditor implements
 			((FacesConfigEditorActionBarContributor) contributor)
 					.setActivePage(activeEditor);
 		}
-		// _prevPart = activeEditor;
 	}
 
 	/*
@@ -1168,79 +947,22 @@ public class FacesConfigEditor extends FormEditor implements
 		currentPageChanged();
 	}
 
-	/**
-	 * get the goto marker based on active editor
-	 * 
-	 * @return
-	 */
-	private IGotoMarker getGotoMarker() {
-		IGotoMarker gotoMarker = null;
-		setActivePage(sourcePageId);
-
-		IEditorPart activeEditor = getActiveEditor();
-
-		if (activeEditor != null) {
-			if (activeEditor instanceof IGotoMarker) {
-				gotoMarker = (IGotoMarker) activeEditor;
-			} else {
-				gotoMarker = (IGotoMarker) activeEditor
-						.getAdapter(IGotoMarker.class);
-			}
-		}
-		return gotoMarker;
-	}
-
-	/**
-	 * This accesses a cached version of the property sheet. <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	// public IPropertySheetPage getPropertySheetPage() {
-	// if (propertySheetPage == null) {
-	// propertySheetPage = new ExtendedPropertySheetPage(editingDomain) {
-	// public void setSelectionToViewer(List selection) {
-	// // FacesConfigEditor.this.setSelectionToViewer(selection);
-	// // FacesConfigEditor.this.setFocus();
-	// }
-	//
-	// public void setActionBars(IActionBars actionBars) {
-	// super.setActionBars(actionBars);
-	// getActionBarContributor().shareGlobalActions(this,
-	// actionBars);
-	// }
-	// };
-	// propertySheetPage
-	// .setPropertySourceProvider(new AdapterFactoryContentProvider(
-	// adapterFactory));
-	// }
-	//
-	// return propertySheetPage;
-	// }
 	public void dispose() {
 		if (facesConfigAtrifactEdit != null)
 			facesConfigAtrifactEdit.dispose();
-		super.dispose();
 
 		getModelsTransform().dispose();
 		ResourcesPlugin.getWorkspace().removeResourceChangeListener(
 				resourceChangeListener);
 
-		// getSite().getPage().removePartListener(partListener);
-
 		adapterFactory.dispose();
-
-		if (propertySheetPage != null) {
-			propertySheetPage.dispose();
-		}
 
 		if (this.outlinePage != null) {
 			outlinePage.dispose();
 		}
 
+		super.dispose();
 	}
-
-	private IProject currentProject;
 
 	/**
 	 * get the project of the faces config file that the editor is working on.
@@ -1299,20 +1021,9 @@ public class FacesConfigEditor extends FormEditor implements
 		}
 	}
 
-	public void menuAboutToShow(IMenuManager manager) {
-		((IMenuListener) getEditorSite().getActionBarContributor())
-				.menuAboutToShow(manager);
-	}
-
-	public Viewer getViewer() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public void gotoMarker(IMarker marker) {
-		// TODO Auto-generated method stub
-		// setActivePage(sourcePageId);
-		// IDE.gotoMarker(fTextEditor, marker);
+		setActivePage(sourcePageId);
+		IDE.gotoMarker(this.sourcePage, marker);
 	}
 
 	public FacesConfigActionBarContributor getActionBarContributor() {
@@ -1322,39 +1033,6 @@ public class FacesConfigEditor extends FormEditor implements
 
 	public IActionBars getActionBars() {
 		return getActionBarContributor().getActionBars();
-	}
-
-	/**
-	 * Handles activation of the editor or it's associated views.
-	 * 
-	 * @generated
-	 */
-	protected void handleActivate() {
-		// Recompute the read only state.
-		//
-		if (editingDomain.getResourceToReadOnlyMap() != null) {
-			editingDomain.getResourceToReadOnlyMap().clear();
-
-			// Refresh any actions that may become enabled or disabled.
-			//
-			setSelection(getSelection());
-		}
-
-		if (!removedResources.isEmpty()) {
-			if (handleDirtyConflict()) {
-				getSite().getPage().closeEditor(FacesConfigEditor.this, false);
-				FacesConfigEditor.this.dispose();
-			} else {
-				removedResources.clear();
-				changedResources.clear();
-				savedResources.clear();
-			}
-		} else if (!changedResources.isEmpty()) {
-			changedResources.removeAll(savedResources);
-			handleChangedResources();
-			changedResources.clear();
-			savedResources.clear();
-		}
 	}
 
 	/**
@@ -1387,8 +1065,11 @@ public class FacesConfigEditor extends FormEditor implements
 					try {
 						resource.load(Collections.EMPTY_MAP);
 					} catch (IOException exception) {
-						// TODO log it.
-						// FacesConfigEditorPlugin.INSTANCE.log(exception);
+						EditorPlugin.getDefault().getLog().log(
+								new Status(IStatus.ERROR, EditorPlugin
+										.getPluginId(), IStatus.OK, exception
+										.getMessage() == null ? "" : exception
+										.getMessage(), exception));
 					}
 				}
 			}
