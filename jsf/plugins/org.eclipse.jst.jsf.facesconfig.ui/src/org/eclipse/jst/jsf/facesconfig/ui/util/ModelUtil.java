@@ -11,9 +11,7 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.facesconfig.ui.util;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
-import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.jst.jsf.facesconfig.ui.IFacesConfigConstants;
 
 /**
@@ -21,15 +19,6 @@ import org.eclipse.jst.jsf.facesconfig.ui.IFacesConfigConstants;
  * @version
  */
 public class ModelUtil {
-	public static FacesConfigType getFacesConfigType(EObject obj) {
-		while (obj != null) {
-			if (obj instanceof FacesConfigType) {
-				return (FacesConfigType) obj;
-			}
-			obj = obj.eContainer();
-		}
-		return null;
-	}
 
 	/**
 	 * Get the super class's name of certain element. For example, a class for
