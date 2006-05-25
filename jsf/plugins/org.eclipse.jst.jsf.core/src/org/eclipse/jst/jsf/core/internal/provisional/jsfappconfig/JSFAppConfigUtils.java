@@ -158,7 +158,14 @@ public class JSFAppConfigUtils {
 		if (isValidJSFProject(project)) {
 			WebArtifactEdit webArtifactEdit = WebArtifactEdit.getWebArtifactEditForRead(project);
 			if (webArtifactEdit != null) {
-				WebApp webApp = webArtifactEdit.getWebApp();
+				WebApp webApp = null;
+				try {
+					webApp = webArtifactEdit.getWebApp();
+				} catch(ClassCastException cce) {
+					//occasionally thrown from WTP code in RC3 and possibly later
+					JSFCorePlugin.log(IStatus.ERROR, cce.getLocalizedMessage(), cce);
+					return filesList;
+				}
 				if (webApp != null) {
 					String filesString = null;
 					//need to branch here due to model version differences (BugZilla #119442)
