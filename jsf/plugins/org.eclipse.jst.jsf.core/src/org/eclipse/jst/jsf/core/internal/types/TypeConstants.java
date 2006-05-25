@@ -69,4 +69,8 @@ public class TypeConstants
      * Collection type
      */
     public final static String   TYPE_COLLECTION = "Ljava.util.Collection;";
+    /**
+     * Comparable type
+     */
+    public final static String   TYPE_COMPARABLE = "Ljava.lang.Comparable;";
 }

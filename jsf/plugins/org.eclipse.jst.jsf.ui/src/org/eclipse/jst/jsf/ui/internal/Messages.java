@@ -98,7 +98,21 @@ public class Messages extends NLS {
 	public static String JSFLibraryWizard_ValidateNoLibraryName;
 	public static String JSFLibraryWizard_ValidateExistingLibraryName;
 
-	static {
+    /**
+     * Title set on the el validation preference panel
+     */
+    public static String JSFValidationPreferencePage_ELPrefPanel_Title;
+    /**
+     * Title set on the checkbox that enables/disables build validation for EL
+     */
+    public static String JSFValidationPreferencePage_ELPrefPanel_BuildValidationCheckBoxTitle;
+    /**
+     * Title set on the checkbox that enables/disables incremental (as you type)
+     * validation for EL
+     */
+    public static String JSFValidationPreferencePage_ELPrefPanel_IncrementalValidationCheckBoxTitle;
+
+    static {
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
 	}
 }

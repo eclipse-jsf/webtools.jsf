@@ -14,4 +14,9 @@ public interface SignatureBasedType
      * @return the signature string
      */
     public String getSignature();
+    
+    /**
+     * @return a version of the this type in CompositeType form
+     */
+    public CompositeType toCompositeType();
 }

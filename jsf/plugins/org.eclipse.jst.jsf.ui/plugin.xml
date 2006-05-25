@@ -25,6 +25,11 @@
            class="org.eclipse.jst.jsf.ui.internal.classpath.JSFLibrariesPreferencePage"
            id="org.eclipse.jst.jsf.ui.jsfLibraryPage"
            name="JSF Libraries"/>
+     <page
+           category="org.eclipse.wst.sse.ui.internal.provisional.preferences"
+           class="org.eclipse.jst.jsf.ui.internal.validation.JSFValidationPreferencePage"
+           id="org.eclipse.jst.jsf.ui.JSFValidationPage"
+           name="JSF Validation"/>
   </extension>
   <extension
         point="org.eclipse.ui.newWizards">
