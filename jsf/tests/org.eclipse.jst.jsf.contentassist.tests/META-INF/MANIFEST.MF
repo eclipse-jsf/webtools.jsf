@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.eclipse.jst.jsf.contentassist Tests Plug-in
+Bundle-SymbolicName: org.eclipse.jst.jsf.contentassist.tests
+Bundle-Version: 1.0.0
+Bundle-Activator: org.eclipse.jst.jsf.contentassist.tests.Activator
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.junit
+Eclipse-LazyStart: true
