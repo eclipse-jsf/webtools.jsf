@@ -86,24 +86,19 @@ public class JSFLibraryDecorator extends JSFLibraryImpl {
 		return this.getID() + sptr + String.valueOf(this.isSelected()) + sptr + String.valueOf(this.checkForDeploy()); 
 	}
 
-	@Override
 	public String getID() {
 		return jsfLib.getID();
 	}
 
-	@Override
 	public String getName() {
 		return jsfLib.getName();
 	}
 
-	@Override
 	public boolean isImplementation() {
 		return jsfLib.isImplementation();
 	}
 
-	@Override
 	public EList getArchiveFiles() {
-		// TODO Auto-generated method stub
 		return jsfLib.getArchiveFiles();
 	}
 	
