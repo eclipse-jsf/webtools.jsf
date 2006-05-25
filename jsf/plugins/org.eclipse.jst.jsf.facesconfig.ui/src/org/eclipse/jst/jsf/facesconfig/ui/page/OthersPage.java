@@ -21,6 +21,7 @@ import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
+import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage;
@@ -72,7 +73,7 @@ import org.eclipse.ui.views.properties.IPropertySheetPage;
  * This class is the "Others" page.
  */
 public class OthersPage extends FormPage implements IFacesConfigPage,
-		ISelectionProvider, ISelectionChangedListener {
+		ISelectionProvider, ISelectionChangedListener, IEditingDomainProvider {
 
 	public static final String PAGE_ID = "org.eclipse.jst.jsf.facesconfig.ui.page.OthersPage";
 
@@ -724,5 +725,12 @@ public class OthersPage extends FormPage implements IFacesConfigPage,
 				section.getTableViewer().setSelection(newselection);
 			}
 		}
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.emf.edit.domain.IEditingDomainProvider#getEditingDomain()
+	 */
+	public EditingDomain getEditingDomain() {
+		return ((FacesConfigEditor) getEditor()).getEditingDomain();
 	}
 }

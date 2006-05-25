@@ -1,7 +1,7 @@
 package org.eclipse.jst.jsf.facesconfig.ui;
 
+import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.edit.ui.action.EditingDomainActionBarContributor;
-import org.eclipse.jst.jsf.facesconfig.ui.page.FacesConfigMasterDetailPage;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.actions.ActionFactory;
@@ -34,13 +34,13 @@ public class MyEditingDomainActionContributor extends
 		// copyAction);
 		// actionBars.setGlobalActionHandler(ActionFactory.PASTE.getId(),
 		// pasteAction);
-		if (part instanceof FacesConfigMasterDetailPage) {
+		if (part instanceof IEditingDomainProvider) {
 			activate();
 		}
 	}
 
 	public void update() {
-		if (getActiveEditor() instanceof FacesConfigMasterDetailPage) {
+		if (getActiveEditor() instanceof IEditingDomainProvider) {
 			super.update();
 		}
 	}
