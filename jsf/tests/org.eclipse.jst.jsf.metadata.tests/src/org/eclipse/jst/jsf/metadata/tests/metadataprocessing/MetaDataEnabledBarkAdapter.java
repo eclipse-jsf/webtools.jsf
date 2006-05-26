@@ -2,11 +2,11 @@ package org.eclipse.jst.jsf.metadata.tests.metadataprocessing;
 
 import java.util.List;
 
+import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.CMAnnotationHelper;
 import org.eclipse.jst.jsf.metadata.tests.Activator;
 import org.eclipse.jst.jsf.metadata.tests.metadataprocessing.features.IBarker;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.AbstractMetaDataEnabledFeature;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IPossibleValues;
-import org.eclipse.wtp.jsf.contentmodel.annotation.internal.provisional.CMAnnotationHelper;
 
 /**
  * Test class implementing existing and new fetaure type for

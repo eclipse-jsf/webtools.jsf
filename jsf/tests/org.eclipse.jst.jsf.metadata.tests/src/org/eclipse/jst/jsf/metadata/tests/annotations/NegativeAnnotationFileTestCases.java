@@ -3,7 +3,7 @@ package org.eclipse.jst.jsf.metadata.tests.annotations;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
-import org.eclipse.wtp.jsf.contentmodel.annotation.internal.provisional.CMAnnotationHelper;
+import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.CMAnnotationHelper;
 
 /**
  * Intended to test system level setup problems

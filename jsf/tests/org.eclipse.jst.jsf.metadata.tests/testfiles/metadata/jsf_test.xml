@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <grammar-annotations
-	xmlns="http://org.eclipse.wtp.jsf.core/grammarAnnotationSchema"
+	xmlns="http://org.eclipse.jst.jsf.core/grammarAnnotationSchema"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://org.eclipse.wtp.jsf.core/grammarAnnotationSchema" >
+	xsi:schemaLocation="http://org.eclipse.jst.jsf.core/grammarAnnotationSchema" >
 	<cm-element name="validator">
 		<cm-attribute name="validatorId">
 			<property name="attr-val-content-assistant">

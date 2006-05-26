@@ -3,11 +3,11 @@ package org.eclipse.jst.jsf.metadataprocessingtests2;
 
 import java.util.List;
 
+import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.CMAnnotationHelper;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.AbstractMetaDataEnabledFeature;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.AbstractRootTypeDescriptor;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.IMetaDataEnabledFeature;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IPossibleValues;
-import org.eclipse.wtp.jsf.contentmodel.annotation.internal.provisional.CMAnnotationHelper;
 
 public class NoImplPossibleVals extends AbstractMetaDataEnabledFeature implements
 		IPossibleValues {

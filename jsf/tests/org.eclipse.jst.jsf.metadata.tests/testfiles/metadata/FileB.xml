@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <grammar-annotation 
-	xmlns="http://org.eclipse.wtp.jsf.core/grammarAnnotationSchema" 
+	xmlns="http://org.eclipse.jst.jsf.core/grammarAnnotationSchema" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	>
   <cm-element name="Foo">

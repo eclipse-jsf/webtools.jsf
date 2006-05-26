@@ -54,7 +54,7 @@
             class="org.eclipse.jst.jsf.metadata.tests.metadataprocessing.MetaDataEnabledBarkAdapter"
             typeid="org.eclipse.jst.jsf.metadata.tests.MyBooleanType"/>
       <MetaDataEnabledFeature
-            class="org.eclipse.wtp.jsf.core.tests.NoImplPossibleVals"
+            class="org.eclipse.jst.jsf.core.tests.NoImplPossibleVals"
             typeid="org.eclipse.jst.jsf.metadata.tests.NoImplType"/>
    </extension>
 </plugin>
