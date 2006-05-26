@@ -35,7 +35,7 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.adapter.MaintainDefa
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl.JSFLibraryRegistryPackageImpl;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.util.JSFLibraryRegistryResourceFactoryImpl;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.util.JSFLibraryRegistryResourceImpl;
-import org.eclipse.jst.jsf.core.jsflibraryregistry.PluginProvidedJSFLibraryCreationHelper;
+import org.eclipse.jst.jsf.core.internal.provisional.jsflibraryregistry.PluginProvidedJSFLibraryCreationHelper;
 import org.eclipse.wst.common.frameworks.internal.WTPPlugin;
 import org.osgi.framework.BundleContext;
 

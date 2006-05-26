@@ -8,7 +8,7 @@
  * Contributors:
  *    Gerry Kessler - initial API and implementation
  *******************************************************************************/ 
-package org.eclipse.jst.jsf.core.jsflibraryregistry;
+package org.eclipse.jst.jsf.core.internal.provisional.jsflibraryregistry;
 
 /**
  * Exception class thrown by PluginProvidedJSFLibraryCreationHelper.

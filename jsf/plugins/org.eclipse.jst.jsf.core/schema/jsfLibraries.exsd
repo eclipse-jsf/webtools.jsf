@@ -83,7 +83,7 @@
          <attribute name="archiveFilesDelegate" type="string" use="required">
             <annotation>
                <documentation>
-                  class that must extend org.eclipse.jst.jsf.core.jsflibraryregistry.JSFLibraryArchiveFilesDelegate to supply a collection of ArchiveFiles for the library
+                  class that must extend org.eclipse.jst.jsf.core.internal.provisional.jsflibraryregistry.JSFLibraryArchiveFilesDelegate to supply a collection of ArchiveFiles for the library
                </documentation>
                <appInfo>
                   <meta.attribute kind="java"/>
@@ -128,7 +128,7 @@
          <meta.section type="apiInfo"/>
       </appInfo>
       <documentation>
-         Value of the attribute class must be a fully qualified name of a Java class that extends the abstract class &lt;code&gt;org.eclipse.jst.jsf.core.jsflibraryregistry.JSFLibraryArchiveFilesDelegate&lt;/code&gt; and has a public 0-arg constructor.
+         Value of the attribute class must be a fully qualified name of a Java class that extends the abstract class &lt;code&gt;org.eclipse.jst.jsf.core.internal.provisional.jsflibraryregistry.JSFLibraryArchiveFilesDelegate&lt;/code&gt; and has a public 0-arg constructor.
       </documentation>
    </annotation>
 
