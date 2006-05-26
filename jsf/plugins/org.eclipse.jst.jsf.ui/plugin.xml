@@ -2,22 +2,6 @@
 <?eclipse version="3.0"?>
 <plugin>
   <!-- JSF Project Facet --> 
-  <extension point="org.eclipse.wst.common.project.facet.ui.wizard">
-  
-    <wizard-pages facet="jst.jsf" version="1.1">
-      <install>
-        <config class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallConfig"/>
-        <page   class="org.eclipse.jst.jsf.ui.internal.project.facet.JSFFacetInstallPage"/>
-      </install>
-    </wizard-pages>
-
-    <wizard-pages facet="jst.jsf" version="1.2">
-      <install>
-        <config class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallConfig"/>
-        <page   class="org.eclipse.jst.jsf.ui.internal.project.facet.JSFFacetInstallPage"/>
-      </install>
-    </wizard-pages>
-  </extension>
   <extension
         point="org.eclipse.ui.preferencePages">
      <page
@@ -58,5 +42,14 @@
               name="nature"
               value="org.eclipse.wst.common.project.facet.core.nature"/>
      </page>
+  </extension>
+  <extension 
+        point="org.eclipse.wst.common.project.facet.ui.wizardPages">
+     <wizard-pages action="jst.jsf.v11.install">
+        <page class="org.eclipse.jst.jsf.ui.internal.project.facet.JSFFacetInstallPage"/>
+     </wizard-pages>
+     <wizard-pages action="jst.jsf.v12.install">
+        <page class="org.eclipse.jst.jsf.ui.internal.project.facet.JSFFacetInstallPage"/>
+     </wizard-pages>
   </extension>  
 </plugin>

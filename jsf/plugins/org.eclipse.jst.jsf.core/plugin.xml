@@ -14,6 +14,16 @@
     </project-facet>
 
     <project-facet-version facet="jst.jsf" version="1.1">
+      <action type="install" id="jst.jsf.v11.install">
+        <delegate class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDelegate"/>
+        <config-factory class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDataModelProvider"/>
+      </action>    
+      <action
+            id="jst.jsf.v11.uninstall"
+            type="uninstall">
+	 	<delegate
+         class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetUninstallDelegate"/>
+ 	  </action>      
        <constraint>
         <and>
           <requires facet="jst.web" version="[2.3"/>
@@ -22,24 +32,22 @@
     </project-facet-version> 
     
     <project-facet-version facet="jst.jsf" version="1.2">
+	   	<action type="install" id="jst.jsf.v12.install">
+			<delegate
+	        class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDelegate"/>
+			<config-factory class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDataModelProvider"/>
+		</action>
+		<action type="uninstall" id="jst.jsf.v12.uninstall">
+		 	<delegate
+	         class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetUninstallDelegate"/>
+	 	</action>    
      <constraint>
         <and>
           <requires facet="jst.web" version="[2.4"/>
         </and>
       </constraint>
-    </project-facet-version>    
-
-   	<action type="install" facet="jst.jsf" version="1.1,1.2">
-		<delegate
-        class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDelegate"/>
-		<config-factory class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDataModelProvider"/>
-	</action>
-    
-	<action type="uninstall" facet="jst.jsf" version="1.1,1.2">
-	 	<delegate
-         class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetUninstallDelegate"/>
- 	</action>
- 	
+    </project-facet-version>        
+ 	 	
 	<preset id="preset.jst.jsf.v1_1">
 	    <label>JavaServer Faces v1.1 Project</label>
 	    <facet id="jst.java" version="1.4" />
