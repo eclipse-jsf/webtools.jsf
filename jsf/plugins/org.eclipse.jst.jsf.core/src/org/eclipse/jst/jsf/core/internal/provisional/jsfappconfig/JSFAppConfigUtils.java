@@ -36,6 +36,8 @@ import org.eclipse.jst.j2ee.web.componentcore.util.WebArtifactEdit;
 import org.eclipse.jst.j2ee.webapplication.ContextParam;
 import org.eclipse.jst.j2ee.webapplication.WebApp;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
+import org.eclipse.jst.jsf.core.internal.Messages;
+import org.eclipse.osgi.util.NLS;
 import org.eclipse.wst.common.componentcore.ComponentCore;
 import org.eclipse.wst.common.componentcore.resources.IVirtualComponent;
 import org.eclipse.wst.common.componentcore.resources.IVirtualFolder;
@@ -236,13 +238,24 @@ public class JSFAppConfigUtils {
 									libraryPath = workspaceRootPath.append(libraryPath);
 								}
 								String libraryPathString = libraryPath.toString();
-								JarFile jarFile = new JarFile(libraryPathString);
-								if (jarFile != null) {
-									JarEntry jarEntry = jarFile.getJarEntry(FACES_CONFIG_IN_JAR_PATH);
-									if (jarEntry != null) {
-										JARsList.add(libraryPathString);
+								JarFile jarFile = null;
+								try {
+									jarFile = new JarFile(libraryPathString);
+									if (jarFile != null) {
+										JarEntry jarEntry = jarFile.getJarEntry(FACES_CONFIG_IN_JAR_PATH);
+										if (jarEntry != null) {
+											JARsList.add(libraryPathString);
+										}
 									}
-									jarFile.close();
+								} catch(IOException ioe) {
+									JSFCorePlugin.log(
+											IStatus.ERROR,
+											NLS.bind(Messages.JSFAppConfigUtils_ErrorOpeningJarFile, libraryPathString),
+											ioe);
+								} finally {
+									if (jarFile != null) {
+										jarFile.close();
+									}
 								}
 							}
 						}
