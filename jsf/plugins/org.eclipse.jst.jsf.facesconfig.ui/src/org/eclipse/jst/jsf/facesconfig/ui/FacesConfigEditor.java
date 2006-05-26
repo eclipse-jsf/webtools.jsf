@@ -71,7 +71,6 @@ import org.eclipse.jst.jsf.facesconfig.ui.page.ManagedBeanPage;
 import org.eclipse.jst.jsf.facesconfig.ui.page.OthersPage;
 import org.eclipse.jst.jsf.facesconfig.ui.page.OverviewPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.DelegatingZoomManager;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.FacesConfigEditorActionBarContributor;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowEditor;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.command.DelegatingCommandStack;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.command.EMFCommandStackGEFAdapter;
@@ -929,8 +928,8 @@ public class FacesConfigEditor extends FormEditor implements
 		IEditorActionBarContributor contributor = getEditorSite()
 				.getActionBarContributor();
 		if (contributor != null
-				&& contributor instanceof FacesConfigEditorActionBarContributor) {
-			((FacesConfigEditorActionBarContributor) contributor)
+				&& contributor instanceof FacesConfigActionBarContributor) {
+			((FacesConfigActionBarContributor) contributor)
 					.setActivePage(activeEditor);
 		}
 	}
