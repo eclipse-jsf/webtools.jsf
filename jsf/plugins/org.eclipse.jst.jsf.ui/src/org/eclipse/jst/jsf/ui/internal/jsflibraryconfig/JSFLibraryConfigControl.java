@@ -150,7 +150,7 @@ public class JSFLibraryConfigControl extends Composite implements IResourceChang
 	 * Return a list of selected JSF Component Libraries.
 	 * Otherwise, return an empty list.
 	 * 
-	 * @return
+	 * @return a list of selected JSF Component Libraries
 	 */
 	public List getSelectedJSFLibComponents() {
 		
