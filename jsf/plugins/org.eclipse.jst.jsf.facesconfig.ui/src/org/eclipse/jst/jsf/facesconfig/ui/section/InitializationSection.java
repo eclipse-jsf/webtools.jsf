@@ -14,6 +14,7 @@ package org.eclipse.jst.jsf.facesconfig.ui.section;
 
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.edit.command.SetCommand;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.DialogField;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.IDialogFieldApplyListener;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.RadiosDialogField;
@@ -297,13 +298,16 @@ public class InitializationSection extends AbstractFacesConfigSection {
 
 		managedPropertyGroup = new ManagedPropertyEditGroup(this);
 		managedPropertyGroup.initialize();
-
+		managedPropertyGroup.addSelectionChangedListener(this);
+		
 		mapEntryGroup = new MapEntriesEditGroup(this);
 		mapEntryGroup.initialize();
-
+		mapEntryGroup.addSelectionChangedListener(this);
+		
 		listEntryGroup = new ListEntriesEditGroup(this);
 		listEntryGroup.initialize();
-
+		listEntryGroup.addSelectionChangedListener(this);
+		
 		propertySection = toolkit.createComposite(pageBook);
 		GridLayout gl = new GridLayout();
 		gl.horizontalSpacing = 0;
@@ -355,6 +359,14 @@ public class InitializationSection extends AbstractFacesConfigSection {
 	}
 
 	public void clearAll() {
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.jst.jsf.facesconfig.ui.section.AbstractFacesConfigSection#getSelection()
+	 */
+	public ISelection getSelection() {
+		// TODO Auto-generated method stub
+		return super.getSelection();
 	}
 
 }

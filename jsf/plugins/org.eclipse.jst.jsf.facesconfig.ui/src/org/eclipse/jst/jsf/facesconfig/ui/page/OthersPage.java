@@ -92,6 +92,8 @@ public class OthersPage extends FormPage implements IFacesConfigPage,
 
 	private IContentOutlinePage contentOutlinePage;
 
+	private ISelection currentSelection;
+
 	/**
 	 * Constructor of OthersPage;
 	 * 
@@ -440,9 +442,8 @@ public class OthersPage extends FormPage implements IFacesConfigPage,
 	}
 
 	public ISelection getSelection() {
-		OthersPageBaseSection section = getActiveSection();
-		if (section != null)
-			return section.getSelection();
+		if (currentSelection != null)
+			return currentSelection;
 
 		return StructuredSelection.EMPTY;
 	}
@@ -455,7 +456,7 @@ public class OthersPage extends FormPage implements IFacesConfigPage,
 	}
 
 	public void selectionChanged(SelectionChangedEvent event) {
-
+		currentSelection = event.getSelection();
 		if (event.getSource() instanceof OthersPageBaseSection) {
 			OthersPageBaseSection source = (OthersPageBaseSection) event
 					.getSource();
@@ -727,7 +728,9 @@ public class OthersPage extends FormPage implements IFacesConfigPage,
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.emf.edit.domain.IEditingDomainProvider#getEditingDomain()
 	 */
 	public EditingDomain getEditingDomain() {

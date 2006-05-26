@@ -12,6 +12,7 @@
 package org.eclipse.jst.jsf.facesconfig.ui.section;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.runtime.Assert;
@@ -26,7 +27,11 @@ import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.viewers.ColumnWeightData;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.Viewer;
@@ -65,7 +70,7 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
  * @version
  */
 public class ManagedPropertyEditGroup extends DialogFieldGroup implements
-		IDialogFieldGroup {
+		IDialogFieldGroup, ISelectionProvider, ISelectionChangedListener {
 
 	private TableViewer tableViewer;
 
@@ -78,6 +83,8 @@ public class ManagedPropertyEditGroup extends DialogFieldGroup implements
 	private ManagedBeanType managedBean;
 
 	private AbstractFacesConfigSection section;
+
+	private List selectionChangedListeners = new ArrayList();
 
 	/**
 	 * 
@@ -220,6 +227,8 @@ public class ManagedPropertyEditGroup extends DialogFieldGroup implements
 						.isInstance(element);
 			}
 		});
+		
+		tableViewer.addSelectionChangedListener(this);
 	}
 
 	/**
@@ -509,6 +518,63 @@ public class ManagedPropertyEditGroup extends DialogFieldGroup implements
 
 	public EditingDomain getEditingDomain() {
 		return section.getEditingDomain();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.jface.viewers.ISelectionProvider#addSelectionChangedListener(org.eclipse.jface.viewers.ISelectionChangedListener)
+	 */
+	public void addSelectionChangedListener(ISelectionChangedListener listener) {
+		// TODO Auto-generated method stub
+		selectionChangedListeners.add(listener);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.jface.viewers.ISelectionProvider#getSelection()
+	 */
+	public ISelection getSelection() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.jface.viewers.ISelectionProvider#removeSelectionChangedListener(org.eclipse.jface.viewers.ISelectionChangedListener)
+	 */
+	public void removeSelectionChangedListener(
+			ISelectionChangedListener listener) {
+		// TODO Auto-generated method stub
+		selectionChangedListeners.remove(listener);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.jface.viewers.ISelectionProvider#setSelection(org.eclipse.jface.viewers.ISelection)
+	 */
+	public void setSelection(ISelection selection) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.jface.viewers.ISelectionChangedListener#selectionChanged(org.eclipse.jface.viewers.SelectionChangedEvent)
+	 */
+	public void selectionChanged(SelectionChangedEvent event) {
+		// TODO Auto-generated method stub
+		for (Iterator listeners = selectionChangedListeners.iterator(); listeners
+				.hasNext();) {
+			ISelectionChangedListener listener = (ISelectionChangedListener) listeners
+					.next();
+			listener.selectionChanged(new SelectionChangedEvent(this, event
+					.getSelection()));
+		}
 	}
 
 }

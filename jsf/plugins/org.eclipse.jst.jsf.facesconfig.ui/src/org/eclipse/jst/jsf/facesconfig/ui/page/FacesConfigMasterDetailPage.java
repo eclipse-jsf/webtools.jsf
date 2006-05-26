@@ -28,6 +28,7 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor;
+import org.eclipse.jst.jsf.facesconfig.ui.page.detail.FacesConfigDetailsPage;
 import org.eclipse.jst.jsf.facesconfig.ui.section.FacesConfigMasterSection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
@@ -70,6 +71,8 @@ public abstract class FacesConfigMasterDetailPage extends FormPage implements
 	private List selectionChangedListeners = new ArrayList();
 
 	private IPropertySheetPage propertySheetPage;
+	
+	private ISelection currentSelection = null;
 
 	/**
 	 * 
@@ -238,6 +241,7 @@ public abstract class FacesConfigMasterDetailPage extends FormPage implements
 	 */
 	public void selectionChanged(SelectionChangedEvent event) {
 
+		currentSelection = event.getSelection();
 		if (event.getSource() instanceof FacesConfigMasterSection) {
 			FacesConfigMasterSection source = (FacesConfigMasterSection) event
 					.getSource();
@@ -249,6 +253,11 @@ public abstract class FacesConfigMasterDetailPage extends FormPage implements
 					((ISelectionChangedListener) selectionChangedListeners
 							.get(i)).selectionChanged(event);
 				}
+			}
+		} else if (event.getSource() instanceof FacesConfigDetailsPage) {
+			for (int i = 0, n = selectionChangedListeners.size(); i < n; i++) {
+				((ISelectionChangedListener) selectionChangedListeners.get(i))
+						.selectionChanged(event);
 			}
 		}
 	}
@@ -313,10 +322,8 @@ public abstract class FacesConfigMasterDetailPage extends FormPage implements
 	}
 
 	public ISelection getSelection() {
-		FacesConfigMasterSection section = getActiveSection();
-		if (section != null)
-			return section.getSelection();
-
+		if(currentSelection != null)
+			return currentSelection;
 		return StructuredSelection.EMPTY;
 
 	}

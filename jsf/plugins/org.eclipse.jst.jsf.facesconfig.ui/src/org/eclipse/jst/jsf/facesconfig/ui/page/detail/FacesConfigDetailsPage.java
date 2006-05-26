@@ -11,7 +11,14 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.facesconfig.ui.page.detail;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.ISelectionProvider;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jst.jsf.facesconfig.ui.page.FacesConfigMasterDetailPage;
 import org.eclipse.jst.jsf.facesconfig.ui.section.IFacesConfigSection;
@@ -31,11 +38,13 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
  * 
  */
 public abstract class FacesConfigDetailsPage extends AbstractFormPart implements
-		IDetailsPage {
+		IDetailsPage, ISelectionProvider, ISelectionChangedListener {
 
 	private FacesConfigMasterDetailPage page;
 
 	private IFacesConfigSection[] detailSections;
+
+	private List selectionChangedListeners = new ArrayList();
 
 	public FacesConfigDetailsPage(FacesConfigMasterDetailPage page) {
 		super();
@@ -65,6 +74,10 @@ public abstract class FacesConfigDetailsPage extends AbstractFormPart implements
 		if (detailSections != null) {
 			for (int i = 0, n = detailSections.length; i < n; i++) {
 				detailSections[i].initialize();
+				if (detailSections[i] instanceof ISelectionProvider) {
+					((ISelectionProvider) detailSections[i])
+							.addSelectionChangedListener(this);
+				}
 			}
 		}
 	}
@@ -78,8 +91,9 @@ public abstract class FacesConfigDetailsPage extends AbstractFormPart implements
 	 * @param page
 	 * @return
 	 */
-	abstract protected IFacesConfigSection[] createDetailSections(Composite composite,
-			IManagedForm managedForm, FormToolkit toolkit, FacesConfigMasterDetailPage page);
+	abstract protected IFacesConfigSection[] createDetailSections(
+			Composite composite, IManagedForm managedForm, FormToolkit toolkit,
+			FacesConfigMasterDetailPage page);
 
 	/**
 	 * 
@@ -108,4 +122,62 @@ public abstract class FacesConfigDetailsPage extends AbstractFormPart implements
 			}
 		}
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.jface.viewers.ISelectionChangedListener#selectionChanged(org.eclipse.jface.viewers.SelectionChangedEvent)
+	 */
+	public void selectionChanged(SelectionChangedEvent event) {
+		for (Iterator listeners = selectionChangedListeners.iterator(); listeners
+				.hasNext();) {
+			ISelectionChangedListener listener = (ISelectionChangedListener) listeners
+					.next();
+			listener.selectionChanged(new SelectionChangedEvent(this, event
+					.getSelection()));
+		}
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.jface.viewers.ISelectionProvider#addSelectionChangedListener(org.eclipse.jface.viewers.ISelectionChangedListener)
+	 */
+	public void addSelectionChangedListener(ISelectionChangedListener listener) {
+		// TODO Auto-generated method stub
+		selectionChangedListeners.add(listener);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.jface.viewers.ISelectionProvider#getSelection()
+	 */
+	public ISelection getSelection() {
+		// TODO Auto-generated method stub
+		return StructuredSelection.EMPTY;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.jface.viewers.ISelectionProvider#removeSelectionChangedListener(org.eclipse.jface.viewers.ISelectionChangedListener)
+	 */
+	public void removeSelectionChangedListener(
+			ISelectionChangedListener listener) {
+		// TODO Auto-generated method stub
+		selectionChangedListeners.remove(listener);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.jface.viewers.ISelectionProvider#setSelection(org.eclipse.jface.viewers.ISelection)
+	 */
+	public void setSelection(ISelection selection) {
+		// TODO Auto-generated method stub
+
+	}
+
 }

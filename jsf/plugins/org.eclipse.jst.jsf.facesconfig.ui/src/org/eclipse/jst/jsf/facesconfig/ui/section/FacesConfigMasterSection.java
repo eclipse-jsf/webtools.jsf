@@ -22,10 +22,7 @@ import org.eclipse.emf.edit.command.RemoveCommand;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.ISelectionChangedListener;
-import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.jface.viewers.TableViewer;
@@ -47,14 +44,11 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
  * @author sfshi
  * 
  */
-public class FacesConfigMasterSection extends AbstractFacesConfigSection implements
-		ISelectionChangedListener, ISelectionProvider {
+public class FacesConfigMasterSection extends AbstractFacesConfigSection {
 
 	private StructuredViewer structuredViewer;
 
 	protected Button removeButton;
-
-	protected List selectionChangedListeners = new ArrayList();
 
 	/**
 	 * 
@@ -66,8 +60,8 @@ public class FacesConfigMasterSection extends AbstractFacesConfigSection impleme
 	 * @param helpTooltip
 	 */
 	public FacesConfigMasterSection(Composite parent, IManagedForm managedForm,
-			FormToolkit toolkit, FacesConfigMasterDetailPage page, String helpContextId,
-			String helpTooltip) {
+			FormToolkit toolkit, FacesConfigMasterDetailPage page,
+			String helpContextId, String helpTooltip) {
 		super(parent, managedForm, page, toolkit, helpContextId, helpTooltip);
 	}
 
@@ -142,8 +136,8 @@ public class FacesConfigMasterSection extends AbstractFacesConfigSection impleme
 
 		operationContainer.setLayout(layout);
 
-		Button addButton = toolkit.createButton(operationContainer, NewEditorResourcesNLS.UI_Button_Add,
-				SWT.PUSH);
+		Button addButton = toolkit.createButton(operationContainer,
+				NewEditorResourcesNLS.UI_Button_Add, SWT.PUSH);
 		gd = new GridData(GridData.FILL_HORIZONTAL
 				| GridData.VERTICAL_ALIGN_BEGINNING);
 		gd.grabExcessHorizontalSpace = false;
@@ -155,8 +149,8 @@ public class FacesConfigMasterSection extends AbstractFacesConfigSection impleme
 			}
 		});
 
-		removeButton = toolkit.createButton(operationContainer, NewEditorResourcesNLS.UI_Button_Remove,
-				SWT.PUSH);
+		removeButton = toolkit.createButton(operationContainer,
+				NewEditorResourcesNLS.UI_Button_Remove, SWT.PUSH);
 
 		gd = new GridData(GridData.FILL_HORIZONTAL
 				| GridData.VERTICAL_ALIGN_BEGINNING);
@@ -193,7 +187,8 @@ public class FacesConfigMasterSection extends AbstractFacesConfigSection impleme
 			List commands = new ArrayList(ssel.size());
 			for (Iterator iter = ssel.iterator(); iter.hasNext();) {
 				EObject element = (EObject) iter.next();
-				Command command = RemoveCommand.create(getEditingDomain(),  element);
+				Command command = RemoveCommand.create(getEditingDomain(),
+						element);
 				commands.add(command);
 			}
 
@@ -202,7 +197,7 @@ public class FacesConfigMasterSection extends AbstractFacesConfigSection impleme
 				getEditingDomain().getCommandStack().execute(command);
 			}
 		}
-	
+
 	}
 
 	/**
@@ -219,25 +214,8 @@ public class FacesConfigMasterSection extends AbstractFacesConfigSection impleme
 	/**
 	 * 
 	 */
-	public void addSelectionChangedListener(ISelectionChangedListener listener) {
-		selectionChangedListeners.add(listener);
-
-	}
-
-	/**
-	 * 
-	 */
 	public ISelection getSelection() {
 		return structuredViewer.getSelection();
-	}
-
-	/**
-	 * 
-	 */
-	public void removeSelectionChangedListener(
-			ISelectionChangedListener listener) {
-
-		selectionChangedListeners.remove(listener);
 	}
 
 	/**
@@ -286,18 +264,6 @@ public class FacesConfigMasterSection extends AbstractFacesConfigSection impleme
 		structuredViewer.setInput(input);
 	}
 
-	public void selectionChanged(SelectionChangedEvent event) {
-		for (Iterator listeners = selectionChangedListeners.iterator(); listeners
-				.hasNext();) {
-			ISelectionChangedListener listener = (ISelectionChangedListener) listeners
-					.next();
-			listener.selectionChanged(new SelectionChangedEvent(this,
-					getSelection()));
-		}
-		updateButtons();
-
-	}
-
 	/**
 	 * 
 	 */
@@ -333,6 +299,7 @@ public class FacesConfigMasterSection extends AbstractFacesConfigSection impleme
 
 	/**
 	 * get the viewer.
+	 * 
 	 * @return
 	 */
 	public StructuredViewer getStructuredViewer() {

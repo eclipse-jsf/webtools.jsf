@@ -25,6 +25,7 @@ import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.viewers.ColumnWeightData;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
@@ -56,7 +57,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
-public class AttributeSection extends AbstractFacesConfigSection {
+public class AttributeSection extends AbstractFacesConfigSection  {
 
 	private static final int TABLE_DEFAULT_HEIGHT = 160;
 
@@ -64,7 +65,7 @@ public class AttributeSection extends AbstractFacesConfigSection {
 
 	private Button removeButton;
 
-	private Button editButton;
+	private Button editButton;	
 
 	/**
 	 * 
@@ -110,7 +111,7 @@ public class AttributeSection extends AbstractFacesConfigSection {
 
 		createTableSection(attributeSection, toolkit);
 		createButtonsSection(attributeSection, toolkit);
-
+		
 	}
 
 	/**
@@ -187,6 +188,8 @@ public class AttributeSection extends AbstractFacesConfigSection {
 						.isInstance(element);
 			}
 		});
+		
+		tableViewer.addSelectionChangedListener(this);
 	}
 
 	/**
@@ -489,5 +492,22 @@ public class AttributeSection extends AbstractFacesConfigSection {
 			refreshAll();
 		}
 
+	}
+
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.viewers.ISelectionProvider#getSelection()
+	 */
+	public ISelection getSelection() {
+		return tableViewer.getSelection();
+	}
+
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.viewers.ISelectionProvider#setSelection(org.eclipse.jface.viewers.ISelection)
+	 */
+	public void setSelection(ISelection selection) {
+
+		tableViewer.setSelection(selection);
 	}
 }

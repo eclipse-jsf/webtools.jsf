@@ -11,11 +11,20 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.facesconfig.ui.section;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.help.HelpSystem;
 import org.eclipse.help.IContext;
 import org.eclipse.help.IHelpResource;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.ISelectionProvider;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.page.IFacesConfigPage;
 import org.eclipse.swt.SWT;
@@ -41,7 +50,7 @@ import org.eclipse.ui.forms.widgets.Section;
  * @version 1.0
  */
 public abstract class AbstractFacesConfigSection extends SectionPart implements
-		IFacesConfigSection {
+		IFacesConfigSection, ISelectionProvider, ISelectionChangedListener {
 	/** tool kit */
 	private FormToolkit toolkit;
 
@@ -55,6 +64,8 @@ public abstract class AbstractFacesConfigSection extends SectionPart implements
 	private Object input = null;
 
 	private IFacesConfigPage page;
+
+	private List selectionChangedListeners = new ArrayList();
 
 	/** help image */
 	private final static Image HELP_IMAGE = EditorPlugin.getDefault().getImage(
@@ -198,6 +209,58 @@ public abstract class AbstractFacesConfigSection extends SectionPart implements
 	 */
 	public IFacesConfigPage getPage() {
 		return page;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.jface.viewers.ISelectionProvider#getSelection()
+	 */
+	public ISelection getSelection() {
+		return StructuredSelection.EMPTY;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.jface.viewers.ISelectionProvider#setSelection(org.eclipse.jface.viewers.ISelection)
+	 */
+	public void setSelection(ISelection selection) {
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.jface.viewers.ISelectionProvider#addSelectionChangedListener(org.eclipse.jface.viewers.ISelectionChangedListener)
+	 */
+	public void addSelectionChangedListener(ISelectionChangedListener listener) {
+		selectionChangedListeners.add(listener);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.jface.viewers.ISelectionProvider#removeSelectionChangedListener(org.eclipse.jface.viewers.ISelectionChangedListener)
+	 */
+	public void removeSelectionChangedListener(
+			ISelectionChangedListener listener) {
+		selectionChangedListeners.remove(listener);
+	}
+
+	/**
+	 * transfer the selection changed event to detail part.
+	 */
+	public void selectionChanged(SelectionChangedEvent event) {
+
+		for (Iterator listeners = selectionChangedListeners.iterator(); listeners
+				.hasNext();) {
+			ISelectionChangedListener listener = (ISelectionChangedListener) listeners
+					.next();
+			listener.selectionChanged(new SelectionChangedEvent(this,
+					event != null ? event.getSelection()
+							: StructuredSelection.EMPTY));
+		}
 	}
 
 	/**

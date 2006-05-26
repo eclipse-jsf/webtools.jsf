@@ -22,13 +22,10 @@ import org.eclipse.emf.edit.command.RemoveCommand;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.ISelectionChangedListener;
-import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
-import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
 import org.eclipse.jst.jsf.facesconfig.ui.page.IFacesConfigPage;
 import org.eclipse.jst.jsf.facesconfig.ui.page.OthersPage;
@@ -49,14 +46,11 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 /**
  * The base class for the Sections in Others Page.
  */
-public abstract class OthersPageBaseSection extends AbstractFacesConfigSection
-		implements ISelectionProvider, ISelectionChangedListener {
+public abstract class OthersPageBaseSection extends AbstractFacesConfigSection {
 
 	protected TableViewer tableViewer;
 
 	protected Button removeButton;
-
-	private List selectionChangedListeners = new ArrayList();
 
 	/**
 	 * 
@@ -196,9 +190,6 @@ public abstract class OthersPageBaseSection extends AbstractFacesConfigSection
 		});
 	}
 
-	protected boolean isContainerObj() {
-		return getInput() instanceof FacesConfigType;
-	}
 
 	abstract void addButtonSelected(SelectionEvent e);
 
@@ -301,27 +292,8 @@ public abstract class OthersPageBaseSection extends AbstractFacesConfigSection
 
 	}
 
-	public void addSelectionChangedListener(ISelectionChangedListener listener) {
-		// TODO Auto-generated method stub
-
-		selectionChangedListeners.add(listener);
-	}
-
-	public void removeSelectionChangedListener(
-			ISelectionChangedListener listener) {
-		// TODO Auto-generated method stub
-
-		selectionChangedListeners.remove(listener);
-	}
-
 	public void selectionChanged(SelectionChangedEvent event) {
-		for (Iterator listeners = selectionChangedListeners.iterator(); listeners
-				.hasNext();) {
-			ISelectionChangedListener listener = (ISelectionChangedListener) listeners
-					.next();
-			listener.selectionChanged(new SelectionChangedEvent(this,
-					getSelection()));
-		}
+		super.selectionChanged(event);
 		updateButtons();
 	}
 }

@@ -18,6 +18,7 @@ import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -118,19 +119,25 @@ public class ComponentsPage extends FacesConfigMasterDetailPage {
 	 *            the eClass object of a component.
 	 */
 	public IDetailsPage getPage(Object key) {
+		IDetailsPage detailsPage = null;
 		if (key instanceof EClass) {
 			EClass eClass = (EClass) key;
 			if (eClass.getClassifierID() == FacesConfigPackage.COMPONENT_TYPE) {
-				return new ComponentDetailsPage(this);
+				detailsPage = new ComponentDetailsPage(this);
 			} else if (eClass.getClassifierID() == FacesConfigPackage.RENDER_KIT_TYPE) {
-				return new RenderkitDetailsPage(this);
+				detailsPage = new RenderkitDetailsPage(this);
 			} else if (eClass.getClassifierID() == FacesConfigPackage.CONVERTER_TYPE) {
-				return new ConverterDetailsPage(this);
+				detailsPage = new ConverterDetailsPage(this);
 			} else if (eClass.getClassifierID() == FacesConfigPackage.VALIDATOR_TYPE) {
-				return new ValidatorDetailsPage(this);
+				detailsPage = new ValidatorDetailsPage(this);
+			}
+
+			if (detailsPage instanceof ISelectionProvider) {
+				((ISelectionProvider) detailsPage)
+						.addSelectionChangedListener(this);
 			}
 		}
-		return null;
+		return detailsPage;
 	}
 
 	public Object getAdapter(Class adapter) {

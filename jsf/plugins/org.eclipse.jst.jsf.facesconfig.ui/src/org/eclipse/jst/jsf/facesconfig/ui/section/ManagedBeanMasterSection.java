@@ -23,7 +23,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.command.RemoveCommand;
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
@@ -196,21 +195,15 @@ public class ManagedBeanMasterSection extends FacesConfigMasterSection {
 	 * Override the super method to ignore the selection on ScopeTreeItem.
 	 */
 	public void selectionChanged(SelectionChangedEvent event) {
+
 		if (event != null
 				&& event.getSelection() != null
 				&& ((IStructuredSelection) event.getSelection())
 						.getFirstElement() instanceof ManagedBeanScopeTreeItem) {
 
-			updateButtons();
-			return;
+			event = new SelectionChangedEvent(this, StructuredSelection.EMPTY);
 		}
-		for (Iterator listeners = selectionChangedListeners.iterator(); listeners
-				.hasNext();) {
-			ISelectionChangedListener listener = (ISelectionChangedListener) listeners
-					.next();
-			listener.selectionChanged(new SelectionChangedEvent(this,
-					getSelection()));
-		}
+		super.selectionChanged(event);
 		updateButtons();
 
 	}

@@ -24,6 +24,7 @@ import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.viewers.ColumnWeightData;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
@@ -177,6 +178,8 @@ public class FacetSection extends AbstractFacesConfigSection {
 						element);
 			}
 		});
+		
+		tableViewer.addSelectionChangedListener(this);
 	}
 
 	/**
@@ -435,4 +438,19 @@ public class FacetSection extends AbstractFacesConfigSection {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.viewers.ISelectionProvider#getSelection()
+	 */
+	public ISelection getSelection() {
+		return tableViewer.getSelection();
+	}
+
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.viewers.ISelectionProvider#setSelection(org.eclipse.jface.viewers.ISelection)
+	 */
+	public void setSelection(ISelection selection) {
+
+		tableViewer.setSelection(selection);
+	}
 }
