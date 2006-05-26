@@ -1,7 +1,5 @@
 package org.eclipse.jst.jsf.metadata.tests.taglibprocessing;
 
-import java.util.List;
-
 import junit.framework.Assert;
 
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IPossibleValues;
