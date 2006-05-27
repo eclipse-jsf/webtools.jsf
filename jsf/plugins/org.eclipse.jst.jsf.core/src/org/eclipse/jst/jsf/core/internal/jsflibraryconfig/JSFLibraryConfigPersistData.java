@@ -62,7 +62,7 @@ public class JSFLibraryConfigPersistData {
 			if (JSFCorePlugin.getDefault().getJSFLibraryRegistry() != null) {
 				JSFLibrary jsfLib = JSFCorePlugin.getDefault().getJSFLibraryRegistry().getDefaultImplementation();
 				if (jsfLib != null) {
-					selJSFLibImpl = new JSFLibraryDecorator(jsfLib, true, jsfLib.isDeployed());
+					selJSFLibImpl = new JSFLibraryDecorator(jsfLib, true, true);
 				} 
 			} else {
 				JSFCorePlugin.getDefault().getMsgLogger().log(e);

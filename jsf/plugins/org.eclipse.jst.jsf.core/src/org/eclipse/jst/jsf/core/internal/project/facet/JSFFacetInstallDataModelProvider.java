@@ -225,7 +225,7 @@ public class JSFFacetInstallDataModelProvider extends
 			boolean selected = false;	// not selected when project is created
 			while (it.hasNext()) {
 				jsfLib = (JSFLibrary)it.next(); 
-				prjJSFLib = new JSFLibraryDecorator(jsfLib, selected, jsfLib.isDeployed());
+				prjJSFLib = new JSFLibraryDecorator(jsfLib, selected, true);
 			}
 		}
 		return list;
@@ -246,7 +246,7 @@ public class JSFFacetInstallDataModelProvider extends
 	private JSFLibraryDecorator getDefaultImplementationLibrary() {		
 		if (JSFCorePlugin.getDefault().getJSFLibraryRegistry() != null) {
 			JSFLibrary jsfLib = JSFCorePlugin.getDefault().getJSFLibraryRegistry().getDefaultImplementation();
-			return new JSFLibraryDecorator(jsfLib, true, jsfLib.isDeployed());	// default to be selected
+			return new JSFLibraryDecorator(jsfLib, true, true);	// default to be selected
 		}
 		return null;	
 	}	

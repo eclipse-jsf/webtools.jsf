@@ -153,7 +153,7 @@ public class JSFLibraryConfigModelAdapter {
 			if (selected && prjJSFLib != null) {
 				newPrjJSFLib = prjJSFLib;
 			} else {
-				newPrjJSFLib = new JSFLibraryDecorator(jsfLib, false, jsfLib.isDeployed());
+				newPrjJSFLib = new JSFLibraryDecorator(jsfLib, false, true);
 			}
 			list.add(newPrjJSFLib);			
 		}
