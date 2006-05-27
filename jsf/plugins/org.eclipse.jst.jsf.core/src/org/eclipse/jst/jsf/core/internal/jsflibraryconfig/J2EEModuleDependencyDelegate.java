@@ -103,7 +103,6 @@ public class J2EEModuleDependencyDelegate {
 	private void updateProjectDependency(IPath[] elems, boolean deployme, IProgressMonitor monitor) {
 		
 		ClassPathSelection selection = null;
-		
 		/**
 		 * For each JAR defined in a JSF Library, it is added as J2EE Module Dependency if 
 		 * the JSF Library is checked for deployment.  However, JARs are added into project build path 
@@ -123,7 +122,6 @@ public class J2EEModuleDependencyDelegate {
 					vlist.add(ref);
 				}		
 				
-				// Add the new reference but also check if it already exists
 				IVirtualReference ref = ComponentCore.createReference( 
 						model.getComponent(), 
 						archive, 
@@ -136,27 +134,29 @@ public class J2EEModuleDependencyDelegate {
 					refs[j] = tmpref;
 				}				
 				model.getComponent().setReferences(refs);
-			}
-			
-			// Added to project build path
-			ClasspathElement element = createClassPathElement(archive, archive.getName(), true);
-			if (selection == null) {
-				selection = createClassPathSelectionForExternalJar(element);
 			} else {
-				selection.getClasspathElements().add(element);
+				// added into the path selection to update build path later.			
+				ClasspathElement element = createClassPathElement(archive, archive.getName(), true);
+				if (selection == null) {
+					selection = createClassPathSelectionForExternalJar(element);
+				} else {
+					selection.getClasspathElements().add(element);
+				}
+				model.getClassPathSelectionForWLPs().getClasspathElements().add(element);
 			}
-			model.getClassPathSelectionForWLPs().getClasspathElements().add(element);
-			
 		}	// end For
 		
-		IRunnableWithProgress buildPathOP = createBuildPathOperationForExternalJar(selection);
-		try {
-			buildPathOP.run(monitor);	
-		} catch (InvocationTargetException e) {
-			JSFCorePlugin.getDefault().getMsgLogger().log(e);
-		} catch (InterruptedException e) {
-			JSFCorePlugin.getDefault().getMsgLogger().log(e);
-		}		
+		// Add JARs into build path for selected JSF libs checked for not deploy. 
+		if (selection != null) {
+			IRunnableWithProgress buildPathOP = createBuildPathOperationForExternalJar(selection);
+			try {
+				buildPathOP.run(monitor);	
+			} catch (InvocationTargetException e) {
+				JSFCorePlugin.getDefault().getMsgLogger().log(e);
+			} catch (InterruptedException e) {
+				JSFCorePlugin.getDefault().getMsgLogger().log(e);
+			}
+		}
 	}
 
 	/**
@@ -203,6 +203,7 @@ public class J2EEModuleDependencyDelegate {
 			selection.getClasspathElements().add(element);			
 			model.getClassPathSelectionForWLPs().getClasspathElements().remove(element);
 		}	// end for
+		
 		IRunnableWithProgress buildPathOP = createBuildPathOperationForExternalJar(selection);			
 		try {
 			buildPathOP.run(monitor);	

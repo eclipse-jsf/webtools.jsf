@@ -11,13 +11,16 @@
 package org.eclipse.jst.jsf.ui.internal.jsflibraryconfig;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.jface.dialogs.IMessageProvider;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.J2EEModuleDependencyDelegate;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfigModelAdapter;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryDecorator;
@@ -26,6 +29,9 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.dialogs.PropertyPage;
+import org.eclipse.wst.common.project.facet.core.IFacetedProject;
+import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
+import org.eclipse.wst.common.project.facet.core.ProjectFacetsManager;
 
 /**
  * @author Justin Chen - Oracle
@@ -56,7 +62,13 @@ public class JSFLibraryPropertyPage extends PropertyPage {
 	 * @see org.eclipse.jface.preference.PreferencePage#performOk()
 	 */
 	public boolean performOk() {
+
+		// Do nothing since because of invalid settings.
+		if (!validatePage()) {
+			return true;
+		}
 		
+		// Otheriwse, update project dependencies. 
 		List colImplLibs = new ArrayList();
 		colImplLibs.add(jsfLibCfgControl.getSelectedJSFLibImplementation());
 		List colCompLibs = jsfLibCfgControl.getSelectedJSFLibComponents();
@@ -71,17 +83,8 @@ public class JSFLibraryPropertyPage extends PropertyPage {
 		JSFLibraryDecorator newImplLib = jsfLibCfgControl.getSelectedJSFLibImplementation();
 		JSFLibraryDecorator preSelectedJSFImplLib = provider.getPreviousJSFImplementation(); 
 		if (preSelectedJSFImplLib != null) {
-			if (!newImplLib.getID().equals(preSelectedJSFImplLib.getID())) {
-				modulesDep.removeProjectDependency(preSelectedJSFImplLib.getLibrary(), monitor);
-				modulesDep.addProjectDependency(newImplLib.getLibrary(), newImplLib.checkForDeploy(), monitor);
-			} else {
-				if (newImplLib.checkForDeploy()) {
-					modulesDep.addProjectDependency(newImplLib.getLibrary(), newImplLib.checkForDeploy(), monitor);
-				} else {
-					modulesDep.removeProjectDependency(newImplLib.getLibrary(), monitor);
-					modulesDep.addLibraryToBuildPath(newImplLib, monitor);
-				}
-			}
+			modulesDep.removeProjectDependency(preSelectedJSFImplLib.getLibrary(), monitor);
+			modulesDep.addProjectDependency(newImplLib.getLibrary(), newImplLib.checkForDeploy(), monitor);
 		} else {
 			modulesDep.addProjectDependency(newImplLib.getLibrary(), newImplLib.checkForDeploy(), monitor);
 		}
@@ -96,15 +99,10 @@ public class JSFLibraryPropertyPage extends PropertyPage {
 		}
 		for (int i = 0; i < ComponentLibs.size(); i++) {
 			prjJSFCompLib = (JSFLibraryDecorator) ComponentLibs.get(i);
-			if (prjJSFCompLib.isSelected()) {
-				if (prjJSFCompLib.checkForDeploy()) {			
-					modulesDep.addProjectDependency(prjJSFCompLib.getLibrary(), prjJSFCompLib.checkForDeploy(), monitor);
-				} else {
-					modulesDep.addLibraryToBuildPath(prjJSFCompLib, monitor);
-				}
+			if (prjJSFCompLib.isSelected()) {			
+				modulesDep.addProjectDependency(prjJSFCompLib.getLibrary(), prjJSFCompLib.checkForDeploy(), monitor);
 			}
 		}
-
 		return true;
 	}	
 	
@@ -112,7 +110,7 @@ public class JSFLibraryPropertyPage extends PropertyPage {
 	 * @see org.eclipse.jface.preference.PreferencePage#createContents(org.eclipse.swt.widgets.Composite)
 	 */
 	protected Control createContents(Composite parent) {		
-		//if (isJSFFacetInstalled()) {
+		//if (isJSFFacetInstalled()) {			
 			return createForJSFProject(parent);
 		//} else {
 		//	return createForNonJSFProject(parent);
@@ -136,18 +134,36 @@ public class JSFLibraryPropertyPage extends PropertyPage {
 				      | IResourceChangeEvent.POST_CHANGE);		
 		 End of JC Test
 		 */
-		
-		setValid(jsfLibCfgControl.getSelectedJSFLibImplementation() != null);		
-		jsfLibCfgControl.addOkClickedListener(new IJSFImplLibraryCreationListener() {
+				
+		jsfLibCfgControl.addOkClickedListener(new IJSFImplLibraryCreationListener() {			
 			public void okClicked(JSFImplLibraryCreationEvent event) {
-				setValid(jsfLibCfgControl.getSelectedJSFLibImplementation() != null);				
+				validatePage();
+				/*setValid(jsfLibCfgControl.getSelectedJSFLibImplementation() != null && 
+						isJSFFacetInstalled());
+				*/
 			}
 		});		
-				
+		
+		validatePage();
+		
 		return jsfLibCfgControl;
 	}
 
-/**		
+	protected boolean validatePage() {
+		if (!isJSFFacetInstalled() || jsfLibCfgControl.getSelectedJSFLibImplementation() == null) {
+			if (!isJSFFacetInstalled()) {
+				JSFLibraryPropertyPage.this.setErrorMessage("JSF Facet not installed.");
+			} 
+			if (jsfLibCfgControl.getSelectedJSFLibImplementation() == null) {
+				JSFLibraryPropertyPage.this.setErrorMessage("No JSF implementation library selected.");
+			}
+			return false;
+		}/* else {
+			this.setMessage("Configurations are valid.", IMessageProvider.INFORMATION);
+		}*/
+		return true;
+	}
+	
 	private boolean isJSFFacetInstalled() {
 		if (project == null) {
 			return false;
@@ -173,13 +189,5 @@ public class JSFLibraryPropertyPage extends PropertyPage {
 		return false;
 
 	}
-
-	private Control createForNonJSFProject(Composite parent) {
-		Label label = new Label(parent, SWT.NULL);
-		label.setText("No JSF facet installed.  \n\nPlease add JavaServer Faces facet from Project Facets.");
-		
-		return label;
-	}
-*/	
 	
 }
