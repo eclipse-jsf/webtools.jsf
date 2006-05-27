@@ -29,6 +29,7 @@ import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.J2EEModuleDependencyDelegate;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfigModelAdapter;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryDecorator;
+import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
 import org.eclipse.wst.common.project.facet.core.IDelegate;
 import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
@@ -76,23 +77,28 @@ public class JSFFacetInstallDelegate implements IDelegate {
 			// Add JSF Impls to WEB-INF/lib
 			//deployJSFLibraries(project, config, monitor);
 			
-			// Update Model
+			// Update Model			
 			java.util.List implLibs = (List) config.getProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION_LIBRARIES);
 			java.util.List compLibs = (List) config.getProperty(IJSFFacetInstallDataModelProperties.COMPONENT_LIBRARIES);			
 			JSFLibraryConfigModelAdapter provider = new JSFLibraryConfigModelAdapter(project);
-			provider.saveData(implLibs, compLibs);
+			JSFLibraryDecorator preSelJSFImplLib = provider.getPreviousJSFImplementation();
 			
 			// Update J2EE Module dependency for deployment and add JARs into project build path.
 			J2EEModuleDependencyDelegate modulesDep = new J2EEModuleDependencyDelegate(project);
 			JSFLibraryDecorator selJSFImplLib = (JSFLibraryDecorator)implLibs.get(0);
+			if (preSelJSFImplLib != null) {
+				modulesDep.removeProjectDependency(preSelJSFImplLib.getLibrary(), monitor);
+			}
 			modulesDep.addProjectDependency(selJSFImplLib.getLibrary(), selJSFImplLib.checkForDeploy(), monitor);
 			JSFLibraryDecorator jsfLibItem;
 			for(int i = 0; i < compLibs.size(); i++) {
 				jsfLibItem = (JSFLibraryDecorator)compLibs.get(i);
 				if (jsfLibItem.isSelected()) {
 					modulesDep.addProjectDependency(jsfLibItem.getLibrary(), jsfLibItem.checkForDeploy(), monitor);
-				}				
-			}	
+				}
+			}			
+			// Update Model			
+			provider.saveData(implLibs, compLibs);			
 			
 			// Create config file
 			createConfigFile(project, fv, config, monitor);
@@ -182,8 +188,6 @@ public class JSFFacetInstallDelegate implements IDelegate {
 			else
 				JSFUtils.setupConfigFileContextParamForV2_4(webApp, config);
 			
-			
-
 		} finally {
 			if (artifactEdit != null) {
 				// save and dispose
