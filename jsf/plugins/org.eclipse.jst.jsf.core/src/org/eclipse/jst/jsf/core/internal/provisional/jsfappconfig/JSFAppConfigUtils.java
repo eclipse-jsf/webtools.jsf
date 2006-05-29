@@ -60,7 +60,8 @@ public class JSFAppConfigUtils {
 	public static final String CONFIG_FILES_CONTEXT_PARAM_NAME = "javax.faces.CONFIG_FILES";
 
 	/**
-	 * Location in JAR file of application configuration resource file. 
+	 * Location in JAR file of application configuration resource file
+	 * ("META-INF/faces-config.xml"). 
 	 */
 	public static final String FACES_CONFIG_IN_JAR_PATH = "META-INF/faces-config.xml";
 
