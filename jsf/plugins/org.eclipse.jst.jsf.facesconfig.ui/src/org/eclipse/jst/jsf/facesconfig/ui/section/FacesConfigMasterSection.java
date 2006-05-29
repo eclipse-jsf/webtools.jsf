@@ -23,6 +23,7 @@ import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.jface.viewers.TableViewer;
@@ -304,5 +305,14 @@ public class FacesConfigMasterSection extends AbstractFacesConfigSection {
 	 */
 	public StructuredViewer getStructuredViewer() {
 		return structuredViewer;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.jst.jsf.facesconfig.ui.section.AbstractFacesConfigSection#selectionChanged(org.eclipse.jface.viewers.SelectionChangedEvent)
+	 */
+	public void selectionChanged(SelectionChangedEvent event) {
+		// TODO Auto-generated method stub
+		super.selectionChanged(event);
+		updateButtons();
 	}
 }
