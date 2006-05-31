@@ -176,7 +176,9 @@ public class ListEntriesEditGroup extends DialogFieldGroup implements
 						EditingDomain editingDomain = section
 								.getEditingDomain();
 						Command cmd;
+						boolean isNew;
 						if (managedBean.getListEntries() == null) {
+							isNew = true;
 							ListEntriesType listEntries = FacesConfigFactory.eINSTANCE
 									.createListEntriesType();
 							listEntries.setValueClass(valueClass);
@@ -185,6 +187,7 @@ public class ListEntriesEditGroup extends DialogFieldGroup implements
 											.getManagedBeanType_ListEntries(),
 									listEntries);
 						} else {
+							isNew = false;
 							ListEntriesType listEntries = managedBean
 									.getListEntries();
 							cmd = SetCommand.create(editingDomain, listEntries,
@@ -195,6 +198,8 @@ public class ListEntriesEditGroup extends DialogFieldGroup implements
 
 						if (cmd.canExecute()) {
 							editingDomain.getCommandStack().execute(cmd);
+							if (isNew)
+								refreshAll();
 						}
 
 					}
@@ -518,9 +523,12 @@ public class ListEntriesEditGroup extends DialogFieldGroup implements
 	 * 
 	 */
 	public void refreshAll() {
-		if (managedBean.getListEntries().getValueClass() != null) {
-			this.valueClassField.setTextWithoutUpdate(managedBean.getListEntries()
-					.getValueClass().getTextContent());
+		if (managedBean.getListEntries() != null
+				&& managedBean.getListEntries().getValueClass() != null) {
+			this.valueClassField.setTextWithoutUpdate(managedBean
+					.getListEntries().getValueClass().getTextContent());
+		} else {
+			valueClassField.setTextWithoutUpdate(null);
 		}
 		tableViewer.setInput(((ManagedBeanType) getInput()).getListEntries());
 		updateButtons();

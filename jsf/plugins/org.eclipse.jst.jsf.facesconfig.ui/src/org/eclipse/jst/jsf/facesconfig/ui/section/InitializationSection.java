@@ -165,6 +165,7 @@ public class InitializationSection extends AbstractFacesConfigSection {
 			if (clearPage(IFacesConfigConstants.MAP_ENTRIES, bForceClearOthers)
 					&& clearPage(IFacesConfigConstants.LIST_ENTRIES,
 							bForceClearOthers)) {
+				managedPropertyGroup.refreshAll();
 				pageBook.showPage(propertySection);
 				// FIXME: there should be some other methods to resize the whole
 				// section.
@@ -177,6 +178,7 @@ public class InitializationSection extends AbstractFacesConfigSection {
 					bForceClearOthers)
 					&& clearPage(IFacesConfigConstants.LIST_ENTRIES,
 							bForceClearOthers)) {
+				mapEntryGroup.refreshAll();
 				pageBook.showPage(mapSection);
 				// FIXME: there should be some other methods to resize the whole
 				// section.
@@ -189,6 +191,7 @@ public class InitializationSection extends AbstractFacesConfigSection {
 					bForceClearOthers)
 					&& clearPage(IFacesConfigConstants.MAP_ENTRIES,
 							bForceClearOthers)) {
+				listEntryGroup.refreshAll();
 				pageBook.showPage(listSection);
 				// FIXME: there should be some other methods to resize the whole
 				// section.

@@ -179,7 +179,9 @@ public class MapEntriesEditGroup extends DialogFieldGroup implements
 						EditingDomain editingDomain = section
 								.getEditingDomain();
 						Command cmd;
+						boolean isNew;
 						if (managedBean.getMapEntries() == null) {
+							isNew = true;
 							MapEntriesType mapEntries = FacesConfigFactory.eINSTANCE
 									.createMapEntriesType();
 							mapEntries.setKeyClass(keyClass);
@@ -188,6 +190,7 @@ public class MapEntriesEditGroup extends DialogFieldGroup implements
 											.getManagedBeanType_MapEntries(),
 									mapEntries);
 						} else {
+							isNew = false;
 							cmd = SetCommand.create(editingDomain, managedBean
 									.getMapEntries(),
 									FacesConfigPackage.eINSTANCE
@@ -197,6 +200,8 @@ public class MapEntriesEditGroup extends DialogFieldGroup implements
 
 						if (cmd.canExecute()) {
 							editingDomain.getCommandStack().execute(cmd);
+							if (isNew)
+								refreshAll();
 						}
 
 					}
@@ -219,7 +224,9 @@ public class MapEntriesEditGroup extends DialogFieldGroup implements
 						EditingDomain editingDomain = section
 								.getEditingDomain();
 						Command cmd;
+						boolean isNew;
 						if (managedBean.getMapEntries() == null) {
+							isNew = true;
 							MapEntriesType mapEntries = FacesConfigFactory.eINSTANCE
 									.createMapEntriesType();
 							mapEntries.setValueClass(valueClass);
@@ -228,6 +235,7 @@ public class MapEntriesEditGroup extends DialogFieldGroup implements
 											.getManagedBeanType_MapEntries(),
 									mapEntries);
 						} else {
+							isNew = false;
 							cmd = SetCommand.create(editingDomain, managedBean
 									.getMapEntries(),
 									FacesConfigPackage.eINSTANCE
@@ -237,6 +245,8 @@ public class MapEntriesEditGroup extends DialogFieldGroup implements
 
 						if (cmd.canExecute()) {
 							editingDomain.getCommandStack().execute(cmd);
+							if (isNew)
+								refreshAll();
 						}
 
 					}
@@ -331,7 +341,7 @@ public class MapEntriesEditGroup extends DialogFieldGroup implements
 						.isInstance(element);
 			}
 		});
-		
+
 		tableViewer.addSelectionChangedListener(this);
 
 		Composite operationContainer = null;
@@ -579,7 +589,7 @@ public class MapEntriesEditGroup extends DialogFieldGroup implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.sybase.stf.jmt.editors.pageflow.managedbean.sections.wizards.IDialogFieldGroup#setInput(java.lang.Object)
+	 * @see org.eclipse.jst.jsf.facesconfig.ui.section.IDialogFieldGroup#setInput(java.lang.Object)
 	 */
 	public void setInput(Object newInput) {
 		if (newInput != null && newInput instanceof ManagedBeanType) {
@@ -589,19 +599,23 @@ public class MapEntriesEditGroup extends DialogFieldGroup implements
 		}
 	}
 
-	/**
-	 * 
-	 */
 	public void refreshAll() {
-		if (managedBean.getMapEntries().getKeyClass() != null) {
+		if (managedBean.getMapEntries() != null
+				&& managedBean.getMapEntries().getKeyClass() != null) {
 			this.keyClassField.setTextWithoutUpdate(managedBean.getMapEntries()
 					.getKeyClass().getTextContent());
+		} else {
+			this.keyClassField.setTextWithoutUpdate(null);
 		}
 
-		if (managedBean.getMapEntries().getValueClass() != null) {
-			this.valueClassField.setTextWithoutUpdate(managedBean.getMapEntries()
-					.getValueClass().getTextContent());
+		if (managedBean.getMapEntries() != null
+				&& managedBean.getMapEntries().getValueClass() != null) {
+			this.valueClassField.setTextWithoutUpdate(managedBean
+					.getMapEntries().getValueClass().getTextContent());
+		} else {
+			this.valueClassField.setTextWithoutUpdate(null);
 		}
+
 		tableViewer.setInput(((ManagedBeanType) getInput()).getMapEntries());
 		updateButtons();
 	}
