@@ -19,13 +19,19 @@ import java.util.Map;
 
 import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.draw2d.graph.DirectedGraph;
+import org.eclipse.draw2d.graph.DirectedGraphLayout;
+import org.eclipse.draw2d.graph.Edge;
+import org.eclipse.draw2d.graph.EdgeList;
+import org.eclipse.draw2d.graph.Node;
+import org.eclipse.draw2d.graph.NodeList;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowFactory;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowModelManager;
 
 /**
@@ -88,7 +94,7 @@ public class PageflowLayoutManager {
 		List lstGraph = createGraphs(pageflow);
 		for (Iterator iter = lstGraph.iterator(); iter.hasNext();) {
 			DirectedGraph graph = (DirectedGraph) iter.next();
-			new StraightLineLayout().visit(graph);
+			new DirectedGraphLayout().visit(graph);// .visit(graph);
 		}
 		updatePageflow(lstGraph);
 
@@ -251,7 +257,7 @@ public class PageflowLayoutManager {
 
 		if (pageflow != null) {
 			// Graph is not connected totally.
-			UnconnectedDirectedGraph graph = null;
+			DirectedGraph graph = null;
 			HashMap nodesMap = new HashMap();
 
 			NodeList nodes = new NodeList();
@@ -294,13 +300,14 @@ public class PageflowLayoutManager {
 				}
 			}
 
-			graph = new UnconnectedDirectedGraph();
+			graph = new DirectedGraph();
 
 			graph.nodes = nodes;
 			graph.edges = edges;
 
 			// get the connected subgraphs.
-			lstGraph = graph.getConnectedSubGraphs();
+			lstGraph = new ArrayList();
+			lstGraph.add(graph);// ..getConnectedSubGraphs();
 		}
 		return lstGraph;
 	}
@@ -391,7 +398,8 @@ public class PageflowLayoutManager {
 		for (Iterator iter = oldPageflow.getNodes().iterator(); iter.hasNext();) {
 			PageflowNode oldNode = (PageflowNode) iter.next();
 
-			if (oldNode instanceof PageflowPage && newNode instanceof PageflowPage) {
+			if (oldNode instanceof PageflowPage
+					&& newNode instanceof PageflowPage) {
 				if (((PageflowPage) oldNode).getPath().trim().equals(
 						((PageflowPage) newNode).getPath().trim())) {
 					updatePageflowNode(newNode, oldNode);
@@ -489,12 +497,17 @@ public class PageflowLayoutManager {
 		PageflowNode oldTarget = oldLink.getTarget();
 
 		// Page-Page
-		if (newSource instanceof PageflowPage && oldSource instanceof PageflowPage
-				&& newTarget instanceof PageflowPage && oldTarget instanceof PageflowPage) {
+		if (newSource instanceof PageflowPage
+				&& oldSource instanceof PageflowPage
+				&& newTarget instanceof PageflowPage
+				&& oldTarget instanceof PageflowPage) {
 			if (((PageflowPage) newSource).getPath().trim().equalsIgnoreCase(
 					((PageflowPage) oldSource).getPath().trim())
-					&& ((PageflowPage) newTarget).getPath().trim().equalsIgnoreCase(
-							((PageflowPage) oldTarget).getPath().trim())) {
+					&& ((PageflowPage) newTarget)
+							.getPath()
+							.trim()
+							.equalsIgnoreCase(
+									((PageflowPage) oldTarget).getPath().trim())) {
 				if ((newLink.getOutcome() == null && oldLink.getOutcome() == null)
 						|| (newLink.getOutcome() != null
 								&& oldLink.getOutcome() != null && newLink
@@ -521,8 +534,10 @@ public class PageflowLayoutManager {
 		newLink.getBendPoints().clear();
 
 		for (Iterator iter = link.getBendPoints().iterator(); iter.hasNext();) {
-			PageflowLinkBendpoint bendPoint = (PageflowLinkBendpoint) iter.next();
-			PageflowLinkBendpoint newBendPoint = factory.createPFLinkBendpoint();
+			PageflowLinkBendpoint bendPoint = (PageflowLinkBendpoint) iter
+					.next();
+			PageflowLinkBendpoint newBendPoint = factory
+					.createPFLinkBendpoint();
 			newBendPoint.setD1Height(bendPoint.getD1Height());
 			newBendPoint.setD1Width(bendPoint.getD1Width());
 			newBendPoint.setD2Height(bendPoint.getD2Height());
