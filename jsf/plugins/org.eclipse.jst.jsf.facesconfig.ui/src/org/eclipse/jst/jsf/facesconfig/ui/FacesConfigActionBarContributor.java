@@ -28,6 +28,11 @@ import org.eclipse.wst.sse.ui.StructuredTextEditor;
 import org.eclipse.wst.xml.ui.internal.tabletree.SourcePageActionContributor;
 
 /**
+ * The faces-config editor itself is composed by a set of pages. Each page has
+ * its own action contributor. This FacesConfigActionBarContributor will work as
+ * a proxy to delegate the action contributing to target nested action
+ * contributor.
+ * 
  * @author hmeng
  */
 
@@ -38,8 +43,6 @@ public class FacesConfigActionBarContributor extends
 	protected PageflowActionBarContributor pageflowActionContributor = null;
 
 	protected EditingDomainActionBarContributor formbasedPageActionContributor = null;
-
-	// private EditorActionBarContributor activeContributor;
 
 	private IEditorPart activeNestedEditor;
 
@@ -60,8 +63,7 @@ public class FacesConfigActionBarContributor extends
 				activeContributor.setActiveEditor(activeEditor);
 			else
 				super.setActiveEditor(activeEditor);
-			getActionBars().updateActionBars();
-			update();
+			updateActionBars();
 		}
 	}
 
@@ -176,9 +178,12 @@ public class FacesConfigActionBarContributor extends
 
 	}
 
-	public void update() {
+	public void updateActionBars() {
 		EditorActionBarContributor activeContributor = getActionContributor(activeNestedEditor);
 		if (activeContributor instanceof INestedActionContributor)
 			((INestedActionContributor) activeContributor).update();
+		// getActionBars().getMenuManager().removeAll();
+		// activeContributor.contributeToMenu(getActionBars().getMenuManager());
+		getActionBars().updateActionBars();
 	}
 }

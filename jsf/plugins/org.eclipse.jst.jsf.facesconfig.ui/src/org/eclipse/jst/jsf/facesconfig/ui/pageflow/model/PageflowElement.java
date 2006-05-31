@@ -276,6 +276,14 @@ public interface PageflowElement extends EObject {
 	void notifyModelChanged(Notification nofitification);
 
 	/**
+	 * When the model is modified, the adapters or reference elements should be
+	 * updated.
+	 * 
+	 * @generated NOT
+	 */
+	void update();
+
+	/**
 	 * @generated NOT
 	 */
 	void dispose();

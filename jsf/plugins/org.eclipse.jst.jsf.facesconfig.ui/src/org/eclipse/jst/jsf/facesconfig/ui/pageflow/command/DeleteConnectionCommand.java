@@ -14,16 +14,17 @@ public class DeleteConnectionCommand extends ConnectionCommand {
 
 	protected void doExecute() {
 		// It is a delete connection command
-		if (pageflowNode == null && target == null) {
+		if (link != null) {
 			link.setSource(null);
 			link.setTarget(null);
 			oldSource.getPageflow().getLinks().remove(link);
+			link.eAdapters().clear();
 		}
 	}
 
 	public void undo() {
 		// It is a delete connection command
-		if (canExecute() && pageflowNode == null && target == null) {
+		if (canExecute()) {
 			link.setSource(oldSource);
 			link.setTarget(oldTarget);
 			oldSource.getPageflow().getLinks().add(link);

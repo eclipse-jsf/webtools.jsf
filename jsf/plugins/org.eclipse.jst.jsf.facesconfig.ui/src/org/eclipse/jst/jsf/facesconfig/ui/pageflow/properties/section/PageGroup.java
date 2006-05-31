@@ -11,15 +11,19 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.section;
 
+import org.eclipse.core.resources.IProject;
+import org.eclipse.jface.window.Window;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.DialogField;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.IStringButtonAdapter;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.LayoutUtil;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.StringButtonDialogField;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.StringDialogField;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.ITabbedPropertiesConstants;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.ProjectWebPageSelectionDialog;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.PropertyMessages;
+import org.eclipse.jst.jsf.facesconfig.ui.util.WebrootUtil;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
@@ -48,33 +52,12 @@ public class PageGroup extends AbstractEditPartGroup {
 		 * @see org.eclipse.jst.jsf.facesconfig.ui.common.dialogfield.IStringButtonAdapter#changeControlPressed(org.eclipse.jst.jsf.facesconfig.ui.common.dialogfield.DialogField)
 		 */
 		public void changeControlPressed(DialogField field) {
-			// String jsfSelection = fromViewField.getText();
-			// Shell control = field.getLabelControl(null,null).getShell();
-			//
-			// IStructuredSelection selectionToPass = StructuredSelection.EMPTY;
-			// Create a new jsf Wizard
-			// TODO sfshi 11.14
-			/*
-			 * JSFFileSelectionWizard jsfSelectionWizard = new
-			 * JSFFileSelectionWizard();
-			 * jsfSelectionWizard.init(EditorPlugin.getDefault().getWorkbench(),
-			 * selectionToPass);
-			 * jsfSelectionWizard.setJSFSelection(jsfSelection); //using a
-			 * wizard dialog to display the new jsf wizard WizardDialog
-			 * jsfSelectionWizardDialog = new WizardDialog(control,
-			 * jsfSelectionWizard); if (jsfSelectionWizardDialog.open() ==
-			 * WizardDialog.OK) { String jsfNew =
-			 * jsfSelectionWizard.getJSFSelection(); if
-			 * (!jsfSelection.equalsIgnoreCase(jsfNew)) { if
-			 * (PageflowValidation.getInstance().isExistedPage(
-			 * _pfPage.getPageflow(), jsfNew)) {
-			 * //Pageflow.PageflowEditor.Alert.DNDResourceTitle = Pageflow
-			 * Creation Error //Pageflow.PageflowEditor.Alert.ExistingPage = The
-			 * web page {0} is already existed in current PageFlow.
-			 * EditorPlugin.getAlerts().error("Pageflow.PageflowEditor.Alert.DNDResourceTitle",
-			 * "Pageflow.PageflowEditor.Alert.ExistingPage", jsfNew); } else {
-			 * _fromViewField.setText(jsfNew); } } }
-			 */
+			IProject project = WebrootUtil.getProject(pfPage);
+			ProjectWebPageSelectionDialog dlg = new ProjectWebPageSelectionDialog(
+					field.getLabelControl(null, null).getShell(), project);
+			if (dlg.open() == Window.OK) {
+				fromViewField.setText(dlg.getResultFilePath());
+			}
 		}
 	}
 

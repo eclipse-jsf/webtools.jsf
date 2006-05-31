@@ -89,6 +89,7 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowEditPartsFac
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowNodeEditPart;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.synchronization.FC2PFTransformer;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.EditPartMarkerUtil;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowAnnotationUtil;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowModelManager;
@@ -170,7 +171,16 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 	/** the command stack of this page */
 	private CommandStack commandStack;
 
+	private FC2PFTransformer modelsTransform;
+
 	List stackActions = new ArrayList();
+
+	public FC2PFTransformer getModelsTransform() {
+		if (modelsTransform == null) {
+			modelsTransform = new FC2PFTransformer();
+		}
+		return modelsTransform;
+	}
 
 	public void updateActions() {
 		updateActions(stackActions);
@@ -590,6 +600,7 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 	 */
 	public void dispose() {
 		// remove selection change listener
+		getModelsTransform().dispose();
 		getSite().getWorkbenchWindow().getSelectionService()
 				.removeSelectionListener(getSelectionListener());
 

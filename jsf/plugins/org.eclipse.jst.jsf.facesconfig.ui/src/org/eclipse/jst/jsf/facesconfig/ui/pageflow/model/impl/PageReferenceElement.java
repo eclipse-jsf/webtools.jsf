@@ -35,8 +35,8 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.synchronization.FC2PFTransfor
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.synchronization.TransformUtil;
 
 /**
- * The reference element represents a mapping from pageflow page to one or more navigation
- * rules/cases's view IDs (fromViewID or toViewID).
+ * The reference element represents a mapping from pageflow page to one or more
+ * navigation rules/cases's view IDs (fromViewID or toViewID).
  * 
  * @author hmeng
  */

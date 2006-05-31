@@ -75,7 +75,6 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowEditor;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.command.DelegatingCommandStack;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.command.EMFCommandStackGEFAdapter;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.layout.PageflowLayoutManager;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.synchronization.FC2PFTransformer;
 import org.eclipse.jst.jsf.facesconfig.ui.util.WebrootUtil;
 import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
 import org.eclipse.swt.custom.CTabFolder;
@@ -107,7 +106,7 @@ import org.eclipse.wst.sse.ui.StructuredTextEditor;
  * 
  */
 public class FacesConfigEditor extends FormEditor implements
-		IEditingDomainProvider, ISelectionProvider{
+		IEditingDomainProvider, ISelectionProvider {
 
 	/**
 	 * editing domain that is used to track all changes to the model
@@ -129,8 +128,6 @@ public class FacesConfigEditor extends FormEditor implements
 	private int othersPageID;
 
 	private int sourcePageId;
-
-	private FC2PFTransformer modelsTransform;
 
 	private PageflowEditor pageflowPage;
 
@@ -279,7 +276,7 @@ public class FacesConfigEditor extends FormEditor implements
 								new Runnable() {
 									public void run() {
 										editorDirtyStateChanged();
-										getActionBarContributor().update();
+										getActionBarContributor().updateActionBars();
 									}
 								});
 					}
@@ -391,22 +388,21 @@ public class FacesConfigEditor extends FormEditor implements
 		pageflowPageID = addPage(pageflowPage, getEditorInput());
 		setPageText(pageflowPageID, "Navigation Rule");
 		addPageActionRegistry(pageflowPage);
-		getModelsTransform().setFacesConfig(getFacesConfig());
-		getModelsTransform().setPageflow(pageflowPage.getPageflow());
-		boolean fornew = getModelsTransform().updatePageflowModelFromEMF();
+		pageflowPage.getModelsTransform().setFacesConfig(getFacesConfig());
+		pageflowPage.getModelsTransform().setPageflow(
+				pageflowPage.getPageflow());
+		boolean fornew = pageflowPage.getModelsTransform()
+				.updatePageflowModelFromEMF();
 		pageflowPage.setGraphicalViewerContents(pageflowPage.getPageflow());
 		if (fornew) {
 			PageflowLayoutManager.getInstance().layoutPageflow(
 					pageflowPage.getPageflow());
 		}
-		getModelsTransform().setListenToNotify(true);
+		pageflowPage.getModelsTransform().setListenToNotify(true);
 	}
 
-	private FC2PFTransformer getModelsTransform() {
-		if (modelsTransform == null) {
-			modelsTransform = new FC2PFTransformer();
-		}
-		return modelsTransform;
+	public PageflowEditor getPageflowPage() {
+		return pageflowPage;
 	}
 
 	/**
@@ -883,7 +879,6 @@ public class FacesConfigEditor extends FormEditor implements
 		addEditorAction(new SaveAction(this));
 	}
 
-
 	/**
 	 * Indicates that the current page has changed.
 	 * <p>
@@ -949,8 +944,6 @@ public class FacesConfigEditor extends FormEditor implements
 	public void dispose() {
 		if (facesConfigAtrifactEdit != null)
 			facesConfigAtrifactEdit.dispose();
-
-		getModelsTransform().dispose();
 		ResourcesPlugin.getWorkspace().removeResourceChangeListener(
 				resourceChangeListener);
 

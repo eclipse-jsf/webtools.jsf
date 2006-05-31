@@ -11,12 +11,18 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.facesconfig.ui.pageflow.synchronization;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
+import org.eclipse.jst.jsf.facesconfig.emf.FromOutcomeType;
 import org.eclipse.jst.jsf.facesconfig.emf.NavigationCaseType;
 import org.eclipse.jst.jsf.facesconfig.emf.NavigationRuleType;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 
 /**
  * The util for pageflow and faces-config transforming
@@ -30,15 +36,8 @@ public class TransformUtil {
 	 * To see if the faces-config element is on a valid hirachy.
 	 */
 	public static boolean isValidFacesConfigElement(EObject object) {
-		boolean result = false;
-		EObject parent = object;
-		while ((parent != null)) {
-			if (parent instanceof FacesConfigType) {
-				result = true;
-				break;
-			}
-			parent = parent.eContainer();
-		}
+		EObject parent = EcoreUtil.getRootContainer(object);
+		boolean result = parent instanceof FacesConfigType;
 		return result;
 	}
 
@@ -46,15 +45,8 @@ public class TransformUtil {
 	 * To see if the pageflow element is on a valid hirachy.
 	 */
 	public static boolean isValidPageflowElement(EObject element) {
-		boolean result = false;
-		EObject parent = element;
-		while (parent != null) {
-			if (parent instanceof Pageflow) {
-				result = true;
-				break;
-			}
-			parent = parent.eContainer();
-		}
+		EObject root = EcoreUtil.getRootContainer(element);
+		boolean result = root instanceof Pageflow;
 		return result;
 	}
 
@@ -77,5 +69,36 @@ public class TransformUtil {
 			result = navCase.getToViewId().getTextContent();
 		}
 		return result;
+	}
+
+	public static PageflowPage findPage(String path, Pageflow pageflow) {
+		List nodes = pageflow.getNodes();
+		for (int i = 0; i < nodes.size(); i++) {
+			if (nodes.get(i) instanceof PageflowPage) {
+				if (path != null) {
+					if (path.equals(((PageflowPage) nodes.get(i)).getPath())) {
+						return (PageflowPage) nodes.get(i);
+					}
+				}
+			}
+		}
+		return null;
+	}
+
+	public static PageflowNode findCaseEnd(PageflowPage action,
+			FromOutcomeType outcome, Pageflow pageflow) {
+		// TODO: find a case end in pageflow model
+		List links = action.getOutlinks();
+		for (int i = 0; i < links.size(); i++) {
+			PageflowLink link = (PageflowLink) links.get(i);
+			String outcomeStr = "";
+			if (outcome != null) {
+				outcomeStr = outcome.getTextContent();
+			}
+			if (link.getOutcome().equals(outcomeStr)) {
+				return link.getTarget();
+			}
+		}
+		return null;
 	}
 }

@@ -497,8 +497,7 @@ public class PageflowLinkImpl extends PageflowElementImpl implements
 		case PageflowPackage.PF_LINK__FROMACTION:
 			return getFromaction();
 		}
-		return super.eGet(eFeature, resolve);// eDynamicGet(eFeature,
-		// resolve);
+		return super.eGet(eFeature, resolve);
 	}
 
 	/**
@@ -558,7 +557,7 @@ public class PageflowLinkImpl extends PageflowElementImpl implements
 			setFromaction((String) newValue);
 			return;
 		}
-		super.eSet(eFeature, newValue);// eDynamicSet(eFeature, newValue);
+		super.eSet(eFeature, newValue);
 	}
 
 	/**
@@ -617,7 +616,7 @@ public class PageflowLinkImpl extends PageflowElementImpl implements
 			setFromaction(FROMACTION_EDEFAULT);
 			return;
 		}
-		super.eUnset(eFeature);// eDynamicUnset(eFeature);
+		super.eUnset(eFeature);
 	}
 
 	/**
@@ -667,7 +666,7 @@ public class PageflowLinkImpl extends PageflowElementImpl implements
 			return FROMACTION_EDEFAULT == null ? getFromaction() != null
 					: !FROMACTION_EDEFAULT.equals(getFromaction());
 		}
-		return super.eIsSet(eFeature);// eDynamicIsSet(eFeature);
+		return super.eIsSet(eFeature);
 	}
 
 	/**

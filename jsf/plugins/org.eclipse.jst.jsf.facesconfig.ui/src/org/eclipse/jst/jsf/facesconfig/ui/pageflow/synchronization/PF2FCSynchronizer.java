@@ -119,9 +119,6 @@ public class PF2FCSynchronizer extends AdapterImpl {
 			case PageflowPackage.PAGEFLOW_NODE__INLINKS:
 				removeLink(notification, element);
 				break;
-			// case PageflowPackage.PAGEFLOW:
-			// updateAndNotify(notification);
-			// break;
 			}
 			if (!tranformer.isNeedBatchOperations()) {
 				updateAndNotify(notification);
@@ -202,7 +199,7 @@ public class PF2FCSynchronizer extends AdapterImpl {
 			if (caseFC != null)
 				tranformer.removeCase(caseFC);
 		}
-		link.getFCElements().update();
+		link.update();
 	}
 
 	private void updateAndNotify(Notification notification) {

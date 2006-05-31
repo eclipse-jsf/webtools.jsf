@@ -263,7 +263,7 @@ public abstract class PageflowNodeImpl extends PageflowElementImpl implements
 		case PageflowPackage.PAGEFLOW_NODE__INLINKS:
 			return getInlinks();
 		}
-		return super.eGet(eFeature, resolve);//eDynamicGet(eFeature, resolve);
+		return super.eGet(eFeature, resolve);
 	}
 
 	/**
@@ -306,7 +306,7 @@ public abstract class PageflowNodeImpl extends PageflowElementImpl implements
 			getInlinks().addAll((Collection) newValue);
 			return;
 		}
-		super.eSet(eFeature, newValue);//eDynamicSet(eFeature, newValue);
+		super.eSet(eFeature, newValue);
 	}
 
 	/**
@@ -347,7 +347,7 @@ public abstract class PageflowNodeImpl extends PageflowElementImpl implements
 			getInlinks().clear();
 			return;
 		}
-		super.eUnset(eFeature);//eDynamicUnset(eFeature);
+		super.eUnset(eFeature);
 	}
 
 	/**
@@ -381,7 +381,7 @@ public abstract class PageflowNodeImpl extends PageflowElementImpl implements
 		case PageflowPackage.PAGEFLOW_NODE__INLINKS:
 			return inlinks != null && !inlinks.isEmpty();
 		}
-		return super.eIsSet(eFeature);//eDynamicIsSet(eFeature);
+		return super.eIsSet(eFeature);
 	}
 
 }

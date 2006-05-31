@@ -12,7 +12,10 @@
 
 package org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties;
 
+import org.eclipse.core.resources.IProject;
+import org.eclipse.jface.window.Window;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
+import org.eclipse.jst.jsf.facesconfig.ui.util.WebrootUtil;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 
@@ -58,12 +61,15 @@ public class PagePathDialogCellEditor extends EditableDialogCellEditor {
 	 * @see DialogCellEditor#openDialogBox(Control)
 	 */
 	protected Object openDialogBox(Control cellEditorWindow) {
-		// FIXME: remove the get the project path and the webroot path later.
 		String jsfSelection = "";
 		if (getDefaultText() != null && getDefaultText().getText().length() > 0) {
 			jsfSelection = getDefaultText().getText();
-			// jsfSelection =
-			// PageflowModelManager.getProjectPath(getDefaultLabel().getText());
+			IProject project = WebrootUtil.getProject(element);
+			ProjectWebPageSelectionDialog dlg = new ProjectWebPageSelectionDialog(
+					cellEditorWindow.getShell(), project);
+			if (dlg.open() == Window.OK) {
+				jsfSelection = dlg.getResultFilePath();
+			}
 		}
 		return jsfSelection;
 	}

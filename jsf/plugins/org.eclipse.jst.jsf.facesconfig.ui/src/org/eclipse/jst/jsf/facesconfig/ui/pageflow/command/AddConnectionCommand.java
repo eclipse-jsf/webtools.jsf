@@ -24,12 +24,12 @@ public class AddConnectionCommand extends ConnectionCommand {
 			// It is a connection create command
 			// Source and target must be pointing to some
 			// real connection point
-			if (pageflowNode == null || target == null) {
+			if (source == null || target == null) {
 				return false;
 			}
 
 			if (!PageflowValidation.getInstance().isValidLinkForCreation(
-					pageflowNode, target)) {
+					source, target)) {
 				return false;
 			}
 		}
@@ -41,15 +41,15 @@ public class AddConnectionCommand extends ConnectionCommand {
 		if (canExecute() && oldSource == null && oldTarget == null) {
 			Pageflow pageflow = null;
 			// Get a reference to the pageflow
-			if (pageflowNode != null) {
-				pageflow = pageflowNode.getPageflow();
+			if (source != null) {
+				pageflow = source.getPageflow();
 			} else if (target != null) {
 				pageflow = target.getPageflow();
 			}
-			pageflow.connect(pageflowNode, target, link);
+			pageflow.connect(source, target, link);
 
 			// self loop link
-			if (pageflowNode == target) {
+			if (source == target) {
 				PageflowLayoutManager.updateSelfLoopLink(link);
 			}
 		}
@@ -67,8 +67,8 @@ public class AddConnectionCommand extends ConnectionCommand {
 
 				Pageflow pageflow = null;
 				// Get a reference to the pageflow
-				if (pageflowNode != null) {
-					pageflow = pageflowNode.getPageflow();
+				if (source != null) {
+					pageflow = source.getPageflow();
 				} else if (target != null) {
 					pageflow = target.getPageflow();
 				}

@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.synchronization.TransformUtil;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Element</b></em>'.
@@ -582,6 +583,16 @@ public abstract class PageflowElementImpl extends EObjectImpl implements
 
 	public ReferenceElement getFCElements() {
 		return null;
+	}
+
+	/**
+	 * @generated NOT
+	 */
+	public void update() {
+		getFCElements().update();
+		if (!TransformUtil.isValidPageflowElement(this)) {
+			eAdapters().clear();
+		}
 	}
 
 	/**

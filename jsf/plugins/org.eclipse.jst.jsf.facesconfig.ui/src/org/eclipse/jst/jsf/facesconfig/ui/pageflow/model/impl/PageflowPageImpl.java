@@ -351,8 +351,7 @@ public class PageflowPageImpl extends PageflowNodeImpl implements PageflowPage {
 		case PageflowPackage.PF_PAGE__LARGEICON:
 			return getLargeicon();
 		}
-		return super.eGet(eFeature, resolve);// eDynamicGet(eFeature,
-		// resolve);
+		return super.eGet(eFeature, resolve);
 	}
 
 	/**
@@ -404,7 +403,7 @@ public class PageflowPageImpl extends PageflowNodeImpl implements PageflowPage {
 			setLargeicon((String) newValue);
 			return;
 		}
-		super.eSet(eFeature, newValue);// eDynamicSet(eFeature, newValue);
+		super.eSet(eFeature, newValue);
 	}
 
 	/**
@@ -454,7 +453,7 @@ public class PageflowPageImpl extends PageflowNodeImpl implements PageflowPage {
 			setLargeicon(LARGEICON_EDEFAULT);
 			return;
 		}
-		super.eUnset(eFeature);// eDynamicUnset(eFeature);
+		super.eUnset(eFeature);
 	}
 
 	/**
@@ -497,7 +496,7 @@ public class PageflowPageImpl extends PageflowNodeImpl implements PageflowPage {
 			return LARGEICON_EDEFAULT == null ? getLargeicon() != null
 					: !LARGEICON_EDEFAULT.equals(getLargeicon());
 		}
-		return super.eIsSet(eFeature);// eDynamicIsSet(eFeature);
+		return super.eIsSet(eFeature);
 	}
 
 	/**

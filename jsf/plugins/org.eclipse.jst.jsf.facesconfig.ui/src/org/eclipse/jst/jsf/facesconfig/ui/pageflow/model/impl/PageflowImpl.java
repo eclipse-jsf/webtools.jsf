@@ -228,8 +228,7 @@ public class PageflowImpl extends PageflowElementImpl implements Pageflow {
 		case PageflowPackage.PAGEFLOW__CONFIGFILE:
 			return getConfigfile();
 		}
-		return super.eGet(eFeature, resolve);// eDynamicGet(eFeature,
-		// resolve);
+		return super.eGet(eFeature, resolve);
 	}
 
 	/**
@@ -272,7 +271,7 @@ public class PageflowImpl extends PageflowElementImpl implements Pageflow {
 			setConfigfile((String) newValue);
 			return;
 		}
-		super.eSet(eFeature, newValue);// eDynamicSet(eFeature, newValue);
+		super.eSet(eFeature, newValue);
 	}
 
 	/**
@@ -313,7 +312,7 @@ public class PageflowImpl extends PageflowElementImpl implements Pageflow {
 			setConfigfile(CONFIGFILE_EDEFAULT);
 			return;
 		}
-		super.eUnset(eFeature);// eDynamicUnset(eFeature);
+		super.eUnset(eFeature);
 	}
 
 	/**
@@ -348,7 +347,7 @@ public class PageflowImpl extends PageflowElementImpl implements Pageflow {
 			return CONFIGFILE_EDEFAULT == null ? configfile != null
 					: !CONFIGFILE_EDEFAULT.equals(configfile);
 		}
-		return super.eIsSet(eFeature);// eDynamicIsSet(eFeature);
+		return super.eIsSet(eFeature);
 	}
 
 	/**
@@ -380,12 +379,6 @@ public class PageflowImpl extends PageflowElementImpl implements Pageflow {
 				this.getLinks().add(link);
 				link.setSource(source);
 				link.setTarget(target);
-				// Add the link to the pageflow, to benefit
-				// of the containment link between pageflow and link
-
-				// Link input and output to the link
-				// target.getInlinks().add(link);
-				// source.getOutlinks().add(link);
 			}
 		}
 	}
@@ -456,7 +449,7 @@ public class PageflowImpl extends PageflowElementImpl implements Pageflow {
 		while (children.hasNext()) {
 			Object next = children.next();
 			if (next instanceof PageflowElement) {
-				((PageflowElement) next).getFCElements().update();
+				((PageflowElement) next).update();
 			}
 		}
 		super.notifyModelChanged(notification);

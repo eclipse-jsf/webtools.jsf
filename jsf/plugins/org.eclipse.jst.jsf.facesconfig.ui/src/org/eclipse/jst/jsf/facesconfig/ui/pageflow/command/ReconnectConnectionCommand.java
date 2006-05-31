@@ -15,29 +15,29 @@ public class ReconnectConnectionCommand extends ConnectionCommand {
 	}
 
 	public boolean canExecute() {
-		// if user don't set PFLink object before, this command can't be
+		// if user didn't set PFLink object beforehand, this command can't be
 		// executed.
 		if (link == null || link.eContainer() == null) {
 			return false;
 		}
 
-		// It is a reconnect both of source and target command
-		if (oldSource != null && pageflowNode != null && oldTarget != null
+		// Reconnect both source and target
+		if (oldSource != null && source != null && oldTarget != null
 				&& target != null) {
 			if (!PageflowValidation.getInstance().isValidLinkForCreation(
-					pageflowNode, target)) {
+					source, target)) {
 				return false;
 			}
 		}
 
-		// It is a reconnect only source command
-		if (oldSource != null && pageflowNode != null) {
+		// Reconnect source
+		if (oldSource != null && source != null) {
 			if (!PageflowValidation.getInstance().isValidLinkForCreation(
-					pageflowNode, oldTarget)) {
+					source, oldTarget)) {
 				return false;
 			}
 		}
-		// It is a reconnect only target command
+		// Reconnect target
 		if (oldTarget != null && target != null) {
 			if (!PageflowValidation.getInstance().isValidLinkForCreation(
 					oldSource, target)) {
@@ -50,29 +50,37 @@ public class ReconnectConnectionCommand extends ConnectionCommand {
 	}
 
 	public void doExecute() {
+		String outcome = null, action = null, largeIcon = null, smallIcon = null;
+		boolean isRedirect = false;
+		outcome = link.getOutcome();
+		action = link.getFromaction();
+		isRedirect = link.isRedirect();
+		largeIcon = link.getLargeicon();
+		smallIcon = link.getSmallicon();
 		// It is a reconnect source command
-		if (oldSource != null && pageflowNode != null) {
-			link.setSource(pageflowNode);
+		if (oldSource != null && source != null) {
+			link.setSource(source);
 		}
 		// It is a reconnect target command
 		if (oldTarget != null && target != null) {
 			link.setTarget(target);
 		}
+		link.setOutcome(outcome);
+		link.setFromaction(action);
+		link.setLargeicon(largeIcon);
+		link.setSmallicon(smallIcon);
+		link.setRedirect(isRedirect);
 	}
 
 	public void undo() {
 		if (canExecute()) {
 			// It was a reconnect source command
-			if (oldSource != null && pageflowNode != null) {
+			if (oldSource != null && source != null) {
 				// The link source must be replaced by the oldSource
 				if (link.getSource() != null) {
 					link.getSource().getOutlinks().remove(link);
 				}
-				// Source should not know link anymore
-				pageflowNode.getOutlinks().remove(link);
-				// Re-link with oldSource
-				// No containment link between link and input and output
-				// Two add method need to be called
+				source.getOutlinks().remove(link);
 				link.setSource(oldSource);
 			}
 			// It was a reconnect target command
@@ -81,11 +89,7 @@ public class ReconnectConnectionCommand extends ConnectionCommand {
 				if (link.getTarget() != null) {
 					link.getTarget().getInlinks().remove(link);
 				}
-				// Target should not know link anymore
 				target.getInlinks().remove(link);
-				// Re-link with oldTarget
-				// No containment link between link and input and output port
-				// Two add method need to be called
 				link.setTarget(oldTarget);
 			}
 		}
