@@ -96,7 +96,7 @@ public class MetaDataProcessorsFactoryTests extends TestCase {
 			getAttributeValueRuntimeTypeFeatureProcessors(IPossibleValues.class, null, uri1, 
 				"MyTag", "MyDualTypeAttr");
 		Assert.assertNotNull(possibleValueProcessors);
-		Assert.assertEquals(2,possibleValueProcessors.size());
+		Assert.assertEquals(2,possibleValueProcessors.size());  //expect StringType + NoImplPossibleVals
 		
 		List vals = new ArrayList();
 		Iterator it = possibleValueProcessors.iterator();

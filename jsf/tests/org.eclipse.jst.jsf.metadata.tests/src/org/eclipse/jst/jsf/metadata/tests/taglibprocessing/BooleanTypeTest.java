@@ -13,14 +13,14 @@ public class BooleanTypeTest extends TaglibProcessingTestCase {
 		Assert.assertNotNull(possibleValueAdapters);
 		Assert.assertFalse(possibleValueAdapters.isEmpty());
 		IPossibleValues pv =(IPossibleValues)getProcessorForTaglibProcessingBundle(possibleValueAdapters);
-		Assert.assertTrue(pv.getPossibleValues().size() == 2);
+		Assert.assertEquals(pv.getPossibleValues().size(), 2);//true and false
 	
 		
-		//why has this changed?
+		//validate BarkProcessorFeature does not kick in for this tag
 		//as the tests have added a second impl of IPossibleVals check
 		pv =(IPossibleValues)getBarkProcessingBundle(possibleValueAdapters);
 		Assert.assertNotNull(pv);
-		//however since "barks" metadata is not defined by the annotation file in that bundle, there are no return vals
+		//bark annotation is not on the MyTag element MyAttr attr
 		Assert.assertTrue(pv.getPossibleValues().isEmpty());
 
 	}

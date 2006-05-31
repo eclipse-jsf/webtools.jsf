@@ -30,8 +30,8 @@ public class AttributeValueRuntimeTypeExtensionsTests extends TestCase {
 				"MyTag", "BooleanAttr");   
 		
 		Assert.assertNotNull(processors);
-		Assert.assertTrue(!processors.isEmpty());
-		Assert.assertTrue(processors.size() == 2); //there should be a Boolean and BarkProcessor capable of handling IPossibleValues
+		Assert.assertFalse(processors.isEmpty());
+		Assert.assertEquals(processors.size(), 2); //there should be a Boolean and BarkProcessor capable of handling IPossibleValues
 //		Iterator it = processors.iterator();
 //		while (it.hasNext()){
 //			dumpPossibleValues((IPossibleValues)it.next());
