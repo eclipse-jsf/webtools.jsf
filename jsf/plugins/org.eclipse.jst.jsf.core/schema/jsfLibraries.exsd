@@ -86,7 +86,7 @@
                   class that must extend org.eclipse.jst.jsf.core.internal.provisional.jsflibraryregistry.JSFLibraryArchiveFilesDelegate to supply a collection of ArchiveFiles for the library
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java"/>
+                  <meta.attribute kind="java" basedOn="org.eclipse.jst.jsf.core.internal.provisional.jsflibraryregistry.JSFLibraryArchiveFilesDelegate"/>
                </appInfo>
             </annotation>
          </attribute>
