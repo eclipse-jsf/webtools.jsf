@@ -33,7 +33,7 @@ import org.eclipse.jst.jsf.facesconfig.emf.RenderKitClassType;
 import org.eclipse.jst.jsf.facesconfig.emf.RenderKitIdType;
 import org.eclipse.jst.jsf.facesconfig.emf.RenderKitType;
 import org.eclipse.jst.jsf.facesconfig.ui.IFacesConfigConstants;
-import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.page.IFacesConfigPage;
 import org.eclipse.jst.jsf.facesconfig.ui.util.ModelUtil;
 import org.eclipse.swt.layout.GridData;
@@ -69,9 +69,9 @@ public class RenderkitGeneralSection extends AbstractFacesConfigSection {
 			IFacesConfigPage page, FormToolkit toolkit) {
 		super(parent, managedForm, page, toolkit, null, null);
 		getSection()
-				.setText(NewEditorResourcesNLS.RenderKitGeneralSection_Name);
+				.setText(EditorMessages.RenderKitGeneralSection_Name);
 		getSection().setDescription(
-				NewEditorResourcesNLS.RenderKitGeneralSection_Description);
+				EditorMessages.RenderKitGeneralSection_Description);
 	}
 
 	/**
@@ -87,7 +87,7 @@ public class RenderkitGeneralSection extends AbstractFacesConfigSection {
 		toolkit.paintBordersFor(container);
 		displayNameField = new StringDialogField();
 		displayNameField
-				.setLabelText(NewEditorResourcesNLS.RenderKitGeneralSection_Label_DisplayName);
+				.setLabelText(EditorMessages.RenderKitGeneralSection_Label_DisplayName);
 		displayNameField.doFillIntoGrid(toolkit, container, numberOfColumns);
 
 		displayNameField
@@ -127,7 +127,7 @@ public class RenderkitGeneralSection extends AbstractFacesConfigSection {
 
 		descriptionField = new StringDialogField(2);
 		descriptionField
-				.setLabelText(NewEditorResourcesNLS.RenderKitGeneralSection_Label_Description);
+				.setLabelText(EditorMessages.RenderKitGeneralSection_Label_Description);
 		descriptionField.doFillIntoGrid(toolkit, container, numberOfColumns);
 
 		descriptionField
@@ -168,7 +168,7 @@ public class RenderkitGeneralSection extends AbstractFacesConfigSection {
 		renderkitIdField = new StringDialogField();
 		// renderkitIdField.setRequired(true);
 		renderkitIdField
-				.setLabelText(NewEditorResourcesNLS.RenderKitGeneralSection_Label_RenderKitID);
+				.setLabelText(EditorMessages.RenderKitGeneralSection_Label_RenderKitID);
 		renderkitIdField.doFillIntoGrid(toolkit, container, numberOfColumns);
 		renderkitIdField
 				.setDialogFieldApplyListener(new IDialogFieldApplyListener() {
@@ -195,7 +195,7 @@ public class RenderkitGeneralSection extends AbstractFacesConfigSection {
 		renderkitClassField = new ClassButtonDialogField(null);
 		// renderkitClassField.setRequired(true);
 		renderkitClassField
-				.setLabelText(NewEditorResourcesNLS.RenderKitGeneralSection_Label_RenderKitClass);
+				.setLabelText(EditorMessages.RenderKitGeneralSection_Label_RenderKitClass);
 		renderkitClassField.doFillIntoGrid(toolkit, container, numberOfColumns);
 		renderkitClassField.setProject((IProject) getPage().getEditor()
 				.getAdapter(IProject.class));

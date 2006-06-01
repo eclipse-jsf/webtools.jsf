@@ -38,7 +38,7 @@ import org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 import org.eclipse.jst.jsf.facesconfig.ui.IFacesConfigConstants;
-import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.page.IFacesConfigPage;
 import org.eclipse.jst.jsf.facesconfig.ui.util.ModelUtil;
 import org.eclipse.swt.layout.GridData;
@@ -76,9 +76,9 @@ public class ConverterGeneralSection extends AbstractFacesConfigSection {
 			IFacesConfigPage page, FormToolkit toolkit) {
 		super(parent, managedForm, page, toolkit, null, null);
 		getSection()
-				.setText(NewEditorResourcesNLS.ConverterGeneralSection_Name);
+				.setText(EditorMessages.ConverterGeneralSection_Name);
 		getSection().setDescription(
-				NewEditorResourcesNLS.ConverterGeneralSection_Description);
+				EditorMessages.ConverterGeneralSection_Description);
 	}
 
 	/**
@@ -94,7 +94,7 @@ public class ConverterGeneralSection extends AbstractFacesConfigSection {
 		toolkit.paintBordersFor(container);
 		displayNameField = new StringDialogField();
 		displayNameField
-				.setLabelText(NewEditorResourcesNLS.ConverterGeneralSection_Label_DisplayName);
+				.setLabelText(EditorMessages.ConverterGeneralSection_Label_DisplayName);
 		displayNameField.doFillIntoGrid(toolkit, container, numberOfColumns);
 
 		displayNameField
@@ -134,7 +134,7 @@ public class ConverterGeneralSection extends AbstractFacesConfigSection {
 
 		descriptionField = new StringDialogField(2);
 		descriptionField
-				.setLabelText(NewEditorResourcesNLS.ConverterGeneralSection_Label_Description);
+				.setLabelText(EditorMessages.ConverterGeneralSection_Label_Description);
 		descriptionField.doFillIntoGrid(toolkit, container, numberOfColumns);
 
 		descriptionField
@@ -176,7 +176,7 @@ public class ConverterGeneralSection extends AbstractFacesConfigSection {
 		converterIdField = new StringDialogField();
 		// converterIdField.setRequired(true);
 		converterIdField
-				.setLabelText(NewEditorResourcesNLS.ConverterGeneralSection_Label_ConverterID);
+				.setLabelText(EditorMessages.ConverterGeneralSection_Label_ConverterID);
 		converterIdField.doFillIntoGrid(toolkit, container, numberOfColumns);
 		converterIdField
 				.setDialogFieldApplyListener(new IDialogFieldApplyListener() {
@@ -214,7 +214,7 @@ public class ConverterGeneralSection extends AbstractFacesConfigSection {
 		converterForClassField = new ClassButtonDialogField(null);
 		// converterForClassField.setRequired(true);
 		converterForClassField
-				.setLabelText(NewEditorResourcesNLS.ConverterGeneralSection_Label_ConverterForClass);
+				.setLabelText(EditorMessages.ConverterGeneralSection_Label_ConverterForClass);
 		converterForClassField.setProject((IProject) getPage().getEditor()
 				.getAdapter(IProject.class));
 		converterForClassField.doFillIntoGrid(toolkit, container,
@@ -258,7 +258,7 @@ public class ConverterGeneralSection extends AbstractFacesConfigSection {
 		converterClassField = new ClassButtonDialogField(null);
 		// converterClassField.setRequired(true);
 		converterClassField
-				.setLabelText(NewEditorResourcesNLS.ConverterGeneralSection_Label_ConverterClass);
+				.setLabelText(EditorMessages.ConverterGeneralSection_Label_ConverterClass);
 		converterClassField.setProject((IProject) getPage().getEditor()
 				.getAdapter(IProject.class));
 		converterClassField.doFillIntoGrid(toolkit, container, numberOfColumns);

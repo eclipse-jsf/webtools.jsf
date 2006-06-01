@@ -51,7 +51,7 @@ import org.eclipse.jst.jsf.facesconfig.emf.NullValueType;
 import org.eclipse.jst.jsf.facesconfig.emf.ValueClassType;
 import org.eclipse.jst.jsf.facesconfig.emf.ValueType;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
-import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.dialog.EditValueDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseAdapter;
@@ -162,7 +162,7 @@ public class ListEntriesEditGroup extends DialogFieldGroup implements
 		valueClassField = new ClassButtonDialogField(getProject());
 
 		valueClassField
-				.setLabelText(NewEditorResourcesNLS.InitializationSection_MapType_ValueClass);//$NON-NLS-1$
+				.setLabelText(EditorMessages.InitializationSection_MapType_ValueClass);//$NON-NLS-1$
 		valueClassField
 				.setDialogFieldApplyListener(new IDialogFieldApplyListener() {
 
@@ -232,7 +232,7 @@ public class ListEntriesEditGroup extends DialogFieldGroup implements
 		listValueSection.setLayout(gl);
 		DialogFieldBase valuesTitle = new DialogFieldBase();
 		valuesTitle
-				.setLabelText(NewEditorResourcesNLS.InitializationSection_MapTable_Title);//$NON-NLS-1$    
+				.setLabelText(EditorMessages.InitializationSection_MapTable_Title);//$NON-NLS-1$    
 		valuesTitle.doFillIntoGrid(toolkit, listValueSection, numberOfColumns);
 
 		// list's value table
@@ -267,7 +267,7 @@ public class ListEntriesEditGroup extends DialogFieldGroup implements
 		TableColumn valueCol = new TableColumn(listTable, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(1, true));
 		valueCol
-				.setText(NewEditorResourcesNLS.InitializationSection_MapTable_Value);//$NON-NLS-1$
+				.setText(EditorMessages.InitializationSection_MapTable_Value);//$NON-NLS-1$
 		valueCol.setResizable(true);
 
 		listTable.addMouseListener(new MouseAdapter() {
@@ -308,11 +308,11 @@ public class ListEntriesEditGroup extends DialogFieldGroup implements
 		Button addButton = null;
 		if (toolkit != null) {
 			addButton = toolkit.createButton(operationContainer,
-					NewEditorResourcesNLS.UI_Button_Add_more, //$NON-NLS-1$
+					EditorMessages.UI_Button_Add_more, //$NON-NLS-1$
 					SWT.PUSH);
 		} else {
 			addButton = SWTUtils.createPushButton(operationContainer,
-					NewEditorResourcesNLS.UI_Button_Add_more); //$NON-NLS-1$
+					EditorMessages.UI_Button_Add_more); //$NON-NLS-1$
 		}
 		gd = new GridData(GridData.FILL_HORIZONTAL
 				| GridData.VERTICAL_ALIGN_BEGINNING);
@@ -322,10 +322,10 @@ public class ListEntriesEditGroup extends DialogFieldGroup implements
 		editButton = null;
 		if (toolkit != null) {
 			editButton = toolkit.createButton(operationContainer,
-					NewEditorResourcesNLS.UI_Button_Edit_more, SWT.PUSH);
+					EditorMessages.UI_Button_Edit_more, SWT.PUSH);
 		} else {
 			editButton = SWTUtils.createPushButton(operationContainer,
-					NewEditorResourcesNLS.UI_Button_Edit_more);
+					EditorMessages.UI_Button_Edit_more);
 		}
 
 		gd = new GridData(GridData.FILL_HORIZONTAL
@@ -336,11 +336,11 @@ public class ListEntriesEditGroup extends DialogFieldGroup implements
 		removeButton = null;
 		if (toolkit != null) {
 			removeButton = toolkit.createButton(operationContainer,
-					NewEditorResourcesNLS.UI_Button_Remove, //$NON-NLS-1$
+					EditorMessages.UI_Button_Remove, //$NON-NLS-1$
 					SWT.PUSH);
 		} else {
 			removeButton = SWTUtils.createPushButton(operationContainer,
-					NewEditorResourcesNLS.UI_Button_Remove); //$NON-NLS-1$
+					EditorMessages.UI_Button_Remove); //$NON-NLS-1$
 		}
 
 		gd = new GridData(GridData.FILL_HORIZONTAL

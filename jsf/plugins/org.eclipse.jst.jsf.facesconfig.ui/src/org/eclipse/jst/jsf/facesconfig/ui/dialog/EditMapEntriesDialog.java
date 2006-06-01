@@ -27,7 +27,7 @@ import org.eclipse.jst.jsf.facesconfig.emf.NullValueType;
 import org.eclipse.jst.jsf.facesconfig.emf.ValueClassType;
 import org.eclipse.jst.jsf.facesconfig.emf.ValueType;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
-import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.section.AbstractFacesConfigSection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseAdapter;
@@ -126,12 +126,12 @@ public class EditMapEntriesDialog extends Dialog {
 	private void createKeyValueSection(Composite parent) {
 		keyClassField = new ClassButtonDialogField(getProject());
 		keyClassField
-				.setLabelText(NewEditorResourcesNLS.InitializationSection_MapType_KeyClass);//$NON-NLS-1$
+				.setLabelText(EditorMessages.InitializationSection_MapType_KeyClass);//$NON-NLS-1$
 
 		valueClassField = new ClassButtonDialogField(getProject());
 
 		valueClassField
-				.setLabelText(NewEditorResourcesNLS.InitializationSection_MapType_ValueClass);//$NON-NLS-1$
+				.setLabelText(EditorMessages.InitializationSection_MapType_ValueClass);//$NON-NLS-1$
 
 		Composite typeSelectionSection = SWTUtils.createComposite(parent,
 				SWT.NONE);
@@ -168,7 +168,7 @@ public class EditMapEntriesDialog extends Dialog {
 
 		DialogField valuesTitle = new DialogFieldBase();
 		valuesTitle
-				.setLabelText(NewEditorResourcesNLS.InitializationSection_MapTable_Title);//$NON-NLS-1$    
+				.setLabelText(EditorMessages.InitializationSection_MapTable_Title);//$NON-NLS-1$    
 
 		valuesTitle.doFillIntoGrid(null, mapValueSection, numberOfColumns);
 
@@ -200,7 +200,7 @@ public class EditMapEntriesDialog extends Dialog {
 
 		TableColumn keyCol = new TableColumn(mapTable, SWT.NONE);
 		keyCol
-				.setText(NewEditorResourcesNLS.InitializationSection_MapTable_Key);//$NON-NLS-1$
+				.setText(EditorMessages.InitializationSection_MapTable_Key);//$NON-NLS-1$
 		layout.addColumnData(new ColumnWeightData(1, true));
 		keyCol.setResizable(true);
 
@@ -208,7 +208,7 @@ public class EditMapEntriesDialog extends Dialog {
 		layout.addColumnData(new ColumnWeightData(1, true));
 
 		valueCol
-				.setText(NewEditorResourcesNLS.InitializationSection_MapTable_Value);//$NON-NLS-1$
+				.setText(EditorMessages.InitializationSection_MapTable_Value);//$NON-NLS-1$
 		valueCol.setResizable(true);
 
 		tableViewer = new TableViewer(mapTable);
@@ -237,7 +237,7 @@ public class EditMapEntriesDialog extends Dialog {
 		operationContainer.setLayout(gl);
 
 		Button addButton = SWTUtils.createPushButton(operationContainer,
-				NewEditorResourcesNLS.UI_Button_Add_more); //$NON-NLS-1$
+				EditorMessages.UI_Button_Add_more); //$NON-NLS-1$
 
 		gd = new GridData(GridData.FILL_HORIZONTAL
 				| GridData.VERTICAL_ALIGN_BEGINNING);
@@ -250,7 +250,7 @@ public class EditMapEntriesDialog extends Dialog {
 		});
 
 		editButton = SWTUtils.createPushButton(operationContainer,
-				NewEditorResourcesNLS.UI_Button_Edit_more);
+				EditorMessages.UI_Button_Edit_more);
 
 		gd = new GridData(GridData.FILL_HORIZONTAL
 				| GridData.VERTICAL_ALIGN_BEGINNING);
@@ -263,7 +263,7 @@ public class EditMapEntriesDialog extends Dialog {
 
 		});
 		removeButton = SWTUtils.createPushButton(operationContainer,
-				NewEditorResourcesNLS.UI_Button_Remove); //$NON-NLS-1$
+				EditorMessages.UI_Button_Remove); //$NON-NLS-1$
 
 		gd = new GridData(GridData.FILL_HORIZONTAL
 				| GridData.VERTICAL_ALIGN_BEGINNING);

@@ -21,7 +21,7 @@ import org.eclipse.jst.jsf.facesconfig.common.dialogfield.StringButtonDialogFiel
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.StringDialogField;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.IFacesConfigConstants;
-import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.page.IFacesConfigPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Point;
@@ -94,9 +94,9 @@ public class AddEditRendererDialog extends Dialog {
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
 		if (isNew)
-			newShell.setText(NewEditorResourcesNLS.RendererSection_Dialog_Title_Add);
+			newShell.setText(EditorMessages.RendererSection_Dialog_Title_Add);
 		else
-			newShell.setText(NewEditorResourcesNLS.RendererSection_Dialog_Title_Edit);
+			newShell.setText(EditorMessages.RendererSection_Dialog_Title_Edit);
 	}
 
 	/*
@@ -115,7 +115,7 @@ public class AddEditRendererDialog extends Dialog {
 		tabFolder.setLayoutData(gd);
 		TabItem generalTabItem = new TabItem(tabFolder, SWT.NONE);
 		generalTabItem
-				.setText(NewEditorResourcesNLS.RendererSection_Dialog_Tab_General);
+				.setText(EditorMessages.RendererSection_Dialog_Tab_General);
 		Control control = createGeneralTabControl(generalTabItem.getParent());
 		generalTabItem.setControl(control);
 		return container;
@@ -136,12 +136,12 @@ public class AddEditRendererDialog extends Dialog {
 
 		rendererNameField = new StringDialogField();
 		rendererNameField
-				.setLabelText(NewEditorResourcesNLS.RendererSection_Dialog_DisplayName);
+				.setLabelText(EditorMessages.RendererSection_Dialog_DisplayName);
 
 		rendererClassField = new ClassButtonDialogField(getProject());
 //		rendererClassField.setRequired(true);
 		rendererClassField
-				.setLabelText(NewEditorResourcesNLS.RendererSection_Dialog_RendererClass);//$NON-NLS-1$
+				.setLabelText(EditorMessages.RendererSection_Dialog_RendererClass);//$NON-NLS-1$
 		rendererClassField.setProject(getProject());
 		rendererClassField.setSuperClassName(IFacesConfigConstants.RENDERER_SUPER_CLASS);
 		rendererClassField.setAutoOpenResource(false);
@@ -154,21 +154,21 @@ public class AddEditRendererDialog extends Dialog {
 								shell,
 								page,
 								page.getInput(),
-								NewEditorResourcesNLS.RendererSection_Dialog_ComponentFamilyCaption,
-								NewEditorResourcesNLS.RendererSection_Dialog_ComponentFamilyLabel);
+								EditorMessages.RendererSection_Dialog_ComponentFamilyCaption,
+								EditorMessages.RendererSection_Dialog_ComponentFamilyLabel);
 						if (dialog.open() == Dialog.OK) {
 							componentFamilyField.setText(dialog.getValue());
 						}
 					}
 				});
 		componentFamilyField
-				.setLabelText(NewEditorResourcesNLS.RendererSection_Dialog_ComponentFamilyValue);
+				.setLabelText(EditorMessages.RendererSection_Dialog_ComponentFamilyValue);
 //		componentFamilyField.setRequired(true);
 
 		renderTypeField = new StringDialogField();
 //		renderTypeField.setRequired(true);
 		renderTypeField
-				.setLabelText(NewEditorResourcesNLS.RendererSection_Dialog_TypeValue);
+				.setLabelText(EditorMessages.RendererSection_Dialog_TypeValue);
 
 		GridData data = new GridData(GridData.FILL_BOTH);
 		composite.setLayoutData(data);

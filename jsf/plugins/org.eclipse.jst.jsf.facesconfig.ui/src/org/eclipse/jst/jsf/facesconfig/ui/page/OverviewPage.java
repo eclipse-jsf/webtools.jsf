@@ -18,7 +18,7 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor;
-import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.section.OverviewComponentsSection;
 import org.eclipse.jst.jsf.facesconfig.ui.section.OverviewGeneralSection;
 import org.eclipse.jst.jsf.facesconfig.ui.section.OverviewManagedBeanSection;
@@ -74,7 +74,7 @@ public class OverviewPage extends FormPage implements ISelectionProvider,
 	protected void createFormContent(IManagedForm managedForm) {
 
 		ScrolledForm form = managedForm.getForm();
-		form.setText(NewEditorResourcesNLS.OverviewPage_PageflowOverview_summary);
+		form.setText(EditorMessages.OverviewPage_PageflowOverview_summary);
 		form.setBackgroundImage(EditorPlugin.getDefault().getImage(
 				"form_banner.gif")); //$NON-NLS-1$
 		Composite body = form.getBody();

@@ -31,7 +31,7 @@ import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.jst.jsf.facesconfig.emf.NavigationCaseType;
 import org.eclipse.jst.jsf.facesconfig.emf.NavigationRuleType;
-import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.page.IFacesConfigPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowEditor;
 import org.eclipse.swt.SWT;
@@ -63,8 +63,8 @@ public class OverviewNavigationSection extends AbstractOverviewSection {
 	public OverviewNavigationSection(Composite parent,
 			IManagedForm managedForm, IFacesConfigPage page, FormToolkit toolkit) {
 		super(parent, managedForm, page, toolkit, PageflowEditor.PAGE_ID,
-				NewEditorResourcesNLS.OverviewPage_NavigationSection_name,
-				NewEditorResourcesNLS.OverviewPage_NavigationSection_description,
+				EditorMessages.OverviewPage_NavigationSection_name,
+				EditorMessages.OverviewPage_NavigationSection_description,
 				null, null);
 	}
 
@@ -157,7 +157,7 @@ public class OverviewNavigationSection extends AbstractOverviewSection {
 
 		TableColumn column1 = new TableColumn(table, SWT.LEFT);
 		column1
-				.setText(NewEditorResourcesNLS.OverviewPage_NavigationSection_table_col1);
+				.setText(EditorMessages.OverviewPage_NavigationSection_table_col1);
 		// column1.setWidth(COLUMN_WITH);
 		tablelayout.addColumnData(new ColumnWeightData(1, COLUMN_WITH, true));
 		// tablelayout.addColumnData(new ColumnWeightData(1, true));
@@ -165,7 +165,7 @@ public class OverviewNavigationSection extends AbstractOverviewSection {
 
 		TableColumn column2 = new TableColumn(table, SWT.LEFT);
 		column2
-				.setText(NewEditorResourcesNLS.OverviewPage_NavigationSection_table_col2);
+				.setText(EditorMessages.OverviewPage_NavigationSection_table_col2);
 		tablelayout.addColumnData(new ColumnWeightData(1, COLUMN_WITH, true));
 		// tablelayout.addColumnData(new ColumnWeightData(1, true));
 		column2.setResizable(true);
@@ -173,7 +173,7 @@ public class OverviewNavigationSection extends AbstractOverviewSection {
 
 		TableColumn column3 = new TableColumn(table, SWT.LEFT);
 		column3
-				.setText(NewEditorResourcesNLS.OverviewPage_NavigationSection_table_col3);
+				.setText(EditorMessages.OverviewPage_NavigationSection_table_col3);
 		tablelayout.addColumnData(new ColumnWeightData(1, COLUMN_WITH, true));
 		// tablelayout.addColumnData(new ColumnWeightData(1, true));
 		column3.setResizable(true);

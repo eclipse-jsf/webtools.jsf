@@ -49,7 +49,7 @@ import org.eclipse.jst.jsf.facesconfig.emf.PropertyNameType;
 import org.eclipse.jst.jsf.facesconfig.emf.ValueType;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.IFacesConfigConstants;
-import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.dialog.AddEditManagedPropertyDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseAdapter;
@@ -186,19 +186,19 @@ public class ManagedPropertyEditGroup extends DialogFieldGroup implements
 		TableColumn propertyCol = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(1, true));
 		propertyCol
-				.setText(NewEditorResourcesNLS.InitializationSection_PropertyTable_Name);
+				.setText(EditorMessages.InitializationSection_PropertyTable_Name);
 		propertyCol.setResizable(true);
 
 		TableColumn classCol = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(1, true));
 		classCol
-				.setText(NewEditorResourcesNLS.InitializationSection_PropertyTable_Class);
+				.setText(EditorMessages.InitializationSection_PropertyTable_Class);
 		classCol.setResizable(true);
 
 		TableColumn valueCol = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(1, true));
 		valueCol
-				.setText(NewEditorResourcesNLS.InitializationSection_PropertyTable_Value);
+				.setText(EditorMessages.InitializationSection_PropertyTable_Value);
 		valueCol.setResizable(true);
 
 		table.addSelectionListener(new SelectionAdapter() {
@@ -261,14 +261,14 @@ public class ManagedPropertyEditGroup extends DialogFieldGroup implements
 
 		// create list operation buttons
 		Button addButton = toolkit.createButton(operationContainer,
-				NewEditorResourcesNLS.UI_Button_Add_more, SWT.PUSH);
+				EditorMessages.UI_Button_Add_more, SWT.PUSH);
 		gd = new GridData(GridData.FILL_HORIZONTAL
 				| GridData.VERTICAL_ALIGN_BEGINNING);
 		gd.grabExcessHorizontalSpace = false;
 		addButton.setLayoutData(gd);
 
 		editButton = toolkit.createButton(operationContainer,
-				NewEditorResourcesNLS.UI_Button_Edit_more, //$NON-NLS-1$
+				EditorMessages.UI_Button_Edit_more, //$NON-NLS-1$
 				SWT.PUSH);
 		gd = new GridData(GridData.FILL_HORIZONTAL
 				| GridData.VERTICAL_ALIGN_BEGINNING);
@@ -276,7 +276,7 @@ public class ManagedPropertyEditGroup extends DialogFieldGroup implements
 		editButton.setLayoutData(gd);
 
 		removeButton = toolkit.createButton(operationContainer,
-				NewEditorResourcesNLS.UI_Button_Remove, //$NON-NLS-1$
+				EditorMessages.UI_Button_Remove, //$NON-NLS-1$
 				SWT.PUSH);
 		gd = new GridData(GridData.FILL_HORIZONTAL
 				| GridData.VERTICAL_ALIGN_BEGINNING);

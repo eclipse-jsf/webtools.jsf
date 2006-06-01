@@ -33,7 +33,7 @@ import org.eclipse.jst.jsf.facesconfig.emf.ManagedPropertyType;
 import org.eclipse.jst.jsf.facesconfig.emf.MapEntriesType;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.IFacesConfigConstants;
-import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.section.AbstractFacesConfigSection;
 import org.eclipse.jst.jsf.facesconfig.ui.util.JavaBeanProperty;
 import org.eclipse.jst.jsf.facesconfig.ui.util.JavaBeanUtils;
@@ -159,7 +159,7 @@ public class AddEditManagedPropertyDialog extends Dialog {
 
 		nameField = new ComboDialogField(SWT.DROP_DOWN | SWT.READ_ONLY
 				| SWT.BORDER);
-		nameField.setLabelText(NewEditorResourcesNLS.ManagedBeanPropertyEditDialog_PropertyName);
+		nameField.setLabelText(EditorMessages.ManagedBeanPropertyEditDialog_PropertyName);
 
 		int propertyCount = 0;
 		beanPropertyList = getBeanPropertyList(managedBean);
@@ -185,11 +185,11 @@ public class AddEditManagedPropertyDialog extends Dialog {
 
 		classField = new ClassButtonDialogField(null);
 		classField.setProject(getProject());
-		classField.setLabelText(NewEditorResourcesNLS.ManagedBeanPropertyEditDialog_PropertyClass);
+		classField.setLabelText(EditorMessages.ManagedBeanPropertyEditDialog_PropertyClass);
 
 		valueTypeField = new ComboDialogField(SWT.DROP_DOWN | SWT.READ_ONLY
 				| SWT.BORDER);
-		valueTypeField.setLabelText(NewEditorResourcesNLS.ManagedBeanPropertyEditDialog_ValueType);
+		valueTypeField.setLabelText(EditorMessages.ManagedBeanPropertyEditDialog_ValueType);
 
 		valueTypeField.setItems(valueTypes);
 		valueTypeField
@@ -207,8 +207,8 @@ public class AddEditManagedPropertyDialog extends Dialog {
 
 		});
 
-		valueField.setLabelText(NewEditorResourcesNLS.ManagedBeanPropertyEditDialog_Value);//$NON-NLS-1$
-		valueField.setButtonLabel(NewEditorResourcesNLS.UI_Button_Edit_more);
+		valueField.setLabelText(EditorMessages.ManagedBeanPropertyEditDialog_Value);//$NON-NLS-1$
+		valueField.setButtonLabel(EditorMessages.UI_Button_Edit_more);
 
 		valueField.setDialogFieldApplyListener(new IDialogFieldApplyListener() {
 

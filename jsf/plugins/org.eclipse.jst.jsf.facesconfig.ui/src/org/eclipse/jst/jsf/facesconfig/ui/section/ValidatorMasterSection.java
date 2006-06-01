@@ -21,7 +21,7 @@ import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 import org.eclipse.jst.jsf.facesconfig.emf.ValidatorType;
-import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.page.FacesConfigMasterDetailPage;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Composite;
@@ -46,9 +46,9 @@ public class ValidatorMasterSection extends FacesConfigMasterSection {
 	public ValidatorMasterSection(Composite parent, IManagedForm managedForm,
 			FormToolkit toolkit, FacesConfigMasterDetailPage page) {
 		super(parent, managedForm, toolkit, page, null, null);
-		getSection().setText(NewEditorResourcesNLS.ValidatorMasterSection_Name); //$NON-NLS-1$
+		getSection().setText(EditorMessages.ValidatorMasterSection_Name); //$NON-NLS-1$
 		getSection().setDescription(
-				NewEditorResourcesNLS.ValidatorMasterSection_Description);
+				EditorMessages.ValidatorMasterSection_Description);
 	}
 
 	/**

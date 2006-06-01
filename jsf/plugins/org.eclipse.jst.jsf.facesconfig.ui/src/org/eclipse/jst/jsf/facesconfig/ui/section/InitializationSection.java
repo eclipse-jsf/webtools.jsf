@@ -22,7 +22,7 @@ import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanType;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.IFacesConfigConstants;
-import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.page.IFacesConfigPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -39,11 +39,11 @@ import org.eclipse.ui.part.PageBook;
  * @author Xiao-guang Zhang, sfshi
  */
 public class InitializationSection extends AbstractFacesConfigSection {
-	private static final String MANAGEDBEAN_GENERAL_CLASS = NewEditorResourcesNLS.InitializationSection_ClassType_General;
+	private static final String MANAGEDBEAN_GENERAL_CLASS = EditorMessages.InitializationSection_ClassType_General;
 
-	private static final String MANAGEDBEAN_MAP = NewEditorResourcesNLS.InitializationSection_ClassType_Map;
+	private static final String MANAGEDBEAN_MAP = EditorMessages.InitializationSection_ClassType_Map;
 
-	private static final String MANAGEDBEAN_LIST = NewEditorResourcesNLS.InitializationSection_ClassType_List;
+	private static final String MANAGEDBEAN_LIST = EditorMessages.InitializationSection_ClassType_List;
 
 	/** property initiliazation container composite */
 	private Composite propertySection;
@@ -80,9 +80,9 @@ public class InitializationSection extends AbstractFacesConfigSection {
 	public InitializationSection(Composite parent, IManagedForm managedForm,
 			IFacesConfigPage page, FormToolkit toolkit) {
 		super(parent, managedForm, page, toolkit, null, null); //$NON-NLS-1$
-		getSection().setText(NewEditorResourcesNLS.InitializationSection_Name); //$NON-NLS-1$
+		getSection().setText(EditorMessages.InitializationSection_Name); //$NON-NLS-1$
 		getSection().setDescription(
-				NewEditorResourcesNLS.InitializationSection_Description); //$NON-NLS-1$
+				EditorMessages.InitializationSection_Description); //$NON-NLS-1$
 
 	}
 
@@ -116,7 +116,7 @@ public class InitializationSection extends AbstractFacesConfigSection {
 		String[] items = { MANAGEDBEAN_GENERAL_CLASS, MANAGEDBEAN_MAP,
 				MANAGEDBEAN_LIST };
 		beanTypeField
-				.setLabelText(NewEditorResourcesNLS.InitializationSection_ClassType);
+				.setLabelText(EditorMessages.InitializationSection_ClassType);
 		beanTypeField.setItems(items);
 		beanTypeField.doFillIntoGrid(toolkit, container, numberOfColumns);
 		beanTypeField

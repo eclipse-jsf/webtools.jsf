@@ -2,16 +2,16 @@ package org.eclipse.jst.jsf.facesconfig.ui;
 
 import org.eclipse.osgi.util.NLS;
 
-public final class NewEditorResourcesNLS extends NLS {
+public final class EditorMessages extends NLS {
 
-	private static final String BUNDLE_NAME = "org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS";
+	private static final String BUNDLE_NAME = "org.eclipse.jst.jsf.facesconfig.ui.EditorMessages";
 
-	private NewEditorResourcesNLS() {
+	private EditorMessages() {
 		// Do not instantiate
 	}
 
 	static {
-		NLS.initializeMessages(BUNDLE_NAME, NewEditorResourcesNLS.class);
+		NLS.initializeMessages(BUNDLE_NAME, EditorMessages.class);
 	}
 
 	public static String UI_Button_Add;

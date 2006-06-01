@@ -18,7 +18,7 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jst.jsf.facesconfig.common.guiutils.IntroductionSection;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor;
-import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorMessages;
 import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.editor.FormPage;
 import org.eclipse.ui.forms.widgets.FormToolkit;
@@ -37,7 +37,7 @@ public class IntroductionPage extends FormPage implements IFacesConfigPage, ISel
 	 */
 	public IntroductionPage(FacesConfigEditor facesConfigEditor) {
 		super(facesConfigEditor, IntroductionPage.class.getName(),
-				NewEditorResourcesNLS.editor_pageflow_page_intro_name);
+				EditorMessages.editor_pageflow_page_intro_name);
 	}
 
 	/*
@@ -49,7 +49,7 @@ public class IntroductionPage extends FormPage implements IFacesConfigPage, ISel
 		// get the form
 		ScrolledForm form = managedForm.getForm();
 		FormToolkit toolkit = getEditor().getToolkit();
-		form.setText(NewEditorResourcesNLS.editor_pageflow_page_intro_title);
+		form.setText(EditorMessages.editor_pageflow_page_intro_title);
 
 		form.setBackgroundImage(EditorPlugin.getDefault().getImage("form_banner.gif"));
 
@@ -61,8 +61,8 @@ public class IntroductionPage extends FormPage implements IFacesConfigPage, ISel
 
 		IntroductionSection introPart = new IntroductionSection(
 				FacesConfigEditor.EDITOR_ID, managedForm, toolkit,
-				NewEditorResourcesNLS.editor_pageflow_page_intro_help_HelpContextID,
-				NewEditorResourcesNLS.editor_pageflow_page_intro_help_HelpToolTip);
+				EditorMessages.editor_pageflow_page_intro_help_HelpContextID,
+				EditorMessages.editor_pageflow_page_intro_help_HelpToolTip);
 
 		TableWrapData td = new TableWrapData(TableWrapData.FILL_GRAB);
 		td.colspan = 1;

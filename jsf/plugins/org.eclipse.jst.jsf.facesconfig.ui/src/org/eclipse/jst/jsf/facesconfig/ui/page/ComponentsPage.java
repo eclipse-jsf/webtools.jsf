@@ -32,7 +32,7 @@ import org.eclipse.jst.jsf.facesconfig.emf.FacetType;
 import org.eclipse.jst.jsf.facesconfig.emf.PropertyType;
 import org.eclipse.jst.jsf.facesconfig.emf.RendererType;
 import org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor;
-import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.page.detail.ComponentDetailsPage;
 import org.eclipse.jst.jsf.facesconfig.ui.page.detail.ConverterDetailsPage;
 import org.eclipse.jst.jsf.facesconfig.ui.page.detail.RenderkitDetailsPage;
@@ -70,7 +70,7 @@ public class ComponentsPage extends FacesConfigMasterDetailPage {
 	 */
 	public ComponentsPage(FacesConfigEditor editor) {
 		super(editor, "ComponentsPage",
-				NewEditorResourcesNLS.FacesConfigEditor_Components_TabName);
+				EditorMessages.FacesConfigEditor_Components_TabName);
 	}
 
 	/**

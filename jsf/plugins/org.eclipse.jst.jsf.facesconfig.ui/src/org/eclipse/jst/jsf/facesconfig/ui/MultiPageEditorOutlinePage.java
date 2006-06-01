@@ -215,7 +215,7 @@ public class MultiPageEditorOutlinePage extends Page implements
 	 */
 	protected IPage createDefaultPage(PageBook book) {
 		// Message to show on the default page
-		String defaultText = NewEditorResourcesNLS.MultiPageEditorOutlinePage_noOutline;
+		String defaultText = EditorMessages.MultiPageEditorOutlinePage_noOutline;
 
 		MessagePage page = new MessagePage();
 		initPage(page);

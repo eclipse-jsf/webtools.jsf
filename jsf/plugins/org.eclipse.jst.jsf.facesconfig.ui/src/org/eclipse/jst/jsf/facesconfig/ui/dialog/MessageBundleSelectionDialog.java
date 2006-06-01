@@ -18,7 +18,7 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jst.jsf.facesconfig.common.IFileFolderConstants;
 import org.eclipse.jst.jsf.facesconfig.common.dialogs.ResourceOnClasspathDialog;
 import org.eclipse.jst.jsf.facesconfig.emf.MessageBundleType;
-import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorMessages;
 import org.eclipse.swt.widgets.Shell;
 
 /**
@@ -29,9 +29,9 @@ public class MessageBundleSelectionDialog extends ResourceOnClasspathDialog {
 	/** A list contains the resoursebundles existing in faces config */
 	private List resourceBundles;
 
-	private String selectPropertyFileMessage = NewEditorResourcesNLS.MessageBundleSection_Dialog_Message_SelectPropertyFile; 
+	private String selectPropertyFileMessage = EditorMessages.MessageBundleSection_Dialog_Message_SelectPropertyFile; 
 
-	private String alreadyExistStatusMessage = NewEditorResourcesNLS.MessageBundleSection_Dialog_Message_AlreadyExists; 
+	private String alreadyExistStatusMessage = EditorMessages.MessageBundleSection_Dialog_Message_AlreadyExists; 
 
 	private static final String[] PROPERTIES_FILES_SUFFIXS = new String[] { IFileFolderConstants.EXT_PROPERTIES };
 
@@ -46,7 +46,7 @@ public class MessageBundleSelectionDialog extends ResourceOnClasspathDialog {
 		this.resourceBundles = resourceBundles;
 		setSuffixs(PROPERTIES_FILES_SUFFIXS);
 		
-		setTitle(NewEditorResourcesNLS.MessageBundleSection_Dialog_Title);
+		setTitle(EditorMessages.MessageBundleSection_Dialog_Title);
 		setViewerSorter(new MessageBundleViewerSorter());
 	}
 

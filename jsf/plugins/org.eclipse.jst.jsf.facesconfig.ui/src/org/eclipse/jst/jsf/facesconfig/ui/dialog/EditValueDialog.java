@@ -18,7 +18,7 @@ import org.eclipse.jst.jsf.facesconfig.common.dialogfield.DialogField;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.DialogFieldBase;
 import org.eclipse.jst.jsf.facesconfig.common.guiutils.SWTUtils;
 import org.eclipse.jst.jsf.facesconfig.ui.IFacesConfigConstants;
-import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorMessages;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -103,7 +103,7 @@ public class EditValueDialog extends Dialog {
 		// ManagedBeansPage.ManagedBeanInitializationSection.MapTable.Title =
 		// Values:
 		valueTitle
-				.setLabelText(NewEditorResourcesNLS.ManagedBeanPropertyEditDialog_Value);//$NON-NLS-1$
+				.setLabelText(EditorMessages.ManagedBeanPropertyEditDialog_Value);//$NON-NLS-1$
 		valueTitle.doFillIntoGrid(null, container, 1);
 
 		gd = new GridData(GridData.FILL_BOTH);
@@ -148,7 +148,7 @@ public class EditValueDialog extends Dialog {
 
 		// ManagedBeanPropertyEditDialog.Value = Value:
 		lblValue
-				.setText(NewEditorResourcesNLS.ManagedBeanPropertyEditDialog_Value); //$NON-NLS-1$
+				.setText(EditorMessages.ManagedBeanPropertyEditDialog_Value); //$NON-NLS-1$
 
 		gd = new GridData(GridData.HORIZONTAL_ALIGN_FILL
 				| GridData.FILL_HORIZONTAL);
@@ -176,7 +176,7 @@ public class EditValueDialog extends Dialog {
 	 */
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
-		newShell.setText(NewEditorResourcesNLS.ValueEditDialog_Title); //$NON-NLS-1$
+		newShell.setText(EditorMessages.ValueEditDialog_Title); //$NON-NLS-1$
 	}
 
 	/*

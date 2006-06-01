@@ -368,7 +368,7 @@ public class FacesConfigEditor extends FormEditor implements
 
 			sourcePageId = addPage(sourcePage, this.getEditorInput());
 			setPageText(sourcePageId,
-					NewEditorResourcesNLS.FacesConfigEditor_Source_TabName);
+					EditorMessages.FacesConfigEditor_Source_TabName);
 			sourcePage.update();
 
 		} catch (PartInitException e) {

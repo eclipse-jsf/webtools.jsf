@@ -16,7 +16,7 @@ import org.eclipse.jst.jsf.facesconfig.common.dialogfield.LayoutUtil;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.StringDialogField;
 import org.eclipse.jst.jsf.facesconfig.common.guiutils.SWTUtils;
 import org.eclipse.jst.jsf.facesconfig.ui.IFacesConfigConstants;
-import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorMessages;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -80,9 +80,9 @@ public class AddEditMapEntryDialog extends Dialog {
 		super.configureShell(newShell);
 		if (isNew)
 			// TODO change it to "add"
-			newShell.setText(NewEditorResourcesNLS.MapEntryEditPage_Title);
+			newShell.setText(EditorMessages.MapEntryEditPage_Title);
 		else
-			newShell.setText(NewEditorResourcesNLS.MapEntryEditPage_Title);
+			newShell.setText(EditorMessages.MapEntryEditPage_Title);
 	}
 
 	/*
@@ -121,7 +121,7 @@ public class AddEditMapEntryDialog extends Dialog {
 
 	public void layoutKeySection(Composite parent) {
 		keyField = new StringDialogField();
-		keyField.setLabelText(NewEditorResourcesNLS.MapEntryEditGroup_Key); //$NON-NLS-1$
+		keyField.setLabelText(EditorMessages.MapEntryEditGroup_Key); //$NON-NLS-1$
 		Composite
 
 		keySection = SWTUtils.createComposite(parent, SWT.NONE);
@@ -167,7 +167,7 @@ public class AddEditMapEntryDialog extends Dialog {
 		});
 		valueField = new StringDialogField(VALUE_DEFAULT_LINENUMS);
 
-		valueField.setLabelText(NewEditorResourcesNLS.ValueEditGroup_Value); //$NON-NLS-1$
+		valueField.setLabelText(EditorMessages.ValueEditGroup_Value); //$NON-NLS-1$
 		valueField.doFillIntoGrid(null, valueSection, numberOfColumns);
 
 		gd = (GridData) valueField.getLabelControl(null, valueSection)

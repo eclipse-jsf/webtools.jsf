@@ -22,7 +22,7 @@ import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jst.jsf.facesconfig.common.guiutils.SWTUtils;
-import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorMessages;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
@@ -90,7 +90,7 @@ public class LocaleDialog extends StatusDialog {
 			itemsList.add(locales[i].toString());
 		}
 		
-		setStatusMessage(NewEditorResourcesNLS.LocaleConfigSection_Wizard_Page_AlreadyExistsError);
+		setStatusMessage(EditorMessages.LocaleConfigSection_Wizard_Page_AlreadyExistsError);
 	}
 	
 	/*
@@ -99,7 +99,7 @@ public class LocaleDialog extends StatusDialog {
 	 */
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
-		newShell.setText(NewEditorResourcesNLS.LocaleConfigSection_Wizard_WindowTitle);
+		newShell.setText(EditorMessages.LocaleConfigSection_Wizard_WindowTitle);
 	}
 
 	/*
@@ -115,7 +115,7 @@ public class LocaleDialog extends StatusDialog {
 		SWTUtils
 				.createLabel(
 						parent,
-						NewEditorResourcesNLS.LocaleConfigSection_Wizard_Page_LabelText,
+						EditorMessages.LocaleConfigSection_Wizard_Page_LabelText,
 						1);
 
 		inputText = SWTUtils.createTextBox(parent, 1);

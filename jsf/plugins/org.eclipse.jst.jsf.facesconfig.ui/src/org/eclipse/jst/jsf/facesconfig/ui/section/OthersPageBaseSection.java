@@ -26,7 +26,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
-import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.page.IFacesConfigPage;
 import org.eclipse.jst.jsf.facesconfig.ui.page.OthersPage;
 import org.eclipse.swt.SWT;
@@ -155,7 +155,7 @@ public abstract class OthersPageBaseSection extends AbstractFacesConfigSection {
 		operationContainer.setLayout(new GridLayout());
 
 		Button addButton = toolkit.createButton(operationContainer,
-				NewEditorResourcesNLS.UI_Button_Add, SWT.PUSH);
+				EditorMessages.UI_Button_Add, SWT.PUSH);
 		GridData gd = new GridData(GridData.FILL_HORIZONTAL
 				| GridData.VERTICAL_ALIGN_BEGINNING);
 		gd.grabExcessHorizontalSpace = false;
@@ -172,7 +172,7 @@ public abstract class OthersPageBaseSection extends AbstractFacesConfigSection {
 		});
 
 		removeButton = toolkit.createButton(operationContainer,
-				NewEditorResourcesNLS.UI_Button_Remove, SWT.PUSH);
+				EditorMessages.UI_Button_Remove, SWT.PUSH);
 
 		removeButton.setEnabled(true);
 		gd = new GridData(GridData.FILL_HORIZONTAL

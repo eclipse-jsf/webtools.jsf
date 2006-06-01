@@ -37,7 +37,7 @@ import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 import org.eclipse.jst.jsf.facesconfig.emf.FacetNameType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacetType;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
-import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.dialog.AddEditFacetDialog;
 import org.eclipse.jst.jsf.facesconfig.ui.page.IFacesConfigPage;
 import org.eclipse.swt.SWT;
@@ -75,9 +75,9 @@ public class FacetSection extends AbstractFacesConfigSection {
 	public FacetSection(Composite parent, IManagedForm managedForm,
 			IFacesConfigPage page, FormToolkit toolkit) {
 		super(parent, managedForm, page, toolkit, null, null);
-		this.getSection().setText(NewEditorResourcesNLS.FacetSection_Name);
+		this.getSection().setText(EditorMessages.FacetSection_Name);
 		this.getSection().setDescription(
-				NewEditorResourcesNLS.FacetSection_Description);
+				EditorMessages.FacetSection_Description);
 
 	}
 
@@ -141,16 +141,16 @@ public class FacetSection extends AbstractFacesConfigSection {
 		TableColumn facetNameCol = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(1, true));
 		facetNameCol
-				.setText(NewEditorResourcesNLS.FacetSection_Table_FacetNameColumn);
+				.setText(EditorMessages.FacetSection_Table_FacetNameColumn);
 		TableColumn displayNameCol = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(1, true));
 		displayNameCol
-				.setText(NewEditorResourcesNLS.FacetSection_Table_DisplayNameColumn);//$NON-NLS-1$
+				.setText(EditorMessages.FacetSection_Table_DisplayNameColumn);//$NON-NLS-1$
 
 		TableColumn descriptionCol = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(1, true));
 		descriptionCol
-				.setText(NewEditorResourcesNLS.FacetSection_Table_DescriptionColumn);
+				.setText(EditorMessages.FacetSection_Table_DescriptionColumn);
 
 		table.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
@@ -198,7 +198,7 @@ public class FacetSection extends AbstractFacesConfigSection {
 		operationContainer.setLayout(gl);
 
 		Button addButton = toolkit.createButton(operationContainer,
-				NewEditorResourcesNLS.UI_Button_Add_more, //$NON-NLS-1$
+				EditorMessages.UI_Button_Add_more, //$NON-NLS-1$
 				SWT.PUSH);
 		gd = new GridData(GridData.FILL_HORIZONTAL
 				| GridData.VERTICAL_ALIGN_BEGINNING);
@@ -206,7 +206,7 @@ public class FacetSection extends AbstractFacesConfigSection {
 		addButton.setLayoutData(gd);
 
 		editButton = toolkit.createButton(operationContainer,
-				NewEditorResourcesNLS.UI_Button_Edit_more, //$NON-NLS-1$
+				EditorMessages.UI_Button_Edit_more, //$NON-NLS-1$
 				SWT.PUSH);
 		gd = new GridData(GridData.FILL_HORIZONTAL
 				| GridData.VERTICAL_ALIGN_BEGINNING);
@@ -214,7 +214,7 @@ public class FacetSection extends AbstractFacesConfigSection {
 		editButton.setLayoutData(gd);
 
 		removeButton = toolkit.createButton(operationContainer,
-				NewEditorResourcesNLS.UI_Button_Remove, //$NON-NLS-1$
+				EditorMessages.UI_Button_Remove, //$NON-NLS-1$
 				SWT.PUSH);
 		gd = new GridData(GridData.FILL_HORIZONTAL
 				| GridData.VERTICAL_ALIGN_BEGINNING);

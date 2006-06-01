@@ -14,7 +14,7 @@ package org.eclipse.jst.jsf.facesconfig.ui.dialog;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.LayoutUtil;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.StringDialogField;
-import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorMessages;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
@@ -89,9 +89,9 @@ public class AddEditFacetDialog extends Dialog {
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
 		if (isNew)
-			newShell.setText(NewEditorResourcesNLS.FacetSection_Dialog_Title_Add);
+			newShell.setText(EditorMessages.FacetSection_Dialog_Title_Add);
 		else
-			newShell.setText(NewEditorResourcesNLS.FacetSection_Dialog_Title_Edit);
+			newShell.setText(EditorMessages.FacetSection_Dialog_Title_Edit);
 	}
 
 	/*
@@ -109,7 +109,7 @@ public class AddEditFacetDialog extends Dialog {
 		TabFolder tabFolder = new TabFolder(container, SWT.FILL);
 		tabFolder.setLayoutData(gd);
 		TabItem generalTabItem = new TabItem(tabFolder, SWT.NONE);
-		generalTabItem.setText(NewEditorResourcesNLS.FacetSection_Dialog_Tab_General);
+		generalTabItem.setText(EditorMessages.FacetSection_Dialog_Tab_General);
 		Control control = createGeneralTabControl(generalTabItem.getParent());
 		generalTabItem.setControl(control);
 		return container;
@@ -131,15 +131,15 @@ public class AddEditFacetDialog extends Dialog {
 		facetNameField = new StringDialogField();
 //		facetNameField.setRequired(true);
 		facetNameField
-				.setLabelText(NewEditorResourcesNLS.FacetSection_Dialog_FacetName);
+				.setLabelText(EditorMessages.FacetSection_Dialog_FacetName);
 
 		displayNameField = new StringDialogField();
 		displayNameField
-				.setLabelText(NewEditorResourcesNLS.FacetSection_Dialog_DisplayName);
+				.setLabelText(EditorMessages.FacetSection_Dialog_DisplayName);
 
 		descriptionField = new StringDialogField();
 		descriptionField
-				.setLabelText(NewEditorResourcesNLS.FacetSection_Dialog_Description);
+				.setLabelText(EditorMessages.FacetSection_Dialog_Description);
 
 		GridData data = new GridData(GridData.FILL_BOTH);
 		composite.setLayoutData(data);

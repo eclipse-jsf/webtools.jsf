@@ -39,7 +39,7 @@ import org.eclipse.jst.jsf.facesconfig.emf.PropertyNameType;
 import org.eclipse.jst.jsf.facesconfig.emf.PropertyType;
 import org.eclipse.jst.jsf.facesconfig.emf.SuggestedValueType;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
-import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.dialog.AddEditPropertyDialog;
 import org.eclipse.jst.jsf.facesconfig.ui.page.IFacesConfigPage;
 import org.eclipse.swt.SWT;
@@ -77,9 +77,9 @@ public class PropertySection extends AbstractFacesConfigSection {
 	public PropertySection(Composite parent, IManagedForm managedForm,
 			IFacesConfigPage page, FormToolkit toolkit) {
 		super(parent, managedForm, page, toolkit, null, null);
-		this.getSection().setText(NewEditorResourcesNLS.PropertySection_Name);
+		this.getSection().setText(EditorMessages.PropertySection_Name);
 		this.getSection().setDescription(
-				NewEditorResourcesNLS.PropertySection_Description);
+				EditorMessages.PropertySection_Description);
 
 	}
 
@@ -145,22 +145,22 @@ public class PropertySection extends AbstractFacesConfigSection {
 
 		TableColumn nameCol = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(1, true));
-		nameCol.setText(NewEditorResourcesNLS.PropertySection_Table_NameColumn);//$NON-NLS-1$
+		nameCol.setText(EditorMessages.PropertySection_Table_NameColumn);//$NON-NLS-1$
 
 		TableColumn classCol = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(1, true));
 		classCol
-				.setText(NewEditorResourcesNLS.PropertySection_Table_ClassColumn);
+				.setText(EditorMessages.PropertySection_Table_ClassColumn);
 
 		TableColumn valueCol = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(1, true));
 		valueCol
-				.setText(NewEditorResourcesNLS.PropertySection_Table_DefaultValueColumn);
+				.setText(EditorMessages.PropertySection_Table_DefaultValueColumn);
 
 		TableColumn suggestedValueCol = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(1, true));
 		suggestedValueCol
-				.setText(NewEditorResourcesNLS.PropertySection_Table_SuggestedValueColumn);
+				.setText(EditorMessages.PropertySection_Table_SuggestedValueColumn);
 
 		table.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
@@ -220,7 +220,7 @@ public class PropertySection extends AbstractFacesConfigSection {
 		operationContainer.setLayout(gl);
 
 		Button addButton = toolkit.createButton(operationContainer,
-				NewEditorResourcesNLS.UI_Button_Add_more, //$NON-NLS-1$
+				EditorMessages.UI_Button_Add_more, //$NON-NLS-1$
 				SWT.PUSH);
 		gd = new GridData(GridData.FILL_HORIZONTAL
 				| GridData.VERTICAL_ALIGN_BEGINNING);
@@ -228,7 +228,7 @@ public class PropertySection extends AbstractFacesConfigSection {
 		addButton.setLayoutData(gd);
 
 		editButton = toolkit.createButton(operationContainer,
-				NewEditorResourcesNLS.UI_Button_Edit_more, //$NON-NLS-1$
+				EditorMessages.UI_Button_Edit_more, //$NON-NLS-1$
 				SWT.PUSH);
 		gd = new GridData(GridData.FILL_HORIZONTAL
 				| GridData.VERTICAL_ALIGN_BEGINNING);
@@ -236,7 +236,7 @@ public class PropertySection extends AbstractFacesConfigSection {
 		editButton.setLayoutData(gd);
 
 		removeButton = toolkit.createButton(operationContainer,
-				NewEditorResourcesNLS.UI_Button_Remove, //$NON-NLS-1$
+				EditorMessages.UI_Button_Remove, //$NON-NLS-1$
 				SWT.PUSH);
 		gd = new GridData(GridData.FILL_HORIZONTAL
 				| GridData.VERTICAL_ALIGN_BEGINNING);

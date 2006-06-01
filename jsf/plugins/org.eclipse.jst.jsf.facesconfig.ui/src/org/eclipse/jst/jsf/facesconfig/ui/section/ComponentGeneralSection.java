@@ -33,7 +33,7 @@ import org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 import org.eclipse.jst.jsf.facesconfig.ui.IFacesConfigConstants;
-import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.page.IFacesConfigPage;
 import org.eclipse.jst.jsf.facesconfig.ui.util.ModelUtil;
 import org.eclipse.swt.layout.GridData;
@@ -73,9 +73,9 @@ public class ComponentGeneralSection extends AbstractFacesConfigSection {
 			IFacesConfigPage page, FormToolkit toolkit) {
 		super(parent, managedForm, page, toolkit, null, null);
 		getSection()
-				.setText(NewEditorResourcesNLS.ComponentGeneralSection_Name);
+				.setText(EditorMessages.ComponentGeneralSection_Name);
 		getSection().setDescription(
-				NewEditorResourcesNLS.ComponentGeneralSection_Description);
+				EditorMessages.ComponentGeneralSection_Description);
 	}
 
 	/**
@@ -91,7 +91,7 @@ public class ComponentGeneralSection extends AbstractFacesConfigSection {
 		toolkit.paintBordersFor(container);
 		displayNameField = new StringDialogField();
 		displayNameField
-				.setLabelText(NewEditorResourcesNLS.ComponentGeneralSection_Label_DisplayName);
+				.setLabelText(EditorMessages.ComponentGeneralSection_Label_DisplayName);
 		displayNameField.doFillIntoGrid(toolkit, container, numberOfColumns);
 
 		displayNameField
@@ -132,7 +132,7 @@ public class ComponentGeneralSection extends AbstractFacesConfigSection {
 
 		descriptionField = new StringDialogField(2);
 		descriptionField
-				.setLabelText(NewEditorResourcesNLS.ComponentGeneralSection_Label_Description);
+				.setLabelText(EditorMessages.ComponentGeneralSection_Label_Description);
 		descriptionField.doFillIntoGrid(toolkit, container, numberOfColumns);
 
 		descriptionField
@@ -174,7 +174,7 @@ public class ComponentGeneralSection extends AbstractFacesConfigSection {
 
 		componentTypeField = new StringDialogField();
 		componentTypeField
-				.setLabelText(NewEditorResourcesNLS.ComponentGeneralSection_Label_ComponentType);
+				.setLabelText(EditorMessages.ComponentGeneralSection_Label_ComponentType);
 		componentTypeField.doFillIntoGrid(toolkit, container, numberOfColumns);
 		componentTypeField
 				.setDialogFieldApplyListener(new IDialogFieldApplyListener() {
@@ -201,7 +201,7 @@ public class ComponentGeneralSection extends AbstractFacesConfigSection {
 
 		componentClassField = new ClassButtonDialogField(null);
 		componentClassField
-				.setLabelText(NewEditorResourcesNLS.ComponentGeneralSection_Label_ComponentClass);
+				.setLabelText(EditorMessages.ComponentGeneralSection_Label_ComponentClass);
 		componentClassField.doFillIntoGrid(toolkit, container, numberOfColumns);
 		LayoutUtil.setHorizontalGrabbing(componentClassField.getTextControl(
 				toolkit, container));

@@ -40,7 +40,7 @@ import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanNameType;
 import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanScopeType;
 import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanType;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
-import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.page.FacesConfigMasterDetailPage;
 import org.eclipse.jst.jsf.facesconfig.ui.provider.ManagedBeanContentProvider;
 import org.eclipse.jst.jsf.facesconfig.ui.provider.ManagedBeanLabelProvider;
@@ -71,9 +71,9 @@ public class ManagedBeanMasterSection extends FacesConfigMasterSection {
 			FormToolkit toolkit, FacesConfigMasterDetailPage page) {
 		super(parent, managedForm, toolkit, page, null, null);
 		getSection().setText(
-				NewEditorResourcesNLS.ManagedBeanMasterSection_Name); //$NON-NLS-1$
+				EditorMessages.ManagedBeanMasterSection_Name); //$NON-NLS-1$
 		getSection().setDescription(
-				NewEditorResourcesNLS.ManagedBeanMasterSection_Description);
+				EditorMessages.ManagedBeanMasterSection_Description);
 	}
 
 	protected StructuredViewer createViewer(Composite parent,

@@ -16,7 +16,7 @@ import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.ClassButtonDialogField;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.LayoutUtil;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.StringDialogField;
-import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorMessages;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
@@ -92,11 +92,11 @@ public class AddEditPropertyDialog extends Dialog {
 		super.configureShell(newShell);
 		if (isNew)
 			newShell
-					.setText(NewEditorResourcesNLS.PropertySection_Dialog_Title_Add);
+					.setText(EditorMessages.PropertySection_Dialog_Title_Add);
 		else
 
 			newShell
-					.setText(NewEditorResourcesNLS.PropertySection_Dialog_Title_Edit);
+					.setText(EditorMessages.PropertySection_Dialog_Title_Edit);
 	}
 
 	/*
@@ -115,7 +115,7 @@ public class AddEditPropertyDialog extends Dialog {
 		tabFolder.setLayoutData(gd);
 		TabItem generalTabItem = new TabItem(tabFolder, SWT.NONE);
 		generalTabItem
-				.setText(NewEditorResourcesNLS.PropertySection_Dialog_Tab_General);
+				.setText(EditorMessages.PropertySection_Dialog_Tab_General);
 		Control control = createGeneralTabControl(generalTabItem.getParent());
 		generalTabItem.setControl(control);
 		return container;
@@ -137,22 +137,22 @@ public class AddEditPropertyDialog extends Dialog {
 		propertyNameField = new StringDialogField();
 		// propertyNameField.setRequired(true);
 		propertyNameField
-				.setLabelText(NewEditorResourcesNLS.PropertySection_Dialog_PropertyName);
+				.setLabelText(EditorMessages.PropertySection_Dialog_PropertyName);
 
 		propertyClassField = new ClassButtonDialogField(getProject());
 		// propertyClassField.setRequired(true);
 		propertyClassField
-				.setLabelText(NewEditorResourcesNLS.PropertySection_Dialog_PropertyClass);//$NON-NLS-1$
+				.setLabelText(EditorMessages.PropertySection_Dialog_PropertyClass);//$NON-NLS-1$
 
 		propertyClassField.setAutoOpenResource(false);
 
 		defaultValueField = new StringDialogField();
 		defaultValueField
-				.setLabelText(NewEditorResourcesNLS.PropertySection_Dialog_DefaultValue);
+				.setLabelText(EditorMessages.PropertySection_Dialog_DefaultValue);
 
 		suggestedValueField = new StringDialogField();
 		suggestedValueField
-				.setLabelText(NewEditorResourcesNLS.PropertySection_Dialog_SuggestedValue);
+				.setLabelText(EditorMessages.PropertySection_Dialog_SuggestedValue);
 
 		GridData data = new GridData(GridData.FILL_BOTH);
 		composite.setLayoutData(data);

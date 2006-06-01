@@ -33,7 +33,7 @@ import org.eclipse.jst.jsf.facesconfig.emf.ValidatorClassType;
 import org.eclipse.jst.jsf.facesconfig.emf.ValidatorIdType;
 import org.eclipse.jst.jsf.facesconfig.emf.ValidatorType;
 import org.eclipse.jst.jsf.facesconfig.ui.IFacesConfigConstants;
-import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.page.IFacesConfigPage;
 import org.eclipse.jst.jsf.facesconfig.ui.util.ModelUtil;
 import org.eclipse.swt.layout.GridData;
@@ -69,9 +69,9 @@ public class ValidatorGeneralSection extends AbstractFacesConfigSection {
 			IFacesConfigPage page, FormToolkit toolkit) {
 		super(parent, managedForm, page, toolkit, null, null);
 		getSection()
-				.setText(NewEditorResourcesNLS.ValidatorGeneralSection_Name);
+				.setText(EditorMessages.ValidatorGeneralSection_Name);
 		getSection().setDescription(
-				NewEditorResourcesNLS.ValidatorGeneralSection_Description);
+				EditorMessages.ValidatorGeneralSection_Description);
 	}
 
 	/**
@@ -87,7 +87,7 @@ public class ValidatorGeneralSection extends AbstractFacesConfigSection {
 		toolkit.paintBordersFor(container);
 		displayNameField = new StringDialogField();
 		displayNameField
-				.setLabelText(NewEditorResourcesNLS.ValidatorGeneralSection_Label_DisplayName);
+				.setLabelText(EditorMessages.ValidatorGeneralSection_Label_DisplayName);
 		displayNameField.doFillIntoGrid(toolkit, container, numberOfColumns);
 
 		displayNameField
@@ -127,7 +127,7 @@ public class ValidatorGeneralSection extends AbstractFacesConfigSection {
 
 		descriptionField = new StringDialogField(2);
 		descriptionField
-				.setLabelText(NewEditorResourcesNLS.ValidatorGeneralSection_Label_Description);
+				.setLabelText(EditorMessages.ValidatorGeneralSection_Label_Description);
 		descriptionField.doFillIntoGrid(toolkit, container, numberOfColumns);
 
 		descriptionField
@@ -168,7 +168,7 @@ public class ValidatorGeneralSection extends AbstractFacesConfigSection {
 		validatorIDField = new StringDialogField();
 		// validatorIDField.setRequired(true);
 		validatorIDField
-				.setLabelText(NewEditorResourcesNLS.ValidatorGeneralSection_Label_ValidatorID);
+				.setLabelText(EditorMessages.ValidatorGeneralSection_Label_ValidatorID);
 		validatorIDField.doFillIntoGrid(toolkit, container, numberOfColumns);
 		validatorIDField
 				.setDialogFieldApplyListener(new IDialogFieldApplyListener() {
@@ -196,7 +196,7 @@ public class ValidatorGeneralSection extends AbstractFacesConfigSection {
 		validatorClassField = new ClassButtonDialogField(null);
 		// validatorClassField.setRequired(true);
 		validatorClassField
-				.setLabelText(NewEditorResourcesNLS.ValidatorGeneralSection_Label_ValidatorClass);
+				.setLabelText(EditorMessages.ValidatorGeneralSection_Label_ValidatorClass);
 		validatorClassField.setProject((IProject) getPage().getEditor()
 				.getAdapter(IProject.class));
 		validatorClassField.doFillIntoGrid(toolkit, container, numberOfColumns);

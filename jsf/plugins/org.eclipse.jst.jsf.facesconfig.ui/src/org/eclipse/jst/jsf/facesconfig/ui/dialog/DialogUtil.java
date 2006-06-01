@@ -26,7 +26,7 @@ import org.eclipse.jst.jsf.facesconfig.common.dialogfield.JavaUIHelper;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.jst.jsf.facesconfig.emf.RenderKitIdType;
 import org.eclipse.jst.jsf.facesconfig.emf.RenderKitType;
-import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorMessages;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.dialogs.SelectionDialog;
 
@@ -40,8 +40,8 @@ public class DialogUtil {
 			String superType, int tyle) {
 		SelectionDialog dialog = (SelectionDialog) JavaUIHelper
 				.openSelectionDialog(shell, project, superType, tyle);
-		dialog.setTitle(NewEditorResourcesNLS.FindType);
-		dialog.setMessage(NewEditorResourcesNLS.FindType_Filter);
+		dialog.setTitle(EditorMessages.FindType);
+		dialog.setMessage(EditorMessages.FindType_Filter);
 		if (dialog.open() == SelectionDialog.OK) {
 			Object[] result = dialog.getResult();
 			IType searchedType = (IType) result[0];
@@ -69,7 +69,7 @@ public class DialogUtil {
 			ListChoiceDialog dialog = new ListChoiceDialog(
 					shell,
 					idArray,
-					NewEditorResourcesNLS.DefaultRenderKitIDSection_Wizard_Page_LabelText);
+					EditorMessages.DefaultRenderKitIDSection_Wizard_Page_LabelText);
 			if (dialog.open() == SelectionDialog.OK) {
 				String result = dialog.getResult();
 				if (!"".equals(result)) {

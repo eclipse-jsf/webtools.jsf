@@ -29,7 +29,7 @@ import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanType;
 import org.eclipse.jst.jsf.facesconfig.emf.ManagedPropertyType;
 import org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor;
-import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.page.detail.ManagedBeanDetailsPage;
 import org.eclipse.jst.jsf.facesconfig.ui.section.FacesConfigMasterSection;
 import org.eclipse.jst.jsf.facesconfig.ui.section.ManagedBeanMasterSection;
@@ -54,7 +54,7 @@ public class ManagedBeanPage extends FacesConfigMasterDetailPage {
 
 	public ManagedBeanPage(FacesConfigEditor editor) {
 		super(editor, "ManagedBeanPage",
-				NewEditorResourcesNLS.FacesConfigEditor_ManagedBeans_TabName);
+				EditorMessages.FacesConfigEditor_ManagedBeans_TabName);
 	}
 
 	protected FacesConfigMasterSection[] createMasterSections(

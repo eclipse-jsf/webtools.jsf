@@ -42,7 +42,7 @@ import org.eclipse.jst.jsf.facesconfig.emf.FactoryType;
 import org.eclipse.jst.jsf.facesconfig.emf.LifecycleType;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor;
-import org.eclipse.jst.jsf.facesconfig.ui.NewEditorResourcesNLS;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.section.AbstractFacesConfigSection;
 import org.eclipse.jst.jsf.facesconfig.ui.section.ApplicationSection;
 import org.eclipse.jst.jsf.facesconfig.ui.section.FactorySection;
@@ -102,13 +102,13 @@ public class OthersPage extends FormPage implements IFacesConfigPage,
 	 */
 	public OthersPage(FacesConfigEditor editor) {
 		super(editor, "OthersPage",
-				NewEditorResourcesNLS.FacesConfigEditor_Others_TabName);
+				EditorMessages.FacesConfigEditor_Others_TabName);
 	}
 
 	protected void createFormContent(IManagedForm managedForm) {
 		super.createFormContent(managedForm);
 		ScrolledForm form = managedForm.getForm();
-		form.setText(NewEditorResourcesNLS.OthersPage_Title);
+		form.setText(EditorMessages.OthersPage_Title);
 		form.setBackgroundImage(BANNER_IMAGE);
 		fillBody(managedForm, managedForm.getToolkit());
 		managedForm.refresh();
@@ -144,8 +144,8 @@ public class OthersPage extends FormPage implements IFacesConfigPage,
 		OthersPageBaseSection section = new ApplicationSection(
 				FacesConfigPackage.eINSTANCE.getActionListenerType(),
 				leftContainer, managedForm, this, toolkit);
-		initSection(section, NewEditorResourcesNLS.ActionListenerSection_Name,
-				NewEditorResourcesNLS.ActionListenerSection_Description,
+		initSection(section, EditorMessages.ActionListenerSection_Name,
+				EditorMessages.ActionListenerSection_Description,
 				sectionList);
 		section.getSection().setLayoutData(new GridData(GridData.FILL_BOTH));
 		section.getSection().setExpanded(true);
@@ -154,60 +154,60 @@ public class OthersPage extends FormPage implements IFacesConfigPage,
 				.getDefaultRenderKitIdType(), leftContainer, managedForm, this,
 				toolkit);
 		initSection(section,
-				NewEditorResourcesNLS.DefaultRenderKitIDSection_Name,
-				NewEditorResourcesNLS.DefaultRenderKitIDSection_Description,
+				EditorMessages.DefaultRenderKitIDSection_Name,
+				EditorMessages.DefaultRenderKitIDSection_Description,
 				sectionList);
 
 		section = new LocaleConfigSection(FacesConfigPackage.eINSTANCE
 				.getSupportedLocaleType(), leftContainer, managedForm, this,
 				toolkit);
-		initSection(section, NewEditorResourcesNLS.LocaleConfigSection_Name,
-				NewEditorResourcesNLS.LocaleConfigSection_Description,
+		initSection(section, EditorMessages.LocaleConfigSection_Name,
+				EditorMessages.LocaleConfigSection_Description,
 				sectionList);
 
 		section = new ApplicationSection(FacesConfigPackage.eINSTANCE
 				.getMessageBundleType(), leftContainer, managedForm, this,
 				toolkit);
-		initSection(section, NewEditorResourcesNLS.MessageBundleSection_Name,
-				NewEditorResourcesNLS.MessageBundleSection_Description,
+		initSection(section, EditorMessages.MessageBundleSection_Name,
+				EditorMessages.MessageBundleSection_Description,
 				sectionList);
 
 		section = new ApplicationSection(FacesConfigPackage.eINSTANCE
 				.getNavigationHandlerType(), leftContainer, managedForm, this,
 				toolkit);
 		initSection(section,
-				NewEditorResourcesNLS.NavigationHandlerSection_Name,
-				NewEditorResourcesNLS.NavigationHandlerSection_Description,
+				EditorMessages.NavigationHandlerSection_Name,
+				EditorMessages.NavigationHandlerSection_Description,
 				sectionList);
 
 		section = new ApplicationSection(FacesConfigPackage.eINSTANCE
 				.getPropertyResolverType(), leftContainer, managedForm, this,
 				toolkit);
 		initSection(section,
-				NewEditorResourcesNLS.PropertyResolverSection_Name,
-				NewEditorResourcesNLS.PropertyResolverSection_Description,
+				EditorMessages.PropertyResolverSection_Name,
+				EditorMessages.PropertyResolverSection_Description,
 				sectionList);
 
 		section = new ApplicationSection(FacesConfigPackage.eINSTANCE
 				.getStateManagerType(), leftContainer, managedForm, this,
 				toolkit);
-		initSection(section, NewEditorResourcesNLS.StateManagerSection_Name,
-				NewEditorResourcesNLS.StateManagerSection_Description,
+		initSection(section, EditorMessages.StateManagerSection_Name,
+				EditorMessages.StateManagerSection_Description,
 				sectionList);
 
 		section = new ApplicationSection(FacesConfigPackage.eINSTANCE
 				.getVariableResolverType(), leftContainer, managedForm, this,
 				toolkit);
 		initSection(section,
-				NewEditorResourcesNLS.VariableResolverSection_Name,
-				NewEditorResourcesNLS.VariableResolverSection_Description,
+				EditorMessages.VariableResolverSection_Name,
+				EditorMessages.VariableResolverSection_Description,
 				sectionList);
 
 		section = new ApplicationSection(FacesConfigPackage.eINSTANCE
 				.getViewHandlerType(), leftContainer, managedForm, this,
 				toolkit);
-		initSection(section, NewEditorResourcesNLS.ViewHandlerSection_Name,
-				NewEditorResourcesNLS.ViewHandlerSection_Description,
+		initSection(section, EditorMessages.ViewHandlerSection_Name,
+				EditorMessages.ViewHandlerSection_Description,
 				sectionList);
 
 		leftSections = sectionList;
@@ -222,8 +222,8 @@ public class OthersPage extends FormPage implements IFacesConfigPage,
 				.getApplicationFactoryType(), rightContainer, managedForm,
 				this, toolkit);
 		initSection(section,
-				NewEditorResourcesNLS.ApplicationFactorySection_Name,
-				NewEditorResourcesNLS.ApplicationFactorySection_Description,
+				EditorMessages.ApplicationFactorySection_Name,
+				EditorMessages.ApplicationFactorySection_Description,
 				sectionList);
 		section.getSection().setLayoutData(new GridData(GridData.FILL_BOTH));
 		section.getSection().setExpanded(true);
@@ -232,31 +232,31 @@ public class OthersPage extends FormPage implements IFacesConfigPage,
 				.getFacesContextFactoryType(), rightContainer, managedForm,
 				this, toolkit);
 		initSection(section,
-				NewEditorResourcesNLS.FacesContextFactorySection_Name,
-				NewEditorResourcesNLS.FacesContextFactorySection_Description,
+				EditorMessages.FacesContextFactorySection_Name,
+				EditorMessages.FacesContextFactorySection_Description,
 				sectionList);
 
 		section = new FactorySection(FacesConfigPackage.eINSTANCE
 				.getLifecycleFactoryType(), rightContainer, managedForm, this,
 				toolkit);
 		initSection(section,
-				NewEditorResourcesNLS.LifecycleFactorySection_Name,
-				NewEditorResourcesNLS.LifecycleFactorySection_Description,
+				EditorMessages.LifecycleFactorySection_Name,
+				EditorMessages.LifecycleFactorySection_Description,
 				sectionList);
 
 		section = new FactorySection(FacesConfigPackage.eINSTANCE
 				.getRenderKitFactoryType(), rightContainer, managedForm, this,
 				toolkit);
 		initSection(section,
-				NewEditorResourcesNLS.RenderKitFactorySection_Name,
-				NewEditorResourcesNLS.RenderKitFactorySection_Description,
+				EditorMessages.RenderKitFactorySection_Name,
+				EditorMessages.RenderKitFactorySection_Description,
 				sectionList);
 
 		section = new LifecycleSection(FacesConfigPackage.eINSTANCE
 				.getPhaseListenerType(), rightContainer, managedForm, this,
 				toolkit);
-		initSection(section, NewEditorResourcesNLS.PhaseListenerSection_Name,
-				NewEditorResourcesNLS.PhaseListenerSection_Description,
+		initSection(section, EditorMessages.PhaseListenerSection_Name,
+				EditorMessages.PhaseListenerSection_Description,
 				sectionList);
 
 		rightSections = sectionList;
