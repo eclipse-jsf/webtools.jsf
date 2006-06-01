@@ -330,11 +330,10 @@ public class JSFUtils {
 		EList archiveFiles = jsfLib.getArchiveFiles();
 		int numJars = archiveFiles.size();
 		String name = null;		
-		IPath[] elements = new IPath[numJars];				
+		IPath[] elements = new IPath[numJars];
 		for (int i= 0; i < numJars; i++) {
-			name = ((ArchiveFile)archiveFiles.get(i)).getName();
-			elements[i] = new Path(((ArchiveFile)archiveFiles.get(i)).getPath() + IPath.SEPARATOR + name).makeAbsolute();	
-		}			
+			elements[i] = new Path(((ArchiveFile)archiveFiles.get(i)).getResolvedSourceLocation()).makeAbsolute();	
+		}
 		return elements;
 	}		
 	
