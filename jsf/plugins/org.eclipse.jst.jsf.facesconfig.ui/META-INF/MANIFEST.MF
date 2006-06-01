@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: FacesConfig Editor Plug-in
 Bundle-SymbolicName: org.eclipse.jst.jsf.facesconfig.ui;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 0.5.0.qualifier
 Bundle-Activator: org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin
 Bundle-Vendor: Sybase, Inc
 Bundle-Localization: plugin
