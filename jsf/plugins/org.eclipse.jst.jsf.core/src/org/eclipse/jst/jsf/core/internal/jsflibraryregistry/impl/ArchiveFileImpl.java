@@ -426,13 +426,24 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 	 */
 	public String getResolvedSourceLocation() {
 		String resolvedSourceLocation = null;
+		/**
+		 * The implementation to support PluginProvidedJSFLibrary assume the following.
+		 * 1. Plugin provided JSF library needs to be distributed as an expanded folder.
+		 * 2. JARs for plugin provided JSF library need to reside inside the folder mentioned in item 1 above.
+		 * 3. Each JAR needs to specify a relative path for the folder mentioned in item 1 above.
+		 * 
+		 * Fix for bug 144954.
+		 */
 		if (getJSFLibrary() instanceof PluginProvidedJSFLibrary) {
 			Bundle bundle = getBundle();
 			if (bundle != null) {
-				String bundleLocation= bundle.getLocation();
-				if (bundleLocation != null) {
-					resolvedSourceLocation = appendSeparator(bundleLocation) + sourceLocation; 
-				} else {
+				//resolvedSourceLocation = appendSeparator(bundleLocation) + sourceLocation;
+				try {
+					Path srcPath = new Path(sourceLocation);
+					URL fileURL = Platform.find(bundle, srcPath);
+					URL url = Platform.resolve(fileURL);
+					resolvedSourceLocation = url.getPath();
+				} catch (IOException e) {
 					resolvedSourceLocation = sourceLocation;
 				}
 			} else {
