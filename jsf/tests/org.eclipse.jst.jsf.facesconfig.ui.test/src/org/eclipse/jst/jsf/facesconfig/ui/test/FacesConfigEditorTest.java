@@ -1,0 +1,84 @@
+/*******************************************************************************
+ * Copyright (c) 2004, 2006 Sybase, Inc. and others.
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Sybase, Inc. - initial API and implementation
+ *******************************************************************************/
+
+package org.eclipse.jst.jsf.facesconfig.ui.test;
+
+import junit.framework.TestCase;
+
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor;
+import org.eclipse.jst.jsf.facesconfig.ui.test.util.MockProgressMonitor;
+import org.eclipse.jst.jsf.facesconfig.ui.test.util.TestUtil;
+import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IPerspectiveDescriptor;
+import org.eclipse.ui.IPerspectiveRegistry;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.part.FileEditorInput;
+
+/**
+ * The base class for test cases, other test cases could extends this. In this
+ * test case, an empty jsf project will be created and the default faces config
+ * file will be opened with FacesConfig Editor.
+ * 
+ * @author sfshi
+ * 
+ */
+public abstract class FacesConfigEditorTest extends TestCase {
+	public IProject project;
+
+	public FacesConfigEditor editor;
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see junit.framework.TestCase#setUp()
+	 */
+	protected void setUp() throws Exception {
+		super.setUp();
+		project = TestUtil.createProjectFromZip("emptyjsfproject",
+				"emptyjsfproject.zip");
+		IPerspectiveRegistry reg = PlatformUI.getWorkbench()
+				.getPerspectiveRegistry();
+		
+		IPerspectiveDescriptor j2eePersp = reg
+				.findPerspectiveWithId("org.eclipse.jst.j2ee.J2EEPerspective");
+		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
+				.setPerspective(j2eePersp);
+		IPath filePath = new Path("WebContent/WEB-INF/faces-config.xml");
+		IFile facesConfigFile = project.getFile(filePath);
+		assertNotNull(facesConfigFile);
+		assertTrue("The facesconfig file doesn't exists.", facesConfigFile
+				.exists());
+		IEditorInput fileInput = new FileEditorInput(facesConfigFile);
+		editor = (FacesConfigEditor) PlatformUI.getWorkbench()
+				.getActiveWorkbenchWindow().getActivePage().openEditor(
+						fileInput, FacesConfigEditor.EDITOR_ID);
+		assertNotNull(editor);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see junit.framework.TestCase#tearDown()
+	 */
+	protected void tearDown() throws Exception {
+		super.tearDown();
+		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
+				.closeEditor(editor, false);
+		project.delete(IProject.FORCE | IProject.ALWAYS_DELETE_PROJECT_CONTENT,
+				new MockProgressMonitor());
+	}
+
+}
