@@ -11,6 +11,7 @@
  *******************************************************************************/ 
 package org.eclipse.jst.jsf.core.internal;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -28,15 +29,18 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.ArchiveFile;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistry;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryFactory;
+import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.PluginProvidedJSFLibrary;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.adapter.MaintainDefaultImplementationAdapter;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl.JSFLibraryRegistryPackageImpl;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.util.JSFLibraryRegistryResourceFactoryImpl;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.util.JSFLibraryRegistryResourceImpl;
 import org.eclipse.jst.jsf.core.internal.provisional.jsflibraryregistry.PluginProvidedJSFLibraryCreationHelper;
 import org.eclipse.wst.common.frameworks.internal.WTPPlugin;
+import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 
 /**
@@ -127,7 +131,13 @@ public class JSFCorePlugin extends WTPPlugin {
 				jsfLibraryRegistry = (JSFLibraryRegistry)jsfLibraryRegistryResource.getContents().get(0);
 				loadJSFLibraryExtensions();
 			} catch(IOException ioe) {
-				log(IStatus.INFO, Messages.JSFLibraryRegistry_NoLoadCreatingNew, ioe);
+				/**
+				 * Remove the 3rd throwable parameter in the statement below 
+				 * to surpress error stack in log file since it is only 
+				 * informational.  Bug 144947.
+				 */  
+				//log(IStatus.INFO, Messages.JSFLibraryRegistry_NoLoadCreatingNew, ioe);
+				log(IStatus.INFO, Messages.JSFLibraryRegistry_NoLoadCreatingNew);
 				jsfLibraryRegistry = JSFLibraryRegistryFactory.eINSTANCE.createJSFLibraryRegistry();
 				jsfLibraryRegistryResource.getContents().add(jsfLibraryRegistry);
 				loadJSFLibraryExtensions();
@@ -153,7 +163,18 @@ public class JSFCorePlugin extends WTPPlugin {
 				for (int j=0;j < ext.getConfigurationElements().length;j++){
 					PluginProvidedJSFLibraryCreationHelper newLibCreator = new PluginProvidedJSFLibraryCreationHelper(ext.getConfigurationElements()[j]);						
 					JSFLibrary newLib = newLibCreator.create();
-					if (newLib != null)
+					
+					/**
+					 * Additional check on if a plug-in contributes jsflibraries is an expanded folder.
+					 * Fix related to bug 144954.  
+					 * 
+					 * It would be ideal to check if a plug-in is distributed as a JAR 
+					 * before a JSFLibrary is created.
+					 * 
+					 * This is a temporary solution since JARs in a JAR case is not 
+					 * supported in this release.  Bug 14496.
+					 */
+					if (newLib != null && isJSFLibinExpandedFolder(newLib))
 						jsfLibraryRegistry.addJSFLibrary(newLib);
 				}
 			}
@@ -161,7 +182,7 @@ public class JSFCorePlugin extends WTPPlugin {
 			log(IStatus.ERROR, Messages.JSFLibraryRegistry_ErrorLoadingFromExtPt, e);
 		}
 	}
-
+	
 	/**
 	 * Saves the JSFLibraryRegistry EMF object from plugin-specfic workspace
 	 * settings location. (Called from stop(BundleContext).)
@@ -211,4 +232,29 @@ public class JSFCorePlugin extends WTPPlugin {
 	public String getPluginID() {
 		return PLUGIN_ID;
 	}
+	
+	/**
+	 * To check if a jsflibraries contribution plug-in is 
+	 * distributed in a JAR.
+	 * 
+	 * This is temporary for bug 144954.  Need to be removed when 
+	 * fixing 144996.
+	 *    
+	 * @param jsflib
+	 * @return
+	 */
+	private boolean isJSFLibinExpandedFolder(JSFLibrary jsflib) {
+		boolean exists = false;
+		if (jsflib instanceof PluginProvidedJSFLibrary) { 		// No need to check probably  
+			if (jsflib.getArchiveFiles().size() > 0) {
+				ArchiveFile ar = (ArchiveFile) jsflib.getArchiveFiles().get(0);
+				String resolvedSourceLocation = ar.getResolvedSourceLocation();
+				if (resolvedSourceLocation != null) {
+					exists = new File(resolvedSourceLocation).exists();
+				}		
+			}			
+		}		
+		return exists;
+	}
+
 }
