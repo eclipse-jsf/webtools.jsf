@@ -69,13 +69,5 @@
      point="org.eclipse.jst.j2ee.web.fileURL">
      <fileURL run="org.eclipse.jst.jsf.core.internal.launch.JSFFileURL"/>
   </extension>
-  <extension
-        point="org.eclipse.wst.xml.core.catalogContributions">
-     <catalogContribution>
-        <system
-              systemId="http://org.eclipse.jst.jsf.core/grammarAnnotationSchema"
-              uri="schema/grammar-annotations.xsd"/>
-     </catalogContribution>
-  </extension>
   
 </plugin>
