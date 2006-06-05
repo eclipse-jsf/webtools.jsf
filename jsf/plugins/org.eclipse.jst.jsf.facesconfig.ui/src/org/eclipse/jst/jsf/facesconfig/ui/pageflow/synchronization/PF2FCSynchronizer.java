@@ -60,7 +60,7 @@ public class PF2FCSynchronizer extends AdapterImpl {
 	}
 
 	public void notifyChanged(Notification notification) {
-		if (!tranformer.isListenToNotify()) {
+		if (!isProcessorFor(notification)) {
 			return;
 		}
 		tranformer.setInEvent(true);
@@ -78,6 +78,10 @@ public class PF2FCSynchronizer extends AdapterImpl {
 			}
 			tranformer.setInEvent(false);
 		}
+	}
+
+	private boolean isProcessorFor(Notification notification) {
+		return tranformer.isListenToNotify();
 	}
 
 	private void processChange(Notification notification) {

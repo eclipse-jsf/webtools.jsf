@@ -39,8 +39,9 @@ public class FC2PFSynchronizer extends AdapterImpl {
 	private final boolean DEBUG = false;
 
 	FC2PFTransformer transformer;
-	
-	private static final Logger logger = EditorPlugin.getLogger(FC2PFSynchronizer.class);
+
+	private static final Logger logger = EditorPlugin
+			.getLogger(FC2PFSynchronizer.class);
 
 	public FC2PFSynchronizer(FC2PFTransformer transformer) {
 		this.transformer = transformer;
@@ -59,8 +60,7 @@ public class FC2PFSynchronizer extends AdapterImpl {
 	}
 
 	public void notifyChanged(Notification notification) {
-		if (!transformer.isListenToNotify()
-				|| !(notification.getNotifier() instanceof EObject)) {
+		if (!isProcessorFor(notification)) {
 			return;
 		}
 		transformer.setInEvent(true);
@@ -92,6 +92,23 @@ public class FC2PFSynchronizer extends AdapterImpl {
 			}
 			transformer.setInEvent(false);
 		}
+	}
+
+	private boolean isProcessorFor(Notification notification) {
+		boolean result = false;
+		if (transformer.isListenToNotify()
+				&& (notification.getNotifier() instanceof EObject)) {
+			if (notification.getNotifier() == transformer.getFacesConfig()) {
+				// For faces-config, only navigation rule's change is awared.
+				if (notification.getFeature() == FacesConfigPackage.eINSTANCE
+						.getFacesConfigType_NavigationRule()) {
+					result = true;
+				}
+			} else {
+				result = true;
+			}
+		}
+		return result;
 	}
 
 	private void processAdd(Notification notification) {
