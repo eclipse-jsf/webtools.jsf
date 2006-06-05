@@ -21,7 +21,7 @@ import org.eclipse.wst.common.internal.emf.resource.Translator;
  * @author xnjiang, itrimble
  *
  */
-public class AttributeExtensionTranslator extends Translator {
+public class AttributeExtensionTranslator extends SkipUnknownChildrenTranslator {
 	public AttributeExtensionTranslator(String domNameAndPath, EStructuralFeature aFeature) {
 		super(domNameAndPath, aFeature);//$NON-NLS-1$
 	}

@@ -21,7 +21,7 @@ import org.eclipse.wst.common.internal.emf.resource.Translator;
  * @author xnjiang, itrimble
  *
  */
-public class RendererExtensionTranslator extends Translator {
+public class RendererExtensionTranslator extends SkipUnknownChildrenTranslator {
 
 	public RendererExtensionTranslator(String domNameAndPath, EStructuralFeature aFeature) {
 		super(domNameAndPath, aFeature);

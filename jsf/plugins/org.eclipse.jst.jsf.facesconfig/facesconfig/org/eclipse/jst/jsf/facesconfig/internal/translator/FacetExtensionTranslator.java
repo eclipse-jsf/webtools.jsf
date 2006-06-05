@@ -21,7 +21,7 @@ import org.eclipse.wst.common.internal.emf.resource.Translator;
  * @author xnjiang, itrimble
  *
  */
-public class FacetExtensionTranslator extends Translator {
+public class FacetExtensionTranslator extends SkipUnknownChildrenTranslator {
 	public FacetExtensionTranslator(String domNameAndPath, EStructuralFeature aFeature) {
 		super(domNameAndPath, aFeature); //$NON-NLS-1$
 	}
