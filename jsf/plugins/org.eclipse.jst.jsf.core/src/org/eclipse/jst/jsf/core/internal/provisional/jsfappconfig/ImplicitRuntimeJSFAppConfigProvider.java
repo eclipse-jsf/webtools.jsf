@@ -11,6 +11,9 @@
 package org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.jst.jsf.facesconfig.emf.ComponentClassType;
+import org.eclipse.jst.jsf.facesconfig.emf.ComponentType;
+import org.eclipse.jst.jsf.facesconfig.emf.ComponentTypeType;
 import org.eclipse.jst.jsf.facesconfig.emf.ConverterClassType;
 import org.eclipse.jst.jsf.facesconfig.emf.ConverterIdType;
 import org.eclipse.jst.jsf.facesconfig.emf.ConverterType;
@@ -80,6 +83,50 @@ public class ImplicitRuntimeJSFAppConfigProvider extends AbstractJSFAppConfigPro
 		validators.add(createValidator("DoubleRange")); //$NON-NLS-1$
 		validators.add(createValidator("Length")); //$NON-NLS-1$
 		validators.add(createValidator("LongRange")); //$NON-NLS-1$
+		//create and add UI components
+		EList components = facesConfig.getComponent();
+		components.add(createUIComponent("Column")); //$NON-NLS-1$
+		components.add(createUIComponent("Command")); //$NON-NLS-1$
+		components.add(createUIComponent("Data")); //$NON-NLS-1$
+		components.add(createUIComponent("Form")); //$NON-NLS-1$
+		components.add(createUIComponent("Graphic")); //$NON-NLS-1$
+		components.add(createUIComponent("Input")); //$NON-NLS-1$
+		components.add(createUIComponent("Message")); //$NON-NLS-1$
+		components.add(createUIComponent("Messages")); //$NON-NLS-1$
+		components.add(createUIComponent("Output")); //$NON-NLS-1$
+		components.add(createUIComponent("Panel")); //$NON-NLS-1$
+		components.add(createUIComponent("Parameter")); //$NON-NLS-1$
+		components.add(createUIComponent("SelectBoolean")); //$NON-NLS-1$
+		components.add(createUIComponent("SelectItem")); //$NON-NLS-1$
+		components.add(createUIComponent("SelectItems")); //$NON-NLS-1$
+		components.add(createUIComponent("SelectMany")); //$NON-NLS-1$
+		components.add(createUIComponent("SelectOne")); //$NON-NLS-1$
+		components.add(createUIComponent("ViewRoot")); //$NON-NLS-1$
+		//create and add HTML components
+		components.add(createHTMLComponent("HtmlCommandButton")); //$NON-NLS-1$
+		components.add(createHTMLComponent("HtmlCommandLink")); //$NON-NLS-1$
+		components.add(createHTMLComponent("HtmlDataTable")); //$NON-NLS-1$
+		components.add(createHTMLComponent("HtmlForm")); //$NON-NLS-1$
+		components.add(createHTMLComponent("HtmlGraphicImage")); //$NON-NLS-1$
+		components.add(createHTMLComponent("HtmlInputHidden")); //$NON-NLS-1$
+		components.add(createHTMLComponent("HtmlInputSecret")); //$NON-NLS-1$
+		components.add(createHTMLComponent("HtmlInputText")); //$NON-NLS-1$
+		components.add(createHTMLComponent("HtmlInputTextarea")); //$NON-NLS-1$
+		components.add(createHTMLComponent("HtmlMessage")); //$NON-NLS-1$
+		components.add(createHTMLComponent("HtmlMessages")); //$NON-NLS-1$
+		components.add(createHTMLComponent("HtmlOutputFormat")); //$NON-NLS-1$
+		components.add(createHTMLComponent("HtmlOutputLabel")); //$NON-NLS-1$
+		components.add(createHTMLComponent("HtmlOutputLink")); //$NON-NLS-1$
+		components.add(createHTMLComponent("HtmlOutputText")); //$NON-NLS-1$
+		components.add(createHTMLComponent("HtmlPanelGrid")); //$NON-NLS-1$
+		components.add(createHTMLComponent("HtmlPanelGroup")); //$NON-NLS-1$
+		components.add(createHTMLComponent("HtmlSelectBooleanCheckbox")); //$NON-NLS-1$
+		components.add(createHTMLComponent("HtmlSelectManyCheckbox")); //$NON-NLS-1$
+		components.add(createHTMLComponent("HtmlSelectManyListbox")); //$NON-NLS-1$
+		components.add(createHTMLComponent("HtmlSelectManyMenu")); //$NON-NLS-1$
+		components.add(createHTMLComponent("HtmlSelectOneListbox")); //$NON-NLS-1$
+		components.add(createHTMLComponent("HtmlSelectOneMenu")); //$NON-NLS-1$
+		components.add(createHTMLComponent("HtmlSelectOneRadio")); //$NON-NLS-1$
 	}
 
 	/**
@@ -134,6 +181,60 @@ public class ImplicitRuntimeJSFAppConfigProvider extends AbstractJSFAppConfigPro
 		validatorClassType.setTextContent(sb.toString());
 		validatorType.setValidatorClass(validatorClassType);
 		return validatorType;
+	}
+
+	/**
+	 * Creates a {@link ComponentType} instance to represent a standard UI
+	 * component.
+	 * 
+	 * @param name Base name of component from which component-type and
+	 * component-class are formed.
+	 * @return {@link ComponentType} instance.
+	 */
+	protected ComponentType createUIComponent(String name) {
+		ComponentType componentType = FacesConfigFactory.eINSTANCE.createComponentType();
+		//set component-type
+		ComponentTypeType componentTypeType = FacesConfigFactory.eINSTANCE.createComponentTypeType();
+		StringBuffer sb = new StringBuffer();
+		sb.append("javax.faces."); //$NON-NLS-1$
+		sb.append(name);
+		componentTypeType.setTextContent(sb.toString());
+		componentType.setComponentType(componentTypeType);
+		//set component-class
+		ComponentClassType componentClassType = FacesConfigFactory.eINSTANCE.createComponentClassType();
+		sb = new StringBuffer();
+		sb.append("javax.faces.component.UI"); //$NON-NLS-1$
+		sb.append(name);
+		componentClassType.setTextContent(sb.toString());
+		componentType.setComponentClass(componentClassType);
+		return componentType;
+	}
+
+	/**
+	 * Creates a {@link ComponentType} instance to represent a concrete HTML
+	 * component.
+	 * 
+	 * @param name Base name of component from which component-type and
+	 * component-class are formed.
+	 * @return {@link ComponentType} instance.
+	 */
+	protected ComponentType createHTMLComponent(String name) {
+		ComponentType componentType = FacesConfigFactory.eINSTANCE.createComponentType();
+		//set component-type
+		ComponentTypeType componentTypeType = FacesConfigFactory.eINSTANCE.createComponentTypeType();
+		StringBuffer sb = new StringBuffer();
+		sb.append("javax.faces."); //$NON-NLS-1$
+		sb.append(name);
+		componentTypeType.setTextContent(sb.toString());
+		componentType.setComponentType(componentTypeType);
+		//set component-class
+		ComponentClassType componentClassType = FacesConfigFactory.eINSTANCE.createComponentClassType();
+		sb = new StringBuffer();
+		sb.append("javax.faces.component.html."); //$NON-NLS-1$
+		sb.append(name);
+		componentClassType.setTextContent(sb.toString());
+		componentType.setComponentClass(componentClassType);
+		return componentType;
 	}
 
 	/*
