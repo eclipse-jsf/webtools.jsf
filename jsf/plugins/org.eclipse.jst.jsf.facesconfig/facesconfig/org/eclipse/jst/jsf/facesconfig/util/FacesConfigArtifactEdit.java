@@ -27,7 +27,7 @@ import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 
 
 public class FacesConfigArtifactEdit extends ArtifactEdit {
-	private static String sFileName = null;
+	private String sFileName = null;
 	private FacesConfigType facesConfig = null;
 	private URI facesConfigURI = URI.createURI(IFacesConfigConstants.FACES_CONFIG_URI);
 	private boolean bRegistered = false;
@@ -37,10 +37,12 @@ public class FacesConfigArtifactEdit extends ArtifactEdit {
 	}
 
 	public static FacesConfigArtifactEdit getFacesConfigArtifactEditForRead(IProject aProject, String sConfigFile) {
-		sFileName = sConfigFile;
 		FacesConfigArtifactEdit artifactEdit = null;
 		try {
 			artifactEdit = new FacesConfigArtifactEdit(aProject, true);
+			if (artifactEdit != null) {
+				artifactEdit.setFilename(sConfigFile);
+			}
 		} catch (IllegalArgumentException iae) {
 		}
 		return artifactEdit;
@@ -50,10 +52,12 @@ public class FacesConfigArtifactEdit extends ArtifactEdit {
 	}
 
 	public static FacesConfigArtifactEdit getFacesConfigArtifactEditForWrite(IProject aProject, String sConfigFile) {
-		sFileName = sConfigFile;
 		FacesConfigArtifactEdit artifactEdit = null;
 		try {
 			artifactEdit = new FacesConfigArtifactEdit(aProject, false);
+			if (artifactEdit != null) {
+				artifactEdit.setFilename(sConfigFile);
+			}
 		} catch (IllegalArgumentException iae) {
 		}
 		return artifactEdit;
@@ -108,6 +112,15 @@ public class FacesConfigArtifactEdit extends ArtifactEdit {
 			facesConfigURI = URI.createURI(IFacesConfigConstants.FACES_CONFIG_URI);
 		}
 		return getArtifactEditModel().getResource(facesConfigURI);
+	}
+
+	/**
+	 * Sets an instance's filename, used to create a URI and load a model.
+	 * 
+	 * @param filename This instance's filename.
+	 */
+	public void setFilename(String filename) {
+		sFileName = filename;
 	}
 
 	protected void addFacesConfigIfNecessary(TranslatorResource aResource) {
