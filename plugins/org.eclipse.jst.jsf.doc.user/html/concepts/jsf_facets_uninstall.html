@@ -3,22 +3,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" href="../../book.css" type="text/css"/>
-<title>What happens when a JSF Facet is installed?</title>
+<title>What happens when a JSF Facet is un-installed?</title>
 </head>
 <body>
-<h1>What happens when a JSF Facet is installed?</h1>
+<h1>What happens when a JSF Facet is un-installed?</h1>
 <br>
-When a JSF Facet is installed, the following occurs:
+When a JSF Facet is un-installed, the JSF references in the Web Deployment descriptor (web.xml) are removed.<br>References removed are:
 <ul>
-<li>The user specified JSF Libraries are added to the build classpath if they are not deployed or, they are added as J2EE Module Dependencies which allows them to be added to the build classpath and deployed at module publish time</li>
-<li>The project's Web Deployment Descriptor (web.xml) is updated ensuring that the Faces Servlet is present along with the user's specification for:
-	<ul>
-	<li>Faces Servlet Name</li>
 	<li>Faces Servlet URL Mappings</li>
 	<li>Context Params for application configuration file</li>
-	</ul>
-</li>
+	<li>Servlet</li>
 </ul>
+<br>
+No files, including faces-config.xml, are removed or deleted from the project.<br>
 <br>
 <img src="../../images/ngrelc.png"  alt="Related concepts" border="0"> 
 <p> <a href="./jsf_facets.html">JSF Facets</a><br>

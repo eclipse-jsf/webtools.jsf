@@ -2,11 +2,11 @@
 <?NLS TYPE="org.eclipse.help.toc"?>
 
 <toc label="Reference" link_to="toc.xml#jsf_reference"> 
-	<topic label="Faces-Config Editor/Wizards"  href="html/reference/???.html" /> 
-	<topic label="Taglibrary Support" href="html/reference/???.html" > 
-		<topic label="JSF Core" href="html/reference/???.html" /> 
-		<topic label="JSF HTML" href="html/reference/???.html" />
+	<topic label="Faces-Config Editor/Wizards"  href="html/reference/facesconfigeditor.html" /> 
+	<topic label="Taglibrary Support" href="html/reference/taglibsupport.html" > 
+		<topic label="JSF Core" href="html/reference/jsf-c.html" /> 
+		<topic label="JSF HTML" href="html/reference/jsf-h.html" />
 	</topic>
-	<topic label="JSF Facet" href="html/reference/???.html" /> 
-	<topic label="JSF Libraries" href="html/reference/???.html" /> 
+	<topic label="JSF Facet" href="html/reference/jsf_facet.html" /> 
+	<topic label="JSF Libraries" href="html/reference/jsf_libraries.html" /> 
 </toc>
