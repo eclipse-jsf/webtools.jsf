@@ -24,7 +24,6 @@ import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.command.RemoveCommand;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.StructuredViewer;
@@ -39,8 +38,8 @@ import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanClassType;
 import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanNameType;
 import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanScopeType;
 import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanType;
-import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorMessages;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.page.FacesConfigMasterDetailPage;
 import org.eclipse.jst.jsf.facesconfig.ui.provider.ManagedBeanContentProvider;
 import org.eclipse.jst.jsf.facesconfig.ui.provider.ManagedBeanLabelProvider;
@@ -50,6 +49,7 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.widgets.FormToolkit;
@@ -70,8 +70,7 @@ public class ManagedBeanMasterSection extends FacesConfigMasterSection {
 	public ManagedBeanMasterSection(Composite parent, IManagedForm managedForm,
 			FormToolkit toolkit, FacesConfigMasterDetailPage page) {
 		super(parent, managedForm, toolkit, page, null, null);
-		getSection().setText(
-				EditorMessages.ManagedBeanMasterSection_Name); //$NON-NLS-1$
+		getSection().setText(EditorMessages.ManagedBeanMasterSection_Name); //$NON-NLS-1$
 		getSection().setDescription(
 				EditorMessages.ManagedBeanMasterSection_Description);
 	}
@@ -273,33 +272,45 @@ public class ManagedBeanMasterSection extends FacesConfigMasterSection {
 			if (msg.getFeature() == FacesConfigPackage.eINSTANCE
 					.getFacesConfigType_ManagedBean()) {
 				if (msg.getEventType() == Notification.ADD) {
-					EObject mbean = (EObject) msg.getNewValue();
+					final EObject mbean = (EObject) msg.getNewValue();
 					if (EcoreUtil.getExistingAdapter(mbean,
 							ManagedBeanMasterSection.class) == null) {
 
 						mbean.eAdapters().add(
 								getManagedBeanMasterSectionAdapter());
 					}
-					Object parentElement = ((ITreeContentProvider) ((TreeViewer) getStructuredViewer())
-							.getContentProvider()).getParent(mbean);
-					((TreeViewer) getStructuredViewer()).add(parentElement,
-							mbean);
-					IStructuredSelection selection = new StructuredSelection(
-							mbean);
-					getStructuredViewer().setSelection(selection);
+
+					Runnable run = new Runnable() {
+
+						public void run() {
+							getStructuredViewer().refresh(true);
+							IStructuredSelection selection = new StructuredSelection(
+									mbean);
+							getStructuredViewer().setSelection(selection);
+						}
+
+					};
+					Display.getDefault().asyncExec(run);
+				} else if (msg.getEventType() == Notification.REMOVE) {
+
+					Runnable run = new Runnable() {
+						public void run() {
+							getStructuredViewer().refresh(true);
+						}
+
+					};
+					Display.getDefault().asyncExec(run);
 				}
 
-				if (msg.getEventType() == Notification.REMOVE) {
-					Object mbean = msg.getOldValue();
-					Object scopeItem = ((ITreeContentProvider) ((TreeViewer) getStructuredViewer())
-							.getContentProvider()).getParent(mbean);
-					((TreeViewer) getStructuredViewer()).remove(scopeItem,
-							new Object[] { mbean });
-				}
+				else if (msg.getEventType() == Notification.SET) {
+					final Object mbean = msg.getNewValue();
+					Runnable run = new Runnable() {
+						public void run() {
+							getStructuredViewer().refresh(mbean, true);
+						}
 
-				if (msg.getEventType() == Notification.SET) {
-					Object mbean = msg.getNewValue();
-					getStructuredViewer().refresh(mbean, true);
+					};
+					Display.getDefault().asyncExec(run);
 				}
 			}
 
@@ -308,16 +319,33 @@ public class ManagedBeanMasterSection extends FacesConfigMasterSection {
 					|| msg.getFeature() == FacesConfigPackage.eINSTANCE
 							.getManagedBeanType_ManagedBeanName()) {
 
-				Object mbean = msg.getNotifier();
-				getStructuredViewer().refresh(mbean, true);
+				final Object bean = msg.getNotifier();
+
+				Runnable run = new Runnable() {
+
+					public void run() {
+						getStructuredViewer().refresh(bean, true);
+					}
+
+				};
+				Display.getDefault().asyncExec(run);
 
 			} else if (msg.getFeature() == FacesConfigPackage.eINSTANCE
 					.getManagedBeanType_ManagedBeanScope()) {
 
-				Object mbean = msg.getNotifier();
-				getStructuredViewer().refresh();
-				IStructuredSelection selection = new StructuredSelection(mbean);
-				getStructuredViewer().setSelection(selection);
+				final Object mbean = msg.getNotifier();
+
+				Runnable run1 = new Runnable() {
+
+					public void run() {
+						getStructuredViewer().refresh();
+						IStructuredSelection selection = new StructuredSelection(
+								mbean);
+						getStructuredViewer().setSelection(selection);
+					}
+
+				};
+				Display.getDefault().asyncExec(run1);
 			}
 
 		}
