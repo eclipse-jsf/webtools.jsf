@@ -14,27 +14,30 @@ import org.eclipse.ui.actions.ActionFactory;
  */
 public class MyEditingDomainActionContributor extends
 		EditingDomainActionBarContributor implements INestedActionContributor {
+	public MyEditingDomainActionContributor() {
+		super();
+	}
+
 	public void setActiveEditor(IEditorPart part) {
-		super.setActiveEditor(part);
 		if (getActiveEditor() != null) {
 			deactivate();
 		}
+		super.setActiveEditor(part);
 		IActionBars actionBars = getActionBars();
 		actionBars.clearGlobalActionHandlers();
-
-		actionBars.setGlobalActionHandler(ActionFactory.DELETE.getId(),
-				deleteAction);
-		actionBars.setGlobalActionHandler(ActionFactory.UNDO.getId(),
-				undoAction);
-		actionBars.setGlobalActionHandler(ActionFactory.REDO.getId(),
-				redoAction);
-		// actionBars.setGlobalActionHandler(ActionFactory.CUT.getId(),
-		// cutAction);
-		// actionBars.setGlobalActionHandler(ActionFactory.COPY.getId(),
-		// copyAction);
-		// actionBars.setGlobalActionHandler(ActionFactory.PASTE.getId(),
-		// pasteAction);
 		if (part instanceof IEditingDomainProvider) {
+			actionBars.setGlobalActionHandler(ActionFactory.DELETE.getId(),
+					deleteAction);
+			actionBars.setGlobalActionHandler(ActionFactory.UNDO.getId(),
+					undoAction);
+			actionBars.setGlobalActionHandler(ActionFactory.REDO.getId(),
+					redoAction);
+			// actionBars.setGlobalActionHandler(ActionFactory.CUT.getId(),
+			// cutAction);
+			// actionBars.setGlobalActionHandler(ActionFactory.COPY.getId(),
+			// copyAction);
+			// actionBars.setGlobalActionHandler(ActionFactory.PASTE.getId(),
+			// pasteAction);
 			activate();
 		}
 	}

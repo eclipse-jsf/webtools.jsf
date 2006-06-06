@@ -46,6 +46,8 @@ public class FacesConfigActionBarContributor extends
 
 	private IEditorPart activeNestedEditor;
 
+	private IEditorPart targetEditor;
+
 	public FacesConfigActionBarContributor() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -119,13 +121,6 @@ public class FacesConfigActionBarContributor extends
 		getSourceActionContributor().init(bars, page);
 		getFormbasedPageActionContributor().init(bars, page);
 		super.init(bars, page);
-	}
-
-	public void setActiveEditor(IEditorPart targetEditor) {
-		if (activeNestedEditor != getActiveNestedEditor(targetEditor)) {
-			activeNestedEditor = getActiveNestedEditor(targetEditor);
-			setActivePage(activeNestedEditor);
-		}
 	}
 
 	private IEditorPart getActiveNestedEditor(IEditorPart targetEditor) {
