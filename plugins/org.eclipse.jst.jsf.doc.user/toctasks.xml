@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?NLS TYPE="org.eclipse.help.toc"?>
+
+<toc label="Tasks" link_to="toc.xml#jsf_tasks"> 
+	<topic label="Creating New JSF  Projects"  href="html/tasks/create_jsf_app.html" /> 
+	<topic label="Adding Facets to Existing projects" href="html/tasks/add_jsf_facet.html" /> 
+	<topic label="Creating and Updating JSF Libs" href="html/tasks/jsf_libs.html" /> 
+	<topic label="Creating JSF JSP Pages" href="html/tasks/create_jsf_jsp_page.html" /> 
+	<topic label="Creating and Managing JSF Configuration Files" href="html/tasks/jsf_app_configs.html" /> 
+	<topic label="Creating Managed Beans" href="html/tasks/create_managed_beans.html" /> 
+	<topic label="Validating JSF Applications" href="html/tasks/jsf_validation.html" /> 
+	<topic label="Executing JSF Pages" href="html/gettingstarted/tutorial/tutorial/JSFTools_tutorial.html#testpage" /> 
+</toc>
