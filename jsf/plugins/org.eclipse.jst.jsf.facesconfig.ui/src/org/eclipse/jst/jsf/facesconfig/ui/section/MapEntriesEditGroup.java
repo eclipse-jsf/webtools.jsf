@@ -312,15 +312,13 @@ public class MapEntriesEditGroup extends DialogFieldGroup implements
 		table.setLayout(layout);
 
 		TableColumn keyCol = new TableColumn(table, SWT.NONE);
-		keyCol
-				.setText(EditorMessages.InitializationSection_MapTable_Key);//$NON-NLS-1$
+		keyCol.setText(EditorMessages.InitializationSection_MapTable_Key);//$NON-NLS-1$
 		layout.addColumnData(new ColumnWeightData(1, true));
 		keyCol.setResizable(true);
 
 		TableColumn valueCol = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(1, true));
-		valueCol
-				.setText(EditorMessages.InitializationSection_MapTable_Value);//$NON-NLS-1$
+		valueCol.setText(EditorMessages.InitializationSection_MapTable_Value);//$NON-NLS-1$
 		valueCol.setResizable(true);
 		table.addMouseListener(new MouseAdapter() {
 			public void mouseDoubleClick(MouseEvent e) {
@@ -468,6 +466,11 @@ public class MapEntriesEditGroup extends DialogFieldGroup implements
 	}
 
 	protected void editButtonSelected() {
+		if (tableViewer.getSelection() == null
+				|| ((IStructuredSelection) tableViewer.getSelection())
+						.isEmpty()) {
+			return;
+		}
 		MapEntryType mapEntry = (MapEntryType) ((IStructuredSelection) tableViewer
 				.getSelection()).getFirstElement();
 		AddEditMapEntryDialog dialog = new AddEditMapEntryDialog(EditorPlugin
