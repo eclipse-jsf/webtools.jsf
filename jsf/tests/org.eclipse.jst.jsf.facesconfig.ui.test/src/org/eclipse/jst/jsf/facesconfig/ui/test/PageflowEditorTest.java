@@ -17,6 +17,7 @@ import org.eclipse.jst.jsf.facesconfig.emf.NavigationCaseType;
 import org.eclipse.jst.jsf.facesconfig.emf.NavigationRuleType;
 import org.eclipse.jst.jsf.facesconfig.emf.ToViewIdType;
 import org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor;
+import org.eclipse.jst.jsf.facesconfig.ui.page.IntroductionPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowEditor;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.command.AddConnectionCommand;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.command.AddNodeCommand;
@@ -28,6 +29,7 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowFactory;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.synchronization.TransformUtil;
+import org.eclipse.ui.actions.ActionFactory;
 
 /**
  * @author hmeng
@@ -44,7 +46,15 @@ public class PageflowEditorTest extends FacesConfigEditorTest {
 		// TODO Auto-generated constructor stub
 	}
 
+	protected void setUp() throws Exception {
+		// TODO Auto-generated method stub
+		super.setUp();
+		((FacesConfigEditor) editor)
+				.setActiveEditorPage(PageflowEditor.PAGE_ID);
+	}
+
 	public void testAddElements() {
+		editor.setActiveEditorPage(PageflowEditor.PAGE_ID);
 		Pageflow pageflow = getPageflow();
 		PageflowPage source = createPage(INDEX_JSP);
 		Assert.isTrue(pageflow.getNodes().contains(source));
@@ -70,7 +80,8 @@ public class PageflowEditorTest extends FacesConfigEditorTest {
 		connectionCommand.setTarget(target);
 		PageflowLink link = PageflowFactory.eINSTANCE.createPFLink();
 		connectionCommand.setPFLink(link);
-		connectionCommand.execute();
+		((FacesConfigEditor) editor).getDelegatingCommandStack().execute(
+				connectionCommand);
 		return link;
 	}
 
@@ -80,7 +91,8 @@ public class PageflowEditorTest extends FacesConfigEditorTest {
 		AddNodeCommand command = new AddNodeCommand();
 		command.setParent(getPageflow());
 		command.setChild(source);
-		command.execute();
+		((FacesConfigEditor) editor).getDelegatingCommandStack().execute(
+				command);
 		return source;
 	}
 
@@ -195,5 +207,38 @@ public class PageflowEditorTest extends FacesConfigEditorTest {
 		((FacesConfigEditor) editor).getDelegatingCommandStack().redo();
 		Assert.isTrue(getFacesConfig().getNavigationRule().size() == 0);
 		Assert.isTrue(getPageflow().getLinks().size() == 0);
+	}
+
+	public void testEditorSwitch() throws Exception {
+		editor.setFocus();
+		editor.setActivePage(IntroductionPage.class.getName());
+		Assert.isTrue(editor.getActionBarContributor().getActionBars()
+				.getGlobalActionHandler(ActionFactory.UNDO.getId()) == null);
+		Assert.isTrue(editor.getActionBarContributor().getActionBars()
+				.getGlobalActionHandler(ActionFactory.REDO.getId()) == null);
+		testAddElements();
+		editor.setActivePage(PageflowEditor.PAGE_ID);
+		Assert
+				.isTrue(editor.getActionBarContributor().getActionBars()
+						.getGlobalActionHandler(ActionFactory.UNDO.getId())
+						.isEnabled());
+
+		editor.setActivePage(IntroductionPage.class.getName());
+		Assert.isTrue(editor.getActionBarContributor().getActionBars()
+				.getGlobalActionHandler(ActionFactory.UNDO.getId()) == null);
+		Assert.isTrue(editor.getActionBarContributor().getActionBars()
+				.getGlobalActionHandler(ActionFactory.REDO.getId()) == null);
+		FacesConfigEditor anotherEditor = (FacesConfigEditor) openWithEditor("WebContent/WEB-INF/faces-config1.xml");
+		anotherEditor.setFocus();
+		Assert.isTrue(anotherEditor.getActionBarContributor().getActionBars()
+				.getGlobalActionHandler(ActionFactory.UNDO.getId()) == null);
+		Assert.isTrue(anotherEditor.getActionBarContributor().getActionBars()
+				.getGlobalActionHandler(ActionFactory.REDO.getId()) == null);
+		editor.setFocus();
+		editor.setActiveEditorPage(PageflowEditor.PAGE_ID);
+		Assert
+				.isTrue(editor.getActionBarContributor().getActionBars()
+						.getGlobalActionHandler(ActionFactory.UNDO.getId())
+						.isEnabled());
 	}
 }

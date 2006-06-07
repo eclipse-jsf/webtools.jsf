@@ -22,8 +22,10 @@ import org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor;
 import org.eclipse.jst.jsf.facesconfig.ui.test.util.MockProgressMonitor;
 import org.eclipse.jst.jsf.facesconfig.ui.test.util.TestUtil;
 import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IPerspectiveDescriptor;
 import org.eclipse.ui.IPerspectiveRegistry;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
 
@@ -51,21 +53,30 @@ public abstract class FacesConfigEditorTest extends TestCase {
 				"emptyjsfproject.zip");
 		IPerspectiveRegistry reg = PlatformUI.getWorkbench()
 				.getPerspectiveRegistry();
-		
+
 		IPerspectiveDescriptor j2eePersp = reg
 				.findPerspectiveWithId("org.eclipse.jst.j2ee.J2EEPerspective");
 		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
 				.setPerspective(j2eePersp);
-		IPath filePath = new Path("WebContent/WEB-INF/faces-config.xml");
+		openEditor();
+	}
+
+	protected void openEditor() throws PartInitException {
+		editor = (FacesConfigEditor) openWithEditor("WebContent/WEB-INF/faces-config.xml");
+	}
+
+	protected IEditorPart openWithEditor(String name) throws PartInitException {
+		IPath filePath = new Path(name);
 		IFile facesConfigFile = project.getFile(filePath);
 		assertNotNull(facesConfigFile);
 		assertTrue("The facesconfig file doesn't exists.", facesConfigFile
 				.exists());
 		IEditorInput fileInput = new FileEditorInput(facesConfigFile);
-		editor = (FacesConfigEditor) PlatformUI.getWorkbench()
+		IEditorPart editor = (FacesConfigEditor) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().openEditor(
 						fileInput, FacesConfigEditor.EDITOR_ID);
 		assertNotNull(editor);
+		return editor;
 	}
 
 	/*
