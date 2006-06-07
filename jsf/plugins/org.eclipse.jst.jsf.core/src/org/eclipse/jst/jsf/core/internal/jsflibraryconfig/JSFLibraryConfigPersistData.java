@@ -25,9 +25,9 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistry;
 import org.eclipse.jst.jsf.core.internal.project.facet.JSFUtils;
 
 /**
- * This class is responsible for persist and retore 
- * the configuration data for <b>JSFLibraryConfigControl</b>.  
- *  
+ * To save and retore JSF library reference configuration 
+ * for <b>JSFLibraryConfigControl</b>.  
+ * 
  * @author Justin Chen - Oracle
  *
  */
@@ -40,23 +40,21 @@ public class JSFLibraryConfigPersistData {
 	private JSFLibraryDecorator selJSFLibImpl = null;
 	private List selJSFLibComp = null;
 	
- 	/**
- 	 * @param project
- 	 */
  	protected JSFLibraryConfigPersistData(IProject project) {
 		this.project = project;	
 		this.jsfLibReg = JSFCorePlugin.getDefault().getJSFLibraryRegistry();
 	}
  	
 	/**
+	 * Return previoulsly selected JSF implementation library.
+	 * 
 	 * @return JSFLibraryDecorator
 	 */
-	protected JSFLibraryDecorator getSelectedJSFLibImplementation() {
-		
+ 	protected JSFLibraryDecorator getSavedJSFImplLib() {		
 		try {			
 			if ( selJSFLibImpl == null ) {
 				String strImplLibs = ((IResource)project).getPersistentProperty(new QualifiedName("", JSFUtils.PP_JSF_IMPLEMENTATION_LIBRARIES));				
-				selJSFLibImpl = getSelectedJSFLibImpl(getTuples(strImplLibs));
+				selJSFLibImpl = getJSFImplLibfromPersistentProperties(getTuples(strImplLibs));
 			}
 		} catch (CoreException e) {
 			if (JSFCorePlugin.getDefault().getJSFLibraryRegistry() != null) {
@@ -69,19 +67,19 @@ public class JSFLibraryConfigPersistData {
 			}
 		}
 		return selJSFLibImpl;
-		
 	}
 	
 	/**
+	 * Return the collection of selected JSF component libraries.
+	 * 
 	 * @return List
 	 */
-	protected List getSelectedJSFLibComponent() {	
-		
+	protected List getSavedJSFCompLibs() {	
 		try {
 			if ( selJSFLibComp == null ) {
 				selJSFLibComp = new ArrayList(Collections.EMPTY_LIST);
 				String strCompLibs = ((IResource)project).getPersistentProperty(new QualifiedName("", JSFUtils.PP_JSF_COMPONENT_LIBRARIES));				
-				initJSFCompLibs(getTuples(strCompLibs), selJSFLibComp);
+				getJSFCompLibsfromPersistentProperties(getTuples(strCompLibs), selJSFLibComp);
 			}		
 		} catch (CoreException e) {
 			JSFCorePlugin.getDefault().getMsgLogger().log(e);
@@ -90,7 +88,7 @@ public class JSFLibraryConfigPersistData {
 	}
 	
 	/**
-	 * To persist configuration data as a project resource.
+	 * To save configuration data as a project resource.
 	 * 
 	 * @param selJSFLibImpl
 	 * @param selJSFLibComp
@@ -100,6 +98,11 @@ public class JSFLibraryConfigPersistData {
 			((IResource)project).setPersistentProperty(new QualifiedName("", JSFUtils.PP_JSF_IMPLEMENTATION_LIBRARIES), generatePersistString(selJSFLibImpl));
 			((IResource)project).setPersistentProperty(new QualifiedName("", JSFUtils.PP_JSF_COMPONENT_LIBRARIES), generatePersistString(selJSFLibComp));
 			
+			/**
+			 * Flush the selection so that they are reconstructed from 
+			 * persistent properties when getSavedJSFImplLib and getSavedJSFCompLibs 
+			 * called next time.
+			 */
 			this.selJSFLibImpl = null;
 			this.selJSFLibComp = null;
 			
@@ -108,7 +111,7 @@ public class JSFLibraryConfigPersistData {
 		}
 	}
 	
-	private JSFLibraryDecorator getSelectedJSFLibImpl(List jsfLibTuples) {
+	private JSFLibraryDecorator getJSFImplLibfromPersistentProperties(List jsfLibTuples) {
 		Iterator itTuple = jsfLibTuples.iterator();
 		while(itTuple.hasNext()) {
 			Tuple tuple = (Tuple)itTuple.next();
@@ -123,7 +126,7 @@ public class JSFLibraryConfigPersistData {
 		return null;
 	}
 	
-	private void initJSFCompLibs(List jsfLibTuples, List JSFCompLibs) {
+	private void getJSFCompLibsfromPersistentProperties(List jsfLibTuples, List JSFCompLibs) {
 		Iterator itTuple = jsfLibTuples.iterator();
 		while(itTuple.hasNext()) {
 			Tuple tuple = (Tuple)itTuple.next();
@@ -163,11 +166,16 @@ public class JSFLibraryConfigPersistData {
 				}
 			}			
 		}
-		
 		return list;
 	}
 	
-	
+	/**
+	 * Inner class for parsing persistent property resource. 
+	 * 
+	 * Note: Take out selected attribute since it is not needed.
+	 *       And, to provide a way to migrating earlier 
+	 *       project.
+	 */
 	class Tuple {
 		private String ID;
 		private boolean selected = false;

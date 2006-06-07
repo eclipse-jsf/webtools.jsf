@@ -11,7 +11,6 @@
 package org.eclipse.jst.jsf.ui.internal.project.facet;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 
 import org.eclipse.core.resources.IProject;
@@ -19,36 +18,21 @@ import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.jface.dialogs.DialogSettings;
 import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.dialogs.IInputValidator;
 import org.eclipse.jface.dialogs.InputDialog;
-import org.eclipse.jface.viewers.ComboViewer;
-import org.eclipse.jface.viewers.ILabelProvider;
-import org.eclipse.jface.viewers.ILabelProviderListener;
-import org.eclipse.jface.viewers.ISelectionChangedListener;
-import org.eclipse.jface.viewers.IStructuredContentProvider;
-import org.eclipse.jface.viewers.SelectionChangedEvent;
-import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.window.Window;
-import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.jst.j2ee.project.facet.IJ2EEModuleFacetInstallDataModelProperties;
-import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
-import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
-import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistry;
 import org.eclipse.jst.jsf.core.internal.project.facet.IJSFFacetInstallDataModelProperties;
 import org.eclipse.jst.jsf.ui.internal.JSFUiPlugin;
 import org.eclipse.jst.jsf.ui.internal.Messages;
-import org.eclipse.jst.jsf.ui.internal.classpath.JSFLibraryWizard;
 import org.eclipse.jst.jsf.ui.internal.jsflibraryconfig.IJSFImplLibraryCreationListener;
 import org.eclipse.jst.jsf.ui.internal.jsflibraryconfig.JSFLibraryConfigControl;
 import org.eclipse.jst.jsf.ui.internal.jsflibraryconfig.JSFImplLibraryCreationEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -56,8 +40,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.wst.common.frameworks.datamodel.AbstractDataModelProvider;
 import org.eclipse.wst.common.frameworks.datamodel.DataModelEvent;
 import org.eclipse.wst.common.frameworks.datamodel.DataModelFactory;
@@ -76,9 +58,6 @@ import org.eclipse.wst.common.project.facet.ui.IWizardContext;
 public class JSFFacetInstallPage extends DataModelWizardPage implements IJSFFacetInstallDataModelProperties, IFacetWizardPage {
 	// UI
 	private Label lblJSFImpl;
-	//private ComboViewer cboJSFImplViewer;
-	//private Button chkDeployImpl;
-	//private Button btnAddJSFImpl;
 	private Label lblJSFConfig;
 	private Text txtJSFConfig;
 	private Label lblJSFServletName;
@@ -126,7 +105,6 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements IJSFFace
 
 		lblJSFImpl = new Label(composite, SWT.None);		
 		lblJSFImpl.setLayoutData(new GridData(GridData.BEGINNING, GridData.BEGINNING, false, false));
-		//lblJSFImpl.setText(Messages.JSFFacetInstallPage_JSFImplLabel);
 		lblJSFImpl.setText(Messages.JSFFacetInstallPage_JSFLibraryLabel0);
 		
 		((GridLayout)composite.getLayout()).marginLeft = 0;		
@@ -237,7 +215,6 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements IJSFFace
 
 		addModificationListeners();
 		
-		//parent.pack(true);  Resized to show all controls.		
 		this.getContainer().getShell().pack();
 		
 		return composite;
@@ -281,7 +258,7 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements IJSFFace
 		if (jsfLibCfgComp.getSelectedJSFLibImplementation() == null) {
 			return false;
 		}
-		return jsfLibCfgComp.getSelectedJSFLibImplementation().checkForDeploy();
+		return jsfLibCfgComp.getSelectedJSFLibImplementation().isCheckedToBeDeployed();
 	}
 
 	private String getJSFConfig() {
@@ -341,23 +318,7 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements IJSFFace
 //		This is being done on Add and Remove, currently
 //		synchHelper.synchList(lstJSFServletURLPatterns, SERVLET_URL_PATTERNS, null);
 	}
-/*
-	private void addJSFImplComboListeners() {
-		cboJSFImplViewer.addSelectionChangedListener(new ISelectionChangedListener(){
-			public void selectionChanged(SelectionChangedEvent event) {
-				if (cboJSFImplViewer.getSelection() != null  && cboJSFImplViewer.getSelection() instanceof StructuredSelection){
-					StructuredSelection sel = (StructuredSelection)cboJSFImplViewer.getSelection();
-					if (sel.getFirstElement() != null){
-						JSFLibrary lib = (JSFLibrary)sel.getFirstElement();
-						model.setProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION, lib);
-						return;
-					}
-				}
-				model.setProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION, null );
-			}			
-		});
-	}
-*/
+
 	private String isValidPattern(String value) {
 		if (value == null || value.trim().equals(""))  //$NON-NLS-1$
 			return Messages.JSFFacetInstallPage_PatternEmptyMsg;
@@ -405,12 +366,7 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements IJSFFace
 	private void updateModelForURLPattern() {
 		model.setProperty(IJSFFacetInstallDataModelProperties.SERVLET_URL_PATTERNS, lstJSFServletURLPatterns.getItems());
 	}
-/*
-	private void loadJSFImplList() {
-		cboJSFImplViewer.setInput(JSFCorePlugin.getDefault().getJSFLibraryRegistry()
-			.getImplJSFLibraries());		
-	}
-*/
+
 	protected String[] getValidationPropertyNames() {
 		return new String[]{IMPLEMENTATION, DEPLOY_IMPLEMENTATION, CONFIG_PATH, SERVLET_NAME};
 	}

@@ -42,6 +42,13 @@ public class JSFLibraryDecorator extends JSFLibraryImpl {
 	public JSFLibrary getLibrary() {
 		return jsfLib;
 	}
+
+	/**
+	 * @param deploy
+	 */
+	public void setToBeDeployed(boolean deploy) {
+		this.check4Deploy = deploy;
+	}	
 	
 	/**
 	 * Return true if the JSF library needs to be deployed to server.
@@ -51,9 +58,18 @@ public class JSFLibraryDecorator extends JSFLibraryImpl {
 	 * 
 	 * @return boolean
 	 */
-	public boolean checkForDeploy() {
+	public boolean isCheckedToBeDeployed() {
 		return check4Deploy;
 	}
+
+	/**
+	 * Set the JSF library to be selected.
+	 * 
+	 * @param selected
+	 */
+	public void setSelected(boolean selected) {
+		this.isSelected = selected;
+	}	
 	
 	/**
 	 * Return true if the JSF library is referenced 
@@ -62,28 +78,16 @@ public class JSFLibraryDecorator extends JSFLibraryImpl {
 	 */
 	public boolean isSelected() {
 		return isSelected;
-	}
-
-	/**
-	 * @param deploy
-	 */
-	public void setDeployment(boolean deploy) {
-		this.check4Deploy = deploy;
-	}
-	
-	/**
-	 * @param selected
-	 */
-	public void setSelected(boolean selected) {
-		this.isSelected = selected;
-	}
+	}	
 	
 	/**
 	 * @return String
 	 */
 	protected String generatePersistString() {
 		String sptr = JSFLibraryConfigPersistData.SPTR_TUPLE;
-		return this.getID() + sptr + String.valueOf(this.isSelected()) + sptr + String.valueOf(this.checkForDeploy()); 
+		return this.getID() + sptr + String.valueOf(this.isSelected()) + 
+			sptr + 
+			String.valueOf(this.isCheckedToBeDeployed()); 
 	}
 
 	public String getID() {

@@ -10,21 +10,13 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.ui.internal.jsflibraryconfig;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.jface.dialogs.IMessageProvider;
-import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.J2EEModuleDependencyDelegate;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfigModelAdapter;
-import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryDecorator;
-import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
@@ -56,53 +48,24 @@ public class JSFLibraryPropertyPage extends PropertyPage {
 	public void setElement(IAdaptable element) {
 		super.setElement(element);
 		project= (IProject) element.getAdapter(IResource.class);
-	}
-
+	}	
+	
 	/* (non-Javadoc)
 	 * @see org.eclipse.jface.preference.PreferencePage#performOk()
 	 */
 	public boolean performOk() {
 
-		// Do nothing since because of invalid settings.
+		// Do nothing because of invalid settings.
 		if (!validatePage()) {
 			return true;
 		}
-		
-		// Otheriwse, update project dependencies. 
-		List colImplLibs = new ArrayList();
-		colImplLibs.add(jsfLibCfgControl.getSelectedJSFLibImplementation());
-		List colCompLibs = jsfLibCfgControl.getSelectedJSFLibComponents();
-		
-		// update model first
-		provider.saveData(colImplLibs, colCompLibs);
-		
-		// Update dependencies. 		
-		J2EEModuleDependencyDelegate modulesDep = new J2EEModuleDependencyDelegate(project);									
-		IProgressMonitor monitor = new NullProgressMonitor();		
- 
-		JSFLibraryDecorator newImplLib = jsfLibCfgControl.getSelectedJSFLibImplementation();
-		JSFLibraryDecorator preSelectedJSFImplLib = provider.getPreviousJSFImplementation(); 
-		if (preSelectedJSFImplLib != null) {
-			modulesDep.removeProjectDependency(preSelectedJSFImplLib.getLibrary(), monitor);
-			modulesDep.addProjectDependency(newImplLib.getLibrary(), newImplLib.checkForDeploy(), monitor);
-		} else {
-			modulesDep.addProjectDependency(newImplLib.getLibrary(), newImplLib.checkForDeploy(), monitor);
-		}
+				
+		// Update project dependencies.
+		provider.updateProjectDependencies();
 
-		List ComponentLibs = provider.getProjectJSFComponentLibraries();
-		JSFLibraryDecorator prjJSFCompLib = null;
-		JSFLibrary compLib = null;
-		for (int i = 0; i < ComponentLibs.size(); i++) {
-			prjJSFCompLib = (JSFLibraryDecorator) ComponentLibs.get(i);
-			compLib = prjJSFCompLib.getLibrary();
-			modulesDep.removeProjectDependency(compLib, monitor);
-		}
-		for (int i = 0; i < ComponentLibs.size(); i++) {
-			prjJSFCompLib = (JSFLibraryDecorator) ComponentLibs.get(i);
-			if (prjJSFCompLib.isSelected()) {			
-				modulesDep.addProjectDependency(prjJSFCompLib.getLibrary(), prjJSFCompLib.checkForDeploy(), monitor);
-			}
-		}
+		// Save configuration data
+		provider.saveData();
+		
 		return true;
 	}	
 	
@@ -117,14 +80,13 @@ public class JSFLibraryPropertyPage extends PropertyPage {
 		//}
 	}
 
-	private Control createForJSFProject(Composite parent) {
-		if (provider == null) {
-			provider = new JSFLibraryConfigModelAdapter(project);
-		}		
-		
-		// 
+	private Control createForJSFProject(Composite parent) {		 
 		jsfLibCfgControl = new JSFLibraryConfigControl(parent, SWT.NULL, project);
 		
+		if (provider == null) {
+			provider = jsfLibCfgControl.getModelProvider();
+		}				
+				
 		/** JC Test
 		   ResourcesPlugin.getWorkspace().addResourceChangeListener(jsfLibCfgControl,
 				      IResourceChangeEvent.PRE_CLOSE

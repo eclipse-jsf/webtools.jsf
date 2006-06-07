@@ -21,6 +21,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.jface.window.Window;
 import org.eclipse.jst.j2ee.internal.J2EEVersionConstants;
 import org.eclipse.jst.j2ee.web.componentcore.util.WebArtifactEdit;
 import org.eclipse.jst.j2ee.webapplication.Servlet;
@@ -77,28 +78,17 @@ public class JSFFacetInstallDelegate implements IDelegate {
 			// Add JSF Impls to WEB-INF/lib
 			//deployJSFLibraries(project, config, monitor);
 			
-			// Update Model			
+			// Update project dependencies and save configiuration data
 			java.util.List implLibs = (List) config.getProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION_LIBRARIES);
-			java.util.List compLibs = (List) config.getProperty(IJSFFacetInstallDataModelProperties.COMPONENT_LIBRARIES);			
-			JSFLibraryConfigModelAdapter provider = new JSFLibraryConfigModelAdapter(project);
-			JSFLibraryDecorator preSelJSFImplLib = provider.getPreviousJSFImplementation();
+			java.util.List compLibs = (List) config.getProperty(IJSFFacetInstallDataModelProperties.COMPONENT_LIBRARIES);
 			
-			// Update J2EE Module dependency for deployment and add JARs into project build path.
-			J2EEModuleDependencyDelegate modulesDep = new J2EEModuleDependencyDelegate(project);
-			JSFLibraryDecorator selJSFImplLib = (JSFLibraryDecorator)implLibs.get(0);
-			if (preSelJSFImplLib != null) {
-				modulesDep.removeProjectDependency(preSelJSFImplLib.getLibrary(), monitor);
-			}
-			modulesDep.addProjectDependency(selJSFImplLib.getLibrary(), selJSFImplLib.checkForDeploy(), monitor);
-			JSFLibraryDecorator jsfLibItem;
-			for(int i = 0; i < compLibs.size(); i++) {
-				jsfLibItem = (JSFLibraryDecorator)compLibs.get(i);
-				if (jsfLibItem.isSelected()) {
-					modulesDep.addProjectDependency(jsfLibItem.getLibrary(), jsfLibItem.checkForDeploy(), monitor);
-				}
-			}			
-			// Update Model			
-			provider.saveData(implLibs, compLibs);			
+			JSFLibraryConfigModelAdapter provider = new JSFLibraryConfigModelAdapter(project);
+			provider.updateJSFImplementationLibrary((JSFLibraryDecorator) implLibs.get(0));
+			provider.updateJSFComponentLibraries(compLibs);	
+			
+			provider.updateProjectDependencies();			
+			
+			provider.saveData();			
 			
 			// Create config file
 			createConfigFile(project, fv, config, monitor);
@@ -116,7 +106,37 @@ public class JSFFacetInstallDelegate implements IDelegate {
 			}
 		}
 	}
-	
+	/*
+	private void updateProjectDependency(JSFLibraryDecorator prevLib, 
+			List implLibs, 
+			List compLibs,
+			IProject project,
+			IProgressMonitor monitor) {
+		// Update Model			
+		//java.util.List implLibs = (List) config.getProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION_LIBRARIES);
+		//java.util.List compLibs = (List) config.getProperty(IJSFFacetInstallDataModelProperties.COMPONENT_LIBRARIES);			
+		//JSFLibraryConfigModelAdapter provider = new JSFLibraryConfigModelAdapter(project);
+		//JSFLibraryDecorator preSelJSFImplLib = provider.getPreviousJSFImplementation();
+		//JSFLibraryDecorator preSelJSFImplLib = provider.getSavedJSFImplementationLibrary();
+		
+		// Update J2EE Module dependency for deployment and add JARs into project build path.
+		J2EEModuleDependencyDelegate modulesDep = new J2EEModuleDependencyDelegate(project);
+		JSFLibraryDecorator selJSFImplLib = (JSFLibraryDecorator)implLibs.get(0);
+		if (prevLib != null) {
+			modulesDep.removeProjectDependency(prevLib.getLibrary(), monitor);
+		}
+		modulesDep.addProjectDependency(selJSFImplLib.getLibrary(), selJSFImplLib.isCheckedToBeDeployed(), monitor);
+		JSFLibraryDecorator jsfLibItem;
+		for(int i = 0; i < compLibs.size(); i++) {
+			jsfLibItem = (JSFLibraryDecorator)compLibs.get(i);
+			if (jsfLibItem.isSelected()) {
+				modulesDep.addProjectDependency(jsfLibItem.getLibrary(), jsfLibItem.isCheckedToBeDeployed(), monitor);
+			}
+		}			
+		// Update Model			
+		//provider.saveData(implLibs, compLibs);		
+	}
+	*/
 	/** Obsoleted M1 approach
 	private void deployJSFLibraries(IProject project,
 			final IDataModel config, IProgressMonitor monitor) {

@@ -21,9 +21,11 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.viewers.CheckStateChangedEvent;
 import org.eclipse.jface.viewers.CheckboxTableViewer;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.ICheckStateListener;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ILabelProviderListener;
@@ -54,6 +56,7 @@ import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -70,9 +73,9 @@ import org.eclipse.ui.PlatformUI;
  * A custom control used in wizard and property pages.
  * 
  * @author Justin Chen - Oracle
- *
  */
-public class JSFLibraryConfigControl extends Composite implements IResourceChangeListener  {
+public class JSFLibraryConfigControl extends Composite 
+	implements IResourceChangeListener  {
 	final private int COLUMN_DEPLOY = 0;
 	final private int COLUMN_LIB_NAME = 1;
 
@@ -107,11 +110,20 @@ public class JSFLibraryConfigControl extends Composite implements IResourceChang
 		super(parent, style);	
 		
 		this.provider = new JSFLibraryConfigModelAdapter(fProject);
-		this.colJSFImpl = provider.getProjectJSFImplementationLibraries();
-		this.colJSFComp = provider.getProjectJSFComponentLibraries();
+		this.colJSFImpl = provider.getJSFImplementationLibraries();
+		this.colJSFComp = provider.getJSFComponentLibraries();
 		
 		initControls();
 	}	
+
+	/**
+	 * Return the working model.
+	 * 
+	 * @return JSFLibraryConfigModelAdapter
+	 */
+	public JSFLibraryConfigModelAdapter getModelProvider() {
+		return provider;
+	}
 	
 	/* (non-Javadoc)
 	 * @see org.eclipse.swt.widgets.Widget#dispose()
@@ -133,17 +145,7 @@ public class JSFLibraryConfigControl extends Composite implements IResourceChang
 	 * @return JSFLibraryDecorator
 	 */
 	public JSFLibraryDecorator getSelectedJSFLibImplementation() {
-		
-		JSFLibraryDecorator selJSFImpl = null;
-		StructuredSelection objs = (StructuredSelection)cvImplLib.getSelection();
-		if (objs != null){
-			if (objs.getFirstElement() instanceof JSFLibraryDecorator){
-				selJSFImpl = (JSFLibraryDecorator)objs.getFirstElement();
-				selJSFImpl.setDeployment(btnDeployJars.getSelection());
-			}
-		}
-		return selJSFImpl;
-		
+		return provider.getSelectedJSFImplLibrary();
 	}
 	
 	/**
@@ -153,66 +155,58 @@ public class JSFLibraryConfigControl extends Composite implements IResourceChang
 	 * @return a list of selected JSF Component Libraries
 	 */
 	public List getSelectedJSFLibComponents() {
-		
-		List list = new ArrayList(Collections.EMPTY_LIST);
-		
-		Iterator it = ((List)ctvSelCompLib.getInput()).iterator();
-		JSFLibraryDecorator prjJSFLib;
-		while(it.hasNext()) {
-			prjJSFLib = (JSFLibraryDecorator)it.next();
-			prjJSFLib.setDeployment(false);
-			if (prjJSFLib.isSelected()) {				
-				Object[] checked4Deploy = ctvSelCompLib.getCheckedElements();				
-				for (int i = 0; i < checked4Deploy.length; i++) {
-					boolean toDeploy = ((JSFLibraryDecorator)checked4Deploy[i]).getID().equals(prjJSFLib.getID());
-					if (toDeploy) {
-						prjJSFLib.setDeployment(true);
-						break;
-					} 					
-				}
-				list.add(prjJSFLib);
-			}
-		}		
-		return list;
-
+		return provider.getSelectedJSFCompLibraries();
 	}
-				
+					
 	private void initializeControlValues() {
-		
 		cvImplLib.setInput(colJSFImpl);	
 		
 		btnDeployJars.setSelection(false);
-		if ( provider.getSelectedJSFImplementation() != null ) {
-			JSFLibraryDecorator selJSFImplLib = provider.getSelectedJSFImplementation();
+		if ( provider.getSavedJSFImplementationLibrary() != null ) {
+			JSFLibraryDecorator selJSFImplLib = provider.getSavedJSFImplementationLibrary();
 			cvImplLib.setSelection(new StructuredSelection(selJSFImplLib), true);
-			btnDeployJars.setSelection(selJSFImplLib.checkForDeploy());
+			btnDeployJars.setSelection(selJSFImplLib.isCheckedToBeDeployed());
 		} else {
-			List implLibs = provider.getProjectJSFImplementationLibraries();
-			if (implLibs.size() > 0) {
-				// Might be to find the default if multiple implementation libraries available
-				cvImplLib.setSelection(new StructuredSelection(implLibs.get(0)), true);
-				((JSFLibraryDecorator)implLibs.get(0)).setSelected(true);
+			JSFLibraryDecorator dftJSFImplLib = provider.getDefaultJSFImplemntationLibrary();
+			if (dftJSFImplLib != null) {				
+				cvImplLib.setSelection(new StructuredSelection(dftJSFImplLib), true);				
+				btnDeployJars.setSelection(dftJSFImplLib.isCheckedToBeDeployed());				
 			}
 		}
 		
+		// Source JSF Component Viewer
 		tvCompLib.setInput(colJSFComp);
 		
-		ctvSelCompLib.setInput(colJSFComp);		
-		JSFLibraryDecorator prjJSFLib = null;
-		List jsfCompLib = provider.getSelectedJSFComponent(); 
-		for (int i = 0; i < jsfCompLib.size(); i++) {
-			prjJSFLib = (JSFLibraryDecorator)jsfCompLib.get(i);
-			ctvSelCompLib.setChecked(prjJSFLib, prjJSFLib.checkForDeploy());
-		} 		
+		// Destination JSF Component Viewer
+		ctvSelCompLib.setInput(colJSFComp);
+
+		JSFLibraryDecorator jsfLibDctr = null; 
+		List jsfCompLibs = provider.getSavedJSFComponentLibraries();
+		for (int i = 0; i < jsfCompLibs.size(); i++) {
+			jsfLibDctr = (JSFLibraryDecorator)jsfCompLibs.get(i);
+			ctvSelCompLib.setChecked(jsfLibDctr, jsfLibDctr.isCheckedToBeDeployed());
+		} 
 	}
 	
 	private void loadJSFImplList() {
-		cvImplLib.setInput(colJSFImpl);
+		cvImplLib.setInput(provider.getJSFImplementationLibraries());
 	}
 	
 	private void loadJSFCompList() {
-		ctvSelCompLib.setInput(this.colJSFComp);
-		tvCompLib.setInput(this.colJSFComp);
+		tvCompLib.setInput(provider.getJSFComponentLibraries());
+		ctvSelCompLib.setInput(provider.getJSFComponentLibraries());		
+	}
+	
+	private JSFLibraryDecorator getJSFImplLibwUpdatedState() {
+		JSFLibraryDecorator selJSFImpl = null;
+		StructuredSelection objs = (StructuredSelection)cvImplLib.getSelection();
+		if (objs != null){
+			if (objs.getFirstElement() instanceof JSFLibraryDecorator){
+				selJSFImpl = (JSFLibraryDecorator)objs.getFirstElement();
+				selJSFImpl.setToBeDeployed(btnDeployJars.getSelection());
+			}
+		}
+		return selJSFImpl;		
 	}
 	
 	private void initControls() {
@@ -233,6 +227,15 @@ public class JSFLibraryConfigControl extends Composite implements IResourceChang
 		btnDeployJars = new Button(this, SWT.CHECK);
 		btnDeployJars.setLayoutData(new GridData(GridData.END, GridData.CENTER, false, false, 2, 1));
 		btnDeployJars.setText(Messages.JSFLibraryConfigControl_DeployJAR);
+		btnDeployJars.addSelectionListener(new SelectionListener() {
+			public void widgetDefaultSelected(SelectionEvent e) {
+			}
+			public void widgetSelected(SelectionEvent e) {
+				JSFLibraryDecorator jsflib = getJSFImplLibwUpdatedState();
+				provider.updateJSFImplementationLibrary(jsflib);
+			}
+		}
+		);
 		
 		final Composite compTest = new Composite(this, SWT.None);
 		final GridLayout compgl = new GridLayout();
@@ -251,7 +254,15 @@ public class JSFLibraryConfigControl extends Composite implements IResourceChang
 		comboImplLib = cvImplLib.getCombo();
 		final GridData gd_cvImplLib = new GridData(GridData.FILL, GridData.CENTER, true, false, 1, 1);
 		comboImplLib.setLayoutData(gd_cvImplLib);
-
+		cvImplLib.addSelectionChangedListener(
+			new ISelectionChangedListener() {
+				public void selectionChanged(SelectionChangedEvent event) {
+					StructuredSelection ss = (StructuredSelection) event.getSelection();
+					provider.updateJSFImplementationLibrary((JSFLibraryDecorator) ss.getFirstElement());
+				}
+			}
+		);
+				
 		final Button btnNewImpl = new Button(compTest, SWT.NONE);
 		btnNewImpl.setLayoutData(new GridData(GridData.CENTER, GridData.CENTER, false, false));
 		btnNewImpl.setText(Messages.JSFLibraryConfigControl_NewImplementationLibrary);	
@@ -264,15 +275,19 @@ public class JSFLibraryConfigControl extends Composite implements IResourceChang
 						.getActiveWorkbenchWindow().getShell(), wizard);
 				int ret = dialog.open();
 				if (ret == Window.OK) {					
-					JSFLibraryDecorator newPrjJSFLib = new JSFLibraryDecorator(wizard.getJSFLibrary(), true, true);
-					provider.getJSFLibraryRegistry().addJSFLibrary(wizard.getJSFLibrary());
-										
-					((List)cvImplLib.getInput()).add(newPrjJSFLib);
+					JSFLibraryDecorator jsfLibDctr = new JSFLibraryDecorator(wizard.getJSFLibrary(), true, true);
+					JSFLibraryRegistry jsflibreg = JSFCorePlugin.getDefault().getJSFLibraryRegistry();
+					jsflibreg.addJSFLibrary(wizard.getJSFLibrary());
+					
+					provider.addJSFLibrary(jsfLibDctr);
+					provider.updateJSFImplementationLibrary(jsfLibDctr);
+					
 					loadJSFImplList();
+					
 					btnDeployJars.setSelection(true);
-					cvImplLib.setSelection(new StructuredSelection(newPrjJSFLib), true);					
+					cvImplLib.setSelection(new StructuredSelection(jsfLibDctr), true);
 				}
-				// Send event to listeners
+				// notify listeners that a JSF implementation is created.
 				JSFImplLibraryCreationEvent event = new JSFImplLibraryCreationEvent(this, (ret == Window.OK));
 				int size = newJSFLibCreatedListeners.size();
 				for (int i = 0; i < size; i++) {
@@ -350,16 +365,19 @@ public class JSFLibraryConfigControl extends Composite implements IResourceChang
 				IWorkbench wb = PlatformUI.getWorkbench();
 				wizard.init(wb, null, true);
 				WizardDialog dialog = new WizardDialog(wb
-						.getActiveWorkbenchWindow().getShell(), wizard);
+						.getActiveWorkbenchWindow().getShell(), wizard);						
 				int ret = dialog.open();
 				if (ret == Window.OK) {
 					JSFLibrary newCompLib = wizard.getJSFLibrary();
-					JSFLibraryDecorator newPrjJSFLib = new JSFLibraryDecorator(newCompLib, true, newCompLib.isDeployed());					
-					provider.getJSFLibraryRegistry().addJSFLibrary(newCompLib);
+					JSFLibraryDecorator jsfLibDctr = new JSFLibraryDecorator(newCompLib, true, true);
+					JSFLibraryRegistry jsflibreg = JSFCorePlugin.getDefault().getJSFLibraryRegistry();
+					jsflibreg.addJSFLibrary(newCompLib);
 					
-					((List)ctvSelCompLib.getInput()).add(newPrjJSFLib);
+					provider.addJSFLibrary(jsfLibDctr);
+					
 					loadJSFCompList();
-					ctvSelCompLib.setChecked(newPrjJSFLib, true);
+					
+					ctvSelCompLib.setChecked(jsfLibDctr, true);
 				}
 			}
 		});	
@@ -379,74 +397,112 @@ public class JSFLibraryConfigControl extends Composite implements IResourceChang
 		//ctvSelCompLib.setCellModifier(new CellModifierCTVSelCompLib());
 		ctvSelCompLib.setSorter(new SelectedCompLibCTVSorter());
 		ctvSelCompLib.setLabelProvider(new SelectedCompLibCTVLabelProvider());
-		ctvSelCompLib.setContentProvider(new CompLibCTVContentProvider());				
-		
-		initializeControlValues();
-
-		btnAdd.addMouseListener(new MouseAdapter() {
-			public void mouseDown(MouseEvent e) {
-				StructuredSelection sel = (StructuredSelection)tvCompLib.getSelection();
-				if (sel != null  && sel.getFirstElement() != null) {
-					if (sel.getFirstElement() instanceof JSFLibraryDecorator) {
-						JSFLibraryDecorator prjJSFLib = (JSFLibraryDecorator)sel.getFirstElement();	
-						prjJSFLib.setSelected(true);	
-						prjJSFLib.setDeployment(true);
-						tvCompLib.refresh();
-						ctvSelCompLib.refresh();
-						ctvSelCompLib.setChecked(prjJSFLib, true);
+		ctvSelCompLib.setContentProvider(new CompLibCTVContentProvider());
+		ctvSelCompLib.addCheckStateListener(new ICheckStateListener() {
+			public void checkStateChanged(CheckStateChangedEvent event) {
+				JSFLibraryDecorator changedItem = (JSFLibraryDecorator) event.getElement();
+				boolean isChecked4Deploy = event.getChecked();
+				
+				List list = provider.getJSFComponentLibraries();
+				Iterator it = list.iterator();
+				JSFLibraryDecorator crtjsflib = null;
+				while (it.hasNext()) {
+					crtjsflib = (JSFLibraryDecorator) it.next();
+					if (crtjsflib.getID().equals(changedItem.getID())) {
+						crtjsflib.setToBeDeployed(isChecked4Deploy);
+						break;
 					}
 				}
 			}
 		});
+		
+		//initializeControlValues();
+		btnAdd.addMouseListener(new MouseAdapter() {
+			public void mouseDown(MouseEvent e) {
+				resetComponentLibSelection((StructuredSelection)tvCompLib.getSelection(), 
+						tvCompLib, 
+						ctvSelCompLib, 
+						true);	
+			}
+		});
 		btnAddAll.addMouseListener(new MouseAdapter() {
 			public void mouseDown(MouseEvent e) {
-				Iterator it = ((List)tvCompLib.getInput()).iterator();
-				JSFLibraryDecorator prjJSFLib;
-				while(it.hasNext()) {
-					prjJSFLib = (JSFLibraryDecorator)it.next();
-					prjJSFLib.setSelected(true);
-					prjJSFLib.setDeployment(true);
-				}
-				
-				tvCompLib.refresh();
-				ctvSelCompLib.refresh();
-				ctvSelCompLib.setAllChecked(true);
+				resetCompontLibSelectionAll(tvCompLib, ctvSelCompLib, true);
 			}
 		});		
 		btnRemove.addMouseListener(new MouseAdapter() {
 			public void mouseDown(MouseEvent e) {
-				StructuredSelection sel = (StructuredSelection)ctvSelCompLib.getSelection();
-				if (sel != null && sel.getFirstElement() != null) {
-					JSFLibraryDecorator prjJSFLib = (JSFLibraryDecorator)sel.getFirstElement();
-					prjJSFLib.setDeployment(false);
-					prjJSFLib.setSelected(false);
-					tvCompLib.refresh();
-					ctvSelCompLib.refresh();					
-				}
+				resetComponentLibSelection((StructuredSelection)ctvSelCompLib.getSelection(), 
+						tvCompLib, 
+						ctvSelCompLib, 
+						false);	
 			}
 		});
 		btnRemoveAll.addMouseListener(new MouseAdapter() {
-			public void mouseDown(MouseEvent e) {	
-				Iterator it = ((List)tvCompLib.getInput()).iterator();
-				JSFLibraryDecorator prjJSFLib;
-				while(it.hasNext()) {
-					prjJSFLib = (JSFLibraryDecorator)it.next();
-					prjJSFLib.setSelected(false);
-					prjJSFLib.setDeployment(false);
-				}
-				tvCompLib.refresh();
-				ctvSelCompLib.refresh();
-				ctvSelCompLib.setAllChecked(false);				
+			public void mouseDown(MouseEvent e) {
+				resetCompontLibSelectionAll(tvCompLib, ctvSelCompLib, false);
 			}
-		});				
+		});
+		
+		initializeControlValues();
 	}
 
+	/*
+	 * Event handling helper methods
+	 */	
+	
+	// Set selected item to the given state on model and update viewers.  
+	private void resetComponentLibSelection(StructuredSelection item, 
+			TreeViewer srcViewer, 
+			CheckboxTableViewer destViewer,
+			boolean state) {
+		if (item != null && item.getFirstElement() != null) {
+			JSFLibraryDecorator jsfLibDctr = (JSFLibraryDecorator)item.getFirstElement();
+			List list = provider.getJSFComponentLibraries();
+			Iterator it = list.iterator();
+			JSFLibraryDecorator crtjsfLibDctr = null;
+			while(it.hasNext()) {
+				crtjsfLibDctr = (JSFLibraryDecorator)it.next();
+				if (crtjsfLibDctr.getID().equals(jsfLibDctr.getID())) {
+					crtjsfLibDctr.setToBeDeployed(state);
+					crtjsfLibDctr.setSelected(state);
+				}
+			}					
+						
+			loadJSFCompList();
+			
+			srcViewer.refresh();
+			destViewer.refresh();	
+			destViewer.setChecked(jsfLibDctr, state);
+		}		
+	}
+	
+	// Reset all component library from given state to model and update viewers.   
+	private void resetCompontLibSelectionAll(TreeViewer srcViewer, 
+			CheckboxTableViewer destViewer, 
+			boolean state) {
+
+			List list = provider.getJSFComponentLibraries();
+			Iterator it = list.iterator();
+			JSFLibraryDecorator jsfLibDctr;
+			while(it.hasNext()) {
+				jsfLibDctr = (JSFLibraryDecorator)it.next();
+				jsfLibDctr.setSelected(state);
+				jsfLibDctr.setToBeDeployed(state);
+			}				
+			
+			loadJSFCompList();
+			
+			srcViewer.refresh();
+			destViewer.refresh();
+			destViewer.setAllChecked(state);					
+	}
+	
 	/**
 	 * 	Inner Classes for filtering.
 	 *
 	 */
 	class CheckedTableViewerFilter extends ViewerFilter {
-
 		public boolean select(Viewer viewer, Object parentElement, Object element) {
 			if (element instanceof JSFLibraryDecorator) {
 				return ((JSFLibraryDecorator)element).isSelected();
@@ -465,19 +521,18 @@ public class JSFLibraryConfigControl extends Composite implements IResourceChang
 	}
 
 	class CompLibCTVContentProvider implements IStructuredContentProvider {
-		private List jsfImplLibs = new ArrayList(Collections.EMPTY_LIST);
+		private List jsfComplLibs = new ArrayList(Collections.EMPTY_LIST);
 		
 		public Object[] getElements(Object inputElement) {
-			return jsfImplLibs.toArray();
+			return jsfComplLibs.toArray();
 		}
 		public void dispose() {
 		}
 		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 			if (newInput == null) {
-				jsfImplLibs = Collections.EMPTY_LIST;
+				jsfComplLibs = Collections.EMPTY_LIST;
 			} else {
-				//jsfImplLibs.clear();
-				jsfImplLibs = (List)newInput;
+				jsfComplLibs = (List)newInput;
 			}
 		}
 	}
@@ -493,8 +548,6 @@ public class JSFLibraryConfigControl extends Composite implements IResourceChang
 			if (newInput == null) {
 				jsfImplLibs = Collections.EMPTY_LIST;
 			} else {
-				//jsfImplLibs.clear();
-				//jsfImplLibs.addAll((java.util.List)newInput);
 				jsfImplLibs = (List)newInput;
 			}
 		}
@@ -509,7 +562,6 @@ public class JSFLibraryConfigControl extends Composite implements IResourceChang
 			    case COLUMN_DEPLOY:
 			    	return " ";	  //$NON-NLS-1$
 			    case COLUMN_LIB_NAME:
-			    	//return ((JSFLibraryDecorator)element).getLibrary().getName();
 			    	return ((JSFLibraryDecorator)element).getName();
 			    }				
 			}			
@@ -525,7 +577,6 @@ public class JSFLibraryConfigControl extends Composite implements IResourceChang
 		
 		public String getText(Object element) {
 			if (element instanceof JSFLibraryDecorator){
-				//StringBuffer nameBuf = new StringBuffer(((JSFLibraryDecorator)element).getLibrary().getName());
 				StringBuffer nameBuf = new StringBuffer(((JSFLibraryDecorator)element).getName());
 				if ((((JSFLibraryDecorator)element).getLibrary()) == getDefaultImpl())
 					nameBuf.append(" ").append(JSFLibraryRegistry.DEFAULT_IMPL_LABEL); //$NON-NLS-1$
@@ -535,7 +586,8 @@ public class JSFLibraryConfigControl extends Composite implements IResourceChang
 		}
 		private JSFLibrary getDefaultImpl() {
 			if (defaultImpl == null){
-				defaultImpl = provider.getJSFLibraryRegistry().getDefaultImplementation();
+				JSFLibraryRegistry jsflibreg = JSFCorePlugin.getDefault().getJSFLibraryRegistry();
+				defaultImpl = jsflibreg.getDefaultImplementation();
 			}
 			return defaultImpl;
 		}
@@ -557,10 +609,9 @@ public class JSFLibraryConfigControl extends Composite implements IResourceChang
 		}
 	}
 	
-	
-	/**
-	 * Borrowed from preference page with changes. 
-	 */ 
+	/*
+	 * Content provider Adapter for TreeViewer
+	 */
 	private class TreeViewerAdapter implements ITreeContentProvider, ISelectionChangedListener, IDoubleClickListener {
 		private final Object[] NO_ELEMENTS= new Object[0];
 
@@ -578,7 +629,7 @@ public class JSFLibraryConfigControl extends Composite implements IResourceChang
 		}
 
 		public Object[] getElements(Object obj) {
-			return provider.getProjectJSFComponentLibraries().toArray();
+			return provider.getJSFComponentLibraries().toArray();
 		}
 		
 		public Object[] getChildren(Object element) {
@@ -715,6 +766,7 @@ public class JSFLibraryConfigControl extends Composite implements IResourceChang
               break;
         }
         */				
-	}	
+	}
+
 	
 }

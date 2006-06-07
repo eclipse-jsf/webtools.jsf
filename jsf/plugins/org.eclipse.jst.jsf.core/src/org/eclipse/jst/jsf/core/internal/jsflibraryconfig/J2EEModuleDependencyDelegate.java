@@ -47,7 +47,7 @@ import org.eclipse.wst.common.frameworks.internal.ui.WTPUIPlugin;
 
 /**
  * The <b>J2EEModuleDependencyDelegate</b> provide services to update 
- * J2EE module dependencies and java build path when JSF libraries 
+ * J2EE module dependencies and java build path if JSF libraries 
  * are referenced in a web application. 
  * 
  * @author Justin Chen - Oracle
@@ -66,6 +66,11 @@ public class J2EEModuleDependencyDelegate {
 	}	
 	
 	/**
+	 * Add given <b>jsfLibrary</b> as project dependency.
+	 * If <b>toDeploy</b> flag is true, the JSF library JARs will be 
+	 * added as J2EE module dependencies.  
+	 * Otherwise, JARs are added in project build path only.
+	 * 
 	 * @param jsfLibrary
 	 * @param toDeploy
 	 * @param monitor
@@ -76,6 +81,8 @@ public class J2EEModuleDependencyDelegate {
 	}	
 
 	/**
+	 * Remove given <b>jsfLibrary</b> from project dependency.
+	 * 
 	 * @param jsfLibrary
 	 * @param monitor
 	 */
@@ -87,11 +94,12 @@ public class J2EEModuleDependencyDelegate {
 	/**
 	 * @param jsfLibrary
 	 * @param monitor
-	 */
+	 * 
 	public void addLibraryToBuildPath(JSFLibraryDecorator jsfLibrary, IProgressMonitor monitor) {
 		IPath[] elements = JSFUtils.getJARPathforJSFLib(jsfLibrary.getLibrary());
 		this.updateProjectDependency(elements, false, monitor);
 	}
+	*/
 	
 	/**
 	 * To update J2EE Module dependencies from given collection of JARs and deployment flag.
