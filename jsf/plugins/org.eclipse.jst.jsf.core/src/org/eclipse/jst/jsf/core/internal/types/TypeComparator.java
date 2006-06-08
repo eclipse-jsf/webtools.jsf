@@ -59,7 +59,9 @@ public final class TypeComparator
                 // simplest success is an exact match
                 if (curSatisfyType.equals(testType))
                 {
-                    result = Diagnostic.OK_INSTANCE;
+                    // check assignability mask
+                    // returns Diagnostic.OK if okay
+                    result = checkAssignability(firstType, secondType);
                     break MAIN_LOOP;
                 }
                 
@@ -89,9 +91,9 @@ public final class TypeComparator
                 }
                 
                 // or, can we coerce testType to curSatisfyType
-                if (canCoerce(testType, curSatisfyType))
+                if (canCoerce(testType, curSatisfyType, firstType.isLHS()))
                 {
-                    result = Diagnostic.OK_INSTANCE;
+                    result = checkAssignability(firstType, secondType);
                     break MAIN_LOOP;
                 }
             }
@@ -100,11 +102,29 @@ public final class TypeComparator
         return result;
     }
     
+    private static boolean canCoerce(String testType, String checkType,
+                                                boolean checkTypeIsWritable)
+    {
+        boolean canCoerce = canCoerce(testType, checkType);
+        
+        // if the check type is writable, we need to be sure that the
+        // coercion can work in both directions
+        if (canCoerce && checkTypeIsWritable)
+        {
+            // reverse roles: can checkType assign back to test type?
+            canCoerce &= canCoerce(checkType, testType);
+        }
+        
+        return canCoerce;
+    }
+    
     private static boolean canCoerce(String testType, String checkType)
     {
         // can always to coerce to string
         if (TypeCoercer.typeIsString(checkType))
         {
+            // if check type expects writability, need to ensure that 
+            // coercability is reversible
             return true;
         }
         else if (TypeCoercer.typeIsNumeric(checkType))
@@ -182,5 +202,35 @@ public final class TypeComparator
         
         // if we get to here, then everything checks out
         return Diagnostic.OK_INSTANCE;
+    }
+    
+    /**
+     * Precond: both firstType and secondType must represent value bindings.
+     * 
+     * @param firstType
+     * @param secondType
+     * @return a diagnostic validating that the two composite have compatible
+     * assignability
+     */
+    private static Diagnostic checkAssignability(CompositeType firstType, CompositeType secondType)
+    {
+        if (firstType.isRHS() && !secondType.isRHS())
+        {
+            return new BasicDiagnostic(Diagnostic.ERROR, "", 0, 
+                            "Expression is not gettable", null);
+        }
+        
+        if (firstType.isLHS() && !secondType.isLHS())
+        {
+            return new BasicDiagnostic(Diagnostic.WARNING, "", 0,
+                            "Attribute expects settable value, but expression is not settable", null);
+        }
+        
+        return Diagnostic.OK_INSTANCE;
+    }
+    
+    private TypeComparator()
+    {
+        // static utility class; not instantiable
     }
 }
