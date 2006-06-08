@@ -58,6 +58,16 @@ public class TypeComparatorTests extends TestCase
         new CompositeType(new String[] {"Ljava.lang.Object;", "Ljava.util.Collection;"}
                             , IAssignable.ASSIGNMENT_TYPE_RHS);
     
+    // read/write types
+    private final CompositeType readWritePrimitiveLong =
+        new CompositeType(Signature.SIG_LONG, 
+                IAssignable.ASSIGNMENT_TYPE_RHS | IAssignable.ASSIGNMENT_TYPE_LHS);
+    private final CompositeType readWriteString =
+        new CompositeType("Ljava.lang.String;", 
+                IAssignable.ASSIGNMENT_TYPE_LHS | IAssignable.ASSIGNMENT_TYPE_RHS);
+    private final CompositeType readWriteObject =
+        new CompositeType("Ljava.lang.Object;",
+                IAssignable.ASSIGNMENT_TYPE_LHS | IAssignable.ASSIGNMENT_TYPE_RHS);
     
     /**
      * Sanity check on simple types
@@ -304,4 +314,30 @@ public class TypeComparatorTests extends TestCase
                 calculateTypeCompatibility(mapType, objectAndCollection);
         assertFalse(result.getSeverity() == Diagnostic.OK);
     }
+    
+    /**
+     * Tests assignability, for example when read/write expected, but only
+     * read-only returned.
+     */
+    public void testAssignability()
+    {
+        // can assign read/write to read-only
+        Diagnostic result =
+            TypeComparator.calculateTypeCompatibility(simpleLong, readWritePrimitiveLong);
+        assertTrue(result.getSeverity() == Diagnostic.OK);
+        
+        // can NOT assign read-only to read/write
+        result =
+            TypeComparator.calculateTypeCompatibility(readWritePrimitiveLong, simpleLong);
+        assertFalse(result.getSeverity() == Diagnostic.OK);
+        
+        // check bi-directional type comparison -- e.g when a read/write string
+        // is expected, the read side will always work fine because you can always
+        // coerce to string.  But the other direction may not work because
+        // you may not be able to coerce the string to the other thing
+        result =
+            TypeComparator.calculateTypeCompatibility(readWriteString, readWriteObject);
+        assertFalse(result.getSeverity() == Diagnostic.OK);
+    }
+    
 }
