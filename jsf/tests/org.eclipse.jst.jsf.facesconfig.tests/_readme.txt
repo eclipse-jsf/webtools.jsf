@@ -1,0 +1,1 @@
+Requires plugin "org.eclipse.wst.common.tests.collector" in same workbench instance.

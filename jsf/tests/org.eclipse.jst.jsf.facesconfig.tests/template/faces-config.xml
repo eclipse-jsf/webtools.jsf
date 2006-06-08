@@ -1,0 +1,265 @@
+<?xml version="1.0"?>
+
+<!--
+	Copyright 2003 Sun Microsystems, Inc. All rights reserved.
+	SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+-->
+
+<!DOCTYPE faces-config PUBLIC
+  "-//Sun Microsystems, Inc.//DTD JavaServer Faces Config 1.0//EN"
+  "http://java.sun.com/dtd/web-facesconfig_1_0.dtd">
+
+<!-- =========== FULL CONFIGURATION FILE ================================== -->
+
+<faces-config>
+
+	<lifecycle>
+		<phase-listener>
+			org.eclipse.wtp.jsf.tests.ValueResourcePhaseListener
+		</phase-listener>
+	</lifecycle>
+
+
+	<factory>
+		
+		<application-factory>application-factory</application-factory><faces-context-factory>
+			faces-context-factory
+		</faces-context-factory>
+		<lifecycle-factory>lifecycle-factory</lifecycle-factory>
+		<render-kit-factory>render-kit-factory</render-kit-factory>
+	</factory>
+
+	<!-- Component -->
+	<component>
+		<description>my component</description>
+		<display-name>My component</display-name>
+		<icon>
+			<small-icon>icon2</small-icon>
+		</icon>
+		<component-type>component-type</component-type>
+		<component-class>ComponentClass</component-class>
+		<attribute>
+			<description>attribute-description</description>
+			<display-name>attribute-display-name</display-name>
+			<icon>
+				<small-icon>attribute-icon</small-icon>
+			</icon>
+			<attribute-name>attribute-name</attribute-name>
+			<attribute-class>attribute-class</attribute-class>
+			<default-value>value5</default-value>
+			<suggested-value>attribute-suggested-value</suggested-value>
+			<attribute-extension>attr - extension</attribute-extension>
+		</attribute>
+		<property>
+			<property-name>property1</property-name>
+			<property-class>ComponentProperty</property-class>
+			<default-value>value6</default-value>
+		</property>
+		<component-extension>component-extension</component-extension>
+
+	</component>
+
+
+	<!-- managed-bean -->
+	<managed-bean>
+		<description>managed-bean-description</description>
+		<display-name>managed-bean-display-name</display-name>
+		<icon>
+			<large-icon>large-icon</large-icon>
+		</icon>
+		<managed-bean-name>managed-bean-name</managed-bean-name>
+		<managed-bean-class>managed-bean-class</managed-bean-class>
+		<managed-bean-scope>managed-bean-scope</managed-bean-scope>
+		<managed-property>
+			<description>managed-property-description</description>
+			<display-name>managed-property-display-name</display-name>
+			<icon>
+				<large-icon>large-icon</large-icon>
+			</icon>
+			<property-name>property-name</property-name>
+			<property-class>property-class</property-class>
+			<null-value />
+		</managed-property>
+	</managed-bean>
+	<converter>
+		<description>converter-description</description>
+		<display-name>converter-display-name</display-name>
+		<icon>
+			<large-icon>large-icon</large-icon>
+		</icon>
+
+		<converter-for-class>converter-for-class</converter-for-class>
+		<converter-class>converter-class</converter-class>
+		<attribute>
+			<description>attribute-description</description>
+			<description>desc 2</description>
+			<description>desc 3</description>
+
+			<description>desc 4</description>
+			<description>desc 5</description>
+			<description>desc 6</description>
+			<description>desc 7</description>
+
+
+
+			<display-name>attribute-display-name</display-name>
+			<icon>
+				<large-icon>large-icon</large-icon>
+			</icon>
+			<attribute-name>attribute-name</attribute-name>
+			<attribute-class>attribute-class</attribute-class>
+			<default-value>default-value</default-value>
+			<suggested-value>attribute-suggested-value</suggested-value>
+			<attribute-extension>
+				attribute-extension
+			</attribute-extension>
+		</attribute>
+		<property>
+			<property-name>property1</property-name>
+			<property-class>MyPropertyClass</property-class>
+			<default-value>value4</default-value>
+		</property>
+	</converter>
+
+	<!-- Referenced-bean -->
+	<referenced-bean>
+		<description>Bean Desc</description>
+		<display-name>referenced-bean-display</display-name>
+		<icon>
+			<small-icon>referenced-bean-myicon</small-icon>
+		</icon>
+		<referenced-bean-name>
+			referenced-bean-name
+		</referenced-bean-name>
+		<referenced-bean-class>
+			referenced-bean-class
+		</referenced-bean-class>
+	</referenced-bean>
+
+	<!-- Render kit -->
+	<render-kit>
+		<description>Render kit Desc</description>
+		<display-name>Render kit disp name</display-name>
+		<icon>
+			<small-icon>icon</small-icon>
+		</icon>
+		<render-kit-id>render-kit-Id</render-kit-id>
+		<render-kit-class>render-kit-class</render-kit-class>
+		<renderer>
+			<description>my renderer</description>
+
+			<display-name>my renderer</display-name>
+			<icon>
+				<small-icon>new icon</small-icon>
+			</icon>
+			<component-family>component-family</component-family>
+			<renderer-type>renderer-type</renderer-type>
+			<renderer-class>renderer-class</renderer-class>
+			<attribute>
+				<description>attribute-description</description>
+				<display-name>attribute-display-name</display-name>
+				<icon>
+					<large-icon>large-icon</large-icon>
+				</icon>
+				<attribute-name>attribute name</attribute-name>
+				<attribute-class>Attribute Class</attribute-class>
+				<default-value>default value</default-value>
+				<attribute-extension>
+					renderer-extension
+				</attribute-extension>
+				<attribute-extension>
+					blah extension
+				</attribute-extension>
+			</attribute>
+			<renderer-extension>
+				renderer-extension 1
+			</renderer-extension>
+			<renderer-extension>
+				renderer-extension 2
+			</renderer-extension>
+			<renderer-extension>
+				renderer-extension 3
+			</renderer-extension>
+
+		</renderer>
+	</render-kit>
+
+	<!-- Validator rules -->
+	<validator>
+		<description>validator-description</description>
+		<display-name>validator-display-name</display-name>
+		<icon>
+			<small-icon>icon1</small-icon>
+		</icon>
+		<validator-id>validator-Id</validator-id>
+		<validator-class>validator-class</validator-class>
+		<attribute>
+			<description>attribute-description</description>
+			<display-name>attribute-display-name</display-name>
+			<icon>
+				<large-icon>large-icon</large-icon>
+			</icon>
+			<attribute-name>validator-attribute-name</attribute-name>
+			<attribute-class>validator-attribute-class</attribute-class>
+			<default-value>default-value</default-value>
+			<suggested-value>attribute-suggested-value</suggested-value>
+			<attribute-extension>
+				attribute-extension
+			</attribute-extension>
+		</attribute>
+		<property>
+			<property-name>property-name</property-name>
+			<property-class>property-class</property-class>
+			<default-value>value4</default-value>
+		</property>
+	</validator>
+
+	<!-- variable/property resolver registration -->
+	<application>
+		<action-listener>Action listener</action-listener>
+		<variable-resolver>
+			com.ibm.faces.databind.SelectItemsVarResolver
+		</variable-resolver>
+		<default-render-kit-id>some renderer kit</default-render-kit-id>
+		<message-bundle>some messeage bundle goes here</message-bundle>
+		<navigation-handler>navigation handler</navigation-handler>
+		<view-handler>view handler</view-handler>
+		<state-manager>state manager</state-manager>
+
+		<property-resolver>
+			com.ibm.faces.databind.SelectItemsPropResolver
+		</property-resolver>
+		<locale-config>
+			<default-locale>en</default-locale>
+			<supported-locale>en</supported-locale>
+			<supported-locale>de</supported-locale>
+
+		</locale-config>
+	</application>
+
+	<navigation-rule>
+		<description>Descri 1</description>
+		<display-name>display name 1</display-name>
+		<icon>
+			<small-icon>myicon</small-icon>
+		</icon>
+		<from-view-id>/Page1.jsp</from-view-id>
+		<navigation-case>
+			<description>nav case descr 2</description>
+			<description>nav case descr 2</description>
+			<description>nav case descr 2</description>
+			<description>nav case descr 2</description>
+
+			<display-name>what display name</display-name>
+			<icon>
+				<small-icon>small-icon</small-icon>
+			</icon>
+			<from-action>from-action</from-action>
+			<from-outcome>drilldown</from-outcome>
+			<to-view-id>/edit.jsp</to-view-id>
+
+
+		</navigation-case>
+	</navigation-rule>
+
+</faces-config>
