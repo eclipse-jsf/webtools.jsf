@@ -14,6 +14,8 @@ import java.util.Iterator;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IResourceChangeEvent;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfigModelAdapter;
@@ -59,12 +61,10 @@ public class JSFLibraryPropertyPage extends PropertyPage {
 		if (!validatePage()) {
 			return true;
 		}
-				
-		// Update project dependencies.
+		
+		provider = jsfLibCfgControl.getModelProvider();		
 		provider.updateProjectDependencies();
-
-		// Save configuration data
-		provider.saveData();
+		provider.saveData();	// save library configuration data
 		
 		return true;
 	}	
@@ -83,20 +83,9 @@ public class JSFLibraryPropertyPage extends PropertyPage {
 	private Control createForJSFProject(Composite parent) {		 
 		jsfLibCfgControl = new JSFLibraryConfigControl(parent, SWT.NULL, project);
 		
-		if (provider == null) {
-			provider = jsfLibCfgControl.getModelProvider();
-		}				
-				
-		/** JC Test
-		   ResourcesPlugin.getWorkspace().addResourceChangeListener(jsfLibCfgControl,
-				      IResourceChangeEvent.PRE_CLOSE
-				      | IResourceChangeEvent.PRE_DELETE
-				      | IResourceChangeEvent.PRE_AUTO_BUILD
-				      | IResourceChangeEvent.POST_AUTO_BUILD
-				      | IResourceChangeEvent.POST_CHANGE);		
-		 End of JC Test
-		 */
-				
+	    ResourcesPlugin.getWorkspace().addResourceChangeListener(jsfLibCfgControl,
+			      IResourceChangeEvent.POST_CHANGE);	
+		   
 		jsfLibCfgControl.addOkClickedListener(new IJSFImplLibraryCreationListener() {			
 			public void okClicked(JSFImplLibraryCreationEvent event) {
 				validatePage();

@@ -80,6 +80,7 @@ public class JSFLibraryConfigControl extends Composite
 	final private int COLUMN_LIB_NAME = 1;
 
 	private JSFLibraryConfigModelAdapter provider = null;
+	private IProject project = null;
 	
 	private ComboViewer cvImplLib;
 	private CheckboxTableViewer ctvSelCompLib;
@@ -87,12 +88,10 @@ public class JSFLibraryConfigControl extends Composite
 	private TreeViewer tvCompLib;
 	private TreeViewerAdapter tvAdapter;
 	private TreeLabelProvider tvLabelProvider;
-	private List colJSFImpl = null;
-	private List colJSFComp = null;
 	private Combo comboImplLib;
-	
-	private Vector newJSFLibCreatedListeners = new Vector();
-	
+		
+	private Vector newJSFLibCreatedListeners = new Vector();	
+
 	public void addOkClickedListener(IJSFImplLibraryCreationListener listener) {
 		newJSFLibCreatedListeners.addElement(listener);
 	}
@@ -109,9 +108,8 @@ public class JSFLibraryConfigControl extends Composite
 	public JSFLibraryConfigControl(Composite parent, int style, IProject fProject) {
 		super(parent, style);	
 		
+		this.project = fProject;		
 		this.provider = new JSFLibraryConfigModelAdapter(fProject);
-		this.colJSFImpl = provider.getJSFImplementationLibraries();
-		this.colJSFComp = provider.getJSFComponentLibraries();
 		
 		initControls();
 	}	
@@ -159,7 +157,7 @@ public class JSFLibraryConfigControl extends Composite
 	}
 					
 	private void initializeControlValues() {
-		cvImplLib.setInput(colJSFImpl);	
+		loadJSFImplList();
 		
 		btnDeployJars.setSelection(false);
 		if ( provider.getSavedJSFImplementationLibrary() != null ) {
@@ -174,11 +172,7 @@ public class JSFLibraryConfigControl extends Composite
 			}
 		}
 		
-		// Source JSF Component Viewer
-		tvCompLib.setInput(colJSFComp);
-		
-		// Destination JSF Component Viewer
-		ctvSelCompLib.setInput(colJSFComp);
+		loadJSFCompList();
 
 		JSFLibraryDecorator jsfLibDctr = null; 
 		List jsfCompLibs = provider.getSavedJSFComponentLibraries();
@@ -186,6 +180,8 @@ public class JSFLibraryConfigControl extends Composite
 			jsfLibDctr = (JSFLibraryDecorator)jsfCompLibs.get(i);
 			ctvSelCompLib.setChecked(jsfLibDctr, jsfLibDctr.isCheckedToBeDeployed());
 		} 
+		
+		redraw();
 	}
 	
 	private void loadJSFImplList() {
@@ -731,42 +727,22 @@ public class JSFLibraryConfigControl extends Composite
 	}
 
 	/**
-	 * Need to listen to resource changes to resolve 
-	 * changes from facet install and property page
+	 * Listen to resource changes to synchronize 
+	 * JSF library reference settings between facet install 
+	 * and property page
 	 */	
-	public void resourceChanged(IResourceChangeEvent event) {
-        IResource res = event.getResource();
-        /* JC Test
+	public void resourceChanged(IResourceChangeEvent event) {        
         switch (event.getType()) {
-           case IResourceChangeEvent.PRE_CLOSE:
-              System.out.print("Project ");
-              System.out.print(res.getFullPath());
-              System.out.println(" is about to close.");
-              break;
-           case IResourceChangeEvent.PRE_DELETE:
-              System.out.print("Project ");
-              System.out.print(res.getFullPath());
-              System.out.println(" is about to be deleted.");
-              break;
            case IResourceChangeEvent.POST_CHANGE:
-              System.out.println("Resources have changed.");
-              IProject project = provider.getProject();
               this.provider = null;
-              this.colJSFImpl = null;
-              this.colJSFComp = null;
               this.provider = new JSFLibraryConfigModelAdapter(project);
-      		  this.colJSFImpl = provider.getProjectJSFImplementationLibraries();
-      		  this.colJSFComp = provider.getProjectJSFComponentLibraries(); 
-              break;
-           case IResourceChangeEvent.PRE_AUTO_BUILD:
-              System.out.println("Auto build about to run.");
-              break;
-           case IResourceChangeEvent.POST_AUTO_BUILD:
-              System.out.println("Auto build complete.");
+              this.getDisplay().asyncExec (new Runnable () {
+                  public void run () {
+                	  initializeControlValues();
+                  }
+               });
               break;
         }
-        */				
 	}
-
 	
 }

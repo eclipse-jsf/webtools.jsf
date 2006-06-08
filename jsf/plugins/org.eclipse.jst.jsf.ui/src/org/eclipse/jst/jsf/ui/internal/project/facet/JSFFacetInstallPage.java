@@ -110,17 +110,7 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements IJSFFace
 		((GridLayout)composite.getLayout()).marginLeft = 0;		
 		IProject project = getProjectHandle();
 		jsfLibCfgComp = new JSFLibraryConfigControl(composite, SWT.NONE, project);
-		
-		// JC Test
-		   ResourcesPlugin.getWorkspace().addResourceChangeListener(jsfLibCfgComp,
-				      IResourceChangeEvent.PRE_CLOSE
-				      | IResourceChangeEvent.PRE_DELETE
-				      | IResourceChangeEvent.PRE_AUTO_BUILD
-				      | IResourceChangeEvent.POST_AUTO_BUILD
-				      | IResourceChangeEvent.POST_CHANGE);
-		// End of JC Test
-		
-		
+				
 		jsfLibCfgComp.addOkClickedListener(new IJSFImplLibraryCreationListener() {
 			public void okClicked(JSFImplLibraryCreationEvent event) {
 				if (((JSFImplLibraryCreationEvent) event).isLibraryCreated()) {
