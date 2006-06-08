@@ -11,6 +11,7 @@
 package org.eclipse.jst.jsf.core.internal.project.facet;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -231,13 +232,12 @@ public class JSFFacetInstallDataModelProvider extends
 		return list;
 	}	
 
-	private List getDefaultJSFImplementationLibraries() {	
-		List list = new ArrayList();		
-		JSFLibraryDecorator prjJSFLib = null;
-		JSFLibrary jsfLib = null;
+	private List getDefaultJSFImplementationLibraries() {
+		List list = new ArrayList(Collections.EMPTY_LIST);
+		
 		if (JSFCorePlugin.getDefault().getJSFLibraryRegistry() != null) {
-			JSFCorePlugin.getDefault().getJSFLibraryRegistry().getDefaultImplementation();
-			prjJSFLib = new JSFLibraryDecorator(jsfLib, true, jsfLib.isDeployed());
+			JSFLibrary jsfLib = JSFCorePlugin.getDefault().getJSFLibraryRegistry().getDefaultImplementation();
+			JSFLibraryDecorator prjJSFLib = new JSFLibraryDecorator(jsfLib, true, true);
 			list.add(prjJSFLib);			
 		}
 		return list;
@@ -246,7 +246,7 @@ public class JSFFacetInstallDataModelProvider extends
 	private JSFLibraryDecorator getDefaultImplementationLibrary() {		
 		if (JSFCorePlugin.getDefault().getJSFLibraryRegistry() != null) {
 			JSFLibrary jsfLib = JSFCorePlugin.getDefault().getJSFLibraryRegistry().getDefaultImplementation();
-			return new JSFLibraryDecorator(jsfLib, true, true);	// default to be selected
+			return new JSFLibraryDecorator(jsfLib, true, true);	
 		}
 		return null;	
 	}	
