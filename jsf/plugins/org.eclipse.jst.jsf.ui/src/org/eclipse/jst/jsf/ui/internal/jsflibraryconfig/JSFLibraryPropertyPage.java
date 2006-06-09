@@ -140,5 +140,15 @@ public class JSFLibraryPropertyPage extends PropertyPage {
 		return false;
 
 	}
+
+	public void dispose() {
+		super.dispose();
+		
+		if (jsfLibCfgControl != null) {
+			ResourcesPlugin.getWorkspace().removeResourceChangeListener(jsfLibCfgControl);
+		}
+		jsfLibCfgControl = null;
+	}
+	
 	
 }
