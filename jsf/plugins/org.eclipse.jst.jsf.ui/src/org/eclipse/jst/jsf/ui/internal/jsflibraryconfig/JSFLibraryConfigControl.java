@@ -74,13 +74,11 @@ import org.eclipse.ui.PlatformUI;
  * 
  * @author Justin Chen - Oracle
  */
-public class JSFLibraryConfigControl extends Composite 
-	implements IResourceChangeListener  {
+public class JSFLibraryConfigControl extends Composite { 
 	final private int COLUMN_DEPLOY = 0;
 	final private int COLUMN_LIB_NAME = 1;
 
 	private JSFLibraryConfigModelAdapter provider = null;
-	private IProject project = null;
 	
 	private ComboViewer cvImplLib;
 	private CheckboxTableViewer ctvSelCompLib;
@@ -107,8 +105,7 @@ public class JSFLibraryConfigControl extends Composite
 	 */	
 	public JSFLibraryConfigControl(Composite parent, int style, IProject fProject) {
 		super(parent, style);	
-		
-		this.project = fProject;		
+				
 		this.provider = new JSFLibraryConfigModelAdapter(fProject);
 		
 		initControls();
@@ -726,23 +723,4 @@ public class JSFLibraryConfigControl extends Composite
 		}
 	}
 
-	/**
-	 * Listen to resource changes to synchronize 
-	 * JSF library reference settings between facet install 
-	 * and property page
-	 */	
-	public void resourceChanged(IResourceChangeEvent event) {        
-        switch (event.getType()) {
-           case IResourceChangeEvent.POST_CHANGE:
-              this.provider = null;
-              this.provider = new JSFLibraryConfigModelAdapter(project);
-              this.getDisplay().asyncExec (new Runnable () {
-                  public void run () {
-                	  initializeControlValues();
-                  }
-               });
-              break;
-        }
-	}
-	
 }

@@ -82,10 +82,7 @@ public class JSFLibraryPropertyPage extends PropertyPage {
 
 	private Control createForJSFProject(Composite parent) {		 
 		jsfLibCfgControl = new JSFLibraryConfigControl(parent, SWT.NULL, project);
-		
-	    ResourcesPlugin.getWorkspace().addResourceChangeListener(jsfLibCfgControl,
-			      IResourceChangeEvent.POST_CHANGE);	
-		   
+				
 		jsfLibCfgControl.addOkClickedListener(new IJSFImplLibraryCreationListener() {			
 			public void okClicked(JSFImplLibraryCreationEvent event) {
 				validatePage();
@@ -140,15 +137,5 @@ public class JSFLibraryPropertyPage extends PropertyPage {
 		return false;
 
 	}
-
-	public void dispose() {
-		super.dispose();
 		
-		if (jsfLibCfgControl != null) {
-			ResourcesPlugin.getWorkspace().removeResourceChangeListener(jsfLibCfgControl);
-		}
-		jsfLibCfgControl = null;
-	}
-	
-	
 }
