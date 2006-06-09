@@ -7,7 +7,7 @@
 		<topic label="JSF Core" href="html/reference/jsf-c.html" /> 
 		<topic label="JSF HTML" href="html/reference/jsf-h.html" />
 	</topic>
-	<topic label="JSF Facet" href="html/reference/jsf_facet.html" /> 
+	<topic label="JSF Facets" href="html/reference/jsf_facets.html" /> 
 	<topic label="JSF Libraries" href="html/reference/jsf_libraries.html" >
 		<topic label="Implementations vs. Component Libraries" href="html/reference/jsf_libraries.html#ImplVsComponents" />
 		<topic label="Plugin-Provided Libraries" href="html/reference/jsf_libraries.html#pluginprovided" />
