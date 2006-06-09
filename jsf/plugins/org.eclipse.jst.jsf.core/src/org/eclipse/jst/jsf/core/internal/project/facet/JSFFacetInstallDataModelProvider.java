@@ -216,17 +216,17 @@ public class JSFFacetInstallDataModelProvider extends
 
 	}
 
-	
+	// Is this called at all?
 	private List getDefaultJSFComponentLibraries() {
-		List list = new ArrayList();		
+		List list = new ArrayList(Collections.EMPTY_LIST);		
 		JSFLibraryDecorator prjJSFLib = null;
 		JSFLibrary jsfLib = null;
 		if (JSFCorePlugin.getDefault().getJSFLibraryRegistry() != null) {
 			Iterator it = JSFCorePlugin.getDefault().getJSFLibraryRegistry().getNonImplJSFLibraries().iterator();
-			boolean selected = false;	// not selected when project is created
 			while (it.hasNext()) {
 				jsfLib = (JSFLibrary)it.next(); 
-				prjJSFLib = new JSFLibraryDecorator(jsfLib, selected, true);
+				prjJSFLib = new JSFLibraryDecorator(jsfLib, true, true);
+				list.add(prjJSFLib);
 			}
 		}
 		return list;
