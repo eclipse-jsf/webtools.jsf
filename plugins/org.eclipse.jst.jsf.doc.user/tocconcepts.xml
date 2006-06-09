@@ -7,10 +7,7 @@
 		<topic label="What happens during facet install?" href="html/concepts/jsf_facets_install.html"/>
 		<topic label="What happens during facet un-install?" href="html/concepts/jsf_facets_uninstall.html"/>		
 	</topic>
-	<topic label="JSF Libraries"  href="html/concepts/jsf_libraries.html">
-		<topic label="User defined" href="html/concepts/jsf_libraries_user.html"/>
-		<topic label="Plugin defined" href="html/concepts/jsf_libraries_plugin.html"/>			
-	</topic> 
+	<topic label="JSF Libraries"  href="html/concepts/jsf_libs.html"/>
 	<topic label="JSP JSF Source Page Editing Tools" href="html/concepts/jsf_source_editing.html">
 		<topic label="Content Assist" href="html/concepts/jsf_source_edit_content_assist.html" /> 
 		<topic label="Validation" href="html/concepts/jsf_source_edit_validation.html" /> 

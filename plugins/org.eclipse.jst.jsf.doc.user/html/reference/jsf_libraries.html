@@ -6,6 +6,7 @@
 <title>JSF Libraries</title>
 </head>
 <body>
+
 <h1>JSF Libraries</h1>
 <br>
 A JSF Library is very similar in concept to the Eclipse JDT User Library.   They are meant to be named collections of jars that can be added as references to a Dynamic Web Project.  
@@ -18,29 +19,80 @@ A JSF Library differs from a JDT User Library in the following ways:
 <li>The JSF Library Registry, that is persisted for a workspace, is currently not importable or exportable</li>
 </ul>
 <p>
-<h3>Implementations vs Component Libraries</h3>
+<a id="ImplVsComponents"></a><h2>Implementations vs Component Libraries</h2>
 <br>
-A JSF Library is just a set of jars that will be put on the classpath and optionally deployed to the WEB-INF/lib directory at publish time using the J2EE Module Dependencies.   Why do some libraries have the "implementation" flag?
+A JSF Library is just a set of jars that will be put on the classpath and optionally deployed to the WEB-INF/lib directory at publish time using the J2EE Module Dependencies.   <p>Why do some libraries have the "implementation" flag?
 A library marked as a JSF implementation differentiates it from a normal set of jars that make up a library.  This flag is meant as an on-your-honor marking that this set of jars meets the JSF specification for an implementation.  
 The JSF tooling requires a Faces Servlet implementation for compilation and "Run on Server" feature of a JSF JSP page.  
-</p>
-<h3>Plugin-Provided Libraries</h3>
+
+A library marked as an implementation will appear with [implementation] in the label.   There can be more than one implementation in the registry.   One of them can be marked as the default so that it will be chosen automatically during JSF Facet installation allowing JSF Facet Finish to be enabled.
+<br><br>
+<img alt="JSF Implmentation Library" src="./images/jsfimpl.png"/>
 <br>
+To make one of the implementations the default, select the desired default implementation library and press the enabled "Make Default" button.   This button is only available when the selected library is an implementation.
+<p><br><br>
+<img alt="Make Default Implementation" src="./images/jsfimplmakedefault.png"/>
+</p>
+<a id="pluginprovided"></a><h2>Plugin-Provided Libraries</h2>
+<br>
+<p>
 An adopter of the WTP JSF Tooling may create a plugin that extends <code>org.eclipse.jst.jsf.core.jsflibraries</code> which would allows a developer to procedurally create a JSF Library.   This, in theory, would simplify project configuration and could also enable the adopter to provide other tool extensions to improve the development experience. 
 <br><br>
 Plugin-provided libaries are not editable or deletable by an end user.
 <br>
 </p>
 <p>
+<a id="missingjars"></a><h2>Missing Jars</h2>
+<br>
+A JSF Libary keeps references to jars somewhere on the local file system.   Should the files be moved or the directory renamed, you will see:
+<br>
+<img alt="Missing Jars" src="./images/jsflibsmissingjars.png"/>
+<br>
+<p>
+It will be necessary to edit the JSF Library and fix the references before the library will be useable.
+</p>
+
+<a id="projectrefs"></a><h2>Project References</h2>
+<br>
+<p>
+When a library is referenced by a project, either at JSF Facet install time, or at a later time by adding it using JSF Library Reference project property page, the following occurs:
+</p>
+<ul>
+<li>If a library was marked for deployment, each jar is added as a J2EE Module Dependency for the project.   This places each jar on the build classpath and allows it to be deployed to WEB-INF/lib directory </li>
+<li>If library is not marked for deployment, each individual jar in the library is added as a classpath library reference in the build path.</li>
+<li><i>The current implementation does not use classpath container variable references for libraries.</i></li>
+</ul>
+<br>
+<p>
+Note: if by adding a reference to a library that contains a jar that is already referenced (same name and location), the newly referenced jar will be skipped.     
+</p>
+<p>
+When a library is removed as a reference by a project, the following occurs:
+</p>
+<ul>
+<li>If a library was marked for deployment, each jar is removed as a J2EE Module Dependency.</li>
+<li>If library is not marked for deployment, each individual jar in the library is removed from the classpath library reference in the build path.</li>
+</ul>
+<br>
+<p>
+Beware: One can remove the J2EE Module Dependency through the J2EE Module Dependencies property page.   Doing so currently will not remove the JSF Library reference.   
+<br>
+</p>
+<p>
+If there have been updates to a library in the registry that your project is referencing, it is currently necessary to remove and re-add the reference.  Future enhancments will be made to resolve lifecycle issues with a JSF Library project reference.<a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=142056" id="Bug142056">142056</a>
+</p>
+<p>
 <img src="../../images/ngrelc.png"  alt="Related concepts" border="0"><br> 
 <a href="../concepts/jsf_facets.html">JSF Facets</a><br>
 </p>
 
-<p> <img src="../../images/ngrelr.png"  alt="Related reference" border="0"><br>
+<p> 
+<img src="../../images/ngrelr.png"  alt="Related reference" border="0"><br>
 <a href="../reference/jsf_facets.html">JSF Facets</a><br>
 </p>
 
-<p> <img src="../../images/ngrelt.png"  alt="Related tasks" border="0"> <br>
+<p> 
+<img src="../../images/ngrelt.png"  alt="Related tasks" border="0"> <br>
 <a href="../tasks/jsf_libs.html">Create and Update JSF Libraries</a><br>
 <a href="../tasks/create_jsf_app.html">Create JSF Project</a><br>
 </p>
