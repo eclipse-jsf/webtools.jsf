@@ -45,7 +45,7 @@
 				hyperlinkaction="org.eclipse.jst.jsf.facesconfig.common.actions.LoadCheatSheetAction"
 				text="%pageflow.editor.intro.cheatsheets.text"
 				hyperlink="%pageflow.editor.intro.cheatsheets.link"/>
-			<introductionelement actionparameters="com.sybase.stf.jmt.editors_pageflow_PageflowPage"
+			<introductionelement actionparameters="org.eclipse.jst.jsf.facesconfig.ui.use_facesconfig_editor"
 				icon="icons/overview_obj.gif"
 				hyperlinkaction="org.eclipse.jst.jsf.facesconfig.common.actions.LoadHelpAction"
 				text="%pageflow.editor.intro.help.text"
