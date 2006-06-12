@@ -2,8 +2,8 @@
 <?NLS TYPE="org.eclipse.help.toc"?>
 
 <toc label="Tasks" link_to="toc.xml#jsf_tasks"> 
-	<topic label="Creating New JSF  Projects"  href="html/tasks/create_jsf_app.html" /> 
-	<topic label="Adding Facets to Existing projects" href="html/tasks/add_jsf_facet.html" /> 
+	<topic label="Creating New JSF Projects"  href="html/tasks/create_jsf_app.html" /> 
+	<topic label="Adding JSF Facet to Existing projects" href="html/tasks/add_jsf_facet.html" /> 
 	<topic label="Creating and Updating JSF Libraries" href="html/tasks/jsf_libs.html" /> 
 	<topic label="Adding and Removing JSF Library References from a Project" href="html/tasks/jsf_libs_refs.html" /> 
 	<topic label="Creating JSF JSP Pages" href="html/tasks/create_jsf_jsp_page.html" /> 
