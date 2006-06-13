@@ -21,6 +21,10 @@ import org.eclipse.osgi.util.NLS;
 public class Messages extends NLS {
 	private static final String BUNDLE_NAME = "org.eclipse.jst.jsf.core.internal.messages"; //$NON-NLS-1$
 
+	public static String JSFLibraryConfigPersistData_SAVED_COMPLIB_NOT_FOUND;
+
+	public static String JSFLibraryConfigPersistData_SAVED_IMPLLIB_NOT_FOUND;
+
 	public static String JSFLibraryRegistry_ErrorCreatingURL;
 	public static String JSFLibraryRegistry_NoLoadCreatingNew;
 	public static String JSFLibraryRegistry_ErrorSaving;

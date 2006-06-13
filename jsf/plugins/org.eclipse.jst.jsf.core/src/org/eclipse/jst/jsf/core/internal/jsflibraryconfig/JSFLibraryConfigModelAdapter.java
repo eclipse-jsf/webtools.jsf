@@ -125,8 +125,9 @@ public class JSFLibraryConfigModelAdapter {
 		if (colJSFImplLib == null) {
 			List list = new ArrayList(Collections.EMPTY_LIST);
 
-			if (data.getSavedJSFImplLib() != null) {
-				list.add(data.getSavedJSFImplLib());
+			JSFLibraryDecorator savedImplLib = data.getSavedJSFImplLib();
+			if (savedImplLib != null) {
+				list.add(savedImplLib);
 			}
 			colJSFImplLib = buildJSFLibraryDecoratorList(jsfLibReg
 					.getImplJSFLibraries(), list);
@@ -336,7 +337,7 @@ public class JSFLibraryConfigModelAdapter {
 	 * 
 	 * @param wsJSFLibs
 	 * @param pjJSFLibs
-	 * @return
+	 * @return List
 	 */
 	private List buildJSFLibraryDecoratorList(EList wsJSFLibs, List pjJSFLibs) {
 		List list = new ArrayList(Collections.EMPTY_LIST);

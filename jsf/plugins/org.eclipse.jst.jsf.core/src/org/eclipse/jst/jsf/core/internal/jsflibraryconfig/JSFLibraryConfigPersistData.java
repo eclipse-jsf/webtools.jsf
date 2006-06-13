@@ -18,11 +18,14 @@ import java.util.List;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.QualifiedName;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
+import org.eclipse.jst.jsf.core.internal.Messages;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistry;
 import org.eclipse.jst.jsf.core.internal.project.facet.JSFUtils;
+import org.eclipse.osgi.util.NLS;
 
 /**
  * To save and retore JSF library reference configuration 
@@ -43,7 +46,10 @@ public class JSFLibraryConfigPersistData {
  	protected JSFLibraryConfigPersistData(IProject project) {
 		this.project = project;	
 		this.jsfLibReg = JSFCorePlugin.getDefault().getJSFLibraryRegistry();
-	}
+		
+		// Checked when object is instanciated instead of at method call  
+		VerifySavedLibAvailability();
+	} 
  	
 	/**
 	 * Return previoulsly selected JSF implementation library.
@@ -53,7 +59,7 @@ public class JSFLibraryConfigPersistData {
  	protected JSFLibraryDecorator getSavedJSFImplLib() {		
 		try {			
 			if ( selJSFLibImpl == null ) {
-				String strImplLibs = ((IResource)project).getPersistentProperty(new QualifiedName("", JSFUtils.PP_JSF_IMPLEMENTATION_LIBRARIES));				
+				String strImplLibs = ((IResource)project).getPersistentProperty(new QualifiedName("", JSFUtils.PP_JSF_IMPLEMENTATION_LIBRARIES));
 				selJSFLibImpl = getJSFImplLibfromPersistentProperties(getTuples(strImplLibs));
 			}
 		} catch (CoreException e) {
@@ -78,7 +84,7 @@ public class JSFLibraryConfigPersistData {
 		try {
 			if ( selJSFLibComp == null ) {
 				selJSFLibComp = new ArrayList(Collections.EMPTY_LIST);
-				String strCompLibs = ((IResource)project).getPersistentProperty(new QualifiedName("", JSFUtils.PP_JSF_COMPONENT_LIBRARIES));				
+				String strCompLibs = ((IResource)project).getPersistentProperty(new QualifiedName("", JSFUtils.PP_JSF_COMPONENT_LIBRARIES));
 				getJSFCompLibsfromPersistentProperties(getTuples(strCompLibs), selJSFLibComp);
 			}		
 		} catch (CoreException e) {
@@ -111,33 +117,67 @@ public class JSFLibraryConfigPersistData {
 		}
 	}
 	
+	
+	
+ 	private void VerifySavedLibAvailability() {
+ 		try {
+			String strImplLibs = ((IResource)project).getPersistentProperty(new QualifiedName("", JSFUtils.PP_JSF_IMPLEMENTATION_LIBRARIES));
+	 		String strCompLibs = ((IResource)project).getPersistentProperty(new QualifiedName("", JSFUtils.PP_JSF_COMPONENT_LIBRARIES));
+	 		
+	 		logMissingLib(getTuples(strImplLibs), true);
+	 		logMissingLib(getTuples(strCompLibs), false);
+	 		
+		} catch (CoreException e) {
+			JSFCorePlugin.getDefault().getMsgLogger().log(e);
+		}		
+ 	} 	
+ 	
+ 	private void logMissingLib(List jsfLibTuples, boolean isVerifyImpl) {
+		if (jsfLibReg != null) {
+			Iterator itTuple = jsfLibTuples.iterator();
+			while(itTuple.hasNext()) {
+				Tuple tuple = (Tuple)itTuple.next();			
+				JSFLibrary jsfLib = jsfLibReg.getJSFLibraryByID(tuple.ID);				
+				// Info logged when saved JSF lib is removed from registry.
+				// One log entry is created for each missing library.
+				if (jsfLib == null) {
+					String prjName = project.getName();
+					String msg = (isVerifyImpl) ?
+							Messages.JSFLibraryConfigPersistData_SAVED_IMPLLIB_NOT_FOUND : 
+							Messages.JSFLibraryConfigPersistData_SAVED_COMPLIB_NOT_FOUND;
+					JSFCorePlugin.log(IStatus.INFO, NLS.bind(msg, prjName));
+				}
+			}
+		} 		
+ 	}	
+	
 	private JSFLibraryDecorator getJSFImplLibfromPersistentProperties(List jsfLibTuples) {
-		Iterator itTuple = jsfLibTuples.iterator();
-		while(itTuple.hasNext()) {
-			Tuple tuple = (Tuple)itTuple.next();
-			
-			if ( jsfLibReg != null ) {			
+		if (jsfLibReg != null) {
+			Iterator itTuple = jsfLibTuples.iterator();
+
+			while(itTuple.hasNext()) {
+				Tuple tuple = (Tuple)itTuple.next();			
 				JSFLibrary jsfLib = jsfLibReg.getJSFLibraryByID(tuple.ID);				
 				if (jsfLib != null) {
 					return new JSFLibraryDecorator(jsfLib, tuple.selected, tuple.deploy);
 				}
-			} 
-		}	
+			}
+		}
 		return null;
 	}
 	
-	private void getJSFCompLibsfromPersistentProperties(List jsfLibTuples, List JSFCompLibs) {
-		Iterator itTuple = jsfLibTuples.iterator();
-		while(itTuple.hasNext()) {
-			Tuple tuple = (Tuple)itTuple.next();
-			
-			if ( jsfLibReg != null ) {				
+	private void getJSFCompLibsfromPersistentProperties(List jsfLibTuples, List JSFCompLibs) {		
+		if (jsfLibReg != null) {
+			Iterator itTuple = jsfLibTuples.iterator();	
+			while(itTuple.hasNext()) {
+				Tuple tuple = (Tuple)itTuple.next();
+								
 				JSFLibrary jsfLib = jsfLibReg.getJSFLibraryByID(tuple.ID);				
 				if (jsfLib != null) {
 					JSFLibraryDecorator newJSFLibDcrt = new JSFLibraryDecorator(jsfLib, tuple.selected, tuple.deploy);
 					JSFCompLibs.add(newJSFLibDcrt);
-				}			
-			} 			
+				}	
+			}
 		}
 	}
 	
