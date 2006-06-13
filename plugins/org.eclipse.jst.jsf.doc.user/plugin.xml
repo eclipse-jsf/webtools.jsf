@@ -21,5 +21,11 @@
             file="toctasks.xml">
       </toc>
    </extension>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="facesconfig_ui_contexts.xml"
+            plugin="org.eclipse.jst.jsf.facesconfig.ui"/>
+   </extension>
 
 </plugin>
