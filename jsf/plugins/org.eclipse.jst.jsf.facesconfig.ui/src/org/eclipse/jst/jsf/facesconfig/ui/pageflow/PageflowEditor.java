@@ -539,13 +539,11 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 		} catch (FileNotFoundException e) {
 			// Pageflow.PageflowEditor.Alert.errorSaveFileInfo = The current
 			// pageflow model could not be saved.
-			EditorPlugin.getAlerts().throwCoreException(
-					"Pageflow.PageflowEditor.Alert.errorSaveFileInfo");
+			EditorPlugin.getAlerts().throwCoreException(e);
 		} catch (IOException e) {
 			// Pageflow.PageflowEditor.Alert.errorSaveFileInfo = The current
 			// pageflow model could not be saved.
-			EditorPlugin.getAlerts().throwCoreException(
-					"Pageflow.PageflowEditor.Alert.errorSaveFileInfo");
+			EditorPlugin.getAlerts().throwCoreException(e);
 		}
 	}
 
