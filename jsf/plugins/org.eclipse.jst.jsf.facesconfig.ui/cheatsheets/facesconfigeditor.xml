@@ -1,70 +1,276 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <cheatsheet title="Faces Configuration Editor">
 
-	<intro>
+	<intro
+		href="/org.eclipse.platform.doc.user/reference/ref-cheatsheets.htm">
 		<description>
-			This cheat sheet will automatically launch wizards, perform
-			actions, and guide you through the individual steps to
-			create a new Service. To learn more about using cheat sheets
-			or to see a list of available cheat sheets click help (?).
-			To start working on this cheat sheet, click the &quot;Click
-			to begin&quot; button below.
+			This cheat sheet will demonstrate how to eidt a JSF
+			configuration file with Faces Config Editor.
+			<br />
+			<br />
+			To learn more about using cheat sheets, click the help
+			button in the top right corner (?).
 		</description>
 	</intro>
 
-	<item
-		href="/com.sybase.stf.jmt.doc.user/reference/FacesConfigEditor/facesconfig-editor.htm"
-		title="Overview Details">
+	<!-- Item -->
+
+	<item title="Open the J2EE perspective"
+		href="/org.eclipse.jst.j2ee.doc.user/topics/cjpers.html"
+		dialog="false" skip="true">
 		<description>
-			Description on how to use the overview page.
+			To open the J2EE perspective, select
+			<b>Window-&gt;Open Perspective-&gt;Other...</b>
+			and choose
+			<b>J2EE</b>
+			.
+			<br />
+			<br />
+			Alternatively, click the following button to perform the
+			task.
+		</description>
+		<command
+			serialization="org.eclipse.ui.perspectives.showPerspective(org.eclipse.ui.perspectives.showPerspective.perspectiveId=org.eclipse.jst.j2ee.J2EEPerspective)" />
+	</item>
+
+	<!-- Item -->
+
+	<item title="Create the JSF web project"
+		href="/org.eclipse.jst.jsf.doc.user/html/tasks/create_jsf_app.html"
+		dialog="true" skip="false">
+		<description>
+			To create the JSF web application perform the following
+			steps
+		</description>
+		<subitem
+			label="Select &quot;File-&gt;New-&gt;Project...&quot; from the main menu and choose &quot;Dynamic Web Project&quot; from the resulting &quot;New Project&quot; dialog box"
+			skip="false">
+			<command
+				serialization="org.eclipse.ui.newWizard(newWizardId=org.eclipse.jst.servlet.ui.project.facet.WebProjectWizard)" />
+		</subitem>
+		<subitem
+			label="Input &quot;JSFApplication&quot; into the &quot;Project Name&quot; text box"
+			skip="false" />
+		<subitem
+			label="Select &quot;JavaServer Faces v1.1 Project&quot; in the &quot;Configurations&quot; dropdown box"
+			skip="false" />
+		<subitem
+			label="Accept the rest of the default preloaded values on the &quot;Dynamic Web Project&quot; page and click &quot;Next&quot;"
+			skip="false" />
+		<subitem
+			label="Accept the rest of the default preloaded values on the &quot;Project Facets&quot; page and click &quot;Next&quot;"
+			skip="false" />
+		<subitem
+			label="Accept the rest of the default preloaded values on the &quot;Web Module&quot; page and click &quot;Next&quot;"
+			skip="false" />
+		<subitem
+			label="Specify JSF Facet Settings on the &quot;JSF Capabilities&quot; page and click &quot;Finish&quot;"
+			skip="false" />
+	</item>
+
+	<item title="Open the JSF configuration file"
+		href="/org.eclipse.jst.jsf.doc.user/html/tasks/use_facesconfig_editor.html"
+		dialog="true" skip="false">
+		<description>
+			To open the JSF configuration file, Expand the
+			WebContent/WEB-INF/ folder in the &quot;Project
+			Explorer&quot; view; Double click on the
+			&quot;faces-config.xml&quot; file to open it. Or right click
+			on it then select &quot;Open With&quot; -> &quot;FacesConfig
+			Editor&quot;
+		</description>
+		<subitem
+			label="Expand the /JSFApplication/WebContent/WEB-INF/ folder in the &quot;Project Explorer&quot; view; "
+			skip="true">
+		</subitem>
+		<subitem
+			label="Double click on the &quot;faces-config.xml&quot; file to open it.
+			Or right click on it then select &quot;Open With&quot; -> &quot;FacesConfig Editor&quot;"
+			skip="false">
+			<command
+				serialization="org.eclipse.ui.navigate.openResource(filePath=JSFApplication/WebContent/WEB-INF/faces-config.xml)" />
+		</subitem>
+	</item>
+
+
+	<item href=" " title="Get an introduction on the FacesConfig Editor"
+		dialog="false" skip="true">
+		<description>
+			On the &quot;Introduction &quot; page, there are some
+			introductions about the FacesConfig Editor, and some links
+			to start work with it, or show user the tutorial and help
+			documentation.
 		</description>
 	</item>
 
-	<item href="/com.sybase.stf.jmt.doc.user/tasks/tasks-12.htm"
-		title="Pageflow Page">
+
+	<item href=" " title="Get an overview of the content" dialog="false"
+		skip="true">
 		<description>
-			Description or introduction on how to use this page to
-			create page flow.
+			On the &quot;Overview &quot; page, there are several tables
+			that list the main elements defined in the current faces
+			config file. By double-clicking on an element, user could be
+			guided to the corresponding page to edit it.
 		</description>
 	</item>
 
 	<item
-		href="/com.sybase.stf.jmt.doc.user/tasks/FacesConfigEditor/managedbean.htm"
-		title="Managed beans Page">
+		href="/org.eclipse.jst.jsf.doc.user/html/tasks/define_navigations.html"
+		title="Create a Navigation Rule">
 		<description>
-			Description on how to use the "managed beans page" to
-			create, edit and remove a managed bean in JSF.
+			To create a navigation rule perform the following steps
 		</description>
+		<subitem
+			label="Use the JSP Page wizard to create a page called &quot; login.jsp &quot; in the Web Content folder of the new application. 
+			In the Select Templates page of the wizard, select the &quot;New JSP(html) &quot; template. Click Finish."
+			skip="false">
+			<command
+				serialization="org.eclipse.ui.newWizard(newWizardId=org.eclipse.jst.jsp.ui.internal.wizard.NewJSPWizard)" />
+		</subitem>
+		<subitem
+			label="In the same way, create a page called &quot;welcome.jsp &quot; ."
+			skip="false">
+			<command
+				serialization="org.eclipse.ui.newWizard(newWizardId=org.eclipse.jst.jsp.ui.internal.wizard.NewJSPWizard)" />
+		</subitem>
+		<subitem
+			label="Select the &quot;Page&quot; control from the &quot;Palette&quot; and drop it on the &quot;Navigation&quot; tab. 
+			Choose the page in the resulting &quot;Select JSP File&quot; dialog. "
+			skip="false" />
+		<subitem
+			label="Connect the two pages. Click on the &quot;Link&quot; control in the &quot;Palette&quot;, select the &quot;login&quot; page and draw a line to the &quot;welcome&quot; page. 
+			Select the line in the &quot;Navigation&quot; tab and in the property view, set the value of the &quot;from-outcome&quot; to &quot;login&quot; . "
+			skip="false" />
+		<subitem
+			label="Swith to the &quot;Source&quot; page, will find that there is a navigation-rule element created."
+			skip="false" />
 	</item>
 
 	<item
-		href="/com.sybase.stf.jmt.doc.user/tasks/FacesConfigEditor/component.htm"
-		title="Components Page">
+		href="/org.eclipse.jst.jsf.doc.user/html/tasks/create_managedbean.html"
+		title="Create a Managed Bean">
 		<description>
-			Description on how to create, edit and remove a component,
-			renderkit, converter and validator.
+			To create a managed bean perform the following steps
 		</description>
+		<subitem
+			label="Switch to the &quot;ManagedBean&quot; page; click the &quot;New&quot; button, the new managed bean wizard pops up."
+			skip="false" />
+		<subitem
+			label="On the &quot;Java Class Selection&quot; page, choose &quot;Create a new Java class&quot;, then click &quot;Next&quot;."
+			skip="false" />
+		<subitem
+			label="On the &quot;Java Class&quot; page, input &quot;com.tutorial&quot; into the &quot;Package&quot; field and input &quot;LoginBean&quot; into the &quot;Name&quot; field, 
+			then click &quot;Next&quot; to the next page."
+			skip="false" />
+		<subitem
+			label="On the &quot;Managed Bean Configuration&quot; page, accept the default values and click &quot;Finish&quot; to finish this wizard."
+			skip="false" />
+		<subitem
+			label="Swith to the &quot;Source&quot; page, will find that there is a managed-bean element created."
+			skip="true" />
 	</item>
 
 	<item
-		href="/com.sybase.stf.jmt.doc.user/tasks/FacesConfigEditor/Others/actionlistener.htm"
-		title="Others Page">
+		href="/org.eclipse.jst.jsf.doc.user/html/tasks/facesconfig_ui/add_component.html"
+		title="Create a Component">
 		<description>
-			Description on how to manage other elements in the faces
-			config file: action listener, message bundle, locale
+			To create a component perform the following steps
+		</description>
+		<subitem
+			label="Switch to the &quot;Component&quot; page; expand the &quot;Components&quot; section; "
+			skip="false" />
+		<subitem
+			label="Click the &quot;New&quot; button, a new empty component element is created."
+			skip="false" />
+		<subitem
+			label="On the right part, fill in the essential fields for this component, for example &quot;Component Type&quot;, &quot;Component Class&quot;."
+			skip="false" />
+		<subitem
+			label="Swith to the &quot;Source&quot; page, will find that there is a component element created."
+			skip="false" />
+	</item>
+
+
+	<item
+		href="/org.eclipse.jst.jsf.doc.user/html/tasks/facesconfig_ui/add_converter.html"
+		title="Create a Converter">
+		<description>
+			To create a converter perform the following steps
+		</description>
+		<subitem
+			label="Switch to the &quot;Component&quot; page; expand the &quot;Converters&quot; section; "
+			skip="false" />
+		<subitem
+			label="Click the &quot;New&quot; button, a new empty converter element is created."
+			skip="false" />
+		<subitem
+			label="On the right part, fill in the essential fields for this converter, for example &quot;Converter ID&quot;, &quot;Converter Class&quot;."
+			skip="false" />
+		<subitem
+			label="Swith to the &quot;Source&quot; page, will find that there is a converter element created."
+			skip="false" />
+	</item>
+
+	<item
+		href="/org.eclipse.jst.jsf.doc.user/html/tasks/facesconfig_ui/add_renderkit.html"
+		title="Create a Render Kit">
+		<description>
+			To create a render-kit perform the following steps
+		</description>
+		<subitem
+			label="Switch to the &quot;Component&quot; page; expand the &quot;RenderKits&quot; section; "
+			skip="false" />
+		<subitem
+			label="Click the &quot;New&quot; button, a new empty render-kit element is created."
+			skip="false" />
+		<subitem
+			label="On the right part, fill in the essential fields for this converter, for example &quot;Renderkit ID&quot;, &quot;Renderkit Class&quot;."
+			skip="false" />
+		<subitem
+			label="Swith to the &quot;Source&quot; page, will find that there is a render-kit element created."
+			skip="false" />
+	</item>
+
+	<item
+		href="/org.eclipse.jst.jsf.doc.user/html/tasks/facesconfig_ui/add_validator.html"
+		title="Create a Validator">
+		<description>
+			To create a validator perform the following steps
+		</description>
+		<subitem
+			label="Switch to the &quot;Component&quot; page; expand the &quot;Validators&quot; section; "
+			skip="false" />
+		<subitem
+			label="Click the &quot;New&quot; button, a new empty validator element is created."
+			skip="false" />
+		<subitem
+			label="On the right part, fill in the essential fields for this converter, for example &quot;Validator ID&quot;, &quot;Validator Class&quot;."
+			skip="false" />
+		<subitem
+			label="Swith to the &quot;Source&quot; page, will find that there is a validator element created."
+			skip="false" />
+	</item>
+
+	<item
+		href="/org.eclipse.jst.jsf.doc.user/html/tasks/use_facesconfig_editor.html"
+		title="Editing other elements on the Others Page">
+		<description>
+			On the &quot;Others&quot; page, there are several sections
+			for editing the elements such as
+			&quot;action-listener&quot;, &quot;locale-config&quot;, and
+			so on.
 		</description>
 	</item>
 
 	<item title="Source Page">
 		<description>
-			User can edit the source of faces config here.
+		   The &quot;Source&quot; page is a embeded XML editor, user can edit the xml source of faces config directly here.
 		</description>
 	</item>
 
 	<item title="Completion">
 		<description>
-			Congratulations, you should now be able to take further
-			actions.
+			Congratulations, you should now be able to use this editor fluently.
 		</description>
 	</item>
 </cheatsheet>
