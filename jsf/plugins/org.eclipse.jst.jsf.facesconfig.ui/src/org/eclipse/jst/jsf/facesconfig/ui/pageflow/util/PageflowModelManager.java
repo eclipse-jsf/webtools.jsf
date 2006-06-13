@@ -84,7 +84,7 @@ public class PageflowModelManager {
 		if (resourcePageflow == null) {
 			pathPageflow = path;
 			ResourceSet resSet = getResourceSet();
-			resourcePageflow = resSet.getResource(URI.createFileURI(path
+			resourcePageflow = resSet.getResource(URI.createPlatformResourceURI(path
 					.toString()), true);
 		}
 
@@ -121,7 +121,7 @@ public class PageflowModelManager {
 		if (resourcePageflow == null) {
 			pathPageflow = path;
 			ResourceSet resSet = getResourceSet();
-			resourcePageflow = resSet.createResource(URI.createFileURI(path
+			resourcePageflow = resSet.createResource(URI.createPlatformResourceURI(path
 					.toString()));
 		}
 		return resourcePageflow;
