@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?NLS TYPE="org.eclipse.help.toc"?>
 
-<toc label="JavaServer Faces Tooling Developer Guide" >
+<toc label="JavaServer Faces Tooling Developer Guide" topic="html/mainpage.html">
 	<topic label="Programmer's Guide">
 		<link toc="tocprogrammersguide.xml" />
 	</topic>
