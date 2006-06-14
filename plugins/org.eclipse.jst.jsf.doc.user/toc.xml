@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?NLS TYPE="org.eclipse.help.toc"?>
 
-<toc label="JavaServer Faces Tooling User Guide" >
+<toc label="JavaServer Faces Tooling User Guide" topic="html/mainpage.html">
 	<topic label="Getting Started" href="html/gettingstarted/getting_started.html">
 		<link toc="tocgettingstarted.xml" />
 	</topic>
-	<topic label="Concepts">
+	<topic label="Concepts" href="html/concepts/concepts.html">
 		<link toc="tocconcepts.xml" />
 	</topic>
-	<topic label="Tasks">
+	<topic label="Tasks" href="html/tasks/tasks.html">
 		<link toc="toctasks.xml" />
 	</topic>
-	<topic label="Reference">
+	<topic label="Reference" href="html/reference/references.html">
 		<link toc="tocreference.xml" />
 	</topic>
 	<topic label="Tips and tricks" href="html/tips_and_tricks.htm"/>

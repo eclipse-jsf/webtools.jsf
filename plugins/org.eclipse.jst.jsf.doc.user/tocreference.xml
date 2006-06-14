@@ -2,12 +2,11 @@
 <?NLS TYPE="org.eclipse.help.toc"?>
 
 <toc label="Reference" link_to="toc.xml#jsf_reference"> 
-	<topic label="Faces-Config Editor/Wizards"  href="html/reference/facesconfigeditor.html" /> 
+	<!--   <topic label="Faces-Config Editor/Wizards"  href="html/reference/facesconfigeditor.html" /> -->
 	<topic label="Taglibrary Support in the JSP Source Editor" href="html/reference/taglibsupport.html" > 
 		<topic label="JSF Core" href="html/reference/jsf-c.html" /> 
 		<topic label="JSF HTML" href="html/reference/jsf-h.html" />
 	</topic>
-	<topic label="JSF Facets" href="html/reference/jsf_facets.html" /> 
 	<topic label="JSF Libraries" href="html/reference/jsf_libraries.html" >
 		<topic label="Implementations vs. Component Libraries" href="html/reference/jsf_libraries.html#ImplVsComponents" />
 		<topic label="Plugin-Provided Libraries" href="html/reference/jsf_libraries.html#pluginprovided" />
