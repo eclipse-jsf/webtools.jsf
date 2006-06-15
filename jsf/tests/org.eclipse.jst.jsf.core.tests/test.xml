@@ -16,7 +16,7 @@
   <target name="init">
     <tstamp/>
     <delete>
-      <fileset dir="${eclipse-home}" includes="org.eclipse.jst.jsp.core.tests.*xml"/>
+      <fileset dir="${eclipse-home}" includes="org.eclipse.jst.jsf.core.tests.*xml"/>
     </delete>
   </target>
 
