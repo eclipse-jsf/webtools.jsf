@@ -25,4 +25,17 @@
          install-size="0"
          version="0.0.0"/>
 
+   <plugin
+         id="org.eclipse.jst.jsf.metadata.tests"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+   <plugin
+         id="org.eclipse.jst.jsf.dtresolver.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
 </feature>
