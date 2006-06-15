@@ -9,6 +9,8 @@ import org.eclipse.jst.jsf.core.tests.annotations.CaseInsensitiveAnnotationsTest
 import org.eclipse.jst.jsf.core.tests.annotations.DuplicateAnnotationsTestCases;
 import org.eclipse.jst.jsf.core.tests.annotations.NegativeAnnotationFileTestCases;
 */
+import org.eclipse.jst.jsf.core.tests.jsflibraryconfig.JSFLibraryConfigModelAdapterTestCases;
+import org.eclipse.jst.jsf.core.tests.jsflibraryconfig.JSFLibraryDecoratorTestCases;
 import org.eclipse.jst.jsf.core.tests.jsflibraryregistry.ArchiveFileTestCases;
 import org.eclipse.jst.jsf.core.tests.jsflibraryregistry.JSFLibraryRegistryPackageTestCases;
 import org.eclipse.jst.jsf.core.tests.jsflibraryregistry.JSFLibraryRegistryTestCases;
@@ -28,6 +30,9 @@ public class AllTests {
 		suite.addTestSuite(JSFLibraryRegistryPackageTestCases.class);
 		
 		suite.addTestSuite(JSFFacetInstallDataModelProviderTestCases.class);
+		
+		suite.addTestSuite(JSFLibraryConfigModelAdapterTestCases.class);
+		suite.addTestSuite(JSFLibraryDecoratorTestCases.class);
 		
 		//annotations 
 /*		suite.addTestSuite(AnnotationMapTestCases.class);
