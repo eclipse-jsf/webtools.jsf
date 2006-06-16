@@ -2,10 +2,12 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.eclipse.jst.jsf.contentassist Tests Plug-in
 Bundle-SymbolicName: org.eclipse.jst.jsf.contentassist.tests
-Bundle-Version: 1.0.0
+Bundle-Version: 0.5.0
 Bundle-Activator: org.eclipse.jst.jsf.contentassist.tests.Activator
 Bundle-Localization: plugin
+Bundle-ClassPath: jsfcontentassisttests.jar
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- org.junit
+ org.junit,
+ org.eclipse.jst.jsf.contentassist
 Eclipse-LazyStart: true
