@@ -35,58 +35,96 @@ import org.eclipse.osgi.util.NLS;
  *
  */
 public class JSFLibraryConfigPersistData {
+	/**
+	 * Parsing delimnitor for elements in a tuple.
+	 */
 	final protected static String SPTR_TUPLE = ":"; //$NON-NLS-1$
+	/**
+	 * Parsing delimintor for tuples in a persistent property string.
+	 */
 	final protected static String EO_TUPLE = ";"; //$NON-NLS-1$
 	
 	private IProject project;
 	private JSFLibraryRegistry jsfLibReg;
-	private JSFLibraryDecorator selJSFLibImpl = null;
+	private JSFLibraryDecorator dftImplLib = null;
+	private JSFLibraryDecorator selJSFLibImpl = null;	
 	private List selJSFLibComp = null;
 	
  	protected JSFLibraryConfigPersistData(IProject project) {
 		this.project = project;	
 		this.jsfLibReg = JSFCorePlugin.getDefault().getJSFLibraryRegistry();
 		
-		// Checked when object is instanciated instead of at method call  
-		VerifySavedLibAvailability();
+		// Checked when object is instanciated instead of at method call
+		if (!isProjectFirstCreated()) {
+			VerifySavedLibAvailability();
+		}
 	} 
+
+ 	/**
+ 	 * Return default JSF implementation library 
+ 	 * if there is one defined in JSF library registry.
+ 	 * 
+ 	 * @return JSFLibraryDecorator dftImplLib 
+ 	 */
+ 	protected JSFLibraryDecorator getDefaultJSFImplLib() {
+ 		if (dftImplLib == null) {
+ 			if (jsfLibReg != null) {
+				JSFLibrary jsfLib = jsfLibReg.getDefaultImplementation();
+				if (jsfLib != null) {
+					dftImplLib = new JSFLibraryDecorator(jsfLib, true, true);
+				}
+	 		}
+ 		}
+ 		return dftImplLib;
+ 	} 	
  	
 	/**
 	 * Return previoulsly selected JSF implementation library.
+	 * The default JSF implementation library is returned if 
+	 * there is one defined in registry.  
+	 * Otheriwise, null is returned.
 	 * 
 	 * @return JSFLibraryDecorator
 	 */
- 	protected JSFLibraryDecorator getSavedJSFImplLib() {		
-		try {			
-			if ( selJSFLibImpl == null ) {
-				String strImplLibs = ((IResource)project).getPersistentProperty(new QualifiedName("", JSFUtils.PP_JSF_IMPLEMENTATION_LIBRARIES));
-				selJSFLibImpl = getJSFImplLibfromPersistentProperties(getTuples(strImplLibs));
+ 	protected JSFLibraryDecorator getSavedJSFImplLib() {
+		try {
+			if (!isProjectFirstCreated()) {
+				if ( selJSFLibImpl == null ) {
+					String strImplLibs = ((IResource)project).getPersistentProperty(new QualifiedName("", JSFUtils.PP_JSF_IMPLEMENTATION_LIBRARIES));
+					selJSFLibImpl = getJSFImplLibfromPersistentProperties(getTuples(strImplLibs));
+					// project created but no JSF facet installed yet.
+					if (selJSFLibImpl == null) {
+						selJSFLibImpl = getDefaultJSFImplLib();
+					}
+				}
+			} else {
+				selJSFLibImpl = getDefaultJSFImplLib();
 			}
 		} catch (CoreException e) {
-			if (JSFCorePlugin.getDefault().getJSFLibraryRegistry() != null) {
-				JSFLibrary jsfLib = JSFCorePlugin.getDefault().getJSFLibraryRegistry().getDefaultImplementation();
-				if (jsfLib != null) {
-					selJSFLibImpl = new JSFLibraryDecorator(jsfLib, true, true);
-				} 
-			} else {
-				JSFCorePlugin.getDefault().getMsgLogger().log(e);
-			}
+			JSFCorePlugin.getDefault().getMsgLogger().log(e);
 		}
 		return selJSFLibImpl;
 	}
 	
+ 	
 	/**
 	 * Return the collection of selected JSF component libraries.
+	 * An empty List is returned if no JSF comp libs saved or 
+	 * the project is newly created.
 	 * 
 	 * @return List
 	 */
 	protected List getSavedJSFCompLibs() {	
 		try {
-			if ( selJSFLibComp == null ) {
-				selJSFLibComp = new ArrayList(Collections.EMPTY_LIST);
-				String strCompLibs = ((IResource)project).getPersistentProperty(new QualifiedName("", JSFUtils.PP_JSF_COMPONENT_LIBRARIES));
-				getJSFCompLibsfromPersistentProperties(getTuples(strCompLibs), selJSFLibComp);
-			}		
+			if (!isProjectFirstCreated()) {
+				if ( selJSFLibComp == null ) {
+					selJSFLibComp = new ArrayList(Collections.EMPTY_LIST);
+					String strCompLibs = ((IResource)project).getPersistentProperty(new QualifiedName("", JSFUtils.PP_JSF_COMPONENT_LIBRARIES));
+					getJSFCompLibsfromPersistentProperties(getTuples(strCompLibs), selJSFLibComp);
+				}		
+			} else {
+				selJSFLibComp = new ArrayList(Collections.EMPTY_LIST);  
+			}
 		} catch (CoreException e) {
 			JSFCorePlugin.getDefault().getMsgLogger().log(e);
 		}
@@ -118,6 +156,19 @@ public class JSFLibraryConfigPersistData {
 	}
 	
 	
+	/**
+	 * Check if a project is just created by inspecting persistent properties    
+	 * if there is any.  ?
+	 */
+ 	private boolean isProjectFirstCreated() {
+ 		boolean isNew = false;
+ 		try {
+			String strImplLibs = ((IResource)project).getPersistentProperty(new QualifiedName("", JSFUtils.PP_JSF_IMPLEMENTATION_LIBRARIES));
+		} catch (CoreException e) {
+			isNew = true;
+		}
+		return isNew;
+ 	}
 	
  	private void VerifySavedLibAvailability() {
  		try {

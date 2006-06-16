@@ -45,6 +45,11 @@ public class JSFLibraryConfigModelAdapter {
 	private JSFLibraryConfigPersistData data;
 	private J2EEModuleDependencyDelegate modulesDep;
 
+	/**
+	 * Constructor.
+	 * 
+	 * @param project
+	 */
 	public JSFLibraryConfigModelAdapter(IProject project) {
 		this.project = project;
 		this.jsfLibReg = JSFCorePlugin.getDefault().getJSFLibraryRegistry();
@@ -199,17 +204,19 @@ public class JSFLibraryConfigModelAdapter {
 	 * @param jsflib 
 	 */
 	public void updateJSFImplementationLibrary(JSFLibraryDecorator jsflib) {
-		Iterator it = getJSFImplementationLibraries().iterator();
-		JSFLibraryDecorator crtjsflib = null;
-		while (it.hasNext()) {
-			crtjsflib = (JSFLibraryDecorator) it.next();
-			if (crtjsflib.getID().equals(jsflib.getID())) {
-				crtjsflib.setSelected(true);
-				crtjsflib.setToBeDeployed(jsflib.isCheckedToBeDeployed());
-			} else {
-				crtjsflib.setSelected(false);
-			}
-		}		
+		if (jsflib != null) {
+			Iterator it = getJSFImplementationLibraries().iterator();
+			JSFLibraryDecorator crtjsflib = null;
+			while (it.hasNext()) {
+				crtjsflib = (JSFLibraryDecorator) it.next();
+				if (crtjsflib.getID().equals(jsflib.getID())) {
+					crtjsflib.setSelected(true);
+					crtjsflib.setToBeDeployed(jsflib.isCheckedToBeDeployed());
+				} else {
+					crtjsflib.setSelected(false);
+				}
+			}				
+		}
 	}
 
 	/**
@@ -218,13 +225,15 @@ public class JSFLibraryConfigModelAdapter {
 	 * @param complibs 
 	 */
 	public void updateJSFComponentLibraries(List complibs) {
-		setJSFLibrariesSelection(this.getJSFComponentLibraries(), false);
-		
-		Iterator it = complibs.iterator();
-		JSFLibraryDecorator crtjsflib;
-		while (it.hasNext()) {
-			crtjsflib = (JSFLibraryDecorator) it.next();
-			setJSFLibStateAsGivenTarget(getJSFComponentLibraries(), crtjsflib);
+		if (complibs != null) {
+			setJSFLibrariesSelection(this.getJSFComponentLibraries(), false);
+			
+			Iterator it = complibs.iterator();
+			JSFLibraryDecorator crtjsflib;
+			while (it.hasNext()) {
+				crtjsflib = (JSFLibraryDecorator) it.next();
+				setJSFLibStateAsGivenTarget(getJSFComponentLibraries(), crtjsflib);
+			}		
 		}
 	}
 	
@@ -243,17 +252,7 @@ public class JSFLibraryConfigModelAdapter {
 	 * Return null if no default implementation in registry. 
 	 */
 	public JSFLibraryDecorator getDefaultJSFImplemntationLibrary() {
-		String dftJSFImplLibID = jsfLibReg.getDefaultImplementationID();
-		
-		Iterator it = getJSFImplementationLibraries().iterator();
-		JSFLibraryDecorator dftJSFImplLib = null;
-		while (it.hasNext()) {
-			dftJSFImplLib = (JSFLibraryDecorator) it.next();
-			if (dftJSFImplLib.getID().equals(dftJSFImplLibID)) {
-				return dftJSFImplLib;
-			}
-		}
-		return null;
+		return data.getDefaultJSFImplLib();
 	}
 		
 	/**
