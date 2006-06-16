@@ -14,12 +14,12 @@ package org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties;
 
 import java.util.List;
 
-import org.eclipse.jface.text.TextSelection;
+import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowLinkEditPart;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowElementEditPart;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowElementTreeEditPart;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowLinkEditPart;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowValidation;
 import org.eclipse.ui.IWorkbenchPart;
@@ -103,7 +103,8 @@ public class GeneralViewSectionDescriptor implements ISectionDescriptor {
 					|| object instanceof PageflowElementTreeEditPart) {
 				return true;
 			} else if (object instanceof PageflowLinkEditPart) {
-				PageflowLink pfLink = (PageflowLink) ((PageflowLinkEditPart) object).getModel();
+				PageflowLink pfLink = (PageflowLink) ((PageflowLinkEditPart) object)
+						.getModel();
 				if (PageflowValidation.getInstance().isValidLinkForProperty(
 						pfLink)) {
 					return true;
@@ -111,7 +112,7 @@ public class GeneralViewSectionDescriptor implements ISectionDescriptor {
 			} else {
 				return true;
 			}
-		} else if (selection instanceof TextSelection) {
+		} else if (selection instanceof ITextSelection) {
 			return true;
 		}
 
@@ -128,8 +129,6 @@ public class GeneralViewSectionDescriptor implements ISectionDescriptor {
 	}
 
 	public int getEnablesFor() {
-		// TODO Auto-generated method stub
 		return ENABLES_FOR_ANY;
 	}
-
 }
