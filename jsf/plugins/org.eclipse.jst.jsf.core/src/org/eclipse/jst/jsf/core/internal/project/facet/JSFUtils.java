@@ -16,6 +16,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -38,6 +39,7 @@ import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.Messages;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.ArchiveFile;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
+import org.eclipse.osgi.util.NLS;
 import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
 
 /**
@@ -51,15 +53,15 @@ public class JSFUtils {
 	public static final String JSF_CONFIG_CONTEXT_PARAM = "javax.faces.CONFIG_FILES"; //$NON-NLS-1$
 	public static final String JSF_DEFAULT_CONFIG_PATH = "/WEB-INF/faces-config.xml"; //$NON-NLS-1$
 
-	public static final String PP_JSF_FACET_INSTALLED = "is.jsf.project";
-	public static final String PP_JSF_DEPLOY_ME = "deploy.jsf.libraries";
-	public static final String PP_JSF_IMPL_LIB = "jsf.impl.lib";
-	public static final String PP_JSF_NONIMPL_LIB = "jsf.nonimpl.lib";
-	public static final String PP_JSF_AVAIL_COMP_LIB = "jsf.comp.lib.avail";
-	public static final String PP_JSF_SEL_COMP_LIB = "jsf.comp.lib.selected";
+	public static final String PP_JSF_FACET_INSTALLED = "is.jsf.project"; //$NON-NLS-1$
+	public static final String PP_JSF_DEPLOY_ME = "deploy.jsf.libraries"; //$NON-NLS-1$
+	public static final String PP_JSF_IMPL_LIB = "jsf.impl.lib"; //$NON-NLS-1$
+	public static final String PP_JSF_NONIMPL_LIB = "jsf.nonimpl.lib"; //$NON-NLS-1$
+	public static final String PP_JSF_AVAIL_COMP_LIB = "jsf.comp.lib.avail"; //$NON-NLS-1$
+	public static final String PP_JSF_SEL_COMP_LIB = "jsf.comp.lib.selected"; //$NON-NLS-1$
 	
-	public static final String PP_JSF_IMPLEMENTATION_LIBRARIES = "jsf.implementation.libraries";
-	public static final String PP_JSF_COMPONENT_LIBRARIES = "jsf.component.libraries";
+	public static final String PP_JSF_IMPLEMENTATION_LIBRARIES = "jsf.implementation.libraries"; //$NON-NLS-1$
+	public static final String PP_JSF_COMPONENT_LIBRARIES = "jsf.component.libraries"; //$NON-NLS-1$
 	
 	
 	/**
@@ -326,15 +328,74 @@ public class JSFUtils {
 		}
 	}
 
-	public static IPath[] getJARPathforJSFLib(JSFLibrary jsfLib) {		
+	/**
+	 * Construct an array that hold paths for all JARs in a JSF library. 
+	 * However, archive files that no longer exist are filtered out.  
+	 * 
+	 * @param jsfLib
+	 * @param logMissingJar true to log an error for each invalid JAR.
+	 * @return elements
+	 */
+	public static IPath[] getJARPathforJSFLibwFilterMissingJars(JSFLibrary jsfLib, boolean logMissingJar) {
+		EList archiveFiles = jsfLib.getArchiveFiles();
+		int numJars = numberofValidJar(archiveFiles);
+		IPath[] elements = new IPath[numJars];
+		ArchiveFile ar = null;
+		int idxValidJar = 0;
+		for (int i= 0; i < archiveFiles.size(); i++) {
+			ar = (ArchiveFile)archiveFiles.get(i); 
+			if ( !ar.exists() ) {
+				if (logMissingJar) {
+					logErroronMissingJAR(jsfLib, ar);
+				}
+			} else {
+				elements[idxValidJar] = new Path(((ArchiveFile)archiveFiles.get(i)).getResolvedSourceLocation()).makeAbsolute();
+				idxValidJar++;
+			}
+		}
+		return elements;		
+	}
+	
+	/**
+	 * Construct an array that hold paths for all JARs in a JSF library. 
+	 * 
+	 * @param jsfLib
+	 * @param logMissingJar true to log an error for each invalid JAR.
+	 * @return elements
+	 */
+	public static IPath[] getJARPathforJSFLib(JSFLibrary jsfLib, boolean logMissingJar) {		
 		EList archiveFiles = jsfLib.getArchiveFiles();
 		int numJars = archiveFiles.size();
-		String name = null;		
 		IPath[] elements = new IPath[numJars];
+		ArchiveFile ar = null;
 		for (int i= 0; i < numJars; i++) {
-			elements[i] = new Path(((ArchiveFile)archiveFiles.get(i)).getResolvedSourceLocation()).makeAbsolute();	
+			ar = (ArchiveFile)archiveFiles.get(i); 
+			if ( !ar.exists() && logMissingJar ) {
+				logErroronMissingJAR(jsfLib, ar);
+			}
+			elements[i] = new Path(((ArchiveFile)archiveFiles.get(i)).getResolvedSourceLocation()).makeAbsolute();
 		}
 		return elements;
-	}		
+	}	
+	
+	private static int numberofValidJar(EList archiveFiles) {
+		int total = 0;
+		final Iterator it = archiveFiles.iterator();
+		ArchiveFile ar = null;
+		while(it.hasNext()) {
+			ar = (ArchiveFile) it.next();
+			if (ar.exists()) {
+				total++;
+			}
+		}
+		return total;
+	}
+	
+	private static void logErroronMissingJAR(JSFLibrary jsfLib, ArchiveFile ar) {
+		String msg = NLS.bind(Messages.JSFUtils_MissingJAR, 
+						ar.getName(),
+						jsfLib.getName());
+		JSFCorePlugin.log(IStatus.ERROR, msg);
+	}
 	
 }

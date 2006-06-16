@@ -44,6 +44,8 @@ public class Messages extends NLS {
 	public static String ArchiveFileImpl_CannotCloseFile;
 	public static String ArchiveFileImpl_CannotLocatePluginRelativeFile;
 
+	public static String JSFUtils_MissingJAR;
+
 	public static String PluginProvidedJSFLibraryCreationHelper_ErrorCreating;
 	public static String PluginProvidedJSFLibraryCreationHelper_ErrorMultipleDefinition;
 

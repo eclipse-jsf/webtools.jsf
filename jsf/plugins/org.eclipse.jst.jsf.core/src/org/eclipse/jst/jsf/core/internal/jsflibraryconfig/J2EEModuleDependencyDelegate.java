@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.core.internal.jsflibraryconfig;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
@@ -23,7 +24,9 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jem.workbench.utility.JemProjectUtilities;
@@ -36,8 +39,11 @@ import org.eclipse.jst.j2ee.internal.J2EEConstants;
 import org.eclipse.jst.j2ee.internal.common.ClasspathModel;
 import org.eclipse.jst.j2ee.internal.common.operations.UpdateJavaBuildPathOperation;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
+import org.eclipse.jst.jsf.core.internal.Messages;
+import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.ArchiveFile;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.project.facet.JSFUtils;
+import org.eclipse.osgi.util.NLS;
 import org.eclipse.wst.common.componentcore.ComponentCore;
 import org.eclipse.wst.common.componentcore.internal.impl.ModuleURIUtil;
 import org.eclipse.wst.common.componentcore.internal.resources.VirtualArchiveComponent;
@@ -76,10 +82,10 @@ public class J2EEModuleDependencyDelegate {
 	 * @param monitor
 	 */
 	public void addProjectDependency(JSFLibrary jsfLibrary, boolean toDeploy, IProgressMonitor monitor) {
-		IPath[] jarPaths = JSFUtils.getJARPathforJSFLib(jsfLibrary);
+		IPath[] jarPaths = JSFUtils.getJARPathforJSFLibwFilterMissingJars(jsfLibrary, true);
 		this.updateProjectDependency(jarPaths, toDeploy, monitor);		
 	}	
-
+		
 	/**
 	 * Remove given <b>jsfLibrary</b> from project dependency.
 	 * 
@@ -87,7 +93,7 @@ public class J2EEModuleDependencyDelegate {
 	 * @param monitor
 	 */
 	public void removeProjectDependency(JSFLibrary jsfLibrary, IProgressMonitor monitor) {
-		IPath[] elements = JSFUtils.getJARPathforJSFLib(jsfLibrary);
+		IPath[] elements = JSFUtils.getJARPathforJSFLib(jsfLibrary, false);
 		this.removeProjectDependency_(elements, monitor);
 	}
 	
