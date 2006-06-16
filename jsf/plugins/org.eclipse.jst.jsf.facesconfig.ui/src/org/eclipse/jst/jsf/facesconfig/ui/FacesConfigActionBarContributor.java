@@ -50,7 +50,6 @@ public class FacesConfigActionBarContributor extends
 
 	public FacesConfigActionBarContributor() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public void setActivePage(IEditorPart activeEditor) {
@@ -112,7 +111,6 @@ public class FacesConfigActionBarContributor extends
 	}
 
 	public IWorkbenchPage getPage() {
-		// TODO Auto-generated method stub
 		return super.getPage();
 	}
 
@@ -161,8 +159,6 @@ public class FacesConfigActionBarContributor extends
 	}
 
 	protected void declareGlobalActionKeys() {
-		// TODO Auto-generated method stub
-
 	}
 
 	public PageflowActionBarContributor getPageflowActionContributor() {
