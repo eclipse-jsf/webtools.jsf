@@ -1,27 +1,102 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-<title>Contributing EL Variables</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="Content-Style-Type" content="text/css" />
-<meta http-equiv="Content-Script-Type" content="text/javascript" />
-<link rel="stylesheet" href="../../book.css" type="text/css"/>
-</head>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><title>Contributing EL Variables</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<link rel="stylesheet" href="../../book.css" type="text/css"></head>
+
 <body>
-<table summary="" cellspacing="0" cellpadding="0" width="100%">
-<tr valign="bottom">
+<table summary="" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr valign="bottom">
 <td align="left" width="86%">
 <h1>Contributing EL Variables</h1>
 </td>
 </tr>
-</table>
-<hr/>
+</tbody></table>
+<hr>
+<h3>Overview</h3>
+The JSF tooling&nbsp; provides three ways to contribute EL variables to the framework depending on the goal of the contribution.<br>
+<br>
+If you are a component developer and want to add support for EL
+variables that are declared by your component tags, you can use the
+symbol factory extension and meta-data.<br>
+<br>
+If you are a tooling developer and you wish to add new sources of
+variables without changing the behaviour of other sources (beans, tag
+contributed variables), then you can use the symbolProvider extension.<br>
+<br>
+If you are a tooling developer and you wish to modify the way all
+variables are resolved, you can use the variableResolver extension.<br>
+<h3>Symbol Factory Extension and Meta-data<br>
+</h3>
+A symbol factory is any factory class that extends
+org.eclipse.jst.jsf.context.symbol.internal.provisional.source.AbstractContextSymbolFactory.&nbsp;
+Once you create your implementation, you can declare it to the
+framework using the
+org.eclipse.jst.jsf.context.symbol.contextSymbolFactory extension
+point.&nbsp; In the extension, you need to provide a unique
+factoryId.&nbsp; This factoryId is used to identify your factory and
+can then be used in your symbol factory meta-data TODO: link to
+designtimeappmanager section.<br>
+<br>
+Your factory implementation will implement the following method:<br>
+<br>
+&nbsp;&nbsp;&nbsp; protected abstract ISymbol internalCreate(String symbolName, int scope, IAdaptable context, List problems);<br>
+<br>
+The symbolName is the one provided by the system, usually corresponding
+to the tag attribute, that declares the variable.&nbsp; You may use
+this symbol name or ignore it and use your own, depending on how the
+variable will be named at runtime.&nbsp; The scope argument is one of
+ISymbolConstants.SYMBOL_SCOPE_*.&nbsp; The system value is passed in
+based on meta-data settings if present.&nbsp; Your factory is not
+obligated to use this scope variable.&nbsp;&nbsp; The IAdapable context
+object provides context information about the source of the variable
+declaration.&nbsp; This is usually an IModelContext object.&nbsp; You
+can implement the supports() abstract method in such a way to tell the
+framework work what types of context object you support.&nbsp;&nbsp;
+The problems list is for future use.&nbsp; In future versions, you will
+be able to add diagnostic objects to the list that report warnings or
+errors related to symbol creation.&nbsp; Currently, the list is ignored.<br>
+<h3>SymbolProvider Extension</h3>
+JSF has many ways to contribute variables.&nbsp; If the framework has
+overlooked any or if you have added new ways yourself without affecting
+the way other variables, such as managed beans, are declared, then you
+can do so through the
+org.eclipse.jst.jsf.context.symbol.symbolSourceProvider
+extension.&nbsp; Your symbol provider will implement the
+org.eclipse.jst.jsf.context.symbol.internal.provisional.source.ISymbolSourceProviderFactory
+interface.&nbsp; Every time the framework requests a list of variables
+through the default VariableResolver and ExternalContext, your provider
+will be queried for all its symbols at one or more scopes.<br>
+<br>
+Note that your symbol provider may not called if:<br>
+<br>
+- the default variable resolver has been replaced by one that does not call the default external context.<br>
+- the default external context has been replaced by one that does not call query the symbol providers.<br>
+<br>
+<h3>VariableResolver Extension<br>
+</h3>
+The variable provider extension allows you to register your own design
+time resolver.&nbsp; You declare your resolver using the
+org.eclipse.jst.jsf.designtime.variableresolver extension point.&nbsp;
+Your extension will declare a unique id and a class.&nbsp; The class
+must extend
+org.eclipse.jst.jsf.designtime.internal.provisional.el.AbstractDTVariableResolver.&nbsp;
+To register your resolver as the active one for a project (note: JSF
+1.1 only supports a single variable resolver at a given time.&nbsp;
+Future versions supporting JSF 1.2 will have a more robust scheme
+matching what is defined in the newer specification), you use
+DesignTimeApplicationManager.setVariableResolverProvider specifying the
+id defined in your extension as the argument.<br>
+<br>
+Once your variable resolver is registered and active for a project, all
+variable resolution requests to the framework will query your
+implementation.&nbsp; This gives you complete control over how all EL
+variable symbols are discovered and instantiated by the design time
+framework.<br>
+
 <p>
-	CONTENT
+	<span style="font-style: italic;">Complete information will be available in a future build.</span>
 </p>
-<p>
-	<span style="font-style:italic">Complete information will be available in a future build.</span>
-</p>
-</body>
-</html>
+</body></html>
