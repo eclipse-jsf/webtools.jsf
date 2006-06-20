@@ -57,8 +57,10 @@
      <wizard-pages action="jst.jsf.v11.install">
         <page class="org.eclipse.jst.jsf.ui.internal.project.facet.JSFFacetInstallPage"/>
      </wizard-pages>
+     <!--
      <wizard-pages action="jst.jsf.v12.install">
         <page class="org.eclipse.jst.jsf.ui.internal.project.facet.JSFFacetInstallPage"/>
      </wizard-pages>
+     -->
   </extension>  
 </plugin>
