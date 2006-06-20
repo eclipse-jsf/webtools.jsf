@@ -19,7 +19,7 @@ import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IDef
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IPossibleValues;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IValidValues;
 
-public class TaglibProcessingTestCase extends TestCase {
+public abstract class TaglibProcessingTestCase extends TestCase {
 	protected IStructuredDocumentContext docContext;
 	protected String uri = "http://org.eclipse.jsf/tagprocessing";
 	protected String bundle = "org.eclipse.jst.jsf.taglibprocessing";
