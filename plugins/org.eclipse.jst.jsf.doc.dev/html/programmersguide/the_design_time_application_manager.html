@@ -5,7 +5,6 @@
 <meta http-equiv="Content-Style-Type" content="text/css">
 <meta http-equiv="Content-Script-Type" content="text/javascript">
 <link rel="stylesheet" href="../../book.css" type="text/css"></head>
-
 <body>
 <table summary="" cellpadding="0" cellspacing="0" width="100%">
 <tbody><tr valign="bottom">
@@ -25,10 +24,9 @@ runtime behavior.&nbsp; These features include validation and content
 assist for EL expressions.<br>
 <br>
 The DTAppMgr is comprised of the following main components:<br>
-<br>
 <ul>
   <li>a simulated FacesContext, called DTFacesContext, used to simulates part of this key runtime context object.</li>
-  <li>a pluggable ExternalContext, called DTExternalContext to support different behaviours in different containers (i.e. JSP).</li>
+  <li>a pluggable ExternalContext, called DTExternalContext to support different behaviors in different containers (i.e. JSP).</li>
   <li>pluggable resolvers for EL variables, properties and methods including default implementations.</li>
   <li>a JSP processor that can update simulated design time state based on a JSP page and tag-based meta-data.</li>
 </ul>
@@ -36,15 +34,68 @@ The DTAppMgr is comprised of the following main components:<br>
 The simulated FacesContext, called DTFacesContext, currently supports a
 very limited subset of the runtime FacesContext object.&nbsp; Its main
 function is to allow for a pluggable external context.&nbsp; At
-designtime, one FacesContext is created per IFile.<br>
+design-time, one FacesContext is created per IFile.<br>
 <h3>Pluggable ExternalContext</h3>
 The ExternalContext is used to separate container-dependent context
 information from the rest of the FacesContext.&nbsp; At design time, we
 support a DTExternalContext with much the same function.&nbsp; This
 external context can be configured by adopters by implementing a
-factory extension point TODO<br>
+factory extension point.&nbsp; The extension point is
+org.eclipse.jst.jsf.designtime.externalcontext.&nbsp; You extension
+will define an id and class.&nbsp; The id uniquely identifies you
+factory class, which must extend
+org.eclipse.jst.jsf.designtime.internal.provisional.context.AbstractDTExternalContextFactory.&nbsp;
+To set your external context factory as the current one, use
+DesignTimeApplicationManager.setExternalContextProvider(String).&nbsp;
+Note that by changing the current ExternalContextProvider on a project,
+you will significantly change the behavior of how variables are
+resolved in EL expressions.<br>
 <h3>Pluggable resolvers</h3>
-TODO<br>
+JSF EL expressions may contain variable and method bindings that
+reference external objects.&nbsp; At runtime, this is accomplished
+through several mechanisms that convert different types of
+identifier symbols into objects and methods.&nbsp; At design-time the
+JSF tooling tries to parallel these as closely as possible.&nbsp; These
+mechanisms are:<br>
+
+<ul>
+<li>VariableResolver</li><li>PropertyResolver</li><li>MethodBinding<br>
+</li>
+</ul>
+<h4>VariableResolver</h4>
+
+All identifier symbol resolution in EL starts with the
+VariableResolver.&nbsp; An expression like "myBean.property" is
+resolved by first extracting the symbol "myBean" and requesting the
+VariableResolver to return a matching runtime object.&nbsp; At design
+time, we parallel this exactly but constructing a design-time description of
+the object rather than its actual value (since the actual value cannot
+be fully computed until runtime in most cases).&nbsp; The concept of a
+"DTVariableResolver" is introduced.&nbsp; A default implementation is
+automatically provided which closely mirrors the default runtime
+resolver.&nbsp; New variable resolvers can be contributed through the
+Eclipse extension point mechanism to support custom runtime
+counterparts.&nbsp; To learn more about contributing new variables, see <a href="contributing_el_variables.html">Contributing EL Variables</a>.
+<h4>PropertyResolver</h4>
+
+Once a variable is resolved, the next step in resolving a value binding
+is to resolve its properties.&nbsp; To return to our simple example,
+"myBean.property", the JSF runtime will pass the object returned for
+'myBean' to the property resolver along with the name 'property' and
+ask it to resolve it to an object.&nbsp; At design time, we parallel
+this by introducing the "DTPropertyResolver".<br>
+
+<h4>MethodBinding</h4>
+
+The method binding mechanism implemented by the JSF runtime, differs
+from the way variables and properties are resolved.&nbsp; At design
+time however, we support them in the same way by providing a
+"DTMethodResolver".&nbsp; The main reason for this divergence is that
+at runtime, the method binding need know only enough to invoke a
+method.&nbsp; However at design time, we want to be able resolve a
+method binding in such a way that we can provide the same kinds of
+features we provide for properties such as signature validation and
+content assist.
 <h3>JSP document processor<br>
 </h3>
 The JSP document processor parses JSP document models looking for
@@ -70,12 +121,15 @@ properties that are supported are as follows:<br>
       </td>
       <td style="vertical-align: top;">true or false<br>
       </td>
-      <td style="vertical-align: top;">This property alerts the model
+      <td style="vertical-align: top;">This
+property alerts the model
 processor that this attribute contributes a variable to the EL name
 space at runtime.&nbsp; If no further meta-data is provided, this will
 cause a default variable using the text of the attribute as the name to
 be added to the name space for this document at 'request' scope.&nbsp;
-The variable will have&nbsp; no properties or methods.&nbsp; More information about the variable can be provided using the extra meta-data defined below.<br>
+The variable will have&nbsp; no properties or methods.&nbsp; More
+information about the variable can be provided using the extra
+meta-data defined below.<br>
       </td>
     </tr>
     <tr>

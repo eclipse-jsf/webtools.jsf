@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head>
-  <title>Using Context Resolvers</title>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><title>Using Context Resolvers</title>
+  
 
 
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -9,9 +9,7 @@
 
   <meta http-equiv="Content-Script-Type" content="text/javascript">
 
-  <link rel="stylesheet" href="../../book.css" type="text/css">
-</head>
-
+  <link rel="stylesheet" href="../../book.css" type="text/css"></head>
 <body>
 <table summary="" cellpadding="0" cellspacing="0" width="100%">
 
@@ -139,7 +137,18 @@ Factories exist to create both contexts and context resolvers.&nbsp; These are:<
   </tbody>
 </table>
 <br>
-<h3>Adding Factory Delegates</h3>
-TODO:<br>
+<h3>Adding Factory Delegates</h3>The existing factories can be extended
+using factory delegates.&nbsp; A delegate for
+IStructuredDocumentContextFactory allows you to extend the existing
+factory to create IStructuredDocumentContext's for document contexts
+other than an IStructuredDocumentContext and offset.&nbsp; Similarly,
+adding factory delegates to IStructuredDocumentContextResolverFactory
+allows you to create context resolvers for structured documents other
+than those already supported.<br>
+<br>
+Factory delegates are added programmatically be calling
+addFactoryDelegate on the appropriate factory.&nbsp; See the JavaDoc
+for IDelegatingFactory for more details.<br>
+
 
 </body></html>

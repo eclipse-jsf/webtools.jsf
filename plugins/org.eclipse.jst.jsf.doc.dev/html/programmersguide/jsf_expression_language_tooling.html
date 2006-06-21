@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head>
-  <title>JSF Expression Language Tooling</title>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><title>JSF Expression Language Tooling</title>
+  
 
   
 
@@ -18,9 +18,7 @@
 
 
   
-  <link rel="stylesheet" href="../../book.css" type="text/css">
-</head>
-
+  <link rel="stylesheet" href="../../book.css" type="text/css"></head>
 <body>
 <table summary="" cellpadding="0" cellspacing="0" width="100%">
 
@@ -52,8 +50,7 @@ the following specifications:</p>
 </p>
 
 
-In order to support design time evaluation of expressions, the tooling has the following basic capabilities:<br>
-<br>
+In order to support design-time evaluation of expressions, the tooling has the following basic capabilities:<br>
 <ul>
   <li>syntax parsing <br>
   </li>
@@ -64,15 +61,15 @@ In order to support design time evaluation of expressions, the tooling has the f
 <h3>Syntax Parsing<br>
 </h3>
 The WTP JSP tooling provides an EL parser that the JSF EL tooling
-leverage because of syntactic commonality between JSP and JSF EL.&nbsp;
+leverage because of the syntactic commonality between JSP and JSF EL.&nbsp;
 The parser is based on JavaCC and constructs an abstract syntax tree
-(AST) that can be further processed by the framework.&nbsp; The parser
+(AST) that is further processed by the framework.&nbsp; The parser
 reports syntax errors in expressions.<br>
 <h3>Design-time variable, property and method resolution</h3>
 JSF EL expressions may contain variable and method bindings that
 reference external objects.&nbsp; At runtime, this is accomplished
-through a several mechanisms, which can convert different types of
-identifier symbols into objects and methods.&nbsp; At designtime the
+through several mechanisms that convert different types of
+identifier symbols into objects and methods.&nbsp; At design-time the
 JSF tooling tries to parallel these as closely as possible.&nbsp; These
 mechanisms are:<br>
 <br>
@@ -80,49 +77,16 @@ mechanisms are:<br>
   <li>VariableResolver</li>
   <li>PropertyResolver</li>
   <li>MethodBinding</li>
-</ul>
-<h4>VariableResolver</h4>
-All identifier symbol resolution in EL starts with the
-VariableResolver.&nbsp; An expression like "myBean.property" is
-resolved by first extracting the symbol "myBean" and requesting the
-VariableResolver to return a matching runtime object.&nbsp; At design
-time, we parallel this exactly but running a design time description of
-the object rather than its actual value (since the actual value cannot
-be fully computed until runtime in most cases).&nbsp; The concept of a
-"DTVariableResolver" is introduced.&nbsp; A default implementation is
-automatically provided which closely mirrors the default runtime
-resolver.&nbsp; New variable resolvers can be contributed through the
-Eclipse extension point mechanism to support custom runtime
-counterparts.<br>
-<h4>PropertyResolver</h4>
-Once a variable is resolved, the next step in resolving a value binding
-is to resolve its properties.&nbsp; To return to our simple example,
-"myBean.property", the JSF runtime will pass the object returned for
-'myBean' to the property resolver along with the name 'property' and
-ask it to resolve it to an object.&nbsp; At design time, we parallel
-this by introducing the "DTPropertyResolver".<br>
-<br>
-<h4>MethodBinding</h4>
-The method binding mechanism implemented by the JSF runtime, differs
-from the way variables and properties are resolved.&nbsp; At design
-time however, we support them in the same way by providing a
-"DTMethodResolver".&nbsp; The main reason for this divergence is that
-at runtime, the method binding need know only enough to invoke a
-method.&nbsp; However at design time, we want to be able resolve a
-method binding in such a way that we can provide the same kinds of
-features we provide for properties such as signature validation and
-content assist.<br>
-<br>
+</ul>For more information on pluggable resolvers, see <a href="the_design_time_application_manager.html">The Design Time Application Manager</a>.<br>
 <span style="font-weight: bold;"></span><span style="font-weight: bold;"></span>
 <h3>Semantic type analysis</h3>
 Type analysis of literals is performed for all expressions.&nbsp;
 Analysis is done on all variables, properties and methods that can be
-resolved.&nbsp; Type analysis can verify:<br>
-<br>
+resolved.&nbsp; Type analysis can verify that:<br>
 <ul>
-  <li>that operator arguments are of a valid type or can be coerced to one.</li>
-  <li>that EL attribute values resolve to a type that is expected by its tag attribute</li>
-  <li>that the result&nbsp; of an EL expression supports that assignment properties expected by its tag attribute&nbsp;<br>
+  <li>operator arguments are of a valid type or can be coerced to one.</li>
+  <li>EL attribute values resolve to a type that is expected by its tag attribute</li>
+  <li>the result of an EL expression supports the assignment properties expected by its tag attribute&nbsp;<br>
   </li>
 </ul>
 <h4>Argument Coercability</h4>
@@ -166,13 +130,12 @@ number-to-boolean coercion and flag a warning).<br>
   </tbody>
 </table>
 <br>
-<h4>Attribute value compatability</h4>
+<h4>Attribute value compatibility</h4>
 For those tag attributes that are annotated with JSF tooling meta-data
 providing type information, EL type information can be compared to what
 is expected by the attribute.&nbsp; Below are some examples of
 attribute values being assigned EL expressions that have incompatible
-types.&nbsp; The tag prefixes "f" and "h" represent the built-in JSF
-"core" and "html" tag libraries respectively.<br>
+types.&nbsp; The tag prefix "h" represents the built-in JSF "html" tag library.<br>
 <br>
 <table style="text-align: left; width: 1241px; height: 59px;" border="1" cellpadding="2" cellspacing="2">
   <tbody>
@@ -189,9 +152,11 @@ types.&nbsp; The tag prefixes "f" and "h" represent the built-in JSF
       </td>
     </tr>
     <tr>
-      <td style="vertical-align: top;">TODO: more examples<br>
+      <td style="vertical-align: top;">&lt;h:dataTable binding="#{myBeanSubClass.booleanProperty}"/&gt;<br>
       </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">The
+binding attribute expects a binding to a UIComponent object.&nbsp; The
+boolean property can be neither converted or coerced to a valid type.<br>
       </td>
     </tr>
   </tbody>
@@ -203,7 +168,7 @@ Some JSF tag attributes support the writing back of data to an identified object
 e.g. &lt;h:inputText value=#{bean.readOnlyProperty}/&gt;<br>
 <br>
 For tags that are annotated with JSF tooling meta-data, the framework
-can check if the property is writable if expected.&nbsp; In the example
+can check if the property is writable as expected.&nbsp; In the example
 above, the inputText will write back the value entered by the user to
 bean.readOnlyProperty.&nbsp; However, if the bean doesn't implement a
 setter for this property, the user will be issued a warning that the
@@ -254,7 +219,7 @@ evaluate to a constant value regardless of runtime conditions:<br>
       </td>
       <td style="vertical-align: top; text-align: center;">false<br>
       </td>
-      <td style="vertical-align: top;">Empty operator always returns false for non-null, non-empty strings<br>
+      <td style="vertical-align: top;">Empty operator always returns false for non-null, non-empty strings.<br>
       </td>
     </tr>
     <tr>
@@ -262,7 +227,7 @@ evaluate to a constant value regardless of runtime conditions:<br>
       </td>
       <td style="vertical-align: top; text-align: center;">false<br>
       </td>
-      <td style="vertical-align: top;">The empty operator always returns false if the argument is not a string, collection, array or map<br>
+      <td style="vertical-align: top;">The empty operator always returns false if the argument is not a string, collection, array or map.<br>
       </td>
     </tr>
     <tr>
@@ -280,9 +245,9 @@ evaluate to a constant value regardless of runtime conditions:<br>
 
 <h4>Logical short-circuit analysis<br>
 </h4>
-
-JSF EL supports short-circuit evaluation of boolean expressions.&nbsp; This
-cause entire sub-expressions to not be evaluated and those important
+JSF EL supports short-circuit evaluation of boolean expressions.&nbsp;
+Short-circuit evaluation can cause entire sub-expressions to not be
+evaluated and important
 side-effects may not occur.&nbsp; The following are examples of EL
 expressions that will be short-circuited:<br>
 
