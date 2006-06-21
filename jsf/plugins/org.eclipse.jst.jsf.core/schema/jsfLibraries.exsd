@@ -3,7 +3,7 @@
 <schema targetNamespace="org.eclipse.jst.jsf.core">
 <annotation>
       <appInfo>
-         <meta.schema plugin="org.eclipse.jst.jsf.core" id="jsfLibraries" name="org.eclipse.jst.jsf.core.jsfLibraries"/>
+         <meta.schema plugin="org.eclipse.jst.jsf.core" id="jsfLibraries" name="JSF Libraries"/>
       </appInfo>
       <documentation>
          This extension point allows clients to create named sets of jars for use with JavaServer Faces Applications.
