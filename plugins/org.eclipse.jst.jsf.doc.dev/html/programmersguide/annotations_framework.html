@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../../book.css" type="text/css"/>
+<title>Content Model Annotations Framework</title>
+</head>
+<body>
+<h1>Content Model Annotations Framework</h1>
+<br>
+<p>The purpose of the JSF content model annotations framework is to provide a mechanism by which Eclipse plugin developers can attach the required meta-data to support improved tooling for XML content models.   XML Content models (DTD, Schema, Taglibs), do not contain all of the information that is required to provide high-quality tooling support.  The information that they contain simply does not have all of the information to provide semantic validation, content assistance, graphical tooling support, etc.   This framework is the foundation for providing meta-data driven features used with the JSF JSP source editor in this release.</p>
+<p>A content model can have any number of annotations files associated with it.   The public id of the content model is the key.  eg. "http://java.sun.com/jsf/core"</p>
+<p>The annotation file uses the extension-point <code>org.eclipse.jst.jsf.contentmodel.annotations.annotationFiles</code> to attach itself to the uri identifier of the content model.</p>	
+<p>Through the extension-point:</p>
+<ul>
+<li>The annotation file is bound to the content model using the public uri as the key</li>		
+<li>The extender can specify it’s own reader to parse the annotation file or, if the file conforms to the <code>org.eclipse.jst.jsf.contentmodel.annotations.grammar-annotations</code> schema, the supplied default reader/parser can be used.</li>
+<li>An extender can specify an annotation file locator.   If not specified, a plugin relative file locator is used.</li>
+</ul>	
+<p>An annotation file has named properties with one or more values that are given to xml elements and attributes.  The file can associate 0-N named properties with any element or attribute.  If there is more than one annotation file associated with the same public id and element/attribute, and there is a like-named property, it is not deterministic which property will be returned.  The caller could, however, use the bundle ID of where the annotation file was created.   A single plugin should not supply more than one annotation file for a given content model so that an annotation file can be identifiable. </p>	
+<h6>eg. A Section of the JSF Core Taglibrary Annotation File</h6>
+<pre>
+&lt;cm-element name="actionListener"&gt;
+	&lt;cm-attribute name="type"&gt;
+		&lt;property name="attribute-value-runtime-type"&gt;
+			&lt;value&gt;
+				org.eclipse.jst.jsf.taglibprocessing.attributevalues.JavaClassType
+			&lt;/value&gt;
+		&lt;/property&gt;
+		&lt;property name="valid-interfaces"&gt;
+			&lt;value&gt;javax.faces.event.ActionListener&lt;/value&gt;
+		&lt;/property&gt;		
+	&lt;/cm-attribute&gt;
+&lt;/cm-element&gt;
+&lt;cm-element name="convertDateTime"&gt;
+	&lt;cm-attribute name="dateStyle"&gt;
+		&lt;property name="attribute-value-runtime-type"&gt;
+			&lt;value&gt;
+				org.eclipse.jst.jsf.taglibprocessing.attributevalues.StringType
+			&lt;/value&gt;
+		&lt;/property&gt;
+		&lt;property name="valid-values"&gt;
+			&lt;value&gt;default&lt;/value&gt;
+			&lt;value&gt;short&lt;/value&gt;
+			&lt;value&gt;medium&lt;/value&gt;
+			&lt;value&gt;long&lt;/value&gt;
+			&lt;value&gt;full&lt;/value&gt;
+		&lt;/property&gt;
+		&lt;property name="default-value"&gt;
+			&lt;value&gt;default&lt;/value&gt;
+		&lt;/property&gt;
+	&lt;/cm-attribute&gt;
+	etc....
+&lt;/cm-element&gt;
+etc....
+</pre>
+
+<p>Annotations should only be accessed thru static calls to the <code>CMAnnotationHelper</code> class.   This class has many convenience methods for accessing annotations on elements and attributes.  Generally, lists of CMAnnotationPropertyValues are returned for a given property name on a particular element or attribute of an element.   The CMAnnotationPropertyValues class allows the caller to know where the annotation came from which allows the caller some flexibility with using or not using the meta-data.</p>   
+<p>Annotation files can be developed using wild cards to mimimize the amount of metadata that must be provided.  These wild cards are supported in the sense that the caller can choose to request something other than the actual name of an element or attribute.   So for example, if the attribute named "foo" applies to all elements in a content model, if "*" is used as the element name, the call to the <code>CMAnnotationHelper</code> can first look for "foo" attribute of the specifically named element, and if not found can look for the "foo" attribute on the "*" element in a second call.   This gives the annotation provider greater flexibility in determining how the annotation files are structured and used.  <i>The helper will not automatically locate wild-carded annotations.</i></p>
+<p>If no annotations are found by the call to <code>CMAnnotationHelper</code> for the passed parameters, methods that return:</p>
+<ul>
+<li><code>List</code> will return an empty list and not <code>null</code> </li>
+<li><code>String</code> will return <code>null</code></li>
+</ul>
+<p>For more complete information on annotations files, please see the Annotations Design Summary in CVS at /home/webtools/org.eclipse.jsf/components/jsf/developement/design	.</p>
+</body>
+</html>

@@ -3,7 +3,10 @@
 
 <toc label="Programmer's Guide" link_to="toc.xml#jsf_dev_programmersguide">
 	<topic label="Creating Plugin-Provided JSF Libraries" href="html/programmersguide/creating_plugin_provided_jsf_libraries.html"/>
-	<topic label="Contributing JSP Source Page Editing Services for a Tag Library" href="html/programmersguide/contributing_jsp_source_page_editing_services_for_a_tag_library.html"/>
+	<topic label="Contributing JSP Source Page Editing Services for a Tag Library" href="html/programmersguide/contributing_jsp_source_page_editing_services_for_a_tag_library.html" >
+		<topic label="Content Model Annotations" href="html/programmersguide/annotations_framework.html"/>
+		<topic label="Using Annotations Meta-Data for Providing Source Editing Services" href="html/programmersguide/metadata_processing_framework.html"/>		
+	</topic>
 	<topic label="JSF Expression Language Tooling" href="html/programmersguide/jsf_expression_language_tooling.html">
 		<topic label="Using Context Resolvers" href="html/programmersguide/using_context_resolvers.html"/>
 		<topic label="Contributing EL Variables" href="html/programmersguide/contributing_el_variables.html"/>
