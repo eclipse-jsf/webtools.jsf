@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>JSF Libraries</title>
+<style>@import url("../../book.css");</style>
+<style>@import url("../../schema.css");</style>
+</HEAD>
+<BODY>
+<H1><CENTER>JSF Libraries</CENTER></H1>
+<p></p>
+<h6 class=CaptionFigColumn id=header>Identifier: </h6>org.eclipse.jst.jsf.core.jsfLibraries<p></p>
+<h6 class=CaptionFigColumn id=header>Since: </h6>JSF M1
+<p></p>
+
+<p>
+<h6 class=CaptionFigColumn id=header>Description: </h6>This extension point allows clients to create named sets of jars for use with JavaServer Faces Applications.</p>
+<p><h6 class=CaptionFigColumn id=header>Configuration Markup:</h6></p>
+<p class=code id=dtd>&lt;!ELEMENT <a name="e.extension">extension</a> (<a href="#e.jsfLibrary">jsfLibrary</a>*)&gt;</p>
+<p class=code id=dtd>&lt;!ATTLIST extension</p>
+<p class=code id=dtdAttlist>point&nbsp;CDATA #REQUIRED<p class=code id=dtdAttlist>id&nbsp;&nbsp;&nbsp;&nbsp;CDATA #REQUIRED<p class=code id=dtdAttlist>name&nbsp;&nbsp;CDATA #IMPLIED&gt;</p>
+<p></p>
+<ul class=ConfigMarkup id=attlistDesc>
+</ul>
+<br><p class=code id=dtd>&lt;!ELEMENT <a name="e.jsfLibrary">jsfLibrary</a> EMPTY&gt;</p>
+<p class=code id=dtd>&lt;!ATTLIST jsfLibrary</p>
+<p class=code id=dtdAttlist>name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CDATA #REQUIRED<p class=code id=dtdAttlist>isImplementation&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(true | false) <p class=code id=dtdAttlist>maxVersionSupported&nbsp;&nbsp;(v1_1|v1_2|UNKNOWN) <p class=code id=dtdAttlist>archiveFilesDelegate&nbsp;CDATA #REQUIRED&gt;</p>
+<p></p>
+<p class=ConfigMarkup id=elementDesc>
+A named collection of jars that can be copied as a unit to WEB-INF/lib.</p>
+<br>
+<ul class=ConfigMarkup id=attlistDesc>
+<li><b>name</b> - A unique name for the library that will be displayed to an end user.</li>
+<li><b>isImplementation</b> - Flag indicating that this libary is declared to be a JSF implementation and not just a JSF component library.</li>
+<li><b>maxVersionSupported</b> - Used to declare which JSF specification this library will support.</li>
+<li><b>archiveFilesDelegate</b> - class that must extend org.eclipse.jst.jsf.core.internal.provisional.jsflibraryregistry.JSFLibraryArchiveFilesDelegate to supply a collection of ArchiveFiles for the library</li>
+</ul>
+<br><h6 class=CaptionFigColumn id=header>Examples: </h6>The following is an example of a jsfLibrary extension point:
+
+<p>
+<pre>
+  <p class=code id=tag>&lt;extension point=<p class=code id=cstring>&quot;org.eclipse.jst.jsf.core.jsfLibraries&quot;</p><p class=code id=tag>&gt;</p>
+    <p class=code id=tag>&lt;jsfLibrary       
+       name=<p class=code id=cstring>&quot;MyComponentLib1&quot;</p><p class=code id=tag>
+       isImplementation=<p class=code id=cstring>&quot;false&quot;</p><p class=code id=tag>
+       maxVersionSupported=<p class=code id=cstring>&quot;v1_1&quot;</p><p class=code id=tag>
+       archiveFilesDelegate=<p class=code id=cstring>&quot;com.acme.jsf.libraries.MyComponentLibraryFiles&quot;</p><p class=code id=tag>/&gt;</p>
+  <p class=code id=tag>&lt;/extension&gt;</p>
+</pre>
+</p>
+<p></p>
+
+<h6 class=CaptionFigColumn id=header>API Information: </h6>Value of the attribute class must be a fully qualified name of a Java class that extends the abstract class <code>org.eclipse.jst.jsf.core.internal.provisional.jsflibraryregistry.JSFLibraryArchiveFilesDelegate</code> and has a public 0-arg constructor.
+<p></p>
+
+<h6 class=CaptionFigColumn id=header>Supplied Implementation: </h6>none
+<p></p>
+
+<br>
+<p class=note id=copyright>
+Copyright (c) 2005 Oracle Corporation.
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+
+Contributors:
+Gerry Kessler - initial API and implementation
+<p></p>
+
+</p>
+</BODY>
+</HTML>
