@@ -9,6 +9,10 @@
       %feature.description
    </description>
 
+   <copyright>
+      %feature.copyright
+   </copyright>
+
    <license url="license.html">
       %feature.license
    </license>
