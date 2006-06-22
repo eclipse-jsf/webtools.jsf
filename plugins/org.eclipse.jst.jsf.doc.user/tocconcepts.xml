@@ -11,7 +11,9 @@
 	<topic label="JSP JSF Source Page Editing Tools" href="html/concepts/jsf_source_editing.html">
 		<topic label="Content Assist" href="html/concepts/jsf_source_editing.html#contentassist" /> 
 		<topic label="Validation" href="html/concepts/jsf_source_editing.html#validation" /> 
-		<topic label="Snippets" href="html/concepts/jsf_source_editing.html#snippets" /> 		
+<!--
+		<topic label="Snippets" href="html/concepts/jsf_source_editing.html#snippets" />
+-->
 		<topic label="Future Features" href="html/concepts/jsf_source_editing.html#futures" /> 
 	</topic> 
 	<topic label="JSF Application Configuration" href="html/concepts/jsf_app_config_mgr.html" />	
