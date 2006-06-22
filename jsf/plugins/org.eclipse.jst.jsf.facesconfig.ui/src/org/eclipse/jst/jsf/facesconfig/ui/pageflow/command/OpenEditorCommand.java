@@ -18,6 +18,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPart;
+import org.eclipse.gef.commands.Command;
 import org.eclipse.jst.jsf.facesconfig.common.logging.Logger;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor;
@@ -37,7 +38,7 @@ import org.eclipse.ui.ide.IDE;
  * 
  * @author Xiao-guang Zhang
  */
-public class OpenEditorCommand extends org.eclipse.gef.commands.Command {
+public class OpenEditorCommand extends Command {
 	/** The selected object */
 	private PageflowNodeImpl child = null;
 
@@ -104,10 +105,10 @@ public class OpenEditorCommand extends org.eclipse.gef.commands.Command {
 						.findMember(resourcePath);
 				openExistingJSFFile(file);
 			} else {
-				// Pageflow.PageflowEditor.Alert.errorOpenEditor4JSFTitle = Open
-				// JSF File Error
+				// Pageflow.PageflowEditor.Alert.errorOpenEditor4JSFTitle =
+				// Open JSF File Error
 				// Pageflow.PageflowEditor.Alert.errorOpenEditor4JSFFolderInfo =
-				// This page is related with JSF folder. CAN'T be edited.
+				// Cannot open the page in the page editor.
 				EditorPlugin
 						.getAlerts()
 						.error(
@@ -182,6 +183,5 @@ public class OpenEditorCommand extends org.eclipse.gef.commands.Command {
 		if (part.getModel() instanceof PageflowPage) {
 			executeOpenPFPage();
 		}
-
 	}
 }

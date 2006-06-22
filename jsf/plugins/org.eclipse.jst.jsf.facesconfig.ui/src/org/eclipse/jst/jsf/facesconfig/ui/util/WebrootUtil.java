@@ -68,8 +68,6 @@ public class WebrootUtil extends
 		return strProjectPath;
 	}
 
-	
-
 	/**
 	 * get the current resource according to EMF model
 	 * 
@@ -82,7 +80,11 @@ public class WebrootUtil extends
 
 		if (model != null && model.eResource() != null) {
 			URI uri = model.eResource().getURI();
-			Path path = new Path(URI.decode(uri.devicePath()));
+			IPath path = new Path(URI.decode(uri.devicePath()));
+
+			// since the uri format is "platform:/resource/..."
+			// we will remove the first part
+			path = path.removeFirstSegments(1);
 
 			IWorkspaceRoot workspaceRoot = ResourcesPlugin.getWorkspace()
 					.getRoot();
@@ -91,7 +93,7 @@ public class WebrootUtil extends
 
 		return resource;
 	}
-	
+
 	/**
 	 * get the current project according to EMF model
 	 * 
@@ -110,5 +112,4 @@ public class WebrootUtil extends
 
 		return project;
 	}
-
 }
