@@ -24,8 +24,8 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.JSPUtil;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -195,21 +195,13 @@ public class ActionOutcomeSelectionDialog extends Dialog {
 		actionCol
 				.setText(PageflowMessages.Pageflow_Property_Action_OutcomeSelectionDialog_ActionListTable_Action);//$NON-NLS-1$
 
-		actionTable.addSelectionListener(new SelectionListener() {
-
+		actionTable.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				TableItem selItem = (TableItem) e.item;
 				String action = selItem.getText(1);
-				if (action != null && action.length() > 0) {
+				if (action != null && action.length() > 0)
 					actionText.setText(action);
-				}
 			}
-
-			public void widgetDefaultSelected(SelectionEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
 		});
 
 		addActionsInJSP();
@@ -306,7 +298,7 @@ public class ActionOutcomeSelectionDialog extends Dialog {
 	 * @return
 	 */
 	private boolean isValidName() {
-		return (actionText.getText().length() > 0);
+		return actionText.getText().length() > 0;
 	}
 
 	/**
@@ -326,33 +318,29 @@ public class ActionOutcomeSelectionDialog extends Dialog {
 		List actionNodes = JSPUtil.getActionListInJSPFile(jspName);
 
 		if (actionNodes != null) {
-			for (int i = 0; i < actionNodes.size(); i++) {
+			for (int i = 0, n = actionNodes.size(); i < n; i++) {
 				Element node = (Element) actionNodes.get(i);
+				StringBuffer componentName = new StringBuffer();
 
-				String tagName = node.getTagName();
 				Attr idAttr = node.getAttributeNode("id");
-				String id = "";
-				if (idAttr != null) {
-					id = idAttr.getNodeValue(); //$NON-NLS-1$
-				}
+				if (idAttr != null)
+					componentName.append(idAttr.getNodeValue());
 
-				String componentName = id + "(" + tagName + ")"; //$NON-NLS-1$
+				componentName.append("(").append(node.getTagName()).append(")"); //$NON-NLS-1$
+
 				Attr actionAttr = node.getAttributeNode("action");
-				String action = "";
 				if (actionAttr != null) {
-					action = actionAttr.getValue();
-					if (!isValidEL(action)) {
-						addActionTableItem(componentName, action);
-					}
+					String action = actionAttr.getValue();
+					if (isValidEL(action))
+						addActionTableItem(componentName.toString(), action);
 				}
 			}
 		}
 	}
 
 	public static boolean isValidEL(String expressionString) {
-		if (expressionString == null || expressionString.length() == 0) {
+		if (expressionString == null || expressionString.length() == 0)
 			return true;
-		}
 
 		return expressionString.startsWith(JSF_EL_LEFT_BRACE)
 				&& expressionString.endsWith(JSF_EL_RIGHT_BRACE);
@@ -373,7 +361,5 @@ public class ActionOutcomeSelectionDialog extends Dialog {
 			item.setText(0, componentName);
 			item.setText(1, action);
 		}
-
 	}
-
 }

@@ -69,9 +69,9 @@ public class JSPUtil {
 		List trackers = m.getTaglibTrackers();
 		for (Iterator iter = trackers.iterator(); iter.hasNext();) {
 			TaglibTracker tracker = (TaglibTracker) iter.next();
-			if (uri.equals(tracker.getURI())) {
+			if (uri.equals(tracker.getURI()))
 				return tracker.getPrefix();
-			} else {
+			else {
 				CMDocument cmdoc = tracker.getDocument();
 				if (cmdoc instanceof TLDDocument
 						&& uri.equals(((TLDDocument) cmdoc).getUri())) {
@@ -122,15 +122,15 @@ public class JSPUtil {
 			TaglibTracker tracker = (TaglibTracker) iter.next();
 			if (prefix.equals(tracker.getPrefix())) {
 				CMDocument cmdoc = tracker.getDocument();
-				if (cmdoc instanceof TLDDocument) {
+				if (cmdoc instanceof TLDDocument)
 					return ((TLDDocument) cmdoc).getUri();
-				} else
+				else
 					return null;
 			}
 		}
 		return null;
 	}
-	
+
 	/**
 	 * get the action list in the jsp file
 	 * 
@@ -160,16 +160,14 @@ public class JSPUtil {
 					// get the command butonns
 					List buttonActions = jspAdapter.getElementsByTagNameNS(
 							prefix, "commandButton");//$NON-NLS-1$
-					if (buttonActions != null) {
+					if (buttonActions != null)
 						actions.addAll(buttonActions);
-					}
 
 					// get the command links
 					List linkActions = jspAdapter.getElementsByTagNameNS(
 							prefix, "commandLink");//$NON-NLS-1$
-					if (linkActions != null) {
+					if (linkActions != null)
 						actions.addAll(linkActions);
-					}
 				}
 			}
 		}
