@@ -342,8 +342,10 @@ public class ActionOutcomeSelectionDialog extends Dialog {
 		if (expressionString == null || expressionString.length() == 0)
 			return true;
 
-		return expressionString.startsWith(JSF_EL_LEFT_BRACE)
-				&& expressionString.endsWith(JSF_EL_RIGHT_BRACE);
+		return (expressionString.startsWith(JSF_EL_LEFT_BRACE) && expressionString
+				.endsWith(JSF_EL_RIGHT_BRACE))
+				|| (!expressionString.startsWith(JSF_EL_LEFT_BRACE) && !expressionString
+						.endsWith(JSF_EL_RIGHT_BRACE));
 	}
 
 	/**
