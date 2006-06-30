@@ -1215,5 +1215,4 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 		}
 		return null;
 	}
-
 }
