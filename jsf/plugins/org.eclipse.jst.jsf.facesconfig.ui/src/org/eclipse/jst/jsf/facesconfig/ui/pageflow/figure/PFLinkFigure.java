@@ -19,12 +19,15 @@ import org.eclipse.draw2d.PolygonDecoration;
 import org.eclipse.draw2d.PolylineConnection;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceConverter;
+import org.eclipse.jface.resource.FontRegistry;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowElementEditPart;
 import org.eclipse.jst.jsf.facesconfig.ui.preference.GEMPreferences;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Image;
 
 /**
@@ -45,9 +48,6 @@ public class PFLinkFigure extends PolylineConnection {
 
 	/** The label's foreground color */
 	private Color labelFgColor;
-
-	/** the label's font */
-	private Font labelFont;
 
 	/** The label's visiblity */
 	private boolean bLabelVisible = false;
@@ -132,11 +132,10 @@ public class PFLinkFigure extends PolylineConnection {
 	}
 
 	public Image getImage() {
-		if (textLabel != null) {
+		if (textLabel != null)
 			return textLabel.getIcon();
-		} else {
+		else
 			return null;
-		}
 	}
 
 	/*
@@ -161,9 +160,8 @@ public class PFLinkFigure extends PolylineConnection {
 	 * @see com.sybase.stf.gem.diagram.editor.figures.IBaseFigure#getToolTipText()
 	 */
 	public String getToolTipText() {
-		if (getToolTip() != null) {
+		if (getToolTip() != null)
 			return ((Label) getToolTip()).getText();
-		}
 		return null;
 	}
 
@@ -172,9 +170,8 @@ public class PFLinkFigure extends PolylineConnection {
 	 * 
 	 */
 	public void setFont(Font f) {
-		if (textLabel != null) {
+		if (textLabel != null)
 			textLabel.setFont(f);
-		}
 		super.setFont(f);
 	}
 
@@ -183,13 +180,15 @@ public class PFLinkFigure extends PolylineConnection {
 	 * 
 	 */
 	private Font getLabelFont() {
-		if (labelFont == null) {
-			IPreferenceStore store = EditorPlugin.getDefault()
-					.getPreferenceStore();
-			labelFont = new Font(null, PreferenceConverter.getFontData(store,
-					GEMPreferences.LINE_LABEL_FONT));
-		}
-		return labelFont;
+		FontRegistry registry = JFaceResources.getFontRegistry();
+		IPreferenceStore store = EditorPlugin.getDefault().getPreferenceStore();
+		FontData fontData = PreferenceConverter.getFontData(store,
+				GEMPreferences.LINE_LABEL_FONT);
+		if (!registry.get(fontData.toString()).equals(registry.defaultFont()))
+			return registry.get(fontData.toString());
+		
+		registry.put(fontData.toString(), new FontData[] {fontData});
+		return registry.get(fontData.toString());
 	}
 
 	/*
@@ -198,9 +197,8 @@ public class PFLinkFigure extends PolylineConnection {
 	 * @see org.eclipse.draw2d.Shape#setLineWidth(int)
 	 */
 	public void setLineWidth(int w) {
-		if (textLabel != null) {
+		if (textLabel != null)
 			textLabel.setBorderWidth(w);
-		}
 		arrow.setScale(10, getLineWidth() * 2);
 		super.setLineWidth(w);
 	}
@@ -221,9 +219,8 @@ public class PFLinkFigure extends PolylineConnection {
 	 *            visible or not.
 	 */
 	public void setLabelVisible(boolean flag) {
-		if (textLabel != null) {
+		if (textLabel != null)
 			textLabel.setVisible(flag);
-		}
 	}
 
 	/**
@@ -243,9 +240,8 @@ public class PFLinkFigure extends PolylineConnection {
 	 */
 	public void setLabelForegroundColor(Color c) {
 		labelFgColor = c;
-		if (textLabel != null) {
+		if (textLabel != null)
 			textLabel.setForegroundColor(c);
-		}
 	}
 
 	/**
@@ -269,9 +265,8 @@ public class PFLinkFigure extends PolylineConnection {
 	 */
 	public void setLabelBackgroundColor(Color c) {
 		labelBgColor = c;
-		if (textLabel != null) {
+		if (textLabel != null)
 			textLabel.setBackgroundColor(c);
-		}
 	}
 
 	/**
@@ -303,9 +298,8 @@ public class PFLinkFigure extends PolylineConnection {
 	 * color.
 	 */
 	public void setForegroundColor(Color c) {
-		if (textLabel != null) {
+		if (textLabel != null)
 			textLabel.setBorderColor(c);
-		}
 		super.setForegroundColor(c);
 	}
 }

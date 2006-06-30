@@ -110,6 +110,9 @@ public class PageflowDirectEditManager extends DirectEditManager {
 		Dimension fontSize = new Dimension(0, data.getHeight());
 		label.translateToAbsolute(fontSize);
 		data.setHeight(fontSize.height);
+
+		if (scaledFont != null & !scaledFont.isDisposed())
+			scaledFont.dispose();
 		scaledFont = new Font(null, data);
 
 		text.setFont(scaledFont);

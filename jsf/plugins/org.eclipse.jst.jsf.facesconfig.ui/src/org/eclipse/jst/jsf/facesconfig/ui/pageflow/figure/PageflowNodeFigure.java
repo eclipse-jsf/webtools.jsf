@@ -26,16 +26,18 @@ import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceConverter;
+import org.eclipse.jface.resource.FontRegistry;
+import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.preference.GEMPreferences;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Image;
 
 /**
  * The figure for pageflow node, used by pageflow node edit part.
  * 
- * @author Xiao-guang Zhang
  */
 public class PageflowNodeFigure extends Figure {
 	/** Same connection anchors for source and target */
@@ -53,9 +55,6 @@ public class PageflowNodeFigure extends Figure {
 	/** the text placement for the label */
 	private int textPlacement = PositionConstants.SOUTH;
 
-	/** the label's font */
-	private Font labelFont;
-
 	public PageflowNodeFigure() {
 		setLayoutManager(new FlowLayout());
 
@@ -70,9 +69,8 @@ public class PageflowNodeFigure extends Figure {
 	 * @return - Source ConnectionAnchor
 	 */
 	public ConnectionAnchor getSourceConnectionAnchorAt(Point p) {
-		if (getSourceConnectionAnchors().size() == 0) {
+		if (getSourceConnectionAnchors().size() == 0)
 			return null;
-		}
 		return (ConnectionAnchor) getSourceConnectionAnchors().get(0);
 	}
 
@@ -82,9 +80,8 @@ public class PageflowNodeFigure extends Figure {
 	 * @return - Source ConnectionAnchor
 	 */
 	public ConnectionAnchor getSourceConnectionAnchor() {
-		if (getSourceConnectionAnchors().size() == 0) {
+		if (getSourceConnectionAnchors().size() == 0)
 			return null;
-		}
 		return (ConnectionAnchor) getSourceConnectionAnchors().get(0);
 	}
 
@@ -105,9 +102,8 @@ public class PageflowNodeFigure extends Figure {
 	 * @return - ConnectionAnchor
 	 */
 	public ConnectionAnchor getTargetConnectionAnchorAt(Point p) {
-		if (getTargetConnectionAnchors().size() == 0) {
+		if (getTargetConnectionAnchors().size() == 0)
 			return null;
-		}
 		return (ConnectionAnchor) getTargetConnectionAnchors().get(0);
 	}
 
@@ -117,9 +113,8 @@ public class PageflowNodeFigure extends Figure {
 	 * @return - ConnectionAnchor
 	 */
 	public ConnectionAnchor getTargetConnectionAnchor() {
-		if (getTargetConnectionAnchors().size() == 0) {
+		if (getTargetConnectionAnchors().size() == 0)
 			return null;
-		}
 		return (ConnectionAnchor) getTargetConnectionAnchors().get(0);
 	}
 
@@ -157,18 +152,14 @@ public class PageflowNodeFigure extends Figure {
 	private int getTextPlacement() {
 		IPreferenceStore store = EditorPlugin.getDefault().getPreferenceStore();
 		String s = store.getString(GEMPreferences.LABEL_PLACEMENT);
-		if (GEMPreferences.LABEL_PLACEMENT_TOP.equals(s)) {
+		if (GEMPreferences.LABEL_PLACEMENT_TOP.equals(s))
 			textPlacement = PositionConstants.NORTH;
-		}
-		if (GEMPreferences.LABEL_PLACEMENT_BOTTOM.equals(s)) {
+		else if (GEMPreferences.LABEL_PLACEMENT_BOTTOM.equals(s))
 			textPlacement = PositionConstants.SOUTH;
-		}
-		if (GEMPreferences.LABEL_PLACEMENT_LEFT.equals(s)) {
+		else if (GEMPreferences.LABEL_PLACEMENT_LEFT.equals(s))
 			textPlacement = PositionConstants.WEST;
-		}
-		if (GEMPreferences.LABEL_PLACEMENT_RIGHT.equals(s)) {
+		else if (GEMPreferences.LABEL_PLACEMENT_RIGHT.equals(s))
 			textPlacement = PositionConstants.EAST;
-		}
 		return textPlacement;
 	}
 
@@ -202,13 +193,15 @@ public class PageflowNodeFigure extends Figure {
 	 * @return
 	 */
 	private Font getLabelFont() {
-		if (labelFont == null) {
-			IPreferenceStore store = EditorPlugin.getDefault()
-					.getPreferenceStore();
-			labelFont = new Font(null, PreferenceConverter.getFontData(store,
-					GEMPreferences.FIGURE_LABEL_FONT));
-		}
-		return labelFont;
+		FontRegistry registry = JFaceResources.getFontRegistry();
+		IPreferenceStore store = EditorPlugin.getDefault().getPreferenceStore();
+		FontData fontData = PreferenceConverter.getFontData(store,
+				GEMPreferences.FIGURE_LABEL_FONT);
+		if (!registry.get(fontData.toString()).equals(registry.defaultFont()))
+			return registry.get(fontData.toString());
+		
+		registry.put(fontData.toString(), new FontData[] {fontData});
+		return registry.get(fontData.toString());
 	}
 
 	/**
@@ -220,11 +213,11 @@ public class PageflowNodeFigure extends Figure {
 	 *            the label
 	 */
 	public void setImageText(Image image, String str) {
-		if (image == null) {
+		if (image == null)
 			setText(str);
-		} else if (str == null) {
+		else if (str == null)
 			setImage(image);
-		} else {
+		else {
 			if (label == null) {
 				label = new NodeLabel(str, image);
 				label.setTextPlacement(getTextPlacement());
@@ -246,9 +239,8 @@ public class PageflowNodeFigure extends Figure {
 	 *            the image
 	 */
 	public void setImage(Image image) {
-		if (image == null) {
+		if (image == null)
 			return;
-		}
 		if (label == null) {
 			label = new NodeLabel(image);
 			label.setTextPlacement(getTextPlacement());
@@ -256,9 +248,8 @@ public class PageflowNodeFigure extends Figure {
 			label.setFont(getLabelFont());
 			add(label);
 			initializeConnectionAnchors();
-		} else {
+		} else
 			label.setIcon(image);
-		}
 	}
 
 	/**
@@ -268,9 +259,8 @@ public class PageflowNodeFigure extends Figure {
 	 *            the text
 	 */
 	public void setText(String str) {
-		if (str == null) {
+		if (str == null)
 			return;
-		}
 		if (label == null) {
 			label = new NodeLabel(str);
 			label.setTextPlacement(getTextPlacement());
@@ -278,9 +268,8 @@ public class PageflowNodeFigure extends Figure {
 			label.setFont(getLabelFont());
 			add(label);
 			initializeConnectionAnchors();
-		} else {
+		} else
 			label.setText(str);
-		}
 	}
 
 	/*
@@ -324,9 +313,8 @@ public class PageflowNodeFigure extends Figure {
 	 */
 	public void setBackgroundColor(Color bg) {
 		labelBgColor = bg;
-		if (label != null) {
+		if (label != null)
 			label.setBackgroundColor(bg);
-		}
 	}
 
 	/**
@@ -335,18 +323,16 @@ public class PageflowNodeFigure extends Figure {
 	public void setForegroundColor(Color fg) {
 		labelFgColor = fg;
 
-		if (label != null) {
+		if (label != null)
 			label.setForegroundColor(fg);
-		}
 	}
 
 	/**
 	 * Set the label's font
 	 */
 	public void setFont(Font f) {
-		if (label != null) {
+		if (label != null)
 			label.setFont(f);
-		}
 		super.setFont(f);
 	}
 
@@ -357,9 +343,8 @@ public class PageflowNodeFigure extends Figure {
 	 */
 	public void setTextPlacement(int where) {
 		textPlacement = where;
-		if (label != null) {
+		if (label != null)
 			label.setTextPlacement(where);
-		}
 	}
 
 	/*
@@ -384,9 +369,8 @@ public class PageflowNodeFigure extends Figure {
 	 * @see com.sybase.stf.gem.diagram.editor.figures.IBaseFigure#getToolTipText()
 	 */
 	public String getToolTipText() {
-		if (getToolTip() != null) {
+		if (getToolTip() != null)
 			return ((Label) getToolTip()).getText();
-		}
 		return null;
 	}
 }

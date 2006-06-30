@@ -11,7 +11,6 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.facesconfig.ui.preference;
 
-import java.util.Hashtable;
 import java.util.Iterator;
 
 import org.eclipse.draw2d.ColorConstants;
@@ -27,6 +26,8 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.IntegerFieldEditor;
 import org.eclipse.jface.preference.PreferenceConverter;
 import org.eclipse.jface.preference.StringFieldEditor;
+import org.eclipse.jface.resource.ColorRegistry;
+import org.eclipse.jface.resource.FontRegistry;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.swt.SWT;
@@ -169,7 +170,7 @@ public class GEMPreferences extends FieldEditorPreferencePage implements
 
 	// CR392586: resource leaks
 	// at least keep leaks bounded...
-	private static Hashtable resourceRegistry = new Hashtable();
+//	private static Hashtable resourceRegistry = new Hashtable();
 
 	private class BooleanField extends BooleanFieldEditor {
 		private Composite parent;
@@ -482,10 +483,11 @@ public class GEMPreferences extends FieldEditorPreferencePage implements
 		} else {
 			// CR392586: resource leaks
 			RGB rgb = PreferenceConverter.getColor(store, property);
-			if (resourceRegistry.containsKey(rgb.toString()))
-				return (Color) resourceRegistry.get(rgb.toString());
-			c = new Color(Display.getCurrent(), rgb);
-			resourceRegistry.put(rgb.toString(), c);
+			ColorRegistry registry = JFaceResources.getColorRegistry();
+			if (registry.get(rgb.toString()) != null)
+				return (Color) registry.get(rgb.toString());
+			registry.put(rgb.toString(), rgb);
+			c = registry.get(rgb.toString());
 		}
 		return c;
 	}
@@ -493,12 +495,12 @@ public class GEMPreferences extends FieldEditorPreferencePage implements
 	// CR392586: resource leaks
 	public static Font getFont(IPreferenceStore store, String property) {
 		FontData fd = PreferenceConverter.getFontData(store, property);
-		if (resourceRegistry.containsKey(fd.toString()))
-			return (Font) resourceRegistry.get(fd.toString());
+		FontRegistry registry = JFaceResources.getFontRegistry();
+		if (!registry.get(fd.toString()).equals(registry.defaultFont()))
+			return registry.get(fd.toString());
 
-		Font f = new Font(null, fd);
-		resourceRegistry.put(fd.toString(), f);
-		return f;
+		registry.put(fd.toString(), new FontData[] {fd});
+		return registry.get(fd.toString());
 	}
 
 	public static void propagateProperty(String property, Figure fig) {

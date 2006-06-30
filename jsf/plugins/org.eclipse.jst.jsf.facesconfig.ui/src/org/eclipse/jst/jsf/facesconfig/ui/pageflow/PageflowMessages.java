@@ -10,7 +10,6 @@
  *     Sybase, Inc. - initial API and implementation
  *******************************************************************************/
 
-
 package org.eclipse.jst.jsf.facesconfig.ui.pageflow;
 
 import org.eclipse.osgi.util.NLS;
@@ -187,4 +186,7 @@ public final class PageflowMessages extends NLS {
 
 	public static String ExistingPagePathDialogCellEdito_LabelText;
 
+	public static String PageflowLinkEditPart_FromAction;
+
+	public static String PageflowLinkEditPart_FromOutcome;
 }

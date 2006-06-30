@@ -114,7 +114,7 @@ public class TabbedWindowBorder extends FrameBorder {
 			gc.setClipping(new org.eclipse.swt.graphics.Rectangle(left, top,
 					right - left, bottom - top));
 
-			Color color = new Color(Display.getDefault(), new RGB(255, 0, 0));
+			Color color = ColorConstants.red;
 			gc.setForeground(color);
 			gc.drawLine(left, top, right, bottom);
 

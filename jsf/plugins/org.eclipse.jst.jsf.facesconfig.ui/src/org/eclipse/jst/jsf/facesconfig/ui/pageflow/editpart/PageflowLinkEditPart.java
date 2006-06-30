@@ -27,6 +27,7 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpolicy.PFLinkBendpointEditPolicy;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpolicy.PFLinkEditPolicy;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpolicy.PFLinkEndpointEditPolicy;
@@ -379,24 +380,25 @@ public class PageflowLinkEditPart extends AbstractConnectionEditPart implements
 	}
 
 	public void resetLabel() {
-		String tip = "";
+		StringBuffer tip = new StringBuffer();
 		if (needDrawingAction()) {
 			((PFLinkFigure) getFigure()).setActionImage();
-			tip = "fromAction:(" + ((PageflowLink) getModel()).getFromaction()
-					+ ") ";
+			tip.append(PageflowMessages.PageflowLinkEditPart_FromAction).append(
+					((PageflowLink) getModel()).getFromaction());
 		} else if (((PFLinkFigure) getFigure()).getImage() != getImage(IMG_WARNING)) {
 			((PFLinkFigure) getFigure()).clearIcon();
-			tip = "";
 		}
 		if (needDrawingLabel()) {
 			((PFLinkFigure) getFigure()).setLabel(((PageflowLink) getModel())
 					.getOutcome());
-			tip += "fromOutcome:(";
-			tip += ((PageflowLink) getModel()).getOutcome() + ")";
+			if (tip.length() > 0)
+				tip.append("\n");
+			tip.append(PageflowMessages.PageflowLinkEditPart_FromOutcome).append(
+					((PageflowLink) getModel()).getOutcome());
 		} else {
 			((PFLinkFigure) getFigure()).clearOutcome();
 		}
-		((PFLinkFigure) getFigure()).setToolTipText(tip);
+		((PFLinkFigure) getFigure()).setToolTipText(tip.toString());
 	}
 
 	/*

@@ -69,7 +69,9 @@ import org.eclipse.gef.ui.parts.SelectionSynchronizer;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceConverter;
+import org.eclipse.jface.resource.FontRegistry;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jface.util.TransferDropTargetListener;
@@ -99,6 +101,7 @@ import org.eclipse.jst.jsf.facesconfig.ui.util.WebrootUtil;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
@@ -1044,8 +1047,7 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 
 		if (property == null || GEMPreferences.LINE_LABEL_FONT.equals(property)
 				|| GEMPreferences.LINE_LABEL_FONT_COLOR.equals(property)) {
-			Font linkLabelFont = new Font(null, PreferenceConverter
-					.getFontData(store, GEMPreferences.LINE_LABEL_FONT));
+			Font linkLabelFont = getLinkLabelFont();
 			Color linkLabelFgColor = GEMPreferences.getColor(store,
 					GEMPreferences.LINE_LABEL_FONT_COLOR);
 			if (part instanceof IConnectionPreference) {
@@ -1085,8 +1087,7 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 		if (property == null
 				|| GEMPreferences.FIGURE_LABEL_FONT.equals(property)
 				|| GEMPreferences.FIGURE_LABEL_FONT_COLOR.equals(property)) {
-			Font nodeLabelFont = new Font(null, PreferenceConverter
-					.getFontData(store, GEMPreferences.FIGURE_LABEL_FONT));
+			Font nodeLabelFont = getNodeLabelFont();
 			Color nodeLabelFgColor = GEMPreferences.getColor(store,
 					GEMPreferences.FIGURE_LABEL_FONT_COLOR);
 
@@ -1102,18 +1103,42 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 					.getString(GEMPreferences.LABEL_PLACEMENT);
 			if (GEMPreferences.LABEL_PLACEMENT_TOP.equals(nodeLabelPlacement))
 				placement = PositionConstants.NORTH;
-			if (GEMPreferences.LABEL_PLACEMENT_BOTTOM
+			else if (GEMPreferences.LABEL_PLACEMENT_BOTTOM
 					.equals(nodeLabelPlacement))
 				placement = PositionConstants.SOUTH;
-			if (GEMPreferences.LABEL_PLACEMENT_LEFT.equals(nodeLabelPlacement))
+			else if (GEMPreferences.LABEL_PLACEMENT_LEFT
+					.equals(nodeLabelPlacement))
 				placement = PositionConstants.WEST;
-			if (GEMPreferences.LABEL_PLACEMENT_RIGHT.equals(nodeLabelPlacement))
+			else if (GEMPreferences.LABEL_PLACEMENT_RIGHT
+					.equals(nodeLabelPlacement))
 				placement = PositionConstants.EAST;
-
-			if (part instanceof INodePreference) {
+			if (part instanceof INodePreference)
 				((INodePreference) part).setTextPlacement(placement);
-			}
 		}
+	}
+
+	private Font getLinkLabelFont() {
+		FontRegistry registry = JFaceResources.getFontRegistry();
+		IPreferenceStore store = EditorPlugin.getDefault().getPreferenceStore();
+		FontData fontData = PreferenceConverter.getFontData(store,
+				GEMPreferences.LINE_LABEL_FONT);
+		if (!registry.get(fontData.toString()).equals(registry.defaultFont()))
+			return registry.get(fontData.toString());
+		
+		registry.put(fontData.toString(), new FontData[] {fontData});
+		return registry.get(fontData.toString());
+	}
+
+	private Font getNodeLabelFont() {
+		FontRegistry registry = JFaceResources.getFontRegistry();
+		IPreferenceStore store = EditorPlugin.getDefault().getPreferenceStore();
+		FontData fontData = PreferenceConverter.getFontData(store,
+				GEMPreferences.FIGURE_LABEL_FONT);
+		if (!registry.get(fontData.toString()).equals(registry.defaultFont()))
+			return registry.get(fontData.toString());
+		
+		registry.put(fontData.toString(), new FontData[] {fontData});
+		return registry.get(fontData.toString());
 	}
 
 	/*
