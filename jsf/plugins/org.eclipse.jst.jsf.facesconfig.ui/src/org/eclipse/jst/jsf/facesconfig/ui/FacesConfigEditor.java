@@ -276,7 +276,8 @@ public class FacesConfigEditor extends FormEditor implements
 								new Runnable() {
 									public void run() {
 										editorDirtyStateChanged();
-										getActionBarContributor().updateActionBars();
+										getActionBarContributor()
+												.updateActionBars();
 									}
 								});
 					}
@@ -293,7 +294,16 @@ public class FacesConfigEditor extends FormEditor implements
 	 */
 	public void init(IEditorSite site, IEditorInput input)
 			throws PartInitException {
-		super.init(site, input);
+		try {
+			super.init(site, input);
+		} catch (Exception e) {
+			MessageDialog.openError(null,
+					EditorMessages.FacesConfigEditor_Error_OpenModel_Title,
+					EditorMessages.FacesConfigEditor_Error_OpenModel);
+			throw new PartInitException(
+					EditorMessages.FacesConfigEditor_Error_OpenModel);
+		}
+
 		setPartName(input.getName());
 		if (!isValidInput(input)) {
 			PlatformUI.getWorkbench().getActiveWorkbenchWindow()
@@ -386,7 +396,8 @@ public class FacesConfigEditor extends FormEditor implements
 	protected void createAndAddPageflowPage() throws PartInitException {
 		pageflowPage = new PageflowEditor(this);
 		pageflowPageID = addPage(pageflowPage, getEditorInput());
-		setPageText(pageflowPageID, "Navigation Rule");
+		setPageText(pageflowPageID,
+				EditorMessages.FacesConfigEditor_Pageflow_TabName);
 		addPageActionRegistry(pageflowPage);
 		pageflowPage.getModelsTransform().setFacesConfig(getFacesConfig());
 		pageflowPage.getModelsTransform().setPageflow(
@@ -693,7 +704,6 @@ public class FacesConfigEditor extends FormEditor implements
 	}
 
 	public boolean isSaveAsAllowed() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 

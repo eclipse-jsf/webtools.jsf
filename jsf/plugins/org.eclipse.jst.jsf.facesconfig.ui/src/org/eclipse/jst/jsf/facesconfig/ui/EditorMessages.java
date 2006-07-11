@@ -10,7 +10,6 @@
  *     Sybase, Inc. - initial API and implementation
  *******************************************************************************/
 
-
 package org.eclipse.jst.jsf.facesconfig.ui;
 
 import org.eclipse.osgi.util.NLS;
@@ -673,4 +672,7 @@ public final class EditorMessages extends NLS {
 
 	public static String MultiPageEditorOutlinePage_noOutline;
 
+	public static String FacesConfigEditor_Error_OpenModel_Title;
+
+	public static String FacesConfigEditor_Error_OpenModel;
 }
