@@ -7,10 +7,10 @@
  *
  * Contributors:
  *    Justin Chen - development check in
+ *    Ian Trimble - run reference-changing code in WorkspaceJob (bug# 144006)
  *******************************************************************************/
 package org.eclipse.jst.jsf.core.internal.jsflibraryconfig;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
@@ -21,12 +21,15 @@ import java.util.jar.Manifest;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.resources.WorkspaceJob;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.emf.common.util.EList;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jem.workbench.utility.JemProjectUtilities;
@@ -40,7 +43,6 @@ import org.eclipse.jst.j2ee.internal.common.ClasspathModel;
 import org.eclipse.jst.j2ee.internal.common.operations.UpdateJavaBuildPathOperation;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.Messages;
-import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.ArchiveFile;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.project.facet.JSFUtils;
 import org.eclipse.osgi.util.NLS;
@@ -57,7 +59,6 @@ import org.eclipse.wst.common.frameworks.internal.ui.WTPUIPlugin;
  * are referenced in a web application. 
  * 
  * @author Justin Chen - Oracle
- *
  */
 public class J2EEModuleDependencyDelegate {	
 	private IProject project = null;
@@ -129,6 +130,7 @@ public class J2EEModuleDependencyDelegate {
 			
 			// Added as J2EE Module Dependency if need to be deployed
 			if (deployme) {
+				/* fix for bug# 144006 - wrap in WorkspaceJob
 				ArrayList vlist = new ArrayList(Collections.EMPTY_LIST);
 				IVirtualReference[] oldrefs = model.getComponent().getReferences();
 				for (int j = 0; j < oldrefs.length; j++) {
@@ -146,8 +148,12 @@ public class J2EEModuleDependencyDelegate {
 				for (int j = 0; j < vlist.size(); j++) {
 					IVirtualReference tmpref = (IVirtualReference) vlist.get(j);
 					refs[j] = tmpref;
-				}				
+				}
+
 				model.getComponent().setReferences(refs);
+				*/
+				SetReferencesJob setRefsJob = new SetReferencesJob(project, model.getComponent(), archive, true);
+				setRefsJob.schedule();
 			} else {
 				// added into the path selection to update build path later.			
 				ClasspathElement element = createClassPathElement(archive, archive.getName(), true);
@@ -185,7 +191,7 @@ public class J2EEModuleDependencyDelegate {
 		for (int i= 0; i < elems.length; i++) {			
 			String type = VirtualArchiveComponent.LIBARCHIVETYPE + IPath.SEPARATOR;
 			IVirtualComponent archive = ComponentCore.createArchiveComponent( model.getComponent().getProject(), type + elems[i].toString());
-			
+			/* fix for bug# 144006 - wrap in WorkspaceJob
 			ArrayList vlist = new ArrayList(Collections.EMPTY_LIST);
 			IVirtualReference[] oldrefs = model.getComponent().getReferences();
 			for (int j = 0; j < oldrefs.length; j++) {
@@ -204,9 +210,13 @@ public class J2EEModuleDependencyDelegate {
 			for (int j = 0; j < vlist.size(); j++) {
 				IVirtualReference tmpref = (IVirtualReference) vlist.get(j);
 				refs[j] = tmpref;
-			}				
+			}
+
 			model.getComponent().setReferences(refs);
-						
+			*/
+			SetReferencesJob setRefsJob = new SetReferencesJob(project, model.getComponent(), archive, false);
+			setRefsJob.schedule();
+
 			// Update project classpath
 			ClasspathElement element = createClassPathElement(archive, archive.getName(), false);
 			if (selection == null) {
@@ -331,5 +341,101 @@ public class J2EEModuleDependencyDelegate {
 	        }
 	    }
 	}	
-	
+
+	/**
+	 * SetReferencesJob is responsible for adding or removing IVirtualReference
+	 * instances on a specified IVirtualComponent and runs as a WorkspaceJob.
+	 * 
+	 * @author Ian Trimble - Oracle
+	 */
+	class SetReferencesJob extends WorkspaceJob {
+
+		/**
+		 * IProject instance.
+		 */
+		protected IProject project = null;
+		/**
+		 * IVirtualComponent instance on which to set references.
+		 */
+		protected IVirtualComponent parentComponent = null;
+		/**
+		 * IVirtualComponent instance to be added or removed as a reference on parentComponent.
+		 */
+		protected IVirtualComponent referencedComponent = null;
+		/**
+		 * If true, referencedComponent is added; if false, it is removed.
+		 */
+		protected boolean addReferencedComponent = true;
+
+		/**
+		 * Instantiates and configures a SetReferencesJob.
+		 * 
+		 * @param project IProject instance on which to set rule.
+		 * @param parentComponent IVirtualComponent instance on which to set references.
+		 * @param referencedComponent IVirtualComponent instance to be added or removed as a reference on parentComponent.
+		 * @param addReferencedComponent If true, referencedComponent is added; if false, it is removed.
+		 */
+		public SetReferencesJob(
+				IProject project,
+				IVirtualComponent parentComponent,
+				IVirtualComponent referencedComponent,
+				boolean addReferencedComponent) {
+			super(Messages.J2EEModuleDependencyDelegate_UpdatingJ2EEModuleDependencies);
+			this.project = project;
+			this.parentComponent = parentComponent;
+			this.referencedComponent = referencedComponent;
+			this.addReferencedComponent = addReferencedComponent;
+			IWorkspace workspace = ResourcesPlugin.getWorkspace();
+			setRule(workspace.getRuleFactory().createRule(workspace.getRoot()));
+			setUser(true);
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * @see org.eclipse.core.resources.WorkspaceJob#runInWorkspace(org.eclipse.core.runtime.IProgressMonitor)
+		 */
+		public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
+			try {
+				String projectName = project != null ? project.getName() : "null";
+				monitor.beginTask(
+						NLS.bind(Messages.J2EEModuleDependencyDelegate_UpdatingJ2EEModuleDependenciesForProject, projectName),
+						5);
+				if (parentComponent != null) {
+					//copy from array to list
+					ArrayList refList = new ArrayList(Collections.EMPTY_LIST);
+					IVirtualReference[] refArray = parentComponent.getReferences();
+					for (int i = 0; i < refArray.length; i++) {
+						refList.add(refArray[i]);
+					}
+					monitor.worked(1);
+					//create new reference
+					IVirtualReference reference = ComponentCore.createReference( 
+							parentComponent, 
+							referencedComponent, 
+							new Path("/WEB-INF/lib")); //$NON-NLS-1$
+					monitor.worked(1);
+					//add or remove reference
+					if (addReferencedComponent) {
+						addReferences(refList, reference);
+					} else {
+						removeReference(refList, reference);
+					}
+					monitor.worked(1);
+					//copy from list to array
+					IVirtualReference[] newRefArray = new IVirtualReference[refList.size()];
+					newRefArray = (IVirtualReference[])refList.toArray(newRefArray);
+					monitor.worked(1);
+					//set references
+					parentComponent.setReferences(newRefArray);
+					monitor.worked(1);
+				} else {
+					monitor.worked(5);
+				}
+			} finally {
+				monitor.done();
+			}
+			return Status.OK_STATUS;
+		}
+	}
+
 }

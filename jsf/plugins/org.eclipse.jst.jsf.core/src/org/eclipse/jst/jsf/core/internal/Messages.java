@@ -56,6 +56,9 @@ public class Messages extends NLS {
 
 	public static String JARFileJSFAppConfigProvider_ErrorLoadingModel;
 
+	public static String J2EEModuleDependencyDelegate_UpdatingJ2EEModuleDependencies;
+	public static String J2EEModuleDependencyDelegate_UpdatingJ2EEModuleDependenciesForProject;
+
 	static {
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
 	}
