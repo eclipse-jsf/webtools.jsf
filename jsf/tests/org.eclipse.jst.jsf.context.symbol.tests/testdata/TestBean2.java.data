@@ -1,0 +1,37 @@
+package com.test
+
+public class TestBean2 implements ITestBean2
+{
+	public boolean aBooleanMethodWithNoArgs()
+	{
+		return false;
+	}
+	
+	public String aStringMethodWithNoArgs()
+	{
+		return true;
+	}
+	
+	public boolean isAnIsAccessor()
+	{
+		return false;
+	}
+	
+	public int aIntegerMethodThatTakesAString(String arg)
+	{
+		return -1;
+	}
+	
+	public int aIntegerMethodThatTakesAStringAndLong(String arg1, Long arg2)
+	{
+	     return -1;
+	}
+	
+	public void overloadedMethod(int a)
+	{
+	}
+	
+	public void overloadedMethod(String a)
+	{
+	}
+}

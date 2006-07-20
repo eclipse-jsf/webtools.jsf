@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.eclipse.jst.jsf.context.symbol.tests; singleton:=true
+Bundle-Version: 1.0.0
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Export-Package: org.eclipse.jst.jsf.context.symbol.tests
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.jst.jsf.context.symbol;visibility:=reexport,
+ org.eclipse.emf.ecore.xmi;visibility:=reexport,
+ org.junit;visibility:=reexport,
+ org.eclipse.jst.jsf.test.util,
+ org.eclipse.jdt.core,
+ org.eclipse.jst.jsf.core.tests,
+ org.eclipse.ui
+Eclipse-LazyStart: true
+Bundle-Activator: org.eclipse.jst.jsf.context.symbol.tests.ContextSymbolTestPlugin
