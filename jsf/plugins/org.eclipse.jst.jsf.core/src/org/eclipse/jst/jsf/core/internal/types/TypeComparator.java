@@ -76,17 +76,15 @@ public final class TypeComparator
                     {
                         continue CHECK_CANDIDATES;
                     }
-                    else
+
+                    final Diagnostic test =
+                        methodSignaturesMatch(curSatisfyType, testType);
+                    
+                    if (test.getSeverity() ==  Diagnostic.OK)
                     {
-                        final Diagnostic test =
-                            methodSignaturesMatch(curSatisfyType, testType);
-                        
-                        if (test.getSeverity() ==  Diagnostic.OK)
-                        {
-                            result = Diagnostic.OK_INSTANCE;
-                            // found a match so break
-                            break MAIN_LOOP;
-                        }
+                        result = Diagnostic.OK_INSTANCE;
+                        // found a match so break
+                        break MAIN_LOOP;
                     }
                 }
                 
