@@ -27,8 +27,9 @@ Require-Bundle: org.eclipse.jst.jsf.core,
  org.eclipse.core.runtime.compatibility,
  org.junit,
  org.eclipse.wst.xml.core,
- org.eclipse.jst.jsp.core
-Eclipse-AutoStart: true
+ org.eclipse.jst.jsp.core,
+ org.eclipse.jst.jsf.test.util
+Eclipse-LazyStart: true
 Export-Package: org.eclipse.jst.jsf.core.tests;x-friends:="org.eclipse.jst.jsf.ui.tests",
  org.eclipse.jst.jsf.core.tests.jsflibraryregistry,
  org.eclipse.jst.jsf.core.tests.project.facet,

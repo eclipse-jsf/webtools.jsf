@@ -1,0 +1,13 @@
+package com.test;
+
+public class AnotherBean
+{
+    public String getProperty();
+    {
+    	return "";
+    }
+
+	public void setProperty(String prop)
+	{
+	}
+}

@@ -13,12 +13,6 @@ package org.eclipse.jst.jsf.core.tests;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-/*import org.eclipse.jst.jsf.core.tests.annotations.AnnotationHelperTestCases;
-import org.eclipse.jst.jsf.core.tests.annotations.AnnotationMapTestCases;
-import org.eclipse.jst.jsf.core.tests.annotations.CaseInsensitiveAnnotationsTestCases;
-import org.eclipse.jst.jsf.core.tests.annotations.DuplicateAnnotationsTestCases;
-import org.eclipse.jst.jsf.core.tests.annotations.NegativeAnnotationFileTestCases;
-*/
 import org.eclipse.jst.jsf.core.tests.jsflibraryconfig.JSFLibraryConfigModelAdapterTestCases;
 import org.eclipse.jst.jsf.core.tests.jsflibraryconfig.JSFLibraryDecoratorTestCases;
 import org.eclipse.jst.jsf.core.tests.jsflibraryregistry.ArchiveFileTestCases;
@@ -27,12 +21,30 @@ import org.eclipse.jst.jsf.core.tests.jsflibraryregistry.JSFLibraryRegistryTestC
 import org.eclipse.jst.jsf.core.tests.jsflibraryregistry.JSFLibraryTestCases;
 import org.eclipse.jst.jsf.core.tests.jsflibraryregistry.MaintainDefaultImplementationAdapterTestCases;
 import org.eclipse.jst.jsf.core.tests.project.facet.JSFFacetInstallDataModelProviderTestCases;
+import org.eclipse.jst.jsf.core.tests.types.TypeComparatorTests;
+import org.eclipse.jst.jsf.core.tests.types.TypeTransformerTests;
+import org.eclipse.jst.jsf.core.tests.util.TestJDTBeanIntrospector;
+import org.eclipse.jst.jsf.core.tests.util.TestJDTBeanPropertyWorkingCopy;
 
+/**
+ * The full test suite for core.tests
+ * @author cbateman
+ *
+ */
 public class AllTests {
 
+	/**
+	 * @return the test suite
+	 */
 	public static Test suite() {
 		TestSuite suite = new TestSuite("Test for org.eclipse.jst.jsf.core.tests");
 		//$JUnit-BEGIN$
+        suite.addTestSuite(TestJDTBeanPropertyWorkingCopy.class);
+        suite.addTestSuite(TestJDTBeanIntrospector.class);
+
+		suite.addTestSuite(TypeComparatorTests.class);
+		suite.addTestSuite(TypeTransformerTests.class);
+
 		suite.addTestSuite(JSFLibraryRegistryTestCases.class);
 		suite.addTestSuite(JSFLibraryTestCases.class);
 		suite.addTestSuite(ArchiveFileTestCases.class);

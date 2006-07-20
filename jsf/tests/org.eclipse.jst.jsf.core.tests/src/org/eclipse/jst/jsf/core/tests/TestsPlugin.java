@@ -53,6 +53,7 @@ public class TestsPlugin extends AbstractUIPlugin {
 
 	/**
 	 * Returns the shared instance.
+	 * @return the plugin
 	 */
 	public static TestsPlugin getDefault() {
 		return plugin;
@@ -69,6 +70,9 @@ public class TestsPlugin extends AbstractUIPlugin {
 		return AbstractUIPlugin.imageDescriptorFromPlugin("org.eclipse.jst.jsf.core.tests", path);
 	}
 	
+	/**
+	 * @return the url corresponding to the bundle's install location
+	 */
 	public static URL getInstallLocation() {
 		URL installLocation = Platform.getBundle(TestsPlugin.ID_BUNDLE).getEntry("/");
 		URL resolvedLocation = null;
@@ -82,6 +86,10 @@ public class TestsPlugin extends AbstractUIPlugin {
 		return resolvedLocation;
 	}
 	
+	/**
+	 * @param filepath
+	 * @return the File for the given path relative to the bundle install location
+	 */
 	public static File getTestFile(String filepath) {
 		URL installURL = getInstallLocation();
 		//String scheme = installURL.getProtocol();
