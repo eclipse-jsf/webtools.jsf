@@ -7,7 +7,7 @@ import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jst.jsf.test.util.Activator;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
-import org.eclipse.jst.jsf.test.util.JavaCodeResource;
+import org.eclipse.jst.jsf.test.util.TestFileResource;
 import org.eclipse.jst.jsf.test.util.ProjectTestEnvironment;
 
 /**
@@ -23,9 +23,9 @@ public class TestJDTTestEnvironment extends TestCase
 		super.setUp();
 		_projectTestEnvironment = new ProjectTestEnvironment("JDTTestProject");
 		_projectTestEnvironment.createProject();
-        JavaCodeResource codeRes = new JavaCodeResource();
+        TestFileResource codeRes = new TestFileResource();
         codeRes.load(Activator.getDefault().getBundle(), "/testdata/TestClass1.java.data");
-        _testClass1 = codeRes.getCode();
+        _testClass1 = codeRes.toString();
 	}
 
 	/**

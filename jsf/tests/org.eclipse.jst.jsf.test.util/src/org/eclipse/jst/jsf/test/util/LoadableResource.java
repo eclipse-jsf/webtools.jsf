@@ -1,6 +1,5 @@
 package org.eclipse.jst.jsf.test.util;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -8,16 +7,13 @@ import java.net.URL;
 import org.osgi.framework.Bundle;
 
 /**
- * Represents a piece of java code (usually a full compilation unit) that is loaded
- * from a static test file somewhere.  
+ * A resource that can be loaded into memory in a test plugin friendly way
  * 
  * @author cbateman
- *
  */
-public class JavaCodeResource 
+public abstract class LoadableResource 
 {
-    private String      _code;
-    
+
     /**
      * Attempts to load the code from the path relative to bundle
      * 
@@ -25,7 +21,7 @@ public class JavaCodeResource
      * @param path
      * @throws IOException
      */
-    public void load(Bundle  bundle, String path) throws IOException
+    public void load(Bundle  bundle, String path) throws IOException 
     {
         URL url = bundle.getEntry(path);
         
@@ -39,16 +35,13 @@ public class JavaCodeResource
         try
         {
             stream = url.openStream();
-            ByteArrayOutputStream bufferStream = new ByteArrayOutputStream();
             byte[]  buffer = new byte[2048];
             int bytesRead = 0;
             
             while ((bytesRead = stream.read(buffer)) != -1)
             {
-                bufferStream.write(buffer, 0, bytesRead);
+                bufferLoaded(buffer, bytesRead);
             }
-            
-            _code = bufferStream.toString();
         }
         finally
         {
@@ -58,12 +51,16 @@ public class JavaCodeResource
             }
         }
     }
-    
+
     /**
-     * @return the code or null if failed to load
+     * Called by load to indicate that numBytes starting from offset 0
+     * have been loaded.  Sub-classes must implement to handle the buffer,
+     * usually it will be appended into a running buffer until loadCompleted
+     * is called to indicate that all data has been loaded. 
+     * 
+     * @param buffer
+     * @param numBytes
      */
-    public String getCode()
-    {
-        return _code;
-    }
+    protected abstract void bufferLoaded(byte[] buffer, int numBytes);
+    
 }

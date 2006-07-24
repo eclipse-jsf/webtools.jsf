@@ -11,16 +11,25 @@
  **************************************************************************************************/
 package org.eclipse.jst.jsf.test.util;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.jst.j2ee.internal.web.archive.operations.WebFacetProjectCreationDataModelProvider;
+import org.eclipse.wst.common.componentcore.ComponentCore;
 import org.eclipse.wst.common.componentcore.datamodel.properties.IFacetProjectCreationDataModelProperties;
+import org.eclipse.wst.common.componentcore.resources.IVirtualContainer;
+import org.eclipse.wst.common.componentcore.resources.IVirtualResource;
 import org.eclipse.wst.common.frameworks.datamodel.DataModelFactory;
 import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
+import org.osgi.framework.Bundle;
 
 /**
  * Utility class for launching JSF-related wizard operations. 
@@ -51,22 +60,14 @@ public class ProjectTestEnvironment {
 	/**
 	 * Construct the basic web project
 	 */
-	public void createProject() {
-		if(!isProjectCreated()) {
+	public void createProject() 
+    {
+		if(!isProjectCreated()) 
+        {
 			// first delete the projects of these names, if present
-			IWorkspace workspace = ResourcesPlugin.getWorkspace();
-			IResource oldWebProj = workspace.getRoot().getProject(_projectName);
-
-			try {			
-                if (oldWebProj != null && oldWebProj.isAccessible())
-                {
-                    workspace.delete(new IResource[] { oldWebProj }, true, null);
-                }
-			} catch (CoreException ce) {
-				ce.printStackTrace();
-			}
-			
-			try {
+            deleteProject();
+			try 
+            {
 				_project = createWebProject(_projectName);
 			} catch (Throwable t) {
 				t.printStackTrace();
@@ -76,6 +77,27 @@ public class ProjectTestEnvironment {
 		}
 	}
 
+    /**
+     * Delete project
+     */
+    public void deleteProject()
+    {
+        IWorkspace workspace = ResourcesPlugin.getWorkspace();
+        IProject oldWebProj = workspace.getRoot().getProject(_projectName);
+
+        try 
+        {           
+            if (oldWebProj != null && oldWebProj.isAccessible())
+            {
+                workspace.delete(new IResource[] { oldWebProj }, true, null);
+            }
+        }
+        catch (CoreException ce) 
+        {
+            ce.printStackTrace();
+        }
+    }
+    
 	/**
 	 * @param projectName
 	 * @return the web project
@@ -86,6 +108,7 @@ public class ProjectTestEnvironment {
 			IDataModel dataModel = DataModelFactory.createDataModel(new WebFacetProjectCreationDataModelProvider());
 			dataModel.setProperty(IFacetProjectCreationDataModelProperties.FACET_PROJECT_NAME, projectName);
 			dataModel.getDefaultOperation().execute(new NullProgressMonitor(), null);
+            dataModel.dispose();
 		}
 		return ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
 	}
@@ -121,6 +144,53 @@ public class ProjectTestEnvironment {
 		return null;
 	}
 
+    /**
+     * @param create 
+     * @param force 
+     * @return the web root container for the project
+     */
+    public IVirtualContainer getWebRoot(boolean create, boolean force)
+    {
+        IVirtualContainer webRoot =
+            ComponentCore.createComponent(getTestProject()).getRootFolder();
+        
+        if (!webRoot.exists() && create)
+        {
+            try
+            {
+                webRoot.create(force ? IVirtualResource.FORCE : 0, new NullProgressMonitor());
+            }
+            catch (CoreException ce)
+            {
+                Activator.log("Error creating web root", ce);
+                ce.printStackTrace();
+            }
+        }
+       
+        return webRoot;
+    }
+    
+       
+    /**
+     * @param bundle
+     * @param srcFileName
+     * @param destDirName
+     * @param destFileName
+     * @return the IResource for the  newly loaded resource
+     * @throws IOException 
+     * @throws CoreException 
+     */
+    public IResource loadResourceInWebRoot(Bundle bundle, String srcFileName, String destFileName) throws IOException, CoreException
+    {
+        final TestFileResource resource = new TestFileResource();
+        resource.load(bundle, srcFileName);
+        
+        IFile file = getWebRoot(true, true).getFile(new Path(destFileName)).getUnderlyingFile();
+        file.create(new ByteArrayInputStream(resource.toBytes()), true, null);
+        
+        return file;
+    }
+    
 //	public void checkAndAddFacesConfig() {
 //		final IProject project = getTestProject();
 //		IContainer container = ComponentCore.createComponent(project).getRootFolder().getFolder("/WEB-INF").getUnderlyingFolder();

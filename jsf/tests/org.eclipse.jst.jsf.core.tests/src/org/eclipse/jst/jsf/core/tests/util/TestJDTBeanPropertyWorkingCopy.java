@@ -9,7 +9,7 @@ import org.eclipse.jst.jsf.core.internal.provisional.util.JDTBeanProperty;
 import org.eclipse.jst.jsf.core.internal.provisional.util.JDTBeanPropertyWorkingCopy;
 import org.eclipse.jst.jsf.core.tests.TestsPlugin;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
-import org.eclipse.jst.jsf.test.util.JavaCodeResource;
+import org.eclipse.jst.jsf.test.util.TestFileResource;
 import org.eclipse.jst.jsf.test.util.ProjectTestEnvironment;
 
 /**
@@ -35,9 +35,9 @@ public class TestJDTBeanPropertyWorkingCopy extends TestCase {
 		_jdtTestEnvironment = new JDTTestEnvironment(projectTestEnvironment);
         
         // load TestBean1
-        JavaCodeResource codeRes = new JavaCodeResource();
+        TestFileResource codeRes = new TestFileResource();
         codeRes.load(TestsPlugin.getDefault().getBundle(), "/testfiles/TestBean1.java.data");
-        String code = codeRes.getCode();
+        String code = codeRes.toString();
         _jdtTestEnvironment.addSourceFile(srcFolderName, packageName1, testBeanName1, code);
         
         _testBean1Type = _jdtTestEnvironment.getJavaProject().findType(packageName1+"."+testBeanName1);

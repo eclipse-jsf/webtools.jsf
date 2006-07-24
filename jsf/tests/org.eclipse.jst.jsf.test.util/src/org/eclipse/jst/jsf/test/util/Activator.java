@@ -1,5 +1,7 @@
 package org.eclipse.jst.jsf.test.util;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -50,4 +52,15 @@ public class Activator extends AbstractUIPlugin {
 		return plugin;
 	}
 
+    /**
+     * Default plugin log method
+     * 
+     * @param message
+     * @param t
+     */
+    public static void log(String message, Throwable t)
+    {
+        IStatus logInfo = new Status(IStatus.ERROR, plugin.getBundle().getSymbolicName(), 0, message, t);
+        plugin.getLog().log(logInfo);
+    }
 }

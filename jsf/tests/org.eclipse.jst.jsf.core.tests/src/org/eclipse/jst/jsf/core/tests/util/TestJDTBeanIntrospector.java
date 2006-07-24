@@ -12,7 +12,7 @@ import org.eclipse.jst.jsf.core.internal.provisional.util.JDTBeanProperty;
 import org.eclipse.jst.jsf.core.internal.provisional.util.JDTBeanPropertyWorkingCopy;
 import org.eclipse.jst.jsf.core.tests.TestsPlugin;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
-import org.eclipse.jst.jsf.test.util.JavaCodeResource;
+import org.eclipse.jst.jsf.test.util.TestFileResource;
 import org.eclipse.jst.jsf.test.util.ProjectTestEnvironment;
 
 /**
@@ -42,18 +42,18 @@ public class TestJDTBeanIntrospector extends TestCase
         projectTestEnvironment.createProject();
         
         _jdtTestEnvironment = new JDTTestEnvironment(projectTestEnvironment);
-        JavaCodeResource codeRes = new JavaCodeResource();
+        TestFileResource codeRes = new TestFileResource();
         codeRes.load(TestsPlugin.getDefault().getBundle(), "/testfiles/TestBean1.java.data");
-        String code = codeRes.getCode();
+        String code = codeRes.toString();
         _jdtTestEnvironment.addSourceFile(srcFolderName, packageName1, testBeanName1, code);
         
         _testBean1Type = _jdtTestEnvironment.getJavaProject().findType(packageName1+"."+testBeanName1);
         assertNotNull(_testBean1Type);
         
         // load TestBean1Subclass
-        codeRes = new JavaCodeResource();
+        codeRes = new TestFileResource();
         codeRes.load(TestsPlugin.getDefault().getBundle(), "/testfiles/TestBean1Subclass.java.data");
-        code = codeRes.getCode();
+        code = codeRes.toString();
         _jdtTestEnvironment.addSourceFile(srcFolderName, packageName1, testBeanSubclassName1, code);
 
         _testBeanSubclassType = _jdtTestEnvironment.getJavaProject().findType(packageName1+"."+testBeanSubclassName1);
@@ -62,9 +62,9 @@ public class TestJDTBeanIntrospector extends TestCase
         assertNotSame(_testBean1Type, _testBeanSubclassType);
         
         // load anotherBean
-        codeRes = new JavaCodeResource();
+        codeRes = new TestFileResource();
         codeRes.load(TestsPlugin.getDefault().getBundle(), "/testfiles/AnotherBean.java.data");
-        code = codeRes.getCode();
+        code = codeRes.toString();
         _jdtTestEnvironment.addSourceFile(srcFolderName, packageName1, testAnotherBeanName, code);
         
         assertNotNull(_jdtTestEnvironment.getJavaProject().findType(packageName1+"."+testAnotherBeanName));

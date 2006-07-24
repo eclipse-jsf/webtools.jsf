@@ -18,7 +18,7 @@ import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanPropertySymb
 import org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaTypeDescriptor2;
 import org.eclipse.jst.jsf.core.tests.TestsPlugin;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
-import org.eclipse.jst.jsf.test.util.JavaCodeResource;
+import org.eclipse.jst.jsf.test.util.TestFileResource;
 import org.eclipse.jst.jsf.test.util.ProjectTestEnvironment;
 import org.osgi.framework.Bundle;
 
@@ -114,9 +114,9 @@ public class TestIJavaTypeDescriptor2 extends TestCase
     
     private void loadSourceClass(final Bundle bundle, final String fileName, final String beanClassName) throws Exception
     {
-        JavaCodeResource codeRes = new JavaCodeResource();
+        TestFileResource codeRes = new TestFileResource();
         codeRes.load(bundle, fileName);
-        String code = codeRes.getCode();
+        String code = codeRes.toString();
         _jdtTestEnvironment.addSourceFile(srcFolderName, packageName1, beanClassName, code);
     }
     
