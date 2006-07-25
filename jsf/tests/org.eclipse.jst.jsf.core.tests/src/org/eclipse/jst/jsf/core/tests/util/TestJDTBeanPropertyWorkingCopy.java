@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * Copyright (c) 2006 Oracle Corporation.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Cameron Bateman/Oracle - initial API and implementation
+ *    
+ ********************************************************************************/
 package org.eclipse.jst.jsf.core.tests.util;
 
 import junit.framework.TestCase;
@@ -10,7 +21,7 @@ import org.eclipse.jst.jsf.core.internal.provisional.util.JDTBeanPropertyWorking
 import org.eclipse.jst.jsf.core.tests.TestsPlugin;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
 import org.eclipse.jst.jsf.test.util.TestFileResource;
-import org.eclipse.jst.jsf.test.util.ProjectTestEnvironment;
+import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
 
 /**
  * Tests basic operations on the jdt bean property
@@ -28,8 +39,8 @@ public class TestJDTBeanPropertyWorkingCopy extends TestCase {
     
 	protected void setUp() throws Exception {
 		super.setUp();
-		final ProjectTestEnvironment  projectTestEnvironment = 
-			new ProjectTestEnvironment("TestJDTBeanPropertyWorkingCopyProject");
+		final WebProjectTestEnvironment  projectTestEnvironment = 
+			new WebProjectTestEnvironment("TestJDTBeanPropertyWorkingCopyProject");
 		projectTestEnvironment.createProject();
 		
 		_jdtTestEnvironment = new JDTTestEnvironment(projectTestEnvironment);

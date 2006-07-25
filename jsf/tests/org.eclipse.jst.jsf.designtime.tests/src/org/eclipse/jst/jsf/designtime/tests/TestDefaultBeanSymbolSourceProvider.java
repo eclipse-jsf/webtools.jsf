@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * Copyright (c) 2006 Oracle Corporation.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Cameron Bateman/Oracle - initial API and implementation
+ *    
+ ********************************************************************************/
 package org.eclipse.jst.jsf.designtime.tests;
 
 import junit.framework.TestCase;
@@ -9,8 +20,8 @@ import org.eclipse.jst.jsf.core.tests.TestsPlugin;
 import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
 import org.eclipse.jst.jsf.designtime.internal.provisional.symbols.DefaultBeanSymbolSourceProvider;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
-import org.eclipse.jst.jsf.test.util.ProjectTestEnvironment;
 import org.eclipse.jst.jsf.test.util.TestFileResource;
+import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
 import org.osgi.framework.Bundle;
 
 /**
@@ -32,8 +43,8 @@ public class TestDefaultBeanSymbolSourceProvider extends TestCase
     {
         super.setUp();
         
-        final ProjectTestEnvironment  projectTestEnvironment = 
-            new ProjectTestEnvironment("TestDefaultBeanSymbolSourceProvider_"+getName());
+        final WebProjectTestEnvironment  projectTestEnvironment = 
+            new WebProjectTestEnvironment("TestDefaultBeanSymbolSourceProvider_"+getName());
         projectTestEnvironment.createProject();
         _facesConfigFile = (IFile) projectTestEnvironment.
             loadResourceInWebRoot(DesignTimeTestsPlugin.getDefault().getBundle(),
