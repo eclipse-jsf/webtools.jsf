@@ -1,0 +1,8 @@
+package beans;
+
+public class MyBean {
+	public String[] getProperty()
+	{
+		return new String[]{"blah"};
+	}
+}

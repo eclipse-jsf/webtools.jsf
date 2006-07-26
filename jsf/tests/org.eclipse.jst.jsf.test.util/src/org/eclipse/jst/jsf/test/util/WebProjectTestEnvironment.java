@@ -99,6 +99,8 @@ public class WebProjectTestEnvironment extends ProjectTestEnvironment {
     
        
     /**
+     * Creates or overwrites destFileName with the contents of srcFileName in bundle
+     * 
      * @param bundle
      * @param srcFileName
      * @param destDirName
@@ -113,7 +115,15 @@ public class WebProjectTestEnvironment extends ProjectTestEnvironment {
         resource.load(bundle, srcFileName);
         
         IFile file = getWebRoot(true, true).getFile(new Path(destFileName)).getUnderlyingFile();
-        file.create(new ByteArrayInputStream(resource.toBytes()), true, null);
+        
+        if (!file.exists())
+        {            
+            file.create(new ByteArrayInputStream(resource.toBytes()), true, null);
+        }
+        else
+        {
+            file.setContents(new ByteArrayInputStream(resource.toBytes()), true, true, null);
+        }
         
         return file;
     }
