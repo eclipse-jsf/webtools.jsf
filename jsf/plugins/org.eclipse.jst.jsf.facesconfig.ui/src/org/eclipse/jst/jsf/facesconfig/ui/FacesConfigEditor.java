@@ -19,6 +19,7 @@ import java.util.EventObject;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -96,6 +97,10 @@ import org.eclipse.ui.ide.IGotoMarker;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
+import org.eclipse.wst.common.project.facet.core.IFacetedProject;
+import org.eclipse.wst.common.project.facet.core.IProjectFacet;
+import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
+import org.eclipse.wst.common.project.facet.core.ProjectFacetsManager;
 import org.eclipse.wst.common.ui.properties.internal.provisional.ITabbedPropertySheetPageContributor;
 import org.eclipse.wst.common.ui.properties.internal.provisional.TabbedPropertySheetPage;
 import org.eclipse.wst.sse.ui.StructuredTextEditor;
@@ -145,6 +150,8 @@ public class FacesConfigEditor extends FormEditor implements
 	private IContentOutlinePage outlinePage;
 
 	private IProject currentProject;
+
+	private boolean isWebProject;
 
 	public FacesConfigEditor() {
 		initializeEMF();
@@ -325,6 +332,7 @@ public class FacesConfigEditor extends FormEditor implements
 	 */
 	protected void setInput(IEditorInput input) {
 		super.setInput(input);
+		isWebProject = matches(input);
 
 		IFile inputFile = (IFile) input.getAdapter(IFile.class);
 		if (inputFile != null) {
@@ -339,38 +347,44 @@ public class FacesConfigEditor extends FormEditor implements
 	 * 
 	 */
 	private void loadModel(IProject project, IPath modelPath) {
+		if (isWebProject) {
+			IFolder webContentFolder = WebrootUtil.getWebContentFolder(project);
+			Assert
+					.isTrue(webContentFolder != null
+							&& webContentFolder.exists());
 
-		IFolder webContentFolder = WebrootUtil.getWebContentFolder(project);
-		Assert.isTrue(webContentFolder != null && webContentFolder.exists());
+			IPath relativePath = modelPath;
+			if (webContentFolder.getFullPath().isPrefixOf(modelPath)) {
+				relativePath = modelPath.removeFirstSegments(webContentFolder
+						.getFullPath().segmentCount());
+			}
 
-		IPath relativePath = modelPath;
-		if (webContentFolder.getFullPath().isPrefixOf(modelPath)) {
-			relativePath = modelPath.removeFirstSegments(webContentFolder
-					.getFullPath().segmentCount());
+			facesConfigAtrifactEdit = FacesConfigArtifactEdit
+					.getFacesConfigArtifactEditForWrite(project, relativePath
+							.toString());
 		}
-		facesConfigAtrifactEdit = FacesConfigArtifactEdit
-				.getFacesConfigArtifactEditForWrite(project, relativePath
-						.toString());
 	}
 
 	protected void addPages() {
 		try {
-			IntroductionPage page1 = new IntroductionPage(this);
-			addPage(page1, null);
+			if (isWebProject) {
+				IntroductionPage page1 = new IntroductionPage(this);
+				addPage(page1, null);
 
-			IFormPage overviewPage = new OverviewPage(this);
-			addPage(overviewPage, null);
+				IFormPage overviewPage = new OverviewPage(this);
+				addPage(overviewPage, null);
 
-			// Page flow
-			createAndAddPageflowPage();
+				// Page flow
+				createAndAddPageflowPage();
 
-			// pages
-			IFormPage managedBeanPage = new ManagedBeanPage(this);
-			managedBeanPageID = addPage(managedBeanPage, null);
-			IFormPage componentsPage = new ComponentsPage(this);
-			componentsPageID = addPage(componentsPage, null);
-			IFormPage othersPage = new OthersPage(this);
-			othersPageID = addPage(othersPage, null);
+				// pages
+				IFormPage managedBeanPage = new ManagedBeanPage(this);
+				managedBeanPageID = addPage(managedBeanPage, null);
+				IFormPage componentsPage = new ComponentsPage(this);
+				componentsPageID = addPage(componentsPage, null);
+				IFormPage othersPage = new OthersPage(this);
+				othersPageID = addPage(othersPage, null);
+			}
 
 			sourcePage = new StructuredTextEditor();
 
@@ -442,9 +456,8 @@ public class FacesConfigEditor extends FormEditor implements
 	 * @return - the action registry
 	 */
 	protected ActionRegistry getActionRegistry() {
-		if (null == actionRegistry) {
+		if (null == actionRegistry)
 			actionRegistry = new ActionRegistry();
-		}
 
 		return actionRegistry;
 	}
@@ -489,12 +502,12 @@ public class FacesConfigEditor extends FormEditor implements
 		 */
 		public void addCommandStack(CommandStack commandStack,
 				IEditorPart editor) {
-			if (commandStack == null) {
+			if (commandStack == null)
 				return;
-			}
-			if (mapEditorCommandStack.get(commandStack) == editor) {
+
+			if (mapEditorCommandStack.get(commandStack) == editor)
 				return;
-			}
+
 			commandStacks.add(commandStack);
 			commandStack.addCommandStackListener(this);
 			mapEditorCommandStack.put(commandStack, editor);
@@ -509,7 +522,6 @@ public class FacesConfigEditor extends FormEditor implements
 		 *            true or false
 		 */
 		private void setEditorDirty(IEditorPart editor, boolean dirty) {
-
 		}
 
 		/** the list of action ids that are to CommandStack actions */
@@ -618,9 +630,9 @@ public class FacesConfigEditor extends FormEditor implements
 	 * @return the <code>CommandStackListener</code>
 	 */
 	protected MultiPageCommandStackListener getMultiPageCommandStackListener() {
-		if (null == multiPageCommandStackListener) {
+		if (null == multiPageCommandStackListener)
 			multiPageCommandStackListener = new MultiPageCommandStackListener();
-		}
+
 		return multiPageCommandStackListener;
 	}
 
@@ -633,12 +645,15 @@ public class FacesConfigEditor extends FormEditor implements
 		WorkspaceModifyOperation operation = new WorkspaceModifyOperation() {
 			public void execute(IProgressMonitor monitor) {
 				try {
-					// modelResource.save(Collections.EMPTY_MAP);
-					facesConfigAtrifactEdit.getDeploymentDescriptorResource()
-							.save(Collections.EMPTY_MAP);
-					IFile file = ((IFileEditorInput) getEditorInput())
-							.getFile();
-					pageflowPage.doSave(file, monitor);
+					if (isWebProject) {
+						// modelResource.save(Collections.EMPTY_MAP);
+						facesConfigAtrifactEdit
+								.getDeploymentDescriptorResource().save(
+										Collections.EMPTY_MAP);
+						IFile file = ((IFileEditorInput) getEditorInput())
+								.getFile();
+						pageflowPage.doSave(file, monitor);
+					}
 					sourcePage.doSave(monitor);
 					getMultiPageCommandStackListener().markSaveLocations();
 				} catch (Exception e) {
@@ -747,7 +762,7 @@ public class FacesConfigEditor extends FormEditor implements
 	 * @return - the <code>DelegatingZoomManager</code>
 	 */
 	protected DelegatingZoomManager getDelegatingZoomManager() {
-		if (!isValidInput(getEditorInput())) {
+		if (!isValidInput(getEditorInput()) || !isWebProject) {
 			return null;
 		}
 		if (null == delegatingZoomManager) {
@@ -969,7 +984,7 @@ public class FacesConfigEditor extends FormEditor implements
 	/**
 	 * get the project of the faces config file that the editor is working on.
 	 * 
-	 * @return
+	 * @return IProject
 	 */
 	public IProject getProject() {
 		if (currentProject == null) {
@@ -1000,7 +1015,6 @@ public class FacesConfigEditor extends FormEditor implements
 
 	public void addSelectionChangedListener(ISelectionChangedListener listener) {
 		selectionChangedListeners.add(listener);
-
 	}
 
 	public ISelection getSelection() {
@@ -1047,7 +1061,7 @@ public class FacesConfigEditor extends FormEditor implements
 				.openQuestion(
 						getSite().getShell(),
 						"File Conflict",
-						" There are unsaved changes that conflict with changes made outside the editor.  Do you wish to discard this editor's changes?");
+						"There are unsaved changes that conflict with changes made outside the editor.  Do you wish to discard this editor's changes?");
 	}
 
 	/**
@@ -1088,5 +1102,47 @@ public class FacesConfigEditor extends FormEditor implements
 		} else if (pageID.equals(OthersPage.PAGE_ID)) {
 			setActivePage(othersPageID);
 		}
+	}
+
+	private boolean matches(IEditorInput input) {
+		final IResource file = (IResource) input.getAdapter(IResource.class);
+		boolean hasWebFacet = false;
+		boolean hasJSFFacet = false;
+
+		if (file != null) {
+			final IProject project = file.getProject();
+
+			if (project != null) {
+				try {
+					final IFacetedProject facetedProject = ProjectFacetsManager
+							.create(project);
+
+					if (facetedProject != null) {
+						final Set facets = facetedProject.getProjectFacets();
+
+						for (final Iterator it = facets.iterator(); it
+								.hasNext();) {
+							final IProjectFacetVersion version = (IProjectFacetVersion) it
+									.next();
+
+							IProjectFacet facet = version.getProjectFacet();
+							if ("jst.jsf".equals(facet.getId())) {
+								hasJSFFacet = true;
+							} else if ("jst.web".equals(facet.getId())) {
+								hasWebFacet = true;
+							}
+						}
+					}
+				} catch (CoreException ex) {
+					EditorPlugin.getDefault().getLog().log(
+							new Status(IStatus.ERROR, EditorPlugin
+									.getPluginId(), IStatus.OK,
+									ex.getMessage() == null ? "" : ex
+											.getMessage(), ex));
+				}
+			}
+		}
+
+		return hasWebFacet && hasJSFFacet;
 	}
 }
