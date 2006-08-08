@@ -64,6 +64,8 @@ public class Messages extends NLS {
 
 	public static String JSFLibraryConfigControl_NewImplementationLibrary;
 
+	public static String JSFLibraryConfigControl_NullProject;
+
 	public static String JSFLibraryConfigControl_Remove;
 
 	public static String JSFLibraryConfigControl_RemoveAll;

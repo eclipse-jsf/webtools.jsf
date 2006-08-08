@@ -17,9 +17,7 @@ import java.util.List;
 import java.util.Vector;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IResourceChangeEvent;
-import org.eclipse.core.resources.IResourceChangeListener;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.CheckStateChangedEvent;
 import org.eclipse.jface.viewers.CheckboxTableViewer;
@@ -101,16 +99,27 @@ public class JSFLibraryConfigControl extends Composite {
 	 * Create the composite
 	 * @param parent
 	 * @param style
-	 * @param IProject
 	 */	
-	public JSFLibraryConfigControl(Composite parent, int style, IProject fProject) {
-		super(parent, style);	
-				
-		this.provider = new JSFLibraryConfigModelAdapter(fProject);
-		
-		initControls();
+	public JSFLibraryConfigControl(Composite parent, int style) {
+		super(parent, style);
+	
+		createControls();
 	}	
-
+	
+	/**
+	 * To initialize control valaues from a model instanciated w/ a project.
+	 * 
+	 * @param project
+	 */
+	public void initControlsValues(IProject project) {
+		if (project != null) {
+			provider = new JSFLibraryConfigModelAdapter(project);		
+			initializeControlValues();
+		} else {
+			JSFUiPlugin.log(IStatus.ERROR, Messages.JSFLibraryConfigControl_NullProject);
+		}
+	}	
+	
 	/**
 	 * Return the working model.
 	 * 
@@ -201,9 +210,8 @@ public class JSFLibraryConfigControl extends Composite {
 		}
 		return selJSFImpl;		
 	}
-	
-	private void initControls() {
-		
+
+	private void createControls() {
 		setRedraw(true);
 		final GridLayout gridLayout = new GridLayout();
 		gridLayout.numColumns = 4;
@@ -409,7 +417,6 @@ public class JSFLibraryConfigControl extends Composite {
 			}
 		});
 		
-		//initializeControlValues();
 		btnAdd.addMouseListener(new MouseAdapter() {
 			public void mouseDown(MouseEvent e) {
 				resetComponentLibSelection((StructuredSelection)tvCompLib.getSelection(), 
@@ -436,8 +443,7 @@ public class JSFLibraryConfigControl extends Composite {
 				resetCompontLibSelectionAll(tvCompLib, ctvSelCompLib, false);
 			}
 		});
-		
-		initializeControlValues();
+			
 	}
 
 	/*
@@ -722,5 +728,5 @@ public class JSFLibraryConfigControl extends Composite {
 		public void removeListener(ILabelProviderListener listener) {
 		}
 	}
-
+	
 }

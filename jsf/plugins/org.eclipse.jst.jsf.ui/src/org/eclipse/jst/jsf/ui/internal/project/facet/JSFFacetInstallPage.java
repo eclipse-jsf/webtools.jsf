@@ -80,7 +80,7 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements IJSFFace
 	private JSFLibraryConfigControl jsfLibCfgComp = null;
 	private String projectName = null;
 	private Composite composite = null;	
-	
+		
 	/**
 	 * Zero argument constructor
 	 */
@@ -107,10 +107,9 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements IJSFFace
 		lblJSFImpl.setLayoutData(new GridData(GridData.BEGINNING, GridData.BEGINNING, false, false));
 		lblJSFImpl.setText(Messages.JSFFacetInstallPage_JSFLibraryLabel0);
 		
-		((GridLayout)composite.getLayout()).marginLeft = 0;		
-		IProject project = getProjectHandle();
-		jsfLibCfgComp = new JSFLibraryConfigControl(composite, SWT.NONE, project);
-				
+		((GridLayout)composite.getLayout()).marginLeft = 0;
+		
+		jsfLibCfgComp = new JSFLibraryConfigControl(composite, SWT.NONE);
 		jsfLibCfgComp.addOkClickedListener(new IJSFImplLibraryCreationListener() {
 			public void okClicked(JSFImplLibraryCreationEvent event) {
 				if (((JSFImplLibraryCreationEvent) event).isLibraryCreated()) {
@@ -394,7 +393,7 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements IJSFFace
 	public void propertyChanged(DataModelEvent event) {
 		if (webAppDataModel != null){
 			String propertyName = event.getPropertyName();
-			if (propertyName.equals(IJ2EEModuleFacetInstallDataModelProperties.CONFIG_FOLDER)){
+			if (propertyName.equals(IJ2EEModuleFacetInstallDataModelProperties.CONFIG_FOLDER)) {
 				model.setStringProperty(WEBCONTENT_DIR, event.getProperty().toString());
 			}
 		}
@@ -406,14 +405,26 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements IJSFFace
 			webAppDataModel.removeListener(this);
 		super.dispose();
 	}
+	
 	protected void restoreDefaultSettings() {
 		initializeValues();
 	}
 	
+	/**
+	 * (non-Javadoc)
+	 * @see org.eclipse.wst.common.frameworks.internal.datamodel.ui.DataModelWizardPage#updateControls()
+	 */
+	protected void updateControls() {
+		projectName = model.getStringProperty(IJ2EEModuleFacetInstallDataModelProperties.FACET_PROJECT_NAME);
+		IProject project = getProjectHandle();
+		jsfLibCfgComp.initControlsValues(project);
+	}		
+	
 	private IProject getProjectHandle() {
-		if (projectName != null) {
+		if (projectName != null && projectName.length() > 0) {
 			return ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
 		}
 		return null;
-	}	
+	}
+		
 }

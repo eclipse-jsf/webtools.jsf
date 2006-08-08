@@ -49,7 +49,7 @@ public class JSFLibraryPropertyPage extends PropertyPage {
 	 */
 	public void setElement(IAdaptable element) {
 		super.setElement(element);
-		project= (IProject) element.getAdapter(IResource.class);
+		project = (IProject) element.getAdapter(IResource.class);
 	}	
 	
 	/* (non-Javadoc)
@@ -81,7 +81,8 @@ public class JSFLibraryPropertyPage extends PropertyPage {
 	}
 
 	private Control createForJSFProject(Composite parent) {		 
-		jsfLibCfgControl = new JSFLibraryConfigControl(parent, SWT.NULL, project);
+		jsfLibCfgControl = new JSFLibraryConfigControl(parent, SWT.NULL);
+		jsfLibCfgControl.initControlsValues(project);
 				
 		jsfLibCfgControl.addOkClickedListener(new IJSFImplLibraryCreationListener() {			
 			public void okClicked(JSFImplLibraryCreationEvent event) {
