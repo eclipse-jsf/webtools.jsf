@@ -8,5 +8,9 @@ Bundle-Localization: plugin
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.jst.jsf.contentmodel.annotations,
  org.eclipse.jst.jsf.metadataprocessors,
- org.eclipse.jst.jsf.metadata.tests
+ org.eclipse.jst.jsf.metadata.tests,
+ org.eclipse.jst.jsf.context,
+ org.eclipse.jst.jsf.context.resolver,
+ org.eclipse.jst.jsf.context.resolver.structureddocument,
+ org.eclipse.jst.jsf.context.structureddocument
 Eclipse-LazyStart: true
