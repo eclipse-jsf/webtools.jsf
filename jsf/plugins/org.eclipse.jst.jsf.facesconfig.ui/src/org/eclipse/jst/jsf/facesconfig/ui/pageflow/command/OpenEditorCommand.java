@@ -27,10 +27,12 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PageflowNodeImpl;
 import org.eclipse.jst.jsf.facesconfig.ui.util.WebrootUtil;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.IEditorDescriptor;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
+import org.eclipse.ui.part.FileEditorInput;
 
 /**
  * 
@@ -98,9 +100,7 @@ public class OpenEditorCommand extends Command {
 			String resourceName = WebrootUtil.getProjectPath((EObject) part
 					.getModel(), pagePath);
 			Path resourcePath = new Path(resourceName);
-			if (resourcePath.getFileExtension() != null
-					&& WebrootUtil.isValidWebFile(resourcePath)) {
-
+			if (resourcePath.getFileExtension() != null) {
 				final IFile file = (IFile) workspaceRoot
 						.findMember(resourcePath);
 				openExistingJSFFile(file);
@@ -140,10 +140,14 @@ public class OpenEditorCommand extends Command {
 					.getActiveWorkbenchWindow().getShell().getDisplay();
 			display.asyncExec(new Runnable() {
 				public void run() {
-					IWorkbenchPage page = PlatformUI.getWorkbench()
-							.getActiveWorkbenchWindow().getActivePage();
+					IDE.setDefaultEditor(file, null);
 					try {
-						IDE.openEditor(page, file, true);
+						IWorkbenchPage page = PlatformUI.getWorkbench()
+								.getActiveWorkbenchWindow().getActivePage();
+						IEditorDescriptor desc = IDE.getEditorDescriptor(file);
+						page.openEditor(new FileEditorInput(file),
+								desc.getId(), true, IWorkbenchPage.MATCH_INPUT
+										| IWorkbenchPage.MATCH_ID);
 					} catch (PartInitException e) {
 						// Pageflow.PageflowEditor.Error.CanNotOpenEditor4JSF =
 						// The jsf file can not be opened in the editor.

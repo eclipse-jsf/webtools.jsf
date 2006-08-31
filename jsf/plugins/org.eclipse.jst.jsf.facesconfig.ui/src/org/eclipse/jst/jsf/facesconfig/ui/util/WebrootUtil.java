@@ -49,12 +49,10 @@ public class WebrootUtil extends
 			IPath path = new Path(strPath);
 			// jsp file
 			if (path.getFileExtension() != null) {
-				if (isValidWebFile(path)) {
-					IPath webContentPath = getWebContentPath(project);
-					if (webContentPath != null)
-						strProjectPath = webContentPath.toString() + strPath;
+				IPath webContentPath = getWebContentPath(project);
+				if (webContentPath != null)
+					strProjectPath = webContentPath.toString() + strPath;
 
-				}
 			} else
 			// jsp folder
 			{
