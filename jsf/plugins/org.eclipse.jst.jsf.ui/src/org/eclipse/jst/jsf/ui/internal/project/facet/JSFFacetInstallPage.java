@@ -11,11 +11,9 @@
 package org.eclipse.jst.jsf.ui.internal.project.facet;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResourceChangeEvent;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jface.dialogs.DialogSettings;
@@ -24,6 +22,9 @@ import org.eclipse.jface.dialogs.IInputValidator;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.window.Window;
 import org.eclipse.jst.j2ee.project.facet.IJ2EEModuleFacetInstallDataModelProperties;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfiglModelSource;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfigDialogSettingData;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFProjectLibraryReference;
 import org.eclipse.jst.jsf.core.internal.project.facet.IJSFFacetInstallDataModelProperties;
 import org.eclipse.jst.jsf.ui.internal.JSFUiPlugin;
 import org.eclipse.jst.jsf.ui.internal.Messages;
@@ -76,9 +77,13 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements IJSFFace
 	private static final String SETTINGS_URL_MAPPINGS = "urlMappings"; //$NON-NLS-1$
 	private static final String SETTINGS_URL_PATTERN = "pattern"; //$NON-NLS-1$
 	private static final String SETTINGS_DEPLOY_IMPL = "deployImplementation"; //$NON-NLS-1$
+	private static final String SETTINGS_COMPLIB = "selectedComponent"; //$NON-NLS-1$
+	private static final String SETTINGS_COMPLIB_SELECT_DEPLOY = "selectdeploycomplib"; //$NON-NLS-1$
 
+	private static final String SEPARATOR =":";	//$NON-NLS-1$
+	
 	private JSFLibraryConfigControl jsfLibCfgComp = null;
-	private String projectName = null;
+	//private String projectName = null;
 	private Composite composite = null;	
 		
 	/**
@@ -212,6 +217,8 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements IJSFFace
 	private void initializeValues() {
 		IDialogSettings root = dialogSettings.getSection(SETTINGS_ROOT);
 
+		initJSFCfgCtrlValues(root);
+		
 		String conf = null;
 		if (root != null)
 			conf = root.get(SETTINGS_CONFIG);
@@ -231,6 +238,31 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements IJSFFace
 		loadURLMappingPatterns(root);
 	}
 
+	private void initJSFCfgCtrlValues(IDialogSettings root) {
+		String deployImpl = null;
+		if (root != null) {
+			deployImpl = root.get(SETTINGS_DEPLOY_IMPL);
+		}
+		if (deployImpl == null || deployImpl.equals("")) { //$NON-NLS-1$
+			deployImpl = ((Boolean)model.getDefaultProperty(IJSFFacetInstallDataModelProperties.DEPLOY_IMPLEMENTATION)).toString();
+		}
+	
+		IDialogSettings complibs = null;		
+		if (root != null) {
+			complibs = root.getSection(SETTINGS_COMPLIB);
+		}
+		
+		String[] selection = null;
+		if (complibs != null) {
+			selection = (String[])complibs.getArray(SETTINGS_COMPLIB_SELECT_DEPLOY);
+		}
+
+		JSFLibraryConfiglModelSource source = new JSFLibraryConfigDialogSettingData(
+				Boolean.valueOf(deployImpl).booleanValue(), 
+				selection);
+		jsfLibCfgComp.loadControlValuesFromModel(source);
+	}
+	
 	private void saveSettings() {
 		DialogSettings root = new DialogSettings(SETTINGS_ROOT);
 		dialogSettings.addSection(root);
@@ -241,6 +273,10 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements IJSFFace
 		DialogSettings mappings = new DialogSettings(SETTINGS_URL_MAPPINGS);
 		root.addSection(mappings);
 		mappings.put(SETTINGS_URL_PATTERN, getJSFPatterns());
+		
+		DialogSettings complibs = new DialogSettings(SETTINGS_COMPLIB);
+		root.addSection(complibs);
+		complibs.put(SETTINGS_COMPLIB_SELECT_DEPLOY, getCompLibSelections());
 	}
 
 	private boolean getDeployJSFImpl() {
@@ -262,6 +298,27 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements IJSFFace
 		return lstJSFServletURLPatterns.getItems();
 	}
 
+	private String[] getCompLibSelections() {
+		/*
+		 * Iterate thru the selected component libraries 
+		 * and return selected component libraries and their deployment flags 
+		 * in a string array.
+		 */
+		JSFProjectLibraryReference complib = null;
+		String str = null;
+		ArrayList al = new ArrayList();
+		
+		java.util.List list = jsfLibCfgComp.getSelectedJSFLibComponents();
+		Iterator it = list.iterator();
+		while(it.hasNext()) {
+			complib = (JSFProjectLibraryReference) it.next();
+			str = complib.getID() + SEPARATOR + complib.isCheckedToBeDeployed();
+			al.add(str);
+		}
+		
+		return (String[]) al.toArray(new String[al.size()]);
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -285,8 +342,8 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements IJSFFace
 		saveSettings(); //convenient place for this.  don't want to save if user cancelled.
 		//do nothing else now.  being handled by synchHelper
 //		config.setProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION, getJSFImpl());
-//		config.setStringProperty(IJSFFacetInstallDataModelProperties.CONFIG_PATH, getJSFConfig());
-//		config.setStringProperty(IJSFFacetInstallDataModelProperties.SERVLET_NAME, getJSFServletName());
+		model.setStringProperty(IJSFFacetInstallDataModelProperties.CONFIG_PATH, getJSFConfig());
+		model.setStringProperty(IJSFFacetInstallDataModelProperties.SERVLET_NAME, getJSFServletName());
 //		config.setProperty(IJSFFacetInstallDataModelProperties.SERVLET_URL_PATTERNS, getJSFPatterns());
 		
 		java.util.List implLibs = new ArrayList(); 
@@ -300,8 +357,8 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements IJSFFace
 //		119330 - enhancement request for ComboViewer support.  Manually update model for now
 //		addJSFImplComboListeners();
 //		synchHelper.synchComboViewer(cboJSFImplViewer, IMPLEMENTATION, null);
-		synchHelper.synchText(txtJSFConfig, CONFIG_PATH, null);
-		synchHelper.synchText(txtJSFServletName, SERVLET_NAME, null);
+//		synchHelper.synchText(txtJSFConfig, CONFIG_PATH, null);
+//		synchHelper.synchText(txtJSFServletName, SERVLET_NAME, null);
 //		synchHelper.synchCheckbox(chkDeployImpl, DEPLOY_IMPLEMENTATION, null);
 //		Until 119321 is fixed, need to comment out below and handle model updates 'manually'.  
 //		This is being done on Add and Remove, currently
@@ -316,7 +373,7 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements IJSFFace
 
 		return null;
 	}
-
+	
 	private void loadURLMappingPatterns(IDialogSettings root) {
 		lstJSFServletURLPatterns.removeAll();
 		IDialogSettings mappings = null;
@@ -361,8 +418,6 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements IJSFFace
 	}
 
 	public void setWizardContext(IWizardContext context) {
-		projectName = context.getProjectName();
-		
 		//hook into web datamodel if new project wizard.
 		Iterator it = context.getSelectedProjectFacets().iterator();
 		IProjectFacetVersion webFacetVersion = null;
@@ -409,22 +464,5 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements IJSFFace
 	protected void restoreDefaultSettings() {
 		initializeValues();
 	}
-	
-	/**
-	 * (non-Javadoc)
-	 * @see org.eclipse.wst.common.frameworks.internal.datamodel.ui.DataModelWizardPage#updateControls()
-	 */
-	protected void updateControls() {
-		projectName = model.getStringProperty(IJ2EEModuleFacetInstallDataModelProperties.FACET_PROJECT_NAME);
-		IProject project = getProjectHandle();
-		jsfLibCfgComp.initControlsValues(project);
-	}		
-	
-	private IProject getProjectHandle() {
-		if (projectName != null && projectName.length() > 0) {
-			return ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
-		}
-		return null;
-	}
-		
+			
 }

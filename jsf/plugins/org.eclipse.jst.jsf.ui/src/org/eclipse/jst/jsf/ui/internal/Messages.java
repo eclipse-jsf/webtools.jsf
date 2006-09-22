@@ -82,6 +82,10 @@ public class Messages extends NLS {
 	public static String JSFLibraryContainerWizardPage_Add;
 	public static String JSFLibraryContainerWizardPage_ErrorInitializing;
 
+	public static String JSFLibraryPropertyPage_No_JSF_Facet_Installed;
+
+	public static String JSFLibraryPropertyPage_No_JSF_Implementation_Lib_Selected;
+
 	public static String JSFLibraryWizard_DESCRIPTION;
 	public static String JSFLibraryWizard_IMPLS_ONLY_DESC;
 	public static String JSFLibraryWizard_CreateImplementation;

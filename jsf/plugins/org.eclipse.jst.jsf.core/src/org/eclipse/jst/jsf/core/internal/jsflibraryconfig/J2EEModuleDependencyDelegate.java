@@ -16,6 +16,8 @@ import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 import java.util.jar.Manifest;
 
 import org.eclipse.core.resources.IContainer;
@@ -28,6 +30,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
@@ -54,18 +57,18 @@ import org.eclipse.wst.common.componentcore.resources.IVirtualReference;
 import org.eclipse.wst.common.frameworks.internal.ui.WTPUIPlugin;
 
 /**
- * The <b>J2EEModuleDependencyDelegate</b> provide services to update 
- * J2EE module dependencies and java build path if JSF libraries 
- * are referenced in a web application. 
+ * <b>J2EEModuleDependencyDelegate</b> provides a service to update project dependencies.
+ * It includes updating web library dependencies and java build path for web modules. 
  * 
  * @author Justin Chen - Oracle
  */
 public class J2EEModuleDependencyDelegate {	
-	private IProject project = null;
-	private ClasspathModel model = null;
+	final private IProject project;
+	final private ClasspathModel model;
 
 	/**
-	 * @param project
+	 * Constructor
+	 * @param project IProject instance on which to update dependencies.
 	 */
 	public J2EEModuleDependencyDelegate(IProject project) {
 		this.project = project;
@@ -73,49 +76,90 @@ public class J2EEModuleDependencyDelegate {
 	}	
 	
 	/**
-	 * Add given <b>jsfLibrary</b> as project dependency.
-	 * If <b>toDeploy</b> flag is true, the JSF library JARs will be 
-	 * added as J2EE module dependencies.  
+	 * To update project dependencies including Java buildpath and 
+	 * web library dependencies from JSFLibraryConfigModel.  
+	 * 
+	 * @param model JSFLibraryConfigModel  instance with information to update project dependencies
+	 * @param monitor IProgressMonitor  progress monitor passed.  New instance is creatsed if a null is given  
+	 */
+	public void updateProjectDependencies(final JSFLibraryConfigModel model, 
+			IProgressMonitor monitor) {
+		if (monitor == null) {		
+			monitor = new NullProgressMonitor();
+		}
+		// update implementation library
+		JSFProjectLibraryReference newImplLib = model.getCurrentJSFImplementationLibrarySelection();
+		JSFProjectLibraryReference savedImplLib = model.getSavedJSFImplementationLibrary();
+		if (savedImplLib != null) {
+			this.removeProjectDependency(savedImplLib.getLibrary(), monitor);
+			this.addProjectDependency(newImplLib.getLibrary(), newImplLib.isCheckedToBeDeployed(), monitor);
+		} else {
+			this.addProjectDependency(newImplLib.getLibrary(), newImplLib.isCheckedToBeDeployed(), monitor);
+		}
+
+		 // update component libraries
+		 // Remove first and then add dependencies from selected libraries currently. 
+		JSFProjectLibraryReference compLibDctr = null;
+		List savedCompLibs = model.getSavedJSFComponentLibraries();
+		Iterator it = savedCompLibs.iterator();
+		while (it.hasNext()) {
+			compLibDctr = (JSFProjectLibraryReference) it.next();
+			this.removeProjectDependency(compLibDctr.getLibrary(), monitor);
+		}
+
+		List selComponentLibs = model.getCurrentJSFComponentLibrarySelection();
+		it = selComponentLibs.iterator();
+		while (it.hasNext()) {
+			compLibDctr = (JSFProjectLibraryReference) it.next();
+			if (compLibDctr.isSelected()) {
+				this.addProjectDependency(compLibDctr.getLibrary(), 
+						compLibDctr.isCheckedToBeDeployed(), 
+						monitor);
+			}
+		}		
+	}	
+	
+	/**
+	 * Add the given jsfLibrary instance as project dependency.
+	 * If toDeploy is true, the JARs from JSF library is added as web library dependencies.  
 	 * Otherwise, JARs are added in project build path only.
 	 * 
-	 * @param jsfLibrary
-	 * @param toDeploy
-	 * @param monitor
+	 * @param jsfLibrary JSFLibrary  instance to be added as project dependencies.
+	 * @param toDeploy boolean  add as web library project for a web module if true.  Otheriwse, add to build path only 
+	 * @param monitor IProgressMOnitor 
 	 */
-	public void addProjectDependency(JSFLibrary jsfLibrary, boolean toDeploy, IProgressMonitor monitor) {
+	private void addProjectDependency(final JSFLibrary jsfLibrary, 
+			final boolean toDeploy, 
+			final IProgressMonitor monitor) {
 		IPath[] jarPaths = JSFUtils.getJARPathforJSFLibwFilterMissingJars(jsfLibrary, true);
-		this.updateProjectDependency(jarPaths, toDeploy, monitor);		
+		updateProjectDependency(jarPaths, toDeploy, monitor);		
 	}	
 		
 	/**
-	 * Remove given <b>jsfLibrary</b> from project dependency.
+	 * Remove given <b>jsfLibrary</b> from project dependency, 
+	 * including web library dependencies and project build path.
 	 * 
-	 * @param jsfLibrary
-	 * @param monitor
+	 * @param jsfLibrary JSFLibrary  instance to be removed from project dependencies.
+	 * @param monitor 
 	 */
-	public void removeProjectDependency(JSFLibrary jsfLibrary, IProgressMonitor monitor) {
+	private void removeProjectDependency(final JSFLibrary jsfLibrary, final IProgressMonitor monitor) {
 		IPath[] elements = JSFUtils.getJARPathforJSFLib(jsfLibrary, false);
-		this.removeProjectDependency_(elements, monitor);
+		removeProjectDependency_(elements, monitor);
 	}
 	
 	/**
-	 * @param jsfLibrary
-	 * @param monitor
+	 * To update project dependencies by the path collection of JARs.
 	 * 
-	public void addLibraryToBuildPath(JSFLibraryDecorator jsfLibrary, IProgressMonitor monitor) {
-		IPath[] elements = JSFUtils.getJARPathforJSFLib(jsfLibrary.getLibrary());
-		this.updateProjectDependency(elements, false, monitor);
-	}
-	*/
-	
-	/**
-	 * To update J2EE Module dependencies from given collection of JARs and deployment flag.
+	 * All JARs are added into project build path.   
+	 * However, JARs are added as web library dependencies only if deployme is true.  
 	 * 
-	 * @param elems
-	 * @param deployme
-	 * @param monitor
+	 * @param elems IPath[] 
+	 * @param deployme boolean
+	 * @param monitor IProgressMonitor
 	 */
-	private void updateProjectDependency(IPath[] elems, boolean deployme, IProgressMonitor monitor) {
+	private void updateProjectDependency(final IPath[] elems, 
+			final boolean deployme, 
+			final IProgressMonitor monitor) {
 		
 		ClassPathSelection selection = null;
 		/**
@@ -130,28 +174,7 @@ public class J2EEModuleDependencyDelegate {
 			
 			// Added as J2EE Module Dependency if need to be deployed
 			if (deployme) {
-				/* fix for bug# 144006 - wrap in WorkspaceJob
-				ArrayList vlist = new ArrayList(Collections.EMPTY_LIST);
-				IVirtualReference[] oldrefs = model.getComponent().getReferences();
-				for (int j = 0; j < oldrefs.length; j++) {
-					IVirtualReference ref = oldrefs[j];
-					vlist.add(ref);
-				}		
-				
-				IVirtualReference ref = ComponentCore.createReference( 
-						model.getComponent(), 
-						archive, 
-						new Path("/WEB-INF/lib") ); //$NON-NLS-1$
-				addReferences(vlist, ref);
-				
-				IVirtualReference[] refs = new IVirtualReference[vlist.size()];
-				for (int j = 0; j < vlist.size(); j++) {
-					IVirtualReference tmpref = (IVirtualReference) vlist.get(j);
-					refs[j] = tmpref;
-				}
-
-				model.getComponent().setReferences(refs);
-				*/
+				// fix for bug# 144006 - wrap in WorkspaceJob
 				SetReferencesJob setRefsJob = new SetReferencesJob(project, model.getComponent(), archive, true);
 				setRefsJob.schedule();
 			} else {
@@ -180,40 +203,18 @@ public class J2EEModuleDependencyDelegate {
 	}
 
 	/**
-	 * To remove given collection of JARs from project's J2EE Module Dependencies.
+	 * To remove project dependencies from the path collection of JARs.
 	 * 
-	 * @param elems
-	 * @param monitor
+	 * @param elems IPath[] elems
+	 * @param monitor IProgressMonitor
 	 */
-	private void removeProjectDependency_(IPath[] elems, IProgressMonitor monitor) {		
+	private void removeProjectDependency_(final IPath[] elems, final IProgressMonitor monitor) {		
 		
 		ClassPathSelection selection = null;
 		for (int i= 0; i < elems.length; i++) {			
 			String type = VirtualArchiveComponent.LIBARCHIVETYPE + IPath.SEPARATOR;
 			IVirtualComponent archive = ComponentCore.createArchiveComponent( model.getComponent().getProject(), type + elems[i].toString());
-			/* fix for bug# 144006 - wrap in WorkspaceJob
-			ArrayList vlist = new ArrayList(Collections.EMPTY_LIST);
-			IVirtualReference[] oldrefs = model.getComponent().getReferences();
-			for (int j = 0; j < oldrefs.length; j++) {
-				IVirtualReference ref = oldrefs[j];
-				vlist.add(ref);
-			}		
-			
-			// Remove the reference
-			IVirtualReference ref = ComponentCore.createReference( 
-					model.getComponent(), 
-					archive, 
-					new Path("/WEB-INF/lib") ); //$NON-NLS-1$
-			removeReference(vlist, ref);
-			
-			IVirtualReference[] refs = new IVirtualReference[vlist.size()];
-			for (int j = 0; j < vlist.size(); j++) {
-				IVirtualReference tmpref = (IVirtualReference) vlist.get(j);
-				refs[j] = tmpref;
-			}
-
-			model.getComponent().setReferences(refs);
-			*/
+			// fix for bug# 144006 - wrap in WorkspaceJob
 			SetReferencesJob setRefsJob = new SetReferencesJob(project, model.getComponent(), archive, false);
 			setRefsJob.schedule();
 
@@ -249,11 +250,10 @@ public class J2EEModuleDependencyDelegate {
 	}
 
 	/**
-	 * Check if archive component already exists
-	 * But, how to tell if two references are equal?
+	 * To Do: check if archive component already exists
 	 * 
-	 * @param vlist
-	 * @param ref
+	 * @param vlist ArrayList
+	 * @param ref IVirtualReference
 	 */
 	private void addReferences(ArrayList vlist, IVirtualReference ref) {		
 		IVirtualReference elem = null;
@@ -306,8 +306,9 @@ public class J2EEModuleDependencyDelegate {
 	}    
 
 	private void updateModelManifest(ClasspathModel model) {
-	    if (JemProjectUtilities.isBinaryProject(project) || model.getAvailableEARComponents().length == 0)
+	    if (JemProjectUtilities.isBinaryProject(project) || model.getAvailableEARComponents().length == 0) {
 	        return;
+	    }
 	    
 	    IContainer root = null;
 	    IFile manifestFile = null;
@@ -319,8 +320,9 @@ public class J2EEModuleDependencyDelegate {
 	    if (root != null) {
 	        manifestFile = root.getFile(new Path(J2EEConstants.MANIFEST_URI));
 	    }
-	    if (manifestFile == null || !manifestFile.exists())
+	    if (manifestFile == null || !manifestFile.exists()) {
 	        return;
+	    }
 	
 	    InputStream in = null;
 	    try {
@@ -402,7 +404,7 @@ public class J2EEModuleDependencyDelegate {
 						5);
 				if (parentComponent != null) {
 					//copy from array to list
-					ArrayList refList = new ArrayList(Collections.EMPTY_LIST);
+					ArrayList refList = new ArrayList();
 					IVirtualReference[] refArray = parentComponent.getReferences();
 					for (int i = 0; i < refArray.length; i++) {
 						refList.add(refArray[i]);

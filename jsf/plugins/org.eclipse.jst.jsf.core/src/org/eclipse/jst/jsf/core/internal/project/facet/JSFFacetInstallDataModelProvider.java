@@ -12,7 +12,6 @@ package org.eclipse.jst.jsf.core.internal.project.facet;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -24,7 +23,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.jst.j2ee.web.componentcore.util.WebArtifactEdit;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.Messages;
-import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryDecorator;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFProjectLibraryReference;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.wst.common.componentcore.datamodel.FacetInstallDataModelProvider;
@@ -79,7 +78,7 @@ public class JSFFacetInstallDataModelProvider extends
 		} else if (propertyName.equals(WEBCONTENT_DIR)){
 			return "WebContent";  //not sure I need this
 		} else if (propertyName.equals(COMPONENT_LIBRARIES)) {
-			return getDefaultJSFComponentLibraries();
+			return new ArrayList(0);
 		} else if (propertyName.equals(IMPLEMENTATION_LIBRARIES)) {
 			return getDefaultJSFImplementationLibraries();
 		} else if (propertyName.equals(DEFAULT_IMPLEMENTATION_LIBRARY)) {
@@ -151,7 +150,6 @@ public class JSFFacetInstallDataModelProvider extends
 //			//skip validation here
 //			return OK_STATUS;
 //		}
-		
 		if (passedPath.getDevice() != null) {
 			errorMessage = NLS.bind(
 					Messages.JSFFacetInstallDataModelProvider_ValidateConfigFileRelative1,
@@ -189,7 +187,7 @@ public class JSFFacetInstallDataModelProvider extends
 	private IPath getWebContentFolder() {
 		//One can get here 2 ways:
 		//if web app exists and user is adding a facet, or
-		// if creating a new web app.   
+		// if creating a new web app.
 		if (webContentPath != null)
 			return webContentPath;
 		
@@ -215,38 +213,21 @@ public class JSFFacetInstallDataModelProvider extends
 		}
 
 	}
-
-	// Is this called at all?
-	private List getDefaultJSFComponentLibraries() {
-		List list = new ArrayList(Collections.EMPTY_LIST);		
-		JSFLibraryDecorator prjJSFLib = null;
-		JSFLibrary jsfLib = null;
-		if (JSFCorePlugin.getDefault().getJSFLibraryRegistry() != null) {
-			Iterator it = JSFCorePlugin.getDefault().getJSFLibraryRegistry().getNonImplJSFLibraries().iterator();
-			while (it.hasNext()) {
-				jsfLib = (JSFLibrary)it.next(); 
-				prjJSFLib = new JSFLibraryDecorator(jsfLib, true, true);
-				list.add(prjJSFLib);
-			}
-		}
-		return list;
-	}	
-
+	
 	private List getDefaultJSFImplementationLibraries() {
-		List list = new ArrayList(Collections.EMPTY_LIST);
-		
+		List list = new ArrayList();
 		if (JSFCorePlugin.getDefault().getJSFLibraryRegistry() != null) {
 			JSFLibrary jsfLib = JSFCorePlugin.getDefault().getJSFLibraryRegistry().getDefaultImplementation();
-			JSFLibraryDecorator prjJSFLib = new JSFLibraryDecorator(jsfLib, true, true);
+			JSFProjectLibraryReference prjJSFLib = new JSFProjectLibraryReference(jsfLib, true, true);
 			list.add(prjJSFLib);			
 		}
 		return list;
 	}	
 	
-	private JSFLibraryDecorator getDefaultImplementationLibrary() {		
+	private JSFProjectLibraryReference getDefaultImplementationLibrary() {		
 		if (JSFCorePlugin.getDefault().getJSFLibraryRegistry() != null) {
 			JSFLibrary jsfLib = JSFCorePlugin.getDefault().getJSFLibraryRegistry().getDefaultImplementation();
-			return new JSFLibraryDecorator(jsfLib, true, true);	
+			return new JSFProjectLibraryReference(jsfLib, true, true);	
 		}
 		return null;	
 	}	

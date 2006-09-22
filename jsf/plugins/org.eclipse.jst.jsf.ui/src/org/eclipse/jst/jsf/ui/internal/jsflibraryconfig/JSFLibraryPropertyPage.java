@@ -14,11 +14,14 @@ import java.util.Iterator;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IResourceChangeEvent;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
-import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfigModelAdapter;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.J2EEModuleDependencyDelegate;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfiglModelSource;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfigProjectData;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfigModel;
+import org.eclipse.jst.jsf.ui.internal.Messages;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
@@ -28,12 +31,11 @@ import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
 import org.eclipse.wst.common.project.facet.core.ProjectFacetsManager;
 
 /**
- * @author Justin Chen - Oracle
+ * @author Justin Chen
  */
 public class JSFLibraryPropertyPage extends PropertyPage {
 	private static String JSF_FACET_ID = "jst.jsf"; //$NON-NLS-1$
 	private JSFLibraryConfigControl jsfLibCfgControl;
-	private JSFLibraryConfigModelAdapter provider;
 	private IProject project;
 		
 	/**
@@ -56,20 +58,25 @@ public class JSFLibraryPropertyPage extends PropertyPage {
 	 * @see org.eclipse.jface.preference.PreferencePage#performOk()
 	 */
 	public boolean performOk() {
-
 		// Do nothing because of invalid settings.
 		if (!validatePage()) {
 			return true;
 		}
 		
-		provider = jsfLibCfgControl.getModelProvider();		
-		provider.updateProjectDependencies();
-		provider.saveData();	// save library configuration data
+		JSFLibraryConfigModel model = jsfLibCfgControl.getWorkingModel();
+		if (model != null) {	
+			J2EEModuleDependencyDelegate dependencyUpdate = new J2EEModuleDependencyDelegate(project);
+			dependencyUpdate.updateProjectDependencies(model, new NullProgressMonitor());			
+			model.saveData(project);
+		} else {
+			// log an error message
+		}
 		
 		return true;
 	}	
 	
-	/* (non-Javadoc)
+	/*
+	 *  (non-Javadoc)
 	 * @see org.eclipse.jface.preference.PreferencePage#createContents(org.eclipse.swt.widgets.Composite)
 	 */
 	protected Control createContents(Composite parent) {		
@@ -80,9 +87,10 @@ public class JSFLibraryPropertyPage extends PropertyPage {
 		//}
 	}
 
-	private Control createForJSFProject(Composite parent) {		 
-		jsfLibCfgControl = new JSFLibraryConfigControl(parent, SWT.NULL);
-		jsfLibCfgControl.initControlsValues(project);
+	private Control createForJSFProject(Composite parent) {
+		JSFLibraryConfiglModelSource model = new JSFLibraryConfigProjectData(project);
+		jsfLibCfgControl = new JSFLibraryConfigControl(parent, SWT.NULL);		
+		jsfLibCfgControl.loadControlValuesFromModel(model);
 				
 		jsfLibCfgControl.addOkClickedListener(new IJSFImplLibraryCreationListener() {			
 			public void okClicked(JSFImplLibraryCreationEvent event) {
@@ -101,10 +109,10 @@ public class JSFLibraryPropertyPage extends PropertyPage {
 	protected boolean validatePage() {
 		if (!isJSFFacetInstalled() || jsfLibCfgControl.getSelectedJSFLibImplementation() == null) {
 			if (!isJSFFacetInstalled()) {
-				JSFLibraryPropertyPage.this.setErrorMessage("JSF Facet not installed.");
+				JSFLibraryPropertyPage.this.setErrorMessage(Messages.JSFLibraryPropertyPage_No_JSF_Facet_Installed);
 			} 
 			if (jsfLibCfgControl.getSelectedJSFLibImplementation() == null) {
-				JSFLibraryPropertyPage.this.setErrorMessage("No JSF implementation library selected.");
+				JSFLibraryPropertyPage.this.setErrorMessage(Messages.JSFLibraryPropertyPage_No_JSF_Implementation_Lib_Selected);
 			}
 			return false;
 		}/* else {
