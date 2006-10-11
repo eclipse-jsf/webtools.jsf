@@ -18,10 +18,10 @@ public class JSFLibraryConfigDialogSettingDataTestCases extends TestCase {
 		
 		JSFCoreUtilHelper.createJSFLibraryRegistry();
 		libReg = JSFCoreUtilHelper.getJSFLibraryRegistryFromJSFCorePlugin();
-		// There is at least one component library in the registry
-		compLibs = new String[1];
+		
+		compLibs = new String[1];  // test data has one component library
 		JSFLibrary lib = (JSFLibrary)libReg.getNonImplJSFLibraries().get(0);
-		compLibs[0] = lib.getID() + ":" + "true";
+		compLibs[0] = lib.getID() + ":" + "true";	// deployed
 	}
 
 	protected void tearDown() throws Exception {
@@ -46,7 +46,6 @@ public class JSFLibraryConfigDialogSettingDataTestCases extends TestCase {
 	public void testGetJSFComponentLibraries() {
 		JSFLibraryConfigDialogSettingData data = new JSFLibraryConfigDialogSettingData(bDeployImplLib, compLibs);
 		Assert.assertNotNull(data);
-		
 	}
 
 }

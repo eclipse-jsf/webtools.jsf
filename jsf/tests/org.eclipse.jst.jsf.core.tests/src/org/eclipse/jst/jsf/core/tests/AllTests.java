@@ -15,6 +15,8 @@ import junit.framework.TestSuite;
 
 import org.eclipse.jst.jsf.core.tests.jsflibraryconfig.J2EEModuleDependencyDelegateTestCases;
 import org.eclipse.jst.jsf.core.tests.jsflibraryconfig.JSFLibraryConfigDialogSettingDataTestCases;
+import org.eclipse.jst.jsf.core.tests.jsflibraryconfig.JSFLibraryConfigModelTestCases;
+import org.eclipse.jst.jsf.core.tests.jsflibraryconfig.JSFLibraryRegistryUtilTestCases;
 import org.eclipse.jst.jsf.core.tests.jsflibraryconfig.JSFProjectLibraryReferenceTestCases;
 import org.eclipse.jst.jsf.core.tests.jsflibraryregistry.ArchiveFileTestCases;
 import org.eclipse.jst.jsf.core.tests.jsflibraryregistry.JSFLibraryRegistryPackageTestCases;
@@ -54,11 +56,11 @@ public class AllTests {
 		
 		suite.addTestSuite(JSFFacetInstallDataModelProviderTestCases.class);
 		
-		//suite.addTestSuite(JSFLibraryConfigModelAdapterTestCases.class);
-		//suite.addTestSuite(JSFLibraryDecoratorTestCases.class);
 		suite.addTestSuite(J2EEModuleDependencyDelegateTestCases.class);
 		suite.addTestSuite(JSFLibraryConfigDialogSettingDataTestCases.class);
 		suite.addTestSuite(JSFProjectLibraryReferenceTestCases.class);
+		suite.addTestSuite(JSFLibraryConfigModelTestCases.class);
+		suite.addTestSuite(JSFLibraryRegistryUtilTestCases.class);
 		//annotations 
 /*		suite.addTestSuite(AnnotationMapTestCases.class);
 		suite.addTestSuite(AnnotationHelperTestCases.class);

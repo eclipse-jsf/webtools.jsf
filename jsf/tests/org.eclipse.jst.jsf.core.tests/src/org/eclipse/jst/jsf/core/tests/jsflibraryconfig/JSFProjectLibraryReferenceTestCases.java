@@ -70,8 +70,7 @@ public class JSFProjectLibraryReferenceTestCases extends TestCase {
 	 */
 	public void testGetLibrary() {
 		Assert.assertNotNull(jsfLibRef);
-		Assert.assertEquals(jsfLibRef.getLibrary(), jsfLib);
-		Assert.assertTrue(jsfLibRef.getLibrary().getID().equals(jsfLib.getID()));		
+		Assert.assertEquals(jsfLibRef.getLibrary(), jsfLib);		
 	}
 
 	/*
