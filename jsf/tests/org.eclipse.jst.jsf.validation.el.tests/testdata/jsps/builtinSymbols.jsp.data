@@ -1,0 +1,112 @@
+<%@page contentType="text/html"%>
+<%@page pageEncoding="UTF-8"%>
+<%--
+The taglib directive below imports the JSTL library. If you uncomment it,
+you must also add the JSTL library to the project. The Add Library... action
+on Libraries node in Projects view can be used to add the JSTL 1.1 library.
+--%>
+
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+<%@taglib uri="http://java.sun.com/jsf/core" prefix="f"%>
+<%@taglib uri="http://java.sun.com/jsf/html" prefix="h"%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+    <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+    <f:view>
+    <h1>JSP Page</h1>
+    	<f:loadBundle var="bundle" basename="beans.Bundle"/>
+    	<f:loadBundle var="bundle2" basename="beans.Bundle"/>
+	
+    	<!--  no errors -->
+    	<!-- check all built-ins -->
+    	<h:outputText value="#{applicationScope}"/>
+    	<h:outputText value="#{sessionScope}"/>
+    	<h:outputText value="#{requestScope}"/>
+    	<h:outputText value="#{cookie}"/>
+    	<h:outputText value="#{facesContext}"/>
+    	<h:outputText value="#{header}"/>
+    	<h:outputText value="#{headerValues}"/>
+    	<h:outputText value="#{initParam}"/>
+    	<h:outputText value="#{param}"/>
+    	<h:outputText value="#{paramValues}"/>
+    	<h:outputText value="#{view}"/>
+
+		<!-- check known application scope variables -->
+		<h:outputText value="#{applicationScope.mapBean}"/>
+		
+		<!-- check known session scope variables -->
+		<h:outputText value="#{sessionScope.myBean}"/>
+		<h:outputText value="#{sessionScope.mapBean1}"/>
+		<h:outputText value="#{sessionScope.myBeanSettable}"/>
+		
+		<!-- check known request scope variables -->
+		<h:outputText value="#{requestScope.myBeanSubClass}"/>
+		<h:outputText value="#{requestScope.hiddenBean}"/>
+		<h:outputText value="#{requestScope.bundle}"/>
+		<h:outputText value="#{requestScope.bundle2}"/>
+
+		<!-- these only get runtime members, so just check that they can be empty -->
+    	<h:outputText value="#{empty cookie}"/>
+		<h:outputText value="#{empty header}"/>
+		<h:outputText value="#{empty headerValues}"/>
+		<h:outputText value="#{empty param}"/>
+		<h:outputText value="#{empty paramValues}"/>		
+		
+		<!-- test known members of facesContext -->
+		<h:outputText value="#{facesContext.application}"/>
+		<h:outputText value="#{facesContext.clientIdsWithMessages}"/>
+		<h:outputText value="#{facesContext.externalContext}"/>
+		<h:outputText value="#{facesContext.maximumSeverity}"/>
+		<h:outputText value="#{facesContext.messages}"/>
+		<h:outputText value="#{facesContext.renderKit}"/>
+		<h:outputText value="#{facesContext.renderResponse}"/>
+		<h:outputText value="#{facesContext.responseComplete}"/>
+		<h:outputText value="#{facesContext.responseStream}"/>
+		<h:outputText value="#{facesContext.responseWriter}"/>
+		<h:outputText value="#{facesContext.viewRoot}"/>
+		
+		<!-- test known members of viewRoot -->
+		<h:outputText value="#{view.viewId}"/>
+		<h:outputText value="#{view.family}"/>
+		<h:outputText value="#{view.locale}"/>
+		<h:outputText value="#{view.renderKitId}"/>
+		<h:outputText value="#{view.viewId}"/>
+
+		<!- check objects accessed through scoping -->		
+    	<h:outputText value="#{sessionScope.myBean.integerProperty}"/>
+    	<h:outputText value="#{requestScope.bundle.bundleProp2}"/>
+
+		<!-- a little interaction through scope map -->
+    	<h:outputText value="#{3 + sessionScope.myBean.integerProperty}"/>
+
+		<!--  warnings -->
+    	<h:outputText value="#{applicationScope.notAMember}"/>
+    	<h:outputText value="#{sessionScope.notAMember}"/>
+    	<h:outputText value="#{requestScope.notAMember}"/>
+    	<h:outputText value="#{cookie.notAMember}"/>
+    	<h:outputText value="#{facesContext.notAMember}"/>
+    	<h:outputText value="#{header.notAMember}"/>
+    	<h:outputText value="#{headerValues.notAMember}"/>
+    	<h:outputText value="#{initParam.notAMember}"/>
+    	<h:outputText value="#{param.notAMember}"/>
+    	<h:outputText value="#{paramValues.notAMember}"/>
+    	<h:outputText value="#{view.notAMember}"/>
+    	
+    	<!-- right bean, wrong scope map -->
+    	<h:outputText value="#{applicationScope.myBean_none}"/>
+    	<h:outputText value="#{sessionScope.myBean_none}"/>
+    	<h:outputText value="#{requestScope.myBean_none}"/>
+
+		<!-- errors -->
+		<h:outputText value="#{!initParam}"/>
+
+    </f:view>
+    </body>
+</html>

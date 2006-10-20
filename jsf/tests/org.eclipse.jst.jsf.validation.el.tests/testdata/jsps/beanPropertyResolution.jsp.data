@@ -1,0 +1,72 @@
+<%@page contentType="text/html"%>
+<%@page pageEncoding="UTF-8"%>
+
+<%@taglib uri="http://java.sun.com/jsf/core" prefix="f"%>
+<%@taglib uri="http://java.sun.com/jsf/html" prefix="h"%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+    <head>
+  		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+    <f:view>
+    <h1>JSP Page</h1>
+    	<!--  no errors -->
+    	<h:outputText value="#{myBean.stringProperty}"/>
+    	<h:outputText value="#{myBean.integerProperty}"/>
+    	<h:outputText value="#{myBean.booleanProperty}"/>
+    	<h:outputText value="#{myBean.doubleProperty}"/>
+    	<h:outputText value="#{myBean.mapProperty}"/>
+    	<h:outputText value="#{myBean.stringArrayProperty}"/>
+    	<h:outputText value="#{myBean.collectionProperty}"/>
+    	<h:outputText value="#{myBean.listProperty}"/>
+    	<h:outputText value="#{myBean.comparableProperty}"/>
+    	<h:outputText value="#{myBean.bigIntegerProperty}"/>
+    	<h:outputText value="#{myBean.bigDoubleProperty}"/>
+    	<h:outputText value="#{myBean.writableStringProperty}"/>
+    	<h:outputText value="#{myBean.isStyleBooleanProperty}"/>
+
+		<!-- sub-class resolution -->
+    	<h:outputText value="#{myBeanSubClass.stringProperty}"/>
+    	<h:outputText value="#{myBeanSubClass.integerProperty}"/>
+    	<h:outputText value="#{myBeanSubClass.booleanProperty}"/>
+    	<h:outputText value="#{myBeanSubClass.doubleProperty}"/>
+    	<h:outputText value="#{myBeanSubClass.mapProperty}"/>
+    	<h:outputText value="#{myBeanSubClass.stringArrayProperty}"/>
+    	<h:outputText value="#{myBeanSubClass.collectionProperty}"/>
+    	<h:outputText value="#{myBeanSubClass.listProperty}"/>
+    	<h:outputText value="#{myBeanSubClass.comparableProperty}"/>
+    	<h:outputText value="#{myBeanSubClass.bigIntegerProperty}"/>
+    	<h:outputText value="#{myBeanSubClass.bigDoubleProperty}"/>
+    	<h:outputText value="#{myBeanSubClass.writableStringProperty}"/>
+    	<h:outputText value="#{myBeanSubClass.isStyleBooleanProperty}"/>
+    	<h:outputText value="#{myBeanSubClass.subClassStringProperty}"/>
+
+		<!-- settable properties -->
+		<h:outputText value="#{myBeanSubClass.stringProperty}"/>
+    	<h:outputText value="#{myBeanSettable.integerProperty}"/>
+    	<h:outputText value="#{myBeanSettable.booleanProperty}"/>
+    	<h:outputText value="#{myBeanSettable.doubleProperty}"/>
+    	<h:outputText value="#{myBeanSettable.mapProperty}"/>
+    	<h:outputText value="#{myBeanSettable.stringArrayProperty}"/>
+    	<h:outputText value="#{myBeanSettable.collectionProperty}"/>
+    	<h:outputText value="#{myBeanSettable.listProperty}"/>
+    	<h:outputText value="#{myBeanSettable.comparableProperty}"/>
+    	<h:outputText value="#{myBeanSettable.bigIntegerProperty}"/>
+    	<h:outputText value="#{myBeanSettable.bigDoubleProperty}"/>
+    	<h:outputText value="#{myBeanSettable.writableStringProperty}"/>
+    	<h:outputText value="#{myBeanSettable.isStyleBooleanProperty}"/>
+    	
+		<!--  warnings -->
+    	<h:outputText value="#{myBean.subClassStringProperty}"/>
+    	<h:outputText value="#{myBeanSubClass.notAMember}"/>
+    	<h:outputText value="#{myBeanSettable.alsoNotAMember}"/>
+
+		<!-- errors -->
+    </f:view>
+    </body>
+</html>

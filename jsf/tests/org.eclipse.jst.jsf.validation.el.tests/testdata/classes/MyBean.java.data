@@ -1,0 +1,111 @@
+package beans;
+
+import java.math.BigInteger;
+import java.math.BigDecimal;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
+import javax.faces.component.UIComponent; 
+import javax.faces.context.FacesContext;
+
+public class MyBean 
+{
+	public String getStringProperty()
+	{
+		return "";
+	}
+	
+	public int getIntegerProperty()
+	{
+		return 0;
+	}
+	
+	public boolean getBooleanProperty()
+	{
+		return false;
+	}
+	
+	public double getDoubleProperty()
+	{
+		return 1.04;
+	}
+	
+	public Map getMapProperty()
+	{
+		return Collections.EMPTY_MAP;
+	}
+	
+	public String[] getStringArrayProperty()
+	{
+		return new String[0];
+	}
+	
+	public Collection getCollectionProperty()
+	{
+		return Collections.EMPTY_LIST;
+	}
+	
+	public List getListProperty()
+	{
+		return Collections.EMPTY_LIST;
+	}
+	
+	public Comparable getComparableProperty()
+	{
+		return null;
+	}
+	
+	public BigInteger getBigIntegerProperty()
+	{
+		return BigInteger.ONE;
+	}
+	
+	public BigDecimal getBigDoubleProperty()
+	{
+		return new BigDecimal(0.5);
+	}
+	
+	public MyBean recursiveCall()
+	{
+		return this;
+	}
+	
+	public String getWritableStringProperty()
+	{
+		return "";
+	}
+	
+	public void setWritableStringProperty(String newValue)
+	{
+		;
+	}
+	
+	public void validate(FacesContext facesContext, 
+					      UIComponent component,
+					      Object object
+					      )
+	{
+		
+	}
+
+	public void validate2(FacesContext facesContext, 
+		      UIComponent component,
+		      Object[] object
+		      )
+	{
+	
+	}	
+	
+	public MyBean getSelf()
+	{
+		return this;
+	}
+	
+	public boolean isIsStyleBooleanProperty()
+	{
+		return false;
+	}
+}

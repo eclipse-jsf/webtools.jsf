@@ -1,0 +1,13 @@
+package beans;
+
+
+import java.util.AbstractMap;
+import java.util.Collections;
+import java.util.Set;
+
+public class MapBean extends AbstractMap 
+{
+	public Set entrySet() {
+		return Collections.EMPTY_SET;
+	}
+}
