@@ -38,7 +38,7 @@ public class TypeConstants
     /**
      * big double
      */
-    public final static String   TYPE_BIG_DOUBLE = "Ljava.math.BigDouble;";
+    public final static String   TYPE_BIG_DOUBLE = "Ljava.math.BigDecimal;";
     
     /* boxed types */
     /**
