@@ -61,7 +61,6 @@ public class UnaryMinusTestCase extends SingleJSPTestCase
         assertContainsProblem(list, DiagnosticFactory.UNARY_OP_MINUS_ON_NULL_ALWAYS_ZERO_ID);
     }
     
-    @Override
     public void testErrorExprs() 
     {
         List list = assertSemanticError(1370, null, 1);

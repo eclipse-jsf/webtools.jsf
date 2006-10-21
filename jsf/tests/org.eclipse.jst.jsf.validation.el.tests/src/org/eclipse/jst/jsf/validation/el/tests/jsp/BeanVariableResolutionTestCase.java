@@ -27,8 +27,6 @@ public class BeanVariableResolutionTestCase extends SingleJSPTestCase
         assertEquals("someOtherBeanName", getELText(_structuredDocument,919));
     }
     
-
-    @Override
     public void testNoErrorExprs() 
     {
         assertNoError(541, "Lbeans.MyBean;");
@@ -40,7 +38,6 @@ public class BeanVariableResolutionTestCase extends SingleJSPTestCase
         assertNoError(801, "Lbeans.MyBeanSettable;");
     }
 
-    @Override
     public void testWarningExprs() 
     {
         List list = assertSemanticWarning(878, null, 1);
