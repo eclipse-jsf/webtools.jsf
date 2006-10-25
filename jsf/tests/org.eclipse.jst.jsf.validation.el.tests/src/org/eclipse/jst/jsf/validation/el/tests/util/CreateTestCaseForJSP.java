@@ -19,7 +19,7 @@ import org.eclipse.wst.xml.core.internal.regions.DOMRegionContext;
 
 public class CreateTestCaseForJSP extends TestCase 
 {
-    private final static String  jspFile = "methodBinding";
+    private final static String  jspFile = "markerOffsets";
     private static IFile  file;
     private static IStructuredModel model;
 
@@ -30,7 +30,7 @@ public class CreateTestCaseForJSP extends TestCase
 
         _testEnv = new WebProjectTestEnvironment("ELValidationTest_"+getName());
         _testEnv.createProject();
-        assertNotNull(_testEnv);       
+        assertNotNull(_testEnv);    
         assertNotNull(_testEnv.getTestProject());
         assertTrue(_testEnv.getTestProject().isAccessible());
 

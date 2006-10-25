@@ -1,0 +1,63 @@
+<%@page contentType="text/html"%>
+<%@page pageEncoding="UTF-8"%>
+<%--
+The taglib directive below imports the JSTL library. If you uncomment it,
+you must also add the JSTL library to the project. The Add Library... action
+on Libraries node in Projects view can be used to add the JSTL 1.1 library.
+--%>
+
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+<%@taglib uri="http://java.sun.com/jsf/core" prefix="f"%>
+<%@taglib uri="http://java.sun.com/jsf/html" prefix="h"%>
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+    <f:view>
+    <h1>JSP Page</h1>
+		<!--  warnings: checking also that correct offset/length is found for the warning-->
+		<h:outputText value="#{5 + 3}"/>
+		<h:outputText value="#{null / null}"/>
+		<h:outputText value="#{myBean.integerProperty == null"/>
+		<h:outputText value="#{false && myBean.booleanProperty"/>
+		<h:outputText value="#{myBean.booleanProperty && false"/>
+		<h:outputText value="#{!false}"/>
+		<h:outputText value="#{empty 5}"/>
+		<h:outputText value="#{-null}"/>
+		<h:outputText value="#{-myBean.stringProperty}"/>
+		
+		<!-- warning where the offset/length don't match exactly the whole expr -->
+		<h:outputText value="#{myBean.integerProperty - (5 + 3)}"/>
+		<h:outputText value="#{myBean.booleanProperty && myBean.integerProperty + 5 == null}"/>
+		
+		<!-- symbol resolution warnings -->
+		<h:outputText value="#{notABean.stringProperty}"/>
+		<h:outputText value="#{myBean.notAProperty}"/>
+		<h:outputText value="#{myBean.integerProperty + 5 + myBean.notAProperty}"/>
+		
+		<-- syntax -->
+		<h:outputText value="#{myBean.integerProperty++}"/>
+		<h:outputText value="#{myBean.}"/>
+		<h:outputText value="#{ }"/>
+		
+		<!-- errors: checking also that correct offset/length is found for the warning-->
+		<h:outputText value="#{myBean.integerProperty / 0}"/>
+		<h:outputText value="#{myBean.integerProperty + myBean.booleanProperty}"/>
+		<h:outputText value="#{myBean.integerProperty && myBean.booleanProperty}"/>
+		<h:outputText value="#{myBean.booleanProperty >= myBean.collectionProperty}"/>
+		<h:outputText value="#{5 + 'noNumberConversion'}"/>
+		<h:outputText value="#{-true}"/>
+		<h:outputText value="#{!5}"/>
+
+		<-- method bindings -->
+		<h:outputText value="#{myBean.doubleProperty + myBean.getIntegerProperty}"/>
+    </f:view>
+    </body>
+</html>

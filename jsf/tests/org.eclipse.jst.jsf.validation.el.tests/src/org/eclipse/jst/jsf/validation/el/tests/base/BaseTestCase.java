@@ -374,10 +374,10 @@ public class BaseTestCase extends TestCase
     
     protected void assertContainsProblem(List problems, int code)
     {
-        assertContainsProblem(problems, code, -1);
+        assertContainsProblem(problems, code, -1, -1);
     }
     
-    protected void assertContainsProblem(List problems, int code, int curPos)
+    protected void assertContainsProblem(List problems, int code, int startPos, int length)
     {
         Set  probsFound = new HashSet();
         
@@ -391,6 +391,15 @@ public class BaseTestCase extends TestCase
                 probsFound.add(Integer.valueOf(localizedMsg.getErrorCode()));
                 if (localizedMsg.getErrorCode() == code)
                 {
+                    assertTrue("Offset of message must be >= 0", localizedMsg.getOffset()>=0);
+                    assertTrue("Length of message marker must be >=0", localizedMsg.getLength()>=0);
+                    
+                    if (startPos >= 0)
+                    {
+                        assertEquals("Offset must be == startPos", startPos, localizedMsg.getOffset());
+                        assertEquals("Length must be == length", localizedMsg.getLength(), length);
+                    }
+
                     // found the required code, so exit without throwing
                     // any error assertions
                     return;
