@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema">
+	<element name="taglib">
+		<complexType>
+			<sequence>
+				<element ref="tag" maxOccurs="unbounded"></element>
+				<element ref="definition" minOccurs="0" maxOccurs="1"></element>
+			</sequence>
+			<attribute ref="uri" />
+		</complexType>
+	</element>
+
+	<element name="tag">
+		<complexType>
+			<sequence>
+				<element ref="category" minOccurs="0"
+					maxOccurs="unbounded">
+				</element>
+				<element ref="referedcategory" minOccurs="0"
+					maxOccurs="unbounded">
+				</element>
+			</sequence>
+			<attribute ref="name"></attribute>
+		</complexType>
+	</element>
+
+	<element name="category">
+		<complexType>
+			<sequence>
+				<element ref="attribute" minOccurs="0"
+					maxOccurs="unbounded">
+				</element>
+				<element ref="referedattribute" minOccurs="0"
+					maxOccurs="unbounded">
+				</element>
+			</sequence>
+			<attribute ref="name"></attribute>
+			<attribute ref="displaylabel"></attribute>
+		</complexType>
+	</element>
+
+	<element name="referedcategory">
+		<complexType>
+			<sequence>
+				<element ref="includeattrs" minOccurs="0"
+					maxOccurs="1">
+				</element>
+				<element ref="excludeattrs" minOccurs="0"
+					maxOccurs="1">
+				</element>
+			</sequence>
+			<attribute ref="ref"></attribute>
+			<attribute ref="displaylabel"></attribute>
+		</complexType>
+	</element>
+
+	<element name="definition">
+		<complexType>
+			<sequence>
+				<element ref="categories" minOccurs="0" maxOccurs="1"></element>
+				<element ref="attributes" minOccurs="0" maxOccurs="1"></element>
+			</sequence>
+		</complexType>
+	</element>
+
+	<element name="attribute">
+		<complexType>
+			<sequence>
+				<element ref="option" minOccurs="0"
+					maxOccurs="unbounded">
+				</element>
+			</sequence>
+			<attribute ref="name"></attribute>
+			<attribute ref="displaylabel"></attribute>
+			<attribute ref="required"></attribute>
+			<attribute ref="type"></attribute>
+			<attribute ref="typeparam"></attribute>
+		</complexType>
+	</element>
+
+	<element name="referedattribute">
+		<complexType>
+			<attribute ref="ref"></attribute>
+			<attribute ref="overridename"></attribute>
+			<attribute ref="displaylabel"></attribute>
+		</complexType>
+	</element>
+
+	<element name="includeattrs">
+		<complexType>
+			<sequence>
+				<element ref="attribute" minOccurs="0"
+					maxOccurs="unbounded">
+				</element>
+				<element ref="referedattribute" minOccurs="0"
+					maxOccurs="unbounded">
+				</element>
+			</sequence>
+		</complexType>
+	</element>
+
+	<element name="excludeattrs">
+		<complexType>
+			<attribute ref="refs"></attribute>
+		</complexType>
+	</element>
+
+	<element name="categories">
+		<complexType>
+			<sequence>
+				<element ref="category"></element>
+			</sequence>
+		</complexType>
+	</element>
+
+	<element name="attributes">
+		<complexType>
+			<sequence>
+				<element ref="attribute"></element>
+			</sequence>
+		</complexType>
+	</element>
+
+	<element name="option">
+		<complexType>
+			<attribute ref="key"></attribute>
+			<attribute ref="value"></attribute>
+			<attribute ref="default"></attribute>
+		</complexType>
+	</element>
+
+	<attribute name="name" type="string"></attribute>
+
+	<attribute name="displaylabel" type="string"></attribute>
+
+	<attribute name="ref" type="string"></attribute>
+
+	<attribute name="refs" type="string"></attribute>
+
+	<attribute name="uri" type="string"></attribute>
+
+	<attribute name="type" type="string"></attribute>
+
+	<attribute name="typeparam" type="string"></attribute>
+
+	<attribute name="key" type="string"></attribute>
+
+	<attribute name="value" type="string"></attribute>
+
+	<attribute name="overridename" type="string"></attribute>
+	<attribute name="default" type="string" fixed="default"></attribute>
+	<attribute name="required" type="string" fixed="required"></attribute>
+
+</schema>

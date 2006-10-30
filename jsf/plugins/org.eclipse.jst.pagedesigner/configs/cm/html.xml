@@ -1,0 +1,1559 @@
+<?xml version="1.0" ?>
+<taglib uri="html">
+	<tag name="a">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="href" type="RELATIVEPATH"
+				displaylabel="%Attribute.Label.href" />
+			<attribute name="name" displaylabel="%Attribute.Label.name" />
+			<referedattribute ref="lang" overridename="hreflang"
+				displaylabel="%Attribute.Label.hreflang" />
+			<referedattribute ref="linktype" overridename="rel"
+				displaylabel="%Attribute.Label.rel" />
+			<referedattribute ref="linktype" overridename="rev"
+				displaylabel="%Attribute.Label.rev" />
+			<referedattribute ref="target" />
+			<attribute name="shape" type="ENUMERATED"
+				displaylabel="%Attribute.Label.shape">
+				<option key="circle" value="circle" />
+				<option key="default" value="default" />
+				<option key="rect" value="rect" default="default" />
+				<option key="poly" value="poly" />
+			</attribute>
+		</category>
+		<referedcategory ref="CSS/Accessibility">
+			<includeattrs>
+				<attribute name="accesskey"
+					displaylabel="%Attribute.Label.accesskey" />
+				<attribute name="tabindex"
+					displaylabel="%Attribute.Label.tabindex" />
+			</includeattrs>
+		</referedcategory>
+		<referedcategory ref="Event">
+			<includeattrs>
+				<attribute name="onblur"
+					displaylabel="%Attribute.Label.onblur" />
+				<attribute name="onfocus"
+					displaylabel="%Attribute.Label.onfocus" />
+			</includeattrs>
+		</referedcategory>
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="abbr">
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="acronym">
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="address">
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="applet">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="code" displaylabel="%Attribute.Label.code" />
+			<attribute name="codebase"
+				displaylabel="%Attribute.Label.codebase" />
+			<attribute name="width" required="required"
+				displaylabel="%Attribute.Label.width" />
+			<attribute name="height" required="required"
+				displaylabel="%Attribute.Label.height" />
+			<attribute name="hspace"
+				displaylabel="%Attribute.Label.hspace" />
+			<attribute name="vspace"
+				displaylabel="%Attribute.Label.vspace" />
+			<referedattribute ref="ialign" overridename="align" />
+			<attribute name="archive"
+				displaylabel="%Attribute.Label.archive" />
+			<attribute name="name" displaylabel="%Attribute.Label.name" />
+		</category>
+		<referedcategory ref="CSS/Accessibility">
+			<includeattrs>
+				<attribute name="alt"
+					displaylabel="%Attribute.Label.alt" />
+			</includeattrs>
+		</referedcategory>
+	</tag>
+	<tag name="area">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="shape" type="ENUMERATED"
+				displaylabel="%Attribute.Label.shape">
+				<option key="circle" value="circle" />
+				<option key="default" value="default" />
+				<option key="rect" value="rect" default="default" />
+				<option key="poly" value="poly" />
+			</attribute>
+			<attribute name="coords"
+				displaylabel="%Attribute.Label.coords" />
+			<attribute name="href" type="RELATIVEPATH"
+				displaylabel="%Attribute.Label.href" />
+			<referedattribute ref="target" />
+		</category>
+		<referedcategory ref="CSS/Accessibility">
+			<includeattrs>
+				<attribute name="alt" required="required"
+					displaylabel="%Attribute.Label.alt" />
+				<attribute name="accesskey"
+					displaylabel="%Attribute.Label.accesskey" />
+				<attribute name="tabindex"
+					displaylabel="%Attribute.Label.tabindex" />
+			</includeattrs>
+		</referedcategory>
+		<referedcategory ref="Event">
+			<includeattrs>
+				<attribute name="onblur"
+					displaylabel="%Attribute.Label.onblur" />
+				<attribute name="onfocus"
+					displaylabel="%Attribute.Label.onfocus" />
+			</includeattrs>
+		</referedcategory>
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="b">
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="base">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="href" type="RELATIVEPATH"
+				displaylabel="%Attribute.Label.href" />
+			<referedattribute ref="target" />
+		</category>
+	</tag>
+	<tag name="basefont">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="size" type="ENUMERATED" required="required"
+				displaylabel="%Attribute.Label.size">
+				<option key="1" value="1" />
+				<option key="2" value="2" />
+				<option key="3" value="3" />
+				<option key="4" value="4" />
+				<option key="5" value="5" />
+				<option key="6" value="6" />
+				<option key="7" value="7" />
+			</attribute>
+			<attribute name="face" displaylabel="%Attribute.Label.face" />
+			<attribute name="color" type="COLOR"
+				displaylabel="%Attribute.Label.color" />
+		</category>
+		<referedcategory ref="CSS/Accessibility">
+			<excludeattrs refs="class,style,title" />
+		</referedcategory>
+	</tag>
+	<tag name="bdo">
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="big">
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="blockquote">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="cite" type="RELATIVEPATH"
+				displaylabel="%Attribute.Label.cite" />
+		</category>
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="body">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="bgcolor" type="COLOR"
+				displaylabel="%Attribute.Label.bgcolor" />
+			<attribute name="background" type="RELATIVEPATH"
+				typeparam="suffix=jpg;gif;png"
+				displaylabel="%Attribute.Label.background" />
+			<attribute name="text" type="COLOR"
+				displaylabel="%Attribute.Label.text" />
+			<attribute name="link" type="COLOR"
+				displaylabel="%Attribute.Label.link" />
+			<attribute name="vlink" type="COLOR"
+				displaylabel="%Attribute.Label.vlink" />
+			<attribute name="alink" type="COLOR"
+				displaylabel="%Attribute.Label.alink" />
+		</category>
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event">
+			<includeattrs>
+				<attribute name="onload"
+					displaylabel="%Attribute.Label.onload" />
+				<attribute name="onunload"
+					displaylabel="%Attribute.Label.onunload" />
+			</includeattrs>
+		</referedcategory>
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="br">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="clear" type="ENUMERATED"
+				displaylabel="%Attribute.Label.clear">
+				<option key="right" value="right" />
+				<option key="none" value="none" default="default" />
+				<option key="left" value="left" />
+				<option key="all" value="all" />
+			</attribute>
+		</category>
+		<referedcategory ref="CSS/Accessibility" />
+	</tag>
+	<tag name="button">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="value"
+				displaylabel="%Attribute.Label.value" />
+			<attribute name="type" type="ENUMERATED"
+				displaylabel="%Attribute.Label.type">
+				<option key="submit" value="submit" default="default" />
+				<option key="reset" value="reset" />
+				<option key="button" value="button" />
+			</attribute>
+			<attribute name="disabled" type="NAMED-BOOLEAN"
+				displaylabel="%Attribute.Label.disabled" />
+			<attribute name="name" displaylabel="%Attribute.Label.name" />
+		</category>
+		<referedcategory ref="CSS/Accessibility">
+			<includeattrs>
+				<attribute name="accesskey"
+					displaylabel="%Attribute.Label.accesskey" />
+				<attribute name="tabindex"
+					displaylabel="%Attribute.Label.tabindex" />
+			</includeattrs>
+		</referedcategory>
+		<referedcategory ref="Event">
+			<includeattrs>
+				<attribute name="onblur"
+					displaylabel="%Attribute.Label.onblur" />
+				<attribute name="onfocus"
+					displaylabel="%Attribute.Label.onfocus" />
+			</includeattrs>
+		</referedcategory>
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="caption">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="align" type="ENUMERATED"
+				displaylabel="%Attribute.Label.align">
+				<option key="right" value="right" />
+				<option key="top" value="top" />
+				<option key="left" value="left" />
+				<option key="bottom" value="bottom" />
+			</attribute>
+		</category>
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="center">
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="cite">
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="code">
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="col">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<referedattribute ref="align" />
+			<attribute name="span" displaylabel="%Attribute.Label.span" />
+			<referedattribute ref="valign" />
+			<attribute name="width"
+				displaylabel="%Attribute.Label.width" />
+		</category>
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="colgroup">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<referedattribute ref="align" />
+			<attribute name="span" displaylabel="%Attribute.Label.span" />
+			<referedattribute ref="valign" />
+			<attribute name="width"
+				displaylabel="%Attribute.Label.width" />
+		</category>
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="dd">
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="del">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="cite" type="RELATIVEPATH"
+				displaylabel="%Attribute.Label.cite" />
+			<attribute name="datetime"
+				displaylabel="%Attribute.Label.datetime" />
+		</category>
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="dfn">
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="dir">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="compact" type="NAMED-BOOLEAN"
+				displaylabel="%Attribute.Label.compact" />
+		</category>
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="div">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<referedattribute ref="dalign" overridename="align" />
+		</category>
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="dl">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="compact" type="NAMED-BOOLEAN"
+				displaylabel="%Attribute.Label.compact" />
+		</category>
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="dt">
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="em">
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="fieldset">
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="font">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="color" type="COLOR"
+				displaylabel="%Attribute.Label.color" />
+			<attribute name="size" type="ENUMERATED"
+				displaylabel="%Attribute.Label.size">
+				<option key="1" value="1" />
+				<option key="2" value="2" />
+				<option key="3" value="3" />
+				<option key="4" value="4" />
+				<option key="5" value="5" />
+				<option key="6" value="6" />
+				<option key="7" value="7" />
+				<option key="-1" value="-1" />
+				<option key="-2" value="-2" />
+				<option key="-3" value="-3" />
+				<option key="-4" value="-4" />
+				<option key="-5" value="-5" />
+				<option key="-6" value="-6" />
+				<option key="-7" value="-7" />
+				<option key="+1" value="+1" />
+				<option key="+2" value="+2" />
+				<option key="+3" value="+3" />
+				<option key="+4" value="+4" />
+				<option key="+5" value="+5" />
+				<option key="+6" value="+6" />
+				<option key="+7" value="+7" />
+			</attribute>
+			<attribute name="face" displaylabel="%Attribute.Label.face" />
+		</category>
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="form">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="action" required="required" type="RELATIVEPATH"
+				displaylabel="%Attribute.Label.action" />
+			<attribute name="method" type="ENUMERATED"
+				displaylabel="%Attribute.Label.method">
+				<option key="get" value="get" default="default" />
+				<option key="post" value="post" />
+			</attribute>
+			<attribute name="enctype" type="ENUMERATED"
+				displaylabel="%Attribute.Label.enctype">
+				<option key="application/x-www-form-urlencoded"
+					value="application/x-www-form-urlencoded" default="default" />
+				<option key="text/plain" value="text/plain" />
+				<option key="multipart/form-data"
+					value="multipart/form-data" />
+			</attribute>
+			<attribute name="name" displaylabel="%Attribute.Label.name" />
+			<referedattribute ref="target" />
+		</category>
+		<referedcategory ref="CSS/Accessibility"></referedcategory>
+		<referedcategory ref="Language" />
+		<referedcategory ref="Event">
+			<includeattrs>
+				<attribute name="onreset"
+					displaylabel="%Attribute.Label.onreset" />
+				<attribute name="onsubmit"
+					displaylabel="%Attribute.Label.onsubmit" />
+			</includeattrs>
+		</referedcategory>
+	</tag>
+	<tag name="frame">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="src" type="RELATIVEPATH"
+				displaylabel="%Attribute.Label.src" />
+			<attribute name="frameborder" type="ENUMERATED"
+				displaylabel="%Attribute.Label.frameborder">
+				<option key="0" value="0" />
+				<option key="1" value="1" default="default" />
+			</attribute>
+			<attribute name="scrolling" type="ENUMERATED"
+				displaylabel="%Attribute.Label.scrolling">
+				<option key="yes" value="Yes" />
+				<option key="no" value="No" />
+				<option key="auto" value="Auto" default="default" />
+			</attribute>
+			<attribute name="noresize" type="NAMED-BOOLEAN"
+				displaylabel="%Attribute.Label.noresize" />
+			<attribute name="marginwidth"
+				displaylabel="%Attribute.Label.marginwidth" />
+			<attribute name="marginheight"
+				displaylabel="%Attribute.Label.marginheight" />
+			<attribute name="name" displaylabel="%Attribute.Label.name" />
+		</category>
+		<referedcategory ref="CSS/Accessibility">
+			<includeattrs>
+				<attribute name="longdesc"
+					displaylabel="%Attribute.Label.longdesc" />
+			</includeattrs>
+		</referedcategory>
+	</tag>
+	<tag name="frameset">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="rows" displaylabel="%Attribute.Label.rows" />
+			<attribute name="cols" displaylabel="%Attribute.Label.cols" />
+		</category>
+		<referedcategory ref="CSS/Accessibility" />
+		<category name="Event" displaylabel="%Category.Label.Event">
+			<attribute name="onload"
+				displaylabel="%Attribute.Label.onload" />
+			<attribute name="onunload"
+				displaylabel="%Attribute.Label.onunload" />
+		</category>
+	</tag>
+	<tag name="h1">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<referedattribute ref="dalign" overridename="align" />
+		</category>
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="h2">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<referedattribute ref="dalign" overridename="align" />
+		</category>
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="h3">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<referedattribute ref="dalign" overridename="align" />
+		</category>
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="h4">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<referedattribute ref="dalign" overridename="align" />
+		</category>
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="h5">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<referedattribute ref="dalign" overridename="align" />
+		</category>
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="h6">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<referedattribute ref="dalign" overridename="align" />
+		</category>
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="head">
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="hr">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="align" type="ENUMERATED"
+				displaylabel="%Attribute.Label.align">
+				<option key="right" value="right" />
+				<option key="left" value="left" />
+				<option key="center" value="center" />
+			</attribute>
+			<attribute name="width"
+				displaylabel="%Attribute.Label.width" />
+			<attribute name="size" displaylabel="%Attribute.Label.size" />
+			<attribute name="noshade" type="NAMED-BOOLEAN"
+				displaylabel="%Attribute.Label.noshade" />
+		</category>
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="html">
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="i">
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="iframe">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="src" type="RELATIVEPATH"
+				displaylabel="%Attribute.Label.src" />
+			<attribute name="width"
+				displaylabel="%Attribute.Label.width" />
+			<attribute name="marginwidth"
+				displaylabel="%Attribute.Label.marginwidth" />
+			<attribute name="height"
+				displaylabel="%Attribute.Label.height" />
+			<attribute name="marginheight"
+				displaylabel="%Attribute.Label.marginheight" />
+			<referedattribute ref="ialign" overridename="align" />
+			<attribute name="scrolling" type="ENUMERATED"
+				displaylabel="%Attribute.Label.scrolling">
+				<option key="Yes" value="Yes" />
+				<option key="No" value="No" />
+				<option key="Auto" value="Auto" />
+			</attribute>
+			<attribute name="frameborder" type="ENUMERATED"
+				displaylabel="%Attribute.Label.frameborder">
+				<option key="0" value="0" />
+				<option key="1" value="1" default="default" />
+			</attribute>
+			<attribute name="name" displaylabel="%Attribute.Label.name" />
+		</category>
+		<referedcategory ref="CSS/Accessibility">
+			<includeattrs>
+				<attribute name="longdesc"
+					displaylabel="%Attribute.Label.longdesc" />
+			</includeattrs>
+		</referedcategory>
+	</tag>
+	<tag name="img">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="src" type="RELATIVEPATH" required="required"
+				typeparam="suffix=jpg;gif;png" displaylabel="%Attribute.Label.src" />
+			<attribute name="width"
+				displaylabel="%Attribute.Label.width" />
+			<attribute name="height"
+				displaylabel="%Attribute.Label.height" />
+			<attribute name="hspace"
+				displaylabel="%Attribute.Label.hspace" />
+			<attribute name="vspace"
+				displaylabel="%Attribute.Label.vspace" />
+			<attribute name="border"
+				displaylabel="%Attribute.Label.border" />
+			<referedattribute ref="ialign" overridename="align" />
+			<attribute name="usemap"
+				displaylabel="%Attribute.Label.usemap" />
+			<attribute name="ismap" type="NAMED-BOOLEAN"
+				displaylabel="%Attribute.Label.ismap" />
+			<attribute name="name" displaylabel="%Attribute.Label.name" />
+		</category>
+		<referedcategory ref="CSS/Accessibility">
+			<includeattrs>
+				<attribute name="alt" required="required"
+					displaylabel="%Attribute.Label.alt" />
+				<attribute name="longdesc" type="RELATIVEPATH"
+					displaylabel="%Attribute.Label.longdesc" />
+			</includeattrs>
+		</referedcategory>
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="input">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="checked" type="NAMED-BOOLEAN"
+				displaylabel="%Attribute.Label.checked" />
+			<attribute name="maxlength"
+				displaylabel="%Attribute.Label.maxlength" />
+			<attribute name="readonly" type="NAMED-BOOLEAN"
+				displaylabel="%Attribute.Label.readonly" />
+			<attribute name="type" type="ENUMERATED"
+				displaylabel="%Attribute.Label.type">
+				<option key="password" value="Password" />
+				<option key="checkbox" value="Checkbox" />
+				<option key="text" value="Text" default="default" />
+				<option key="submit" value="Submit" />
+				<option key="hidden" value="Hidden" />
+				<option key="file" value="File" />
+				<option key="reset" value="Reset" />
+				<option key="radio" value="Radio" />
+				<option key="image" value="Image" />
+				<option key="button" value="Button" />
+			</attribute>
+			<attribute name="disabled" type="NAMED-BOOLEAN"
+				displaylabel="%Attribute.Label.disabled" />
+			<attribute name="value"
+				displaylabel="%Attribute.Label.value" />
+			<attribute name="size" displaylabel="%Attribute.Label.size" />
+			<attribute name="accept" type="ENUMERATED"
+				displaylabel="%Attribute.Label.accept">
+				<option key="application/msword"
+					value="application/msword" />
+				<option key="image/jpeg" value="image/jpeg" />
+				<option key="image/x-MS-bmp" value="image/x-MS-bmp" />
+				<option key="image/x-portable-greymap"
+					value="image/x-portable-greymap" />
+				<option key="video/x-msvideo" value="video/x-msvideo" />
+				<option key="video/x-mpeg2" value="video/x-mpeg2" />
+				<option key="audio/x-aiff" value="audio/x-aiff" />
+				<option key="image/x-photo-cd" value="image/x-photo-cd" />
+				<option key="audio/x-waw" value="audio/x-waw" />
+				<option key="image/tiff" value="image/tiff" />
+				<option key="audio/basic" value="audio/basic" />
+				<option key="video/quicktime" value="video/quicktime" />
+				<option key="application/msexcel"
+					value="application/msexcel" />
+				<option key="image/gif" value="image/gif" />
+				<option key="audio/x-pn/realaudio"
+					value="audio/x-pn/realaudio" />
+				<option key="application/pdf" value="application/pdf" />
+				<option key="image/x-portablebitmap"
+					value="image/x-portablebitmap" />
+				<option key="application/rtf" value="application/rtf" />
+				<option key="text/html" value="text/html" />
+				<option key="image/x-portable-pixmap"
+					value="image/x-portable-pixmap" />
+				<option key="text/plain" value="text/plain" />
+				<option key="application/x-zip-compressed"
+					value="application/x-zip-compressed" />
+				<option key="audio/x-mpeg" value="audio/x-mpeg" />
+				<option key="application/postscript"
+					value="application/postscript" />
+				<option key="image/x-png" value="image/x-png" />
+				<option key="image/x-rgb" value="image/x-rgb" />
+			</attribute>
+			<attribute name="name" displaylabel="%Attribute.Label.name" />
+		</category>
+		<referedcategory ref="CSS/Accessibility">
+			<includeattrs>
+				<attribute name="accesskey"
+					displaylabel="%Attribute.Label.accesskey" />
+				<attribute name="alt"
+					displaylabel="%Attribute.Label.alt" />
+				<attribute name="tabindex"
+					displaylabel="%Attribute.Label.tabindex" />
+			</includeattrs>
+		</referedcategory>
+		<referedcategory ref="Event">
+			<includeattrs>
+				<attribute name="onblur"
+					displaylabel="%Attribute.Label.onblur" />
+				<attribute name="onchange"
+					displaylabel="%Attribute.Label.onchange" />
+				<attribute name="onfocus"
+					displaylabel="%Attribute.Label.onfocus" />
+				<attribute name="onselect"
+					displaylabel="%Attribute.Label.onselect" />
+			</includeattrs>
+		</referedcategory>
+		<category name="Image" displaylabel="%Category.Label.Image">
+			<attribute name="src" type="RELATIVEPATH"
+				typeparam="suffix=jpg;gif;png" displaylabel="%Attribute.Label.src" />
+			<referedattribute ref="ialign" overridename="align" />
+			<attribute name="usemap"
+				displaylabel="%Attribute.Label.usemap" />
+			<attribute name="ismap" type="NAMED-BOOLEAN"
+				displaylabel="%Attribute.Label.ismap" />
+		</category>
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="ins">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="cite" type="RELATIVEPATH"
+				displaylabel="%Attribute.Label.cite" />
+			<attribute name="datetime"
+				displaylabel="%Attribute.Label.datetime" />
+		</category>
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="isindex">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="prompt"
+				displaylabel="%Attribute.Label.prompt" />
+		</category>
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="kbd">
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="label">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="for" displaylabel="%Attribute.Label.for" />
+		</category>
+		<referedcategory ref="CSS/Accessibility">
+			<includeattrs>
+				<attribute name="accesskey"
+					displaylabel="%Attribute.Label.accesskey" />
+			</includeattrs>
+		</referedcategory>
+		<referedcategory ref="Event">
+			<includeattrs>
+				<attribute name="onblur"
+					displaylabel="%Attribute.Label.onblur" />
+				<attribute name="onfocus"
+					displaylabel="%Attribute.Label.onfocus" />
+			</includeattrs>
+		</referedcategory>
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="legend">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="align" type="ENUMERATED"
+				displaylabel="%Attribute.Label.align">
+				<option key="right" value="right" />
+				<option key="top" value="top - not supported by MSIE4" />
+				<option key="left" value="left" />
+				<option key="bottom" value="bottom" />
+			</attribute>
+		</category>
+		<referedcategory ref="CSS/Accessibility">
+			<includeattrs>
+				<attribute name="accesskey"
+					displaylabel="%Attribute.Label.accesskey" />
+			</includeattrs>
+		</referedcategory>
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="li">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="type" type="ENUMERATED"
+				displaylabel="%Attribute.Label.type">
+				<option key="i" value="i lower roman" />
+				<option key="I" value="I upper roman" />
+				<option key="a" value="a lower alpha" />
+				<option key="A" value="A upper alpha" />
+				<option key="1" value="1 arabic numbers" />
+				<option key="square" value="square" />
+				<option key="circle" value="circle" />
+				<option key="disc" value="disc" />
+			</attribute>
+			<attribute name="value"
+				displaylabel="%Attribute.Label.value" />
+		</category>
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="link">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="href" type="RELATIVEPATH"
+				displaylabel="%Attribute.Label.href" />
+			<referedattribute ref="linktype" overridename="rel"
+				displaylabel="%Attribute.Label.rel" />
+			<referedattribute ref="linktype" overridename="rev"
+				displaylabel="%Attribute.Label.rev" />
+			<referedattribute ref="lang" overridename="hreflang"
+				displaylabel="%Attribute.Label.hreflang" />
+			<referedattribute ref="media" />
+			<referedattribute ref="target" />
+		</category>
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="map">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="name" displaylabel="%Attribute.Label.name" required="required" />
+		</category>
+		<referedcategory ref="CSS/Accessibility"></referedcategory>
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="menu">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="compact" type="NAMED-BOOLEAN"
+				displaylabel="%Attribute.Label.compact" />
+		</category>
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="meta">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="http-equiv"
+				displaylabel="%Attribute.Label.http-equiv" />
+			<attribute name="content" required="required"
+				displaylabel="%Attribute.Label.content" />
+			<attribute name="name" displaylabel="%Attribute.Label.name" />
+		</category>
+		<category name="CSS/Accessibility"
+			displaylabel="%Category.Label.CSS/Accessibility">
+		</category>
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="noframes">
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="noscript">
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="object">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="usemap"
+				displaylabel="%Attribute.Label.usemap" />
+			<attribute name="standby"
+				displaylabel="%Attribute.Label.standby" />
+			<attribute name="width"
+				displaylabel="%Attribute.Label.width" />
+			<attribute name="height"
+				displaylabel="%Attribute.Label.height" />
+			<attribute name="hspace"
+				displaylabel="%Attribute.Label.hspace" />
+			<attribute name="vspace"
+				displaylabel="%Attribute.Label.vspace" />
+			<referedattribute ref="ialign" overridename="align" />
+			<attribute name="border"
+				displaylabel="%Attribute.Label.border" />
+			<attribute name="name" displaylabel="%Attribute.Label.name" />
+		</category>
+		<referedcategory ref="CSS/Accessibility">
+			<includeattrs>
+				<attribute name="tabindex"
+					displaylabel="%Attribute.Label.tabindex" />
+			</includeattrs>
+		</referedcategory>
+		<category name="Content"
+			displaylabel="%Category.Label.Content">
+			<attribute name="classid" type="RELATIVEPATH"
+				displaylabel="%Attribute.Label.classid" />
+			<attribute name="codebase" type="RELATIVEPATH"
+				displaylabel="%Attribute.Label.codebase" />
+			<attribute name="codetype"
+				displaylabel="%Attribute.Label.codetype" />
+			<attribute name="data" type="RELATIVEPATH"
+				displaylabel="%Attribute.Label.data" />
+			<attribute name="archive"
+				displaylabel="%Attribute.Label.archive" />
+			<attribute name="declare" type="NAMED-BOOLEAN"
+				displaylabel="%Attribute.Label.declare" />
+		</category>
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="ol">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="start"
+				displaylabel="%Attribute.Label.start" />
+			<attribute name="type" type="ENUMERATED"
+				displaylabel="%Attribute.Label.type">
+				<option key="i" value="i lower roman" />
+				<option key="I" value="I upper roman" />
+				<option key="a" value="a lower alpha" />
+				<option key="A" value="A upper alpha" />
+				<option key="1" value="1 arabic numbers" />
+			</attribute>
+			<attribute name="compact" type="NAMED-BOOLEAN"
+				displaylabel="%Attribute.Label.compact" />
+		</category>
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="optgroup">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="disabled" type="NAMED-BOOLEAN"
+				displaylabel="%Attribute.Label.disabled" />
+		</category>
+		<referedcategory ref="CSS/Accessibility">
+			<includeattrs>
+				<attribute name="label" required="required"
+					displaylabel="%Attribute.Label.label" />
+			</includeattrs>
+		</referedcategory>
+		<referedcategory ref="Event">
+			<includeattrs>
+				<attribute name="onblur"
+					displaylabel="%Attribute.Label.onblur" />
+				<attribute name="onchange"
+					displaylabel="%Attribute.Label.onchange" />
+				<attribute name="onfocus"
+					displaylabel="%Attribute.Label.onfocus" />
+			</includeattrs>
+		</referedcategory>
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="option">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="value"
+				displaylabel="%Attribute.Label.value" />
+			<attribute name="selected" type="NAMED-BOOLEAN"
+				displaylabel="%Attribute.Label.selected" />
+			<attribute name="disabled" type="NAMED-BOOLEAN"
+				displaylabel="%Attribute.Label.disabled" />
+		</category>
+		<referedcategory ref="CSS/Accessibility">
+			<includeattrs>
+				<attribute name="label"
+					displaylabel="%Attribute.Label.label" />
+			</includeattrs>
+		</referedcategory>
+		<referedcategory ref="Event">
+			<includeattrs>
+				<attribute name="onblur"
+					displaylabel="%Attribute.Label.onblur" />
+				<attribute name="onchange"
+					displaylabel="%Attribute.Label.onchange" />
+				<attribute name="onfocus"
+					displaylabel="%Attribute.Label.onfocus" />
+			</includeattrs>
+		</referedcategory>
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="p">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<referedattribute ref="dalign" overridename="align" />
+		</category>
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Language" />
+		<referedcategory ref="Event" />
+	</tag>
+	<tag name="param">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="value"
+				displaylabel="%Attribute.Label.value" />
+			<attribute name="valuetype" type="ENUMERATED"
+				displaylabel="%Attribute.Label.valuetype">
+				<option key="object" value="object" />
+				<option key="ref" value="ref" />
+				<option key="data" value="data" default="default" />
+			</attribute>
+			<attribute name="name" displaylabel="%Attribute.Label.name" required="required" />
+		</category>
+		<referedcategory ref="CSS/Accessibility">
+			<excludeattrs refs="class,style,title" />
+		</referedcategory>
+	</tag>
+	<tag name="pre">
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="q">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="cite" type="RELATIVEPATH"
+				displaylabel="%Attribute.Label.cite" />
+		</category>
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="s">
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="samp">
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="script">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="src" type="RELATIVEPATH"
+				displaylabel="%Attribute.Label.src" />
+			<attribute name="type" type="ENUMERATED" required="required"
+				displaylabel="%Attribute.Label.type">
+				<option key="text/php" value="text/php" />
+				<option key="text/tcl" value="text/tcl" />
+				<option key="text/livescript" value="text/livescript" />
+				<option key="text/vbscript" value="text/vbscript" />
+				<option key="text/jscript" value="text/jscript" />
+				<option key="text/javascript" value="text/javascript" />
+			</attribute>
+			<attribute name="defer" type="NAMED-BOOLEAN"
+				displaylabel="%Attribute.Label.defer" />
+		</category>
+	</tag>
+	<tag name="select">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="size" displaylabel="%Attribute.Label.size" />
+			<attribute name="multiple" type="NAMED-BOOLEAN"
+				displaylabel="%Attribute.Label.multiple" />
+			<attribute name="disabled" type="NAMED-BOOLEAN"
+				displaylabel="%Attribute.Label.disabled" />
+			<attribute name="name" displaylabel="%Attribute.Label.name" />
+		</category>
+		<referedcategory ref="CSS/Accessibility">
+			<includeattrs>
+				<attribute name="tabindex"
+					displaylabel="%Attribute.Label.tabindex" />
+			</includeattrs>
+		</referedcategory>
+		<referedcategory ref="Event">
+			<includeattrs>
+				<attribute name="onblur"
+					displaylabel="%Attribute.Label.onblur" />
+				<attribute name="onchange"
+					displaylabel="%Attribute.Label.onchange" />
+				<attribute name="onfocus"
+					displaylabel="%Attribute.Label.onfocus" />
+			</includeattrs>
+		</referedcategory>
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="small">
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="span">
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="strike">
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="strong">
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="style">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="type" type="ENUMERATED" required="required"
+				displaylabel="%Attribute.Label.type">
+				<option key="text/css" value="text/css" />
+				<option key="text/javascript" value="text/javascript" />
+			</attribute>
+			<referedattribute ref="media" />
+		</category>
+		<category name="CSS/Accessibility"
+			displaylabel="%Category.Label.CSS/Accessibility">
+			<attribute name="title"
+				displaylabel="%Attribute.Label.title" />
+		</category>
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="sub">
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="sup">
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="table">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="width"
+				displaylabel="%Attribute.Label.width" />
+			<attribute name="border"
+				displaylabel="%Attribute.Label.border" />
+			<attribute name="align" type="ENUMERATED"
+				displaylabel="%Attribute.Label.align">
+				<option key="right" value="right" />
+				<option key="left" value="left" />
+				<option key="center" value="center" />
+			</attribute>
+			<attribute name="cellpadding"
+				displaylabel="%Attribute.Label.cellpadding" />
+			<attribute name="cellspacing"
+				displaylabel="%Attribute.Label.cellspacing" />
+			<attribute name="bgcolor" type="COLOR"
+				displaylabel="%Attribute.Label.bgcolor" />
+			<attribute name="frame" type="ENUMERATED"
+				displaylabel="%Attribute.Label.frame">
+				<option key="lhs"
+					value="Lhs - Border on the left-hand side of the table frame" />
+				<option key="above"
+					value="Above - Border on the top side of the table frame" />
+				<option key="void"
+					value="Void - Removes all outside table borders (default)" />
+				<option key="box"
+					value="Box - Border on all sides of the table frame" />
+				<option key="vsides"
+					value="Vsides - Border on the left and right sides of the table frame" />
+				<option key="below"
+					value="Below - Border on the bottom side of the table frame" />
+				<option key="border"
+					value="Border - Border on all sides of the table frame" />
+				<option key="rhs"
+					value="Rhs - Border on the right-hand side of the table frame" />
+				<option key="hsides"
+					value="Hsides - Border on the top and bottom sides of the table frame" />
+			</attribute>
+			<attribute name="rules" type="ENUMERATED"
+				displaylabel="%Attribute.Label.rules">
+				<option key="cols"
+					value="Cols - Displays vertical borders between all table columns" />
+				<option key="groups"
+					value="Groups - Displays horizontal borders between all table groups" />
+				<option key="rows"
+					value="Rows - Displays horizontal borders between all table rows" />
+				<option key="none"
+					value="None - Removes all interior table borders (default)" />
+				<option key="all"
+					value="All - Displays a border on all rows and columns" />
+			</attribute>
+		</category>
+		<referedcategory ref="CSS/Accessibility">
+			<includeattrs>
+				<attribute name="summary"
+					displaylabel="%Attribute.Label.summary" />
+			</includeattrs>
+		</referedcategory>
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="tbody">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<referedattribute ref="align" />
+			<referedattribute ref="valign" />
+		</category>
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="td">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="width"
+				displaylabel="%Attribute.Label.width" />
+			<attribute name="height"
+				displaylabel="%Attribute.Label.height" />
+			<attribute name="colspan"
+				displaylabel="%Attribute.Label.colspan" />
+			<attribute name="rowspan"
+				displaylabel="%Attribute.Label.rowspan" />
+			<referedattribute ref="align" />
+			<attribute name="nowrap" type="NAMED-BOOLEAN"
+				displaylabel="%Attribute.Label.nowrap" />
+			<attribute name="bgcolor" type="COLOR"
+				displaylabel="%Attribute.Label.bgcolor" />
+			<referedattribute ref="scope" />
+			<referedattribute ref="valign" />
+		</category>
+		<referedcategory ref="CSS/Accessibility">
+			<includeattrs>
+				<attribute name="abbr"
+					displaylabel="%Attribute.Label.abbr" />
+				<attribute name="axis"
+					displaylabel="%Attribute.Label.axis" />
+				<attribute name="headers"
+					displaylabel="%Attribute.Label.headers" />
+			</includeattrs>
+		</referedcategory>
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="textarea">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="cols" required="required" displaylabel="%Attribute.Label.cols" />
+			<attribute name="rows" required="required" displaylabel="%Attribute.Label.rows" />
+			<attribute name="disabled" type="NAMED-BOOLEAN"
+				displaylabel="%Attribute.Label.disabled" />
+			<attribute name="readonly" type="NAMED-BOOLEAN"
+				displaylabel="%Attribute.Label.readonly" />
+			<attribute name="name" displaylabel="%Attribute.Label.name" />
+		</category>
+		<referedcategory ref="CSS/Accessibility">
+			<includeattrs>
+				<attribute name="accesskey"
+					displaylabel="%Attribute.Label.accesskey" />
+				<attribute name="tabindex"
+					displaylabel="%Attribute.Label.tabindex" />
+			</includeattrs>
+		</referedcategory>
+		<referedcategory ref="Event">
+			<includeattrs>
+				<attribute name="onblur"
+					displaylabel="%Attribute.Label.onblur" />
+				<attribute name="onchange"
+					displaylabel="%Attribute.Label.onchange" />
+				<attribute name="onfocus"
+					displaylabel="%Attribute.Label.onfocus" />
+				<attribute name="onselect"
+					displaylabel="%Attribute.Label.onselect" />
+			</includeattrs>
+		</referedcategory>
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="tfoot">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<referedattribute ref="align" />
+			<referedattribute ref="valign" />
+		</category>
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="th">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="width"
+				displaylabel="%Attribute.Label.width" />
+			<attribute name="height"
+				displaylabel="%Attribute.Label.height" />
+			<attribute name="colspan"
+				displaylabel="%Attribute.Label.colspan" />
+			<attribute name="rowspan"
+				displaylabel="%Attribute.Label.rowspan" />
+			<referedattribute ref="align" />
+			<attribute name="nowrap" type="NAMED-BOOLEAN"
+				displaylabel="%Attribute.Label.nowrap" />
+			<attribute name="bgcolor" type="COLOR"
+				displaylabel="%Attribute.Label.bgcolor" />
+			<referedattribute ref="scope" />
+			<referedattribute ref="valign" />
+		</category>
+		<referedcategory ref="CSS/Accessibility">
+			<includeattrs>
+				<attribute name="abbr"
+					displaylabel="%Attribute.Label.abbr" />
+				<attribute name="axis"
+					displaylabel="%Attribute.Label.axis" />
+				<attribute name="headers"
+					displaylabel="%Attribute.Label.headers" />
+			</includeattrs>
+		</referedcategory>
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="thead">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<referedattribute ref="align" />
+			<referedattribute ref="valign" />
+		</category>
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="title">
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="tr">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<referedattribute ref="align" />
+			<referedattribute ref="valign" />
+			<attribute name="bgcolor" type="COLOR"
+				displaylabel="%Attribute.Label.bgcolor" />
+		</category>
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="tt">
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="u">
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="ul">
+		<category name="General"
+			displaylabel="%Category.Label.General">
+			<attribute name="type" type="ENUMERATED"
+				displaylabel="%Attribute.Label.type">
+				<option key="square" value="square" />
+				<option key="circle" value="circle" />
+				<option key="disc" value="disc" />
+			</attribute>
+			<attribute name="compact" type="NAMED-BOOLEAN"
+				displaylabel="%Attribute.Label.compact" />
+		</category>
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<tag name="var">
+		<referedcategory ref="CSS/Accessibility" />
+		<referedcategory ref="Event" />
+		<referedcategory ref="Language" />
+	</tag>
+	<definition>
+		<categories>
+			<category name="CSS/Accessibility"
+				displaylabel="%Category.Label.CSS/Accessibility">
+				<attribute name="class" type="CSSCLASS"
+					displaylabel="%Attribute.Label.class" />
+				<attribute name="id" type="CSSID"
+					displaylabel="%Attribute.Label.id" />
+				<attribute name="style" type="CSSSTYLE"
+					typeparam="style=STYLE" displaylabel="%Attribute.Label.style" />
+				<attribute name="title"
+					displaylabel="%Attribute.Label.title" />
+			</category>
+			<category name="Event"
+				displaylabel="%Category.Label.Event">
+				<attribute name="onclick" type="JAVASCRIPT"
+					displaylabel="%Attribute.Label.onclick" />
+				<attribute name="ondblclick" type="JAVASCRIPT"
+					displaylabel="%Attribute.Label.ondblclick" />
+				<attribute name="onmousedown" type="JAVASCRIPT"
+					displaylabel="%Attribute.Label.onmousedown" />
+				<attribute name="onmousemove" type="JAVASCRIPT"
+					displaylabel="%Attribute.Label.onmousemove" />
+				<attribute name="onmouseout" type="JAVASCRIPT"
+					displaylabel="%Attribute.Label.onmouseout" />
+				<attribute name="onmouseover" type="JAVASCRIPT"
+					displaylabel="%Attribute.Label.onmouseover" />
+				<attribute name="onmouseup" type="JAVASCRIPT"
+					displaylabel="%Attribute.Label.onmouseup" />
+				<attribute name="onkeydown" type="JAVASCRIPT"
+					displaylabel="%Attribute.Label.onkeydown" />
+				<attribute name="onkeypress" type="JAVASCRIPT"
+					displaylabel="%Attribute.Label.onkeypress" />
+				<attribute name="onkeyup" type="JAVASCRIPT"
+					displaylabel="%Attribute.Label.onkeyup" />
+			</category>
+			<category name="Language"
+				displaylabel="%Category.Label.Language">
+				<attribute name="dir" type="ENUMERATED"
+					displaylabel="%Attribute.Label.dir">
+					<option key="ltr" value="left-to-right" />
+					<option key="rtl" value="right-to-left" />
+				</attribute>
+				<referedattribute ref="lang" />
+			</category>
+		</categories>
+		<attributes>
+			<attribute name="align" type="ENUMERATED"
+				displaylabel="%Attribute.Label.align">
+				<option key="right" value="right" />
+				<option key="char" value="char" />
+				<option key="left" value="left" />
+				<option key="center" value="center" />
+				<option key="justify" value="justify" />
+			</attribute>
+			<attribute name="dalign" type="ENUMERATED"
+				displaylabel="%Attribute.Label.align">
+				<option key="right" value="right" />
+				<option key="left" value="left" />
+				<option key="center" value="center" />
+				<option key="justify" value="justify" />
+			</attribute>
+			<attribute name="ialign" type="ENUMERATED"
+				displaylabel="%Attribute.Label.align">
+				<option key="bottom" value="bottom" />
+				<option key="middle" value="middle" />
+				<option key="top" value="top" />
+				<option key="right" value="right" />
+				<option key="left" value="left" />
+			</attribute>
+			<attribute name="lang" type="ENUMERATED"
+				displaylabel="%Attribute.Label.lang">
+				<option key="af" value="af Afrikaans" />
+				<option key="ar" value="ar Arabic (needs subtype)" />
+				<option key="be" value="be Belarusian" />
+				<option key="bg" value="bg Bulgarian" />
+				<option key="br" value="br Breton" />
+				<option key="ca" value="ca Catalan" />
+				<option key="cs" value="cs Czech" />
+				<option key="da" value="da Danish" />
+				<option key="de" value="de German (Standard)" />
+				<option key="el" value="el Greek" />
+				<option key="en" value="en English" />
+				<option key="es" value="es Spanish (Spain)" />
+				<option key="et" value="et Estonian" />
+				<option key="eu" value="eu Basque" />
+				<option key="fa" value="fa Farsi" />
+				<option key="fi" value="fi Finnish" />
+				<option key="fo" value="fo Faeroese" />
+				<option key="fr" value="fr French (Standard)" />
+				<option key="gd" value="gd Gaelic (Scotland)" />
+				<option key="he" value="he Hebrew" />
+				<option key="hi" value="hi Hindi" />
+				<option key="hr" value="hr Croatian" />
+				<option key="hu" value="hu Hungarian" />
+				<option key="id" value="id Indonesian" />
+				<option key="is" value="is Icelandic" />
+				<option key="it" value="it Italian (Standard)" />
+				<option key="ja" value="ja Japanese" />
+				<option key="ko" value="ko Korean" />
+				<option key="lt" value="lt Lithuanian" />
+				<option key="lv" value="lv Latvian" />
+				<option key="mk" value="mk Macedonian" />
+				<option key="ms" value="ms Malaysian" />
+				<option key="mt" value="mt Maltese" />
+				<option key="nl" value="nl Dutch (Standard)" />
+				<option key="no" value="no Norwegian (Bokmal/Nynorsk)" />
+				<option key="pl" value="pl Polish" />
+				<option key="pt" value="pt Portuguese (Standard)" />
+				<option key="rm" value="rm Rhaeto-Romanic" />
+				<option key="ro" value="ro Romanian" />
+				<option key="ru" value="ru Russian" />
+				<option key="sk" value="sk Slovak" />
+				<option key="sl" value="sl Slovenian" />
+				<option key="sq" value="sq Albanian" />
+				<option key="sr" value="sr Serbian (Cyrillic/Latin)" />
+				<option key="sv" value="sv Swedish" />
+				<option key="sx" value="sx Sutu" />
+				<option key="sz" value="sz Sami (Lappish)" />
+				<option key="th" value="th Thai" />
+				<option key="tn" value="tn Setswana" />
+				<option key="tr" value="tr Turkish" />
+				<option key="ts" value="ts Tsonga" />
+				<option key="uk" value="uk Ukrainian" />
+				<option key="ur" value="ur Urdu" />
+				<option key="vi" value="vi Vietnamese" />
+				<option key="xh" value="xh Xhosa" />
+				<option key="yi" value="yi Yiddish" />
+				<option key="zh" value="zh Chinese (needs subtype)" />
+				<option key="zu" value="zu Zulu" />
+			</attribute>
+			<attribute name="linktype">
+				<option key="index" value="index" />
+				<option key="subsection" value="subsection" />
+				<option key="bookmark" value="bookmark" />
+				<option key="start" value="start" />
+				<option key="next" value="next" />
+				<option key="stylesheet" value="stylesheet" />
+				<option key="chapter" value="chapter" />
+				<option key="help" value="help" />
+				<option key="alternate" value="alternate" />
+				<option key="appendix" value="appendix" />
+				<option key="contents" value="contents" />
+				<option key="section" value="section" />
+				<option key="prev" value="prev" />
+				<option key="previous" value="previous" />
+				<option key="glossary" value="glossary" />
+				<option key="copyright" value="copyright" />
+			</attribute>
+			<attribute name="media" type="ENUMERATED"
+				displaylabel="%Attribute.Label.media">
+				<option key="tv" value="tv" />
+				<option key="braille" value="braille" />
+				<option key="tty" value="tty" />
+				<option key="print" value="print" />
+				<option key="all" value="all" />
+				<option key="projection" value="projection" />
+				<option key="handheld" value="handheld" />
+				<option key="screen" value="screen" />
+				<option key="aural" value="aural" />
+			</attribute>
+			<attribute name="scope" type="ENUMERATED"
+				displaylabel="%Attribute.Label.scope">
+				<option key="row" value="row" />
+				<option key="col" value="col" />
+				<option key="rowgroup" value="rowgroup" />
+				<option key="colgroup" value="colgroup" />
+			</attribute>
+			<attribute name="target" type="ENUMERATED"
+				displaylabel="%Attribute.Label.target">
+				<option key="_self" value="_self" />
+				<option key="_blank" value="_blank" />
+				<option key="_parent" value="_parent" />
+				<option key="_top" value="_top" />
+			</attribute>
+			<attribute name="valign" type="ENUMERATED"
+				displaylabel="%Attribute.Label.valign">
+				<option key="middle" value="middle" />
+				<option key="top" value="top" />
+				<option key="baseline" value="baseline" />
+				<option key="bottom" value="bottom" />
+			</attribute>
+		</attributes>
+	</definition>
+</taglib>

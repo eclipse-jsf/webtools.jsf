@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<palette-item>
+	<category label="HTML" uri="html" iconPrefix="icons/palette/HTML/">
+		<item tagName="BR" label="Line Break" shortDesc="The element is used to enforce a line break." smallIcon="small/HTML_BR.gif" largeIcon="large/HTML_BR.gif" expert="true" />
+		<item tagName="INPUT" label="Button" shortDesc="An INPUT element with TYPE=SUBMIT represents an input option, typically a button, that instructs the user agent to submit the form." smallIcon="small/HTML_INPUT_BUTTON.gif" largeIcon="large/HTML_INPUT_BUTTON.gif">
+			<attribute name="type" value="submit"/>
+			<attribute name="name" value="submit"/>
+			<attribute name="value" value="submit"/>
+		</item>
+		<item tagName="INPUT" label="Check Box" shortDesc="An INPUT element with TYPE=CHECKBOX represents a boolean choice. A set of such elements with the same name represents an n-of-many choice field." smallIcon="small/HTML_INPUT_CHECKBOX.gif" largeIcon="large/HTML_INPUT_CHECKBOX.gif">
+			<attribute name="type" value="checkbox" />
+		</item>
+		<item tagName="FORM" label="Form" shortDesc="The FORM element contains a sequence of input elements, along with document structuring elements." smallIcon="small/HTML_FORM.gif" largeIcon="large/HTML_FORM.gif" />
+		<item tagName="INPUT" label="Hidden Field" shortDesc="An INPUT element with TYPE=HIDDEN represents a hidden field.The user does not interact with this field; instead, the VALUE attribute specifies the value of the field." smallIcon="small/HTML_INPUT_HIDDEN.gif" largeIcon="large/HTML_INPUT_HIDDEN.gif">
+			<attribute name="type" value="hidden" />
+		</item>
+		<item tagName="HR" label="Horizontal Rule" shortDesc="The HR element is a divider between sections of text; typically a full width horizontal rule or equivalent graphic." smallIcon="small/HTML_HR.gif" largeIcon="large/HTML_HR.gif"/>
+		<item tagName="IMG" label="Image" shortDesc="The IMG element refers to an image or icon via a hyperlink." smallIcon="small/HTML_IMG.gif" largeIcon="large/HTML_IMG.gif"/>
+		<item tagName="INPUT" label="Image Button" shortDesc="An INPUT element with TYPE=IMAGE specifies an image resource to display, and allows input of two form fields: the x and y coordinate of a pixel chosen from the image." smallIcon="small/HTML_INPUT_IMAGE.gif" largeIcon="large/HTML_INPUT_IMAGE.gif">
+			<attribute name="type" value="image" />
+		</item>
+		<item tagName="A" label="Link" shortDesc="The element allows the user to navigate the content of the document." smallIcon="small/HTML_A.gif" largeIcon="large/HTML_A.gif">
+			<attribute name="href" value="#" />
+			<template>Link</template>
+		</item>
+		<item tagName="INPUT" label="Password Field" shortDesc="An INPUT element with TYPE=PASSWORD is a text field as above, except that the value is obscured as it is entered." smallIcon="small/HTML_INPUT_PASSWORD.gif" largeIcon="large/HTML_INPUT_PASSWORD.gif">
+			<attribute name="type" value="password" />
+		</item>
+		<item tagName="INPUT" label="Radio Button" shortDesc="An INPUT element with TYPE=RADIO represents a boolean choice. A set of such elements with the same name represents a 1-of-many choice field." smallIcon="small/HTML_INPUT_RADIO.gif" largeIcon="large/HTML_INPUT_RADIO.gif">
+			<attribute name="type" value="radio" />
+		</item>
+		<item tagName="SELECT" label="Select" shortDesc="The SELECT element constrains the form field to an enumerated list of values." smallIcon="small/HTML_SELECT.gif" largeIcon="large/HTML_SELECT.gif" />
+		<item tagName="TABLE" label="Table" shortDesc="HTML Tables are contained within a TABLE element. The TABLE element denotes the range of the table, and uses attribute to define properties of it." smallIcon="small/HTML_TABLE.gif" largeIcon="large/HTML_TABLE.gif">
+			<attribute name="border" value="1" />
+			<attribute name="style" value="width:100;height:50"/>
+			<template>
+				<tr>
+					<td />
+					<td />
+				</tr>
+			</template>
+		</item>
+		<item tagName="TEXTAREA" label="Text Area" shortDesc="The TEXTAREA element represents a multi-line text field." smallIcon="small/HTML_TEXTAREA.gif" largeIcon="large/HTML_TEXTAREA.gif"/>
+		<item tagName="INPUT" label="Text Field" shortDesc="The default vaule of the TYPE attribute is TEXT, indicating a single line text entry field." smallIcon="small/HTML_INPUT_TEXT.gif" largeIcon="large/HTML_INPUT_TEXT.gif">
+			<attribute name="type" value="text" />
+		</item>
+	</category>
+</palette-item>
