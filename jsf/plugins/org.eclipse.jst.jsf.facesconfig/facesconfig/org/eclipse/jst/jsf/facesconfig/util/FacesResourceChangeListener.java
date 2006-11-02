@@ -10,8 +10,6 @@
  **************************************************************************************************/
 package org.eclipse.jst.jsf.facesconfig.util;
 
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
@@ -100,6 +98,7 @@ public class FacesResourceChangeListener implements IResourceChangeListener,
 	 * Only this class can create instances.
 	 */
 	private FacesResourceChangeListener() {
+        // no local instantiation
 	}
 
 	/**
@@ -197,6 +196,7 @@ public class FacesResourceChangeListener implements IResourceChangeListener,
 		try {
 			editorID = file.getPersistentProperty(EDITOR_KEY);
 		} catch (CoreException e) {
+            // suppress core exception
 		}
 		if (editorID == null) {
 			try {
@@ -226,8 +226,8 @@ public class FacesResourceChangeListener implements IResourceChangeListener,
 		}
 	}
 
-	private boolean isRestarting = false;
-	private Collection restartableComponents = new HashSet();
+	//private boolean isRestarting = false;
+	//private Collection restartableComponents = new HashSet();
 
 /*	private void restartComponents(Collection components) {
 		restartableComponents.addAll(components);
@@ -256,14 +256,17 @@ public class FacesResourceChangeListener implements IResourceChangeListener,
 
 	/** @see ISaveParticipant#doneSaving(ISaveContext) */
 	public void doneSaving(ISaveContext context) {
+        // nothing to do
 	}
 
 	/** @see ISaveParticipant#prepareToSave(ISaveContext) */
 	public void prepareToSave(ISaveContext context) throws CoreException {
+        // nothing to do
 	}
 
 	/** @see ISaveParticipant#rollback(ISaveContext) */
 	public void rollback(ISaveContext context) {
+	    // nothing to do
 	}
 
 	/** @see ISaveParticipant#saving(ISaveContext) */

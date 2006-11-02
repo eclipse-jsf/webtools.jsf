@@ -44,6 +44,7 @@ public class FacesConfigArtifactEdit extends ArtifactEdit {
 				artifactEdit.setFilename(sConfigFile);
 			}
 		} catch (IllegalArgumentException iae) {
+            // suppress illegal argument exception
 		}
 		return artifactEdit;
 	}
@@ -59,6 +60,7 @@ public class FacesConfigArtifactEdit extends ArtifactEdit {
 				artifactEdit.setFilename(sConfigFile);
 			}
 		} catch (IllegalArgumentException iae) {
+            // suppress illegal argument exception
 		}
 		return artifactEdit;
 	}
