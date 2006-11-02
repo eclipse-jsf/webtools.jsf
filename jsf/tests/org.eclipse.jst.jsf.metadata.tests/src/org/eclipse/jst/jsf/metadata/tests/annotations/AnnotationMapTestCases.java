@@ -17,7 +17,6 @@ import java.util.List;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.jst.jsf.contentmodel.annotation.internal.CMAnnotationFileRegistry;
 import org.eclipse.jst.jsf.contentmodel.annotation.internal.CMAnnotationMap;
 import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.CMAnnotationHelper;
@@ -104,8 +103,8 @@ public class AnnotationMapTestCases extends TestCase implements ICMAnnotationTes
 	}
 
 	//return "(en_US)" if that is the locale
-	private String getNLSSuffix() {
-		return Platform.getNL().equals("en_US") ? "(en_US)" : "";
-	}
+//	private String getNLSSuffix() {
+//		return Platform.getNL().equals("en_US") ? "(en_US)" : "";
+//	}
 	
 }

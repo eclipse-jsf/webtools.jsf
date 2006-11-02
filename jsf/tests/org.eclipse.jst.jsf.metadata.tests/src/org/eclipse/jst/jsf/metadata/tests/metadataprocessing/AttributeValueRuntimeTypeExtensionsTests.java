@@ -11,7 +11,6 @@
  ********************************************************************************/
 package org.eclipse.jst.jsf.metadata.tests.metadataprocessing;
 
-import java.util.Iterator;
 import java.util.List;
 
 import junit.framework.Assert;
@@ -60,10 +59,10 @@ public class AttributeValueRuntimeTypeExtensionsTests extends TestCase {
 		
 		
 	}
-	private void dumpPossibleValues(IPossibleValues p){
-		Iterator it = p.getPossibleValues().iterator();
-		while (it.hasNext()){
-			System.out.println((String)it.next());
-		}
-	}
+//	private void dumpPossibleValues(IPossibleValues p){
+//		Iterator it = p.getPossibleValues().iterator();
+//		while (it.hasNext()){
+//			System.out.println((String)it.next());
+//		}
+//	}
 }

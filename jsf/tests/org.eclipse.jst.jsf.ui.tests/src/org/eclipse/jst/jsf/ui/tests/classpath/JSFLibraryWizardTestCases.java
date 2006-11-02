@@ -11,17 +11,16 @@
  ********************************************************************************/
 package org.eclipse.jst.jsf.ui.tests.classpath;
 
+import junit.framework.Assert;
+import junit.framework.TestCase;
+
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.window.Window;
 import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.jface.wizard.WizardDialog;
+import org.eclipse.jst.jsf.ui.internal.classpath.JSFLibraryWizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.jst.jsf.ui.internal.classpath.JSFLibraryWizard;
-
-import junit.framework.Assert;
-import junit.framework.TestCase;
 
 public class JSFLibraryWizardTestCases extends TestCase {
 

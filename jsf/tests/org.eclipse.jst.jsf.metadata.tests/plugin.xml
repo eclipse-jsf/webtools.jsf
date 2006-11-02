@@ -33,17 +33,14 @@
          point="org.eclipse.jst.jsf.metadataprocessors.AttributeValueRuntimeTypes">
       <attributeValueRuntimeType
             class="org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.StringType"
-            id="MyStringArrayType"
-            runtime-type="java.lang.String"/>
+            id="MyStringArrayType"/>
       <attributeValueRuntimeType
             class="org.eclipse.jst.jsf.metadata.tests.metadataprocessing.types.MyBooleanType"
-            id="MyBooleanType"
-            runtime-type="boolean"/>
+            id="MyBooleanType"/>
       <attributeValueRuntimeType
             class="org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.LongType"
-            id="MyLongType"
-            runtime-type="java.lang.Long"/>
-      <attributeValueRuntimeType id="NoImplType" runtime-type="java.lang.String"/>
+            id="MyLongType"/>
+      <attributeValueRuntimeType id="NoImplType"/>
    </extension>
    <extension
          point="org.eclipse.jst.jsf.metadataprocessors.MetaDataEnabledFeatures">
@@ -53,8 +50,5 @@
       <MetaDataEnabledFeature
             class="org.eclipse.jst.jsf.metadata.tests.metadataprocessing.MetaDataEnabledBarkAdapter"
             typeid="org.eclipse.jst.jsf.metadata.tests.MyBooleanType"/>
-      <MetaDataEnabledFeature
-            class="org.eclipse.jst.jsf.core.tests.NoImplPossibleVals"
-            typeid="org.eclipse.jst.jsf.metadata.tests.NoImplType"/>
    </extension>
 </plugin>
