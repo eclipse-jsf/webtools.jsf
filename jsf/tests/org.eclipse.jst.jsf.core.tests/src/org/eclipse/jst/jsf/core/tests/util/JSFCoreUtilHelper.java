@@ -144,9 +144,9 @@ public class JSFCoreUtilHelper {
 		File pathTestFiles = new File(TestsPlugin.getInstallLocation().getPath() 
 								+ File.separator + relPathToArchives);
 		FilenameFilter jars = new FilenameFilter(){
-			public boolean accept(File dir, String name) {
-				if (name.length() >=5){
-					String lastChars = name.toLowerCase().substring(name.length() - 4);
+			public boolean accept(File dir, String name_) {
+				if (name_.length() >=5){
+					String lastChars = name_.toLowerCase().substring(name_.length() - 4);
 					if (lastChars.equals(".jar") || lastChars.equals(".zip"))
 						return true;
 				}

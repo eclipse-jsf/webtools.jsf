@@ -1,24 +1,13 @@
 package org.eclipse.jst.jsf.core.tests.jsflibraryconfig;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import junit.framework.Assert;
+import junit.framework.TestCase;
+
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFProjectLibraryReference;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.ArchiveFile;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryFactory;
-import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryPackage;
-import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFVersion;
 import org.eclipse.jst.jsf.core.tests.TestsPlugin;
-
-import junit.framework.Assert;
-import junit.framework.TestCase;
 
 public class JSFProjectLibraryReferenceTestCases extends TestCase {
 	private String JSF_NAME = "MockJSFLib";
@@ -55,14 +44,14 @@ public class JSFProjectLibraryReferenceTestCases extends TestCase {
 	 * General test class for JSFProjectLibraryReference class
 	 */
 	public void testJSFProjectLibraryReference() {		
-		JSFProjectLibraryReference jsfLibRef = new JSFProjectLibraryReference(jsfLib, true, true);
+		JSFProjectLibraryReference jsfLibRef_ = new JSFProjectLibraryReference(jsfLib, true, true);
 		
-		Assert.assertNotNull(jsfLibRef);		
-		Assert.assertTrue(jsfLibRef.isSelected());
-		Assert.assertTrue(jsfLibRef.isCheckedToBeDeployed());		
-		Assert.assertTrue(JSF_NAME.equals(jsfLibRef.getName()));
-		Assert.assertTrue(JSF_ID.equals(jsfLibRef.getID()));
-		Assert.assertTrue(isImpl == jsfLibRef.isImplementation());
+		Assert.assertNotNull(jsfLibRef_);		
+		Assert.assertTrue(jsfLibRef_.isSelected());
+		Assert.assertTrue(jsfLibRef_.isCheckedToBeDeployed());		
+		Assert.assertTrue(JSF_NAME.equals(jsfLibRef_.getName()));
+		Assert.assertTrue(JSF_ID.equals(jsfLibRef_.getID()));
+		Assert.assertTrue(isImpl == jsfLibRef_.isImplementation());
 	}		
 	
 	/*
@@ -77,22 +66,22 @@ public class JSFProjectLibraryReferenceTestCases extends TestCase {
 	 * test method for JSFProjectLibraryReference.isCheckedToBeDeployed()
 	 */
 	public void testIsCheckedToBeDeployed() {
-		JSFProjectLibraryReference jsfLibRef = new JSFProjectLibraryReference(jsfLib, true, true);
-		Assert.assertNotNull(jsfLibRef);		
-		Assert.assertTrue(jsfLibRef.isCheckedToBeDeployed());
+		JSFProjectLibraryReference jsfLibRef_ = new JSFProjectLibraryReference(jsfLib, true, true);
+		Assert.assertNotNull(jsfLibRef_);		
+		Assert.assertTrue(jsfLibRef_.isCheckedToBeDeployed());
 	}
 
 	/*
 	 * test method for JSFProjectLibraryReference.setSelected()
 	 */
 	public void testSetSelected() {
-		JSFProjectLibraryReference jsfLibRef = new JSFProjectLibraryReference(jsfLib, true, true);
-		Assert.assertNotNull(jsfLibRef);		
+		JSFProjectLibraryReference jsfLibRef_ = new JSFProjectLibraryReference(jsfLib, true, true);
+		Assert.assertNotNull(jsfLibRef_);		
 		
-		Assert.assertTrue(jsfLibRef.isSelected());
+		Assert.assertTrue(jsfLibRef_.isSelected());
 		
-		jsfLibRef.setSelected(false);
-		Assert.assertFalse(jsfLibRef.isSelected());
+		jsfLibRef_.setSelected(false);
+		Assert.assertFalse(jsfLibRef_.isSelected());
 	}
 
 	/*

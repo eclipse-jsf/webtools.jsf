@@ -27,7 +27,7 @@ public class JSFLibraryTestCases extends TestCase {
 	// test data
 	private String jsfLibID = "MyfacesID";
 	private String jsfLibName = "MyfacesName";
-	private boolean jsfDeployDefault = true;
+	//private boolean jsfDeployDefault = true;
 	private String[] archivefiles = {
 			"faces-all-bogus.jar",
 			"faces-api-bogus.jar", 

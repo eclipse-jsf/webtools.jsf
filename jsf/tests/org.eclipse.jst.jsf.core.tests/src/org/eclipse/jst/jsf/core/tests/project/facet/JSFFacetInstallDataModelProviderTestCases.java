@@ -16,19 +16,17 @@ import junit.framework.Assert;
 import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.Platform;
-import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
-import org.eclipse.wst.common.frameworks.datamodel.DataModelFactory;
-import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.project.facet.IJSFFacetInstallDataModelProperties;
 import org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDataModelProvider;
+import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
+import org.eclipse.wst.common.frameworks.datamodel.DataModelFactory;
+import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
 
 public class JSFFacetInstallDataModelProviderTestCases extends TestCase {
 	private static final String PROJ_2_3_NAME = "_TEST_2_3_PROJECT";
-	private static final String PROJ_2_4_NAME = "_TEST_2_4_PROJECT";
+	//private static final String PROJ_2_4_NAME = "_TEST_2_4_PROJECT";
 	
 	private JSFFacetInstallDataModelProvider dm;
 	private JSFLibrary jsfLib;

@@ -2,12 +2,13 @@ package org.eclipse.jst.jsf.core.tests.jsflibraryconfig;
 
 import java.util.List;
 
+import junit.framework.Assert;
+import junit.framework.TestCase;
+
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.QualifiedName;
-import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.J2EEModuleDependencyDelegate;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfigDialogSettingData;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfigModel;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfiglModelSource;
@@ -17,9 +18,6 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistry;
 import org.eclipse.jst.jsf.core.internal.project.facet.JSFUtils;
 import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
-
-import junit.framework.Assert;
-import junit.framework.TestCase;
 
 public class JSFLibraryConfigModelTestCases extends TestCase {
 	final static private String QUALIFIEDNAME = "org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfigProjectData";	
@@ -85,7 +83,7 @@ public class JSFLibraryConfigModelTestCases extends TestCase {
 	public void testGetSavedJSFComponentLibraries() {
 		JSFLibraryConfigModel model = JSFLibraryConfigModelFactory.createInstance(modelSrc);
 
-		JSFLibraryRegistry libReg = JSFCoreUtilHelper.getJSFLibraryRegistryFromJSFCorePlugin();
+		/*JSFLibraryRegistry libReg = */JSFCoreUtilHelper.getJSFLibraryRegistryFromJSFCorePlugin();
 		List lstCompRef = model.getCurrentJSFComponentLibrarySelection();
 		
 		Assert.assertTrue(lstCompRef.size() == 1);

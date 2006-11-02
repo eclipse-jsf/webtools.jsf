@@ -104,7 +104,7 @@ public class ArchiveFileTestCases extends TestCase {
 	public void testgetPath() {		
 		ArchiveFile archiveFile = null;	
 		String testData;
-		int subStrEnd = path4TestFiles.length() - 1;
+		//int subStrEnd = path4TestFiles.length() - 1;
 		
 		// Branch test - not-relative to workspace
 		testData = path4TestFiles + archivefiles[archivefiles.length-1];
@@ -127,7 +127,7 @@ public class ArchiveFileTestCases extends TestCase {
 	public void testgetName() {
 		ArchiveFile archiveFile = null;	
 		String testData;
-		int subStrEnd = path4TestFiles.length() - 1;
+		//int subStrEnd = path4TestFiles.length() - 1;
 		
 		// Branch test - not-relative to workspace
 		testData = path4TestFiles + archivefiles[archivefiles.length-1];
@@ -149,7 +149,7 @@ public class ArchiveFileTestCases extends TestCase {
 	public void testexists() {
 		ArchiveFile archiveFile = null;	
 		String testData;
-		int subStrEnd = path4TestFiles.length() - 1;
+		//int subStrEnd = path4TestFiles.length() - 1;
 		
 		testData = path4TestFiles + archivefiles[archivefiles.length-1];
 		archiveFile = JSFLibraryRegistryFactory.eINSTANCE.createArchiveFile();	
@@ -171,7 +171,7 @@ public class ArchiveFileTestCases extends TestCase {
 		ArchiveFile archiveFile_01 = null;
 		ArchiveFile archiveFile_02 = null;
 		String testData;
-		int subStrEnd = path4TestFiles.length() - 1;
+		//int subStrEnd = path4TestFiles.length() - 1;
 		
 		testData = path4TestFiles + archivefiles[archivefiles.length-1];
 		archiveFile_01 = JSFLibraryRegistryFactory.eINSTANCE.createArchiveFile();	
@@ -195,7 +195,7 @@ public class ArchiveFileTestCases extends TestCase {
 	public void testcopyTo() {
 		ArchiveFile archiveFile = null;	
 		String testData;
-		int subStrEnd = path4TestFiles.length() - 1;
+		//int subStrEnd = path4TestFiles.length() - 1;
 		
 		testData = path4TestFiles + archivefiles[0];						
 		
