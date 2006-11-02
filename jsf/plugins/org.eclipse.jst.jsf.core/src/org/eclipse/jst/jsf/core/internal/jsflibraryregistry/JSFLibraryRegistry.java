@@ -67,6 +67,9 @@ public interface JSFLibraryRegistry extends EObject{
 	 */
 	void setDefaultImplementationID(String value);
 
+	/**
+	 *The default implementation message string
+	 */
 	public static final String DEFAULT_IMPL_LABEL = Messages.JSFLibraryRegistry_DEFAULT_IMPL_LABEL;
 
 	/**
@@ -107,6 +110,7 @@ public interface JSFLibraryRegistry extends EObject{
 	 * If the meaning of the '<em>Default Implementation</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
+	 * @return the default implementation 
 	 * <!-- end-user-doc -->
 	 * @model kind="operation" required="true"
 	 * @generated
@@ -115,6 +119,7 @@ public interface JSFLibraryRegistry extends EObject{
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param value 
 	 * <!-- end-user-doc -->
 	 * @model implementationRequired="true"
 	 * @generated
@@ -123,6 +128,8 @@ public interface JSFLibraryRegistry extends EObject{
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param ID 
+	 * @return the jsf library 
 	 * <!-- end-user-doc -->
 	 * @model required="true" IDRequired="true"
 	 * @generated
@@ -131,6 +138,8 @@ public interface JSFLibraryRegistry extends EObject{
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param name 
+	 * @return the jsf libraries matching name 
 	 * <!-- end-user-doc -->
 	 * @model required="true" many="false" nameRequired="true"
 	 * @generated
@@ -139,6 +148,7 @@ public interface JSFLibraryRegistry extends EObject{
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return the implementation JSF libraries 
 	 * <!-- end-user-doc -->
 	 * @model kind="operation" required="true" many="false"
 	 * @generated
@@ -147,6 +157,7 @@ public interface JSFLibraryRegistry extends EObject{
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return the non-implementation JSF libraries 
 	 * <!-- end-user-doc -->
 	 * @model kind="operation" required="true" many="false"
 	 * @generated
@@ -155,6 +166,7 @@ public interface JSFLibraryRegistry extends EObject{
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return all the JSF libraries 
 	 * <!-- end-user-doc -->
 	 * @model kind="operation" required="true" many="false"
 	 * @generated
@@ -163,6 +175,8 @@ public interface JSFLibraryRegistry extends EObject{
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param library 
+	 * @return true if add succeeds 
 	 * <!-- end-user-doc -->
 	 * @model required="true" libraryRequired="true"
 	 * @generated
@@ -171,6 +185,8 @@ public interface JSFLibraryRegistry extends EObject{
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param library 
+	 * @return true if remove succeeds 
 	 * <!-- end-user-doc -->
 	 * @model required="true" libraryRequired="true"
 	 * @generated

@@ -155,6 +155,7 @@ public interface ArchiveFile extends EObject{
 	 * If the meaning of the '<em>Path</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
+	 * @return the path
 	 * <!-- end-user-doc -->
 	 * @model kind="operation" required="true"
 	 * @generated
@@ -163,6 +164,7 @@ public interface ArchiveFile extends EObject{
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return the name 
 	 * <!-- end-user-doc -->
 	 * @model kind="operation" required="true"
 	 * @generated
@@ -171,6 +173,7 @@ public interface ArchiveFile extends EObject{
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return true if exists 
 	 * <!-- end-user-doc -->
 	 * @model required="true"
 	 * @generated
@@ -179,6 +182,8 @@ public interface ArchiveFile extends EObject{
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param object 
+	 * @return true if equal 
 	 * <!-- end-user-doc -->
 	 * @model required="true" objectRequired="true"
 	 * @generated
@@ -187,6 +192,7 @@ public interface ArchiveFile extends EObject{
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return the hashCode 
 	 * <!-- end-user-doc -->
 	 * @model required="true"
 	 * @generated
@@ -195,6 +201,8 @@ public interface ArchiveFile extends EObject{
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param baseDestLocation 
+	 * @return true if copied succeeds 
 	 * <!-- end-user-doc -->
 	 * @model required="true" baseDestLocationRequired="true"
 	 * @generated
@@ -203,6 +211,7 @@ public interface ArchiveFile extends EObject{
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return the resolved source location 
 	 * <!-- end-user-doc -->
 	 * @model kind="operation" required="true"
 	 * @generated

@@ -101,19 +101,17 @@ public class RuntimeClasspathJSFAppConfigLocater extends AbstractJSFAppConfigLoc
 				((deltaFlags & IJavaElementDelta.F_ARCHIVE_CONTENT_CHANGED) == IJavaElementDelta.F_ARCHIVE_CONTENT_CHANGED) ||
 				((deltaFlags & IJavaElementDelta.F_REMOVED_FROM_CLASSPATH) == IJavaElementDelta.F_REMOVED_FROM_CLASSPATH)) {
 			return true;
-		} else {
-			boolean changed = false;
-			IJavaElementDelta[] childDeltas = delta.getAffectedChildren();
-			if (childDeltas != null) {
-				for (int i = 0; i < childDeltas.length; i++) {
-					if (classpathChanged(childDeltas[i])) {
-						changed = true;
-						break;
-					}
+		}  
+		boolean changed = false;
+		IJavaElementDelta[] childDeltas = delta.getAffectedChildren();
+		if (childDeltas != null) {
+			for (int i = 0; i < childDeltas.length; i++) {
+				if (classpathChanged(childDeltas[i])) {
+					changed = true;
+					break;
 				}
 			}
-			return changed;
 		}
+		return changed;
 	}
-
 }

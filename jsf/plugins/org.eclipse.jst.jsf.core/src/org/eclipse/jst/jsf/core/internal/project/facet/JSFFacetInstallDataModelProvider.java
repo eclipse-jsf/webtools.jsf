@@ -11,7 +11,6 @@
 package org.eclipse.jst.jsf.core.internal.project.facet;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -103,18 +102,18 @@ public class JSFFacetInstallDataModelProvider extends
 			errorMessage = Messages.JSFFacetInstallDataModelProvider_ValidateServletName;
 			return WTPCommonPlugin.createErrorStatus(errorMessage);				
 		}
-		else 
-			return OK_STATUS;
+		
+		return OK_STATUS;
 	}
 
 	private IStatus validateImpl(JSFLibrary impl) {
 		if (impl == null) {
 			errorMessage = Messages.JSFFacetInstallDataModelProvider_ValidateJSFImpl; 
 		}
-		if (errorMessage != null)
+		if (errorMessage != null) {
 			return WTPCommonPlugin.createErrorStatus(errorMessage);
-		else
-			return OK_STATUS;
+		}
+		return OK_STATUS;
 	}
 	
 	private IStatus validateConfigLocation(String text) {
@@ -173,15 +172,14 @@ public class JSFFacetInstallDataModelProvider extends
 		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(projName);
 		if (project.exists()){
 			return project.getLocation();
-		} else {
-			IDataModel projModel = (IDataModel)getProperty(MASTER_PROJECT_DM);
-			if (projModel.getBooleanProperty(IProjectCreationPropertiesNew.USE_DEFAULT_LOCATION)){
-				return new Path(projModel.getStringProperty(IProjectCreationPropertiesNew.PROJECT_LOCATION)).append(projName);
-			}
-			else {
-				return new Path(projModel.getStringProperty(IProjectCreationPropertiesNew.USER_DEFINED_LOCATION)).append(projName);
-			}	
+		} 
+		
+		IDataModel projModel = (IDataModel)getProperty(MASTER_PROJECT_DM);
+		if (projModel.getBooleanProperty(IProjectCreationPropertiesNew.USE_DEFAULT_LOCATION)){
+			return new Path(projModel.getStringProperty(IProjectCreationPropertiesNew.PROJECT_LOCATION)).append(projName);
 		}
+		
+		return new Path(projModel.getStringProperty(IProjectCreationPropertiesNew.USER_DEFINED_LOCATION)).append(projName);
 	}
 
 	private IPath getWebContentFolder() {
@@ -201,11 +199,9 @@ public class JSFFacetInstallDataModelProvider extends
 				webContentPath = JSFUtils.getWebArtifactEditForRead(proj)
 					.getDeploymentDescriptorPath().removeLastSegments(2);
 				return webContentPath;
-			} else {
-				webContentPath = new Path(getStringProperty(WEBCONTENT_DIR));
-				return webContentPath;
 			}
-				
+			webContentPath = new Path(getStringProperty(WEBCONTENT_DIR));
+			return webContentPath;
 		} finally {
 			if (webApp != null) {
 				webApp.dispose();

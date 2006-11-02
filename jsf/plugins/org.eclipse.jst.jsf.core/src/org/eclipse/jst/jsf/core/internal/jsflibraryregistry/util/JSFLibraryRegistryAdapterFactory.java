@@ -59,6 +59,7 @@ public class JSFLibraryRegistryAdapterFactory extends AdapterFactoryImpl {
 	 * Returns whether this factory is applicable for the type of the object.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns <code>true</code> if the object is either the model's package or is an instance object of the model.
+     * @param object 
 	 * <!-- end-user-doc -->
 	 * @return whether this factory is applicable for the type of the object.
 	 * @generated

@@ -128,8 +128,9 @@ public class JSFLibraryContainerWizardPage extends WizardPage implements
 	 * @see org.eclipse.jdt.ui.wizards.IClasspathContainerPage#getSelection()
 	 */
 	public IClasspathEntry getSelection() {
-		if (lv.getSelection()!= null){
-		}
+	    // TODO: dead code?
+        //		if (lv.getSelection()!= null){
+//		}
 		return null;
 	}
 
@@ -137,6 +138,7 @@ public class JSFLibraryContainerWizardPage extends WizardPage implements
 	 * @see org.eclipse.jdt.ui.wizards.IClasspathContainerPage#setSelection(org.eclipse.jdt.core.IClasspathEntry)
 	 */
 	public void setSelection(IClasspathEntry containerEntry) {
+        // getSelection always returns null
 	}
 
 	public void createControl(Composite parent) {
@@ -236,6 +238,7 @@ public class JSFLibraryContainerWizardPage extends WizardPage implements
 		 * @see org.eclipse.jface.viewers.IContentProvider#dispose()
 		 */
 		public void dispose() {
+            // do nothing
 		}
 
 		/* (non-Javadoc)
@@ -275,9 +278,8 @@ public class JSFLibraryContainerWizardPage extends WizardPage implements
 				JSFLibrary lib = (JSFLibrary)element;
 				if (lib.isImplementation()) {
 					return lib.getName() + " [implementation]"; //$NON-NLS-1$
-				} else {
-					return lib.getName();
 				}
+                return lib.getName();
 			}
 			return null;
 		}
@@ -287,7 +289,8 @@ public class JSFLibraryContainerWizardPage extends WizardPage implements
 				libImg.dispose();
 		}
 
-		public void addListener(ILabelProviderListener listener) {			
+		public void addListener(ILabelProviderListener listener) {		
+            // no listener support
 		}
 
 		public boolean isLabelProperty(Object element, String property) {
@@ -295,13 +298,16 @@ public class JSFLibraryContainerWizardPage extends WizardPage implements
 		}
 
 		public void removeListener(ILabelProviderListener listener) {
+            // no listener support
 		}
 	}
 	
 	private void validate() {
+        // TODO: what's this for? seems dead
 	}
 
 	private void doListSelected(SelectionChangedEvent event) {
+        // what's this for? seems dead.
 	}
 
 	private void doDoubleClick(DoubleClickEvent event) {

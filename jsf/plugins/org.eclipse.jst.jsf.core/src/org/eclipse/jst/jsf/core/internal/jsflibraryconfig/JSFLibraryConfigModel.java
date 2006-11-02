@@ -10,7 +10,6 @@
 package org.eclipse.jst.jsf.core.internal.jsflibraryconfig;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -216,10 +215,10 @@ public class JSFLibraryConfigModel {
 	 */
 	public void saveData(final IProject project) {
 		// Instantiate one to make sure it is for a project.
-		JSFLibraryConfigProjectData data = new JSFLibraryConfigProjectData(project);
+		JSFLibraryConfigProjectData data_ = new JSFLibraryConfigProjectData(project);
 		List implLibs = new ArrayList();
 		implLibs.add(getCurrentJSFImplementationLibrarySelection());
-		data.saveData(implLibs, getCurrentJSFComponentLibrarySelection());
+		data_.saveData(implLibs, getCurrentJSFComponentLibrarySelection());
 	}	
 	
 	/**

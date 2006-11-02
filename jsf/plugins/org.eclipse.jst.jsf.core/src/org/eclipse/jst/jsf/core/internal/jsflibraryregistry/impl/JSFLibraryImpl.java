@@ -184,6 +184,7 @@ public class JSFLibraryImpl extends EObjectImpl implements JSFLibrary {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return the static eClass 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -193,6 +194,7 @@ public class JSFLibraryImpl extends EObjectImpl implements JSFLibrary {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return the id 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -202,6 +204,7 @@ public class JSFLibraryImpl extends EObjectImpl implements JSFLibrary {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param newID 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -214,6 +217,7 @@ public class JSFLibraryImpl extends EObjectImpl implements JSFLibrary {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return the name 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -223,6 +227,7 @@ public class JSFLibraryImpl extends EObjectImpl implements JSFLibrary {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param newName 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -235,6 +240,7 @@ public class JSFLibraryImpl extends EObjectImpl implements JSFLibrary {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return the jsf version 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -244,6 +250,7 @@ public class JSFLibraryImpl extends EObjectImpl implements JSFLibrary {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param newJSFVersion 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -256,6 +263,7 @@ public class JSFLibraryImpl extends EObjectImpl implements JSFLibrary {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return true if library is to be deployed 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -265,6 +273,7 @@ public class JSFLibraryImpl extends EObjectImpl implements JSFLibrary {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param newDeployed 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -277,6 +286,7 @@ public class JSFLibraryImpl extends EObjectImpl implements JSFLibrary {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return true if implementation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -286,6 +296,7 @@ public class JSFLibraryImpl extends EObjectImpl implements JSFLibrary {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param newImplementation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -298,6 +309,7 @@ public class JSFLibraryImpl extends EObjectImpl implements JSFLibrary {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return the list of archive files 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -310,6 +322,8 @@ public class JSFLibraryImpl extends EObjectImpl implements JSFLibrary {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param fullPath 
+	 * @return the true if the fullPath contains an archive file 
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -330,6 +344,8 @@ public class JSFLibraryImpl extends EObjectImpl implements JSFLibrary {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param fullPath 
+	 * @return the working copy 
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -354,6 +370,7 @@ public class JSFLibraryImpl extends EObjectImpl implements JSFLibrary {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param otherLibrary 
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -379,6 +396,8 @@ public class JSFLibraryImpl extends EObjectImpl implements JSFLibrary {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param baseDestLocation 
+	 * @return the base destination location 
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -395,6 +414,11 @@ public class JSFLibraryImpl extends EObjectImpl implements JSFLibrary {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param otherEnd 
+	 * @param featureID 
+	 * @param baseClass 
+	 * @param msgs 
+	 * @return the notification chain 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -414,6 +438,11 @@ public class JSFLibraryImpl extends EObjectImpl implements JSFLibrary {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param otherEnd 
+	 * @param featureID 
+	 * @param baseClass 
+	 * @param msgs 
+	 * @return the notification chain 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -431,6 +460,9 @@ public class JSFLibraryImpl extends EObjectImpl implements JSFLibrary {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param eFeature 
+	 * @param resolve 
+	 * @return the value of the indicated feature 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -454,6 +486,8 @@ public class JSFLibraryImpl extends EObjectImpl implements JSFLibrary {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param eFeature 
+	 * @param newValue 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -484,6 +518,7 @@ public class JSFLibraryImpl extends EObjectImpl implements JSFLibrary {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param eFeature 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -513,6 +548,8 @@ public class JSFLibraryImpl extends EObjectImpl implements JSFLibrary {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param eFeature 
+	 * @return true if the feature's value is set 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -536,6 +573,7 @@ public class JSFLibraryImpl extends EObjectImpl implements JSFLibrary {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return the string representation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */

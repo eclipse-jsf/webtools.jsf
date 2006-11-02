@@ -22,6 +22,7 @@ import java.net.URL;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
@@ -138,6 +139,7 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return the static eClass 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -147,6 +149,7 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return the source location
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -162,6 +165,8 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 	 * stored and the relativeToWorkspace property is set to false. To override
 	 * this behaviour and set the absolute location as passed regardless, call
 	 * setRelativeToWorkspace(false) BEFORE calling this method.
+	 * 
+	 * @param newSourceLocation 
 	 *  
 	 * <!-- end-user-doc -->
 	 * @generated NOT
@@ -193,6 +198,7 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return true if file is relative to workspace 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -204,6 +210,7 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 	 * <!-- begin-user-doc -->
 	 * To override workspace-relative recognition behaviour, be sure to call
 	 * this method with a false value BEFORE calling setLocation(String).
+	 * @param newRelativeToWorkspace 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -216,6 +223,7 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return  the relative destination location 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -225,6 +233,7 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param newRelativeDestLocation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -237,6 +246,7 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return the jsf library instance 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -247,6 +257,7 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param newJSFLibrary 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -268,6 +279,7 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return the path 
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -290,6 +302,7 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return the name 
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -312,6 +325,7 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return true if the archive file exists in the bundle 
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -333,6 +347,8 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param object 
+	 * @return true if equal 
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -352,6 +368,7 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return a the resolved source location hash or 0 if it is null 
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -361,6 +378,8 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param baseDestLocation 
+	 * @return true if the copy is successful
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -421,6 +440,7 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return the resolved source location 
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -440,8 +460,8 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 				//resolvedSourceLocation = appendSeparator(bundleLocation) + sourceLocation;
 				try {
 					Path srcPath = new Path(sourceLocation);
-					URL fileURL = Platform.find(bundle, srcPath);
-					URL url = Platform.resolve(fileURL);
+					URL fileURL = FileLocator.find(bundle, srcPath, null);
+					URL url = FileLocator.resolve(fileURL);
 					resolvedSourceLocation = url.getPath();
 				} catch (IOException e) {
 					resolvedSourceLocation = sourceLocation;
@@ -499,6 +519,10 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 		return workspaceRoot;
 	}
 
+	/**
+	 * @param path
+	 * @return the the path string with invalid path separators correctly fixed
+	 */
 	protected String appendSeparator(String path) {
 		String newPath = null;
 		if (!path.endsWith("\\") && !path.endsWith("/")) { //$NON-NLS-1$ //$NON-NLS-2$
@@ -511,6 +535,11 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param otherEnd 
+	 * @param featureID 
+	 * @param baseClass 
+	 * @param msgs 
+	 * @return the inverse notification chain 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -532,6 +561,11 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param otherEnd 
+	 * @param featureID 
+	 * @param baseClass 
+	 * @param msgs 
+	 * @return the notification chain 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -549,6 +583,8 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param msgs 
+	 * @return the notification chain 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -566,6 +602,9 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param eFeature 
+	 * @param resolve 
+	 * @return the request feature value 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -585,6 +624,8 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param eFeature 
+	 * @param newValue 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -608,6 +649,7 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param eFeature 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -631,6 +673,8 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param eFeature 
+	 * @return true if the feature is set 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -650,6 +694,7 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return the string representation of this archive file 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */

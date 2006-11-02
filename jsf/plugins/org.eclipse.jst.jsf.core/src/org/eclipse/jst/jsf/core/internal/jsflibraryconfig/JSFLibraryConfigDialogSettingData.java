@@ -11,7 +11,6 @@
 package org.eclipse.jst.jsf.core.internal.jsflibraryconfig;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.runtime.IStatus;

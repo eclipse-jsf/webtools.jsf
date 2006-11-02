@@ -117,6 +117,7 @@ public class JSFLibraryRegistryPackageImpl extends EPackageImpl implements JSFLi
 	 * <p>Invocation of this method will not affect any packages that have
 	 * already been initialized.
 	 * <!-- begin-user-doc -->
+	 * @return the JSF library registry package
 	 * <!-- end-user-doc -->
 	 * @see #eNS_URI
 	 * @see #createPackageContents()
@@ -145,6 +146,7 @@ public class JSFLibraryRegistryPackageImpl extends EPackageImpl implements JSFLi
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @return the eclass 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -154,6 +156,7 @@ public class JSFLibraryRegistryPackageImpl extends EPackageImpl implements JSFLi
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @return the eattribute 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -163,6 +166,7 @@ public class JSFLibraryRegistryPackageImpl extends EPackageImpl implements JSFLi
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @return the ereference
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -172,6 +176,7 @@ public class JSFLibraryRegistryPackageImpl extends EPackageImpl implements JSFLi
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @return the ereference 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -181,6 +186,7 @@ public class JSFLibraryRegistryPackageImpl extends EPackageImpl implements JSFLi
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @return the eclass 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -190,6 +196,7 @@ public class JSFLibraryRegistryPackageImpl extends EPackageImpl implements JSFLi
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @return the eattribute 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -199,6 +206,7 @@ public class JSFLibraryRegistryPackageImpl extends EPackageImpl implements JSFLi
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @return the eattribute 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -208,6 +216,7 @@ public class JSFLibraryRegistryPackageImpl extends EPackageImpl implements JSFLi
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @return the eattribute
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -217,6 +226,7 @@ public class JSFLibraryRegistryPackageImpl extends EPackageImpl implements JSFLi
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @return the eattribute 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -226,6 +236,7 @@ public class JSFLibraryRegistryPackageImpl extends EPackageImpl implements JSFLi
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @return the eattribute 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -235,6 +246,7 @@ public class JSFLibraryRegistryPackageImpl extends EPackageImpl implements JSFLi
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @return the ereference 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -244,6 +256,7 @@ public class JSFLibraryRegistryPackageImpl extends EPackageImpl implements JSFLi
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @return the eclass 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -253,6 +266,7 @@ public class JSFLibraryRegistryPackageImpl extends EPackageImpl implements JSFLi
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @return the eattribute 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -262,6 +276,7 @@ public class JSFLibraryRegistryPackageImpl extends EPackageImpl implements JSFLi
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @return the eattribute 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -271,6 +286,7 @@ public class JSFLibraryRegistryPackageImpl extends EPackageImpl implements JSFLi
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @return the eattribute
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -280,6 +296,7 @@ public class JSFLibraryRegistryPackageImpl extends EPackageImpl implements JSFLi
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @return the ereference 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -289,6 +306,7 @@ public class JSFLibraryRegistryPackageImpl extends EPackageImpl implements JSFLi
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @return the eclass 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -298,6 +316,7 @@ public class JSFLibraryRegistryPackageImpl extends EPackageImpl implements JSFLi
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @return the eattribute 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -307,6 +326,7 @@ public class JSFLibraryRegistryPackageImpl extends EPackageImpl implements JSFLi
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @return the eenum 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -316,7 +336,8 @@ public class JSFLibraryRegistryPackageImpl extends EPackageImpl implements JSFLi
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+     * @return the jsf library registry factory
+     * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public JSFLibraryRegistryFactory getJSFLibraryRegistryFactory() {

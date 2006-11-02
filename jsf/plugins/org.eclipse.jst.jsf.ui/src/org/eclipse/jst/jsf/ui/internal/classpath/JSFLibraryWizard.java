@@ -253,6 +253,7 @@ public class JSFLibraryWizard extends Wizard implements INewWizard {
 				}
 
 				public void dispose() {
+                    // do nothing
 				}
 
 				public void inputChanged(Viewer viewer, Object oldInput,
@@ -283,6 +284,7 @@ public class JSFLibraryWizard extends Wizard implements INewWizard {
 				}
 
 				public void addListener(ILabelProviderListener listener) {
+                    // no listeners supported
 				}
 
 				public void dispose() {
@@ -295,6 +297,7 @@ public class JSFLibraryWizard extends Wizard implements INewWizard {
 				}
 
 				public void removeListener(ILabelProviderListener listener) {
+                    // no listeners supported
 				}
 			});
 
@@ -419,6 +422,7 @@ public class JSFLibraryWizard extends Wizard implements INewWizard {
 		}
 
 		public void widgetDefaultSelected(SelectionEvent e) {
+            // no handling for default selection
 		}
 
 		private void validate() {

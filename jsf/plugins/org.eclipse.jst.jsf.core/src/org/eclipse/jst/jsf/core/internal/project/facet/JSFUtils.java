@@ -16,7 +16,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -49,24 +48,45 @@ import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
  * @since M1
  */
 public class JSFUtils {
+	/**
+	 * The name of the Faces servlet class
+	 */
 	public static final String JSF_SERVLET_CLASS = "javax.faces.webapp.FacesServlet"; //$NON-NLS-1$
+	/**
+	 * The name of the context parameter used for JSF configuration files
+	 */
 	public static final String JSF_CONFIG_CONTEXT_PARAM = "javax.faces.CONFIG_FILES"; //$NON-NLS-1$
+	/**
+	 * The path to the default application configuration file
+	 */
 	public static final String JSF_DEFAULT_CONFIG_PATH = "/WEB-INF/faces-config.xml"; //$NON-NLS-1$
 
-	public static final String PP_JSF_FACET_INSTALLED = "is.jsf.project"; //$NON-NLS-1$
-	public static final String PP_JSF_DEPLOY_ME = "deploy.jsf.libraries"; //$NON-NLS-1$
-	public static final String PP_JSF_IMPL_LIB = "jsf.impl.lib"; //$NON-NLS-1$
-	public static final String PP_JSF_NONIMPL_LIB = "jsf.nonimpl.lib"; //$NON-NLS-1$
-	public static final String PP_JSF_AVAIL_COMP_LIB = "jsf.comp.lib.avail"; //$NON-NLS-1$
-	public static final String PP_JSF_SEL_COMP_LIB = "jsf.comp.lib.selected"; //$NON-NLS-1$
-	
+	/**
+	 * The key that identifies
+	 */
+	// TODO: this seem not to be used; dead code?
+//	public static final String PP_JSF_FACET_INSTALLED = "is.jsf.project"; //$NON-NLS-1$
+//	public static final String PP_JSF_DEPLOY_ME = "deploy.jsf.libraries"; //$NON-NLS-1$
+//	public static final String PP_JSF_IMPL_LIB = "jsf.impl.lib"; //$NON-NLS-1$
+//	public static final String PP_JSF_NONIMPL_LIB = "jsf.nonimpl.lib"; //$NON-NLS-1$
+//	public static final String PP_JSF_AVAIL_COMP_LIB = "jsf.comp.lib.avail"; //$NON-NLS-1$
+//	public static final String PP_JSF_SEL_COMP_LIB = "jsf.comp.lib.selected"; //$NON-NLS-1$
+//	
+	/**
+	 * the key for implementation libraries in persistent properties
+     * TODO: should encapsulate the property somewhere and hide the constant
+	 */
 	public static final String PP_JSF_IMPLEMENTATION_LIBRARIES = "jsf.implementation.libraries"; //$NON-NLS-1$
+	/**
+	 * the key for component libraries in persistent properties
+     * TODO: should encapsulate the property somewhere and hide the constant
+	 */
 	public static final String PP_JSF_COMPONENT_LIBRARIES = "jsf.component.libraries"; //$NON-NLS-1$
 	
 	
 	/**
 	 * Convenience method for getting writeable WebApp model
-	 * @param IProject
+	 * @param project
 	 * @return WebArtifactEdit
 	 */
 	public static WebArtifactEdit getWebArtifactEditForWrite(IProject project) {
@@ -75,7 +95,7 @@ public class JSFUtils {
 
 	/**
 	 * Convenience method for getting read-only WebApp model
-	 * @param IProject
+	 * @param project
 	 * @return WebArtifactEdit
 	 */
 	public static WebArtifactEdit getWebArtifactEditForRead(IProject project) {
@@ -108,8 +128,8 @@ public class JSFUtils {
 
 	/**
 	 * Creates a stubbed JSF configuration file for specified JSF version and path
-	 * @param String jsfVersion
-	 * @param String configPath
+	 * @param jsfVersion
+	 * @param configPath
 	 */
 	public static void createConfigFile(String jsfVersion, IPath configPath) {
 		FileOutputStream os = null;
@@ -178,9 +198,9 @@ public class JSFUtils {
 	 * Creates servlet reference in WebApp if not present or updates servlet name if found
 	 * using the passed configuration.
 	 * 
-	 * @param WebApp webApp
-	 * @param IDataModel config
-	 * @param Servlet servlet
+	 * @param webApp
+	 * @param config
+	 * @param servlet
 	 * @return Servlet servlet - if passed servlet was null, will return created servlet
 	 */
 	public static Servlet createOrUpdateServletRef(WebApp webApp,
@@ -211,9 +231,9 @@ public class JSFUtils {
 	/**
 	 * Creates servlet-mappings for the servlet
 	 * 
-	 * @param WebApp webApp
-	 * @param List urlMappingList - list of string values to  be used in url-pattern for servlet-mapping
-	 * @param Servlet servlet
+	 * @param webApp
+	 * @param urlMappingList - list of string values to  be used in url-pattern for servlet-mapping
+	 * @param servlet
 	 */
 	public static void setUpURLMappings(WebApp webApp, List urlMappingList,
 			Servlet servlet) {
@@ -232,8 +252,8 @@ public class JSFUtils {
 	
 	/**
 	 * Removes servlet-mappings for servlet using servlet-name.
-	 * @param WebApp webApp
-	 * @param Servlet servlet
+	 * @param webApp
+	 * @param servlet
 	 */
 	public static void removeURLMappings(WebApp webApp, Servlet servlet) {
 		String servletName = servlet.getServletName();
@@ -251,8 +271,8 @@ public class JSFUtils {
 
 	/**
 	 * Creates or updates config file context-param in v 2.3 WebApp if non default configuration file is specified.
-	 * @param WebApp webApp
-	 * @param IDataModel config
+	 * @param webApp
+	 * @param config
 	 */
 	public static void setupConfigFileContextParamForV2_3(WebApp webApp,
 			IDataModel config) {
@@ -290,8 +310,8 @@ public class JSFUtils {
 	}
 	/**
 	 * Creates or updates config file context-param in v2.4 WebApp  if non default configuration file is specified.
-	 * @param WebApp webApp
-	 * @param IDataModel config
+	 * @param webApp
+	 * @param config
 	 */
 	public static void setupConfigFileContextParamForV2_4(WebApp webApp,
 			IDataModel config) {

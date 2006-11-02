@@ -48,6 +48,8 @@ public class JSFLibraryRegistryFactoryImpl extends EFactoryImpl implements JSFLi
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param eClass 
+	 * @return the static eclass 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -64,6 +66,9 @@ public class JSFLibraryRegistryFactoryImpl extends EFactoryImpl implements JSFLi
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param eDataType 
+	 * @param initialValue 
+	 * @return an instance of eDataType for initialValue
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -81,6 +86,9 @@ public class JSFLibraryRegistryFactoryImpl extends EFactoryImpl implements JSFLi
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param eDataType 
+	 * @param instanceValue 
+	 * @return the string created from instanceValue from eDataType 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -95,6 +103,7 @@ public class JSFLibraryRegistryFactoryImpl extends EFactoryImpl implements JSFLi
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return the jsf library registry
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -105,6 +114,7 @@ public class JSFLibraryRegistryFactoryImpl extends EFactoryImpl implements JSFLi
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return the jsf library 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -115,6 +125,7 @@ public class JSFLibraryRegistryFactoryImpl extends EFactoryImpl implements JSFLi
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return the archive file 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -125,6 +136,7 @@ public class JSFLibraryRegistryFactoryImpl extends EFactoryImpl implements JSFLi
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return the plugin provided JSF library 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -135,6 +147,7 @@ public class JSFLibraryRegistryFactoryImpl extends EFactoryImpl implements JSFLi
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return the registry package 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -144,6 +157,7 @@ public class JSFLibraryRegistryFactoryImpl extends EFactoryImpl implements JSFLi
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return the package 
 	 * <!-- end-user-doc -->
 	 * @deprecated
 	 * @generated

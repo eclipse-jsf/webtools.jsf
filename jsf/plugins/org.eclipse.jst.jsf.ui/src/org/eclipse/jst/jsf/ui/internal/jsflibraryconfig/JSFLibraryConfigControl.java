@@ -40,9 +40,9 @@ import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.jface.window.Window;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfigModel;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfiglModelSource;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryRegistryUtil;
-import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfigModel;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFProjectLibraryReference;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.ArchiveFile;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
@@ -55,7 +55,6 @@ import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -78,7 +77,7 @@ public class JSFLibraryConfigControl extends Composite {
 	final private int COLUMN_LIB_NAME = 1;
 
 	private JSFLibraryConfigModel workingCopyModel = null;
-	private JSFLibraryConfiglModelSource persistentModel = null;
+	// TODO: never read private JSFLibraryConfiglModelSource persistentModel = null;
 	
 	private ComboViewer cvImplLib;
 	private CheckboxTableViewer ctvSelCompLib;
@@ -115,7 +114,7 @@ public class JSFLibraryConfigControl extends Composite {
 	 */
 	public void loadControlValuesFromModel(JSFLibraryConfiglModelSource source) {
 		if (source != null) {
-			persistentModel = source;
+			// never read persistentModel = source;
 			workingCopyModel = JSFLibraryConfigModel.JSFLibraryConfigModelFactory.createInstance(source);
 			initializeControlValues();
 		} else {
@@ -134,6 +133,7 @@ public class JSFLibraryConfigControl extends Composite {
 	 * @see org.eclipse.swt.widgets.Composite#checkSubclass()
 	 */
 	protected void checkSubclass() {
+        // TODO: overriding sub-class checking? why?
 	}
 	
 	/**
@@ -241,9 +241,7 @@ public class JSFLibraryConfigControl extends Composite {
 		btnDeployJars = new Button(this, SWT.CHECK);
 		btnDeployJars.setLayoutData(new GridData(GridData.END, GridData.CENTER, false, false, 2, 1));
 		btnDeployJars.setText(Messages.JSFLibraryConfigControl_DeployJAR);
-		btnDeployJars.addSelectionListener(new SelectionListener() {
-			public void widgetDefaultSelected(SelectionEvent e) {
-			}
+		btnDeployJars.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				JSFProjectLibraryReference jsflib = getCurrentSelectedJSFImplLib();
 				jsflib.setToBeDeployed(btnDeployJars.getSelection());
@@ -538,6 +536,7 @@ public class JSFLibraryConfigControl extends Composite {
 			return jsfComplLibs.toArray();
 		}
 		public void dispose() {
+            // do nothing
 		}
 		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 			if (newInput == null) {
@@ -554,6 +553,7 @@ public class JSFLibraryConfigControl extends Composite {
 			return jsfImplLibs.toArray();
 		}
 		public void dispose() {
+            // do nothing
 		}
 		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 			if (newInput == null) {
@@ -637,6 +637,7 @@ public class JSFLibraryConfigControl extends Composite {
 		}
 
 		public void dispose() {
+            // do nothing
 		}
 
 		public Object[] getElements(Object obj) {
@@ -664,14 +665,14 @@ public class JSFLibraryConfigControl extends Composite {
 		// ------- ISelectionChangedListener Interface ------------
 
 		public void selectionChanged(SelectionChangedEvent event) {
-
+		    // do nothing; TODO: what's the point then?
 		}
 		
 		/* (non-Javadoc)
 		 * @see org.eclipse.jface.viewers.IDoubleClickListener#doubleClick(org.eclipse.jface.viewers.DoubleClickEvent)
 		 */
 		public void doubleClick(DoubleClickEvent event) {
-
+		    // do nothing; TODO: what's the point then?
 		}		
 	}
 	
@@ -692,16 +693,17 @@ public class JSFLibraryConfigControl extends Composite {
 		
 		public Image getImage(Object element) {
 			if (element instanceof JSFProjectLibraryReference)
-				return libImg;
-			else
-				return jarImg;
+            {
+			    return libImg;
+            }
+			return jarImg;
 		}
 
 		public String getText(Object element) {
 			StringBuffer labelBuf = new StringBuffer();
 			if (element instanceof JSFProjectLibraryReference) {
 				JSFProjectLibraryReference libWrapper = (JSFProjectLibraryReference)element;
-				JSFLibrary lib = (JSFLibrary)libWrapper.getLibrary();
+				JSFLibrary lib = libWrapper.getLibrary();
 				labelBuf.append(lib.getName());
 				if (lib.isImplementation()) {
 					labelBuf.append(" [implementation"); //$NON-NLS-1$
@@ -722,6 +724,7 @@ public class JSFLibraryConfigControl extends Composite {
 		}
 
 		public void addListener(ILabelProviderListener listener) {
+            // not handling listeners
 		}
 
 		public void dispose() {
@@ -738,6 +741,7 @@ public class JSFLibraryConfigControl extends Composite {
 		}
 
 		public void removeListener(ILabelProviderListener listener) {
+            // not handling listeners
 		}
 	}
 	

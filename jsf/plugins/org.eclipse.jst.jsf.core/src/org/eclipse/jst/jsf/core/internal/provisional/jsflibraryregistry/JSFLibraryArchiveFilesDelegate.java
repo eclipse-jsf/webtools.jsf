@@ -32,8 +32,7 @@ import org.osgi.framework.Bundle;
  * @author Gerry Kessler - Oracle
  */
 public abstract class JSFLibraryArchiveFilesDelegate {
-	
-	protected IConfigurationElement extPtElement;
+	private IConfigurationElement extPtElement;
 	private String libID = null;
 	private IPath pluginPath = null;
 	private String pluginID;
@@ -133,7 +132,7 @@ public abstract class JSFLibraryArchiveFilesDelegate {
 	 */
 	private String getPluginID() {
 		if (pluginID == null){
-			pluginID = extPtElement.getDeclaringExtension().getNamespace();
+			pluginID = extPtElement.getDeclaringExtension().getContributor().getName();
 		}
 		return pluginID;
 	}

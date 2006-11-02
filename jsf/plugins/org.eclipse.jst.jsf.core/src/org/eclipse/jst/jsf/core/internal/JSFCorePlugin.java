@@ -40,7 +40,6 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.util.JSFLibraryRegis
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.util.JSFLibraryRegistryResourceImpl;
 import org.eclipse.jst.jsf.core.internal.provisional.jsflibraryregistry.PluginProvidedJSFLibraryCreationHelper;
 import org.eclipse.wst.common.frameworks.internal.WTPPlugin;
-import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 
 /**
@@ -49,8 +48,14 @@ import org.osgi.framework.BundleContext;
  * @author Gerry Kessler - Oracle, Ian Trimble - Oracle
  */
 public class JSFCorePlugin extends WTPPlugin {
+	/**
+	 * The plugin id
+	 */
 	public static final String PLUGIN_ID = "org.eclipse.jst.jsf.core";//org.eclipse.jst.jsf.core.internal.JSFCorePlugin"; //$NON-NLS-1$
 
+	/**
+	 * The JSF facet identifier
+	 */
 	public static final String FACET_ID = "jst.jsf"; //$NON-NLS-1$
 	
 	// The shared instance.
@@ -64,6 +69,9 @@ public class JSFCorePlugin extends WTPPlugin {
 	// setting on package in Ecore model.)
 	private static final String JSF_LIBRARY_REGISTRY_NSURI = "http://www.eclipse.org/webtools/jsf/schema/jsflibraryregistry.xsd"; //$NON-NLS-1$
 
+	/**
+	 * The id of the library extension point
+	 */
 	public static final String LIB_EXT_PT = "jsfLibraries"; //$NON-NLS-1$
 
 	// The JSF Library Registry EMF resource instance.
@@ -81,6 +89,8 @@ public class JSFCorePlugin extends WTPPlugin {
 
 	/**
 	 * This method is called upon plug-in activation
+	 * @param context 
+	 * @throws Exception 
 	 */
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
@@ -89,6 +99,8 @@ public class JSFCorePlugin extends WTPPlugin {
 
 	/**
 	 * This method is called when the plug-in is stopped
+	 * @param context 
+	 * @throws Exception 
 	 */
 	public void stop(BundleContext context) throws Exception {
 		saveJSFLibraryRegistry();
@@ -98,6 +110,7 @@ public class JSFCorePlugin extends WTPPlugin {
 
 	/**
 	 * Returns the shared instance.
+	 * @return the shared instance
 	 */
 	public static JSFCorePlugin getDefault() {
 		return plugin;
@@ -186,6 +199,7 @@ public class JSFCorePlugin extends WTPPlugin {
 	/**
 	 * Saves the JSFLibraryRegistry EMF object from plugin-specfic workspace
 	 * settings location. (Called from stop(BundleContext).)
+	 * @return true if save is successful
 	 */
 	public boolean saveJSFLibraryRegistry() {
 		boolean saved = false;
@@ -202,6 +216,10 @@ public class JSFCorePlugin extends WTPPlugin {
 		return saved;
 	}
 
+	/**
+	 * @param e
+	 * @param msg
+	 */
 	public static void log(final Exception e, final String msg) {
 		final ILog log = getDefault().getLog();
 
@@ -241,7 +259,7 @@ public class JSFCorePlugin extends WTPPlugin {
 	 * fixing 144996.
 	 *    
 	 * @param jsflib
-	 * @return
+	 * @return true if jsflib is in the expanded folder
 	 */
 	private boolean isJSFLibinExpandedFolder(JSFLibrary jsflib) {
 		boolean exists = false;

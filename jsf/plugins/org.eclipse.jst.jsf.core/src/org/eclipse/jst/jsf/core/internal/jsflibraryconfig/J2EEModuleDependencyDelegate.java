@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.jar.Manifest;
@@ -79,17 +78,17 @@ public class J2EEModuleDependencyDelegate {
 	 * To update project dependencies including Java buildpath and 
 	 * web library dependencies from JSFLibraryConfigModel.  
 	 * 
-	 * @param model JSFLibraryConfigModel  instance with information to update project dependencies
+	 * @param model_ JSFLibraryConfigModel  instance with information to update project dependencies
 	 * @param monitor IProgressMonitor  progress monitor passed.  New instance is creatsed if a null is given  
 	 */
-	public void updateProjectDependencies(final JSFLibraryConfigModel model, 
+	public void updateProjectDependencies(final JSFLibraryConfigModel model_, 
 			IProgressMonitor monitor) {
 		if (monitor == null) {		
 			monitor = new NullProgressMonitor();
 		}
 		// update implementation library
-		JSFProjectLibraryReference newImplLib = model.getCurrentJSFImplementationLibrarySelection();
-		JSFProjectLibraryReference savedImplLib = model.getSavedJSFImplementationLibrary();
+		JSFProjectLibraryReference newImplLib = model_.getCurrentJSFImplementationLibrarySelection();
+		JSFProjectLibraryReference savedImplLib = model_.getSavedJSFImplementationLibrary();
 		if (savedImplLib != null) {
 			this.removeProjectDependency(savedImplLib.getLibrary(), monitor);
 			this.addProjectDependency(newImplLib.getLibrary(), newImplLib.isCheckedToBeDeployed(), monitor);
@@ -100,14 +99,14 @@ public class J2EEModuleDependencyDelegate {
 		 // update component libraries
 		 // Remove first and then add dependencies from selected libraries currently. 
 		JSFProjectLibraryReference compLibDctr = null;
-		List savedCompLibs = model.getSavedJSFComponentLibraries();
+		List savedCompLibs = model_.getSavedJSFComponentLibraries();
 		Iterator it = savedCompLibs.iterator();
 		while (it.hasNext()) {
 			compLibDctr = (JSFProjectLibraryReference) it.next();
 			this.removeProjectDependency(compLibDctr.getLibrary(), monitor);
 		}
 
-		List selComponentLibs = model.getCurrentJSFComponentLibrarySelection();
+		List selComponentLibs = model_.getCurrentJSFComponentLibrarySelection();
 		it = selComponentLibs.iterator();
 		while (it.hasNext()) {
 			compLibDctr = (JSFProjectLibraryReference) it.next();
@@ -270,13 +269,13 @@ public class J2EEModuleDependencyDelegate {
 		}
 	}
 	
-	private ClasspathModel newClasspathModel(IProject project) {
-		ClasspathModel model = new ClasspathModel(null);
-	    model.setProject(project);
-        if( model.getComponent() != null ){
-	        updateModelManifest(model);
+	private ClasspathModel newClasspathModel(IProject project_) {
+		ClasspathModel model_ = new ClasspathModel(null);
+	    model_.setProject(project_);
+        if( model_.getComponent() != null ){
+	        updateModelManifest(model_);
         }	
-        return model;
+        return model_;
 	}
 	
 	private ClasspathElement createClassPathElement(
@@ -305,8 +304,8 @@ public class J2EEModuleDependencyDelegate {
 	    return WTPUIPlugin.getRunnableWithProgress(new UpdateJavaBuildPathOperation(javaProject, selection));
 	}    
 
-	private void updateModelManifest(ClasspathModel model) {
-	    if (JemProjectUtilities.isBinaryProject(project) || model.getAvailableEARComponents().length == 0) {
+	private void updateModelManifest(ClasspathModel model_) {
+	    if (JemProjectUtilities.isBinaryProject(project) || model_.getAvailableEARComponents().length == 0) {
 	        return;
 	    }
 	    
@@ -328,11 +327,11 @@ public class J2EEModuleDependencyDelegate {
 	    try {
 	        in = manifestFile.getContents();
 	        ArchiveManifest mf = new ArchiveManifestImpl(new Manifest(in));
-	        model.primSetManifest(mf);
+	        model_.primSetManifest(mf);
 	    } catch (CoreException e) {
-	        model.primSetManifest(new ArchiveManifestImpl());
+	        model_.primSetManifest(new ArchiveManifestImpl());
 	    } catch (IOException iox) {
-	        model.primSetManifest(new ArchiveManifestImpl());
+	        model_.primSetManifest(new ArchiveManifestImpl());
 	    } finally {
 	        if (in != null) {
 	            try {

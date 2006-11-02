@@ -104,6 +104,7 @@ public class JSFLibraryRegistryImpl extends EObjectImpl implements JSFLibraryReg
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return the static eClass 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -113,6 +114,7 @@ public class JSFLibraryRegistryImpl extends EObjectImpl implements JSFLibraryReg
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return the default implementation id 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -122,6 +124,7 @@ public class JSFLibraryRegistryImpl extends EObjectImpl implements JSFLibraryReg
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param newDefaultImplementationID 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -134,6 +137,7 @@ public class JSFLibraryRegistryImpl extends EObjectImpl implements JSFLibraryReg
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return the list of jsf libraries
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -146,6 +150,7 @@ public class JSFLibraryRegistryImpl extends EObjectImpl implements JSFLibraryReg
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return the list of plugin provided JSF libraries 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -158,6 +163,7 @@ public class JSFLibraryRegistryImpl extends EObjectImpl implements JSFLibraryReg
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return the default implemention JSF library 
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -167,6 +173,7 @@ public class JSFLibraryRegistryImpl extends EObjectImpl implements JSFLibraryReg
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param implementation 
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -180,6 +187,8 @@ public class JSFLibraryRegistryImpl extends EObjectImpl implements JSFLibraryReg
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param ID 
+	 * @return the jsf library of ID or null if none 
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -200,6 +209,8 @@ public class JSFLibraryRegistryImpl extends EObjectImpl implements JSFLibraryReg
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param name 
+	 * @return the list of libraries named 'name' 
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -223,6 +234,7 @@ public class JSFLibraryRegistryImpl extends EObjectImpl implements JSFLibraryReg
 	 * that are marked as JSF implementations; while all instances are valid
 	 * references, the returned EList should not be used for additions and/or
 	 * removals of instances (use the EList returned by getJSFLibraries()).
+	 * @return the list of implemention jsf libraries 
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -245,6 +257,7 @@ public class JSFLibraryRegistryImpl extends EObjectImpl implements JSFLibraryReg
 	 * valid references, the returned EList should not be used for additions
 	 * and/or removals of instances (use the EList returned by
 	 * getJSFLibraries()).
+	 * @return the non-implemention JSF libraries
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -266,6 +279,7 @@ public class JSFLibraryRegistryImpl extends EObjectImpl implements JSFLibraryReg
 	 * and PluginProvidedJSFLibrary instances; while all instances are valid
 	 * references, the returned EList should not be used for additions and/or
 	 * removals of instances (use the EList returned by getJSFLibraries()).
+	 * @return all JSF libraries 
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -278,6 +292,8 @@ public class JSFLibraryRegistryImpl extends EObjectImpl implements JSFLibraryReg
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param library 
+	 * @return true if library is successfully added 
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -293,6 +309,8 @@ public class JSFLibraryRegistryImpl extends EObjectImpl implements JSFLibraryReg
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param library 
+	 * @return true if library is successfully removed
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -308,6 +326,11 @@ public class JSFLibraryRegistryImpl extends EObjectImpl implements JSFLibraryReg
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param otherEnd 
+	 * @param featureID 
+	 * @param baseClass 
+	 * @param msgs 
+	 * @return the notification chain 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -327,6 +350,9 @@ public class JSFLibraryRegistryImpl extends EObjectImpl implements JSFLibraryReg
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param eFeature 
+	 * @param resolve 
+	 * @return the value of the feature 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -344,6 +370,8 @@ public class JSFLibraryRegistryImpl extends EObjectImpl implements JSFLibraryReg
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param eFeature 
+	 * @param newValue 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -366,6 +394,7 @@ public class JSFLibraryRegistryImpl extends EObjectImpl implements JSFLibraryReg
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param eFeature 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -386,6 +415,8 @@ public class JSFLibraryRegistryImpl extends EObjectImpl implements JSFLibraryReg
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param eFeature 
+	 * @return true if the feature value is set 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -403,6 +434,7 @@ public class JSFLibraryRegistryImpl extends EObjectImpl implements JSFLibraryReg
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return the string representation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */

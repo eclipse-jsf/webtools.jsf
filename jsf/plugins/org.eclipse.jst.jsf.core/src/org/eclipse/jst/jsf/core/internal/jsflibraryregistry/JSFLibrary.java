@@ -200,6 +200,8 @@ public interface JSFLibrary extends EObject{
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param fullPath 
+	 * @return true if fullPath contains archive file 
 	 * <!-- end-user-doc -->
 	 * @model required="true" fullPathRequired="true"
 	 * @generated
@@ -208,6 +210,7 @@ public interface JSFLibrary extends EObject{
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return the working copy 
 	 * <!-- end-user-doc -->
 	 * @model kind="operation" required="true"
 	 * @generated
@@ -216,6 +219,7 @@ public interface JSFLibrary extends EObject{
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param otherLibrary 
 	 * <!-- end-user-doc -->
 	 * @model otherLibraryRequired="true"
 	 * @generated
@@ -224,6 +228,8 @@ public interface JSFLibrary extends EObject{
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param baseDestLocation 
+	 * @return true if copy succeeds 
 	 * <!-- end-user-doc -->
 	 * @model required="true" baseDestLocationRequired="true"
 	 * @generated

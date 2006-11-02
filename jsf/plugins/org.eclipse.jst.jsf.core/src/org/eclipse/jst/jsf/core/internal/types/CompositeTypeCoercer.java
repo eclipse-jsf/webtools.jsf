@@ -103,18 +103,16 @@ public class CompositeTypeCoercer
         {
             throw new TypeCoercionException();
         }
+        
         // otherwise the flag was cleared return what we found
-        else
+        if (coercedType != null)
         {
-            if (coercedType != null)
-            {
-                // need to unbox per JSP.2.8.1
-                coercedType =
-                    TypeTransformer.transformUnboxPrimitives(coercedType);
-            }
-            
-            return coercedType;
+            // need to unbox per JSP.2.8.1
+            coercedType =
+                TypeTransformer.transformUnboxPrimitives(coercedType);
         }
+        
+        return coercedType;
     }
     
     

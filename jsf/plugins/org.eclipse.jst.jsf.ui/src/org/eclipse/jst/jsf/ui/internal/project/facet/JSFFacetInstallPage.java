@@ -11,7 +11,6 @@
 package org.eclipse.jst.jsf.ui.internal.project.facet;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 
 import org.eclipse.core.runtime.CoreException;
@@ -22,15 +21,15 @@ import org.eclipse.jface.dialogs.IInputValidator;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.window.Window;
 import org.eclipse.jst.j2ee.project.facet.IJ2EEModuleFacetInstallDataModelProperties;
-import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfiglModelSource;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfigDialogSettingData;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfiglModelSource;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFProjectLibraryReference;
 import org.eclipse.jst.jsf.core.internal.project.facet.IJSFFacetInstallDataModelProperties;
 import org.eclipse.jst.jsf.ui.internal.JSFUiPlugin;
 import org.eclipse.jst.jsf.ui.internal.Messages;
 import org.eclipse.jst.jsf.ui.internal.jsflibraryconfig.IJSFImplLibraryCreationListener;
-import org.eclipse.jst.jsf.ui.internal.jsflibraryconfig.JSFLibraryConfigControl;
 import org.eclipse.jst.jsf.ui.internal.jsflibraryconfig.JSFImplLibraryCreationEvent;
+import org.eclipse.jst.jsf.ui.internal.jsflibraryconfig.JSFLibraryConfigControl;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -91,7 +90,7 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements IJSFFace
 	 */
 	public JSFFacetInstallPage() {
 		//FIXME: following WebFacetInstallPage pattern which will be fixed at somepoint
-    	super(DataModelFactory.createDataModel(new AbstractDataModelProvider(){}), "jsf.facet.install.page"); //$NON-NLS-1$
+    	super(DataModelFactory.createDataModel(new AbstractDataModelProvider(){/*do nothing*/}), "jsf.facet.install.page"); //$NON-NLS-1$
 		setTitle(Messages.JSFFacetInstallPage_title);
 		setDescription(Messages.JSFFacetInstallPage_description);
 		dialogSettings = JSFUiPlugin.getDefault().getDialogSettings();
@@ -117,7 +116,7 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements IJSFFace
 		jsfLibCfgComp = new JSFLibraryConfigControl(composite, SWT.NONE);
 		jsfLibCfgComp.addOkClickedListener(new IJSFImplLibraryCreationListener() {
 			public void okClicked(JSFImplLibraryCreationEvent event) {
-				if (((JSFImplLibraryCreationEvent) event).isLibraryCreated()) {
+				if (event.isLibraryCreated()) {
 					validatePage();
 				}				
 			}			
@@ -254,7 +253,7 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements IJSFFace
 		
 		String[] selection = null;
 		if (complibs != null) {
-			selection = (String[])complibs.getArray(SETTINGS_COMPLIB_SELECT_DEPLOY);
+			selection = complibs.getArray(SETTINGS_COMPLIB_SELECT_DEPLOY);
 		}
 
 		JSFLibraryConfiglModelSource source = new JSFLibraryConfigDialogSettingData(

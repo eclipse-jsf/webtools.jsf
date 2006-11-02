@@ -129,11 +129,11 @@ public class JSFFacetInstallDelegate implements IDelegate {
 			if (!configPath.toFile().exists()) {
 				IWorkspaceRunnable op = new IWorkspaceRunnable(){
 
-					public void run(IProgressMonitor monitor)
+					public void run(IProgressMonitor monitor_inner)
 							throws CoreException{ 
 						JSFUtils.createConfigFile(fv.getVersionString(),
 								configPath);
-						project.refreshLocal(IResource.DEPTH_INFINITE, monitor);
+						project.refreshLocal(IResource.DEPTH_INFINITE, monitor_inner);
 					}
 
 				};

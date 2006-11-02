@@ -79,6 +79,7 @@ public class PluginProvidedJSFLibraryImpl extends JSFLibraryImpl implements Plug
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @return the static eclass 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -88,6 +89,7 @@ public class PluginProvidedJSFLibraryImpl extends JSFLibraryImpl implements Plug
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @return the plugin id 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -97,6 +99,7 @@ public class PluginProvidedJSFLibraryImpl extends JSFLibraryImpl implements Plug
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @param newPluginID 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -109,6 +112,11 @@ public class PluginProvidedJSFLibraryImpl extends JSFLibraryImpl implements Plug
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @param otherEnd 
+     * @param featureID 
+     * @param baseClass 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -128,6 +136,11 @@ public class PluginProvidedJSFLibraryImpl extends JSFLibraryImpl implements Plug
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @param otherEnd 
+     * @param featureID 
+     * @param baseClass 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -145,6 +158,9 @@ public class PluginProvidedJSFLibraryImpl extends JSFLibraryImpl implements Plug
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @param eFeature 
+     * @param resolve 
+     * @return the value of the feature 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -170,6 +186,8 @@ public class PluginProvidedJSFLibraryImpl extends JSFLibraryImpl implements Plug
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @param eFeature 
+     * @param newValue 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -203,6 +221,7 @@ public class PluginProvidedJSFLibraryImpl extends JSFLibraryImpl implements Plug
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @param eFeature 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -235,6 +254,8 @@ public class PluginProvidedJSFLibraryImpl extends JSFLibraryImpl implements Plug
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @param eFeature 
+     * @return true if the value of eFeature is set 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -260,6 +281,7 @@ public class PluginProvidedJSFLibraryImpl extends JSFLibraryImpl implements Plug
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @return the string representation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */

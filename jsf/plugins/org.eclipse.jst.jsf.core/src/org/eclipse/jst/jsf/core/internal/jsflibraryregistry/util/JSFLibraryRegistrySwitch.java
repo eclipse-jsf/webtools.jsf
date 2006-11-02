@@ -61,8 +61,9 @@ public class JSFLibraryRegistrySwitch {
 	/**
 	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
 	 * <!-- begin-user-doc -->
+     * @param theEObject 
+     * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * <!-- end-user-doc -->
-	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
 	public Object doSwitch(EObject theEObject) {
@@ -72,28 +73,30 @@ public class JSFLibraryRegistrySwitch {
 	/**
 	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
 	 * <!-- begin-user-doc -->
+     * @param theEClass 
+     * @param theEObject 
+     * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * <!-- end-user-doc -->
-	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
 	protected Object doSwitch(EClass theEClass, EObject theEObject) {
 		if (theEClass.eContainer() == modelPackage) {
 			return doSwitch(theEClass.getClassifierID(), theEObject);
 		}
-		else {
-			List eSuperTypes = theEClass.getESuperTypes();
-			return
-				eSuperTypes.isEmpty() ?
-					defaultCase(theEObject) :
-					doSwitch((EClass)eSuperTypes.get(0), theEObject);
-		}
+		List eSuperTypes = theEClass.getESuperTypes();
+		return
+			eSuperTypes.isEmpty() ?
+				defaultCase(theEObject) :
+				doSwitch((EClass)eSuperTypes.get(0), theEObject);
 	}
 
 	/**
 	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
 	 * <!-- begin-user-doc -->
+     * @param classifierID 
+     * @param theEObject 
+     * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * <!-- end-user-doc -->
-	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
 	protected Object doSwitch(int classifierID, EObject theEObject) {

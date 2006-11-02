@@ -118,7 +118,7 @@ public class JSFLibrariesPreferencePage extends PreferencePage implements IWorkb
 		btnEdit.setEnabled(false);
 		btnEdit.addSelectionListener(new SelectionAdapter(){
 			public void widgetSelected(SelectionEvent e) {
-				TreeItem[] element = (TreeItem[]) tv.getTree().getSelection();
+				TreeItem[] element = tv.getTree().getSelection();
 				if (element != null){
 					openJSFLibraryEditDialog(element[0]);
 				}
@@ -212,6 +212,7 @@ public class JSFLibrariesPreferencePage extends PreferencePage implements IWorkb
 		}
 
 		public void dispose() {
+            // do nothing
 		}
 
 		public Object[] getElements(Object obj) {
@@ -333,9 +334,10 @@ public class JSFLibrariesPreferencePage extends PreferencePage implements IWorkb
 		
 		public Image getImage(Object element) {
 			if (element instanceof JSFLibrary)
+            {
 				return libImg;
-			else
-				return jarImg;
+            }
+			return jarImg;
 		}
 
 		public String getText(Object element) {
@@ -362,6 +364,7 @@ public class JSFLibrariesPreferencePage extends PreferencePage implements IWorkb
 		}
 
 		public void addListener(ILabelProviderListener listener) {
+            // no listeners supported
 		}
 
 		public void dispose() {
@@ -378,6 +381,7 @@ public class JSFLibrariesPreferencePage extends PreferencePage implements IWorkb
 		}
 
 		public void removeListener(ILabelProviderListener listener) {
+            // no listeners supported
 		}
 	}
 

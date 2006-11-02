@@ -7,9 +7,9 @@
  *
  * Contributors:
  *    Gerry Kessler - initial API and implementation
- *******************************************************************************/ 
+ *******************************************************************************/
 package org.eclipse.jst.jsf.core.internal.project.facet;
- 
+
 import org.eclipse.wst.common.componentcore.datamodel.properties.IFacetInstallDataModelProperties;
 
 /**
@@ -17,18 +17,50 @@ import org.eclipse.wst.common.componentcore.datamodel.properties.IFacetInstallDa
  * 
  * @author Gerry Kessler - Oracle
  */
-public interface IJSFFacetInstallDataModelProperties extends IFacetInstallDataModelProperties {
-	 public static final String IMPLEMENTATION = "IJSFFacetInstallDataModelProperties.IMPLEMENTATION"; //$NON-NLS-1$
-	 public static final String DEPLOY_IMPLEMENTATION = "IJSFFacetInstallDataModelProperties.DEPLOY_IMPLEMENTATION"; //$NON-NLS-1$
-	 public static final String CONFIG_PATH = "IJSFFacetInstallDataModelProperties.CONFIG_PATH"; //$NON-NLS-1$
-	 public static final String SERVLET_NAME = "IJSFFacetInstallDataModelProperties.SERVLET_NAME"; //$NON-NLS-1$
-	 public static final String SERVLET_URL_PATTERNS = "IJSFFacetInstallDataModelProperties.SERVLET_URL_PATTERNS"; //$NON-NLS-1$
-	 public static final String WEBCONTENT_DIR = "IJSFFacetInstallDataModelProperties.WEBCONTENT_DIR"; //$NON-NLS-1$
-	 
-	 public static final String DEFAULT_IMPLEMENTATION_LIBRARY = "IJSFFacetInstallDataModelProperties.DEFAULT_IMPLEMENTATION_LIBRARY";
-	 public static final String IMPLEMENTATION_LIBRARIES = "IJSFFacetInstallDataModelProperties.IMPLEMENTATION_LIBRARIES";	
-	 public static final String COMPONENT_LIBRARIES = "IJSFFacetInstallDataModelProperties.COMPONENT_LIBRARIES";	//$NON-NLS-1$	 
-	 
-}
+public interface IJSFFacetInstallDataModelProperties extends
+        IFacetInstallDataModelProperties {
+    /**
+     * TODO:
+     */
+    public static final String IMPLEMENTATION = "IJSFFacetInstallDataModelProperties.IMPLEMENTATION"; //$NON-NLS-1$
 
- 
+    /**
+     * TODO:
+     */
+    public static final String DEPLOY_IMPLEMENTATION = "IJSFFacetInstallDataModelProperties.DEPLOY_IMPLEMENTATION"; //$NON-NLS-1$
+
+    /**
+     * TODO:
+     */
+    public static final String CONFIG_PATH = "IJSFFacetInstallDataModelProperties.CONFIG_PATH"; //$NON-NLS-1$
+
+    /**
+     * TODO:
+     */
+    public static final String SERVLET_NAME = "IJSFFacetInstallDataModelProperties.SERVLET_NAME"; //$NON-NLS-1$
+
+    /**
+     * TODO:
+     */
+    public static final String SERVLET_URL_PATTERNS = "IJSFFacetInstallDataModelProperties.SERVLET_URL_PATTERNS"; //$NON-NLS-1$
+
+    /**
+     * TODO:
+     */
+    public static final String WEBCONTENT_DIR = "IJSFFacetInstallDataModelProperties.WEBCONTENT_DIR"; //$NON-NLS-1$
+
+    /**
+     * TODO:
+     */
+    public static final String DEFAULT_IMPLEMENTATION_LIBRARY = "IJSFFacetInstallDataModelProperties.DEFAULT_IMPLEMENTATION_LIBRARY";
+
+    /**
+     * TODO:
+     */
+    public static final String IMPLEMENTATION_LIBRARIES = "IJSFFacetInstallDataModelProperties.IMPLEMENTATION_LIBRARIES";
+
+    /**
+     * TODO:
+     */
+    public static final String COMPONENT_LIBRARIES = "IJSFFacetInstallDataModelProperties.COMPONENT_LIBRARIES"; //$NON-NLS-1$	 
+}

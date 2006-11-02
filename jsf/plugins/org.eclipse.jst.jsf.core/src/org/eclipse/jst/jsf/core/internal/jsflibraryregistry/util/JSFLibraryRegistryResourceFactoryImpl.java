@@ -44,6 +44,8 @@ public class JSFLibraryRegistryResourceFactoryImpl extends ResourceFactoryImpl {
 	/**
 	 * Creates an instance of the resource.
 	 * <!-- begin-user-doc -->
+     * @param uri 
+     * @return the Resource
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */

@@ -132,6 +132,8 @@ public final class JSFVersion extends AbstractEnumerator {
 	/**
 	 * Returns the '<em><b>JSF Version</b></em>' literal with the specified name.
 	 * <!-- begin-user-doc -->
+	 * @param name 
+	 * @return the JSF version for name value 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -148,6 +150,8 @@ public final class JSFVersion extends AbstractEnumerator {
 	/**
 	 * Returns the '<em><b>JSF Version</b></em>' literal with the specified value.
 	 * <!-- begin-user-doc -->
+	 * @param value 
+	 * @return the JSFVersion for the integer 'value' 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -175,6 +179,8 @@ public final class JSFVersion extends AbstractEnumerator {
 	 * name like the get(String) method does, but will return UNKNOWN instead
 	 * of null if the name is not recognized.
 	 * <!-- begin-user-doc -->
+	 * @param name 
+	 * @return the JSFVersion
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */

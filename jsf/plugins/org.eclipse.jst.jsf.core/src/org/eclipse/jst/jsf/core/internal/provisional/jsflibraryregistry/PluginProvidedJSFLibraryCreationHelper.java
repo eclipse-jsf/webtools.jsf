@@ -142,6 +142,6 @@ public final class PluginProvidedJSFLibraryCreationHelper {
 	 * @return The plugin's ID
 	 */
 	private String getPluginID() {
-		return config_element.getDeclaringExtension().getNamespace();
+		return config_element.getDeclaringExtension().getContributor().getName();
 	}
 }

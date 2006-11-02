@@ -95,9 +95,11 @@ public class JSFFileURL implements FileURL {
 			if (ext == null){
 				String lastSeg = extPath.lastSegment();
 				if (lastSeg.equals("*")) //$NON-NLS-1$
+				{
 					return extPath.removeLastSegments(1).toString();
-				else 
-					return extPath.toString();				
+				}
+				
+				return extPath.toString();				
 			}
 		}
 		return null;

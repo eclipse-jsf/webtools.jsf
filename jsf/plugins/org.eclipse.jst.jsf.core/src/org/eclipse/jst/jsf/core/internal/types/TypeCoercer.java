@@ -40,29 +40,26 @@ public class TypeCoercer
         {
             throw new TypeCoercionException("Cannot coerce arrays to numbers");
         }
-        else 
+        // if it's character, pre-coerce to short per step 2
+        if (TypeConstants.SIGNATURE_BOXED_CHARACTER.equals(boxedTypeSignature))
         {
-            // if it's character, pre-coerce to short per step 2
-            if ("Ljava.lang.Character;".equals(boxedTypeSignature))
-            {
-                boxedTypeSignature = "Ljava.lang.Short;";
-            }
+            boxedTypeSignature = TypeConstants.TYPE_BOXED_SHORT;
+        }
 
-            if (TypeCoercer.typeIsNumeric(boxedTypeSignature)
-                    || TypeCoercer.typeIsNull(boxedTypeSignature))
-            {
-                return boxedTypeSignature;
-            }
-            else if (typeIsString(boxedTypeSignature))
-            {
-                // undetermined a string may or not resolve to a number
-                // depending on its runtime value
-                return null;
-            }
-            else
-            {
-                throw new TypeCoercionException();
-            }
+        if (TypeCoercer.typeIsNumeric(boxedTypeSignature)
+                || TypeCoercer.typeIsNull(boxedTypeSignature))
+        {
+            return boxedTypeSignature;
+        }
+        else if (typeIsString(boxedTypeSignature))
+        {
+            // undetermined a string may or not resolve to a number
+            // depending on its runtime value
+            return null;
+        }
+        else
+        {
+            throw new TypeCoercionException();
         }
     }
     
@@ -80,10 +77,7 @@ public class TypeCoercer
             return true;
         }
         // nothing else really convertible besides null
-        else 
-        {
-            return false;
-        }
+        return false;
     }
     
     /**
@@ -117,7 +111,7 @@ public class TypeCoercer
      */
     public static boolean typeIsBoolean(final String typeSignature)
     {
-        return ("Ljava.lang.Boolean;".equals(typeSignature));
+        return (TypeConstants.TYPE_BOXED_BOOLEAN.equals(typeSignature));
     }
     
     /**

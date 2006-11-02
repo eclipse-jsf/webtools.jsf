@@ -16,11 +16,13 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.J2EEModuleDependencyDelegate;
-import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfiglModelSource;
-import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfigProjectData;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfigModel;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfigProjectData;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfiglModelSource;
+import org.eclipse.jst.jsf.ui.internal.JSFUiPlugin;
 import org.eclipse.jst.jsf.ui.internal.Messages;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
@@ -129,7 +131,7 @@ public class JSFLibraryPropertyPage extends PropertyPage {
 		try {
 			IFacetedProject fProject = ProjectFacetsManager.create(project);
 			
-			Iterator it = ((IFacetedProject)fProject).getProjectFacets().iterator();
+			Iterator it = fProject.getProjectFacets().iterator();
 			IProjectFacetVersion fv = null;
 			String facetId = null;
 			while (it.hasNext()) {
@@ -141,7 +143,7 @@ public class JSFLibraryPropertyPage extends PropertyPage {
 			}	
 			
 		} catch (CoreException e) {
-			
+			JSFUiPlugin.log(IStatus.ERROR, "Error creating faceted project", e);
 		}		
 		return false;
 
