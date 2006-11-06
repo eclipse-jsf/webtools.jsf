@@ -41,7 +41,6 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
@@ -337,55 +336,56 @@ public class GEMPreferences extends FieldEditorPreferencePage implements
 		useSystemColors.getButton().addSelectionListener(
 				new SelectionAdapter() {
 					public void widgetSelected(SelectionEvent e) {
-						boolean userColorsValue = !useSystemColors
+						boolean userColorsValue_ = !useSystemColors
 								.getBooleanValue();
-						boolean showLineLabelsValue = showLineLabels
+						boolean showLineLabelsValue_ = showLineLabels
 								.getBooleanValue();
-						boolean snapToGridValue = snapToGrid.getBooleanValue();
+						boolean snapToGridValue_ = snapToGrid.getBooleanValue();
 
-						canvasColor.setEnabled(userColorsValue, canvasGroup);
+						canvasColor.setEnabled(userColorsValue_, canvasGroup);
 						gridColor
-								.setEnabled(snapToGridValue && userColorsValue,
+								.setEnabled(snapToGridValue_ && userColorsValue_,
 										canvasGroup);
-						iconFont.setEnabled(userColorsValue, iconGroup);
+						iconFont.setEnabled(userColorsValue_, iconGroup);
 						// inputPortColor.setEnabled(userColorsValue,
 						// iconGroup);
 						// outputPortColor.setEnabled(userColorsValue,
 						// iconGroup);
-						lineColor.setEnabled(userColorsValue, lineGroup);
-						lineLabelColor.setEnabled(showLineLabelsValue
-								&& userColorsValue, lineGroup);
-						lineFont.setEnabled(showLineLabelsValue
-								&& userColorsValue, lineGroup);
+						lineColor.setEnabled(userColorsValue_, lineGroup);
+						lineLabelColor.setEnabled(showLineLabelsValue_
+								&& userColorsValue_, lineGroup);
+						lineFont.setEnabled(showLineLabelsValue_
+								&& userColorsValue_, lineGroup);
 					}
 				});
 
 		showLineLabels.getButton().addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
-				boolean userColorsValue = !useSystemColors.getBooleanValue();
-				boolean showLineLabelsValue = showLineLabels.getBooleanValue();
-				lineLabelColor.setEnabled(showLineLabelsValue
-						&& userColorsValue, lineGroup);
-				lineFont.setEnabled(showLineLabelsValue && userColorsValue,
+				boolean userColorsValue_ = !useSystemColors.getBooleanValue();
+				boolean showLineLabelsValue_ = showLineLabels.getBooleanValue();
+				lineLabelColor.setEnabled(showLineLabelsValue_
+						&& userColorsValue_, lineGroup);
+				lineFont.setEnabled(showLineLabelsValue_ && userColorsValue_,
 						lineGroup);
 			}
 		});
 
 		snapToGrid.getButton().addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
-				boolean userColorsValue = !useSystemColors.getBooleanValue();
-				boolean snapToGridValue = snapToGrid.getBooleanValue();
+				boolean userColorsValue_ = !useSystemColors.getBooleanValue();
+				boolean snapToGridValue_ = snapToGrid.getBooleanValue();
 
-				gridColor.setEnabled(snapToGridValue && userColorsValue,
+				gridColor.setEnabled(snapToGridValue_ && userColorsValue_,
 						canvasGroup);
-				gridWidth.setEnabled(snapToGridValue, canvasGroup);
-				gridHeight.setEnabled(snapToGridValue, canvasGroup);
+				gridWidth.setEnabled(snapToGridValue_, canvasGroup);
+				gridHeight.setEnabled(snapToGridValue_, canvasGroup);
 			}
 		});
 
 	}
 
 	public void init(IWorkbench workbench) {
+        // no initialization
 	}
 
 	protected ColorFieldEditor addColorField(String name, String labelText,
@@ -485,7 +485,7 @@ public class GEMPreferences extends FieldEditorPreferencePage implements
 			RGB rgb = PreferenceConverter.getColor(store, property);
 			ColorRegistry registry = JFaceResources.getColorRegistry();
 			if (registry.get(rgb.toString()) != null)
-				return (Color) registry.get(rgb.toString());
+				return registry.get(rgb.toString());
 			registry.put(rgb.toString(), rgb);
 			c = registry.get(rgb.toString());
 		}

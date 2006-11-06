@@ -184,11 +184,11 @@ public class PF2FCSynchronizer extends AdapterImpl {
 		// for outLink remove, only target is referenced.
 		PageflowLink link = (PageflowLink) value;
 		if (element instanceof PageflowPage) {
-			PageflowNode target = link.getTarget();
+			PageflowNode target_ = link.getTarget();
 			// page->page
-			if (target instanceof PageflowPage) {
+			if (target_ instanceof PageflowPage) {
 				tranformer.addLink((PageflowPage) element,
-						(PageflowPage) target, link);
+						(PageflowPage) target_, link);
 			}
 		}
 	}
@@ -211,9 +211,5 @@ public class PF2FCSynchronizer extends AdapterImpl {
 				new ENotificationImpl((InternalEObject) notification
 						.getNotifier(), Notification.SET,
 						PageflowPackage.PAGEFLOW, null, null));
-	}
-
-	public void dispose() {
-
 	}
 }

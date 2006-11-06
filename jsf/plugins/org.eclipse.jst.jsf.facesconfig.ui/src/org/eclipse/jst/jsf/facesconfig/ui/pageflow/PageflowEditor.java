@@ -337,11 +337,10 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 		addStackAction(new RedoAction(this));
 
 		// Allows opening of JSP files from the pageflow
-		addEditPartAction(new OpenEditorAction((IWorkbenchPart) this));
+		addEditPartAction(new OpenEditorAction(this));
 
 		// Allows showing property view for the pageflow
-		SelectionAction action = new ShowPropertyViewAction(
-				(IWorkbenchPart) this);
+		SelectionAction action = new ShowPropertyViewAction(this);
 		action
 				.setImageDescriptor(getImageDescriptorForView("org.eclipse.ui.views.PropertySheet"));
 		addEditPartAction(action);
@@ -376,13 +375,13 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 	/**
 	 * Returns the zoom manager of the specified viewer.
 	 * 
-	 * @param viewer -
+	 * @param viewer_ -
 	 *            the viewer to get the zoom manager from
 	 * @return - the zoom manager
 	 */
-	private ZoomManager getZoomManager(GraphicalViewer viewer) {
+	private ZoomManager getZoomManager(GraphicalViewer viewer_) {
 		// get zoom manager from root edit part
-		RootEditPart rootEditPart = viewer.getRootEditPart();
+		RootEditPart rootEditPart = viewer_.getRootEditPart();
 		ZoomManager zoomManager = null;
 		if (rootEditPart instanceof ScalableFreeformRootEditPart) {
 			zoomManager = ((ScalableFreeformRootEditPart) rootEditPart)
@@ -760,55 +759,55 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 	 * be used to keep 2 or more EditPartViewers in sync. The viewer is also
 	 * registered as the ISelectionProvider for the Editor's PartSite.
 	 * 
-	 * @param viewer -
+	 * @param viewer_ -
 	 *            the viewer to hook into the editor
 	 */
-	protected void registerEditPartViewer(EditPartViewer viewer) {
+	protected void registerEditPartViewer(EditPartViewer viewer_) {
 		// register viewer to edit domain
-		getEditDomain().addViewer(viewer);
+		getEditDomain().addViewer(viewer_);
 
 		// the multi page pageflow editor keeps track of synchronizing
-		getSelectionSynchronizer().addViewer(viewer);
+		getSelectionSynchronizer().addViewer(viewer_);
 
 		// add viewer as selection provider
-		getSite().setSelectionProvider(viewer);
+		getSite().setSelectionProvider(viewer_);
 	}
 
 	/**
 	 * Configures the specified <code>EditPartViewer</code> including context
 	 * menu, key handler, etc.
 	 * 
-	 * @param viewer -
+	 * @param viewer_ -
 	 *            the pageflow graphical viewer.
 	 */
-	protected void configureEditPartViewer(EditPartViewer viewer) {
+	protected void configureEditPartViewer(EditPartViewer viewer_) {
 		// configure the shared key handler
-		if (null != viewer.getKeyHandler()) {
-			viewer.getKeyHandler().setParent(getSharedKeyHandler());
+		if (null != viewer_.getKeyHandler()) {
+			viewer_.getKeyHandler().setParent(getSharedKeyHandler());
 		}
 		// create the ActionRegistry
 		createActions();
 
 		// append the parent editor's action registry.
-		ActionRegistry actionRegistry = (ActionRegistry) getParentEditor()
+		ActionRegistry actionRegistry_ = (ActionRegistry) getParentEditor()
 				.getAdapter(ActionRegistry.class);
-		if (actionRegistry != null) {
-			for (Iterator iter = actionRegistry.getActions(); iter.hasNext();) {
+		if (actionRegistry_ != null) {
+			for (Iterator iter = actionRegistry_.getActions(); iter.hasNext();) {
 				getActionRegistry().registerAction((IAction) iter.next());
 			}
 		}
 		// configure and register the context menu
 		ContextMenuProvider provider = new PageflowEditorContextMenuProvider(
-				viewer, getActionRegistry());
-		viewer.setContextMenu(provider);
+				viewer_, getActionRegistry());
+		viewer_.setContextMenu(provider);
 		getSite().registerContextMenu(
 				EditorPlugin.getPluginId() + PAGEFLOW_CONTEXTMENU_REG_ID,
 				provider, getSite().getSelectionProvider()); //$NON-NLS-1$
 
 		// enable viewer as drop target for template transfers
-		viewer
+		viewer_
 				.addDropTargetListener((TransferDropTargetListener) new PageflowTemplateTransferDropTargetListener(
-						viewer));
+						viewer_));
 
 	}
 
@@ -1208,7 +1207,7 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 				String iconPath = elements[i].getAttribute("icon");
 				if (iconPath != null) {
 					return AbstractUIPlugin.imageDescriptorFromPlugin(
-							elements[i].getDeclaringExtension().getNamespace(),
+							elements[i].getDeclaringExtension().getContributor().getName(),
 							iconPath);
 				}
 			}

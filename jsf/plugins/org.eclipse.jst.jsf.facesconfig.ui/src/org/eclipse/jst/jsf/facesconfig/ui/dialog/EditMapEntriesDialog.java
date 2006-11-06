@@ -72,7 +72,7 @@ public class EditMapEntriesDialog extends Dialog {
 
 	private ClassButtonDialogField valueClassField;
 
-	private IProject project;;
+	private IProject project;
 
 	private TableViewer tableViewer;
 

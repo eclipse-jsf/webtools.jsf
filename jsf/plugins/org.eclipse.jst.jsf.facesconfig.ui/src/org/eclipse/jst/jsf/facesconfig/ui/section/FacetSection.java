@@ -242,11 +242,6 @@ public class FacetSection extends AbstractFacesConfigSection {
 		});
 	}
 
-	public void clearAll() {
-		// TODO Auto-generated method stub
-
-	}
-
 	/**
 	 * refresh the table viewer and update buttons.
 	 */

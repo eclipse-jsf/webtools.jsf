@@ -70,9 +70,8 @@ public abstract class ReferenceElement {
 					.setFormat(CompatibilityXMIResource.FORMAT_EMF1);
 			String uriTarget = object.eResource().getURIFragment(object);
 			return uriTarget;
-		} else {
-			return "";
 		}
+        return "";
 	}
 
 	public boolean remove(EObject object) {

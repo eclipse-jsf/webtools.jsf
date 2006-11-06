@@ -64,7 +64,7 @@ public class MultiPageEditorOutlinePage extends Page implements
 	/**
 	 * Selection change listeners.
 	 */
-	private ListenerList selectionChangedListeners = new ListenerList(1);
+	private ListenerList selectionChangedListeners = new ListenerList(ListenerList.IDENTITY);
 
 	/** the pagebook */
 	private PageBook pageBook = null;
@@ -463,9 +463,8 @@ public class MultiPageEditorOutlinePage extends Page implements
 			// get active editor of mutli-page editor.
 			return (IWorkbenchPart) page.getActiveEditor().getAdapter(
 					IEditorPart.class);
-		} else {
-			return null;
 		}
+        return null;
 	}
 
 	/**
@@ -702,5 +701,6 @@ public class MultiPageEditorOutlinePage extends Page implements
 	 * @see SelectionListener#widgetDefaultSelected(SelectionEvent)
 	 */
 	public void widgetDefaultSelected(SelectionEvent e) {
+        // do nothing: no handling of default selected event
 	}
 }

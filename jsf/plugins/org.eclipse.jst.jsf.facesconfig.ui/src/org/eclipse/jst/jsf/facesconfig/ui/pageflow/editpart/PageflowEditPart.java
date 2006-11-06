@@ -42,9 +42,9 @@ import org.eclipse.gef.editpolicies.RootComponentEditPolicy;
 import org.eclipse.gef.editpolicies.SnapFeedbackPolicy;
 import org.eclipse.gef.rulers.RulerProvider;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.synchronization.FC2PFTransformer;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.synchronization.PFBatchAdapter;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowAnnotationUtil;
@@ -71,7 +71,7 @@ public class PageflowEditPart extends PageflowContainerEditPart implements
 	 *            pageflow model
 	 */
 	protected PageflowEditPart(Pageflow pageflow) {
-		super((PageflowElement) pageflow);
+		super(pageflow);
 	}
 
 	/*
@@ -133,7 +133,7 @@ public class PageflowEditPart extends PageflowContainerEditPart implements
 				return null;
 			}
 			if (snapStrategies.size() == 1) {
-				return (SnapToHelper) snapStrategies.get(0);
+				return snapStrategies.get(0);
 			}
 
 			SnapToHelper ss[] = new SnapToHelper[snapStrategies.size()];
@@ -306,10 +306,10 @@ public class PageflowEditPart extends PageflowContainerEditPart implements
 		if (this.connectionStyle == -1) {
 			IPreferenceStore store = EditorPlugin.getDefault()
 					.getPreferenceStore();
-			String connectionStyle = store
+			String connectionStyle_ = store
 					.getString(GEMPreferences.LINE_ROUTING);
 
-			if (GEMPreferences.LINE_ROUTING_MANHATTAN.equals(connectionStyle)) {
+			if (GEMPreferences.LINE_ROUTING_MANHATTAN.equals(connectionStyle_)) {
 				this.connectionStyle = ILayerPanePreference.LINE_ROUTING_MANHATTAN;
 			} else {
 				this.connectionStyle = ILayerPanePreference.LINE_ROUTING_MANUAL;
@@ -366,4 +366,21 @@ public class PageflowEditPart extends PageflowContainerEditPart implements
 		GridLayer gl = (GridLayer) getLayer(GRID_LAYER);
 		gl.setForegroundColor(c);
 	}
+
+    protected void performDirectEdit() {
+        // do nothing
+    }
+
+    protected void performOpen() {
+        // do nothing
+    }
+
+    public void addAnnotation(Annotation annotation) {
+        // do nothing
+        
+    }
+
+    public void removeAnnotation() {
+        // do nothing
+    }
 }

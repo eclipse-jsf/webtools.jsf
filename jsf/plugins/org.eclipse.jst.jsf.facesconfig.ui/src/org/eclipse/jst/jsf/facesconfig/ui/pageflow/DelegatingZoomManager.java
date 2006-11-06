@@ -13,13 +13,13 @@
 package org.eclipse.jst.jsf.facesconfig.ui.pageflow;
 
 // import org.eclipse.core.runtime.ListenerList;
+import org.eclipse.core.runtime.ListenerList;
 import org.eclipse.draw2d.ScalableFigure;
 import org.eclipse.draw2d.Viewport;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.editparts.ZoomListener;
 import org.eclipse.gef.editparts.ZoomManager;
-import org.eclipse.jface.util.ListenerList;
 
 /**
  * A delegating ZoomManager.
@@ -31,15 +31,12 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	private static final double DEFAULT_ZOOM_LEVEL = 1;
 
-	/** Initial capacity of ZoomListerner list */
-	private static final int ZOOM_LISTENERLIST_INIT_SIZE = 3;
-
 	/** the current ZoomManager all work is delegated to */
 	private ZoomManager currentZoomManager = null;
 
 	/** listeners of zoom */
 	private ListenerList zoomListeners = new ListenerList(
-			ZOOM_LISTENERLIST_INIT_SIZE);
+			ListenerList.IDENTITY);
 
 	/**
 	 * Creates a new DelegatingZoomManager instance.

@@ -113,8 +113,8 @@ public class LifecycleSection extends OthersPageBaseSection {
 	 * Add a filter on the table viewer. Only the elements that is a instance of
 	 * <code>lifecycleChildClass</code> could be selected.
 	 */
-	protected void configTableViewer(TableViewer tableViewer) {
-		tableViewer.addFilter(new ViewerFilter() {
+	protected void configTableViewer(TableViewer tableViewer1) {
+		tableViewer1.addFilter(new ViewerFilter() {
 			public boolean select(Viewer viewer, Object parentElement,
 					Object element) {
 				return lifecycleChildClass.isInstance(element);

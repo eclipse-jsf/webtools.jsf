@@ -67,7 +67,7 @@ public class PageflowLayoutManager {
 	 * 
 	 */
 	private PageflowLayoutManager() {
-
+	    // no external instantiation
 	}
 
 	/**

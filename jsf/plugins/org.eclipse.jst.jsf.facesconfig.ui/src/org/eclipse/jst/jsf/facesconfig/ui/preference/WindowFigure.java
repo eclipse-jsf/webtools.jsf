@@ -15,6 +15,8 @@ package org.eclipse.jst.jsf.facesconfig.ui.preference;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.draw2d.AncestorListener;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.ConnectionLayer;
@@ -37,6 +39,7 @@ import org.eclipse.gef.LayerConstants;
 import org.eclipse.gef.editparts.GridLayer;
 import org.eclipse.gef.editparts.GuideLayer;
 import org.eclipse.jface.resource.JFaceResources;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Image;
@@ -145,6 +148,8 @@ public class WindowFigure extends ScrollPane implements IContainerFigure,
 				try {
 					setVisible(false);
 				} catch (Exception e) {
+                    EditorPlugin.getDefault().getLog().log(
+                       new Status(IStatus.ERROR, EditorPlugin.getPluginId(), 0, "Error setting visible", e));
 				}
 			}
 		});
@@ -455,6 +460,7 @@ public class WindowFigure extends ScrollPane implements IContainerFigure,
 	 * @see com.sybase.stf.gem.diagram.editor.figures.IBaseFigure#setIcon(org.eclipse.swt.graphics.Image)
 	 */
 	public void setIcon(Image image) {
+        // do nothing
 	}
 
 	/*
@@ -463,6 +469,7 @@ public class WindowFigure extends ScrollPane implements IContainerFigure,
 	 * @see com.sybase.stf.gem.diagram.editor.figures.IBaseFigure#setToolTipText(java.lang.String)
 	 */
 	public void setToolTipText(String text) {
+        // do nothing
 	}
 
 	public String getToolTipText() {
@@ -475,15 +482,7 @@ public class WindowFigure extends ScrollPane implements IContainerFigure,
 	 * @see com.sybase.stf.gem.diagram.editor.figures.IBaseFigure#addDecorator(com.sybase.stf.gem.diagram.editor.figures.BaseFigureDecorator)
 	 */
 	public void addDecorator(BaseFigureDecorator decorator) {
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.sybase.stf.gem.diagram.editor.figures.IBaseFigure#addDecorator(com.sybase.stf.gem.diagram.editor.figures.BaseFigureDecorator,
-	 *      int)
-	 */
-	public void addDecorator(BaseFigureDecorator decorator, int position) {
+        // do nothing
 	}
 
 	/*
@@ -492,6 +491,7 @@ public class WindowFigure extends ScrollPane implements IContainerFigure,
 	 * @see com.sybase.stf.gem.diagram.editor.figures.IBaseFigure#removeDecorator()
 	 */
 	public void removeDecorator() {
+        // do nothing
 	}
 
 	/*
@@ -500,6 +500,7 @@ public class WindowFigure extends ScrollPane implements IContainerFigure,
 	 * @see com.sybase.stf.gem.diagram.editor.figures.IBaseFigure#removeDecorator(int)
 	 */
 	public void removeDecorator(int position) {
+        // do nothing
 	}
 
 	/*

@@ -63,7 +63,7 @@ public class PageflowActionBarContributor extends ActionBarContributor
 	 * @see ActionBarContributor#declareGlobalActionKeys()
 	 */
 	public void declareGlobalActionKeys() {
-		
+		// do nothing
 	}
 
 	public void updateActionKeys() {

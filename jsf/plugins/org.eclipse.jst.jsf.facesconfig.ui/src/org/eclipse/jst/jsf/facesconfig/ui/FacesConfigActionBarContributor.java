@@ -21,7 +21,6 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowEditor;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.forms.editor.FormEditor;
 import org.eclipse.ui.part.EditorActionBarContributor;
 import org.eclipse.ui.part.MultiPageEditorActionBarContributor;
 import org.eclipse.wst.sse.ui.StructuredTextEditor;
@@ -46,7 +45,7 @@ public class FacesConfigActionBarContributor extends
 
 	private IEditorPart activeNestedEditor;
 
-	private IEditorPart targetEditor;
+	//private IEditorPart targetEditor;
 
 	public FacesConfigActionBarContributor() {
 		super();
@@ -105,9 +104,8 @@ public class FacesConfigActionBarContributor extends
 		EditorActionBarContributor activeContributor = getActionContributor(activeNestedEditor);
 		if (activeContributor != null) {
 			return activeContributor.getActionBars();
-		} else {
-			return super.getActionBars();
 		}
+        return super.getActionBars();
 	}
 
 	public IWorkbenchPage getPage() {
@@ -121,24 +119,24 @@ public class FacesConfigActionBarContributor extends
 		super.init(bars, page);
 	}
 
-	private IEditorPart getActiveNestedEditor(IEditorPart targetEditor) {
-		IEditorPart activeNestedEditor;
-		if (targetEditor instanceof FormEditor) {
-			activeNestedEditor = ((FormEditor) targetEditor).getActiveEditor();
-		} else {
-			activeNestedEditor = targetEditor;
-		}
-		return activeNestedEditor;
-	}
+//	private IEditorPart getActiveNestedEditor(IEditorPart targetEditor) {
+//		IEditorPart activeNestedEditor_;
+//		if (targetEditor instanceof FormEditor) {
+//			activeNestedEditor_ = ((FormEditor) targetEditor).getActiveEditor();
+//		} else {
+//			activeNestedEditor_ = targetEditor;
+//		}
+//		return activeNestedEditor_;
+//	}
 
 	private EditorActionBarContributor getActionContributor(
-			IEditorPart activeNestedEditor) {
+			IEditorPart activeNestedEditor_) {
 		EditorActionBarContributor activeContributor = null;
-		if (activeNestedEditor instanceof PageflowEditor) {
+		if (activeNestedEditor_ instanceof PageflowEditor) {
 			activeContributor = getPageflowActionContributor();
-		} else if (activeNestedEditor instanceof StructuredTextEditor) {
+		} else if (activeNestedEditor_ instanceof StructuredTextEditor) {
 			activeContributor = getSourceActionContributor();
-		} else if (activeNestedEditor != null) {
+		} else if (activeNestedEditor_ != null) {
 			activeContributor = getFormbasedPageActionContributor();
 		}
 		return activeContributor;
@@ -158,8 +156,9 @@ public class FacesConfigActionBarContributor extends
 		return formbasedPageActionContributor;
 	}
 
-	protected void declareGlobalActionKeys() {
-	}
+//	protected void declareGlobalActionKeys() {
+//        // 
+//	}
 
 	public PageflowActionBarContributor getPageflowActionContributor() {
 		if (pageflowActionContributor == null) {

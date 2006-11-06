@@ -67,13 +67,13 @@ public class ActionOutcomeDialogCellEditor extends EditableDialogCellEditor {
 	 * get the previous JSP page, it can be null if the previous node is not
 	 * PFPage, but PFAction.
 	 * 
-	 * @param element
+	 * @param element_
 	 * @return
 	 */
-	private String getPreviousJSPPath(PageflowElement element) {
+	private String getPreviousJSPPath(PageflowElement element_) {
 		String jspPath = null;
-		if (element instanceof PageflowLink) {
-			PageflowNode source = ((PageflowLink) element).getSource();
+		if (element_ instanceof PageflowLink) {
+			PageflowNode source = ((PageflowLink) element_).getSource();
 
 			if (source instanceof PageflowPage) {
 				jspPath = ((PageflowPage) source).getPath();

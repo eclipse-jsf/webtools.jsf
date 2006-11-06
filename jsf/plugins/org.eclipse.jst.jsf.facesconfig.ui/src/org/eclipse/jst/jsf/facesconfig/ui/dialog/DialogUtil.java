@@ -38,7 +38,7 @@ public class DialogUtil {
 
 	public static String openClassDialog(Shell shell, IProject project,
 			String superType, int tyle) {
-		SelectionDialog dialog = (SelectionDialog) JavaUIHelper
+		SelectionDialog dialog = JavaUIHelper
 				.openSelectionDialog(shell, project, superType, tyle);
 		dialog.setTitle(EditorMessages.FindType);
 		dialog.setMessage(EditorMessages.FindType_Filter);

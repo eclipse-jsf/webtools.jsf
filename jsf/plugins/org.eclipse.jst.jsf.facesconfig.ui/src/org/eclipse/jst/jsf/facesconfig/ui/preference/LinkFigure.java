@@ -72,14 +72,14 @@ public class LinkFigure extends PolylineConnection implements IBaseFigure {
 	 * @see com.sybase.stf.gem.diagram.editor.figures.IBaseFigure#setToolTipText()
 	 */
 	public void setToolTipText(String text) {
-		Label toolTip = null;
+		Label toolTip_ = null;
 
 		if (text != null && text.length() > 0) {
-			toolTip = new Label(text);
-			toolTip.setBorder(new MarginBorder(3));
+			toolTip_ = new Label(text);
+			toolTip_.setBorder(new MarginBorder(3));
 		}
 
-		super.setToolTip(toolTip);
+		super.setToolTip(toolTip_);
 	}
 
 	/*
@@ -316,9 +316,9 @@ public class LinkFigure extends PolylineConnection implements IBaseFigure {
 			setForegroundColor(defaultLabelForeground);
 			setBackgroundColor(defaultLabelBackground);
 			setFont(defaultFont);
-			LineBorder border = new LineBorder(defaultLineWidth);
-			setBorder(border);
-			border.setColor(defaultLineColor);
+			LineBorder border_ = new LineBorder(defaultLineWidth);
+			setBorder(border_);
+			border_.setColor(defaultLineColor);
 			setVisible(defaultLabelVisible);
 		}
 

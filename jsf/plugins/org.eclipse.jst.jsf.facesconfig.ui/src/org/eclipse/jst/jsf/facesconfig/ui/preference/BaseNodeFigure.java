@@ -32,7 +32,6 @@ import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.widgets.Display;
 
 /**
  * The <code>BaseNodeFigure</code> class is the base class for all the figures
@@ -305,7 +304,7 @@ public class BaseNodeFigure extends Figure implements IBaseFigure {
 	public void setAnchorsVisible(boolean visible) {
 		if (anchorsVisible != visible) {
 			anchorsVisible = visible;
-			ConnectionAnchor port;
+			//ConnectionAnchor port;
 			List all = new ArrayList();
 			all.addAll(getTargetConnectionAnchors());
 			all.addAll(getSourceConnectionAnchors());
@@ -333,7 +332,7 @@ public class BaseNodeFigure extends Figure implements IBaseFigure {
 		rightConnectionAnchors.clear();
 
 		if (anchorsVisible) {
-			final Dimension size = baseFigure.getPreferredSize();
+			//final Dimension size = baseFigure.getPreferredSize();
 			PortConnectionAnchor port;
 
 			// start with outputs
@@ -498,9 +497,9 @@ public class BaseNodeFigure extends Figure implements IBaseFigure {
 						otherPort1 = conn1.getSourceAnchor();
 					Point otherLoc1 = otherPort1.getOwner().getParent()
 							.getBounds().getLocation();
-					Dimension otherSize1 = ((BaseNodeFigure) otherPort1
-							.getOwner().getParent()).getBaseFigure()
-							.getPreferredSize();
+//					Dimension otherSize1 = ((BaseNodeFigure) otherPort1
+//							.getOwner().getParent()).getBaseFigure()
+//							.getPreferredSize();
 					// otherLoc1.x += otherSize1.width/2;
 					// otherLoc1.y += otherSize1.height/2;
 

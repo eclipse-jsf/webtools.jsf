@@ -82,19 +82,19 @@ public class PageflowDirectEditManager extends DirectEditManager {
 		Text text = (Text) getCellEditor().getControl();
 		verifyListener = new VerifyListener() {
 			public void verifyText(VerifyEvent event) {
-				Text text = (Text) getCellEditor().getControl();
-				String oldText = text.getText();
+				Text text_ = (Text) getCellEditor().getControl();
+				String oldText = text_.getText();
 				// get the left string of the new input character
 				String leftText = oldText.substring(0, event.start);
 				// get the right string of the new input charactor
 				String rightText = oldText.substring(event.end, oldText
 						.length());
 
-				GC gc = new GC(text);
+				GC gc = new GC(text_);
 				Point size = gc.textExtent(leftText + event.text + rightText);
 				gc.dispose();
 				if (size.x != 0) {
-					size = text.computeSize(size.x, SWT.DEFAULT);
+					size = text_.computeSize(size.x, SWT.DEFAULT);
 				}
 				getCellEditor().getControl().setSize(size.x, size.y);
 			}
@@ -104,7 +104,7 @@ public class PageflowDirectEditManager extends DirectEditManager {
 		// set the initial text, font, to the direct editor
 		String initialLabelText = label.getText();
 		getCellEditor().setValue(initialLabelText);
-		IFigure figure = ((GraphicalEditPart) getEditPart()).getFigure();
+		IFigure figure = getEditPart().getFigure();
 		scaledFont = figure.getFont();
 		FontData data = scaledFont.getFontData()[0];
 		Dimension fontSize = new Dimension(0, data.getHeight());

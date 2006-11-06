@@ -76,7 +76,7 @@ public abstract class PageflowElementEditPart extends AbstractGraphicalEditPart
 						break;
 					}
 				}
-			};
+			}
 		};
 	}
 
@@ -272,18 +272,18 @@ public abstract class PageflowElementEditPart extends AbstractGraphicalEditPart
 	 * @see AbstractGraphicalEditPart#createFigure()
 	 */
 	protected IFigure createFigure() {
-		IFigure figure = null;
-		figure = new PageflowNodeFigure();
+		IFigure figure_ = null;
+		figure_ = new PageflowNodeFigure();
 		PageflowElement elm = getPageflowElement();
 		if (elm.getName() != null) {
-			((PageflowNodeFigure) figure).setImageText(getImage(elm), elm
+			((PageflowNodeFigure) figure_).setImageText(getImage(elm), elm
 					.getName());
 		} else {
-			((PageflowNodeFigure) figure).setImageText(getImage(elm),
+			((PageflowNodeFigure) figure_).setImageText(getImage(elm),
 					getTypeName(elm));
 		}
-		((PageflowNodeFigure) figure).update();
-		return figure;
+		((PageflowNodeFigure) figure_).update();
+		return figure_;
 	}
 
 	/**
@@ -306,34 +306,28 @@ public abstract class PageflowElementEditPart extends AbstractGraphicalEditPart
 	 * perfrom direct edit request
 	 * 
 	 */
-	protected void performDirectEdit() {
-	}
+	protected abstract void performDirectEdit();
 
 	/**
 	 * perform double click request
 	 * 
 	 */
-	protected void performOpen() {
-	}
+	protected abstract void performOpen();
 
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see com.sybase.stf.jmt.editors.pageflow.editparts.IEditPartDecorator#decorateEditPart()
 	 */
-	public void addAnnotation(Annotation annotation) {
-
-	}
-
+	public abstract void addAnnotation(Annotation annotation);
+    
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see com.sybase.stf.jmt.editors.pageflow.editparts.IEditPartDecorator#undecorateEditPart()
 	 */
-	public void removeAnnotation() {
-
-	}
-
+	public abstract void removeAnnotation();
+    
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -341,7 +335,6 @@ public abstract class PageflowElementEditPart extends AbstractGraphicalEditPart
 	 */
 	public IResource getMarkerResource() {
 		IResource resource = WebrootUtil.getResource((EObject) getModel());
-		;
 		return resource;
 	}
 }

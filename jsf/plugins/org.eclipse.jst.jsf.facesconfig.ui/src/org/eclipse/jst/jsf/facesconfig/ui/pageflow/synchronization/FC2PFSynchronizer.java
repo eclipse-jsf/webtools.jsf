@@ -48,11 +48,12 @@ public class FC2PFSynchronizer extends AdapterImpl {
 	}
 
 	public Notifier getTarget() {
-		// TODO Auto-generated method stub
+		// can't set target so return null
 		return null;
 	}
 
 	public void setTarget(Notifier newTarget) {
+        // do nothing
 	}
 
 	public boolean isAdapterForType(Object type) {
@@ -263,9 +264,5 @@ public class FC2PFSynchronizer extends AdapterImpl {
 					.getNotifier()).eContainer();
 			transformer.refreshLink(caseType);
 		}
-	}
-
-	public void dispose() {
-
 	}
 }

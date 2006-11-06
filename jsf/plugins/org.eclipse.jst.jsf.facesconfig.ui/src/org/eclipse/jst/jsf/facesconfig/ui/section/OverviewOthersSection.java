@@ -71,8 +71,8 @@ public class OverviewOthersSection extends AbstractOverviewSection {
 	 * 
 	 * @see org.eclipse.jst.jsf.facesconfig.ui.section.AbstractOverviewSection#configTableViewer(org.eclipse.jface.viewers.TableViewer)
 	 */
-	protected void configTableViewer(TableViewer tableViewer) {
-		tableViewer.setContentProvider(new IStructuredContentProvider() {
+	protected void configTableViewer(TableViewer tableViewer1) {
+		tableViewer1.setContentProvider(new IStructuredContentProvider() {
 
 			public Object[] getElements(Object inputElement) {
 				List othersNodesList = (List) inputElement;
@@ -80,12 +80,12 @@ public class OverviewOthersSection extends AbstractOverviewSection {
 			}
 
 			public void dispose() {
-
+                // do nothing
 			}
 
 			public void inputChanged(Viewer viewer, Object oldInput,
 					Object newInput) {
-
+			    // do nothing
 			}
 		});
 

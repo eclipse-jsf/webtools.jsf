@@ -224,11 +224,6 @@ public class ManagedBeanGeneralSection extends AbstractFacesConfigSection {
 				});
 	}
 
-	public void clearAll() {
-		// TODO Auto-generated method stub
-
-	}
-
 	public void refreshAll() {
 		refresh();
 	}

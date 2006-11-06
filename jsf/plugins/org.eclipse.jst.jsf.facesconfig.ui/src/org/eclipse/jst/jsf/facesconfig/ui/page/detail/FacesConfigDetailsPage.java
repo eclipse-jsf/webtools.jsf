@@ -93,7 +93,7 @@ public abstract class FacesConfigDetailsPage extends AbstractFormPart implements
 	 */
 	abstract protected IFacesConfigSection[] createDetailSections(
 			Composite composite, IManagedForm managedForm, FormToolkit toolkit,
-			FacesConfigMasterDetailPage page);
+			FacesConfigMasterDetailPage page_);
 
 	/**
 	 * 

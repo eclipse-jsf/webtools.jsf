@@ -286,13 +286,6 @@ public class RendererSection extends AbstractFacesConfigSection {
 		return reference;
 	}
 
-	/**
-	 * 
-	 */
-	public void clearAll() {
-		// TODO Auto-generated method stub
-
-	}
 
 	/**
 	 * 

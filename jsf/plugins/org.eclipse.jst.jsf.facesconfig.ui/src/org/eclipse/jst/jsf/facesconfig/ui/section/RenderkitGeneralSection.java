@@ -282,14 +282,6 @@ public class RenderkitGeneralSection extends AbstractFacesConfigSection {
 	}
 
 	/**
-	 * 
-	 */
-	public void clearAll() {
-		// TODO Auto-generated method stub
-
-	}
-
-	/**
 	 * Add RenderKitGeneralAdapter onto <render-kit> and the first
 	 * <display-name> and <description> elements.
 	 */

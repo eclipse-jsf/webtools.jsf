@@ -54,8 +54,8 @@ public class OverviewComponentsSection extends AbstractOverviewSection {
 	 * 
 	 * @see org.eclipse.jst.jsf.facesconfig.ui.section.AbstractOverviewSection#configTableViewer(org.eclipse.jface.viewers.TableViewer)
 	 */
-	protected void configTableViewer(TableViewer tableViewer) {
-		tableViewer.addFilter(new ViewerFilter() {
+	protected void configTableViewer(TableViewer tableViewer1) {
+		tableViewer1.addFilter(new ViewerFilter() {
 			public boolean select(Viewer viewer, Object parentElement,
 					Object element) {
 				return FacesConfigPackage.eINSTANCE.getComponentType()

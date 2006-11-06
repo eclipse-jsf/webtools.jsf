@@ -110,6 +110,7 @@ public class MapEntriesEditGroup extends DialogFieldGroup implements
 	 * @see org.eclipse.jst.jsf.facesconfig.ui.common.dialogfield.DialogFieldGroup#initialize()
 	 */
 	public void initialize() {
+        // TODO: initialize?
 	}
 
 	public void updateButtons() {
@@ -170,7 +171,7 @@ public class MapEntriesEditGroup extends DialogFieldGroup implements
 				.setDialogFieldApplyListener(new IDialogFieldApplyListener() {
 
 					public void dialogFieldApplied(DialogField field) {
-						ManagedBeanType managedBean = (ManagedBeanType) getInput();
+						ManagedBeanType managedBean1 = (ManagedBeanType) getInput();
 						String className = ((ClassButtonDialogField) field)
 								.getText();
 						KeyClassType keyClass = FacesConfigFactory.eINSTANCE
@@ -180,18 +181,18 @@ public class MapEntriesEditGroup extends DialogFieldGroup implements
 								.getEditingDomain();
 						Command cmd;
 						boolean isNew;
-						if (managedBean.getMapEntries() == null) {
+						if (managedBean1.getMapEntries() == null) {
 							isNew = true;
 							MapEntriesType mapEntries = FacesConfigFactory.eINSTANCE
 									.createMapEntriesType();
 							mapEntries.setKeyClass(keyClass);
-							cmd = SetCommand.create(editingDomain, managedBean,
+							cmd = SetCommand.create(editingDomain, managedBean1,
 									FacesConfigPackage.eINSTANCE
 											.getManagedBeanType_MapEntries(),
 									mapEntries);
 						} else {
 							isNew = false;
-							cmd = SetCommand.create(editingDomain, managedBean
+							cmd = SetCommand.create(editingDomain, managedBean1
 									.getMapEntries(),
 									FacesConfigPackage.eINSTANCE
 											.getMapEntriesType_KeyClass(),
@@ -215,7 +216,7 @@ public class MapEntriesEditGroup extends DialogFieldGroup implements
 				.setDialogFieldApplyListener(new IDialogFieldApplyListener() {
 
 					public void dialogFieldApplied(DialogField field) {
-						ManagedBeanType managedBean = (ManagedBeanType) getInput();
+						ManagedBeanType managedBean1 = (ManagedBeanType) getInput();
 						String className = ((ClassButtonDialogField) field)
 								.getText();
 						ValueClassType valueClass = FacesConfigFactory.eINSTANCE
@@ -225,18 +226,18 @@ public class MapEntriesEditGroup extends DialogFieldGroup implements
 								.getEditingDomain();
 						Command cmd;
 						boolean isNew;
-						if (managedBean.getMapEntries() == null) {
+						if (managedBean1.getMapEntries() == null) {
 							isNew = true;
 							MapEntriesType mapEntries = FacesConfigFactory.eINSTANCE
 									.createMapEntriesType();
 							mapEntries.setValueClass(valueClass);
-							cmd = SetCommand.create(editingDomain, managedBean,
+							cmd = SetCommand.create(editingDomain, managedBean1,
 									FacesConfigPackage.eINSTANCE
 											.getManagedBeanType_MapEntries(),
 									mapEntries);
 						} else {
 							isNew = false;
-							cmd = SetCommand.create(editingDomain, managedBean
+							cmd = SetCommand.create(editingDomain, managedBean1
 									.getMapEntries(),
 									FacesConfigPackage.eINSTANCE
 											.getMapEntriesType_ValueClass(),
@@ -646,7 +647,6 @@ public class MapEntriesEditGroup extends DialogFieldGroup implements
 	 * @see org.eclipse.jface.viewers.ISelectionProvider#addSelectionChangedListener(org.eclipse.jface.viewers.ISelectionChangedListener)
 	 */
 	public void addSelectionChangedListener(ISelectionChangedListener listener) {
-		// TODO Auto-generated method stub
 		selectionChangedListeners.add(listener);
 	}
 
@@ -656,7 +656,6 @@ public class MapEntriesEditGroup extends DialogFieldGroup implements
 	 * @see org.eclipse.jface.viewers.ISelectionProvider#getSelection()
 	 */
 	public ISelection getSelection() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -667,7 +666,6 @@ public class MapEntriesEditGroup extends DialogFieldGroup implements
 	 */
 	public void removeSelectionChangedListener(
 			ISelectionChangedListener listener) {
-		// TODO Auto-generated method stub
 		selectionChangedListeners.remove(listener);
 	}
 
@@ -677,8 +675,7 @@ public class MapEntriesEditGroup extends DialogFieldGroup implements
 	 * @see org.eclipse.jface.viewers.ISelectionProvider#setSelection(org.eclipse.jface.viewers.ISelection)
 	 */
 	public void setSelection(ISelection selection) {
-		// TODO Auto-generated method stub
-
+        // do nothing
 	}
 
 	/*
@@ -687,7 +684,6 @@ public class MapEntriesEditGroup extends DialogFieldGroup implements
 	 * @see org.eclipse.jface.viewers.ISelectionChangedListener#selectionChanged(org.eclipse.jface.viewers.SelectionChangedEvent)
 	 */
 	public void selectionChanged(SelectionChangedEvent event) {
-		// TODO Auto-generated method stub
 		for (Iterator listeners = selectionChangedListeners.iterator(); listeners
 				.hasNext();) {
 			ISelectionChangedListener listener = (ISelectionChangedListener) listeners

@@ -79,11 +79,10 @@ public class PageflowSwitch {
 	protected Object doSwitch(EClass theEClass, EObject theEObject) {
 		if (theEClass.eContainer() == modelPackage) {
 			return doSwitch(theEClass.getClassifierID(), theEObject);
-		} else {
-			List eSuperTypes = theEClass.getESuperTypes();
-			return eSuperTypes.isEmpty() ? defaultCase(theEObject) : doSwitch(
-					(EClass) eSuperTypes.get(0), theEObject);
 		}
+        List eSuperTypes = theEClass.getESuperTypes();
+        return eSuperTypes.isEmpty() ? defaultCase(theEObject) : doSwitch(
+        		(EClass) eSuperTypes.get(0), theEObject);
 	}
 
 	/**

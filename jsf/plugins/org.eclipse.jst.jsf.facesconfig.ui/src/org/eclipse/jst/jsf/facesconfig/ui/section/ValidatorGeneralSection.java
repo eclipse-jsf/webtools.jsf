@@ -283,14 +283,6 @@ public class ValidatorGeneralSection extends AbstractFacesConfigSection {
 	}
 
 	/**
-	 * 
-	 */
-	public void clearAll() {
-		// TODO Auto-generated method stub
-
-	}
-
-	/**
 	 * Add ValidatorGeneralAdapter onto <validator> and the first <display-name>
 	 * and <description> elements.
 	 */

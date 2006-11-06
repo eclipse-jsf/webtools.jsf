@@ -112,15 +112,4 @@ public class OverviewGeneralSection extends AbstractFacesConfigSection {
 		// }
 		// versionText.setText(version);
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.jst.jsf.facesconfig.ui.section.IFacesConfigSection#clearAll()
-	 */
-	public void clearAll() {
-		// TODO Auto-generated method stub
-
-	}
-
 }

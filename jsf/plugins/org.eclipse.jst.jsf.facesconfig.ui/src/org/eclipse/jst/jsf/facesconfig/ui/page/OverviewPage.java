@@ -197,7 +197,7 @@ public class OverviewPage extends FormPage implements ISelectionProvider,
 	 * @see org.eclipse.jface.viewers.ISelectionProvider#addSelectionChangedListener(org.eclipse.jface.viewers.ISelectionChangedListener)
 	 */
 	public void addSelectionChangedListener(ISelectionChangedListener listener) {
-
+        // do not support change in selection
 	}
 
 	/*
@@ -216,7 +216,7 @@ public class OverviewPage extends FormPage implements ISelectionProvider,
 	 */
 	public void removeSelectionChangedListener(
 			ISelectionChangedListener listener) {
-
+        // do not support change in selection
 	}
 
 	/*
@@ -225,6 +225,6 @@ public class OverviewPage extends FormPage implements ISelectionProvider,
 	 * @see org.eclipse.jface.viewers.ISelectionProvider#setSelection(org.eclipse.jface.viewers.ISelection)
 	 */
 	public void setSelection(ISelection selection) {
-
+	    // do not support change in selection
 	}
 }

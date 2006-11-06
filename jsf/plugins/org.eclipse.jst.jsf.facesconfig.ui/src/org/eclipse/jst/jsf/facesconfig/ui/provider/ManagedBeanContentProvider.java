@@ -34,13 +34,6 @@ public class ManagedBeanContentProvider implements ITreeContentProvider {
 
 	private List scopeItemList = null;
 
-
-	/**
-	 * The constructor
-	 */
-	public ManagedBeanContentProvider() {
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 

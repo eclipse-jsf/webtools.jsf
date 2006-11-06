@@ -149,7 +149,7 @@ public class TitleBarButton extends Button {
 			if (uncheckedRects != null) {
 				Iterator iter = uncheckedRects.getRectangles().iterator();
 				while (iter.hasNext()) {
-					Point p = getLocation();
+					/*Point p =*/ getLocation();
 					Rectangle r = ((Rectangle) iter.next()).getCopy();
 					rect = rect.getUnion(r);
 				}
@@ -157,7 +157,7 @@ public class TitleBarButton extends Button {
 			if (checkedRects != null) {
 				Iterator iter = checkedRects.getRectangles().iterator();
 				while (iter.hasNext()) {
-					Point p = getLocation();
+					/*Point p =*/ getLocation();
 					Rectangle r = ((Rectangle) iter.next()).getCopy();
 					rect = rect.getUnion(r);
 				}

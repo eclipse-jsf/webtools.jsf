@@ -20,8 +20,8 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PageflowPackageImp
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowValidation;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.wst.common.ui.properties.internal.provisional.TabbedPropertySheetPage;
-import org.eclipse.wst.common.ui.properties.internal.provisional.TabbedPropertySheetWidgetFactory;
+import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
+import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetWidgetFactory;
 
 /**
  * Edit section for Pagflow Link element (EditPart)
@@ -118,5 +118,9 @@ public class LinkSection extends AbstractEditPartSection {
 		super.refresh();
 		group.setPropertyProvider(pfLink);
 	}
+
+    public void validate() {
+        // do nothing
+    }
 
 }

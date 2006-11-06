@@ -168,9 +168,8 @@ public class EditorPlugin extends AbstractUIPlugin {//implements IStartup {
 	public static IWorkbenchWindow getActiveWorkbenchWindow() {
 		if (getDefault().getWorkbench() == null) {
 			return null;
-		} else {
-			return getDefault().getWorkbench().getActiveWorkbenchWindow();
 		}
+        return getDefault().getWorkbench().getActiveWorkbenchWindow();
 	}
 
 	public static Shell getActiveShell() {
@@ -218,7 +217,7 @@ public class EditorPlugin extends AbstractUIPlugin {//implements IStartup {
 		}
 
 		ImageRegistry images = getImageRegistry();
-		Image image = (Image) images.get(name);
+		Image image = images.get(name);
 		if (image == null) {
 			try {
 				ImageDescriptor id = ImageDescriptor.createFromURL(new URL(
@@ -248,7 +247,7 @@ public class EditorPlugin extends AbstractUIPlugin {//implements IStartup {
 		}
 
 		ImageRegistry images = getImageRegistry();
-		ImageDescriptor id = (ImageDescriptor) images.getDescriptor(path);
+		ImageDescriptor id = images.getDescriptor(path);
 		if (id == null) {
 			try {
 				id = ImageDescriptor.createFromURL(new URL(pluginBase, "icons/"

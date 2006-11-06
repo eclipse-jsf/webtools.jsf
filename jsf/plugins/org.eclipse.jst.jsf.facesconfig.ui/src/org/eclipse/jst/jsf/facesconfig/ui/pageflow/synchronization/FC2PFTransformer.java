@@ -29,8 +29,6 @@ import org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
-import org.eclipse.jst.jsf.facesconfig.emf.FromActionType;
-import org.eclipse.jst.jsf.facesconfig.emf.FromOutcomeType;
 import org.eclipse.jst.jsf.facesconfig.emf.FromViewIdType;
 import org.eclipse.jst.jsf.facesconfig.emf.IconType;
 import org.eclipse.jst.jsf.facesconfig.emf.LargeIconType;
@@ -219,46 +217,47 @@ public class FC2PFTransformer extends AdapterImpl {
 	 * @param navigationCase
 	 * @param link
 	 */
-	private void updateFacesCase(NavigationCaseType navigationCase,
-			PageflowLink link) {
-		FacesConfigFactory factory = FacesConfigFactory.eINSTANCE;
-		if (link.getComment() != null) {
-			DescriptionType description = factory.createDescriptionType();
-			description.setTextContent(link.getComment());
-			navigationCase.getDescription().clear();
-			navigationCase.getDescription().add(description);
-		}
-		// set the navigation rule's icon
-		if (link.getLargeicon() != null || link.getSmallicon() != null) {
-			IconType icon = factory.createIconType();
-			if (link.getLargeicon() != null) {
-				LargeIconType largeicon = factory.createLargeIconType();
-				largeicon.setTextContent(link.getLargeicon());
-				icon.setLargeIcon(largeicon);
-			}
-
-			if (link.getSmallicon() != null) {
-				SmallIconType smallicon = factory.createSmallIconType();
-				smallicon.setTextContent(link.getSmallicon());
-				icon.setSmallIcon(smallicon);
-			}
-			navigationCase.getIcon().clear();
-			navigationCase.getIcon().add(icon);
-		}
-		if (link.getFromaction() != null) {
-			FromActionType fromAction = factory.createFromActionType();
-			fromAction.setTextContent(link.getFromaction());
-			navigationCase.setFromAction(fromAction);
-		}
-		if (link.getOutcome() != null) {
-			FromOutcomeType fromOutcome = factory.createFromOutcomeType();
-			fromOutcome.setTextContent(link.getOutcome());
-			navigationCase.setFromOutcome(fromOutcome);
-		}
-	}
+    // TODO: not used, dead?
+//	private void updateFacesCase(NavigationCaseType navigationCase,
+//			PageflowLink link) {
+//		FacesConfigFactory factory = FacesConfigFactory.eINSTANCE;
+//		if (link.getComment() != null) {
+//			DescriptionType description = factory.createDescriptionType();
+//			description.setTextContent(link.getComment());
+//			navigationCase.getDescription().clear();
+//			navigationCase.getDescription().add(description);
+//		}
+//		// set the navigation rule's icon
+//		if (link.getLargeicon() != null || link.getSmallicon() != null) {
+//			IconType icon = factory.createIconType();
+//			if (link.getLargeicon() != null) {
+//				LargeIconType largeicon = factory.createLargeIconType();
+//				largeicon.setTextContent(link.getLargeicon());
+//				icon.setLargeIcon(largeicon);
+//			}
+//
+//			if (link.getSmallicon() != null) {
+//				SmallIconType smallicon = factory.createSmallIconType();
+//				smallicon.setTextContent(link.getSmallicon());
+//				icon.setSmallIcon(smallicon);
+//			}
+//			navigationCase.getIcon().clear();
+//			navigationCase.getIcon().add(icon);
+//		}
+//		if (link.getFromaction() != null) {
+//			FromActionType fromAction = factory.createFromActionType();
+//			fromAction.setTextContent(link.getFromaction());
+//			navigationCase.setFromAction(fromAction);
+//		}
+//		if (link.getOutcome() != null) {
+//			FromOutcomeType fromOutcome = factory.createFromOutcomeType();
+//			fromOutcome.setTextContent(link.getOutcome());
+//			navigationCase.setFromOutcome(fromOutcome);
+//		}
+//	}
 
 	private void createFacesCase(PageflowLink link, PageflowPage source,
-			PageflowPage target) {
+			PageflowPage target_) {
 		NavigationRuleType rule = FacesConfigFactory.eINSTANCE
 				.createNavigationRuleType();
 		FromViewIdType from = FacesConfigFactory.eINSTANCE
@@ -268,13 +267,13 @@ public class FC2PFTransformer extends AdapterImpl {
 		NavigationCaseType navCase = FacesConfigFactory.eINSTANCE
 				.createNavigationCaseType();
 		ToViewIdType toView = FacesConfigFactory.eINSTANCE.createToViewIdType();
-		toView.setTextContent((target).getPath());
+		toView.setTextContent((target_).getPath());
 		navCase.setToViewId(toView);
 		rule.getNavigationCase().add(navCase);
 		facesConfig.getNavigationRule().add(rule);
 		updateFacesRule(rule, source);
 		source.getFCElements().add(from);
-		target.getFCElements().add(toView);
+		target_.getFCElements().add(toView);
 		link.getFCElements().add(navCase);
 		mapCases2Links.put(navCase, link);
 	}
@@ -301,14 +300,14 @@ public class FC2PFTransformer extends AdapterImpl {
 	private void removeLink(PageflowLink pLink) {
 		// Link
 		PageflowPage source = (PageflowPage) pLink.getSource();
-		PageflowPage target = (PageflowPage) pLink.getTarget();
+		PageflowPage target_ = (PageflowPage) pLink.getTarget();
 		pLink.getPageflow().getLinks().remove(pLink);
 		source.getOutlinks().remove(pLink);
-		target.getInlinks().remove(pLink);
+		target_.getInlinks().remove(pLink);
 		// Navigation case
 		pLink.getFCElements().clear();
 		cleanPage(source);
-		cleanPage(target);
+		cleanPage(target_);
 	}
 
 	/**
@@ -329,7 +328,7 @@ public class FC2PFTransformer extends AdapterImpl {
 		// remove old case
 		NavigationCaseType caseType = (NavigationCaseType) pLink
 				.getFCElements().getData().get(0);
-		NavigationRuleType rule = (NavigationRuleType) caseType.eContainer();
+		//NavigationRuleType rule = (NavigationRuleType) caseType.eContainer();
 		removeCase(caseType);
 
 		// create new rule / case
@@ -421,9 +420,9 @@ public class FC2PFTransformer extends AdapterImpl {
 		}
 	}
 
-	void addLink(PageflowPage source, PageflowPage target, PageflowLink value) {
-		if (source != null && target != null && value != null) {
-			createFacesCase(value, (PageflowPage) source, (PageflowPage) target);
+	void addLink(PageflowPage source, PageflowPage target_, PageflowLink value) {
+		if (source != null && target_ != null && value != null) {
+			createFacesCase(value, source, target_);
 		}
 	}
 
@@ -531,7 +530,7 @@ public class FC2PFTransformer extends AdapterImpl {
 	}
 
 	public void setTarget(Notifier newTarget) {
-
+	    // do nothing
 	}
 
 	public static FromViewIdType getSource(NavigationCaseType caseType) {
@@ -587,9 +586,9 @@ public class FC2PFTransformer extends AdapterImpl {
 	 */
 	private PageflowPage getOrCreateEndPage(NavigationCaseType navCase) {
 		PageflowPage endPageflowNode = null;
-		ToViewIdType target = navCase.getToViewId();
-		if (target != null) {
-			String path = target.getTextContent();
+		ToViewIdType target_ = navCase.getToViewId();
+		if (target_ != null) {
+			String path = target_.getTextContent();
 			if (getValidPFPageInCache(path) == null) {
 				endPageflowNode = TransformUtil.findPage(path, pageflow);
 				if (endPageflowNode == null) {
@@ -604,13 +603,13 @@ public class FC2PFTransformer extends AdapterImpl {
 			} else {
 				endPageflowNode = (PageflowPage) mapPaths2PF.get(path);
 			}
-			if (target != null) {
+			if (target_ != null) {
 				ReferenceElement element = new PageReferenceElement(
 						endPageflowNode);
-				element.add(target);
+				element.add(target_);
 				endPageflowNode.setReferenceLink(element
 						.resolveReferenceString());
-				endPageflowNode.getFCElements().add(target);
+				endPageflowNode.getFCElements().add(target_);
 			}
 		}
 		return endPageflowNode;
@@ -652,12 +651,12 @@ public class FC2PFTransformer extends AdapterImpl {
 	/**
 	 * Update pageflow model elements against faces-config navigation case.
 	 */
-	public boolean updatePageflowElements(Pageflow pageflow,
+	public boolean updatePageflowElements(Pageflow pageflow_,
 			NavigationCaseType caseFC) {
 		this.pageflowChanged = false;
-		this.pageflow = pageflow;
-		ToViewIdType target = caseFC.getToViewId();
-		if (target == null) {
+		this.pageflow = pageflow_;
+		ToViewIdType target_ = caseFC.getToViewId();
+		if (target_ == null) {
 			return false;
 		}
 
@@ -699,9 +698,9 @@ public class FC2PFTransformer extends AdapterImpl {
 		return pageflowChanged;
 	}
 
-	private boolean cleanPageflowNavigationRule(Pageflow pageflow) {
+	private boolean cleanPageflowNavigationRule(Pageflow pageflow_) {
 		boolean dirty = false;
-		List links = pageflow.getLinks();
+		List links = pageflow_.getLinks();
 		Iterator linksIterator = links.iterator();
 		while (linksIterator.hasNext()) {
 			PageflowLink link = (PageflowLink) linksIterator.next();
@@ -788,7 +787,7 @@ public class FC2PFTransformer extends AdapterImpl {
 		return null;
 	}
 
-	public PageflowLink createPFLink(PageflowNode start, PageflowNode target,
+	public PageflowLink createPFLink(PageflowNode start, PageflowNode target_,
 			NavigationCaseType caseFC) {
 		PageflowLink link = null;
 		String fromOutcome = caseFC.getFromOutcome() != null ? caseFC
@@ -799,13 +798,13 @@ public class FC2PFTransformer extends AdapterImpl {
 		link = createPFLink(fromOutcome);
 		link.setFromaction(action);
 		link.setSource(start);
-		link.setTarget(target);
+		link.setTarget(target_);
 		start.getOutlinks().add(link);
-		target.getInlinks().add(link);
+		target_.getInlinks().add(link);
 		// The reference.
 		link.getFCElements().add(caseFC);
 		start.getFCElements().add(rule.getFromViewId());
-		target.getFCElements().add(caseFC.getToViewId());
+		target_.getFCElements().add(caseFC.getToViewId());
 		return link;
 	}
 
@@ -833,16 +832,16 @@ public class FC2PFTransformer extends AdapterImpl {
 	 *            PFLink's fromOutcome attribute
 	 * @return - new PFLink object
 	 */
-	public PageflowLink createPFLink(PageflowNode start, PageflowNode target,
+	public PageflowLink createPFLink(PageflowNode start, PageflowNode target_,
 			String action, String fromOutcome) {
-		Assert.isTrue(start != null && target != null);
+		Assert.isTrue(start != null && target_ != null);
 		PageflowLink link = null;
 		link = createPFLink(fromOutcome);
 		link.setFromaction(action);
 		link.setSource(start);
-		link.setTarget(target);
+		link.setTarget(target_);
 		start.getOutlinks().add(link);
-		target.getInlinks().add(link);
+		target_.getInlinks().add(link);
 		return link;
 	}
 
@@ -927,7 +926,7 @@ public class FC2PFTransformer extends AdapterImpl {
 	public static FromViewIdType createRLFromViewID(String value) {
 		FromViewIdType fromView = FacesConfigFactory.eINSTANCE
 				.createFromViewIdType();
-		((FromViewIdType) fromView).setTextContent(value);
+		fromView.setTextContent(value);
 		return fromView;
 	}
 

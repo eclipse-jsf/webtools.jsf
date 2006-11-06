@@ -13,15 +13,15 @@ package org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties;
 
 import java.util.List;
 
+import org.eclipse.jface.viewers.IFilter;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowNodeEditPart;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PageflowPageImpl;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.section.PageSection;
 import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.wst.common.ui.properties.internal.provisional.ISection;
-import org.eclipse.wst.common.ui.properties.internal.provisional.ISectionDescriptor;
-import org.eclipse.wst.common.ui.properties.internal.provisional.ITypeMapper;
+import org.eclipse.ui.views.properties.tabbed.ISection;
+import org.eclipse.ui.views.properties.tabbed.ISectionDescriptor;
 
 /**
  * @author jchoi
@@ -43,7 +43,7 @@ public class PageSectionDescriptor implements ISectionDescriptor {
 	 * 
 	 * @see org.eclipse.wst.common.ui.properties.internal.provisional.ISectionDescriptor#getFilter()
 	 */
-	public ITypeMapper getFilter() {
+	public IFilter getFilter() {
 		return null;
 	}
 

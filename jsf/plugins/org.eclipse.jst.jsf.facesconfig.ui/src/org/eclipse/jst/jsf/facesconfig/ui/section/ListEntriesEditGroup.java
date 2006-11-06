@@ -108,7 +108,7 @@ public class ListEntriesEditGroup extends DialogFieldGroup implements
 	 * @see org.eclipse.jst.jsf.facesconfig.ui.common.dialogfield.DialogFieldGroup#initialize()
 	 */
 	public void initialize() {
-
+	    // TODO: initialize?
 	}
 
 	/*
@@ -117,7 +117,8 @@ public class ListEntriesEditGroup extends DialogFieldGroup implements
 	 * @see org.eclipse.jst.jsf.facesconfig.ui.common.dialogfield.DialogFieldGroup#refreshData()
 	 */
 	public void refreshData() {
-	}
+        // TODO: initialize?
+    }
 
 	/*
 	 * (non-Javadoc)
@@ -167,7 +168,7 @@ public class ListEntriesEditGroup extends DialogFieldGroup implements
 				.setDialogFieldApplyListener(new IDialogFieldApplyListener() {
 
 					public void dialogFieldApplied(DialogField field) {
-						ManagedBeanType managedBean = (ManagedBeanType) getInput();
+						ManagedBeanType managedBean_ = (ManagedBeanType) getInput();
 						String className = ((ClassButtonDialogField) field)
 								.getText();
 						ValueClassType valueClass = FacesConfigFactory.eINSTANCE
@@ -177,18 +178,18 @@ public class ListEntriesEditGroup extends DialogFieldGroup implements
 								.getEditingDomain();
 						Command cmd;
 						boolean isNew;
-						if (managedBean.getListEntries() == null) {
+						if (managedBean_.getListEntries() == null) {
 							isNew = true;
 							ListEntriesType listEntries = FacesConfigFactory.eINSTANCE
 									.createListEntriesType();
 							listEntries.setValueClass(valueClass);
-							cmd = SetCommand.create(editingDomain, managedBean,
+							cmd = SetCommand.create(editingDomain, managedBean_,
 									FacesConfigPackage.eINSTANCE
 											.getManagedBeanType_ListEntries(),
 									listEntries);
 						} else {
 							isNew = false;
-							ListEntriesType listEntries = managedBean
+							ListEntriesType listEntries = managedBean_
 									.getListEntries();
 							cmd = SetCommand.create(editingDomain, listEntries,
 									FacesConfigPackage.eINSTANCE
@@ -574,19 +575,12 @@ public class ListEntriesEditGroup extends DialogFieldGroup implements
 		return null;
 	}
 
-	/**
-	 * 
-	 */
-	public void clearAll() {
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see org.eclipse.jface.viewers.ISelectionProvider#addSelectionChangedListener(org.eclipse.jface.viewers.ISelectionChangedListener)
 	 */
 	public void addSelectionChangedListener(ISelectionChangedListener listener) {
-		// TODO Auto-generated method stub
 		selectionChangedListeners.add(listener);
 	}
 
@@ -596,7 +590,6 @@ public class ListEntriesEditGroup extends DialogFieldGroup implements
 	 * @see org.eclipse.jface.viewers.ISelectionProvider#getSelection()
 	 */
 	public ISelection getSelection() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -607,7 +600,6 @@ public class ListEntriesEditGroup extends DialogFieldGroup implements
 	 */
 	public void removeSelectionChangedListener(
 			ISelectionChangedListener listener) {
-		// TODO Auto-generated method stub
 		selectionChangedListeners.remove(listener);
 	}
 
@@ -617,8 +609,7 @@ public class ListEntriesEditGroup extends DialogFieldGroup implements
 	 * @see org.eclipse.jface.viewers.ISelectionProvider#setSelection(org.eclipse.jface.viewers.ISelection)
 	 */
 	public void setSelection(ISelection selection) {
-		// TODO Auto-generated method stub
-
+	    // do nothing
 	}
 
 	/*
@@ -627,7 +618,6 @@ public class ListEntriesEditGroup extends DialogFieldGroup implements
 	 * @see org.eclipse.jface.viewers.ISelectionChangedListener#selectionChanged(org.eclipse.jface.viewers.SelectionChangedEvent)
 	 */
 	public void selectionChanged(SelectionChangedEvent event) {
-		// TODO Auto-generated method stub
 		for (Iterator listeners = selectionChangedListeners.iterator(); listeners
 				.hasNext();) {
 			ISelectionChangedListener listener = (ISelectionChangedListener) listeners

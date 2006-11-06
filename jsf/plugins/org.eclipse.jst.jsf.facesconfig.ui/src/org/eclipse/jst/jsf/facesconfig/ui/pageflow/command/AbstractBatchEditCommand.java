@@ -85,9 +85,9 @@ public abstract class AbstractBatchEditCommand extends Command {
 		notifyPageflow(getPageflow());
 	}
 
-	protected void notifyPageflow(Pageflow pageflow) {
-		pageflow.notifyModelChanged(new ENotificationImpl(
-				(InternalEObject) pageflow, Notification.ADD,
+	protected void notifyPageflow(Pageflow pageflow_) {
+		pageflow_.notifyModelChanged(new ENotificationImpl(
+				(InternalEObject) pageflow_, Notification.ADD,
 				PageflowPackage.PAGEFLOW, null, null));
 	}
 }

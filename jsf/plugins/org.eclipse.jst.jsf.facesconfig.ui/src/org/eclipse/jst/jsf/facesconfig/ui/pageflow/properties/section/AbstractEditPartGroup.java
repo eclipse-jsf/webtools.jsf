@@ -40,7 +40,7 @@ public abstract class AbstractEditPartGroup extends DialogFieldGroup {
 		displayNameField
 				.setDialogFieldChangeListener(getDefaultChangeListener());
 		descField = new StringDialogField();
-		;
+
 		descField.setLabelText(PropertyMessages.property_description);
 		descField.setDialogFieldChangeListener(getDefaultChangeListener());
 

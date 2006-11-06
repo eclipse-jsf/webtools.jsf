@@ -40,9 +40,9 @@ public class PageflowTreeEditPart extends PageflowElementTreeEditPart {
 	 * @see AbstractEditPart#getModelChildren()
 	 */
 	protected List getModelChildren() {
-		List children = getPageflow().getNodes();
+		List children_ = getPageflow().getNodes();
 
-		return new ArrayList(children);
+		return new ArrayList(children_);
 	}
 
 	/**

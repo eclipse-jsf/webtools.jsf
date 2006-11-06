@@ -51,15 +51,15 @@ public class PageflowResourceFactory implements CreationFactory {
 			page.setPath(strWebPath);
 			page.setName(WebrootUtil.getPageNameFromWebPath(strWebPath));
 			return page;
-		} else {
-			EditorPlugin
-					.getAlerts()
-					.error(
-							"Pageflow.Error.DNDResourceTitle",
-							EditorPlugin
-									.getResourceString("Pageflow.Error.InvalidResource")
-									+ resource.getName());
 		}
+        
+        EditorPlugin
+        		.getAlerts()
+        		.error(
+        				"Pageflow.Error.DNDResourceTitle",
+        				EditorPlugin
+        						.getResourceString("Pageflow.Error.InvalidResource")
+        						+ resource.getName());
 
 		return null;
 	}

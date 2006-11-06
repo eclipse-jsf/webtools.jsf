@@ -157,8 +157,8 @@ public class ApplicationSection extends OthersPageBaseSection {
 	 * Add a filter on the table viewer. Only the elements that is a instance of
 	 * <code>applicationChildClass</code> could be selected.
 	 */
-	protected void configTableViewer(TableViewer tableViewer) {
-		tableViewer.addFilter(new ViewerFilter() {
+	protected void configTableViewer(TableViewer tableViewer1) {
+		tableViewer1.addFilter(new ViewerFilter() {
 			public boolean select(Viewer viewer, Object parentElement,
 					Object element) {
 				return applicationChildClass.isInstance(element);

@@ -192,7 +192,7 @@ public class PageflowModelManager {
 	 * 
 	 * @param path
 	 */
-	public void load(IPath path) throws IOException {
+	public void load(IPath path) {
 		getResource(path);
 	}
 
@@ -201,7 +201,7 @@ public class PageflowModelManager {
 	 * 
 	 * @param path
 	 */
-	public void reload(IPath path) throws IOException {
+	public void reload(IPath path) {
 		getResource(path).unload();
 		load(path);
 	}

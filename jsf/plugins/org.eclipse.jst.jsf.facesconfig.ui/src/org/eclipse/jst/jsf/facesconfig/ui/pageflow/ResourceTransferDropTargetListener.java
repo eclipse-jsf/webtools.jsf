@@ -21,7 +21,6 @@ import org.eclipse.gef.requests.CreateRequest;
 import org.eclipse.gef.requests.CreationFactory;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor;
 import org.eclipse.jst.jsf.facesconfig.ui.util.WebrootUtil;
 import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.DropTargetEvent;
@@ -154,7 +153,7 @@ public abstract class ResourceTransferDropTargetListener extends
 			viewer.select((EditPart) editpart);
 			// Activate the editor window
 			PlatformUI.getWorkbench().getActiveWorkbenchWindow()
-					.getActivePage().activate((FacesConfigEditor) editor);
+					.getActivePage().activate(editor);
 		}
 	}
 

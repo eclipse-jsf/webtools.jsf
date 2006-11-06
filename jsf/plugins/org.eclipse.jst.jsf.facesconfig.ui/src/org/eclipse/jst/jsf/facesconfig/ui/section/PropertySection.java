@@ -285,11 +285,6 @@ public class PropertySection extends AbstractFacesConfigSection {
 
 	}
 
-	public void clearAll() {
-		// TODO Auto-generated method stub
-
-	}
-
 	/**
 	 * add a property.
 	 * 

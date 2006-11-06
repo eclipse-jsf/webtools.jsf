@@ -353,14 +353,6 @@ public class ConverterGeneralSection extends AbstractFacesConfigSection {
 	}
 
 	/**
-	 * 
-	 */
-	public void clearAll() {
-		// TODO Auto-generated method stub
-
-	}
-
-	/**
 	 * Add ConverterGeneralAdapter onto <converter> and the first <display-name>
 	 * and <description> elements.
 	 */

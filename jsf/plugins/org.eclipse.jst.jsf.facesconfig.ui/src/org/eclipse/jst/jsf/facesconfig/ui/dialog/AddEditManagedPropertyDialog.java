@@ -147,8 +147,8 @@ public class AddEditManagedPropertyDialog extends Dialog {
 	/*
 	 * @see org.eclipse.jface.dialogs.Dialog#createDialogArea(org.eclipse.swt.widgets.Composite)
 	 */
-	protected Control createDialogArea(Composite parent) {
-		Composite container = new Composite(parent, SWT.FILL);
+	protected Control createDialogArea(Composite parent_) {
+		Composite container = new Composite(parent_, SWT.FILL);
 		this.parent = container;
 		GridLayout layout = new GridLayout();
 		layout.numColumns = 2;
@@ -323,13 +323,13 @@ public class AddEditManagedPropertyDialog extends Dialog {
 	/**
 	 * @param textControl
 	 */
-	protected void handleChangeValue(String valueType, String value) {
-		if (valueType.equalsIgnoreCase(IFacesConfigConstants.VALUE)) {
+	protected void handleChangeValue(String valueType_, String value) {
+		if (valueType_.equalsIgnoreCase(IFacesConfigConstants.VALUE)) {
 			handleChangeLongStringValue(value);
-		} else if (valueType
+		} else if (valueType_
 				.equalsIgnoreCase(IFacesConfigConstants.MAP_ENTRIES)) {
 			handleChangeMapEntries();
-		} else if (valueType
+		} else if (valueType_
 				.equalsIgnoreCase(IFacesConfigConstants.LIST_ENTRIES)) {
 			handleChangeListEntries();
 		}
@@ -370,7 +370,7 @@ public class AddEditManagedPropertyDialog extends Dialog {
 		} else {
 			//user cancel the dialog, then restore.
 			if (!isNew && managedProperty.getMapEntries() != null)
-				valueObject = (MapEntriesType) EcoreUtil.copy(managedProperty
+				valueObject = EcoreUtil.copy(managedProperty
 						.getMapEntries());
 			// else
 			//				valueObject = null;
@@ -396,7 +396,7 @@ public class AddEditManagedPropertyDialog extends Dialog {
 		} else {
 			//user cancel the dialog, then restore.
 			if (!isNew && managedProperty.getListEntries() != null)
-				valueObject = (ListEntriesType) EcoreUtil.copy(managedProperty
+				valueObject = EcoreUtil.copy(managedProperty
 						.getListEntries());
 			// else
 			// valueObject = null;
@@ -408,10 +408,10 @@ public class AddEditManagedPropertyDialog extends Dialog {
 	 * 
 	 * @return
 	 */
-	private List getBeanPropertyList(ManagedBeanType managedBean) {
-		if (managedBean.getManagedBeanClass() == null)
+	private List getBeanPropertyList(ManagedBeanType managedBean_) {
+		if (managedBean_.getManagedBeanClass() == null)
 			return null;
-		String beanClassName = managedBean.getManagedBeanClass()
+		String beanClassName = managedBean_.getManagedBeanClass()
 				.getTextContent();
 		IType classType = JavaClassUtils.getType(getProject(), beanClassName);
 		if (classType == null) {

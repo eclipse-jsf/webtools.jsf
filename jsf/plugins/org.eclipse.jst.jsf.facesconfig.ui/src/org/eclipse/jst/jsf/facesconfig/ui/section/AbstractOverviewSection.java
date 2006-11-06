@@ -106,9 +106,9 @@ public abstract class AbstractOverviewSection extends
 
 	/**
 	 * 
-	 * @param tableViewer
+	 * @param tableViewer1
 	 */
-	abstract protected void configTableViewer(TableViewer tableViewer);
+	abstract protected void configTableViewer(TableViewer tableViewer1);
 
 	/*
 	 * (non-Javadoc)
@@ -117,7 +117,6 @@ public abstract class AbstractOverviewSection extends
 	 */
 	public void clearAll() {
 		tableViewer.setInput(null);
-
 	}
 
 	/*

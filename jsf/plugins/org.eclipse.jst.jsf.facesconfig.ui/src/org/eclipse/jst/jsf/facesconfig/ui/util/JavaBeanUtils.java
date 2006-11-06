@@ -55,7 +55,7 @@ public final class JavaBeanUtils {
 	 * @throws JavaModelException
 	 */
 	private static IMethod getPropertyGetterMethod(IType type,
-			String propertyName) throws JavaModelException {
+			String propertyName)  {
 		if (type == null || !type.exists() || propertyName == null) {
 			return null;
 		}
@@ -247,7 +247,7 @@ public final class JavaBeanUtils {
 	 * @throws JavaModelException
 	 */
 	public static boolean isBeanProperty(IType baseType, String propertyName)
-			throws JavaModelException {
+    {
 		if (baseType == null || !baseType.exists() || propertyName == null) {
 			return false;
 		}

@@ -45,7 +45,7 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
  * @author sfshi
  * 
  */
-public class FacesConfigMasterSection extends AbstractFacesConfigSection {
+public abstract class FacesConfigMasterSection extends AbstractFacesConfigSection {
 
 	private StructuredViewer structuredViewer;
 
@@ -117,9 +117,10 @@ public class FacesConfigMasterSection extends AbstractFacesConfigSection {
 	 * Config the viewer, such as set a filter and so on. Sub classes should
 	 * override this method to add filter.
 	 * 
-	 * @param structuredViewer
+	 * @param viewer
 	 */
-	protected void configViewer(StructuredViewer structuredViewer) {
+	protected void configViewer(StructuredViewer viewer) {
+        // do nothing; subs may override
 	}
 
 	/**
@@ -163,14 +164,12 @@ public class FacesConfigMasterSection extends AbstractFacesConfigSection {
 			}
 		});
 	}
-
-	/**
+    
+    /**
 	 * 
 	 * @param e
 	 */
-	protected void addButtonSelected(SelectionEvent e) {
-
-	}
+    protected abstract void addButtonSelected(SelectionEvent e);
 
 	/**
 	 * 
@@ -224,13 +223,6 @@ public class FacesConfigMasterSection extends AbstractFacesConfigSection {
 	 */
 	public void setSelection(ISelection selection) {
 		structuredViewer.setSelection(selection);
-	}
-
-	/**
-	 * 
-	 */
-	public void clearAll() {
-		// TODO Auto-generated method stub
 	}
 
 	/**

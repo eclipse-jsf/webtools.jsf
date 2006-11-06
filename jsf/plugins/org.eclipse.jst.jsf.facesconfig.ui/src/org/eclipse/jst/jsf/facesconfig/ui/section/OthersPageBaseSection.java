@@ -112,10 +112,9 @@ public abstract class OthersPageBaseSection extends AbstractFacesConfigSection {
 	 * Config the viewer, such as set a filter and so on. Sub classes should
 	 * override this method to add filter.
 	 * 
-	 * @param tableViewer
+	 * @param tableViewer1
 	 */
-	protected void configTableViewer(TableViewer tableViewer) {
-	}
+	protected abstract void configTableViewer(TableViewer tableViewer1);
 
 	/**
 	 * 
@@ -286,10 +285,6 @@ public abstract class OthersPageBaseSection extends AbstractFacesConfigSection {
 		}
 
 		super.expansionStateChanging(expanding);
-	}
-
-	public void clearAll() {
-
 	}
 
 	public void selectionChanged(SelectionChangedEvent event) {

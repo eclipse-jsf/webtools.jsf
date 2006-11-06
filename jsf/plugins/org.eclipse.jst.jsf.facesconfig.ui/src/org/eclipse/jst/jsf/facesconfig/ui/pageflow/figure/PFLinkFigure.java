@@ -41,7 +41,7 @@ public class PFLinkFigure extends PolylineConnection {
 	/** the label attached to the connection */
 	private ConnectionLabel textLabel = null;
 
-	private ConnectionLabel iconLabel = null;
+	//private ConnectionLabel iconLabel = null;
 
 	/** The label's background color */
 	private Color labelBgColor;
@@ -133,9 +133,10 @@ public class PFLinkFigure extends PolylineConnection {
 
 	public Image getImage() {
 		if (textLabel != null)
+        {
 			return textLabel.getIcon();
-		else
-			return null;
+        }
+        return null;
 	}
 
 	/*
@@ -144,14 +145,14 @@ public class PFLinkFigure extends PolylineConnection {
 	 * @see com.sybase.stf.gem.diagram.editor.figures.IBaseFigure#setToolTipText()
 	 */
 	public void setToolTipText(String text) {
-		Label toolTip = null;
+		Label toolTipLabel = null;
 
 		if (text != null && text.length() > 0) {
-			toolTip = new Label(text);
-			toolTip.setBorder(new MarginBorder(3));
+			toolTipLabel = new Label(text);
+			toolTipLabel.setBorder(new MarginBorder(3));
 		}
 
-		super.setToolTip(toolTip);
+		super.setToolTip(toolTipLabel);
 	}
 
 	/*
@@ -289,8 +290,9 @@ public class PFLinkFigure extends PolylineConnection {
 	 */
 	public Color getForegroundColor() {
 		IPreferenceStore store = EditorPlugin.getDefault().getPreferenceStore();
-		fgColor = GEMPreferences.getColor(store, GEMPreferences.LINE_COLOR);
-		return fgColor;
+		final Color newFgColor = GEMPreferences.getColor(store, GEMPreferences.LINE_COLOR);
+        setForegroundColor(newFgColor);
+		return newFgColor;
 	}
 
 	/**

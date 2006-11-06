@@ -183,19 +183,27 @@ public class IconFigure extends Label implements IBaseFigure {
 
 	public Font getFont() {
 		if (defaultFont == null)
+        {
 			defaultFont = JFaceResources.getFontRegistry().get(
 					JFaceResources.DEFAULT_FONT);
-		if (font == null)
-			font = defaultFont;
-		return font;
+        }
+        
+		if (getLocalFont() == null)
+        {
+            // TODO: replaced a deprecated assignment to font
+            // with this, but the behaviour is a little different
+			setFont(defaultFont);
+        }
+        
+		return getLocalFont();
 	}
 
 	public void setFont(Font f) {
-		if (font != f) {
-			font = f;
-			iconLabel.setFont(font);
-			revalidate();
+        Font localFont = getLocalFont();
+		if (localFont != f) {
+			iconLabel.setFont(f);
 		}
+        super.setFont(f);
 	}
 
 	public void setVisible(boolean visible) {
@@ -215,14 +223,14 @@ public class IconFigure extends Label implements IBaseFigure {
 	}
 
 	public void setToolTipText(String text) {
-		Label toolTip = null;
+		Label toolTipLabel = null;
 
 		if (text != null && text.length() > 0) {
-			toolTip = new Label(text);
-			toolTip.setBorder(new MarginBorder(3));
+			toolTipLabel = new Label(text);
+			toolTipLabel.setBorder(new MarginBorder(3));
 		}
 
-		super.setToolTip(toolTip);
+		super.setToolTip(toolTipLabel);
 	}
 
 	public String getToolTipText() {
@@ -252,11 +260,11 @@ public class IconFigure extends Label implements IBaseFigure {
 		if (prefSize == null) {
 			super.getPreferredSize(-1, -1);
 			prefSize.width = getIconBounds().getSize().width;
-			Dimension minSize = getMinimumSize(wHint, hHint);
-			if (prefSize.width < minSize.width)
-				prefSize.width = minSize.width;
-			if (prefSize.height < minSize.height)
-				prefSize.height = minSize.height;
+			Dimension minSize_ = getMinimumSize(wHint, hHint);
+			if (prefSize.width < minSize_.width)
+				prefSize.width = minSize_.width;
+			if (prefSize.height < minSize_.height)
+				prefSize.height = minSize_.height;
 		}
 		return prefSize;
 	}
@@ -371,8 +379,8 @@ public class IconFigure extends Label implements IBaseFigure {
 			super.paintFigure(graphics);
 		// CR405873: F111-Error decorator missing
 		placeDecorators();
-		Rectangle bounds = getBounds();
-		graphics.translate(bounds.x, bounds.y);
+		Rectangle bounds_ = getBounds();
+		graphics.translate(bounds_.x, bounds_.y);
 		if (getIcon() != null)
 			graphics.drawImage(getIcon(), getIconLocation());
 		if (iconLabel == null || !iconLabel.isVisible()) {
@@ -385,6 +393,6 @@ public class IconFigure extends Label implements IBaseFigure {
 			}
 			graphics.drawText(getSubStringText(), getTextLocation());
 		}
-		graphics.translate(-bounds.x, -bounds.y);
+		graphics.translate(-bounds_.x, -bounds_.y);
 	}
 }

@@ -50,7 +50,7 @@ public class PageflowNodeFigure extends Figure {
 	private Color labelFgColor;
 
 	/** the background color of Label */
-	private Color labelBgColor;
+//	private Color labelBgColor;  // TODO: variable is never read because getter is private
 
 	/** the text placement for the label */
 	private int textPlacement = PositionConstants.SOUTH;
@@ -168,9 +168,10 @@ public class PageflowNodeFigure extends Figure {
 	 * 
 	 * @return
 	 */
-	private Color getLabelBackgroundColor() {
-		return labelBgColor;
-	}
+	 // TODO: dead code
+//	private Color getLabelBackgroundColor() {
+//		return labelBgColor;
+//	}
 
 	/**
 	 * get the label's foreground color from preference.
@@ -312,7 +313,7 @@ public class PageflowNodeFigure extends Figure {
 	 * set the label's backaground
 	 */
 	public void setBackgroundColor(Color bg) {
-		labelBgColor = bg;
+//		TODO: var is never read: labelBgColor = bg;
 		if (label != null)
 			label.setBackgroundColor(bg);
 	}
@@ -353,14 +354,14 @@ public class PageflowNodeFigure extends Figure {
 	 * @see com.sybase.stf.gem.diagram.editor.figures.IBaseFigure#setToolTipText()
 	 */
 	public void setToolTipText(String text) {
-		Label toolTip = null;
+		Label toolTipLabel = null;
 
 		if (text != null && text.length() > 0) {
-			toolTip = new Label(text);
-			toolTip.setBorder(new MarginBorder(3));
+			toolTipLabel = new Label(text);
+			toolTipLabel.setBorder(new MarginBorder(3));
 		}
 
-		super.setToolTip(toolTip);
+		super.setToolTip(toolTipLabel);
 	}
 
 	/*

@@ -133,7 +133,7 @@ public class PageflowNodeEditPart extends PageflowElementEditPart implements
 	 *            pageflow node
 	 */
 	public PageflowNodeEditPart(PageflowNode element) {
-		super((PageflowElement) element);
+		super(element);
 	}
 
 	/**
@@ -206,7 +206,7 @@ public class PageflowNodeEditPart extends PageflowElementEditPart implements
 					refreshVisuals();
 					break;
 				}
-			};
+			}
 		};
 	}
 
@@ -350,7 +350,7 @@ public class PageflowNodeEditPart extends PageflowElementEditPart implements
 	 */
 	protected void performDirectEdit() {
 		if (editManager == null) {
-			Label l = (Label) ((PageflowNodeFigure) getFigure()).getLabel();
+			Label l = ((PageflowNodeFigure) getFigure()).getLabel();
 			editManager = new PageflowDirectEditManager(this,
 					TextCellEditor.class, new DirectEditCellEditorLocator(l), l);
 		}

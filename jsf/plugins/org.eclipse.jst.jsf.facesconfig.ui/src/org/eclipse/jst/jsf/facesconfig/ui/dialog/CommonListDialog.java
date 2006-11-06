@@ -169,17 +169,18 @@ public class CommonListDialog extends Dialog implements
 	 * 
 	 * @param structuredViewer
 	 */
-	protected void configViewer(StructuredViewer structuredViewer) {
+	protected void configViewer(StructuredViewer structuredViewer_) {
+        // do nothing; sub-classes should override
 	}
 
+     //TODO: why bother with this interface?
 	public void selectionChanged(SelectionChangedEvent event) {
-		
+		// selectionChanged not handled
 
 	}
 
 	public void addSelectionChangedListener(ISelectionChangedListener listener) {
-		// TODO Auto-generated method stub
-
+        // do nothing; not handling setSelection
 	}
 
 	public ISelection getSelection() {
@@ -188,13 +189,11 @@ public class CommonListDialog extends Dialog implements
 
 	public void removeSelectionChangedListener(
 			ISelectionChangedListener listener) {
-		// TODO Auto-generated method stub
-
+		// do nothing; not handling setSelection
 	}
 
 	public void setSelection(ISelection selection) {
-		// TODO Auto-generated method stub
-
+        // do nothing; not handling change in selection
 	}
 
 	/**

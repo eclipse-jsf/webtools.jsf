@@ -58,6 +58,7 @@ import org.eclipse.gef.ui.actions.SaveAction;
 import org.eclipse.gef.ui.actions.UpdateAction;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
@@ -97,12 +98,15 @@ import org.eclipse.ui.ide.IGotoMarker;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
+import org.eclipse.ui.views.properties.tabbed.ITabbedPropertySheetPageContributor;
+import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import org.eclipse.wst.common.project.facet.core.IFacetedProject;
 import org.eclipse.wst.common.project.facet.core.IProjectFacet;
 import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
 import org.eclipse.wst.common.project.facet.core.ProjectFacetsManager;
-import org.eclipse.wst.common.ui.properties.internal.provisional.ITabbedPropertySheetPageContributor;
-import org.eclipse.wst.common.ui.properties.internal.provisional.TabbedPropertySheetPage;
+import org.eclipse.wst.sse.core.StructuredModelManager;
+import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
+import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
 import org.eclipse.wst.sse.ui.StructuredTextEditor;
 
 /**
@@ -178,16 +182,16 @@ public class FacesConfigEditor extends FormEditor implements
 
 						protected Collection removedResources = new ArrayList();
 
-						public boolean visit(IResourceDelta delta) {
-							if (delta.getFlags() != IResourceDelta.MARKERS
-									&& delta.getResource().getType() == IResource.FILE) {
-								if ((delta.getKind() & (IResourceDelta.CHANGED | IResourceDelta.REMOVED)) != 0) {
+						public boolean visit(IResourceDelta delta_) {
+							if (delta_.getFlags() != IResourceDelta.MARKERS
+									&& delta_.getResource().getType() == IResource.FILE) {
+								if ((delta_.getKind() & (IResourceDelta.CHANGED | IResourceDelta.REMOVED)) != 0) {
 									Resource resource = resourceSet
-											.getResource(URI.createURI(delta
+											.getResource(URI.createURI(delta_
 													.getFullPath().toString()),
 													false);
 									if (resource != null) {
-										if ((delta.getKind() & IResourceDelta.REMOVED) != 0) {
+										if ((delta_.getKind() & IResourceDelta.REMOVED) != 0) {
 											removedResources.add(resource);
 										} else {
 											changedResources.add(resource);
@@ -522,6 +526,7 @@ public class FacesConfigEditor extends FormEditor implements
 		 *            true or false
 		 */
 		private void setEditorDirty(IEditorPart editor, boolean dirty) {
+            // do nothing
 		}
 
 		/** the list of action ids that are to CommandStack actions */
@@ -553,7 +558,7 @@ public class FacesConfigEditor extends FormEditor implements
 			if (((CommandStack) event.getSource()).isDirty()) {
 				// set the editor's model dirty status
 				setEditorDirty((IEditorPart) mapEditorCommandStack
-						.get(((CommandStack) event.getSource())), true);
+						.get(event.getSource()), true);
 				// at least one command stack is dirty,
 				// so the multi page editor is dirty too
 				setDirty(true);
@@ -562,7 +567,7 @@ public class FacesConfigEditor extends FormEditor implements
 				// location.
 				if (!saveLocation) {
 					setEditorDirty((IEditorPart) mapEditorCommandStack
-							.get(((CommandStack) event.getSource())), true);
+							.get(event.getSource()), true);
 					setDirty(true);
 				} else {
 					setDirty(false);
@@ -643,7 +648,7 @@ public class FacesConfigEditor extends FormEditor implements
 		// do the work within an operation because this is a long running
 		// activity that modifies the workbench
 		WorkspaceModifyOperation operation = new WorkspaceModifyOperation() {
-			public void execute(IProgressMonitor monitor) {
+			public void execute(IProgressMonitor monitor_) {
 				try {
 					if (isWebProject) {
 						// modelResource.save(Collections.EMPTY_MAP);
@@ -652,9 +657,9 @@ public class FacesConfigEditor extends FormEditor implements
 										Collections.EMPTY_MAP);
 						IFile file = ((IFileEditorInput) getEditorInput())
 								.getFile();
-						pageflowPage.doSave(file, monitor);
+						pageflowPage.doSave(file, monitor_);
 					}
-					sourcePage.doSave(monitor);
+					sourcePage.doSave(monitor_);
 					getMultiPageCommandStackListener().markSaveLocations();
 				} catch (Exception e) {
 					EditorPlugin.getDefault().getLog().log(
@@ -870,9 +875,23 @@ public class FacesConfigEditor extends FormEditor implements
 	 */
 	private CommandStack getSourcePageCommandStack() {
 		if (sourceCommandStack == null) {
-			sourceCommandStack = new EMFCommandStackGEFAdapter(
-					(BasicCommandStack) sourcePage.getModel().getUndoManager()
-							.getCommandStack());
+            IDocument doc = sourcePage.getDocumentProvider().getDocument(getEditorInput());
+            if (doc instanceof IStructuredDocument) {
+                IStructuredModel model = StructuredModelManager.getModelManager().getExistingModelForEdit(doc);
+                if (model == null) {
+                    model = StructuredModelManager.getModelManager().getModelForEdit((IStructuredDocument) doc);
+                }
+                sourceCommandStack = new EMFCommandStackGEFAdapter(
+                        (BasicCommandStack) model.getUndoManager()
+                                .getCommandStack());
+            }
+            else
+            {
+                EditorPlugin.getDefault().getLog().log(
+                   new Status(IStatus.ERROR, EditorPlugin.getPluginId(), 0, 
+                           "Error getting undo stack for Faces Config editor.  Undo may be disabled",
+                           new Throwable()));
+            }
 		}
 		return sourceCommandStack;
 	}

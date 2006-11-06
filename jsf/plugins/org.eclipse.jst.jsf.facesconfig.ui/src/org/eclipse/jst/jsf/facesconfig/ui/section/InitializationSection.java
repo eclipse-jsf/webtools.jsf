@@ -14,15 +14,14 @@ package org.eclipse.jst.jsf.facesconfig.ui.section;
 
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.edit.command.SetCommand;
-import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.DialogField;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.IDialogFieldApplyListener;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.RadiosDialogField;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanType;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.IFacesConfigConstants;
-import org.eclipse.jst.jsf.facesconfig.ui.EditorMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.page.IFacesConfigPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -122,26 +121,26 @@ public class InitializationSection extends AbstractFacesConfigSection {
 		beanTypeField
 				.setDialogFieldApplyListener(new IDialogFieldApplyListener() {
 					public void dialogFieldApplied(DialogField field) {
-						RadiosDialogField beanTypeField = (RadiosDialogField) field;
+						RadiosDialogField beanTypeField1 = (RadiosDialogField) field;
 
 						boolean bChangedSuccess = false;
-						if (beanTypeField.getSelectedIndex() == 0) {
+						if (beanTypeField1.getSelectedIndex() == 0) {
 							bChangedSuccess = switchPage(
 									IFacesConfigConstants.MANAGED_PROPERTY,
 									false);
-						} else if (beanTypeField.getSelectedIndex() == 1) {
+						} else if (beanTypeField1.getSelectedIndex() == 1) {
 							bChangedSuccess = switchPage(
 									IFacesConfigConstants.MAP_ENTRIES, false);
-						} else if (beanTypeField.getSelectedIndex() == 2) {
+						} else if (beanTypeField1.getSelectedIndex() == 2) {
 							bChangedSuccess = switchPage(
 									IFacesConfigConstants.LIST_ENTRIES, false);
 						}
 
 						if (bChangedSuccess) {
-							currentPageIndex = beanTypeField.getSelectedIndex();
+							currentPageIndex = beanTypeField1.getSelectedIndex();
 						} else {
-							beanTypeField.setSelectedIndexWithoutUpdate(-1);
-							beanTypeField
+							beanTypeField1.setSelectedIndexWithoutUpdate(-1);
+							beanTypeField1
 									.setSelectedIndexWithoutUpdate(currentPageIndex);
 						}
 					}
@@ -360,16 +359,4 @@ public class InitializationSection extends AbstractFacesConfigSection {
 			}
 		}
 	}
-
-	public void clearAll() {
-	}
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.facesconfig.ui.section.AbstractFacesConfigSection#getSelection()
-	 */
-	public ISelection getSelection() {
-		// TODO Auto-generated method stub
-		return super.getSelection();
-	}
-
 }

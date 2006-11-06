@@ -29,7 +29,7 @@ import org.eclipse.jst.jsf.facesconfig.common.dialogfield.DialogField;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.IDialogFieldChangeListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.IPropertySource;
-import org.eclipse.wst.common.ui.properties.internal.provisional.AbstractPropertySection;
+import org.eclipse.ui.views.properties.tabbed.AbstractPropertySection;
 
 /**
  * This is base section, which support GEF command stack to redo/undo setting
@@ -75,8 +75,10 @@ public abstract class AbstractEditPartSection extends AbstractPropertySection {
 		super.refresh();
 	}
 
-	public void validate() {
-	}
+	/**
+	 * TODO: this method seems unused
+	 */
+	public abstract void validate();
 
 	/**
 	 * dispose the command stack listener
@@ -108,7 +110,7 @@ public abstract class AbstractEditPartSection extends AbstractPropertySection {
 					editPart = (EditPart) structuredSelection.getFirstElement();
 				}
 
-				if (editPart instanceof IAdaptable
+				if (editPart != null
 						&& ((IAdaptable) editPart)
 								.getAdapter(IPropertySource.class) != null) {
 					propertySource = (IPropertySource) ((IAdaptable) editPart)
@@ -224,7 +226,7 @@ public abstract class AbstractEditPartSection extends AbstractPropertySection {
 		if (propertyName != null && propertyValue != null
 				&& getPropertySource() != null) {
 			SetPropertyValueCommand setCommand = new SetPropertyValueCommand(
-					(String) propertyName);
+					propertyName);
 			setCommand.setTarget(getPropertySource());
 			setCommand.setPropertyId(getFeatureID(propertyName));
 			setCommand.setPropertyValue(propertyValue);

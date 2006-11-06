@@ -22,9 +22,7 @@ import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.GC;
-import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
 
 public class TabbedWindowBorder extends FrameBorder {
 	private boolean isVisible = true;
@@ -64,7 +62,7 @@ public class TabbedWindowBorder extends FrameBorder {
 			public Color[] getShadow() {
 				return super.getHighlight();
 			}
-		};
+		}
 
 		MySchemeBorder(MyScheme scheme) {
 			super(scheme);
@@ -105,6 +103,7 @@ public class TabbedWindowBorder extends FrameBorder {
 
 			gc.setLineWidth(1);
 			gc.setLineStyle(SWT.LINE_SOLID);
+			// TODO: deprecated with no obvious replacement: 
 			gc.setXORMode(false);
 
 			int top = rect.y - insets.top;
@@ -163,6 +162,7 @@ public class TabbedWindowBorder extends FrameBorder {
 	}
 
 	protected void createBorders() {
+        // TODO: NOTE: this is overriding default border creation
 	}
 
 	public void paint(IFigure figure, Graphics g, Insets insets) {
@@ -178,9 +178,9 @@ public class TabbedWindowBorder extends FrameBorder {
 
 	private Composite comp;
 
-	public void paint(Composite comp, GC gc, Insets insets) {
-		this.comp = comp;
+	public void paint(Composite comp_, GC gc, Insets insets) {
+		this.comp = comp_;
 		if (isVisible)
-			((MySchemeBorder) outer).paint(comp, gc, insets);
+			((MySchemeBorder) outer).paint(comp_, gc, insets);
 	}
 }

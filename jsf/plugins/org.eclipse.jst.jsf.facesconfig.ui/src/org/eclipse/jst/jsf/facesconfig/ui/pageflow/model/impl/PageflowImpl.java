@@ -411,9 +411,9 @@ public class PageflowImpl extends PageflowElementImpl implements Pageflow {
 	 * @generated NOT
 	 */
 	public String getDefaultNodeName(Class nodeType) {
-		HashMap mapNodePrefix = getNodePrefixMap();
+		HashMap mapNodePrefix_ = getNodePrefixMap();
 
-		String strNodePrefix = (String) mapNodePrefix.get(nodeType);
+		String strNodePrefix = (String) mapNodePrefix_.get(nodeType);
 
 		String strNodeName = null;
 		boolean bFound = true;

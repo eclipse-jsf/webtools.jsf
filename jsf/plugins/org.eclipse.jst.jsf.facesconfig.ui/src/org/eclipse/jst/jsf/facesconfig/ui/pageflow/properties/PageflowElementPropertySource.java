@@ -174,48 +174,49 @@ public class PageflowElementPropertySource implements IPropertySource {
 	/**
 	 * @return
 	 */
-	private IPropertyDescriptor[] getLinkPropertyDescriptors() {
-		// property descriptors
-		List propertyDescriptors = new Vector();
-
-		Iterator it;
-		EClass cls = element.eClass();
-
-		it = cls.getEAllAttributes().iterator();
-		while (it.hasNext()) {
-			EAttribute attr = (EAttribute) it.next();
-			if (attr.isID()
-					|| attr.getName().equalsIgnoreCase(PAGEFLOW_NAME)
-					|| attr.getName().equalsIgnoreCase(PAGEFLOW_COMMENT)
-					|| attr.getFeatureID() == PageflowPackage.PAGEFLOW__REFERENCE_LINK) {
-				continue;
-			}
-
-			EDataType type = attr.getEAttributeType();
-			if (type.getInstanceClass() == String.class) {
-				PropertyDescriptor propertyDescriptor;
-
-				propertyDescriptor = new TextPropertyDescriptor(Integer
-						.toString(attr.getFeatureID()), getString(attr
-						.getName()));
-
-				if (propertyDescriptor != null) {
-					propertyDescriptor
-							.setLabelProvider(new PageflowLabelProvider());
-					propertyDescriptors.add(propertyDescriptor);
-				}
-
-			} else if (type.getInstanceClass() == boolean.class) {
-				PropertyDescriptor propertyDescriptor;
-				propertyDescriptor = getBooleanTypePropertyDescriptor(attr);
-				propertyDescriptor.setLabelProvider(new BooleanLabelProvider());
-				propertyDescriptors.add(propertyDescriptor);
-			}
-		}
-
-		return (IPropertyDescriptor[]) propertyDescriptors
-				.toArray(new IPropertyDescriptor[] {});
-	}
+    // TODO: method not used; dead?
+//	private IPropertyDescriptor[] getLinkPropertyDescriptors() {
+//		// property descriptors
+//		List propertyDescriptors = new Vector();
+//
+//		Iterator it;
+//		EClass cls = element.eClass();
+//
+//		it = cls.getEAllAttributes().iterator();
+//		while (it.hasNext()) {
+//			EAttribute attr = (EAttribute) it.next();
+//			if (attr.isID()
+//					|| attr.getName().equalsIgnoreCase(PAGEFLOW_NAME)
+//					|| attr.getName().equalsIgnoreCase(PAGEFLOW_COMMENT)
+//					|| attr.getFeatureID() == PageflowPackage.PAGEFLOW__REFERENCE_LINK) {
+//				continue;
+//			}
+//
+//			EDataType type = attr.getEAttributeType();
+//			if (type.getInstanceClass() == String.class) {
+//				PropertyDescriptor propertyDescriptor;
+//
+//				propertyDescriptor = new TextPropertyDescriptor(Integer
+//						.toString(attr.getFeatureID()), getString(attr
+//						.getName()));
+//
+//				if (propertyDescriptor != null) {
+//					propertyDescriptor
+//							.setLabelProvider(new PageflowLabelProvider());
+//					propertyDescriptors.add(propertyDescriptor);
+//				}
+//
+//			} else if (type.getInstanceClass() == boolean.class) {
+//				PropertyDescriptor propertyDescriptor;
+//				propertyDescriptor = getBooleanTypePropertyDescriptor(attr);
+//				propertyDescriptor.setLabelProvider(new BooleanLabelProvider());
+//				propertyDescriptors.add(propertyDescriptor);
+//			}
+//		}
+//
+//		return (IPropertyDescriptor[]) propertyDescriptors
+//				.toArray(new IPropertyDescriptor[] {});
+//	}
 
 	/**
 	 * get the property descriptor for the attribute "path" of page component
@@ -262,7 +263,7 @@ public class PageflowElementPropertySource implements IPropertySource {
 										.error(
 												"Pageflow.PageflowEditor.Alert.DNDResourceTitle",
 												"Pageflow.PageflowEditor.Alert.ExistingPage",
-												(String) value);
+												value);
 
 								return EditorPlugin
 										.getResourceString("Pageflow.PageflowEditor.Alert.ExistingPage");
@@ -286,35 +287,36 @@ public class PageflowElementPropertySource implements IPropertySource {
 	 *            EAttribute
 	 * @return
 	 */
-	private PropertyDescriptor getActionPropertyDescriptor(EAttribute attr) {
-		PropertyDescriptor propertyDescriptor = new PropertyDescriptor(Integer
-				.toString(attr.getFeatureID()), getString(attr.getName())) {
-			public CellEditor createPropertyEditor(Composite parent) {
-				CellEditor editor = new ActionDialogCellEditor(parent);
-				if (getValidator() != null) {
-					editor.setValidator(getValidator());
-				}
-				return editor;
-			}
-
-			/**
-			 * Returns the input validator for editing the property.
-			 * 
-			 * @return the validator used to verify correct values for this
-			 *         property, or <code>null</code>
-			 */
-			protected ICellEditorValidator getValidator() {
-				return new ICellEditorValidator() {
-					public String isValid(Object value) {
-
-						return null;
-					}
-
-				};
-			}
-		};
-		return propertyDescriptor;
-	}
+    // TODO: method not used; dead?
+//	private PropertyDescriptor getActionPropertyDescriptor(EAttribute attr) {
+//		PropertyDescriptor propertyDescriptor = new PropertyDescriptor(Integer
+//				.toString(attr.getFeatureID()), getString(attr.getName())) {
+//			public CellEditor createPropertyEditor(Composite parent) {
+//				CellEditor editor = new ActionDialogCellEditor(parent);
+//				if (getValidator() != null) {
+//					editor.setValidator(getValidator());
+//				}
+//				return editor;
+//			}
+//
+//			/**
+//			 * Returns the input validator for editing the property.
+//			 * 
+//			 * @return the validator used to verify correct values for this
+//			 *         property, or <code>null</code>
+//			 */
+//			protected ICellEditorValidator getValidator() {
+//				return new ICellEditorValidator() {
+//					public String isValid(Object value) {
+//
+//						return null;
+//					}
+//
+//				};
+//			}
+//		};
+//		return propertyDescriptor;
+//	}
 
 	/**
 	 * get the property descriptor for the attribute "outcome" of Link component
@@ -323,21 +325,22 @@ public class PageflowElementPropertySource implements IPropertySource {
 	 *            EAttribute
 	 * @return
 	 */
-	private PropertyDescriptor getActionOutcomePropertyDescriptor(
-			EAttribute attr) {
-		PropertyDescriptor propertyDescriptor = new PropertyDescriptor(Integer
-				.toString(attr.getFeatureID()), getString(attr.getName())) {
-			public CellEditor createPropertyEditor(Composite parent) {
-				CellEditor editor = new ActionOutcomeDialogCellEditor(parent,
-						element);
-				if (getValidator() != null) {
-					editor.setValidator(getValidator());
-				}
-				return editor;
-			}
-		};
-		return propertyDescriptor;
-	}
+    // TODO: method not used; dead?
+//	private PropertyDescriptor getActionOutcomePropertyDescriptor(
+//			EAttribute attr) {
+//		PropertyDescriptor propertyDescriptor = new PropertyDescriptor(Integer
+//				.toString(attr.getFeatureID()), getString(attr.getName())) {
+//			public CellEditor createPropertyEditor(Composite parent) {
+//				CellEditor editor = new ActionOutcomeDialogCellEditor(parent,
+//						element);
+//				if (getValidator() != null) {
+//					editor.setValidator(getValidator());
+//				}
+//				return editor;
+//			}
+//		};
+//		return propertyDescriptor;
+//	}
 
 	/**
 	 * get property descriptor for the attribute with the boolean type
@@ -445,6 +448,7 @@ public class PageflowElementPropertySource implements IPropertySource {
 	 * @see IPropertySouce#resetPropertyValue(Object)
 	 */
 	public void resetPropertyValue(Object id) {
+        // do nothing
 	}
 
 	/*

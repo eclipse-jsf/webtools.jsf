@@ -53,7 +53,7 @@ public abstract class ConnectionCommand extends Command {
 	}
 
 	protected void doExecute() {
-
+	    // do nothing; sub-class can over-ride
 	}
 
 	/*
@@ -84,6 +84,7 @@ public abstract class ConnectionCommand extends Command {
 	 * @see ommand#undo()
 	 */
 	public void undo() {
+        // do nothing
 	}
 
 	/**

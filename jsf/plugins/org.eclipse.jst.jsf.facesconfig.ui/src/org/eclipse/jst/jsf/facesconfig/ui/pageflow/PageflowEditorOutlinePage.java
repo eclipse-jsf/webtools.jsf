@@ -481,6 +481,7 @@ public class PageflowEditorOutlinePage extends Page implements
 		 * @see org.eclipse.gef.EditPartListener#partActivated(org.eclipse.gef.EditPart)
 		 */
 		public void partActivated(EditPart editpart) {
+            // do nothing
 		}
 
 		/*
@@ -489,7 +490,8 @@ public class PageflowEditorOutlinePage extends Page implements
 		 * @see org.eclipse.gef.EditPartListener#partDeactivated(org.eclipse.gef.EditPart)
 		 */
 		public void partDeactivated(EditPart editpart) {
-		}
+            // do nothing
+        }
 
 		/*
 		 * (non-Javadoc)
@@ -498,7 +500,8 @@ public class PageflowEditorOutlinePage extends Page implements
 		 *      int)
 		 */
 		public void removingChild(EditPart child, int index) {
-		}
+            // do nothing
+        }
 
 		/*
 		 * (non-Javadoc)
@@ -506,6 +509,7 @@ public class PageflowEditorOutlinePage extends Page implements
 		 * @see org.eclipse.gef.EditPartListener#selectedStateChanged(org.eclipse.gef.EditPart)
 		 */
 		public void selectedStateChanged(EditPart editpart) {
+            // do nothing
 		}
 	}
 

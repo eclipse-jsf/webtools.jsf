@@ -47,13 +47,13 @@ public class ObserveVisibleXYLayout extends FreeformLayout {
 				continue;
 
 			if (r.width == -1 || r.height == -1) {
-				Dimension preferredSize = child.getPreferredSize(r.width,
+				Dimension preferredSize_ = child.getPreferredSize(r.width,
 						r.height);
 				r = r.getCopy();
 				if (r.width == -1)
-					r.width = preferredSize.width;
+					r.width = preferredSize_.width;
 				if (r.height == -1)
-					r.height = preferredSize.height;
+					r.height = preferredSize_.height;
 			}
 			rect.union(r);
 		}
@@ -77,13 +77,13 @@ public class ObserveVisibleXYLayout extends FreeformLayout {
 				continue;
 
 			if (bounds.width == -1 || bounds.height == -1) {
-				Dimension preferredSize = f.getPreferredSize(bounds.width,
+				Dimension preferredSize_ = f.getPreferredSize(bounds.width,
 						bounds.height);
 				bounds = bounds.getCopy();
 				if (bounds.width == -1)
-					bounds.width = preferredSize.width;
+					bounds.width = preferredSize_.width;
 				if (bounds.height == -1)
-					bounds.height = preferredSize.height;
+					bounds.height = preferredSize_.height;
 			}
 			bounds = bounds.getTranslated(offset);
 			f.setBounds(bounds);

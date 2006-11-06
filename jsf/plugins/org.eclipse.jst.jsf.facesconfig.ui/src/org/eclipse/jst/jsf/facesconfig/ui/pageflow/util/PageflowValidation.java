@@ -37,7 +37,7 @@ public class PageflowValidation {
 
 	/** constructor */
 	private PageflowValidation() {
-
+	    // no external instantiation
 	}
 
 	/**

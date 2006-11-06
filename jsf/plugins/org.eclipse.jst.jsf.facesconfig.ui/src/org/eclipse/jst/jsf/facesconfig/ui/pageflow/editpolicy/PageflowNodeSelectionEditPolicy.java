@@ -12,8 +12,6 @@
 package org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpolicy;
 
 import org.eclipse.gef.editpolicies.NonResizableEditPolicy;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowNodeEditPart;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.figure.PageflowNodeFigure;
 
 /**
  * Handles selection of Node. Primary selection is denoted by highlight and a
@@ -23,10 +21,10 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.figure.PageflowNodeFigure;
  */
 public class PageflowNodeSelectionEditPolicy extends NonResizableEditPolicy {
 
-	private PageflowNodeFigure getFigure() {
-		PageflowNodeEditPart part = (PageflowNodeEditPart) getHost();
-		return ((PageflowNodeFigure) part.getFigure());
-	}
+//	private PageflowNodeFigure getFigure() {
+//		PageflowNodeEditPart part = (PageflowNodeEditPart) getHost();
+//		return ((PageflowNodeFigure) part.getFigure());
+//	}
 
 	/**
 	 * @see org.eclipse.gef.editpolicies.SelectionHandlesEditPolicy#hideSelection()

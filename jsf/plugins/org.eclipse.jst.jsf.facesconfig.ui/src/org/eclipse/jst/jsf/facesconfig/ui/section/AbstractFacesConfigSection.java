@@ -157,7 +157,7 @@ public abstract class AbstractFacesConfigSection extends SectionPart implements
 	 * @param toolkit
 	 */
 	protected abstract void createContents(Composite container,
-			FormToolkit toolkit);
+			FormToolkit toolkit_);
 
 	/**
 	 * get the input object of this section.
@@ -189,7 +189,7 @@ public abstract class AbstractFacesConfigSection extends SectionPart implements
 	 * @param oldInput
 	 */
 	protected void removeAdaptersFromInput(Object oldInput) {
-
+	    // do nothing; subs should override
 	}
 
 	/**
@@ -199,7 +199,7 @@ public abstract class AbstractFacesConfigSection extends SectionPart implements
 	 * @param newInput
 	 */
 	protected void addAdaptersOntoInput(Object newInput) {
-
+        // do nothing; subs should override
 	}
 
 	/**
@@ -226,7 +226,7 @@ public abstract class AbstractFacesConfigSection extends SectionPart implements
 	 * @see org.eclipse.jface.viewers.ISelectionProvider#setSelection(org.eclipse.jface.viewers.ISelection)
 	 */
 	public void setSelection(ISelection selection) {
-
+	    // do nothing: no selection change
 	}
 
 	/*
@@ -282,4 +282,9 @@ public abstract class AbstractFacesConfigSection extends SectionPart implements
 		return (EditingDomain) getPage().getEditor().getAdapter(
 				EditingDomain.class);
 	}
+    
+    public void clearAll()
+    {
+        // do nothing, sub-classes may choose to override to clear their contents
+    }
 }

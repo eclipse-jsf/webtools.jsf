@@ -73,14 +73,14 @@ public class NodeLabel extends Label {
 	 * @param text
 	 */
 	public void setToolTipText(String text) {
-		Label toolTip = null;
+		Label toolTipLabel = null;
 
 		if (text != null && text.length() > 0) {
-			toolTip = new Label(text);
-			toolTip.setBorder(new MarginBorder(3));
+			toolTipLabel = new Label(text);
+			toolTipLabel.setBorder(new MarginBorder(3));
 		}
 
-		super.setToolTip(toolTip);
+		super.setToolTip(toolTipLabel);
 	}
 
 	/**

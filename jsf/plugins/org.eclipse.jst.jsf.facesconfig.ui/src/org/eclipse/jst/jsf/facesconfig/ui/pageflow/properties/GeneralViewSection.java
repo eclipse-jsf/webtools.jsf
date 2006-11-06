@@ -20,8 +20,6 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
@@ -31,9 +29,9 @@ import org.eclipse.ui.part.MultiPageEditorPart;
 import org.eclipse.ui.part.PageBook;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.PropertySheetPage;
-import org.eclipse.wst.common.ui.properties.internal.provisional.ISection;
-import org.eclipse.wst.common.ui.properties.internal.provisional.ITabbedPropertyConstants;
-import org.eclipse.wst.common.ui.properties.internal.provisional.TabbedPropertySheetPage;
+import org.eclipse.ui.views.properties.tabbed.ISection;
+import org.eclipse.ui.views.properties.tabbed.ITabbedPropertyConstants;
+import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import org.eclipse.wst.sse.ui.StructuredTextEditor;
 
 /**
@@ -45,7 +43,7 @@ import org.eclipse.wst.sse.ui.StructuredTextEditor;
  * 
  * @author Xiao-guang Zhang
  */
-public class GeneralViewSection implements ISection, SelectionListener,
+public class GeneralViewSection implements ISection, 
 		ISelectionChangedListener {
 	/** the pagebook */
 	private PageBook pageBook = null;
@@ -272,7 +270,7 @@ public class GeneralViewSection implements ISection, SelectionListener,
 	 * @see ISection#aboutToBeHidden()
 	 */
 	public void aboutToBeHidden() {
-
+	    // do nothing
 	}
 
 	/*
@@ -330,7 +328,7 @@ public class GeneralViewSection implements ISection, SelectionListener,
 	 *            a page record for the part
 	 */
 	protected void doDestroyPage(IWorkbenchPart part, PageRec rec) {
-		IPropertySheetPage page = (IPropertySheetPage) rec.page;
+		IPropertySheetPage page = rec.page;
 		page.dispose();
 		rec.dispose();
 	}
@@ -374,21 +372,4 @@ public class GeneralViewSection implements ISection, SelectionListener,
 	public void selectionChanged(SelectionChangedEvent event) {
 		setInput((IWorkbenchPart) event.getSource(), event.getSelection());
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.swt.events.SelectionListener#widgetSelected(org.eclipse.swt.events.SelectionEvent)
-	 */
-	public void widgetSelected(SelectionEvent e) {
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.swt.events.SelectionListener#widgetDefaultSelected(org.eclipse.swt.events.SelectionEvent)
-	 */
-	public void widgetDefaultSelected(SelectionEvent e) {
-	}
-
 }

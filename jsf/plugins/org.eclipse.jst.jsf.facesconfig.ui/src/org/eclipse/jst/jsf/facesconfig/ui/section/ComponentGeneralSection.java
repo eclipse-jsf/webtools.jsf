@@ -286,14 +286,6 @@ public class ComponentGeneralSection extends AbstractFacesConfigSection {
 	}
 
 	/**
-	 * 
-	 */
-	public void clearAll() {
-		// TODO Auto-generated method stub
-
-	}
-
-	/**
 	 * Add ComponentGeneralAdapter onto <component> and the first <display-name>
 	 * and <description> elements.
 	 */

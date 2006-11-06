@@ -22,6 +22,7 @@ public class RectangleList extends Figure {
 	protected List rectangles = new ArrayList();
 
 	public RectangleList() {
+        // ??
 	}
 
 	public void addRectangle(int x1, int y1, int x2, int y2) {

@@ -18,7 +18,6 @@ import org.eclipse.jst.jsf.facesconfig.common.dialogfield.IStringButtonAdapter;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.LayoutUtil;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.StringButtonDialogField;
 import org.eclipse.jst.jsf.facesconfig.common.dialogfield.StringDialogField;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.ITabbedPropertiesConstants;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.ProjectWebPageSelectionDialog;
@@ -96,7 +95,7 @@ public class PageGroup extends AbstractEditPartGroup {
 					.getLargeicon()));
 			smallIconField.setTextWithoutUpdate(assertString(pfPage
 					.getSmallicon()));
-			super.refreshData((PageflowElement) pfPage);
+			super.refreshData(pfPage);
 
 		}
 

@@ -271,14 +271,6 @@ public class AttributeSection extends AbstractFacesConfigSection  {
 	/**
 	 * 
 	 */
-	public void clearAll() {
-		// TODO Auto-generated method stub
-
-	}
-
-	/**
-	 * 
-	 */
 	public void refreshAll() {
 		tableViewer.setInput(getInput());
 		updateButtons();

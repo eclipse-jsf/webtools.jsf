@@ -73,8 +73,8 @@ public class OverviewNavigationSection extends AbstractOverviewSection {
 	 * 
 	 * @see org.eclipse.jst.jsf.facesconfig.ui.section.AbstractOverviewSection#configTableViewer(org.eclipse.jface.viewers.TableViewer)
 	 */
-	protected void configTableViewer(TableViewer tableViewer) {
-		tableViewer.setContentProvider(new IStructuredContentProvider() {
+	protected void configTableViewer(TableViewer tableViewer1) {
+		tableViewer1.setContentProvider(new IStructuredContentProvider() {
 
 			public Object[] getElements(Object inputElement) {
 				List navigationCaseList = (List) inputElement;
@@ -82,16 +82,16 @@ public class OverviewNavigationSection extends AbstractOverviewSection {
 			}
 
 			public void dispose() {
-
+			    // nothing to dispose
 			}
 
 			public void inputChanged(Viewer viewer, Object oldInput,
 					Object newInput) {
-
+			    // do nothing
 			}
 		});
 
-		tableViewer.setLabelProvider(new ITableLabelProvider() {
+		tableViewer1.setLabelProvider(new ITableLabelProvider() {
 
 			public Image getColumnImage(Object element, int columnIndex) {
 				return null;
@@ -119,11 +119,11 @@ public class OverviewNavigationSection extends AbstractOverviewSection {
 			}
 
 			public void addListener(ILabelProviderListener listener) {
-
+			    // no listeners?
 			}
 
 			public void dispose() {
-
+			    // do nothing
 			}
 
 			public boolean isLabelProperty(Object element, String property) {
@@ -131,7 +131,7 @@ public class OverviewNavigationSection extends AbstractOverviewSection {
 			}
 
 			public void removeListener(ILabelProviderListener listener) {
-
+			    // no listeners?
 			}
 		});
 	}

@@ -110,11 +110,11 @@ public abstract class EditableDialogCellEditor extends DialogCellEditor {
 			return;
 		}
 
-		String text = "";//$NON-NLS-1$
+		String text_ = "";//$NON-NLS-1$
 		if (value != null) {
-			text = value.toString();
+			text_ = value.toString();
 		}
-		this.text.setText(text);
+		this.text.setText(text_);
 	}
 
 	/*

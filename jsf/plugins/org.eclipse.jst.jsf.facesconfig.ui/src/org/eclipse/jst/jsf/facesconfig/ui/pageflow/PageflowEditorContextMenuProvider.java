@@ -170,13 +170,14 @@ public class PageflowEditorContextMenuProvider extends ContextMenuProvider {
 	 * @param menuGroup -
 	 *            menu group name
 	 */
-	private void appendActionToMenu(IMenuManager menu, String actionId,
-			String menuGroup) {
-		IAction action = getActionRegistry().getAction(actionId);
-		if (null != action && action.isEnabled()) {
-			menu.appendToGroup(menuGroup, action);
-		}
-	}
+	 // TODO: dead code
+//	private void appendActionToMenu(IMenuManager menu, String actionId,
+//			String menuGroup) {
+//		IAction action = getActionRegistry().getAction(actionId);
+//		if (null != action && action.isEnabled()) {
+//			menu.appendToGroup(menuGroup, action);
+//		}
+//	}
 
 	/**
 	 * Appends the specified action to the 'Undo' menu group
@@ -216,12 +217,13 @@ public class PageflowEditorContextMenuProvider extends ContextMenuProvider {
 	 * @param actionId -
 	 *            action's ID
 	 */
-	private void appendActionToAddGroup(IMenuManager menu, String actionId) {
-		IAction action = getActionRegistry().getAction(actionId);
-		if (null != action && action.isEnabled()) {
-			menu.appendToGroup(GEFActionConstants.GROUP_ADD, action);
-		}
-	}
+	 // TODO: dead code
+//	private void appendActionToAddGroup(IMenuManager menu, String actionId) {
+//		IAction action = getActionRegistry().getAction(actionId);
+//		if (null != action && action.isEnabled()) {
+//			menu.appendToGroup(GEFActionConstants.GROUP_ADD, action);
+//		}
+//	}
 
 	/**
 	 * Appends the specified action to the 'save' menu group

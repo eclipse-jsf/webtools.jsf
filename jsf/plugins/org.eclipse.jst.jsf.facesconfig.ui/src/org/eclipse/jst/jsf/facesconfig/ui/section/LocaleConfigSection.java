@@ -86,19 +86,19 @@ public class LocaleConfigSection extends ApplicationSection implements
 	 * create a CheckboxTableViewer for this section.
 	 */
 	protected TableViewer createTableViewer(Composite parent) {
-		CheckboxTableViewer tableViewer = CheckboxTableViewer.newCheckList(
+		CheckboxTableViewer tableViewer1 = CheckboxTableViewer.newCheckList(
 				parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
-		tableViewer.addCheckStateListener(this);
-		tableViewer.setSorter(new ViewerSorter());
-		return tableViewer;
+		tableViewer1.addCheckStateListener(this);
+		tableViewer1.setSorter(new ViewerSorter());
+		return tableViewer1;
 	}
 
 	/**
 	 * Add a filter for this table viewer, only <supported-locale> and
 	 * <default-locale> elements would be listed.
 	 */
-	protected void configTableViewer(TableViewer tableViewer) {
-		tableViewer.addFilter(new ViewerFilter() {
+	protected void configTableViewer(TableViewer tableViewer1) {
+		tableViewer1.addFilter(new ViewerFilter() {
 			public boolean select(Viewer viewer, Object parentElement,
 					Object element) {
 				return FacesConfigPackage.eINSTANCE.getSupportedLocaleType()

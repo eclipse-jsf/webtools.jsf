@@ -12,7 +12,6 @@
 package org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.section;
 
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
@@ -44,7 +43,7 @@ public class EditorGroup extends AbstractEditPartGroup {
 	 */
 	public void refreshData() {
 		if (pageflow != null) {
-			super.refreshData((PageflowElement) pageflow);
+			super.refreshData(pageflow);
 		}
 
 	}

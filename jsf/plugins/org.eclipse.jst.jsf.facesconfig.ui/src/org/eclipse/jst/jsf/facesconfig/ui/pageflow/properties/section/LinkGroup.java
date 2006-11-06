@@ -195,8 +195,7 @@ public class LinkGroup extends AbstractEditPartGroup {
 	public Integer getRedirectValue() {
 		if (redirectField.getText().equalsIgnoreCase(Boolean.TRUE.toString())) {
 			return LinkGroup.P_VALUE_TRUE;
-		} else {
-			return LinkGroup.P_VALUE_FALSE;
 		}
+        return LinkGroup.P_VALUE_FALSE;
 	}
 }

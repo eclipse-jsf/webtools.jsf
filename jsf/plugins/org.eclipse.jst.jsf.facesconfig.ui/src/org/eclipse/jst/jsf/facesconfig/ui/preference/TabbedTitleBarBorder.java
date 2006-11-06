@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.core.runtime.ListenerList;
 import org.eclipse.draw2d.Border;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.FigureUtilities;
@@ -29,7 +30,6 @@ import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.jface.resource.JFaceResources;
-import org.eclipse.jface.util.ListenerList;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.widgets.Composite;
@@ -70,19 +70,19 @@ public class TabbedTitleBarBorder extends SchemeBorder {
 
 		parent.addMouseListener(new MouseListener() {
 			public void mousePressed(MouseEvent me) {
-				Insets padding = getPadding();
+				Insets padding_ = getPadding();
 				Point mp = me.getLocation();
-				mp.x -= padding.left;
-				mp.y -= padding.top + 3; // 3==width of the outer border
+				mp.x -= padding_.left;
+				mp.y -= padding_.top + 3; // 3==width of the outer border
 				Point pp = parent.getBounds().getLocation();
 				Rectangle tr = new Rectangle(pp.x, pp.y, 0, 0);
-				int activeIndex = -1;
+				//int activeIndex = -1;
 
 				for (int i = 0; i < getTabList().size(); ++i) {
 					Tab t = (Tab) tabList.get(i);
 					Dimension d = t.getTextExtents();
-					d.height += padding.top + padding.bottom;
-					d.width += padding.left;
+					d.height += padding_.top + padding_.bottom;
+					d.width += padding_.left;
 					tr.setSize(d);
 					if (tr.contains(mp)) {
 						setCurrentTab(i);
@@ -93,11 +93,11 @@ public class TabbedTitleBarBorder extends SchemeBorder {
 			}
 
 			public void mouseReleased(MouseEvent me) {
+                // do nothing: not handling release
 			}
 
 			public void mouseDoubleClicked(MouseEvent me) {
-				// TODO Auto-generated method stub
-
+                // do nothing: not handling release
 			}
 		});
 	}
@@ -161,7 +161,7 @@ public class TabbedTitleBarBorder extends SchemeBorder {
 
 	public void addTabbedWindowListener(WindowFigureListener listener) {
 		if (listenerList == null)
-			listenerList = new ListenerList();
+			listenerList = new ListenerList(ListenerList.IDENTITY);
 		listenerList.add(listener);
 	}
 
@@ -353,7 +353,7 @@ public class TabbedTitleBarBorder extends SchemeBorder {
 
 	public Dimension getMinimumSize(int wHint, int hHint) {
 		Dimension d = getTextExtents(parent);
-		Insets i = getInsets(parent);
+		getInsets(parent);
 		d.expand(insets.left + insets.right, insets.top + insets.bottom);
 		// add enough width for the min/max buttons
 		// d.width += minButton.getSize().width + maxButton.getSize().width;

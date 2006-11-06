@@ -80,6 +80,7 @@ public class JavaClassUtils {
 					return false;
 				}
 			} catch (JavaModelException e) {
+                // suppress: this is possible; fall through
 			}
 		}
 		return true;
@@ -151,8 +152,6 @@ public class JavaClassUtils {
 			} catch (JavaModelException e) {
 				// Nothing to do.
 			}
-			;
-
 		}
 		return false;
 	}
@@ -169,10 +168,8 @@ public class JavaClassUtils {
 	 *            the datatype of the property
 	 * @return boolean - true, if the datatype is primitive or part of java.lang
 	 *         or java.util package
-	 * @throws JavaModelException
 	 */
-	public static boolean isPrimitiveType(IType classType, String signatureName)
-			throws JavaModelException {
+	public static boolean isPrimitiveType(IType classType, String signatureName) {
 		while (signatureName.startsWith("[")) {
 			signatureName = signatureName.substring(1);
 		}
@@ -211,6 +208,7 @@ public class JavaClassUtils {
 			try {
 				cunit = jProject.findType(className);
 			} catch (JavaModelException e) {
+                // suppress: fall-through and return null
 			}
 		}
 		return cunit;
@@ -266,6 +264,7 @@ public class JavaClassUtils {
 				packagename = packages[0].getElementName();
 			}
 		} catch (JavaModelException jme) {
+            // suppress: fall-through and return an empty string?? TODO:?
 		}
 		return packagename;
 	}
@@ -275,10 +274,8 @@ public class JavaClassUtils {
 	 * 
 	 * @param methodList
 	 * @param methods
-	 * @throws JavaModelException
 	 */
-	private static void copyToMethodList(List methodList, IMethod[] methods)
-			throws JavaModelException {
+	private static void copyToMethodList(List methodList, IMethod[] methods) {
 		if (methods != null && methods.length > 0) {
 			for (int i = 0; i < methods.length; i++) {
 				if (!isDuplicateMethod(methodList, methods[i])) {
@@ -295,10 +292,8 @@ public class JavaClassUtils {
 	 * @param methodList
 	 * @param method
 	 * @return
-	 * @throws JavaModelException
 	 */
-	private static boolean isDuplicateMethod(List methodList, IMethod method)
-			throws JavaModelException {
+	private static boolean isDuplicateMethod(List methodList, IMethod method) {
 		if (method == null || !method.exists()) {
 			return false;
 		}
@@ -329,7 +324,7 @@ public class JavaClassUtils {
 	 *         parameter types and constructor state.
 	 */
 	public static boolean isSameMethodSignature(String name,
-			String[] paramTypes, IMethod curr) throws JavaModelException {
+			String[] paramTypes, IMethod curr) {
 		if (name.equals(curr.getElementName())) {
 			String[] currParamTypes = curr.getParameterTypes();
 			if (paramTypes.length == currParamTypes.length) {

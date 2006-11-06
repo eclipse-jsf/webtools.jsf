@@ -66,10 +66,9 @@ public class LocaleDialog extends StatusDialog {
 			if (object instanceof String) {
 				if (null == locale || locale.length() == 0) {
 					return true;
-				} else {
-					String aLocale = (String) object;
-					return aLocale.startsWith(this.locale);
 				}
+                String aLocale = (String) object;
+                return aLocale.startsWith(this.locale);
 			}
 			return false;
 		}

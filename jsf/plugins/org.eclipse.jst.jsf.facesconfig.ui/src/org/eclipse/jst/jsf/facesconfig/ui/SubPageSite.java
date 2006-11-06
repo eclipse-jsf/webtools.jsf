@@ -86,9 +86,9 @@ public class SubPageSite implements IPageSite {
 	 *      org.eclipse.jface.viewers.ISelectionProvider)
 	 */
 	public void registerContextMenu(String menuId, MenuManager menuManager,
-			ISelectionProvider selectionProvider) {
+			ISelectionProvider selectionProvider1) {
 
-		parentSite.registerContextMenu(menuId, menuManager, selectionProvider);
+		parentSite.registerContextMenu(menuId, menuManager, selectionProvider1);
 	}
 
 	/*

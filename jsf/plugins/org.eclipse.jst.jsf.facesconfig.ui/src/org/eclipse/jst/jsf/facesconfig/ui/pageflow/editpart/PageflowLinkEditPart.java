@@ -85,8 +85,8 @@ public class PageflowLinkEditPart extends AbstractConnectionEditPart implements
 	 * @see AbstractGraphicalEditPart#createFigure()
 	 */
 	protected IFigure createFigure() {
-		IFigure figure = new PFLinkFigure();
-		return figure;
+		IFigure figure_ = new PFLinkFigure();
+		return figure_;
 
 	}
 
@@ -103,7 +103,7 @@ public class PageflowLinkEditPart extends AbstractConnectionEditPart implements
 			installEditPolicy(EditPolicy.CONNECTION_BENDPOINTS_ROLE,
 					getBendpointEditPolicy());
 		}
-		PFLinkEditPolicy policy = new PFLinkEditPolicy();
+		//PFLinkEditPolicy policy = new PFLinkEditPolicy();
 		// policy.setSseModel(model);
 		installEditPolicy(EditPolicy.CONNECTION_ROLE, new PFLinkEditPolicy());
 
@@ -188,7 +188,7 @@ public class PageflowLinkEditPart extends AbstractConnectionEditPart implements
 	 */
 	public void activate() {
 		getPFLink().eAdapters().add(adapter);
-		PageflowLink element = (PageflowLink) getModel();
+		//PageflowLink element = (PageflowLink) getModel();
 		super.activate();
 	}
 
@@ -458,10 +458,10 @@ public class PageflowLinkEditPart extends AbstractConnectionEditPart implements
 		if (this.connectionStyle == -1) {
 			IPreferenceStore store = EditorPlugin.getDefault()
 					.getPreferenceStore();
-			String connectionStyle = store
+			String connectionStyle_ = store
 					.getString(GEMPreferences.LINE_ROUTING);
 
-			if (GEMPreferences.LINE_ROUTING_MANHATTAN.equals(connectionStyle)) {
+			if (GEMPreferences.LINE_ROUTING_MANHATTAN.equals(connectionStyle_)) {
 				this.connectionStyle = ILayerPanePreference.LINE_ROUTING_MANHATTAN;
 			} else {
 				this.connectionStyle = ILayerPanePreference.LINE_ROUTING_MANUAL;
