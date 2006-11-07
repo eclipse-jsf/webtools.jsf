@@ -17,8 +17,6 @@ import java.util.List;
 
 import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.CMAnnotationHelper;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.AbstractMetaDataEnabledFeature;
-import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.AbstractRootTypeDescriptor;
-import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.IMetaDataEnabledFeature;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IPossibleValues;
 
 public class NoImplPossibleVals extends AbstractMetaDataEnabledFeature implements
