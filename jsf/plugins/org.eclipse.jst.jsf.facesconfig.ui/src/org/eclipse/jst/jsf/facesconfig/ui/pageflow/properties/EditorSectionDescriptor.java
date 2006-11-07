@@ -13,7 +13,6 @@ package org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties;
 
 import java.util.List;
 
-import org.eclipse.jface.viewers.IFilter;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowEditPart;
