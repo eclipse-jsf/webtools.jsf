@@ -80,4 +80,26 @@
            id="FacesConfigEditor.CheatSheet"
            name="FacesConfigEditor CheatSheet"/>
   </extension>
+  <!--<extension
+        point="org.eclipse.ui.views.properties.tabbed.propertyContributor">
+     <propertyContributor
+           contributorId="org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor"
+           labelProvider="org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.PageflowSectionLabelProvider">
+        <propertyCategory category="attribute"/>
+        <propertyCategory category="general"/>
+     </propertyContributor>
+  </extension>
+  <extension
+        point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
+     <propertyTabs contributorId="org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor">
+        <propertyTab
+              category="attribute"
+              id="org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.attribute"
+              label="%propertyTab.attribute"/>
+        <propertyTab
+              category="general"
+              id="org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.general"
+              label="%propertyTab.general"/>
+     </propertyTabs>
+  </extension>-->
 </plugin>

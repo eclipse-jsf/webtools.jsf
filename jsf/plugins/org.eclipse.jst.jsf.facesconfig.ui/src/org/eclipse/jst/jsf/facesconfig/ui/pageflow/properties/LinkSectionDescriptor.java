@@ -21,8 +21,9 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.section.LinkSection;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowValidation;
 import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.ui.views.properties.tabbed.ISection;
-import org.eclipse.ui.views.properties.tabbed.ISectionDescriptor;
+import org.eclipse.wst.common.ui.properties.internal.provisional.ISection;
+import org.eclipse.wst.common.ui.properties.internal.provisional.ISectionDescriptor;
+import org.eclipse.wst.common.ui.properties.internal.provisional.ITypeMapper;
 
 /**
  * @author jchoi
@@ -44,7 +45,7 @@ public class LinkSectionDescriptor implements ISectionDescriptor {
 	 * 
 	 * @see org.eclipse.wst.common.ui.properties.internal.provisional.ISectionDescriptor#getFilter()
 	 */
-	public IFilter getFilter() {
+	public ITypeMapper getFilter() {
 		return null;
 	}
 

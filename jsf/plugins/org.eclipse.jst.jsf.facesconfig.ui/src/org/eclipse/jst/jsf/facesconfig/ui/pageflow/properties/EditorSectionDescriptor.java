@@ -19,8 +19,10 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowEditPart;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.section.EditorSection;
 import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.ui.views.properties.tabbed.ISection;
-import org.eclipse.ui.views.properties.tabbed.ISectionDescriptor;
+import org.eclipse.wst.common.ui.properties.internal.provisional.ISection;
+import org.eclipse.wst.common.ui.properties.internal.provisional.ISectionDescriptor;
+import org.eclipse.wst.common.ui.properties.internal.provisional.ITypeMapper;
+
 
 
 /**
@@ -48,7 +50,7 @@ public class EditorSectionDescriptor implements ISectionDescriptor {
 	 * 
 	 * @see org.eclipse.wst.common.ui.properties.internal.provisional.ISectionDescriptor#getFilter()
 	 */
-	public IFilter getFilter() {
+	public ITypeMapper getFilter() {
 		return null;
 	}
 
