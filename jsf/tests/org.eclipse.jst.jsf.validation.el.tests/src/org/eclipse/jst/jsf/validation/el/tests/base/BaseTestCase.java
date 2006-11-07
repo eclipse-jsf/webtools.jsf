@@ -388,7 +388,7 @@ public class BaseTestCase extends TestCase
             if (probObj instanceof IELLocalizedMessage)
             {
                 final IELLocalizedMessage localizedMsg = (IELLocalizedMessage) probObj;
-                probsFound.add(Integer.valueOf(localizedMsg.getErrorCode()));
+                probsFound.add(new Integer(localizedMsg.getErrorCode()));
                 if (localizedMsg.getErrorCode() == code)
                 {
                     assertTrue("Offset of message must be >= 0", localizedMsg.getOffset()>=0);
