@@ -55,8 +55,8 @@ public class FacesConfigFactoryImplForWriteValidatorTwoFiles extends TestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		WizardUtil.createProject();
-		project = WizardUtil.getTestProject();
+		WizardUtil.createProject(getName());
+		project = WizardUtil.getTestProject(getName());
 	}
 
 	public void testWriteValidatorToFileTwo() {

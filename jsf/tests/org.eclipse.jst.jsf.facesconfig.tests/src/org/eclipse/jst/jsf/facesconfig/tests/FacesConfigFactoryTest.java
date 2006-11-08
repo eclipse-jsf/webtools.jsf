@@ -35,7 +35,7 @@ public class FacesConfigFactoryTest extends TestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		project = WizardUtil.getTestProject();
+		project = WizardUtil.getTestProject(getName());
 	}
 
 	public static Test suite() {

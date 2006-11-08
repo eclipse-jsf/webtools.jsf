@@ -35,10 +35,10 @@ public class FacesConfigFactoryImplForWriteFactoryTwoFiles extends TestCase {
 	FacesConfigArtifactEdit edit1 = null;
 	FacesConfigArtifactEdit edit2 = null;
 	
-	String applicationFactory = "application-factory";
-	String facesContext = "Faces-Contexto";
-	String lifecyclefactory = "lifecycle-factory";
-	String renderKitFactory = "render-kit-factory";
+	private static final String applicationFactory = "application-factory";
+	private static final String facesContext = "Faces-Contexto";
+	private static final String lifecyclefactory = "lifecycle-factory";
+	private static final String renderKitFactory = "render-kit-factory";
 	
 
 	public FacesConfigFactoryImplForWriteFactoryTwoFiles(String name) {
@@ -47,8 +47,8 @@ public class FacesConfigFactoryImplForWriteFactoryTwoFiles extends TestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		WizardUtil.createProject();
-		project = WizardUtil.getTestProject();
+		WizardUtil.createProject(getName());
+		project = WizardUtil.getTestProject(getName());
 	}
 	
 	public void testWriteFacesconfigFile() {
@@ -91,7 +91,7 @@ public class FacesConfigFactoryImplForWriteFactoryTwoFiles extends TestCase {
 				edit2.dispose();
 			}
 		}
-		String result = null;
+
 		try {
 			edit2 = FacesConfigArtifactEdit.getFacesConfigArtifactEditForRead(
 					project, "WEB-INF/faces-config2.xml");
@@ -102,7 +102,9 @@ public class FacesConfigFactoryImplForWriteFactoryTwoFiles extends TestCase {
 					EList appFactList = facto.getApplicationFactory();
 					for (int j=0; j<appFactList.size(); j++) {
 						ApplicationFactoryType app = (ApplicationFactoryType)appFactList.get(j);
-						result = app.getTextContent();
+						String result = app.getTextContent();
+                        assertEquals(result, applicationFactory);
+                        // TODO: eliminate loop and assertEquals(1, appFactList.size())?
 						break;
 					}
 				}
@@ -157,7 +159,7 @@ public class FacesConfigFactoryImplForWriteFactoryTwoFiles extends TestCase {
 				edit1.dispose();
 			}
 		}
-		String result = null;
+		//String result = null;
 		try {
 			edit1 = FacesConfigArtifactEdit.getFacesConfigArtifactEditForRead(
 					project, "WEB-INF/faces-config2.xml");
@@ -167,8 +169,9 @@ public class FacesConfigFactoryImplForWriteFactoryTwoFiles extends TestCase {
 					FactoryType lifecycle = (FactoryType) lifecycles.get(i);
 					EList phaseListeners = lifecycle.getApplicationFactory();
 					for (int j=0; j<phaseListeners.size(); j++) {
-						ApplicationFactoryType phaseListener = (ApplicationFactoryType)phaseListeners.get(j);
-						result = phaseListener.getTextContent();
+                        // TODO: ???
+//						ApplicationFactoryType phaseListener = (ApplicationFactoryType)phaseListeners.get(j);
+//						result = phaseListener.getTextContent();
 						break;
 					}
 				}
@@ -216,7 +219,7 @@ public class FacesConfigFactoryImplForWriteFactoryTwoFiles extends TestCase {
 				edit2.dispose();
 			}
 		}
-		String result = null;
+		//String result = null;
 		try {
 			edit2 = FacesConfigArtifactEdit.getFacesConfigArtifactEditForRead(
 					project, "WEB-INF/faces-config2.xml");
@@ -226,8 +229,9 @@ public class FacesConfigFactoryImplForWriteFactoryTwoFiles extends TestCase {
 					FactoryType factory = (FactoryType) factories.get(i);
 					EList facescContextFactories = factory.getFacesContextFactory();
 					for (int j=0; j<facescContextFactories.size(); j++) {
-						FacesContextFactoryType faacesContext = (FacesContextFactoryType)facescContextFactories.get(j);
-						result = faacesContext.getTextContent();
+                        // TODO:???
+//						FacesContextFactoryType faacesContext = (FacesContextFactoryType)facescContextFactories.get(j);
+//						result = faacesContext.getTextContent();
 						break;
 					}
 				}
@@ -273,7 +277,7 @@ public class FacesConfigFactoryImplForWriteFactoryTwoFiles extends TestCase {
 				edit1.dispose();
 			}
 		}
-		String result = null;
+		//String result = null;
 		try {
 			edit1 = FacesConfigArtifactEdit.getFacesConfigArtifactEditForRead(
 					project, "WEB-INF/faces-config2.xml");
@@ -283,8 +287,9 @@ public class FacesConfigFactoryImplForWriteFactoryTwoFiles extends TestCase {
 					FactoryType factory = (FactoryType) factories.get(i);
 					EList facescContextFactories = factory.getFacesContextFactory();
 					for (int j=0; j<facescContextFactories.size(); j++) {
-						FacesContextFactoryType faacesContext = (FacesContextFactoryType)facescContextFactories.get(j);
-						result = faacesContext.getTextContent();
+                        // TODO: ??
+//						FacesContextFactoryType faacesContext = (FacesContextFactoryType)facescContextFactories.get(j);
+//						result = faacesContext.getTextContent();
 						break;
 					}
 				}
@@ -328,7 +333,7 @@ public class FacesConfigFactoryImplForWriteFactoryTwoFiles extends TestCase {
 				edit2.dispose();
 			}
 		}
-		String result = null;
+		//String result = null;
 		try {
 			edit2 = FacesConfigArtifactEdit.getFacesConfigArtifactEditForRead(
 					project, "WEB-INF/faces-config2.xml");
@@ -338,8 +343,9 @@ public class FacesConfigFactoryImplForWriteFactoryTwoFiles extends TestCase {
 					FactoryType factory = (FactoryType) factories.get(i);
 					EList lifecycleFactories = factory.getLifecycleFactory();
 					for (int j=0; j<lifecycleFactories.size(); j++) {
-						LifecycleFactoryType lifecyle = (LifecycleFactoryType)lifecycleFactories.get(j);
-						result = lifecyle.getTextContent();
+                        // TODO: ???
+//						LifecycleFactoryType lifecyle = (LifecycleFactoryType)lifecycleFactories.get(j);
+//						result = lifecyle.getTextContent();
 						break;
 					}
 				}
@@ -388,7 +394,7 @@ public class FacesConfigFactoryImplForWriteFactoryTwoFiles extends TestCase {
 				edit1.dispose();
 			}
 		}
-		String result = null;
+		//String result = null;
 		try {
 			edit1 = FacesConfigArtifactEdit.getFacesConfigArtifactEditForRead(
 					project, "WEB-INF/faces-config1.xml");
@@ -398,8 +404,9 @@ public class FacesConfigFactoryImplForWriteFactoryTwoFiles extends TestCase {
 					FactoryType factory = (FactoryType) factories.get(i);
 					EList lifecycleFactories = factory.getLifecycleFactory();
 					for (int j=0; j<lifecycleFactories.size(); j++) {
-						LifecycleFactoryType lifecyle = (LifecycleFactoryType)lifecycleFactories.get(j);
-						result = lifecyle.getTextContent();
+                        // TODO: ???
+//						LifecycleFactoryType lifecyle = (LifecycleFactoryType)lifecycleFactories.get(j);
+//						result = lifecyle.getTextContent();
 						break;
 					}
 				}
@@ -418,9 +425,7 @@ public class FacesConfigFactoryImplForWriteFactoryTwoFiles extends TestCase {
 		//IProject project = WizardUtil.getTestProject();
 		//FacesConfigArtifactEdit edit1 = null;
 		
-		String renderKitFactory=null;
-	
-		renderKitFactory = "render-kit-factory";
+		final String renderKitFactory1= "render-kit-factory";
 		try {
 			edit2 = FacesConfigArtifactEdit.getFacesConfigArtifactEditForWrite(
 					project, "WEB-INF/faces-config2.xml");
@@ -432,7 +437,7 @@ public class FacesConfigFactoryImplForWriteFactoryTwoFiles extends TestCase {
 				
 				RenderKitFactoryType renderKitFact = facesConfigFactory.createRenderKitFactoryType();
 				
-				renderKitFact.setTextContent(renderKitFactory);
+				renderKitFact.setTextContent(renderKitFactory1);
 				newfactory.getRenderKitFactory().add(renderKitFact);
 				edit2.getFacesConfig().getFactory().add(newfactory);
 				
@@ -443,7 +448,7 @@ public class FacesConfigFactoryImplForWriteFactoryTwoFiles extends TestCase {
 				edit2.dispose();
 			}
 		}
-		String result = null;
+		//String result = null;
 		try {
 			edit2 = FacesConfigArtifactEdit.getFacesConfigArtifactEditForRead(
 					project, "WEB-INF/faces-config2.xml");
@@ -453,8 +458,9 @@ public class FacesConfigFactoryImplForWriteFactoryTwoFiles extends TestCase {
 					FactoryType factory = (FactoryType) factories.get(i);
 					EList renderKitFactories = factory.getRenderKitFactory();
 					for (int j=0; j<renderKitFactories.size(); j++) {
-						RenderKitFactoryType render = (RenderKitFactoryType)renderKitFactories.get(j);
-						result = render.getTextContent();
+                        // TODO: ????
+//						RenderKitFactoryType render = (RenderKitFactoryType)renderKitFactories.get(j);
+//						result = render.getTextContent();
 						break;
 					}
 				}
@@ -474,9 +480,7 @@ public class FacesConfigFactoryImplForWriteFactoryTwoFiles extends TestCase {
 		//IProject project = WizardUtil.getTestProject();
 		//FacesConfigArtifactEdit edit1 = null;
 		
-		String renderKitFactory=null;
-	
-		renderKitFactory = "render-kit-factory";
+		final String renderKitFactory1="render-kit-factory";
 		try {
 			edit1 = FacesConfigArtifactEdit.getFacesConfigArtifactEditForWrite(
 					project, "WEB-INF/faces-config1.xml");
@@ -488,7 +492,7 @@ public class FacesConfigFactoryImplForWriteFactoryTwoFiles extends TestCase {
 				
 				RenderKitFactoryType renderKitFact = facesConfigFactory.createRenderKitFactoryType();
 				
-				renderKitFact.setTextContent(renderKitFactory);
+				renderKitFact.setTextContent(renderKitFactory1);
 				newfactory.getRenderKitFactory().add(renderKitFact);
 				edit1.getFacesConfig().getFactory().add(newfactory);
 				
@@ -499,7 +503,7 @@ public class FacesConfigFactoryImplForWriteFactoryTwoFiles extends TestCase {
 				edit1.dispose();
 			}
 		}
-		String result = null;
+		//String result = null;
 		try {
 			edit1 = FacesConfigArtifactEdit.getFacesConfigArtifactEditForRead(
 					project, "WEB-INF/faces-config2.xml");
@@ -509,8 +513,9 @@ public class FacesConfigFactoryImplForWriteFactoryTwoFiles extends TestCase {
 					FactoryType factory = (FactoryType) factories.get(i);
 					EList renderKitFactories = factory.getRenderKitFactory();
 					for (int j=0; j<renderKitFactories.size(); j++) {
-						RenderKitFactoryType render = (RenderKitFactoryType)renderKitFactories.get(j);
-						result = render.getTextContent();
+                        // TODO: ???
+//						RenderKitFactoryType render = (RenderKitFactoryType)renderKitFactories.get(j);
+//						result = render.getTextContent();
 						break;
 					}
 				}

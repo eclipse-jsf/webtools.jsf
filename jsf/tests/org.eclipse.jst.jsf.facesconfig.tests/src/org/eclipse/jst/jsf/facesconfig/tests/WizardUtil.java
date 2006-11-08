@@ -21,6 +21,8 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
@@ -29,6 +31,7 @@ import org.eclipse.wst.common.componentcore.ComponentCore;
 import org.eclipse.wst.common.componentcore.datamodel.properties.IFacetProjectCreationDataModelProperties;
 import org.eclipse.wst.common.frameworks.datamodel.DataModelFactory;
 import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
+import org.osgi.framework.Bundle;
 
 /**
  * Utility class for launching JSF-related wizard operations. 
@@ -37,19 +40,19 @@ import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
  */
 public class WizardUtil {
 	private static boolean projectCreated = false;
-	public static final String FACESCONFIG_PROJECT_NAME = "FacesConfigUnitTest";
+	private static final String FACESCONFIG_PROJECT_NAME = "FacesConfigUnitTest";
 	private static final String FACESCONFIG_EAR_PROJECT_NAME = FACESCONFIG_PROJECT_NAME + "EAR";
 
 	public static boolean isProjectCreated() {
 		return projectCreated;
 	}
 	
-	public static void createProject() {
+	public static void createProject(String nameSuffix) {
 		if(!isProjectCreated()) {
 			// first delete the projects of these names, if present
 			IWorkspace workspace = ResourcesPlugin.getWorkspace();
-			IResource oldWebProj = workspace.getRoot().getProject(FACESCONFIG_PROJECT_NAME);
-			IResource oldEarProj = workspace.getRoot().getProject(FACESCONFIG_EAR_PROJECT_NAME);
+			IResource oldWebProj = workspace.getRoot().getProject(createProjectName(nameSuffix));
+			IResource oldEarProj = workspace.getRoot().getProject(createEarProjectName(nameSuffix));
 
 			try {			
 				workspace.delete(new IResource[] { oldWebProj, oldEarProj }, true, null);
@@ -59,7 +62,7 @@ public class WizardUtil {
 	
 			
 			try {
-				IProject project = createWebProject(FACESCONFIG_PROJECT_NAME);
+				IProject project = createWebProject(createProjectName(nameSuffix));
 				checkAndAddFacesConfig(project);
 			} catch (Throwable t) {
 				t.printStackTrace();
@@ -85,20 +88,34 @@ public class WizardUtil {
 	/**
 	 * Forces recreation of the test project - to be used after unit tests
 	 * that dirty the project state.  
+	 * @param nameSuffix TODO
 	 */
-	public static void recreateProject() {
+	public static void recreateProject(String nameSuffix) {
 		setProjectDirtied();
-		createProject();
+		createProject(nameSuffix);
 	}
 
 	/**
 	 * Should call createProject first. 
+	 * @param nameSuffix TODO
 	 */
-	public static IProject getTestProject() {
+	public static IProject getTestProject(String nameSuffix) {
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
-		return workspace.getRoot().getProject(FACESCONFIG_PROJECT_NAME);
+		return workspace.getRoot().getProject(createProjectName(nameSuffix));
 	}
 
+    private static String createProjectName(final String nameSuffix)
+    {
+        // TODO: do we need separate projects for each test?
+        return FACESCONFIG_PROJECT_NAME;//+"_"+nameSuffix;        
+    }
+    
+    private static String createEarProjectName(final String nameSuffix)
+    {
+        // TODO: do we need separate projects for each test?
+        return FACESCONFIG_EAR_PROJECT_NAME;//+"_"+nameSuffix;
+    }
+    
 	private static void checkAndAddFacesConfig(IProject project) {
 		IContainer container = ComponentCore.createComponent(project).getRootFolder().getFolder("/WEB-INF").getUnderlyingFolder();
 		IFile facesConfigFile  = ResourcesPlugin.getWorkspace().getRoot().getFile(container.getFullPath().append(new Path("faces-config.xml"))); //$NON-NLS-1$
@@ -107,31 +124,36 @@ public class WizardUtil {
 		
 		if(facesConfigFile.exists()) {
 			return;
-		} else {
-			// there is no faces-config, so add our starting template
-			try {
-				String sourcePath = Platform.asLocalURL(Platform.find(Platform.getBundle("org.eclipse.jst.jsf.facesconfig.tests"), new Path("/template/faces-config.xml"))).getPath().toString(); //$NON-NLS-1$ //$NON-NLS-2$	
-				File f = new File(sourcePath);
-				FileInputStream sourceStream = new FileInputStream(f);
-				facesConfigFile.create(sourceStream, true, null);
-				sourceStream.close();
-
-				String sourcePath1 = Platform.asLocalURL(Platform.find(Platform.getBundle("org.eclipse.jst.jsf.facesconfig.tests"), new Path("/template/faces-config1.xml"))).getPath().toString(); //$NON-NLS-1$ //$NON-NLS-2$	
-				File f1 = new File(sourcePath1);
-				FileInputStream sourceStream1 = new FileInputStream(f1);
-				facesConfigFile1.create(sourceStream1, true, null);
-				sourceStream1.close();
-
-				String sourcePath2 = Platform.asLocalURL(Platform.find(Platform.getBundle("org.eclipse.jst.jsf.facesconfig.tests"), new Path("/template/faces-config2.xml"))).getPath().toString(); //$NON-NLS-1$ //$NON-NLS-2$	
-				File f2 = new File(sourcePath2);
-				FileInputStream sourceStream2 = new FileInputStream(f2);
-				facesConfigFile2.create(sourceStream2, true, null);
-				sourceStream2.close();
-			} catch (IOException ioe) {
-			} catch (CoreException ce) {
-			}
-
 		}
+        
+        final IPath facesConfigPath = new Path("/template/faces-config.xml");
+        final IPath facesConfig1Path = new Path("/template/faces-config1.xml");
+        final IPath facesConfig2Path = new Path("/template/faces-config2.xml");
+        final Bundle  myBundle = Platform.getBundle("org.eclipse.jst.jsf.facesconfig.tests");
+        // there is no faces-config, so add our starting template
+        try {
+        	final String sourcePath = FileLocator.toFileURL(FileLocator.find(myBundle, facesConfigPath,null)).getPath().toString(); //$NON-NLS-1$ //$NON-NLS-2$	
+        	final File f = new File(sourcePath);
+        	final FileInputStream sourceStream = new FileInputStream(f);
+        	facesConfigFile.create(sourceStream, true, null);
+        	sourceStream.close();
+
+        	final String sourcePath1 = FileLocator.toFileURL(FileLocator.find(myBundle,facesConfig1Path,null)).getPath().toString(); //$NON-NLS-1$ //$NON-NLS-2$	
+        	final File f1 = new File(sourcePath1);
+        	final FileInputStream sourceStream1 = new FileInputStream(f1);
+        	facesConfigFile1.create(sourceStream1, true, null);
+        	sourceStream1.close();
+
+        	final String sourcePath2 = FileLocator.toFileURL(FileLocator.find(myBundle, facesConfig2Path,null)).getPath().toString(); //$NON-NLS-1$ //$NON-NLS-2$	
+        	final File f2 = new File(sourcePath2);
+        	final FileInputStream sourceStream2 = new FileInputStream(f2);
+        	facesConfigFile2.create(sourceStream2, true, null);
+        	sourceStream2.close();
+        } catch (IOException ioe) {
+            ioe.printStackTrace(System.err);
+        } catch (CoreException ce) {
+            ce.printStackTrace(System.err);
+        }
 		
 	}
 }

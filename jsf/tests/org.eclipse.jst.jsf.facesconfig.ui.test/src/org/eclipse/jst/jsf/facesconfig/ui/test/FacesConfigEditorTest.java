@@ -72,11 +72,11 @@ public abstract class FacesConfigEditorTest extends TestCase {
 		assertTrue("The facesconfig file doesn't exists.", facesConfigFile
 				.exists());
 		IEditorInput fileInput = new FileEditorInput(facesConfigFile);
-		IEditorPart editor = (FacesConfigEditor) PlatformUI.getWorkbench()
+		IEditorPart editor1 = PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().openEditor(
 						fileInput, FacesConfigEditor.EDITOR_ID);
-		assertNotNull(editor);
-		return editor;
+		assertNotNull(editor1);
+		return editor1;
 	}
 
 	/*

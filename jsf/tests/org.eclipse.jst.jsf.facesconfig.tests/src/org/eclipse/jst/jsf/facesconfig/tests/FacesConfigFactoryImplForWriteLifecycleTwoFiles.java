@@ -28,8 +28,8 @@ public class FacesConfigFactoryImplForWriteLifecycleTwoFiles extends TestCase {
 	FacesConfigArtifactEdit edit1 = null;
 	FacesConfigArtifactEdit edit2 = null;	
 
-	String phaseListener1 = "test1";
-	String phaseListener2 = "test2";
+	private final String phaseListener1 = "test1";
+	private final String phaseListener2 = "test2";
 	
 	public FacesConfigFactoryImplForWriteLifecycleTwoFiles(String name) {
 		super(name);
@@ -37,8 +37,8 @@ public class FacesConfigFactoryImplForWriteLifecycleTwoFiles extends TestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		WizardUtil.createProject();
-		project = WizardUtil.getTestProject();
+		WizardUtil.createProject(getName());
+		project = WizardUtil.getTestProject(getName());
 	}
 	
 	public void testWriteToFileTwo() {
@@ -70,6 +70,7 @@ public class FacesConfigFactoryImplForWriteLifecycleTwoFiles extends TestCase {
 					project, "WEB-INF/faces-config2.xml");
 			if (edit2.getFacesConfig() != null) {
 				EList lifecycles = edit2.getFacesConfig().getLifecycle();
+                boolean foundPhaseListener2 = false;
 				for (int i = 0; i < lifecycles.size(); i++) {
 					LifecycleType lifecycle = (LifecycleType) lifecycles.get(i);
 					EList phaseListeners = lifecycle.getPhaseListener();
@@ -77,10 +78,14 @@ public class FacesConfigFactoryImplForWriteLifecycleTwoFiles extends TestCase {
 						PhaseListenerType phaseLis = (PhaseListenerType)phaseListeners.get(j);
 						result = phaseLis.getTextContent();
 						System.out.println("The PhaseListener in lifecycle is (for file two) " + result);
-						assertEquals(phaseListener2,result);
-						break;
+						if (phaseListener2.equals(result))
+                        {
+                            foundPhaseListener2 = true;
+						    break;
+                        }
 					}
 				}
+                assertTrue(foundPhaseListener2);
 			}
 		} finally {
 			//assertTrue(result != null && result.equals(sTestString));

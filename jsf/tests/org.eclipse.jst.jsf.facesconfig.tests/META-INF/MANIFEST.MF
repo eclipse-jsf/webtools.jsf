@@ -27,5 +27,6 @@ Require-Bundle: org.eclipse.core.resources;visibility:=reexport,
  org.eclipse.wst.validation,
  org.eclipse.wst.xml.core,
  org.junit,
- org.eclipse.jst.jsf.facesconfig
-Eclipse-AutoStart: true
+ org.eclipse.jst.jsf.facesconfig,
+ org.eclipse.wst.common.tests.collector
+Eclipse-LazyStart: true

@@ -33,13 +33,13 @@ public class MultipleFacesConfigFilesTest extends TestCase {
 	}
 	protected void setUp() throws Exception {
 		super.setUp();
-		WizardUtil.createProject();
+		WizardUtil.createProject(getName());
 	}
 	public static Test suite() {
 		return new TestSuite(MultipleFacesConfigFilesTest.class);
 	}
 	public void testReadFacesconfigFile() {
-		IProject project = WizardUtil.getTestProject();
+		IProject project = WizardUtil.getTestProject(getName());
 		FacesConfigArtifactEdit edit = null;
 		String sTestString = null;
 		try {
@@ -66,7 +66,7 @@ public class MultipleFacesConfigFilesTest extends TestCase {
 		}
 	}
 	public void testWriteFacesconfigFile() {
-		IProject project = WizardUtil.getTestProject();
+		IProject project = WizardUtil.getTestProject(getName());
 		FacesConfigArtifactEdit edit = null;
 		String sTestString = "";
 		try {

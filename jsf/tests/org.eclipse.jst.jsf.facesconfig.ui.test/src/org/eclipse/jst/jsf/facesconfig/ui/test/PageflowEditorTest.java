@@ -49,8 +49,7 @@ public class PageflowEditorTest extends FacesConfigEditorTest {
 	protected void setUp() throws Exception {
 		// TODO Auto-generated method stub
 		super.setUp();
-		((FacesConfigEditor) editor)
-				.setActiveEditorPage(PageflowEditor.PAGE_ID);
+		editor.setActiveEditorPage(PageflowEditor.PAGE_ID);
 	}
 
 	public void testAddElements() {
@@ -80,7 +79,7 @@ public class PageflowEditorTest extends FacesConfigEditorTest {
 		connectionCommand.setTarget(target);
 		PageflowLink link = PageflowFactory.eINSTANCE.createPFLink();
 		connectionCommand.setPFLink(link);
-		((FacesConfigEditor) editor).getDelegatingCommandStack().execute(
+		editor.getDelegatingCommandStack().execute(
 				connectionCommand);
 		return link;
 	}
@@ -91,13 +90,13 @@ public class PageflowEditorTest extends FacesConfigEditorTest {
 		AddNodeCommand command = new AddNodeCommand();
 		command.setParent(getPageflow());
 		command.setChild(source);
-		((FacesConfigEditor) editor).getDelegatingCommandStack().execute(
+		editor.getDelegatingCommandStack().execute(
 				command);
 		return source;
 	}
 
 	private FacesConfigType getFacesConfig() {
-		return ((FacesConfigEditor) editor).getFacesConfig();
+		return editor.getFacesConfig();
 	}
 
 	public void testDeleteNode() {
@@ -159,7 +158,7 @@ public class PageflowEditorTest extends FacesConfigEditorTest {
 	}
 
 	private Pageflow getPageflow() {
-		return ((FacesConfigEditor) editor).getPageflowPage().getPageflow();
+		return editor.getPageflowPage().getPageflow();
 	}
 
 	public void testChangeLinkTarget() {
@@ -191,20 +190,18 @@ public class PageflowEditorTest extends FacesConfigEditorTest {
 		PageflowPage page = TransformUtil.findPage(INDEX_JSP, pageflow);
 		PageflowLink link = (PageflowLink) page.getOutlinks().get(0);
 		command.setPFLink(link);
-		((FacesConfigEditor) editor)
-				.setActiveEditorPage(PageflowEditor.PAGE_ID);
-		((FacesConfigEditor) editor).getDelegatingCommandStack().execute(
-				command);
+		editor.setActiveEditorPage(PageflowEditor.PAGE_ID);
+		editor.getDelegatingCommandStack().execute(command);
 		Assert.isTrue(getFacesConfig().getNavigationRule().size() == 0);
 		Assert.isTrue(getPageflow().getLinks().size() == 0);
-		((FacesConfigEditor) editor).getDelegatingCommandStack().undo();
+		editor.getDelegatingCommandStack().undo();
 		Assert.isTrue(getFacesConfig().getNavigationRule().size() == 1);
 		Assert.isTrue(getPageflow().getLinks().size() == 1);
 	}
 
 	public void testRedo() {
 		testUndo();
-		((FacesConfigEditor) editor).getDelegatingCommandStack().redo();
+		editor.getDelegatingCommandStack().redo();
 		Assert.isTrue(getFacesConfig().getNavigationRule().size() == 0);
 		Assert.isTrue(getPageflow().getLinks().size() == 0);
 	}

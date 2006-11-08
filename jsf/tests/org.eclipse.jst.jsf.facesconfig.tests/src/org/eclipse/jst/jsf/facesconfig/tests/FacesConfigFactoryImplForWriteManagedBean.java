@@ -41,8 +41,8 @@ public class FacesConfigFactoryImplForWriteManagedBean extends TestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		WizardUtil.createProject();
-		project = WizardUtil.getTestProject();
+		WizardUtil.createProject(getName());
+		project = WizardUtil.getTestProject(getName());
 	}
 	
 	public void testWriteManagedBean() {
@@ -131,7 +131,7 @@ public class FacesConfigFactoryImplForWriteManagedBean extends TestCase {
 				edit.dispose();
 			}
 		}
-		String result = null;
+		// TODO: never read String result = null;
 		try {
 			edit = FacesConfigArtifactEdit.getFacesConfigArtifactEditForRead(
 					project, "WEB-INF/faces-config2.xml");
@@ -141,8 +141,9 @@ public class FacesConfigFactoryImplForWriteManagedBean extends TestCase {
 					ValidatorType lifecycle = (ValidatorType) lifecycles.get(i);
 					EList phaseListeners = lifecycle.getDisplayName();
 					for (int j=0; j<phaseListeners.size(); j++) {
-						DisplayNameType phaseListener = (DisplayNameType)phaseListeners.get(j);
-						result = phaseListener.getTextContent();
+						// TODO: never used?DisplayNameType phaseListener = (DisplayNameType)phaseListeners.get(j);
+						// TODO: never tested? result = phaseListener.getTextContent();
+                        // TODO: this break kills loop after 1 iteration?
 						break;
 					}
 				}

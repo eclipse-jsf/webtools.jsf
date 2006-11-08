@@ -14,7 +14,6 @@ import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.jst.jsf.facesconfig.emf.ApplicationFactoryType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 import org.eclipse.jst.jsf.facesconfig.emf.FactoryType;
@@ -31,8 +30,8 @@ public class FacesConfigFactoryImplForWriteLifecycle extends TestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		WizardUtil.createProject();
-		project = WizardUtil.getTestProject();
+		WizardUtil.createProject(getName());
+		project = WizardUtil.getTestProject(getName());
 	}
 
 	public void testWriteLifecycleToFileTwo() {
@@ -64,7 +63,7 @@ public class FacesConfigFactoryImplForWriteLifecycle extends TestCase {
 				edit.dispose();
 			}
 		}
-		String result = null;
+		//TODO: never read. String result = null;
 		try {
 			edit = FacesConfigArtifactEdit.getFacesConfigArtifactEditForRead(
 					project, "WEB-INF/faces-config2.xml");
@@ -74,9 +73,10 @@ public class FacesConfigFactoryImplForWriteLifecycle extends TestCase {
 					FactoryType lifecycle = (FactoryType) lifecycles.get(i);
 					EList phaseListeners = lifecycle.getApplicationFactory();
 					for (int j = 0; j < phaseListeners.size(); j++) {
-						ApplicationFactoryType phaseLis = (ApplicationFactoryType) phaseListeners
-								.get(j);
-						result = phaseLis.getTextContent();
+						//ApplicationFactoryType phaseLis = (ApplicationFactoryType) phaseListeners
+						//		.get(j);
+						// TODO: what's the point?
+                        // result = phaseLis.getTextContent();
 						break;
 					}
 				}
@@ -118,7 +118,7 @@ public class FacesConfigFactoryImplForWriteLifecycle extends TestCase {
 				edit1.dispose();
 			}
 		}
-		String result = null;
+		// TODO: never read: String result = null;
 		try {
 			edit1 = FacesConfigArtifactEdit.getFacesConfigArtifactEditForRead(
 					project, "WEB-INF/faces-config1.xml");
@@ -128,9 +128,10 @@ public class FacesConfigFactoryImplForWriteLifecycle extends TestCase {
 					FactoryType lifecycle = (FactoryType) lifecycles.get(i);
 					EList phaseListeners = lifecycle.getApplicationFactory();
 					for (int j = 0; j < phaseListeners.size(); j++) {
-						ApplicationFactoryType phaseLis = (ApplicationFactoryType) phaseListeners
-								.get(j);
-						result = phaseLis.getTextContent();
+                        //TODO: what's the point of this?
+//						ApplicationFactoryType phaseLis = (ApplicationFactoryType) phaseListeners
+//								.get(j);
+//						result = phaseLis.getTextContent();
 						break;
 					}
 				}

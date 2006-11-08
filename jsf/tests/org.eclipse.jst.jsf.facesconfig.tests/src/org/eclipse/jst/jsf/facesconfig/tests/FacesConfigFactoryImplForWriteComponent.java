@@ -21,7 +21,6 @@ import org.eclipse.jst.jsf.facesconfig.emf.ComponentClassType;
 import org.eclipse.jst.jsf.facesconfig.emf.ComponentType;
 import org.eclipse.jst.jsf.facesconfig.emf.ComponentTypeType;
 import org.eclipse.jst.jsf.facesconfig.emf.DefaultValueType;
-import org.eclipse.jst.jsf.facesconfig.emf.DescriptionType;
 import org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
@@ -43,8 +42,8 @@ public class FacesConfigFactoryImplForWriteComponent extends TestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		WizardUtil.createProject();
-		project = WizardUtil.getTestProject();
+		WizardUtil.createProject(getName());
+		project = WizardUtil.getTestProject(getName());
 	}
 	
 	public void testWriteComponent() {
@@ -150,7 +149,7 @@ public class FacesConfigFactoryImplForWriteComponent extends TestCase {
 				edit.dispose();
 			}
 		}
-		String result = null;
+		//String result = null;
 		try {
 			edit = FacesConfigArtifactEdit.getFacesConfigArtifactEditForRead(
 					project, "WEB-INF/faces-config2.xml");
@@ -160,8 +159,9 @@ public class FacesConfigFactoryImplForWriteComponent extends TestCase {
 					ComponentType comp = (ComponentType) components.get(i);
 					EList descr = comp.getDescription();
 					for (int j=0; j<descr.size(); j++) {
-						DescriptionType phaseListener = (DescriptionType)descr.get(j);
-						result = phaseListener.getLang();
+                        // TODO: ???
+						//DescriptionType phaseListener = (DescriptionType)descr.get(j);
+						//result = phaseListener.getLang();
 						break;
 					}
 				}

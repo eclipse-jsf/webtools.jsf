@@ -29,8 +29,8 @@ public class FacesConfigFactoryImplForReadEmptyNavigationRule extends TestCase
 	
 	protected void setUp() throws Exception {
 		super.setUp();
-		WizardUtil.createProject();
-		project = WizardUtil.getTestProject();
+		WizardUtil.createProject(getName());
+		project = WizardUtil.getTestProject(getName());
 	}
 /*
 * The following method is used to test for the empty 

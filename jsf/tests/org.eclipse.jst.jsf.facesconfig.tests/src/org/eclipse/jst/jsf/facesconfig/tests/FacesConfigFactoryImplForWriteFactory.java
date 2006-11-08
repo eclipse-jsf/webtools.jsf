@@ -40,8 +40,8 @@ public class FacesConfigFactoryImplForWriteFactory extends TestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		WizardUtil.createProject();
-		project = WizardUtil.getTestProject();
+		WizardUtil.createProject(getName());
+		project = WizardUtil.getTestProject(getName());
 	}
 	
 	public void testWriteFacesconfigFile() {
@@ -89,7 +89,7 @@ public class FacesConfigFactoryImplForWriteFactory extends TestCase {
 				edit.dispose();
 			}
 		}
-		String result = null;
+		//String result = null;
 		try {
 			edit = FacesConfigArtifactEdit.getFacesConfigArtifactEditForRead(
 					project, "WEB-INF/faces-config2.xml");
@@ -99,8 +99,9 @@ public class FacesConfigFactoryImplForWriteFactory extends TestCase {
 					FactoryType lifecycle = (FactoryType) lifecycles.get(i);
 					EList phaseListeners = lifecycle.getApplicationFactory();
 					for (int j=0; j<phaseListeners.size(); j++) {
-						ApplicationFactoryType phaseListener = (ApplicationFactoryType)phaseListeners.get(j);
-						result = phaseListener.getTextContent();
+                        //TODO:??
+					    // ApplicationFactoryType phaseListener = (ApplicationFactoryType)phaseListeners.get(j);
+						//result = phaseListener.getTextContent();
 						break;
 					}
 				}
@@ -117,7 +118,7 @@ public class FacesConfigFactoryImplForWriteFactory extends TestCase {
 	public void testWriteFactoryFacesContextFactory() {
 		//IProject project = WizardUtil.getTestProject();
 		FacesConfigArtifactEdit edit = null;
-		String sTestString = "";
+		//String sTestString = "";
 		String facesContextFactory=null;
 		
 		
@@ -147,7 +148,7 @@ public class FacesConfigFactoryImplForWriteFactory extends TestCase {
 				edit.dispose();
 			}
 		}
-		String result = null;
+		//String result = null;
 		try {
 			edit = FacesConfigArtifactEdit.getFacesConfigArtifactEditForRead(
 					project, "WEB-INF/faces-config2.xml");
@@ -157,8 +158,9 @@ public class FacesConfigFactoryImplForWriteFactory extends TestCase {
 					FactoryType factory = (FactoryType) factories.get(i);
 					EList facescContextFactories = factory.getFacesContextFactory();
 					for (int j=0; j<facescContextFactories.size(); j++) {
-						FacesContextFactoryType faacesContext = (FacesContextFactoryType)facescContextFactories.get(j);
-						result = faacesContext.getTextContent();
+                        // TODO:???
+//						FacesContextFactoryType faacesContext = (FacesContextFactoryType)facescContextFactories.get(j);
+//						result = faacesContext.getTextContent();
 						break;
 					}
 				}
@@ -174,7 +176,7 @@ public class FacesConfigFactoryImplForWriteFactory extends TestCase {
 	public void testWriteFactoryLifecycleFactory() {
 		//IProject project = WizardUtil.getTestProject();
 		FacesConfigArtifactEdit edit = null;
-		String sTestString = "";
+		//String sTestString = "";
 		String lifecycleFactory=null;
 		
 		
@@ -204,7 +206,7 @@ public class FacesConfigFactoryImplForWriteFactory extends TestCase {
 				edit.dispose();
 			}
 		}
-		String result = null;
+		//String result = null;
 		try {
 			edit = FacesConfigArtifactEdit.getFacesConfigArtifactEditForRead(
 					project, "WEB-INF/faces-config2.xml");
@@ -214,8 +216,9 @@ public class FacesConfigFactoryImplForWriteFactory extends TestCase {
 					FactoryType factory = (FactoryType) factories.get(i);
 					EList lifecycleFactories = factory.getLifecycleFactory();
 					for (int j=0; j<lifecycleFactories.size(); j++) {
-						LifecycleFactoryType lifecyle = (LifecycleFactoryType)lifecycleFactories.get(j);
-						result = lifecyle.getTextContent();
+                        // TODO: ???
+//						LifecycleFactoryType lifecyle = (LifecycleFactoryType)lifecycleFactories.get(j);
+//						result = lifecyle.getTextContent();
 						break;
 					}
 				}
@@ -234,7 +237,7 @@ public class FacesConfigFactoryImplForWriteFactory extends TestCase {
 	public void testWriteRednderKitFactory() {
 		//IProject project = WizardUtil.getTestProject();
 		FacesConfigArtifactEdit edit = null;
-		String sTestString = "";
+		//String sTestString = "";
 		String renderKitFactory=null;
 	
 		renderKitFactory = "render-kit-factory";
@@ -260,7 +263,7 @@ public class FacesConfigFactoryImplForWriteFactory extends TestCase {
 				edit.dispose();
 			}
 		}
-		String result = null;
+		//String result = null;
 		try {
 			edit = FacesConfigArtifactEdit.getFacesConfigArtifactEditForRead(
 					project, "WEB-INF/faces-config2.xml");
@@ -270,8 +273,9 @@ public class FacesConfigFactoryImplForWriteFactory extends TestCase {
 					FactoryType factory = (FactoryType) factories.get(i);
 					EList renderKitFactories = factory.getRenderKitFactory();
 					for (int j=0; j<renderKitFactories.size(); j++) {
-						RenderKitFactoryType render = (RenderKitFactoryType)renderKitFactories.get(j);
-						result = render.getTextContent();
+                        // TODO: ???
+//						RenderKitFactoryType render = (RenderKitFactoryType)renderKitFactories.get(j);
+//						result = render.getTextContent();
 						break;
 					}
 				}

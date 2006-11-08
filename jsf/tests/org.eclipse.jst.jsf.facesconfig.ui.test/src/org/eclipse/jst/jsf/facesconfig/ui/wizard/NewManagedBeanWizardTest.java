@@ -45,18 +45,18 @@ public class NewManagedBeanWizardTest extends FacesConfigEditorTest {
 	}
 
 	public void testManagedBeanWizard() {
-		NewManagedBeanWizard wizard = new NewManagedBeanWizard(project);
-		wizard.setForcePreviousAndNextButtons(true);
+		NewManagedBeanWizard wizard1 = new NewManagedBeanWizard(project);
+		wizard1.setForcePreviousAndNextButtons(true);
 
 		Shell shell = EditorPlugin.getActiveShell();
-		WizardDialog wizardDialog = new WizardDialog(shell, wizard);
+		WizardDialog wizardDialog = new WizardDialog(shell, wizard1);
 		wizardDialog.create();
 		wizardDialog.setBlockOnOpen(true);
 
-		assertTrue(wizard.getStartingPage() instanceof ManagedBeanClassSelectionPage);
-		ManagedBeanClassSelectionPage page1 = (ManagedBeanClassSelectionPage) wizard
+		assertTrue(wizard1.getStartingPage() instanceof ManagedBeanClassSelectionPage);
+		ManagedBeanClassSelectionPage page1 = (ManagedBeanClassSelectionPage) wizard1
 				.getStartingPage();
-		IWizardPage page2 = wizard.getNextPage(page1);
+		IWizardPage page2 = wizard1.getNextPage(page1);
 		assertTrue(page2 instanceof ManagedBeanPropertyPage);
 		// page1.searchRadioButton.setSelection(true);
 		// assertFalse(page1.isPageComplete());

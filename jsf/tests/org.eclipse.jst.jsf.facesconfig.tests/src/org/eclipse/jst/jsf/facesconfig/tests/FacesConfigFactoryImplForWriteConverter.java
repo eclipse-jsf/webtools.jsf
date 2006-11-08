@@ -38,8 +38,8 @@ public class FacesConfigFactoryImplForWriteConverter extends TestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		WizardUtil.createProject();
-		project = WizardUtil.getTestProject();
+		WizardUtil.createProject(getName());
+		project = WizardUtil.getTestProject(getName());
 	}
 	
 	public void testWriteApplication() {
@@ -124,7 +124,7 @@ public class FacesConfigFactoryImplForWriteConverter extends TestCase {
 				edit.dispose();
 			}
 		}
-		String result = null;
+		//String result = null;
 		try {
 			edit = FacesConfigArtifactEdit.getFacesConfigArtifactEditForRead(
 					project, "WEB-INF/faces-config2.xml");
@@ -134,8 +134,9 @@ public class FacesConfigFactoryImplForWriteConverter extends TestCase {
 					ConverterType lifecycle = (ConverterType) lifecycles.get(i);
 					EList phaseListeners = lifecycle.getDisplayName();
 					for (int j=0; j<phaseListeners.size(); j++) {
-						DisplayNameType phaseListener = (DisplayNameType)phaseListeners.get(j);
-						result = phaseListener.getTextContent();
+                        // TODO: ??
+//						DisplayNameType phaseListener = (DisplayNameType)phaseListeners.get(j);
+//						result = phaseListener.getTextContent();
 						break;
 					}
 				}

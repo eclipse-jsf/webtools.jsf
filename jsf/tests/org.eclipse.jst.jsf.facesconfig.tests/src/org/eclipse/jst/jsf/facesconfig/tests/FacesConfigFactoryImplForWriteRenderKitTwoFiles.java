@@ -61,8 +61,8 @@ public class FacesConfigFactoryImplForWriteRenderKitTwoFiles extends TestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		WizardUtil.createProject();
-		project = WizardUtil.getTestProject();
+		WizardUtil.createProject(getName());
+		project = WizardUtil.getTestProject(getName());
 	}
 
 	public void testWriteRenderKit() {
@@ -275,9 +275,9 @@ public class FacesConfigFactoryImplForWriteRenderKitTwoFiles extends TestCase {
 							.get(i);
 					EList rendererList = renderer.getRenderer();
 					for (int j = 0; j < rendererList.size(); j++) {
-						RendererType rendererType = (RendererType) rendererList
+						RendererType rendererType1 = (RendererType) rendererList
 								.get(j);
-						EList names = rendererType.getDisplayName();
+						EList names = rendererType1.getDisplayName();
 						for (int k = 0; k < names.size(); k++) {
 							DisplayNameType displayName = (DisplayNameType) names
 									.get(k);
@@ -307,12 +307,12 @@ public class FacesConfigFactoryImplForWriteRenderKitTwoFiles extends TestCase {
 							.get(i);
 					EList rendererList = renderer.getRenderer();
 					for (int j = 0; j < rendererList.size(); j++) {
-						RendererType rendererType = (RendererType) rendererList
+						RendererType rendererType1 = (RendererType) rendererList
 								.get(j);
-						EList icons = rendererType.getIcon();
+						EList icons = rendererType1.getIcon();
 						for (int k = 0; k < icons.size(); k++) {
-							IconType icon = (IconType) icons.get(k);
-							rendererIconResult = icon.getLargeIcon().getTextContent();
+							IconType icon1 = (IconType) icons.get(k);
+							rendererIconResult = icon1.getLargeIcon().getTextContent();
 							assertEquals(rendIcon, rendererIconResult);
 							break;
 						}
@@ -338,9 +338,9 @@ public class FacesConfigFactoryImplForWriteRenderKitTwoFiles extends TestCase {
 							.get(i);
 					EList rendererList = renderer.getRenderer();
 					for (int j = 0; j < rendererList.size(); j++) {
-						RendererType rendererType = (RendererType) rendererList
+						RendererType rendererType1 = (RendererType) rendererList
 								.get(j);
-						rendererComponentFmaily = rendererType.getComponentFamily().getTextContent();
+						rendererComponentFmaily = rendererType1.getComponentFamily().getTextContent();
 						assertEquals(rendererFamily, rendererComponentFmaily);
 						break;
 					}
@@ -365,9 +365,9 @@ public class FacesConfigFactoryImplForWriteRenderKitTwoFiles extends TestCase {
 							.get(i);
 					EList rendererList = renderer.getRenderer();
 					for (int j = 0; j < rendererList.size(); j++) {
-						RendererType rendererType = (RendererType) rendererList
+						RendererType rendererType1 = (RendererType) rendererList
 								.get(j);
-						rendererTyp = rendererType.getRendererType().getTextContent();
+						rendererTyp = rendererType1.getRendererType().getTextContent();
 						assertEquals("renderer-type", rendererTyp);
 						break;
 					}
@@ -392,9 +392,9 @@ public class FacesConfigFactoryImplForWriteRenderKitTwoFiles extends TestCase {
 							.get(i);
 					EList rendererList = renderer.getRenderer();
 					for (int j = 0; j < rendererList.size(); j++) {
-						RendererType rendererType = (RendererType) rendererList
+						RendererType rendererType1 = (RendererType) rendererList
 								.get(j);
-						rendererClassResult = rendererType.getRendererClass().getTextContent();
+						rendererClassResult = rendererType1.getRendererClass().getTextContent();
 						assertEquals(rendererClass, rendererClassResult);
 						break;
 					}
@@ -420,9 +420,9 @@ public class FacesConfigFactoryImplForWriteRenderKitTwoFiles extends TestCase {
 							.get(i);
 					EList rendererList = renderer.getRenderer();
 					for (int j = 0; j < rendererList.size(); j++) {
-						RendererType rendererType = (RendererType) rendererList
+						RendererType rendererType1 = (RendererType) rendererList
 								.get(j);
-						EList attribute = rendererType.getAttribute();
+						EList attribute = rendererType1.getAttribute();
 						for (int k = 0; k < attribute.size(); k++) {
 							AttributeType attTyp = (AttributeType) attribute
 									.get(k);
@@ -457,16 +457,16 @@ public class FacesConfigFactoryImplForWriteRenderKitTwoFiles extends TestCase {
 							.get(i);
 					EList rendererList = renderer.getRenderer();
 					for (int j = 0; j < rendererList.size(); j++) {
-						RendererType rendererType = (RendererType) rendererList
+						RendererType rendererType1 = (RendererType) rendererList
 								.get(j);
-						EList attribute = rendererType.getAttribute();
+						EList attribute = rendererType1.getAttribute();
 						for (int k = 0; k < attribute.size(); k++) {
 							AttributeType attTyp = (AttributeType) attribute
 									.get(k);
 							EList icons = attTyp.getIcon();
 							for (int z = 0; z < icons.size(); z++) {
-								IconType icon = (IconType) icons.get(k);
-								iconResult = icon.getLargeIcon().getTextContent();
+								IconType icon1 = (IconType) icons.get(k);
+								iconResult = icon1.getLargeIcon().getTextContent();
 								assertEquals(attrIcon, iconResult);
 								break;
 							}
@@ -493,9 +493,9 @@ public class FacesConfigFactoryImplForWriteRenderKitTwoFiles extends TestCase {
 							.get(i);
 					EList rendererList = renderer.getRenderer();
 					for (int j = 0; j < rendererList.size(); j++) {
-						RendererType rendererType = (RendererType) rendererList
+						RendererType rendererType1 = (RendererType) rendererList
 								.get(j);
-						EList attribute = rendererType.getAttribute();
+						EList attribute = rendererType1.getAttribute();
 						for (int k = 0; k < attribute.size(); k++) {
 							AttributeType attTyp = (AttributeType) attribute
 									.get(k);
@@ -525,9 +525,9 @@ public class FacesConfigFactoryImplForWriteRenderKitTwoFiles extends TestCase {
 							.get(i);
 					EList rendererList = renderer.getRenderer();
 					for (int j = 0; j < rendererList.size(); j++) {
-						RendererType rendererType = (RendererType) rendererList
+						RendererType rendererType1 = (RendererType) rendererList
 								.get(j);
-						EList attribute = rendererType.getAttribute();
+						EList attribute = rendererType1.getAttribute();
 						for (int k = 0; k < attribute.size(); k++) {
 							AttributeType attTyp = (AttributeType) attribute
 									.get(k);
@@ -558,9 +558,9 @@ public class FacesConfigFactoryImplForWriteRenderKitTwoFiles extends TestCase {
 							.get(i);
 					EList rendererList = renderer.getRenderer();
 					for (int j = 0; j < rendererList.size(); j++) {
-						RendererType rendererType = (RendererType) rendererList
+						RendererType rendererType1 = (RendererType) rendererList
 								.get(j);
-						EList attribute = rendererType.getAttribute();
+						EList attribute = rendererType1.getAttribute();
 						for (int k = 0; k < attribute.size(); k++) {
 							AttributeType attTyp = (AttributeType) attribute
 									.get(k);
@@ -591,9 +591,9 @@ public class FacesConfigFactoryImplForWriteRenderKitTwoFiles extends TestCase {
 							.get(i);
 					EList rendererList = renderer.getRenderer();
 					for (int j = 0; j < rendererList.size(); j++) {
-						RendererType rendererType = (RendererType) rendererList
+						RendererType rendererType1 = (RendererType) rendererList
 								.get(j);
-						EList attribute = rendererType.getAttribute();
+						EList attribute = rendererType1.getAttribute();
 						for (int k = 0; k < attribute.size(); k++) {
 							AttributeType attTyp = (AttributeType) attribute
 									.get(k);
@@ -830,9 +830,9 @@ public class FacesConfigFactoryImplForWriteRenderKitTwoFiles extends TestCase {
 							.get(i);
 					EList rendererList = renderer.getRenderer();
 					for (int j = 0; j < rendererList.size(); j++) {
-						RendererType rendererType = (RendererType) rendererList
+						RendererType rendererType1 = (RendererType) rendererList
 								.get(j);
-						EList names = rendererType.getDisplayName();
+						EList names = rendererType1.getDisplayName();
 						for (int k = 0; k < names.size(); k++) {
 							DisplayNameType displayName = (DisplayNameType) names
 									.get(k);
@@ -862,12 +862,12 @@ public class FacesConfigFactoryImplForWriteRenderKitTwoFiles extends TestCase {
 							.get(i);
 					EList rendererList = renderer.getRenderer();
 					for (int j = 0; j < rendererList.size(); j++) {
-						RendererType rendererType = (RendererType) rendererList
+						RendererType rendererType1 = (RendererType) rendererList
 								.get(j);
-						EList icons = rendererType.getIcon();
+						EList icons = rendererType1.getIcon();
 						for (int k = 0; k < icons.size(); k++) {
-							IconType icon = (IconType) icons.get(k);
-							rendererIconResult = icon.getLargeIcon().getTextContent();
+							IconType icon1 = (IconType) icons.get(k);
+							rendererIconResult = icon1.getLargeIcon().getTextContent();
 							assertEquals(rendIcon, rendererIconResult);
 							break;
 						}
@@ -893,9 +893,9 @@ public class FacesConfigFactoryImplForWriteRenderKitTwoFiles extends TestCase {
 							.get(i);
 					EList rendererList = renderer.getRenderer();
 					for (int j = 0; j < rendererList.size(); j++) {
-						RendererType rendererType = (RendererType) rendererList
+						RendererType rendererType1 = (RendererType) rendererList
 								.get(j);
-						rendererComponentFmaily = rendererType.getComponentFamily().getTextContent();
+						rendererComponentFmaily = rendererType1.getComponentFamily().getTextContent();
 						assertEquals(rendererFamily, rendererComponentFmaily);
 						break;
 					}
@@ -920,9 +920,9 @@ public class FacesConfigFactoryImplForWriteRenderKitTwoFiles extends TestCase {
 							.get(i);
 					EList rendererList = renderer.getRenderer();
 					for (int j = 0; j < rendererList.size(); j++) {
-						RendererType rendererType = (RendererType) rendererList
+						RendererType rendererType1 = (RendererType) rendererList
 								.get(j);
-						rendererTyp = rendererType.getRendererType().getTextContent();
+						rendererTyp = rendererType1.getRendererType().getTextContent();
 						assertEquals("renderer-type", rendererTyp);
 						break;
 					}
@@ -947,9 +947,9 @@ public class FacesConfigFactoryImplForWriteRenderKitTwoFiles extends TestCase {
 							.get(i);
 					EList rendererList = renderer.getRenderer();
 					for (int j = 0; j < rendererList.size(); j++) {
-						RendererType rendererType = (RendererType) rendererList
+						RendererType rendererType1 = (RendererType) rendererList
 								.get(j);
-						rendererClassResult = rendererType.getRendererClass().getTextContent();
+						rendererClassResult = rendererType1.getRendererClass().getTextContent();
 						assertEquals(rendererClass, rendererClassResult);
 						break;
 					}
@@ -975,9 +975,9 @@ public class FacesConfigFactoryImplForWriteRenderKitTwoFiles extends TestCase {
 							.get(i);
 					EList rendererList = renderer.getRenderer();
 					for (int j = 0; j < rendererList.size(); j++) {
-						RendererType rendererType = (RendererType) rendererList
+						RendererType rendererType1 = (RendererType) rendererList
 								.get(j);
-						EList attribute = rendererType.getAttribute();
+						EList attribute = rendererType1.getAttribute();
 						for (int k = 0; k < attribute.size(); k++) {
 							AttributeType attTyp = (AttributeType) attribute
 									.get(k);
@@ -1012,16 +1012,16 @@ public class FacesConfigFactoryImplForWriteRenderKitTwoFiles extends TestCase {
 							.get(i);
 					EList rendererList = renderer.getRenderer();
 					for (int j = 0; j < rendererList.size(); j++) {
-						RendererType rendererType = (RendererType) rendererList
+						RendererType rendererType1 = (RendererType) rendererList
 								.get(j);
-						EList attribute = rendererType.getAttribute();
+						EList attribute = rendererType1.getAttribute();
 						for (int k = 0; k < attribute.size(); k++) {
 							AttributeType attTyp = (AttributeType) attribute
 									.get(k);
 							EList icons = attTyp.getIcon();
 							for (int z = 0; z < icons.size(); z++) {
-								IconType icon = (IconType) icons.get(k);
-								iconResult = icon.getLargeIcon().getTextContent();
+								IconType icon1 = (IconType) icons.get(k);
+								iconResult = icon1.getLargeIcon().getTextContent();
 								assertEquals(attrIcon, iconResult);
 								break;
 							}
@@ -1048,9 +1048,9 @@ public class FacesConfigFactoryImplForWriteRenderKitTwoFiles extends TestCase {
 							.get(i);
 					EList rendererList = renderer.getRenderer();
 					for (int j = 0; j < rendererList.size(); j++) {
-						RendererType rendererType = (RendererType) rendererList
+						RendererType rendererType1 = (RendererType) rendererList
 								.get(j);
-						EList attribute = rendererType.getAttribute();
+						EList attribute = rendererType1.getAttribute();
 						for (int k = 0; k < attribute.size(); k++) {
 							AttributeType attTyp = (AttributeType) attribute
 									.get(k);
@@ -1080,9 +1080,9 @@ public class FacesConfigFactoryImplForWriteRenderKitTwoFiles extends TestCase {
 							.get(i);
 					EList rendererList = renderer.getRenderer();
 					for (int j = 0; j < rendererList.size(); j++) {
-						RendererType rendererType = (RendererType) rendererList
+						RendererType rendererType1 = (RendererType) rendererList
 								.get(j);
-						EList attribute = rendererType.getAttribute();
+						EList attribute = rendererType1.getAttribute();
 						for (int k = 0; k < attribute.size(); k++) {
 							AttributeType attTyp = (AttributeType) attribute
 									.get(k);
@@ -1113,9 +1113,9 @@ public class FacesConfigFactoryImplForWriteRenderKitTwoFiles extends TestCase {
 							.get(i);
 					EList rendererList = renderer.getRenderer();
 					for (int j = 0; j < rendererList.size(); j++) {
-						RendererType rendererType = (RendererType) rendererList
+						RendererType rendererType1 = (RendererType) rendererList
 								.get(j);
-						EList attribute = rendererType.getAttribute();
+						EList attribute = rendererType1.getAttribute();
 						for (int k = 0; k < attribute.size(); k++) {
 							AttributeType attTyp = (AttributeType) attribute
 									.get(k);
@@ -1146,9 +1146,9 @@ public class FacesConfigFactoryImplForWriteRenderKitTwoFiles extends TestCase {
 							.get(i);
 					EList rendererList = renderer.getRenderer();
 					for (int j = 0; j < rendererList.size(); j++) {
-						RendererType rendererType = (RendererType) rendererList
+						RendererType rendererType1 = (RendererType) rendererList
 								.get(j);
-						EList attribute = rendererType.getAttribute();
+						EList attribute = rendererType1.getAttribute();
 						for (int k = 0; k < attribute.size(); k++) {
 							AttributeType attTyp = (AttributeType) attribute
 									.get(k);

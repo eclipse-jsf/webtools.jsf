@@ -105,7 +105,7 @@ public class TestUtil {
 		try {
 			project.build(IncrementalProjectBuilder.FULL_BUILD, monitor);
 		} catch (CoreException e) {
-
+		    e.printStackTrace(System.err);
 		}
 	}
 

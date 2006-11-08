@@ -17,7 +17,6 @@ import org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 import org.eclipse.jst.jsf.facesconfig.emf.IconType;
-import org.eclipse.jst.jsf.facesconfig.emf.LargeIconType;
 import org.eclipse.jst.jsf.facesconfig.emf.ReferencedBeanClassType;
 import org.eclipse.jst.jsf.facesconfig.emf.ReferencedBeanNameType;
 import org.eclipse.jst.jsf.facesconfig.emf.ReferencedBeanType;
@@ -34,8 +33,8 @@ public class FacesConfigFactoryImplForWriteReferencedBean extends TestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		WizardUtil.createProject();
-		project = WizardUtil.getTestProject();
+		WizardUtil.createProject(getName());
+		project = WizardUtil.getTestProject(getName());
 	}
 	
 	public void testWriteReferencedBeanToFileTwo() {
