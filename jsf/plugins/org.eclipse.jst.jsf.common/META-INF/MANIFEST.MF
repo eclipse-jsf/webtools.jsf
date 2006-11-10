@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %plugin.name
+Bundle-SymbolicName: org.eclipse.jst.jsf.common;singleton:=true
+Bundle-Version: 0.5.0.qualifier
+Bundle-Activator: org.eclipse.jst.jsf.common.JSFCommonPlugin
+Bundle-Localization: plugin
+Export-Package: org.eclipse.jst.jsf.context.internal.provisional,
+ org.eclipse.jst.jsf.context.resolver.internal.provisional,
+ org.eclipse.jst.jsf.context.structureddocument.internal.provisional,
+ org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional,
+ org.eclipse.jst.jsf.context.resolver.structureddocument.internal;x-friends:="org.eclipse.jst.jsf.contentassist.el, org.eclipse.jst.jsf.contentassist.tests",
+ org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional,
+ org.eclipse.jst.jsf.contentmodel.annotation.internal;x-friends:="org.eclipse.jst.jsf.metadata.tests"
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.wst.sse.core,
+ org.eclipse.jst.jsp.core,
+ org.eclipse.core.resources,
+ org.eclipse.jface.text,
+ org.eclipse.wst.sse.ui,
+ org.eclipse.wst.xml.core
+Eclipse-LazyStart: true
+Bundle-Vendor: %plugin.provider
