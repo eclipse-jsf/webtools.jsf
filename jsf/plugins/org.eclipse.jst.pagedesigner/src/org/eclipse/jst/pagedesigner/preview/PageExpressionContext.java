@@ -30,9 +30,9 @@ import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.common.logging.Logger;
+import org.eclipse.jst.pagedesigner.common.utils.LoadBundleUtil;
 import org.eclipse.jst.pagedesigner.common.utils.ResourceUtils;
 import org.eclipse.jst.pagedesigner.jsp.core.el.JSFELParserHelper;
-import org.eclipse.jst.pagedesigner.jsp.core.el.LoadBundleUtil;
 import org.eclipse.jst.pagedesigner.jsp.core.pagevar.IPageVariablesProvider;
 import org.eclipse.jst.pagedesigner.jsp.core.pagevar.IVariableInfo;
 
