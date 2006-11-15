@@ -11,7 +11,6 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart;
 
-import org.eclipse.draw2d.PositionConstants;
 
 /**
  * This interface can be used to set NodeEditPart's preference
@@ -24,9 +23,9 @@ public interface INodePreference extends IFigurePreference {
 
 	/**
 	 * Sets the text placement of the label relative to its icon. The default is
-	 * {@link PositionConstants#EAST}. Other possible values are
-	 * {@link PositionConstants#NORTH}, {@link PositionConstants#SOUTH} and
-	 * {@link PositionConstants#WEST}.
+	 * {@link org.eclipse.draw2d.PositionConstants#EAST}. Other possible values are
+	 * {@link org.eclipse.draw2d.PositionConstants#NORTH}, {@link org.eclipse.draw2d.PositionConstants#SOUTH} and
+	 * {@link org.eclipse.draw2d.PositionConstants#WEST}.
 	 * 
 	 * @param where
 	 *            the text placement

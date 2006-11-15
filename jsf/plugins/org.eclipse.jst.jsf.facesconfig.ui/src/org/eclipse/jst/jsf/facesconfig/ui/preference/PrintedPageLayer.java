@@ -16,7 +16,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.draw2d.Figure;
-import org.eclipse.draw2d.FreeformFigure;
 import org.eclipse.draw2d.FreeformLayer;
 import org.eclipse.draw2d.FreeformLayeredPane;
 import org.eclipse.draw2d.RectangleFigure;
@@ -81,7 +80,7 @@ public class PrintedPageLayer extends FreeformLayer {
 	}
 
 	/**
-	 * @see FreeformFigure#setFreeformBounds(Rectangle)
+	 * @see org.eclipse.draw2d.FreeformFigure#setFreeformBounds(Rectangle)
 	 */
 	public void setFreeformBounds(Rectangle bounds) {
 		if (!busy && getParent() instanceof FreeformLayeredPane

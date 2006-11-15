@@ -11,7 +11,6 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.facesconfig.ui.preference;
 
-import org.eclipse.draw2d.Border;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.FigureUtilities;
 import org.eclipse.draw2d.FrameBorder;
@@ -73,7 +72,7 @@ public class TabbedWindowBorder extends FrameBorder {
 		}
 
 		/**
-		 * @see Border#paint(IFigure, Graphics, Insets)
+		 * @see org.eclipse.draw2d.Border#paint(IFigure, Graphics, Insets)
 		 */
 		public void paint(Composite comp, GC gc, Insets insets) {
 			Color[] tl = getMyScheme().getHighlight();
