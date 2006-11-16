@@ -26,9 +26,9 @@ import org.w3c.dom.NodeList;
  * @version 1.5
  */
 public class MoveNodeCommand extends DesignerCommand {
-	IDOMPosition _insertPosition;
+	private IDOMPosition insertPosition;
 
-	Node _originalNode;
+	private Node originalNode;
 
 	/**
 	 * @param label
@@ -38,8 +38,8 @@ public class MoveNodeCommand extends DesignerCommand {
 			IDOMPosition insertionPoint, Node originalNode) {
 		super(
 				CommandResources.getString("MoveNodeCommand.Label.MoveNode"), viewer); //$NON-NLS-1$
-		this._insertPosition = insertionPoint;
-		this._originalNode = originalNode;
+		this.insertPosition = insertionPoint;
+		this.originalNode = originalNode;
 	}
 
 	/*
@@ -48,36 +48,43 @@ public class MoveNodeCommand extends DesignerCommand {
 	 * @see org.eclipse.jst.pagedesigner.commands.DesignerCommand#doExecute()
 	 */
 	protected void doExecute() {
-		Node originalParent = _originalNode.getParentNode();
-		if (originalParent == null) {
-			return;
-		}
-		// when remove the _originalNode, may affect the insertionPosition.
-		if (originalParent == _insertPosition.getContainerNode()) {
-			// under same parent, may affect it.
-			int insertIndex = _insertPosition.getOffset();
-			int nodeIndex = -1;
-			NodeList list = originalParent.getChildNodes();
-			for (int i = 0, length = list.getLength(); i < length; i++) {
-				if (_originalNode == list.item(i)) {
-					nodeIndex = i;
+		getModel().beginRecording(this);
+		try {
+			Node originalParent = originalNode.getParentNode();
+			if (originalParent == null) {
+				return;
+			}
+			// when remove the _originalNode, may affect the insertionPosition.
+			if (originalParent == insertPosition.getContainerNode()) {
+				// under same parent, may affect it.
+				int insertIndex = insertPosition.getOffset();
+				int nodeIndex = -1;
+				NodeList list = originalParent.getChildNodes();
+				for (int i = 0, length = list.getLength(); i < length; i++) {
+					if (originalNode == list.item(i)) {
+						nodeIndex = i;
+					}
+				}
+				if (nodeIndex == -1) {
+					return; // should not happen.
+				}
+				if (insertIndex < nodeIndex) {
+					insertPosition = new DOMPosition(originalParent,
+							insertIndex);
+				} else if (insertIndex == nodeIndex
+						|| insertIndex == nodeIndex + 1) {
+					// move to same position, do nothing.
+					return;
+				} else {
+					insertPosition = new DOMPosition(originalParent,
+							insertIndex - 1);
 				}
 			}
-			if (nodeIndex == -1) {
-				return; // should not happen.
-			}
-			if (insertIndex < nodeIndex) {
-				_insertPosition = new DOMPosition(originalParent, insertIndex);
-			} else if (insertIndex == nodeIndex || insertIndex == nodeIndex + 1) {
-				// move to same position, do nothing.
-				return;
-			} else {
-				_insertPosition = new DOMPosition(originalParent,
-						insertIndex - 1);
-			}
+			originalParent.removeChild(originalNode);
+			DOMUtil.insertNode(insertPosition, originalNode);
+		} finally {
+			getModel().endRecording(this);
 		}
-		originalParent.removeChild(_originalNode);
-		DOMUtil.insertNode(_insertPosition, _originalNode);
 	}
 
 	/*
@@ -86,6 +93,6 @@ public class MoveNodeCommand extends DesignerCommand {
 	 * @see org.eclipse.jst.pagedesigner.commands.DesignerCommand#getAfterCommandDesignerSelection()
 	 */
 	protected ISelection getAfterCommandDesignerSelection() {
-		return toDesignSelection(_originalNode);
+		return toDesignSelection(originalNode);
 	}
 }
