@@ -122,6 +122,7 @@ public class JSFCoreUtilHelper {
 	 * @param name
 	 * @param relPathToArchives
 	 * @param isImpl
+	 * @param isFakedPlugginLib 
 	 * @return JSFLibrary
 	 */
 	public static JSFLibrary constructJSFLib(
@@ -174,6 +175,7 @@ public class JSFCoreUtilHelper {
 	 * @param name
 	 * @param relPathToArchives
 	 * @param isImpl
+	 * @param isFakedPlugginLib 
 	 * @return JSFLibrary
 	 */
 	public static JSFLibrary constructJSFLib(
