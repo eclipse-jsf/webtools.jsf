@@ -1,0 +1,171 @@
+package beans;
+
+import java.math.BigInteger;
+import java.math.BigDecimal;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+
+public class MyBeanSettable
+{
+	public String getStringProperty()
+	{
+		return "";
+	}
+	
+	public void setStringProperty(String stringProp)
+	{
+		
+	}
+
+	public double getDoubleProperty()
+	{
+		return 1.04;
+	}
+	
+	public void setDoubleProperty(double newValue)
+	{
+		// doesn't matter what happens here
+	}
+
+	public void setIntegerProperty(int integerProp)
+	{
+		
+	}
+
+	public int getIntegerProperty()
+	{
+		return 0;
+	}
+
+	public boolean getBooleanProperty()
+	{
+		return false;
+	}
+	
+	public void setBooleanProperty(boolean booleanProp)
+	{
+		
+	}
+	
+	public Map getMapProperty()
+	{
+		return Collections.EMPTY_MAP;
+	}
+	
+	public void setMapProperty(Map mapProperty)
+	{
+		
+	}
+	
+	public void setStringArrayProperty(String[] stringArrayProperty)
+	{
+		
+	}
+	
+	public String[] getStringArrayProperty()
+	{
+		return new String[0];
+	}
+	
+	public Collection getCollectionProperty()
+	{
+		return Collections.EMPTY_LIST;
+	}
+	
+	public void setCollectionProperty(Collection collectionProp)
+	{
+		
+	}
+
+	public void setListProperty(List listProp)
+	{
+		
+	}
+	
+	public List getListProperty()
+	{
+		return Collections.EMPTY_LIST;
+	}
+
+	public void setComparablePropety(Comparable comp)
+	{
+		
+	}
+	
+	public Comparable getComparableProperty()
+	{
+		return null;
+	}
+	
+	public MyBeanSettable recursiveCall()
+	{
+		return this;
+	}
+	
+	public String getWritableStringProperty()
+	{
+		return "";
+	}
+	
+	public void setWritableStringProperty(String newValue)
+	{
+		;
+	}
+	
+	public BigInteger getBigIntegerProperty()
+	{
+		return BigInteger.ONE;
+	}
+	
+	public void setBigIntegerProperty(BigInteger newValue)
+	{
+		// doesn't matter what happens here
+	}
+	
+	public BigDecimal getBigDoubleProperty()
+	{
+		return new BigDecimal(0.5);
+	}
+	
+	public void setBigDoubleProperty(BigDecimal newValue)
+	{
+		// doesn't matter what happens here
+	}
+	
+	public void validate(FacesContext facesContext, 
+					      UIComponent component,
+					      Object object
+					      )
+	{
+		
+	}
+
+	public void validate2(FacesContext facesContext, 
+		      UIComponent component,
+		      Object[] object
+		      )
+	{
+	
+	}	
+	
+	public MyBeanSettable getSelf()
+	{
+		return this;
+	}
+	
+	public boolean isIsStyleBooleanProperty()
+	{
+		return false;
+	}
+	
+	public void setIsStyleBooleanProperty(boolean styleProp)
+	{
+		
+	}
+}

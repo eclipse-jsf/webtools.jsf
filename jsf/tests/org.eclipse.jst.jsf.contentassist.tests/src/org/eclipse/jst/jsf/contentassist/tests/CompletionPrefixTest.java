@@ -38,7 +38,25 @@ public class CompletionPrefixTest extends TestCase
     
     /* expressions using the ['yyy'] map syntax */
     private final static String xxxMapYYY = "xxx['yyy']";
+    private final static String xxxMapXXXExpr = "xxx[XXX]";
+    private final static String xxxMapXXXDotExpr = "xxx[XXX.]";
+    private final static String xxxMapXXXDotYYYExpr = "xxx[XXX.YYY]";
+    private final static String xxxMapXXXDotYYYDotExpr = "xxx[XXX.YYY.]";
+    private final static String xxxMapXXXDotYYYDotZZZExpr = "xxx[XXX.YYY.ZZZ]";
     
+    
+    
+    /**
+     * Test passing null to the parser
+     */
+    public void testPrefix_null()
+    {
+        /* Test passing a null expression */
+        {
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(1, null);
+            assertNull(prefix);
+        }
+    }
     
     /**
      * 
@@ -507,5 +525,147 @@ public class CompletionPrefixTest extends TestCase
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION
                     && "xxx['yyy']".equals(prefix.getValue()));
         }
+    }
+    
+    /**
+     * Test completion inside an array
+     */
+    public void testPrefix_xxxMapXXXDotExpr()
+    {
+        /* Test x x x [ X X X ] */
+        /*             ^ */
+        {
+            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(5, xxxMapXXXExpr);
+
+            assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION
+                    && "XXX".equals(prefix.getValue()));
+        }
+
+        /* Test x x x [ X X X ] */
+        /*               ^ */
+        {
+            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(6, xxxMapXXXExpr);
+
+            assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION
+                    && "XXX".equals(prefix.getValue()));
+        }
+
+        /* Test x x x [ X X X ] */
+        /*                   ^*/
+        {
+            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(8, xxxMapXXXExpr);
+
+            assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION
+                    && "XXX".equals(prefix.getValue()));
+        }
+    }
+    
+    /**
+     * Tests suffix completions on dots inside brackets
+     */
+    public void testSuffix_xxxMapXXXDotExpr()
+    {
+        /* Test x x x [ X X X . ] */
+        /*                   ^*/
+        {
+            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(8, xxxMapXXXDotExpr);
+
+            assertEquals(ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION, prefix.getType()); 
+            assertEquals("XXX", prefix.getValue());
+        }
+        
+        /* Test x x x [ X X X . ] */
+        /*                     ^*/
+        {
+            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(9, xxxMapXXXDotExpr);
+
+            assertEquals(ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION, prefix.getType()); 
+            assertEquals("XXX", prefix.getValue());
+        }
+    }
+    
+    /**
+     * Test dot completion inside an array expression
+     */
+    public void testSuffix_xxxMapXXXDotYYYExpr()
+    {
+        /* Test x x x [ X X X . Y Y Y ] */
+        /*                     ^*/
+        {
+            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(9, xxxMapXXXDotYYYExpr);
+
+            assertEquals(ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION, prefix.getType()); 
+            assertEquals("XXX", prefix.getValue());
+        }
+
+        /* Test x x x [ X X X . Y Y Y ] */
+        /*                       ^*/
+        {
+            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(10, xxxMapXXXDotYYYExpr);
+
+            assertEquals(ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION, prefix.getType()); 
+            assertEquals("XXX", prefix.getValue());
+        }
+        
+        /* Test x x x [ X X X . Y Y Y ] */
+        /*                           ^*/
+        {
+            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(12, xxxMapXXXDotYYYExpr);
+
+            assertEquals(ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION, prefix.getType()); 
+            assertEquals("XXX", prefix.getValue());
+        }
+
+        /* Test x x x [ X X X . Y Y Y . ] */
+        /*                           ^*/
+        {
+            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(12, xxxMapXXXDotYYYDotExpr);
+
+            assertEquals(ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION, prefix.getType()); 
+            assertEquals("XXX", prefix.getValue());
+        }
+
+        /* Test x x x [ X X X . Y Y Y . ] */
+        /*                             ^*/
+        {
+            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(13, xxxMapXXXDotYYYDotExpr);
+
+            assertEquals(ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION, prefix.getType()); 
+            assertEquals("XXX.YYY", prefix.getValue());
+        }
+    }
+    
+    /**
+     * Test dot completion on XXX.YYY.ZZZ type expressions
+     */
+    public void testSuffix_xxxMapXXXDotYYYDotZZZExpr()
+    {
+        /* Test x x x [ X X X . Y Y Y . Z Z Z] */
+        /*                             ^*/
+        {
+            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(13, xxxMapXXXDotYYYDotZZZExpr);
+
+            assertEquals(ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION, prefix.getType()); 
+            assertEquals("XXX.YYY", prefix.getValue());
+        }
+
+        /* Test x x x [ X X X . Y Y Y . Z Z Z] */
+        /*                               ^*/
+        {
+            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(14, xxxMapXXXDotYYYDotZZZExpr);
+
+            assertEquals(ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION, prefix.getType()); 
+            assertEquals("XXX.YYY", prefix.getValue());
+        }
+
+        /* Test x x x [ X X X . Y Y Y . Z Z Z ] */
+        /*                                   ^*/
+        {
+            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(16, xxxMapXXXDotYYYDotZZZExpr);
+
+            assertEquals(ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION, prefix.getType()); 
+            assertEquals("XXX.YYY", prefix.getValue());
+        }
+
     }
 }
