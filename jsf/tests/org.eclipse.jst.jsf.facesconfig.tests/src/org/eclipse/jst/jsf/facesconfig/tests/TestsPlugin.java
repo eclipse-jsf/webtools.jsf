@@ -46,6 +46,7 @@ public class TestsPlugin extends AbstractUIPlugin {
 
 	/**
 	 * Returns the shared instance.
+	 * @return the default instance
 	 */
 	public static TestsPlugin getDefault() {
 		return plugin;

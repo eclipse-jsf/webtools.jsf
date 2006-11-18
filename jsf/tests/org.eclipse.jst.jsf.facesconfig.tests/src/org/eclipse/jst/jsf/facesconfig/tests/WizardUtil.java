@@ -97,6 +97,7 @@ public class WizardUtil {
 
 	/**
 	 * Should call createProject first. 
+	 * @return the test project
 	 * @param nameSuffix TODO
 	 */
 	public static IProject getTestProject(String nameSuffix) {
