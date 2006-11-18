@@ -99,4 +99,12 @@ public class NullLiteralType extends LiteralType
         return "";
     }
 
+    /* (non-Javadoc)
+     * @see org.eclipse.jst.jsf.core.internal.types.LiteralType#getLiteralValueRaw()
+     */
+    public Object getLiteralValueRaw() 
+    {
+        return null;
+    }
+
 }

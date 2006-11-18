@@ -31,11 +31,13 @@ public class TypeCoercer
      * is performed on the return.
      * @throws TypeCoercionException if boxedTypeSignature is
      */
-    public static String coerceToNumber(String boxedTypeSignature)
+    public static String coerceToNumber(final String boxedTypeSignature)
                              throws TypeCoercionException
     {
+        String boxedTypeSignature_ = boxedTypeSignature;
+        
         // can't coerce arrays to numbers
-        if (Signature.getTypeSignatureKind(boxedTypeSignature)
+        if (Signature.getTypeSignatureKind(boxedTypeSignature_)
                 == Signature.ARRAY_TYPE_SIGNATURE)
         {
             throw new TypeCoercionException("Cannot coerce arrays to numbers");
@@ -43,15 +45,15 @@ public class TypeCoercer
         // if it's character, pre-coerce to short per step 2
         if (TypeConstants.SIGNATURE_BOXED_CHARACTER.equals(boxedTypeSignature))
         {
-            boxedTypeSignature = TypeConstants.TYPE_BOXED_SHORT;
+            boxedTypeSignature_ = TypeConstants.TYPE_BOXED_SHORT;
         }
 
-        if (TypeCoercer.typeIsNumeric(boxedTypeSignature)
-                || TypeCoercer.typeIsNull(boxedTypeSignature))
+        if (TypeCoercer.typeIsNumeric(boxedTypeSignature_)
+                || TypeCoercer.typeIsNull(boxedTypeSignature_))
         {
-            return boxedTypeSignature;
+            return boxedTypeSignature_;
         }
-        else if (typeIsString(boxedTypeSignature))
+        else if (typeIsString(boxedTypeSignature_))
         {
             // undetermined a string may or not resolve to a number
             // depending on its runtime value

@@ -85,4 +85,14 @@ public class TypeConstants
      * Comparable type
      */
     public final static String   TYPE_COMPARABLE = "Ljava.lang.Comparable;";
+    
+    /**
+     * List type
+     */
+    public final static String   TYPE_LIST = "Ljava.util.List;";
+    
+    /**
+     * java.lang.Object type signature
+     */
+    public static final String TYPE_JAVAOBJECT = "Ljava.lang.Object;";
 }

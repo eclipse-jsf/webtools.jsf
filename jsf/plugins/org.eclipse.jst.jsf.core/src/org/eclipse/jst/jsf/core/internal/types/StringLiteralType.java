@@ -118,6 +118,11 @@ public class StringLiteralType extends LiteralType
         return _literalValue;
     }
 
+    public Object getLiteralValueRaw() 
+    {
+        return _literalValue;
+    }
+
     public Boolean coerceToBoolean() throws TypeCoercionException 
     {
         // JSP.2.8.5

@@ -41,6 +41,11 @@ public abstract class LiteralType extends ValueType
     public abstract String getLiteralValue();
 
     /**
+     * @return the actual untranslated literal value as an object
+     */
+    public abstract Object getLiteralValueRaw();
+    
+    /**
      * @return the type signature
      */
     public final String getSignature() {

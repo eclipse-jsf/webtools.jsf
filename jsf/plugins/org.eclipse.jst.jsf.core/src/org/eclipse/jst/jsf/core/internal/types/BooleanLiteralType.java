@@ -53,6 +53,11 @@ public class BooleanLiteralType extends LiteralType
         return Boolean.toString(_literalValue);
     }
 
+    public Object getLiteralValueRaw() 
+    {
+        return Boolean.valueOf(_literalValue);
+    }
+
     public Boolean coerceToBoolean() throws TypeCoercionException 
     {
         return Boolean.valueOf(_literalValue);

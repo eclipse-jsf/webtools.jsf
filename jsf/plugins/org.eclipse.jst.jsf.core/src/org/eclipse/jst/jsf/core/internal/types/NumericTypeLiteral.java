@@ -72,6 +72,11 @@ public abstract class NumericTypeLiteral extends LiteralType
         return getBoxedValue().toString();
     }
 
+    public Object getLiteralValueRaw() 
+    {
+        return getBoxedValue();
+    }
+
     /* (non-Javadoc)
      * @see org.eclipse.jst.jsf.core.internal.types.LiteralType#coerceToBoolean()
      */

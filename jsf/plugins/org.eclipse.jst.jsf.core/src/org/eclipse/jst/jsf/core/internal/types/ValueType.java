@@ -23,7 +23,10 @@ import org.eclipse.jdt.core.Signature;
  */
 public class ValueType implements SignatureBasedType, IAssignable
 {
-    private final static String[]        EMPTY_STRING_ARRAY = new String[0];
+    /**
+     * A default empty string array
+     */
+    protected final static String[]        EMPTY_STRING_ARRAY = new String[0];
     
     private final String        _signature;
     private final int           _assignmentMask;
