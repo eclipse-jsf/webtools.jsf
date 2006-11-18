@@ -1,0 +1,12 @@
+package com.test;
+
+public class BeanWithMapProp
+{
+	private MapBean		_myBean1;
+	
+	// test a property of type Map
+	public MapBean getMapProp()
+	{
+		return _myBean1;
+	}
+}

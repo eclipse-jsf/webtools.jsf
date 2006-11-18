@@ -15,5 +15,6 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.jst.jsf.context.structureddocument,
  org.eclipse.jst.jsf.test.util,
  org.eclipse.jst.jsf.core.tests,
- org.eclipse.jst.jsf.context.symbol
+ org.eclipse.jst.jsf.context.symbol,
+ org.eclipse.jst.jsf.core
 Eclipse-LazyStart: true

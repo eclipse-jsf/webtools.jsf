@@ -20,9 +20,8 @@ import org.eclipse.jst.jsf.core.tests.TestsPlugin;
 import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
 import org.eclipse.jst.jsf.designtime.internal.provisional.symbols.DefaultBeanSymbolSourceProvider;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
-import org.eclipse.jst.jsf.test.util.TestFileResource;
+import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
-import org.osgi.framework.Bundle;
 
 /**
  * JUnit tests for org.eclipse.jst.jsf.designtime.DefaultBeanSymbolSourceProvider
@@ -42,7 +41,9 @@ public class TestDefaultBeanSymbolSourceProvider extends TestCase
     protected void setUp() throws Exception 
     {
         super.setUp();
-        
+        JSFTestUtil.setValidationEnabled(false);
+        JSFTestUtil.setInternetProxyPreferences(true, "www-proxy.uk.oracle.com","80");
+
         final WebProjectTestEnvironment  projectTestEnvironment = 
             new WebProjectTestEnvironment("TestDefaultBeanSymbolSourceProvider_"+getName());
         projectTestEnvironment.createProject();
@@ -56,22 +57,14 @@ public class TestDefaultBeanSymbolSourceProvider extends TestCase
         
         _jdtTestEnvironment = new JDTTestEnvironment(projectTestEnvironment);
 
-        loadSourceClass(TestsPlugin.getDefault().getBundle(), "/testfiles/TestBean1.java.data", "TestBean1");
+        JSFTestUtil.loadSourceClass(
+                TestsPlugin.getDefault().getBundle(), 
+                    "/testfiles/TestBean1.java.data", "TestBean1", SRC_FOLDER_NAME, PACKAGE_NAME, _jdtTestEnvironment);
     }
 
     protected void tearDown() throws Exception 
     {
         super.tearDown();
-        _jsfFactedTestEnvironment.dispose();
-        _jdtTestEnvironment.getProjectEnvironment().deleteProject();
-    }
-
-    private void loadSourceClass(final Bundle bundle, final String fileName, final String beanClassName) throws Exception
-    {
-        TestFileResource codeRes = new TestFileResource();
-        codeRes.load(bundle, fileName);
-        String code = codeRes.toString();
-        _jdtTestEnvironment.addSourceFile(SRC_FOLDER_NAME, PACKAGE_NAME, beanClassName, code);
     }
 
     /**

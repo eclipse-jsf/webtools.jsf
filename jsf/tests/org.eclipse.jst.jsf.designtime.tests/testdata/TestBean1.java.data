@@ -1,0 +1,26 @@
+package com.test;
+
+import java.util.*;
+
+public class TestBean1
+{
+// simple bean properties
+	public String getStringProp1()
+	{
+		return "";
+	}
+	
+	public void setStringProp1(String prop)
+	{
+	}
+	
+// simple boolean with is getter
+	public boolean isBooleanIsProp1()
+	{
+		return true;
+	}
+	
+	public void setBooleanIsProp1(boolean property)
+	{
+	}
+}
