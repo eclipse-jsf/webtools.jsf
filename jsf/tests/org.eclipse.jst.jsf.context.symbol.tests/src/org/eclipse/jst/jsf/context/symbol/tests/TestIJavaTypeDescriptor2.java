@@ -17,8 +17,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import junit.framework.TestCase;
-
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.Signature;
@@ -29,10 +27,6 @@ import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanMethodSymbol
 import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanPropertySymbol;
 import org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaTypeDescriptor2;
 import org.eclipse.jst.jsf.core.tests.TestsPlugin;
-import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
-import org.eclipse.jst.jsf.test.util.TestFileResource;
-import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
-import org.osgi.framework.Bundle;
 
 /**
  * Test the IJavaTypeDescriptor
@@ -40,9 +34,8 @@ import org.osgi.framework.Bundle;
  * @author cbateman
  *
  */
-public class TestIJavaTypeDescriptor2 extends TestCase 
+public class TestIJavaTypeDescriptor2 extends ModelBaseTestCase 
 {
-    private JDTTestEnvironment      _jdtTestEnvironment;
     private Map                     _beanProperties;
     private Map                     _beanSubclassProperties;
     private Map                     _beanMethods;
@@ -53,7 +46,6 @@ public class TestIJavaTypeDescriptor2 extends TestCase
     private IBeanInstanceSymbol     _testBean2Symbol;
     private IBeanInstanceSymbol     _testBean2SubclassSymbol;
     
-    private final static String srcFolderName = "src";
     private final static String packageName1 = "com.test";
     private final static String testBeanName1 = "TestBean1";
     private final static String testBeanSubclass1 = "TestBean1Subclass";
@@ -65,27 +57,21 @@ public class TestIJavaTypeDescriptor2 extends TestCase
     protected void setUp() throws Exception 
     {
         super.setUp();
-        final WebProjectTestEnvironment  projectTestEnvironment = 
-            new WebProjectTestEnvironment("TestJDTBeanIntrospectorProject");
-        projectTestEnvironment.createProject();
-        
-        _jdtTestEnvironment = new JDTTestEnvironment(projectTestEnvironment);
 
         // load ITestBean2 first due to later dependencies
-        loadSourceClass(ContextSymbolTestPlugin.getDefault().getBundle(), "/testdata/ITestBean2.java.data", "ITestBean2");
-        assertNotNull(_jdtTestEnvironment.getJavaProject().findType(packageName1+"."+"ITestBean2"));
+        loadSourceClass(ContextSymbolTestPlugin.getDefault().getBundle(), "/testdata/ITestBean2.java.data", packageName1, "ITestBean2");
         
         // load another bean first since others have a dependency on on it
-        loadSourceClass(TestsPlugin.getDefault().getBundle(), "/testfiles/AnotherBean.java.data", "AnotherBean");
+        loadSourceClass(TestsPlugin.getDefault().getBundle(), "/testfiles/AnotherBean.java.data", packageName1, "AnotherBean");
         assertNotNull(_jdtTestEnvironment.getJavaProject().findType(packageName1+"."+"AnotherBean"));
         
         _beanProperties = new HashMap();
         _testBean1Symbol =
-            setupBeanProperty("/testfiles/TestBean1.java.data", testBeanName1, _beanProperties);
+            setupBeanProperty(TestsPlugin.getDefault().getBundle(), "/testfiles/TestBean1.java.data", packageName1, testBeanName1, _beanProperties);
         
         _beanSubclassProperties = new HashMap();
         _testBean1SubclassSymbol =
-            setupBeanProperty("/testfiles/TestBean1Subclass.java.data", testBeanSubclass1, _beanSubclassProperties);
+            setupBeanProperty(TestsPlugin.getDefault().getBundle(), "/testfiles/TestBean1Subclass.java.data", packageName1, testBeanSubclass1, _beanSubclassProperties);
 
         _beanMethods = new HashMap();
         _testBean2Symbol = 
@@ -95,46 +81,10 @@ public class TestIJavaTypeDescriptor2 extends TestCase
         _testBean2SubclassSymbol = 
             setupBeanMethods("/testdata/TestBean2Subclass.java.data", testBean2Subclass, _beanMethodsSubclass);
     }
-    
 
-    private IBeanInstanceSymbol setupBeanProperty(String fileName, String beanClassName, Map properties) throws Exception
-    {
-        loadSourceClass(TestsPlugin.getDefault().getBundle(), fileName, beanClassName);
-        
-        final IType testBean1Type = 
-            _jdtTestEnvironment.getJavaProject().findType(packageName1+"."+beanClassName);
-        assertNotNull(testBean1Type);
-        
-        final IJavaTypeDescriptor2 testBeanDescriptor = 
-            SymbolFactory.eINSTANCE.createIJavaTypeDescriptor2();
-        testBeanDescriptor.setType(testBean1Type);
-        
-        IBeanInstanceSymbol  bean = 
-            SymbolFactory.eINSTANCE.createIBeanInstanceSymbol();
-        bean.setTypeDescriptor(testBeanDescriptor);
-        bean.setName(beanClassName);
-        List propertyList = bean.getProperties();
-        for(final Iterator it = propertyList.iterator(); it.hasNext();)
-        {
-            final IBeanPropertySymbol  property = 
-                (IBeanPropertySymbol) it.next();
-            properties.put(property.getName(), property);
-        }
-        
-        return bean;
-    }
-    
-    private void loadSourceClass(final Bundle bundle, final String fileName, final String beanClassName) throws Exception
-    {
-        TestFileResource codeRes = new TestFileResource();
-        codeRes.load(bundle, fileName);
-        String code = codeRes.toString();
-        _jdtTestEnvironment.addSourceFile(srcFolderName, packageName1, beanClassName, code);
-    }
-    
     private IBeanInstanceSymbol setupBeanMethods(String fileName, String beanClassName, Map methods) throws Exception
     {
-        loadSourceClass(ContextSymbolTestPlugin.getDefault().getBundle(), fileName, beanClassName);
+        loadSourceClass(ContextSymbolTestPlugin.getDefault().getBundle(), fileName, packageName1, beanClassName);
 
         final IType testBean1Type = 
             _jdtTestEnvironment.getJavaProject().findType(packageName1+"."+beanClassName);
@@ -905,7 +855,7 @@ public class TestIJavaTypeDescriptor2 extends TestCase
         // there are methods and one property on TestBean2
         assertFalse(desc.eIsSet(SymbolPackage.eINSTANCE.getIJavaTypeDescriptor2_BeanProperties()));
         assertFalse(desc.eIsSet(SymbolPackage.eINSTANCE.getIJavaTypeDescriptor2_BeanMethods()));
-        assertFalse(desc.eIsSet(SymbolPackage.eINSTANCE.getIBeanInstanceSymbol_JavaTypeDescriptor()));
+        //assertFalse(desc.eIsSet(SymbolPackage.eINSTANCE.getIBeanInstanceSymbol_escriptor()));
         
         desc.eSet(SymbolPackage.eINSTANCE.getIJavaTypeDescriptor2_BeanProperties(), 
                   _testBean2Symbol.getJavaTypeDescriptor().getBeanProperties());

@@ -16,6 +16,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.jst.jsf.core.tests,
  org.eclipse.ui,
  org.eclipse.emf.edit,
- org.eclipse.jface.text
+ org.eclipse.jface.text,
+ org.eclipse.jst.jsf.core
 Eclipse-LazyStart: true
 Bundle-Activator: org.eclipse.jst.jsf.context.symbol.tests.ContextSymbolTestPlugin
