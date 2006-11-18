@@ -12,6 +12,11 @@ import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
 import org.eclipse.wst.sse.core.internal.provisional.text.ITextRegion;
 import org.eclipse.wst.sse.core.internal.provisional.text.ITextRegionCollection;
 
+/**
+ * Generates sanity checks for all JSP test files listed in jspFiles array
+ * 
+ * @author cbateman
+ */
 public class FindELRegions extends TestCase
 {
     private final static String[]  jspFiles =
@@ -88,6 +93,9 @@ public class FindELRegions extends TestCase
         }
     }
     
+    /**
+     * Prints assertions for all regions in all models
+     */
     public void testGenReport()
     {
         for (int i = 0; i < models.length; i++)

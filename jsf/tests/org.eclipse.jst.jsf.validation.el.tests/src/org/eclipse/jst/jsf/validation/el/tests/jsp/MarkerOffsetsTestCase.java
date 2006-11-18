@@ -93,22 +93,22 @@ public class MarkerOffsetsTestCase extends SingleJSPTestCase
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_SECOND_ARGUMENT_ALWAYS_EVAL_SAME_ID, 1475, 60);
 
         list = assertSemanticWarning(1609, null, 1);
-        assertContainsProblem(list, 0, 1609, 8);
+        assertContainsProblem(list, DiagnosticFactory.VARIABLE_NOT_FOUND_ID, 1609, 8);
 
         list = assertSemanticWarning(1663, null, 1);
-        assertContainsProblem(list, 0, 1670, 12);
+        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID, 1670, 12);
 
         list = assertSemanticWarning(1713, null, 1);
-        assertContainsProblem(list, 0, 1749, 12);
+        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID, 1749, 12);
 
         list = assertSyntaxWarning(1814, 1);
-        assertContainsProblem(list, 0, 1837, 1);
+        assertContainsProblem(list, DiagnosticFactory.GENERAL_SYNTAX_ERROR_ID, 1837, 1);
 
         list = assertSemanticWarning(1869, null, 1);
-        assertContainsProblem(list, 0, 1875, 1);
+        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID, 1875, 1);
 
         list = assertSyntaxWarning(1907, 1);
-        assertContainsProblem(list, 0, 1907, 1);
+        assertContainsProblem(list, DiagnosticFactory.GENERAL_SYNTAX_ERROR_ID, 1907, 1);
     }
     
     public void testErrorExprs() 
@@ -135,7 +135,7 @@ public class MarkerOffsetsTestCase extends SingleJSPTestCase
         assertContainsProblem(list, DiagnosticFactory.UNARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN_ID, 2415, 2);
 
         list = assertSemanticError(2477, null, 1);
-        assertContainsProblem(list, 0, 2501, 25);
+        assertContainsProblem(list, DiagnosticFactory.CANNOT_APPLY_OPERATOR_TO_METHOD_BINDING_ID, 2501, 25);
     }
 
 }

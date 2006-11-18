@@ -7,6 +7,11 @@ import org.eclipse.jst.jsf.core.internal.types.TypeConstants;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
+/**
+ * Test cases for unary minus
+ * 
+ * @author cbateman
+ */
 public class UnaryMinusTestCase extends SingleJSPTestCase 
 {
     protected void setUp() throws Exception
@@ -55,7 +60,7 @@ public class UnaryMinusTestCase extends SingleJSPTestCase
     public void testWarningExprs() 
     {
         List list = assertSemanticWarning(1102, Signature.SIG_LONG, 1);
-        assertContainsProblem(list, DiagnosticFactory.UNARY_OP_STRING_CONVERSION_NOT_GUARANTEED);
+        assertContainsProblem(list, DiagnosticFactory.UNARY_OP_STRING_CONVERSION_NOT_GUARANTEED_ID);
 
         list = assertSemanticWarning(1310, Signature.SIG_LONG, 1);
         assertContainsProblem(list, DiagnosticFactory.UNARY_OP_MINUS_ON_NULL_ALWAYS_ZERO_ID);

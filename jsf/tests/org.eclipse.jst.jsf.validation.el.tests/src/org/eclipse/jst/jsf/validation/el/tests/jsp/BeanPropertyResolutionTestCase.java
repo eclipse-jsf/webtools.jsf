@@ -5,7 +5,13 @@ import java.util.List;
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.core.internal.types.TypeConstants;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
+import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
+/**
+ * Test cases for bean property resolution
+ * 
+ * @author cbateman
+ */
 public class BeanPropertyResolutionTestCase extends SingleJSPTestCase 
 {
     protected void setUp() throws Exception
@@ -112,13 +118,13 @@ public class BeanPropertyResolutionTestCase extends SingleJSPTestCase
     public void testWarningExprs() 
     {
         List list = assertSemanticWarning(3159,null,1);
-        assertContainsProblem(list, 0);
+        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
 
         list = assertSemanticWarning(3222,null,1);
-        assertContainsProblem(list, 0);
+        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
         
         list = assertSemanticWarning(3281,null,1);
-        assertContainsProblem(list, 0);
+        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
     }
 
     public void testErrorExprs() 

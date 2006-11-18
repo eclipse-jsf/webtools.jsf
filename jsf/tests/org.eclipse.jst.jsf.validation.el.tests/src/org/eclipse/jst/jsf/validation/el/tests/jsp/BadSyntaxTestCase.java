@@ -3,7 +3,14 @@ package org.eclipse.jst.jsf.validation.el.tests.jsp;
 import java.util.List;
 
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
+import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
+/**
+ * Test cases for syntax error testing
+ * 
+ * @author cbateman
+ *
+ */
 public class BadSyntaxTestCase extends SingleJSPTestCase 
 {
     protected void setUp() throws Exception
@@ -31,19 +38,19 @@ public class BadSyntaxTestCase extends SingleJSPTestCase
     public void testWarningExprs() 
     {
         List list = assertSyntaxWarning(870,1);
-        assertContainsProblem(list, 0);
+        assertContainsProblem(list, DiagnosticFactory.GENERAL_SYNTAX_ERROR_ID);
         
         list = assertSyntaxWarning(902,1);
-        assertContainsProblem(list, 0);
+        assertContainsProblem(list, DiagnosticFactory.GENERAL_SYNTAX_ERROR_ID);
         
         list = assertSyntaxWarning(958,1);
-        assertContainsProblem(list, 0);
+        assertContainsProblem(list, DiagnosticFactory.GENERAL_SYNTAX_ERROR_ID);
 
         list = assertSyntaxWarning(1014,1);
-        assertContainsProblem(list, 0);
+        assertContainsProblem(list, DiagnosticFactory.GENERAL_SYNTAX_ERROR_ID);
 
         list = assertSyntaxWarning(1047,1);
-        assertContainsProblem(list, 0);
+        assertContainsProblem(list, DiagnosticFactory.GENERAL_SYNTAX_ERROR_ID);
     }
 
     public void testErrorExprs() 

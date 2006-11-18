@@ -7,6 +7,12 @@ import org.eclipse.jst.jsf.core.internal.types.TypeConstants;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
+/**
+ * Test cases for built-in (implicit) symbol resolution
+ * 
+ * @author cbateman
+ *
+ */
 public class BuiltInSymbolsTestCase extends SingleJSPTestCase 
 {
     protected void setUp() throws Exception
@@ -133,44 +139,46 @@ public class BuiltInSymbolsTestCase extends SingleJSPTestCase
     public void testWarningExprs() 
     {
         List list = assertSemanticWarning(3661,null,1);
-        assertContainsProblem(list, 0);
+        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
 
         list = assertSemanticWarning(3722,null,1);
-        assertContainsProblem(list, 0);
+        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
 
         list = assertSemanticWarning(3779,null,1);
-        assertContainsProblem(list, 0);
+        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
 
         list = assertSemanticWarning(3836,null,1);
-        assertContainsProblem(list, 0);
+        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
 
         list = assertSemanticWarning(3887,null,1);
-        assertContainsProblem(list, 0);
+        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
 
         list = assertSemanticWarning(3944,null,1);
-        assertContainsProblem(list, 0);
+        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
 
         list = assertSemanticWarning(3995,null,1);
-        assertContainsProblem(list, 0);
+        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
 
         list = assertSemanticWarning(4052,null,1);
-        assertContainsProblem(list, 0);
+        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
 
         list = assertSemanticWarning(4106,null,1);
-        assertContainsProblem(list, 0);
+        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
 
         list = assertSemanticWarning(4156,null,1);
-        assertContainsProblem(list, 0);
+        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
 
         list = assertSemanticWarning(4212,null,1);
-        assertContainsProblem(list, 0);
+        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
         
         list = assertSemanticWarning(4311,null,1);
-        assertContainsProblem(list, 0);
+        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
+        
         list = assertSemanticWarning(4373,null,1);
-        assertContainsProblem(list, 0);
+        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
+        
         list = assertSemanticWarning(4431,null,1);
-        assertContainsProblem(list, 0);
+        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
     }
     public void testErrorExprs() 
     {

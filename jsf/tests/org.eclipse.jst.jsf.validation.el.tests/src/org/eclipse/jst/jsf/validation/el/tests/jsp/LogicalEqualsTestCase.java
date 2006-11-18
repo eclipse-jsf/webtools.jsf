@@ -6,6 +6,11 @@ import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
+/**
+ * Test cases for logical equals (eq, ==)
+ * 
+ * @author cbateman
+ */
 public class LogicalEqualsTestCase extends SingleJSPTestCase 
 {
     protected void setUp() throws Exception

@@ -3,7 +3,14 @@ package org.eclipse.jst.jsf.validation.el.tests.jsp;
 import java.util.List;
 
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
+import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
+/**
+ * Test cases for bean variable resolution
+ * 
+ * @author cbateman
+ *
+ */
 public class BeanVariableResolutionTestCase extends SingleJSPTestCase 
 {
     protected void setUp() throws Exception
@@ -41,10 +48,10 @@ public class BeanVariableResolutionTestCase extends SingleJSPTestCase
     public void testWarningExprs() 
     {
         List list = assertSemanticWarning(878, null, 1);
-        assertContainsProblem(list,0);
+        assertContainsProblem(list,DiagnosticFactory.VARIABLE_NOT_FOUND_ID);
         
         list = assertSemanticWarning(919, null, 1);
-        assertContainsProblem(list,0);
+        assertContainsProblem(list,DiagnosticFactory.VARIABLE_NOT_FOUND_ID);
     }
 
     public void testErrorExprs() 

@@ -7,6 +7,12 @@ import org.eclipse.jst.jsf.core.internal.types.TypeConstants;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
+/**
+ * Test cases for arithmetic multiply
+ * 
+ * @author cbateman
+ *
+ */
 public class ArithmeticMultiplyTestCase extends SingleJSPTestCase 
 {
     protected void setUp() throws Exception 

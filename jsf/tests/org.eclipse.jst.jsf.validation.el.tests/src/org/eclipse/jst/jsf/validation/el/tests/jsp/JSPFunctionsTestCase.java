@@ -3,7 +3,13 @@ package org.eclipse.jst.jsf.validation.el.tests.jsp;
 import java.util.List;
 
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
+import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
+/**
+ * Test cases for functions
+ * 
+ * @author cbateman
+ */
 public class JSPFunctionsTestCase extends SingleJSPTestCase 
 {
     protected void setUp() throws Exception
@@ -35,13 +41,13 @@ public class JSPFunctionsTestCase extends SingleJSPTestCase
         // note: this will change to non-error when functions are properly supported
         // by the parser
         List list = assertSyntaxWarning(1260, 1);
-        assertContainsProblem(list, 0);
+        assertContainsProblem(list, DiagnosticFactory.GENERAL_SYNTAX_ERROR_ID);
 
         list = assertSyntaxWarning(1309, 1);
-        assertContainsProblem(list, 0);
+        assertContainsProblem(list, DiagnosticFactory.GENERAL_SYNTAX_ERROR_ID);
         
         list = assertSyntaxWarning(1354, 1);
-        assertContainsProblem(list, 0);
+        assertContainsProblem(list, DiagnosticFactory.GENERAL_SYNTAX_ERROR_ID);
     }
     
     public void testErrorExprs() 

@@ -33,6 +33,7 @@ import org.eclipse.jst.jsf.validation.el.tests.jsp.LogicalNotTestCase;
 import org.eclipse.jst.jsf.validation.el.tests.jsp.LogicalOrTestCase;
 import org.eclipse.jst.jsf.validation.el.tests.jsp.MarkerOffsetsTestCase;
 import org.eclipse.jst.jsf.validation.el.tests.jsp.MethodBindingTestCase;
+import org.eclipse.jst.jsf.validation.el.tests.jsp.PropertiesOfMapsTestCase;
 import org.eclipse.jst.jsf.validation.el.tests.jsp.UnaryEmptyTestCase;
 import org.eclipse.jst.jsf.validation.el.tests.jsp.UnaryMinusTestCase;
 
@@ -62,6 +63,7 @@ public class AllTests {
         suite.addTestSuite(AssignabilityTestCase.class);
         suite.addTestSuite(JSPFunctionsTestCase.class);
         suite.addTestSuite(MethodBindingTestCase.class);
+        suite.addTestSuite(PropertiesOfMapsTestCase.class);
         
         suite.addTestSuite(ArithmeticAddTestCase.class);
         suite.addTestSuite(ArithmeticDivideTestCase.class);

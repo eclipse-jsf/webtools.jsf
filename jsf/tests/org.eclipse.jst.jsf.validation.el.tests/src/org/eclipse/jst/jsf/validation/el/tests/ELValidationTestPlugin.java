@@ -6,9 +6,11 @@ import org.osgi.framework.BundleContext;
 /**
  * The activator class controls the plug-in life cycle
  */
-public class ELValidationTestPlugin extends AbstractUIPlugin {
-
-	// The plug-in ID
+public class ELValidationTestPlugin extends AbstractUIPlugin 
+{
+	/**
+	 * The plug-in ID
+	 */
 	public static final String PLUGIN_ID = "org.eclipse.jst.jsf.validation.el.tests";
 
 	// The shared instance

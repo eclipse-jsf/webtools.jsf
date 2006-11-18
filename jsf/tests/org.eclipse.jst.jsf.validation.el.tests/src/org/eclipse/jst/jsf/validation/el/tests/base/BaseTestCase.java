@@ -1,7 +1,6 @@
 package org.eclipse.jst.jsf.validation.el.tests.base;
 
 import java.io.ByteArrayInputStream;
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -19,7 +18,6 @@ import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.ITextRegionContextResolver;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.IStructuredDocumentContextResolverFactory;
 import org.eclipse.jst.jsf.context.structureddocument.internal.provisional.IStructuredDocumentContext;
@@ -28,39 +26,39 @@ import org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.JSFAppConfigMa
 import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
 import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanType;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
+import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.jst.jsf.test.util.TestFileResource;
 import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
 import org.eclipse.jst.jsf.validation.el.tests.ELValidationTestPlugin;
 import org.eclipse.jst.jsf.validation.internal.el.ELExpressionValidator;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.IELLocalizedMessage;
-import org.eclipse.wst.internet.cache.internal.CacheMessages;
-import org.eclipse.wst.internet.internal.proxy.InternetPlugin;
 import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
-import org.eclipse.wst.validation.internal.ConfigurationManager;
-import org.eclipse.wst.validation.internal.GlobalConfiguration;
 import org.eclipse.wst.validation.internal.provisional.core.IMessage;
 
+/**
+ * Base class for all JSP test cases in this plugin
+ * 
+ * @author cbateman
+ *
+ */
 public class BaseTestCase extends TestCase 
 {
+	/**
+	 * The dynamic web project test environment
+	 */
 	protected WebProjectTestEnvironment  _testEnv;
+	/**
+	 * A handle to the Java project test environment
+	 */
 	protected JDTTestEnvironment         _jdtTestEnv;
     
 	protected void setUp() throws Exception    
 	{
 		super.setUp();
 
-        setValidationEnabled(false);
+        JSFTestUtil.setValidationEnabled(false);
         
-        // setup local proxy
-        System.setProperty(CacheMessages.WTP_NO_USER_INTERACTION_SYSTEM_PROP, "true");
-        InternetPlugin plugin = InternetPlugin.getInstance();
-        IPreferenceStore prefStore = plugin.getPreferenceStore();
-        prefStore.setValue( InternetPlugin.PREFERENCE_PROXYCHECKED, true);
-        prefStore.setValue( InternetPlugin.PREFERENCE_SOCKSCHECKED, false );
-        prefStore.setValue("http.proxySet", true);
-        prefStore.setValue(InternetPlugin.PREFERENCE_HOSTNAME, "www-proxy.uk.oracle.com");
-        prefStore.setValue(InternetPlugin.PREFERENCE_PORT, "80");
-        plugin.updateProxyProperties();
+        JSFTestUtil.setInternetProxyPreferences(true, "www-proxy.uk.oracle.com", "80");
         
         _testEnv = new WebProjectTestEnvironment("ELValidationTest_"+this.getClass().getName()+"_"+getName());
         _testEnv.createProject();
@@ -99,6 +97,11 @@ public class BaseTestCase extends TestCase
 
         resource = new TestFileResource();
         resource.load(ELValidationTestPlugin.getDefault().getBundle(), 
+                      "/testdata/classes/BeanWithMapProperties.java.data");
+        _jdtTestEnv.addSourceFile("src", "beans", "BeanWithMapProperties", resource.toString());
+        
+        resource = new TestFileResource();
+        resource.load(ELValidationTestPlugin.getDefault().getBundle(), 
                       "/testdata/classes/Bundle.properties.data");
         _jdtTestEnv.addResourceFile("src", new ByteArrayInputStream(resource.toBytes()), 
                       "beans", "Bundle.properties");
@@ -107,8 +110,12 @@ public class BaseTestCase extends TestCase
     protected void tearDown() throws Exception
     {
         _testEnv.getTestProject().close(null);
+        //_testEnv.getTestProject().delete(true, null);
     }
     
+    /**
+     * Performs pre-condition and other sanity checks on what was done in setUp()
+     */
     public void testSanity()
     {
         final IJavaProject javaProject = _jdtTestEnv.getJavaProject(); 
@@ -126,6 +133,9 @@ public class BaseTestCase extends TestCase
             assertNotNull(type);
 
             type = javaProject.findType("beans.MyBeanSubClass");
+            assertNotNull(type);
+            
+            type = javaProject.findType("beans.BeanWithMapProperties");
             assertNotNull(type);
             
             IPackageFragmentRoot srcRoot = _jdtTestEnv.getPackageFragmentRoot("src");
@@ -153,6 +163,7 @@ public class BaseTestCase extends TestCase
             assertTrue(nameTest.containsKey("mapBean"));
             assertTrue(nameTest.containsKey("myBeanSettable"));
             assertTrue(nameTest.containsKey("myBeanSubClass"));
+            assertTrue(nameTest.containsKey("beanWithMapProperties"));
         }
         catch(JavaModelException jme)
         {
@@ -164,6 +175,11 @@ public class BaseTestCase extends TestCase
         }
     }
     
+    /**
+     * @param document
+     * @param docPos
+     * @return the ELText at docPos in document or null if no such text
+     */
     protected String getELText(IStructuredDocument document, int docPos)
     {
         final IStructuredDocumentContext context = 
@@ -173,6 +189,12 @@ public class BaseTestCase extends TestCase
         return resolver.getRegionText();
     }
     
+    /**
+     * @param document
+     * @param docPos
+     * @param file
+     * @return a new expression validator for docPos in the document
+     */
     protected ELExpressionValidator createELValidator(IStructuredDocument document, int docPos, IFile file)
     {
         final String elText = getELText(document, docPos);
@@ -188,7 +210,7 @@ public class BaseTestCase extends TestCase
      * @param docPos
      * @param file
      * @param expectedProblems
-     * @return
+     * @return the list of found syntax problems
      */
     protected List assertSyntaxError(IStructuredDocument document, 
             int docPos, 
@@ -281,6 +303,7 @@ public class BaseTestCase extends TestCase
      * @param docPos
      * @param file
      * @param expectedSignature
+     * @param assignability 
      */
     protected void assertNoError(IStructuredDocument document, int docPos, IFile file, String expectedSignature, int assignability)
     {
@@ -311,6 +334,7 @@ public class BaseTestCase extends TestCase
      * @param docPos
      * @param file
      * @param expectedSignature
+     * @param expectedProblems 
      * @return the list of semantic warnings
      */
     protected List assertSemanticError(IStructuredDocument document, int docPos, IFile file, String expectedSignature, int expectedProblems)
@@ -328,6 +352,7 @@ public class BaseTestCase extends TestCase
      * @param docPos
      * @param file
      * @param expectedSignature
+     * @param expectedProblems 
      * @return the list of semantic warnings
      */
     protected List assertSemanticWarning(IStructuredDocument document, int docPos, IFile file, String expectedSignature, int expectedProblems)
@@ -335,6 +360,15 @@ public class BaseTestCase extends TestCase
         return assertSemanticProblems(document, docPos, file, expectedSignature, expectedProblems, IMessage.NORMAL_SEVERITY/* "normal" is Warning for some reason*/);
     }
     
+    /**
+     * @param document
+     * @param docPos
+     * @param file
+     * @param expectedSignature
+     * @param expectedProblems
+     * @param expectedMaxSeverity
+     * @return the list of semantic problems found
+     */
     protected List assertSemanticProblems(IStructuredDocument document, 
                                           int docPos, 
                                           IFile file, 
@@ -372,11 +406,27 @@ public class BaseTestCase extends TestCase
         return problems;
     }
     
+    /**
+     * Asserts that the list of problems contains one whose id == code
+     * 
+     * @param problems
+     * @param code
+     */
     protected void assertContainsProblem(List problems, int code)
     {
         assertContainsProblem(problems, code, -1, -1);
     }
     
+    /**
+     * Asserts that the list of problems contains one whose id == code
+     * If startPos > -1, also checks the offset and length on the matching
+     * problem against startPos and length
+     * 
+     * @param problems
+     * @param code
+     * @param startPos
+     * @param length
+     */
     protected void assertContainsProblem(List problems, int code, int startPos, int length)
     {
         Set  probsFound = new HashSet();
@@ -409,15 +459,6 @@ public class BaseTestCase extends TestCase
         // if we reach this point then we have not found the asserted
         // error code
         assertTrue("Expected find error code matching "+code+" found "+probsFound.toString(), false);
-    }
-    
-    
-    protected void setValidationEnabled(boolean isEnabled) throws InvocationTargetException
-    {
-        final GlobalConfiguration config = new GlobalConfiguration(ConfigurationManager.getManager().getGlobalConfiguration());
-        config.setDisableAllValidation(!isEnabled);
-        config.passivate();
-        config.store();
     }
     
     private static int maxSeverity(int sev1, int sev2)

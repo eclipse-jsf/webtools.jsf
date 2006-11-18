@@ -5,6 +5,11 @@ import org.eclipse.jst.jsf.core.internal.types.IAssignable;
 import org.eclipse.jst.jsf.core.internal.types.TypeConstants;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 
+/**
+ * Test cases for assignability test on variable and properties
+ * 
+ * @author cbateman
+ */
 public class AssignabilityTestCase extends SingleJSPTestCase 
 {
     protected void setUp() throws Exception

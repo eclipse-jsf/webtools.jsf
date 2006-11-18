@@ -8,6 +8,11 @@ import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
 
+/**
+ * Test suite for arithimetic divide (/, div)
+ * @author cbateman
+ *
+ */
 public class ArithmeticDivideTestCase extends SingleJSPTestCase 
 {
     protected void setUp() throws Exception 

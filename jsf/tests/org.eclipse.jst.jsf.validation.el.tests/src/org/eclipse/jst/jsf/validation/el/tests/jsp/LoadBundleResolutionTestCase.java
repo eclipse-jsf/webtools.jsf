@@ -7,6 +7,11 @@ import org.eclipse.jst.jsf.core.internal.types.TypeConstants;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
+/**
+ * Test cases for load bundle resolution
+ * 
+ * @author cbateman
+ */
 public class LoadBundleResolutionTestCase extends SingleJSPTestCase 
 {
     protected void setUp() throws Exception
@@ -46,16 +51,16 @@ public class LoadBundleResolutionTestCase extends SingleJSPTestCase
     public void testWarningExprs() 
     {
         List list = assertSemanticWarning(1368, Signature.SIG_LONG, 1);
-        assertContainsProblem(list, DiagnosticFactory.UNARY_OP_STRING_CONVERSION_NOT_GUARANTEED);
+        assertContainsProblem(list, DiagnosticFactory.UNARY_OP_STRING_CONVERSION_NOT_GUARANTEED_ID);
 
         list = assertSemanticWarning(1421, null, 1);
-        assertContainsProblem(list, 0);
+        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
 
         list = assertSemanticWarning(1473, null, 1);
-        assertContainsProblem(list, 0);
+        assertContainsProblem(list, DiagnosticFactory.VARIABLE_NOT_FOUND_ID);
         
         list = assertSemanticWarning(1510, null, 1);
-        assertContainsProblem(list, 0);
+        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
     }
     
     public void testErrorExprs() 

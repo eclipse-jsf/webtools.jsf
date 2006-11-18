@@ -6,7 +6,14 @@ import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
-public class LessThanEqTestCase extends SingleJSPTestCase {
+/**
+ * Test cases for less than or equal (<=, le)
+ * 
+ * @author cbateman
+ */
+public class LessThanEqTestCase extends SingleJSPTestCase 
+{
+
     protected void setUp() throws Exception 
     {
         _srcFileName = "/testdata/jsps/lessThanEq.jsp.data";

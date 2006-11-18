@@ -10,4 +10,9 @@ public class MapBean extends AbstractMap
 	public Set entrySet() {
 		return Collections.EMPTY_SET;
 	}
+	
+	public int ignoredMapProperty()
+	{
+		return -1;
+	}
 }

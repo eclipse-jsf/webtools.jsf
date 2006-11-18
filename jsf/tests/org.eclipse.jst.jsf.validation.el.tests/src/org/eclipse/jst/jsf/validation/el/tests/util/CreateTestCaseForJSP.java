@@ -17,9 +17,14 @@ import org.eclipse.wst.sse.core.internal.provisional.text.ITextRegionCollection;
 import org.eclipse.wst.sse.core.internal.provisional.text.ITextRegionList;
 import org.eclipse.wst.xml.core.internal.regions.DOMRegionContext;
 
+/**
+ * Utility class for generating test skeleton for a single JSP test
+ * 
+ * @author cbateman
+ */
 public class CreateTestCaseForJSP extends TestCase 
 {
-    private final static String  jspFile = "markerOffsets";
+    private final static String  jspFile = "bracketOperator";
     private static IFile  file;
     private static IStructuredModel model;
 
@@ -35,8 +40,9 @@ public class CreateTestCaseForJSP extends TestCase
         assertTrue(_testEnv.getTestProject().isAccessible());
 
         file = 
-            (IFile) 
-            _testEnv.loadResourceInWebRoot(ELValidationTestPlugin.getDefault().getBundle(),
+            (IFile)
+            _testEnv.loadResourceInWebRoot(
+                ELValidationTestPlugin.getDefault().getBundle(),
                 "/testdata/jsps/"+jspFile+".jsp.data", 
                 "/WEB-INF/"+jspFile+".jsp");
 
@@ -50,6 +56,9 @@ public class CreateTestCaseForJSP extends TestCase
         model.releaseFromRead();
     }
     
+    /**
+     * Test gen
+     */
     public void testDoTestGen()
     {
         System.out.println("    protected void setUp() throws Exception"); 
@@ -76,6 +85,12 @@ public class CreateTestCaseForJSP extends TestCase
         System.out.println("    }");
     }
 
+    /**
+     * Process a single JSP files
+     * 
+     * @param document
+     * @param handler
+     */
     public static void processJSP(IStructuredDocument document, ELRegionHandler handler)
     {
         IStructuredDocumentRegion curNode = document.getFirstStructuredDocumentRegion();
@@ -120,8 +135,19 @@ public class CreateTestCaseForJSP extends TestCase
         }
     }
     
+    /**
+     * Used as a callback interface when an EL region is found in a StructuredModel
+     * 
+     * @author cbateman
+     */
     public interface ELRegionHandler
     {
+        /**
+         * Called when an EL region is found
+         * 
+         * @param parentRegion
+         * @param elRegion
+         */
         public void handleRegion(ITextRegionCollection parentRegion, ITextRegion elRegion);
     }
 }
