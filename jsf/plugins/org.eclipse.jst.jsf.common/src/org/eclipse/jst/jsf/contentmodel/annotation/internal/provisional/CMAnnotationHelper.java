@@ -18,8 +18,6 @@ import java.util.List;
 
 import org.eclipse.jst.jsf.contentmodel.annotation.internal.CMAnnotationFileRegistry;
 import org.eclipse.jst.jsf.contentmodel.annotation.internal.CMAnnotationMap;
-import org.eclipse.jst.jsf.contentmodel.annotation.internal.CMAttributeAnnotation;
-import org.eclipse.jst.jsf.contentmodel.annotation.internal.CMElementAnnotation;
 
 /**
  * Class meant for all public access to the design-time meta-data (CMAnnotations) values.
@@ -36,8 +34,8 @@ import org.eclipse.jst.jsf.contentmodel.annotation.internal.CMElementAnnotation;
  * 
  * <li>-- include link to doc--</li>
  * 
- * @see CMElementAnnotation
- * @see CMAttributeAnnotation
+ * @see org.eclipse.jst.jsf.contentmodel.annotation.internal.CMElementAnnotation
+ * @see org.eclipse.jst.jsf.contentmodel.annotation.internal.CMAttributeAnnotation
  * @see CMAnnotationPropertyValue
  * @see org.eclipse.jst.jsf.contentmodel.annotations.annotationFiles extension-point
  */
