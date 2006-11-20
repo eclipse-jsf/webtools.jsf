@@ -11,7 +11,8 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.facesconfig.ui.test;
 
-import org.eclipse.jface.util.Assert;
+
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.jst.jsf.facesconfig.emf.NavigationCaseType;
 import org.eclipse.jst.jsf.facesconfig.emf.NavigationRuleType;
