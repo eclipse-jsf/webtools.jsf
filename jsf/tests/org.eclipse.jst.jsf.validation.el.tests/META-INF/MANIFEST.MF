@@ -14,14 +14,12 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.jst.jsf.core,
  org.eclipse.jst.jsf.facesconfig,
  org.eclipse.wst.sse.core,
- org.eclipse.jst.jsf.context,
- org.eclipse.jst.jsf.context.resolver,
- org.eclipse.jst.jsf.context.resolver.structureddocument,
- org.eclipse.jst.jsf.context.structureddocument,
+ org.eclipse.jst.jsf.common,
  org.eclipse.wst.xml.core,
  org.eclipse.jst.jsp.core,
  org.eclipse.jst.jsf.validation.el,
  org.eclipse.wst.validation,
  org.eclipse.wst.internet.cache,
- org.eclipse.wst.internet.proxy
+ org.eclipse.wst.internet.proxy,
+ org.eclipse.jface.text
 Eclipse-LazyStart: true

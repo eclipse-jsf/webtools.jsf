@@ -2,7 +2,7 @@
 <?eclipse version="3.0"?>
 <plugin>
    <extension
-         point="org.eclipse.jst.jsf.contentmodel.annotations.annotationFiles">
+         point="org.eclipse.jst.jsf.common.annotationFiles">
       <annotationFile
             location="/testfiles/metadata/jsf_test.xml"
             uri="http://org.eclipse.jsf/test"/>
