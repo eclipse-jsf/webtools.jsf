@@ -105,6 +105,10 @@ public class PaletteItemManager implements IPaletteItemManager,
 	/** the resource tracker instance */
 	private ResourceTracker _resourceTracker = null;
 
+	private boolean isUpdateNeeded;
+
+	private IPath classpath, webinf;
+
 	private class ResourceTracker implements IResourceChangeListener,
 			IResourceDeltaVisitor {
 		/*
@@ -114,7 +118,6 @@ public class PaletteItemManager implements IPaletteItemManager,
 		 */
 		public void resourceChanged(IResourceChangeEvent event) {
 			IResourceDelta delta = event.getDelta();
-
 			try {
 				if (delta != null)
 					delta.accept(this);
@@ -133,13 +136,50 @@ public class PaletteItemManager implements IPaletteItemManager,
 		 * @see org.eclipse.core.resources.IResourceDeltaVisitor#visit(org.eclipse.core.resources.IResourceDelta)
 		 */
 		public boolean visit(IResourceDelta delta) {
-			if (delta == null) {
-				return true;
+			isUpdateNeeded = false;
+			if (needUpdate(delta)) {
+				reset();
 			}
 
-			reset();
 			return false;
 		}
+	}
+
+	/**
+	 * Only update the palette when classpath is changed or the content under
+	 * web-inf is changed
+	 * 
+	 * @param delta
+	 * @return
+	 */
+	private boolean needUpdate(IResourceDelta delta) {
+		if (isUpdateNeeded)
+			return true;
+
+		IResource res = delta.getResource();
+		switch (delta.getKind()) {
+		case IResourceDelta.ADDED:
+			break;
+		case IResourceDelta.REMOVED:
+			break;
+		case IResourceDelta.CHANGED:
+			IPath fullpath = delta.getFullPath();
+			if (classpath.isPrefixOf(fullpath) || (webinf.isPrefixOf(fullpath))) {
+				isUpdateNeeded = true;
+				return true;
+			}
+			break;
+		}
+
+		IResourceDelta[] children = delta.getAffectedChildren();
+		for (int i = 0, n = children.length; i < n; i++) {
+			boolean result = needUpdate(children[i]);
+			if (result) {
+				isUpdateNeeded = true;
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -212,9 +252,15 @@ public class PaletteItemManager implements IPaletteItemManager,
 	 */
 	private PaletteItemManager(IProject project) {
 		_curProject = project;
+
+		classpath = _curProject.getFullPath().append(".classpath");
+		IFolder webroot = WebrootUtil.getWebContentFolder(_curProject);
+		webinf = webroot.getFolder(IFileFolderConstants.FOLDER_WEBINF)
+				.getFullPath();
+
 		init();
-		_curProject.getWorkspace().addResourceChangeListener(
-				getResourceTracker());
+		ResourcesPlugin.getWorkspace().addResourceChangeListener(
+				getResourceTracker(), IResourceChangeEvent.POST_CHANGE);
 	}
 
 	/*
