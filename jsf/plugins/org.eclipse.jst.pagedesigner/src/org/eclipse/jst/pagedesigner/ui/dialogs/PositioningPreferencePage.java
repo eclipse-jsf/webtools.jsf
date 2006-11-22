@@ -397,12 +397,12 @@ public class PositioningPreferencePage extends PreferencePage {
 					_placementLeftUnitCombo.setEnabled(false);
 				}
 
-				String top = _placementLeftNumberCombo.getText();
+				String top1 = _placementLeftNumberCombo.getText();
 				if (_placementLeftUnitCombo.isEnabled()) {
-					top += _placementLeftUnitCombo.getText();
+					top1 += _placementLeftUnitCombo.getText();
 				}
 
-				_style.setLeft(top);
+				_style.setLeft(top1);
 			}
 		});
 
@@ -414,12 +414,12 @@ public class PositioningPreferencePage extends PreferencePage {
 		_placementLeftUnitCombo.setEnabled(false);
 		_placementLeftUnitCombo.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
-				String top = _placementLeftNumberCombo.getText();
+				String top1 = _placementLeftNumberCombo.getText();
 				if (_placementLeftUnitCombo.isEnabled()) {
-					top += _placementLeftUnitCombo.getText();
+					top1 += _placementLeftUnitCombo.getText();
 				}
 
-				_style.setLeft(top);
+				_style.setLeft(top1);
 			}
 		});
 
@@ -587,12 +587,12 @@ public class PositioningPreferencePage extends PreferencePage {
 					_clipLeftUnitCombo.setEnabled(false);
 				}
 
-				String top = _clipLeftNumberCombo.getText();
+				String top1 = _clipLeftNumberCombo.getText();
 				if (_clipLeftUnitCombo.isEnabled()) {
-					top += _clipLeftUnitCombo.getText();
+					top1 += _clipLeftUnitCombo.getText();
 				}
 
-				_style.setClipLeft(top);
+				_style.setClipLeft(top1);
 			}
 		});
 
@@ -604,12 +604,12 @@ public class PositioningPreferencePage extends PreferencePage {
 		_clipLeftUnitCombo.setEnabled(false);
 		_clipLeftUnitCombo.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
-				String top = _clipLeftNumberCombo.getText();
+				String top1 = _clipLeftNumberCombo.getText();
 				if (_clipLeftUnitCombo.isEnabled()) {
-					top += _clipLeftUnitCombo.getText();
+					top1 += _clipLeftUnitCombo.getText();
 				}
 
-				_style.setClipLeft(top);
+				_style.setClipLeft(top1);
 			}
 		});
 
@@ -772,8 +772,7 @@ public class PositioningPreferencePage extends PreferencePage {
 	private boolean isEmptyString(String str) {
 		if (str == null || str.length() == 0) {
 			return true;
-		} else {
-			return false;
-		}
+        }	
+        return false;
 	}
 }

@@ -18,6 +18,7 @@ public class CSSColorManager {
 	private static CSSColorManager _instance;
 
 	private CSSColorManager() {
+        // no external instantiation
 	}
 
 	public static CSSColorManager getInstance() {

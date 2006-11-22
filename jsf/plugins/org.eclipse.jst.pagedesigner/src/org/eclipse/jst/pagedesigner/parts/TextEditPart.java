@@ -54,8 +54,7 @@ public class TextEditPart extends SubNodeEditPart implements ICSSTextProvider {
 	protected IFigure createFigure() {
 		// XXX: currently creating of CSSTextFigure is distributed both here
 		// and FigureFactory. We may want to unify them later.
-		CSSTextFigure figure = new CSSTextFigure(this);
-		return figure;
+		return new CSSTextFigure(this);
 	}
 
 	/*
@@ -100,9 +99,9 @@ public class TextEditPart extends SubNodeEditPart implements ICSSTextProvider {
 	 * @see org.eclipse.jst.pagedesigner.css2.provider.ICSSTextProvider#getCSSStyle()
 	 */
 	public ICSSStyle getCSSStyle() {
-		IFigure figure = this.getFigure();
-		if (figure instanceof ICSSFigure) {
-			ICSSStyle style = ((ICSSFigure) figure).getCSSStyle();
+		IFigure figure1 = this.getFigure();
+		if (figure1 instanceof ICSSFigure) {
+			ICSSStyle style = ((ICSSFigure) figure1).getCSSStyle();
 			if (style != null) {
 				return style;
 			}
@@ -130,9 +129,8 @@ public class TextEditPart extends SubNodeEditPart implements ICSSTextProvider {
 		String data = _cachedData;
 		if (style.getStyleProperty(ICSSPropertyID.ATTR_WHITESPACE) != ICSSPropertyID.VAL_PRE) {
 			return HTMLUtil.compactWhitespaces(_textNode, data);
-		} else {
-			return data;
 		}
+        return data;
 	}
 
 	/**

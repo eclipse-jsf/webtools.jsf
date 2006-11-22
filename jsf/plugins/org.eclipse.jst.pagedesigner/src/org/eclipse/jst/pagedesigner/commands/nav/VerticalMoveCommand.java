@@ -84,9 +84,9 @@ public class VerticalMoveCommand extends Command {
 				moveMediator);// position.getContainerPart();
 		if (rootpart1 == null) {
 			return;
-		} else {
-			point = adjustLocation(rootpart1, point);
 		}
+        
+        point = adjustLocation(rootpart1, point);
 		Rectangle bound = EditPartPositionHelper.getAbsoluteBounds(rootpart1);
 		// get current according to the point.
 		// FlowBoxLine line =
@@ -176,9 +176,8 @@ public class VerticalMoveCommand extends Command {
 				.convertToAbsoluteCaretRect(prevPos);
 		if (_up) {
 			return getYDistance(newRec, prevRec, _up) < 0;
-		} else {
-			return getYDistance(newRec, prevRec, _up) > 0;
 		}
+        return getYDistance(newRec, prevRec, _up) > 0;
 	}
 
 	/**
@@ -193,12 +192,10 @@ public class VerticalMoveCommand extends Command {
 	private int getYDistance(Rectangle rec1, Rectangle rec2, boolean top) {
 		if (rec1.getCopy().intersect(rec2).height > 0) {
 			return 0;
-		} else {
-			if (top) {
-				return rec1.getTop().y - rec2.getTop().y;
-			} else {
-				return rec1.getBottom().y - rec2.getBottom().y;
-			}
 		}
+        if (top) {
+        	return rec1.getTop().y - rec2.getTop().y;
+        }
+        return rec1.getBottom().y - rec2.getBottom().y;
 	}
 }

@@ -23,9 +23,8 @@ public class WidgetBox extends FlowBox {
 	public int getAscent() {
 		if (_ascent < 0) {
 			return super.getAscent();
-		} else {
-			return _ascent;
 		}
+        return _ascent;
 	}
 
 	public void setAscent(int ascent) {

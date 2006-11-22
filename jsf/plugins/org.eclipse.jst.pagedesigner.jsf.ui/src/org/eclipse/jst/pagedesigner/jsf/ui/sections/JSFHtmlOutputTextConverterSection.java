@@ -106,6 +106,7 @@ public class JSFHtmlOutputTextConverterSection extends BaseCustomSection
          */
         public void inputChanged(Viewer viewer, Object oldInput, Object newInput)
         {
+            // do nothing
         }
 
         public String getColumnText(Object element, int columnIndex)
@@ -133,6 +134,7 @@ public class JSFHtmlOutputTextConverterSection extends BaseCustomSection
 
         public void dispose()
         {
+            // nothing to dispose
         }
 
         /* (non-Javadoc)
@@ -148,6 +150,7 @@ public class JSFHtmlOutputTextConverterSection extends BaseCustomSection
          */
         public void addListener(ILabelProviderListener listener)
         {
+            // TODO: no support for listeners?
         }
 
         /* (non-Javadoc)
@@ -163,6 +166,7 @@ public class JSFHtmlOutputTextConverterSection extends BaseCustomSection
          */
         public void removeListener(ILabelProviderListener listener)
         {
+            // TODO: no support for listeners?
         }
 
     }

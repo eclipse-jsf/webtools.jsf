@@ -31,9 +31,6 @@ import org.eclipse.jst.pagedesigner.parts.ElementEditPart;
 import org.eclipse.jst.pagedesigner.parts.HTMLEditPartsFactory;
 import org.eclipse.jst.pagedesigner.parts.NodeEditPart;
 import org.eclipse.jst.pagedesigner.utils.HTMLUtil;
-import org.eclipse.jst.pagedesigner.validation.caret.ActionData;
-import org.eclipse.jst.pagedesigner.validation.caret.IMovementMediator;
-import org.eclipse.jst.pagedesigner.validation.caret.InlineEditingNavigationMediator;
 import org.eclipse.jst.pagedesigner.validation.caret.Target;
 import org.eclipse.jst.pagedesigner.viewer.DesignPosition;
 import org.eclipse.jst.pagedesigner.viewer.DesignRange;
@@ -129,6 +126,7 @@ public class EditModelQuery {
 	}
 
 	private EditModelQuery() {
+        // no  external instantiation
 	}
 
 	public static EditModelQuery getInstance() {
@@ -211,9 +209,8 @@ public class EditModelQuery {
 		}
 		if (node.getLastChild() != null) {
 			return getLastLeafChild(node.getLastChild());
-		} else {
-			return node;
 		}
+        return node;
 	}
 
 	/**
@@ -229,9 +226,8 @@ public class EditModelQuery {
 
 		if (node.getFirstChild() != null) {
 			return getFirstLeafChild(node.getFirstChild());
-		} else {
-			return node;
 		}
+        return node;
 	}
 
 	/**
@@ -268,9 +264,8 @@ public class EditModelQuery {
 		if (getNodeLenth(theNode) > 0) {
 			return getNodeStartIndex(theNode) >= end
 					|| getNodeEndIndex(theNode) <= start;
-		} else {
-			return !((getNodeStartIndex(theNode) >= start && getNodeEndIndex(theNode) <= end));
 		}
+        return !((getNodeStartIndex(theNode) >= start && getNodeEndIndex(theNode) <= end));
 	}
 
 	/**
@@ -288,12 +283,10 @@ public class EditModelQuery {
 		if (forward) {
 			if (EditModelQuery.isText(node)) {
 				return offset == node.getNodeValue().length();
-			} else {
-				return offset == node.getChildNodes().getLength();
 			}
-		} else {
-			return offset == 0;
+            return offset == node.getChildNodes().getLength();
 		}
+        return offset == 0;
 	}
 
 	/**
@@ -307,9 +300,8 @@ public class EditModelQuery {
 	public Node getNeighbor(Node node, boolean forward) {
 		if (forward) {
 			return getNextNeighbor(node);
-		} else {
-			return getPreviousNeighbor(node);
 		}
+        return getPreviousNeighbor(node);
 	}
 
 	/**
@@ -367,9 +359,8 @@ public class EditModelQuery {
 		Assert.isTrue(root != null);
 		if (forward) {
 			return getNextNeighbor(node, root);
-		} else {
-			return getPreviousNeighbor(node, root);
 		}
+        return getPreviousNeighbor(node, root);
 	}
 
 	/**
@@ -386,9 +377,8 @@ public class EditModelQuery {
 		}
 		if (forward) {
 			return getNextLeafNeighbor(node);
-		} else {
-			return getPreviousLeafNeighbor(node);
 		}
+        return getPreviousLeafNeighbor(node);
 	}
 
 	/**
@@ -407,9 +397,8 @@ public class EditModelQuery {
 		if (neighbor != null) {
 			if (forward) {
 				return getFirstLeafChild(neighbor);
-			} else {
-				return getLastLeafChild(neighbor);
 			}
+            return getLastLeafChild(neighbor);
 		}
 		return null;
 	}
@@ -439,16 +428,13 @@ public class EditModelQuery {
 			childNode = nodeList.item(childIndex);
 			if (childNode != null) {
 				return childNode;
-			} else {
-				return getNeighbor(parent, forward);
 			}
-		} else {
-			if (parent.getNodeType() == Node.TEXT_NODE) {
-				return getNeighbor(parent, forward);
-			} else {
-				return null;
-			}
+            return getNeighbor(parent, forward);
 		}
+        if (parent.getNodeType() == Node.TEXT_NODE) {
+        	return getNeighbor(parent, forward);
+        }
+        return null;
 	}
 
 	/**
@@ -570,39 +556,31 @@ public class EditModelQuery {
 		Node parent = p.getContainerNode();
 		if (p.isText()) {
 			return ((IndexedRegion) parent).getStartOffset() + p.getOffset();
-		} else {
-			int index = p.getOffset();
-			if (!parent.hasChildNodes()) {
-				// Element:
-				if (!isDocument(parent)) {
-					IStructuredDocumentRegion region = ((IDOMNode) parent)
-							.getStartStructuredDocumentRegion();
-					return region.getEnd();
-				}
-				// Document node:
-				else {
-					int offset = ((IndexedRegion) parent).getStartOffset();
-					return offset;
-				}
-			} else {
-				NodeList children = parent.getChildNodes();
-				// After rightmost child
-				if (children.getLength() == index) {
-					if (!isDocument(parent)) {
-						int pos = getNodeEndNameStartIndex(parent);
-						return pos;
-					} else {
-						int offset = ((IndexedRegion) parent).getEndOffset();
-						return offset;
-					}
-				}
-				// Before a child
-				else {
-					Node node = children.item(index);
-					return ((IndexedRegion) node).getStartOffset();
-				}
-			}
 		}
+        int index = p.getOffset();
+        if (!parent.hasChildNodes()) {
+        	// Element:
+        	if (!isDocument(parent)) {
+        		IStructuredDocumentRegion region = ((IDOMNode) parent)
+        				.getStartStructuredDocumentRegion();
+        		return region.getEnd();
+        	}
+            // Document node:
+            int offset = ((IndexedRegion) parent).getStartOffset();
+            return offset;
+        }
+        NodeList children = parent.getChildNodes();
+        // After rightmost child
+        if (children.getLength() == index) {
+        	if (!isDocument(parent)) {
+        		int pos = getNodeEndNameStartIndex(parent);
+        		return pos;
+        	}
+            int offset = ((IndexedRegion) parent).getEndOffset();
+            return offset;
+        }
+        Node node = children.item(index);
+        return ((IndexedRegion) node).getStartOffset();
 	}
 
 	/**
@@ -619,19 +597,18 @@ public class EditModelQuery {
 		if (left) {
 			int pos = getIndexedRegionLocation(nodePos);
 			return pos == index;
-		} else {
-			Node node = null;
-			int end;
-			if (nodePos.isText()) {
-				node = nodePos.getContainerNode();
-				end = ((IndexedRegion) node).getEndOffset();
-			} else {
-				node = nodePos.getNextSiblingNode();
-				Assert.isTrue(node != null);
-				end = ((IndexedRegion) node).getEndOffset();
-			}
-			return end == index;
 		}
+        Node node = null;
+        int end;
+        if (nodePos.isText()) {
+        	node = nodePos.getContainerNode();
+        	end = ((IndexedRegion) node).getEndOffset();
+        } else {
+        	node = nodePos.getNextSiblingNode();
+        	Assert.isTrue(node != null);
+        	end = ((IndexedRegion) node).getEndOffset();
+        }
+        return end == index;
 	}
 
 	/**
@@ -752,14 +729,13 @@ public class EditModelQuery {
 				i++;
 			}
 			return i;
-		} else {
-			i = position - 1;
-			while (i >= 0
-					&& (value.charAt(i) == SWT.CR || value.charAt(i) == SWT.LF)) {
-				i--;
-			}
-			return i + 1;
 		}
+        i = position - 1;
+        while (i >= 0
+        		&& (value.charAt(i) == SWT.CR || value.charAt(i) == SWT.LF)) {
+        	i--;
+        }
+        return i + 1;
 	}
 
 	/**
@@ -974,9 +950,8 @@ public class EditModelQuery {
 	public Node getNextSibling(IDOMPosition position) {
 		if (position.isText()) {
 			return position.getContainerNode().getNextSibling();
-		} else {
-			return position.getNextSiblingNode();
 		}
+        return position.getNextSiblingNode();
 	}
 
 	/**
@@ -988,9 +963,8 @@ public class EditModelQuery {
 	public Node getPreviousSibling(IDOMPosition position) {
 		if (position.isText()) {
 			return position.getContainerNode().getPreviousSibling();
-		} else {
-			return position.getPreviousSiblingNode();
 		}
+        return position.getPreviousSiblingNode();
 	}
 
 	/**
@@ -1002,9 +976,8 @@ public class EditModelQuery {
 	public Node getParent(IDOMPosition position) {
 		if (position.isText()) {
 			return position.getContainerNode().getParentNode();
-		} else {
-			return position.getContainerNode();
 		}
+        return position.getContainerNode();
 	}
 
 	/**
@@ -1018,9 +991,8 @@ public class EditModelQuery {
 		EditValidateUtil.validNode(node);
 		if (forward) {
 			return node.getNextSibling();
-		} else {
-			return node.getPreviousSibling();
 		}
+        return node.getPreviousSibling();
 	}
 
 	/**
@@ -1033,9 +1005,8 @@ public class EditModelQuery {
 	public Node getSibling(IDOMPosition position, boolean forward) {
 		if (forward) {
 			return getNextSibling(position);
-		} else {
-			return getPreviousSibling(position);
 		}
+        return getPreviousSibling(position);
 	}
 
 	/**
@@ -1049,13 +1020,11 @@ public class EditModelQuery {
 		EditValidateUtil.validPosition(position);
 		if (position.isText()) {
 			return ((Text) position.getContainerNode()).getLength();
-		} else {
-			if (position.getContainerNode().hasChildNodes()) {
-				return position.getContainerNode().getChildNodes().getLength();
-			} else {
-				return 0;
-			}
 		}
+        if (position.getContainerNode().hasChildNodes()) {
+        	return position.getContainerNode().getChildNodes().getLength();
+        }
+        return 0;
 	}
 
 	/**
@@ -1118,9 +1087,10 @@ public class EditModelQuery {
 		return node != null && node.getNodeType() == Node.DOCUMENT_NODE;
 	}
 
-	private static boolean isHead(Node node) {
-		return node.getNodeName().equalsIgnoreCase(IHTMLConstants.TAG_HEAD);
-	}
+    // TODO: dead?
+//	private static boolean isHead(Node node) {
+//		return node.getNodeName().equalsIgnoreCase(IHTMLConstants.TAG_HEAD);
+//	}
 
 	/**
 	 * Get style from parent node. from first paret 'firstF', we will traverse
@@ -1189,17 +1159,15 @@ public class EditModelQuery {
 			if (forward && container.hasChildNodes()) {
 				return new DOMPosition(container, container.getChildNodes()
 						.getLength());
-			} else {
-				return new DOMPosition(container, 0);
 			}
-		} else {
-			Assert.isTrue(refNode.getParentNode() == container);
-			int index = getNodeIndex(refNode);
-			if (!forward) {
-				index++;
-			}
-			return new DOMPosition(container, index);
+            return new DOMPosition(container, 0);
 		}
+        Assert.isTrue(refNode.getParentNode() == container);
+        int index = getNodeIndex(refNode);
+        if (!forward) {
+        	index++;
+        }
+        return new DOMPosition(container, index);
 	}
 
 	public static DesignRange convertToDesignRange(IStructuredModel fModel,
@@ -1254,8 +1222,9 @@ public class EditModelQuery {
 	public IDOMPosition createDomposition1(IDOMModel model, int position,
 			boolean adjust) {
 		try {
-			IMovementMediator validator = new InlineEditingNavigationMediator(
-					new ActionData(ActionData.INLINE_EDIT, null));
+            // TODO: never read
+//			IMovementMediator validator = new InlineEditingNavigationMediator(
+//					new ActionData(ActionData.INLINE_EDIT, null));
 			// get the container
 			Object object = getPosNode(model, position);
 			if (object == null && position > 0) {
@@ -1312,15 +1281,12 @@ public class EditModelQuery {
 	 * @return
 	 */
 	public static int getNodeLenth(Node node) {
-		if (node == null) {
-			return 0;
-		}
-		if (EditValidateUtil.validNode(node)) {
+		if (node != null
+               && EditValidateUtil.validNode(node)) {
 			return ((IndexedRegion) node).getEndOffset()
 					- ((IndexedRegion) node).getStartOffset();
-		} else {
-			return 0;
 		}
+        return 0;
 	}
 
 	/**
@@ -1454,21 +1420,17 @@ public class EditModelQuery {
 	 * @return
 	 */
 	public boolean hasNonTransparentChild(Node node) {
-		if (!node.hasChildNodes()) {
-			return false;
-		} else {
-			NodeList children = node.getChildNodes();
-			for (int i = 0, n = children.getLength(); i < n; i++) {
-				Object child = children.item(i);
-				if (isText((Node) child)) {
-					if (!isTransparentText((Node) child)) {
-						return true;
-					}
-				} else {
-					return true;
-				}
-			}
-		}
+        NodeList children = node.getChildNodes();
+        for (int i = 0, n = children.getLength(); i < n; i++) {
+        	Object child = children.item(i);
+        	if (isText((Node) child)) {
+        		if (!isTransparentText((Node) child)) {
+        			return true;
+        		}
+        	} else {
+        		return true;
+        	}
+        }
 		return false;
 	}
 
@@ -1481,20 +1443,19 @@ public class EditModelQuery {
 	public boolean hasNonTransparentChild(Node node, String[] excludes) {
 		if (!node.hasChildNodes()) {
 			return false;
-		} else {
-			NodeList children = node.getChildNodes();
-			for (int i = 0, n = children.getLength(); i < n; i++) {
-				Object child = children.item(i);
-				if (isText((Node) child)) {
-					if (!isTransparentText((Node) child)) {
-						return true;
-					}
-				} else if (!Arrays.asList(excludes).contains(
-						((Node) child).getLocalName())) {
-					return true;
-				}
-			}
 		}
+        NodeList children = node.getChildNodes();
+        for (int i = 0, n = children.getLength(); i < n; i++) {
+        	Object child = children.item(i);
+        	if (isText((Node) child)) {
+        		if (!isTransparentText((Node) child)) {
+        			return true;
+        		}
+        	} else if (!Arrays.asList(excludes).contains(
+        			((Node) child).getLocalName())) {
+        		return true;
+        	}
+        }
 		return false;
 	}
 
@@ -1508,10 +1469,9 @@ public class EditModelQuery {
 		node = getNeighbor(node, true);
 		if (isWidget(node)) {
 			return false;
-		} else {
-			node = getFirstLeafChild(node);
-			return isTransparentText(node);
 		}
+        node = getFirstLeafChild(node);
+        return isTransparentText(node);
 
 	}
 
@@ -1547,9 +1507,8 @@ public class EditModelQuery {
 	public boolean isRedundantWightspaces(Node node) {
 		if (isTransparentText(node) && hasWhitespaceNeighbor(node)) {
 			return true;
-		} else {
-			return false;
 		}
+        return false;
 	}
 
 	public static boolean hasAncestor(Node node, String names[],
@@ -1651,17 +1610,16 @@ public class EditModelQuery {
 			int maxLevelToSearch, boolean ignoreCase) {
 		if (ancestor == null || maxLevelToSearch < 0) {
 			return null;
-		} else {
-			if (ancestor.getLocalName() != null
-					&& ignoreCase
-					&& Arrays.asList(childrenNames).contains(
-							ancestor.getLocalName().toLowerCase())
-					|| !ignoreCase
-					&& Arrays.asList(childrenNames).contains(
-							ancestor.getLocalName())) {
-				return ancestor;
-			}
 		}
+        if (ancestor.getLocalName() != null
+        		&& ignoreCase
+        		&& Arrays.asList(childrenNames).contains(
+        				ancestor.getLocalName().toLowerCase())
+        		|| !ignoreCase
+        		&& Arrays.asList(childrenNames).contains(
+        				ancestor.getLocalName())) {
+        	return ancestor;
+        }
 		NodeList children = ancestor.getChildNodes();
 		for (int i = 0, n = children.getLength(); i < n; i++) {
 			Node result = getChild(children.item(i), childrenNames,
@@ -1688,15 +1646,14 @@ public class EditModelQuery {
 			String childrenNames[], int maxLevelToSearch, boolean ignoreCase) {
 		if (ancestor == null || maxLevelToSearch < 0) {
 			return null;
-		} else {
-			String nodeName = ancestor.getNodeName();
-			if (nodeName != null && ignoreCase
-					&& Arrays.asList(childrenNames).contains(nodeName)
-					|| !ignoreCase
-					&& Arrays.asList(childrenNames).contains(nodeName)) {
-				return ancestor;
-			}
 		}
+        String nodeName = ancestor.getNodeName();
+        if (nodeName != null && ignoreCase
+        		&& Arrays.asList(childrenNames).contains(nodeName)
+        		|| !ignoreCase
+        		&& Arrays.asList(childrenNames).contains(nodeName)) {
+        	return ancestor;
+        }
 		NodeList children = ancestor.getChildNodes();
 		for (int i = 0, n = children.getLength(); i < n; i++) {
 			Node result = getChildDeferredNode(children.item(i), childrenNames,
@@ -1711,7 +1668,7 @@ public class EditModelQuery {
 	public static boolean hasTransparentNodeOnly(Node node) {
 		NodeList children = node.getChildNodes();
 		for (int i = 0, n = children.getLength(); i < n; i++) {
-			if (!EditModelQuery.isTransparentText((Node) children.item(i))) {
+			if (!EditModelQuery.isTransparentText(children.item(i))) {
 				return false;
 			}
 		}

@@ -513,15 +513,14 @@ public class CSSTableLayout2 extends CSSBlockFlowLayout implements ICSSPainter {
 
 		if (spanwidth >= width) {
 			return;
-		} else {
-			int delta = width - spanwidth;
-			int deltaeach = delta / colspan;
-			for (int i = 0; i < colspan - 1; i++) {
-				columnWidths[column + i] += deltaeach;
-			}
-			columnWidths[column + colspan - 1] += (delta - (colspan - 1)
-					* deltaeach);
 		}
+        int delta = width - spanwidth;
+        int deltaeach = delta / colspan;
+        for (int i = 0; i < colspan - 1; i++) {
+        	columnWidths[column + i] += deltaeach;
+        }
+        columnWidths[column + colspan - 1] += (delta - (colspan - 1)
+        		* deltaeach);
 	}
 
 	/**

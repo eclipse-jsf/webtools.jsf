@@ -43,9 +43,8 @@ public class ATagConverter extends DumTagConverter {
 			Text fakedNode = createText("link");
 			resultEle.appendChild(fakedNode);
 			return resultEle;
-		} else {
-			return super.doConvertRefresh();
 		}
+        return super.doConvertRefresh();
 	}
 
 	/*

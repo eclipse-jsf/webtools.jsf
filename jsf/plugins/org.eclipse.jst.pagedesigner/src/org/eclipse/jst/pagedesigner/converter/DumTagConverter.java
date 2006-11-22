@@ -77,10 +77,8 @@ public class DumTagConverter extends AbstractTagConverter {
 				|| IHTMLConstants.TAG_STYLE.equalsIgnoreCase(tagname)
 				|| IHTMLConstants.TAG_HR.equalsIgnoreCase(tagname)) {
 			return true;
-		} else {
-
-			return false;
 		}
+        return false;
 	}
 
 	/*

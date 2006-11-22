@@ -17,7 +17,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.SafeRunner;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.jface.util.SafeRunnable;
 import org.eclipse.jface.viewers.IPostSelectionProvider;
@@ -404,7 +404,7 @@ public abstract class SashEditorPart extends EditorPart {
 	 *            The part to dispose; must not be <code>null</code>.
 	 */
 	private void disposePart(final IWorkbenchPart part) {
-		Platform.run(new SafeRunnable() {
+        SafeRunner.run(new SafeRunnable() {
 			public void run() {
 				if (part.getSite() instanceof SashEditorSite) {
 					SashEditorSite partSite = (SashEditorSite) part.getSite();
@@ -462,22 +462,21 @@ public abstract class SashEditorPart extends EditorPart {
 						.log("MultiPageEditorPart.setFocus()   Parent key binding service was not an instance of INestableKeyBindingService.  It was an instance of " + service.getClass().getName() + " instead."); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 			return;
-		} else {
-			editor.setFocus();
-			// There is no selected page, so deactivate the active service.
-			if (service instanceof INestableKeyBindingService) {
-				final INestableKeyBindingService nestableService = (INestableKeyBindingService) service;
-				if (editor != null) {
-					nestableService.activateKeyBindingService(editor
-							.getEditorSite());
-				} else {
-					nestableService.activateKeyBindingService(null);
-				}
-			} else {
-				WorkbenchPlugin
-						.log("MultiPageEditorPart.setFocus()   Parent key binding service was not an instance of INestableKeyBindingService.  It was an instance of " + service.getClass().getName() + " instead."); //$NON-NLS-1$ //$NON-NLS-2$
-			}
 		}
+        editor.setFocus();
+        // There is no selected page, so deactivate the active service.
+        if (service instanceof INestableKeyBindingService) {
+        	final INestableKeyBindingService nestableService = (INestableKeyBindingService) service;
+        	if (editor != null) {
+        		nestableService.activateKeyBindingService(editor
+        				.getEditorSite());
+        	} else {
+        		nestableService.activateKeyBindingService(null);
+        	}
+        } else {
+        	WorkbenchPlugin
+        			.log("MultiPageEditorPart.setFocus()   Parent key binding service was not an instance of INestableKeyBindingService.  It was an instance of " + service.getClass().getName() + " instead."); //$NON-NLS-1$ //$NON-NLS-2$
+        }
 	}
 
 	public void doSave(IProgressMonitor monitor) {
@@ -495,9 +494,10 @@ public abstract class SashEditorPart extends EditorPart {
 
 	public boolean isSaveAsAllowed() {
 		if (_activeEditor != null)
+        {
 			return _activeEditor.isSaveAsAllowed();
-		else
-			return false;
+        }
+		return false;
 	}
 
 	public void setOrientation(int orientation) {

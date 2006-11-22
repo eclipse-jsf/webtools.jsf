@@ -137,7 +137,7 @@ public class DesignerPaletteCustomizerDialog extends PaletteCustomizerDialog {
 		}
 
 		public void update() {
-			boolean enabled = false;
+			//boolean enabled = false;
 			PaletteEntry entry = getSelectedPaletteEntry();
 			if (entry != null) {
 				// if (getCustomizer() instanceof DesignerPaletteCustomizer)

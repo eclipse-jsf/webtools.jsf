@@ -30,6 +30,7 @@ public class JSPConverterFactory implements IConverterFactory {
 	 * 
 	 */
 	public JSPConverterFactory() {
+        // do nothing
 	}
 
 	/*
@@ -63,15 +64,14 @@ public class JSPConverterFactory implements IConverterFactory {
 			} else {
 				return new HiddenTagConverter(element, image);
 			}
-		} else {
-			if (IJSPCoreConstants.TAG_ROOT.equalsIgnoreCase(tagName)) {
-				TagConverterToDumBlock c = new TagConverterToDumBlock(element);
-				c.setNeedBorderDecorator(true);
-				c.setMode(mode);
-				return c;
-			}
-			return new HiddenTagConverter(element, image);
 		}
+        if (IJSPCoreConstants.TAG_ROOT.equalsIgnoreCase(tagName)) {
+        	TagConverterToDumBlock c = new TagConverterToDumBlock(element);
+        	c.setNeedBorderDecorator(true);
+        	c.setMode(mode);
+        	return c;
+        }
+        return new HiddenTagConverter(element, image);
 	}
 
 	/**

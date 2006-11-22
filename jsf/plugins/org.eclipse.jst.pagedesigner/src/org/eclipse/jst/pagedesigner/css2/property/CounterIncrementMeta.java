@@ -70,16 +70,15 @@ public class CounterIncrementMeta extends CSSPropertyMeta {
 			}
 			if (cssValue == null) {
 				return null;
-			} else {
-				// identifier:
-				identifier = ((ICSSPrimitiveValue) value).getStringValue();
-				cssValue = cssValue.getNextSibling();
-				// value:
-				if (CounterHelper.isNumber(cssValue)) {
-					increment = new Integer((int) ((ICSSPrimitiveValue) value)
-							.getFloatValue(ICSSPrimitiveValue.CSS_INTEGER));
-				}
 			}
+            // identifier:
+            identifier = ((ICSSPrimitiveValue) value).getStringValue();
+            cssValue = cssValue.getNextSibling();
+            // value:
+            if (CounterHelper.isNumber(cssValue)) {
+            	increment = new Integer((int) ((ICSSPrimitiveValue) value)
+            			.getFloatValue(ICSSPrimitiveValue.CSS_INTEGER));
+            }
 
 			if (identifier != null) {
 				incrementObject = new IncrementObject(identifier, increment);

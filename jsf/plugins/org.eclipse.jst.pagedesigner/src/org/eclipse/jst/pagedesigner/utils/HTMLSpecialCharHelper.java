@@ -310,22 +310,21 @@ public class HTMLSpecialCharHelper {
 		Integer result = (Integer) _reverse.get(str);
 		if (result == null) {
 			return -1;
-		} else {
-			return result.intValue();
 		}
+        return result.intValue();
 	}
 
 	public static void encode(String str, int start, int end, Writer writer)
 			throws IOException {
 		for (int i = start; i < end; i++) {
 			char ch = str.charAt(i);
-			String special = getSpecial((int) ch);
+			String special = getSpecial(ch);
 			if (special != null) {
 				writer.write(special);
 			} else {
 				if ((ch & 0xff) != 0) {
 					writer.write("&#"); //$NON-NLS-1$
-					writer.write(Integer.toString((int) ch));
+					writer.write(Integer.toString(ch));
 					writer.write(";"); //$NON-NLS-1$
 				} else {
 					writer.write(ch);
@@ -342,13 +341,13 @@ public class HTMLSpecialCharHelper {
 			StringBuffer result) {
 		for (int i = start; i < end; i++) {
 			char ch = str.charAt(i);
-			String special = getSpecial((int) ch);
+			String special = getSpecial(ch);
 			if (special != null) {
 				result.append(special);
 			} else {
 				if ((ch & 0xff00) != 0) {
 					result.append("&#"); //$NON-NLS-1$
-					result.append(Integer.toString((int) ch));
+					result.append(Integer.toString(ch));
 					result.append(";"); //$NON-NLS-1$
 				} else {
 					result.append(ch);

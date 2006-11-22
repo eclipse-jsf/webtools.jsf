@@ -100,9 +100,9 @@ public class DialogFieldWrapper implements DialogField, ISupportTextValue,
 			 * 
 			 * @see org.eclipse.jst.pagedesigner.common.dialogfield.IStringButtonAdapter#changeControlPressed(org.eclipse.jst.pagedesigner.common.dialogfield.DialogField)
 			 */
-			public void changeControlPressed(DialogField field) {
-				Shell shell = field.getLabelControl(null, null).getShell();
-				DialogFieldWrapper wrapper = (DialogFieldWrapper) field;
+			public void changeControlPressed(DialogField field1) {
+				Shell shell = field1.getLabelControl(null, null).getShell();
+				DialogFieldWrapper wrapper = (DialogFieldWrapper) field1;
 				String result = _handler
 						.handleBinding(shell, wrapper.getAncester(), wrapper
 								.getElement(), wrapper.getText());

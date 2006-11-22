@@ -25,10 +25,10 @@ public class ResourceBoundle {
 			.getBundle(BUNDLE_NAME);
 
 	private ResourceBoundle() {
+        // no external instantiation
 	}
 
 	public static String getString(String key) {
-		// TODO Auto-generated method stub
 		try {
 			return RESOURCE_BUNDLE.getString(key);
 		} catch (MissingResourceException e) {

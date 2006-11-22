@@ -36,8 +36,7 @@ public class PageVariableAdapterFactory extends AbstractAdapterFactory {
 	protected INodeAdapter createAdapter(INodeNotifier target) {
 		if (target instanceof IDOMElement) {
 			return PageVariableAdapter.getInstance();
-		} else {
-			return null;
 		}
+        return null;
 	}
 }

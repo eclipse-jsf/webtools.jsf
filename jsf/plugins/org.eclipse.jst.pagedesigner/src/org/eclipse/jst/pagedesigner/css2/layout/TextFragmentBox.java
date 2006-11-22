@@ -34,6 +34,7 @@ public class TextFragmentBox extends FlowBox {
 	 * Creates a new TextFragmentBox
 	 */
 	public TextFragmentBox() {
+        // do nothgin
 	}
 
 	/**

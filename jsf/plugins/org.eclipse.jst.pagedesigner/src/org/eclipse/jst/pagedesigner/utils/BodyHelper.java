@@ -113,8 +113,8 @@ public class BodyHelper {
 					| HEADER)) {
 				reference = reference.getNextSibling();
 				continue;
-			} else
-				break;
+			}
+            break;
 		}
 
 		// backward
@@ -132,8 +132,8 @@ public class BodyHelper {
 			if (isSkippableChild(container, reference, EMPTY_TEXT | COMMENT)) {
 				reference = reference.getPreviousSibling();
 				continue;
-			} else
-				break;
+			}
+            break;
 		}
 
 		// not find any body at same level as the insertion point.
@@ -177,38 +177,33 @@ public class BodyHelper {
 			// try to find a body container at same level and see whether we can
 			// move into that body.
 			return findBodyInsertLocation(position);
-		} else {
-			// good, we find a body container and the new node should be header
-			// of it.
-			Node child = headerContainer.getFirstChild();
-			Node refNode = position.getNextSiblingNode();
-			// if parent is different from headerContainer, then
-			// child!=referenceHolder[0] will always be true
-			while (child != null) // && child != refNode)
-			{
-				Comparator comp = NodeLocationComparator.getInstance();
-				// Currently the comparator deels with tags like taglib and
-				// loadbundle particularly, comparasion result 0
-				// means it didn't compare the tags.
-				if (comp.compare(child, tag) < 0
-						|| (comp.compare(child, tag) == 0 && isSkippableChild(
-								headerContainer, child, COMMENT | EMPTY_TEXT
-										| HEADER))) {
-					child = child.getNextSibling();
-				} else {
-					break;
-				}
-			}
-			if (child != null) {
-				return new DOMRefPosition(child, false);
-			} else {
-				return new DOMPosition(parent, parent.getChildNodes()
-						.getLength());
-			}
-			// parentHolder[0] = headerContainer;
-			// referenceHolder[0] = child;
-			// return;
 		}
+        // good, we find a body container and the new node should be header
+        // of it.
+        Node child = headerContainer.getFirstChild();
+        // TODO: dead? Node refNode = position.getNextSiblingNode();
+        // if parent is different from headerContainer, then
+        // child!=referenceHolder[0] will always be true
+        while (child != null) // && child != refNode)
+        {
+        	Comparator comp = NodeLocationComparator.getInstance();
+        	// Currently the comparator deels with tags like taglib and
+        	// loadbundle particularly, comparasion result 0
+        	// means it didn't compare the tags.
+        	if (comp.compare(child, tag) < 0
+        			|| (comp.compare(child, tag) == 0 && isSkippableChild(
+        					headerContainer, child, COMMENT | EMPTY_TEXT
+        							| HEADER))) {
+        		child = child.getNextSibling();
+        	} else {
+        		break;
+        	}
+        }
+        if (child != null) {
+        	return new DOMRefPosition(child, false);
+        }
+        return new DOMPosition(parent, parent.getChildNodes()
+        		.getLength());
 	}
 
 	/**
@@ -271,7 +266,7 @@ public class BodyHelper {
 				NodeList nl = node.getChildNodes();
 				ArrayList list = new ArrayList();
 				for (int i = 0; i < nl.getLength(); i++) {
-					Node child = (Node) nl.item(i);
+					Node child = nl.item(i);
 					if (isSkippableChild(node, child, HEADER | COMMENT
 							| EMPTY_TEXT)) {
 						continue;
@@ -292,9 +287,8 @@ public class BodyHelper {
 					} else {
 						return new DOMPosition(ele, 0);
 					}
-				} else {
-					return position;
 				}
+                return position;
 			}
 			node = node.getParentNode();
 		}

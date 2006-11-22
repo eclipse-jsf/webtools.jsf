@@ -110,10 +110,9 @@ public class LocalDropCommand extends Command {
 		if (_widget != null) {
 			return new DropSelectionWizard(_viewer, _localObject,
 					_feedbackToHandlers, _widget);
-		} else {
-			return new DropSelectionWizard(_viewer, _localObject,
-					_feedbackToHandlers, _position);
 		}
+        return new DropSelectionWizard(_viewer, _localObject,
+        		_feedbackToHandlers, _position);
 	}
 
 	/**

@@ -52,9 +52,8 @@ public abstract class NodeEditPart extends AbstractGraphicalEditPart implements
 	public IDOMDocument getDestDocumentForDesign() {
 		if (this._destDocument == null) {
 			return (IDOMDocument) this.getIDOMNode().getOwnerDocument();
-		} else {
-			return this._destDocument;
 		}
+        return this._destDocument;
 	}
 
 	/*
@@ -129,7 +128,7 @@ public abstract class NodeEditPart extends AbstractGraphicalEditPart implements
 		Object obj = getModel();
 		if (key == IPropertySource.class) {
 			if (obj instanceof INodeNotifier) {
-				return (IPropertySource) ((INodeNotifier) obj)
+				return ((INodeNotifier) obj)
 						.getAdapterFor(IPropertySource.class);
 			}
 		}

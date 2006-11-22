@@ -108,7 +108,7 @@ public class AttributePropertySource implements IPropertySource {
 		}
 		Command c = new ChangeAttributeCommand(
 				PDPlugin
-						.getResourceString("AttributePropertySource.CommandLabel.ChangeAttribute"), (IDOMElement) _element, (String) id, (String) value); //$NON-NLS-1$
+						.getResourceString("AttributePropertySource.CommandLabel.ChangeAttribute"), _element, (String) id, (String) value); //$NON-NLS-1$
 		c.execute();
 	}
 
@@ -158,7 +158,7 @@ public class AttributePropertySource implements IPropertySource {
 							desc));
 				} else {
 					result.add(new PropertyDescriptorWrapper(
-							(IDOMElement) _element, desc));
+							_element, desc));
 				}
 			}
 		}

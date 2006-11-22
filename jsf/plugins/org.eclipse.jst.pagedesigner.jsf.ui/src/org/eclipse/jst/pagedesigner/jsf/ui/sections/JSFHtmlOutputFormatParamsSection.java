@@ -76,7 +76,6 @@ public class JSFHtmlOutputFormatParamsSection extends BaseCustomSection
 
     private class ParamCotentLabelProvider implements IStructuredContentProvider, ITableLabelProvider
     {
-
         /* (non-Javadoc)
          * @see org.eclipse.jface.viewers.IStructuredContentProvider#getElements(java.lang.Object)
          */
@@ -113,6 +112,7 @@ public class JSFHtmlOutputFormatParamsSection extends BaseCustomSection
          */
         public void inputChanged(Viewer viewer, Object oldInput, Object newInput)
         {
+            // do nothing
         }
 
         public String getColumnText(Object element, int columnIndex)
@@ -142,6 +142,7 @@ public class JSFHtmlOutputFormatParamsSection extends BaseCustomSection
 
         public void dispose()
         {
+            // nothing to dispose
         }
 
         /* (non-Javadoc)
@@ -157,6 +158,7 @@ public class JSFHtmlOutputFormatParamsSection extends BaseCustomSection
          */
         public void addListener(ILabelProviderListener listener)
         {
+            // TODO: no support for listeners?
         }
 
         /* (non-Javadoc)
@@ -172,6 +174,7 @@ public class JSFHtmlOutputFormatParamsSection extends BaseCustomSection
          */
         public void removeListener(ILabelProviderListener listener)
         {
+            // TODO: no support for listeners?
         }
     }
 
@@ -235,7 +238,7 @@ public class JSFHtmlOutputFormatParamsSection extends BaseCustomSection
                     break;
             }
             _paramViewer.setInput(_element);
-            updateParamButtonStatus();
+            // TODO: does nothing updateParamButtonStatus();
         }
     }
 
@@ -317,7 +320,7 @@ public class JSFHtmlOutputFormatParamsSection extends BaseCustomSection
         {
             public void selectionChanged(SelectionChangedEvent event)
             {
-                updateParamButtonStatus();
+//              TODO: does nothing updateParamButtonStatus();
             }
         }
         );
@@ -337,7 +340,7 @@ public class JSFHtmlOutputFormatParamsSection extends BaseCustomSection
                 IJMTConstants.URI_JSF_CORE, attributes);
                 c.execute();
                 _paramViewer.refresh();
-                updateParamButtonStatus();
+//              TODO: does nothing updateParamButtonStatus();
             }
         }
         );
@@ -359,23 +362,24 @@ public class JSFHtmlOutputFormatParamsSection extends BaseCustomSection
                         c.execute();
                     }
                     _paramViewer.refresh();
-                    updateParamButtonStatus();
+//                  TODO: does nothing updateParamButtonStatus();
                 }
             }
         }
         );
     }
     
-    private void updateParamButtonStatus()
-    {
-    }
+    // TODO: does nothing
+//    private void updateParamButtonStatus()
+//    {
+//    }
     
     public void setInput(IWorkbenchPart part, ISelection selection)
     {
         super.setInput(part, selection);
 
         _paramViewer.setInput(_element);
-        updateParamButtonStatus();
+//      TODO: does nothing updateParamButtonStatus();
     }
     
     private List getColumnNames()

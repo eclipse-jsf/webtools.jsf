@@ -59,8 +59,7 @@ public class DeleteCommand extends RangeModeCommand implements
 		if (status) {
 			return new DOMRange(edit.getOperationPosition(), edit
 					.getOperationPosition());
-		} else {
-			return selection;
 		}
+        return selection;
 	}
 }

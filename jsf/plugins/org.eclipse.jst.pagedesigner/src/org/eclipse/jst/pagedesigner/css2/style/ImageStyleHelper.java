@@ -24,6 +24,7 @@ public class ImageStyleHelper {
 	public static Image loadImage(String url, Element source) {
 		if (source instanceof IDOMElement) {
 			IDOMModel model = ((IDOMElement) source).getModel();
+            // TODO: the new resolver is not compatible with model
 			URIResolver resolver = model.getResolver();
 			if (resolver != null)
 				url = resolver.getLocationByURI(url);

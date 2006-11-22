@@ -82,6 +82,7 @@ public class SourceViewerDragDropHelper {
 							lineInfo = ste.getTextViewer().getDocument()
 									.getLineInformationOfOffset(offset);
 						} catch (BadLocationException e1) {
+                            // ignore exception and fall-through with lineInfo == null
 						}
 						if (lineInfo != null)
 							offset = lineInfo.getOffset()
@@ -203,9 +204,8 @@ public class SourceViewerDragDropHelper {
 	protected ModelQuery getModelQuery(Node node) {
 		if (node.getNodeType() == Node.DOCUMENT_NODE) {
 			return ModelQueryUtil.getModelQuery((Document) node);
-		} else {
-			return ModelQueryUtil.getModelQuery(node.getOwnerDocument());
 		}
+        return ModelQueryUtil.getModelQuery(node.getOwnerDocument());
 	}
 
 	public IDOMPosition findPosition(int caretPos, Node element) {
@@ -298,6 +298,7 @@ public class SourceViewerDragDropHelper {
 	 * IExtendedMarkupEditor method
 	 */
 	public Node getCaretNode(StructuredTextEditor textEditor, int pos) {
+        // TODO: getModel is deprecated
 		IStructuredModel model = textEditor.getModel();
 		// getModel(textEditor);
 		if (model == null) {
@@ -329,15 +330,13 @@ public class SourceViewerDragDropHelper {
 		} else if (pos[0][0] <= location && pos[0][1] >= location) {
 			if (((pos[0][1] + pos[0][0]) / 2) >= location) {
 				return pos[0][0];
-			} else {
-				return pos[0][1];
 			}
+            return pos[0][1];
 		} else if (pos[1][0] <= location && pos[1][1] >= location) {
 			if (((pos[1][1] + pos[1][0]) / 2) >= location) {
 				return pos[1][0];
-			} else {
-				return pos[1][1];
 			}
+            return pos[1][1];
 		}
 		return location;
 	}

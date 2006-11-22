@@ -48,9 +48,9 @@ public class DocumentEditPart extends NodeEditPart implements StyleListener,
 			return list;
 		}
 
-		NodeList children = model.getChildNodes();
-		for (int i = 0, n = children.getLength(); i < n; i++) {
-			Node node = children.item(i);
+		NodeList children1 = model.getChildNodes();
+		for (int i = 0, n = children1.getLength(); i < n; i++) {
+			Node node = children1.item(i);
 			if (node.getNodeType() != Node.TEXT_NODE
 					&& node.getNodeType() != Node.ELEMENT_NODE) {
 				continue;
@@ -105,9 +105,9 @@ public class DocumentEditPart extends NodeEditPart implements StyleListener,
 	 */
 	protected void refreshChildren() {
 		super.refreshChildren();
-		List children = getChildren();
-		for (int i = 0, size = children.size(); i < size; i++) {
-			((EditPart) children.get(i)).refresh();
+		List children1 = getChildren();
+		for (int i = 0, size = children1.size(); i < size; i++) {
+			((EditPart) children1.get(i)).refresh();
 		}
 	}
 

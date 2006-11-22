@@ -93,9 +93,8 @@ public class ChangeAttributeCommand extends SingleNodeCommand {
 	private boolean isEmptyString(String str) {
 		if (str == null || str.equals("")) {
 			return true;
-		} else {
-			return false;
 		}
+        return false;
 	}
 
 	/**

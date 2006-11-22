@@ -13,8 +13,6 @@ package org.eclipse.jst.pagedesigner.utils;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IAdapterFactory;
-import org.eclipse.jst.pagedesigner.PDPlugin;
-import org.eclipse.jst.pagedesigner.common.logging.Logger;
 import org.eclipse.wst.sse.core.internal.util.URIResolver;
 
 /**
@@ -23,7 +21,7 @@ import org.eclipse.wst.sse.core.internal.util.URIResolver;
  */
 public class UriAdapterFactory implements IAdapterFactory {
 	/** Create the logger for this class */
-	private static Logger _log = PDPlugin.getLogger(UriAdapterFactory.class);
+	//private static Logger _log = PDPlugin.getLogger(UriAdapterFactory.class);
 
 	/*
 	 * (non-Javadoc)

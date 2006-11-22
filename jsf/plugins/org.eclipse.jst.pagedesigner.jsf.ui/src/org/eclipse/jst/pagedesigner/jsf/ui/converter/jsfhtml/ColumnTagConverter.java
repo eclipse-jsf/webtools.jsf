@@ -84,10 +84,8 @@ public class ColumnTagConverter extends AbstractTagConverter
             int index = 0;
             while (child != null)
             {
-                if (child instanceof Element && JSFDOMUtil.isFacet((Element) child))
-                {
-                }
-                else
+                if (!(child instanceof Element)
+                        || !JSFDOMUtil.isFacet((Element) child))
                 {
                     addChild(child, new ConvertPosition(resultEle, index++));
                 }

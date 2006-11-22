@@ -84,7 +84,7 @@ public class LoadBundleAction extends Action
         }
         else
         {
-            IEditorInput input = new JarEntryEditorInput((IStorage) storage);
+            IEditorInput input = new JarEntryEditorInput(storage);
             try
             {
                 getPage().openEditor(input, "org.eclipse.ui.DefaultTextEditor");//$NON-NLS-1$

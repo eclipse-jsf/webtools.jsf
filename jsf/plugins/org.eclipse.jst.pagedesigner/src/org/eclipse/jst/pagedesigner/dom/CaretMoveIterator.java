@@ -256,8 +256,7 @@ public class CaretMoveIterator {
 	private Node getNaviContainer(IDOMPosition position) {
 		if (position.isText()) {
 			return position.getContainerNode().getParentNode();
-		} else {
-			return position.getContainerNode();
 		}
+        return position.getContainerNode();
 	}
 }

@@ -20,7 +20,6 @@ import org.eclipse.jst.pagedesigner.commands.range.ParagraphFinder;
 import org.eclipse.jst.pagedesigner.dom.DOMRange;
 import org.eclipse.jst.pagedesigner.dom.EditModelQuery;
 import org.eclipse.jst.pagedesigner.dom.IDOMPosition;
-import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
@@ -77,12 +76,10 @@ public class ParagraphStyleAction extends DesignerToolBarAction {
 			// the lowest common block parent is the container to apply style.
 			if (containsTag(common)) {
 				return true;
-			} else {
-				return false;
 			}
-		} else {
-			return false;
+            return false;
 		}
+        return false;
 	}
 
 	protected boolean containsTag(Node common) {
@@ -92,23 +89,19 @@ public class ParagraphStyleAction extends DesignerToolBarAction {
 					&& getExpectedTag().equalsIgnoreCase(
 							common.getNodeName().toLowerCase());
 		}
-		// return false;
-		else {
-			String align = ((Element) _applyingNode).getAttribute("align");
-			if (!(common instanceof Element)) {
-				return false;
-			}
-			String cAlign = ((Element) common).getAttribute("align");
-			if (align == null || cAlign == null) {
-				return false;
-			}
-			if (align.equals(cAlign)) {
-				return true;
-			} else {
-				return false;
-			}
-		}
-
+        
+        String align = ((Element) _applyingNode).getAttribute("align");
+        if (!(common instanceof Element)) {
+        	return false;
+        }
+        String cAlign = ((Element) common).getAttribute("align");
+        if (align == null || cAlign == null) {
+        	return false;
+        }
+        if (align.equals(cAlign)) {
+        	return true;
+        }
+        return false;
 	}
 
 	/**
@@ -117,9 +110,8 @@ public class ParagraphStyleAction extends DesignerToolBarAction {
 	public String getExpectedTag() {
 		if (_tagName == null) {
 			return _applyingNode.getNodeName().toLowerCase();
-		} else {
-			return _tagName.toLowerCase();
 		}
+        return _tagName.toLowerCase();
 	}
 
 	/**
@@ -128,9 +120,8 @@ public class ParagraphStyleAction extends DesignerToolBarAction {
 	public Element getApplyingNode() {
 		if (_applyingNode != null) {
 			return (Element) _applyingNode;
-		} else {
-			return null;
 		}
+        return null;
 	}
 
 	/*
@@ -148,25 +139,5 @@ public class ParagraphStyleAction extends DesignerToolBarAction {
 					getExpectedTag(), null, null);
 		}
 		return command;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.jst.pagedesigner.commands.range.DesignerToolBarAction#setViewer(org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer)
-	 */
-	public void setViewer(IHTMLGraphicalViewer viewer) {
-		// TODO Auto-generated method stub
-		super.setViewer(viewer);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.texteditor.IUpdate#update()
-	 */
-	public void update() {
-		// TODO Auto-generated method stub
-		super.update();
 	}
 }

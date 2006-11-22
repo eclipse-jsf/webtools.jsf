@@ -12,17 +12,15 @@
 package org.eclipse.jst.pagedesigner.jsf.ui.commands.jsfhtml;
 
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
 import org.eclipse.jst.pagedesigner.IJMTConstants;
 import org.eclipse.jst.pagedesigner.IJSFConstants;
 import org.eclipse.jst.pagedesigner.commands.DesignerCommand;
 import org.eclipse.jst.pagedesigner.jsf.core.dom.JSFDOMUtil;
 import org.eclipse.jst.pagedesigner.utils.JSPUtil;
 import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * Insert a column into dataTable.
@@ -67,7 +65,7 @@ public class DataTableInsertColumnCommand extends DesignerCommand
     protected void doExecute()
     {
         String prefix = JSPUtil.getOrCreatePrefix(getModel(), IJMTConstants.URI_JSF_HTML, "h"); //$NON-NLS-1$
-        _child = (IDOMElement) _dataTable.getOwnerDocument().createElement(prefix + ":column"); //$NON-NLS-1$
+        _child = _dataTable.getOwnerDocument().createElement(prefix + ":column"); //$NON-NLS-1$
 
         createHeaderFooter(_child);
         NodeList children = _dataTable.getChildNodes();

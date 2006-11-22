@@ -341,12 +341,12 @@ public class BoxPreferencePage extends PreferencePage {
 					_paddingLeftUnitCombo.setEnabled(false);
 				}
 
-				String top = _paddingLeftNumberText.getText();
+				String top1 = _paddingLeftNumberText.getText();
 				if (_paddingLeftUnitCombo.isEnabled()) {
-					top += _paddingLeftUnitCombo.getText();
+					top1 += _paddingLeftUnitCombo.getText();
 				}
 
-				_style.setPaddingLeft(top);
+				_style.setPaddingLeft(top1);
 			}
 		});
 
@@ -358,12 +358,12 @@ public class BoxPreferencePage extends PreferencePage {
 		_paddingLeftUnitCombo.setEnabled(false);
 		_paddingLeftUnitCombo.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
-				String top = _paddingLeftNumberText.getText();
+				String top1 = _paddingLeftNumberText.getText();
 				if (_paddingLeftUnitCombo.isEnabled()) {
-					top += _paddingLeftUnitCombo.getText();
+					top1 += _paddingLeftUnitCombo.getText();
 				}
 
-				_style.setPaddingLeft(top);
+				_style.setPaddingLeft(top1);
 			}
 		});
 
@@ -531,12 +531,12 @@ public class BoxPreferencePage extends PreferencePage {
 					_marginLeftUnitCombo.setEnabled(false);
 				}
 
-				String top = _marginLeftNumberCombo.getText();
+				String top1 = _marginLeftNumberCombo.getText();
 				if (_marginLeftUnitCombo.isEnabled()) {
-					top += _marginLeftUnitCombo.getText();
+					top1 += _marginLeftUnitCombo.getText();
 				}
 
-				_style.setMarginLeft(top);
+				_style.setMarginLeft(top1);
 			}
 		});
 
@@ -548,12 +548,12 @@ public class BoxPreferencePage extends PreferencePage {
 		_marginLeftUnitCombo.setEnabled(false);
 		_marginLeftUnitCombo.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
-				String top = _marginLeftNumberCombo.getText();
+				String top1 = _marginLeftNumberCombo.getText();
 				if (_marginLeftUnitCombo.isEnabled()) {
-					top += _marginLeftUnitCombo.getText();
+					top1 += _marginLeftUnitCombo.getText();
 				}
 
-				_style.setMarginLeft(top);
+				_style.setMarginLeft(top1);
 			}
 		});
 
@@ -663,8 +663,7 @@ public class BoxPreferencePage extends PreferencePage {
 	private boolean isEmptyString(String str) {
 		if (str == null || str.length() == 0) {
 			return true;
-		} else {
-			return false;
 		}
+        return false;
 	}
 }

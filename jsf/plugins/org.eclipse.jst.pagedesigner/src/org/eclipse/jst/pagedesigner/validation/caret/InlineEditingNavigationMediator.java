@@ -39,7 +39,6 @@ public class InlineEditingNavigationMediator extends
 	 */
 	public InlineEditingNavigationMediator(ActionData actionData) {
 		super(actionData);
-		// TODO Auto-generated constructor stub
 	}
 
 	/*
@@ -180,8 +179,7 @@ public class InlineEditingNavigationMediator extends
 				part = Target.resolvePart(node);
 			}
 			return part;
-		} else {
-			return null;
 		}
+        return null;
 	}
 }

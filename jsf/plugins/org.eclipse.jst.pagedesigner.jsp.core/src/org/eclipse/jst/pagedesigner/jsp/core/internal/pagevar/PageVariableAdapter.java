@@ -153,10 +153,9 @@ public class PageVariableAdapter implements IPageVariableAdapter {
 		IVariableInfo info = getVariableInfo(element);
 		if (info == null) {
 			return Collections.EMPTY_LIST;
-		} else {
-			List ret = new ArrayList(1);
-			ret.add(info);
-			return ret;
 		}
+        List ret = new ArrayList(1);
+        ret.add(info);
+        return ret;
 	}
 }

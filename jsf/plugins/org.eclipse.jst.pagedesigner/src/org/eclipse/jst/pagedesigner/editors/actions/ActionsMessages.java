@@ -25,6 +25,7 @@ public class ActionsMessages {
 			.getBundle(BUNDLE_NAME);
 
 	private ActionsMessages() {
+        // no external instantiation
 	}
 
 	public static String getString(String key) {

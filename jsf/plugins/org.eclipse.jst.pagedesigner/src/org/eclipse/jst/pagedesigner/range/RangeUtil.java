@@ -42,9 +42,10 @@ public class RangeUtil {
 	public static Node appendAfter(Node child, Node reference) {
 		Node next = reference.getNextSibling();
 		if (next == null)
+        {
 			return reference.getParentNode().appendChild(child);
-		else
-			return reference.getParentNode().insertBefore(child, next);
+        }
+        return reference.getParentNode().insertBefore(child, next);
 	}
 
 	public static Node insertBefore(Node child, Node reference) {
@@ -87,9 +88,8 @@ public class RangeUtil {
 				insertBefore(t, newnode);
 				return newnode;
 			}
-		} else {
-			return insertIntoEditPart(containerEditPart, node, offset);
 		}
+        return insertIntoEditPart(containerEditPart, node, offset);
 	}
 
 	/**
@@ -105,14 +105,13 @@ public class RangeUtil {
 		if (offset >= childParts.size()) {
 			// to the end of parent
 			return parent.appendChild(node);
-		} else {
-			Node child = (Node) ((EditPart) childParts.get(offset)).getModel();
-			return insertBefore(node, child);
 		}
+        Node child = (Node) ((EditPart) childParts.get(offset)).getModel();
+        return insertBefore(node, child);
 	}
 
 	public static TextPosition insertText(DesignPosition position, String data) {
-		EditPart containerEditPart = position.getContainerPart();
+		// TODO: never read EditPart containerEditPart = position.getContainerPart();
 
 		position = moveIntoText(position);
 		int offset = position.getOffset();
@@ -133,15 +132,14 @@ public class RangeUtil {
 			IDOMText text = (IDOMText) textPart.getModel();
 			text.setData(nextData);
 			return new TextPosition(text, offset + data.length());
-		} else {
-			// can't merge into a neighboring text node. So create a text node
-			// of it's own
-			EditPart part = position.getContainerPart();
-			Node parent = (Node) part.getModel();
-			Text text = parent.getOwnerDocument().createTextNode(data);
-			insertIntoEditPart(part, text, offset);
-			return new TextPosition((IDOMText) text, offset);
 		}
+        // can't merge into a neighboring text node. So create a text node
+        // of it's own
+        EditPart part = position.getContainerPart();
+        Node parent = (Node) part.getModel();
+        Text text = parent.getOwnerDocument().createTextNode(data);
+        insertIntoEditPart(part, text, offset);
+        return new TextPosition((IDOMText) text, offset);
 	}
 
 	/**
@@ -242,10 +240,11 @@ public class RangeUtil {
 		int result = compareDesignPosition(range.getStartPosition(), range
 				.getEndPosition());
 		if (result == 1)
+        {
 			return new DesignRange(range.getEndPosition(), range
 					.getStartPosition());
-		else
-			return range;
+        }
+        return range;
 	}
 
 	/**
@@ -273,12 +272,12 @@ public class RangeUtil {
 			EditPart p2a = (EditPart) a2.get(i);
 			if (p1a == p2a) {
 				if (p1a != null)
+                {
 					continue; // same ancester
-				else {
-					// both are null. just compare the offset.
-					return offset1 < offset2 ? -1
-							: (offset1 == offset2 ? 0 : 1);
-				}
+                }
+                // both are null. just compare the offset.
+                return offset1 < offset2 ? -1
+                		: (offset1 == offset2 ? 0 : 1);
 			}
 			// p1a != p2a. now we can just compare p1a and p2a to decide the
 			// order.
@@ -308,9 +307,10 @@ public class RangeUtil {
 		while (part != null) {
 			list.add(part);
 			if (part instanceof DocumentEditPart)
+            {
 				break;
-			else
-				part = part.getParent();
+            }
+			part = part.getParent();
 		}
 		if (part == null) {
 			// if part ==null, means we didn't find a DocumentEditPart,

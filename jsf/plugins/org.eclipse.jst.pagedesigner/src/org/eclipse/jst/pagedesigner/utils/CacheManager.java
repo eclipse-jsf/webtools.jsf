@@ -56,11 +56,10 @@ public class CacheManager {
 			_keys.addLast(key);
 			_map.put(key, result);
 			return result;
-		} else {
-			_keys.remove(key);
-			_keys.addLast(key);
-			return result;
 		}
+        _keys.remove(key);
+        _keys.addLast(key);
+        return result;
 	}
 
 	public void disposeAll() {

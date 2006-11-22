@@ -65,6 +65,7 @@ public class VariableInfo implements IVariableInfo {
 	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
+    // TODO: no hashcode override?
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
@@ -73,16 +74,14 @@ public class VariableInfo implements IVariableInfo {
 			VariableInfo info = (VariableInfo) obj;
 			return this._mode == info._mode && equals(this._name, info._name)
 					&& equals(this._typeInfo, info._typeInfo);
-		} else {
-			return false;
 		}
+        return false;
 	}
 
 	private boolean equals(String s1, String s2) {
 		if (s1 == null) {
 			return s2 == null;
-		} else {
-			return s1.equals(s2);
 		}
+        return s1.equals(s2);
 	}
 }

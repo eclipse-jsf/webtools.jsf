@@ -75,7 +75,7 @@ public class KeyboardData implements IInputSourceProvider {
 		EditDomain domain = _viewer.getEditDomain();
 		Document document = null;
 		if (domain instanceof DefaultEditDomain) {
-			document = (Document) ((HTMLEditor) (((DefaultEditDomain) domain)
+			document = ((HTMLEditor) (((DefaultEditDomain) domain)
 					.getEditorPart())).getDOMDocument();
 		}
 		// if ((keyCode.getStateMask() & SWT.SHIFT) != 0)

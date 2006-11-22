@@ -15,8 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jst.pagedesigner.IJMTConstants;
-import org.eclipse.jst.pagedesigner.PDPlugin;
-import org.eclipse.jst.pagedesigner.common.logging.Logger;
 import org.eclipse.jst.pagedesigner.dom.EditModelQuery;
 import org.eclipse.jst.pagedesigner.editors.palette.IPaletteItemDescriptor;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
@@ -37,8 +35,8 @@ public class PaletteElementTemplateHelper {
 
 	private static final String PREFIX_ATTRIBUTE = "uri";
 
-	private static Logger _log = PDPlugin
-			.getLogger(PaletteElementTemplateHelper.class);
+//	private static Logger _log = PDPlugin
+//			.getLogger(PaletteElementTemplateHelper.class);
 
 	public static NodeList readTemplate(Element item) {
 		if (item != null) {

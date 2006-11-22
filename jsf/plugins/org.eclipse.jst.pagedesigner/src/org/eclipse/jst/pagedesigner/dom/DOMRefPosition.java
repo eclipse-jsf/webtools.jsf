@@ -44,11 +44,14 @@ public class DOMRefPosition implements IDOMRefPosition {
 	 */
 	public Node getSibling(boolean forward) {
 		if (forward != _forward)
-			return _refNode;
+        {
+		    return _refNode;
+        }
 		if (forward)
+        {
 			return _refNode.getNextSibling();
-		else
-			return _refNode.getPreviousSibling();
+        }
+        return _refNode.getPreviousSibling();
 	}
 
 	/*
@@ -87,16 +90,15 @@ public class DOMRefPosition implements IDOMRefPosition {
 		Node parent = _refNode.getParentNode();
 		if (parent == null) {
 			return _forward ? 1 : 0;
-		} else {
-			NodeList list = parent.getChildNodes();
-			for (int i = 0, n = list.getLength(); i < n; i++) {
-				if (list.item(i) == _refNode) {
-					return _forward ? (i + 1) : i;
-				}
-			}
-			// should not happen.
-			return -1;
 		}
+        NodeList list = parent.getChildNodes();
+        for (int i = 0, n = list.getLength(); i < n; i++) {
+        	if (list.item(i) == _refNode) {
+        		return _forward ? (i + 1) : i;
+        	}
+        }
+        // should not happen.
+        return -1;
 	}
 
 	/*
@@ -111,9 +113,8 @@ public class DOMRefPosition implements IDOMRefPosition {
 	public IDOMPosition handleReplacement(Node original, Node replacement) {
 		if (this._refNode == original) {
 			return new DOMRefPosition(replacement, this._forward);
-		} else {
-			return this;
 		}
+        return this;
 	}
 
 	/*

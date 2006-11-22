@@ -12,10 +12,12 @@
 package org.eclipse.jst.pagedesigner.commands.nav;
 
 /**
+ * Tags commands that care about caret position
+ * TODO: does presently appear to have a purpose
+ * 
  * @author mengbo
  * 
- * TODO To change the template for this generated type comment go to Window -
- * Preferences - Java - Code Style - Code Templates
  */
 public interface ICaretPositionMover {
+    // empty; tagging interface
 }

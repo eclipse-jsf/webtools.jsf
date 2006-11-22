@@ -13,11 +13,8 @@ package org.eclipse.jst.pagedesigner.jsf.ui.celleditors;
 
 import java.util.Arrays;
 
-import org.eclipse.core.resources.IProject;
-import org.eclipse.jst.jsf.facesconfig.ui.IFacesConfigConstants;
 import org.eclipse.jst.pagedesigner.common.dialogfield.ComboDialogField;
 import org.eclipse.jst.pagedesigner.properties.attrgroup.IElementContextable;
-import org.eclipse.jst.pagedesigner.utils.StructuredModelUtil;
 import org.eclipse.swt.SWT;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
@@ -43,7 +40,6 @@ public class ConverterValidatorIdDialogField extends ComboDialogField implements
      */
     public void setElementContext(IDOMNode ancester, IDOMElement element)
     {
-        IProject project = StructuredModelUtil.getProjectFor(element.getModel());
         String[] results = null;
         if ("validator-id".equalsIgnoreCase(_elementId))
         {

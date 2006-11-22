@@ -66,6 +66,7 @@ public class CommonResourceDialog extends TreeViewerSelectionDialog {
 		 * disposed. Deallocate all allocated SWT resources.
 		 */
 		public void dispose() {
+            // do nothing
 		}
 
 		/**
@@ -169,6 +170,7 @@ public class CommonResourceDialog extends TreeViewerSelectionDialog {
 		 * @see IContentProvider#inputChanged
 		 */
 		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
+            // do nothing
 		}
 
 	}
@@ -233,9 +235,8 @@ public class CommonResourceDialog extends TreeViewerSelectionDialog {
 					if (isWebAppProject(container)
 							&& this.isSameProject(container, _project)) {
 						return true;
-					} else {
-						return false;
 					}
+                    return false;
 				} else if (element instanceof IFolder) {
 					IContainer container = (IContainer) element;
 					try {
@@ -285,7 +286,7 @@ public class CommonResourceDialog extends TreeViewerSelectionDialog {
 		}
 
 		private boolean isSameProject(IProject orig, IProject dst) {
-			String currentProjectName = ((IProject) orig).getFullPath()
+			String currentProjectName = orig.getFullPath()
 					.toString().trim();
 			String projectName = dst.getFullPath().toString().trim();
 			return projectName.equalsIgnoreCase(currentProjectName);
@@ -325,24 +326,23 @@ public class CommonResourceDialog extends TreeViewerSelectionDialog {
 	protected boolean isValidSelection(Object selection) {
 		if (getContainerFullPath(selection) == null) {
 			return false;
-		} else {
-			int depth = getContainerFullPath(selection).segmentCount();
-			// The location is within WEBROOT PATH?
-			if ((selection instanceof IFile) && depth >= WEBROOT_FOLDER_DEPTH) {
-				// Null means no filter is set
-				if (_suffixs == null) {
-					return true;
-				}
-				// The extension is supported?
-				else if (_suffixs != null
-						&& Arrays.asList(_suffixs).contains(
-								((IFile) selection).getFileExtension())) {
-					return true;
-				}
-			}
-			// None of above conditions, invalid.
-			return false;
 		}
+        int depth = getContainerFullPath(selection).segmentCount();
+        // The location is within WEBROOT PATH?
+        if ((selection instanceof IFile) && depth >= WEBROOT_FOLDER_DEPTH) {
+        	// Null means no filter is set
+        	if (_suffixs == null) {
+        		return true;
+        	}
+        	// The extension is supported?
+        	else if (_suffixs != null
+        			&& Arrays.asList(_suffixs).contains(
+        					((IFile) selection).getFileExtension())) {
+        		return true;
+        	}
+        }
+        // None of above conditions, invalid.
+        return false;
 	}
 
 	/*

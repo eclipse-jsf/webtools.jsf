@@ -29,10 +29,10 @@ import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
  */
 public class JSFNavigationGroup
 {
-    public static Action action = new Action()
+    private final static Action EMPTY_ACTION = new Action()
     {
-    }
-    ;
+        // TODO: why?
+    };
 
     /* (non-Javadoc)
      * @see org.eclipse.ui.actions.ActionGroup#fillContextMenu(org.eclipse.jface.action.IMenuManager)
@@ -40,7 +40,7 @@ public class JSFNavigationGroup
     public void fillContextMenu(IMenuManager menu, final IDOMElement element, final IJSFCoreSupport support)
     {
         final IMenuManager submenu = new MenuManager(JSFUIPlugin.getResourceString("ElementEdit.Submenu.JavaNavigation"));//$NON-NLS-1$
-        submenu.add(action);
+        submenu.add(EMPTY_ACTION);
         submenu.addMenuListener(new IMenuListener()
         {
             public void menuAboutToShow(IMenuManager manager)
@@ -60,9 +60,9 @@ public class JSFNavigationGroup
             ExpressionAction action = new ExpressionAction(ExpressionAction.METHOD);
             action.setText(JSFUIPlugin.getResourceString("ElementEdit.Submenu.JavaNavigation.Action"));//$NON-NLS-1$
             action.setActionValue(ele.getAttribute(ICSSPropertyID.ATTR_ACTION));
-            if (ele instanceof IDOMElement)
+            if (ele != null)
             {
-                IDOMModel model = ((IDOMElement) ele).getModel();
+                IDOMModel model = ele.getModel();
                 action.setProject(StructuredModelUtil.getProjectFor(model));
                 action.setFile(StructuredModelUtil.getFileFor(model));
             }
@@ -73,9 +73,9 @@ public class JSFNavigationGroup
             ExpressionAction action = new ExpressionAction(ExpressionAction.VARIABLE);
             action.setText(JSFUIPlugin.getResourceString("ElementEdit.Submenu.JavaNavigation.Value"));//$NON-NLS-1$
             action.setActionValue(ele.getAttribute(ICSSPropertyID.ATTR_VALUE));
-            if (ele instanceof IDOMElement)
+            if (ele != null)
             {
-                IDOMModel model = ((IDOMElement) ele).getModel();
+                IDOMModel model = ele.getModel();
                 action.setProject(StructuredModelUtil.getProjectFor(model));
                 action.setFile(StructuredModelUtil.getFileFor(model));
             }
@@ -86,9 +86,9 @@ public class JSFNavigationGroup
             ExpressionAction action = new ExpressionAction(ExpressionAction.VARIABLE);
             action.setText(JSFUIPlugin.getResourceString("ElementEdit.Submenu.JavaNavigation.Binding"));//$NON-NLS-1$
             action.setActionValue(ele.getAttribute(ICSSPropertyID.ATTR_BINDING));
-            if (ele instanceof IDOMElement)
+            if (ele != null)
             {
-                IDOMModel model = ((IDOMElement) ele).getModel();
+                IDOMModel model = ele.getModel();
                 action.setProject(StructuredModelUtil.getProjectFor(model));
                 action.setFile(StructuredModelUtil.getFileFor(model));
             }

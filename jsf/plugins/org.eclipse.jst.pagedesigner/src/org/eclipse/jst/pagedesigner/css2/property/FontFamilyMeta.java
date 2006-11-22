@@ -72,7 +72,7 @@ public class FontFamilyMeta extends CSSPropertyMeta {
 		if (value.getCssValueType() == CSSValue.CSS_VALUE_LIST) {
 			CSSValueList valueList = (CSSValueList) value;
 			for (int i = 0, count = valueList.getLength(); i < count; i++) {
-				String name = ((CSSValue) valueList.item(i)).getCssText();
+				String name = valueList.item(i).getCssText();
 				name = trimPadding(name);
 				if (isSupportedFont(name)) {
 					return name;

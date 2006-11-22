@@ -352,23 +352,22 @@ public class PaletteItemDescriptor implements IPaletteItemDescriptor {
 				nodes.add(node);
 			}
 			return (Node[]) nodes.toArray(new Node[nodes.size()]);
-		} else {
-			Node[] result = null;
-			if (model != null) {
-				NodeList nl = _templateSubNodes;
-				if (nl != null) {
-					String prefixH = JSPUtil.getPrefix(model,
-							IJMTConstants.URI_JSF_HTML);
-					String prefixC = JSPUtil.getPrefix(model,
-							IJMTConstants.URI_JSF_CORE);
-
-					Assert.isTrue(prefixH != null && prefixC != null);
-					result = PaletteElementTemplateHelper.applyPrefixes(
-							prefixH, prefixC, nl, model.getDocument());
-				}
-			}
-			return result;
 		}
+        Node[] result = null;
+        if (model != null) {
+        	NodeList nl = _templateSubNodes;
+        	if (nl != null) {
+        		String prefixH = JSPUtil.getPrefix(model,
+        				IJMTConstants.URI_JSF_HTML);
+        		String prefixC = JSPUtil.getPrefix(model,
+        				IJMTConstants.URI_JSF_CORE);
+
+        		Assert.isTrue(prefixH != null && prefixC != null);
+        		result = PaletteElementTemplateHelper.applyPrefixes(
+        				prefixH, prefixC, nl, model.getDocument());
+        	}
+        }
+        return result;
 	}
 
 	/**

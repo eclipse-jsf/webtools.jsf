@@ -38,12 +38,14 @@ public class PageFlowLayout extends BlockFlowLayout {
 	 * @see BlockFlowLayout#endBlock()
 	 */
 	protected void endBlock() {
+        // do nothing
 	}
 
 	/**
-	 * TODO: This method is not being called.
+	 * 
 	 */
 	public void postValidate() {
+       // TODO: This method is not being called.
 	}
 
 	protected void setupLine(LineBox line, int topMargin) {

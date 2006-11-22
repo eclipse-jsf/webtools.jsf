@@ -120,10 +120,12 @@ public class SimpleWizardSelectionPage extends WizardSelectionPage implements
 			}
 
 			public void dispose() {
+                // nothing to dispose
 			}
 
 			public void inputChanged(Viewer viewer, Object oldInput,
 					Object newInput) {
+                // no input changing
 			}
 		});
 		listViewer.setLabelProvider(new LabelProvider() {
@@ -183,6 +185,7 @@ public class SimpleWizardSelectionPage extends WizardSelectionPage implements
 				IWizard _wizard = null;
 
 				public void dispose() {
+                    // nothing to dispose
 				}
 
 				public Point getExtent() {
@@ -206,9 +209,8 @@ public class SimpleWizardSelectionPage extends WizardSelectionPage implements
 					return _wizard != null;
 				}
 			};
-		} else {
-			return dropHandler;
 		}
+        return dropHandler;
 	}
 
 	/**

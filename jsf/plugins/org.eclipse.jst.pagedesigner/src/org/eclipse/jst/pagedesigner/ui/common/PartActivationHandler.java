@@ -63,12 +63,14 @@ public abstract class PartActivationHandler extends ShellAdapter implements
 	 * @see IPartListener#partBroughtToTop(IWorkbenchPart)
 	 */
 	public void partBroughtToTop(IWorkbenchPart part) {
+        // do nothing
 	}
 
 	/**
 	 * @see IPartListener#partClosed(IWorkbenchPart)
 	 */
 	public void partClosed(IWorkbenchPart part) {
+        // do nothing
 	}
 
 	/**
@@ -82,6 +84,7 @@ public abstract class PartActivationHandler extends ShellAdapter implements
 	 * @see IPartListener#partOpened(IWorkbenchPart)
 	 */
 	public void partOpened(IWorkbenchPart part) {
+        // do nothing
 	}
 
 	/*

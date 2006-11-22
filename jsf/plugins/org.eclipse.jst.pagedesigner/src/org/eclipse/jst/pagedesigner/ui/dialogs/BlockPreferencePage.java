@@ -384,11 +384,11 @@ public class BlockPreferencePage extends PreferencePage {
 		getDefaultsButton().setVisible(false);
 	}
 
+    // TODO: seeing this method repeated in on other preference pages..
 	private boolean isEmptyString(String str) {
 		if (str == null || str.length() == 0) {
 			return true;
-		} else {
-			return false;
 		}
+        return false;
 	}
 }

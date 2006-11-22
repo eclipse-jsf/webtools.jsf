@@ -14,9 +14,7 @@ package org.eclipse.jst.pagedesigner.itemcreation;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.SharedCursors;
-import org.eclipse.gef.SnapToHelper;
 import org.eclipse.gef.requests.CreateRequest;
-import org.eclipse.gef.requests.CreationFactory;
 import org.eclipse.gef.tools.TargetingTool;
 import org.eclipse.jst.pagedesigner.editors.palette.IPaletteItemDescriptor;
 import org.eclipse.swt.graphics.Cursor;
@@ -33,9 +31,9 @@ import org.eclipse.swt.graphics.Cursor;
 public class ItemCreationTool extends TargetingTool {
 	IPaletteItemDescriptor _itemDescriptor;
 
-	private CreationFactory factory;
+	// TODO: dead? never read private CreationFactory factory;
 
-	private SnapToHelper helper;
+	// TODO: dead? never read private SnapToHelper helper;
 
 	/**
 	 * Default constructor. Sets the default and disabled cursors.
@@ -80,7 +78,7 @@ public class ItemCreationTool extends TargetingTool {
 	 */
 	public void deactivate() {
 		super.deactivate();
-		helper = null;
+		// TODO: never read helper = null;
 	}
 
 	/**
@@ -128,8 +126,8 @@ public class ItemCreationTool extends TargetingTool {
 				getCreateRequest().setLocation(getLocation());
 				lockTargetEditPart(getTargetEditPart());
 				// Snap only when size on drop is employed
-				helper = (SnapToHelper) getTargetEditPart().getAdapter(
-						SnapToHelper.class);
+				// TODO: never read helper = (SnapToHelper) getTargetEditPart().getAdapter(
+				//SnapToHelper.class);
 			}
 		}
 		return true;

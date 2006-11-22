@@ -209,29 +209,29 @@ public class SimpleGraphicalEditor extends GraphicalEditor implements
 		Menu menu = menuMgr.createContextMenu(gviewer);
 		gviewer.setMenu(menu);
 		menuMgr.addMenuListener(new IMenuListener() {
-			public void menuAboutToShow(IMenuManager menuMgr) {
-				PageDesignerActionConstants.addStandardActionGroups(menuMgr);
+			public void menuAboutToShow(IMenuManager menuMgr1) {
+				PageDesignerActionConstants.addStandardActionGroups(menuMgr1);
 
-				menuMgr.add(new RunAction(SimpleGraphicalEditor.this._delegate,
+				menuMgr1.add(new RunAction(SimpleGraphicalEditor.this._delegate,
 						RunAction.LAUNCH_MODE_RUN));
-				menuMgr.add(new RunAction(SimpleGraphicalEditor.this._delegate,
+				menuMgr1.add(new RunAction(SimpleGraphicalEditor.this._delegate,
 						RunAction.LAUNCH_MODE_DEBUG));
 				// FIXME: for UNDO/REDO, maybe need also wrap them in
 				// DesignerCommand.
 				// otherwise don't have validate() called after the source
 				// change.
-				menuMgr.appendToGroup(PageDesignerActionConstants.GROUP_UNDO,
+				menuMgr1.appendToGroup(PageDesignerActionConstants.GROUP_UNDO,
 						getAction(IWorkbenchActionDefinitionIds.UNDO));
-				menuMgr.appendToGroup(PageDesignerActionConstants.GROUP_UNDO,
+				menuMgr1.appendToGroup(PageDesignerActionConstants.GROUP_UNDO,
 						getAction(IWorkbenchActionDefinitionIds.REDO));
 
-				menuMgr.appendToGroup(PageDesignerActionConstants.GROUP_EDIT,
+				menuMgr1.appendToGroup(PageDesignerActionConstants.GROUP_EDIT,
 						getAction(IWorkbenchActionDefinitionIds.CUT));
-				menuMgr.appendToGroup(PageDesignerActionConstants.GROUP_EDIT,
+				menuMgr1.appendToGroup(PageDesignerActionConstants.GROUP_EDIT,
 						getAction(IWorkbenchActionDefinitionIds.COPY));
-				menuMgr.appendToGroup(PageDesignerActionConstants.GROUP_EDIT,
+				menuMgr1.appendToGroup(PageDesignerActionConstants.GROUP_EDIT,
 						getAction(IWorkbenchActionDefinitionIds.PASTE));
-				menuMgr.appendToGroup(PageDesignerActionConstants.GROUP_EDIT,
+				menuMgr1.appendToGroup(PageDesignerActionConstants.GROUP_EDIT,
 						getAction(IWorkbenchActionDefinitionIds.DELETE));
 
 				ContainerActionGroup containerActionGroup = new ContainerActionGroup();
@@ -239,7 +239,7 @@ public class SimpleGraphicalEditor extends GraphicalEditor implements
 						.getSelection());
 				context.setInput(_viewer);
 				containerActionGroup.setContext(context);
-				containerActionGroup.fillContextMenu(menuMgr);
+				containerActionGroup.fillContextMenu(menuMgr1);
 				containerActionGroup.setContext(null);
 
 				// TableActionGroup tableActionGroup = new TableActionGroup();
@@ -252,13 +252,13 @@ public class SimpleGraphicalEditor extends GraphicalEditor implements
 				context = new ActionContext(_viewer.getSelection());
 				context.setInput(_viewer);
 				rangeActionGroup.setContext(context);
-				rangeActionGroup.fillContextMenu(menuMgr);
+				rangeActionGroup.fillContextMenu(menuMgr1);
 				rangeActionGroup.setContext(null);
 
 				SingleElementActionGroup singleActionGroup = new SingleElementActionGroup();
 				singleActionGroup.setContext(new ActionContext(_viewer
 						.getSelection()));
-				singleActionGroup.fillContextMenu(menuMgr);
+				singleActionGroup.fillContextMenu(menuMgr1);
 				singleActionGroup.setContext(null);
 
 				// IAction customize =
@@ -268,14 +268,14 @@ public class SimpleGraphicalEditor extends GraphicalEditor implements
 				// customize);
 
 				RelatedViewActionGroup viewMenu = new RelatedViewActionGroup();
-				viewMenu.fillContextMenu(menuMgr);
+				viewMenu.fillContextMenu(menuMgr1);
 
 				CustomedContextMenuActionGroup customedMenu = new CustomedContextMenuActionGroup();
 				customedMenu.setContext(new ActionContext(_viewer
 						.getSelection()));
 				customedMenu.setModel(_model);
 				customedMenu.setParentControl(_viewer.getControl());
-				customedMenu.fillContextMenu(menuMgr);
+				customedMenu.fillContextMenu(menuMgr1);
 				customedMenu.setContext(null);
 				customedMenu.setParentControl(null);
 				customedMenu.setModel(null);
@@ -402,9 +402,8 @@ public class SimpleGraphicalEditor extends GraphicalEditor implements
 	public boolean isDirty() {
 		if (_delegate != null) {
 			return _delegate.isDirty();
-		} else {
-			return false;
 		}
+        return false;
 	}
 
 	/*
@@ -415,9 +414,8 @@ public class SimpleGraphicalEditor extends GraphicalEditor implements
 	public boolean isSaveAsAllowed() {
 		if (_delegate != null) {
 			return _delegate.isSaveAsAllowed();
-		} else {
-			return false;
 		}
+        return false;
 	}
 
 	/*
@@ -627,6 +625,7 @@ public class SimpleGraphicalEditor extends GraphicalEditor implements
 
 			_model.addModelStateListener(new IModelStateListener() {
 				public void modelAboutToBeChanged(IStructuredModel model) {
+                    // nothing to do
 				}
 
 				public void modelChanged(IStructuredModel model) {
@@ -641,20 +640,25 @@ public class SimpleGraphicalEditor extends GraphicalEditor implements
 
 				public void modelDirtyStateChanged(IStructuredModel model,
 						boolean isDirty) {
+                    // do  nothing
 				}
 
 				public void modelResourceDeleted(IStructuredModel model) {
+                    // do nothign
 				}
 
 				public void modelResourceMoved(IStructuredModel oldModel,
 						IStructuredModel newModel) {
+                    // do nothing
 				}
 
 				public void modelAboutToBeReinitialized(
 						IStructuredModel structuredModel) {
+                    // do nothing
 				}
 
 				public void modelReinitialized(IStructuredModel structuredModel) {
+                    // do nothing
 				}
 			});
 		}

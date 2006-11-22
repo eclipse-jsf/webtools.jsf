@@ -18,7 +18,6 @@ import org.eclipse.jst.pagedesigner.IJSFConstants;
 import org.eclipse.jst.pagedesigner.utils.BodyHelper;
 import org.eclipse.jst.pagedesigner.validation.caret.JSFRootContainerPositionRule;
 import org.w3c.dom.Document;
-import org.w3c.dom.Node;
 
 /**
  * This is a temparary class, for automatically insert "view" and "form" tag
@@ -35,8 +34,8 @@ public class JSFValidatorSupport {
 	static private QName _qnameForm = new QName(IJMTConstants.URI_JSF_HTML,
 			IJSFConstants.TAG_FORM);
 
-	static private QName[] _views = new QName[] { _qnameView,
-			new QName(IJMTConstants.URI_JSF_CORE, IJSFConstants.TAG_SUBVIEW) };
+//	static private QName[] _views = new QName[] { _qnameView,
+//			new QName(IJMTConstants.URI_JSF_CORE, IJSFConstants.TAG_SUBVIEW) };
 
 	/**
 	 * If not inside a view/subview, then f:view will be created. If
@@ -57,9 +56,8 @@ public class JSFValidatorSupport {
 
 		if (generateHForm) {
 			return prepareForm(position);
-		} else {
-			return position;
 		}
+        return position;
 	}
 
 	/**
@@ -95,10 +93,10 @@ public class JSFValidatorSupport {
 	 */
 	public static IDOMPosition prepareView(IDOMPosition position, String uri,
 			String localname) {
-		Node view = null;
+		//Node view = null;
 		Document document = EditModelQuery.getDocumentNode(position
 				.getContainerNode());
-		if ((view = JSFRootContainerPositionRule.getBasicContainer(document)) == null) {
+		if (JSFRootContainerPositionRule.getBasicContainer(document) == null) {
 			if (!(IJSFConstants.TAG_VIEW.equals(localname))) {
 				position = BodyHelper.insertBody(position, _qnameView, "f");
 			}

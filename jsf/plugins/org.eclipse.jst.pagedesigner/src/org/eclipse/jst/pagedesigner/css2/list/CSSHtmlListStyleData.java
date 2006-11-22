@@ -13,7 +13,6 @@ package org.eclipse.jst.pagedesigner.css2.list;
 
 import org.eclipse.jst.pagedesigner.css2.property.ICSSPropertyID;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.wst.sse.core.internal.util.URIResolver;
 
 /**
  * @author mengbo
@@ -39,7 +38,7 @@ public class CSSHtmlListStyleData {
 
 	public final static int LIST_T_UPPER_ROMAN = 0x16;
 
-	private CSSMarkerStyleData _markerStyleData;
+	//private CSSMarkerStyleData _markerStyleData;
 
 	private Image _markerImage;
 
@@ -50,12 +49,14 @@ public class CSSHtmlListStyleData {
 	}
 
 	private String getResolvedURL() {
-		String textValue = _markerStyleData.getTextContent();
-		URIResolver resolver = null;// FIXME: this is not implemented yet.
+		//String textValue = _markerStyleData.getTextContent();
+		// TODO: when I found this, resolver was not being set and would either
+        // have thrown NPE or returned "".. so I've "improved it :)
+        //URIResolver resolver = null;// FIXME: this is not implemented yet.
 		// DesignerPropertyTool.getModel().getResolver();
-		if (textValue != null && textValue.length() > 0) {
-			return resolver.getLocationByURI(textValue);
-		}
+		//if (textValue != null && textValue.length() > 0) {
+		//	return resolver.getLocationByURI(textValue);
+		//}
 		return "";
 	}
 
@@ -120,7 +121,7 @@ public class CSSHtmlListStyleData {
 		} else if (type.equalsIgnoreCase(ICSSPropertyID.VAL_IMAGE)) {
 			return LIST_T_IMAGE;
 		}
-		;
+
 		return 0;
 	}
 }

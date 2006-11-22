@@ -118,8 +118,7 @@ public abstract class CSSPropertyMeta implements ICSSPropertyMeta {
 		String s = checkKeywordValues(value.getCssText());
 		if (s != null) {
 			return s;
-		} else {
-			return this.getInitialValue(propertyName, style);
 		}
+        return this.getInitialValue(propertyName, style);
 	}
 }

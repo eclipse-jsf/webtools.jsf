@@ -104,13 +104,12 @@ public class JSPUtil {
 			TaglibTracker tracker = (TaglibTracker) iter.next();
 			if (uri.equals(tracker.getURI())) {
 				return tracker.getPrefix();
-			} else {
-				CMDocument cmdoc = tracker.getDocument();
-				if (cmdoc instanceof TLDDocument
-						&& uri.equals(((TLDDocument) cmdoc).getUri())) {
-					return tracker.getPrefix();
-				}
 			}
+            CMDocument cmdoc = tracker.getDocument();
+            if (cmdoc instanceof TLDDocument
+            		&& uri.equals(((TLDDocument) cmdoc).getUri())) {
+            	return tracker.getPrefix();
+            }
 		}
 		return null;
 	}
@@ -184,9 +183,8 @@ public class JSPUtil {
 				CMDocument cmdoc = tracker.getDocument();
 				if (cmdoc instanceof TLDDocument) {
 					return ((TLDDocument) cmdoc).getUri();
-				} else {
-					return null;
 				}
+                break; // fall out and return null
 			}
 		}
 		return null;

@@ -30,11 +30,11 @@ import org.w3c.dom.NodeList;
  * @author mengbo
  */
 public class SelectManyHelper {
-	private static final String OPTION_VISUAL_PREFIX = "option: "; //$NON-NLS-1$
-
-	private static final String OPTION_VISUAL_PREFIX_BINDING = "option(binding): "; //$NON-NLS-1$
-
-	private static final String OPTION_VISUAL_PREFIX_VALUE = "option(value): "; //$NON-NLS-1$
+//	private static final String OPTION_VISUAL_PREFIX = "option: "; //$NON-NLS-1$
+//
+//	private static final String OPTION_VISUAL_PREFIX_BINDING = "option(binding): "; //$NON-NLS-1$
+//
+//	private static final String OPTION_VISUAL_PREFIX_VALUE = "option(value): "; //$NON-NLS-1$
 
 	private static final String NO_VALUE = "<no value>"; //$NON-NLS-1$
 
@@ -160,9 +160,8 @@ public class SelectManyHelper {
 					NodeList nl1 = node.getElementsByTagName(jsfcorePrefix
 							+ ":" + IJSFConstants.TAG_SELECTITEMS);
 					return nl.getLength() > 0 || nl1.getLength() > 0;
-				} else {
-					return false;
 				}
+                return false;
 			}
 		}
 		if (IJMTConstants.URI_HTML.equals(uri)) {
@@ -204,8 +203,7 @@ public class SelectManyHelper {
 		 */
 		if (element != null) {
 			return element.getNodeName();
-		} else {
-			return NO_VALUE;
 		}
+        return NO_VALUE;
 	}
 }

@@ -172,5 +172,6 @@ public class CSSTextLayout extends FlowFigureLayout {
 	}
 
 	public void dispose() {
+        // TODO: anything to dispose?
 	}
 }

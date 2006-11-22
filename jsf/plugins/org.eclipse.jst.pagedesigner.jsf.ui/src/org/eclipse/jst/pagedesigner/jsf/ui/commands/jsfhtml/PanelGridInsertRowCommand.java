@@ -115,10 +115,7 @@ public class PanelGridInsertRowCommand extends DesignerCommand
             {
                 return;
             }
-            else
-            {
-                insertRow--;
-            }
+            insertRow--;
         }
         //if (insertRow < numRows || ((insertRow == numRows) && (children.size() % columns == 0)))
 

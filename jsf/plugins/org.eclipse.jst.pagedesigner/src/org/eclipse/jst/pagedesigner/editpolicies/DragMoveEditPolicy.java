@@ -96,10 +96,9 @@ public class DragMoveEditPolicy extends GraphicalEditPolicy {
 		if (REQ_CLONE.equals(type)) {
 			return new CloneNodeCommand((IHTMLGraphicalViewer) getHost()
 					.getViewer(), domposition, draggedNode);
-		} else {
-			return new MoveNodeCommand((IHTMLGraphicalViewer) getHost()
-					.getViewer(), domposition, draggedNode);
 		}
+        return new MoveNodeCommand((IHTMLGraphicalViewer) getHost()
+        		.getViewer(), domposition, draggedNode);
 	}
 
 	/*
@@ -148,7 +147,7 @@ public class DragMoveEditPolicy extends GraphicalEditPolicy {
 					&& type != REQ_MOVE_CHILDREN) {
 				return;
 			}
-			EditPart host = getHost();
+			//TODO: not used EditPart host = getHost();
 			DesignPosition position = findPosition(r);
 			if (position != null) {
 				Rectangle rect = EditPartPositionHelper

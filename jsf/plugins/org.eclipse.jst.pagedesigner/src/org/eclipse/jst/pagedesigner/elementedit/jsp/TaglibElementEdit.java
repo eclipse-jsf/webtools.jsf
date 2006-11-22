@@ -33,15 +33,14 @@ public class TaglibElementEdit extends AbstractElementEdit {
 	public void fillContextMenu(IMenuManager contextMenu, Element ele) {
 		super.fillContextMenu(contextMenu, ele);
 
-		TaglibURIAction action = getAction();
+		TaglibURIAction action1 = getAction();
 
-		action.setURI(ele.getAttribute(ICSSPropertyID.ATTR_URI));
+		action1.setURI(ele.getAttribute(ICSSPropertyID.ATTR_URI));
 
-		if (ele instanceof Element) {
-			action.setElement((Element) ele);
-		}
-		contextMenu.appendToGroup(PageDesignerActionConstants.GROUP_SPECIAL,
-				action);
+		action1.setElement(ele);
+
+        contextMenu.appendToGroup(PageDesignerActionConstants.GROUP_SPECIAL,
+				action1);
 	}
 
 	private TaglibURIAction getAction() {

@@ -70,8 +70,8 @@ public class CSSFont implements ICSSFont {
 			CSSFont fd = (CSSFont) obj;
 			return this._family.equals(fd._family) && this._size == fd._size
 					&& this._style == fd._style && this._weight == fd._weight;
-		} else
-			return false;
+		}
+        return false;
 	}
 
 	/*

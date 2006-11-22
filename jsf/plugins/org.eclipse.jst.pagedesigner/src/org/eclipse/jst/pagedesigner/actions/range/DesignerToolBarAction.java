@@ -102,16 +102,16 @@ public abstract class DesignerToolBarAction extends Action implements IUpdate,
 	public void setViewer(IHTMLGraphicalViewer viewer) {
 		if (viewer == _viewer) {
 			return;
-		} else {
-			if (_viewer != null) {
-				_viewer.removeSelectionChangedListener(this);
-			}
-			_viewer = viewer;
-			if (_viewer != null) {
-				_viewer.addSelectionChangedListener(this);
-			}
-			update();
 		}
+        
+        if (_viewer != null) {
+        	_viewer.removeSelectionChangedListener(this);
+        }
+        _viewer = viewer;
+        if (_viewer != null) {
+        	_viewer.addSelectionChangedListener(this);
+        }
+        update();
 	}
 
 	/*

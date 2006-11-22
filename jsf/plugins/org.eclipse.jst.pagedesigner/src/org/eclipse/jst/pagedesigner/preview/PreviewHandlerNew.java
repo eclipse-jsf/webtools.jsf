@@ -11,12 +11,9 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.preview;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.jst.pagedesigner.PDPlugin;
-import org.eclipse.jst.pagedesigner.common.logging.Logger;
 import org.eclipse.jst.pagedesigner.jsp.core.pagevar.IPageVariablesProvider;
 import org.eclipse.jst.pagedesigner.jsp.core.pagevar.adapter.IDocumentPageVariableAdapter;
 import org.eclipse.jst.pagedesigner.parts.DocumentEditPart;
@@ -24,8 +21,8 @@ import org.eclipse.jst.pagedesigner.parts.NodeEditPart;
 import org.eclipse.jst.pagedesigner.utils.PreviewUtil;
 import org.eclipse.jst.pagedesigner.utils.StructuredModelUtil;
 import org.eclipse.wst.html.core.internal.provisional.contenttype.ContentTypeIdForHTML;
+import org.eclipse.wst.sse.core.StructuredModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
-import org.eclipse.wst.sse.core.internal.provisional.StructuredModelManager;
 import org.eclipse.wst.xml.core.internal.document.XMLGeneratorImpl;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMDocument;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
@@ -37,10 +34,10 @@ import org.w3c.dom.Node;
  * @version 1.5
  */
 public class PreviewHandlerNew {
-	private static Logger _log = PDPlugin.getLogger(PreviewHandlerNew.class);
+	//private static Logger _log = PDPlugin.getLogger(PreviewHandlerNew.class);
 
 	public static void generatePreview(DocumentEditPart part,
-			StringBuffer result) throws IOException {
+			StringBuffer result) {
 		try {
 			IProject prj = StructuredModelUtil.getProjectFor(part.getIDOMNode()
 					.getModel());

@@ -384,9 +384,8 @@ public class DesignerPropertyTool {
 						.getNature(JavaCore.NATURE_ID);
 				if (nature == null) {
 					return null;
-				} else {
-					return (IJavaProject) nature;
 				}
+                return (IJavaProject) nature;
 			} catch (Exception e) {
 				// Error.DesignerPropertyTool.NatureQuerying = Error in project
 				// java nature querying

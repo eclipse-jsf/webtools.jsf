@@ -194,21 +194,17 @@ public class PageVariableAdatperRegistry {
 		if (target instanceof IDOMElement) {
 			IDOMElement xmlEle = (IDOMElement) target;
 			CMElementDeclaration decl = CMUtil.getElementDeclaration(xmlEle);
-			if (decl == null) {
-				return null;
-			} else if (CMUtil.isJSP(decl)) {
-				return getJSPTagVarDescriptor(xmlEle.getLocalName());
-			} else {
-				String uri = CMUtil.getTagURI(decl);
-				if (uri != null) {
-					return getTagVarDescriptor(uri, xmlEle.getLocalName());
-				} else {
-					return null;
-				}
+			if (decl != null) {
+			    if (CMUtil.isJSP(decl)) {
+			        return getJSPTagVarDescriptor(xmlEle.getLocalName());
+			    }
+                String uri = CMUtil.getTagURI(decl);
+                if (uri != null) {
+                    return getTagVarDescriptor(uri, xmlEle.getLocalName());
+                }
 			}
-		} else {
-			return null;
 		}
+        return null;
 	}
 
 }

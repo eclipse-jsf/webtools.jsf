@@ -44,9 +44,8 @@ public class BackgroundColorMeta extends CSSPropertyMeta {
 		Object result = CSSColorManager.getInstance().getColor(text);
 		if (result != null) {
 			return result;
-		} else {
-			return getInitialValue(propertyName, style);
 		}
+        return getInitialValue(propertyName, style);
 	}
 
 	/*

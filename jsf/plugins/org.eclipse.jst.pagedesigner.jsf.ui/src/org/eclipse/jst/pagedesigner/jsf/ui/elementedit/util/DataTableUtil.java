@@ -64,7 +64,7 @@ public class DataTableUtil
         }
         while (!IJSFConstants.TAG_DATATABLE.equalsIgnoreCase(childBackup.getParentNode().getLocalName()))
         {
-            childBackup = (Element) childBackup.getParentNode();
+            childBackup = childBackup.getParentNode();
             String tagName = childBackup.getLocalName();
             if (IJSFConstants.TAG_COLUMN.equalsIgnoreCase(tagName))
             {

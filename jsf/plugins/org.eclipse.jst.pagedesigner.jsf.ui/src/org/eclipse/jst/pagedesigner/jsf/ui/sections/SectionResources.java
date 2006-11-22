@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
  * @author mengbo
  * @version 1.5
  */
-public class SectionResources
+public final class SectionResources
 {
     private static final String         BUNDLE_NAME     = "org.eclipse.jst.pagedesigner.jsf.ui.sections.SectionResources"; //$NON-NLS-1$
 
@@ -27,6 +27,7 @@ public class SectionResources
 
     private SectionResources()
     {
+        // no external instantiation
     }
 
     public static String getString(String key)

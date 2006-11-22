@@ -225,21 +225,23 @@ public class ParagraphApplyStyleCommand extends ApplyStyleCommand {
 		// compute selected character number in the text or selected element
 		// number under a node
 		int len = 0;
-		if (start instanceof DOMPosition && end instanceof DOMPosition
-				|| start instanceof IDOMPosition && end instanceof IDOMPosition) {
+//		if (start instanceof DOMPosition && end instanceof DOMPosition
+//				|| start instanceof IDOMPosition && end instanceof IDOMPosition) {
+        // TODO: as written, this will be the only statement run, since
+        // both start and end are instanceof IDOMPosition by defn.
 			len = end.getOffset() - start.getOffset();
-		} else {
-			IDOMRefPosition startRef = null;
-			IDOMRefPosition endRef = null;
-			if (!(start.isText()) && start instanceof DOMPosition) {
-				startRef = new DOMRefPosition(startNode, false);
-			} else if (!(end.isText()) && end instanceof DOMPosition) {
-				endRef = new DOMRefPosition(endNode, true);
-			}
-			len = (endRef != null ? endRef.getOffset() : end.getOffset())
-					- (startRef != null ? startRef.getOffset() : start
-							.getOffset());
-		}
+//		} else {
+//			IDOMRefPosition startRef = null;
+//			IDOMRefPosition endRef = null;
+//			if (!(start.isText()) && start instanceof DOMPosition) {
+//				startRef = new DOMRefPosition(startNode, false);
+//			} else if (!(end.isText()) && end instanceof DOMPosition) {
+//				endRef = new DOMRefPosition(endNode, true);
+//			}
+//			len = (endRef != null ? endRef.getOffset() : end.getOffset())
+//					- (startRef != null ? startRef.getOffset() : start
+//							.getOffset());
+//		}
 
 		// if a full Text node is selected,and the Text node is the only child
 		// of its parent
@@ -345,50 +347,48 @@ public class ParagraphApplyStyleCommand extends ApplyStyleCommand {
 		if (common == null) {
 			// should not happen.
 			return null;
-		} else {
-
-			if (startContainer instanceof Text) {
-				// if the start offset is 0,then skip split the Text
-				if (start.getOffset() > 0) {
-					startContainer = ((Text) startContainer).splitText(start
-							.getOffset());
-					start = new DOMRefPosition(startContainer, false);
-				}
-			} else {
-				startContainer = start.getNextSiblingNode();
-			}
-			if (endContainer instanceof Text) {
-				if (end.getOffset() > 0) {
-					endContainer = ((Text) endContainer).splitText(end
-							.getOffset());
-					endContainer = endContainer.getPreviousSibling();
-				} else {
-					endContainer = endContainer.getPreviousSibling();
-				}
-			} else {
-				endContainer = end.getPreviousSiblingNode();
-			}
-
-			// now the startContainer and the endContainer should share the same
-			// parent
-			Element newNode = createStyleElement();
-			startContainer.getParentNode()
-					.insertBefore(newNode, startContainer);
-
-			Node sibling = startContainer.getNextSibling();
-			newNode.appendChild(startContainer);
-			Node endNodeSibling = endContainer.getNextSibling();
-			while (sibling != null && startContainer != endContainer
-					&& sibling != endNodeSibling) {
-				Node tempNode = sibling.getNextSibling();
-				newNode.appendChild(sibling);
-				sibling = tempNode;
-			}
-
-			IDOMPosition startPos = new DOMPosition(newNode, 0);
-			IDOMPosition endPos = new DOMRefPosition(endContainer, true);
-			return new DOMRange(startPos, endPos);
 		}
+        if (startContainer instanceof Text) {
+        	// if the start offset is 0,then skip split the Text
+        	if (start.getOffset() > 0) {
+        		startContainer = ((Text) startContainer).splitText(start
+        				.getOffset());
+        		start = new DOMRefPosition(startContainer, false);
+        	}
+        } else {
+        	startContainer = start.getNextSiblingNode();
+        }
+        if (endContainer instanceof Text) {
+        	if (end.getOffset() > 0) {
+        		endContainer = ((Text) endContainer).splitText(end
+        				.getOffset());
+        		endContainer = endContainer.getPreviousSibling();
+        	} else {
+        		endContainer = endContainer.getPreviousSibling();
+        	}
+        } else {
+        	endContainer = end.getPreviousSiblingNode();
+        }
+
+        // now the startContainer and the endContainer should share the same
+        // parent
+        Element newNode = createStyleElement();
+        startContainer.getParentNode()
+        		.insertBefore(newNode, startContainer);
+
+        Node sibling = startContainer.getNextSibling();
+        newNode.appendChild(startContainer);
+        Node endNodeSibling = endContainer.getNextSibling();
+        while (sibling != null && startContainer != endContainer
+        		&& sibling != endNodeSibling) {
+        	Node tempNode = sibling.getNextSibling();
+        	newNode.appendChild(sibling);
+        	sibling = tempNode;
+        }
+
+        IDOMPosition startPos = new DOMPosition(newNode, 0);
+        IDOMPosition endPos = new DOMRefPosition(endContainer, true);
+        return new DOMRange(startPos, endPos);
 	}
 
 	private static String getAName(String name) {

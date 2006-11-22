@@ -183,7 +183,7 @@ public class CellEditorFactoryRegistry {
 			if (Modifier.isStatic(modifiers) && Modifier.isFinal(modifiers)) {
 				if (fields[i].getType() == String.class) {
 					try {
-						valueTypes.add((String) fields[i].get(null));
+						valueTypes.add(fields[i].get(null));
 					} catch (IllegalArgumentException ex) {
 						// "Error in fields retrieving:"
 						_log.info("CellEditorFactoryRegistry.Info.2", ex); //$NON-NLS-1$

@@ -214,5 +214,6 @@ public class DesignPageActionContributor extends EditorActionBarContributor {
 	 * @see org.eclipse.ui.IEditorActionBarContributor#dispose()
 	 */
 	public void dispose() {
+        // TODO: anything to dispose?
 	}
 }

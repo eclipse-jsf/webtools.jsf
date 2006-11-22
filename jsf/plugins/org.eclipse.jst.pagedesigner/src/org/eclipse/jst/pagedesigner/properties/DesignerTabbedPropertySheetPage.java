@@ -133,7 +133,7 @@ public class DesignerTabbedPropertySheetPage extends TabbedPropertySheetPage {
 
 			public void addSelectionChangedListener(
 					ISelectionChangedListener listener) {
-				;
+			    // do nothing
 			}
 
 			/**
@@ -155,7 +155,7 @@ public class DesignerTabbedPropertySheetPage extends TabbedPropertySheetPage {
 			 */
 			public void removeSelectionChangedListener(
 					ISelectionChangedListener listener) {
-				;
+				// do nothing
 			}
 
 			/**

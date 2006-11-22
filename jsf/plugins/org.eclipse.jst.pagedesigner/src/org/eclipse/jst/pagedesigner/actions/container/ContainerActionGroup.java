@@ -88,12 +88,10 @@ public class ContainerActionGroup extends ActionGroup {
 				if (position.getOffset() == 0
 						|| position.getContainerNode() instanceof Text) {
 					return position.getContainerPart();
-				} else {
-					return position.getSiblingEditPart(false);
 				}
-			} else {
-				return RangeUtil.findCommonAncestor(range);
+                return position.getSiblingEditPart(false);
 			}
+            return RangeUtil.findCommonAncestor(range);
 		} else {
 			return null;
 		}

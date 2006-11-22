@@ -22,6 +22,7 @@ import org.w3c.dom.Element;
  */
 public class AttributePropertySourceProvider implements IPropertySourceProvider {
 	public AttributePropertySourceProvider() {
+        // do nothing?
 	}
 
 	/*

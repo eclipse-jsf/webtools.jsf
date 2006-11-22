@@ -139,20 +139,16 @@ public class BorderWidthMeta extends LengthMeta {
 			if (rules == null || rules.length() == 0) {
 				if (borderstr == null || "0".equals(borderstr.trim())) {
 					return null;
-				} else {
-					return Length.LENGTH_1;
 				}
-			} else {
-				// ok, we got a value for rules
-				if (TableUtil.matchRules(extractEdge(propertyName), rules)) {
-					return Length.LENGTH_1;
-				} else {
-					return Length.LENGTH_0;
-				}
+                return Length.LENGTH_1;
 			}
-		} else {
-			return Length.LENGTH_0;
+            // ok, we got a value for rules
+            if (TableUtil.matchRules(extractEdge(propertyName), rules)) {
+            	return Length.LENGTH_1;
+            }
+            return Length.LENGTH_0;
 		}
+        return Length.LENGTH_0;
 	}
 
 	/**
@@ -190,9 +186,8 @@ public class BorderWidthMeta extends LengthMeta {
 				}
 			}
 			return Length.LENGTH_1;
-		} else {
-			return Length.LENGTH_0;
 		}
+        return Length.LENGTH_0;
 	}
 
 	static String extractEdge(String propertyName) {

@@ -26,10 +26,10 @@ public class MultiLineLabel extends Label {
 		if (isOpaque()) {
 			graphics.fillRectangle(getBounds());
 		}
-		Rectangle bounds = getBounds();
-		graphics.translate(bounds.x, bounds.y);
+		Rectangle bounds1 = getBounds();
+		graphics.translate(bounds1.x, bounds1.y);
 		drawText(graphics);
-		graphics.translate(-bounds.x, -bounds.y);
+		graphics.translate(-bounds1.x, -bounds1.y);
 	}
 
 	private void drawText(Graphics graphics) {

@@ -132,7 +132,7 @@ public class JSFUIPlugin extends AbstractUIPlugin
         }
 
         ImageRegistry images = getImageRegistry();
-        Image image = (Image) images.get(name);
+        Image image = images.get(name);
         if (image == null)
         {
             try

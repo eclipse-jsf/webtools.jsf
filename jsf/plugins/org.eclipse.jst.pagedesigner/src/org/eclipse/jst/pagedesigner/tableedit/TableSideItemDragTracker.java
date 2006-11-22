@@ -22,9 +22,10 @@ import org.eclipse.gef.tools.DragEditPartsTracker;
  * @version 1.5
  */
 public class TableSideItemDragTracker extends DragEditPartsTracker {
-	private boolean _isRow;
-
-	private int _index;
+    // TODO: dead?
+    //	private boolean _isRow;
+//
+//	private int _index;
 
 	/**
 	 * 
@@ -35,8 +36,9 @@ public class TableSideItemDragTracker extends DragEditPartsTracker {
 	public TableSideItemDragTracker(EditPart sourceEditPart, boolean isrow,
 			int index) {
 		super(sourceEditPart);
-		this._isRow = isrow;
-		this._index = index;
+        // TODO: dead?
+//		this._isRow = isrow;
+//		this._index = index;
 	}
 
 	/*

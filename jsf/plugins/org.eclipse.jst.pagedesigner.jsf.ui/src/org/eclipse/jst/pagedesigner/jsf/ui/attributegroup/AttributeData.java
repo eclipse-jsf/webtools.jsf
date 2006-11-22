@@ -30,7 +30,7 @@ public class AttributeData
 
     public AttributeData()
     {
-
+        // TODO: do we need this constructor?
     }
 
     public AttributeData(String uri,String elementName,String name)

@@ -111,12 +111,10 @@ public class FlowBoxLine {
 			if (closer(lPart)) {
 				resetBounds(lPart);
 				return true;
-			} else {
-				return false;
 			}
-		} else {
-			rect = lPart.getAbsoluteBounds();
+            return false;
 		}
+        rect = lPart.getAbsoluteBounds();
 		int xx = Math.min(rect.x, _x);
 		int width = Math.max(rect.getRight().x, getRightBottom().x) - xx;
 		int yy = Math.min(rect.y, _y);
@@ -173,9 +171,8 @@ public class FlowBoxLine {
 		}
 		if (result != null) {
 			return result.getPart();
-		} else {
-			return null;
 		}
+        return null;
 	}
 
 	/**

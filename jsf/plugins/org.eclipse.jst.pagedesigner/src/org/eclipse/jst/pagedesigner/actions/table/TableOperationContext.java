@@ -38,7 +38,7 @@ public class TableOperationContext {
 		CSSTableLayout2 tableLayout = null;
 
 		while (part.getParent() instanceof ElementEditPart) {
-			part = (ElementEditPart) part.getParent();
+			part = part.getParent();
 			IFigure figure = ((GraphicalEditPart) part).getFigure();
 
 			if (figure.getLayoutManager() instanceof CSSTableLayout2) {
@@ -63,16 +63,14 @@ public class TableOperationContext {
 					TableCellInfo cellInfo = cellLayout.getTableCellInfo();
 					if (cellInfo == null) {
 						return null;
-					} else {
-						TableOperationContext context = new TableOperationContext();
-						context._tablePart = tablePart;
-						context._rowIndex = cellInfo.getRowIndex();
-						context._columnIndex = cellInfo.getColumnIndex();
-						return context;
 					}
-				} else {
-					return null;
+                    TableOperationContext context = new TableOperationContext();
+                    context._tablePart = tablePart;
+                    context._rowIndex = cellInfo.getRowIndex();
+                    context._columnIndex = cellInfo.getColumnIndex();
+                    return context;
 				}
+                return null;
 			}
 			figure = figure.getParent();
 		}

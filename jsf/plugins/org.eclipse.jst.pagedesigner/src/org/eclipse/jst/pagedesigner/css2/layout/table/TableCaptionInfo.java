@@ -56,8 +56,7 @@ public class TableCaptionInfo extends TableItemInfo {
 		if ("bottom".equalsIgnoreCase(_align)) //$NON-NLS-1$
 		{
 			return _align;
-		} else {
-			return "top"; //$NON-NLS-1$
 		}
+        return "top"; //$NON-NLS-1$
 	}
 }

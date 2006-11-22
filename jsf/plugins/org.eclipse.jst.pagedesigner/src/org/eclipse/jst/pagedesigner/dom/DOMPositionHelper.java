@@ -37,12 +37,10 @@ public class DOMPositionHelper {
 				EditPart child = DOMPositionHelper.findEditPart(part, node);
 				if (child != null) {
 					return new DesignRefPosition(child, position.isForward());
-				} else {
-					return DesignPosition.INVALID;
 				}
-			} else {
-				node = node.getParentNode();
+                return DesignPosition.INVALID;
 			}
+            node = node.getParentNode();
 		} while (true);
 	}
 
@@ -69,21 +67,19 @@ public class DOMPositionHelper {
 					return new DesignPosition(part,
 							textDataOffsetToDisplayOffset(textData,
 									displayData, position.getOffset()));
-				} else {
-					Node pre = position.getPreviousSiblingNode();
-					while (pre != null) {
-						int index = findChildEditPartIndex(part, pre);
-						if (index != -1) {
-							return new DesignPosition(part, index + 1);
-						}
-						pre = pre.getPreviousSibling();
-					}
-					return new DesignPosition(part, 0);
 				}
-			} else {
-				position = new DOMRefPosition(position.getContainerNode(),
-						false);
+                Node pre = position.getPreviousSiblingNode();
+                while (pre != null) {
+                	int index = findChildEditPartIndex(part, pre);
+                	if (index != -1) {
+                		return new DesignPosition(part, index + 1);
+                	}
+                	pre = pre.getPreviousSibling();
+                }
+                return new DesignPosition(part, 0);
 			}
+            position = new DOMRefPosition(position.getContainerNode(),
+            		false);
 		} while (true);
 	}
 
@@ -108,20 +104,18 @@ public class DOMPositionHelper {
 					return new DesignPosition(part,
 							textDataOffsetToDisplayOffset(textData,
 									displayData, position.getOffset()));
-				} else {
-					Node pre = position.getPreviousSiblingNode();
-					while (pre != null) {
-						int index = findChildEditPartIndex(part, pre);
-						if (index != -1) {
-							return new DesignPosition(part, index + 1);
-						}
-						pre = pre.getPreviousSibling();
-					}
-					return new DesignPosition(part, 0);
 				}
-			} else {
-				return DesignPosition.INVALID;
+                Node pre = position.getPreviousSiblingNode();
+                while (pre != null) {
+                	int index = findChildEditPartIndex(part, pre);
+                	if (index != -1) {
+                		return new DesignPosition(part, index + 1);
+                	}
+                	pre = pre.getPreviousSibling();
+                }
+                return new DesignPosition(part, 0);
 			}
+            return DesignPosition.INVALID;
 		} while (true);
 	}
 
@@ -182,35 +176,32 @@ public class DOMPositionHelper {
 			int offset = position.getOffset();
 			if (offset == 0) {
 				return new DOMPosition(text, 0);
-			} else {
-				String displayData = ((TextEditPart) part).getTextData();
-				String nodeData = text.getData();
-				if (offset >= displayData.length()) {
-					// point to end of the text node.
-					return new DOMPosition(text, nodeData.length());
-				} else {
-					// we need to calculate it out.
-					int index = displayOffsetToTextDataOffset(displayData,
-							nodeData, offset);
-					return new DOMPosition(text, index);
-				}
 			}
-		} else {
-			// ok, it is not text.
-			EditPart sibling = position.getSiblingEditPart(true);
-			if (sibling != null) {
-				return new DOMRefPosition((Node) sibling.getModel(), false);
-			}
-
-			sibling = position.getSiblingEditPart(false);
-			if (sibling != null) {
-				return new DOMRefPosition((Node) sibling.getModel(), true);
-			}
-
-			// no previous sibling, no next sibling, the parent node must be
-			// empty
-			return new DOMPosition((Node) part.getModel(), 0);
+            String displayData = ((TextEditPart) part).getTextData();
+            String nodeData = text.getData();
+            if (offset >= displayData.length()) {
+            	// point to end of the text node.
+            	return new DOMPosition(text, nodeData.length());
+            }
+            // we need to calculate it out.
+            int index = displayOffsetToTextDataOffset(displayData,
+            		nodeData, offset);
+            return new DOMPosition(text, index);
 		}
+        // ok, it is not text.
+        EditPart sibling = position.getSiblingEditPart(true);
+        if (sibling != null) {
+        	return new DOMRefPosition((Node) sibling.getModel(), false);
+        }
+
+        sibling = position.getSiblingEditPart(false);
+        if (sibling != null) {
+        	return new DOMRefPosition((Node) sibling.getModel(), true);
+        }
+
+        // no previous sibling, no next sibling, the parent node must be
+        // empty
+        return new DOMPosition((Node) part.getModel(), 0);
 	}
 
 	/**
@@ -238,8 +229,8 @@ public class DOMPositionHelper {
 			// ok, we need split
 			((Text) container).splitText(offset);
 			return new DOMRefPosition(container, true);
-		} else
-			return position;
+		}
+        return position;
 	}
 
 	/**
@@ -250,8 +241,8 @@ public class DOMPositionHelper {
 	 */
 	public static IDOMPosition removeRange(DOMRange range) {
 		boolean ordered = range.isOrdered();
-		IDOMPosition start = ordered ? range.getStartPosition() : range
-				.getEndPosition();
+//		IDOMPosition start = ordered ? range.getStartPosition() : range
+//				.getEndPosition();
 		IDOMPosition end = ordered ? range.getEndPosition() : range
 				.getStartPosition();
 
@@ -312,11 +303,10 @@ public class DOMPositionHelper {
 					nodeIndex++;
 				}
 				continue;
-			} else {
-				// should not happen!
-				displayIndex++;
-				nodeIndex++;
 			}
+            // should not happen!
+            displayIndex++;
+            nodeIndex++;
 		}
 
 		if (nodeIndex >= nodeDataLength)
@@ -367,11 +357,10 @@ public class DOMPositionHelper {
 					nodeIndex++;
 				}
 				continue;
-			} else {
-				// should not happen!
-				displayIndex++;
-				nodeIndex++;
 			}
+            // should not happen!
+            displayIndex++;
+            nodeIndex++;
 		}
 		return displayIndex;
 	}
@@ -395,8 +384,7 @@ public class DOMPositionHelper {
 		}
 		if (position.getPreviousSiblingNode() != null) {
 			return new DOMRefPosition(position.getPreviousSiblingNode(), true);
-		} else {
-			return new DOMRefPosition2(position.getContainerNode(), true);
 		}
+        return new DOMRefPosition2(position.getContainerNode(), true);
 	}
 }

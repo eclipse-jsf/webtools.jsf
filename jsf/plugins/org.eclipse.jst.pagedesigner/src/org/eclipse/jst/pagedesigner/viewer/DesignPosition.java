@@ -27,7 +27,7 @@ public class DesignPosition {
 
 	int _offset;
 
-	private Node _containerNode;
+	//private Node _containerNode;
 
 	/**
 	 * @param part
@@ -37,7 +37,7 @@ public class DesignPosition {
 		_containerPart = part;
 		_offset = offset;
 
-		int[] a = new int[] { 0, 0 };
+		// TODO: ?? int[] a = new int[] { 0, 0 };
 	}
 
 	/**
@@ -52,9 +52,8 @@ public class DesignPosition {
 	public Node getContainerNode() {
 		if (_containerPart != null) {
 			return (Node) _containerPart.getModel();
-		} else {
-			return null;
 		}
+        return null;
 	}
 
 	/**
@@ -102,10 +101,9 @@ public class DesignPosition {
 
 		if (parent == null) {
 			return new DesignPosition(part, 0);
-		} else {
-			return new DesignPosition(parent, parent.getChildren()
-					.indexOf(part));
 		}
+        return new DesignPosition(parent, parent.getChildren()
+        		.indexOf(part));
 	}
 
 	/**
@@ -119,10 +117,9 @@ public class DesignPosition {
 
 		if (parent == null) {
 			return new DesignPosition(part, part.getChildren().size());
-		} else {
-			return new DesignPosition(parent, parent.getChildren()
-					.indexOf(part) + 1);
 		}
+        return new DesignPosition(parent, parent.getChildren()
+        		.indexOf(part) + 1);
 	}
 
 	/*
@@ -147,7 +144,7 @@ public class DesignPosition {
 	 * @see java.lang.Object#toString()
 	 */
 	public StringBuffer debugDump(StringBuffer buffer) {
-		try {
+//		try {
 			buffer.append("DesignPosition: ").append(this._containerPart)
 					.append(": ").append(this._offset).append("\n");
 
@@ -167,8 +164,9 @@ public class DesignPosition {
 											this._offset)).append("\n");
 				}
 			}
-		} catch (Exception e) {
-		}
+            //TODO: what was being caught here?
+//		} catch (Exception e) {
+//		}
 
 		return buffer;
 	}

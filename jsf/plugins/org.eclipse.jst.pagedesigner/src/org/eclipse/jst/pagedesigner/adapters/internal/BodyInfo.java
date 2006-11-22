@@ -17,7 +17,6 @@ import org.eclipse.jst.pagedesigner.IJSFConstants;
 import org.eclipse.jst.pagedesigner.adapters.IBodyInfo;
 import org.eclipse.jst.pagedesigner.jsp.core.IJSPCoreConstants;
 import org.eclipse.jst.pagedesigner.utils.CMUtil;
-import org.eclipse.wst.sse.core.internal.provisional.INodeNotifier;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -137,9 +136,10 @@ public class BodyInfo implements IBodyInfo {
 	 * @see org.eclipse.wst.sse.core.internal.provisional.INodeAdapter#notifyChanged(org.eclipse.wst.sse.core.internal.provisional.INodeNotifier,
 	 *      int, java.lang.Object, java.lang.Object, java.lang.Object, int)
 	 */
-	public void notifyChanged(INodeNotifier notifier, int eventType,
-			Object changedFeature, Object oldValue, Object newValue, int pos) {
-	}
+    // TODO: dead code?
+//	public void notifyChanged(INodeNotifier notifier, int eventType,
+//			Object changedFeature, Object oldValue, Object newValue, int pos) {
+//	}
 
 	/**
 	 * @return

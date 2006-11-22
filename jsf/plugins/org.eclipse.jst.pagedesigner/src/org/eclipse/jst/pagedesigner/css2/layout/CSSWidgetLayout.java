@@ -107,6 +107,7 @@ public class CSSWidgetLayout extends CSSBlockFlowLayout implements ICSSPainter {
 	 * @see org.eclipse.jst.pagedesigner.css2.layout.FlowFigureLayout#dispose()
 	 */
 	public void dispose() {
+        // TODO: anything to dispose?
 	}
 
 	// public int getSuggestedWidth(LineBox line, ICSSStyle style,

@@ -110,8 +110,7 @@ public class DeleteNodeCommand extends DesignerCommand {
 	protected ISelection getAfterCommandDesignerSelection() {
 		if (_prevRange.isValid()) {
 			return _prevRange;
-		} else {
-			return null;
 		}
+        return null;
 	}
 }

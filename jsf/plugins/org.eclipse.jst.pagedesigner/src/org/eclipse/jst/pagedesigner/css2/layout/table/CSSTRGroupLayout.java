@@ -19,7 +19,6 @@ import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.jst.pagedesigner.css2.layout.CSSBlockFlowLayout;
 import org.eclipse.jst.pagedesigner.css2.layout.CSSFigure;
 import org.eclipse.jst.pagedesigner.css2.layout.FlowFigure;
-import org.eclipse.jst.pagedesigner.css2.layout.ICSSFigure;
 
 /**
  * @author mengbo
@@ -98,7 +97,7 @@ public class CSSTRGroupLayout extends CSSBlockFlowLayout {
 		for (int k = 0; k < rowCount; k++) {
 			height += tableLayout.getRowHeights()[rowIndex + k];
 		}
-		ICSSFigure figure = groupinfo.getFigure();
+		//ICSSFigure figure = groupinfo.getFigure();
 		return new Rectangle(tableLayout.getRowX(), y, tableLayout
 				.getRowWidth(), height);
 	}

@@ -35,6 +35,7 @@ public class DefaultStyle implements ICSSStyle {
 	 * @see org.eclipse.jst.pagedesigner.css2.ICSSStyle#reset()
 	 */
 	public void reset() {
+        // TODO: dead?        
 	}
 
 	/*
@@ -46,9 +47,8 @@ public class DefaultStyle implements ICSSStyle {
 		ICSSPropertyMeta meta = CSSMetaRegistry.getInstance().getMeta(property);
 		if (meta == null) {
 			return ICSSPropertyMeta.NOT_SPECIFIED;
-		} else {
-			return meta.getInitialValue(property, this);
 		}
+        return meta.getInitialValue(property, this);
 	}
 
 	/*
@@ -93,6 +93,7 @@ public class DefaultStyle implements ICSSStyle {
 	 * @see org.eclipse.jst.pagedesigner.css2.ICSSStyle#dispose()
 	 */
 	public void dispose() {
+        // TODO: anything to dispose
 	}
 
 	/*
@@ -112,9 +113,10 @@ public class DefaultStyle implements ICSSStyle {
 	 */
 	public void notifyChanged(INodeNotifier notifier, int eventType,
 			Object changedFeature, Object oldValue, Object newValue, int pos) {
+        // TODO: do nothing?
 	}
 
-	ICSSFont defaultFont = CSSFontManager.getInstance().createDefaultFont();
+	private ICSSFont defaultFont = CSSFontManager.getInstance().createDefaultFont();
 
 	/*
 	 * (non-Javadoc)
@@ -248,8 +250,7 @@ public class DefaultStyle implements ICSSStyle {
 				propertyName);
 		if (meta == null) {
 			return ICSSPropertyMeta.NOT_SPECIFIED;
-		} else {
-			return meta.getInitialValue(propertyName, this);
 		}
+        return meta.getInitialValue(propertyName, this);
 	}
 }

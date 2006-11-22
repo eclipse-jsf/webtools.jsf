@@ -310,8 +310,7 @@ public class BackgroundPreferencePage extends PreferencePage {
 	private boolean isEmptyString(String str) {
 		if (str == null || str.length() == 0) {
 			return true;
-		} else {
-			return false;
 		}
+        return false;
 	}
 }

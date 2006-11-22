@@ -104,12 +104,10 @@ public class InsertTagChangeStyleAction extends ChangeStyleAction {
 					|| EditModelQuery.hasAncestor(common, getExpectedTag(),
 							true)) {
 				return false;
-			} else {
-				return true;
 			}
-		} else {
-			return false;
+            return true;
 		}
+        return false;
 	}
 
 	protected boolean supportSingle() {

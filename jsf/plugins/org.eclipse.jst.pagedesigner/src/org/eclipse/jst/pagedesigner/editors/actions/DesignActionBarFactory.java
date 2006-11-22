@@ -25,6 +25,7 @@ public class DesignActionBarFactory {
 	private static DesignActionBarFactory _instance;
 
 	private DesignActionBarFactory() {
+        // no external instantiation
 	}
 
 	public static DesignActionBarFactory getInstance() {

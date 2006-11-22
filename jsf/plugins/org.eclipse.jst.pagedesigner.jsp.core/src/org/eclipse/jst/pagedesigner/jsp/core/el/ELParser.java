@@ -50,7 +50,7 @@ public class ELParser {
 					.getSuffixes());
 		} else if (parsedExpression instanceof NamedValue) {
 			_expressionList = new ArrayList();
-			_expressionList.add((NamedValue) parsedExpression);
+			_expressionList.add(parsedExpression);
 		}
 
 	}

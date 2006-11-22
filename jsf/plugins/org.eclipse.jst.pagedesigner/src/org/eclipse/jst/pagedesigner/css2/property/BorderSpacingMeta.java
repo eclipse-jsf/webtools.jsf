@@ -63,9 +63,8 @@ public class BorderSpacingMeta extends CSSPropertyMeta {
 			int intvalue = toIntValue(value.getCssText(), style);
 			if (intvalue >= 0) {
 				return new int[] { intvalue, intvalue };
-			} else {
-				return INITIAL_SPACING;
 			}
+            return INITIAL_SPACING;
 		} else if (value.getCssValueType() == CSSValue.CSS_VALUE_LIST) {
 			CSSValueList list = (CSSValueList) value;
 			if (list.getLength() >= 2) {
@@ -78,9 +77,8 @@ public class BorderSpacingMeta extends CSSPropertyMeta {
 					i2 = 0;
 				}
 				return new int[] { i1, i2 };
-			} else {
-				return INITIAL_SPACING;
 			}
+            return INITIAL_SPACING;
 		} else {
 			return INITIAL_SPACING;
 		}
@@ -115,8 +113,7 @@ public class BorderSpacingMeta extends CSSPropertyMeta {
 				style.getCSSFont());
 		if (length instanceof Length && !((Length) length).isPercentage()) {
 			return ((Length) length).getValue();
-		} else {
-			return Integer.MIN_VALUE;
 		}
+        return Integer.MIN_VALUE;
 	}
 }

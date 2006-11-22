@@ -51,9 +51,8 @@ public class ItemCreationEditPolicy extends GraphicalEditPolicy {
 			IDOMPosition domposition = null;
 			if (position == null) {
 				return null;
-			} else {
-				domposition = DOMPositionHelper.toDOMPosition(position);
 			}
+            domposition = DOMPositionHelper.toDOMPosition(position);
 			if (domposition == null) {
 				return null;
 			}

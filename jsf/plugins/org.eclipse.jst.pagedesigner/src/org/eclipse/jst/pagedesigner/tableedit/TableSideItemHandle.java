@@ -43,8 +43,8 @@ public abstract class TableSideItemHandle extends AbstractHandle {
 	 */
 	private void initialize() {
 		this.setOpaque(false);
-		LineBorder border = new LineBorder(ColorConstants.green, 1);
-		this.setBorder(border);
+		LineBorder border1 = new LineBorder(ColorConstants.green, 1);
+		this.setBorder(border1);
 		this.setCursor(Cursors.ARROW);
 	}
 

@@ -37,8 +37,8 @@ import org.eclipse.jst.pagedesigner.common.utils.ResourceUtils;
 import org.eclipse.jst.pagedesigner.common.utils.WebrootUtil;
 import org.eclipse.jst.pagedesigner.css2.property.ICSSPropertyID;
 import org.eclipse.wst.common.uriresolver.internal.util.URIHelper;
+import org.eclipse.wst.sse.core.StructuredModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IModelManager;
-import org.eclipse.wst.sse.core.internal.provisional.StructuredModelManager;
 import org.eclipse.wst.sse.core.internal.util.URIResolver;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.w3c.dom.DOMException;
@@ -153,7 +153,7 @@ public class ProjectResolver implements URIResolver {
 		} catch (FileNotFoundException e) {
 			_log.error("RenderingTraverser.Error.FileNotFound", e);
 		}
-		IDOMModel xmlModel = null;
+//		IDOMModel xmlModel = null;
 
 		try {
 			tldModel = (IDOMModel) PDPlugin.getModelManager().getModelForRead(

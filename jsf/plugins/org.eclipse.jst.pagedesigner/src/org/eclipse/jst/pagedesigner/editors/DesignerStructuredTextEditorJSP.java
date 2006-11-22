@@ -37,10 +37,9 @@ public class DesignerStructuredTextEditorJSP extends StructuredTextEditor {
 	public Object getAdapter(Class required) {
 		if (ITextEditorDropTargetListener.class.equals(required)) {
 			DesignerSourceDropTargetListener listener = new DesignerSourceDropTargetListener(
-					(StructuredTextEditor) this);
+					this);
 			return listener;
-		} else {
-			return super.getAdapter(required);
 		}
+        return super.getAdapter(required);
 	}
 }

@@ -123,13 +123,12 @@ public class DOMUtil {
 		String attrvalue = getAttributeIgnoreCase(ele, attr);
 		if (attrvalue == null) {
 			return defaultvalue;
-		} else {
-			try {
-				return Integer.parseInt(attrvalue);
-			} catch (Exception ex) {
-				return defaultvalue;
-			}
 		}
+        try {
+        	return Integer.parseInt(attrvalue);
+        } catch (NumberFormatException  ex) {
+        	return defaultvalue;
+        }
 	}
 
 	/**

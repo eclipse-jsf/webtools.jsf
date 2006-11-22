@@ -32,7 +32,10 @@ import org.w3c.dom.Element;
  * @version 1.5
  */
 public class RangeActionGroup extends ActionGroup {
-	public static Action action = new Action() {
+    // TODO: what is this?  a separator?
+	private static final Action action = new Action() {
+        // Action is abstract but has no abstract methods
+        // so create a default empty action that does nothing
 	};
 
 	/**
@@ -60,9 +63,11 @@ public class RangeActionGroup extends ActionGroup {
 			addTextStyleMenu(menu, (IHTMLGraphicalViewer) getContext()
 					.getInput());
 		}
-		addListModeMenu(menu, selection);
+        // TODO: the (commented out) copy of this method does nothing
+		//addListModeMenu(menu, selection);
 
-		addTextFontMenu(menu, selection);
+		// TODO: the (commented out) copy of this method does nothing
+        //addTextFontMenu(menu, selection);
 
 		addLinkMenu(menu, selection);
 	}
@@ -74,14 +79,13 @@ public class RangeActionGroup extends ActionGroup {
 	private DesignRange fixUpSelection(ISelection selection) {
 		if (selection instanceof DesignRange) {
 			return (DesignRange) selection;
-		} else {
-			return null;
 		}
+        return null;
 	}
 
 	private void addLinkMenu(IMenuManager menu, final DesignRange selection) {
-		Action action = new MakeLinkAction(selection);
-		menu.appendToGroup(PageDesignerActionConstants.GROUP_STYLE, action);
+		Action action1 = new MakeLinkAction(selection);
+		menu.appendToGroup(PageDesignerActionConstants.GROUP_STYLE, action1);
 	}
 
 	private void addTextStyleMenu(IMenuManager menu,
@@ -93,31 +97,31 @@ public class RangeActionGroup extends ActionGroup {
 		submenu.setRemoveAllWhenShown(true);
 		submenu.addMenuListener(new IMenuListener() {
 			public void menuAboutToShow(IMenuManager manager) {
-				DesignerToolBarAction action = null;
-				action = DesignActionBarFactory.getInstance().getStyleAction(
+				DesignerToolBarAction action1 = null;
+				action1 = DesignActionBarFactory.getInstance().getStyleAction(
 						IHTMLConstants.TAG_U);
-				action.setViewer(viewer);
-				submenu.add(action);
+				action1.setViewer(viewer);
+				submenu.add(action1);
 
-				action = DesignActionBarFactory.getInstance().getStyleAction(
+				action1 = DesignActionBarFactory.getInstance().getStyleAction(
 						IHTMLConstants.TAG_B);
-				action.setViewer(viewer);
-				submenu.add(action);
+				action1.setViewer(viewer);
+				submenu.add(action1);
 
-				action = DesignActionBarFactory.getInstance().getStyleAction(
+				action1 = DesignActionBarFactory.getInstance().getStyleAction(
 						IHTMLConstants.TAG_I);
-				action.setViewer(viewer);
-				submenu.add(action);
+				action1.setViewer(viewer);
+				submenu.add(action1);
 
-				action = DesignActionBarFactory.getInstance().getStyleAction(
+				action1 = DesignActionBarFactory.getInstance().getStyleAction(
 						IHTMLConstants.TAG_SMALL);
-				action.setViewer(viewer);
-				submenu.add(action);
+				action1.setViewer(viewer);
+				submenu.add(action1);
 
-				action = DesignActionBarFactory.getInstance().getStyleAction(
+				action1 = DesignActionBarFactory.getInstance().getStyleAction(
 						IHTMLConstants.TAG_BIG);
-				action.setViewer(viewer);
-				submenu.add(action);
+				action1.setViewer(viewer);
+				submenu.add(action1);
 
 			}
 		});
@@ -128,9 +132,9 @@ public class RangeActionGroup extends ActionGroup {
 	 * @param menu
 	 * @param selection
 	 */
-	private void addTextFontMenu(IMenuManager menu, DesignRange selection) {
-
-	}
+//	private void addTextFontMenu(IMenuManager menu, DesignRange selection) {
+//	    //
+//	}
 
 	/**
 	 * @param menu
@@ -167,8 +171,8 @@ public class RangeActionGroup extends ActionGroup {
 	 * @param menu
 	 * @param selection
 	 */
-	private void addListModeMenu(IMenuManager menu, DesignRange selection) {
-	}
+//	private void addListModeMenu(IMenuManager menu, DesignRange selection) {
+//	}
 
 	/**
 	 * @param menu

@@ -32,6 +32,7 @@ public class EmptyLocator implements Locator {
 	 * @see org.eclipse.draw2d.Locator#relocate(org.eclipse.draw2d.IFigure)
 	 */
 	public void relocate(IFigure target) {
+        // do nothing; this is a noop locator
 	}
 
 }

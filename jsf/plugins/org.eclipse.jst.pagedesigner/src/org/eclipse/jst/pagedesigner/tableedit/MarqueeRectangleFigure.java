@@ -35,7 +35,7 @@ class MarqueeRectangleFigure extends Figure {
 	 * @see org.eclipse.draw2d.Figure#paintFigure(org.eclipse.draw2d.Graphics)
 	 */
 	protected void paintFigure(Graphics graphics) {
-		Rectangle bounds = getBounds().getCopy();
+		Rectangle bounds1 = getBounds().getCopy();
 		graphics.translate(getLocation());
 
 		graphics.setXORMode(true);
@@ -48,19 +48,19 @@ class MarqueeRectangleFigure extends Figure {
 
 		points[0] = 0 + offset;
 		points[1] = 0;
-		points[2] = bounds.width - 1;
+		points[2] = bounds1.width - 1;
 		points[3] = 0;
-		points[4] = bounds.width - 1;
-		points[5] = bounds.height - 1;
+		points[4] = bounds1.width - 1;
+		points[5] = bounds1.height - 1;
 
 		graphics.drawPolyline(points);
 
 		points[0] = 0;
 		points[1] = 0 + offset;
 		points[2] = 0;
-		points[3] = bounds.height - 1;
-		points[4] = bounds.width - 1;
-		points[5] = bounds.height - 1;
+		points[3] = bounds1.height - 1;
+		points[4] = bounds1.width - 1;
+		points[5] = bounds1.height - 1;
 
 		graphics.drawPolyline(points);
 

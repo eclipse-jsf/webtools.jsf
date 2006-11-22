@@ -52,16 +52,13 @@ public class DOMRefPosition2 implements IDOMRefPosition {
 		if (forward) {
 			if (_last) {
 				return null;
-			} else {
-				return _parentNode.getFirstChild();
 			}
-		} else {
-			if (_last) {
-				return _parentNode.getLastChild();
-			} else {
-				return null;
-			}
-		}
+            return _parentNode.getFirstChild();
+		} else if (_last) {
+        	return _parentNode.getLastChild();
+        } else {
+        	return null;
+        }
 	}
 
 	/*
@@ -99,9 +96,8 @@ public class DOMRefPosition2 implements IDOMRefPosition {
 	public int getOffset() {
 		if (!_last) {
 			return 0;
-		} else {
-			return _parentNode.getChildNodes().getLength();
 		}
+        return _parentNode.getChildNodes().getLength();
 	}
 
 	/*
@@ -122,8 +118,8 @@ public class DOMRefPosition2 implements IDOMRefPosition {
 	public IDOMPosition handleReplacement(Node original, Node replacement) {
 		if (original == _parentNode) {
 			return new DOMRefPosition2(replacement, _last);
-		} else
-			return this;
+		}
+        return this;
 	}
 
 }

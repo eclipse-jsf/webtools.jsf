@@ -18,13 +18,9 @@ import org.eclipse.jst.pagedesigner.dom.DOMPositionHelper;
 import org.eclipse.jst.pagedesigner.dom.DOMRange;
 import org.eclipse.jst.pagedesigner.dom.DOMRefPosition;
 import org.eclipse.jst.pagedesigner.dom.DOMUtil;
-import org.eclipse.jst.pagedesigner.dom.EditHelper;
 import org.eclipse.jst.pagedesigner.dom.EditModelQuery;
 import org.eclipse.jst.pagedesigner.dom.IDOMPosition;
 import org.eclipse.jst.pagedesigner.jsp.core.IJSPCoreConstants;
-import org.eclipse.jst.pagedesigner.validation.caret.ActionData;
-import org.eclipse.jst.pagedesigner.validation.caret.InlineEditingNavigationMediator;
-import org.eclipse.jst.pagedesigner.viewer.DesignRange;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
 import org.w3c.dom.Node;
 import org.w3c.dom.Text;
@@ -160,28 +156,29 @@ public class InsertEdit extends DeleteEdit {
 		return true;
 	}
 
-	private boolean splitNode() {
-		if ((getViewer()).getSelection() instanceof DesignRange
-				&& _data.getCharacterData() != null
-				&& _data.getCharacterData().charValue() == '\r') {
-			DesignRange range = (DesignRange) (getViewer()).getSelection();
-			Node node = range.getStartPosition().getContainerNode();
-			if (EditModelQuery.isText(node)) {
-				node = node.getParentNode();
-			}
-			if (EditModelQuery.isListItem(node)) {
-				IDOMPosition position = DOMPositionHelper.toDOMPosition(range
-						.getStartPosition());
-				// split text and it's parent.
-				position = EditHelper.splitNode(position);
-				position = EditHelper.splitNode(position);
-				position = EditHelper.moveInto(position.getNextSiblingNode(),
-						new InlineEditingNavigationMediator(new ActionData(
-								ActionData.INLINE_EDIT, null)), true);
-				setOperationPosition(position);
-				return true;
-			}
-		}
-		return false;
-	}
+    // TODO: dead?
+//	private boolean splitNode() {
+//		if ((getViewer()).getSelection() instanceof DesignRange
+//				&& _data.getCharacterData() != null
+//				&& _data.getCharacterData().charValue() == '\r') {
+//			DesignRange range = (DesignRange) (getViewer()).getSelection();
+//			Node node = range.getStartPosition().getContainerNode();
+//			if (EditModelQuery.isText(node)) {
+//				node = node.getParentNode();
+//			}
+//			if (EditModelQuery.isListItem(node)) {
+//				IDOMPosition position = DOMPositionHelper.toDOMPosition(range
+//						.getStartPosition());
+//				// split text and it's parent.
+//				position = EditHelper.splitNode(position);
+//				position = EditHelper.splitNode(position);
+//				position = EditHelper.moveInto(position.getNextSiblingNode(),
+//						new InlineEditingNavigationMediator(new ActionData(
+//								ActionData.INLINE_EDIT, null)), true);
+//				setOperationPosition(position);
+//				return true;
+//			}
+//		}
+//		return false;
+//	}
 }

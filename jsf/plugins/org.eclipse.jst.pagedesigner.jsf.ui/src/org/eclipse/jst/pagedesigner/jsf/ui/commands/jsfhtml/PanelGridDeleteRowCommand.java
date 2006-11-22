@@ -74,10 +74,7 @@ public class PanelGridDeleteRowCommand extends DesignerCommand
                 formatNode(_panelGridEle);
                 return;
             }
-            else
-            {
-                removeRow--;
-            }
+            removeRow--;
         }
         if (removeRow < numRows)
         {
@@ -93,14 +90,12 @@ public class PanelGridDeleteRowCommand extends DesignerCommand
                 _panelGridEle.removeChild((Node) toRemove.get(i));
             }
             formatNode(_panelGridEle);
-            return;
         }
         else
         {
             // must be footer.
             removeFooter();
             formatNode(_panelGridEle);
-            return;
         }
     }
 

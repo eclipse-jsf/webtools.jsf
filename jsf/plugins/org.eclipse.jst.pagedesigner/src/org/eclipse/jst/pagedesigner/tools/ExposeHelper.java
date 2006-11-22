@@ -280,9 +280,8 @@ public class ExposeHelper {
 		if (forward) {
 			Rectangle portBounds = port.getBounds().getCopy();
 			return portBounds.getRight().x - p.x;
-		} else {
-			return p.x;
 		}
+        return p.x;
 	}
 
 	private int getVerticalBoundsOffset(Point p, boolean up) {
@@ -297,9 +296,8 @@ public class ExposeHelper {
 		if (!up) {
 			Rectangle portBounds = port.getBounds().getCopy();
 			return portBounds.getBottom().y - p.y;
-		} else {
-			return p.y;
 		}
+        return p.y;
 	}
 
 	public void exposeBorder(Rectangle rect, AbstractEditPolicy policy) {

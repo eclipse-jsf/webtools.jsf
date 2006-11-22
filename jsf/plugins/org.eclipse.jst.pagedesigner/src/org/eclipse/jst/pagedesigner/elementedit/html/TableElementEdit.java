@@ -57,7 +57,8 @@ import org.w3c.dom.Node;
  * @version 1.5
  */
 public class TableElementEdit extends AbstractElementEdit {
-	public static Action action = new Action() {
+	private final static Action action = new Action() {
+        // TODO: what's this for?
 	};
 
 	private static int FAKE_INDEX = -10;
@@ -97,7 +98,7 @@ public class TableElementEdit extends AbstractElementEdit {
 	public boolean fillContainerContextMenu(IMenuManager contextMenu,
 			final ElementEditPart tablePart, NodeEditPart nodePart,
 			ISelection innerSelection) {
-		boolean superret = super.fillContainerContextMenu(contextMenu,
+		super.fillContainerContextMenu(contextMenu,
 				tablePart, nodePart, innerSelection);
 
 		Element table = (Element) tablePart.getModel();
@@ -132,9 +133,9 @@ public class TableElementEdit extends AbstractElementEdit {
 	 */
 	private void fillTableMenu(ElementEditPart tablePart, int cellRow,
 			int cellColumn, IMenuManager tableMenu) {
-		SelectEditPartAction action = new SelectEditPartAction(
+		SelectEditPartAction action1 = new SelectEditPartAction(
 				PDPlugin.getResourceString("ElementEdit.Submenu.SelectTable"), tablePart);//$NON-NLS-1$
-		tableMenu.add(action);
+		tableMenu.add(action1);
 
 		tableMenu.add(new Separator());
 
@@ -235,10 +236,9 @@ public class TableElementEdit extends AbstractElementEdit {
 				if (trq.isRow()) {
 					return new TableResizeRowCommand(viewer, table, trq
 							.getIndex(), trq.getDelta());
-				} else {
-					return new TableResizeColumnCommand(viewer, table, trq
-							.getIndex(), trq.getDelta());
 				}
+                return new TableResizeColumnCommand(viewer, table, trq
+                		.getIndex(), trq.getDelta());
 			} else if (request instanceof TableInsertRequest) {
 				TableInsertRequest tableInsertRequest = (TableInsertRequest) request;
 				int index = tableInsertRequest.getIndex()
@@ -246,18 +246,16 @@ public class TableElementEdit extends AbstractElementEdit {
 				if (tableInsertRequest.isRow()) {
 					return new TableInsertRowCommand(viewer, table, index,
 							tableInsertRequest.isBefore());
-				} else {
-					return new TableInsertColumnCommand(viewer, table, index);
 				}
+                return new TableInsertColumnCommand(viewer, table, index);
 			} else if (request instanceof TableRowColumnDeleteRequest) {
 				TableRowColumnDeleteRequest deleteReq = (TableRowColumnDeleteRequest) request;
 				if (deleteReq.isRow()) {
 					return new TableDeleteRowCommand(viewer, table, deleteReq
 							.getIndex());
-				} else {
-					return new TableDeleteColumnCommand(viewer, table,
-							deleteReq.getIndex());
 				}
+                return new TableDeleteColumnCommand(viewer, table,
+                		deleteReq.getIndex());
 			} else if (request instanceof InsertHeaderFooterRequest) {
 				InsertHeaderFooterRequest hfRequest = (InsertHeaderFooterRequest) request;
 				return new TableInsertHeaderFooterCommand(viewer, table,

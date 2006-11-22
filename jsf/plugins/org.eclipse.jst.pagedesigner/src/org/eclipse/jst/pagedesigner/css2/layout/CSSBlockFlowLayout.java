@@ -77,10 +77,9 @@ public class CSSBlockFlowLayout extends CSSLayout implements ICSSPainter2 {
 		ICSSStyle style = getCSSStyle();
 		if (style == null) {
 			return false;
-		} else {
-			return "block".equalsIgnoreCase(style.getDisplay())
-					|| "list-item".equalsIgnoreCase(style.getDisplay());
 		}
+        return "block".equalsIgnoreCase(style.getDisplay())
+        		|| "list-item".equalsIgnoreCase(style.getDisplay());
 	}
 
 	// ---------------------------------------------------------------------------------------------------

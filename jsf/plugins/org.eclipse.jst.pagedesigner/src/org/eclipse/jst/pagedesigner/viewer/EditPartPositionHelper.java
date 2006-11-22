@@ -20,8 +20,6 @@ import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.jst.pagedesigner.IHTMLConstants;
-import org.eclipse.jst.pagedesigner.PDPlugin;
-import org.eclipse.jst.pagedesigner.common.logging.Logger;
 import org.eclipse.jst.pagedesigner.css2.layout.CSSFigure;
 import org.eclipse.jst.pagedesigner.css2.layout.CSSTextFigure;
 import org.eclipse.jst.pagedesigner.css2.layout.FlowBox;
@@ -42,8 +40,8 @@ import org.w3c.dom.Node;
  * @author mengbo
  */
 public class EditPartPositionHelper {
-	private final static Logger _log = PDPlugin
-			.getLogger(EditPartPositionHelper.class);
+//	private final static Logger _log = PDPlugin
+//			.getLogger(EditPartPositionHelper.class);
 
 	/**
 	 * Add something to curent
@@ -169,6 +167,7 @@ public class EditPartPositionHelper {
 	 * @param skip
 	 * @return
 	 */
+    //TODO: needs refactoring
 	public static DesignPosition innerFindEditPartPosition(EditPart rootHost,
 			EditPart host, Point p, FlowBoxLine boxLine,
 			IPositionMediator validator) {
@@ -185,10 +184,9 @@ public class EditPartPositionHelper {
 				}
 				// found?!!
 				return position;
-			} else {
-				addToCurrentLine(boxLine, host, p, validator);
-				return null;
 			}
+            addToCurrentLine(boxLine, host, p, validator);
+            return null;
 		}
 		// widget
 		else if (isWidget(host)) {
@@ -200,16 +198,11 @@ public class EditPartPositionHelper {
 				if (IHTMLConstants.TAG_BR.equalsIgnoreCase(Target.resolveNode(
 						host).getNodeName())) {
 					return new DesignRefPosition(host, lPart.isBeforePoint(p));
-				} else {
-					return new DesignRefPosition(host, lPart.isBeforePoint(p)
-							|| !lPart.atLeftPart(p));
 				}
-				// found!!!
-				// return new DesignRefPosition(host, lPart.isBeforePoint(p) ||
-				// !lPart.atLeftPart(p));
-			} else {
-				addToCurrentLine(boxLine, host, p, validator);
+                return new DesignRefPosition(host, lPart.isBeforePoint(p)
+                		|| !lPart.atLeftPart(p));
 			}
+            addToCurrentLine(boxLine, host, p, validator);
 		} else {
 			// root host. we always supporse it has editable area.
 			if (host == rootHost) {
@@ -245,9 +238,8 @@ public class EditPartPositionHelper {
 						return new DesignRefPosition(host, lPart
 								.isBeforePoint(p)
 								|| !lPart.atLeftPart(p));
-					} else {
-						addToCurrentLine(boxLine, host, p, validator);
 					}
+                    addToCurrentLine(boxLine, host, p, validator);
 				}
 				// can edit
 				else {
@@ -273,9 +265,8 @@ public class EditPartPositionHelper {
 							if (lPart.contains(p)) {
 								// found!!!
 								return new DesignPosition(host, 0);
-							} else {
-								addToCurrentLine(boxLine, host, p, validator);
 							}
+                            addToCurrentLine(boxLine, host, p, validator);
 						}
 					}
 					// not contains p
@@ -330,6 +321,7 @@ public class EditPartPositionHelper {
 	 * @param skip
 	 * @return
 	 */
+    // TODO: needs refactoring
 	public static DesignPosition innerFindEditPartPositionConstrained(
 			EditPart rootHost, EditPart host, Point p, FlowBoxLine boxLine,
 			IMovementMediator validator) {
@@ -346,10 +338,9 @@ public class EditPartPositionHelper {
 				}
 				// found?!!
 				return position;
-			} else {
-				addToCurrentLine(boxLine, host, p, validator);
-				return null;
 			}
+            addToCurrentLine(boxLine, host, p, validator);
+            return null;
 		}
 		// widget
 		else if (isWidget(host)) {
@@ -358,13 +349,11 @@ public class EditPartPositionHelper {
 				if (IHTMLConstants.TAG_BR.equalsIgnoreCase(Target.resolveNode(
 						host).getNodeName())) {
 					return new DesignRefPosition(host, lPart.isBeforePoint(p));
-				} else {
-					return new DesignRefPosition(host, lPart.isBeforePoint(p)
-							|| !lPart.atLeftPart(p));
 				}
-			} else {
-				addToCurrentLine(boxLine, host, p, validator);
+                return new DesignRefPosition(host, lPart.isBeforePoint(p)
+                		|| !lPart.atLeftPart(p));
 			}
+            addToCurrentLine(boxLine, host, p, validator);
 		} else {
 			// root host. we always supporse it has editable area.
 			if (host == rootHost) {
@@ -398,9 +387,8 @@ public class EditPartPositionHelper {
 							return new DesignRefPosition(host, lPart
 									.isBeforePoint(p)
 									|| !lPart.atLeftPart(p));
-						} else {
-							addToCurrentLine(boxLine, host, p, validator);
 						}
+                        addToCurrentLine(boxLine, host, p, validator);
 					}
 				}
 				// can edit
@@ -423,9 +411,8 @@ public class EditPartPositionHelper {
 							if (lPart.contains(p)) {
 								// found!!!
 								return new DesignPosition(host, 0);
-							} else {
-								addToCurrentLine(boxLine, host, p, validator);
 							}
+                            addToCurrentLine(boxLine, host, p, validator);
 						}
 					}
 					// not contains p
@@ -485,13 +472,11 @@ public class EditPartPositionHelper {
 			int offset = figure.getInsertionOffset(p);
 			if (offset >= 0) {
 				return new DesignPosition(host, offset);
-			} else {
-				return null;
 			}
-		} else {
-			// should not happen.
-			return new DesignPosition(host, 0);
+            return null;
 		}
+        // should not happen.
+        return new DesignPosition(host, 0);
 	}
 
 	/**
@@ -516,9 +501,8 @@ public class EditPartPositionHelper {
 					.getBounds().getCopy();
 			((GraphicalEditPart) child).getFigure().translateToAbsolute(bounds);
 			return bounds;
-		} else {
-			return new Rectangle(0, 0, 0, 0);
 		}
+        return new Rectangle(0, 0, 0, 0);
 	}
 
 	/**
@@ -529,9 +513,8 @@ public class EditPartPositionHelper {
 	private static boolean isWidget(EditPart host) {
 		if (host instanceof NodeEditPart) {
 			return ((NodeEditPart) host).isWidget();
-		} else {
-			return false;
 		}
+        return false;
 	}
 
 	/**
@@ -690,10 +673,10 @@ public class EditPartPositionHelper {
 			domposition = BodyHelper
 					.adjustInsertPosition(uri, tag, domposition);
 		}
+        // TODO: huh?
 		if (domposition != null) {
 			return DOMPositionHelper.toDesignPosition(domposition);
-		} else {
-			return null;
 		}
+        return null;
 	}
 }

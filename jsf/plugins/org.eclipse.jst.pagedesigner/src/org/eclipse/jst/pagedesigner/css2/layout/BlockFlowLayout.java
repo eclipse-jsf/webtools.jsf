@@ -236,6 +236,7 @@ public class BlockFlowLayout extends FlowContainerLayout {
 	 * @see org.eclipse.jst.pagedesigner.css2.layout.FlowFigureLayout#dispose()
 	 */
 	public void dispose() {
+        // TODO: anything to dispose?
 	}
 
 	/*

@@ -218,10 +218,10 @@ public class DesignerPaletteRoot extends PaletteRoot {
 	protected void removeItems() {
 		// we try to remove anything other than the basic
 		// group that have the selectentry and marqeeentry
-		List children = new ArrayList(getChildren());
-		children.remove(0); // remove the first one
-		for (int i = 0, n = children.size(); i < n; i++) {
-			this.remove((PaletteEntry) children.get(i));
+		List children1 = new ArrayList(getChildren());
+		children1.remove(0); // remove the first one
+		for (int i = 0, n = children1.size(); i < n; i++) {
+			this.remove((PaletteEntry) children1.get(i));
 		}
 	}
 

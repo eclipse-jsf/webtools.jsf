@@ -97,46 +97,41 @@ public class CSSBorder extends AbstractBorder {
 			return getDefaultColors(graphics, style, edge);
 		}
 	}
-
+	// TODO: needs refactoring
 	private RGB[] getDefaultColors(Graphics graphics, String style, String edge) {
 		if (ICSSPropertyID.VAL_OUTSET.equals(style)) {
 			if (ICSSStyle.TOP.equals(edge) || ICSSStyle.LEFT.equals(edge)) {
 				return new RGB[] { ColorConstants.button.getRGB(),
 						ColorConstants.buttonLightest.getRGB() };
-			} else {
-				return new RGB[] { ColorConstants.buttonDarkest.getRGB(),
-						ColorConstants.buttonDarker.getRGB() };
 			}
+            return new RGB[] { ColorConstants.buttonDarkest.getRGB(),
+            		ColorConstants.buttonDarker.getRGB() };
 		} else if (ICSSPropertyID.VAL_INSET.equals(style)) {
 			if (ICSSStyle.TOP.equals(edge) || ICSSStyle.LEFT.equals(edge)) {
 				return new RGB[] { ColorConstants.buttonDarker.getRGB(),
 						ColorConstants.buttonDarkest.getRGB() };
-			} else {
-				return new RGB[] { ColorConstants.buttonLightest.getRGB(),
-						ColorConstants.button.getRGB() };
 			}
+            return new RGB[] { ColorConstants.buttonLightest.getRGB(),
+            		ColorConstants.button.getRGB() };
 		} else if (ICSSPropertyID.VAL_TDBORDERSTYLE.equals(style)) {
 			if (ICSSStyle.TOP.equals(edge) || ICSSStyle.LEFT.equals(edge)) {
 				return new RGB[] { ColorConstants.buttonDarker.getRGB() };
-			} else {
-				return new RGB[] { ColorConstants.button.getRGB() };
 			}
+            return new RGB[] { ColorConstants.button.getRGB() };
 		} else if (ICSSPropertyID.VAL_RIDGE.equals(style)) {
 			if (ICSSStyle.TOP.equals(edge) || ICSSStyle.LEFT.equals(edge)) {
 				return new RGB[] { ColorConstants.button.getRGB(),
 						ColorConstants.buttonDarkest.getRGB() };
-			} else {
-				return new RGB[] { ColorConstants.buttonDarkest.getRGB(),
-						ColorConstants.button.getRGB() };
 			}
+            return new RGB[] { ColorConstants.buttonDarkest.getRGB(),
+            		ColorConstants.button.getRGB() };
 		} else if (ICSSPropertyID.VAL_GROOVE.equals(style)) {
 			if (ICSSStyle.TOP.equals(edge) || ICSSStyle.LEFT.equals(edge)) {
 				return new RGB[] { ColorConstants.buttonDarker.getRGB(),
 						ColorConstants.buttonLightest.getRGB() };
-			} else {
-				return new RGB[] { ColorConstants.buttonLightest.getRGB(),
-						ColorConstants.buttonDarker.getRGB(), };
 			}
+            return new RGB[] { ColorConstants.buttonLightest.getRGB(),
+            		ColorConstants.buttonDarker.getRGB(), };
 		} else if (ICSSPropertyID.VAL_DOUBLE.equals(style)) {
 			return new RGB[] { ColorConstants.buttonDarkest.getRGB(),
 					graphics.getBackgroundColor().getRGB(),
@@ -148,81 +143,77 @@ public class CSSBorder extends AbstractBorder {
 		return new RGB[] { ColorConstants.black.getRGB() };
 	}
 
+    // TODO: needs refactoring
 	private RGB[] getCustomColors(Graphics graphics, String style, String edge,
 			RGB baseColor) {
 		if (ICSSPropertyID.VAL_OUTSET.equals(style)) {
 			if (ICSSStyle.TOP.equals(edge) || ICSSStyle.LEFT.equals(edge)) {
 				return new RGB[] {
-						new RGB((int) baseColor.red * 3 / 4,
-								(int) baseColor.green * 3 / 4,
-								(int) baseColor.blue * 3 / 4),
+						new RGB(baseColor.red * 3 / 4,
+								baseColor.green * 3 / 4,
+								baseColor.blue * 3 / 4),
 						new RGB(baseColor.red, baseColor.green, baseColor.blue) };
-			} else {
-				return new RGB[] {
-						new RGB((int) baseColor.red / 2,
-								(int) baseColor.green / 2,
-								(int) baseColor.blue / 2),
-						new RGB((int) baseColor.red / 4,
-								(int) baseColor.green / 4,
-								(int) baseColor.blue / 4) };
 			}
+            return new RGB[] {
+            		new RGB(baseColor.red / 2,
+            				baseColor.green / 2,
+            				baseColor.blue / 2),
+            		new RGB(baseColor.red / 4,
+            				baseColor.green / 4,
+            				baseColor.blue / 4) };
 		} else if (ICSSPropertyID.VAL_INSET.equals(style)) {
 			if (ICSSStyle.TOP.equals(edge) || ICSSStyle.LEFT.equals(edge)) {
 				return new RGB[] {
-						new RGB((int) baseColor.red / 4,
-								(int) baseColor.green / 4,
-								(int) baseColor.blue / 4),
-						new RGB((int) baseColor.red / 2,
-								(int) baseColor.green / 2,
-								(int) baseColor.blue / 2) };
-			} else {
-				return new RGB[] {
-						new RGB(baseColor.red, baseColor.green, baseColor.blue),
-						new RGB((int) baseColor.red * 3 / 4,
-								(int) baseColor.green * 3 / 4,
-								(int) baseColor.blue * 3 / 4), };
+						new RGB(baseColor.red / 4,
+								baseColor.green / 4,
+								baseColor.blue / 4),
+						new RGB(baseColor.red / 2,
+								baseColor.green / 2,
+								baseColor.blue / 2) };
 			}
+            return new RGB[] {
+            		new RGB(baseColor.red, baseColor.green, baseColor.blue),
+            		new RGB(baseColor.red * 3 / 4,
+            				baseColor.green * 3 / 4,
+            				baseColor.blue * 3 / 4), };
 		} else if (ICSSPropertyID.VAL_TDBORDERSTYLE.equals(style)) {
 			if (ICSSStyle.TOP.equals(edge) || ICSSStyle.LEFT.equals(edge)) {
-				return new RGB[] { new RGB((int) baseColor.red / 4,
-						(int) baseColor.green / 4, (int) baseColor.blue / 4) };
-			} else {
-				return new RGB[] { new RGB(baseColor.red, baseColor.green,
-						baseColor.blue) };
+				return new RGB[] { new RGB(baseColor.red / 4,
+						baseColor.green / 4, baseColor.blue / 4) };
 			}
+            return new RGB[] { new RGB(baseColor.red, baseColor.green,
+            		baseColor.blue) };
 		} else if (ICSSPropertyID.VAL_RIDGE.equals(style)) {
 			if (ICSSStyle.TOP.equals(edge) || ICSSStyle.LEFT.equals(edge)) {
 				return new RGB[] {
-						new RGB((int) baseColor.red * 3 / 4,
-								(int) baseColor.green * 3 / 4,
-								(int) baseColor.blue * 3 / 4),
-						new RGB((int) baseColor.red / 2,
-								(int) baseColor.green / 2,
-								(int) baseColor.blue / 2) };
-			} else {
-				return new RGB[] {
-						new RGB((int) baseColor.red / 2,
-								(int) baseColor.green / 2,
-								(int) baseColor.blue / 2),
-						new RGB((int) baseColor.red * 3 / 4,
-								(int) baseColor.green * 3 / 4,
-								(int) baseColor.blue * 3 / 4) };
+						new RGB(baseColor.red * 3 / 4,
+								baseColor.green * 3 / 4,
+								baseColor.blue * 3 / 4),
+						new RGB(baseColor.red / 2,
+								baseColor.green / 2,
+								baseColor.blue / 2) };
 			}
+            return new RGB[] {
+            		new RGB(baseColor.red / 2,
+            				baseColor.green / 2,
+            				baseColor.blue / 2),
+            		new RGB(baseColor.red * 3 / 4,
+            				baseColor.green * 3 / 4,
+            				baseColor.blue * 3 / 4) };
 		} else if (ICSSPropertyID.VAL_GROOVE.equals(style)) {
 			if (ICSSStyle.TOP.equals(edge) || ICSSStyle.LEFT.equals(edge)) {
 				return new RGB[] {
-						new RGB((int) baseColor.red / 4,
-								(int) baseColor.green / 4,
-								(int) baseColor.blue / 4),
+						new RGB(baseColor.red / 4,
+								baseColor.green / 4,
+								baseColor.blue / 4),
 						new RGB(baseColor.red, baseColor.green, baseColor.blue) };
 
-			} else {
-				return new RGB[] {
-						new RGB(baseColor.red, baseColor.green, baseColor.blue),
-						new RGB((int) baseColor.red / 4,
-								(int) baseColor.green / 4,
-								(int) baseColor.blue / 4) };
 			}
+            return new RGB[] {
+            		new RGB(baseColor.red, baseColor.green, baseColor.blue),
+            		new RGB(baseColor.red / 4,
+            				baseColor.green / 4,
+            				baseColor.blue / 4) };
 		} else if (ICSSPropertyID.VAL_DOUBLE.equals(style)) {
 			return new RGB[] {
 					new RGB(baseColor.red, baseColor.green, baseColor.blue),

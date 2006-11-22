@@ -25,10 +25,10 @@ public class CommandResources {
 			.getBundle(BUNDLE_NAME);
 
 	private CommandResources() {
+        // no local instantiation
 	}
 
 	public static String getString(String key) {
-		// TODO Auto-generated method stub
 		try {
 			return RESOURCE_BUNDLE.getString(key);
 		} catch (MissingResourceException e) {

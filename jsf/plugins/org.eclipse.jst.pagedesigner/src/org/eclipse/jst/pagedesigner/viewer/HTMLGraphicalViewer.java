@@ -89,9 +89,8 @@ public class HTMLGraphicalViewer extends ScrollingGraphicalViewer implements
 		FigureCanvas canvas = this.getFigureCanvas();
 		if (canvas != null) {
 			return canvas.getViewport();
-		} else {
-			return null;
 		}
+        return null;
 	}
 
 	public IDOMModel getModel() {
@@ -99,18 +98,16 @@ public class HTMLGraphicalViewer extends ScrollingGraphicalViewer implements
 		EditPart part = this.getContents();
 		if (part != null) {
 			return ((IDOMNode) part.getModel()).getModel();
-		} else {
-			return null;
 		}
+        return null;
 	}
 
 	public IStatusLineManager getStatusLineManager() {
 		if (_parentPart == null) {
 			return null;
-		} else {
-			return _parentPart.getEditorSite().getActionBars()
-					.getStatusLineManager();
 		}
+        return _parentPart.getEditorSite().getActionBars()
+        		.getStatusLineManager();
 	}
 
 	public Caret getCaret() {
@@ -189,9 +186,8 @@ public class HTMLGraphicalViewer extends ScrollingGraphicalViewer implements
 	public ISelection getSelection() {
 		if (isInRangeMode()) {
 			return getRangeSelection();
-		} else {
-			return super.getSelection();
 		}
+        return super.getSelection();
 	}
 
 	/*

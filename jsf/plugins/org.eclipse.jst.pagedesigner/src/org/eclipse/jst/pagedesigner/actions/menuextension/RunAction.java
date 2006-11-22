@@ -101,10 +101,9 @@ public class RunAction extends Action {
 						if (iconPath != null) {
 							return AbstractUIPlugin.imageDescriptorFromPlugin(
 									actions[j].getDeclaringExtension()
-											.getNamespace(), iconPath);
-						} else {
-							return null;
+											.getContributor().getName(), iconPath);
 						}
+                        return null;
 					}
 				}
 			}

@@ -14,8 +14,6 @@ package org.eclipse.jst.pagedesigner.css2.layout;
 import java.util.List;
 
 import org.eclipse.draw2d.Figure;
-import org.eclipse.jst.pagedesigner.PDPlugin;
-import org.eclipse.jst.pagedesigner.common.logging.Logger;
 
 /**
  * A layout for FlowFigures with children.
@@ -27,7 +25,7 @@ import org.eclipse.jst.pagedesigner.common.logging.Logger;
  */
 public abstract class FlowContainerLayout extends FlowFigureLayout implements
 		FlowContext {
-	private static Logger _log = PDPlugin.getLogger(FlowContainerLayout.class);
+//	private static Logger _log = PDPlugin.getLogger(FlowContainerLayout.class);
 
 	/**
 	 * the current line
@@ -134,9 +132,8 @@ public abstract class FlowContainerLayout extends FlowFigureLayout implements
 				_currentLine.getFragments().size() - 1);
 		if (box != null) {
 			return box._marginInsets.right;
-		} else {
-			return 0;
 		}
+        return 0;
 	}
 
 	public void setCalculatingMaxWidth(boolean c) {

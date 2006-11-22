@@ -103,8 +103,8 @@ public class NodeCreationFactory implements CreationFactory {
 		IEditorPart editor = page.getActiveEditor();
 		if (editor instanceof HTMLEditor) {
 			return ((HTMLEditor) editor).getDOMDocument();
-		} else
-			return null;
+		}
+        return null;
 	}
 
 	/*

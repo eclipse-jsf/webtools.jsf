@@ -63,9 +63,8 @@ public class SelectionHelper {
 		Object inode = model.getIndexedRegion(textSel.getOffset());
 		if (inode instanceof Node) {
 			return (Node) inode;
-		} else {
-			return null;
 		}
+        return null;
 	}
 
 	/**
@@ -100,9 +99,8 @@ public class SelectionHelper {
 			Node node1 = range.getStartPosition().getContainerNode();
 			Node node2 = range.getEndPosition().getContainerNode();
 			return DOMUtil.findCommonAncester(node1, node2);
-		} else {
-			return null;
 		}
+        return null;
 	}
 
 	/**
@@ -149,7 +147,7 @@ public class SelectionHelper {
 			IStructuredDocumentRegion r = node
 					.getFirstStructuredDocumentRegion();
 			int countedData = 0;
-			int offsetInNode = offset - start;
+			// TODO: dead? int offsetInNode = offset - start;
 			while (r != null) {
 				if (DOMRegionContext.XML_CHAR_REFERENCE.equals(r.getType())
 						|| DOMRegionContext.XML_ENTITY_REFERENCE.equals(r
@@ -182,17 +180,15 @@ public class SelectionHelper {
 					.getStartStructuredDocumentRegion();
 			if (startRegion == null) {
 				return new DOMRefPosition(node, true);
-			} else {
-				int startRegionEnd = node.getStartStructuredDocumentRegion()
-						.getEnd();
-				if (offset <= startRegionEnd) {
-					// it is in the start tag region. So put position at first
-					// child position.
-					return new DOMRefPosition2(node, false);
-				} else {
-					return new DOMRefPosition2(node, true);
-				}
 			}
+            int startRegionEnd = node.getStartStructuredDocumentRegion()
+            		.getEnd();
+            if (offset <= startRegionEnd) {
+            	// it is in the start tag region. So put position at first
+            	// child position.
+            	return new DOMRefPosition2(node, false);
+            }
+            return new DOMRefPosition2(node, true);
 		} else {
 			return new DOMRefPosition(node, true);
 		}
@@ -295,24 +291,22 @@ public class SelectionHelper {
 				r = r.getNext();
 			}
 			return parent.getStartOffset() + p.getOffset();
-		} else {
-			IDOMNode previous = (IDOMNode) p.getPreviousSiblingNode();
-			if (previous != null) {
-				return previous.getEndOffset();
-			}
-			IDOMNode next = (IDOMNode) p.getNextSiblingNode();
-			if (next != null) {
-				return next.getStartOffset();
-			}
-			IStructuredDocumentRegion r = parent
-					.getStartStructuredDocumentRegion();
-			if (r != null) {
-				return r.getEnd();
-			} else {
-				// r == null normally means the parent is the document node.
-				return parent.getEndOffset();
-			}
 		}
+        IDOMNode previous = (IDOMNode) p.getPreviousSiblingNode();
+        if (previous != null) {
+        	return previous.getEndOffset();
+        }
+        IDOMNode next = (IDOMNode) p.getNextSiblingNode();
+        if (next != null) {
+        	return next.getStartOffset();
+        }
+        IStructuredDocumentRegion r = parent
+        		.getStartStructuredDocumentRegion();
+        if (r != null) {
+        	return r.getEnd();
+        }
+        // r == null normally means the parent is the document node.
+        return parent.getEndOffset();
 	}
 
 	/**
@@ -332,9 +326,8 @@ public class SelectionHelper {
 				result.add(part.getIDOMNode());
 			}
 			return new StructuredSelection(result);
-		} else {
-			return new StructuredSelection();
 		}
+        return new StructuredSelection();
 	}
 
 	/**
@@ -361,12 +354,9 @@ public class SelectionHelper {
 					endoffset = temp;
 				}
 				return new TextSelection(offset, endoffset - offset);
-			} else {
-				return new TextSelection(0, 0);
-			}
-		} else {
-			return new TextSelection(0, 0);
+			} 
 		}
+        return new TextSelection(0, 0);
 	}
 
 	public static ITextSelection convertFromDesignSelectionToTextSelection(
@@ -378,13 +368,10 @@ public class SelectionHelper {
 				return new TextSelection(node.getStartOffset(), node
 						.getEndOffset()
 						- node.getStartOffset());
-			} else {
-				return new TextSelection(0, 0);
 			}
 		} else if (selection instanceof DesignRange) {
 			return convertFromDesignSelection((DesignRange) selection);
-		} else {
-			return new TextSelection(0, 0);
 		}
+        return new TextSelection(0, 0);
 	}
 }

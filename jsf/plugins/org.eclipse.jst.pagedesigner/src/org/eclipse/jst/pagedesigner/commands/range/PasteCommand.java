@@ -39,9 +39,8 @@ public class PasteCommand extends RangeModeCommand {
 		if (edit.operate()) {
 			return new DOMRange(edit.getOperationPosition(), edit
 					.getOperationPosition());
-		} else {
-			return selection;
 		}
+        return selection;
 	}
 
 }

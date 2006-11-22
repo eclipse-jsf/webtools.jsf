@@ -188,9 +188,8 @@ public abstract class CSSLayout extends FlowFigureLayout implements FlowContext 
 	public FlowContext getFlowContext() {
 		if (_absoluteContext != null) {
 			return _absoluteContext;
-		} else {
-			return getOriginalFlowContext();
 		}
+        return getOriginalFlowContext();
 	}
 
 	public FlowContext getParentFigureContext() {
@@ -272,7 +271,7 @@ public abstract class CSSLayout extends FlowFigureLayout implements FlowContext 
 		}
 
 		// xOffset is relative to the first box of the containing figure
-		List fragments = ((ICSSFigure) containingPositionedFigure)
+		List fragments = containingPositionedFigure
 				.getFragmentsForRead();
 		if (fragments.size() > 0) {
 			FlowBox box = (FlowBox) fragments.get(0);
@@ -360,9 +359,8 @@ public abstract class CSSLayout extends FlowFigureLayout implements FlowContext 
 				_currentLine.getFragments().size() - 1);
 		if (box != null) {
 			return box._marginInsets.right;
-		} else {
-			return 0;
 		}
+        return 0;
 	}
 
 	public void setCalculatingMaxWidth(boolean c) {
@@ -425,6 +423,7 @@ public abstract class CSSLayout extends FlowFigureLayout implements FlowContext 
 	 * @param invalidate
 	 */
 	public void setBoundsCalled(Rectangle rect, boolean invalidate) {
+        // TODO: dead?
 	}
 
 	/**

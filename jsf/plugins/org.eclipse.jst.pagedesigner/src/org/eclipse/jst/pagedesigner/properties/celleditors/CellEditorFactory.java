@@ -233,10 +233,9 @@ public class CellEditorFactory implements IAttributeCellEditorFactory {
 			if (defaultValue == null) {
 				return LabeledComboBoxCellEditor.newInstance(parent, map,
 						SWT.NONE);
-			} else {
-				return LabeledStyleComboCellEditor.newInstance(parent, map,
-						defaultValue, SWT.NONE);
 			}
+            return LabeledStyleComboCellEditor.newInstance(parent, map,
+            		defaultValue, SWT.NONE);
 		} else if (IValueType.LOCALE.equalsIgnoreCase(type)) {
 			Map map = new HashMap();
 			Locale[] locales = Locale.getAvailableLocales();
@@ -287,7 +286,7 @@ public class CellEditorFactory implements IAttributeCellEditorFactory {
 			return new LoadbundleSelectionCellEditor(parent,
 					getProject(element));
 		} else if (IValueType.CSSID.equalsIgnoreCase(type)) {
-
+		    // TODO: missing case?
 		} else if (IValueType.CSSCLASS.equalsIgnoreCase(type)) {
 			String cssclasses[] = CSSUtil.getCSSClasses(element
 					.getOwnerDocument());
@@ -307,10 +306,9 @@ public class CellEditorFactory implements IAttributeCellEditorFactory {
 			if (defaultValue == null) {
 				return LabeledComboBoxCellEditor.newInstance(parent,
 						booleanMap, SWT.NONE);
-			} else {
-				return LabeledStyleComboCellEditor.newInstance(parent,
-						booleanMap, defaultValue, SWT.NONE);
 			}
+            return LabeledStyleComboCellEditor.newInstance(parent,
+            		booleanMap, defaultValue, SWT.NONE);
 		} else if (IValueType.CSSSTYLE.equalsIgnoreCase(type)) {
 			String param = attr
 					.getParameterByName(IAttributeDescriptor.PARAMETER_STYLE);

@@ -18,13 +18,11 @@ import org.eclipse.gef.requests.LocationRequest;
 import org.eclipse.gef.tools.SelectionTool;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.commands.DeleteNodeCommand;
 import org.eclipse.jst.pagedesigner.commands.SwitchSelectionCommand;
 import org.eclipse.jst.pagedesigner.commands.nav.HorizontalMoveCommand;
 import org.eclipse.jst.pagedesigner.commands.nav.ICaretPositionMover;
 import org.eclipse.jst.pagedesigner.commands.nav.VerticalMoveCommand;
-import org.eclipse.jst.pagedesigner.commands.range.ContentCommand;
 import org.eclipse.jst.pagedesigner.commands.range.CopyCommand;
 import org.eclipse.jst.pagedesigner.commands.range.CutCommand;
 import org.eclipse.jst.pagedesigner.commands.range.DeleteCommand;
@@ -32,7 +30,6 @@ import org.eclipse.jst.pagedesigner.commands.range.InsertCommand;
 import org.eclipse.jst.pagedesigner.commands.range.KeyboardData;
 import org.eclipse.jst.pagedesigner.commands.range.PasteCommand;
 import org.eclipse.jst.pagedesigner.commands.range.SelectAllCommand;
-import org.eclipse.jst.pagedesigner.common.logging.Logger;
 import org.eclipse.jst.pagedesigner.editors.pagedesigner.PageDesignerResources;
 import org.eclipse.jst.pagedesigner.parts.DocumentEditPart;
 import org.eclipse.jst.pagedesigner.requests.LocationModifierRequest;
@@ -45,8 +42,8 @@ import org.eclipse.swt.events.KeyEvent;
  * @author mengbo
  */
 public class RangeSelectionTool extends SelectionTool {
-	static final private Logger _log = PDPlugin
-			.getLogger(RangeSelectionTool.class);
+//	static final private Logger _log = PDPlugin
+//			.getLogger(RangeSelectionTool.class);
 
 	private LocationRequest _hoverRequest;
 
@@ -166,9 +163,8 @@ public class RangeSelectionTool extends SelectionTool {
 									"RangeSelectionTool.CommandLabel.Insert"), (IHTMLGraphicalViewer) this.getCurrentViewer(), keyCode); //$NON-NLS-1$
 					e.doit = false;
 					break;
-				} else {
-					return super.handleKeyDown(e);
 				}
+                return super.handleKeyDown(e);
 			}
 		}
 		if (command != null) {
@@ -239,21 +235,23 @@ public class RangeSelectionTool extends SelectionTool {
 	 * 
 	 * @param e
 	 */
-	private void dumpKey(KeyEvent e) {
-		String message = "code:" + Integer.toBinaryString(e.keyCode) + "char:" + e.character + "key:" + Integer.toBinaryString(e.stateMask); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		_log.info(message);
-	}
-
-	/**
-	 * @param content
-	 */
-	private boolean handleRangeModeContentChar(char content) {
-		IHTMLGraphicalViewer viewer = (IHTMLGraphicalViewer) this
-				.getCurrentViewer();
-		ContentCommand c = new ContentCommand(viewer, content);
-		c.execute();
-		return true;
-	}
+    
+    // TODO: dead?
+//	private void dumpKey(KeyEvent e) {
+//		String message = "code:" + Integer.toBinaryString(e.keyCode) + "char:" + e.character + "key:" + Integer.toBinaryString(e.stateMask); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+//		_log.info(message);
+//	}
+//
+//	/**
+//	 * @param content
+//	 */
+//	private boolean handleRangeModeContentChar(char content) {
+//		IHTMLGraphicalViewer viewer = (IHTMLGraphicalViewer) this
+//				.getCurrentViewer();
+//		ContentCommand c = new ContentCommand(viewer, content);
+//		c.execute();
+//		return true;
+//	}
 
 	/*
 	 * (non-Javadoc)

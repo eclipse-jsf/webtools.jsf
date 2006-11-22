@@ -76,12 +76,10 @@ public class NoneParagraphStyleAction extends ParagraphStyleAction {
 			// the lowest common block parent is the container to apply style.
 			if (EditModelQuery.hasAncestor(common, _applyingTags, true)) {
 				return false;
-			} else {
-				return true;
 			}
-		} else {
-			return false;
+            return true;
 		}
+        return false;
 	}
 
 	/*

@@ -75,25 +75,22 @@ public class LocaleFallback {
 		if (languageLength == 0 && countryLength == 0 && variantLength == 0) {
 			// The locale is "", "", "".
 			return list;
-		} else {
-			item = new StringBuffer();
-			item = item.append('_').append(language);
-			list.add(item.toString());
 		}
+        item = new StringBuffer();
+        item = item.append('_').append(language);
+        list.add(item.toString());
 
 		if (countryLength == 0 && variantLength == 0) {
 			return list;
-		} else {
-			item.append('_').append(country);
-			list.add(item.toString());
 		}
+        item.append('_').append(country);
+        list.add(item.toString());
 
 		if (variantLength == 0) {
 			return list;
-		} else {
-			item.append('_').append(variantLength);
-			list.add(item.toString());
 		}
+        item.append('_').append(variantLength);
+        list.add(item.toString());
 
 		return list;
 	}

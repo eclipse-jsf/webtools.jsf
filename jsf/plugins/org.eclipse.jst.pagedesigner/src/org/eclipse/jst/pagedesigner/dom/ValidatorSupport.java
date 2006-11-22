@@ -79,9 +79,8 @@ public class ValidatorSupport {
 		if (form != null) {
 			DOMPosition pos = new DOMPosition(form, 0);
 			return pos;
-		} else {
-			return null;
 		}
+        return null;
 	}
 
 	public static IBodyInfo getBodyInfo() {

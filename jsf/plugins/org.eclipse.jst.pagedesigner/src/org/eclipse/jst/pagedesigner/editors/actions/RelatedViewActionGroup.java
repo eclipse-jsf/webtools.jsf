@@ -45,7 +45,7 @@ public class RelatedViewActionGroup extends ActionGroup {
 				.getString("RelatedViewActionGroup.Menu.ShowView"),//$NON-NLS-1$
 				PageDesignerActionConstants.MENUMGR_VIEW_ID);
 		viewMgr.add(new Action() {
-
+		    // add noop action; TODO: why?
 		});
 		viewMgr.setRemoveAllWhenShown(true);
 		viewMgr.addMenuListener(new IMenuListener() {
@@ -95,7 +95,7 @@ public class RelatedViewActionGroup extends ActionGroup {
 				String iconPath = elements[i].getAttribute("icon");
 				if (iconPath != null) {
 					icons.put(id, AbstractUIPlugin.imageDescriptorFromPlugin(
-							elements[i].getDeclaringExtension().getNamespace(),
+							elements[i].getDeclaringExtension().getContributor().getName(),
 							iconPath));
 				} else {
 					icons.put(id, null);

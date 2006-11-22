@@ -32,7 +32,7 @@ public class LabeledStyleComboCellEditor extends StyleComboCellEditor {
 		// we'll sort according to label. since that is what being show to user.
 		List list = new ArrayList();
 		for (Iterator iter = valueLabelMap.keySet().iterator(); iter.hasNext();) {
-			Object key = (Object) iter.next();
+			Object key = iter.next();
 			String label = (String) valueLabelMap.get(key);
 			list.add(new Object[] { key, label });
 		}
@@ -70,12 +70,12 @@ public class LabeledStyleComboCellEditor extends StyleComboCellEditor {
 	protected Object doGetValue() {
 		// otherwise limits to set of valid values
 		Object index = super.doGetValue();
-		int selection = -1;
+		int selection1 = -1;
 		if (index instanceof Integer) {
-			selection = ((Integer) index).intValue();
+			selection1 = ((Integer) index).intValue();
 		}
-		if (selection >= 0) {
-			return _values[selection];
+		if (selection1 >= 0) {
+			return _values[selection1];
 		} else if (getControl() instanceof StyleCombo) {
 			// retrieve the actual text as the list of valid items doesn't
 			// contain the value
@@ -93,14 +93,14 @@ public class LabeledStyleComboCellEditor extends StyleComboCellEditor {
 			super.doSetValue(value);
 		} else {
 			String stringValue = value.toString();
-			int selection = -1;
+			int selection1 = -1;
 			for (int i = 0; i < _values.length; i++) {
 				if (_values[i].equals(stringValue)) {
-					selection = i;
+					selection1 = i;
 				}
 			}
-			if (selection >= 0) {
-				super.doSetValue(new Integer(selection));
+			if (selection1 >= 0) {
+				super.doSetValue(new Integer(selection1));
 			} else {
 				super.doSetValue(new Integer(-1));
 				if (getControl() instanceof StyleCombo

@@ -26,6 +26,7 @@ public class ActionsResources
 
     private ActionsResources()
     {
+        // no external instantiation
     }
 
     public static String getString(String key)

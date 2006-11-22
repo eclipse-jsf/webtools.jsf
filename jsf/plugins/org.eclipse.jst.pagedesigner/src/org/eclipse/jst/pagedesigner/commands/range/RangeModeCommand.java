@@ -13,9 +13,7 @@ package org.eclipse.jst.pagedesigner.commands.range;
 
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.commands.DesignerCommand;
-import org.eclipse.jst.pagedesigner.common.logging.Logger;
 import org.eclipse.jst.pagedesigner.dom.DOMPositionHelper;
 import org.eclipse.jst.pagedesigner.dom.DOMRange;
 import org.eclipse.jst.pagedesigner.dom.EditModelQuery;
@@ -31,8 +29,8 @@ import org.w3c.dom.Node;
  * @author mengbo
  */
 public abstract class RangeModeCommand extends DesignerCommand {
-	private static final Logger _log = PDPlugin
-			.getLogger(RangeModeCommand.class);
+//	private static final Logger _log = PDPlugin
+//			.getLogger(RangeModeCommand.class);
 
 	DOMRange _resultRange = null;
 
@@ -89,9 +87,8 @@ public abstract class RangeModeCommand extends DesignerCommand {
 			getViewer().startSelectionChange();
 			getModel().aboutToChangeModel();
 			return true;
-		} else {
-			return false;
 		}
+        return false;
 	}
 
 	/*
@@ -114,7 +111,7 @@ public abstract class RangeModeCommand extends DesignerCommand {
 	 * @see org.eclipse.jst.pagedesigner.commands.DesignerCommand#getAfterCommandDesignerSelection()
 	 */
 	protected final ISelection getAfterCommandDesignerSelection() {
-		try {
+//		try {
 			if (_resultRange == null) {
 				return null;
 			}
@@ -122,16 +119,16 @@ public abstract class RangeModeCommand extends DesignerCommand {
 			DesignPosition start = DOMPositionHelper.toDesignPosition(startPos);
 			if (_resultRange.isEmpty()) {
 				return new DesignRange(start, start);
-			} else {
-				IDOMPosition endPos = _resultRange.getEndPosition();
-				return new DesignRange(start, DOMPositionHelper
-						.toDesignPosition(endPos));
 			}
-		} catch (Exception e) {
-			// "Selection error"
-			_log.error("Error.RangeModeCommand.SetSelection"); //$NON-NLS-1$
-			return null;
-		}
+            IDOMPosition endPos = _resultRange.getEndPosition();
+            return new DesignRange(start, DOMPositionHelper
+            		.toDesignPosition(endPos));
+            // TODO: don't know what this exception catch is for
+//		} catch (Exception e) {
+//			// "Selection error"
+//			_log.error("Error.RangeModeCommand.SetSelection"); //$NON-NLS-1$
+//			return null;
+//		}
 	}
 
 	/**

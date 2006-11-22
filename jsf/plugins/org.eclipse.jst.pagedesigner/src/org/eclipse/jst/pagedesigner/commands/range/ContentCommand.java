@@ -71,13 +71,12 @@ public class ContentCommand extends RangeModeCommand {
 					+ data.substring(offset);
 			text.setData(newData);
 			return new DOMPosition(text, offset + _content.length());
-		} else {
-			// we need to create a text node.
-			Text text = getDocument().createTextNode(_content);
-			position.getContainerNode().insertBefore(text,
-					position.getNextSiblingNode());
-			return new DOMRefPosition(text, true);
 		}
+        // we need to create a text node.
+        Text text = getDocument().createTextNode(_content);
+        position.getContainerNode().insertBefore(text,
+        		position.getNextSiblingNode());
+        return new DOMRefPosition(text, true);
 	}
 
 	// protected DesignPosition doContent()

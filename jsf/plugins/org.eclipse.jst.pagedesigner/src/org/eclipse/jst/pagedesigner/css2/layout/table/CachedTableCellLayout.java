@@ -184,9 +184,8 @@ public abstract class CachedTableCellLayout extends CSSBlockFlowLayout {
 			}
 			if (h > _pageSizeCacheValues[0].height) {
 				return new Dimension(_pageSizeCacheValues[0].width, h);
-			} else {
-				return _pageSizeCacheValues[0];
 			}
+            return _pageSizeCacheValues[0];
 		} finally {
 			_calculatingSize = false;
 		}

@@ -172,6 +172,7 @@ public abstract class DesignerCommand extends Command {
 	 * child class can override this method for any pre action.
 	 */
 	protected void preExecute() {
+        // does nothing; children may wish to implement
 	}
 
 	/**
@@ -185,6 +186,7 @@ public abstract class DesignerCommand extends Command {
 	 * called.
 	 */
 	protected void postExecute() {
+        // does nothing; child may wish to implement
 	}
 
 	/**
@@ -246,11 +248,10 @@ public abstract class DesignerCommand extends Command {
 			DesignPosition start = DOMPositionHelper.toDesignPosition(startPos);
 			if (range.isEmpty()) {
 				return new DesignRange(start, start);
-			} else {
-				IDOMPosition endPos = range.getEndPosition();
-				return new DesignRange(start, DOMPositionHelper
-						.toDesignPosition(endPos));
 			}
+            IDOMPosition endPos = range.getEndPosition();
+            return new DesignRange(start, DOMPositionHelper
+            		.toDesignPosition(endPos));
 		} catch (Exception e) {
 			// "Selection error"
 			_log.error("Error.RangeModeCommand.SetSelection"); //$NON-NLS-1$

@@ -103,12 +103,12 @@ public class DropSelectionWizard extends Wizard {
 		if (getContainer().getCurrentPage() == _firstPage) {
 			Object obj = _firstPage.getCurrentHandler();
 			if (obj instanceof ILocalDropHandler)
+            {
 				return true;
-			else
-				return false;
-		} else {
-			return super.canFinish();
+            }
+            return false;
 		}
+        return super.canFinish();
 	}
 
 	/*

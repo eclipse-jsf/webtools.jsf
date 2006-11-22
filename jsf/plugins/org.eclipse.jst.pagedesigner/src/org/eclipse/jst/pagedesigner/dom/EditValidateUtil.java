@@ -181,14 +181,15 @@ public class EditValidateUtil {
 	 */
 	public static boolean validRange(DOMRange range) {
 		try {
-			EditModelQuery modelQuery = EditModelQuery.getInstance();
+			// TODO: never read EditModelQuery modelQuery = EditModelQuery.getInstance();
 			boolean result = true;
 			IDOMPosition start = range.getStartPosition();
 			IDOMPosition end = range.getEndPosition();
 			result &= validPosition(start);
 			result &= validPosition(end);
-			Node startContainer = start.getContainerNode();
-			Node endContainer = end.getContainerNode();
+            // TODO: never read
+//			Node startContainer = start.getContainerNode();
+//			Node endContainer = end.getContainerNode();
 			// Assert.isTrue(isValidForEditing(modelQuery.getCommonAncestor(startContainer,
 			// endContainer)));
 			return result;
@@ -300,55 +301,57 @@ public class EditValidateUtil {
 		// }
 		// _logger.debug("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
 	}
+	
+    // TODO: dead?
+//	private static int getContainerLength(Node node) {
+//		if (node.getNodeType() == Node.TEXT_NODE) {
+//			return ((Text) node).getLength();
+//		} else {
+//			if (node.hasChildNodes()) {
+//				return node.getChildNodes().getLength();
+//			} else {
+//				return 0;
+//			}
+//		}
+//	}
 
-	private static int getContainerLength(Node node) {
-		if (node.getNodeType() == Node.TEXT_NODE) {
-			return ((Text) node).getLength();
-		} else {
-			if (node.hasChildNodes()) {
-				return node.getChildNodes().getLength();
-			} else {
-				return 0;
-			}
-		}
-	}
-
-	private static void message(String text) {
-		// internal debug
-		_logger.info("+++++ message:" + text);
-	}
+    //TODO: dead?
+//	private static void message(String text) {
+//		// internal debug
+//		_logger.info("+++++ message:" + text);
+//	}
 
 	public static boolean isValidForEditing(IDOMPosition pos, boolean forward) {
-		try {
+//		try {
 			if (pos == null) {
 				return false;
 			}
 			if (pos.isText()) {
 				return true;
-			} else {
-				Node container = pos.getContainerNode();
-				// only head can't be edited
-				if (EditModelQuery.isChild(IHTMLConstants.TAG_HEAD, container,
-						true)) {
-					return false;
-				}
-				Node sibling = EditModelQuery.getInstance().getSibling(pos,
-						forward);
-				if (sibling != null) {
-					if (EditModelQuery.isText(sibling)) {
-						return true;
-					}
-					Assert.isTrue(sibling.getLocalName() != null);
-					if (EditModelQuery.UNREMOVEBLE_TAGS.contains(sibling
-							.getLocalName().toLowerCase())) {
-						return false;
-					}
-				}
-				return true;
 			}
-		} catch (Exception e) {
-			return false;
-		}
+            Node container = pos.getContainerNode();
+            // only head can't be edited
+            if (EditModelQuery.isChild(IHTMLConstants.TAG_HEAD, container,
+            		true)) {
+            	return false;
+            }
+            Node sibling = EditModelQuery.getInstance().getSibling(pos,
+            		forward);
+            if (sibling != null) {
+            	if (EditModelQuery.isText(sibling)) {
+            		return true;
+            	}
+            	Assert.isTrue(sibling.getLocalName() != null);
+            	if (EditModelQuery.UNREMOVEBLE_TAGS.contains(sibling
+            			.getLocalName().toLowerCase())) {
+            		return false;
+            	}
+            }
+            return true;
+        // TODO: not sure what was being caught here
+//		} catch (Exception e) {
+//			return false;
+//		}
 	}
 
 	public static boolean isValidForEditing(Node node) {

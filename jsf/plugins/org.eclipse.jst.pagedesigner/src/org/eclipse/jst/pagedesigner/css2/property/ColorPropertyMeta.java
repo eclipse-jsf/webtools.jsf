@@ -62,9 +62,8 @@ public class ColorPropertyMeta extends CSSPropertyMeta {
 		Object result = CSSColorManager.getInstance().getColor(text);
 		if (result != null) {
 			return result;
-		} else {
-			return this.getInitialValue(propertyName, style);
 		}
+        return this.getInitialValue(propertyName, style);
 	}
 
 	/*

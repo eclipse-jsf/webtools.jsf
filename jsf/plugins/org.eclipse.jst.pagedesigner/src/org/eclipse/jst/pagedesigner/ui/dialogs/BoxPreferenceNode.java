@@ -40,6 +40,7 @@ public class BoxPreferenceNode implements IPreferenceNode {
 	 * @see org.eclipse.jface.preference.IPreferenceNode#add(org.eclipse.jface.preference.IPreferenceNode)
 	 */
 	public void add(IPreferenceNode node) {
+        // TODO: this pattern is being repeated; perhaps need common super for preference nodes?
 	}
 
 	/*
@@ -57,6 +58,7 @@ public class BoxPreferenceNode implements IPreferenceNode {
 	 * @see org.eclipse.jface.preference.IPreferenceNode#disposeResources()
 	 */
 	public void disposeResources() {
+        // TODO:
 	}
 
 	/*

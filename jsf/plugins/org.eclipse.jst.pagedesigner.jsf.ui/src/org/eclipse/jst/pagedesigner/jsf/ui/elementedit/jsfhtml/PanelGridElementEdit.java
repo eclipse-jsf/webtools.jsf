@@ -57,9 +57,10 @@ import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
  */
 public class PanelGridElementEdit extends DefaultJSFHTMLElementEdit
 {
-    public static Action     action     = new Action()
-                                        {
-                                        };
+    private final static Action  EMPTY_ACTION = new Action()
+    {
+        // TODO: why?
+    };
     private final static int FAKE_INDEX = -10;
 
     /* (non-Javadoc)
@@ -70,7 +71,7 @@ public class PanelGridElementEdit extends DefaultJSFHTMLElementEdit
         super.fillContextMenu(contextMenu, ele);
 
         final IMenuManager tableMenu = new MenuManager(JSFUIPlugin.getResourceString("ElementEdit.Submenu.PanelGrid"));//$NON-NLS-1$
-        tableMenu.add(action);
+        tableMenu.add(EMPTY_ACTION);
         final ElementEditPart gridEditPart = (ElementEditPart) ((IDOMElement) ele).getAdapterFor(EditPart.class);
 
         // ok, we passed the checking, now let's create the actions.
@@ -117,10 +118,7 @@ public class PanelGridElementEdit extends DefaultJSFHTMLElementEdit
             {
                 return false;
             }
-            else
-            {
-                childEle = (Element) nodeBackup;
-            }
+            childEle = (Element) nodeBackup;
         }
 
         PanelGridUtil util = new PanelGridUtil(table);
@@ -128,7 +126,7 @@ public class PanelGridElementEdit extends DefaultJSFHTMLElementEdit
         final int cellColumn = util.getDomColumnIndex(childEle);
 
         final IMenuManager tableMenu = new MenuManager(JSFUIPlugin.getResourceString("ElementEdit.Submenu.PanelGrid"));//$NON-NLS-1$
-        tableMenu.add(action);
+        tableMenu.add(EMPTY_ACTION);
 
         // ok, we passed the checking, now let's create the actions.
         tableMenu.addMenuListener(new IMenuListener()
@@ -257,11 +255,8 @@ public class PanelGridElementEdit extends DefaultJSFHTMLElementEdit
                     int index = tableInsertRequest.getIndex() + (tableInsertRequest.isBefore() ? 0 : 1);
                     return new PanelGridInsertRowCommand(viewer, panelGrid, index);
                 }
-                else
-                {
-                    int index = tableInsertRequest.getIndex() + (tableInsertRequest.isBefore() ? 0 : 1);
-                    return new PanelGridInsertColumnCommand(viewer, panelGrid, index);
-                }
+                int index = tableInsertRequest.getIndex() + (tableInsertRequest.isBefore() ? 0 : 1);
+                return new PanelGridInsertColumnCommand(viewer, panelGrid, index);
             }
             else if (request instanceof InsertHeaderFooterRequest)
             {
@@ -271,10 +266,7 @@ public class PanelGridElementEdit extends DefaultJSFHTMLElementEdit
                 {
                     return new PanelGridInsertHeaderCommand(viewer, panelGrid);
                 }
-                else
-                {
-                    return new PanelGridInsertFooterCommand(viewer, panelGrid);
-                }
+                return new PanelGridInsertFooterCommand(viewer, panelGrid);
             }
             else if (request instanceof DeleteHeaderFooterRequest)
             {
@@ -289,10 +281,7 @@ public class PanelGridElementEdit extends DefaultJSFHTMLElementEdit
                 {
                     return new PanelGridDeleteRowCommand(viewer, panelGrid, deleteReq.getIndex());
                 }
-                else
-                {
-                    return new PanelGridDeleteColumnCommand(viewer, panelGrid, deleteReq.getIndex());
-                }
+                return new PanelGridDeleteColumnCommand(viewer, panelGrid, deleteReq.getIndex());
             }
             return super.getCommand(request);
         }

@@ -76,9 +76,8 @@ public class StyleClassSupport {
 		String styleClassAttr = getStyleClassAttributeName(ele);
 		if (styleClassAttr != null) {
 			return ele.getAttribute(styleClassAttr);
-		} else {
-			return null;
 		}
+        return null;
 	}
 
 	/**
@@ -98,9 +97,8 @@ public class StyleClassSupport {
 		if (taguri == null || IJMTConstants.URI_HTML.equals(taguri)) {
 			if (decl.getAttributes().getNamedItem("class") != null) {
 				return "class";
-			} else {
-				return null;
 			}
+            return null;
 		} else if (decl.getAttributes().getNamedItem("styleClass") != null) {
 			return "styleClass";
 		} else if (decl.getAttributes().getNamedItem("class") != null) {

@@ -211,9 +211,8 @@ public class RangeDragTracker extends TargetingTool implements DragTracker {
 		if (getHTMLGraphicalViewer().isInRangeMode()) {
 			rangeSelection(true);
 			return true;
-		} else {
-			return super.handleDragInProgress();
 		}
+        return super.handleDragInProgress();
 	}
 
 	/**
@@ -269,9 +268,8 @@ public class RangeDragTracker extends TargetingTool implements DragTracker {
 		if (positionMediator.isEditable(new Target(getSourceEditPart()))) {
 			return getSourceEditPart() instanceof TextEditPart
 					|| !(((NodeEditPart) getSourceEditPart()).isWidget());
-		} else {
-			return false;
 		}
+        return false;
 	}
 
 	/**

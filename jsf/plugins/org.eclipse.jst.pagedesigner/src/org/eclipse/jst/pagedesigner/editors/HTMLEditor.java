@@ -132,6 +132,7 @@ public class HTMLEditor extends PostSelectionMultiPageEditorPart implements
 	private class TextInputListener implements ITextInputListener {
 		public void inputDocumentAboutToBeChanged(IDocument oldInput,
 				IDocument newInput) {
+            // do nothing
 		}
 
 		public void inputDocumentChanged(IDocument oldInput, IDocument newInput) {
@@ -264,7 +265,7 @@ public class HTMLEditor extends PostSelectionMultiPageEditorPart implements
 		// TextInputListener());
 	}
 
-	protected void createAndAddPreviewPage() throws PartInitException {
+	protected void createAndAddPreviewPage() {
 		Composite composite = new Composite(getContainer(), 0);
 		FillLayout filllayout = new FillLayout();
 		composite.setLayout(filllayout);
@@ -462,10 +463,9 @@ public class HTMLEditor extends PostSelectionMultiPageEditorPart implements
 					}
 					throw new PartInitException("Resource " + input.getName()
 							+ " does not exist.");
-				} else {
-					throw new PartInitException("Editor could not be open on "
-							+ input.getName());
 				}
+                throw new PartInitException("Editor could not be open on "
+                		+ input.getName());
 			}
 		} else if (input instanceof IStorageEditorInput) {
 			InputStream contents = null;
@@ -483,9 +483,8 @@ public class HTMLEditor extends PostSelectionMultiPageEditorPart implements
 				// input.getName()}))); //$NON-NLS-1$
 				throw new PartInitException("Editor could not be open on "
 						+ input.getName());
-			} else {
-				ResourceUtils.ensureClosed(contents);
 			}
+            ResourceUtils.ensureClosed(contents);
 		}
 	}
 
@@ -543,10 +542,9 @@ public class HTMLEditor extends PostSelectionMultiPageEditorPart implements
 			Object obj = ((IDOMModel) getModel()).getDocument().getAdapterFor(
 					IDocumentPageVariableAdapter.class);
 			if (obj instanceof IPageVariablesProvider) {
-				return (IPageVariablesProvider) obj;
-			} else {
-				return null;
+				return obj;
 			}
+            return null;
 		} else {
 			// DMW: I'm bullet-proofing this because
 			// its been reported (on 4.03 version) a null pointer sometimes
@@ -1002,8 +1000,7 @@ public class HTMLEditor extends PostSelectionMultiPageEditorPart implements
 	public String getPartName() {
 		if (_textEditor != null) {
 			return _textEditor.getPartName();
-		} else {
-			return super.getPartName();
 		}
+        return super.getPartName();
 	}
 }

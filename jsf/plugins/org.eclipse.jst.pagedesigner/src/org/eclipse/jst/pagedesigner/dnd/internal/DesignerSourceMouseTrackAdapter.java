@@ -85,14 +85,13 @@ public class DesignerSourceMouseTrackAdapter extends
 				_domain.getPaletteViewer().setActiveTool(null);
 			}
 			return;
-		} else {
-			SourceViewerCommand command = getCommand(event);
-			if (command != null) {
-				command.execute();
-				resetPalette();
-			}
-			_location = 0;
 		}
+        SourceViewerCommand command = getCommand(event);
+        if (command != null) {
+        	command.execute();
+        	resetPalette();
+        }
+        _location = 0;
 	}
 
 	/*
@@ -118,6 +117,7 @@ public class DesignerSourceMouseTrackAdapter extends
 	 * @see org.eclipse.swt.events.MouseListener#mouseDoubleClick(org.eclipse.swt.events.MouseEvent)
 	 */
 	public void mouseDoubleClick(MouseEvent e) {
+       // do nothing
 	}
 
 	/*
@@ -126,6 +126,7 @@ public class DesignerSourceMouseTrackAdapter extends
 	 * @see org.eclipse.swt.events.MouseListener#mouseDown(org.eclipse.swt.events.MouseEvent)
 	 */
 	public void mouseDown(MouseEvent e) {
+        // do nothing
 	}
 
 	private PaletteDropInsertCommand getCommand(MouseEvent event) {
@@ -149,7 +150,7 @@ public class DesignerSourceMouseTrackAdapter extends
 			ToolEntry tool = _domain.getPaletteViewer().getPaletteRoot()
 					.getDefaultEntry();
 			if (tool != null) {
-				_domain.getPaletteViewer().setActiveTool((ToolEntry) tool);
+				_domain.getPaletteViewer().setActiveTool(tool);
 			}
 		}
 	}

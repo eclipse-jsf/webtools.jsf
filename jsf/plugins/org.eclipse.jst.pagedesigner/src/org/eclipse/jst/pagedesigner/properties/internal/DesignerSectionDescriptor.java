@@ -202,9 +202,8 @@ public class DesignerSectionDescriptor implements ISectionDescriptor {
 		}
 		if (filter.caseSensitive) {
 			return tag.equals(filter.tag);
-		} else {
-			return tag.equalsIgnoreCase(filter.tag);
 		}
+        return tag.equalsIgnoreCase(filter.tag);
 	}
 
 	/**

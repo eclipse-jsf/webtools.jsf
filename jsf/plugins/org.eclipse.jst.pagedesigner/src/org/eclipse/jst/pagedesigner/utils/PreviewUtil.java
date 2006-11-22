@@ -64,7 +64,7 @@ public class PreviewUtil {
 	/** key is prefix value is uri */
 	private static Map _taglibMap = new HashMap();
 
-	private static final String PAGE_EXTEND = "_jsppreview_.html"; //$NON-NLS-1$
+	// TODO: dead? private static final String PAGE_EXTEND = "_jsppreview_.html"; //$NON-NLS-1$
 
 	/**
 	 * @return Returns the _taglibMap.
@@ -121,9 +121,8 @@ public class PreviewUtil {
 					File file = new File(aPath);
 					if (file.exists()) {
 						return aPath;
-					} else {
-						return uri;
 					}
+                    return uri;
 				}
 			}
 		}
@@ -157,9 +156,8 @@ public class PreviewUtil {
 							value = bundle.getString(key);
 							if (value != null) {
 								return value;
-							} else {
-								return attrValue; //$NON-NLS-1$
 							}
+                            return attrValue; //$NON-NLS-1$
 						} catch (MissingResourceException e1) {
 							// "Error in resource bundle processing:"
 							_log.info("PreviewUtil.Error.0", e1); //$NON-NLS-1$
@@ -300,8 +298,9 @@ public class PreviewUtil {
 					attr.setNodeValue(getValueOFEP(attr.getNodeValue()));
 					attr.setNodeValue(PathUtil.convertToAbsolutePath(attr
 							.getNodeValue(), null));
-					StringBuffer buf = new StringBuffer();
-					String attrValue = attr.getNodeValue();
+                    //TODO: dead?
+//					StringBuffer buf = new StringBuffer();
+//					String attrValue = attr.getNodeValue();
 				}
 			}
 		}

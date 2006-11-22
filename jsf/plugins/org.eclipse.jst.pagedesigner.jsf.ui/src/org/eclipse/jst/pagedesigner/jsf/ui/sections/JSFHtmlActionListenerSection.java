@@ -105,6 +105,7 @@ public class JSFHtmlActionListenerSection extends BaseCustomSection
          */
         public void inputChanged(Viewer viewer, Object oldInput, Object newInput)
         {
+            // no support for viewer changes
         }
 
         public String getColumnText(Object element, int columnIndex)
@@ -132,6 +133,7 @@ public class JSFHtmlActionListenerSection extends BaseCustomSection
 
         public void dispose()
         {
+            // nothing to dispose
         }
 
         /* (non-Javadoc)
@@ -147,6 +149,7 @@ public class JSFHtmlActionListenerSection extends BaseCustomSection
          */
         public void addListener(ILabelProviderListener listener)
         {
+            // TODO: listeners not supported?
         }
 
         /* (non-Javadoc)
@@ -162,6 +165,7 @@ public class JSFHtmlActionListenerSection extends BaseCustomSection
          */
         public void removeListener(ILabelProviderListener listener)
         {
+            // TODO: listeners not supported?
         }
     }
 

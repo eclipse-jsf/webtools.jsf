@@ -24,10 +24,10 @@ public class DOMRangeHelper {
 			IDOMPosition dp = DOMPositionHelper.toDOMPosition(range
 					.getStartPosition());
 			return new DOMRange(dp, dp);
-		} else
-			return new DOMRange(DOMPositionHelper.toDOMPosition(range
-					.getStartPosition()), DOMPositionHelper.toDOMPosition(range
-					.getEndPosition()));
+		}
+        return new DOMRange(DOMPositionHelper.toDOMPosition(range
+        		.getStartPosition()), DOMPositionHelper.toDOMPosition(range
+        		.getEndPosition()));
 	}
 
 	public static DesignRange toDesignRange(DOMRange range) {
@@ -47,10 +47,9 @@ public class DOMRangeHelper {
 			IDOMPosition pos = range.getStartPosition().handleReplacement(
 					original, replacement);
 			return new DOMRange(pos, pos);
-		} else {
-			return new DOMRange(range.getStartPosition().handleReplacement(
-					original, replacement), range.getEndPosition()
-					.handleReplacement(original, replacement));
 		}
+        return new DOMRange(range.getStartPosition().handleReplacement(
+        		original, replacement), range.getEndPosition()
+        		.handleReplacement(original, replacement));
 	}
 }

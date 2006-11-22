@@ -36,6 +36,7 @@ public class NodeLocationComparator implements Comparator {
 	}
 
 	private NodeLocationComparator() {
+        // no external instantiation
 	}
 
 	public static NodeLocationComparator getInstance() {

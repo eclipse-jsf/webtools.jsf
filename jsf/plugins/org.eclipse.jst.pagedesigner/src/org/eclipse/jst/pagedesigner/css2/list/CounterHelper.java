@@ -199,7 +199,7 @@ public class CounterHelper {
 		String display = style.getDisplay();
 		Object styleType = style
 				.getStyleProperty(ICSSPropertyID.ATTR_LIST_STYLE_TYPE);
-		return (((String) display)
+		return (display
 				.equalsIgnoreCase(ICSSPropertyID.VAL_LIST_ITEM) //
 				&& styleType instanceof String //
 		&& !CounterValueGenerator.NON_STRING_TYPES.contains(styleType));
@@ -214,9 +214,8 @@ public class CounterHelper {
 				.getStyleProperty(ICSSPropertyID.ATTR_LIST_STYLE_TYPE);
 		if (type instanceof String) {
 			return toTypeInt((String) type);
-		} else {
-			return -1;
 		}
+        return -1;
 	}
 
 	public static int toTypeInt(String type) {

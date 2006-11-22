@@ -67,7 +67,7 @@ public class TextDecorationMeta extends CSSPropertyMeta {
 			CSSValueList valueList = (CSSValueList) value;
 			decorations = new String[valueList.getLength()];
 			for (int i = 0; i < decorations.length; i++) {
-				decorations[i] = ((CSSValue) valueList.item(i)).getCssText();
+				decorations[i] = valueList.item(i).getCssText();
 			}
 		} else {
 			decorations = new String[1];

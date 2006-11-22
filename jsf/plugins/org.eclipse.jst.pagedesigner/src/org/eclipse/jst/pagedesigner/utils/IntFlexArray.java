@@ -42,16 +42,15 @@ public class IntFlexArray {
 	public int getAt(int idx) {
 		if (idx < array.length)
 			return array[idx];
-		else
-			return 0;
+        return 0;
 	}
 
 	public int getSize() {
 		return size;
 	}
 
-	private void ensureCapacity(int size) {
-		if (size <= array.length)
+	private void ensureCapacity(int size1) {
+		if (size1 <= array.length)
 			return;
 		int[] temp = array;
 		array = new int[2 * temp.length];

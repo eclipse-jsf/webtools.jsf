@@ -40,7 +40,7 @@ public class LabeledComboBoxCellEditor extends ComboBoxCellEditor {
 		// we'll sort according to label. since that is what being show to user.
 		List list = new ArrayList();
 		for (Iterator iter = valueLabelMap.keySet().iterator(); iter.hasNext();) {
-			Object key = (Object) iter.next();
+			Object key = iter.next();
 			String label = (String) valueLabelMap.get(key);
 			list.add(new Object[] { key, label });
 		}

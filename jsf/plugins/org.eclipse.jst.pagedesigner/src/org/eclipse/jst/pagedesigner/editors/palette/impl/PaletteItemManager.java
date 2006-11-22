@@ -15,8 +15,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Enumeration;
@@ -39,11 +37,10 @@ import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.core.runtime.IExtensionPoint;
-import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.gef.palette.PaletteDrawer;
 import org.eclipse.gef.palette.PaletteEntry;
 import org.eclipse.jst.j2ee.internal.deployables.J2EEFlexProjDeployable;
@@ -59,7 +56,6 @@ import org.eclipse.jst.pagedesigner.editors.palette.IPaletteItemCategory;
 import org.eclipse.jst.pagedesigner.editors.palette.IPaletteItemDescriptor;
 import org.eclipse.jst.pagedesigner.editors.palette.IPaletteItemEntry;
 import org.eclipse.jst.pagedesigner.editors.palette.IPaletteItemManager;
-import org.eclipse.jst.pagedesigner.editors.palette.IResourceManager;
 import org.eclipse.jst.pagedesigner.utils.XMLUtil;
 import org.eclipse.wst.common.componentcore.ComponentCore;
 import org.eclipse.wst.common.componentcore.resources.IVirtualComponent;
@@ -84,9 +80,9 @@ public class PaletteItemManager implements IPaletteItemManager,
 
 	private static Map _managers = new HashMap();
 
-	private static TLDDocument jsfcoreTLD = null;
-
-	private static TLDDocument jsfhtmlTLD = null;
+//	private static TLDDocument jsfcoreTLD = null;
+//
+//	private static TLDDocument jsfhtmlTLD = null;
 
 	private List _categories = new ArrayList();
 
@@ -118,6 +114,7 @@ public class PaletteItemManager implements IPaletteItemManager,
 		 */
 		public void resourceChanged(IResourceChangeEvent event) {
 			IResourceDelta delta = event.getDelta();
+
 			try {
 				if (delta != null)
 					delta.accept(this);
@@ -380,7 +377,24 @@ public class PaletteItemManager implements IPaletteItemManager,
 					}
 					zFile.close();
 				} catch (IOException e) {
+                    PDPlugin.getDefault().getLog().log
+                        (new Status(IStatus.ERROR, PDPlugin.getPluginId(), 0, "Error accessing zip file", e));
 				}
+                finally
+                {
+                    if (zFile != null)
+                    {
+                        try
+                        {
+                            zFile.close();
+                        }
+                        catch (IOException ioe)
+                        {
+                            PDPlugin.getDefault().getLog().log
+                                (new Status(IStatus.ERROR, PDPlugin.getPluginId(), 0, "Error closing zip file", ioe));
+                        }
+                    }
+                }
 
 			}
 		}
@@ -404,6 +418,8 @@ public class PaletteItemManager implements IPaletteItemManager,
 				}
 			}
 		} catch (CoreException e) {
+            PDPlugin.getDefault().getLog().log
+                (new Status(IStatus.ERROR, PDPlugin.getPluginId(), 0, "Error initalizing form folder", e));
 		}
 
 	}
@@ -425,142 +441,143 @@ public class PaletteItemManager implements IPaletteItemManager,
 	/**
 	 * 
 	 */
-	private void initForPluginExtension() {
-		IExtensionRegistry extensionRegistry = Platform.getExtensionRegistry();
-
-		IExtensionPoint point = extensionRegistry.getExtensionPoint(
-				IPaletteConstants.BUNDLE_ID,
-				IPaletteConstants.EXTENSION_POINT_ID);
-
-		IConfigurationElement[] elements = point.getConfigurationElements();
-		for (int i = 0; i < elements.length; i++) {
-			try {
-				IConfigurationElement element = elements[i];
-				Object obj = element.createExecutableExtension("class"); //$NON-NLS-1$
-
-				if (obj instanceof IResourceManager && _curProject != null) {
-					IResourceManager manager = (IResourceManager) obj;
-					List resources = manager.getResourceList(_curProject);
-					for (Iterator iter = resources.iterator(); iter.hasNext();) {
-						String path = (String) iter.next();
-						try {
-							URL url = new URL(path);
-							url = Platform.asLocalURL(url);
-							String filepath = url.toExternalForm();
-							filepath = filepath.replace('\\', '/');
-							TLDDocument doc = null;
-
-							if (path.indexOf("!") > 0) //$NON-NLS-1$
-							{
-
-								DocumentFactoryTLD factory = new DocumentFactoryTLD();
-								String jarFile = path.substring(0, path
-										.indexOf("!")); //$NON-NLS-1$
-								if (jarFile.startsWith(JARPROTO)) {
-									jarFile = jarFile.substring(JARPROTO
-											.length());
-								}
-								String contentName = path.substring(path
-										.indexOf("!") + 1, path.length()); //$NON-NLS-1$
-								if (contentName.startsWith("/")) {
-									contentName = contentName.substring(1);
-								}
-								// first get resource from project, if not exist
-								// , from eclipse plugin.
-								String jarpathofproject = null;
-								try {
-									jarpathofproject = jarFile.substring(0,
-											jarFile.toUpperCase().indexOf(
-													".JAR") + 4);
-									jarpathofproject = jarpathofproject
-											.substring(jarpathofproject
-													.lastIndexOf("/") + 1);
-									jarpathofproject = getRelativeProjectFile(
-											_curProject,
-											IFileFolderConstants.FOLDER_WEBINF
-													+ "/"
-													+ IFileFolderConstants.FOLDER_LIB
-													+ "/" + jarpathofproject);
-								} catch (Exception e) {
-									jarpathofproject = null;
-								}
-								if (jarpathofproject != null) {
-									jarpathofproject = jarpathofproject
-											.replace('\\', '/');
-									doc = (TLDDocument) factory
-											.buildCMDocumentFromJar(
-													jarpathofproject,
-													contentName);
-								} else {
-									doc = (TLDDocument) factory
-											.buildCMDocumentFromJar(jarFile,
-													contentName);
-								}
-							} else {
-								if (filepath.startsWith(FILEPROTO))// if
-								// filepath
-								// starts
-								// with
-								// "file://"
-								// will have
-								// problem
-								// to be
-								// paremeter.
-								{
-									filepath = filepath.substring(FILEPROTO
-											.length());
-								}
-								String tldpathofproject = null;
-								try {
-									tldpathofproject = filepath.substring(0,
-											filepath.toUpperCase().indexOf(
-													".TLD") + 4);
-									tldpathofproject = tldpathofproject
-											.substring(tldpathofproject
-													.lastIndexOf("/") + 1);
-									tldpathofproject = getRelativeProjectFile(
-											_curProject,
-											IFileFolderConstants.FOLDER_WEBINF
-													+ "/"
-													+ IFileFolderConstants.FOLDER_TAGLIB
-													+ "/" + tldpathofproject);
-								} catch (Exception e) {
-									tldpathofproject = null;
-								}
-								if (tldpathofproject != null) {
-									tldpathofproject = tldpathofproject
-											.replace('\\', '/');
-									doc = (TLDDocument) ContentModelManager
-											.getInstance().createCMDocument(
-													tldpathofproject, "tld"); //$NON-NLS-1$
-								} else {
-									doc = (TLDDocument) ContentModelManager
-											.getInstance().createCMDocument(
-													filepath, "tld"); //$NON-NLS-1$
-								}
-							}
-
-							PaletteHelper.configPaletteItemsByTLD(this, doc);
-						} catch (MalformedURLException e1) {
-							_log
-									.error(
-											"PaletteItemManager.initForPluginExtension.error.MalformedURLException", e1); //$NON-NLS-1$
-						}
-
-						catch (IOException e2) {
-							_log
-									.error(
-											"PaletteItemManager.initForPluginExtension.error.IOException", e2); //$NON-NLS-1$
-						}
-					}
-				}
-			} catch (CoreException e) {
-				_log
-						.error(
-								"PaletteItemManager.initForPluginExtension.error.InstantiationException", e); //$NON-NLS-1$
-			}
-		}
-	}
+    // TODO: dead?
+//	private void initForPluginExtension() {
+//		IExtensionRegistry extensionRegistry = Platform.getExtensionRegistry();
+//
+//		IExtensionPoint point = extensionRegistry.getExtensionPoint(
+//				IPaletteConstants.BUNDLE_ID,
+//				IPaletteConstants.EXTENSION_POINT_ID);
+//
+//		IConfigurationElement[] elements = point.getConfigurationElements();
+//		for (int i = 0; i < elements.length; i++) {
+//			try {
+//				IConfigurationElement element = elements[i];
+//				Object obj = element.createExecutableExtension("class"); //$NON-NLS-1$
+//
+//				if (obj instanceof IResourceManager && _curProject != null) {
+//					IResourceManager manager = (IResourceManager) obj;
+//					List resources = manager.getResourceList(_curProject);
+//					for (Iterator iter = resources.iterator(); iter.hasNext();) {
+//						String path = (String) iter.next();
+//						try {
+//							URL url = new URL(path);
+//							url = FileLocator.toFileURL(url);
+//							String filepath = url.toExternalForm();
+//							filepath = filepath.replace('\\', '/');
+//							TLDDocument doc = null;
+//
+//							if (path.indexOf("!") > 0) //$NON-NLS-1$
+//							{
+//
+//								DocumentFactoryTLD factory = new DocumentFactoryTLD();
+//								String jarFile = path.substring(0, path
+//										.indexOf("!")); //$NON-NLS-1$
+//								if (jarFile.startsWith(JARPROTO)) {
+//									jarFile = jarFile.substring(JARPROTO
+//											.length());
+//								}
+//								String contentName = path.substring(path
+//										.indexOf("!") + 1, path.length()); //$NON-NLS-1$
+//								if (contentName.startsWith("/")) {
+//									contentName = contentName.substring(1);
+//								}
+//								// first get resource from project, if not exist
+//								// , from eclipse plugin.
+//								String jarpathofproject = null;
+//								try {
+//									jarpathofproject = jarFile.substring(0,
+//											jarFile.toUpperCase().indexOf(
+//													".JAR") + 4);
+//									jarpathofproject = jarpathofproject
+//											.substring(jarpathofproject
+//													.lastIndexOf("/") + 1);
+//									jarpathofproject = getRelativeProjectFile(
+//											_curProject,
+//											IFileFolderConstants.FOLDER_WEBINF
+//													+ "/"
+//													+ IFileFolderConstants.FOLDER_LIB
+//													+ "/" + jarpathofproject);
+//								} catch (Exception e) {
+//									jarpathofproject = null;
+//								}
+//								if (jarpathofproject != null) {
+//									jarpathofproject = jarpathofproject
+//											.replace('\\', '/');
+//									doc = (TLDDocument) factory
+//											.buildCMDocumentFromJar(
+//													jarpathofproject,
+//													contentName);
+//								} else {
+//									doc = (TLDDocument) factory
+//											.buildCMDocumentFromJar(jarFile,
+//													contentName);
+//								}
+//							} else {
+//								if (filepath.startsWith(FILEPROTO))// if
+//								// filepath
+//								// starts
+//								// with
+//								// "file://"
+//								// will have
+//								// problem
+//								// to be
+//								// paremeter.
+//								{
+//									filepath = filepath.substring(FILEPROTO
+//											.length());
+//								}
+//								String tldpathofproject = null;
+//								try {
+//									tldpathofproject = filepath.substring(0,
+//											filepath.toUpperCase().indexOf(
+//													".TLD") + 4);
+//									tldpathofproject = tldpathofproject
+//											.substring(tldpathofproject
+//													.lastIndexOf("/") + 1);
+//									tldpathofproject = getRelativeProjectFile(
+//											_curProject,
+//											IFileFolderConstants.FOLDER_WEBINF
+//													+ "/"
+//													+ IFileFolderConstants.FOLDER_TAGLIB
+//													+ "/" + tldpathofproject);
+//								} catch (Exception e) {
+//									tldpathofproject = null;
+//								}
+//								if (tldpathofproject != null) {
+//									tldpathofproject = tldpathofproject
+//											.replace('\\', '/');
+//									doc = (TLDDocument) ContentModelManager
+//											.getInstance().createCMDocument(
+//													tldpathofproject, "tld"); //$NON-NLS-1$
+//								} else {
+//									doc = (TLDDocument) ContentModelManager
+//											.getInstance().createCMDocument(
+//													filepath, "tld"); //$NON-NLS-1$
+//								}
+//							}
+//
+//							PaletteHelper.configPaletteItemsByTLD(this, doc);
+//						} catch (MalformedURLException e1) {
+//							_log
+//									.error(
+//											"PaletteItemManager.initForPluginExtension.error.MalformedURLException", e1); //$NON-NLS-1$
+//						}
+//
+//						catch (IOException e2) {
+//							_log
+//									.error(
+//											"PaletteItemManager.initForPluginExtension.error.IOException", e2); //$NON-NLS-1$
+//						}
+//					}
+//				}
+//			} catch (CoreException e) {
+//				_log
+//						.error(
+//								"PaletteItemManager.initForPluginExtension.error.InstantiationException", e); //$NON-NLS-1$
+//			}
+//		}
+//	}
 
 	/**
 	 * 
@@ -670,11 +687,10 @@ public class PaletteItemManager implements IPaletteItemManager,
 			name = name.replace('/', File.separatorChar);
 			name = name.replace('\\', File.separatorChar);
 			return name;
-		} else {
-			_filename = _filename.replace('/', File.separatorChar);
-			_filename = _filename.replace('\\', File.separatorChar);
-			return _filename;
 		}
+        _filename = _filename.replace('/', File.separatorChar);
+        _filename = _filename.replace('\\', File.separatorChar);
+        return _filename;
 	}
 
 	public void setFilename(String filename) {

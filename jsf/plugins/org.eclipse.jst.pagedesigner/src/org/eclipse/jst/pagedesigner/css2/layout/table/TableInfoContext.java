@@ -36,6 +36,7 @@ public class TableInfoContext {
 	 * 
 	 */
 	public TableInfoContext() {
+        // do nothing
 	}
 
 	/**
@@ -101,6 +102,7 @@ public class TableInfoContext {
 	 * 
 	 */
 	public void finishRowGroup() {
+        // TODO: does nothing; only called in one places
 	}
 
 	/**

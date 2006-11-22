@@ -180,6 +180,10 @@ public abstract class AbstractTagConverter implements ITagConverter,
 	 * @see org.eclipse.jst.pagedesigner.visualtag.ITagConverter#dispose()
 	 */
 	public void dispose() {
+        // do nothing; children may wish to sub-class
+        // TODO: null shared references?
+        // this doesn't seem to be called by anybody..
+        // need to review this
 	}
 
 	protected boolean shouldIgnore(Node node) {
@@ -234,9 +238,8 @@ public abstract class AbstractTagConverter implements ITagConverter,
 	public IDOMDocument getDestDocument() {
 		if (this._targetDocument != null) {
 			return this._targetDocument;
-		} else {
-			return (IDOMDocument) _hostElement.getOwnerDocument();
 		}
+        return (IDOMDocument) _hostElement.getOwnerDocument();
 	}
 
 	/**

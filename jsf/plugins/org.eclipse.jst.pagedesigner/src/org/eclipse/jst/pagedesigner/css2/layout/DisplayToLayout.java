@@ -93,8 +93,7 @@ public class DisplayToLayout {
 		Object position = style.getStyleProperty(ICSSPropertyID.ATTR_POSITION);
 		if (PositionMeta.STATIC.equalsIgnoreCase((String) position)) {
 			return false;
-		} else {
-			return true;
 		}
+        return true;
 	}
 }

@@ -37,7 +37,9 @@ import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
  * @version 1.5
  */
 public class TableActionGroup extends ActionGroup {
-	public static Action action = new Action() {
+	// TODO: I think there's a pattern emerging...
+    private final static Action action = new Action() {
+        // create an empty no-op
 	};
 
 	/*
@@ -92,10 +94,10 @@ public class TableActionGroup extends ActionGroup {
 	 */
 	private void fillTableMenu(ElementEditPart tablePart, int cellRow,
 			int cellColumn, IMenuManager tableMenu) {
-		SelectEditPartAction action = new SelectEditPartAction(
+		SelectEditPartAction action1 = new SelectEditPartAction(
 				PDPlugin
 						.getResourceString("TableActionGroup.Submenu.SelectTable"), tablePart);//$NON-NLS-1$
-		tableMenu.add(action);
+		tableMenu.add(action1);
 
 		tableMenu.add(new Separator());
 
@@ -151,7 +153,8 @@ public class TableActionGroup extends ActionGroup {
 	 * @return
 	 */
 	private boolean supportTableActions(ElementEditPart tablePart) {
-		// TODO Auto-generated method stub
+	    // TODO: what's the point of this method?
+        // it's only used in one place and always resolves to the same value..
 		return true;
 	}
 
@@ -181,12 +184,10 @@ public class TableActionGroup extends ActionGroup {
 				DesignPosition position = range.getStartPosition();
 				if (position.getOffset() == 0) {
 					return position.getContainerPart();
-				} else {
-					return position.getSiblingEditPart(true);
 				}
-			} else {
-				return RangeUtil.findCommonAncestor(range);
+                return position.getSiblingEditPart(true);
 			}
+            return RangeUtil.findCommonAncestor(range);
 		} else {
 			return null;
 		}

@@ -15,14 +15,12 @@ import java.util.List;
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.jst.pagedesigner.PDPlugin;
-import org.eclipse.jst.pagedesigner.css2.ICSSStyle;
 import org.eclipse.jst.pagedesigner.css2.layout.CSSFigure;
 import org.eclipse.jst.pagedesigner.css2.layout.CSSTextFigure;
 import org.eclipse.jst.pagedesigner.css2.provider.ICSSTextProvider;
 import org.eclipse.jst.pagedesigner.utils.HTMLUtil;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
-import org.eclipse.wst.sse.core.internal.provisional.INodeNotifier;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -90,11 +88,12 @@ public class FigureFactory {
 				 * 
 				 * @see org.eclipse.jst.pagedesigner.css2.provider.ICSSTextProvider#getCSSStyle()
 				 */
-				public ICSSStyle getCSSStyle() {
-					INodeNotifier notifier = (INodeNotifier) node
-							.getParentNode();
-					return (ICSSStyle) notifier.getAdapterFor(ICSSStyle.class);
-				}
+                //  TODO: dead?
+//				public ICSSStyle getCSSStyle() {
+//					INodeNotifier notifier = (INodeNotifier) node
+//							.getParentNode();
+//					return (ICSSStyle) notifier.getAdapterFor(ICSSStyle.class);
+//				}
 
 				/*
 				 * (non-Javadoc)

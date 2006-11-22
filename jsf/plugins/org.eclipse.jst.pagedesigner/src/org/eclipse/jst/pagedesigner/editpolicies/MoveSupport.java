@@ -33,9 +33,8 @@ public class MoveSupport {
 		if (parts == null || parts.size() != 1
 				|| !(parts.get(0) instanceof NodeEditPart)) {
 			return false;
-		} else {
-			return true;
 		}
+        return true;
 	}
 
 	/**

@@ -25,6 +25,7 @@ public class DialogsMessages {
 			.getBundle(BUNDLE_NAME);
 
 	private DialogsMessages() {
+        // no external instantiation
 	}
 
 	public static String getString(String key) {

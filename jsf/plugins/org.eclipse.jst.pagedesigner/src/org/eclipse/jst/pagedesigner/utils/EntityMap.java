@@ -39,9 +39,10 @@ public class EntityMap {
 			}
 			while (posi < len) {
 				if (!Character.isLetterOrDigit(array[posi]))
+                {
 					break;
-				else
-					posi++;
+                }
+				posi++;
 			}
 			// now posi>=array.length or array[posi] is non letter or digit
 			String str = new String(array, lastPosi, posi - lastPosi);
@@ -72,8 +73,12 @@ public class EntityMap {
 		while (posi < len) {
 			if (HTMLUtil.isHTMLWhitespace(array[posi])) {
 				while (++posi < len && HTMLUtil.isHTMLWhitespace(array[posi]))
-					;
-				buffer.append(' ');
+                {
+                    // no body
+                    // loop until we have find non-whitepspace or endof array
+                }
+
+                buffer.append(' ');
 				continue;
 			}
 			if (array[posi] != '&') {
@@ -90,9 +95,8 @@ public class EntityMap {
 			while (posi < len) {
 				if (!Character.isLetterOrDigit(array[posi])) {
 					break;
-				} else {
-					posi++;
 				}
+                posi++;
 			}
 			// now posi>=array.length or array[posi] is non letter or digit
 			String str = new String(array, lastPosi, posi - lastPosi);
@@ -145,10 +149,9 @@ public class EntityMap {
 				strBuf.append(s);
 				return false;
 			}
-		} else {
-			strBuf.append(s);
-			return false;
 		}
+        strBuf.append(s);
+        return false;
 	}
 
 	/**
@@ -162,7 +165,7 @@ public class EntityMap {
 	private static char replaceBadEntity(char n) {
 		if (n < 132 || n > 156)
 			return n;
-		switch ((int) n) {
+		switch (n) {
 		case 132:
 			return (char) 8222;
 		case 133:

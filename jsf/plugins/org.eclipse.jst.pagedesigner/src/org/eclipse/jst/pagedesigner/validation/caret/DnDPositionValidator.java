@@ -16,17 +16,18 @@ package org.eclipse.jst.pagedesigner.validation.caret;
  * screen.
  * 
  * @author mengbo
+ * TODO: is this class complete?
  */
 public class DnDPositionValidator extends DefaultPositionValidator {
-	private static DnDPositionValidator _instance;
-
-	private ActionData _data;
+    //TODO: not used
+//	private static DnDPositionValidator _instance;
+//
+//	private ActionData _data;
 
 	/**
 	 * @param actionData
 	 */
 	public DnDPositionValidator(ActionData actionData) {
 		super(actionData);
-		// TODO Auto-generated constructor stub
 	}
 }

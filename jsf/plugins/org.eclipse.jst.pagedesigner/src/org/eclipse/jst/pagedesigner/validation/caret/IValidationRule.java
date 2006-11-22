@@ -15,5 +15,5 @@ package org.eclipse.jst.pagedesigner.validation.caret;
  * @author mengbo
  */
 public interface IValidationRule {
-
+    // TODO: tagging interface?
 }

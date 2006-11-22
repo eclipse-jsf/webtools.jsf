@@ -48,12 +48,10 @@ public class NoneStyleAction extends ChangeStyleAction {
 			common = EditModelQuery.getInstance().getCommonAncestor(start, end);
 			if (EditModelQuery.hasAncestor(common, _applyingStyleTags, true)) {
 				return false;
-			} else {
-				return true;
 			}
-		} else {
-			return false;
+            return true;
 		}
+        return false;
 	}
 
 	/*

@@ -181,8 +181,6 @@ public class FontSizeMeta extends LengthMeta {
 					// _log.error("Error.FontSizeMeta.0", ex); //$NON-NLS-1$
 					return null;
 				}
-			} else {
-				return null;
 			}
 		}
 		return null;

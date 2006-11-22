@@ -11,13 +11,13 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.editors.pagedesigner;
 
+import org.eclipse.core.runtime.ListenerList;
 import org.eclipse.draw2d.ScalableFigure;
 import org.eclipse.draw2d.Viewport;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.editparts.ZoomListener;
 import org.eclipse.gef.editparts.ZoomManager;
-import org.eclipse.jface.util.ListenerList;
 
 /**
  * A delegating ZoomManager.
@@ -33,7 +33,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 	private ZoomManager _currentZoomManager;
 
 	/** listeners */
-	private ListenerList _zoomListeners = new ListenerList(3);
+	private ListenerList _zoomListeners = new ListenerList(ListenerList.IDENTITY);
 
 	/**
 	 * Creates a new DelegatingZoomManager instance.

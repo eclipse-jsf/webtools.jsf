@@ -14,16 +14,13 @@ package org.eclipse.jst.pagedesigner.jsf.ui.celleditors;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.core.resources.IProject;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jst.pagedesigner.common.dialogfield.DialogField;
 import org.eclipse.jst.pagedesigner.meta.IAttributeCellEditorFactory;
 import org.eclipse.jst.pagedesigner.meta.IAttributeDescriptor;
 import org.eclipse.jst.pagedesigner.properties.celleditors.LabeledComboBoxCellEditor;
-import org.eclipse.jst.pagedesigner.utils.StructuredModelUtil;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
 import org.w3c.dom.Element;
 
 /**
@@ -49,7 +46,6 @@ public class JSFAttributeCellEditorFactory implements IAttributeCellEditorFactor
     public CellEditor createCellEditor(Composite parent, IAttributeDescriptor attr, Element element)
     {
         String type = attr.getValueType();
-        IProject project = StructuredModelUtil.getProjectFor(((IDOMElement) element).getModel());
         String[] results = null;
         if (type.equalsIgnoreCase(CONVERTERID))
         {

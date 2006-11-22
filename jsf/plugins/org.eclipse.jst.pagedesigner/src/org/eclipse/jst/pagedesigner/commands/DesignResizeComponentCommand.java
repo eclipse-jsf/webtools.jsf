@@ -39,6 +39,8 @@ public class DesignResizeComponentCommand extends Command {
 		this._constraint = constraint;
 		EditPart part = child;
 		if (part instanceof ScalableRootEditPart) {
+            // TODO: eh?
+            // do nothing I guess...
 		} else {
 			while (part != null
 					&& !(part.getParent() instanceof ScalableRootEditPart)) {
@@ -120,9 +122,8 @@ public class DesignResizeComponentCommand extends Command {
 		}
 		if (result.indexOf(item) >= 0) {
 			return removeOthers(result, item);
-		} else {
-			return result;
 		}
+        return result;
 	}
 
 	/*

@@ -116,9 +116,10 @@ public abstract class FlowFigure extends Figure {
 
 	public String toString() {
 		if (_displayString == null)
+        {
 			return super.toString();
-		else
-			return _displayString + " " + getClass().getName();
+        }
+        return _displayString + " " + getClass().getName();
 	}
 
 	String _displayString; // for debug

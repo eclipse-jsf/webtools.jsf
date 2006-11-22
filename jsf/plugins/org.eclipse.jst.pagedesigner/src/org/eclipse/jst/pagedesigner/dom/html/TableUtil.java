@@ -71,12 +71,11 @@ public class TableUtil {
 			Element preTr = (Element) trList.get(dex);
 			if (preTr.getParentNode() != parent) {
 				break;
-			} else {
-				int maxRowSpan = countMaxRowSpan(preTr);
-				if (maxRowSpan > (index - dex)) {
-					return true;
-				}
 			}
+            int maxRowSpan = countMaxRowSpan(preTr);
+            if (maxRowSpan > (index - dex)) {
+            	return true;
+            }
 		}
 		return false;
 	}

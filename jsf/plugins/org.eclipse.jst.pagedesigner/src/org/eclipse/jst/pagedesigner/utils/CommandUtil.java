@@ -112,9 +112,8 @@ public class CommandUtil {
 		if (item.isJSFComponent()) {
 			return JSFValidatorSupport.prepareInsertJSFComponent(position, item
 					.getURI(), item.getTagName(), item.isRequireHForm());
-		} else {
-			return position;
 		}
+        return position;
 	}
 
 	// /**

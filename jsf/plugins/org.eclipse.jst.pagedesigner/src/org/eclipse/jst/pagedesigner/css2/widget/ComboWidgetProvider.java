@@ -37,7 +37,7 @@ public class ComboWidgetProvider extends AbstractWidgetProvider {
 
 	private static int ARRAWWIDTH = 16;
 
-	private static int ARROWHEIGHT = 16;
+	//private static int ARROWHEIGHT = 16;
 
 	private String _firstString;
 

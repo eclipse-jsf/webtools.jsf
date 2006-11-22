@@ -44,9 +44,8 @@ public class DOMUtil {
 			list.add(node);
 			if (node instanceof Document) {
 				break;
-			} else {
-				node = node.getParentNode();
 			}
+            node = node.getParentNode();
 		}
 		if (node == null) {
 			// if part ==null, means we didn't find a DocumentEditPart,

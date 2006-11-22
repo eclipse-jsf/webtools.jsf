@@ -184,18 +184,19 @@ public class IETablePositionRule extends DefaultPositionRule {
 		return false;
 	}
 
-	private boolean isValidTrTd(List ancestors) {
-		String name;
-		int offset = ancestors.size();
-		if (offset >= 2) {
-			return IHTMLConstants.TAG_TR.equalsIgnoreCase(((Node) ancestors
-					.get(offset - 1)).getLocalName())
-					&& //
-					(IHTMLConstants.TAG_TH.equalsIgnoreCase(((Node) ancestors
-							.get(offset - 2)).getLocalName()) || //
-					IHTMLConstants.TAG_TD.equalsIgnoreCase(((Node) ancestors
-							.get(offset - 2)).getLocalName()));
-		}
-		return false;
-	}
+    // TODO: dead?
+//	private boolean isValidTrTd(List ancestors) {
+//		String name;
+//		int offset = ancestors.size();
+//		if (offset >= 2) {
+//			return IHTMLConstants.TAG_TR.equalsIgnoreCase(((Node) ancestors
+//					.get(offset - 1)).getLocalName())
+//					&& //
+//					(IHTMLConstants.TAG_TH.equalsIgnoreCase(((Node) ancestors
+//							.get(offset - 2)).getLocalName()) || //
+//					IHTMLConstants.TAG_TD.equalsIgnoreCase(((Node) ancestors
+//							.get(offset - 2)).getLocalName()));
+//		}
+//		return false;
+//	}
 }

@@ -220,9 +220,8 @@ public class BlockFlowContext implements FlowContext {
 				_currentLine.getFragments().size() - 1);
 		if (box != null) {
 			return box._marginInsets.right;
-		} else {
-			return 0;
 		}
+        return 0;
 	}
 
 	/*

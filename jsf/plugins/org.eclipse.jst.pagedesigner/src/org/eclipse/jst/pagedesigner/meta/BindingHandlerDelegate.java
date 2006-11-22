@@ -39,9 +39,8 @@ public class BindingHandlerDelegate implements IBindingHandler {
 		if (handler != null) {
 			return handler
 					.handleBinding(shell, ancester, element, currentValue);
-		} else {
-			return null;
 		}
+        return null;
 	}
 
 	/*
@@ -100,9 +99,8 @@ public class BindingHandlerDelegate implements IBindingHandler {
 		IDOMModel model = getModel(ancester, element);
 		if (model != null) {
 			return StructuredModelUtil.getProjectFor(model);
-		} else {
-			return null;
 		}
+        return null;
 	}
 
 	private IDOMModel getModel(IDOMNode ancester, IDOMElement element) {

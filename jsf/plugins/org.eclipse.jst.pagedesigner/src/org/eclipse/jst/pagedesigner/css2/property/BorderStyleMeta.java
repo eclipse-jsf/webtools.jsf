@@ -104,20 +104,16 @@ public class BorderStyleMeta extends CSSPropertyMeta {
 			if (rules == null || rules.length() == 0) {
 				if (borderstr == null || "0".equals(borderstr.trim())) {
 					return ICSSPropertyID.VAL_NONE;
-				} else {
-					return ICSSPropertyID.VAL_TDBORDERSTYLE;
 				}
-			} else {
-				// ok, we got a value for rules
-				if (TableUtil.matchRules(extractEdge(propertyName), rules)) {
-					return ICSSPropertyID.VAL_TDBORDERSTYLE;
-				} else {
-					return ICSSPropertyID.VAL_NONE;
-				}
+                return ICSSPropertyID.VAL_TDBORDERSTYLE;
 			}
-		} else {
-			return null;
+            // ok, we got a value for rules
+            if (TableUtil.matchRules(extractEdge(propertyName), rules)) {
+            	return ICSSPropertyID.VAL_TDBORDERSTYLE;
+            }
+            return ICSSPropertyID.VAL_NONE;
 		}
+        return null;
 	}
 
 	/**
@@ -151,9 +147,8 @@ public class BorderStyleMeta extends CSSPropertyMeta {
 		// ok, we got a value for frame.
 		if (TableUtil.matchFrame(extractEdge(propertyName), frame)) {
 			return ICSSPropertyID.VAL_OUTSET;
-		} else {
-			return ICSSPropertyID.VAL_NONE;
 		}
+        return ICSSPropertyID.VAL_NONE;
 	}
 
 	static String extractEdge(String propertyName) {

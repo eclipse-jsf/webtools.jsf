@@ -59,9 +59,10 @@ import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
  */
 public class DataTableElementEdit extends DefaultJSFHTMLElementEdit
 {
-    public static Action     action     = new Action()
-                                        {
-                                        };
+    private final static Action     EMPTY_ACTION     = new Action()
+    {
+        // TODO: why?
+    };
     private final static int FAKE_INDEX = -10;
 
     /* (non-Javadoc)
@@ -74,7 +75,7 @@ public class DataTableElementEdit extends DefaultJSFHTMLElementEdit
         final IMenuManager tableMenu = new MenuManager(JSFUIPlugin.getResourceString("ElementEdit.Submenu.DataTable"));//$NON-NLS-1$
         final ElementEditPart editPart = (ElementEditPart) ((IDOMElement) ele).getAdapterFor(EditPart.class);
         // ok, we passed the checking, now let's create the actions.
-        tableMenu.add(action);
+        tableMenu.add(EMPTY_ACTION);
         tableMenu.addMenuListener(new IMenuListener()
         {
             public void menuAboutToShow(IMenuManager manager)
@@ -104,7 +105,7 @@ public class DataTableElementEdit extends DefaultJSFHTMLElementEdit
         final IMenuManager tableMenu = new MenuManager(JSFUIPlugin.getResourceString("ElementEdit.Submenu.DataTable"));//$NON-NLS-1$
 
         // ok, we passed the checking, now let's create the actions.
-        tableMenu.add(action);
+        tableMenu.add(EMPTY_ACTION);
         tableMenu.addMenuListener(new IMenuListener()
         {
             public void menuAboutToShow(IMenuManager manager)
@@ -232,11 +233,8 @@ public class DataTableElementEdit extends DefaultJSFHTMLElementEdit
                     // don't support insert row.
                     return null;
                 }
-                else
-                {
-                    int index = tableInsertRequest.getIndex() + (tableInsertRequest.isBefore() ? 0 : 1);
-                    return new DataTableInsertColumnCommand(viewer, dataTable, index);
-                }
+                int index = tableInsertRequest.getIndex() + (tableInsertRequest.isBefore() ? 0 : 1);
+                return new DataTableInsertColumnCommand(viewer, dataTable, index);
             }
             else if (request instanceof InsertHeaderFooterRequest)
             {
@@ -269,10 +267,7 @@ public class DataTableElementEdit extends DefaultJSFHTMLElementEdit
                 {
                     return null;
                 }
-                else
-                {
-                    return new DataTableDeleteColumnCommand(viewer, dataTable, deleteReq.getIndex());
-                }
+                return new DataTableDeleteColumnCommand(viewer, dataTable, deleteReq.getIndex());
             }
             return super.getCommand(request);
         }

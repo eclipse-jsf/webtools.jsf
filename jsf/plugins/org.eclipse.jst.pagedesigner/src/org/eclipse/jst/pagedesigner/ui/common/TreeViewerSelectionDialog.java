@@ -134,7 +134,7 @@ public abstract class TreeViewerSelectionDialog extends SelectionDialog {
 						_selection = getSelectedElement((IStructuredSelection) event
 								.getSelection());
 						updateStatus();
-					};
+					}
 				});
 		_treeViewer.addDoubleClickListener(new IDoubleClickListener() {
 			public void doubleClick(DoubleClickEvent event) {
@@ -224,7 +224,7 @@ public abstract class TreeViewerSelectionDialog extends SelectionDialog {
 	}
 
 	private Object getSelectedElement(IStructuredSelection selection) {
-		return ((IStructuredSelection) selection).getFirstElement();
+		return selection.getFirstElement();
 	}
 
 	/**

@@ -38,7 +38,7 @@ public class CSSColorConverter {
 		if (CSSText == null) {
 			return null;
 		}
-		;
+
 		CSSText = CSSText.trim().toLowerCase();
 		if (CSSText.length() == 0) {
 			return null;

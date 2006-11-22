@@ -137,9 +137,8 @@ public class CSSFigure extends FlowFigure implements ICSSFigure {
 				.getDisplay(), old);
 		if (layout != null) {
 			return layout;
-		} else {
-			return new CSSInlineFlowLayout(this);
 		}
+        return new CSSInlineFlowLayout(this);
 	}
 
 	/*
@@ -186,15 +185,14 @@ public class CSSFigure extends FlowFigure implements ICSSFigure {
 		if (list == null || list.size() == 0) {
 			// should not happen. but still handle it.
 			return new Rectangle[] { getBounds() };
-		} else {
-			Rectangle[] ret = new Rectangle[list.size()];
-			for (int i = 0, size = list.size(); i < size; i++) {
-				FlowBox box = (FlowBox) list.get(i);
-				ret[i] = new Rectangle(box._x, box._y, box.getWidth(), box
-						.getHeight());
-			}
-			return ret;
 		}
+        Rectangle[] ret = new Rectangle[list.size()];
+        for (int i = 0, size = list.size(); i < size; i++) {
+        	FlowBox box = (FlowBox) list.get(i);
+        	ret[i] = new Rectangle(box._x, box._y, box.getWidth(), box
+        			.getHeight());
+        }
+        return ret;
 	}
 
 	/*
@@ -247,9 +245,8 @@ public class CSSFigure extends FlowFigure implements ICSSFigure {
 		CSSLayout layout = (CSSLayout) getLayoutManager();
 		if (layout == null) {
 			return false;
-		} else {
-			return layout.useLocalCoordinates();
 		}
+        return layout.useLocalCoordinates();
 	}
 
 	/*
@@ -471,8 +468,8 @@ public class CSSFigure extends FlowFigure implements ICSSFigure {
 
 		ICSSStyle style = this.getCSSStyle();
 		if (style != null) {
-			CSSBorder border = new CSSBorder(this.getCSSStyle());
-			border.paint(this, graphics, NO_INSETS);
+			CSSBorder border1 = new CSSBorder(this.getCSSStyle());
+			border1.paint(this, graphics, NO_INSETS);
 
 			// draw a border for those special elements like <h:form>, etc.
 			ITagEditInfo editInfo = (ITagEditInfo) style

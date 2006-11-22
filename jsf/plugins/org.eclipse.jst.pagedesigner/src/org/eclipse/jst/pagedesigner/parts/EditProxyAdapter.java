@@ -56,6 +56,7 @@ public class EditProxyAdapter implements INodeAdapter, IRangeSelectionProxy {
 	 */
 	public void notifyChanged(INodeNotifier notifier, int eventType,
 			Object changedFeature, Object oldValue, Object newValue, int pos) {
+        // do nothing?
 	}
 
 	/*

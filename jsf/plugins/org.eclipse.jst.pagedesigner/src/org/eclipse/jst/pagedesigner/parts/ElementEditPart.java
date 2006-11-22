@@ -91,13 +91,11 @@ public class ElementEditPart extends SubNodeEditPart {
 			if (((ElementResizableEditPolicy) policy)
 					.shouldUseObjectMode(request)) {
 				return new ObjectModeDragTracker(this);
-			} else {
-				return new RangeDragTracker(this);
 			}
-		} else {
-			// should not happen
-			return new DragEditPartsTracker(this);
+            return new RangeDragTracker(this);
 		}
+        // should not happen
+        return new DragEditPartsTracker(this);
 	}
 
 	/*
@@ -255,10 +253,10 @@ public class ElementEditPart extends SubNodeEditPart {
 		Object model;
 
 		Map modelToEditPart = new HashMap();
-		List children = getChildren();
+		List children1 = getChildren();
 
-		for (int i = 0, n = children.size(); i < n; i++) {
-			editPart = (EditPart) children.get(i);
+		for (int i = 0, n = children1.size(); i < n; i++) {
+			editPart = (EditPart) children1.get(i);
 			modelToEditPart.put(editPart.getModel(), editPart);
 			// remove child visual, since we may reconstruct the figure
 			// structure of this edit part
@@ -395,17 +393,16 @@ public class ElementEditPart extends SubNodeEditPart {
 		IElementEdit edit = this.getElementEdit();
 		if (edit != null) {
 			return edit.isResizable(this._elementNode);
-		} else {
-			CMElementDeclaration decl = CMUtil
-					.getElementDeclaration(this._elementNode);
-			if (decl != null) {
-				// XXX: default implementation, if this element support "style"
-				// attribute,
-				// then we think it support resize.
-				return decl.getAttributes().getNamedItem("style") != null;
-			}
-			return true;
 		}
+        CMElementDeclaration decl = CMUtil
+        		.getElementDeclaration(this._elementNode);
+        if (decl != null) {
+        	// XXX: default implementation, if this element support "style"
+        	// attribute,
+        	// then we think it support resize.
+        	return decl.getAttributes().getNamedItem("style") != null;
+        }
+        return true;
 	}
 
 	/**
@@ -536,10 +533,10 @@ public class ElementEditPart extends SubNodeEditPart {
 	 * @return
 	 */
 	public boolean haveNonWhitespaceTextChild() {
-		List children = this.getChildren();
-		for (int i = 0, size = children.size(); i < size; i++) {
-			if (children.get(i) instanceof TextEditPart) {
-				IDOMText xmltext = (IDOMText) ((TextEditPart) children.get(i))
+		List children1 = this.getChildren();
+		for (int i = 0, size = children1.size(); i < size; i++) {
+			if (children1.get(i) instanceof TextEditPart) {
+				IDOMText xmltext = (IDOMText) ((TextEditPart) children1.get(i))
 						.getIDOMNode();
 				if (!xmltext.isElementContentWhitespace()) {
 					return true;

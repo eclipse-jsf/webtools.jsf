@@ -128,7 +128,7 @@ public class PaletteHelper {
 	private static void configItem(IPaletteItemDescriptor item,
 			CMElementDeclaration eledecl) {
 		if (eledecl instanceof HTMLElementDeclaration) {
-			configHTMLItem(item, (HTMLElementDeclaration) eledecl);
+			// TODO: does nothing: configHTMLItem(item, (HTMLElementDeclaration) eledecl);
 		} else if (eledecl instanceof TLDElementDeclaration) {
 			configTLDItem(item, (TLDElementDeclaration) eledecl);
 		}
@@ -152,9 +152,10 @@ public class PaletteHelper {
 	 * @param item
 	 * @param declaration
 	 */
-	private static void configHTMLItem(IPaletteItemDescriptor item,
-			HTMLElementDeclaration declaration) {
-	}
+//	private static void configHTMLItem(IPaletteItemDescriptor item,
+//			HTMLElementDeclaration declaration) {
+//        // TODO: does nothing
+//	}
 
 	public static void readConfigFromPlugin(IPaletteItemManager manager) {
 		IExtensionRegistry extensionRegistry = Platform.getExtensionRegistry();

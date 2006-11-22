@@ -16,14 +16,11 @@ import java.beans.PropertyChangeListener;
 
 import org.eclipse.draw2d.FigureListener;
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.Polyline;
 import org.eclipse.draw2d.RangeModel;
 import org.eclipse.draw2d.Viewport;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
-import org.eclipse.jst.pagedesigner.PDPlugin;
-import org.eclipse.jst.pagedesigner.common.logging.Logger;
 import org.eclipse.jst.pagedesigner.css2.property.ICSSPropertyID;
 import org.eclipse.jst.pagedesigner.tools.ExposeHelper;
 import org.eclipse.swt.widgets.Caret;
@@ -42,7 +39,7 @@ import org.eclipse.swt.widgets.Caret;
  */
 public class CaretUpdater implements IHTMLGraphicalViewerListener,
 		FigureListener {
-	private static final Logger _log = PDPlugin.getLogger(CaretUpdater.class);
+//	private static final Logger _log = PDPlugin.getLogger(CaretUpdater.class);
 
 	private IHTMLGraphicalViewer _viewer;
 
@@ -56,7 +53,7 @@ public class CaretUpdater implements IHTMLGraphicalViewerListener,
 	 */
 	private IFigure _trackFigure;
 
-	private Polyline _rangeStartCaret;
+	//TODO: dead? private Polyline _rangeStartCaret;
 
 	public CaretUpdater(IHTMLGraphicalViewer viewer) {
 		_viewer = viewer;
@@ -133,7 +130,7 @@ public class CaretUpdater implements IHTMLGraphicalViewerListener,
 	private void updateRangeSelection() {
 		// FIXME: optimization needed here. Normally should not repaint the
 		// whole page.
-		DesignRange range = _viewer.getRangeSelection();
+		// TODO: dead?? DesignRange range = _viewer.getRangeSelection();
 		((GraphicalEditPart) _viewer.getRootEditPart()).getFigure().repaint();
 		((GraphicalEditPart) _viewer.getRootEditPart()).getFigure()
 				.getUpdateManager().performUpdate();

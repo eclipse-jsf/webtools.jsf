@@ -93,10 +93,9 @@ public class DeleteEdit extends DesignEdit {
 		}
 		if (EditModelQuery.isSame(opPosition, getOperationPosition())) {
 			return;
-		} else {
-			setRange(new DOMRange(opPosition, getOperationPosition()));
-			deleteRange();
 		}
+        setRange(new DOMRange(opPosition, getOperationPosition()));
+        deleteRange();
 	}
 
 	protected Stack deleteRange() {
@@ -277,9 +276,8 @@ public class DeleteEdit extends DesignEdit {
 				second = position.getPreviousSiblingNode();
 			}
 			return second != null ? (Text) EditHelper.deleteNode(second) : null;
-		} else {
-			setOperationPosition(new DOMRefPosition(currentNode, false));
-			return (Text) EditHelper.deleteNode(currentNode);
 		}
+        setOperationPosition(new DOMRefPosition(currentNode, false));
+        return (Text) EditHelper.deleteNode(currentNode);
 	}
 }

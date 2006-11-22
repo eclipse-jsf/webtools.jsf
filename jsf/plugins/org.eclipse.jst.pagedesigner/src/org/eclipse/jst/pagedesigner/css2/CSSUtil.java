@@ -30,9 +30,9 @@ import org.eclipse.wst.css.core.internal.provisional.document.ICSSModel;
 import org.eclipse.wst.css.core.internal.provisional.document.ICSSNode;
 import org.eclipse.wst.css.core.internal.util.CSSClassTraverser;
 import org.eclipse.wst.html.core.internal.htmlcss.CSSQueryTraverser;
+import org.eclipse.wst.sse.core.StructuredModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.INodeNotifier;
 import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
-import org.eclipse.wst.sse.core.internal.provisional.StructuredModelManager;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -91,9 +91,8 @@ public class CSSUtil {
 		}
 		if (style == null) {
 			return DefaultStyle.getInstance();
-		} else {
-			return style;
 		}
+        return style;
 	}
 
 	/**

@@ -88,10 +88,10 @@ public class TableCellInfo extends TableItemInfo {
 			Dimension d = ((CSSTableCellLayout) layout).getMaxContentWidthSize(
 					figure, _cellWidth, _cellHeight);
 			return d;
-		} else {
-			// should not happen
-			return getMinCWDimension();
 		}
+
+        // should not happen
+        return getMinCWDimension();
 	}
 
 	/**

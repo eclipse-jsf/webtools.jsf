@@ -108,12 +108,11 @@ public class InputFigureHandler extends WidgetFigureHandler {
 		try {
 			if (s != null) {
 				return Integer.parseInt(s);
-			} else {
-				return 0;
 			}
-		} catch (Exception ex) {
-			return 0;
+		} catch (NumberFormatException  ex) {
+            // suppress and fall-through; return 0
 		}
+        return 0;
 	}
 
 	/**
@@ -171,9 +170,8 @@ public class InputFigureHandler extends WidgetFigureHandler {
 		}
 		if (type.equalsIgnoreCase(ICSSPropertyID.VAL_PASSWORD)) {
 			return getPasswordProvider(node);
-		} else {
-			return getTextInputProvider(node);
 		}
+        return getTextInputProvider(node);
 	}
 
 	/**

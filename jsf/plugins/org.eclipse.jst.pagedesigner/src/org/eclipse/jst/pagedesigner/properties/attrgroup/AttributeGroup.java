@@ -115,9 +115,8 @@ public class AttributeGroup extends DialogFieldGroup {
 		Object obj = field.getAttachedData(KEY_ATTR);
 		if (obj instanceof IAttributeDescriptor) {
 			return (IAttributeDescriptor) obj;
-		} else {
-			return null;
 		}
+        return null;
 	}
 
 	/**

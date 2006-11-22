@@ -11,7 +11,6 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.dom;
 
-import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
@@ -54,8 +53,7 @@ public class DOMPosition implements IDOMPosition {
 		int length = children.getLength();
 		if (_offset >= length || _offset < 0)
 			return null;
-		else
-			return (IDOMNode) children.item(_offset);
+        return children.item(_offset);
 	}
 
 	/*
@@ -70,8 +68,7 @@ public class DOMPosition implements IDOMPosition {
 		int length = children.getLength();
 		if (_offset > length || _offset <= 0)
 			return null;
-		else
-			return (IDOMNode) children.item(_offset - 1);
+        return children.item(_offset - 1);
 	}
 
 	/*
@@ -100,16 +97,14 @@ public class DOMPosition implements IDOMPosition {
 	public Node getSibling(boolean forward) {
 		if (forward)
 			return getNextSiblingNode();
-		else
-			return getPreviousSiblingNode();
+        return getPreviousSiblingNode();
 	}
 
 	public IDOMPosition handleReplacement(Node original, Node replacement) {
 		if (original == this._containerNode) {
 			return new DOMPosition(replacement, this._offset);
-		} else {
-			return this;
 		}
+        return this;
 	}
 
 	/*

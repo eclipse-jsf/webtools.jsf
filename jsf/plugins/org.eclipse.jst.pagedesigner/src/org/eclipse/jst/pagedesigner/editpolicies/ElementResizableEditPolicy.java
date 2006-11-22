@@ -248,9 +248,8 @@ public class ElementResizableEditPolicy extends ResizableEditPolicy {
 		if (part != null && part.getModel() instanceof Node) {
 			return EditModelQuery.HTML_STYLE_NODES.contains(((Node) part
 					.getModel()).getNodeName());
-		} else {
-			return false;
 		}
+        return false;
 	}
 
 	/**
@@ -282,9 +281,8 @@ public class ElementResizableEditPolicy extends ResizableEditPolicy {
 					.getCopy();
 			part.getFigure().translateToRelative(location);
 			return shouldUseObjectMode(location);
-		} else {
-			return false; // should not happen
 		}
+        return false; // should not happen
 	}
 
 	/**
@@ -343,16 +341,13 @@ public class ElementResizableEditPolicy extends ResizableEditPolicy {
 				if (((ElementEditPart) getHost()).isResizable()) {
 					// super is Resizable policy, will create a resize handles.
 					return super.createSelectionHandles();
-				} else {
-					return createNonResizeHandles();
 				}
-			} else {
-				return createFragmentsHandles();
+                return createNonResizeHandles();
 			}
-		} else {
-			// second case
-			return createNonResizeHandles();
+            return createFragmentsHandles();
 		}
+        // second case
+        return createNonResizeHandles();
 	}
 
 	/**
@@ -398,11 +393,10 @@ public class ElementResizableEditPolicy extends ResizableEditPolicy {
 		if (height > 0) {
 			map.put("height", height + "px");
 		}
-		if (map.isEmpty()) {
-			return null;
-		} else {
-			return new ChangeStyleCommand(element, map);
+		if (!map.isEmpty()) {
+            return new ChangeStyleCommand(element, map);
 		}
+        return null;
 	}
 
 	/*

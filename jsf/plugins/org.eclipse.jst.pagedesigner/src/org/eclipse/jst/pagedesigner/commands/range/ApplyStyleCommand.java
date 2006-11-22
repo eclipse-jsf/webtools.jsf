@@ -11,9 +11,6 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.commands.range;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.jst.pagedesigner.IHTMLConstants;
 import org.eclipse.jst.pagedesigner.commands.CommandResources;
 import org.eclipse.jst.pagedesigner.dom.DOMRange;
@@ -22,7 +19,6 @@ import org.eclipse.jst.pagedesigner.dom.DOMUtil;
 import org.eclipse.jst.pagedesigner.dom.EditModelQuery;
 import org.eclipse.jst.pagedesigner.dom.IDOMPosition;
 import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
-import org.eclipse.wst.xml.core.internal.provisional.document.IDOMText;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.Text;
@@ -93,47 +89,45 @@ public class ApplyStyleCommand extends RangeModeCommand {
 					.getOffset());
 
 			return range;
-		} else {
-
-			if (startContainer instanceof Text) {
-				// if the start offset is 0,then skip split the Text
-				if (start.getOffset() > 0) {
-					startContainer = ((Text) startContainer).splitText(start
-							.getOffset());
-					start = new DOMRefPosition(startContainer, false);
-				}
-			} else {
-				startContainer = start.getNextSiblingNode();
-			}
-			if (endContainer instanceof Text) {
-				if (end.getOffset() > 0) {
-					endContainer = ((Text) endContainer).splitText(end
-							.getOffset());
-					endContainer = endContainer.getPreviousSibling();
-				} else {
-					endContainer = endContainer.getPreviousSibling();
-				}
-			} else {
-				endContainer = end.getPreviousSiblingNode();
-			}
-
-			for (Node node = startContainer; node != endContainer; node = EditModelQuery
-					.getInstance().getNextLeafNeighbor(node)) {
-				if (EditModelQuery.hasAncestor(node, getTag(), true)) {
-					continue;
-				}
-				Element newnode = createStyleElement();
-				node.getParentNode().insertBefore(newnode, node);
-				newnode.appendChild(node);
-			}
-			if (!EditModelQuery.hasAncestor(endContainer, getTag(), true)) {
-				Element newnode = createStyleElement();
-				endContainer.getParentNode()
-						.insertBefore(newnode, endContainer);
-				newnode.appendChild(endContainer);
-			}
-
 		}
+        
+        if (startContainer instanceof Text) {
+        	// if the start offset is 0,then skip split the Text
+        	if (start.getOffset() > 0) {
+        		startContainer = ((Text) startContainer).splitText(start
+        				.getOffset());
+        		start = new DOMRefPosition(startContainer, false);
+        	}
+        } else {
+        	startContainer = start.getNextSiblingNode();
+        }
+        if (endContainer instanceof Text) {
+        	if (end.getOffset() > 0) {
+        		endContainer = ((Text) endContainer).splitText(end
+        				.getOffset());
+        		endContainer = endContainer.getPreviousSibling();
+        	} else {
+        		endContainer = endContainer.getPreviousSibling();
+        	}
+        } else {
+        	endContainer = end.getPreviousSiblingNode();
+        }
+
+        for (Node node = startContainer; node != endContainer; node = EditModelQuery
+        		.getInstance().getNextLeafNeighbor(node)) {
+        	if (EditModelQuery.hasAncestor(node, getTag(), true)) {
+        		continue;
+        	}
+        	Element newnode = createStyleElement();
+        	node.getParentNode().insertBefore(newnode, node);
+        	newnode.appendChild(node);
+        }
+        if (!EditModelQuery.hasAncestor(endContainer, getTag(), true)) {
+        	Element newnode = createStyleElement();
+        	endContainer.getParentNode()
+        			.insertBefore(newnode, endContainer);
+        	newnode.appendChild(endContainer);
+        }
 
 		// merge the style tags
 
@@ -209,93 +203,95 @@ public class ApplyStyleCommand extends RangeModeCommand {
 		 */
 	}
 
-	private DOMRange middleApply(Node ancester, IDOMPosition startPosition,
-			IDOMPosition endPosition) {
-		startPosition = skip(startPosition, true);
-		if (startPosition.getNextSiblingNode() == null
-				|| startPosition.getOffset() >= endPosition.getOffset()) {
-			return null;
-		} else {
-			List needMove = new ArrayList();
-			Node startNext = startPosition.getNextSiblingNode();
-			Node endNext = endPosition.getNextSiblingNode();
-			while (startNext != null && startNext != endNext) {
-				needMove.add(startNext);
-				startNext = startNext.getNextSibling();
-			}
-			Element newEle = createStyleElement();
-			ancester.insertBefore(newEle, startPosition.getNextSiblingNode());
-			for (int i = 0, n = needMove.size(); i < n; i++) {
-				newEle.appendChild((Node) needMove.get(i));
-			}
-			return new DOMRange(new DOMRefPosition(newEle, false),
-					new DOMRefPosition(newEle, true));
-		}
+    // TODO: unused code.  Dead?
+//	private DOMRange middleApply(Node ancester, IDOMPosition startPosition,
+//			IDOMPosition endPosition) {
+//		startPosition = skip(startPosition, true);
+//		if (startPosition.getNextSiblingNode() == null
+//				|| startPosition.getOffset() >= endPosition.getOffset()) {
+//			return null;
+//		} else {
+//			List needMove = new ArrayList();
+//			Node startNext = startPosition.getNextSiblingNode();
+//			Node endNext = endPosition.getNextSiblingNode();
+//			while (startNext != null && startNext != endNext) {
+//				needMove.add(startNext);
+//				startNext = startNext.getNextSibling();
+//			}
+//			Element newEle = createStyleElement();
+//			ancester.insertBefore(newEle, startPosition.getNextSiblingNode());
+//			for (int i = 0, n = needMove.size(); i < n; i++) {
+//				newEle.appendChild((Node) needMove.get(i));
+//			}
+//			return new DOMRange(new DOMRefPosition(newEle, false),
+//					new DOMRefPosition(newEle, true));
+//		}
+//	}
 
-	}
-
-	private IDOMPosition partialApply(IDOMPosition position, Node ancester,
-			boolean forward, DOMRange[] result) {
-		IDOMPosition startRef = null, endRef = null;
-
-		while (position != null && position.getContainerNode() != ancester) {
-			Node container = position.getContainerNode();
-			if (container instanceof Text) {
-				// splitText will move the position up one level
-				position = splitText(position);
-			} else {
-				// skip those nodes that can't have the style applied.
-				position = skip(position, forward);
-				Node sibling = position.getSibling(forward);
-				if (sibling != null) {
-					List needMove = new ArrayList();
-					while (sibling != null) {
-						needMove.add(sibling);
-						sibling = forward ? sibling.getNextSibling() : sibling
-								.getPreviousSibling();
-					}
-
-					// ok, there is nodes that need the style
-					Element newEle = createStyleElement();
-					container.insertBefore(newEle, position
-							.getNextSiblingNode());
-					for (int i = 0, size = needMove.size(); i < size; i++) {
-						newEle.appendChild((Node) needMove.get(i));
-					}
-					if (startRef == null) {
-						startRef = new DOMRefPosition(newEle, !forward);
-					}
-					endRef = new DOMRefPosition(newEle, forward);
-				}
-				// move the position up one level
-				position = new DOMRefPosition(container, forward);
-			}
-		}
-		if (startRef == null) {
-			result[0] = null;
-		} else {
-			result[0] = forward ? new DOMRange(startRef, endRef)
-					: new DOMRange(endRef, startRef);
-		}
-		return position;
-	}
+    // TODO: unused code.  Dead?
+//	private IDOMPosition partialApply(IDOMPosition position, Node ancester,
+//			boolean forward, DOMRange[] result) {
+//		IDOMPosition startRef = null, endRef = null;
+//
+//		while (position != null && position.getContainerNode() != ancester) {
+//			Node container = position.getContainerNode();
+//			if (container instanceof Text) {
+//				// splitText will move the position up one level
+//				position = splitText(position);
+//			} else {
+//				// skip those nodes that can't have the style applied.
+//				position = skip(position, forward);
+//				Node sibling = position.getSibling(forward);
+//				if (sibling != null) {
+//					List needMove = new ArrayList();
+//					while (sibling != null) {
+//						needMove.add(sibling);
+//						sibling = forward ? sibling.getNextSibling() : sibling
+//								.getPreviousSibling();
+//					}
+//
+//					// ok, there is nodes that need the style
+//					Element newEle = createStyleElement();
+//					container.insertBefore(newEle, position
+//							.getNextSiblingNode());
+//					for (int i = 0, size = needMove.size(); i < size; i++) {
+//						newEle.appendChild((Node) needMove.get(i));
+//					}
+//					if (startRef == null) {
+//						startRef = new DOMRefPosition(newEle, !forward);
+//					}
+//					endRef = new DOMRefPosition(newEle, forward);
+//				}
+//				// move the position up one level
+//				position = new DOMRefPosition(container, forward);
+//			}
+//		}
+//		if (startRef == null) {
+//			result[0] = null;
+//		} else {
+//			result[0] = forward ? new DOMRange(startRef, endRef)
+//					: new DOMRange(endRef, startRef);
+//		}
+//		return position;
+//	}
 
 	/**
 	 * @param position
 	 * @return
 	 */
-	private IDOMPosition splitText(IDOMPosition position) {
-		Text text = (Text) position.getContainerNode();
-		int offset = position.getOffset();
-		if (offset <= 0) {
-			return new DOMRefPosition(text, false);
-		} else if (offset >= text.getData().length()) {
-			return new DOMRefPosition(text, true);
-		} else {
-			text.splitText(offset);
-			return new DOMRefPosition(text, true);
-		}
-	}
+    // TODO: dead?
+//	private IDOMPosition splitText(IDOMPosition position) {
+//		Text text = (Text) position.getContainerNode();
+//		int offset = position.getOffset();
+//		if (offset <= 0) {
+//			return new DOMRefPosition(text, false);
+//		} else if (offset >= text.getData().length()) {
+//			return new DOMRefPosition(text, true);
+//		} else {
+//			text.splitText(offset);
+//			return new DOMRefPosition(text, true);
+//		}
+//	}
 
 	/**
 	 * @param start
@@ -408,13 +404,12 @@ public class ApplyStyleCommand extends RangeModeCommand {
 	protected Element createStyleElement() {
 		if (_applyingNode != null) {
 			return _applyingNode;
-		} else {
-			Element element = getModel().getDocument().createElement(getTag());
-			if (_cssProperty != null && _cssPropertyValue != null) {
-				element.setAttribute(_cssProperty, _cssPropertyValue);
-			}
-			return element;
 		}
+        Element element = getModel().getDocument().createElement(getTag());
+        if (_cssProperty != null && _cssPropertyValue != null) {
+        	element.setAttribute(_cssProperty, _cssPropertyValue);
+        }
+        return element;
 	}
 
 	/**
@@ -422,30 +417,31 @@ public class ApplyStyleCommand extends RangeModeCommand {
 	 * @param b
 	 * @return
 	 */
-	private IDOMPosition skip(IDOMPosition position, boolean forward) {
-		Node node = position.getSibling(forward);
-
-		if (node == null) {
-			return position;
-		}
-		boolean canSkip = false;
-		if (node instanceof Text) {
-			canSkip = ((IDOMText) node).isElementContentWhitespace();
-		} else if (node instanceof Element) {
-			if (getTag().equalsIgnoreCase(((Element) node).getTagName())) {
-				canSkip = true;
-			} else {
-				canSkip = false;
-			}
-		} else {
-			canSkip = true;
-		}
-		if (canSkip) {
-			return new DOMRefPosition(node, forward);
-		} else {
-			return position;
-		}
-	}
+    // TODO: dead?
+//	private IDOMPosition skip(IDOMPosition position, boolean forward) {
+//		Node node = position.getSibling(forward);
+//
+//		if (node == null) {
+//			return position;
+//		}
+//		boolean canSkip = false;
+//		if (node instanceof Text) {
+//			canSkip = ((IDOMText) node).isElementContentWhitespace();
+//		} else if (node instanceof Element) {
+//			if (getTag().equalsIgnoreCase(((Element) node).getTagName())) {
+//				canSkip = true;
+//			} else {
+//				canSkip = false;
+//			}
+//		} else {
+//			canSkip = true;
+//		}
+//		if (canSkip) {
+//			return new DOMRefPosition(node, forward);
+//		} else {
+//			return position;
+//		}
+//	}
 
 	/**
 	 * @return Returns the _cssProperty.
@@ -483,9 +479,8 @@ public class ApplyStyleCommand extends RangeModeCommand {
 	public final String getTag() {
 		if (_tag != null) {
 			return _tag;
-		} else {
-			return _applyingNode.getNodeName();
 		}
+        return _applyingNode.getNodeName();
 	}
 
 	/**
@@ -494,9 +489,5 @@ public class ApplyStyleCommand extends RangeModeCommand {
 	 */
 	public final void setTag(String _tag) {
 		this._tag = _tag;
-	}
-
-	private void updateStyleElement() {
-
 	}
 }

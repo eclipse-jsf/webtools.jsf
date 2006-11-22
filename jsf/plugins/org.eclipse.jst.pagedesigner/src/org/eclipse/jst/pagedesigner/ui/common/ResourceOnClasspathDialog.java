@@ -111,9 +111,8 @@ public class ResourceOnClasspathDialog extends TreeViewerSelectionDialog {
 						.toString().trim();
 				if (projectName.equalsIgnoreCase(currentProjectName)) {
 					return true;
-				} else {
-					return false;
 				}
+                return false;
 			} else if (element instanceof IResource) {
 				if (((_javaProject != null) && !_javaProject
 						.isOnClasspath((IResource) element))) {
@@ -133,9 +132,8 @@ public class ResourceOnClasspathDialog extends TreeViewerSelectionDialog {
 						.getFileExtension();
 				if (ext != null && Arrays.asList(_suffixs).contains(ext)) {
 					return true;
-				} else {
-					return false;
 				}
+                return false;
 			}
 			if (!(element instanceof IJavaElement)) {
 				return false;
@@ -159,16 +157,14 @@ public class ResourceOnClasspathDialog extends TreeViewerSelectionDialog {
 				if (Arrays.asList(_suffixs).contains(
 						IFileFolderConstants.EXT_CLASS)) {
 					return true;
-				} else {
-					return false;
-				}
+				} 
+				return false;
 			case IJavaElement.COMPILATION_UNIT:
 				String ext = javaElement.getPath().getFileExtension();
 				if (ext != null && Arrays.asList(_suffixs).contains(ext)) {
 					return true;
-				} else {
-					return false;
-				}
+				} 
+				return false;
 			default:
 				return false;
 			}

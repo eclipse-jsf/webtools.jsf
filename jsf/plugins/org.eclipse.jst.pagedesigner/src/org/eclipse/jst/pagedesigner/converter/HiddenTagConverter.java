@@ -47,6 +47,7 @@ public class HiddenTagConverter implements ITagConverter {
 	 * @see org.eclipse.jst.pagedesigner.converter.ITagConverter#setDestDocument(org.eclipse.wst.xml.core.internal.provisional.document.IDOMDocument)
 	 */
 	public void setDestDocument(IDOMDocument document) {
+        // do nothing?
 	}
 
 	/*
@@ -136,6 +137,8 @@ public class HiddenTagConverter implements ITagConverter {
 	 * @see org.eclipse.jst.pagedesigner.visualtag.ITagConverter#dispose()
 	 */
 	public void dispose() {
+        // do nothing
+        // TODO: dispose of image or Element here?
 	}
 
 	/*

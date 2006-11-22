@@ -101,8 +101,7 @@ public class DefaultPositionRule implements IPositionRule {
 	public static boolean isWidget(EditPart host) {
 		if (host instanceof NodeEditPart) {
 			return ((NodeEditPart) host).isWidget();
-		} else {
-			return false;
 		}
+        return false;
 	}
 }

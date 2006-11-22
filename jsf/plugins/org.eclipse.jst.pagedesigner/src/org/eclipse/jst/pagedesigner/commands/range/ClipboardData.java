@@ -74,12 +74,10 @@ public class ClipboardData implements IInputSourceProvider {
 	public Object getClipboardData() {
 		Clipboard clipboard = new Clipboard(_control.getDisplay());
 
-		Object cuted = clipboard.getContents(TemplateTransfer.getInstance());
+		final Object cuted = clipboard.getContents(TemplateTransfer.getInstance());
 		if (cuted instanceof Node[] || cuted instanceof Vector) {
 			return cuted;
-		} else {
-			cuted = clipboard.getContents(TextTransfer.getInstance());
-			return cuted;
 		}
+        return clipboard.getContents(TextTransfer.getInstance());
 	}
 }

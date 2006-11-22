@@ -82,9 +82,9 @@ public class DefaultPositionValidator implements IPositionMediator {
 	 */
 	public boolean hasEditableArea(Target target) {
 		boolean result = true;
-		List _rules = getRules();
-		for (int i = 0, n = _rules.size(); i < n; i++) {
-			Object rule = _rules.get(i);
+		List rules = getRules();
+		for (int i = 0, n = rules.size(); i < n; i++) {
+			Object rule = rules.get(i);
 			if (rule instanceof IPositionRule) {
 				result &= ((IPositionRule) rule).hasEditableArea(target);
 			}
@@ -103,9 +103,9 @@ public class DefaultPositionValidator implements IPositionMediator {
 	public boolean isEditable(Target target) {
 		Node node = target.getNode();
 		boolean result = true;
-		List _rules = getRules();
-		for (int i = 0, n = _rules.size(); i < n; i++) {
-			Object rule = _rules.get(i);
+		List rules = getRules();
+		for (int i = 0, n = rules.size(); i < n; i++) {
+			Object rule = rules.get(i);
 			if (rule instanceof IPositionRule) {
 				result &= ((IPositionRule) rule).isEditable(new Target(node));
 			}
@@ -136,9 +136,9 @@ public class DefaultPositionValidator implements IPositionMediator {
 		if (position == null) {
 			return false;
 		}
-		List _rules = getRules();
-		for (int i = 0, n = _rules.size(); i < n; i++) {
-			Object rule = _rules.get(i);
+		List rules = getRules();
+		for (int i = 0, n = rules.size(); i < n; i++) {
+			Object rule = rules.get(i);
 			if (rule instanceof IPositionRule) {
 				// editable?
 				result &= ((IPositionRule) rule).isEditable(new Target(position
@@ -208,9 +208,9 @@ public class DefaultPositionValidator implements IPositionMediator {
 	 */
 	public boolean canReference(Target target, boolean atRight) {
 		boolean result = true;
-		List _rules = getRules();
-		for (int i = 0, n = _rules.size(); i < n; i++) {
-			Object rule = _rules.get(i);
+		List rules = getRules();
+		for (int i = 0, n = rules.size(); i < n; i++) {
+			Object rule = rules.get(i);
 			if (rule instanceof IPositionRule) {
 				result &= ((IPositionRule) rule).canReference(target, atRight);
 			}

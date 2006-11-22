@@ -127,8 +127,8 @@ public class WorkNode {
 		this.previous = previous;
 	}
 
-	private int[] resoveOffsets(Node node, int pos1, int pos2) {
-		int left = EditModelQuery.getNodeStartIndex(node);
+	private int[] resoveOffsets(Node node1, int pos1, int pos2) {
+		int left = EditModelQuery.getNodeStartIndex(node1);
 		return new int[] { pos1 - left, pos2 - left };
 	}
 

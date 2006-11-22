@@ -21,7 +21,7 @@ import org.eclipse.gef.requests.LocationRequest;
  */
 public class LocationModifierRequest extends LocationRequest {
 
-	private int _statemask;
+	// TODO: dead? private int _statemask;
 
 	private boolean _controlKeyDown;
 

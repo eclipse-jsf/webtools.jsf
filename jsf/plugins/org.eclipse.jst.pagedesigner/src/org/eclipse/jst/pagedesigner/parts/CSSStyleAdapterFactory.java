@@ -25,7 +25,7 @@ import org.w3c.dom.Element;
 public class CSSStyleAdapterFactory extends AbstractAdapterFactory {
 	static Class ADAPTERKEY = ICSSStyle.class;
 
-	private static CSSStyleAdapterFactory _instance = new CSSStyleAdapterFactory();
+	// TODO: dead? private static CSSStyleAdapterFactory _instance = new CSSStyleAdapterFactory();
 
 	private CSSStyleAdapterFactory() {
 		super(ADAPTERKEY, true);
@@ -38,16 +38,16 @@ public class CSSStyleAdapterFactory extends AbstractAdapterFactory {
 	protected INodeAdapter createAdapter(INodeNotifier target) {
 		if (target instanceof Element) {
 			return new AbstractStyle((Element) target);
-		} else {
-			return null;
 		}
+        return null;
 	}
 
 	/**
 	 * @return
 	 */
 	public static CSSStyleAdapterFactory getInstance() {
-		return _instance = new CSSStyleAdapterFactory();
+        // TODO: this 'singleton' is broken
+		return new CSSStyleAdapterFactory();
 	}
 
 }

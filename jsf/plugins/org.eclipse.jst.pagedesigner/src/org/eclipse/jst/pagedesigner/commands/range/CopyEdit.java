@@ -20,6 +20,7 @@ import org.eclipse.jst.pagedesigner.common.logging.Logger;
 import org.eclipse.jst.pagedesigner.dom.DOMRange;
 import org.eclipse.jst.pagedesigner.dom.EditHelper;
 import org.eclipse.jst.pagedesigner.dom.EditModelQuery;
+import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 import org.w3c.dom.Text;
 
@@ -107,15 +108,19 @@ public class CopyEdit extends DesignEdit {
 		}
 		if (start == end) {
 			return null;
-		} else {
-			try {
-				String text = currentNode.getData().substring(start, end);
-				return EditModelQuery.getDocumentNode(currentNode)
-						.createTextNode(text);
-			} catch (Exception e) {
-				_log.error("Exception", e);
-				return null;
-			}
 		}
+        
+        try {
+        	String text = currentNode.getData().substring(start, end);
+        	return EditModelQuery.getDocumentNode(currentNode)
+        			.createTextNode(text);
+        } catch (DOMException e) {
+            // TODO: changed this from catching Exception
+            // DOMException is the only exception that 
+            // anything in the try is threatening to throw
+            // and even that is Runtime
+        	_log.error("Exception", e);
+        	return null;
+        }
 	}
 }

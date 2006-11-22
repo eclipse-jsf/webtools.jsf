@@ -18,7 +18,7 @@ import org.eclipse.jst.pagedesigner.css2.list.CSSHtmlListStyleData;
  */
 public class DecimalCounter extends EnumerableCounter {
 	protected DecimalCounter() {
-
+	    // do nothing; restrict construction to child classes
 	}
 
 	/*
@@ -27,7 +27,7 @@ public class DecimalCounter extends EnumerableCounter {
 	 * @see org.eclipse.jst.pagedesigner.css2.list.EnumerableCounter#getString(int)
 	 */
 	public String getNextString(int index, int type) {
-		String result;
+		//String result;
 		switch (type) {
 		case CSSHtmlListStyleData.LIST_T_DECIMAL:
 			return Integer.toString(index);

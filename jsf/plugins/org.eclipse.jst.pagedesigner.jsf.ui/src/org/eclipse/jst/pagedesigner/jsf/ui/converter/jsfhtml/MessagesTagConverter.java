@@ -61,18 +61,15 @@ public class MessagesTagConverter extends AbstractTagConverter
             }
             return table;
         }
-        else
+        Element ul = createElement(IHTMLConstants.TAG_UL);
+        for (int i = 0; i < 2; i++)
         {
-            Element ul = createElement(IHTMLConstants.TAG_UL);
-            for (int i = 0; i < 2; i++)
-            {
-                Element li = createElement(IHTMLConstants.TAG_LI);
-                Element span = createSpan();
-                li.appendChild(span);
-                ul.appendChild(li);
-            }
-            return ul;
+            Element li = createElement(IHTMLConstants.TAG_LI);
+            Element span = createSpan();
+            li.appendChild(span);
+            ul.appendChild(li);
         }
+        return ul;
     }
 
     /* (non-Javadoc)

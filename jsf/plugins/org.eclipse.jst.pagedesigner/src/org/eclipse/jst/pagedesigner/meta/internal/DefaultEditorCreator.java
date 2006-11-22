@@ -220,8 +220,7 @@ public class DefaultEditorCreator extends EditorCreator {
 	private String convertToString(Object value) {
 		if (value == null) {
 			return null;
-		} else {
-			return value.toString();
 		}
+        return value.toString();
 	}
 }

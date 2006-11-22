@@ -26,6 +26,7 @@ public class AttributeGroupMessages {
 			.getBundle(BUNDLE_NAME);
 
 	private AttributeGroupMessages() {
+        // no external instantiation
 	}
 
 	public static String getString(String key) {

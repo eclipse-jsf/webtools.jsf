@@ -31,25 +31,24 @@ public class WindowsIEBrowser implements ProgressListener {
 	public synchronized void loadFile(File file) {
 		if (_browser == null) {
 			return;
-		} else {
-			_file = file;
-			String s = "file:" + file.getAbsolutePath();
-			_browser.setUrl(s);
-			return;
 		}
+        _file = file;
+        String s = "file:" + file.getAbsolutePath();
+        _browser.setUrl(s);
+        return;
 	}
 
 	public void dispose() {
 		if (_browser == null) {
 			return;
-		} else {
-			_browser.dispose();
-			_browser = null;
-			return;
 		}
+        _browser.dispose();
+        _browser = null;
+        return;
 	}
 
 	public void changed(ProgressEvent progressevent) {
+        // do nothing
 	}
 
 	public synchronized void completed(ProgressEvent progressevent) {

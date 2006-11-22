@@ -17,9 +17,7 @@ import java.util.Stack;
 import org.eclipse.gef.EditPart;
 import org.eclipse.jface.text.Assert;
 import org.eclipse.jst.pagedesigner.IHTMLConstants;
-import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.commands.range.WorkNode;
-import org.eclipse.jst.pagedesigner.common.logging.Logger;
 import org.eclipse.jst.pagedesigner.parts.TextEditPart;
 import org.eclipse.jst.pagedesigner.utils.HTMLUtil;
 import org.eclipse.jst.pagedesigner.validation.caret.ActionData;
@@ -52,9 +50,10 @@ public class EditHelper {
 
 	public static final EditHelper _instance = new EditHelper();
 
-	private static Logger _log = PDPlugin.getLogger(EditHelper.class);
+	//private static Logger _log = PDPlugin.getLogger(EditHelper.class);
 
 	private EditHelper() {
+        //  no external instantiation
 	}
 
 	/**
@@ -186,9 +185,8 @@ public class EditHelper {
 		if (EditModelQuery.getIndexedRegionLocation(p1) > EditModelQuery
 				.getIndexedRegionLocation(p2)) {
 			return new DOMRange(p2, p1);
-		} else {
-			return range;
 		}
+        return range;
 	}
 
 	/**
@@ -300,60 +298,61 @@ public class EditHelper {
 					return OUT_OF_RIGHT;
 				}
 			}
-		} else {
-			int left = EditModelQuery.getNodeStartIndex(currentNode);
-			int left1 = EditModelQuery.getNodeStartNameEndIndex(currentNode);
-			int right = EditModelQuery.getNodeEndNameStartIndex(currentNode);
-			int right1 = EditModelQuery.getNodeEndIndex(currentNode);
-			if (isOffset) {
-				pos += left;
-			}
-			if (pos <= left) {
-				return OUT_OF_LEFT;
-			} else if (left < pos && pos < left1) {
-				return LEFT_NAME;
-			} else if (left1 <= pos && pos <= right) {
-				return IN_MIDDLE;
-			} else if (right < pos && pos < right1) {
-				return RIGHT_NAME;
-			} else {
-				return OUT_OF_RIGHT;
-			}
 		}
+        int left = EditModelQuery.getNodeStartIndex(currentNode);
+        int left1 = EditModelQuery.getNodeStartNameEndIndex(currentNode);
+        int right = EditModelQuery.getNodeEndNameStartIndex(currentNode);
+        int right1 = EditModelQuery.getNodeEndIndex(currentNode);
+        if (isOffset) {
+        	pos += left;
+        }
+        if (pos <= left) {
+        	return OUT_OF_LEFT;
+        } else if (left < pos && pos < left1) {
+        	return LEFT_NAME;
+        } else if (left1 <= pos && pos <= right) {
+        	return IN_MIDDLE;
+        } else if (right < pos && pos < right1) {
+        	return RIGHT_NAME;
+        } else {
+        	return OUT_OF_RIGHT;
+        }
 
 	}
 
-	private Node cutCurrentNode(int pos[], Node currentNode,
-			IDOMPosition position) {
-		// at right edge
-		int curpos = EditModelQuery.getIndexedRegionLocation(position);
-		if (pos[0] <= curpos) {
-			pos[1] = EditModelQuery.getNodeStartIndex(currentNode);
-			currentNode = deleteNode(currentNode);
-			if (INNER_DEBUG) {
-				_log.info("cut:" + currentNode);
-			}
-			return currentNode;
-		} else if (pos[1] >= curpos) {
-			pos[0] = EditModelQuery.getNodeEndIndex(currentNode);
-			currentNode = deleteNode(currentNode);
-			if (INNER_DEBUG) {
-				_log.info("cut:" + currentNode);
-			}
-			return currentNode;
-		}
-		return null;
-	}
+    // TODO: dead?
+//	private Node cutCurrentNode(int pos[], Node currentNode,
+//			IDOMPosition position) {
+//		// at right edge
+//		int curpos = EditModelQuery.getIndexedRegionLocation(position);
+//		if (pos[0] <= curpos) {
+//			pos[1] = EditModelQuery.getNodeStartIndex(currentNode);
+//			currentNode = deleteNode(currentNode);
+//			if (INNER_DEBUG) {
+//				_log.info("cut:" + currentNode);
+//			}
+//			return currentNode;
+//		} else if (pos[1] >= curpos) {
+//			pos[0] = EditModelQuery.getNodeEndIndex(currentNode);
+//			currentNode = deleteNode(currentNode);
+//			if (INNER_DEBUG) {
+//				_log.info("cut:" + currentNode);
+//			}
+//			return currentNode;
+//		}
+//		return null;
+//	}
 
-	private int getPos(DOMRange range, boolean forStart) {
-		if (forStart) {
-			return EditModelQuery.getIndexedRegionLocation(range
-					.getStartPosition());
-		} else {
-			return EditModelQuery.getIndexedRegionLocation(range
-					.getEndPosition());
-		}
-	}
+    //TODO: dead?
+//	private int getPos(DOMRange range, boolean forStart) {
+//		if (forStart) {
+//			return EditModelQuery.getIndexedRegionLocation(range
+//					.getStartPosition());
+//		} else {
+//			return EditModelQuery.getIndexedRegionLocation(range
+//					.getEndPosition());
+//		}
+//	}
 
 	public EditPart getEditPart(DesignPosition position, boolean forward) {
 		if (position instanceof DesignRefPosition) {
@@ -435,10 +434,9 @@ public class EditHelper {
 							}
 						}
 						return new DOMRefPosition(newContainer, true);
-					} else {
-						// position = new
-						// DOMRefPosition(position.getContainerNode(), true);
 					}
+//                    position = new
+//                    DOMRefPosition(position.getContainerNode(), true);
 				}
 			} else {
 				// container = position.getContainerNode();
@@ -454,23 +452,19 @@ public class EditHelper {
 	public static int getLocation(IDOMPosition position) {
 		if (position.getOffset() == 0) {
 			return -1;
-		} else {
-			if (position.isText()) {
-				if (position.getOffset() == ((Text) position.getContainerNode())
-						.getLength()) {
-					return 1;
-				} else {
-					return 0;
-				}
-			} else {
-				if (position.getOffset() == position.getContainerNode()
-						.getChildNodes().getLength()) {
-					return 1;
-				} else {
-					return 0;
-				}
-			}
 		}
+        if (position.isText()) {
+        	if (position.getOffset() == ((Text) position.getContainerNode())
+        			.getLength()) {
+        		return 1;
+        	}
+            return 0;
+        }
+        if (position.getOffset() == position.getContainerNode()
+        		.getChildNodes().getLength()) {
+        	return 1;
+        }
+        return 0;
 	}
 
 	public static EditPart getPart(Node node) {

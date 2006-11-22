@@ -54,7 +54,7 @@ public class CounterValueGenerator implements ICounterValueGenerator {
 		STRING_TYPES.add("katakana");
 		STRING_TYPES.add("hiragana-iroha");
 		STRING_TYPES.add("katakana-iroha");
-	};
+	}
 
 	private final static int DEFAULT_INCREMENT = 1;
 
@@ -93,7 +93,6 @@ public class CounterValueGenerator implements ICounterValueGenerator {
 	 * @see org.w3c.dom.css.Counter#getIdentifier()
 	 */
 	public String getIdentifier() {
-		// TODO Auto-generated method stub
 		return _identifier;
 	}
 
@@ -103,7 +102,6 @@ public class CounterValueGenerator implements ICounterValueGenerator {
 	 * @see org.w3c.dom.css.Counter#getListStyle()
 	 */
 	public String getListStyle() {
-		// TODO Auto-generated method stub
 		return _styleType;
 	}
 
@@ -113,7 +111,6 @@ public class CounterValueGenerator implements ICounterValueGenerator {
 	 * @see org.w3c.dom.css.Counter#getSeparator()
 	 */
 	public String getSeparator() {
-		// TODO Auto-generated method stub
 		return _seperator;
 	}
 
@@ -322,10 +319,9 @@ public class CounterValueGenerator implements ICounterValueGenerator {
 	public int getInitial() {
 		if (HTMLListInfoHelper.getStartInt(_style) != null) {
 			return HTMLListInfoHelper.getStartInt(_style).intValue();
-		} else {
-			return _initial != null ? _initial.intValue()
-					: DEFAULT_INITIAL_VALUE;
 		}
+        return _initial != null ? _initial.intValue()
+        		: DEFAULT_INITIAL_VALUE;
 	}
 
 	/*

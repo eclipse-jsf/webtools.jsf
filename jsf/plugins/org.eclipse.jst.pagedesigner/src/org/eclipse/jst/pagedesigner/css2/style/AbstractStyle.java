@@ -243,9 +243,8 @@ public class AbstractStyle implements ICSSStyle {
 			CSSValue value, String propertyName) {
 		if (meta == null) {
 			return ICSSPropertyMeta.NOT_SPECIFIED;
-		} else {
-			return meta.calculateCSSValueResult(value, propertyName, this);
 		}
+        return meta.calculateCSSValueResult(value, propertyName, this);
 	}
 
 	/**
@@ -306,9 +305,8 @@ public class AbstractStyle implements ICSSStyle {
 					.getAdapterFor(ICSSStyle.class);
 			if (parentStyle != null) {
 				return parentStyle;
-			} else {
-				node = node.getParentNode();
 			}
+            node = node.getParentNode();
 		}
 		return DefaultStyle.getInstance();
 	}
@@ -338,6 +336,7 @@ public class AbstractStyle implements ICSSStyle {
 	 * @see org.eclipse.jst.pagedesigner.css2.ICSSStyle#dispose()
 	 */
 	public void dispose() {
+        // TODO: anything to dispose?
 	}
 
 	/*
@@ -398,9 +397,8 @@ public class AbstractStyle implements ICSSStyle {
 			Length l = (Length) obj;
 			if (l.isPercentage()) {
 				return 0; // FIXME:
-			} else {
-				return l.getValue();
 			}
+            return l.getValue();
 		}
 
 		return 0;
@@ -435,6 +433,7 @@ public class AbstractStyle implements ICSSStyle {
 	 */
 	public void notifyChanged(INodeNotifier notifier, int eventType,
 			Object changedFeature, Object oldValue, Object newValue, int pos) {
+        // do nothing
 	}
 
 	/*
@@ -514,9 +513,8 @@ public class AbstractStyle implements ICSSStyle {
 				return ICSSPropertyID.VAL_INLINE_BLOCK;
 			}
 			return displayStr;
-		} else {
-			return displayStr;
 		}
+        return displayStr;
 	}
 
 	/*
@@ -584,9 +582,8 @@ public class AbstractStyle implements ICSSStyle {
 		// colume
 		if (colspan < 0) {
 			return 1;
-		} else {
-			return colspan;
 		}
+        return colspan;
 	}
 
 	/*
@@ -599,9 +596,8 @@ public class AbstractStyle implements ICSSStyle {
 				"rowspan", 1);
 		if (rowspan < 0) {
 			return 1;
-		} else {
-			return rowspan;
 		}
+        return rowspan;
 	}
 
 	/*

@@ -63,8 +63,7 @@ public class DisplayMeta extends CSSPropertyMeta {
 		String key = this.checkKeywordValues(text);
 		if (key != null)
 			return key;
-		else
-			return ICSSPropertyID.VAL_INLINE;
+        return ICSSPropertyID.VAL_INLINE;
 	}
 
 }

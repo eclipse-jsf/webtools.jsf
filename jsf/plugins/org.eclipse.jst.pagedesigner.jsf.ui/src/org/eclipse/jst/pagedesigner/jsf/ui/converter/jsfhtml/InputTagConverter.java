@@ -69,10 +69,7 @@ public class InputTagConverter extends AbstractTagConverter
             String name = hostEle.getLocalName();
             return name.substring(0, 1).toUpperCase() + name.substring(1);
         }
-        else
-        {
-            return mapValue(valueAttr);
-        }
+        return mapValue(valueAttr);
     }
 
     /**

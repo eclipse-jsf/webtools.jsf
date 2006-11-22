@@ -20,7 +20,6 @@ import org.eclipse.draw2d.LineBorder;
 import org.eclipse.draw2d.Locator;
 import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.geometry.Dimension;
-import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.PrecisionRectangle;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.DragTracker;
@@ -63,8 +62,8 @@ public class FragmentHandle extends AbstractHandle implements Handle {
 	}
 
 	public void refresh() {
-		Insets insets = getOwnerFigure().getInsets();
-		Rectangle bounds;
+		// TODO: not ref Insets insets = getOwnerFigure().getInsets();
+		// TODO: not ref Rectangle bounds;
 
 		// set the bounds of this figure, so it could cover all children.
 		bounds = getOwnerFigure().getBounds();

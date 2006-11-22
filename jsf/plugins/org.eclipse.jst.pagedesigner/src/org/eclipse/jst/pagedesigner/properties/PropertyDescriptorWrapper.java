@@ -53,16 +53,15 @@ public class PropertyDescriptorWrapper implements IPropertyDescriptor {
 			 * 
 			 * @see org.eclipse.jst.pagedesigner.meta.EditorCreator.CellEditorHolder#createCellEditor(org.eclipse.swt.widgets.Composite)
 			 */
-			public CellEditor createCellEditor(Composite parent) {
+			public CellEditor createCellEditor(Composite parent1) {
 				if (_inner != null) {
-					return _inner.createPropertyEditor(parent);
-				} else {
-					return new TextCellEditor(parent);
+					return _inner.createPropertyEditor(parent1);
 				}
+                return new TextCellEditor(parent1);
 			}
 		};
 		return EditorCreator.getInstance().createCellEditorWithWrapper(parent,
-				null, holder, (IDOMElement) _element, null);
+				null, holder, _element, null);
 	}
 
 	/*

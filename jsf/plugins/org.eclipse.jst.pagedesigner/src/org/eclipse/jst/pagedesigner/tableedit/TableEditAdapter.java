@@ -52,7 +52,7 @@ public class TableEditAdapter implements ITableEditAdapter {
 	 * @see org.eclipse.jst.pagedesigner.editpolicies.ITableEditAdapter#insertColumn(int)
 	 */
 	public void insertColumn(int atPosition) {
-
+	    // do nothing
 	}
 
 	/*

@@ -101,9 +101,8 @@ public class CMUtil {
 		}
 		if (decl instanceof TLDElementDeclaration) {
 			return (TLDElementDeclaration) decl;
-		} else {
-			return null;
 		}
+        return null;
 	}
 
 	/**

@@ -37,13 +37,11 @@ public class CutCommand extends RangeModeCommand {
 		DesignEdit edit = new CutEdit(selection, getViewer());
 		if (EditModelQuery.isSame(selection)) {
 			return null;
-		} else {
-			if (edit.perform()) {
-				return new DOMRange(edit.getOperationPosition(), edit
-						.getOperationPosition());
-			} else {
-				return selection;
-			}
 		}
+        if (edit.perform()) {
+        	return new DOMRange(edit.getOperationPosition(), edit
+        			.getOperationPosition());
+        }
+        return selection;
 	}
 }

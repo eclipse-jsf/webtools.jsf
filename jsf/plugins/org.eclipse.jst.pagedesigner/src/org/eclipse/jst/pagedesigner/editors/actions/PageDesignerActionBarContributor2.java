@@ -11,23 +11,15 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.editors.actions;
 
-import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IStatusLineManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jst.pagedesigner.IJMTConstants;
-import org.eclipse.jst.pagedesigner.actions.container.ContainerActionGroup;
-import org.eclipse.jst.pagedesigner.actions.menuextension.CustomedContextMenuActionGroup;
-import org.eclipse.jst.pagedesigner.actions.range.RangeActionGroup;
-import org.eclipse.jst.pagedesigner.actions.single.SingleElementActionGroup;
 import org.eclipse.jst.pagedesigner.editors.HTMLEditor;
 import org.eclipse.jst.pagedesigner.editors.SimpleGraphicalEditor;
 import org.eclipse.jst.pagedesigner.ui.common.sash.NestedEditorActionBarContributor;
-import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.actions.ActionContext;
-import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
 import org.eclipse.wst.sse.ui.StructuredTextEditor;
 import org.eclipse.wst.sse.ui.internal.ExtendedEditorActionBuilder;
 import org.eclipse.wst.sse.ui.internal.IExtendedContributor;
@@ -56,12 +48,13 @@ public class PageDesignerActionBarContributor2 extends
 
 	DesignerStyleActionGroup _group = new DesignerStyleActionGroup();
 
-	private IHTMLGraphicalViewer _viewer = null;
+//	private IHTMLGraphicalViewer _viewer = null;
+//
+//	private IStructuredModel _model = null;
 
-	private IStructuredModel _model = null;
-
-	public static Action action = new Action() {
-	};
+//	private final static Action action = new Action() {
+//        
+//	};
 
 	public PageDesignerActionBarContributor2() {
 		super();
@@ -151,39 +144,40 @@ public class PageDesignerActionBarContributor2 extends
 	 * @see IExtendedContributor#contributeToPopupMenu(IMenuManager)
 	 */
 	public final void contributeToPopupMenu(IMenuManager menu) {
-		addToPopupMenu(menu);
+		// TODO: this method is empty addToPopupMenu(menu);
 		if (_extendedContributor != null)
 			_extendedContributor.contributeToPopupMenu(menu);
 	}
 
-	protected void addToPopupMenu(IMenuManager menu) {
-	}
+//	protected void addToPopupMenu(IMenuManager menu) {
+//        // do nothing
+//	}
 
 	/**
 	 * @see org.eclipse.ui.part.EditorActionBarContributor#contributeToToolBar(IToolBarManager)
 	 */
 	public final void contributeToToolBar(IToolBarManager toolBarManager) {
 		super.contributeToToolBar(toolBarManager);
-		addToToolBar(toolBarManager);
+		// TODO: this method is empty addToToolBar(toolBarManager);
 		if (_extendedContributor != null)
 			_extendedContributor.contributeToToolBar(toolBarManager);
 	}
 
-	protected void addToToolBar(IToolBarManager toolBarManager) {
-	}
+//	protected void addToToolBar(IToolBarManager toolBarManager) {
+//	}
 
 	/**
 	 * @see org.eclipse.ui.part.EditorActionBarContributor#contributeToStatusLine(IStatusLineManager)
 	 */
 	public final void contributeToStatusLine(IStatusLineManager manager) {
 		super.contributeToStatusLine(manager);
-		addToStatusLine(manager);
+		// TODO: this method does nothing addToStatusLine(manager);
 		if (_extendedContributor != null)
 			_extendedContributor.contributeToStatusLine(manager);
 	}
 
-	protected void addToStatusLine(IStatusLineManager manager) {
-	}
+//	protected void addToStatusLine(IStatusLineManager manager) {
+//	}
 
 	/**
 	 * @see IExtendedContributor#updateToolbarActions()
@@ -198,8 +192,8 @@ public class PageDesignerActionBarContributor2 extends
 	public void setActiveEditor(IEditorPart targetEditor) {
 		if (targetEditor instanceof HTMLEditor) {
 			_htmlEditor = (HTMLEditor) targetEditor;
-			StructuredTextEditor textEditor = _htmlEditor.getTextEditor();
-			this._model = textEditor.getModel();
+			//StructuredTextEditor textEditor = _htmlEditor.getTextEditor();
+			// TODO: never read this._model = textEditor.getModel();
 		}
 		super.setActiveEditor(targetEditor);
 		updateToolbarActions();
@@ -216,13 +210,13 @@ public class PageDesignerActionBarContributor2 extends
 			if (activeEditor instanceof StructuredTextEditor) {
 				activateSourcePage((StructuredTextEditor) activeEditor);
 			} else if (activeEditor instanceof SimpleGraphicalEditor) {
-				SimpleGraphicalEditor graphEditor = (SimpleGraphicalEditor) activeEditor;
+				//SimpleGraphicalEditor graphEditor = (SimpleGraphicalEditor) activeEditor;
 				activateDesignPage((SimpleGraphicalEditor) activeEditor);
-				this._viewer = graphEditor.getGraphicViewer();
+				// TODO: never read this._viewer = graphEditor.getGraphicViewer();
 			} else {
 				// currently we don't have special action for preview.
 				deactivateSourceAndDesignPage(activeEditor);
-				this._viewer = null;
+				// TODO: never read this._viewer = null;
 			}
 		}
 
@@ -297,49 +291,49 @@ public class PageDesignerActionBarContributor2 extends
 													 * ISourceViewerActionBarContributor
 													 */) {
 			_sourceViewerActionContributor.setActiveEditor(activeEditor);
-			((ISourceViewerActionBarContributor) _sourceViewerActionContributor)
-					.setViewerSpecificContributionsEnabled(true);
+			_sourceViewerActionContributor.setViewerSpecificContributionsEnabled(true);
 		}
 	}
 
-	private void updateEditorMenu(IMenuManager menuMgr) {
-		if (this._viewer == null) {
-			return;
-		} else {
-			if (menuMgr != null) {
-				ContainerActionGroup containerActionGroup = new ContainerActionGroup();
-				ActionContext context = new ActionContext(this._viewer
-						.getSelection());
-				context.setInput(this._viewer);
-				containerActionGroup.setContext(context);
-				containerActionGroup.fillContextMenu(menuMgr);
-				containerActionGroup.setContext(null);
-
-				RangeActionGroup rangeActionGroup = new RangeActionGroup();
-				context = new ActionContext(this._viewer.getSelection());
-				context.setInput(this._viewer);
-				rangeActionGroup.setContext(context);
-				rangeActionGroup.fillContextMenu(menuMgr);
-				rangeActionGroup.setContext(null);
-
-				SingleElementActionGroup singleActionGroup = new SingleElementActionGroup();
-				singleActionGroup.setContext(new ActionContext(this._viewer
-						.getSelection()));
-				singleActionGroup.fillContextMenu(menuMgr);
-				singleActionGroup.setContext(null);
-
-				if (this._model != null) {
-					CustomedContextMenuActionGroup customedMenu = new CustomedContextMenuActionGroup();
-					customedMenu.setContext(new ActionContext(_viewer
-							.getSelection()));
-					customedMenu.setModel(_model);
-					customedMenu.setParentControl(_viewer.getControl());
-					customedMenu.fillContextMenu(menuMgr);
-					customedMenu.setContext(null);
-					customedMenu.setParentControl(null);
-					customedMenu.setModel(null);
-				}
-			}
-		}
-	}
+    // TODO: dead?
+//	private void updateEditorMenu(IMenuManager menuMgr) {
+//		if (this._viewer == null) {
+//			return;
+//		} else {
+//			if (menuMgr != null) {
+//				ContainerActionGroup containerActionGroup = new ContainerActionGroup();
+//				ActionContext context = new ActionContext(this._viewer
+//						.getSelection());
+//				context.setInput(this._viewer);
+//				containerActionGroup.setContext(context);
+//				containerActionGroup.fillContextMenu(menuMgr);
+//				containerActionGroup.setContext(null);
+//
+//				RangeActionGroup rangeActionGroup = new RangeActionGroup();
+//				context = new ActionContext(this._viewer.getSelection());
+//				context.setInput(this._viewer);
+//				rangeActionGroup.setContext(context);
+//				rangeActionGroup.fillContextMenu(menuMgr);
+//				rangeActionGroup.setContext(null);
+//
+//				SingleElementActionGroup singleActionGroup = new SingleElementActionGroup();
+//				singleActionGroup.setContext(new ActionContext(this._viewer
+//						.getSelection()));
+//				singleActionGroup.fillContextMenu(menuMgr);
+//				singleActionGroup.setContext(null);
+//
+//				if (this._model != null) {
+//					CustomedContextMenuActionGroup customedMenu = new CustomedContextMenuActionGroup();
+//					customedMenu.setContext(new ActionContext(_viewer
+//							.getSelection()));
+//					customedMenu.setModel(_model);
+//					customedMenu.setParentControl(_viewer.getControl());
+//					customedMenu.fillContextMenu(menuMgr);
+//					customedMenu.setContext(null);
+//					customedMenu.setParentControl(null);
+//					customedMenu.setModel(null);
+//				}
+//			}
+//		}
+//	}
 }

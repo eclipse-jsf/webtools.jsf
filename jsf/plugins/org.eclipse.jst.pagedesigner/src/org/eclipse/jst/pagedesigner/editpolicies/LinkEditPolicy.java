@@ -35,13 +35,14 @@ public class LinkEditPolicy extends GraphicalEditPolicy {
 		EditPart part = this.getHost();
 		IHTMLGraphicalViewer viewer = null;
 		if (part instanceof TextEditPart) {
-			part = (TextEditPart) part;
+			//TODO: ?? part = (TextEditPart) part;
 			viewer = (IHTMLGraphicalViewer) part.getViewer();
 		}
 		if (request instanceof LinkRequest) {
 			LinkRequest req = (LinkRequest) request;
 			String identifier = req.getIdentifier();
 			DesignRange range = req.getDesignRange();
+            // TODO: when part !instancof TextEditPart, viewer == null
 			Command command = new MakeLinkCommand(identifier, viewer, part,
 					range);
 			return command;

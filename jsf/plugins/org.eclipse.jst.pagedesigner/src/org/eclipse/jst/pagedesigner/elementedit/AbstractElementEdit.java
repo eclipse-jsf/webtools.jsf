@@ -24,6 +24,7 @@ import org.w3c.dom.Element;
  * @author mengbo
  * @version 1.5
  */
+// TODO: should this be abstract?
 public class AbstractElementEdit implements IElementEdit {
 	/*
 	 * (non-Javadoc)
@@ -31,6 +32,7 @@ public class AbstractElementEdit implements IElementEdit {
 	 * @see org.eclipse.jst.pagedesigner.elementedit.IElementEdit#createEditPolicies(org.eclipse.jst.pagedesigner.parts.ElementEditPart)
 	 */
 	public void createEditPolicies(ElementEditPart part) {
+        // do nothing; sub-classes should override to add edit policies a part
 	}
 
 	/*

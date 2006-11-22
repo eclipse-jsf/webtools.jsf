@@ -91,19 +91,17 @@ public class ConverterFactoryRegistry {
 		if (uri == null || IJMTConstants.URI_HTML.equals(uri)) {
 			// basically, for HTML or non JSP tag, directly renders it.
 			return new DumTagConverter(ele);
-		} else {
-			CMElementDeclaration decl = CMUtil.getElementDeclaration(ele);
-			if (decl == null) {
-				return new DumTagConverter(ele);
-			}
-			int contentType = decl.getContentType();
-			if (contentType == CMElementDeclaration.EMPTY) {
-				// if the tag is empty, show it as icon.
-				return new HiddenTagConverter(ele, getUnknownImage());
-			} else {
-				return new DefaultUnknownTagConverter(ele);
-			}
 		}
+        CMElementDeclaration decl = CMUtil.getElementDeclaration(ele);
+        if (decl == null) {
+        	return new DumTagConverter(ele);
+        }
+        int contentType = decl.getContentType();
+        if (contentType == CMElementDeclaration.EMPTY) {
+        	// if the tag is empty, show it as icon.
+        	return new HiddenTagConverter(ele, getUnknownImage());
+        }
+        return new DefaultUnknownTagConverter(ele);
 
 	}
 

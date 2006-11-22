@@ -181,6 +181,7 @@ public class CSSTextFigure extends FlowFigure implements ICSSFigure {
 	 * @param relative
 	 * @return
 	 */
+    // TODO: refactoring?
 	public int getNewInsertionOffset(Point relative) {
 		TextFragmentBox closestBox = null;
 		// if there is one which are at the same line with relative, calculate
@@ -193,46 +194,45 @@ public class CSSTextFigure extends FlowFigure implements ICSSFigure {
 								- box._x, TextLayoutSupport
 								.getAverageCharWidth(box));
 				return box._offset + index;
-			} else {
-				if (closestBox == null) {
-					closestBox = box;
-				} else {
-					// box is above point
-					TextFragmentBox tempBox = box;
-					int offset1 = Math
-							.abs(CaretPositionResolver.getYDistance(
-									new Rectangle(tempBox._x, tempBox._y,
-											tempBox._width, tempBox._height),
-									relative));
-					tempBox = closestBox;
-					int offset2 = Math
-							.abs(CaretPositionResolver.getYDistance(
-									new Rectangle(tempBox._x, tempBox._y,
-											tempBox._width, tempBox._height),
-									relative));
-					if (offset1 < offset2) {
-						closestBox = box;
-					}
-				}
-				// at the same line
-				if (box.containsPoint(box._x, relative.y)) {
-					TextFragmentBox tempBox = box;
-					int offset1 = Math
-							.abs(CaretPositionResolver.getXDistance(
-									new Rectangle(tempBox._x, tempBox._y,
-											tempBox._width, tempBox._height),
-									relative));
-					tempBox = closestBox;
-					int offset2 = Math
-							.abs(CaretPositionResolver.getXDistance(
-									new Rectangle(tempBox._x, tempBox._y,
-											tempBox._width, tempBox._height),
-									relative));
-					if (offset1 < offset2) {
-						closestBox = box;
-					}
-				}
 			}
+            if (closestBox == null) {
+            	closestBox = box;
+            } else {
+            	// box is above point
+            	TextFragmentBox tempBox = box;
+            	int offset1 = Math
+            			.abs(CaretPositionResolver.getYDistance(
+            					new Rectangle(tempBox._x, tempBox._y,
+            							tempBox._width, tempBox._height),
+            					relative));
+            	tempBox = closestBox;
+            	int offset2 = Math
+            			.abs(CaretPositionResolver.getYDistance(
+            					new Rectangle(tempBox._x, tempBox._y,
+            							tempBox._width, tempBox._height),
+            					relative));
+            	if (offset1 < offset2) {
+            		closestBox = box;
+            	}
+            }
+            // at the same line
+            if (box.containsPoint(box._x, relative.y)) {
+            	TextFragmentBox tempBox = box;
+            	int offset1 = Math
+            			.abs(CaretPositionResolver.getXDistance(
+            					new Rectangle(tempBox._x, tempBox._y,
+            							tempBox._width, tempBox._height),
+            					relative));
+            	tempBox = closestBox;
+            	int offset2 = Math
+            			.abs(CaretPositionResolver.getXDistance(
+            					new Rectangle(tempBox._x, tempBox._y,
+            							tempBox._width, tempBox._height),
+            					relative));
+            	if (offset1 < offset2) {
+            		closestBox = box;
+            	}
+            }
 		}
 
 		if (closestBox.containsPoint(closestBox._x, relative.y)
@@ -242,9 +242,8 @@ public class CSSTextFigure extends FlowFigure implements ICSSFigure {
 					getCSSStyle().getCSSFont().getSwtFont(), offset,
 					TextLayoutSupport.getAverageCharWidth(closestBox));
 			return closestBox._offset + index;
-		} else {
-			return -1;
 		}
+        return -1;
 	}
 
 	public int getInsertionOffset(Point relative) {
@@ -278,14 +277,13 @@ public class CSSTextFigure extends FlowFigure implements ICSSFigure {
 					if (box._offset + box._length < offset) {
 						return new Rectangle(box._x + box._width, box._y, 1,
 								box._height);
-					} else {
-						String s = box.getTextData().substring(0,
-								offset - box._offset);
-						int width = FlowUtilities.getTextExtents(s,
-								getCSSStyle().getCSSFont().getSwtFont()).width;
-						return new Rectangle(box._x + width, box._y, 1,
-								box._height);
 					}
+                    String s = box.getTextData().substring(0,
+                    		offset - box._offset);
+                    int width = FlowUtilities.getTextExtents(s,
+                    		getCSSStyle().getCSSFont().getSwtFont()).width;
+                    return new Rectangle(box._x + width, box._y, 1,
+                    		box._height);
 				}
 			}
 		} else {
@@ -295,8 +293,7 @@ public class CSSTextFigure extends FlowFigure implements ICSSFigure {
 			}
 		}
 		// should only reach here when there is no fragments.
-		Rectangle bounds = this.getBounds();
-		return new Rectangle(bounds.x, bounds.y, 1, bounds.height);
+		return new Rectangle(getBounds().x, getBounds().y, 1, getBounds().height);
 	}
 
 }

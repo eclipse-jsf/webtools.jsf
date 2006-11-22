@@ -11,8 +11,6 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.css2.widget;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.StringTokenizer;
 
 import org.eclipse.draw2d.ColorConstants;
@@ -56,7 +54,7 @@ public class ButtonWidgetProvider extends AbstractWidgetProvider {
 
 	private String[] _lines = DEFAULTLINES;
 
-	private List _fragments = new ArrayList();
+//	private List _fragments = new ArrayList();
 
 	/**
 	 * @param style

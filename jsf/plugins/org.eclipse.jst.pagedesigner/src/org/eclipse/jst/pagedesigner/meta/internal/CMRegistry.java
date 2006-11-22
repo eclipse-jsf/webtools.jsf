@@ -11,7 +11,6 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.meta.internal;
 
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -84,8 +83,6 @@ public class CMRegistry implements ICMRegistry {
 								.subTask(PDPlugin
 										.getResourceString("CMRegistry.OtherConfigration"));
 						readExtensions();
-					} catch (IOException ex) {
-						// ignore
 					} finally {
 						monitor.done();
 					}
@@ -118,7 +115,7 @@ public class CMRegistry implements ICMRegistry {
 				String configFile = eles[i].getAttribute("configFile");
 				if (configFile != null && configFile.length() > 0) {
 					String bundleName = eles[i].getDeclaringExtension()
-							.getNamespace();
+							.getContributor().getName();
 					try {
 						Bundle bundle = Platform.getBundle(bundleName);
 						URL cmFileUrl = bundle.getEntry(configFile);
@@ -156,7 +153,7 @@ public class CMRegistry implements ICMRegistry {
 		return null;
 	}
 
-	private void loadCM(String fileName, Map map) throws IOException {
+	private void loadCM(String fileName, Map map) {
 		try {
 			URL url = PDPlugin.getDefault().getBundle().getEntry(fileName);
 			ElementDescReader reader = new ElementDescReader(url);

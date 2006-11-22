@@ -60,7 +60,7 @@ public class LocationHelper {
 			result[1] = null;
 			return true;
 		}
-		GraphicalEditPart ref = null;
+		// TODO: never read GraphicalEditPart ref = null;
 		for (int i = 0, size = children.size(); i < size; i++) {
 			GraphicalEditPart child = (GraphicalEditPart) children.get(i);
 			Rectangle rect = getAbsoluteBounds(child);
@@ -93,10 +93,9 @@ public class LocationHelper {
 				// closer.
 				if (p.x > rect.x + rect.width / 2) {
 					continue;
-				} else {
-					result[1] = child;
-					return true;
 				}
+                result[1] = child;
+                return true;
 			} else if (rect.x + rect.width < p.x || rect.y + rect.height < p.y) {
 				// p is at right or below rect. so the point is "after" the
 				// rect.
@@ -182,11 +181,12 @@ public class LocationHelper {
 	}
 
 	protected static ModelQuery getModelQuery(Node node) {
+        Document doc = node.getOwnerDocument();
+        
 		if (node.getNodeType() == Node.DOCUMENT_NODE) {
-			return ModelQueryUtil.getModelQuery((Document) node);
-		} else {
-			return ModelQueryUtil.getModelQuery(node.getOwnerDocument());
+            doc = (Document) node;
 		}
+        return ModelQueryUtil.getModelQuery(doc);
 	}
 
 }

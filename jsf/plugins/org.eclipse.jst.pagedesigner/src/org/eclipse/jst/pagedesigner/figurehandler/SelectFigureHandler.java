@@ -76,12 +76,11 @@ public class SelectFigureHandler extends WidgetFigureHandler {
 			provider.setOptions(labels);
 			provider.setRows(rowsInt);
 			return provider;
-		} else {
-			ComboWidgetProvider provider = new ComboWidgetProvider(
-					getCSSStyle(node));
-			provider.setOptions(labels);
-			provider.setSelectedLabel(getSelectedLabels(node));
-			return provider;
 		}
+        ComboWidgetProvider provider = new ComboWidgetProvider(
+        		getCSSStyle(node));
+        provider.setOptions(labels);
+        provider.setSelectedLabel(getSelectedLabels(node));
+        return provider;
 	}
 }

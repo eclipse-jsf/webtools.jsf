@@ -42,6 +42,7 @@ public abstract class AbstractFigureHandler implements IFigureHandler {
 	 */
 	public void notifyChanged(INodeNotifier notifier, int eventType,
 			Object changedFeature, Object oldValue, Object newValue, int pos) {
+        // TODO: anything?
 	}
 
 	protected ICSSStyle getCSSStyle(Element node) {
@@ -51,10 +52,10 @@ public abstract class AbstractFigureHandler implements IFigureHandler {
 					.getAdapterFor(ICSSStyle.class);
 		}
 		if (style == null) {
-			return DefaultStyle.getInstance();
-		} else {
-			return style;
-		}
+			style = DefaultStyle.getInstance();
+		} 
+        
+        return style;
 	}
 
 	protected void setCurrentFigure(CSSFigure oldFigure) {
@@ -69,5 +70,6 @@ public abstract class AbstractFigureHandler implements IFigureHandler {
 	 * child class could override this method
 	 */
 	public void dispose() {
+        // TODO: anything to dispose?
 	}
 }

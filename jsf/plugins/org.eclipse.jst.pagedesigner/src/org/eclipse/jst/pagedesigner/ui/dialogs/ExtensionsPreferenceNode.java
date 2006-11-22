@@ -41,6 +41,7 @@ public class ExtensionsPreferenceNode implements IPreferenceNode {
 	 * @see org.eclipse.jface.preference.IPreferenceNode#add(org.eclipse.jface.preference.IPreferenceNode)
 	 */
 	public void add(IPreferenceNode node) {
+        // TODO:
 	}
 
 	/*
@@ -58,6 +59,7 @@ public class ExtensionsPreferenceNode implements IPreferenceNode {
 	 * @see org.eclipse.jface.preference.IPreferenceNode#disposeResources()
 	 */
 	public void disposeResources() {
+        // TODO:
 	}
 
 	/*

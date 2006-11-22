@@ -66,17 +66,15 @@ public class IncludeTagConverterPreview extends AbstractTagConverter {
 		String fileName = getResolvedURL(getHostElement(), this._fileAttrName);
 		if (fileName == null || fileName.length() == 0) {
 			return null;
-		} else {
-			IPath includedPath = new Path(fileName);
-			includedPath.makeAbsolute();
-
-			IFile file = getFile(includedPath);
-			if (file == null) {
-				return null;
-			} else {
-				return previewFile(file);
-			}
 		}
+        IPath includedPath = new Path(fileName);
+        includedPath.makeAbsolute();
+
+        IFile file = getFile(includedPath);
+        if (file == null) {
+        	return null;
+        }
+        return previewFile(file);
 	}
 
 	public IFile getFile(IPath includedPath) {
@@ -165,6 +163,7 @@ public class IncludeTagConverterPreview extends AbstractTagConverter {
 	static String getResolvedURL(Element element, String attrName) {
 		URIResolver resolver = null;
 		if (element instanceof IDOMNode) {
+            // TODO: the new URI resolver is not available on the IStructuredModel
 			resolver = ((IDOMNode) element).getModel().getResolver();
 		}
 		if (null == resolver) {

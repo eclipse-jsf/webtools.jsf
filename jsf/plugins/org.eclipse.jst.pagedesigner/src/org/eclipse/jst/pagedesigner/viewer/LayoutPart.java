@@ -146,33 +146,32 @@ public class LayoutPart {
 			if (boxRect.contains(_point.x, _point.y)) {
 				closestBox = box;
 				break;
-			} else {
-				if (closestBox == null) {
-					closestBox = box;
-				} else {
-					// compare y.
-					int offset1 = Math.abs(CaretPositionResolver.getYDistance(
-							boxRect, _point));
-					Rectangle closestRect = getAbsoluteBounds(closestBox);
-					int offset2 = Math.abs(CaretPositionResolver.getYDistance(
-							closestRect, _point));
-					if (offset1 < offset2) {
-						closestBox = box;
-					}
-				}
-				// at the same line
-				if (closestBox != box && boxRect.contains(boxRect.x, _point.y)) {
-					// compare x.
-					int offset1 = Math.abs(CaretPositionResolver.getXDistance(
-							boxRect, _point));
-					Rectangle closestRect = getAbsoluteBounds(closestBox);
-					int offset2 = Math.abs(CaretPositionResolver.getXDistance(
-							closestRect, _point));
-					if (offset1 < offset2) {
-						closestBox = box;
-					}
-				}
 			}
+            if (closestBox == null) {
+            	closestBox = box;
+            } else {
+            	// compare y.
+            	int offset1 = Math.abs(CaretPositionResolver.getYDistance(
+            			boxRect, _point));
+            	Rectangle closestRect = getAbsoluteBounds(closestBox);
+            	int offset2 = Math.abs(CaretPositionResolver.getYDistance(
+            			closestRect, _point));
+            	if (offset1 < offset2) {
+            		closestBox = box;
+            	}
+            }
+            // at the same line
+            if (closestBox != box && boxRect.contains(boxRect.x, _point.y)) {
+            	// compare x.
+            	int offset1 = Math.abs(CaretPositionResolver.getXDistance(
+            			boxRect, _point));
+            	Rectangle closestRect = getAbsoluteBounds(closestBox);
+            	int offset2 = Math.abs(CaretPositionResolver.getXDistance(
+            			closestRect, _point));
+            	if (offset1 < offset2) {
+            		closestBox = box;
+            	}
+            }
 		}
 		return closestBox;
 	}
@@ -217,7 +216,7 @@ public class LayoutPart {
 			atPointLeft = isBeforePoint(_point);
 			atPointRight = isAfterPoint(_point);
 			if (!(atPointLeft ^ atPointRight)) {
-
+			    // TODO: and...?
 			}
 			Target target = new Target(getPart());
 			if (validator.isValidPosition(new DOMRefPosition(target.getNode(),
@@ -238,9 +237,10 @@ public class LayoutPart {
 		return result;
 	}
 
-	private IFigure getFigure() {
-		return ((GraphicalEditPart) _part).getFigure();
-	}
+    // TODO: dead?
+//	private IFigure getFigure() {
+//		return ((GraphicalEditPart) _part).getFigure();
+//	}
 
 	public boolean isAfterPoint(Point point) {
 		boolean result = false;
@@ -362,13 +362,13 @@ public class LayoutPart {
 	}
 
 	/**
-	 * @param _part
+	 * @param part
 	 * @return
 	 */
-	List getLines(EditPart _part) {
+	List getLines(EditPart part) {
 		List fragments = new ArrayList();
-		if (_part instanceof SubNodeEditPart) {
-			IFigure figure = ((GraphicalEditPart) _part).getFigure();
+		if (part instanceof SubNodeEditPart) {
+			IFigure figure = ((GraphicalEditPart) part).getFigure();
 
 			if (figure instanceof CSSTextFigure) {
 				fragments = ((CSSTextFigure) figure).getFragments();
@@ -453,9 +453,10 @@ public class LayoutPart {
 		return EditModelQuery.isInline(Target.resolveNode(_part));
 	}
 
-	private boolean isWidget() {
-		return EditModelQuery.isWidget(_part);
-	}
+    // TODO: dead?
+//	private boolean isWidget() {
+//		return EditModelQuery.isWidget(_part);
+//	}
 
 	/*
 	 * (non-Javadoc)

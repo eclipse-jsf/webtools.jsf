@@ -38,5 +38,7 @@ public class StyleCombo extends Combo {
 	}
 
 	protected void checkSubclass() {
+        // override subclass validation, otherwise Widget.isValidSubclass
+        // will throw an error
 	}
 }

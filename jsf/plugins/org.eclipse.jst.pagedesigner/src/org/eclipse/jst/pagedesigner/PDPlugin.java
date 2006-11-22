@@ -26,6 +26,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
@@ -44,8 +45,8 @@ import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.wst.sse.core.StructuredModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IModelManager;
-import org.eclipse.wst.sse.core.internal.provisional.StructuredModelManager;
 import org.osgi.framework.BundleContext;
 
 /**
@@ -54,7 +55,7 @@ import org.osgi.framework.BundleContext;
 public class PDPlugin extends AbstractUIPlugin {
 	private static final String ICONS_LIB_PATH = "icons";
 
-	private static final boolean ROOT_PLUGIN = false;
+	//private static final boolean ROOT_PLUGIN = false;
 
 	// The shared instance.
 	private static PDPlugin _plugin;
@@ -252,7 +253,7 @@ public class PDPlugin extends AbstractUIPlugin {
 		}
 
 		ImageRegistry images = getImageRegistry();
-		Image image = (Image) images.get(name);
+		Image image = images.get(name);
 		if (image == null) {
 			try {
 				ImageDescriptor id = ImageDescriptor.createFromURL(new URL(
@@ -286,7 +287,7 @@ public class PDPlugin extends AbstractUIPlugin {
 		}
 
 		ImageRegistry images = getImageRegistry();
-		ImageDescriptor id = (ImageDescriptor) images.getDescriptor(name);
+		ImageDescriptor id = images.getDescriptor(name);
 		if (id == null) {
 			try {
 				id = ImageDescriptor.createFromURL(new URL(_pluginBase,
@@ -317,7 +318,7 @@ public class PDPlugin extends AbstractUIPlugin {
 	public static Path getInstallLocation() {
 		try {
 			URL url = getDefault().getBundle().getEntry("/");
-			String s1 = Platform.resolve(url).getFile();
+			String s1 = FileLocator.resolve(url).getFile();
 			if (s1.startsWith("/")) //$NON-NLS-1$
 			{
 				s1 = s1.substring(1);
@@ -355,9 +356,8 @@ public class PDPlugin extends AbstractUIPlugin {
 	public static IWorkbenchWindow getActiveWorkbenchWindow() {
 		if (getDefault().getWorkbench() == null) {
 			return null;
-		} else {
-			return getDefault().getWorkbench().getActiveWorkbenchWindow();
 		}
+        return getDefault().getWorkbench().getActiveWorkbenchWindow();
 	}
 
 	/**
@@ -413,9 +413,8 @@ public class PDPlugin extends AbstractUIPlugin {
 		Shell shell = getActiveWorkbenchShell();
 		if (shell != null) {
 			return shell.getDisplay();
-		} else {
-			return Display.getDefault();
 		}
+        return Display.getDefault();
 	}
 
 	/**

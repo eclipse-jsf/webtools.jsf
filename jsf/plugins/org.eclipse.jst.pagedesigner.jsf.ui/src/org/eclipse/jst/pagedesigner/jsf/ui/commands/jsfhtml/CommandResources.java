@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
  * @author mengbo
  * @version 1.5
  */
-public class CommandResources
+public final class CommandResources
 {
     private static final String         BUNDLE_NAME     = "org.eclipse.jst.pagedesigner.jsf.ui.commands.jsfhtml.CommandResources"; //$NON-NLS-1$
 
@@ -26,6 +26,7 @@ public class CommandResources
 
     private CommandResources()
     {
+        // no external instantiation
     }
 
     public static String getString(String key)

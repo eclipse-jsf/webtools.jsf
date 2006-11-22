@@ -22,5 +22,5 @@ import org.eclipse.wst.sse.core.internal.provisional.INodeAdapter;
  */
 public interface IDocumentPageVariableAdapter extends IPageVariablesProvider,
 		INodeAdapter {
-
+    // TODO: what's this for?
 }

@@ -35,7 +35,8 @@ import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
  */
 public class JSFAddActionGroup {
 
-	public static Action action = new Action() {
+	private final static Action EMPTY_ACTION = new Action() {
+        // TODO: why?
 	};
 
 	/*
@@ -47,7 +48,7 @@ public class JSFAddActionGroup {
 			final IJSFCoreSupport support) {
 		final IMenuManager submenu = new MenuManager(ActionsResources
 				.getString("Submenu.JSFAdd"));//$NON-NLS-1$
-		submenu.add(action);
+		submenu.add(EMPTY_ACTION);
 		submenu.addMenuListener(new IMenuListener() {
 			public void menuAboutToShow(IMenuManager manager) {
 				submenu.removeAll();

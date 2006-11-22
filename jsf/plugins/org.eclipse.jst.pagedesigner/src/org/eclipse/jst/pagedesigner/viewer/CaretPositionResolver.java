@@ -76,33 +76,32 @@ public class CaretPositionResolver {
 		if (part1 == null
 				|| EditModelQuery.isTransparentText(Target.resolveNode(part1
 						.getPart()))) {
-			return (LayoutPart) part2;
+			return part2;
 		} else if (part2 == null
 				|| EditModelQuery.isTransparentText(Target.resolveNode(part2
 						.getPart()))) {
-			return (LayoutPart) part1;
+			return part1;
 		}
-		Rectangle rect1 = ((LayoutPart) part1).getAbsoluteBounds();
-		Rectangle rect2 = ((LayoutPart) part2).getAbsoluteBounds();
-		Node n1 = Target.resolveNode(((LayoutPart) part1).getPart());
-		Node n2 = Target.resolveNode(((LayoutPart) part2).getPart());
+		Rectangle rect1 = part1.getAbsoluteBounds();
+		Rectangle rect2 = part2.getAbsoluteBounds();
+		Node n1 = Target.resolveNode(part1.getPart());
+		Node n2 = Target.resolveNode(part2.getPart());
 		// Within same.
 		if (EditModelQuery.isChild(n1, n2)
 				&& (CaretPositionResolver.getXDistance(rect2, _point) == 0)
 				&& !part1.isCloseToEdgeFromOutSide()) {
-			return (LayoutPart) part2;
+			return part2;
 		} else if (EditModelQuery.isChild(n2, n1)
 				&& (CaretPositionResolver.getXDistance(rect1, _point) == 0 && !part2
 						.isCloseToEdgeFromOutSide())
 				&& !part2.isCloseToEdgeFromOutSide()) {
-			return (LayoutPart) part1;
+			return part1;
 		}
 		if (rect1.intersect(new Rectangle(rect1.x, rect2.y, rect1.width,
 				rect2.height)).height == 0) {
 			return heightFirst(part1, part2, _point);
-		} else {
-			return widthFirst(part1, part2, _point);
 		}
+        return widthFirst(part1, part2, _point);
 	}
 
 	private static LayoutPart heightFirst(LayoutPart part1, LayoutPart part2,
@@ -114,44 +113,42 @@ public class CaretPositionResolver {
 		int offset2 = Math.abs(CaretPositionResolver
 				.getYDistance(rect2, _point));
 		if (offset1 > offset2) {
-			return (LayoutPart) part2;
+			return part2;
 		} else if (offset1 < offset2) {
-			return (LayoutPart) part1;
+			return part1;
 		} else {
 			offset1 = Math.abs(CaretPositionResolver
 					.getXDistance(rect1, _point));
 			offset2 = Math.abs(CaretPositionResolver
 					.getXDistance(rect2, _point));
 			if (offset1 >= offset2) {
-				return (LayoutPart) part2;
-			} else {
-				return (LayoutPart) part1;
+				return part2;
 			}
+            return part1;
 		}
 	}
 
 	private static LayoutPart widthFirst(LayoutPart part1, LayoutPart part2,
 			Point _point) {
-		Rectangle rect1 = ((LayoutPart) part1).getAbsoluteBounds();
-		Rectangle rect2 = ((LayoutPart) part2).getAbsoluteBounds();
+		Rectangle rect1 = part1.getAbsoluteBounds();
+		Rectangle rect2 = part2.getAbsoluteBounds();
 		int offset1 = Math.abs(CaretPositionResolver
 				.getXDistance(rect1, _point));
 		int offset2 = Math.abs(CaretPositionResolver
 				.getXDistance(rect2, _point));
 		if (offset1 > offset2) {
-			return (LayoutPart) part2;
+			return part2;
 		} else if (offset1 < offset2) {
-			return (LayoutPart) part1;
+			return part1;
 		} else {
 			offset1 = Math.abs(CaretPositionResolver
 					.getYDistance(rect1, _point));
 			offset2 = Math.abs(CaretPositionResolver
 					.getYDistance(rect2, _point));
 			if (offset1 >= offset2) {
-				return (LayoutPart) part2;
-			} else {
-				return (LayoutPart) part1;
+				return part2;
 			}
+            return part1;
 		}
 	}
 

@@ -31,7 +31,11 @@ import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
  * @version 1.5
  */
 public class SingleElementActionGroup extends ActionGroup {
-	public static Action action = new Action() {
+    // TODO: why?
+	private static final Action action = new Action() {
+        // create a default instance that does nothing
+        // Action is abstract but has no abstract methods
+        // run() on this object is a NOOP
 	};
 
 	/*

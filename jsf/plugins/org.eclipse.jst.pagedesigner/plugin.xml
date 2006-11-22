@@ -24,7 +24,7 @@
 		<factory
 			class="org.eclipse.jst.pagedesigner.utils.UriAdapterFactory"
 			adaptableType="org.eclipse.core.resources.IProject">
-			<adapter type="org.eclipse.wst.sse.core.util.URIResolver" />
+			<adapter type="org.eclipse.wst.sse.core.internal.util.URIResolver" />
 		</factory>
 		<factory
 			class="org.eclipse.jst.pagedesigner.dnd.internal.TextEditorDropTargetListenerFactory"

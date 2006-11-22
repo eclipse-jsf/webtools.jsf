@@ -165,9 +165,8 @@ public class DOMStyleUtil {
 		CMElementDeclaration decl = CMUtil.getElementDeclaration(ele);
 		if (decl != null && decl.getAttributes().getNamedItem("style") != null) {
 			return true;
-		} else {
-			return false;
 		}
+        return false;
 	}
 
 }

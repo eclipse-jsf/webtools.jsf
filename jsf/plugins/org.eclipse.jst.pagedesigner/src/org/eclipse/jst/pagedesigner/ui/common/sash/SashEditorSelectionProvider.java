@@ -11,9 +11,9 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.ui.common.sash;
 
-import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.ListenerList;
+import org.eclipse.core.runtime.SafeRunner;
 import org.eclipse.jface.util.Assert;
-import org.eclipse.jface.util.ListenerList;
 import org.eclipse.jface.util.SafeRunnable;
 import org.eclipse.jface.viewers.IPostSelectionProvider;
 import org.eclipse.jface.viewers.ISelection;
@@ -31,9 +31,9 @@ public class SashEditorSelectionProvider implements IPostSelectionProvider {
 	 * Registered selection changed listeners (element type:
 	 * <code>ISelectionChangedListener</code>).
 	 */
-	private ListenerList _listeners = new ListenerList();
+	private ListenerList _listeners = new ListenerList(ListenerList.IDENTITY);
 
-	private ListenerList _postSelectionChangedListeners = new ListenerList(1);
+	private ListenerList _postSelectionChangedListeners = new ListenerList(ListenerList.IDENTITY);
 
 	/**
 	 * The multi-page editor.
@@ -70,7 +70,7 @@ public class SashEditorSelectionProvider implements IPostSelectionProvider {
 		Object[] listeners = this._listeners.getListeners();
 		for (int i = 0; i < listeners.length; ++i) {
 			final ISelectionChangedListener l = (ISelectionChangedListener) listeners[i];
-			Platform.run(new SafeRunnable() {
+            SafeRunner.run(new SafeRunnable() {
 				public void run() {
 					l.selectionChanged(event);
 				}

@@ -83,7 +83,11 @@ public class HTMLUtil {
 		while (posi < len) {
 			if (HTMLUtil.isHTMLWhitespace(array[posi])) {
 				while (++posi < len && HTMLUtil.isHTMLWhitespace(array[posi]))
-					;
+                {
+                    // no body
+                    // loop until we have find non-whitepspace or endof array
+                }
+
 				buffer.append(' ');
 				continue;
 			}
