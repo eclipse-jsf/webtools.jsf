@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension-point id="introductionPage" name="Introduction Page" schema="schema/introductionPage.exsd"/>
+   <extension-point id="overviewPage" name="OverviewPage" schema="schema/overviewPage.exsd"/>
+</plugin>

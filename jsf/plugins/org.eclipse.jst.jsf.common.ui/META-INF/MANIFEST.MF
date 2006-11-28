@@ -1,0 +1,29 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %plugin.name
+Bundle-SymbolicName: org.eclipse.jst.jsf.common.ui;singleton:=true
+Bundle-Version: 0.5.0.qualifier
+Bundle-Activator: org.eclipse.jst.jsf.common.ui.JSFUICommonPlugin
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.ui.cheatsheets,
+ org.eclipse.help,
+ org.eclipse.jdt.core,
+ org.eclipse.core.resources,
+ org.eclipse.ui.forms,
+ org.eclipse.jdt.ui,
+ org.eclipse.ui.ide,
+ org.eclipse.draw2d,
+ org.eclipse.jface.text,
+ org.eclipse.jst.j2ee.web,
+ org.eclipse.jst.j2ee,
+ org.eclipse.wst.common.project.facet.core
+Export-Package: org.eclipse.jst.jsf.common.ui.internal.dialogfield;x-friends:="org.eclipse.jst.pagedesigner, org.eclipse.jst.pagedesigner.jsf.ui",
+ org.eclipse.jst.jsf.common.ui.internal.dialogs;x-friends:="org.eclipse.jst.pagedesigner",
+ org.eclipse.jst.jsf.common.ui.internal.guiutils;x-friends:="org.eclipse.jst.pagedesigner",
+ org.eclipse.jst.jsf.common.ui.internal.logging;x-friends:="org.eclipse.jst.pagedesigner",
+ org.eclipse.jst.jsf.common.ui.internal.utils;x-friends:="org.eclipse.jst.pagedesigner, org.eclipse.jst.jsf.facesconfig.ui",
+ org.eclipse.jst.jsf.common.ui;x-friends:="org.eclipse.jst.pagedesigner",
+ org.eclipse.jst.jsf.common.ui.internal.actions;x-friends:="org.eclipse.jst.jsf.facesconfig.ui"
+Eclipse-LazyStart: true
+Bundle-Vendor: %plugin.provider
