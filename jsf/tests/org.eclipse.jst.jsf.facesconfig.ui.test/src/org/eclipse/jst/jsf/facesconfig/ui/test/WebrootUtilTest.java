@@ -31,7 +31,7 @@ public class WebrootUtilTest extends FacesConfigEditorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.eclipse.jst.jsf.facesconfig.common.utils.WebrootUtil#getWebPath(org.eclipse.core.runtime.IPath)}.
+	 * {@link org.eclipse.jst.jsf.common.ui.internal.utils.WebrootUtil#getWebPath(org.eclipse.core.runtime.IPath)}.
 	 */
 	public void testGetWebPathIPath() {
         // TODO:
@@ -39,7 +39,7 @@ public class WebrootUtilTest extends FacesConfigEditorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.eclipse.jst.jsf.facesconfig.common.utils.WebrootUtil#isUnderWebContentFolder(org.eclipse.core.resources.IResource)}.
+	 * {@link org.eclipse.jst.jsf.common.ui.internal.utils.WebrootUtil#isUnderWebContentFolder(org.eclipse.core.resources.IResource)}.
 	 * 
 	 * @throws CoreException
 	 */
@@ -61,7 +61,7 @@ public class WebrootUtilTest extends FacesConfigEditorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.eclipse.jst.jsf.facesconfig.common.utils.WebrootUtil#getWebContentPath(org.eclipse.core.resources.IProject)}.
+	 * {@link org.eclipse.jst.jsf.common.ui.internal.utils.WebrootUtil#getWebContentPath(org.eclipse.core.resources.IProject)}.
 	 */
 	public void testGetWebContentPath() {
 
@@ -72,7 +72,7 @@ public class WebrootUtilTest extends FacesConfigEditorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.eclipse.jst.jsf.facesconfig.common.utils.WebrootUtil#getWebContentFolder(org.eclipse.core.resources.IProject)}.
+	 * {@link org.eclipse.jst.jsf.common.ui.internal.utils.WebrootUtil#getWebContentFolder(org.eclipse.core.resources.IProject)}.
 	 */
 	public void testGetWebContentFolder() {
 		IFolder folder = WebrootUtil.getWebContentFolder(project);
@@ -83,7 +83,7 @@ public class WebrootUtilTest extends FacesConfigEditorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.eclipse.jst.jsf.facesconfig.common.utils.WebrootUtil#getWebContentFolderDepth(org.eclipse.core.resources.IProject)}.
+	 * {@link org.eclipse.jst.jsf.common.ui.internal.utils.WebrootUtil#getWebContentFolderDepth(org.eclipse.core.resources.IProject)}.
 	 */
 	public void testGetWebContentFolderDepth() {
 		assertEquals(2, WebrootUtil.getWebContentFolderDepth(project));
@@ -91,7 +91,7 @@ public class WebrootUtilTest extends FacesConfigEditorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.eclipse.jst.jsf.facesconfig.common.utils.WebrootUtil#isValidWebFile(org.eclipse.core.runtime.IPath)}.
+	 * {@link org.eclipse.jst.jsf.common.ui.internal.utils.WebrootUtil#isValidWebFile(org.eclipse.core.runtime.IPath)}.
 	 * @throws CoreException 
 	 */
 	public void testIsValidWebFile() throws CoreException {
@@ -115,7 +115,7 @@ public class WebrootUtilTest extends FacesConfigEditorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.eclipse.jst.jsf.facesconfig.common.utils.WebrootUtil#getWebPath(java.lang.String)}.
+	 * {@link org.eclipse.jst.jsf.common.ui.internal.utils.WebrootUtil#getWebPath(java.lang.String)}.
 	 */
 	public void testGetWebPathString() {
         // TODO:
@@ -123,7 +123,7 @@ public class WebrootUtilTest extends FacesConfigEditorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.eclipse.jst.jsf.facesconfig.common.utils.WebrootUtil#getPageNameFromWebPath(java.lang.String)}.
+	 * {@link org.eclipse.jst.jsf.common.ui.internal.utils.WebrootUtil#getPageNameFromWebPath(java.lang.String)}.
 	 */
 	public void testGetPageNameFromWebPath() {
 	    // TODO:

@@ -6,7 +6,7 @@ Bundle-Version: 0.5.0.qualifier
 Bundle-Activator: org.eclipse.jst.jsf.metadataprocessingtests2.Activator
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.jst.jsf.metadataprocessors,
  org.eclipse.jst.jsf.metadata.tests,
- org.eclipse.jst.jsf.common
+ org.eclipse.jst.jsf.common,
+ org.eclipse.jst.jsf.core
 Eclipse-LazyStart: true

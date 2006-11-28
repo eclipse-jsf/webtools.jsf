@@ -8,7 +8,6 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Export-Package: org.eclipse.jst.jsf.context.symbol.tests
 Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.jst.jsf.context.symbol;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.junit;visibility:=reexport,
  org.eclipse.jst.jsf.test.util,
@@ -17,6 +16,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui,
  org.eclipse.emf.edit,
  org.eclipse.jface.text,
- org.eclipse.jst.jsf.core
+ org.eclipse.jst.jsf.core,
+ org.eclipse.jst.jsf.common
 Eclipse-LazyStart: true
 Bundle-Activator: org.eclipse.jst.jsf.context.symbol.tests.ContextSymbolTestPlugin

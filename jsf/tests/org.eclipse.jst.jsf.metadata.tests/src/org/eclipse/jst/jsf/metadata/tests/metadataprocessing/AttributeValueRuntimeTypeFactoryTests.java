@@ -16,7 +16,7 @@ import java.util.List;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
-import org.eclipse.jst.jsf.metadata.tests.Activator;
+import org.eclipse.jst.jsf.metadata.tests.MetadataTestsPlugin;
 import org.eclipse.jst.jsf.metadataprocessors.internal.AttributeValueRuntimeTypeFactory;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.ITypeDescriptor;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IPossibleValues;
@@ -34,7 +34,7 @@ public class AttributeValueRuntimeTypeFactoryTests extends TestCase {
 		ITypeDescriptor atype = factory.getType(AttributeValueRuntimeTypesRegistryTests.BOOLEANTYPE_ID);
 		Assert.assertNotNull(atype);
 		Assert.assertNotNull(atype.getTypeExtension().getClassName());
-		Assert.assertTrue(atype.getTypeExtension().getBundleID().equals(Activator.ID_BUNDLE));		
+		Assert.assertTrue(atype.getTypeExtension().getBundleID().equals(MetadataTestsPlugin.ID_BUNDLE));		
 		Assert.assertTrue(atype.getTypeExtension().getTypeID().equals(AttributeValueRuntimeTypesRegistryTests.BOOLEANTYPE_ID));
 		List features =  atype.getFeatureAdapters(IPossibleValues.class);
 		Assert.assertNotNull(features);
@@ -44,7 +44,7 @@ public class AttributeValueRuntimeTypeFactoryTests extends TestCase {
 		atype = factory.getType(AttributeValueRuntimeTypesRegistryTests.STRINGARRAYTYPE_ID);
 		Assert.assertNotNull(atype);
 		Assert.assertNotNull(atype.getTypeExtension().getClassName());
-		Assert.assertTrue(atype.getTypeExtension().getBundleID().equals(Activator.ID_BUNDLE));		
+		Assert.assertTrue(atype.getTypeExtension().getBundleID().equals(MetadataTestsPlugin.ID_BUNDLE));		
 		Assert.assertTrue(atype.getTypeExtension().getTypeID().equals(AttributeValueRuntimeTypesRegistryTests.STRINGARRAYTYPE_ID));
 
 	}
@@ -56,7 +56,7 @@ public class AttributeValueRuntimeTypeFactoryTests extends TestCase {
 		ITypeDescriptor atype = factory.getType(AttributeValueRuntimeTypesRegistryTests.NOIMPLTYPE_ID);
 		Assert.assertNotNull(atype);
 		Assert.assertNotNull(atype.getTypeExtension().getClassName());
-		Assert.assertTrue(atype.getTypeExtension().getBundleID().equals(Activator.ID_BUNDLE));	
+		Assert.assertTrue(atype.getTypeExtension().getBundleID().equals(MetadataTestsPlugin.ID_BUNDLE));	
 		
 	}
 

@@ -17,17 +17,17 @@ import org.osgi.framework.BundleContext;
 /**
  * The main plugin class to be used in the desktop.
  */
-public class Activator extends Plugin {
+public class MetadataTestsPlugin extends Plugin {
 
 	public static final String ID_BUNDLE = "org.eclipse.jst.jsf.metadata.tests";
 	
 	//The shared instance.
-	private static Activator plugin;
+	private static MetadataTestsPlugin plugin;
 	
 	/**
 	 * The constructor.
 	 */
-	public Activator() {
+	public MetadataTestsPlugin() {
 		plugin = this;
 	}
 
@@ -51,7 +51,7 @@ public class Activator extends Plugin {
 	 *
 	 * @return the shared instance.
 	 */
-	public static Activator getDefault() {
+	public static MetadataTestsPlugin getDefault() {
 		return plugin;
 	}
 

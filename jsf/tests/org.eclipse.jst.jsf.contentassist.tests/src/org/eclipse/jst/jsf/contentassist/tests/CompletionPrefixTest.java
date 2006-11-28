@@ -12,8 +12,8 @@
 
 package org.eclipse.jst.jsf.contentassist.tests;
 
-import org.eclipse.jst.jsf.contentassist.internal.el.ContentAssistParser;
-import org.eclipse.jst.jsf.contentassist.internal.el.ContentAssistStrategy;
+import org.eclipse.jst.jsf.core.internal.contentassist.el.ContentAssistParser;
+import org.eclipse.jst.jsf.core.internal.contentassist.el.ContentAssistStrategy;
 
 import junit.framework.TestCase;
 

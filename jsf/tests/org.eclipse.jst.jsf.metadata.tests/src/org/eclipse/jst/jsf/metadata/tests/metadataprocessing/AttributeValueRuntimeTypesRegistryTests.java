@@ -14,14 +14,14 @@ package org.eclipse.jst.jsf.metadata.tests.metadataprocessing;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
-import org.eclipse.jst.jsf.metadata.tests.Activator;
+import org.eclipse.jst.jsf.metadata.tests.MetadataTestsPlugin;
 import org.eclipse.jst.jsf.metadataprocessors.internal.AbstractMetaDataEnabledType;
 import org.eclipse.jst.jsf.metadataprocessors.internal.AttributeValueRuntimeTypeRegistry;
 
 public class AttributeValueRuntimeTypesRegistryTests extends TestCase {
-	public final static String BOOLEANTYPE_ID = Activator.ID_BUNDLE + ".MyBooleanType";
-	public final static String STRINGARRAYTYPE_ID = Activator.ID_BUNDLE + ".MyStringArrayType";
-	public final static String NOIMPLTYPE_ID = Activator.ID_BUNDLE + ".NoImplType";
+	public final static String BOOLEANTYPE_ID = MetadataTestsPlugin.ID_BUNDLE + ".MyBooleanType";
+	public final static String STRINGARRAYTYPE_ID = MetadataTestsPlugin.ID_BUNDLE + ".MyStringArrayType";
+	public final static String NOIMPLTYPE_ID = MetadataTestsPlugin.ID_BUNDLE + ".NoImplType";
 	
 	/*
 	 * Test method for 'org.eclipse.jst.jsf.metadataprocessors.internal.AbstractMetaDataEnabledTypeRegistry.getTypes(String)'
@@ -34,7 +34,7 @@ public class AttributeValueRuntimeTypesRegistryTests extends TestCase {
 		Assert.assertTrue( obj instanceof AbstractMetaDataEnabledType);
 		AbstractMetaDataEnabledType type = (AbstractMetaDataEnabledType)obj;
 		
-		Assert.assertTrue(type.getBundleID().equals(Activator.ID_BUNDLE));
+		Assert.assertTrue(type.getBundleID().equals(MetadataTestsPlugin.ID_BUNDLE));
 		Assert.assertTrue(type.getTypeID().equals(BOOLEANTYPE_ID));
 		Assert.assertTrue(type.getClassName().equals("org.eclipse.jst.jsf.metadata.tests.metadataprocessing.types.MyBooleanType"));
 				
@@ -43,7 +43,7 @@ public class AttributeValueRuntimeTypesRegistryTests extends TestCase {
 		Assert.assertTrue( obj instanceof AbstractMetaDataEnabledType);
 		type = (AbstractMetaDataEnabledType)obj;
 		
-		Assert.assertTrue(type.getBundleID().equals(Activator.ID_BUNDLE));
+		Assert.assertTrue(type.getBundleID().equals(MetadataTestsPlugin.ID_BUNDLE));
 		Assert.assertTrue(type.getTypeID().equals(STRINGARRAYTYPE_ID));
 		Assert.assertTrue(type.getClassName().equals("org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.StringType"));
 		

@@ -12,11 +12,11 @@
 
 package org.eclipse.jst.jsf.core.tests.types;
 
-import org.eclipse.jst.jsf.core.internal.types.CompositeType;
-import org.eclipse.jst.jsf.core.internal.types.IAssignable;
-import org.eclipse.jst.jsf.core.internal.types.TypeTransformer;
-
 import junit.framework.TestCase;
+
+import org.eclipse.jst.jsf.common.internal.types.CompositeType;
+import org.eclipse.jst.jsf.common.internal.types.IAssignable;
+import org.eclipse.jst.jsf.common.internal.types.TypeTransformer;
 
 /**
  * @author cbateman

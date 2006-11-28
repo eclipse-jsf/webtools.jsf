@@ -17,9 +17,9 @@ import junit.framework.TestCase;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.jdt.core.Signature;
-import org.eclipse.jst.jsf.core.internal.types.CompositeType;
-import org.eclipse.jst.jsf.core.internal.types.IAssignable;
-import org.eclipse.jst.jsf.core.internal.types.TypeComparator;
+import org.eclipse.jst.jsf.common.internal.types.CompositeType;
+import org.eclipse.jst.jsf.common.internal.types.IAssignable;
+import org.eclipse.jst.jsf.common.internal.types.TypeComparator;
 
 /**
  * Unit tests for the composite type comparator.  Indirectly exercises

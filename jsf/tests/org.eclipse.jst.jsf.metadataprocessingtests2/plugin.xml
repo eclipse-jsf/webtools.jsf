@@ -8,11 +8,11 @@
             uri=" http://org.eclipse.jsf/metadataprocessing"/>
    </extension>
    <extension
-         point="org.eclipse.jst.jsf.metadataprocessors.AttributeValueRuntimeTypes">
+         point="org.eclipse.jst.jsf.core.AttributeValueRuntimeTypes">
       <attributeValueRuntimeType id="NoImplType"/>
    </extension>
    <extension
-         point="org.eclipse.jst.jsf.metadataprocessors.MetaDataEnabledFeatures">
+         point="org.eclipse.jst.jsf.core.MetaDataEnabledFeatures">
       <MetaDataEnabledFeature
             class="org.eclipse.jst.jsf.metadataprocessingtests2.NoImplPossibleVals"
             typeid="org.eclipse.jst.jsf.metadata.tests.NoImplType"/>

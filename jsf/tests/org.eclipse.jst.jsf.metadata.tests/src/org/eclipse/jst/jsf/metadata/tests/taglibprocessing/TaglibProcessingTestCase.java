@@ -17,7 +17,7 @@ import java.util.List;
 import junit.framework.TestCase;
 
 import org.eclipse.jst.jsf.context.structureddocument.internal.provisional.IStructuredDocumentContext;
-import org.eclipse.jst.jsf.metadata.tests.Activator;
+import org.eclipse.jst.jsf.metadata.tests.MetadataTestsPlugin;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.IMetaDataEnabledFeature;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.MetaDataEnabledProcessingFactory;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.ICreateValues;
@@ -28,8 +28,8 @@ import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IVal
 public abstract class TaglibProcessingTestCase extends TestCase {
 	protected IStructuredDocumentContext docContext;
 	protected String uri = "http://org.eclipse.jsf/tagprocessing";
-	protected String bundle = "org.eclipse.jst.jsf.taglibprocessing";
-	protected String barkerBundle = Activator.ID_BUNDLE;
+	protected String bundle = "org.eclipse.jst.jsf.core";
+	protected String barkerBundle = MetadataTestsPlugin.ID_BUNDLE;
 	protected String tag = "MyTag";
 	protected String attributeName;
 	

@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <grammar-annotation 
-	xmlns="http://org.eclipse.jsf.core/grammarAnnotationSchema"
+	xmlns:p="http://org.eclipse.jst.jsf.contentmodel.annotations/grammarAnnotationSchema"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://org.eclipse.jst.jsf.contentmodel.annotations/grammarAnnotationSchema ../../org.eclipse.jst.jsf.contentmodel.annotations/schema/grammar-annotations.xsd ">
 >
 
   <cm-element name="MyTag">
   	<cm-attribute name="BooleanType">
   		<property name="attribute-value-runtime-type">
-  			<value>org.eclipse.jst.jsf.taglibprocessing.attributevalues.BooleanType</value>
+  			<value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
   		</property>
   		<property name="default-value">
   			<value>true</value>
@@ -15,7 +16,7 @@
   	</cm-attribute>  	
   	<cm-attribute name="StringType">
   		<property name="attribute-value-runtime-type">
-  			<value>org.eclipse.jst.jsf.taglibprocessing.attributevalues.StringType</value>
+  			<value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
   		</property>
   		<property name="valid-values">
   			<value>A</value>
@@ -38,21 +39,21 @@
   	</cm-attribute> 
   	<cm-attribute name="IntegerType">
   		<property name="attribute-value-runtime-type">
-  			<value>org.eclipse.jst.jsf.taglibprocessing.attributevalues.IntegerType</value>
+  			<value>org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
   		</property>
   		<property name="valid-minimum"><value>0</value></property>
   		<property name="default-value"><value>10</value></property>
   	</cm-attribute> 
   	<cm-attribute name="LongType">
   		<property name="attribute-value-runtime-type">
-  			<value>org.eclipse.jst.jsf.taglibprocessing.attributevalues.LongType</value>
+  			<value>org.eclipse.jst.jsf.core.attributevalues.LongType</value>
   		</property>
 	  	<property name="valid-minimum"><value>-1000</value></property>
   		<property name="valid-maximum"><value>1000</value></property>
   	</cm-attribute>    	
   	<cm-attribute name="DoubleType">
   		<property name="attribute-value-runtime-type">
-  			<value>org.eclipse.jst.jsf.taglibprocessing.attributevalues.DoubleType</value>
+  			<value>org.eclipse.jst.jsf.core.attributevalues.DoubleType</value>
   		</property>
   		<property name="valid-values">
   			<value>188.23</value>
@@ -62,12 +63,12 @@
   	</cm-attribute>    	
   	<cm-attribute name="JavaClassType">
   		<property name="attribute-value-runtime-type">
-  			<value>org.eclipse.jst.jsf.taglibprocessing.attributevalues.JavaClassType</value>
+  			<value>org.eclipse.jst.jsf.core.attributevalues.JavaClassType</value>
   		</property>
   	</cm-attribute>   
   	<cm-attribute name="MethodBindingType">
   		<property name="attribute-value-runtime-type">
-  			<value>org.eclipse.jst.jsf.taglibprocessing.attributevalues.MethodBindingType</value>
+  			<value>org.eclipse.jst.jsf.core.attributevalues.MethodBindingType</value>
   		</property>
   	</cm-attribute>   
   </cm-element>

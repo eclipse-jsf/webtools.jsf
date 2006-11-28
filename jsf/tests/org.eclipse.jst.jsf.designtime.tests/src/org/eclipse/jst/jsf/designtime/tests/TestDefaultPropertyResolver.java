@@ -7,6 +7,8 @@ import junit.framework.TestCase;
 
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.Signature;
+import org.eclipse.jst.jsf.common.internal.provisional.util.JDTBeanIntrospector;
+import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
 import org.eclipse.jst.jsf.context.symbol.SymbolFactory;
 import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanInstanceSymbol;
 import org.eclipse.jst.jsf.context.symbol.internal.provisional.IComponentSymbol;
@@ -15,8 +17,6 @@ import org.eclipse.jst.jsf.context.symbol.internal.provisional.IMapTypeDescripto
 import org.eclipse.jst.jsf.context.symbol.internal.provisional.IObjectSymbol;
 import org.eclipse.jst.jsf.context.symbol.internal.provisional.IPropertySymbol;
 import org.eclipse.jst.jsf.context.symbol.internal.provisional.ISymbol;
-import org.eclipse.jst.jsf.core.internal.provisional.util.JDTBeanIntrospector;
-import org.eclipse.jst.jsf.core.internal.types.TypeConstants;
 import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
 import org.eclipse.jst.jsf.designtime.internal.provisional.el.DefaultDTPropertyResolver;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;

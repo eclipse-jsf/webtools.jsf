@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <grammar-annotation 
-	xmlns="http://org.eclipse.jsf.core/grammarAnnotationSchema"
+	xmlns:p="http://org.eclipse.jst.jsf.contentmodel.annotations/grammarAnnotationSchema"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://org.eclipse.jst.jsf.contentmodel.annotations/grammarAnnotationSchema ../../org.eclipse.jst.jsf.contentmodel.annotations/schema/grammar-annotations.xsd ">
 >
 
   <cm-element name="MyTag">
@@ -12,7 +13,7 @@
   	</cm-attribute>
   	  	<cm-attribute name="BooleanAttr">
   		<property name="attribute-value-runtime-type">
-  			<value>org.eclipse.jst.jsf.taglibprocessing.attributevalues.BooleanType</value>
+  			<value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
   		</property>
   		<property name="barks">
   			<value>woof</value>
@@ -22,7 +23,7 @@
   	</cm-attribute>
   	<cm-attribute name="NutherBooleanAttr">
   		<property name="attribute-value-runtime-type">
-  			<value>org.eclipse.jst.jsf.taglibprocessing.attributevalues.BooleanType</value>
+  			<value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
   		</property>
   		<property name="barks">
   			<value>WOOF</value>
@@ -83,7 +84,7 @@
   	</cm-attribute>
   	<cm-attribute name="ValidatorID">
 	  	<property name="attribute-value-runtime-type">
-			<value>org.eclipse.jst.jsf.metadataprocessors.IdentifierType</value>
+			<value>org.eclipse.jst.jsf.core.IdentifierType</value>
 		</property>
 	  	<property name="identifier-type">
 	  		<value>javax.faces.validator</value>
