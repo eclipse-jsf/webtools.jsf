@@ -12,8 +12,8 @@
 package org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.section;
 
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jst.jsf.facesconfig.common.dialogfield.DialogField;
-import org.eclipse.jst.jsf.facesconfig.common.dialogfield.IDialogFieldApplyListener;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogField;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.IDialogFieldApplyListener;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowNodeEditPart;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;

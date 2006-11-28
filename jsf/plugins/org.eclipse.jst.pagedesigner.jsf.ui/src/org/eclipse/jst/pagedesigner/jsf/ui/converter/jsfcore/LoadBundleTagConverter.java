@@ -22,11 +22,11 @@ import java.util.PropertyResourceBundle;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.jst.jsf.common.ui.IFileFolderConstants;
+import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
+import org.eclipse.jst.jsf.common.ui.internal.utils.ResourceUtils;
 import org.eclipse.jst.pagedesigner.IJSFConstants;
 import org.eclipse.jst.pagedesigner.PDPlugin;
-import org.eclipse.jst.pagedesigner.common.IFileFolderConstants;
-import org.eclipse.jst.pagedesigner.common.logging.Logger;
-import org.eclipse.jst.pagedesigner.common.utils.ResourceUtils;
 import org.eclipse.jst.pagedesigner.converter.HiddenTagConverter;
 import org.eclipse.jst.pagedesigner.utils.PreviewUtil;
 import org.eclipse.jst.pagedesigner.utils.StructuredModelUtil;

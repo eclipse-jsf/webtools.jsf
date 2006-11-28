@@ -13,11 +13,11 @@ package org.eclipse.jst.pagedesigner.ui.dialogfields;
 
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.preference.PreferenceManager;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogField;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.IStringButtonAdapter;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.StringButtonDialogField;
 import org.eclipse.jst.pagedesigner.IJSFConstants;
 import org.eclipse.jst.pagedesigner.commands.single.ChangeStyleCommand;
-import org.eclipse.jst.pagedesigner.common.dialogfield.DialogField;
-import org.eclipse.jst.pagedesigner.common.dialogfield.IStringButtonAdapter;
-import org.eclipse.jst.pagedesigner.common.dialogfield.StringButtonDialogField;
 import org.eclipse.jst.pagedesigner.properties.attrgroup.IElementContextable;
 import org.eclipse.jst.pagedesigner.ui.dialogs.DialogsMessages;
 import org.eclipse.jst.pagedesigner.ui.dialogs.StyleDialog;

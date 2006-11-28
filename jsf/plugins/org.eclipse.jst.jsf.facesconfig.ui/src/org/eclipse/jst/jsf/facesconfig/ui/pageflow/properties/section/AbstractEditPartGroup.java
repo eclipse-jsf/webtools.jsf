@@ -12,8 +12,8 @@
 package org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.section;
 
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.jst.jsf.facesconfig.common.dialogfield.DialogFieldGroup;
-import org.eclipse.jst.jsf.facesconfig.common.dialogfield.StringDialogField;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogFieldGroup;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.StringDialogField;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.PropertyMessages;
 import org.eclipse.swt.widgets.Composite;

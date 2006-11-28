@@ -31,8 +31,8 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jdt.ui.JavaUI;
-import org.eclipse.jst.jsf.facesconfig.common.IFileFolderConstants;
-import org.eclipse.jst.jsf.facesconfig.common.utils.JavaModelUtil;
+import org.eclipse.jst.jsf.common.ui.IFileFolderConstants;
+import org.eclipse.jst.jsf.common.ui.internal.utils.JavaModelUtil;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PartInitException;
 

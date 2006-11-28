@@ -12,7 +12,7 @@
 package org.eclipse.jst.pagedesigner.ui.dialogfields;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.jst.pagedesigner.common.dialogfield.ResourceButtonDialogField;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.ResourceButtonDialogField;
 import org.eclipse.jst.pagedesigner.utils.WebAppUtil;
 
 /**
@@ -28,7 +28,7 @@ public class ExtendedResourceButtonDialogField extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.jst.pagedesigner.common.dialogfield.ResourceButtonDialogField#browseButtonPressed()
+	 * @see org.eclipse.jst.jsf.common.ui.internal.dialogfield.ResourceButtonDialogField#browseButtonPressed()
 	 */
 	protected String browseButtonPressed() {
 		String url = super.browseButtonPressed();

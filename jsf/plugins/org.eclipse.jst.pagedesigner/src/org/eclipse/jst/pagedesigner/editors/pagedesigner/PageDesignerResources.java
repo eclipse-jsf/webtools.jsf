@@ -14,10 +14,10 @@ package org.eclipse.jst.pagedesigner.editors.pagedesigner;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
+import org.eclipse.jst.jsf.common.ui.internal.utils.ResourceUtils;
 import org.eclipse.jst.pagedesigner.IJMTConstants;
 import org.eclipse.jst.pagedesigner.PDPlugin;
-import org.eclipse.jst.pagedesigner.common.logging.Logger;
-import org.eclipse.jst.pagedesigner.common.utils.ResourceUtils;
 
 /**
  * @author mengbo

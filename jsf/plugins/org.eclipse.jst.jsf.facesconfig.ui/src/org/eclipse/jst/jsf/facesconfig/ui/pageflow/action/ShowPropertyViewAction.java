@@ -16,7 +16,7 @@ import java.util.List;
 
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.ui.actions.SelectionAction;
-import org.eclipse.jst.jsf.facesconfig.common.logging.Logger;
+import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;

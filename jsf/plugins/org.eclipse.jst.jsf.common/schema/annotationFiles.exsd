@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="org.eclipse.jst.jsf.contentmodel.annotations">
+<schema targetNamespace="org.eclipse.jst.jsf.common">
 <annotation>
       <appInfo>
-         <meta.schema plugin="org.eclipse.jst.jsf.contentmodel.annotations" id="annotationFiles" name="Annotation Files"/>
+         <meta.schema plugin="org.eclipse.jst.jsf.common" id="annotationFiles" name="Annotation Files"/>
       </appInfo>
       <documentation>
          Adds annotation meta-data to a content model.  An extending plugin may only create one annotation file for a given URI.

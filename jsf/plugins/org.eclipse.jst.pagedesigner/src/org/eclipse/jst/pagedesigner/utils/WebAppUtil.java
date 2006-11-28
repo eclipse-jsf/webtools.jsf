@@ -13,8 +13,8 @@ package org.eclipse.jst.pagedesigner.utils;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jst.j2ee.internal.web.deployables.WebDeployableArtifactUtil;
+import org.eclipse.jst.jsf.common.ui.IFileFolderConstants;
 import org.eclipse.jst.pagedesigner.IJMTConstants;
-import org.eclipse.jst.pagedesigner.common.IFileFolderConstants;
 import org.eclipse.wst.common.componentcore.ComponentCore;
 import org.eclipse.wst.common.componentcore.resources.IVirtualComponent;
 import org.eclipse.wst.common.componentcore.resources.IVirtualResource;

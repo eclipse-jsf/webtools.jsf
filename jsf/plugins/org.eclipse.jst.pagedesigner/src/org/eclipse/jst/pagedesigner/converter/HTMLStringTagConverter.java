@@ -14,9 +14,9 @@ package org.eclipse.jst.pagedesigner.converter;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
+import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
+import org.eclipse.jst.jsf.common.ui.internal.utils.ResourceUtils;
 import org.eclipse.jst.pagedesigner.PDPlugin;
-import org.eclipse.jst.pagedesigner.common.logging.Logger;
-import org.eclipse.jst.pagedesigner.common.utils.ResourceUtils;
 import org.eclipse.jst.pagedesigner.dom.DOMUtil;
 import org.eclipse.wst.sse.core.StructuredModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IModelManager;

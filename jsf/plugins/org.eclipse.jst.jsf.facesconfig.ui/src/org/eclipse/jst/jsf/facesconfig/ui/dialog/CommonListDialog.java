@@ -22,7 +22,7 @@ import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.jface.viewers.TableViewer;
-import org.eclipse.jst.jsf.facesconfig.common.guiutils.SWTUtils;
+import org.eclipse.jst.jsf.common.ui.internal.guiutils.SWTUtils;
 import org.eclipse.jst.jsf.facesconfig.ui.page.IFacesConfigPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Point;

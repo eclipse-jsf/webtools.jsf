@@ -15,7 +15,7 @@ import java.text.MessageFormat;
 
 import org.eclipse.jface.util.Assert;
 import org.eclipse.jface.viewers.CellEditor;
-import org.eclipse.jst.pagedesigner.common.widget.StyleCombo;
+import org.eclipse.jst.jsf.common.ui.internal.utils.StyleCombo;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;

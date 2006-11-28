@@ -15,11 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.jst.pagedesigner.common.dialogfield.DialogField;
-import org.eclipse.jst.pagedesigner.common.dialogfield.DialogFieldGroup;
-import org.eclipse.jst.pagedesigner.common.dialogfield.IDialogFieldApplyListener;
-import org.eclipse.jst.pagedesigner.common.dialogfield.IDialogFieldChangeListener;
-import org.eclipse.jst.pagedesigner.common.dialogfield.ISupportTextValue;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogField;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogFieldGroup;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.IDialogFieldApplyListener;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.IDialogFieldChangeListener;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.ISupportTextValue;
 import org.eclipse.jst.pagedesigner.meta.AttributeDescriptor;
 import org.eclipse.jst.pagedesigner.meta.EditorCreator;
 import org.eclipse.jst.pagedesigner.meta.IAttributeDescriptor;
@@ -136,7 +136,7 @@ public class AttributeGroup extends DialogFieldGroup {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.jst.pagedesigner.common.dialogfield.DialogFieldGroup#initialize()
+	 * @see org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogFieldGroup#initialize()
 	 */
 	public void initialize() {
 		if (_dialogFields == null) {
@@ -203,7 +203,7 @@ public class AttributeGroup extends DialogFieldGroup {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.jst.pagedesigner.common.dialogfield.DialogFieldGroup#refreshData()
+	 * @see org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogFieldGroup#refreshData()
 	 */
 	public void refreshData() {
 		if (_ownerElement == null) {
@@ -244,7 +244,7 @@ public class AttributeGroup extends DialogFieldGroup {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.jst.pagedesigner.common.dialogfield.DialogFieldGroup#layoutDialogFields(org.eclipse.ui.forms.widgets.FormToolkit,
+	 * @see org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogFieldGroup#layoutDialogFields(org.eclipse.ui.forms.widgets.FormToolkit,
 	 *      org.eclipse.swt.widgets.Composite)
 	 */
 	public void layoutDialogFields(FormToolkit toolkit, Composite parent) {
@@ -304,7 +304,7 @@ public class AttributeGroup extends DialogFieldGroup {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.jst.pagedesigner.common.dialogfield.DialogFieldGroup#validateDialogFields()
+	 * @see org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogFieldGroup#validateDialogFields()
 	 */
 	public IStatus[] validateDialogFields() {
 		return null;

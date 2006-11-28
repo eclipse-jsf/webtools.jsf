@@ -35,9 +35,9 @@ import org.eclipse.jface.viewers.IPostSelectionProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
+import org.eclipse.jst.jsf.common.ui.internal.utils.ResourceUtils;
 import org.eclipse.jst.pagedesigner.PDPlugin;
-import org.eclipse.jst.pagedesigner.common.logging.Logger;
-import org.eclipse.jst.pagedesigner.common.utils.ResourceUtils;
 import org.eclipse.jst.pagedesigner.dnd.internal.DesignerSourceMouseTrackAdapter;
 import org.eclipse.jst.pagedesigner.editors.pagedesigner.PageDesignerResources;
 import org.eclipse.jst.pagedesigner.editors.palette.DesignerPaletteRoot;
@@ -419,7 +419,8 @@ public class HTMLEditor extends PostSelectionMultiPageEditorPart implements
 		// or something.
 		super.dispose();
 		
-		_log.info("Debug.HTMLEditor.0", null);
+        // TODO: passing null?
+		_log.info("Debug.HTMLEditor.0", (String)null);
 	}
 
 	public void doSave(IProgressMonitor monitor) {

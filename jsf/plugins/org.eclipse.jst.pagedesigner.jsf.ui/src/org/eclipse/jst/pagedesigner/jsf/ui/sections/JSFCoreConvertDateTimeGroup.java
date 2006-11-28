@@ -14,12 +14,12 @@ package org.eclipse.jst.pagedesigner.jsf.ui.sections;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogField;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.IDialogFieldApplyListener;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.StyleComboDialogField;
 import org.eclipse.jst.pagedesigner.IJMTConstants;
 import org.eclipse.jst.pagedesigner.IJSFConstants;
 import org.eclipse.jst.pagedesigner.commands.single.ChangeAttributeCommand;
-import org.eclipse.jst.pagedesigner.common.dialogfield.DialogField;
-import org.eclipse.jst.pagedesigner.common.dialogfield.IDialogFieldApplyListener;
-import org.eclipse.jst.pagedesigner.common.dialogfield.StyleComboDialogField;
 import org.eclipse.jst.pagedesigner.meta.EditorCreator;
 import org.eclipse.jst.pagedesigner.meta.IAttributeDescriptor;
 import org.eclipse.jst.pagedesigner.properties.attrgroup.AttributeGroup;

@@ -12,7 +12,7 @@
 package org.eclipse.jst.pagedesigner.ui.dialogfields;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.jst.pagedesigner.common.dialogfield.ClasspathResourceButtonDialogField;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.ClasspathResourceButtonDialogField;
 import org.eclipse.jst.pagedesigner.properties.attrgroup.IElementContextable;
 import org.eclipse.jst.pagedesigner.utils.StructuredModelUtil;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;

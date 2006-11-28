@@ -13,8 +13,8 @@ package org.eclipse.jst.pagedesigner.editors.actions;
 
 import org.eclipse.gef.ui.views.palette.PaletteView;
 import org.eclipse.jface.action.Action;
+import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
 import org.eclipse.jst.pagedesigner.PDPlugin;
-import org.eclipse.jst.pagedesigner.common.logging.Logger;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;

@@ -14,9 +14,9 @@ package org.eclipse.jst.pagedesigner.jsf.ui.util;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
-import org.eclipse.jst.pagedesigner.common.CommonPlugin;
-import org.eclipse.jst.pagedesigner.common.logging.Logger;
-import org.eclipse.jst.pagedesigner.common.utils.ResourceUtils;
+import org.eclipse.jst.jsf.common.ui.JSFUICommonPlugin;
+import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
+import org.eclipse.jst.jsf.common.ui.internal.utils.ResourceUtils;
 
 /**
  * @author mengbo
@@ -24,7 +24,7 @@ import org.eclipse.jst.pagedesigner.common.utils.ResourceUtils;
 public class JSFUIPluginResourcesUtil extends ResourceUtils
 {
     private final static String             bundleName = "org.eclipse.jst.pagedesigner.jsf.ui.JSFUIResources";
-    private static Logger                   _log       = CommonPlugin.getLogger(JSFUIPluginResourcesUtil.class);
+    private static Logger                   _log       = JSFUICommonPlugin.getLogger(JSFUIPluginResourcesUtil.class);
     private static JSFUIPluginResourcesUtil _resource;                                                          // singleton
 
     private JSFUIPluginResourcesUtil()

@@ -15,7 +15,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.jst.jsf.facesconfig.common.dialogs.CommonResourceDialog;
+import org.eclipse.jst.jsf.common.ui.internal.dialogs.CommonResourceDialog;
 import org.eclipse.swt.widgets.Shell;
 
 /**

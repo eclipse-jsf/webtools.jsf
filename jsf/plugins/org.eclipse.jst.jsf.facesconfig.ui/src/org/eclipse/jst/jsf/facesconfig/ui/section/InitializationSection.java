@@ -14,9 +14,9 @@ package org.eclipse.jst.jsf.facesconfig.ui.section;
 
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.edit.command.SetCommand;
-import org.eclipse.jst.jsf.facesconfig.common.dialogfield.DialogField;
-import org.eclipse.jst.jsf.facesconfig.common.dialogfield.IDialogFieldApplyListener;
-import org.eclipse.jst.jsf.facesconfig.common.dialogfield.RadiosDialogField;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogField;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.IDialogFieldApplyListener;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.RadiosDialogField;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanType;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorMessages;

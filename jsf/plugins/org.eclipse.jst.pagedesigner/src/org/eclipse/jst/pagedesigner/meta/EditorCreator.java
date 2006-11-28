@@ -12,7 +12,7 @@
 package org.eclipse.jst.pagedesigner.meta;
 
 import org.eclipse.jface.viewers.CellEditor;
-import org.eclipse.jst.pagedesigner.common.dialogfield.DialogField;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogField;
 import org.eclipse.jst.pagedesigner.meta.internal.DefaultEditorCreator;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;

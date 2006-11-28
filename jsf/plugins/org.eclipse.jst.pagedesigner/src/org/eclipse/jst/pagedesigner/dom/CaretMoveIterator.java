@@ -11,9 +11,9 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.dom;
 
+import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
 import org.eclipse.jst.pagedesigner.IHTMLConstants;
 import org.eclipse.jst.pagedesigner.PDPlugin;
-import org.eclipse.jst.pagedesigner.common.logging.Logger;
 import org.eclipse.jst.pagedesigner.utils.HTMLUtil;
 import org.eclipse.jst.pagedesigner.validation.caret.IMovementMediator;
 import org.eclipse.jst.pagedesigner.validation.caret.Target;

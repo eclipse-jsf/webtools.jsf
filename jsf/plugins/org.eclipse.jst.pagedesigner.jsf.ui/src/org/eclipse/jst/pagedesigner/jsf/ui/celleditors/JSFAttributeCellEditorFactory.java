@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.jface.viewers.CellEditor;
-import org.eclipse.jst.pagedesigner.common.dialogfield.DialogField;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogField;
 import org.eclipse.jst.pagedesigner.meta.IAttributeCellEditorFactory;
 import org.eclipse.jst.pagedesigner.meta.IAttributeDescriptor;
 import org.eclipse.jst.pagedesigner.properties.celleditors.LabeledComboBoxCellEditor;

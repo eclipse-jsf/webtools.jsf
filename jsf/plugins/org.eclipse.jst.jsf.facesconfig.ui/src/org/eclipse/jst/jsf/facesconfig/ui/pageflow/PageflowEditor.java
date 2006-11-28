@@ -76,7 +76,7 @@ import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jface.util.TransferDropTargetListener;
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jst.jsf.facesconfig.common.logging.Logger;
+import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.action.AlignmentAction;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.action.OpenEditorAction;

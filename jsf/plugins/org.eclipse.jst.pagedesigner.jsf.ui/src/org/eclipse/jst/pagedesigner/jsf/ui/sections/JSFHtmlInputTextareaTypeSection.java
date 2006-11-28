@@ -15,12 +15,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogField;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.IDialogFieldApplyListener;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.LayoutUtil;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.RadiosDialogField;
 import org.eclipse.jst.pagedesigner.IJSFConstants;
 import org.eclipse.jst.pagedesigner.commands.single.ChangeTagCommand;
-import org.eclipse.jst.pagedesigner.common.dialogfield.DialogField;
-import org.eclipse.jst.pagedesigner.common.dialogfield.IDialogFieldApplyListener;
-import org.eclipse.jst.pagedesigner.common.dialogfield.LayoutUtil;
-import org.eclipse.jst.pagedesigner.common.dialogfield.RadiosDialogField;
 import org.eclipse.jst.pagedesigner.properties.BaseCustomSection;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;

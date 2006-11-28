@@ -11,7 +11,7 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.jsf.ui.attributegroup;
 
-import org.eclipse.jst.pagedesigner.common.dialogfield.DialogFieldGroupPage;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogFieldGroupPage;
 import org.eclipse.ui.internal.dialogs.NewWizard;
 
 /**

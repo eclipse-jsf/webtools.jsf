@@ -12,9 +12,9 @@
 package org.eclipse.jst.pagedesigner.ui.dialogs;
 
 import org.eclipse.jface.preference.PreferencePage;
-import org.eclipse.jst.pagedesigner.common.dialogfield.ColorButtonDialogField;
-import org.eclipse.jst.pagedesigner.common.dialogfield.DialogField;
-import org.eclipse.jst.pagedesigner.common.dialogfield.IDialogFieldApplyListener;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.ColorButtonDialogField;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogField;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.IDialogFieldApplyListener;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -61,7 +61,7 @@ public class BackgroundPreferencePage extends PreferencePage {
 		top.setLayout(layout);
 		top.setLayoutData(data);
 
-		_backgroundColorField = new ColorButtonDialogField(SWT.BORDER);
+		_backgroundColorField = new ColorButtonDialogField(SWT.BORDER, new ColorUtil());
 		_backgroundColorField.setLabelText(DialogsMessages
 				.getString("BackgroundBoxPreferencePage.BackgroundColor"));
 		data = new GridData(GridData.HORIZONTAL_ALIGN_END);

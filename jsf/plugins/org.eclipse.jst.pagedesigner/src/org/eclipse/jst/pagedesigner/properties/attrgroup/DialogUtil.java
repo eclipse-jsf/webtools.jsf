@@ -16,12 +16,12 @@ import java.util.Map;
 
 import org.eclipse.jface.window.Window;
 import org.eclipse.jface.wizard.Wizard;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogField;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogFieldGroupPage;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.ISupportTextValue;
+import org.eclipse.jst.jsf.common.ui.internal.dialogs.CommonWizardDialog;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.commands.single.AddSubNodeCommand;
-import org.eclipse.jst.pagedesigner.common.dialogfield.DialogField;
-import org.eclipse.jst.pagedesigner.common.dialogfield.DialogFieldGroupPage;
-import org.eclipse.jst.pagedesigner.common.dialogfield.ISupportTextValue;
-import org.eclipse.jst.pagedesigner.common.dialogs.CommonWizardDialog;
 import org.eclipse.jst.pagedesigner.meta.IAttributeDescriptor;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;

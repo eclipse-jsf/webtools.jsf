@@ -11,8 +11,8 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.utils;
 
+import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
 import org.eclipse.jst.pagedesigner.PDPlugin;
-import org.eclipse.jst.pagedesigner.common.logging.Logger;
 
 /**
  * @author mengbo

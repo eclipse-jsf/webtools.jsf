@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-import org.eclipse.jst.pagedesigner.common.utils.StringUtil;
+import org.eclipse.jst.jsf.common.ui.internal.utils.StringUtil;
 
 /**
  * @author mengbo

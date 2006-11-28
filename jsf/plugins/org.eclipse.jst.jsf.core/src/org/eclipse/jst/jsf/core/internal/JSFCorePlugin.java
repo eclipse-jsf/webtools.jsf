@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtension;
 import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.ILog;
@@ -26,9 +27,11 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.InvalidRegistryObjectException;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.ArchiveFile;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistry;
@@ -39,7 +42,9 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl.JSFLibraryRegis
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.util.JSFLibraryRegistryResourceFactoryImpl;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.util.JSFLibraryRegistryResourceImpl;
 import org.eclipse.jst.jsf.core.internal.provisional.jsflibraryregistry.PluginProvidedJSFLibraryCreationHelper;
+import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.wst.common.frameworks.internal.WTPPlugin;
+import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 
 /**
@@ -79,6 +84,8 @@ public class JSFCorePlugin extends WTPPlugin {
 
 	// The JSF Library Registry instance.
 	private JSFLibraryRegistry jsfLibraryRegistry = null;
+
+    private IPreferenceStore  preferenceStore;
 
 	/**
 	 * The constructor.
@@ -247,6 +254,20 @@ public class JSFCorePlugin extends WTPPlugin {
 		log(severity, message, null);
 	}
 
+    /**
+     * Logs a message for this plugin
+     * 
+     * @param message
+     * @param t
+     */
+    public static void log(String message, Throwable t)
+    {
+        ILog log = plugin.getLog();
+        log.log(
+           new Status(
+             IStatus.ERROR, plugin.getBundle().getSymbolicName(), 0, message, t));
+    }
+    
 	public String getPluginID() {
 		return PLUGIN_ID;
 	}
@@ -275,4 +296,181 @@ public class JSFCorePlugin extends WTPPlugin {
 		return exists;
 	}
 
+    /**
+     * @return all registered symbol source providers
+     */
+    public synchronized static Map getVariableResolvers()
+    {
+        if (_registeredVariableResolvers == null)
+        {
+            registerVariableResolverProviders();
+            if (_registeredVariableResolvers == null)
+            {
+                throw new AssertionError("registerProviders failed");
+            }
+        }
+        return Collections.unmodifiableMap(_registeredVariableResolvers);
+    }
+    
+    private static Map    _registeredVariableResolvers;
+    private final static String VARIABLE_RESOLVER_EXT_POINT_NAME = "variableresolver";
+    
+    private static void registerVariableResolverProviders()
+    {
+        _registeredVariableResolvers = new HashMap();
+        loadRegisteredExtensions(VARIABLE_RESOLVER_EXT_POINT_NAME,
+                                _registeredVariableResolvers,
+                                 "variableresolver");
+    }
+    
+    /**
+     * @return a map of all registered property resolvers by id
+     */
+    public synchronized static Map getPropertyResolvers()
+    {
+        if (_registeredPropertyResolvers == null)
+        {
+            registerPropertyResolverProviders();
+            if (_registeredPropertyResolvers == null)
+            {
+                throw new AssertionError("registerProviders failed");
+            }
+        }
+        return Collections.unmodifiableMap(_registeredPropertyResolvers);
+    }
+    
+    private static Map    _registeredPropertyResolvers;
+    private final static String PROPERTY_RESOLVER_EXT_POINT_NAME = 
+                                                             "propertyresolver";
+    
+    private static void registerPropertyResolverProviders()
+    {
+        _registeredPropertyResolvers = new HashMap();
+        loadRegisteredExtensions(PROPERTY_RESOLVER_EXT_POINT_NAME,
+                                _registeredPropertyResolvers,
+                                 "propertyresolver");
+    }
+    
+    
+    /**
+     * @return a map of all registered method resolvers by id
+     */
+    public synchronized static Map getMethodResolvers()
+    {
+        if (_registeredMethodResolvers == null)
+        {
+            registerMethodResolverProviders();
+            if (_registeredMethodResolvers == null)
+            {
+                throw new AssertionError("registerProviders failed");
+            }
+        }
+        return Collections.unmodifiableMap(_registeredMethodResolvers);
+    }
+
+    private static Map     _registeredMethodResolvers;
+    private final static String METHOD_RESOLVER_EXT_POINT_NAME = 
+                                                               "methodresolver";
+    
+    private static void registerMethodResolverProviders()
+    {
+        _registeredMethodResolvers = new HashMap();
+        loadRegisteredExtensions(METHOD_RESOLVER_EXT_POINT_NAME,
+                _registeredMethodResolvers,
+                 "methodresolver");
+
+    }
+
+    /**
+     * @return a map of all registered external context providers by id
+     */
+    public synchronized static Map getExternalContextProviders()
+    {
+        if (_registeredExternalContextProviders == null)
+        {
+            registerExternalContextProviders();
+            if (_registeredExternalContextProviders == null)
+            {
+                throw new AssertionError("registerProviders failed");
+            }
+        }
+        return Collections.unmodifiableMap(_registeredExternalContextProviders);
+    }
+    
+    private static Map     _registeredExternalContextProviders;
+    private final static String EXTERNAL_CONTEXT_EXT_POINT_NAME = 
+                                                               "externalcontext";
+
+    private static void registerExternalContextProviders()
+    {
+        _registeredExternalContextProviders = new HashMap();
+        loadRegisteredExtensions(EXTERNAL_CONTEXT_EXT_POINT_NAME,
+                                 _registeredExternalContextProviders,
+                                 "externalcontext");
+    }
+    
+    private static void loadRegisteredExtensions(final String extName,
+                                                 final Map    registry,
+                                                 final String elementName)
+    {
+        final IExtensionPoint point = Platform.getExtensionRegistry().
+        getExtensionPoint(plugin.getBundle().getSymbolicName(), 
+                extName);
+        final IExtension[] extensions = point.getExtensions();
+
+        for (int i = 0; i < extensions.length; i++)
+        {
+            final IExtension extension = extensions[i];
+            final IConfigurationElement[] elements = 
+                extension.getConfigurationElements();
+            final String bundleId = extension.getContributor().getName();
+            
+            for (int j = 0; j < elements.length; j++)
+            {
+                final IConfigurationElement element = elements[j];
+                if (elementName.equals(element.getName())
+                        && element.getAttribute("class") != null
+                        && element.getAttribute("id") != null)
+                {
+                    final String factoryClassName = element.getAttribute("class");
+                    final String id = element.getAttribute("id");
+                    final Bundle bundle = Platform.getBundle(bundleId);
+                    
+                    if (bundle != null)
+                    {
+                        try
+                        {
+                            final Class factoryClass = 
+                                bundle.loadClass(factoryClassName);
+                            
+                            final Object variableResolver= 
+                                factoryClass.newInstance();
+    
+                            registry.put(id, variableResolver);
+                        }
+                        catch (Exception e)
+                        {
+                            final ILog        logger_ = getDefault().getLog();
+                            logger_.log(new Status(IStatus.ERROR, plugin.getBundle()
+                                    .getSymbolicName(), 0, 
+                                    "Error loading property resolver provider extension point",e));
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * @return the preference store for this bundle
+     * TODO: this is copied from AbstractUIPlugin; need to upgrade to new IPreferencesService
+     */
+    public IPreferenceStore getPreferenceStore() {
+        // Create the preference store lazily.
+        if ( this.preferenceStore == null) {
+            this.preferenceStore = new ScopedPreferenceStore(new InstanceScope(),getBundle().getSymbolicName());
+
+        }
+        return this.preferenceStore;
+    }
 }

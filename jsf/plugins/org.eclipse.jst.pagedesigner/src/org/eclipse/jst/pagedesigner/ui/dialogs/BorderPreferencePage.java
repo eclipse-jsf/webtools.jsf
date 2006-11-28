@@ -12,9 +12,9 @@
 package org.eclipse.jst.pagedesigner.ui.dialogs;
 
 import org.eclipse.jface.preference.PreferencePage;
-import org.eclipse.jst.pagedesigner.common.dialogfield.ColorButtonDialogField;
-import org.eclipse.jst.pagedesigner.common.dialogfield.DialogField;
-import org.eclipse.jst.pagedesigner.common.dialogfield.IDialogFieldApplyListener;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.ColorButtonDialogField;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogField;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.IDialogFieldApplyListener;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -151,7 +151,7 @@ public class BorderPreferencePage extends PreferencePage {
 		layout = new GridLayout(3, false);
 		colorGroup.setLayout(layout);
 
-		_colorTopField = new ColorButtonDialogField(SWT.BORDER);
+		_colorTopField = new ColorButtonDialogField(SWT.BORDER, new ColorUtil());
 		_colorTopField.setLabelText(DialogsMessages
 				.getString("BorderPreferencePage.Top"));
 
@@ -171,7 +171,7 @@ public class BorderPreferencePage extends PreferencePage {
 					}
 				});
 
-		_colorRightField = new ColorButtonDialogField(SWT.BORDER);
+		_colorRightField = new ColorButtonDialogField(SWT.BORDER, new ColorUtil());
 		_colorRightField.setLabelText(DialogsMessages
 				.getString("BorderPreferencePage.Right"));
 		data = new GridData(GridData.HORIZONTAL_ALIGN_END);
@@ -190,7 +190,7 @@ public class BorderPreferencePage extends PreferencePage {
 					}
 				});
 
-		_colorBottomField = new ColorButtonDialogField(SWT.BORDER);
+		_colorBottomField = new ColorButtonDialogField(SWT.BORDER, new ColorUtil());
 		_colorBottomField.setLabelText(DialogsMessages
 				.getString("BorderPreferencePage.Bottom"));
 		data = new GridData(GridData.HORIZONTAL_ALIGN_END);
@@ -210,7 +210,7 @@ public class BorderPreferencePage extends PreferencePage {
 					}
 				});
 
-		_colorLeftField = new ColorButtonDialogField(SWT.BORDER);
+		_colorLeftField = new ColorButtonDialogField(SWT.BORDER, new ColorUtil());
 		_colorLeftField.setLabelText(DialogsMessages
 				.getString("BorderPreferencePage.Left"));
 		data = new GridData(GridData.HORIZONTAL_ALIGN_END);

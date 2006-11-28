@@ -22,11 +22,11 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.jface.viewers.CellEditor;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogField;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.ISupportTextValue;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.StringDialogField;
+import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
 import org.eclipse.jst.pagedesigner.PDPlugin;
-import org.eclipse.jst.pagedesigner.common.dialogfield.DialogField;
-import org.eclipse.jst.pagedesigner.common.dialogfield.ISupportTextValue;
-import org.eclipse.jst.pagedesigner.common.dialogfield.StringDialogField;
-import org.eclipse.jst.pagedesigner.common.logging.Logger;
 import org.eclipse.jst.pagedesigner.meta.IAttributeCellEditorFactory;
 import org.eclipse.jst.pagedesigner.meta.IAttributeDescriptor;
 import org.eclipse.jst.pagedesigner.meta.IValueType;

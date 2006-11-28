@@ -16,8 +16,8 @@ import java.io.Writer;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
+import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
 import org.eclipse.jst.pagedesigner.PDPlugin;
-import org.eclipse.jst.pagedesigner.common.logging.Logger;
 
 /**
  * entity map support.

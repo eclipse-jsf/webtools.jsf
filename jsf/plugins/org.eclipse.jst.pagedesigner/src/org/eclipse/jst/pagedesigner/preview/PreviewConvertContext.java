@@ -13,8 +13,8 @@ package org.eclipse.jst.pagedesigner.preview;
 
 import java.util.List;
 
+import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
 import org.eclipse.jst.pagedesigner.PDPlugin;
-import org.eclipse.jst.pagedesigner.common.logging.Logger;
 import org.eclipse.jst.pagedesigner.converter.ConvertPosition;
 import org.eclipse.jst.pagedesigner.converter.ConverterFactoryRegistry;
 import org.eclipse.jst.pagedesigner.converter.IConverterFactory;

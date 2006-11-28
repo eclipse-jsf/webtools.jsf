@@ -18,7 +18,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.jst.pagedesigner.common.widget.StyleCombo;
+import org.eclipse.jst.jsf.common.ui.internal.utils.StyleCombo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.wst.sse.ui.internal.Logger;
 

@@ -12,9 +12,9 @@
 package org.eclipse.jst.pagedesigner.dom;
 
 import org.eclipse.jface.text.Assert;
+import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
 import org.eclipse.jst.pagedesigner.IHTMLConstants;
 import org.eclipse.jst.pagedesigner.PDPlugin;
-import org.eclipse.jst.pagedesigner.common.logging.Logger;
 import org.eclipse.jst.pagedesigner.viewer.DesignPosition;
 import org.eclipse.jst.pagedesigner.viewer.DesignRefPosition;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;

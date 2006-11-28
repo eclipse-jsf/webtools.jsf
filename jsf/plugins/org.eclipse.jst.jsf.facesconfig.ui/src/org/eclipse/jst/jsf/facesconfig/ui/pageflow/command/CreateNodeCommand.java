@@ -17,7 +17,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.jface.window.Window;
-import org.eclipse.jst.jsf.facesconfig.common.dialogs.CommonResourceDialog;
+import org.eclipse.jst.jsf.common.ui.internal.dialogs.CommonResourceDialog;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;

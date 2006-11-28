@@ -12,9 +12,9 @@
 package org.eclipse.jst.pagedesigner.ui.dialogs;
 
 import org.eclipse.jface.preference.PreferencePage;
-import org.eclipse.jst.pagedesigner.common.dialogfield.ColorButtonDialogField;
-import org.eclipse.jst.pagedesigner.common.dialogfield.DialogField;
-import org.eclipse.jst.pagedesigner.common.dialogfield.IDialogFieldApplyListener;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.ColorButtonDialogField;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogField;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.IDialogFieldApplyListener;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -327,7 +327,7 @@ public class TextPreferencePage extends PreferencePage {
 			}
 		});
 
-		_colorField = new ColorButtonDialogField(SWT.BORDER);
+		_colorField = new ColorButtonDialogField(SWT.BORDER, new ColorUtil());
 		_colorField.setLabelText(DialogsMessages
 				.getString("TextPreferencePage.Color"));
 

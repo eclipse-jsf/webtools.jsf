@@ -11,6 +11,9 @@
  *******************************************************************************/ 
 package org.eclipse.jst.jsf.ui.internal;
 
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
+
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -24,10 +27,14 @@ import org.osgi.framework.BundleContext;
  */
 public class JSFUiPlugin extends AbstractUIPlugin {
 
-	public static final String PLUGIN_ID = "org.eclipse.jst.jsf.ui.internal.JSFUiPlugin"; //$NON-NLS-1$
+	/**
+	 * The plugin id
+	 */
+	public static final String PLUGIN_ID = "org.eclipse.jst.jsf.ui"; //$NON-NLS-1$
 	//The shared instance.
 	private static JSFUiPlugin plugin;
-
+    private static ResourceBundle   _resourceBundle;
+    
 	/**
 	 * The constructor.
 	 */
@@ -52,6 +59,7 @@ public class JSFUiPlugin extends AbstractUIPlugin {
 
 	/**
 	 * Returns the shared instance.
+	 * @return the default plugin instance
 	 */
 	public static JSFUiPlugin getDefault() {
 		return plugin;
@@ -69,8 +77,31 @@ public class JSFUiPlugin extends AbstractUIPlugin {
 		return AbstractUIPlugin.imageDescriptorFromPlugin("org.eclipse.jst.jsf.ui", path); //$NON-NLS-1$
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.wst.common.frameworks.internal.WTPPlugin#getPluginID()
+    /**
+     * Returns the string from the plugin's resource bundle, or 'key' if not
+     * found.
+     * @param key the key used to look up the string
+     * @return the resource string if one is found matching key or key is returned if it is not
+     */
+    public static String getResourceString(String key) {
+        ResourceBundle bundle = getDefault().getResourceBundle();
+        try {
+            return (bundle != null) ? bundle.getString(key) : key;
+        } catch (MissingResourceException e) {
+            return key;
+        }
+    }
+    
+    /**
+     * @return the resource bundle
+     */
+    public ResourceBundle getResourceBundle()
+    {
+        return _resourceBundle;
+    }
+    
+	/**
+	 * @return the plugin id
 	 */
 	public String getPluginID() {
 		return PLUGIN_ID;

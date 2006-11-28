@@ -10,7 +10,7 @@ package org.eclipse.jst.jsf.facesconfig.ui.wizard;
 import org.eclipse.jface.viewers.ColumnPixelData;
 import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.wizard.WizardPage;
-import org.eclipse.jst.jsf.facesconfig.common.guiutils.SWTUtils;
+import org.eclipse.jst.jsf.common.ui.internal.guiutils.SWTUtils;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;

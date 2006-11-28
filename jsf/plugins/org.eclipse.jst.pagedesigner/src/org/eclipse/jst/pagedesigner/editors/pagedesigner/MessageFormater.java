@@ -13,8 +13,8 @@ package org.eclipse.jst.pagedesigner.editors.pagedesigner;
 
 import java.text.MessageFormat;
 
+import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
 import org.eclipse.jst.pagedesigner.PDPlugin;
-import org.eclipse.jst.pagedesigner.common.logging.Logger;
 
 /**
  * @A tool class for message format

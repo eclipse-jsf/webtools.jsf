@@ -11,8 +11,8 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.css2.property;
 
+import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
 import org.eclipse.jst.pagedesigner.PDPlugin;
-import org.eclipse.jst.pagedesigner.common.logging.Logger;
 import org.eclipse.jst.pagedesigner.css2.ICSSStyle;
 import org.w3c.dom.css.CSSValue;
 

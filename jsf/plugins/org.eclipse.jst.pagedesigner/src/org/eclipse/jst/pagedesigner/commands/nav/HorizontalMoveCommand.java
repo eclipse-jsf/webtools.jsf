@@ -15,8 +15,8 @@ import java.util.List;
 
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.commands.Command;
+import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
 import org.eclipse.jst.pagedesigner.PDPlugin;
-import org.eclipse.jst.pagedesigner.common.logging.Logger;
 import org.eclipse.jst.pagedesigner.dom.EditHelper;
 import org.eclipse.jst.pagedesigner.parts.SubNodeEditPart;
 import org.eclipse.jst.pagedesigner.parts.TextEditPart;

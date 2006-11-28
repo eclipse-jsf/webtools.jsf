@@ -15,8 +15,8 @@ import java.util.Stack;
 
 import org.eclipse.gef.GraphicalViewer;
 import org.eclipse.jface.text.Assert;
+import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
 import org.eclipse.jst.pagedesigner.PDPlugin;
-import org.eclipse.jst.pagedesigner.common.logging.Logger;
 import org.eclipse.jst.pagedesigner.dom.DOMRange;
 import org.eclipse.jst.pagedesigner.dom.EditHelper;
 import org.eclipse.jst.pagedesigner.dom.EditModelQuery;

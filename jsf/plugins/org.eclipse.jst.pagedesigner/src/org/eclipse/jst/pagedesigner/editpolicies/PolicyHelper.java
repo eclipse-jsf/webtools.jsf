@@ -14,8 +14,8 @@ package org.eclipse.jst.pagedesigner.editpolicies;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartViewer;
 import org.eclipse.jface.action.IStatusLineManager;
+import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
 import org.eclipse.jst.pagedesigner.PDPlugin;
-import org.eclipse.jst.pagedesigner.common.logging.Logger;
 import org.eclipse.jst.pagedesigner.viewer.HTMLGraphicalViewer;
 
 /**
@@ -30,11 +30,11 @@ public class PolicyHelper {
 			HTMLGraphicalViewer htmlviewer = (HTMLGraphicalViewer) v;
 			IStatusLineManager m = htmlviewer.getStatusLineManager();
 			if (m == null) {
-				_log.info("Warn.PolicyHelper.0", null); //$NON-NLS-1$
+				_log.info("Warn.PolicyHelper.0", (String) null); //$NON-NLS-1$
 			}
 			return m;
 		}
-		_log.info("Warn.PolicyHelper.1", null); //$NON-NLS-1$
+		_log.info("Warn.PolicyHelper.1", (String)null); //$NON-NLS-1$
 		return null;
 	}
 }

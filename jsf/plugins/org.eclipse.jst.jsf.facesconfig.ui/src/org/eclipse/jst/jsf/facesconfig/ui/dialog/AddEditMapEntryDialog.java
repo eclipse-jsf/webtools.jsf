@@ -12,11 +12,11 @@
 package org.eclipse.jst.jsf.facesconfig.ui.dialog;
 
 import org.eclipse.jface.dialogs.Dialog;
-import org.eclipse.jst.jsf.facesconfig.common.dialogfield.LayoutUtil;
-import org.eclipse.jst.jsf.facesconfig.common.dialogfield.StringDialogField;
-import org.eclipse.jst.jsf.facesconfig.common.guiutils.SWTUtils;
-import org.eclipse.jst.jsf.facesconfig.ui.IFacesConfigConstants;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.LayoutUtil;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.StringDialogField;
+import org.eclipse.jst.jsf.common.ui.internal.guiutils.SWTUtils;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorMessages;
+import org.eclipse.jst.jsf.facesconfig.ui.IFacesConfigConstants;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;

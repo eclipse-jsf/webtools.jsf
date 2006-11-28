@@ -18,7 +18,7 @@ import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.viewers.ColumnPixelData;
 import org.eclipse.jface.viewers.TableLayout;
-import org.eclipse.jst.jsf.facesconfig.common.dialogfield.Separator;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.Separator;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.JSPUtil;
 import org.eclipse.swt.SWT;

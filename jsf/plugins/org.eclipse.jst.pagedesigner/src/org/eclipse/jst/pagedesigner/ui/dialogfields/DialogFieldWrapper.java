@@ -12,11 +12,11 @@
 package org.eclipse.jst.pagedesigner.ui.dialogfields;
 
 import org.eclipse.jface.util.Assert;
-import org.eclipse.jst.pagedesigner.common.dialogfield.DialogField;
-import org.eclipse.jst.pagedesigner.common.dialogfield.IDialogFieldApplyListener;
-import org.eclipse.jst.pagedesigner.common.dialogfield.IDialogFieldChangeListener;
-import org.eclipse.jst.pagedesigner.common.dialogfield.IStringButtonAdapter;
-import org.eclipse.jst.pagedesigner.common.dialogfield.ISupportTextValue;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogField;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.IDialogFieldApplyListener;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.IDialogFieldChangeListener;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.IStringButtonAdapter;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.ISupportTextValue;
 import org.eclipse.jst.pagedesigner.meta.IAttributeDescriptor;
 import org.eclipse.jst.pagedesigner.meta.IBindingHandler;
 import org.eclipse.jst.pagedesigner.properties.attrgroup.IElementContextable;
@@ -98,7 +98,7 @@ public class DialogFieldWrapper implements DialogField, ISupportTextValue,
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.eclipse.jst.pagedesigner.common.dialogfield.IStringButtonAdapter#changeControlPressed(org.eclipse.jst.pagedesigner.common.dialogfield.DialogField)
+			 * @see org.eclipse.jst.jsf.common.ui.internal.dialogfield.IStringButtonAdapter#changeControlPressed(org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogField)
 			 */
 			public void changeControlPressed(DialogField field1) {
 				Shell shell = field1.getLabelControl(null, null).getShell();
@@ -121,7 +121,7 @@ public class DialogFieldWrapper implements DialogField, ISupportTextValue,
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.jst.pagedesigner.common.dialogfield.ISupportTextValue#setTextWithoutUpdate(java.lang.String)
+	 * @see org.eclipse.jst.jsf.common.ui.internal.dialogfield.ISupportTextValue#setTextWithoutUpdate(java.lang.String)
 	 */
 	public void setTextWithoutUpdate(String value) {
 		((ISupportTextValue) _wrapped).setTextWithoutUpdate(value);
@@ -130,7 +130,7 @@ public class DialogFieldWrapper implements DialogField, ISupportTextValue,
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.jst.pagedesigner.common.dialogfield.ISupportTextValue#getText()
+	 * @see org.eclipse.jst.jsf.common.ui.internal.dialogfield.ISupportTextValue#getText()
 	 */
 	public String getText() {
 		return ((ISupportTextValue) _wrapped).getText();
@@ -139,7 +139,7 @@ public class DialogFieldWrapper implements DialogField, ISupportTextValue,
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.jst.pagedesigner.common.dialogfield.ISupportTextValue#setText(java.lang.String)
+	 * @see org.eclipse.jst.jsf.common.ui.internal.dialogfield.ISupportTextValue#setText(java.lang.String)
 	 */
 	public void setText(String value) {
 		((ISupportTextValue) _wrapped).setText(value);
@@ -169,7 +169,7 @@ public class DialogFieldWrapper implements DialogField, ISupportTextValue,
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.jst.pagedesigner.common.dialogfield.DialogField#doFillIntoGrid(org.eclipse.ui.forms.widgets.FormToolkit,
+	 * @see org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogField#doFillIntoGrid(org.eclipse.ui.forms.widgets.FormToolkit,
 	 *      org.eclipse.swt.widgets.Composite, int)
 	 */
 	public Control[] doFillIntoGrid(FormToolkit toolkit, Composite parent,
@@ -255,7 +255,7 @@ public class DialogFieldWrapper implements DialogField, ISupportTextValue,
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.jst.pagedesigner.common.dialogfield.DialogField#getLabelControl(org.eclipse.ui.forms.widgets.FormToolkit,
+	 * @see org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogField#getLabelControl(org.eclipse.ui.forms.widgets.FormToolkit,
 	 *      org.eclipse.swt.widgets.Composite)
 	 */
 	public Control getLabelControl(FormToolkit _formToolkit, Composite parent) {
@@ -265,7 +265,7 @@ public class DialogFieldWrapper implements DialogField, ISupportTextValue,
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.jst.pagedesigner.common.dialogfield.IDialogField#setHyperLink(org.eclipse.ui.forms.events.IHyperlinkListener)
+	 * @see org.eclipse.jst.jsf.common.ui.internal.dialogfield.IDialogField#setHyperLink(org.eclipse.ui.forms.events.IHyperlinkListener)
 	 */
 	public void setHyperLink(IHyperlinkListener listener) {
 		_wrapped.setHyperLink(listener);
@@ -274,7 +274,7 @@ public class DialogFieldWrapper implements DialogField, ISupportTextValue,
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.jst.pagedesigner.common.dialogfield.IDialogField#setLabelText(java.lang.String)
+	 * @see org.eclipse.jst.jsf.common.ui.internal.dialogfield.IDialogField#setLabelText(java.lang.String)
 	 */
 	public void setLabelText(String labeltext) {
 		_wrapped.setLabelText(labeltext);
@@ -283,7 +283,7 @@ public class DialogFieldWrapper implements DialogField, ISupportTextValue,
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.jst.pagedesigner.common.dialogfield.IDialogField#setDialogFieldChangeListener(org.eclipse.jst.pagedesigner.common.dialogfield.IDialogFieldChangeListener)
+	 * @see org.eclipse.jst.jsf.common.ui.internal.dialogfield.IDialogField#setDialogFieldChangeListener(org.eclipse.jst.jsf.common.ui.internal.dialogfield.IDialogFieldChangeListener)
 	 */
 	public void setDialogFieldChangeListener(IDialogFieldChangeListener listener) {
 		_wrapped.setDialogFieldChangeListener(listener);
@@ -292,7 +292,7 @@ public class DialogFieldWrapper implements DialogField, ISupportTextValue,
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.jst.pagedesigner.common.dialogfield.IDialogField#setDialogFieldApplyListener(org.eclipse.jst.pagedesigner.common.dialogfield.IDialogFieldApplyListener)
+	 * @see org.eclipse.jst.jsf.common.ui.internal.dialogfield.IDialogField#setDialogFieldApplyListener(org.eclipse.jst.jsf.common.ui.internal.dialogfield.IDialogFieldApplyListener)
 	 */
 	public void setDialogFieldApplyListener(IDialogFieldApplyListener listener) {
 		_wrapped.setDialogFieldApplyListener(listener);
@@ -301,7 +301,7 @@ public class DialogFieldWrapper implements DialogField, ISupportTextValue,
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.jst.pagedesigner.common.dialogfield.IDialogField#setFocus()
+	 * @see org.eclipse.jst.jsf.common.ui.internal.dialogfield.IDialogField#setFocus()
 	 */
 	public boolean setFocus() {
 		return _wrapped.setFocus();
@@ -310,7 +310,7 @@ public class DialogFieldWrapper implements DialogField, ISupportTextValue,
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.jst.pagedesigner.common.dialogfield.IDialogField#getNumberOfControls()
+	 * @see org.eclipse.jst.jsf.common.ui.internal.dialogfield.IDialogField#getNumberOfControls()
 	 */
 	public int getNumberOfControls() {
 		return _wrapped.getNumberOfControls() + 1;
@@ -328,7 +328,7 @@ public class DialogFieldWrapper implements DialogField, ISupportTextValue,
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.jst.pagedesigner.common.dialogfield.IDialogField#setEnabled(boolean)
+	 * @see org.eclipse.jst.jsf.common.ui.internal.dialogfield.IDialogField#setEnabled(boolean)
 	 */
 	public void setEnabled(boolean enabled) {
 		_wrapped.setEnabled(enabled);
@@ -349,7 +349,7 @@ public class DialogFieldWrapper implements DialogField, ISupportTextValue,
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.jst.pagedesigner.common.dialogfield.IDialogField#isEnabled()
+	 * @see org.eclipse.jst.jsf.common.ui.internal.dialogfield.IDialogField#isEnabled()
 	 */
 	public boolean isEnabled() {
 		return _wrapped.isEnabled();
@@ -358,7 +358,7 @@ public class DialogFieldWrapper implements DialogField, ISupportTextValue,
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.jst.pagedesigner.common.dialogfield.IDialogField#getAttachedData(java.lang.Object)
+	 * @see org.eclipse.jst.jsf.common.ui.internal.dialogfield.IDialogField#getAttachedData(java.lang.Object)
 	 */
 	public Object getAttachedData(Object key) {
 		return _wrapped.getAttachedData(key);
@@ -367,7 +367,7 @@ public class DialogFieldWrapper implements DialogField, ISupportTextValue,
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.jst.pagedesigner.common.dialogfield.IDialogField#putAttachedData(java.lang.Object,
+	 * @see org.eclipse.jst.jsf.common.ui.internal.dialogfield.IDialogField#putAttachedData(java.lang.Object,
 	 *      java.lang.Object)
 	 */
 	public void putAttachedData(Object key, Object value) {
@@ -383,7 +383,7 @@ public class DialogFieldWrapper implements DialogField, ISupportTextValue,
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.jst.pagedesigner.common.dialogfield.DialogField#handleGrabHorizontal()
+	 * @see org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogField#handleGrabHorizontal()
 	 */
 	public void handleGrabHorizontal() {
 		_wrapped.handleGrabHorizontal();

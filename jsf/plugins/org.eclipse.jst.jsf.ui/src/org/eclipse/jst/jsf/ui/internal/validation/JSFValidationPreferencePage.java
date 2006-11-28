@@ -14,8 +14,8 @@ package org.eclipse.jst.jsf.ui.internal.validation;
 
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferencePage;
+import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.validation.internal.ValidationPreferences;
-import org.eclipse.jst.jsf.validation.internal.el.Activator;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.IWorkbench;
@@ -78,7 +78,7 @@ public class JSFValidationPreferencePage extends PreferencePage implements
     protected IPreferenceStore doGetPreferenceStore() 
     {
         // load the validation pref store
-        return Activator.getDefault().getPreferenceStore();
+        return JSFCorePlugin.getDefault().getPreferenceStore();
     }
     
 }

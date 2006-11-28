@@ -12,8 +12,8 @@
 package org.eclipse.jst.pagedesigner.properties.celleditors;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.jst.pagedesigner.common.IFileFolderConstants;
-import org.eclipse.jst.pagedesigner.common.dialogs.ResourceOnClasspathDialog;
+import org.eclipse.jst.jsf.common.ui.IFileFolderConstants;
+import org.eclipse.jst.jsf.common.ui.internal.dialogs.ResourceOnClasspathDialog;
 import org.eclipse.jst.pagedesigner.properties.DesignerPropertyTool;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;

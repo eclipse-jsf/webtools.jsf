@@ -14,7 +14,7 @@ import java.util.List;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.jface.wizard.WizardPage;
-import org.eclipse.jst.jsf.facesconfig.common.guiutils.SWTUtils;
+import org.eclipse.jst.jsf.common.ui.internal.guiutils.SWTUtils;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.IFacesConfigConstants;
 import org.eclipse.jst.jsf.facesconfig.ui.util.JavaClassUtils;

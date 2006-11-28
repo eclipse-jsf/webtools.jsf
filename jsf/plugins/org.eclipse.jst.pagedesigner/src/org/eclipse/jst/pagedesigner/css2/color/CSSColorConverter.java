@@ -13,8 +13,8 @@ package org.eclipse.jst.pagedesigner.css2.color;
 
 import java.util.StringTokenizer;
 
+import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
 import org.eclipse.jst.pagedesigner.PDPlugin;
-import org.eclipse.jst.pagedesigner.common.logging.Logger;
 import org.eclipse.swt.graphics.RGB;
 
 /**

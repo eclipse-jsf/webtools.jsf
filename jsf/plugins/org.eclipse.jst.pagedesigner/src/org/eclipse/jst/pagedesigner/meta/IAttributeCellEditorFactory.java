@@ -12,7 +12,7 @@
 package org.eclipse.jst.pagedesigner.meta;
 
 import org.eclipse.jface.viewers.CellEditor;
-import org.eclipse.jst.pagedesigner.common.dialogfield.DialogField;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogField;
 import org.eclipse.swt.widgets.Composite;
 import org.w3c.dom.Element;
 
@@ -55,7 +55,7 @@ public interface IAttributeCellEditorFactory {
 	 *            the attribute descriptor, meta data
 	 * @return A dialog field. null means this factory can't create one.
 	 * 
-	 * @see org.eclipse.jst.pagedesigner.common.dialogfield.ISupportTextValue
+	 * @see org.eclipse.jst.jsf.common.ui.internal.dialogfield.ISupportTextValue
 	 */
 	public DialogField createDialogField(IAttributeDescriptor attr);
 

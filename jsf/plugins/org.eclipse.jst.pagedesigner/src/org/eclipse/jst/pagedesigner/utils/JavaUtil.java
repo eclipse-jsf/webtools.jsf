@@ -18,8 +18,8 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.internal.core.JarEntryFile;
+import org.eclipse.jst.jsf.common.ui.IFileFolderConstants;
 import org.eclipse.jst.pagedesigner.PDPlugin;
-import org.eclipse.jst.pagedesigner.common.IFileFolderConstants;
 
 /**
  * @author mengbo

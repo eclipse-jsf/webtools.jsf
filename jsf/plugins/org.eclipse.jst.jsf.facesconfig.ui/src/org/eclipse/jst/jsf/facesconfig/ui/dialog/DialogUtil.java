@@ -22,7 +22,7 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jface.window.Window;
-import org.eclipse.jst.jsf.facesconfig.common.dialogfield.JavaUIHelper;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.JavaUIHelper;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.jst.jsf.facesconfig.emf.RenderKitIdType;
 import org.eclipse.jst.jsf.facesconfig.emf.RenderKitType;

@@ -12,11 +12,11 @@
 package org.eclipse.jst.pagedesigner.jsf.ui.attributegroup;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.jst.pagedesigner.common.dialogfield.ClassButtonDialogField;
-import org.eclipse.jst.pagedesigner.common.dialogfield.ComboDialogField;
-import org.eclipse.jst.pagedesigner.common.dialogfield.DialogField;
-import org.eclipse.jst.pagedesigner.common.dialogfield.RadiosDialogField;
-import org.eclipse.jst.pagedesigner.common.dialogfield.StringDialogField;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.ClassButtonDialogField;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.ComboDialogField;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogField;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.RadiosDialogField;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.StringDialogField;
 import org.eclipse.jst.pagedesigner.meta.IAttributeDescriptor;
 import org.eclipse.jst.pagedesigner.meta.ICMRegistry;
 import org.eclipse.jst.pagedesigner.meta.IElementDescriptor;

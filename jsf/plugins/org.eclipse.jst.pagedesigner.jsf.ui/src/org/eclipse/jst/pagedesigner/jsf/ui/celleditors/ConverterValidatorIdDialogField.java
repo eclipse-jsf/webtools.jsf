@@ -13,7 +13,7 @@ package org.eclipse.jst.pagedesigner.jsf.ui.celleditors;
 
 import java.util.Arrays;
 
-import org.eclipse.jst.pagedesigner.common.dialogfield.ComboDialogField;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.ComboDialogField;
 import org.eclipse.jst.pagedesigner.properties.attrgroup.IElementContextable;
 import org.eclipse.swt.SWT;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;

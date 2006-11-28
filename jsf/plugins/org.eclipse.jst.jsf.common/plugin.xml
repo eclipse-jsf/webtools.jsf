@@ -2,11 +2,34 @@
 <?eclipse version="3.2"?>
 <plugin>
  <extension-point id="annotationFiles" name="annotationFiles" schema="schema/annotationFiles.exsd"/>
+ <extension-point id="symbolSourceProvider" name="JSF EL Symbol Source Provider" schema="schema/symbols.exsd"/>
+ <extension-point id="contextSymbolFactory" name="Contextual Symbol Factory" schema="schema/contextSymbolFactory.exsd"/>
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http:///org/eclipse/jst/jsf/common/symbol.ecore" 
+       class = "org.eclipse.jst.jsf.context.symbol.SymbolPackage"
+       genModel = "model/symbol.genmodel" /> 
+  </extension>
+  <extension
+        point="org.eclipse.emf.edit.itemProviderAdapterFactories">
+        <factory 
+       uri = "http:///org/eclipse/jst/jsf/common/symbol.ecore" 
+       class = "org.eclipse.jst.jsf.context.symbol.internal.provider.SymbolItemProviderAdapterFactory" 
+       supportedTypes = 
+         "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
+          org.eclipse.emf.edit.provider.IStructuredItemContentProvider
+          org.eclipse.emf.edit.provider.ITreeItemContentProvider
+          org.eclipse.emf.edit.provider.IItemLabelProvider
+          org.eclipse.emf.edit.provider.IItemPropertySource
+          org.eclipse.jst.jsf.context.symbol.internal.provisional.provider.IContentProposalProvider" />
+  </extension>
+ 
  <extension
         point="org.eclipse.wst.xml.core.catalogContributions">
      <catalogContribution>
         <system
-              systemId="org.eclipse.jst.jsf.contentmodel.annotations/grammarAnnotationSchema"
+              systemId="org.eclipse.jst.jsf.common/grammarAnnotationSchema"
               uri="schema/grammar-annotations.xsd"/>
      </catalogContribution>
   </extension>

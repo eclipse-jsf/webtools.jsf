@@ -25,6 +25,7 @@ Require-Bundle: org.eclipse.core.resources;visibility:=reexport,
  org.eclipse.wst.xml.core
 Eclipse-LazyStart: true
 Export-Package: org.eclipse.jst.jsf.facesconfig,
+ org.eclipse.jst.jsf.facesconfig.edit.provider,
  org.eclipse.jst.jsf.facesconfig.emf,
  org.eclipse.jst.jsf.facesconfig.emf.impl,
  org.eclipse.jst.jsf.facesconfig.emf.util,

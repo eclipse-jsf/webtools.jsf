@@ -29,7 +29,7 @@ import org.eclipse.jdt.ui.JavaElementLabelProvider;
 import org.eclipse.jdt.ui.StandardJavaElementContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
-import org.eclipse.jst.pagedesigner.common.IFileFolderConstants;
+import org.eclipse.jst.jsf.common.ui.IFileFolderConstants;
 import org.eclipse.jst.pagedesigner.editors.pagedesigner.PageDesignerResources;
 import org.eclipse.jst.pagedesigner.utils.JavaUtil;
 import org.eclipse.swt.widgets.Shell;

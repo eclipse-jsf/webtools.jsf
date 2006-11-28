@@ -20,8 +20,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
-import org.eclipse.jst.pagedesigner.common.dialogfield.DialogField;
-import org.eclipse.jst.pagedesigner.common.dialogfield.DialogFieldGroup;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogField;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogFieldGroup;
 
 /**
  * @author mengbo
@@ -33,7 +33,7 @@ public class CommonDialogFieldGroup extends DialogFieldGroup
     private AttributeData[] attributeData = null;
 
     /* (non-Javadoc)
-     * @see org.eclipse.jst.pagedesigner.common.dialogfield.DialogFieldGroup#initialize()
+     * @see org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogFieldGroup#initialize()
      */
     public void initialize()
     {
@@ -61,7 +61,7 @@ public class CommonDialogFieldGroup extends DialogFieldGroup
     }
 
     /* (non-Javadoc)
-     * @see org.eclipse.jst.pagedesigner.common.dialogfield.DialogFieldGroup#refreshData()
+     * @see org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogFieldGroup#refreshData()
      */
     public void refreshData()
     {
@@ -76,7 +76,7 @@ public class CommonDialogFieldGroup extends DialogFieldGroup
     }
 
     /* (non-Javadoc)
-     * @see org.eclipse.jst.pagedesigner.common.dialogfield.DialogFieldGroup#layoutDialogFields(org.eclipse.ui.forms.widgets.FormToolkit, org.eclipse.swt.widgets.Composite)
+     * @see org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogFieldGroup#layoutDialogFields(org.eclipse.ui.forms.widgets.FormToolkit, org.eclipse.swt.widgets.Composite)
      */
     public void layoutDialogFields(FormToolkit toolkit, Composite parent)
     {
@@ -126,7 +126,7 @@ public class CommonDialogFieldGroup extends DialogFieldGroup
     }
 
     /* (non-Javadoc)
-     * @see org.eclipse.jst.pagedesigner.common.dialogfield.DialogFieldGroup#validateDialogFields()
+     * @see org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogFieldGroup#validateDialogFields()
      */
     public IStatus[] validateDialogFields()
     {

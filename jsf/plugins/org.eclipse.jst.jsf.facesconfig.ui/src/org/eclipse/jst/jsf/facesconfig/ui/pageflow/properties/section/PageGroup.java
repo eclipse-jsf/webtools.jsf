@@ -13,11 +13,11 @@ package org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.section;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jface.window.Window;
-import org.eclipse.jst.jsf.facesconfig.common.dialogfield.DialogField;
-import org.eclipse.jst.jsf.facesconfig.common.dialogfield.IStringButtonAdapter;
-import org.eclipse.jst.jsf.facesconfig.common.dialogfield.LayoutUtil;
-import org.eclipse.jst.jsf.facesconfig.common.dialogfield.StringButtonDialogField;
-import org.eclipse.jst.jsf.facesconfig.common.dialogfield.StringDialogField;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogField;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.IStringButtonAdapter;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.LayoutUtil;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.StringButtonDialogField;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.StringDialogField;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.ITabbedPropertiesConstants;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.ProjectWebPageSelectionDialog;

@@ -12,10 +12,10 @@
 package org.eclipse.jst.pagedesigner.properties.attrgroup;
 
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogField;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.IDialogFieldApplyListener;
+import org.eclipse.jst.jsf.common.ui.internal.dialogfield.ISupportTextValue;
 import org.eclipse.jst.pagedesigner.commands.single.ChangeAttributeCommand;
-import org.eclipse.jst.pagedesigner.common.dialogfield.DialogField;
-import org.eclipse.jst.pagedesigner.common.dialogfield.IDialogFieldApplyListener;
-import org.eclipse.jst.pagedesigner.common.dialogfield.ISupportTextValue;
 import org.eclipse.jst.pagedesigner.meta.IAttributeDescriptor;
 import org.eclipse.jst.pagedesigner.properties.BaseCustomSection;
 import org.eclipse.swt.widgets.Composite;
@@ -37,7 +37,7 @@ public class AttributeGroupSection extends BaseCustomSection {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.eclipse.jst.pagedesigner.common.dialogfield.IDialogFieldApplyListener#dialogFieldApplied(org.eclipse.jst.pagedesigner.common.dialogfield.DialogField)
+		 * @see org.eclipse.jst.jsf.common.ui.internal.dialogfield.IDialogFieldApplyListener#dialogFieldApplied(org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogField)
 		 */
 		public void dialogFieldApplied(DialogField field) {
 			Object attr = field.getAttachedData(KEY_ATTR);

@@ -25,9 +25,11 @@ Require-Bundle: org.eclipse.core.runtime;visibility:=reexport,
  org.eclipse.jst.jsp.ui,
  org.eclipse.jst.j2ee.web,
  org.eclipse.jst.pagedesigner.jsp.core,
- org.eclipse.jst.pagedesigner.common;visibility:=reexport,
  org.eclipse.wst.html.ui,
- org.eclipse.wst.common.ui.properties
+ org.eclipse.wst.common.ui.properties,
+ org.eclipse.jst.jsf.common.ui,
+ org.eclipse.ui.ide,
+ org.eclipse.jdt.ui
 Eclipse-LazyStart: true
 Provide-Package: org.eclipse.jst.pagedesigner,
  org.eclipse.jst.pagedesigner.actions.container,

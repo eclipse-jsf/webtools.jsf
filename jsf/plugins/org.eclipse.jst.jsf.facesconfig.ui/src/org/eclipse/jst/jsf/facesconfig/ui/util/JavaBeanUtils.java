@@ -24,7 +24,7 @@ import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.ITypeHierarchy;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.Signature;
-import org.eclipse.jst.jsf.facesconfig.common.utils.JavaModelUtil;
+import org.eclipse.jst.jsf.common.ui.internal.utils.JavaModelUtil;
 
 /**
  * This utility class is used to access java bean class, e.g., get java bean's

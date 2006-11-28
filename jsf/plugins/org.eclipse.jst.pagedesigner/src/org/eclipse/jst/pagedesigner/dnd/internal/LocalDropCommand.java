@@ -15,7 +15,7 @@ import java.util.Map;
 
 import org.eclipse.gef.commands.Command;
 import org.eclipse.jface.wizard.IWizard;
-import org.eclipse.jst.pagedesigner.common.dialogs.CommonWizardDialog;
+import org.eclipse.jst.jsf.common.ui.internal.dialogs.CommonWizardDialog;
 import org.eclipse.jst.pagedesigner.dnd.ILocalDropHandler;
 import org.eclipse.jst.pagedesigner.dom.IDOMPosition;
 import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;

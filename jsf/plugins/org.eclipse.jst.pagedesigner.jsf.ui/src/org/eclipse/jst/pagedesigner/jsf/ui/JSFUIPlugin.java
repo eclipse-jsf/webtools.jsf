@@ -18,10 +18,10 @@ import java.util.ResourceBundle;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
-import org.eclipse.jst.pagedesigner.common.CommonPlugin;
-import org.eclipse.jst.pagedesigner.common.IFileFolderConstants;
-import org.eclipse.jst.pagedesigner.common.guiutils.Alerts;
-import org.eclipse.jst.pagedesigner.common.logging.Logger;
+import org.eclipse.jst.jsf.common.ui.IFileFolderConstants;
+import org.eclipse.jst.jsf.common.ui.JSFUICommonPlugin;
+import org.eclipse.jst.jsf.common.ui.internal.guiutils.Alerts;
+import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
@@ -64,7 +64,7 @@ public class JSFUIPlugin extends AbstractUIPlugin
     {
         super.start(context);
         _alerts = new Alerts(this, _resourceBundle);
-        _logger = CommonPlugin.getLogger(JSFUIPlugin.class);
+        _logger = JSFUICommonPlugin.getLogger(JSFUIPlugin.class);
 //        _logger.setResourceBundle(_resourceBundle);
         _pluginBase = getBundle().getEntry("/");
     }

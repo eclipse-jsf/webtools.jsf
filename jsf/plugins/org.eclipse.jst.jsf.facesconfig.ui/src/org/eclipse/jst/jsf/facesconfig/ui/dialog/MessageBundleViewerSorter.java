@@ -16,7 +16,7 @@ import java.text.Collator;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.internal.core.JarPackageFragmentRoot;
 import org.eclipse.jface.viewers.ViewerSorter;
-import org.eclipse.jst.jsf.facesconfig.common.IFileFolderConstants;
+import org.eclipse.jst.jsf.common.ui.IFileFolderConstants;
 
 /**
  * @author sfshi

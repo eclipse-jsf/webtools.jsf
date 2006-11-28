@@ -32,14 +32,14 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.jst.j2ee,
  org.eclipse.jst.j2ee.core,
  org.eclipse.wst.common.emf,
- org.eclipse.jst.jsf.facesconfig.edit,
  org.eclipse.jem.util,
- org.eclipse.jst.jsf.facesconfig.common,
  org.eclipse.jst.jsf.facesconfig,
  org.eclipse.ui.cheatsheets,
  org.apache.xerces,
  org.eclipse.wst.common.project.facet.core,
- org.eclipse.emf.edit.ui
+ org.eclipse.emf.edit.ui,
+ org.eclipse.jst.jsf.common.ui,
+ org.eclipse.jdt.ui
 Eclipse-LazyStart: true
 Export-Package: org.eclipse.jst.jsf.facesconfig.ui,
  org.eclipse.jst.jsf.facesconfig.ui.dialog,

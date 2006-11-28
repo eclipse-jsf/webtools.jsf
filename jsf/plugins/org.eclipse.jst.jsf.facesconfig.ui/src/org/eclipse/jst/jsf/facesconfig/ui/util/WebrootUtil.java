@@ -20,6 +20,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 
+
 /**
  * This utility class is used to make a bridge between the relative path from
  * webroot and physical path in the project.
@@ -28,7 +29,7 @@ import org.eclipse.emf.ecore.EObject;
  * 
  */
 public class WebrootUtil extends
-		org.eclipse.jst.jsf.facesconfig.common.utils.WebrootUtil {
+            org.eclipse.jst.jsf.common.ui.internal.utils.WebrootUtil {
 
 	/**
 	 * get the the project path for webpath The project path is something like
