@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar-annotation 
+	xmlns="http://org.eclipse.jsf.core/grammarAnnotationSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://org.eclipse.jsf.core/grammarAnnotationSchema D:\\EclipseWTPLatest\\WTPWorkspace\\org.eclipse.jst.jsf.core\\schema\\grammar-annotations.xsd ">
+	<cm-element name="loadBundle">
+		<cm-attribute name="var">
+			<property name="contributes-value-binding">
+				<value>true</value>
+			</property>
+			<property name="value-binding-scope">
+				<value>request</value>
+			</property>
+			<property name="value-binding-symbol-factory">
+				<value>org.eclipse.jst.jsf.designtime.core.loadBundle</value>
+			</property>
+		</cm-attribute>
+	</cm-element>
+	<cm-element name="view">
+		<cm-attribute name="locale">
+			<property name="sets-locale">
+				<value>true</value>
+			</property>
+		</cm-attribute>
+	</cm-element>
+</grammar-annotation>
