@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IBoundedJavaTypeDescriptorImpl.java,v 1.2 2006/11/29 00:08:19 cbateman Exp $
+ * $Id: IBoundedJavaTypeDescriptorImpl.java,v 1.3 2006/11/29 01:26:09 cbateman Exp $
  */
 package org.eclipse.jst.jsf.context.symbol.internal.impl;
 
@@ -66,12 +66,27 @@ public class IBoundedJavaTypeDescriptorImpl extends IJavaTypeDescriptor2Impl imp
 	/**
 	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
     public ISymbol getUnboundedProperty(Object name, String typeSignature) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+        ISymbol retValue = null;
+        
+        if (isUnboundedForType(typeSignature))
+        {
+            IPropertySymbol  propSymbol = SymbolFactory.eINSTANCE.createIPropertySymbol();
+            // TODO: there is a possible problem here for non-string keyed maps
+            propSymbol.setName(name.toString());
+            propSymbol.setReadable(true);
+            IBoundedJavaTypeDescriptor typeDesc = 
+                SymbolFactory.eINSTANCE.createIBoundedJavaTypeDescriptor();
+            
+            typeDesc.setTypeSignatureDelegate(TypeConstants.TYPE_JAVAOBJECT);
+            propSymbol.setTypeDescriptor(typeDesc);
+            retValue = propSymbol;
+        }
+        
+        return retValue;
+
 	}
 
 } //IBoundedJavaTypeDescriptorImpl
