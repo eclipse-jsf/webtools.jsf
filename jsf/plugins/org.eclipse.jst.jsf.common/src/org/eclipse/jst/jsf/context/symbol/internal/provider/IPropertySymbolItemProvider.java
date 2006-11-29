@@ -56,171 +56,171 @@ public class IPropertySymbolItemProvider
         IItemLabelProvider,	
         IItemPropertySource,
         IContentProposalProvider{
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public static final String copyright = "Copyright 2006 Oracle";
 
-    /**
-     * This constructs an instance from a factory and a notifier.
-     * <!-- begin-user-doc -->
+	/**
+	 * This constructs an instance from a factory and a notifier.
+	 * <!-- begin-user-doc -->
      * @param adapterFactory 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public IPropertySymbolItemProvider(AdapterFactory adapterFactory) {
-        super(adapterFactory);
-    }
+		super(adapterFactory);
+	}
 
-    /**
-     * This returns the property descriptors for the adapted class.
-     * <!-- begin-user-doc -->
+	/**
+	 * This returns the property descriptors for the adapted class.
+	 * <!-- begin-user-doc -->
      * @param object 
      * @return the property descriptors 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public List getPropertyDescriptors(Object object) {
-        if (itemPropertyDescriptors == null) {
-            super.getPropertyDescriptors(object);
+		if (itemPropertyDescriptors == null) {
+			super.getPropertyDescriptors(object);
 
-            addNamePropertyDescriptor(object);
-            addTypeDescriptorPropertyDescriptor(object);
-            addReadablePropertyDescriptor(object);
-            addWritablePropertyDescriptor(object);
-            addIntermediatePropertyDescriptor(object);
-        }
-        return itemPropertyDescriptors;
-    }
+			addNamePropertyDescriptor(object);
+			addTypeDescriptorPropertyDescriptor(object);
+			addReadablePropertyDescriptor(object);
+			addWritablePropertyDescriptor(object);
+			addIntermediatePropertyDescriptor(object);
+		}
+		return itemPropertyDescriptors;
+	}
 
-    /**
-     * This adds a property descriptor for the Name feature.
-     * <!-- begin-user-doc -->
+	/**
+	 * This adds a property descriptor for the Name feature.
+	 * <!-- begin-user-doc -->
      * @param object 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected void addNamePropertyDescriptor(Object object) {
-        itemPropertyDescriptors.add
-            (createItemPropertyDescriptor
-                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-                 getResourceLocator(),
-                 getString("_UI_ISymbol_name_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_ISymbol_name_feature", "_UI_ISymbol_type"),
-                 SymbolPackage.Literals.ISYMBOL__NAME,
-                 true,
-                 false,
-                 false,
-                 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-                 null,
-                 null));
-    }
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ISymbol_name_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ISymbol_name_feature", "_UI_ISymbol_type"),
+				 SymbolPackage.Literals.ISYMBOL__NAME,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
 
-    /**
-     * This adds a property descriptor for the Type Descriptor feature.
-     * <!-- begin-user-doc -->
+	/**
+	 * This adds a property descriptor for the Type Descriptor feature.
+	 * <!-- begin-user-doc -->
      * @param object 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected void addTypeDescriptorPropertyDescriptor(Object object) {
-        itemPropertyDescriptors.add
-            (createItemPropertyDescriptor
-                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-                 getResourceLocator(),
-                 getString("_UI_IObjectSymbol_typeDescriptor_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_IObjectSymbol_typeDescriptor_feature", "_UI_IObjectSymbol_type"),
-                 SymbolPackage.Literals.IOBJECT_SYMBOL__TYPE_DESCRIPTOR,
-                 true,
-                 false,
-                 true,
-                 null,
-                 null,
-                 null));
-    }
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_IObjectSymbol_typeDescriptor_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_IObjectSymbol_typeDescriptor_feature", "_UI_IObjectSymbol_type"),
+				 SymbolPackage.Literals.IOBJECT_SYMBOL__TYPE_DESCRIPTOR,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
 
-    /**
-     * This adds a property descriptor for the Readable feature.
-     * <!-- begin-user-doc -->
+	/**
+	 * This adds a property descriptor for the Readable feature.
+	 * <!-- begin-user-doc -->
      * @param object 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected void addReadablePropertyDescriptor(Object object) {
-        itemPropertyDescriptors.add
-            (createItemPropertyDescriptor
-                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-                 getResourceLocator(),
-                 getString("_UI_IObjectSymbol_readable_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_IObjectSymbol_readable_feature", "_UI_IObjectSymbol_type"),
-                 SymbolPackage.Literals.IOBJECT_SYMBOL__READABLE,
-                 true,
-                 false,
-                 false,
-                 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-                 null,
-                 null));
-    }
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_IObjectSymbol_readable_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_IObjectSymbol_readable_feature", "_UI_IObjectSymbol_type"),
+				 SymbolPackage.Literals.IOBJECT_SYMBOL__READABLE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
 
-    /**
-     * This adds a property descriptor for the Writable feature.
-     * <!-- begin-user-doc -->
+	/**
+	 * This adds a property descriptor for the Writable feature.
+	 * <!-- begin-user-doc -->
      * @param object 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected void addWritablePropertyDescriptor(Object object) {
-        itemPropertyDescriptors.add
-            (createItemPropertyDescriptor
-                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-                 getResourceLocator(),
-                 getString("_UI_IObjectSymbol_writable_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_IObjectSymbol_writable_feature", "_UI_IObjectSymbol_type"),
-                 SymbolPackage.Literals.IOBJECT_SYMBOL__WRITABLE,
-                 true,
-                 false,
-                 false,
-                 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-                 null,
-                 null));
-    }
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_IObjectSymbol_writable_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_IObjectSymbol_writable_feature", "_UI_IObjectSymbol_type"),
+				 SymbolPackage.Literals.IOBJECT_SYMBOL__WRITABLE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
 
-    /**
-     * This adds a property descriptor for the Intermediate feature.
-     * <!-- begin-user-doc -->
+	/**
+	 * This adds a property descriptor for the Intermediate feature.
+	 * <!-- begin-user-doc -->
      * @param object 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected void addIntermediatePropertyDescriptor(Object object) {
-        itemPropertyDescriptors.add
-            (createItemPropertyDescriptor
-                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-                 getResourceLocator(),
-                 getString("_UI_IPropertySymbol_intermediate_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_IPropertySymbol_intermediate_feature", "_UI_IPropertySymbol_type"),
-                 SymbolPackage.Literals.IPROPERTY_SYMBOL__INTERMEDIATE,
-                 true,
-                 false,
-                 false,
-                 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-                 null,
-                 null));
-    }
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_IPropertySymbol_intermediate_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_IPropertySymbol_intermediate_feature", "_UI_IPropertySymbol_type"),
+				 SymbolPackage.Literals.IPROPERTY_SYMBOL__INTERMEDIATE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
 
-    /**
-     * This returns IPropertySymbol.gif.
-     * <!-- begin-user-doc -->
+	/**
+	 * This returns IPropertySymbol.gif.
+	 * <!-- begin-user-doc -->
      * @param object 
      * @return the image rep of object 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/IPropertySymbol"));
-    }
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/IPropertySymbol"));
+	}
 
     /**
      * This returns the label text for the adapted class.
@@ -237,51 +237,51 @@ public class IPropertySymbolItemProvider
             label;
     }
 
-    /**
-     * This handles model notifications by calling {@link #updateChildren} to update any cached
-     * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-     * <!-- begin-user-doc -->
+	/**
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc -->
      * @param notification 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void notifyChanged(Notification notification) {
-        updateChildren(notification);
+		updateChildren(notification);
 
-        switch (notification.getFeatureID(IPropertySymbol.class)) {
-            case SymbolPackage.IPROPERTY_SYMBOL__NAME:
-            case SymbolPackage.IPROPERTY_SYMBOL__READABLE:
-            case SymbolPackage.IPROPERTY_SYMBOL__WRITABLE:
-            case SymbolPackage.IPROPERTY_SYMBOL__INTERMEDIATE:
-                fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-                return;
-        }
-        super.notifyChanged(notification);
-    }
+		switch (notification.getFeatureID(IPropertySymbol.class)) {
+			case SymbolPackage.IPROPERTY_SYMBOL__NAME:
+			case SymbolPackage.IPROPERTY_SYMBOL__READABLE:
+			case SymbolPackage.IPROPERTY_SYMBOL__WRITABLE:
+			case SymbolPackage.IPROPERTY_SYMBOL__INTERMEDIATE:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+		}
+		super.notifyChanged(notification);
+	}
 
-    /**
-     * This adds to the collection of {@link org.eclipse.emf.edit.command.CommandParameter}s
-     * describing all of the children that can be created under this object.
-     * <!-- begin-user-doc -->
+	/**
+	 * This adds to the collection of {@link org.eclipse.emf.edit.command.CommandParameter}s
+	 * describing all of the children that can be created under this object.
+	 * <!-- begin-user-doc -->
      * @param newChildDescriptors 
      * @param object 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected void collectNewChildDescriptors(Collection newChildDescriptors, Object object) {
-        super.collectNewChildDescriptors(newChildDescriptors, object);
-    }
+		super.collectNewChildDescriptors(newChildDescriptors, object);
+	}
 
-    /**
-     * Return the resource locator for this item provider's resources.
-     * <!-- begin-user-doc -->
+	/**
+	 * Return the resource locator for this item provider's resources.
+	 * <!-- begin-user-doc -->
      * @return the resource locator 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public ResourceLocator getResourceLocator() {
-        return JSFCommonPlugin.INSTANCE;
-    }
+		return JSFCommonPlugin.INSTANCE;
+	}
 
     /**
      * @see org.eclipse.emf.edit.provider.ItemProviderAdapter#getChildren(java.lang.Object)

@@ -7,14 +7,14 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "http:///org/eclipse/jst/jsf/common/symbol.ecore" 
+       uri = "http:///org/eclipse/jst/jsf/context/symbol.ecore" 
        class = "org.eclipse.jst.jsf.context.symbol.SymbolPackage"
        genModel = "model/symbol.genmodel" /> 
   </extension>
   <extension
         point="org.eclipse.emf.edit.itemProviderAdapterFactories">
         <factory 
-       uri = "http:///org/eclipse/jst/jsf/common/symbol.ecore" 
+       uri = "http:///org/eclipse/jst/jsf/context/symbol.ecore" 
        class = "org.eclipse.jst.jsf.context.symbol.internal.provider.SymbolItemProviderAdapterFactory" 
        supportedTypes = 
          "org.eclipse.emf.edit.provider.IEditingDomainItemProvider

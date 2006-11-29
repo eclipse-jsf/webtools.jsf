@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IBoundedMapTypeDescriptorImpl.java,v 1.1 2006/11/28 20:20:51 cbateman Exp $
+ * $Id: IBoundedMapTypeDescriptorImpl.java,v 1.2 2006/11/29 00:08:19 cbateman Exp $
  */
 package org.eclipse.jst.jsf.context.symbol.internal.impl;
 
@@ -28,30 +28,30 @@ import org.eclipse.jst.jsf.context.symbol.internal.provisional.ISymbol;
  * @generated
  */
 public class IBoundedMapTypeDescriptorImpl extends IMapTypeDescriptorImpl implements IBoundedMapTypeDescriptor {
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public static final String copyright = "Copyright 2006 Oracle";
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected IBoundedMapTypeDescriptorImpl() {
-        super();
-    }
+		super();
+	}
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected EClass eStaticClass() {
-        return SymbolPackage.Literals.IBOUNDED_MAP_TYPE_DESCRIPTOR;
-    }
+		return SymbolPackage.Literals.IBOUNDED_MAP_TYPE_DESCRIPTOR;
+	}
 
     /**
      * <!-- begin-user-doc -->

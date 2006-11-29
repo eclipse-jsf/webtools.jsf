@@ -6,12 +6,12 @@ Bundle-Version: 0.5.0.qualifier
 Bundle-Activator: org.eclipse.jst.jsf.common.JSFCommonPlugin$Implementation
 Bundle-Localization: plugin
 Export-Package: org.eclipse.jst.jsf.common.internal.provisional.util,
- org.eclipse.jst.jsf.common.internal.types;x-friends:="org.eclipse.jst.jsf.validation.el",
+ org.eclipse.jst.jsf.common.internal.types;x-friends:="org.eclipse.jst.jsf.core",
  org.eclipse.jst.jsf.contentmodel.annotation.internal;x-friends:="org.eclipse.jst.jsf.metadata.tests",
  org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional,
  org.eclipse.jst.jsf.context.internal.provisional,
  org.eclipse.jst.jsf.context.resolver.internal.provisional,
- org.eclipse.jst.jsf.context.resolver.structureddocument.internal;x-friends:="org.eclipse.jst.jsf.contentassist.el,org.eclipse.jst.jsf.contentassist.tests",
+ org.eclipse.jst.jsf.context.resolver.structureddocument.internal;x-friends:="org.eclipse.jst.jsf.core,org.eclipse.jst.jsf.contentassist.tests",
  org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional,
  org.eclipse.jst.jsf.context.structureddocument.internal.provisional,
  org.eclipse.jst.jsf.context.symbol,
@@ -32,7 +32,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.jdt.core,
  org.eclipse.emf.common,
  org.eclipse.jface,
-  org.eclipse.emf.ecore;visibility:=reexport,
+ org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.emf.edit,
  org.eclipse.emf.edit.ui
 Eclipse-LazyStart: true

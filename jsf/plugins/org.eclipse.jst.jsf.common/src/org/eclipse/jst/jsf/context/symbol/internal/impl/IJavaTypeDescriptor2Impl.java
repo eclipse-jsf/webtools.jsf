@@ -56,74 +56,74 @@ import org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaTypeDescript
  */
 public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJavaTypeDescriptor2 {
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public static final String copyright = "Copyright 2006 Oracle";
 
-    /**
-     * The default value of the '{@link #getType() <em>Type</em>}' attribute.
-     * <!-- begin-user-doc -->
+	/**
+	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getType()
-     * @generated
-     * @ordered
-     */
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
 	protected static final IType TYPE_EDEFAULT = null;
 
-    /**
-     * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
-     * <!-- begin-user-doc -->
+	/**
+	 * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getType()
-     * @generated
-     * @ordered
-     */
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
 	protected IType type = TYPE_EDEFAULT;
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected IJavaTypeDescriptor2Impl() {
-        super();
-    }
+		super();
+	}
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @return the static class 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected EClass eStaticClass() {
-        return SymbolPackage.Literals.IJAVA_TYPE_DESCRIPTOR2;
-    }
+		return SymbolPackage.Literals.IJAVA_TYPE_DESCRIPTOR2;
+	}
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @return the JDT type descriptor 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public IType getType() {
-        return type;
-    }
+		return type;
+	}
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @param newType 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public void setType(IType newType) {
-        IType oldType = type;
-        type = newType;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__TYPE, oldType, type));
-    }
+		IType oldType = type;
+		type = newType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__TYPE, oldType, type));
+	}
 
 	public EList getInterfaceTypeSignatures() 
     {
@@ -326,105 +326,105 @@ public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJa
 		return methodSymbols;
 	}
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @param featureID 
      * @param resolve 
      * @param coreType 
      * @return the value of featureID 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-        switch (featureID) {
-            case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__TYPE:
-                return getType();
-            case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__BEAN_PROPERTIES:
-                return getBeanProperties();
-            case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__BEAN_METHODS:
-                return getBeanMethods();
-        }
-        return super.eGet(featureID, resolve, coreType);
-    }
+		switch (featureID) {
+			case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__TYPE:
+				return getType();
+			case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__BEAN_PROPERTIES:
+				return getBeanProperties();
+			case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__BEAN_METHODS:
+				return getBeanMethods();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @param featureID 
      * @param newValue 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public void eSet(int featureID, Object newValue) {
-        switch (featureID) {
-            case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__TYPE:
-                setType((IType)newValue);
-                return;
-            case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__BEAN_PROPERTIES:
-                getBeanProperties().clear();
-                getBeanProperties().addAll((Collection)newValue);
-                return;
-            case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__BEAN_METHODS:
-                getBeanMethods().clear();
-                getBeanMethods().addAll((Collection)newValue);
-                return;
-        }
-        super.eSet(featureID, newValue);
-    }
+		switch (featureID) {
+			case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__TYPE:
+				setType((IType)newValue);
+				return;
+			case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__BEAN_PROPERTIES:
+				getBeanProperties().clear();
+				getBeanProperties().addAll((Collection)newValue);
+				return;
+			case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__BEAN_METHODS:
+				getBeanMethods().clear();
+				getBeanMethods().addAll((Collection)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @param featureID 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public void eUnset(int featureID) {
-        switch (featureID) {
-            case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__TYPE:
-                setType(TYPE_EDEFAULT);
-                return;
-            case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__BEAN_PROPERTIES:
-                getBeanProperties().clear();
-                return;
-            case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__BEAN_METHODS:
-                getBeanMethods().clear();
-                return;
-        }
-        super.eUnset(featureID);
-    }
+		switch (featureID) {
+			case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__TYPE:
+				setType(TYPE_EDEFAULT);
+				return;
+			case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__BEAN_PROPERTIES:
+				getBeanProperties().clear();
+				return;
+			case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__BEAN_METHODS:
+				getBeanMethods().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @param featureID 
      * @return true if the feature is set 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public boolean eIsSet(int featureID) {
-        switch (featureID) {
-            case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__TYPE:
-                return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
-            case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__BEAN_PROPERTIES:
-                return !getBeanProperties().isEmpty();
-            case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__BEAN_METHODS:
-                return !getBeanMethods().isEmpty();
-        }
-        return super.eIsSet(featureID);
-    }
+		switch (featureID) {
+			case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__TYPE:
+				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
+			case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__BEAN_PROPERTIES:
+				return !getBeanProperties().isEmpty();
+			case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__BEAN_METHODS:
+				return !getBeanMethods().isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @return the default string rep 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public String toString() {
-        if (eIsProxy()) return super.toString();
+		if (eIsProxy()) return super.toString();
 
-        StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (type: ");
-        result.append(type);
-        result.append(')');
-        return result.toString();
-    }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (type: ");
+		result.append(type);
+		result.append(')');
+		return result.toString();
+	}
 
 } //IJavaTypeDescriptor2Impl

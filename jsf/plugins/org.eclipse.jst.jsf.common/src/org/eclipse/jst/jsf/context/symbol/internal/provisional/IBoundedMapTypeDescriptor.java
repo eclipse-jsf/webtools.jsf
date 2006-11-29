@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IBoundedMapTypeDescriptor.java,v 1.1 2006/11/28 20:20:52 cbateman Exp $
+ * $Id: IBoundedMapTypeDescriptor.java,v 1.2 2006/11/29 00:08:20 cbateman Exp $
  */
 package org.eclipse.jst.jsf.context.symbol.internal.provisional;
 
@@ -21,11 +21,11 @@ package org.eclipse.jst.jsf.context.symbol.internal.provisional;
  * @generated
  */
 public interface IBoundedMapTypeDescriptor extends IMapTypeDescriptor, IBoundedTypeDescriptor {
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     String copyright = "Copyright 2006 Oracle";
 
 } // IBoundedMapTypeDescriptor

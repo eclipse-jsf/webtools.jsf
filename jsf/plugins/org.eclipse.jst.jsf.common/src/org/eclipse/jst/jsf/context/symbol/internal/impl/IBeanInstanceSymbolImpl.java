@@ -38,11 +38,11 @@ import org.eclipse.jst.jsf.context.symbol.internal.provisional.ITypeDescriptor;
  * @generated
  */
 public class IBeanInstanceSymbolImpl extends IInstanceSymbolImpl implements IBeanInstanceSymbol {
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public static final String copyright = "Copyright 2006 Oracle";
 
 	/**
@@ -50,24 +50,24 @@ public class IBeanInstanceSymbolImpl extends IInstanceSymbolImpl implements IBea
 	 */
 	protected String			  detailedDescription = null;
 	
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected IBeanInstanceSymbolImpl() {
-        super();
-    }
+		super();
+	}
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @return the EClass
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected EClass eStaticClass() {
-        return SymbolPackage.Literals.IBEAN_INSTANCE_SYMBOL;
-    }
+		return SymbolPackage.Literals.IBEAN_INSTANCE_SYMBOL;
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -108,41 +108,41 @@ public class IBeanInstanceSymbolImpl extends IInstanceSymbolImpl implements IBea
         setTypeDescriptor(newTypeDescriptor);
     }
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @param featureID 
      * @param resolve 
      * @param coreType 
      * @return the object related to featureID
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-        switch (featureID) {
-            case SymbolPackage.IBEAN_INSTANCE_SYMBOL__PROPERTIES:
-                return getProperties();
-            case SymbolPackage.IBEAN_INSTANCE_SYMBOL__METHODS:
-                return getMethods();
-        }
-        return super.eGet(featureID, resolve, coreType);
-    }
+		switch (featureID) {
+			case SymbolPackage.IBEAN_INSTANCE_SYMBOL__PROPERTIES:
+				return getProperties();
+			case SymbolPackage.IBEAN_INSTANCE_SYMBOL__METHODS:
+				return getMethods();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @param featureID 
      * @return whether the corresponding feature is set 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public boolean eIsSet(int featureID) {
-        switch (featureID) {
-            case SymbolPackage.IBEAN_INSTANCE_SYMBOL__PROPERTIES:
-                return !getProperties().isEmpty();
-            case SymbolPackage.IBEAN_INSTANCE_SYMBOL__METHODS:
-                return !getMethods().isEmpty();
-        }
-        return super.eIsSet(featureID);
-    }
+		switch (featureID) {
+			case SymbolPackage.IBEAN_INSTANCE_SYMBOL__PROPERTIES:
+				return !getProperties().isEmpty();
+			case SymbolPackage.IBEAN_INSTANCE_SYMBOL__METHODS:
+				return !getMethods().isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
 
 	public String getDetailedDescription() 
 	{

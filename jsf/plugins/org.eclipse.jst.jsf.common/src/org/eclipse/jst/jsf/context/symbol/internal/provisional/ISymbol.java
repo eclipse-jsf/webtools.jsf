@@ -27,11 +27,11 @@ public interface ISymbol extends EObject {
      */
     final ISymbol[]         EMPTY_SYMBOL_ARRAY = new ISymbol[0];
     
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     String copyright = "Copyright 2006 Oracle";
 
 	/**
@@ -39,14 +39,14 @@ public interface ISymbol extends EObject {
 	 * @model
 	 */
 	String getName();
-    /**
-     * Sets the value of the '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.ISymbol#getName <em>Name</em>}' attribute.
-     * <!-- begin-user-doc -->
+	/**
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.ISymbol#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Name</em>' attribute.
-     * @see #getName()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
+	 * @generated
+	 */
 	void setName(String value);
 
 }

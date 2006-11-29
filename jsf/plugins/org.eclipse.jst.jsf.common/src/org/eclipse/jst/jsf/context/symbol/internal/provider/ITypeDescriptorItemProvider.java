@@ -48,256 +48,256 @@ public class ITypeDescriptorItemProvider
 		ITreeItemContentProvider,	
 		IItemLabelProvider,	
 		IItemPropertySource {
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public static final String copyright = "Copyright 2006 Oracle";
 
-    /**
-     * This constructs an instance from a factory and a notifier.
-     * <!-- begin-user-doc -->
+	/**
+	 * This constructs an instance from a factory and a notifier.
+	 * <!-- begin-user-doc -->
      * @param adapterFactory 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public ITypeDescriptorItemProvider(AdapterFactory adapterFactory) {
-        super(adapterFactory);
-    }
+		super(adapterFactory);
+	}
 
-    /**
-     * This returns the property descriptors for the adapted class.
-     * <!-- begin-user-doc -->
+	/**
+	 * This returns the property descriptors for the adapted class.
+	 * <!-- begin-user-doc -->
      * @param object 
      * @return the list of property descriptors
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public List getPropertyDescriptors(Object object) {
-        if (itemPropertyDescriptors == null) {
-            super.getPropertyDescriptors(object);
+		if (itemPropertyDescriptors == null) {
+			super.getPropertyDescriptors(object);
 
-            addPropertiesPropertyDescriptor(object);
-            addTypeSignaturePropertyDescriptor(object);
-            addSuperTypeSignaturesPropertyDescriptor(object);
-            addInterfaceTypeSignaturesPropertyDescriptor(object);
-            addTypeSignatureDelegatePropertyDescriptor(object);
-            addMethodsPropertyDescriptor(object);
-        }
-        return itemPropertyDescriptors;
-    }
+			addPropertiesPropertyDescriptor(object);
+			addTypeSignaturePropertyDescriptor(object);
+			addSuperTypeSignaturesPropertyDescriptor(object);
+			addInterfaceTypeSignaturesPropertyDescriptor(object);
+			addTypeSignatureDelegatePropertyDescriptor(object);
+			addMethodsPropertyDescriptor(object);
+		}
+		return itemPropertyDescriptors;
+	}
 
-    /**
-     * This adds a property descriptor for the Properties feature.
-     * <!-- begin-user-doc -->
+	/**
+	 * This adds a property descriptor for the Properties feature.
+	 * <!-- begin-user-doc -->
      * @param object 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected void addPropertiesPropertyDescriptor(Object object) {
-        itemPropertyDescriptors.add
-            (createItemPropertyDescriptor
-                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-                 getResourceLocator(),
-                 getString("_UI_ITypeDescriptor_properties_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_ITypeDescriptor_properties_feature", "_UI_ITypeDescriptor_type"),
-                 SymbolPackage.Literals.ITYPE_DESCRIPTOR__PROPERTIES,
-                 true,
-                 false,
-                 true,
-                 null,
-                 null,
-                 null));
-    }
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ITypeDescriptor_properties_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ITypeDescriptor_properties_feature", "_UI_ITypeDescriptor_type"),
+				 SymbolPackage.Literals.ITYPE_DESCRIPTOR__PROPERTIES,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
 
-    /**
-     * This adds a property descriptor for the Type Signature feature.
-     * <!-- begin-user-doc -->
+	/**
+	 * This adds a property descriptor for the Type Signature feature.
+	 * <!-- begin-user-doc -->
      * @param object 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected void addTypeSignaturePropertyDescriptor(Object object) {
-        itemPropertyDescriptors.add
-            (createItemPropertyDescriptor
-                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-                 getResourceLocator(),
-                 getString("_UI_ITypeDescriptor_typeSignature_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_ITypeDescriptor_typeSignature_feature", "_UI_ITypeDescriptor_type"),
-                 SymbolPackage.Literals.ITYPE_DESCRIPTOR__TYPE_SIGNATURE,
-                 false,
-                 false,
-                 false,
-                 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-                 null,
-                 null));
-    }
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ITypeDescriptor_typeSignature_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ITypeDescriptor_typeSignature_feature", "_UI_ITypeDescriptor_type"),
+				 SymbolPackage.Literals.ITYPE_DESCRIPTOR__TYPE_SIGNATURE,
+				 false,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
 
-    /**
-     * This adds a property descriptor for the Super Type Signatures feature.
-     * <!-- begin-user-doc -->
+	/**
+	 * This adds a property descriptor for the Super Type Signatures feature.
+	 * <!-- begin-user-doc -->
      * @param object 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected void addSuperTypeSignaturesPropertyDescriptor(Object object) {
-        itemPropertyDescriptors.add
-            (createItemPropertyDescriptor
-                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-                 getResourceLocator(),
-                 getString("_UI_ITypeDescriptor_superTypeSignatures_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_ITypeDescriptor_superTypeSignatures_feature", "_UI_ITypeDescriptor_type"),
-                 SymbolPackage.Literals.ITYPE_DESCRIPTOR__SUPER_TYPE_SIGNATURES,
-                 true,
-                 false,
-                 false,
-                 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-                 null,
-                 null));
-    }
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ITypeDescriptor_superTypeSignatures_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ITypeDescriptor_superTypeSignatures_feature", "_UI_ITypeDescriptor_type"),
+				 SymbolPackage.Literals.ITYPE_DESCRIPTOR__SUPER_TYPE_SIGNATURES,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
 
-    /**
-     * This adds a property descriptor for the Interface Type Signatures feature.
-     * <!-- begin-user-doc -->
+	/**
+	 * This adds a property descriptor for the Interface Type Signatures feature.
+	 * <!-- begin-user-doc -->
      * @param object 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected void addInterfaceTypeSignaturesPropertyDescriptor(Object object) {
-        itemPropertyDescriptors.add
-            (createItemPropertyDescriptor
-                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-                 getResourceLocator(),
-                 getString("_UI_ITypeDescriptor_interfaceTypeSignatures_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_ITypeDescriptor_interfaceTypeSignatures_feature", "_UI_ITypeDescriptor_type"),
-                 SymbolPackage.Literals.ITYPE_DESCRIPTOR__INTERFACE_TYPE_SIGNATURES,
-                 true,
-                 false,
-                 false,
-                 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-                 null,
-                 null));
-    }
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ITypeDescriptor_interfaceTypeSignatures_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ITypeDescriptor_interfaceTypeSignatures_feature", "_UI_ITypeDescriptor_type"),
+				 SymbolPackage.Literals.ITYPE_DESCRIPTOR__INTERFACE_TYPE_SIGNATURES,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
 
-    /**
-     * This adds a property descriptor for the Type Signature Delegate feature.
-     * <!-- begin-user-doc -->
+	/**
+	 * This adds a property descriptor for the Type Signature Delegate feature.
+	 * <!-- begin-user-doc -->
      * @param object 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected void addTypeSignatureDelegatePropertyDescriptor(Object object) {
-        itemPropertyDescriptors.add
-            (createItemPropertyDescriptor
-                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-                 getResourceLocator(),
-                 getString("_UI_ITypeDescriptor_typeSignatureDelegate_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_ITypeDescriptor_typeSignatureDelegate_feature", "_UI_ITypeDescriptor_type"),
-                 SymbolPackage.Literals.ITYPE_DESCRIPTOR__TYPE_SIGNATURE_DELEGATE,
-                 true,
-                 false,
-                 false,
-                 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-                 null,
-                 null));
-    }
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ITypeDescriptor_typeSignatureDelegate_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ITypeDescriptor_typeSignatureDelegate_feature", "_UI_ITypeDescriptor_type"),
+				 SymbolPackage.Literals.ITYPE_DESCRIPTOR__TYPE_SIGNATURE_DELEGATE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
 
-    /**
-     * This adds a property descriptor for the Methods feature.
-     * <!-- begin-user-doc -->
+	/**
+	 * This adds a property descriptor for the Methods feature.
+	 * <!-- begin-user-doc -->
      * @param object 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected void addMethodsPropertyDescriptor(Object object) {
-        itemPropertyDescriptors.add
-            (createItemPropertyDescriptor
-                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-                 getResourceLocator(),
-                 getString("_UI_ITypeDescriptor_methods_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_ITypeDescriptor_methods_feature", "_UI_ITypeDescriptor_type"),
-                 SymbolPackage.Literals.ITYPE_DESCRIPTOR__METHODS,
-                 true,
-                 false,
-                 true,
-                 null,
-                 null,
-                 null));
-    }
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ITypeDescriptor_methods_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ITypeDescriptor_methods_feature", "_UI_ITypeDescriptor_type"),
+				 SymbolPackage.Literals.ITYPE_DESCRIPTOR__METHODS,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
 
-    /**
-     * This returns ITypeDescriptor.gif.
-     * <!-- begin-user-doc -->
+	/**
+	 * This returns ITypeDescriptor.gif.
+	 * <!-- begin-user-doc -->
      * @param object 
      * @return the image associated with object or null if not found 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/ITypeDescriptor"));
-    }
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/ITypeDescriptor"));
+	}
 
-    /**
-     * This returns the label text for the adapted class.
-     * <!-- begin-user-doc -->
+	/**
+	 * This returns the label text for the adapted class.
+	 * <!-- begin-user-doc -->
      * @param object 
      * @return the text label associated with object or null if not found 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public String getText(Object object) {
-        String label = ((ITypeDescriptor)object).getTypeSignature();
-        return label == null || label.length() == 0 ?
-            getString("_UI_ITypeDescriptor_type") :
-            getString("_UI_ITypeDescriptor_type") + " " + label;
-    }
+		String label = ((ITypeDescriptor)object).getTypeSignature();
+		return label == null || label.length() == 0 ?
+			getString("_UI_ITypeDescriptor_type") :
+			getString("_UI_ITypeDescriptor_type") + " " + label;
+	}
 
-    /**
-     * This handles model notifications by calling {@link #updateChildren} to update any cached
-     * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-     * <!-- begin-user-doc -->
+	/**
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc -->
      * @param notification 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public void notifyChanged(Notification notification) {
-        updateChildren(notification);
+		updateChildren(notification);
 
-        switch (notification.getFeatureID(ITypeDescriptor.class)) {
-            case SymbolPackage.ITYPE_DESCRIPTOR__TYPE_SIGNATURE:
-            case SymbolPackage.ITYPE_DESCRIPTOR__SUPER_TYPE_SIGNATURES:
-            case SymbolPackage.ITYPE_DESCRIPTOR__INTERFACE_TYPE_SIGNATURES:
-            case SymbolPackage.ITYPE_DESCRIPTOR__TYPE_SIGNATURE_DELEGATE:
-                fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-                return;
-        }
-        super.notifyChanged(notification);
-    }
+		switch (notification.getFeatureID(ITypeDescriptor.class)) {
+			case SymbolPackage.ITYPE_DESCRIPTOR__TYPE_SIGNATURE:
+			case SymbolPackage.ITYPE_DESCRIPTOR__SUPER_TYPE_SIGNATURES:
+			case SymbolPackage.ITYPE_DESCRIPTOR__INTERFACE_TYPE_SIGNATURES:
+			case SymbolPackage.ITYPE_DESCRIPTOR__TYPE_SIGNATURE_DELEGATE:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+		}
+		super.notifyChanged(notification);
+	}
 
-    /**
-     * This adds to the collection of {@link org.eclipse.emf.edit.command.CommandParameter}s
-     * describing all of the children that can be created under this object.
-     * <!-- begin-user-doc -->
+	/**
+	 * This adds to the collection of {@link org.eclipse.emf.edit.command.CommandParameter}s
+	 * describing all of the children that can be created under this object.
+	 * <!-- begin-user-doc -->
      * @param newChildDescriptors 
      * @param object 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected void collectNewChildDescriptors(Collection newChildDescriptors, Object object) {
-        super.collectNewChildDescriptors(newChildDescriptors, object);
-    }
+		super.collectNewChildDescriptors(newChildDescriptors, object);
+	}
 
-    /**
-     * Return the resource locator for this item provider's resources.
-     * <!-- begin-user-doc -->
+	/**
+	 * Return the resource locator for this item provider's resources.
+	 * <!-- begin-user-doc -->
      * @return the resource locator 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public ResourceLocator getResourceLocator() {
-        return JSFCommonPlugin.INSTANCE;
-    }
+		return JSFCommonPlugin.INSTANCE;
+	}
 
 }
 

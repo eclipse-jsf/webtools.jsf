@@ -42,377 +42,377 @@ import org.eclipse.jst.jsf.context.symbol.internal.provisional.ITypeDescriptor;
  * @generated
  */
 public class SymbolAdapterFactory extends AdapterFactoryImpl {
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public static final String copyright = "Copyright 2006 Oracle";
 
-    /**
-     * The cached model package.
-     * <!-- begin-user-doc -->
+	/**
+	 * The cached model package.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected static SymbolPackage modelPackage;
 
-    /**
-     * Creates an instance of the adapter factory.
-     * <!-- begin-user-doc -->
+	/**
+	 * Creates an instance of the adapter factory.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public SymbolAdapterFactory() {
-        if (modelPackage == null) {
-            modelPackage = SymbolPackage.eINSTANCE;
-        }
-    }
+		if (modelPackage == null) {
+			modelPackage = SymbolPackage.eINSTANCE;
+		}
+	}
 
-    /**
-     * Returns whether this factory is applicable for the type of the object.
-     * <!-- begin-user-doc -->
+	/**
+	 * Returns whether this factory is applicable for the type of the object.
+	 * <!-- begin-user-doc -->
 	 * This implementation returns <code>true</code> if the object is either the model's package or is an instance object of the model.
      * @param object 
 	 * <!-- end-user-doc -->
-     * @return whether this factory is applicable for the type of the object.
-     * @generated
-     */
+	 * @return whether this factory is applicable for the type of the object.
+	 * @generated
+	 */
 	public boolean isFactoryForType(Object object) {
-        if (object == modelPackage) {
-            return true;
-        }
-        if (object instanceof EObject) {
-            return ((EObject)object).eClass().getEPackage() == modelPackage;
-        }
-        return false;
-    }
+		if (object == modelPackage) {
+			return true;
+		}
+		if (object instanceof EObject) {
+			return ((EObject)object).eClass().getEPackage() == modelPackage;
+		}
+		return false;
+	}
 
-    /**
-     * The switch the delegates to the <code>createXXX</code> methods.
-     * <!-- begin-user-doc -->
+	/**
+	 * The switch the delegates to the <code>createXXX</code> methods.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected SymbolSwitch modelSwitch =
-        new SymbolSwitch() {
-            public Object caseIBeanInstanceSymbol(IBeanInstanceSymbol object) {
-                return createIBeanInstanceSymbolAdapter();
-            }
-            public Object caseIBeanPropertySymbol(IBeanPropertySymbol object) {
-                return createIBeanPropertySymbolAdapter();
-            }
-            public Object caseIInstanceSymbol(IInstanceSymbol object) {
-                return createIInstanceSymbolAdapter();
-            }
-            public Object caseIJavaSymbol(IJavaSymbol object) {
-                return createIJavaSymbolAdapter();
-            }
-            public Object caseISymbol(ISymbol object) {
-                return createISymbolAdapter();
-            }
-            public Object caseITypeDescriptor(ITypeDescriptor object) {
-                return createITypeDescriptorAdapter();
-            }
-            public Object caseIDescribedInDetail(IDescribedInDetail object) {
-                return createIDescribedInDetailAdapter();
-            }
-            public Object caseIJavaTypeDescriptor2(IJavaTypeDescriptor2 object) {
-                return createIJavaTypeDescriptor2Adapter();
-            }
-            public Object caseIBeanMethodSymbol(IBeanMethodSymbol object) {
-                return createIBeanMethodSymbolAdapter();
-            }
-            public Object caseIComponentSymbol(IComponentSymbol object) {
-                return createIComponentSymbolAdapter();
-            }
-            public Object caseIPropertySymbol(IPropertySymbol object) {
-                return createIPropertySymbolAdapter();
-            }
-            public Object caseIMapTypeDescriptor(IMapTypeDescriptor object) {
-                return createIMapTypeDescriptorAdapter();
-            }
-            public Object caseIMethodSymbol(IMethodSymbol object) {
-                return createIMethodSymbolAdapter();
-            }
-            public Object caseIObjectSymbol(IObjectSymbol object) {
-                return createIObjectSymbolAdapter();
-            }
-            public Object caseIBoundedTypeDescriptor(IBoundedTypeDescriptor object) {
-                return createIBoundedTypeDescriptorAdapter();
-            }
-            public Object caseIBoundedMapTypeDescriptor(IBoundedMapTypeDescriptor object) {
-                return createIBoundedMapTypeDescriptorAdapter();
-            }
-            public Object caseIBoundedJavaTypeDescriptor(IBoundedJavaTypeDescriptor object) {
-                return createIBoundedJavaTypeDescriptorAdapter();
-            }
-            public Object defaultCase(EObject object) {
-                return createEObjectAdapter();
-            }
-        };
+		new SymbolSwitch() {
+			public Object caseIBeanInstanceSymbol(IBeanInstanceSymbol object) {
+				return createIBeanInstanceSymbolAdapter();
+			}
+			public Object caseIBeanPropertySymbol(IBeanPropertySymbol object) {
+				return createIBeanPropertySymbolAdapter();
+			}
+			public Object caseIInstanceSymbol(IInstanceSymbol object) {
+				return createIInstanceSymbolAdapter();
+			}
+			public Object caseIJavaSymbol(IJavaSymbol object) {
+				return createIJavaSymbolAdapter();
+			}
+			public Object caseISymbol(ISymbol object) {
+				return createISymbolAdapter();
+			}
+			public Object caseITypeDescriptor(ITypeDescriptor object) {
+				return createITypeDescriptorAdapter();
+			}
+			public Object caseIDescribedInDetail(IDescribedInDetail object) {
+				return createIDescribedInDetailAdapter();
+			}
+			public Object caseIJavaTypeDescriptor2(IJavaTypeDescriptor2 object) {
+				return createIJavaTypeDescriptor2Adapter();
+			}
+			public Object caseIBeanMethodSymbol(IBeanMethodSymbol object) {
+				return createIBeanMethodSymbolAdapter();
+			}
+			public Object caseIComponentSymbol(IComponentSymbol object) {
+				return createIComponentSymbolAdapter();
+			}
+			public Object caseIPropertySymbol(IPropertySymbol object) {
+				return createIPropertySymbolAdapter();
+			}
+			public Object caseIMapTypeDescriptor(IMapTypeDescriptor object) {
+				return createIMapTypeDescriptorAdapter();
+			}
+			public Object caseIMethodSymbol(IMethodSymbol object) {
+				return createIMethodSymbolAdapter();
+			}
+			public Object caseIObjectSymbol(IObjectSymbol object) {
+				return createIObjectSymbolAdapter();
+			}
+			public Object caseIBoundedTypeDescriptor(IBoundedTypeDescriptor object) {
+				return createIBoundedTypeDescriptorAdapter();
+			}
+			public Object caseIBoundedMapTypeDescriptor(IBoundedMapTypeDescriptor object) {
+				return createIBoundedMapTypeDescriptorAdapter();
+			}
+			public Object caseIBoundedJavaTypeDescriptor(IBoundedJavaTypeDescriptor object) {
+				return createIBoundedJavaTypeDescriptorAdapter();
+			}
+			public Object defaultCase(EObject object) {
+				return createEObjectAdapter();
+			}
+		};
 
-    /**
-     * Creates an adapter for the <code>target</code>.
-     * <!-- begin-user-doc -->
+	/**
+	 * Creates an adapter for the <code>target</code>.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @param target the object to adapt.
-     * @return the adapter for the <code>target</code>.
-     * @generated
-     */
+	 * @param target the object to adapt.
+	 * @return the adapter for the <code>target</code>.
+	 * @generated
+	 */
 	public Adapter createAdapter(Notifier target) {
-        return (Adapter)modelSwitch.doSwitch((EObject)target);
-    }
+		return (Adapter)modelSwitch.doSwitch((EObject)target);
+	}
 
 
-    /**
-     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanInstanceSymbol <em>IBean Instance Symbol</em>}'.
-     * <!-- begin-user-doc -->
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanInstanceSymbol <em>IBean Instance Symbol</em>}'.
+	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-     * @return the new adapter.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanInstanceSymbol
-     * @generated
-     */
+	 * @return the new adapter.
+	 * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanInstanceSymbol
+	 * @generated
+	 */
 	public Adapter createIBeanInstanceSymbolAdapter() {
-        return null;
-    }
+		return null;
+	}
 
-    /**
-     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanPropertySymbol <em>IBean Property Symbol</em>}'.
-     * <!-- begin-user-doc -->
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanPropertySymbol <em>IBean Property Symbol</em>}'.
+	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-     * @return the new adapter.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanPropertySymbol
-     * @generated
-     */
+	 * @return the new adapter.
+	 * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanPropertySymbol
+	 * @generated
+	 */
 	public Adapter createIBeanPropertySymbolAdapter() {
-        return null;
-    }
+		return null;
+	}
 
-    /**
-     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IInstanceSymbol <em>IInstance Symbol</em>}'.
-     * <!-- begin-user-doc -->
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IInstanceSymbol <em>IInstance Symbol</em>}'.
+	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-     * @return the new adapter.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IInstanceSymbol
-     * @generated
-     */
+	 * @return the new adapter.
+	 * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IInstanceSymbol
+	 * @generated
+	 */
 	public Adapter createIInstanceSymbolAdapter() {
-        return null;
-    }
+		return null;
+	}
 
-    /**
-     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaSymbol <em>IJava Symbol</em>}'.
-     * <!-- begin-user-doc -->
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaSymbol <em>IJava Symbol</em>}'.
+	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-     * @return the new adapter.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaSymbol
-     * @generated
-     */
+	 * @return the new adapter.
+	 * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaSymbol
+	 * @generated
+	 */
 	public Adapter createIJavaSymbolAdapter() {
-        return null;
-    }
+		return null;
+	}
 
-    /**
-     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.ISymbol <em>ISymbol</em>}'.
-     * <!-- begin-user-doc -->
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.ISymbol <em>ISymbol</em>}'.
+	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-     * @return the new adapter.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.ISymbol
-     * @generated
-     */
+	 * @return the new adapter.
+	 * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.ISymbol
+	 * @generated
+	 */
 	public Adapter createISymbolAdapter() {
-        return null;
-    }
+		return null;
+	}
 
-    /**
-     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.ITypeDescriptor <em>IType Descriptor</em>}'.
-     * <!-- begin-user-doc -->
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.ITypeDescriptor <em>IType Descriptor</em>}'.
+	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-     * @return the new adapter.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.ITypeDescriptor
-     * @generated
-     */
+	 * @return the new adapter.
+	 * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.ITypeDescriptor
+	 * @generated
+	 */
 	public Adapter createITypeDescriptorAdapter() {
-        return null;
-    }
+		return null;
+	}
 
-    /**
-     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IDescribedInDetail <em>IDescribed In Detail</em>}'.
-     * <!-- begin-user-doc -->
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IDescribedInDetail <em>IDescribed In Detail</em>}'.
+	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-     * @return the new adapter.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IDescribedInDetail
-     * @generated
-     */
+	 * @return the new adapter.
+	 * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IDescribedInDetail
+	 * @generated
+	 */
 	public Adapter createIDescribedInDetailAdapter() {
-        return null;
-    }
+		return null;
+	}
 
-    /**
-     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaTypeDescriptor2 <em>IJava Type Descriptor2</em>}'.
-     * <!-- begin-user-doc -->
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaTypeDescriptor2 <em>IJava Type Descriptor2</em>}'.
+	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-     * @return the new adapter.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaTypeDescriptor2
-     * @generated
-     */
+	 * @return the new adapter.
+	 * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaTypeDescriptor2
+	 * @generated
+	 */
 	public Adapter createIJavaTypeDescriptor2Adapter() {
-        return null;
-    }
+		return null;
+	}
 
-    /**
-     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanMethodSymbol <em>IBean Method Symbol</em>}'.
-     * <!-- begin-user-doc -->
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanMethodSymbol <em>IBean Method Symbol</em>}'.
+	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-     * @return the new adapter.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanMethodSymbol
-     * @generated
-     */
+	 * @return the new adapter.
+	 * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanMethodSymbol
+	 * @generated
+	 */
 	public Adapter createIBeanMethodSymbolAdapter() {
-        return null;
-    }
+		return null;
+	}
 
-    /**
-     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IComponentSymbol <em>IComponent Symbol</em>}'.
-     * <!-- begin-user-doc -->
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IComponentSymbol <em>IComponent Symbol</em>}'.
+	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-     * @return the new adapter.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IComponentSymbol
-     * @generated
-     */
+	 * @return the new adapter.
+	 * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IComponentSymbol
+	 * @generated
+	 */
 	public Adapter createIComponentSymbolAdapter() {
-        return null;
-    }
+		return null;
+	}
 
-    /**
-     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IPropertySymbol <em>IProperty Symbol</em>}'.
-     * <!-- begin-user-doc -->
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IPropertySymbol <em>IProperty Symbol</em>}'.
+	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-     * @return the new adapter.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IPropertySymbol
-     * @generated
-     */
+	 * @return the new adapter.
+	 * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IPropertySymbol
+	 * @generated
+	 */
 	public Adapter createIPropertySymbolAdapter() {
-        return null;
-    }
+		return null;
+	}
 
-    /**
-     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IMapTypeDescriptor <em>IMap Type Descriptor</em>}'.
-     * <!-- begin-user-doc -->
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IMapTypeDescriptor <em>IMap Type Descriptor</em>}'.
+	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-     * @return the new adapter.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IMapTypeDescriptor
-     * @generated
-     */
+	 * @return the new adapter.
+	 * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IMapTypeDescriptor
+	 * @generated
+	 */
 	public Adapter createIMapTypeDescriptorAdapter() {
-        return null;
-    }
+		return null;
+	}
 
-    /**
-     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IMethodSymbol <em>IMethod Symbol</em>}'.
-     * <!-- begin-user-doc -->
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IMethodSymbol <em>IMethod Symbol</em>}'.
+	 * <!-- begin-user-doc -->
      * This default implementation returns null so that we can easily ignore cases;
      * it's useful to ignore a case when inheritance will catch all the cases anyway.
      * <!-- end-user-doc -->
-     * @return the new adapter.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IMethodSymbol
-     * @generated
-     */
+	 * @return the new adapter.
+	 * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IMethodSymbol
+	 * @generated
+	 */
     public Adapter createIMethodSymbolAdapter() {
-        return null;
-    }
+		return null;
+	}
 
-    /**
-     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IObjectSymbol <em>IObject Symbol</em>}'.
-     * <!-- begin-user-doc -->
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IObjectSymbol <em>IObject Symbol</em>}'.
+	 * <!-- begin-user-doc -->
      * This default implementation returns null so that we can easily ignore cases;
      * it's useful to ignore a case when inheritance will catch all the cases anyway.
      * <!-- end-user-doc -->
-     * @return the new adapter.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IObjectSymbol
-     * @generated
-     */
+	 * @return the new adapter.
+	 * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IObjectSymbol
+	 * @generated
+	 */
     public Adapter createIObjectSymbolAdapter() {
-        return null;
-    }
+		return null;
+	}
 
-    /**
-     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedTypeDescriptor <em>IBounded Type Descriptor</em>}'.
-     * <!-- begin-user-doc -->
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedTypeDescriptor <em>IBounded Type Descriptor</em>}'.
+	 * <!-- begin-user-doc -->
      * This default implementation returns null so that we can easily ignore cases;
      * it's useful to ignore a case when inheritance will catch all the cases anyway.
      * <!-- end-user-doc -->
-     * @return the new adapter.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedTypeDescriptor
-     * @generated
-     */
+	 * @return the new adapter.
+	 * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedTypeDescriptor
+	 * @generated
+	 */
     public Adapter createIBoundedTypeDescriptorAdapter() {
-        return null;
-    }
+		return null;
+	}
 
-    /**
-     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedMapTypeDescriptor <em>IBounded Map Type Descriptor</em>}'.
-     * <!-- begin-user-doc -->
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedMapTypeDescriptor <em>IBounded Map Type Descriptor</em>}'.
+	 * <!-- begin-user-doc -->
      * This default implementation returns null so that we can easily ignore cases;
      * it's useful to ignore a case when inheritance will catch all the cases anyway.
      * <!-- end-user-doc -->
-     * @return the new adapter.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedMapTypeDescriptor
-     * @generated
-     */
+	 * @return the new adapter.
+	 * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedMapTypeDescriptor
+	 * @generated
+	 */
     public Adapter createIBoundedMapTypeDescriptorAdapter() {
-        return null;
-    }
+		return null;
+	}
 
-    /**
-     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedJavaTypeDescriptor <em>IBounded Java Type Descriptor</em>}'.
-     * <!-- begin-user-doc -->
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedJavaTypeDescriptor <em>IBounded Java Type Descriptor</em>}'.
+	 * <!-- begin-user-doc -->
      * This default implementation returns null so that we can easily ignore cases;
      * it's useful to ignore a case when inheritance will catch all the cases anyway.
      * <!-- end-user-doc -->
-     * @return the new adapter.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedJavaTypeDescriptor
-     * @generated
-     */
+	 * @return the new adapter.
+	 * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedJavaTypeDescriptor
+	 * @generated
+	 */
     public Adapter createIBoundedJavaTypeDescriptorAdapter() {
-        return null;
-    }
+		return null;
+	}
 
-    /**
-     * Creates a new adapter for the default case.
-     * <!-- begin-user-doc -->
+	/**
+	 * Creates a new adapter for the default case.
+	 * <!-- begin-user-doc -->
 	 * This default implementation returns null.
 	 * <!-- end-user-doc -->
-     * @return the new adapter.
-     * @generated
-     */
+	 * @return the new adapter.
+	 * @generated
+	 */
 	public Adapter createEObjectAdapter() {
-        return null;
-    }
+		return null;
+	}
 
 } //SymbolAdapterFactory

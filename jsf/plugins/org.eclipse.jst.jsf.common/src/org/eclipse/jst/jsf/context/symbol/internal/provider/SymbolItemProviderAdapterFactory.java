@@ -41,35 +41,35 @@ import org.eclipse.jst.jsf.context.symbol.internal.util.SymbolAdapterFactory;
  * @generated
  */
 public class SymbolItemProviderAdapterFactory extends SymbolAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public static final String copyright = "Copyright 2006 Oracle";
 
-    /**
-     * This keeps track of the root adapter factory that delegates to this adapter factory.
-     * <!-- begin-user-doc -->
+	/**
+	 * This keeps track of the root adapter factory that delegates to this adapter factory.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected ComposedAdapterFactory parentAdapterFactory;
 
-    /**
-     * This is used to implement {@link org.eclipse.emf.edit.provider.IChangeNotifier}.
-     * <!-- begin-user-doc -->
+	/**
+	 * This is used to implement {@link org.eclipse.emf.edit.provider.IChangeNotifier}.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected IChangeNotifier changeNotifier = new ChangeNotifier();
 
-    /**
-     * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}.
-     * <!-- begin-user-doc -->
+	/**
+	 * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected Collection supportedTypes = new ArrayList();
 
 	/**
@@ -89,401 +89,401 @@ public class SymbolItemProviderAdapterFactory extends SymbolAdapterFactory imple
 		supportedTypes.add(IContentProposalProvider.class);
 	}
 
-    /**
-     * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanInstanceSymbol} instances.
-     * <!-- begin-user-doc -->
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanInstanceSymbol} instances.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected IBeanInstanceSymbolItemProvider iBeanInstanceSymbolItemProvider;
 
-    /**
-     * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanInstanceSymbol}.
-     * <!-- begin-user-doc -->
+	/**
+	 * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanInstanceSymbol}.
+	 * <!-- begin-user-doc -->
      * @return the adapter 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public Adapter createIBeanInstanceSymbolAdapter() {
-        if (iBeanInstanceSymbolItemProvider == null) {
-            iBeanInstanceSymbolItemProvider = new IBeanInstanceSymbolItemProvider(this);
-        }
+		if (iBeanInstanceSymbolItemProvider == null) {
+			iBeanInstanceSymbolItemProvider = new IBeanInstanceSymbolItemProvider(this);
+		}
 
-        return iBeanInstanceSymbolItemProvider;
-    }
+		return iBeanInstanceSymbolItemProvider;
+	}
 
-    /**
-     * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanPropertySymbol} instances.
-     * <!-- begin-user-doc -->
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanPropertySymbol} instances.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected IBeanPropertySymbolItemProvider iBeanPropertySymbolItemProvider;
 
-    /**
-     * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanPropertySymbol}.
-     * <!-- begin-user-doc -->
+	/**
+	 * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanPropertySymbol}.
+	 * <!-- begin-user-doc -->
      * @return the adapter 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public Adapter createIBeanPropertySymbolAdapter() {
-        if (iBeanPropertySymbolItemProvider == null) {
-            iBeanPropertySymbolItemProvider = new IBeanPropertySymbolItemProvider(this);
-        }
+		if (iBeanPropertySymbolItemProvider == null) {
+			iBeanPropertySymbolItemProvider = new IBeanPropertySymbolItemProvider(this);
+		}
 
-        return iBeanPropertySymbolItemProvider;
-    }
+		return iBeanPropertySymbolItemProvider;
+	}
 
-    /**
-     * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IInstanceSymbol} instances.
-     * <!-- begin-user-doc -->
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IInstanceSymbol} instances.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected IInstanceSymbolItemProvider iInstanceSymbolItemProvider;
 
-    /**
-     * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IInstanceSymbol}.
-     * <!-- begin-user-doc -->
+	/**
+	 * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IInstanceSymbol}.
+	 * <!-- begin-user-doc -->
      * @return the adapter 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public Adapter createIInstanceSymbolAdapter() {
-        if (iInstanceSymbolItemProvider == null) {
-            iInstanceSymbolItemProvider = new IInstanceSymbolItemProvider(this);
-        }
+		if (iInstanceSymbolItemProvider == null) {
+			iInstanceSymbolItemProvider = new IInstanceSymbolItemProvider(this);
+		}
 
-        return iInstanceSymbolItemProvider;
-    }
+		return iInstanceSymbolItemProvider;
+	}
 
-    /**
-     * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaSymbol} instances.
-     * <!-- begin-user-doc -->
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaSymbol} instances.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected IJavaSymbolItemProvider iJavaSymbolItemProvider;
 
-    /**
-     * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaSymbol}.
-     * <!-- begin-user-doc -->
+	/**
+	 * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaSymbol}.
+	 * <!-- begin-user-doc -->
      * @return the adapter 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public Adapter createIJavaSymbolAdapter() {
-        if (iJavaSymbolItemProvider == null) {
-            iJavaSymbolItemProvider = new IJavaSymbolItemProvider(this);
-        }
+		if (iJavaSymbolItemProvider == null) {
+			iJavaSymbolItemProvider = new IJavaSymbolItemProvider(this);
+		}
 
-        return iJavaSymbolItemProvider;
-    }
+		return iJavaSymbolItemProvider;
+	}
 
-    /**
-     * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaTypeDescriptor2} instances.
-     * <!-- begin-user-doc -->
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaTypeDescriptor2} instances.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected IJavaTypeDescriptor2ItemProvider iJavaTypeDescriptor2ItemProvider;
 
-    /**
-     * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaTypeDescriptor2}.
-     * <!-- begin-user-doc -->
+	/**
+	 * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaTypeDescriptor2}.
+	 * <!-- begin-user-doc -->
      * @return the adapter 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public Adapter createIJavaTypeDescriptor2Adapter() {
-        if (iJavaTypeDescriptor2ItemProvider == null) {
-            iJavaTypeDescriptor2ItemProvider = new IJavaTypeDescriptor2ItemProvider(this);
-        }
+		if (iJavaTypeDescriptor2ItemProvider == null) {
+			iJavaTypeDescriptor2ItemProvider = new IJavaTypeDescriptor2ItemProvider(this);
+		}
 
-        return iJavaTypeDescriptor2ItemProvider;
-    }
+		return iJavaTypeDescriptor2ItemProvider;
+	}
 
-    /**
-     * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanMethodSymbol} instances.
-     * <!-- begin-user-doc -->
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanMethodSymbol} instances.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected IBeanMethodSymbolItemProvider iBeanMethodSymbolItemProvider;
 
-    /**
-     * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanMethodSymbol}.
-     * <!-- begin-user-doc -->
+	/**
+	 * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanMethodSymbol}.
+	 * <!-- begin-user-doc -->
      * @return the adapter 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public Adapter createIBeanMethodSymbolAdapter() {
-        if (iBeanMethodSymbolItemProvider == null) {
-            iBeanMethodSymbolItemProvider = new IBeanMethodSymbolItemProvider(this);
-        }
+		if (iBeanMethodSymbolItemProvider == null) {
+			iBeanMethodSymbolItemProvider = new IBeanMethodSymbolItemProvider(this);
+		}
 
-        return iBeanMethodSymbolItemProvider;
-    }
+		return iBeanMethodSymbolItemProvider;
+	}
 
-    /**
-     * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IComponentSymbol} instances.
-     * <!-- begin-user-doc -->
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IComponentSymbol} instances.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected IComponentSymbolItemProvider iComponentSymbolItemProvider;
 
-    /**
-     * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IComponentSymbol}.
-     * <!-- begin-user-doc -->
+	/**
+	 * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IComponentSymbol}.
+	 * <!-- begin-user-doc -->
      * @return the adapter 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public Adapter createIComponentSymbolAdapter() {
-        if (iComponentSymbolItemProvider == null) {
-            iComponentSymbolItemProvider = new IComponentSymbolItemProvider(this);
-        }
+		if (iComponentSymbolItemProvider == null) {
+			iComponentSymbolItemProvider = new IComponentSymbolItemProvider(this);
+		}
 
-        return iComponentSymbolItemProvider;
-    }
+		return iComponentSymbolItemProvider;
+	}
 
-    /**
-     * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IPropertySymbol} instances.
-     * <!-- begin-user-doc -->
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IPropertySymbol} instances.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected IPropertySymbolItemProvider iPropertySymbolItemProvider;
 
-    /**
-     * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IPropertySymbol}.
-     * <!-- begin-user-doc -->
+	/**
+	 * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IPropertySymbol}.
+	 * <!-- begin-user-doc -->
      * @return the property symbol adapter 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public Adapter createIPropertySymbolAdapter() {
-        if (iPropertySymbolItemProvider == null) {
-            iPropertySymbolItemProvider = new IPropertySymbolItemProvider(this);
-        }
+		if (iPropertySymbolItemProvider == null) {
+			iPropertySymbolItemProvider = new IPropertySymbolItemProvider(this);
+		}
 
-        return iPropertySymbolItemProvider;
-    }
+		return iPropertySymbolItemProvider;
+	}
 
-    /**
-     * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IMapTypeDescriptor} instances.
-     * <!-- begin-user-doc -->
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IMapTypeDescriptor} instances.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected IMapTypeDescriptorItemProvider iMapTypeDescriptorItemProvider;
 
-    /**
-     * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IMapTypeDescriptor}.
-     * <!-- begin-user-doc -->
+	/**
+	 * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IMapTypeDescriptor}.
+	 * <!-- begin-user-doc -->
      * @return the adapter 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public Adapter createIMapTypeDescriptorAdapter() {
-        if (iMapTypeDescriptorItemProvider == null) {
-            iMapTypeDescriptorItemProvider = new IMapTypeDescriptorItemProvider(this);
-        }
+		if (iMapTypeDescriptorItemProvider == null) {
+			iMapTypeDescriptorItemProvider = new IMapTypeDescriptorItemProvider(this);
+		}
 
-        return iMapTypeDescriptorItemProvider;
-    }
+		return iMapTypeDescriptorItemProvider;
+	}
 
-    /**
-     * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IMethodSymbol} instances.
-     * <!-- begin-user-doc -->
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IMethodSymbol} instances.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected IMethodSymbolItemProvider iMethodSymbolItemProvider;
 
-    /**
-     * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IMethodSymbol}.
-     * <!-- begin-user-doc -->
+	/**
+	 * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IMethodSymbol}.
+	 * <!-- begin-user-doc -->
      * @return the adapter for method symbols 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public Adapter createIMethodSymbolAdapter() {
-        if (iMethodSymbolItemProvider == null) {
-            iMethodSymbolItemProvider = new IMethodSymbolItemProvider(this);
-        }
+		if (iMethodSymbolItemProvider == null) {
+			iMethodSymbolItemProvider = new IMethodSymbolItemProvider(this);
+		}
 
-        return iMethodSymbolItemProvider;
-    }
+		return iMethodSymbolItemProvider;
+	}
 
-    /**
-     * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedMapTypeDescriptor} instances.
-     * <!-- begin-user-doc -->
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedMapTypeDescriptor} instances.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected IBoundedMapTypeDescriptorItemProvider iBoundedMapTypeDescriptorItemProvider;
 
-    /**
-     * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedMapTypeDescriptor}.
-     * <!-- begin-user-doc -->
+	/**
+	 * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedMapTypeDescriptor}.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public Adapter createIBoundedMapTypeDescriptorAdapter() {
-        if (iBoundedMapTypeDescriptorItemProvider == null) {
-            iBoundedMapTypeDescriptorItemProvider = new IBoundedMapTypeDescriptorItemProvider(this);
-        }
+		if (iBoundedMapTypeDescriptorItemProvider == null) {
+			iBoundedMapTypeDescriptorItemProvider = new IBoundedMapTypeDescriptorItemProvider(this);
+		}
 
-        return iBoundedMapTypeDescriptorItemProvider;
-    }
+		return iBoundedMapTypeDescriptorItemProvider;
+	}
 
-    /**
-     * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedJavaTypeDescriptor} instances.
-     * <!-- begin-user-doc -->
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedJavaTypeDescriptor} instances.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected IBoundedJavaTypeDescriptorItemProvider iBoundedJavaTypeDescriptorItemProvider;
 
-    /**
-     * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedJavaTypeDescriptor}.
-     * <!-- begin-user-doc -->
+	/**
+	 * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedJavaTypeDescriptor}.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public Adapter createIBoundedJavaTypeDescriptorAdapter() {
-        if (iBoundedJavaTypeDescriptorItemProvider == null) {
-            iBoundedJavaTypeDescriptorItemProvider = new IBoundedJavaTypeDescriptorItemProvider(this);
-        }
+		if (iBoundedJavaTypeDescriptorItemProvider == null) {
+			iBoundedJavaTypeDescriptorItemProvider = new IBoundedJavaTypeDescriptorItemProvider(this);
+		}
 
-        return iBoundedJavaTypeDescriptorItemProvider;
-    }
+		return iBoundedJavaTypeDescriptorItemProvider;
+	}
 
-    /**
-     * This returns the root adapter factory that contains this factory.
-     * <!-- begin-user-doc -->
+	/**
+	 * This returns the root adapter factory that contains this factory.
+	 * <!-- begin-user-doc -->
      * @return the adapter factory
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public ComposeableAdapterFactory getRootAdapterFactory() {
-        return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
-    }
+		return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
+	}
 
-    /**
-     * This sets the composed adapter factory that contains this factory.
-     * <!-- begin-user-doc -->
+	/**
+	 * This sets the composed adapter factory that contains this factory.
+	 * <!-- begin-user-doc -->
      * @param parentAdapterFactory 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
-        this.parentAdapterFactory = parentAdapterFactory;
-    }
+		this.parentAdapterFactory = parentAdapterFactory;
+	}
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @param type 
      * @return true if the factory supports the adapter type 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public boolean isFactoryForType(Object type) {
-        return supportedTypes.contains(type) || super.isFactoryForType(type);
-    }
+		return supportedTypes.contains(type) || super.isFactoryForType(type);
+	}
 
-    /**
-     * This implementation substitutes the factory itself as the key for the adapter.
-     * <!-- begin-user-doc -->
+	/**
+	 * This implementation substitutes the factory itself as the key for the adapter.
+	 * <!-- begin-user-doc -->
      * @param notifier 
      * @param type 
      * @return the adapter
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public Adapter adapt(Notifier notifier, Object type) {
-        return super.adapt(notifier, this);
-    }
+		return super.adapt(notifier, this);
+	}
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @param object 
      * @param type 
      * @return the adapted object 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public Object adapt(Object object, Object type) {
-        if (isFactoryForType(type)) {
-            Object adapter = super.adapt(object, type);
-            if (!(type instanceof Class) || (((Class)type).isInstance(adapter))) {
-                return adapter;
-            }
-        }
+		if (isFactoryForType(type)) {
+			Object adapter = super.adapt(object, type);
+			if (!(type instanceof Class) || (((Class)type).isInstance(adapter))) {
+				return adapter;
+			}
+		}
 
-        return null;
-    }
+		return null;
+	}
 
-    /**
-     * This adds a listener.
-     * <!-- begin-user-doc -->
+	/**
+	 * This adds a listener.
+	 * <!-- begin-user-doc -->
      * @param notifyChangedListener 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public void addListener(INotifyChangedListener notifyChangedListener) {
-        changeNotifier.addListener(notifyChangedListener);
-    }
+		changeNotifier.addListener(notifyChangedListener);
+	}
 
-    /**
-     * This removes a listener.
-     * <!-- begin-user-doc -->
+	/**
+	 * This removes a listener.
+	 * <!-- begin-user-doc -->
      * @param notifyChangedListener 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public void removeListener(INotifyChangedListener notifyChangedListener) {
-        changeNotifier.removeListener(notifyChangedListener);
-    }
+		changeNotifier.removeListener(notifyChangedListener);
+	}
 
-    /**
-     * This delegates to {@link #changeNotifier} and to {@link #parentAdapterFactory}.
-     * <!-- begin-user-doc -->
+	/**
+	 * This delegates to {@link #changeNotifier} and to {@link #parentAdapterFactory}.
+	 * <!-- begin-user-doc -->
      * @param notification 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public void fireNotifyChanged(Notification notification) {
-        changeNotifier.fireNotifyChanged(notification);
+		changeNotifier.fireNotifyChanged(notification);
 
-        if (parentAdapterFactory != null) {
-            parentAdapterFactory.fireNotifyChanged(notification);
-        }
-    }
+		if (parentAdapterFactory != null) {
+			parentAdapterFactory.fireNotifyChanged(notification);
+		}
+	}
 
-    /**
-     * This disposes all of the item providers created by this factory. 
-     * <!-- begin-user-doc -->
+	/**
+	 * This disposes all of the item providers created by this factory. 
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public void dispose() {
-        if (iBeanInstanceSymbolItemProvider != null) iBeanInstanceSymbolItemProvider.dispose();
-        if (iBeanPropertySymbolItemProvider != null) iBeanPropertySymbolItemProvider.dispose();
-        if (iInstanceSymbolItemProvider != null) iInstanceSymbolItemProvider.dispose();
-        if (iJavaSymbolItemProvider != null) iJavaSymbolItemProvider.dispose();
-        if (iJavaTypeDescriptor2ItemProvider != null) iJavaTypeDescriptor2ItemProvider.dispose();
-        if (iBeanMethodSymbolItemProvider != null) iBeanMethodSymbolItemProvider.dispose();
-        if (iComponentSymbolItemProvider != null) iComponentSymbolItemProvider.dispose();
-        if (iPropertySymbolItemProvider != null) iPropertySymbolItemProvider.dispose();
-        if (iMapTypeDescriptorItemProvider != null) iMapTypeDescriptorItemProvider.dispose();
-        if (iMethodSymbolItemProvider != null) iMethodSymbolItemProvider.dispose();
-        if (iBoundedMapTypeDescriptorItemProvider != null) iBoundedMapTypeDescriptorItemProvider.dispose();
-        if (iBoundedJavaTypeDescriptorItemProvider != null) iBoundedJavaTypeDescriptorItemProvider.dispose();
-    }
+		if (iBeanInstanceSymbolItemProvider != null) iBeanInstanceSymbolItemProvider.dispose();
+		if (iBeanPropertySymbolItemProvider != null) iBeanPropertySymbolItemProvider.dispose();
+		if (iInstanceSymbolItemProvider != null) iInstanceSymbolItemProvider.dispose();
+		if (iJavaSymbolItemProvider != null) iJavaSymbolItemProvider.dispose();
+		if (iJavaTypeDescriptor2ItemProvider != null) iJavaTypeDescriptor2ItemProvider.dispose();
+		if (iBeanMethodSymbolItemProvider != null) iBeanMethodSymbolItemProvider.dispose();
+		if (iComponentSymbolItemProvider != null) iComponentSymbolItemProvider.dispose();
+		if (iPropertySymbolItemProvider != null) iPropertySymbolItemProvider.dispose();
+		if (iMapTypeDescriptorItemProvider != null) iMapTypeDescriptorItemProvider.dispose();
+		if (iMethodSymbolItemProvider != null) iMethodSymbolItemProvider.dispose();
+		if (iBoundedMapTypeDescriptorItemProvider != null) iBoundedMapTypeDescriptorItemProvider.dispose();
+		if (iBoundedJavaTypeDescriptorItemProvider != null) iBoundedJavaTypeDescriptorItemProvider.dispose();
+	}
 
 }

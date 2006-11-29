@@ -44,99 +44,99 @@ public class IBeanInstanceSymbolItemProvider
 	implements	
 		IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource, IContentProposalProvider 
 {
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public static final String copyright = "Copyright 2006 Oracle";
 
-    /**
-     * This constructs an instance from a factory and a notifier.
-     * <!-- begin-user-doc -->
+	/**
+	 * This constructs an instance from a factory and a notifier.
+	 * <!-- begin-user-doc -->
      * @param adapterFactory 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public IBeanInstanceSymbolItemProvider(AdapterFactory adapterFactory) {
-        super(adapterFactory);
-    }
+		super(adapterFactory);
+	}
 
-    /**
-     * This returns the property descriptors for the adapted class.
-     * <!-- begin-user-doc -->
+	/**
+	 * This returns the property descriptors for the adapted class.
+	 * <!-- begin-user-doc -->
 	 * @param object 
 	 * @return 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public List getPropertyDescriptors(Object object) {
-        if (itemPropertyDescriptors == null) {
-            super.getPropertyDescriptors(object);
+		if (itemPropertyDescriptors == null) {
+			super.getPropertyDescriptors(object);
 
-            addPropertiesPropertyDescriptor(object);
-            addMethodsPropertyDescriptor(object);
-        }
-        return itemPropertyDescriptors;
-    }
+			addPropertiesPropertyDescriptor(object);
+			addMethodsPropertyDescriptor(object);
+		}
+		return itemPropertyDescriptors;
+	}
 
-    /**
-     * This adds a property descriptor for the Properties feature.
-     * <!-- begin-user-doc -->
+	/**
+	 * This adds a property descriptor for the Properties feature.
+	 * <!-- begin-user-doc -->
      * @param object 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected void addPropertiesPropertyDescriptor(Object object) {
-        itemPropertyDescriptors.add
-            (createItemPropertyDescriptor
-                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-                 getResourceLocator(),
-                 getString("_UI_IBeanInstanceSymbol_properties_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_IBeanInstanceSymbol_properties_feature", "_UI_IBeanInstanceSymbol_type"),
-                 SymbolPackage.Literals.IBEAN_INSTANCE_SYMBOL__PROPERTIES,
-                 false,
-                 false,
-                 false,
-                 null,
-                 null,
-                 null));
-    }
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_IBeanInstanceSymbol_properties_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_IBeanInstanceSymbol_properties_feature", "_UI_IBeanInstanceSymbol_type"),
+				 SymbolPackage.Literals.IBEAN_INSTANCE_SYMBOL__PROPERTIES,
+				 false,
+				 false,
+				 false,
+				 null,
+				 null,
+				 null));
+	}
 
-    /**
-     * This adds a property descriptor for the Methods feature.
-     * <!-- begin-user-doc -->
+	/**
+	 * This adds a property descriptor for the Methods feature.
+	 * <!-- begin-user-doc -->
      * @param object 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected void addMethodsPropertyDescriptor(Object object) {
-        itemPropertyDescriptors.add
-            (createItemPropertyDescriptor
-                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-                 getResourceLocator(),
-                 getString("_UI_IBeanInstanceSymbol_methods_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_IBeanInstanceSymbol_methods_feature", "_UI_IBeanInstanceSymbol_type"),
-                 SymbolPackage.Literals.IBEAN_INSTANCE_SYMBOL__METHODS,
-                 false,
-                 false,
-                 false,
-                 null,
-                 null,
-                 null));
-    }
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_IBeanInstanceSymbol_methods_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_IBeanInstanceSymbol_methods_feature", "_UI_IBeanInstanceSymbol_type"),
+				 SymbolPackage.Literals.IBEAN_INSTANCE_SYMBOL__METHODS,
+				 false,
+				 false,
+				 false,
+				 null,
+				 null,
+				 null));
+	}
 
-    /**
-     * This returns IBeanInstanceSymbol.gif.
-     * <!-- begin-user-doc -->
+	/**
+	 * This returns IBeanInstanceSymbol.gif.
+	 * <!-- begin-user-doc -->
      * @param object 
      * @return the image associated with object or null if not found 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/IBeanInstanceSymbol"));
-    }
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/IBeanInstanceSymbol"));
+	}
 
     /**
      * This returns the label text for the adapted class.
@@ -153,42 +153,42 @@ public class IBeanInstanceSymbolItemProvider
             label;
     }
 
-    /**
-     * This handles model notifications by calling {@link #updateChildren} to update any cached
-     * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-     * <!-- begin-user-doc -->
+	/**
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc -->
      * @param notification 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public void notifyChanged(Notification notification) {
-        updateChildren(notification);
-        super.notifyChanged(notification);
-    }
+		updateChildren(notification);
+		super.notifyChanged(notification);
+	}
 
-    /**
-     * This adds to the collection of {@link org.eclipse.emf.edit.command.CommandParameter}s
-     * describing all of the children that can be created under this object.
-     * <!-- begin-user-doc -->
+	/**
+	 * This adds to the collection of {@link org.eclipse.emf.edit.command.CommandParameter}s
+	 * describing all of the children that can be created under this object.
+	 * <!-- begin-user-doc -->
      * @param newChildDescriptors 
      * @param object 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected void collectNewChildDescriptors(Collection newChildDescriptors, Object object) {
-        super.collectNewChildDescriptors(newChildDescriptors, object);
-    }
+		super.collectNewChildDescriptors(newChildDescriptors, object);
+	}
 
-    /**
-     * Return the resource locator for this item provider's resources.
-     * <!-- begin-user-doc -->
+	/**
+	 * Return the resource locator for this item provider's resources.
+	 * <!-- begin-user-doc -->
      * @return the resource locator 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public ResourceLocator getResourceLocator() {
-        return JSFCommonPlugin.INSTANCE;
-    }
+		return JSFCommonPlugin.INSTANCE;
+	}
 
 	/**
 	 * @param target_

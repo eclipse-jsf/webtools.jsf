@@ -34,136 +34,136 @@ import org.eclipse.jst.jsf.context.symbol.internal.provisional.IPropertySymbol;
  * @generated
  */
 public interface SymbolFactory extends EFactory {
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     String copyright = "Copyright 2006 Oracle";
 
-    /**
-     * The singleton instance of the factory.
-     * <!-- begin-user-doc -->
+	/**
+	 * The singleton instance of the factory.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     SymbolFactory eINSTANCE = org.eclipse.jst.jsf.context.symbol.internal.impl.SymbolFactoryImpl.init();
 
-    /**
-     * Returns a new object of class '<em>IBean Instance Symbol</em>'.
-     * <!-- begin-user-doc -->
+	/**
+	 * Returns a new object of class '<em>IBean Instance Symbol</em>'.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @return a new object of class '<em>IBean Instance Symbol</em>'.
-     * @generated
-     */
+	 * @return a new object of class '<em>IBean Instance Symbol</em>'.
+	 * @generated
+	 */
     IBeanInstanceSymbol createIBeanInstanceSymbol();
 
-    /**
-     * Returns a new object of class '<em>IBean Property Symbol</em>'.
-     * <!-- begin-user-doc -->
+	/**
+	 * Returns a new object of class '<em>IBean Property Symbol</em>'.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @return a new object of class '<em>IBean Property Symbol</em>'.
-     * @generated
-     */
+	 * @return a new object of class '<em>IBean Property Symbol</em>'.
+	 * @generated
+	 */
     IBeanPropertySymbol createIBeanPropertySymbol();
 
-    /**
-     * Returns a new object of class '<em>IInstance Symbol</em>'.
-     * <!-- begin-user-doc -->
+	/**
+	 * Returns a new object of class '<em>IInstance Symbol</em>'.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @return a new object of class '<em>IInstance Symbol</em>'.
-     * @generated
-     */
+	 * @return a new object of class '<em>IInstance Symbol</em>'.
+	 * @generated
+	 */
     IInstanceSymbol createIInstanceSymbol();
 
-    /**
-     * Returns a new object of class '<em>IJava Symbol</em>'.
-     * <!-- begin-user-doc -->
+	/**
+	 * Returns a new object of class '<em>IJava Symbol</em>'.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @return a new object of class '<em>IJava Symbol</em>'.
-     * @generated
-     */
+	 * @return a new object of class '<em>IJava Symbol</em>'.
+	 * @generated
+	 */
     IJavaSymbol createIJavaSymbol();
 
-    /**
-     * Returns a new object of class '<em>IJava Type Descriptor2</em>'.
-     * <!-- begin-user-doc -->
+	/**
+	 * Returns a new object of class '<em>IJava Type Descriptor2</em>'.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @return a new object of class '<em>IJava Type Descriptor2</em>'.
-     * @generated
-     */
+	 * @return a new object of class '<em>IJava Type Descriptor2</em>'.
+	 * @generated
+	 */
     IJavaTypeDescriptor2 createIJavaTypeDescriptor2();
 
-    /**
-     * Returns a new object of class '<em>IBean Method Symbol</em>'.
-     * <!-- begin-user-doc -->
+	/**
+	 * Returns a new object of class '<em>IBean Method Symbol</em>'.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @return a new object of class '<em>IBean Method Symbol</em>'.
-     * @generated
-     */
+	 * @return a new object of class '<em>IBean Method Symbol</em>'.
+	 * @generated
+	 */
     IBeanMethodSymbol createIBeanMethodSymbol();
 
-    /**
-     * Returns a new object of class '<em>IComponent Symbol</em>'.
-     * <!-- begin-user-doc -->
+	/**
+	 * Returns a new object of class '<em>IComponent Symbol</em>'.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @return a new object of class '<em>IComponent Symbol</em>'.
-     * @generated
-     */
+	 * @return a new object of class '<em>IComponent Symbol</em>'.
+	 * @generated
+	 */
     IComponentSymbol createIComponentSymbol();
 
-    /**
-     * Returns a new object of class '<em>IProperty Symbol</em>'.
-     * <!-- begin-user-doc -->
+	/**
+	 * Returns a new object of class '<em>IProperty Symbol</em>'.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @return a new object of class '<em>IProperty Symbol</em>'.
-     * @generated
-     */
+	 * @return a new object of class '<em>IProperty Symbol</em>'.
+	 * @generated
+	 */
     IPropertySymbol createIPropertySymbol();
 
-    /**
-     * Returns a new object of class '<em>IMap Type Descriptor</em>'.
-     * <!-- begin-user-doc -->
+	/**
+	 * Returns a new object of class '<em>IMap Type Descriptor</em>'.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @return a new object of class '<em>IMap Type Descriptor</em>'.
-     * @generated
-     */
+	 * @return a new object of class '<em>IMap Type Descriptor</em>'.
+	 * @generated
+	 */
     IMapTypeDescriptor createIMapTypeDescriptor();
 
-    /**
-     * Returns a new object of class '<em>IMethod Symbol</em>'.
-     * <!-- begin-user-doc -->
+	/**
+	 * Returns a new object of class '<em>IMethod Symbol</em>'.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @return a new object of class '<em>IMethod Symbol</em>'.
-     * @generated
-     */
+	 * @return a new object of class '<em>IMethod Symbol</em>'.
+	 * @generated
+	 */
     IMethodSymbol createIMethodSymbol();
 
-    /**
-     * Returns a new object of class '<em>IBounded Map Type Descriptor</em>'.
-     * <!-- begin-user-doc -->
+	/**
+	 * Returns a new object of class '<em>IBounded Map Type Descriptor</em>'.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @return a new object of class '<em>IBounded Map Type Descriptor</em>'.
-     * @generated
-     */
+	 * @return a new object of class '<em>IBounded Map Type Descriptor</em>'.
+	 * @generated
+	 */
     IBoundedMapTypeDescriptor createIBoundedMapTypeDescriptor();
 
-    /**
-     * Returns a new object of class '<em>IBounded Java Type Descriptor</em>'.
-     * <!-- begin-user-doc -->
+	/**
+	 * Returns a new object of class '<em>IBounded Java Type Descriptor</em>'.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @return a new object of class '<em>IBounded Java Type Descriptor</em>'.
-     * @generated
-     */
+	 * @return a new object of class '<em>IBounded Java Type Descriptor</em>'.
+	 * @generated
+	 */
     IBoundedJavaTypeDescriptor createIBoundedJavaTypeDescriptor();
 
-    /**
-     * Returns the package supported by this factory.
-     * <!-- begin-user-doc -->
+	/**
+	 * Returns the package supported by this factory.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @return the package supported by this factory.
-     * @generated
-     */
+	 * @return the package supported by this factory.
+	 * @generated
+	 */
     SymbolPackage getSymbolPackage();
 
 } //SymbolFactory

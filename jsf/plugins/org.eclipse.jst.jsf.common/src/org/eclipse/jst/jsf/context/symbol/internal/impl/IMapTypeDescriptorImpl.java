@@ -47,118 +47,118 @@ import org.eclipse.jst.jsf.context.symbol.internal.provisional.ITypeDescriptor;
  * @generated
  */
 public class IMapTypeDescriptorImpl extends ITypeDescriptorImpl implements IMapTypeDescriptor {
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public static final String copyright = "Copyright 2006 Oracle";
 
-    /**
-     * The default value of the '{@link #getMapSource() <em>Map Source</em>}' attribute.
-     * <!-- begin-user-doc -->
+	/**
+	 * The default value of the '{@link #getMapSource() <em>Map Source</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getMapSource()
-     * @generated
-     * @ordered
-     */
+	 * @see #getMapSource()
+	 * @generated
+	 * @ordered
+	 */
     protected static final Map MAP_SOURCE_EDEFAULT = null;
 
-    /**
-     * The cached value of the '{@link #getMapSource() <em>Map Source</em>}' attribute.
-     * <!-- begin-user-doc -->
+	/**
+	 * The cached value of the '{@link #getMapSource() <em>Map Source</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getMapSource()
-     * @generated
-     * @ordered
-     */
+	 * @see #getMapSource()
+	 * @generated
+	 * @ordered
+	 */
     protected Map mapSource = MAP_SOURCE_EDEFAULT;
 
-    /**
-     * The default value of the '{@link #isImmutable() <em>Immutable</em>}' attribute.
-     * <!-- begin-user-doc -->
+	/**
+	 * The default value of the '{@link #isImmutable() <em>Immutable</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #isImmutable()
-     * @generated
-     * @ordered
-     */
+	 * @see #isImmutable()
+	 * @generated
+	 * @ordered
+	 */
     protected static final boolean IMMUTABLE_EDEFAULT = true;
 
-    /**
-     * The cached value of the '{@link #isImmutable() <em>Immutable</em>}' attribute.
-     * <!-- begin-user-doc -->
+	/**
+	 * The cached value of the '{@link #isImmutable() <em>Immutable</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #isImmutable()
-     * @generated
-     * @ordered
-     */
+	 * @see #isImmutable()
+	 * @generated
+	 * @ordered
+	 */
     protected boolean immutable = IMMUTABLE_EDEFAULT;
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected IMapTypeDescriptorImpl() {
-        super();
-    }
+		super();
+	}
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @return the static eClass 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected EClass eStaticClass() {
-        return SymbolPackage.Literals.IMAP_TYPE_DESCRIPTOR;
-    }
+		return SymbolPackage.Literals.IMAP_TYPE_DESCRIPTOR;
+	}
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @return the map source 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public Map getMapSource() {
-        return mapSource;
-    }
+		return mapSource;
+	}
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @param newMapSource 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void setMapSource(Map newMapSource) {
-        Map oldMapSource = mapSource;
-        mapSource = newMapSource;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SymbolPackage.IMAP_TYPE_DESCRIPTOR__MAP_SOURCE, oldMapSource, mapSource));
-    }
+		Map oldMapSource = mapSource;
+		mapSource = newMapSource;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SymbolPackage.IMAP_TYPE_DESCRIPTOR__MAP_SOURCE, oldMapSource, mapSource));
+	}
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @return true if this map is immutable as defined in the java.util.Map
      * interface. 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public boolean isImmutable() {
-        return immutable;
-    }
+		return immutable;
+	}
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @param newImmutable 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void setImmutable(boolean newImmutable) {
-        boolean oldImmutable = immutable;
-        immutable = newImmutable;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SymbolPackage.IMAP_TYPE_DESCRIPTOR__IMMUTABLE, oldImmutable, immutable));
-    }
+		boolean oldImmutable = immutable;
+		immutable = newImmutable;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SymbolPackage.IMAP_TYPE_DESCRIPTOR__IMMUTABLE, oldImmutable, immutable));
+	}
 
     /* (non-Javadoc)
      * @see org.eclipse.jst.jsf.context.symbol.internal.impl.ITypeDescriptorImpl#getTypeSignature()
@@ -282,95 +282,95 @@ public class IMapTypeDescriptorImpl extends ITypeDescriptorImpl implements IMapT
 
     
     
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @param featureID 
      * @param resolve 
      * @param coreType 
      * @return the object for the feature id 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
-        switch (featureID) {
-            case SymbolPackage.IMAP_TYPE_DESCRIPTOR__MAP_SOURCE:
-                return getMapSource();
-            case SymbolPackage.IMAP_TYPE_DESCRIPTOR__IMMUTABLE:
-                return isImmutable() ? Boolean.TRUE : Boolean.FALSE;
-        }
-        return super.eGet(featureID, resolve, coreType);
-    }
+		switch (featureID) {
+			case SymbolPackage.IMAP_TYPE_DESCRIPTOR__MAP_SOURCE:
+				return getMapSource();
+			case SymbolPackage.IMAP_TYPE_DESCRIPTOR__IMMUTABLE:
+				return isImmutable() ? Boolean.TRUE : Boolean.FALSE;
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @param featureID 
      * @param newValue 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void eSet(int featureID, Object newValue) {
-        switch (featureID) {
-            case SymbolPackage.IMAP_TYPE_DESCRIPTOR__MAP_SOURCE:
-                setMapSource((Map)newValue);
-                return;
-            case SymbolPackage.IMAP_TYPE_DESCRIPTOR__IMMUTABLE:
-                setImmutable(((Boolean)newValue).booleanValue());
-                return;
-        }
-        super.eSet(featureID, newValue);
-    }
+		switch (featureID) {
+			case SymbolPackage.IMAP_TYPE_DESCRIPTOR__MAP_SOURCE:
+				setMapSource((Map)newValue);
+				return;
+			case SymbolPackage.IMAP_TYPE_DESCRIPTOR__IMMUTABLE:
+				setImmutable(((Boolean)newValue).booleanValue());
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @param featureID 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void eUnset(int featureID) {
-        switch (featureID) {
-            case SymbolPackage.IMAP_TYPE_DESCRIPTOR__MAP_SOURCE:
-                setMapSource(MAP_SOURCE_EDEFAULT);
-                return;
-            case SymbolPackage.IMAP_TYPE_DESCRIPTOR__IMMUTABLE:
-                setImmutable(IMMUTABLE_EDEFAULT);
-                return;
-        }
-        super.eUnset(featureID);
-    }
+		switch (featureID) {
+			case SymbolPackage.IMAP_TYPE_DESCRIPTOR__MAP_SOURCE:
+				setMapSource(MAP_SOURCE_EDEFAULT);
+				return;
+			case SymbolPackage.IMAP_TYPE_DESCRIPTOR__IMMUTABLE:
+				setImmutable(IMMUTABLE_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @param featureID 
      * @return true if is set
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public boolean eIsSet(int featureID) {
-        switch (featureID) {
-            case SymbolPackage.IMAP_TYPE_DESCRIPTOR__MAP_SOURCE:
-                return MAP_SOURCE_EDEFAULT == null ? mapSource != null : !MAP_SOURCE_EDEFAULT.equals(mapSource);
-            case SymbolPackage.IMAP_TYPE_DESCRIPTOR__IMMUTABLE:
-                return immutable != IMMUTABLE_EDEFAULT;
-        }
-        return super.eIsSet(featureID);
-    }
+		switch (featureID) {
+			case SymbolPackage.IMAP_TYPE_DESCRIPTOR__MAP_SOURCE:
+				return MAP_SOURCE_EDEFAULT == null ? mapSource != null : !MAP_SOURCE_EDEFAULT.equals(mapSource);
+			case SymbolPackage.IMAP_TYPE_DESCRIPTOR__IMMUTABLE:
+				return immutable != IMMUTABLE_EDEFAULT;
+		}
+		return super.eIsSet(featureID);
+	}
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @return the string representation 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public String toString() {
-        if (eIsProxy()) return super.toString();
+		if (eIsProxy()) return super.toString();
 
-        StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (mapSource: ");
-        result.append(mapSource);
-        result.append(", immutable: ");
-        result.append(immutable);
-        result.append(')');
-        return result.toString();
-    }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (mapSource: ");
+		result.append(mapSource);
+		result.append(", immutable: ");
+		result.append(immutable);
+		result.append(')');
+		return result.toString();
+	}
 
 } //IMapTypeDescriptorImpl

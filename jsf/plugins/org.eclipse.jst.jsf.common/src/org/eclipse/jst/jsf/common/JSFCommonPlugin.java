@@ -26,72 +26,72 @@ import org.osgi.framework.Bundle;
  * <!-- end-user-doc -->
  * @generated
  */
-public class JSFCommonPlugin extends EMFPlugin {
+public final class JSFCommonPlugin extends EMFPlugin {
 
 	/**
 	 * Plugin id
 	 */
 	public static final String PLUGIN_ID = "org.eclipse.jst.jsf.common";
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public static final String copyright = "Copyright 2006 Oracle";
 
     private static List  registeredSymbolSourceProviders;
     private static Map   registeredSymbolFactories;
     
-    /**
-     * Keep track of the singleton.
-     * <!-- begin-user-doc -->
+	/**
+	 * Keep track of the singleton.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public static final JSFCommonPlugin INSTANCE = new JSFCommonPlugin();
 
-    /**
-     * Keep track of the singleton.
-     * <!-- begin-user-doc -->
+	/**
+	 * Keep track of the singleton.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     private static Implementation plugin;
 
-    /**
-     * Create the instance.
-     * <!-- begin-user-doc -->
+	/**
+	 * Create the instance.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public JSFCommonPlugin() {
-        super
-          (new ResourceLocator [] {
-           });
-    }
+		super
+		  (new ResourceLocator [] {
+		   });
+	}
 
-    /**
-     * Returns the singleton instance of the Eclipse plugin.
-     * <!-- begin-user-doc -->
+	/**
+	 * Returns the singleton instance of the Eclipse plugin.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @return the singleton instance.
-     * @generated
-     */
+	 * @return the singleton instance.
+	 * @generated
+	 */
     public ResourceLocator getPluginResourceLocator() {
-        return plugin;
-    }
+		return plugin;
+	}
 
-    /**
-     * Returns the singleton instance of the Eclipse plugin.
-     * <!-- begin-user-doc -->
+	/**
+	 * Returns the singleton instance of the Eclipse plugin.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @return the singleton instance.
-     * @generated
-     */
+	 * @return the singleton instance.
+	 * @generated
+	 */
     public static Implementation getPlugin() {
-        return plugin;
-    }
+		return plugin;
+	}
 
     /**
      * @param e
@@ -263,12 +263,12 @@ public class JSFCommonPlugin extends EMFPlugin {
         log.log(status);
     }
 
-    /**
-     * The actual implementation of the Eclipse <b>Plugin</b>.
-     * <!-- begin-user-doc -->
+	/**
+	 * The actual implementation of the Eclipse <b>Plugin</b>.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public static class Implementation extends EclipsePlugin 
     {
         /**
@@ -279,18 +279,18 @@ public class JSFCommonPlugin extends EMFPlugin {
          * Local identifier for the symbol factory extension point
          */
         public static final  String   SYMBOL_FACTORY_EXT_ID = "contextSymbolFactory";
-        /**
-         * Creates an instance.
-         * <!-- begin-user-doc -->
+		/**
+		 * Creates an instance.
+		 * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
-         * @generated
-         */
+		 * @generated
+		 */
         public Implementation() {
-            super();
+			super();
 
-            // Remember the static instance.
-            //
-            plugin = this;
-        }
-    }
+			// Remember the static instance.
+			//
+			plugin = this;
+		}
+	}
 }

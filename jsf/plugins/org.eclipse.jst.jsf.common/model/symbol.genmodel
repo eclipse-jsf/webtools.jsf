@@ -2,9 +2,9 @@
 <genmodel:GenModel xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright 2006 Oracle"
-    modelDirectory="/org.eclipse.jst.jsf.context.symbol/src" editDirectory="/org.eclipse.jst.jsf.context.symbol/src"
-    editorDirectory="/org.eclipse.jst.jsf.context.symbol.editor/src" modelPluginID="org.eclipse.jst.jsf.context.symbol"
-    modelName="My" modelPluginClass="" editPluginClass="org.eclipse.jst.jsf.context.symbol.plugin.SymbolsPlugin"
+    modelDirectory="/org.eclipse.jst.jsf.common/src" editDirectory="/org.eclipse.jst.jsf.common/src"
+    editorDirectory="/org.eclipse.jst.jsf.context.symbol.editor/src" modelPluginID="org.eclipse.jst.jsf.common"
+    modelName="My" modelPluginClass="" editPluginClass="org.eclipse.jst.jsf.common.JSFCommonPlugin"
     editorPluginClass="org.eclipse.jst.jsf.context.symbol.presentation.MyEditorPlugin"
     testSuiteClass="org.eclipse.jst.jsf.context.symbol.tests.MyAllTests" importerID="org.eclipse.emf.importer.java">
   <foreignModel>@model</foreignModel>
@@ -21,9 +21,12 @@
     <genDataTypes ecoreDataType="symbol.ecore#//IType"/>
     <genDataTypes ecoreDataType="symbol.ecore#//IJavaElement"/>
     <genClasses ecoreClass="symbol.ecore#//IBeanInstanceSymbol">
-      <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference symbol.ecore#//IBeanInstanceSymbol/javaTypeDescriptor"/>
       <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference symbol.ecore#//IBeanInstanceSymbol/properties"/>
       <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference symbol.ecore#//IBeanInstanceSymbol/methods"/>
+      <genOperations ecoreOperation="symbol.ecore#//IBeanInstanceSymbol/getJavaTypeDescriptor"/>
+      <genOperations ecoreOperation="symbol.ecore#//IBeanInstanceSymbol/setJavaTypeDescriptor">
+        <genParameters ecoreParameter="symbol.ecore#//IBeanInstanceSymbol/setJavaTypeDescriptor/newTypeDescriptor"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="symbol.ecore#//IBeanPropertySymbol">
       <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference symbol.ecore#//IBeanPropertySymbol/owner"/>
@@ -76,6 +79,20 @@
       <genOperations ecoreOperation="symbol.ecore#//IObjectSymbol/supportsCoercion">
         <genParameters ecoreParameter="symbol.ecore#//IObjectSymbol/supportsCoercion/typeSignature"/>
       </genOperations>
+      <genOperations ecoreOperation="symbol.ecore#//IObjectSymbol/coerce">
+        <genParameters ecoreParameter="symbol.ecore#//IObjectSymbol/coerce/typeSignature"/>
+      </genOperations>
     </genClasses>
+    <genClasses ecoreClass="symbol.ecore#//IBoundedTypeDescriptor">
+      <genOperations ecoreOperation="symbol.ecore#//IBoundedTypeDescriptor/isUnboundedForType">
+        <genParameters ecoreParameter="symbol.ecore#//IBoundedTypeDescriptor/isUnboundedForType/typeSignature"/>
+      </genOperations>
+      <genOperations ecoreOperation="symbol.ecore#//IBoundedTypeDescriptor/getUnboundedProperty">
+        <genParameters ecoreParameter="symbol.ecore#//IBoundedTypeDescriptor/getUnboundedProperty/name"/>
+        <genParameters ecoreParameter="symbol.ecore#//IBoundedTypeDescriptor/getUnboundedProperty/typeSignature"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="symbol.ecore#//IBoundedMapTypeDescriptor"/>
+    <genClasses ecoreClass="symbol.ecore#//IBoundedJavaTypeDescriptor"/>
   </genPackages>
 </genmodel:GenModel>

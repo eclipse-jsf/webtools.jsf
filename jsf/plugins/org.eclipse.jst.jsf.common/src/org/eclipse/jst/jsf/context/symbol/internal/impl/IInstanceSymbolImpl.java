@@ -42,41 +42,41 @@ import org.eclipse.jst.jsf.context.symbol.internal.provisional.ITypeDescriptor;
  * @generated
  */
 public class IInstanceSymbolImpl extends EObjectImpl implements IInstanceSymbol {
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public static final String copyright = "Copyright 2006 Oracle";
 
-    /**
-     * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-     * <!-- begin-user-doc -->
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getName()
-     * @generated
-     * @ordered
-     */
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
 	protected static final String NAME_EDEFAULT = null;
 
-    /**
-     * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-     * <!-- begin-user-doc -->
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getName()
-     * @generated
-     * @ordered
-     */
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
 	protected String name = NAME_EDEFAULT;
 
-    /**
-     * The cached value of the '{@link #getTypeDescriptor() <em>Type Descriptor</em>}' reference.
-     * <!-- begin-user-doc -->
+	/**
+	 * The cached value of the '{@link #getTypeDescriptor() <em>Type Descriptor</em>}' reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getTypeDescriptor()
-     * @generated
-     * @ordered
-     */
+	 * @see #getTypeDescriptor()
+	 * @generated
+	 * @ordered
+	 */
 	protected ITypeDescriptor typeDescriptor = null;
 
     /**
@@ -89,174 +89,174 @@ public class IInstanceSymbolImpl extends EObjectImpl implements IInstanceSymbol 
      */
     protected static final boolean READABLE_EDEFAULT = true;
 
-    /**
-     * The cached value of the '{@link #isReadable() <em>Readable</em>}' attribute.
-     * <!-- begin-user-doc -->
+	/**
+	 * The cached value of the '{@link #isReadable() <em>Readable</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #isReadable()
-     * @generated
-     * @ordered
-     */
+	 * @see #isReadable()
+	 * @generated
+	 * @ordered
+	 */
     protected boolean readable = READABLE_EDEFAULT;
 
-    /**
-     * The default value of the '{@link #isWritable() <em>Writable</em>}' attribute.
-     * <!-- begin-user-doc -->
+	/**
+	 * The default value of the '{@link #isWritable() <em>Writable</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #isWritable()
-     * @generated
-     * @ordered
-     */
+	 * @see #isWritable()
+	 * @generated
+	 * @ordered
+	 */
     protected static final boolean WRITABLE_EDEFAULT = false;
 
-    /**
-     * The cached value of the '{@link #isWritable() <em>Writable</em>}' attribute.
-     * <!-- begin-user-doc -->
+	/**
+	 * The cached value of the '{@link #isWritable() <em>Writable</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #isWritable()
-     * @generated
-     * @ordered
-     */
+	 * @see #isWritable()
+	 * @generated
+	 * @ordered
+	 */
     protected boolean writable = WRITABLE_EDEFAULT;
 
-    /**
-     * The default value of the '{@link #isTypeResolved() <em>Type Resolved</em>}' attribute.
-     * <!-- begin-user-doc -->
+	/**
+	 * The default value of the '{@link #isTypeResolved() <em>Type Resolved</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #isTypeResolved()
-     * @generated
-     * @ordered
-     */
+	 * @see #isTypeResolved()
+	 * @generated
+	 * @ordered
+	 */
 	protected static final boolean TYPE_RESOLVED_EDEFAULT = false;
 
-    /**
-     * The default value of the '{@link #getRuntimeSource() <em>Runtime Source</em>}' attribute.
-     * <!-- begin-user-doc -->
+	/**
+	 * The default value of the '{@link #getRuntimeSource() <em>Runtime Source</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getRuntimeSource()
-     * @generated
-     * @ordered
-     */
+	 * @see #getRuntimeSource()
+	 * @generated
+	 * @ordered
+	 */
     protected static final ERuntimeSource RUNTIME_SOURCE_EDEFAULT = ERuntimeSource.TAG_INSTANTIATED_SYMBOL_LITERAL;
 
-    /**
-     * The cached value of the '{@link #getRuntimeSource() <em>Runtime Source</em>}' attribute.
-     * <!-- begin-user-doc -->
+	/**
+	 * The cached value of the '{@link #getRuntimeSource() <em>Runtime Source</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getRuntimeSource()
-     * @generated
-     * @ordered
-     */
+	 * @see #getRuntimeSource()
+	 * @generated
+	 * @ordered
+	 */
     protected ERuntimeSource runtimeSource = RUNTIME_SOURCE_EDEFAULT;
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected IInstanceSymbolImpl() {
-        super();
-    }
+		super();
+	}
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @return the static class 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected EClass eStaticClass() {
-        return SymbolPackage.Literals.IINSTANCE_SYMBOL;
-    }
+		return SymbolPackage.Literals.IINSTANCE_SYMBOL;
+	}
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @return the symbol name
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public String getName() {
-        return name;
-    }
+		return name;
+	}
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @param newName 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public void setName(String newName) {
-        String oldName = name;
-        name = newName;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SymbolPackage.IINSTANCE_SYMBOL__NAME, oldName, name));
-    }
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SymbolPackage.IINSTANCE_SYMBOL__NAME, oldName, name));
+	}
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @return the type descriptor for this instance 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public ITypeDescriptor getTypeDescriptor() {
-        if (typeDescriptor != null && typeDescriptor.eIsProxy()) {
-            InternalEObject oldTypeDescriptor = (InternalEObject)typeDescriptor;
-            typeDescriptor = (ITypeDescriptor)eResolveProxy(oldTypeDescriptor);
-            if (typeDescriptor != oldTypeDescriptor) {
-                if (eNotificationRequired())
-                    eNotify(new ENotificationImpl(this, Notification.RESOLVE, SymbolPackage.IINSTANCE_SYMBOL__TYPE_DESCRIPTOR, oldTypeDescriptor, typeDescriptor));
-            }
-        }
-        return typeDescriptor;
-    }
+		if (typeDescriptor != null && typeDescriptor.eIsProxy()) {
+			InternalEObject oldTypeDescriptor = (InternalEObject)typeDescriptor;
+			typeDescriptor = (ITypeDescriptor)eResolveProxy(oldTypeDescriptor);
+			if (typeDescriptor != oldTypeDescriptor) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SymbolPackage.IINSTANCE_SYMBOL__TYPE_DESCRIPTOR, oldTypeDescriptor, typeDescriptor));
+			}
+		}
+		return typeDescriptor;
+	}
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
 	 * @return the instance type
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public ITypeDescriptor basicGetTypeDescriptor() {
-        return typeDescriptor;
-    }
+		return typeDescriptor;
+	}
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @param newTypeDescriptor 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public void setTypeDescriptor(ITypeDescriptor newTypeDescriptor) {
-        ITypeDescriptor oldTypeDescriptor = typeDescriptor;
-        typeDescriptor = newTypeDescriptor;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SymbolPackage.IINSTANCE_SYMBOL__TYPE_DESCRIPTOR, oldTypeDescriptor, typeDescriptor));
-    }
+		ITypeDescriptor oldTypeDescriptor = typeDescriptor;
+		typeDescriptor = newTypeDescriptor;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SymbolPackage.IINSTANCE_SYMBOL__TYPE_DESCRIPTOR, oldTypeDescriptor, typeDescriptor));
+	}
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @return true if instance symbol is readable 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public boolean isReadable() {
-        return readable;
-    }
+		return readable;
+	}
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @param newReadable 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void setReadable(boolean newReadable) {
-        boolean oldReadable = readable;
-        readable = newReadable;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SymbolPackage.IINSTANCE_SYMBOL__READABLE, oldReadable, readable));
-    }
+		boolean oldReadable = readable;
+		readable = newReadable;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SymbolPackage.IINSTANCE_SYMBOL__READABLE, oldReadable, readable));
+	}
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @return true if instance is writable.  
      * 
      * Normally, instances should not be 
@@ -264,24 +264,24 @@ public class IInstanceSymbolImpl extends EObjectImpl implements IInstanceSymbol 
      * this is included to allow for unforeseen cases that may require an 
      * instance symbol to appear to be writable 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public boolean isWritable() {
-        return writable;
-    }
+		return writable;
+	}
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @param newWritable 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void setWritable(boolean newWritable) {
-        boolean oldWritable = writable;
-        writable = newWritable;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SymbolPackage.IINSTANCE_SYMBOL__WRITABLE, oldWritable, writable));
-    }
+		boolean oldWritable = writable;
+		writable = newWritable;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SymbolPackage.IINSTANCE_SYMBOL__WRITABLE, oldWritable, writable));
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -294,28 +294,28 @@ public class IInstanceSymbolImpl extends EObjectImpl implements IInstanceSymbol 
 		return getTypeDescriptor() != null;
 	}
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @return return the symbol's runtime source 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public ERuntimeSource getRuntimeSource() {
-        return runtimeSource;
-    }
+		return runtimeSource;
+	}
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @param newRuntimeSource 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void setRuntimeSource(ERuntimeSource newRuntimeSource) {
-        ERuntimeSource oldRuntimeSource = runtimeSource;
-        runtimeSource = newRuntimeSource == null ? RUNTIME_SOURCE_EDEFAULT : newRuntimeSource;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SymbolPackage.IINSTANCE_SYMBOL__RUNTIME_SOURCE, oldRuntimeSource, runtimeSource));
-    }
+		ERuntimeSource oldRuntimeSource = runtimeSource;
+		runtimeSource = newRuntimeSource == null ? RUNTIME_SOURCE_EDEFAULT : newRuntimeSource;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SymbolPackage.IINSTANCE_SYMBOL__RUNTIME_SOURCE, oldRuntimeSource, runtimeSource));
+	}
 
     /**
      * @generated NOT
@@ -355,134 +355,134 @@ public class IInstanceSymbolImpl extends EObjectImpl implements IInstanceSymbol 
         return getTypeDescriptor();
     }
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @param featureID 
      * @param resolve 
      * @param coreType 
      * @return the value for the featureID 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-        switch (featureID) {
-            case SymbolPackage.IINSTANCE_SYMBOL__NAME:
-                return getName();
-            case SymbolPackage.IINSTANCE_SYMBOL__TYPE_DESCRIPTOR:
-                if (resolve) return getTypeDescriptor();
-                return basicGetTypeDescriptor();
-            case SymbolPackage.IINSTANCE_SYMBOL__READABLE:
-                return isReadable() ? Boolean.TRUE : Boolean.FALSE;
-            case SymbolPackage.IINSTANCE_SYMBOL__WRITABLE:
-                return isWritable() ? Boolean.TRUE : Boolean.FALSE;
-            case SymbolPackage.IINSTANCE_SYMBOL__TYPE_RESOLVED:
-                return isTypeResolved() ? Boolean.TRUE : Boolean.FALSE;
-            case SymbolPackage.IINSTANCE_SYMBOL__RUNTIME_SOURCE:
-                return getRuntimeSource();
-        }
-        return super.eGet(featureID, resolve, coreType);
-    }
+		switch (featureID) {
+			case SymbolPackage.IINSTANCE_SYMBOL__NAME:
+				return getName();
+			case SymbolPackage.IINSTANCE_SYMBOL__TYPE_DESCRIPTOR:
+				if (resolve) return getTypeDescriptor();
+				return basicGetTypeDescriptor();
+			case SymbolPackage.IINSTANCE_SYMBOL__READABLE:
+				return isReadable() ? Boolean.TRUE : Boolean.FALSE;
+			case SymbolPackage.IINSTANCE_SYMBOL__WRITABLE:
+				return isWritable() ? Boolean.TRUE : Boolean.FALSE;
+			case SymbolPackage.IINSTANCE_SYMBOL__TYPE_RESOLVED:
+				return isTypeResolved() ? Boolean.TRUE : Boolean.FALSE;
+			case SymbolPackage.IINSTANCE_SYMBOL__RUNTIME_SOURCE:
+				return getRuntimeSource();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @param featureID 
      * @param newValue 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public void eSet(int featureID, Object newValue) {
-        switch (featureID) {
-            case SymbolPackage.IINSTANCE_SYMBOL__NAME:
-                setName((String)newValue);
-                return;
-            case SymbolPackage.IINSTANCE_SYMBOL__TYPE_DESCRIPTOR:
-                setTypeDescriptor((ITypeDescriptor)newValue);
-                return;
-            case SymbolPackage.IINSTANCE_SYMBOL__READABLE:
-                setReadable(((Boolean)newValue).booleanValue());
-                return;
-            case SymbolPackage.IINSTANCE_SYMBOL__WRITABLE:
-                setWritable(((Boolean)newValue).booleanValue());
-                return;
-            case SymbolPackage.IINSTANCE_SYMBOL__RUNTIME_SOURCE:
-                setRuntimeSource((ERuntimeSource)newValue);
-                return;
-        }
-        super.eSet(featureID, newValue);
-    }
+		switch (featureID) {
+			case SymbolPackage.IINSTANCE_SYMBOL__NAME:
+				setName((String)newValue);
+				return;
+			case SymbolPackage.IINSTANCE_SYMBOL__TYPE_DESCRIPTOR:
+				setTypeDescriptor((ITypeDescriptor)newValue);
+				return;
+			case SymbolPackage.IINSTANCE_SYMBOL__READABLE:
+				setReadable(((Boolean)newValue).booleanValue());
+				return;
+			case SymbolPackage.IINSTANCE_SYMBOL__WRITABLE:
+				setWritable(((Boolean)newValue).booleanValue());
+				return;
+			case SymbolPackage.IINSTANCE_SYMBOL__RUNTIME_SOURCE:
+				setRuntimeSource((ERuntimeSource)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @param featureID 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public void eUnset(int featureID) {
-        switch (featureID) {
-            case SymbolPackage.IINSTANCE_SYMBOL__NAME:
-                setName(NAME_EDEFAULT);
-                return;
-            case SymbolPackage.IINSTANCE_SYMBOL__TYPE_DESCRIPTOR:
-                setTypeDescriptor((ITypeDescriptor)null);
-                return;
-            case SymbolPackage.IINSTANCE_SYMBOL__READABLE:
-                setReadable(READABLE_EDEFAULT);
-                return;
-            case SymbolPackage.IINSTANCE_SYMBOL__WRITABLE:
-                setWritable(WRITABLE_EDEFAULT);
-                return;
-            case SymbolPackage.IINSTANCE_SYMBOL__RUNTIME_SOURCE:
-                setRuntimeSource(RUNTIME_SOURCE_EDEFAULT);
-                return;
-        }
-        super.eUnset(featureID);
-    }
+		switch (featureID) {
+			case SymbolPackage.IINSTANCE_SYMBOL__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+			case SymbolPackage.IINSTANCE_SYMBOL__TYPE_DESCRIPTOR:
+				setTypeDescriptor((ITypeDescriptor)null);
+				return;
+			case SymbolPackage.IINSTANCE_SYMBOL__READABLE:
+				setReadable(READABLE_EDEFAULT);
+				return;
+			case SymbolPackage.IINSTANCE_SYMBOL__WRITABLE:
+				setWritable(WRITABLE_EDEFAULT);
+				return;
+			case SymbolPackage.IINSTANCE_SYMBOL__RUNTIME_SOURCE:
+				setRuntimeSource(RUNTIME_SOURCE_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @param featureID 
      * @return true if the feature has been set 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public boolean eIsSet(int featureID) {
-        switch (featureID) {
-            case SymbolPackage.IINSTANCE_SYMBOL__NAME:
-                return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-            case SymbolPackage.IINSTANCE_SYMBOL__TYPE_DESCRIPTOR:
-                return typeDescriptor != null;
-            case SymbolPackage.IINSTANCE_SYMBOL__READABLE:
-                return readable != READABLE_EDEFAULT;
-            case SymbolPackage.IINSTANCE_SYMBOL__WRITABLE:
-                return writable != WRITABLE_EDEFAULT;
-            case SymbolPackage.IINSTANCE_SYMBOL__TYPE_RESOLVED:
-                return isTypeResolved() != TYPE_RESOLVED_EDEFAULT;
-            case SymbolPackage.IINSTANCE_SYMBOL__RUNTIME_SOURCE:
-                return runtimeSource != RUNTIME_SOURCE_EDEFAULT;
-        }
-        return super.eIsSet(featureID);
-    }
+		switch (featureID) {
+			case SymbolPackage.IINSTANCE_SYMBOL__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case SymbolPackage.IINSTANCE_SYMBOL__TYPE_DESCRIPTOR:
+				return typeDescriptor != null;
+			case SymbolPackage.IINSTANCE_SYMBOL__READABLE:
+				return readable != READABLE_EDEFAULT;
+			case SymbolPackage.IINSTANCE_SYMBOL__WRITABLE:
+				return writable != WRITABLE_EDEFAULT;
+			case SymbolPackage.IINSTANCE_SYMBOL__TYPE_RESOLVED:
+				return isTypeResolved() != TYPE_RESOLVED_EDEFAULT;
+			case SymbolPackage.IINSTANCE_SYMBOL__RUNTIME_SOURCE:
+				return runtimeSource != RUNTIME_SOURCE_EDEFAULT;
+		}
+		return super.eIsSet(featureID);
+	}
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @return the string representation 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public String toString() {
-        if (eIsProxy()) return super.toString();
+		if (eIsProxy()) return super.toString();
 
-        StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (name: ");
-        result.append(name);
-        result.append(", readable: ");
-        result.append(readable);
-        result.append(", writable: ");
-        result.append(writable);
-        result.append(", runtimeSource: ");
-        result.append(runtimeSource);
-        result.append(')');
-        return result.toString();
-    }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(", readable: ");
+		result.append(readable);
+		result.append(", writable: ");
+		result.append(writable);
+		result.append(", runtimeSource: ");
+		result.append(runtimeSource);
+		result.append(')');
+		return result.toString();
+	}
 
 } //IInstanceSymbolImpl

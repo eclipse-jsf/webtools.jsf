@@ -31,112 +31,112 @@ package org.eclipse.jst.jsf.context.symbol.internal.provisional;
  * @generated
  */
 public interface IObjectSymbol extends ISymbol {
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     String copyright = "Copyright 2006 Oracle";
 
-    /**
-     * Returns the value of the '<em><b>Type Descriptor</b></em>' reference.
-     * <!-- begin-user-doc -->
+	/**
+	 * Returns the value of the '<em><b>Type Descriptor</b></em>' reference.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Type Descriptor</em>' reference isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Type Descriptor</em>' reference.
-     * @see #setTypeDescriptor(ITypeDescriptor)
-     * @see org.eclipse.jst.jsf.context.symbol.SymbolPackage#getIObjectSymbol_TypeDescriptor()
-     * @model
-     * @generated
-     */
+	 * @return the value of the '<em>Type Descriptor</em>' reference.
+	 * @see #setTypeDescriptor(ITypeDescriptor)
+	 * @see org.eclipse.jst.jsf.context.symbol.SymbolPackage#getIObjectSymbol_TypeDescriptor()
+	 * @model
+	 * @generated
+	 */
     ITypeDescriptor getTypeDescriptor();
 
-    /**
-     * Sets the value of the '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IObjectSymbol#getTypeDescriptor <em>Type Descriptor</em>}' reference.
-     * <!-- begin-user-doc -->
+	/**
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IObjectSymbol#getTypeDescriptor <em>Type Descriptor</em>}' reference.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Type Descriptor</em>' reference.
-     * @see #getTypeDescriptor()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Type Descriptor</em>' reference.
+	 * @see #getTypeDescriptor()
+	 * @generated
+	 */
     void setTypeDescriptor(ITypeDescriptor value);
 
-    /**
-     * Returns the value of the '<em><b>Readable</b></em>' attribute.
-     * <!-- begin-user-doc -->
+	/**
+	 * Returns the value of the '<em><b>Readable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Readable</em>' attribute isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Readable</em>' attribute.
-     * @see #setReadable(boolean)
-     * @see org.eclipse.jst.jsf.context.symbol.SymbolPackage#getIObjectSymbol_Readable()
-     * @model
-     * @generated
-     */
+	 * @return the value of the '<em>Readable</em>' attribute.
+	 * @see #setReadable(boolean)
+	 * @see org.eclipse.jst.jsf.context.symbol.SymbolPackage#getIObjectSymbol_Readable()
+	 * @model
+	 * @generated
+	 */
     boolean isReadable();
 
-    /**
-     * Sets the value of the '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IObjectSymbol#isReadable <em>Readable</em>}' attribute.
-     * <!-- begin-user-doc -->
+	/**
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IObjectSymbol#isReadable <em>Readable</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Readable</em>' attribute.
-     * @see #isReadable()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Readable</em>' attribute.
+	 * @see #isReadable()
+	 * @generated
+	 */
     void setReadable(boolean value);
 
-    /**
-     * Returns the value of the '<em><b>Writable</b></em>' attribute.
-     * <!-- begin-user-doc -->
+	/**
+	 * Returns the value of the '<em><b>Writable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Writable</em>' attribute isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Writable</em>' attribute.
-     * @see #setWritable(boolean)
-     * @see org.eclipse.jst.jsf.context.symbol.SymbolPackage#getIObjectSymbol_Writable()
-     * @model
-     * @generated
-     */
+	 * @return the value of the '<em>Writable</em>' attribute.
+	 * @see #setWritable(boolean)
+	 * @see org.eclipse.jst.jsf.context.symbol.SymbolPackage#getIObjectSymbol_Writable()
+	 * @model
+	 * @generated
+	 */
     boolean isWritable();
 
-    /**
-     * Sets the value of the '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IObjectSymbol#isWritable <em>Writable</em>}' attribute.
-     * <!-- begin-user-doc -->
+	/**
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IObjectSymbol#isWritable <em>Writable</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Writable</em>' attribute.
-     * @see #isWritable()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Writable</em>' attribute.
+	 * @see #isWritable()
+	 * @generated
+	 */
     void setWritable(boolean value);
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @param typeSignature 
      * @return true if this object can be coerced (is an instanceof) the type
      * specified in the fully qualified typeSignature 
      * <!-- end-user-doc -->
-     * @model
-     * @generated
-     */
+	 * @model
+	 * @generated
+	 */
     boolean supportsCoercion(String typeSignature);
 
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * @param typeSignature 
      * @return a type descriptor supporting a class cast of this object to
      * the request typeSignature, or null if such a cast is not supported.
      * Returns non-null iff supportsCoercion(typeSignature) == false
      * <!-- end-user-doc -->
-     * @model
-     * @generated
-     */
+	 * @model
+	 * @generated
+	 */
     ITypeDescriptor coerce(String typeSignature);
 
 } // IObjectSymbol

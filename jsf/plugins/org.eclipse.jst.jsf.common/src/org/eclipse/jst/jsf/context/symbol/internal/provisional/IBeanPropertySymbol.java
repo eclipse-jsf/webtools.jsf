@@ -19,11 +19,11 @@ package org.eclipse.jst.jsf.context.symbol.internal.provisional;
  * @model
  */
 public interface IBeanPropertySymbol extends IPropertySymbol, IDescribedInDetail {
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     String copyright = "Copyright 2006 Oracle";
 
 	/**
@@ -32,14 +32,14 @@ public interface IBeanPropertySymbol extends IPropertySymbol, IDescribedInDetail
 	 */
 	IJavaTypeDescriptor2		getOwner();
 	
-    /**
-     * Sets the value of the '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanPropertySymbol#getOwner <em>Owner</em>}' reference.
-     * <!-- begin-user-doc -->
+	/**
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanPropertySymbol#getOwner <em>Owner</em>}' reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Owner</em>' reference.
-     * @see #getOwner()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Owner</em>' reference.
+	 * @see #getOwner()
+	 * @generated
+	 */
 	void setOwner(IJavaTypeDescriptor2 value);
 
 	/**

@@ -46,158 +46,158 @@ public class IMapTypeDescriptorItemProvider
         ITreeItemContentProvider,	
         IItemLabelProvider,	
         IItemPropertySource {
-    /**
-     * <!-- begin-user-doc -->
+	/**
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public static final String copyright = "Copyright 2006 Oracle";
 
-    /**
-     * This constructs an instance from a factory and a notifier.
-     * <!-- begin-user-doc -->
+	/**
+	 * This constructs an instance from a factory and a notifier.
+	 * <!-- begin-user-doc -->
      * @param adapterFactory 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public IMapTypeDescriptorItemProvider(AdapterFactory adapterFactory) {
-        super(adapterFactory);
-    }
+		super(adapterFactory);
+	}
 
-    /**
-     * This returns the property descriptors for the adapted class.
-     * <!-- begin-user-doc -->
+	/**
+	 * This returns the property descriptors for the adapted class.
+	 * <!-- begin-user-doc -->
      * @param object 
      * @return the prop descriptor 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public List getPropertyDescriptors(Object object) {
-        if (itemPropertyDescriptors == null) {
-            super.getPropertyDescriptors(object);
+		if (itemPropertyDescriptors == null) {
+			super.getPropertyDescriptors(object);
 
-            addMapSourcePropertyDescriptor(object);
-            addImmutablePropertyDescriptor(object);
-        }
-        return itemPropertyDescriptors;
-    }
+			addMapSourcePropertyDescriptor(object);
+			addImmutablePropertyDescriptor(object);
+		}
+		return itemPropertyDescriptors;
+	}
 
-    /**
-     * This adds a property descriptor for the Map Source feature.
-     * <!-- begin-user-doc -->
+	/**
+	 * This adds a property descriptor for the Map Source feature.
+	 * <!-- begin-user-doc -->
      * @param object 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected void addMapSourcePropertyDescriptor(Object object) {
-        itemPropertyDescriptors.add
-            (createItemPropertyDescriptor
-                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-                 getResourceLocator(),
-                 getString("_UI_IMapTypeDescriptor_mapSource_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_IMapTypeDescriptor_mapSource_feature", "_UI_IMapTypeDescriptor_type"),
-                 SymbolPackage.Literals.IMAP_TYPE_DESCRIPTOR__MAP_SOURCE,
-                 true,
-                 false,
-                 false,
-                 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-                 null,
-                 null));
-    }
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_IMapTypeDescriptor_mapSource_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_IMapTypeDescriptor_mapSource_feature", "_UI_IMapTypeDescriptor_type"),
+				 SymbolPackage.Literals.IMAP_TYPE_DESCRIPTOR__MAP_SOURCE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
 
-    /**
-     * This adds a property descriptor for the Immutable feature.
-     * <!-- begin-user-doc -->
+	/**
+	 * This adds a property descriptor for the Immutable feature.
+	 * <!-- begin-user-doc -->
      * @param object 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected void addImmutablePropertyDescriptor(Object object) {
-        itemPropertyDescriptors.add
-            (createItemPropertyDescriptor
-                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-                 getResourceLocator(),
-                 getString("_UI_IMapTypeDescriptor_immutable_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_IMapTypeDescriptor_immutable_feature", "_UI_IMapTypeDescriptor_type"),
-                 SymbolPackage.Literals.IMAP_TYPE_DESCRIPTOR__IMMUTABLE,
-                 true,
-                 false,
-                 false,
-                 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-                 null,
-                 null));
-    }
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_IMapTypeDescriptor_immutable_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_IMapTypeDescriptor_immutable_feature", "_UI_IMapTypeDescriptor_type"),
+				 SymbolPackage.Literals.IMAP_TYPE_DESCRIPTOR__IMMUTABLE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
 
-    /**
-     * This returns IMapTypeDescriptor.gif.
-     * <!-- begin-user-doc -->
+	/**
+	 * This returns IMapTypeDescriptor.gif.
+	 * <!-- begin-user-doc -->
      * @param object 
      * @return the image adaptation of the object 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/IMapTypeDescriptor"));
-    }
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/IMapTypeDescriptor"));
+	}
 
-    /**
-     * This returns the label text for the adapted class.
-     * <!-- begin-user-doc -->
+	/**
+	 * This returns the label text for the adapted class.
+	 * <!-- begin-user-doc -->
      * @param object 
      * @return the text rep of the object 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public String getText(Object object) {
-        String label = ((IMapTypeDescriptor)object).getTypeSignature();
-        return label == null || label.length() == 0 ?
-            getString("_UI_IMapTypeDescriptor_type") :
-            getString("_UI_IMapTypeDescriptor_type") + " " + label;
-    }
+		String label = ((IMapTypeDescriptor)object).getTypeSignature();
+		return label == null || label.length() == 0 ?
+			getString("_UI_IMapTypeDescriptor_type") :
+			getString("_UI_IMapTypeDescriptor_type") + " " + label;
+	}
 
-    /**
-     * This handles model notifications by calling {@link #updateChildren} to update any cached
-     * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-     * <!-- begin-user-doc -->
+	/**
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc -->
      * @param notification 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void notifyChanged(Notification notification) {
-        updateChildren(notification);
+		updateChildren(notification);
 
-        switch (notification.getFeatureID(IMapTypeDescriptor.class)) {
-            case SymbolPackage.IMAP_TYPE_DESCRIPTOR__MAP_SOURCE:
-            case SymbolPackage.IMAP_TYPE_DESCRIPTOR__IMMUTABLE:
-                fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-                return;
-        }
-        super.notifyChanged(notification);
-    }
+		switch (notification.getFeatureID(IMapTypeDescriptor.class)) {
+			case SymbolPackage.IMAP_TYPE_DESCRIPTOR__MAP_SOURCE:
+			case SymbolPackage.IMAP_TYPE_DESCRIPTOR__IMMUTABLE:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+		}
+		super.notifyChanged(notification);
+	}
 
-    /**
-     * This adds to the collection of {@link org.eclipse.emf.edit.command.CommandParameter}s
-     * describing all of the children that can be created under this object.
-     * <!-- begin-user-doc -->
+	/**
+	 * This adds to the collection of {@link org.eclipse.emf.edit.command.CommandParameter}s
+	 * describing all of the children that can be created under this object.
+	 * <!-- begin-user-doc -->
      * @param newChildDescriptors 
      * @param object 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected void collectNewChildDescriptors(Collection newChildDescriptors, Object object) {
-        super.collectNewChildDescriptors(newChildDescriptors, object);
-    }
+		super.collectNewChildDescriptors(newChildDescriptors, object);
+	}
 
-    /**
-     * Return the resource locator for this item provider's resources.
-     * <!-- begin-user-doc -->
+	/**
+	 * Return the resource locator for this item provider's resources.
+	 * <!-- begin-user-doc -->
      * @return the resource locator 
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public ResourceLocator getResourceLocator() {
-        return JSFCommonPlugin.INSTANCE;
-    }
+		return JSFCommonPlugin.INSTANCE;
+	}
 
 }
 
