@@ -108,4 +108,14 @@ public class MyBean
 	{
 		return false;
 	}
+	
+	public int[] getIntArrayProperty()
+	{
+		return new int[] {0, 1, 2};
+	}
+	
+	public String[][] getArrayOfArrayOfStringProperty()
+	{
+		return new String[3][];
+	}	
 }

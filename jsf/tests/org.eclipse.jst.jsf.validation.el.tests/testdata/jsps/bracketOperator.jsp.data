@@ -40,6 +40,30 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
 	   	<h:outputText value="#{mapBean['getIgnoredIntProperty']}"/>
 	   	<h:commandButton action="#{beanWithMapProperties['actionProperty']}"/>
 
+		<h:outputText value="#{myBean.stringArrayProperty[0]}"/>
+		<h:outputText value="#{myBean.stringArrayProperty[myBean.integerProperty]}"/>
+		<h:outputText value="#{myBean.stringArrayProperty['0']}"/>
+		<h:outputText value="#{myBean.intArrayProperty[1]}"/>
+		<h:outputText value="#{myBean.intArrayProperty[1] > 0}"/>
+		<h:outputText value="#{empty myBean.arrayOfArrayOfStringProperty}"/>
+		<h:outputText value="#{empty myBean.arrayOfArrayOfStringProperty[1]}"/>
+		<h:outputText value="#{myBean.arrayOfArrayOfStringProperty[0][1]}"/>
+		<h:outputText value="#{myBean.arrayOfArrayOfStringProperty[myBean.intArrayProperty[0]][myBean.intArrayProperty[1]]}"/>
+
+		<h:outputText value="#{beanWithListProperties.listProperty[0]}"/>
+		<h:outputText value="#{beanWithListProperties.listProperty[myBean.integerProperty]}"/>
+		<h:outputText value="#{beanWithListProperties.listProperty['0']}"/>
+		<h:outputText value="#{beanWithListProperties.listProperty['0'].someValue}"/>
+		<h:outputText value="#{beanWithListProperties.arrayListProperty[0]}"/>
+		<h:outputText value="#{beanWithListProperties.arrayListProperty[myBean.integerProperty]}"/>
+		<h:outputText value="#{beanWithListProperties.arrayListProperty['0']}"/>
+		<h:outputText value="#{beanWithListProperties.arrayListProperty['0'].someValue}"/>
+		
+		<h:outputText value="#{listBean[0]}"/>
+		<h:outputText value="#{listBean[myBean.integerProperty]}"/>
+		<h:outputText value="#{listBean['0']}"/>
+		<h:outputText value="#{listBean['0'].someValue}"/>
+
 		<!--  warnings -->
 	   	<h:outputText value="#{bundle['y']}"/>
 	   	<h:outputText value="#{bundle['x.z']}"/>
@@ -48,7 +72,23 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
     	<h:outputText value="#{beanWithMapProperties['mapProperty.foo']}"/>
     	<h:outputText value="#{beanWithMapProperties['mapProperty.foo.x']}"/>
 	   	<h:outputText value="#{beanWithMapProperties['treeMap.foo.x']}"/>
-	   	
+	   	<h:outputText value="#{myBean.stringArrayProperty[myBean.stringProperty]"/>
+	   	<h:outputText value="#{myBean.stringArrayProperty[-1]}"/>
+
+		<h:outputText value="#{beanWithListProperties.listProperty.someProperty}"/>
+		<h:outputText value="#{beanWithListProperties.arrayListProperty.someProperty"}/>
+		<h:outputText value="#{beanWithListProperties.arrayListProperty[-1]}"/>
+		<h:outputText value="#{listBean[-1]}"/>
+		<!-- because it is a list the bean properties are invisible
+		<h:outputText value="#{listBean.stringProperty}"}/>
+		<h:outputText value="#{listBean['stringProperty']}"}/>
+		
+	   	<!-- errors -->
+		<h:outputText value="#{myBean.stringArrayProperty['a']}"/>
+		<h:outputText value="#{beanWithListProperties.arrayListProperty['a']}"/>
+		<h:outputText value="#{beanWithListProperties.arrayListProperty[true]}"/>
+		<h:outputText value="#{listBean['a']}"/>
+		<h:outputText value="#{listBean[true]}"/>
   </f:view>
     </body>
 </html>

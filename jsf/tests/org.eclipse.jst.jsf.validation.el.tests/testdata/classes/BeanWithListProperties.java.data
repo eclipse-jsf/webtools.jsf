@@ -1,0 +1,25 @@
+package beans;
+
+
+public class BeanWithListProperties 
+{
+	public java.util.List getListProperty()
+	{
+		return new HashMap();
+	}
+	
+	public int getIntegerProperty()
+	{
+		return -1;
+	}
+	
+	public java.util.ArrayList getArrayListProperty()
+	{
+		return new java.util.ArrayList();
+	}
+	
+	public String actionProperty()
+	{
+		return "go";
+	}
+}

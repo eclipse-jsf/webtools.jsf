@@ -128,4 +128,14 @@ public class TestBean1
     public void setAnotherBean(AnotherBean anotherBean)
     {
     }
+// Int array property
+	public int[] getIntArrayProperty()
+	{
+		return new int[] {0,1,2};
+	}
+// array of array of string
+	public String[][] getArrayOfArrayOfStringProperty()
+	{
+		return new String[3][];
+	}
 }

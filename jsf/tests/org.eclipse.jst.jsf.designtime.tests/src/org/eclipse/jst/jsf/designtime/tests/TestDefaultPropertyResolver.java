@@ -30,14 +30,17 @@ import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
  */
 public class TestDefaultPropertyResolver extends TestCase 
 {
+    private static final int NUM_PROPERTIES_TEST_BEAN_1 = 5;
     private JDTTestEnvironment              _jdtTestEnvironment;
     private JSFFacetedTestEnvironment       _jsfFactedTestEnvironment;
 
     private IType                           _testBean1Type;
-    private IType _testMapBean1Type;
-    private IType _testBean2Type;
-    private IType _testBean3Type;
-    private IType _testBeanWithMapProp;
+    private IType                           _testMapBean1Type;
+    private IType                           _testBean2Type;
+    private IType                           _testBean3Type;
+    private IType                           _testBeanWithMapProp;
+    private IType                           _testListBeanType;
+    private IType                           _testBeanWithListPropType;
     
     private final static String     SRC_FOLDER_NAME = "src";
     private final static String     PACKAGE_NAME = "com.test";
@@ -46,7 +49,8 @@ public class TestDefaultPropertyResolver extends TestCase
     private final static String     TESTBEAN3_NAME = "TestBean3";
     private final static String     MAPBEAN_NAME = "MapBean";
     private final static String     BEANWITHMAPPROP_NAME = "BeanWithMapProp";  
-    
+    private final static String     LISTBEAN_NAME = "ListBean";
+    private final static String     BEANWITHLISTPROP_NAME = "BeanWithListProp";
     
     protected void setUp() throws Exception 
     {
@@ -102,6 +106,19 @@ public class TestDefaultPropertyResolver extends TestCase
             _jdtTestEnvironment.getJavaProject().findType(PACKAGE_NAME+"."+BEANWITHMAPPROP_NAME);
         assertNotNull(_testBeanWithMapProp);
 
+        JSFTestUtil.loadSourceClass(
+                DesignTimeTestsPlugin.getDefault().getBundle(), 
+                    "/testdata/ListBean.java.data", LISTBEAN_NAME, SRC_FOLDER_NAME, PACKAGE_NAME, _jdtTestEnvironment);
+        _testListBeanType =
+            _jdtTestEnvironment.getJavaProject().findType(PACKAGE_NAME+"."+LISTBEAN_NAME);
+        assertNotNull(_testListBeanType);
+        
+        JSFTestUtil.loadSourceClass(
+                DesignTimeTestsPlugin.getDefault().getBundle(), 
+                    "/testdata/BeanWithListProp.java.data", BEANWITHLISTPROP_NAME, SRC_FOLDER_NAME, PACKAGE_NAME, _jdtTestEnvironment);
+        _testBeanWithListPropType =
+            _jdtTestEnvironment.getJavaProject().findType(PACKAGE_NAME+"."+BEANWITHLISTPROP_NAME);
+        assertNotNull(_testBeanWithListPropType);
     }
     
     /**
@@ -111,7 +128,7 @@ public class TestDefaultPropertyResolver extends TestCase
     {
         JDTBeanIntrospector  beanIntrospector = new JDTBeanIntrospector(_testBean1Type);
         Map props = beanIntrospector.getProperties();
-        assertEquals(2, props.size());
+        assertEquals(NUM_PROPERTIES_TEST_BEAN_1, props.size());
         assertTrue(props.containsKey("stringProp1"));
         assertTrue(props.containsKey("booleanIsProp1"));
         
@@ -134,6 +151,15 @@ public class TestDefaultPropertyResolver extends TestCase
         props = beanIntrospector.getProperties();
         // one props: one of type Map
         assertEquals(1, props.size());
+        
+        beanIntrospector = new JDTBeanIntrospector(_testListBeanType);
+        props = beanIntrospector.getProperties();
+        // includes isEmpty
+        assertEquals(2, props.size());
+        
+        beanIntrospector = new JDTBeanIntrospector(_testBeanWithListPropType);
+        props = beanIntrospector.getProperties();
+        assertEquals(1, props.size());
     }
     
     /**
@@ -149,7 +175,7 @@ public class TestDefaultPropertyResolver extends TestCase
         
         DefaultDTPropertyResolver propResolver = new DefaultDTPropertyResolver();
         ISymbol[]  properties = propResolver.getAllProperties(symbol);
-        assertEquals(2, properties.length);
+        assertEquals(NUM_PROPERTIES_TEST_BEAN_1, properties.length);
         Map  checkProps = new HashMap();
         for (int i = 0; i < properties.length; i++)
         {
@@ -359,6 +385,168 @@ public class TestDefaultPropertyResolver extends TestCase
         assertEquals(0, properties.length);
         
         IPropertySymbol unboundedProp = (IPropertySymbol) propResolver.getProperty(mapProp, "foo");
+        assertEquals(TypeConstants.TYPE_JAVAOBJECT, unboundedProp.getTypeDescriptor().getTypeSignature());
+    }
+    
+    /**
+     * Verify that bean properties of type array are resolved properly
+     * using the getProperty(base, offset) method.
+     */
+    public void testBeanWithArrayProperty()
+    {
+        final IBeanInstanceSymbol symbol = SymbolFactory.eINSTANCE.createIBeanInstanceSymbol();
+        symbol.setName("BeanWithArrayProp");
+        final IJavaTypeDescriptor2 typeDesc = SymbolFactory.eINSTANCE.createIJavaTypeDescriptor2();
+        typeDesc.setType(_testBean1Type);
+        symbol.setTypeDescriptor(typeDesc);
+        
+        DefaultDTPropertyResolver propResolver = new DefaultDTPropertyResolver();
+
+        // test array of strings property
+        {
+            final ISymbol arrayOfStringsProperty = 
+                propResolver.getProperty(symbol, "stringArrayProperty");
+            
+            assertTrue(arrayOfStringsProperty instanceof IPropertySymbol);
+            final IPropertySymbol arrayOfStringsPropertySymbol = 
+                (IPropertySymbol) arrayOfStringsProperty;
+            assertEquals(Signature.createArraySignature(TypeConstants.TYPE_STRING, 1), arrayOfStringsPropertySymbol.getTypeDescriptor().getTypeSignature());
+            assertTrue(arrayOfStringsPropertySymbol.getTypeDescriptor().isArray());
+            assertEquals(TypeConstants.TYPE_STRING, arrayOfStringsPropertySymbol.getTypeDescriptor().getArrayElement().getTypeDescriptor().getTypeSignature());
+    
+            // now the real property resolver test
+            // get an array element
+            final ISymbol  arrayElement = propResolver.getProperty(arrayOfStringsPropertySymbol, 0);
+            assertTrue(arrayElement instanceof IObjectSymbol);
+            final IObjectSymbol arrayElementSymbol = (IObjectSymbol) arrayElement;
+            assertNotNull(((IJavaTypeDescriptor2)arrayElementSymbol.getTypeDescriptor()).getType());
+            assertEquals(TypeConstants.TYPE_STRING, arrayElementSymbol.getTypeDescriptor().getTypeSignature());
+        }
+        
+        // test array of int property
+        {
+            final ISymbol arrayOfIntProperty = 
+                propResolver.getProperty(symbol, "intArrayProperty");
+            
+            assertTrue(arrayOfIntProperty instanceof IPropertySymbol);
+            final IPropertySymbol arrayOfIntPropertySymbol = 
+                (IPropertySymbol) arrayOfIntProperty;
+            assertEquals(Signature.createArraySignature(Signature.SIG_INT, 1), arrayOfIntPropertySymbol.getTypeDescriptor().getTypeSignature());
+            assertTrue(arrayOfIntPropertySymbol.getTypeDescriptor().isArray());
+            assertEquals(Signature.SIG_INT, arrayOfIntPropertySymbol.getTypeDescriptor().getArrayElement().getTypeDescriptor().getTypeSignature());
+    
+            // now the real property resolver test
+            // get an array element
+            final ISymbol  arrayElement = propResolver.getProperty(arrayOfIntPropertySymbol, 0);
+            assertTrue(arrayElement instanceof IObjectSymbol);
+            final IObjectSymbol arrayElementSymbol = (IObjectSymbol) arrayElement;
+            // type will be null since int has no corresponding IType (not an object)
+            assertNull(((IJavaTypeDescriptor2)arrayElementSymbol.getTypeDescriptor()).getType());
+            assertEquals(Signature.SIG_INT, arrayElementSymbol.getTypeDescriptor().getTypeSignature());
+        }
+        
+        // test array of array of strings
+        {
+            final ISymbol arrayOfIntProperty = 
+                propResolver.getProperty(symbol, "arrayOfArrayOfStringProperty");
+            
+            assertTrue(arrayOfIntProperty instanceof IPropertySymbol);
+            final IPropertySymbol arrayOfIntPropertySymbol = 
+                (IPropertySymbol) arrayOfIntProperty;
+            assertEquals(Signature.createArraySignature(TypeConstants.TYPE_STRING, 2),
+                         arrayOfIntPropertySymbol.getTypeDescriptor().getTypeSignature());
+            assertTrue(arrayOfIntPropertySymbol.getTypeDescriptor().isArray());
+            assertEquals(
+                         Signature.createArraySignature(TypeConstants.TYPE_STRING,1), 
+                         arrayOfIntPropertySymbol.getTypeDescriptor().getArrayElement().getTypeDescriptor().getTypeSignature()
+                        );
+    
+            // now the real property resolver test
+            // get an array element
+            final ISymbol  arrayElement = propResolver.getProperty(arrayOfIntPropertySymbol, 0);
+            assertTrue(arrayElement instanceof IObjectSymbol);
+            final IObjectSymbol arrayElementSymbol = (IObjectSymbol) arrayElement;
+            assertNotNull(((IJavaTypeDescriptor2)arrayElementSymbol.getTypeDescriptor()).getType());
+            assertEquals(
+                            Signature.createArraySignature(TypeConstants.TYPE_STRING,1), 
+                            arrayElementSymbol.getTypeDescriptor().getTypeSignature()
+                        );
+            
+            // the elements of the array are arrays themselves
+            assertTrue(arrayElementSymbol.getTypeDescriptor().isArray());
+            final ISymbol arrayElementElement =
+                propResolver.getProperty(arrayElementSymbol, 0);
+            assertTrue(arrayElementElement instanceof IObjectSymbol);
+            final IObjectSymbol arrayElementElementSymbol = 
+                (IObjectSymbol) arrayElementElement;
+            assertNotNull(((IJavaTypeDescriptor2)arrayElementElementSymbol.getTypeDescriptor()).getType());
+            assertEquals(TypeConstants.TYPE_STRING, arrayElementElementSymbol.getTypeDescriptor().getTypeSignature());
+        }
+    }
+    
+    /**
+     * Test an unconstrained Map bean
+     */
+    public void testListBeanInstanceSymbol()
+    {
+        IBeanInstanceSymbol symbol = 
+            SymbolFactory.eINSTANCE.createIBeanInstanceSymbol();
+        symbol.setName("myListBean");
+        IJavaTypeDescriptor2 typeDesc = 
+            SymbolFactory.eINSTANCE.createIJavaTypeDescriptor2();
+        typeDesc.setType(_testListBeanType);
+        symbol.setTypeDescriptor(typeDesc);
+        
+        DefaultDTPropertyResolver propResolver = 
+            new DefaultDTPropertyResolver();
+        ISymbol[]  properties = propResolver.getAllProperties(symbol);
+
+        // should have no properties since a list won't be treated like
+        // anything but a list
+        assertEquals(0, properties.length);
+
+        // but being that it's an unbounded List, it may have  any number
+        // of arbitrary "unconstrained" properties a different indices
+        for (int i = 0; i < 25; i++)
+        {
+            ISymbol someProperty1 = propResolver.getProperty(symbol, i);
+            assertNotNull(someProperty1);
+            assertTrue(someProperty1 instanceof IPropertySymbol);
+            // completely unconstrained properties should come back as java object
+            assertEquals(TypeConstants.TYPE_JAVAOBJECT, 
+                    ((IPropertySymbol)someProperty1).getTypeDescriptor().getTypeSignature());
+        }
+    }
+    
+    /**
+     * Test a property on a bean that is a list
+     */
+    public void testBeanWithListProperty()
+    {
+        final IBeanInstanceSymbol symbol = SymbolFactory.eINSTANCE.createIBeanInstanceSymbol();
+        symbol.setName("beanWithListProp");
+        final IJavaTypeDescriptor2 typeDesc = SymbolFactory.eINSTANCE.createIJavaTypeDescriptor2();
+        typeDesc.setType(_testBeanWithListPropType);
+        symbol.setTypeDescriptor(typeDesc);
+        
+        DefaultDTPropertyResolver propResolver = new DefaultDTPropertyResolver();
+        ISymbol[]  properties = propResolver.getAllProperties(symbol);
+
+        // should be just one property
+        assertEquals(1, properties.length);
+        assertEquals(properties[0].getName(), "listProp");
+        assertEquals(properties[0].getName(),
+                     propResolver.getProperty(symbol, "listProp").getName());
+        
+        IPropertySymbol  listProp = (IPropertySymbol) propResolver.getProperty(symbol, "listProp");
+        assertEquals("Lcom.test.ListBean;", listProp.getTypeDescriptor().getTypeSignature());
+        
+        properties = propResolver.getAllProperties(listProp);
+        
+        // has isEmpty and one bean props
+        assertEquals(0, properties.length);
+        
+        IPropertySymbol unboundedProp = (IPropertySymbol) propResolver.getProperty(listProp, 0);
         assertEquals(TypeConstants.TYPE_JAVAOBJECT, unboundedProp.getTypeDescriptor().getTypeSignature());
     }
 }

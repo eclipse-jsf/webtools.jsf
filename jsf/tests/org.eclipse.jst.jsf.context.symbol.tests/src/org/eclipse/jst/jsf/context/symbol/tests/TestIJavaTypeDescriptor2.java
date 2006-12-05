@@ -20,12 +20,16 @@ import java.util.Map;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.Signature;
+import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
 import org.eclipse.jst.jsf.context.symbol.SymbolFactory;
 import org.eclipse.jst.jsf.context.symbol.SymbolPackage;
 import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanInstanceSymbol;
 import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanMethodSymbol;
 import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanPropertySymbol;
 import org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaTypeDescriptor2;
+import org.eclipse.jst.jsf.context.symbol.internal.provisional.IObjectSymbol;
+import org.eclipse.jst.jsf.context.symbol.internal.provisional.IPropertySymbol;
+import org.eclipse.jst.jsf.context.symbol.internal.provisional.ITypeDescriptor;
 import org.eclipse.jst.jsf.core.tests.TestsPlugin;
 
 /**
@@ -67,11 +71,15 @@ public class TestIJavaTypeDescriptor2 extends ModelBaseTestCase
         
         _beanProperties = new HashMap();
         _testBean1Symbol =
-            setupBeanProperty(TestsPlugin.getDefault().getBundle(), "/testfiles/TestBean1.java.data", packageName1, testBeanName1, _beanProperties);
+            setupBeanProperty(TestsPlugin.getDefault().getBundle(), 
+                              "/testfiles/TestBean1.java.data", packageName1, 
+                              testBeanName1, _beanProperties);
         
         _beanSubclassProperties = new HashMap();
         _testBean1SubclassSymbol =
-            setupBeanProperty(TestsPlugin.getDefault().getBundle(), "/testfiles/TestBean1Subclass.java.data", packageName1, testBeanSubclass1, _beanSubclassProperties);
+            setupBeanProperty(TestsPlugin.getDefault().getBundle(), 
+                              "/testfiles/TestBean1Subclass.java.data", packageName1, 
+                              testBeanSubclass1, _beanSubclassProperties);
 
         _beanMethods = new HashMap();
         _testBean2Symbol = 
@@ -118,8 +126,9 @@ public class TestIJavaTypeDescriptor2 extends ModelBaseTestCase
      */
     public void testMapSanity()
     {
-        assertEquals("Check extra or missing properties",_beanProperties.size(), 12);
-        assertEquals("Check extra or missing properties",_beanSubclassProperties.size(), 13);
+        final int NUM_PROPS_IN_BEAN = 14;
+        assertEquals("Check extra or missing properties",_beanProperties.size(), NUM_PROPS_IN_BEAN);
+        assertEquals("Check extra or missing properties",_beanSubclassProperties.size(), NUM_PROPS_IN_BEAN+1);
         assertEquals("Check extra or missing methods",_beanMethods.size(), 5);
         assertEquals("Check extra or missing methods",_beanMethodsSubclass.size(), 6);
     }
@@ -289,15 +298,6 @@ public class TestIJavaTypeDescriptor2 extends ModelBaseTestCase
     }
     
     /**
-     * test inhertied
-     */
-    public void testReadonlyStringPropertySubClass()
-    {
-        testReadonlyStringProperty(_beanSubclassProperties);
-    }
-    
-    
-    /**
      * 
      */
     private void testReadonlyStringProperty(Map properties)
@@ -328,6 +328,14 @@ public class TestIJavaTypeDescriptor2 extends ModelBaseTestCase
         testReadonlyBooleanProperty(_beanSubclassProperties);
     }
     
+    /**
+     * test inhertied
+     */
+    public void testReadonlyStringPropertySubClass()
+    {
+        testReadonlyStringProperty(_beanSubclassProperties);
+    }
+
     /**
      * 
      */
@@ -370,8 +378,74 @@ public class TestIJavaTypeDescriptor2 extends ModelBaseTestCase
         
         assertTrue(property.isReadable());
         assertTrue(property.isWritable());
+        
+        ITypeDescriptor typeDesc = property.getTypeDescriptor();
         assertEquals("Signature must be for a String[]", 
-                "[Ljava.lang.String;", property.getTypeDescriptor().getTypeSignature());
+                Signature.createArraySignature(TypeConstants.TYPE_STRING, 1), typeDesc.getTypeSignature());
+        assertEquals(true, typeDesc.isArray());
+        assertEquals(1, ((IJavaTypeDescriptor2)typeDesc).getArrayCount());
+    }
+    
+    /**
+     * 
+     */
+    public void testIntArrayProperty()
+    {
+        testIntArrayProperty(_beanProperties);
+    }
+    
+    /**
+     * test inherited
+     */
+    public void testIntArrayPropertySubClass()
+    {
+        testIntArrayProperty(_beanSubclassProperties);
+    }
+    
+    private void testIntArrayProperty(Map properties)
+    {
+        IBeanPropertySymbol  property = 
+            (IBeanPropertySymbol) properties.get("intArrayProperty");
+        assertNotNull(property);
+        
+        assertTrue(property.isReadable());
+        
+        ITypeDescriptor typeDesc = property.getTypeDescriptor();
+        assertEquals("Signature must be for a int[]", 
+                Signature.createArraySignature(Signature.SIG_INT, 1), typeDesc.getTypeSignature());
+        assertEquals(true, typeDesc.isArray());
+        assertEquals(1, ((IJavaTypeDescriptor2)typeDesc).getArrayCount());
+    }
+
+    /**
+     * 
+     */
+    public void testArrayOfArrayOfStringProperty()
+    {
+        testArrayOfArrayOfStringProperty(_beanProperties);
+    }
+    
+    /**
+     * test inherited
+     */
+    public void testArrayOfArrayOfStringPropertySubClass()
+    {
+        testArrayOfArrayOfStringProperty(_beanSubclassProperties);
+    }
+
+    private void testArrayOfArrayOfStringProperty(Map properties)
+    {
+        IBeanPropertySymbol  property = 
+            (IBeanPropertySymbol) properties.get("arrayOfArrayOfStringProperty");
+        assertNotNull(property);
+        
+        assertTrue(property.isReadable());
+        
+        ITypeDescriptor typeDesc = property.getTypeDescriptor();
+        assertEquals("Signature must be for a String[][]",
+                Signature.createArraySignature(TypeConstants.TYPE_STRING, 2), typeDesc.getTypeSignature());
+        assertEquals(true, typeDesc.isArray());
+        assertEquals(2, ((IJavaTypeDescriptor2)typeDesc).getArrayCount());
     }
 
     /**
@@ -557,6 +631,70 @@ public class TestIJavaTypeDescriptor2 extends ModelBaseTestCase
         assertFalse(property.isWritable());
         assertEquals("Signature must be for a String", 
                 "Ljava.lang.String;", property.getTypeDescriptor().getTypeSignature());
+    }
+    
+    /**
+     * Acquire an element of an array
+     */
+    public void testArrayPropertyElement()
+    {
+    	final IPropertySymbol propSymbol = 
+    		(IPropertySymbol) _beanProperties.get("stringArrayProperty");
+    	assertNotNull(propSymbol);
+    	
+    	ITypeDescriptor typeDesc = propSymbol.getTypeDescriptor();
+    	assertNotNull(typeDesc);
+        assertEquals(TypeConstants.TYPE_STRING, typeDesc.getArrayElement().getTypeDescriptor().getTypeSignature());
+
+    	final IObjectSymbol symbol = typeDesc.getArrayElement();
+    	assertNotNull(symbol);
+    	assertEquals(TypeConstants.TYPE_STRING, symbol.getTypeDescriptor().getTypeSignature());
+    }
+    
+    /**
+     * Acquire an element of an int array
+     */
+    public void testIntArrayPropertyElement()
+    {
+        final IPropertySymbol propSymbol = 
+            (IPropertySymbol) _beanProperties.get("intArrayProperty");
+        assertNotNull(propSymbol);
+        
+        ITypeDescriptor typeDesc = propSymbol.getTypeDescriptor();
+        assertNotNull(typeDesc);
+        assertEquals(Signature.SIG_INT, typeDesc.getArrayElement().getTypeDescriptor().getTypeSignature());
+
+        final IObjectSymbol symbol = typeDesc.getArrayElement();
+        assertNotNull(symbol);
+        assertEquals(Signature.SIG_INT, symbol.getTypeDescriptor().getTypeSignature());
+    }
+    
+    /**
+     * Acquire an element of an array of array of string and
+     * get the element of that element
+     */
+    public void testArrayOfArrayOfStringPropertyElement()
+    {
+        final IPropertySymbol propSymbol = 
+            (IPropertySymbol) _beanProperties.get("arrayOfArrayOfStringProperty");
+        assertNotNull(propSymbol);
+        
+        ITypeDescriptor typeDesc = propSymbol.getTypeDescriptor();
+        assertNotNull(typeDesc);
+        assertEquals(Signature.createArraySignature(TypeConstants.TYPE_STRING, 1), 
+                      typeDesc.getArrayElement().getTypeDescriptor().getTypeSignature()
+                    );
+
+        final IObjectSymbol symbol = typeDesc.getArrayElement();
+        assertNotNull(symbol);
+        assertEquals(Signature.createArraySignature(TypeConstants.TYPE_STRING, 1), 
+                typeDesc.getArrayElement().getTypeDescriptor().getTypeSignature());
+        
+        assertTrue(symbol.getTypeDescriptor().isArray());
+        final IObjectSymbol nestedSymbol = symbol.getTypeDescriptor().getArrayElement();
+        assertNotNull(nestedSymbol);
+        assertEquals(TypeConstants.TYPE_STRING, 
+                nestedSymbol.getTypeDescriptor().getTypeSignature());
     }
     
 /* ------ Method signature testing -----------------------*/

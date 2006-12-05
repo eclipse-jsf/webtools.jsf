@@ -99,15 +99,17 @@ public class TestJDTBeanIntrospector extends TestCase
      */
     public void testMapSanity()
     {
-        checkMapSanity(_properties, 12);
+        final int NUM_PROPS = 14;
+        
+        checkMapSanity(_properties, NUM_PROPS);
         // sub class an locally defined property in addition to what
         // is inherited
-        checkMapSanity(_subClassProperties, 13);
+        checkMapSanity(_subClassProperties, NUM_PROPS+1);
     }
 
     private void checkMapSanity(Map properties, int numProps)
     {
-        assertEquals("Check extra or missing properties",properties.size(), numProps);
+        assertEquals("Check extra or missing properties",numProps,properties.size());
         assertNull("Empty string is invalid property name", properties.get(""));
         assertNull("Null is not a valid property name", properties.get(null));
         
@@ -392,7 +394,8 @@ public class TestJDTBeanIntrospector extends TestCase
         assertTrue(property.isWritable());
         assertEquals("Signature must be for a String[]", 
                 "[Ljava.lang.String;", property.getTypeSignature());
-        assertNull("No IType for arrays", property.getType());
+        assertNotNull("Should resolve the base type", property.getType());
+        assertEquals(1, property.getArrayCount());
     }
 
     /**

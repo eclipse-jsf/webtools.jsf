@@ -370,8 +370,8 @@ public class TestJDTBeanPropertyWorkingCopy extends TestCase {
         // the type should resolve to a String[]
         assertTrue("[Ljava.lang.String;".equals(beanProperty.getTypeSignature()));
         
-        // no IType for arrays
-        assertNull(beanProperty.getType());
+        // Should resolve to base type (String)
+        assertNotNull(beanProperty.getType());
     }
     
     /**

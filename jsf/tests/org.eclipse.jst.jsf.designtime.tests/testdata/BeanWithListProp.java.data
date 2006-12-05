@@ -1,0 +1,12 @@
+package com.test;
+
+public class BeanWithListProp
+{
+	private ListBean		_myBean1;
+	
+	// test a property of type Map
+	public ListBean getListProp()
+	{
+		return _myBean1;
+	}
+}

@@ -99,6 +99,16 @@ public class BaseTestCase extends TestCase
         resource.load(ELValidationTestPlugin.getDefault().getBundle(), 
                       "/testdata/classes/BeanWithMapProperties.java.data");
         _jdtTestEnv.addSourceFile("src", "beans", "BeanWithMapProperties", resource.toString());
+
+        resource = new TestFileResource();
+        resource.load(ELValidationTestPlugin.getDefault().getBundle(), 
+                      "/testdata/classes/BeanWithListProperties.java.data");
+        _jdtTestEnv.addSourceFile("src", "beans", "BeanWithListProperties", resource.toString());
+        
+        resource = new TestFileResource();
+        resource.load(ELValidationTestPlugin.getDefault().getBundle(), 
+                      "/testdata/classes/ListBean.java.data");
+        _jdtTestEnv.addSourceFile("src", "beans", "ListBean", resource.toString());
         
         resource = new TestFileResource();
         resource.load(ELValidationTestPlugin.getDefault().getBundle(), 
@@ -137,7 +147,13 @@ public class BaseTestCase extends TestCase
             
             type = javaProject.findType("beans.BeanWithMapProperties");
             assertNotNull(type);
-            
+
+            type = javaProject.findType("beans.BeanWithListProperties");
+            assertNotNull(type);
+
+            type = javaProject.findType("beans.ListBean");
+            assertNotNull(type);
+
             IPackageFragmentRoot srcRoot = _jdtTestEnv.getPackageFragmentRoot("src");
             assertTrue(srcRoot.exists());
             IPackageFragment frag = srcRoot.getPackageFragment("beans");
@@ -164,6 +180,8 @@ public class BaseTestCase extends TestCase
             assertTrue(nameTest.containsKey("myBeanSettable"));
             assertTrue(nameTest.containsKey("myBeanSubClass"));
             assertTrue(nameTest.containsKey("beanWithMapProperties"));
+            assertTrue(nameTest.containsKey("beanWithListProperties"));
+            assertTrue(nameTest.containsKey("listBean"));
         }
         catch(JavaModelException jme)
         {
