@@ -3,6 +3,7 @@ package org.eclipse.jst.jsf.common.internal.provisional.util;
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 
 /**
@@ -89,13 +90,24 @@ public class JDTBeanProperty
      * @return the IType for this property's type or null if it
      * cannot determined.  Note that null does not necessarily indicate an error
      * since some types like arrays of things do not have corresponding JDT IType's
+     * If typeSignature represents an array, the base element IType is returned
+     * if possible
      */
     public IType getType()
     {
-        final String typeSignature = getTypeSignature();
+        final String typeSignature = Signature.getElementType(getTypeSignature());
         return TypeUtil.resolveType(_type, typeSignature);
     }
 	
+    /**
+     * @return the number of array nesting levels in typeSignature.
+     * Returns 0 if not an array.
+     */
+    public int getArrayCount()
+    {
+        return Signature.getArrayCount(getTypeSignature());
+    }
+    
 	/**
 	 * @return the fully resolved (if possible) type signature for
      * the property or null if unable to determine

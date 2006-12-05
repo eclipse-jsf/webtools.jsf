@@ -39,41 +39,41 @@ import org.eclipse.jst.jsf.context.symbol.internal.provisional.ITypeDescriptor;
  * @generated
  */
 public class IPropertySymbolImpl extends EObjectImpl implements IPropertySymbol {
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
     public static final String copyright = "Copyright 2006 Oracle";
 
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
+    /**
+     * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getName()
+     * @generated
+     * @ordered
+     */
     protected static final String NAME_EDEFAULT = null;
 
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
+    /**
+     * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getName()
+     * @generated
+     * @ordered
+     */
     protected String name = NAME_EDEFAULT;
 
-	/**
-	 * The cached value of the '{@link #getTypeDescriptor() <em>Type Descriptor</em>}' reference.
-	 * <!-- begin-user-doc -->
+    /**
+     * The cached value of the '{@link #getTypeDescriptor() <em>Type Descriptor</em>}' reference.
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-	 * @see #getTypeDescriptor()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getTypeDescriptor()
+     * @generated
+     * @ordered
+     */
     protected ITypeDescriptor typeDescriptor = null;
 
     
@@ -87,197 +87,197 @@ public class IPropertySymbolImpl extends EObjectImpl implements IPropertySymbol 
      */
     protected boolean  isWritable = WRITABLE_EDEFAULT;
     
-	/**
-	 * The default value of the '{@link #isReadable() <em>Readable</em>}' attribute.
-	 * <!-- begin-user-doc -->
+    /**
+     * The default value of the '{@link #isReadable() <em>Readable</em>}' attribute.
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-	 * @see #isReadable()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #isReadable()
+     * @generated
+     * @ordered
+     */
     protected static final boolean READABLE_EDEFAULT = false;
 
-	/**
-	 * The cached value of the '{@link #isReadable() <em>Readable</em>}' attribute.
-	 * <!-- begin-user-doc -->
+    /**
+     * The cached value of the '{@link #isReadable() <em>Readable</em>}' attribute.
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-	 * @see #isReadable()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #isReadable()
+     * @generated
+     * @ordered
+     */
     protected boolean readable = READABLE_EDEFAULT;
 
-	/**
-	 * The default value of the '{@link #isWritable() <em>Writable</em>}' attribute.
-	 * <!-- begin-user-doc -->
+    /**
+     * The default value of the '{@link #isWritable() <em>Writable</em>}' attribute.
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-	 * @see #isWritable()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #isWritable()
+     * @generated
+     * @ordered
+     */
     protected static final boolean WRITABLE_EDEFAULT = false;
 
-	/**
-	 * The cached value of the '{@link #isWritable() <em>Writable</em>}' attribute.
-	 * <!-- begin-user-doc -->
+    /**
+     * The cached value of the '{@link #isWritable() <em>Writable</em>}' attribute.
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-	 * @see #isWritable()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #isWritable()
+     * @generated
+     * @ordered
+     */
     protected boolean writable = WRITABLE_EDEFAULT;
 
-	/**
-	 * The default value of the '{@link #isIntermediate() <em>Intermediate</em>}' attribute.
-	 * <!-- begin-user-doc -->
+    /**
+     * The default value of the '{@link #isIntermediate() <em>Intermediate</em>}' attribute.
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-	 * @see #isIntermediate()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #isIntermediate()
+     * @generated
+     * @ordered
+     */
     protected static final boolean INTERMEDIATE_EDEFAULT = false;
 
-	/**
-	 * The cached value of the '{@link #isIntermediate() <em>Intermediate</em>}' attribute.
-	 * <!-- begin-user-doc -->
+    /**
+     * The cached value of the '{@link #isIntermediate() <em>Intermediate</em>}' attribute.
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-	 * @see #isIntermediate()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #isIntermediate()
+     * @generated
+     * @ordered
+     */
     protected boolean intermediate = INTERMEDIATE_EDEFAULT;
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
     protected IPropertySymbolImpl() {
-		super();
-	}
+        super();
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @return the static eClass 
      * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
     protected EClass eStaticClass() {
-		return SymbolPackage.Literals.IPROPERTY_SYMBOL;
-	}
+        return SymbolPackage.Literals.IPROPERTY_SYMBOL;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @return return the property name
      * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
     public String getName() {
-		return name;
-	}
+        return name;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @param newName the new name of the property 
      * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
     public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SymbolPackage.IPROPERTY_SYMBOL__NAME, oldName, name));
-	}
+        String oldName = name;
+        name = newName;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, SymbolPackage.IPROPERTY_SYMBOL__NAME, oldName, name));
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @return the property's type descriptor ?? can be null ?? 
      * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
     public ITypeDescriptor getTypeDescriptor() {
-		if (typeDescriptor != null && typeDescriptor.eIsProxy()) {
-			InternalEObject oldTypeDescriptor = (InternalEObject)typeDescriptor;
-			typeDescriptor = (ITypeDescriptor)eResolveProxy(oldTypeDescriptor);
-			if (typeDescriptor != oldTypeDescriptor) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SymbolPackage.IPROPERTY_SYMBOL__TYPE_DESCRIPTOR, oldTypeDescriptor, typeDescriptor));
-			}
-		}
-		return typeDescriptor;
-	}
+        if (typeDescriptor != null && typeDescriptor.eIsProxy()) {
+            InternalEObject oldTypeDescriptor = (InternalEObject)typeDescriptor;
+            typeDescriptor = (ITypeDescriptor)eResolveProxy(oldTypeDescriptor);
+            if (typeDescriptor != oldTypeDescriptor) {
+                if (eNotificationRequired())
+                    eNotify(new ENotificationImpl(this, Notification.RESOLVE, SymbolPackage.IPROPERTY_SYMBOL__TYPE_DESCRIPTOR, oldTypeDescriptor, typeDescriptor));
+            }
+        }
+        return typeDescriptor;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @return the type descriptor 
      * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
     public ITypeDescriptor basicGetTypeDescriptor() {
-		return typeDescriptor;
-	}
+        return typeDescriptor;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @param newTypeDescriptor 
      * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
     public void setTypeDescriptor(ITypeDescriptor newTypeDescriptor) {
-		ITypeDescriptor oldTypeDescriptor = typeDescriptor;
-		typeDescriptor = newTypeDescriptor;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SymbolPackage.IPROPERTY_SYMBOL__TYPE_DESCRIPTOR, oldTypeDescriptor, typeDescriptor));
-	}
+        ITypeDescriptor oldTypeDescriptor = typeDescriptor;
+        typeDescriptor = newTypeDescriptor;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, SymbolPackage.IPROPERTY_SYMBOL__TYPE_DESCRIPTOR, oldTypeDescriptor, typeDescriptor));
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @return true if property is readable 
      * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
     public boolean isReadable() {
-		return readable;
-	}
+        return readable;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @param newReadable 
      * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
     public void setReadable(boolean newReadable) {
-		boolean oldReadable = readable;
-		readable = newReadable;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SymbolPackage.IPROPERTY_SYMBOL__READABLE, oldReadable, readable));
-	}
+        boolean oldReadable = readable;
+        readable = newReadable;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, SymbolPackage.IPROPERTY_SYMBOL__READABLE, oldReadable, readable));
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @return true if property is writable 
      * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
     public boolean isWritable() {
-		return writable;
-	}
+        return writable;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @param newWritable 
      * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
     public void setWritable(boolean newWritable) {
-		boolean oldWritable = writable;
-		writable = newWritable;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SymbolPackage.IPROPERTY_SYMBOL__WRITABLE, oldWritable, writable));
-	}
+        boolean oldWritable = writable;
+        writable = newWritable;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, SymbolPackage.IPROPERTY_SYMBOL__WRITABLE, oldWritable, writable));
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @return true if this property is intermediate and has no value of it's own
      * besides as a path to it's own properties.  This is used to support the 
      * situation in JSF where a map-based property can have dots in it (i.e. 
@@ -287,24 +287,24 @@ public class IPropertySymbolImpl extends EObjectImpl implements IPropertySymbol 
      * actual y property on x that has value in and of itself (in this case
      * "#{x.y}" is invalid even though "#{x.y.z}" is valid). 
      * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
     public boolean isIntermediate() {
-		return intermediate;
-	}
+        return intermediate;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @param newIntermediate 
      * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
     public void setIntermediate(boolean newIntermediate) {
-		boolean oldIntermediate = intermediate;
-		intermediate = newIntermediate;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SymbolPackage.IPROPERTY_SYMBOL__INTERMEDIATE, oldIntermediate, intermediate));
-	}
+        boolean oldIntermediate = intermediate;
+        intermediate = newIntermediate;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, SymbolPackage.IPROPERTY_SYMBOL__INTERMEDIATE, oldIntermediate, intermediate));
+    }
 
     /**
      * <!-- begin-user-doc -->
@@ -327,130 +327,130 @@ public class IPropertySymbolImpl extends EObjectImpl implements IPropertySymbol 
         return getTypeDescriptor();
     }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @param featureID 
      * @param resolve 
      * @param coreType 
      * @return the eObject for the featureID 
      * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case SymbolPackage.IPROPERTY_SYMBOL__NAME:
-				return getName();
-			case SymbolPackage.IPROPERTY_SYMBOL__TYPE_DESCRIPTOR:
-				if (resolve) return getTypeDescriptor();
-				return basicGetTypeDescriptor();
-			case SymbolPackage.IPROPERTY_SYMBOL__READABLE:
-				return isReadable() ? Boolean.TRUE : Boolean.FALSE;
-			case SymbolPackage.IPROPERTY_SYMBOL__WRITABLE:
-				return isWritable() ? Boolean.TRUE : Boolean.FALSE;
-			case SymbolPackage.IPROPERTY_SYMBOL__INTERMEDIATE:
-				return isIntermediate() ? Boolean.TRUE : Boolean.FALSE;
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+        switch (featureID) {
+            case SymbolPackage.IPROPERTY_SYMBOL__NAME:
+                return getName();
+            case SymbolPackage.IPROPERTY_SYMBOL__TYPE_DESCRIPTOR:
+                if (resolve) return getTypeDescriptor();
+                return basicGetTypeDescriptor();
+            case SymbolPackage.IPROPERTY_SYMBOL__READABLE:
+                return isReadable() ? Boolean.TRUE : Boolean.FALSE;
+            case SymbolPackage.IPROPERTY_SYMBOL__WRITABLE:
+                return isWritable() ? Boolean.TRUE : Boolean.FALSE;
+            case SymbolPackage.IPROPERTY_SYMBOL__INTERMEDIATE:
+                return isIntermediate() ? Boolean.TRUE : Boolean.FALSE;
+        }
+        return super.eGet(featureID, resolve, coreType);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @param featureID -- set the feature 
      * @param newValue 
      * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
     public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case SymbolPackage.IPROPERTY_SYMBOL__NAME:
-				setName((String)newValue);
-				return;
-			case SymbolPackage.IPROPERTY_SYMBOL__TYPE_DESCRIPTOR:
-				setTypeDescriptor((ITypeDescriptor)newValue);
-				return;
-			case SymbolPackage.IPROPERTY_SYMBOL__READABLE:
-				setReadable(((Boolean)newValue).booleanValue());
-				return;
-			case SymbolPackage.IPROPERTY_SYMBOL__WRITABLE:
-				setWritable(((Boolean)newValue).booleanValue());
-				return;
-			case SymbolPackage.IPROPERTY_SYMBOL__INTERMEDIATE:
-				setIntermediate(((Boolean)newValue).booleanValue());
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+        switch (featureID) {
+            case SymbolPackage.IPROPERTY_SYMBOL__NAME:
+                setName((String)newValue);
+                return;
+            case SymbolPackage.IPROPERTY_SYMBOL__TYPE_DESCRIPTOR:
+                setTypeDescriptor((ITypeDescriptor)newValue);
+                return;
+            case SymbolPackage.IPROPERTY_SYMBOL__READABLE:
+                setReadable(((Boolean)newValue).booleanValue());
+                return;
+            case SymbolPackage.IPROPERTY_SYMBOL__WRITABLE:
+                setWritable(((Boolean)newValue).booleanValue());
+                return;
+            case SymbolPackage.IPROPERTY_SYMBOL__INTERMEDIATE:
+                setIntermediate(((Boolean)newValue).booleanValue());
+                return;
+        }
+        super.eSet(featureID, newValue);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @param featureID -- unset the feature 
      * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
     public void eUnset(int featureID) {
-		switch (featureID) {
-			case SymbolPackage.IPROPERTY_SYMBOL__NAME:
-				setName(NAME_EDEFAULT);
-				return;
-			case SymbolPackage.IPROPERTY_SYMBOL__TYPE_DESCRIPTOR:
-				setTypeDescriptor((ITypeDescriptor)null);
-				return;
-			case SymbolPackage.IPROPERTY_SYMBOL__READABLE:
-				setReadable(READABLE_EDEFAULT);
-				return;
-			case SymbolPackage.IPROPERTY_SYMBOL__WRITABLE:
-				setWritable(WRITABLE_EDEFAULT);
-				return;
-			case SymbolPackage.IPROPERTY_SYMBOL__INTERMEDIATE:
-				setIntermediate(INTERMEDIATE_EDEFAULT);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+        switch (featureID) {
+            case SymbolPackage.IPROPERTY_SYMBOL__NAME:
+                setName(NAME_EDEFAULT);
+                return;
+            case SymbolPackage.IPROPERTY_SYMBOL__TYPE_DESCRIPTOR:
+                setTypeDescriptor((ITypeDescriptor)null);
+                return;
+            case SymbolPackage.IPROPERTY_SYMBOL__READABLE:
+                setReadable(READABLE_EDEFAULT);
+                return;
+            case SymbolPackage.IPROPERTY_SYMBOL__WRITABLE:
+                setWritable(WRITABLE_EDEFAULT);
+                return;
+            case SymbolPackage.IPROPERTY_SYMBOL__INTERMEDIATE:
+                setIntermediate(INTERMEDIATE_EDEFAULT);
+                return;
+        }
+        super.eUnset(featureID);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @param featureID 
      * @return true if is set 
      * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
     public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case SymbolPackage.IPROPERTY_SYMBOL__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case SymbolPackage.IPROPERTY_SYMBOL__TYPE_DESCRIPTOR:
-				return typeDescriptor != null;
-			case SymbolPackage.IPROPERTY_SYMBOL__READABLE:
-				return readable != READABLE_EDEFAULT;
-			case SymbolPackage.IPROPERTY_SYMBOL__WRITABLE:
-				return writable != WRITABLE_EDEFAULT;
-			case SymbolPackage.IPROPERTY_SYMBOL__INTERMEDIATE:
-				return intermediate != INTERMEDIATE_EDEFAULT;
-		}
-		return super.eIsSet(featureID);
-	}
+        switch (featureID) {
+            case SymbolPackage.IPROPERTY_SYMBOL__NAME:
+                return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+            case SymbolPackage.IPROPERTY_SYMBOL__TYPE_DESCRIPTOR:
+                return typeDescriptor != null;
+            case SymbolPackage.IPROPERTY_SYMBOL__READABLE:
+                return readable != READABLE_EDEFAULT;
+            case SymbolPackage.IPROPERTY_SYMBOL__WRITABLE:
+                return writable != WRITABLE_EDEFAULT;
+            case SymbolPackage.IPROPERTY_SYMBOL__INTERMEDIATE:
+                return intermediate != INTERMEDIATE_EDEFAULT;
+        }
+        return super.eIsSet(featureID);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @return the string representation 
      * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
     public String toString() {
-		if (eIsProxy()) return super.toString();
+        if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(", readable: ");
-		result.append(readable);
-		result.append(", writable: ");
-		result.append(writable);
-		result.append(", intermediate: ");
-		result.append(intermediate);
-		result.append(')');
-		return result.toString();
-	}
+        StringBuffer result = new StringBuffer(super.toString());
+        result.append(" (name: ");
+        result.append(name);
+        result.append(", readable: ");
+        result.append(readable);
+        result.append(", writable: ");
+        result.append(writable);
+        result.append(", intermediate: ");
+        result.append(intermediate);
+        result.append(')');
+        return result.toString();
+    }
 
 } //IPropertySymbolImpl

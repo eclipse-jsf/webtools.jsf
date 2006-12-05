@@ -27,11 +27,11 @@ import org.eclipse.jst.jsf.context.symbol.internal.provisional.ITypeDescriptor;
  * @generated
  */
 public class IComponentSymbolImpl extends IInstanceSymbolImpl implements IComponentSymbol {
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public static final String copyright = "Copyright 2006 Oracle";
 
     /**
@@ -49,24 +49,24 @@ public class IComponentSymbolImpl extends IInstanceSymbolImpl implements ICompon
      */
     protected boolean _isWritable = WRITABLE_EDEFAULT;
     
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected IComponentSymbolImpl() {
-		super();
-	}
+        super();
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @return the static class 
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected EClass eStaticClass() {
-		return SymbolPackage.Literals.ICOMPONENT_SYMBOL;
-	}
+        return SymbolPackage.Literals.ICOMPONENT_SYMBOL;
+    }
 
     public String getDetailedDescription() {
         return _detailedDescription;

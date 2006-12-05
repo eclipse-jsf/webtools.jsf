@@ -2,29 +2,32 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IBoundedJavaTypeDescriptorImpl.java,v 1.4 2006/12/05 18:36:42 cbateman Exp $
+ * $Id: IBoundedListTypeDescriptorImpl.java,v 1.1 2006/12/05 18:36:43 cbateman Exp $
  */
 package org.eclipse.jst.jsf.context.symbol.internal.impl;
 
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
 import org.eclipse.jst.jsf.context.symbol.SymbolFactory;
 import org.eclipse.jst.jsf.context.symbol.SymbolPackage;
+
 import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedJavaTypeDescriptor;
+import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedListTypeDescriptor;
 import org.eclipse.jst.jsf.context.symbol.internal.provisional.IPropertySymbol;
 import org.eclipse.jst.jsf.context.symbol.internal.provisional.ISymbol;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>IBounded Java Type Descriptor</b></em>'.
+ * An implementation of the model object '<em><b>IBounded List Type Descriptor</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class IBoundedJavaTypeDescriptorImpl extends IJavaTypeDescriptor2Impl implements IBoundedJavaTypeDescriptor {
+public class IBoundedListTypeDescriptorImpl extends IListTypeDescriptorImpl implements IBoundedListTypeDescriptor {
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -37,7 +40,7 @@ public class IBoundedJavaTypeDescriptorImpl extends IJavaTypeDescriptor2Impl imp
      * <!-- end-user-doc -->
      * @generated
      */
-    protected IBoundedJavaTypeDescriptorImpl() {
+    protected IBoundedListTypeDescriptorImpl() {
         super();
     }
 
@@ -47,7 +50,7 @@ public class IBoundedJavaTypeDescriptorImpl extends IJavaTypeDescriptor2Impl imp
      * @generated
      */
     protected EClass eStaticClass() {
-        return SymbolPackage.Literals.IBOUNDED_JAVA_TYPE_DESCRIPTOR;
+        return SymbolPackage.Literals.IBOUNDED_LIST_TYPE_DESCRIPTOR;
     }
 
     /**
@@ -63,30 +66,35 @@ public class IBoundedJavaTypeDescriptorImpl extends IJavaTypeDescriptor2Impl imp
                 && typeSignature.startsWith(Character.toString(Signature.C_RESOLVED));
     }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
+     * @generated NOT
+     */
     public ISymbol getUnboundedProperty(Object name, String typeSignature) {
-        ISymbol retValue = null;
+        ISymbol  retValue = null;
         
         if (isUnboundedForType(typeSignature))
         {
-            IPropertySymbol  propSymbol = SymbolFactory.eINSTANCE.createIPropertySymbol();
-            // TODO: there is a possible problem here for non-string keyed maps
-            propSymbol.setName(name.toString());
-            propSymbol.setReadable(true);
-            IBoundedJavaTypeDescriptor typeDesc = 
-                SymbolFactory.eINSTANCE.createIBoundedJavaTypeDescriptor();
+            // first see if we have it in our map source
+            // TODO: retValue = getFromMap(name.toString());
             
-            typeDesc.setTypeSignatureDelegate(TypeConstants.TYPE_JAVAOBJECT);
-            propSymbol.setTypeDescriptor(typeDesc);
-            retValue = propSymbol;
+            if (retValue == null)
+            {
+                IPropertySymbol  propSymbol = SymbolFactory.eINSTANCE.createIPropertySymbol();
+                // TODO: there is a possible problem here for non-string keyed maps
+                propSymbol.setName(name.toString());
+                propSymbol.setReadable(true);
+                IBoundedJavaTypeDescriptor typeDesc = 
+                    SymbolFactory.eINSTANCE.createIBoundedJavaTypeDescriptor();
+                
+                typeDesc.setTypeSignatureDelegate(TypeConstants.TYPE_JAVAOBJECT);
+                propSymbol.setTypeDescriptor(typeDesc);
+                retValue = propSymbol;
+            }
         }
-        
+
         return retValue;
+    }
 
-	}
-
-} //IBoundedJavaTypeDescriptorImpl
+} //IBoundedListTypeDescriptorImpl

@@ -136,6 +136,12 @@ public final class DiagnosticFactory
     public final static int BINARY_OP_DOT_WITH_DOTTED_KEY_SHOULD_USE_ARRAY_ID = 25;
     
     /**
+     * Indicates that a numeric array accessor is being used with a value
+     * which is either < 0 or may be greater than the assumed size of the array
+     */
+    public final static int POSSIBLE_ARRAY_INDEX_OUT_OF_BOUNDS_ID = 26;
+    
+    /**
      * @param operatorName
      * @return a configured diagnostic
      */
@@ -482,6 +488,20 @@ public final class DiagnosticFactory
         return new BasicDiagnostic(Diagnostic.WARNING, "",
                 BINARY_OP_DOT_WITH_DOTTED_KEY_SHOULD_USE_ARRAY_ID,
                 MessageFormat.format(Messages.BINARY_OP_DOT_WITH_DOTTED_KEY_SHOULD_USE_ARRAY,formatArgs), 
+                null);
+    }
+    
+    /**
+     * @param value
+     * @return an array index out of bounds diagnostic
+     */
+    public static Diagnostic create_POSSIBLE_ARRAY_INDEX_OUT_OF_BOUNDS(final Integer value)
+    {
+        final Object[] formatArgs = new Object[] {value};
+
+        return new BasicDiagnostic(Diagnostic.WARNING, "",
+                POSSIBLE_ARRAY_INDEX_OUT_OF_BOUNDS_ID,
+                MessageFormat.format(Messages.POSSIBLE_ARRAY_INDEX_OUT_OF_BOUNDS,formatArgs), 
                 null);
     }
     

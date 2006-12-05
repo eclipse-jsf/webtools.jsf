@@ -94,18 +94,30 @@ public class ValueType implements SignatureBasedType, IAssignable
         return _signature;
     }
 
+    /* (non-Javadoc)
+     * @see org.eclipse.jst.jsf.common.internal.types.IAssignable#getAssignability()
+     */
     public int getAssignability() {
         return _assignmentMask;
     }
 
+    /* (non-Javadoc)
+     * @see org.eclipse.jst.jsf.common.internal.types.IAssignable#isLHS()
+     */
     public boolean isLHS() {
         return TypeUtil.matchesLHS(_assignmentMask);
     }
 
+    /* (non-Javadoc)
+     * @see org.eclipse.jst.jsf.common.internal.types.IAssignable#isRHS()
+     */
     public boolean isRHS() {
         return TypeUtil.matchesRHS(_assignmentMask);
     }
     
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     public String toString()
     {
         return Signature.getSignatureSimpleName
@@ -115,6 +127,9 @@ public class ValueType implements SignatureBasedType, IAssignable
     /**
      * @return an array of all signatures of all super types or empty
      * array if there are no super types for this type
+     * 
+     * Note: if isArray() == true, then these are the super types of 
+     * the base element
      */
     public String[] getSuperTypes()
     {
@@ -124,6 +139,9 @@ public class ValueType implements SignatureBasedType, IAssignable
     /**
      * @return an array of all interfaces implemented or empty array
      * if none
+     * 
+     * Note: if isArray() == true, then these are the interfacess of 
+     * the base element
      */
     public String[] getInterfaceTypes()
     {
@@ -133,6 +151,10 @@ public class ValueType implements SignatureBasedType, IAssignable
     /**
      * @return all types including the base type, super types and interface
      * types.
+     * 
+     * Note: if isArray() == true, then these are the super types of 
+     * the base element
+
      */
     public String[]  getAllTypes()
     {
@@ -147,8 +169,9 @@ public class ValueType implements SignatureBasedType, IAssignable
         return _allTypes;
     }
     
-    
-    
+    /**
+     * 
+     */
     public CompositeType toCompositeType() 
     {
         return new CompositeType(getAllTypes(), getAssignability());
@@ -161,6 +184,13 @@ public class ValueType implements SignatureBasedType, IAssignable
      */
     public boolean isInstanceOf(final String signature)
     {
+        // if this is an array, then the super types are for the base
+        // type and we can't be an instance of anything but signature
+        if (isArray())
+        {
+            return getSignature().equals(signature);
+        }
+        
         final String[]  allTypes = getAllTypes();
         
         for (int i = 0; i < allTypes.length; i++)
@@ -172,5 +202,13 @@ public class ValueType implements SignatureBasedType, IAssignable
         }
         
         return false;
+    }
+    
+    /**
+     * @return true if this is an array type
+     */
+    public boolean isArray()
+    {
+        return Signature.getArrayCount(getSignature()) > 0;
     }
 }

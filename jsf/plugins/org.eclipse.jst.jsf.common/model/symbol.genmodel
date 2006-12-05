@@ -51,6 +51,8 @@
       <genOperations ecoreOperation="symbol.ecore#//ITypeDescriptor/instanceOf">
         <genParameters ecoreParameter="symbol.ecore#//ITypeDescriptor/instanceOf/typeSignature"/>
       </genOperations>
+      <genOperations ecoreOperation="symbol.ecore#//ITypeDescriptor/isArray"/>
+      <genOperations ecoreOperation="symbol.ecore#//ITypeDescriptor/getArrayElement"/>
     </genClasses>
     <genClasses image="false" ecoreClass="symbol.ecore#//IDescribedInDetail"/>
     <genClasses ecoreClass="symbol.ecore#//IJavaTypeDescriptor2">

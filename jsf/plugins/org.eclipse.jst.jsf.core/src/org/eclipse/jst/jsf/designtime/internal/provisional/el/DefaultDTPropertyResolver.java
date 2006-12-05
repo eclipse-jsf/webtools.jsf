@@ -55,8 +55,17 @@ public class DefaultDTPropertyResolver extends AbstractDTPropertyResolver
             final IObjectSymbol objSymbol = (IObjectSymbol) base;
             typeDesc = objSymbol.getTypeDescriptor();
 
+            // although not stated explicitly stated by the spec, in practice (based on Sun RI),
+            // a list cannot have non-numeric indexed properties
+            // note: due to remove(Object) having different return types
+            // an object can't be both a List and a Map!  So we can consider
+            // a List instanceof out of order
+            if (objSymbol.supportsCoercion(TypeConstants.TYPE_LIST))
+            {
+                typeDesc = null;
+            }
             // per JSP.2.3.4, if instance of map (unconstrained in our terminology)
-            if (objSymbol.supportsCoercion(TypeConstants.TYPE_MAP))
+            else if (objSymbol.supportsCoercion(TypeConstants.TYPE_MAP))
             {
                 typeDesc = objSymbol.coerce(TypeConstants.TYPE_MAP);
 
@@ -74,10 +83,10 @@ public class DefaultDTPropertyResolver extends AbstractDTPropertyResolver
             {
                 // TODO: propertyId may need to change when supporting
                 // template types
-                if (((IBoundedTypeDescriptor)typeDesc).isUnboundedForType("Ljava.lang.Object;"))
+                if (((IBoundedTypeDescriptor)typeDesc).isUnboundedForType(TypeConstants.TYPE_JAVAOBJECT))
                 {
                     // the most we know is that it could be an Object
-                    return ((IBoundedTypeDescriptor)typeDesc).getUnboundedProperty(propertyId, "Ljava.lang.Object;");
+                    return ((IBoundedTypeDescriptor)typeDesc).getUnboundedProperty(propertyId, TypeConstants.TYPE_JAVAOBJECT);
                 }
             }
         }
@@ -126,6 +135,11 @@ public class DefaultDTPropertyResolver extends AbstractDTPropertyResolver
                 typeDesc = 
                     ((IObjectSymbol)base).coerce(TypeConstants.TYPE_MAP);
             }
+            // Lists have no properties, even if they are also beans
+            else if (((IObjectSymbol)base).supportsCoercion(TypeConstants.TYPE_LIST))
+            {
+                typeDesc = null;
+            }
             else
             {
                 typeDesc = ((IObjectSymbol)base).getTypeDescriptor();
@@ -139,6 +153,54 @@ public class DefaultDTPropertyResolver extends AbstractDTPropertyResolver
         }
 
         return (ISymbol[]) symbolsList.toArray(ISymbol.EMPTY_SYMBOL_ARRAY);
+    }
+
+    public ISymbol getProperty(ISymbol base, int offset) 
+    {
+        ITypeDescriptor typeDesc = null;
+
+        if (offset < 0)
+        {
+        	// should never be called with offset < 0
+        	throw new AssertionError("offsets must be >=0 to be valid");
+        }
+        
+        // check for expected interface types per JSP.2.3.4
+        if (base instanceof IObjectSymbol)
+        {
+
+        	final IObjectSymbol objSymbol = (IObjectSymbol) base;
+            typeDesc = objSymbol.getTypeDescriptor();
+
+            // per JSP.2.3.4, if instance of map (unconstrained in our terminology)
+            if (typeDesc.isArray())
+            {
+                ISymbol arrayElement = typeDesc.getArrayElement();
+                // reset the name
+                arrayElement.setName(base.getName()+"["+offset+"]");
+                return arrayElement;
+            }
+            
+            // per JSP.2.3.4, if instance of list (unbounded in our terminology)
+            if (objSymbol.supportsCoercion(TypeConstants.TYPE_LIST))
+            {
+                typeDesc = objSymbol.coerce(TypeConstants.TYPE_LIST);
+            }
+
+            // check unconstrained type
+            if (typeDesc instanceof IBoundedTypeDescriptor)
+            {
+                // TODO: propertyId may need to change when supporting
+                // template types
+                if (((IBoundedTypeDescriptor)typeDesc).isUnboundedForType(TypeConstants.TYPE_JAVAOBJECT))
+                {
+                    // the most we know is that it could be an Object
+                    return ((IBoundedTypeDescriptor)typeDesc).getUnboundedProperty(new Integer(offset), TypeConstants.TYPE_JAVAOBJECT);
+                }
+            }
+        }
+        
+        return null;
     }
     
     private Iterator getIterator(ITypeDescriptor typeDesc)
@@ -156,7 +218,7 @@ public class DefaultDTPropertyResolver extends AbstractDTPropertyResolver
      * more one than property actually must be traversed to evaluate the whole expr.
      * @param key
      * @return an array containing all property segments of the key.  If the key contains only
-     * one property, then this returned a single element in the array
+     * one property, then this is returned a single element in the array
      */
     private Object[] factorKey(Object key)
     {
@@ -183,5 +245,4 @@ public class DefaultDTPropertyResolver extends AbstractDTPropertyResolver
 
         return new Object[] {key};
     }
-
 }

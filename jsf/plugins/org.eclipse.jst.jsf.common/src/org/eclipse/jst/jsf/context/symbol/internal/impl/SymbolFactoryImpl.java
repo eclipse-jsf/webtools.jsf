@@ -43,334 +43,356 @@ import org.eclipse.jst.jsf.context.symbol.internal.provisional.IPropertySymbol;
  * @generated
  */
 public class SymbolFactoryImpl extends EFactoryImpl implements SymbolFactory {
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
     public static final String copyright = "Copyright 2006 Oracle";
 
-	/**
-	 * Creates the default factory implementation.
-	 * <!-- begin-user-doc -->
+    /**
+     * Creates the default factory implementation.
+     * <!-- begin-user-doc -->
 	 * @return the SymbolFactory 
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public static SymbolFactory init() {
-		try {
-			SymbolFactory theSymbolFactory = (SymbolFactory)EPackage.Registry.INSTANCE.getEFactory("http:///org/eclipse/jst/jsf/context/symbol.ecore"); 
-			if (theSymbolFactory != null) {
-				return theSymbolFactory;
-			}
-		}
-		catch (Exception exception) {
-			EcorePlugin.INSTANCE.log(exception);
-		}
-		return new SymbolFactoryImpl();
-	}
+        try {
+            SymbolFactory theSymbolFactory = (SymbolFactory)EPackage.Registry.INSTANCE.getEFactory("http:///org/eclipse/jst/jsf/context/symbol.ecore"); 
+            if (theSymbolFactory != null) {
+                return theSymbolFactory;
+            }
+        }
+        catch (Exception exception) {
+            EcorePlugin.INSTANCE.log(exception);
+        }
+        return new SymbolFactoryImpl();
+    }
 
-	/**
-	 * Creates an instance of the factory.
-	 * <!-- begin-user-doc -->
+    /**
+     * Creates an instance of the factory.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public SymbolFactoryImpl() {
-		super();
-	}
+        super();
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @param eClass 
      * @return the model instace for the model class 
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public EObject create(EClass eClass) {
-		switch (eClass.getClassifierID()) {
-			case SymbolPackage.IBEAN_INSTANCE_SYMBOL: return createIBeanInstanceSymbol();
-			case SymbolPackage.IBEAN_PROPERTY_SYMBOL: return createIBeanPropertySymbol();
-			case SymbolPackage.IINSTANCE_SYMBOL: return createIInstanceSymbol();
-			case SymbolPackage.IJAVA_SYMBOL: return createIJavaSymbol();
-			case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2: return createIJavaTypeDescriptor2();
-			case SymbolPackage.IBEAN_METHOD_SYMBOL: return createIBeanMethodSymbol();
-			case SymbolPackage.ICOMPONENT_SYMBOL: return createIComponentSymbol();
-			case SymbolPackage.IPROPERTY_SYMBOL: return createIPropertySymbol();
-			case SymbolPackage.IMAP_TYPE_DESCRIPTOR: return createIMapTypeDescriptor();
-			case SymbolPackage.IMETHOD_SYMBOL: return createIMethodSymbol();
-			case SymbolPackage.IBOUNDED_MAP_TYPE_DESCRIPTOR: return createIBoundedMapTypeDescriptor();
-			case SymbolPackage.IBOUNDED_JAVA_TYPE_DESCRIPTOR: return createIBoundedJavaTypeDescriptor();
-			default:
-				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-		}
-	}
+        switch (eClass.getClassifierID()) {
+            case SymbolPackage.IBEAN_INSTANCE_SYMBOL: return createIBeanInstanceSymbol();
+            case SymbolPackage.IBEAN_PROPERTY_SYMBOL: return createIBeanPropertySymbol();
+            case SymbolPackage.IINSTANCE_SYMBOL: return createIInstanceSymbol();
+            case SymbolPackage.IJAVA_SYMBOL: return createIJavaSymbol();
+            case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2: return createIJavaTypeDescriptor2();
+            case SymbolPackage.IBEAN_METHOD_SYMBOL: return createIBeanMethodSymbol();
+            case SymbolPackage.ICOMPONENT_SYMBOL: return createIComponentSymbol();
+            case SymbolPackage.IPROPERTY_SYMBOL: return createIPropertySymbol();
+            case SymbolPackage.IMAP_TYPE_DESCRIPTOR: return createIMapTypeDescriptor();
+            case SymbolPackage.IMETHOD_SYMBOL: return createIMethodSymbol();
+            case SymbolPackage.IBOUNDED_MAP_TYPE_DESCRIPTOR: return createIBoundedMapTypeDescriptor();
+            case SymbolPackage.IBOUNDED_JAVA_TYPE_DESCRIPTOR: return createIBoundedJavaTypeDescriptor();
+            case SymbolPackage.ILIST_TYPE_DESCRIPTOR: return createIListTypeDescriptor();
+            case SymbolPackage.IBOUNDED_LIST_TYPE_DESCRIPTOR: return createIBoundedListTypeDescriptor();
+            default:
+                throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+        }
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @param eDataType 
      * @param initialValue 
      * @return an object constructed from the initialValue string 
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public Object createFromString(EDataType eDataType, String initialValue) {
-		switch (eDataType.getClassifierID()) {
-			case SymbolPackage.ERUNTIME_SOURCE:
-				return createERuntimeSourceFromString(eDataType, initialValue);
-			case SymbolPackage.ITYPE:
-				return createITypeFromString(eDataType, initialValue);
-			case SymbolPackage.IJAVA_ELEMENT:
-				return createIJavaElementFromString(eDataType, initialValue);
-			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
-		}
-	}
+        switch (eDataType.getClassifierID()) {
+            case SymbolPackage.ERUNTIME_SOURCE:
+                return createERuntimeSourceFromString(eDataType, initialValue);
+            case SymbolPackage.ITYPE:
+                return createITypeFromString(eDataType, initialValue);
+            case SymbolPackage.IJAVA_ELEMENT:
+                return createIJavaElementFromString(eDataType, initialValue);
+            default:
+                throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+        }
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @param eDataType 
      * @param instanceValue 
      * @return the string equivelent of eDataType for the instance 
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String convertToString(EDataType eDataType, Object instanceValue) {
-		switch (eDataType.getClassifierID()) {
-			case SymbolPackage.ERUNTIME_SOURCE:
-				return convertERuntimeSourceToString(eDataType, instanceValue);
-			case SymbolPackage.ITYPE:
-				return convertITypeToString(eDataType, instanceValue);
-			case SymbolPackage.IJAVA_ELEMENT:
-				return convertIJavaElementToString(eDataType, instanceValue);
-			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
-		}
-	}
+        switch (eDataType.getClassifierID()) {
+            case SymbolPackage.ERUNTIME_SOURCE:
+                return convertERuntimeSourceToString(eDataType, instanceValue);
+            case SymbolPackage.ITYPE:
+                return convertITypeToString(eDataType, instanceValue);
+            case SymbolPackage.IJAVA_ELEMENT:
+                return convertIJavaElementToString(eDataType, instanceValue);
+            default:
+                throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+        }
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @return a new bean instance symbol 
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public IBeanInstanceSymbol createIBeanInstanceSymbol() {
-		IBeanInstanceSymbolImpl iBeanInstanceSymbol = new IBeanInstanceSymbolImpl();
-		return iBeanInstanceSymbol;
-	}
+        IBeanInstanceSymbolImpl iBeanInstanceSymbol = new IBeanInstanceSymbolImpl();
+        return iBeanInstanceSymbol;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @return a new bean property symbol 
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public IBeanPropertySymbol createIBeanPropertySymbol() {
-		IBeanPropertySymbolImpl iBeanPropertySymbol = new IBeanPropertySymbolImpl();
-		return iBeanPropertySymbol;
-	}
+        IBeanPropertySymbolImpl iBeanPropertySymbol = new IBeanPropertySymbolImpl();
+        return iBeanPropertySymbol;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
     public IInstanceSymbol createIInstanceSymbol() {
-		IInstanceSymbolImpl iInstanceSymbol = new IInstanceSymbolImpl();
-		return iInstanceSymbol;
-	}
+        IInstanceSymbolImpl iInstanceSymbol = new IInstanceSymbolImpl();
+        return iInstanceSymbol;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @return a new java symbol 
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public IJavaSymbol createIJavaSymbol() {
-		IJavaSymbolImpl iJavaSymbol = new IJavaSymbolImpl();
-		return iJavaSymbol;
-	}
+        IJavaSymbolImpl iJavaSymbol = new IJavaSymbolImpl();
+        return iJavaSymbol;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @return a new java type descriptor 
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public IJavaTypeDescriptor2 createIJavaTypeDescriptor2() {
-		IJavaTypeDescriptor2Impl iJavaTypeDescriptor2 = new IJavaTypeDescriptor2Impl();
-		return iJavaTypeDescriptor2;
-	}
+        IJavaTypeDescriptor2Impl iJavaTypeDescriptor2 = new IJavaTypeDescriptor2Impl();
+        return iJavaTypeDescriptor2;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @return a new bean method symbol 
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public IBeanMethodSymbol createIBeanMethodSymbol() {
-		IBeanMethodSymbolImpl iBeanMethodSymbol = new IBeanMethodSymbolImpl();
-		return iBeanMethodSymbol;
-	}
+        IBeanMethodSymbolImpl iBeanMethodSymbol = new IBeanMethodSymbolImpl();
+        return iBeanMethodSymbol;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @return a new component derived symbol 
      * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
     public IComponentSymbol createIComponentSymbol() {
-		IComponentSymbolImpl iComponentSymbol = new IComponentSymbolImpl();
-		return iComponentSymbol;
-	}
+        IComponentSymbolImpl iComponentSymbol = new IComponentSymbolImpl();
+        return iComponentSymbol;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @return a new property symbol 
      * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
     public IPropertySymbol createIPropertySymbol() {
-		IPropertySymbolImpl iPropertySymbol = new IPropertySymbolImpl();
-		return iPropertySymbol;
-	}
+        IPropertySymbolImpl iPropertySymbol = new IPropertySymbolImpl();
+        return iPropertySymbol;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @return create map type descriptor 
      * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
     public IMapTypeDescriptor createIMapTypeDescriptor() {
-		IMapTypeDescriptorImpl iMapTypeDescriptor = new IMapTypeDescriptorImpl();
-		return iMapTypeDescriptor;
-	}
+        IMapTypeDescriptorImpl iMapTypeDescriptor = new IMapTypeDescriptorImpl();
+        return iMapTypeDescriptor;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @return the method symbol 
      * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
     public IMethodSymbol createIMethodSymbol() {
-		IMethodSymbolImpl iMethodSymbol = new IMethodSymbolImpl();
-		return iMethodSymbol;
-	}
+        IMethodSymbolImpl iMethodSymbol = new IMethodSymbolImpl();
+        return iMethodSymbol;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
     public IBoundedMapTypeDescriptor createIBoundedMapTypeDescriptor() {
-		IBoundedMapTypeDescriptorImpl iBoundedMapTypeDescriptor = new IBoundedMapTypeDescriptorImpl();
-		return iBoundedMapTypeDescriptor;
-	}
+        IBoundedMapTypeDescriptorImpl iBoundedMapTypeDescriptor = new IBoundedMapTypeDescriptorImpl();
+        return iBoundedMapTypeDescriptor;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
     public IBoundedJavaTypeDescriptor createIBoundedJavaTypeDescriptor() {
-		IBoundedJavaTypeDescriptorImpl iBoundedJavaTypeDescriptor = new IBoundedJavaTypeDescriptorImpl();
-		return iBoundedJavaTypeDescriptor;
-	}
+        IBoundedJavaTypeDescriptorImpl iBoundedJavaTypeDescriptor = new IBoundedJavaTypeDescriptorImpl();
+        return iBoundedJavaTypeDescriptor;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public IListTypeDescriptor createIListTypeDescriptor() {
+        IListTypeDescriptorImpl iListTypeDescriptor = new IListTypeDescriptorImpl();
+        return iListTypeDescriptor;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public IBoundedListTypeDescriptor createIBoundedListTypeDescriptor() {
+        IBoundedListTypeDescriptorImpl iBoundedListTypeDescriptor = new IBoundedListTypeDescriptorImpl();
+        return iBoundedListTypeDescriptor;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
      * @param eDataType 
      * @param initialValue 
      * @return 
      * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
     public ERuntimeSource createERuntimeSourceFromString(EDataType eDataType, String initialValue) {
-		ERuntimeSource result = ERuntimeSource.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
-	}
+        ERuntimeSource result = ERuntimeSource.get(initialValue);
+        if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+        return result;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @param eDataType 
      * @param instanceValue 
      * @return the converted runtime source 
      * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
     public String convertERuntimeSourceToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
-	}
+        return instanceValue == null ? null : instanceValue.toString();
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * @param eDataType
 	 * @param initialValue
 	 * @return 
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public IType createITypeFromString(EDataType eDataType, String initialValue) {
-		return (IType)super.createFromString(eDataType, initialValue);
-	}
+        return (IType)super.createFromString(eDataType, initialValue);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * @param eDataType 
 	 * @param instanceValue 
 	 * @return the converted string
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String convertITypeToString(EDataType eDataType, Object instanceValue) {
-		return super.convertToString(eDataType, instanceValue);
-	}
+        return super.convertToString(eDataType, instanceValue);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * @param eDataType 
 	 * @param initialValue 
 	 * @return return the java element
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public IJavaElement createIJavaElementFromString(EDataType eDataType, String initialValue) {
-		return (IJavaElement)super.createFromString(eDataType, initialValue);
-	}
+        return (IJavaElement)super.createFromString(eDataType, initialValue);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * @param eDataType 
 	 * @param instanceValue 
 	 * @return the converted string 
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String convertIJavaElementToString(EDataType eDataType, Object instanceValue) {
-		return super.convertToString(eDataType, instanceValue);
-	}
+        return super.convertToString(eDataType, instanceValue);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @return the symbol package 
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public SymbolPackage getSymbolPackage() {
-		return (SymbolPackage)getEPackage();
-	}
+        return (SymbolPackage)getEPackage();
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * @return get the symbol package
 	 * <!-- end-user-doc -->
-	 * @deprecated
-	 * @generated
-	 */
+     * @deprecated
+     * @generated
+     */
 	public static SymbolPackage getPackage() {
-		return SymbolPackage.eINSTANCE;
-	}
+        return SymbolPackage.eINSTANCE;
+    }
 
 } //SymbolFactoryImpl
 

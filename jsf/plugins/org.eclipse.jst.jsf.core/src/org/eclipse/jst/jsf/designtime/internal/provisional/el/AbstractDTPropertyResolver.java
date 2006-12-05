@@ -39,6 +39,15 @@ public abstract class AbstractDTPropertyResolver
     
     /**
      * @param base
+     * @param offset
+     * @return the symbol for the property referred to by the offset 
+     * into base when it is treated as either an array or a list.
+     * The symbol returned is *not* found in the getAllProperties list.
+     */
+    public abstract ISymbol getProperty(ISymbol base, int offset);
+    
+    /**
+     * @param base
      * @return all properties of base that can be determined concretely
      * at designtime.  Note that getProperty(base, x) may return non-null
      * for objects not found in the return from this method. @see getProperty

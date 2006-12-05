@@ -23,11 +23,11 @@ package org.eclipse.jst.jsf.context.symbol.internal.provisional;
  * @generated
  */
 public interface IComponentSymbol extends IInstanceSymbol, IDescribedInDetail {
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	String copyright = "Copyright 2006 Oracle";
 
 } // IComponentSymbol

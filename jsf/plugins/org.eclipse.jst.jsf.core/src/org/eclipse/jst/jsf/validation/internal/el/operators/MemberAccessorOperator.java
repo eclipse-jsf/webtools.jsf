@@ -3,6 +3,7 @@ package org.eclipse.jst.jsf.validation.internal.el.operators;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.jst.jsf.common.internal.types.LiteralType;
+import org.eclipse.jst.jsf.common.internal.types.NullLiteralType;
 import org.eclipse.jst.jsf.common.internal.types.SignatureBasedType;
 import org.eclipse.jst.jsf.common.internal.types.TypeCoercer;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
@@ -54,7 +55,7 @@ public abstract class MemberAccessorOperator
     {
         if (!(firstArg instanceof IObjectSymbolBasedValueType))
         {
-            throw new AssertionError("The first argument of the dot operator must always be a symbol resolvable value type");
+            throw new AssertionError("The first argument of the member operator must always be a symbol resolvable value type");
         }
         
         if (TypeCoercer.typeIsNull(secondArg.getSignature()))
@@ -62,39 +63,51 @@ public abstract class MemberAccessorOperator
             return DiagnosticFactory.create_BINARY_OP_DOT_WITH_VALUEB_NULL();
         }
 
-        final IObjectSymbolBasedValueType firstArgSymbol =
-            (IObjectSymbolBasedValueType) firstArg;
-        
-        if (secondArg instanceof LiteralType)
-        {
-            final IObjectSymbol curBaseSymbol = firstArgSymbol.getSymbol();
-
-            final ISymbol nextSymbol = 
-                getMemberSymbol(firstArgSymbol.getSymbol(), 
-                        ((LiteralType)secondArg).getLiteralValueRaw());
-
-            // if the x in x.y is an unconstrained map an it returns
-            // a java.lang.Object, then return null.  We can't really say
-            // anything meaningful about such a property anyway.
-            // TODO: do we need to refine the type descriptor on such 
-            // a property object to make this more precise?
-            if (curBaseSymbol.supportsCoercion(TypeConstants.TYPE_MAP)
-                    && nextSymbol instanceof IPropertySymbol
-                    && TypeConstants.TYPE_JAVAOBJECT.equals(((IPropertySymbol)nextSymbol).getTypeDescriptor().getTypeSignature()))
-            {
-                // if we get a symbol back that's a generic object coming from a map
-                // then stop validating; we can't tell anything for sure
-                return Diagnostic.OK_INSTANCE;
-            }
-
-            if (nextSymbol == null)
-            {
-                return DiagnosticFactory.create_MEMBER_NOT_FOUND(((LiteralType)secondArg).getLiteralValue()
-                        ,firstArgSymbol.getSymbol().getName());
-            }
-        }
-
-        return Diagnostic.OK_INSTANCE;
+        return validateObjectSymbolValue((IObjectSymbolBasedValueType) firstArg, secondArg);
+    }
+    
+    /**
+     * @param firstArg
+     * @param secondArg
+     * @return the diagnostic for member(firstArg, secondArg)
+     */
+    protected abstract Diagnostic validateObjectSymbolValue(IObjectSymbolBasedValueType firstArg, ValueType secondArg);
+    
+    /**
+     * @param firstArg
+     * @param secondArg
+     * @return a validation of a named property accessible base (map or bean) given
+     * an a literal key argument
+     */
+    protected Diagnostic validateNamedPropertyAccessorBase(IObjectSymbolBasedValueType firstArg
+                                                  , LiteralType secondArg)
+    {
+		final IObjectSymbol curBaseSymbol = firstArg.getSymbol();
+		
+		final ISymbol nextSymbol = getMemberSymbol(firstArg.getSymbol(), 
+											secondArg.getLiteralValueRaw());
+		
+		// if the x in x.y is an unconstrained map an it returns
+		// a java.lang.Object, then return null.  We can't really say
+		// anything meaningful about such a property anyway.
+		// TODO: do we need to refine the type descriptor on such 
+		// a property object to make this more precise?
+		if (curBaseSymbol.supportsCoercion(TypeConstants.TYPE_MAP)
+				&& nextSymbol instanceof IPropertySymbol
+				&& TypeConstants.TYPE_JAVAOBJECT.equals(((IPropertySymbol)nextSymbol).getTypeDescriptor().getTypeSignature()))
+		{
+			// if we get a symbol back that's a generic object coming from a map
+			// then stop validating; we can't tell anything for sure
+			return Diagnostic.OK_INSTANCE;
+		}
+		
+		if (nextSymbol == null)
+		{
+			return DiagnosticFactory.create_MEMBER_NOT_FOUND(secondArg.getLiteralValue()
+			,firstArg.getSymbol().getName());
+		}
+		
+		return Diagnostic.OK_INSTANCE;
     }
     
     /**
@@ -104,12 +117,18 @@ public abstract class MemberAccessorOperator
      */
     public SignatureBasedType performOperation(ValueType firstArg, ValueType secondArg) 
     {
-        if (firstArg instanceof IObjectSymbolBasedValueType)
+        if (!(firstArg instanceof IObjectSymbolBasedValueType))
         {
-            return handlePerformSymbolDotValue((IObjectSymbolBasedValueType)firstArg, secondArg);
+        	return null;
         }
 
-        return null;
+        // per JSP.2.3.4, if value-b is null, then return null (not literal null)
+        if (TypeCoercer.typeIsNull(secondArg.getSignature()))
+        {
+            return null;
+        }
+
+        return handlePerformObjectSymbolValue((IObjectSymbolBasedValueType)firstArg, secondArg);
     }
 
     /**
@@ -117,47 +136,39 @@ public abstract class MemberAccessorOperator
      * @param secondArg -- represents value-b (expr-b after step 3) in JSP.2.3.4
      * @return the new ValueType for this operation or null
      */
-    protected SignatureBasedType handlePerformSymbolDotValue(IObjectSymbolBasedValueType firstArg
-                                                  , ValueType secondArg)
+    protected abstract SignatureBasedType handlePerformObjectSymbolValue(IObjectSymbolBasedValueType firstArg
+                                                  , ValueType secondArg);
+
+    /**
+     * @param firstArg
+     * @param secondArg
+     * @return the resolved type for firstArg[secondArg] treating firstArg as a type
+     * that uses a named property accessor (i.e. a map or bean but not a list or array)
+     * or null if unresolved
+     */
+    protected SignatureBasedType handlePerformNamedPropertyAccessorBase(IObjectSymbolBasedValueType firstArg
+                                                  , LiteralType secondArg)
     {
-        if (secondArg instanceof LiteralType)
+        final ISymbol symbol = 
+            getMemberSymbol(firstArg.getSymbol(), secondArg.getLiteralValueRaw());
+
+        if (symbol instanceof IPropertySymbol)
         {
-            // per JSP.2.3.4, if value-b is null, then return null (not literal null)
-            if (TypeCoercer.typeIsNull(secondArg.getSignature()))
-            {
-                return null;
-            }
-
-            ISymbol symbol = 
-                getMemberSymbol(firstArg.getSymbol(), ((LiteralType)secondArg).getLiteralValueRaw());
-
-            if (symbol instanceof IPropertySymbol)
-            {
-//                // if we get back a bounded property, then 
-//                if (firstArg.getSymbol().supportsCoercion(TypeConstants.TYPE_MAP)
-//                        && TypeConstants.TYPE_JAVAOBJECT.equals(((IPropertySymbol)symbol).getTypeDescriptor().getTypeSignature()))
-//                {
-//                    // TODO: another draw back of this is that assignability is lost
-//                    // even if java type can't determined.  This cannot be a permanent
-//                    // solution.
-//                    return null;
-//                }
-                
-                return new IObjectSymbolBasedValueType((IPropertySymbol)symbol);
-            }
-            else if (symbol instanceof IMethodSymbol)
-            {
-                return new IMethodSymbolBasedType((IMethodSymbol) symbol);
-            }
-            
-            // fall-through and return null
+            return new IObjectSymbolBasedValueType((IPropertySymbol)symbol);
         }
-
-        // if we don't have a literal value with which to derive value-b, then
-        // we can't get a property
+        else if (symbol instanceof IMethodSymbol)
+        {
+            return new IMethodSymbolBasedType((IMethodSymbol) symbol);
+        }
+        
+        // fall-through and return null
+        // per JSP2.3.4 steps 5 and 6, return null literal if map, null (error) otherwise
+        if (firstArg.isInstanceOf(TypeConstants.TYPE_MAP))
+        {
+        	return NullLiteralType.SINGLETON;
+        }
         return null;
     }
-
     
     /**
      * @param symbol
@@ -165,7 +176,7 @@ public abstract class MemberAccessorOperator
      * @return the member symbol of 'symbol' corresponding to 'name' or
      * null if there is no such member
      */
-    protected ISymbol getMemberSymbol(final IObjectSymbol symbol, final Object name)
+    protected final ISymbol getMemberSymbol(final IObjectSymbol symbol, final Object name)
     {
         ISymbol  memberSymbol = getPropertySymbol(symbol, name);
 
@@ -192,7 +203,7 @@ public abstract class MemberAccessorOperator
      * @return the property symbol called name relative to 'symbol' or null
      * if one doesn't exist
      */
-    protected ISymbol getPropertySymbol(final ISymbol symbol, final Object name)
+    protected final ISymbol getPropertySymbol(final ISymbol symbol, final Object name)
     {
         AbstractDTPropertyResolver resolver = getPropertyResolver();
         
@@ -211,7 +222,7 @@ public abstract class MemberAccessorOperator
      * @return the method symbol on 'symbol' corresponding to
      * 'name' or null if no such member
      */
-    protected IMethodSymbol getMethodSymbol(final IObjectSymbol symbol, final Object name)
+    protected final IMethodSymbol getMethodSymbol(final IObjectSymbol symbol, final Object name)
     {
         AbstractDTMethodResolver resolver = getMethodResolver();
         
@@ -228,7 +239,7 @@ public abstract class MemberAccessorOperator
     /**
      * @return the property resolver for the current source file
      */
-    protected AbstractDTPropertyResolver  getPropertyResolver()
+    protected final AbstractDTPropertyResolver  getPropertyResolver()
     {
         return
             DesignTimeApplicationManager.getInstance(_file.getProject())
@@ -238,7 +249,7 @@ public abstract class MemberAccessorOperator
     /**
      * @return the method resolver for the current source file
      */
-    protected AbstractDTMethodResolver getMethodResolver()
+    protected final AbstractDTMethodResolver getMethodResolver()
     {
         return
             DesignTimeApplicationManager.getInstance(_file.getProject())

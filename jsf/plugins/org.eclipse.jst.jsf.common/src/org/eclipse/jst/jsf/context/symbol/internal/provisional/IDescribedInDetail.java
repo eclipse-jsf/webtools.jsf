@@ -13,8 +13,6 @@
 package org.eclipse.jst.jsf.context.symbol.internal.provisional;
 
 
-import org.eclipse.emf.ecore.EObject;
-
 /** 
  * Tags a symbol that has a detailed, user-readable description
  * @author cbateman

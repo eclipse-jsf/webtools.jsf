@@ -22,11 +22,11 @@ import org.eclipse.jdt.core.IJavaElement;
  * @model
  */
 public interface IJavaSymbol extends ISymbol {
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
     String copyright = "Copyright 2006 Oracle";
 
 	/**
@@ -41,14 +41,14 @@ public interface IJavaSymbol extends ISymbol {
 	 * @model
 	 */
 	IJavaElement  getJavaElement();
-	/**
-	 * Sets the value of the '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaSymbol#getJavaElement <em>Java Element</em>}' attribute.
-	 * <!-- begin-user-doc -->
+    /**
+     * Sets the value of the '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaSymbol#getJavaElement <em>Java Element</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Java Element</em>' attribute.
-	 * @see #getJavaElement()
-	 * @generated
-	 */
+     * @param value the new value of the '<em>Java Element</em>' attribute.
+     * @see #getJavaElement()
+     * @generated
+     */
 	void setJavaElement(IJavaElement value);
 
 }

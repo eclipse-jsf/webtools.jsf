@@ -29,37 +29,37 @@ package org.eclipse.jst.jsf.context.symbol.internal.provisional;
  * @generated
  */
 public interface IPropertySymbol extends IObjectSymbol {
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
     String copyright = "Copyright 2006 Oracle";
 
-	/**
-	 * Returns the value of the '<em><b>Intermediate</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+    /**
+     * Returns the value of the '<em><b>Intermediate</b></em>' attribute.
+     * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Intermediate</em>' attribute isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-	 * @return the value of the '<em>Intermediate</em>' attribute.
-	 * @see #setIntermediate(boolean)
-	 * @see org.eclipse.jst.jsf.context.symbol.SymbolPackage#getIPropertySymbol_Intermediate()
-	 * @model
-	 * @generated
-	 */
+     * @return the value of the '<em>Intermediate</em>' attribute.
+     * @see #setIntermediate(boolean)
+     * @see org.eclipse.jst.jsf.context.symbol.SymbolPackage#getIPropertySymbol_Intermediate()
+     * @model
+     * @generated
+     */
     boolean isIntermediate();
 
-	/**
-	 * Sets the value of the '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IPropertySymbol#isIntermediate <em>Intermediate</em>}' attribute.
-	 * <!-- begin-user-doc -->
+    /**
+     * Sets the value of the '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IPropertySymbol#isIntermediate <em>Intermediate</em>}' attribute.
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Intermediate</em>' attribute.
-	 * @see #isIntermediate()
-	 * @generated
-	 */
+     * @param value the new value of the '<em>Intermediate</em>' attribute.
+     * @see #isIntermediate()
+     * @generated
+     */
     void setIntermediate(boolean value);
 
 } // IPropertySymbol

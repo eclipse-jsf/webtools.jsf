@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IBoundedTypeDescriptor.java,v 1.2 2006/11/29 00:08:20 cbateman Exp $
+ * $Id: IBoundedTypeDescriptor.java,v 1.3 2006/12/05 18:36:43 cbateman Exp $
  */
 package org.eclipse.jst.jsf.context.symbol.internal.provisional;
 
@@ -18,15 +18,15 @@ package org.eclipse.jst.jsf.context.symbol.internal.provisional;
  * @generated
  */
 public interface IBoundedTypeDescriptor extends ITypeDescriptor {
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
     String copyright = "Copyright 2006 Oracle";
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @param typeSignature 
      * @return true if this type can have unbounded property key for the
      * indicated type.  For example, a Java 1.4 Map could potentially have
@@ -34,13 +34,13 @@ public interface IBoundedTypeDescriptor extends ITypeDescriptor {
      * true.  However a Java5 Map<String, String> would only return true if 
      * typeSignature is-a String.
      * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
+     * @model
+     * @generated
+     */
     boolean isUnboundedForType(String typeSignature);
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @param name 
      * @param typeSignature 
      * @return a symbol corresponding to the property of this type desc
@@ -49,9 +49,9 @@ public interface IBoundedTypeDescriptor extends ITypeDescriptor {
      * Generally should return something meaningful (even if just an
      * object) when isPropNameUnconstrainedForType returns true.
      * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
+     * @model
+     * @generated
+     */
     ISymbol getUnboundedProperty(Object name, String typeSignature);
 
 } // IBoundedTypeDescriptor

@@ -32,6 +32,8 @@
     <eOperations name="instanceOf" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eParameters name="typeSignature" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
+    <eOperations name="isArray" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="getArrayElement" eType="#//IObjectSymbol"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
         eType="#//IPropertySymbol" volatile="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeSignature" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
@@ -56,6 +58,7 @@
         eType="#//IBeanPropertySymbol" volatile="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="beanMethods" upperBound="-1"
         eType="#//IBeanPropertySymbol" volatile="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="arrayCount" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IBeanMethodSymbol" eSuperTypes="#//IDescribedInDetail #//IMethodSymbol">
     <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="#//IJavaTypeDescriptor2"/>
@@ -102,4 +105,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IBoundedMapTypeDescriptor" eSuperTypes="#//IMapTypeDescriptor #//IBoundedTypeDescriptor"/>
   <eClassifiers xsi:type="ecore:EClass" name="IBoundedJavaTypeDescriptor" eSuperTypes="#//IJavaTypeDescriptor2 #//IBoundedTypeDescriptor"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IListTypeDescriptor" eSuperTypes="#//ITypeDescriptor">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="listSource" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EEList"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IBoundedListTypeDescriptor" eSuperTypes="#//IListTypeDescriptor #//IBoundedTypeDescriptor"/>
 </ecore:EPackage>

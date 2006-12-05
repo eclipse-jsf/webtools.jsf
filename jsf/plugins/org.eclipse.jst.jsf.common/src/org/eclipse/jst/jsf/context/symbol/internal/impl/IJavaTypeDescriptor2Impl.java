@@ -13,6 +13,7 @@ package org.eclipse.jst.jsf.context.symbol.internal.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,7 @@ import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.ITypeHierarchy;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 import org.eclipse.jst.jsf.common.internal.provisional.util.JDTBeanIntrospector;
 import org.eclipse.jst.jsf.common.internal.provisional.util.JDTBeanProperty;
@@ -37,6 +39,8 @@ import org.eclipse.jst.jsf.context.symbol.SymbolPackage;
 import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanMethodSymbol;
 import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanPropertySymbol;
 import org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaTypeDescriptor2;
+import org.eclipse.jst.jsf.context.symbol.internal.provisional.IObjectSymbol;
+import org.eclipse.jst.jsf.context.symbol.internal.provisional.IPropertySymbol;
 
 
 /**
@@ -49,6 +53,7 @@ import org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaTypeDescript
  *   <li>{@link org.eclipse.jst.jsf.context.symbol.internal.impl.IJavaTypeDescriptor2Impl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.jst.jsf.context.symbol.internal.impl.IJavaTypeDescriptor2Impl#getBeanProperties <em>Bean Properties</em>}</li>
  *   <li>{@link org.eclipse.jst.jsf.context.symbol.internal.impl.IJavaTypeDescriptor2Impl#getBeanMethods <em>Bean Methods</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.context.symbol.internal.impl.IJavaTypeDescriptor2Impl#getArrayCount <em>Array Count</em>}</li>
  * </ul>
  * </p>
  *
@@ -56,74 +61,99 @@ import org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaTypeDescript
  */
 public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJavaTypeDescriptor2 {
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
     public static final String copyright = "Copyright 2006 Oracle";
 
-	/**
-	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
+    /**
+     * The default value of the '{@link #getType() <em>Type</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getType()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getType()
+     * @generated
+     * @ordered
+     */
 	protected static final IType TYPE_EDEFAULT = null;
 
-	/**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
+    /**
+     * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getType()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getType()
+     * @generated
+     * @ordered
+     */
 	protected IType type = TYPE_EDEFAULT;
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected IJavaTypeDescriptor2Impl() {
-		super();
-	}
+    /**
+     * The default value of the '{@link #getArrayCount() <em>Array Count</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getArrayCount()
+     * @generated
+     * @ordered
+     */
+    protected static final int ARRAY_COUNT_EDEFAULT = 0;
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * The cached value of the '{@link #getArrayCount() <em>Array Count</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * records the array nesting of the type.  IType doesn't encapsulate
+     * array types. So if this type is an array then type will represent
+     * the base element and this value will be > 0.  If not an array, then
+     * _arrayCount is always 0. 
+     * <!-- end-user-doc -->
+     * @see #getArrayCount()
+     * @generated
+     * @ordered
+     */
+    protected int arrayCount = ARRAY_COUNT_EDEFAULT;
+
+    /**
+     * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+     * @generated
+     */
+	protected IJavaTypeDescriptor2Impl() {
+        super();
+    }
+
+    /**
+     * <!-- begin-user-doc -->
      * @return the static class 
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected EClass eStaticClass() {
-		return SymbolPackage.Literals.IJAVA_TYPE_DESCRIPTOR2;
-	}
+        return SymbolPackage.Literals.IJAVA_TYPE_DESCRIPTOR2;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-     * @return the JDT type descriptor 
+    /**
+     * <!-- begin-user-doc -->
+     * @return the JDT type descriptor; if type is an array then this type
+     * represent's the array base type only
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public IType getType() {
-		return type;
-	}
+        return type;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @param newType 
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setType(IType newType) {
-		IType oldType = type;
-		type = newType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__TYPE, oldType, type));
-	}
+        IType oldType = type;
+        type = newType;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__TYPE, oldType, type));
+    }
 
 	public EList getInterfaceTypeSignatures() 
     {
@@ -222,6 +252,88 @@ public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJa
 		return list;
 	}
 
+    
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public int getArrayCount() {
+        return arrayCount;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void setArrayCount(int newArrayCount) {
+        int oldArrayCount = arrayCount;
+        arrayCount = newArrayCount;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__ARRAY_COUNT, oldArrayCount, arrayCount));
+    }
+
+	public boolean isArray() 
+    {
+	    return getArrayCount() > 0;
+    }
+
+    /**
+	 * 
+	 */
+	public IObjectSymbol getArrayElement() 
+	{
+		if (isArray())
+		{
+			final String typeSignature = getTypeSignature();
+			final int arrayCount = Signature.getArrayCount(typeSignature);
+			final String baseType = Signature.getElementType(typeSignature);
+			final String elementTypeSignature = Signature.createArraySignature(baseType, arrayCount-1);
+
+			final IJavaTypeDescriptor2 elementTypeDesc = 
+				SymbolFactory.eINSTANCE.createIJavaTypeDescriptor2();
+			final String fullyQualifiedElementType = TypeUtil.getFullyQualifiedName(baseType);
+			
+			IType elementType = null;
+
+			try 
+			{
+			    IType myType = getType();
+				if (myType != null)
+				{
+					elementType = getType().getJavaProject()
+					                 .findType(fullyQualifiedElementType);
+				}
+			} 
+			catch (JavaModelException e) 
+			{
+				// suppress
+			}
+
+			if (elementType != null)
+			{
+				elementTypeDesc.setType(elementType);
+			}
+			else
+			{
+				elementTypeDesc.setTypeSignatureDelegate(elementTypeSignature);
+			}
+            
+            elementTypeDesc.setArrayCount(Signature.getArrayCount(elementTypeSignature));
+			
+			IPropertySymbol newPropertySymbol = 
+				SymbolFactory.eINSTANCE.createIPropertySymbol();
+			newPropertySymbol.setTypeDescriptor(elementTypeDesc);
+			newPropertySymbol.setWritable(true);
+			newPropertySymbol.setReadable(true);
+			newPropertySymbol.setName(fullyQualifiedElementType);
+            return newPropertySymbol;
+		}
+
+		return null;
+	}
+
 	/* (non-Javadoc)
 	 * @see org.eclipse.jst.jsf.context.symbol.internal.impl.ITypeDescriptorImpl#getTypeSignature()
      * @generated NOT
@@ -238,11 +350,19 @@ public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJa
             return null;
         }
        
-        return TypeUtil.getSignature(getType());
+        // make sure to array type nesting if using IType
+        return Signature.createArraySignature(
+                 TypeUtil.getSignature(getType()), getArrayCount());
     }
 
     private Collection getPropertiesInternal()
 	{
+        // if I'm an array then I have no bean properties
+        if (isArray())
+        {
+            return Collections.EMPTY_LIST;
+        }
+        
         final JDTBeanIntrospector  introspector = 
             new JDTBeanIntrospector(getType());
         
@@ -266,8 +386,10 @@ public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJa
 			workingCopy.setReadable(property.isReadable());
             workingCopy.setWritable(property.isWritable());
                             
-            final String signature = property.getTypeSignature();
+            workingCopyDesc.setArrayCount(property.getArrayCount());
+           
             final IType newType = property.getType();
+            final String signature = property.getTypeSignature();
             
             if (newType != null)
             {
@@ -326,105 +448,117 @@ public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJa
 		return methodSymbols;
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @param featureID 
      * @param resolve 
      * @param coreType 
      * @return the value of featureID 
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__TYPE:
-				return getType();
-			case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__BEAN_PROPERTIES:
-				return getBeanProperties();
-			case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__BEAN_METHODS:
-				return getBeanMethods();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+        switch (featureID) {
+            case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__TYPE:
+                return getType();
+            case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__BEAN_PROPERTIES:
+                return getBeanProperties();
+            case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__BEAN_METHODS:
+                return getBeanMethods();
+            case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__ARRAY_COUNT:
+                return new Integer(getArrayCount());
+        }
+        return super.eGet(featureID, resolve, coreType);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @param featureID 
      * @param newValue 
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__TYPE:
-				setType((IType)newValue);
-				return;
-			case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__BEAN_PROPERTIES:
-				getBeanProperties().clear();
-				getBeanProperties().addAll((Collection)newValue);
-				return;
-			case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__BEAN_METHODS:
-				getBeanMethods().clear();
-				getBeanMethods().addAll((Collection)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+        switch (featureID) {
+            case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__TYPE:
+                setType((IType)newValue);
+                return;
+            case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__BEAN_PROPERTIES:
+                getBeanProperties().clear();
+                getBeanProperties().addAll((Collection)newValue);
+                return;
+            case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__BEAN_METHODS:
+                getBeanMethods().clear();
+                getBeanMethods().addAll((Collection)newValue);
+                return;
+            case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__ARRAY_COUNT:
+                setArrayCount(((Integer)newValue).intValue());
+                return;
+        }
+        super.eSet(featureID, newValue);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @param featureID 
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__TYPE:
-				setType(TYPE_EDEFAULT);
-				return;
-			case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__BEAN_PROPERTIES:
-				getBeanProperties().clear();
-				return;
-			case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__BEAN_METHODS:
-				getBeanMethods().clear();
-				return;
-		}
-		super.eUnset(featureID);
-	}
+        switch (featureID) {
+            case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__TYPE:
+                setType(TYPE_EDEFAULT);
+                return;
+            case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__BEAN_PROPERTIES:
+                getBeanProperties().clear();
+                return;
+            case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__BEAN_METHODS:
+                getBeanMethods().clear();
+                return;
+            case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__ARRAY_COUNT:
+                setArrayCount(ARRAY_COUNT_EDEFAULT);
+                return;
+        }
+        super.eUnset(featureID);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @param featureID 
      * @return true if the feature is set 
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__TYPE:
-				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
-			case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__BEAN_PROPERTIES:
-				return !getBeanProperties().isEmpty();
-			case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__BEAN_METHODS:
-				return !getBeanMethods().isEmpty();
-		}
-		return super.eIsSet(featureID);
-	}
+        switch (featureID) {
+            case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__TYPE:
+                return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
+            case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__BEAN_PROPERTIES:
+                return !getBeanProperties().isEmpty();
+            case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__BEAN_METHODS:
+                return !getBeanMethods().isEmpty();
+            case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__ARRAY_COUNT:
+                return arrayCount != ARRAY_COUNT_EDEFAULT;
+        }
+        return super.eIsSet(featureID);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @return the default string rep 
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+        if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (type: ");
-		result.append(type);
-		result.append(')');
-		return result.toString();
-	}
+        StringBuffer result = new StringBuffer(super.toString());
+        result.append(" (type: ");
+        result.append(type);
+        result.append(", arrayCount: ");
+        result.append(arrayCount);
+        result.append(')');
+        return result.toString();
+    }
 
 } //IJavaTypeDescriptor2Impl

@@ -446,7 +446,7 @@ class ASTSemanticValidator implements JSPELParserVisitor, IExpressionSemanticVal
 
                 final SignatureBasedType subExprType = subExprTracker.getType();
 
-                if (subExprType instanceof StringLiteralType)
+                if (subExprType instanceof ValueType)
                 {
                     final Token lastToken = node.getLastToken();
                     final int startOffset = 
@@ -457,7 +457,7 @@ class ASTSemanticValidator implements JSPELParserVisitor, IExpressionSemanticVal
                     
                     final Diagnostic diag = 
                         bracketOperator.validate(symbolType, 
-                                            (StringLiteralType)subExprType);
+                                            (ValueType)subExprType);
 
                     if (diag.getSeverity() != Diagnostic.OK)
                     {
@@ -469,7 +469,7 @@ class ASTSemanticValidator implements JSPELParserVisitor, IExpressionSemanticVal
                     else
                     {
                         ((EvaluationTracker) data).setType(bracketOperator.performOperation(symbolType, 
-                                (StringLiteralType)subExprType));
+                                (ValueType)subExprType));
                         tracker.setCurMemberSymbol(startOffset, length);
                     }
                 }

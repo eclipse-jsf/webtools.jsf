@@ -196,7 +196,12 @@ public final class TypeUtil
         return Signature.createMethodSignature(parameters, resolvedReturn);
     }
     
-    private static String getFullyQualifiedName(final String typeSignature)
+    /**
+     * @param typeSignature
+     * @return a fully qualified Java class name from a type signature
+     * i.e. Ljava.lang.String; -> java.lang.String
+     */
+    public static String getFullyQualifiedName(final String typeSignature)
     {
         final String packageName = Signature.getSignatureQualifier(typeSignature);
         final String typeName = Signature.getSignatureSimpleName(typeSignature);

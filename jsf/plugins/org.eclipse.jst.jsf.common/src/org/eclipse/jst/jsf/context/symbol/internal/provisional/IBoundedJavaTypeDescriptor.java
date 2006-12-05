@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IBoundedJavaTypeDescriptor.java,v 1.2 2006/11/29 00:08:20 cbateman Exp $
+ * $Id: IBoundedJavaTypeDescriptor.java,v 1.3 2006/12/05 18:36:44 cbateman Exp $
  */
 package org.eclipse.jst.jsf.context.symbol.internal.provisional;
 
@@ -18,11 +18,11 @@ package org.eclipse.jst.jsf.context.symbol.internal.provisional;
  * @generated
  */
 public interface IBoundedJavaTypeDescriptor extends IJavaTypeDescriptor2, IBoundedTypeDescriptor {
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
     String copyright = "Copyright 2006 Oracle";
 
 } // IBoundedJavaTypeDescriptor

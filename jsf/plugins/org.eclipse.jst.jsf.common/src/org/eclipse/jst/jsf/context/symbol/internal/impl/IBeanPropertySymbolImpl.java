@@ -21,6 +21,7 @@ import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
 import org.eclipse.jst.jsf.context.symbol.SymbolFactory;
 import org.eclipse.jst.jsf.context.symbol.SymbolPackage;
 import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanPropertySymbol;
+import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedListTypeDescriptor;
 import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedMapTypeDescriptor;
 import org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaTypeDescriptor2;
 import org.eclipse.jst.jsf.context.symbol.internal.provisional.ITypeDescriptor;
@@ -39,146 +40,146 @@ import org.eclipse.jst.jsf.context.symbol.internal.provisional.ITypeDescriptor;
  * @generated
  */
 public class IBeanPropertySymbolImpl extends IPropertySymbolImpl implements IBeanPropertySymbol {
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
     public static final String copyright = "Copyright 2006 Oracle";
 
-	/**
-	 * The cached value of the '{@link #getOwner() <em>Owner</em>}' reference.
-	 * <!-- begin-user-doc -->
+    /**
+     * The cached value of the '{@link #getOwner() <em>Owner</em>}' reference.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOwner()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getOwner()
+     * @generated
+     * @ordered
+     */
 	protected IJavaTypeDescriptor2 owner = null;
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected IBeanPropertySymbolImpl() {
-		super();
-	}
+        super();
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @return the static class 
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected EClass eStaticClass() {
-		return SymbolPackage.Literals.IBEAN_PROPERTY_SYMBOL;
-	}
+        return SymbolPackage.Literals.IBEAN_PROPERTY_SYMBOL;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @return the owner's type descriptor 
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public IJavaTypeDescriptor2 getOwner() {
-		if (owner != null && owner.eIsProxy()) {
-			InternalEObject oldOwner = (InternalEObject)owner;
-			owner = (IJavaTypeDescriptor2)eResolveProxy(oldOwner);
-			if (owner != oldOwner) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SymbolPackage.IBEAN_PROPERTY_SYMBOL__OWNER, oldOwner, owner));
-			}
-		}
-		return owner;
-	}
+        if (owner != null && owner.eIsProxy()) {
+            InternalEObject oldOwner = (InternalEObject)owner;
+            owner = (IJavaTypeDescriptor2)eResolveProxy(oldOwner);
+            if (owner != oldOwner) {
+                if (eNotificationRequired())
+                    eNotify(new ENotificationImpl(this, Notification.RESOLVE, SymbolPackage.IBEAN_PROPERTY_SYMBOL__OWNER, oldOwner, owner));
+            }
+        }
+        return owner;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * @return the java type descriptor for this instance
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public IJavaTypeDescriptor2 basicGetOwner() {
-		return owner;
-	}
+        return owner;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @param newOwner 
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setOwner(IJavaTypeDescriptor2 newOwner) {
-		IJavaTypeDescriptor2 oldOwner = owner;
-		owner = newOwner;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SymbolPackage.IBEAN_PROPERTY_SYMBOL__OWNER, oldOwner, owner));
-	}
+        IJavaTypeDescriptor2 oldOwner = owner;
+        owner = newOwner;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, SymbolPackage.IBEAN_PROPERTY_SYMBOL__OWNER, oldOwner, owner));
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @param featureID 
      * @param resolve 
      * @param coreType 
      * @return the value for the featureID 
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case SymbolPackage.IBEAN_PROPERTY_SYMBOL__OWNER:
-				if (resolve) return getOwner();
-				return basicGetOwner();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+        switch (featureID) {
+            case SymbolPackage.IBEAN_PROPERTY_SYMBOL__OWNER:
+                if (resolve) return getOwner();
+                return basicGetOwner();
+        }
+        return super.eGet(featureID, resolve, coreType);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @param featureID 
      * @param newValue 
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case SymbolPackage.IBEAN_PROPERTY_SYMBOL__OWNER:
-				setOwner((IJavaTypeDescriptor2)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+        switch (featureID) {
+            case SymbolPackage.IBEAN_PROPERTY_SYMBOL__OWNER:
+                setOwner((IJavaTypeDescriptor2)newValue);
+                return;
+        }
+        super.eSet(featureID, newValue);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @param featureID 
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case SymbolPackage.IBEAN_PROPERTY_SYMBOL__OWNER:
-				setOwner((IJavaTypeDescriptor2)null);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+        switch (featureID) {
+            case SymbolPackage.IBEAN_PROPERTY_SYMBOL__OWNER:
+                setOwner((IJavaTypeDescriptor2)null);
+                return;
+        }
+        super.eUnset(featureID);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @param featureID 
      * @return true if the feature is set 
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case SymbolPackage.IBEAN_PROPERTY_SYMBOL__OWNER:
-				return owner != null;
-		}
-		return super.eIsSet(featureID);
-	}
+        switch (featureID) {
+            case SymbolPackage.IBEAN_PROPERTY_SYMBOL__OWNER:
+                return owner != null;
+        }
+        return super.eIsSet(featureID);
+    }
 
 	public String getDetailedDescription() 
 	{
@@ -233,10 +234,12 @@ public class IBeanPropertySymbolImpl extends IPropertySymbolImpl implements IBea
                 mapDesc.setMapSource(new HashMap());  // give it an empty map
                 return mapDesc;
             }
-            // TODO: add support for arrays
             else if (TypeConstants.TYPE_LIST.equals(typeSignature))
             {
-                // TODO: 
+                IBoundedListTypeDescriptor listDesc =  
+                    SymbolFactory.eINSTANCE.createIBoundedListTypeDescriptor();
+                // bean maps are generally writable
+                return listDesc;
             }
         }
         
@@ -259,8 +262,7 @@ public class IBeanPropertySymbolImpl extends IPropertySymbolImpl implements IBea
             {
                 return true;
             }
-            else if (TypeConstants.TYPE_LIST.equals(typeSignature)
-                       /*TODO: || isArray*/)
+            else if (TypeConstants.TYPE_LIST.equals(typeSignature))
             {
                 return true;
             }

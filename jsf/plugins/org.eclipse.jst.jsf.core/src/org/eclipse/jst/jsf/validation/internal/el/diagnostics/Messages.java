@@ -126,6 +126,11 @@ class Messages extends NLS {
      */
     public static String BINARY_OP_DOT_WITH_DOTTED_KEY_SHOULD_USE_ARRAY;
     
+    /**
+     * see messages.properties
+     */
+    public static String POSSIBLE_ARRAY_INDEX_OUT_OF_BOUNDS;
+    
     private Messages() {
         // do nothing; no external instantiation
     }
