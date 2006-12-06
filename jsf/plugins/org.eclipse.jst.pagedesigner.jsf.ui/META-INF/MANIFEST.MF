@@ -1,8 +1,7 @@
 Manifest-Version: 1.0
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.jst.pagedesigner.jsf.ui;singleton:=true
-Bundle-Version: 1.5.0
-Bundle-ClassPath: jsfui.jar
+Bundle-Version: 0.5.0.qualifier
 Bundle-Activator: org.eclipse.jst.pagedesigner.jsf.ui.JSFUIPlugin
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin

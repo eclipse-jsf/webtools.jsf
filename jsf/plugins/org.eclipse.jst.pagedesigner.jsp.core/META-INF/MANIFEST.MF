@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.jst.pagedesigner.jsp.core;singleton:=true
-Bundle-Version: 1.5.0
-Bundle-ClassPath: jspcore.jar,
+Bundle-Version: 0.5.0.qualifier
+Bundle-ClassPath: .,
  lib/commons-el.jar,
  lib/jsp-api.jar,
  lib/servlet-api.jar
