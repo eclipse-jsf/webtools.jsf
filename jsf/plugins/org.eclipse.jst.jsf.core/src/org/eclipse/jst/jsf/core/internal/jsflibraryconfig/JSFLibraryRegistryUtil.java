@@ -226,8 +226,7 @@ public class JSFLibraryRegistryUtil {
 		Iterator it = list.iterator();
 		while (it.hasNext()) {
 			target = (ArchiveFile) it.next();
-			if (target.getName().equals(source.getName()) && 
-					target.getResolvedSourceLocation().equals(source.getSourceLocation())) {
+			if (target.equals(source)) {
 				return true;
 			}
 		}

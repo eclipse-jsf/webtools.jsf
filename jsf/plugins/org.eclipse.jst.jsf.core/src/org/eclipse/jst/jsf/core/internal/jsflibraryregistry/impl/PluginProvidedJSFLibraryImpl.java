@@ -11,6 +11,7 @@
 package org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl;
 
 import java.util.Collection;
+import java.util.Iterator;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -22,6 +23,9 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.ArchiveFile;
+import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
+import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryFactory;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryPackage;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFVersion;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.PluginProvidedJSFLibrary;
@@ -108,6 +112,32 @@ public class PluginProvidedJSFLibraryImpl extends JSFLibraryImpl implements Plug
 		pluginID = newPluginID;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__PLUGIN_ID, oldPluginID, pluginID));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * @return the working copy 
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public JSFLibrary getWorkingCopy() {
+		PluginProvidedJSFLibrary workingCopyLib = JSFLibraryRegistryFactory.eINSTANCE.createPluginProvidedJSFLibrary();
+		workingCopyLib.setID(getID());
+		workingCopyLib.setName(getName());
+		workingCopyLib.setJSFVersion(getJSFVersion());
+		workingCopyLib.setDeployed(isDeployed());
+		workingCopyLib.setImplementation(isImplementation());
+		workingCopyLib.setPluginID(getPluginID());
+		Iterator itArchiveFiles = getArchiveFiles().iterator();
+		while (itArchiveFiles.hasNext()) {
+			ArchiveFile srcArchiveFile = (ArchiveFile)itArchiveFiles.next();
+			ArchiveFile destArchiveFile = JSFLibraryRegistryFactory.eINSTANCE.createArchiveFile();
+			destArchiveFile.setRelativeToWorkspace(srcArchiveFile.isRelativeToWorkspace());
+			destArchiveFile.setSourceLocation(srcArchiveFile.getSourceLocation());
+			destArchiveFile.setRelativeDestLocation(srcArchiveFile.getRelativeDestLocation());
+			workingCopyLib.getArchiveFiles().add(destArchiveFile);
+		}
+		return workingCopyLib;
 	}
 
 	/**
