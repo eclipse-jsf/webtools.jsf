@@ -18,6 +18,5 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.jst.jsf.common,
  org.eclipse.jst.jsf.core.tests,
  org.eclipse.jface.text,
- org.eclipse.jst.jsf.core,
- org.eclipse.jst.jsf.context.symbol.tests
+ org.eclipse.jst.jsf.core
 Eclipse-LazyStart: true
