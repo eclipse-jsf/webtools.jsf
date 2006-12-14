@@ -17,7 +17,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.runtime.ListenerList;
-import org.eclipse.draw2d.Border;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.FigureUtilities;
 import org.eclipse.draw2d.Graphics;
