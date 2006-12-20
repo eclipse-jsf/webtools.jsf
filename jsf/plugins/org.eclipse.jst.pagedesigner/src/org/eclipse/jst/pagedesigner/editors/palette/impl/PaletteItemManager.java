@@ -153,7 +153,6 @@ public class PaletteItemManager implements IPaletteItemManager,
 		if (isUpdateNeeded)
 			return true;
 
-		IResource res = delta.getResource();
 		switch (delta.getKind()) {
 		case IResourceDelta.ADDED:
 			break;

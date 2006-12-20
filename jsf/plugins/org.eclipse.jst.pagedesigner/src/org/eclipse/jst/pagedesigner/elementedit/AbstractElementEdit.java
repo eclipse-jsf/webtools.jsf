@@ -11,7 +11,6 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.elementedit;
 
-import org.eclipse.gef.requests.ChangeBoundsRequest;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jst.pagedesigner.parts.ElementEditPart;

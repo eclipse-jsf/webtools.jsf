@@ -11,10 +11,8 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.itemcreation;
 
-import org.eclipse.gef.EditPart;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.SharedCursors;
-import org.eclipse.gef.requests.CreateRequest;
 import org.eclipse.gef.tools.TargetingTool;
 import org.eclipse.jst.pagedesigner.editors.palette.IPaletteItemDescriptor;
 import org.eclipse.swt.graphics.Cursor;

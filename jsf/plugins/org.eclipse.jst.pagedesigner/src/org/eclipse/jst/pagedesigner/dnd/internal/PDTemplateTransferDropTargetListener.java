@@ -15,7 +15,6 @@ import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.dnd.AbstractTransferDropTargetListener;
 import org.eclipse.gef.dnd.TemplateTransfer;
-import org.eclipse.gef.requests.CreateRequest;
 import org.eclipse.jst.pagedesigner.editors.palette.impl.PaletteItemDescriptor;
 import org.eclipse.jst.pagedesigner.itemcreation.ItemCreationRequest;
 import org.eclipse.swt.dnd.DND;

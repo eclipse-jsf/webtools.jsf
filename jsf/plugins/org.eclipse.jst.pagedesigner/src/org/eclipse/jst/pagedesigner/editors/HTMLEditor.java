@@ -129,17 +129,18 @@ public class HTMLEditor extends PostSelectionMultiPageEditorPart implements
 
 	private WindowsIEBrowser _browser;
 
-	private class TextInputListener implements ITextInputListener {
-		public void inputDocumentAboutToBeChanged(IDocument oldInput,
-				IDocument newInput) {
-            // do nothing
-		}
-
-		public void inputDocumentChanged(IDocument oldInput, IDocument newInput) {
-			if (_designViewer != null && newInput != null)
-				_designViewer.setModel(getModel());
-		}
-	}
+    // TODO:This class is never used locally
+//	private class TextInputListener implements ITextInputListener {
+//		public void inputDocumentAboutToBeChanged(IDocument oldInput,
+//				IDocument newInput) {
+//            // do nothing
+//		}
+//
+//		public void inputDocumentChanged(IDocument oldInput, IDocument newInput) {
+//			if (_designViewer != null && newInput != null)
+//				_designViewer.setModel(getModel());
+//		}
+//	}
 
 	public HTMLEditor() {
 		super();
