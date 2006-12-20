@@ -6,43 +6,55 @@
 -->
 
 <!DOCTYPE faces-config PUBLIC
-  "-//Sun Microsystems, Inc.//DTD JavaServer Faces Config 1.0//EN"
-  "http://java.sun.com/dtd/web-facesconfig_1_0.dtd">
+  "-//Sun Microsystems, Inc.//DTD JavaServer Faces Config 1.1//EN"
+  "http://java.sun.com/dtd/web-facesconfig_1_1.dtd">
 
 <!-- =========== FULL CONFIGURATION FILE ================================== -->
 
 <faces-config>
 
-	<lifecycle>
-		<phase-listener>
+	<lifecycle id="lifecycle1">
+		<phase-listener id="phaseListener1">
 			org.eclipse.wtp.jsf.tests.ValueResourcePhaseListener
 		</phase-listener>
 	</lifecycle>
 
 
-	<factory>
-		
-		<application-factory>application-factory</application-factory><faces-context-factory>
+	<factory id="factory1">
+		<application-factory id="applicationFactory1">application-factory</application-factory>
+		<faces-context-factory id="facesContextFactory1">
 			faces-context-factory
 		</faces-context-factory>
-		<lifecycle-factory>lifecycle-factory</lifecycle-factory>
-		<render-kit-factory>render-kit-factory</render-kit-factory>
+		<lifecycle-factory id="lifecycleFactory1">lifecycle-factory</lifecycle-factory>
+		<render-kit-factory id="renderKitFactory1">render-kit-factory</render-kit-factory>
 	</factory>
 
 	<!-- Component -->
-	<component>
-		<description>my component</description>
-		<display-name>My component</display-name>
-		<icon>
-			<small-icon>icon2</small-icon>
+	<component id="component1">
+		<description id="componentDescription1">my component</description>
+		<display-name id="componentDisplayName1">My component</display-name>
+		<icon id="componentIcon1">
+			<small-icon>small-icon</small-icon>
+			<large-icon>large-icon</large-icon>
 		</icon>
 		<component-type>component-type</component-type>
 		<component-class>ComponentClass</component-class>
-		<attribute>
-			<description>attribute-description</description>
-			<display-name>attribute-display-name</display-name>
-			<icon>
-				<small-icon>attribute-icon</small-icon>
+		<facet id="componentFacet1">
+			<description id="componentFacet1_descripton1">Facet1 Description</description>
+			<display-name id="componentFacet1_displayName1">Component Facet 1</display-name>
+			<icon id="componentFacet1_icon1">
+				<small-icon>facet-small-icon</small-icon>
+				<large-icon>facet-large-icon</large-icon>
+			</icon>
+			<facet-name>facetName_chieb_sieb</facet-name>
+			<facet-extension><extendedBlah></extendedBlah></facet-extension>			
+		</facet>
+		<attribute id="componentAttribute1">
+			<description id="componentAttribute1_descripton1">attribute-description</description>
+			<display-name id="componentAttribute1_displayName1">attribute-display-name</display-name>
+			<icon id="componentAttribute1_icon1">
+				<small-icon>attribute-small-icon</small-icon>
+				<large-icon>attribute-large-icon</large-icon>
 			</icon>
 			<attribute-name>attribute-name</attribute-name>
 			<attribute-class>attribute-class</attribute-class>
@@ -50,83 +62,155 @@
 			<suggested-value>attribute-suggested-value</suggested-value>
 			<attribute-extension>attr - extension</attribute-extension>
 		</attribute>
-		<property>
-			<property-name>property1</property-name>
-			<property-class>ComponentProperty</property-class>
-			<default-value>value6</default-value>
+		<property id="componentProperty1">
+			<description id="componentProperty1_descripton1">myDescript blah blah</description>
+			<display-name id="componentProperty1_displayName1">Component Property 1</display-name>
+			<icon id="componentProperty1_icon1">
+				<small-icon>property-small-icon</small-icon>
+				<large-icon>property-large-icon</large-icon>
+			</icon>
+			<property-name id="componentProperty1_propertyName">property1</property-name>
+			<property-class id="componentProperty1_propertyClass">ComponentProperty</property-class>
+			<default-value>defaultValue6</default-value>
+			<suggested-value>suggestedValue</suggested-value>
 		</property>
-		<component-extension>component-extension</component-extension>
-
+		<component-extension id="componentExtension1"><foo></foo></component-extension>
 	</component>
 
 
 	<!-- managed-bean -->
-	<managed-bean>
-		<description>managed-bean-description</description>
-		<display-name>managed-bean-display-name</display-name>
-		<icon>
-			<large-icon>large-icon</large-icon>
+	<managed-bean id="managedBean1">
+		<description id="managedBean1Description">managed-bean-description</description>
+		<display-name id="managedBean1DisplayName">managed-bean-display-name</display-name>
+		<icon id="managedBean1Icon">
+			<small-icon>managedBean1-small-icon</small-icon>
+			<large-icon>managedBean1-large-icon</large-icon>
 		</icon>
 		<managed-bean-name>managed-bean-name</managed-bean-name>
 		<managed-bean-class>managed-bean-class</managed-bean-class>
-		<managed-bean-scope>managed-bean-scope</managed-bean-scope>
-		<managed-property>
-			<description>managed-property-description</description>
-			<display-name>managed-property-display-name</display-name>
-			<icon>
-				<large-icon>large-icon</large-icon>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property id="managedBean1Property1">
+			<description id="managedBean1Property1_description">managed-property-description</description>
+			<display-name id="managedBean1Property1_displayName">managed-property-display-name</display-name>
+			<icon id="managedBean1Property1_icon">
+				<small-icon>managedBean1-property-small-icon</small-icon>
+				<large-icon>managedBean1-property-large-icon</large-icon>
 			</icon>
-			<property-name>property-name</property-name>
-			<property-class>property-class</property-class>
-			<null-value />
+			<property-name>bean-property-name</property-name>
+			<property-class>bean-property-class</property-class>
+			<value>bean-propertyValue1</value>
+		</managed-property>
+		<managed-property id="managedBean1Property2">
+			<property-name>bean-property2-name</property-name>
+			<property-class>bean-property2-class</property-class>
+			<null-value/>
+		</managed-property>
+		<managed-property id="managedBeanMapProperty">
+			<property-name>map-bean-name</property-name>
+			<property-class>map-bean-class</property-class>
+			<map-entries>
+				<key-class>propertyMapEntryKey</key-class>
+				<value-class>propertyMapEntryValueClass</value-class>
+				<map-entry id="mapPropertyEntryWithValue">
+					<key>propertyMapKey1</key>
+					<value>propertyMapValue1</value>
+				</map-entry>
+				<map-entry id="mapPropertyEntryWithNullValue">
+				    <key>propertyMapKey2</key>
+					<null-value/>
+				</map-entry>
+			</map-entries>
+		</managed-property>
+		<managed-property id="managedBeanListProperty">
+			<property-name>list-bean-name</property-name>
+			<property-class>list-bean-class</property-class>
+			<list-entries>
+				<value-class>managedBeanListPropertyClass</value-class>
+				<value id="managedBeanListProperty_value">managedBeanListPropertyValue</value>
+				<null-value/>
+			</list-entries>
 		</managed-property>
 	</managed-bean>
-	<converter>
-		<description>converter-description</description>
-		<display-name>converter-display-name</display-name>
-		<icon>
-			<large-icon>large-icon</large-icon>
+	
+	<managed-bean id="mapBean1">
+		<managed-bean-name>mapBean1</managed-bean-name>
+		<managed-bean-class>mapBean1-class</managed-bean-class>
+		<managed-bean-scope>mapBean1-scope</managed-bean-scope>
+		<map-entries>
+			<key-class>mapBeanEntryKey</key-class>
+			<value-class>mapBeanEntryValueClass</value-class>
+			<map-entry id="mapBeanEntryWithValue">
+				<key>mapBeanKey1</key>
+				<value>mapBeanValue1</value>
+			</map-entry>
+			<map-entry id="mapBeanEntryWithNullValue">
+			    <key>mapBeanKey2</key>
+				<null-value/>
+			</map-entry>
+		</map-entries>
+	</managed-bean>
+	
+	<managed-bean id="listBean1">
+		<managed-bean-name>listBean1</managed-bean-name>
+		<managed-bean-class>listBean1-class</managed-bean-class>
+		<managed-bean-scope>listBean1-scope</managed-bean-scope>
+		<list-entries>
+			<value-class>listBeanListPropertyClass</value-class>
+			<value id="listBeanListProperty_value">listBeanListPropertyValue</value>
+			<null-value/>
+		</list-entries>
+	</managed-bean>
+	
+	<converter id="converter1">
+		<description id="converter1Description">converter-description</description>
+		<display-name id="converter1DisplayName">converter-display-name</display-name>
+		<icon id="converter1Icon">
+			<small-icon>converter-small-icon</small-icon>
+			<large-icon>converter-large-icon</large-icon>
 		</icon>
-
 		<converter-for-class>converter-for-class</converter-for-class>
 		<converter-class>converter-class</converter-class>
-		<attribute>
-			<description>attribute-description</description>
-			<description>desc 2</description>
-			<description>desc 3</description>
-
-			<description>desc 4</description>
-			<description>desc 5</description>
-			<description>desc 6</description>
-			<description>desc 7</description>
-
-
-
-			<display-name>attribute-display-name</display-name>
-			<icon>
-				<large-icon>large-icon</large-icon>
+		<attribute id="converter1Attribute">
+			<description id="converter1_attribute_description">converter-attribute-description</description>
+			<display-name id="converter1_attribute_display-name">converter-attribute-display-name</display-name>
+			<icon id="converter1_attribute_icon">
+				<small-icon>converter1-attribute-small-icon</small-icon>
+				<large-icon>converter1-attribute-large-icon</large-icon>
 			</icon>
-			<attribute-name>attribute-name</attribute-name>
-			<attribute-class>attribute-class</attribute-class>
-			<default-value>default-value</default-value>
-			<suggested-value>attribute-suggested-value</suggested-value>
+			<attribute-name>converter1-attribute-name</attribute-name>
+			<attribute-class>converter1-attribute-class</attribute-class>
+			<default-value>converter1-default-value</default-value>
+			<suggested-value>converter1-attribute-suggested-value</suggested-value>
 			<attribute-extension>
 				attribute-extension
 			</attribute-extension>
 		</attribute>
-		<property>
-			<property-name>property1</property-name>
-			<property-class>MyPropertyClass</property-class>
-			<default-value>value4</default-value>
+		<property id="converter1Property">
+			<description id="converter1_property_description">converter-property-description</description>
+			<display-name id="converter1_property_display-name">converter-property-display-name</display-name>
+			<icon id="converter1_property_icon">
+				<small-icon>converter1-property-small-icon</small-icon>
+				<large-icon>converter1-property-large-icon</large-icon>
+			</icon>
+			<property-name>converter-property-name</property-name>
+			<property-class>converter-property-propertyClass</property-class>
+			<default-value>converter-property-default-value</default-value>
+			<suggested-value>converter-property-suggested-value</suggested-value>
 		</property>
 	</converter>
 
+	<converter id="converter2">
+		<converter-id>converter2-id</converter-id>
+		<converter-class>converter2-class</converter-class>
+	</converter>
+	
 	<!-- Referenced-bean -->
-	<referenced-bean>
-		<description>Bean Desc</description>
-		<display-name>referenced-bean-display</display-name>
-		<icon>
-			<small-icon>referenced-bean-myicon</small-icon>
+	<referenced-bean id="referencedBean1">
+		<description id="referencedBean1Description">Referenced Bean Desc</description>
+		<display-name id="referencedBean1DisplayName">referenced-bean-display</display-name>
+		<icon id="referencedBean1Icon">
+			<small-icon>referenced-bean-small-icon</small-icon>
+			<large-icon>referenced-bean-large-icon</large-icon>
 		</icon>
 		<referenced-bean-name>
 			referenced-bean-name
@@ -137,33 +221,46 @@
 	</referenced-bean>
 
 	<!-- Render kit -->
-	<render-kit>
-		<description>Render kit Desc</description>
-		<display-name>Render kit disp name</display-name>
-		<icon>
-			<small-icon>icon</small-icon>
+	<render-kit id="renderKit1">
+		<description id="renderKit1Description">Render kit Desc</description>
+		<display-name id="renderKit1DisplayName">Render kit disp name</display-name>
+		<icon id="renderKit1Icon">
+			<small-icon>small-renderkit-icon</small-icon>
+			<large-icon>large-renderkit-icon</large-icon>
 		</icon>
 		<render-kit-id>render-kit-Id</render-kit-id>
 		<render-kit-class>render-kit-class</render-kit-class>
-		<renderer>
-			<description>my renderer</description>
-
-			<display-name>my renderer</display-name>
-			<icon>
-				<small-icon>new icon</small-icon>
+		<renderer id="renderKit1Renderer">
+			<description id="renderKit1RendererDescription">my renderer description</description>
+			<display-name id="renderKit1RendererDisplayName">my renderer display name</display-name>
+			<icon id="renderKit1RendererIcon">
+				<small-icon>renderer-small-icon</small-icon>
+				<large-icon>renderer-large-icon</large-icon>
 			</icon>
 			<component-family>component-family</component-family>
 			<renderer-type>renderer-type</renderer-type>
 			<renderer-class>renderer-class</renderer-class>
-			<attribute>
-				<description>attribute-description</description>
-				<display-name>attribute-display-name</display-name>
-				<icon>
-					<large-icon>large-icon</large-icon>
+			<facet id="renderKit1Renderer1Facet1">
+				<description id="renderKit1Renderer1Facet1Description">RendererFacetDescription</description>
+				<display-name id="renderKit1Renderer1Facet1DisplayName">RendererFacetDisplayName</display-name>
+				<icon id="renderKit1Renderer1Facet1Icon">
+					<small-icon>facet-renderer-small-icon</small-icon>
+					<large-icon>facet-renderer-large-icon</large-icon>
 				</icon>
-				<attribute-name>attribute name</attribute-name>
-				<attribute-class>Attribute Class</attribute-class>
-				<default-value>default value</default-value>
+				<facet-name>rendererFacetName</facet-name>
+				<facet-extension></facet-extension>
+			</facet>
+			<attribute id="renderKit1RendererAttribute1">
+				<description id="renderKit1RendererAttribute1Description">renderer-attribute-attribute-description</description>
+				<display-name id="renderKit1RendererAttribute1DisplayName">renderer-attribute-display-name</display-name>
+				<icon id="renderKit1RendererAttribute1Icon">
+					<small-icon>renderer-attribute-small-icon</small-icon>
+					<large-icon>renderer-attribute-large-icon</large-icon>
+				</icon>
+				<attribute-name>renderer attribute name</attribute-name>
+				<attribute-class>renderer Attribute Class</attribute-class>
+				<default-value>renderer attribute default value</default-value>
+				<suggested-value>renderer attribute suggested value</suggested-value>
 				<attribute-extension>
 					renderer-extension
 				</attribute-extension>
@@ -185,55 +282,64 @@
 	</render-kit>
 
 	<!-- Validator rules -->
-	<validator>
-		<description>validator-description</description>
-		<display-name>validator-display-name</display-name>
-		<icon>
-			<small-icon>icon1</small-icon>
+	<validator id="validator1">
+		<description id="validator1_description">validator-description</description>
+		<display-name id="validator1_displayName">validator-display-name</display-name>
+		<icon id="validator1_icon">
+			<small-icon>validator-small-icon</small-icon>
+			<large-icon>validator-large-icon</large-icon>
 		</icon>
 		<validator-id>validator-Id</validator-id>
 		<validator-class>validator-class</validator-class>
-		<attribute>
-			<description>attribute-description</description>
-			<display-name>attribute-display-name</display-name>
-			<icon>
-				<large-icon>large-icon</large-icon>
+		<attribute id="validator1_attribute">
+			<description id="validator1_attribute_description">validator-attribute-description</description>
+			<display-name id="validator1_attribute_displayName">validator-attribute-display-name</display-name>
+			<icon id="validator1_attribute_icon">
+				<small-icon>validator-attribute-small-icon</small-icon>
+				<large-icon>validator-attribute-large-icon</large-icon>
 			</icon>
 			<attribute-name>validator-attribute-name</attribute-name>
 			<attribute-class>validator-attribute-class</attribute-class>
-			<default-value>default-value</default-value>
-			<suggested-value>attribute-suggested-value</suggested-value>
+			<default-value>validator-default-value</default-value>
+			<suggested-value>validator-attribute-suggested-value</suggested-value>
 			<attribute-extension>
 				attribute-extension
 			</attribute-extension>
 		</attribute>
-		<property>
-			<property-name>property-name</property-name>
-			<property-class>property-class</property-class>
-			<default-value>value4</default-value>
+		<property id="validator1_property">
+			<description id="validator1_property_description">validator-property-description</description>
+			<display-name id="validator1_property_displayName">validator-property-display-name</display-name>
+			<icon id="validator1_property_icon">
+				<small-icon>validator-property-small-icon</small-icon>
+				<large-icon>validator-property-large-icon</large-icon>
+			</icon>
+			<property-name>validator-property-name</property-name>
+			<property-class>validator-property-class</property-class>
+			<default-value>validator property default value</default-value>
+			<suggested-value>validator property suggested value</suggested-value>
+			<property-extension>future</property-extension>
 		</property>
 	</validator>
 
 	<!-- variable/property resolver registration -->
-	<application>
-		<action-listener>Action listener</action-listener>
-		<variable-resolver>
+	<application id="application1">
+		<action-listener id="actionListener1">Action listener</action-listener>
+		<variable-resolver id="variableResolver1">
 			com.ibm.faces.databind.SelectItemsVarResolver
 		</variable-resolver>
-		<default-render-kit-id>some renderer kit</default-render-kit-id>
-		<message-bundle>some messeage bundle goes here</message-bundle>
-		<navigation-handler>navigation handler</navigation-handler>
-		<view-handler>view handler</view-handler>
-		<state-manager>state manager</state-manager>
+		<default-render-kit-id id="defaultRenderKit1">some renderer kit</default-render-kit-id>
+		<message-bundle id="messageBundle1">some messeage bundle goes here</message-bundle>
+		<navigation-handler id="navigationHandler1">navigation handler</navigation-handler>
+		<view-handler id="viewHandler1">view handler</view-handler>
+		<state-manager id="stateManager1">state manager</state-manager>
 
-		<property-resolver>
+		<property-resolver id="propertyResolver1">
 			com.ibm.faces.databind.SelectItemsPropResolver
 		</property-resolver>
-		<locale-config>
-			<default-locale>en</default-locale>
-			<supported-locale>en</supported-locale>
-			<supported-locale>de</supported-locale>
-
+		<locale-config id="localeConfig1">
+			<default-locale id="defaultLocale1">en</default-locale>
+			<supported-locale id="supportedLocale_en">en</supported-locale>
+			<supported-locale id="supportedLocale_de">de</supported-locale>
 		</locale-config>
 	</application>
 
@@ -254,11 +360,56 @@
 			<icon>
 				<small-icon>small-icon</small-icon>
 			</icon>
-			<from-action>from-action</from-action>
+			<from-action>#{from-action}</from-action>
 			<from-outcome>drilldown</from-outcome>
 			<to-view-id>/edit.jsp</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<description>nav case descr 2</description>
+			<description>nav case descr 2</description>
+			<description>nav case descr 2</description>
+			<description>nav case descr 2</description>
+			<display-name>second navigation case</display-name>
+			<icon>
+				<small-icon>small-icon</small-icon>
+			</icon>
+			<from-action>action2</from-action>
+			<from-outcome>outcome2</from-outcome>
+			<to-view-id>/edit2.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 
-
+	<navigation-rule>
+		<description xml:lang="en">A navigation rule with lang attributes</description>
+		<description xml:lang="en-US">What color is it?</description>
+		<description xml:lang="en-GB">What colour is it?</description>
+		<description xml:lang="fr">Quelle couleur est lui?</description>
+		<display-name xml:lang="en">English Display Name</display-name>
+		<display-name xml:lang="fr">Nom D'Affichage De Français</display-name>
+		
+		<icon xml:lang="en">
+			<small-icon>en_small-icon</small-icon>
+			<large-icon>en_large-icon</large-icon>
+		</icon>
+		<icon>
+			<small-icon>small-icon</small-icon>
+			<large-icon>large-icon</large-icon>
+		</icon>
+		<from-view-id>/Page1.jsp</from-view-id>
+		<navigation-case>
+			<description>nav case descr 2</description>
+			<description>nav case descr 2</description>
+			<description>nav case descr 2</description>
+			<description>nav case descr 2</description>
+			<display-name>second navigation rule navcase</display-name>
+			<icon>
+				<small-icon>small-icon</small-icon>
+			</icon>
+			<from-action>action3</from-action>
+			<from-outcome>outcome3</from-outcome>
+			<to-view-id>/edit3.jsp</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 
