@@ -16,6 +16,8 @@ import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -24,9 +26,11 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import org.eclipse.emf.ecore.util.BasicFeatureMap;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jst.jsf.facesconfig.emf.ComponentExtensionType;
+import org.eclipse.jst.jsf.facesconfig.emf.DynamicElement;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 
 
@@ -35,247 +39,34 @@ import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
  * An implementation of the model object '<em><b>Component Extension Type</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * The following features are implemented:
- * <ul>
- *   <li>{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ComponentExtensionTypeImpl#getMixed <em>Mixed</em>}</li>
- *   <li>{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ComponentExtensionTypeImpl#getGroup <em>Group</em>}</li>
- *   <li>{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ComponentExtensionTypeImpl#getAny <em>Any</em>}</li>
- *   <li>{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ComponentExtensionTypeImpl#getId <em>Id</em>}</li>
- * </ul>
  * </p>
  *
  * @generated
  */
-public class ComponentExtensionTypeImpl extends EObjectImpl implements ComponentExtensionType {
-	/**
-	 * <!-- begin-user-doc -->
+public class ComponentExtensionTypeImpl extends ExtensionTypeImpl implements ComponentExtensionType {
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
 
-	/**
-	 * The cached value of the '{@link #getMixed() <em>Mixed</em>}' attribute list.
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getMixed()
-	 * @generated
-	 * @ordered
-	 */
-	protected FeatureMap mixed = null;
-
-	/**
-	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getId()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String ID_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getId()
-	 * @generated
-	 * @ordered
-	 */
-	protected String id = ID_EDEFAULT;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected ComponentExtensionTypeImpl() {
-		super();
-	}
+        super();
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected EClass eStaticClass() {
-		return FacesConfigPackage.eINSTANCE.getComponentExtensionType();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public FeatureMap getMixed() {
-		if (mixed == null) {
-			mixed = new BasicFeatureMap(this, FacesConfigPackage.COMPONENT_EXTENSION_TYPE__MIXED);
-		}
-		return mixed;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public FeatureMap getGroup() {
-		return (FeatureMap)((FeatureMap)getMixed()).list(FacesConfigPackage.eINSTANCE.getComponentExtensionType_Group());
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public FeatureMap getAny() {
-		return (FeatureMap)((FeatureMap)getGroup()).list(FacesConfigPackage.eINSTANCE.getComponentExtensionType_Any());
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getId() {
-		return id;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setId(String newId) {
-		String oldId = id;
-		id = newId;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.COMPONENT_EXTENSION_TYPE__ID, oldId, id));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case FacesConfigPackage.COMPONENT_EXTENSION_TYPE__MIXED:
-					return ((InternalEList)getMixed()).basicRemove(otherEnd, msgs);
-				case FacesConfigPackage.COMPONENT_EXTENSION_TYPE__GROUP:
-					return ((InternalEList)getGroup()).basicRemove(otherEnd, msgs);
-				case FacesConfigPackage.COMPONENT_EXTENSION_TYPE__ANY:
-					return ((InternalEList)getAny()).basicRemove(otherEnd, msgs);
-				default:
-					return eDynamicInverseRemove(otherEnd, featureID, baseClass, msgs);
-			}
-		}
-		return eBasicSetContainer(null, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Object eGet(EStructuralFeature eFeature, boolean resolve) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case FacesConfigPackage.COMPONENT_EXTENSION_TYPE__MIXED:
-				return getMixed();
-			case FacesConfigPackage.COMPONENT_EXTENSION_TYPE__GROUP:
-				return getGroup();
-			case FacesConfigPackage.COMPONENT_EXTENSION_TYPE__ANY:
-				return getAny();
-			case FacesConfigPackage.COMPONENT_EXTENSION_TYPE__ID:
-				return getId();
-		}
-		return eDynamicGet(eFeature, resolve);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void eSet(EStructuralFeature eFeature, Object newValue) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case FacesConfigPackage.COMPONENT_EXTENSION_TYPE__MIXED:
-				getMixed().clear();
-				getMixed().addAll((Collection)newValue);
-				return;
-			case FacesConfigPackage.COMPONENT_EXTENSION_TYPE__GROUP:
-				getGroup().clear();
-				getGroup().addAll((Collection)newValue);
-				return;
-			case FacesConfigPackage.COMPONENT_EXTENSION_TYPE__ANY:
-				getAny().clear();
-				getAny().addAll((Collection)newValue);
-				return;
-			case FacesConfigPackage.COMPONENT_EXTENSION_TYPE__ID:
-				setId((String)newValue);
-				return;
-		}
-		eDynamicSet(eFeature, newValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void eUnset(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case FacesConfigPackage.COMPONENT_EXTENSION_TYPE__MIXED:
-				getMixed().clear();
-				return;
-			case FacesConfigPackage.COMPONENT_EXTENSION_TYPE__GROUP:
-				getGroup().clear();
-				return;
-			case FacesConfigPackage.COMPONENT_EXTENSION_TYPE__ANY:
-				getAny().clear();
-				return;
-			case FacesConfigPackage.COMPONENT_EXTENSION_TYPE__ID:
-				setId(ID_EDEFAULT);
-				return;
-		}
-		eDynamicUnset(eFeature);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean eIsSet(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case FacesConfigPackage.COMPONENT_EXTENSION_TYPE__MIXED:
-				return mixed != null && !mixed.isEmpty();
-			case FacesConfigPackage.COMPONENT_EXTENSION_TYPE__GROUP:
-				return !getGroup().isEmpty();
-			case FacesConfigPackage.COMPONENT_EXTENSION_TYPE__ANY:
-				return !getAny().isEmpty();
-			case FacesConfigPackage.COMPONENT_EXTENSION_TYPE__ID:
-				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
-		}
-		return eDynamicIsSet(eFeature);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (mixed: ");
-		result.append(mixed);
-		result.append(", id: ");
-		result.append(id);
-		result.append(')');
-		return result.toString();
-	}
+        return FacesConfigPackage.Literals.COMPONENT_EXTENSION_TYPE;
+    }
 
 } //ComponentExtensionTypeImpl

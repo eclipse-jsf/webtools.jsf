@@ -11,10 +11,9 @@
  **************************************************************************************************/
 package org.eclipse.jst.jsf.facesconfig.internal.translator;
 
+
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
-
-
 import org.eclipse.wst.common.internal.emf.resource.Translator;
 
 /**
@@ -33,16 +32,16 @@ public class ComponentTranslator extends Translator {
 		
 		FacesConfigPackage facesPackage = FacesConfigPackage.eINSTANCE;
 		return new Translator[] {
-				new DescriptionTranslator("description", facesPackage.getComponentType_Description()), //$NON-NLS-1$
-				new DisplayNameTranslator("display-name", facesPackage.getComponentType_DisplayName()), //$NON-NLS-1$
-				new IconTranslator("icon", facesPackage.getComponentType_Icon()), //$NON-NLS-1$
-				new ComponentTypeTranslator("component-type", facesPackage.getComponentType_ComponentType()), //$NON-NLS-1$
-				new ComponentClassTranslator("component-class", facesPackage.getComponentType_ComponentClass()), //$NON-NLS-1$
-				new FacetTranslator("facet", facesPackage.getComponentType_Facet()), //$NON-NLS-1$
-				new AttributeTranslator("attribute", facesPackage.getComponentType_Attribute()), //$NON-NLS-1$
-				new PropertyTranslator("property", facesPackage.getComponentType_Property()), //$NON-NLS-1$
-				new ComponentExtensionTranslator("component-extension", facesPackage.getComponentType_ComponentExtension()), //$NON-NLS-1$
-				new Translator("id", facesPackage.getComponentType_Id(), DOM_ATTRIBUTE) //$NON-NLS-1$
+			new DescriptionTranslator("description", facesPackage.getComponentType_Description()), //$NON-NLS-1$
+			new DisplayNameTranslator("display-name", facesPackage.getComponentType_DisplayName()), //$NON-NLS-1$
+			new IconTranslator("icon", facesPackage.getComponentType_Icon()), //$NON-NLS-1$
+			new ComponentTypeTranslator("component-type", facesPackage.getComponentType_ComponentType()), //$NON-NLS-1$
+			new ComponentClassTranslator("component-class", facesPackage.getComponentType_ComponentClass()), //$NON-NLS-1$
+			new FacetTranslator("facet", facesPackage.getComponentType_Facet()), //$NON-NLS-1$
+			new AttributeTranslator("attribute", facesPackage.getComponentType_Attribute()), //$NON-NLS-1$
+			new PropertyTranslator("property", facesPackage.getComponentType_Property()), //$NON-NLS-1$
+			new ComponentExtensionTranslator("component-extension", facesPackage.getComponentType_ComponentExtension()),//ComponentExtensionTranslator("component-extension", facesPackage.getComponentType_ComponentExtension()), //$NON-NLS-1$
+			new Translator("id", facesPackage.getComponentType_Id(), DOM_ATTRIBUTE) //$NON-NLS-1$
 		};
 	}
 }

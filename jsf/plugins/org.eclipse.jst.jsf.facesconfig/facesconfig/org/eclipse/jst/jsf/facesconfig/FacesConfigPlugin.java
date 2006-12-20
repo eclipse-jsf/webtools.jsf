@@ -24,6 +24,13 @@ import org.osgi.framework.BundleContext;
  */
 public class FacesConfigPlugin extends EMFPlugin {
 
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+
 	public static final String FACES_CONFIG_EDITOR_ID = "org.eclipse.jst.jsf.facesconfig.internal.presentation.FacesConfigEditor";
 
 	public static final FacesConfigPlugin INSTANCE = new FacesConfigPlugin();

@@ -58,11 +58,11 @@ public class FacesConfigResourceFactory extends TranslatorResourceFactory {
 	 * @see #registerWith(RendererFactory)
 	 */
 	public static void register() {
-		registerWith(null, RendererFactory.getDefaultRendererFactory());
+		register((String)null);
 	}
 
 	public static void register(String sFileName) {
-		registerWith(sFileName, RendererFactory.getDefaultRendererFactory());
+		registerWith(sFileName, FacesRendererFactory.INSTANCE/*RendererFactory.getDefaultRendererFactory()*/);
 	}
 
 	/**

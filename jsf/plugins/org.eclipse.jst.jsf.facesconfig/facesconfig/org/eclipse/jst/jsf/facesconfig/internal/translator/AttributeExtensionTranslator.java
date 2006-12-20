@@ -12,30 +12,13 @@
 package org.eclipse.jst.jsf.facesconfig.internal.translator;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
-
-
-import org.eclipse.wst.common.internal.emf.resource.Translator;
 
 /**
  * @author xnjiang, itrimble
  *
  */
-public class AttributeExtensionTranslator extends SkipUnknownChildrenTranslator {
+public class AttributeExtensionTranslator extends ExtensionTypeTranslator {
 	public AttributeExtensionTranslator(String domNameAndPath, EStructuralFeature aFeature) {
 		super(domNameAndPath, aFeature);//$NON-NLS-1$
-	}
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.wst.common.internal.emf.resource.Translator#getChildren()
-	 */
-	public Translator[] getChildren() {
-		
-		FacesConfigPackage facesPackage = FacesConfigPackage.eINSTANCE;
-		return new Translator[] {
-			new Translator("any", facesPackage.getAttributeExtensionType_Any()), //$NON-NLS-1$
-			new Translator("mixed", facesPackage.getAttributeExtensionType_Mixed()), //$NON-NLS-1$
-			new Translator("id", facesPackage.getAttributeExtensionType_Id(), DOM_ATTRIBUTE) //$NON-NLS-1$
-		};
 	}
 }

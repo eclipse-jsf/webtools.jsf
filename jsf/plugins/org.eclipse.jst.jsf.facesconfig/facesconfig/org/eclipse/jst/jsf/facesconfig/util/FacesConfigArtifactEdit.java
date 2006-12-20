@@ -172,4 +172,9 @@ public class FacesConfigArtifactEdit extends ArtifactEdit {
 			return ((IVirtualFile) resource).getUnderlyingFile();
 		return null;
 	}
+    
+    public boolean isDisposed()
+    {
+        return getArtifactEditModel().isDisposed();
+    }
 }

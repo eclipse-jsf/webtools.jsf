@@ -2,18 +2,18 @@
 <genmodel:GenModel xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2005, 2006 IBM Corporation and others"
-    modelDirectory="/org.eclipse.jst.jsf.facesconfig/facesconfig" editDirectory="/org.eclipse.jst.jsf.facesconfig.edit/src"
+    modelDirectory="/org.eclipse.jst.jsf.facesconfig/facesconfig" editDirectory="/org.eclipse.jst.jsf.facesconfig/facesconfig"
     editorDirectory="/org.eclipse.jst.jsf.facesconfig.editor/src" modelPluginID="org.eclipse.jst.jsf.facesconfig"
     templateDirectory="org.eclipse.jst.jsf.facesconfig/model/templates" dynamicTemplates="true"
-    redirection="" modelName="FacesConfig" modelPluginClass="" editPluginClass="org.eclipse.jst.jsf.facesconfig.emf.provider.FacesConfigEditPlugin"
+    redirection="" modelName="FacesConfig" modelPluginClass="" editPluginClass="org.eclipse.jst.jsf.facesconfig.FacesConfigPlugin"
     editorPluginClass="org.eclipse.jst.jsf.facesconfig.emf.presentation.FacesConfigEditorPlugin"
     rootImplementsInterface="" featureMapWrapperInterface="" featureMapWrapperInternalInterface=""
     featureMapWrapperClass="" testSuiteClass="org.eclipse.jst.jsf.facesconfig.emf.tests.FacesConfigAllTests"
     booleanFlagsField="">
   <foreignModel>../../../com.ibm.etools.jsf/facesConfig.xsd</foreignModel>
   <genPackages prefix="FacesConfig" basePackage="org.eclipse.jst.jsf" disposableProviderFactory="true"
-      interfacePackageSuffix="emf" classPackageSuffix="emf.impl" utilityPackageSuffix="emf.util"
-      providerPackageSuffix="emf.provider" presentationPackageSuffix="emf.presentation"
+      interfacePackageSuffix="emf" metaDataPackageSuffix="emf" classPackageSuffix="emf.impl"
+      utilityPackageSuffix="emf.util" providerPackageSuffix="edit.provider" presentationPackageSuffix="emf.presentation"
       testsPackageSuffix="emf.tests" ecorePackage="FacesConfig.ecore#/">
     <genClasses ecoreClass="FacesConfig.ecore#//ActionListenerType">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ActionListenerType/textContent"/>
@@ -65,9 +65,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ComponentClassType/id"/>
     </genClasses>
     <genClasses ecoreClass="FacesConfig.ecore#//ComponentExtensionType">
-      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ComponentExtensionType/mixed"/>
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ComponentExtensionType/group"/>
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ComponentExtensionType/any"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ComponentExtensionType/id"/>
     </genClasses>
     <genClasses ecoreClass="FacesConfig.ecore#//ComponentFamilyType">
@@ -220,6 +217,15 @@
       <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/variableResolver"/>
       <genFeatures property="None" notify="false" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DocumentRoot/viewHandler"/>
     </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//DynamicAttribute">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//DynamicAttribute/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//DynamicAttribute/value"/>
+    </genClasses>
+    <genClasses ecoreClass="FacesConfig.ecore#//DynamicElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//DynamicElement/childNodes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//DynamicElement/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference FacesConfig.ecore#//DynamicElement/attributes"/>
+    </genClasses>
     <genClasses ecoreClass="FacesConfig.ecore#//FacesConfigType">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//FacesConfigType/application"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//FacesConfigType/factory"/>
@@ -254,6 +260,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//FacetType/icon"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//FacetType/facetName"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//FacetType/facetExtension"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//FacetType/id"/>
     </genClasses>
     <genClasses ecoreClass="FacesConfig.ecore#//FactoryType">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//FactoryType/applicationFactory"/>
@@ -540,6 +547,10 @@
     <genClasses ecoreClass="FacesConfig.ecore#//ViewHandlerType">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ViewHandlerType/textContent"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ViewHandlerType/id"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="FacesConfig.ecore#//ExtensionType">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FacesConfig.ecore#//ExtensionType/childNodes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FacesConfig.ecore#//ExtensionType/textContent"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

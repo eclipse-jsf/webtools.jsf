@@ -185,38 +185,6 @@ public interface Literals {
 	EClass ATTRIBUTE_EXTENSION_TYPE = FacesConfigPackage.eINSTANCE.getAttributeExtensionType();
 
 	/**
-	 * The meta object literal for the '<em><b>Mixed</b></em>' attribute list feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	EAttribute ATTRIBUTE_EXTENSION_TYPE__MIXED = FacesConfigPackage.eINSTANCE.getAttributeExtensionType_Mixed();
-
-	/**
-	 * The meta object literal for the '<em><b>Group</b></em>' attribute list feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	EAttribute ATTRIBUTE_EXTENSION_TYPE__GROUP = FacesConfigPackage.eINSTANCE.getAttributeExtensionType_Group();
-
-	/**
-	 * The meta object literal for the '<em><b>Any</b></em>' attribute list feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	EAttribute ATTRIBUTE_EXTENSION_TYPE__ANY = FacesConfigPackage.eINSTANCE.getAttributeExtensionType_Any();
-
-	/**
-	 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	EAttribute ATTRIBUTE_EXTENSION_TYPE__ID = FacesConfigPackage.eINSTANCE.getAttributeExtensionType_Id();
-
-	/**
 	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.AttributeNameTypeImpl <em>Attribute Name Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -359,38 +327,6 @@ public interface Literals {
 	 * @generated
 	 */
 	EClass COMPONENT_EXTENSION_TYPE = FacesConfigPackage.eINSTANCE.getComponentExtensionType();
-
-	/**
-	 * The meta object literal for the '<em><b>Mixed</b></em>' attribute list feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	EAttribute COMPONENT_EXTENSION_TYPE__MIXED = FacesConfigPackage.eINSTANCE.getComponentExtensionType_Mixed();
-
-	/**
-	 * The meta object literal for the '<em><b>Group</b></em>' attribute list feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	EAttribute COMPONENT_EXTENSION_TYPE__GROUP = FacesConfigPackage.eINSTANCE.getComponentExtensionType_Group();
-
-	/**
-	 * The meta object literal for the '<em><b>Any</b></em>' attribute list feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	EAttribute COMPONENT_EXTENSION_TYPE__ANY = FacesConfigPackage.eINSTANCE.getComponentExtensionType_Any();
-
-	/**
-	 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	EAttribute COMPONENT_EXTENSION_TYPE__ID = FacesConfigPackage.eINSTANCE.getComponentExtensionType_Id();
 
 	/**
 	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.ComponentFamilyTypeImpl <em>Component Family Type</em>}' class.
@@ -1657,38 +1593,6 @@ public interface Literals {
 	EClass FACET_EXTENSION_TYPE = FacesConfigPackage.eINSTANCE.getFacetExtensionType();
 
 	/**
-	 * The meta object literal for the '<em><b>Mixed</b></em>' attribute list feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	EAttribute FACET_EXTENSION_TYPE__MIXED = FacesConfigPackage.eINSTANCE.getFacetExtensionType_Mixed();
-
-	/**
-	 * The meta object literal for the '<em><b>Group</b></em>' attribute list feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	EAttribute FACET_EXTENSION_TYPE__GROUP = FacesConfigPackage.eINSTANCE.getFacetExtensionType_Group();
-
-	/**
-	 * The meta object literal for the '<em><b>Any</b></em>' attribute list feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	EAttribute FACET_EXTENSION_TYPE__ANY = FacesConfigPackage.eINSTANCE.getFacetExtensionType_Any();
-
-	/**
-	 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	EAttribute FACET_EXTENSION_TYPE__ID = FacesConfigPackage.eINSTANCE.getFacetExtensionType_Id();
-
-	/**
 	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.FacetNameTypeImpl <em>Facet Name Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2755,38 +2659,6 @@ public interface Literals {
 	EClass PROPERTY_EXTENSION_TYPE = FacesConfigPackage.eINSTANCE.getPropertyExtensionType();
 
 	/**
-	 * The meta object literal for the '<em><b>Mixed</b></em>' attribute list feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	EAttribute PROPERTY_EXTENSION_TYPE__MIXED = FacesConfigPackage.eINSTANCE.getPropertyExtensionType_Mixed();
-
-	/**
-	 * The meta object literal for the '<em><b>Group</b></em>' attribute list feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	EAttribute PROPERTY_EXTENSION_TYPE__GROUP = FacesConfigPackage.eINSTANCE.getPropertyExtensionType_Group();
-
-	/**
-	 * The meta object literal for the '<em><b>Any</b></em>' attribute list feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	EAttribute PROPERTY_EXTENSION_TYPE__ANY = FacesConfigPackage.eINSTANCE.getPropertyExtensionType_Any();
-
-	/**
-	 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	EAttribute PROPERTY_EXTENSION_TYPE__ID = FacesConfigPackage.eINSTANCE.getPropertyExtensionType_Id();
-
-	/**
 	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.PropertyNameTypeImpl <em>Property Name Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3083,38 +2955,6 @@ public interface Literals {
 	 * @generated
 	 */
 	EClass RENDERER_EXTENSION_TYPE = FacesConfigPackage.eINSTANCE.getRendererExtensionType();
-
-	/**
-	 * The meta object literal for the '<em><b>Mixed</b></em>' attribute list feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	EAttribute RENDERER_EXTENSION_TYPE__MIXED = FacesConfigPackage.eINSTANCE.getRendererExtensionType_Mixed();
-
-	/**
-	 * The meta object literal for the '<em><b>Group</b></em>' attribute list feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	EAttribute RENDERER_EXTENSION_TYPE__GROUP = FacesConfigPackage.eINSTANCE.getRendererExtensionType_Group();
-
-	/**
-	 * The meta object literal for the '<em><b>Any</b></em>' attribute list feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	EAttribute RENDERER_EXTENSION_TYPE__ANY = FacesConfigPackage.eINSTANCE.getRendererExtensionType_Any();
-
-	/**
-	 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	EAttribute RENDERER_EXTENSION_TYPE__ID = FacesConfigPackage.eINSTANCE.getRendererExtensionType_Id();
 
 	/**
 	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.RendererTypeImpl <em>Renderer Type</em>}' class.

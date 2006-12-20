@@ -36,7 +36,7 @@ public class IconTranslator extends Translator {
 		return new Translator[] {
 			new SmallIconTranslator("small-icon", facesPackage.getIconType_SmallIcon()), //$NON-NLS-1$
 			new LargeIconTranslator("large-icon", facesPackage.getIconType_LargeIcon()), //$NON-NLS-1$
-			new Translator("lang", facesPackage.getIconType_Lang(), DOM_ATTRIBUTE), //$NON-NLS-1$
+			new Translator("xml:lang", facesPackage.getIconType_Lang(), DOM_ATTRIBUTE), //$NON-NLS-1$
 			new Translator("id", facesPackage.getIconType_Id(), DOM_ATTRIBUTE) //$NON-NLS-1$
 		};
 	}

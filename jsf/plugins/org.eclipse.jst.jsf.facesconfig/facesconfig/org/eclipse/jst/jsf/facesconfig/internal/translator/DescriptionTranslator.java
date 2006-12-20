@@ -34,7 +34,7 @@ public class DescriptionTranslator extends Translator {
 		FacesConfigPackage facesPackage = FacesConfigPackage.eINSTANCE;
 		return new Translator[] {
 			new Translator(TEXT_ATTRIBUTE_VALUE, facesPackage.getDescriptionType_TextContent()),
-			new Translator("lang", facesPackage.getDescriptionType_Lang(), DOM_ATTRIBUTE), //$NON-NLS-1$
+			new Translator("xml:lang", facesPackage.getDescriptionType_Lang(), DOM_ATTRIBUTE), //$NON-NLS-1$
 			new Translator("id", facesPackage.getDescriptionType_Id(), DOM_ATTRIBUTE) //$NON-NLS-1$
 		};
 	}
