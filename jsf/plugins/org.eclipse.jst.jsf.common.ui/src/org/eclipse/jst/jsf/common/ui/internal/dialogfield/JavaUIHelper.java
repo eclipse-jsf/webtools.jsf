@@ -25,6 +25,7 @@ import org.eclipse.jdt.core.search.SearchEngine;
 import org.eclipse.jdt.ui.IJavaElementSearchConstants;
 import org.eclipse.jdt.ui.JavaUI;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
+import org.eclipse.jst.jsf.common.ui.JSFUICommonPlugin;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
@@ -84,6 +85,7 @@ public class JavaUIHelper {
 			return JavaUI.createTypeDialog(shell, new ProgressMonitorDialog(
 					shell), searchScope, typeFlag, false);
 		} catch (JavaModelException e) {
+            JSFUICommonPlugin.getLogger(JavaUIHelper.class).error(e);
 			return null;
 		}
 	}
