@@ -37,7 +37,7 @@ class DynamicElementTranslator extends Translator implements IAnyTranslator
 
         return new Translator[]
         {
-            /*new Translator(TEXT_ATTRIBUTE_VALUE, facesConfigPackage.getDynamicElement_TextContent()),*/
+            new Translator(TEXT_ATTRIBUTE_VALUE, facesConfigPackage.getDynamicElement_TextContent()),
             new DynamicElementTranslator("*", facesConfigPackage.getDynamicElement_ChildNodes())
         };
     }
@@ -48,8 +48,7 @@ class DynamicElementTranslator extends Translator implements IAnyTranslator
         super(domNameAndPath, feature);
     }
     public boolean isMapFor(String domName) {
-        // always valid since we are translating ANY
-        return !TEXT_ATTRIBUTE_VALUE.equals(domName);
+        return true;
     }
     
     public EObject createEMFObject(String nodeName, String readAheadName) {
