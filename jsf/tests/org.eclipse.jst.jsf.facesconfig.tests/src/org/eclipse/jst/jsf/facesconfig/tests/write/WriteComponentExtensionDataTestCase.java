@@ -1,18 +1,16 @@
 package org.eclipse.jst.jsf.facesconfig.tests.write;
 
 import org.eclipse.jst.jsf.facesconfig.emf.ComponentClassType;
-import org.eclipse.jst.jsf.facesconfig.emf.ComponentExtensionType;
 import org.eclipse.jst.jsf.facesconfig.emf.ComponentType;
 import org.eclipse.jst.jsf.facesconfig.emf.ComponentTypeType;
-import org.eclipse.jst.jsf.facesconfig.emf.DynamicAttribute;
-import org.eclipse.jst.jsf.facesconfig.emf.DynamicElement;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 import org.eclipse.jst.jsf.facesconfig.tests.util.CommonStructuresUtil;
+import org.eclipse.jst.jsf.facesconfig.tests.util.FacesConfigModelUtil;
 import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
 
 public class WriteComponentExtensionDataTestCase extends BaseWriteTestCase {
-    private static final String COMPONENT = "component";
+    private static final String COMPONENT_ID = "component1";
     
     private static final String COMPONENT_CLASS = "component-class";
 
@@ -28,14 +26,18 @@ public class WriteComponentExtensionDataTestCase extends BaseWriteTestCase {
         FacesConfigArtifactEdit edit = null;
         try 
         {
-            edit = getArtifactEditForWrite();
+            edit = FacesConfigArtifactEdit
+                .getFacesConfigArtifactEditForWrite(project, "WEB-INF/faces-config-ext-data1.xml");
+            assertNotNull(edit);
             assertNotNull(edit.getFacesConfig());
             FacesConfigPackage facesConfigPackage = FacesConfigPackage.eINSTANCE;
             FacesConfigFactory facesConfigFactory = facesConfigPackage
                     .getFacesConfigFactory();
 
-            ComponentType newComponent = facesConfigFactory
-                    .createComponentType();
+            ComponentType newComponent = 
+                (ComponentType) FacesConfigModelUtil
+                    .findEObjectElementById(edit.getFacesConfig()
+                            .getComponent(), COMPONENT_ID);
 
             {
                 ComponentTypeType componentTypeType = facesConfigFactory.createComponentTypeType();
@@ -53,28 +55,28 @@ public class WriteComponentExtensionDataTestCase extends BaseWriteTestCase {
                 newComponent.setComponentClass(componentClassType);
             }
             
-            ComponentExtensionType extType =
-                facesConfigFactory.createComponentExtensionType();
-            extType.setId(CommonStructuresUtil.createPreficedString(COMPONENT, "extension-id"));
-            
-            DynamicElement singleRoot = facesConfigFactory.createDynamicElement();
-            singleRoot.setName("any-data");
-            DynamicAttribute attribute = facesConfigFactory.createDynamicAttribute();
-            attribute.setName("some-attribute");
-            attribute.setValue("some-value");
-            singleRoot.getAttributes().add(attribute);
-            
-            DynamicElement firstChild = facesConfigFactory.createDynamicElement();
-            firstChild.setName("first-child");
-            singleRoot.getChildNodes().add(firstChild);
-            
-            DynamicElement secondChild =
-                facesConfigFactory.createDynamicElement();
-            secondChild.setName("second-child");
-            //secondChild.setTextContent("secondChild text content");
-            singleRoot.getChildNodes().add(secondChild);
-            extType.getChildNodes().add(singleRoot);
-            newComponent.getComponentExtension().add(extType);
+//            ComponentExtensionType extType =
+//                facesConfigFactory.createComponentExtensionType();
+//            extType.setId(CommonStructuresUtil.createPreficedString(COMPONENT, "extension-id"));
+//            
+//            DynamicElement singleRoot = facesConfigFactory.createDynamicElement();
+//            singleRoot.setName("any-data");
+//            DynamicAttribute attribute = facesConfigFactory.createDynamicAttribute();
+//            attribute.setName("some-attribute");
+//            attribute.setValue("some-value");
+//            singleRoot.getAttributes().add(attribute);
+//            
+//            DynamicElement firstChild = facesConfigFactory.createDynamicElement();
+//            firstChild.setName("first-child");
+//            singleRoot.getChildNodes().add(firstChild);
+//            
+//            DynamicElement secondChild =
+//                facesConfigFactory.createDynamicElement();
+//            secondChild.setName("second-child");
+//            //secondChild.setTextContent("secondChild text content");
+//            singleRoot.getChildNodes().add(secondChild);
+//            extType.getChildNodes().add(singleRoot);
+//            newComponent.getComponentExtension().add(extType);
             
             edit.getFacesConfig().getComponent().add(newComponent);
             edit.save(null);

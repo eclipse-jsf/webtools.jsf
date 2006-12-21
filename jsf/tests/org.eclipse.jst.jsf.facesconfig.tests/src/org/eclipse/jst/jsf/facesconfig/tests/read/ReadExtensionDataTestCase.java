@@ -57,12 +57,12 @@ public class ReadExtensionDataTestCase extends BaseReadTestCase
             DynamicElement firstChild = 
                 (DynamicElement) singleRoot.getChildNodes().get(0);
             assertEquals("first-child", firstChild.getName());
-//            assertEquals("someData", firstChild.getTextContent());
+            assertEquals("someData", firstChild.getTextContent());
             
             DynamicElement secondChild =
                 (DynamicElement) singleRoot.getChildNodes().get(1);
             assertEquals("second-child", secondChild.getName());
-//            assertEquals("second Child's data", secondChild.getTextContent());            
+            assertEquals("second Child's data", secondChild.getTextContent());            
         } finally {
             if (edit != null) {
                 edit.dispose();

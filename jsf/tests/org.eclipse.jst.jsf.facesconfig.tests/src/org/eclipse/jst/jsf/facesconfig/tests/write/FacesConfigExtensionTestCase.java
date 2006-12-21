@@ -6,12 +6,9 @@ import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.jst.jsf.facesconfig.tests.util.CommonStructuresUtil;
-import org.eclipse.jst.jsf.facesconfig.tests.util.FacesConfigModelUtil;
 import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
 
 public class FacesConfigExtensionTestCase extends BaseWriteTestCase {
-    private final static String EXTENDED_FACES_CONFIG_ID = "extended-faces-config-id";
-
     private static final String FACES_CONFIG = "faces-config";
 
     private final static String FACES_CONFIG_EXTENSION = CommonStructuresUtil
@@ -31,8 +28,6 @@ public class FacesConfigExtensionTestCase extends BaseWriteTestCase {
         // test should not be used with 1.1
         assertEquals("1.2", _facesVersion);
     }
-
-
 
     public void testFacesConfigExtension() {
         FacesConfigArtifactEdit edit = null;
