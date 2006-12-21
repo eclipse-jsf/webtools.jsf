@@ -254,6 +254,15 @@ public interface FacesConfigFactory extends EFactory {
     DynamicElement createDynamicElement();
 
     /**
+     * Returns a new object of class '<em>EL Resolver Type</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>EL Resolver Type</em>'.
+     * @generated
+     */
+    ELResolverType createELResolverType();
+
+    /**
      * Returns a new object of class '<em>Type</em>'.
      * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -783,6 +792,114 @@ public interface FacesConfigFactory extends EFactory {
      * @generated
      */
 	ViewHandlerType createViewHandlerType();
+
+    /**
+     * Returns a new object of class '<em>Application Extension Type</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Application Extension Type</em>'.
+     * @generated
+     */
+    ApplicationExtensionType createApplicationExtensionType();
+
+    /**
+     * Returns a new object of class '<em>Resource Bundle Type</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Resource Bundle Type</em>'.
+     * @generated
+     */
+    ResourceBundleType createResourceBundleType();
+
+    /**
+     * Returns a new object of class '<em>Base Name Type</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Base Name Type</em>'.
+     * @generated
+     */
+    BaseNameType createBaseNameType();
+
+    /**
+     * Returns a new object of class '<em>Var Type</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Var Type</em>'.
+     * @generated
+     */
+    VarType createVarType();
+
+    /**
+     * Returns a new object of class '<em>Render Kit Extension Type</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Render Kit Extension Type</em>'.
+     * @generated
+     */
+    RenderKitExtensionType createRenderKitExtensionType();
+
+    /**
+     * Returns a new object of class '<em>Navigation Rule Extension Type</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Navigation Rule Extension Type</em>'.
+     * @generated
+     */
+    NavigationRuleExtensionType createNavigationRuleExtensionType();
+
+    /**
+     * Returns a new object of class '<em>Validator Extension Type</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Validator Extension Type</em>'.
+     * @generated
+     */
+    ValidatorExtensionType createValidatorExtensionType();
+
+    /**
+     * Returns a new object of class '<em>Extension Type</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Extension Type</em>'.
+     * @generated
+     */
+    FacesConfigExtensionType createFacesConfigExtensionType();
+
+    /**
+     * Returns a new object of class '<em>Factory Extension Type</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Factory Extension Type</em>'.
+     * @generated
+     */
+    FactoryExtensionType createFactoryExtensionType();
+
+    /**
+     * Returns a new object of class '<em>Lifecycle Extension Type</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Lifecycle Extension Type</em>'.
+     * @generated
+     */
+    LifecycleExtensionType createLifecycleExtensionType();
+
+    /**
+     * Returns a new object of class '<em>Managed Bean Extension Type</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Managed Bean Extension Type</em>'.
+     * @generated
+     */
+    ManagedBeanExtensionType createManagedBeanExtensionType();
+
+    /**
+     * Returns a new object of class '<em>Converter Extension Type</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Converter Extension Type</em>'.
+     * @generated
+     */
+    ConverterExtensionType createConverterExtensionType();
 
     /**
      * Returns the package supported by this factory.

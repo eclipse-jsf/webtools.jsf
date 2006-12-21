@@ -28,6 +28,8 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.eclipse.jst.jsf.facesconfig.FacesConfigPlugin;
+
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 import org.eclipse.jst.jsf.facesconfig.emf.RenderKitType;
@@ -40,13 +42,11 @@ import org.eclipse.jst.jsf.facesconfig.emf.RenderKitType;
  * @generated
  */
 public class RenderKitTypeItemProvider extends ItemProviderAdapter implements
-		IEditingDomainItemProvider, IStructuredItemContentProvider,
-		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource, ITableItemLabelProvider {
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
+		IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+    /**
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
+     * @generated
+     */
 	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
 
 	/**
@@ -56,8 +56,8 @@ public class RenderKitTypeItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	public RenderKitTypeItemProvider(AdapterFactory adapterFactory) {
-		super(adapterFactory);
-	}
+        super(adapterFactory);
+    }
 
 	/**
 	 * This returns the property descriptors for the adapted class. <!--
@@ -66,15 +66,15 @@ public class RenderKitTypeItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	public List getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
-			super.getPropertyDescriptors(object);
+        if (itemPropertyDescriptors == null) {
+            super.getPropertyDescriptors(object);
 
-			addIdPropertyDescriptor(object);
-			addRenderKitIdPropertyDescriptor(object);
-			addRenderKitClassPropertyDescriptor(object);
-		}
-		return itemPropertyDescriptors;
-	}
+            addRenderKitIdPropertyDescriptor(object);
+            addRenderKitClassPropertyDescriptor(object);
+            addIdPropertyDescriptor(object);
+        }
+        return itemPropertyDescriptors;
+    }
 
 	/**
 	 * This adds a property descriptor for the Render Kit Id feature. <!--
@@ -83,17 +83,20 @@ public class RenderKitTypeItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	protected void addRenderKitIdPropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(
-						((ComposeableAdapterFactory) adapterFactory)
-								.getRootAdapterFactory(), getResourceLocator(),
-						getString("_UI_RenderKitType_renderKitId_feature"),
-						getString("_UI_PropertyDescriptor_description",
-								"_UI_RenderKitType_renderKitId_feature",
-								"_UI_RenderKitType_type"),
-						Literals.RENDER_KIT_TYPE__RENDER_KIT_ID, true, null,
-						null, null));
-	}
+        itemPropertyDescriptors.add
+            (createItemPropertyDescriptor
+                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+                 getResourceLocator(),
+                 getString("_UI_RenderKitType_renderKitId_feature"),
+                 getString("_UI_PropertyDescriptor_description", "_UI_RenderKitType_renderKitId_feature", "_UI_RenderKitType_type"),
+                 FacesConfigPackage.Literals.RENDER_KIT_TYPE__RENDER_KIT_ID,
+                 true,
+                 false,
+                 false,
+                 null,
+                 null,
+                 null));
+    }
 
 	/**
 	 * This adds a property descriptor for the Render Kit Class feature. <!--
@@ -102,68 +105,72 @@ public class RenderKitTypeItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	protected void addRenderKitClassPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(), getResourceLocator(),
-				getString("_UI_RenderKitType_renderKitClass_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_RenderKitType_renderKitClass_feature",
-						"_UI_RenderKitType_type"),
-				Literals.RENDER_KIT_TYPE__RENDER_KIT_CLASS, true, null, null,
-				null));
-	}
+        itemPropertyDescriptors.add
+            (createItemPropertyDescriptor
+                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+                 getResourceLocator(),
+                 getString("_UI_RenderKitType_renderKitClass_feature"),
+                 getString("_UI_PropertyDescriptor_description", "_UI_RenderKitType_renderKitClass_feature", "_UI_RenderKitType_type"),
+                 FacesConfigPackage.Literals.RENDER_KIT_TYPE__RENDER_KIT_CLASS,
+                 true,
+                 false,
+                 false,
+                 null,
+                 null,
+                 null));
+    }
 
-	/**
-	 * This adds a property descriptor for the Id feature. <!-- begin-user-doc
+    /**
+     * This adds a property descriptor for the Id feature.
+     * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
+     * @generated
+     */
 	protected void addIdPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(), getResourceLocator(),
-				getString("_UI_RenderKitType_id_feature"), getString(
-						"_UI_PropertyDescriptor_description",
-						"_UI_RenderKitType_id_feature",
-						"_UI_RenderKitType_type"),
-				Literals.RENDER_KIT_TYPE__ID, true,
-				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
-	}
+        itemPropertyDescriptors.add
+            (createItemPropertyDescriptor
+                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+                 getResourceLocator(),
+                 getString("_UI_RenderKitType_id_feature"),
+                 getString("_UI_PropertyDescriptor_description", "_UI_RenderKitType_id_feature", "_UI_RenderKitType_type"),
+                 FacesConfigPackage.Literals.RENDER_KIT_TYPE__ID,
+                 true,
+                 false,
+                 false,
+                 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+                 null,
+                 null));
+    }
 
-	/**
-	 * This specifies how to implement {@link #getChildren} and is used to
-	 * deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand},
-	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in
-	 * {@link #createCommand}. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
+    /**
+     * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+     * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+     * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
+     * @generated
+     */
 	public Collection getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
-			super.getChildrenFeatures(object);
-			childrenFeatures.add(Literals.RENDER_KIT_TYPE__DESCRIPTION);
-			childrenFeatures.add(Literals.RENDER_KIT_TYPE__DISPLAY_NAME);
-			childrenFeatures.add(Literals.RENDER_KIT_TYPE__ICON);
-			childrenFeatures.add(Literals.RENDER_KIT_TYPE__RENDERER);
-		}
-		return childrenFeatures;
-	}
+        if (childrenFeatures == null) {
+            super.getChildrenFeatures(object);
+            childrenFeatures.add(FacesConfigPackage.Literals.RENDER_KIT_TYPE__DESCRIPTION);
+            childrenFeatures.add(FacesConfigPackage.Literals.RENDER_KIT_TYPE__DISPLAY_NAME);
+            childrenFeatures.add(FacesConfigPackage.Literals.RENDER_KIT_TYPE__ICON);
+            childrenFeatures.add(FacesConfigPackage.Literals.RENDER_KIT_TYPE__RENDERER);
+            childrenFeatures.add(FacesConfigPackage.Literals.RENDER_KIT_TYPE__RENDER_KIT_EXTENSION);
+        }
+        return childrenFeatures;
+    }
 
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
+    /**
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
+     * @generated
+     */
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper
-		// feature to use for
-		// adding (see {@link AddCommand}) it as a child.
+        // Check the type of the specified child object and return the proper feature to use for
+        // adding (see {@link AddCommand}) it as a child.
 
-		return super.getChildFeature(object, child);
-	}
+        return super.getChildFeature(object, child);
+    }
 
 	/**
 	 * This returns RenderKitType.gif. <!-- begin-user-doc --> <!-- end-user-doc
@@ -172,92 +179,84 @@ public class RenderKitTypeItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage(
-				"full/obj16/FacesConfig_RenderKit"));
-	}
+        return overlayImage(object, getResourceLocator().getImage("full/obj16/RenderKitType"));
+    }
 
-	/**
-	 * This returns the label text for the adapted class. <!-- begin-user-doc
+    /**
+     * This returns the label text for the adapted class.
+     * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
+     * @generated
+     */
 	public String getText(Object object) {
+        String label = ((RenderKitType)object).getId();
+        return label == null || label.length() == 0 ?
+            getString("_UI_RenderKitType_type") :
+            getString("_UI_RenderKitType_type") + " " + label;
+    }
 
-		String label = ((RenderKitType) object).getId();
-
-		if (((RenderKitType) object).getRenderKitId() != null
-				&& ((RenderKitType) object).getRenderKitId().getTextContent() != null) {
-			label = ((RenderKitType) object).getRenderKitId().getTextContent();
-		}
-
-		if (label == null || label.length() == 0) {
-			if (((RenderKitType) object).getRenderKitClass() != null)
-				label = ((RenderKitType) object).getRenderKitClass()
-						.getTextContent();
-		}
-
-		return label == null || label.length() == 0 ? getString("_UI_RenderKitType_type")
-				: getString("_UI_RenderKitType_type") + " " + label;
-	}
-
-	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+    /**
+     * This handles model notifications by calling {@link #updateChildren} to update any cached
+     * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+     * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
-	 * @generated
-	 */
+     * @generated
+     */
 	public void notifyChanged(Notification notification) {
-		updateChildren(notification);
+        updateChildren(notification);
 
-		switch (notification.getFeatureID(RenderKitType.class)) {
-		case FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_ID:
-		case FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_CLASS:
-		case FacesConfigPackage.RENDER_KIT_TYPE__ID:
-			fireNotifyChanged(new ViewerNotification(notification, notification
-					.getNotifier(), false, true));
-			return;
-		case FacesConfigPackage.RENDER_KIT_TYPE__DESCRIPTION:
-		case FacesConfigPackage.RENDER_KIT_TYPE__DISPLAY_NAME:
-		case FacesConfigPackage.RENDER_KIT_TYPE__ICON:
-		case FacesConfigPackage.RENDER_KIT_TYPE__RENDERER:
-			fireNotifyChanged(new ViewerNotification(notification, notification
-					.getNotifier(), true, false));
-			return;
-		}
-		super.notifyChanged(notification);
-	}
+        switch (notification.getFeatureID(RenderKitType.class)) {
+            case FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_ID:
+            case FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_CLASS:
+            case FacesConfigPackage.RENDER_KIT_TYPE__ID:
+                fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+                return;
+            case FacesConfigPackage.RENDER_KIT_TYPE__DESCRIPTION:
+            case FacesConfigPackage.RENDER_KIT_TYPE__DISPLAY_NAME:
+            case FacesConfigPackage.RENDER_KIT_TYPE__ICON:
+            case FacesConfigPackage.RENDER_KIT_TYPE__RENDERER:
+            case FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_EXTENSION:
+                fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+                return;
+        }
+        super.notifyChanged(notification);
+    }
 
-	/**
-	 * This adds to the collection of
-	 * {@link org.eclipse.emf.edit.command.CommandParameter}s describing all of
-	 * the children that can be created under this object. <!-- begin-user-doc
+    /**
+     * This adds to the collection of {@link org.eclipse.emf.edit.command.CommandParameter}s
+     * describing all of the children that can be created under this object.
+     * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	protected void collectNewChildDescriptors(Collection newChildDescriptors,
-			Object object) {
-		super.collectNewChildDescriptors(newChildDescriptors, object);
+     * @generated
+     */
+	protected void collectNewChildDescriptors(Collection newChildDescriptors, Object object) {
+        super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(
-				Literals.RENDER_KIT_TYPE__DESCRIPTION,
-				FacesConfigFactory.eINSTANCE.createDescriptionType()));
+        newChildDescriptors.add
+            (createChildParameter
+                (FacesConfigPackage.Literals.RENDER_KIT_TYPE__DESCRIPTION,
+                 FacesConfigFactory.eINSTANCE.createDescriptionType()));
 
-		newChildDescriptors.add(createChildParameter(
-				Literals.RENDER_KIT_TYPE__DISPLAY_NAME,
-				FacesConfigFactory.eINSTANCE.createDisplayNameType()));
+        newChildDescriptors.add
+            (createChildParameter
+                (FacesConfigPackage.Literals.RENDER_KIT_TYPE__DISPLAY_NAME,
+                 FacesConfigFactory.eINSTANCE.createDisplayNameType()));
 
-		newChildDescriptors.add(createChildParameter(
-				Literals.RENDER_KIT_TYPE__ICON, FacesConfigFactory.eINSTANCE
-						.createIconType()));
+        newChildDescriptors.add
+            (createChildParameter
+                (FacesConfigPackage.Literals.RENDER_KIT_TYPE__ICON,
+                 FacesConfigFactory.eINSTANCE.createIconType()));
 
-		newChildDescriptors.add(createChildParameter(
-				Literals.RENDER_KIT_TYPE__RENDERER,
-				FacesConfigFactory.eINSTANCE.createRendererType()));
-	}
+        newChildDescriptors.add
+            (createChildParameter
+                (FacesConfigPackage.Literals.RENDER_KIT_TYPE__RENDERER,
+                 FacesConfigFactory.eINSTANCE.createRendererType()));
+
+        newChildDescriptors.add
+            (createChildParameter
+                (FacesConfigPackage.Literals.RENDER_KIT_TYPE__RENDER_KIT_EXTENSION,
+                 FacesConfigFactory.eINSTANCE.createRenderKitExtensionType()));
+    }
 
 	/**
 	 * Return the resource locator for this item provider's resources. <!--
@@ -266,8 +265,8 @@ public class RenderKitTypeItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return FacesConfigEditPlugin.INSTANCE;
-	}
+        return FacesConfigPlugin.INSTANCE;
+    }
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.emf.edit.provider.ITableItemLabelProvider#getColumnImage(java.lang.Object, int)

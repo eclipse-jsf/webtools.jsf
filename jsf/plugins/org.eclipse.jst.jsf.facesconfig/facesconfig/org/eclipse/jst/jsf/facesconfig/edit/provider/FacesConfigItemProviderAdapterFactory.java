@@ -615,6 +615,160 @@ public class FacesConfigItemProviderAdapterFactory extends FacesConfigAdapterFac
     }
 
     /**
+     * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.facesconfig.emf.ELResolverType} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected ELResolverTypeItemProvider elResolverTypeItemProvider;
+
+    /**
+     * This creates an adapter for a {@link org.eclipse.jst.jsf.facesconfig.emf.ELResolverType}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public Adapter createELResolverTypeAdapter() {
+        if (elResolverTypeItemProvider == null) {
+            elResolverTypeItemProvider = new ELResolverTypeItemProvider(this);
+        }
+
+        return elResolverTypeItemProvider;
+    }
+
+    /**
+     * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.facesconfig.emf.FacesConfigExtensionType} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected FacesConfigExtensionTypeItemProvider facesConfigExtensionTypeItemProvider;
+
+    /**
+     * This creates an adapter for a {@link org.eclipse.jst.jsf.facesconfig.emf.FacesConfigExtensionType}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public Adapter createFacesConfigExtensionTypeAdapter() {
+        if (facesConfigExtensionTypeItemProvider == null) {
+            facesConfigExtensionTypeItemProvider = new FacesConfigExtensionTypeItemProvider(this);
+        }
+
+        return facesConfigExtensionTypeItemProvider;
+    }
+
+    /**
+     * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.facesconfig.emf.FactoryExtensionType} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected FactoryExtensionTypeItemProvider factoryExtensionTypeItemProvider;
+
+    /**
+     * This creates an adapter for a {@link org.eclipse.jst.jsf.facesconfig.emf.FactoryExtensionType}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public Adapter createFactoryExtensionTypeAdapter() {
+        if (factoryExtensionTypeItemProvider == null) {
+            factoryExtensionTypeItemProvider = new FactoryExtensionTypeItemProvider(this);
+        }
+
+        return factoryExtensionTypeItemProvider;
+    }
+
+    /**
+     * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.facesconfig.emf.LifecycleExtensionType} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected LifecycleExtensionTypeItemProvider lifecycleExtensionTypeItemProvider;
+
+    /**
+     * This creates an adapter for a {@link org.eclipse.jst.jsf.facesconfig.emf.LifecycleExtensionType}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public Adapter createLifecycleExtensionTypeAdapter() {
+        if (lifecycleExtensionTypeItemProvider == null) {
+            lifecycleExtensionTypeItemProvider = new LifecycleExtensionTypeItemProvider(this);
+        }
+
+        return lifecycleExtensionTypeItemProvider;
+    }
+
+    /**
+     * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanExtensionType} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected ManagedBeanExtensionTypeItemProvider managedBeanExtensionTypeItemProvider;
+
+    /**
+     * This creates an adapter for a {@link org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanExtensionType}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public Adapter createManagedBeanExtensionTypeAdapter() {
+        if (managedBeanExtensionTypeItemProvider == null) {
+            managedBeanExtensionTypeItemProvider = new ManagedBeanExtensionTypeItemProvider(this);
+        }
+
+        return managedBeanExtensionTypeItemProvider;
+    }
+
+    /**
+     * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.facesconfig.emf.NavigationRuleExtensionType} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected NavigationRuleExtensionTypeItemProvider navigationRuleExtensionTypeItemProvider;
+
+    /**
+     * This creates an adapter for a {@link org.eclipse.jst.jsf.facesconfig.emf.NavigationRuleExtensionType}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public Adapter createNavigationRuleExtensionTypeAdapter() {
+        if (navigationRuleExtensionTypeItemProvider == null) {
+            navigationRuleExtensionTypeItemProvider = new NavigationRuleExtensionTypeItemProvider(this);
+        }
+
+        return navigationRuleExtensionTypeItemProvider;
+    }
+
+    /**
+     * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.facesconfig.emf.ValidatorExtensionType} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected ValidatorExtensionTypeItemProvider validatorExtensionTypeItemProvider;
+
+    /**
+     * This creates an adapter for a {@link org.eclipse.jst.jsf.facesconfig.emf.ValidatorExtensionType}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public Adapter createValidatorExtensionTypeAdapter() {
+        if (validatorExtensionTypeItemProvider == null) {
+            validatorExtensionTypeItemProvider = new ValidatorExtensionTypeItemProvider(this);
+        }
+
+        return validatorExtensionTypeItemProvider;
+    }
+
+    /**
      * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType} instances.
      * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1913,6 +2067,138 @@ public class FacesConfigItemProviderAdapterFactory extends FacesConfigAdapterFac
     }
 
     /**
+     * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.facesconfig.emf.ApplicationExtensionType} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected ApplicationExtensionTypeItemProvider applicationExtensionTypeItemProvider;
+
+    /**
+     * This creates an adapter for a {@link org.eclipse.jst.jsf.facesconfig.emf.ApplicationExtensionType}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public Adapter createApplicationExtensionTypeAdapter() {
+        if (applicationExtensionTypeItemProvider == null) {
+            applicationExtensionTypeItemProvider = new ApplicationExtensionTypeItemProvider(this);
+        }
+
+        return applicationExtensionTypeItemProvider;
+    }
+
+    /**
+     * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.facesconfig.emf.ConverterExtensionType} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected ConverterExtensionTypeItemProvider converterExtensionTypeItemProvider;
+
+    /**
+     * This creates an adapter for a {@link org.eclipse.jst.jsf.facesconfig.emf.ConverterExtensionType}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public Adapter createConverterExtensionTypeAdapter() {
+        if (converterExtensionTypeItemProvider == null) {
+            converterExtensionTypeItemProvider = new ConverterExtensionTypeItemProvider(this);
+        }
+
+        return converterExtensionTypeItemProvider;
+    }
+
+    /**
+     * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.facesconfig.emf.ResourceBundleType} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected ResourceBundleTypeItemProvider resourceBundleTypeItemProvider;
+
+    /**
+     * This creates an adapter for a {@link org.eclipse.jst.jsf.facesconfig.emf.ResourceBundleType}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public Adapter createResourceBundleTypeAdapter() {
+        if (resourceBundleTypeItemProvider == null) {
+            resourceBundleTypeItemProvider = new ResourceBundleTypeItemProvider(this);
+        }
+
+        return resourceBundleTypeItemProvider;
+    }
+
+    /**
+     * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.facesconfig.emf.BaseNameType} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected BaseNameTypeItemProvider baseNameTypeItemProvider;
+
+    /**
+     * This creates an adapter for a {@link org.eclipse.jst.jsf.facesconfig.emf.BaseNameType}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public Adapter createBaseNameTypeAdapter() {
+        if (baseNameTypeItemProvider == null) {
+            baseNameTypeItemProvider = new BaseNameTypeItemProvider(this);
+        }
+
+        return baseNameTypeItemProvider;
+    }
+
+    /**
+     * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.facesconfig.emf.VarType} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected VarTypeItemProvider varTypeItemProvider;
+
+    /**
+     * This creates an adapter for a {@link org.eclipse.jst.jsf.facesconfig.emf.VarType}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public Adapter createVarTypeAdapter() {
+        if (varTypeItemProvider == null) {
+            varTypeItemProvider = new VarTypeItemProvider(this);
+        }
+
+        return varTypeItemProvider;
+    }
+
+    /**
+     * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.facesconfig.emf.RenderKitExtensionType} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected RenderKitExtensionTypeItemProvider renderKitExtensionTypeItemProvider;
+
+    /**
+     * This creates an adapter for a {@link org.eclipse.jst.jsf.facesconfig.emf.RenderKitExtensionType}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public Adapter createRenderKitExtensionTypeAdapter() {
+        if (renderKitExtensionTypeItemProvider == null) {
+            renderKitExtensionTypeItemProvider = new RenderKitExtensionTypeItemProvider(this);
+        }
+
+        return renderKitExtensionTypeItemProvider;
+    }
+
+    /**
      * This returns the root adapter factory that contains this factory.
      * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2091,6 +2377,19 @@ public class FacesConfigItemProviderAdapterFactory extends FacesConfigAdapterFac
         if (valueTypeItemProvider != null) valueTypeItemProvider.dispose();
         if (variableResolverTypeItemProvider != null) variableResolverTypeItemProvider.dispose();
         if (viewHandlerTypeItemProvider != null) viewHandlerTypeItemProvider.dispose();
+        if (applicationExtensionTypeItemProvider != null) applicationExtensionTypeItemProvider.dispose();
+        if (converterExtensionTypeItemProvider != null) converterExtensionTypeItemProvider.dispose();
+        if (elResolverTypeItemProvider != null) elResolverTypeItemProvider.dispose();
+        if (facesConfigExtensionTypeItemProvider != null) facesConfigExtensionTypeItemProvider.dispose();
+        if (factoryExtensionTypeItemProvider != null) factoryExtensionTypeItemProvider.dispose();
+        if (lifecycleExtensionTypeItemProvider != null) lifecycleExtensionTypeItemProvider.dispose();
+        if (managedBeanExtensionTypeItemProvider != null) managedBeanExtensionTypeItemProvider.dispose();
+        if (navigationRuleExtensionTypeItemProvider != null) navigationRuleExtensionTypeItemProvider.dispose();
+        if (validatorExtensionTypeItemProvider != null) validatorExtensionTypeItemProvider.dispose();
+        if (resourceBundleTypeItemProvider != null) resourceBundleTypeItemProvider.dispose();
+        if (baseNameTypeItemProvider != null) baseNameTypeItemProvider.dispose();
+        if (varTypeItemProvider != null) varTypeItemProvider.dispose();
+        if (renderKitExtensionTypeItemProvider != null) renderKitExtensionTypeItemProvider.dispose();
     }
 
 }

@@ -40,6 +40,7 @@ public class ValidatorTranslator extends Translator {
 			new ValidatorClassTranslator("validator-class", facesPackage.getValidatorType_ValidatorClass()), //$NON-NLS-1$
 			new AttributeTranslator("attribute", facesPackage.getValidatorType_Attribute()), //$NON-NLS-1$
 			new PropertyTranslator("property", facesPackage.getValidatorType_Property()), //$NON-NLS-1$
+            new ValidatorExtensionTranslator("validator-extension", facesPackage.getValidatorType_ValidatorExtension()), //$NON-NLS-1$
 			new Translator("id", facesPackage.getValidatorType_Id(), DOM_ATTRIBUTE) //$NON-NLS-1$
 		};
 	}

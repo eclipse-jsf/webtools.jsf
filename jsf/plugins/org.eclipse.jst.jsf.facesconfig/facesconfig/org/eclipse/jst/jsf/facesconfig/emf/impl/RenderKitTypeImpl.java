@@ -32,6 +32,7 @@ import org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 import org.eclipse.jst.jsf.facesconfig.emf.IconType;
 import org.eclipse.jst.jsf.facesconfig.emf.RenderKitClassType;
+import org.eclipse.jst.jsf.facesconfig.emf.RenderKitExtensionType;
 import org.eclipse.jst.jsf.facesconfig.emf.RenderKitIdType;
 import org.eclipse.jst.jsf.facesconfig.emf.RenderKitType;
 import org.eclipse.jst.jsf.facesconfig.emf.RendererType;
@@ -50,6 +51,7 @@ import org.eclipse.jst.jsf.facesconfig.emf.RendererType;
  *   <li>{@link org.eclipse.jst.jsf.facesconfig.emf.impl.RenderKitTypeImpl#getRenderKitId <em>Render Kit Id</em>}</li>
  *   <li>{@link org.eclipse.jst.jsf.facesconfig.emf.impl.RenderKitTypeImpl#getRenderKitClass <em>Render Kit Class</em>}</li>
  *   <li>{@link org.eclipse.jst.jsf.facesconfig.emf.impl.RenderKitTypeImpl#getRenderer <em>Renderer</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.facesconfig.emf.impl.RenderKitTypeImpl#getRenderKitExtension <em>Render Kit Extension</em>}</li>
  *   <li>{@link org.eclipse.jst.jsf.facesconfig.emf.impl.RenderKitTypeImpl#getId <em>Id</em>}</li>
  * </ul>
  * </p>
@@ -57,424 +59,455 @@ import org.eclipse.jst.jsf.facesconfig.emf.RendererType;
  * @generated
  */
 public class RenderKitTypeImpl extends EObjectImpl implements RenderKitType {
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
 
-	/**
-	 * The cached value of the '{@link #getDescription() <em>Description</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+    /**
+     * The cached value of the '{@link #getDescription() <em>Description</em>}' containment reference list.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDescription()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getDescription()
+     * @generated
+     * @ordered
+     */
 	protected EList description = null;
 
-	/**
-	 * The cached value of the '{@link #getDisplayName() <em>Display Name</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+    /**
+     * The cached value of the '{@link #getDisplayName() <em>Display Name</em>}' containment reference list.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDisplayName()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getDisplayName()
+     * @generated
+     * @ordered
+     */
 	protected EList displayName = null;
 
-	/**
-	 * The cached value of the '{@link #getIcon() <em>Icon</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+    /**
+     * The cached value of the '{@link #getIcon() <em>Icon</em>}' containment reference list.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getIcon()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getIcon()
+     * @generated
+     * @ordered
+     */
 	protected EList icon = null;
 
-	/**
-	 * The cached value of the '{@link #getRenderKitId() <em>Render Kit Id</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+    /**
+     * The cached value of the '{@link #getRenderKitId() <em>Render Kit Id</em>}' containment reference.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getRenderKitId()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getRenderKitId()
+     * @generated
+     * @ordered
+     */
 	protected RenderKitIdType renderKitId = null;
 
-	/**
-	 * The cached value of the '{@link #getRenderKitClass() <em>Render Kit Class</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+    /**
+     * The cached value of the '{@link #getRenderKitClass() <em>Render Kit Class</em>}' containment reference.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getRenderKitClass()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getRenderKitClass()
+     * @generated
+     * @ordered
+     */
 	protected RenderKitClassType renderKitClass = null;
 
-	/**
-	 * The cached value of the '{@link #getRenderer() <em>Renderer</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+    /**
+     * The cached value of the '{@link #getRenderer() <em>Renderer</em>}' containment reference list.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getRenderer()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getRenderer()
+     * @generated
+     * @ordered
+     */
 	protected EList renderer = null;
 
-	/**
-	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
+    /**
+     * The cached value of the '{@link #getRenderKitExtension() <em>Render Kit Extension</em>}' containment reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getRenderKitExtension()
+     * @generated
+     * @ordered
+     */
+    protected EList renderKitExtension = null;
+
+    /**
+     * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getId()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getId()
+     * @generated
+     * @ordered
+     */
 	protected static final String ID_EDEFAULT = null;
 
-	/**
-	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
+    /**
+     * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getId()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getId()
+     * @generated
+     * @ordered
+     */
 	protected String id = ID_EDEFAULT;
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected RenderKitTypeImpl() {
-		super();
-	}
+        super();
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected EClass eStaticClass() {
-		return FacesConfigPackage.eINSTANCE.getRenderKitType();
-	}
+        return FacesConfigPackage.Literals.RENDER_KIT_TYPE;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public EList getDescription() {
-		if (description == null) {
-			description = new EObjectContainmentEList(DescriptionType.class, this, FacesConfigPackage.RENDER_KIT_TYPE__DESCRIPTION);
-		}
-		return description;
-	}
+        if (description == null) {
+            description = new EObjectContainmentEList(DescriptionType.class, this, FacesConfigPackage.RENDER_KIT_TYPE__DESCRIPTION);
+        }
+        return description;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public EList getDisplayName() {
-		if (displayName == null) {
-			displayName = new EObjectContainmentEList(DisplayNameType.class, this, FacesConfigPackage.RENDER_KIT_TYPE__DISPLAY_NAME);
-		}
-		return displayName;
-	}
+        if (displayName == null) {
+            displayName = new EObjectContainmentEList(DisplayNameType.class, this, FacesConfigPackage.RENDER_KIT_TYPE__DISPLAY_NAME);
+        }
+        return displayName;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public EList getIcon() {
-		if (icon == null) {
-			icon = new EObjectContainmentEList(IconType.class, this, FacesConfigPackage.RENDER_KIT_TYPE__ICON);
-		}
-		return icon;
-	}
+        if (icon == null) {
+            icon = new EObjectContainmentEList(IconType.class, this, FacesConfigPackage.RENDER_KIT_TYPE__ICON);
+        }
+        return icon;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public RenderKitIdType getRenderKitId() {
-		return renderKitId;
-	}
+        return renderKitId;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public NotificationChain basicSetRenderKitId(RenderKitIdType newRenderKitId, NotificationChain msgs) {
-		RenderKitIdType oldRenderKitId = renderKitId;
-		renderKitId = newRenderKitId;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_ID, oldRenderKitId, newRenderKitId);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+        RenderKitIdType oldRenderKitId = renderKitId;
+        renderKitId = newRenderKitId;
+        if (eNotificationRequired()) {
+            ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_ID, oldRenderKitId, newRenderKitId);
+            if (msgs == null) msgs = notification; else msgs.add(notification);
+        }
+        return msgs;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setRenderKitId(RenderKitIdType newRenderKitId) {
-		if (newRenderKitId != renderKitId) {
-			NotificationChain msgs = null;
-			if (renderKitId != null)
-				msgs = ((InternalEObject)renderKitId).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_ID, null, msgs);
-			if (newRenderKitId != null)
-				msgs = ((InternalEObject)newRenderKitId).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_ID, null, msgs);
-			msgs = basicSetRenderKitId(newRenderKitId, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_ID, newRenderKitId, newRenderKitId));
-	}
+        if (newRenderKitId != renderKitId) {
+            NotificationChain msgs = null;
+            if (renderKitId != null)
+                msgs = ((InternalEObject)renderKitId).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_ID, null, msgs);
+            if (newRenderKitId != null)
+                msgs = ((InternalEObject)newRenderKitId).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_ID, null, msgs);
+            msgs = basicSetRenderKitId(newRenderKitId, msgs);
+            if (msgs != null) msgs.dispatch();
+        }
+        else if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_ID, newRenderKitId, newRenderKitId));
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public RenderKitClassType getRenderKitClass() {
-		return renderKitClass;
-	}
+        return renderKitClass;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public NotificationChain basicSetRenderKitClass(RenderKitClassType newRenderKitClass, NotificationChain msgs) {
-		RenderKitClassType oldRenderKitClass = renderKitClass;
-		renderKitClass = newRenderKitClass;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_CLASS, oldRenderKitClass, newRenderKitClass);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+        RenderKitClassType oldRenderKitClass = renderKitClass;
+        renderKitClass = newRenderKitClass;
+        if (eNotificationRequired()) {
+            ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_CLASS, oldRenderKitClass, newRenderKitClass);
+            if (msgs == null) msgs = notification; else msgs.add(notification);
+        }
+        return msgs;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setRenderKitClass(RenderKitClassType newRenderKitClass) {
-		if (newRenderKitClass != renderKitClass) {
-			NotificationChain msgs = null;
-			if (renderKitClass != null)
-				msgs = ((InternalEObject)renderKitClass).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_CLASS, null, msgs);
-			if (newRenderKitClass != null)
-				msgs = ((InternalEObject)newRenderKitClass).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_CLASS, null, msgs);
-			msgs = basicSetRenderKitClass(newRenderKitClass, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_CLASS, newRenderKitClass, newRenderKitClass));
-	}
+        if (newRenderKitClass != renderKitClass) {
+            NotificationChain msgs = null;
+            if (renderKitClass != null)
+                msgs = ((InternalEObject)renderKitClass).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_CLASS, null, msgs);
+            if (newRenderKitClass != null)
+                msgs = ((InternalEObject)newRenderKitClass).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_CLASS, null, msgs);
+            msgs = basicSetRenderKitClass(newRenderKitClass, msgs);
+            if (msgs != null) msgs.dispatch();
+        }
+        else if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_CLASS, newRenderKitClass, newRenderKitClass));
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public EList getRenderer() {
-		if (renderer == null) {
-			renderer = new EObjectContainmentEList(RendererType.class, this, FacesConfigPackage.RENDER_KIT_TYPE__RENDERER);
-		}
-		return renderer;
-	}
+        if (renderer == null) {
+            renderer = new EObjectContainmentEList(RendererType.class, this, FacesConfigPackage.RENDER_KIT_TYPE__RENDERER);
+        }
+        return renderer;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EList getRenderKitExtension() {
+        if (renderKitExtension == null) {
+            renderKitExtension = new EObjectContainmentEList(RenderKitExtensionType.class, this, FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_EXTENSION);
+        }
+        return renderKitExtension;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String getId() {
-		return id;
-	}
+        return id;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setId(String newId) {
-		String oldId = id;
-		id = newId;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.RENDER_KIT_TYPE__ID, oldId, id));
-	}
+        String oldId = id;
+        id = newId;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.RENDER_KIT_TYPE__ID, oldId, id));
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case FacesConfigPackage.RENDER_KIT_TYPE__DESCRIPTION:
-					return ((InternalEList)getDescription()).basicRemove(otherEnd, msgs);
-				case FacesConfigPackage.RENDER_KIT_TYPE__DISPLAY_NAME:
-					return ((InternalEList)getDisplayName()).basicRemove(otherEnd, msgs);
-				case FacesConfigPackage.RENDER_KIT_TYPE__ICON:
-					return ((InternalEList)getIcon()).basicRemove(otherEnd, msgs);
-				case FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_ID:
-					return basicSetRenderKitId(null, msgs);
-				case FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_CLASS:
-					return basicSetRenderKitClass(null, msgs);
-				case FacesConfigPackage.RENDER_KIT_TYPE__RENDERER:
-					return ((InternalEList)getRenderer()).basicRemove(otherEnd, msgs);
-				default:
-					return eDynamicInverseRemove(otherEnd, featureID, baseClass, msgs);
-			}
-		}
-		return eBasicSetContainer(null, featureID, msgs);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+        switch (featureID) {
+            case FacesConfigPackage.RENDER_KIT_TYPE__DESCRIPTION:
+                return ((InternalEList)getDescription()).basicRemove(otherEnd, msgs);
+            case FacesConfigPackage.RENDER_KIT_TYPE__DISPLAY_NAME:
+                return ((InternalEList)getDisplayName()).basicRemove(otherEnd, msgs);
+            case FacesConfigPackage.RENDER_KIT_TYPE__ICON:
+                return ((InternalEList)getIcon()).basicRemove(otherEnd, msgs);
+            case FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_ID:
+                return basicSetRenderKitId(null, msgs);
+            case FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_CLASS:
+                return basicSetRenderKitClass(null, msgs);
+            case FacesConfigPackage.RENDER_KIT_TYPE__RENDERER:
+                return ((InternalEList)getRenderer()).basicRemove(otherEnd, msgs);
+            case FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_EXTENSION:
+                return ((InternalEList)getRenderKitExtension()).basicRemove(otherEnd, msgs);
+        }
+        return super.eInverseRemove(otherEnd, featureID, msgs);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Object eGet(EStructuralFeature eFeature, boolean resolve) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case FacesConfigPackage.RENDER_KIT_TYPE__DESCRIPTION:
-				return getDescription();
-			case FacesConfigPackage.RENDER_KIT_TYPE__DISPLAY_NAME:
-				return getDisplayName();
-			case FacesConfigPackage.RENDER_KIT_TYPE__ICON:
-				return getIcon();
-			case FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_ID:
-				return getRenderKitId();
-			case FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_CLASS:
-				return getRenderKitClass();
-			case FacesConfigPackage.RENDER_KIT_TYPE__RENDERER:
-				return getRenderer();
-			case FacesConfigPackage.RENDER_KIT_TYPE__ID:
-				return getId();
-		}
-		return eDynamicGet(eFeature, resolve);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public Object eGet(int featureID, boolean resolve, boolean coreType) {
+        switch (featureID) {
+            case FacesConfigPackage.RENDER_KIT_TYPE__DESCRIPTION:
+                return getDescription();
+            case FacesConfigPackage.RENDER_KIT_TYPE__DISPLAY_NAME:
+                return getDisplayName();
+            case FacesConfigPackage.RENDER_KIT_TYPE__ICON:
+                return getIcon();
+            case FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_ID:
+                return getRenderKitId();
+            case FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_CLASS:
+                return getRenderKitClass();
+            case FacesConfigPackage.RENDER_KIT_TYPE__RENDERER:
+                return getRenderer();
+            case FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_EXTENSION:
+                return getRenderKitExtension();
+            case FacesConfigPackage.RENDER_KIT_TYPE__ID:
+                return getId();
+        }
+        return super.eGet(featureID, resolve, coreType);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void eSet(EStructuralFeature eFeature, Object newValue) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case FacesConfigPackage.RENDER_KIT_TYPE__DESCRIPTION:
-				getDescription().clear();
-				getDescription().addAll((Collection)newValue);
-				return;
-			case FacesConfigPackage.RENDER_KIT_TYPE__DISPLAY_NAME:
-				getDisplayName().clear();
-				getDisplayName().addAll((Collection)newValue);
-				return;
-			case FacesConfigPackage.RENDER_KIT_TYPE__ICON:
-				getIcon().clear();
-				getIcon().addAll((Collection)newValue);
-				return;
-			case FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_ID:
-				setRenderKitId((RenderKitIdType)newValue);
-				return;
-			case FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_CLASS:
-				setRenderKitClass((RenderKitClassType)newValue);
-				return;
-			case FacesConfigPackage.RENDER_KIT_TYPE__RENDERER:
-				getRenderer().clear();
-				getRenderer().addAll((Collection)newValue);
-				return;
-			case FacesConfigPackage.RENDER_KIT_TYPE__ID:
-				setId((String)newValue);
-				return;
-		}
-		eDynamicSet(eFeature, newValue);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void eSet(int featureID, Object newValue) {
+        switch (featureID) {
+            case FacesConfigPackage.RENDER_KIT_TYPE__DESCRIPTION:
+                getDescription().clear();
+                getDescription().addAll((Collection)newValue);
+                return;
+            case FacesConfigPackage.RENDER_KIT_TYPE__DISPLAY_NAME:
+                getDisplayName().clear();
+                getDisplayName().addAll((Collection)newValue);
+                return;
+            case FacesConfigPackage.RENDER_KIT_TYPE__ICON:
+                getIcon().clear();
+                getIcon().addAll((Collection)newValue);
+                return;
+            case FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_ID:
+                setRenderKitId((RenderKitIdType)newValue);
+                return;
+            case FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_CLASS:
+                setRenderKitClass((RenderKitClassType)newValue);
+                return;
+            case FacesConfigPackage.RENDER_KIT_TYPE__RENDERER:
+                getRenderer().clear();
+                getRenderer().addAll((Collection)newValue);
+                return;
+            case FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_EXTENSION:
+                getRenderKitExtension().clear();
+                getRenderKitExtension().addAll((Collection)newValue);
+                return;
+            case FacesConfigPackage.RENDER_KIT_TYPE__ID:
+                setId((String)newValue);
+                return;
+        }
+        super.eSet(featureID, newValue);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void eUnset(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case FacesConfigPackage.RENDER_KIT_TYPE__DESCRIPTION:
-				getDescription().clear();
-				return;
-			case FacesConfigPackage.RENDER_KIT_TYPE__DISPLAY_NAME:
-				getDisplayName().clear();
-				return;
-			case FacesConfigPackage.RENDER_KIT_TYPE__ICON:
-				getIcon().clear();
-				return;
-			case FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_ID:
-				setRenderKitId((RenderKitIdType)null);
-				return;
-			case FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_CLASS:
-				setRenderKitClass((RenderKitClassType)null);
-				return;
-			case FacesConfigPackage.RENDER_KIT_TYPE__RENDERER:
-				getRenderer().clear();
-				return;
-			case FacesConfigPackage.RENDER_KIT_TYPE__ID:
-				setId(ID_EDEFAULT);
-				return;
-		}
-		eDynamicUnset(eFeature);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void eUnset(int featureID) {
+        switch (featureID) {
+            case FacesConfigPackage.RENDER_KIT_TYPE__DESCRIPTION:
+                getDescription().clear();
+                return;
+            case FacesConfigPackage.RENDER_KIT_TYPE__DISPLAY_NAME:
+                getDisplayName().clear();
+                return;
+            case FacesConfigPackage.RENDER_KIT_TYPE__ICON:
+                getIcon().clear();
+                return;
+            case FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_ID:
+                setRenderKitId((RenderKitIdType)null);
+                return;
+            case FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_CLASS:
+                setRenderKitClass((RenderKitClassType)null);
+                return;
+            case FacesConfigPackage.RENDER_KIT_TYPE__RENDERER:
+                getRenderer().clear();
+                return;
+            case FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_EXTENSION:
+                getRenderKitExtension().clear();
+                return;
+            case FacesConfigPackage.RENDER_KIT_TYPE__ID:
+                setId(ID_EDEFAULT);
+                return;
+        }
+        super.eUnset(featureID);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean eIsSet(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case FacesConfigPackage.RENDER_KIT_TYPE__DESCRIPTION:
-				return description != null && !description.isEmpty();
-			case FacesConfigPackage.RENDER_KIT_TYPE__DISPLAY_NAME:
-				return displayName != null && !displayName.isEmpty();
-			case FacesConfigPackage.RENDER_KIT_TYPE__ICON:
-				return icon != null && !icon.isEmpty();
-			case FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_ID:
-				return renderKitId != null;
-			case FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_CLASS:
-				return renderKitClass != null;
-			case FacesConfigPackage.RENDER_KIT_TYPE__RENDERER:
-				return renderer != null && !renderer.isEmpty();
-			case FacesConfigPackage.RENDER_KIT_TYPE__ID:
-				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
-		}
-		return eDynamicIsSet(eFeature);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public boolean eIsSet(int featureID) {
+        switch (featureID) {
+            case FacesConfigPackage.RENDER_KIT_TYPE__DESCRIPTION:
+                return description != null && !description.isEmpty();
+            case FacesConfigPackage.RENDER_KIT_TYPE__DISPLAY_NAME:
+                return displayName != null && !displayName.isEmpty();
+            case FacesConfigPackage.RENDER_KIT_TYPE__ICON:
+                return icon != null && !icon.isEmpty();
+            case FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_ID:
+                return renderKitId != null;
+            case FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_CLASS:
+                return renderKitClass != null;
+            case FacesConfigPackage.RENDER_KIT_TYPE__RENDERER:
+                return renderer != null && !renderer.isEmpty();
+            case FacesConfigPackage.RENDER_KIT_TYPE__RENDER_KIT_EXTENSION:
+                return renderKitExtension != null && !renderKitExtension.isEmpty();
+            case FacesConfigPackage.RENDER_KIT_TYPE__ID:
+                return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+        }
+        return super.eIsSet(featureID);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+        if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (id: ");
-		result.append(id);
-		result.append(')');
-		return result.toString();
-	}
+        StringBuffer result = new StringBuffer(super.toString());
+        result.append(" (id: ");
+        result.append(id);
+        result.append(')');
+        return result.toString();
+    }
 
 } //RenderKitTypeImpl

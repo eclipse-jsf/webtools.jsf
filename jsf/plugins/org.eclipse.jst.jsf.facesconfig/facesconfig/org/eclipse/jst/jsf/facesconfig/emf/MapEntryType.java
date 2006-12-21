@@ -33,119 +33,119 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface MapEntryType extends EObject {
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
 
-	/**
-	 * Returns the value of the '<em><b>Key</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
+    /**
+     * Returns the value of the '<em><b>Key</b></em>' containment reference.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Key</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Key</em>' containment reference.
-	 * @see #setKey(KeyType)
-	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getMapEntryType_Key()
-	 * @model containment="true" resolveProxies="false" required="true"
-	 *        extendedMetaData="kind='element' name='key' namespace='##targetNamespace'"
-	 * @generated
-	 */
+     * @return the value of the '<em>Key</em>' containment reference.
+     * @see #setKey(KeyType)
+     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getMapEntryType_Key()
+     * @model containment="true" required="true"
+     *        extendedMetaData="kind='element' name='key' namespace='##targetNamespace'"
+     * @generated
+     */
 	KeyType getKey();
 
-	/**
-	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.MapEntryType#getKey <em>Key</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+    /**
+     * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.MapEntryType#getKey <em>Key</em>}' containment reference.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Key</em>' containment reference.
-	 * @see #getKey()
-	 * @generated
-	 */
+     * @param value the new value of the '<em>Key</em>' containment reference.
+     * @see #getKey()
+     * @generated
+     */
 	void setKey(KeyType value);
 
-	/**
-	 * Returns the value of the '<em><b>Null Value</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
+    /**
+     * Returns the value of the '<em><b>Null Value</b></em>' containment reference.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Null Value</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Null Value</em>' containment reference.
-	 * @see #setNullValue(NullValueType)
-	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getMapEntryType_NullValue()
-	 * @model containment="true" resolveProxies="false"
-	 *        extendedMetaData="kind='element' name='null-value' namespace='##targetNamespace'"
-	 * @generated
-	 */
+     * @return the value of the '<em>Null Value</em>' containment reference.
+     * @see #setNullValue(NullValueType)
+     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getMapEntryType_NullValue()
+     * @model containment="true"
+     *        extendedMetaData="kind='element' name='null-value' namespace='##targetNamespace'"
+     * @generated
+     */
 	NullValueType getNullValue();
 
-	/**
-	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.MapEntryType#getNullValue <em>Null Value</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+    /**
+     * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.MapEntryType#getNullValue <em>Null Value</em>}' containment reference.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Null Value</em>' containment reference.
-	 * @see #getNullValue()
-	 * @generated
-	 */
+     * @param value the new value of the '<em>Null Value</em>' containment reference.
+     * @see #getNullValue()
+     * @generated
+     */
 	void setNullValue(NullValueType value);
 
-	/**
-	 * Returns the value of the '<em><b>Value</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
+    /**
+     * Returns the value of the '<em><b>Value</b></em>' containment reference.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Value</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Value</em>' containment reference.
-	 * @see #setValue(ValueType)
-	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getMapEntryType_Value()
-	 * @model containment="true" resolveProxies="false"
-	 *        extendedMetaData="kind='element' name='value' namespace='##targetNamespace'"
-	 * @generated
-	 */
+     * @return the value of the '<em>Value</em>' containment reference.
+     * @see #setValue(ValueType)
+     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getMapEntryType_Value()
+     * @model containment="true"
+     *        extendedMetaData="kind='element' name='value' namespace='##targetNamespace'"
+     * @generated
+     */
 	ValueType getValue();
 
-	/**
-	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.MapEntryType#getValue <em>Value</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+    /**
+     * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.MapEntryType#getValue <em>Value</em>}' containment reference.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value</em>' containment reference.
-	 * @see #getValue()
-	 * @generated
-	 */
+     * @param value the new value of the '<em>Value</em>' containment reference.
+     * @see #getValue()
+     * @generated
+     */
 	void setValue(ValueType value);
 
-	/**
-	 * Returns the value of the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+    /**
+     * Returns the value of the '<em><b>Id</b></em>' attribute.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Id</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Id</em>' attribute.
-	 * @see #setId(String)
-	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getMapEntryType_Id()
-	 * @model unique="false" id="true" dataType="org.eclipse.emf.ecore.xml.type.ID"
-	 *        extendedMetaData="kind='attribute' name='id' namespace='##targetNamespace'"
-	 * @generated
-	 */
+     * @return the value of the '<em>Id</em>' attribute.
+     * @see #setId(String)
+     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getMapEntryType_Id()
+     * @model unique="false" id="true" dataType="org.eclipse.emf.ecore.xml.type.ID"
+     *        extendedMetaData="kind='attribute' name='id' namespace='##targetNamespace'"
+     * @generated
+     */
 	String getId();
 
-	/**
-	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.MapEntryType#getId <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
+    /**
+     * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.MapEntryType#getId <em>Id</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Id</em>' attribute.
-	 * @see #getId()
-	 * @generated
-	 */
+     * @param value the new value of the '<em>Id</em>' attribute.
+     * @see #getId()
+     * @generated
+     */
 	void setId(String value);
 
 } // MapEntryType

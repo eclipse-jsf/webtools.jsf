@@ -334,6 +334,45 @@ public class FacesConfigAdapterFactory extends AdapterFactoryImpl {
             public Object caseExtensionType(ExtensionType object) {
                 return createExtensionTypeAdapter();
             }
+            public Object caseApplicationExtensionType(ApplicationExtensionType object) {
+                return createApplicationExtensionTypeAdapter();
+            }
+            public Object caseConverterExtensionType(ConverterExtensionType object) {
+                return createConverterExtensionTypeAdapter();
+            }
+            public Object caseELResolverType(ELResolverType object) {
+                return createELResolverTypeAdapter();
+            }
+            public Object caseFacesConfigExtensionType(FacesConfigExtensionType object) {
+                return createFacesConfigExtensionTypeAdapter();
+            }
+            public Object caseFactoryExtensionType(FactoryExtensionType object) {
+                return createFactoryExtensionTypeAdapter();
+            }
+            public Object caseLifecycleExtensionType(LifecycleExtensionType object) {
+                return createLifecycleExtensionTypeAdapter();
+            }
+            public Object caseManagedBeanExtensionType(ManagedBeanExtensionType object) {
+                return createManagedBeanExtensionTypeAdapter();
+            }
+            public Object caseNavigationRuleExtensionType(NavigationRuleExtensionType object) {
+                return createNavigationRuleExtensionTypeAdapter();
+            }
+            public Object caseValidatorExtensionType(ValidatorExtensionType object) {
+                return createValidatorExtensionTypeAdapter();
+            }
+            public Object caseResourceBundleType(ResourceBundleType object) {
+                return createResourceBundleTypeAdapter();
+            }
+            public Object caseBaseNameType(BaseNameType object) {
+                return createBaseNameTypeAdapter();
+            }
+            public Object caseVarType(VarType object) {
+                return createVarTypeAdapter();
+            }
+            public Object caseRenderKitExtensionType(RenderKitExtensionType object) {
+                return createRenderKitExtensionTypeAdapter();
+            }
             public Object defaultCase(EObject object) {
                 return createEObjectAdapter();
             }
@@ -685,6 +724,20 @@ public class FacesConfigAdapterFactory extends AdapterFactoryImpl {
      * @generated
      */
     public Adapter createDynamicElementAdapter() {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facesconfig.emf.ELResolverType <em>EL Resolver Type</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.ELResolverType
+     * @generated
+     */
+    public Adapter createELResolverTypeAdapter() {
         return null;
     }
 
@@ -1515,6 +1568,160 @@ public class FacesConfigAdapterFactory extends AdapterFactoryImpl {
     }
 
     /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facesconfig.emf.ResourceBundleType <em>Resource Bundle Type</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.ResourceBundleType
+     * @generated
+     */
+    public Adapter createResourceBundleTypeAdapter() {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facesconfig.emf.BaseNameType <em>Base Name Type</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.BaseNameType
+     * @generated
+     */
+    public Adapter createBaseNameTypeAdapter() {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facesconfig.emf.VarType <em>Var Type</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.VarType
+     * @generated
+     */
+    public Adapter createVarTypeAdapter() {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facesconfig.emf.RenderKitExtensionType <em>Render Kit Extension Type</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.RenderKitExtensionType
+     * @generated
+     */
+    public Adapter createRenderKitExtensionTypeAdapter() {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facesconfig.emf.NavigationRuleExtensionType <em>Navigation Rule Extension Type</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.NavigationRuleExtensionType
+     * @generated
+     */
+    public Adapter createNavigationRuleExtensionTypeAdapter() {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facesconfig.emf.ValidatorExtensionType <em>Validator Extension Type</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.ValidatorExtensionType
+     * @generated
+     */
+    public Adapter createValidatorExtensionTypeAdapter() {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facesconfig.emf.FacesConfigExtensionType <em>Extension Type</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigExtensionType
+     * @generated
+     */
+    public Adapter createFacesConfigExtensionTypeAdapter() {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facesconfig.emf.FactoryExtensionType <em>Factory Extension Type</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.FactoryExtensionType
+     * @generated
+     */
+    public Adapter createFactoryExtensionTypeAdapter() {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facesconfig.emf.LifecycleExtensionType <em>Lifecycle Extension Type</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.LifecycleExtensionType
+     * @generated
+     */
+    public Adapter createLifecycleExtensionTypeAdapter() {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanExtensionType <em>Managed Bean Extension Type</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanExtensionType
+     * @generated
+     */
+    public Adapter createManagedBeanExtensionTypeAdapter() {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facesconfig.emf.ConverterExtensionType <em>Converter Extension Type</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.ConverterExtensionType
+     * @generated
+     */
+    public Adapter createConverterExtensionTypeAdapter() {
+        return null;
+    }
+
+    /**
      * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facesconfig.emf.ExtensionType <em>Extension Type</em>}'.
      * <!-- begin-user-doc -->
      * This default implementation returns null so that we can easily ignore cases;
@@ -1525,6 +1732,20 @@ public class FacesConfigAdapterFactory extends AdapterFactoryImpl {
      * @generated
      */
     public Adapter createExtensionTypeAdapter() {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facesconfig.emf.ApplicationExtensionType <em>Application Extension Type</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.ApplicationExtensionType
+     * @generated
+     */
+    public Adapter createApplicationExtensionTypeAdapter() {
         return null;
     }
 

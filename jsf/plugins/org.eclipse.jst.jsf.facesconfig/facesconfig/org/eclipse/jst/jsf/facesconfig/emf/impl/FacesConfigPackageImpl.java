@@ -22,18 +22,21 @@ import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
 
 import org.eclipse.emf.ecore.xml.type.impl.XMLTypePackageImpl;
 import org.eclipse.jst.jsf.facesconfig.emf.ActionListenerType;
+import org.eclipse.jst.jsf.facesconfig.emf.ApplicationExtensionType;
 import org.eclipse.jst.jsf.facesconfig.emf.ApplicationFactoryType;
 import org.eclipse.jst.jsf.facesconfig.emf.ApplicationType;
 import org.eclipse.jst.jsf.facesconfig.emf.AttributeClassType;
 import org.eclipse.jst.jsf.facesconfig.emf.AttributeExtensionType;
 import org.eclipse.jst.jsf.facesconfig.emf.AttributeNameType;
 import org.eclipse.jst.jsf.facesconfig.emf.AttributeType;
+import org.eclipse.jst.jsf.facesconfig.emf.BaseNameType;
 import org.eclipse.jst.jsf.facesconfig.emf.ComponentClassType;
 import org.eclipse.jst.jsf.facesconfig.emf.ComponentExtensionType;
 import org.eclipse.jst.jsf.facesconfig.emf.ComponentFamilyType;
 import org.eclipse.jst.jsf.facesconfig.emf.ComponentType;
 import org.eclipse.jst.jsf.facesconfig.emf.ComponentTypeType;
 import org.eclipse.jst.jsf.facesconfig.emf.ConverterClassType;
+import org.eclipse.jst.jsf.facesconfig.emf.ConverterExtensionType;
 import org.eclipse.jst.jsf.facesconfig.emf.ConverterForClassType;
 import org.eclipse.jst.jsf.facesconfig.emf.ConverterIdType;
 import org.eclipse.jst.jsf.facesconfig.emf.ConverterType;
@@ -45,7 +48,9 @@ import org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType;
 import org.eclipse.jst.jsf.facesconfig.emf.DocumentRoot;
 import org.eclipse.jst.jsf.facesconfig.emf.DynamicAttribute;
 import org.eclipse.jst.jsf.facesconfig.emf.DynamicElement;
+import org.eclipse.jst.jsf.facesconfig.emf.ELResolverType;
 import org.eclipse.jst.jsf.facesconfig.emf.ExtensionType;
+import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigExtensionType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
@@ -53,6 +58,7 @@ import org.eclipse.jst.jsf.facesconfig.emf.FacesContextFactoryType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacetExtensionType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacetNameType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacetType;
+import org.eclipse.jst.jsf.facesconfig.emf.FactoryExtensionType;
 import org.eclipse.jst.jsf.facesconfig.emf.FactoryType;
 import org.eclipse.jst.jsf.facesconfig.emf.FromActionType;
 import org.eclipse.jst.jsf.facesconfig.emf.FromOutcomeType;
@@ -61,11 +67,13 @@ import org.eclipse.jst.jsf.facesconfig.emf.IconType;
 import org.eclipse.jst.jsf.facesconfig.emf.KeyClassType;
 import org.eclipse.jst.jsf.facesconfig.emf.KeyType;
 import org.eclipse.jst.jsf.facesconfig.emf.LargeIconType;
+import org.eclipse.jst.jsf.facesconfig.emf.LifecycleExtensionType;
 import org.eclipse.jst.jsf.facesconfig.emf.LifecycleFactoryType;
 import org.eclipse.jst.jsf.facesconfig.emf.LifecycleType;
 import org.eclipse.jst.jsf.facesconfig.emf.ListEntriesType;
 import org.eclipse.jst.jsf.facesconfig.emf.LocaleConfigType;
 import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanClassType;
+import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanExtensionType;
 import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanNameType;
 import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanScopeType;
 import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanType;
@@ -75,6 +83,7 @@ import org.eclipse.jst.jsf.facesconfig.emf.MapEntryType;
 import org.eclipse.jst.jsf.facesconfig.emf.MessageBundleType;
 import org.eclipse.jst.jsf.facesconfig.emf.NavigationCaseType;
 import org.eclipse.jst.jsf.facesconfig.emf.NavigationHandlerType;
+import org.eclipse.jst.jsf.facesconfig.emf.NavigationRuleExtensionType;
 import org.eclipse.jst.jsf.facesconfig.emf.NavigationRuleType;
 import org.eclipse.jst.jsf.facesconfig.emf.NullValueType;
 import org.eclipse.jst.jsf.facesconfig.emf.PhaseListenerType;
@@ -88,6 +97,7 @@ import org.eclipse.jst.jsf.facesconfig.emf.ReferencedBeanClassType;
 import org.eclipse.jst.jsf.facesconfig.emf.ReferencedBeanNameType;
 import org.eclipse.jst.jsf.facesconfig.emf.ReferencedBeanType;
 import org.eclipse.jst.jsf.facesconfig.emf.RenderKitClassType;
+import org.eclipse.jst.jsf.facesconfig.emf.RenderKitExtensionType;
 import org.eclipse.jst.jsf.facesconfig.emf.RenderKitFactoryType;
 import org.eclipse.jst.jsf.facesconfig.emf.RenderKitIdType;
 import org.eclipse.jst.jsf.facesconfig.emf.RenderKitType;
@@ -95,16 +105,19 @@ import org.eclipse.jst.jsf.facesconfig.emf.RendererClassType;
 import org.eclipse.jst.jsf.facesconfig.emf.RendererExtensionType;
 import org.eclipse.jst.jsf.facesconfig.emf.RendererType;
 import org.eclipse.jst.jsf.facesconfig.emf.RendererTypeType;
+import org.eclipse.jst.jsf.facesconfig.emf.ResourceBundleType;
 import org.eclipse.jst.jsf.facesconfig.emf.SmallIconType;
 import org.eclipse.jst.jsf.facesconfig.emf.StateManagerType;
 import org.eclipse.jst.jsf.facesconfig.emf.SuggestedValueType;
 import org.eclipse.jst.jsf.facesconfig.emf.SupportedLocaleType;
 import org.eclipse.jst.jsf.facesconfig.emf.ToViewIdType;
 import org.eclipse.jst.jsf.facesconfig.emf.ValidatorClassType;
+import org.eclipse.jst.jsf.facesconfig.emf.ValidatorExtensionType;
 import org.eclipse.jst.jsf.facesconfig.emf.ValidatorIdType;
 import org.eclipse.jst.jsf.facesconfig.emf.ValidatorType;
 import org.eclipse.jst.jsf.facesconfig.emf.ValueClassType;
 import org.eclipse.jst.jsf.facesconfig.emf.ValueType;
+import org.eclipse.jst.jsf.facesconfig.emf.VarType;
 import org.eclipse.jst.jsf.facesconfig.emf.VariableResolverType;
 import org.eclipse.jst.jsf.facesconfig.emf.ViewHandlerType;
 
@@ -290,6 +303,13 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
      * @generated
      */
     private EClass dynamicElementEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass elResolverTypeEClass = null;
 
     /**
      * <!-- begin-user-doc -->
@@ -709,7 +729,91 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
      * <!-- end-user-doc -->
      * @generated
      */
+    private EClass resourceBundleTypeEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass baseNameTypeEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass varTypeEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass renderKitExtensionTypeEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass navigationRuleExtensionTypeEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass validatorExtensionTypeEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass facesConfigExtensionTypeEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass factoryExtensionTypeEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass lifecycleExtensionTypeEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass managedBeanExtensionTypeEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass converterExtensionTypeEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     private EClass extensionTypeEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass applicationExtensionTypeEClass = null;
 
     /**
      * Creates an instance of the model <b>Package</b>, registered with
@@ -933,6 +1037,33 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
      */
 	public EAttribute getApplicationType_Id() {
         return (EAttribute)applicationTypeEClass.getEStructuralFeatures().get(9);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getApplicationType_ELResolver() {
+        return (EReference)applicationTypeEClass.getEStructuralFeatures().get(10);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getApplicationType_ResourceBundle() {
+        return (EReference)applicationTypeEClass.getEStructuralFeatures().get(11);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getApplicationType_ApplicationExtension() {
+        return (EReference)applicationTypeEClass.getEStructuralFeatures().get(12);
     }
 
     /**
@@ -1441,11 +1572,20 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
 
     /**
      * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getConverterType_ConverterExtension() {
+        return (EReference)converterTypeEClass.getEStructuralFeatures().get(8);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
      * @generated
      */
 	public EAttribute getConverterType_Id() {
-        return (EAttribute)converterTypeEClass.getEStructuralFeatures().get(8);
+        return (EAttribute)converterTypeEClass.getEStructuralFeatures().get(9);
     }
 
     /**
@@ -2425,6 +2565,33 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
      * <!-- end-user-doc -->
      * @generated
      */
+    public EClass getELResolverType() {
+        return elResolverTypeEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getELResolverType_TextContent() {
+        return (EAttribute)elResolverTypeEClass.getEStructuralFeatures().get(0);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getELResolverType_Id() {
+        return (EAttribute)elResolverTypeEClass.getEStructuralFeatures().get(1);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     public EAttribute getDynamicElement_Name() {
         return (EAttribute)dynamicElementEClass.getEStructuralFeatures().get(1);
     }
@@ -2530,11 +2697,20 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
 
     /**
      * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getFacesConfigType_FacesConfigExtension() {
+        return (EReference)facesConfigTypeEClass.getEStructuralFeatures().get(10);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
      * @generated
      */
 	public EAttribute getFacesConfigType_Xmlns() {
-        return (EAttribute)facesConfigTypeEClass.getEStructuralFeatures().get(10);
+        return (EAttribute)facesConfigTypeEClass.getEStructuralFeatures().get(11);
     }
 
     /**
@@ -2543,7 +2719,7 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
      * @generated
      */
 	public EAttribute getFacesConfigType_Id() {
-        return (EAttribute)facesConfigTypeEClass.getEStructuralFeatures().get(11);
+        return (EAttribute)facesConfigTypeEClass.getEStructuralFeatures().get(12);
     }
 
     /**
@@ -2719,11 +2895,20 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
 
     /**
      * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getFactoryType_FactoryExtension() {
+        return (EReference)factoryTypeEClass.getEStructuralFeatures().get(4);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
      * @generated
      */
 	public EAttribute getFactoryType_Id() {
-        return (EAttribute)factoryTypeEClass.getEStructuralFeatures().get(4);
+        return (EAttribute)factoryTypeEClass.getEStructuralFeatures().get(5);
     }
 
     /**
@@ -2980,11 +3165,20 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
 
     /**
      * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getLifecycleType_LifecycleExtension() {
+        return (EReference)lifecycleTypeEClass.getEStructuralFeatures().get(1);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
      * @generated
      */
 	public EAttribute getLifecycleType_Id() {
-        return (EAttribute)lifecycleTypeEClass.getEStructuralFeatures().get(1);
+        return (EAttribute)lifecycleTypeEClass.getEStructuralFeatures().get(2);
     }
 
     /**
@@ -3241,11 +3435,20 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
 
     /**
      * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getManagedBeanType_ManagedBeanExtension() {
+        return (EReference)managedBeanTypeEClass.getEStructuralFeatures().get(9);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
      * @generated
      */
 	public EAttribute getManagedBeanType_Id() {
-        return (EAttribute)managedBeanTypeEClass.getEStructuralFeatures().get(9);
+        return (EAttribute)managedBeanTypeEClass.getEStructuralFeatures().get(10);
     }
 
     /**
@@ -3628,11 +3831,20 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
 
     /**
      * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getNavigationRuleType_NavigationRuleExtension() {
+        return (EReference)navigationRuleTypeEClass.getEStructuralFeatures().get(5);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
      * @generated
      */
 	public EAttribute getNavigationRuleType_Id() {
-        return (EAttribute)navigationRuleTypeEClass.getEStructuralFeatures().get(5);
+        return (EAttribute)navigationRuleTypeEClass.getEStructuralFeatures().get(6);
     }
 
     /**
@@ -4303,11 +4515,20 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
 
     /**
      * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getRenderKitType_RenderKitExtension() {
+        return (EReference)renderKitTypeEClass.getEStructuralFeatures().get(6);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
      * @generated
      */
 	public EAttribute getRenderKitType_Id() {
-        return (EAttribute)renderKitTypeEClass.getEStructuralFeatures().get(6);
+        return (EAttribute)renderKitTypeEClass.getEStructuralFeatures().get(7);
     }
 
     /**
@@ -4573,11 +4794,20 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
 
     /**
      * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getValidatorType_ValidatorExtension() {
+        return (EReference)validatorTypeEClass.getEStructuralFeatures().get(7);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
      * @generated
      */
 	public EAttribute getValidatorType_Id() {
-        return (EAttribute)validatorTypeEClass.getEStructuralFeatures().get(7);
+        return (EAttribute)validatorTypeEClass.getEStructuralFeatures().get(8);
     }
 
     /**
@@ -4693,6 +4923,195 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
      * <!-- end-user-doc -->
      * @generated
      */
+    public EClass getResourceBundleType() {
+        return resourceBundleTypeEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getResourceBundleType_Description() {
+        return (EReference)resourceBundleTypeEClass.getEStructuralFeatures().get(0);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getResourceBundleType_DisplayName() {
+        return (EReference)resourceBundleTypeEClass.getEStructuralFeatures().get(1);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getResourceBundleType_Icon() {
+        return (EReference)resourceBundleTypeEClass.getEStructuralFeatures().get(2);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getResourceBundleType_BaseName() {
+        return (EReference)resourceBundleTypeEClass.getEStructuralFeatures().get(3);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getResourceBundleType_Var() {
+        return (EReference)resourceBundleTypeEClass.getEStructuralFeatures().get(4);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getResourceBundleType_Id() {
+        return (EAttribute)resourceBundleTypeEClass.getEStructuralFeatures().get(5);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getBaseNameType() {
+        return baseNameTypeEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getBaseNameType_TextContent() {
+        return (EAttribute)baseNameTypeEClass.getEStructuralFeatures().get(0);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getBaseNameType_Id() {
+        return (EAttribute)baseNameTypeEClass.getEStructuralFeatures().get(1);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getVarType() {
+        return varTypeEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getVarType_TextContent() {
+        return (EAttribute)varTypeEClass.getEStructuralFeatures().get(0);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getVarType_Id() {
+        return (EAttribute)varTypeEClass.getEStructuralFeatures().get(1);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getRenderKitExtensionType() {
+        return renderKitExtensionTypeEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getNavigationRuleExtensionType() {
+        return navigationRuleExtensionTypeEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getValidatorExtensionType() {
+        return validatorExtensionTypeEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getFacesConfigExtensionType() {
+        return facesConfigExtensionTypeEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getFactoryExtensionType() {
+        return factoryExtensionTypeEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getLifecycleExtensionType() {
+        return lifecycleExtensionTypeEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getManagedBeanExtensionType() {
+        return managedBeanExtensionTypeEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getConverterExtensionType() {
+        return converterExtensionTypeEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     public EClass getExtensionType() {
         return extensionTypeEClass;
     }
@@ -4722,6 +5141,15 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
      */
     public EAttribute getExtensionType_Id() {
         return (EAttribute)extensionTypeEClass.getEStructuralFeatures().get(2);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getApplicationExtensionType() {
+        return applicationExtensionTypeEClass;
     }
 
     /**
@@ -4771,6 +5199,9 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
         createEReference(applicationTypeEClass, APPLICATION_TYPE__VARIABLE_RESOLVER);
         createEReference(applicationTypeEClass, APPLICATION_TYPE__LOCALE_CONFIG);
         createEAttribute(applicationTypeEClass, APPLICATION_TYPE__ID);
+        createEReference(applicationTypeEClass, APPLICATION_TYPE__EL_RESOLVER);
+        createEReference(applicationTypeEClass, APPLICATION_TYPE__RESOURCE_BUNDLE);
+        createEReference(applicationTypeEClass, APPLICATION_TYPE__APPLICATION_EXTENSION);
 
         attributeClassTypeEClass = createEClass(ATTRIBUTE_CLASS_TYPE);
         createEAttribute(attributeClassTypeEClass, ATTRIBUTE_CLASS_TYPE__TEXT_CONTENT);
@@ -4840,6 +5271,7 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
         createEReference(converterTypeEClass, CONVERTER_TYPE__CONVERTER_CLASS);
         createEReference(converterTypeEClass, CONVERTER_TYPE__ATTRIBUTE);
         createEReference(converterTypeEClass, CONVERTER_TYPE__PROPERTY);
+        createEReference(converterTypeEClass, CONVERTER_TYPE__CONVERTER_EXTENSION);
         createEAttribute(converterTypeEClass, CONVERTER_TYPE__ID);
 
         defaultLocaleTypeEClass = createEClass(DEFAULT_LOCALE_TYPE);
@@ -4970,6 +5402,7 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
         createEReference(facesConfigTypeEClass, FACES_CONFIG_TYPE__RENDER_KIT);
         createEReference(facesConfigTypeEClass, FACES_CONFIG_TYPE__LIFECYCLE);
         createEReference(facesConfigTypeEClass, FACES_CONFIG_TYPE__VALIDATOR);
+        createEReference(facesConfigTypeEClass, FACES_CONFIG_TYPE__FACES_CONFIG_EXTENSION);
         createEAttribute(facesConfigTypeEClass, FACES_CONFIG_TYPE__XMLNS);
         createEAttribute(facesConfigTypeEClass, FACES_CONFIG_TYPE__ID);
 
@@ -4996,6 +5429,7 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
         createEReference(factoryTypeEClass, FACTORY_TYPE__FACES_CONTEXT_FACTORY);
         createEReference(factoryTypeEClass, FACTORY_TYPE__LIFECYCLE_FACTORY);
         createEReference(factoryTypeEClass, FACTORY_TYPE__RENDER_KIT_FACTORY);
+        createEReference(factoryTypeEClass, FACTORY_TYPE__FACTORY_EXTENSION);
         createEAttribute(factoryTypeEClass, FACTORY_TYPE__ID);
 
         fromActionTypeEClass = createEClass(FROM_ACTION_TYPE);
@@ -5034,6 +5468,7 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
 
         lifecycleTypeEClass = createEClass(LIFECYCLE_TYPE);
         createEReference(lifecycleTypeEClass, LIFECYCLE_TYPE__PHASE_LISTENER);
+        createEReference(lifecycleTypeEClass, LIFECYCLE_TYPE__LIFECYCLE_EXTENSION);
         createEAttribute(lifecycleTypeEClass, LIFECYCLE_TYPE__ID);
 
         listEntriesTypeEClass = createEClass(LIST_ENTRIES_TYPE);
@@ -5069,6 +5504,7 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
         createEReference(managedBeanTypeEClass, MANAGED_BEAN_TYPE__MANAGED_PROPERTY);
         createEReference(managedBeanTypeEClass, MANAGED_BEAN_TYPE__MAP_ENTRIES);
         createEReference(managedBeanTypeEClass, MANAGED_BEAN_TYPE__LIST_ENTRIES);
+        createEReference(managedBeanTypeEClass, MANAGED_BEAN_TYPE__MANAGED_BEAN_EXTENSION);
         createEAttribute(managedBeanTypeEClass, MANAGED_BEAN_TYPE__ID);
 
         managedPropertyTypeEClass = createEClass(MANAGED_PROPERTY_TYPE);
@@ -5119,6 +5555,7 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
         createEReference(navigationRuleTypeEClass, NAVIGATION_RULE_TYPE__ICON);
         createEReference(navigationRuleTypeEClass, NAVIGATION_RULE_TYPE__FROM_VIEW_ID);
         createEReference(navigationRuleTypeEClass, NAVIGATION_RULE_TYPE__NAVIGATION_CASE);
+        createEReference(navigationRuleTypeEClass, NAVIGATION_RULE_TYPE__NAVIGATION_RULE_EXTENSION);
         createEAttribute(navigationRuleTypeEClass, NAVIGATION_RULE_TYPE__ID);
 
         nullValueTypeEClass = createEClass(NULL_VALUE_TYPE);
@@ -5213,6 +5650,7 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
         createEReference(renderKitTypeEClass, RENDER_KIT_TYPE__RENDER_KIT_ID);
         createEReference(renderKitTypeEClass, RENDER_KIT_TYPE__RENDER_KIT_CLASS);
         createEReference(renderKitTypeEClass, RENDER_KIT_TYPE__RENDERER);
+        createEReference(renderKitTypeEClass, RENDER_KIT_TYPE__RENDER_KIT_EXTENSION);
         createEAttribute(renderKitTypeEClass, RENDER_KIT_TYPE__ID);
 
         smallIconTypeEClass = createEClass(SMALL_ICON_TYPE);
@@ -5251,6 +5689,7 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
         createEReference(validatorTypeEClass, VALIDATOR_TYPE__VALIDATOR_CLASS);
         createEReference(validatorTypeEClass, VALIDATOR_TYPE__ATTRIBUTE);
         createEReference(validatorTypeEClass, VALIDATOR_TYPE__PROPERTY);
+        createEReference(validatorTypeEClass, VALIDATOR_TYPE__VALIDATOR_EXTENSION);
         createEAttribute(validatorTypeEClass, VALIDATOR_TYPE__ID);
 
         valueClassTypeEClass = createEClass(VALUE_CLASS_TYPE);
@@ -5273,6 +5712,44 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
         createEReference(extensionTypeEClass, EXTENSION_TYPE__CHILD_NODES);
         createEAttribute(extensionTypeEClass, EXTENSION_TYPE__TEXT_CONTENT);
         createEAttribute(extensionTypeEClass, EXTENSION_TYPE__ID);
+
+        applicationExtensionTypeEClass = createEClass(APPLICATION_EXTENSION_TYPE);
+
+        converterExtensionTypeEClass = createEClass(CONVERTER_EXTENSION_TYPE);
+
+        elResolverTypeEClass = createEClass(EL_RESOLVER_TYPE);
+        createEAttribute(elResolverTypeEClass, EL_RESOLVER_TYPE__TEXT_CONTENT);
+        createEAttribute(elResolverTypeEClass, EL_RESOLVER_TYPE__ID);
+
+        facesConfigExtensionTypeEClass = createEClass(FACES_CONFIG_EXTENSION_TYPE);
+
+        factoryExtensionTypeEClass = createEClass(FACTORY_EXTENSION_TYPE);
+
+        lifecycleExtensionTypeEClass = createEClass(LIFECYCLE_EXTENSION_TYPE);
+
+        managedBeanExtensionTypeEClass = createEClass(MANAGED_BEAN_EXTENSION_TYPE);
+
+        navigationRuleExtensionTypeEClass = createEClass(NAVIGATION_RULE_EXTENSION_TYPE);
+
+        validatorExtensionTypeEClass = createEClass(VALIDATOR_EXTENSION_TYPE);
+
+        resourceBundleTypeEClass = createEClass(RESOURCE_BUNDLE_TYPE);
+        createEReference(resourceBundleTypeEClass, RESOURCE_BUNDLE_TYPE__DESCRIPTION);
+        createEReference(resourceBundleTypeEClass, RESOURCE_BUNDLE_TYPE__DISPLAY_NAME);
+        createEReference(resourceBundleTypeEClass, RESOURCE_BUNDLE_TYPE__ICON);
+        createEReference(resourceBundleTypeEClass, RESOURCE_BUNDLE_TYPE__BASE_NAME);
+        createEReference(resourceBundleTypeEClass, RESOURCE_BUNDLE_TYPE__VAR);
+        createEAttribute(resourceBundleTypeEClass, RESOURCE_BUNDLE_TYPE__ID);
+
+        baseNameTypeEClass = createEClass(BASE_NAME_TYPE);
+        createEAttribute(baseNameTypeEClass, BASE_NAME_TYPE__TEXT_CONTENT);
+        createEAttribute(baseNameTypeEClass, BASE_NAME_TYPE__ID);
+
+        varTypeEClass = createEClass(VAR_TYPE);
+        createEAttribute(varTypeEClass, VAR_TYPE__TEXT_CONTENT);
+        createEAttribute(varTypeEClass, VAR_TYPE__ID);
+
+        renderKitExtensionTypeEClass = createEClass(RENDER_KIT_EXTENSION_TYPE);
     }
 
     /**
@@ -5307,6 +5784,15 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
         facetExtensionTypeEClass.getESuperTypes().add(this.getExtensionType());
         propertyExtensionTypeEClass.getESuperTypes().add(this.getExtensionType());
         rendererExtensionTypeEClass.getESuperTypes().add(this.getExtensionType());
+        applicationExtensionTypeEClass.getESuperTypes().add(this.getExtensionType());
+        converterExtensionTypeEClass.getESuperTypes().add(this.getExtensionType());
+        facesConfigExtensionTypeEClass.getESuperTypes().add(this.getExtensionType());
+        factoryExtensionTypeEClass.getESuperTypes().add(this.getExtensionType());
+        lifecycleExtensionTypeEClass.getESuperTypes().add(this.getExtensionType());
+        managedBeanExtensionTypeEClass.getESuperTypes().add(this.getExtensionType());
+        navigationRuleExtensionTypeEClass.getESuperTypes().add(this.getExtensionType());
+        validatorExtensionTypeEClass.getESuperTypes().add(this.getExtensionType());
+        renderKitExtensionTypeEClass.getESuperTypes().add(this.getExtensionType());
 
         // Initialize classes and features; add operations and parameters
         initEClass(actionListenerTypeEClass, ActionListenerType.class, "ActionListenerType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -5328,6 +5814,9 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
         initEReference(getApplicationType_VariableResolver(), this.getVariableResolverType(), null, "variableResolver", null, 0, -1, ApplicationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getApplicationType_LocaleConfig(), this.getLocaleConfigType(), null, "localeConfig", null, 0, -1, ApplicationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEAttribute(getApplicationType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ApplicationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getApplicationType_ELResolver(), this.getELResolverType(), null, "eLResolver", null, 0, -1, ApplicationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getApplicationType_ResourceBundle(), this.getResourceBundleType(), null, "resourceBundle", null, 0, -1, ApplicationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getApplicationType_ApplicationExtension(), this.getApplicationExtensionType(), null, "applicationExtension", null, 0, -1, ApplicationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(attributeClassTypeEClass, AttributeClassType.class, "AttributeClassType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
         initEAttribute(getAttributeClassType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, AttributeClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -5397,6 +5886,7 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
         initEReference(getConverterType_ConverterClass(), this.getConverterClassType(), null, "converterClass", null, 1, 1, ConverterType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getConverterType_Attribute(), this.getAttributeType(), null, "attribute", null, 0, -1, ConverterType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getConverterType_Property(), this.getPropertyType(), null, "property", null, 0, -1, ConverterType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getConverterType_ConverterExtension(), this.getConverterExtensionType(), null, "converterExtension", null, 0, -1, ConverterType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEAttribute(getConverterType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ConverterType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(defaultLocaleTypeEClass, DefaultLocaleType.class, "DefaultLocaleType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -5527,6 +6017,7 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
         initEReference(getFacesConfigType_RenderKit(), this.getRenderKitType(), null, "renderKit", null, 0, -1, FacesConfigType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getFacesConfigType_Lifecycle(), this.getLifecycleType(), null, "lifecycle", null, 0, -1, FacesConfigType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getFacesConfigType_Validator(), this.getValidatorType(), null, "validator", null, 0, -1, FacesConfigType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getFacesConfigType_FacesConfigExtension(), this.getFacesConfigExtensionType(), null, "facesConfigExtension", null, 0, -1, FacesConfigType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEAttribute(getFacesConfigType_Xmlns(), theXMLTypePackage.getString(), "xmlns", "http://java.sun.com/JSF/Configuration", 0, 1, FacesConfigType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEAttribute(getFacesConfigType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, FacesConfigType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -5553,6 +6044,7 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
         initEReference(getFactoryType_FacesContextFactory(), this.getFacesContextFactoryType(), null, "facesContextFactory", null, 0, -1, FactoryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getFactoryType_LifecycleFactory(), this.getLifecycleFactoryType(), null, "lifecycleFactory", null, 0, -1, FactoryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getFactoryType_RenderKitFactory(), this.getRenderKitFactoryType(), null, "renderKitFactory", null, 0, -1, FactoryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getFactoryType_FactoryExtension(), this.getFactoryExtensionType(), null, "factoryExtension", null, 0, -1, FactoryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEAttribute(getFactoryType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, FactoryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(fromActionTypeEClass, FromActionType.class, "FromActionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -5591,6 +6083,7 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
 
         initEClass(lifecycleTypeEClass, LifecycleType.class, "LifecycleType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
         initEReference(getLifecycleType_PhaseListener(), this.getPhaseListenerType(), null, "phaseListener", null, 0, -1, LifecycleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getLifecycleType_LifecycleExtension(), this.getLifecycleExtensionType(), null, "lifecycleExtension", null, 0, -1, LifecycleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEAttribute(getLifecycleType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, LifecycleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(listEntriesTypeEClass, ListEntriesType.class, "ListEntriesType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -5626,6 +6119,7 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
         initEReference(getManagedBeanType_ManagedProperty(), this.getManagedPropertyType(), null, "managedProperty", null, 0, -1, ManagedBeanType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getManagedBeanType_MapEntries(), this.getMapEntriesType(), null, "mapEntries", null, 0, 1, ManagedBeanType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getManagedBeanType_ListEntries(), this.getListEntriesType(), null, "listEntries", null, 0, 1, ManagedBeanType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getManagedBeanType_ManagedBeanExtension(), this.getManagedBeanExtensionType(), null, "managedBeanExtension", null, 0, -1, ManagedBeanType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEAttribute(getManagedBeanType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ManagedBeanType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(managedPropertyTypeEClass, ManagedPropertyType.class, "ManagedPropertyType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -5676,6 +6170,7 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
         initEReference(getNavigationRuleType_Icon(), this.getIconType(), null, "icon", null, 0, -1, NavigationRuleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getNavigationRuleType_FromViewId(), this.getFromViewIdType(), null, "fromViewId", null, 0, 1, NavigationRuleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getNavigationRuleType_NavigationCase(), this.getNavigationCaseType(), null, "navigationCase", null, 0, -1, NavigationRuleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getNavigationRuleType_NavigationRuleExtension(), this.getNavigationRuleExtensionType(), null, "navigationRuleExtension", null, 0, -1, NavigationRuleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEAttribute(getNavigationRuleType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, NavigationRuleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(nullValueTypeEClass, NullValueType.class, "NullValueType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -5770,6 +6265,7 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
         initEReference(getRenderKitType_RenderKitId(), this.getRenderKitIdType(), null, "renderKitId", null, 0, 1, RenderKitType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getRenderKitType_RenderKitClass(), this.getRenderKitClassType(), null, "renderKitClass", null, 0, 1, RenderKitType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getRenderKitType_Renderer(), this.getRendererType(), null, "renderer", null, 0, -1, RenderKitType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getRenderKitType_RenderKitExtension(), this.getRenderKitExtensionType(), null, "renderKitExtension", null, 0, -1, RenderKitType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEAttribute(getRenderKitType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, RenderKitType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(smallIconTypeEClass, SmallIconType.class, "SmallIconType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -5808,6 +6304,7 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
         initEReference(getValidatorType_ValidatorClass(), this.getValidatorClassType(), null, "validatorClass", null, 1, 1, ValidatorType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getValidatorType_Attribute(), this.getAttributeType(), null, "attribute", null, 0, -1, ValidatorType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getValidatorType_Property(), this.getPropertyType(), null, "property", null, 0, -1, ValidatorType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getValidatorType_ValidatorExtension(), this.getValidatorExtensionType(), null, "validatorExtension", null, 0, -1, ValidatorType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEAttribute(getValidatorType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ValidatorType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(valueClassTypeEClass, ValueClassType.class, "ValueClassType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -5830,6 +6327,44 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
         initEReference(getExtensionType_ChildNodes(), this.getDynamicElement(), null, "childNodes", null, 0, -1, ExtensionType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEAttribute(getExtensionType_TextContent(), ecorePackage.getEString(), "textContent", null, 0, 1, ExtensionType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEAttribute(getExtensionType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ExtensionType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+        initEClass(applicationExtensionTypeEClass, ApplicationExtensionType.class, "ApplicationExtensionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+        initEClass(converterExtensionTypeEClass, ConverterExtensionType.class, "ConverterExtensionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+        initEClass(elResolverTypeEClass, ELResolverType.class, "ELResolverType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        initEAttribute(getELResolverType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ELResolverType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEAttribute(getELResolverType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ELResolverType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+        initEClass(facesConfigExtensionTypeEClass, FacesConfigExtensionType.class, "FacesConfigExtensionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+        initEClass(factoryExtensionTypeEClass, FactoryExtensionType.class, "FactoryExtensionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+        initEClass(lifecycleExtensionTypeEClass, LifecycleExtensionType.class, "LifecycleExtensionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+        initEClass(managedBeanExtensionTypeEClass, ManagedBeanExtensionType.class, "ManagedBeanExtensionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+        initEClass(navigationRuleExtensionTypeEClass, NavigationRuleExtensionType.class, "NavigationRuleExtensionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+        initEClass(validatorExtensionTypeEClass, ValidatorExtensionType.class, "ValidatorExtensionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+        initEClass(resourceBundleTypeEClass, ResourceBundleType.class, "ResourceBundleType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        initEReference(getResourceBundleType_Description(), this.getDescriptionType(), null, "description", null, 0, -1, ResourceBundleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getResourceBundleType_DisplayName(), this.getDisplayNameType(), null, "displayName", null, 0, -1, ResourceBundleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getResourceBundleType_Icon(), this.getIconType(), null, "icon", null, 0, -1, ResourceBundleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getResourceBundleType_BaseName(), this.getBaseNameType(), null, "baseName", null, 0, 1, ResourceBundleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getResourceBundleType_Var(), this.getVarType(), null, "var", null, 0, 1, ResourceBundleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEAttribute(getResourceBundleType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ResourceBundleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+        initEClass(baseNameTypeEClass, BaseNameType.class, "BaseNameType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        initEAttribute(getBaseNameType_TextContent(), ecorePackage.getEString(), "textContent", null, 0, 1, BaseNameType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEAttribute(getBaseNameType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, BaseNameType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+        initEClass(varTypeEClass, VarType.class, "VarType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        initEAttribute(getVarType_TextContent(), ecorePackage.getEString(), "textContent", null, 0, 1, VarType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEAttribute(getVarType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, VarType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+        initEClass(renderKitExtensionTypeEClass, RenderKitExtensionType.class, "RenderKitExtensionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
         // Create resource
         createResource(eNS_URI);
@@ -5983,6 +6518,36 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
              "kind", "attribute",
              "name", "id",
              "namespace", "##targetNamespace"
+           });		
+        addAnnotation
+          (getApplicationType_ELResolver(), 
+           source, 
+           new String[] {
+             "kind", "element",
+             "name", "el-resolver",
+             "namespace", "##targetNamespace"
+           });		
+        addAnnotation
+          (getApplicationType_ResourceBundle(), 
+           source, 
+           new String[] {
+             "kind", "element",
+             "name", "resource-bundle",
+             "namespace", "##targetNamespace"
+           });		
+        addAnnotation
+          (getApplicationType_ApplicationExtension(), 
+           source, 
+           new String[] {
+             "kind", "element",
+             "name", "application-extension",
+             "namespace", "##targetNamespace"
+           });		
+        addAnnotation
+          (applicationExtensionTypeEClass, 
+           source, 
+           new String[] {
+             "name", "application-extension_._type"
            });		
         addAnnotation
           (attributeClassTypeEClass, 
@@ -6410,12 +6975,26 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
              "namespace", "##targetNamespace"
            });		
         addAnnotation
+          (getConverterType_ConverterExtension(), 
+           source, 
+           new String[] {
+             "kind", "element",
+             "name", "converter-extension",
+             "namespace", "##targetNamespace"
+           });		
+        addAnnotation
           (getConverterType_Id(), 
            source, 
            new String[] {
              "kind", "attribute",
              "name", "id",
              "namespace", "##targetNamespace"
+           });		
+        addAnnotation
+          (converterExtensionTypeEClass, 
+           source, 
+           new String[] {
+             "name", "converter-extension_._type"
            });		
         addAnnotation
           (defaultLocaleTypeEClass, 
@@ -7212,6 +7791,28 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
              "namespace", "##targetNamespace"
            });		
         addAnnotation
+          (elResolverTypeEClass, 
+           source, 
+           new String[] {
+             "name", "el-resolver_._type",
+             "kind", "simple"
+           });		
+        addAnnotation
+          (getELResolverType_TextContent(), 
+           source, 
+           new String[] {
+             "name", ":0",
+             "kind", "simple"
+           });		
+        addAnnotation
+          (getELResolverType_Id(), 
+           source, 
+           new String[] {
+             "kind", "attribute",
+             "name", "id",
+             "namespace", "##targetNamespace"
+           });		
+        addAnnotation
           (getExtensionType_TextContent(), 
            source, 
            new String[] {
@@ -7314,6 +7915,14 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
              "namespace", "##targetNamespace"
            });		
         addAnnotation
+          (getFacesConfigType_FacesConfigExtension(), 
+           source, 
+           new String[] {
+             "kind", "element",
+             "name", "faces-config-extension",
+             "namespace", "##targetNamespace"
+           });		
+        addAnnotation
           (getFacesConfigType_Xmlns(), 
            source, 
            new String[] {
@@ -7328,6 +7937,12 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
              "kind", "attribute",
              "name", "id",
              "namespace", "##targetNamespace"
+           });		
+        addAnnotation
+          (facesConfigExtensionTypeEClass, 
+           source, 
+           new String[] {
+             "name", "faces-config-extension_._type"
            });		
         addAnnotation
           (facesContextFactoryTypeEClass, 
@@ -7474,12 +8089,26 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
              "namespace", "##targetNamespace"
            });		
         addAnnotation
+          (getFactoryType_FactoryExtension(), 
+           source, 
+           new String[] {
+             "kind", "element",
+             "name", "factory-type",
+             "namespace", "##targetNamespace"
+           });		
+        addAnnotation
           (getFactoryType_Id(), 
            source, 
            new String[] {
              "kind", "attribute",
              "name", "id",
              "namespace", "##targetNamespace"
+           });		
+        addAnnotation
+          (factoryExtensionTypeEClass, 
+           source, 
+           new String[] {
+             "name", "factory-extension_._type"
            });		
         addAnnotation
           (fromActionTypeEClass, 
@@ -7690,12 +8319,26 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
              "namespace", "##targetNamespace"
            });		
         addAnnotation
+          (getLifecycleType_LifecycleExtension(), 
+           source, 
+           new String[] {
+             "kind", "element",
+             "name", "lifecycle-extension",
+             "namespace", "##targetNamespace"
+           });		
+        addAnnotation
           (getLifecycleType_Id(), 
            source, 
            new String[] {
              "kind", "attribute",
              "name", "id",
              "namespace", "##targetNamespace"
+           });		
+        addAnnotation
+          (lifecycleExtensionTypeEClass, 
+           source, 
+           new String[] {
+             "name", "lifecycle-extension_._type"
            });		
         addAnnotation
           (listEntriesTypeEClass, 
@@ -7913,12 +8556,26 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
              "namespace", "##targetNamespace"
            });		
         addAnnotation
+          (getManagedBeanType_ManagedBeanExtension(), 
+           source, 
+           new String[] {
+             "kind", "element",
+             "name", "managed-bean-extension",
+             "namespace", "##targetNamespace"
+           });		
+        addAnnotation
           (getManagedBeanType_Id(), 
            source, 
            new String[] {
              "kind", "attribute",
              "name", "id",
              "namespace", "##targetNamespace"
+           });		
+        addAnnotation
+          (managedBeanExtensionTypeEClass, 
+           source, 
+           new String[] {
+             "name", "managed-bean-extension_._type"
            });		
         addAnnotation
           (managedPropertyTypeEClass, 
@@ -8248,12 +8905,26 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
              "namespace", "##targetNamespace"
            });		
         addAnnotation
+          (getNavigationRuleType_NavigationRuleExtension(), 
+           source, 
+           new String[] {
+             "kind", "element",
+             "name", "navigation-rule-extension",
+             "namespace", "##targetNamespace"
+           });		
+        addAnnotation
           (getNavigationRuleType_Id(), 
            source, 
            new String[] {
              "kind", "attribute",
              "name", "id",
              "namespace", "##targetNamespace"
+           });		
+        addAnnotation
+          (navigationRuleExtensionTypeEClass, 
+           source, 
+           new String[] {
+             "name", "navigation-rule-extension_._type"
            });		
         addAnnotation
           (nullValueTypeEClass, 
@@ -8816,12 +9487,26 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
              "namespace", "##targetNamespace"
            });		
         addAnnotation
+          (getRenderKitType_RenderKitExtension(), 
+           source, 
+           new String[] {
+             "kind", "element",
+             "name", "render-kit-extension",
+             "namespace", "##targetNamespace"
+           });		
+        addAnnotation
           (getRenderKitType_Id(), 
            source, 
            new String[] {
              "kind", "attribute",
              "name", "id",
              "namespace", "##targetNamespace"
+           });		
+        addAnnotation
+          (renderKitExtensionTypeEClass, 
+           source, 
+           new String[] {
+             "name", "render-kit-extension_._type"
            });		
         addAnnotation
           (smallIconTypeEClass, 
@@ -9041,12 +9726,26 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
              "namespace", "##targetNamespace"
            });		
         addAnnotation
+          (getValidatorType_ValidatorExtension(), 
+           source, 
+           new String[] {
+             "kind", "element",
+             "name", "validator-extension",
+             "namespace", "##targetNamespace"
+           });		
+        addAnnotation
           (getValidatorType_Id(), 
            source, 
            new String[] {
              "kind", "attribute",
              "name", "id",
              "namespace", "##targetNamespace"
+           });		
+        addAnnotation
+          (validatorExtensionTypeEClass, 
+           source, 
+           new String[] {
+             "name", "validator-extension_._type"
            });		
         addAnnotation
           (valueClassTypeEClass, 
@@ -9130,6 +9829,105 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
            });		
         addAnnotation
           (getViewHandlerType_Id(), 
+           source, 
+           new String[] {
+             "kind", "attribute",
+             "name", "id",
+             "namespace", "##targetNamespace"
+           });		
+        addAnnotation
+          (resourceBundleTypeEClass, 
+           source, 
+           new String[] {
+             "name", "resourceBundle_._type",
+             "kind", "elementOnly"
+           });		
+        addAnnotation
+          (getResourceBundleType_Description(), 
+           source, 
+           new String[] {
+             "kind", "element",
+             "name", "description",
+             "namespace", "##targetNamespace"
+           });		
+        addAnnotation
+          (getResourceBundleType_DisplayName(), 
+           source, 
+           new String[] {
+             "kind", "element",
+             "name", "display-name",
+             "namespace", "##targetNamespace"
+           });		
+        addAnnotation
+          (getResourceBundleType_Icon(), 
+           source, 
+           new String[] {
+             "kind", "element",
+             "name", "icon",
+             "namespace", "##targetNamespace"
+           });		
+        addAnnotation
+          (getResourceBundleType_BaseName(), 
+           source, 
+           new String[] {
+             "kind", "element",
+             "name", "base-name",
+             "namespace", "##targetNamespace"
+           });		
+        addAnnotation
+          (getResourceBundleType_Var(), 
+           source, 
+           new String[] {
+             "kind", "element",
+             "name", "var",
+             "namespace", "##targetNamespace"
+           });		
+        addAnnotation
+          (getResourceBundleType_Id(), 
+           source, 
+           new String[] {
+             "kind", "attribute",
+             "name", "id",
+             "namespace", "##targetNamespace"
+           });		
+        addAnnotation
+          (baseNameTypeEClass, 
+           source, 
+           new String[] {
+             "name", "base-name_._type",
+             "kind", "simple"
+           });		
+        addAnnotation
+          (getBaseNameType_TextContent(), 
+           source, 
+           new String[] {
+             "name", ":0",
+             "kind", "simple"
+           });		
+        addAnnotation
+          (getBaseNameType_Id(), 
+           source, 
+           new String[] {
+             "kind", "attribute",
+             "name", "id",
+             "namespace", "##targetNamespace"
+           });		
+        addAnnotation
+          (varTypeEClass, 
+           source, 
+           new String[] {
+             "name", "var_._type",
+             "kind", "simple"
+           });		
+        addAnnotation
+          (getVarType_TextContent(), 
+           source, 
+           new String[] {
+             "name", ":0",
+             "kind", "simple"
+           });		
+        addAnnotation
+          (getVarType_Id(), 
            source, 
            new String[] {
              "kind", "attribute",

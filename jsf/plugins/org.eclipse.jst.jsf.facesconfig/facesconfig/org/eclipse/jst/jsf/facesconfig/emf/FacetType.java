@@ -36,134 +36,134 @@ import org.eclipse.emf.ecore.EObject;
  * @model extendedMetaData="name='facet_._type' kind='elementOnly'"
  * @generated
  */
-public interface FacetType extends EObject{
-	/**
-	 * <!-- begin-user-doc -->
+public interface FacetType extends EObject {
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
 
-	/**
-	 * Returns the value of the '<em><b>Description</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.jst.jsf.facesconfig.emf.DescriptionType}.
-	 * <!-- begin-user-doc -->
+    /**
+     * Returns the value of the '<em><b>Description</b></em>' containment reference list.
+     * The list contents are of type {@link org.eclipse.jst.jsf.facesconfig.emf.DescriptionType}.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Description</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Description</em>' containment reference list.
-	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getFacetType_Description()
-	 * @model type="org.eclipse.jst.jsf.facesconfig.emf.DescriptionType" containment="true" resolveProxies="false"
-	 *        extendedMetaData="kind='element' name='description' namespace='##targetNamespace'"
-	 * @generated
-	 */
+     * @return the value of the '<em>Description</em>' containment reference list.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getFacetType_Description()
+     * @model type="org.eclipse.jst.jsf.facesconfig.emf.DescriptionType" containment="true"
+     *        extendedMetaData="kind='element' name='description' namespace='##targetNamespace'"
+     * @generated
+     */
 	EList getDescription();
 
-	/**
-	 * Returns the value of the '<em><b>Display Name</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType}.
-	 * <!-- begin-user-doc -->
+    /**
+     * Returns the value of the '<em><b>Display Name</b></em>' containment reference list.
+     * The list contents are of type {@link org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType}.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Display Name</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Display Name</em>' containment reference list.
-	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getFacetType_DisplayName()
-	 * @model type="org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType" containment="true" resolveProxies="false"
-	 *        extendedMetaData="kind='element' name='display-name' namespace='##targetNamespace'"
-	 * @generated
-	 */
+     * @return the value of the '<em>Display Name</em>' containment reference list.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getFacetType_DisplayName()
+     * @model type="org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType" containment="true"
+     *        extendedMetaData="kind='element' name='display-name' namespace='##targetNamespace'"
+     * @generated
+     */
 	EList getDisplayName();
 
-	/**
-	 * Returns the value of the '<em><b>Icon</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.jst.jsf.facesconfig.emf.IconType}.
-	 * <!-- begin-user-doc -->
+    /**
+     * Returns the value of the '<em><b>Icon</b></em>' containment reference list.
+     * The list contents are of type {@link org.eclipse.jst.jsf.facesconfig.emf.IconType}.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Icon</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Icon</em>' containment reference list.
-	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getFacetType_Icon()
-	 * @model type="org.eclipse.jst.jsf.facesconfig.emf.IconType" containment="true" resolveProxies="false"
-	 *        extendedMetaData="kind='element' name='icon' namespace='##targetNamespace'"
-	 * @generated
-	 */
+     * @return the value of the '<em>Icon</em>' containment reference list.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getFacetType_Icon()
+     * @model type="org.eclipse.jst.jsf.facesconfig.emf.IconType" containment="true"
+     *        extendedMetaData="kind='element' name='icon' namespace='##targetNamespace'"
+     * @generated
+     */
 	EList getIcon();
 
-	/**
-	 * Returns the value of the '<em><b>Facet Name</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
+    /**
+     * Returns the value of the '<em><b>Facet Name</b></em>' containment reference.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Facet Name</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Facet Name</em>' containment reference.
-	 * @see #setFacetName(FacetNameType)
-	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getFacetType_FacetName()
-	 * @model containment="true" resolveProxies="false" required="true"
-	 *        extendedMetaData="kind='element' name='facet-name' namespace='##targetNamespace'"
-	 * @generated
-	 */
+     * @return the value of the '<em>Facet Name</em>' containment reference.
+     * @see #setFacetName(FacetNameType)
+     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getFacetType_FacetName()
+     * @model containment="true" required="true"
+     *        extendedMetaData="kind='element' name='facet-name' namespace='##targetNamespace'"
+     * @generated
+     */
 	FacetNameType getFacetName();
 
-	/**
-	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.FacetType#getFacetName <em>Facet Name</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+    /**
+     * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.FacetType#getFacetName <em>Facet Name</em>}' containment reference.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Facet Name</em>' containment reference.
-	 * @see #getFacetName()
-	 * @generated
-	 */
+     * @param value the new value of the '<em>Facet Name</em>' containment reference.
+     * @see #getFacetName()
+     * @generated
+     */
 	void setFacetName(FacetNameType value);
 
-	/**
-	 * Returns the value of the '<em><b>Facet Extension</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.jst.jsf.facesconfig.emf.FacetExtensionType}.
-	 * <!-- begin-user-doc -->
+    /**
+     * Returns the value of the '<em><b>Facet Extension</b></em>' containment reference list.
+     * The list contents are of type {@link org.eclipse.jst.jsf.facesconfig.emf.FacetExtensionType}.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Facet Extension</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Facet Extension</em>' containment reference list.
-	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getFacetType_FacetExtension()
-	 * @model type="org.eclipse.jst.jsf.facesconfig.emf.FacetExtensionType" containment="true" resolveProxies="false"
-	 *        extendedMetaData="kind='element' name='facet-extension' namespace='##targetNamespace'"
-	 * @generated
-	 */
+     * @return the value of the '<em>Facet Extension</em>' containment reference list.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getFacetType_FacetExtension()
+     * @model type="org.eclipse.jst.jsf.facesconfig.emf.FacetExtensionType" containment="true"
+     *        extendedMetaData="kind='element' name='facet-extension' namespace='##targetNamespace'"
+     * @generated
+     */
 	EList getFacetExtension();
 
-	/**
-	 * Returns the value of the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+    /**
+     * Returns the value of the '<em><b>Id</b></em>' attribute.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Id</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Id</em>' attribute.
-	 * @see #setId(String)
-	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getFacetType_Id()
-	 * @model unique="false" id="true" dataType="org.eclipse.emf.ecore.xml.type.ID"
-	 *        extendedMetaData="kind='attribute' name='id' namespace='##targetNamespace'"
-	 * @generated
-	 */
+     * @return the value of the '<em>Id</em>' attribute.
+     * @see #setId(String)
+     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getFacetType_Id()
+     * @model unique="false" id="true" dataType="org.eclipse.emf.ecore.xml.type.ID"
+     *        extendedMetaData="kind='attribute' name='id' namespace='##targetNamespace'"
+     * @generated
+     */
 	String getId();
 
-	/**
-	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.FacetType#getId <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
+    /**
+     * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.FacetType#getId <em>Id</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Id</em>' attribute.
-	 * @see #getId()
-	 * @generated
-	 */
+     * @param value the new value of the '<em>Id</em>' attribute.
+     * @see #getId()
+     * @generated
+     */
 	void setId(String value);
 
 } // FacetType

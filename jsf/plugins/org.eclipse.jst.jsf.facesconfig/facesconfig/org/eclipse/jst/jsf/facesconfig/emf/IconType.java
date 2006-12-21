@@ -33,119 +33,119 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface IconType extends EObject {
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
 
-	/**
-	 * Returns the value of the '<em><b>Small Icon</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
+    /**
+     * Returns the value of the '<em><b>Small Icon</b></em>' containment reference.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Small Icon</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Small Icon</em>' containment reference.
-	 * @see #setSmallIcon(SmallIconType)
-	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getIconType_SmallIcon()
-	 * @model containment="true" resolveProxies="false"
-	 *        extendedMetaData="kind='element' name='small-icon' namespace='##targetNamespace'"
-	 * @generated
-	 */
+     * @return the value of the '<em>Small Icon</em>' containment reference.
+     * @see #setSmallIcon(SmallIconType)
+     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getIconType_SmallIcon()
+     * @model containment="true"
+     *        extendedMetaData="kind='element' name='small-icon' namespace='##targetNamespace'"
+     * @generated
+     */
 	SmallIconType getSmallIcon();
 
-	/**
-	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.IconType#getSmallIcon <em>Small Icon</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+    /**
+     * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.IconType#getSmallIcon <em>Small Icon</em>}' containment reference.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Small Icon</em>' containment reference.
-	 * @see #getSmallIcon()
-	 * @generated
-	 */
+     * @param value the new value of the '<em>Small Icon</em>' containment reference.
+     * @see #getSmallIcon()
+     * @generated
+     */
 	void setSmallIcon(SmallIconType value);
 
-	/**
-	 * Returns the value of the '<em><b>Large Icon</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
+    /**
+     * Returns the value of the '<em><b>Large Icon</b></em>' containment reference.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Large Icon</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Large Icon</em>' containment reference.
-	 * @see #setLargeIcon(LargeIconType)
-	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getIconType_LargeIcon()
-	 * @model containment="true" resolveProxies="false"
-	 *        extendedMetaData="kind='element' name='large-icon' namespace='##targetNamespace'"
-	 * @generated
-	 */
+     * @return the value of the '<em>Large Icon</em>' containment reference.
+     * @see #setLargeIcon(LargeIconType)
+     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getIconType_LargeIcon()
+     * @model containment="true"
+     *        extendedMetaData="kind='element' name='large-icon' namespace='##targetNamespace'"
+     * @generated
+     */
 	LargeIconType getLargeIcon();
 
-	/**
-	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.IconType#getLargeIcon <em>Large Icon</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+    /**
+     * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.IconType#getLargeIcon <em>Large Icon</em>}' containment reference.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Large Icon</em>' containment reference.
-	 * @see #getLargeIcon()
-	 * @generated
-	 */
+     * @param value the new value of the '<em>Large Icon</em>' containment reference.
+     * @see #getLargeIcon()
+     * @generated
+     */
 	void setLargeIcon(LargeIconType value);
 
-	/**
-	 * Returns the value of the '<em><b>Lang</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+    /**
+     * Returns the value of the '<em><b>Lang</b></em>' attribute.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Lang</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Lang</em>' attribute.
-	 * @see #setLang(String)
-	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getIconType_Lang()
-	 * @model unique="false" dataType="org.eclipse.emf.ecore.xml.type.Language"
-	 *        extendedMetaData="kind='attribute' name='lang' namespace='http://www.w3.org/XML/1998/namespace'"
-	 * @generated
-	 */
+     * @return the value of the '<em>Lang</em>' attribute.
+     * @see #setLang(String)
+     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getIconType_Lang()
+     * @model unique="false" dataType="org.eclipse.emf.ecore.xml.type.Language"
+     *        extendedMetaData="kind='attribute' name='lang' namespace='http://www.w3.org/XML/1998/namespace'"
+     * @generated
+     */
 	String getLang();
 
-	/**
-	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.IconType#getLang <em>Lang</em>}' attribute.
-	 * <!-- begin-user-doc -->
+    /**
+     * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.IconType#getLang <em>Lang</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Lang</em>' attribute.
-	 * @see #getLang()
-	 * @generated
-	 */
+     * @param value the new value of the '<em>Lang</em>' attribute.
+     * @see #getLang()
+     * @generated
+     */
 	void setLang(String value);
 
-	/**
-	 * Returns the value of the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+    /**
+     * Returns the value of the '<em><b>Id</b></em>' attribute.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Id</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Id</em>' attribute.
-	 * @see #setId(String)
-	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getIconType_Id()
-	 * @model unique="false" id="true" dataType="org.eclipse.emf.ecore.xml.type.ID"
-	 *        extendedMetaData="kind='attribute' name='id' namespace='##targetNamespace'"
-	 * @generated
-	 */
+     * @return the value of the '<em>Id</em>' attribute.
+     * @see #setId(String)
+     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getIconType_Id()
+     * @model unique="false" id="true" dataType="org.eclipse.emf.ecore.xml.type.ID"
+     *        extendedMetaData="kind='attribute' name='id' namespace='##targetNamespace'"
+     * @generated
+     */
 	String getId();
 
-	/**
-	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.IconType#getId <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
+    /**
+     * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.IconType#getId <em>Id</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Id</em>' attribute.
-	 * @see #getId()
-	 * @generated
-	 */
+     * @param value the new value of the '<em>Id</em>' attribute.
+     * @see #getId()
+     * @generated
+     */
 	void setId(String value);
 
 } // IconType

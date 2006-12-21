@@ -33,15 +33,16 @@ public class ConverterTranslator extends Translator {
 		
 		FacesConfigPackage facesPackage = FacesConfigPackage.eINSTANCE;
 		return new Translator[] {
-				new DescriptionTranslator("description", facesPackage.getConverterType_Description()), //$NON-NLS-1$
-				new DisplayNameTranslator("display-name", facesPackage.getConverterType_DisplayName()), //$NON-NLS-1$
-				new IconTranslator("icon", facesPackage.getConverterType_Icon()), //$NON-NLS-1$
-				new ConverterIdTranslator("converter-id", facesPackage.getConverterType_ConverterId()), //$NON-NLS-1$
-				new ConverterForClassTranslator("converter-for-class", facesPackage.getConverterType_ConverterForClass()), //$NON-NLS-1$
-				new ConverterClassTranslator("converter-class", facesPackage.getConverterType_ConverterClass()), //$NON-NLS-1$
-				new AttributeTranslator("attribute", facesPackage.getConverterType_Attribute()), //$NON-NLS-1$
-				new PropertyTranslator("property", facesPackage.getConverterType_Property()), //$NON-NLS-1$
-				new Translator("id", facesPackage.getConverterType_Id(), DOM_ATTRIBUTE) //$NON-NLS-1$
+			new DescriptionTranslator("description", facesPackage.getConverterType_Description()), //$NON-NLS-1$
+			new DisplayNameTranslator("display-name", facesPackage.getConverterType_DisplayName()), //$NON-NLS-1$
+			new IconTranslator("icon", facesPackage.getConverterType_Icon()), //$NON-NLS-1$
+			new ConverterIdTranslator("converter-id", facesPackage.getConverterType_ConverterId()), //$NON-NLS-1$
+			new ConverterForClassTranslator("converter-for-class", facesPackage.getConverterType_ConverterForClass()), //$NON-NLS-1$
+			new ConverterClassTranslator("converter-class", facesPackage.getConverterType_ConverterClass()), //$NON-NLS-1$
+			new AttributeTranslator("attribute", facesPackage.getConverterType_Attribute()), //$NON-NLS-1$
+			new PropertyTranslator("property", facesPackage.getConverterType_Property()), //$NON-NLS-1$
+            new ConverterExtensionTranslator("converter-extension", facesPackage.getConverterType_ConverterExtension()), //$NON-NLS-1$
+			new Translator("id", facesPackage.getConverterType_Id(), DOM_ATTRIBUTE) //$NON-NLS-1$
 		};
 	}
 }

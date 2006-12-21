@@ -31,6 +31,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.jst.jsf.facesconfig.emf.ConverterType#getConverterClass <em>Converter Class</em>}</li>
  *   <li>{@link org.eclipse.jst.jsf.facesconfig.emf.ConverterType#getAttribute <em>Attribute</em>}</li>
  *   <li>{@link org.eclipse.jst.jsf.facesconfig.emf.ConverterType#getProperty <em>Property</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.facesconfig.emf.ConverterType#getConverterExtension <em>Converter Extension</em>}</li>
  *   <li>{@link org.eclipse.jst.jsf.facesconfig.emf.ConverterType#getId <em>Id</em>}</li>
  * </ul>
  * </p>
@@ -40,204 +41,221 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface ConverterType extends EObject {
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
 
-	/**
-	 * Returns the value of the '<em><b>Description</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.jst.jsf.facesconfig.emf.DescriptionType}.
-	 * <!-- begin-user-doc -->
+    /**
+     * Returns the value of the '<em><b>Description</b></em>' containment reference list.
+     * The list contents are of type {@link org.eclipse.jst.jsf.facesconfig.emf.DescriptionType}.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Description</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Description</em>' containment reference list.
-	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getConverterType_Description()
-	 * @model type="org.eclipse.jst.jsf.facesconfig.emf.DescriptionType" containment="true" resolveProxies="false"
-	 *        extendedMetaData="kind='element' name='description' namespace='##targetNamespace'"
-	 * @generated
-	 */
+     * @return the value of the '<em>Description</em>' containment reference list.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getConverterType_Description()
+     * @model type="org.eclipse.jst.jsf.facesconfig.emf.DescriptionType" containment="true"
+     *        extendedMetaData="kind='element' name='description' namespace='##targetNamespace'"
+     * @generated
+     */
 	EList getDescription();
 
-	/**
-	 * Returns the value of the '<em><b>Display Name</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType}.
-	 * <!-- begin-user-doc -->
+    /**
+     * Returns the value of the '<em><b>Display Name</b></em>' containment reference list.
+     * The list contents are of type {@link org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType}.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Display Name</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Display Name</em>' containment reference list.
-	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getConverterType_DisplayName()
-	 * @model type="org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType" containment="true" resolveProxies="false"
-	 *        extendedMetaData="kind='element' name='display-name' namespace='##targetNamespace'"
-	 * @generated
-	 */
+     * @return the value of the '<em>Display Name</em>' containment reference list.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getConverterType_DisplayName()
+     * @model type="org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType" containment="true"
+     *        extendedMetaData="kind='element' name='display-name' namespace='##targetNamespace'"
+     * @generated
+     */
 	EList getDisplayName();
 
-	/**
-	 * Returns the value of the '<em><b>Icon</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.jst.jsf.facesconfig.emf.IconType}.
-	 * <!-- begin-user-doc -->
+    /**
+     * Returns the value of the '<em><b>Icon</b></em>' containment reference list.
+     * The list contents are of type {@link org.eclipse.jst.jsf.facesconfig.emf.IconType}.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Icon</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Icon</em>' containment reference list.
-	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getConverterType_Icon()
-	 * @model type="org.eclipse.jst.jsf.facesconfig.emf.IconType" containment="true" resolveProxies="false"
-	 *        extendedMetaData="kind='element' name='icon' namespace='##targetNamespace'"
-	 * @generated
-	 */
+     * @return the value of the '<em>Icon</em>' containment reference list.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getConverterType_Icon()
+     * @model type="org.eclipse.jst.jsf.facesconfig.emf.IconType" containment="true"
+     *        extendedMetaData="kind='element' name='icon' namespace='##targetNamespace'"
+     * @generated
+     */
 	EList getIcon();
 
-	/**
-	 * Returns the value of the '<em><b>Converter Id</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
+    /**
+     * Returns the value of the '<em><b>Converter Id</b></em>' containment reference.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Converter Id</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Converter Id</em>' containment reference.
-	 * @see #setConverterId(ConverterIdType)
-	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getConverterType_ConverterId()
-	 * @model containment="true" resolveProxies="false"
-	 *        extendedMetaData="kind='element' name='converter-id' namespace='##targetNamespace'"
-	 * @generated
-	 */
+     * @return the value of the '<em>Converter Id</em>' containment reference.
+     * @see #setConverterId(ConverterIdType)
+     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getConverterType_ConverterId()
+     * @model containment="true"
+     *        extendedMetaData="kind='element' name='converter-id' namespace='##targetNamespace'"
+     * @generated
+     */
 	ConverterIdType getConverterId();
 
-	/**
-	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.ConverterType#getConverterId <em>Converter Id</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+    /**
+     * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.ConverterType#getConverterId <em>Converter Id</em>}' containment reference.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Converter Id</em>' containment reference.
-	 * @see #getConverterId()
-	 * @generated
-	 */
+     * @param value the new value of the '<em>Converter Id</em>' containment reference.
+     * @see #getConverterId()
+     * @generated
+     */
 	void setConverterId(ConverterIdType value);
 
-	/**
-	 * Returns the value of the '<em><b>Converter For Class</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
+    /**
+     * Returns the value of the '<em><b>Converter For Class</b></em>' containment reference.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Converter For Class</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Converter For Class</em>' containment reference.
-	 * @see #setConverterForClass(ConverterForClassType)
-	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getConverterType_ConverterForClass()
-	 * @model containment="true" resolveProxies="false"
-	 *        extendedMetaData="kind='element' name='converter-for-class' namespace='##targetNamespace'"
-	 * @generated
-	 */
+     * @return the value of the '<em>Converter For Class</em>' containment reference.
+     * @see #setConverterForClass(ConverterForClassType)
+     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getConverterType_ConverterForClass()
+     * @model containment="true"
+     *        extendedMetaData="kind='element' name='converter-for-class' namespace='##targetNamespace'"
+     * @generated
+     */
 	ConverterForClassType getConverterForClass();
 
-	/**
-	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.ConverterType#getConverterForClass <em>Converter For Class</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+    /**
+     * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.ConverterType#getConverterForClass <em>Converter For Class</em>}' containment reference.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Converter For Class</em>' containment reference.
-	 * @see #getConverterForClass()
-	 * @generated
-	 */
+     * @param value the new value of the '<em>Converter For Class</em>' containment reference.
+     * @see #getConverterForClass()
+     * @generated
+     */
 	void setConverterForClass(ConverterForClassType value);
 
-	/**
-	 * Returns the value of the '<em><b>Converter Class</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
+    /**
+     * Returns the value of the '<em><b>Converter Class</b></em>' containment reference.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Converter Class</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Converter Class</em>' containment reference.
-	 * @see #setConverterClass(ConverterClassType)
-	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getConverterType_ConverterClass()
-	 * @model containment="true" resolveProxies="false" required="true"
-	 *        extendedMetaData="kind='element' name='converter-class' namespace='##targetNamespace'"
-	 * @generated
-	 */
+     * @return the value of the '<em>Converter Class</em>' containment reference.
+     * @see #setConverterClass(ConverterClassType)
+     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getConverterType_ConverterClass()
+     * @model containment="true" required="true"
+     *        extendedMetaData="kind='element' name='converter-class' namespace='##targetNamespace'"
+     * @generated
+     */
 	ConverterClassType getConverterClass();
 
-	/**
-	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.ConverterType#getConverterClass <em>Converter Class</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+    /**
+     * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.ConverterType#getConverterClass <em>Converter Class</em>}' containment reference.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Converter Class</em>' containment reference.
-	 * @see #getConverterClass()
-	 * @generated
-	 */
+     * @param value the new value of the '<em>Converter Class</em>' containment reference.
+     * @see #getConverterClass()
+     * @generated
+     */
 	void setConverterClass(ConverterClassType value);
 
-	/**
-	 * Returns the value of the '<em><b>Attribute</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.jst.jsf.facesconfig.emf.AttributeType}.
-	 * <!-- begin-user-doc -->
+    /**
+     * Returns the value of the '<em><b>Attribute</b></em>' containment reference list.
+     * The list contents are of type {@link org.eclipse.jst.jsf.facesconfig.emf.AttributeType}.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Attribute</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Attribute</em>' containment reference list.
-	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getConverterType_Attribute()
-	 * @model type="org.eclipse.jst.jsf.facesconfig.emf.AttributeType" containment="true" resolveProxies="false"
-	 *        extendedMetaData="kind='element' name='attribute' namespace='##targetNamespace'"
-	 * @generated
-	 */
+     * @return the value of the '<em>Attribute</em>' containment reference list.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getConverterType_Attribute()
+     * @model type="org.eclipse.jst.jsf.facesconfig.emf.AttributeType" containment="true"
+     *        extendedMetaData="kind='element' name='attribute' namespace='##targetNamespace'"
+     * @generated
+     */
 	EList getAttribute();
 
-	/**
-	 * Returns the value of the '<em><b>Property</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.jst.jsf.facesconfig.emf.PropertyType}.
-	 * <!-- begin-user-doc -->
+    /**
+     * Returns the value of the '<em><b>Property</b></em>' containment reference list.
+     * The list contents are of type {@link org.eclipse.jst.jsf.facesconfig.emf.PropertyType}.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Property</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Property</em>' containment reference list.
-	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getConverterType_Property()
-	 * @model type="org.eclipse.jst.jsf.facesconfig.emf.PropertyType" containment="true" resolveProxies="false"
-	 *        extendedMetaData="kind='element' name='property' namespace='##targetNamespace'"
-	 * @generated
-	 */
+     * @return the value of the '<em>Property</em>' containment reference list.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getConverterType_Property()
+     * @model type="org.eclipse.jst.jsf.facesconfig.emf.PropertyType" containment="true"
+     *        extendedMetaData="kind='element' name='property' namespace='##targetNamespace'"
+     * @generated
+     */
 	EList getProperty();
 
-	/**
-	 * Returns the value of the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+    /**
+     * Returns the value of the '<em><b>Converter Extension</b></em>' containment reference list.
+     * The list contents are of type {@link org.eclipse.jst.jsf.facesconfig.emf.ConverterExtensionType}.
+     * <!-- begin-user-doc -->
+     * <p>
+     * If the meaning of the '<em>Converter Extension</em>' containment reference list isn't clear,
+     * there really should be more of a description here...
+     * </p>
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Converter Extension</em>' containment reference list.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getConverterType_ConverterExtension()
+     * @model type="org.eclipse.jst.jsf.facesconfig.emf.ConverterExtensionType" containment="true"
+     *        extendedMetaData="kind='element' name='converter-extension' namespace='##targetNamespace'"
+     * @generated
+     */
+    EList getConverterExtension();
+
+    /**
+     * Returns the value of the '<em><b>Id</b></em>' attribute.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Id</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Id</em>' attribute.
-	 * @see #setId(String)
-	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getConverterType_Id()
-	 * @model unique="false" id="true" dataType="org.eclipse.emf.ecore.xml.type.ID"
-	 *        extendedMetaData="kind='attribute' name='id' namespace='##targetNamespace'"
-	 * @generated
-	 */
+     * @return the value of the '<em>Id</em>' attribute.
+     * @see #setId(String)
+     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getConverterType_Id()
+     * @model unique="false" id="true" dataType="org.eclipse.emf.ecore.xml.type.ID"
+     *        extendedMetaData="kind='attribute' name='id' namespace='##targetNamespace'"
+     * @generated
+     */
 	String getId();
 
-	/**
-	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.ConverterType#getId <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
+    /**
+     * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.ConverterType#getId <em>Id</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Id</em>' attribute.
-	 * @see #getId()
-	 * @generated
-	 */
+     * @param value the new value of the '<em>Id</em>' attribute.
+     * @see #getId()
+     * @generated
+     */
 	void setId(String value);
 
 } // ConverterType

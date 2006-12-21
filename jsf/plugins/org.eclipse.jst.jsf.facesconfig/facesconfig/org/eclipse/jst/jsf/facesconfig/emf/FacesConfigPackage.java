@@ -330,13 +330,40 @@ public interface FacesConfigPackage extends EPackage {
 	int APPLICATION_TYPE__ID = 9;
 
     /**
+     * The feature id for the '<em><b>EL Resolver</b></em>' reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int APPLICATION_TYPE__EL_RESOLVER = 10;
+
+    /**
+     * The feature id for the '<em><b>Resource Bundle</b></em>' reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int APPLICATION_TYPE__RESOURCE_BUNDLE = 11;
+
+    /**
+     * The feature id for the '<em><b>Application Extension</b></em>' reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int APPLICATION_TYPE__APPLICATION_EXTENSION = 12;
+
+    /**
      * The number of structural features of the '<em>Application Type</em>' class.
      * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-	int APPLICATION_TYPE_FEATURE_COUNT = 10;
+	int APPLICATION_TYPE_FEATURE_COUNT = 13;
 
     /**
      * The meta object id for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.AttributeClassTypeImpl <em>Attribute Class Type</em>}' class.
@@ -1064,13 +1091,22 @@ public interface FacesConfigPackage extends EPackage {
 	int CONVERTER_TYPE__PROPERTY = 7;
 
     /**
+     * The feature id for the '<em><b>Converter Extension</b></em>' containment reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int CONVERTER_TYPE__CONVERTER_EXTENSION = 8;
+
+    /**
      * The feature id for the '<em><b>Id</b></em>' attribute.
      * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-	int CONVERTER_TYPE__ID = 8;
+	int CONVERTER_TYPE__ID = 9;
 
     /**
      * The number of structural features of the '<em>Converter Type</em>' class.
@@ -1079,7 +1115,7 @@ public interface FacesConfigPackage extends EPackage {
      * @generated
      * @ordered
      */
-	int CONVERTER_TYPE_FEATURE_COUNT = 9;
+	int CONVERTER_TYPE_FEATURE_COUNT = 10;
 
     /**
      * The meta object id for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.DefaultLocaleTypeImpl <em>Default Locale Type</em>}' class.
@@ -2143,6 +2179,16 @@ public interface FacesConfigPackage extends EPackage {
     int DYNAMIC_ELEMENT_FEATURE_COUNT = 4;
 
     /**
+     * The meta object id for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ELResolverTypeImpl <em>EL Resolver Type</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.jst.jsf.facesconfig.emf.impl.ELResolverTypeImpl
+     * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getELResolverType()
+     * @generated
+     */
+    int EL_RESOLVER_TYPE = 86;
+
+    /**
      * The meta object id for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigTypeImpl <em>Type</em>}' class.
      * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2243,13 +2289,22 @@ public interface FacesConfigPackage extends EPackage {
 	int FACES_CONFIG_TYPE__VALIDATOR = 9;
 
     /**
+     * The feature id for the '<em><b>Faces Config Extension</b></em>' reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int FACES_CONFIG_TYPE__FACES_CONFIG_EXTENSION = 10;
+
+    /**
      * The feature id for the '<em><b>Xmlns</b></em>' attribute.
      * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-	int FACES_CONFIG_TYPE__XMLNS = 10;
+	int FACES_CONFIG_TYPE__XMLNS = 11;
 
     /**
      * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -2258,7 +2313,7 @@ public interface FacesConfigPackage extends EPackage {
      * @generated
      * @ordered
      */
-	int FACES_CONFIG_TYPE__ID = 11;
+	int FACES_CONFIG_TYPE__ID = 12;
 
     /**
      * The number of structural features of the '<em>Type</em>' class.
@@ -2267,7 +2322,7 @@ public interface FacesConfigPackage extends EPackage {
      * @generated
      * @ordered
      */
-	int FACES_CONFIG_TYPE_FEATURE_COUNT = 12;
+	int FACES_CONFIG_TYPE_FEATURE_COUNT = 13;
 
     /**
      * The meta object id for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.FacesContextFactoryTypeImpl <em>Faces Context Factory Type</em>}' class.
@@ -2509,13 +2564,22 @@ public interface FacesConfigPackage extends EPackage {
 	int FACTORY_TYPE__RENDER_KIT_FACTORY = 3;
 
     /**
+     * The feature id for the '<em><b>Factory Extension</b></em>' reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int FACTORY_TYPE__FACTORY_EXTENSION = 4;
+
+    /**
      * The feature id for the '<em><b>Id</b></em>' attribute.
      * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-	int FACTORY_TYPE__ID = 4;
+	int FACTORY_TYPE__ID = 5;
 
     /**
      * The number of structural features of the '<em>Factory Type</em>' class.
@@ -2524,7 +2588,7 @@ public interface FacesConfigPackage extends EPackage {
      * @generated
      * @ordered
      */
-	int FACTORY_TYPE_FEATURE_COUNT = 5;
+	int FACTORY_TYPE_FEATURE_COUNT = 6;
 
     /**
      * The meta object id for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.FromActionTypeImpl <em>From Action Type</em>}' class.
@@ -2860,13 +2924,22 @@ public interface FacesConfigPackage extends EPackage {
 	int LIFECYCLE_TYPE__PHASE_LISTENER = 0;
 
     /**
+     * The feature id for the '<em><b>Lifecycle Extension</b></em>' containment reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int LIFECYCLE_TYPE__LIFECYCLE_EXTENSION = 1;
+
+    /**
      * The feature id for the '<em><b>Id</b></em>' attribute.
      * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-	int LIFECYCLE_TYPE__ID = 1;
+	int LIFECYCLE_TYPE__ID = 2;
 
     /**
      * The number of structural features of the '<em>Lifecycle Type</em>' class.
@@ -2875,7 +2948,7 @@ public interface FacesConfigPackage extends EPackage {
      * @generated
      * @ordered
      */
-	int LIFECYCLE_TYPE_FEATURE_COUNT = 2;
+	int LIFECYCLE_TYPE_FEATURE_COUNT = 3;
 
     /**
      * The meta object id for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ListEntriesTypeImpl <em>List Entries Type</em>}' class.
@@ -3181,13 +3254,22 @@ public interface FacesConfigPackage extends EPackage {
 	int MANAGED_BEAN_TYPE__LIST_ENTRIES = 8;
 
     /**
+     * The feature id for the '<em><b>Managed Bean Extension</b></em>' containment reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MANAGED_BEAN_TYPE__MANAGED_BEAN_EXTENSION = 9;
+
+    /**
      * The feature id for the '<em><b>Id</b></em>' attribute.
      * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-	int MANAGED_BEAN_TYPE__ID = 9;
+	int MANAGED_BEAN_TYPE__ID = 10;
 
     /**
      * The number of structural features of the '<em>Managed Bean Type</em>' class.
@@ -3196,7 +3278,7 @@ public interface FacesConfigPackage extends EPackage {
      * @generated
      * @ordered
      */
-	int MANAGED_BEAN_TYPE_FEATURE_COUNT = 10;
+	int MANAGED_BEAN_TYPE_FEATURE_COUNT = 11;
 
     /**
      * The meta object id for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ManagedPropertyTypeImpl <em>Managed Property Type</em>}' class.
@@ -3638,13 +3720,22 @@ public interface FacesConfigPackage extends EPackage {
 	int NAVIGATION_RULE_TYPE__NAVIGATION_CASE = 4;
 
     /**
+     * The feature id for the '<em><b>Navigation Rule Extension</b></em>' containment reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int NAVIGATION_RULE_TYPE__NAVIGATION_RULE_EXTENSION = 5;
+
+    /**
      * The feature id for the '<em><b>Id</b></em>' attribute.
      * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-	int NAVIGATION_RULE_TYPE__ID = 5;
+	int NAVIGATION_RULE_TYPE__ID = 6;
 
     /**
      * The number of structural features of the '<em>Navigation Rule Type</em>' class.
@@ -3653,7 +3744,7 @@ public interface FacesConfigPackage extends EPackage {
      * @generated
      * @ordered
      */
-	int NAVIGATION_RULE_TYPE_FEATURE_COUNT = 6;
+	int NAVIGATION_RULE_TYPE_FEATURE_COUNT = 7;
 
     /**
      * The meta object id for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.NullValueTypeImpl <em>Null Value Type</em>}' class.
@@ -4557,13 +4648,22 @@ public interface FacesConfigPackage extends EPackage {
 	int RENDER_KIT_TYPE__RENDERER = 5;
 
     /**
+     * The feature id for the '<em><b>Render Kit Extension</b></em>' containment reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int RENDER_KIT_TYPE__RENDER_KIT_EXTENSION = 6;
+
+    /**
      * The feature id for the '<em><b>Id</b></em>' attribute.
      * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-	int RENDER_KIT_TYPE__ID = 6;
+	int RENDER_KIT_TYPE__ID = 7;
 
     /**
      * The number of structural features of the '<em>Render Kit Type</em>' class.
@@ -4572,7 +4672,7 @@ public interface FacesConfigPackage extends EPackage {
      * @generated
      * @ordered
      */
-	int RENDER_KIT_TYPE_FEATURE_COUNT = 7;
+	int RENDER_KIT_TYPE_FEATURE_COUNT = 8;
 
     /**
      * The meta object id for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.SmallIconTypeImpl <em>Small Icon Type</em>}' class.
@@ -4907,13 +5007,22 @@ public interface FacesConfigPackage extends EPackage {
 	int VALIDATOR_TYPE__PROPERTY = 6;
 
     /**
+     * The feature id for the '<em><b>Validator Extension</b></em>' containment reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int VALIDATOR_TYPE__VALIDATOR_EXTENSION = 7;
+
+    /**
      * The feature id for the '<em><b>Id</b></em>' attribute.
      * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-	int VALIDATOR_TYPE__ID = 7;
+	int VALIDATOR_TYPE__ID = 8;
 
     /**
      * The number of structural features of the '<em>Validator Type</em>' class.
@@ -4922,7 +5031,7 @@ public interface FacesConfigPackage extends EPackage {
      * @generated
      * @ordered
      */
-	int VALIDATOR_TYPE_FEATURE_COUNT = 8;
+	int VALIDATOR_TYPE_FEATURE_COUNT = 9;
 
     /**
      * The meta object id for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ValueClassTypeImpl <em>Value Class Type</em>}' class.
@@ -5071,6 +5180,601 @@ public interface FacesConfigPackage extends EPackage {
      * @ordered
      */
 	int VIEW_HANDLER_TYPE_FEATURE_COUNT = 2;
+
+
+    /**
+     * The meta object id for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ApplicationExtensionTypeImpl <em>Application Extension Type</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.jst.jsf.facesconfig.emf.impl.ApplicationExtensionTypeImpl
+     * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getApplicationExtensionType()
+     * @generated
+     */
+    int APPLICATION_EXTENSION_TYPE = 84;
+
+    /**
+     * The feature id for the '<em><b>Child Nodes</b></em>' reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int APPLICATION_EXTENSION_TYPE__CHILD_NODES = EXTENSION_TYPE__CHILD_NODES;
+
+    /**
+     * The feature id for the '<em><b>Text Content</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int APPLICATION_EXTENSION_TYPE__TEXT_CONTENT = EXTENSION_TYPE__TEXT_CONTENT;
+
+    /**
+     * The feature id for the '<em><b>Id</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int APPLICATION_EXTENSION_TYPE__ID = EXTENSION_TYPE__ID;
+
+    /**
+     * The number of structural features of the '<em>Application Extension Type</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int APPLICATION_EXTENSION_TYPE_FEATURE_COUNT = EXTENSION_TYPE_FEATURE_COUNT + 0;
+
+    /**
+     * The meta object id for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ResourceBundleTypeImpl <em>Resource Bundle Type</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.jst.jsf.facesconfig.emf.impl.ResourceBundleTypeImpl
+     * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getResourceBundleType()
+     * @generated
+     */
+    int RESOURCE_BUNDLE_TYPE = 93;
+
+    /**
+     * The meta object id for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.BaseNameTypeImpl <em>Base Name Type</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.jst.jsf.facesconfig.emf.impl.BaseNameTypeImpl
+     * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getBaseNameType()
+     * @generated
+     */
+    int BASE_NAME_TYPE = 94;
+
+    /**
+     * The meta object id for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.VarTypeImpl <em>Var Type</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.jst.jsf.facesconfig.emf.impl.VarTypeImpl
+     * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getVarType()
+     * @generated
+     */
+    int VAR_TYPE = 95;
+
+    /**
+     * The meta object id for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigExtensionTypeImpl <em>Extension Type</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigExtensionTypeImpl
+     * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getFacesConfigExtensionType()
+     * @generated
+     */
+    int FACES_CONFIG_EXTENSION_TYPE = 87;
+
+    /**
+     * The meta object id for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.FactoryExtensionTypeImpl <em>Factory Extension Type</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FactoryExtensionTypeImpl
+     * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getFactoryExtensionType()
+     * @generated
+     */
+    int FACTORY_EXTENSION_TYPE = 88;
+
+    /**
+     * The meta object id for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.LifecycleExtensionTypeImpl <em>Lifecycle Extension Type</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.jst.jsf.facesconfig.emf.impl.LifecycleExtensionTypeImpl
+     * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getLifecycleExtensionType()
+     * @generated
+     */
+    int LIFECYCLE_EXTENSION_TYPE = 89;
+
+    /**
+     * The meta object id for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ConverterExtensionTypeImpl <em>Converter Extension Type</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.jst.jsf.facesconfig.emf.impl.ConverterExtensionTypeImpl
+     * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getConverterExtensionType()
+     * @generated
+     */
+    int CONVERTER_EXTENSION_TYPE = 85;
+
+    /**
+     * The feature id for the '<em><b>Child Nodes</b></em>' reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int CONVERTER_EXTENSION_TYPE__CHILD_NODES = EXTENSION_TYPE__CHILD_NODES;
+
+    /**
+     * The feature id for the '<em><b>Text Content</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int CONVERTER_EXTENSION_TYPE__TEXT_CONTENT = EXTENSION_TYPE__TEXT_CONTENT;
+
+    /**
+     * The feature id for the '<em><b>Id</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int CONVERTER_EXTENSION_TYPE__ID = EXTENSION_TYPE__ID;
+
+    /**
+     * The number of structural features of the '<em>Converter Extension Type</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int CONVERTER_EXTENSION_TYPE_FEATURE_COUNT = EXTENSION_TYPE_FEATURE_COUNT + 0;
+
+
+    /**
+     * The feature id for the '<em><b>Text Content</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EL_RESOLVER_TYPE__TEXT_CONTENT = 0;
+
+    /**
+     * The feature id for the '<em><b>Id</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EL_RESOLVER_TYPE__ID = 1;
+
+    /**
+     * The number of structural features of the '<em>EL Resolver Type</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int EL_RESOLVER_TYPE_FEATURE_COUNT = 2;
+
+    /**
+     * The feature id for the '<em><b>Child Nodes</b></em>' reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int FACES_CONFIG_EXTENSION_TYPE__CHILD_NODES = EXTENSION_TYPE__CHILD_NODES;
+
+    /**
+     * The feature id for the '<em><b>Text Content</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int FACES_CONFIG_EXTENSION_TYPE__TEXT_CONTENT = EXTENSION_TYPE__TEXT_CONTENT;
+
+    /**
+     * The feature id for the '<em><b>Id</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int FACES_CONFIG_EXTENSION_TYPE__ID = EXTENSION_TYPE__ID;
+
+    /**
+     * The number of structural features of the '<em>Extension Type</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int FACES_CONFIG_EXTENSION_TYPE_FEATURE_COUNT = EXTENSION_TYPE_FEATURE_COUNT + 0;
+
+
+    /**
+     * The feature id for the '<em><b>Child Nodes</b></em>' reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int FACTORY_EXTENSION_TYPE__CHILD_NODES = EXTENSION_TYPE__CHILD_NODES;
+
+    /**
+     * The feature id for the '<em><b>Text Content</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int FACTORY_EXTENSION_TYPE__TEXT_CONTENT = EXTENSION_TYPE__TEXT_CONTENT;
+
+    /**
+     * The feature id for the '<em><b>Id</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int FACTORY_EXTENSION_TYPE__ID = EXTENSION_TYPE__ID;
+
+    /**
+     * The number of structural features of the '<em>Factory Extension Type</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int FACTORY_EXTENSION_TYPE_FEATURE_COUNT = EXTENSION_TYPE_FEATURE_COUNT + 0;
+
+
+    /**
+     * The feature id for the '<em><b>Child Nodes</b></em>' reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int LIFECYCLE_EXTENSION_TYPE__CHILD_NODES = EXTENSION_TYPE__CHILD_NODES;
+
+    /**
+     * The feature id for the '<em><b>Text Content</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int LIFECYCLE_EXTENSION_TYPE__TEXT_CONTENT = EXTENSION_TYPE__TEXT_CONTENT;
+
+    /**
+     * The feature id for the '<em><b>Id</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int LIFECYCLE_EXTENSION_TYPE__ID = EXTENSION_TYPE__ID;
+
+    /**
+     * The number of structural features of the '<em>Lifecycle Extension Type</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int LIFECYCLE_EXTENSION_TYPE_FEATURE_COUNT = EXTENSION_TYPE_FEATURE_COUNT + 0;
+
+    /**
+     * The meta object id for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ManagedBeanExtensionTypeImpl <em>Managed Bean Extension Type</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.jst.jsf.facesconfig.emf.impl.ManagedBeanExtensionTypeImpl
+     * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getManagedBeanExtensionType()
+     * @generated
+     */
+    int MANAGED_BEAN_EXTENSION_TYPE = 90;
+
+    /**
+     * The feature id for the '<em><b>Child Nodes</b></em>' reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MANAGED_BEAN_EXTENSION_TYPE__CHILD_NODES = EXTENSION_TYPE__CHILD_NODES;
+
+    /**
+     * The feature id for the '<em><b>Text Content</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MANAGED_BEAN_EXTENSION_TYPE__TEXT_CONTENT = EXTENSION_TYPE__TEXT_CONTENT;
+
+    /**
+     * The feature id for the '<em><b>Id</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MANAGED_BEAN_EXTENSION_TYPE__ID = EXTENSION_TYPE__ID;
+
+    /**
+     * The number of structural features of the '<em>Managed Bean Extension Type</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MANAGED_BEAN_EXTENSION_TYPE_FEATURE_COUNT = EXTENSION_TYPE_FEATURE_COUNT + 0;
+
+    /**
+     * The meta object id for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.NavigationRuleExtensionTypeImpl <em>Navigation Rule Extension Type</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.jst.jsf.facesconfig.emf.impl.NavigationRuleExtensionTypeImpl
+     * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getNavigationRuleExtensionType()
+     * @generated
+     */
+    int NAVIGATION_RULE_EXTENSION_TYPE = 91;
+
+    /**
+     * The feature id for the '<em><b>Child Nodes</b></em>' reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int NAVIGATION_RULE_EXTENSION_TYPE__CHILD_NODES = EXTENSION_TYPE__CHILD_NODES;
+
+    /**
+     * The feature id for the '<em><b>Text Content</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int NAVIGATION_RULE_EXTENSION_TYPE__TEXT_CONTENT = EXTENSION_TYPE__TEXT_CONTENT;
+
+    /**
+     * The feature id for the '<em><b>Id</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int NAVIGATION_RULE_EXTENSION_TYPE__ID = EXTENSION_TYPE__ID;
+
+    /**
+     * The number of structural features of the '<em>Navigation Rule Extension Type</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int NAVIGATION_RULE_EXTENSION_TYPE_FEATURE_COUNT = EXTENSION_TYPE_FEATURE_COUNT + 0;
+
+
+    /**
+     * The meta object id for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ValidatorExtensionTypeImpl <em>Validator Extension Type</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.jst.jsf.facesconfig.emf.impl.ValidatorExtensionTypeImpl
+     * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getValidatorExtensionType()
+     * @generated
+     */
+    int VALIDATOR_EXTENSION_TYPE = 92;
+
+    /**
+     * The feature id for the '<em><b>Child Nodes</b></em>' reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int VALIDATOR_EXTENSION_TYPE__CHILD_NODES = EXTENSION_TYPE__CHILD_NODES;
+
+    /**
+     * The feature id for the '<em><b>Text Content</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int VALIDATOR_EXTENSION_TYPE__TEXT_CONTENT = EXTENSION_TYPE__TEXT_CONTENT;
+
+    /**
+     * The feature id for the '<em><b>Id</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int VALIDATOR_EXTENSION_TYPE__ID = EXTENSION_TYPE__ID;
+
+    /**
+     * The number of structural features of the '<em>Validator Extension Type</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int VALIDATOR_EXTENSION_TYPE_FEATURE_COUNT = EXTENSION_TYPE_FEATURE_COUNT + 0;
+
+
+    /**
+     * The feature id for the '<em><b>Description</b></em>' containment reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int RESOURCE_BUNDLE_TYPE__DESCRIPTION = 0;
+
+    /**
+     * The feature id for the '<em><b>Display Name</b></em>' containment reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int RESOURCE_BUNDLE_TYPE__DISPLAY_NAME = 1;
+
+    /**
+     * The feature id for the '<em><b>Icon</b></em>' containment reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int RESOURCE_BUNDLE_TYPE__ICON = 2;
+
+    /**
+     * The feature id for the '<em><b>Base Name</b></em>' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int RESOURCE_BUNDLE_TYPE__BASE_NAME = 3;
+
+    /**
+     * The feature id for the '<em><b>Var</b></em>' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int RESOURCE_BUNDLE_TYPE__VAR = 4;
+
+    /**
+     * The feature id for the '<em><b>Id</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int RESOURCE_BUNDLE_TYPE__ID = 5;
+
+    /**
+     * The number of structural features of the '<em>Resource Bundle Type</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int RESOURCE_BUNDLE_TYPE_FEATURE_COUNT = 6;
+
+    /**
+     * The feature id for the '<em><b>Text Content</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int BASE_NAME_TYPE__TEXT_CONTENT = 0;
+
+    /**
+     * The feature id for the '<em><b>Id</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int BASE_NAME_TYPE__ID = 1;
+
+    /**
+     * The number of structural features of the '<em>Base Name Type</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int BASE_NAME_TYPE_FEATURE_COUNT = 2;
+
+    /**
+     * The feature id for the '<em><b>Text Content</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int VAR_TYPE__TEXT_CONTENT = 0;
+
+    /**
+     * The feature id for the '<em><b>Id</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int VAR_TYPE__ID = 1;
+
+    /**
+     * The number of structural features of the '<em>Var Type</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int VAR_TYPE_FEATURE_COUNT = 2;
+
+
+    /**
+     * The meta object id for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.RenderKitExtensionTypeImpl <em>Render Kit Extension Type</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.jst.jsf.facesconfig.emf.impl.RenderKitExtensionTypeImpl
+     * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getRenderKitExtensionType()
+     * @generated
+     */
+    int RENDER_KIT_EXTENSION_TYPE = 96;
+
+    /**
+     * The feature id for the '<em><b>Child Nodes</b></em>' reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int RENDER_KIT_EXTENSION_TYPE__CHILD_NODES = EXTENSION_TYPE__CHILD_NODES;
+
+    /**
+     * The feature id for the '<em><b>Text Content</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int RENDER_KIT_EXTENSION_TYPE__TEXT_CONTENT = EXTENSION_TYPE__TEXT_CONTENT;
+
+    /**
+     * The feature id for the '<em><b>Id</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int RENDER_KIT_EXTENSION_TYPE__ID = EXTENSION_TYPE__ID;
+
+    /**
+     * The number of structural features of the '<em>Render Kit Extension Type</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int RENDER_KIT_EXTENSION_TYPE_FEATURE_COUNT = EXTENSION_TYPE_FEATURE_COUNT + 0;
 
 
     /**
@@ -5256,6 +5960,39 @@ public interface FacesConfigPackage extends EPackage {
      * @generated
      */
 	EAttribute getApplicationType_Id();
+
+    /**
+     * Returns the meta object for the reference list '{@link org.eclipse.jst.jsf.facesconfig.emf.ApplicationType#getELResolver <em>EL Resolver</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the reference list '<em>EL Resolver</em>'.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.ApplicationType#getELResolver()
+     * @see #getApplicationType()
+     * @generated
+     */
+    EReference getApplicationType_ELResolver();
+
+    /**
+     * Returns the meta object for the reference list '{@link org.eclipse.jst.jsf.facesconfig.emf.ApplicationType#getResourceBundle <em>Resource Bundle</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the reference list '<em>Resource Bundle</em>'.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.ApplicationType#getResourceBundle()
+     * @see #getApplicationType()
+     * @generated
+     */
+    EReference getApplicationType_ResourceBundle();
+
+    /**
+     * Returns the meta object for the reference list '{@link org.eclipse.jst.jsf.facesconfig.emf.ApplicationType#getApplicationExtension <em>Application Extension</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the reference list '<em>Application Extension</em>'.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.ApplicationType#getApplicationExtension()
+     * @see #getApplicationType()
+     * @generated
+     */
+    EReference getApplicationType_ApplicationExtension();
 
     /**
      * Returns the meta object for class '{@link org.eclipse.jst.jsf.facesconfig.emf.AttributeClassType <em>Attribute Class Type</em>}'.
@@ -5859,6 +6596,17 @@ public interface FacesConfigPackage extends EPackage {
      * @generated
      */
 	EReference getConverterType_Property();
+
+    /**
+     * Returns the meta object for the containment reference list '{@link org.eclipse.jst.jsf.facesconfig.emf.ConverterType#getConverterExtension <em>Converter Extension</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference list '<em>Converter Extension</em>'.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.ConverterType#getConverterExtension()
+     * @see #getConverterType()
+     * @generated
+     */
+    EReference getConverterType_ConverterExtension();
 
     /**
      * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.facesconfig.emf.ConverterType#getId <em>Id</em>}'.
@@ -7052,6 +7800,38 @@ public interface FacesConfigPackage extends EPackage {
     EAttribute getDynamicElement_TextContent();
 
     /**
+     * Returns the meta object for class '{@link org.eclipse.jst.jsf.facesconfig.emf.ELResolverType <em>EL Resolver Type</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>EL Resolver Type</em>'.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.ELResolverType
+     * @generated
+     */
+    EClass getELResolverType();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.facesconfig.emf.ELResolverType#getTextContent <em>Text Content</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Text Content</em>'.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.ELResolverType#getTextContent()
+     * @see #getELResolverType()
+     * @generated
+     */
+    EAttribute getELResolverType_TextContent();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.facesconfig.emf.ELResolverType#getId <em>Id</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Id</em>'.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.ELResolverType#getId()
+     * @see #getELResolverType()
+     * @generated
+     */
+    EAttribute getELResolverType_Id();
+
+    /**
      * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.facesconfig.emf.DynamicElement#getName <em>Name</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -7181,6 +7961,17 @@ public interface FacesConfigPackage extends EPackage {
      * @generated
      */
 	EReference getFacesConfigType_Validator();
+
+    /**
+     * Returns the meta object for the reference list '{@link org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType#getFacesConfigExtension <em>Faces Config Extension</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the reference list '<em>Faces Config Extension</em>'.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType#getFacesConfigExtension()
+     * @see #getFacesConfigType()
+     * @generated
+     */
+    EReference getFacesConfigType_FacesConfigExtension();
 
     /**
      * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType#getXmlns <em>Xmlns</em>}'.
@@ -7407,6 +8198,17 @@ public interface FacesConfigPackage extends EPackage {
      * @generated
      */
 	EReference getFactoryType_RenderKitFactory();
+
+    /**
+     * Returns the meta object for the reference list '{@link org.eclipse.jst.jsf.facesconfig.emf.FactoryType#getFactoryExtension <em>Factory Extension</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the reference list '<em>Factory Extension</em>'.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.FactoryType#getFactoryExtension()
+     * @see #getFactoryType()
+     * @generated
+     */
+    EReference getFactoryType_FactoryExtension();
 
     /**
      * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.facesconfig.emf.FactoryType#getId <em>Id</em>}'.
@@ -7717,6 +8519,17 @@ public interface FacesConfigPackage extends EPackage {
      * @generated
      */
 	EReference getLifecycleType_PhaseListener();
+
+    /**
+     * Returns the meta object for the containment reference list '{@link org.eclipse.jst.jsf.facesconfig.emf.LifecycleType#getLifecycleExtension <em>Lifecycle Extension</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference list '<em>Lifecycle Extension</em>'.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.LifecycleType#getLifecycleExtension()
+     * @see #getLifecycleType()
+     * @generated
+     */
+    EReference getLifecycleType_LifecycleExtension();
 
     /**
      * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.facesconfig.emf.LifecycleType#getId <em>Id</em>}'.
@@ -8030,6 +8843,17 @@ public interface FacesConfigPackage extends EPackage {
      * @generated
      */
 	EReference getManagedBeanType_ListEntries();
+
+    /**
+     * Returns the meta object for the containment reference list '{@link org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanType#getManagedBeanExtension <em>Managed Bean Extension</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference list '<em>Managed Bean Extension</em>'.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanType#getManagedBeanExtension()
+     * @see #getManagedBeanType()
+     * @generated
+     */
+    EReference getManagedBeanType_ManagedBeanExtension();
 
     /**
      * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanType#getId <em>Id</em>}'.
@@ -8496,6 +9320,17 @@ public interface FacesConfigPackage extends EPackage {
      * @generated
      */
 	EReference getNavigationRuleType_NavigationCase();
+
+    /**
+     * Returns the meta object for the containment reference list '{@link org.eclipse.jst.jsf.facesconfig.emf.NavigationRuleType#getNavigationRuleExtension <em>Navigation Rule Extension</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference list '<em>Navigation Rule Extension</em>'.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.NavigationRuleType#getNavigationRuleExtension()
+     * @see #getNavigationRuleType()
+     * @generated
+     */
+    EReference getNavigationRuleType_NavigationRuleExtension();
 
     /**
      * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.facesconfig.emf.NavigationRuleType#getId <em>Id</em>}'.
@@ -9304,6 +10139,17 @@ public interface FacesConfigPackage extends EPackage {
 	EReference getRenderKitType_Renderer();
 
     /**
+     * Returns the meta object for the containment reference list '{@link org.eclipse.jst.jsf.facesconfig.emf.RenderKitType#getRenderKitExtension <em>Render Kit Extension</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference list '<em>Render Kit Extension</em>'.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.RenderKitType#getRenderKitExtension()
+     * @see #getRenderKitType()
+     * @generated
+     */
+    EReference getRenderKitType_RenderKitExtension();
+
+    /**
      * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.facesconfig.emf.RenderKitType#getId <em>Id</em>}'.
      * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9626,6 +10472,17 @@ public interface FacesConfigPackage extends EPackage {
 	EReference getValidatorType_Property();
 
     /**
+     * Returns the meta object for the containment reference list '{@link org.eclipse.jst.jsf.facesconfig.emf.ValidatorType#getValidatorExtension <em>Validator Extension</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference list '<em>Validator Extension</em>'.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.ValidatorType#getValidatorExtension()
+     * @see #getValidatorType()
+     * @generated
+     */
+    EReference getValidatorType_ValidatorExtension();
+
+    /**
      * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.facesconfig.emf.ValidatorType#getId <em>Id</em>}'.
      * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9765,6 +10622,226 @@ public interface FacesConfigPackage extends EPackage {
 	EAttribute getViewHandlerType_Id();
 
     /**
+     * Returns the meta object for class '{@link org.eclipse.jst.jsf.facesconfig.emf.ResourceBundleType <em>Resource Bundle Type</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Resource Bundle Type</em>'.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.ResourceBundleType
+     * @generated
+     */
+    EClass getResourceBundleType();
+
+    /**
+     * Returns the meta object for the containment reference list '{@link org.eclipse.jst.jsf.facesconfig.emf.ResourceBundleType#getDescription <em>Description</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference list '<em>Description</em>'.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.ResourceBundleType#getDescription()
+     * @see #getResourceBundleType()
+     * @generated
+     */
+    EReference getResourceBundleType_Description();
+
+    /**
+     * Returns the meta object for the containment reference list '{@link org.eclipse.jst.jsf.facesconfig.emf.ResourceBundleType#getDisplayName <em>Display Name</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference list '<em>Display Name</em>'.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.ResourceBundleType#getDisplayName()
+     * @see #getResourceBundleType()
+     * @generated
+     */
+    EReference getResourceBundleType_DisplayName();
+
+    /**
+     * Returns the meta object for the containment reference list '{@link org.eclipse.jst.jsf.facesconfig.emf.ResourceBundleType#getIcon <em>Icon</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference list '<em>Icon</em>'.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.ResourceBundleType#getIcon()
+     * @see #getResourceBundleType()
+     * @generated
+     */
+    EReference getResourceBundleType_Icon();
+
+    /**
+     * Returns the meta object for the reference '{@link org.eclipse.jst.jsf.facesconfig.emf.ResourceBundleType#getBaseName <em>Base Name</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the reference '<em>Base Name</em>'.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.ResourceBundleType#getBaseName()
+     * @see #getResourceBundleType()
+     * @generated
+     */
+    EReference getResourceBundleType_BaseName();
+
+    /**
+     * Returns the meta object for the reference '{@link org.eclipse.jst.jsf.facesconfig.emf.ResourceBundleType#getVar <em>Var</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the reference '<em>Var</em>'.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.ResourceBundleType#getVar()
+     * @see #getResourceBundleType()
+     * @generated
+     */
+    EReference getResourceBundleType_Var();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.facesconfig.emf.ResourceBundleType#getId <em>Id</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Id</em>'.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.ResourceBundleType#getId()
+     * @see #getResourceBundleType()
+     * @generated
+     */
+    EAttribute getResourceBundleType_Id();
+
+    /**
+     * Returns the meta object for class '{@link org.eclipse.jst.jsf.facesconfig.emf.BaseNameType <em>Base Name Type</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Base Name Type</em>'.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.BaseNameType
+     * @generated
+     */
+    EClass getBaseNameType();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.facesconfig.emf.BaseNameType#getTextContent <em>Text Content</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Text Content</em>'.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.BaseNameType#getTextContent()
+     * @see #getBaseNameType()
+     * @generated
+     */
+    EAttribute getBaseNameType_TextContent();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.facesconfig.emf.BaseNameType#getId <em>Id</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Id</em>'.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.BaseNameType#getId()
+     * @see #getBaseNameType()
+     * @generated
+     */
+    EAttribute getBaseNameType_Id();
+
+    /**
+     * Returns the meta object for class '{@link org.eclipse.jst.jsf.facesconfig.emf.VarType <em>Var Type</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Var Type</em>'.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.VarType
+     * @generated
+     */
+    EClass getVarType();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.facesconfig.emf.VarType#getTextContent <em>Text Content</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Text Content</em>'.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.VarType#getTextContent()
+     * @see #getVarType()
+     * @generated
+     */
+    EAttribute getVarType_TextContent();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.facesconfig.emf.VarType#getId <em>Id</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Id</em>'.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.VarType#getId()
+     * @see #getVarType()
+     * @generated
+     */
+    EAttribute getVarType_Id();
+
+    /**
+     * Returns the meta object for class '{@link org.eclipse.jst.jsf.facesconfig.emf.RenderKitExtensionType <em>Render Kit Extension Type</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Render Kit Extension Type</em>'.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.RenderKitExtensionType
+     * @generated
+     */
+    EClass getRenderKitExtensionType();
+
+    /**
+     * Returns the meta object for class '{@link org.eclipse.jst.jsf.facesconfig.emf.NavigationRuleExtensionType <em>Navigation Rule Extension Type</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Navigation Rule Extension Type</em>'.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.NavigationRuleExtensionType
+     * @generated
+     */
+    EClass getNavigationRuleExtensionType();
+
+    /**
+     * Returns the meta object for class '{@link org.eclipse.jst.jsf.facesconfig.emf.ValidatorExtensionType <em>Validator Extension Type</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Validator Extension Type</em>'.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.ValidatorExtensionType
+     * @generated
+     */
+    EClass getValidatorExtensionType();
+
+    /**
+     * Returns the meta object for class '{@link org.eclipse.jst.jsf.facesconfig.emf.FacesConfigExtensionType <em>Extension Type</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Extension Type</em>'.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigExtensionType
+     * @generated
+     */
+    EClass getFacesConfigExtensionType();
+
+    /**
+     * Returns the meta object for class '{@link org.eclipse.jst.jsf.facesconfig.emf.FactoryExtensionType <em>Factory Extension Type</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Factory Extension Type</em>'.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.FactoryExtensionType
+     * @generated
+     */
+    EClass getFactoryExtensionType();
+
+    /**
+     * Returns the meta object for class '{@link org.eclipse.jst.jsf.facesconfig.emf.LifecycleExtensionType <em>Lifecycle Extension Type</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Lifecycle Extension Type</em>'.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.LifecycleExtensionType
+     * @generated
+     */
+    EClass getLifecycleExtensionType();
+
+    /**
+     * Returns the meta object for class '{@link org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanExtensionType <em>Managed Bean Extension Type</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Managed Bean Extension Type</em>'.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanExtensionType
+     * @generated
+     */
+    EClass getManagedBeanExtensionType();
+
+    /**
+     * Returns the meta object for class '{@link org.eclipse.jst.jsf.facesconfig.emf.ConverterExtensionType <em>Converter Extension Type</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Converter Extension Type</em>'.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.ConverterExtensionType
+     * @generated
+     */
+    EClass getConverterExtensionType();
+
+    /**
      * Returns the meta object for class '{@link org.eclipse.jst.jsf.facesconfig.emf.ExtensionType <em>Extension Type</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -9806,6 +10883,16 @@ public interface FacesConfigPackage extends EPackage {
      * @generated
      */
     EAttribute getExtensionType_Id();
+
+    /**
+     * Returns the meta object for class '{@link org.eclipse.jst.jsf.facesconfig.emf.ApplicationExtensionType <em>Application Extension Type</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Application Extension Type</em>'.
+     * @see org.eclipse.jst.jsf.facesconfig.emf.ApplicationExtensionType
+     * @generated
+     */
+    EClass getApplicationExtensionType();
 
     /**
      * Returns the factory that creates the instances of the model.
@@ -9970,6 +11057,30 @@ public interface FacesConfigPackage extends EPackage {
          * @generated
          */
         EAttribute APPLICATION_TYPE__ID = eINSTANCE.getApplicationType_Id();
+
+        /**
+         * The meta object literal for the '<em><b>EL Resolver</b></em>' reference list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference APPLICATION_TYPE__EL_RESOLVER = eINSTANCE.getApplicationType_ELResolver();
+
+        /**
+         * The meta object literal for the '<em><b>Resource Bundle</b></em>' reference list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference APPLICATION_TYPE__RESOURCE_BUNDLE = eINSTANCE.getApplicationType_ResourceBundle();
+
+        /**
+         * The meta object literal for the '<em><b>Application Extension</b></em>' reference list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference APPLICATION_TYPE__APPLICATION_EXTENSION = eINSTANCE.getApplicationType_ApplicationExtension();
 
         /**
          * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.AttributeClassTypeImpl <em>Attribute Class Type</em>}' class.
@@ -10444,6 +11555,14 @@ public interface FacesConfigPackage extends EPackage {
          * @generated
          */
         EReference CONVERTER_TYPE__PROPERTY = eINSTANCE.getConverterType_Property();
+
+        /**
+         * The meta object literal for the '<em><b>Converter Extension</b></em>' containment reference list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference CONVERTER_TYPE__CONVERTER_EXTENSION = eINSTANCE.getConverterType_ConverterExtension();
 
         /**
          * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
@@ -11334,6 +12453,32 @@ public interface FacesConfigPackage extends EPackage {
         EAttribute DYNAMIC_ELEMENT__TEXT_CONTENT = eINSTANCE.getDynamicElement_TextContent();
 
         /**
+         * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ELResolverTypeImpl <em>EL Resolver Type</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.jst.jsf.facesconfig.emf.impl.ELResolverTypeImpl
+         * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getELResolverType()
+         * @generated
+         */
+        EClass EL_RESOLVER_TYPE = eINSTANCE.getELResolverType();
+
+        /**
+         * The meta object literal for the '<em><b>Text Content</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute EL_RESOLVER_TYPE__TEXT_CONTENT = eINSTANCE.getELResolverType_TextContent();
+
+        /**
+         * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute EL_RESOLVER_TYPE__ID = eINSTANCE.getELResolverType_Id();
+
+        /**
          * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
@@ -11430,6 +12575,14 @@ public interface FacesConfigPackage extends EPackage {
          * @generated
          */
         EReference FACES_CONFIG_TYPE__VALIDATOR = eINSTANCE.getFacesConfigType_Validator();
+
+        /**
+         * The meta object literal for the '<em><b>Faces Config Extension</b></em>' reference list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference FACES_CONFIG_TYPE__FACES_CONFIG_EXTENSION = eINSTANCE.getFacesConfigType_FacesConfigExtension();
 
         /**
          * The meta object literal for the '<em><b>Xmlns</b></em>' attribute feature.
@@ -11608,6 +12761,14 @@ public interface FacesConfigPackage extends EPackage {
          * @generated
          */
         EReference FACTORY_TYPE__RENDER_KIT_FACTORY = eINSTANCE.getFactoryType_RenderKitFactory();
+
+        /**
+         * The meta object literal for the '<em><b>Factory Extension</b></em>' reference list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference FACTORY_TYPE__FACTORY_EXTENSION = eINSTANCE.getFactoryType_FactoryExtension();
 
         /**
          * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
@@ -11860,6 +13021,14 @@ public interface FacesConfigPackage extends EPackage {
         EReference LIFECYCLE_TYPE__PHASE_LISTENER = eINSTANCE.getLifecycleType_PhaseListener();
 
         /**
+         * The meta object literal for the '<em><b>Lifecycle Extension</b></em>' containment reference list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference LIFECYCLE_TYPE__LIFECYCLE_EXTENSION = eINSTANCE.getLifecycleType_LifecycleExtension();
+
+        /**
          * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
@@ -12102,6 +13271,14 @@ public interface FacesConfigPackage extends EPackage {
          * @generated
          */
         EReference MANAGED_BEAN_TYPE__LIST_ENTRIES = eINSTANCE.getManagedBeanType_ListEntries();
+
+        /**
+         * The meta object literal for the '<em><b>Managed Bean Extension</b></em>' containment reference list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference MANAGED_BEAN_TYPE__MANAGED_BEAN_EXTENSION = eINSTANCE.getManagedBeanType_ManagedBeanExtension();
 
         /**
          * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
@@ -12460,6 +13637,14 @@ public interface FacesConfigPackage extends EPackage {
          * @generated
          */
         EReference NAVIGATION_RULE_TYPE__NAVIGATION_CASE = eINSTANCE.getNavigationRuleType_NavigationCase();
+
+        /**
+         * The meta object literal for the '<em><b>Navigation Rule Extension</b></em>' containment reference list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference NAVIGATION_RULE_TYPE__NAVIGATION_RULE_EXTENSION = eINSTANCE.getNavigationRuleType_NavigationRuleExtension();
 
         /**
          * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
@@ -13100,6 +14285,14 @@ public interface FacesConfigPackage extends EPackage {
         EReference RENDER_KIT_TYPE__RENDERER = eINSTANCE.getRenderKitType_Renderer();
 
         /**
+         * The meta object literal for the '<em><b>Render Kit Extension</b></em>' containment reference list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference RENDER_KIT_TYPE__RENDER_KIT_EXTENSION = eINSTANCE.getRenderKitType_RenderKitExtension();
+
+        /**
          * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
@@ -13356,6 +14549,14 @@ public interface FacesConfigPackage extends EPackage {
         EReference VALIDATOR_TYPE__PROPERTY = eINSTANCE.getValidatorType_Property();
 
         /**
+         * The meta object literal for the '<em><b>Validator Extension</b></em>' containment reference list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference VALIDATOR_TYPE__VALIDATOR_EXTENSION = eINSTANCE.getValidatorType_ValidatorExtension();
+
+        /**
          * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
@@ -13468,6 +14669,196 @@ public interface FacesConfigPackage extends EPackage {
         EAttribute VIEW_HANDLER_TYPE__ID = eINSTANCE.getViewHandlerType_Id();
 
         /**
+         * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ResourceBundleTypeImpl <em>Resource Bundle Type</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.jst.jsf.facesconfig.emf.impl.ResourceBundleTypeImpl
+         * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getResourceBundleType()
+         * @generated
+         */
+        EClass RESOURCE_BUNDLE_TYPE = eINSTANCE.getResourceBundleType();
+
+        /**
+         * The meta object literal for the '<em><b>Description</b></em>' containment reference list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference RESOURCE_BUNDLE_TYPE__DESCRIPTION = eINSTANCE.getResourceBundleType_Description();
+
+        /**
+         * The meta object literal for the '<em><b>Display Name</b></em>' containment reference list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference RESOURCE_BUNDLE_TYPE__DISPLAY_NAME = eINSTANCE.getResourceBundleType_DisplayName();
+
+        /**
+         * The meta object literal for the '<em><b>Icon</b></em>' containment reference list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference RESOURCE_BUNDLE_TYPE__ICON = eINSTANCE.getResourceBundleType_Icon();
+
+        /**
+         * The meta object literal for the '<em><b>Base Name</b></em>' reference feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference RESOURCE_BUNDLE_TYPE__BASE_NAME = eINSTANCE.getResourceBundleType_BaseName();
+
+        /**
+         * The meta object literal for the '<em><b>Var</b></em>' reference feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference RESOURCE_BUNDLE_TYPE__VAR = eINSTANCE.getResourceBundleType_Var();
+
+        /**
+         * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute RESOURCE_BUNDLE_TYPE__ID = eINSTANCE.getResourceBundleType_Id();
+
+        /**
+         * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.BaseNameTypeImpl <em>Base Name Type</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.jst.jsf.facesconfig.emf.impl.BaseNameTypeImpl
+         * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getBaseNameType()
+         * @generated
+         */
+        EClass BASE_NAME_TYPE = eINSTANCE.getBaseNameType();
+
+        /**
+         * The meta object literal for the '<em><b>Text Content</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute BASE_NAME_TYPE__TEXT_CONTENT = eINSTANCE.getBaseNameType_TextContent();
+
+        /**
+         * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute BASE_NAME_TYPE__ID = eINSTANCE.getBaseNameType_Id();
+
+        /**
+         * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.VarTypeImpl <em>Var Type</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.jst.jsf.facesconfig.emf.impl.VarTypeImpl
+         * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getVarType()
+         * @generated
+         */
+        EClass VAR_TYPE = eINSTANCE.getVarType();
+
+        /**
+         * The meta object literal for the '<em><b>Text Content</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute VAR_TYPE__TEXT_CONTENT = eINSTANCE.getVarType_TextContent();
+
+        /**
+         * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute VAR_TYPE__ID = eINSTANCE.getVarType_Id();
+
+        /**
+         * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.RenderKitExtensionTypeImpl <em>Render Kit Extension Type</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.jst.jsf.facesconfig.emf.impl.RenderKitExtensionTypeImpl
+         * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getRenderKitExtensionType()
+         * @generated
+         */
+        EClass RENDER_KIT_EXTENSION_TYPE = eINSTANCE.getRenderKitExtensionType();
+
+            /**
+         * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.NavigationRuleExtensionTypeImpl <em>Navigation Rule Extension Type</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.jst.jsf.facesconfig.emf.impl.NavigationRuleExtensionTypeImpl
+         * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getNavigationRuleExtensionType()
+         * @generated
+         */
+        EClass NAVIGATION_RULE_EXTENSION_TYPE = eINSTANCE.getNavigationRuleExtensionType();
+
+        /**
+         * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ValidatorExtensionTypeImpl <em>Validator Extension Type</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.jst.jsf.facesconfig.emf.impl.ValidatorExtensionTypeImpl
+         * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getValidatorExtensionType()
+         * @generated
+         */
+        EClass VALIDATOR_EXTENSION_TYPE = eINSTANCE.getValidatorExtensionType();
+
+        /**
+         * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigExtensionTypeImpl <em>Extension Type</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigExtensionTypeImpl
+         * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getFacesConfigExtensionType()
+         * @generated
+         */
+        EClass FACES_CONFIG_EXTENSION_TYPE = eINSTANCE.getFacesConfigExtensionType();
+
+        /**
+         * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.FactoryExtensionTypeImpl <em>Factory Extension Type</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FactoryExtensionTypeImpl
+         * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getFactoryExtensionType()
+         * @generated
+         */
+        EClass FACTORY_EXTENSION_TYPE = eINSTANCE.getFactoryExtensionType();
+
+        /**
+         * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.LifecycleExtensionTypeImpl <em>Lifecycle Extension Type</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.jst.jsf.facesconfig.emf.impl.LifecycleExtensionTypeImpl
+         * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getLifecycleExtensionType()
+         * @generated
+         */
+        EClass LIFECYCLE_EXTENSION_TYPE = eINSTANCE.getLifecycleExtensionType();
+
+        /**
+         * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ManagedBeanExtensionTypeImpl <em>Managed Bean Extension Type</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.jst.jsf.facesconfig.emf.impl.ManagedBeanExtensionTypeImpl
+         * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getManagedBeanExtensionType()
+         * @generated
+         */
+        EClass MANAGED_BEAN_EXTENSION_TYPE = eINSTANCE.getManagedBeanExtensionType();
+
+        /**
+         * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ConverterExtensionTypeImpl <em>Converter Extension Type</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.jst.jsf.facesconfig.emf.impl.ConverterExtensionTypeImpl
+         * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getConverterExtensionType()
+         * @generated
+         */
+        EClass CONVERTER_EXTENSION_TYPE = eINSTANCE.getConverterExtensionType();
+
+        /**
          * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ExtensionTypeImpl <em>Extension Type</em>}' class.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
@@ -13501,6 +14892,16 @@ public interface FacesConfigPackage extends EPackage {
          */
         EAttribute EXTENSION_TYPE__ID = eINSTANCE.getExtensionType_Id();
 
-    }
+        /**
+         * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ApplicationExtensionTypeImpl <em>Application Extension Type</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.jst.jsf.facesconfig.emf.impl.ApplicationExtensionTypeImpl
+         * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getApplicationExtensionType()
+         * @generated
+         */
+        EClass APPLICATION_EXTENSION_TYPE = eINSTANCE.getApplicationExtensionType();
+
+}
 
 } //FacesConfigPackage

@@ -37,192 +37,192 @@ import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
  * @generated
  */
 public class ComponentFamilyTypeImpl extends EObjectImpl implements ComponentFamilyType {
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
 
-	/**
-	 * The default value of the '{@link #getTextContent() <em>Text Content</em>}' attribute.
-	 * <!-- begin-user-doc -->
+    /**
+     * The default value of the '{@link #getTextContent() <em>Text Content</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTextContent()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getTextContent()
+     * @generated
+     * @ordered
+     */
 	protected static final String TEXT_CONTENT_EDEFAULT = null;
 
-	/**
-	 * The cached value of the '{@link #getTextContent() <em>Text Content</em>}' attribute.
-	 * <!-- begin-user-doc -->
+    /**
+     * The cached value of the '{@link #getTextContent() <em>Text Content</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTextContent()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getTextContent()
+     * @generated
+     * @ordered
+     */
 	protected String textContent = TEXT_CONTENT_EDEFAULT;
 
-	/**
-	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
+    /**
+     * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getId()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getId()
+     * @generated
+     * @ordered
+     */
 	protected static final String ID_EDEFAULT = null;
 
-	/**
-	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
+    /**
+     * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getId()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getId()
+     * @generated
+     * @ordered
+     */
 	protected String id = ID_EDEFAULT;
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected ComponentFamilyTypeImpl() {
-		super();
-	}
+        super();
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected EClass eStaticClass() {
-		return FacesConfigPackage.eINSTANCE.getComponentFamilyType();
-	}
+        return FacesConfigPackage.Literals.COMPONENT_FAMILY_TYPE;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String getTextContent() {
-		return textContent;
-	}
+        return textContent;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setTextContent(String newTextContent) {
-		String oldTextContent = textContent;
-		textContent = newTextContent;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.COMPONENT_FAMILY_TYPE__TEXT_CONTENT, oldTextContent, textContent));
-	}
+        String oldTextContent = textContent;
+        textContent = newTextContent;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.COMPONENT_FAMILY_TYPE__TEXT_CONTENT, oldTextContent, textContent));
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String getId() {
-		return id;
-	}
+        return id;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setId(String newId) {
-		String oldId = id;
-		id = newId;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.COMPONENT_FAMILY_TYPE__ID, oldId, id));
-	}
+        String oldId = id;
+        id = newId;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.COMPONENT_FAMILY_TYPE__ID, oldId, id));
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Object eGet(EStructuralFeature eFeature, boolean resolve) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case FacesConfigPackage.COMPONENT_FAMILY_TYPE__TEXT_CONTENT:
-				return getTextContent();
-			case FacesConfigPackage.COMPONENT_FAMILY_TYPE__ID:
-				return getId();
-		}
-		return eDynamicGet(eFeature, resolve);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public Object eGet(int featureID, boolean resolve, boolean coreType) {
+        switch (featureID) {
+            case FacesConfigPackage.COMPONENT_FAMILY_TYPE__TEXT_CONTENT:
+                return getTextContent();
+            case FacesConfigPackage.COMPONENT_FAMILY_TYPE__ID:
+                return getId();
+        }
+        return super.eGet(featureID, resolve, coreType);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void eSet(EStructuralFeature eFeature, Object newValue) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case FacesConfigPackage.COMPONENT_FAMILY_TYPE__TEXT_CONTENT:
-				setTextContent((String)newValue);
-				return;
-			case FacesConfigPackage.COMPONENT_FAMILY_TYPE__ID:
-				setId((String)newValue);
-				return;
-		}
-		eDynamicSet(eFeature, newValue);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void eSet(int featureID, Object newValue) {
+        switch (featureID) {
+            case FacesConfigPackage.COMPONENT_FAMILY_TYPE__TEXT_CONTENT:
+                setTextContent((String)newValue);
+                return;
+            case FacesConfigPackage.COMPONENT_FAMILY_TYPE__ID:
+                setId((String)newValue);
+                return;
+        }
+        super.eSet(featureID, newValue);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void eUnset(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case FacesConfigPackage.COMPONENT_FAMILY_TYPE__TEXT_CONTENT:
-				setTextContent(TEXT_CONTENT_EDEFAULT);
-				return;
-			case FacesConfigPackage.COMPONENT_FAMILY_TYPE__ID:
-				setId(ID_EDEFAULT);
-				return;
-		}
-		eDynamicUnset(eFeature);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void eUnset(int featureID) {
+        switch (featureID) {
+            case FacesConfigPackage.COMPONENT_FAMILY_TYPE__TEXT_CONTENT:
+                setTextContent(TEXT_CONTENT_EDEFAULT);
+                return;
+            case FacesConfigPackage.COMPONENT_FAMILY_TYPE__ID:
+                setId(ID_EDEFAULT);
+                return;
+        }
+        super.eUnset(featureID);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean eIsSet(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case FacesConfigPackage.COMPONENT_FAMILY_TYPE__TEXT_CONTENT:
-				return TEXT_CONTENT_EDEFAULT == null ? textContent != null : !TEXT_CONTENT_EDEFAULT.equals(textContent);
-			case FacesConfigPackage.COMPONENT_FAMILY_TYPE__ID:
-				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
-		}
-		return eDynamicIsSet(eFeature);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public boolean eIsSet(int featureID) {
+        switch (featureID) {
+            case FacesConfigPackage.COMPONENT_FAMILY_TYPE__TEXT_CONTENT:
+                return TEXT_CONTENT_EDEFAULT == null ? textContent != null : !TEXT_CONTENT_EDEFAULT.equals(textContent);
+            case FacesConfigPackage.COMPONENT_FAMILY_TYPE__ID:
+                return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+        }
+        return super.eIsSet(featureID);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+        if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (textContent: ");
-		result.append(textContent);
-		result.append(", id: ");
-		result.append(id);
-		result.append(')');
-		return result.toString();
-	}
+        StringBuffer result = new StringBuffer(super.toString());
+        result.append(" (textContent: ");
+        result.append(textContent);
+        result.append(", id: ");
+        result.append(id);
+        result.append(')');
+        return result.toString();
+    }
 
 } //ComponentFamilyTypeImpl

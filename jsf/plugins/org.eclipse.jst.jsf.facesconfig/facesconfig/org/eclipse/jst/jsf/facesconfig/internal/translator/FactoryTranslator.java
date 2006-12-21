@@ -37,6 +37,7 @@ public class FactoryTranslator extends Translator {
 			new FacesContextFactoryTranslator("faces-context-factory", facesPackage.getFactoryType_FacesContextFactory()), //$NON-NLS-1$
 			new LifecycleFactoryTranslator("lifecycle-factory", facesPackage.getFactoryType_LifecycleFactory()), //$NON-NLS-1$
 			new RenderKitFactoryTranslator("render-kit-factory", facesPackage.getFactoryType_RenderKitFactory()), //$NON-NLS-1$
+            new FactoryExtensionTranslator("factory-extension", facesPackage.getFactoryType_FactoryExtension()), //$NON-NLS-1$
 			new Translator("id", facesPackage.getFactoryType_Id(), DOM_ATTRIBUTE) //$NON-NLS-1$
 		};
 	}

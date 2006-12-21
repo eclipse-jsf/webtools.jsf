@@ -45,6 +45,7 @@ public class FacesConfigTranslator extends RootTranslator {
 				new RenderKitTranslator("render-kit", facesPackage.getFacesConfigType_RenderKit()), //$NON-NLS-1$
 				new LifecycleTranslator("lifecycle", facesPackage.getFacesConfigType_Lifecycle()), //$NON-NLS-1$
 				new ValidatorTranslator("validator", facesPackage.getFacesConfigType_Validator()), //$NON-NLS-1$
+                new FacesConfigExtensionTranslator("faces-config-extension", facesPackage.getFacesConfigType_FacesConfigExtension()), //$NON_NLS-1$
 				new Translator("xmlns", facesPackage.getFacesConfigType_Xmlns(), DOM_ATTRIBUTE), //$NON-NLS-1$
 				new Translator("id", facesPackage.getFacesConfigType_Id(), DOM_ATTRIBUTE) //$NON-NLS-1$
 		};

@@ -34,6 +34,7 @@ public class LifecycleTranslator extends Translator {
 		FacesConfigPackage facesPackage = FacesConfigPackage.eINSTANCE;
 		return new Translator[] {
 			new PhaseListenerTranslator("phase-listener", facesPackage.getLifecycleType_PhaseListener()), //$NON-NLS-1$
+            new LifecycleExtensionTranslator("lifecycle-extension",facesPackage.getLifecycleType_LifecycleExtension()),
 			new Translator("id", facesPackage.getLifecycleType_Id(), DOM_ATTRIBUTE) //$NON-NLS-1$
 		};
 	}

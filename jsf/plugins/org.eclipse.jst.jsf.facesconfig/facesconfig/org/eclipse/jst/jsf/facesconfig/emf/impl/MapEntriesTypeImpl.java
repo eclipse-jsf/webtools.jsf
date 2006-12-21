@@ -51,319 +51,315 @@ import org.eclipse.jst.jsf.facesconfig.emf.ValueClassType;
  * @generated
  */
 public class MapEntriesTypeImpl extends EObjectImpl implements MapEntriesType {
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
 
-	/**
-	 * The cached value of the '{@link #getKeyClass() <em>Key Class</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+    /**
+     * The cached value of the '{@link #getKeyClass() <em>Key Class</em>}' containment reference.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getKeyClass()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getKeyClass()
+     * @generated
+     * @ordered
+     */
 	protected KeyClassType keyClass = null;
 
-	/**
-	 * The cached value of the '{@link #getValueClass() <em>Value Class</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+    /**
+     * The cached value of the '{@link #getValueClass() <em>Value Class</em>}' containment reference.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValueClass()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getValueClass()
+     * @generated
+     * @ordered
+     */
 	protected ValueClassType valueClass = null;
 
-	/**
-	 * The cached value of the '{@link #getMapEntry() <em>Map Entry</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+    /**
+     * The cached value of the '{@link #getMapEntry() <em>Map Entry</em>}' containment reference list.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getMapEntry()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getMapEntry()
+     * @generated
+     * @ordered
+     */
 	protected EList mapEntry = null;
 
-	/**
-	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
+    /**
+     * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getId()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getId()
+     * @generated
+     * @ordered
+     */
 	protected static final String ID_EDEFAULT = null;
 
-	/**
-	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
+    /**
+     * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getId()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getId()
+     * @generated
+     * @ordered
+     */
 	protected String id = ID_EDEFAULT;
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected MapEntriesTypeImpl() {
-		super();
-	}
+        super();
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected EClass eStaticClass() {
-		return FacesConfigPackage.eINSTANCE.getMapEntriesType();
-	}
+        return FacesConfigPackage.Literals.MAP_ENTRIES_TYPE;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public KeyClassType getKeyClass() {
-		return keyClass;
-	}
+        return keyClass;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public NotificationChain basicSetKeyClass(KeyClassType newKeyClass, NotificationChain msgs) {
-		KeyClassType oldKeyClass = keyClass;
-		keyClass = newKeyClass;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FacesConfigPackage.MAP_ENTRIES_TYPE__KEY_CLASS, oldKeyClass, newKeyClass);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+        KeyClassType oldKeyClass = keyClass;
+        keyClass = newKeyClass;
+        if (eNotificationRequired()) {
+            ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FacesConfigPackage.MAP_ENTRIES_TYPE__KEY_CLASS, oldKeyClass, newKeyClass);
+            if (msgs == null) msgs = notification; else msgs.add(notification);
+        }
+        return msgs;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setKeyClass(KeyClassType newKeyClass) {
-		if (newKeyClass != keyClass) {
-			NotificationChain msgs = null;
-			if (keyClass != null)
-				msgs = ((InternalEObject)keyClass).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.MAP_ENTRIES_TYPE__KEY_CLASS, null, msgs);
-			if (newKeyClass != null)
-				msgs = ((InternalEObject)newKeyClass).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.MAP_ENTRIES_TYPE__KEY_CLASS, null, msgs);
-			msgs = basicSetKeyClass(newKeyClass, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.MAP_ENTRIES_TYPE__KEY_CLASS, newKeyClass, newKeyClass));
-	}
+        if (newKeyClass != keyClass) {
+            NotificationChain msgs = null;
+            if (keyClass != null)
+                msgs = ((InternalEObject)keyClass).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.MAP_ENTRIES_TYPE__KEY_CLASS, null, msgs);
+            if (newKeyClass != null)
+                msgs = ((InternalEObject)newKeyClass).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.MAP_ENTRIES_TYPE__KEY_CLASS, null, msgs);
+            msgs = basicSetKeyClass(newKeyClass, msgs);
+            if (msgs != null) msgs.dispatch();
+        }
+        else if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.MAP_ENTRIES_TYPE__KEY_CLASS, newKeyClass, newKeyClass));
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public ValueClassType getValueClass() {
-		return valueClass;
-	}
+        return valueClass;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public NotificationChain basicSetValueClass(ValueClassType newValueClass, NotificationChain msgs) {
-		ValueClassType oldValueClass = valueClass;
-		valueClass = newValueClass;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FacesConfigPackage.MAP_ENTRIES_TYPE__VALUE_CLASS, oldValueClass, newValueClass);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+        ValueClassType oldValueClass = valueClass;
+        valueClass = newValueClass;
+        if (eNotificationRequired()) {
+            ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FacesConfigPackage.MAP_ENTRIES_TYPE__VALUE_CLASS, oldValueClass, newValueClass);
+            if (msgs == null) msgs = notification; else msgs.add(notification);
+        }
+        return msgs;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setValueClass(ValueClassType newValueClass) {
-		if (newValueClass != valueClass) {
-			NotificationChain msgs = null;
-			if (valueClass != null)
-				msgs = ((InternalEObject)valueClass).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.MAP_ENTRIES_TYPE__VALUE_CLASS, null, msgs);
-			if (newValueClass != null)
-				msgs = ((InternalEObject)newValueClass).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.MAP_ENTRIES_TYPE__VALUE_CLASS, null, msgs);
-			msgs = basicSetValueClass(newValueClass, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.MAP_ENTRIES_TYPE__VALUE_CLASS, newValueClass, newValueClass));
-	}
+        if (newValueClass != valueClass) {
+            NotificationChain msgs = null;
+            if (valueClass != null)
+                msgs = ((InternalEObject)valueClass).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.MAP_ENTRIES_TYPE__VALUE_CLASS, null, msgs);
+            if (newValueClass != null)
+                msgs = ((InternalEObject)newValueClass).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.MAP_ENTRIES_TYPE__VALUE_CLASS, null, msgs);
+            msgs = basicSetValueClass(newValueClass, msgs);
+            if (msgs != null) msgs.dispatch();
+        }
+        else if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.MAP_ENTRIES_TYPE__VALUE_CLASS, newValueClass, newValueClass));
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public EList getMapEntry() {
-		if (mapEntry == null) {
-			mapEntry = new EObjectContainmentEList(MapEntryType.class, this, FacesConfigPackage.MAP_ENTRIES_TYPE__MAP_ENTRY);
-		}
-		return mapEntry;
-	}
+        if (mapEntry == null) {
+            mapEntry = new EObjectContainmentEList(MapEntryType.class, this, FacesConfigPackage.MAP_ENTRIES_TYPE__MAP_ENTRY);
+        }
+        return mapEntry;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String getId() {
-		return id;
-	}
+        return id;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setId(String newId) {
-		String oldId = id;
-		id = newId;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.MAP_ENTRIES_TYPE__ID, oldId, id));
-	}
+        String oldId = id;
+        id = newId;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.MAP_ENTRIES_TYPE__ID, oldId, id));
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case FacesConfigPackage.MAP_ENTRIES_TYPE__KEY_CLASS:
-					return basicSetKeyClass(null, msgs);
-				case FacesConfigPackage.MAP_ENTRIES_TYPE__VALUE_CLASS:
-					return basicSetValueClass(null, msgs);
-				case FacesConfigPackage.MAP_ENTRIES_TYPE__MAP_ENTRY:
-					return ((InternalEList)getMapEntry()).basicRemove(otherEnd, msgs);
-				default:
-					return eDynamicInverseRemove(otherEnd, featureID, baseClass, msgs);
-			}
-		}
-		return eBasicSetContainer(null, featureID, msgs);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+        switch (featureID) {
+            case FacesConfigPackage.MAP_ENTRIES_TYPE__KEY_CLASS:
+                return basicSetKeyClass(null, msgs);
+            case FacesConfigPackage.MAP_ENTRIES_TYPE__VALUE_CLASS:
+                return basicSetValueClass(null, msgs);
+            case FacesConfigPackage.MAP_ENTRIES_TYPE__MAP_ENTRY:
+                return ((InternalEList)getMapEntry()).basicRemove(otherEnd, msgs);
+        }
+        return super.eInverseRemove(otherEnd, featureID, msgs);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Object eGet(EStructuralFeature eFeature, boolean resolve) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case FacesConfigPackage.MAP_ENTRIES_TYPE__KEY_CLASS:
-				return getKeyClass();
-			case FacesConfigPackage.MAP_ENTRIES_TYPE__VALUE_CLASS:
-				return getValueClass();
-			case FacesConfigPackage.MAP_ENTRIES_TYPE__MAP_ENTRY:
-				return getMapEntry();
-			case FacesConfigPackage.MAP_ENTRIES_TYPE__ID:
-				return getId();
-		}
-		return eDynamicGet(eFeature, resolve);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public Object eGet(int featureID, boolean resolve, boolean coreType) {
+        switch (featureID) {
+            case FacesConfigPackage.MAP_ENTRIES_TYPE__KEY_CLASS:
+                return getKeyClass();
+            case FacesConfigPackage.MAP_ENTRIES_TYPE__VALUE_CLASS:
+                return getValueClass();
+            case FacesConfigPackage.MAP_ENTRIES_TYPE__MAP_ENTRY:
+                return getMapEntry();
+            case FacesConfigPackage.MAP_ENTRIES_TYPE__ID:
+                return getId();
+        }
+        return super.eGet(featureID, resolve, coreType);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void eSet(EStructuralFeature eFeature, Object newValue) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case FacesConfigPackage.MAP_ENTRIES_TYPE__KEY_CLASS:
-				setKeyClass((KeyClassType)newValue);
-				return;
-			case FacesConfigPackage.MAP_ENTRIES_TYPE__VALUE_CLASS:
-				setValueClass((ValueClassType)newValue);
-				return;
-			case FacesConfigPackage.MAP_ENTRIES_TYPE__MAP_ENTRY:
-				getMapEntry().clear();
-				getMapEntry().addAll((Collection)newValue);
-				return;
-			case FacesConfigPackage.MAP_ENTRIES_TYPE__ID:
-				setId((String)newValue);
-				return;
-		}
-		eDynamicSet(eFeature, newValue);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void eSet(int featureID, Object newValue) {
+        switch (featureID) {
+            case FacesConfigPackage.MAP_ENTRIES_TYPE__KEY_CLASS:
+                setKeyClass((KeyClassType)newValue);
+                return;
+            case FacesConfigPackage.MAP_ENTRIES_TYPE__VALUE_CLASS:
+                setValueClass((ValueClassType)newValue);
+                return;
+            case FacesConfigPackage.MAP_ENTRIES_TYPE__MAP_ENTRY:
+                getMapEntry().clear();
+                getMapEntry().addAll((Collection)newValue);
+                return;
+            case FacesConfigPackage.MAP_ENTRIES_TYPE__ID:
+                setId((String)newValue);
+                return;
+        }
+        super.eSet(featureID, newValue);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void eUnset(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case FacesConfigPackage.MAP_ENTRIES_TYPE__KEY_CLASS:
-				setKeyClass((KeyClassType)null);
-				return;
-			case FacesConfigPackage.MAP_ENTRIES_TYPE__VALUE_CLASS:
-				setValueClass((ValueClassType)null);
-				return;
-			case FacesConfigPackage.MAP_ENTRIES_TYPE__MAP_ENTRY:
-				getMapEntry().clear();
-				return;
-			case FacesConfigPackage.MAP_ENTRIES_TYPE__ID:
-				setId(ID_EDEFAULT);
-				return;
-		}
-		eDynamicUnset(eFeature);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void eUnset(int featureID) {
+        switch (featureID) {
+            case FacesConfigPackage.MAP_ENTRIES_TYPE__KEY_CLASS:
+                setKeyClass((KeyClassType)null);
+                return;
+            case FacesConfigPackage.MAP_ENTRIES_TYPE__VALUE_CLASS:
+                setValueClass((ValueClassType)null);
+                return;
+            case FacesConfigPackage.MAP_ENTRIES_TYPE__MAP_ENTRY:
+                getMapEntry().clear();
+                return;
+            case FacesConfigPackage.MAP_ENTRIES_TYPE__ID:
+                setId(ID_EDEFAULT);
+                return;
+        }
+        super.eUnset(featureID);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean eIsSet(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case FacesConfigPackage.MAP_ENTRIES_TYPE__KEY_CLASS:
-				return keyClass != null;
-			case FacesConfigPackage.MAP_ENTRIES_TYPE__VALUE_CLASS:
-				return valueClass != null;
-			case FacesConfigPackage.MAP_ENTRIES_TYPE__MAP_ENTRY:
-				return mapEntry != null && !mapEntry.isEmpty();
-			case FacesConfigPackage.MAP_ENTRIES_TYPE__ID:
-				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
-		}
-		return eDynamicIsSet(eFeature);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public boolean eIsSet(int featureID) {
+        switch (featureID) {
+            case FacesConfigPackage.MAP_ENTRIES_TYPE__KEY_CLASS:
+                return keyClass != null;
+            case FacesConfigPackage.MAP_ENTRIES_TYPE__VALUE_CLASS:
+                return valueClass != null;
+            case FacesConfigPackage.MAP_ENTRIES_TYPE__MAP_ENTRY:
+                return mapEntry != null && !mapEntry.isEmpty();
+            case FacesConfigPackage.MAP_ENTRIES_TYPE__ID:
+                return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+        }
+        return super.eIsSet(featureID);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+        if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (id: ");
-		result.append(id);
-		result.append(')');
-		return result.toString();
-	}
+        StringBuffer result = new StringBuffer(super.toString());
+        result.append(" (id: ");
+        result.append(id);
+        result.append(')');
+        return result.toString();
+    }
 
 } //MapEntriesTypeImpl

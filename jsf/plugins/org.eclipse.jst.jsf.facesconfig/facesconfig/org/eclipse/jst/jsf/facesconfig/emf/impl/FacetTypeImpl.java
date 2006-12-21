@@ -55,359 +55,355 @@ import org.eclipse.jst.jsf.facesconfig.emf.IconType;
  * @generated
  */
 public class FacetTypeImpl extends EObjectImpl implements FacetType {
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
 
-	/**
-	 * The cached value of the '{@link #getDescription() <em>Description</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+    /**
+     * The cached value of the '{@link #getDescription() <em>Description</em>}' containment reference list.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDescription()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getDescription()
+     * @generated
+     * @ordered
+     */
 	protected EList description = null;
 
-	/**
-	 * The cached value of the '{@link #getDisplayName() <em>Display Name</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+    /**
+     * The cached value of the '{@link #getDisplayName() <em>Display Name</em>}' containment reference list.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDisplayName()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getDisplayName()
+     * @generated
+     * @ordered
+     */
 	protected EList displayName = null;
 
-	/**
-	 * The cached value of the '{@link #getIcon() <em>Icon</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+    /**
+     * The cached value of the '{@link #getIcon() <em>Icon</em>}' containment reference list.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getIcon()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getIcon()
+     * @generated
+     * @ordered
+     */
 	protected EList icon = null;
 
-	/**
-	 * The cached value of the '{@link #getFacetName() <em>Facet Name</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+    /**
+     * The cached value of the '{@link #getFacetName() <em>Facet Name</em>}' containment reference.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getFacetName()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getFacetName()
+     * @generated
+     * @ordered
+     */
 	protected FacetNameType facetName = null;
 
-	/**
-	 * The cached value of the '{@link #getFacetExtension() <em>Facet Extension</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+    /**
+     * The cached value of the '{@link #getFacetExtension() <em>Facet Extension</em>}' containment reference list.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getFacetExtension()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getFacetExtension()
+     * @generated
+     * @ordered
+     */
 	protected EList facetExtension = null;
 
-	/**
-	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
+    /**
+     * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getId()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getId()
+     * @generated
+     * @ordered
+     */
 	protected static final String ID_EDEFAULT = null;
 
-	/**
-	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
+    /**
+     * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getId()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getId()
+     * @generated
+     * @ordered
+     */
 	protected String id = ID_EDEFAULT;
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected FacetTypeImpl() {
-		super();
-	}
+        super();
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected EClass eStaticClass() {
-		return FacesConfigPackage.eINSTANCE.getFacetType();
-	}
+        return FacesConfigPackage.Literals.FACET_TYPE;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public EList getDescription() {
-		if (description == null) {
-			description = new EObjectContainmentEList(DescriptionType.class, this, FacesConfigPackage.FACET_TYPE__DESCRIPTION);
-		}
-		return description;
-	}
+        if (description == null) {
+            description = new EObjectContainmentEList(DescriptionType.class, this, FacesConfigPackage.FACET_TYPE__DESCRIPTION);
+        }
+        return description;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public EList getDisplayName() {
-		if (displayName == null) {
-			displayName = new EObjectContainmentEList(DisplayNameType.class, this, FacesConfigPackage.FACET_TYPE__DISPLAY_NAME);
-		}
-		return displayName;
-	}
+        if (displayName == null) {
+            displayName = new EObjectContainmentEList(DisplayNameType.class, this, FacesConfigPackage.FACET_TYPE__DISPLAY_NAME);
+        }
+        return displayName;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public EList getIcon() {
-		if (icon == null) {
-			icon = new EObjectContainmentEList(IconType.class, this, FacesConfigPackage.FACET_TYPE__ICON);
-		}
-		return icon;
-	}
+        if (icon == null) {
+            icon = new EObjectContainmentEList(IconType.class, this, FacesConfigPackage.FACET_TYPE__ICON);
+        }
+        return icon;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public FacetNameType getFacetName() {
-		return facetName;
-	}
+        return facetName;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public NotificationChain basicSetFacetName(FacetNameType newFacetName, NotificationChain msgs) {
-		FacetNameType oldFacetName = facetName;
-		facetName = newFacetName;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FacesConfigPackage.FACET_TYPE__FACET_NAME, oldFacetName, newFacetName);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+        FacetNameType oldFacetName = facetName;
+        facetName = newFacetName;
+        if (eNotificationRequired()) {
+            ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FacesConfigPackage.FACET_TYPE__FACET_NAME, oldFacetName, newFacetName);
+            if (msgs == null) msgs = notification; else msgs.add(notification);
+        }
+        return msgs;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setFacetName(FacetNameType newFacetName) {
-		if (newFacetName != facetName) {
-			NotificationChain msgs = null;
-			if (facetName != null)
-				msgs = ((InternalEObject)facetName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.FACET_TYPE__FACET_NAME, null, msgs);
-			if (newFacetName != null)
-				msgs = ((InternalEObject)newFacetName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.FACET_TYPE__FACET_NAME, null, msgs);
-			msgs = basicSetFacetName(newFacetName, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.FACET_TYPE__FACET_NAME, newFacetName, newFacetName));
-	}
+        if (newFacetName != facetName) {
+            NotificationChain msgs = null;
+            if (facetName != null)
+                msgs = ((InternalEObject)facetName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.FACET_TYPE__FACET_NAME, null, msgs);
+            if (newFacetName != null)
+                msgs = ((InternalEObject)newFacetName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.FACET_TYPE__FACET_NAME, null, msgs);
+            msgs = basicSetFacetName(newFacetName, msgs);
+            if (msgs != null) msgs.dispatch();
+        }
+        else if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.FACET_TYPE__FACET_NAME, newFacetName, newFacetName));
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public EList getFacetExtension() {
-		if (facetExtension == null) {
-			facetExtension = new EObjectContainmentEList(FacetExtensionType.class, this, FacesConfigPackage.FACET_TYPE__FACET_EXTENSION);
-		}
-		return facetExtension;
-	}
+        if (facetExtension == null) {
+            facetExtension = new EObjectContainmentEList(FacetExtensionType.class, this, FacesConfigPackage.FACET_TYPE__FACET_EXTENSION);
+        }
+        return facetExtension;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String getId() {
-		return id;
-	}
+        return id;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setId(String newId) {
-		String oldId = id;
-		id = newId;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.FACET_TYPE__ID, oldId, id));
-	}
+        String oldId = id;
+        id = newId;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.FACET_TYPE__ID, oldId, id));
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case FacesConfigPackage.FACET_TYPE__DESCRIPTION:
-					return ((InternalEList)getDescription()).basicRemove(otherEnd, msgs);
-				case FacesConfigPackage.FACET_TYPE__DISPLAY_NAME:
-					return ((InternalEList)getDisplayName()).basicRemove(otherEnd, msgs);
-				case FacesConfigPackage.FACET_TYPE__ICON:
-					return ((InternalEList)getIcon()).basicRemove(otherEnd, msgs);
-				case FacesConfigPackage.FACET_TYPE__FACET_NAME:
-					return basicSetFacetName(null, msgs);
-				case FacesConfigPackage.FACET_TYPE__FACET_EXTENSION:
-					return ((InternalEList)getFacetExtension()).basicRemove(otherEnd, msgs);
-				default:
-					return eDynamicInverseRemove(otherEnd, featureID, baseClass, msgs);
-			}
-		}
-		return eBasicSetContainer(null, featureID, msgs);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+        switch (featureID) {
+            case FacesConfigPackage.FACET_TYPE__DESCRIPTION:
+                return ((InternalEList)getDescription()).basicRemove(otherEnd, msgs);
+            case FacesConfigPackage.FACET_TYPE__DISPLAY_NAME:
+                return ((InternalEList)getDisplayName()).basicRemove(otherEnd, msgs);
+            case FacesConfigPackage.FACET_TYPE__ICON:
+                return ((InternalEList)getIcon()).basicRemove(otherEnd, msgs);
+            case FacesConfigPackage.FACET_TYPE__FACET_NAME:
+                return basicSetFacetName(null, msgs);
+            case FacesConfigPackage.FACET_TYPE__FACET_EXTENSION:
+                return ((InternalEList)getFacetExtension()).basicRemove(otherEnd, msgs);
+        }
+        return super.eInverseRemove(otherEnd, featureID, msgs);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Object eGet(EStructuralFeature eFeature, boolean resolve) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case FacesConfigPackage.FACET_TYPE__DESCRIPTION:
-				return getDescription();
-			case FacesConfigPackage.FACET_TYPE__DISPLAY_NAME:
-				return getDisplayName();
-			case FacesConfigPackage.FACET_TYPE__ICON:
-				return getIcon();
-			case FacesConfigPackage.FACET_TYPE__FACET_NAME:
-				return getFacetName();
-			case FacesConfigPackage.FACET_TYPE__FACET_EXTENSION:
-				return getFacetExtension();
-			case FacesConfigPackage.FACET_TYPE__ID:
-				return getId();
-		}
-		return eDynamicGet(eFeature, resolve);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public Object eGet(int featureID, boolean resolve, boolean coreType) {
+        switch (featureID) {
+            case FacesConfigPackage.FACET_TYPE__DESCRIPTION:
+                return getDescription();
+            case FacesConfigPackage.FACET_TYPE__DISPLAY_NAME:
+                return getDisplayName();
+            case FacesConfigPackage.FACET_TYPE__ICON:
+                return getIcon();
+            case FacesConfigPackage.FACET_TYPE__FACET_NAME:
+                return getFacetName();
+            case FacesConfigPackage.FACET_TYPE__FACET_EXTENSION:
+                return getFacetExtension();
+            case FacesConfigPackage.FACET_TYPE__ID:
+                return getId();
+        }
+        return super.eGet(featureID, resolve, coreType);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void eSet(EStructuralFeature eFeature, Object newValue) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case FacesConfigPackage.FACET_TYPE__DESCRIPTION:
-				getDescription().clear();
-				getDescription().addAll((Collection)newValue);
-				return;
-			case FacesConfigPackage.FACET_TYPE__DISPLAY_NAME:
-				getDisplayName().clear();
-				getDisplayName().addAll((Collection)newValue);
-				return;
-			case FacesConfigPackage.FACET_TYPE__ICON:
-				getIcon().clear();
-				getIcon().addAll((Collection)newValue);
-				return;
-			case FacesConfigPackage.FACET_TYPE__FACET_NAME:
-				setFacetName((FacetNameType)newValue);
-				return;
-			case FacesConfigPackage.FACET_TYPE__FACET_EXTENSION:
-				getFacetExtension().clear();
-				getFacetExtension().addAll((Collection)newValue);
-				return;
-			case FacesConfigPackage.FACET_TYPE__ID:
-				setId((String)newValue);
-				return;
-		}
-		eDynamicSet(eFeature, newValue);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void eSet(int featureID, Object newValue) {
+        switch (featureID) {
+            case FacesConfigPackage.FACET_TYPE__DESCRIPTION:
+                getDescription().clear();
+                getDescription().addAll((Collection)newValue);
+                return;
+            case FacesConfigPackage.FACET_TYPE__DISPLAY_NAME:
+                getDisplayName().clear();
+                getDisplayName().addAll((Collection)newValue);
+                return;
+            case FacesConfigPackage.FACET_TYPE__ICON:
+                getIcon().clear();
+                getIcon().addAll((Collection)newValue);
+                return;
+            case FacesConfigPackage.FACET_TYPE__FACET_NAME:
+                setFacetName((FacetNameType)newValue);
+                return;
+            case FacesConfigPackage.FACET_TYPE__FACET_EXTENSION:
+                getFacetExtension().clear();
+                getFacetExtension().addAll((Collection)newValue);
+                return;
+            case FacesConfigPackage.FACET_TYPE__ID:
+                setId((String)newValue);
+                return;
+        }
+        super.eSet(featureID, newValue);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void eUnset(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case FacesConfigPackage.FACET_TYPE__DESCRIPTION:
-				getDescription().clear();
-				return;
-			case FacesConfigPackage.FACET_TYPE__DISPLAY_NAME:
-				getDisplayName().clear();
-				return;
-			case FacesConfigPackage.FACET_TYPE__ICON:
-				getIcon().clear();
-				return;
-			case FacesConfigPackage.FACET_TYPE__FACET_NAME:
-				setFacetName((FacetNameType)null);
-				return;
-			case FacesConfigPackage.FACET_TYPE__FACET_EXTENSION:
-				getFacetExtension().clear();
-				return;
-			case FacesConfigPackage.FACET_TYPE__ID:
-				setId(ID_EDEFAULT);
-				return;
-		}
-		eDynamicUnset(eFeature);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void eUnset(int featureID) {
+        switch (featureID) {
+            case FacesConfigPackage.FACET_TYPE__DESCRIPTION:
+                getDescription().clear();
+                return;
+            case FacesConfigPackage.FACET_TYPE__DISPLAY_NAME:
+                getDisplayName().clear();
+                return;
+            case FacesConfigPackage.FACET_TYPE__ICON:
+                getIcon().clear();
+                return;
+            case FacesConfigPackage.FACET_TYPE__FACET_NAME:
+                setFacetName((FacetNameType)null);
+                return;
+            case FacesConfigPackage.FACET_TYPE__FACET_EXTENSION:
+                getFacetExtension().clear();
+                return;
+            case FacesConfigPackage.FACET_TYPE__ID:
+                setId(ID_EDEFAULT);
+                return;
+        }
+        super.eUnset(featureID);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean eIsSet(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case FacesConfigPackage.FACET_TYPE__DESCRIPTION:
-				return description != null && !description.isEmpty();
-			case FacesConfigPackage.FACET_TYPE__DISPLAY_NAME:
-				return displayName != null && !displayName.isEmpty();
-			case FacesConfigPackage.FACET_TYPE__ICON:
-				return icon != null && !icon.isEmpty();
-			case FacesConfigPackage.FACET_TYPE__FACET_NAME:
-				return facetName != null;
-			case FacesConfigPackage.FACET_TYPE__FACET_EXTENSION:
-				return facetExtension != null && !facetExtension.isEmpty();
-			case FacesConfigPackage.FACET_TYPE__ID:
-				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
-		}
-		return eDynamicIsSet(eFeature);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public boolean eIsSet(int featureID) {
+        switch (featureID) {
+            case FacesConfigPackage.FACET_TYPE__DESCRIPTION:
+                return description != null && !description.isEmpty();
+            case FacesConfigPackage.FACET_TYPE__DISPLAY_NAME:
+                return displayName != null && !displayName.isEmpty();
+            case FacesConfigPackage.FACET_TYPE__ICON:
+                return icon != null && !icon.isEmpty();
+            case FacesConfigPackage.FACET_TYPE__FACET_NAME:
+                return facetName != null;
+            case FacesConfigPackage.FACET_TYPE__FACET_EXTENSION:
+                return facetExtension != null && !facetExtension.isEmpty();
+            case FacesConfigPackage.FACET_TYPE__ID:
+                return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+        }
+        return super.eIsSet(featureID);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+        if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (id: ");
-		result.append(id);
-		result.append(')');
-		return result.toString();
-	}
+        StringBuffer result = new StringBuffer(super.toString());
+        result.append(" (id: ");
+        result.append(id);
+        result.append(')');
+        return result.toString();
+    }
 
 } //FacetTypeImpl

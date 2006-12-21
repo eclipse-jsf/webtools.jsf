@@ -17,6 +17,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jst.jsf.facesconfig.FacesConfigPlugin;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.wst.common.componentcore.ArtifactEdit;
 import org.eclipse.wst.common.componentcore.resources.IVirtualFile;
@@ -45,6 +46,7 @@ public class FacesConfigArtifactEdit extends ArtifactEdit {
 			}
 		} catch (IllegalArgumentException iae) {
             // suppress illegal argument exception
+            FacesConfigPlugin.write(iae);
 		}
 		return artifactEdit;
 	}
@@ -61,6 +63,7 @@ public class FacesConfigArtifactEdit extends ArtifactEdit {
 			}
 		} catch (IllegalArgumentException iae) {
             // suppress illegal argument exception
+            FacesConfigPlugin.write(iae);
 		}
 		return artifactEdit;
 	}

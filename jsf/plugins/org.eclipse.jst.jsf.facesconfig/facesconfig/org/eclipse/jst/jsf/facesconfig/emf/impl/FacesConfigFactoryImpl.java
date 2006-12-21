@@ -155,6 +155,19 @@ public class FacesConfigFactoryImpl extends EFactoryImpl implements FacesConfigF
             case FacesConfigPackage.VALUE_TYPE: return createValueType();
             case FacesConfigPackage.VARIABLE_RESOLVER_TYPE: return createVariableResolverType();
             case FacesConfigPackage.VIEW_HANDLER_TYPE: return createViewHandlerType();
+            case FacesConfigPackage.APPLICATION_EXTENSION_TYPE: return createApplicationExtensionType();
+            case FacesConfigPackage.CONVERTER_EXTENSION_TYPE: return createConverterExtensionType();
+            case FacesConfigPackage.EL_RESOLVER_TYPE: return createELResolverType();
+            case FacesConfigPackage.FACES_CONFIG_EXTENSION_TYPE: return createFacesConfigExtensionType();
+            case FacesConfigPackage.FACTORY_EXTENSION_TYPE: return createFactoryExtensionType();
+            case FacesConfigPackage.LIFECYCLE_EXTENSION_TYPE: return createLifecycleExtensionType();
+            case FacesConfigPackage.MANAGED_BEAN_EXTENSION_TYPE: return createManagedBeanExtensionType();
+            case FacesConfigPackage.NAVIGATION_RULE_EXTENSION_TYPE: return createNavigationRuleExtensionType();
+            case FacesConfigPackage.VALIDATOR_EXTENSION_TYPE: return createValidatorExtensionType();
+            case FacesConfigPackage.RESOURCE_BUNDLE_TYPE: return createResourceBundleType();
+            case FacesConfigPackage.BASE_NAME_TYPE: return createBaseNameType();
+            case FacesConfigPackage.VAR_TYPE: return createVarType();
+            case FacesConfigPackage.RENDER_KIT_EXTENSION_TYPE: return createRenderKitExtensionType();
             default:
                 throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
         }
@@ -398,6 +411,16 @@ public class FacesConfigFactoryImpl extends EFactoryImpl implements FacesConfigF
     public DynamicElement createDynamicElement() {
         DynamicElementImpl dynamicElement = new DynamicElementImpl();
         return dynamicElement;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public ELResolverType createELResolverType() {
+        ELResolverTypeImpl elResolverType = new ELResolverTypeImpl();
+        return elResolverType;
     }
 
     /**
@@ -988,6 +1011,126 @@ public class FacesConfigFactoryImpl extends EFactoryImpl implements FacesConfigF
 	public ViewHandlerType createViewHandlerType() {
         ViewHandlerTypeImpl viewHandlerType = new ViewHandlerTypeImpl();
         return viewHandlerType;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public ApplicationExtensionType createApplicationExtensionType() {
+        ApplicationExtensionTypeImpl applicationExtensionType = new ApplicationExtensionTypeImpl();
+        return applicationExtensionType;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public ResourceBundleType createResourceBundleType() {
+        ResourceBundleTypeImpl resourceBundleType = new ResourceBundleTypeImpl();
+        return resourceBundleType;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public BaseNameType createBaseNameType() {
+        BaseNameTypeImpl baseNameType = new BaseNameTypeImpl();
+        return baseNameType;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public VarType createVarType() {
+        VarTypeImpl varType = new VarTypeImpl();
+        return varType;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public RenderKitExtensionType createRenderKitExtensionType() {
+        RenderKitExtensionTypeImpl renderKitExtensionType = new RenderKitExtensionTypeImpl();
+        return renderKitExtensionType;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public NavigationRuleExtensionType createNavigationRuleExtensionType() {
+        NavigationRuleExtensionTypeImpl navigationRuleExtensionType = new NavigationRuleExtensionTypeImpl();
+        return navigationRuleExtensionType;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public ValidatorExtensionType createValidatorExtensionType() {
+        ValidatorExtensionTypeImpl validatorExtensionType = new ValidatorExtensionTypeImpl();
+        return validatorExtensionType;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public FacesConfigExtensionType createFacesConfigExtensionType() {
+        FacesConfigExtensionTypeImpl facesConfigExtensionType = new FacesConfigExtensionTypeImpl();
+        return facesConfigExtensionType;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public FactoryExtensionType createFactoryExtensionType() {
+        FactoryExtensionTypeImpl factoryExtensionType = new FactoryExtensionTypeImpl();
+        return factoryExtensionType;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public LifecycleExtensionType createLifecycleExtensionType() {
+        LifecycleExtensionTypeImpl lifecycleExtensionType = new LifecycleExtensionTypeImpl();
+        return lifecycleExtensionType;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public ManagedBeanExtensionType createManagedBeanExtensionType() {
+        ManagedBeanExtensionTypeImpl managedBeanExtensionType = new ManagedBeanExtensionTypeImpl();
+        return managedBeanExtensionType;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public ConverterExtensionType createConverterExtensionType() {
+        ConverterExtensionTypeImpl converterExtensionType = new ConverterExtensionTypeImpl();
+        return converterExtensionType;
     }
 
     /**

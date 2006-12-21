@@ -39,6 +39,7 @@ public class NavigationRuleTranslator extends Translator {
 			new IconTranslator("icon", facesPackage.getNavigationRuleType_Icon()), //$NON-NLS-1$
 			new FromViewIdTranslator("from-view-id", facesPackage.getNavigationRuleType_FromViewId()), //$NON-NLS-1$
 			new NavigationCaseTranslator("navigation-case", facesPackage.getNavigationRuleType_NavigationCase()), //$NON-NLS-1$
+            new NavigationRuleExtensionTranslator("navigation-rule-extension", facesPackage.getNavigationRuleType_NavigationRuleExtension()), // $NON-NLS-1$
 			new Translator("id", facesPackage.getNavigationRuleType_Id(), DOM_ATTRIBUTE) //$NON-NLS-1$
 		};
 	}

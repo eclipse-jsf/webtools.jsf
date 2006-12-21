@@ -608,6 +608,93 @@ public class FacesConfigSwitch {
                 if (result == null) result = defaultCase(theEObject);
                 return result;
             }
+            case FacesConfigPackage.APPLICATION_EXTENSION_TYPE: {
+                ApplicationExtensionType applicationExtensionType = (ApplicationExtensionType)theEObject;
+                Object result = caseApplicationExtensionType(applicationExtensionType);
+                if (result == null) result = caseExtensionType(applicationExtensionType);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case FacesConfigPackage.CONVERTER_EXTENSION_TYPE: {
+                ConverterExtensionType converterExtensionType = (ConverterExtensionType)theEObject;
+                Object result = caseConverterExtensionType(converterExtensionType);
+                if (result == null) result = caseExtensionType(converterExtensionType);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case FacesConfigPackage.EL_RESOLVER_TYPE: {
+                ELResolverType elResolverType = (ELResolverType)theEObject;
+                Object result = caseELResolverType(elResolverType);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case FacesConfigPackage.FACES_CONFIG_EXTENSION_TYPE: {
+                FacesConfigExtensionType facesConfigExtensionType = (FacesConfigExtensionType)theEObject;
+                Object result = caseFacesConfigExtensionType(facesConfigExtensionType);
+                if (result == null) result = caseExtensionType(facesConfigExtensionType);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case FacesConfigPackage.FACTORY_EXTENSION_TYPE: {
+                FactoryExtensionType factoryExtensionType = (FactoryExtensionType)theEObject;
+                Object result = caseFactoryExtensionType(factoryExtensionType);
+                if (result == null) result = caseExtensionType(factoryExtensionType);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case FacesConfigPackage.LIFECYCLE_EXTENSION_TYPE: {
+                LifecycleExtensionType lifecycleExtensionType = (LifecycleExtensionType)theEObject;
+                Object result = caseLifecycleExtensionType(lifecycleExtensionType);
+                if (result == null) result = caseExtensionType(lifecycleExtensionType);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case FacesConfigPackage.MANAGED_BEAN_EXTENSION_TYPE: {
+                ManagedBeanExtensionType managedBeanExtensionType = (ManagedBeanExtensionType)theEObject;
+                Object result = caseManagedBeanExtensionType(managedBeanExtensionType);
+                if (result == null) result = caseExtensionType(managedBeanExtensionType);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case FacesConfigPackage.NAVIGATION_RULE_EXTENSION_TYPE: {
+                NavigationRuleExtensionType navigationRuleExtensionType = (NavigationRuleExtensionType)theEObject;
+                Object result = caseNavigationRuleExtensionType(navigationRuleExtensionType);
+                if (result == null) result = caseExtensionType(navigationRuleExtensionType);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case FacesConfigPackage.VALIDATOR_EXTENSION_TYPE: {
+                ValidatorExtensionType validatorExtensionType = (ValidatorExtensionType)theEObject;
+                Object result = caseValidatorExtensionType(validatorExtensionType);
+                if (result == null) result = caseExtensionType(validatorExtensionType);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case FacesConfigPackage.RESOURCE_BUNDLE_TYPE: {
+                ResourceBundleType resourceBundleType = (ResourceBundleType)theEObject;
+                Object result = caseResourceBundleType(resourceBundleType);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case FacesConfigPackage.BASE_NAME_TYPE: {
+                BaseNameType baseNameType = (BaseNameType)theEObject;
+                Object result = caseBaseNameType(baseNameType);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case FacesConfigPackage.VAR_TYPE: {
+                VarType varType = (VarType)theEObject;
+                Object result = caseVarType(varType);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case FacesConfigPackage.RENDER_KIT_EXTENSION_TYPE: {
+                RenderKitExtensionType renderKitExtensionType = (RenderKitExtensionType)theEObject;
+                Object result = caseRenderKitExtensionType(renderKitExtensionType);
+                if (result == null) result = caseExtensionType(renderKitExtensionType);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
             default: return defaultCase(theEObject);
         }
     }
@@ -969,6 +1056,21 @@ public class FacesConfigSwitch {
      * @generated
      */
     public Object caseDynamicElement(DynamicElement object) {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpretting the object as an instance of '<em>EL Resolver Type</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpretting the object as an instance of '<em>EL Resolver Type</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public Object caseELResolverType(ELResolverType object) {
         return null;
     }
 
@@ -1858,6 +1960,171 @@ public class FacesConfigSwitch {
     }
 
     /**
+     * Returns the result of interpretting the object as an instance of '<em>Resource Bundle Type</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpretting the object as an instance of '<em>Resource Bundle Type</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public Object caseResourceBundleType(ResourceBundleType object) {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpretting the object as an instance of '<em>Base Name Type</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpretting the object as an instance of '<em>Base Name Type</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public Object caseBaseNameType(BaseNameType object) {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpretting the object as an instance of '<em>Var Type</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpretting the object as an instance of '<em>Var Type</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public Object caseVarType(VarType object) {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpretting the object as an instance of '<em>Render Kit Extension Type</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpretting the object as an instance of '<em>Render Kit Extension Type</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public Object caseRenderKitExtensionType(RenderKitExtensionType object) {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpretting the object as an instance of '<em>Navigation Rule Extension Type</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpretting the object as an instance of '<em>Navigation Rule Extension Type</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public Object caseNavigationRuleExtensionType(NavigationRuleExtensionType object) {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpretting the object as an instance of '<em>Validator Extension Type</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpretting the object as an instance of '<em>Validator Extension Type</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public Object caseValidatorExtensionType(ValidatorExtensionType object) {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpretting the object as an instance of '<em>Extension Type</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpretting the object as an instance of '<em>Extension Type</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public Object caseFacesConfigExtensionType(FacesConfigExtensionType object) {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpretting the object as an instance of '<em>Factory Extension Type</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpretting the object as an instance of '<em>Factory Extension Type</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public Object caseFactoryExtensionType(FactoryExtensionType object) {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpretting the object as an instance of '<em>Lifecycle Extension Type</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpretting the object as an instance of '<em>Lifecycle Extension Type</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public Object caseLifecycleExtensionType(LifecycleExtensionType object) {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpretting the object as an instance of '<em>Managed Bean Extension Type</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpretting the object as an instance of '<em>Managed Bean Extension Type</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public Object caseManagedBeanExtensionType(ManagedBeanExtensionType object) {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpretting the object as an instance of '<em>Converter Extension Type</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpretting the object as an instance of '<em>Converter Extension Type</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public Object caseConverterExtensionType(ConverterExtensionType object) {
+        return null;
+    }
+
+    /**
      * Returns the result of interpretting the object as an instance of '<em>Extension Type</em>'.
      * <!-- begin-user-doc -->
      * This implementation returns null;
@@ -1869,6 +2136,21 @@ public class FacesConfigSwitch {
      * @generated
      */
     public Object caseExtensionType(ExtensionType object) {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpretting the object as an instance of '<em>Application Extension Type</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpretting the object as an instance of '<em>Application Extension Type</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public Object caseApplicationExtensionType(ApplicationExtensionType object) {
         return null;
     }
 
