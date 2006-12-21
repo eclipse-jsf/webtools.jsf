@@ -43,7 +43,7 @@ public class ManagedBeanTranslator extends Translator {
 			new ManagedPropertyTranslator("managed-property", facesPackage.getManagedBeanType_ManagedProperty()), //$NON-NLS-1$
 			new MapEntriesTranslator("map-entries", facesPackage.getManagedBeanType_MapEntries()), //$NON-NLS-1$
 			new ListEntriesTranslator("list-entries", facesPackage.getManagedBeanType_ListEntries()), //$NON-NLS-1$
-            new ManagedBeanExtensionType("managed-bean-extension", facesPackage.getManagedBeanType_ManagedBeanExtension()), //$NON-NLS-1$
+            new ManagedBeanExtensionTranslator("managed-bean-extension", facesPackage.getManagedBeanType_ManagedBeanExtension()), //$NON-NLS-1$
 			new Translator("id", facesPackage.getManagedBeanType_Id(), DOM_ATTRIBUTE) //$NON-NLS-1$
 		};
 	}
