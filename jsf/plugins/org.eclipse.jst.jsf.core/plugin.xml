@@ -21,45 +21,44 @@
     </project-facet>
 
     <project-facet-version facet="jst.jsf" version="1.1">
-      <action type="install" id="jst.jsf.v11.install">
-        <delegate class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDelegate"/>
-        <config-factory class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDataModelProvider"/>
-      </action>    
-      <action
-            id="jst.jsf.v11.uninstall"
-            type="uninstall">
-	 	<delegate
-         class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetUninstallDelegate"/>
- 	  </action>      
        <constraint>
         <and>
           <requires facet="jst.web" version="[2.3"/>
         </and>
       </constraint>
     </project-facet-version> 
- <!--
+
     <project-facet-version facet="jst.jsf" version="1.2">
-	   	<action type="install" id="jst.jsf.v12.install">
-			<delegate
-	        class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDelegate"/>
-			<config-factory class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDataModelProvider"/>
-		</action>
-		<action type="uninstall" id="jst.jsf.v12.uninstall">
-		 	<delegate
-	         class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetUninstallDelegate"/>
-	 	</action>    
-     <constraint>
+       <constraint>
         <and>
           <requires facet="jst.web" version="[2.4"/>
+          <requires facet="jst.java" version="[5.0"/>
         </and>
       </constraint>
-    </project-facet-version>        
---> 	 	
+    </project-facet-version> 
+
+    <action id="jst.jsf.v11.install" facet="jst.jsf" type="INSTALL" version="[1.1-1.2]">
+      <delegate class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDelegate"/>
+        <config-factory class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDataModelProvider"/>
+    </action>  
+      
+    <action id="jst.jsf.v11.uninstall" facet="jst.jsf" version="[1.1-1.2]" type="UNINSTALL">
+	 	<delegate
+        class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetUninstallDelegate"/>
+ 	</action>      
+
 	<preset id="preset.jst.jsf.v1_1">
 	    <label>JavaServer Faces v1.1 Project</label>
 	    <facet id="jst.java" version="1.4" />
 	    <facet id="jst.web" version="2.3"/>
 	    <facet id="jst.jsf" version="1.1" />
+	</preset>    
+
+	<preset id="preset.jst.jsf.v1_2">
+	    <label>JavaServer Faces v1.2 Project</label>
+	    <facet id="jst.java" version="5.0" />
+	    <facet id="jst.web" version="2.4"/>
+	    <facet id="jst.jsf" version="1.2" />
 	</preset>    
  	
   </extension> 
@@ -198,7 +197,33 @@
          		fullBuild="true"
          	/>
 		</validator>
+		</extension>
+
+   <extension
+        point="org.eclipse.wst.validation.validator"
+		id="JSFAppConfigValidator"
+		name="%JSFAppConfigValidator">
+		<validator>
+			<projectNature id="org.eclipse.wst.common.modulecore.ModuleCoreNature" />
+			<projectNature id="org.eclipse.jdt.core.javanature" />
+			<filter
+				objectClass="org.eclipse.core.resources.IFile"
+				nameFilter="faces-config.xml">
+			</filter>
+			<markerId
+               markerIdValue="JSPSemanticsValidatorMarker">
+         	</markerId>
+			<helper 
+				class="org.eclipse.wst.validation.internal.operations.WorkbenchContext">
+			</helper>
+			<run
+         		class="org.eclipse.jst.jsf.validation.internal.appconfig.AppConfigValidator"
+         		incremental="true"
+         		fullBuild="true"
+         	/>
+		</validator>
 	</extension>
+	
 	<extension
          id="JSPSemanticsValidatorMarker"
          name="%JSPSemanticsValidatorMarker"

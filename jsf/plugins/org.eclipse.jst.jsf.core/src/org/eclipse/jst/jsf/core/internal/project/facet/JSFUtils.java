@@ -161,7 +161,7 @@ public class JSFUtils {
 			} else if (jsfVersion.equals("1.2")) { //$NON-NLS-1$
 				pw.write("<faces-config\n"); //$NON-NLS-1$
 				pw.write("    " + "xmlns=" + QUOTE //$NON-NLS-1$ //$NON-NLS-2$
-						+ "http://java.sun.com/xml/ns/j2ee" + QUOTE + "\n"); //$NON-NLS-1$ //$NON-NLS-2$
+						+ "http://java.sun.com/xml/ns/javaee" + QUOTE + "\n"); //$NON-NLS-1$ //$NON-NLS-2$
 				pw.write("    " + "xmlns:xsi=" + QUOTE //$NON-NLS-1$ //$NON-NLS-2$
 						+ "http://www.w3.org/2001/XMLSchema-instance" + QUOTE //$NON-NLS-1$
 						+ "\n"); //$NON-NLS-1$
@@ -169,7 +169,7 @@ public class JSFUtils {
 						.write("    " //$NON-NLS-1$
 								+ "xsi:schemaLocation=" //$NON-NLS-1$
 								+ QUOTE
-								+ "http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-facesconfig_1_2.xsd" //$NON-NLS-1$
+								+ "http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd" //$NON-NLS-1$
 								+ QUOTE + "\n"); //$NON-NLS-1$
 				pw.write("    " + "version=" + QUOTE + "1.2" + QUOTE + ">\n\n"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 				pw.write("</faces-config>\n"); //$NON-NLS-1$

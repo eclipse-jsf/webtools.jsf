@@ -12,6 +12,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.jst.server.core,
  org.eclipse.wst.server.core,
  org.eclipse.wst.common.frameworks,
+ org.eclipse.jst.jsf.facesconfig,
  org.eclipse.jst.common.frameworks,
  org.eclipse.jdt.core,
  org.eclipse.core.resources,
@@ -22,8 +23,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.jst.j2ee.core,
  org.eclipse.jem.util,
  org.eclipse.wst.xml.core,
- org.eclipse.jst.jsf.facesconfig,
- org.eclipse.wst.common.emf,
  org.eclipse.jem.workbench,
  org.eclipse.wst.common.frameworks.ui,
  org.eclipse.jst.jsp.core,
@@ -32,7 +31,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.wst.sse.core,
  org.eclipse.wst.html.core,
  org.eclipse.wst.validation,
- org.eclipse.wst.sse.ui
+ org.eclipse.wst.sse.ui,
+ org.eclipse.wst.common.emf
 Eclipse-LazyStart: true
 Export-Package: org.eclipse.jst.jsf.core.internal;x-friends:="org.eclipse.jst.jsf.core.tests,org.eclipse.jst.jsf.ui,org.eclipse.jst.jsf.ui.tests",
  org.eclipse.jst.jsf.core.internal.contentassist.el;x-friends:="org.eclipse.jst.jsf.contentassist.tests",
@@ -57,4 +57,5 @@ Export-Package: org.eclipse.jst.jsf.core.internal;x-friends:="org.eclipse.jst.js
  org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues,
  org.eclipse.jst.jsf.validation.internal.el.diagnostics;x-friends:="org.eclipse.jst.jsf.validation.el.tests",
  org.eclipse.jst.jsf.validation.internal;x-friends:="org.eclipse.jst.jsf.ui",
- org.eclipse.jst.jsf.validation.internal.el;x-friends:="org.eclipse.jst.jsf.ui"
+ org.eclipse.jst.jsf.validation.internal.el;x-friends:="org.eclipse.jst.jsf.ui",
+ org.eclipse.jst.jsf.validation.internal.appconfig;x-friends:="org.eclipse.jst.jsf.core.tests"
