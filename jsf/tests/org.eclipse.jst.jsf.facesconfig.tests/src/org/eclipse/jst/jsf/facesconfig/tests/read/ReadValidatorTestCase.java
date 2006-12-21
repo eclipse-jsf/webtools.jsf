@@ -10,16 +10,12 @@
  **************************************************************************************************/
 package org.eclipse.jst.jsf.facesconfig.tests.read;
 
-import junit.framework.TestCase;
-
-import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.facesconfig.emf.DescriptionType;
 import org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.jst.jsf.facesconfig.emf.IconType;
 import org.eclipse.jst.jsf.facesconfig.emf.ValidatorType;
 import org.eclipse.jst.jsf.facesconfig.tests.util.FacesConfigModelUtil;
-import org.eclipse.jst.jsf.facesconfig.tests.util.WizardUtil;
 import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
 
 /*
@@ -28,17 +24,10 @@ import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
  * information hierarchy of the faces-config.xml file 
  *
  */
-public class ReadValidatorTestCase extends TestCase {
-	IProject project = null;
+public class ReadValidatorTestCase extends BaseReadTestCase {
 
 	public ReadValidatorTestCase(String name) {
 		super(name);
-	}
-
-	protected void setUp() throws Exception {
-		super.setUp();
-		WizardUtil.createProject(getName());
-		project = WizardUtil.getTestProject(getName());
 	}
 
 	/*
@@ -50,8 +39,7 @@ public class ReadValidatorTestCase extends TestCase {
 	public void testSingleValidator() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
             assertNotNull(getValidator1(edit.getFacesConfig()));
 		} finally {
@@ -61,7 +49,7 @@ public class ReadValidatorTestCase extends TestCase {
 		}
 	}
 
-    private ValidatorType getValidator1(FacesConfigType facesConfig)
+    ValidatorType getValidator1(FacesConfigType facesConfig)
     {
         return (ValidatorType)
             FacesConfigModelUtil
@@ -72,8 +60,7 @@ public class ReadValidatorTestCase extends TestCase {
 	public void testDescriptionGroup() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
             ValidatorType validator1 = getValidator1(edit.getFacesConfig());
             assertNotNull(validator1);
@@ -114,8 +101,7 @@ public class ReadValidatorTestCase extends TestCase {
 	public void testValidatorSingleValueProperties() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
             
             ValidatorType validator1 = getValidator1(edit.getFacesConfig());
@@ -140,8 +126,7 @@ public class ReadValidatorTestCase extends TestCase {
 	public void testAttribute() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
             
 			ValidatorType validator = getValidator1(edit.getFacesConfig());
@@ -161,8 +146,7 @@ public class ReadValidatorTestCase extends TestCase {
 	public void testProperty() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-            edit = FacesConfigArtifactEdit
-                .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
     
             ValidatorType validator = getValidator1(edit.getFacesConfig());

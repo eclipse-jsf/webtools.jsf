@@ -11,7 +11,6 @@
  ********************************************************************************/
 package org.eclipse.jst.jsf.test.util;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;

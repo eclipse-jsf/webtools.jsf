@@ -1,8 +1,5 @@
 package org.eclipse.jst.jsf.facesconfig.tests.read;
 
-import junit.framework.TestCase;
-
-import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jst.jsf.facesconfig.emf.AttributeType;
 import org.eclipse.jst.jsf.facesconfig.emf.ComponentType;
@@ -13,20 +10,12 @@ import org.eclipse.jst.jsf.facesconfig.emf.IconType;
 import org.eclipse.jst.jsf.facesconfig.emf.RenderKitType;
 import org.eclipse.jst.jsf.facesconfig.emf.RendererType;
 import org.eclipse.jst.jsf.facesconfig.tests.util.FacesConfigModelUtil;
-import org.eclipse.jst.jsf.facesconfig.tests.util.WizardUtil;
 import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
 
-public class ReadAttributeRendererTestCase extends TestCase {
-    IProject project = null;
+public class ReadAttributeRendererTestCase extends BaseReadTestCase {
 
     public ReadAttributeRendererTestCase(String name) {
         super(name);
-    }
-
-    protected void setUp() throws Exception {
-        super.setUp();
-        WizardUtil.createProject(getName());
-        project = WizardUtil.getTestProject(getName());
     }
 
     /*
@@ -36,8 +25,7 @@ public class ReadAttributeRendererTestCase extends TestCase {
     public void testSingleAttribute() {
         FacesConfigArtifactEdit edit = null;
         try {
-            edit = FacesConfigArtifactEdit
-                    .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
             AttributeType attribute1 = getAttribute1(edit.getFacesConfig());
             assertNotNull(attribute1);
@@ -76,8 +64,7 @@ public class ReadAttributeRendererTestCase extends TestCase {
     public void testDescription() {
         FacesConfigArtifactEdit edit = null;
         try {
-            edit = FacesConfigArtifactEdit
-                    .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
             
             AttributeType attributeType = 
@@ -106,8 +93,7 @@ public class ReadAttributeRendererTestCase extends TestCase {
     public void testDisplayName() {
         FacesConfigArtifactEdit edit = null;
         try {
-            edit = FacesConfigArtifactEdit
-                .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
     
             AttributeType attributeType = 
@@ -135,8 +121,7 @@ public class ReadAttributeRendererTestCase extends TestCase {
     public void testIcon() {
         FacesConfigArtifactEdit edit = null;
         try {
-            edit = FacesConfigArtifactEdit
-                    .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
             
             AttributeType attrType = getAttribute1(edit.getFacesConfig());
@@ -171,8 +156,7 @@ public class ReadAttributeRendererTestCase extends TestCase {
     public void testAttributeNameAndClass() {
         FacesConfigArtifactEdit edit = null;
         try {
-            edit = FacesConfigArtifactEdit
-                    .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
             
             AttributeType attribute1 = getAttribute1(edit.getFacesConfig());
@@ -196,8 +180,7 @@ public class ReadAttributeRendererTestCase extends TestCase {
     public void testSuggestedValue() {
         FacesConfigArtifactEdit edit = null;
         try {
-            edit = FacesConfigArtifactEdit
-                    .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
             
             AttributeType attributeType = 
@@ -216,8 +199,7 @@ public class ReadAttributeRendererTestCase extends TestCase {
     {
         FacesConfigArtifactEdit edit = null;
         try {
-            edit = FacesConfigArtifactEdit
-                    .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
             
             AttributeType attributeType = 
@@ -239,8 +221,7 @@ public class ReadAttributeRendererTestCase extends TestCase {
     public void testAttributeExtension() {
         FacesConfigArtifactEdit edit = null;
         try {
-            edit = FacesConfigArtifactEdit
-                    .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             if (edit.getFacesConfig() != null) {
                 EList comp = edit.getFacesConfig().getComponent();
                 assertTrue(!comp.isEmpty());

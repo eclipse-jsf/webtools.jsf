@@ -10,12 +10,6 @@
  **************************************************************************************************/
 package org.eclipse.jst.jsf.facesconfig.tests.read;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
-import org.eclipse.core.resources.IProject;
-import org.eclipse.jst.jsf.facesconfig.tests.util.WizardUtil;
 import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
 
 /*
@@ -23,33 +17,21 @@ import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
  * class. 
  * 
  */
-public class ReadFacesConfigElementsTestCase extends TestCase {
-	IProject project = null;
+public class ReadFacesConfigElementsTestCase extends BaseReadTestCase {
 
 	public ReadFacesConfigElementsTestCase(String name) {
 		super(name);
 	}
-
-	protected void setUp() throws Exception {
-		super.setUp();
-        WizardUtil.createProject(getName());
-		project = WizardUtil.getTestProject(getName());
-	}
-
-	public static Test suite() {
-		return new TestSuite(ReadFacesConfigElementsTestCase.class);
-	}
-
+    
 	/*
 	 * Test the applicaion element of faces-config.xml
 	 * 
 	 */
-	public void testApplication() {
+	public final void testApplication() {
 
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
 			assertEquals(1, edit.getFacesConfig().getApplication().size());
 		} finally {
@@ -63,12 +45,11 @@ public class ReadFacesConfigElementsTestCase extends TestCase {
 	 * Test the factory element of faces-config.xml
 	 * 
 	 */
-	public void testFactory() {
+	public final void testFactory() {
 
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
 			assertEquals(1, edit.getFacesConfig().getFactory().size());
 		} finally {
@@ -81,12 +62,11 @@ public class ReadFacesConfigElementsTestCase extends TestCase {
 	 * Test the component element of faces-config.xml
 	 * 
 	 */
-	public void testComponent() {
+	public final void testComponent() {
 
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
 			assertEquals(1, edit.getFacesConfig().getComponent().size());
 		} finally {
@@ -100,12 +80,10 @@ public class ReadFacesConfigElementsTestCase extends TestCase {
 	 * Test the managed-bean element of faces-config.xml
 	 * 
 	 */
-	public void testManagedBean() {
-
+	public final void testManagedBean() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
 			assertEquals(3, edit.getFacesConfig().getManagedBean().size());
 		} finally {
@@ -120,12 +98,11 @@ public class ReadFacesConfigElementsTestCase extends TestCase {
 	 * Test the referenced-bean element of faces-config.xml
 	 * 
 	 */
-	public void testReferencedBean() {
+	public final void testReferencedBean() {
 
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
 			assertEquals(1, edit.getFacesConfig().getReferencedBean().size());
 		} finally {
@@ -140,12 +117,11 @@ public class ReadFacesConfigElementsTestCase extends TestCase {
 	 * Test the render-kit element of faces-config.xml
 	 * 
 	 */
-	public void testRenderKit() {
+	public final void testRenderKit() {
 
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
 			assertEquals(1, edit.getFacesConfig().getRenderKit().size());
 		} finally {
@@ -158,12 +134,11 @@ public class ReadFacesConfigElementsTestCase extends TestCase {
 	 * Testing for the validator elment of the config file
 	 */
 	
-	public void testValidator() {
+	public final void testValidator() {
 
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
 			assertEquals(1, edit.getFacesConfig().getValidator().size());
 		} finally {
@@ -177,11 +152,10 @@ public class ReadFacesConfigElementsTestCase extends TestCase {
 	 * Testing for the converter elment of the config file
 	 */
 	
-	public void testConverter() {
+	public final void testConverter() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
 			assertEquals(2, edit.getFacesConfig().getConverter().size());
 		} finally {
@@ -194,12 +168,11 @@ public class ReadFacesConfigElementsTestCase extends TestCase {
     /**
      * Testing for the navigation rule list population
      */
-    public void testNavigationRule()
+    public final void testNavigationRule()
     {
         FacesConfigArtifactEdit edit = null;
         try {
-            edit = FacesConfigArtifactEdit
-                    .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
             assertEquals(2, edit.getFacesConfig().getNavigationRule().size());
         } finally {
@@ -212,12 +185,11 @@ public class ReadFacesConfigElementsTestCase extends TestCase {
     /**
      * Testing for the lifecycle list population
      */
-    public void testLifecycle()
+    public final void testLifecycle()
     {
         FacesConfigArtifactEdit edit = null;
         try {
-            edit = FacesConfigArtifactEdit
-                    .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
             assertEquals(1, edit.getFacesConfig().getLifecycle().size());
         } finally {

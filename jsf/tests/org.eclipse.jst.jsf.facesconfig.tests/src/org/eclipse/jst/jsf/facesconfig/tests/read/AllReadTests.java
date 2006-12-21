@@ -13,6 +13,9 @@ package org.eclipse.jst.jsf.facesconfig.tests.read;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
+import org.eclipse.jst.jsf.test.util.ConfigurableTestSuite;
+import org.eclipse.jst.jsf.test.util.ConfigurableTestCase.TestConfiguration;
+
 /**
  * Wrapper suite for all the tests against the .util package.
  * 
@@ -21,79 +24,132 @@ import junit.framework.TestSuite;
  */
 public class AllReadTests {
 
-    public static Test suite() {
-        TestSuite suite = new TestSuite("Test FacesConfig model");
+    public static Test suite() 
+    {
+        TestSuite suite = new TestSuite("FacesConfig Model Read Translation");
+        suite.addTest(Faces_1_1_suite());
+        suite.addTest(Faces_1_2_suite());
+        return suite;
+    }
+    
+    private static Test Faces_1_2_suite()
+    {
+        TestConfiguration testConfiguration = new TestConfiguration();
+        testConfiguration.put(BaseReadTestCase.CONFIG_FILE_KEY, "WEB-INF/faces-config_1_2.xml");
+        testConfiguration.put(BaseReadTestCase.FACES_VERSION_KEY, "1.2");
 
-        suite.addTest(new TestSuite(ReadFacesConfigElementsTestCase.class,
-                "Faces-config - Each Element"));
+        TestSuite suite = 
+            new ConfigurableTestSuite(testConfiguration, "Faces 1.2 Model Tests");
+        suite.addTest(new ConfigurableTestSuite(ReadApplicationTestCase_1_2.class, "Application Test"));
+        suite.addTest(new ConfigurableTestSuite(ReadFacesConfigElementsTestCase_1_2.class,
+            "Faces-config - Each Element"));
+        // Factory
+        suite.addTest(new ConfigurableTestSuite(ReadFactoryTestCase_1_2.class,
+            "Facesconfig -Factory "));
+        // Converter
+        suite.addTest(new ConfigurableTestSuite(ReadConverterTestCase_1_2.class,
+                "Converter Test - Single"));
+        // Lifecycle
+        suite.addTest(new ConfigurableTestSuite(ReadLifecycleTestCase_1_2.class,
+                "Lifecycle Test - Single"));
+        // Navigation
+        suite.addTest(new ConfigurableTestSuite(ReadNavigationRuleTestCase_1_2.class,
+                "Navigation Rule"));
+        // Validator
+        suite.addTest(new ConfigurableTestSuite(ReadValidatorTestCase_1_2.class,
+                "Validator Test - Single"));
+        // Managed Bean
+        suite.addTest(new ConfigurableTestSuite(ReadManagedBeanTestCase_1_2.class,
+                "Managed-Bean Test"));
+        // Render-kit
+        suite.addTest(new ConfigurableTestSuite(ReadRenderKitTestCase_1_2.class,
+                "Render-kit Test"));
 
+        Faces_base_suite(suite, testConfiguration);
+        return suite;
+    }
+    
+    private static Test Faces_1_1_suite()
+    {
+        TestConfiguration testConfiguration = new TestConfiguration();
+        testConfiguration.put(BaseReadTestCase.CONFIG_FILE_KEY, BaseReadTestCase.CONFIG_FILE_DEFAULT);
+        testConfiguration.put(BaseReadTestCase.FACES_VERSION_KEY, "1.1");
+
+        TestSuite suite = 
+            new ConfigurableTestSuite(testConfiguration, "Faces 1.1 Model Tests");
+        suite.addTest(new ConfigurableTestSuite(ReadFacesConfigElementsTestCase.class,
+            "Faces-config - Each Element"));
         // Application
-        suite.addTest(new TestSuite(ReadApplicationTestCase.class,
+        suite.addTest(new ConfigurableTestSuite(ReadApplicationTestCase.class,
                 "Application Test"));
-        
+        // Factory
+        suite.addTest(new ConfigurableTestSuite(ReadFactoryTestCase.class,
+                "Facesconfig -Factory "));
+        // Converter
+        suite.addTest(new ConfigurableTestSuite(ReadConverterTestCase.class,
+                "Converter Test - Single"));
+        // Lifecycle
+        suite.addTest(new ConfigurableTestSuite(ReadLifecycleTestCase.class,
+                "Lifecycle Test - Single"));
+        Faces_base_suite(suite, testConfiguration);
+        // Navigation
+        suite.addTest(new ConfigurableTestSuite(ReadNavigationRuleTestCase.class,
+                "Navigation Rule"));
+        // Validator
+        suite.addTest(new ConfigurableTestSuite(ReadValidatorTestCase.class,
+                "Validator Test - Single"));
+        // Managed Bean
+        suite.addTest(new ConfigurableTestSuite(ReadManagedBeanTestCase.class,
+                "Managed-Bean Test"));
+        // Render-kit
+        suite.addTest(new ConfigurableTestSuite(ReadRenderKitTestCase.class,
+                "Render-kit Test"));
+
+        return suite;
+    }
+
+    private static void Faces_base_suite(TestSuite suite, TestConfiguration configuration) 
+    {
         // Component
-        suite.addTest(new TestSuite(ReadComponentTestCase.class,
+        suite.addTest(new ConfigurableTestSuite(ReadComponentTestCase.class,
                 "Component Test"));
-        suite.addTest(new TestSuite(ReadAttributeComponentTestCase.class,
+        suite.addTest(new ConfigurableTestSuite(ReadAttributeComponentTestCase.class,
                 "Component-->Attribute Test"));
-        suite.addTest(new TestSuite(ReadFacetComponentTestCase.class,
+        suite.addTest(new ConfigurableTestSuite(ReadFacetComponentTestCase.class,
                 "Component-->Facet Test"));
-        suite.addTest(new TestSuite(ReadPropertyComponentTestCase.class,
+        suite.addTest(new ConfigurableTestSuite(ReadPropertyComponentTestCase.class,
                 "Component-->Property Test"));
         
-        // Converter
-        suite.addTest(new TestSuite(ReadConverterTestCase.class,
-                "Converter Test - Single"));
-        suite.addTest(new TestSuite(ReadAttributeConverterTestCase.class,
+        suite.addTest(new ConfigurableTestSuite(ReadAttributeConverterTestCase.class,
                 "Converter-->Attribute Test"));
-        suite.addTest(new TestSuite(ReadPropertyConverterTestCase.class,
+        suite.addTest(new ConfigurableTestSuite(ReadPropertyConverterTestCase.class,
                 "Converter-->Property Test"));
         
-        // Factory
-        suite.addTest(new TestSuite(ReadFactoryTestCase.class,
-                "Facesconfig -Factory "));
-        
-        // Lifecycle
-        suite.addTest(new TestSuite(ReadLifecycleTestCase.class,
-                "Lifecycle Test - Single"));
-        
         // Managed Bean
-        suite.addTest(new TestSuite(ReadManagedBeanTestCase.class,
-                "Managed-Bean Test"));
-        suite.addTest(new TestSuite(
+        suite.addTest(new ConfigurableTestSuite(
                 ReadManagedBeanManagedPropertyTestCase.class,
                 "Managed-Bean Property"));
         
-        // Navigation
-        suite.addTest(new TestSuite(ReadNavigationRuleTestCase.class,
-                "Navigation Rule"));
-        
         // Referenced Bean
-        suite.addTest(new TestSuite(ReadReferencedBeanTestCase.class,
+        suite.addTest(new ConfigurableTestSuite(ReadReferencedBeanTestCase.class,
                 "Referenced-Bean Test"));
 
         // Render-kit
-        suite.addTest(new TestSuite(ReadRenderKitTestCase.class,
-                "Render-kit Test"));
-        suite.addTest(new TestSuite(ReadRendererTestCase.class,
+        suite.addTest(new ConfigurableTestSuite(ReadRendererTestCase.class,
                 "Render-kit-->Renderer Test"));
-        suite.addTest(new TestSuite(ReadAttributeRendererTestCase.class,
+        suite.addTest(new ConfigurableTestSuite(ReadAttributeRendererTestCase.class,
                 "Render-kit-->Renderer-->Attribute"));
-        suite.addTest(new TestSuite(ReadFacetRendererTestCase.class,
+        suite.addTest(new ConfigurableTestSuite(ReadFacetRendererTestCase.class,
                 "Render-kit-->Renderer-->Facet"));
         
         // Validator
-        suite.addTest(new TestSuite(ReadValidatorTestCase.class,
-                "Validator Test - Single"));
-        suite.addTest(new TestSuite(ReadAttributeValidatorTestCase.class,
+        suite.addTest(new ConfigurableTestSuite(ReadAttributeValidatorTestCase.class,
                 "Validator-->Attribute Test - Single"));
-        suite.addTest(new TestSuite(ReadPropertyValidatorTestCase.class,
+        suite.addTest(new ConfigurableTestSuite(ReadPropertyValidatorTestCase.class,
                 "Validator-->Property Test"));
 
         // Extended data
-        suite.addTest(new TestSuite(ReadExtensionDataTestCase.class,
+        suite.addTest(new ConfigurableTestSuite(ReadExtensionDataTestCase.class,
                 "Extension Data Test 1"));
-        
-        return suite;
     }
 }

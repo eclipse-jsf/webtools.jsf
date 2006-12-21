@@ -10,9 +10,6 @@
  **************************************************************************************************/
 package org.eclipse.jst.jsf.facesconfig.tests.read;
 
-import junit.framework.TestCase;
-
-import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.facesconfig.emf.ActionListenerType;
 import org.eclipse.jst.jsf.facesconfig.emf.ApplicationType;
 import org.eclipse.jst.jsf.facesconfig.emf.DefaultRenderKitIdType;
@@ -25,25 +22,15 @@ import org.eclipse.jst.jsf.facesconfig.emf.SupportedLocaleType;
 import org.eclipse.jst.jsf.facesconfig.emf.VariableResolverType;
 import org.eclipse.jst.jsf.facesconfig.emf.ViewHandlerType;
 import org.eclipse.jst.jsf.facesconfig.tests.util.FacesConfigModelUtil;
-import org.eclipse.jst.jsf.facesconfig.tests.util.WizardUtil;
 import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
 /*
  * This Junit class is used to test that the different of child lists
  * of Application are correctly populated.
  */
-public class ReadApplicationTestCase extends TestCase {
-	IProject project = null;
-
+public class ReadApplicationTestCase extends BaseReadTestCase 
+{
 	public ReadApplicationTestCase(String name) {
 		super(name);
-	}
-
-	
-	
-	protected void setUp() throws Exception {
-		super.setUp();
-		WizardUtil.createProject(getName());
-		project = WizardUtil.getTestProject(getName());
 	}
 
 	/*
@@ -55,8 +42,7 @@ public class ReadApplicationTestCase extends TestCase {
 	public void testSingleApplication() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
             ApplicationType application1 = getApplication1(edit);
             assertEquals(1, application1.getActionListener().size());
@@ -75,7 +61,7 @@ public class ReadApplicationTestCase extends TestCase {
 		}
 	}
 
-	private ApplicationType getApplication1(FacesConfigArtifactEdit edit)
+	ApplicationType getApplication1(FacesConfigArtifactEdit edit)
     {
         ApplicationType application1 = 
             FacesConfigModelUtil.findApplicationById
@@ -91,8 +77,7 @@ public class ReadApplicationTestCase extends TestCase {
 	public void testActionListener() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
             ApplicationType application1 = getApplication1(edit);
             ActionListenerType actionListener =
@@ -115,8 +100,7 @@ public class ReadApplicationTestCase extends TestCase {
 	public void testDefaultRenderKitId() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-            edit = FacesConfigArtifactEdit
-                    .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
             ApplicationType application1 = getApplication1(edit);
             DefaultRenderKitIdType defaultRenderKit =
@@ -139,8 +123,7 @@ public class ReadApplicationTestCase extends TestCase {
 	public void testMessageBundle() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-            edit = FacesConfigArtifactEdit
-                    .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
             ApplicationType application1 = getApplication1(edit);
             MessageBundleType messageBundleType =
@@ -163,8 +146,7 @@ public class ReadApplicationTestCase extends TestCase {
 	public void testNavigationHandler() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-            edit = FacesConfigArtifactEdit
-                .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
             ApplicationType application1 = getApplication1(edit);   
             NavigationHandlerType navigationHandlerType =
@@ -188,8 +170,7 @@ public class ReadApplicationTestCase extends TestCase {
 	public void testViewHandler() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-            edit = FacesConfigArtifactEdit
-                .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
             ApplicationType application1 = getApplication1(edit);   
             ViewHandlerType viewHandlerType =
@@ -213,8 +194,7 @@ public class ReadApplicationTestCase extends TestCase {
 	public void testStateManager() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-            edit = FacesConfigArtifactEdit
-                .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
             ApplicationType application1 = getApplication1(edit);   
             StateManagerType stateManagerType =
@@ -239,8 +219,7 @@ public class ReadApplicationTestCase extends TestCase {
 	public void testSingleVariableResolver() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-            edit = FacesConfigArtifactEdit
-                .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
             ApplicationType application1 = getApplication1(edit);   
             VariableResolverType variableResolverType =
@@ -263,8 +242,7 @@ public class ReadApplicationTestCase extends TestCase {
 	public void testSinglePropertyResolver() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-            edit = FacesConfigArtifactEdit
-                .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
             ApplicationType application1 = getApplication1(edit);   
             PropertyResolverType propertyResolverType =
@@ -287,8 +265,7 @@ public class ReadApplicationTestCase extends TestCase {
 	public void testLocalConfig() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-            edit = FacesConfigArtifactEdit
-                .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
             ApplicationType application1 = getApplication1(edit);   
             LocaleConfigType localeConfigType =

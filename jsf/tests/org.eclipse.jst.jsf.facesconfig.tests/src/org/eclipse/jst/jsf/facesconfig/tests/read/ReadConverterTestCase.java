@@ -10,16 +10,12 @@
  **************************************************************************************************/
 package org.eclipse.jst.jsf.facesconfig.tests.read;
 
-import junit.framework.TestCase;
-
-import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.facesconfig.emf.ConverterType;
 import org.eclipse.jst.jsf.facesconfig.emf.DescriptionType;
 import org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.jst.jsf.facesconfig.emf.IconType;
 import org.eclipse.jst.jsf.facesconfig.tests.util.FacesConfigModelUtil;
-import org.eclipse.jst.jsf.facesconfig.tests.util.WizardUtil;
 import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
 
 /*
@@ -28,17 +24,9 @@ import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
  * information hierarchy of the faces-config.xml file 
  *
  */
-public class ReadConverterTestCase extends TestCase {
-	IProject project = null;
-
+public class ReadConverterTestCase extends BaseReadTestCase {
 	public ReadConverterTestCase(String name) {
 		super(name);
-	}
-
-	protected void setUp() throws Exception {
-		super.setUp();
-		WizardUtil.createProject(getName());
-		project = WizardUtil.getTestProject(getName());
 	}
 
 	/*
@@ -48,8 +36,7 @@ public class ReadConverterTestCase extends TestCase {
 	public void testSingleConverter() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					    .getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
             assertNotNull(getConverter1(edit.getFacesConfig()));
 		} finally {
@@ -59,7 +46,7 @@ public class ReadConverterTestCase extends TestCase {
 		}
 	}
 
-    private ConverterType getConverter1(FacesConfigType facesConfig)
+    ConverterType getConverter1(FacesConfigType facesConfig)
     {
         return
             (ConverterType) FacesConfigModelUtil.
@@ -80,8 +67,7 @@ public class ReadConverterTestCase extends TestCase {
     public void testDescriptionGroup() {
         FacesConfigArtifactEdit edit = null;
         try {
-            edit = FacesConfigArtifactEdit
-                    .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
             ConverterType converter1 = getConverter1(edit.getFacesConfig());
             assertNotNull(converter1);
@@ -122,8 +108,7 @@ public class ReadConverterTestCase extends TestCase {
     public void testValidatorSingleValueProperties() {
         FacesConfigArtifactEdit edit = null;
         try {
-            edit = FacesConfigArtifactEdit
-                    .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
             
             // we need two different converters because converter-for-class
@@ -158,8 +143,7 @@ public class ReadConverterTestCase extends TestCase {
     public void testAttribute() {
         FacesConfigArtifactEdit edit = null;
         try {
-            edit = FacesConfigArtifactEdit
-                    .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
             
             ConverterType converter1 = getConverter1(edit.getFacesConfig());
@@ -179,8 +163,7 @@ public class ReadConverterTestCase extends TestCase {
     public void testProperty() {
         FacesConfigArtifactEdit edit = null;
         try {
-            edit = FacesConfigArtifactEdit
-                .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
     
             ConverterType converter1 = getConverter1(edit.getFacesConfig());

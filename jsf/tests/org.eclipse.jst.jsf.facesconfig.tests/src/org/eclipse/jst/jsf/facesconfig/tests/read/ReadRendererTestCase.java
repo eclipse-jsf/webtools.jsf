@@ -10,9 +10,6 @@
  **************************************************************************************************/
 package org.eclipse.jst.jsf.facesconfig.tests.read;
 
-import junit.framework.TestCase;
-
-import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jst.jsf.facesconfig.emf.DescriptionType;
 import org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType;
@@ -21,24 +18,16 @@ import org.eclipse.jst.jsf.facesconfig.emf.IconType;
 import org.eclipse.jst.jsf.facesconfig.emf.RenderKitType;
 import org.eclipse.jst.jsf.facesconfig.emf.RendererType;
 import org.eclipse.jst.jsf.facesconfig.tests.util.FacesConfigModelUtil;
-import org.eclipse.jst.jsf.facesconfig.tests.util.WizardUtil;
 import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
 
 /*
  * This Junit class is used to test the for the existence of
  * renderer
  */
-public class ReadRendererTestCase extends TestCase {
-	IProject project = null;
+public class ReadRendererTestCase extends BaseReadTestCase {
 
 	public ReadRendererTestCase(String name) {
 		super(name);
-	}
-
-	protected void setUp() throws Exception {
-		super.setUp();
-		WizardUtil.createProject(getName());
-		project = WizardUtil.getTestProject(getName());
 	}
 
 	/*
@@ -47,8 +36,7 @@ public class ReadRendererTestCase extends TestCase {
 	public void testSingleRenderer() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
             
             assertNotNull(getRenderer1(edit.getFacesConfig()));
@@ -82,8 +70,7 @@ public class ReadRendererTestCase extends TestCase {
 	public void testDescriptionGroup() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
 
             RendererType renderKit = getRenderer1(edit.getFacesConfig());
@@ -131,8 +118,7 @@ public class ReadRendererTestCase extends TestCase {
 	public void testStringForRequiredEntries() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
 
             RendererType renderer = getRenderer1(edit.getFacesConfig());
@@ -158,8 +144,7 @@ public class ReadRendererTestCase extends TestCase {
 	public void testAttribute() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
 			
             RendererType renderer = getRenderer1(edit.getFacesConfig());
@@ -177,8 +162,7 @@ public class ReadRendererTestCase extends TestCase {
     {
         FacesConfigArtifactEdit edit = null;
         try {
-            edit = FacesConfigArtifactEdit
-                    .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
             
             RendererType renderer = getRenderer1(edit.getFacesConfig());
@@ -201,8 +185,7 @@ public class ReadRendererTestCase extends TestCase {
 	public void testRendererExtension() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			if (edit.getFacesConfig() != null) {
 				EList renderKit = edit.getFacesConfig().getRenderKit();
 				assertTrue(!renderKit.isEmpty());

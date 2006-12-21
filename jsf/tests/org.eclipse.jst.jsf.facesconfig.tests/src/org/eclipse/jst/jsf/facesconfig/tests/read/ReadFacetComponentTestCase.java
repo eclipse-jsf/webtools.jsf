@@ -1,8 +1,5 @@
 package org.eclipse.jst.jsf.facesconfig.tests.read;
 
-import junit.framework.TestCase;
-
-import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.facesconfig.emf.ComponentType;
 import org.eclipse.jst.jsf.facesconfig.emf.DescriptionType;
 import org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType;
@@ -10,7 +7,6 @@ import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacetType;
 import org.eclipse.jst.jsf.facesconfig.emf.IconType;
 import org.eclipse.jst.jsf.facesconfig.tests.util.FacesConfigModelUtil;
-import org.eclipse.jst.jsf.facesconfig.tests.util.WizardUtil;
 import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
 
 /**
@@ -19,17 +15,10 @@ import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
  * @author cbateman
  *
  */
-public class ReadFacetComponentTestCase extends TestCase {
-    IProject project = null;
+public class ReadFacetComponentTestCase extends BaseReadTestCase {
 
     public ReadFacetComponentTestCase(String name) {
         super(name);
-    }
-
-    protected void setUp() throws Exception {
-        super.setUp();
-        WizardUtil.createProject(getName());
-        project = WizardUtil.getTestProject(getName());
     }
 
     /*
@@ -40,8 +29,7 @@ public class ReadFacetComponentTestCase extends TestCase {
     public void testSingleFacet() {
         FacesConfigArtifactEdit edit = null;
         try {
-            edit = FacesConfigArtifactEdit
-                    .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
             
             FacetType facet1 = getFacet1(edit.getFacesConfig());
@@ -77,8 +65,7 @@ public class ReadFacetComponentTestCase extends TestCase {
     public void testDescription() {
         FacesConfigArtifactEdit edit = null;
         try {
-            edit = FacesConfigArtifactEdit
-                    .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
             
             FacetType facetType = 
@@ -107,8 +94,7 @@ public class ReadFacetComponentTestCase extends TestCase {
     public void testDisplayName() {
         FacesConfigArtifactEdit edit = null;
         try {
-            edit = FacesConfigArtifactEdit
-                .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
     
             FacetType facetType = 
@@ -136,8 +122,7 @@ public class ReadFacetComponentTestCase extends TestCase {
     public void testIcon() {
         FacesConfigArtifactEdit edit = null;
         try {
-            edit = FacesConfigArtifactEdit
-                    .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
             
             FacetType facetType = getFacet1(edit.getFacesConfig());
@@ -166,8 +151,7 @@ public class ReadFacetComponentTestCase extends TestCase {
     public void testFacetName() {
         FacesConfigArtifactEdit edit = null;
         try {
-            edit = FacesConfigArtifactEdit
-                    .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
             
             FacetType facet1 = getFacet1(edit.getFacesConfig());

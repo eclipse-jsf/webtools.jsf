@@ -10,14 +10,10 @@
  **************************************************************************************************/
 package org.eclipse.jst.jsf.facesconfig.tests.read;
 
-import junit.framework.TestCase;
-
-import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.jst.jsf.facesconfig.emf.LifecycleType;
 import org.eclipse.jst.jsf.facesconfig.emf.PhaseListenerType;
 import org.eclipse.jst.jsf.facesconfig.tests.util.FacesConfigModelUtil;
-import org.eclipse.jst.jsf.facesconfig.tests.util.WizardUtil;
 import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
 /*
  * This Junit class is used to test the lifecycle which is one of 
@@ -25,17 +21,10 @@ import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
  * information hierarchy of the faces-config.xml file 
  *
  */
-public class ReadLifecycleTestCase extends TestCase {
-	IProject project = null;
+public class ReadLifecycleTestCase extends BaseReadTestCase {
 
 	public ReadLifecycleTestCase(String name) {
 		super(name);
-	}
-
-	protected void setUp() throws Exception {
-		super.setUp();
-		WizardUtil.createProject(getName());
-		project = WizardUtil.getTestProject(getName());
 	}
 
 	/*
@@ -47,8 +36,7 @@ public class ReadLifecycleTestCase extends TestCase {
 	public void testLifecycle() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
 			assertEquals(1, edit.getFacesConfig().getLifecycle().size());
             assertNotNull(getLifecycleType1(edit.getFacesConfig()));
@@ -59,7 +47,7 @@ public class ReadLifecycleTestCase extends TestCase {
 		}
 	}
 
-    private LifecycleType getLifecycleType1(FacesConfigType  facesConfig)
+    LifecycleType getLifecycleType1(FacesConfigType  facesConfig)
     {
         return (LifecycleType)
             FacesConfigModelUtil
@@ -71,8 +59,7 @@ public class ReadLifecycleTestCase extends TestCase {
 	public void testPhaseListener() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
             LifecycleType lifecycle1 = getLifecycleType1(edit.getFacesConfig());
             assertNotNull(lifecycle1);

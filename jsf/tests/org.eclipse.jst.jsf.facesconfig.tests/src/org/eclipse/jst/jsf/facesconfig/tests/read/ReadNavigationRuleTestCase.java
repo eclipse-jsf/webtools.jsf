@@ -10,9 +10,6 @@
  **************************************************************************************************/
 package org.eclipse.jst.jsf.facesconfig.tests.read;
 
-import junit.framework.TestCase;
-
-import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jst.jsf.facesconfig.emf.DescriptionType;
 import org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType;
@@ -20,7 +17,6 @@ import org.eclipse.jst.jsf.facesconfig.emf.IconType;
 import org.eclipse.jst.jsf.facesconfig.emf.NavigationCaseType;
 import org.eclipse.jst.jsf.facesconfig.emf.NavigationRuleType;
 import org.eclipse.jst.jsf.facesconfig.tests.util.FacesConfigModelUtil;
-import org.eclipse.jst.jsf.facesconfig.tests.util.WizardUtil;
 import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
 
 /*
@@ -30,17 +26,10 @@ import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
  */
 
 
-public class ReadNavigationRuleTestCase extends TestCase {
-	IProject project = null;
+public class ReadNavigationRuleTestCase extends BaseReadTestCase {
 
 	public ReadNavigationRuleTestCase(String name) {
 		super(name);
-	}
-
-	protected void setUp() throws Exception {
-		super.setUp();
-		WizardUtil.createProject(getName());
-		project = WizardUtil.getTestProject(getName());
 	}
 
 	/*
@@ -50,8 +39,7 @@ public class ReadNavigationRuleTestCase extends TestCase {
 	public void testSingleNavigationRule() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
 			EList navRules = edit.getFacesConfig().getNavigationRule();
 			assertTrue(!navRules.isEmpty());
@@ -69,8 +57,7 @@ public class ReadNavigationRuleTestCase extends TestCase {
     {
         FacesConfigArtifactEdit edit = null;
         try {
-            edit = FacesConfigArtifactEdit
-                    .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit);
             EList navRules = edit.getFacesConfig().getNavigationRule();
             assertTrue(!navRules.isEmpty());
@@ -106,8 +93,7 @@ public class ReadNavigationRuleTestCase extends TestCase {
 	public void testNonEmptyDescription() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
             assertNotNull(edit);
 			EList navRules = edit.getFacesConfig().getNavigationRule();
 			assertTrue(!navRules.isEmpty());
@@ -156,8 +142,7 @@ public class ReadNavigationRuleTestCase extends TestCase {
 	public void testNonEmptyNavigationCases() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
 			EList navRules = edit.getFacesConfig().getNavigationRule();
 			assertTrue(!navRules.isEmpty());
@@ -194,7 +179,7 @@ public class ReadNavigationRuleTestCase extends TestCase {
             
             
             assertNotNull(navCase.getFromAction());
-            assertEquals("action2", navCase.getFromAction().getTextContent());
+            assertEquals("#{action2}", navCase.getFromAction().getTextContent());
             
             assertNotNull(navCase.getFromOutcome());
             assertEquals("outcome2", navCase.getFromOutcome().getTextContent());
@@ -217,7 +202,7 @@ public class ReadNavigationRuleTestCase extends TestCase {
             assertNotNull(navCase);
             
             assertNotNull(navCase.getFromAction());
-            assertEquals("action3", navCase.getFromAction().getTextContent());
+            assertEquals("#{action3}", navCase.getFromAction().getTextContent());
             
             assertNotNull(navCase.getFromOutcome());
             assertEquals("outcome3", navCase.getFromOutcome().getTextContent());
@@ -237,8 +222,7 @@ public class ReadNavigationRuleTestCase extends TestCase {
 	public void testNonEmptyIcon() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
 			EList navRules = edit.getFacesConfig().getNavigationRule();
 			assertTrue(!navRules.isEmpty());
@@ -291,8 +275,7 @@ public class ReadNavigationRuleTestCase extends TestCase {
     {
         FacesConfigArtifactEdit edit = null;
         try {
-            edit = FacesConfigArtifactEdit
-                    .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
             EList navRules = edit.getFacesConfig().getNavigationRule();
             assertTrue(!navRules.isEmpty());

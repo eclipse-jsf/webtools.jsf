@@ -10,9 +10,6 @@
  **************************************************************************************************/
 package org.eclipse.jst.jsf.facesconfig.tests.read;
 
-import junit.framework.TestCase;
-
-import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.facesconfig.emf.DescriptionType;
 import org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
@@ -24,7 +21,6 @@ import org.eclipse.jst.jsf.facesconfig.emf.MapEntriesType;
 import org.eclipse.jst.jsf.facesconfig.emf.MapEntryType;
 import org.eclipse.jst.jsf.facesconfig.emf.ValueType;
 import org.eclipse.jst.jsf.facesconfig.tests.util.FacesConfigModelUtil;
-import org.eclipse.jst.jsf.facesconfig.tests.util.WizardUtil;
 import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
 
 /*
@@ -33,17 +29,10 @@ import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
  *
  */
 public class ReadManagedBeanManagedPropertyTestCase extends
-		TestCase {
-	IProject project = null;
+    BaseReadTestCase {
 
 	public ReadManagedBeanManagedPropertyTestCase(String name) {
 		super(name);
-	}
-
-	protected void setUp() throws Exception {
-		super.setUp();
-		WizardUtil.createProject(getName());
-		project = WizardUtil.getTestProject(getName());
 	}
 
     /*
@@ -53,8 +42,7 @@ public class ReadManagedBeanManagedPropertyTestCase extends
 	public void testSingleManagedProperty() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
             
             assertNotNull(getManagedProperty(
@@ -91,8 +79,7 @@ public class ReadManagedBeanManagedPropertyTestCase extends
 	public void testManagedBeanDescriptionGroup() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
             
             ManagedPropertyType property = 
@@ -142,8 +129,7 @@ public class ReadManagedBeanManagedPropertyTestCase extends
 	public void testValueManagedProperty() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
 
             ManagedPropertyType property = 
@@ -171,8 +157,7 @@ public class ReadManagedBeanManagedPropertyTestCase extends
     {
         FacesConfigArtifactEdit edit = null;
         try {
-            edit = FacesConfigArtifactEdit
-                    .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
 
             ManagedPropertyType property = 
@@ -199,8 +184,7 @@ public class ReadManagedBeanManagedPropertyTestCase extends
     {
         FacesConfigArtifactEdit edit = null;
         try {
-            edit = FacesConfigArtifactEdit
-                    .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
 
             ManagedPropertyType property = 
@@ -253,8 +237,7 @@ public class ReadManagedBeanManagedPropertyTestCase extends
     {
         FacesConfigArtifactEdit edit = null;
         try {
-            edit = FacesConfigArtifactEdit
-                    .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
 
             ManagedPropertyType property = 

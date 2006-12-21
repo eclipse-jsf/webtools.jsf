@@ -1,22 +1,17 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
-<!--
-	Copyright 2003 Sun Microsystems, Inc. All rights reserved.
-	SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
--->
-
-<!DOCTYPE faces-config PUBLIC
-  "-//Sun Microsystems, Inc.//DTD JavaServer Faces Config 1.1//EN"
-  "http://java.sun.com/dtd/web-facesconfig_1_1.dtd">
-
+<faces-config
+    xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-facesconfig_1_2.xsd"
+    version="1.2">
 <!-- =========== FULL CONFIGURATION FILE ================================== -->
-
-<faces-config>
 
 	<lifecycle id="lifecycle1">
 		<phase-listener id="phaseListener1">
 			org.eclipse.wtp.jsf.tests.ValueResourcePhaseListener
 		</phase-listener>
+		<lifecycle-extension><lifecycle-extension-tag/></lifecycle-extension>
 	</lifecycle>
 
 
@@ -27,6 +22,7 @@
 		</faces-context-factory>
 		<lifecycle-factory id="lifecycleFactory1">lifecycle-factory</lifecycle-factory>
 		<render-kit-factory id="renderKitFactory1">render-kit-factory</render-kit-factory>
+		<factory-extension><factory-extension-tag/></factory-extension>
 	</factory>
 
 	<!-- Component -->
@@ -130,6 +126,7 @@
 				<null-value/>
 			</list-entries>
 		</managed-property>
+		<managed-bean-extension><managed-bean-extension-tag/></managed-bean-extension>
 	</managed-bean>
 	
 	<managed-bean id="mapBean1">
@@ -197,6 +194,7 @@
 			<default-value>converter-property-default-value</default-value>
 			<suggested-value>converter-property-suggested-value</suggested-value>
 		</property>
+		<converter-extension><converter-extension-tag/></converter-extension>
 	</converter>
 
 	<converter id="converter2">
@@ -277,8 +275,8 @@
 			<renderer-extension>
 				<renderer-extension-3/>
 			</renderer-extension>
-
 		</renderer>
+		<render-kit-extension><render-kit-extension-tag/></render-kit-extension>
 	</render-kit>
 
 	<!-- Validator rules -->
@@ -319,6 +317,7 @@
 			<suggested-value>validator property suggested value</suggested-value>
 			<property-extension><future/></property-extension>
 		</property>
+		<validator-extension><validator-extension-tag/></validator-extension>
 	</validator>
 
 	<!-- variable/property resolver registration -->
@@ -341,6 +340,20 @@
 			<supported-locale id="supportedLocale_en">en</supported-locale>
 			<supported-locale id="supportedLocale_de">de</supported-locale>
 		</locale-config>
+		<el-resolver id="el-resolver-id">com.test.MyELResolver</el-resolver>
+		<resource-bundle id="resourceBundleId1">
+			<description id="resourceBundleDesc">Resource Bundle description blah</description>
+			<display-name id="resourceBundleDisplayName">Resource Bundle display name blah</display-name>
+			<icon id="resourceBundleId">
+				<small-icon>resourceBundle-smallIcon</small-icon>
+				<large-icon>resourceBundle-largeIcon</large-icon>
+			</icon>
+			<base-name>com.test.Bundle</base-name>
+			<var>bundleVar</var>
+		</resource-bundle>
+		<application-extension id="applicatinExtension1">
+			<some-extension-data/>
+		</application-extension>
 	</application>
 
 	<navigation-rule>
@@ -379,6 +392,8 @@
 			<from-outcome>outcome2</from-outcome>
 			<to-view-id>/edit2.jsp</to-view-id>
 		</navigation-case>
+		
+		<navigation-rule-extension><navigation-extension-tag/></navigation-rule-extension>
 	</navigation-rule>
 
 	<navigation-rule>
@@ -412,5 +427,7 @@
 			<to-view-id>/edit3.jsp</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-
+	<faces-config-extension>
+		<faces-config-extended-data/>
+	</faces-config-extension>
 </faces-config>

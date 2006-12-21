@@ -9,9 +9,6 @@
  *   IBM Corporation - initial API and implementation
  **************************************************************************************************/
 package org.eclipse.jst.jsf.facesconfig.tests.read;
-import junit.framework.TestCase;
-
-import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.facesconfig.emf.DescriptionType;
 import org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
@@ -22,7 +19,6 @@ import org.eclipse.jst.jsf.facesconfig.emf.MapEntriesType;
 import org.eclipse.jst.jsf.facesconfig.emf.MapEntryType;
 import org.eclipse.jst.jsf.facesconfig.emf.ValueType;
 import org.eclipse.jst.jsf.facesconfig.tests.util.FacesConfigModelUtil;
-import org.eclipse.jst.jsf.facesconfig.tests.util.WizardUtil;
 import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
 
 /*
@@ -31,28 +27,20 @@ import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
  * information hierarchy of the faces-config.xml file 
  *
  */
-public class ReadManagedBeanTestCase extends TestCase {
-	IProject project = null;
+public class ReadManagedBeanTestCase extends BaseReadTestCase {
 
 	public ReadManagedBeanTestCase(String name) {
 		super(name);
 	}
-	
-	protected void setUp() throws Exception {
-		super.setUp();
-		WizardUtil.createProject(getName());
-		project = WizardUtil.getTestProject(getName());
-	}
 
-	/*
+    /*
 	 *Test to see if there is at least one managed-bean.
 	 *This should be specified in the file for reading (faces-config)
 	 */
 	public void testManagedBean() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
             assertNotNull(getManagedBean("managedBean1", edit.getFacesConfig()));
             assertNotNull(getManagedBean("mapBean1", edit.getFacesConfig()));
@@ -64,7 +52,7 @@ public class ReadManagedBeanTestCase extends TestCase {
 		}
 	}
 
-    private ManagedBeanType getManagedBean(String name, FacesConfigType facesConfig)
+    ManagedBeanType getManagedBean(String name, FacesConfigType facesConfig)
     {
         return (ManagedBeanType) FacesConfigModelUtil
             .findEObjectElementById(facesConfig.getManagedBean(), name);
@@ -74,8 +62,7 @@ public class ReadManagedBeanTestCase extends TestCase {
 	public void testDescriptionGroup() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
             
             final ManagedBeanType managedBean1 = 
@@ -120,15 +107,14 @@ public class ReadManagedBeanTestCase extends TestCase {
 	public void testSingleValuedProperties() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
             
             {
                 final ManagedBeanType managedBean1 = 
                     getManagedBean("managedBean1", edit.getFacesConfig());
                 
-                assertEquals("managed-bean-name",
+                assertEquals("managedBeanName",
                              managedBean1.getManagedBeanName().getTextContent());
                 assertEquals("managed-bean-class",
                              managedBean1.getManagedBeanClass().getTextContent());
@@ -144,7 +130,7 @@ public class ReadManagedBeanTestCase extends TestCase {
                         mapBean1.getManagedBeanName().getTextContent());
                 assertEquals("mapBean1-class",
                         mapBean1.getManagedBeanClass().getTextContent());
-                assertEquals("mapBean1-scope",
+                assertEquals("request",
                         mapBean1.getManagedBeanScope().getTextContent());
             }
             
@@ -156,7 +142,7 @@ public class ReadManagedBeanTestCase extends TestCase {
                         listBean1.getManagedBeanName().getTextContent());
                 assertEquals("listBean1-class",
                         listBean1.getManagedBeanClass().getTextContent());
-                assertEquals("listBean1-scope",
+                assertEquals("request",
                         listBean1.getManagedBeanScope().getTextContent());
             }
 		} finally {
@@ -170,8 +156,7 @@ public class ReadManagedBeanTestCase extends TestCase {
     {
         FacesConfigArtifactEdit edit = null;
         try {
-            edit = FacesConfigArtifactEdit
-                    .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
 
             ManagedBeanType bean = 
@@ -215,8 +200,7 @@ public class ReadManagedBeanTestCase extends TestCase {
     {
         FacesConfigArtifactEdit edit = null;
         try {
-            edit = FacesConfigArtifactEdit
-                    .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
 
             ManagedBeanType bean = 

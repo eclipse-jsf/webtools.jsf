@@ -2,32 +2,24 @@ package org.eclipse.jst.jsf.facesconfig.tests.read;
 
 import java.util.List;
 
-import junit.framework.TestCase;
-
-import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.facesconfig.emf.ComponentExtensionType;
 import org.eclipse.jst.jsf.facesconfig.emf.ComponentType;
 import org.eclipse.jst.jsf.facesconfig.emf.DynamicAttribute;
 import org.eclipse.jst.jsf.facesconfig.emf.DynamicElement;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.jst.jsf.facesconfig.tests.util.FacesConfigModelUtil;
-import org.eclipse.jst.jsf.facesconfig.tests.util.WizardUtil;
 import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
 
-public class ReadExtensionDataTestCase extends TestCase 
+/**
+ * Read test for extension data
+ * 
+ * @author cbateman
+ *
+ */
+public class ReadExtensionDataTestCase extends BaseReadTestCase 
 {
-    IProject project = null;
-
     public ReadExtensionDataTestCase(String name) {
         super(name);
-    }
-
-    
-    
-    protected void setUp() throws Exception {
-        super.setUp();
-        WizardUtil.createProject(getName());
-        project = WizardUtil.getTestProject(getName());
     }
     
     /*

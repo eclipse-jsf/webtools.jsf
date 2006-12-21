@@ -11,11 +11,6 @@
 
 package org.eclipse.jst.jsf.facesconfig.tests.read;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
-import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.facesconfig.emf.ApplicationFactoryType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesContextFactoryType;
@@ -23,7 +18,6 @@ import org.eclipse.jst.jsf.facesconfig.emf.FactoryType;
 import org.eclipse.jst.jsf.facesconfig.emf.LifecycleFactoryType;
 import org.eclipse.jst.jsf.facesconfig.emf.RenderKitFactoryType;
 import org.eclipse.jst.jsf.facesconfig.tests.util.FacesConfigModelUtil;
-import org.eclipse.jst.jsf.facesconfig.tests.util.WizardUtil;
 import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
 
 
@@ -32,21 +26,10 @@ import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
 * class. 
 * 
 */
-public class ReadFactoryTestCase extends TestCase {
-	IProject project = null;
+public class ReadFactoryTestCase extends BaseReadTestCase {
 
 	public ReadFactoryTestCase(String name) {
 		super(name);
-	}
-
-	protected void setUp() throws Exception {
-		super.setUp();
-        WizardUtil.createProject(getName());
-		project = WizardUtil.getTestProject(getName());
-	}
-
-	public static Test suite() {
-		return new TestSuite(ReadFactoryTestCase.class);
 	}
 
 	/*
@@ -57,8 +40,7 @@ public class ReadFactoryTestCase extends TestCase {
 
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
 			assertEquals(1, edit.getFacesConfig().getFactory().size());
             assertNotNull(getFactoryType1(edit.getFacesConfig()));
@@ -69,7 +51,7 @@ public class ReadFactoryTestCase extends TestCase {
 		}
 	}
 
-    private FactoryType getFactoryType1(FacesConfigType facesConfig)
+    FactoryType getFactoryType1(FacesConfigType facesConfig)
     {
         return (FactoryType) FacesConfigModelUtil
             .findEObjectElementById(facesConfig.getFactory(), "factory1");
@@ -82,8 +64,7 @@ public class ReadFactoryTestCase extends TestCase {
 
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
 			FactoryType factoryType1 = getFactoryType1(edit.getFacesConfig());
 			assertNotNull(factoryType1);
@@ -107,8 +88,7 @@ public class ReadFactoryTestCase extends TestCase {
 
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
             FactoryType factoryType1 = getFactoryType1(edit.getFacesConfig());
             assertNotNull(factoryType1);
@@ -133,8 +113,7 @@ public class ReadFactoryTestCase extends TestCase {
 	public void testLifeCycleFactory() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-            edit = FacesConfigArtifactEdit
-                .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
             FactoryType factoryType1 = getFactoryType1(edit.getFacesConfig());
             assertNotNull(factoryType1);
@@ -158,8 +137,7 @@ public class ReadFactoryTestCase extends TestCase {
     {
         FacesConfigArtifactEdit edit = null;
         try {
-            edit = FacesConfigArtifactEdit
-                .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
             FactoryType factoryType1 = getFactoryType1(edit.getFacesConfig());
             assertNotNull(factoryType1);

@@ -10,16 +10,12 @@
  **************************************************************************************************/
 package org.eclipse.jst.jsf.facesconfig.tests.read;
 
-import junit.framework.TestCase;
-
-import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.facesconfig.emf.DescriptionType;
 import org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.jst.jsf.facesconfig.emf.IconType;
 import org.eclipse.jst.jsf.facesconfig.emf.RenderKitType;
 import org.eclipse.jst.jsf.facesconfig.tests.util.FacesConfigModelUtil;
-import org.eclipse.jst.jsf.facesconfig.tests.util.WizardUtil;
 import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
 
 /*
@@ -28,28 +24,20 @@ import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
  * information hierarchy of the faces-config.xml file 
  *
  */
-public class ReadRenderKitTestCase extends TestCase {
-	IProject project = null;
+public class ReadRenderKitTestCase extends BaseReadTestCase {
 
 	public ReadRenderKitTestCase(String name) {
 		super(name);
 	}
 
-	protected void setUp() throws Exception {
-		super.setUp();
-		WizardUtil.createProject(getName());
-		project = WizardUtil.getTestProject(getName());
-	}
-
-	/*
+    /*
 	 *Test to see if there is at least one render-kit.
 	 *This should be specified in the file for reading (faces-config)
 	 */
 	public void testSingleRenderKit() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
             
             assertNotNull(getRenderKit1(edit.getFacesConfig()));
@@ -60,7 +48,7 @@ public class ReadRenderKitTestCase extends TestCase {
 		}
 	}
 
-    private RenderKitType getRenderKit1(FacesConfigType facesConfig)
+    RenderKitType getRenderKit1(FacesConfigType facesConfig)
     {
         return (RenderKitType) FacesConfigModelUtil
             .findEObjectElementById(facesConfig.getRenderKit(), "renderKit1");
@@ -71,8 +59,7 @@ public class ReadRenderKitTestCase extends TestCase {
     {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
             
             RenderKitType renderKit = getRenderKit1(edit.getFacesConfig());
@@ -116,8 +103,7 @@ public class ReadRenderKitTestCase extends TestCase {
 	public void testSingleValuedProperties() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
             
             RenderKitType renderKit = getRenderKit1(edit.getFacesConfig());
@@ -141,8 +127,7 @@ public class ReadRenderKitTestCase extends TestCase {
 	public void testRenderer() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
             RenderKitType renderKit = getRenderKit1(edit.getFacesConfig());
             assertNotNull(renderKit);

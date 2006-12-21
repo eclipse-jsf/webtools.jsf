@@ -10,9 +10,6 @@
  **************************************************************************************************/
 package org.eclipse.jst.jsf.facesconfig.tests.read;
 
-import junit.framework.TestCase;
-
-import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.facesconfig.emf.AttributeType;
 import org.eclipse.jst.jsf.facesconfig.emf.ComponentExtensionType;
 import org.eclipse.jst.jsf.facesconfig.emf.ComponentType;
@@ -23,7 +20,6 @@ import org.eclipse.jst.jsf.facesconfig.emf.FacetType;
 import org.eclipse.jst.jsf.facesconfig.emf.IconType;
 import org.eclipse.jst.jsf.facesconfig.emf.PropertyType;
 import org.eclipse.jst.jsf.facesconfig.tests.util.FacesConfigModelUtil;
-import org.eclipse.jst.jsf.facesconfig.tests.util.WizardUtil;
 import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
 
 /*
@@ -31,17 +27,10 @@ import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
  * root Element.
  *
  */
-public class ReadComponentTestCase extends TestCase {
-	IProject project = null;
+public class ReadComponentTestCase extends BaseReadTestCase {
 
 	public ReadComponentTestCase(String name) {
 		super(name);
-	}
-
-	protected void setUp() throws Exception {
-		super.setUp();
-		WizardUtil.createProject(getName());
-		project = WizardUtil.getTestProject(getName());
 	}
 
 	/*
@@ -50,8 +39,7 @@ public class ReadComponentTestCase extends TestCase {
 	public void testSingleComponent() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
             assertNotNull(getComponent1(edit.getFacesConfig()));
 		} finally {
@@ -71,8 +59,7 @@ public class ReadComponentTestCase extends TestCase {
 	public void testNonEmptyDescription() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
 
             final ComponentType component1 = 
@@ -99,8 +86,7 @@ public class ReadComponentTestCase extends TestCase {
 	public void testDisplayName() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
 
             final ComponentType component1 = 
@@ -128,8 +114,7 @@ public class ReadComponentTestCase extends TestCase {
 	public void testNonEmptyIcon() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
             
             final ComponentType component1 = 
@@ -159,8 +144,7 @@ public class ReadComponentTestCase extends TestCase {
 	public void testNonEmptyComponentTypeAndClass() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
             assertNotNull (edit.getFacesConfig());
             ComponentType component1 = getComponent1(edit.getFacesConfig());
 			assertNotNull(component1);
@@ -183,8 +167,7 @@ public class ReadComponentTestCase extends TestCase {
 	public void testAttribute() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull (edit.getFacesConfig());
 			ComponentType component1 = getComponent1(edit.getFacesConfig());
 			
@@ -207,8 +190,7 @@ public class ReadComponentTestCase extends TestCase {
 	public void testProperty() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
             
             ComponentType component1 = getComponent1(edit.getFacesConfig());
@@ -227,8 +209,7 @@ public class ReadComponentTestCase extends TestCase {
     {
         FacesConfigArtifactEdit edit = null;
         try {
-            edit = FacesConfigArtifactEdit
-                    .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
             
             ComponentType component1 = getComponent1(edit.getFacesConfig());
@@ -250,8 +231,7 @@ public class ReadComponentTestCase extends TestCase {
 	public void testComponentExtension() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
             ComponentType component1 = getComponent1(edit.getFacesConfig());
             assertNotNull(component1);

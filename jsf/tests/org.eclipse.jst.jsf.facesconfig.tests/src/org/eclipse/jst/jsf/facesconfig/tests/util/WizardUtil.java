@@ -124,7 +124,10 @@ public class WizardUtil {
 		IFile facesConfigFile2  = ResourcesPlugin.getWorkspace().getRoot().getFile(container.getFullPath().append(new Path("faces-config2.xml"))); //$NON-NLS-1$
 		IFile facesConfigFileExtData = ResourcesPlugin.getWorkspace().getRoot().getFile(container.getFullPath().append(new Path("faces-config-ext-data1.xml"))); //$NON-NLS-1$
         
-		if(facesConfigFile.exists()) {
+
+        IFile facesConfig_1_2File = ResourcesPlugin.getWorkspace().getRoot().getFile(container.getFullPath().append(new Path("faces-config_1_2.xml"))); //$NON-NLS-1$ 
+
+        if(facesConfigFile.exists()) {
 			return;
 		}
         
@@ -132,6 +135,7 @@ public class WizardUtil {
         final IPath facesConfig1Path = new Path("/template/faces-config1.xml");
         final IPath facesConfig2Path = new Path("/template/faces-config2.xml");
         final IPath facesConfigExtData1Path = new Path("/template/faces-config-ext-data1.xml");
+        final IPath facesConfig_1_2_Path = new Path("/template/faces-config_1_2.xml");
         
         final Bundle  myBundle = Platform.getBundle("org.eclipse.jst.jsf.facesconfig.tests");
         // there is no faces-config, so add our starting template
@@ -165,13 +169,21 @@ public class WizardUtil {
                 final FileInputStream sourceStreamExt1 = new FileInputStream(fext);
                 facesConfigFileExtData.create(sourceStreamExt1, true, null);
                 sourceStreamExt1.close();
-            }            
+            }
+            
+            {
+                final String sourcePathFacesConfig_1_2 = 
+                    FileLocator.toFileURL(FileLocator.find(myBundle, facesConfig_1_2_Path,null)).getPath().toString(); //$NON-NLS-1$ //$NON-NLS-2$   
+                final File fext = new File(sourcePathFacesConfig_1_2);
+                final FileInputStream sourceStreamExt1 = new FileInputStream(fext);
+                facesConfig_1_2File.create(sourceStreamExt1, true, null);
+                sourceStreamExt1.close();
+            }
             
         } catch (IOException ioe) {
             ioe.printStackTrace(System.err);
         } catch (CoreException ce) {
             ce.printStackTrace(System.err);
         }
-		
 	}
 }

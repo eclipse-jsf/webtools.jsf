@@ -10,16 +10,12 @@
  **************************************************************************************************/
 package org.eclipse.jst.jsf.facesconfig.tests.read;
 
-import junit.framework.TestCase;
-
-import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.facesconfig.emf.DescriptionType;
 import org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.jst.jsf.facesconfig.emf.IconType;
 import org.eclipse.jst.jsf.facesconfig.emf.ReferencedBeanType;
 import org.eclipse.jst.jsf.facesconfig.tests.util.FacesConfigModelUtil;
-import org.eclipse.jst.jsf.facesconfig.tests.util.WizardUtil;
 import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
 /*
  * This Junit class is used to test the referenced-bean which is one of 
@@ -27,18 +23,12 @@ import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
  * information hierarchy of the faces-config.xml file 
  *
  */
-public class ReadReferencedBeanTestCase extends TestCase {
-	IProject project = null;
+public class ReadReferencedBeanTestCase extends BaseReadTestCase {
 
 	public ReadReferencedBeanTestCase(String name) {
 		super(name);
 	}
 
-	protected void setUp() throws Exception {
-		super.setUp();
-		WizardUtil.createProject(getName());
-		project = WizardUtil.getTestProject(getName());
-	}
 
 	/*
 	 * check for the existence of referenced-bean with in
@@ -48,8 +38,7 @@ public class ReadReferencedBeanTestCase extends TestCase {
 	public void testSingleReferncedBean() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
             
 			assertNotNull(getReferencedBean1(edit.getFacesConfig()));
@@ -72,8 +61,7 @@ public class ReadReferencedBeanTestCase extends TestCase {
 	public void testDescriptionGroup() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
                 
             ReferencedBeanType referencedBean =
@@ -118,15 +106,14 @@ public class ReadReferencedBeanTestCase extends TestCase {
 	public void testSingleValuedProperties(){
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForRead(project);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
             
             ReferencedBeanType referencedBean =
                 getReferencedBean1(edit.getFacesConfig());
             assertNotNull(referencedBean);
 
-            assertEquals("referenced-bean-name"
+            assertEquals("referencedBeanName"
                         ,referencedBean.getReferencedBeanName().getTextContent().trim());
             assertEquals("referenced-bean-class"
                     ,referencedBean.getReferencedBeanClass().getTextContent().trim());

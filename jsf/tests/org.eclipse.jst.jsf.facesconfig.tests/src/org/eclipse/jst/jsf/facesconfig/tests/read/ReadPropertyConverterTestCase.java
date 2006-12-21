@@ -1,8 +1,5 @@
 package org.eclipse.jst.jsf.facesconfig.tests.read;
 
-import junit.framework.TestCase;
-
-import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.facesconfig.emf.ConverterType;
 import org.eclipse.jst.jsf.facesconfig.emf.DescriptionType;
 import org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType;
@@ -10,7 +7,6 @@ import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.jst.jsf.facesconfig.emf.IconType;
 import org.eclipse.jst.jsf.facesconfig.emf.PropertyType;
 import org.eclipse.jst.jsf.facesconfig.tests.util.FacesConfigModelUtil;
-import org.eclipse.jst.jsf.facesconfig.tests.util.WizardUtil;
 import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
 
 /**
@@ -18,26 +14,17 @@ import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
  *  
  * @author cbateman
  */
-public class ReadPropertyConverterTestCase extends TestCase 
+public class ReadPropertyConverterTestCase extends BaseReadTestCase 
 {
-    IProject project = null;
-
     public ReadPropertyConverterTestCase(String name) {
         super(name);
-    }
-
-    protected void setUp() throws Exception {
-        super.setUp();
-        WizardUtil.createProject(getName());
-        project = WizardUtil.getTestProject(getName());
     }
     
     public void testProperty()
     {
         FacesConfigArtifactEdit edit = null;
         try {
-            edit = FacesConfigArtifactEdit
-                    .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
             
             PropertyType property1 = getProperty1(edit.getFacesConfig());
@@ -73,8 +60,7 @@ public class ReadPropertyConverterTestCase extends TestCase
     public void testDescription() {
         FacesConfigArtifactEdit edit = null;
         try {
-            edit = FacesConfigArtifactEdit
-                    .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
             
             PropertyType propertyType = 
@@ -103,8 +89,7 @@ public class ReadPropertyConverterTestCase extends TestCase
     public void testDisplayName() {
         FacesConfigArtifactEdit edit = null;
         try {
-            edit = FacesConfigArtifactEdit
-                .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
     
             PropertyType propertyType = 
@@ -132,8 +117,7 @@ public class ReadPropertyConverterTestCase extends TestCase
     public void testIcon() {
         FacesConfigArtifactEdit edit = null;
         try {
-            edit = FacesConfigArtifactEdit
-                    .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
             
             PropertyType propertyType = getProperty1(edit.getFacesConfig());
@@ -168,8 +152,7 @@ public class ReadPropertyConverterTestCase extends TestCase
     public void testPropertyNameAndClass() {
         FacesConfigArtifactEdit edit = null;
         try {
-            edit = FacesConfigArtifactEdit
-                    .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
             
             PropertyType property1 = getProperty1(edit.getFacesConfig());
@@ -193,8 +176,7 @@ public class ReadPropertyConverterTestCase extends TestCase
     public void testSuggestedValue() {
         FacesConfigArtifactEdit edit = null;
         try {
-            edit = FacesConfigArtifactEdit
-                    .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
             
             PropertyType propertyType = 
@@ -214,8 +196,7 @@ public class ReadPropertyConverterTestCase extends TestCase
     {
         FacesConfigArtifactEdit edit = null;
         try {
-            edit = FacesConfigArtifactEdit
-                    .getFacesConfigArtifactEditForRead(project);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
             
             PropertyType propertyType = 
