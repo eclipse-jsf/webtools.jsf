@@ -10,8 +10,6 @@
  **************************************************************************************************/
 package org.eclipse.jst.jsf.facesconfig.tests.write;
 
-import junit.framework.TestCase;
-
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.facesconfig.emf.AttributeType;
 import org.eclipse.jst.jsf.facesconfig.emf.DescriptionType;
@@ -24,14 +22,14 @@ import org.eclipse.jst.jsf.facesconfig.emf.ValidatorClassType;
 import org.eclipse.jst.jsf.facesconfig.emf.ValidatorIdType;
 import org.eclipse.jst.jsf.facesconfig.emf.ValidatorType;
 import org.eclipse.jst.jsf.facesconfig.tests.util.CommonStructuresUtil;
+import org.eclipse.jst.jsf.facesconfig.tests.util.FacesConfigModelUtil;
 import org.eclipse.jst.jsf.facesconfig.tests.util.WizardUtil;
 import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
 
-public class WriteValidatorTestCase extends TestCase {
-	private static final String WEB_INF_FACES_CONFIG2_XML = "WEB-INF/faces-config2.xml";
+public class WriteValidatorTestCase extends BaseWriteTestCase {
     IProject project = null;
 
-    private final static String VALIDATOR = "validator";
+    protected final static String VALIDATOR = "validator";
     private final static String VALIDATOR_CLASS = 
         CommonStructuresUtil.createPreficedString(VALIDATOR, CommonStructuresUtil.CLASS);
     private final static String VALIDATOR_ID =
@@ -52,8 +50,7 @@ public class WriteValidatorTestCase extends TestCase {
 		
 		try 
         {
-			edit = FacesConfigArtifactEdit.getFacesConfigArtifactEditForWrite(
-					project, WEB_INF_FACES_CONFIG2_XML);
+			edit = getArtifactEditForWrite();
 			assertNotNull(edit.getFacesConfig());
             
 			FacesConfigPackage facesConfigPackage = FacesConfigPackage.eINSTANCE;
@@ -89,7 +86,7 @@ public class WriteValidatorTestCase extends TestCase {
             validator.getProperty().add(
                 CommonStructuresUtil.createProperty(VALIDATOR));
 
-            validator.setId(CommonStructuresUtil.createPreficedString(VALIDATOR, CommonStructuresUtil.ID));
+            validator.setId(VALIDATOR_ID);
 			
 			edit.getFacesConfig().getValidator().add(validator);
 			edit.save(null);
@@ -103,13 +100,13 @@ public class WriteValidatorTestCase extends TestCase {
 
         try 
         {
-			edit = FacesConfigArtifactEdit.getFacesConfigArtifactEditForRead(
-					project, WEB_INF_FACES_CONFIG2_XML);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
             
-            assertEquals(1, edit.getFacesConfig().getValidator().size());
-            ValidatorType validator = 
-                (ValidatorType) edit.getFacesConfig().getValidator().get(0);
+            ValidatorType validator = (ValidatorType) FacesConfigModelUtil
+            .findEObjectElementById(edit.getFacesConfig()
+                    .getValidator(), VALIDATOR_ID);
+            assertNotNull(validator);
 
             {
                 ValidatorIdType validatorIdType = validator.getValidatorId();

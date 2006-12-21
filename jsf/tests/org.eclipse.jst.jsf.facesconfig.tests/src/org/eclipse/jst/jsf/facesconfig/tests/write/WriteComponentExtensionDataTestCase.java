@@ -1,8 +1,5 @@
 package org.eclipse.jst.jsf.facesconfig.tests.write;
 
-import junit.framework.TestCase;
-
-import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.facesconfig.emf.ComponentClassType;
 import org.eclipse.jst.jsf.facesconfig.emf.ComponentExtensionType;
 import org.eclipse.jst.jsf.facesconfig.emf.ComponentType;
@@ -12,42 +9,26 @@ import org.eclipse.jst.jsf.facesconfig.emf.DynamicElement;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 import org.eclipse.jst.jsf.facesconfig.tests.util.CommonStructuresUtil;
-import org.eclipse.jst.jsf.facesconfig.tests.util.WizardUtil;
 import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
-import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 
-public class WriteComponentExtensionDataTestCase extends TestCase {
+public class WriteComponentExtensionDataTestCase extends BaseWriteTestCase {
     private static final String COMPONENT = "component";
     
     private static final String COMPONENT_CLASS = "component-class";
 
     private static final String COMPONENT_TYPE = "component-type";
 
-    private static final String WEB_INF_FACES_CONFIG1_XML = "WEB-INF/faces-config1.xml";
-
-    IProject project = null;
-
     public WriteComponentExtensionDataTestCase(String name) {
         super(name);
     }
 
-    protected void setUp() throws Exception {
-        super.setUp();
-        JSFTestUtil.setValidationEnabled(false);
-        
-        JSFTestUtil.setInternetProxyPreferences(true, "www-proxy.uk.oracle.com", "80");
-
-        WizardUtil.createProject(getName());
-        project = WizardUtil.getTestProject(getName());
-    }
 
     public void testWriteExtensionData()
     {
         FacesConfigArtifactEdit edit = null;
         try 
         {
-            edit = FacesConfigArtifactEdit.getFacesConfigArtifactEditForWrite(
-                    project, WEB_INF_FACES_CONFIG1_XML);
+            edit = getArtifactEditForWrite();
             assertNotNull(edit.getFacesConfig());
             FacesConfigPackage facesConfigPackage = FacesConfigPackage.eINSTANCE;
             FacesConfigFactory facesConfigFactory = facesConfigPackage

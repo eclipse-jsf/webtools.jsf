@@ -10,9 +10,6 @@
  **************************************************************************************************/
 package org.eclipse.jst.jsf.facesconfig.tests.write;
 
-import junit.framework.TestCase;
-
-import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.facesconfig.emf.ApplicationFactoryType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
@@ -21,38 +18,30 @@ import org.eclipse.jst.jsf.facesconfig.emf.FactoryType;
 import org.eclipse.jst.jsf.facesconfig.emf.LifecycleFactoryType;
 import org.eclipse.jst.jsf.facesconfig.emf.RenderKitFactoryType;
 import org.eclipse.jst.jsf.facesconfig.tests.util.CommonStructuresUtil;
-import org.eclipse.jst.jsf.facesconfig.tests.util.WizardUtil;
+import org.eclipse.jst.jsf.facesconfig.tests.util.FacesConfigModelUtil;
 import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
 
 /*
  * This Junit class is used to test the FacesConfigFactoryImpl
  * class.
  */
-public class WriteFactoryTestCase extends TestCase {
-	private static final String WEB_INF_FACES_CONFIG2_XML = "WEB-INF/faces-config2.xml";
-    IProject project = null;
-
-    private final static String  FACTORY = "factory";
+public class WriteFactoryTestCase extends BaseWriteTestCase {
+    protected final static String  FACTORY = "factory";
     private final static String  APPLICATION_FACTORY = "application-factory";
     private final static String  FACESCONTEXT_FACTORY = "faces-context-factory";
     private final static String  LIFECYCLE_FACTORY = "lifecycle-factory";
     private final static String  RENDERKIT_FACTORY = "render-kit-factory";
+    private final static String FACTORY_ID = CommonStructuresUtil
+        .createPreficedString(FACTORY, CommonStructuresUtil.ID);
     
 	public WriteFactoryTestCase(String name) {
 		super(name);
 	}
 
-	protected void setUp() throws Exception {
-		super.setUp();
-		WizardUtil.createProject(getName());
-		project = WizardUtil.getTestProject(getName());
-	}
-	
-	public void testWriteFacesconfigFile() {
+	public void testFactory() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit.getFacesConfigArtifactEditForWrite(
-					project, WEB_INF_FACES_CONFIG2_XML);
+			edit = getArtifactEditForWrite();
 			assertNotNull(edit.getFacesConfig());
 			FacesConfigPackage facesConfigPackage = FacesConfigPackage.eINSTANCE;
 			FacesConfigFactory facesConfigFactory = facesConfigPackage.getFacesConfigFactory();
@@ -90,13 +79,11 @@ public class WriteFactoryTestCase extends TestCase {
                         .createPreficedString(RENDERKIT_FACTORY, CommonStructuresUtil.ID));
     			newfactory.getRenderKitFactory().add(renderKit);
             }			
-			
-            newfactory.setId(CommonStructuresUtil
-                        .createPreficedString(FACTORY, CommonStructuresUtil.ID));
-            
+
+            newfactory.setId(FACTORY_ID);
+
 			edit.getFacesConfig().getFactory().add(newfactory);
 			edit.save(null);
-
         } finally {
 			if (edit != null) {
 				edit.dispose();
@@ -106,14 +93,14 @@ public class WriteFactoryTestCase extends TestCase {
 		}
         
 		try {
-			edit = FacesConfigArtifactEdit.getFacesConfigArtifactEditForRead(
-					project, WEB_INF_FACES_CONFIG2_XML);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
             
-            assertEquals(1, edit.getFacesConfig().getFactory().size());
-            
             FactoryType newFactory = 
-                (FactoryType) edit.getFacesConfig().getFactory().get(0);
+                (FactoryType) FacesConfigModelUtil
+                    .findEObjectElementById(
+                            edit.getFacesConfig().getFactory(), FACTORY_ID);
+            assertNotNull(newFactory);
 
             {
                 assertEquals(1, newFactory.getApplicationFactory().size());

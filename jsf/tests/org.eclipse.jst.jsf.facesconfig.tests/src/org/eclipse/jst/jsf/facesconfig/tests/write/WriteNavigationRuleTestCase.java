@@ -10,9 +10,6 @@
  **************************************************************************************************/
 package org.eclipse.jst.jsf.facesconfig.tests.write;
 
-import junit.framework.TestCase;
-
-import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.facesconfig.emf.DescriptionType;
 import org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
@@ -25,15 +22,17 @@ import org.eclipse.jst.jsf.facesconfig.emf.NavigationCaseType;
 import org.eclipse.jst.jsf.facesconfig.emf.NavigationRuleType;
 import org.eclipse.jst.jsf.facesconfig.emf.ToViewIdType;
 import org.eclipse.jst.jsf.facesconfig.tests.util.CommonStructuresUtil;
-import org.eclipse.jst.jsf.facesconfig.tests.util.WizardUtil;
+import org.eclipse.jst.jsf.facesconfig.tests.util.FacesConfigModelUtil;
 import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
 
 
-public class WriteNavigationRuleTestCase extends TestCase {
-	private static final String NAVIGATION_RULE = "navigation-rule";
+public class WriteNavigationRuleTestCase extends BaseWriteTestCase {
+	protected static final String NAVIGATION_RULE = "navigation-rule";
     private static final String FROM_VIEW_ID = "from-view-id";
     private static final String FROM_VIEW_ID_ID = 
         CommonStructuresUtil.createPreficedString(FROM_VIEW_ID, CommonStructuresUtil.ID);
+    private static final String NAVIGATION_RULE_ID =
+        CommonStructuresUtil.createPreficedString(NAVIGATION_RULE, CommonStructuresUtil.ID);
 
     private static final String NAVIGATION_CASE = "navigation-case";
     private static final String FROM_ACTION = "from-action";
@@ -45,25 +44,16 @@ public class WriteNavigationRuleTestCase extends TestCase {
     private static final String TO_VIEW_ID = "from-view-id";
     private static final String NAVIGATION_CASE_TO_VIEW_ID =
         CommonStructuresUtil.createPreficedString(NAVIGATION_CASE,TO_VIEW_ID);
-    
-    
-    IProject project = null;
 
 	public WriteNavigationRuleTestCase(String name) {
 		super(name);
 	}
 
-	protected void setUp() throws Exception {
-		super.setUp();
-		WizardUtil.createProject(getName());
-		project = WizardUtil.getTestProject(getName());
-	}
 	
-	public void testWriteNavigationCase() {
+	public void testWriteNavigationRule() {
 		FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit.getFacesConfigArtifactEditForWrite(
-					project, "WEB-INF/faces-config2.xml");
+			edit = getArtifactEditForWrite();
 			assertNotNull(edit.getFacesConfig());
             
 			FacesConfigPackage facesConfigPackage = FacesConfigPackage.eINSTANCE;
@@ -74,7 +64,6 @@ public class WriteNavigationRuleTestCase extends TestCase {
             navigationRule.getDescription().add(CommonStructuresUtil.createDescription(NAVIGATION_RULE));
 			navigationRule.getDisplayName().add(CommonStructuresUtil.createDisplayName(NAVIGATION_RULE));
 			navigationRule.getIcon().add(CommonStructuresUtil.createIcon(NAVIGATION_RULE));
-            
             
             FromViewIdType fromViewIdType = facesConfigFactory.createFromViewIdType();
 			fromViewIdType.setTextContent(FROM_VIEW_ID);
@@ -115,7 +104,7 @@ public class WriteNavigationRuleTestCase extends TestCase {
             }
             
 			navigationRule.getNavigationCase().add(navCaseType);
-            navigationRule.setId(CommonStructuresUtil.createPreficedString(NAVIGATION_RULE, CommonStructuresUtil.ID));
+            navigationRule.setId(NAVIGATION_RULE_ID);
 
 			edit.getFacesConfig().getNavigationRule().add(navigationRule);
 			edit.save(null);
@@ -129,13 +118,15 @@ public class WriteNavigationRuleTestCase extends TestCase {
 
         try
         {
-            edit = FacesConfigArtifactEdit.getFacesConfigArtifactEditForWrite(
-                    project, "WEB-INF/faces-config2.xml");
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
 
-            assertEquals(1, edit.getFacesConfig().getNavigationRule().size());
-            NavigationRuleType navigationRule = (NavigationRuleType) 
-                edit.getFacesConfig().getNavigationRule().get(0);
+            NavigationRuleType navigationRule = 
+                (NavigationRuleType) FacesConfigModelUtil
+                    .findEObjectElementById(
+                            edit.getFacesConfig().getNavigationRule(), NAVIGATION_RULE_ID);      
+            assertNotNull(navigationRule);
+
 
             assertEquals(1, navigationRule.getDescription().size());
             CommonStructuresUtil.assertMatchesDescription

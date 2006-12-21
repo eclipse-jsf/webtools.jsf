@@ -10,9 +10,6 @@
  **************************************************************************************************/
 package org.eclipse.jst.jsf.facesconfig.tests.write;
 
-import junit.framework.TestCase;
-
-import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.facesconfig.emf.ConverterClassType;
 import org.eclipse.jst.jsf.facesconfig.emf.ConverterForClassType;
 import org.eclipse.jst.jsf.facesconfig.emf.ConverterIdType;
@@ -23,38 +20,28 @@ import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 import org.eclipse.jst.jsf.facesconfig.emf.IconType;
 import org.eclipse.jst.jsf.facesconfig.tests.util.CommonStructuresUtil;
-import org.eclipse.jst.jsf.facesconfig.tests.util.WizardUtil;
+import org.eclipse.jst.jsf.facesconfig.tests.util.FacesConfigModelUtil;
 import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
 
-public class WriteConverterTestCase extends TestCase {
-	private static final String WEB_INF_FACES_CONFIG2_XML = "WEB-INF/faces-config2.xml";
-    IProject project = null;
-
-    private static final String CONVERTER = "converter";
+public class WriteConverterTestCase extends BaseWriteTestCase {
+    protected static final String CONVERTER = "converter";
     private static final String CONVERTER_CLASS = 
         CommonStructuresUtil.createPreficedString(CONVERTER, CommonStructuresUtil.CLASS);
     private static final String CONVERTER_CLASS_FOR =
         CommonStructuresUtil.createPreficedString(CONVERTER
                 , CommonStructuresUtil.createPreficedString(CommonStructuresUtil.CLASS, "for"));
-    private static final String CONVERTER_ID =
+    protected static final String CONVERTER_ID =
         CommonStructuresUtil.createPreficedString(CONVERTER, CommonStructuresUtil.ID);
 
 	public WriteConverterTestCase(String name) {
 		super(name);
 	}
 
-	protected void setUp() throws Exception {
-		super.setUp();
-		WizardUtil.createProject(getName());
-		project = WizardUtil.getTestProject(getName());
-	}
-	
 	public void testWriteConverter() {
 		FacesConfigArtifactEdit edit = null;
 		
 		try {
-			edit = FacesConfigArtifactEdit.getFacesConfigArtifactEditForWrite(
-					project, WEB_INF_FACES_CONFIG2_XML);
+			edit = getArtifactEditForWrite();
 			assertNotNull(edit.getFacesConfig());
 			FacesConfigPackage facesConfigPackage = FacesConfigPackage.eINSTANCE;
 			FacesConfigFactory facesConfigFactory = facesConfigPackage.getFacesConfigFactory();
@@ -91,8 +78,7 @@ public class WriteConverterTestCase extends TestCase {
             converter.getAttribute().add(CommonStructuresUtil.createAttribute(CONVERTER));
             converter.getProperty().add(CommonStructuresUtil.createProperty(CONVERTER));
 
-            converter.setId(CommonStructuresUtil.createPreficedString(CONVERTER
-                                                    , CommonStructuresUtil.ID));
+            converter.setId(CONVERTER_ID);
             
 			edit.getFacesConfig().getConverter().add(converter);
 			edit.save(null);
@@ -105,14 +91,14 @@ public class WriteConverterTestCase extends TestCase {
 		}
 
 		try {
-			edit = FacesConfigArtifactEdit.getFacesConfigArtifactEditForRead(
-					project, WEB_INF_FACES_CONFIG2_XML);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
             
-            assertEquals(1, edit.getFacesConfig().getConverter().size());
             ConverterType converter = 
-                (ConverterType) edit.getFacesConfig().getConverter().get(0);
-
+                (ConverterType) FacesConfigModelUtil
+                    .findEObjectElementById(edit.getFacesConfig().getConverter(), CONVERTER_ID);
+            assertNotNull(converter);
+            
             assertEquals(1, converter.getDescription().size());
             CommonStructuresUtil.assertMatchesDescription
                 (CONVERTER, (DescriptionType) converter.getDescription().get(0));

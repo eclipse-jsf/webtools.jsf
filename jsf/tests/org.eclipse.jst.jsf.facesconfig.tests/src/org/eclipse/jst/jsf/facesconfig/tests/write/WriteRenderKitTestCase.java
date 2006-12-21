@@ -10,9 +10,6 @@
  **************************************************************************************************/
 package org.eclipse.jst.jsf.facesconfig.tests.write;
 
-import junit.framework.TestCase;
-
-import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.facesconfig.emf.AttributeType;
 import org.eclipse.jst.jsf.facesconfig.emf.ComponentFamilyType;
 import org.eclipse.jst.jsf.facesconfig.emf.DescriptionType;
@@ -28,15 +25,15 @@ import org.eclipse.jst.jsf.facesconfig.emf.RendererClassType;
 import org.eclipse.jst.jsf.facesconfig.emf.RendererType;
 import org.eclipse.jst.jsf.facesconfig.emf.RendererTypeType;
 import org.eclipse.jst.jsf.facesconfig.tests.util.CommonStructuresUtil;
-import org.eclipse.jst.jsf.facesconfig.tests.util.WizardUtil;
+import org.eclipse.jst.jsf.facesconfig.tests.util.FacesConfigModelUtil;
 import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
 
 
-public class WriteRenderKitTestCase extends TestCase 
+public class WriteRenderKitTestCase extends BaseWriteTestCase 
 {
-	IProject project = null;
-    
-    private final static String RENDER_KIT = "render-kit";
+    protected final static String RENDER_KIT = "render-kit";
+    private final static String RENDER_KIT_ID =
+        CommonStructuresUtil.createPreficedString(RENDER_KIT, CommonStructuresUtil.ID);
     private final static String RENDER_KIT_CLASS = 
         CommonStructuresUtil.createPreficedString(RENDER_KIT, CommonStructuresUtil.CLASS);
     private final static String RENDERER = "renderer";
@@ -52,20 +49,13 @@ public class WriteRenderKitTestCase extends TestCase
 		super(name);
 	}
 
-	protected void setUp() throws Exception {
-		super.setUp();
-		WizardUtil.createProject(getName());
-		project = WizardUtil.getTestProject(getName());
-	}
-	
 	public void testWriteRenderKit() {
 		//IProject project = WizardUtil.getTestProject();
 		FacesConfigArtifactEdit edit = null;
 		
 		try 
         {
-			edit = FacesConfigArtifactEdit.getFacesConfigArtifactEditForWrite(
-					project, "WEB-INF/faces-config2.xml");
+			edit = getArtifactEditForWrite();
 			assertNotNull(edit.getFacesConfig());
 			FacesConfigPackage facesConfigPackage = FacesConfigPackage.eINSTANCE;
 			FacesConfigFactory facesConfigFactory = facesConfigPackage.getFacesConfigFactory();
@@ -128,7 +118,7 @@ public class WriteRenderKitTestCase extends TestCase
             renderer.setId(CommonStructuresUtil.createPreficedString(RENDERER, CommonStructuresUtil.ID));
             
 			renderKit.getRenderer().add(renderer);
-			renderKit.setId(CommonStructuresUtil.createPreficedString(RENDER_KIT, CommonStructuresUtil.ID));
+			renderKit.setId(RENDER_KIT_ID);
             
 			edit.getFacesConfig().getRenderKit().add(renderKit);
 			edit.save(null);
@@ -141,13 +131,13 @@ public class WriteRenderKitTestCase extends TestCase
 		}
 
 		try {
-			edit = FacesConfigArtifactEdit.getFacesConfigArtifactEditForRead(
-					project, "WEB-INF/faces-config2.xml");
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
-			assertEquals(1, edit.getFacesConfig().getRenderKit().size());
             
-            RenderKitType renderKit = 
-                (RenderKitType) edit.getFacesConfig().getRenderKit().get(0);
+            RenderKitType renderKit = (RenderKitType) FacesConfigModelUtil
+                .findEObjectElementById(edit.getFacesConfig()
+                    .getRenderKit(), RENDER_KIT_ID);
+            assertNotNull(renderKit);
             
             assertEquals(1, renderKit.getDescription().size());
             CommonStructuresUtil.assertMatchesDescription(RENDER_KIT,

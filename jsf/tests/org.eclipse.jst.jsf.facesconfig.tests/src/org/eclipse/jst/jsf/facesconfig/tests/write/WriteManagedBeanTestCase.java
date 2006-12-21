@@ -10,9 +10,6 @@
  **************************************************************************************************/
 package org.eclipse.jst.jsf.facesconfig.tests.write;
 
-import junit.framework.TestCase;
-
-import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.facesconfig.emf.DescriptionType;
 import org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
@@ -28,15 +25,12 @@ import org.eclipse.jst.jsf.facesconfig.emf.MapEntriesType;
 import org.eclipse.jst.jsf.facesconfig.emf.NullValueType;
 import org.eclipse.jst.jsf.facesconfig.emf.ValueType;
 import org.eclipse.jst.jsf.facesconfig.tests.util.CommonStructuresUtil;
-import org.eclipse.jst.jsf.facesconfig.tests.util.WizardUtil;
 import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
 
 
-public class WriteManagedBeanTestCase extends TestCase {
-	private static final String WEB_INF_FACES_CONFIG2_XML = "WEB-INF/faces-config2.xml";
-    IProject project = null;
-    
-    private final static String  MANAGED_BEAN = "managed-bean";
+public class WriteManagedBeanTestCase extends BaseWriteTestCase {
+
+    protected final static String  MANAGED_BEAN = "managed-bean";
     private final static String  SCOPE = "scope";
     private final static String  MANAGED_BEAN_NAME = 
         CommonStructuresUtil.createPreficedString(MANAGED_BEAN, CommonStructuresUtil.NAME);
@@ -53,15 +47,11 @@ public class WriteManagedBeanTestCase extends TestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		WizardUtil.createProject(getName());
-		project = WizardUtil.getTestProject(getName());
-        
         FacesConfigArtifactEdit edit = null;
         try
         {
             edit =
-                FacesConfigArtifactEdit.getFacesConfigArtifactEditForWrite(
-                    project, WEB_INF_FACES_CONFIG2_XML);
+                getArtifactEditForWrite();
             edit.getFacesConfig().getManagedBean().clear();
             edit.save(null);
         }
@@ -79,8 +69,7 @@ public class WriteManagedBeanTestCase extends TestCase {
 		FacesConfigArtifactEdit edit = null;
 
         try {
-			edit = FacesConfigArtifactEdit.getFacesConfigArtifactEditForWrite(
-					project, WEB_INF_FACES_CONFIG2_XML);
+			edit = getArtifactEditForWrite();
 			assertNotNull(edit.getFacesConfig());
 			FacesConfigPackage facesConfigPackage = FacesConfigPackage.eINSTANCE;
 			FacesConfigFactory facesConfigFactory = facesConfigPackage.getFacesConfigFactory();
@@ -149,8 +138,7 @@ public class WriteManagedBeanTestCase extends TestCase {
 		}
 
         try {
-			edit = FacesConfigArtifactEdit.getFacesConfigArtifactEditForRead(
-					project, WEB_INF_FACES_CONFIG2_XML);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
 			
             assertEquals(1, edit.getFacesConfig().getManagedBean().size());
@@ -228,8 +216,7 @@ public class WriteManagedBeanTestCase extends TestCase {
 
         try 
         {
-            edit = FacesConfigArtifactEdit.getFacesConfigArtifactEditForWrite(
-                    project, WEB_INF_FACES_CONFIG2_XML);
+            edit = getArtifactEditForWrite();
             assertNotNull(edit.getFacesConfig());
             
             ManagedBeanType managedBean = createManagedBeanBase();
@@ -250,8 +237,7 @@ public class WriteManagedBeanTestCase extends TestCase {
         
         try 
         {
-            edit = FacesConfigArtifactEdit.getFacesConfigArtifactEditForRead(
-                    project, WEB_INF_FACES_CONFIG2_XML);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
 
             assertEquals(1, edit.getFacesConfig().getManagedBean().size());
@@ -277,8 +263,7 @@ public class WriteManagedBeanTestCase extends TestCase {
 
         try 
         {
-            edit = FacesConfigArtifactEdit.getFacesConfigArtifactEditForWrite(
-                    project, WEB_INF_FACES_CONFIG2_XML);
+            edit = getArtifactEditForWrite();
             assertNotNull(edit.getFacesConfig());
             
             ManagedBeanType managedBean = createManagedBeanBase();
@@ -298,8 +283,7 @@ public class WriteManagedBeanTestCase extends TestCase {
         
         try 
         {
-            edit = FacesConfigArtifactEdit.getFacesConfigArtifactEditForRead(
-                    project, WEB_INF_FACES_CONFIG2_XML);
+            edit = getArtifactEditForRead();
             assertNotNull(edit.getFacesConfig());
 
             assertEquals(1, edit.getFacesConfig().getManagedBean().size());

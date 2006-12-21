@@ -13,8 +13,5 @@
 
 <faces-config>
 
-	<lifecycle>
-		<phase-listener>test1</phase-listener>
-	</lifecycle>
-	
+
 </faces-config>

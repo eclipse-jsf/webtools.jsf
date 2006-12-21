@@ -10,9 +10,6 @@
  **************************************************************************************************/
 package org.eclipse.jst.jsf.facesconfig.tests.write;
 
-import junit.framework.TestCase;
-
-import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.facesconfig.emf.DescriptionType;
 import org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
@@ -22,15 +19,10 @@ import org.eclipse.jst.jsf.facesconfig.emf.ReferencedBeanClassType;
 import org.eclipse.jst.jsf.facesconfig.emf.ReferencedBeanNameType;
 import org.eclipse.jst.jsf.facesconfig.emf.ReferencedBeanType;
 import org.eclipse.jst.jsf.facesconfig.tests.util.CommonStructuresUtil;
-import org.eclipse.jst.jsf.facesconfig.tests.util.WizardUtil;
 import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
 
 
-public class WriteReferencedBeanTestCase extends TestCase {
-	private static final String WEB_INF_FACES_CONFIG2_XML = "WEB-INF/faces-config2.xml";
-
-    IProject project = null;
-
+public class WriteReferencedBeanTestCase extends BaseWriteTestCase {
     private final static String REFERENCED_BEAN = "referenced-bean";
     private final static String REFERENCED_BEAN_NAME =
         CommonStructuresUtil.createPreficedString(REFERENCED_BEAN, CommonStructuresUtil.NAME);
@@ -41,20 +33,13 @@ public class WriteReferencedBeanTestCase extends TestCase {
 		super(name);
 	}
 
-	protected void setUp() throws Exception {
-		super.setUp();
-		WizardUtil.createProject(getName());
-		project = WizardUtil.getTestProject(getName());
-	}
-	
 	public void testWriteReferencedBeanToFileTwo() 
     {
 		FacesConfigArtifactEdit edit = null;
 		
 		try 
         {
-			edit = FacesConfigArtifactEdit.getFacesConfigArtifactEditForWrite(
-					project, WEB_INF_FACES_CONFIG2_XML);
+			edit = getArtifactEditForWrite();
 			assertNotNull(edit.getFacesConfig());
             
 			FacesConfigPackage facesConfigPackage = FacesConfigPackage.eINSTANCE;
@@ -101,8 +86,7 @@ public class WriteReferencedBeanTestCase extends TestCase {
 
 		try 
         {
-			edit = FacesConfigArtifactEdit.getFacesConfigArtifactEditForRead(
-					project, WEB_INF_FACES_CONFIG2_XML);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
 
 			assertEquals(1, edit.getFacesConfig().getReferencedBean().size());

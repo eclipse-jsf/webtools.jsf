@@ -10,9 +10,6 @@
  **************************************************************************************************/
 package org.eclipse.jst.jsf.facesconfig.tests.write;
 
-import junit.framework.TestCase;
-
-import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.facesconfig.emf.AttributeType;
 import org.eclipse.jst.jsf.facesconfig.emf.ComponentClassType;
 import org.eclipse.jst.jsf.facesconfig.emf.ComponentExtensionType;
@@ -27,11 +24,10 @@ import org.eclipse.jst.jsf.facesconfig.emf.FacetType;
 import org.eclipse.jst.jsf.facesconfig.emf.IconType;
 import org.eclipse.jst.jsf.facesconfig.emf.PropertyType;
 import org.eclipse.jst.jsf.facesconfig.tests.util.CommonStructuresUtil;
-import org.eclipse.jst.jsf.facesconfig.tests.util.WizardUtil;
 import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
 
 
-public class WriteComponentTestCase extends TestCase {
+public class WriteComponentTestCase extends BaseWriteTestCase {
 
     private static final String COMPONENT = "component";
     
@@ -39,25 +35,14 @@ public class WriteComponentTestCase extends TestCase {
 
     private static final String COMPONENT_TYPE = "component-type";
 
-    private static final String WEB_INF_FACES_CONFIG1_XML = "WEB-INF/faces-config1.xml";
-
-    IProject project = null;
-
 	public WriteComponentTestCase(String name) {
 		super(name);
-	}
-
-	protected void setUp() throws Exception {
-		super.setUp();
-		WizardUtil.createProject(getName());
-		project = WizardUtil.getTestProject(getName());
 	}
 
 	public void testWriteComponent() {
 	    FacesConfigArtifactEdit edit = null;
 		try {
-			edit = FacesConfigArtifactEdit.getFacesConfigArtifactEditForWrite(
-					project, WEB_INF_FACES_CONFIG1_XML);
+			edit = getArtifactEditForWrite();
 			assertNotNull(edit.getFacesConfig());
 			FacesConfigPackage facesConfigPackage = FacesConfigPackage.eINSTANCE;
 			FacesConfigFactory facesConfigFactory = facesConfigPackage
@@ -115,8 +100,7 @@ public class WriteComponentTestCase extends TestCase {
 		}
 
 		try {
-			edit = FacesConfigArtifactEdit.getFacesConfigArtifactEditForRead(
-					project, WEB_INF_FACES_CONFIG1_XML);
+			edit = getArtifactEditForRead();
 			assertNotNull(edit.getFacesConfig());
             
             assertEquals(1, edit.getFacesConfig().getComponent().size());
