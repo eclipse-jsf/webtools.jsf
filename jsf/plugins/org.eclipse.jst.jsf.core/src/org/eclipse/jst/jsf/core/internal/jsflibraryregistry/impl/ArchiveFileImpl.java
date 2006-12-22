@@ -18,10 +18,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
+import java.util.Collections;
 
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
@@ -441,6 +443,12 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 				try {
 					Path srcPath = new Path(sourceLocation);
 					URL fileURL = Platform.find(bundle, srcPath);
+					if (fileURL == null) {
+						String bundleName = srcPath.segments()[0];
+						bundle = Platform.getBundle(bundleName);
+						fileURL = FileLocator.find(bundle, srcPath
+								.removeFirstSegments(1), Collections.EMPTY_MAP);
+					}
 					URL url = Platform.resolve(fileURL);
 					resolvedSourceLocation = url.getPath();
 				} catch (IOException e) {
