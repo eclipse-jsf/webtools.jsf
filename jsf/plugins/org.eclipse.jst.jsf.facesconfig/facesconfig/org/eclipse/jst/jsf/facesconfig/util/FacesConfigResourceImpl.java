@@ -10,12 +10,19 @@
  **************************************************************************************************/
 package org.eclipse.jst.jsf.facesconfig.util;
 
+import java.io.IOException;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.jst.jsf.facesconfig.internal.translator.FacesConfigTranslator;
 import org.eclipse.wst.common.internal.emf.resource.Renderer;
 import org.eclipse.wst.common.internal.emf.resource.Translator;
 import org.eclipse.wst.common.internal.emf.resource.TranslatorResourceImpl;
+import org.eclipse.wst.common.uriresolver.internal.provisional.URIResolver;
+import org.eclipse.wst.common.uriresolver.internal.provisional.URIResolverPlugin;
+import org.xml.sax.EntityResolver;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 
 /**
@@ -27,6 +34,29 @@ import org.eclipse.wst.common.internal.emf.resource.TranslatorResourceImpl;
  */
 public class FacesConfigResourceImpl extends TranslatorResourceImpl implements IFacesConfigResource {
 
+	public static class MyEntityResolver implements EntityResolver {
+
+		private final String baseLocation;
+		private URIResolver uriResolver = null;
+		
+		public MyEntityResolver(String baseLocation) {
+			super();
+			this.baseLocation = baseLocation;
+		}
+
+		public InputSource resolveEntity(String publicId, String systemId)
+				throws SAXException, IOException {
+			if (uriResolver == null) {
+				uriResolver = URIResolverPlugin.createResolver();
+			}
+			String physicalLocation = uriResolver.resolvePhysicalLocation(baseLocation, publicId, systemId);
+			return new InputSource(physicalLocation);
+		}
+
+	}
+	
+	private EntityResolver entityResolver = null;
+	
 	/**
 	 * @param aRenderer
 	 */
@@ -105,5 +135,16 @@ public class FacesConfigResourceImpl extends TranslatorResourceImpl implements I
 	 */
 	protected int getDefaultVersionID() {
 		return 0;
+	}
+	public EntityResolver getEntityResolver() {
+		if (entityResolver == null) {
+			String baseLocation = getURI().toString();
+			entityResolver = new MyEntityResolver(baseLocation);
+		}
+		return entityResolver;
+	}
+	public void setURI(URI arg0) {
+		super.setURI(arg0);
+		entityResolver = null;
 	}
 } //FacesConfigResourceFactoryImpl
