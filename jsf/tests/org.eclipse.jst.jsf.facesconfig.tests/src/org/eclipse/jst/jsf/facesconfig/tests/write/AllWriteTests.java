@@ -124,5 +124,8 @@ public class AllWriteTests {
         suite.addTest(new ConfigurableTestSuite(
                 WriteReferencedBeanTestCase.class,
                 "Write ReferencedBean Test"));
+        suite.addTest(new ConfigurableTestSuite(
+                WriteComponentExtensionDataTestCase.class,
+                "Write Component Extension Data"));
 	}
 }
