@@ -11,13 +11,13 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.css2.widget;
 
-import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.FigureUtilities;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.jst.pagedesigner.css2.provider.DimensionInfo;
 import org.eclipse.jst.pagedesigner.css2.style.HiddenElementStyle;
 import org.eclipse.jst.pagedesigner.parts.EditProxyAdapter;
 import org.eclipse.jst.pagedesigner.parts.ElementEditPart;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontMetrics;
 import org.eclipse.swt.graphics.Image;
@@ -35,7 +35,7 @@ public class HiddenProvider extends ImageWidgetProvider {
 	private boolean _labelVisible = true;
 
 	private FontMetrics _fontMetrics;
-
+    
 	/**
 	 * @param image
 	 * @param style
@@ -97,7 +97,6 @@ public class HiddenProvider extends ImageWidgetProvider {
 
 	public void paintFigure(Graphics g,
 			org.eclipse.draw2d.geometry.Rectangle rect) {
-		g.setBackgroundColor(ColorConstants.cyan);
 		g.fillRectangle(rect);
 		g.setClip(rect);
 		int imageAreaWidth = Math.min(rect.width, _imageWidth);
@@ -112,8 +111,13 @@ public class HiddenProvider extends ImageWidgetProvider {
 			if (_fontMetrics != null) {
 				leading = _fontMetrics.getLeading();
 			}
-			g.drawString(_label, imageAreaWidth + GAP, rect.y
+            // TODO: adapt to bg: go lighter on colors that darker() would make black
+			// TODO: color registry
+            Color fg = FigureUtilities.darker(g.getBackgroundColor());
+            g.setForegroundColor(fg);
+            g.drawString(_label, imageAreaWidth + GAP, rect.y
 					+ (rect.height - getLabelHeight()) / 2 + leading);
+            fg.dispose();
 		}
 	}
 

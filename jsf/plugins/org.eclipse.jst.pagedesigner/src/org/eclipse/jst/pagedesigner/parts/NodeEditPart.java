@@ -38,7 +38,8 @@ public abstract class NodeEditPart extends AbstractGraphicalEditPart implements
 		INodeAdapter {
 
 	private IDOMDocument _destDocument;
-
+	private boolean      _isDragActive;
+    
 	/**
 	 * this method is called from the HTMLEditPartsFactory directly after the
 	 * part's creation.
@@ -183,4 +184,13 @@ public abstract class NodeEditPart extends AbstractGraphicalEditPart implements
 	public boolean isResizable() {
 		return false;
 	}
+    
+    public boolean isDragActive() {
+        return _isDragActive;
+    }
+    
+    public void setDragActive(boolean newValue)
+    {
+        _isDragActive = newValue;
+    }
 }

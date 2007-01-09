@@ -45,7 +45,7 @@ public class BorderUtil {
 	 * @param Color
 	 */
 	public static void maskRectangle(Graphics g, Rectangle rect, Color color) {
-		// default color is blue
+		// set default if one not provided
 		if (color == null) {
 			color = ColorConstants.blue;
 		}
@@ -241,8 +241,8 @@ public class BorderUtil {
 	 */
 	public static void drawBorderDecorator(CSSFigure figure, Graphics graphics) {
 		graphics.setLineWidth(1);
-		graphics.setLineStyle(Graphics.LINE_DOT);
-		graphics.setForegroundColor(ColorConstants.lightBlue);
+		graphics.setLineStyle(Graphics.LINE_DASH);
+		graphics.setForegroundColor(ColorConstants.lightGray);
 		List fragments = figure.getFragmentsForRead();
 		for (int i = 0, size = fragments.size(); i < size; i++) {
 			FlowBox box = (FlowBox) fragments.get(i);

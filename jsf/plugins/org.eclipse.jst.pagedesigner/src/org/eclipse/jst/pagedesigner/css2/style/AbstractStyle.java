@@ -346,10 +346,10 @@ public class AbstractStyle implements ICSSStyle {
 	 */
 	public Insets getMarginInsets() {
 		if (_marginInsets == null) {
-			int top = getInsetProperty(ICSSPropertyID.ATTR_MARGIN_TOP);
-			int left = getInsetProperty(ICSSPropertyID.ATTR_MARGIN_LEFT);
-			int bottom = getInsetProperty(ICSSPropertyID.ATTR_MARGIN_BOTTOM);
-			int right = getInsetProperty(ICSSPropertyID.ATTR_MARGIN_RIGHT);
+			int top = getInsetProperty(ICSSPropertyID.ATTR_MARGIN_TOP)+ARTIFICIAL_MARGIN_OFFSET;
+			int left = getInsetProperty(ICSSPropertyID.ATTR_MARGIN_LEFT)+ARTIFICIAL_MARGIN_OFFSET;
+			int bottom = getInsetProperty(ICSSPropertyID.ATTR_MARGIN_BOTTOM)+ARTIFICIAL_MARGIN_OFFSET;
+			int right = getInsetProperty(ICSSPropertyID.ATTR_MARGIN_RIGHT)+ARTIFICIAL_MARGIN_OFFSET;
 			_marginInsets = new Insets(top, left, bottom, right);
 		}
 		return _marginInsets;

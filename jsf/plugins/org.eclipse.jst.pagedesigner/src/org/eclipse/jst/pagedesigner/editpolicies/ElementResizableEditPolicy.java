@@ -16,11 +16,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
+import org.eclipse.draw2d.LineBorder;
+import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Insets;
@@ -39,25 +40,16 @@ import org.eclipse.gef.requests.ChangeBoundsRequest;
 import org.eclipse.gef.requests.LocationRequest;
 import org.eclipse.gef.requests.SelectionRequest;
 import org.eclipse.gef.tools.SelectEditPartTracker;
-import org.eclipse.jst.jsf.common.ui.internal.utils.StringUtil;
-import org.eclipse.jst.pagedesigner.IHTMLConstants;
-import org.eclipse.jst.pagedesigner.IJMTConstants;
 import org.eclipse.jst.pagedesigner.commands.single.ChangeStyleCommand;
 import org.eclipse.jst.pagedesigner.css2.ICSSStyle;
 import org.eclipse.jst.pagedesigner.css2.layout.BlockBox;
 import org.eclipse.jst.pagedesigner.css2.layout.CSSFigure;
-import org.eclipse.jst.pagedesigner.css2.layout.MultiLineLabel;
 import org.eclipse.jst.pagedesigner.dom.EditModelQuery;
-import org.eclipse.jst.pagedesigner.editors.palette.IPaletteItemCategory;
-import org.eclipse.jst.pagedesigner.editors.palette.IPaletteItemDescriptor;
-import org.eclipse.jst.pagedesigner.editors.palette.impl.PaletteItemManager;
 import org.eclipse.jst.pagedesigner.parts.ElementEditPart;
+import org.eclipse.jst.pagedesigner.parts.NodeEditPart;
 import org.eclipse.jst.pagedesigner.requests.LocationModifierRequest;
-import org.eclipse.jst.pagedesigner.utils.CMUtil;
-import org.eclipse.jst.pagedesigner.utils.StructuredModelUtil;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
-import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
@@ -69,6 +61,10 @@ public class ElementResizableEditPolicy extends ResizableEditPolicy {
 	private static final Insets INSETS_1 = new Insets(1, 1, 1, 1);
 
 	private static final int THRESHHOLD = 3;
+    
+    // the number of pixels to offset the top left of tooltop feedback
+    // below the current mouse cursor location
+    private static final int TOOLTIP_VERTICAL_OFFSET = 25;
 
 	private static final Insets INSETS_CONST = new Insets(THRESHHOLD,
 			THRESHHOLD, THRESHHOLD, THRESHHOLD);
@@ -77,7 +73,7 @@ public class ElementResizableEditPolicy extends ResizableEditPolicy {
 
 	private IFigure[] _hoverFeedbackFigure;
 
-	public static Color HOVER_FEEDBACK_COLOR = ColorConstants.darkBlue;
+	public static Color HOVER_FEEDBACK_COLOR = ColorConstants.black;
 
 	/*
 	 * (non-Javadoc)
@@ -91,8 +87,15 @@ public class ElementResizableEditPolicy extends ResizableEditPolicy {
 					removeFeedback(_hoverFeedbackFigure[i]);
 				}
 				_hoverFeedbackFigure = null;
-			}
-			_hoverFeedbackFigure = showHoverFeedback(request);
+            }
+            // <gripe>this is what I hate about GEF, if it's a location dependent
+            // request why aren't we guaranteed a LocationRequest?!
+            // even GEF interal code protects casts by checking getType()
+            // rather than an instanceof!</gripe>
+            Assert.isTrue(request instanceof LocationRequest);
+            // don't show tooltip if drag is active
+            _showLabelFeedback = !((NodeEditPart)getHost()).isDragActive();
+			_hoverFeedbackFigure = showHoverFeedback((LocationRequest)request);
 		} else {
 			super.showTargetFeedback(request);
 		}
@@ -119,12 +122,12 @@ public class ElementResizableEditPolicy extends ResizableEditPolicy {
 	/**
 	 * @param request
 	 */
-	private IFigure[] showHoverFeedback(Request request) {
+	private IFigure[] showHoverFeedback(LocationRequest request) {
 		if (!shouldUseObjectMode(request) && !isStyleTags(getHost())) {
 			return null;
 		}
 
-		IFigure figure = this.getHostFigure();
+        IFigure figure = this.getHostFigure();
 		Rectangle[] rects;
 		if (figure instanceof CSSFigure) {
 			rects = ((CSSFigure) figure).getFragmentsBounds();
@@ -149,17 +152,31 @@ public class ElementResizableEditPolicy extends ResizableEditPolicy {
 			figures[i] = fig;
 		}
 		if (_showLabelFeedback) {
-			Label label = new MultiLineLabel();
+			Label label = new Label();///new MultiLineLabel();
 			label.setOpaque(true);
-			label.setBackgroundColor(ColorConstants.yellow);
-			// label.setBorder(new LineBorder(HOVER_FEEDBACK_COLOR, 1));
+			label.setBackgroundColor(ColorConstants.tooltipBackground);
+			label.setBorder(
+                    new LineBorder(HOVER_FEEDBACK_COLOR, 1)
+                    {
+                        // add an extra pixel of inset to make sure the text
+                        // isn't pressed against the border
+                        public Insets getInsets(IFigure figure) {
+                            return new Insets(getWidth()+1);
+                        }
+                    }
+            );
+            label.setTextAlignment(PositionConstants.CENTER); 
 			label.setForegroundColor(HOVER_FEEDBACK_COLOR);
 			label.setText(getTooltipText());
 			addFeedback(label);
-			// use last rect's bottom left as the label's left top
-			Point leftTop = new Point(rects[rects.length - 1].getBottomLeft());
-			figure.translateToAbsolute(leftTop);
-			label.translateToRelative(leftTop);
+
+            // use mouse cursor plus an offset so the tooltip doesn't
+            // appear z-ordered below the mouse cursor
+			Point leftTop = request.getLocation();//new Point(rects[rects.length - 1].getBottomLeft());
+            leftTop.y += TOOLTIP_VERTICAL_OFFSET;
+
+            //			figure.translateToAbsolute(leftTop);
+//			label.translateToRelative(leftTop);
 			Dimension d = label.getPreferredSize();
 			Rectangle rect = new Rectangle(leftTop, d);
 
@@ -174,74 +191,62 @@ public class ElementResizableEditPolicy extends ResizableEditPolicy {
 
 	private String getTooltipText() {
 		Element element = (Element) this.getHost().getModel();
-		StringBuffer text = new StringBuffer();
-		text.append("<").append(element.getTagName()).append(">");
+		StringBuffer text = new StringBuffer(element.getTagName());
 
-		PaletteItemManager manager = PaletteItemManager
-				.getInstance(getProject(element));
-		if (manager != null) {
-			IPaletteItemCategory category = manager.findOrCreateCategory(CMUtil
-					.getElementNamespaceURI(element), null);
-			if (category != null) {
-				String name = element.getLocalName();
-				if (category.getURI().equals(IJMTConstants.URI_JSP)) {
-					name = element.getTagName();
-				}
-				IPaletteItemDescriptor descriptor = category
-						.getItemByTagName(name);
-				if (category.getURI().equals(IJMTConstants.URI_HTML)
-						&& IHTMLConstants.TAG_INPUT.equalsIgnoreCase(name)) {
-					String type = element
-							.getAttribute(IHTMLConstants.ATTR_TYPE);
-					if (IHTMLConstants.TYPE_SUBMIT.equalsIgnoreCase(type)) {
-						descriptor = category.getItemByID("html:INPUT:Button");
-					} else if (IHTMLConstants.TYPE_CHECKBOX
-							.equalsIgnoreCase(type)) {
-						descriptor = category
-								.getItemByID("html:INPUT:Check Box");
-					} else if (IHTMLConstants.TYPE_RADIO.equalsIgnoreCase(type)) {
-						descriptor = category
-								.getItemByID("html:INPUT:Radio Button");
-					} else if (IHTMLConstants.TYPE_IMAGE.equalsIgnoreCase(type)) {
-						descriptor = category
-								.getItemByID("html:INPUT:Image Button");
-					} else if (IHTMLConstants.TYPE_PASSWORD
-							.equalsIgnoreCase(type)) {
-						descriptor = category
-								.getItemByID("html:INPUT:Password Field");
-					} else if (IHTMLConstants.TYPE_TEXT.equalsIgnoreCase(type)) {
-						descriptor = category
-								.getItemByID("html:INPUT:Text Field");
-					} else if (IHTMLConstants.TYPE_HIDDEN
-							.equalsIgnoreCase(type)) {
-						descriptor = category
-								.getItemByID("html:INPUT:Hidden Field");
-					}
-				}
-
-				if (descriptor != null) {
-					text.append("\n").append(
-							StringUtil.filterConvertString(descriptor
-									.getDescription()));
-				}
-			}
-		}
-
-		if (text.toString().endsWith("\n")) {
-			return text.substring(0, text.length() - 1);
-		}
+//		PaletteItemManager manager = PaletteItemManager
+//				.getInstance(getProject(element));
+//		if (manager != null) {
+//			IPaletteItemCategory category = manager.findOrCreateCategory(CMUtil
+//					.getElementNamespaceURI(element), null);
+//			if (category != null) {
+//				String name = element.getLocalName();
+//				if (category.getURI().equals(IJMTConstants.URI_JSP)) {
+//					name = element.getTagName();
+//				}
+//				IPaletteItemDescriptor descriptor = category
+//						.getItemByTagName(name);
+//				if (category.getURI().equals(IJMTConstants.URI_HTML)
+//						&& IHTMLConstants.TAG_INPUT.equalsIgnoreCase(name)) {
+//					String type = element
+//							.getAttribute(IHTMLConstants.ATTR_TYPE);
+//					if (IHTMLConstants.TYPE_SUBMIT.equalsIgnoreCase(type)) {
+//						descriptor = category.getItemByID("html:INPUT:Button");
+//					} else if (IHTMLConstants.TYPE_CHECKBOX
+//							.equalsIgnoreCase(type)) {
+//						descriptor = category
+//								.getItemByID("html:INPUT:Check Box");
+//					} else if (IHTMLConstants.TYPE_RADIO.equalsIgnoreCase(type)) {
+//						descriptor = category
+//								.getItemByID("html:INPUT:Radio Button");
+//					} else if (IHTMLConstants.TYPE_IMAGE.equalsIgnoreCase(type)) {
+//						descriptor = category
+//								.getItemByID("html:INPUT:Image Button");
+//					} else if (IHTMLConstants.TYPE_PASSWORD
+//							.equalsIgnoreCase(type)) {
+//						descriptor = category
+//								.getItemByID("html:INPUT:Password Field");
+//					} else if (IHTMLConstants.TYPE_TEXT.equalsIgnoreCase(type)) {
+//						descriptor = category
+//								.getItemByID("html:INPUT:Text Field");
+//					} else if (IHTMLConstants.TYPE_HIDDEN
+//							.equalsIgnoreCase(type)) {
+//						descriptor = category
+//								.getItemByID("html:INPUT:Hidden Field");
+//					}
+//				}
+//
+//				if (descriptor != null) {
+//					text.append("\n").append(
+//							StringUtil.filterConvertString(descriptor
+//									.getDescription()));
+//				}
+//			}
+//		}
+//
+//		if (text.toString().endsWith("\n")) {
+//			return text.substring(0, text.length() - 1);
+//		}
 		return text.toString();
-	}
-
-	private IProject getProject(Element element) {
-		if (element instanceof IDOMElement) {
-			IDOMModel model = ((IDOMElement) element).getModel();
-			IFile file = StructuredModelUtil.getFileFor(model);
-			if (file != null) {
-				return file.getProject();
-			}
-		}
-		return null;
 	}
 
 	private boolean isStyleTags(EditPart part) {
@@ -455,4 +460,12 @@ public class ElementResizableEditPolicy extends ResizableEditPolicy {
 		feedback.translateToRelative(rect);
 		feedback.setBounds(rect);
 	}
+
+    protected void showFocus() {
+        // TODO Auto-generated method stub
+        super.showFocus();
+    }
+
+
+    
 }

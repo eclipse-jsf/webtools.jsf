@@ -32,6 +32,7 @@ import org.eclipse.jst.pagedesigner.commands.range.PasteCommand;
 import org.eclipse.jst.pagedesigner.commands.range.SelectAllCommand;
 import org.eclipse.jst.pagedesigner.editors.pagedesigner.PageDesignerResources;
 import org.eclipse.jst.pagedesigner.parts.DocumentEditPart;
+import org.eclipse.jst.pagedesigner.parts.NodeEditPart;
 import org.eclipse.jst.pagedesigner.requests.LocationModifierRequest;
 import org.eclipse.jst.pagedesigner.viewer.HTMLGraphicalViewer;
 import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
@@ -41,11 +42,10 @@ import org.eclipse.swt.events.KeyEvent;
 /**
  * @author mengbo
  */
-public class RangeSelectionTool extends SelectionTool {
-//	static final private Logger _log = PDPlugin
-//			.getLogger(RangeSelectionTool.class);
-
+public class RangeSelectionTool extends SelectionTool 
+{
 	private LocationRequest _hoverRequest;
+    
 
 	/*
 	 * (non-Javadoc)
@@ -280,4 +280,23 @@ public class RangeSelectionTool extends SelectionTool {
 		request.setLocation(getLocation());
 		request.setControlKeyPressed(getCurrentInput().isControlKeyDown());
 	}
+
+    /* 
+     * If the target edit part is a NodeEditPart, then inform it if of the current
+     * drag status before calling its hover feedback
+     */
+    protected void showHoverFeedback() 
+    {
+        if (getTargetEditPart() instanceof NodeEditPart)
+        {
+            ((NodeEditPart)getTargetEditPart())
+                .setDragActive(
+                        isInState(STATE_DRAG_IN_PROGRESS 
+                                | STATE_ACCESSIBLE_DRAG_IN_PROGRESS 
+                                | STATE_DRAG));
+        }
+        super.showHoverFeedback();
+    }
+    
+    
 }

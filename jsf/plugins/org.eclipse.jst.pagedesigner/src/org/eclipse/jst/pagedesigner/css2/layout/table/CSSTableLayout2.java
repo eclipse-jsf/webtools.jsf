@@ -617,7 +617,7 @@ public class CSSTableLayout2 extends CSSBlockFlowLayout implements ICSSPainter {
 					rect = rect.expand(1, 1);
 					g.setLineStyle(Graphics.LINE_SOLID);
 					g.setLineWidth(1);
-					g.setForegroundColor(ColorConstants.lightBlue);
+					g.setForegroundColor(ColorConstants.lightGray);
 					g.drawRectangle(rect);
 				}
 			}

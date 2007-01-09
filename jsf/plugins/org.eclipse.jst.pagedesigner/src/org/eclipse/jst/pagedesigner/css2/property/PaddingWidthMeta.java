@@ -13,6 +13,7 @@ package org.eclipse.jst.pagedesigner.css2.property;
 
 import org.eclipse.jst.pagedesigner.IHTMLConstants;
 import org.eclipse.jst.pagedesigner.css2.ICSSStyle;
+import org.eclipse.jst.pagedesigner.css2.value.Length;
 import org.eclipse.jst.pagedesigner.utils.DOMUtil;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -21,6 +22,9 @@ import org.w3c.dom.Node;
  * @author mengbo
  */
 public class PaddingWidthMeta extends LengthMeta {
+    
+    private static int MIN_PADDING_THRESHOLD = 4;
+
 	/**
 	 * @param inherit
 	 * @param initvalue
@@ -54,9 +58,19 @@ public class PaddingWidthMeta extends LengthMeta {
 				String padding = DOMUtil.getAttributeIgnoreCase(tableEle,
 						"cellpadding");//$NON-NLS-1$
 				if (padding != null) {
-					return LengthMeta.toLength(padding, style, this
+					Length length = (Length) LengthMeta.toLength(padding, style, this
 							.getPercentageType(), getBaseFont(style));
+                    // TODO should not be hardcoded value.  Either should change to a pref
+                    // or a per-component customization.
+                    if (length.getValue() < MIN_PADDING_THRESHOLD)
+                    {
+                        return new Length(MIN_PADDING_THRESHOLD, false);
+                    }
+                    return length;
 				}
+                // TODO should not be hardcoded value.  Either should change to a pref
+                // or a per-component customization.
+                return new Length(MIN_PADDING_THRESHOLD, false);
 			}
 		}
 		return super.calculateHTMLAttributeOverride(element, htmltag,

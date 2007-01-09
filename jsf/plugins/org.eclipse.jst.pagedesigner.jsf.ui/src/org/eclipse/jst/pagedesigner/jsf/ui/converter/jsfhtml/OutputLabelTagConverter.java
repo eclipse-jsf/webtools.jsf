@@ -106,7 +106,7 @@ public class OutputLabelTagConverter extends AbstractTagConverter
      */
     public boolean isWidget()
     {
-        return false;
+        return true;
     }
 
     /* (non-Javadoc)
