@@ -14,9 +14,9 @@ package org.eclipse.jst.pagedesigner.commands.range;
 import java.util.Stack;
 import java.util.Vector;
 
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.gef.GraphicalViewer;
 import org.eclipse.gef.dnd.TemplateTransfer;
-import org.eclipse.jface.text.Assert;
 import org.eclipse.jst.pagedesigner.IHTMLConstants;
 import org.eclipse.jst.pagedesigner.css2.CSSUtil;
 import org.eclipse.jst.pagedesigner.css2.ICSSStyle;

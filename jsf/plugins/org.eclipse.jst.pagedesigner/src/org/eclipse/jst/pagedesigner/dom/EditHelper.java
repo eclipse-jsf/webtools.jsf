@@ -14,8 +14,8 @@ package org.eclipse.jst.pagedesigner.dom;
 import java.util.List;
 import java.util.Stack;
 
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.gef.EditPart;
-import org.eclipse.jface.text.Assert;
 import org.eclipse.jst.pagedesigner.IHTMLConstants;
 import org.eclipse.jst.pagedesigner.commands.range.WorkNode;
 import org.eclipse.jst.pagedesigner.parts.TextEditPart;

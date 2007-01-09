@@ -13,8 +13,8 @@ package org.eclipse.jst.pagedesigner.commands.range;
 
 import java.util.Stack;
 
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.gef.GraphicalViewer;
-import org.eclipse.jface.text.Assert;
 import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.dom.DOMRange;

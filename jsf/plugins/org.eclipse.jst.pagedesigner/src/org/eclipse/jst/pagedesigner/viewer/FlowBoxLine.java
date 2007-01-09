@@ -15,10 +15,10 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.EditPart;
-import org.eclipse.jface.text.Assert;
 import org.eclipse.jst.pagedesigner.validation.caret.ActionData;
 import org.eclipse.jst.pagedesigner.validation.caret.IPositionMediator;
 

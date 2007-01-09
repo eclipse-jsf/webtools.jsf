@@ -18,8 +18,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Vector;
 
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.gef.EditPart;
-import org.eclipse.jface.text.Assert;
 import org.eclipse.jface.text.TextSelection;
 import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
 import org.eclipse.jst.pagedesigner.IHTMLConstants;

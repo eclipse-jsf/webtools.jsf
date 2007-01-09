@@ -11,9 +11,9 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.actions.range;
 
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.jface.text.Assert;
 import org.eclipse.jst.pagedesigner.commands.range.Paragraph;
 import org.eclipse.jst.pagedesigner.commands.range.ParagraphApplyStyleCommand;
 import org.eclipse.jst.pagedesigner.commands.range.ParagraphFinder;

@@ -11,8 +11,8 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.commands;
 
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.gef.commands.Command;
-import org.eclipse.jface.text.Assert;
 import org.eclipse.jface.text.TextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;

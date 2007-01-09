@@ -13,7 +13,7 @@ package org.eclipse.jst.pagedesigner.properties.celleditors;
 
 import java.text.MessageFormat;
 
-import org.eclipse.jface.util.Assert;
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jst.jsf.common.ui.internal.utils.StyleCombo;
 import org.eclipse.swt.SWT;
