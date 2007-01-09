@@ -13,7 +13,6 @@ package org.eclipse.jst.pagedesigner.css2.layout;
 
 import java.util.List;
 
-import org.eclipse.draw2d.Border;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.LayoutManager;
