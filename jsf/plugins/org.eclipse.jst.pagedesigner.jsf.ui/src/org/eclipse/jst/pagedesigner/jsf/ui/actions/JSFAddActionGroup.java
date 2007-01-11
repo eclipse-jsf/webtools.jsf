@@ -15,6 +15,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
@@ -46,16 +47,20 @@ public class JSFAddActionGroup {
 	 */
 	public void fillContextMenu(IMenuManager menu, final IDOMElement element,
 			final IJSFCoreSupport support) {
-		final IMenuManager submenu = new MenuManager(ActionsResources
-				.getString("Submenu.JSFAdd"));//$NON-NLS-1$
-		submenu.add(EMPTY_ACTION);
-		submenu.addMenuListener(new IMenuListener() {
-			public void menuAboutToShow(IMenuManager manager) {
-				submenu.removeAll();
-				addJSFAddItems(submenu, element, support);
-			}
-		});
-		menu.appendToGroup(PageDesignerActionConstants.GROUP_SPECIAL, submenu);
+        IContributionItem item = menu.find(PageDesignerActionConstants.INSERT_SUBMENU_ID);
+        
+        if (item instanceof IMenuManager)
+        {
+    		final IMenuManager submenu = (IMenuManager) item;
+    		submenu.add(EMPTY_ACTION);
+    		submenu.addMenuListener(new IMenuListener() {
+    			public void menuAboutToShow(IMenuManager manager) {
+    				submenu.removeAll();
+    				addJSFAddItems(submenu, element, support);
+    			}
+    		});
+        }
+		//menu.appendToGroup(PageDesignerActionConstants.GROUP_SPECIAL, submenu);
 	}
 
 	/**

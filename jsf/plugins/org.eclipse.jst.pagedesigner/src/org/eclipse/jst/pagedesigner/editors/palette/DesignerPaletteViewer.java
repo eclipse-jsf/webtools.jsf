@@ -184,7 +184,6 @@ public class DesignerPaletteViewer extends PaletteViewer {
 	}
 
 	public void setPaletteRoot(PaletteRoot root) {
-		// TODO Auto-generated method stub
 		super.setPaletteRoot(root);
 		// add palette model change listener
 		// PaletteRoot root = getPaletteRoot();

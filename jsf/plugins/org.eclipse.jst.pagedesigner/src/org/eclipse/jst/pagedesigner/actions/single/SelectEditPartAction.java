@@ -11,23 +11,37 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.actions.single;
 
+import org.eclipse.gef.EditPart;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.jst.pagedesigner.parts.ElementEditPart;
 
 /**
  * @author mengbo
  * @version 1.5
  */
-public class SelectEditPartAction extends Action {
-	ElementEditPart _part;
+public abstract class SelectEditPartAction extends Action {
+    
+    /**
+     * @param text
+     * @param forThisPart
+     * @return a convience object when the edit part that needs selection
+     * is already known when the action is constructed
+     */
+    public static SelectEditPartAction create(final String text, final EditPart forThisPart)
+    {
+        return new SelectEditPartAction(text)
+        {
+            protected EditPart getNewSelection() {
+                return forThisPart;
+            }
+        };
+    }
 
 	/**
 	 * @param text
 	 */
-	public SelectEditPartAction(String text, ElementEditPart part) {
+	protected SelectEditPartAction(String text) {
 		super(text);
-		this._part = part;
 	}
 
 	/*
@@ -36,6 +50,12 @@ public class SelectEditPartAction extends Action {
 	 * @see org.eclipse.jface.action.Action#run()
 	 */
 	public void run() {
-		_part.getViewer().setSelection(new StructuredSelection(_part));
+        final EditPart newSelection = getNewSelection();
+        newSelection.getViewer().setSelection(new StructuredSelection(newSelection));
 	}
+    
+    /**
+     * @return the EditPart onto which selection should be applied.
+     */
+    protected abstract EditPart getNewSelection();
 }

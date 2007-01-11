@@ -12,6 +12,7 @@
 package org.eclipse.jst.pagedesigner.jsf.ui.actions;
 
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
@@ -39,18 +40,26 @@ public class JSFNavigationGroup
      */
     public void fillContextMenu(IMenuManager menu, final IDOMElement element, final IJSFCoreSupport support)
     {
-        final IMenuManager submenu = new MenuManager(JSFUIPlugin.getResourceString("ElementEdit.Submenu.JavaNavigation"));//$NON-NLS-1$
-        submenu.add(EMPTY_ACTION);
-        submenu.addMenuListener(new IMenuListener()
+        final IContributionItem item = 
+            menu.find(PageDesignerActionConstants.NAVIGATE_SUBMENU_ID);
+        
+        if (item instanceof IMenuManager)
         {
-            public void menuAboutToShow(IMenuManager manager)
+            final IMenuManager submenu = (IMenuManager) item; 
+            final IMenuManager javaMenu = new MenuManager(JSFUIPlugin.getResourceString("ElementEdit.Submenu.JavaNavigation"));//$NON-NLS-1$
+            javaMenu.add(EMPTY_ACTION);
+            javaMenu.addMenuListener(new IMenuListener()
             {
-                submenu.removeAll();
-                addNavigationItems(submenu, element, support);
+                public void menuAboutToShow(IMenuManager manager)
+                {
+                    javaMenu.removeAll();
+                    addNavigationItems(javaMenu, element, support);
+                }
             }
+            );
+            
+            submenu.appendToGroup(PageDesignerActionConstants.GROUP_NAVIGATE, javaMenu);
         }
-        );
-        menu.appendToGroup(PageDesignerActionConstants.GROUP_SPECIAL, submenu);
     }
 
     private void addNavigationItems(IMenuManager submenu, IDOMElement ele, IJSFCoreSupport support)

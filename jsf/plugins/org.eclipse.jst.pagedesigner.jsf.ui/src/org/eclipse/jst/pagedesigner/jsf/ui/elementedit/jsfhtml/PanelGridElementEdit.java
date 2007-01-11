@@ -151,7 +151,7 @@ public class PanelGridElementEdit extends DefaultJSFHTMLElementEdit
      */
     private void fillPanelGridMenu(ElementEditPart elePart, int cellRow, int cellColumn, IMenuManager tableMenu)
     {
-        SelectEditPartAction action = new SelectEditPartAction(JSFUIPlugin
+        SelectEditPartAction action = SelectEditPartAction.create(JSFUIPlugin
                 .getResourceString("ElementEdit.Submenu.PanelGrid.SelectTable"), elePart);//$NON-NLS-1$
         tableMenu.add(action);
 

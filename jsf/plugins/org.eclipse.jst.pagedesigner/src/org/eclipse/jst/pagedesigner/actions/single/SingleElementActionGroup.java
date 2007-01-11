@@ -11,7 +11,13 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.actions.single;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import org.eclipse.gef.EditPart;
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
@@ -25,8 +31,11 @@ import org.eclipse.jst.pagedesigner.elementedit.IElementEdit;
 import org.eclipse.jst.pagedesigner.parts.ElementEditPart;
 import org.eclipse.ui.actions.ActionGroup;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
+import org.w3c.dom.Element;
 
 /**
+ * Group that constructs context menu items for a single selected element.
+ * 
  * @author mengbo
  * @version 1.5
  */
@@ -49,6 +58,7 @@ public class SingleElementActionGroup extends ActionGroup {
 			return;
 		}
 		IDOMElement ele = (IDOMElement) part.getIDOMNode();
+        addPositionRelativeMenu(menu, part, ele);
 		addStylelMenu(menu, part, ele);
 
 		// next add element special actions
@@ -75,25 +85,90 @@ public class SingleElementActionGroup extends ActionGroup {
 		return null;
 	}
 
+    /**
+     * Add menu actions that select relative to the current position
+     * 
+     * @param menu
+     * @param part
+     * @param ele
+     */
+    private void addPositionRelativeMenu(IMenuManager menu, ElementEditPart part, IDOMElement ele)
+    {
+        IContributionItem subMenuItem = menu.find(PageDesignerActionConstants.SELECT_SUBMENU_ID);
+        
+        if (subMenuItem instanceof IMenuManager)
+        {
+            final IMenuManager subMenu = (IMenuManager) subMenuItem;
+    //        final IMenuManager selectMenu = new MenuManager(PDPlugin
+    //                .getResourceString("ActionGroup.Submenu.SelectRelative"));//$NON-NLS-1$
+            SelectParentAction  selectParentAction = SelectParentAction.create(ele, part);
+            // Eclipse UI guideline: 6.13
+            // even if there is no parent, a disabled action will be returned by
+            // create and this should be added to the menu
+            subMenu.add(selectParentAction);
+            
+            List children = new ArrayList();
+            for (Iterator it = part.getChildren().iterator(); it.hasNext();)
+            {
+                EditPart childPart = (EditPart) it.next();
+                
+                // only include selectable element edit part that are modelling
+                // XML elements in the source doc
+                if (childPart instanceof ElementEditPart
+                        && ((ElementEditPart)childPart).isSelectable()
+                        && ((ElementEditPart)childPart).getModel() instanceof Element)
+                {
+                    children.add(SelectNodeAction
+                            .create(((Element)((ElementEditPart)childPart).getModel()).getNodeName(), childPart));
+                }
+            }
+
+            
+            // don't add the select Children menu unless there are actually children
+            if (children.size() > 0)
+            {
+                MenuManager selectChildMenu = new MenuManager("Children"/*PDPlugin
+                .getResourceString("ActionGroup.Submenu.StyleClasses")*/);
+                subMenu.add(selectChildMenu);
+
+                for (final Iterator it = children.iterator(); it.hasNext();)
+                {
+                    selectChildMenu.add((Action)it.next());
+                }
+            }
+            else
+            {   // Eclipse UI guideline 6.13
+                // create the child actions even if no children but make it
+                // a disabled option if no children
+                Action childrenAction = new Action("Children"){/* do nothing*/};
+                childrenAction.setEnabled(false);
+                subMenu.add(childrenAction);
+            }
+        }
+    }
+    
 	/**
 	 * @param menu
 	 * @param part
 	 */
 	private void addStylelMenu(IMenuManager menu, ElementEditPart part,
 			IDOMElement ele) {
-		// IMenuManager stylesub = new MenuManager("Style");
-		IMenuManager stylesub = menu;
+        IContributionItem subMenu = 
+            menu.find(PageDesignerActionConstants.STYLE_SUBMENU_ID);
 
-		addStyle(menu, part, ele);
-		addStyleClassesMenu(stylesub, part, ele);
-
-		if (DOMStyleUtil.supportStyleAttribute(ele)) {
-			// addBorderStyleMenu(stylesub, part, ele);
-			addColorMenu(stylesub, part, ele);
-			addBackgroundMenu(stylesub, part, ele);
-		}
-
-		// menu.add(stylesub);
+        if (subMenu instanceof IMenuManager)
+        {
+            final IMenuManager subMenuManager = 
+                (IMenuManager) subMenu;
+    		addStyle(subMenuManager, part, ele);
+    		addStyleClassesMenu(subMenuManager, part, ele);
+    
+    		if (DOMStyleUtil.supportStyleAttribute(ele)) {
+    			// addBorderStyleMenu(stylesub, part, ele);
+    			addColorMenu(subMenuManager, part, ele);
+    			addBackgroundMenu(subMenuManager, part, ele);
+    		}
+        }
 	}
 
 	/**
@@ -102,57 +177,30 @@ public class SingleElementActionGroup extends ActionGroup {
 	 * @param part
 	 * @param ele
 	 */
-	private void addStyle(IMenuManager menu, ElementEditPart part,
+	private void addStyle(IMenuManager subMenu, ElementEditPart part,
 			IDOMElement ele) {
-		StyleSupport.createStyleAction(menu, part, ele);
+        StyleSupport.createStyleAction(subMenu, part, ele);
 	}
 
 	/**
 	 * @param stylesub
 	 * @param part
 	 */
-	private void addStyleClassesMenu(IMenuManager stylesub,
+	private void addStyleClassesMenu(IMenuManager subMenu,
 			ElementEditPart part, final IDOMElement ele) {
 		final IMenuManager classmenu = new MenuManager(PDPlugin
 				.getResourceString("ActionGroup.Submenu.StyleClasses"));//$NON-NLS-1$
 		StyleClassSupport.createStyleClassActions(classmenu, ele);
-		/*
-		 * classmenu.add(action); classmenu.addMenuListener(new IMenuListener() {
-		 * 
-		 * public void menuAboutToShow(IMenuManager manager) {
-		 * classmenu.removeAll();
-		 * StyleClassSupport.createStyleClassActions(classmenu, ele); } } );
-		 */
 
-		stylesub.appendToGroup(PageDesignerActionConstants.GROUP_STYLE,
-				classmenu);
+        subMenu.appendToGroup(PageDesignerActionConstants.GROUP_STYLE,
+                classmenu);
 	}
 
 	/**
 	 * @param stylesub
 	 * @param part
 	 */
-	/*
-	 * private void addBorderStyleMenu(IMenuManager stylesub, ElementEditPart
-	 * part, final IDOMElement ele) { final IMenuManager borderStyleSub = new
-	 * MenuManager(PDPlugin
-	 * .getResourceString("ActionGroup.Submenu.BorderStyle"));//$NON-NLS-1$
-	 * borderStyleSub.add(action);
-	 * 
-	 * final String mode = BorderStyleSupport.getCurrentBorderStyle(ele);
-	 * 
-	 * borderStyleSub.addMenuListener(new IMenuListener() { public void
-	 * menuAboutToShow(IMenuManager manager) { borderStyleSub.removeAll();
-	 * BorderStyleSupport.createParagraphActions(borderStyleSub, ele, mode); }
-	 * }); stylesub.appendToGroup(PageDesignerActionConstants.GROUP_STYLE,
-	 * borderStyleSub); }
-	 */
-
-	/**
-	 * @param stylesub
-	 * @param part
-	 */
-	private void addColorMenu(IMenuManager stylesub, ElementEditPart part,
+	private void addColorMenu(IMenuManager subMenu, ElementEditPart part,
 			final IDOMElement ele) {
 		final IMenuManager colorSub = new MenuManager(PDPlugin
 				.getResourceString("ActionGroup.Submenu.Color"));//$NON-NLS-1$
@@ -164,7 +212,7 @@ public class SingleElementActionGroup extends ActionGroup {
 						ICSSPropertyID.ATTR_COLOR);
 			}
 		});
-		stylesub.appendToGroup(PageDesignerActionConstants.GROUP_STYLE,
+        subMenu.appendToGroup(PageDesignerActionConstants.GROUP_STYLE,
 				colorSub);
 
 	}
@@ -173,7 +221,7 @@ public class SingleElementActionGroup extends ActionGroup {
 	 * @param stylesub
 	 * @param part
 	 */
-	private void addBackgroundMenu(IMenuManager stylesub, ElementEditPart part,
+	private void addBackgroundMenu(IMenuManager subMenu, ElementEditPart part,
 			final IDOMElement ele) {
 		final IMenuManager colorSub = new MenuManager(PDPlugin
 				.getResourceString("ActionGroup.Submenu.BackgroundColor"));//$NON-NLS-1$
@@ -187,7 +235,7 @@ public class SingleElementActionGroup extends ActionGroup {
 			}
 		});
 
-		stylesub.appendToGroup(PageDesignerActionConstants.GROUP_STYLE,
+        subMenu.appendToGroup(PageDesignerActionConstants.GROUP_STYLE,
 				colorSub);
 	}
 }

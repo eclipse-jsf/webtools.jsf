@@ -17,7 +17,7 @@ import org.eclipse.jst.pagedesigner.converter.AbstractTagConverter;
 import org.eclipse.jst.pagedesigner.converter.HiddenTagConverter;
 import org.eclipse.jst.pagedesigner.converter.IConverterFactory;
 import org.eclipse.jst.pagedesigner.converter.ITagConverter;
-import org.eclipse.jst.pagedesigner.converter.TagConverterToSpan;
+import org.eclipse.jst.pagedesigner.converter.TagConverterToInlineBlock;
 import org.eclipse.jst.pagedesigner.jsf.ui.JSFUIPlugin;
 import org.eclipse.swt.graphics.Image;
 import org.w3c.dom.Element;
@@ -53,7 +53,7 @@ public class JSFCoreConverterFactory implements IConverterFactory
         else if (IJSFConstants.TAG_FACET.equalsIgnoreCase(tagName)
                 || IJSFConstants.TAG_VERBATIM.equalsIgnoreCase(tagName))
         {
-            AbstractTagConverter toSpan = new TagConverterToSpan(element);
+            AbstractTagConverter toSpan = new TagConverterToInlineBlock(element, mode);
             toSpan.setMinWidth(10);
             toSpan.setMinHeight(10);
             toSpan.setNeedBorderDecorator(true);

@@ -26,7 +26,7 @@ import org.eclipse.gef.ui.actions.UpdateAction;
 import org.eclipse.gef.ui.palette.PaletteViewer;
 import org.eclipse.gef.ui.palette.PaletteViewerProvider;
 import org.eclipse.gef.ui.palette.FlyoutPaletteComposite.FlyoutPreferences;
-import org.eclipse.gef.ui.parts.GraphicalEditor;
+import org.eclipse.gef.ui.parts.GraphicalEditorWithFlyoutPalette;
 import org.eclipse.gef.ui.parts.GraphicalViewerKeyHandler;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuListener;
@@ -38,7 +38,6 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.actions.container.ContainerActionGroup;
 import org.eclipse.jst.pagedesigner.actions.menuextension.CustomedContextMenuActionGroup;
-import org.eclipse.jst.pagedesigner.actions.menuextension.RunAction;
 import org.eclipse.jst.pagedesigner.actions.range.RangeActionGroup;
 import org.eclipse.jst.pagedesigner.actions.single.SingleElementActionGroup;
 import org.eclipse.jst.pagedesigner.commands.CopyAction;
@@ -49,6 +48,7 @@ import org.eclipse.jst.pagedesigner.dnd.internal.DesignerTemplateTransferDragSou
 import org.eclipse.jst.pagedesigner.dnd.internal.LocalSelectionDropTargetListener;
 import org.eclipse.jst.pagedesigner.dnd.internal.PDTemplateTransferDropTargetListener;
 import org.eclipse.jst.pagedesigner.dnd.internal.ResouceDropTargetListener;
+import org.eclipse.jst.pagedesigner.editors.actions.ActionsMessages;
 import org.eclipse.jst.pagedesigner.editors.actions.DesignerUndoRedoAction;
 import org.eclipse.jst.pagedesigner.editors.actions.RelatedViewActionGroup;
 import org.eclipse.jst.pagedesigner.editors.palette.DesignerPaletteCustomizer;
@@ -89,9 +89,10 @@ import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 /**
  * @author mengbo
  */
-public class SimpleGraphicalEditor extends GraphicalEditor implements
+public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette implements
 		IDesignViewer, IDocumentSelectionMediator {
-	private HTMLEditor _delegate;
+
+    private HTMLEditor _delegate;
 
 	private HTMLGraphicalViewer _viewer;
 
@@ -105,6 +106,7 @@ public class SimpleGraphicalEditor extends GraphicalEditor implements
 
 	private IModelStateListener _internalModelListener = new IModelStateListener() {
 		public void modelAboutToBeChanged(IStructuredModel model) {
+            // do nothing
 		}
 
 		public void modelChanged(IStructuredModel model) {
@@ -113,19 +115,24 @@ public class SimpleGraphicalEditor extends GraphicalEditor implements
 
 		public void modelDirtyStateChanged(IStructuredModel model,
 				boolean isDirty) {
+            // do nothing
 		}
 
 		public void modelResourceDeleted(IStructuredModel model) {
+            // do nothing
 		}
 
 		public void modelResourceMoved(IStructuredModel oldModel,
 				IStructuredModel newModel) {
+            // do nothing
 		}
 
 		public void modelAboutToBeReinitialized(IStructuredModel structuredModel) {
+            // do nothing
 		}
 
 		public void modelReinitialized(IStructuredModel structuredModel) {
+            // do nothing
 		}
 	};
 
@@ -200,6 +207,8 @@ public class SimpleGraphicalEditor extends GraphicalEditor implements
 				}
 			}
 		});
+        
+        super.initializeGraphicalViewer();
 	}
 
 	protected void initializeContextMenu() {
@@ -208,79 +217,7 @@ public class SimpleGraphicalEditor extends GraphicalEditor implements
 		menuMgr.setRemoveAllWhenShown(true);
 		Menu menu = menuMgr.createContextMenu(gviewer);
 		gviewer.setMenu(menu);
-		menuMgr.addMenuListener(new IMenuListener() {
-			public void menuAboutToShow(IMenuManager menuMgr1) {
-				PageDesignerActionConstants.addStandardActionGroups(menuMgr1);
-
-				menuMgr1.add(new RunAction(SimpleGraphicalEditor.this._delegate,
-						RunAction.LAUNCH_MODE_RUN));
-				menuMgr1.add(new RunAction(SimpleGraphicalEditor.this._delegate,
-						RunAction.LAUNCH_MODE_DEBUG));
-				// FIXME: for UNDO/REDO, maybe need also wrap them in
-				// DesignerCommand.
-				// otherwise don't have validate() called after the source
-				// change.
-				menuMgr1.appendToGroup(PageDesignerActionConstants.GROUP_UNDO,
-						getAction(IWorkbenchActionDefinitionIds.UNDO));
-				menuMgr1.appendToGroup(PageDesignerActionConstants.GROUP_UNDO,
-						getAction(IWorkbenchActionDefinitionIds.REDO));
-
-				menuMgr1.appendToGroup(PageDesignerActionConstants.GROUP_EDIT,
-						getAction(IWorkbenchActionDefinitionIds.CUT));
-				menuMgr1.appendToGroup(PageDesignerActionConstants.GROUP_EDIT,
-						getAction(IWorkbenchActionDefinitionIds.COPY));
-				menuMgr1.appendToGroup(PageDesignerActionConstants.GROUP_EDIT,
-						getAction(IWorkbenchActionDefinitionIds.PASTE));
-				menuMgr1.appendToGroup(PageDesignerActionConstants.GROUP_EDIT,
-						getAction(IWorkbenchActionDefinitionIds.DELETE));
-
-				ContainerActionGroup containerActionGroup = new ContainerActionGroup();
-				ActionContext context = new ActionContext(_viewer
-						.getSelection());
-				context.setInput(_viewer);
-				containerActionGroup.setContext(context);
-				containerActionGroup.fillContextMenu(menuMgr1);
-				containerActionGroup.setContext(null);
-
-				// TableActionGroup tableActionGroup = new TableActionGroup();
-				// tableActionGroup.setContext(new
-				// ActionContext(_viewer.getSelection()));
-				// tableActionGroup.fillContextMenu(menuMgr);
-				// tableActionGroup.setContext(null);
-
-				RangeActionGroup rangeActionGroup = new RangeActionGroup();
-				context = new ActionContext(_viewer.getSelection());
-				context.setInput(_viewer);
-				rangeActionGroup.setContext(context);
-				rangeActionGroup.fillContextMenu(menuMgr1);
-				rangeActionGroup.setContext(null);
-
-				SingleElementActionGroup singleActionGroup = new SingleElementActionGroup();
-				singleActionGroup.setContext(new ActionContext(_viewer
-						.getSelection()));
-				singleActionGroup.fillContextMenu(menuMgr1);
-				singleActionGroup.setContext(null);
-
-				// IAction customize =
-				// graphicalActionRegistry.getAction(CustomizeJavaBeanAction.ACTION_ID);
-				// if (customize.isEnabled())
-				// menuMgr.appendToGroup(GEFActionConstants.GROUP_EDIT,
-				// customize);
-
-				RelatedViewActionGroup viewMenu = new RelatedViewActionGroup();
-				viewMenu.fillContextMenu(menuMgr1);
-
-				CustomedContextMenuActionGroup customedMenu = new CustomedContextMenuActionGroup();
-				customedMenu.setContext(new ActionContext(_viewer
-						.getSelection()));
-				customedMenu.setModel(_model);
-				customedMenu.setParentControl(_viewer.getControl());
-				customedMenu.fillContextMenu(menuMgr1);
-				customedMenu.setContext(null);
-				customedMenu.setParentControl(null);
-				customedMenu.setModel(null);
-			}
-		});
+		menuMgr.addMenuListener(new ContextMenuListener());
 		getSite().registerContextMenu(
 				"HTMLVisualEditor.contextMenu", menuMgr, _viewer); //$NON-NLS-1$
 	}
@@ -547,6 +484,11 @@ public class SimpleGraphicalEditor extends GraphicalEditor implements
 		};
 	}
 
+    PaletteViewerProvider getPaletteViewerProvider2()
+    {
+        return getPaletteViewerProvider();
+    }
+    
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -663,4 +605,131 @@ public class SimpleGraphicalEditor extends GraphicalEditor implements
 			});
 		}
 	}
+ 
+    private final class ContextMenuListener implements IMenuListener 
+    {
+        public void menuAboutToShow(IMenuManager menuMgr1) 
+        {
+            // add standarized sub-menus
+            addEditSubMenu(menuMgr1);
+            addSelectSubMenu(menuMgr1);
+            addInsertSubMenu(menuMgr1);
+            addNavigateSubMenu(menuMgr1);
+            addStyleSubMenu(menuMgr1);
+            
+            // add separators that mark standard append locations in the main
+            // context menu
+            PageDesignerActionConstants.addStandardActionGroups(menuMgr1);
+
+            // TODO: Run/Debug?
+            
+            // insert ElementEdit contributed menu items
+            final ContainerActionGroup containerActionGroup = 
+                new ContainerActionGroup();
+            ActionContext context = new ActionContext(_viewer
+                    .getSelection());
+            context.setInput(_viewer);
+            containerActionGroup.setContext(context);
+            containerActionGroup.fillContextMenu(menuMgr1);
+            containerActionGroup.setContext(null);
+
+            // TODO: TableActionGroup
+
+            // if on a text context, (instead of a ElementEditPart),
+            // add text styling actions
+            final RangeActionGroup rangeActionGroup = new RangeActionGroup();
+            context = new ActionContext(_viewer.getSelection());
+            context.setInput(_viewer);
+            rangeActionGroup.setContext(context);
+            rangeActionGroup.fillContextMenu(menuMgr1);
+            rangeActionGroup.setContext(null);
+
+            // Add actions for single ElementEditPart's that are common
+            // to all
+            final SingleElementActionGroup singleActionGroup = 
+                new SingleElementActionGroup();
+            singleActionGroup.setContext(new ActionContext(_viewer
+                    .getSelection()));
+            singleActionGroup.fillContextMenu(menuMgr1);
+            singleActionGroup.setContext(null);
+
+            // add "Show In" actions...
+            final RelatedViewActionGroup viewMenu = new RelatedViewActionGroup(getEditDomain());
+            context = new ActionContext(_viewer.getSelection());
+            viewMenu.setContext(context);
+            viewMenu.fillContextMenu(menuMgr1);
+
+            // add extension point contributed menu actions
+            CustomedContextMenuActionGroup customedMenu = new CustomedContextMenuActionGroup();
+            customedMenu.setContext(new ActionContext(_viewer
+                    .getSelection()));
+            customedMenu.setModel(_model);
+            customedMenu.setParentControl(_viewer.getControl());
+            customedMenu.fillContextMenu(menuMgr1);
+            customedMenu.setContext(null);
+            customedMenu.setParentControl(null);
+            customedMenu.setModel(null);
+        }
+        
+        private void addNavigateSubMenu(IMenuManager menu) {
+            final IMenuManager  navigateSubmenu = 
+                new MenuManager(ActionsMessages.getString("Navigate.Menu")  //$NON-NLS-1$
+                        , PageDesignerActionConstants.NAVIGATE_SUBMENU_ID);
+            menu.add(navigateSubmenu);
+            PageDesignerActionConstants.addStandardNavigateActionGroups(navigateSubmenu);
+        }
+
+        private void addEditSubMenu(IMenuManager menu)
+        {
+            final IMenuManager  editSubmenu 
+                = new MenuManager(ActionsMessages.getString("Edit.Menu")  //$NON-NLS-1$
+                        , PageDesignerActionConstants.EDIT_SUBMENU_ID);
+            menu.add(editSubmenu);
+            PageDesignerActionConstants.addStandardEditActionGroups(editSubmenu);
+            
+            // FIXME: for UNDO/REDO, maybe need also wrap them in
+            // DesignerCommand.
+            // otherwise don't have validate() called after the source
+            // change.
+            editSubmenu.appendToGroup(PageDesignerActionConstants.GROUP_UNDO,
+                    getAction(IWorkbenchActionDefinitionIds.UNDO));
+            editSubmenu.appendToGroup(PageDesignerActionConstants.GROUP_UNDO,
+                    getAction(IWorkbenchActionDefinitionIds.REDO));
+
+            editSubmenu.appendToGroup(PageDesignerActionConstants.GROUP_EDIT,
+                    getAction(IWorkbenchActionDefinitionIds.CUT));
+            editSubmenu.appendToGroup(PageDesignerActionConstants.GROUP_EDIT,
+                    getAction(IWorkbenchActionDefinitionIds.COPY));
+            editSubmenu.appendToGroup(PageDesignerActionConstants.GROUP_EDIT,
+                    getAction(IWorkbenchActionDefinitionIds.PASTE));
+            editSubmenu.appendToGroup(PageDesignerActionConstants.GROUP_EDIT,
+                    getAction(IWorkbenchActionDefinitionIds.DELETE));
+
+        }
+        
+        private void addStyleSubMenu(IMenuManager menu)
+        {
+            final IMenuManager  styleSubmenu = 
+                new MenuManager(ActionsMessages.getString("Style.Menu")  //$NON-NLS-1$
+                        , PageDesignerActionConstants.STYLE_SUBMENU_ID);
+            menu.add(styleSubmenu);
+            PageDesignerActionConstants.addStandardStyleActionGroups(styleSubmenu);
+        }
+        private void addInsertSubMenu(IMenuManager menu) {
+            final IMenuManager  insertSubmenu = 
+                new MenuManager(ActionsMessages.getString("Insert.Menu")  //$NON-NLS-1$
+                        , PageDesignerActionConstants.INSERT_SUBMENU_ID);
+            menu.add(insertSubmenu);
+            PageDesignerActionConstants.addStandardInsertActionGroups(insertSubmenu);
+        }
+        
+        private void addSelectSubMenu(IMenuManager menu)
+        {
+            final IMenuManager  selectSubMenu = 
+                new MenuManager(ActionsMessages.getString("Select.Menu")  //$NON-NLS-1$
+                        , PageDesignerActionConstants.SELECT_SUBMENU_ID);
+            menu.add(selectSubMenu);
+            PageDesignerActionConstants.addStandardSelectActionGroups(selectSubMenu);
+        }
+    }
 }

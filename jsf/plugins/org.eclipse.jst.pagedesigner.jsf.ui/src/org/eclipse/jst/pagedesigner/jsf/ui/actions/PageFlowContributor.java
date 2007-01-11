@@ -61,7 +61,7 @@ public class PageFlowContributor implements IContextMenuItemContributor
         PageFlowAction action = new PageFlowAction();
         action.setId(PageFlowAction.ID);
         action.setModel(model);
-        IMenuManager viewMgr = manager.findMenuUsingPath(PageDesignerActionConstants.MENUMGR_VIEW_ID);
+        IMenuManager viewMgr = manager.findMenuUsingPath(PageDesignerActionConstants.SHOWVIEW_SUBMENU_ID);
         if (viewMgr != null)
         {
             viewMgr.add(action);

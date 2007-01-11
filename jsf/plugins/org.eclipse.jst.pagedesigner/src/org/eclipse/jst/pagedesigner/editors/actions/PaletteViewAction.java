@@ -11,46 +11,96 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.editors.actions;
 
+import org.eclipse.gef.EditDomain;
 import org.eclipse.gef.ui.views.palette.PaletteView;
-import org.eclipse.jface.action.Action;
-import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
-import org.eclipse.jst.pagedesigner.PDPlugin;
-import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.PlatformUI;
+import org.w3c.dom.Element;
 
 /**
  * @author mengbo
  * @version 1.5
  */
-public class PaletteViewAction extends Action {
+public class PaletteViewAction extends ShowViewAction {
 	public final static String ID = "org.eclipse.jst.pagedesigner.editors.actions.PaletteViewAction"; //$NON-NLS-1$
-
-	private static Logger _log = PDPlugin.getLogger(PaletteViewAction.class);
-
-	public PaletteViewAction() {
-		setText(ActionsMessages.getString("PaletteViewAction.Menu.PaletteView")); //$NON-NLS-1$
+	private final Element   _element;
+    private final EditDomain _editDomain;
+    
+	public PaletteViewAction(Element element, EditDomain editDomain) {
+        super(ActionsMessages.getString("PaletteViewAction.Menu.PaletteView")
+                , PaletteView.ID); //$NON-NLS-1$
+        _element = element;
+        _editDomain = editDomain;
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.jface.action.IAction#run()
-	 */
-	public void run() {
-		try {
-			getPage().showView(PaletteView.ID);
-		} catch (PartInitException e) {
-			_log.info("Open the Palette View", e);
-		}
-
-	}
-
-	private IWorkbenchPage getPage() {
-		IWorkbench workbench = PlatformUI.getWorkbench();
-		IWorkbenchWindow window = workbench.getActiveWorkbenchWindow();
-		return window.getActivePage();
-	}
+    
+    /** 
+     * Add to default behavior because pallete view doesn't automatically track
+     * selection to currently selected edit part
+     */
+    public void run()
+    {
+        super.run();
+        
+        //TODO: for some reason getting a palette item to select doesn't work
+//        if (_element != null && _editDomain != null)
+//        {
+//            PaletteItemManager manager = PaletteItemManager
+//                                          .getInstance(getProject(_element));
+//            if (manager != null) {
+//                IPaletteItemCategory category = manager.findOrCreateCategory(CMUtil
+//                        .getElementNamespaceURI(_element), null);
+//                
+//              if (category != null) {
+//                  String name = _element.getLocalName();
+//                  if (category.getURI().equals(IJMTConstants.URI_JSP)) {
+//                      name = _element.getTagName();
+//                  }
+//                  IPaletteItemDescriptor descriptor = category
+//                      .getItemByTagName(name);
+//                  if (descriptor != null)
+//                  {
+//                      PaletteEntry paletteEntry = descriptor.getPaletteEntry();
+//                      final RootEditPart editPart = 
+//                          _editDomain.getPaletteViewer().getRootEditPart();
+//                      EditPart newSelection = findMatchingPart(editPart.getContents(), paletteEntry);
+//
+//                      if (newSelection != null)
+//                      {
+//                          _editDomain.getPaletteViewer().setSelection(new StructuredSelection(newSelection));
+//                      }
+//                   }
+//                }
+//            }
+//        }
+    }
+    
+//    private EditPart findMatchingPart(EditPart curPart, PaletteEntry paletteEntry)
+//    {
+//        EditPart match = null;
+//
+//        if (curPart.getModel() == paletteEntry)
+//        {
+//            return curPart;
+//        }
+//        
+//        for (final Iterator it = curPart.getChildren().iterator(); it.hasNext();)
+//        {
+//            match = findMatchingPart((EditPart)it.next(), paletteEntry);
+//            
+//            if (match != null)
+//            {
+//                break;
+//            }
+//        }
+//        
+//        return match;
+//    }
+//    private IProject getProject(Element element) {
+//        if (element instanceof IDOMElement) {
+//            IDOMModel model = ((IDOMElement) element).getModel();
+//            IFile file = StructuredModelUtil.getFileFor(model);
+//            if (file != null) {
+//                return file.getProject();
+//            }
+//        }
+//        return null;
+//    }
 }

@@ -346,10 +346,10 @@ public class AbstractStyle implements ICSSStyle {
 	 */
 	public Insets getMarginInsets() {
 		if (_marginInsets == null) {
-			int top = getInsetProperty(ICSSPropertyID.ATTR_MARGIN_TOP)+ARTIFICIAL_MARGIN_OFFSET;
-			int left = getInsetProperty(ICSSPropertyID.ATTR_MARGIN_LEFT)+ARTIFICIAL_MARGIN_OFFSET;
-			int bottom = getInsetProperty(ICSSPropertyID.ATTR_MARGIN_BOTTOM)+ARTIFICIAL_MARGIN_OFFSET;
-			int right = getInsetProperty(ICSSPropertyID.ATTR_MARGIN_RIGHT)+ARTIFICIAL_MARGIN_OFFSET;
+			int top = getInsetProperty(ICSSPropertyID.ATTR_MARGIN_TOP);
+			int left = getInsetProperty(ICSSPropertyID.ATTR_MARGIN_LEFT);
+			int bottom = getInsetProperty(ICSSPropertyID.ATTR_MARGIN_BOTTOM);
+			int right = getInsetProperty(ICSSPropertyID.ATTR_MARGIN_RIGHT);
 			_marginInsets = new Insets(top, left, bottom, right);
 		}
 		return _marginInsets;
@@ -362,10 +362,10 @@ public class AbstractStyle implements ICSSStyle {
 	 */
 	public Insets getPaddingInsets() {
 		if (_paddingInsets == null) {
-			int top = getInsetProperty(ICSSPropertyID.ATTR_PADDING_TOP);
-			int left = getInsetProperty(ICSSPropertyID.ATTR_PADDING_LEFT);
-			int bottom = getInsetProperty(ICSSPropertyID.ATTR_PADDING_BOTTOM);
-			int right = getInsetProperty(ICSSPropertyID.ATTR_PADDING_RIGHT);
+			int top = getInsetProperty(ICSSPropertyID.ATTR_PADDING_TOP)+ARTIFICIAL_BORDER_OFFSET;
+			int left = getInsetProperty(ICSSPropertyID.ATTR_PADDING_LEFT)+ARTIFICIAL_BORDER_OFFSET;
+			int bottom = getInsetProperty(ICSSPropertyID.ATTR_PADDING_BOTTOM)+ARTIFICIAL_BORDER_OFFSET;
+			int right = getInsetProperty(ICSSPropertyID.ATTR_PADDING_RIGHT)+ARTIFICIAL_BORDER_OFFSET;
 			_paddingInsets = new Insets(top, left, bottom, right);
 		}
 		return _paddingInsets;

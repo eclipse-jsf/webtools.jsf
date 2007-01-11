@@ -133,7 +133,7 @@ public class TableElementEdit extends AbstractElementEdit {
 	 */
 	private void fillTableMenu(ElementEditPart tablePart, int cellRow,
 			int cellColumn, IMenuManager tableMenu) {
-		SelectEditPartAction action1 = new SelectEditPartAction(
+		SelectEditPartAction action1 = SelectEditPartAction.create(
 				PDPlugin.getResourceString("ElementEdit.Submenu.SelectTable"), tablePart);//$NON-NLS-1$
 		tableMenu.add(action1);
 

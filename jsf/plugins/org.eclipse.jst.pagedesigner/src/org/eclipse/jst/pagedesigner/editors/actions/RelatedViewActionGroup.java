@@ -18,21 +18,35 @@ import java.util.Map;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.gef.EditDomain;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jst.pagedesigner.editors.PageDesignerActionConstants;
+import org.eclipse.jst.pagedesigner.parts.ElementEditPart;
 import org.eclipse.ui.IWorkbenchActionConstants;
+import org.eclipse.ui.actions.ActionContext;
 import org.eclipse.ui.actions.ActionGroup;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.w3c.dom.Element;
 
 /**
  * @author mengbo
  * @version 1.5
  */
-public class RelatedViewActionGroup extends ActionGroup {
+public class RelatedViewActionGroup extends ActionGroup 
+{
+    private final EditDomain  _editDomain;
+    
+    public RelatedViewActionGroup(EditDomain editDomain)
+    {
+        _editDomain = editDomain;
+    }
+    
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -43,17 +57,20 @@ public class RelatedViewActionGroup extends ActionGroup {
 
 		final IMenuManager viewMgr = new MenuManager(ActionsMessages
 				.getString("RelatedViewActionGroup.Menu.ShowView"),//$NON-NLS-1$
-				PageDesignerActionConstants.MENUMGR_VIEW_ID);
+				PageDesignerActionConstants.SHOWVIEW_SUBMENU_ID);
 		viewMgr.add(new Action() {
 		    // add noop action; TODO: why?
 		});
 		viewMgr.setRemoveAllWhenShown(true);
+        final ActionContext context = getContext();
 		viewMgr.addMenuListener(new IMenuListener() {
 			public void menuAboutToShow(IMenuManager manager) {
+                // TODO: don't like this at all
 				String[] views = { "org.eclipse.ui.views.PropertySheet",
-						"org.eclipse.gef.ui.palette_view"};
-//						"org.eclipse.jst.pagedesigner.databinding.ui.views.DataBindingsView" };
-				Map icons = getIconForView(views);
+						"org.eclipse.gef.ui.palette_view", "org.eclipse.ui.views.ContentOutline"};
+
+                Map icons = getIconForView(views);
+                // TODO: is this the best way to do this?
 				if (manager.find(PropertiesViewAction.ID) == null) {
 					Action action = new PropertiesViewAction();
 					action.setId(PropertiesViewAction.ID);
@@ -62,21 +79,39 @@ public class RelatedViewActionGroup extends ActionGroup {
 					manager.add(action);
 				}
 				if (manager.find(PaletteViewAction.ID) == null) {
-					Action action = new PaletteViewAction();
-					action.setId(PaletteViewAction.ID);
-					action.setImageDescriptor((ImageDescriptor) icons
-							.get(views[1]));
-					manager.add(action);
+                    ISelection selection = context.getSelection();
+                    if (selection instanceof IStructuredSelection)
+                    {
+                        IStructuredSelection strucSelection = 
+                            (IStructuredSelection) selection;
+                        Action action = null;
+                        
+                        if (strucSelection.getFirstElement() instanceof ElementEditPart)
+                        {                      
+                            Element selectedElem = (Element)
+                                ((ElementEditPart) strucSelection.getFirstElement()).getModel();
+        					action = new PaletteViewAction(selectedElem, _editDomain);
+                        }
+                        else
+                        {
+                            // if can't determine, just default open the palette
+                            action = new PaletteViewAction(null, null);
+                        }
+                        action.setId(PaletteViewAction.ID);
+                        action.setImageDescriptor((ImageDescriptor) icons
+                                .get(views[1]));
+                        manager.add(action);
+                    }
 				}
-				/*
-				if (manager.find(DataBindingViewAction.ID) == null) {
-					Action action = new DataBindingViewAction();
-					action.setId(DataBindingViewAction.ID);
-					action.setImageDescriptor((ImageDescriptor) icons
-							.get(views[2]));
-					manager.add(action);
-				}
-				*/
+                if (manager.find(OutlineViewAction.ID) == null)
+                {
+                    Action action = new OutlineViewAction();
+                    action.setId(OutlineViewAction.ID);
+                    action.setImageDescriptor((ImageDescriptor) icons
+                            .get(views[2]));
+                    manager.add(action);
+                }
+                
 			}
 		});
 		menu.appendToGroup(IWorkbenchActionConstants.MB_ADDITIONS, viewMgr);

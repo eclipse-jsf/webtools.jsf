@@ -11,46 +11,18 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.editors.actions;
 
-import org.eclipse.jface.action.Action;
-import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
-import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.ui.IPageLayout;
-import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.PlatformUI;
 
 /**
  * @author mengbo
  */
-public class PropertiesViewAction extends Action {
+public class PropertiesViewAction extends ShowViewAction {
 	public final static String ID = "org.eclipse.jst.pagedesigner.editors.actions.PropertiesViewAction"; //$NON-NLS-1$
 
-	private static Logger _log = PDPlugin.getLogger(PropertiesViewAction.class);
-
-	public PropertiesViewAction() {
-		setText(ActionsMessages
-				.getString("PropertiesViewAction.Menu.Properties")); //$NON-NLS-1$
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.jface.action.IAction#run()
-	 */
-	public void run() {
-		try {
-			getPage().showView(IPageLayout.ID_PROP_SHEET);
-		} catch (PartInitException e) {
-			_log.info("Open the Properties View", e);
-		}
-
-	}
-
-	private IWorkbenchPage getPage() {
-		IWorkbench workbench = PlatformUI.getWorkbench();
-		IWorkbenchWindow window = workbench.getActiveWorkbenchWindow();
-		return window.getActivePage();
+	public PropertiesViewAction() 
+    {
+		super(ActionsMessages
+				.getString("PropertiesViewAction.Menu.Properties")
+              , IPageLayout.ID_PROP_SHEET); //$NON-NLS-1$
 	}
 }

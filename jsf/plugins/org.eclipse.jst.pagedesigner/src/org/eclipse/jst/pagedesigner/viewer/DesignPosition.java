@@ -36,8 +36,6 @@ public class DesignPosition {
 	public DesignPosition(EditPart part, int offset) {
 		_containerPart = part;
 		_offset = offset;
-
-		// TODO: ?? int[] a = new int[] { 0, 0 };
 	}
 
 	/**

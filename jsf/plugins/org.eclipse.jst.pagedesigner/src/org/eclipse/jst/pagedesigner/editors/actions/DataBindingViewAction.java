@@ -47,7 +47,6 @@ public class DataBindingViewAction extends Action {
 		} catch (PartInitException e) {
 			_log.error("Error opening the DataBindingView");
 		}
-
 	}
 
 	private IWorkbenchPage getPage() {

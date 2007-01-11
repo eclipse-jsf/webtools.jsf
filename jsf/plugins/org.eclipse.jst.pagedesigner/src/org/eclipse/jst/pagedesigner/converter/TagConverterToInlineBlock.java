@@ -28,14 +28,15 @@ import org.w3c.dom.Element;
  * @see org.eclipse.jst.pagedesigner.css2.style.ITagEditInfo#getMinWidth()
  */
 public class TagConverterToInlineBlock extends AbstractTagConverter {
-	private int model;
+	private int displayMode;
 
 	/**
 	 * @param host
+	 * @param mode
 	 */
-	public TagConverterToInlineBlock(Element host, int model) {
+	public TagConverterToInlineBlock(Element host, int mode) {
 		super(host);
-		this.model = model;
+		this.displayMode = mode;
 	}
 
 	/*
@@ -45,7 +46,7 @@ public class TagConverterToInlineBlock extends AbstractTagConverter {
 	 */
 	protected Element doConvertRefresh() {
 		Element result = null;
-		if (model == IConverterFactory.MODE_PREVIEW) {
+		if (displayMode == IConverterFactory.MODE_PREVIEW) {
 			result = createElement("span");
 			copyChildren(getHostElement(), result);
 		} else {

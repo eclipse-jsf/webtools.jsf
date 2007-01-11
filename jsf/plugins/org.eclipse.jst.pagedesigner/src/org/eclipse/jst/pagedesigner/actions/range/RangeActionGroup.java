@@ -12,6 +12,7 @@
 package org.eclipse.jst.pagedesigner.actions.range;
 
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
@@ -50,27 +51,35 @@ public class RangeActionGroup extends ActionGroup {
 	 * 
 	 * @see org.eclipse.ui.actions.ActionGroup#fillContextMenu(org.eclipse.jface.action.IMenuManager)
 	 */
-	public void fillContextMenu(IMenuManager menu) {
+	public void fillContextMenu(IMenuManager contextMenu) 
+    {
 		DesignRange selection = fixUpSelection(getContext().getSelection());
 		if (selection == null) {
 			return;
 		}
-		if (getContext().getInput() instanceof IHTMLGraphicalViewer) {
-			addParagraphFormatMenu(menu, selection,
-					(IHTMLGraphicalViewer) getContext().getInput());
-			addHorizontalAlignMenu(menu, selection,
-					(IHTMLGraphicalViewer) getContext().getInput());
-			addTextStyleMenu(menu, (IHTMLGraphicalViewer) getContext()
-					.getInput());
-		}
-        // TODO: the (commented out) copy of this method does nothing
-		//addListModeMenu(menu, selection);
-
-		// TODO: the (commented out) copy of this method does nothing
-        //addTextFontMenu(menu, selection);
-
-		addLinkMenu(menu, selection);
-	}
+        IContributionItem styleSubMenuItem = 
+            contextMenu.find(PageDesignerActionConstants.STYLE_SUBMENU_ID);
+        
+        if (styleSubMenuItem instanceof IMenuManager)
+        {
+            final IMenuManager subMenu = (IMenuManager) styleSubMenuItem;
+    		if (getContext().getInput() instanceof IHTMLGraphicalViewer) {
+    			addParagraphFormatMenu(subMenu, selection,
+    					(IHTMLGraphicalViewer) getContext().getInput());
+    			addHorizontalAlignMenu(subMenu, selection,
+    					(IHTMLGraphicalViewer) getContext().getInput());
+    			addTextStyleMenu(subMenu, (IHTMLGraphicalViewer) getContext()
+    					.getInput());
+    		}
+            // TODO: the (commented out) copy of this method does nothing
+    		//addListModeMenu(menu, selection);
+    
+    		// TODO: the (commented out) copy of this method does nothing
+            //addTextFontMenu(menu, selection);
+    
+    		addLinkMenu(subMenu, selection);
+        }
+    }
 
 	/**
 	 * @param selection

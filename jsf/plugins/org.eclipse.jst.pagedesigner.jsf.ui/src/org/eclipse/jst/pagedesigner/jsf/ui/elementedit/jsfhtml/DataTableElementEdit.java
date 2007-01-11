@@ -127,7 +127,7 @@ public class DataTableElementEdit extends DefaultJSFHTMLElementEdit
      */
     private void fillTableMenu(ElementEditPart elePart, int cellColumn, IMenuManager tableMenu)
     {
-        SelectEditPartAction action = new SelectEditPartAction(JSFUIPlugin
+        SelectEditPartAction action = SelectEditPartAction.create(JSFUIPlugin
                 .getResourceString("ElementEdit.Submenu.DataTable.SelectTable"), elePart);//$NON-NLS-1$
         tableMenu.add(action);
 

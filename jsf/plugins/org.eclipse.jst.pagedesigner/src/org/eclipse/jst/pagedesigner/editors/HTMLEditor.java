@@ -24,12 +24,12 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.gef.DefaultEditDomain;
+import org.eclipse.gef.palette.PaletteRoot;
 import org.eclipse.gef.ui.palette.PaletteViewerProvider;
 import org.eclipse.gef.ui.views.palette.PalettePage;
 import org.eclipse.gef.ui.views.palette.PaletteViewerPage;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
-import org.eclipse.jface.text.ITextInputListener;
 import org.eclipse.jface.text.TextSelection;
 import org.eclipse.jface.viewers.IPostSelectionProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -40,8 +40,6 @@ import org.eclipse.jst.jsf.common.ui.internal.utils.ResourceUtils;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.dnd.internal.DesignerSourceMouseTrackAdapter;
 import org.eclipse.jst.pagedesigner.editors.pagedesigner.PageDesignerResources;
-import org.eclipse.jst.pagedesigner.editors.palette.DesignerPaletteRoot;
-import org.eclipse.jst.pagedesigner.editors.palette.DesignerPaletteViewerProvider;
 import org.eclipse.jst.pagedesigner.editors.palette.impl.PaletteItemManager;
 import org.eclipse.jst.pagedesigner.jsp.core.pagevar.IPageVariablesProvider;
 import org.eclipse.jst.pagedesigner.jsp.core.pagevar.adapter.IDocumentPageVariableAdapter;
@@ -863,8 +861,6 @@ public class HTMLEditor extends PostSelectionMultiPageEditorPart implements
 		return getTextEditor().isDirty();
 	}
 
-	// IPropertySheetPage _propertySheetPage;
-
 	protected IPropertySheetPage getPropertySheetPage() {
 		return new org.eclipse.jst.pagedesigner.properties.DesignerTabbedPropertySheetPage(
 				this, this);
@@ -876,11 +872,16 @@ public class HTMLEditor extends PostSelectionMultiPageEditorPart implements
 			PaletteItemManager manager = PaletteItemManager
 					.getInstance(getCurrentProject(getEditorInput()));
 			manager.reset();
-			editDomain.setPaletteRoot(new DesignerPaletteRoot(manager));
-
-			PaletteViewerProvider provider = new DesignerPaletteViewerProvider(
-					editDomain);
-			_paletteViewerPage = new PaletteViewerPage(provider);
+            PaletteRoot paletteRoot = _designViewer.getPaletteRoot();
+            editDomain.setPaletteRoot(paletteRoot);
+            
+            _paletteViewerPage = (PaletteViewerPage) _designViewer.getAdapter(PalettePage.class);
+            // if possible, try to use the 
+            if (_paletteViewerPage == null)
+            {
+                PaletteViewerProvider provider = _designViewer.getPaletteViewerProvider2();
+                _paletteViewerPage = new PaletteViewerPage(provider);
+            }
 		}
 		return _paletteViewerPage;
 	}

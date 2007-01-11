@@ -57,8 +57,8 @@ public class DefaultStyle implements ICSSStyle {
 	 * @see org.eclipse.jst.pagedesigner.css2.ICSSStyle#getMarginInsets()
 	 */
 	public Insets getMarginInsets() {
-		//return EMPTY_INSETS;
-        return new Insets(ARTIFICIAL_MARGIN_OFFSET, ARTIFICIAL_MARGIN_OFFSET, ARTIFICIAL_MARGIN_OFFSET,ARTIFICIAL_MARGIN_OFFSET);
+		return EMPTY_INSETS;
+        //return new Insets(0, 0, 0, 0);
 	}
 
 	/*
@@ -76,7 +76,7 @@ public class DefaultStyle implements ICSSStyle {
 	 * @see org.eclipse.jst.pagedesigner.css2.ICSSStyle#getPaddingInsets()
 	 */
 	public Insets getPaddingInsets() {
-		return EMPTY_INSETS;
+        return new Insets(ARTIFICIAL_BORDER_OFFSET, ARTIFICIAL_BORDER_OFFSET, ARTIFICIAL_BORDER_OFFSET, ARTIFICIAL_BORDER_OFFSET);
 	}
 
 	/*
