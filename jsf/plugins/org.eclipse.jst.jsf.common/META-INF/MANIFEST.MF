@@ -5,8 +5,11 @@ Bundle-SymbolicName: org.eclipse.jst.jsf.common;singleton:=true
 Bundle-Version: 0.5.0.qualifier
 Bundle-Activator: org.eclipse.jst.jsf.common.JSFCommonPlugin$Implementation
 Bundle-Localization: plugin
-Export-Package: org.eclipse.jst.jsf.common.internal.provisional.util,
+Export-Package: org.eclipse.jst.jsf.common,
+ org.eclipse.jst.jsf.common.internal.provisional.util,
  org.eclipse.jst.jsf.common.internal.types;x-friends:="org.eclipse.jst.jsf.core",
+ org.eclipse.jst.jsf.common.metadata.internal.provisional,
+ org.eclipse.jst.jsf.common.metadata.internal.provisional.query,
  org.eclipse.jst.jsf.contentmodel.annotation.internal;x-friends:="org.eclipse.jst.jsf.metadata.tests",
  org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional,
  org.eclipse.jst.jsf.context.internal.provisional,
@@ -20,8 +23,7 @@ Export-Package: org.eclipse.jst.jsf.common.internal.provisional.util,
  org.eclipse.jst.jsf.context.symbol.internal.provisional,
  org.eclipse.jst.jsf.context.symbol.internal.provisional.provider,
  org.eclipse.jst.jsf.context.symbol.internal.provisional.source,
- org.eclipse.jst.jsf.context.symbol.internal.util,
- org.eclipse.jst.jsf.common
+ org.eclipse.jst.jsf.context.symbol.internal.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.wst.sse.core,
  org.eclipse.jst.jsp.core,
@@ -34,6 +36,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.jface,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.emf.edit,
- org.eclipse.emf.edit.ui
+ org.eclipse.emf.edit.ui,
+ org.eclipse.emf.ecore.xmi
 Eclipse-LazyStart: true
 Bundle-Vendor: %plugin.provider

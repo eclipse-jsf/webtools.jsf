@@ -4,12 +4,16 @@
  <extension-point id="annotationFiles" name="annotationFiles" schema="schema/annotationFiles.exsd"/>
  <extension-point id="symbolSourceProvider" name="JSF EL Symbol Source Provider" schema="schema/symbols.exsd"/>
  <extension-point id="contextSymbolFactory" name="Contextual Symbol Factory" schema="schema/contextSymbolFactory.exsd"/>
-
+  
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http:///org/eclipse/jst/jsf/context/symbol.ecore" 
        class = "org.eclipse.jst.jsf.context.symbol.SymbolPackage"
        genModel = "model/symbol.genmodel" /> 
+	<package 
+       uri = "http://org.eclipse.jst.jsf.common.metadata/metadata.ecore" 
+       class = "org.eclipse.jst.jsf.common.metadata.internal.provisional.MetadataPackage"
+       genModel = "model/metadata.genmodel" />        
   </extension>
   <extension
         point="org.eclipse.emf.edit.itemProviderAdapterFactories">

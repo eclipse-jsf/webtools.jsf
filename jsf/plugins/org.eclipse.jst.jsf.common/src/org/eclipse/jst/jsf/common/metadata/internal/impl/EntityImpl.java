@@ -1,0 +1,419 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * $Id: EntityImpl.java,v 1.1 2007/01/15 23:26:15 gkessler Exp $
+ */
+package org.eclipse.jst.jsf.common.metadata.internal.impl;
+
+import java.util.Collection;
+import java.util.Iterator;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.MetadataPackage;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IEntityVisitor;
+
+/**
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Entity</b></em>'.
+ * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * <ul>
+ *   <li>{@link org.eclipse.jst.jsf.common.metadata.internal.impl.EntityImpl#getChildEntities <em>Child Entities</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.common.metadata.internal.impl.EntityImpl#getTraits <em>Traits</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.common.metadata.internal.impl.EntityImpl#getParent <em>Parent</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.common.metadata.internal.impl.EntityImpl#getId <em>Id</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.common.metadata.internal.impl.EntityImpl#getType <em>Type</em>}</li>
+ * </ul>
+ * </p>
+ *
+ * @generated
+ */
+public class EntityImpl extends EObjectImpl implements Entity {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
+
+	/**
+	 * The cached value of the '{@link #getChildEntities() <em>Child Entities</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getChildEntities()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList childEntities = null;
+
+	/**
+	 * The cached value of the '{@link #getTraits() <em>Traits</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTraits()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList traits = null;
+
+	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected String id = ID_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String TYPE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
+	protected String type = TYPE_EDEFAULT;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected EntityImpl() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected EClass eStaticClass() {
+		return MetadataPackage.Literals.ENTITY;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList getChildEntities() {
+		if (childEntities == null) {
+			childEntities = new EObjectContainmentWithInverseEList(Entity.class, this, MetadataPackage.ENTITY__CHILD_ENTITIES, MetadataPackage.ENTITY__PARENT);
+		}
+		return childEntities;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList getTraits() {
+		if (traits == null) {
+			traits = new EObjectContainmentEList(Trait.class, this, MetadataPackage.ENTITY__TRAITS);
+		}
+		return traits;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Entity getParent() {
+		if (eContainerFeatureID != MetadataPackage.ENTITY__PARENT) return null;
+		return (Entity)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetParent(Entity newParent, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newParent, MetadataPackage.ENTITY__PARENT, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setParent(Entity newParent) {
+		if (newParent != eInternalContainer() || (eContainerFeatureID != MetadataPackage.ENTITY__PARENT && newParent != null)) {
+			if (EcoreUtil.isAncestor(this, newParent))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newParent != null)
+				msgs = ((InternalEObject)newParent).eInverseAdd(this, MetadataPackage.ENTITY__CHILD_ENTITIES, Entity.class, msgs);
+			msgs = basicSetParent(newParent, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MetadataPackage.ENTITY__PARENT, newParent, newParent));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setId(String newId) {
+		String oldId = id;
+		id = newId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MetadataPackage.ENTITY__ID, oldId, id));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getType() {
+		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setType(String newType) {
+		String oldType = type;
+		type = newType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MetadataPackage.ENTITY__TYPE, oldType, type));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void accept(IEntityVisitor visitor) {
+		if (visitor.stopVisiting())
+			return;
+		visitor.visit(this);
+		
+		if (!getChildEntities().isEmpty()){
+			for (Iterator/*<Entity>*/ it = getChildEntities().iterator(); it.hasNext();){
+				Entity k = (Entity)it.next();
+				k.accept(visitor);
+				if (visitor.stopVisiting())
+					return;
+			}
+		}
+		visitor.visitCompleted();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case MetadataPackage.ENTITY__CHILD_ENTITIES:
+				return ((InternalEList)getChildEntities()).basicAdd(otherEnd, msgs);
+			case MetadataPackage.ENTITY__PARENT:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetParent((Entity)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case MetadataPackage.ENTITY__CHILD_ENTITIES:
+				return ((InternalEList)getChildEntities()).basicRemove(otherEnd, msgs);
+			case MetadataPackage.ENTITY__TRAITS:
+				return ((InternalEList)getTraits()).basicRemove(otherEnd, msgs);
+			case MetadataPackage.ENTITY__PARENT:
+				return basicSetParent(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID) {
+			case MetadataPackage.ENTITY__PARENT:
+				return eInternalContainer().eInverseRemove(this, MetadataPackage.ENTITY__CHILD_ENTITIES, Entity.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case MetadataPackage.ENTITY__CHILD_ENTITIES:
+				return getChildEntities();
+			case MetadataPackage.ENTITY__TRAITS:
+				return getTraits();
+			case MetadataPackage.ENTITY__PARENT:
+				return getParent();
+			case MetadataPackage.ENTITY__ID:
+				return getId();
+			case MetadataPackage.ENTITY__TYPE:
+				return getType();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case MetadataPackage.ENTITY__CHILD_ENTITIES:
+				getChildEntities().clear();
+				getChildEntities().addAll((Collection)newValue);
+				return;
+			case MetadataPackage.ENTITY__TRAITS:
+				getTraits().clear();
+				getTraits().addAll((Collection)newValue);
+				return;
+			case MetadataPackage.ENTITY__PARENT:
+				setParent((Entity)newValue);
+				return;
+			case MetadataPackage.ENTITY__ID:
+				setId((String)newValue);
+				return;
+			case MetadataPackage.ENTITY__TYPE:
+				setType((String)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case MetadataPackage.ENTITY__CHILD_ENTITIES:
+				getChildEntities().clear();
+				return;
+			case MetadataPackage.ENTITY__TRAITS:
+				getTraits().clear();
+				return;
+			case MetadataPackage.ENTITY__PARENT:
+				setParent((Entity)null);
+				return;
+			case MetadataPackage.ENTITY__ID:
+				setId(ID_EDEFAULT);
+				return;
+			case MetadataPackage.ENTITY__TYPE:
+				setType(TYPE_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case MetadataPackage.ENTITY__CHILD_ENTITIES:
+				return childEntities != null && !childEntities.isEmpty();
+			case MetadataPackage.ENTITY__TRAITS:
+				return traits != null && !traits.isEmpty();
+			case MetadataPackage.ENTITY__PARENT:
+				return getParent() != null;
+			case MetadataPackage.ENTITY__ID:
+				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+			case MetadataPackage.ENTITY__TYPE:
+				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (id: ");
+		result.append(id);
+		result.append(", type: ");
+		result.append(type);
+		result.append(')');
+		return result.toString();
+	}
+
+} //EntityImpl
