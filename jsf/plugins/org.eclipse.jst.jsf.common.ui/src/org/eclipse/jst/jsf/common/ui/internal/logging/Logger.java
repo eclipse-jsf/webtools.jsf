@@ -41,8 +41,7 @@ public class Logger {
 		Object[] args = new Object[1];
 		args[0] = arg0;
 
-		MessageFormat formatter = new MessageFormat(resourceBundle
-				.getString(key));
+		MessageFormat formatter = new MessageFormat(getString(key));
 		String message = formatter.format(args);
 		IStatus status = new Status(IStatus.INFO, bundleId, IStatus.OK,
 				message, null);
@@ -56,7 +55,7 @@ public class Logger {
 	}
 
 	public void info(String key, Throwable e) {
-		String message = resourceBundle.getString(key);
+		String message = getString(key);
 		IStatus status = new Status(IStatus.INFO, bundleId, IStatus.OK,
 				message, e);
 		log.log(status);
@@ -66,8 +65,7 @@ public class Logger {
 		Object[] args = new Object[1];
 		args[0] = arg0;
 
-		MessageFormat formatter = new MessageFormat(resourceBundle
-				.getString(key));
+		MessageFormat formatter = new MessageFormat(getString(key));
 		String message = formatter.format(args);
 		IStatus status = new Status(IStatus.INFO, bundleId, IStatus.OK,
 				message, null);
@@ -79,8 +77,7 @@ public class Logger {
 		args[0] = arg0;
 		args[1] = arg1;
 
-		MessageFormat formatter = new MessageFormat(resourceBundle
-				.getString(key));
+		MessageFormat formatter = new MessageFormat(getString(key));
 		String message = formatter.format(args);
 		IStatus status = new Status(IStatus.INFO, bundleId, IStatus.OK,
 				message, e);
@@ -88,7 +85,8 @@ public class Logger {
 	}
 
     public void error(String key) {
-        String message = resourceBundle.getString(key);
+        
+        String message = getString(key);
         IStatus status = new Status(IStatus.ERROR, bundleId, IStatus.OK,
                 message, null);
         log.log(status);
@@ -100,7 +98,7 @@ public class Logger {
 	}
 
 	public void error(String key, Throwable e) {
-		String message = resourceBundle.getString(key);
+		String message = getString(key);
 		IStatus status = new Status(IStatus.ERROR, bundleId, IStatus.OK,
 				message, e);
 		log.log(status);
@@ -110,8 +108,7 @@ public class Logger {
 		Object[] args = new Object[1];
 		args[0] = arg0;
 
-		MessageFormat formatter = new MessageFormat(resourceBundle
-				.getString(key));
+		MessageFormat formatter = new MessageFormat(getString(key));
 		String message = formatter.format(args);
 		IStatus status = new Status(IStatus.ERROR, bundleId, IStatus.OK,
 				message, null);
@@ -122,8 +119,7 @@ public class Logger {
 		Object[] args = new Object[1];
 		args[0] = arg;
 
-		MessageFormat formatter = new MessageFormat(resourceBundle
-				.getString(key));
+		MessageFormat formatter = new MessageFormat(getString(key));
 		String message = formatter.format(args);
 		IStatus status = new Status(IStatus.ERROR, bundleId, IStatus.OK,
 				message, e);
@@ -135,11 +131,30 @@ public class Logger {
 		args[0] = arg0;
 		args[1] = arg1;
 
-		MessageFormat formatter = new MessageFormat(resourceBundle
-				.getString(key));
+		MessageFormat formatter = new MessageFormat(getString(key));
 		String message = formatter.format(args);
 		IStatus status = new Status(IStatus.ERROR, bundleId, IStatus.OK,
 				message, e);
 		log.log(status);
 	}
+    
+    /**
+     * @param key
+     * @return the resource for the key, or an error message if
+     * resourceBundle.getString(key) throws an Exception
+     */
+    private String getString(String key)
+    {
+        try
+        {
+            return resourceBundle.getString(key);
+        }
+        // suppress non-error exceptions so that the logging operation
+        // itself (usually called in response to an exception) does not
+        // throw a new exception
+        catch(Exception e)
+        {
+            return "!!missing resource: " + key + "!!";
+        }
+    }
 }
