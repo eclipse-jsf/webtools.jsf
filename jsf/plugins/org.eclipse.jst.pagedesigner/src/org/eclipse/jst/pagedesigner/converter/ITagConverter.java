@@ -83,6 +83,12 @@ public interface ITagConverter {
 	 * @return
 	 */
 	public List getChildModeList();
+    
+    /**
+     * @return a list of Element tags that map to non-visual children
+     * Type should be always be Element.
+     */
+    public List getNonVisualChildren();
 
 	/**
 	 * For child nodes that need further convert, return their position in the

@@ -11,6 +11,7 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.parts;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -34,6 +35,7 @@ import org.eclipse.jst.pagedesigner.css2.layout.CSSFigure;
 import org.eclipse.jst.pagedesigner.css2.layout.CSSWidgetLayout;
 import org.eclipse.jst.pagedesigner.css2.style.AbstractStyle;
 import org.eclipse.jst.pagedesigner.css2.widget.HiddenProvider;
+import org.eclipse.jst.pagedesigner.editpolicies.ElementMenuBar;
 import org.eclipse.jst.pagedesigner.editpolicies.ElementResizableEditPolicy;
 import org.eclipse.jst.pagedesigner.elementedit.ElementEditFactoryRegistry;
 import org.eclipse.jst.pagedesigner.elementedit.IElementEdit;
@@ -65,6 +67,8 @@ public class ElementEditPart extends SubNodeEditPart {
 	private Element _elementNode;
 
 	private ITagConverter _tagConverter;
+    
+    private ElementMenuBar  _nonVisualElementBar;
 
 	/*
 	 * (non-Javadoc)
@@ -172,7 +176,16 @@ public class ElementEditPart extends SubNodeEditPart {
 	 * @see org.eclipse.gef.editparts.AbstractEditPart#getModelChildren()
 	 */
 	protected List getModelChildren() {
-		return _tagConverter.getChildModeList();
+		List children = new ArrayList(_tagConverter.getChildModeList());
+        
+        for (Iterator it = _tagConverter.getNonVisualChildren().iterator(); it.hasNext();)
+        {
+            Element nonVisualChild = (Element) it.next();
+            children.add(ConverterFactoryRegistry.getInstance().createTagConverter(nonVisualChild,
+                IConverterFactory.MODE_DESIGNER,
+                this.getDestDocumentForDesign()));
+        }
+        return children;
 	}
 
 	/*
@@ -427,7 +440,17 @@ public class ElementEditPart extends SubNodeEditPart {
 	 *      int)
 	 */
 	protected void addChildVisual(EditPart childEditPart, int index) {
-		boolean figureAdded = false;
+        
+        boolean figureAdded = false;
+
+        if (childEditPart instanceof NonVisualComponentEditPart)
+        {
+            getNonVisualElementBar().addNonVisualChild(((NonVisualComponentEditPart) childEditPart));
+            figureAdded = true;
+            //TODO: need better flow of control.
+            return;
+        }
+        
 		Node childNode = (Node) childEditPart.getModel();
 		IFigure childFigure = ((GraphicalEditPart) childEditPart).getFigure();
 		ConvertPosition position = _tagConverter
@@ -465,7 +488,7 @@ public class ElementEditPart extends SubNodeEditPart {
 				}
 			}
 		} else {
-			_log.error("getChildVisualPosition() return null");
+		    _log.error("getChildVisualPosition() return null");
 		}
 
 		if (!figureAdded) {
@@ -479,27 +502,33 @@ public class ElementEditPart extends SubNodeEditPart {
 	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#removeChildVisual(org.eclipse.gef.EditPart)
 	 */
 	protected void removeChildVisual(EditPart childEditPart) {
-		// remove figure
-		IFigure childFigure = ((GraphicalEditPart) childEditPart).getFigure();
-		IFigure parent = childFigure.getParent();
+        // remove figure
+        IFigure childFigure = ((GraphicalEditPart) childEditPart).getFigure();
+        IFigure parent = childFigure.getParent();
+
 		if (parent != null) {
 			parent.remove(childFigure);
 		}
-		// de-link style
-		Node childNode = (Node) childEditPart.getModel();
-		ICSSStyle childStyle = (ICSSStyle) ((INodeNotifier) childNode)
-				.getAdapterFor(ICSSStyle.class);
-		if (childStyle instanceof AbstractStyle) {
-			((AbstractStyle) childStyle).setParentStyle(null);
-		}
-		// de-link nodeForFigure
-		if (childEditPart instanceof SubNodeEditPart) {
-			Node nodeForFigure = ((SubNodeEditPart) childEditPart)
-					.getNodeForFigure();
-			if (nodeForFigure != null && nodeForFigure.getParentNode() != null) {
-				nodeForFigure.getParentNode().removeChild(nodeForFigure);
-			}
-		}
+        
+        // this only applies to visual edit parts
+        if (! (childEditPart instanceof NonVisualComponentEditPart))
+        {
+    		// de-link style
+    		Node childNode = (Node) childEditPart.getModel();
+    		ICSSStyle childStyle = (ICSSStyle) ((INodeNotifier) childNode)
+    				.getAdapterFor(ICSSStyle.class);
+    		if (childStyle instanceof AbstractStyle) {
+    			((AbstractStyle) childStyle).setParentStyle(null);
+    		}
+    		// de-link nodeForFigure
+    		if (childEditPart instanceof SubNodeEditPart) {
+    			Node nodeForFigure = ((SubNodeEditPart) childEditPart)
+    					.getNodeForFigure();
+    			if (nodeForFigure != null && nodeForFigure.getParentNode() != null) {
+    				nodeForFigure.getParentNode().removeChild(nodeForFigure);
+    			}
+    		}
+        }
 	}
 
 	/**
@@ -546,4 +575,25 @@ public class ElementEditPart extends SubNodeEditPart {
 		return false;
 	}
 
+    private ElementMenuBar getNonVisualElementBar()
+    {
+        if (_nonVisualElementBar == null)
+        {
+            _nonVisualElementBar = new ElementMenuBar(this);
+        }
+        return _nonVisualElementBar;
+    }
+
+    public ElementMenuBar getElementMenuBar() {
+        return getNonVisualElementBar();
+    }
+
+    public void deactivate() {
+        super.deactivate();
+        if (_nonVisualElementBar != null)
+        {
+            _nonVisualElementBar.dispose();
+            _nonVisualElementBar = null;
+        }
+    }
 }

@@ -30,6 +30,7 @@ import org.eclipse.wst.sse.core.internal.provisional.INodeAdapter;
 import org.eclipse.wst.sse.core.internal.provisional.INodeNotifier;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMDocument;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
+import org.w3c.dom.Node;
 
 /**
  * @author mengbo
@@ -158,6 +159,10 @@ public abstract class NodeEditPart extends AbstractGraphicalEditPart implements
 		return ((IDOMNode) getModel());
 	}
 
+    public Node getDOMNode()
+    {
+        return ((Node)getModel());
+    }
 	/**
 	 * if a EditPart don't support caret inside it, and don't can't have child
 	 * edit part, then we call it as a widget.

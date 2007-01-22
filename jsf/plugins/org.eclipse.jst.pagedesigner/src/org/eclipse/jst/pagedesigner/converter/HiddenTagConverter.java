@@ -153,4 +153,8 @@ public class HiddenTagConverter implements ITagConverter {
 	public int getMode() {
 		return _mode;
 	}
+
+    public List getNonVisualChildren() {
+        return Collections.EMPTY_LIST;
+    }
 }

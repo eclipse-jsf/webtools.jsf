@@ -24,6 +24,8 @@ import org.w3c.dom.Element;
  * document.</li>
  * </ol>
  * 
+ * TODO: this the wrong way to do this.  This should sub-class HiddenTagConverter
+ * 
  * @author mengbo
  * @version 1.5
  */

@@ -19,17 +19,15 @@ import java.util.Map;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.Label;
-import org.eclipse.draw2d.LineBorder;
 import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.RectangleFigure;
-import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.PrecisionRectangle;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.GraphicalEditPart;
+import org.eclipse.gef.LayerConstants;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.RequestConstants;
 import org.eclipse.gef.SharedCursors;
@@ -72,10 +70,23 @@ public class ElementResizableEditPolicy extends ResizableEditPolicy {
 	private boolean _showLabelFeedback = true;
 
 	private IFigure[] _hoverFeedbackFigure;
+    
+    //private NonVisualChildDecorator   _selectionDecoratorNorthWest; // = null;
+    private MouseSelectableChildDecorator   _nonVisualChildDecorator; // = null;
+    
+	private final static Color HOVER_FEEDBACK_COLOR = ColorConstants.blue;
 
-	public static Color HOVER_FEEDBACK_COLOR = ColorConstants.black;
+	public void deactivate() 
+    {
+        super.deactivate();
+        if (_nonVisualChildDecorator != null)
+        {
+            _nonVisualChildDecorator.dispose();
+            _nonVisualChildDecorator = null;
+        }
+    }
 
-	/*
+    /*
 	 * (non-Javadoc)
 	 * 
 	 * @see org.eclipse.gef.editpolicies.AbstractEditPolicy#showTargetFeedback(org.eclipse.gef.Request)
@@ -88,6 +99,7 @@ public class ElementResizableEditPolicy extends ResizableEditPolicy {
 				}
 				_hoverFeedbackFigure = null;
             }
+            
             // <gripe>this is what I hate about GEF, if it's a location dependent
             // request why aren't we guaranteed a LocationRequest?!
             // even GEF interal code protects casts by checking getType()
@@ -113,6 +125,7 @@ public class ElementResizableEditPolicy extends ResizableEditPolicy {
 					removeFeedback(_hoverFeedbackFigure[i]);
 				}
 				_hoverFeedbackFigure = null;
+                getNonVisualChildDecorator().updateState(MouseSelectableChildDecorator.EVENT_HOST_HOVER_LOST);
 			}
 		} else {
 			super.eraseTargetFeedback(request);
@@ -127,15 +140,21 @@ public class ElementResizableEditPolicy extends ResizableEditPolicy {
 			return null;
 		}
 
-        IFigure figure = this.getHostFigure();
+        final IFigure figure = this.getHostFigure();
 		Rectangle[] rects;
 		if (figure instanceof CSSFigure) {
 			rects = ((CSSFigure) figure).getFragmentsBounds();
 		} else {
 			rects = new Rectangle[] { figure.getBounds() };
 		}
-		IFigure[] figures = new IFigure[rects.length
-				+ (_showLabelFeedback ? 1 : 0)];
+        int figureSize = rects.length;
+        
+        if (_showLabelFeedback)
+        {
+            figureSize++;
+        }
+        
+		IFigure[] figures = new IFigure[figureSize];
 		for (int i = 0; i < rects.length; i++) {
 			RectangleFigure fig = new RectangleFigure();
 			fig.setFill(false);
@@ -151,39 +170,21 @@ public class ElementResizableEditPolicy extends ResizableEditPolicy {
 
 			figures[i] = fig;
 		}
-		if (_showLabelFeedback) {
-			Label label = new Label();///new MultiLineLabel();
-			label.setOpaque(true);
-			label.setBackgroundColor(ColorConstants.tooltipBackground);
-			label.setBorder(
-                    new LineBorder(HOVER_FEEDBACK_COLOR, 1)
-                    {
-                        // add an extra pixel of inset to make sure the text
-                        // isn't pressed against the border
-                        public Insets getInsets(IFigure figure) {
-                            return new Insets(getWidth()+1);
-                        }
-                    }
-            );
-            label.setTextAlignment(PositionConstants.CENTER); 
-			label.setForegroundColor(HOVER_FEEDBACK_COLOR);
-			label.setText(getTooltipText());
+       
+		if (_showLabelFeedback) 
+        {
+            getNonVisualChildDecorator().updateState(MouseSelectableChildDecorator.EVENT_HOST_HOVER_RECEIVED);
+            
+			BasicLabelToolTip label = new BasicLabelToolTip(getTooltipText());
 			addFeedback(label);
 
             // use mouse cursor plus an offset so the tooltip doesn't
             // appear z-ordered below the mouse cursor
-			Point leftTop = request.getLocation();//new Point(rects[rects.length - 1].getBottomLeft());
-            leftTop.y += TOOLTIP_VERTICAL_OFFSET;
-
-            //			figure.translateToAbsolute(leftTop);
-//			label.translateToRelative(leftTop);
-			Dimension d = label.getPreferredSize();
-			Rectangle rect = new Rectangle(leftTop, d);
-
-			// to avoid enlarge feedback pane.
-			rect = rect.intersect(getFeedbackLayer().getBounds());
-			label.setBounds(rect);
-
+            AbsolutePointLocator locator = AbsolutePointLocator.getInstance();
+            locator.setReferencePoint(request.getLocation(), 0, TOOLTIP_VERTICAL_OFFSET);
+            //  to avoid enlargemeent of the feedback layer
+            locator.setIntersectFigure(getFeedbackLayer());
+            locator.relocate(label);
 			figures[rects.length] = label;
 		}
 		return figures;
@@ -192,60 +193,6 @@ public class ElementResizableEditPolicy extends ResizableEditPolicy {
 	private String getTooltipText() {
 		Element element = (Element) this.getHost().getModel();
 		StringBuffer text = new StringBuffer(element.getTagName());
-
-//		PaletteItemManager manager = PaletteItemManager
-//				.getInstance(getProject(element));
-//		if (manager != null) {
-//			IPaletteItemCategory category = manager.findOrCreateCategory(CMUtil
-//					.getElementNamespaceURI(element), null);
-//			if (category != null) {
-//				String name = element.getLocalName();
-//				if (category.getURI().equals(IJMTConstants.URI_JSP)) {
-//					name = element.getTagName();
-//				}
-//				IPaletteItemDescriptor descriptor = category
-//						.getItemByTagName(name);
-//				if (category.getURI().equals(IJMTConstants.URI_HTML)
-//						&& IHTMLConstants.TAG_INPUT.equalsIgnoreCase(name)) {
-//					String type = element
-//							.getAttribute(IHTMLConstants.ATTR_TYPE);
-//					if (IHTMLConstants.TYPE_SUBMIT.equalsIgnoreCase(type)) {
-//						descriptor = category.getItemByID("html:INPUT:Button");
-//					} else if (IHTMLConstants.TYPE_CHECKBOX
-//							.equalsIgnoreCase(type)) {
-//						descriptor = category
-//								.getItemByID("html:INPUT:Check Box");
-//					} else if (IHTMLConstants.TYPE_RADIO.equalsIgnoreCase(type)) {
-//						descriptor = category
-//								.getItemByID("html:INPUT:Radio Button");
-//					} else if (IHTMLConstants.TYPE_IMAGE.equalsIgnoreCase(type)) {
-//						descriptor = category
-//								.getItemByID("html:INPUT:Image Button");
-//					} else if (IHTMLConstants.TYPE_PASSWORD
-//							.equalsIgnoreCase(type)) {
-//						descriptor = category
-//								.getItemByID("html:INPUT:Password Field");
-//					} else if (IHTMLConstants.TYPE_TEXT.equalsIgnoreCase(type)) {
-//						descriptor = category
-//								.getItemByID("html:INPUT:Text Field");
-//					} else if (IHTMLConstants.TYPE_HIDDEN
-//							.equalsIgnoreCase(type)) {
-//						descriptor = category
-//								.getItemByID("html:INPUT:Hidden Field");
-//					}
-//				}
-//
-//				if (descriptor != null) {
-//					text.append("\n").append(
-//							StringUtil.filterConvertString(descriptor
-//									.getDescription()));
-//				}
-//			}
-//		}
-//
-//		if (text.toString().endsWith("\n")) {
-//			return text.substring(0, text.length() - 1);
-//		}
 		return text.toString();
 	}
 
@@ -256,6 +203,18 @@ public class ElementResizableEditPolicy extends ResizableEditPolicy {
 		}
         return false;
 	}
+    private MouseSelectableChildDecorator getNonVisualChildDecorator()
+    {
+        if  (_nonVisualChildDecorator == null)
+        {
+            _nonVisualChildDecorator = 
+                new MouseSelectableChildDecorator((GraphicalEditPart)getHost()
+                        , PositionConstants.NORTH_EAST
+                        , getLayer(LayerConstants.FEEDBACK_LAYER)
+                        , getLayer(LayerConstants.HANDLE_LAYER));
+        }
+        return _nonVisualChildDecorator;
+    }
 
 	/**
 	 * @param request
@@ -382,7 +341,23 @@ public class ElementResizableEditPolicy extends ResizableEditPolicy {
 		return list;
 	}
 
-	/**
+
+    protected void hideSelection() {
+        super.hideSelection();
+        // handle removing the menu bar handle separately because it will decide
+        // when to remove itself (not removeSelectionHandles)
+        getNonVisualChildDecorator().updateState(MouseSelectableChildDecorator.EVENT_HOST_SELECTION_LOST);
+
+    }
+
+    protected void showSelection() {
+        super.showSelection();
+        // handle adding the menu bar handle separately because it will decide
+        // when to remove itself (not removeSelectionHandles
+        getNonVisualChildDecorator().updateState(MouseSelectableChildDecorator.EVENT_HOST_SELECTION_RECEIVED);
+    }
+
+    /**
 	 * child class could override this method.
 	 * 
 	 * @param width
@@ -460,12 +435,4 @@ public class ElementResizableEditPolicy extends ResizableEditPolicy {
 		feedback.translateToRelative(rect);
 		feedback.setBounds(rect);
 	}
-
-    protected void showFocus() {
-        // TODO Auto-generated method stub
-        super.showFocus();
-    }
-
-
-    
 }

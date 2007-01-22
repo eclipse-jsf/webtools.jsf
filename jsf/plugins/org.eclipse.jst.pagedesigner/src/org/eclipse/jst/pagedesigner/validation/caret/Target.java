@@ -13,6 +13,7 @@ package org.eclipse.jst.pagedesigner.validation.caret;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.gef.EditPart;
+import org.eclipse.jst.pagedesigner.converter.ITagConverter;
 import org.eclipse.wst.sse.core.internal.provisional.INodeNotifier;
 import org.w3c.dom.Node;
 
@@ -26,8 +27,19 @@ public class Target {
 
 	public Target(EditPart part) {
 		_part = part;
-		Assert.isTrue(part.getModel() instanceof Node);
-		_node = (Node) part.getModel();
+        
+        if(part.getModel() instanceof Node)
+        {
+            _node = (Node) part.getModel();        
+        }
+        else if (part.getModel() instanceof ITagConverter)
+        {
+            _node = ((ITagConverter)part.getModel()).getHostElement();
+        }
+        else
+        {
+            Assert.isTrue(false);
+        }
 	}
 
 	public Target(Node node) {

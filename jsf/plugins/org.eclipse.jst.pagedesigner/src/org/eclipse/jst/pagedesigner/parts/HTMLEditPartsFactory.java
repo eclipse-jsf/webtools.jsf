@@ -13,6 +13,7 @@ package org.eclipse.jst.pagedesigner.parts;
 
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartFactory;
+import org.eclipse.jst.pagedesigner.converter.ITagConverter;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMDocument;
 import org.w3c.dom.Node;
 
@@ -35,20 +36,38 @@ public class HTMLEditPartsFactory implements EditPartFactory {
 	 *      java.lang.Object)
 	 */
 	public EditPart createEditPart(EditPart context, Object model) {
-		Node node = (Node) model;
-		NodeEditPart part = null;
-		if (node.getNodeType() == Node.DOCUMENT_NODE) {
-			part = new DocumentEditPart();
-		} else if (node.getNodeType() == Node.ELEMENT_NODE) {
-			// String tag = ((Element)node).getTagName();
-			// if ("TABLE".equalsIgnoreCase(tag))
-			// part = new HTMLTableEditPart();
-			// else
-			part = new ElementEditPart();
-		} else if (node.getNodeType() == Node.TEXT_NODE
-				|| node.getNodeType() == Node.CDATA_SECTION_NODE) {
-			part = new TextEditPart();
-		}
+        NodeEditPart part = null;
+        
+        if (model instanceof Node)
+        {
+    		Node node = (Node) model;
+    		if (node.getNodeType() == Node.DOCUMENT_NODE) {
+    			part = new DocumentEditPart();
+    		} else if (node.getNodeType() == Node.ELEMENT_NODE) {
+    			// String tag = ((Element)node).getTagName();
+    			// if ("TABLE".equalsIgnoreCase(tag))
+    			// part = new HTMLTableEditPart();
+    			// else
+                    part = new ElementEditPart();
+    		} else if (node.getNodeType() == Node.TEXT_NODE
+    				|| node.getNodeType() == Node.CDATA_SECTION_NODE) {
+    			part = new TextEditPart();
+    		}
+        }
+        else if (model instanceof ITagConverter)
+        {
+            ITagConverter converter = (ITagConverter) model;
+            if (!converter.isVisualByHTML())
+            {
+                part = new NonVisualComponentEditPart();
+            }
+            else
+            {
+                part = new ElementEditPart();
+            }
+
+        }
+        
 		if (part != null) {
 			part.setDestDocumentForDesign(this._destDocument);
 			part.setModel(model);

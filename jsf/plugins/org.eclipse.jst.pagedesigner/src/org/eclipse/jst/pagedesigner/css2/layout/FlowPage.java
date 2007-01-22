@@ -11,7 +11,7 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.css2.layout;
 
-import java.util.List;
+import java.util.Iterator;
 
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Insets;
@@ -106,9 +106,10 @@ public class FlowPage extends BlockFlow {
 		Rectangle r = getBlockBox().toRectangle();
 		_pageSize.width = r.width;
 		_pageSize.height = r.height;
-		List v = getChildren();
-		for (int i = 0; i < v.size(); i++)
-			((FlowFigure) v.get(i)).postValidate();
+		for (final Iterator it = getChildren().iterator(); it.hasNext();)
+        {
+            ((FlowFigure)it.next()).postValidate();            
+        }
 	}
 
 	/**

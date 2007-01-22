@@ -133,7 +133,14 @@ public abstract class AbstractTagConverter implements ITagConverter,
 		return _childNodes;
 	}
 
-	/**
+
+	public List getNonVisualChildren() 
+    {
+	    // by default, no non-visual children
+        return Collections.EMPTY_LIST;
+    }
+
+    /**
 	 * child class should call this method.
 	 * 
 	 * @param childNode

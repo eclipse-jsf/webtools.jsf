@@ -15,6 +15,7 @@ import java.util.List;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.gef.EditPart;
+import org.eclipse.jst.pagedesigner.parts.NodeEditPart;
 import org.eclipse.jst.pagedesigner.parts.TextEditPart;
 import org.eclipse.jst.pagedesigner.utils.HTMLUtil;
 import org.eclipse.jst.pagedesigner.viewer.DesignPosition;
@@ -190,18 +191,18 @@ public class DOMPositionHelper {
 		}
         // ok, it is not text.
         EditPart sibling = position.getSiblingEditPart(true);
-        if (sibling != null) {
-        	return new DOMRefPosition((Node) sibling.getModel(), false);
+        if (sibling instanceof NodeEditPart) {
+        	return new DOMRefPosition(((NodeEditPart) sibling).getDOMNode(), false);
         }
 
         sibling = position.getSiblingEditPart(false);
-        if (sibling != null) {
-        	return new DOMRefPosition((Node) sibling.getModel(), true);
+        if (sibling instanceof NodeEditPart) {
+        	return new DOMRefPosition(((NodeEditPart) sibling).getDOMNode(), true);
         }
 
         // no previous sibling, no next sibling, the parent node must be
         // empty
-        return new DOMPosition((Node) part.getModel(), 0);
+        return new DOMPosition(((NodeEditPart) part).getDOMNode(), 0);
 	}
 
 	/**
