@@ -22,6 +22,7 @@ import java.util.PropertyResourceBundle;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jst.jsf.common.ui.IFileFolderConstants;
 import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
 import org.eclipse.jst.jsf.common.ui.internal.utils.ResourceUtils;
@@ -30,7 +31,6 @@ import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.converter.HiddenTagConverter;
 import org.eclipse.jst.pagedesigner.utils.PreviewUtil;
 import org.eclipse.jst.pagedesigner.utils.StructuredModelUtil;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
 import org.w3c.dom.Element;
@@ -46,9 +46,9 @@ public class LoadBundleTagConverter extends HiddenTagConverter
      * @param host
      * @param image
      */
-    public LoadBundleTagConverter(Element host, Image image)
+    public LoadBundleTagConverter(Element host, ILabelProvider labelProvider)
     {
-        super(host, image);
+        super(host, labelProvider);
     }
 
     /* (non-Javadoc)

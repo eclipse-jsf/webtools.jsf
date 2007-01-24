@@ -14,6 +14,7 @@ package org.eclipse.jst.pagedesigner.converter;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMDocument;
 import org.w3c.dom.Element;
@@ -29,16 +30,18 @@ import org.w3c.dom.Node;
 public class HiddenTagConverter implements ITagConverter {
 	private Element _hostElement;
 
-	private Image _image;
+//	private Image                  _image;
+    private ILabelProvider         _labelProvider;
 
 	private int _mode;
 
 	/**
 	 * 
 	 */
-	public HiddenTagConverter(Element host, Image image) {
+	public HiddenTagConverter(Element host, ILabelProvider labelProvider/*Image image*/) {
 		_hostElement = host;
-		_image = image;
+		//_image = image;
+        _labelProvider = labelProvider;
 	}
 
 	/*
@@ -83,7 +86,8 @@ public class HiddenTagConverter implements ITagConverter {
 	 * @see org.eclipse.jst.pagedesigner.visualtag.ITagConverter#getVisualImage()
 	 */
 	public Image getVisualImage() {
-		return _image;
+        // defer the creation of the image until it is needed
+		return _labelProvider.getImage(this);
 	}
 
 	/*

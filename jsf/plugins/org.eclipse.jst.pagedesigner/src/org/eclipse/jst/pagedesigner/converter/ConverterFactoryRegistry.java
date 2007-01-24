@@ -14,6 +14,7 @@ package org.eclipse.jst.pagedesigner.converter;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jst.pagedesigner.IJMTConstants;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.converter.html.HTMLConverterFactory;
@@ -99,7 +100,14 @@ public class ConverterFactoryRegistry {
         int contentType = decl.getContentType();
         if (contentType == CMElementDeclaration.EMPTY) {
         	// if the tag is empty, show it as icon.
-        	return new HiddenTagConverter(ele, getUnknownImage());
+        	return new HiddenTagConverter(ele,
+                    new LabelProvider()
+                    {
+                        public Image getImage(Object element) {
+                            return getUnknownImage();
+                        }
+                    }
+             );
         }
         return new DefaultUnknownTagConverter(ele);
 

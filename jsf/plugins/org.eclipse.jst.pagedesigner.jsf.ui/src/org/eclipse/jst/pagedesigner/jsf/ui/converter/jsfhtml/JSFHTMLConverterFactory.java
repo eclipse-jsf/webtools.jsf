@@ -11,6 +11,7 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.jsf.ui.converter.jsfhtml;
 
+import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jst.pagedesigner.IJMTConstants;
 import org.eclipse.jst.pagedesigner.IJSFConstants;
 import org.eclipse.jst.pagedesigner.converter.HiddenTagConverter;
@@ -27,13 +28,15 @@ import org.w3c.dom.Element;
  */
 public class JSFHTMLConverterFactory implements IConverterFactory
 {
-
+    private final MyLabelProvider  _labelProvider;
+    
     /**
      * 
      */
     public JSFHTMLConverterFactory()
     {
         super();
+        _labelProvider = new MyLabelProvider();
     }
 
     /* (non-Javadoc)
@@ -69,7 +72,7 @@ public class JSFHTMLConverterFactory implements IConverterFactory
         }
         else if (IJSFConstants.TAG_INPUTHIDDEN.equalsIgnoreCase(tagName))
         {
-            return new HiddenTagConverter(element, getJSFHTMLImage(tagName));
+            return new HiddenTagConverter(element, _labelProvider);
         }
         else if (IJSFConstants.TAG_INPUTSECRET.equalsIgnoreCase(tagName))
         {
@@ -86,7 +89,7 @@ public class JSFHTMLConverterFactory implements IConverterFactory
         else if (IJSFConstants.TAG_MESSAGE.equalsIgnoreCase(tagName)
         || IJSFConstants.TAG_MESSAGES.equalsIgnoreCase(tagName))
         {
-            converter = new HiddenTagConverter(element, getJSFHTMLImage(tagName));
+            converter = new HiddenTagConverter(element, _labelProvider);
         }
         else if (IJSFConstants.TAG_OUTPUTTEXT.equalsIgnoreCase(tagName)
         || IJSFConstants.TAG_OUTPUTFORMAT.equalsIgnoreCase(tagName))
@@ -145,11 +148,26 @@ public class JSFHTMLConverterFactory implements IConverterFactory
         return converter;
     }
 
+    private static class MyLabelProvider extends LabelProvider
+    {
+        public Image getImage(Object element) 
+        {
+            if (element instanceof ITagConverter)
+            {
+                final Element hostElement = ((ITagConverter)element).getHostElement();
+                final String tagName = hostElement.getLocalName();
+                return getJSFHTMLImage(tagName);
+            }
+            
+            return null;
+        }
+    }
+    
     /**
      * @param tagName
      * @return
      */
-    private Image getJSFHTMLImage(String tagName)
+    private static Image getJSFHTMLImage(String tagName)
     {
         Image image = JSFUIPlugin.getDefault().getImage("palette/JSFHTML/small/JSF_" + tagName.toUpperCase() + ".gif");
         return image;

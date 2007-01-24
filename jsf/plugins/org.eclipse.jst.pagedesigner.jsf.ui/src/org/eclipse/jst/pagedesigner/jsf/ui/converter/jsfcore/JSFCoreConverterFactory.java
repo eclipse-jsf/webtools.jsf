@@ -11,6 +11,7 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.jsf.ui.converter.jsfcore;
 
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jst.pagedesigner.IJMTConstants;
 import org.eclipse.jst.pagedesigner.IJSFConstants;
 import org.eclipse.jst.pagedesigner.converter.AbstractTagConverter;
@@ -30,12 +31,15 @@ import org.w3c.dom.Element;
 public class JSFCoreConverterFactory implements IConverterFactory
 {
 
+    private final ILabelProvider        _labelProvider;
+    
     /**
      * 
      */
     public JSFCoreConverterFactory()
     {
         super();
+        _labelProvider = new MyLabelProvider();
     }
 
     /* (non-Javadoc)
@@ -61,21 +65,37 @@ public class JSFCoreConverterFactory implements IConverterFactory
         }
         else if (IJSFConstants.TAG_LOADBUNDLE.equalsIgnoreCase(tagName))
         {
-            converter = new LoadBundleTagConverter(element, getJSFCoreSharedImage(tagName));
+            converter = new LoadBundleTagConverter(element, _labelProvider);
         }
         else
         {
-            converter = new HiddenTagConverter(element, getJSFCoreSharedImage(tagName));
+            converter = new HiddenTagConverter(element, _labelProvider);
         }
         converter.setMode(mode);
         return converter;
     }
 
+    private static class MyLabelProvider extends org.eclipse.jface.viewers.LabelProvider
+    {
+
+        public Image getImage(Object element) 
+        {
+            if (element instanceof ITagConverter)
+            {
+                final Element hostElement = ((ITagConverter)element).getHostElement();
+                final String tagName = hostElement.getLocalName();
+                return getJSFCoreSharedImage(tagName);
+            }
+            
+            return null;
+        }
+    }
+    
     /**
      * @param tagName
      * @return
      */
-    private Image getJSFCoreSharedImage(String tagName)
+    private static Image getJSFCoreSharedImage(String tagName)
     {
         Image image = JSFUIPlugin.getDefault().getImage("palette/JSFCORE/small/JSF_" + tagName.toUpperCase() + ".gif");
         return image;

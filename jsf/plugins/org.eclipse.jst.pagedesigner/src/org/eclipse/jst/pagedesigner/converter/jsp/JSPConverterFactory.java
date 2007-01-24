@@ -11,6 +11,7 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.converter.jsp;
 
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jst.pagedesigner.IJMTConstants;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.converter.HiddenTagConverter;
@@ -26,11 +27,13 @@ import org.w3c.dom.Element;
  * @version 1.5
  */
 public class JSPConverterFactory implements IConverterFactory {
+    private final ILabelProvider  _labelProvider;
+    
 	/**
 	 * 
 	 */
 	public JSPConverterFactory() {
-        // do nothing
+        _labelProvider = new MyLabelProvider();
 	}
 
 	/*
@@ -40,7 +43,6 @@ public class JSPConverterFactory implements IConverterFactory {
 	 */
 	public ITagConverter createConverter(Element element, int mode) {
 		String tagName = element.getLocalName();
-		Image image = getJSPSharedImage(tagName);
 
 		if (mode == IConverterFactory.MODE_PREVIEW) {
 			// we want to generate the included page in preview, so
@@ -62,7 +64,7 @@ public class JSPConverterFactory implements IConverterFactory {
 				c.setMode(mode);
 				return c;
 			} else {
-				return new HiddenTagConverter(element, image);
+				return new HiddenTagConverter(element, _labelProvider);
 			}
 		}
         if (IJSPCoreConstants.TAG_ROOT.equalsIgnoreCase(tagName)) {
@@ -71,14 +73,30 @@ public class JSPConverterFactory implements IConverterFactory {
         	c.setMode(mode);
         	return c;
         }
-        return new HiddenTagConverter(element, image);
+        return new HiddenTagConverter(element, _labelProvider);
 	}
+    
+    private static class MyLabelProvider extends org.eclipse.jface.viewers.LabelProvider
+    {
+
+        public Image getImage(Object element) 
+        {
+            if (element instanceof ITagConverter)
+            {
+                final Element hostElement = ((ITagConverter)element).getHostElement();
+                final String tagName = hostElement.getLocalName();
+                return getJSPSharedImage(tagName);
+            }
+            
+            return null;
+        }
+    }
 
 	/**
 	 * @param tagName
 	 * @return
 	 */
-	private Image getJSPSharedImage(String tagName) {
+	private static Image getJSPSharedImage(String tagName) {
 		Image image = PDPlugin.getDefault().getImage(
 				"palette/JSP/small/JSP_" + tagName.toUpperCase() + ".gif");
 		return image;
