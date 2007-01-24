@@ -24,7 +24,6 @@ import org.eclipse.jst.pagedesigner.commands.nav.CaretPositionTracker;
 import org.eclipse.jst.pagedesigner.dom.DOMPositionHelper;
 import org.eclipse.jst.pagedesigner.dom.DOMRefPosition;
 import org.eclipse.jst.pagedesigner.dom.IDOMPosition;
-import org.eclipse.jst.pagedesigner.editors.SimpleGraphicalEditor;
 import org.eclipse.jst.pagedesigner.parts.DocumentEditPart;
 import org.eclipse.jst.pagedesigner.parts.ElementEditPart;
 import org.eclipse.jst.pagedesigner.tools.ExposeHelper;
