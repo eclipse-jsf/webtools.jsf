@@ -443,13 +443,13 @@ public class PageflowLinkImpl extends PageflowElementImpl implements
 		if (eContainerFeatureID >= 0) {
 			switch (eContainerFeatureID) {
 			case PageflowPackage.PF_LINK__PAGEFLOW:
-				return ((InternalEObject) eContainer).eInverseRemove(this,
+				return eContainer.eInverseRemove(this,
 						PageflowPackage.PAGEFLOW__LINKS, Pageflow.class, msgs);
 			default:
 				return eDynamicBasicRemoveFromContainer(msgs);
 			}
 		}
-		return ((InternalEObject) eContainer).eInverseRemove(this,
+		return eContainer.eInverseRemove(this,
 				EOPPOSITE_FEATURE_BASE - eContainerFeatureID, null, msgs);
 	}
 

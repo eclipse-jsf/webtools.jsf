@@ -14,9 +14,9 @@ package org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.jface.util.Assert;
 import org.eclipse.jst.jsf.facesconfig.emf.DescriptionType;
 import org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;

@@ -225,13 +225,13 @@ public abstract class PageflowNodeImpl extends PageflowElementImpl implements
 		if (eContainerFeatureID >= 0) {
 			switch (eContainerFeatureID) {
 			case PageflowPackage.PAGEFLOW_NODE__PAGEFLOW:
-				return ((InternalEObject) eContainer).eInverseRemove(this,
+				return eContainer.eInverseRemove(this,
 						PageflowPackage.PAGEFLOW__NODES, Pageflow.class, msgs);
 			default:
 				return eDynamicBasicRemoveFromContainer(msgs);
 			}
 		}
-		return ((InternalEObject) eContainer).eInverseRemove(this,
+		return eContainer.eInverseRemove(this,
 				EOPPOSITE_FEATURE_BASE - eContainerFeatureID, null, msgs);
 	}
 

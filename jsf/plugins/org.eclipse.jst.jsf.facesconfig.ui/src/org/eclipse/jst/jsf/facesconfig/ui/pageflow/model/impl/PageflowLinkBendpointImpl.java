@@ -372,14 +372,14 @@ public class PageflowLinkBendpointImpl extends EObjectImpl implements PageflowLi
 		if (eContainerFeatureID >= 0) {
 			switch (eContainerFeatureID) {
 			case PageflowPackage.PF_LINK_BENDPOINT__LINK:
-				return ((InternalEObject) eContainer).eInverseRemove(this,
+				return eContainer.eInverseRemove(this,
 						PageflowPackage.PF_LINK__BEND_POINTS, PageflowLink.class,
 						msgs);
 			default:
 				return eDynamicBasicRemoveFromContainer(msgs);
 			}
 		}
-		return ((InternalEObject) eContainer).eInverseRemove(this,
+		return eContainer.eInverseRemove(this,
 				EOPPOSITE_FEATURE_BASE - eContainerFeatureID, null, msgs);
 	}
 
