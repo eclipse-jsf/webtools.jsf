@@ -41,6 +41,7 @@ public abstract class ChangeStyleAction extends Action implements IUpdate {
 		 * @see org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewerListener#selectionAboutToChange()
 		 */
 		public void selectionAboutToChange() {
+            // do nothing
 		}
 
 		/*
