@@ -282,7 +282,9 @@ class MouseSelectableChildDecorator extends NonVisualChildDecorator
         if (animate)
         {
             final Point endPoint = this.getLocation().getCopy();
-            this.translateToAbsolute(endPoint);
+            //TODO: don't understand when translation is necessary...
+            //this.translateToAbsolute(endPoint);
+            
             endPoint.x += this.getBounds().width / 2;
             endPoint.y += this.getBounds().height / 2;
             _hideLocator.setHideEndPoint(endPoint);
