@@ -28,6 +28,7 @@ import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaConventions;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jdt.internal.compiler.impl.CompilerOptions;
 import org.eclipse.jdt.ui.wizards.NewClassWizardPage;
 
 /**
@@ -119,16 +120,16 @@ public class JavaClassWizardPage extends NewClassWizardPage {
 			}
 		}
 		_fClassNameStatus = JavaConventions
-				.validateJavaTypeName(_initialValues.className);
+		    .validateJavaTypeName(_initialValues.className, CompilerOptions.VERSION_1_3,CompilerOptions.VERSION_1_3);
 
 		loc = _className.lastIndexOf('.');
 		if (loc != -1) {
 			_initialValues.packageName = _className.substring(0, loc);
 			_initialValues.className = _className.substring(loc + 1);
 			_fPackageNameStatus = JavaConventions
-					.validatePackageName(_initialValues.packageName);
+                    .validateJavaTypeName(_initialValues.packageName, CompilerOptions.VERSION_1_3,CompilerOptions.VERSION_1_3);
 			_fClassNameStatus = JavaConventions
-					.validateJavaTypeName(_initialValues.className);
+                    .validateJavaTypeName(_initialValues.className, CompilerOptions.VERSION_1_3,CompilerOptions.VERSION_1_3);
 		}
 		if (_javaProject == null) {
 			return;

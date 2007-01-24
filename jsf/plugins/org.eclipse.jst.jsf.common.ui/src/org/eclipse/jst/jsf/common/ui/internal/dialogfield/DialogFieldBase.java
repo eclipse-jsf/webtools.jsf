@@ -14,7 +14,7 @@ package org.eclipse.jst.jsf.common.ui.internal.dialogfield;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.jface.util.Assert;
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseTrackAdapter;

@@ -11,7 +11,7 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.common.ui.internal.dialogfield;
 
-import org.eclipse.jface.util.Assert;
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.PaintListener;
