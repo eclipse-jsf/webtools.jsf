@@ -18,12 +18,10 @@ import org.eclipse.jst.pagedesigner.commands.SourceViewerCommand;
 import org.eclipse.jst.pagedesigner.editors.pagedesigner.PageDesignerResources;
 import org.eclipse.jst.pagedesigner.editors.palette.impl.PaletteItemDescriptor;
 import org.eclipse.jst.pagedesigner.itemcreation.ItemToolEntry;
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.MouseMoveListener;
-import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.wst.sse.ui.StructuredTextEditor;
 import org.eclipse.wst.sse.ui.internal.ExtendedEditorDropTargetAdapter;
@@ -61,7 +59,8 @@ public class DesignerSourceMouseTrackAdapter extends
 			return;
 		}
 		if (object == null) {
-			text.setCursor(new Cursor(null, SWT.CURSOR_IBEAM));
+            // set to default cusror
+			text.setCursor(null);
 			return;
 		}
 		Point p = new Point(event.x, event.y);
