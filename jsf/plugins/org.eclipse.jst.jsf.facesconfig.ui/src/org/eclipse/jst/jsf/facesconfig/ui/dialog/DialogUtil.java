@@ -40,13 +40,18 @@ public class DialogUtil {
 			String superType, int tyle) {
 		SelectionDialog dialog = JavaUIHelper
 				.openSelectionDialog(shell, project, superType, tyle);
-		dialog.setTitle(EditorMessages.FindType);
-		dialog.setMessage(EditorMessages.FindType_Filter);
-		if (dialog.open() == SelectionDialog.OK) {
-			Object[] result = dialog.getResult();
-			IType searchedType = (IType) result[0];
-			return searchedType.getFullyQualifiedName();
-		}
+        
+        // dialog could be null
+        if (dialog != null)
+        {
+    		dialog.setTitle(EditorMessages.FindType);
+    		dialog.setMessage(EditorMessages.FindType_Filter);
+    		if (dialog.open() == SelectionDialog.OK) {
+    			Object[] result = dialog.getResult();
+    			IType searchedType = (IType) result[0];
+    			return searchedType.getFullyQualifiedName();
+    		}
+        }
 		return null;
 	}
 
