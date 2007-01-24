@@ -18,6 +18,7 @@ import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.ICMAnnot
 
 /**
  * Contains information about annotation files.  
+ * @deprecated see common.metadata package
  */
 public final class CMAnnotationFileInfo implements ICMAnnotationSourceFileInfo{
 	private String annotationFileLocation;

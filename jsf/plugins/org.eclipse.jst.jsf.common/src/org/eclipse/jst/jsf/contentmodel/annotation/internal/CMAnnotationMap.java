@@ -39,6 +39,7 @@ import org.eclipse.osgi.util.NLS;
  *  @see <code>org.eclipse.jst.jsf.contentmodel.annotation.internal.CMElementAnnotation</code>
  *  @see <code>org.eclipse.jst.jsf.contentmodel.annotation.internal.CMAttributeAnnotation</code>
  * 
+ * @deprecated see common.metadata package
  */
 public class CMAnnotationMap {
 	//map of tag-element annotations keyed by tag name

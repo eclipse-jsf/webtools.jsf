@@ -293,4 +293,27 @@ public final class JSFCommonPlugin extends EMFPlugin {
 			plugin = this;
 		}
 	}
+    
+	
+	/**
+	 * Utility method returning class from class name using classloader from specified bundle
+	 * @param className
+	 * @param bundleId
+	 * @return Class
+	 */
+	public static Class loadClass(String className, String bundleId) {
+		Class aClass = null;
+		try {
+			if (bundleId != null){
+				Bundle bundle = Platform.getBundle(bundleId);
+				if (bundle != null){
+					aClass = bundle.loadClass(className);
+				}
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO log
+			e.printStackTrace();
+		}
+		return aClass;
+	}
 }

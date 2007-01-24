@@ -20,6 +20,7 @@ import java.util.List;
 
 /**
  * Content model annotation.   A property with a set of values.
+ * @deprecated see common.metadata package
  */
 public abstract class CMAnnotation {
 	private String _name;	

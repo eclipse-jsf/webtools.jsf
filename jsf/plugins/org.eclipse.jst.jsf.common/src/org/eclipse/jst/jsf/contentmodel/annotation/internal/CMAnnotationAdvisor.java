@@ -19,7 +19,7 @@ import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.ICMAnnot
  * from the internal data model (CMAnnotationMap).
  * 
  * @author Gerry Kessler - Oracle
- *
+ * @deprecated see common.metadata package
  */
 public final class CMAnnotationAdvisor implements ICMAnnotationAdvisor {
 

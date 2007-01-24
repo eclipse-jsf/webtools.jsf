@@ -22,6 +22,7 @@ import java.util.Map;
  * @author Gerry Kessler - Oracle
  * 
  * @see CMAttributeAnnotation
+ * @deprecated see common.metadata package
  */
 public class CMElementAnnotation extends CMAnnotation {
 	protected Hashtable attributes = new Hashtable();

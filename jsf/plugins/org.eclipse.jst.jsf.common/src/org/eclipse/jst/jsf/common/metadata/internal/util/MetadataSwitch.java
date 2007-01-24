@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MetadataSwitch.java,v 1.1 2007/01/15 23:26:15 gkessler Exp $
+ * $Id: MetadataSwitch.java,v 1.2 2007/01/24 17:22:47 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.util;
 
@@ -11,7 +11,10 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.*;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.MetadataPackage;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.Model;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
 
 
 

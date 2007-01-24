@@ -26,7 +26,7 @@ import org.osgi.framework.Bundle;
  * the specified parsed, and source file locator from the extension.
  * 
  * @author Gerry Kessler - Oracle
- *
+ * @deprecated see common.metadata package
  */
 public class CMAnnotationFileParserHelper {
 	private static final String DEFAULT_PARSER_NAME = "org.eclipse.jst.jsf.contentmodel.annotation.internal.CMAnnotationFileParser"; //$NON-NLS-1$

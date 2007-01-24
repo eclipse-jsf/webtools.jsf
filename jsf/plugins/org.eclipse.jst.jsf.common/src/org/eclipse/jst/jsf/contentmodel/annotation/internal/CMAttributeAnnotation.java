@@ -18,6 +18,7 @@ package org.eclipse.jst.jsf.contentmodel.annotation.internal;
  * @author Gerry Kessler - Oracle
  *
  * @see CMElementAnnotation
+ * @deprecated see common.metadata package
  */
 public class CMAttributeAnnotation extends CMAnnotation {
 	private String elementNodeSpec;

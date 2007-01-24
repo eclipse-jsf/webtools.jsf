@@ -1,0 +1,43 @@
+/*******************************************************************************
+ * Copyright (c) 2007 Oracle Corporation.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Oracle - initial API and implementation
+ *    
+ ********************************************************************************/
+package org.eclipse.jst.jsf.common.metadata.internal;
+
+
+/**
+ * Defines a strategy to use for loading a standard metadata model for a certain domain.
+ * @see <code>org.eclipse.jst.jsf.common.domainLoadingStrategies</code> ext-pt 
+ */
+public interface IDomainLoadingStrategy {
+	
+	/**
+	 * Create a merged "standard" metadata model.  
+	 * @param MetaDataModel to load
+	 * 
+	 */
+	public void load(MetaDataModel model);
+	
+	/**
+	 * Reload a merged "standard" metadata model.  
+	 * Allows for some optimization for reload.
+	 * 
+	 * @param MetaDataModel to reload
+	 * 
+	 */
+	public void reload() throws ModelNotSetException;
+	
+	
+	/**
+	 * Opportunity to cleanup and should be called when strategy is being destroyed
+	 */
+	public void cleanup();
+
+}

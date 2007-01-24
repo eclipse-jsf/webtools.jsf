@@ -19,6 +19,7 @@ import java.util.List;
  * 
  * @author Gerry Kessler - Oracle
  *
+ * @deprecated see common.metadata package
  */
 public class CMAnnotationPropertyValue {
 	private ICMAnnotationSourceFileInfo fileInfo;

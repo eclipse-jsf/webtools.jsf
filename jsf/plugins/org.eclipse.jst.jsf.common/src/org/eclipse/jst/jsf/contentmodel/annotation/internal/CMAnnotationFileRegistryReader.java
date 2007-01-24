@@ -27,6 +27,7 @@ import org.eclipse.osgi.util.NLS;
  * 
  * @see CMAnnotationFileRegistry
  * @see org.eclipse.jst.jsf.contentmodel.annotations.annotationFiles extension-point
+ * @deprecated see common.metadata package
  */
 public class CMAnnotationFileRegistryReader {
 	protected static final String EXTENSION_POINT_ID = "annotationFiles"; //$NON-NLS-1$

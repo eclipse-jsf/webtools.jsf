@@ -14,6 +14,9 @@ package org.eclipse.jst.jsf.contentmodel.annotation.internal;
 
 import org.eclipse.osgi.util.NLS;
 
+/**
+ * @deprecated see common.metadata package
+ */
 public class Messages extends NLS {
 	private static final String BUNDLE_NAME = "org.eclipse.jst.jsf.contentmodel.annotation.internal.messages"; //$NON-NLS-1$
 

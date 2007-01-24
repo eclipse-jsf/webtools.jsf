@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Schema file written by PDE -->
+<schema targetNamespace="org.eclipse.jst.jsf.common">
+<annotation>
+      <appInfo>
+         <meta.schema plugin="org.eclipse.jst.jsf.common" id="domainSourceModelTypes" name="Metadata Domain Source Model Types"/>
+      </appInfo>
+      <documentation>
+         ** Should be considered internal at this time.   Subject to change **
+Binds metadata source types to a particular domain of metadata.
+      </documentation>
+   </annotation>
+
+   <element name="extension">
+      <complexType>
+         <sequence>
+            <element ref="domainSourceModelTypes"/>
+         </sequence>
+         <attribute name="point" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="id" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appInfo>
+                  <meta.attribute translatable="true"/>
+               </appInfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="domainSourceModelTypes">
+      <complexType>
+         <attribute name="domainSourceModelTypeId" type="string" use="required">
+            <annotation>
+               <documentation>
+                  Uniquely identifies this combination of domain and source metadata locator.  This id should be used by the domainSourceModelTypeTranslator ext-pt.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="domainId" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The DomainLoadingStrategy domainId that this source is being bound to.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="locator" type="string" use="required">
+            <annotation>
+               <documentation>
+                  A class implementing &lt;code&gt;IMetaDataLocator&lt;/code&gt; that is responsible for finding instances of metadata.
+               </documentation>
+               <appInfo>
+                  <meta.attribute kind="java" basedOn="org.eclipse.jst.jsf.common.metadata.internal.IMetaDataLocator"/>
+               </appInfo>
+            </annotation>
+         </attribute>
+         <attribute name="ordinal" type="string">
+            <annotation>
+               <documentation>
+                  An optional integer ordinal that is used to prioritize a source if the domain loading strategy does not supply it&apos;s own sorting.  The higher the number, the higher the priority.
+               </documentation>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <annotation>
+      <appInfo>
+         <meta.section type="since"/>
+      </appInfo>
+      <documentation>
+         WTP JSF 1.0
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appInfo>
+         <meta.section type="examples"/>
+      </appInfo>
+      <documentation>
+         &lt;extension
+         point=&quot;org.eclipse.jst.jsf.common.domainSourceModelTypes&quot;&gt;
+      &lt;domainSourceModelTypes
+            domainId=&quot;TagLibraryDomain&quot;
+            domainSourceModelTypeId=&quot;DefaultMetaDataTagLibraryHandler&quot;
+            locator=&quot;org.eclipse.jst.jsf.common.metadata.internal.StandardMetaDataLocator&quot;
+            ordinal=&quot;10&quot;&gt;
+      &lt;/domainSourceModelTypes&gt;
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appInfo>
+         <meta.section type="apiInfo"/>
+      </appInfo>
+      <documentation>
+         
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appInfo>
+         <meta.section type="implementation"/>
+      </appInfo>
+      <documentation>
+         
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appInfo>
+         <meta.section type="copyright"/>
+      </appInfo>
+      <documentation>
+         /*******************************************************************************
+ * Copyright (c) 2007 Oracle Corporation.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Oracle - initial API and implementation
+ *    
+ ********************************************************************************/
+      </documentation>
+   </annotation>
+
+</schema>

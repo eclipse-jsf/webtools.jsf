@@ -34,6 +34,7 @@ import org.xml.sax.helpers.DefaultHandler;
  * @author Gerry Kessler - Oracle
  * 
  * @see http://org.eclipse.jst.jsf.contentmodel.annotations/grammarAnnotationSchema
+ * @deprecated see common.metadata package
  */
 public class CMAnnotationFileParser implements ICMAnnotationFileParser {
 	

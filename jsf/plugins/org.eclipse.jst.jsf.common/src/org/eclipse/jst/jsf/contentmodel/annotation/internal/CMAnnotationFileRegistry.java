@@ -40,6 +40,8 @@ import org.eclipse.osgi.util.NLS;
  * @see CMAnnotationMap
  * @see 
  * @see org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.ICMAnnotationSourceFileInfo
+ * 
+ * @deprecated see common.metadata package
  */
 public final class CMAnnotationFileRegistry {
 	//all annotation files registered using "org.eclipse.jst.jsf.contentmodel.annotations.annotationFiles" ext-pt. and keyed by uri.  

@@ -21,6 +21,10 @@ import java.util.ResourceBundle;
 
 import org.eclipse.core.runtime.FileLocator;
 
+/**
+ * @deprecated see common.metadata package
+ *
+ */
 public class ResourceBundleHelper {
 
 	public static ResourceBundle getResourceBundle(String resourceURI) throws MalformedURLException, IOException {

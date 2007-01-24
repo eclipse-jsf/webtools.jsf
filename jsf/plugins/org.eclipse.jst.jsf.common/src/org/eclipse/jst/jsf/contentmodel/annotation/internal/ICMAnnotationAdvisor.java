@@ -23,7 +23,7 @@ import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.ICMAnnot
  * 
  * @author Gerry Kessler - Oracle
  * @see org.eclipse.jst.jsf.contentmodel.annotation.internal.CMAnnotationAdvisor
- * 
+ * @deprecated see common.metadata package
  */
 public interface ICMAnnotationAdvisor {
 	/**

@@ -29,7 +29,7 @@ import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.CMAnnota
  * and resource bundles relative to the plugin that extends annotationFiles.
  * 
  * @author Gerry Kessler - Oracle
- *
+ * @deprecated see common.metadata package
  */
 public class CMPluginRelativeSourceFileLocator extends CMAnnotationSourceFileLocator {
 	

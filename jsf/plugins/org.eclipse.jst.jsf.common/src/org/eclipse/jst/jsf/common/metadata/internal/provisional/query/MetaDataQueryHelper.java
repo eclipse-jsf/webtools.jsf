@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * Copyright (c) 2007 Oracle Corporation.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Oracle - initial API and implementation
+ *    
+ ********************************************************************************/
 package org.eclipse.jst.jsf.common.metadata.internal.provisional.query;
 
 import org.eclipse.jst.jsf.common.metadata.internal.MetaDataModel;
@@ -41,7 +52,7 @@ public class MetaDataQueryHelper{
 	 */
 	public static Entity getEntity(final IMetaDataModelContext modelContext,
 			final String entityKey) {
-		IEntityQueryVisitor visitor = new SimpleMetaDataQueryVisitorImpl(new SearchControl(1, SearchControl.ALL_LEVELS));
+		IEntityQueryVisitor visitor = new SimpleMetaDataQueryVisitorImpl(new SearchControl(1, SearchControl.SCOPE_ALL_LEVELS));
 		IResultSet/*<Entity>*/ rs = getEntities(modelContext,entityKey,  visitor);
 		Entity e = null;
 		if (rs != null){
@@ -64,7 +75,6 @@ public class MetaDataQueryHelper{
 		Model model = getModel(modelContext);
 		//we may want to throw error that model is empty
 		if (model != null){
-//			String key = getEntityKeyWithModelURIIfNecessary(modelContext.getURI(), entityKey); //FIX ME!
 			return getEntities(model, entityKey, visitor);
 		}
 		return null;
@@ -105,7 +115,7 @@ public class MetaDataQueryHelper{
 	 * @return the first entity located by key using SimpleMetaDataQueryVisitorImpl
 	 */
 	public static Entity getEntity(Entity initialEntityContext, String entityKey) {
-		IEntityQueryVisitor visitor = new SimpleMetaDataQueryVisitorImpl(new SearchControl(1, SearchControl.ALL_LEVELS));
+		IEntityQueryVisitor visitor = new SimpleMetaDataQueryVisitorImpl(new SearchControl(1, SearchControl.SCOPE_ALL_LEVELS));
 		Entity e= null;
 		IResultSet/*<Entity>*/ rs = getEntities(initialEntityContext, entityKey, visitor);
 		if (rs.hasMoreElements())

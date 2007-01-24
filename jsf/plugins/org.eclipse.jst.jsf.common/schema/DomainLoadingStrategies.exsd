@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Schema file written by PDE -->
+<schema targetNamespace="org.eclipse.jst.jsf.common">
+<annotation>
+      <appInfo>
+         <meta.schema plugin="org.eclipse.jst.jsf.common" id="DomainLoadingStrategies" name="DomainLoadingStrategies"/>
+      </appInfo>
+      <documentation>
+         ** Should be considered internal at this time.   Subject to change **
+Allows for naming domains of metadata and binding to classes that can load sources of metadata into that domain.   A domain is a set of entities using jsf.common.metadata model.  In initial release, Tag Library domain will be supplied.  Tag files, Tags, attributes are the known entities on this domain, as an example.
+      </documentation>
+   </annotation>
+
+   <element name="extension">
+      <complexType>
+         <sequence minOccurs="0" maxOccurs="unbounded">
+            <element ref="domainLoader"/>
+         </sequence>
+         <attribute name="point" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="id" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appInfo>
+                  <meta.attribute translatable="true"/>
+               </appInfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="domainLoader">
+      <complexType>
+         <attribute name="domainId" type="string" use="required">
+            <annotation>
+               <documentation>
+                  Key used to name this domain.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="domainLoadingStrategy" type="string" use="required">
+            <annotation>
+               <documentation>
+                  Fully qualified java class implementing &lt;code&gt;org.eclipse.jst.jsf.common.metadata.IDomainLoadingStrategy&lt;/code&gt; that will be used to load an instance of a metadata model.
+
+Implementing class requires a constructor taking the domainID String.
+               </documentation>
+               <appInfo>
+                  <meta.attribute kind="java" basedOn="org.eclipse.jst.jsf.common.metadata.internal.IDomainLoadingStrategy"/>
+               </appInfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <annotation>
+      <appInfo>
+         <meta.section type="since"/>
+      </appInfo>
+      <documentation>
+         JSF 1.0
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appInfo>
+         <meta.section type="examples"/>
+      </appInfo>
+      <documentation>
+         &lt;extension
+         point=&quot;org.eclipse.jst.jsf.common.domainLoadingStrategies&quot;&gt;
+      &lt;domainLoader
+            domainId=&quot;TagLibraryDomain&quot;
+         domainLoadingStrategy=&quot;org.eclipse.jst.jsf.common.metadata.internal.JSPTagLibDomainLoadingStrategy&quot;/&gt;
+   &lt;/extension&gt;
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appInfo>
+         <meta.section type="apiInfo"/>
+      </appInfo>
+      <documentation>
+         
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appInfo>
+         <meta.section type="implementation"/>
+      </appInfo>
+      <documentation>
+         
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appInfo>
+         <meta.section type="copyright"/>
+      </appInfo>
+      <documentation>
+         /*******************************************************************************
+ * Copyright (c) 2007 Oracle Corporation.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Oracle - initial API and implementation
+ *    
+ ********************************************************************************/
+      </documentation>
+   </annotation>
+
+</schema>

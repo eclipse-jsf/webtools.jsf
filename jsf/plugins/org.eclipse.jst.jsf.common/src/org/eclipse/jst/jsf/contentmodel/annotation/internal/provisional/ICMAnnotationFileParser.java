@@ -22,6 +22,8 @@ import org.eclipse.jst.jsf.contentmodel.annotation.internal.ICMAnnotationAdvisor
  * @see xml schema defn: <code>http://org.eclipse.jst.jsf.contentmodel.annotations/grammarAnnotationSchema</code>
  * @see <code>org.eclipse.jst.jsf.contentmodel.annotation.internal.ICMAnnotationAdvisor</code>
  * @see <code>org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.CMAnnotationSourceFileLocator</code>
+ * 
+ * @deprecated see common.metadata package
  */
 public interface ICMAnnotationFileParser {
 
