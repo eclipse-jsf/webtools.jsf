@@ -11,7 +11,7 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.ui.dialogfields;
 
-import org.eclipse.jface.util.Assert;
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogField;
 import org.eclipse.jst.jsf.common.ui.internal.dialogfield.IDialogFieldApplyListener;
 import org.eclipse.jst.jsf.common.ui.internal.dialogfield.IDialogFieldChangeListener;

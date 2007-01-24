@@ -15,7 +15,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.jface.text.Assert;
+import org.eclipse.core.runtime.Assert;
 import org.w3c.dom.Node;
 
 /**
