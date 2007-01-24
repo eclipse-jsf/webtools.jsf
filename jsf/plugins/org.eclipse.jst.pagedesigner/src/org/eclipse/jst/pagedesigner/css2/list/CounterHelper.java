@@ -14,7 +14,7 @@ package org.eclipse.jst.pagedesigner.css2.list;
 import java.util.HashMap;
 import java.util.List;
 
-import org.eclipse.jface.text.Assert;
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.jst.pagedesigner.css2.ICSSStyle;
 import org.eclipse.jst.pagedesigner.css2.property.ICSSPropertyID;
 import org.eclipse.jst.pagedesigner.css2.property.ICSSPropertyMeta;
