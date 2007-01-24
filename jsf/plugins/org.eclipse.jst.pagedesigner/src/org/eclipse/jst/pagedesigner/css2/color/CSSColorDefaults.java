@@ -26,6 +26,9 @@ public class CSSColorDefaults {
 
 	public static final HashMap EXTENDED_COLORS = new HashMap(20);
 
+    // TODO C.B.: there is overlap here between the default and extended
+    // colors.  Also, for the custom colors, should use a ColorRegistry
+    // that allows other components to share values here
 	static {
 		SYSTEM_DEFAULT_COLORS.put("black", ColorConstants.black);
 		SYSTEM_DEFAULT_COLORS.put("blue", ColorConstants.blue);
@@ -34,7 +37,7 @@ public class CSSColorDefaults {
 		SYSTEM_DEFAULT_COLORS.put("orange", ColorConstants.orange);
 		SYSTEM_DEFAULT_COLORS.put("red", ColorConstants.red);
 		SYSTEM_DEFAULT_COLORS.put("white", ColorConstants.white);
-		SYSTEM_DEFAULT_COLORS.put("yellow", new Color(null, 255, 255, 0));
+		SYSTEM_DEFAULT_COLORS.put("yellow", ColorConstants.yellow);
 		SYSTEM_DEFAULT_COLORS.put("aqua", ColorConstants.cyan);
 		SYSTEM_DEFAULT_COLORS.put("fuchsia", new Color(null, 255, 0, 255));
 		SYSTEM_DEFAULT_COLORS.put("lime", ColorConstants.green);
@@ -129,17 +132,20 @@ public class CSSColorDefaults {
 		SYSTEM_DEFAULT_COLORS.put("hyperlink", ColorConstants.blue);
 	}
 
+    // populate the extended color palette.  Where the extended 
+    // color is the same as a constant color, use that to save
+    // on SWT resource handles
 	static {
 		EXTENDED_COLORS.put("aliceblue", new Color(null, 240, 248, 255));
 		EXTENDED_COLORS.put("antiquewhite", new Color(null, 250, 235, 215));
-		EXTENDED_COLORS.put("aqua", new Color(null, 0, 255, 255));
+		EXTENDED_COLORS.put("aqua", ColorConstants.cyan);
 		EXTENDED_COLORS.put("aquamarine", new Color(null, 127, 255, 212));
 		EXTENDED_COLORS.put("azure", new Color(null, 240, 255, 255));
 		EXTENDED_COLORS.put("beige", new Color(null, 245, 245, 220));
 		EXTENDED_COLORS.put("bisque", new Color(null, 255, 228, 196));
-		EXTENDED_COLORS.put("black", new Color(null, 0, 0, 0));
+		EXTENDED_COLORS.put("black", ColorConstants.black);
 		EXTENDED_COLORS.put("blanchedalmond", new Color(null, 255, 235, 205));
-		EXTENDED_COLORS.put("blue", new Color(null, 0, 0, 255));
+		EXTENDED_COLORS.put("blue", ColorConstants.blue);
 		EXTENDED_COLORS.put("blueviolet", new Color(null, 138, 43, 226));
 		EXTENDED_COLORS.put("brown", new Color(null, 165, 42, 42));
 		EXTENDED_COLORS.put("burlywood", new Color(null, 222, 184, 135));
@@ -181,7 +187,7 @@ public class CSSColorDefaults {
 		EXTENDED_COLORS.put("ghostwhite", new Color(null, 248, 248, 255));
 		EXTENDED_COLORS.put("gold", new Color(null, 255, 215, 0));
 		EXTENDED_COLORS.put("goldenrod", new Color(null, 218, 165, 32));
-		EXTENDED_COLORS.put("gray", new Color(null, 128, 128, 128));
+		EXTENDED_COLORS.put("gray", ColorConstants.gray);
 		EXTENDED_COLORS.put("green", new Color(null, 0, 128, 0));
 		EXTENDED_COLORS.put("greenyellow", new Color(null, 173, 255, 47));
 		EXTENDED_COLORS.put("honeydew", new Color(null, 240, 255, 240));
@@ -209,7 +215,7 @@ public class CSSColorDefaults {
 		EXTENDED_COLORS.put("lightslategray", new Color(null, 119, 136, 153));
 		EXTENDED_COLORS.put("lightsteelblue", new Color(null, 176, 196, 222));
 		EXTENDED_COLORS.put("lightyellow", new Color(null, 255, 255, 224));
-		EXTENDED_COLORS.put("lime", new Color(null, 0, 255, 0));
+		EXTENDED_COLORS.put("lime", ColorConstants.green);
 		EXTENDED_COLORS.put("limegreen", new Color(null, 50, 205, 50));
 		EXTENDED_COLORS.put("linen", new Color(null, 250, 240, 230));
 		EXTENDED_COLORS.put("magenta", new Color(null, 255, 0, 255));
@@ -246,7 +252,7 @@ public class CSSColorDefaults {
 		EXTENDED_COLORS.put("plum", new Color(null, 221, 160, 221));
 		EXTENDED_COLORS.put("powderblue", new Color(null, 176, 224, 230));
 		EXTENDED_COLORS.put("purple", new Color(null, 128, 0, 128));
-		EXTENDED_COLORS.put("red", new Color(null, 255, 0, 0));
+		EXTENDED_COLORS.put("red", ColorConstants.red);
 		EXTENDED_COLORS.put("rosybrown", new Color(null, 188, 143, 143));
 		EXTENDED_COLORS.put("royalblue", new Color(null, 65, 105, 225));
 		EXTENDED_COLORS.put("saddlebrown", new Color(null, 139, 69, 19));
@@ -270,9 +276,9 @@ public class CSSColorDefaults {
 		EXTENDED_COLORS.put("violet", new Color(null, 238, 130, 238));
 		EXTENDED_COLORS.put("violetred", new Color(null, 208, 32, 144));
 		EXTENDED_COLORS.put("wheat", new Color(null, 245, 222, 179));
-		EXTENDED_COLORS.put("white", new Color(null, 255, 255, 255));
+		EXTENDED_COLORS.put("white", ColorConstants.white);
 		EXTENDED_COLORS.put("whitesmoke", new Color(null, 245, 245, 245));
-		EXTENDED_COLORS.put("yellow", new Color(null, 255, 255, 0));
+		EXTENDED_COLORS.put("yellow", ColorConstants.yellow);
 		EXTENDED_COLORS.put("yellowgreen", new Color(null, 154, 205, 50));
 	}
 }
