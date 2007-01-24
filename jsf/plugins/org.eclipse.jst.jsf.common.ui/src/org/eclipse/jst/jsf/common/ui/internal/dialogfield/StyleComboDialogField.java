@@ -17,6 +17,8 @@ import java.util.Map.Entry;
 
 import org.eclipse.jst.jsf.common.ui.internal.utils.StyleCombo;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.DisposeEvent;
+import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.ModifyEvent;
@@ -151,8 +153,8 @@ public class StyleComboDialogField extends DialogFieldBase implements
 
 			if (toolkit != null) {
 				_comboControl = new StyleCombo(parent, _flags);
+                final FormColors colors = new FormColors(parent.getDisplay());
 				parent.addPaintListener(new PaintListener() {
-					FormColors colors = new FormColors(parent.getDisplay());
 
 					public void paintControl(PaintEvent event) {
 						Composite composite = (Composite) event.widget;
@@ -170,6 +172,16 @@ public class StyleComboDialogField extends DialogFieldBase implements
 						}
 					}
 				});
+                
+                // when the parent is disposed, the colors should no
+                // no longer be needed.
+                parent.addDisposeListener(new DisposeListener()
+                {
+                    public void widgetDisposed(DisposeEvent e) {
+                        colors.dispose();
+                    }
+                }
+                );
 				toolkit.adapt(_comboControl);
 			} else {
 				_comboControl = new StyleCombo(parent, _flags | SWT.BORDER);
