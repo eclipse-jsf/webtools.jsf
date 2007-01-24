@@ -188,7 +188,9 @@ public class WorkspaceUtil {
 		try {
 			project.refreshLocal(IResource.DEPTH_INFINITE, null);
 		} catch (CoreException e) {
-            JSFUICommonPlugin.getLogger(WorkspaceUtil.class).error("Error.RefreshingLocal", e);
+            // TODO C.B.:pushing this down to a warning because it creates really
+            // spurious output.  Don't know why we are calling refreshLocal at all.
+            JSFUICommonPlugin.getLogger(WorkspaceUtil.class).info("Error.RefreshingLocal", e);
 		}
 
 		IResource res = project.findMember(new Path(projectPath));
