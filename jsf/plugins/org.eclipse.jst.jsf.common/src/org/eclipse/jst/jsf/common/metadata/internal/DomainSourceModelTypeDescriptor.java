@@ -109,7 +109,7 @@ public class DomainSourceModelTypeDescriptor {
 		 * @see org.eclipse.jst.jsf.common.metadata.internal.IDomainSourceModelType#getDomain()
 		 */
 		public String getDomain() {
-			return this.getDomain();
+			return domain;
 		}
 		
 		/**
@@ -153,7 +153,7 @@ public class DomainSourceModelTypeDescriptor {
 		 * @see java.lang.Object#toString()
 		 */
 		public String toString(){
-			StringBuffer buf = new StringBuffer(getClass().getSimpleName());
+			StringBuffer buf = new StringBuffer("DomainSourceModelTypeImpl");
 			buf.append("(domain = ");
 			buf.append(getDomain());
 			buf.append(", locator = ");
