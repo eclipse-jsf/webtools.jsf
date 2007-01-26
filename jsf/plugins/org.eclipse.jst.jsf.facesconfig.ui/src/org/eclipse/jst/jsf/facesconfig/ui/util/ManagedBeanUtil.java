@@ -16,9 +16,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
+import org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.JSFAppConfigManager;
 import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanType;
-import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
 
 /**
  * 
@@ -36,15 +35,13 @@ public class ManagedBeanUtil {
 	 * @return int - 0 if bean doesn't exist, otherwise the choice from the
 	 *         Duplicate Bean dialog
 	 */
-	public static boolean isBeanDuplicate(IProject project, String beanName) {
-		// TODO we may need to consider the managed bean declared in other
-		// faces config file in the project, not only the default faces config
-		// file.
-		FacesConfigArtifactEdit artifactEdit = FacesConfigArtifactEdit
-				.getFacesConfigArtifactEditForRead(project);
-		if (artifactEdit != null) {
-			FacesConfigType facesConfig = artifactEdit.getFacesConfig();
-			List beans = facesConfig.getManagedBean();
+	public static boolean isBeanDuplicate(IProject project, String beanName) 
+    {
+	    JSFAppConfigManager appCfgMgr = JSFAppConfigManager.getInstance(project);
+        
+		if (appCfgMgr != null) 
+        {
+			List beans = appCfgMgr.getManagedBeans();
 
 			// Iterate through the bean list
 			for (Iterator i = beans.iterator(); i.hasNext();) {
