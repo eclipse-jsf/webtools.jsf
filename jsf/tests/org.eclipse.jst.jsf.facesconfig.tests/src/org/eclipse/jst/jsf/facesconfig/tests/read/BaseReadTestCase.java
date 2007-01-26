@@ -36,7 +36,7 @@ public class BaseReadTestCase extends ConfigurableTestCase
         if (CONFIG_FILE_DEFAULT.equals(_facesConfigFile))
         {
             edit = FacesConfigArtifactEdit
-                .getFacesConfigArtifactEditForRead(project);
+                .getFacesConfigArtifactEditForRead(project, null);
         }
         else
         {
