@@ -72,6 +72,8 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 /**
+ * TODO: C.B.: parts of this class need a re-write.  This is very complex.
+ *  
  * @author mengbo
  */
 public class PaletteItemManager implements IPaletteItemManager,

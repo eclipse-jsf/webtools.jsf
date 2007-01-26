@@ -29,6 +29,8 @@ import org.eclipse.gef.ui.palette.PaletteViewer;
 import org.eclipse.gef.ui.palette.customize.PaletteCustomizerDialog;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.editors.palette.impl.PaletteItemManager;
+import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorReference;
@@ -69,9 +71,26 @@ public class DesignerPaletteViewer extends PaletteViewer {
 	IEntryChangeListener _paletteModelListener = new IEntryChangeListener() {
 
 		public void modelChanged(List oldDefinitions, List newDefinitions) {
-			PaletteRoot root = getPaletteRoot();
+			final PaletteRoot root = getPaletteRoot();
 			if (root instanceof DesignerPaletteRoot) {
-				((DesignerPaletteRoot) root).refresh();
+                Control viewerControl = getControl();
+                
+                if (viewerControl != null && !viewerControl.isDisposed())
+                {
+                    Display  display = viewerControl.getDisplay();
+                    
+                    if (display != null && !display.isDisposed())
+                    {
+                        // this updates the UI, so it must be run on
+                        // the display thread
+                        display.asyncExec(new Runnable()
+                        {
+                            public void run() {
+                                ((DesignerPaletteRoot) root).refresh();
+                            }
+                        });
+                    }
+                }
 			}
 		}
 
