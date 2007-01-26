@@ -15,6 +15,7 @@ import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.dnd.AbstractTransferDropTargetListener;
 import org.eclipse.gef.dnd.TemplateTransfer;
+import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.editors.palette.impl.PaletteItemDescriptor;
 import org.eclipse.jst.pagedesigner.itemcreation.ItemCreationRequest;
 import org.eclipse.swt.dnd.DND;
@@ -84,10 +85,20 @@ public class PDTemplateTransferDropTargetListener extends
 		// Add this test to avoid potential error.
 		if (getCreateRequest() instanceof ItemCreationRequest) {
 			ItemCreationRequest request = (ItemCreationRequest) getCreateRequest();
-			PaletteItemDescriptor itemDescriptor = (PaletteItemDescriptor) TemplateTransfer
-					.getInstance().getObject();
-			request.setItemDescriptor(itemDescriptor);
-			request.setLocation(getDropLocation());
+            Object transferObj = TemplateTransfer.getInstance().getObject();
+            
+            if (transferObj instanceof PaletteItemDescriptor)
+            {
+                PaletteItemDescriptor itemDescriptor = 
+                    (PaletteItemDescriptor) transferObj;
+                
+                request.setItemDescriptor(itemDescriptor);
+                request.setLocation(getDropLocation());
+            }
+            else
+            {
+                PDPlugin.getLogger(this.getClass()).error("Unexpected transfer object on palette drag:"+transferObj, new Throwable("Artificial throwable for stack tracing"));
+            }
 		}
 	}
 
