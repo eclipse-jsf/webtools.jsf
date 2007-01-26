@@ -50,6 +50,13 @@ public class FacesConfigArtifactEdit extends ArtifactEdit {
 		}
 		return artifactEdit;
 	}
+	/**
+	 * @param aProject
+	 * @return the default artifact edit
+     * @deprecated Use getFacesConfigArtifactEditForRead(IProject, String) instead. This
+     * method is dangerous because the caller is assuming that the "default"
+     * model exists and knows nothing about where it is coming from.
+	 */
 	public static FacesConfigArtifactEdit getFacesConfigArtifactEditForRead(IProject aProject) {
 		return getFacesConfigArtifactEditForRead(aProject, null);
 	}
@@ -68,6 +75,14 @@ public class FacesConfigArtifactEdit extends ArtifactEdit {
 		return artifactEdit;
 	}
 
+	/**
+	 * @param aProject
+	 * @return the default artifact edit for read
+     * @deprecated Use getFacesConfigArtifactEditForWrite(IProject, String) 
+     * instead. This method is dangerous because the caller is assuming that
+     * the "default" model exists and knows nothing about where it is coming
+     * from.
+	 */
 	public static FacesConfigArtifactEdit getFacesConfigArtifactEditForWrite(IProject aProject) {
 		return getFacesConfigArtifactEditForWrite(aProject, null);
 	}
