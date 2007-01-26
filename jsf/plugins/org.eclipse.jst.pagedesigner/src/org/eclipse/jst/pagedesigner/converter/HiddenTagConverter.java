@@ -30,7 +30,6 @@ import org.w3c.dom.Node;
 public class HiddenTagConverter implements ITagConverter {
 	private Element _hostElement;
 
-//	private Image                  _image;
     private ILabelProvider         _labelProvider;
 
 	private int _mode;
@@ -38,7 +37,7 @@ public class HiddenTagConverter implements ITagConverter {
 	/**
 	 * 
 	 */
-	public HiddenTagConverter(Element host, ILabelProvider labelProvider/*Image image*/) {
+	public HiddenTagConverter(Element host, ILabelProvider labelProvider) {
 		_hostElement = host;
 		//_image = image;
         _labelProvider = labelProvider;
