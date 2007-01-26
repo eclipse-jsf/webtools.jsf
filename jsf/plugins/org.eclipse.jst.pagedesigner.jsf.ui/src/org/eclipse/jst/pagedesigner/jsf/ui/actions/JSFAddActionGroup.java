@@ -11,21 +11,22 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.jsf.ui.actions;
 
+import java.util.Iterator;
+import java.util.List;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
+import org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.JSFAppConfigManager;
 import org.eclipse.jst.jsf.facesconfig.emf.ConverterIdType;
 import org.eclipse.jst.jsf.facesconfig.emf.ConverterType;
-import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.jst.jsf.facesconfig.emf.ValidatorIdType;
 import org.eclipse.jst.jsf.facesconfig.emf.ValidatorType;
-import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
 import org.eclipse.jst.pagedesigner.editors.PageDesignerActionConstants;
 import org.eclipse.jst.pagedesigner.utils.StructuredModelUtil;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
@@ -156,54 +157,54 @@ public class JSFAddActionGroup {
 	/**
 	 * @return
 	 */
-	private String[] getRegisteredValidatorIds(IProject project) {
-		FacesConfigArtifactEdit facesConfigArtifactEdit = FacesConfigArtifactEdit
-				.getFacesConfigArtifactEditForRead(project);
+	private String[] getRegisteredValidatorIds(IProject project) 
+    {
+        String[] result = null;
+        
+        JSFAppConfigManager appConfigMgr = 
+            JSFAppConfigManager.getInstance(project);
 
-		if (facesConfigArtifactEdit == null)
-			return null;
-
-		FacesConfigType facesConfigType = facesConfigArtifactEdit
-				.getFacesConfig();
-		EList list = facesConfigType.getValidator();
-		int size = list.size();
-		if (size == 0)
-			return null;
-
-		String[] result = new String[size];
-		for (int i = 0, n = list.size(); i < n; i++) {
-			ValidatorType validator = (ValidatorType) list.get(i);
-			ValidatorIdType validatorId = validator.getValidatorId();
-			if (validatorId != null)
-				result[i] = validatorId.getTextContent().trim();
-		}
-		return result;
+        // getInstance may return null if there is a problem
+        if (appConfigMgr != null)
+        {
+            final List list = appConfigMgr.getValidators();
+            result = new String[list.size()];
+            int i = 0;
+            for (final Iterator it = list.iterator(); it.hasNext();) 
+            {
+                ValidatorType validator = (ValidatorType) it.next();
+                ValidatorIdType validatorId = validator.getValidatorId();
+                if (validatorId != null)
+                    result[i++] = validatorId.getTextContent().trim();
+            }
+        }
+        return result;
 	}
 
 	/**
 	 * @return
 	 */
-	private String[] getRegisteredConverterIds(IProject project) {
-		FacesConfigArtifactEdit facesConfigArtifactEdit = FacesConfigArtifactEdit
-				.getFacesConfigArtifactEditForRead(project);
+	private String[] getRegisteredConverterIds(IProject project) 
+    {
+        String[] result = null;
+        
+        JSFAppConfigManager appConfigMgr = 
+            JSFAppConfigManager.getInstance(project);
 
-		if (facesConfigArtifactEdit == null)
-			return null;
-
-		FacesConfigType facesConfigType = facesConfigArtifactEdit
-				.getFacesConfig();
-		EList list = facesConfigType.getConverter();
-		int size = list.size();
-		if (size == 0)
-			return null;
-
-		String[] result = new String[size];
-		for (int i = 0, n = list.size(); i < n; i++) {
-			ConverterType converter = (ConverterType) list.get(i);
-			ConverterIdType converterId = converter.getConverterId();
-			if (converterId != null)
-				result[i] = converterId.getTextContent().trim();
-		}
+        // getInstance may return null if there is a problem
+        if (appConfigMgr != null)
+        {
+            final List list = appConfigMgr.getConverters();
+    		result = new String[list.size()];
+            int i = 0;
+    		for (final Iterator it = list.iterator(); it.hasNext();) 
+            {
+    			ConverterType converter = (ConverterType) it.next();
+    			ConverterIdType converterId = converter.getConverterId();
+    			if (converterId != null)
+    				result[i++] = converterId.getTextContent().trim();
+    		}
+        }
 		return result;
 	}
 }
