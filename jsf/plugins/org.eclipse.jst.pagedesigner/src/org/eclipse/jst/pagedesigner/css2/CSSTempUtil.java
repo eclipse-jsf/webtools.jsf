@@ -113,10 +113,22 @@ public class CSSTempUtil {
 					|| IHTMLConstants.TAG_STYLE.equalsIgnoreCase(tagName)) {
 				INodeAdapter adapter = notifier
 						.getAdapterFor(IStyleSheetAdapter.class);
-				if (adapter != null && adapter instanceof IStyleSheetAdapter) {
-					StyleSheet sheet = ((IStyleSheetAdapter) adapter)
-							.getSheet();
-					result.add(sheet);
+				if (adapter instanceof IStyleSheetAdapter) {
+                    // XXX: see bug 171740.  This is a (hopefully) temporary
+                    // workaround that avoids having the call to getSheet throw an NPE
+                    IStyleSheetAdapter sheetAdapter = (IStyleSheetAdapter) adapter;
+                    if (sheetAdapter.getElement() != null
+                            && "text/css".equals(sheetAdapter.getElement().getAttribute(HTML40Namespace.ATTR_NAME_TYPE)))
+
+                    {
+    					StyleSheet sheet = ((IStyleSheetAdapter) adapter)
+    							.getSheet();
+                        
+                        if (sheet != null)
+                        {
+                            result.add(sheet);
+                        }
+                    }
 				}
 			}
 
