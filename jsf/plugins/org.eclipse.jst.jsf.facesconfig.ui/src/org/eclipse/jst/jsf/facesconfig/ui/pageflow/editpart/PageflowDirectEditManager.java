@@ -68,7 +68,7 @@ public class PageflowDirectEditManager extends DirectEditManager {
 		Font disposeFont = scaledFont;
 		scaledFont = null;
 		super.bringDown();
-		if (disposeFont != null) {
+		if (disposeFont != null && !disposeFont.isDisposed()) {
 			disposeFont.dispose();
 		}
 	}
@@ -105,15 +105,18 @@ public class PageflowDirectEditManager extends DirectEditManager {
 		String initialLabelText = label.getText();
 		getCellEditor().setValue(initialLabelText);
 		IFigure figure = getEditPart().getFigure();
-		scaledFont = figure.getFont();
-		FontData data = scaledFont.getFontData()[0];
+		final Font figureFont = figure.getFont();
+        // take a copy of the font data for the label we are cell editing
+		FontData data = figureFont.getFontData()[0];
 		Dimension fontSize = new Dimension(0, data.getHeight());
 		label.translateToAbsolute(fontSize);
 		data.setHeight(fontSize.height);
 
-		if (scaledFont != null & !scaledFont.isDisposed())
+		if (scaledFont != null && !scaledFont.isDisposed())
+        {
 			scaledFont.dispose();
-		scaledFont = new Font(null, data);
+        }
+		scaledFont = new Font(figureFont.getDevice(), data);
 
 		text.setFont(scaledFont);
 		text.selectAll();
