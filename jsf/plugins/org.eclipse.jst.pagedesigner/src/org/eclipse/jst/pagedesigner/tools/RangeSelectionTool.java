@@ -11,6 +11,8 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.tools;
 
+import org.eclipse.gef.DragTracker;
+import org.eclipse.gef.EditPart;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.RequestConstants;
 import org.eclipse.gef.commands.Command;
@@ -38,6 +40,7 @@ import org.eclipse.jst.pagedesigner.viewer.HTMLGraphicalViewer;
 import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.graphics.Cursor;
 
 /**
  * @author mengbo
@@ -181,15 +184,6 @@ public class RangeSelectionTool extends SelectionTool
 		return false;
 	}
 
-	/**
-	 * @param e
-	 * @return
-	 */
-	protected boolean handleObjectModeKeyDown(KeyEvent e) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 	// /**
 	// * @param e
 	// * @return
@@ -297,6 +291,54 @@ public class RangeSelectionTool extends SelectionTool
         }
         super.showHoverFeedback();
     }
-    
-    
+
+    // TODO : this method is for debug purposes and should
+    // be removed in production
+//    protected boolean updateTargetUnderMouse() {
+//        EditPart editPart = getTargetEditPart();
+//        boolean retValue =  super.updateTargetUnderMouse();
+//        if (getTargetEditPart() != editPart)
+//        {
+//            System.out.println("New target editpart:  "+getTargetEditPart()+" Old edit part: "+editPart);
+//        }
+//        return retValue;
+//    }
+
+    protected boolean handleMove() {
+        boolean handled =  super.handleMove();
+        EditPart targetEditPart = getTargetEditPart();
+        
+        if (isInState(STATE_INITIAL)
+                && targetEditPart instanceof NodeEditPart)
+        {
+            LocationRequest request = new LocationRequest(org.eclipse.jst.pagedesigner.requests.PageDesignerRequestConstants.REQ_SELECTION_TRACKER);
+            request.setLocation(getLocation());
+            DragTracker selectionTracker = targetEditPart.getDragTracker(request);
+            setDragTracker(selectionTracker);
+        }
+        
+        return handled;
+    }
+
+    protected Cursor calculateCursor() {
+        EditPart targetEditPart = getTargetEditPart();
+        if (isInState(STATE_INITIAL)
+               && targetEditPart instanceof NodeEditPart)
+        {
+            final Cursor  nodeCursor = 
+                ((NodeEditPart)targetEditPart).getCursor(getLocation());
+            
+            // if the edit part specified a custom cursor and there is no
+            // active drag tracker (which would otherwise manage cursor)
+            // then set the custom cursor
+            // if we fall-through, the default behaviour will be used
+            if (nodeCursor != null
+                    && getDragTracker() == null)
+            {
+                return nodeCursor;
+            }
+        }
+        // otherwise, use super's defaults
+        return super.calculateCursor();
+    }
 }

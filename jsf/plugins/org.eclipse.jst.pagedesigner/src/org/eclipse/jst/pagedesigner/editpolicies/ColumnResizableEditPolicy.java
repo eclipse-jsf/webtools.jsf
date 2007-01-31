@@ -14,10 +14,13 @@ package org.eclipse.jst.pagedesigner.editpolicies;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.draw2d.ColorConstants;
+import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Locator;
 import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.DragTracker;
 import org.eclipse.gef.GraphicalEditPart;
@@ -25,8 +28,13 @@ import org.eclipse.gef.Handle;
 import org.eclipse.gef.SharedCursors;
 import org.eclipse.gef.handles.MoveHandle;
 import org.eclipse.gef.handles.ResizeHandle;
+import org.eclipse.gef.handles.SquareHandle;
+import org.eclipse.gef.tools.DragEditPartsTracker;
 import org.eclipse.gef.tools.SelectEditPartTracker;
+import org.eclipse.jst.pagedesigner.PDPlugin;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Cursor;
+import org.eclipse.swt.graphics.Image;
 import org.w3c.dom.Element;
 
 /**
@@ -44,10 +52,19 @@ public class ColumnResizableEditPolicy extends ElementResizableEditPolicy {
 			List list = new ArrayList();
 
 			GraphicalEditPart part = (GraphicalEditPart) getHost();
-			MoveHandle handle = new MoveHandle(part, new ColumnHandleLocator(
-					part));
-			list.add(handle);
-
+            
+            {
+    			MoveHandle borderhandle = new MoveHandle(part, new ColumnBorderHandleLocator(
+    					part));
+    			list.add(borderhandle);
+            }
+            
+            {
+    			MyMoveHandle cornerHandle = new MyMoveHandle(part, new ColumnHandleLocator(part, getHostFigure(),
+    					PositionConstants.NORTH_WEST));
+    			list.add(cornerHandle);
+            }
+            
 			SelectEditPartTracker tracker = new SelectEditPartTracker(getHost());
 			list.add(createHandle(part, PositionConstants.SOUTH_EAST, tracker,
 					SharedCursors.ARROW));
@@ -72,16 +89,21 @@ public class ColumnResizableEditPolicy extends ElementResizableEditPolicy {
 		return handle;
 	}
 
-	private class ColumnHandleLocator implements Locator {
+    private class ColumnHandleLocator extends CornerRelativeHandleLocator {
 		private GraphicalEditPart editPart;
 
-		public ColumnHandleLocator(GraphicalEditPart editPart) {
+		public ColumnHandleLocator(GraphicalEditPart editPart, IFigure reference, int location) {
+            super(reference, location);
 			this.editPart = editPart;
 		}
+        
+        protected Dimension getNewTargetSize(IFigure relocateFigure) {
+            return relocateFigure.getPreferredSize();
+        }
 
-		public void relocate(IFigure target) {
-			target.setBounds(ColumnHelper.getColumnBounds(editPart, target));
-		}
+        protected Rectangle getCurrentTargetBounds(IFigure relocateFigure) {
+            return ColumnHelper.getColumnBounds(editPart, relocateFigure);
+        }
 	}
 
 	private class ColumnCornerLocator implements Locator {
@@ -144,4 +166,50 @@ public class ColumnResizableEditPolicy extends ElementResizableEditPolicy {
 			target.setBounds(targetBounds);
 		}
 	}
+
+    private class ColumnBorderHandleLocator implements Locator {
+        private GraphicalEditPart editPart;
+
+        public ColumnBorderHandleLocator(GraphicalEditPart editPart) {
+            this.editPart = editPart;
+        }
+
+        public void relocate(IFigure target) {
+            target.setBounds(ColumnHelper.getColumnBounds(editPart, target));
+        }
+    }
+    
+    private static class MyMoveHandle extends SquareHandle
+    {
+        public MyMoveHandle(GraphicalEditPart owner, Locator loc) {
+            super(owner, loc);
+            setCursor(SharedCursors.SIZEALL);
+        }
+
+        protected void init() {
+            setPreferredSize(16,16);
+        }
+
+        protected Color getBorderColor() {
+            return ColorConstants.black;
+        }
+
+        protected Color getFillColor() {
+            return ColorConstants.white;
+        }
+
+        protected DragTracker createDragTracker() {
+            DragTracker tracker = new DragEditPartsTracker(getOwner());
+            
+            return tracker;
+        }
+
+        public void paintFigure(Graphics graphics) {
+            super.paintFigure(graphics);
+            final  Image moveImage = PDPlugin.getDefault().getImage("MoveHandle.png");
+            Point topLeft = getBounds().getTopLeft().getCopy();
+            topLeft.performTranslate(3,3);
+            graphics.drawImage(moveImage, topLeft);
+        }
+    }
 }

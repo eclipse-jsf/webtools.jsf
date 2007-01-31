@@ -31,7 +31,7 @@ public class DefaultPositionRule implements IPositionRule {
 	public DefaultPositionRule(IPositionMediator mediator, ActionData actionData) {
 		super();
 		_mediator = mediator;
-		if (_actionData != null) {
+		if (actionData != null) {
 			_actionData = actionData;
 		} else {
 			_actionData = new ActionData(ActionData.UNKNOWN, new Object());
@@ -92,16 +92,16 @@ public class DefaultPositionRule implements IPositionRule {
 		}
 		return result;
 	}
-
-	/**
-	 * @param host
-	 * @param tagName
-	 * @return
-	 */
-	public static boolean isWidget(EditPart host) {
-		if (host instanceof NodeEditPart) {
-			return ((NodeEditPart) host).isWidget();
-		}
+    
+    /**
+     * @param host
+     * @param tagName
+     * @return
+     */
+     public static boolean isWidget(EditPart host) {
+        if (host instanceof NodeEditPart) {
+            return ((NodeEditPart) host).isWidget();
+        }
         return false;
-	}
+    }
 }

@@ -12,9 +12,9 @@
 package org.eclipse.jst.pagedesigner.validation.caret;
 
 /**
- * This method represents the an user action, the 'data' could be any related
+ * This method represents a user action, the 'data' could be any related
  * data that will be referenced later in the action processing. For example.
- * when user do DnD, the localData will be referenced as _data.
+ * when user does a DnD, the localData will be referenced as _data.
  * 
  * @author mengbo
  */

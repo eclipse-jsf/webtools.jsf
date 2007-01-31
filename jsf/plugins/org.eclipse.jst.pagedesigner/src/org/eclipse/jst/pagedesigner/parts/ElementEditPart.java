@@ -18,11 +18,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.gef.DragTracker;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.Request;
+import org.eclipse.gef.requests.LocationRequest;
 import org.eclipse.gef.tools.DragEditPartsTracker;
 import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
 import org.eclipse.jst.pagedesigner.PDPlugin;
@@ -37,17 +39,18 @@ import org.eclipse.jst.pagedesigner.css2.style.AbstractStyle;
 import org.eclipse.jst.pagedesigner.css2.widget.HiddenProvider;
 import org.eclipse.jst.pagedesigner.editpolicies.ElementMenuBar;
 import org.eclipse.jst.pagedesigner.editpolicies.ElementResizableEditPolicy;
+import org.eclipse.jst.pagedesigner.editpolicies.IEnhancedSelectionEditPolicy;
 import org.eclipse.jst.pagedesigner.elementedit.ElementEditFactoryRegistry;
 import org.eclipse.jst.pagedesigner.elementedit.IElementEdit;
 import org.eclipse.jst.pagedesigner.figurehandler.FigureFactory;
 import org.eclipse.jst.pagedesigner.figurehandler.IFigureHandler;
 import org.eclipse.jst.pagedesigner.jsp.core.IJSPCoreConstants;
 import org.eclipse.jst.pagedesigner.range.RangeUtil;
-import org.eclipse.jst.pagedesigner.tools.ObjectModeDragTracker;
-import org.eclipse.jst.pagedesigner.tools.RangeDragTracker;
+import org.eclipse.jst.pagedesigner.requests.PageDesignerRequestConstants;
 import org.eclipse.jst.pagedesigner.utils.CMUtil;
 import org.eclipse.jst.pagedesigner.viewer.DesignRange;
 import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
+import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.wst.sse.core.internal.provisional.INodeAdapter;
 import org.eclipse.wst.sse.core.internal.provisional.INodeNotifier;
@@ -88,16 +91,23 @@ public class ElementEditPart extends SubNodeEditPart {
 	 * 
 	 * @see org.eclipse.jst.pagedesigner.parts.NodeEditPart#getDragTracker(org.eclipse.gef.Request)
 	 */
-	public DragTracker getDragTracker(Request request) {
-		EditPolicy policy = this
-				.getEditPolicy(EditPolicy.SELECTION_FEEDBACK_ROLE);
-		if (policy instanceof ElementResizableEditPolicy) {
-			if (((ElementResizableEditPolicy) policy)
-					.shouldUseObjectMode(request)) {
-				return new ObjectModeDragTracker(this);
-			}
-            return new RangeDragTracker(this);
-		}
+	public DragTracker getDragTracker(Request request) 
+    {
+        EditPolicy policy = this
+            .getEditPolicy(EditPolicy.SELECTION_FEEDBACK_ROLE);
+
+        if (PageDesignerRequestConstants.REQ_SELECTION_TRACKER.equals(request.getType())
+                || org.eclipse.gef.RequestConstants.REQ_SELECTION.equals(request.getType()))
+        {
+            if (policy instanceof IEnhancedSelectionEditPolicy
+                    && request instanceof LocationRequest)
+            {
+                return ((IEnhancedSelectionEditPolicy)policy).getSelectionDragTracker((LocationRequest)request);
+            }
+            
+            return null;
+        }
+        
         // should not happen
         return new DragEditPartsTracker(this);
 	}
@@ -510,8 +520,13 @@ public class ElementEditPart extends SubNodeEditPart {
 			parent.remove(childFigure);
 		}
         
+        
+        if (childEditPart instanceof NonVisualComponentEditPart)
+        {
+            _nonVisualElementBar.removeNonVisualChild((NonVisualComponentEditPart) childEditPart);
+        }
         // this only applies to visual edit parts
-        if (! (childEditPart instanceof NonVisualComponentEditPart))
+        else
         {
     		// de-link style
     		Node childNode = (Node) childEditPart.getModel();
@@ -596,4 +611,17 @@ public class ElementEditPart extends SubNodeEditPart {
             _nonVisualElementBar = null;
         }
     }
+
+    public Cursor getCursor(Point mouseLocation) {
+        // let the selection edit policy dictate
+        EditPolicy  editPolicy = getEditPolicy(EditPolicy.SELECTION_FEEDBACK_ROLE);
+        
+        if (editPolicy instanceof IEnhancedSelectionEditPolicy)
+        {
+            return  ((IEnhancedSelectionEditPolicy)editPolicy).getSelectionToolCursor(mouseLocation);
+        }
+        return super.getCursor(mouseLocation);
+    }
+    
+    
 }

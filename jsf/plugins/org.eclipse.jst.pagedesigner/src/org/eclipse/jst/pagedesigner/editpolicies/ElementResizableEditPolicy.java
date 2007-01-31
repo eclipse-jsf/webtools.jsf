@@ -25,6 +25,7 @@ import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.PrecisionRectangle;
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.gef.DragTracker;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.LayerConstants;
@@ -46,7 +47,10 @@ import org.eclipse.jst.pagedesigner.dom.EditModelQuery;
 import org.eclipse.jst.pagedesigner.parts.ElementEditPart;
 import org.eclipse.jst.pagedesigner.parts.NodeEditPart;
 import org.eclipse.jst.pagedesigner.requests.LocationModifierRequest;
+import org.eclipse.jst.pagedesigner.tools.ObjectModeDragTracker;
+import org.eclipse.jst.pagedesigner.tools.RangeDragTracker;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -55,7 +59,8 @@ import org.w3c.dom.Node;
  * @author mengbo
  * @version 1.5
  */
-public class ElementResizableEditPolicy extends ResizableEditPolicy {
+public class ElementResizableEditPolicy extends ResizableEditPolicy implements IEnhancedSelectionEditPolicy 
+{
 	private static final Insets INSETS_1 = new Insets(1, 1, 1, 1);
 
 	private static final int THRESHHOLD = 3;
@@ -435,4 +440,32 @@ public class ElementResizableEditPolicy extends ResizableEditPolicy {
 		feedback.translateToRelative(rect);
 		feedback.setBounds(rect);
 	}
+
+    public Cursor getSelectionToolCursor(Point mouseLocation) {
+        // by default return null to indicate system default.  
+        // sub-classes should override to customize
+        return null;
+    }
+
+    protected DragTracker getSelectionTracker(LocationRequest request)
+    {
+        // by default, return null
+        // sub-classes should override to customize
+        return null;
+    }
+    
+    public DragTracker getSelectionDragTracker(LocationRequest request) 
+    {
+        if (org.eclipse.jst.pagedesigner.requests.PageDesignerRequestConstants.REQ_SELECTION_TRACKER.equals(request.getType())){
+            return getSelectionTracker(request);
+        }
+        
+        // be default don't specify a selection drag tracker
+        // sub-classes should override to customize
+        if (shouldUseObjectMode(request)) {
+            return new ObjectModeDragTracker(getHost());
+        }
+        return new RangeDragTracker(getHost());
+
+    }
 }

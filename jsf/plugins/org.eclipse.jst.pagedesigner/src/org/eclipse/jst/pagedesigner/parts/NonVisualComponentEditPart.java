@@ -45,6 +45,8 @@ public class NonVisualComponentEditPart extends NodeEditPart
         super.createEditPolicies();
         installEditPolicy(EditPolicy.SELECTION_FEEDBACK_ROLE
                           , new NonVisualChildGraphicalEditPolicy());
+        installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
+                null);
     }
 
     protected ITagConverter getTagConverter()
@@ -65,5 +67,11 @@ public class NonVisualComponentEditPart extends NodeEditPart
     public Node getDOMNode() {
         return getModelElement();
     }
-    
+
+//    public DragTracker getDragTracker(Request request) {
+//        // TODO: need to define drag semantics for these
+//        // Also, right now edit part dragging causes bad behaviour
+//        // in the non-visual decorator
+//        return null;//new ObjectModeDragTracker(this);
+//    }
 }

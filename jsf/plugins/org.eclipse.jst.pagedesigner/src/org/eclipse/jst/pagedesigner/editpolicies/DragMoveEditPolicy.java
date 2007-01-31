@@ -11,15 +11,10 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.editpolicies;
 
-import org.eclipse.draw2d.ColorConstants;
+import java.util.Iterator;
+import java.util.List;
+
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.Label;
-import org.eclipse.draw2d.LineBorder;
-import org.eclipse.draw2d.RectangleFigure;
-import org.eclipse.draw2d.geometry.Dimension;
-import org.eclipse.draw2d.geometry.Insets;
-import org.eclipse.draw2d.geometry.Point;
-import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.commands.Command;
@@ -31,13 +26,13 @@ import org.eclipse.jst.pagedesigner.commands.MoveNodeCommand;
 import org.eclipse.jst.pagedesigner.dom.DOMPositionHelper;
 import org.eclipse.jst.pagedesigner.dom.DOMUtil;
 import org.eclipse.jst.pagedesigner.dom.IDOMPosition;
-import org.eclipse.jst.pagedesigner.parts.ElementEditPart;
 import org.eclipse.jst.pagedesigner.parts.NodeEditPart;
 import org.eclipse.jst.pagedesigner.validation.caret.ActionData;
 import org.eclipse.jst.pagedesigner.validation.caret.DnDPositionValidator;
 import org.eclipse.jst.pagedesigner.validation.caret.IPositionMediator;
+import org.eclipse.jst.pagedesigner.viewer.DefaultDropLocationStrategy;
 import org.eclipse.jst.pagedesigner.viewer.DesignPosition;
-import org.eclipse.jst.pagedesigner.viewer.EditPartPositionHelper;
+import org.eclipse.jst.pagedesigner.viewer.IDropLocationStrategy;
 import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
 import org.w3c.dom.Node;
 
@@ -45,19 +40,16 @@ import org.w3c.dom.Node;
  * @author mengbo
  * @version 1.5
  */
-public class DragMoveEditPolicy extends GraphicalEditPolicy {
-    // the amount of vertical offset below the mouse pointer to place
-    // the upper left of the drop hint tooltip
-	private static final int DROP_HINT_VERTICAL_OFFSET = 20;
-    private RectangleFigure _feedbackFigure;
-    private Label           _dropHintLabel;
+public class DragMoveEditPolicy extends GraphicalEditPolicy implements IDropRequestorProvider
+{
+    private List        _feedbackFigures;
 
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see org.eclipse.gef.editpolicies.AbstractEditPolicy#getCommand(org.eclipse.gef.Request)
 	 */
-	public Command getCommand(Request request) {
+	public final Command getCommand(Request request) {
 		if (!(request instanceof ChangeBoundsRequest)) {
 			return null;
 		}
@@ -124,32 +116,108 @@ public class DragMoveEditPolicy extends GraphicalEditPolicy {
 		return super.getTargetEditPart(request);
 	}
 
-	DesignPosition findPosition(ChangeBoundsRequest r) {
-		IPositionMediator mediator = new DnDPositionValidator(new ActionData(
-				ActionData.COMPONENT_MOVE, r.getEditParts()));
-		DesignPosition position = EditPartPositionHelper.findEditPartPosition(
-				getHost(), r.getLocation(), mediator);
+	protected final DesignPosition findPosition(ChangeBoundsRequest r) {
+		final IPositionMediator mediator = getDropChildValidator(r);
+        final IDropLocationStrategy dropStrategy = createDropLocationStrategy(r);
+		final DesignPosition position = 
+            dropStrategy.calculateDesignPosition(getHost(), r.getLocation(), mediator);
+        
+        // verify that the drop strategy has honoured it's contract that our
+        // mediator be respected
+        if (position != null)
+        {
+            if (!mediator.isValidPosition(position))
+            {
+                // if our mediator says no go, then veto the requestor
+                // there is no drop location
+                return null;
+            }
+        }
 		return position;
 	}
 
+    /**
+     * @param r
+     * @return the validator to be used to validate the 'request' to drop
+     * the edit parts specified by 'r' into this policy's host edit part
+     * MUST NOT RETURN NULL
+     */
+    protected final IPositionMediator getDropChildValidator(ChangeBoundsRequest r)
+    {
+        IPositionMediator mediator = createDropChildValidator(r);
+        
+        if (mediator == null)
+        {
+            mediator = createDefaultDropChildValidator(r);
+        }
+       
+        return mediator;
+    }
+    
+    /**
+     * @param r
+     * @return a mediator that can validate valid model drops into the
+     * host's edit part
+     */
+    protected IPositionMediator createDropChildValidator(ChangeBoundsRequest r)
+    {
+        // sub-class may override to customize the drop container validator
+        return null;
+    }
+    
+    protected final IPositionMediator createDefaultDropChildValidator(ChangeBoundsRequest r)
+    {
+        return new DnDPositionValidator(new ActionData(
+                ActionData.COMPONENT_MOVE, r.getEditParts()));
+    }
+    
+    protected final IDropLocationStrategy createDropLocationStrategy(ChangeBoundsRequest r)
+    {
+        List requestingParts = r.getEditParts();
+        
+        // TODO: support a composite strategy can collect all requesting parts
+        if (requestingParts.size() == 1)
+        {
+            EditPart requestPart = (EditPart) requestingParts.get(0);
+            IDropRequestorProvider strategyProvider = 
+                (IDropRequestorProvider) requestPart.getAdapter(IDropRequestorProvider.class);
+            
+            if (strategyProvider != null)
+            {
+                IDropLocationStrategy strategy = 
+                    strategyProvider.getDropRequestorLocationStrategy(r);
+                
+                if (strategy != null)
+                {
+                    return strategy;
+                }
+            }
+
+        }
+        
+        // by default, return the default strategy
+        return new DefaultDropLocationStrategy(getHost());
+    }
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see org.eclipse.gef.editpolicies.AbstractEditPolicy#eraseTargetFeedback(org.eclipse.gef.Request)
 	 */
-	public void eraseTargetFeedback(Request request) {
-		if (_feedbackFigure != null)
-//                && getFeedbackLayer().getChildren().contains(_feedbackFigure)) 
+	public final void eraseTargetFeedback(Request request) {
+        if (_feedbackFigures != null)
         {
-			removeFeedback(_feedbackFigure);
-			_feedbackFigure = null;
-		}
-        
-        if (_dropHintLabel != null)
-//                && getFeedbackLayer().getChildren().contains(_dropHintLabel))
-        {
-            removeFeedback(_dropHintLabel);
-            _dropHintLabel = null;
+            for (final Iterator it = _feedbackFigures.iterator(); it.hasNext();)
+            {
+                final IFigure figure = (IFigure) it.next();
+                
+                if (figure != null)
+                {
+                    removeFeedback(figure);
+                }
+            }
+            
+            _feedbackFigures.clear();
+            _feedbackFigures = null;
         }
 	}
 
@@ -158,109 +226,32 @@ public class DragMoveEditPolicy extends GraphicalEditPolicy {
 	 * 
 	 * @see org.eclipse.gef.editpolicies.AbstractEditPolicy#showTargetFeedback(org.eclipse.gef.Request)
 	 */
-	public void showTargetFeedback(Request request) {
+	public final void showTargetFeedback(Request request) {
 		if (request instanceof ChangeBoundsRequest) {
 			ChangeBoundsRequest r = (ChangeBoundsRequest) request;
-
+			
 			Object type = r.getType();
 			if (type != REQ_ADD && type != REQ_CLONE
-					&& type != REQ_MOVE_CHILDREN) {
+					&& type != REQ_MOVE_CHILDREN && type != REQ_MOVE) {
 				return;
 			}
-			//TODO: not used EditPart host = getHost();
-			DesignPosition position = findPosition(r);
-			if (position != null) {
-				Rectangle rect = EditPartPositionHelper
-						.convertToAbsoluteCaretRect(position);
 
-				// to avoid enlarge feedback pane.
-				rect = rect.intersect(getFeedbackLayer().getBounds());
-				showFeedbackRect(rect);
-                showDropHintLabel(r.getLocation(), position);
+            DesignPosition position = findPosition(r);
+			if (position != null) {
+                // erase any prior feedback
+                eraseTargetFeedback(request);
+                // add figures to feedback layer and save them in _feedbackFigures
+                // for later.
+                _feedbackFigures = createDropLocationStrategy(r).showTargetFeedback(getHost(), position, r); 
 			}
 		}
 	}
 
-	protected RectangleFigure getFeedbackFigure() {
-		if (this._feedbackFigure == null) {
-			_feedbackFigure = new RectangleFigure();
-			_feedbackFigure.setFill(true);
-			_feedbackFigure.setOutline(true);
-			_feedbackFigure.setLineWidth(1);
-			_feedbackFigure.setForegroundColor(ColorConstants.red);
-			_feedbackFigure.setBounds(new Rectangle(0, 0, 0, 0));
-			_feedbackFigure.setXOR(true);
-			addFeedback(_feedbackFigure);
-		}
-		return _feedbackFigure;
-	}
-
-	protected void showFeedbackRect(Rectangle rect) {
-		RectangleFigure pf = getFeedbackFigure();
-		pf.translateToRelative(rect);
-		pf.setBounds(rect);
-	}
-
-    /**
-     * Shows a label in a position relative to the drop marker
-     * that hints where the new component will be dropped in
-     * respect of components already there
-     */
-    protected void showDropHintLabel(Point mousePosition, DesignPosition position)
+    public IDropLocationStrategy getDropRequestorLocationStrategy(
+            Request request) 
     {
-        if (_dropHintLabel == null){
-            _dropHintLabel = new Label();
-            _dropHintLabel.setOpaque(true);
-            _dropHintLabel.setBackgroundColor(ColorConstants.tooltipBackground);
-            _dropHintLabel.setBorder(
-                    new LineBorder(ColorConstants.black, 1)
-                    {
-                        // add an extra pixel of inset to make sure the text
-                        // isn't pressed against the border
-                        public Insets getInsets(IFigure figure) {
-                            return new Insets(getWidth()+1);
-                        }
-                    }
-            );
-            addFeedback(_dropHintLabel);
-        }
-        final String hintText = getDropHintText(position);
-        _dropHintLabel.setText(hintText);
-        //TODO: need to handle viewport clipping and adjust label location appropriately
-        Dimension hintSize = _dropHintLabel.getPreferredSize();
-        Point hintLocation = new Point(mousePosition.x, mousePosition.y+DROP_HINT_VERTICAL_OFFSET);
-        
-        Rectangle hintRect = new Rectangle(hintLocation, hintSize);
-
-        // to avoid enlarge feedback pane.
-        //hintRect = hintRect.intersect(getFeedbackLayer().getBounds());
-        _dropHintLabel.setBounds(hintRect);
-    }
-    
-    private String getDropHintText(DesignPosition position)
-    {
-        StringBuffer buffer = new StringBuffer("Place");
-        
-        EditPart prevPart = position.getSiblingEditPart(false);
-        EditPart nextPart = position.getSiblingEditPart(true);
-
-        if (nextPart instanceof ElementEditPart)
-        {
-            buffer.append(" before ");
-            buffer.append(((ElementEditPart)nextPart).getTagConvert().getHostElement().getNodeName());
-            buffer.append(",");
-        }
-        
-        if (prevPart instanceof ElementEditPart)
-        {
-            buffer.append(" after ");
-            buffer.append(((ElementEditPart)prevPart).getTagConvert().getHostElement().getNodeName());
-            buffer.append(",");
-        }
-        
-        buffer.append(" inside ");
-        buffer.append(position.getContainerNode().getNodeName());
-        
-        return buffer.toString();
+        // by default, always return null.  Sub-classes should override
+        // to customize their drop request strategy
+        return null;
     }
 }

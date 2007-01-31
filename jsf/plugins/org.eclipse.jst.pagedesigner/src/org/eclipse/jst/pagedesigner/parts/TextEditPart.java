@@ -12,7 +12,9 @@
 package org.eclipse.jst.pagedesigner.parts;
 
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.gef.EditPart;
+import org.eclipse.gef.SharedCursors;
 import org.eclipse.jst.pagedesigner.css2.ICSSStyle;
 import org.eclipse.jst.pagedesigner.css2.layout.CSSTextFigure;
 import org.eclipse.jst.pagedesigner.css2.layout.ICSSFigure;
@@ -24,6 +26,7 @@ import org.eclipse.jst.pagedesigner.range.RangeUtil;
 import org.eclipse.jst.pagedesigner.utils.HTMLUtil;
 import org.eclipse.jst.pagedesigner.viewer.DesignRange;
 import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
+import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.wst.sse.core.internal.provisional.INodeNotifier;
 import org.w3c.dom.Node;
 import org.w3c.dom.Text;
@@ -171,6 +174,14 @@ public class TextEditPart extends SubNodeEditPart implements ICSSTextProvider {
 	}
 
 	public boolean isSelectable() {
-		return false;
+        // controls, amongst other things, whether or not a standard 
+        // hit test in SelectionTool for mouse over will find this edit part 
+		return true;
 	}
+
+    public Cursor getCursor(Point mouseLocation) {
+        return SharedCursors.IBEAM;
+    }
+    
+    
 }

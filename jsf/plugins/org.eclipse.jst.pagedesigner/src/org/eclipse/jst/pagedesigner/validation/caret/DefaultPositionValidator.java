@@ -12,6 +12,7 @@
 package org.eclipse.jst.pagedesigner.validation.caret;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.gef.EditPart;
@@ -30,7 +31,7 @@ import org.w3c.dom.Node;
 public class DefaultPositionValidator implements IPositionMediator {
 	private List _rules = new ArrayList();
 
-	ActionData _actionData;
+	protected final ActionData _actionData;
 
 	/**
 	 * @return Returns the _actionData.
@@ -49,26 +50,18 @@ public class DefaultPositionValidator implements IPositionMediator {
 
 	protected void initRules() {
 		_rules.clear();
-		_rules.add(new BasicPositionRule(this, _actionData));
-		_rules.add(new IETablePositionRule(this, _actionData));
-		_rules.add(new RootContainerPositionRule(this, _actionData));
-		_rules.add(new JSFRootContainerPositionRule(this, _actionData));
-		_rules.add(new WhitespacePositionMoveRule(this, _actionData));
+		addRule(new BasicPositionRule(this, _actionData));
+        addRule(new IETablePositionRule(this, _actionData));
+        addRule(new RootContainerPositionRule(this, _actionData));
+        addRule(new JSFRootContainerPositionRule(this, _actionData));
+        addRule(new WhitespacePositionMoveRule(this, _actionData));
 	}
 
 	/**
 	 * @return Returns the _rules.
 	 */
 	public List getRules() {
-		return _rules;
-	}
-
-	/**
-	 * @param _rules
-	 *            The _rules to set.
-	 */
-	protected void setRules(List rules) {
-		_rules = rules;
+		return Collections.unmodifiableList(_rules);
 	}
 
 	protected void addRule(IValidationRule rule) {
@@ -131,6 +124,7 @@ public class DefaultPositionValidator implements IPositionMediator {
 	 * @see org.eclipse.jst.pagedesigner.caret.IValidator#isValidPosition(org.eclipse.jst.pagedesigner.dom.IDOMPosition)
 	 */
 	public boolean isValidPosition(IDOMPosition position) {
+        // if position is really a IDOMRefPosition, convert it to DOMPosition
 		position = EditHelper.ensureDOMPosition(position);
 		boolean refLeft = true, refRight = true, result = true;
 		if (position == null) {
@@ -139,13 +133,23 @@ public class DefaultPositionValidator implements IPositionMediator {
 		List rules = getRules();
 		for (int i = 0, n = rules.size(); i < n; i++) {
 			Object rule = rules.get(i);
+            
+            // rule may be an IValidationRule that is not a position rule
+            // so only use those that are actually position rules
 			if (rule instanceof IPositionRule) {
-				// editable?
+                // the IDOMPosition represents a position somewhere in a parent
+                // node based on a node list index.  We need to verify that the
+                // parent is editable.
 				result &= ((IPositionRule) rule).isEditable(new Target(position
 						.getContainerNode()));
 				if (result) {
 					if (!position.isText()) {
 
+                        // TODO C.B: no sure what the point is here.  It appears
+                        // as though it is validating whether the sibling either
+                        // side of this position is a valid location for this 
+                        // action
+                        
 						// ref1?
 						Node node = EditModelQuery.getInstance().getSibling(
 								position, true);

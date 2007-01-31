@@ -12,6 +12,7 @@
 package org.eclipse.jst.pagedesigner.parts;
 
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.gef.DragTracker;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
@@ -22,9 +23,12 @@ import org.eclipse.gef.requests.LocationRequest;
 import org.eclipse.jst.pagedesigner.dnd.LocalDropRequest;
 import org.eclipse.jst.pagedesigner.dnd.internal.LocalDropEditPolicy;
 import org.eclipse.jst.pagedesigner.editpolicies.DragMoveEditPolicy;
+import org.eclipse.jst.pagedesigner.editpolicies.IDropRequestorProvider;
 import org.eclipse.jst.pagedesigner.itemcreation.ItemCreationEditPolicy;
 import org.eclipse.jst.pagedesigner.itemcreation.ItemCreationRequest;
 import org.eclipse.jst.pagedesigner.tools.RangeDragTracker;
+import org.eclipse.jst.pagedesigner.viewer.IDropLocationStrategy;
+import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.ui.views.properties.IPropertySource;
 import org.eclipse.wst.sse.core.internal.provisional.INodeAdapter;
 import org.eclipse.wst.sse.core.internal.provisional.INodeNotifier;
@@ -36,7 +40,7 @@ import org.w3c.dom.Node;
  * @author mengbo
  */
 public abstract class NodeEditPart extends AbstractGraphicalEditPart implements
-		INodeAdapter {
+		INodeAdapter, IDropRequestorProvider {
 
 	private IDOMDocument _destDocument;
 	private boolean      _isDragActive;
@@ -134,6 +138,11 @@ public abstract class NodeEditPart extends AbstractGraphicalEditPart implements
 						.getAdapterFor(IPropertySource.class);
 			}
 		}
+        else if (IDropRequestorProvider.class.equals(key))
+        {
+            // I am my own drop requestor
+            return this;
+        }
 
 		if (obj instanceof IAdaptable) {
 			Object ret = ((IAdaptable) obj).getAdapter(key);
@@ -197,5 +206,41 @@ public abstract class NodeEditPart extends AbstractGraphicalEditPart implements
     public void setDragActive(boolean newValue)
     {
         _isDragActive = newValue;
+    }
+    
+    /**
+     * @param defaultCursor
+     * @return this edit part's cursor or null if this edit part
+     * does not wish to specify a specific cursor (the default
+     * should be used).  
+     * Note that this is only called when no drag tracker is active,
+     * when the mouse enters the edit part with the RangeSelectionTool
+     * and the current state is INITIAL.  This allows the editpart to
+     * specify a custom mouse-over tool cursor
+     * TODO: perhaps getCursor is not a specific enough a name
+     */
+    public Cursor getCursor(Point mouseLocation)
+    {
+        return null;
+    }
+    
+    /**
+     * @param request
+     * @return a drop location strategy to determine drop locations for this edit part
+     * when it is the part being dropped (drop requestor).
+     */
+    public IDropLocationStrategy getDropRequestorLocationStrategy(Request request)
+    {
+        // by default query the primary drag role policy
+        EditPolicy dragRolePolicy = getEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE);
+        
+        if (dragRolePolicy instanceof IDropRequestorProvider)
+        {
+            return ((IDropRequestorProvider)dragRolePolicy).getDropRequestorLocationStrategy(request);
+        }
+       
+        // if our edit policy doesn't support it, return null to indicate
+        // we have no strategy
+        return null;
     }
 }

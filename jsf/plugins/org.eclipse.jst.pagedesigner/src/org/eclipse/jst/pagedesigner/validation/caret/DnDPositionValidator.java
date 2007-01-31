@@ -30,4 +30,14 @@ public class DnDPositionValidator extends DefaultPositionValidator {
 	public DnDPositionValidator(ActionData actionData) {
 		super(actionData);
 	}
+
+    /**
+     * Override to make adding rules public on Dnd validators
+     */
+    public void addRule(IValidationRule rule) 
+    {
+        super.addRule(rule);
+    }
+    
+    
 }

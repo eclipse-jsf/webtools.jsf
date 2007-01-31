@@ -13,6 +13,7 @@ package org.eclipse.jst.pagedesigner.tools;
 
 import java.util.Collections;
 
+import org.eclipse.draw2d.Cursors;
 import org.eclipse.gef.DragTracker;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.RequestConstants;
@@ -59,10 +60,17 @@ public class RangeDragTracker extends TargetingTool implements DragTracker {
 	 * @see org.eclipse.gef.tools.AbstractTool#calculateCursor()
 	 */
 	protected Cursor calculateCursor() {
-		if (isInState(STATE_INITIAL | STATE_DRAG | STATE_ACCESSIBLE_DRAG)) {
-			return getDefaultCursor();
-		}
-		return super.calculateCursor();
+        return Cursors.IBEAM;
+//		if (isInState(STATE_INITIAL))
+//        {
+//            return Cursors.IBEAM;
+//        }
+//        else if (isInState(STATE_DRAG | STATE_ACCESSIBLE_DRAG))
+//        {
+//			return getDefaultCursor();
+//		}
+//        return Cursors.IBEAM;
+//		return super.calculateCursor();
 	}
 
 	/**
@@ -297,4 +305,10 @@ public class RangeDragTracker extends TargetingTool implements DragTracker {
 					.updateHorizontalPos();
 		}
 	}
+
+    protected boolean handleHover() {
+        boolean retValue = super.handleHover();
+        refreshCursor();
+        return retValue;
+    }
 }

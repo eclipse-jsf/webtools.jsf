@@ -158,8 +158,12 @@ public class JSFRootContainerPositionRule extends DefaultPositionRule {
 	public boolean canReference(Target target, boolean atRight) {
 		Node node = target.getNode();
 		if (node.getLocalName() != null) {
+            // if the local name of the target is in the list of JSF root
+            // containers
 			if (Arrays.asList(JSF_ROOT_CONTAINERS).contains(
 					node.getLocalName().toLowerCase())) {
+                
+                // verify that either the target is 
 				return EditModelQuery.isChild(
 						RootContainerPositionRule.HTML_ROOT_CONTAINERS, node,
 						false, false)

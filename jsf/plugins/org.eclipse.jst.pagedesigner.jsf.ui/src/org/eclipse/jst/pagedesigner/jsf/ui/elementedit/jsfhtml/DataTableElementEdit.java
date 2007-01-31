@@ -11,23 +11,31 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.jsf.ui.elementedit.jsfhtml;
 
+import java.util.Iterator;
+import java.util.List;
+
+import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.geometry.Point;
+import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.gef.DragTracker;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
+import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.commands.Command;
+import org.eclipse.gef.requests.ChangeBoundsRequest;
+import org.eclipse.gef.requests.LocationRequest;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-
 import org.eclipse.jst.pagedesigner.actions.single.SelectEditPartAction;
 import org.eclipse.jst.pagedesigner.editors.PageDesignerActionConstants;
+import org.eclipse.jst.pagedesigner.editpolicies.DragMoveEditPolicy;
 import org.eclipse.jst.pagedesigner.editpolicies.ElementResizableEditPolicy;
+import org.eclipse.jst.pagedesigner.jsf.core.dom.JSFDOMUtil;
 import org.eclipse.jst.pagedesigner.jsf.ui.JSFUIPlugin;
 import org.eclipse.jst.pagedesigner.jsf.ui.actions.DeleteHColumnHeaderFooterAction;
 import org.eclipse.jst.pagedesigner.jsf.ui.actions.DeleteHeaderFooterAction;
@@ -51,7 +59,18 @@ import org.eclipse.jst.pagedesigner.tableedit.InsertRowColumnAction;
 import org.eclipse.jst.pagedesigner.tableedit.TableInsertRequest;
 import org.eclipse.jst.pagedesigner.tableedit.TableResizeRequest;
 import org.eclipse.jst.pagedesigner.tableedit.TableRowColumnDeleteRequest;
+import org.eclipse.jst.pagedesigner.tools.ObjectModeDragTracker;
+import org.eclipse.jst.pagedesigner.validation.caret.ActionData;
+import org.eclipse.jst.pagedesigner.validation.caret.DefaultPositionRule;
+import org.eclipse.jst.pagedesigner.validation.caret.DnDPositionValidator;
+import org.eclipse.jst.pagedesigner.validation.caret.IPositionMediator;
+import org.eclipse.jst.pagedesigner.validation.caret.Target;
 import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
+import org.eclipse.swt.graphics.Cursor;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 /**
  * @author mengbo
@@ -203,17 +222,39 @@ public class DataTableElementEdit extends DefaultJSFHTMLElementEdit
     public void createEditPolicies(ElementEditPart part)
     {
         part.installEditPolicy(EditPolicy.SELECTION_FEEDBACK_ROLE, new DataTableResizePolicy(part));
+        part.installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
+                new MyDragMoveEditPolicy());
     }
 
     static class DataTableResizePolicy extends ElementResizableEditPolicy
     {
         ElementEditPart _part;
+        Cursor          _columnSelectCursor;
 
         public DataTableResizePolicy(ElementEditPart part)
         {
             _part = part;
         }
 
+        public void deactivate() {
+            super.deactivate();
+            if (_columnSelectCursor != null && !_columnSelectCursor.isDisposed())
+            {
+                _columnSelectCursor.dispose();
+                _columnSelectCursor = null;
+            }
+        }
+
+        private Cursor getColumnSelectCursor()
+        {
+            if (_columnSelectCursor == null)
+            {
+                final Image cursorImage = JSFUIPlugin.getDefault().getImage("column_select.gif");
+                _columnSelectCursor = new Cursor(null, cursorImage.getImageData(), 2, 5);
+            }
+            
+            return _columnSelectCursor;
+        }
         /* (non-Javadoc)
          * @see org.eclipse.gef.editpolicies.ResizableEditPolicy#getCommand(org.eclipse.gef.Request)
          */
@@ -270,6 +311,156 @@ public class DataTableElementEdit extends DefaultJSFHTMLElementEdit
                 return new DataTableDeleteColumnCommand(viewer, dataTable, deleteReq.getIndex());
             }
             return super.getCommand(request);
+        }
+
+        public Cursor getSelectionToolCursor(Point mouseLocation) 
+        {
+            if (hitTestColumnSelection(mouseLocation))
+            {
+                return getColumnSelectCursor();
+            }
+            
+            return null;
+        }
+
+        protected DragTracker getSelectionTracker(LocationRequest request) {
+            final Point mouseLocator = request.getLocation();
+            if (hitTestColumnSelection(mouseLocator))
+            {
+                ObjectModeDragTracker dragTracker =  new ObjectModeDragTracker(getHost())
+                {
+                    protected boolean handleButtonDown(int button)
+                    {
+                        // only customize the case where we are in a column selection mode
+                        if (button == 1)
+                        {
+                            EditPart retarget = 
+                                getRetargetSelectionEditPart(mouseLocator);
+                            
+                            if (retarget != null)
+                            {
+                                setSourceEditPart(retarget);
+                            }
+                        }
+                        
+                        // default
+                        return super.handleButtonDown(button);
+                    }
+                };
+                
+                dragTracker.setDefaultCursor(getSelectionToolCursor(mouseLocator));
+                return dragTracker;
+            }
+            return new ObjectModeDragTracker(getHost());
+        }
+
+        public DragTracker getSelectionDragTracker(LocationRequest request) {
+            return getSelectionTracker(request);
+        }
+
+        public EditPart getRetargetSelectionEditPart(Point mouseLocation) {
+            if (hitTestColumnSelection(mouseLocation))
+            {
+                GraphicalEditPart editPart = (GraphicalEditPart) getHost();
+                List children = editPart.getChildren();
+                
+                for (Iterator it = children.iterator(); it.hasNext();)
+                {
+                    GraphicalEditPart child = (GraphicalEditPart) it.next();
+
+                    if (child instanceof NodeEditPart)
+                    {
+                        Node childNode = ((NodeEditPart)child).getDOMNode();
+
+                        if (JSFDOMUtil.isHColumn(childNode))
+                        {
+                            Point relativeMousePointer = mouseLocation.getCopy();
+                            IFigure hostFigure = child.getFigure();
+                            hostFigure.translateToRelative(relativeMousePointer);
+                            Rectangle hostBounds = hostFigure.getBounds();
+                            if (relativeMousePointer.x >= hostBounds.x
+                                    && relativeMousePointer.x < hostBounds.x+hostBounds.width)
+                            {
+                                return child;
+                            }
+                        }
+                    }
+                }
+            }
+            
+            // otherwise, don't retarget
+            return null;
+        }
+
+        private boolean hitTestColumnSelection(Point mouseLocation)
+        {
+            final GraphicalEditPart part = (GraphicalEditPart) getHost();
+            final IFigure panelFigure = part.getFigure();
+            
+            Point  relativeLocation = mouseLocation.getCopy();
+            panelFigure.translateToRelative(relativeLocation);
+
+            final int yoffsetAbs = Math.abs(panelFigure.getBounds().y - relativeLocation.y);
+            
+            if (yoffsetAbs <= 4)
+            {
+                return true;
+            }
+            
+            return false;
+        }
+    }
+    
+    public static class MyDragMoveEditPolicy extends DragMoveEditPolicy 
+    {
+        protected IPositionMediator createDropChildValidator(
+                ChangeBoundsRequest r) 
+        {
+            DnDPositionValidator validator = 
+                new DnDPositionValidator(new ActionData(
+                        ActionData.COMPONENT_MOVE, r.getEditParts()));
+            validator.addRule(new OnlyColumnsAndFacetsRule(validator, validator.getActionData()));
+            return validator;
+        }
+        
+        private static class OnlyColumnsAndFacetsRule extends DefaultPositionRule
+        {
+            public OnlyColumnsAndFacetsRule(IPositionMediator mediator,
+                    ActionData actionData) {
+                super(mediator, actionData);
+            }
+
+            public boolean isEditable(Target target) {
+                // TODO: 
+                if ("dataTable".equals(target.getNode().getLocalName()))
+                {
+                    return isDataDroppable();
+                }
+                
+                return true;
+            }
+            
+            private boolean isDataDroppable()
+            {
+                List editParts = (List) _actionData.getData();
+                
+                for (Iterator it = editParts.iterator(); it.hasNext();)
+                {
+                    EditPart editPart = (EditPart) it.next();
+                    if (editPart instanceof NodeEditPart)
+                    {
+                        Node node = ((NodeEditPart)editPart).getDOMNode();
+                        // TODO: need proper lib call that verifies tag lib
+                        if (!"facet".equals(node.getLocalName())
+                                && !"column".equals(node.getLocalName()))
+                        {
+                            return false;
+                        }
+                    }
+                }
+                
+                return true;
+            }
         }
     }
 }

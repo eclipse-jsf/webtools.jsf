@@ -52,23 +52,48 @@ class CornerRelativeHandleLocator extends RelativeHandleLocator
         }
     }
 
-    public void relocate(IFigure target) {
-        IFigure reference = getReferenceFigure();
-        Rectangle targetBounds = new PrecisionRectangle(getReferenceBox().getResized(-1, -1));
-        reference.translateToAbsolute(targetBounds);
-        target.translateToRelative(targetBounds);
-        //targetBounds.resize(1, 1);
-
-        Dimension targetSize = target.getPreferredSize();
-
+    /**
+     * Pass in targetBounds to be updated and newTargetSize.  targetBounds will
+     * be applied to the figure that is being relocated immediately after this method
+     * @param targetBounds
+     * @param newTargetSize
+     */
+    protected void relocateBounds(Rectangle targetBounds, Dimension newTargetSize)
+    {
         // copied from super.relocate because relativeX/Y are private in super
         // changed from super to remove div by 2 that centers target; we want
         // it to be corner-to-corner
         targetBounds.x
-            += (int) ((targetBounds.width+2 * relativeX) + ((targetSize.width+1)*offsetXMultiplier));
+            += (int) (((targetBounds.width+2) * relativeX) + ((newTargetSize.width+1)*offsetXMultiplier));
         targetBounds.y
-            += (int) (targetBounds.height * relativeY + ((targetSize.height+1)*offsetYMultiplier));
-        targetBounds.setSize(targetSize);
+            += (int) (targetBounds.height * relativeY + ((newTargetSize.height+1)*offsetYMultiplier));
+
+        targetBounds.setSize(newTargetSize);
+    }
+
+    /**
+     * @param relocateFigure
+     * @return a modifiable Rectangle that represents the bounds of the figure to be relocated
+     */
+    protected Rectangle getCurrentTargetBounds(IFigure relocateFigure)
+    {
+        IFigure reference = getReferenceFigure();
+        Rectangle targetBounds = new PrecisionRectangle(getReferenceBox().getResized(-1, -1));
+        reference.translateToAbsolute(targetBounds);
+        relocateFigure.translateToRelative(targetBounds);
+        return targetBounds;
+    }
+    
+    protected Dimension getNewTargetSize(IFigure relocateFigure)
+    {
+        return relocateFigure.getPreferredSize();
+    }
+    
+    public void relocate(IFigure target) {
+        Rectangle targetBounds = getCurrentTargetBounds(target);
+        Dimension targetSize = getNewTargetSize(target);
+        relocateBounds(targetBounds, targetSize);
+
         target.setBounds(targetBounds);        
     }
 }

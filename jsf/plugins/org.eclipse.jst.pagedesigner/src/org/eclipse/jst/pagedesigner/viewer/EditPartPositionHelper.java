@@ -484,12 +484,12 @@ public class EditPartPositionHelper {
 	 * @param box
 	 * @return
 	 */
-	public static Rectangle getBoxBounds(IFigure figure, FlowBox box) {
-		Rectangle r = new Rectangle(box._x, box._y, box.getWidth(), box
-				.getHeight());
-		figure.translateToAbsolute(r);
-		return r;
-	}
+//	public static Rectangle getBoxBounds(IFigure figure, FlowBox box) {
+//		Rectangle r = new Rectangle(box._x, box._y, box.getWidth(), box
+//				.getHeight());
+//		figure.translateToAbsolute(r);
+//		return r;
+//	}
 
 	/**
 	 * @param child
