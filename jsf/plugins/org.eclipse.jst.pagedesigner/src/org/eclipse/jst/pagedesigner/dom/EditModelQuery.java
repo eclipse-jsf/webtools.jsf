@@ -860,14 +860,23 @@ public class EditModelQuery {
 	}
 
 	/**
-	 * Determine whether a node is a child of node that is named as 'name', if
-	 * the node itself is named as 'name' return true also.
-	 * 
-	 * @param names
-	 * @param node
-	 * @return
+     * The net effect of this method is that (subject to flags), true
+     * is returned if 'node' is the descendant (not really a child)
+     * of a tag with a local name in the list of 'names'.
+     * 
+     * TODO C.B: I hate method.  Need to rename and possibly rewrite
+     * 
+	 * @param names -- check this list for valid local names
+	 * @param node -- the node to check
+	 * @param ignoreCase -- if true, each node name has toLowerCase applied to
+     * it before checking for it names.  NOTE: this assumes that names is already
+     * in lowercase.  TODO: this is crappy assumption
+	 * @param noSame -- if true, then node is skipped and only its parent nodes are
+     * checked
+	 * @return true if the local name of node or one of its parents
+     * is in the array of Strings called names.
 	 */
-	public static boolean isChild(String names[], Node node,
+	public static boolean isChild(final String names[], Node node,
 			boolean ignoreCase, boolean noSame) {
 		if (node == null) {
 			return false;
@@ -875,16 +884,30 @@ public class EditModelQuery {
 		if (noSame) {
 			node = node.getParentNode();
 		}
+        
+        final List namesAsList = Arrays.asList(names);
+        
 		while (node != null && !isDocument(node)) {
 			String nodeName = node.getLocalName();
-			if (nodeName != null
-					&& (ignoreCase
-							&& Arrays.asList(names).contains(
-									nodeName.toLowerCase()) || !ignoreCase
-							&& Arrays.asList(names).contains(nodeName))) {
-				return true;
+
+			if (nodeName != null)
+            {
+			    if (ignoreCase)
+                {
+			        nodeName = nodeName.toLowerCase();
+                }
+                
+                if (namesAsList.contains(nodeName))
+                {
+                    return true;
+                }
 			}
+            Node oldNode = node;
 			node = node.getParentNode();
+            if (oldNode == node)
+            {
+                throw new IllegalStateException("Infinite loop discovered in DOM tree");
+            }
 		}
 		return false;
 	}
