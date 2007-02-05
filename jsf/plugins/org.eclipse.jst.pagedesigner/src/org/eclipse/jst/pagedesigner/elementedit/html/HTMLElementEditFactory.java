@@ -11,24 +11,29 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.elementedit.html;
 
+import org.eclipse.jst.pagedesigner.IHTMLConstants;
 import org.eclipse.jst.pagedesigner.IJMTConstants;
+import org.eclipse.jst.pagedesigner.dom.TagIdentifier;
+import org.eclipse.jst.pagedesigner.dom.TagIdentifierFactory;
 import org.eclipse.jst.pagedesigner.elementedit.IElementEdit;
 import org.eclipse.jst.pagedesigner.elementedit.IElementEditFactory;
-import org.w3c.dom.Element;
 
 /**
  * @author mengbo
  * @version 1.5
  */
-public class HTMLElementEditFactory implements IElementEditFactory {
-	/*
+public class HTMLElementEditFactory implements IElementEditFactory 
+{
+    final static TagIdentifier HTMLTABLE_TAG_IDENTIFIER =
+        TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_HTML, IHTMLConstants.TAG_TABLE);
+    
+    /*
 	 * (non-Javadoc)
 	 * 
 	 * @see org.eclipse.jst.pagedesigner.elementedit.IElementEditFactory#createElementEdit(org.w3c.dom.Element)
 	 */
-	public IElementEdit createElementEdit(Element element) {
-		String tag = element.getTagName();
-		if ("table".equalsIgnoreCase(tag)) {
+	public IElementEdit createElementEdit(TagIdentifier tagIdentifier) {
+		if (HTMLTABLE_TAG_IDENTIFIER.isSameTagType(tagIdentifier)) {
 			return new TableElementEdit();
 		}
 		return null;
@@ -42,5 +47,4 @@ public class HTMLElementEditFactory implements IElementEditFactory {
 	public String getSupportedURI() {
 		return IJMTConstants.URI_HTML;
 	}
-
 }

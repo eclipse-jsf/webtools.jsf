@@ -12,15 +12,10 @@
 package org.eclipse.jst.pagedesigner.validation.caret;
 
 import java.util.Arrays;
-import java.util.List;
 
-import org.eclipse.gef.EditPart;
 import org.eclipse.jst.pagedesigner.IJMTConstants;
 import org.eclipse.jst.pagedesigner.dom.EditModelQuery;
-import org.eclipse.jst.pagedesigner.itemcreation.ItemCreationRequest;
-import org.eclipse.jst.pagedesigner.utils.JSPUtil;
-import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
-import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
+import org.eclipse.jst.pagedesigner.dom.TagIdentifier;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
@@ -39,7 +34,6 @@ public class JSFRootContainerPositionRule extends DefaultPositionRule {
 	public JSFRootContainerPositionRule(IPositionMediator mediator,
 			ActionData actionData) {
 		super(mediator, actionData);
-		// TODO Auto-generated constructor stub
 	}
 
 	/*
@@ -50,37 +44,25 @@ public class JSFRootContainerPositionRule extends DefaultPositionRule {
 	public boolean hasEditableArea(Target target) {
 		Node node = target.getNode();
 		if (hasBasicContainers(EditModelQuery.getDocumentNode(node))) {
-			if (_actionData.getActionType() == ActionData.PALETTE_DND
-					|| _actionData.getActionType() == ActionData.COMPONENT_MOVE) {
-				if (_actionData.getData() instanceof ItemCreationRequest) {
-					String uri = ((ItemCreationRequest) _actionData.getData())
-							.getItemDescriptor().getURI();
-					if (IJMTConstants.URI_JSF_HTML.equalsIgnoreCase(uri)
-							|| IJMTConstants.URI_JSF_CORE.equalsIgnoreCase(uri)) {
-						boolean result = EditModelQuery.isChild(
-								JSF_ROOT_CONTAINERS, node, true, false);
-						return result
-								| EditModelQuery.getChild(node,
-										JSF_ROOT_CONTAINERS, 3, false) != null;
-					}
-				} else if (_actionData.getData() instanceof List) {
-					IDOMNode carriedNode = ((IDOMNode) Target
-							.resolveNode((EditPart) ((List) _actionData
-									.getData()).get(0)));
-					IDOMModel model = carriedNode.getModel();
-					String uri = JSPUtil.findURIForPrefix(model, carriedNode
-							.getPrefix());
-					if (IJMTConstants.URI_JSF_HTML.equalsIgnoreCase(uri)
-							|| IJMTConstants.URI_JSF_CORE.equalsIgnoreCase(uri)) {
-						return EditModelQuery.isChild(JSF_ROOT_CONTAINERS,
-								node, true, false);
-					}
+            ActionData actionData = getActionData();
+			if (actionData instanceof DropActionData) {
+                DropActionData dropActionData = (DropActionData) actionData;
+                TagIdentifier tagId = 
+                     (TagIdentifier) dropActionData.getDropData().getTagIdentifiers().get(0);
+                final String uri  = tagId.getUri();
+				if (IJMTConstants.URI_JSF_HTML.equalsIgnoreCase(uri)
+						|| IJMTConstants.URI_JSF_CORE.equalsIgnoreCase(uri)) {
+					boolean result = EditModelQuery.isChild(
+							JSF_ROOT_CONTAINERS, node, true, false);
+					return result
+							|| EditModelQuery.getChild(node,
+									JSF_ROOT_CONTAINERS, 3, false) != null;
 				}
-			} else if (_actionData.getActionType() == ActionData.DATABINDING_DND) {
+			} else if (getActionData().getActionType() == ActionData.DATABINDING_DND) {
 				boolean result = EditModelQuery.isChild(JSF_ROOT_CONTAINERS,
 						node, true, false);
 				return result
-						| EditModelQuery.getChild(node, JSF_ROOT_CONTAINERS, 3,
+						|| EditModelQuery.getChild(node, JSF_ROOT_CONTAINERS, 3,
 								false) != null;
 			}
 		}
@@ -96,30 +78,19 @@ public class JSFRootContainerPositionRule extends DefaultPositionRule {
 		boolean result = true;
 		Node node = target.getNode();
 		if (hasBasicContainers(EditModelQuery.getDocumentNode(node))) {
-			if (_actionData.getActionType() == ActionData.PALETTE_DND
-					|| _actionData.getActionType() == ActionData.COMPONENT_MOVE) {
-				if (_actionData.getData() instanceof ItemCreationRequest) {
-					String uri = ((ItemCreationRequest) _actionData.getData())
-							.getItemDescriptor().getURI();
-					if (IJMTConstants.URI_JSF_HTML.equalsIgnoreCase(uri)
-							|| IJMTConstants.URI_JSF_CORE.equalsIgnoreCase(uri)) {
-						result = EditModelQuery.isChild(JSF_ROOT_CONTAINERS,
-								node, true, false);
-					}
-				} else if (_actionData.getData() instanceof List) {
-					IDOMNode carriedNode = ((IDOMNode) Target
-							.resolveNode((EditPart) ((List) _actionData
-									.getData()).get(0)));
-					IDOMModel model = carriedNode.getModel();
-					String uri = JSPUtil.findURIForPrefix(model, carriedNode
-							.getPrefix());
-					if (IJMTConstants.URI_JSF_HTML.equalsIgnoreCase(uri)
-							|| IJMTConstants.URI_JSF_CORE.equalsIgnoreCase(uri)) {
-						result = EditModelQuery.isChild(JSF_ROOT_CONTAINERS,
-								node, true, false);
-					}
+            ActionData actionData = getActionData();
+            if (actionData instanceof DropActionData) {
+                DropActionData dropActionData = (DropActionData) actionData;
+                TagIdentifier tagId = 
+                     (TagIdentifier) dropActionData.getDropData().getTagIdentifiers().get(0);
+                final String uri  = tagId.getUri();
+
+				if (IJMTConstants.URI_JSF_HTML.equalsIgnoreCase(uri)
+						|| IJMTConstants.URI_JSF_CORE.equalsIgnoreCase(uri)) {
+					result = EditModelQuery.isChild(JSF_ROOT_CONTAINERS,
+							node, true, false);
 				}
-			} else if (_actionData.getActionType() == ActionData.DATABINDING_DND) {
+			} else if (getActionData().getActionType() == ActionData.DATABINDING_DND) {
 				result = EditModelQuery.isChild(JSF_ROOT_CONTAINERS, node,
 						true, false);
 			}

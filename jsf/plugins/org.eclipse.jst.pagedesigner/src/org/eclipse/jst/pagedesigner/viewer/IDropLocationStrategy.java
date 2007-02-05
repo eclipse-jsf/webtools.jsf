@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.gef.EditPart;
-import org.eclipse.gef.requests.ChangeBoundsRequest;
+import org.eclipse.gef.requests.DropRequest;
 import org.eclipse.jst.pagedesigner.validation.caret.IPositionMediator;
 
 /**
@@ -43,5 +43,5 @@ public interface IDropLocationStrategy
      * before it can be fully initialized, which is why this call adds feedback and then
      * returns it.  The caller is responsible for erasing the figures in the list.
      */
-    List showTargetFeedback(EditPart host, DesignPosition position, ChangeBoundsRequest request);
+    List showTargetFeedback(EditPart host, DesignPosition position, DropRequest request);
 }

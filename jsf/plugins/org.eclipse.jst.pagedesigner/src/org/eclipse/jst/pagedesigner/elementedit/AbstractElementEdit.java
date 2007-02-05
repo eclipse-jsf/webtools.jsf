@@ -11,11 +11,14 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.elementedit;
 
+import org.eclipse.gef.EditPartViewer;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jst.pagedesigner.dom.TagIdentifier;
 import org.eclipse.jst.pagedesigner.parts.ElementEditPart;
 import org.eclipse.jst.pagedesigner.parts.NodeEditPart;
 import org.eclipse.jst.pagedesigner.utils.CMUtil;
+import org.eclipse.jst.pagedesigner.viewer.IDropLocationStrategy;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMElementDeclaration;
 import org.w3c.dom.Element;
 
@@ -87,4 +90,13 @@ public class AbstractElementEdit implements IElementEdit {
 		}
 		return true;
 	}
+
+    /** 
+     * By default, return null to signal caller should use its default strategy
+     */
+    public IDropLocationStrategy getDropRequestorLocationStrategy(TagIdentifier tag, EditPartViewer viewer) {
+        return null;
+    }
+    
+    
 }

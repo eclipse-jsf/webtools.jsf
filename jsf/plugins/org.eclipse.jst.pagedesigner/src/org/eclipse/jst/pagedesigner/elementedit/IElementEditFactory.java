@@ -11,7 +11,8 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.elementedit;
 
-import org.w3c.dom.Element;
+import org.eclipse.jst.pagedesigner.dom.TagIdentifier;
+
 
 /**
  * @author mengbo
@@ -23,7 +24,7 @@ public interface IElementEditFactory {
 	 * @param element
 	 * @return null if this factory don't support this element
 	 */
-	public IElementEdit createElementEdit(Element element);
+	public IElementEdit createElementEdit(TagIdentifier tagWrapper);
 
 	/**
 	 * get the URI namespace that this factory support. "null" means this

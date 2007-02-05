@@ -13,9 +13,10 @@ package org.eclipse.jst.pagedesigner.jsf.ui.elementedit.jsfcore;
 
 import org.eclipse.jst.pagedesigner.IJMTConstants;
 import org.eclipse.jst.pagedesigner.IJSFConstants;
+import org.eclipse.jst.pagedesigner.dom.TagIdentifier;
+import org.eclipse.jst.pagedesigner.dom.TagIdentifierFactory;
 import org.eclipse.jst.pagedesigner.elementedit.IElementEdit;
 import org.eclipse.jst.pagedesigner.elementedit.IElementEditFactory;
-import org.w3c.dom.Element;
 
 /**
  * @author mengbo
@@ -23,18 +24,22 @@ import org.w3c.dom.Element;
  */
 public class JSFCoreElementEditFactory implements IElementEditFactory
 {
+    public final static TagIdentifier LOADBUNDLE_TAG_IDENTIFIER =
+        TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_CORE, IJSFConstants.TAG_LOADBUNDLE);
 
+    public final static TagIdentifier FACET_TAG_IDENTIFIER =
+        TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_CORE, IJSFConstants.TAG_FACET);
+        
     /* (non-Javadoc)
      * @see org.eclipse.jst.pagedesigner.elementedit.IElementEditFactory#createElementEdit(org.w3c.dom.Element)
      */
-    public IElementEdit createElementEdit(Element element)
+    public IElementEdit createElementEdit(TagIdentifier tagIdentifier)
     {
-        String tagname = element.getLocalName();
-        if (IJSFConstants.TAG_LOADBUNDLE.equalsIgnoreCase(tagname))
+        if (LOADBUNDLE_TAG_IDENTIFIER.isSameTagType(tagIdentifier))
         {
             return new LoadBundleElementEdit();
         }
-        else if(IJSFConstants.TAG_FACET.equalsIgnoreCase(tagname))
+        else if(FACET_TAG_IDENTIFIER.isSameTagType(tagIdentifier))
         {
             return new FacetElementEdit();
         }

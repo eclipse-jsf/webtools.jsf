@@ -12,9 +12,11 @@
 package org.eclipse.jst.pagedesigner.jsf.ui.elementedit.jsfhtml;
 
 import org.eclipse.jst.pagedesigner.IJMTConstants;
+import org.eclipse.jst.pagedesigner.IJSFConstants;
+import org.eclipse.jst.pagedesigner.dom.TagIdentifier;
+import org.eclipse.jst.pagedesigner.dom.TagIdentifierFactory;
 import org.eclipse.jst.pagedesigner.elementedit.IElementEdit;
 import org.eclipse.jst.pagedesigner.elementedit.IElementEditFactory;
-import org.w3c.dom.Element;
 
 /**
  * @author mengbo
@@ -22,22 +24,29 @@ import org.w3c.dom.Element;
  */
 public class JSFHTMLElementEditFactory implements IElementEditFactory
 {
+    final static TagIdentifier DATA_TABLE_TAG_IDENTIFIER = 
+        TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_HTML, IJSFConstants.TAG_DATATABLE);
+    
+    final static TagIdentifier PANEL_GRID_TAG_IDENTIFIER =
+        TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_HTML, IJSFConstants.TAG_PANELGRID);
+    
+    final static TagIdentifier COLUMN_TAG_IDENTIFIER =
+        TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_HTML, IJSFConstants.TAG_COLUMN);
+        
     /* (non-Javadoc)
      * @see org.eclipse.jst.pagedesigner.elementedit.IElementEditFactory#createElementEdit(org.w3c.dom.Element)
      */
-    public IElementEdit createElementEdit(Element element)
+    public IElementEdit createElementEdit(final TagIdentifier tagIdentifier)
     {
-        String tagname = element.getLocalName();
-
-        if ("dataTable".equalsIgnoreCase(tagname))
+        if (DATA_TABLE_TAG_IDENTIFIER.isSameTagType(tagIdentifier))
         {
             return new DataTableElementEdit();
         }
-        else if ("panelGrid".equalsIgnoreCase(tagname))
+        else if (PANEL_GRID_TAG_IDENTIFIER.isSameTagType(tagIdentifier))
         {
             return new PanelGridElementEdit();
         }
-        else if ("column".equalsIgnoreCase(tagname))
+        else if (COLUMN_TAG_IDENTIFIER.isSameTagType(tagIdentifier))
         {
             return new ColumnElementEdit();
         }

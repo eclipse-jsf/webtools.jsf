@@ -33,7 +33,6 @@ public class WhitespacePositionMoveRule extends DefaultPositionRule implements
 	public WhitespacePositionMoveRule(IPositionMediator mediator,
 			ActionData actionData) {
 		super(mediator, actionData);
-		_actionData = actionData;
 	}
 
 	/*

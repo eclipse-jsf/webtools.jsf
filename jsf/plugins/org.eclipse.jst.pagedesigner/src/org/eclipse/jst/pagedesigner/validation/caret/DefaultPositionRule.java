@@ -23,7 +23,7 @@ public class DefaultPositionRule implements IPositionRule {
 
 	protected IPositionMediator _mediator;
 
-	protected ActionData _actionData;
+	private ActionData _actionData;
 
 	/**
 	 * 
@@ -38,6 +38,11 @@ public class DefaultPositionRule implements IPositionRule {
 		}
 	}
 
+    protected final ActionData getActionData()
+    {
+        return _actionData;
+    }
+    
 	/*
 	 * (non-Javadoc)
 	 * 

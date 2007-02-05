@@ -11,16 +11,12 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.editpolicies;
 
-import java.util.Iterator;
-import java.util.List;
-
-import org.eclipse.draw2d.IFigure;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.commands.UnexecutableCommand;
-import org.eclipse.gef.editpolicies.GraphicalEditPolicy;
 import org.eclipse.gef.requests.ChangeBoundsRequest;
+import org.eclipse.gef.requests.DropRequest;
 import org.eclipse.jst.pagedesigner.commands.CloneNodeCommand;
 import org.eclipse.jst.pagedesigner.commands.MoveNodeCommand;
 import org.eclipse.jst.pagedesigner.dom.DOMPositionHelper;
@@ -29,8 +25,9 @@ import org.eclipse.jst.pagedesigner.dom.IDOMPosition;
 import org.eclipse.jst.pagedesigner.parts.NodeEditPart;
 import org.eclipse.jst.pagedesigner.validation.caret.ActionData;
 import org.eclipse.jst.pagedesigner.validation.caret.DnDPositionValidator;
+import org.eclipse.jst.pagedesigner.validation.caret.DropActionData;
 import org.eclipse.jst.pagedesigner.validation.caret.IPositionMediator;
-import org.eclipse.jst.pagedesigner.viewer.DefaultDropLocationStrategy;
+import org.eclipse.jst.pagedesigner.validation.caret.DropActionData.DropData;
 import org.eclipse.jst.pagedesigner.viewer.DesignPosition;
 import org.eclipse.jst.pagedesigner.viewer.IDropLocationStrategy;
 import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
@@ -40,10 +37,8 @@ import org.w3c.dom.Node;
  * @author mengbo
  * @version 1.5
  */
-public class DragMoveEditPolicy extends GraphicalEditPolicy implements IDropRequestorProvider
+public class DragMoveEditPolicy extends DropEditPolicy
 {
-    private List        _feedbackFigures;
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -76,11 +71,6 @@ public class DragMoveEditPolicy extends GraphicalEditPolicy implements IDropRequ
 		if (DOMUtil.isAncester(draggedNode, hostNode)) {
 			return UnexecutableCommand.INSTANCE;
 		}
-
-		// System.out.println();
-		// System.out.println("r.type = " + r.getType());
-		// System.out.println("Host: " + hostNode);
-		// System.out.println("Dragged: " + draggedNode);
 
 		DesignPosition position = findPosition(r);
 		if (position == null || !position.isValid()) {
@@ -116,8 +106,12 @@ public class DragMoveEditPolicy extends GraphicalEditPolicy implements IDropRequ
 		return super.getTargetEditPart(request);
 	}
 
-	protected final DesignPosition findPosition(ChangeBoundsRequest r) {
+	protected final DesignPosition findPosition(DropRequest r) {
 		final IPositionMediator mediator = getDropChildValidator(r);
+        if (mediator == null)
+        {
+            return null;
+        }
         final IDropLocationStrategy dropStrategy = createDropLocationStrategy(r);
 		final DesignPosition position = 
             dropStrategy.calculateDesignPosition(getHost(), r.getLocation(), mediator);
@@ -136,122 +130,19 @@ public class DragMoveEditPolicy extends GraphicalEditPolicy implements IDropRequ
 		return position;
 	}
 
-    /**
-     * @param r
-     * @return the validator to be used to validate the 'request' to drop
-     * the edit parts specified by 'r' into this policy's host edit part
-     * MUST NOT RETURN NULL
-     */
-    protected final IPositionMediator getDropChildValidator(ChangeBoundsRequest r)
+    public void showTargetFeedback(Request request) 
     {
-        IPositionMediator mediator = createDropChildValidator(r);
-        
-        if (mediator == null)
-        {
-            mediator = createDefaultDropChildValidator(r);
+        Object type = request.getType();
+        // only show feedback for these request types
+        if (type == REQ_ADD || type == REQ_CLONE
+                || type == REQ_MOVE_CHILDREN || type == REQ_MOVE) {
+            super.showTargetFeedback(request);
         }
-       
-        return mediator;
     }
-    
-    /**
-     * @param r
-     * @return a mediator that can validate valid model drops into the
-     * host's edit part
-     */
-    protected IPositionMediator createDropChildValidator(ChangeBoundsRequest r)
-    {
-        // sub-class may override to customize the drop container validator
-        return null;
-    }
-    
-    protected final IPositionMediator createDefaultDropChildValidator(ChangeBoundsRequest r)
-    {
-        return new DnDPositionValidator(new ActionData(
-                ActionData.COMPONENT_MOVE, r.getEditParts()));
-    }
-    
-    protected final IDropLocationStrategy createDropLocationStrategy(ChangeBoundsRequest r)
-    {
-        List requestingParts = r.getEditParts();
-        
-        // TODO: support a composite strategy can collect all requesting parts
-        if (requestingParts.size() == 1)
-        {
-            EditPart requestPart = (EditPart) requestingParts.get(0);
-            IDropRequestorProvider strategyProvider = 
-                (IDropRequestorProvider) requestPart.getAdapter(IDropRequestorProvider.class);
-            
-            if (strategyProvider != null)
-            {
-                IDropLocationStrategy strategy = 
-                    strategyProvider.getDropRequestorLocationStrategy(r);
-                
-                if (strategy != null)
-                {
-                    return strategy;
-                }
-            }
 
-        }
-        
-        // by default, return the default strategy
-        return new DefaultDropLocationStrategy(getHost());
-    }
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.gef.editpolicies.AbstractEditPolicy#eraseTargetFeedback(org.eclipse.gef.Request)
-	 */
-	public final void eraseTargetFeedback(Request request) {
-        if (_feedbackFigures != null)
-        {
-            for (final Iterator it = _feedbackFigures.iterator(); it.hasNext();)
-            {
-                final IFigure figure = (IFigure) it.next();
-                
-                if (figure != null)
-                {
-                    removeFeedback(figure);
-                }
-            }
-            
-            _feedbackFigures.clear();
-            _feedbackFigures = null;
-        }
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.gef.editpolicies.AbstractEditPolicy#showTargetFeedback(org.eclipse.gef.Request)
-	 */
-	public final void showTargetFeedback(Request request) {
-		if (request instanceof ChangeBoundsRequest) {
-			ChangeBoundsRequest r = (ChangeBoundsRequest) request;
-			
-			Object type = r.getType();
-			if (type != REQ_ADD && type != REQ_CLONE
-					&& type != REQ_MOVE_CHILDREN && type != REQ_MOVE) {
-				return;
-			}
-
-            DesignPosition position = findPosition(r);
-			if (position != null) {
-                // erase any prior feedback
-                eraseTargetFeedback(request);
-                // add figures to feedback layer and save them in _feedbackFigures
-                // for later.
-                _feedbackFigures = createDropLocationStrategy(r).showTargetFeedback(getHost(), position, r); 
-			}
-		}
-	}
-
-    public IDropLocationStrategy getDropRequestorLocationStrategy(
-            Request request) 
+    protected final IPositionMediator createDefaultDropChildValidator(DropData r)
     {
-        // by default, always return null.  Sub-classes should override
-        // to customize their drop request strategy
-        return null;
+        return new DnDPositionValidator(new DropActionData(
+                ActionData.COMPONENT_MOVE, r));
     }
 }

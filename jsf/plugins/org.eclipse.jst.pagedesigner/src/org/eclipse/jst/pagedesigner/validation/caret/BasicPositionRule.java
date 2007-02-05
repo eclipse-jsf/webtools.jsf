@@ -41,8 +41,6 @@ public class BasicPositionRule extends DefaultPositionRule {
 		if (!EditValidateUtil.validNode(target.getNode())) {
 			return false;
 		}
-		// TODO: dead? Node node = target.getNode();
-		//TODO: dead? String name = node.getLocalName();
 		if (DefaultPositionRule.isWidget(target.getPart())) {
 			return false;
 		}

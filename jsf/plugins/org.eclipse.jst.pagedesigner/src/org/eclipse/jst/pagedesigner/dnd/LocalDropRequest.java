@@ -31,7 +31,6 @@ public class LocalDropRequest extends Request implements DropRequest {
 	 */
 	public LocalDropRequest() {
 		super(REQ_LOCAL_DROP);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

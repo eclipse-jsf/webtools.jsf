@@ -23,7 +23,7 @@ import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.commands.Command;
-import org.eclipse.gef.requests.ChangeBoundsRequest;
+import org.eclipse.gef.requests.DropRequest;
 import org.eclipse.gef.requests.LocationRequest;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuListener;
@@ -32,6 +32,7 @@ import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jst.pagedesigner.actions.single.SelectEditPartAction;
+import org.eclipse.jst.pagedesigner.dom.TagIdentifier;
 import org.eclipse.jst.pagedesigner.editors.PageDesignerActionConstants;
 import org.eclipse.jst.pagedesigner.editpolicies.DragMoveEditPolicy;
 import org.eclipse.jst.pagedesigner.editpolicies.ElementResizableEditPolicy;
@@ -47,6 +48,7 @@ import org.eclipse.jst.pagedesigner.jsf.ui.commands.jsfhtml.DataTableDeleteHeade
 import org.eclipse.jst.pagedesigner.jsf.ui.commands.jsfhtml.DataTableInsertColumnCommand;
 import org.eclipse.jst.pagedesigner.jsf.ui.commands.jsfhtml.DataTableInsertColumnHeaderCommand;
 import org.eclipse.jst.pagedesigner.jsf.ui.commands.jsfhtml.DataTableInsertHeaderCommand;
+import org.eclipse.jst.pagedesigner.jsf.ui.elementedit.jsfcore.JSFCoreElementEditFactory;
 import org.eclipse.jst.pagedesigner.jsf.ui.elementedit.request.DeleteHColumnHeaderFooterRequest;
 import org.eclipse.jst.pagedesigner.jsf.ui.elementedit.request.DeleteHeaderFooterRequest;
 import org.eclipse.jst.pagedesigner.jsf.ui.elementedit.request.InsertHColumnHeaderFooterRequest;
@@ -63,8 +65,10 @@ import org.eclipse.jst.pagedesigner.tools.ObjectModeDragTracker;
 import org.eclipse.jst.pagedesigner.validation.caret.ActionData;
 import org.eclipse.jst.pagedesigner.validation.caret.DefaultPositionRule;
 import org.eclipse.jst.pagedesigner.validation.caret.DnDPositionValidator;
+import org.eclipse.jst.pagedesigner.validation.caret.DropActionData;
 import org.eclipse.jst.pagedesigner.validation.caret.IPositionMediator;
 import org.eclipse.jst.pagedesigner.validation.caret.Target;
+import org.eclipse.jst.pagedesigner.validation.caret.DropActionData.DropData;
 import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
 import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.graphics.Image;
@@ -414,13 +418,19 @@ public class DataTableElementEdit extends DefaultJSFHTMLElementEdit
     public static class MyDragMoveEditPolicy extends DragMoveEditPolicy 
     {
         protected IPositionMediator createDropChildValidator(
-                ChangeBoundsRequest r) 
+                DropRequest r) 
         {
-            DnDPositionValidator validator = 
-                new DnDPositionValidator(new ActionData(
-                        ActionData.COMPONENT_MOVE, r.getEditParts()));
-            validator.addRule(new OnlyColumnsAndFacetsRule(validator, validator.getActionData()));
-            return validator;
+            DropData dropData = createDropData(r);
+            
+            if (dropData!=null)
+            {
+                DnDPositionValidator validator = 
+                    new DnDPositionValidator(new DropActionData(
+                            ActionData.COMPONENT_MOVE, dropData));
+                validator.addRule(new OnlyColumnsAndFacetsRule(validator, validator.getActionData()));
+                return validator;
+            }
+            return null;
         }
         
         private static class OnlyColumnsAndFacetsRule extends DefaultPositionRule
@@ -431,8 +441,7 @@ public class DataTableElementEdit extends DefaultJSFHTMLElementEdit
             }
 
             public boolean isEditable(Target target) {
-                // TODO: 
-                if ("dataTable".equals(target.getNode().getLocalName()))
+                if (JSFHTMLElementEditFactory.DATA_TABLE_TAG_IDENTIFIER.isSameTagType(target.getTagWrapper()))
                 {
                     return isDataDroppable();
                 }
@@ -442,24 +451,21 @@ public class DataTableElementEdit extends DefaultJSFHTMLElementEdit
             
             private boolean isDataDroppable()
             {
-                List editParts = (List) _actionData.getData();
-                
-                for (Iterator it = editParts.iterator(); it.hasNext();)
+                ActionData actionData = getActionData();
+                if (actionData instanceof DropActionData)
                 {
-                    EditPart editPart = (EditPart) it.next();
-                    if (editPart instanceof NodeEditPart)
+                    DropActionData dropActionData = (DropActionData) actionData;
+                    TagIdentifier tagId = 
+                        (TagIdentifier) dropActionData.getDropData().getTagIdentifiers().get(0);
+                            
+                    if (JSFCoreElementEditFactory.FACET_TAG_IDENTIFIER.isSameTagType(tagId)
+                            || JSFHTMLElementEditFactory.COLUMN_TAG_IDENTIFIER.isSameTagType(tagId))
                     {
-                        Node node = ((NodeEditPart)editPart).getDOMNode();
-                        // TODO: need proper lib call that verifies tag lib
-                        if (!"facet".equals(node.getLocalName())
-                                && !"column".equals(node.getLocalName()))
-                        {
-                            return false;
-                        }
+                        return true;
                     }
                 }
                 
-                return true;
+                return false;
             }
         }
     }

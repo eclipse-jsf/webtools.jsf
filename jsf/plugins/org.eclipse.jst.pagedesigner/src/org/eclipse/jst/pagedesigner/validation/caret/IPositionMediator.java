@@ -19,6 +19,9 @@ import org.eclipse.jst.pagedesigner.viewer.DesignPosition;
  * @author mengbo
  */
 public interface IPositionMediator {
+	/**
+	 * @return this mediator's action data
+	 */
 	public ActionData getActionData();
 
 	/**

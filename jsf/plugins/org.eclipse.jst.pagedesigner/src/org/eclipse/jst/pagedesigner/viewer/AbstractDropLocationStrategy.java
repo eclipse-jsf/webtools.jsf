@@ -2,10 +2,13 @@ package org.eclipse.jst.pagedesigner.viewer;
 
 import java.util.List;
 
+import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.gef.EditPart;
-import org.eclipse.gef.editpolicies.GraphicalEditPolicy;
-import org.eclipse.gef.requests.ChangeBoundsRequest;
+import org.eclipse.gef.EditPartViewer;
+import org.eclipse.gef.LayerConstants;
+import org.eclipse.gef.editparts.LayerManager;
+import org.eclipse.gef.requests.DropRequest;
 import org.eclipse.jst.pagedesigner.validation.caret.IPositionMediator;
 
 /**
@@ -16,15 +19,49 @@ import org.eclipse.jst.pagedesigner.validation.caret.IPositionMediator;
  * @author cbateman
  *
  */
-public abstract class AbstractDropLocationStrategy extends GraphicalEditPolicy implements IDropLocationStrategy 
+public abstract class AbstractDropLocationStrategy  implements IDropLocationStrategy 
 {
-    public AbstractDropLocationStrategy(EditPart host)
+    private final EditPartViewer        _viewer;
+    
+    public AbstractDropLocationStrategy(EditPartViewer viewer)
     {
-        setHost(host);
+        _viewer = viewer;
     }
     
     public abstract DesignPosition calculateDesignPosition(EditPart host, Point p,
             IPositionMediator validator);
 
-    public abstract List showTargetFeedback(EditPart host, DesignPosition position, ChangeBoundsRequest request);
+    public abstract List showTargetFeedback(EditPart host, DesignPosition position, DropRequest request);
+
+    /**
+     * @return the viewer in which this strategy may show target feedback
+     */
+    protected final EditPartViewer getViewer() 
+    {
+        return _viewer;
+    }
+    
+    /**
+     * @return the figure for the feedback layer
+     */
+    protected final IFigure getFeedbackLayer()
+    {
+        return LayerManager.Helper.find(_viewer.getRootEditPart().getContents()).getLayer(LayerConstants.FEEDBACK_LAYER);
+    }
+    
+    /**
+     * Adds the specified <code>Figure</code> to the {@link LayerConstants#FEEDBACK_LAYER}.
+     * @param figure the feedback to add
+     */
+    protected void addFeedback(IFigure figure) {
+        getFeedbackLayer().add(figure);
+    }
+    
+    /**
+     * Removes the specified <code>Figure</code> to the {@link LayerConstants#FEEDBACK_LAYER}.
+     * @param figure the feedback to remove
+     */
+    protected void removeFeedback(IFigure figure) {
+        getFeedbackLayer().remove(figure);
+    }
 }

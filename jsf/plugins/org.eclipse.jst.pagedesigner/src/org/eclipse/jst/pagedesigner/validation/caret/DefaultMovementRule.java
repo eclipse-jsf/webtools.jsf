@@ -31,7 +31,6 @@ public class DefaultMovementRule implements IMovementRule {
 	 * @see org.eclipse.jst.pagedesigner.validation.caret.IMovementRule#allowsMoveIn(org.eclipse.jst.pagedesigner.validation.caret.Target)
 	 */
 	public boolean allowsMoveIn(Target target) {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
@@ -41,7 +40,6 @@ public class DefaultMovementRule implements IMovementRule {
 	 * @see org.eclipse.jst.pagedesigner.validation.caret.IMovementRule#allowsMoveOut(org.eclipse.jst.pagedesigner.validation.caret.Target)
 	 */
 	public boolean allowsMoveOut(Target target) {
-		// TODO Auto-generated method stub
 		return true;
 	}
 

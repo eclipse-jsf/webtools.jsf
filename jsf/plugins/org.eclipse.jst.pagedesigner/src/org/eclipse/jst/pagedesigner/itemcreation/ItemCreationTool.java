@@ -29,10 +29,6 @@ import org.eclipse.swt.graphics.Cursor;
 public class ItemCreationTool extends TargetingTool {
 	IPaletteItemDescriptor _itemDescriptor;
 
-	// TODO: dead? never read private CreationFactory factory;
-
-	// TODO: dead? never read private SnapToHelper helper;
-
 	/**
 	 * Default constructor. Sets the default and disabled cursors.
 	 */

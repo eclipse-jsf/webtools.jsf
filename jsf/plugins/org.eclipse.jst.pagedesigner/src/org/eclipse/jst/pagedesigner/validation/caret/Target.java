@@ -14,7 +14,10 @@ package org.eclipse.jst.pagedesigner.validation.caret;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.gef.EditPart;
 import org.eclipse.jst.pagedesigner.converter.ITagConverter;
+import org.eclipse.jst.pagedesigner.dom.TagIdentifier;
+import org.eclipse.jst.pagedesigner.dom.TagIdentifierFactory;
 import org.eclipse.wst.sse.core.internal.provisional.INodeNotifier;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 /**
@@ -65,6 +68,20 @@ public class Target {
 		return _part;
 	}
 
+    /**
+     * @return the target's tag wrapper or null if the target
+     * is not an Element node
+     */
+    public TagIdentifier getTagWrapper()
+    {
+        if (_node instanceof Element)
+        {
+            return TagIdentifierFactory.createDocumentTagWrapper((Element)_node);
+        }
+        
+        return null;
+    }
+    
 	public static EditPart resolvePart(Node node) {
 		if (node instanceof INodeNotifier
 				&& ((INodeNotifier) node).getAdapterFor(EditPart.class) != null) {

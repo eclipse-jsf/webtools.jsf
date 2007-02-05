@@ -13,7 +13,8 @@ import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.EditPart;
-import org.eclipse.gef.requests.ChangeBoundsRequest;
+import org.eclipse.gef.EditPartViewer;
+import org.eclipse.gef.requests.DropRequest;
 import org.eclipse.jst.pagedesigner.parts.ElementEditPart;
 import org.eclipse.jst.pagedesigner.validation.caret.IPositionMediator;
 
@@ -23,8 +24,8 @@ public class DefaultDropLocationStrategy extends AbstractDropLocationStrategy
     // the upper left of the drop hint tooltip
     private static final int DROP_HINT_VERTICAL_OFFSET = 20;
 
-    public DefaultDropLocationStrategy(EditPart host) {
-        super(host);
+    public DefaultDropLocationStrategy(EditPartViewer viewer) {
+        super(viewer);
     }
 
     public DesignPosition calculateDesignPosition(EditPart host, Point p,
@@ -33,9 +34,8 @@ public class DefaultDropLocationStrategy extends AbstractDropLocationStrategy
                 host, p, validator);
     }
 
-    public List showTargetFeedback(EditPart host, DesignPosition position, ChangeBoundsRequest request) 
+    public List showTargetFeedback(EditPart host, DesignPosition position, DropRequest request) 
     {
-        
         List feedback = new ArrayList(4);
         feedback.add(showFeedbackRect(createCaretBounds(position)));
         feedback.add(showDropHintLabel(request.getLocation(), position));

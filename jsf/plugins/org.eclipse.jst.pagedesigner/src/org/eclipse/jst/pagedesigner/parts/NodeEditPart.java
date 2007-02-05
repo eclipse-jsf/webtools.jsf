@@ -22,25 +22,26 @@ import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
 import org.eclipse.gef.requests.LocationRequest;
 import org.eclipse.jst.pagedesigner.dnd.LocalDropRequest;
 import org.eclipse.jst.pagedesigner.dnd.internal.LocalDropEditPolicy;
+import org.eclipse.jst.pagedesigner.dom.TagIdentifier;
+import org.eclipse.jst.pagedesigner.dom.TagIdentifierFactory;
 import org.eclipse.jst.pagedesigner.editpolicies.DragMoveEditPolicy;
-import org.eclipse.jst.pagedesigner.editpolicies.IDropRequestorProvider;
 import org.eclipse.jst.pagedesigner.itemcreation.ItemCreationEditPolicy;
 import org.eclipse.jst.pagedesigner.itemcreation.ItemCreationRequest;
 import org.eclipse.jst.pagedesigner.tools.RangeDragTracker;
-import org.eclipse.jst.pagedesigner.viewer.IDropLocationStrategy;
 import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.ui.views.properties.IPropertySource;
 import org.eclipse.wst.sse.core.internal.provisional.INodeAdapter;
 import org.eclipse.wst.sse.core.internal.provisional.INodeNotifier;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMDocument;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 /**
  * @author mengbo
  */
 public abstract class NodeEditPart extends AbstractGraphicalEditPart implements
-		INodeAdapter, IDropRequestorProvider {
+		INodeAdapter {
 
 	private IDOMDocument _destDocument;
 	private boolean      _isDragActive;
@@ -138,11 +139,6 @@ public abstract class NodeEditPart extends AbstractGraphicalEditPart implements
 						.getAdapterFor(IPropertySource.class);
 			}
 		}
-        else if (IDropRequestorProvider.class.equals(key))
-        {
-            // I am my own drop requestor
-            return this;
-        }
 
 		if (obj instanceof IAdaptable) {
 			Object ret = ((IAdaptable) obj).getAdapter(key);
@@ -172,6 +168,23 @@ public abstract class NodeEditPart extends AbstractGraphicalEditPart implements
     {
         return ((Node)getModel());
     }
+    
+    /**
+     * @return if this edit part's model is an Element, then returns
+     * the tag identifier. Otherwise, null.
+     */
+    public TagIdentifier getTagIdentifier()
+    {
+        Node node = getDOMNode();
+        
+        if (node instanceof Element)
+        {
+            return TagIdentifierFactory.createDocumentTagWrapper(((Element)node));
+        }
+        
+        return null;
+    }
+    
 	/**
 	 * if a EditPart don't support caret inside it, and don't can't have child
 	 * edit part, then we call it as a widget.
@@ -221,26 +234,6 @@ public abstract class NodeEditPart extends AbstractGraphicalEditPart implements
      */
     public Cursor getCursor(Point mouseLocation)
     {
-        return null;
-    }
-    
-    /**
-     * @param request
-     * @return a drop location strategy to determine drop locations for this edit part
-     * when it is the part being dropped (drop requestor).
-     */
-    public IDropLocationStrategy getDropRequestorLocationStrategy(Request request)
-    {
-        // by default query the primary drag role policy
-        EditPolicy dragRolePolicy = getEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE);
-        
-        if (dragRolePolicy instanceof IDropRequestorProvider)
-        {
-            return ((IDropRequestorProvider)dragRolePolicy).getDropRequestorLocationStrategy(request);
-        }
-       
-        // if our edit policy doesn't support it, return null to indicate
-        // we have no strategy
         return null;
     }
 }

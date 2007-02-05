@@ -35,7 +35,6 @@ public class ContainerMoveInAndOutRule extends DefaultMovementRule {
 	 */
 	public ContainerMoveInAndOutRule(ActionData actionData) {
 		super(actionData);
-		// TODO Auto-generated constructor stub
 	}
 
 	/*

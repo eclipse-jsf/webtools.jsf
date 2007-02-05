@@ -11,10 +11,13 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.elementedit;
 
+import org.eclipse.gef.EditPartViewer;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jst.pagedesigner.dom.TagIdentifier;
 import org.eclipse.jst.pagedesigner.parts.ElementEditPart;
 import org.eclipse.jst.pagedesigner.parts.NodeEditPart;
+import org.eclipse.jst.pagedesigner.viewer.IDropLocationStrategy;
 import org.w3c.dom.Element;
 
 /**
@@ -73,4 +76,18 @@ public interface IElementEdit {
 	 * @return
 	 */
 	public boolean isResizable(Element ele);
+    
+    /**
+     * @param element the element to return a drop location strategy for.
+     * This is the requesting element (being dropped), not the drop target
+     * 
+     * @param viewer is the viewer where the new strategy will optionally
+     * add feedback
+     * 
+     * @return the strategy to be used to use to find a drop location when
+     * the corresponding element is being dropped (the source part).  May
+     * be null signalling that the caller should use its default strategy.
+     * 
+     */
+     public IDropLocationStrategy getDropRequestorLocationStrategy(TagIdentifier tag, EditPartViewer viewer);
 }

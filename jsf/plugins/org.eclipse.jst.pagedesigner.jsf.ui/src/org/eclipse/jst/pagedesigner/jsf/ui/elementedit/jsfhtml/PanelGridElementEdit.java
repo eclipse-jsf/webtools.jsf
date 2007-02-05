@@ -11,9 +11,13 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.jsf.ui.elementedit.jsfhtml;
 
+import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
+import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.Request;
+import org.eclipse.gef.SharedCursors;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuListener;
@@ -21,10 +25,6 @@ import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-
 import org.eclipse.jst.pagedesigner.IJSFConstants;
 import org.eclipse.jst.pagedesigner.actions.single.SelectEditPartAction;
 import org.eclipse.jst.pagedesigner.editors.PageDesignerActionConstants;
@@ -50,6 +50,10 @@ import org.eclipse.jst.pagedesigner.tableedit.TableInsertRequest;
 import org.eclipse.jst.pagedesigner.tableedit.TableResizeRequest;
 import org.eclipse.jst.pagedesigner.tableedit.TableRowColumnDeleteRequest;
 import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
+import org.eclipse.swt.graphics.Cursor;
+import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 /**
  * @author mengbo
@@ -234,6 +238,32 @@ public class PanelGridElementEdit extends DefaultJSFHTMLElementEdit
         public PanelGridResizePolicy(ElementEditPart part)
         {
             _part = part;
+        }
+
+        public Cursor getSelectionToolCursor(Point mouseLocation) 
+        {
+            final GraphicalEditPart part = (GraphicalEditPart) getHost();
+            final IFigure panelFigure = part.getFigure();
+            
+            Point  relativeLocation = mouseLocation.getCopy();
+            panelFigure.translateToRelative(relativeLocation);
+            
+            // row cursor if we are within +/- 2 pixels of the left side
+            final int xoffsetAbs = Math.abs(panelFigure.getBounds().x - relativeLocation.x);
+
+            if (xoffsetAbs <= 2)
+            {
+                return SharedCursors.SIZEE;
+            }
+            
+            final int yoffsetAbs = Math.abs(panelFigure.getBounds().y - relativeLocation.y);
+            
+            if (yoffsetAbs <= 2)
+            {
+                return SharedCursors.SIZEW;
+            }
+            
+            return null;
         }
 
         /* (non-Javadoc)

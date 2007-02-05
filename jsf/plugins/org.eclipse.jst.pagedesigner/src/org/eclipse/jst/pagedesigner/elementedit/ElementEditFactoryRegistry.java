@@ -14,9 +14,10 @@ package org.eclipse.jst.pagedesigner.elementedit;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.jst.pagedesigner.dom.TagIdentifier;
+import org.eclipse.jst.pagedesigner.dom.TagIdentifierFactory;
 import org.eclipse.jst.pagedesigner.elementedit.html.HTMLElementEditFactory;
 import org.eclipse.jst.pagedesigner.elementedit.jsp.JSPElementEditFactory;
-import org.eclipse.jst.pagedesigner.utils.CMUtil;
 import org.w3c.dom.Element;
 
 /**
@@ -32,8 +33,8 @@ public class ElementEditFactoryRegistry {
 	 * 
 	 */
 	private ElementEditFactoryRegistry() {
-		_factories.add(new HTMLElementEditFactory());
-		_factories.add(new JSPElementEditFactory());
+		addFactory(new HTMLElementEditFactory());
+        addFactory(new JSPElementEditFactory());
 
 		IElementEditFactory facs[] = ElementEditFacRegistryReader
 				.getAllHandlers();
@@ -48,31 +49,52 @@ public class ElementEditFactoryRegistry {
 		_factories.add(fac);
 	}
 
+    /**
+     * @param uri
+     * @param tagName
+     * @return an IElementEdit constructed for the tag uniquely identified
+     * by the ns uri (tag uri for JSP tags) and tagName (element name) or null
+     * if the system can't create one.
+     */
+    public IElementEdit createElementEdit(final TagIdentifier tagIdentifier)
+    {
+        final String uri = tagIdentifier.getUri();
+        
+        // first round, match uri
+        for (int i = 0, size = _factories.size(); i < size; i++) {
+            IElementEditFactory fac = (IElementEditFactory) _factories.get(i);
+            String facuri = fac.getSupportedURI();
+            if (facuri != null && facuri.equals(uri)) {
+                IElementEdit elementEdit = fac.createElementEdit(tagIdentifier);
+                if (elementEdit != null) {
+                    return elementEdit;
+                }
+            }
+        }
+        // second round
+        for (int i = 0, size = _factories.size(); i < size; i++) {
+            IElementEditFactory fac = (IElementEditFactory) _factories.get(i);
+            String facuri = fac.getSupportedURI();
+            if (facuri == null) {
+                IElementEdit elementEdit = fac.createElementEdit(tagIdentifier);
+                if (elementEdit != null) {
+                    return elementEdit;
+                }
+            }
+        }
+        return null;
+    }
+    
+	/**
+     * Convenience method for createElementEdit(uri, tagName) that takes
+     * a tag element.
+     * 
+	 * @param ele
+	 * @return an element edit
+	 */
 	public IElementEdit createElementEdit(Element ele) {
-		String uri = CMUtil.getElementNamespaceURI(ele);
-		// first round, match uri
-		for (int i = 0, size = _factories.size(); i < size; i++) {
-			IElementEditFactory fac = (IElementEditFactory) _factories.get(i);
-			String facuri = fac.getSupportedURI();
-			if (facuri != null && facuri.equals(uri)) {
-				IElementEdit elementEdit = fac.createElementEdit(ele);
-				if (elementEdit != null) {
-					return elementEdit;
-				}
-			}
-		}
-		// second round
-		for (int i = 0, size = _factories.size(); i < size; i++) {
-			IElementEditFactory fac = (IElementEditFactory) _factories.get(i);
-			String facuri = fac.getSupportedURI();
-			if (facuri == null) {
-				IElementEdit elementEdit = fac.createElementEdit(ele);
-				if (elementEdit != null) {
-					return elementEdit;
-				}
-			}
-		}
-		return null;
+		final TagIdentifier tagIdentifier = TagIdentifierFactory.createDocumentTagWrapper(ele);
+        return createElementEdit(tagIdentifier);
 	}
 
 	public static ElementEditFactoryRegistry getInstance() {

@@ -12,25 +12,28 @@
 package org.eclipse.jst.pagedesigner.elementedit.jsp;
 
 import org.eclipse.jst.pagedesigner.IJMTConstants;
+import org.eclipse.jst.pagedesigner.dom.TagIdentifier;
+import org.eclipse.jst.pagedesigner.dom.TagIdentifierFactory;
 import org.eclipse.jst.pagedesigner.elementedit.IElementEdit;
 import org.eclipse.jst.pagedesigner.elementedit.IElementEditFactory;
 import org.eclipse.jst.pagedesigner.jsp.core.IJSPCoreConstants;
-import org.w3c.dom.Element;
 
 /**
  * @author mengbo
  * @version 1.5
  */
-public class JSPElementEditFactory implements IElementEditFactory {
+public class JSPElementEditFactory implements IElementEditFactory 
+{
+    final static TagIdentifier TAG_DIRECTIVE_TAGLIB_TAG_IDENTIFIER =
+        TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSP, IJSPCoreConstants.TAG_DIRECTIVE_TAGLIB);
 
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see org.eclipse.jst.pagedesigner.elementedit.IElementEditFactory#createElementEdit(org.w3c.dom.Element)
 	 */
-	public IElementEdit createElementEdit(Element element) {
-		String tag = element.getLocalName();
-		if (IJSPCoreConstants.TAG_DIRECTIVE_TAGLIB.equalsIgnoreCase(tag)) {
+	public IElementEdit createElementEdit(TagIdentifier tagIdentifier) {
+		if (TAG_DIRECTIVE_TAGLIB_TAG_IDENTIFIER.isSameTagType(tagIdentifier)) {
 			return new TaglibElementEdit();
 		}
 		return null;

@@ -71,9 +71,9 @@ public class LocalDropEditPolicy extends GraphicalEditPolicy {
 			EditPart[] host, Map results, DesignPosition[] dpHolder,
 			IDOMPosition[] position) {
 		DesignPosition designPosition = EditPartPositionHelper
-				.findEditPartPosition(host[0], request.getLocation(),
-						new DnDPositionValidator(new ActionData(
-								ActionData.DATABINDING_DND, request)));
+		    .findEditPartPosition(host[0], request.getLocation(),
+		        new DnDPositionValidator(new ActionData(
+		            ActionData.DATABINDING_DND, request)));
 		dpHolder[0] = designPosition;
 		if (designPosition == null) {
 			return false;

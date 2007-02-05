@@ -11,31 +11,31 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.itemcreation;
 
-import org.eclipse.draw2d.ColorConstants;
-import org.eclipse.draw2d.RectangleFigure;
-import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.commands.Command;
-import org.eclipse.gef.editpolicies.GraphicalEditPolicy;
+import org.eclipse.gef.requests.DropRequest;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.commands.CreateItemCommand;
 import org.eclipse.jst.pagedesigner.dom.DOMPositionHelper;
 import org.eclipse.jst.pagedesigner.dom.IDOMPosition;
+import org.eclipse.jst.pagedesigner.editpolicies.DropEditPolicy;
 import org.eclipse.jst.pagedesigner.tools.ExposeHelper;
 import org.eclipse.jst.pagedesigner.validation.caret.ActionData;
 import org.eclipse.jst.pagedesigner.validation.caret.DnDPositionValidator;
+import org.eclipse.jst.pagedesigner.validation.caret.DropActionData;
+import org.eclipse.jst.pagedesigner.validation.caret.IPositionMediator;
+import org.eclipse.jst.pagedesigner.validation.caret.DropActionData.DropData;
 import org.eclipse.jst.pagedesigner.viewer.DesignPosition;
-import org.eclipse.jst.pagedesigner.viewer.EditPartPositionHelper;
+import org.eclipse.jst.pagedesigner.viewer.IDropLocationStrategy;
 import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
 
 /**
  * @author mengbo
  */
-public class ItemCreationEditPolicy extends GraphicalEditPolicy {
-	private RectangleFigure _feedbackFigure;
-
+public class ItemCreationEditPolicy extends DropEditPolicy 
+{
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -44,15 +44,12 @@ public class ItemCreationEditPolicy extends GraphicalEditPolicy {
 	public Command getCommand(Request request) {
 		if (request instanceof ItemCreationRequest) {
 			ItemCreationRequest r = (ItemCreationRequest) request;
-			DesignPosition position = EditPartPositionHelper
-					.findEditPartPosition(getHost(), r.getLocation(),
-							new DnDPositionValidator(new ActionData(
-									ActionData.PALETTE_DND, request)));
-			IDOMPosition domposition = null;
+			DesignPosition position = findPosition((ItemCreationRequest)request);
+            
 			if (position == null) {
 				return null;
 			}
-            domposition = DOMPositionHelper.toDOMPosition(position);
+            IDOMPosition domposition = DOMPositionHelper.toDOMPosition(position);
 			if (domposition == null) {
 				return null;
 			}
@@ -71,11 +68,7 @@ public class ItemCreationEditPolicy extends GraphicalEditPolicy {
 	 */
 	public EditPart getTargetEditPart(Request request) {
 		if (request instanceof ItemCreationRequest) {
-			ItemCreationRequest r = (ItemCreationRequest) request;
-			DesignPosition position = EditPartPositionHelper
-					.findEditPartPosition(getHost(), r.getLocation(),
-							new DnDPositionValidator(new ActionData(
-									ActionData.PALETTE_DND, request)));
+			DesignPosition position = findPosition((ItemCreationRequest)request);
 
 			if (position == null) {
 				return null;
@@ -98,59 +91,48 @@ public class ItemCreationEditPolicy extends GraphicalEditPolicy {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.gef.editpolicies.AbstractEditPolicy#eraseTargetFeedback(org.eclipse.gef.Request)
-	 */
-	public void eraseTargetFeedback(Request request) {
-		if (_feedbackFigure != null) {
-			removeFeedback(_feedbackFigure);
-			_feedbackFigure = null;
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.gef.editpolicies.AbstractEditPolicy#showTargetFeedback(org.eclipse.gef.Request)
 	 */
-	public void showTargetFeedback(Request request) {
-		if (request instanceof ItemCreationRequest) {
-			ItemCreationRequest r = (ItemCreationRequest) request;
-			DesignPosition position = EditPartPositionHelper
-					.findEditPartPosition(getHost(), r.getLocation(),
-							new DnDPositionValidator(new ActionData(
-									ActionData.PALETTE_DND, request)));
-
-			if (position == null) {
-				return;
-			}
-			Rectangle rect = EditPartPositionHelper
-					.convertToAbsoluteCaretRect(position);
-			showFeedbackRect(rect);
-			if (getHost() instanceof GraphicalEditPart) {
-				ExposeHelper exposeHelper = new ExposeHelper(
-						getViewer(getHost()));
-				exposeHelper.adjustVertical(r.getLocation());
-			}
-		}
+	public void showTargetFeedback(Request request) 
+    {
+        if (request instanceof DropRequest 
+                && request.getType() == ItemCreationRequest.REQ_ITEM_CREATION)
+        {
+            super.showTargetFeedback(request);
+            if (getHost() instanceof GraphicalEditPart) {
+                ExposeHelper exposeHelper = new ExposeHelper(
+                        getViewer(getHost()));
+                exposeHelper.adjustVertical(((DropRequest)request).getLocation());
+            }
+        }
 	}
 
-	protected RectangleFigure getFeedbackFigure() {
-		if (_feedbackFigure == null) {
-			_feedbackFigure = new RectangleFigure();
-			_feedbackFigure.setFill(true);
-			_feedbackFigure.setXOR(true);
-			_feedbackFigure.setOutline(true);
-			_feedbackFigure.setLineWidth(1);
-			_feedbackFigure.setForegroundColor(ColorConstants.red);
-			_feedbackFigure.setBounds(new Rectangle(0, 0, 0, 0));
-			addFeedback(_feedbackFigure);
-		}
-		return _feedbackFigure;
-	}
+	protected DesignPosition findPosition(DropRequest request) {
+        final IPositionMediator mediator = getDropChildValidator(request);
+        if (mediator == null)
+        {
+            return null;
+        }
+        
+        final IDropLocationStrategy dropStrategy = createDropLocationStrategy(request);
+        final DesignPosition position = 
+            dropStrategy.calculateDesignPosition(getHost(), request.getLocation(), mediator);
+        
+        // verify that the drop strategy has honoured it's contract that our
+        // mediator be respected
+        if (position != null)
+        {
+            if (!mediator.isValidPosition(position))
+            {
+                // if our mediator says no go, then veto the requestor
+                // there is no drop location
+                return null;
+            }
+        }
+        return position;
+    }
 
-	protected void showFeedbackRect(Rectangle rect) {
-		RectangleFigure pf = getFeedbackFigure();
-		pf.translateToRelative(rect);
-		pf.setBounds(rect);
-	}
+    protected final IPositionMediator createDefaultDropChildValidator(DropData data) {
+        return new DnDPositionValidator(new DropActionData(
+                ActionData.PALETTE_DND, data));    }
 }
