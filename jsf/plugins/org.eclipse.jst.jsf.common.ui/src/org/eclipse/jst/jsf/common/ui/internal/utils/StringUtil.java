@@ -11,12 +11,25 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.common.ui.internal.utils;
 
+import java.util.regex.Pattern;
+
 /**
  * This is tool class for String processing.
  * 
  * @author mengbo
  */
 public class StringUtil {
+    
+    // pattern to find all end-of-paragraph and end-of-line html tags
+    // so they can be converted to newlines
+    final private static Pattern htmlToNewline = Pattern.compile("</p>|<br>");
+    
+    // pattern to strip all <x> and </x> HTML tags
+    final private static Pattern removeHTMLTags = Pattern.compile("<[/?\\w\\s=\"\\.\\#]+>");
+    
+    // pattern to find all runs of spaces longer than one
+    final private static Pattern trimInteriorWhitespace = Pattern.compile("[ ]+");
+    
 	/**
 	 * Split a java variable name into words For example, "_aJavaVariable" will
 	 * split to "A Java Variable", "_aWTPPackageImplementation" will be "A WTP
@@ -120,9 +133,10 @@ public class StringUtil {
 		if (text == null) {
 			return "";
 		}
-
-		String result = text.replaceAll("</p>", "\n").replaceAll("<br>", "\n")
-				.replaceAll("<[/?\\w]+>", "").replaceAll("[ ]+", " ");
+        
+		String result = htmlToNewline.matcher(text).replaceAll("\n"); 
+        result = removeHTMLTags.matcher(result).replaceAll("");
+        result = trimInteriorWhitespace.matcher(result).replaceAll(" ");
 
 		return result;
 	}
