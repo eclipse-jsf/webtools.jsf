@@ -17,6 +17,10 @@ import junit.framework.TestCase;
 import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.CMAnnotationHelper;
 
 /**
+ * CMAnnotatations Metadata framework has been "taken out of service"
+ * Please use org.eclipse.jst.jsf.common.metadata
+ * 
+ * 
  * Intended to test system level setup problems
  * 
  * @author Gerry Kessler - Oracle

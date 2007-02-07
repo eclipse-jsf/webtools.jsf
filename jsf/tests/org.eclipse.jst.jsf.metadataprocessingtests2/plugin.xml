@@ -2,8 +2,8 @@
 <?eclipse version="3.0"?>
 <plugin>
    <extension
-         point="org.eclipse.jst.jsf.common.annotationFiles">
-      <annotationFile
+         point="org.eclipse.jst.jsf.common.standardMetaDataFiles">
+      <standardMetaDataFile
             location="/metadata/jsf_metadataprocessing2.xml"
             uri=" http://org.eclipse.jsf/metadataprocessing"/>
    </extension>

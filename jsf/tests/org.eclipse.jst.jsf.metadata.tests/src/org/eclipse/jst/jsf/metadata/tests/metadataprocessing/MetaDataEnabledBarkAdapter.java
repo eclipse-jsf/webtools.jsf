@@ -19,6 +19,8 @@ import org.eclipse.jst.jsf.metadata.tests.metadataprocessing.features.IBarker;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.AbstractMetaDataEnabledFeature;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IPossibleValues;
 
+import sun.security.action.GetLongAction;
+
 /**
  * Test class implementing existing and new fetaure type for
  * testing the MetaDataEnabledFeature Extension
@@ -39,10 +41,11 @@ public class MetaDataEnabledBarkAdapter extends AbstractMetaDataEnabledFeature
 	}
 
 	public List getBarks() {
-		//notice that we want to use the bundle id of the extender
-		return CMAnnotationHelper.getCMAttributePropertyValues(MetadataTestsPlugin.ID_BUNDLE, getCMAnnotationContext().getUri(),
-					getCMAnnotationContext().getElementName(), getCMAnnotationContext().getAttributeName(), 
-					"barks");
+		return getTraitValueAsListOfStrings("barks");
+//		//notice that we want to use the bundle id of the extender
+//		return CMAnnotationHelper.getCMAttributePropertyValues(MetadataTestsPlugin.ID_BUNDLE, getCMAnnotationContext().getUri(),
+//					getCMAnnotationContext().getElementName(), getCMAnnotationContext().getAttributeName(), 
+//					"barks");
 	}
 
 	public List getPossibleValues() {

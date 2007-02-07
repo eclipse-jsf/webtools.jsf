@@ -11,8 +11,19 @@
  ********************************************************************************/
 package org.eclipse.jst.jsf.metadata.tests.metadataprocessing.types;
 
+import java.util.List;
+
 import org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.BooleanType;
 
+/**
+ * Subclass of boolean type used by tests to prove feature extensions
+ *
+ */
 public class MyBooleanType extends BooleanType {
-    // TODO: what's this for?
+
+	public List getPossibleValues() {
+		System.out.println("MyBooleanType: getPossibleValues()");
+		return super.getPossibleValues();
+	}
+	
 }

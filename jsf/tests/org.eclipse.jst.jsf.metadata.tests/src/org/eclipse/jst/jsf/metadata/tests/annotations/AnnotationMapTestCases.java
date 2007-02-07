@@ -22,6 +22,9 @@ import org.eclipse.jst.jsf.contentmodel.annotation.internal.CMAnnotationMap;
 import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.CMAnnotationHelper;
 
 /**
+  * CMAnnotatations Metadata framework has been "taken out of service"
+ * Please use org.eclipse.jst.jsf.common.metadata
+ * 
  * Test functions in the CMAnnotationMap.  
  * Uses /testfiles/metadata/jsf_test.xml
  * 

@@ -20,6 +20,9 @@ import junit.framework.TestCase;
 import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.CMAnnotationHelper;
 import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.CMAnnotationPropertyValue;
 /**
+ * CMAnnotatations Metadata framework has been "taken out of service"
+ * Please use org.eclipse.jst.jsf.common.metadata
+ * 
  * Ensure case insensitive meta-data can be located correctly.
  * Uses /testfiles/metadata/CaseInsensitive.xml
  * 

@@ -21,6 +21,9 @@ import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.CMAnnota
 import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.CMAnnotationPropertyValue;
 
 /**
+ * CMAnnotatations Metadata framework has been "taken out of service"
+ * Please use org.eclipse.jst.jsf.common.metadata
+ * 
  * Make sure that multiple annotations are being dealt with correctly.
  * Uses /testfiles/metadata/FileA.xml, FileB.xml
  * 

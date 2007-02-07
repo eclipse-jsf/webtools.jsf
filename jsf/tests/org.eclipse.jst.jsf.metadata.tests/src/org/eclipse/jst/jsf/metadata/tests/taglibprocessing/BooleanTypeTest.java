@@ -14,6 +14,7 @@ package org.eclipse.jst.jsf.metadata.tests.taglibprocessing;
 
 import junit.framework.Assert;
 
+import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IDefaultValue;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IPossibleValues;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IValidValues;
@@ -23,13 +24,15 @@ public class BooleanTypeTest extends TaglibProcessingTestCase {
 	public void testPossibleValues(){		
 		Assert.assertNotNull(possibleValueAdapters);
 		Assert.assertFalse(possibleValueAdapters.isEmpty());
-		IPossibleValues pv =(IPossibleValues)getProcessorForTaglibProcessingBundle(possibleValueAdapters);
+		Assert.assertEquals(2, possibleValueAdapters.size());
+		IPossibleValues pv =(IPossibleValues)possibleValueAdapters.get(0);
 		Assert.assertEquals(pv.getPossibleValues().size(), 2);//true and false
 	
 		
 		//validate BarkProcessorFeature does not kick in for this tag
 		//as the tests have added a second impl of IPossibleVals check
-		pv =(IPossibleValues)getBarkProcessingBundle(possibleValueAdapters);
+//		pv =(IPossibleValues)getBarkProcessingBundle(possibleValueAdapters);
+		pv =(IPossibleValues)possibleValueAdapters.get(1);
 		Assert.assertNotNull(pv);
 		//bark annotation is not on the MyTag element MyAttr attr
 		Assert.assertTrue(pv.getPossibleValues().isEmpty());
@@ -39,7 +42,7 @@ public class BooleanTypeTest extends TaglibProcessingTestCase {
 	public void testValidValues(){		
 		Assert.assertNotNull(validValuesAdapters);
 		Assert.assertFalse(validValuesAdapters.isEmpty());
-		IValidValues vv =(IValidValues)getProcessorForTaglibProcessingBundle(validValuesAdapters);
+		IValidValues vv =(IValidValues)validValuesAdapters.get(0);
 		vv.getValidationMessages().clear();
 		Assert.assertTrue(vv.isValidValue("true"));
 		Assert.assertTrue(vv.getValidationMessages().size()==0);
@@ -56,7 +59,7 @@ public class BooleanTypeTest extends TaglibProcessingTestCase {
 	public void testDefaultValues(){		
 		Assert.assertNotNull(defaultValueAdapters);
 		Assert.assertFalse(defaultValueAdapters.isEmpty());
-		Assert.assertTrue(((IDefaultValue)getProcessorForTaglibProcessingBundle(defaultValueAdapters)).getDefaultValue().equals("true"));
+		Assert.assertTrue(((IDefaultValue)defaultValueAdapters.get(0)).getDefaultValue().equals("true"));
 	}
 	
 	public void testCreateValues(){		

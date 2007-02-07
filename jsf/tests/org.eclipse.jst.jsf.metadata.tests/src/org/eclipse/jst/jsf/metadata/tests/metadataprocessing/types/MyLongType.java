@@ -11,8 +11,19 @@
  ********************************************************************************/
 package org.eclipse.jst.jsf.metadata.tests.metadataprocessing.types;
 
+import java.util.List;
+
 import org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.LongType;
 
+/**
+ * Subclass of boolean type used by tests to prove feature extensions
+ *
+ */
 public class MyLongType extends LongType {
-    // TODO: what's this for?
+
+	public boolean isValidValue(String value) {
+		System.out.println("MyLongType: isValidValue(value)");
+		return super.isValidValue(value);
+	}
+
 }

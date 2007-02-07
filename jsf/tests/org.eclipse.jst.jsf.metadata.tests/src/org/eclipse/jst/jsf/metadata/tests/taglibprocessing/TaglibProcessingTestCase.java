@@ -11,22 +11,23 @@
  ********************************************************************************/
 package org.eclipse.jst.jsf.metadata.tests.taglibprocessing;
 
-import java.util.Iterator;
 import java.util.List;
 
 import junit.framework.TestCase;
 
+import org.eclipse.jface.text.IDocument;
+import org.eclipse.jst.jsf.common.metadata.tests.AbstractBaseMetaDataTestCase;
 import org.eclipse.jst.jsf.context.structureddocument.internal.provisional.IStructuredDocumentContext;
+import org.eclipse.jst.jsf.context.structureddocument.internal.provisional.IStructuredDocumentContextFactory;
 import org.eclipse.jst.jsf.metadata.tests.MetadataTestsPlugin;
-import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.IMetaDataEnabledFeature;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.MetaDataEnabledProcessingFactory;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.ICreateValues;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IDefaultValue;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IPossibleValues;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IValidValues;
 
-public abstract class TaglibProcessingTestCase extends TestCase {
-	protected IStructuredDocumentContext docContext;
+public abstract class TaglibProcessingTestCase extends AbstractBaseMetaDataTestCase {
+//	protected IStructuredDocumentContext docContext;
 	protected String uri = "http://org.eclipse.jsf/tagprocessing";
 	protected String bundle = "org.eclipse.jst.jsf.core";
 	protected String barkerBundle = MetadataTestsPlugin.ID_BUNDLE;
@@ -38,7 +39,8 @@ public abstract class TaglibProcessingTestCase extends TestCase {
 	protected List defaultValueAdapters;
 	protected List createValuesAdapters;
 	
-	public void setUp(){
+	public void setUp() throws Exception{
+		super.setUp();
 		
 		// TODO: This won't work currently docContext = getTestDocContext();
 		possibleValueAdapters = getProcessorAdapters(IPossibleValues.class);
@@ -73,33 +75,33 @@ public abstract class TaglibProcessingTestCase extends TestCase {
         return attributeName;
 	}
 	
-	private List getProcessorAdapters(Class featureClass) {
+	protected List getProcessorAdapters(Class featureClass) {
 		return MetaDataEnabledProcessingFactory.getInstance().
 			getAttributeValueRuntimeTypeFeatureProcessors(featureClass, docContext, 
 					uri, tag , getAttributeNameFromTest());
 	}
 
-	private IMetaDataEnabledFeature getProcessorForBundle(List processors, String bundleID){
-		IMetaDataEnabledFeature ret = null;
-		Iterator it = processors.iterator();
-		while(it.hasNext()){
-			IMetaDataEnabledFeature feature = (IMetaDataEnabledFeature)it.next();
-			if (feature.getBundleID().equals(bundleID)){
-				ret = feature;
-				break;
-			}
-		}
-		return ret;
-	}
+//	private IMetaDataEnabledFeature getProcessorForBundle(List processors, String bundleID){
+//		IMetaDataEnabledFeature ret = null;
+//		Iterator it = processors.iterator();
+//		while(it.hasNext()){
+//			IMetaDataEnabledFeature feature = (IMetaDataEnabledFeature)it.next();
+//			if (feature.getBundleID().equals(bundleID)){
+//				ret = feature;
+//				break;
+//			}
+//		}
+//		return ret;
+//	}
 //	private ITypeDescriptor getType(String typeId){
 //		return AttributeValueRuntimeTypeFactory.getInstance().getType(typeId);
 //	}
 	
-	protected IMetaDataEnabledFeature getBarkProcessingBundle(List processors) {
-		return getProcessorForBundle(processors, barkerBundle);		
-	}
-	
-	protected IMetaDataEnabledFeature getProcessorForTaglibProcessingBundle(List processors) {
-		return getProcessorForBundle(processors, bundle);
-	}
+//	protected IMetaDataEnabledFeature getBarkProcessingBundle(List processors) {
+//		return getProcessorForBundle(processors, barkerBundle);		
+//	}
+//	
+//	protected IMetaDataEnabledFeature getProcessorForTaglibProcessingBundle(List processors) {
+//		return getProcessorForBundle(processors, bundle);
+//	}
 }

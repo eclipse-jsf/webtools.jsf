@@ -16,21 +16,31 @@ import java.util.Iterator;
 import java.util.List;
 
 import junit.framework.Assert;
-import junit.framework.TestCase;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.jst.jsf.common.metadata.tests.AbstractBaseMetaDataTestCase;
 import org.eclipse.jst.jsf.context.structureddocument.internal.provisional.IStructuredDocumentContext;
+import org.eclipse.jst.jsf.context.structureddocument.internal.provisional.IStructuredDocumentContextFactory;
+import org.eclipse.jst.jsf.metadata.tests.MetadataTestsPlugin;
 import org.eclipse.jst.jsf.metadata.tests.metadataprocessing.features.IBarker;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.MetaDataEnabledProcessingFactory;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IPossibleValue;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IPossibleValues;
+import org.eclipse.jst.jsp.core.internal.domdocument.DOMModelForJSP;
+import org.eclipse.wst.sse.core.StructuredModelManager;
+import org.eclipse.wst.sse.core.internal.provisional.IModelManager;
+import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
 
-public class MetaDataProcessorsFactoryTests extends TestCase {
+public class MetaDataProcessorsFactoryTests extends AbstractBaseMetaDataTestCase {
 	private String uri1 = "http://org.eclipse.jsf/metadataprocessing";
+
 	/*
-	 * Test method for 'org.eclipse.jst.jsf.metadataprocessors.internal.provisional.MetaDataEnabledProcessorsFactory.getAttributeValueRuntimeTypeProcessors(Class, String, String, String)'
+	 * Test method for
+	 * 'org.eclipse.jst.jsf.metadataprocessors.internal.provisional.MetaDataEnabledProcessorsFactory.getAttributeValueRuntimeTypeProcessors(Class,
+	 * String, String, String)'
 	 */
 	public void testGetAttributeValueRuntimeTypeProcessors() {
-		IStructuredDocumentContext docContext = null;
 		
 		List possibleValueProcessors = MetaDataEnabledProcessingFactory.getInstance().
 			getAttributeValueRuntimeTypeFeatureProcessors(IPossibleValues.class, docContext, uri1, 
@@ -99,26 +109,28 @@ public class MetaDataProcessorsFactoryTests extends TestCase {
 		}
 		
 	}
+	// IT IS NO LONGER POSSIBLE FOR THE SAME ENTITY TO HAVE MORE THAN ONE TRAIT VALUE FOR THE SAME TRAIT.
+	// NEW METADATA FRAMEWORK WILL MERGE INTO SINGLE MODEL WHERE ONLY THE FIRST TRAIT WILL BE PRESENT
 	
-	public void testDualTypeTest(){
-		System.out.println("---------------- DualTypeTest ------------------");
-		//second plugin (metadataprocessingtests2 marks the same attr with another type
-		List possibleValueProcessors = MetaDataEnabledProcessingFactory.getInstance().
-			getAttributeValueRuntimeTypeFeatureProcessors(IPossibleValues.class, null, uri1, 
-				"MyTag", "MyDualTypeAttr");
-		Assert.assertNotNull(possibleValueProcessors);
-		Assert.assertEquals(2,possibleValueProcessors.size());  //expect StringType + NoImplPossibleVals
-		
-		List vals = new ArrayList();
-		Iterator it = possibleValueProcessors.iterator();
-		while (it.hasNext()){
-			IPossibleValues p = (IPossibleValues)it.next();
-			vals.addAll(p.getPossibleValues());
-			dumpPossibleValues(p);
-		}
-		Assert.assertTrue(vals.size() == 8);
-		System.out.println("---------------- END DualTypeTest ------------------");
-	}
+//	public void testDualTypeTest(){
+//		System.out.println("---------------- DualTypeTest ------------------");
+//		//second plugin (metadataprocessingtests2 marks the same attr with another type
+//		List possibleValueProcessors = MetaDataEnabledProcessingFactory.getInstance().
+//			getAttributeValueRuntimeTypeFeatureProcessors(IPossibleValues.class, null, uri1, 
+//				"MyTag", "MyDualTypeAttr");
+//		Assert.assertNotNull(possibleValueProcessors);
+//		Assert.assertEquals(2,possibleValueProcessors.size());  //expect StringType + NoImplPossibleVals
+//		
+//		List vals = new ArrayList();
+//		Iterator it = possibleValueProcessors.iterator();
+//		while (it.hasNext()){
+//			IPossibleValues p = (IPossibleValues)it.next();
+//			vals.addAll(p.getPossibleValues());
+//			dumpPossibleValues(p);
+//		}
+//		Assert.assertTrue(vals.size() == 8);
+//		System.out.println("---------------- END DualTypeTest ------------------");
+//	}
 	
 	private void dumpPossibleValues(IPossibleValues p){
 		Iterator it = p.getPossibleValues().iterator();

@@ -1,94 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grammar-annotation 
-	xmlns:p="http://org.eclipse.jst.jsf.contentmodel.annotations/grammarAnnotationSchema"
+<metadatamodel 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://org.eclipse.jst.jsf.contentmodel.annotations/grammarAnnotationSchema ../../org.eclipse.jst.jsf.contentmodel.annotations/schema/grammar-annotations.xsd ">
->
+	xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" 
+	xmlns:mdt="http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore"  
+	id="http://org.eclipse.jsf/metadataprocessing"
+	type="tagFile">
 
-  <cm-element name="MyTag">
-  	<cm-attribute name="MyBooleanAttr">
-  		<property name="attribute-value-runtime-type">
+  <entity type="tag" id="MyTag">
+  	<entity type="attribute" id="MyBooleanAttr">
+  		<trait id="attribute-value-runtime-type">
   			<value>org.eclipse.jst.jsf.metadata.tests.MyBooleanType</value>
-  		</property>
-  	</cm-attribute>
-  	  	<cm-attribute name="BooleanAttr">
-  		<property name="attribute-value-runtime-type">
+  		</trait>
+  	</entity>
+  	  	<entity type="attribute" id="BooleanAttr">
+  		<trait id="attribute-value-runtime-type">
   			<value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
-  		</property>
-  		<property name="barks">
-  			<value>woof</value>
-  			<value>ruff</value>
-  			<value>howllllllll</value>
-  		</property>
-  	</cm-attribute>
-  	<cm-attribute name="NutherBooleanAttr">
-  		<property name="attribute-value-runtime-type">
+  		</trait>
+  		<trait id="barks">
+  			<value xsi:type="mdt:ListOfValues">
+	  			<item>woof</item>
+	  			<item>ruff</item>
+	  			<item>howlll</item>
+	  		</value>  
+  		</trait>
+  	</entity>
+  	<entity type="attribute" id="NutherBooleanAttr">
+  		<trait id="attribute-value-runtime-type">
   			<value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
-  		</property>
-  		<property name="barks">
-  			<value>WOOF</value>
-  			<value>RUFF</value>
-  			<value>HOWLLL</value>
-  		</property>
-  	</cm-attribute>  	
-  	<cm-attribute name="MyValidValsAttr">
-  		<property name="attribute-value-runtime-type">
+  		</trait>
+  		<trait id="barks">
+  			<value xsi:type="mdt:ListOfValues">
+	  			<item>WOOF</item>
+	  			<item>RUFF</item>
+	  			<item>HOWLLL</item>
+	  		</value>  		
+  		</trait>
+  	</entity>  	
+  	<entity type="attribute" id="MyValidValsAttr">
+  		<trait id="attribute-value-runtime-type">
   			<value>org.eclipse.jst.jsf.metadata.tests.MyStringArrayType</value>
-  		</property>
-  		<property name="valid-values">
-  			<value>FirstVal</value>
-  			<value>SecondVal</value>
-  			<value>ThirdVal</value>
-  			<value>FourthVal</value>
-  		</property>
-  	</cm-attribute>
-  	<cm-attribute name="MyNonMetaDataEnabledAttr">
-  		<property name="valid-values">
-  			<value>FirstVal</value>
-  			<value>SecondVal</value>
-  			<value>ThirdVal</value>
-  			<value>FourthVal</value>
-  		</property>
-  	</cm-attribute>
-  	<cm-attribute name="MyNoImplMetaDataEnabledAttr">
-  	  	<property name="attribute-value-runtime-type">
+  		</trait>
+  		<trait id="valid-values">
+  			<value xsi:type="mdt:ListOfValues">
+	  			<item>AFirstVal</item>
+	  			<item>ASecondVal</item>
+	  			<item>AThirdVal</item>
+	  			<item>AFourthVal</item>
+	  		</value>
+  		</trait>
+  	</entity>
+  	<entity type="attribute" id="MyNonMetaDataEnabledAttr">
+  		<trait id="valid-values">
+  			<value xsi:type="mdt:ListOfValues">
+	  			<item>AFirstVal</item>
+	  			<item>ASecondVal</item>
+	  			<item>AThirdVal</item>
+	  			<item>AFourthVal</item>
+	  		</value>
+  		</trait>
+  	</entity>
+  	<entity type="attribute" id="MyNoImplMetaDataEnabledAttr">
+  	  	<trait id="attribute-value-runtime-type">
   			<value>org.eclipse.jst.jsf.metadata.tests.NoImplType</value>
-  		</property>
-  		<property name="valid-values">
-  			<value>FirstVal</value>
-  			<value>SecondVal</value>
-  			<value>ThirdVal</value>
-  			<value>FourthVal</value>
-  		</property>
-  	</cm-attribute>
-  	<cm-attribute name="MyDualTypeAttr">
-  	  	<property name="attribute-value-runtime-type">
+  		</trait>
+  		<trait id="valid-values">
+  			<value xsi:type="mdt:ListOfValues">
+	  			<item>AFirstVal</item>
+	  			<item>ASecondVal</item>
+	  			<item>AThirdVal</item>
+	  			<item>AFourthVal</item>
+	  		</value>
+  		</trait>
+  	</entity>
+  	<entity type="attribute" id="MyDualTypeAttr">
+  	  	<trait id="attribute-value-runtime-type">
   			<value>org.eclipse.jst.jsf.metadata.tests.MyStringArrayType</value>
-  		</property>
-  		<property name="valid-values">
-  			<value>AFirstVal</value>
-  			<value>ASecondVal</value>
-  			<value>AThirdVal</value>
-  			<value>AFourthVal</value>
-  		</property>
-  	</cm-attribute>
-  	<cm-attribute name="MyLongAttr">
-  		<property name="attribute-value-runtime-type">
+  		</trait>
+  		<trait id="valid-values">
+  			<value xsi:type="mdt:ListOfValues">
+	  			<item>AFirstVal</item>
+	  			<item>ASecondVal</item>
+	  			<item>AThirdVal</item>
+	  			<item>AFourthVal</item>
+	  		</value>
+  		</trait>
+  	</entity>
+  	<entity type="attribute" id="MyLongAttr">
+  		<trait id="attribute-value-runtime-type">
   			<value>org.eclipse.jst.jsf.metadata.tests.MyLongType</value>
-  		</property>
-  	</cm-attribute>
-  	<cm-attribute name="MyMissingType">
-  		<property name="attribute-value-runtime-type">
+  		</trait>
+  	</entity>
+  	<entity type="attribute" id="MyMissingType">
+  		<trait id="attribute-value-runtime-type">
   			<value>org.eclipse.jst.jsf.metadata.tests.WhereIsIt</value>
-  		</property>
-  	</cm-attribute>
-  	<cm-attribute name="ValidatorID">
-	  	<property name="attribute-value-runtime-type">
+  		</trait>
+  	</entity>
+  	<entity type="attribute" id="ValidatorID">
+	  	<trait id="attribute-value-runtime-type">
 			<value>org.eclipse.jst.jsf.core.IdentifierType</value>
-		</property>
-	  	<property name="identifier-type">
+		</trait>
+	  	<trait id="identifier-type">
 	  		<value>javax.faces.validator</value>
-	  	</property>
-  	</cm-attribute>
-  </cm-element>
-</grammar-annotation>
+	  	</trait>
+  	</entity>
+  </entity>
+</metadatamodel>

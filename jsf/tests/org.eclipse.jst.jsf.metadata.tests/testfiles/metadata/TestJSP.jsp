@@ -10,7 +10,7 @@
 </head>
 <body>
 	<f:view>
-		
+		<MyTag attr1="foo"/>
 	</f:view>
 </body>
 </html>

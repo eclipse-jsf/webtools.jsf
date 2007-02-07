@@ -31,9 +31,10 @@ public class NoImplPossibleVals extends AbstractMetaDataEnabledFeature implement
 	}
 
 	private List getPossibleVals() {
-		return CMAnnotationHelper.getCMAttributePropertyValues(getCMAnnotationContext().getBundleId(), getCMAnnotationContext().getUri(),
-				getCMAnnotationContext().getElementName(), getCMAnnotationContext().getAttributeName(),
-				IPossibleValues.POSSIBLE_VALUES_PROP_NAME);
+		return getTraitValueAsListOfStrings(IPossibleValues.POSSIBLE_VALUES_PROP_NAME);
+//		return CMAnnotationHelper.getCMAttributePropertyValues(getCMAnnotationContext().getBundleId(), getCMAnnotationContext().getUri(),
+//				getCMAnnotationContext().getElementName(), getCMAnnotationContext().getAttributeName(),
+//				IPossibleValues.POSSIBLE_VALUES_PROP_NAME);
 
 	}
 	

@@ -2,32 +2,32 @@
 <?eclipse version="3.0"?>
 <plugin>
    <extension
-         point="org.eclipse.jst.jsf.common.annotationFiles">
-      <annotationFile
+         point="org.eclipse.jst.jsf.common.standardMetaDataFiles">
+      <standardMetaDataFile
             location="/testfiles/metadata/jsf_test.xml"
             uri="http://org.eclipse.jsf/test"/>
-      <annotationFile
+      <standardMetaDataFile
             location="/testfiles/metadata/jsf_test.xml"
             uri="http://org.eclipse.jsf/test2"
             parser="com.foobar.DifferentParser"/>
-      <annotationFile
+      <standardMetaDataFile
             location="/testfiles/metadata/FileA.xml"
-            uri="http://org.eclipse.jsf/dupeTest"/>
-      <annotationFile
+            uri="http://org.eclipse.jsf/mergetest1"/>
+      <standardMetaDataFile
             location="/testfiles/metadata/FileB.xml"
-            uri="http://org.eclipse.jsf/dupeTest"/>  
-      <annotationFile
-            location="/testfiles/metadata/CaseInsensitive.xml"
-            uri="http://org.eclipse.jsf/caseInsensitiveTest"/>     
-      <annotationFile
+            uri="http://org.eclipse.jsf/mergetest1"/>     
+      <standardMetaDataFile
+            location="/testfiles/metadata/FileIncludeExternalModel.xml"
+            uri="http://org.eclipse.jsf/mergetest2"/>               
+      <standardMetaDataFile
             location="/testfiles/metadata/doesntexist.xml"
-            uri=" http://org.eclipse.jsf/missingFile  "/>
-      <annotationFile
+            uri=" http://org.eclipse.jsf/missingFile "/>
+      <standardMetaDataFile
             location="/testfiles/metadata/jsf_metadataprocessing.xml"
             uri=" http://org.eclipse.jsf/metadataprocessing"/>
-      <annotationFile
+      <standardMetaDataFile
             location="/testfiles/metadata/jsf_tagprocessing.xml"
-            uri="http://org.eclipse.jsf/tagprocessing"/>                                                  
+            uri="http://org.eclipse.jsf/tagprocessing"/>                                                    
    </extension>
    <extension
          point="org.eclipse.jst.jsf.core.AttributeValueRuntimeTypes">

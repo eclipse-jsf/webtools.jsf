@@ -34,6 +34,7 @@ public class AttributeValueRuntimeTypeExtensionsTests extends TestCase {
 		
 		
 	}
+	
 	public void testGetPossibleValsWithExtensions(){
 		List processors	= MetaDataEnabledProcessingFactory.getInstance().
 			getAttributeValueRuntimeTypeFeatureProcessors(IPossibleValues.class, null, uri1, 

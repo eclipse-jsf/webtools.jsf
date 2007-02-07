@@ -11,6 +11,9 @@
  ********************************************************************************/
 package org.eclipse.jst.jsf.metadata.tests.annotations;
 /**
+ * CMAnnotatations Metadata framework has been "taken out of service"
+ * Please use org.eclipse.jst.jsf.common.metadata
+ * 
  * @author Gerry Kessler - Oracle
  */
 public interface ICMAnnotationTestCases {;

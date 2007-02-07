@@ -26,7 +26,7 @@ public class LongTypeTest extends TaglibProcessingTestCase {
 		Assert.assertNotNull(validValuesAdapters);
 		Assert.assertFalse(validValuesAdapters.isEmpty());
 		
-		IValidValues vv =(IValidValues)getProcessorForTaglibProcessingBundle(validValuesAdapters);
+		IValidValues vv =(IValidValues)validValuesAdapters.get(0);
 		Assert.assertTrue(vv.isValidValue("0"));
 		Assert.assertTrue(vv.getValidationMessages().size()==0);
 		vv.getValidationMessages().clear();
@@ -56,7 +56,7 @@ public class LongTypeTest extends TaglibProcessingTestCase {
 		Assert.assertNotNull(defaultValueAdapters);
 		Assert.assertFalse(defaultValueAdapters.isEmpty());
 		
-		IDefaultValue dv =(IDefaultValue)getProcessorForTaglibProcessingBundle(defaultValueAdapters);
+		IDefaultValue dv =(IDefaultValue)defaultValueAdapters.get(0);
 		Assert.assertTrue(dv.getDefaultValue() == null);
 //		Assert.assertTrue(dv.getDefaultValue().equals("10"));
 	}
