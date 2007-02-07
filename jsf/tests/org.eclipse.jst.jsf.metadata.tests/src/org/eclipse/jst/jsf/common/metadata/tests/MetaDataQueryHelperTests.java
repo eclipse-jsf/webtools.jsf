@@ -1,5 +1,7 @@
 package org.eclipse.jst.jsf.common.metadata.tests;
 
+import java.util.Collections;
+
 import junit.framework.TestCase;
 
 import org.eclipse.jst.jsf.common.metadata.internal.MetaDataModelContextImpl;
@@ -185,7 +187,12 @@ public class MetaDataQueryHelperTests extends AbstractBaseMetaDataTestCase {
 	}
 
 	public void testGetEntitiesEntityStringIEntityQueryVisitor() {
-		//provide test
+		//negative test
+		
+		IResultSet rs = MetaDataQueryHelper.getEntities(negativeContextBadUri, "foo", new SimpleMetaDataQueryVisitorImpl());
+		assertNotNull(rs);
+		assertNotNull(rs.getResults());
+		assertEquals(Collections.EMPTY_LIST, rs.getResults());
 	}
 
 	public void testGetTraitIMetaDataModelContextStringString() {
@@ -198,6 +205,9 @@ public class MetaDataQueryHelperTests extends AbstractBaseMetaDataTestCase {
 		assertNull(trait);
 		
 		trait = MetaDataQueryHelper.getTrait(baseContext, "doesnotexist", "A3");
+		assertNull(trait);
+		
+		trait = MetaDataQueryHelper.getTrait(negativeContextBadDomain, "doesnotexist", "A3");
 		assertNull(trait);
 	}
 	
