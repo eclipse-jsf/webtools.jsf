@@ -11,6 +11,9 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.jsf.ui.converter.jsfcore;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jst.pagedesigner.IJMTConstants;
 import org.eclipse.jst.pagedesigner.IJSFConstants;
@@ -20,6 +23,7 @@ import org.eclipse.jst.pagedesigner.converter.IConverterFactory;
 import org.eclipse.jst.pagedesigner.converter.ITagConverter;
 import org.eclipse.jst.pagedesigner.converter.TagConverterToInlineBlock;
 import org.eclipse.jst.pagedesigner.jsf.ui.JSFUIPlugin;
+import org.eclipse.jst.pagedesigner.jsf.ui.converter.DTTagConverter;
 import org.eclipse.swt.graphics.Image;
 import org.w3c.dom.Element;
 
@@ -32,6 +36,18 @@ public class JSFCoreConverterFactory implements IConverterFactory
 {
 
     private final ILabelProvider        _labelProvider;
+   
+    // TODO C.B: this is a transitional step so that we can incrementally add
+    // new meta-data driven tag converter one-by-one without breaking other existing
+    // if a tag name is in this set, the new DTTagConverter will be created for it,
+    // else, revert to original one
+    private final static Set                   _dtConversionSupported;
+    
+    static
+    {
+        _dtConversionSupported = new HashSet();
+        _dtConversionSupported.add(IJSFConstants.TAG_VIEW);
+    }
     
     /**
      * 
@@ -49,7 +65,12 @@ public class JSFCoreConverterFactory implements IConverterFactory
     {
         String tagName = element.getLocalName();
         ITagConverter converter;
-        if (IJSFConstants.TAG_VIEW.equalsIgnoreCase(tagName) || IJSFConstants.TAG_SUBVIEW.equalsIgnoreCase(tagName))
+        
+        if (_dtConversionSupported.contains(tagName))
+        {
+            converter = createDTTagConverter(element);
+        }
+        else if (IJSFConstants.TAG_VIEW.equalsIgnoreCase(tagName) || IJSFConstants.TAG_SUBVIEW.equalsIgnoreCase(tagName))
         {
             converter = new ViewTagConverter(element);
             ((ViewTagConverter) converter).setNeedBorderDecorator(true);
@@ -107,5 +128,10 @@ public class JSFCoreConverterFactory implements IConverterFactory
     public String getSupportedURI()
     {
         return IJMTConstants.URI_JSF_CORE;
+    }
+    
+    private ITagConverter createDTTagConverter(Element element)
+    {
+        return new DTTagConverter(element);
     }
 }

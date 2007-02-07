@@ -14,7 +14,6 @@ package org.eclipse.jst.pagedesigner.jsf.ui.elementedit.jsfhtml;
 import org.eclipse.jst.pagedesigner.IJMTConstants;
 import org.eclipse.jst.pagedesigner.IJSFConstants;
 import org.eclipse.jst.pagedesigner.dom.TagIdentifier;
-import org.eclipse.jst.pagedesigner.dom.TagIdentifierFactory;
 import org.eclipse.jst.pagedesigner.elementedit.IElementEdit;
 import org.eclipse.jst.pagedesigner.elementedit.IElementEditFactory;
 
@@ -24,29 +23,20 @@ import org.eclipse.jst.pagedesigner.elementedit.IElementEditFactory;
  */
 public class JSFHTMLElementEditFactory implements IElementEditFactory
 {
-    final static TagIdentifier DATA_TABLE_TAG_IDENTIFIER = 
-        TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_HTML, IJSFConstants.TAG_DATATABLE);
-    
-    final static TagIdentifier PANEL_GRID_TAG_IDENTIFIER =
-        TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_HTML, IJSFConstants.TAG_PANELGRID);
-    
-    final static TagIdentifier COLUMN_TAG_IDENTIFIER =
-        TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_HTML, IJSFConstants.TAG_COLUMN);
-        
     /* (non-Javadoc)
      * @see org.eclipse.jst.pagedesigner.elementedit.IElementEditFactory#createElementEdit(org.w3c.dom.Element)
      */
     public IElementEdit createElementEdit(final TagIdentifier tagIdentifier)
     {
-        if (DATA_TABLE_TAG_IDENTIFIER.isSameTagType(tagIdentifier))
+        if (IJSFConstants.TAG_IDENTIFIER_DATA_TABLE.isSameTagType(tagIdentifier))
         {
             return new DataTableElementEdit();
         }
-        else if (PANEL_GRID_TAG_IDENTIFIER.isSameTagType(tagIdentifier))
+        else if (IJSFConstants.TAG_IDENTIFIER_PANEL_GRID.isSameTagType(tagIdentifier))
         {
             return new PanelGridElementEdit();
         }
-        else if (COLUMN_TAG_IDENTIFIER.isSameTagType(tagIdentifier))
+        else if (IJSFConstants.TAG_IDENTIFIER_COLUMN.isSameTagType(tagIdentifier))
         {
             return new ColumnElementEdit();
         }

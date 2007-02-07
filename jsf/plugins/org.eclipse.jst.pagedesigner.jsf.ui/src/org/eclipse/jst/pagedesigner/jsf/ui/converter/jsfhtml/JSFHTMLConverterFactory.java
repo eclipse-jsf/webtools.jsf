@@ -11,6 +11,9 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.jsf.ui.converter.jsfhtml;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jst.pagedesigner.IJMTConstants;
 import org.eclipse.jst.pagedesigner.IJSFConstants;
@@ -18,6 +21,7 @@ import org.eclipse.jst.pagedesigner.converter.HiddenTagConverter;
 import org.eclipse.jst.pagedesigner.converter.IConverterFactory;
 import org.eclipse.jst.pagedesigner.converter.ITagConverter;
 import org.eclipse.jst.pagedesigner.jsf.ui.JSFUIPlugin;
+import org.eclipse.jst.pagedesigner.jsf.ui.converter.DTTagConverter;
 import org.eclipse.swt.graphics.Image;
 import org.w3c.dom.Element;
 
@@ -29,6 +33,21 @@ import org.w3c.dom.Element;
 public class JSFHTMLConverterFactory implements IConverterFactory
 {
     private final MyLabelProvider  _labelProvider;
+    
+    // TODO C.B: this is a transitional step so that we can incrementally add
+    // new meta-data driven tag converter one-by-one without breaking other existing
+    // if a tag name is in this set, the new DTTagConverter will be created for it,
+    // else, revert to original one
+    private final static Set                   _dtConversionSupported;
+    
+    static
+    {
+        _dtConversionSupported = new HashSet();
+        _dtConversionSupported.add(IJSFConstants.TAG_FORM);
+        _dtConversionSupported.add(IJSFConstants.TAG_INPUTTEXT);
+        _dtConversionSupported.add(IJSFConstants.TAG_OUTPUTTEXT);
+        _dtConversionSupported.add(IJSFConstants.TAG_OUTPUTLABEL);
+    }
     
     /**
      * 
@@ -44,9 +63,14 @@ public class JSFHTMLConverterFactory implements IConverterFactory
      */
     public ITagConverter createConverter(Element element, int mode)
     {
-        String tagName = element.getLocalName();
         ITagConverter converter;
-        if (IJSFConstants.TAG_COLUMN.equalsIgnoreCase(tagName))
+        String tagName = element.getLocalName();
+        
+        if (_dtConversionSupported.contains(tagName))
+        {
+            converter = createDTTagConverter(element);
+        }
+        else if (IJSFConstants.TAG_COLUMN.equalsIgnoreCase(tagName))
         {
             converter = new ColumnTagConverter(element);
         }
@@ -180,5 +204,9 @@ public class JSFHTMLConverterFactory implements IConverterFactory
     {
         return IJMTConstants.URI_JSF_HTML;
     }
-
+    
+    private ITagConverter createDTTagConverter(Element element)
+    {
+        return new DTTagConverter(element);
+    }
 }

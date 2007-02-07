@@ -31,6 +31,7 @@ import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jst.pagedesigner.IJSFConstants;
 import org.eclipse.jst.pagedesigner.actions.single.SelectEditPartAction;
 import org.eclipse.jst.pagedesigner.dom.TagIdentifier;
 import org.eclipse.jst.pagedesigner.editors.PageDesignerActionConstants;
@@ -48,7 +49,6 @@ import org.eclipse.jst.pagedesigner.jsf.ui.commands.jsfhtml.DataTableDeleteHeade
 import org.eclipse.jst.pagedesigner.jsf.ui.commands.jsfhtml.DataTableInsertColumnCommand;
 import org.eclipse.jst.pagedesigner.jsf.ui.commands.jsfhtml.DataTableInsertColumnHeaderCommand;
 import org.eclipse.jst.pagedesigner.jsf.ui.commands.jsfhtml.DataTableInsertHeaderCommand;
-import org.eclipse.jst.pagedesigner.jsf.ui.elementedit.jsfcore.JSFCoreElementEditFactory;
 import org.eclipse.jst.pagedesigner.jsf.ui.elementedit.request.DeleteHColumnHeaderFooterRequest;
 import org.eclipse.jst.pagedesigner.jsf.ui.elementedit.request.DeleteHeaderFooterRequest;
 import org.eclipse.jst.pagedesigner.jsf.ui.elementedit.request.InsertHColumnHeaderFooterRequest;
@@ -441,7 +441,7 @@ public class DataTableElementEdit extends DefaultJSFHTMLElementEdit
             }
 
             public boolean isEditable(Target target) {
-                if (JSFHTMLElementEditFactory.DATA_TABLE_TAG_IDENTIFIER.isSameTagType(target.getTagWrapper()))
+                if (IJSFConstants.TAG_IDENTIFIER_DATA_TABLE.isSameTagType(target.getTagWrapper()))
                 {
                     return isDataDroppable();
                 }
@@ -458,8 +458,8 @@ public class DataTableElementEdit extends DefaultJSFHTMLElementEdit
                     TagIdentifier tagId = 
                         (TagIdentifier) dropActionData.getDropData().getTagIdentifiers().get(0);
                             
-                    if (JSFCoreElementEditFactory.FACET_TAG_IDENTIFIER.isSameTagType(tagId)
-                            || JSFHTMLElementEditFactory.COLUMN_TAG_IDENTIFIER.isSameTagType(tagId))
+                    if (IJSFConstants.TAG_IDENTIFIER_FACET.isSameTagType(tagId)
+                            || IJSFConstants.TAG_IDENTIFIER_COLUMN.isSameTagType(tagId))
                     {
                         return true;
                     }

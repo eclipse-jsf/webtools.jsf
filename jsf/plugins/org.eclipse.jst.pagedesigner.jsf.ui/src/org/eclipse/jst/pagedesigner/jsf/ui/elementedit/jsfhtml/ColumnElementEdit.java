@@ -19,6 +19,7 @@ import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.GraphicalEditPart;
+import org.eclipse.jst.pagedesigner.IJSFConstants;
 import org.eclipse.jst.pagedesigner.dom.TagIdentifier;
 import org.eclipse.jst.pagedesigner.editpolicies.ColumnHelper;
 import org.eclipse.jst.pagedesigner.editpolicies.ColumnResizableEditPolicy;
@@ -85,7 +86,7 @@ public class ColumnElementEdit extends DefaultJSFHTMLElementEdit
                 // targetting a column, then we can see if its table will take it
                 TagIdentifier tagId = ((ElementEditPart)target).getTagIdentifier();
                 
-                if (JSFHTMLElementEditFactory.DATA_TABLE_TAG_IDENTIFIER.isSameTagType(tagId))
+                if (IJSFConstants.TAG_IDENTIFIER_DATA_TABLE.isSameTagType(tagId))
                 {
                     // if we're on the table, try to figure out which column we are above
                     for (Iterator it = target.getChildren().iterator(); it.hasNext();)
@@ -93,7 +94,7 @@ public class ColumnElementEdit extends DefaultJSFHTMLElementEdit
                         final NodeEditPart nodeEditPart = (NodeEditPart) it.next();
                         TagIdentifier tagId2 = nodeEditPart.getTagIdentifier();
                         
-                        if (JSFHTMLElementEditFactory.COLUMN_TAG_IDENTIFIER.isSameTagType(tagId2))
+                        if (IJSFConstants.TAG_IDENTIFIER_COLUMN.isSameTagType(tagId2))
                         {
                             final Rectangle columnBounds = 
                                 ColumnHelper.getAdjustedColumnBoundingRectangle(nodeEditPart);
@@ -109,7 +110,7 @@ public class ColumnElementEdit extends DefaultJSFHTMLElementEdit
                 // recalculate the id because it may have changed
                 tagId = ((ElementEditPart)target).getTagIdentifier();
                 
-                if (JSFHTMLElementEditFactory.COLUMN_TAG_IDENTIFIER.isSameTagType(tagId))
+                if (IJSFConstants.TAG_IDENTIFIER_COLUMN.isSameTagType(tagId))
                 {
                     DesignPosition position = null;
                     final Rectangle columnBounds = 

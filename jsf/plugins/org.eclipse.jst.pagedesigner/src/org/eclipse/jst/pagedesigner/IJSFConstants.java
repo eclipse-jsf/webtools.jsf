@@ -11,10 +11,15 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner;
 
+import org.eclipse.jst.pagedesigner.dom.TagIdentifier;
+import org.eclipse.jst.pagedesigner.dom.TagIdentifierFactory;
+
 /**
  * @author mengbo
  */
 public interface IJSFConstants {
+    
+    
 	// tag name
 	final static public String TAG_ACTIONLISTENER = "actionListener";
 
@@ -101,6 +106,38 @@ public interface IJSFConstants {
 	final static public String TAG_SELECTONEMENU = "selectOneMenu";
 
 	final static public String TAG_SELECTONERADIO = "selectOneRadio";
+
+    // tag identifiers
+    final static TagIdentifier TAG_IDENTIFIER_VIEW =
+        TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_CORE, TAG_VIEW);
+
+    final static TagIdentifier TAG_IDENTIFIER_LOADBUNDLE =
+        TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_CORE, TAG_LOADBUNDLE);
+
+    final static TagIdentifier TAG_IDENTIFIER_FACET =
+        TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_CORE, TAG_FACET);
+    
+    final static TagIdentifier TAG_IDENTIFIER_DATA_TABLE = 
+        TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_HTML, TAG_DATATABLE);
+
+    final static TagIdentifier TAG_IDENTIFIER_PANEL_GRID =
+       TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_HTML, TAG_PANELGRID);
+
+    final static TagIdentifier TAG_IDENTIFIER_COLUMN =
+       TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_HTML, TAG_COLUMN);
+
+    final static TagIdentifier TAG_IDENTIFIER_FORM =
+        TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_HTML, TAG_FORM);
+
+    final static TagIdentifier TAG_IDENTIFIER_INPUTTEXT =
+        TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_HTML, TAG_INPUTTEXT);
+    
+    final static TagIdentifier TAG_IDENTIFIER_OUTPUTTEXT =
+        TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_HTML, TAG_OUTPUTTEXT);
+    
+    final static TagIdentifier TAG_IDENTIFIER_OUTPUTLABEL =
+        TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_HTML, TAG_OUTPUTLABEL);
+    
 
 	// attribute name
 	final static public String ATTR_ACCEPT = "accept";
