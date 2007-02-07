@@ -120,7 +120,7 @@ public class TraitValueHelper {
 		if (val == null)
 			return false;
 		
-		return Boolean.parseBoolean(val);
+		return Boolean.valueOf(val).booleanValue();
 
 	}
 
