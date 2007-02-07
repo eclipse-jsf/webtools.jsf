@@ -25,6 +25,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.ISafeRunnable;
 import org.eclipse.core.runtime.QualifiedName;
 import org.eclipse.jface.util.SafeRunnable;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.Model;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IMetaDataModelContext;
 
 /*
@@ -115,7 +116,7 @@ public class MetaDataModelManager implements IResourceChangeListener{
 	
 	
 	/**
-	 * Will locate the cached MetaDataModel
+	 * Will locate the cached MetaDataModel.   Sets the model context in the model.
 	 * @param modelContext
 	 * @return the MetaDataModel for the given IMetaDataModelContext
 	 */
@@ -133,6 +134,9 @@ public class MetaDataModelManager implements IResourceChangeListener{
 				model = loadMetadata(modelKeyDescriptor);
 			}
 		}
+		if (model != null && model.getRoot() != null)
+			((Model)model.getRoot()).setCurrentModelContext(modelKeyDescriptor);
+		
 		return model;
 	}
 	
@@ -176,7 +180,10 @@ public class MetaDataModelManager implements IResourceChangeListener{
 	private synchronized MetaDataModel loadMetadata(ModelKeyDescriptor modelKeyDescriptor){
 //		System.out.println("loadMetadata");//debug
 		IDomainLoadingStrategy strategy = DomainLoadingStrategyRegistry.getInstance().getLoadingStrategy(modelKeyDescriptor.getDomain());;
-		
+		if (strategy == null){
+			//TODO log internal error
+			return null;
+		}
 		MetaDataModel model = StandardModelFactory.getInstance().createModel(modelKeyDescriptor, strategy);//new MetaDataModel(modelKey, strategy);
 		model.load();
 		addModel(model);

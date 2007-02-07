@@ -20,7 +20,7 @@ public interface ITraitQueryVisitor extends ITraitVisitor{
 	/**
 	 * @param entity
 	 * @param traitKey
-	 * @return IResultSet of Traits
+	 * @return IResultSet of Traits.  IResultSet should NOT be null.
 	 */
 	public IResultSet/*<Trait>*/ findTraits(final Entity entity,
 			final String traitKey);

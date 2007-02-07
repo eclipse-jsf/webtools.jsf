@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MetadataFactoryImpl.java,v 1.1 2007/01/15 23:26:15 gkessler Exp $
+ * $Id: MetadataFactoryImpl.java,v 1.2 2007/02/07 00:03:49 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.impl;
 
@@ -14,7 +14,14 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.*;
+import org.eclipse.jst.jsf.common.metadata.internal.ModelKeyDescriptor;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.EntityGroup;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.IncludeEntityGroup;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.MetadataFactory;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.MetadataPackage;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.Model;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
 
 
 
@@ -68,9 +75,11 @@ public class MetadataFactoryImpl extends EFactoryImpl implements MetadataFactory
 	 */
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case MetadataPackage.TRAIT: return createTrait();
 			case MetadataPackage.MODEL: return createModel();
+			case MetadataPackage.ENTITY_GROUP: return createEntityGroup();
 			case MetadataPackage.ENTITY: return createEntity();
+			case MetadataPackage.TRAIT: return createTrait();
+			case MetadataPackage.INCLUDE_ENTITY_GROUP: return createIncludeEntityGroup();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -85,6 +94,8 @@ public class MetadataFactoryImpl extends EFactoryImpl implements MetadataFactory
 		switch (eDataType.getClassifierID()) {
 			case MetadataPackage.IMETA_DATA_SOURCE_MODEL_PROVIDER:
 				return createIMetaDataSourceModelProviderFromString(eDataType, initialValue);
+			case MetadataPackage.MODEL_CONTEXT:
+				return createModelContextFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -99,6 +110,8 @@ public class MetadataFactoryImpl extends EFactoryImpl implements MetadataFactory
 		switch (eDataType.getClassifierID()) {
 			case MetadataPackage.IMETA_DATA_SOURCE_MODEL_PROVIDER:
 				return convertIMetaDataSourceModelProviderToString(eDataType, instanceValue);
+			case MetadataPackage.MODEL_CONTEXT:
+				return convertModelContextToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -112,6 +125,16 @@ public class MetadataFactoryImpl extends EFactoryImpl implements MetadataFactory
 	public Trait createTrait() {
 		TraitImpl trait = new TraitImpl();
 		return trait;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public IncludeEntityGroup createIncludeEntityGroup() {
+		IncludeEntityGroupImpl includeEntityGroup = new IncludeEntityGroupImpl();
+		return includeEntityGroup;
 	}
 
 	/**
@@ -139,6 +162,16 @@ public class MetadataFactoryImpl extends EFactoryImpl implements MetadataFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EntityGroup createEntityGroup() {
+		EntityGroupImpl entityGroup = new EntityGroupImpl();
+		return entityGroup;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public IMetaDataSourceModelProvider createIMetaDataSourceModelProviderFromString(EDataType eDataType, String initialValue) {
 		return (IMetaDataSourceModelProvider)super.createFromString(eDataType, initialValue);
 	}
@@ -149,6 +182,24 @@ public class MetadataFactoryImpl extends EFactoryImpl implements MetadataFactory
 	 * @generated
 	 */
 	public String convertIMetaDataSourceModelProviderToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ModelKeyDescriptor createModelContextFromString(EDataType eDataType, String initialValue) {
+		return (ModelKeyDescriptor)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertModelContextToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 

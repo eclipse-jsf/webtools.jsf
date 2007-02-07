@@ -39,7 +39,7 @@ public class IntegerType extends NumberType {
 			exceedsMaxValue(anInt.intValue());
 			lessThanMinValue(anInt.intValue());
 			if (!(minFound || maxFound)){
-				List validVals = getCMValidValues();
+				List validVals = getMDValidValues();
 				if (!validVals.isEmpty()){
 					if (!validVals.contains(value)){
 						addNewValidationMessage(Messages.IntegerType_invalid_member);//fix me

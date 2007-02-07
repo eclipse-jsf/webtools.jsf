@@ -62,9 +62,13 @@ public class JSFContentAssistProcessor implements IContentAssistProcessor {
 	private ITextRegionContextResolver resolver;
 	private ITaglibContextResolver tlResolver;
 	private String defaultAdditionalInfo;
-	private Image defaultAttrValImg;
+
 	private String defaultIconPath = "/icons/attr_val.gif";
+	
+	//move to plugin and have plugin destroy this on shutdown 
+	private Image defaultAttrValImg;
 	private ImageRegistry imgRegistry = new ImageRegistry();
+	
 	private MarkupTagInfoProvider fInfoProvider;
 
 	/**

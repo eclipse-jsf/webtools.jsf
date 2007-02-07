@@ -2,14 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Entity.java,v 1.1 2007/01/15 23:26:14 gkessler Exp $
+ * $Id: Entity.java,v 1.2 2007/02/07 00:03:49 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.provisional;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IEntityVisitor;
 
 /**
@@ -22,9 +20,9 @@ import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IEntityVis
  * <ul>
  *   <li>{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity#getChildEntities <em>Child Entities</em>}</li>
  *   <li>{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity#getTraits <em>Traits</em>}</li>
- *   <li>{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity#getParent <em>Parent</em>}</li>
  *   <li>{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity#getId <em>Id</em>}</li>
  *   <li>{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity#getIncludeGroups <em>Include Groups</em>}</li>
  * </ul>
  * </p>
  *
@@ -43,7 +41,6 @@ public interface Entity extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Child Entities</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity#getParent <em>Parent</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Child Entities</em>' containment reference list isn't clear,
@@ -52,8 +49,7 @@ public interface Entity extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Child Entities</em>' containment reference list.
 	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.MetadataPackage#getEntity_ChildEntities()
-	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity#getParent
-	 * @model type="org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity" opposite="parent" containment="true"
+	 * @model type="org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity" containment="true"
 	 *        extendedMetaData="kind='element' name='entity'"
 	 * @generated
 	 */
@@ -75,34 +71,6 @@ public interface Entity extends EObject {
 	 * @generated
 	 */
 	EList getTraits();
-
-	/**
-	 * Returns the value of the '<em><b>Parent</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity#getChildEntities <em>Child Entities</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Parent</em>' container reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Parent</em>' container reference.
-	 * @see #setParent(Entity)
-	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.MetadataPackage#getEntity_Parent()
-	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity#getChildEntities
-	 * @model opposite="childEntities"
-	 * @generated
-	 */
-	Entity getParent();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity#getParent <em>Parent</em>}' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Parent</em>' container reference.
-	 * @see #getParent()
-	 * @generated
-	 */
-	void setParent(Entity value);
 
 	/**
 	 * Returns the value of the '<em><b>Id</b></em>' attribute.
@@ -157,12 +125,36 @@ public interface Entity extends EObject {
 	void setType(String value);
 
 	/**
+	 * Returns the value of the '<em><b>Include Groups</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.jst.jsf.common.metadata.internal.provisional.IncludeEntityGroup}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Include Groups</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Include Groups</em>' reference list.
+	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.MetadataPackage#getEntity_IncludeGroups()
+	 * @model type="org.eclipse.jst.jsf.common.metadata.internal.provisional.IncludeEntityGroup"
+	 *        extendedMetaData="kind='element' name='include-entity-group'"
+	 * @generated
+	 */
+	EList getIncludeGroups();
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model visitorDataType="org.eclipse.jst.jsf.common.metadata.internal.provisional.IEntityVisitor"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='if (visitor.stopVisiting())\r\n\treturn;\r\nvisitor.visit(this);\r\n\r\nif (!getChildEntities().isEmpty()){\r\n\tfor (Iterator/*<Entity>\052/ it = getChildEntities().iterator(); it.hasNext();){\r\n\t\tEntity k = (Entity)it.next();\r\n\t\tk.accept(visitor);\r\n\t\tif (visitor.stopVisiting())\r\n\t\t\treturn;\r\n\t}\r\n}\r\nvisitor.visitCompleted();'"
 	 * @generated
 	 */
 	void accept(IEntityVisitor visitor);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	Model getModel();
 
 } // Entity

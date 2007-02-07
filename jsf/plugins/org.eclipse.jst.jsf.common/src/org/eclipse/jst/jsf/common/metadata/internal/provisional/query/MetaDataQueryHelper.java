@@ -11,7 +11,11 @@
  ********************************************************************************/
 package org.eclipse.jst.jsf.common.metadata.internal.provisional.query;
 
+import java.util.Collections;
+
+import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.common.metadata.internal.MetaDataModel;
+import org.eclipse.jst.jsf.common.metadata.internal.MetaDataModelContextImpl;
 import org.eclipse.jst.jsf.common.metadata.internal.MetaDataModelManager;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Model;
@@ -31,7 +35,11 @@ import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
  * @see IMetaDataModelContext
  */
 public class MetaDataQueryHelper{
-
+	public static final String TAGLIB_DOMAIN = "TagLibraryDomain"; //need better place for this
+	
+	public static IMetaDataModelContext createMetaDataModelContext(IProject project, String domain, String uri){
+		return new MetaDataModelContextImpl(project, domain, uri);
+	}
 	/**
 	 * @param modelContext
 	 * @return Model object for given context.   May return null if not located.
@@ -55,12 +63,10 @@ public class MetaDataQueryHelper{
 		IEntityQueryVisitor visitor = new SimpleMetaDataQueryVisitorImpl(new SearchControl(1, SearchControl.SCOPE_ALL_LEVELS));
 		IResultSet/*<Entity>*/ rs = getEntities(modelContext,entityKey,  visitor);
 		Entity e = null;
-		if (rs != null){
-			if (rs.hasMoreElements()){
-				e = (Entity)rs.nextElement();				
-			}
-			rs.close();
-		}			
+		if (rs.getResults().size() > 0){
+			e = (Entity)rs.getResults().get(0);				
+		}
+		rs.close();
 		return e;
 	}
 
@@ -90,9 +96,9 @@ public class MetaDataQueryHelper{
 		ITraitQueryVisitor visitor = new SimpleMetaDataQueryVisitorImpl();	
 		Trait t= null;
 		IResultSet/*<Trait>*/ rs = getTraits(entity, traitKey, visitor);
-		if (rs.hasMoreElements())
-			t = (Trait)rs.nextElement();
-		
+		if (rs.getResults().size() > 0){
+			t = (Trait)rs.getResults().get(0);				
+		}
 		rs.close();
 		return t;
 	}
@@ -101,7 +107,7 @@ public class MetaDataQueryHelper{
 	 * @param entity
 	 * @param traitKey
 	 * @param traitQueryVisitor
-	 * @return an IResultSet of trait objects using supplied traitQueryVisitor
+	 * @return an IResultSet of trait objects using supplied traitQueryVisitor.  IResultSet should NOT be null.
 	 */
 	public static IResultSet/*<Trait>*/ getTraits(Entity entity, String traitKey,
 			ITraitQueryVisitor traitQueryVisitor) { 
@@ -118,8 +124,8 @@ public class MetaDataQueryHelper{
 		IEntityQueryVisitor visitor = new SimpleMetaDataQueryVisitorImpl(new SearchControl(1, SearchControl.SCOPE_ALL_LEVELS));
 		Entity e= null;
 		IResultSet/*<Entity>*/ rs = getEntities(initialEntityContext, entityKey, visitor);
-		if (rs.hasMoreElements())
-			e = (Entity)rs.nextElement();
+		if (rs.getResults().size() > 0)
+			e = (Entity)rs.getResults().get(0);
 		
 		rs.close();
 		return e;		
@@ -129,7 +135,7 @@ public class MetaDataQueryHelper{
 	 * @param initialEntityContext
 	 * @param entityKey relative to initial passed entity
 	 * @param entityKeyQueryVisitor
-	 * @return IResultSet of entities located by key using entityQueryVisitor
+	 * @return IResultSet of entities located by key using entityQueryVisitor.  IResultSet should NOT be null.
 	 */
 	public static IResultSet/*<Entity>*/ getEntities(Entity initialEntityContext, String entityQuery,
 			IEntityQueryVisitor entityKeyQueryVisitor) {
@@ -152,21 +158,6 @@ public class MetaDataQueryHelper{
 		
 		return mgr.getModel(modelContext);
 	}
-//	
-//	public static SimpleResultSet<Trait> getTraits(final IMetaDataModelContext modelContext, 
-//				final String entityKey, final IEntityQueryVisitor entityVisitor, 
-//				final String traitKey, final ITraitQueryVisitor traitVisitor){
-//		Model model = getModel(modelContext);
-//		//we may want to throw error that model is empty
-//		if (model != null){
-//			String key = getEntityKeyWithModelURIIfNecessary(modelContext.getURI(), entityKey);
-//			SimpleResultSet entity = getEntity(model, key, entityVisitor);
-//			if (entity != null)
-//				return getTrait(entity, traitKey, traitVisitor);
-//		}
-//		return null;
-//	}
-	
 
 	/**
 	 * @param modelContext

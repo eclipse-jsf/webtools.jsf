@@ -2,11 +2,14 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Model.java,v 1.1 2007/01/15 23:26:14 gkessler Exp $
+ * $Id: Model.java,v 1.2 2007/02/07 00:03:49 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.provisional;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider;
+import org.eclipse.jst.jsf.common.metadata.internal.ModelKeyDescriptor;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IEntityVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -16,7 +19,9 @@ import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.Model#getEntityGroups <em>Entity Groups</em>}</li>
  *   <li>{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.Model#getSourceModelProvider <em>Source Model Provider</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.Model#getCurrentModelContext <em>Current Model Context</em>}</li>
  * </ul>
  * </p>
  *
@@ -57,5 +62,64 @@ public interface Model extends Entity {
 	 * @generated
 	 */
 	void setSourceModelProvider(IMetaDataSourceModelProvider value);
+
+	/**
+	 * Returns the value of the '<em><b>Current Model Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Current Model Context</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Current Model Context</em>' attribute.
+	 * @see #setCurrentModelContext(ModelKeyDescriptor)
+	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.MetadataPackage#getModel_CurrentModelContext()
+	 * @model dataType="org.eclipse.jst.jsf.common.metadata.internal.provisional.ModelContext" transient="true" volatile="true"
+	 * @generated
+	 */
+	ModelKeyDescriptor getCurrentModelContext();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.Model#getCurrentModelContext <em>Current Model Context</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Current Model Context</em>' attribute.
+	 * @see #getCurrentModelContext()
+	 * @generated
+	 */
+	void setCurrentModelContext(ModelKeyDescriptor value);
+
+	/**
+	 * Returns the value of the '<em><b>Entity Groups</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.jst.jsf.common.metadata.internal.provisional.EntityGroup}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Entity Groups</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Entity Groups</em>' reference list.
+	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.MetadataPackage#getModel_EntityGroups()
+	 * @model type="org.eclipse.jst.jsf.common.metadata.internal.provisional.EntityGroup"
+	 *        extendedMetaData="kind='element' name='entityGroup'"
+	 * @generated
+	 */
+	EList getEntityGroups();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	EntityGroup findIncludeGroup(String groupId);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model visitorDataType="org.eclipse.jst.jsf.common.metadata.internal.provisional.IEntityVisitor"
+	 * @generated
+	 */
+	void accept(IEntityVisitor visitor);
 
 } // Model

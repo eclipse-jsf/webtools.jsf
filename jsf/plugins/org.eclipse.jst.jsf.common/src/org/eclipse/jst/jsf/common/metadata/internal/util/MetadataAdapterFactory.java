@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MetadataAdapterFactory.java,v 1.2 2007/01/24 17:22:47 gkessler Exp $
+ * $Id: MetadataAdapterFactory.java,v 1.3 2007/02/07 00:03:50 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.util;
 
@@ -12,6 +12,8 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.EntityGroup;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.IncludeEntityGroup;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.MetadataPackage;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Model;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
@@ -80,14 +82,20 @@ public class MetadataAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected MetadataSwitch modelSwitch =
 		new MetadataSwitch() {
-			public Object caseTrait(Trait object) {
-				return createTraitAdapter();
-			}
 			public Object caseModel(Model object) {
 				return createModelAdapter();
 			}
+			public Object caseEntityGroup(EntityGroup object) {
+				return createEntityGroupAdapter();
+			}
 			public Object caseEntity(Entity object) {
 				return createEntityAdapter();
+			}
+			public Object caseTrait(Trait object) {
+				return createTraitAdapter();
+			}
+			public Object caseIncludeEntityGroup(IncludeEntityGroup object) {
+				return createIncludeEntityGroupAdapter();
 			}
 			public Object defaultCase(EObject object) {
 				return createEObjectAdapter();
@@ -122,6 +130,20 @@ public class MetadataAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.IncludeEntityGroup <em>Include Entity Group</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.IncludeEntityGroup
+	 * @generated
+	 */
+	public Adapter createIncludeEntityGroupAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.Model <em>Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -146,6 +168,20 @@ public class MetadataAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createEntityAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.EntityGroup <em>Entity Group</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.EntityGroup
+	 * @generated
+	 */
+	public Adapter createEntityGroupAdapter() {
 		return null;
 	}
 

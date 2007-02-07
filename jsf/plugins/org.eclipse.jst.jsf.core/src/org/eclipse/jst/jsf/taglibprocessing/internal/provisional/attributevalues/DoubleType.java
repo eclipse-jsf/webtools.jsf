@@ -37,7 +37,7 @@ public class DoubleType extends NumberType {
 			exceedsMaxValue(dbl.doubleValue());
 			lessThanMinValue(dbl.doubleValue());
 			if (!(minFound || maxFound)){
-				List validVals = getCMValidValues();
+				List validVals = getMDValidValues();
 				if (!validVals.isEmpty()){
 					if (!validVals.contains(value)){
 						addNewValidationMessage(Messages.DoubleType_invalid_member);//fix me

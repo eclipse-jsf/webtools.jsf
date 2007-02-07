@@ -14,6 +14,7 @@ package org.eclipse.jst.jsf.common.metadata.internal;
 import java.util.Iterator;
 
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.EntityGroup;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Model;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
 
@@ -41,6 +42,13 @@ public class StandardAnnotationFilesTranslator implements IMetaDataTranslator {
 	protected void traverseAndAdd(IMetaDataModelMergeAssistant assistant, final Entity entity){
 		assistant.addEntity(entity);
 		
+		if (entity instanceof Model){
+			Model model = (Model)entity;
+			for (final Iterator/*EntityGroup*/ it=model.getEntityGroups().iterator();it.hasNext();){
+				assistant.addEntityGroup((EntityGroup)it.next());
+			}
+		}
+		
 		for (final Iterator/*<Trait>*/ it=entity.getTraits().iterator();it.hasNext();){
 			Trait trait = (Trait)it.next();
 			assistant.addTrait(entity, trait);
@@ -50,5 +58,6 @@ public class StandardAnnotationFilesTranslator implements IMetaDataTranslator {
 			Entity e = (Entity)it.next();
 			traverseAndAdd(assistant, e);
 		}
+		
 	}
 }

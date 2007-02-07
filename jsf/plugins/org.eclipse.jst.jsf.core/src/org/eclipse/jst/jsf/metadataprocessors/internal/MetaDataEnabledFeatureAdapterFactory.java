@@ -64,7 +64,7 @@ public final class MetaDataEnabledFeatureAdapterFactory {
 				} 
 				else if (processingFeature.isAssignableFrom(klass)){
 					IMetaDataEnabledFeature obj = (IMetaDataEnabledFeature)klass.newInstance();
-					obj.setBundleID(featureExt.getBundleID());
+//					obj.setBundleID(featureExt.getBundleID());
 					return obj;
 				}
 			}

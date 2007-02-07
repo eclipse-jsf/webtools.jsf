@@ -23,7 +23,7 @@ import org.eclipse.jst.jsf.metadataprocessors.internal.MetaDataEnabledFeatureReg
 
 /**
  * Default implementation that a metadata type should strongly consider for using as it's root.
- * This implementation allows for a class implementing ITypeDescriptor to also contain features so
+ * This implementation allows for a class implementing {@link ITypeDescriptor} to also contain features so
  * that it is not necessary to declare the features using the MetaDataEnabledFeatures ext-pt 
  * 
  * @author Gerry Kessler - Oracle
@@ -35,7 +35,7 @@ public abstract class AbstractRootTypeDescriptor extends AbstractMetaDataEnabled
 	
 	/**
 	 * Default implementation that will return <code>this</code> if it supports the processing feature,
-	 * and all IMetaDataFeatures that also support this feature on this type.   The caller can determine
+	 * and all {@link IMetaDataEnabledFeature}s that also support this feature on this type.   The caller can determine
 	 * which one or more of the returned processors to use.
 	 *    
 	 * @param processingFeature class
@@ -48,7 +48,7 @@ public abstract class AbstractRootTypeDescriptor extends AbstractMetaDataEnabled
 		Assert.isTrue(processingFeature.isInterface());
 		List ret = new ArrayList(3);
 		if (processingFeature.isInstance(this)) {
-			((IMetaDataEnabledFeature)this).setBundleID(type.getBundleID());
+//			((IMetaDataEnabledFeature)this).setBundleID(type.getBundleID());
 			ret.add(this);
 		}
 		
@@ -60,7 +60,7 @@ public abstract class AbstractRootTypeDescriptor extends AbstractMetaDataEnabled
 	
 	/**
 	 * This implementation relies on the the feature implementor using a subclass of AbstractRootTypeDescriptor 
-	 * which implements IMetaDataEnabledFeature.
+	 * which implements {@link IMetaDataEnabledFeature}.
 	 * 
 	 * @param processingFeature
 	 * @return list of <code>IMetaDataEnabledFeature</code>s

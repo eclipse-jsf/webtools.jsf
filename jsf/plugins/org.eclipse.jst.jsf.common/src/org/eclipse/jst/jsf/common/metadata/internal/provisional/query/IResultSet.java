@@ -11,13 +11,20 @@
  ********************************************************************************/
 package org.eclipse.jst.jsf.common.metadata.internal.provisional.query;
 
-import java.util.Enumeration;
+import java.util.List;
+
 
 /**
- * An enumeration of results from a metadata query
- *
+ * Results from a metadata query.
+ * 
+ * Not intended to be implemented directly by clients.  Developers may extend {@link AbstractResultSet} instead.
  */
-public interface IResultSet/*<T>*/ extends Enumeration/*<T>*/{
+public interface IResultSet/*<T>*/{
+	
+	/**
+	 * @return List of results.  May be null.
+	 */
+	public List/*<T>*/ getResults();
 	/**
 	 * Signal that the query results are no longer required allowing for any cleanup that may be required
 	 */

@@ -20,14 +20,17 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.QualifiedName;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
-import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.CMAnnotationHelper;
-import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.CMAnnotationPropertyValue;
+import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IMetaDataModelContext;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.MetaDataQueryHelper;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.IStructuredDocumentContextResolverFactory;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.ITaglibContextResolver;
 import org.eclipse.jst.jsf.context.structureddocument.internal.provisional.IStructuredDocumentContext;
@@ -299,7 +302,7 @@ public class JSPModelProcessor
     {
         final SymbolContribAggregator  aggregator =
             SymbolContribAggregator.
-               create(uri, elementName, attribute.getLocalName());
+               create(_file.getProject(), uri, elementName, attribute.getLocalName());
   
         if (aggregator != null)
         {    
@@ -340,7 +343,7 @@ public class JSPModelProcessor
     
     private void processSetsLocale(final String uri, final String elementName, Node attribute)
     {
-        LocaleSetAggregator  aggregator = LocaleSetAggregator.create(uri, elementName, attribute.getLocalName());
+        LocaleSetAggregator  aggregator = LocaleSetAggregator.create(_file.getProject(), uri, elementName, attribute.getLocalName());
 
         if (aggregator != null)
         {
@@ -486,19 +489,14 @@ public class JSPModelProcessor
     {
         private final static String SETS_LOCALE = "sets-locale";
         
-        static LocaleSetAggregator create(final String uri, 
-                                              final String elementName, 
-                                              final String attributeName)
-        {
-            List properties =
-                CMAnnotationHelper.
-                    getCMAttributeProperties(uri, 
-                                             elementName, 
-                                             attributeName,
-                                             SETS_LOCALE);
+        static LocaleSetAggregator create(IProject project, 
+                                              final String uri, 
+                                              final String elementName, final String attributeName)
+        {            
+        	final IMetaDataModelContext mdContext = MetaDataQueryHelper.createMetaDataModelContext(project, MetaDataQueryHelper.TAGLIB_DOMAIN, uri);
+            Trait trait = MetaDataQueryHelper.getTrait(mdContext, elementName+"/"+attributeName, SETS_LOCALE);
 
-            if (properties != null
-                    && properties.size() > 0)
+            if (TraitValueHelper.getValueAsBoolean(trait))
             {
                 return new LocaleSetAggregator();
             }
@@ -525,51 +523,32 @@ public class JSPModelProcessor
          * @param attributeName
          * @return a new instance only if attributeName is a symbol contributor
          */
-        static SymbolContribAggregator create(final String uri, 
+        static SymbolContribAggregator create(final IProject project, 
+        									  final String uri, 
                                               final String elementName, 
                                               final String attributeName)
         {
-            List properties =
-                CMAnnotationHelper.
-                    getCMAttributeProperties(uri, 
-                                             elementName, 
-                                             attributeName,
-                                             CONTRIBUTES_VALUE_BINDING);
-            
-            if (properties != null
-                    && properties.size() > 0)
+        	final String entityKey = elementName+"/"+attributeName;
+        	final IMetaDataModelContext mdContext = MetaDataQueryHelper.createMetaDataModelContext(project, MetaDataQueryHelper.TAGLIB_DOMAIN, uri);
+            Trait trait = MetaDataQueryHelper.getTrait(mdContext, entityKey, CONTRIBUTES_VALUE_BINDING);
+
+            boolean contribsValueBindings = TraitValueHelper.getValueAsBoolean(trait);
+
+            if (contribsValueBindings)
             {
-                CMAnnotationPropertyValue scope = null;
-                CMAnnotationPropertyValue symbolFactory = null;
+                String scope = null;
+                String symbolFactory = null;
                 
-                properties =
-                    CMAnnotationHelper.
-                        getCMAttributeProperties(uri, 
-                                                 elementName, 
-                                                 attributeName, 
-                                                 VALUE_BINDING_SCOPE);
+                trait = MetaDataQueryHelper.getTrait(mdContext, entityKey, VALUE_BINDING_SCOPE);
+                scope = TraitValueHelper.getValueAsString(trait);
 
-                if (properties != null
-                        && properties.size() > 0)
+                if (scope != null & !scope.equals(""))
                 {
-                    scope = (CMAnnotationPropertyValue) properties.get(0);
-
-                    properties =
-                        CMAnnotationHelper.
-                            getCMAttributeProperties(uri, 
-                                                     elementName, 
-                                                     attributeName, 
-                                                     VALUE_BINDING_SYMBOL_FACTORY);
-                    if (properties != null
-                            && properties.size() > 0)
-                    {
-                        symbolFactory = 
-                            (CMAnnotationPropertyValue) properties.get(0);
-                    }                        
+                	trait = MetaDataQueryHelper.getTrait(mdContext, entityKey, VALUE_BINDING_SYMBOL_FACTORY);
+                	symbolFactory = TraitValueHelper.getValueAsString(trait);                      
                 }
 
-                return new SymbolContribAggregator(scope.getPropertyValue(), 
-                                                   symbolFactory.getPropertyValue());
+                return new SymbolContribAggregator(scope, symbolFactory);
             }
 
             return null;

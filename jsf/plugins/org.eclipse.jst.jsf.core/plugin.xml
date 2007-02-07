@@ -164,10 +164,10 @@
          point="org.eclipse.jst.jsf.core.MetaDataEnabledFeatures">
       <MetaDataEnabledFeature
             class="org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.FacesConfigValidatorIDFeatures"
-            typeid="org.eclipse.jst.jsf.taglibprocessing.attributevalues.FacesConfigIdentifierType"/>
+            typeid="org.eclipse.jst.jsf.core.attributevalues.FacesConfigIdentifierType"/>
      <MetaDataEnabledFeature
             class="org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.FacesConfigConverterIDFeatures"
-            typeid="org.eclipse.jst.jsf.taglibprocessing.attributevalues.FacesConfigIdentifierType"/>            
+            typeid="org.eclipse.jst.jsf.core.attributevalues.FacesConfigIdentifierType"/>            
    </extension>
    
    <extension

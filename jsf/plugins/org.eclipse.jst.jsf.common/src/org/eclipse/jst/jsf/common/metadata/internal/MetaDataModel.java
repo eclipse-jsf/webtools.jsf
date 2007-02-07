@@ -34,7 +34,6 @@ public class MetaDataModel {
 		this.strategy = strategy;
 	}
 
-
 	/**
 	 * @return the root of the model.  
 	 */
@@ -47,6 +46,8 @@ public class MetaDataModel {
 	 */
 	public void setRoot(Object root){
 		this.root = root;
+		if (root != null)
+			((Model)root).setCurrentModelContext(modelKeyDescriptor);
 	}
 	
 	/**

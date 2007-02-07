@@ -15,8 +15,19 @@ package org.eclipse.jst.jsf.metadataprocessors.internal.provisional;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.core.resources.IProject;
+import org.eclipse.jst.jsf.common.metadata.internal.DomainLoadingStrategyRegistry;
+import org.eclipse.jst.jsf.common.metadata.internal.MetaDataModelContextImpl;
+import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.Model;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IMetaDataModelContext;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.MetaDataQueryHelper;
 import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.CMAnnotationHelper;
 import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.CMAnnotationPropertyValue;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.IStructuredDocumentContextResolverFactory;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.IWorkspaceContextResolver;
 import org.eclipse.jst.jsf.context.structureddocument.internal.provisional.IStructuredDocumentContext;
 import org.eclipse.jst.jsf.metadataprocessors.internal.AttributeValueRuntimeTypeFactory;
 
@@ -51,7 +62,7 @@ public final class MetaDataEnabledProcessingFactory {
 	}
 	
 	/**
-	 * Returns list of <code>IMetaDataEnabledFeature</code> adapters for given Content Model attribute.  
+	 * Returns list of <code>IMetaDataEnabledFeature</code> adapters for the given Taglibrary attribute.  
 	 * 
 	 * Adapters will be scanned for first by uri, element, attribute and if not found,
 	 * 	uri, "*", attribute and if still not found by "*", "*", attribute.
@@ -60,50 +71,57 @@ public final class MetaDataEnabledProcessingFactory {
 	 * @param uri annotation file uri
 	 * @param elementName
 	 * @param attributeName
-	 * @return	returns null - if the annotation was not found 
+	 * @return	returns null - if the metadata was not found 
 	 * 			<br>returns empty list - if not a <code>IMetaDataEnabledFeature</code> proccessor or is not valid or does not support the specified feature
 	 * 
 	 * @see MetaDataEnabledProcessingFactory.ATTRIBUTE_VALUE_RUNTIME_TYPE_PROP_NAME
 	 */
 	public List getAttributeValueRuntimeTypeFeatureProcessors(Class featureType, IStructuredDocumentContext sdContext, String uri, String elementName, String attributeName){
-		List retList = new ArrayList(2);
-		
-		//look up the attribute's runtime type from the annotation file
-		String _elem = elementName;
+		List retList = new ArrayList(2);		
+		//look up the attribute's runtime type from MD
+		IProject _project = null; 
+		if (sdContext !=null){
+			IWorkspaceContextResolver resolver = IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver(sdContext);
+			_project = resolver != null ? resolver.getProject() : null; 
+		}
+		String _elem = elementName + "/" + attributeName;
 		String _uri = uri;
-		List props = CMAnnotationHelper.getCMAttributeProperties(_uri, _elem, attributeName, ATTRIBUTE_VALUE_RUNTIME_TYPE_PROP_NAME);
-		if (props.isEmpty()){
-			_elem = "*";
-			props = CMAnnotationHelper.getCMAttributeProperties(_uri, _elem, attributeName, ATTRIBUTE_VALUE_RUNTIME_TYPE_PROP_NAME);
-			if (props.isEmpty()){
-				_uri = "*";			
-				props = CMAnnotationHelper.getCMAttributeProperties(_uri, _elem, attributeName, ATTRIBUTE_VALUE_RUNTIME_TYPE_PROP_NAME);
-			}
+		IMetaDataModelContext modelContext = createModelContext(_project, DomainLoadingStrategyRegistry.TAGLIB_DOMAIN, _uri);
+		Entity entity = MetaDataQueryHelper.getEntity(modelContext, _elem);
+		Trait trait = null;
+		if (entity != null){
+			trait = MetaDataQueryHelper.getTrait(entity, ATTRIBUTE_VALUE_RUNTIME_TYPE_PROP_NAME);
 		}
 		
-		//allow for multiuple types to be defined
-		for (int i=0;i<props.size();i++){
-			CMAnnotationPropertyValue propVal = (CMAnnotationPropertyValue)props.get(i);
-			String typeId = propVal.getPropertyValue();
-			
-			//get the implementing class for the type
-			ITypeDescriptor type = AttributeValueRuntimeTypeFactory.getInstance().getType(typeId);
-			if (type != null){
-				CMAnnotationContext context = new CMAnnotationContext(propVal.getBundleId(), _uri, _elem, attributeName);
-				//get all the feature adapters (IMetaDataEnabledFeature) for this type
-				List aList = type.getFeatureAdapters(featureType);
-				for (int j=0;j<aList.size();j++){
-					//set the context in the feature
-					((IMetaDataEnabledFeature)aList.get(j)).setContentModelContext(context);
-					((IMetaDataEnabledFeature)aList.get(j)).setStructuredDocumentContext(sdContext);
-					retList.add(aList.get(j));
-				}
-			}	
-			
+		if (trait==null){
+			return retList;
+		}
+		
+		String typeId = TraitValueHelper.getValueAsString(trait);
+		
+		//get the implementing class for the type
+		ITypeDescriptor type = AttributeValueRuntimeTypeFactory.getInstance().getType(typeId);
+		if (type != null){
+			TaglibMetadataContext context = new TaglibMetadataContext(uri, elementName, attributeName, entity, trait);
+			//get all the feature adapters (IMetaDataEnabledFeature) for this type
+			List aList = type.getFeatureAdapters(featureType);
+			for (int j=0;j<aList.size();j++){
+				//set the context in the feature
+				((IMetaDataEnabledFeature)aList.get(j)).setMetaDataContext(context);
+				((IMetaDataEnabledFeature)aList.get(j)).setStructuredDocumentContext(sdContext);
+				retList.add(aList.get(j));
+			}
+
 		}
 		//return list of IMetaDataEnabledFeatures for this type
 		return retList;
 
+	}
+	
+	private IMetaDataModelContext createModelContext(IProject project, String taglibDomain,
+			String uri) {		
+		return new MetaDataModelContextImpl(project, taglibDomain, uri);
+		
 	}
 
 }

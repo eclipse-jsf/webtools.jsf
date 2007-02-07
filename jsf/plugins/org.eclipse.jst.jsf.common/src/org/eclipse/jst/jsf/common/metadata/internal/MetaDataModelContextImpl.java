@@ -9,14 +9,15 @@
  *    Oracle - initial API and implementation
  *    
  ********************************************************************************/
-package org.eclipse.jst.jsf.common.metadata.internal.provisional.query;
+package org.eclipse.jst.jsf.common.metadata.internal;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IMetaDataModelContext;
 
 /**
  * Simple implementation of {@link IMetaDataModelContext}
  */
-public class MetaDataModelContextImpl implements IMetaDataModelContext {
+public class MetaDataModelContextImpl implements IMetaDataModelContext, Cloneable{
 	private IProject project;
 	private String domain;
 	private String uri;

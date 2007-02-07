@@ -15,8 +15,9 @@ import org.eclipse.core.resources.IProject;
 
 /**
  * Context for determining the Model to locate in the MetaDataManager
+ * Should not be implemented by clients
  */
-public interface IMetaDataModelContext {
+public interface IMetaDataModelContext{
 	/**
 	 * @return project 
 	 */

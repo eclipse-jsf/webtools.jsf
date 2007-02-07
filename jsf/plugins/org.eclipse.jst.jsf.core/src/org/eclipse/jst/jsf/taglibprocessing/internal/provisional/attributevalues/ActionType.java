@@ -24,7 +24,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.IStructuredDocumentContextResolverFactory;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.IWorkspaceContextResolver;
 import org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.JSFAppConfigManager;
-import org.eclipse.jst.jsf.facesconfig.edit.provider.FacesConfigEditPlugin;
+import org.eclipse.jst.jsf.facesconfig.FacesConfigPlugin;
 import org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType;
 import org.eclipse.jst.jsf.facesconfig.emf.NavigationCaseType;
 import org.eclipse.jst.jsf.facesconfig.emf.NavigationRuleType;
@@ -140,7 +140,7 @@ public class ActionType extends MethodBindingType implements IPossibleValues{
 	
 	private ImageDescriptor getImageDesc(String img) 
     {
-		Bundle bundle = FacesConfigEditPlugin.getPlugin().getBundle();
+		Bundle bundle = FacesConfigPlugin.getPlugin().getBundle();
 		URL url = FileLocator.find(bundle, new Path(img), null);
 		ImageDescriptor desc = ImageDescriptor.createFromURL(url);
 		if (desc == MISSING_IMAGE){

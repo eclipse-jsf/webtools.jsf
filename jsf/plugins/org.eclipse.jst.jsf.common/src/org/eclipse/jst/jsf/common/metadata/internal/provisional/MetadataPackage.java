@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MetadataPackage.java,v 1.1 2007/01/15 23:26:14 gkessler Exp $
+ * $Id: MetadataPackage.java,v 1.2 2007/02/07 00:03:49 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.provisional;
 
@@ -75,7 +75,236 @@ public interface MetadataPackage extends EPackage {
 	 * @see org.eclipse.jst.jsf.common.metadata.internal.impl.MetadataPackageImpl#getTrait()
 	 * @generated
 	 */
-	int TRAIT = 0;
+	int TRAIT = 3;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.jst.jsf.common.metadata.internal.impl.EntityImpl <em>Entity</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.jst.jsf.common.metadata.internal.impl.EntityImpl
+	 * @see org.eclipse.jst.jsf.common.metadata.internal.impl.MetadataPackageImpl#getEntity()
+	 * @generated
+	 */
+	int ENTITY = 2;
+
+	/**
+	 * The feature id for the '<em><b>Child Entities</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTITY__CHILD_ENTITIES = 0;
+
+	/**
+	 * The feature id for the '<em><b>Traits</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTITY__TRAITS = 1;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTITY__ID = 2;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTITY__TYPE = 3;
+
+	/**
+	 * The feature id for the '<em><b>Include Groups</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTITY__INCLUDE_GROUPS = 4;
+
+	/**
+	 * The number of structural features of the '<em>Entity</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTITY_FEATURE_COUNT = 5;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.jst.jsf.common.metadata.internal.impl.ModelImpl <em>Model</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.jst.jsf.common.metadata.internal.impl.ModelImpl
+	 * @see org.eclipse.jst.jsf.common.metadata.internal.impl.MetadataPackageImpl#getModel()
+	 * @generated
+	 */
+	int MODEL = 0;
+
+	/**
+	 * The feature id for the '<em><b>Child Entities</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__CHILD_ENTITIES = ENTITY__CHILD_ENTITIES;
+
+	/**
+	 * The feature id for the '<em><b>Traits</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__TRAITS = ENTITY__TRAITS;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__ID = ENTITY__ID;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__TYPE = ENTITY__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Include Groups</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__INCLUDE_GROUPS = ENTITY__INCLUDE_GROUPS;
+
+	/**
+	 * The feature id for the '<em><b>Entity Groups</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__ENTITY_GROUPS = ENTITY_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Source Model Provider</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__SOURCE_MODEL_PROVIDER = ENTITY_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Current Model Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__CURRENT_MODEL_CONTEXT = ENTITY_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_FEATURE_COUNT = ENTITY_FEATURE_COUNT + 3;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.jst.jsf.common.metadata.internal.impl.IncludeEntityGroupImpl <em>Include Entity Group</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.jst.jsf.common.metadata.internal.impl.IncludeEntityGroupImpl
+	 * @see org.eclipse.jst.jsf.common.metadata.internal.impl.MetadataPackageImpl#getIncludeEntityGroup()
+	 * @generated
+	 */
+	int INCLUDE_ENTITY_GROUP = 4;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.jst.jsf.common.metadata.internal.impl.EntityGroupImpl <em>Entity Group</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.jst.jsf.common.metadata.internal.impl.EntityGroupImpl
+	 * @see org.eclipse.jst.jsf.common.metadata.internal.impl.MetadataPackageImpl#getEntityGroup()
+	 * @generated
+	 */
+	int ENTITY_GROUP = 1;
+
+	/**
+	 * The feature id for the '<em><b>Child Entities</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTITY_GROUP__CHILD_ENTITIES = ENTITY__CHILD_ENTITIES;
+
+	/**
+	 * The feature id for the '<em><b>Traits</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTITY_GROUP__TRAITS = ENTITY__TRAITS;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTITY_GROUP__ID = ENTITY__ID;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTITY_GROUP__TYPE = ENTITY__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Include Groups</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTITY_GROUP__INCLUDE_GROUPS = ENTITY__INCLUDE_GROUPS;
+
+	/**
+	 * The number of structural features of the '<em>Entity Group</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTITY_GROUP_FEATURE_COUNT = ENTITY_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -114,141 +343,31 @@ public interface MetadataPackage extends EPackage {
 	int TRAIT_FEATURE_COUNT = 3;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.jst.jsf.common.metadata.internal.impl.EntityImpl <em>Entity</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.jst.jsf.common.metadata.internal.impl.EntityImpl
-	 * @see org.eclipse.jst.jsf.common.metadata.internal.impl.MetadataPackageImpl#getEntity()
-	 * @generated
-	 */
-	int ENTITY = 2;
-
-	/**
-	 * The feature id for the '<em><b>Child Entities</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENTITY__CHILD_ENTITIES = 0;
-
-	/**
-	 * The feature id for the '<em><b>Traits</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENTITY__TRAITS = 1;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENTITY__PARENT = 2;
-
-	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENTITY__ID = 3;
+	int INCLUDE_ENTITY_GROUP__ID = 0;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * The feature id for the '<em><b>Model Uri</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENTITY__TYPE = 4;
+	int INCLUDE_ENTITY_GROUP__MODEL_URI = 1;
 
 	/**
-	 * The number of structural features of the '<em>Entity</em>' class.
+	 * The number of structural features of the '<em>Include Entity Group</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENTITY_FEATURE_COUNT = 5;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.jst.jsf.common.metadata.internal.impl.ModelImpl <em>Model</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.jst.jsf.common.metadata.internal.impl.ModelImpl
-	 * @see org.eclipse.jst.jsf.common.metadata.internal.impl.MetadataPackageImpl#getModel()
-	 * @generated
-	 */
-	int MODEL = 1;
-
-	/**
-	 * The feature id for the '<em><b>Child Entities</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL__CHILD_ENTITIES = ENTITY__CHILD_ENTITIES;
-
-	/**
-	 * The feature id for the '<em><b>Traits</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL__TRAITS = ENTITY__TRAITS;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL__PARENT = ENTITY__PARENT;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL__ID = ENTITY__ID;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL__TYPE = ENTITY__TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Source Model Provider</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL__SOURCE_MODEL_PROVIDER = ENTITY_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Model</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_FEATURE_COUNT = ENTITY_FEATURE_COUNT + 1;
+	int INCLUDE_ENTITY_GROUP_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '<em>ITrait Visitor</em>' data type.
@@ -258,7 +377,7 @@ public interface MetadataPackage extends EPackage {
 	 * @see org.eclipse.jst.jsf.common.metadata.internal.impl.MetadataPackageImpl#getITraitVisitor()
 	 * @generated
 	 */
-	int ITRAIT_VISITOR = 3;
+	int ITRAIT_VISITOR = 5;
 
 	/**
 	 * The meta object id for the '<em>IEntity Visitor</em>' data type.
@@ -268,7 +387,7 @@ public interface MetadataPackage extends EPackage {
 	 * @see org.eclipse.jst.jsf.common.metadata.internal.impl.MetadataPackageImpl#getIEntityVisitor()
 	 * @generated
 	 */
-	int IENTITY_VISITOR = 4;
+	int IENTITY_VISITOR = 6;
 
 	/**
 	 * The meta object id for the '<em>IMeta Data Source Model Provider</em>' data type.
@@ -278,7 +397,18 @@ public interface MetadataPackage extends EPackage {
 	 * @see org.eclipse.jst.jsf.common.metadata.internal.impl.MetadataPackageImpl#getIMetaDataSourceModelProvider()
 	 * @generated
 	 */
-	int IMETA_DATA_SOURCE_MODEL_PROVIDER = 5;
+	int IMETA_DATA_SOURCE_MODEL_PROVIDER = 7;
+
+
+	/**
+	 * The meta object id for the '<em>Model Context</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.jst.jsf.common.metadata.internal.ModelKeyDescriptor
+	 * @see org.eclipse.jst.jsf.common.metadata.internal.impl.MetadataPackageImpl#getModelContext()
+	 * @generated
+	 */
+	int MODEL_CONTEXT = 8;
 
 
 	/**
@@ -325,6 +455,38 @@ public interface MetadataPackage extends EPackage {
 	EReference getTrait_SourceModel();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.IncludeEntityGroup <em>Include Entity Group</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Include Entity Group</em>'.
+	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.IncludeEntityGroup
+	 * @generated
+	 */
+	EClass getIncludeEntityGroup();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.IncludeEntityGroup#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.IncludeEntityGroup#getId()
+	 * @see #getIncludeEntityGroup()
+	 * @generated
+	 */
+	EAttribute getIncludeEntityGroup_Id();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.IncludeEntityGroup#getModelUri <em>Model Uri</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Model Uri</em>'.
+	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.IncludeEntityGroup#getModelUri()
+	 * @see #getIncludeEntityGroup()
+	 * @generated
+	 */
+	EAttribute getIncludeEntityGroup_ModelUri();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.Model <em>Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -344,6 +506,28 @@ public interface MetadataPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getModel_SourceModelProvider();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.Model#getCurrentModelContext <em>Current Model Context</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Current Model Context</em>'.
+	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.Model#getCurrentModelContext()
+	 * @see #getModel()
+	 * @generated
+	 */
+	EAttribute getModel_CurrentModelContext();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.Model#getEntityGroups <em>Entity Groups</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Entity Groups</em>'.
+	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.Model#getEntityGroups()
+	 * @see #getModel()
+	 * @generated
+	 */
+	EReference getModel_EntityGroups();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity <em>Entity</em>}'.
@@ -378,17 +562,6 @@ public interface MetadataPackage extends EPackage {
 	EReference getEntity_Traits();
 
 	/**
-	 * Returns the meta object for the container reference '{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity#getParent <em>Parent</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Parent</em>'.
-	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity#getParent()
-	 * @see #getEntity()
-	 * @generated
-	 */
-	EReference getEntity_Parent();
-
-	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity#getId <em>Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -409,6 +582,27 @@ public interface MetadataPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getEntity_Type();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity#getIncludeGroups <em>Include Groups</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Include Groups</em>'.
+	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity#getIncludeGroups()
+	 * @see #getEntity()
+	 * @generated
+	 */
+	EReference getEntity_IncludeGroups();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.EntityGroup <em>Entity Group</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Entity Group</em>'.
+	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.EntityGroup
+	 * @generated
+	 */
+	EClass getEntityGroup();
 
 	/**
 	 * Returns the meta object for data type '{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.query.ITraitVisitor <em>ITrait Visitor</em>}'.
@@ -444,6 +638,17 @@ public interface MetadataPackage extends EPackage {
 	EDataType getIMetaDataSourceModelProvider();
 
 	/**
+	 * Returns the meta object for data type '{@link org.eclipse.jst.jsf.common.metadata.internal.ModelKeyDescriptor <em>Model Context</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Model Context</em>'.
+	 * @see org.eclipse.jst.jsf.common.metadata.internal.ModelKeyDescriptor
+	 * @model instanceClass="org.eclipse.jst.jsf.common.metadata.internal.ModelKeyDescriptor"
+	 * @generated
+	 */
+	EDataType getModelContext();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -464,7 +669,7 @@ public interface MetadataPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	interface Literals  {
+	interface Literals {
 		/**
 		 * The meta object literal for the '{@link org.eclipse.jst.jsf.common.metadata.internal.impl.TraitImpl <em>Trait</em>}' class.
 		 * <!-- begin-user-doc -->
@@ -500,6 +705,32 @@ public interface MetadataPackage extends EPackage {
 		EReference TRAIT__SOURCE_MODEL = eINSTANCE.getTrait_SourceModel();
 
 		/**
+		 * The meta object literal for the '{@link org.eclipse.jst.jsf.common.metadata.internal.impl.IncludeEntityGroupImpl <em>Include Entity Group</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.jst.jsf.common.metadata.internal.impl.IncludeEntityGroupImpl
+		 * @see org.eclipse.jst.jsf.common.metadata.internal.impl.MetadataPackageImpl#getIncludeEntityGroup()
+		 * @generated
+		 */
+		EClass INCLUDE_ENTITY_GROUP = eINSTANCE.getIncludeEntityGroup();
+
+		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute INCLUDE_ENTITY_GROUP__ID = eINSTANCE.getIncludeEntityGroup_Id();
+
+		/**
+		 * The meta object literal for the '<em><b>Model Uri</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute INCLUDE_ENTITY_GROUP__MODEL_URI = eINSTANCE.getIncludeEntityGroup_ModelUri();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.jst.jsf.common.metadata.internal.impl.ModelImpl <em>Model</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -516,6 +747,22 @@ public interface MetadataPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute MODEL__SOURCE_MODEL_PROVIDER = eINSTANCE.getModel_SourceModelProvider();
+
+		/**
+		 * The meta object literal for the '<em><b>Current Model Context</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MODEL__CURRENT_MODEL_CONTEXT = eINSTANCE.getModel_CurrentModelContext();
+
+		/**
+		 * The meta object literal for the '<em><b>Entity Groups</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MODEL__ENTITY_GROUPS = eINSTANCE.getModel_EntityGroups();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.jst.jsf.common.metadata.internal.impl.EntityImpl <em>Entity</em>}' class.
@@ -544,14 +791,6 @@ public interface MetadataPackage extends EPackage {
 		EReference ENTITY__TRAITS = eINSTANCE.getEntity_Traits();
 
 		/**
-		 * The meta object literal for the '<em><b>Parent</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ENTITY__PARENT = eINSTANCE.getEntity_Parent();
-
-		/**
 		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -566,6 +805,24 @@ public interface MetadataPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ENTITY__TYPE = eINSTANCE.getEntity_Type();
+
+		/**
+		 * The meta object literal for the '<em><b>Include Groups</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ENTITY__INCLUDE_GROUPS = eINSTANCE.getEntity_IncludeGroups();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.jst.jsf.common.metadata.internal.impl.EntityGroupImpl <em>Entity Group</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.jst.jsf.common.metadata.internal.impl.EntityGroupImpl
+		 * @see org.eclipse.jst.jsf.common.metadata.internal.impl.MetadataPackageImpl#getEntityGroup()
+		 * @generated
+		 */
+		EClass ENTITY_GROUP = eINSTANCE.getEntityGroup();
 
 		/**
 		 * The meta object literal for the '<em>ITrait Visitor</em>' data type.
@@ -596,6 +853,16 @@ public interface MetadataPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType IMETA_DATA_SOURCE_MODEL_PROVIDER = eINSTANCE.getIMetaDataSourceModelProvider();
+
+		/**
+		 * The meta object literal for the '<em>Model Context</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.jst.jsf.common.metadata.internal.ModelKeyDescriptor
+		 * @see org.eclipse.jst.jsf.common.metadata.internal.impl.MetadataPackageImpl#getModelContext()
+		 * @generated
+		 */
+		EDataType MODEL_CONTEXT = eINSTANCE.getModelContext();
 
 	}
 

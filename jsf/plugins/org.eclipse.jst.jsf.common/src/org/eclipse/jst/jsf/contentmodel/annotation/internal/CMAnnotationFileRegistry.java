@@ -14,11 +14,13 @@
 package org.eclipse.jst.jsf.contentmodel.annotation.internal;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.ICMAnnotationSourceFileInfo;
 import org.eclipse.osgi.util.NLS;
@@ -51,16 +53,20 @@ public final class CMAnnotationFileRegistry {
 
 	private static CMAnnotationFileRegistry reg;
 	
+	private static final boolean DISABLED = true;
+	
 	public static CMAnnotationFileRegistry getInstance() {
 		if (reg == null){
 			reg = new CMAnnotationFileRegistry();
 		}
 		return reg;
+		
 	}
 	
 	//constructor reads the annotationFile registry and populates the annotationFilesMap
 	private CMAnnotationFileRegistry() {
-		new CMAnnotationFileRegistryReader(this).readRegistry();
+		if (!(DISABLED))
+			new CMAnnotationFileRegistryReader(this).readRegistry();
 	}
 	
 	private synchronized List getAnnotationFilesInfos(String uri) {
@@ -100,6 +106,11 @@ public final class CMAnnotationFileRegistry {
 	 * @return List of CMAnnotationMaps
 	 */
 	public synchronized List getAnnotationMaps(String uri) {
+		if (DISABLED){
+			JSFCommonPlugin.log(IStatus.ERROR, "Attempted metadata access using CMAnnotationFiles for uri: "+uri+".   Use org.eclipse.jst.jsf.common.metadata, instead." );
+			return Collections.EMPTY_LIST;
+		}
+		
 		List list = (List)parsedFilesMap.get(uri);
 		if (list == null){
 			loadAnnotationsForGrammar(uri);
@@ -117,6 +128,9 @@ public final class CMAnnotationFileRegistry {
 	 * @return boolean
 	 */
 	public boolean hasAnnotations(String bundleId, String uri) {
+		if (DISABLED){
+			
+		}
 		List maps = (List)annotationFilesMap.get(uri);
 		if (maps == null || maps.size() ==0)
 			return false;
@@ -133,6 +147,10 @@ public final class CMAnnotationFileRegistry {
 	 * @return boolean
 	 */
 	public boolean hasAnnotations(String uri){
+		if (DISABLED){
+			JSFCommonPlugin.log(IStatus.ERROR, "Attempted metadata access using CMAnnotationFiles for uri: "+uri+".   Use org.eclipse.jst.jsf.common.metadata, instead." );
+			return false;
+		}
 		if (annotationFilesMap.get(uri) != null)
 			return true;
 		return false;
@@ -148,6 +166,9 @@ public final class CMAnnotationFileRegistry {
 	
 	private void loadAnnotationsForGrammar(String uri) {
 		if (areAnnotationsParsed(uri))
+			return;
+		
+		if (DISABLED)
 			return;
 		
 		List annotationFiles = getAnnotationFilesInfos(uri);

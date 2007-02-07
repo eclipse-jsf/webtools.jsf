@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MetadataFactory.java,v 1.1 2007/01/15 23:26:14 gkessler Exp $
+ * $Id: MetadataFactory.java,v 1.2 2007/02/07 00:03:49 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.provisional;
 
@@ -42,6 +42,15 @@ public interface MetadataFactory extends EFactory {
 	Trait createTrait();
 
 	/**
+	 * Returns a new object of class '<em>Include Entity Group</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Include Entity Group</em>'.
+	 * @generated
+	 */
+	IncludeEntityGroup createIncludeEntityGroup();
+
+	/**
 	 * Returns a new object of class '<em>Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -58,6 +67,15 @@ public interface MetadataFactory extends EFactory {
 	 * @generated
 	 */
 	Entity createEntity();
+
+	/**
+	 * Returns a new object of class '<em>Entity Group</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Entity Group</em>'.
+	 * @generated
+	 */
+	EntityGroup createEntityGroup();
 
 	/**
 	 * Returns the package supported by this factory.

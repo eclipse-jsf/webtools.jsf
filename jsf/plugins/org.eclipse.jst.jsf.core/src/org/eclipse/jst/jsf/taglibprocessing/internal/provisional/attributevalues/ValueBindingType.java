@@ -39,7 +39,7 @@ public class ValueBindingType extends ExpressionBindingType implements IValidELV
 	}
 	
 	protected boolean getIsSetValueRequired(){
-		String value = getCMAttributePropertyValue(RUNTIME_SETTER_REQUIRED);
+		String value = getTraitValueAsString(RUNTIME_SETTER_REQUIRED);
 		if (value == null || value.trim().length() == 0)
 			return false; 
 		else if (value.trim().equals("true")) //$NON-NLS-1$

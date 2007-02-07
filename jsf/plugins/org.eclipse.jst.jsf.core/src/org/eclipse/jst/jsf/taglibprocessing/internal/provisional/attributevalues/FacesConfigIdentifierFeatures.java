@@ -25,11 +25,10 @@ import org.eclipse.jdt.core.Signature;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jst.jsf.common.internal.types.CompositeType;
 import org.eclipse.jst.jsf.common.internal.types.IAssignable;
-import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.CMAnnotationHelper;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.IStructuredDocumentContextResolverFactory;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.IWorkspaceContextResolver;
 import org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.JSFAppConfigManager;
-import org.eclipse.jst.jsf.facesconfig.edit.provider.FacesConfigEditPlugin;
+import org.eclipse.jst.jsf.facesconfig.FacesConfigPlugin;
 import org.eclipse.jst.jsf.facesconfig.emf.DescriptionType;
 import org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.AbstractMetaDataEnabledFeature;
@@ -193,9 +192,9 @@ public abstract class FacesConfigIdentifierFeatures extends AbstractMetaDataEnab
 
 	}
 	
-	//return FacesConfigEditPlugin relative image descriptor
+	//return FacesConfigPlugin relative image descriptor
 	private ImageDescriptor getImageDesc(String img) {
-		Bundle bundle = FacesConfigEditPlugin.getPlugin().getBundle();
+		Bundle bundle = FacesConfigPlugin.getPlugin().getBundle();
 		URL url = FileLocator.find(bundle, new Path(img), null);
 		ImageDescriptor desc = ImageDescriptor.createFromURL(url);
 		if (desc == MISSING_IMAGE){
@@ -230,9 +229,11 @@ public abstract class FacesConfigIdentifierFeatures extends AbstractMetaDataEnab
 	}
 
 	private List getConfigTypes() {
-		return CMAnnotationHelper.getCMAttributePropertyValues(getCMAnnotationContext().getBundleId(), 
-				getCMAnnotationContext().getUri(), getCMAnnotationContext().getElementName(),
-				getCMAnnotationContext().getAttributeName(), ID_TYPE_PROP_NAME);
+		return getTraitValueAsListOfStrings(ID_TYPE_PROP_NAME);
+		
+//		return CMAnnotationHelper.getCMAttributePropertyValues(getMetaDataContext().getBundleId(), 
+//				getMetaDataContext().getUri(), getMetaDataContext().getElementName(),
+//				getMetaDataContext().getAttributeName(), ID_TYPE_PROP_NAME);
 	}
 
 	private JSFAppConfigManager getJSFAppConfigMgr(){
@@ -268,11 +269,11 @@ public abstract class FacesConfigIdentifierFeatures extends AbstractMetaDataEnab
 	
 	//Standard Validation stuff - should be moved somewhere else
 	protected String getCMValidationMessage() {
-		return getCMAttributePropertyValue(IValidValues.VALID_VALUES_MESSAGE_PROP_NAME);			
+		return getTraitValueAsString(IValidValues.VALID_VALUES_MESSAGE_PROP_NAME);			
 	}
 
 	protected int getCMValidationSeverity() {
-		String val = getCMAttributePropertyValue(IValidValues.VALID_VALUES_SEVERITY_PROP_NAME);		
+		String val = getTraitValueAsString(IValidValues.VALID_VALUES_SEVERITY_PROP_NAME);		
 		if (val == null)
 			return IStatus.WARNING;
 		
@@ -281,7 +282,7 @@ public abstract class FacesConfigIdentifierFeatures extends AbstractMetaDataEnab
 	}
 
 	protected String getCMValidationCode() {
-		return getCMAttributePropertyValue(IValidValues.VALID_VALUES_CODE_PROP_NAME);		
+		return getTraitValueAsString(IValidValues.VALID_VALUES_CODE_PROP_NAME);		
 	}
 	
 }

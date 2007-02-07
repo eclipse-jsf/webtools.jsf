@@ -15,6 +15,7 @@ import java.util.Iterator;
 import java.util.Stack;
 
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.EntityGroup;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
 
 
@@ -180,9 +181,11 @@ public class SimpleMetaDataQueryVisitorImpl implements IEntityQueryVisitor, ITra
 			StringBuffer buf = new StringBuffer();
 			while(i < size){
 				Entity e = (Entity)stack.elementAt(i);
-				if (buf.length()>0) 
-					buf.append("/");
-				buf.append(e.getId());			
+				if (!(e instanceof EntityGroup)){
+					if (buf.length()>0) 
+						buf.append("/");
+					buf.append(e.getId());
+				}
 				i++;
 			}
 			return buf.toString();

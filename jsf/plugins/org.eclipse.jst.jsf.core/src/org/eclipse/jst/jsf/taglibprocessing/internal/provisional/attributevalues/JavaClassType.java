@@ -37,7 +37,6 @@ import org.eclipse.jdt.core.search.SearchMatch;
 import org.eclipse.jdt.core.search.SearchParticipant;
 import org.eclipse.jdt.core.search.SearchPattern;
 import org.eclipse.jdt.core.search.SearchRequestor;
-import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.CMAnnotationHelper;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.IStructuredDocumentContextResolverFactory;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.IWorkspaceContextResolver;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IPossibleValues;
@@ -278,9 +277,10 @@ public class JavaClassType extends ObjectType implements IPossibleValues, IValid
 	 * @return String value of {@link POSSIBLE_VALUES_SUPERCLASS_PROP_NAME}
 	 */
 	protected String getSuperClassName(){
-		return CMAnnotationHelper.getCMAttributePropertyValue(getCMAnnotationContext().getBundleId(), getCMAnnotationContext().getUri(),
-				getCMAnnotationContext().getElementName(), getCMAnnotationContext().getAttributeName(),
-				POSSIBLE_VALUES_SUPERCLASS_PROP_NAME);
+		return getTraitValueAsString(POSSIBLE_VALUES_SUPERCLASS_PROP_NAME);
+//		return CMAnnotationHelper.getCMAttributePropertyValue(getMetaDataContext().getBundleId(), getMetaDataContext().getUri(),
+//				getMetaDataContext().getElementName(), getMetaDataContext().getAttributeName(),
+//				POSSIBLE_VALUES_SUPERCLASS_PROP_NAME);
 
 	}
 	
@@ -288,9 +288,11 @@ public class JavaClassType extends ObjectType implements IPossibleValues, IValid
 	 * @return List of values from {@link POSSIBLE_VALUES_INTERFACES_PROP_NAME}
 	 */
 	protected List getInterfaceNames(){
-		return CMAnnotationHelper.getCMAttributePropertyValues(getCMAnnotationContext().getBundleId(), getCMAnnotationContext().getUri(),
-				getCMAnnotationContext().getElementName(), getCMAnnotationContext().getAttributeName(),
-				POSSIBLE_VALUES_INTERFACES_PROP_NAME);
+		return getTraitValueAsListOfStrings(POSSIBLE_VALUES_INTERFACES_PROP_NAME);
+		
+//		return CMAnnotationHelper.getCMAttributePropertyValues(getMetaDataContext().getBundleId(), getMetaDataContext().getUri(),
+//				getMetaDataContext().getElementName(), getMetaDataContext().getAttributeName(),
+//				POSSIBLE_VALUES_INTERFACES_PROP_NAME);
 
 	}
 
@@ -301,8 +303,8 @@ public class JavaClassType extends ObjectType implements IPossibleValues, IValid
 		if (msg == null || msg.equals("")) //$NON-NLS-1$
 			msg = defaultMsg;
 		
-		String code = getCMValidationCode();
-		int severity = getCMValidationSeverity();
+		String code = getValidationCode();
+		int severity = getValidationSeverity();
 		ValidationMessage val = new ValidationMessage(msg, code, severity);
 		getValidationMessages().add(val);
 	}
@@ -312,14 +314,14 @@ public class JavaClassType extends ObjectType implements IPossibleValues, IValid
 	 * @return validation message from meta-data.   Can be null.
 	 */
 	protected String getCMValidationMessage() {
-		return getCMAttributePropertyValue(IValidValues.VALID_VALUES_MESSAGE_PROP_NAME);			
+		return getTraitValueAsString(IValidValues.VALID_VALUES_MESSAGE_PROP_NAME);			
 	}
 	
 	/**
 	 * @return validation severity as int from meta-data.   IStatus.WARNING is default.
 	 */
-	protected int getCMValidationSeverity() {
-		String val = getCMAttributePropertyValue(IValidValues.VALID_VALUES_SEVERITY_PROP_NAME);		
+	protected int getValidationSeverity() {
+		String val = getTraitValueAsString(IValidValues.VALID_VALUES_SEVERITY_PROP_NAME);		
 		if (val == null)
 			return IStatus.WARNING;
 		
@@ -330,8 +332,8 @@ public class JavaClassType extends ObjectType implements IPossibleValues, IValid
 	/**
 	 * @return validation code as String from meta-data.   Can be null.
 	 */
-	protected String getCMValidationCode() {
-		return getCMAttributePropertyValue(IValidValues.VALID_VALUES_CODE_PROP_NAME);		
+	protected String getValidationCode() {
+		return getTraitValueAsString(IValidValues.VALID_VALUES_CODE_PROP_NAME);		
 	}
 	
 	private boolean isInnerOrAnonymousClass(IType res) {

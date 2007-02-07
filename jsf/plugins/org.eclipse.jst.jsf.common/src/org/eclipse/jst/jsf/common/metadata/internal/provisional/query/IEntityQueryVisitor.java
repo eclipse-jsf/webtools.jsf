@@ -17,7 +17,7 @@ public interface IEntityQueryVisitor extends IEntityVisitor{
 	/**
 	 * @param initialEntityContext
 	 * @param entityKey to find relative to the passed intialEntityContext
-	 * @return IResultSet of Entities matching the key
+	 * @return IResultSet of Entities matching the key.  IResultSet should NOT be null.
 	 */
 	public IResultSet/*<Entity>*/ findEntities(final Entity initialEntityContext,
 			final String entityKey);

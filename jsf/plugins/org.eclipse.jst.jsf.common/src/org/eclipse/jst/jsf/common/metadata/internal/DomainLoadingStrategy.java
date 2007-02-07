@@ -83,16 +83,8 @@ public class DomainLoadingStrategy implements IDomainLoadingStrategy, IMetaDataO
 				translator.translate(assistant);
 			}
 		}
-//		return assistant.getMergedModel();
+		assistant.setMergeComplete();
 	}
-
-//	private  IMetaDataModelMergeAssistant getAssistant(MetaDataModel model){
-//		if (assistant == null){
-//			assistant = createModelMergeAssistant(model);
-//			
-//		}
-//		return assistant;
-//	}
 	
 	/**
 	 * @param model

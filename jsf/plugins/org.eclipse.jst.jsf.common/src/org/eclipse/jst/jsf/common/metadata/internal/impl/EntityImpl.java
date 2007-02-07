@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EntityImpl.java,v 1.1 2007/01/15 23:26:15 gkessler Exp $
+ * $Id: EntityImpl.java,v 1.2 2007/02/07 00:03:49 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.impl;
 
@@ -13,17 +13,23 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.jst.jsf.common.metadata.internal.MetaDataModelContextImpl;
+import org.eclipse.jst.jsf.common.metadata.internal.ModelKeyDescriptor;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.IncludeEntityGroup;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.MetadataPackage;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.Model;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IEntityVisitor;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IMetaDataModelContext;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.MetaDataQueryHelper;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,9 +40,9 @@ import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IEntityVis
  * <ul>
  *   <li>{@link org.eclipse.jst.jsf.common.metadata.internal.impl.EntityImpl#getChildEntities <em>Child Entities</em>}</li>
  *   <li>{@link org.eclipse.jst.jsf.common.metadata.internal.impl.EntityImpl#getTraits <em>Traits</em>}</li>
- *   <li>{@link org.eclipse.jst.jsf.common.metadata.internal.impl.EntityImpl#getParent <em>Parent</em>}</li>
  *   <li>{@link org.eclipse.jst.jsf.common.metadata.internal.impl.EntityImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.eclipse.jst.jsf.common.metadata.internal.impl.EntityImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.common.metadata.internal.impl.EntityImpl#getIncludeGroups <em>Include Groups</em>}</li>
  * </ul>
  * </p>
  *
@@ -111,6 +117,24 @@ public class EntityImpl extends EObjectImpl implements Entity {
 	protected String type = TYPE_EDEFAULT;
 
 	/**
+	 * The cached value of the '{@link #getIncludeGroups() <em>Include Groups</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIncludeGroups()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList includeGroups = null;
+
+	/**
+	 * The cached value of the Model
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	private Model _model;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -135,7 +159,7 @@ public class EntityImpl extends EObjectImpl implements Entity {
 	 */
 	public EList getChildEntities() {
 		if (childEntities == null) {
-			childEntities = new EObjectContainmentWithInverseEList(Entity.class, this, MetadataPackage.ENTITY__CHILD_ENTITIES, MetadataPackage.ENTITY__PARENT);
+			childEntities = new EObjectContainmentEList(Entity.class, this, MetadataPackage.ENTITY__CHILD_ENTITIES);
 		}
 		return childEntities;
 	}
@@ -157,40 +181,11 @@ public class EntityImpl extends EObjectImpl implements Entity {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Entity getParent() {
-		if (eContainerFeatureID != MetadataPackage.ENTITY__PARENT) return null;
-		return (Entity)eContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetParent(Entity newParent, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newParent, MetadataPackage.ENTITY__PARENT, msgs);
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setParent(Entity newParent) {
-		if (newParent != eInternalContainer() || (eContainerFeatureID != MetadataPackage.ENTITY__PARENT && newParent != null)) {
-			if (EcoreUtil.isAncestor(this, newParent))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newParent != null)
-				msgs = ((InternalEObject)newParent).eInverseAdd(this, MetadataPackage.ENTITY__CHILD_ENTITIES, Entity.class, msgs);
-			msgs = basicSetParent(newParent, msgs);
-			if (msgs != null) msgs.dispatch();
+	public EList getIncludeGroups() {
+		if (includeGroups == null) {
+			includeGroups = new EObjectResolvingEList(IncludeEntityGroup.class, this, MetadataPackage.ENTITY__INCLUDE_GROUPS);
 		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MetadataPackage.ENTITY__PARENT, newParent, newParent));
+		return includeGroups;
 	}
 
 	/**
@@ -238,7 +233,7 @@ public class EntityImpl extends EObjectImpl implements Entity {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public void accept(IEntityVisitor visitor) {
 		if (visitor.stopVisiting())
@@ -253,24 +248,57 @@ public class EntityImpl extends EObjectImpl implements Entity {
 					return;
 			}
 		}
+//		if (!getIncludeGroups().isEmpty()){
+//			for (Iterator/*<IncludeEntityGroup>*/ it = getIncludeGroups().iterator(); it.hasNext();){
+//				IncludeEntityGroup entityGroup = (IncludeEntityGroup)it.next();
+//				Model m = getModel(entityGroup);
+//				if (m != null){
+//					Entity k = m.findIncludeGroup(entityGroup.getId());
+//					if (k != null){
+//						k.accept(visitor);
+//						if (visitor.stopVisiting())
+//							return;
+//					}
+//				}
+//			}
+//		}
 		visitor.visitCompleted();
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case MetadataPackage.ENTITY__CHILD_ENTITIES:
-				return ((InternalEList)getChildEntities()).basicAdd(otherEnd, msgs);
-			case MetadataPackage.ENTITY__PARENT:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetParent((Entity)otherEnd, msgs);
+	private synchronized Model getModel(IncludeEntityGroup group) {
+		if (group.getModelUri() == null || group.getModelUri().equals(getModel().getCurrentModelContext().getUri()))
+			return getModel();
+		
+		ModelKeyDescriptor currentModelKey = getModel().getCurrentModelContext();
+		IMetaDataModelContext modelContext = new MetaDataModelContextImpl(currentModelKey.getProject(), currentModelKey.getDomain(), group.getModelUri());
+		return MetaDataQueryHelper.getModel(modelContext);	
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public Model getModel() {
+		if (_model == null){
+			EObject parent = this.eContainer();
+			while (true){				
+				if (parent instanceof Model){
+					_model = (Model)parent;
+					break;
+				}
+				if (parent != null)
+					parent = parent.eContainer();
+				else
+					break;
+			}
 		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
+		return _model;
 	}
 
 	/**
@@ -284,23 +312,8 @@ public class EntityImpl extends EObjectImpl implements Entity {
 				return ((InternalEList)getChildEntities()).basicRemove(otherEnd, msgs);
 			case MetadataPackage.ENTITY__TRAITS:
 				return ((InternalEList)getTraits()).basicRemove(otherEnd, msgs);
-			case MetadataPackage.ENTITY__PARENT:
-				return basicSetParent(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
-			case MetadataPackage.ENTITY__PARENT:
-				return eInternalContainer().eInverseRemove(this, MetadataPackage.ENTITY__CHILD_ENTITIES, Entity.class, msgs);
-		}
-		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -314,12 +327,12 @@ public class EntityImpl extends EObjectImpl implements Entity {
 				return getChildEntities();
 			case MetadataPackage.ENTITY__TRAITS:
 				return getTraits();
-			case MetadataPackage.ENTITY__PARENT:
-				return getParent();
 			case MetadataPackage.ENTITY__ID:
 				return getId();
 			case MetadataPackage.ENTITY__TYPE:
 				return getType();
+			case MetadataPackage.ENTITY__INCLUDE_GROUPS:
+				return getIncludeGroups();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -339,14 +352,15 @@ public class EntityImpl extends EObjectImpl implements Entity {
 				getTraits().clear();
 				getTraits().addAll((Collection)newValue);
 				return;
-			case MetadataPackage.ENTITY__PARENT:
-				setParent((Entity)newValue);
-				return;
 			case MetadataPackage.ENTITY__ID:
 				setId((String)newValue);
 				return;
 			case MetadataPackage.ENTITY__TYPE:
 				setType((String)newValue);
+				return;
+			case MetadataPackage.ENTITY__INCLUDE_GROUPS:
+				getIncludeGroups().clear();
+				getIncludeGroups().addAll((Collection)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -365,14 +379,14 @@ public class EntityImpl extends EObjectImpl implements Entity {
 			case MetadataPackage.ENTITY__TRAITS:
 				getTraits().clear();
 				return;
-			case MetadataPackage.ENTITY__PARENT:
-				setParent((Entity)null);
-				return;
 			case MetadataPackage.ENTITY__ID:
 				setId(ID_EDEFAULT);
 				return;
 			case MetadataPackage.ENTITY__TYPE:
 				setType(TYPE_EDEFAULT);
+				return;
+			case MetadataPackage.ENTITY__INCLUDE_GROUPS:
+				getIncludeGroups().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -389,12 +403,12 @@ public class EntityImpl extends EObjectImpl implements Entity {
 				return childEntities != null && !childEntities.isEmpty();
 			case MetadataPackage.ENTITY__TRAITS:
 				return traits != null && !traits.isEmpty();
-			case MetadataPackage.ENTITY__PARENT:
-				return getParent() != null;
 			case MetadataPackage.ENTITY__ID:
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 			case MetadataPackage.ENTITY__TYPE:
 				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
+			case MetadataPackage.ENTITY__INCLUDE_GROUPS:
+				return includeGroups != null && !includeGroups.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

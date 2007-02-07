@@ -14,34 +14,60 @@ package org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features;
 
 import org.eclipse.core.runtime.IStatus;
 
+/**
+ * Metadata Validation Message implementation 
+ *
+ */
 public class ValidationMessage implements IValidationMessage {
 
 	private String code;
 	private String msg;
 	private int severity = IStatus.WARNING;
 
+	/**
+	 * Constructor
+	 * @param msg
+	 */
 	public ValidationMessage(String msg){
 		this.msg = msg;
 	}
 	
+	/**
+	 * Constructor
+	 * @param msg
+	 * @param code
+	 * @param severity
+	 */
 	public ValidationMessage(String msg, String code, int severity){
 		this.msg = msg;
 		this.code = code;
 		this.severity = severity;
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IValidationMessage#getMessage()
+	 */
 	public String getMessage() {
 		return msg;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IValidationMessage#getCode()
+	 */
 	public String getCode() {
 		return code;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IValidationMessage#getSeverity()
+	 */
 	public int getSeverity() {
 		return severity;
 	}
 
+	/**
+	 * @param msg
+	 */
 	public void setMessage(String msg) {
 		this.msg = msg;
 	}

@@ -38,7 +38,7 @@ public class StringType extends EnumerationType implements IValidValues,
 	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IValidValues#isValidValue(java.lang.String)
 	 */
 	public boolean isValidValue(String value) {		
-		List vals = getCMValidValues();
+		List vals = getMDValidValues();
 		if (vals.isEmpty())
 			return true;
 		
@@ -56,11 +56,11 @@ public class StringType extends EnumerationType implements IValidValues,
 	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IPossibleValues#getPossibleValues()
 	 */
 	public List getPossibleValues() {
-		List pvs = getCMPossibleValues();
+		List pvs = getMDPossibleValues();
 		if (pvs.isEmpty())
 			return EMPTY_LIST;
 		
-		List pdvs = getCMPossibleValuesForDisplay();
+		List pdvs = getMDPossibleValuesForDisplay();
 		
 		//if there are no display vals or the meta-data list sizes are different, use the values list for display also
 		if (pdvs.isEmpty() || pvs.size() != pdvs.size())

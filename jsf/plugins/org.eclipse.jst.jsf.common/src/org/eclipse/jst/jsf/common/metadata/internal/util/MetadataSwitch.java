@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MetadataSwitch.java,v 1.2 2007/01/24 17:22:47 gkessler Exp $
+ * $Id: MetadataSwitch.java,v 1.3 2007/02/07 00:03:50 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.util;
 
@@ -12,6 +12,8 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.EntityGroup;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.IncludeEntityGroup;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.MetadataPackage;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Model;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
@@ -99,12 +101,6 @@ public class MetadataSwitch {
 	 */
 	protected Object doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case MetadataPackage.TRAIT: {
-				Trait trait = (Trait)theEObject;
-				Object result = caseTrait(trait);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case MetadataPackage.MODEL: {
 				Model model = (Model)theEObject;
 				Object result = caseModel(model);
@@ -112,9 +108,28 @@ public class MetadataSwitch {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case MetadataPackage.ENTITY_GROUP: {
+				EntityGroup entityGroup = (EntityGroup)theEObject;
+				Object result = caseEntityGroup(entityGroup);
+				if (result == null) result = caseEntity(entityGroup);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case MetadataPackage.ENTITY: {
 				Entity entity = (Entity)theEObject;
 				Object result = caseEntity(entity);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case MetadataPackage.TRAIT: {
+				Trait trait = (Trait)theEObject;
+				Object result = caseTrait(trait);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case MetadataPackage.INCLUDE_ENTITY_GROUP: {
+				IncludeEntityGroup includeEntityGroup = (IncludeEntityGroup)theEObject;
+				Object result = caseIncludeEntityGroup(includeEntityGroup);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -134,6 +149,21 @@ public class MetadataSwitch {
 	 * @generated
 	 */
 	public Object caseTrait(Trait object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpretting the object as an instance of '<em>Include Entity Group</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpretting the object as an instance of '<em>Include Entity Group</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public Object caseIncludeEntityGroup(IncludeEntityGroup object) {
 		return null;
 	}
 
@@ -164,6 +194,21 @@ public class MetadataSwitch {
 	 * @generated
 	 */
 	public Object caseEntity(Entity object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpretting the object as an instance of '<em>Entity Group</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpretting the object as an instance of '<em>Entity Group</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public Object caseEntityGroup(EntityGroup object) {
 		return null;
 	}
 

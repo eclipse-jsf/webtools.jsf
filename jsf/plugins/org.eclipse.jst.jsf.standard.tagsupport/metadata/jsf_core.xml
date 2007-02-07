@@ -1,299 +1,325 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<p:grammar-annotations
-	xmlns:p="http://org.eclipse.jst.jsf.contentmodel.annotations/grammarAnnotationSchema"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://org.eclipse.jst.jsf.contentmodel.annotations/grammarAnnotationSchema ../../org.eclipse.jst.jsf.contentmodel.annotations/schema/grammar-annotations.xsd ">
-	<cm-element name="actionListener">
-		<cm-attribute name="type">
-			<property name="attribute-value-runtime-type">
+<md:metadatamodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" 
+	xmlns:md="http://org.eclipse.jst.jsf.common.metadata/metadata.ecore"
+	xmlns:mdt="http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore"  
+	id="http://java.sun.com/jsf/core"
+	type="tagFile">
+
+	<entity id="actionListener" type="tag">
+		<include-entity-group id="common-core-attributes"/>
+		<entity id="type">
+			<trait id="attribute-value-runtime-type">
 				<value>
 					org.eclipse.jst.jsf.core.attributevalues.JavaClassType
 				</value>
-			</property>
-			<property name="valid-interfaces">
+			</trait>
+			<trait id="valid-interfaces">
 				<value>javax.faces.event.ActionListener</value>
-			</property>		
-		</cm-attribute>
-	</cm-element>
-	<cm-element name="attribute">
-	</cm-element>	
-	<cm-element name="convertDateTime">
-		<cm-attribute name="dateStyle">
-			<property name="attribute-value-runtime-type">
+			</trait>		
+		</entity>
+	</entity>
+	<entity id="attribute" type="tag">
+		<include-entity-group id="common-core-attributes"/>
+	</entity>	
+	<entity id="convertDateTime" type="tag">
+		<include-entity-group id="common-core-attributes"/>
+		<entity id="dateStyle">
+			<trait id="attribute-value-runtime-type">
 				<value>
 					org.eclipse.jst.jsf.core.attributevalues.StringType
 				</value>
-			</property>
-			<property name="valid-values">
+			</trait>
+			<trait id="valid-values">
+				<value xsi:type="mdt:ListOfValues">
+					<item>default</item>
+					<item>short</item>
+					<item>medium</item>
+					<item>long</item>
+					<item>full</item>
+				</value>
+			</trait>
+			<trait id="default-value">
 				<value>default</value>
-				<value>short</value>
-				<value>medium</value>
-				<value>long</value>
-				<value>full</value>
-			</property>
-			<property name="default-value">
-				<value>default</value>
-			</property>
-		</cm-attribute>
-		<cm-attribute name="timeStyle">
-			<property name="attribute-value-runtime-type">
+			</trait>
+		</entity>
+		<entity id="timeStyle">			
+			<trait id="attribute-value-runtime-type">
 				<value>
 					org.eclipse.jst.jsf.core.attributevalues.StringType
 				</value>
-			</property>
-			<property name="valid-values">
+			</trait>
+			<trait id="valid-values">
+				<value xsi:type="mdt:ListOfValues">
+					<item>default</item>
+					<item>short</item>
+					<item>medium</item>
+					<item>long</item>
+					<item>full</item>
+				</value>
+			</trait>
+			<trait id="default-value">
 				<value>default</value>
-				<value>short</value>
-				<value>medium</value>
-				<value>long</value>
-				<value>full</value>
-			</property>
-			<property name="default-value">
-				<value>default</value>
-			</property>
-		</cm-attribute>
-		<cm-attribute name="type">
-			<property name="attribute-value-runtime-type">
+			</trait>
+		</entity>
+		<entity id="type">			
+			<trait id="attribute-value-runtime-type">
 				<value>
 					org.eclipse.jst.jsf.core.attributevalues.StringType
 				</value>
-			</property>
-			<property name="valid-values">
-				<value>date</value>
-				<value>time</value>
+			</trait>
+			<trait id="valid-values">
+				<value xsi:type="mdt:ListOfValues">
+					<item>date</item>
+					<item>time</item>
+					<item>both</item>
+				</value>
+			</trait>
+			<trait id="default-value">
 				<value>both</value>
-			</property>
-			<property name="default-value">
-				<value>both</value>
-			</property>
-		</cm-attribute>
-	</cm-element>
-	<cm-element name="convertNumber">
-		<cm-attribute name="groupingUsed">
-			<property name="attribute-value-runtime-type">
+			</trait>
+		</entity>
+	</entity>
+	<entity id="convertNumber" type="tag">
+		<include-entity-group id="common-core-attributes"/>
+		<entity id="groupingUsed">
+			<trait id="attribute-value-runtime-type">
 				<value>
 					org.eclipse.jst.jsf.core.attributevalues.BooleanType
 				</value>
-			</property>
-			<property name="default-value">
+			</trait>
+			<trait id="default-value">
 				<value>true</value>
-			</property>
-		</cm-attribute>
-		<cm-attribute name="integerOnly">
-			<property name="attribute-value-runtime-type">
+			</trait>
+		</entity>
+		<entity id="integerOnly">
+			<trait id="attribute-value-runtime-type">
 				<value>
 					org.eclipse.jst.jsf.core.attributevalues.BooleanType
 				</value>
-			</property>
-			<property name="default-value">
+			</trait>
+			<trait id="default-value">
 				<value>false</value>
-			</property>
-		</cm-attribute>
-		<cm-attribute name="maxFractionDigits">
-			<property name="attribute-value-runtime-type">
+			</trait>
+		</entity>
+		<entity id="maxFractionDigits">
+			<trait id="attribute-value-runtime-type">
 				<value>
 					org.eclipse.jst.jsf.core.attributevalues.IntegerType
 				</value>
-			</property>
-			<property name="valid-minimum"><value>0</value></property>
-		</cm-attribute>
-		<cm-attribute name="maxIntegerDigits">
-			<property name="attribute-value-runtime-type">
+			</trait>
+			<trait id="valid-minimum"><value>0</value></trait>
+		</entity>
+		<entity id="maxIntegerDigits">
+			<trait id="attribute-value-runtime-type">
 				<value>
 					org.eclipse.jst.jsf.core.attributevalues.IntegerType
 				</value>
-			</property>
-			<property name="valid-minimum"><value>0</value></property>
-		</cm-attribute>
-		<cm-attribute name="minFractionDigits">
-			<property name="attribute-value-runtime-type">
+			</trait>
+			<trait id="valid-minimum"><value>0</value></trait>
+		</entity>
+		<entity id="minFractionDigits">
+			<trait id="attribute-value-runtime-type">
 				<value>
 					org.eclipse.jst.jsf.core.attributevalues.IntegerType
 				</value>
-			</property>
-			<property name="valid-minimum"><value>0</value></property>
-		</cm-attribute>
-		<cm-attribute name="minIntegerDigits">
-			<property name="attribute-value-runtime-type">
+			</trait>
+			<trait id="valid-minimum"><value>0</value></trait>
+		</entity>
+		<entity id="minIntegerDigits">
+			<trait id="attribute-value-runtime-type">
 				<value>
 					org.eclipse.jst.jsf.core.attributevalues.IntegerType
 				</value>
-			</property>
-			<property name="valid-minimum"><value>0</value></property>
-		</cm-attribute>
-		<cm-attribute name="type">
-			<property name="attribute-value-runtime-type">
+			</trait>
+			<trait id="valid-minimum"><value>0</value></trait>
+		</entity>
+		<entity id="type">
+			<trait id="attribute-value-runtime-type">
 				<value>
 					org.eclipse.jst.jsf.core.attributevalues.StringType
 				</value>
-			</property>
-			<property name="valid-values">
+			</trait>
+			<trait id="valid-values">
+				<value xsi:type="mdt:ListOfValues">
+					<item>number</item>
+					<item>currency</item>
+					<item>percentage</item>
+				</value>
+			</trait>
+			<trait id="default-value">
 				<value>number</value>
-				<value>currency</value>
-				<value>percentage</value>
-			</property>
-			<property name="default-value">
-				<value>number</value>
-			</property>
-		</cm-attribute>
-	</cm-element>
-	<cm-element name="converter">
-		<cm-attribute name="converterId">
-			<property name="attribute-value-runtime-type">
+			</trait>
+		</entity>
+	</entity>
+	<entity id="converter" type="tag">
+		<include-entity-group id="common-core-attributes"/>
+		<entity id="converterId">
+			<trait id="attribute-value-runtime-type">
 				<value>
 					org.eclipse.jst.jsf.core.attributevalues.FacesConfigIdentifierType
 				</value>
-			</property>
-			<property name="config-type">
+			</trait>
+			<trait id="config-type">
 				<value>javax.faces.converter.Converter</value>
-			</property>
-		</cm-attribute>
-	</cm-element>
-	<cm-element name="selectItem">
-		<cm-attribute name="itemDisabled">
-			<property name="attribute-value-runtime-type">
+			</trait>
+		</entity>
+	</entity>
+	<entity id="param" type="tag"><include-entity-group id="common-core-attributes"/></entity>
+	<entity id="selectItem" type="tag">
+		<include-entity-group id="common-core-attributes"/>
+		<entity id="itemDisabled">
+			<trait id="attribute-value-runtime-type">
 				<value>
 					org.eclipse.jst.jsf.core.attributevalues.BooleanType
 				</value>
-			</property>
-			<property name="default-value">
+			</trait>
+			<trait id="default-value">
 				<value>false</value>
-			</property>
-		</cm-attribute>
-		<cm-attribute name="value">
-			<property name="attribute-value-runtime-type">
+			</trait>
+		</entity>
+		<entity id="value">
+			<trait id="attribute-value-runtime-type">
 				<value>
 					org.eclipse.jst.jsf.core.attributevalues.ValueBindingType
 				</value>
-			</property>
-			<property name="runtime-return-type">
+			</trait>
+			<trait id="runtime-return-type">
 				<value>javax.faces.model.SelectItem</value>
-			</property>				
-		</cm-attribute>
-	</cm-element>
-	<cm-element name="selectItems">	
-	</cm-element>
-	<cm-element name="subview">
-		<cm-attribute name="rendered">
-			<property name="attribute-value-runtime-type">
+			</trait>				
+		</entity>
+	</entity>
+	<entity id="selectItems" type="tag">	
+		<include-entity-group id="common-core-attributes"/>
+	</entity>
+	<entity id="subview" type="tag">
+		<include-entity-group id="common-core-attributes"/>
+		<entity id="rendered">
+			<trait id="attribute-value-runtime-type">
 				<value>
 					org.eclipse.jst.jsf.core.attributevalues.BooleanType
 				</value>
-			</property>
-		</cm-attribute>
-	</cm-element>
-	<cm-element name="validateDoubleRange">
-		<cm-attribute name="maximum">
-			<property name="attribute-value-runtime-type">
+			</trait>
+		</entity>
+	</entity>
+	<entity id="validateDoubleRange" type="tag">
+		<include-entity-group id="common-core-attributes"/>
+		<entity id="maximum">
+			<trait id="attribute-value-runtime-type">
 				<value>
 					org.eclipse.jst.jsf.core.attributevalues.DoubleType
 				</value>
-			</property>
-		</cm-attribute>
-		<cm-attribute name="minimum">
-			<property name="attribute-value-runtime-type">
+			</trait>
+		</entity>
+		<entity id="minimum">
+			<trait id="attribute-value-runtime-type">
 				<value>
 					org.eclipse.jst.jsf.core.attributevalues.DoubleType
 				</value>
-			</property>
-		</cm-attribute>
-	</cm-element>
-	<cm-element name="validateLength">
-		<cm-attribute name="maximum">
-			<property name="attribute-value-runtime-type">
+			</trait>
+		</entity>
+	</entity>
+	<entity id="validateLength" type="tag">
+		<include-entity-group id="common-core-attributes"/>
+		<entity id="maximum">
+			<trait id="attribute-value-runtime-type">
 				<value>
 					org.eclipse.jst.jsf.core.attributevalues.LongType
 				</value>
-			</property>
-			<property name="valid-minimum"><value>0</value></property>			
-		</cm-attribute>
-		<cm-attribute name="minimum">
-			<property name="attribute-value-runtime-type">
+			</trait>
+			<trait id="valid-minimum"><value>0</value></trait>			
+		</entity>
+		<entity id="minimum">
+			<trait id="attribute-value-runtime-type">
 				<value>
 					org.eclipse.jst.jsf.core.attributevalues.LongType
 				</value>
-			</property>
-			<property name="valid-minimum"><value>0</value></property>	
-		</cm-attribute>
-	</cm-element>
-	<cm-element name="validateLongRange">
-		<cm-attribute name="maximum">
-			<property name="attribute-value-runtime-type">
+			</trait>
+			<trait id="valid-minimum"><value>0</value></trait>	
+		</entity>
+	</entity>
+	<entity id="validateLongRange" type="tag">
+		<include-entity-group id="common-core-attributes"/>
+		<entity id="maximum">
+			<trait id="attribute-value-runtime-type">
 				<value>
 					org.eclipse.jst.jsf.core.attributevalues.LongType
 				</value>
-			</property>
-		</cm-attribute>
-		<cm-attribute name="minimum">
-			<property name="attribute-value-runtime-type">
+			</trait>
+		</entity>
+		<entity id="minimum">
+			<trait id="attribute-value-runtime-type">
 				<value>
 					org.eclipse.jst.jsf.core.attributevalues.LongType
 				</value>
-			</property>
-		</cm-attribute>
-	</cm-element>
-	<cm-element name="validator">
-		<cm-attribute name="validatorId">
-			<property name="attribute-value-runtime-type">
+			</trait>
+		</entity>
+	</entity>
+	<entity id="validator" type="tag">
+		<include-entity-group id="common-core-attributes"/>
+		<entity id="validatorId">
+			<trait id="attribute-value-runtime-type">
 				<value>
 					org.eclipse.jst.jsf.core.attributevalues.FacesConfigIdentifierType
 				</value>
-			</property>
-			<property name="config-type">
+			</trait>
+			<trait id="config-type">
 				<value>javax.faces.validator.Validator</value>
-			</property>
-		</cm-attribute>
-	</cm-element>
-	<cm-element name="valueChangeListener">
-		<cm-attribute name="type">
-			<property name="attribute-value-runtime-type">
+			</trait>
+		</entity>
+	</entity>
+	<entity id="valueChangeListener" type="tag">
+		<include-entity-group id="common-core-attributes"/>
+		<entity id="type">
+			<trait id="attribute-value-runtime-type">
 				<value>
 					org.eclipse.jst.jsf.core.attributevalues.JavaClassType
 				</value>
-			</property>
-			<property name="valid-interfaces">
+			</trait>
+			<trait id="valid-interfaces">
 				<value>javax.faces.event.ValueChangeListener</value>
-			</property>			
-		</cm-attribute>
-	</cm-element>
-	<cm-element name="verbatim">
-		<cm-attribute name="escape">
-			<property name="attribute-value-runtime-type">
+			</trait>			
+		</entity>
+	</entity>
+	<entity id="verbatim" type="tag">
+		<include-entity-group id="common-core-attributes"/>
+		<entity id="escape">
+			<trait id="attribute-value-runtime-type">
 				<value>
 					org.eclipse.jst.jsf.core.attributevalues.BooleanType
 				</value>
-			</property>
-			<property name="default-value">
+			</trait>
+			<trait id="default-value">
 				<value>false</value>
-			</property>
-		</cm-attribute>
-	</cm-element>
-	<cm-element name="view"></cm-element>
+			</trait>
+		</entity>
+	</entity>
+	<entity id="view" type="tag"><include-entity-group id="common-core-attributes"/></entity>
 
-	<cm-element name="*">
-		<cm-attribute name="binding">
-			<property name="attribute-value-runtime-type">
+	<entityGroup id="common-core-attributes" type="tag">
+		<entity id="binding">
+			<trait id="attribute-value-runtime-type">
 				<value>
 					org.eclipse.jst.jsf.core.attributevalues.ComponentBindingType
 				</value>
-			</property>
-			<property name="runtime-return-type">
+			</trait>
+			<trait id="runtime-return-type">
 				<value>javax.faces.component.UIComponent</value>
-			</property>				
-		</cm-attribute>			
-		<cm-attribute name="id">
-			<property name="attribute-value-runtime-type">
+			</trait>				
+		</entity>			
+		<entity id="id">
+			<trait id="attribute-value-runtime-type">
 				<value>
 					org.eclipse.jst.jsf.core.attributevalues.ComponentIDType
 				</value>
-			</property>
-		</cm-attribute>
-		<cm-attribute name="value">
-			<property name="attribute-value-runtime-type">
+			</trait>
+		</entity>
+		<entity id="value">
+			<trait id="attribute-value-runtime-type">
 				<value>
 					org.eclipse.jst.jsf.core.attributevalues.ValueBindingType
 				</value>
-			</property>
-		</cm-attribute>
-	</cm-element>
-</p:grammar-annotations>
+			</trait>
+		</entity>
+	</entityGroup>
+</md:metadatamodel>

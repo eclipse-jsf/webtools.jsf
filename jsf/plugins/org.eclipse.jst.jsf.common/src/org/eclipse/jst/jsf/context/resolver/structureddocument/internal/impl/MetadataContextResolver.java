@@ -15,7 +15,11 @@ package org.eclipse.jst.jsf.context.resolver.structureddocument.internal.impl;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.CMAnnotationHelper;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IMetaDataModelContext;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.MetaDataQueryHelper;
 import org.eclipse.jst.jsf.context.internal.provisional.IModelContext;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.IMetadataContextResolver;
 import org.eclipse.jst.jsf.context.structureddocument.internal.provisional.IStructuredDocumentContext;
@@ -44,6 +48,7 @@ class MetadataContextResolver implements IMetadataContextResolver
     public List getPropertyValue(final String key) 
     {
         final DOMContextResolver domResolver = new DOMContextResolver(_context);
+        final WorkspaceContextResolver wsResolver = new WorkspaceContextResolver(_context);
         final TaglibContextResolver  tagResolver =
             new TaglibContextResolver(_context);
         
@@ -54,25 +59,33 @@ class MetadataContextResolver implements IMetadataContextResolver
             final Attr attribute = (Attr) curNode;
             final Element  element = attribute.getOwnerElement();
             final String uri = tagResolver.getTagURIForNodeName(element);
-
-            return
-                CMAnnotationHelper.
-                    getCMAttributeProperties(uri, 
-                                             element.getLocalName(), 
-                                             attribute.getLocalName(),
-                                             key);
+            final IProject project = wsResolver.getProject();
+            
+            final IMetaDataModelContext mdContext = MetaDataQueryHelper.createMetaDataModelContext(project, MetaDataQueryHelper.TAGLIB_DOMAIN, uri);
+            Trait trait = MetaDataQueryHelper.getTrait(mdContext, element.getLocalName()+"/"+attribute.getLocalName(), key);
+            return TraitValueHelper.getValueAsListOfStrings(trait);
+//            return
+//                CMAnnotationHelper.
+//                    getCMAttributeProperties(uri, 
+//                                             element.getLocalName(), 
+//                                             attribute.getLocalName(),
+//                                             key);
             
         }
         else if (curNode instanceof Element)
         {
             final Element  element = (Element) curNode;
             final String uri = tagResolver.getTagURIForNodeName(element);
-
-            return
-                CMAnnotationHelper.
-                    getCMElementProperties(uri, 
-                             element.getLocalName(), 
-                             key);
+            final IProject project = wsResolver.getProject();
+            
+            final IMetaDataModelContext mdContext = MetaDataQueryHelper.createMetaDataModelContext(project, MetaDataQueryHelper.TAGLIB_DOMAIN, uri);
+            Trait trait = MetaDataQueryHelper.getTrait(mdContext, element.getLocalName(), key);
+            return TraitValueHelper.getValueAsListOfStrings(trait);
+//            return
+//                CMAnnotationHelper.
+//                    getCMElementProperties(uri, 
+//                             element.getLocalName(), 
+//                             key);
         }
         
         return Collections.EMPTY_LIST;

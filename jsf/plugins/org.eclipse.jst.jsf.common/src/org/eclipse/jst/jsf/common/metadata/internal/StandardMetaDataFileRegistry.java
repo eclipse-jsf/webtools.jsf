@@ -138,8 +138,11 @@ class StandardMetaDataFilesProvider implements IMetaDataSourceModelProvider {
 		try {
 			if (inputStream != null){
 				EList contents = StandardModelFactory.getInstance().loadStandardFileResource(inputStream);
-				model = contents.get(0);
-				((Model)model).setSourceModelProvider(this);
+				//check to see if this is a Model
+				if (contents != null && contents.get(0) instanceof Model){				
+					model = contents.get(0);
+					((Model)model).setSourceModelProvider(this);
+				}
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

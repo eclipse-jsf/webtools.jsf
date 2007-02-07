@@ -36,11 +36,11 @@ public abstract class ExpressionBindingType extends BindingType  {
 	
 
 	protected String getReturnType() {
-		return getCMAttributePropertyValue(RUNTIME_RETURN_TYPE);		
+		return getTraitValueAsString(RUNTIME_RETURN_TYPE);		
 	}
 
 	protected String[] getParams() {
-		List params = getCMAttributePropertyValues(RUNTIME_PARAMS_TYPES);
+		List params = getTraitValueAsListOfStrings(RUNTIME_PARAMS_TYPES);
 		
 		return (String[])params.toArray(new String[0]);
 	}

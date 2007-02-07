@@ -39,7 +39,7 @@ public class LongType extends NumberType {
 			exceedsMaxValue(aLong.longValue());
 			lessThanMinValue(aLong.longValue());
 			if (!(minFound || maxFound)){
-				List validVals = getCMValidValues();
+				List validVals = getMDValidValues();
 				if (!validVals.isEmpty()){
 					if (!validVals.contains(value)){
 						addNewValidationMessage(Messages.LongType_invalid_member);

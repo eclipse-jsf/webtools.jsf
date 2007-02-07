@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MetadataPackageImpl.java,v 1.1 2007/01/15 23:26:15 gkessler Exp $
+ * $Id: MetadataPackageImpl.java,v 1.2 2007/02/07 00:03:49 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.impl;
 
@@ -14,7 +14,10 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider;
+import org.eclipse.jst.jsf.common.metadata.internal.ModelKeyDescriptor;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.EntityGroup;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.IncludeEntityGroup;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.MetadataFactory;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.MetadataPackage;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Model;
@@ -49,6 +52,13 @@ public class MetadataPackageImpl extends EPackageImpl implements MetadataPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass includeEntityGroupEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass modelEClass = null;
 
 	/**
@@ -57,6 +67,13 @@ public class MetadataPackageImpl extends EPackageImpl implements MetadataPackage
 	 * @generated
 	 */
 	private EClass entityEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass entityGroupEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -78,6 +95,13 @@ public class MetadataPackageImpl extends EPackageImpl implements MetadataPackage
 	 * @generated
 	 */
 	private EDataType iMetaDataSourceModelProviderEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType modelContextEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -179,6 +203,33 @@ public class MetadataPackageImpl extends EPackageImpl implements MetadataPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getIncludeEntityGroup() {
+		return includeEntityGroupEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getIncludeEntityGroup_Id() {
+		return (EAttribute)includeEntityGroupEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getIncludeEntityGroup_ModelUri() {
+		return (EAttribute)includeEntityGroupEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EAttribute getTrait_Id() {
 		return (EAttribute)traitEClass.getEStructuralFeatures().get(0);
 	}
@@ -198,7 +249,25 @@ public class MetadataPackageImpl extends EPackageImpl implements MetadataPackage
 	 * @generated
 	 */
 	public EAttribute getModel_SourceModelProvider() {
-		return (EAttribute)modelEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)modelEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getModel_CurrentModelContext() {
+		return (EAttribute)modelEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getModel_EntityGroups() {
+		return (EReference)modelEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -233,17 +302,8 @@ public class MetadataPackageImpl extends EPackageImpl implements MetadataPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEntity_Parent() {
-		return (EReference)entityEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getEntity_Id() {
-		return (EAttribute)entityEClass.getEStructuralFeatures().get(3);
+		return (EAttribute)entityEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -252,7 +312,25 @@ public class MetadataPackageImpl extends EPackageImpl implements MetadataPackage
 	 * @generated
 	 */
 	public EAttribute getEntity_Type() {
-		return (EAttribute)entityEClass.getEStructuralFeatures().get(4);
+		return (EAttribute)entityEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEntity_IncludeGroups() {
+		return (EReference)entityEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getEntityGroup() {
+		return entityGroupEClass;
 	}
 
 	/**
@@ -287,6 +365,15 @@ public class MetadataPackageImpl extends EPackageImpl implements MetadataPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getModelContext() {
+		return modelContextEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public MetadataFactory getMetadataFactory() {
 		return (MetadataFactory)getEFactoryInstance();
 	}
@@ -310,25 +397,34 @@ public class MetadataPackageImpl extends EPackageImpl implements MetadataPackage
 		isCreated = true;
 
 		// Create classes and their features
+		modelEClass = createEClass(MODEL);
+		createEReference(modelEClass, MODEL__ENTITY_GROUPS);
+		createEAttribute(modelEClass, MODEL__SOURCE_MODEL_PROVIDER);
+		createEAttribute(modelEClass, MODEL__CURRENT_MODEL_CONTEXT);
+
+		entityGroupEClass = createEClass(ENTITY_GROUP);
+
+		entityEClass = createEClass(ENTITY);
+		createEReference(entityEClass, ENTITY__CHILD_ENTITIES);
+		createEReference(entityEClass, ENTITY__TRAITS);
+		createEAttribute(entityEClass, ENTITY__ID);
+		createEAttribute(entityEClass, ENTITY__TYPE);
+		createEReference(entityEClass, ENTITY__INCLUDE_GROUPS);
+
 		traitEClass = createEClass(TRAIT);
 		createEAttribute(traitEClass, TRAIT__ID);
 		createEReference(traitEClass, TRAIT__VALUE);
 		createEReference(traitEClass, TRAIT__SOURCE_MODEL);
 
-		modelEClass = createEClass(MODEL);
-		createEAttribute(modelEClass, MODEL__SOURCE_MODEL_PROVIDER);
-
-		entityEClass = createEClass(ENTITY);
-		createEReference(entityEClass, ENTITY__CHILD_ENTITIES);
-		createEReference(entityEClass, ENTITY__TRAITS);
-		createEReference(entityEClass, ENTITY__PARENT);
-		createEAttribute(entityEClass, ENTITY__ID);
-		createEAttribute(entityEClass, ENTITY__TYPE);
+		includeEntityGroupEClass = createEClass(INCLUDE_ENTITY_GROUP);
+		createEAttribute(includeEntityGroupEClass, INCLUDE_ENTITY_GROUP__ID);
+		createEAttribute(includeEntityGroupEClass, INCLUDE_ENTITY_GROUP__MODEL_URI);
 
 		// Create data types
 		iTraitVisitorEDataType = createEDataType(ITRAIT_VISITOR);
 		iEntityVisitorEDataType = createEDataType(IENTITY_VISITOR);
 		iMetaDataSourceModelProviderEDataType = createEDataType(IMETA_DATA_SOURCE_MODEL_PROVIDER);
+		modelContextEDataType = createEDataType(MODEL_CONTEXT);
 	}
 
 	/**
@@ -356,33 +452,51 @@ public class MetadataPackageImpl extends EPackageImpl implements MetadataPackage
 
 		// Add supertypes to classes
 		modelEClass.getESuperTypes().add(this.getEntity());
+		entityGroupEClass.getESuperTypes().add(this.getEntity());
 
 		// Initialize classes and features; add operations and parameters
+		initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getModel_EntityGroups(), this.getEntityGroup(), null, "entityGroups", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getModel_SourceModelProvider(), this.getIMetaDataSourceModelProvider(), "sourceModelProvider", null, 0, 1, Model.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getModel_CurrentModelContext(), this.getModelContext(), "currentModelContext", null, 0, 1, Model.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		EOperation op = addEOperation(modelEClass, this.getEntityGroup(), "findIncludeGroup", 0, 1);
+		addEParameter(op, ecorePackage.getEString(), "groupId", 0, 1);
+
+		op = addEOperation(modelEClass, null, "accept");
+		addEParameter(op, this.getIEntityVisitor(), "visitor", 0, 1);
+
+		initEClass(entityGroupEClass, EntityGroup.class, "EntityGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(entityEClass, Entity.class, "Entity", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getEntity_ChildEntities(), this.getEntity(), null, "childEntities", null, 0, -1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEntity_Traits(), this.getTrait(), null, "traits", null, 0, -1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEntity_Id(), ecorePackage.getEString(), "id", null, 1, 1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEntity_Type(), ecorePackage.getEString(), "type", null, 0, 1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEntity_IncludeGroups(), this.getIncludeEntityGroup(), null, "includeGroups", null, 0, -1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(entityEClass, null, "accept");
+		addEParameter(op, this.getIEntityVisitor(), "visitor", 0, 1);
+
+		op = addEOperation(entityEClass, this.getModel(), "getModel", 0, 1);
+
 		initEClass(traitEClass, Trait.class, "Trait", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTrait_Id(), ecorePackage.getEString(), "id", null, 1, 1, Trait.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTrait_Value(), ecorePackage.getEObject(), null, "value", null, 0, 1, Trait.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTrait_SourceModel(), this.getModel(), null, "sourceModel", null, 1, 1, Trait.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		EOperation op = addEOperation(traitEClass, null, "accept");
+		op = addEOperation(traitEClass, null, "accept");
 		addEParameter(op, this.getITraitVisitor(), "visitor", 0, 1);
 
-		initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getModel_SourceModelProvider(), this.getIMetaDataSourceModelProvider(), "sourceModelProvider", null, 0, 1, Model.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(entityEClass, Entity.class, "Entity", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEntity_ChildEntities(), this.getEntity(), this.getEntity_Parent(), "childEntities", null, 0, -1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEntity_Traits(), this.getTrait(), null, "traits", null, 0, -1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEntity_Parent(), this.getEntity(), this.getEntity_ChildEntities(), "parent", null, 0, 1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEntity_Id(), ecorePackage.getEString(), "id", null, 1, 1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEntity_Type(), ecorePackage.getEString(), "type", null, 0, 1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		op = addEOperation(entityEClass, null, "accept");
-		addEParameter(op, this.getIEntityVisitor(), "visitor", 0, 1);
+		initEClass(includeEntityGroupEClass, IncludeEntityGroup.class, "IncludeEntityGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getIncludeEntityGroup_Id(), ecorePackage.getEString(), "id", null, 1, 1, IncludeEntityGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getIncludeEntityGroup_ModelUri(), ecorePackage.getEString(), "modelUri", null, 0, 1, IncludeEntityGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize data types
 		initEDataType(iTraitVisitorEDataType, ITraitVisitor.class, "ITraitVisitor", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(iEntityVisitorEDataType, IEntityVisitor.class, "IEntityVisitor", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(iMetaDataSourceModelProviderEDataType, IMetaDataSourceModelProvider.class, "IMetaDataSourceModelProvider", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(modelContextEDataType, ModelKeyDescriptor.class, "ModelContext", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -410,12 +524,19 @@ public class MetadataPackageImpl extends EPackageImpl implements MetadataPackage
 			 "name", "metadatamodel"
 		   });		
 		addAnnotation
+		  (getModel_EntityGroups(), 
+		   source, 
+		   new String[] {
+			 "kind", "element",
+			 "name", "entityGroup"
+		   });		
+		addAnnotation
 		  (entityEClass, 
 		   source, 
 		   new String[] {
 			 "kind", "element",
 			 "name", "entity"
-		   });			
+		   });		
 		addAnnotation
 		  (getEntity_ChildEntities(), 
 		   source, 
@@ -429,6 +550,19 @@ public class MetadataPackageImpl extends EPackageImpl implements MetadataPackage
 		   new String[] {
 			 "kind", "element",
 			 "name", "trait"
+		   });		
+		addAnnotation
+		  (getEntity_IncludeGroups(), 
+		   source, 
+		   new String[] {
+			 "kind", "element",
+			 "name", "include-entity-group"
+		   });		
+		addAnnotation
+		  (getIncludeEntityGroup_ModelUri(), 
+		   source, 
+		   new String[] {
+			 "name", "uri"
 		   });		
 		addAnnotation
 		  (traitEClass, 
@@ -446,13 +580,7 @@ public class MetadataPackageImpl extends EPackageImpl implements MetadataPackage
 	 * @generated
 	 */
 	protected void createGenModelAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/GenModel";				
-		addAnnotation
-		  ((EOperation)entityEClass.getEOperations().get(0), 
-		   source, 
-		   new String[] {
-			 "body", "if (visitor.stopVisiting())\r\n\treturn;\r\nvisitor.visit(this);\r\n\r\nif (!getChildEntities().isEmpty()){\r\n\tfor (Iterator/*<Entity>*/ it = getChildEntities().iterator(); it.hasNext();){\r\n\t\tEntity k = (Entity)it.next();\r\n\t\tk.accept(visitor);\r\n\t\tif (visitor.stopVisiting())\r\n\t\t\treturn;\r\n\t}\r\n}\r\nvisitor.visitCompleted();"
-		   });					
+		String source = "http://www.eclipse.org/emf/2002/GenModel";										
 		addAnnotation
 		  ((EOperation)traitEClass.getEOperations().get(0), 
 		   source, 

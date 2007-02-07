@@ -47,27 +47,27 @@ public abstract class EnumerationType extends AbstractRootTypeDescriptor impleme
 	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IDefaultValue#getDefaultValue()
 	 */
 	public String getDefaultValue() {
-		return getCMAttributePropertyValue(IDefaultValue.DEFAULT_VALUE_PROP_NAME);		
+		return getTraitValueAsString(IDefaultValue.DEFAULT_VALUE_PROP_NAME);		
 	}
 	
-	protected List getCMPossibleValues() {
-		return getCMAttributePropertyValues(IPossibleValues.POSSIBLE_VALUES_PROP_NAME);
+	protected List getMDPossibleValues() {
+		return getTraitValueAsListOfStrings(IPossibleValues.POSSIBLE_VALUES_PROP_NAME);
 	}
 	
-	protected List getCMPossibleValuesForDisplay() {
-		return getCMAttributePropertyValues(IPossibleValues.POSSIBLE_VALUES_FOR_DISPLAY_PROP_NAME);
+	protected List getMDPossibleValuesForDisplay() {
+		return getTraitValueAsListOfStrings(IPossibleValues.POSSIBLE_VALUES_FOR_DISPLAY_PROP_NAME);
 	}
 	
-	protected List getCMValidValues() {
-		return getCMAttributePropertyValues(IValidValues.VALID_VALUES_PROP_NAME);		
+	protected List getMDValidValues() {
+		return getTraitValueAsListOfStrings(IValidValues.VALID_VALUES_PROP_NAME);		
 	}
 	
-	protected String getCMValidationMessage() {
-		return getCMAttributePropertyValue(IValidValues.VALID_VALUES_MESSAGE_PROP_NAME);			
+	protected String getMDValidationMessage() {
+		return getTraitValueAsString(IValidValues.VALID_VALUES_MESSAGE_PROP_NAME);			
 	}
 
-	protected int getCMValidationSeverity() {
-		String val = getCMAttributePropertyValue(IValidValues.VALID_VALUES_SEVERITY_PROP_NAME);		
+	protected int getMDValidationSeverity() {
+		String val = getTraitValueAsString(IValidValues.VALID_VALUES_SEVERITY_PROP_NAME);		
 		if (val == null)
 			return IStatus.WARNING;
 		
@@ -75,17 +75,17 @@ public abstract class EnumerationType extends AbstractRootTypeDescriptor impleme
 		return severity;
 	}
 
-	protected String getCMValidationCode() {
-		return getCMAttributePropertyValue(IValidValues.VALID_VALUES_CODE_PROP_NAME);		
+	protected String getMDValidationCode() {
+		return getTraitValueAsString(IValidValues.VALID_VALUES_CODE_PROP_NAME);		
 	}
 	
 	protected void addNewValidationMessage(String defaultMsg) {
-		String msg = getCMValidationMessage();
+		String msg = getMDValidationMessage();
 		if (msg == null || msg.equals("")) //$NON-NLS-1$
 			msg = defaultMsg;
 		
-		String code = getCMValidationCode();
-		int severity = getCMValidationSeverity();
+		String code = getMDValidationCode();
+		int severity = getMDValidationSeverity();
 		ValidationMessage val = new ValidationMessage(msg, code, severity);
 		getValidationMessages().add(val);
 	}

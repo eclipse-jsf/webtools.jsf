@@ -28,13 +28,13 @@ public abstract class NumberType extends EnumerationType{
 	 * @return maximum value from property named IValidValues.VALID_VALUES_MAX_PROP_NAME
 	 */
 	protected String getValidMaximumValue(){
-		return getCMAttributePropertyValue(IValidValues.VALID_VALUES_MAX_PROP_NAME);
+		return getTraitValueAsString(IValidValues.VALID_VALUES_MAX_PROP_NAME);
 	}
 		
 	/**
 	 * @return minimum value from property named IValidValues.VALID_VALUES_MIN_PROP_NAME
 	 */
 	protected String getValidMinimumValue(){
-		return getCMAttributePropertyValue(IValidValues.VALID_VALUES_MIN_PROP_NAME);
+		return getTraitValueAsString(IValidValues.VALID_VALUES_MIN_PROP_NAME);
 	}
 }

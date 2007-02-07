@@ -36,25 +36,15 @@ public abstract interface IMetaDataEnabledFeature {
 	public IStructuredDocumentContext getStructuredDocumentContext();
 	
 	/**
-	 * Sets content model context that this feature will operating on
+	 * Sets metadata model context that this feature will operating on
 	 * @param context 
 	 */
-	public void setContentModelContext(CMAnnotationContext context);
+	public void setMetaDataContext(MetaDataContext context);
 	
 	/**
-	 * Gets content model context that this feature will operating on
-	 * @return CMAnnotationContext
+	 * Gets metadata model context that this feature will be operating on. 
+	 * @return MetaDataContext
 	 */
-	public CMAnnotationContext getCMAnnotationContext();
+	public MetaDataContext getMetaDataContext();
 	
-	/**
-	 * Sets the bundle id used to define this feature
-	 * @param bundleId 
-	 */
-	public void setBundleID(String bundleId);
-	/**
-	 * Gets the bundleId used to define the extension
-	 * @return bundleID
-	 */
-	public String getBundleID();
 }
