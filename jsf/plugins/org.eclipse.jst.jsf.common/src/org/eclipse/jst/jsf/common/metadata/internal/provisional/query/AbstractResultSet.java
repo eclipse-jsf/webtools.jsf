@@ -27,10 +27,6 @@ public abstract class AbstractResultSet/*<T>*/ implements IResultSet/*<T>*/ {
 	public AbstractResultSet(){
 		results = new ArrayList/*<T>*/();
 	}
-
-	
-
-	
 	
 	/* (non-Javadoc)
 	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IResultSet#close()

@@ -22,9 +22,10 @@ import java.util.List;
 public interface IResultSet/*<T>*/{
 	
 	/**
-	 * @return List of results.  May be null.
+	 * @return List of results.  May NOT be null.  Implementer must return Collections.EMPTY_LIST instead.
 	 */
 	public List/*<T>*/ getResults();
+	
 	/**
 	 * Signal that the query results are no longer required allowing for any cleanup that may be required
 	 */

@@ -55,8 +55,8 @@ public class SimpleMetaDataQueryVisitorImpl implements IEntityQueryVisitor, ITra
 	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.query.ITraitQueryVisitor#findTraits(org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity, java.lang.String)
 	 */
 	public IResultSet/*<Trait>*/ findTraits(final Entity entity, final String traitQuery){
-		_stop = false;
 		
+		resetQuery();
 		if (entity != null){			
 			this.traitQuery = traitQuery;			
 			for (Iterator/*<Trait>*/ it=entity.getTraits().iterator();it.hasNext();){
@@ -85,11 +85,19 @@ public class SimpleMetaDataQueryVisitorImpl implements IEntityQueryVisitor, ITra
 	 */
 	public IResultSet/*<Entity>*/ findEntities(Entity initialEntityContext,
 			String entityKey) {
-		_stop = false;
-		entityComparator = new EntityQueryComparator(entityKey);		
-		initialEntityContext.accept(this);			
+		
+		resetQuery();
+		
+		if (initialEntityContext != null){
+			entityComparator = new EntityQueryComparator(entityKey);			
+			initialEntityContext.accept(this);			
+		}
 		
 		return getEntityResultSet();
+	}
+
+	private void resetQuery() {
+		_stop = false;
 	}
 
 	/**
@@ -199,15 +207,6 @@ public class SimpleMetaDataQueryVisitorImpl implements IEntityQueryVisitor, ITra
 		public EntityStack(){
 			super();
 		}
-//		private Entity initialEntityContext;
-
-//		public EntityStack(Entity initialEntityContext) {
-//			this.initialEntityContext = initialEntityContext;
-//		}
-		
-//		public Entity getInitailEntityContext(){
-//			return initialEntityContext;
-//		}
 	}
 
 }

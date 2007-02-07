@@ -80,10 +80,7 @@ public class MetaDataQueryHelper{
 				final String entityKey, final IEntityQueryVisitor visitor){
 		Model model = getModel(modelContext);
 		//we may want to throw error that model is empty
-		if (model != null){
-			return getEntities(model, entityKey, visitor);
-		}
-		return null;
+		return getEntities(model, entityKey, visitor);
 		
 	}
 
