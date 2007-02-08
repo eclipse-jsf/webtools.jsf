@@ -11,7 +11,6 @@
  ********************************************************************************/
 package org.eclipse.jst.jsf.common.metadata.internal;
 
-import java.util.ResourceBundle;
 
 /**
  * Provides a source of metadata that can be transformed into a merged standard model
@@ -30,12 +29,7 @@ public interface IMetaDataSourceModelProvider {
 	 * @param IMetaDataLocator instance that located this model provider instance
 	 */
 	public void setLocator(IMetaDataLocator locator);
-	/**
-	 * @return the resource bundle used by this model provider.   Can be null.
-	 */
-	public ResourceBundle getResourceBundle();
-	/**
-	 * @return the class loader to use when loading classes that are referenced in the this source of metadata
-	 */
-	public ClassLoader getClassLoader();
+	
+	public boolean canAdapt(Class klass);
+	public Object getAdapter(Class klass);
 }

@@ -15,6 +15,7 @@ package org.eclipse.jst.jsf.common.metadata.internal;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +23,11 @@ import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Model;
 
@@ -187,7 +192,7 @@ class StandardMetaDataFilesProvider implements IMetaDataSourceModelProvider {
 	/* (non-Javadoc)
 	 * @see org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider#getResourceBundle()
 	 */
-	public ResourceBundle getResourceBundle() {
+	private ResourceBundle internalGetResourceBundle() {
 		if (getFileLocator() != null){
 			try {
 				return fileLocator.getResourceBundle();
@@ -198,6 +203,42 @@ class StandardMetaDataFilesProvider implements IMetaDataSourceModelProvider {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+		return null;
+	}
+
+	public boolean canAdapt(Class klass) {
+		if (klass == IImageDescriptorProvider.class)
+			return true;
+		
+		if (klass == IResourceBundleProvider.class)
+			return true;
+		
+		return false;
+	}
+
+	public Object getAdapter(Class klass) {
+		final StandardMetaDataFilesProvider mdp = this;
+		if (klass == IImageDescriptorProvider.class){			
+			return new IImageDescriptorProvider(){
+
+				public ImageDescriptor getImageDescriptor(String imagePath) {	
+					String bundleID = mdp.getFileLocator().getFileInfo().getBundleId();
+					URL url = FileLocator.find(Platform.getBundle(bundleID), new Path(imagePath), null);
+					return ImageDescriptor.createFromURL(url);
+				}
+				
+			};
+		
+		} else if (klass == IResourceBundleProvider.class) {
+			return new IResourceBundleProvider(){
+
+				public ResourceBundle getResourceBundle() {
+					// TODO Auto-generated method stub
+					return mdp.internalGetResourceBundle();
+				}
+				
+			};
 		}
 		return null;
 	}

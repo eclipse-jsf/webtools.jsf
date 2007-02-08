@@ -18,6 +18,8 @@ import java.util.List;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jst.jsf.common.metadata.internal.DomainLoadingStrategyRegistry;
+import org.eclipse.jst.jsf.common.metadata.internal.IImageDescriptorProvider;
+import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider;
 import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
@@ -171,24 +173,26 @@ public abstract class AbstractMetaDataEnabledFeature implements IMetaDataEnabled
 	
 	/**
 	 * @return ImageDescriptor from the small-icon property for annotation from the same
-	 * bundle as the trait
+	 * source model provider as the trait
 	 */
-//	FIX ME!!!  How do we get an image descriptor from a trait value???
 	protected ImageDescriptor getImage() {
 		final String smallIcon = getSmallIcon();
 		if (smallIcon == null)
 			return null;
 		
-//		try {
-//			Trait t = getMetaDataContext().getTrait();
-//			ClassLoader cl = t.getSourceModel().getSourceModelProvider().getResourceBundle().getClass().getClassLoader();
-////			Bundle bundle = Platform.getBundle();
-//			URL url= URLClassLoader FileLocator.find(bundle,new Path(smallIcon), null);
-//			return ImageDescriptor.createFromURL(url);
-//		} catch (RuntimeException e) {		
-//			//TODO: log error?
-//
-//		}
+		try {
+			Trait t = getMetaDataContext().getTrait();
+			IMetaDataSourceModelProvider provider = t.getSourceModel().getSourceModelProvider();
+			if (provider.canAdapt(IImageDescriptorProvider.class)){
+				IImageDescriptorProvider ip = (IImageDescriptorProvider)provider.getAdapter(IImageDescriptorProvider.class);
+				if (ip != null){
+					return ip.getImageDescriptor(smallIcon);
+				}
+			}
+		} catch (RuntimeException e) {		
+			//TODO: log error?
+
+		}
 		return null;
 	}
 }

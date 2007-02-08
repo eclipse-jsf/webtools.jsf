@@ -91,11 +91,16 @@ public class TraitValueHelper {
 	private static String getNLSPropertyValue(Trait trait, String key){
 		String NOT_FOUND = Messages.CMAnnotationMap_key_not_found;
 		try{
-			
-			ResourceBundle resourceBundle_ = trait.getSourceModel().getSourceModelProvider().getResourceBundle();		
-			if (resourceBundle_ != null){
-				String replVal = resourceBundle_.getString(key);
-				return replVal;
+			IMetaDataSourceModelProvider provider = trait.getSourceModel().getSourceModelProvider();
+			if (provider.canAdapt(IResourceBundleProvider.class)){
+				IResourceBundleProvider resourceBundleProvider = (IResourceBundleProvider)provider.getAdapter(IResourceBundleProvider.class);		
+				if (resourceBundleProvider != null){
+					ResourceBundle resourceBundle_ = resourceBundleProvider.getResourceBundle();				
+					if (resourceBundle_ != null){
+						String replVal = resourceBundle_.getString(key);
+						return replVal;
+					}
+				}
 			}
 			//return original string 
 			return key; 
