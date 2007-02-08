@@ -47,6 +47,7 @@ public class JSFHTMLConverterFactory implements IConverterFactory
         _dtConversionSupported.add(IJSFConstants.TAG_INPUTTEXT);
         _dtConversionSupported.add(IJSFConstants.TAG_OUTPUTTEXT);
         _dtConversionSupported.add(IJSFConstants.TAG_OUTPUTLABEL);
+        _dtConversionSupported.add(IJSFConstants.TAG_PANELGRID);
     }
     
     /**

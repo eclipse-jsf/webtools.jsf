@@ -4,8 +4,6 @@ import org.w3c.dom.Element;
 
 public interface IOutputRenderer {
 
-	public Element render(DTTagConverter tagConverter);
-
-	public DTTagConverter getTagConverter();
+	public Element render(ITagConverterContext tagConverterContext);
 
 }

@@ -14,7 +14,7 @@ public class CreateAttributeOperation extends AbstractTransformOperation {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jst.pagedesigner.dtmanager.ITransformOperation#transform(org.w3c.dom.Element, org.w3c.dom.Element)
+	 * @see org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.AbstractTransformOperation#transform(org.w3c.dom.Element, org.w3c.dom.Element)
 	 */
 	public Element transform(Element srcElement, Element curElement) {
 		if (curElement != null) {

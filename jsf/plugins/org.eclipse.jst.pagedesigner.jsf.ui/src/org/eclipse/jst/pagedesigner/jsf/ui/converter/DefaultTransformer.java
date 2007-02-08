@@ -8,7 +8,7 @@ import org.w3c.dom.Element;
 
 public class DefaultTransformer implements ITransformer {
 
-	private IOutputRenderer outputRenderer;
+	private ITagConverterContext tagConverterContext;
 	private Collection transformOperations;
 
 	public DefaultTransformer() {
@@ -17,12 +17,12 @@ public class DefaultTransformer implements ITransformer {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jst.pagedesigner.dtmanager.ITransformer#appendTransformOperation(org.eclipse.jst.pagedesigner.dtmanager.ITransformOperation)
+	 * @see org.eclipse.jst.pagedesigner.jsf.ui.converter.ITransformer#appendTransformOperation(org.eclipse.jst.pagedesigner.jsf.ui.converter.ITransformOperation)
 	 */
 	public void appendTransformOperation(ITransformOperation operation) {
 		synchronized(transformOperations) {
 			if (operation != null) {
-				operation.setTransformer(this);
+				operation.setTagConverterContext(tagConverterContext);
 				transformOperations.add(operation);
 			}
 		}
@@ -30,7 +30,7 @@ public class DefaultTransformer implements ITransformer {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jst.pagedesigner.dtmanager.ITransformer#transform(org.w3c.dom.Element)
+	 * @see org.eclipse.jst.pagedesigner.jsf.ui.converter.ITransformer#transform(org.w3c.dom.Element)
 	 */
 	public Element transform(Element srcElement) {
 		Element curElement = null;
@@ -51,33 +51,10 @@ public class DefaultTransformer implements ITransformer {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jst.pagedesigner.dtmanager.ITransformer#setOutputRenderer(org.eclipse.jst.pagedesigner.dtmanager.IOutputRenderer)
+	 * @see org.eclipse.jst.pagedesigner.jsf.ui.converter.ITransformer#setTagConverterContext(org.eclipse.jst.pagedesigner.jsf.ui.converter.ITagConverterContext)
 	 */
-	public void setOutputRenderer(IOutputRenderer outputRenderer) {
-		this.outputRenderer = outputRenderer;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see org.eclipse.jst.pagedesigner.dtmanager.ITransformer#getOutputRenderer()
-	 */
-	public IOutputRenderer getOutputRenderer() {
-		return outputRenderer;
-	}
-
-	/**
-	 * Convenience method to get the parent IOutputRenderer instance's parent
-	 * DTTagConverter instance.
-	 * 
-	 * @return The parent IOutputRenderer instance's parent DTTagConverter
-	 * instance (may be null).
-	 */
-	public DTTagConverter getTagConverter() {
-		DTTagConverter tagConverter = null;
-		if (outputRenderer != null) {
-			tagConverter = outputRenderer.getTagConverter();
-		}
-		return tagConverter;
+	public void setTagConverterContext(ITagConverterContext tagConverterContext) {
+		this.tagConverterContext = tagConverterContext;
 	}
 
 }

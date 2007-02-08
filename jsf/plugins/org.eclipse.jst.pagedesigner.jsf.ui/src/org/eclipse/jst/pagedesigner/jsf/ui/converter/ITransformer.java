@@ -8,8 +8,6 @@ public interface ITransformer {
 
 	public Element transform(Element srcElement);
 
-	public void setOutputRenderer(IOutputRenderer outputRenderer);
-
-	public IOutputRenderer getOutputRenderer();
+	public void setTagConverterContext(ITagConverterContext tagConverterContext);
 
 }
