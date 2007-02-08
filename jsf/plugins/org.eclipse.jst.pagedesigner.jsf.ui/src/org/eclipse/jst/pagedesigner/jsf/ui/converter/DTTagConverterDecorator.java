@@ -56,6 +56,7 @@ public class DTTagConverterDecorator implements ITagConverterDecorator {
         {
 			dtTagConverter.setMultiLevel(true);
 			dtTagConverter.setWidget(true);
+			dtTagConverter.addAllNonVisualChildElements(srcElement);
         }
         else if (IJSFConstants.TAG_IDENTIFIER_OUTPUTTEXT.isSameTagType(srcTagIdentifier)) 
         {

@@ -38,6 +38,7 @@ ITagConverter, ITagEditInfo, INodeAdapter, IDOMFactory {
 	private IDOMDocument destDocument;
 	private List childNodeList = Collections.EMPTY_LIST;
 	private Map childVisualPositionMap = Collections.EMPTY_MAP;
+	private List nonVisualChildElementList = Collections.EMPTY_LIST;
 	private boolean isMultiLevel = false;
 	private boolean isVisualByHTML = true;
 	private boolean isWidget = false;
@@ -57,6 +58,7 @@ ITagConverter, ITagEditInfo, INodeAdapter, IDOMFactory {
 	public void convertRefresh(Object context) {
 		childNodeList = new ArrayList();
 		childVisualPositionMap = new HashMap();
+		nonVisualChildElementList = new ArrayList();
 		resultElement = new DTHTMLOutputRenderer().render(new DTTagConverterContext(this));
 		if (mode == IConverterFactory.MODE_DESIGNER) {
 			new DTTagConverterDecorator().decorate(this);
@@ -98,7 +100,7 @@ ITagConverter, ITagEditInfo, INodeAdapter, IDOMFactory {
 	 * @see org.eclipse.jst.pagedesigner.converter.ITagConverter#getNonVisualChildren()
 	 */
 	public List getNonVisualChildren() {
-		return Collections.EMPTY_LIST;
+		return nonVisualChildElementList;
 	}
 
 	public void setResultElement(Element resultElement) {
@@ -273,6 +275,18 @@ ITagConverter, ITagEditInfo, INodeAdapter, IDOMFactory {
 					curNode.getNodeType() == Node.TEXT_NODE ||
 					curNode.getNodeType() == Node.CDATA_SECTION_NODE) {
 				addChild(curNode, new ConvertPosition(destElement, index++));
+			}
+		}
+	}
+
+	public void addNonVisualChildElement(Element childElement) {
+		nonVisualChildElementList.add(childElement);
+	}
+
+	public void addAllNonVisualChildElements(Element srcElement) {
+		for (Node curNode = srcElement.getFirstChild(); curNode != null; curNode = curNode.getNextSibling()) {
+			if (curNode.getNodeType() == Node.ELEMENT_NODE) {
+				addNonVisualChildElement((Element)curNode);
 			}
 		}
 	}
