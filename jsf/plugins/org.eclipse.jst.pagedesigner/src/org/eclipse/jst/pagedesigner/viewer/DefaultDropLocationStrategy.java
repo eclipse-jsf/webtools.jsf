@@ -106,8 +106,12 @@ public class DefaultDropLocationStrategy extends AbstractDropLocationStrategy
         
         Rectangle hintRect = new Rectangle(hintLocation, hintSize);
 
-        // to avoid enlarge feedback pane.
-        //hintRect = hintRect.intersect(getFeedbackLayer().getBounds());
+        // we need to intersect the rectangle with the feedback pane, otherwise, when the mouse
+        // is dragged near the edge of the viewport with the drop hint active, the canvas will expand
+        // away from the mouse.  In future a more ideal solution will be to relocate the tooltip
+        // so that is is completely inside the viewport.
+        hintRect = hintRect.intersect(getFeedbackLayer().getBounds());
+        
         dropHintLabel.translateToRelative(hintRect);
         dropHintLabel.setBounds(hintRect);
         

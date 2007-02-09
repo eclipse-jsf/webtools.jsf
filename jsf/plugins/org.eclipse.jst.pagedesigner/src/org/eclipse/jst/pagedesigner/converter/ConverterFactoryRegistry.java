@@ -109,7 +109,7 @@ public class ConverterFactoryRegistry {
                     }
              );
         }
-        return new DefaultUnknownTagConverter(ele);
+        return new DefaultUnknownTagConverter(ele, mode);
 
 	}
 

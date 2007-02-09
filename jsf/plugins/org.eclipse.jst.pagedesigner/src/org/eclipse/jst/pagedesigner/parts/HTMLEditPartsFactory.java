@@ -54,18 +54,11 @@ public class HTMLEditPartsFactory implements EditPartFactory {
     			part = new TextEditPart();
     		}
         }
+        // XXX: we need to create wrapper that allows us to know when
+        // a model object represents a non-visual decorator
         else if (model instanceof ITagConverter)
         {
-            ITagConverter converter = (ITagConverter) model;
-            if (!converter.isVisualByHTML())
-            {
-                part = new NonVisualComponentEditPart();
-            }
-            else
-            {
-                part = new ElementEditPart();
-            }
-
+            part = new NonVisualComponentEditPart();
         }
         
 		if (part != null) {

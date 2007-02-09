@@ -76,17 +76,18 @@ public class ElementMenuBar extends Figure implements ISelectionProvider, ISelec
      * Removes editpart from the list of non-visual edit parts that this menu
      * bar is managing the visuals for. 
      * @param editpart
-     * @throws IllegalArgumentException if editpart is not currently managed
-     * by the menu bar
      */
     public void removeNonVisualChild(final NonVisualComponentEditPart editpart)
     {
-        if (!getChildParts().remove(editpart))
+        // TODO: I have relaxed the checking to see if editpart is valid
+        // child because of the way ElementEditPart refreshes itself
+        // when the model changes.  It's possible this will get called more
+        // than once for the same editpart argument
+        getChildParts().remove(editpart);
+        if (editpart.getFigure().getParent() == this)
         {
-            throw new IllegalArgumentException("editpart is not a child: "+editpart);
+            remove(editpart.getFigure());
         }
-        
-        remove(editpart.getFigure());
     }
 
     public boolean hasEditPartFocus()

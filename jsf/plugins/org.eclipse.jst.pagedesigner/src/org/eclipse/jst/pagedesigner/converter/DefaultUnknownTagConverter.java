@@ -26,8 +26,9 @@ public class DefaultUnknownTagConverter extends AbstractTagConverter {
 	/**
 	 * @param host
 	 */
-	public DefaultUnknownTagConverter(Element host) {
+	public DefaultUnknownTagConverter(Element host, int  mode) {
 		super(host);
+        setMode(mode);
 	}
 
 	/*
@@ -48,7 +49,8 @@ public class DefaultUnknownTagConverter extends AbstractTagConverter {
 		style += "border: none; padding: 0; margin: 0";
 		divEle.setAttribute("style", style);
 		Element div2 = createElement("span");
-		div2.setAttribute("style", "background-color: cyan; border: none;");
+        String border = isPreviewMode() ? "border-style: solid;border-width: 1px" : "border:none";
+		div2.setAttribute("style", "background-color: white;"+border+";color:gray");
 		Text txt = createText(hostEle.getTagName());
 		div2.appendChild(txt);
 

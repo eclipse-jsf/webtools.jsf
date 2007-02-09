@@ -520,7 +520,6 @@ public class ElementEditPart extends SubNodeEditPart {
 			parent.remove(childFigure);
 		}
         
-        
         if (childEditPart instanceof NonVisualComponentEditPart)
         {
             _nonVisualElementBar.removeNonVisualChild((NonVisualComponentEditPart) childEditPart);
@@ -561,6 +560,8 @@ public class ElementEditPart extends SubNodeEditPart {
 	 */
 	public void notifyChanged(INodeNotifier notifier, int eventType,
 			Object changedFeature, Object oldValue, Object newValue, int pos) {
+        // XXX: this can cause multiple refreshes on the same edit part for the 
+        // same change.  I can also cause incorrect child refreshes...
 		refresh();
 	}
 
