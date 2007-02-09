@@ -10,7 +10,6 @@
  *******************************************************************************/ 
 package org.eclipse.jst.pagedesigner.jsf.ui.converter.operations;
 
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Text;
 
@@ -20,7 +19,7 @@ public class ConvertAttributeToTextOperation extends AbstractTransformOperation 
 	private boolean removeAttribute;
 
 	public ConvertAttributeToTextOperation(String attributeName) {
-		this(attributeName, false);
+		this(attributeName, true);
 	}
 
 	public ConvertAttributeToTextOperation(String attributeName, boolean removeAttribute) {
@@ -33,17 +32,14 @@ public class ConvertAttributeToTextOperation extends AbstractTransformOperation 
 	 * @see org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.AbstractTransformOperation#transform(org.w3c.dom.Element, org.w3c.dom.Element)
 	 */
 	public Element transform(Element srcElement, Element curElement) {
-		if (srcElement != null && curElement != null) {
-			String text = srcElement.getAttribute(attributeName);
-			if (text != null && text.length() > 0) {
-				Document document = curElement.getOwnerDocument();
-				if (document != null) {
-					Text textNode = document.createTextNode(text);
-					curElement.appendChild(textNode);
+		if (tagConverterContext != null && srcElement != null && curElement != null) {
+			String content = srcElement.getAttribute(attributeName);
+			if (content != null && content.length() > 0) {
+				Text text = tagConverterContext.createText(content);
+				curElement.appendChild(text);
+				if (removeAttribute) {
+					curElement.removeAttribute(attributeName);
 				}
-			}
-			if (removeAttribute) {
-				curElement.removeAttribute(attributeName);
 			}
 		}
 		return curElement;

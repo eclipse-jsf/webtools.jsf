@@ -77,14 +77,14 @@ public class DTHTMLOutputRenderer implements IOutputRenderer {
 			transformer.appendTransformOperation(new CreateElementOperation("span"));
 			transformer.appendTransformOperation(new CopyAllAttributesOperation());
 			transformer.appendTransformOperation(new RenameAttributeOperation("styleClass", "class"));
-			transformer.appendTransformOperation(new ConvertAttributeToTextOperation("value", true));
+			transformer.appendTransformOperation(new ConvertAttributeToTextOperation("value"));
         }
 		else if (IJSFConstants.TAG_IDENTIFIER_OUTPUTLABEL.isSameTagType(srcTagIdentifier)) 
         {
 			transformer.appendTransformOperation(new CreateElementOperation("label"));
 			transformer.appendTransformOperation(new CopyAllAttributesOperation());
 			transformer.appendTransformOperation(new RenameAttributeOperation("styleClass", "class"));
-			transformer.appendTransformOperation(new ConvertAttributeToTextOperation("value", true));
+			transformer.appendTransformOperation(new ConvertAttributeToTextOperation("value"));
 			transformer.appendTransformOperation(new CopyChildrenOperation());
 		}
 		else if (IJSFConstants.TAG_IDENTIFIER_PANEL_GRID.isSameTagType(srcTagIdentifier))

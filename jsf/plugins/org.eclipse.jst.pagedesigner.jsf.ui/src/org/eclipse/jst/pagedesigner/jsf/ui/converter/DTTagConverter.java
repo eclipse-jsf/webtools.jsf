@@ -161,7 +161,7 @@ ITagConverter, ITagEditInfo, INodeAdapter, IDOMFactory {
 	/* (non-Javadoc)
 	 * @see org.eclipse.jst.pagedesigner.converter.ITagConverter#setDestDocument(org.eclipse.wst.xml.core.internal.provisional.document.IDOMDocument)
 	 */
-	public void setDestDocument(IDOMDocument document) {
+	public void setDestDocument(IDOMDocument destDocument) {
 		this.destDocument = destDocument;
 	}
 

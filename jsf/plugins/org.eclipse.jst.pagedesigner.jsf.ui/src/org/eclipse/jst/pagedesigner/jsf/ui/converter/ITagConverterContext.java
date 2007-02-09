@@ -13,10 +13,15 @@ package org.eclipse.jst.pagedesigner.jsf.ui.converter;
 import org.eclipse.jst.pagedesigner.converter.ConvertPosition;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.Text;
 
 public interface ITagConverterContext {
 
 	public Element getHostElement();
+
+	public Element createElement(String tag);
+
+	public Text createText(String content);
 
 	public void addChild(Node childNode, ConvertPosition position);
 

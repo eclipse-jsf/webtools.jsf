@@ -10,7 +10,6 @@
  *******************************************************************************/ 
 package org.eclipse.jst.pagedesigner.jsf.ui.converter.operations;
 
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 public class CreateElementOperation extends AbstractTransformOperation {
@@ -27,11 +26,8 @@ public class CreateElementOperation extends AbstractTransformOperation {
 	 */
 	public Element transform(Element srcElement, Element curElement) {
 		Element element = null;
-		if (curElement != null && tagName != null && tagName.length() > 0) {
-			Document document = curElement.getOwnerDocument();
-			if (document != null) {
-				element = document.createElement(tagName);
-			}
+		if (tagConverterContext != null && tagName != null && tagName.length() > 0) {
+			element = tagConverterContext.createElement(tagName);
 		}
 		return element;
 	}

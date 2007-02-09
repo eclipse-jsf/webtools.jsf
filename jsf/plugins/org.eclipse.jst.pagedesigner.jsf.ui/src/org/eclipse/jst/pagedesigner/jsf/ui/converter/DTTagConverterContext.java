@@ -13,6 +13,7 @@ package org.eclipse.jst.pagedesigner.jsf.ui.converter;
 import org.eclipse.jst.pagedesigner.converter.ConvertPosition;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.Text;
 
 public class DTTagConverterContext implements ITagConverterContext {
 
@@ -32,6 +33,30 @@ public class DTTagConverterContext implements ITagConverterContext {
 			hostElement = tagConverter.getHostElement();
 		}
 		return hostElement;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.jst.pagedesigner.jsf.ui.converter.ITagConverterContext#createElement(java.lang.String)
+	 */
+	public Element createElement(String tag) {
+		Element element = null;
+		if (tagConverter != null) {
+			element = tagConverter.createElement(tag);
+		}
+		return element;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.jst.pagedesigner.jsf.ui.converter.ITagConverterContext#createText(java.lang.String)
+	 */
+	public Text createText(String content) {
+		Text text = null;
+		if (tagConverter != null) {
+			text = tagConverter.createText(content);
+		}
+		return text;
 	}
 
 	/*
