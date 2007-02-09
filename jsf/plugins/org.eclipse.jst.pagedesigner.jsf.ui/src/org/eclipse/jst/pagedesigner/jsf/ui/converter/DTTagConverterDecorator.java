@@ -63,12 +63,14 @@ public class DTTagConverterDecorator implements ITagConverterDecorator {
 			dtTagConverter.setNeedBorderDecorator(true);
 			dtTagConverter.setMultiLevel(true);
 			dtTagConverter.setWidget(true);
+			dtTagConverter.addAllNonVisualChildElements(srcElement);
         }
 		else if (IJSFConstants.TAG_IDENTIFIER_OUTPUTLABEL.isSameTagType(srcTagIdentifier)) 
         {
 			dtTagConverter.setNeedBorderDecorator(true);
 			dtTagConverter.setMultiLevel(true);
 			dtTagConverter.setWidget(true);
+			dtTagConverter.addAllNonVisualChildElements(srcElement);
 		}
 		else if (IJSFConstants.TAG_IDENTIFIER_PANEL_GRID.isSameTagType(srcTagIdentifier))
 		{
