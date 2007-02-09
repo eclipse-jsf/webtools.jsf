@@ -16,6 +16,8 @@ import org.eclipse.jst.pagedesigner.dom.TagIdentifier;
 import org.eclipse.jst.pagedesigner.dom.TagIdentifierFactory;
 import org.eclipse.jst.pagedesigner.jsf.ui.util.JSFUIPluginResourcesUtil;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 
 public class DTTagConverterDecorator implements ITagConverterDecorator {
@@ -56,21 +58,21 @@ public class DTTagConverterDecorator implements ITagConverterDecorator {
         {
 			dtTagConverter.setMultiLevel(true);
 			dtTagConverter.setWidget(true);
-			dtTagConverter.addAllNonVisualChildElements(srcElement);
+			setNonVisualChildElements(dtTagConverter, srcElement);
         }
         else if (IJSFConstants.TAG_IDENTIFIER_OUTPUTTEXT.isSameTagType(srcTagIdentifier)) 
         {
 			dtTagConverter.setNeedBorderDecorator(true);
 			dtTagConverter.setMultiLevel(true);
 			dtTagConverter.setWidget(true);
-			dtTagConverter.addAllNonVisualChildElements(srcElement);
+			setNonVisualChildElements(dtTagConverter, srcElement);
         }
 		else if (IJSFConstants.TAG_IDENTIFIER_OUTPUTLABEL.isSameTagType(srcTagIdentifier)) 
         {
 			dtTagConverter.setNeedBorderDecorator(true);
 			dtTagConverter.setMultiLevel(true);
 			dtTagConverter.setWidget(true);
-			dtTagConverter.addAllNonVisualChildElements(srcElement);
+			setNonVisualChildElements(dtTagConverter, srcElement);
 		}
 		else if (IJSFConstants.TAG_IDENTIFIER_PANEL_GRID.isSameTagType(srcTagIdentifier))
 		{
@@ -87,6 +89,16 @@ public class DTTagConverterDecorator implements ITagConverterDecorator {
 		element.appendChild(text);
 		dtTagConverter.setResultElement(element);
 		dtTagConverter.setWidget(true);
+	}
+
+	protected void setNonVisualChildElements(DTTagConverter dtTagConverter, Element srcElement) {
+		NodeList childNodes = srcElement.getChildNodes();
+		for (int i = 0; i < childNodes.getLength(); i++) {
+			Node curNode = childNodes.item(i);
+			if (curNode.getNodeType() == Node.ELEMENT_NODE) {
+				dtTagConverter.addNonVisualChildElement((Element)curNode);
+			}
+		}
 	}
 
 }

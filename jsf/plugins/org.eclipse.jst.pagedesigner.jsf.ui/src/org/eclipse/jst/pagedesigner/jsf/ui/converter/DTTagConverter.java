@@ -27,10 +27,11 @@ import org.eclipse.wst.sse.core.internal.provisional.INodeNotifier;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMDocument;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 
 public class DTTagConverter implements
-ITagConverter, ITagEditInfo, INodeAdapter, IDOMFactory {
+	ITagConverter, ITagEditInfo, INodeAdapter, IDOMFactory {
 
 	private Element hostElement;
 	private Element resultElement;
@@ -268,27 +269,20 @@ ITagConverter, ITagEditInfo, INodeAdapter, IDOMFactory {
 	}
 
 	public void copyChildren(Element srcElement, Element destElement) {
-		int index = 0;
-		for (Node curNode = srcElement.getFirstChild(); curNode != null; curNode = curNode.getNextSibling()) {
+		NodeList childNodes = srcElement.getChildNodes();
+		for (int i = 0; i < childNodes.getLength(); i++) {
+			Node curNode = childNodes.item(i); 
 			if (
 					curNode.getNodeType() == Node.ELEMENT_NODE ||
 					curNode.getNodeType() == Node.TEXT_NODE ||
 					curNode.getNodeType() == Node.CDATA_SECTION_NODE) {
-				addChild(curNode, new ConvertPosition(destElement, index++));
+				addChild(curNode, new ConvertPosition(destElement, i));
 			}
 		}
 	}
 
 	public void addNonVisualChildElement(Element childElement) {
 		nonVisualChildElementList.add(childElement);
-	}
-
-	public void addAllNonVisualChildElements(Element srcElement) {
-		for (Node curNode = srcElement.getFirstChild(); curNode != null; curNode = curNode.getNextSibling()) {
-			if (curNode.getNodeType() == Node.ELEMENT_NODE) {
-				addNonVisualChildElement((Element)curNode);
-			}
-		}
 	}
 
 }
