@@ -24,6 +24,7 @@ import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
+import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
@@ -36,13 +37,14 @@ import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanType;
 /**
  * This is the item provider adapter for a {@link org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanType} object.
  * <!-- begin-user-doc -->
+ * @extends ITableItemLabelProvider
  * <!-- end-user-doc -->
  * @generated
  */
 public class ManagedBeanTypeItemProvider
 	extends ItemProviderAdapter
 	implements	
-		IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+		IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource, ITableItemLabelProvider {
     /**
      * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -214,13 +216,21 @@ public class ManagedBeanTypeItemProvider
      * This returns the label text for the adapted class.
      * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
+     * @generated NOT
      */
 	public String getText(Object object) {
-        String label = ((ManagedBeanType)object).getId();
-        return label == null || label.length() == 0 ?
-            getString("_UI_ManagedBeanType_type") :
-            getString("_UI_ManagedBeanType_type") + " " + label;
+        String label = null;
+        if (((ManagedBeanType) object).getManagedBeanName() != null)
+            label = ((ManagedBeanType) object).getManagedBeanName()
+                    .getTextContent();
+
+        if (label == null || label.length() == 0) {
+            if (((ManagedBeanType) object).getManagedBeanClass() != null)
+                label = ((ManagedBeanType) object).getManagedBeanClass()
+                        .getTextContent();
+        }
+        return label == null || label.length() == 0 ? getString("_UI_ManagedBeanType_type")
+                : label;
     }
 
     /**

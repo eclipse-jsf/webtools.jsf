@@ -31,6 +31,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.eclipse.jst.jsf.facesconfig.FacesConfigPlugin;
 
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
+import org.eclipse.jst.jsf.facesconfig.emf.KeyType;
 import org.eclipse.jst.jsf.facesconfig.emf.MapEntryType;
 
 /**
@@ -186,13 +187,14 @@ public class MapEntryTypeItemProvider
      * This returns the label text for the adapted class.
      * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
+     * @generated NOT
      */
 	public String getText(Object object) {
-        String label = ((MapEntryType)object).getId();
+        KeyType key = ((MapEntryType)object).getKey();
+        
+        String label = key != null ? key.getTextContent() : null;
         return label == null || label.length() == 0 ?
-            getString("_UI_MapEntryType_type") :
-            getString("_UI_MapEntryType_type") + " " + label;
+            getString("_UI_MapEntryType_type") : label;
     }
 
     /**
