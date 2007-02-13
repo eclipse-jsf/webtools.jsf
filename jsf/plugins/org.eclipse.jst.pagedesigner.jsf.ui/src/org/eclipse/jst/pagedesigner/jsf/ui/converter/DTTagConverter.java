@@ -61,9 +61,7 @@ public class DTTagConverter implements
 		childVisualPositionMap = new HashMap();
 		nonVisualChildElementList = new ArrayList();
 		resultElement = new DTHTMLOutputRenderer().render(new DTTagConverterContext(this));
-		if (mode == IConverterFactory.MODE_DESIGNER) {
-			new DTTagConverterDecorator().decorate(this);
-		}
+		new DTTagConverterDecorator().decorate(this);
 		if (resultElement instanceof INodeNotifier) {
 			((INodeNotifier)resultElement).addAdapter(this);
 		}

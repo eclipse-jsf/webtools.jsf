@@ -11,10 +11,12 @@
 package org.eclipse.jst.pagedesigner.jsf.ui.converter;
 
 import org.eclipse.jst.pagedesigner.IJSFConstants;
+import org.eclipse.jst.pagedesigner.converter.IConverterFactory;
 import org.eclipse.jst.pagedesigner.converter.ITagConverter;
 import org.eclipse.jst.pagedesigner.dom.TagIdentifier;
 import org.eclipse.jst.pagedesigner.dom.TagIdentifierFactory;
 import org.eclipse.jst.pagedesigner.jsf.ui.util.JSFUIPluginResourcesUtil;
+import org.eclipse.jst.pagedesigner.preview.PageExpressionContext;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -34,51 +36,60 @@ public class DTTagConverterDecorator implements ITagConverterDecorator {
 		if (tagConverter.getResultElement() == null) {
 			createUnknownTagRepresentation(dtTagConverter);
 		}
-		Element srcElement = tagConverter.getHostElement();
+
+		if (dtTagConverter.getMode() == IConverterFactory.MODE_DESIGNER) {
+			decorateForDesignMode(dtTagConverter);
+		} else if (dtTagConverter.getMode() == IConverterFactory.MODE_PREVIEW) {
+			decorateForPreviewMode(dtTagConverter);
+		}
+	}
+
+	protected void decorateForDesignMode(DTTagConverter dtTagConverter) {
+		Element srcElement = dtTagConverter.getHostElement();
 
 		TagIdentifier srcTagIdentifier =
 			TagIdentifierFactory.createDocumentTagWrapper(srcElement);
 
-		if (IJSFConstants.TAG_IDENTIFIER_VIEW.isSameTagType(srcTagIdentifier)) 
-        {
+		if (IJSFConstants.TAG_IDENTIFIER_VIEW.isSameTagType(srcTagIdentifier)) {
 			dtTagConverter.setNeedBorderDecorator(true);
-		}
-		else if (IJSFConstants.TAG_IDENTIFIER_FACET.isSameTagType(srcTagIdentifier))
-		{
+		} else if (IJSFConstants.TAG_IDENTIFIER_FACET.isSameTagType(srcTagIdentifier)) {
 			dtTagConverter.setMinWidth(10);
 			dtTagConverter.setMinHeight(10);
 			dtTagConverter.setMultiLevel(true);
 			dtTagConverter.setNeedBorderDecorator(true);
-		}
-		else if (IJSFConstants.TAG_IDENTIFIER_FORM.isSameTagType(srcTagIdentifier)) 
-        {
+		} else if (IJSFConstants.TAG_IDENTIFIER_FORM.isSameTagType(srcTagIdentifier)) {
 			dtTagConverter.setNeedBorderDecorator(true);
-        }
-        else if (IJSFConstants.TAG_IDENTIFIER_INPUTTEXT.isSameTagType(srcTagIdentifier))
-        {
+        } else if (IJSFConstants.TAG_IDENTIFIER_INPUTTEXT.isSameTagType(srcTagIdentifier)) {
 			dtTagConverter.setMultiLevel(true);
 			dtTagConverter.setWidget(true);
 			setNonVisualChildElements(dtTagConverter, srcElement);
-        }
-        else if (IJSFConstants.TAG_IDENTIFIER_OUTPUTTEXT.isSameTagType(srcTagIdentifier)) 
-        {
+        } else if (IJSFConstants.TAG_IDENTIFIER_OUTPUTTEXT.isSameTagType(srcTagIdentifier)) {
 			dtTagConverter.setNeedBorderDecorator(true);
 			dtTagConverter.setMultiLevel(true);
 			dtTagConverter.setWidget(true);
 			setNonVisualChildElements(dtTagConverter, srcElement);
-        }
-		else if (IJSFConstants.TAG_IDENTIFIER_OUTPUTLABEL.isSameTagType(srcTagIdentifier)) 
-        {
+        } else if (IJSFConstants.TAG_IDENTIFIER_OUTPUTLABEL.isSameTagType(srcTagIdentifier)) {
 			dtTagConverter.setNeedBorderDecorator(true);
 			dtTagConverter.setMultiLevel(true);
 			dtTagConverter.setWidget(true);
 			setNonVisualChildElements(dtTagConverter, srcElement);
-		}
-		else if (IJSFConstants.TAG_IDENTIFIER_PANEL_GRID.isSameTagType(srcTagIdentifier))
-		{
+		} else if (IJSFConstants.TAG_IDENTIFIER_PANEL_GRID.isSameTagType(srcTagIdentifier)) {
 			dtTagConverter.setMultiLevel(true);
 			dtTagConverter.setNeedBorderDecorator(true);
 			dtTagConverter.setNeedTableDecorator(true);
+		}
+	}
+
+	protected void decorateForPreviewMode(DTTagConverter dtTagConverter) {
+		Element srcElement = dtTagConverter.getHostElement();
+
+		TagIdentifier srcTagIdentifier =
+			TagIdentifierFactory.createDocumentTagWrapper(srcElement);
+
+		if (IJSFConstants.TAG_IDENTIFIER_OUTPUTTEXT.isSameTagType(srcTagIdentifier)) {
+			resolveChildText(dtTagConverter.getResultElement());
+		} else if (IJSFConstants.TAG_IDENTIFIER_OUTPUTLABEL.isSameTagType(srcTagIdentifier)) {
+			resolveChildText(dtTagConverter.getResultElement());
 		}
 	}
 
@@ -97,6 +108,28 @@ public class DTTagConverterDecorator implements ITagConverterDecorator {
 			Node curNode = childNodes.item(i);
 			if (curNode.getNodeType() == Node.ELEMENT_NODE) {
 				dtTagConverter.addNonVisualChildElement((Element)curNode);
+			}
+		}
+	}
+
+	protected void resolveChildText(Element srcElement) {
+		if (srcElement != null) {
+			NodeList childNodes = srcElement.getChildNodes();
+			for (int i = 0; i < childNodes.getLength(); i++) {
+				Node childNode = childNodes.item(i);
+				if (childNode.getNodeType() == Node.TEXT_NODE) {
+					Text textNode = (Text)childNode;
+					String textNodeValue = textNode.getNodeValue();
+					String newTextNodeValue = null;
+					try {
+						newTextNodeValue = (String)PageExpressionContext.getCurrent().evaluateExpression(textNodeValue, String.class, null);
+						if (!textNodeValue.equals(newTextNodeValue)) {
+							textNode.setNodeValue(newTextNodeValue);
+						}
+					} catch(Exception ex) {
+						//ignore; could not resolve
+					}
+				}
 			}
 		}
 	}
