@@ -12,8 +12,21 @@ package org.eclipse.jst.pagedesigner.jsf.ui.converter;
 
 import org.w3c.dom.Element;
 
+/**
+ * Produces output rendering for ITagConverter instances.
+ * 
+ * @author Ian Trimble - Oracle
+ */
 public interface IOutputRenderer {
 
+	/**
+	 * Uses the ITagConverterContext argument to produce output rendering.
+	 * 
+	 * @param tagConverterContext ITagConverterContext instance providing
+	 * ITagConverter-specific context and functionality.
+	 * @return Element instance representing top Element in resulting output
+	 * tree.
+	 */
 	public Element render(ITagConverterContext tagConverterContext);
 
 }

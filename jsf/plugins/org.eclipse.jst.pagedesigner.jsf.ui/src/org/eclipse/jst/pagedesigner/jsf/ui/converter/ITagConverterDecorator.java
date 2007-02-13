@@ -12,8 +12,19 @@ package org.eclipse.jst.pagedesigner.jsf.ui.converter;
 
 import org.eclipse.jst.pagedesigner.converter.ITagConverter;
 
+/**
+ * Decorates an ITagConverter instance as appropriate (generally
+ * client-specific decoration performed after tag conversion).
+ * 
+ * @author Ian Trimble - Oracle
+ */
 public interface ITagConverterDecorator {
 
+	/**
+	 * Decorates the ITagConverter instance as appropriate.
+	 * 
+	 * @param tagConverter ITagConverter instance to be decorated.
+	 */
 	public void decorate(ITagConverter tagConverter);
 
 }
