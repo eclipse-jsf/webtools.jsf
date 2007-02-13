@@ -153,6 +153,12 @@
             class="org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.FacesConfigIdentifierType"
             id="attributevalues.FacesConfigIdentifierType"/>
       <attributeValueRuntimeType
+            class="org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.FacesConfigValidatorIDType"
+            id="attributevalues.FacesConfigValidatorIDType"/>           
+      <attributeValueRuntimeType
+            class="org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.FacesConfigConverterIDType"
+            id="attributevalues.FacesConfigConverterIDType"/>
+      <attributeValueRuntimeType
             class="org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.ComponentBindingType"
             id="attributevalues.ComponentBindingType"/>            
       <attributeValueRuntimeType
@@ -161,13 +167,13 @@
    </extension>
    
    <extension
-         point="org.eclipse.jst.jsf.core.MetaDataEnabledFeatures">
+         point="org.eclipse.jst.jsf.core.MetaDataEnabledFeatures">       
       <MetaDataEnabledFeature
             class="org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.FacesConfigValidatorIDFeatures"
-            typeid="org.eclipse.jst.jsf.core.attributevalues.FacesConfigIdentifierType"/>
+            typeid="org.eclipse.jst.jsf.core.attributevalues.FacesConfigValidatorIDType"/>
      <MetaDataEnabledFeature
             class="org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.FacesConfigConverterIDFeatures"
-            typeid="org.eclipse.jst.jsf.core.attributevalues.FacesConfigIdentifierType"/>            
+            typeid="org.eclipse.jst.jsf.core.attributevalues.FacesConfigConverterIDType"/>            
    </extension>
    
    <extension

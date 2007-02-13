@@ -15,8 +15,7 @@ package org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalue
  * Meta-data processing type representing a faces-config type
  * @author Gerry Kessler - Oracle
  */
-public class FacesConfigIdentifierType extends IdentifierType	 {
-    // TODO: what is this point of this?
+public abstract class FacesConfigIdentifierType extends IdentifierType	 {
 }
 	
 

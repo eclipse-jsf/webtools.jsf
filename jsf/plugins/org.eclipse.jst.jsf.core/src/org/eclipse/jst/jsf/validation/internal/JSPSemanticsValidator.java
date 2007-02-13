@@ -263,9 +263,7 @@ public class JSPSemanticsValidator extends JSPValidator implements ISourceValida
                             // it can be computationally costly.
                             if (checkShouldValidateEL(isIncremental))
                             {
-                                List elVals = 
-                                MetaDataEnabledProcessingFactory.getInstance()
-                                    .getAttributeValueRuntimeTypeFeatureProcessors(IValidELValues.class, elContext, uri, tagName, attrName);
+                                List elVals = MetaDataEnabledProcessingFactory.getInstance().getAttributeValueRuntimeTypeFeatureProcessors(IValidELValues.class, elContext, uri, tagName, attrName);
                                 validateELExpression(context, 
                                                      elContext, 
                                                      elVals, 

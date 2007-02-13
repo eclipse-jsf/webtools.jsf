@@ -251,10 +251,10 @@
 		</entity>
 		<entity id="converter">			
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.FacesConfigIdentifierType</value>
+				<value>org.eclipse.jst.jsf.core.attributevalues.FacesConfigConverterIDType</value>
 			</trait>			
 			<trait id="config-type">
-				<value>javax.faces.converter.Converter</value>
+				<value>javax.faces.convert.Converter</value>
 			</trait>				
 		</entity>
 		<entity id="escape">
