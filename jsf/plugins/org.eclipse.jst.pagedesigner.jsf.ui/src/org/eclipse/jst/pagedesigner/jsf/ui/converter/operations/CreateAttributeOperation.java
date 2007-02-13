@@ -12,11 +12,23 @@ package org.eclipse.jst.pagedesigner.jsf.ui.converter.operations;
 
 import org.w3c.dom.Element;
 
+/**
+ * ITransformOperation implementation that creates a new attribute on the
+ * current Element.
+ * 
+ * @author Ian Trimble - Oracle
+ */
 public class CreateAttributeOperation extends AbstractTransformOperation {
 
 	private String attributeName;
 	private String attributeValue;
 
+	/**
+	 * Constructs an instance with the specified attribute name and value.
+	 * 
+	 * @param attributeName Name of attribute to be created.
+	 * @param attributeValue Value of attribute to be set.
+	 */
 	public CreateAttributeOperation(String attributeName, String attributeValue) {
 		this.attributeName = attributeName;
 		this.attributeValue = attributeValue;

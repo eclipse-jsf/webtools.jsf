@@ -12,6 +12,16 @@ package org.eclipse.jst.pagedesigner.jsf.ui.converter.operations;
 
 import org.w3c.dom.Element;
 
+/**
+ * ITransformOperation implementation that copies all child Elements as Nodes
+ * requiring subsequent tag conversion.
+ * 
+ * <br><b>Note:</b> requires ITransformOperation.setTagConverterContext(...) to
+ * have been called to provide a valid ITagConverterContext instance prior to
+ * a call to the transform(...) method.
+ * 
+ * @author Ian Trimble - Oracle
+ */
 public class CopyChildrenOperation extends AbstractTransformOperation {
 
 	/*

@@ -14,8 +14,17 @@ import org.eclipse.jst.pagedesigner.jsf.ui.converter.ITagConverterContext;
 import org.eclipse.jst.pagedesigner.jsf.ui.converter.ITransformOperation;
 import org.w3c.dom.Element;
 
+/**
+ * Abstract ITransformOperation implementation. Maintains ITagConverterContext
+ * instance.
+ * 
+ * @author Ian Trimble - Oracle
+ */
 public abstract class AbstractTransformOperation implements ITransformOperation {
 
+	/**
+	 * ITagConverterContext instance.
+	 */
 	protected ITagConverterContext tagConverterContext;
 
 	/*

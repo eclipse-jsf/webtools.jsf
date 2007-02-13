@@ -13,16 +13,41 @@ package org.eclipse.jst.pagedesigner.jsf.ui.converter.operations;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
 
+/**
+ * Copies a single attribute from the source Element instance to the current
+ * Element instance, and optionally creates a new attribute on the current
+ * Element instance if no such attribute exists on the source Element instance.
+ * 
+ * @author Ian Trimble - Oracle
+ */
 public class CopyAttributeOperation extends AbstractTransformOperation {
 
 	private String attributeName;
 	private boolean create;
 	private String newAttributeValue;
 
+	/**
+	 * Constructs an instance with the specified attribute name, and defaults
+	 * to not creating an attribute unless the named attribute exists on the
+	 * source Element instance.
+	 * 
+	 * @param attributeName Name of attribute to be copied.
+	 */
 	public CopyAttributeOperation(String attributeName) {
 		this(attributeName, false, null);
 	}
 
+	/**
+	 * Constructs an instance with the specified attribute name and optionally
+	 * forces creation of a new attribute on the current Element even if the
+	 * named attribute does not exist on the source Element instance.
+	 * 
+	 * @param attributeName Name of attribute to be copied.
+	 * @param create If true, create attribute on the current Element even if
+	 * the named attribute does not exist on the source Element.
+	 * @param newAttributeValue Value to set for the new attribute if not found
+	 * on the source Element. 
+	 */
 	public CopyAttributeOperation(String attributeName, boolean create, String newAttributeValue) {
 		this.attributeName = attributeName;
 		this.create = create;

@@ -12,10 +12,24 @@ package org.eclipse.jst.pagedesigner.jsf.ui.converter.operations;
 
 import org.w3c.dom.Element;
 
+/**
+ * ITransformOperation implementation that creates a new Element.
+ * 
+ * <br><b>Note:</b> requires ITransformOperation.setTagConverterContext(...) to
+ * have been called to provide a valid ITagConverterContext instance prior to
+ * a call to the transform(...) method.
+ * 
+ * @author Ian Trimble - Oracle
+ */
 public class CreateElementOperation extends AbstractTransformOperation {
 
 	private String tagName;
 
+	/**
+	 * Constructs an instance with the specified Element name.
+	 * 
+	 * @param tagName Name of Element to be created.
+	 */
 	public CreateElementOperation(String tagName) {
 		this.tagName = tagName;
 	}

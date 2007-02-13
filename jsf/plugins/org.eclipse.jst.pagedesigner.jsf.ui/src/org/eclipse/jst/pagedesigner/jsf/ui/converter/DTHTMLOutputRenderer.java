@@ -22,6 +22,11 @@ import org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.RenameAttributeO
 import org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.PanelGridOperation;
 import org.w3c.dom.Element;
 
+/**
+ * Design-time metadata-driven HTML IOutputRenderer implementation.
+ * 
+ * @author Ian Trimble - Oracle
+ */
 public class DTHTMLOutputRenderer implements IOutputRenderer {
 
 	private ITagConverterContext tagConverterContext;
@@ -41,6 +46,15 @@ public class DTHTMLOutputRenderer implements IOutputRenderer {
 		return resultElement;
 	}
 
+	/**
+	 * Configures and returns an ITransformer instance for the specified source
+	 * Element.
+	 * 
+	 * @param srcElement Source Element for which to configure and return an
+	 * ITransformer instance.
+	 * @return Configured ITransformer instance for the specified source
+	 * Element.
+	 */
 	protected ITransformer getTransformer(Element srcElement) {
 		ITransformer transformer = new DefaultTransformer();
 		transformer.setTagConverterContext(tagConverterContext);

@@ -16,11 +16,19 @@ import java.util.Iterator;
 
 import org.w3c.dom.Element;
 
+/**
+ * Default ITransformer implementation.
+ * 
+ * @author Ian Trimble - Oracle
+ */
 public class DefaultTransformer implements ITransformer {
 
 	private ITagConverterContext tagConverterContext;
 	private Collection transformOperations;
 
+	/**
+	 * Constructs an instance.
+	 */
 	public DefaultTransformer() {
 		transformOperations = new ArrayList();
 	}

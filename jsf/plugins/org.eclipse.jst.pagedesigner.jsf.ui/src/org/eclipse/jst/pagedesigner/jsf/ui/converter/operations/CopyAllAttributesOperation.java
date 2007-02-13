@@ -14,6 +14,12 @@ import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 
+/**
+ * ITransformOperation implementation that copies all attributes from the
+ * source Element instance to the current Element instance.
+ * 
+ * @author Ian Trimble - Oracle
+ */
 public class CopyAllAttributesOperation extends AbstractTransformOperation {
 
 	/*

@@ -13,6 +13,12 @@ package org.eclipse.jst.pagedesigner.jsf.ui.converter.operations;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
+/**
+ * ITransformOperation implementation that makes the current Element's parent
+ * Element the new current Element.
+ * 
+ * @author Ian Trimble - Oracle
+ */
 public class MakeParentElementCurrentOperation extends AbstractTransformOperation {
 
 	/*

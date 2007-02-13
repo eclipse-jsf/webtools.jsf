@@ -30,6 +30,11 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 
+/**
+ * Design-Time metadata-driven tag converter.
+ * 
+ * @author Ian Trimble - Oracle
+ */
 public class DTTagConverter implements
 	ITagConverter, ITagEditInfo, INodeAdapter, IDOMFactory {
 
@@ -49,6 +54,11 @@ public class DTTagConverter implements
 	private boolean needBorderDecorator = false;
 	private boolean needTableDecorator = false;
 
+	/**
+	 * Constructs an instance for the specified source Element.
+	 * 
+	 * @param hostElement Source Element instance.
+	 */
 	public DTTagConverter(Element hostElement) {
 		this.hostElement = hostElement;
 	}
@@ -102,6 +112,12 @@ public class DTTagConverter implements
 		return nonVisualChildElementList;
 	}
 
+	/**
+	 * Sets the result Element instance; allows decorators to set an "unknown
+	 * tag" Element when tag conversion has not produced a result.
+	 * 
+	 * @param resultElement Result Element instance to be set.
+	 */
 	public void setResultElement(Element resultElement) {
 		this.resultElement = resultElement;
 	}
@@ -113,6 +129,11 @@ public class DTTagConverter implements
 		return resultElement;
 	}
 
+	/**
+	 * Sets the visual Image instance.
+	 * 
+	 * @param visualImage Visual Image instance.
+	 */
 	public void setVisualImage(Image visualImage) {
 		this.visualImage = visualImage;
 	}
@@ -124,6 +145,12 @@ public class DTTagConverter implements
 		return visualImage;
 	}
 
+	/**
+	 * Sets the "isMultiLevel" flag; allows decorators to manipulate this
+	 * setting.
+	 * 
+	 * @param isMultiLevel Sets the "isMultiLevel" flag to true or false.
+	 */
 	public void setMultiLevel(boolean isMultiLevel) {
 		this.isMultiLevel = isMultiLevel;
 	}
@@ -135,6 +162,12 @@ public class DTTagConverter implements
 		return isMultiLevel;
 	}
 
+	/**
+	 * Sets the "isVisualByHTML" flag; allows decorators to manipulate this
+	 * setting.
+	 * 
+	 * @param isVisualByHTML Sets the "isVisualByHTML" flag to true or false.
+	 */
 	public void setVisualByHTML(boolean isVisualByHTML) {
 		this.isVisualByHTML = isVisualByHTML;
 	}
@@ -146,6 +179,11 @@ public class DTTagConverter implements
 		return isVisualByHTML;
 	}
 
+	/**
+	 * Sets the "isWidget" flag; allows decorators to manipulate this setting.
+	 * 
+	 * @param isWidget Sets the "isWidget" flag to true or false.
+	 */
 	public void setWidget(boolean isWidget) {
 		this.isWidget = isWidget;
 	}
@@ -164,6 +202,11 @@ public class DTTagConverter implements
 		this.destDocument = destDocument;
 	}
 
+	/**
+	 * Gets the IDOMDocument instance on which new Nodes are created.
+	 * 
+	 * @return IDOMDocument instance.
+	 */
 	public IDOMDocument getDestDocument() {
 		IDOMDocument document = null;
 		if (destDocument != null) {
@@ -181,10 +224,22 @@ public class DTTagConverter implements
 		this.mode = mode;
 	}
 
+	/**
+	 * Gets this instance's "mode", as set by setMode(int mode).
+	 * 
+	 * @return This instance's "mode".
+	 */
 	public int getMode() {
 		return mode;
 	}
 
+	/**
+	 * Sets the desired minimum height of the visual representation; allows
+	 * decorators to manipulate this setting.
+	 * 
+	 * @param minHeight The desired minimum height of the visual
+	 * representation.
+	 */
 	public void setMinHeight(int minHeight) {
 		this.minHeight = minHeight;
 	}
@@ -196,6 +251,13 @@ public class DTTagConverter implements
 		return minHeight;
 	}
 
+	/**
+	 * Sets the desired minimum width of the visual representation; allows
+	 * decorators to manipulate this setting.
+	 * 
+	 * @param minWidth The desired minimum width of the visual
+	 * representation.
+	 */
 	public void setMinWidth(int minWidth) {
 		this.minWidth = minWidth;
 	}
@@ -207,6 +269,13 @@ public class DTTagConverter implements
 		return minWidth;
 	}
 
+	/**
+	 * Sets the "needBorderDecorator" flag; allows decorators to manipulate
+	 * this setting.
+	 * 
+	 * @param needBorderDecorator Sets the "needBorderDecorator" flag to true
+	 * or false.
+	 */
 	public void setNeedBorderDecorator(boolean needBorderDecorator) {
 		this.needBorderDecorator = needBorderDecorator;
 	}
@@ -218,6 +287,13 @@ public class DTTagConverter implements
 		return needBorderDecorator;
 	}
 
+	/**
+	 * Sets the "needTableDecorator" flag; allows decorators to manipulate
+	 * this setting.
+	 * 
+	 * @param needTableDecorator Sets the "needTableDecorator" flag to true
+	 * or false.
+	 */
 	public void setNeedTableDecorator(boolean needTableDecorator) {
 		this.needTableDecorator = needTableDecorator;
 	}
@@ -261,11 +337,27 @@ public class DTTagConverter implements
 		return getDestDocument().createTextNode(content);
 	}
 
+	/**
+	 * Adds a child Node to the collection of Nodes requiring subsequent tag
+	 * conversion.
+	 * 
+	 * @param childNode Node instance to be added.
+	 * @param position ConvertPosition instance describing indexed position
+	 * relative to another Node in the Document.
+	 */
 	public void addChild(Node childNode, ConvertPosition position) {
 		childNodeList.add(childNode);
 		childVisualPositionMap.put(childNode, position);
 	}
 
+	/**
+	 * Adds all child Nodes to the collection of Nodes requiring subsequent tag
+	 * conversion.
+	 * 
+	 * @param srcElement Source Element for which all child Nodes should be
+	 * added.
+	 * @param destElement Element to which added Nodes are relative.
+	 */
 	public void copyChildren(Element srcElement, Element destElement) {
 		NodeList childNodes = srcElement.getChildNodes();
 		for (int i = 0; i < childNodes.getLength(); i++) {
@@ -279,6 +371,12 @@ public class DTTagConverter implements
 		}
 	}
 
+	/**
+	 * Adds a non-visual child Element to the collection of non-visual
+	 * children (subsequently retrieved via a call to "getNonVisualChildren".
+	 * 
+	 * @param childElement Child Element to be added.
+	 */
 	public void addNonVisualChildElement(Element childElement) {
 		nonVisualChildElementList.add(childElement);
 	}

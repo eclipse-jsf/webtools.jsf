@@ -22,6 +22,11 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 
+/**
+ * ITagConverterDecorator implementation for DTTagConverter.
+ * 
+ * @author Ian Trimble - Oracle
+ */
 public class DTTagConverterDecorator implements ITagConverterDecorator {
 
 	/*
@@ -44,6 +49,12 @@ public class DTTagConverterDecorator implements ITagConverterDecorator {
 		}
 	}
 
+	/**
+	 * Performs decoration of the specified DTTagConverter instance for the
+	 * Visual Page Designer's "Design" mode.
+	 * 
+	 * @param dtTagConverter DTTagConverter instance.
+	 */
 	protected void decorateForDesignMode(DTTagConverter dtTagConverter) {
 		Element srcElement = dtTagConverter.getHostElement();
 
@@ -80,6 +91,12 @@ public class DTTagConverterDecorator implements ITagConverterDecorator {
 		}
 	}
 
+	/**
+	 * Performs decoration of the specified DTTagConverter instance for the
+	 * Visual Page Designer's "Preview" mode.
+	 * 
+	 * @param dtTagConverter DTTagConverter instance.
+	 */
 	protected void decorateForPreviewMode(DTTagConverter dtTagConverter) {
 		Element srcElement = dtTagConverter.getHostElement();
 
@@ -93,6 +110,11 @@ public class DTTagConverterDecorator implements ITagConverterDecorator {
 		}
 	}
 
+	/**
+	 * Creates a visual representation result Element for an unknown tag.
+	 * 
+	 * @param dtTagConverter DTTagConverter instance.
+	 */
 	protected void createUnknownTagRepresentation(DTTagConverter dtTagConverter) {
 		Element element = dtTagConverter.createElement("span");
 		element.setAttribute("style", "color:red;font-weight:bold;");
@@ -102,6 +124,14 @@ public class DTTagConverterDecorator implements ITagConverterDecorator {
 		dtTagConverter.setWidget(true);
 	}
 
+	/**
+	 * Adds child Elements of the specified source Element to the specified
+	 * DTTagConverter instance's collection of non-visual children.
+	 * 
+	 * @param dtTagConverter DTTagConverter instance.
+	 * @param srcElement Source Element for which child Elements are to be
+	 * added.
+	 */
 	protected void setNonVisualChildElements(DTTagConverter dtTagConverter, Element srcElement) {
 		NodeList childNodes = srcElement.getChildNodes();
 		for (int i = 0; i < childNodes.getLength(); i++) {
@@ -112,6 +142,13 @@ public class DTTagConverterDecorator implements ITagConverterDecorator {
 		}
 	}
 
+	/**
+	 * Performs simple EL resolution for the child Text Node of the specified
+	 * source Element instance.
+	 * 
+	 * @param srcElement Source Element for which child Text Node EL resolution
+	 * is to be performed.
+	 */
 	protected void resolveChildText(Element srcElement) {
 		if (srcElement != null) {
 			NodeList childNodes = srcElement.getChildNodes();
@@ -127,7 +164,7 @@ public class DTTagConverterDecorator implements ITagConverterDecorator {
 							textNode.setNodeValue(newTextNodeValue);
 						}
 					} catch(Exception ex) {
-						//ignore; could not resolve
+						//ignore - could not resolve, do not change existing value
 					}
 				}
 			}

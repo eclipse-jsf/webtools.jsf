@@ -12,10 +12,21 @@ package org.eclipse.jst.pagedesigner.jsf.ui.converter.operations;
 
 import org.w3c.dom.Element;
 
+/**
+ * ITransformOperation implementation that removes an attribute from the
+ * current Element.
+ * 
+ * @author Ian Trimble - Oracle
+ */
 public class RemoveAttributeOperation extends AbstractTransformOperation {
 
 	private String attributeName;
 
+	/**
+	 * Constructs an instance with the specified attribute name.
+	 * 
+	 * @param attributeName Name of attribute to be removed.
+	 */
 	public RemoveAttributeOperation(String attributeName) {
 		this.attributeName = attributeName;
 	}

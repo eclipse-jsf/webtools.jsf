@@ -15,10 +15,20 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.Text;
 
+/**
+ * Design-time tag converter implementation of ITagConverterContext.
+ * 
+ * @author Ian Trimble - Oracle
+ */
 public class DTTagConverterContext implements ITagConverterContext {
 
 	private DTTagConverter tagConverter;
 
+	/**
+	 * Constructs an instance for the specified DTTagConverter.
+	 * 
+	 * @param tagConverter DTTagConverter instance.
+	 */
 	public DTTagConverterContext(DTTagConverter tagConverter) {
 		this.tagConverter = tagConverter;
 	}

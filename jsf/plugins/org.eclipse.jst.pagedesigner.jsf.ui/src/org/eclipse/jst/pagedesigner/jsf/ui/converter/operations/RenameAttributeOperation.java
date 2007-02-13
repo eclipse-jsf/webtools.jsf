@@ -13,11 +13,23 @@ package org.eclipse.jst.pagedesigner.jsf.ui.converter.operations;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
 
+/**
+ * ITransformOperation implementation that renames an attribute of the current
+ * Element.
+ * 
+ * @author Ian Trimble - Oracle
+ */
 public class RenameAttributeOperation extends AbstractTransformOperation {
 
 	private String oldAttributeName;
 	private String newAttributeName;
 
+	/**
+	 * Constructs an instance with the specified old and new attribute names.
+	 * 
+	 * @param oldAttributeName Old name of the attribute to be renamed.
+	 * @param newAttributeName New name of the attribute to be renamed.
+	 */
 	public RenameAttributeOperation(String oldAttributeName, String newAttributeName) {
 		this.oldAttributeName = oldAttributeName;
 		this.newAttributeName = newAttributeName;

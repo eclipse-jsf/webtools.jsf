@@ -27,6 +27,16 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+/**
+ * ITransformOperation implementation specifically for the "panelGrid" JSF
+ * (HTML) Element. 
+ * 
+ * <br><b>Note:</b> requires ITransformOperation.setTagConverterContext(...) to
+ * have been called to provide a valid ITagConverterContext instance prior to
+ * a call to the transform(...) method.
+ * 
+ * @author Ian Trimble - Oracle
+ */
 public class PanelGridOperation extends AbstractTransformOperation {
 
 	/*
@@ -118,18 +128,40 @@ public class PanelGridOperation extends AbstractTransformOperation {
         return tableElement;
 	}
 
+	/**
+	 * Creates a new Element.
+	 * 
+	 * @param tagName Name of Element to be created.
+	 * @return New Element instance.
+	 */
 	protected Element createElement(String tagName) {
 		ITransformOperation operation = new CreateElementOperation(tagName);
 		operation.setTagConverterContext(tagConverterContext);
 		return operation.transform(null, null);
 	}
 
+	/**
+	 * Creates and appends a new child Element.
+	 * 
+	 * @param tagName Name of child Element to be created.
+	 * @param parentElement Element instance to which to append the new
+	 * Element.
+	 * @return New Element instance.
+	 */
 	protected Element appendChildElement(String tagName, Element parentElement) {
 		ITransformOperation operation = new AppendChildElementOperation(tagName);
 		operation.setTagConverterContext(tagConverterContext);
 		return operation.transform(null, parentElement);
 	}
 
+	/**
+	 * Gets a child Element of the specified parent Element that has the node
+	 * name "facet" and the specified value of the "name" attribute.
+	 * 
+	 * @param srcElement Parent Element instance.
+	 * @param facetName Name of the facet Element for which to search.
+	 * @return Child Element that is a facet with the specified name.
+	 */
 	protected Element getChildFacetByName(Element srcElement, String facetName) {
 		Element element = null;
 		NodeList childNodes = srcElement.getChildNodes();
@@ -147,6 +179,14 @@ public class PanelGridOperation extends AbstractTransformOperation {
 		return element;
 	}
 
+	/**
+	 * Gets a list of child Elements of the specified parent Element, skipping
+	 * any "facet" Elements.
+	 * 
+	 * @param srcElement Parent Element instance.
+	 * @return List of child Elements of the specified parent Element that does
+	 * not include any child "facet" Elements.
+	 */
 	protected List getChildElementsSkipFacets(Element srcElement) {
 		List childElementsList = new ArrayList();
 		NodeList childNodes = srcElement.getChildNodes();
