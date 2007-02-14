@@ -62,47 +62,54 @@ public class DTHTMLOutputRenderer implements IOutputRenderer {
         TagIdentifier srcTagIdentifier = 
             TagIdentifierFactory.createDocumentTagWrapper(srcElement); 
         
-		if (IJSFConstants.TAG_IDENTIFIER_VIEW.isSameTagType(srcTagIdentifier)) 
-        {
+		if (IJSFConstants.TAG_IDENTIFIER_VIEW.isSameTagType(srcTagIdentifier)) {
 			transformer.appendTransformOperation(new CreateElementOperation("div"));
 			transformer.appendTransformOperation(new CopyChildrenOperation());
-		}
-		else if (IJSFConstants.TAG_IDENTIFIER_FACET.isSameTagType(srcTagIdentifier))
-		{
+		} else if (IJSFConstants.TAG_IDENTIFIER_FACET.isSameTagType(srcTagIdentifier)) {
 			transformer.appendTransformOperation(new CreateElementOperation("span"));
 			transformer.appendTransformOperation(new CopyChildrenOperation());
-		}
-		else if (IJSFConstants.TAG_IDENTIFIER_FORM.isSameTagType(srcTagIdentifier)) 
-        {
+		} else if (IJSFConstants.TAG_IDENTIFIER_VERBATIM.isSameTagType(srcTagIdentifier)) {
+			transformer.appendTransformOperation(new CreateElementOperation("span"));
+			transformer.appendTransformOperation(new CopyChildrenOperation());
+		} else if (IJSFConstants.TAG_IDENTIFIER_FORM.isSameTagType(srcTagIdentifier)) {
             transformer.appendTransformOperation(new CreateElementOperation("form"));
             transformer.appendTransformOperation(new CopyAllAttributesOperation());
             transformer.appendTransformOperation(new RenameAttributeOperation("styleClass", "class"));
             transformer.appendTransformOperation(new CopyChildrenOperation());
-        }
-        else if (IJSFConstants.TAG_IDENTIFIER_INPUTTEXT.isSameTagType(srcTagIdentifier))
-        {
+        } else if (IJSFConstants.TAG_IDENTIFIER_INPUTTEXT.isSameTagType(srcTagIdentifier)) {
 			transformer.appendTransformOperation(new CreateElementOperation("input"));
 			transformer.appendTransformOperation(new CopyAllAttributesOperation());
 			transformer.appendTransformOperation(new RenameAttributeOperation("styleClass", "class"));
 			transformer.appendTransformOperation(new CreateAttributeOperation("type", "text"));
-        }
-        else if (IJSFConstants.TAG_IDENTIFIER_OUTPUTTEXT.isSameTagType(srcTagIdentifier)) 
-        {
+        } else if (IJSFConstants.TAG_IDENTIFIER_INPUTSECRET.isSameTagType(srcTagIdentifier)) {
+			transformer.appendTransformOperation(new CreateElementOperation("input"));
+			transformer.appendTransformOperation(new CopyAllAttributesOperation());
+			transformer.appendTransformOperation(new RenameAttributeOperation("styleClass", "class"));
+			transformer.appendTransformOperation(new CreateAttributeOperation("type", "password"));
+        } else if (IJSFConstants.TAG_IDENTIFIER_INPUTTEXTAREA.isSameTagType(srcTagIdentifier)) {
+			transformer.appendTransformOperation(new CreateElementOperation("textarea"));
+			transformer.appendTransformOperation(new CopyAllAttributesOperation());
+			transformer.appendTransformOperation(new RenameAttributeOperation("styleClass", "class"));
+			transformer.appendTransformOperation(new ConvertAttributeToTextOperation("value"));
+        } else if (IJSFConstants.TAG_IDENTIFIER_OUTPUTTEXT.isSameTagType(srcTagIdentifier)) {
 			transformer.appendTransformOperation(new CreateElementOperation("span"));
 			transformer.appendTransformOperation(new CopyAllAttributesOperation());
 			transformer.appendTransformOperation(new RenameAttributeOperation("styleClass", "class"));
 			transformer.appendTransformOperation(new ConvertAttributeToTextOperation("value"));
-        }
-		else if (IJSFConstants.TAG_IDENTIFIER_OUTPUTLABEL.isSameTagType(srcTagIdentifier)) 
-        {
+        } else if (IJSFConstants.TAG_IDENTIFIER_OUTPUTLABEL.isSameTagType(srcTagIdentifier)) {
 			transformer.appendTransformOperation(new CreateElementOperation("label"));
 			transformer.appendTransformOperation(new CopyAllAttributesOperation());
 			transformer.appendTransformOperation(new RenameAttributeOperation("styleClass", "class"));
 			transformer.appendTransformOperation(new ConvertAttributeToTextOperation("value"));
 			transformer.appendTransformOperation(new CopyChildrenOperation());
-		}
-		else if (IJSFConstants.TAG_IDENTIFIER_PANEL_GRID.isSameTagType(srcTagIdentifier))
-		{
+        } else if (IJSFConstants.TAG_IDENTIFIER_GRAPHICIMAGE.isSameTagType(srcTagIdentifier)) {
+			transformer.appendTransformOperation(new CreateElementOperation("img"));
+			transformer.appendTransformOperation(new CopyAllAttributesOperation());
+			transformer.appendTransformOperation(new RenameAttributeOperation("styleClass", "class"));
+			transformer.appendTransformOperation(new RenameAttributeOperation("url", "src"));
+			//"value" overrides "url" as new "src" attribute
+			transformer.appendTransformOperation(new RenameAttributeOperation("value", "src"));
+		} else if (IJSFConstants.TAG_IDENTIFIER_PANEL_GRID.isSameTagType(srcTagIdentifier)) {
 			transformer.appendTransformOperation(new PanelGridOperation());
 		}
 		return transformer;

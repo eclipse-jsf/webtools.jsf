@@ -117,6 +117,9 @@ public interface IJSFConstants {
     final static TagIdentifier TAG_IDENTIFIER_FACET =
         TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_CORE, TAG_FACET);
     
+    final static TagIdentifier TAG_IDENTIFIER_VERBATIM =
+        TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_CORE, TAG_VERBATIM);
+    
     final static TagIdentifier TAG_IDENTIFIER_DATA_TABLE = 
         TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_HTML, TAG_DATATABLE);
 
@@ -131,13 +134,21 @@ public interface IJSFConstants {
 
     final static TagIdentifier TAG_IDENTIFIER_INPUTTEXT =
         TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_HTML, TAG_INPUTTEXT);
-    
+
+    final static TagIdentifier TAG_IDENTIFIER_INPUTSECRET =
+    	TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_HTML, TAG_INPUTSECRET);
+
+    final static TagIdentifier TAG_IDENTIFIER_INPUTTEXTAREA =
+    	TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_HTML, TAG_INPUTTEXTAREA);
+
     final static TagIdentifier TAG_IDENTIFIER_OUTPUTTEXT =
         TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_HTML, TAG_OUTPUTTEXT);
     
     final static TagIdentifier TAG_IDENTIFIER_OUTPUTLABEL =
         TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_HTML, TAG_OUTPUTLABEL);
-    
+
+    final static TagIdentifier TAG_IDENTIFIER_GRAPHICIMAGE =
+    	TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_HTML, TAG_GRAPHICIMAGE);
 
 	// attribute name
 	final static public String ATTR_ACCEPT = "accept";

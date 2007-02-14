@@ -68,9 +68,22 @@ public class DTTagConverterDecorator implements ITagConverterDecorator {
 			dtTagConverter.setMinHeight(10);
 			dtTagConverter.setMultiLevel(true);
 			dtTagConverter.setNeedBorderDecorator(true);
+		} else if (IJSFConstants.TAG_IDENTIFIER_VERBATIM.isSameTagType(srcTagIdentifier)) {
+			dtTagConverter.setMinWidth(10);
+			dtTagConverter.setMinHeight(10);
+			dtTagConverter.setMultiLevel(true);
+			dtTagConverter.setNeedBorderDecorator(true);
 		} else if (IJSFConstants.TAG_IDENTIFIER_FORM.isSameTagType(srcTagIdentifier)) {
 			dtTagConverter.setNeedBorderDecorator(true);
         } else if (IJSFConstants.TAG_IDENTIFIER_INPUTTEXT.isSameTagType(srcTagIdentifier)) {
+			dtTagConverter.setMultiLevel(true);
+			dtTagConverter.setWidget(true);
+			setNonVisualChildElements(dtTagConverter, srcElement);
+        } else if (IJSFConstants.TAG_IDENTIFIER_INPUTSECRET.isSameTagType(srcTagIdentifier)) {
+			dtTagConverter.setMultiLevel(true);
+			dtTagConverter.setWidget(true);
+			setNonVisualChildElements(dtTagConverter, srcElement);
+        } else if (IJSFConstants.TAG_IDENTIFIER_INPUTTEXTAREA.isSameTagType(srcTagIdentifier)) {
 			dtTagConverter.setMultiLevel(true);
 			dtTagConverter.setWidget(true);
 			setNonVisualChildElements(dtTagConverter, srcElement);
@@ -84,6 +97,10 @@ public class DTTagConverterDecorator implements ITagConverterDecorator {
 			dtTagConverter.setMultiLevel(true);
 			dtTagConverter.setWidget(true);
 			setNonVisualChildElements(dtTagConverter, srcElement);
+        } else if (IJSFConstants.TAG_IDENTIFIER_GRAPHICIMAGE.isSameTagType(srcTagIdentifier)) {
+        	dtTagConverter.setMultiLevel(true);
+        	dtTagConverter.setWidget(true);
+        	resolveAttributeValue(dtTagConverter.getResultElement(), "src");
 		} else if (IJSFConstants.TAG_IDENTIFIER_PANEL_GRID.isSameTagType(srcTagIdentifier)) {
 			dtTagConverter.setMultiLevel(true);
 			dtTagConverter.setNeedBorderDecorator(true);
@@ -103,10 +120,14 @@ public class DTTagConverterDecorator implements ITagConverterDecorator {
 		TagIdentifier srcTagIdentifier =
 			TagIdentifierFactory.createDocumentTagWrapper(srcElement);
 
-		if (IJSFConstants.TAG_IDENTIFIER_OUTPUTTEXT.isSameTagType(srcTagIdentifier)) {
+		if (IJSFConstants.TAG_IDENTIFIER_INPUTTEXTAREA.isSameTagType(srcTagIdentifier)) {
+			resolveChildText(dtTagConverter.getResultElement());
+		} else if (IJSFConstants.TAG_IDENTIFIER_OUTPUTTEXT.isSameTagType(srcTagIdentifier)) {
 			resolveChildText(dtTagConverter.getResultElement());
 		} else if (IJSFConstants.TAG_IDENTIFIER_OUTPUTLABEL.isSameTagType(srcTagIdentifier)) {
 			resolveChildText(dtTagConverter.getResultElement());
+        } else if (IJSFConstants.TAG_IDENTIFIER_GRAPHICIMAGE.isSameTagType(srcTagIdentifier)) {
+        	resolveAttributeValue(dtTagConverter.getResultElement(), "src");
 		}
 	}
 
@@ -157,15 +178,38 @@ public class DTTagConverterDecorator implements ITagConverterDecorator {
 				if (childNode.getNodeType() == Node.TEXT_NODE) {
 					Text textNode = (Text)childNode;
 					String textNodeValue = textNode.getNodeValue();
-					String newTextNodeValue = null;
 					try {
-						newTextNodeValue = (String)PageExpressionContext.getCurrent().evaluateExpression(textNodeValue, String.class, null);
+						String newTextNodeValue = (String)PageExpressionContext.getCurrent().evaluateExpression(textNodeValue, String.class, null);
 						if (!textNodeValue.equals(newTextNodeValue)) {
 							textNode.setNodeValue(newTextNodeValue);
 						}
 					} catch(Exception ex) {
 						//ignore - could not resolve, do not change existing value
 					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * Performs simple EL resolution for the value of the specified attribute
+	 * of the specified Element.
+	 * 
+	 * @param srcElement Source Element instance.
+	 * @param attributeName Name of attribute for which the value should be
+	 * resolved.
+	 */
+	protected void resolveAttributeValue(Element srcElement, String attributeName) {
+		if (srcElement != null) {
+			String oldAttributeValue = srcElement.getAttribute(attributeName);
+			if (oldAttributeValue != null && oldAttributeValue.length() > 0) {
+				try {
+					String newAttributeValue = (String)PageExpressionContext.getCurrent().evaluateExpression(oldAttributeValue, String.class, null);
+					if (!oldAttributeValue.equals(newAttributeValue)) {
+						srcElement.setAttribute(attributeName, newAttributeValue);
+					}
+				} catch(Exception ex) {
+					//ignore - could not resolve, do not change existing value
 				}
 			}
 		}
