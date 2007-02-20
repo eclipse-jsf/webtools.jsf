@@ -78,9 +78,9 @@ public class PanelGridOperation extends AbstractTransformOperation {
 			Element tFootElement = appendChildElement("tfoot", tableElement);
 			Element trElement = appendChildElement("tr", tFootElement);
 			Element tdElement = appendChildElement("td", trElement);
-			String headerClass = srcElement.getAttribute("footerClass");
-			if (headerClass != null && headerClass.length() > 0) {
-				new CreateAttributeOperation("class", headerClass).transform(srcElement, tdElement);
+			String footerClass = srcElement.getAttribute("footerClass");
+			if (footerClass != null && footerClass.length() > 0) {
+				new CreateAttributeOperation("class", footerClass).transform(srcElement, tdElement);
 			}
 			new CreateAttributeOperation("colspan", String.valueOf(columns)).transform(srcElement, tdElement);
 			tagConverterContext.addChild(footerFacetElement, new ConvertPosition(tdElement, 0));
