@@ -12,7 +12,7 @@
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.eclipse.jst.pagedesigner.editors.HTMLEditor"
 			contributorClass="org.eclipse.jst.pagedesigner.editors.actions.PageDesignerActionBarContributor2"
-			default="true"
+			default="false"
 			extensions="jsp,jsf,html,htm,xhtml"
 			icon="icons/PD_Plugin.gif"
 			id="org.eclipse.jst.pagedesigner.PageDesignerEditor"
