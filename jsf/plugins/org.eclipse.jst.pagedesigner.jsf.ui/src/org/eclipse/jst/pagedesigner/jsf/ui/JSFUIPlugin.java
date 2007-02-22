@@ -16,6 +16,9 @@ import java.net.URL;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+import org.eclipse.core.runtime.ILog;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.jst.jsf.common.ui.IFileFolderConstants;
@@ -150,4 +153,37 @@ public class JSFUIPlugin extends AbstractUIPlugin
         }
         return image;
     }
+
+    /**
+     * Log message and Throwable by severity.
+     * 
+     * @param severity Severity (use appropriate IStatus constant).
+     * @param message Message to be logged.
+     * @param exception Throwable instance to be logged.
+     */
+    public static void log(int severity, String message, Throwable exception) {
+    	ILog log = getDefault().getLog();
+    	IStatus status = new Status(
+    			severity,
+    			"org.eclipse.jst.pagedesigner.jsf.ui",
+    			message,
+    			exception);
+    	log.log(status);
+    }
+
+    /**
+     * Log message by severity.
+     * 
+     * @param severity Severity (use an IStatus constant).
+     * @param message Message to be logged.
+     */
+    public static void log(int severity, String message) {
+    	ILog log = getDefault().getLog();
+    	IStatus status = new Status(
+    			severity,
+    			"",
+    			message);
+    	log.log(status);
+    }
+
 }

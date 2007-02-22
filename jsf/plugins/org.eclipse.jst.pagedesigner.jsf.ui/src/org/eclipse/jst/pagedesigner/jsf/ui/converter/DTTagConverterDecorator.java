@@ -15,6 +15,10 @@ import org.eclipse.jst.pagedesigner.converter.IConverterFactory;
 import org.eclipse.jst.pagedesigner.converter.ITagConverter;
 import org.eclipse.jst.pagedesigner.dom.TagIdentifier;
 import org.eclipse.jst.pagedesigner.dom.TagIdentifierFactory;
+import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.ResolveAttributeValue;
+import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.TagDecorateInfo;
+import org.eclipse.jst.pagedesigner.dtmanager.internal.provisional.DTManager;
+import org.eclipse.jst.pagedesigner.dtmanager.internal.provisional.IDTInfo;
 import org.eclipse.jst.pagedesigner.jsf.ui.util.JSFUIPluginResourcesUtil;
 import org.eclipse.jst.pagedesigner.preview.PageExpressionContext;
 import org.w3c.dom.Element;
@@ -43,10 +47,56 @@ public class DTTagConverterDecorator implements ITagConverterDecorator {
 		}
 
 		if (dtTagConverter.getMode() == IConverterFactory.MODE_DESIGNER) {
-			decorateForDesignMode(dtTagConverter);
+			if (!decorateFromDTInfo(dtTagConverter, "vpd-decorate-design")) {
+				decorateForDesignMode(dtTagConverter);
+			}
 		} else if (dtTagConverter.getMode() == IConverterFactory.MODE_PREVIEW) {
-			decorateForPreviewMode(dtTagConverter);
+			if (!decorateFromDTInfo(dtTagConverter, "vpd-decorate-preview")) {
+				decorateForPreviewMode(dtTagConverter);
+			}
 		}
+	}
+
+	/**
+	 * Performs decoration of the specified DTTagConverter instance from
+	 * IDTInfo (metadata) for the specified (by ID) TagDecorateInfo.
+	 * 
+	 * @param dtTagConverter DTTagConverter instance.
+	 * @param tagDecorateInfoID ID of the TagDecorateInfo to be located in
+	 * metadata.
+	 * @return true if successfully processed, else false.
+	 */
+	protected boolean decorateFromDTInfo(DTTagConverter dtTagConverter, String tagDecorateInfoID) {
+		boolean processed = false;
+		Element srcElement = dtTagConverter.getHostElement();
+		DTManager dtManager = new DTManager();
+		IDTInfo dtInfo = dtManager.getDTInfo(srcElement);
+		if (dtInfo != null) {
+			TagDecorateInfo tdInfo = dtInfo.getTagDecorateInfo(tagDecorateInfoID);
+			if (tdInfo != null) {
+				dtTagConverter.setMultiLevel(tdInfo.isMultiLevel());
+				dtTagConverter.setNeedBorderDecorator(tdInfo.isNeedBorderDecorator());
+				dtTagConverter.setNeedTableDecorator(tdInfo.isNeedTableDecorator());
+				if (tdInfo.isResolveChildText()) {
+					resolveChildText(dtTagConverter.getResultElement());
+				}
+				if (tdInfo.isSetNonVisualChildElements()) {
+					setNonVisualChildElements(dtTagConverter, srcElement);
+				}
+				dtTagConverter.setWidget(tdInfo.isWidget());
+				dtTagConverter.setMinHeight(tdInfo.getMinHeight());
+				dtTagConverter.setMinWidth(tdInfo.getMinWidth());
+				ResolveAttributeValue resAttrValue = tdInfo.getResolveAttributeValue();
+				if (resAttrValue != null) {
+					String attributeName = resAttrValue.getAttributeName();
+					if (attributeName != null && attributeName.length() > 0) {
+						resolveAttributeValue(srcElement, attributeName);
+					}
+				}
+				processed = true;
+			}
+		}
+		return processed;
 	}
 
 	/**

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<md:metadatamodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" 
+	xmlns:md="http://org.eclipse.jst.jsf.common.metadata/metadata.ecore"
+	xmlns:dti="http://org.eclipse.jsf.pagedesigner/dtinfo.ecore"
+	id="http://java.sun.com/jsf/core"
+	type="tagFile">
+
+	<entity id="facet" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info>
+					<operation id="CreateElementOperation">
+						<parameter value="span"/>
+					</operation>
+					<operation id="CopyChildrenOperation"/>
+				</tag-convert-info>
+				<tag-decorate-info id="vpd-decorate-design"
+					minHeight="10"
+					minWidth="10"
+					multiLevel="true"
+					needBorderDecorator="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="verbatim" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info>
+					<operation id="CreateElementOperation">
+						<parameter value="span"/>
+					</operation>
+					<operation id="CopyChildrenOperation"/>
+				</tag-convert-info>
+				<tag-decorate-info id="vpd-decorate-design"
+					minHeight="10"
+					minWidth="10"
+					multiLevel="true"
+					needBorderDecorator="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="view" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info>
+					<operation id="CreateElementOperation">
+						<parameter value="div"/>
+					</operation>
+					<operation id="CopyChildrenOperation"/>
+				</tag-convert-info>
+				<tag-decorate-info id="vpd-decorate-design"
+					needBorderDecorator="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+</md:metadatamodel>
