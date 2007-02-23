@@ -1,24 +1,42 @@
+/*******************************************************************************
+ * Copyright (c) 2005 Oracle Corporation.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Ian Trimble - initial API and implementation
+ *******************************************************************************/ 
 package org.eclipse.jst.pagedesigner.dtmanager.internal.provisional;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.IWorkspaceRoot;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IMetaDataModelContext;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.MetaDataQueryHelper;
 import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.DTInfo;
 import org.eclipse.jst.pagedesigner.utils.CMUtil;
-import org.eclipse.wst.xml.core.internal.document.DocumentImpl;
+import org.eclipse.jst.pagedesigner.utils.StructuredModelUtil;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
-import org.w3c.dom.Document;
+import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
 import org.w3c.dom.Element;
 
+/**
+ * Default IDTInfoFactory implementation.
+ * 
+ * @author Ian Trimble - Oracle
+ */
 public class DefaultDTInfoFactory implements IDTInfoFactory {
 
+	/**
+	 * Key (in metadata) of IDTInfo trait.
+	 */
 	public static final String DTINFO_TRAIT_KEY = "dt-info";
 
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.internal.provisional.IDTInfoFactory#getDTInfo(org.w3c.dom.Element)
+	 */
 	public IDTInfo getDTInfo(Element element) {
 		IDTInfo dtInfo = null;
 		String nsURI = CMUtil.getElementNamespaceURI(element);
@@ -38,27 +56,20 @@ public class DefaultDTInfoFactory implements IDTInfoFactory {
 		return dtInfo;
 	}
 
-	private IProject getProject(Element element) {
+	/**
+	 * Gets the IProject instance that contains the model of the specified
+	 * Element.
+	 * 
+	 * @param element Element instance.
+	 * @return IProject instance that contains the model of the specified
+	 * Element.
+	 */
+	protected IProject getProject(Element element) {
 		IProject project = null;
-		if (element != null) {
-			Document document = element.getOwnerDocument();
-			if (document != null && document instanceof DocumentImpl) {
-				IDOMModel model = ((DocumentImpl)document).getModel();
-				if (model != null) {
-					String baseLocation = model.getBaseLocation();
-					if (baseLocation != null && baseLocation.length() > 0) {
-						IWorkspace workspace = ResourcesPlugin.getWorkspace();
-						if (workspace != null) {
-							IWorkspaceRoot workspaceRoot = workspace.getRoot();
-							if (workspaceRoot != null) {
-								IResource resource = workspaceRoot.findMember(baseLocation);
-								if (resource != null) {
-									project = resource.getProject();
-								}
-							}
-						}
-					}
-				}
+		if (element instanceof IDOMNode) {
+			IDOMModel model = ((IDOMNode)element).getModel();
+			if (model != null) {
+				project = StructuredModelUtil.getProjectFor(model);
 			}
 		}
 		return project;

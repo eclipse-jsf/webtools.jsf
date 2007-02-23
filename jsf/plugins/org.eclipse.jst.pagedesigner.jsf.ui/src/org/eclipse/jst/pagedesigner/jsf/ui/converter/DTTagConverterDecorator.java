@@ -48,11 +48,11 @@ public class DTTagConverterDecorator implements ITagConverterDecorator {
 
 		if (dtTagConverter.getMode() == IConverterFactory.MODE_DESIGNER) {
 			if (!decorateFromDTInfo(dtTagConverter, "vpd-decorate-design")) {
-				decorateForDesignMode(dtTagConverter);
+				//decorateForDesignMode(dtTagConverter);
 			}
 		} else if (dtTagConverter.getMode() == IConverterFactory.MODE_PREVIEW) {
 			if (!decorateFromDTInfo(dtTagConverter, "vpd-decorate-preview")) {
-				decorateForPreviewMode(dtTagConverter);
+				//decorateForPreviewMode(dtTagConverter);
 			}
 		}
 	}
@@ -90,7 +90,7 @@ public class DTTagConverterDecorator implements ITagConverterDecorator {
 				if (resAttrValue != null) {
 					String attributeName = resAttrValue.getAttributeName();
 					if (attributeName != null && attributeName.length() > 0) {
-						resolveAttributeValue(srcElement, attributeName);
+						resolveAttributeValue(dtTagConverter.getResultElement(), attributeName);
 					}
 				}
 				processed = true;

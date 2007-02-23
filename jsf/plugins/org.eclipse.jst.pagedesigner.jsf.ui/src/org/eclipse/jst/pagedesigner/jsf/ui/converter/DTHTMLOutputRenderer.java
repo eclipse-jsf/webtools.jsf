@@ -56,14 +56,24 @@ public class DTHTMLOutputRenderer implements IOutputRenderer {
 		Element resultElement = null;
 		if (srcElement != null) {
 			ITransformer transformer = createTransformerFromDTInfo(srcElement);
+			/*
 			if (transformer == null) {
 				transformer = createTransformer(srcElement);
 			}
+			*/
 			resultElement = transformer.transform(srcElement);
 		}
 		return resultElement;
 	}
 
+	/**
+	 * Configures and returns an ITransformer instance for the specified source
+	 * Element.
+	 * 
+	 * @param element Element for which to configure and return an ITransformer
+	 * instance.
+	 * @return Configured ITransformer instance for the specified Element.
+	 */
 	protected ITransformer createTransformerFromDTInfo(Element element) {
 		ITransformer transformer = null;
 		DTManager dtManager = new DTManager();
@@ -80,11 +90,11 @@ public class DTHTMLOutputRenderer implements IOutputRenderer {
 						Object opObject = opClass.newInstance();
 						if (opObject instanceof ITransformOperation) {
 							transformer.appendTransformOperation((ITransformOperation)opObject);
-							return null;
 						} else {
 							JSFUIPlugin.log(
 									IStatus.WARNING,
 									JSFUIPluginResourcesUtil.getInstance().getString("Warning.DTHTMLOutputRenderer.NotITransformOperation") + " (\"" + classname + "\")");
+							return null;
 						}
 					} catch(ClassNotFoundException cnfe) {
 						JSFUIPlugin.log(
