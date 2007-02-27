@@ -60,7 +60,7 @@
 				</tag-decorate-info>
 				<tag-decorate-info id="vpd-decorate-preview">
 					<resolve-attribute-value attributeName="src"/>
-				</tag-decorate-info>>
+				</tag-decorate-info>
 			</value>
 		</trait>
 	</entity>
@@ -89,7 +89,7 @@
 				/>
 				<tag-decorate-info id="vpd-decorate-preview">
 					<resolve-attribute-value attributeName="value"/>
-				</tag-decorate-info>>
+				</tag-decorate-info>
 			</value>
 		</trait>
 	</entity>
@@ -118,7 +118,7 @@
 				/>
 				<tag-decorate-info id="vpd-decorate-preview">
 					<resolve-attribute-value attributeName="value"/>
-				</tag-decorate-info>>
+				</tag-decorate-info>
 			</value>
 		</trait>
 	</entity>
