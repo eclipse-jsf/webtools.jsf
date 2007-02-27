@@ -37,6 +37,7 @@ import org.eclipse.jst.pagedesigner.css2.layout.CSSFigure;
 import org.eclipse.jst.pagedesigner.css2.layout.CSSWidgetLayout;
 import org.eclipse.jst.pagedesigner.css2.style.AbstractStyle;
 import org.eclipse.jst.pagedesigner.css2.widget.HiddenProvider;
+import org.eclipse.jst.pagedesigner.dtmanager.internal.provisional.DTManager;
 import org.eclipse.jst.pagedesigner.editpolicies.ElementMenuBar;
 import org.eclipse.jst.pagedesigner.editpolicies.ElementResizableEditPolicy;
 import org.eclipse.jst.pagedesigner.editpolicies.IEnhancedSelectionEditPolicy;
@@ -161,7 +162,7 @@ public class ElementEditPart extends SubNodeEditPart {
 	 * @return
 	 */
 	private ITagConverter getTagConverter(Element node) {
-		return ConverterFactoryRegistry.getInstance().createTagConverter(node,
+		return DTManager.getInstance().getTagConverter(node,
 				IConverterFactory.MODE_DESIGNER,
 				this.getDestDocumentForDesign());
 	}
@@ -191,7 +192,7 @@ public class ElementEditPart extends SubNodeEditPart {
         for (Iterator it = _tagConverter.getNonVisualChildren().iterator(); it.hasNext();)
         {
             Element nonVisualChild = (Element) it.next();
-            children.add(ConverterFactoryRegistry.getInstance().createTagConverter(nonVisualChild,
+            children.add(DTManager.getInstance().getTagConverter(nonVisualChild,
                 IConverterFactory.MODE_DESIGNER,
                 this.getDestDocumentForDesign()));
         }

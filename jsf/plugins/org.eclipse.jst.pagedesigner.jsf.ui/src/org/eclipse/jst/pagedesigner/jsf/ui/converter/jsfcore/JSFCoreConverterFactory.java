@@ -46,9 +46,11 @@ public class JSFCoreConverterFactory implements IConverterFactory
     static
     {
         _dtConversionSupported = new HashSet();
+        /*
         _dtConversionSupported.add(IJSFConstants.TAG_VIEW);
         _dtConversionSupported.add(IJSFConstants.TAG_FACET);
         _dtConversionSupported.add(IJSFConstants.TAG_VERBATIM);
+        */
     }
     
     /**

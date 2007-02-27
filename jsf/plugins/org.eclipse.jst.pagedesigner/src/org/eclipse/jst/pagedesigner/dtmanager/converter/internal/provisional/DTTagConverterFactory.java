@@ -12,6 +12,8 @@ package org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional;
 
 import org.eclipse.jst.pagedesigner.converter.IConverterFactory;
 import org.eclipse.jst.pagedesigner.converter.ITagConverter;
+import org.eclipse.jst.pagedesigner.dtmanager.internal.provisional.DTManager;
+import org.eclipse.jst.pagedesigner.dtmanager.internal.provisional.IDTInfo;
 import org.w3c.dom.Element;
 
 /**
@@ -26,8 +28,12 @@ public class DTTagConverterFactory implements IConverterFactory {
 	 * @see org.eclipse.jst.pagedesigner.converter.IConverterFactory#createConverter(org.w3c.dom.Element, int)
 	 */
 	public ITagConverter createConverter(Element element, int mode) {
-		ITagConverter tagConverter = new DTTagConverter(element);
-		tagConverter.setMode(mode);
+		ITagConverter tagConverter = null;
+		IDTInfo dtInfo = DTManager.getInstance().getDTInfo(element);
+		if (dtInfo != null) {
+			tagConverter = new DTTagConverter(element);
+			tagConverter.setMode(mode);
+		}
 		return tagConverter;
 	}
 

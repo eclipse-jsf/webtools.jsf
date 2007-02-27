@@ -43,6 +43,7 @@ public class JSFHTMLConverterFactory implements IConverterFactory
     static
     {
         _dtConversionSupported = new HashSet();
+        /*
         _dtConversionSupported.add(IJSFConstants.TAG_FORM);
         _dtConversionSupported.add(IJSFConstants.TAG_INPUTTEXT);
         _dtConversionSupported.add(IJSFConstants.TAG_INPUTSECRET);
@@ -51,6 +52,7 @@ public class JSFHTMLConverterFactory implements IConverterFactory
         _dtConversionSupported.add(IJSFConstants.TAG_OUTPUTLABEL);
         _dtConversionSupported.add(IJSFConstants.TAG_GRAPHICIMAGE);
         _dtConversionSupported.add(IJSFConstants.TAG_PANELGRID);
+        */
     }
     
     /**

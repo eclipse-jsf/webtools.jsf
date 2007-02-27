@@ -16,9 +16,9 @@ import java.util.List;
 import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.converter.ConvertPosition;
-import org.eclipse.jst.pagedesigner.converter.ConverterFactoryRegistry;
 import org.eclipse.jst.pagedesigner.converter.IConverterFactory;
 import org.eclipse.jst.pagedesigner.converter.ITagConverter;
+import org.eclipse.jst.pagedesigner.dtmanager.internal.provisional.DTManager;
 import org.eclipse.wst.xml.core.internal.document.InvalidCharacterException;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMDocument;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMText;
@@ -106,7 +106,7 @@ public class PreviewConvertContext {
 	 * @return
 	 */
 	private ITagConverter createTagConverter(Element ele) {
-		return ConverterFactoryRegistry.getInstance().createTagConverter(ele,
+		return DTManager.getInstance().getTagConverter(ele,
 				IConverterFactory.MODE_PREVIEW, _destDocument);
 	}
 }
