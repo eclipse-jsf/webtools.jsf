@@ -10,18 +10,60 @@
  *******************************************************************************/ 
 package org.eclipse.jst.pagedesigner.dtmanager.internal.provisional;
 
+import org.eclipse.jst.pagedesigner.converter.ConverterFactoryRegistry;
+import org.eclipse.jst.pagedesigner.converter.IConverterFactory;
+import org.eclipse.jst.pagedesigner.converter.ITagConverter;
 import org.eclipse.jst.pagedesigner.utils.CMUtil;
+import org.eclipse.wst.xml.core.internal.provisional.document.IDOMDocument;
 import org.w3c.dom.Element;
 
 /**
  * DTManager is the top-level entry point for design-time (DT) services, such
- * as tag converters and other design-time information.
+ * as tag converters and design-time information.
  * 
  * @author Ian Trimble - Oracle
  */
 public class DTManager {
 
 	private IDTInfoFactory dtInfoFactory;
+
+	/**
+	 * Gets an ITagConverter instance for the specified Element and mode.
+	 * 
+	 * @param element Element instance for which to locate and return an
+	 * ITagConverter instance.
+	 * @param mode Mode falg (use IConverterFactory constants).
+	 * @param document Target IDOMDocument instance.
+	 * @return An ITagConverter instance for the specified Element and mode.
+	 */
+	public ITagConverter getTagConverter(Element element, int mode, IDOMDocument document) {
+		ITagConverter tagConverter = null;
+		String nsURI = CMUtil.getElementNamespaceURI(element);
+		//try MD-driven approach
+		IConverterFactory tagConverterFactory = getTagConverterFactory(nsURI);
+		if (tagConverterFactory != null) {
+			tagConverter = tagConverterFactory.createConverter(element, mode);
+			if (tagConverter != null) {
+				tagConverter.setDestDocument(document);
+			} else {
+				//fallback to contributed (non-MD-driven) approach
+				tagConverter = ConverterFactoryRegistry.getInstance().createTagConverter(element, mode, document);
+			}
+		}
+		return tagConverter;
+	}
+
+	/**
+	 * Gets an IConverterFactory instance for the specified namespace URI.
+	 * 
+	 * @param nsURI Namespace URI.
+	 * @return An IConverterFactory instance for the specified namespace URI.
+	 */
+	protected IConverterFactory getTagConverterFactory(String nsURI) {
+		IConverterFactory tagConverterFactory = null;
+		//TODO: return DTTagConverterFactory
+		return tagConverterFactory;
+	}
 
 	/**
 	 * Gets an IDTInfo instance for the specified Element.
