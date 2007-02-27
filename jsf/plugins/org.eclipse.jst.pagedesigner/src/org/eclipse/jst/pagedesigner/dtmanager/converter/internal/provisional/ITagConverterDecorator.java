@@ -8,7 +8,7 @@
  * Contributors:
  *    Ian Trimble - initial API and implementation
  *******************************************************************************/ 
-package org.eclipse.jst.pagedesigner.jsf.ui.converter;
+package org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional;
 
 import org.eclipse.jst.pagedesigner.converter.ITagConverter;
 

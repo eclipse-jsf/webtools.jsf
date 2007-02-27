@@ -8,26 +8,34 @@
  * Contributors:
  *    Ian Trimble - initial API and implementation
  *******************************************************************************/ 
-package org.eclipse.jst.pagedesigner.jsf.ui.converter;
+package org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional;
 
 import org.w3c.dom.Element;
 
 /**
- * Defines an operation used during transformation of input Element instances
- * to output Element instances.
+ * Transforms an original input Element instance to an output Element instance
+ * by invoking a collection of ITransformOperation instances.  
  * 
  * @author Ian Trimble - Oracle
  */
-public interface ITransformOperation {
+public interface ITransformer {
 
 	/**
-	 * Transforms an input element instance to an output Element instance.
+	 * Appends an ITransformOperation instance to the collection.
+	 * 
+	 * @param operation ITransformOperation instance to be appended.
+	 */
+	public void appendTransformOperation(ITransformOperation operation);
+
+	/**
+	 * Transforms an original input Element instance to an output Element
+	 * instance, typically by invoking each ITransformOperation instance in
+	 * this instance's collection.
 	 * 
 	 * @param srcElement Original input Element instance.
-	 * @param curElement Current Element instance.
-	 * @return Resulting transformed Element instance.
+	 * @return Transformed output Element instance.
 	 */
-	public Element transform(Element srcElement, Element curElement);
+	public Element transform(Element srcElement);
 
 	/**
 	 * Sets the ITagConverterContext instance allowing access to context and

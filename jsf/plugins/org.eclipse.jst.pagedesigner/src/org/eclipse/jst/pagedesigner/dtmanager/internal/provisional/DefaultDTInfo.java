@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
 import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.DTInfo;
 import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.TagConvertInfo;
 import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.TagDecorateInfo;
@@ -26,14 +27,17 @@ import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.TagDec
 public class DefaultDTInfo implements IDTInfo {
 
 	private DTInfo dtInfo = null;
+	private Trait trait = null;
 
 	/**
 	 * Constructs an instance that wraps the specified DTInfo instance.
 	 * 
 	 * @param dtInfo DTInfo (EMF model object) instance.
+	 * @param trait Trait instance that was queried to load this data.
 	 */
-	public DefaultDTInfo(DTInfo dtInfo) {
+	public DefaultDTInfo(DTInfo dtInfo, Trait trait) {
 		this.dtInfo = dtInfo;
+		this.trait = trait;
 	}
 
 	/*
@@ -68,6 +72,14 @@ public class DefaultDTInfo implements IDTInfo {
 			}
 		}
 		return tdInfo;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.internal.provisional.IDTInfo#getTrait()
+	 */
+	public Trait getTrait() {
+		return trait;
 	}
 
 }

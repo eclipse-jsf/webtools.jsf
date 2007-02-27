@@ -48,7 +48,7 @@ public class DefaultDTInfoFactory implements IDTInfoFactory {
 				if (trait != null) {
 					DTInfo dtInfoModelObject = (DTInfo)trait.getValue();
 					if (dtInfoModelObject != null) {
-						dtInfo = new DefaultDTInfo(dtInfoModelObject);
+						dtInfo = new DefaultDTInfo(dtInfoModelObject, trait);
 					}
 				}
 			}

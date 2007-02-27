@@ -8,7 +8,7 @@
  * Contributors:
  *    Ian Trimble - initial API and implementation
  *******************************************************************************/ 
-package org.eclipse.jst.pagedesigner.jsf.ui.converter.operations;
+package org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Text;
@@ -55,7 +55,7 @@ public class ConvertAttributeToTextOperation extends AbstractTransformOperation 
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.AbstractTransformOperation#transform(org.w3c.dom.Element, org.w3c.dom.Element)
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.AbstractTransformOperation#transform(org.w3c.dom.Element, org.w3c.dom.Element)
 	 */
 	public Element transform(Element srcElement, Element curElement) {
 		if (tagConverterContext != null && srcElement != null && curElement != null) {

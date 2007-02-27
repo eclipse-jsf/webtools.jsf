@@ -8,7 +8,7 @@
  * Contributors:
  *    Ian Trimble - initial API and implementation
  *******************************************************************************/ 
-package org.eclipse.jst.pagedesigner.jsf.ui.converter;
+package org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional;
 
 import org.eclipse.jst.pagedesigner.converter.ConvertPosition;
 import org.w3c.dom.Element;
@@ -35,7 +35,7 @@ public class DTTagConverterContext implements ITagConverterContext {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jst.pagedesigner.jsf.ui.converter.ITagConverterContext#getHostElement()
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.ITagConverterContext#getHostElement()
 	 */
 	public Element getHostElement() {
 		Element hostElement = null;
@@ -47,7 +47,7 @@ public class DTTagConverterContext implements ITagConverterContext {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jst.pagedesigner.jsf.ui.converter.ITagConverterContext#createElement(java.lang.String)
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.ITagConverterContext#createElement(java.lang.String)
 	 */
 	public Element createElement(String tag) {
 		Element element = null;
@@ -59,7 +59,7 @@ public class DTTagConverterContext implements ITagConverterContext {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jst.pagedesigner.jsf.ui.converter.ITagConverterContext#createText(java.lang.String)
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.ITagConverterContext#createText(java.lang.String)
 	 */
 	public Text createText(String content) {
 		Text text = null;
@@ -71,7 +71,7 @@ public class DTTagConverterContext implements ITagConverterContext {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jst.pagedesigner.jsf.ui.converter.ITagConverterContext#addChild(org.w3c.dom.Node, org.eclipse.jst.pagedesigner.converter.ConvertPosition)
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.ITagConverterContext#addChild(org.w3c.dom.Node, org.eclipse.jst.pagedesigner.converter.ConvertPosition)
 	 */
 	public void addChild(Node childNode, ConvertPosition position) {
 		if (tagConverter != null) {
@@ -81,7 +81,7 @@ public class DTTagConverterContext implements ITagConverterContext {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jst.pagedesigner.jsf.ui.converter.ITagConverterContext#copyChildren(org.w3c.dom.Element, org.w3c.dom.Element)
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.ITagConverterContext#copyChildren(org.w3c.dom.Element, org.w3c.dom.Element)
 	 */
 	public void copyChildren(Element srcElement, Element destElement) {
 		if (tagConverter != null) {

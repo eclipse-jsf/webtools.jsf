@@ -8,7 +8,7 @@
  * Contributors:
  *    Ian Trimble - initial API and implementation
  *******************************************************************************/ 
-package org.eclipse.jst.pagedesigner.jsf.ui.converter;
+package org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -35,7 +35,7 @@ public class DefaultTransformer implements ITransformer {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jst.pagedesigner.jsf.ui.converter.ITransformer#appendTransformOperation(org.eclipse.jst.pagedesigner.jsf.ui.converter.ITransformOperation)
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.ITransformer#appendTransformOperation(org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.ITransformOperation)
 	 */
 	public void appendTransformOperation(ITransformOperation operation) {
 		synchronized(transformOperations) {
@@ -48,7 +48,7 @@ public class DefaultTransformer implements ITransformer {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jst.pagedesigner.jsf.ui.converter.ITransformer#transform(org.w3c.dom.Element)
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.ITransformer#transform(org.w3c.dom.Element)
 	 */
 	public Element transform(Element srcElement) {
 		Element curElement = null;
@@ -69,7 +69,7 @@ public class DefaultTransformer implements ITransformer {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jst.pagedesigner.jsf.ui.converter.ITransformer#setTagConverterContext(org.eclipse.jst.pagedesigner.jsf.ui.converter.ITagConverterContext)
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.ITransformer#setTagConverterContext(org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.ITagConverterContext)
 	 */
 	public void setTagConverterContext(ITagConverterContext tagConverterContext) {
 		this.tagConverterContext = tagConverterContext;

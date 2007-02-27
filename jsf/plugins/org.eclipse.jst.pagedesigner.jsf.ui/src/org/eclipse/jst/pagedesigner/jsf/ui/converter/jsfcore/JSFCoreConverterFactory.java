@@ -22,8 +22,8 @@ import org.eclipse.jst.pagedesigner.converter.HiddenTagConverter;
 import org.eclipse.jst.pagedesigner.converter.IConverterFactory;
 import org.eclipse.jst.pagedesigner.converter.ITagConverter;
 import org.eclipse.jst.pagedesigner.converter.TagConverterToInlineBlock;
+import org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.DTTagConverter;
 import org.eclipse.jst.pagedesigner.jsf.ui.JSFUIPlugin;
-import org.eclipse.jst.pagedesigner.jsf.ui.converter.DTTagConverter;
 import org.eclipse.swt.graphics.Image;
 import org.w3c.dom.Element;
 

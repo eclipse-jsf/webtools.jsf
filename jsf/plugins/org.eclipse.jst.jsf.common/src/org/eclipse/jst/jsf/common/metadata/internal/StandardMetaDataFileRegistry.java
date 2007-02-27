@@ -239,6 +239,19 @@ class StandardMetaDataFilesProvider implements IMetaDataSourceModelProvider {
 				}
 				
 			};
+		} else if (klass == IClassLoaderProvider.class){
+			return new IClassLoaderProvider(){
+
+				public Class loadClass(String className) {
+					String bundleID = mdp.getFileLocator().getFileInfo().getBundleId();
+					try {
+						return Platform.getBundle(bundleID).loadClass(className);
+					} catch (ClassNotFoundException e) {
+						return null;
+					}
+				}
+				
+			};
 		}
 		return null;
 	}

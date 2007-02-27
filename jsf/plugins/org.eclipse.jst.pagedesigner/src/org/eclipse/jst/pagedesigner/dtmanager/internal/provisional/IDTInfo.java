@@ -12,6 +12,7 @@ package org.eclipse.jst.pagedesigner.dtmanager.internal.provisional;
 
 import java.util.List;
 
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
 import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.TagConvertInfo;
 import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.TagDecorateInfo;
 
@@ -43,5 +44,12 @@ public interface IDTInfo {
 	 * @return TagDecorateInfo instance matching specified ID.
 	 */
 	public TagDecorateInfo getTagDecorateInfo(String id);
+
+	/**
+	 * Gets the Trait instance that was queried to load the metadata.
+	 * 
+	 * @return Trait instance that was queried to load the metadata.
+	 */
+	public Trait getTrait();
 
 }

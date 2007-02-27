@@ -13,6 +13,7 @@ package org.eclipse.jst.pagedesigner.dtmanager.internal.provisional;
 import org.eclipse.jst.pagedesigner.converter.ConverterFactoryRegistry;
 import org.eclipse.jst.pagedesigner.converter.IConverterFactory;
 import org.eclipse.jst.pagedesigner.converter.ITagConverter;
+import org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.DTTagConverterFactory;
 import org.eclipse.jst.pagedesigner.utils.CMUtil;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMDocument;
 import org.w3c.dom.Element;
@@ -25,7 +26,23 @@ import org.w3c.dom.Element;
  */
 public class DTManager {
 
+	private static DTManager instance;
 	private IDTInfoFactory dtInfoFactory;
+
+	private DTManager() {
+	}
+
+	/**
+	 * Gets the singleton DTManager instance.
+	 * 
+	 * @return The singleton DTManager instance.
+	 */
+	public static synchronized DTManager getInstance() {
+		if (instance == null) {
+			instance = new DTManager();
+		}
+		return instance;
+	}
 
 	/**
 	 * Gets an ITagConverter instance for the specified Element and mode.
@@ -60,9 +77,8 @@ public class DTManager {
 	 * @return An IConverterFactory instance for the specified namespace URI.
 	 */
 	protected IConverterFactory getTagConverterFactory(String nsURI) {
-		IConverterFactory tagConverterFactory = null;
-		//TODO: return DTTagConverterFactory
-		return tagConverterFactory;
+		//TODO: future - expand to first look for registered factories
+		return new DTTagConverterFactory();
 	}
 
 	/**

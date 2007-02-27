@@ -8,7 +8,7 @@
  * Contributors:
  *    Ian Trimble - initial API and implementation
  *******************************************************************************/ 
-package org.eclipse.jst.pagedesigner.jsf.ui.converter;
+package org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional;
 
 import org.eclipse.jst.pagedesigner.IJSFConstants;
 import org.eclipse.jst.pagedesigner.converter.IConverterFactory;
@@ -19,7 +19,6 @@ import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.Resolv
 import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.TagDecorateInfo;
 import org.eclipse.jst.pagedesigner.dtmanager.internal.provisional.DTManager;
 import org.eclipse.jst.pagedesigner.dtmanager.internal.provisional.IDTInfo;
-import org.eclipse.jst.pagedesigner.jsf.ui.util.JSFUIPluginResourcesUtil;
 import org.eclipse.jst.pagedesigner.preview.PageExpressionContext;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -35,11 +34,11 @@ public class DTTagConverterDecorator implements ITagConverterDecorator {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jst.pagedesigner.jsf.ui.converter.ITagConverterDecorator#decorate(org.eclipse.jst.pagedesigner.converter.ITagConverter)
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.ITagConverterDecorator#decorate(org.eclipse.jst.pagedesigner.converter.ITagConverter)
 	 */
 	public void decorate(ITagConverter tagConverter) {
 		if (!(tagConverter instanceof DTTagConverter)) {
-			throw new IllegalArgumentException(JSFUIPluginResourcesUtil.getInstance().getString("Error.DTTagConverterDecorator.NotDTTagConverterInstance"));
+			throw new IllegalArgumentException("ITagConverter argument must be an instance of DTTagConverter");
 		}
 		DTTagConverter dtTagConverter = (DTTagConverter)tagConverter;
 		if (tagConverter.getResultElement() == null) {
@@ -47,13 +46,9 @@ public class DTTagConverterDecorator implements ITagConverterDecorator {
 		}
 
 		if (dtTagConverter.getMode() == IConverterFactory.MODE_DESIGNER) {
-			if (!decorateFromDTInfo(dtTagConverter, "vpd-decorate-design")) {
-				//decorateForDesignMode(dtTagConverter);
-			}
+			decorateFromDTInfo(dtTagConverter, "vpd-decorate-design");
 		} else if (dtTagConverter.getMode() == IConverterFactory.MODE_PREVIEW) {
-			if (!decorateFromDTInfo(dtTagConverter, "vpd-decorate-preview")) {
-				//decorateForPreviewMode(dtTagConverter);
-			}
+			decorateFromDTInfo(dtTagConverter, "vpd-decorate-preview");
 		}
 	}
 
@@ -69,7 +64,7 @@ public class DTTagConverterDecorator implements ITagConverterDecorator {
 	protected boolean decorateFromDTInfo(DTTagConverter dtTagConverter, String tagDecorateInfoID) {
 		boolean processed = false;
 		Element srcElement = dtTagConverter.getHostElement();
-		DTManager dtManager = new DTManager();
+		DTManager dtManager = DTManager.getInstance();
 		IDTInfo dtInfo = dtManager.getDTInfo(srcElement);
 		if (dtInfo != null) {
 			TagDecorateInfo tdInfo = dtInfo.getTagDecorateInfo(tagDecorateInfoID);
@@ -97,88 +92,6 @@ public class DTTagConverterDecorator implements ITagConverterDecorator {
 			}
 		}
 		return processed;
-	}
-
-	/**
-	 * Performs decoration of the specified DTTagConverter instance for the
-	 * Visual Page Designer's "Design" mode.
-	 * 
-	 * @param dtTagConverter DTTagConverter instance.
-	 */
-	protected void decorateForDesignMode(DTTagConverter dtTagConverter) {
-		Element srcElement = dtTagConverter.getHostElement();
-
-		TagIdentifier srcTagIdentifier =
-			TagIdentifierFactory.createDocumentTagWrapper(srcElement);
-
-		if (IJSFConstants.TAG_IDENTIFIER_VIEW.isSameTagType(srcTagIdentifier)) {
-			dtTagConverter.setNeedBorderDecorator(true);
-		} else if (IJSFConstants.TAG_IDENTIFIER_FACET.isSameTagType(srcTagIdentifier)) {
-			dtTagConverter.setMinWidth(10);
-			dtTagConverter.setMinHeight(10);
-			dtTagConverter.setMultiLevel(true);
-			dtTagConverter.setNeedBorderDecorator(true);
-		} else if (IJSFConstants.TAG_IDENTIFIER_VERBATIM.isSameTagType(srcTagIdentifier)) {
-			dtTagConverter.setMinWidth(10);
-			dtTagConverter.setMinHeight(10);
-			dtTagConverter.setMultiLevel(true);
-			dtTagConverter.setNeedBorderDecorator(true);
-		} else if (IJSFConstants.TAG_IDENTIFIER_FORM.isSameTagType(srcTagIdentifier)) {
-			dtTagConverter.setNeedBorderDecorator(true);
-        } else if (IJSFConstants.TAG_IDENTIFIER_INPUTTEXT.isSameTagType(srcTagIdentifier)) {
-			dtTagConverter.setMultiLevel(true);
-			dtTagConverter.setWidget(true);
-			setNonVisualChildElements(dtTagConverter, srcElement);
-        } else if (IJSFConstants.TAG_IDENTIFIER_INPUTSECRET.isSameTagType(srcTagIdentifier)) {
-			dtTagConverter.setMultiLevel(true);
-			dtTagConverter.setWidget(true);
-			setNonVisualChildElements(dtTagConverter, srcElement);
-        } else if (IJSFConstants.TAG_IDENTIFIER_INPUTTEXTAREA.isSameTagType(srcTagIdentifier)) {
-			dtTagConverter.setMultiLevel(true);
-			dtTagConverter.setWidget(true);
-			setNonVisualChildElements(dtTagConverter, srcElement);
-        } else if (IJSFConstants.TAG_IDENTIFIER_OUTPUTTEXT.isSameTagType(srcTagIdentifier)) {
-			dtTagConverter.setNeedBorderDecorator(true);
-			dtTagConverter.setMultiLevel(true);
-			dtTagConverter.setWidget(true);
-			setNonVisualChildElements(dtTagConverter, srcElement);
-        } else if (IJSFConstants.TAG_IDENTIFIER_OUTPUTLABEL.isSameTagType(srcTagIdentifier)) {
-			dtTagConverter.setNeedBorderDecorator(true);
-			dtTagConverter.setMultiLevel(true);
-			dtTagConverter.setWidget(true);
-			setNonVisualChildElements(dtTagConverter, srcElement);
-        } else if (IJSFConstants.TAG_IDENTIFIER_GRAPHICIMAGE.isSameTagType(srcTagIdentifier)) {
-        	dtTagConverter.setMultiLevel(true);
-        	dtTagConverter.setWidget(true);
-        	resolveAttributeValue(dtTagConverter.getResultElement(), "src");
-		} else if (IJSFConstants.TAG_IDENTIFIER_PANEL_GRID.isSameTagType(srcTagIdentifier)) {
-			dtTagConverter.setMultiLevel(true);
-			dtTagConverter.setNeedBorderDecorator(true);
-			dtTagConverter.setNeedTableDecorator(true);
-		}
-	}
-
-	/**
-	 * Performs decoration of the specified DTTagConverter instance for the
-	 * Visual Page Designer's "Preview" mode.
-	 * 
-	 * @param dtTagConverter DTTagConverter instance.
-	 */
-	protected void decorateForPreviewMode(DTTagConverter dtTagConverter) {
-		Element srcElement = dtTagConverter.getHostElement();
-
-		TagIdentifier srcTagIdentifier =
-			TagIdentifierFactory.createDocumentTagWrapper(srcElement);
-
-		if (IJSFConstants.TAG_IDENTIFIER_INPUTTEXTAREA.isSameTagType(srcTagIdentifier)) {
-			resolveChildText(dtTagConverter.getResultElement());
-		} else if (IJSFConstants.TAG_IDENTIFIER_OUTPUTTEXT.isSameTagType(srcTagIdentifier)) {
-			resolveChildText(dtTagConverter.getResultElement());
-		} else if (IJSFConstants.TAG_IDENTIFIER_OUTPUTLABEL.isSameTagType(srcTagIdentifier)) {
-			resolveChildText(dtTagConverter.getResultElement());
-        } else if (IJSFConstants.TAG_IDENTIFIER_GRAPHICIMAGE.isSameTagType(srcTagIdentifier)) {
-        	resolveAttributeValue(dtTagConverter.getResultElement(), "src");
-		}
 	}
 
 	/**

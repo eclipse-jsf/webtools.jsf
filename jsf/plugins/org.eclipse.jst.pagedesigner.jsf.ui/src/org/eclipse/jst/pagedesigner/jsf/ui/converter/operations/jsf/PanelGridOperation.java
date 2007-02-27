@@ -16,13 +16,13 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import org.eclipse.jst.pagedesigner.converter.ConvertPosition;
-import org.eclipse.jst.pagedesigner.jsf.ui.converter.ITransformOperation;
-import org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.AbstractTransformOperation;
-import org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.AppendChildElementOperation;
-import org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.CopyAllAttributesOperation;
-import org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.CreateAttributeOperation;
-import org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.CreateElementOperation;
-import org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.RenameAttributeOperation;
+import org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.ITransformOperation;
+import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.AbstractTransformOperation;
+import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.AppendChildElementOperation;
+import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.CopyAllAttributesOperation;
+import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.CreateAttributeOperation;
+import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.CreateElementOperation;
+import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.RenameAttributeOperation;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -41,7 +41,7 @@ public class PanelGridOperation extends AbstractTransformOperation {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.AbstractTransformOperation#transform(org.w3c.dom.Element, org.w3c.dom.Element)
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.AbstractTransformOperation#transform(org.w3c.dom.Element, org.w3c.dom.Element)
 	 */
 	public Element transform(Element srcElement, Element curElement) {
 		Element tableElement = null;
