@@ -8,7 +8,13 @@
    <extension-point id="externalcontext" name="External Context Ext Point" schema="schema/externalcontext.exsd"/>
    <extension-point id="AttributeValueRuntimeTypes" name="AttributeValueRuntimeTypes" schema="schema/AttributeValueRuntimeTypes.exsd"/>
    <extension-point id="MetaDataEnabledFeatures" name="MetaDataEnabledFeatures" schema="schema/MetaDataEnabledFeatures.exsd"/>
-   
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+    	<package 
+      	 	uri = "http://org.eclipse.jst.jsf.core/constraints.ecore" 
+       		class = "org.eclipse.jst.jsf.validation.internal.constraints.ConstraintsPackage"
+       		genModel = "model/constraints.genmodel" /> 
+   </extension>   
   <!-- JSF Project Facets -->
 	<extension
        id="org.eclipse.jst.jsf.project.facet"

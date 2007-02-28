@@ -58,4 +58,8 @@ Export-Package: org.eclipse.jst.jsf.core.internal;x-friends:="org.eclipse.jst.js
  org.eclipse.jst.jsf.validation.internal.el.diagnostics;x-friends:="org.eclipse.jst.jsf.validation.el.tests",
  org.eclipse.jst.jsf.validation.internal;x-friends:="org.eclipse.jst.jsf.ui",
  org.eclipse.jst.jsf.validation.internal.el;x-friends:="org.eclipse.jst.jsf.ui",
- org.eclipse.jst.jsf.validation.internal.appconfig;x-friends:="org.eclipse.jst.jsf.core.tests"
+ org.eclipse.jst.jsf.validation.internal.appconfig;x-friends:="org.eclipse.jst.jsf.core.tests",
+ org.eclipse.jst.jsf.core.internal.provisional.tagmatcher,
+ org.eclipse.jst.jsf.core.internal.tld;x-friends:="org.eclipse.jst.pagedesigner",
+ org.eclipse.jst.jsf.core.internal.provisional.set.constraint,
+ org.eclipse.jst.jsf.core.internal.provisional.set.mapping

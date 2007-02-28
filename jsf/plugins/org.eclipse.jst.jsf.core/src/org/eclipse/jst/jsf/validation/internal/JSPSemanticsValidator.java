@@ -12,6 +12,7 @@
 package org.eclipse.jst.jsf.validation.internal;
 
 import java.io.IOException;
+import java.text.MessageFormat;
 import java.util.Iterator;
 import java.util.List;
 
@@ -26,19 +27,37 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
+import org.eclipse.jst.jsf.common.internal.provisional.dom.TagIdentifier;
 import org.eclipse.jst.jsf.common.internal.types.CompositeType;
 import org.eclipse.jst.jsf.common.internal.types.TypeComparator;
+import org.eclipse.jst.jsf.common.metadata.internal.DomainLoadingStrategyRegistry;
+import org.eclipse.jst.jsf.common.metadata.internal.MetaDataModelContextImpl;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IMetaDataModelContext;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.MetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.sets.internal.provisional.AxiomaticSet;
+import org.eclipse.jst.jsf.common.sets.internal.provisional.ConcreteAxiomaticSet;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.IDOMContextResolver;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.IStructuredDocumentContextResolverFactory;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.ITaglibContextResolver;
 import org.eclipse.jst.jsf.context.structureddocument.internal.provisional.IStructuredDocumentContext;
 import org.eclipse.jst.jsf.context.structureddocument.internal.provisional.IStructuredDocumentContextFactory;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
+import org.eclipse.jst.jsf.core.internal.provisional.set.constraint.MemberConstraint;
+import org.eclipse.jst.jsf.core.internal.provisional.set.mapping.ElementToTagIdentifierMapping;
+import org.eclipse.jst.jsf.core.internal.provisional.tagmatcher.EvaluationException;
+import org.eclipse.jst.jsf.core.internal.provisional.tagmatcher.InvalidExpressionException;
+import org.eclipse.jst.jsf.core.internal.provisional.tagmatcher.XPathMatchingAlgorithm;
+import org.eclipse.jst.jsf.core.internal.tld.TagIdentifierFactory;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.MetaDataEnabledProcessingFactory;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.ELIsNotValidException;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IValidELValues;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IValidValues;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IValidationMessage;
+import org.eclipse.jst.jsf.validation.internal.constraints.ContainsTagConstraint;
+import org.eclipse.jst.jsf.validation.internal.constraints.TagId;
+import org.eclipse.jst.jsf.validation.internal.constraints.TagSet;
 import org.eclipse.jst.jsf.validation.internal.el.ELExpressionValidator;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.ValidationMessageFactory;
@@ -57,6 +76,8 @@ import org.eclipse.wst.validation.internal.provisional.core.IMessage;
 import org.eclipse.wst.validation.internal.provisional.core.IReporter;
 import org.eclipse.wst.validation.internal.provisional.core.IValidationContext;
 import org.eclipse.wst.xml.core.internal.regions.DOMRegionContext;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 /**
  * A JSP page validator that makes use of the JSF metadata processing framework so that JSP page
@@ -73,6 +94,7 @@ public class JSPSemanticsValidator extends JSPValidator implements ISourceValida
 		String value = Platform.getDebugOption("org.eclipse.jst.jsf.validation.internal.el/debug/jspsemanticsvalidator"); //$NON-NLS-1$
 		DEBUG = value != null && value.equalsIgnoreCase("true"); //$NON-NLS-1$
 	}
+    private final static ElementToTagIdentifierMapping elem2TagIdMapper = new ElementToTagIdentifierMapping();
 	private IDocument fDocument;
 
 	/* (non-Javadoc)
@@ -168,8 +190,15 @@ public class JSPSemanticsValidator extends JSPValidator implements ISourceValida
 				resolver = IStructuredDocumentContextResolverFactory.INSTANCE.getDOMContextResolver(context);
 				if	(type == DOMRegionContext.XML_TAG_NAME) {					
 					tagLibResolver = IStructuredDocumentContextResolverFactory.INSTANCE.getTaglibContextResolver(context);
+                    Node node = resolver.getNode();
 					tagName = resolver.getNode().getLocalName();
 					uri = tagLibResolver.getTagURIForNodeName(resolver.getNode());
+                    
+                    if (node instanceof Element && uri != null)
+                    {
+                        validateContainment((Element)node, uri, tagName, reporter, file, context);
+                    }
+                    
 					if (DEBUG)
 						System.out.println(addDebugSpacer(1)+"tagName= "+ (tagName!= null ? tagName : "null") +": uri= "+(uri != null ? uri : "null") );
 				} 
@@ -485,5 +514,101 @@ public class JSPSemanticsValidator extends JSPValidator implements ISourceValida
         }
 
         return prefs.getElPrefs().isEnableBuildValidation();
+    }
+    
+    private void validateContainment(Element node, String uri, String tagName, IReporter reporter, IFile file, IStructuredDocumentContext context)
+    {
+        final IMetaDataModelContext modelContext = 
+            new MetaDataModelContextImpl(file.getProject()
+                , DomainLoadingStrategyRegistry.TAGLIB_DOMAIN, uri);
+        final Entity entity = 
+            MetaDataQueryHelper.getEntity(modelContext, tagName);
+        if (entity != null)
+        {
+            final Trait trait = 
+                MetaDataQueryHelper.getTrait
+                    (entity, "containment-constraint");
+            
+            if (trait != null)
+            {
+                final ContainsTagConstraint tagConstraint = 
+                    (ContainsTagConstraint) trait.getValue();
+
+                final String algorithm = tagConstraint.getSetGenerator().getAlgorithm();
+                
+                // TODO: need generalized factory mechanism for registering and constructing
+                // algorithms.
+                if (!"xpath".equals(algorithm))
+                {
+                    return;
+                }
+                
+                final String expr = tagConstraint.getSetGenerator().getExpression();
+                
+                // TODO: optimize on the expression and cache for reuse
+                final XPathMatchingAlgorithm  xpathAlg = 
+                    new XPathMatchingAlgorithm(expr);
+                
+                AxiomaticSet set = null;
+                
+                try
+                {
+                    set = xpathAlg.evaluate(node);
+                    // map dom nodes to tag identifiers
+                    set = elem2TagIdMapper.map(set);
+                }
+                catch(InvalidExpressionException  e)
+                {
+                    JSFCorePlugin.log(e, "Problem with expression: "+expr+" on node "+node);
+                    return;
+                }
+                catch (EvaluationException  e)
+                {
+                    JSFCorePlugin.log(e, "Problem evaluating expression: "+expr+" on node "+node);
+                    return;
+                }
+
+                final TagSet constraintData = tagConstraint.getSatisfiesSet();
+                final AxiomaticSet constraintSet = new ConcreteAxiomaticSet();
+                for (final Iterator it = constraintData.getTags().iterator(); it.hasNext();)
+                {
+                    final TagId tagId = (TagId) it.next();
+                    constraintSet.add(TagIdentifierFactory.createJSPTagWrapper(tagId.getUri(), tagId.getName()));
+                }
+                final MemberConstraint memberConstraint = new MemberConstraint(constraintSet);
+                final Diagnostic diag = memberConstraint.isSatisfied(set);
+
+                if (diag.getSeverity() != Diagnostic.OK)
+                {
+                    final String messagePattern = "Tag {0} is missing required parent tag \"{1}\" ({2})";
+
+                    List data = diag.getData();
+
+                    for (Iterator it = data.iterator(); it.hasNext();)
+                    {
+                        TagIdentifier missingParent = (TagIdentifier) it.next();
+
+                        IMessage message =
+                            createTagValidationMessage(context, node.getNodeName(), 
+                                IMessage.NORMAL_SEVERITY, 
+                                MessageFormat.format(messagePattern, new Object[]{node.getNodeName(), missingParent.getTagName(), missingParent.getUri()})
+                                , file);
+                        reporter.addMessage(this, message);
+                    }
+                }
+            }
+        }
+    }
+    
+    // TODO: need a diagnostic factory
+    private IMessage createTagValidationMessage(IStructuredDocumentContext context, String attributeValue, int severity, String msg, IFile file)
+    {
+        IMessage message = new LocalizedMessage(severity, msg, file);                       
+        final int start = context.getDocumentPosition();
+        final int length = attributeValue.length();
+        
+        message.setOffset(start);
+        message.setLength(length);
+        return message;
     }
 }
