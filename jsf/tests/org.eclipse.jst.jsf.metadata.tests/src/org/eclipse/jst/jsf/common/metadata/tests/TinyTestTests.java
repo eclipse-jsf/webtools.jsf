@@ -1,0 +1,47 @@
+package org.eclipse.jst.jsf.common.metadata.tests;
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.xml.type.AnyType;
+import org.eclipse.jst.jsf.common.metadata.internal.MetaDataModelContextImpl;
+import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.Model;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IMetaDataModelContext;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.MetaDataQueryHelper;
+
+import junit.framework.TestCase;
+
+public class TinyTestTests extends AbstractBaseMetaDataTestCase {
+	protected IMetaDataModelContext baseContext;
+	Model model;
+	Trait trait;
+	
+	public void setUp() throws Exception {
+		super.setUp();
+		String uri = "http://org.eclipse.jsf/tinytest";
+		
+		baseContext = new MetaDataModelContextImpl(project, domain, uri);
+		model = MetaDataQueryHelper.getModel(baseContext);
+		assertNotNull(model);
+	}
+
+	public void testGetValue() {
+		Entity entity = MetaDataQueryHelper.getEntity(baseContext, "A/copy1");
+		assertNotNull(entity);
+		trait = MetaDataQueryHelper.getTrait(entity, "model-trait");
+		assertNotNull(trait);
+		assertNotNull(trait.getValue());
+		assertTrue(trait.getValue() instanceof AnyType);
+		assertEquals("ATrait", TraitValueHelper.getValueAsString(trait));
+		
+		entity = MetaDataQueryHelper.getEntity(baseContext, "B/copy1");
+		assertNotNull(entity);
+		trait = MetaDataQueryHelper.getTrait(entity, "model-trait");
+		assertNotNull(trait);
+		assertNotNull(trait.getValue());
+		assertTrue(trait.getValue() instanceof AnyType);
+		assertEquals("ATrait", TraitValueHelper.getValueAsString(trait));
+	}
+
+}

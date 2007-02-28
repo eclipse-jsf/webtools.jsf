@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadatamodel 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" 
+	xmlns:mdt="http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore"  
+	id="http://org.eclipse.jsf/tinytest"
+	type="tagFile">
+	
+	<entity id="A">
+		<include-entity-group id="eg1"/>		
+	</entity>
+	<entity id="B">
+		<include-entity-group id="eg1"/>		
+	</entity>
+	<entityGroup id="eg1">
+		<entity id="copy1">
+		<trait id="model-trait">
+			<value>ATrait</value>
+		</trait>
+		</entity>
+	</entityGroup>
+</metadatamodel>

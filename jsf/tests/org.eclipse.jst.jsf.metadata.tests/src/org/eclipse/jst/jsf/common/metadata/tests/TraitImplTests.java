@@ -28,7 +28,7 @@ public class TraitImplTests extends AbstractBaseMetaDataTestCase {
 	public void testGetValue() {
 		assertNotNull(trait.getValue());
 		assertTrue(trait.getValue() instanceof EObject);
-		assertEquals("a", TraitValueHelper.getValue(trait));
+		assertEquals("a", TraitValueHelper.getValueAsString(trait));
 	}
 
 	public void testSetValue() {
@@ -36,9 +36,9 @@ public class TraitImplTests extends AbstractBaseMetaDataTestCase {
 	}
 
 	public void testGetSourceModel() {
-		assertNotNull(trait.getSourceModel());
-		assertTrue(trait.getSourceModel() instanceof Model);
-		assertEquals(model, trait.getSourceModel());
+		assertNotNull(trait.getSourceModelProvider());
+		assertTrue(trait.getSourceModelProvider().getSourceModel() instanceof Model);
+		assertEquals(model, trait.getSourceModelProvider().getSourceModel());
 	}
 
 	public void testSetSourceModel() {

@@ -27,7 +27,10 @@
             uri=" http://org.eclipse.jsf/metadataprocessing"/>
       <standardMetaDataFile
             location="/testfiles/metadata/jsf_tagprocessing.xml"
-            uri="http://org.eclipse.jsf/tagprocessing"/>                                                    
+            uri="http://org.eclipse.jsf/tagprocessing"/>    
+      <standardMetaDataFile
+            location="/testfiles/metadata/jsf_tinytest.xml"
+            uri="http://org.eclipse.jsf/tinytest"/>                                                            
    </extension>
    <extension
          point="org.eclipse.jst.jsf.core.AttributeValueRuntimeTypes">

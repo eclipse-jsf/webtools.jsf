@@ -78,7 +78,7 @@ public class MetaDataQueryHelperTests extends AbstractBaseMetaDataTestCase {
 		assertNull(model);
 		
 		model = MetaDataQueryHelper.getModel(negativeContextBadDomain);
-		assertNull(model);
+		assertNotNull(model);//will use default strategy to load
 	}
 
 	public void testGetEntityIMetaDataModelContextString() {

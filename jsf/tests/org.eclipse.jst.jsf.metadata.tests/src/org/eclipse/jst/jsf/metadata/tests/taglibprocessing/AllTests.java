@@ -26,6 +26,7 @@ public class AllTests {
 		suite.addTestSuite(LongTypeTest.class);
 		suite.addTestSuite(DoubleTypeTest.class);
 		suite.addTestSuite(JavaClassTypeTest.class);
+		suite.addTestSuite(JSFHTMLTestCase.class);
 		//$JUnit-END$
 		return suite;
 	}

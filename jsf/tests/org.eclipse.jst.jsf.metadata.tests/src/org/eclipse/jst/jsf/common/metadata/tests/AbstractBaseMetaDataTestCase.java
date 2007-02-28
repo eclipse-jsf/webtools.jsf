@@ -33,7 +33,7 @@ public abstract class AbstractBaseMetaDataTestCase extends TestCase {
 	protected WebProjectTestEnvironment projectTestEnvironment;
 	protected IStructuredDocumentContext docContext;
 	
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 	    super.setUp();
 	    
 	    JSFTestUtil.setInternetProxyPreferences(true, "www-proxy.us.oracle.com", "80");
