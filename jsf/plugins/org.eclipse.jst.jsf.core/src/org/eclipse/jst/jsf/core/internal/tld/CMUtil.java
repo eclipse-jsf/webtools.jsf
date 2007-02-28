@@ -9,11 +9,10 @@
  * Contributors:
  *     Sybase, Inc. - initial API and implementation
  *******************************************************************************/
-package org.eclipse.jst.pagedesigner.utils;
+package org.eclipse.jst.jsf.core.internal.tld;
 
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDDocument;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDElementDeclaration;
-import org.eclipse.jst.pagedesigner.IJMTConstants;
 import org.eclipse.wst.html.core.internal.contentmodel.HTMLElementDeclaration;
 import org.eclipse.wst.html.core.internal.provisional.HTMLCMProperties;
 import org.eclipse.wst.sse.core.internal.provisional.INodeNotifier;
@@ -29,12 +28,12 @@ import org.w3c.dom.Element;
  * 
  * @author mengbo
  */
-public class CMUtil {
+public final class CMUtil {
 	/**
 	 * If the element is a custom tag, get the URI of it. If the element is a
 	 * standard JSP tag, return null. If is not jsp tag, then return null
-	 * 
-	 * @param element
+	 * @param decl
+     *  
 	 * @return
 	 */
 	public static String getTagURI(CMElementDeclaration decl) {
@@ -65,6 +64,10 @@ public class CMUtil {
 		return b.booleanValue();
 	}
 
+	/**
+	 * @param decl
+	 * @return true if the element declartion is a non-JSP html element
+	 */
 	public static boolean isHTML(CMElementDeclaration decl) {
 		if (!isJSP(decl) && (decl instanceof HTMLElementDeclaration)) {
 			return true;
@@ -94,6 +97,10 @@ public class CMUtil {
 		return mqa.getModelQuery().getCMElementDeclaration(element);
 	}
 
+	/**
+	 * @param element
+	 * @return the TLDElementDeclaration for element or null if not found
+	 */
 	public static TLDElementDeclaration getTLDElementDeclaration(Element element) {
 		CMNode decl = getElementDeclaration(element);
 		if (decl instanceof CMNodeWrapper) {
@@ -118,9 +125,9 @@ public class CMUtil {
 		}
 
 		if (isJSP(decl)) {
-			return IJMTConstants.URI_JSP;
+			return ITLDConstants.URI_JSP;
 		} else if (isHTML(decl)) {
-			return IJMTConstants.URI_HTML;
+			return ITLDConstants.URI_HTML;
 		}
 
 		return getTagURI(decl);
@@ -140,4 +147,9 @@ public class CMUtil {
 				&& contentType != CMElementDeclaration.EMPTY;
 
 	}
+    
+    private CMUtil()
+    {
+        // util class, no external instantiation
+    }
 }
