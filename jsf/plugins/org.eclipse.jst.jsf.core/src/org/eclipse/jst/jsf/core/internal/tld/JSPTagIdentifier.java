@@ -1,4 +1,6 @@
-package org.eclipse.jst.pagedesigner.dom;
+package org.eclipse.jst.jsf.core.internal.tld;
+
+import org.eclipse.jst.jsf.common.internal.provisional.dom.TagIdentifier;
 
 /**
  * A tag wrapper for a JSP tag.
@@ -11,6 +13,10 @@ package org.eclipse.jst.pagedesigner.dom;
     private final String _uri;
     private final String _tagName;
     
+    /**
+     * @param uri
+     * @param tagName
+     */
     public JSPTagIdentifier(final String uri, final String tagName)
     {
         _uri = uri;

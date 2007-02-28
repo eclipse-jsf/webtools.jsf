@@ -1,6 +1,6 @@
-package org.eclipse.jst.pagedesigner.dom;
+package org.eclipse.jst.jsf.core.internal.tld;
 
-import org.eclipse.jst.pagedesigner.utils.CMUtil;
+import org.eclipse.jst.jsf.common.internal.provisional.dom.TagIdentifier;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMElementDeclaration;
 import org.w3c.dom.Element;
 
@@ -15,6 +15,9 @@ import org.w3c.dom.Element;
 {
     private final Element  _element;
     
+    /**
+     * @param element
+     */
     public DocumentTagIdentifier(Element element)
     {
         _element = element;
@@ -48,6 +51,9 @@ import org.w3c.dom.Element;
         return false;
     }
 
+    /**
+     * @return the element declaration for this tag
+     */
     protected final CMElementDeclaration getElementDeclaration()
     {
         return CMUtil.getElementDeclaration(_element);
