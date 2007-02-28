@@ -10,11 +10,8 @@
  *******************************************************************************/ 
 package org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional;
 
-import org.eclipse.jst.pagedesigner.IJSFConstants;
 import org.eclipse.jst.pagedesigner.converter.IConverterFactory;
 import org.eclipse.jst.pagedesigner.converter.ITagConverter;
-import org.eclipse.jst.pagedesigner.dom.TagIdentifier;
-import org.eclipse.jst.pagedesigner.dom.TagIdentifierFactory;
 import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.ResolveAttributeValue;
 import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.TagDecorateInfo;
 import org.eclipse.jst.pagedesigner.dtmanager.internal.provisional.DTManager;
@@ -41,7 +38,7 @@ public class DTTagConverterDecorator implements ITagConverterDecorator {
 			throw new IllegalArgumentException("ITagConverter argument must be an instance of DTTagConverter");
 		}
 		DTTagConverter dtTagConverter = (DTTagConverter)tagConverter;
-		if (tagConverter.getResultElement() == null) {
+		if (tagConverter.getResultElement() == null && tagConverter.isVisualByHTML()) {
 			createUnknownTagRepresentation(dtTagConverter);
 		}
 
@@ -59,10 +56,8 @@ public class DTTagConverterDecorator implements ITagConverterDecorator {
 	 * @param dtTagConverter DTTagConverter instance.
 	 * @param tagDecorateInfoID ID of the TagDecorateInfo to be located in
 	 * metadata.
-	 * @return true if successfully processed, else false.
 	 */
-	protected boolean decorateFromDTInfo(DTTagConverter dtTagConverter, String tagDecorateInfoID) {
-		boolean processed = false;
+	protected void decorateFromDTInfo(DTTagConverter dtTagConverter, String tagDecorateInfoID) {
 		Element srcElement = dtTagConverter.getHostElement();
 		DTManager dtManager = DTManager.getInstance();
 		IDTInfo dtInfo = dtManager.getDTInfo(srcElement);
@@ -88,10 +83,8 @@ public class DTTagConverterDecorator implements ITagConverterDecorator {
 						resolveAttributeValue(dtTagConverter.getResultElement(), attributeName);
 					}
 				}
-				processed = true;
 			}
 		}
-		return processed;
 	}
 
 	/**
