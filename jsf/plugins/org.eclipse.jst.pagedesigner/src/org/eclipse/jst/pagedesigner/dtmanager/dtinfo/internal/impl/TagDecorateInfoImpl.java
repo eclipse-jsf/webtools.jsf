@@ -32,6 +32,8 @@ import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.TagDec
  *   <li>{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.impl.TagDecorateInfoImpl#isMultiLevel <em>Multi Level</em>}</li>
  *   <li>{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.impl.TagDecorateInfoImpl#isNeedBorderDecorator <em>Need Border Decorator</em>}</li>
  *   <li>{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.impl.TagDecorateInfoImpl#isNeedTableDecorator <em>Need Table Decorator</em>}</li>
+ *   <li>{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.impl.TagDecorateInfoImpl#isNonVisual <em>Non Visual</em>}</li>
+ *   <li>{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.impl.TagDecorateInfoImpl#getNonVisualImagePath <em>Non Visual Image Path</em>}</li>
  *   <li>{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.impl.TagDecorateInfoImpl#isResolveChildText <em>Resolve Child Text</em>}</li>
  *   <li>{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.impl.TagDecorateInfoImpl#getResolveAttributeValue <em>Resolve Attribute Value</em>}</li>
  *   <li>{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.impl.TagDecorateInfoImpl#isSetNonVisualChildElements <em>Set Non Visual Child Elements</em>}</li>
@@ -168,6 +170,46 @@ public class TagDecorateInfoImpl extends EObjectImpl implements TagDecorateInfo 
 	 * @ordered
 	 */
 	protected boolean needTableDecorator = NEED_TABLE_DECORATOR_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isNonVisual() <em>Non Visual</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isNonVisual()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean NON_VISUAL_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isNonVisual() <em>Non Visual</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isNonVisual()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean nonVisual = NON_VISUAL_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getNonVisualImagePath() <em>Non Visual Image Path</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNonVisualImagePath()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NON_VISUAL_IMAGE_PATH_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getNonVisualImagePath() <em>Non Visual Image Path</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNonVisualImagePath()
+	 * @generated
+	 * @ordered
+	 */
+	protected String nonVisualImagePath = NON_VISUAL_IMAGE_PATH_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #isResolveChildText() <em>Resolve Child Text</em>}' attribute.
@@ -388,6 +430,48 @@ public class TagDecorateInfoImpl extends EObjectImpl implements TagDecorateInfo 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isNonVisual() {
+		return nonVisual;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setNonVisual(boolean newNonVisual) {
+		boolean oldNonVisual = nonVisual;
+		nonVisual = newNonVisual;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DTInfoPackage.TAG_DECORATE_INFO__NON_VISUAL, oldNonVisual, nonVisual));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getNonVisualImagePath() {
+		return nonVisualImagePath;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setNonVisualImagePath(String newNonVisualImagePath) {
+		String oldNonVisualImagePath = nonVisualImagePath;
+		nonVisualImagePath = newNonVisualImagePath;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DTInfoPackage.TAG_DECORATE_INFO__NON_VISUAL_IMAGE_PATH, oldNonVisualImagePath, nonVisualImagePath));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean isResolveChildText() {
 		return resolveChildText;
 	}
@@ -521,6 +605,10 @@ public class TagDecorateInfoImpl extends EObjectImpl implements TagDecorateInfo 
 				return isNeedBorderDecorator() ? Boolean.TRUE : Boolean.FALSE;
 			case DTInfoPackage.TAG_DECORATE_INFO__NEED_TABLE_DECORATOR:
 				return isNeedTableDecorator() ? Boolean.TRUE : Boolean.FALSE;
+			case DTInfoPackage.TAG_DECORATE_INFO__NON_VISUAL:
+				return isNonVisual() ? Boolean.TRUE : Boolean.FALSE;
+			case DTInfoPackage.TAG_DECORATE_INFO__NON_VISUAL_IMAGE_PATH:
+				return getNonVisualImagePath();
 			case DTInfoPackage.TAG_DECORATE_INFO__RESOLVE_CHILD_TEXT:
 				return isResolveChildText() ? Boolean.TRUE : Boolean.FALSE;
 			case DTInfoPackage.TAG_DECORATE_INFO__RESOLVE_ATTRIBUTE_VALUE:
@@ -557,6 +645,12 @@ public class TagDecorateInfoImpl extends EObjectImpl implements TagDecorateInfo 
 				return;
 			case DTInfoPackage.TAG_DECORATE_INFO__NEED_TABLE_DECORATOR:
 				setNeedTableDecorator(((Boolean)newValue).booleanValue());
+				return;
+			case DTInfoPackage.TAG_DECORATE_INFO__NON_VISUAL:
+				setNonVisual(((Boolean)newValue).booleanValue());
+				return;
+			case DTInfoPackage.TAG_DECORATE_INFO__NON_VISUAL_IMAGE_PATH:
+				setNonVisualImagePath((String)newValue);
 				return;
 			case DTInfoPackage.TAG_DECORATE_INFO__RESOLVE_CHILD_TEXT:
 				setResolveChildText(((Boolean)newValue).booleanValue());
@@ -599,6 +693,12 @@ public class TagDecorateInfoImpl extends EObjectImpl implements TagDecorateInfo 
 			case DTInfoPackage.TAG_DECORATE_INFO__NEED_TABLE_DECORATOR:
 				setNeedTableDecorator(NEED_TABLE_DECORATOR_EDEFAULT);
 				return;
+			case DTInfoPackage.TAG_DECORATE_INFO__NON_VISUAL:
+				setNonVisual(NON_VISUAL_EDEFAULT);
+				return;
+			case DTInfoPackage.TAG_DECORATE_INFO__NON_VISUAL_IMAGE_PATH:
+				setNonVisualImagePath(NON_VISUAL_IMAGE_PATH_EDEFAULT);
+				return;
 			case DTInfoPackage.TAG_DECORATE_INFO__RESOLVE_CHILD_TEXT:
 				setResolveChildText(RESOLVE_CHILD_TEXT_EDEFAULT);
 				return;
@@ -634,6 +734,10 @@ public class TagDecorateInfoImpl extends EObjectImpl implements TagDecorateInfo 
 				return needBorderDecorator != NEED_BORDER_DECORATOR_EDEFAULT;
 			case DTInfoPackage.TAG_DECORATE_INFO__NEED_TABLE_DECORATOR:
 				return needTableDecorator != NEED_TABLE_DECORATOR_EDEFAULT;
+			case DTInfoPackage.TAG_DECORATE_INFO__NON_VISUAL:
+				return nonVisual != NON_VISUAL_EDEFAULT;
+			case DTInfoPackage.TAG_DECORATE_INFO__NON_VISUAL_IMAGE_PATH:
+				return NON_VISUAL_IMAGE_PATH_EDEFAULT == null ? nonVisualImagePath != null : !NON_VISUAL_IMAGE_PATH_EDEFAULT.equals(nonVisualImagePath);
 			case DTInfoPackage.TAG_DECORATE_INFO__RESOLVE_CHILD_TEXT:
 				return resolveChildText != RESOLVE_CHILD_TEXT_EDEFAULT;
 			case DTInfoPackage.TAG_DECORATE_INFO__RESOLVE_ATTRIBUTE_VALUE:
@@ -667,6 +771,10 @@ public class TagDecorateInfoImpl extends EObjectImpl implements TagDecorateInfo 
 		result.append(needBorderDecorator);
 		result.append(", needTableDecorator: ");
 		result.append(needTableDecorator);
+		result.append(", nonVisual: ");
+		result.append(nonVisual);
+		result.append(", nonVisualImagePath: ");
+		result.append(nonVisualImagePath);
 		result.append(", resolveChildText: ");
 		result.append(resolveChildText);
 		result.append(", setNonVisualChildElements: ");

@@ -178,6 +178,34 @@ public interface DTInfoPackage extends EPackage {
 	int OPERATION_FEATURE_COUNT = 2;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.impl.ParameterImpl <em>Parameter</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.impl.ParameterImpl
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.impl.DTInfoPackageImpl#getParameter()
+	 * @generated
+	 */
+	int PARAMETER = 3;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER__VALUE = 0;
+
+	/**
+	 * The number of structural features of the '<em>Parameter</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER_FEATURE_COUNT = 1;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.impl.TagDecorateInfoImpl <em>Tag Decorate Info</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -185,7 +213,7 @@ public interface DTInfoPackage extends EPackage {
 	 * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.impl.DTInfoPackageImpl#getTagDecorateInfo()
 	 * @generated
 	 */
-	int TAG_DECORATE_INFO = 3;
+	int TAG_DECORATE_INFO = 4;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -242,13 +270,31 @@ public interface DTInfoPackage extends EPackage {
 	int TAG_DECORATE_INFO__NEED_TABLE_DECORATOR = 5;
 
 	/**
+	 * The feature id for the '<em><b>Non Visual</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TAG_DECORATE_INFO__NON_VISUAL = 6;
+
+	/**
+	 * The feature id for the '<em><b>Non Visual Image Path</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TAG_DECORATE_INFO__NON_VISUAL_IMAGE_PATH = 7;
+
+	/**
 	 * The feature id for the '<em><b>Resolve Child Text</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TAG_DECORATE_INFO__RESOLVE_CHILD_TEXT = 6;
+	int TAG_DECORATE_INFO__RESOLVE_CHILD_TEXT = 8;
 
 	/**
 	 * The feature id for the '<em><b>Resolve Attribute Value</b></em>' containment reference.
@@ -257,7 +303,7 @@ public interface DTInfoPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAG_DECORATE_INFO__RESOLVE_ATTRIBUTE_VALUE = 7;
+	int TAG_DECORATE_INFO__RESOLVE_ATTRIBUTE_VALUE = 9;
 
 	/**
 	 * The feature id for the '<em><b>Set Non Visual Child Elements</b></em>' attribute.
@@ -266,7 +312,7 @@ public interface DTInfoPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAG_DECORATE_INFO__SET_NON_VISUAL_CHILD_ELEMENTS = 8;
+	int TAG_DECORATE_INFO__SET_NON_VISUAL_CHILD_ELEMENTS = 10;
 
 	/**
 	 * The feature id for the '<em><b>Widget</b></em>' attribute.
@@ -275,7 +321,7 @@ public interface DTInfoPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAG_DECORATE_INFO__WIDGET = 9;
+	int TAG_DECORATE_INFO__WIDGET = 11;
 
 	/**
 	 * The number of structural features of the '<em>Tag Decorate Info</em>' class.
@@ -284,7 +330,7 @@ public interface DTInfoPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TAG_DECORATE_INFO_FEATURE_COUNT = 10;
+	int TAG_DECORATE_INFO_FEATURE_COUNT = 12;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.impl.ResolveAttributeValueImpl <em>Resolve Attribute Value</em>}' class.
@@ -294,7 +340,7 @@ public interface DTInfoPackage extends EPackage {
 	 * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.impl.DTInfoPackageImpl#getResolveAttributeValue()
 	 * @generated
 	 */
-	int RESOLVE_ATTRIBUTE_VALUE = 4;
+	int RESOLVE_ATTRIBUTE_VALUE = 5;
 
 	/**
 	 * The feature id for the '<em><b>Attribute Name</b></em>' attribute.
@@ -313,34 +359,6 @@ public interface DTInfoPackage extends EPackage {
 	 * @ordered
 	 */
 	int RESOLVE_ATTRIBUTE_VALUE_FEATURE_COUNT = 1;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.impl.ParameterImpl <em>Parameter</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.impl.ParameterImpl
-	 * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.impl.DTInfoPackageImpl#getParameter()
-	 * @generated
-	 */
-	int PARAMETER = 5;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETER__VALUE = 0;
-
-	/**
-	 * The number of structural features of the '<em>Parameter</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETER_FEATURE_COUNT = 1;
 
 
 	/**
@@ -440,6 +458,27 @@ public interface DTInfoPackage extends EPackage {
 	EReference getOperation_Parameters();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.Parameter <em>Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Parameter</em>'.
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.Parameter
+	 * @generated
+	 */
+	EClass getParameter();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.Parameter#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.Parameter#getValue()
+	 * @see #getParameter()
+	 * @generated
+	 */
+	EAttribute getParameter_Value();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.TagDecorateInfo <em>Tag Decorate Info</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -516,6 +555,28 @@ public interface DTInfoPackage extends EPackage {
 	EAttribute getTagDecorateInfo_NeedTableDecorator();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.TagDecorateInfo#isNonVisual <em>Non Visual</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Non Visual</em>'.
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.TagDecorateInfo#isNonVisual()
+	 * @see #getTagDecorateInfo()
+	 * @generated
+	 */
+	EAttribute getTagDecorateInfo_NonVisual();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.TagDecorateInfo#getNonVisualImagePath <em>Non Visual Image Path</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Non Visual Image Path</em>'.
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.TagDecorateInfo#getNonVisualImagePath()
+	 * @see #getTagDecorateInfo()
+	 * @generated
+	 */
+	EAttribute getTagDecorateInfo_NonVisualImagePath();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.TagDecorateInfo#isResolveChildText <em>Resolve Child Text</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -579,27 +640,6 @@ public interface DTInfoPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getResolveAttributeValue_AttributeName();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.Parameter <em>Parameter</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Parameter</em>'.
-	 * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.Parameter
-	 * @generated
-	 */
-	EClass getParameter();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.Parameter#getValue <em>Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.Parameter#getValue()
-	 * @see #getParameter()
-	 * @generated
-	 */
-	EAttribute getParameter_Value();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -702,6 +742,24 @@ public interface DTInfoPackage extends EPackage {
 		EReference OPERATION__PARAMETERS = eINSTANCE.getOperation_Parameters();
 
 		/**
+		 * The meta object literal for the '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.impl.ParameterImpl <em>Parameter</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.impl.ParameterImpl
+		 * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.impl.DTInfoPackageImpl#getParameter()
+		 * @generated
+		 */
+		EClass PARAMETER = eINSTANCE.getParameter();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PARAMETER__VALUE = eINSTANCE.getParameter_Value();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.impl.TagDecorateInfoImpl <em>Tag Decorate Info</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -760,6 +818,22 @@ public interface DTInfoPackage extends EPackage {
 		EAttribute TAG_DECORATE_INFO__NEED_TABLE_DECORATOR = eINSTANCE.getTagDecorateInfo_NeedTableDecorator();
 
 		/**
+		 * The meta object literal for the '<em><b>Non Visual</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TAG_DECORATE_INFO__NON_VISUAL = eINSTANCE.getTagDecorateInfo_NonVisual();
+
+		/**
+		 * The meta object literal for the '<em><b>Non Visual Image Path</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TAG_DECORATE_INFO__NON_VISUAL_IMAGE_PATH = eINSTANCE.getTagDecorateInfo_NonVisualImagePath();
+
+		/**
 		 * The meta object literal for the '<em><b>Resolve Child Text</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -808,24 +882,6 @@ public interface DTInfoPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute RESOLVE_ATTRIBUTE_VALUE__ATTRIBUTE_NAME = eINSTANCE.getResolveAttributeValue_AttributeName();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.impl.ParameterImpl <em>Parameter</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.impl.ParameterImpl
-		 * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.impl.DTInfoPackageImpl#getParameter()
-		 * @generated
-		 */
-		EClass PARAMETER = eINSTANCE.getParameter();
-
-		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute PARAMETER__VALUE = eINSTANCE.getParameter_Value();
 
 	}
 

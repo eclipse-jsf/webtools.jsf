@@ -65,6 +65,22 @@
 		</trait>
 	</entity>
 
+	<entity id="inputHidden" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-decorate-info id="vpd-decorate-design"
+					nonVisual="true"
+					nonVisualImagePath="icons/palette/JSFHTML/small/JSF_INPUTHIDDEN.gif"
+					widget="true"
+					
+				/>
+				<tag-decorate-info id="vpd-decorate-preview"
+					nonVisual="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
 	<entity id="inputSecret" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
@@ -146,6 +162,38 @@
 				/>
 				<tag-decorate-info id="vpd-decorate-preview"
 					resolveChildText="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="message" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-decorate-info id="vpd-decorate-design"
+					nonVisual="true"
+					nonVisualImagePath="icons/palette/JSFHTML/small/JSF_MESSAGE.gif"
+					widget="true"
+					
+				/>
+				<tag-decorate-info id="vpd-decorate-preview"
+					nonVisual="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="messages" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-decorate-info id="vpd-decorate-design"
+					nonVisual="true"
+					nonVisualImagePath="icons/palette/JSFHTML/small/JSF_MESSAGES.gif"
+					widget="true"
+					
+				/>
+				<tag-decorate-info id="vpd-decorate-preview"
+					nonVisual="true"
 				/>
 			</value>
 		</trait>

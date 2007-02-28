@@ -86,14 +86,14 @@ public class DTInfoAdapterFactory extends AdapterFactoryImpl {
 			public Object caseOperation(Operation object) {
 				return createOperationAdapter();
 			}
+			public Object caseParameter(Parameter object) {
+				return createParameterAdapter();
+			}
 			public Object caseTagDecorateInfo(TagDecorateInfo object) {
 				return createTagDecorateInfoAdapter();
 			}
 			public Object caseResolveAttributeValue(ResolveAttributeValue object) {
 				return createResolveAttributeValueAdapter();
-			}
-			public Object caseParameter(Parameter object) {
-				return createParameterAdapter();
 			}
 			public Object defaultCase(EObject object) {
 				return createEObjectAdapter();
@@ -156,6 +156,20 @@ public class DTInfoAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.Parameter <em>Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.Parameter
+	 * @generated
+	 */
+	public Adapter createParameterAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.TagDecorateInfo <em>Tag Decorate Info</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -180,20 +194,6 @@ public class DTInfoAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createResolveAttributeValueAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.Parameter <em>Parameter</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.Parameter
-	 * @generated
-	 */
-	public Adapter createParameterAdapter() {
 		return null;
 	}
 

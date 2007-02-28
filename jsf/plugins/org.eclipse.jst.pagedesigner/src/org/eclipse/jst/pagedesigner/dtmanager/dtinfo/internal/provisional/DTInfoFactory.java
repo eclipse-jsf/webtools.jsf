@@ -60,6 +60,15 @@ public interface DTInfoFactory extends EFactory {
 	Operation createOperation();
 
 	/**
+	 * Returns a new object of class '<em>Parameter</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Parameter</em>'.
+	 * @generated
+	 */
+	Parameter createParameter();
+
+	/**
 	 * Returns a new object of class '<em>Tag Decorate Info</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -76,15 +85,6 @@ public interface DTInfoFactory extends EFactory {
 	 * @generated
 	 */
 	ResolveAttributeValue createResolveAttributeValue();
-
-	/**
-	 * Returns a new object of class '<em>Parameter</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Parameter</em>'.
-	 * @generated
-	 */
-	Parameter createParameter();
 
 	/**
 	 * Returns the package supported by this factory.

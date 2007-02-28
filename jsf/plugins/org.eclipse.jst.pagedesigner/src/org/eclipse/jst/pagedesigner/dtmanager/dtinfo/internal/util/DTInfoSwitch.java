@@ -112,6 +112,12 @@ public class DTInfoSwitch {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case DTInfoPackage.PARAMETER: {
+				Parameter parameter = (Parameter)theEObject;
+				Object result = caseParameter(parameter);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case DTInfoPackage.TAG_DECORATE_INFO: {
 				TagDecorateInfo tagDecorateInfo = (TagDecorateInfo)theEObject;
 				Object result = caseTagDecorateInfo(tagDecorateInfo);
@@ -121,12 +127,6 @@ public class DTInfoSwitch {
 			case DTInfoPackage.RESOLVE_ATTRIBUTE_VALUE: {
 				ResolveAttributeValue resolveAttributeValue = (ResolveAttributeValue)theEObject;
 				Object result = caseResolveAttributeValue(resolveAttributeValue);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case DTInfoPackage.PARAMETER: {
-				Parameter parameter = (Parameter)theEObject;
-				Object result = caseParameter(parameter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -180,6 +180,21 @@ public class DTInfoSwitch {
 	}
 
 	/**
+	 * Returns the result of interpretting the object as an instance of '<em>Parameter</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpretting the object as an instance of '<em>Parameter</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public Object caseParameter(Parameter object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpretting the object as an instance of '<em>Tag Decorate Info</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -206,21 +221,6 @@ public class DTInfoSwitch {
 	 * @generated
 	 */
 	public Object caseResolveAttributeValue(ResolveAttributeValue object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Parameter</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Parameter</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public Object caseParameter(Parameter object) {
 		return null;
 	}
 

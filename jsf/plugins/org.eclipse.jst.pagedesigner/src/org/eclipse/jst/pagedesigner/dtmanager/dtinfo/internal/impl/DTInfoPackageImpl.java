@@ -62,6 +62,13 @@ public class DTInfoPackageImpl extends EPackageImpl implements DTInfoPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass parameterEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass tagDecorateInfoEClass = null;
 
 	/**
@@ -70,13 +77,6 @@ public class DTInfoPackageImpl extends EPackageImpl implements DTInfoPackage {
 	 * @generated
 	 */
 	private EClass resolveAttributeValueEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass parameterEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -232,6 +232,24 @@ public class DTInfoPackageImpl extends EPackageImpl implements DTInfoPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getParameter() {
+		return parameterEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getParameter_Value() {
+		return (EAttribute)parameterEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTagDecorateInfo() {
 		return tagDecorateInfoEClass;
 	}
@@ -295,7 +313,7 @@ public class DTInfoPackageImpl extends EPackageImpl implements DTInfoPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTagDecorateInfo_ResolveChildText() {
+	public EAttribute getTagDecorateInfo_NonVisual() {
 		return (EAttribute)tagDecorateInfoEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -304,8 +322,8 @@ public class DTInfoPackageImpl extends EPackageImpl implements DTInfoPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTagDecorateInfo_ResolveAttributeValue() {
-		return (EReference)tagDecorateInfoEClass.getEStructuralFeatures().get(7);
+	public EAttribute getTagDecorateInfo_NonVisualImagePath() {
+		return (EAttribute)tagDecorateInfoEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -313,7 +331,7 @@ public class DTInfoPackageImpl extends EPackageImpl implements DTInfoPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTagDecorateInfo_SetNonVisualChildElements() {
+	public EAttribute getTagDecorateInfo_ResolveChildText() {
 		return (EAttribute)tagDecorateInfoEClass.getEStructuralFeatures().get(8);
 	}
 
@@ -322,8 +340,26 @@ public class DTInfoPackageImpl extends EPackageImpl implements DTInfoPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getTagDecorateInfo_ResolveAttributeValue() {
+		return (EReference)tagDecorateInfoEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTagDecorateInfo_SetNonVisualChildElements() {
+		return (EAttribute)tagDecorateInfoEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EAttribute getTagDecorateInfo_Widget() {
-		return (EAttribute)tagDecorateInfoEClass.getEStructuralFeatures().get(9);
+		return (EAttribute)tagDecorateInfoEClass.getEStructuralFeatures().get(11);
 	}
 
 	/**
@@ -342,24 +378,6 @@ public class DTInfoPackageImpl extends EPackageImpl implements DTInfoPackage {
 	 */
 	public EAttribute getResolveAttributeValue_AttributeName() {
 		return (EAttribute)resolveAttributeValueEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getParameter() {
-		return parameterEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getParameter_Value() {
-		return (EAttribute)parameterEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -402,6 +420,9 @@ public class DTInfoPackageImpl extends EPackageImpl implements DTInfoPackage {
 		createEAttribute(operationEClass, OPERATION__ID);
 		createEReference(operationEClass, OPERATION__PARAMETERS);
 
+		parameterEClass = createEClass(PARAMETER);
+		createEAttribute(parameterEClass, PARAMETER__VALUE);
+
 		tagDecorateInfoEClass = createEClass(TAG_DECORATE_INFO);
 		createEAttribute(tagDecorateInfoEClass, TAG_DECORATE_INFO__ID);
 		createEAttribute(tagDecorateInfoEClass, TAG_DECORATE_INFO__MIN_HEIGHT);
@@ -409,6 +430,8 @@ public class DTInfoPackageImpl extends EPackageImpl implements DTInfoPackage {
 		createEAttribute(tagDecorateInfoEClass, TAG_DECORATE_INFO__MULTI_LEVEL);
 		createEAttribute(tagDecorateInfoEClass, TAG_DECORATE_INFO__NEED_BORDER_DECORATOR);
 		createEAttribute(tagDecorateInfoEClass, TAG_DECORATE_INFO__NEED_TABLE_DECORATOR);
+		createEAttribute(tagDecorateInfoEClass, TAG_DECORATE_INFO__NON_VISUAL);
+		createEAttribute(tagDecorateInfoEClass, TAG_DECORATE_INFO__NON_VISUAL_IMAGE_PATH);
 		createEAttribute(tagDecorateInfoEClass, TAG_DECORATE_INFO__RESOLVE_CHILD_TEXT);
 		createEReference(tagDecorateInfoEClass, TAG_DECORATE_INFO__RESOLVE_ATTRIBUTE_VALUE);
 		createEAttribute(tagDecorateInfoEClass, TAG_DECORATE_INFO__SET_NON_VISUAL_CHILD_ELEMENTS);
@@ -416,9 +439,6 @@ public class DTInfoPackageImpl extends EPackageImpl implements DTInfoPackage {
 
 		resolveAttributeValueEClass = createEClass(RESOLVE_ATTRIBUTE_VALUE);
 		createEAttribute(resolveAttributeValueEClass, RESOLVE_ATTRIBUTE_VALUE__ATTRIBUTE_NAME);
-
-		parameterEClass = createEClass(PARAMETER);
-		createEAttribute(parameterEClass, PARAMETER__VALUE);
 	}
 
 	/**
@@ -459,6 +479,9 @@ public class DTInfoPackageImpl extends EPackageImpl implements DTInfoPackage {
 		initEAttribute(getOperation_Id(), ecorePackage.getEString(), "id", null, 1, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getOperation_Parameters(), this.getParameter(), null, "parameters", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(parameterEClass, Parameter.class, "Parameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getParameter_Value(), ecorePackage.getEString(), "value", null, 1, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(tagDecorateInfoEClass, TagDecorateInfo.class, "TagDecorateInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTagDecorateInfo_Id(), ecorePackage.getEString(), "id", null, 1, 1, TagDecorateInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTagDecorateInfo_MinHeight(), ecorePackage.getEInt(), "minHeight", null, 0, 1, TagDecorateInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -466,6 +489,8 @@ public class DTInfoPackageImpl extends EPackageImpl implements DTInfoPackage {
 		initEAttribute(getTagDecorateInfo_MultiLevel(), ecorePackage.getEBoolean(), "multiLevel", "false", 0, 1, TagDecorateInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTagDecorateInfo_NeedBorderDecorator(), ecorePackage.getEBoolean(), "needBorderDecorator", "false", 0, 1, TagDecorateInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTagDecorateInfo_NeedTableDecorator(), ecorePackage.getEBoolean(), "needTableDecorator", "false", 0, 1, TagDecorateInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTagDecorateInfo_NonVisual(), ecorePackage.getEBoolean(), "nonVisual", "false", 0, 1, TagDecorateInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTagDecorateInfo_NonVisualImagePath(), ecorePackage.getEString(), "nonVisualImagePath", null, 0, 1, TagDecorateInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTagDecorateInfo_ResolveChildText(), ecorePackage.getEBoolean(), "resolveChildText", "false", 0, 1, TagDecorateInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTagDecorateInfo_ResolveAttributeValue(), this.getResolveAttributeValue(), null, "resolveAttributeValue", null, 0, 1, TagDecorateInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTagDecorateInfo_SetNonVisualChildElements(), ecorePackage.getEBoolean(), "setNonVisualChildElements", "false", 0, 1, TagDecorateInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -473,9 +498,6 @@ public class DTInfoPackageImpl extends EPackageImpl implements DTInfoPackage {
 
 		initEClass(resolveAttributeValueEClass, ResolveAttributeValue.class, "ResolveAttributeValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getResolveAttributeValue_AttributeName(), ecorePackage.getEString(), "attributeName", null, 1, 1, ResolveAttributeValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(parameterEClass, Parameter.class, "Parameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getParameter_Value(), ecorePackage.getEString(), "value", null, 1, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

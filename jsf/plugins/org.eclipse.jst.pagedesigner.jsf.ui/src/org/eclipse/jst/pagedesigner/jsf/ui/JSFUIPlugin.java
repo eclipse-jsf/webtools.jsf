@@ -181,7 +181,7 @@ public class JSFUIPlugin extends AbstractUIPlugin
     	ILog log = getDefault().getLog();
     	IStatus status = new Status(
     			severity,
-    			"",
+    			"org.eclipse.jst.pagedesigner.jsf.ui",
     			message);
     	log.log(status);
     }

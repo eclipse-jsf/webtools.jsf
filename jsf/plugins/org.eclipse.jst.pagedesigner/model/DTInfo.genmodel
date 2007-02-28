@@ -17,44 +17,17 @@
     <genClasses ecoreClass="DTInfo.ecore#//DTInfo">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DTInfo.ecore#//DTInfo/tagConvertInfo"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DTInfo.ecore#//DTInfo/tagDecorateInfos"/>
-      <genOperations ecoreOperation="DTInfo.ecore#//DTInfo/findTagDecorateInfoById">
-        <genParameters ecoreParameter="DTInfo.ecore#//DTInfo/findTagDecorateInfoById/id"/>
-      </genOperations>
     </genClasses>
     <genClasses ecoreClass="DTInfo.ecore#//TagConvertInfo">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DTInfo.ecore#//TagConvertInfo/operations"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DTInfo.ecore#//TagConvertInfo/classname"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="DTInfo.ecore#//Operation"/>
-    <genClasses ecoreClass="DTInfo.ecore#//AppendChildElement">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DTInfo.ecore#//AppendChildElement/elementName"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DTInfo.ecore#//AppendChildElement/makeChildCurrent"/>
+    <genClasses image="false" ecoreClass="DTInfo.ecore#//Operation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DTInfo.ecore#//Operation/id"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DTInfo.ecore#//Operation/parameters"/>
     </genClasses>
-    <genClasses ecoreClass="DTInfo.ecore#//ConvertAttributeToText">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DTInfo.ecore#//ConvertAttributeToText/attributeName"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DTInfo.ecore#//ConvertAttributeToText/removeAttribute"/>
-    </genClasses>
-    <genClasses ecoreClass="DTInfo.ecore#//CopyAllAttributes"/>
-    <genClasses ecoreClass="DTInfo.ecore#//CopyAttribute">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DTInfo.ecore#//CopyAttribute/attributeName"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DTInfo.ecore#//CopyAttribute/create"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DTInfo.ecore#//CopyAttribute/newAttributeValue"/>
-    </genClasses>
-    <genClasses ecoreClass="DTInfo.ecore#//CopyChildren"/>
-    <genClasses ecoreClass="DTInfo.ecore#//CreateAttribute">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DTInfo.ecore#//CreateAttribute/attributeName"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DTInfo.ecore#//CreateAttribute/attributeValue"/>
-    </genClasses>
-    <genClasses ecoreClass="DTInfo.ecore#//CreateElement">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DTInfo.ecore#//CreateElement/elementName"/>
-    </genClasses>
-    <genClasses ecoreClass="DTInfo.ecore#//MakeParentElementCurrent"/>
-    <genClasses ecoreClass="DTInfo.ecore#//RemoveAttribute">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DTInfo.ecore#//RemoveAttribute/attributeName"/>
-    </genClasses>
-    <genClasses ecoreClass="DTInfo.ecore#//RenameAttribute">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DTInfo.ecore#//RenameAttribute/oldAttributeName"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DTInfo.ecore#//RenameAttribute/newAttributeName"/>
+    <genClasses ecoreClass="DTInfo.ecore#//Parameter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DTInfo.ecore#//Parameter/value"/>
     </genClasses>
     <genClasses ecoreClass="DTInfo.ecore#//TagDecorateInfo">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DTInfo.ecore#//TagDecorateInfo/id"/>
@@ -63,8 +36,11 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DTInfo.ecore#//TagDecorateInfo/multiLevel"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DTInfo.ecore#//TagDecorateInfo/needBorderDecorator"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DTInfo.ecore#//TagDecorateInfo/needTableDecorator"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DTInfo.ecore#//TagDecorateInfo/nonVisual"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DTInfo.ecore#//TagDecorateInfo/nonVisualImagePath"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DTInfo.ecore#//TagDecorateInfo/resolveChildText"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DTInfo.ecore#//TagDecorateInfo/resolveAttributeValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DTInfo.ecore#//TagDecorateInfo/setNonVisualChildElements"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DTInfo.ecore#//TagDecorateInfo/widget"/>
     </genClasses>
     <genClasses ecoreClass="DTInfo.ecore#//ResolveAttributeValue">

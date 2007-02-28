@@ -16,8 +16,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jst.pagedesigner.converter.ConvertPosition;
-import org.eclipse.jst.pagedesigner.converter.IConverterFactory;
 import org.eclipse.jst.pagedesigner.converter.IDOMFactory;
 import org.eclipse.jst.pagedesigner.converter.ITagConverter;
 import org.eclipse.jst.pagedesigner.css2.style.ITagEditInfo;
@@ -41,6 +41,7 @@ public class DTTagConverter implements
 	private Element hostElement;
 	private Element resultElement;
 	private Image visualImage;
+	private ImageDescriptor visualImageDescriptor;
 	private IDOMDocument destDocument;
 	private List childNodeList = Collections.EMPTY_LIST;
 	private Map childVisualPositionMap = Collections.EMPTY_MAP;
@@ -81,7 +82,9 @@ public class DTTagConverter implements
 	 * @see org.eclipse.jst.pagedesigner.converter.ITagConverter#dispose()
 	 */
 	public void dispose() {
-		//do nothing
+		if (visualImage != null) {
+			visualImage.dispose();
+		}
 	}
 
 	/* (non-Javadoc)
@@ -138,10 +141,22 @@ public class DTTagConverter implements
 		this.visualImage = visualImage;
 	}
 
+	/**
+	 * Sets the visual ImageDescriptor instance.
+	 * 
+	 * @param imageDescriptor Visual ImageDescriptor instance.
+	 */
+	public void setVisualImageDescriptor(ImageDescriptor imageDescriptor) {
+		this.visualImageDescriptor = imageDescriptor;
+	}
+
 	/* (non-Javadoc)
 	 * @see org.eclipse.jst.pagedesigner.converter.ITagConverter#getVisualImage()
 	 */
 	public Image getVisualImage() {
+		if (visualImage == null && visualImageDescriptor != null) {
+			visualImage = visualImageDescriptor.createImage();
+		}
 		return visualImage;
 	}
 

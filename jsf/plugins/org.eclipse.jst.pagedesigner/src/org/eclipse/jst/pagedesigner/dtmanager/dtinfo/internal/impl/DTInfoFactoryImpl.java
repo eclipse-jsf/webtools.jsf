@@ -69,9 +69,9 @@ public class DTInfoFactoryImpl extends EFactoryImpl implements DTInfoFactory {
 			case DTInfoPackage.DT_INFO: return createDTInfo();
 			case DTInfoPackage.TAG_CONVERT_INFO: return createTagConvertInfo();
 			case DTInfoPackage.OPERATION: return createOperation();
+			case DTInfoPackage.PARAMETER: return createParameter();
 			case DTInfoPackage.TAG_DECORATE_INFO: return createTagDecorateInfo();
 			case DTInfoPackage.RESOLVE_ATTRIBUTE_VALUE: return createResolveAttributeValue();
-			case DTInfoPackage.PARAMETER: return createParameter();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -112,6 +112,16 @@ public class DTInfoFactoryImpl extends EFactoryImpl implements DTInfoFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Parameter createParameter() {
+		ParameterImpl parameter = new ParameterImpl();
+		return parameter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public TagDecorateInfo createTagDecorateInfo() {
 		TagDecorateInfoImpl tagDecorateInfo = new TagDecorateInfoImpl();
 		return tagDecorateInfo;
@@ -125,16 +135,6 @@ public class DTInfoFactoryImpl extends EFactoryImpl implements DTInfoFactory {
 	public ResolveAttributeValue createResolveAttributeValue() {
 		ResolveAttributeValueImpl resolveAttributeValue = new ResolveAttributeValueImpl();
 		return resolveAttributeValue;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Parameter createParameter() {
-		ParameterImpl parameter = new ParameterImpl();
-		return parameter;
 	}
 
 	/**

@@ -10,6 +10,9 @@
  *******************************************************************************/ 
 package org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional;
 
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jst.jsf.common.metadata.internal.IImageDescriptorProvider;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
 import org.eclipse.jst.pagedesigner.converter.IConverterFactory;
 import org.eclipse.jst.pagedesigner.converter.ITagConverter;
 import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.ResolveAttributeValue;
@@ -38,14 +41,15 @@ public class DTTagConverterDecorator implements ITagConverterDecorator {
 			throw new IllegalArgumentException("ITagConverter argument must be an instance of DTTagConverter");
 		}
 		DTTagConverter dtTagConverter = (DTTagConverter)tagConverter;
-		if (tagConverter.getResultElement() == null && tagConverter.isVisualByHTML()) {
-			createUnknownTagRepresentation(dtTagConverter);
-		}
 
 		if (dtTagConverter.getMode() == IConverterFactory.MODE_DESIGNER) {
 			decorateFromDTInfo(dtTagConverter, "vpd-decorate-design");
 		} else if (dtTagConverter.getMode() == IConverterFactory.MODE_PREVIEW) {
 			decorateFromDTInfo(dtTagConverter, "vpd-decorate-preview");
+		}
+
+		if (tagConverter.getResultElement() == null && tagConverter.isVisualByHTML()) {
+			createUnknownTagRepresentation(dtTagConverter);
 		}
 	}
 
@@ -67,6 +71,9 @@ public class DTTagConverterDecorator implements ITagConverterDecorator {
 				dtTagConverter.setMultiLevel(tdInfo.isMultiLevel());
 				dtTagConverter.setNeedBorderDecorator(tdInfo.isNeedBorderDecorator());
 				dtTagConverter.setNeedTableDecorator(tdInfo.isNeedTableDecorator());
+				if (tdInfo.isNonVisual()) {
+					setNonVisual(dtTagConverter, dtInfo, tdInfo.getNonVisualImagePath());
+				}
 				if (tdInfo.isResolveChildText()) {
 					resolveChildText(dtTagConverter.getResultElement());
 				}
@@ -167,6 +174,27 @@ public class DTTagConverterDecorator implements ITagConverterDecorator {
 				} catch(Exception ex) {
 					//ignore - could not resolve, do not change existing value
 				}
+			}
+		}
+	}
+
+	/**
+	 * Sets DTTagConverter instance as non-visual as HTML and sets the
+	 * ImageDescriptor instance that DTTagConverter will use to return an Image
+	 * for rendering.
+	 * 
+	 * @param dtTagConverter DTTagConverter instance.
+	 * @param dtInfo IDTInfo instance.
+	 * @param imagePath Image path, relative to declaring plugin.
+	 */
+	protected void setNonVisual(DTTagConverter dtTagConverter, IDTInfo dtInfo, String imagePath) {
+		dtTagConverter.setVisualByHTML(false);
+		if (imagePath != null && imagePath.length() > 0) {
+			Trait trait = dtInfo.getTrait();
+			IImageDescriptorProvider imgDescProvider = (IImageDescriptorProvider)trait.getSourceModelProvider().getAdapter(IImageDescriptorProvider.class);
+			if (imgDescProvider != null) {
+				ImageDescriptor imageDescriptor = imgDescProvider.getImageDescriptor(imagePath);
+				dtTagConverter.setVisualImageDescriptor(imageDescriptor);
 			}
 		}
 	}

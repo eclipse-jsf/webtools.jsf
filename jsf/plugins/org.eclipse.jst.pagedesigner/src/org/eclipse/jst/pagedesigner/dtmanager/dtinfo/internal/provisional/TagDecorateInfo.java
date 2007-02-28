@@ -22,6 +22,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.TagDecorateInfo#isMultiLevel <em>Multi Level</em>}</li>
  *   <li>{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.TagDecorateInfo#isNeedBorderDecorator <em>Need Border Decorator</em>}</li>
  *   <li>{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.TagDecorateInfo#isNeedTableDecorator <em>Need Table Decorator</em>}</li>
+ *   <li>{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.TagDecorateInfo#isNonVisual <em>Non Visual</em>}</li>
+ *   <li>{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.TagDecorateInfo#getNonVisualImagePath <em>Non Visual Image Path</em>}</li>
  *   <li>{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.TagDecorateInfo#isResolveChildText <em>Resolve Child Text</em>}</li>
  *   <li>{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.TagDecorateInfo#getResolveAttributeValue <em>Resolve Attribute Value</em>}</li>
  *   <li>{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.TagDecorateInfo#isSetNonVisualChildElements <em>Set Non Visual Child Elements</em>}</li>
@@ -199,6 +201,59 @@ public interface TagDecorateInfo extends EObject {
 	 * @generated
 	 */
 	void setNeedTableDecorator(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Non Visual</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Non Visual</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Non Visual</em>' attribute.
+	 * @see #setNonVisual(boolean)
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.DTInfoPackage#getTagDecorateInfo_NonVisual()
+	 * @model default="false"
+	 * @generated
+	 */
+	boolean isNonVisual();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.TagDecorateInfo#isNonVisual <em>Non Visual</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Non Visual</em>' attribute.
+	 * @see #isNonVisual()
+	 * @generated
+	 */
+	void setNonVisual(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Non Visual Image Path</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Non Visual Image Path</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Non Visual Image Path</em>' attribute.
+	 * @see #setNonVisualImagePath(String)
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.DTInfoPackage#getTagDecorateInfo_NonVisualImagePath()
+	 * @model
+	 * @generated
+	 */
+	String getNonVisualImagePath();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.TagDecorateInfo#getNonVisualImagePath <em>Non Visual Image Path</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Non Visual Image Path</em>' attribute.
+	 * @see #getNonVisualImagePath()
+	 * @generated
+	 */
+	void setNonVisualImagePath(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Resolve Child Text</b></em>' attribute.
