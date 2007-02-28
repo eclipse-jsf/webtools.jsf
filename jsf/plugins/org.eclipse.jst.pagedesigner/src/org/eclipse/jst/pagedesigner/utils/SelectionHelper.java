@@ -20,6 +20,7 @@ import org.eclipse.jface.text.TextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jst.jsf.core.internal.tld.CMUtil;
 import org.eclipse.jst.pagedesigner.dom.DOMPosition;
 import org.eclipse.jst.pagedesigner.dom.DOMPositionHelper;
 import org.eclipse.jst.pagedesigner.dom.DOMRefPosition;

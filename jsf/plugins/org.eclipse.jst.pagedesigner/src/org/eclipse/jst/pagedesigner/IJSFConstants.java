@@ -11,8 +11,9 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner;
 
-import org.eclipse.jst.pagedesigner.dom.TagIdentifier;
-import org.eclipse.jst.pagedesigner.dom.TagIdentifierFactory;
+import org.eclipse.jst.jsf.common.internal.provisional.dom.TagIdentifier;
+import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
+import org.eclipse.jst.jsf.core.internal.tld.TagIdentifierFactory;
 
 /**
  * @author mengbo
@@ -109,46 +110,46 @@ public interface IJSFConstants {
 
     // tag identifiers
     final static TagIdentifier TAG_IDENTIFIER_VIEW =
-        TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_CORE, TAG_VIEW);
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_CORE, TAG_VIEW);
 
     final static TagIdentifier TAG_IDENTIFIER_LOADBUNDLE =
-        TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_CORE, TAG_LOADBUNDLE);
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_CORE, TAG_LOADBUNDLE);
 
     final static TagIdentifier TAG_IDENTIFIER_FACET =
-        TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_CORE, TAG_FACET);
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_CORE, TAG_FACET);
     
     final static TagIdentifier TAG_IDENTIFIER_VERBATIM =
-        TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_CORE, TAG_VERBATIM);
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_CORE, TAG_VERBATIM);
     
     final static TagIdentifier TAG_IDENTIFIER_DATA_TABLE = 
-        TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_HTML, TAG_DATATABLE);
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_HTML, TAG_DATATABLE);
 
     final static TagIdentifier TAG_IDENTIFIER_PANEL_GRID =
-       TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_HTML, TAG_PANELGRID);
+       TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_HTML, TAG_PANELGRID);
 
     final static TagIdentifier TAG_IDENTIFIER_COLUMN =
-       TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_HTML, TAG_COLUMN);
+       TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_HTML, TAG_COLUMN);
 
     final static TagIdentifier TAG_IDENTIFIER_FORM =
-        TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_HTML, TAG_FORM);
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_HTML, TAG_FORM);
 
     final static TagIdentifier TAG_IDENTIFIER_INPUTTEXT =
-        TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_HTML, TAG_INPUTTEXT);
-
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_HTML, TAG_INPUTTEXT);
+    
     final static TagIdentifier TAG_IDENTIFIER_INPUTSECRET =
-    	TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_HTML, TAG_INPUTSECRET);
+    	TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_HTML, TAG_INPUTSECRET);
 
     final static TagIdentifier TAG_IDENTIFIER_INPUTTEXTAREA =
-    	TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_HTML, TAG_INPUTTEXTAREA);
+    	TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_HTML, TAG_INPUTTEXTAREA);
 
     final static TagIdentifier TAG_IDENTIFIER_OUTPUTTEXT =
-        TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_HTML, TAG_OUTPUTTEXT);
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_HTML, TAG_OUTPUTTEXT);
     
     final static TagIdentifier TAG_IDENTIFIER_OUTPUTLABEL =
-        TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_HTML, TAG_OUTPUTLABEL);
-
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_HTML, TAG_OUTPUTLABEL);
+    
     final static TagIdentifier TAG_IDENTIFIER_GRAPHICIMAGE =
-    	TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSF_HTML, TAG_GRAPHICIMAGE);
+    	TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_HTML, TAG_GRAPHICIMAGE);
 
 	// attribute name
 	final static public String ATTR_ACCEPT = "accept";

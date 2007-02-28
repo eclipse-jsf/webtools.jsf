@@ -18,13 +18,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.gef.commands.Command;
+import org.eclipse.jst.jsf.core.internal.tld.CMUtil;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.commands.single.ChangeAttributeCommand;
 import org.eclipse.jst.pagedesigner.meta.IAttributeDescriptor;
 import org.eclipse.jst.pagedesigner.meta.ICMRegistry;
 import org.eclipse.jst.pagedesigner.meta.IElementDescriptor;
 import org.eclipse.jst.pagedesigner.meta.internal.CMRegistry;
-import org.eclipse.jst.pagedesigner.utils.CMUtil;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
 import org.eclipse.ui.views.properties.IPropertySource;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;

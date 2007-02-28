@@ -15,7 +15,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-import org.eclipse.jst.pagedesigner.utils.CMUtil;
+import org.eclipse.jst.jsf.core.internal.tld.CMUtil;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMElementDeclaration;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
 import org.w3c.dom.Element;

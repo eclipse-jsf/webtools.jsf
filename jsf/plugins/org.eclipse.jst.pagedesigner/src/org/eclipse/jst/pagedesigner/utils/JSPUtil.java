@@ -18,12 +18,12 @@ import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.jsp.core.internal.contentmodel.TaglibController;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.TLDCMDocumentManager;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.TaglibTracker;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDDocument;
 import org.eclipse.jst.jsp.core.taglib.TaglibIndex;
-import org.eclipse.jst.pagedesigner.IJMTConstants;
 import org.eclipse.jst.pagedesigner.css2.property.ICSSPropertyID;
 import org.eclipse.wst.html.core.internal.format.HTMLFormatProcessorImpl;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMDocument;
@@ -73,7 +73,7 @@ public class JSPUtil {
 
 		// TODO: should create the taglib inside the IDOMModel
 		Node[] ref = new Node[1];
-		BodyHelper.findHeaderInsertPosition(IJMTConstants.URI_JSP, "taglib",
+		BodyHelper.findHeaderInsertPosition(ITLDConstants.URI_JSP, "taglib",
 				model.getDocument(), ref);
 		Element ele = model.getDocument().createElement("jsp:directive.taglib");
 		((IDOMElement) ele).setJSPTag(true);
@@ -125,7 +125,7 @@ public class JSPUtil {
 	public static Element createTaglibDeclaration(IDOMModel model, String uri,
 			String prefix) {
 		Node[] ref = new Node[1];
-		BodyHelper.findHeaderInsertPosition(IJMTConstants.URI_JSP, "taglib",
+		BodyHelper.findHeaderInsertPosition(ITLDConstants.URI_JSP, "taglib",
 				model.getDocument(), ref);
 		Element ele = model.getDocument().createElement("jsp:directive.taglib");
 		((IDOMElement) ele).setJSPTag(true);

@@ -15,7 +15,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.eclipse.gef.requests.CreationFactory;
-import org.eclipse.jst.pagedesigner.IJMTConstants;
+import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.pagedesigner.editors.HTMLEditor;
 import org.eclipse.jst.pagedesigner.utils.JSPUtil;
 import org.eclipse.ui.IEditorPart;
@@ -113,8 +113,8 @@ public class NodeCreationFactory implements CreationFactory {
 	 * @see org.eclipse.jst.pagedesigner.requests.NodeCreationFactory#getPrefix(int)
 	 */
 	public String getPrefix(String uri, IDOMModel model, String suggested) {
-		if (IJMTConstants.URI_HTML.equals(uri)
-				|| IJMTConstants.URI_JSP.equals(uri))
+		if (ITLDConstants.URI_HTML.equals(uri)
+				|| ITLDConstants.URI_JSP.equals(uri))
 			return null;
 
 		// now handles custom tag lib

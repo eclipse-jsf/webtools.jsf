@@ -13,7 +13,7 @@ package org.eclipse.jst.pagedesigner.dom;
 
 import javax.xml.namespace.QName;
 
-import org.eclipse.jst.pagedesigner.IJMTConstants;
+import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.pagedesigner.IJSFConstants;
 import org.eclipse.jst.pagedesigner.utils.BodyHelper;
 import org.eclipse.jst.pagedesigner.validation.caret.JSFRootContainerPositionRule;
@@ -28,10 +28,10 @@ import org.w3c.dom.Document;
  * @version 1.5
  */
 public class JSFValidatorSupport {
-	static private QName _qnameView = new QName(IJMTConstants.URI_JSF_CORE,
+	static private QName _qnameView = new QName(ITLDConstants.URI_JSF_CORE,
 			IJSFConstants.TAG_VIEW);
 
-	static private QName _qnameForm = new QName(IJMTConstants.URI_JSF_HTML,
+	static private QName _qnameForm = new QName(ITLDConstants.URI_JSF_HTML,
 			IJSFConstants.TAG_FORM);
 
 //	static private QName[] _views = new QName[] { _qnameView,

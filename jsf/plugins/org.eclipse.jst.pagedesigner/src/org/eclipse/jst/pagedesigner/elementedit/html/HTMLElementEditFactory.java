@@ -11,10 +11,10 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.elementedit.html;
 
+import org.eclipse.jst.jsf.common.internal.provisional.dom.TagIdentifier;
+import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
+import org.eclipse.jst.jsf.core.internal.tld.TagIdentifierFactory;
 import org.eclipse.jst.pagedesigner.IHTMLConstants;
-import org.eclipse.jst.pagedesigner.IJMTConstants;
-import org.eclipse.jst.pagedesigner.dom.TagIdentifier;
-import org.eclipse.jst.pagedesigner.dom.TagIdentifierFactory;
 import org.eclipse.jst.pagedesigner.elementedit.IElementEdit;
 import org.eclipse.jst.pagedesigner.elementedit.IElementEditFactory;
 
@@ -25,7 +25,7 @@ import org.eclipse.jst.pagedesigner.elementedit.IElementEditFactory;
 public class HTMLElementEditFactory implements IElementEditFactory 
 {
     final static TagIdentifier HTMLTABLE_TAG_IDENTIFIER =
-        TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_HTML, IHTMLConstants.TAG_TABLE);
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_HTML, IHTMLConstants.TAG_TABLE);
     
     /*
 	 * (non-Javadoc)
@@ -45,6 +45,6 @@ public class HTMLElementEditFactory implements IElementEditFactory
 	 * @see org.eclipse.jst.pagedesigner.elementedit.IElementEditFactory#getSupportedURI()
 	 */
 	public String getSupportedURI() {
-		return IJMTConstants.URI_HTML;
+		return ITLDConstants.URI_HTML;
 	}
 }

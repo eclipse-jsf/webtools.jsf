@@ -13,12 +13,12 @@ package org.eclipse.jst.pagedesigner.meta.internal;
 
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogField;
+import org.eclipse.jst.jsf.core.internal.tld.CMUtil;
 import org.eclipse.jst.pagedesigner.meta.EditorCreator;
 import org.eclipse.jst.pagedesigner.meta.IAttributeDescriptor;
 import org.eclipse.jst.pagedesigner.meta.IBindingHandler;
 import org.eclipse.jst.pagedesigner.properties.celleditors.CellEditorWrapper;
 import org.eclipse.jst.pagedesigner.ui.dialogfields.DialogFieldWrapper;
-import org.eclipse.jst.pagedesigner.utils.CMUtil;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;

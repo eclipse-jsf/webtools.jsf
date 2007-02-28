@@ -14,7 +14,7 @@ package org.eclipse.jst.pagedesigner.utils;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jst.j2ee.internal.web.deployables.WebDeployableArtifactUtil;
 import org.eclipse.jst.jsf.common.ui.IFileFolderConstants;
-import org.eclipse.jst.pagedesigner.IJMTConstants;
+import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.wst.common.componentcore.ComponentCore;
 import org.eclipse.wst.common.componentcore.resources.IVirtualComponent;
 import org.eclipse.wst.common.componentcore.resources.IVirtualResource;
@@ -28,7 +28,7 @@ public class WebAppUtil {
 
 	public static String transformJSPURL(String url, IFile openedFile) {
 		boolean canSupportJSF = JSPUtil.supportTaglib(
-				IJMTConstants.URI_JSF_HTML, openedFile);
+				ITLDConstants.URI_JSF_HTML, openedFile);
 		if (canSupportJSF
 				&& url != null
 				&& url.endsWith(IFileFolderConstants.DOT

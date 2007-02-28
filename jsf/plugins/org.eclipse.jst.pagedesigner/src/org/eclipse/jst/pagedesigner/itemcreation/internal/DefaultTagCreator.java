@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.servlet.jsp.tagext.TagAttributeInfo;
 import javax.xml.namespace.QName;
 
 import org.eclipse.emf.common.util.EList;
@@ -15,9 +14,8 @@ import org.eclipse.jst.jsf.common.metadata.internal.provisional.Model;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IMetaDataModelContext;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.MetaDataQueryHelper;
+import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.pagedesigner.IHTMLConstants;
-import org.eclipse.jst.pagedesigner.IJMTConstants;
-import org.eclipse.jst.pagedesigner.IJSFConstants;
 import org.eclipse.jst.pagedesigner.dom.DOMPositionHelper;
 import org.eclipse.jst.pagedesigner.dom.IDOMPosition;
 import org.eclipse.jst.pagedesigner.dom.JSFValidatorSupport;
@@ -29,7 +27,6 @@ import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provis
 import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.PaletteInfosFactory;
 import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.TagCreationAttribute;
 import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.TagCreationInfo;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.TagCreationTemplate;
 import org.eclipse.jst.pagedesigner.itemcreation.ITagCreator;
 import org.eclipse.jst.pagedesigner.utils.BodyHelper;
 import org.eclipse.jst.pagedesigner.utils.JSPUtil;
@@ -84,7 +81,7 @@ public class DefaultTagCreator implements ITagCreator {
 			return null;
 		
 		//ugly... fix me
-		if (IJMTConstants.URI_JSP.equals(getUri())
+		if (ITLDConstants.URI_JSP.equals(getUri())
 				&& (ele.getLocalName().startsWith("directive.")
 						|| "declaration".equals(ele.getLocalName())
 						|| "expression".equals(ele.getLocalName()) || "scriptlet"
@@ -272,8 +269,8 @@ public class DefaultTagCreator implements ITagCreator {
 	 */
 	protected String getPrefix(String uri, IDOMModel model,
 			String suggested) {
-		if (IJMTConstants.URI_HTML.equalsIgnoreCase(uri)
-				|| IJMTConstants.URI_JSP.equalsIgnoreCase(uri)
+		if (ITLDConstants.URI_HTML.equalsIgnoreCase(uri)
+				|| ITLDConstants.URI_JSP.equalsIgnoreCase(uri)
 				|| CMDocType.JSP11_DOC_TYPE.equalsIgnoreCase(uri)) {
 			return null;
 		}

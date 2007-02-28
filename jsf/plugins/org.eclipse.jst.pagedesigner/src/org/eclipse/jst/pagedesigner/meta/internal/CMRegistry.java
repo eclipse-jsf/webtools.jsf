@@ -26,6 +26,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
+import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.pagedesigner.IJMTConstants;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.meta.ICMRegistry;
@@ -171,15 +172,15 @@ public class CMRegistry implements ICMRegistry {
 	 */
 	public IElementDescriptor getElementDescriptor(String uri, String tagname) {
 		if (uri == null) {
-			uri = IJMTConstants.URI_HTML;
+			uri = ITLDConstants.URI_HTML;
 		}
-		if (IJMTConstants.URI_HTML.equals(uri)) {
+		if (ITLDConstants.URI_HTML.equals(uri)) {
 			IElementDescriptor desc = getHTMLElementDescriptor(tagname);
 			if (desc != null) {
 				return desc;
 			}
 		}
-		if (IJMTConstants.URI_JSP.equals(uri)) {
+		if (ITLDConstants.URI_JSP.equals(uri)) {
 			return getJSPElementDescriptor(tagname);
 		}
 		for (int i = 0, size = _contributedRegistries.size(); i < size; i++) {

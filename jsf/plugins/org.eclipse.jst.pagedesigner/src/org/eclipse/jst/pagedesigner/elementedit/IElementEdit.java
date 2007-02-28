@@ -14,7 +14,7 @@ package org.eclipse.jst.pagedesigner.elementedit;
 import org.eclipse.gef.EditPartViewer;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jst.pagedesigner.dom.TagIdentifier;
+import org.eclipse.jst.jsf.common.internal.provisional.dom.TagIdentifier;
 import org.eclipse.jst.pagedesigner.parts.ElementEditPart;
 import org.eclipse.jst.pagedesigner.parts.NodeEditPart;
 import org.eclipse.jst.pagedesigner.viewer.IDropLocationStrategy;

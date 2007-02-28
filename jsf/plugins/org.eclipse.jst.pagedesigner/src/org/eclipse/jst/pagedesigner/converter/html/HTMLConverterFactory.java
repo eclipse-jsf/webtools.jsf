@@ -11,8 +11,8 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.converter.html;
 
+import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.pagedesigner.IHTMLConstants;
-import org.eclipse.jst.pagedesigner.IJMTConstants;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.converter.AbstractTagConverter;
 import org.eclipse.jst.pagedesigner.converter.DumDescriptionTagConverter;
@@ -84,6 +84,6 @@ public class HTMLConverterFactory implements IConverterFactory {
 	 * @see org.eclipse.jst.pagedesigner.converter.IConverterFactory#getSupportedURI()
 	 */
 	public String getSupportedURI() {
-		return IJMTConstants.URI_HTML;
+		return ITLDConstants.URI_HTML;
 	}
 }

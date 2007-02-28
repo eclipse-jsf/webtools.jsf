@@ -15,11 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jface.viewers.LabelProvider;
-import org.eclipse.jst.pagedesigner.IJMTConstants;
+import org.eclipse.jst.jsf.core.internal.tld.CMUtil;
+import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.converter.html.HTMLConverterFactory;
 import org.eclipse.jst.pagedesigner.converter.jsp.JSPConverterFactory;
-import org.eclipse.jst.pagedesigner.utils.CMUtil;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMElementDeclaration;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMDocument;
@@ -89,7 +89,7 @@ public class ConverterFactoryRegistry {
 
 		// can't find. We need some default tag converter for it.
 		// if the tag is empty, show it as icon.
-		if (uri == null || IJMTConstants.URI_HTML.equals(uri)) {
+		if (uri == null || ITLDConstants.URI_HTML.equals(uri)) {
 			// basically, for HTML or non JSP tag, directly renders it.
 			return new DumTagConverter(ele);
 		}

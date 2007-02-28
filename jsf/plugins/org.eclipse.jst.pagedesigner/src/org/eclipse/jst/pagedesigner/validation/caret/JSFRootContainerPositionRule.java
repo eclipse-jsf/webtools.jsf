@@ -13,9 +13,9 @@ package org.eclipse.jst.pagedesigner.validation.caret;
 
 import java.util.Arrays;
 
-import org.eclipse.jst.pagedesigner.IJMTConstants;
+import org.eclipse.jst.jsf.common.internal.provisional.dom.TagIdentifier;
+import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.pagedesigner.dom.EditModelQuery;
-import org.eclipse.jst.pagedesigner.dom.TagIdentifier;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
@@ -50,8 +50,8 @@ public class JSFRootContainerPositionRule extends DefaultPositionRule {
                 TagIdentifier tagId = 
                      (TagIdentifier) dropActionData.getDropData().getTagIdentifiers().get(0);
                 final String uri  = tagId.getUri();
-				if (IJMTConstants.URI_JSF_HTML.equalsIgnoreCase(uri)
-						|| IJMTConstants.URI_JSF_CORE.equalsIgnoreCase(uri)) {
+				if (ITLDConstants.URI_JSF_HTML.equalsIgnoreCase(uri)
+						|| ITLDConstants.URI_JSF_CORE.equalsIgnoreCase(uri)) {
 					boolean result = EditModelQuery.isChild(
 							JSF_ROOT_CONTAINERS, node, true, false);
 					return result
@@ -85,8 +85,8 @@ public class JSFRootContainerPositionRule extends DefaultPositionRule {
                      (TagIdentifier) dropActionData.getDropData().getTagIdentifiers().get(0);
                 final String uri  = tagId.getUri();
 
-				if (IJMTConstants.URI_JSF_HTML.equalsIgnoreCase(uri)
-						|| IJMTConstants.URI_JSF_CORE.equalsIgnoreCase(uri)) {
+				if (ITLDConstants.URI_JSF_HTML.equalsIgnoreCase(uri)
+						|| ITLDConstants.URI_JSF_CORE.equalsIgnoreCase(uri)) {
 					result = EditModelQuery.isChild(JSF_ROOT_CONTAINERS,
 							node, true, false);
 				}

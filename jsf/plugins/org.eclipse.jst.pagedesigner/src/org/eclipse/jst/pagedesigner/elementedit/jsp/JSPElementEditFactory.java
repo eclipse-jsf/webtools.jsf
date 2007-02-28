@@ -11,9 +11,9 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.elementedit.jsp;
 
-import org.eclipse.jst.pagedesigner.IJMTConstants;
-import org.eclipse.jst.pagedesigner.dom.TagIdentifier;
-import org.eclipse.jst.pagedesigner.dom.TagIdentifierFactory;
+import org.eclipse.jst.jsf.common.internal.provisional.dom.TagIdentifier;
+import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
+import org.eclipse.jst.jsf.core.internal.tld.TagIdentifierFactory;
 import org.eclipse.jst.pagedesigner.elementedit.IElementEdit;
 import org.eclipse.jst.pagedesigner.elementedit.IElementEditFactory;
 import org.eclipse.jst.pagedesigner.jsp.core.IJSPCoreConstants;
@@ -25,7 +25,7 @@ import org.eclipse.jst.pagedesigner.jsp.core.IJSPCoreConstants;
 public class JSPElementEditFactory implements IElementEditFactory 
 {
     final static TagIdentifier TAG_DIRECTIVE_TAGLIB_TAG_IDENTIFIER =
-        TagIdentifierFactory.createJSPTagWrapper(IJMTConstants.URI_JSP, IJSPCoreConstants.TAG_DIRECTIVE_TAGLIB);
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSP, IJSPCoreConstants.TAG_DIRECTIVE_TAGLIB);
 
 	/*
 	 * (non-Javadoc)
@@ -45,7 +45,7 @@ public class JSPElementEditFactory implements IElementEditFactory
 	 * @see org.eclipse.jst.pagedesigner.elementedit.IElementEditFactory#getSupportedURI()
 	 */
 	public String getSupportedURI() {
-		return IJMTConstants.URI_JSP;
+		return ITLDConstants.URI_JSP;
 	}
 
 }

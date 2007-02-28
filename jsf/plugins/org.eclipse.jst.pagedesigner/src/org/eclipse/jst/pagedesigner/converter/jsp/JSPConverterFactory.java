@@ -12,7 +12,7 @@
 package org.eclipse.jst.pagedesigner.converter.jsp;
 
 import org.eclipse.jface.viewers.ILabelProvider;
-import org.eclipse.jst.pagedesigner.IJMTConstants;
+import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.converter.HiddenTagConverter;
 import org.eclipse.jst.pagedesigner.converter.IConverterFactory;
@@ -108,7 +108,7 @@ public class JSPConverterFactory implements IConverterFactory {
 	 * @see org.eclipse.jst.pagedesigner.converter.IConverterFactory#getSupportedURI()
 	 */
 	public String getSupportedURI() {
-		return IJMTConstants.URI_JSP;
+		return ITLDConstants.URI_JSP;
 	}
 
 }

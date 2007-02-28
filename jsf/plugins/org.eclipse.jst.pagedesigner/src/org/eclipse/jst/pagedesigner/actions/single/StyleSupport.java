@@ -13,9 +13,9 @@ package org.eclipse.jst.pagedesigner.actions.single;
 
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jst.jsf.core.internal.tld.CMUtil;
 import org.eclipse.jst.pagedesigner.editors.PageDesignerActionConstants;
 import org.eclipse.jst.pagedesigner.parts.ElementEditPart;
-import org.eclipse.jst.pagedesigner.utils.CMUtil;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMElementDeclaration;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
 

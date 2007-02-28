@@ -15,8 +15,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+import org.eclipse.jst.jsf.core.internal.tld.CMUtil;
+import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.pagedesigner.IHTMLConstants;
-import org.eclipse.jst.pagedesigner.IJMTConstants;
 import org.eclipse.jst.pagedesigner.IJSFConstants;
 import org.eclipse.jst.pagedesigner.css2.property.ICSSPropertyID;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
@@ -74,12 +75,12 @@ public class SelectManyHelper {
 		}
 		// TODO: this query is not cached.
 		String prefixNode = JSPUtil.getPrefix(xmlModel,
-				IJMTConstants.URI_JSF_HTML);
+				ITLDConstants.URI_JSF_HTML);
 		if (prefixNode != null && node.getPrefix() != null
 				&& node.getPrefix().equals(prefixNode)) {
 			if (JSF_SELECT_TAGS.contains(node.getLocalName())) {
 				String prefixItem = JSPUtil.getPrefix(xmlModel,
-						IJMTConstants.URI_JSF_CORE);
+						ITLDConstants.URI_JSF_CORE);
 				List result = new ArrayList();
 				NodeList items = node.getElementsByTagName(prefixItem
 						+ ":" + IJSFConstants.TAG_SELECTITEM); //$NON-NLS-1$
@@ -148,12 +149,12 @@ public class SelectManyHelper {
 			return false;
 		}
 		String uri = CMUtil.getElementNamespaceURI(node);
-		if (IJMTConstants.URI_JSF_HTML.equals(uri)) {
+		if (ITLDConstants.URI_JSF_HTML.equals(uri)) {
 
 			if (JSF_SELECT_TAGS.contains(node.getLocalName())) {
 				IDOMModel model = ((IDOMElement) node).getModel();
 				String jsfcorePrefix = JSPUtil.getPrefix(model,
-						IJMTConstants.URI_JSF_CORE);
+						ITLDConstants.URI_JSF_CORE);
 				if (jsfcorePrefix != null) {
 					NodeList nl = node.getElementsByTagName(jsfcorePrefix + ":"
 							+ IJSFConstants.TAG_SELECTITEM);
@@ -164,7 +165,7 @@ public class SelectManyHelper {
                 return false;
 			}
 		}
-		if (IJMTConstants.URI_HTML.equals(uri)) {
+		if (ITLDConstants.URI_HTML.equals(uri)) {
 			if (HTML_SELECT_TAGS.contains(node.getNodeName().toLowerCase())) {
 				NodeList nl = node
 						.getElementsByTagName(IHTMLConstants.TAG_OPTION);
@@ -178,10 +179,10 @@ public class SelectManyHelper {
 
 	public static boolean supportSections(Element node) {
 		String uri = CMUtil.getElementNamespaceURI(node);
-		if (IJMTConstants.URI_JSF_HTML.equals(uri)) {
+		if (ITLDConstants.URI_JSF_HTML.equals(uri)) {
 			return JSF_SELECT_TAGS.contains(node.getLocalName());
 		}
-		if (IJMTConstants.URI_HTML.equals(uri)) {
+		if (ITLDConstants.URI_HTML.equals(uri)) {
 			return HTML_SELECT_TAGS.contains(node.getNodeName().toLowerCase());
 		}
 		return false;

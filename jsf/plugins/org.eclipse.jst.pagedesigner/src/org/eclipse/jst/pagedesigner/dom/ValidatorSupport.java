@@ -13,14 +13,13 @@ package org.eclipse.jst.pagedesigner.dom;
 
 import javax.xml.namespace.QName;
 
+import org.eclipse.jst.jsf.core.internal.tld.CMUtil;
 import org.eclipse.jst.pagedesigner.adapters.IBodyInfo;
 import org.eclipse.jst.pagedesigner.adapters.internal.BodyInfo;
 import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
 import org.eclipse.jst.pagedesigner.editors.palette.impl.PaletteItemManager;
 import org.eclipse.jst.pagedesigner.editors.palette.impl.TaglibPaletteDrawer;
-import org.eclipse.jst.pagedesigner.utils.CMUtil;
 import org.eclipse.jst.pagedesigner.utils.CommandUtil;
-import org.eclipse.wst.html.core.internal.format.HTMLFormatProcessorImpl;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
 import org.w3c.dom.Element;

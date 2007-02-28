@@ -16,7 +16,7 @@ import java.util.List;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
-import org.eclipse.jst.pagedesigner.IJMTConstants;
+import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.dnd.internal.SourceViewerDragDropHelper;
 import org.eclipse.jst.pagedesigner.dom.DOMPosition;
@@ -71,10 +71,10 @@ public class PaletteDropInsertCommand extends SourceViewerCommand {
 				position = new DOMPosition(getModel().getDocument(), 0);
 			}
 			Assert.isTrue(position != null);
-			if (!_tagItem.getURI().equalsIgnoreCase(IJMTConstants.URI_HTML)
+			if (!_tagItem.getURI().equalsIgnoreCase(ITLDConstants.URI_HTML)
 					&& //
 					!_tagItem.getURI().equalsIgnoreCase(
-							IJMTConstants.URI_JSP)) {
+							ITLDConstants.URI_JSP)) {
 				position = JSFValidatorSupport.prepareView(position);
 			}
 			_element = CommandUtil
@@ -97,8 +97,8 @@ public class PaletteDropInsertCommand extends SourceViewerCommand {
 	 */
 	public String getPrefix(String uri, IDOMModel model, String suggested,
 			Node nodes[]) {
-		if (IJMTConstants.URI_HTML.equals(uri)
-				|| IJMTConstants.URI_JSP.equals(uri)) {
+		if (ITLDConstants.URI_HTML.equals(uri)
+				|| ITLDConstants.URI_JSP.equals(uri)) {
 			return null;
 		}
 

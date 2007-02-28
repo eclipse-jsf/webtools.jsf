@@ -30,17 +30,6 @@ public interface IJMTConstants {
 
 	public static final String PREF_PALETTE_SHOW_ALL = "pref.palette.showall"; //$NON-NLS-1$
 
-	// each name space is represented by an URI. As there are multiversion of
-	// html and jsp,
-	// so we use a special string for them.
-	public static final String URI_HTML = "html"; //$NON-NLS-1$
-
-	public static final String URI_JSP = "jsp"; //$NON-NLS-1$
-
-	public static final String URI_JSF_CORE = "http://java.sun.com/jsf/core"; //$NON-NLS-1$
-
-	public static final String URI_JSF_HTML = "http://java.sun.com/jsf/html"; //$NON-NLS-1$
-
 	public static final String EXTENSION_POINT_PAGEDESIGNER = "pageDesignerExtension"; //$NON-NLS-1$
 
 	public static final String EXTENSION_POINT_CMREGISTRY = "cmRegistry"; //$NON-NLS-1$

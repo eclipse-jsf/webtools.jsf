@@ -13,10 +13,10 @@ package org.eclipse.jst.pagedesigner.actions.single;
 
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.Separator;
-import org.eclipse.jst.pagedesigner.IJMTConstants;
+import org.eclipse.jst.jsf.core.internal.tld.CMUtil;
+import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.css2.CSSUtil;
-import org.eclipse.jst.pagedesigner.utils.CMUtil;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMElementDeclaration;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
 
@@ -94,7 +94,7 @@ public class StyleClassSupport {
 			return null;
 		}
 		String taguri = CMUtil.getTagURI(decl);
-		if (taguri == null || IJMTConstants.URI_HTML.equals(taguri)) {
+		if (taguri == null || ITLDConstants.URI_HTML.equals(taguri)) {
 			if (decl.getAttributes().getNamedItem("class") != null) {
 				return "class";
 			}

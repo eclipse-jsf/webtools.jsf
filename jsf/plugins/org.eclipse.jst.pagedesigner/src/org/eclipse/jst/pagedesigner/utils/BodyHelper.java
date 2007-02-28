@@ -16,7 +16,8 @@ import java.util.Comparator;
 
 import javax.xml.namespace.QName;
 
-import org.eclipse.jst.pagedesigner.IJMTConstants;
+import org.eclipse.jst.jsf.core.internal.tld.CMUtil;
+import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.pagedesigner.adapters.IBodyInfo;
 import org.eclipse.jst.pagedesigner.adapters.internal.BodyInfo;
 import org.eclipse.jst.pagedesigner.dom.DOMPosition;
@@ -308,9 +309,9 @@ public class BodyHelper {
 	 */
 	public static boolean shouldIgnoreAdjust(String uri, String tag) {
 		// FIXME:
-		return (IJMTConstants.URI_HTML.equals(uri) && "script"
+		return (ITLDConstants.URI_HTML.equals(uri) && "script"
 				.equalsIgnoreCase(tag))
-				|| (IJMTConstants.URI_JSP.equals(uri));
+				|| (ITLDConstants.URI_JSP.equals(uri));
 	}
 
 	public static IBodyInfo getBodyInfo(IDOMNode node) {

@@ -12,7 +12,7 @@
 package org.eclipse.jst.pagedesigner.commands.range;
 
 import org.eclipse.gef.GraphicalViewer;
-import org.eclipse.jst.pagedesigner.IJMTConstants;
+import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.pagedesigner.dom.DOMPosition;
 import org.eclipse.jst.pagedesigner.dom.DOMPositionHelper;
 import org.eclipse.jst.pagedesigner.dom.DOMRange;
@@ -134,7 +134,7 @@ public class InsertEdit extends DeleteEdit {
 			String prefix = node.getPrefix();
 			String name = node.getLocalName();
 			if (name != null
-					&& IJMTConstants.URI_JSP.equals(prefix)
+					&& ITLDConstants.URI_JSP.equals(prefix)
 					&& (node.getLocalName().startsWith(
 							IJSPCoreConstants.TAG_LEADING_DIRECTIVE)
 							|| IJSPCoreConstants.TAG_DECLARATION.equals(name)

@@ -11,12 +11,12 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.adapters.internal;
 
+import org.eclipse.jst.jsf.core.internal.tld.CMUtil;
+import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.pagedesigner.IHTMLConstants;
-import org.eclipse.jst.pagedesigner.IJMTConstants;
 import org.eclipse.jst.pagedesigner.IJSFConstants;
 import org.eclipse.jst.pagedesigner.adapters.IBodyInfo;
 import org.eclipse.jst.pagedesigner.jsp.core.IJSPCoreConstants;
-import org.eclipse.jst.pagedesigner.utils.CMUtil;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -96,11 +96,11 @@ public class BodyInfo implements IBodyInfo {
 			String localname) {
 		String elelocalname = element.getLocalName();
 		String namespaceURI = CMUtil.getElementNamespaceURI(element);
-		if (IJMTConstants.URI_HTML.equals(namespaceURI)
+		if (ITLDConstants.URI_HTML.equals(namespaceURI)
 				&& IHTMLConstants.TAG_HTML.equalsIgnoreCase(elelocalname)) {
 			return IHTMLConstants.TAG_HEAD.equalsIgnoreCase(localname);
 		}
-		if (IJMTConstants.URI_JSF_CORE.equals(namespaceURI)
+		if (ITLDConstants.URI_JSF_CORE.equals(namespaceURI)
 				&& IJSFConstants.TAG_VIEW.equalsIgnoreCase(elelocalname)) {
 			return IJSFConstants.TAG_LOADBUNDLE.equalsIgnoreCase(localname);
 		}
