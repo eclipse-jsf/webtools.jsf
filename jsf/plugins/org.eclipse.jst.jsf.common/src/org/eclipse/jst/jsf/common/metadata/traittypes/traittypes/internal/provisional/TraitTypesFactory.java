@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraitTypesFactory.java,v 1.1 2007/02/07 00:03:50 gkessler Exp $
+ * $Id: TraitTypesFactory.java,v 1.2 2007/02/28 21:12:40 cbateman Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional;
 
@@ -42,6 +42,15 @@ public interface TraitTypesFactory extends EFactory {
 	ListOfValues createListOfValues();
 
 	/**
+     * Returns a new object of class '<em>Set Generator</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Set Generator</em>'.
+     * @generated
+     */
+    SetGenerator createSetGenerator();
+
+    /**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

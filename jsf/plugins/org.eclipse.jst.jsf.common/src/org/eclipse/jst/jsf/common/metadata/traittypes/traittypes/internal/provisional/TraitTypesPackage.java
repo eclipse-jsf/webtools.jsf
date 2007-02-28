@@ -2,10 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraitTypesPackage.java,v 1.1 2007/02/07 00:03:50 gkessler Exp $
+ * $Id: TraitTypesPackage.java,v 1.2 2007/02/28 21:12:40 cbateman Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -95,6 +96,44 @@ public interface TraitTypesPackage extends EPackage {
 
 
 	/**
+     * The meta object id for the '{@link org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.impl.SetGeneratorImpl <em>Set Generator</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.impl.SetGeneratorImpl
+     * @see org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.impl.TraitTypesPackageImpl#getSetGenerator()
+     * @generated
+     */
+    int SET_GENERATOR = 1;
+
+    /**
+     * The feature id for the '<em><b>Algorithm</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int SET_GENERATOR__ALGORITHM = 0;
+
+    /**
+     * The feature id for the '<em><b>Expression</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int SET_GENERATOR__EXPRESSION = 1;
+
+    /**
+     * The number of structural features of the '<em>Set Generator</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int SET_GENERATOR_FEATURE_COUNT = 0;
+
+
+    /**
 	 * Returns the meta object for class '{@link org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.ListOfValues <em>List Of Values</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -116,6 +155,38 @@ public interface TraitTypesPackage extends EPackage {
 	EReference getListOfValues_Entries();
 
 	/**
+     * Returns the meta object for class '{@link org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.SetGenerator <em>Set Generator</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Set Generator</em>'.
+     * @see org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.SetGenerator
+     * @generated
+     */
+    EClass getSetGenerator();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.SetGenerator#getAlgorithm <em>Algorithm</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Algorithm</em>'.
+     * @see org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.SetGenerator#getAlgorithm()
+     * @see #getSetGenerator()
+     * @generated
+     */
+    EAttribute getSetGenerator_Algorithm();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.SetGenerator#getExpression <em>Expression</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Expression</em>'.
+     * @see org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.SetGenerator#getExpression()
+     * @see #getSetGenerator()
+     * @generated
+     */
+    EAttribute getSetGenerator_Expression();
+
+    /**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -154,6 +225,32 @@ public interface TraitTypesPackage extends EPackage {
 		 * @generated
 		 */
 		EReference LIST_OF_VALUES__ENTRIES = eINSTANCE.getListOfValues_Entries();
+
+        /**
+         * The meta object literal for the '{@link org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.impl.SetGeneratorImpl <em>Set Generator</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.impl.SetGeneratorImpl
+         * @see org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.impl.TraitTypesPackageImpl#getSetGenerator()
+         * @generated
+         */
+        EClass SET_GENERATOR = eINSTANCE.getSetGenerator();
+
+        /**
+         * The meta object literal for the '<em><b>Algorithm</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute SET_GENERATOR__ALGORITHM = eINSTANCE.getSetGenerator_Algorithm();
+
+        /**
+         * The meta object literal for the '<em><b>Expression</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute SET_GENERATOR__EXPRESSION = eINSTANCE.getSetGenerator_Expression();
 
 	}
 

@@ -2,11 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraitTypesResourceImpl.java,v 1.2 2007/02/28 05:04:21 gkessler Exp $
+ * $Id: TraitTypesResourceImpl.java,v 1.3 2007/02/28 21:12:40 cbateman Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.util;
 
 import org.eclipse.emf.common.util.URI;
+
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
 
 /**
@@ -17,22 +18,22 @@ import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
  * @generated
  */
 public class TraitTypesResourceImpl extends XMLResourceImpl {
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
 
-	/**
-	 * Creates an instance of the resource.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param uri the URI of the new resource.
-	 * @generated
-	 */
-	public TraitTypesResourceImpl(URI uri) {
-		super(uri);
-	}
+    /**
+     * Creates an instance of the resource.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param uri the URI of the new resource.
+     * @generated
+     */
+    public TraitTypesResourceImpl(URI uri) {
+        super(uri);
+    }
 
 } //TraitTypesResourceImpl

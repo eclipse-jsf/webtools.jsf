@@ -2,16 +2,21 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraitTypesPackageImpl.java,v 1.2 2007/02/28 05:04:23 gkessler Exp $
+ * $Id: TraitTypesPackageImpl.java,v 1.3 2007/02/28 21:12:40 cbateman Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.impl;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+
 import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
+
 import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.ListOfValues;
+import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.SetGenerator;
 import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.TraitTypesFactory;
 import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.TraitTypesPackage;
 
@@ -22,196 +27,250 @@ import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provis
  * @generated
  */
 public class TraitTypesPackageImpl extends EPackageImpl implements TraitTypesPackage {
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass listOfValuesEClass = null;
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass listOfValuesEClass = null;
 
-	/**
-	 * Creates an instance of the model <b>Package</b>, registered with
-	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
-	 * package URI value.
-	 * <p>Note: the correct way to create the package is via the static
-	 * factory method {@link #init init()}, which also performs
-	 * initialization of the package, or returns the registered package,
-	 * if one already exists.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.TraitTypesPackage#eNS_URI
-	 * @see #init()
-	 * @generated
-	 */
-	private TraitTypesPackageImpl() {
-		super(eNS_URI, TraitTypesFactory.eINSTANCE);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass setGeneratorEClass = null;
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private static boolean isInited = false;
+    /**
+     * Creates an instance of the model <b>Package</b>, registered with
+     * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
+     * package URI value.
+     * <p>Note: the correct way to create the package is via the static
+     * factory method {@link #init init()}, which also performs
+     * initialization of the package, or returns the registered package,
+     * if one already exists.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.emf.ecore.EPackage.Registry
+     * @see org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.TraitTypesPackage#eNS_URI
+     * @see #init()
+     * @generated
+     */
+    private TraitTypesPackageImpl() {
+        super(eNS_URI, TraitTypesFactory.eINSTANCE);
+    }
 
-	/**
-	 * Creates, registers, and initializes the <b>Package</b> for this
-	 * model, and for any others upon which it depends.  Simple
-	 * dependencies are satisfied by calling this method on all
-	 * dependent packages before doing anything else.  This method drives
-	 * initialization for interdependent packages directly, in parallel
-	 * with this package, itself.
-	 * <p>Of this package and its interdependencies, all packages which
-	 * have not yet been registered by their URI values are first created
-	 * and registered.  The packages are then initialized in two steps:
-	 * meta-model objects for all of the packages are created before any
-	 * are initialized, since one package's meta-model objects may refer to
-	 * those of another.
-	 * <p>Invocation of this method will not affect any packages that have
-	 * already been initialized.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #eNS_URI
-	 * @see #createPackageContents()
-	 * @see #initializePackageContents()
-	 * @generated
-	 */
-	public static TraitTypesPackage init() {
-		if (isInited) return (TraitTypesPackage)EPackage.Registry.INSTANCE.getEPackage(TraitTypesPackage.eNS_URI);
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private static boolean isInited = false;
 
-		// Obtain or create and register package
-		TraitTypesPackageImpl theTraitTypesPackage = (TraitTypesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof TraitTypesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new TraitTypesPackageImpl());
+    /**
+     * Creates, registers, and initializes the <b>Package</b> for this
+     * model, and for any others upon which it depends.  Simple
+     * dependencies are satisfied by calling this method on all
+     * dependent packages before doing anything else.  This method drives
+     * initialization for interdependent packages directly, in parallel
+     * with this package, itself.
+     * <p>Of this package and its interdependencies, all packages which
+     * have not yet been registered by their URI values are first created
+     * and registered.  The packages are then initialized in two steps:
+     * meta-model objects for all of the packages are created before any
+     * are initialized, since one package's meta-model objects may refer to
+     * those of another.
+     * <p>Invocation of this method will not affect any packages that have
+     * already been initialized.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #eNS_URI
+     * @see #createPackageContents()
+     * @see #initializePackageContents()
+     * @generated
+     */
+    public static TraitTypesPackage init() {
+        if (isInited) return (TraitTypesPackage)EPackage.Registry.INSTANCE.getEPackage(TraitTypesPackage.eNS_URI);
 
-		isInited = true;
+        // Obtain or create and register package
+        TraitTypesPackageImpl theTraitTypesPackage = (TraitTypesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof TraitTypesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new TraitTypesPackageImpl());
 
-		// Initialize simple dependencies
-		XMLTypePackage.eINSTANCE.eClass();
+        isInited = true;
 
-		// Create package meta-data objects
-		theTraitTypesPackage.createPackageContents();
+        // Initialize simple dependencies
+        XMLTypePackage.eINSTANCE.eClass();
 
-		// Initialize created meta-data
-		theTraitTypesPackage.initializePackageContents();
+        // Create package meta-data objects
+        theTraitTypesPackage.createPackageContents();
 
-		// Mark meta-data to indicate it can't be changed
-		theTraitTypesPackage.freeze();
+        // Initialize created meta-data
+        theTraitTypesPackage.initializePackageContents();
 
-		return theTraitTypesPackage;
-	}
+        // Mark meta-data to indicate it can't be changed
+        theTraitTypesPackage.freeze();
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getListOfValues() {
-		return listOfValuesEClass;
-	}
+        return theTraitTypesPackage;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getListOfValues_Entries() {
-		return (EReference)listOfValuesEClass.getEStructuralFeatures().get(0);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getListOfValues() {
+        return listOfValuesEClass;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public TraitTypesFactory getTraitTypesFactory() {
-		return (TraitTypesFactory)getEFactoryInstance();
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getListOfValues_Entries() {
+        return (EReference)listOfValuesEClass.getEStructuralFeatures().get(0);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private boolean isCreated = false;
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getSetGenerator() {
+        return setGeneratorEClass;
+    }
 
-	/**
-	 * Creates the meta-model objects for the package.  This method is
-	 * guarded to have no affect on any invocation but its first.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void createPackageContents() {
-		if (isCreated) return;
-		isCreated = true;
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getSetGenerator_Algorithm() {
+        return (EAttribute)setGeneratorEClass.getEStructuralFeatures().get(0);
+    }
 
-		// Create classes and their features
-		listOfValuesEClass = createEClass(LIST_OF_VALUES);
-		createEReference(listOfValuesEClass, LIST_OF_VALUES__ENTRIES);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getSetGenerator_Expression() {
+        return (EAttribute)setGeneratorEClass.getEStructuralFeatures().get(1);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private boolean isInitialized = false;
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public TraitTypesFactory getTraitTypesFactory() {
+        return (TraitTypesFactory)getEFactoryInstance();
+    }
 
-	/**
-	 * Complete the initialization of the package and its meta-model.  This
-	 * method is guarded to have no affect on any invocation but its first.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void initializePackageContents() {
-		if (isInitialized) return;
-		isInitialized = true;
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private boolean isCreated = false;
 
-		// Initialize package
-		setName(eNAME);
-		setNsPrefix(eNS_PREFIX);
-		setNsURI(eNS_URI);
+    /**
+     * Creates the meta-model objects for the package.  This method is
+     * guarded to have no affect on any invocation but its first.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void createPackageContents() {
+        if (isCreated) return;
+        isCreated = true;
 
-		// Obtain other dependent packages
-		XMLTypePackage theXMLTypePackage = (XMLTypePackage)EPackage.Registry.INSTANCE.getEPackage(XMLTypePackage.eNS_URI);
+        // Create classes and their features
+        listOfValuesEClass = createEClass(LIST_OF_VALUES);
+        createEReference(listOfValuesEClass, LIST_OF_VALUES__ENTRIES);
 
-		// Add supertypes to classes
+        setGeneratorEClass = createEClass(SET_GENERATOR);
+        createEAttribute(setGeneratorEClass, SET_GENERATOR__ALGORITHM);
+        createEAttribute(setGeneratorEClass, SET_GENERATOR__EXPRESSION);
+    }
 
-		// Initialize classes and features; add operations and parameters
-		initEClass(listOfValuesEClass, ListOfValues.class, "ListOfValues", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getListOfValues_Entries(), theXMLTypePackage.getSimpleAnyType(), null, "entries", null, 0, -1, ListOfValues.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private boolean isInitialized = false;
 
-		// Create resource
-		createResource(eNS_URI);
+    /**
+     * Complete the initialization of the package and its meta-model.  This
+     * method is guarded to have no affect on any invocation but its first.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void initializePackageContents() {
+        if (isInitialized) return;
+        isInitialized = true;
 
-		// Create annotations
-		// http:///org/eclipse/emf/ecore/util/ExtendedMetaData
-		createExtendedMetaDataAnnotations();
-	}
+        // Initialize package
+        setName(eNAME);
+        setNsPrefix(eNS_PREFIX);
+        setNsURI(eNS_URI);
 
-	/**
-	 * Initializes the annotations for <b>http:///org/eclipse/emf/ecore/util/ExtendedMetaData</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createExtendedMetaDataAnnotations() {
-		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";		
-		addAnnotation
-		  (getListOfValues_Entries(), 
-		   source, 
-		   new String[] {
-			 "kind", "element",
-			 "name", "item"
-		   });
-	}
+        // Obtain other dependent packages
+        XMLTypePackage theXMLTypePackage = (XMLTypePackage)EPackage.Registry.INSTANCE.getEPackage(XMLTypePackage.eNS_URI);
+
+        // Add supertypes to classes
+
+        // Initialize classes and features; add operations and parameters
+        initEClass(listOfValuesEClass, ListOfValues.class, "ListOfValues", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        initEReference(getListOfValues_Entries(), theXMLTypePackage.getSimpleAnyType(), null, "entries", null, 0, -1, ListOfValues.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+        initEClass(setGeneratorEClass, SetGenerator.class, "SetGenerator", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        initEAttribute(getSetGenerator_Algorithm(), ecorePackage.getEString(), "algorithm", null, 0, 1, SetGenerator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEAttribute(getSetGenerator_Expression(), ecorePackage.getEString(), "expression", null, 0, 1, SetGenerator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+        // Create resource
+        createResource(eNS_URI);
+
+        // Create annotations
+        // http:///org/eclipse/emf/ecore/util/ExtendedMetaData
+        createExtendedMetaDataAnnotations();
+    }
+
+    /**
+     * Initializes the annotations for <b>http:///org/eclipse/emf/ecore/util/ExtendedMetaData</b>.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected void createExtendedMetaDataAnnotations() {
+        String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";		
+        addAnnotation
+          (getListOfValues_Entries(), 
+           source, 
+           new String[] {
+             "kind", "element",
+             "name", "item"
+           });		
+        addAnnotation
+          (getSetGenerator_Algorithm(), 
+           source, 
+           new String[] {
+             "kind", "element"
+           });		
+        addAnnotation
+          (getSetGenerator_Expression(), 
+           source, 
+           new String[] {
+             "kind", "element"
+           });
+    }
 
 } //TraitTypesPackageImpl
