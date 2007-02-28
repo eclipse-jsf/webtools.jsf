@@ -29,7 +29,12 @@ Export-Package: org.eclipse.jst.jsf.common,
  org.eclipse.jst.jsf.context.symbol.internal.provisional,
  org.eclipse.jst.jsf.context.symbol.internal.provisional.provider,
  org.eclipse.jst.jsf.context.symbol.internal.provisional.source,
- org.eclipse.jst.jsf.context.symbol.internal.util
+ org.eclipse.jst.jsf.context.symbol.internal.util,
+ org.eclipse.jst.jsf.common.sets.internal.provisional,
+ org.eclipse.jst.jsf.common.internal.provisional.dom,
+ org.eclipse.jst.jsf.common.sets.internal.provisional.mapping,
+ org.eclipse.jst.jsf.common.sets.internal.provisional.constraint,
+ org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.wst.sse.core,
  org.eclipse.jst.jsp.core,
