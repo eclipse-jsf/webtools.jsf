@@ -5,6 +5,9 @@ import org.eclipse.osgi.util.NLS;
 class Messages extends NLS {
     private static final String BUNDLE_NAME = "org.eclipse.jst.jsf.validation.internal.appconfig.messages"; //$NON-NLS-1$
 
+
+
+
     static {
         NLS.initializeMessages(BUNDLE_NAME, Messages.class);
     }
@@ -68,4 +71,24 @@ class Messages extends NLS {
      * see messages.properties
      */
     public static String LIST_ENTRIES_CAN_ONLY_BE_SET_ON_LIST_TYPE_ID;
+    
+    /**
+     * see messages.properties
+     */
+    public static String API_NOT_AVAILABLE_BEFORE_VERSION_ID;
+    
+    /**
+     * see messages.properties
+     */
+    public static String APP_CONFIG_IS_NEWER_THAN_JSF_VERSION_ID;
+
+    /**
+     * see messages.properties 
+     */
+    public static String APP_CONFIG_IS_OLDER_THAN_JSF_VERSION_ID;
+
+    /**
+     * see messages.properties
+     */
+    public static String LOCALE_FORMAT_NOT_VALID_ID;
 }

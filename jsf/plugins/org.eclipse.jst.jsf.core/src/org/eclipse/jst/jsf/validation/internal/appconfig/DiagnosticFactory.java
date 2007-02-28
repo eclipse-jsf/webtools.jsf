@@ -3,6 +3,7 @@ package org.eclipse.jst.jsf.validation.internal.appconfig;
 import java.text.MessageFormat;
 import java.util.Locale;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.wst.validation.internal.core.Message;
@@ -79,7 +80,26 @@ public final class DiagnosticFactory
     /**
      * Problem id
      */
-    public final static int LIST_ENTRIES_CAN_ONLY_BE_SET_ON_LIST_TYPE_ID = 11;
+    public final static int LIST_ENTRIES_CAN_ONLY_BE_SET_ON_LIST_TYPE_ID = 12;
+    
+    /**
+     * Problem id
+     */
+    public final static int API_NOT_AVAILABLE_BEFORE_VERSION_ID = 13;
+    
+    /**
+     * Problem id
+     */
+    public final static int APP_CONFIG_IS_NEWER_THAN_JSF_VERSION_ID = 14;
+    /**
+     * Problem id
+     */
+    public final static int APP_CONFIG_IS_OLDER_THAN_JSF_VERSION_ID = 15;
+    
+    /**
+     * Problem id
+     */
+    public final static int LOCALE_FORMAT_NOT_VALID_ID = 16;
     
     /**
      * @return message indicating text that should be EL was
@@ -196,9 +216,9 @@ public final class DiagnosticFactory
     public static IMessage create_MUST_BE_A_VALID_JAVA_IDENT(final String nameOfId)
     {
         return new MyLocalizedMessage(IMessage.NORMAL_SEVERITY,
-                MessageFormat.format(Messages.MUST_BE_A_VALID_JAVA_IDENT_ID
-                        ,new Object[]{nameOfId})
-                        ,null, MUST_BE_A_VALID_JAVA_IDENT_ID);    
+            MessageFormat.format(Messages.MUST_BE_A_VALID_JAVA_IDENT_ID
+                ,new Object[]{nameOfId})
+                ,null, MUST_BE_A_VALID_JAVA_IDENT_ID);    
     }
     
     /**
@@ -207,8 +227,8 @@ public final class DiagnosticFactory
     public static IMessage create_BEAN_SCOPE_NOT_VALID()
     {
         return new MyLocalizedMessage(IMessage.NORMAL_SEVERITY,
-                Messages.BEAN_SCOPE_NOT_VALID_ID
-                , null, BEAN_SCOPE_NOT_VALID_ID);    
+            Messages.BEAN_SCOPE_NOT_VALID_ID
+            , null, BEAN_SCOPE_NOT_VALID_ID);    
     }
     
     /**
@@ -219,9 +239,9 @@ public final class DiagnosticFactory
     public static IMessage create_MAP_ENTRIES_CAN_ONLY_BE_SET_ON_MAP_TYPE(String targetName)
     {
         return new MyLocalizedMessage(IMessage.NORMAL_SEVERITY,
-                MessageFormat.format(Messages.MAP_ENTRIES_CAN_ONLY_BE_SET_ON_MAP_TYPE_ID,
-                                     new Object[]{targetName}),
-                null, MAP_ENTRIES_CAN_ONLY_BE_SET_ON_MAP_TYPE_ID);
+            MessageFormat.format(Messages.MAP_ENTRIES_CAN_ONLY_BE_SET_ON_MAP_TYPE_ID,
+                                 new Object[]{targetName}),
+            null, MAP_ENTRIES_CAN_ONLY_BE_SET_ON_MAP_TYPE_ID);
     }
 
     /**
@@ -232,9 +252,68 @@ public final class DiagnosticFactory
     public static IMessage create_LIST_ENTRIES_CAN_ONLY_BE_SET_ON_LIST_TYPE(String targetName)
     {
         return new MyLocalizedMessage(IMessage.NORMAL_SEVERITY,
-                MessageFormat.format(Messages.LIST_ENTRIES_CAN_ONLY_BE_SET_ON_LIST_TYPE_ID,
-                                     new Object[]{targetName}),
-                null, LIST_ENTRIES_CAN_ONLY_BE_SET_ON_LIST_TYPE_ID);
+            MessageFormat.format(Messages.LIST_ENTRIES_CAN_ONLY_BE_SET_ON_LIST_TYPE_ID,
+                                 new Object[]{targetName}),
+            null, LIST_ENTRIES_CAN_ONLY_BE_SET_ON_LIST_TYPE_ID);
+    }
+    
+    /**
+     * @param apiName
+     * @param beforeVersion
+     * @param useInstead
+     * @return a diagnostic indicating that an API is being used that is not yet
+     * available in the current JSF version.
+     */
+    public static IMessage create_API_NOT_AVAILABLE_BEFORE_VERSION(final String apiName, final String beforeVersion, final String useInstead)
+    {
+        return new MyLocalizedMessage(IMessage.NORMAL_SEVERITY,
+            MessageFormat.format(Messages.API_NOT_AVAILABLE_BEFORE_VERSION_ID
+                ,new Object[]{apiName, beforeVersion, useInstead})
+                ,null, API_NOT_AVAILABLE_BEFORE_VERSION_ID);
+    }
+    
+    /**
+     * @param file
+     * @return a diagnostic indicating that the app config model in use is too
+     * new for the selected JSF runtime version.
+     */
+    public static IMessage create_APP_CONFIG_IS_NEWER_THAN_JSF_VERSION(IFile file)
+    {
+        final IMessage message = new MyLocalizedMessage(IMessage.HIGH_SEVERITY,
+            Messages.APP_CONFIG_IS_NEWER_THAN_JSF_VERSION_ID
+                ,null, APP_CONFIG_IS_NEWER_THAN_JSF_VERSION_ID);
+        message.setTargetObject(file);
+        return message;
+    }
+    
+    /**
+     * @param file
+     * @param appConfigVersion 
+     * @param projectVersion 
+     * @return a diagnostic indicating that the app config model in use is older
+     * than the selected JSF runtime version.
+     */
+    public static IMessage create_APP_CONFIG_IS_OLDER_THAN_JSF_VERSION(IFile file, String appConfigVersion, String projectVersion)
+    {
+        final IMessage message = new MyLocalizedMessage(IMessage.NORMAL_SEVERITY,
+            MessageFormat.format(
+                Messages.APP_CONFIG_IS_OLDER_THAN_JSF_VERSION_ID,
+                    new Object[] {appConfigVersion, projectVersion})
+            ,null, APP_CONFIG_IS_OLDER_THAN_JSF_VERSION_ID);
+        message.setTargetObject(file);
+        return message;
+    }
+    
+    /**
+     * @return a diagnostic indicating that the locale format does
+     * not match what is expected
+     */
+    public static IMessage create_LOCALE_FORMAT_NOT_VALID()
+    {
+        IMessage message = new MyLocalizedMessage(IMessage.NORMAL_SEVERITY,
+                    Messages.LOCALE_FORMAT_NOT_VALID_ID
+                ,null, LOCALE_FORMAT_NOT_VALID_ID);
+        return message;
     }
     
     /**

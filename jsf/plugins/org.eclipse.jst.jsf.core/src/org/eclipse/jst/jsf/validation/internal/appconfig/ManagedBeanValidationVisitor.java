@@ -31,7 +31,7 @@ public class ManagedBeanValidationVisitor extends EObjectValidationVisitor
 
     protected void doValidate(EObject object, List messages, IFile file) 
     {
-        ManagedBeanType managedBean = (ManagedBeanType) object;
+        final ManagedBeanType managedBean = (ManagedBeanType) object;
         
         // TODO: validate managedBeanName is a valid Java id
 //        final String managedBeanName = 
@@ -57,9 +57,9 @@ public class ManagedBeanValidationVisitor extends EObjectValidationVisitor
         {
             String classTypeValue = classType.getTextContent();
             addMessageInfo(messages
-                    , AppConfigValidationUtil.validateClassName
-                        (classTypeValue == null ? "" : classTypeValue, 
-                                null, file.getProject()), classType, file);
+                , AppConfigValidationUtil.validateClassName
+                    (classTypeValue == null ? "" : classTypeValue, 
+                            null, file.getProject()), classType, file);
         }
     }
     

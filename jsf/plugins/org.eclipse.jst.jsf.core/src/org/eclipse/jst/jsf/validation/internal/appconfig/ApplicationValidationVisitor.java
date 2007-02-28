@@ -1,11 +1,20 @@
 package org.eclipse.jst.jsf.validation.internal.appconfig;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jst.jsf.facesconfig.emf.DefaultLocaleType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
+import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
+import org.eclipse.jst.jsf.facesconfig.emf.LocaleConfigType;
+import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanType;
+import org.eclipse.jst.jsf.facesconfig.emf.SupportedLocaleType;
 
 /**
  * Validator the <application> node of the app config model
@@ -31,18 +40,86 @@ public class ApplicationValidationVisitor extends EObjectValidationVisitor
     protected EObjectValidationVisitor[] getChildNodeValidators() {
         return new EObjectValidationVisitor[]
         {
-                // TODO: validate message and resource bundles
-                // TODO: validate default render kit id
-                // TODO: validate EL resolver
-                new ActionListenerValidationVisitor(getVersion()),
-                new NavigationHandlerValidationVisitor(getVersion()),
-                new ViewHandlerValidationVisitor(getVersion()),
-                new StateManagerValidationVisitior(getVersion()),
-                new PropertyResolverValidationVisitor(getVersion()),
-                new VariableResolverValidationVisitor(getVersion())
+            // TODO: validate message and resource bundles
+            // TODO: validate default render kit id
+            new ActionListenerValidationVisitor(getVersion()),
+            new NavigationHandlerValidationVisitor(getVersion()),
+            new ViewHandlerValidationVisitor(getVersion()),
+            new StateManagerValidationVisitior(getVersion()),
+            new PropertyResolverValidationVisitor(getVersion()),
+            new VariableResolverValidationVisitor(getVersion()),
+            new ELResolverValidationVisitor(getVersion()),
+            new LocaleConfigValidationVisitor(getVersion())
         };
     }
+    
+    protected void validateManagedBeanNames(FacesConfigType facesConfig, List messages, IFile file)
+    {
+        final Map  foundBeans = new HashMap();
+        final List firstCollisionInstance = new ArrayList();
+        
+        for (final Iterator it = facesConfig.getManagedBean().iterator(); it.hasNext();)
+        {
+            final ManagedBeanType managedBean = (ManagedBeanType) it.next();
+            
+            if (managedBean.getManagedBeanName() == null
+                    || managedBean.getManagedBeanName().getTextContent() == null
+                    || "".equals(managedBean.getManagedBeanName().getTextContent()))
+            {
+                
+            }
+            
+//            if (!foundBeans.containsKey(managedBean.getManagedBeanName()))
+        }
+    }
+    
+    private static class LocaleConfigValidationVisitor extends EObjectValidationVisitor
+    {
+        /**
+         * @param structuralFeature
+         * @param version
+         */
+        public LocaleConfigValidationVisitor(String version)
+        {
+            super(FacesConfigPackage.eINSTANCE.getApplicationType_LocaleConfig()
+                    , version);
+        }
 
+        protected void doValidate(EObject object, List messages, IFile file) 
+        {
+            final LocaleConfigType localeConfig = (LocaleConfigType) object;
+
+            DefaultLocaleType defaultLocale = localeConfig.getDefaultLocale();
+
+            if (defaultLocale != null)
+            {
+                addMessageInfo(
+                    messages,
+                    AppConfigValidationUtil
+                        .validateLocaleType(defaultLocale.getTextContent())
+                        , defaultLocale, file);
+            }
+            
+            for (final Iterator it = localeConfig.getSupportedLocale().iterator(); it.hasNext();)
+            {
+                final SupportedLocaleType supportedLocale =
+                    (SupportedLocaleType) it.next();
+                addMessageInfo(
+                    messages,
+                    AppConfigValidationUtil
+                        .validateLocaleType(supportedLocale.getTextContent())
+                        , supportedLocale, file);
+            }
+            
+        }
+
+        protected EObjectValidationVisitor[] getChildNodeValidators() {
+            // there are children, but we're going to validate in doValidate
+            return NO_CHILDREN;
+        }
+        
+    }
+    
     private static class ActionListenerValidationVisitor extends ApplicationClassNameBasedValidationVisitor
     {
         /**
@@ -103,7 +180,7 @@ public class ApplicationValidationVisitor extends EObjectValidationVisitor
             {
                 addMessageInfo(messages, 
                         DiagnosticFactory.create_API_DEPRECATED_AFTER_VERSION_ID
-                            (getInstanceOf(), "1.1", "javax.el.ELResolver")
+                            ("property-resolver", "1.1", "el-resolver")
                         , object, file);
             }
         }
@@ -126,13 +203,38 @@ public class ApplicationValidationVisitor extends EObjectValidationVisitor
             {
                 addMessageInfo(messages, 
                         DiagnosticFactory.create_API_DEPRECATED_AFTER_VERSION_ID
-                            (getInstanceOf(), "1.1", "javax.el.ELResolver")
+                            ("variable-resolver", "1.1", "el-resolver")
                         , object, file);
             }
 
         }
     }
 
+    private static class ELResolverValidationVisitor extends ApplicationClassNameBasedValidationVisitor
+    {
+        ELResolverValidationVisitor(final String version)
+        {
+            super(FacesConfigPackage.eINSTANCE.getApplicationType_ELResolver(),
+                    version, "javax.el.ELResolver");
+        }
+
+        protected void doValidate(EObject object, List messages, IFile file) {
+            // if this version less than 1.2 then property resolvers are
+            // deprecated in favour of el-resolvers
+            final String version = getVersion();
+            if ("1.0".equals(version) || "1.1".equals(version))
+            {
+                addMessageInfo(messages, 
+                        DiagnosticFactory.create_API_NOT_AVAILABLE_BEFORE_VERSION
+                            ("el-resolver", "1.2", "variable-resolver or property-resolver")
+                        , object, file);
+            }
+            else
+            {
+                super.doValidate(object, messages, file);
+            }
+        }
+    }
     
     private abstract static class ApplicationClassNameBasedValidationVisitor extends ClassNameEObjectValidationVisitor
     {

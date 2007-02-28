@@ -297,6 +297,27 @@ public final class AppConfigValidationUtil
     }
     
     /**
+     * @param localeType
+     * @return a diagnostic if 'localeType' does not match the
+     * expected format or null if all is clear
+     */
+    public static IMessage validateLocaleType(final String localeType)
+    {
+        // based on the localeType in the Faces 1.2 schema.  This is safe
+        // to apply to 1.1 since it expects the same pattern even though 
+        // the DTD cannot validate it
+        final String localeTypePattern = "[a-z]{2}(_|-)?([\\p{L}\\-\\p{Nd}]{2})?";
+        final Matcher matcher = Pattern.compile(localeTypePattern).matcher(localeType);
+        
+        if (!matcher.matches())
+        {
+            return DiagnosticFactory.create_LOCALE_FORMAT_NOT_VALID();
+        }
+        
+        return null;
+    }
+    
+    /**
      * @param type
      * @param instanceOf
      * @return true if type instanceof instanceOf is true

@@ -3,12 +3,12 @@ package org.eclipse.jst.jsf.validation.internal.appconfig;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -25,7 +25,6 @@ import org.eclipse.jst.jsp.core.internal.Logger;
 import org.eclipse.wst.common.project.facet.core.IFacetedProject;
 import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
 import org.eclipse.wst.common.project.facet.core.ProjectFacetsManager;
-import org.eclipse.wst.validation.internal.core.Message;
 import org.eclipse.wst.validation.internal.core.ValidationException;
 import org.eclipse.wst.validation.internal.provisional.core.IMessage;
 import org.eclipse.wst.validation.internal.provisional.core.IReporter;
@@ -153,7 +152,7 @@ public class AppConfigValidator implements IValidatorJob {
      * Ensure that the expected project version (facet) jives with what is in
      * the faces-config.  Generally this means:
      * 
-     * if (version == 1.1) then no 1.2 artifacts (errors)
+     * if (version == 1.1) then no 1.2 artifacts (error)
      * if (version == 1.2) then warn if using old artifacts (warning)
      */
     private String validateVersioning(IFile file, FacesConfigArtifactEdit facesConfigEdit, IReporter reporter)
@@ -169,14 +168,20 @@ public class AppConfigValidator implements IValidatorJob {
             {
                 if ("1.2".equals(appConfigFileVersion))
                 {
-                    reporter.addMessage(this, new LocalizedMessage(IMessage.HIGH_SEVERITY, "Faces 1.2 application configuration cannot be used in projects for Faces 1.1 or before", file));
+                    reporter.addMessage(this, 
+                        DiagnosticFactory
+                            .create_APP_CONFIG_IS_NEWER_THAN_JSF_VERSION(file));
                 }
             }
             else if ("1.2".equals(projectVersion))
             {
-                if ("1.1".equals(appConfigFileVersion))
+                if ("1.1".equals(appConfigFileVersion) 
+                        || "1.0".equals(appConfigFileVersion))
                 {
-                    reporter.addMessage(this, new LocalizedMessage(IMessage.LOW_SEVERITY, "Faces "+appConfigFileVersion+" application configuration being used in Faces 1.2 project.  Not all available Faces 1.2 features will be available", file));
+                    reporter.addMessage(this, 
+                        DiagnosticFactory
+                            .create_APP_CONFIG_IS_OLDER_THAN_JSF_VERSION(file
+                                    , appConfigFileVersion, projectVersion));
                 }
             }
             // if no exact match, don't make any assumptions
@@ -201,15 +206,11 @@ public class AppConfigValidator implements IValidatorJob {
         // if we have DTD doctype then we're looking at 1.1 or before
         if (docType != null)
         {
-            final String publicId = docType.getPublicId();
-            final String ids[] = publicId.split("\\/\\/");
-            if (ids.length > 2)
+            appConfigVersion = extractVersionFromPublicId(docType);
+            // if not found in the public id, try the system id
+            if (appConfigVersion == null)
             {
-                // verify that the class type is a DTD
-                if ("DTD".equals(ids[2].split("\\s*")))
-                {
-                    appConfigVersion = "1.1";
-                }
+                appConfigVersion = extractVersionFromSystemId(docType);
             }
         }
         else
@@ -241,6 +242,8 @@ public class AppConfigValidator implements IValidatorJob {
         return appConfigVersion;
     }
     
+
+
     private void validateModel(final IFile file, 
                                final FacesConfigArtifactEdit facesConfigEdit, 
                                final IReporter reporter,
@@ -289,54 +292,60 @@ public class AppConfigValidator implements IValidatorJob {
         return null;
     }
     
+    private String extractVersionFromPublicId(DocumentType docType)
+    {
+        final String publicId = docType.getPublicId();
+        final String publicIdRegex = "-\\/\\/(.*)\\/\\/(.*)\\/\\/.*";
 
-    private class LocalizedMessage extends Message {
+        if (publicId != null)
+        {
+            final Pattern pattern = Pattern.compile(publicIdRegex);
+            Matcher matcher = pattern.matcher(publicId);
 
-        private String _message = null;
-
-        LocalizedMessage(int severity, String messageText) {
-            this(severity, messageText, null);
+            if (matcher.matches())
+            {
+                final String classTypeString = matcher.group(2);
+                final String[] classTypes = classTypeString.split("\\s+");
+                
+                // verify that the class type is a DTD
+                if (classTypes.length > 0
+                        && "DTD".equals(classTypes[0]))
+                {
+                    // either 1.0 or 1.1; be most conservative
+                    String appConfigVersion = "1.0";
+                   
+                    // see if the version is in the public id
+                    if ("1.1".equals(classTypes[classTypes.length-1]))
+                    {
+                        appConfigVersion = "1.1";
+                    }
+                    
+                    return appConfigVersion;
+                }
+            }
         }
 
-        LocalizedMessage(int severity, String messageText, IResource targetObject) {
-            this(severity, messageText, (Object) targetObject);
-        }
-
-        LocalizedMessage(int severity, String messageText, Object targetObject) {
-            super(null, severity, null);
-            setLocalizedMessage(messageText);
-            setTargetObject(targetObject);
-        }
-
-        /**
-         * @param message
-         */
-        public void setLocalizedMessage(String message) {
-            _message = message;
-        }
-
-        /**
-         * @return the localized message text
-         */
-        public String getLocalizedMessage() {
-            return _message;
-        }
-
-        public String getText() {
-            return getLocalizedMessage();
-        }
-
-        public String getText(ClassLoader cl) {
-            return getLocalizedMessage();
-        }
-
-        public String getText(Locale l) {
-            return getLocalizedMessage();
-        }
-
-        public String getText(Locale l, ClassLoader cl) {
-            return getLocalizedMessage();
-        }
+        return null;
     }
 
+    private String extractVersionFromSystemId(DocumentType docType) 
+    {
+        final String systemId = docType.getSystemId();
+        final String systemIdRegEx = "http:\\/\\/java.sun.com\\/dtd\\/web-facesconfig_(.*)\\.dtd";
+        if (systemId != null)
+        {
+            final Pattern pattern = Pattern.compile(systemIdRegEx);
+            Matcher matcher = pattern.matcher(systemId);
+
+            if (matcher.matches())
+            {
+                final String version = matcher.group(1);
+                if ("1_1".equals(version)||"1_0".equals(version))
+                {
+                    return version.replaceAll("_", ".");
+                }
+            }
+        }
+        return null;
+    }
 }
