@@ -28,7 +28,7 @@ import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.jst.pagedesigner.IJMTConstants;
+import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.pagedesigner.commands.single.AddSubNodeCommand;
 import org.eclipse.jst.pagedesigner.commands.single.RemoveSubNodeCommand;
 import org.eclipse.jst.pagedesigner.properties.BaseCustomSection;
@@ -249,7 +249,7 @@ public class JSFHtmlOutputTextConverterSection extends BaseCustomSection
             {
                 Map attributes = new HashMap();
                 AddSubNodeCommand c = new AddSubNodeCommand(SectionResources.getString("JSFHtmlOutputTextSection.CommandLabel.AddSubTag"), _element, "convert" //$NON-NLS-1$ //$NON-NLS-2$
-                + _convertTypeCombo.getText(), IJMTConstants.URI_JSF_CORE, attributes);
+                + _convertTypeCombo.getText(), ITLDConstants.URI_JSF_CORE, attributes);
                 c.execute();
                 _convertViewer.refresh();
                 updateConvertButtonStatus();

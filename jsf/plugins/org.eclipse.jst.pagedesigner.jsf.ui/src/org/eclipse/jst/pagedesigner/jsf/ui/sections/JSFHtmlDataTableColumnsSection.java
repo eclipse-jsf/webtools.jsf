@@ -28,7 +28,7 @@ import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.jst.pagedesigner.IJMTConstants;
+import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.pagedesigner.IJSFConstants;
 import org.eclipse.jst.pagedesigner.commands.single.AddSubNodeCommand;
 import org.eclipse.jst.pagedesigner.commands.single.InsertSubNodeCommand;
@@ -242,20 +242,20 @@ public class JSFHtmlDataTableColumnsSection extends BaseCustomSection
                 Map attributes = new HashMap();
                 attributes.put(IJSFConstants.ATTR_ID, DEFAULT_COLUMN_NAME + (count + 1));
                 AddSubNodeCommand c = new AddSubNodeCommand(SectionResources.getString("JSFHtmlDataTableSection.CommandLabel.AddSubTag"), _element, "column", //$NON-NLS-1$ //$NON-NLS-2$
-                IJMTConstants.URI_JSF_HTML, attributes);
+                ITLDConstants.URI_JSF_HTML, attributes);
                 c.execute();
 
                 IDOMElement child = c.getChildNode();
                 attributes = new HashMap();
                 attributes.put(IJSFConstants.ATTR_NAME, DEFAULT_FACET_NAME);
-                c = new AddSubNodeCommand(SectionResources.getString("JSFHtmlDataTableSection.CommandLabel.AddSubTag"), child, "facet", IJMTConstants.URI_JSF_CORE, attributes); //$NON-NLS-1$ //$NON-NLS-2$
+                c = new AddSubNodeCommand(SectionResources.getString("JSFHtmlDataTableSection.CommandLabel.AddSubTag"), child, "facet", ITLDConstants.URI_JSF_CORE, attributes); //$NON-NLS-1$ //$NON-NLS-2$
                 c.execute();
 
                 child = c.getChildNode();
                 attributes = new HashMap();
                 attributes.put(IJSFConstants.ATTR_ID, DEFAULT_TEXT_NAME + (count + 1));
                 attributes.put(IJSFConstants.ATTR_VALUE, DEFAULT_COLUMN_NAME + (count + 1));
-                c = new AddSubNodeCommand(SectionResources.getString("JSFHtmlDataTableSection.CommandLabel.AddSubTag"), child, "outputText", IJMTConstants.URI_JSF_HTML, attributes); //$NON-NLS-1$ //$NON-NLS-2$
+                c = new AddSubNodeCommand(SectionResources.getString("JSFHtmlDataTableSection.CommandLabel.AddSubTag"), child, "outputText", ITLDConstants.URI_JSF_HTML, attributes); //$NON-NLS-1$ //$NON-NLS-2$
                 c.execute();
 
                 _columnsViewer.refresh();

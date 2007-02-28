@@ -32,7 +32,7 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.jst.pagedesigner.IJMTConstants;
+import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.pagedesigner.IJSFConstants;
 import org.eclipse.jst.pagedesigner.commands.single.AddSubNodeCommand;
 import org.eclipse.jst.pagedesigner.commands.single.ChangeAttributeCommand;
@@ -337,7 +337,7 @@ public class JSFHtmlOutputFormatParamsSection extends BaseCustomSection
                 attributes.put(IJSFConstants.ATTR_NAME, "name"); //$NON-NLS-1$
                 attributes.put(IJSFConstants.ATTR_VALUE, "value"); //$NON-NLS-1$
                 AddSubNodeCommand c = new AddSubNodeCommand(SectionResources.getString("JSFHtmlOutputFormatSection.CommandLabel.AddSubTag"), _element, "param", //$NON-NLS-1$ //$NON-NLS-2$
-                IJMTConstants.URI_JSF_CORE, attributes);
+                ITLDConstants.URI_JSF_CORE, attributes);
                 c.execute();
                 _paramViewer.refresh();
 //              TODO: does nothing updateParamButtonStatus();

@@ -14,7 +14,7 @@ package org.eclipse.jst.pagedesigner.jsf.ui.commands.jsfhtml;
 import org.eclipse.jface.viewers.ISelection;
 import org.w3c.dom.Element;
 
-import org.eclipse.jst.pagedesigner.IJMTConstants;
+import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.pagedesigner.IJSFConstants;
 import org.eclipse.jst.pagedesigner.commands.DesignerCommand;
 import org.eclipse.jst.pagedesigner.jsf.core.dom.JSFDOMUtil;
@@ -104,7 +104,7 @@ public class DataTableInsertHeaderCommand extends DesignerCommand
 
     private Element createFacet()
     {
-        String prefix = JSPUtil.getOrCreatePrefix(getModel(), IJMTConstants.URI_JSF_CORE, "f"); //$NON-NLS-1$
+        String prefix = JSPUtil.getOrCreatePrefix(getModel(), ITLDConstants.URI_JSF_CORE, "f"); //$NON-NLS-1$
         Element ele = _dataTable.getOwnerDocument().createElement(IJSFConstants.TAG_FACET);
         ele.setPrefix(prefix);
         return ele;
@@ -112,7 +112,7 @@ public class DataTableInsertHeaderCommand extends DesignerCommand
 
     private Element createDefaultElement()
     {
-        String prefix = JSPUtil.getOrCreatePrefix(getModel(), IJMTConstants.URI_JSF_HTML, "h"); //$NON-NLS-1$
+        String prefix = JSPUtil.getOrCreatePrefix(getModel(), ITLDConstants.URI_JSF_HTML, "h"); //$NON-NLS-1$
         Element ele = _dataTable.getOwnerDocument().createElement(IJSFConstants.TAG_OUTPUTTEXT);
         ele.setPrefix(prefix);
         if (this._header)

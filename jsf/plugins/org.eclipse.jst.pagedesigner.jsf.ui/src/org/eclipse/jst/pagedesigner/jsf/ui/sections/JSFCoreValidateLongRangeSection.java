@@ -11,7 +11,7 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.jsf.ui.sections;
 
-import org.eclipse.jst.pagedesigner.IJMTConstants;
+import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.pagedesigner.IJSFConstants;
 import org.eclipse.jst.pagedesigner.properties.attrgroup.AttributeGroupSection;
 
@@ -22,7 +22,7 @@ public class JSFCoreValidateLongRangeSection extends AttributeGroupSection
 {
     public JSFCoreValidateLongRangeSection()
     {
-        super(IJMTConstants.URI_JSF_CORE, IJSFConstants.TAG_VALIDATELONGRANGE, 
+        super(ITLDConstants.URI_JSF_CORE, IJSFConstants.TAG_VALIDATELONGRANGE, 
                 new String[] {
                 	IJSFConstants.ATTR_MINIMUM,
                 	IJSFConstants.ATTR_MAXIMUM

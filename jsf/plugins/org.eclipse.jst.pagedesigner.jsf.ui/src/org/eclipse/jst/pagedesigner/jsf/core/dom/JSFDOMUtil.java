@@ -18,8 +18,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import org.eclipse.jst.pagedesigner.IJMTConstants;
-import org.eclipse.jst.pagedesigner.utils.CMUtil;
+import org.eclipse.jst.jsf.core.internal.tld.CMUtil;
+import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 
 /**
  * @author mengbo
@@ -56,7 +56,7 @@ public class JSFDOMUtil
         if (node instanceof Element)
         {
             Element ele = (Element) node;
-            if ("column".equalsIgnoreCase(ele.getLocalName()) && IJMTConstants.URI_JSF_HTML.equals(CMUtil.getElementNamespaceURI(ele)))
+            if ("column".equalsIgnoreCase(ele.getLocalName()) && ITLDConstants.URI_JSF_HTML.equals(CMUtil.getElementNamespaceURI(ele)))
             {
                 return true;
             }

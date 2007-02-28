@@ -11,7 +11,7 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.jsf.ui.sections;
 
-import org.eclipse.jst.pagedesigner.IJMTConstants;
+import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.pagedesigner.IJSFConstants;
 import org.eclipse.jst.pagedesigner.properties.attrgroup.AttributeGroupSection;
 
@@ -22,7 +22,7 @@ public class JSFCoreLoadBundleSection extends AttributeGroupSection
 {
     public JSFCoreLoadBundleSection()
     {
-        super(IJMTConstants.URI_JSF_CORE, IJSFConstants.TAG_LOADBUNDLE, 
+        super(ITLDConstants.URI_JSF_CORE, IJSFConstants.TAG_LOADBUNDLE, 
                 new String[] {
                 	IJSFConstants.ATTR_BASENAME,
                 	IJSFConstants.ATTR_VAR

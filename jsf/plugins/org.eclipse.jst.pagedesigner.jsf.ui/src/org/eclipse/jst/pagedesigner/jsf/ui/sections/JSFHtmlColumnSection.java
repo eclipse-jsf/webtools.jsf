@@ -11,7 +11,7 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.jsf.ui.sections;
 
-import org.eclipse.jst.pagedesigner.IJMTConstants;
+import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.pagedesigner.IJSFConstants;
 import org.eclipse.jst.pagedesigner.properties.attrgroup.AttributeGroupSection;
 
@@ -22,7 +22,7 @@ public class JSFHtmlColumnSection extends AttributeGroupSection
 {
     public JSFHtmlColumnSection()
     {
-        super(IJMTConstants.URI_JSF_HTML, IJSFConstants.TAG_COLUMN, 
+        super(ITLDConstants.URI_JSF_HTML, IJSFConstants.TAG_COLUMN, 
                 new String[] {
                 	IJSFConstants.ATTR_ID
                 });

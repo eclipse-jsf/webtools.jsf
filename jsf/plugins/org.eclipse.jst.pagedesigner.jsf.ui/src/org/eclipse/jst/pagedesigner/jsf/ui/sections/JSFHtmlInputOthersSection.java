@@ -32,7 +32,7 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.jst.pagedesigner.IJMTConstants;
+import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.pagedesigner.IJSFConstants;
 import org.eclipse.jst.pagedesigner.commands.single.AddSubNodeCommand;
 import org.eclipse.jst.pagedesigner.commands.single.ChangeAttributeCommand;
@@ -552,7 +552,7 @@ public class JSFHtmlInputOthersSection extends BaseCustomSection
                 Map attributes = new HashMap();
                 AddSubNodeCommand c = new AddSubNodeCommand(SectionResources
                         .getString("JSFHtmlInputTextSection.CommandLabel.AddSubTag"), _element, "convert" //$NON-NLS-1$ //$NON-NLS-2$
-                        + _convertTypeCombo.getText(), IJMTConstants.URI_JSF_CORE, attributes);
+                        + _convertTypeCombo.getText(), ITLDConstants.URI_JSF_CORE, attributes);
                 c.execute();
                 _convertorsViewer.refresh();
                 updateConvertButtonStatus();
@@ -644,7 +644,7 @@ public class JSFHtmlInputOthersSection extends BaseCustomSection
                 String listener = _listenTypeCombo.getText();
                 listener = listener.substring(0, 1).toLowerCase() + listener.substring(1) + "Listener"; //$NON-NLS-1$
                 AddSubNodeCommand c = new AddSubNodeCommand(
-                        SectionResources.getString("JSFHtmlInputTextSection.CommandLabel.AddSubTag"), _element, listener, IJMTConstants.URI_JSF_CORE, attributes); //$NON-NLS-1$
+                        SectionResources.getString("JSFHtmlInputTextSection.CommandLabel.AddSubTag"), _element, listener, ITLDConstants.URI_JSF_CORE, attributes); //$NON-NLS-1$
                 c.execute();
                 _listenersViewer.refresh();
                 updateListenButtonStatus();
@@ -755,7 +755,7 @@ public class JSFHtmlInputOthersSection extends BaseCustomSection
                 Map attributes = new HashMap();
                 AddSubNodeCommand c = new AddSubNodeCommand(SectionResources
                         .getString("JSFHtmlInputTextSection.CommandLabel.AddSubTag"), _element, "validate" //$NON-NLS-1$ //$NON-NLS-2$
-                        + _validateTypeCombo.getText(), IJMTConstants.URI_JSF_CORE, attributes);
+                        + _validateTypeCombo.getText(), ITLDConstants.URI_JSF_CORE, attributes);
                 c.execute();
                 _validatorsViewer.refresh();
                 updateValidateButtonStatus();

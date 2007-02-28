@@ -28,7 +28,7 @@ import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.jst.pagedesigner.IJMTConstants;
+import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.pagedesigner.IJSFConstants;
 import org.eclipse.jst.pagedesigner.commands.single.AddSubNodeCommand;
 import org.eclipse.jst.pagedesigner.commands.single.InsertSubNodeCommand;
@@ -246,7 +246,7 @@ public class JSFHtmlSelectChoicesSection extends BaseCustomSection
                 Map attributes = new HashMap();
                 AddSubNodeCommand c = new AddSubNodeCommand(
                         SectionResources.getString("JSFHtmlSelectManyCheckboxSection.CommandLabel.AddSubTag"), _element, _choiceTypeCombo.getText(), //$NON-NLS-1$
-                        IJMTConstants.URI_JSF_CORE, attributes);
+                        ITLDConstants.URI_JSF_CORE, attributes);
                 c.execute();
                 _choiceViewer.refresh();
                 updateChoiceButtonStatus();

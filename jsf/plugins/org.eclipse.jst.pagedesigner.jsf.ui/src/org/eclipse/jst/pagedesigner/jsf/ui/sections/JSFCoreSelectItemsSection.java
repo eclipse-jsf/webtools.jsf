@@ -11,7 +11,7 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.jsf.ui.sections;
 
-import org.eclipse.jst.pagedesigner.IJMTConstants;
+import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.pagedesigner.IJSFConstants;
 import org.eclipse.jst.pagedesigner.properties.attrgroup.AttributeGroupSection;
 
@@ -22,7 +22,7 @@ public class JSFCoreSelectItemsSection extends AttributeGroupSection
 {
     public JSFCoreSelectItemsSection()
     {
-        super(IJMTConstants.URI_JSF_CORE, IJSFConstants.TAG_SELECTITEMS, 
+        super(ITLDConstants.URI_JSF_CORE, IJSFConstants.TAG_SELECTITEMS, 
                 new String[] {
                 	IJSFConstants.ATTR_ID,
                 	IJSFConstants.ATTR_VALUE,

@@ -15,7 +15,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.jface.viewers.LabelProvider;
-import org.eclipse.jst.pagedesigner.IJMTConstants;
+import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.pagedesigner.IJSFConstants;
 import org.eclipse.jst.pagedesigner.converter.HiddenTagConverter;
 import org.eclipse.jst.pagedesigner.converter.IConverterFactory;
@@ -208,7 +208,7 @@ public class JSFHTMLConverterFactory implements IConverterFactory
      */
     public String getSupportedURI()
     {
-        return IJMTConstants.URI_JSF_HTML;
+        return ITLDConstants.URI_JSF_HTML;
     }
     
     private ITagConverter createDTTagConverter(Element element)

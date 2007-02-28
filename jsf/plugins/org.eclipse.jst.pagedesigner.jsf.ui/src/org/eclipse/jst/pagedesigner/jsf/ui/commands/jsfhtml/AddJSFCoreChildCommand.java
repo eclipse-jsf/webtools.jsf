@@ -18,7 +18,7 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
 import org.w3c.dom.Element;
 
-import org.eclipse.jst.pagedesigner.IJMTConstants;
+import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.pagedesigner.commands.DesignerCommand;
 import org.eclipse.jst.pagedesigner.utils.JSPUtil;
 
@@ -82,7 +82,7 @@ public class AddJSFCoreChildCommand extends DesignerCommand
      */
     protected void doExecute()
     {
-        String prefix = JSPUtil.getOrCreatePrefix(this.getModel(), IJMTConstants.URI_JSF_CORE, "f"); //$NON-NLS-1$
+        String prefix = JSPUtil.getOrCreatePrefix(this.getModel(), ITLDConstants.URI_JSF_CORE, "f"); //$NON-NLS-1$
         String tag = _coreChildLocalName;
         Element child = _parent.getOwnerDocument().createElement(tag);
         child.setPrefix(prefix);

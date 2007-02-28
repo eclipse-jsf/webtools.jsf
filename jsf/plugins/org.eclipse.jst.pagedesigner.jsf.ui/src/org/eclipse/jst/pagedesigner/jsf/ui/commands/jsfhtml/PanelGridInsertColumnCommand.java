@@ -18,7 +18,7 @@ import org.eclipse.jface.viewers.ISelection;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
-import org.eclipse.jst.pagedesigner.IJMTConstants;
+import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.pagedesigner.IJSFConstants;
 import org.eclipse.jst.pagedesigner.commands.DesignerCommand;
 import org.eclipse.jst.pagedesigner.jsf.core.dom.JSFDOMUtil;
@@ -143,7 +143,7 @@ public class PanelGridInsertColumnCommand extends DesignerCommand
 
     private Node createDefaultNode()
     {
-        String prefix = JSPUtil.getOrCreatePrefix(getModel(), IJMTConstants.URI_JSF_HTML, "h"); //$NON-NLS-1$
+        String prefix = JSPUtil.getOrCreatePrefix(getModel(), ITLDConstants.URI_JSF_HTML, "h"); //$NON-NLS-1$
         Element child = _panelGridEle.getOwnerDocument().createElement(IJSFConstants.TAG_OUTPUTTEXT);
         child.setPrefix(prefix);
         return child;

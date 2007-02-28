@@ -28,7 +28,7 @@ import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.jst.pagedesigner.IJMTConstants;
+import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.pagedesigner.commands.single.AddSubNodeCommand;
 import org.eclipse.jst.pagedesigner.commands.single.RemoveSubNodeCommand;
 import org.eclipse.jst.pagedesigner.properties.BaseCustomSection;
@@ -249,7 +249,7 @@ public class JSFHtmlActionListenerSection extends BaseCustomSection
                 String listener = _listenTypeCombo.getText();
                 listener = listener.substring(0, 1).toLowerCase() + listener.substring(1) + "Listener"; //$NON-NLS-1$
                 AddSubNodeCommand c = new AddSubNodeCommand(
-                        SectionResources.getString("JSFHtmlCommandButtonSection.CommandLabel.AddSubTag"), _element, listener, IJMTConstants.URI_JSF_CORE, attributes); //$NON-NLS-1$
+                        SectionResources.getString("JSFHtmlCommandButtonSection.CommandLabel.AddSubTag"), _element, listener, ITLDConstants.URI_JSF_CORE, attributes); //$NON-NLS-1$
                 c.execute();
                 _listenersViewer.refresh();
                 updateListenerButtonStatus();

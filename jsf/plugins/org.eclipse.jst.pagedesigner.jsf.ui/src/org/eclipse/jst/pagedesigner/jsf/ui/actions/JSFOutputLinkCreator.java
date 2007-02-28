@@ -20,7 +20,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.Text;
 
-import org.eclipse.jst.pagedesigner.IJMTConstants;
+import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.pagedesigner.IJSFConstants;
 import org.eclipse.jst.pagedesigner.actions.link.AbstractLinkCreator;
 import org.eclipse.jst.pagedesigner.actions.link.LinkUtil;
@@ -49,8 +49,8 @@ public class JSFOutputLinkCreator extends AbstractLinkCreator
             Document doc = (parentNode instanceof Document) ? (Document) parentNode : (parentNode.getOwnerDocument());
 
             IDOMModel model = ((IDOMNode) parentNode).getModel();
-            String prefix = JSPUtil.getOrCreatePrefix(model, IJMTConstants.URI_JSF_HTML, "h");
-            String fPrefix = JSPUtil.getOrCreatePrefix(model, IJMTConstants.URI_JSF_CORE, "f");
+            String prefix = JSPUtil.getOrCreatePrefix(model, ITLDConstants.URI_JSF_HTML, "h");
+            String fPrefix = JSPUtil.getOrCreatePrefix(model, ITLDConstants.URI_JSF_CORE, "f");
 
             Element outputLink = doc.createElement(IJSFConstants.TAG_OUTPUTLINK);
             outputLink.setPrefix(prefix);
@@ -82,7 +82,7 @@ public class JSFOutputLinkCreator extends AbstractLinkCreator
         {
             return false;
         }
-        boolean canSupportJSF = JSPUtil.supportTaglib(IJMTConstants.URI_JSF_HTML, openedFile);
+        boolean canSupportJSF = JSPUtil.supportTaglib(ITLDConstants.URI_JSF_HTML, openedFile);
         if (!canSupportJSF)
         {
             return false;

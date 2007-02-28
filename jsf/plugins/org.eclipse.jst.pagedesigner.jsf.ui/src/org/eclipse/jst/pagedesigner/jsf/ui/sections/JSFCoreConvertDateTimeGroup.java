@@ -17,7 +17,7 @@ import java.util.Map;
 import org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogField;
 import org.eclipse.jst.jsf.common.ui.internal.dialogfield.IDialogFieldApplyListener;
 import org.eclipse.jst.jsf.common.ui.internal.dialogfield.StyleComboDialogField;
-import org.eclipse.jst.pagedesigner.IJMTConstants;
+import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.pagedesigner.IJSFConstants;
 import org.eclipse.jst.pagedesigner.commands.single.ChangeAttributeCommand;
 import org.eclipse.jst.pagedesigner.meta.EditorCreator;
@@ -63,7 +63,7 @@ public class JSFCoreConvertDateTimeGroup extends AttributeGroup
      */
     public JSFCoreConvertDateTimeGroup()
     {
-        super(IJMTConstants.URI_JSF_CORE, IJSFConstants.TAG_CONVERTDATETIME, new String[] { IJSFConstants.ATTR_TYPE,
+        super(ITLDConstants.URI_JSF_CORE, IJSFConstants.TAG_CONVERTDATETIME, new String[] { IJSFConstants.ATTR_TYPE,
                 IJSFConstants.ATTR_DATESTYLE, IJSFConstants.ATTR_TIMESTYLE, IJSFConstants.ATTR_PATTERN});
     }
 
