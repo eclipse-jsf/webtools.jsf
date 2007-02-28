@@ -16,7 +16,7 @@ import java.util.List;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.dnd.TemplateTransferDragSourceListener;
-import org.eclipse.jst.pagedesigner.itemcreation.ItemToolEntry;
+import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
 
 /**
  * @author mengbo
@@ -39,8 +39,8 @@ public class DesignerTemplateTransferDragSourceListener extends
 				EditPart editpart = (EditPart) getViewer()
 						.getSelectedEditParts().get(0);
 				Object model = editpart.getModel();
-				if (model instanceof ItemToolEntry) {
-					return ((ItemToolEntry) model).getItemDesc();
+				if (model instanceof TagToolPaletteEntry) {
+					return model;
 				}
 			}
 		}

@@ -2,18 +2,16 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraitTypesAdapterFactory.java,v 1.1 2007/02/07 00:03:50 gkessler Exp $
+ * $Id: TraitTypesAdapterFactory.java,v 1.2 2007/02/28 05:04:21 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
-
-import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.*;
+import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.ListOfValues;
+import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.TraitTypesPackage;
 
 /**
  * <!-- begin-user-doc -->

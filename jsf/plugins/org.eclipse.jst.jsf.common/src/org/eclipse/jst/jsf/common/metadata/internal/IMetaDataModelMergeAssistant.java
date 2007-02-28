@@ -23,14 +23,6 @@ import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
  */
 public interface IMetaDataModelMergeAssistant {
 	/**
-	 * @param source model to merge
-	 */
-	public void setSourceModel(Object source);
-	/**
-	 * @return the source model as an object to be used in the merge
-	 */
-	public Object getSourceModel();
-	/**
 	 * @return merged model
 	 */
 	public MetaDataModel getMergedModel();
@@ -60,5 +52,9 @@ public interface IMetaDataModelMergeAssistant {
 	 * This should be the last call made on the merge assistant and should be done before client calls for the merged model result.
 	 */
 	public void setMergeComplete();
+
+	public void setSourceModelProvider(IMetaDataSourceModelProvider mds);
+	public IMetaDataSourceModelProvider getSourceModelProvider();
+	
 
 }

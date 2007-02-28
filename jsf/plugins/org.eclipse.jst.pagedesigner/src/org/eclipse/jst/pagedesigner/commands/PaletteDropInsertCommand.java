@@ -23,7 +23,7 @@ import org.eclipse.jst.pagedesigner.dom.DOMPosition;
 import org.eclipse.jst.pagedesigner.dom.EditModelQuery;
 import org.eclipse.jst.pagedesigner.dom.IDOMPosition;
 import org.eclipse.jst.pagedesigner.dom.JSFValidatorSupport;
-import org.eclipse.jst.pagedesigner.editors.palette.impl.PaletteItemDescriptor;
+import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
 import org.eclipse.jst.pagedesigner.utils.CommandUtil;
 import org.eclipse.jst.pagedesigner.utils.JSPUtil;
 import org.eclipse.wst.sse.ui.StructuredTextEditor;
@@ -38,7 +38,7 @@ public class PaletteDropInsertCommand extends SourceViewerCommand {
 	private final Logger _log = PDPlugin
 			.getLogger(PaletteDropInsertCommand.class);
 
-	private PaletteItemDescriptor _descriptor;
+	private TagToolPaletteEntry _tagItem;
 
 	private int _location;
 
@@ -47,9 +47,9 @@ public class PaletteDropInsertCommand extends SourceViewerCommand {
 	private Element _element;
 
 	public PaletteDropInsertCommand(String label, StructuredTextEditor editor,
-			PaletteItemDescriptor descriptor, int location) {
+			TagToolPaletteEntry tagItem, int location) {
 		super(label, editor);
-		_descriptor = descriptor;
+		_tagItem = tagItem;
 		_location = location;
 	}
 
@@ -71,14 +71,14 @@ public class PaletteDropInsertCommand extends SourceViewerCommand {
 				position = new DOMPosition(getModel().getDocument(), 0);
 			}
 			Assert.isTrue(position != null);
-			if (!_descriptor.getURI().equalsIgnoreCase(IJMTConstants.URI_HTML)
+			if (!_tagItem.getURI().equalsIgnoreCase(IJMTConstants.URI_HTML)
 					&& //
-					!_descriptor.getURI().equalsIgnoreCase(
+					!_tagItem.getURI().equalsIgnoreCase(
 							IJMTConstants.URI_JSP)) {
 				position = JSFValidatorSupport.prepareView(position);
 			}
 			_element = CommandUtil
-					.excuteInsertion(_descriptor, model, position);
+					.excuteInsertion(_tagItem, model, position);
 			if (_element != null) {
 				_nodesToFormat.add(_element);
 				SourceViewerDragDropHelper.getInstance().changeCaret(_editor,

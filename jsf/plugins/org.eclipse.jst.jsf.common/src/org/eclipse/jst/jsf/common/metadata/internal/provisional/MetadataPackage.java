@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MetadataPackage.java,v 1.2 2007/02/07 00:03:49 gkessler Exp $
+ * $Id: MetadataPackage.java,v 1.3 2007/02/28 05:04:20 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.provisional;
 
@@ -316,7 +316,7 @@ public interface MetadataPackage extends EPackage {
 	int TRAIT__ID = 0;
 
 	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
+	 * The feature id for the '<em><b>Value</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -325,13 +325,13 @@ public interface MetadataPackage extends EPackage {
 	int TRAIT__VALUE = 1;
 
 	/**
-	 * The feature id for the '<em><b>Source Model</b></em>' reference.
+	 * The feature id for the '<em><b>Source Model Provider</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRAIT__SOURCE_MODEL = 2;
+	int TRAIT__SOURCE_MODEL_PROVIDER = 2;
 
 	/**
 	 * The number of structural features of the '<em>Trait</em>' class.
@@ -433,10 +433,10 @@ public interface MetadataPackage extends EPackage {
 	EAttribute getTrait_Id();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait#getValue <em>Value</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Value</em>'.
+	 * @return the meta object for the containment reference '<em>Value</em>'.
 	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait#getValue()
 	 * @see #getTrait()
 	 * @generated
@@ -444,15 +444,15 @@ public interface MetadataPackage extends EPackage {
 	EReference getTrait_Value();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait#getSourceModel <em>Source Model</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait#getSourceModelProvider <em>Source Model Provider</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Source Model</em>'.
-	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait#getSourceModel()
+	 * @return the meta object for the attribute '<em>Source Model Provider</em>'.
+	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait#getSourceModelProvider()
 	 * @see #getTrait()
 	 * @generated
 	 */
-	EReference getTrait_SourceModel();
+	EAttribute getTrait_SourceModelProvider();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.IncludeEntityGroup <em>Include Entity Group</em>}'.
@@ -689,7 +689,7 @@ public interface MetadataPackage extends EPackage {
 		EAttribute TRAIT__ID = eINSTANCE.getTrait_Id();
 
 		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -697,12 +697,12 @@ public interface MetadataPackage extends EPackage {
 		EReference TRAIT__VALUE = eINSTANCE.getTrait_Value();
 
 		/**
-		 * The meta object literal for the '<em><b>Source Model</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Source Model Provider</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TRAIT__SOURCE_MODEL = eINSTANCE.getTrait_SourceModel();
+		EAttribute TRAIT__SOURCE_MODEL_PROVIDER = eINSTANCE.getTrait_SourceModelProvider();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.jst.jsf.common.metadata.internal.impl.IncludeEntityGroupImpl <em>Include Entity Group</em>}' class.

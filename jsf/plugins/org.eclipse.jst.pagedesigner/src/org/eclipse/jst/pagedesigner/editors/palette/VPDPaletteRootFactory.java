@@ -19,20 +19,20 @@ import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.editors.palette.impl.PaletteItemManager;
 
 /**
- * @author mengbo
+ * @author mengbo 
  */
-public class HTMLEditorPaletteFactory {
+public class VPDPaletteRootFactory {
 	/** Default palette size. */
 	private static final int DEFAULT_PALETTE_SIZE = 125;
 
 	/** Preference ID used to persist the palette location. */
-	private static final String PALETTE_DOCK_LOCATION = "HTMLEditorPaletteFactory.Location";
+	private static final String PALETTE_DOCK_LOCATION = "VPDPaletteRootFactory.Location";
 
 	/** Preference ID used to persist the palette size. */
-	private static final String PALETTE_SIZE = "HTMLEditorPaletteFactory.Size";
+	private static final String PALETTE_SIZE = "VPDPaletteRootFactory.Size";
 
 	/** Preference ID used to persist the flyout palette's state. */
-	private static final String PALETTE_STATE = "HTMLEditorPaletteFactory.State";
+	private static final String PALETTE_STATE = "VPDPaletteRootFactory.State";
 
 	/**
 	 * Return a FlyoutPreferences instance used to save/load the preferences of
@@ -88,7 +88,7 @@ public class HTMLEditorPaletteFactory {
 	 * 
 	 * @return a new PaletteRoot
 	 */
-	public static PaletteRoot createPalette(IProject project) {
+	public static PaletteRoot createPaletteRoot(IProject project) {
 		PaletteItemManager manager = PaletteItemManager.getInstance(project);
 		if (manager == null) {
 			return null;

@@ -16,7 +16,6 @@ import java.util.List;
 
 import org.eclipse.gef.Tool;
 import org.eclipse.gef.palette.MarqueeToolEntry;
-import org.eclipse.gef.palette.PaletteDrawer;
 import org.eclipse.gef.palette.PaletteEntry;
 import org.eclipse.gef.palette.PaletteGroup;
 import org.eclipse.gef.palette.PaletteRoot;
@@ -25,7 +24,6 @@ import org.eclipse.gef.palette.ToolEntry;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.editors.pagedesigner.PageDesignerResources;
-import org.eclipse.jst.pagedesigner.itemcreation.ItemToolEntry;
 import org.eclipse.jst.pagedesigner.tools.RangeSelectionTool;
 
 /**
@@ -111,91 +109,9 @@ public class DesignerPaletteRoot extends PaletteRoot {
 
 		List categories = _manager.getAllCategories();
 		List drawers = new ArrayList(categories.size());
-		for (int i = 0, m = categories.size(); i < m; i++) {
-			IPaletteItemCategory cat = (IPaletteItemCategory) categories.get(i);
-			PaletteDrawer drawer = new PaletteDrawer(cat.getLabel());
-			cat.setPaletteEntry(drawer);
-			drawer.setId(cat.getId());
-			drawer.setLabel(cat.getLabel());
-			drawer.setDescription(cat.getDescription());
-			drawer.setVisible(cat.isVisible());
-			drawer.setInitialState(cat.getInitialState());
-			// if (i==categories.size()-1)
-			// {
-			// drawer.setInitialState(PaletteDrawer.INITIAL_STATE_OPEN);
-			// }
-			// else
-			// {
-			// drawer.setInitialState(PaletteDrawer.INITIAL_STATE_CLOSED);
-			// }
-			List items = cat.getPaletteItems();
-			for (int j = 0, n = items.size(); j < n; j++) {
-				entry = createEntry((IPaletteItemDescriptor) items.get(j));
-				if (entry != null) {
-					drawer.add(entry);
-				}
-			}
-			drawers.add(drawer);
-		}
-		// ok, add all the drawers at once
-		this.addAll(drawers);
+		this.addAll(categories);
 	}
 
-	/**
-	 * @param descriptor
-	 * @return
-	 */
-	private PaletteEntry createEntry(IPaletteItemDescriptor descriptor) {
-		// check expert flag.
-		// if (descriptor.isVisible() && !_showAll)
-		// return null;
-
-		// XXX: it is possible to let descriptor to implement certain interface
-		// to provide
-		// special palette entry other than the default one.
-		String label = descriptor.getLabel();
-		if (label == null || label.length() == 0) {
-			label = descriptor.getTagName();
-		}
-		String shortDesc = descriptor.getDescription();
-		if (shortDesc == null || shortDesc.length() == 0) {
-			shortDesc = label;
-		}
-		shortDesc = formatDescription(shortDesc);
-		ImageDescriptor iconSmall = descriptor.getSmallIcon();
-		if (iconSmall == null) {
-			iconSmall = getDefaultSmallIcon();
-		}
-		ImageDescriptor iconLarge = descriptor.getLargeIcon();
-		if (iconLarge == null) {
-			iconLarge = getDefaultLargeIcon();
-		}
-
-		// TODO: suggested prefix is null now. We may also put that into
-		// itemdescriptor
-		// CreationFactory factory = new
-		// NodeCreationFactory(descriptor.getURI(), descriptor.getTagName(),
-		// null, descriptor.getInitialAttributes());
-
-		// CreationToolEntry entry = new CreationToolEntry(label, shortDesc,
-		// factory, iconSmall, iconLarge);
-		ItemToolEntry entry = new ItemToolEntry(label, shortDesc, iconSmall,
-				iconLarge, descriptor);
-		entry.setId(descriptor.getId());
-
-		boolean isVisible = descriptor.isVisible();
-		entry.setVisible(isVisible);
-		// if (_showAll)
-		// {
-		// entry.setVisible(true);
-		// }
-		// else
-		// {
-		// entry.setVisible(descriptor.isVisible());
-		// }
-		descriptor.setPaletteEntry(entry);
-		return entry;
-	}
 
 	private String formatDescription(String desc) {
         // first, truncate the string

@@ -97,8 +97,8 @@ public class StandardModelFactory {
 	 * @return the root of the standard model from the resource as an EList
 	 * @throws IOException
 	 */
-	public EList loadStandardFileResource(InputStream inputStream) throws IOException {
-		XMLResource res = new MetadataResourceImpl(); 
+	public EList loadStandardFileResource(InputStream inputStream, IMetaDataSourceModelProvider provider) throws IOException {
+		XMLResource res = new MetadataResourceImpl(provider); 
 		resourceSet.getResources().add(res);
 		setLoadOptions(res);
 		res.load(inputStream, null);

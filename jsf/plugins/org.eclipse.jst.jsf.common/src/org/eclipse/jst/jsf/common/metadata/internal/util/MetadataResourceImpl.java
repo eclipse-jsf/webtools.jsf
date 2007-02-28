@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MetadataResourceImpl.java,v 1.3 2007/02/07 00:03:50 gkessler Exp $
+ * $Id: MetadataResourceImpl.java,v 1.4 2007/02/28 05:04:22 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.util;
 
@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.xmi.XMLHelper;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMLHelperImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
+import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.MetadataPackage;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Model;
@@ -30,6 +31,13 @@ import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
  * @generated NOT
  */
 public class MetadataResourceImpl extends XMLResourceImpl implements XMLResource.ResourceHandler {
+	
+	protected IMetaDataSourceModelProvider _provider;
+
+	public MetadataResourceImpl(IMetaDataSourceModelProvider provider){
+		super();
+		_provider = provider;
+	}
 	/**
 	* Override createXMLHelper so that MetadataPackage.eINSTANCE is used for the NoNamespace package
 	* @generated NOT
@@ -40,7 +48,6 @@ public class MetadataResourceImpl extends XMLResourceImpl implements XMLResource
 				return MetadataPackage.eINSTANCE;
 			}
 		};
-		
 	}
 
 	/**
@@ -74,9 +81,9 @@ public class MetadataResourceImpl extends XMLResourceImpl implements XMLResource
 	}
 
 	private void setModelKeyInTraits(Model root, Entity currentEntity) {
-		EStructuralFeature feature = MetadataPackage.eINSTANCE.getTrait_SourceModel();
+		EStructuralFeature feature = MetadataPackage.eINSTANCE.getTrait_SourceModelProvider();
 		for (int i=0;i < currentEntity.getTraits().size();i++){
-			((Trait)currentEntity.getTraits().get(i)).setSourceModel(root);
+			((Trait)currentEntity.getTraits().get(i)).setSourceModelProvider(_provider);
 		}
 		for (int j=0;j < currentEntity.getChildEntities().size();j++){
 			setModelKeyInTraits(root,(Entity)currentEntity.getChildEntities().get(j));

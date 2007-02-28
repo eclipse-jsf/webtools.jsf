@@ -678,12 +678,20 @@
    <extension
          point="org.eclipse.jst.jsf.common.standardMetaDataFiles">
       <standardMetaDataFile
+            location="/metadata/jsf_html.xml"
+            uri="http://java.sun.com/jsf/html">
+      </standardMetaDataFile>
+      <standardMetaDataFile
+            location="/metadata/jsf_core.xml"
+            uri="http://java.sun.com/jsf/core">
+      </standardMetaDataFile>
+            <standardMetaDataFile
             location="/metadata/jsf_core_dti.xml"
             uri="http://java.sun.com/jsf/core">
       </standardMetaDataFile>
       <standardMetaDataFile
             location="/metadata/jsf_html_dti.xml"
             uri="http://java.sun.com/jsf/html">
-      </standardMetaDataFile>
+      </standardMetaDataFile>      
    </extension>
 </plugin>

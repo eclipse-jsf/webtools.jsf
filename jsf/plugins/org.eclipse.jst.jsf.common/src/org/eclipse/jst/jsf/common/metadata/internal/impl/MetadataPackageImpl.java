@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MetadataPackageImpl.java,v 1.2 2007/02/07 00:03:49 gkessler Exp $
+ * $Id: MetadataPackageImpl.java,v 1.3 2007/02/28 05:04:20 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.impl;
 
@@ -194,8 +194,8 @@ public class MetadataPackageImpl extends EPackageImpl implements MetadataPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTrait_SourceModel() {
-		return (EReference)traitEClass.getEStructuralFeatures().get(2);
+	public EAttribute getTrait_SourceModelProvider() {
+		return (EAttribute)traitEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -414,7 +414,7 @@ public class MetadataPackageImpl extends EPackageImpl implements MetadataPackage
 		traitEClass = createEClass(TRAIT);
 		createEAttribute(traitEClass, TRAIT__ID);
 		createEReference(traitEClass, TRAIT__VALUE);
-		createEReference(traitEClass, TRAIT__SOURCE_MODEL);
+		createEAttribute(traitEClass, TRAIT__SOURCE_MODEL_PROVIDER);
 
 		includeEntityGroupEClass = createEClass(INCLUDE_ENTITY_GROUP);
 		createEAttribute(includeEntityGroupEClass, INCLUDE_ENTITY_GROUP__ID);
@@ -482,8 +482,8 @@ public class MetadataPackageImpl extends EPackageImpl implements MetadataPackage
 
 		initEClass(traitEClass, Trait.class, "Trait", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTrait_Id(), ecorePackage.getEString(), "id", null, 1, 1, Trait.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTrait_Value(), ecorePackage.getEObject(), null, "value", null, 0, 1, Trait.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTrait_SourceModel(), this.getModel(), null, "sourceModel", null, 1, 1, Trait.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTrait_Value(), ecorePackage.getEObject(), null, "value", null, 1, 1, Trait.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTrait_SourceModelProvider(), this.getIMetaDataSourceModelProvider(), "sourceModelProvider", null, 0, 1, Trait.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(traitEClass, null, "accept");
 		addEParameter(op, this.getITraitVisitor(), "visitor", 0, 1);
@@ -570,7 +570,14 @@ public class MetadataPackageImpl extends EPackageImpl implements MetadataPackage
 		   new String[] {
 			 "kind", "element",
 			 "name", "trait"
-		   });	
+		   });			
+		addAnnotation
+		  (getTrait_Value(), 
+		   source, 
+		   new String[] {
+			 "kind", "element",
+			 "namespace", "##targetNamespace"
+		   });
 	}
 
 	/**
@@ -586,7 +593,7 @@ public class MetadataPackageImpl extends EPackageImpl implements MetadataPackage
 		   source, 
 		   new String[] {
 			 "body", "visitor.visit(this);"
-		   });
+		   });	
 	}
 
 } //MetadataPackageImpl

@@ -19,6 +19,8 @@ import java.util.ResourceBundle;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.BasicEObjectImpl;
+import org.eclipse.emf.ecore.util.FeatureMap;
+import org.eclipse.emf.ecore.xml.type.AnyType;
 import org.eclipse.emf.ecore.xml.type.SimpleAnyType;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
@@ -46,6 +48,11 @@ public class TraitValueHelper {
 		if (trait.getValue() instanceof SimpleAnyType){
 			return ((SimpleAnyType)trait.getValue()).getRawValue();
 		}
+		else if (trait.getValue() instanceof AnyType){
+			AnyType any = (AnyType)trait.getValue();
+			FeatureMap map = any.getMixed();			
+			return getTextValueFromFeatureMap(map);
+		}
 		else if ( trait.getValue().eIsProxy() && trait.getValue() instanceof BasicEObjectImpl){
 			BasicEObjectImpl o = (BasicEObjectImpl)trait.getValue();
 			return o.eProxyURI().toString();
@@ -53,29 +60,42 @@ public class TraitValueHelper {
 		return trait.getValue();
 	}
 	
+	private static String getTextValueFromFeatureMap(FeatureMap map) {
+		for (Iterator it=map.iterator();it.hasNext();){
+			FeatureMap.Entry entry = (FeatureMap.Entry)it.next();
+			if (entry.getEStructuralFeature().getName().equals("text"))		
+				return (String)entry.getValue();
+		}
+		return null;
+	}
+
 	public static String getValueAsString(Trait trait){
-		if (getValue(trait) != null)
-			return getValue(trait).toString();
-		
+		Object val = getValue(trait);
+		if (val != null && val instanceof String){			
+			String result = getNLSValue(trait, (String)val);
+			return result;
+		}
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @param trait whose value a {@link ListOfValues} or is a single string
+	 * @return List of Strings
+	 */
 	public static List getValueAsListOfStrings(Trait trait){
-		//PROTO ONLY!!! Must make WAY more robust!
+		//PROTO ONLY!!! Need to make WAY more robust!
 		List ret = new ArrayList();
 		if (trait.getValue() instanceof ListOfValues) {
 			for(Iterator it=trait.getValue().eContents().iterator();it.hasNext();){
 				Object o = it.next();				
 				if (o instanceof SimpleAnyType){
 					SimpleAnyType sat = (SimpleAnyType)o;
-					String rawValue = sat.getRawValue();
-					if (rawValue.startsWith("%") && !rawValue.startsWith("%%")){ 
-						String key = rawValue.substring(1);
-						rawValue = getNLSPropertyValue(trait, key);						
-						sat.setRawValue(rawValue);
-					}
-					ret.add(rawValue);
-				}				
+					String rawValue = getTextValueFromFeatureMap(sat.getMixed());
+					String nlsValue = getNLSValue(trait, rawValue);
+					
+					ret.add(nlsValue);
+				}	
 			}
 		} 
 		else {
@@ -87,20 +107,38 @@ public class TraitValueHelper {
 		return ret;
 	}
 	
+	/**
+	 * Looks for '%' (and not '%%') at beginning of rawValue.   If found, looks to the
+	 * traits sourceModelProvider for resource bundle to resolve the key after 
+	 * stripping the '%' sign.
+	 * @param trait
+	 * @param rawValue of string in from metadata
+	 * @return the NLS Value or rawValue if it cannot be located
+	 */
+	public static String getNLSValue(Trait trait, String rawValue) {
+		String result = rawValue;
+		if (rawValue.startsWith("%") && !rawValue.startsWith("%%")){ 
+			String key = rawValue.substring(1);
+			result = getNLSPropertyValue(trait, key);	
+			if (rawValue == null){
+				result = rawValue;
+			}
+		}
+		return result;
+	}
+
 	//will return null if there is an IOException with ResourceBundle
 	private static String getNLSPropertyValue(Trait trait, String key){
-		String NOT_FOUND = Messages.CMAnnotationMap_key_not_found;
+		String NOT_FOUND = Messages.CMAnnotationMap_key_not_found;//FIX ME
 		try{
-			IMetaDataSourceModelProvider provider = trait.getSourceModel().getSourceModelProvider();
-			if (provider.canAdapt(IResourceBundleProvider.class)){
-				IResourceBundleProvider resourceBundleProvider = (IResourceBundleProvider)provider.getAdapter(IResourceBundleProvider.class);		
-				if (resourceBundleProvider != null){
-					ResourceBundle resourceBundle_ = resourceBundleProvider.getResourceBundle();				
-					if (resourceBundle_ != null){
-						String replVal = resourceBundle_.getString(key);
-						return replVal;
-					}
-				}
+			IMetaDataSourceModelProvider provider = trait.getSourceModelProvider();
+			IResourceBundleProvider resourceBundleProvider = (IResourceBundleProvider)provider.getAdapter(IResourceBundleProvider.class);		
+			if (resourceBundleProvider != null){
+				ResourceBundle resourceBundle_ = resourceBundleProvider.getResourceBundle();				
+				if (resourceBundle_ != null){
+					String replVal = resourceBundle_.getString(key);
+					return replVal;
+				}				
 			}
 			//return original string 
 			return key; 
@@ -126,6 +164,23 @@ public class TraitValueHelper {
 			return false;
 		
 		return Boolean.valueOf(val).booleanValue();
+
+	}
+	
+	/**
+	 * Caller must know to expect a Boolean object trait type.  Null will be returned if it is not. 
+	 * @param trait
+	 * @return Boolean or null
+	 */
+	public static Boolean getValueAsBooleanObject(Trait trait) {
+
+		Object val = getValue(trait);
+		if (val == null)
+			return null;
+		
+//		if ()
+			return null;
+//		return Boolean.valueOf(val).booleanValue();
 
 	}
 

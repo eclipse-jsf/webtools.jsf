@@ -15,7 +15,9 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.wst.sse.core,
  org.eclipse.wst.xml.core,
  org.eclipse.jst.jsp.core,
- org.eclipse.wst.html.core
+ org.eclipse.wst.html.core,
+ org.eclipse.jst.jsf.common,
+ org.eclipse.jface
 Eclipse-LazyStart: true
 Provide-Package: javax.servlet,
  javax.servlet.http,

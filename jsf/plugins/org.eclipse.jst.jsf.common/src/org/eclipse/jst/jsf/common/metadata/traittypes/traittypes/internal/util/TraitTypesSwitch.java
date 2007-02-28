@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraitTypesSwitch.java,v 1.1 2007/02/07 00:03:50 gkessler Exp $
+ * $Id: TraitTypesSwitch.java,v 1.2 2007/02/28 05:04:21 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.util;
 
@@ -10,8 +10,8 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-
-import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.*;
+import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.ListOfValues;
+import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.TraitTypesPackage;
 
 /**
  * <!-- begin-user-doc -->

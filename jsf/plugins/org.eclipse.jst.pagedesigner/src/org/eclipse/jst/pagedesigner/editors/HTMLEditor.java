@@ -419,7 +419,7 @@ public class HTMLEditor extends PostSelectionMultiPageEditorPart implements
 		super.dispose();
 		
         // TODO: passing null?
-		_log.info("Debug.HTMLEditor.0", (String)null);
+		//_log.info("Debug.HTMLEditor.0", (String)null);
 	}
 
 	public void doSave(IProgressMonitor monitor) {

@@ -83,7 +83,7 @@ public class DTHTMLOutputRenderer implements IOutputRenderer {
 				if (classname != null && classname.length() > 0) {
 					try {
 						Trait trait = dtInfo.getTrait();
-						IClassLoaderProvider classLoaderProvider = (IClassLoaderProvider)trait.getSourceModel().getSourceModelProvider().getAdapter(IClassLoaderProvider.class);
+						IClassLoaderProvider classLoaderProvider = (IClassLoaderProvider)trait.getSourceModelProvider().getAdapter(IClassLoaderProvider.class);
 						if (classLoaderProvider != null) {
 							Class opClass = classLoaderProvider.loadClass(classname);
 							if (opClass != null) {

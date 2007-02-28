@@ -57,7 +57,7 @@ public class DomainSourceTypesRegistry{
 		if (getDomainSourceTypes().containsKey(domain))
 			return (List)getDomainSourceTypes().get(domain);
 		
-		List/*<DomainSourceModelTypeDescriptor>*/ list = (List)getDescriptors().get(domain);
+		List/*<DomainSourceModelTypeDescriptor>*/ list = getDomainSourceModelDescriptors(domain);
 		List/*<IDomainSourceModelType>*/ types = new ArrayList/*<IDomainSourceModelType>*/();
 		for(Iterator/*<DomainSourceModelTypeDescriptor>*/ it=list.iterator();it.hasNext();){
 			DomainSourceModelTypeDescriptor d = (DomainSourceModelTypeDescriptor)it.next();
@@ -82,6 +82,21 @@ public class DomainSourceTypesRegistry{
 		return types;
 	}
 	
+	private List getDomainSourceModelDescriptors(String domain) {
+		List ret = (List)getDescriptors().get(domain);
+		if (ret != null && ret.size()>0)
+			return ret;
+		
+		return getDefaultSourceModelDescriptor();
+	}
+
+	private List getDefaultSourceModelDescriptor() {
+		List ret = new ArrayList();
+		DomainSourceModelTypeDescriptor desc = new DomainSourceModelTypeDescriptor();
+		ret.add(desc);
+		return ret;
+	}
+
 	private synchronized void init() {
 		IExtensionRegistry extensionRegistry = Platform.getExtensionRegistry();
 		IExtensionPoint point = extensionRegistry.getExtensionPoint(JSFCommonPlugin.PLUGIN_ID, EXTENSION_POINT_ID );

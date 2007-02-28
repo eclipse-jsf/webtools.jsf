@@ -2,18 +2,19 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraitImpl.java,v 1.1 2007/01/15 23:26:15 gkessler Exp $
+ * $Id: TraitImpl.java,v 1.2 2007/02/28 05:04:20 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.MetadataPackage;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.Model;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.ITraitVisitor;
 
@@ -65,7 +66,7 @@ public class TraitImpl extends EObjectImpl implements Trait {
 	protected String id = ID_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getValue() <em>Value</em>}' reference.
+	 * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getValue()
@@ -75,23 +76,24 @@ public class TraitImpl extends EObjectImpl implements Trait {
 	protected EObject value = null;
 
 	/**
-	 * The cached value of the '{@link #getSourceModel() <em>Source Model</em>}' reference.
+	 * The default value of the '{@link #getSourceModelProvider() <em>Source Model Provider</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSourceModel()
+	 * @see #getSourceModelProvider()
 	 * @generated
 	 * @ordered
 	 */
-	protected Model sourceModel = null;
+	protected static final IMetaDataSourceModelProvider SOURCE_MODEL_PROVIDER_EDEFAULT = null;
 
 	/**
-	 * This is true if the Source Model reference has been set.
+	 * The cached value of the '{@link #getSourceModelProvider() <em>Source Model Provider</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see #getSourceModelProvider()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean sourceModelESet = false;
+	protected IMetaDataSourceModelProvider sourceModelProvider = SOURCE_MODEL_PROVIDER_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -117,14 +119,6 @@ public class TraitImpl extends EObjectImpl implements Trait {
 	 * @generated
 	 */
 	public EObject getValue() {
-		if (value != null && value.eIsProxy()) {
-			InternalEObject oldValue = (InternalEObject)value;
-			value = eResolveProxy(oldValue);
-			if (value != oldValue) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MetadataPackage.TRAIT__VALUE, oldValue, value));
-			}
-		}
 		return value;
 	}
 
@@ -133,8 +127,14 @@ public class TraitImpl extends EObjectImpl implements Trait {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EObject basicGetValue() {
-		return value;
+	public NotificationChain basicSetValue(EObject newValue, NotificationChain msgs) {
+		EObject oldValue = value;
+		value = newValue;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MetadataPackage.TRAIT__VALUE, oldValue, newValue);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -143,27 +143,17 @@ public class TraitImpl extends EObjectImpl implements Trait {
 	 * @generated
 	 */
 	public void setValue(EObject newValue) {
-		EObject oldValue = value;
-		value = newValue;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MetadataPackage.TRAIT__VALUE, oldValue, value));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Model getSourceModel() {
-		if (sourceModel != null && sourceModel.eIsProxy()) {
-			InternalEObject oldSourceModel = (InternalEObject)sourceModel;
-			sourceModel = (Model)eResolveProxy(oldSourceModel);
-			if (sourceModel != oldSourceModel) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MetadataPackage.TRAIT__SOURCE_MODEL, oldSourceModel, sourceModel));
-			}
+		if (newValue != value) {
+			NotificationChain msgs = null;
+			if (value != null)
+				msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MetadataPackage.TRAIT__VALUE, null, msgs);
+			if (newValue != null)
+				msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MetadataPackage.TRAIT__VALUE, null, msgs);
+			msgs = basicSetValue(newValue, msgs);
+			if (msgs != null) msgs.dispatch();
 		}
-		return sourceModel;
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MetadataPackage.TRAIT__VALUE, newValue, newValue));
 	}
 
 	/**
@@ -171,8 +161,8 @@ public class TraitImpl extends EObjectImpl implements Trait {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Model basicGetSourceModel() {
-		return sourceModel;
+	public IMetaDataSourceModelProvider getSourceModelProvider() {
+		return sourceModelProvider;
 	}
 
 	/**
@@ -180,36 +170,11 @@ public class TraitImpl extends EObjectImpl implements Trait {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSourceModel(Model newSourceModel) {
-		Model oldSourceModel = sourceModel;
-		sourceModel = newSourceModel;
-		boolean oldSourceModelESet = sourceModelESet;
-		sourceModelESet = true;
+	public void setSourceModelProvider(IMetaDataSourceModelProvider newSourceModelProvider) {
+		IMetaDataSourceModelProvider oldSourceModelProvider = sourceModelProvider;
+		sourceModelProvider = newSourceModelProvider;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MetadataPackage.TRAIT__SOURCE_MODEL, oldSourceModel, sourceModel, !oldSourceModelESet));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void unsetSourceModel() {
-		Model oldSourceModel = sourceModel;
-		boolean oldSourceModelESet = sourceModelESet;
-		sourceModel = null;
-		sourceModelESet = false;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.UNSET, MetadataPackage.TRAIT__SOURCE_MODEL, oldSourceModel, null, oldSourceModelESet));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isSetSourceModel() {
-		return sourceModelESet;
+			eNotify(new ENotificationImpl(this, Notification.SET, MetadataPackage.TRAIT__SOURCE_MODEL_PROVIDER, oldSourceModelProvider, sourceModelProvider));
 	}
 
 	/**
@@ -247,16 +212,27 @@ public class TraitImpl extends EObjectImpl implements Trait {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case MetadataPackage.TRAIT__VALUE:
+				return basicSetValue(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case MetadataPackage.TRAIT__ID:
 				return getId();
 			case MetadataPackage.TRAIT__VALUE:
-				if (resolve) return getValue();
-				return basicGetValue();
-			case MetadataPackage.TRAIT__SOURCE_MODEL:
-				if (resolve) return getSourceModel();
-				return basicGetSourceModel();
+				return getValue();
+			case MetadataPackage.TRAIT__SOURCE_MODEL_PROVIDER:
+				return getSourceModelProvider();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -274,8 +250,8 @@ public class TraitImpl extends EObjectImpl implements Trait {
 			case MetadataPackage.TRAIT__VALUE:
 				setValue((EObject)newValue);
 				return;
-			case MetadataPackage.TRAIT__SOURCE_MODEL:
-				setSourceModel((Model)newValue);
+			case MetadataPackage.TRAIT__SOURCE_MODEL_PROVIDER:
+				setSourceModelProvider((IMetaDataSourceModelProvider)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -294,8 +270,8 @@ public class TraitImpl extends EObjectImpl implements Trait {
 			case MetadataPackage.TRAIT__VALUE:
 				setValue((EObject)null);
 				return;
-			case MetadataPackage.TRAIT__SOURCE_MODEL:
-				unsetSourceModel();
+			case MetadataPackage.TRAIT__SOURCE_MODEL_PROVIDER:
+				setSourceModelProvider(SOURCE_MODEL_PROVIDER_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -312,8 +288,8 @@ public class TraitImpl extends EObjectImpl implements Trait {
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 			case MetadataPackage.TRAIT__VALUE:
 				return value != null;
-			case MetadataPackage.TRAIT__SOURCE_MODEL:
-				return isSetSourceModel();
+			case MetadataPackage.TRAIT__SOURCE_MODEL_PROVIDER:
+				return SOURCE_MODEL_PROVIDER_EDEFAULT == null ? sourceModelProvider != null : !SOURCE_MODEL_PROVIDER_EDEFAULT.equals(sourceModelProvider);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -329,6 +305,8 @@ public class TraitImpl extends EObjectImpl implements Trait {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (id: ");
 		result.append(id);
+		result.append(", sourceModelProvider: ");
+		result.append(sourceModelProvider);
 		result.append(')');
 		return result.toString();
 	}

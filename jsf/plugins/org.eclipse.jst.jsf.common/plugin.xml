@@ -21,8 +21,7 @@
             domainSourceModelTypeId="DefaultMetaDataTagLibraryHandler"
             locator="org.eclipse.jst.jsf.common.metadata.internal.StandardMetaDataLocator"
             ordinal="10">
-      </domainSourceModelTypes>
-   
+      </domainSourceModelTypes>   
    </extension>
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 

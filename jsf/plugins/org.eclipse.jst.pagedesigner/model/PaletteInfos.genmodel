@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2007 Oracle Corporation"
+    modelDirectory="/org.eclipse.jst.pagedesigner/src" editDirectory="/org.eclipse.jst.pagedesigner/src"
+    editorDirectory="/org.eclipse.jst.pagedesigner/src" modelPluginID="org.eclipse.jst.pagedesigner"
+    modelName="PaletteInfos" editPluginClass="org.eclipse.jst.pagedesigner.PDPlugin"
+    editorPluginClass="org.eclipse.jst.pagedesigner.PDPlugin" testsDirectory="/org.eclipse.jst.pagedesigner/src"
+    testSuiteClass="org.eclipse.jst.pagedesigner.PDPlugin" importerID="org.eclipse.emf.importer.ecore"
+    usedGenPackages="../../../plugin/org.eclipse.emf.ecore/model/XMLType.genmodel#//type">
+  <foreignModel>PaletteInfos.ecore</foreignModel>
+  <genPackages prefix="PaletteInfos" basePackage="org.eclipse.jst.pagedesigner.editors.palette"
+      disposableProviderFactory="true" interfacePackageSuffix="internal.provisional"
+      metaDataPackageSuffix="internal.provisional" classPackageSuffix="internal.impl"
+      utilityPackageSuffix="internal.util" providerPackageSuffix="internal.provider"
+      presentationPackageSuffix="internal.presentation" testsPackageSuffix="internal.tests"
+      generateExampleClass="false" multipleEditorPages="false" generateModelWizard="false"
+      ecorePackage="PaletteInfos.ecore#/">
+    <genClasses ecoreClass="PaletteInfos.ecore#//PaletteInfos">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PaletteInfos.ecore#//PaletteInfos/infos"/>
+      <genOperations ecoreOperation="PaletteInfos.ecore#//PaletteInfos/findPaletteInfoById">
+        <genParameters ecoreParameter="PaletteInfos.ecore#//PaletteInfos/findPaletteInfoById/id"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="PaletteInfos.ecore#//PaletteInfo">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PaletteInfos.ecore#//PaletteInfo/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PaletteInfos.ecore#//PaletteInfo/tag"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PaletteInfos.ecore#//PaletteInfo/displayLabel"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PaletteInfos.ecore#//PaletteInfo/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PaletteInfos.ecore#//PaletteInfo/expert"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PaletteInfos.ecore#//PaletteInfo/hidden"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PaletteInfos.ecore#//PaletteInfo/smallIcon"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PaletteInfos.ecore#//PaletteInfo/largeIcon"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference PaletteInfos.ecore#//PaletteInfo/tagCreation"/>
+      <genOperations ecoreOperation="PaletteInfos.ecore#//PaletteInfo/isExpert"/>
+      <genOperations ecoreOperation="PaletteInfos.ecore#//PaletteInfo/isHidden"/>
+    </genClasses>
+    <genClasses ecoreClass="PaletteInfos.ecore#//TagCreationInfo">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PaletteInfos.ecore#//TagCreationInfo/attributes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PaletteInfos.ecore#//TagCreationInfo/template"/>
+    </genClasses>
+    <genClasses ecoreClass="PaletteInfos.ecore#//TagCreationTemplate">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference PaletteInfos.ecore#//TagCreationTemplate/template"/>
+    </genClasses>
+    <genClasses ecoreClass="PaletteInfos.ecore#//TagCreationAttribute">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PaletteInfos.ecore#//TagCreationAttribute/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PaletteInfos.ecore#//TagCreationAttribute/value"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

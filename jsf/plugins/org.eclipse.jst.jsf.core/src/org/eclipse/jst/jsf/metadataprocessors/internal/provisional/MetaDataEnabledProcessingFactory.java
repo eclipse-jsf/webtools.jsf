@@ -20,12 +20,9 @@ import org.eclipse.jst.jsf.common.metadata.internal.DomainLoadingStrategyRegistr
 import org.eclipse.jst.jsf.common.metadata.internal.MetaDataModelContextImpl;
 import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.Model;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IMetaDataModelContext;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.MetaDataQueryHelper;
-import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.CMAnnotationHelper;
-import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.CMAnnotationPropertyValue;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.IStructuredDocumentContextResolverFactory;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.IWorkspaceContextResolver;
 import org.eclipse.jst.jsf.context.structureddocument.internal.provisional.IStructuredDocumentContext;

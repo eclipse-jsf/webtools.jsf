@@ -23,6 +23,7 @@ import org.eclipse.gef.ui.palette.customize.PaletteSeparatorFactory;
 import org.eclipse.gef.ui.palette.customize.PaletteStackFactory;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.editors.palette.impl.PaletteItemManager;
+import org.eclipse.jst.pagedesigner.editors.palette.impl.TaglibPaletteDrawer;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
@@ -37,57 +38,66 @@ public class DesignerPaletteCustomizer extends PaletteCustomizer {
 	 * 
 	 * @see org.eclipse.gef.ui.palette.PaletteCustomizer#canMoveDown(org.eclipse.gef.palette.PaletteEntry)
 	 */
-	public boolean canMoveDown(PaletteEntry entry) {
-		if (!(entry instanceof PaletteDrawer)) {
-			return false;
-		}
-		return super.canMoveDown(entry);
-	}
+//	public boolean canMoveDown(PaletteEntry entry) {
+//		if (!(entry instanceof PaletteDrawer)) {
+//			return false;
+//		}
+//		return super.canMoveDown(entry);
+//	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see org.eclipse.gef.ui.palette.PaletteCustomizer#canMoveUp(org.eclipse.gef.palette.PaletteEntry)
 	 */
-	public boolean canMoveUp(PaletteEntry entry) {
-		if (!(entry instanceof PaletteDrawer)) {
-			return false;
-		}
-		if (entry.getParent().getChildren().indexOf(entry) == 1) {
-			return false;
-		}
-		return super.canMoveUp(entry);
-	}
+//	public boolean canMoveUp(PaletteEntry entry) {
+//		if (!(entry instanceof PaletteDrawer)) {
+//			return false;
+//		}
+//		if (entry.getParent().getChildren().indexOf(entry) == 1) {
+//			return false;
+//		}
+//		return super.canMoveUp(entry);
+//	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.gef.ui.palette.PaletteCustomizer#performMoveDown(org.eclipse.gef.palette.PaletteEntry)
-	 */
-	public void performMoveDown(PaletteEntry entry) {
-		if (entry instanceof PaletteDrawer) {
-			String id = entry.getId();
-			IPaletteItemCategory cat = PaletteItemManager.getInstance(
-					getCurrentProject()).getCategoryByURI(id);
-			PaletteItemManager.getInstance(getCurrentProject()).movedown(cat);
-			super.performMoveDown(entry);
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.gef.ui.palette.PaletteCustomizer#performMoveUp(org.eclipse.gef.palette.PaletteEntry)
-	 */
-	public void performMoveUp(PaletteEntry entry) {
-		if (entry instanceof PaletteDrawer) {
-			String id = entry.getId();
-			IPaletteItemCategory cat = PaletteItemManager.getInstance(
-					getCurrentProject()).getCategoryByURI(id);
-			PaletteItemManager.getInstance(getCurrentProject()).moveup(cat);
-			super.performMoveUp(entry);
-		}
-	}
+//	/*
+//	 * (non-Javadoc)
+//	 * 
+//	 * @see org.eclipse.gef.ui.palette.PaletteCustomizer#performMoveDown(org.eclipse.gef.palette.PaletteEntry)
+//	 */
+//	public void performMoveDown(PaletteEntry entry) {
+//		if (entry instanceof PaletteDrawer) {
+//			String id = entry.getId();
+//			TaglibPaletteDrawer cat = PaletteItemManager.getCurrentInstance().getTaglibPalletteDrawer(id);
+//			movedown(PaletteItemManager.getCurrentInstance(), cat);
+//			super.performMoveDown(entry);
+//		}
+//	}
+//	private void moveup(PaletteItemManager paletteItemManager, TaglibPaletteDrawer cat) {
+//		int i = paletteItemManager.getAllCategories().indexOf(cat);
+//		TaglibPaletteDrawer upCat = (TaglibPaletteDrawer) paletteItemManager.getAllCategories()
+//				.get(i - 1);
+//		movedown(paletteItemManager, upCat);
+//	}
+//
+//	private void movedown(PaletteItemManager paletteItemManager, TaglibPaletteDrawer cat) {
+//		int i = paletteItemManager.getAllCategories().indexOf(cat);
+//		paletteItemManager.getAllCategories().add(i + 2, cat);
+//		paletteItemManager.getAllCategories().remove(i);
+//	}
+//	/*
+//	 * (non-Javadoc)
+//	 * 
+//	 * @see org.eclipse.gef.ui.palette.PaletteCustomizer#performMoveUp(org.eclipse.gef.palette.PaletteEntry)
+//	 */
+//	public void performMoveUp(PaletteEntry entry) {
+//		if (entry instanceof PaletteDrawer) {
+//			String id = entry.getId();
+//			TaglibPaletteDrawer cat = PaletteItemManager.getCurrentInstance().getTaglibPalletteDrawer(id);
+//			moveup(PaletteItemManager.getCurrentInstance(), cat);
+//			super.performMoveUp(entry);
+//		}
+//	}
 
 	/*
 	 * (non-Javadoc)
@@ -112,7 +122,7 @@ public class DesignerPaletteCustomizer extends PaletteCustomizer {
 	 */
 	public void revertToSaved() {
 		// PaletteItemManager.getInstance(getCurrentProject()).
-		PaletteItemManager.getInstance(getCurrentProject()).reset();
+		PaletteItemManager.getCurrentInstance().reset();
 	}
 
 	/*
@@ -121,21 +131,21 @@ public class DesignerPaletteCustomizer extends PaletteCustomizer {
 	 * @see org.eclipse.gef.ui.palette.PaletteCustomizer#save()
 	 */
 	public void save() {
-		PaletteItemManager.getInstance(getCurrentProject()).save();
-		PaletteItemManager.getInstance(getCurrentProject()).reset();
+		PaletteItemManager.getCurrentInstance().save();
+//		PaletteItemManager.getCurrentInstance().reset();
 	}
 
-	private IProject getCurrentProject() {
-		IProject curProject = null;
-		IEditorPart editor = PDPlugin.getDefault().getWorkbench()
-				.getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-		IEditorInput input = editor.getEditorInput();
-		IFile inputFile = null;
-		if (input instanceof IFileEditorInput) {
-			inputFile = ((IFileEditorInput) input).getFile();
-			curProject = inputFile.getProject();
-		}
-		return curProject;
-	}
+//	private IProject getCurrentProject() {
+//		IProject curProject = null;
+//		IEditorPart editor = PDPlugin.getDefault().getWorkbench()
+//				.getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+//		IEditorInput input = editor.getEditorInput();
+//		IFile inputFile = null;
+//		if (input instanceof IFileEditorInput) {
+//			inputFile = ((IFileEditorInput) input).getFile();
+//			curProject = inputFile.getProject();
+//		}
+//		return curProject;
+//	}
 
 }

@@ -15,8 +15,9 @@ import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.dnd.AbstractTransferDropTargetListener;
 import org.eclipse.gef.dnd.TemplateTransfer;
+import org.eclipse.gef.requests.CreateRequest;
 import org.eclipse.jst.pagedesigner.PDPlugin;
-import org.eclipse.jst.pagedesigner.editors.palette.impl.PaletteItemDescriptor;
+import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
 import org.eclipse.jst.pagedesigner.itemcreation.ItemCreationRequest;
 import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.DropTargetEvent;
@@ -39,7 +40,8 @@ public class PDTemplateTransferDropTargetListener extends
 	 * @see org.eclipse.gef.dnd.AbstractTransferDropTargetListener#createTargetRequest()
 	 */
 	protected Request createTargetRequest() {
-		Request request = new ItemCreationRequest();
+		ItemCreationRequest request = new ItemCreationRequest();
+		TagToolPaletteEntry tagItem = (TagToolPaletteEntry)TemplateTransfer.getInstance().getTemplate();
 		return request;
 	}
 
@@ -87,12 +89,12 @@ public class PDTemplateTransferDropTargetListener extends
 			ItemCreationRequest request = (ItemCreationRequest) getCreateRequest();
             Object transferObj = TemplateTransfer.getInstance().getObject();
             
-            if (transferObj instanceof PaletteItemDescriptor)
+            if (transferObj instanceof TagToolPaletteEntry)
             {
-                PaletteItemDescriptor itemDescriptor = 
-                    (PaletteItemDescriptor) transferObj;
-                
-                request.setItemDescriptor(itemDescriptor);
+            	TagToolPaletteEntry tagItem = 
+                    (TagToolPaletteEntry) transferObj;
+
+                request.setTagToolPaletteEntry(tagItem);
                 request.setLocation(getDropLocation());
             }
             else

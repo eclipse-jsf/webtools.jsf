@@ -11,8 +11,6 @@
  ********************************************************************************/
 package org.eclipse.jst.jsf.common.metadata.internal.provisional.query;
 
-import java.util.Collections;
-
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.common.metadata.internal.MetaDataModel;
 import org.eclipse.jst.jsf.common.metadata.internal.MetaDataModelContextImpl;

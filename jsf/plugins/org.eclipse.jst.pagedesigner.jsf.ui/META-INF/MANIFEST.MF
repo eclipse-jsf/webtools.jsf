@@ -13,7 +13,8 @@ Require-Bundle: org.eclipse.jst.jsf.facesconfig.ui,
  org.eclipse.wst.common.ui.properties,
  org.eclipse.jst.jsf.common.ui,
  org.eclipse.jst.jsf.core,
- org.eclipse.jst.jsf.common
+ org.eclipse.jst.jsf.common,
+ org.eclipse.emf.codegen.ecore
 Eclipse-LazyStart: true
 Provide-Package: org.eclipse.jst.pagedesigner.jsf.core.dom,
  org.eclipse.jst.pagedesigner.jsf.ui,

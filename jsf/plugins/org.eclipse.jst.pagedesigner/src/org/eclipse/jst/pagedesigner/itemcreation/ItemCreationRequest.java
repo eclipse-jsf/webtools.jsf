@@ -14,17 +14,16 @@ package org.eclipse.jst.pagedesigner.itemcreation;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.requests.DropRequest;
-import org.eclipse.jst.pagedesigner.editors.palette.IPaletteItemDescriptor;
+import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
 
 /**
  * @author mengbo
  */
 public class ItemCreationRequest extends Request implements DropRequest {
 	public static final String REQ_ITEM_CREATION = "Item Creation";
-
-	private Point _location;
-
-	private IPaletteItemDescriptor _itemDescriptor;
+	public static final String TAG_TOOL_PALETTE_ENTRY = "TagToolPaletteEntry";
+	public static final String LOCATION = "location";
+	
 
 	/**
 	 * 
@@ -46,7 +45,7 @@ public class ItemCreationRequest extends Request implements DropRequest {
 	 * @see org.eclipse.gef.requests.DropRequest#getLocation()
 	 */
 	public Point getLocation() {
-		return _location;
+		return (Point)getExtendedData().get(LOCATION);
 	}
 
 	/**
@@ -56,15 +55,17 @@ public class ItemCreationRequest extends Request implements DropRequest {
 	 *            the location
 	 */
 	public void setLocation(Point location) {
-		this._location = location;
+		getExtendedData().remove(LOCATION);
+		getExtendedData().put(LOCATION, location);
 	}
 
-	public void setItemDescriptor(IPaletteItemDescriptor desc) {
-		this._itemDescriptor = desc;
+	public void setTagToolPaletteEntry(TagToolPaletteEntry tag) {
+		getExtendedData().remove(TAG_TOOL_PALETTE_ENTRY);
+		getExtendedData().put(TAG_TOOL_PALETTE_ENTRY, tag);
 	}
 
-	public IPaletteItemDescriptor getItemDescriptor() {
-		return this._itemDescriptor;
+	public TagToolPaletteEntry getTagToolPaletteEntry() {
+		return (TagToolPaletteEntry)getExtendedData().get(TAG_TOOL_PALETTE_ENTRY);
 	}
 
 }

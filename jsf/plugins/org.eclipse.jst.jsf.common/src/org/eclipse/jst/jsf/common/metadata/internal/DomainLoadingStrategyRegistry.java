@@ -81,12 +81,19 @@ public class DomainLoadingStrategyRegistry{
 	public IDomainLoadingStrategy getLoadingStrategy(String domain){
 		DomainLoadingStrategyDescriptorImpl strategy = (DomainLoadingStrategyDescriptorImpl)getDescriptors().get(domain);
 		if (strategy == null){
-			//TODO log error that strategy is unknown
-			return null;
+			return createDefaultLoadingStrategy();
 		}
 		else {			
 			return createLoadingStrategy(domain);
 		}
+	}
+
+	
+	/**
+	 * @return strategy that will only use standard metadata files
+	 */
+	private IDomainLoadingStrategy createDefaultLoadingStrategy() {
+		return new DomainLoadingStrategy(null);
 	}
 
 	private IDomainLoadingStrategy createLoadingStrategy(String domain){

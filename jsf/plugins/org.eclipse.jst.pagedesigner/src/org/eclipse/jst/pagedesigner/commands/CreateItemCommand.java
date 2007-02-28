@@ -13,7 +13,7 @@ package org.eclipse.jst.pagedesigner.commands;
 
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jst.pagedesigner.dom.IDOMPosition;
-import org.eclipse.jst.pagedesigner.editors.palette.IPaletteItemDescriptor;
+import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
 import org.eclipse.jst.pagedesigner.utils.CommandUtil;
 import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
 import org.w3c.dom.Element;
@@ -24,7 +24,7 @@ import org.w3c.dom.Element;
 public class CreateItemCommand extends DesignerCommand {
 	IDOMPosition _position;
 
-	IPaletteItemDescriptor _itemDescriptor;
+	TagToolPaletteEntry _tagItem;
 
 	Element _ele;
 
@@ -33,10 +33,10 @@ public class CreateItemCommand extends DesignerCommand {
 	 * @param viewer
 	 */
 	public CreateItemCommand(String label, IHTMLGraphicalViewer viewer,
-			IDOMPosition position, IPaletteItemDescriptor itemDesc) {
+			IDOMPosition position, TagToolPaletteEntry tagItem) {
 		super(label, viewer);
 		this._position = position;
-		this._itemDescriptor = itemDesc;
+		this._tagItem = tagItem;
 	}
 
 	/*
@@ -45,7 +45,7 @@ public class CreateItemCommand extends DesignerCommand {
 	 * @see org.eclipse.jst.pagedesigner.commands.DesignerCommand#doExecute()
 	 */
 	protected void doExecute() {
-		Element element = CommandUtil.excuteInsertion(this._itemDescriptor,
+		Element element = CommandUtil.excuteInsertion(this._tagItem,
 				getViewer(), this._position);
 		if (element != null) {
 			formatNode(element);

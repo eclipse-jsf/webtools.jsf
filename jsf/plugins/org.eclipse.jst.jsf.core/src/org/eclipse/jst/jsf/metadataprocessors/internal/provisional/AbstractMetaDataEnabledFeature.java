@@ -182,12 +182,10 @@ public abstract class AbstractMetaDataEnabledFeature implements IMetaDataEnabled
 		
 		try {
 			Trait t = getMetaDataContext().getTrait();
-			IMetaDataSourceModelProvider provider = t.getSourceModel().getSourceModelProvider();
-			if (provider.canAdapt(IImageDescriptorProvider.class)){
-				IImageDescriptorProvider ip = (IImageDescriptorProvider)provider.getAdapter(IImageDescriptorProvider.class);
-				if (ip != null){
-					return ip.getImageDescriptor(smallIcon);
-				}
+			IMetaDataSourceModelProvider provider = t.getSourceModelProvider();
+			IImageDescriptorProvider ip = (IImageDescriptorProvider)provider.getAdapter(IImageDescriptorProvider.class);
+			if (ip != null){
+				return ip.getImageDescriptor(smallIcon);
 			}
 		} catch (RuntimeException e) {		
 			//TODO: log error?

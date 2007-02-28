@@ -11,21 +11,33 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.editors.palette.impl;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.eclipse.jst.jsf.common.ui.internal.utils.StringUtil;
 import org.eclipse.jst.pagedesigner.IJMTConstants;
 import org.eclipse.jst.pagedesigner.dom.EditModelQuery;
-import org.eclipse.jst.pagedesigner.editors.palette.IPaletteItemDescriptor;
+import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
+import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.TagCreationInfo;
+import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.TagCreationTemplate;
+import org.eclipse.jst.pagedesigner.utils.JSPUtil;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMText;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
+import org.w3c.dom.DocumentFragment;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
+import org.xml.sax.SAXException;
 
 /**
  * @author mengbo
@@ -33,19 +45,10 @@ import org.w3c.dom.Text;
 public class PaletteElementTemplateHelper {
 	private static final String TEMPLATE_ITEM_NAME = "template";
 
-	private static final String PREFIX_ATTRIBUTE = "uri";
+	private static final String PREFIX_ATTRIBUTE = "_uri_";
 
 //	private static Logger _log = PDPlugin
 //			.getLogger(PaletteElementTemplateHelper.class);
-
-	public static NodeList readTemplate(Element item) {
-		if (item != null) {
-			Node node = EditModelQuery.getChildDeferredNode(item,
-					new String[] { TEMPLATE_ITEM_NAME }, 1, true);
-			return node != null ? node.cloneNode(true).getChildNodes() : null;
-		}
-		return null;
-	}
 
 	/**
 	 * This method is used to process template element which is read from .xmi
@@ -53,19 +56,70 @@ public class PaletteElementTemplateHelper {
 	 * 
 	 * @param model
 	 * @param element
-	 * @param itemDes
+	 * @param tagItem
+	 * @param tagCreationInfo 
 	 */
 	public static void applyTemplate(IDOMModel model, Element element,
-			IPaletteItemDescriptor itemDes) {
+			TagToolPaletteEntry tagItem, TagCreationInfo tagCreationInfo) {
 		if (element == null || element.getLocalName() == null) {
 			return;
 		}
-		Node[] nl = itemDes.getTemplateSubNodes(model);
-		if (nl != null) {
-			for (int i = 0, n = nl.length; i < n; i++) {
-				element.appendChild(nl[i]);
+		
+		Node[] templateNodes = getTemplateNodes(model,  tagCreationInfo);
+		if (templateNodes != null) {
+			for (int i=0;i<templateNodes.length;i++){
+				Node anode = templateNodes[i];
+				element.appendChild(anode);				
 			}
 		}
+	}
+
+	private static Node[] getTemplateNodes(IDOMModel model,
+			TagCreationInfo tagCreationInfo) {
+
+		if (tagCreationInfo == null)
+			return null;
+		
+		String template = (String)tagCreationInfo.getTemplate();
+		if (template != null){
+			
+			final String nodeStr = prepareNode(template);//(String)template.getTemplate();
+			try {
+				DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+				factory.setNamespaceAware(true);
+				factory.setValidating(false);
+				DocumentBuilder builder = factory.newDocumentBuilder();
+				Document doc = builder.parse(new ByteArrayInputStream( nodeStr.getBytes()));
+				Node beginNode = doc.getFirstChild();
+				Node templateNode = beginNode.cloneNode(true);//model.getDocument().importNode(beginNode, true);
+				Node[] templateNodes = applyPrefixes(model, tagCreationInfo, templateNode.getChildNodes(), model.getDocument());
+				return templateNodes;
+			} catch (ParserConfigurationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SAXException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Exception e){
+				e.printStackTrace();
+			}
+//			frag.
+		}
+		return null;
+	}
+
+	/**
+	 * @param template
+	 * @return xml as String wrapped by a <begin> node as template may not have a single root element
+	 */
+	private static String prepareNode(String template) {
+		StringBuffer buf = new StringBuffer("<begin>");
+		buf.append(template);
+		buf.append("</begin>");
+		return buf.toString();
 	}
 
 	/**
@@ -78,12 +132,12 @@ public class PaletteElementTemplateHelper {
 	 * @param document
 	 * @return
 	 */
-	public static Node[] applyPrefixes(String prefixH, String prefixC,
-			NodeList nl, Document document) {
+	public static Node[] applyPrefixes(IDOMModel model, TagCreationInfo info,
+			NodeList templateNodes, Document document) {
 		List result = new ArrayList();
-		for (int i = 0, n = nl.getLength(); i < n; i++) {
-			Node node = cloneNodeDeep(document, nl.item(i), prefixH, prefixC);
-			if (nl.item(i) instanceof Element) {
+		for (int i = 0, n = templateNodes.getLength(); i < n; i++) {
+			Node node = cloneNodeDeep(model, document, templateNodes.item(i));
+			if (node instanceof Element) {
 				result.add(node);
 			}
 		}
@@ -100,29 +154,23 @@ public class PaletteElementTemplateHelper {
 	 * @param node
 	 * @return
 	 */
-	private static void internalApplyPrefixes(String prefixH, String prefixC,
-			Element refNode, Element node) {
+	private static void internalApplyPrefixes(IDOMModel model, Element refNode, Element node) {
 		if (node != null && refNode != null) {
-			String prefix = refNode.getAttribute(PREFIX_ATTRIBUTE); //$NON-NLS-1$
-			if (prefix != null) {
-				if (prefix.equalsIgnoreCase(IJMTConstants.URI_JSF_HTML)) //$NON-NLS-1$
-				{
-					node.setPrefix(prefixH);
-				} else if (prefix.equalsIgnoreCase(IJMTConstants.URI_JSF_CORE)) //$NON-NLS-1$
-				{
-					node.setPrefix(prefixC);
-				}
+			String uri = refNode.getAttribute(PREFIX_ATTRIBUTE); //$NON-NLS-1$
+			if (uri != null) {
+				String prefix = JSPUtil.getPrefix(model, uri);
+				node.setPrefix(prefix);
 			}
 		}
 	}
 
-	public static Node cloneNodeDeep(Document destDoc, Node sourceNode,
-			String prefixH, String prefixC) {
+
+	public static Node cloneNodeDeep(IDOMModel model, Document destDoc, Node sourceNode) {
 		switch (sourceNode.getNodeType()) {
 		case Node.ELEMENT_NODE:
 			Element sourceEle = (Element) sourceNode;
 			Element resultEle = destDoc.createElement(sourceEle.getTagName());
-			internalApplyPrefixes(prefixH, prefixC, sourceEle, resultEle);
+			internalApplyPrefixes(model, sourceEle, resultEle);
 			NamedNodeMap attrs = sourceEle.getAttributes();
 			for (int i = 0, size = attrs.getLength(); i < size; i++) {
 				Attr a = (Attr) attrs.item(i);
@@ -133,7 +181,7 @@ public class PaletteElementTemplateHelper {
 			NodeList children = sourceEle.getChildNodes();
 			for (int i = 0, size = children.getLength(); i < size; i++) {
 				Node n = children.item(i);
-				Node d = cloneNodeDeep(destDoc, n, prefixH, prefixC);
+				Node d = cloneNodeDeep(model, destDoc, n);
 				if (d != null) {
 					resultEle.appendChild(d);
 				}

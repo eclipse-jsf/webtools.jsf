@@ -82,9 +82,14 @@
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         iD="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceModel" lowerBound="1"
-        eType="#//Model" transient="true" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"
+        containment="true">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="kind" value="element"/>
+        <details key="namespace" value="##targetNamespace"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourceModelProvider" eType="#//IMetaDataSourceModelProvider"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="ITraitVisitor" instanceClassName="org.eclipse.jst.jsf.common.metadata.internal.provisional.query.ITraitVisitor"
       serializable="false"/>

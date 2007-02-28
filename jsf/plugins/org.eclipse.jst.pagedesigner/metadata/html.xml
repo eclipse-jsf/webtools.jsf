@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<md:metadatamodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" 
+	xmlns:md="http://org.eclipse.jst.jsf.common.metadata/metadata.ecore"
+	xmlns:pi="http://org.eclipse.jsf.pagedesigner/paletteInfos.ecore"
+	id="HTML"
+	type="tagFile">
+	
+	<trait id="paletteInfos" >
+		<value xsi:type="pi:PaletteInfos">
+			<item id="BR"/>
+			<item id="INPUT.TEXT" tag="INPUT"/>
+			<item id="INPUT.BUTTON" tag="INPUT">
+				<display-label>%INPUT.BUTTON.display-label</display-label>
+				<description>%INPUT.BUTTON.description</description>
+				<small-icon>small/HTML_INPUT_BUTTON.gif</small-icon>
+				<large-icon>small/HTML_INPUT_BUTTON.gif</large-icon>
+				<tag-create>
+					<attribute id="type" value="submit"/>
+				</tag-create>
+			</item>
+			<item id="INPUT.CHECKBOX" tag="INPUT">
+				<display-label>%INPUT.CHECKBOX.display-label</display-label>
+				<description>%INPUT.CHECKBOX.description</description>
+				<small-icon>small/HTML_INPUT_CHECKBOX.gif</small-icon>
+				<large-icon>small/HTML_INPUT_CHECKBOX.gif</large-icon>
+				<tag-create>
+					<attribute id="type" value="checkbox"/>
+				</tag-create>				
+			</item>
+			<item id="FORM"/>		
+			<item id="INPUT.HIDDEN" tag="INPUT">
+				<display-label>%INPUT.HIDDEN.display-label</display-label>
+				<description>%INPUT.HIDDEN.description</description>
+				<small-icon>small/HTML_INPUT_HIDDEN.gif</small-icon>
+				<large-icon>small/HTML_INPUT_HIDDEN.gif</large-icon>
+				<tag-create>
+					<attribute id="type" value="hidden"/>
+				</tag-create>	
+			</item>
+			<item id="HR"/>
+			<item id="IMG"/>
+			<item id="INPUT.IMAGE" tag="INPUT">
+				<display-label>%INPUT.IMAGE.display-label</display-label>
+				<description>%INPUT.IMAGE.description</description>
+				<small-icon>small/HTML_INPUT_IMAGE.gif</small-icon>
+				<large-icon>small/HTML_INPUT_IMAGE.gif</large-icon>
+				<tag-create>
+					<attribute id="type" value="image"/>
+				</tag-create>					
+			</item>
+			<item id="A"/>			
+			<item id="INPUT.PASSWORD" tag="INPUT">
+				<display-label>%INPUT.PASSWORD.display-label</display-label>
+				<description>%INPUT.PASSWORD.description</description>
+				<small-icon>small/HTML_INPUT_PASSWORD.gif</small-icon>
+				<large-icon>small/HTML_INPUT_PASSWORD.gif</large-icon>
+				<tag-create>
+					<attribute id="type" value="password"/>
+				</tag-create>					
+			</item>
+			<item id="INPUT.RADIO" tag="INPUT">
+				<display-label>%INPUT.RADIO.display-label</display-label>
+				<description>%INPUT.RADIO.description</description>
+				<small-icon>small/HTML_INPUT_RADIO.gif</small-icon>
+				<large-icon>small/HTML_INPUT_RADIO.gif</large-icon>
+				<tag-create>
+					<attribute id="type" value="radio"/>
+				</tag-create>					
+			</item>			
+			<item id="SELECT"/>
+			<item id="TABLE"/>
+			<item id="TEXTAREA"/>
+		</value>
+	</trait>
+
+	<trait id="images-base-path">
+		<value>icons/palette/HTML</value>
+	</trait>
+
+	<trait id="display-label">
+		<value>HTML 4.0</value>
+	</trait>
+	
+	<entity id="A">
+		<trait id="display-label">
+			<value>%A.display-label</value>
+		</trait>
+		<trait id="description">
+			<value>%A.description</value>
+		</trait>		
+		<trait id="small-icon">
+			<value>small/HTML_A.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value>large/HTML_A.gif</value>
+		</trait>
+	</entity>
+	<entity id="BR">
+		<trait id="display-label">
+			<value>%BR.display-label</value>
+		</trait>
+		<trait id="description">
+			<value>%BR.description</value>
+		</trait>		
+		<trait id="expert">
+			<value>true</value>
+		</trait>
+		<trait id="small-icon">
+			<value>small/HTML_BR.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value>large/HTML_BR.gif</value>
+		</trait>
+	</entity>
+	<entity id="INPUT">
+		<trait id="display-label">
+			<value>%INPUT.TEXT.display-label</value>
+		</trait>					
+		<trait id="description">
+			<value>%INPUT.TEXT.description</value>
+		</trait>
+		<trait id="small-icon">
+			<value>small/HTML_INPUT_TEXT.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value>large/HTML_INPUT_TEXT.gif</value>
+		</trait>
+		<trait id="requires-html-form">
+			<value>true</value>
+		</trait>	
+	</entity>
+	<entity id="FORM">
+		<trait id="display-label">
+			<value>%FORM.display-label</value>
+		</trait>					
+		<trait id="description">
+			<value>%FORM.description</value>
+		</trait>		
+		<trait id="small-icon">
+			<value>small/HTML_FORM.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value>large/HTML_FORM.gif</value>
+		</trait>
+	</entity>
+	<entity id="HR">
+		<trait id="display-label">
+			<value>%HR.display-label</value>
+		</trait>					
+		<trait id="description">
+			<value>%HR.description</value>
+		</trait>		
+		<trait id="small-icon">
+			<value>small/HTML_HR.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value>large/HTML_HR.gif</value>
+		</trait>
+	</entity>	
+	<entity id="IMG">
+		<trait id="display-label">
+			<value>%IMG.display-label</value>
+		</trait>					
+		<trait id="description">
+			<value>%IMG.description</value>
+		</trait>		
+		<trait id="small-icon">
+			<value>small/HTML_IMG.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value>large/HTML_IMG.gif</value>
+		</trait>
+	</entity>	
+	<entity id="SELECT">
+		<trait id="display-label">
+			<value>%SELECT.display-label</value>
+		</trait>					
+		<trait id="description">
+			<value>%SELECT.description</value>
+		</trait>		
+		<trait id="small-icon">
+			<value>small/HTML_SELECT.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value>large/HTML_SELECT.gif</value>
+		</trait>
+		<trait id="requires-html-form">
+			<value>true</value>
+		</trait>			
+	</entity>		
+	<entity id="TABLE">
+		<trait id="display-label">
+			<value>%TABLE.display-label</value>
+		</trait>					
+		<trait id="description">
+			<value>%TABLE.description</value>
+		</trait>		
+		<trait id="small-icon">
+			<value>small/HTML_TABLE.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value>large/HTML_TABLE.gif</value>
+		</trait>
+	</entity>
+	<entity id="TEXTAREA">
+		<trait id="display-label">
+			<value>%TEXTAREA.display-label</value>
+		</trait>					
+		<trait id="description">
+			<value>%TEXTAREA.description</value>
+		</trait>		
+		<trait id="small-icon">
+			<value>small/HTML_TEXTAREA.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value>large/HTML_TEXTAREA.gif</value>
+		</trait>
+		<trait id="requires-html-form">
+			<value>true</value>
+		</trait>
+	</entity>		
+</md:metadatamodel>

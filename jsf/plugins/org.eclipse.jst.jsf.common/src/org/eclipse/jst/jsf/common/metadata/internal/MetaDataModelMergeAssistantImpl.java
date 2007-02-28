@@ -38,9 +38,9 @@ public class MetaDataModelMergeAssistantImpl implements
 		IMetaDataModelMergeAssistant {
 	
 	private MetaDataModel mergedModel;
-	private Object source;
 	private Copier copier;
 	private SimpleMetaDataQueryVisitorImpl visitor;
+	private IMetaDataSourceModelProvider provider;
 	
 	/**
 	 * Constructor
@@ -62,12 +62,12 @@ public class MetaDataModelMergeAssistantImpl implements
 	/* (non-Javadoc)
 	 * @see org.eclipse.jst.jsf.common.metadata.internal.IMetaDataModelMergeAssistant#getSourceModel()
 	 */
-	public Object getSourceModel() {
-		return source;
+	public IMetaDataSourceModelProvider getSourceModelProvider() {
+		return provider;
 	}
 
-	public void setSourceModel(Object source) {
-		this.source = source;
+	public void setSourceModelProvider(IMetaDataSourceModelProvider provider) {
+		this.provider = provider;
 	}
 
 
@@ -165,7 +165,7 @@ public class MetaDataModelMergeAssistantImpl implements
 		return found;
 	}
 
-	private Entity addEntityInternal(final Entity parent, final Entity entity) {
+	private synchronized Entity addEntityInternal(final Entity parent, final Entity entity) {
 		Entity mmEntity =(Entity)copier.copy((EObject)entity);
 		copier.copyReferences();
 		parent.getChildEntities().add(mmEntity);
@@ -217,7 +217,7 @@ public class MetaDataModelMergeAssistantImpl implements
 		copier.copyReferences();
 		parent.getTraits().add(mmTrait);
 		//set the model key to know from where the trait came
-		mmTrait.setSourceModel(trait.getSourceModel());
+		mmTrait.setSourceModelProvider(trait.getSourceModelProvider());
 		return mmTrait;
 	}
 

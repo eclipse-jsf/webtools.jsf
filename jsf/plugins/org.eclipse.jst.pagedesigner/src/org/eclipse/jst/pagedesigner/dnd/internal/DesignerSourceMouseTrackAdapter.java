@@ -16,8 +16,7 @@ import org.eclipse.gef.palette.ToolEntry;
 import org.eclipse.jst.pagedesigner.commands.PaletteDropInsertCommand;
 import org.eclipse.jst.pagedesigner.commands.SourceViewerCommand;
 import org.eclipse.jst.pagedesigner.editors.pagedesigner.PageDesignerResources;
-import org.eclipse.jst.pagedesigner.editors.palette.impl.PaletteItemDescriptor;
-import org.eclipse.jst.pagedesigner.itemcreation.ItemToolEntry;
+import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
@@ -102,9 +101,8 @@ public class DesignerSourceMouseTrackAdapter extends
 	public Object getPaletteObject() {
 		if (_domain.getPaletteViewer() != null) {
 			Object tool = _domain.getPaletteViewer().getActiveTool();
-			if (tool instanceof ItemToolEntry) {
-				Object object = ((ItemToolEntry) tool).getItemDesc();
-				return object;
+			if (tool instanceof TagToolPaletteEntry) {
+				return tool;
 			}
 		}
 		return null;
@@ -131,8 +129,8 @@ public class DesignerSourceMouseTrackAdapter extends
 	private PaletteDropInsertCommand getCommand(MouseEvent event) {
 		Object data = getPaletteObject();
 		PaletteDropInsertCommand command = null;
-		if (data instanceof PaletteItemDescriptor) {
-			PaletteItemDescriptor descriptor = (PaletteItemDescriptor) data;
+		if (data instanceof TagToolPaletteEntry) {
+			TagToolPaletteEntry descriptor = (TagToolPaletteEntry) data;
 			// "Create new item"
 			command = new PaletteDropInsertCommand(
 					PageDesignerResources

@@ -11,10 +11,12 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.itemcreation;
 
+import org.eclipse.gef.EditPart;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.SharedCursors;
+import org.eclipse.gef.requests.CreateRequest;
 import org.eclipse.gef.tools.TargetingTool;
-import org.eclipse.jst.pagedesigner.editors.palette.IPaletteItemDescriptor;
+import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
 import org.eclipse.swt.graphics.Cursor;
 
 /**
@@ -27,16 +29,16 @@ import org.eclipse.swt.graphics.Cursor;
  * @author mengbo
  */
 public class ItemCreationTool extends TargetingTool {
-	IPaletteItemDescriptor _itemDescriptor;
+	TagToolPaletteEntry _tagPaletteItem; //can we get rid of this?
 
 	/**
 	 * Default constructor. Sets the default and disabled cursors.
 	 */
-	public ItemCreationTool(IPaletteItemDescriptor item) {
+	public ItemCreationTool(TagToolPaletteEntry item) {
 		setDefaultCursor(SharedCursors.CURSOR_TREE_ADD);
 		setDisabledCursor(SharedCursors.NO);
 
-		this._itemDescriptor = item;
+		this._tagPaletteItem = item;  
 	}
 
 	/**
@@ -63,7 +65,7 @@ public class ItemCreationTool extends TargetingTool {
 	 */
 	protected Request createTargetRequest() {
 		ItemCreationRequest request = new ItemCreationRequest();
-		request.setItemDescriptor(this._itemDescriptor);
+		request.setTagToolPaletteEntry(_tagPaletteItem);
 		return request;
 	}
 

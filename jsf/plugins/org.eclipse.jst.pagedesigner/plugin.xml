@@ -8,6 +8,7 @@
 	<extension-point id="popupMenuContributor" name="popupMenu Contributor" schema="schema/popupMenuContributor.exsd"/>
 	<extension-point id="cmRegistry" name="Content Model Meta Data" schema="schema/cmRegistry.exsd"/>
 	<extension-point id="PaletteItemConfigContributions" name="%PaletteItem_Config_Contributions_Extension.name" schema="schema/PaletteItemConfigContributions.exsd"/>
+ <extension-point id="tagCreationFactories" name="tagCreationFactories" schema="schema/tagCreationFactories.exsd"/>
 
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.eclipse.jst.pagedesigner.editors.HTMLEditor"
@@ -110,12 +111,30 @@
 			class="org.eclipse.jst.pagedesigner.editors.OutlineConfiguration"
 			target="org.eclipse.jst.pagedesigner.editors.DesignerStructuredTextEditorJSP"/>
 	</extension>
- <extension
-       point="org.eclipse.emf.ecore.generated_package">
-    <package
+	
+	<extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://org.eclipse.jsf.pagedesigner/paletteInfos.ecore" 
+       class = "org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.PaletteInfosPackage"
+       genModel = "model/paletteInfos.genmodel" /> 
+        <package
           class="org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.DTInfoPackage"
           genModel="model/DTInfo.genmodel"
           uri="http://org.eclipse.jsf.pagedesigner/dtinfo.ecore">
     </package>
+   </extension>
+ <extension
+       point="org.eclipse.jst.jsf.common.standardMetaDataFiles">
+    <standardMetaDataFile
+          location="/metadata/html.xml"
+          uri="HTML">
+    </standardMetaDataFile>
+ </extension>
+ <extension
+       point="org.eclipse.jst.jsf.common.domainSourceModelTypeTranslators">
+    <domainSourceModelTypeTranslator
+          domainSourceModelTypeId="TaglibContentModelHandler"
+          translatorClass="org.eclipse.jst.pagedesigner.editors.palette.internal.metadata.HTMLContentModelMetaDataTranslator">
+    </domainSourceModelTypeTranslator>
  </extension>
 </plugin>

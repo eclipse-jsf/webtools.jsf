@@ -76,7 +76,8 @@ public class DomainLoadingStrategy implements IDomainLoadingStrategy, IMetaDataO
 		IMetaDataModelMergeAssistant assistant = createModelMergeAssistant(model);
 		for (Iterator/*<IMetaDataSourceModelProvider>*/ it = sources.iterator();it.hasNext();){
 			IMetaDataSourceModelProvider mds = (IMetaDataSourceModelProvider)it.next();
-			assistant.setSourceModel(mds.getSourceModel());
+//			assistant.setSourceModel(mds.getSourceModel());
+			assistant.setSourceModelProvider(mds);
 			Iterator translators = mds.getLocator().getDomainSourceModelType().getTranslators().iterator();
 			while (translators.hasNext()){
 				IMetaDataTranslator translator = (IMetaDataTranslator)translators.next();

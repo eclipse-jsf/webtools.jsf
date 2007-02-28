@@ -15,9 +15,12 @@ import javax.xml.namespace.QName;
 
 import org.eclipse.jst.pagedesigner.adapters.IBodyInfo;
 import org.eclipse.jst.pagedesigner.adapters.internal.BodyInfo;
-import org.eclipse.jst.pagedesigner.editors.palette.impl.PaletteItemDescriptor;
+import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
+import org.eclipse.jst.pagedesigner.editors.palette.impl.PaletteItemManager;
+import org.eclipse.jst.pagedesigner.editors.palette.impl.TaglibPaletteDrawer;
 import org.eclipse.jst.pagedesigner.utils.CMUtil;
 import org.eclipse.jst.pagedesigner.utils.CommandUtil;
+import org.eclipse.wst.html.core.internal.format.HTMLFormatProcessorImpl;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
 import org.w3c.dom.Element;
@@ -54,7 +57,7 @@ public class ValidatorSupport {
 							// we treat it
 							// as if url is same
 							return true;
-						} else if (url.equals(qname[i].getNamespaceURI())) {
+						} else if (url.equalsIgnoreCase(qname[i].getNamespaceURI())) {
 							return true;
 						}
 					}
@@ -70,15 +73,15 @@ public class ValidatorSupport {
 
 	public static IDOMPosition insertContainer(IDOMPosition position,
 			QName container) {
-		PaletteItemDescriptor itemDes = new PaletteItemDescriptor();
-		itemDes.setURI(container.getNamespaceURI());
-		itemDes.setTagName(container.getLocalPart());
-		itemDes.setDefaultPrefix("h");
-		IDOMModel model = ((IDOMNode) position.getContainerNode()).getModel();
-		Element form = CommandUtil.excuteInsertion(itemDes, model, position);
-		if (form != null) {
-			DOMPosition pos = new DOMPosition(form, 0);
-			return pos;
+		TaglibPaletteDrawer category = PaletteItemManager.getCurrentInstance().findCategoryByURI(container.getNamespaceURI());
+		if (category != null){
+			TagToolPaletteEntry tagItem = category.getTagPaletteEntryByTagName(container.getLocalPart());
+			IDOMModel model = ((IDOMNode) position.getContainerNode()).getModel();
+			Element form = CommandUtil.excuteInsertion(tagItem, model, position);
+			if (form != null) {
+				DOMPosition pos = new DOMPosition(form, 0);
+				return pos;
+			}
 		}
         return null;
 	}

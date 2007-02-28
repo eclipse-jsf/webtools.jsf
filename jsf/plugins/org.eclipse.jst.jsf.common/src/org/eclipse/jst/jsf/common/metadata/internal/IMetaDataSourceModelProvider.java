@@ -11,12 +11,14 @@
  ********************************************************************************/
 package org.eclipse.jst.jsf.common.metadata.internal;
 
+import org.eclipse.core.runtime.IAdaptable;
+
 
 /**
  * Provides a source of metadata that can be transformed into a merged standard model
  * LIKELY TO CHANGE
  */
-public interface IMetaDataSourceModelProvider {
+public interface IMetaDataSourceModelProvider extends IAdaptable{
 	/**
 	 * @return the source model
 	 */
@@ -29,7 +31,4 @@ public interface IMetaDataSourceModelProvider {
 	 * @param IMetaDataLocator instance that located this model provider instance
 	 */
 	public void setLocator(IMetaDataLocator locator);
-	
-	public boolean canAdapt(Class klass);
-	public Object getAdapter(Class klass);
 }

@@ -30,11 +30,11 @@ import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 public class DomainSourceModelTypeDescriptor {
 	private static final String TRANSLATORS_EXTENSION_POINT_ID = "domainSourceModelTypeTranslators";
 	private static final String STANDARD_FILE_NULL_TRANSLATOR = "org.eclipse.jst.jsf.common.metadata.internal.StandardAnnotationFilesTranslator";
-	private String domain;
+	private String domain = "DEFAULT";
 	private String domainSourceModelTypeId;
-	private String locatorClassName;
+	private String locatorClassName = "org.eclipse.jst.jsf.common.metadata.internal.StandardMetaDataLocator";
 	private Set translatorDescriptors;
-	private String bundleId;
+	private String bundleId = JSFCommonPlugin.PLUGIN_ID;
 	private int ordinal;
 	
 	/**
@@ -54,6 +54,13 @@ public class DomainSourceModelTypeDescriptor {
 		init();
 	}
 
+	/**
+	 * Default model type descriptor that will load only standard metadata files
+	 */
+	public DomainSourceModelTypeDescriptor(){
+		translatorDescriptors = new HashSet();
+	}
+	
 	private synchronized void init() {
 		translatorDescriptors = new HashSet();
 		IExtensionRegistry extensionRegistry = Platform.getExtensionRegistry();
@@ -70,7 +77,7 @@ public class DomainSourceModelTypeDescriptor {
 	}
 	
 	private void addTranslatorDescriptor(IConfigurationElement element) {
-		String translator = element.getAttribute("class");
+		String translator = element.getAttribute("translatorClass");
 		DomainSourceModelTranslatorDescriptor d = new DomainSourceModelTranslatorDescriptor(translator, element.getContributor().getName());
 		getTranslatorDescriptors().add(d);
 	}
@@ -102,7 +109,7 @@ public class DomainSourceModelTypeDescriptor {
 		private Set translators;
 		private IMetaDataLocator locator;
 
-		DomainSourceModelTypeImpl(){
+		DomainSourceModelTypeImpl(){			
 		}
 		
 		/* (non-Javadoc)

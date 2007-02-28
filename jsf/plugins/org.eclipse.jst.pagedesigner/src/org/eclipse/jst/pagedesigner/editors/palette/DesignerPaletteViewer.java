@@ -25,6 +25,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Preferences;
 import org.eclipse.core.runtime.Preferences.PropertyChangeEvent;
 import org.eclipse.gef.palette.PaletteRoot;
+import org.eclipse.gef.ui.palette.PaletteCustomizer;
 import org.eclipse.gef.ui.palette.PaletteViewer;
 import org.eclipse.gef.ui.palette.customize.PaletteCustomizerDialog;
 import org.eclipse.jst.pagedesigner.PDPlugin;
@@ -46,6 +47,11 @@ import org.eclipse.ui.IWorkbenchPage;
  * @version 1.5
  */
 public class DesignerPaletteViewer extends PaletteViewer {
+
+	public PaletteCustomizer getCustomizer() {
+		return null;//FIX ME - remove this method once 'Customize...' persistance is working
+	}
+
 	private PaletteCustomizerDialog _customizerDialog = null;
 
 	/**

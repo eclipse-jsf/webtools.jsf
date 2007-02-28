@@ -2,4 +2,31 @@
 <?eclipse version="3.0"?>
 <plugin>
    <extension-point id="pageVar" name="page variable" schema="schema/pageVar.exsd"/>
+   <extension
+       point="org.eclipse.jst.jsf.common.standardMetaDataFiles">
+    <standardMetaDataFile
+          location="/metadata/jsp11.xml"
+          uri="JSP11">
+    </standardMetaDataFile>
+   </extension>
+   <extension
+         point="org.eclipse.jst.jsf.common.domainSourceModelTypeTranslators">
+    <domainSourceModelTypeTranslator
+          domainSourceModelTypeId="TaglibContentModelHandler"
+          translatorClass="org.eclipse.jst.pagedesigner.jsp.core.internal.metadata.JSPContentModelMetaDataTranslator">
+    </domainSourceModelTypeTranslator>
+    <domainSourceModelTypeTranslator
+          domainSourceModelTypeId="TaglibContentModelHandler"
+          translatorClass="org.eclipse.jst.pagedesigner.jsp.core.internal.metadata.TaglibMetaDataTLDTranslator">
+    </domainSourceModelTypeTranslator>    
+   </extension>
+   <extension
+         point="org.eclipse.jst.jsf.common.domainSourceModelTypes">
+      <domainSourceModelTypes
+            domainId="TagLibraryDomain"
+            domainSourceModelTypeId="TaglibContentModelHandler"
+            locator="org.eclipse.jst.pagedesigner.jsp.core.internal.metadata.TaglibLocator"
+            ordinal="0">
+      </domainSourceModelTypes>
+   </extension>
 </plugin>

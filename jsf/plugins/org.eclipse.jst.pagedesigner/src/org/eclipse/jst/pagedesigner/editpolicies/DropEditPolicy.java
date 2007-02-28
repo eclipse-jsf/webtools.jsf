@@ -12,7 +12,7 @@ import org.eclipse.gef.requests.DropRequest;
 import org.eclipse.gef.requests.GroupRequest;
 import org.eclipse.jst.pagedesigner.dom.TagIdentifier;
 import org.eclipse.jst.pagedesigner.dom.TagIdentifierFactory;
-import org.eclipse.jst.pagedesigner.editors.palette.IPaletteItemDescriptor;
+import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
 import org.eclipse.jst.pagedesigner.elementedit.ElementEditFactoryRegistry;
 import org.eclipse.jst.pagedesigner.elementedit.IElementEdit;
 import org.eclipse.jst.pagedesigner.itemcreation.ItemCreationRequest;
@@ -90,7 +90,7 @@ public abstract class DropEditPolicy extends GraphicalEditPolicy
         }
         else if (request instanceof ItemCreationRequest)
         {
-            IPaletteItemDescriptor desc = ((ItemCreationRequest)request).getItemDescriptor();
+        	TagToolPaletteEntry desc = (TagToolPaletteEntry)((ItemCreationRequest)request).getTagToolPaletteEntry();
             TagIdentifier tagId = 
                 TagIdentifierFactory.
                     createJSPTagWrapper(desc.getURI(), desc.getTagName());

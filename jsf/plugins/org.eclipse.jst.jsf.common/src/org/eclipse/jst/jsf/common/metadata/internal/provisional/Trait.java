@@ -2,12 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Trait.java,v 1.1 2007/01/15 23:26:14 gkessler Exp $
+ * $Id: Trait.java,v 1.2 2007/02/28 05:04:20 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.provisional;
 
 import org.eclipse.emf.ecore.EObject;
-
+import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.ITraitVisitor;
 
 /**
@@ -20,7 +20,7 @@ import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.ITraitVisi
  * <ul>
  *   <li>{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait#getId <em>Id</em>}</li>
  *   <li>{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait#getValue <em>Value</em>}</li>
- *   <li>{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait#getSourceModel <em>Source Model</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait#getSourceModelProvider <em>Source Model Provider</em>}</li>
  * </ul>
  * </p>
  *
@@ -63,83 +63,57 @@ public interface Trait extends EObject {
 	void setId(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Value</b></em>' reference.
+	 * Returns the value of the '<em><b>Value</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Value</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Value</em>' reference.
+	 * @return the value of the '<em>Value</em>' containment reference.
 	 * @see #setValue(EObject)
 	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.MetadataPackage#getTrait_Value()
-	 * @model
+	 * @model containment="true" required="true"
+	 *        extendedMetaData="kind='element' namespace='##targetNamespace'"
 	 * @generated
 	 */
 	EObject getValue();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait#getValue <em>Value</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait#getValue <em>Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value</em>' reference.
+	 * @param value the new value of the '<em>Value</em>' containment reference.
 	 * @see #getValue()
 	 * @generated
 	 */
 	void setValue(EObject value);
 
 	/**
-	 * Returns the value of the '<em><b>Source Model</b></em>' reference.
+	 * Returns the value of the '<em><b>Source Model Provider</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Source Model</em>' reference isn't clear,
+	 * If the meaning of the '<em>Source Model Provider</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Source Model</em>' reference.
-	 * @see #isSetSourceModel()
-	 * @see #unsetSourceModel()
-	 * @see #setSourceModel(Model)
-	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.MetadataPackage#getTrait_SourceModel()
-	 * @model unsettable="true" required="true" transient="true"
+	 * @return the value of the '<em>Source Model Provider</em>' attribute.
+	 * @see #setSourceModelProvider(IMetaDataSourceModelProvider)
+	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.MetadataPackage#getTrait_SourceModelProvider()
+	 * @model dataType="org.eclipse.jst.jsf.common.metadata.internal.provisional.IMetaDataSourceModelProvider"
 	 * @generated
 	 */
-	Model getSourceModel();
+	IMetaDataSourceModelProvider getSourceModelProvider();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait#getSourceModel <em>Source Model</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait#getSourceModelProvider <em>Source Model Provider</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Source Model</em>' reference.
-	 * @see #isSetSourceModel()
-	 * @see #unsetSourceModel()
-	 * @see #getSourceModel()
+	 * @param value the new value of the '<em>Source Model Provider</em>' attribute.
+	 * @see #getSourceModelProvider()
 	 * @generated
 	 */
-	void setSourceModel(Model value);
-
-	/**
-	 * Unsets the value of the '{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait#getSourceModel <em>Source Model</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isSetSourceModel()
-	 * @see #getSourceModel()
-	 * @see #setSourceModel(Model)
-	 * @generated
-	 */
-	void unsetSourceModel();
-
-	/**
-	 * Returns whether the value of the '{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait#getSourceModel <em>Source Model</em>}' reference is set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return whether the value of the '<em>Source Model</em>' reference is set.
-	 * @see #unsetSourceModel()
-	 * @see #getSourceModel()
-	 * @see #setSourceModel(Model)
-	 * @generated
-	 */
-	boolean isSetSourceModel();
+	void setSourceModelProvider(IMetaDataSourceModelProvider value);
 
 	/**
 	 * <!-- begin-user-doc -->

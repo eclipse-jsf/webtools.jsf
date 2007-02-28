@@ -2,18 +2,15 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraitTypesPackageImpl.java,v 1.1 2007/02/07 00:03:50 gkessler Exp $
+ * $Id: TraitTypesPackageImpl.java,v 1.2 2007/02/28 05:04:23 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
-
 import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.ListOfValues;
 import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.TraitTypesFactory;
 import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.TraitTypesPackage;

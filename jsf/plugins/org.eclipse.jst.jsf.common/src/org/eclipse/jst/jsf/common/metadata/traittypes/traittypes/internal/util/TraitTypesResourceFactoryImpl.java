@@ -2,16 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraitTypesResourceFactoryImpl.java,v 1.1 2007/02/07 00:03:50 gkessler Exp $
+ * $Id: TraitTypesResourceFactoryImpl.java,v 1.2 2007/02/28 05:04:21 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.util;
 
 import org.eclipse.emf.common.util.URI;
-
 import org.eclipse.emf.ecore.resource.Resource;
-
 import org.eclipse.emf.ecore.resource.impl.ResourceFactoryImpl;
-
 import org.eclipse.emf.ecore.xmi.XMLResource;
 
 /**

@@ -13,30 +13,35 @@ package org.eclipse.jst.pagedesigner.editors.palette;
 
 import java.util.List;
 
+import org.eclipse.core.resources.IProject;
+import org.eclipse.jst.pagedesigner.editors.palette.impl.TaglibPaletteDrawer;
+
 /**
  * @author mengbo
  */
 public interface IPaletteItemManager {
-	public List getAllCategories();
+	public IProject getProject();
+	
+	public List/*TaglibPaletteDrawer*/ getAllCategories();
 
 	/**
-	 * @param tldURI
+	 * @param id
 	 * @return
 	 */
-	public IPaletteItemCategory createCategory(String tldURI);
+	public TaglibPaletteDrawer createTaglibPaletteDrawer(String id, String label);
 
 	/**
-	 * @param tldURI
+	 * @param id
 	 * @return
 	 */
-	public IPaletteItemCategory getCategoryByURI(String tldURI);
+	public TaglibPaletteDrawer getTaglibPalletteDrawer(String id);
 
 	/**
-	 * @param uri
-	 * @param catlabel
+	 * @param id
+	 * @param label
 	 * @return
 	 */
-	public IPaletteItemCategory findOrCreateCategory(String uri, String catlabel);
+	public TaglibPaletteDrawer findOrCreateCategory(String id, String label);
 
 	/**
 	 * Adds a listener to the list of those notified when the model contents are

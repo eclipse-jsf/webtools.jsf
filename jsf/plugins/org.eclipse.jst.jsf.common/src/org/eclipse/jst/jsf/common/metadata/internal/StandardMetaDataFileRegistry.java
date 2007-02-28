@@ -24,12 +24,15 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Model;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
+import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.MetaDataQueryHelper;
 
 
 /**
@@ -104,11 +107,9 @@ class StandardMetaDataFilesProvider implements IMetaDataSourceModelProvider {
 				try {
 					fileLocator = (StandardMetaDataSourceFileLocator)klass.newInstance();
 				} catch (InstantiationException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					JSFCommonPlugin.log(IStatus.ERROR, "InstantiationException: StandardMetaDataFilesProvider.getFileLocator()", e);
 				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();				
+					JSFCommonPlugin.log(IStatus.ERROR, "IllegalAccessException: StandardMetaDataFilesProvider.getFileLocator()", e);				
 				}			
 			}
 			if (fileLocator != null)
@@ -117,15 +118,13 @@ class StandardMetaDataFilesProvider implements IMetaDataSourceModelProvider {
 		return fileLocator;
 	}
 	
-	private InputStream getInputStream() {		
-//		URL url = FileLocator.find(Platform.getBundle(info.getBundleId()), Path.fromOSString(info.getLocation()), null); 
-		
+	private InputStream getInputStream() {				
 		if (getFileLocator() != null){
 			try {
 				return	getFileLocator().getInputStream();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				JSFCommonPlugin.log(IStatus.ERROR, "IOException: StandardMetaDataFilesProvider.getInputStream()", e);				
+
 			}
 		}
 		return null;
@@ -142,7 +141,7 @@ class StandardMetaDataFilesProvider implements IMetaDataSourceModelProvider {
 		InputStream inputStream = getInputStream();
 		try {
 			if (inputStream != null){
-				EList contents = StandardModelFactory.getInstance().loadStandardFileResource(inputStream);
+				EList contents = StandardModelFactory.getInstance().loadStandardFileResource(inputStream, this);
 				//check to see if this is a Model
 				if (contents != null && contents.get(0) instanceof Model){				
 					model = contents.get(0);
@@ -150,15 +149,13 @@ class StandardMetaDataFilesProvider implements IMetaDataSourceModelProvider {
 				}
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JSFCommonPlugin.log(IStatus.ERROR,"IOException(1): StandardMetaDataFilesProvider.getSourceModel()", e);
 		} finally {
 			if (inputStream != null){
 				try {
 					inputStream.close();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					JSFCommonPlugin.log( IStatus.ERROR,"IOException (2): StandardMetaDataFilesProvider.getSourceModel()", e);
 				}
 			}
 		}
@@ -179,16 +176,6 @@ class StandardMetaDataFilesProvider implements IMetaDataSourceModelProvider {
 		this.locator = locator;
 	}
 
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider#getClassLoader()
-	 */
-	public ClassLoader getClassLoader() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
 	/* (non-Javadoc)
 	 * @see org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider#getResourceBundle()
 	 */
@@ -197,35 +184,43 @@ class StandardMetaDataFilesProvider implements IMetaDataSourceModelProvider {
 			try {
 				return fileLocator.getResourceBundle();
 			} catch (MissingResourceException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//eat it
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//eat it			
 			}
 		}
 		return null;
-	}
-
-	public boolean canAdapt(Class klass) {
-		if (klass == IImageDescriptorProvider.class)
-			return true;
-		
-		if (klass == IResourceBundleProvider.class)
-			return true;
-		
-		return false;
 	}
 
 	public Object getAdapter(Class klass) {
 		final StandardMetaDataFilesProvider mdp = this;
 		if (klass == IImageDescriptorProvider.class){			
 			return new IImageDescriptorProvider(){
-
-				public ImageDescriptor getImageDescriptor(String imagePath) {	
+				String imageBase;
+				public ImageDescriptor getImageDescriptor(String imagePath) {
+					imagePath = appendImageBase(imagePath);
 					String bundleID = mdp.getFileLocator().getFileInfo().getBundleId();
 					URL url = FileLocator.find(Platform.getBundle(bundleID), new Path(imagePath), null);
 					return ImageDescriptor.createFromURL(url);
+				}
+				private String appendImageBase(String imagePath) {
+					return getImageBase() + imagePath;
+				}
+				
+				private String getImageBase(){
+					if (imageBase == null){
+						Model model = (Model)getSourceModel();
+						Trait t = MetaDataQueryHelper.getTrait(model, "images-base-path");
+						if (t == null){
+							imageBase = "";		
+						} else {
+							imageBase = TraitValueHelper.getValueAsString(t);
+							if (imageBase != null && imageBase.length() > 0){
+								imageBase = imageBase +"/";
+							}
+						}
+					}
+					return imageBase;
 				}
 				
 			};
@@ -234,11 +229,11 @@ class StandardMetaDataFilesProvider implements IMetaDataSourceModelProvider {
 			return new IResourceBundleProvider(){
 
 				public ResourceBundle getResourceBundle() {
-					// TODO Auto-generated method stub
 					return mdp.internalGetResourceBundle();
 				}
 				
 			};
+			
 		} else if (klass == IClassLoaderProvider.class){
 			return new IClassLoaderProvider(){
 
