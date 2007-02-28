@@ -3,6 +3,7 @@
 	xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" 
 	xmlns:md="http://org.eclipse.jst.jsf.common.metadata/metadata.ecore"
 	xmlns:mdt="http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore"  
+	xmlns:cnst="http://org.eclipse.jst.jsf.core/constraints.ecore" 
 	id="http://java.sun.com/jsf/core"
 	type="tagFile">
 
@@ -164,6 +165,22 @@
 				<value>javax.faces.converter.Converter</value>
 			</trait>
 		</entity>
+	</entity>
+	<entity id="loadBundle" type="tag">
+		<trait id="containment-constraint">
+			<value xsi:type="cnst:ContainsTagConstraint">
+				<set-generator>
+					<algorithm>xpath</algorithm>
+					<expression>ancestor::*</expression>
+				</set-generator>
+				<satisfies-set>
+						<tagId>
+							<uri>http://java.sun.com/jsf/core</uri>
+							<name>view</name>
+						</tagId>
+				</satisfies-set>
+			</value>
+		</trait>
 	</entity>
 	<entity id="param" type="tag"><include-entity-group id="common-core-attributes"/></entity>
 	<entity id="selectItem" type="tag">

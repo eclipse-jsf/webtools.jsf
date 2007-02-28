@@ -6,5 +6,6 @@ Bundle-Version: 1.0.0
 Bundle-Activator: org.eclipse.jst.jsf.standard.tagsupport.StandardTagSupportPlugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- org.eclipse.jst.jsf.common
+ org.eclipse.jst.jsf.common,
+ org.eclipse.emf.ecore.xmi
 Eclipse-LazyStart: true
