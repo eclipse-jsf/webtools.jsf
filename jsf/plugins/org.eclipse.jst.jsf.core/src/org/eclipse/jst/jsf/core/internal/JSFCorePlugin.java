@@ -157,7 +157,9 @@ public class JSFCorePlugin extends WTPPlugin {
 				 * informational.  Bug 144947.
 				 */  
 				//log(IStatus.INFO, Messages.JSFLibraryRegistry_NoLoadCreatingNew, ioe);
-				log(IStatus.INFO, Messages.JSFLibraryRegistry_NoLoadCreatingNew);
+				//removed below [174679]
+//				log(IStatus.INFO, Messages.JSFLibraryRegistry_NoLoadCreatingNew);
+				
 				jsfLibraryRegistry = JSFLibraryRegistryFactory.eINSTANCE.createJSFLibraryRegistry();
 				jsfLibraryRegistryResource.getContents().add(jsfLibraryRegistry);
 				loadJSFLibraryExtensions();
