@@ -25,6 +25,23 @@
 		</trait>
 	</entity>
 
+	<entity id="loadBundle" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info classname="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.LoadBundleOperation"/>
+				<tag-decorate-info id="vpd-decorate-design"
+					nonVisual="true"
+					nonVisualImagePath="icons/palette/JSFCORE/small/JSF_LOADBUNDLE.gif"
+					widget="true"
+					
+				/>
+				<tag-decorate-info id="vpd-decorate-preview"
+					nonVisual="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
 	<entity id="verbatim" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
