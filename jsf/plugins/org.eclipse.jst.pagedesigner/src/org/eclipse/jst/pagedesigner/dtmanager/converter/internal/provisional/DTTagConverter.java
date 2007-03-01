@@ -374,6 +374,7 @@ public class DTTagConverter implements
 	 * @param destElement Element to which added Nodes are relative.
 	 */
 	public void copyChildren(Element srcElement, Element destElement) {
+		int index = 0;
 		NodeList childNodes = srcElement.getChildNodes();
 		for (int i = 0; i < childNodes.getLength(); i++) {
 			Node curNode = childNodes.item(i); 
@@ -381,7 +382,7 @@ public class DTTagConverter implements
 					curNode.getNodeType() == Node.ELEMENT_NODE ||
 					curNode.getNodeType() == Node.TEXT_NODE ||
 					curNode.getNodeType() == Node.CDATA_SECTION_NODE) {
-				addChild(curNode, new ConvertPosition(destElement, i));
+				addChild(curNode, new ConvertPosition(destElement, index++));
 			}
 		}
 	}
