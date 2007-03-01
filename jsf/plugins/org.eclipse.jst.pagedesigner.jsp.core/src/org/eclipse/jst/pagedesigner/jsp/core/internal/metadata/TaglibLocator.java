@@ -46,7 +46,10 @@ public class TaglibLocator extends AbstractMetaDataLocator implements IPathSensi
 		List ret = new ArrayList();
 		CMDocument doc = null;
 
-		if (uri.equalsIgnoreCase(CMDocType.HTML_DOC_TYPE)){
+		if (uri == null){
+			return ret;
+		}
+		else if (uri.equalsIgnoreCase(CMDocType.HTML_DOC_TYPE)){
 			doc = HTMLCMDocumentFactory.getCMDocument(CMDocType.HTML_DOC_TYPE);
 		}
 		else if (uri.equalsIgnoreCase(CMDocType.JSP11_DOC_TYPE)){
