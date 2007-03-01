@@ -258,9 +258,8 @@ public class JSFUtils {
 	public static void removeURLMappings(WebApp webApp, Servlet servlet) {
 		String servletName = servlet.getServletName();
 		if (servletName != null) {
-			Iterator oldMappings = webApp.getServletMappings().iterator();
-			while (oldMappings.hasNext()) {
-				ServletMapping mapping = (ServletMapping) oldMappings.next();
+			for (int i=webApp.getServletMappings().size()-1;i>=0;--i){
+				ServletMapping mapping = (ServletMapping)webApp.getServletMappings().get(i);
 				if (mapping.getServlet().getServletName()
 						.equals(servletName)) {
 					webApp.getServletMappings().remove(mapping);
