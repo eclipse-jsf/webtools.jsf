@@ -6,6 +6,86 @@
 	id="http://java.sun.com/jsf/core"
 	type="tagFile">
 
+	<entity id="actionListener" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-decorate-info id="vpd-decorate-design"
+					nonVisual="true"
+					nonVisualImagePath="icons/palette/JSFCORE/small/JSF_ACTIONLISTENER.gif"
+					widget="true"
+					
+				/>
+				<tag-decorate-info id="vpd-decorate-preview"
+					nonVisual="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="attribute" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-decorate-info id="vpd-decorate-design"
+					nonVisual="true"
+					nonVisualImagePath="icons/palette/JSFCORE/small/JSF_ATTRIBUTE.gif"
+					widget="true"
+					
+				/>
+				<tag-decorate-info id="vpd-decorate-preview"
+					nonVisual="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="convertDateTime" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-decorate-info id="vpd-decorate-design"
+					nonVisual="true"
+					nonVisualImagePath="icons/palette/JSFCORE/small/JSF_CONVERTDATETIME.gif"
+					widget="true"
+					
+				/>
+				<tag-decorate-info id="vpd-decorate-preview"
+					nonVisual="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="converter" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-decorate-info id="vpd-decorate-design"
+					nonVisual="true"
+					nonVisualImagePath="icons/palette/JSFCORE/small/JSF_CONVERTER.gif"
+					widget="true"
+					
+				/>
+				<tag-decorate-info id="vpd-decorate-preview"
+					nonVisual="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="convertNumber" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-decorate-info id="vpd-decorate-design"
+					nonVisual="true"
+					nonVisualImagePath="icons/palette/JSFCORE/small/JSF_CONVERTNUMBER.gif"
+					widget="true"
+					
+				/>
+				<tag-decorate-info id="vpd-decorate-preview"
+					nonVisual="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
 	<entity id="facet" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
@@ -32,6 +112,150 @@
 				<tag-decorate-info id="vpd-decorate-design"
 					nonVisual="true"
 					nonVisualImagePath="icons/palette/JSFCORE/small/JSF_LOADBUNDLE.gif"
+					widget="true"
+					
+				/>
+				<tag-decorate-info id="vpd-decorate-preview"
+					nonVisual="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="param" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-decorate-info id="vpd-decorate-design"
+					nonVisual="true"
+					nonVisualImagePath="icons/palette/JSFCORE/small/JSF_PARAM.gif"
+					widget="true"
+					
+				/>
+				<tag-decorate-info id="vpd-decorate-preview"
+					nonVisual="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="selectItem" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-decorate-info id="vpd-decorate-design"
+					nonVisual="true"
+					nonVisualImagePath="icons/palette/JSFCORE/small/JSF_SELECTITEM.gif"
+					widget="true"
+					
+				/>
+				<tag-decorate-info id="vpd-decorate-preview"
+					nonVisual="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="selectItems" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-decorate-info id="vpd-decorate-design"
+					nonVisual="true"
+					nonVisualImagePath="icons/palette/JSFCORE/small/JSF_SELECTITEMS.gif"
+					widget="true"
+					
+				/>
+				<tag-decorate-info id="vpd-decorate-preview"
+					nonVisual="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="subview" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-decorate-info id="vpd-decorate-design"
+					nonVisual="true"
+					nonVisualImagePath="icons/palette/JSFCORE/small/JSF_SUBVIEW.gif"
+					widget="true"
+					
+				/>
+				<tag-decorate-info id="vpd-decorate-preview"
+					nonVisual="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="validateDoubleRange" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-decorate-info id="vpd-decorate-design"
+					nonVisual="true"
+					nonVisualImagePath="icons/palette/JSFCORE/small/JSF_VALIDATEDOUBLERANGE.gif"
+					widget="true"
+					
+				/>
+				<tag-decorate-info id="vpd-decorate-preview"
+					nonVisual="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="validateLength" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-decorate-info id="vpd-decorate-design"
+					nonVisual="true"
+					nonVisualImagePath="icons/palette/JSFCORE/small/JSF_VALIDATELENGTH.gif"
+					widget="true"
+					
+				/>
+				<tag-decorate-info id="vpd-decorate-preview"
+					nonVisual="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="validateLongRange" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-decorate-info id="vpd-decorate-design"
+					nonVisual="true"
+					nonVisualImagePath="icons/palette/JSFCORE/small/JSF_VALIDATELONGRANGE.gif"
+					widget="true"
+					
+				/>
+				<tag-decorate-info id="vpd-decorate-preview"
+					nonVisual="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="validator" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-decorate-info id="vpd-decorate-design"
+					nonVisual="true"
+					nonVisualImagePath="icons/palette/JSFCORE/small/JSF_VALIDATOR.gif"
+					widget="true"
+					
+				/>
+				<tag-decorate-info id="vpd-decorate-preview"
+					nonVisual="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="valueChangeListener" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-decorate-info id="vpd-decorate-design"
+					nonVisual="true"
+					nonVisualImagePath="icons/palette/JSFCORE/small/JSF_VALUECHANGELISTENER.gif"
 					widget="true"
 					
 				/>
