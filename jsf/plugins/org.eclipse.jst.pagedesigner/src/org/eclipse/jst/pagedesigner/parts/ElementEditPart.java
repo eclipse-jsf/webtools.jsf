@@ -612,6 +612,9 @@ public class ElementEditPart extends SubNodeEditPart {
             _nonVisualElementBar.dispose();
             _nonVisualElementBar = null;
         }
+        if (_tagConverter != null) {
+        	_tagConverter.dispose();
+        }
     }
 
     public Cursor getCursor(Point mouseLocation) {
