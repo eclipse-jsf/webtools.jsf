@@ -51,7 +51,12 @@ public class NonVisualComponentEditPart extends NodeEditPart
 
     protected ITagConverter getTagConverter()
     {
-        return (ITagConverter) getModel();
+    	ITagConverter tagConverter = (ITagConverter)getModel();
+    	//need to call convertRefresh to get image (if any) from metadata
+    	if (tagConverter != null) {
+    		tagConverter.convertRefresh(null);
+    	}
+    	return tagConverter;
     }
     
     protected Element getModelElement()
