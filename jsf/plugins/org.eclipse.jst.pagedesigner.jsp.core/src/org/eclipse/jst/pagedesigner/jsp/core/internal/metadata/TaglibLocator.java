@@ -35,11 +35,17 @@ import org.eclipse.wst.xml.core.internal.contentmodel.CMDocument;
 import org.eclipse.wst.xml.core.internal.provisional.contentmodel.CMDocType;
 
 public class TaglibLocator extends AbstractMetaDataLocator implements IPathSensitiveMetaDataLocator, ITaglibIndexListener{
-	
+	//project must be set to the current project context during locate only...  should not be used when noifying observers
 	private IProject project;
 	private TaglibMetaDataSource source;
 	private String uri;
 	private boolean _notificationEventOccuring;
+	
+	public TaglibLocator(){
+		super();
+		//we will continue listening for the tag lib uri, even if none are found initially
+//		TaglibIndex.addTaglibIndexListener(this);//non-api call.... danger!
+	}
 	
 	public List/*<IMetaDataModelProvider>*/ locateMetaDataModelProviders(String uri) {
 		this.uri = uri;
@@ -62,10 +68,6 @@ public class TaglibLocator extends AbstractMetaDataLocator implements IPathSensi
 			ITaglibRecord tldRec = findTLD(tldRecs, uri);
 			if (tldRec != null)
 				doc = factory.createCMDocument(tldRec);
-			
-			//we will continue listening for the tag lib uri, even if none are found initially
-			TaglibIndex.addTaglibIndexListener(this);//non-api call.... danger
-
 		}
 		
 		if (doc != null){
@@ -86,9 +88,10 @@ public class TaglibLocator extends AbstractMetaDataLocator implements IPathSensi
 	}
 
 	public void stopLocating() {		
-		TaglibIndex.removeTaglibIndexListener(this);//non-api call.... danger
+//		TaglibIndex.removeTaglibIndexListener(this);//non-api call.... danger
 	}
 	
+	//not currently listening, so will not be called
 	public void indexChanged(ITaglibRecordEvent event) {
 		if (event.getTaglibRecord().getDescriptor().getURI() != null && event.getTaglibRecord().getDescriptor().getURI().equals(uri)){
 			if (!_notificationEventOccuring){

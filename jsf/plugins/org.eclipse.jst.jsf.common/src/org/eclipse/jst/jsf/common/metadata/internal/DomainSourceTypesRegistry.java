@@ -61,7 +61,7 @@ public class DomainSourceTypesRegistry{
 		List/*<IDomainSourceModelType>*/ types = new ArrayList/*<IDomainSourceModelType>*/();
 		for(Iterator/*<DomainSourceModelTypeDescriptor>*/ it=list.iterator();it.hasNext();){
 			DomainSourceModelTypeDescriptor d = (DomainSourceModelTypeDescriptor)it.next();
-			types.add(d.newInstance());
+			types.add(d.getInstance());
 		}
 		//default sort descending by ordinal 
 		Collections.sort(types, new Comparator(){

@@ -167,7 +167,6 @@ public class DomainLoadingStrategy implements IDomainLoadingStrategy, IMetaDataO
 			for (Iterator it= sources.iterator();it.hasNext();){				
 				IMetaDataSourceModelProvider provider = (IMetaDataSourceModelProvider)it.next();
 				IMetaDataLocator locator = provider.getLocator();
-				locator.stopLocating();
 				locator.removeObserver(this);		
 				locator.setDomainSourceModelType(null);
 				provider.setLocator(null);

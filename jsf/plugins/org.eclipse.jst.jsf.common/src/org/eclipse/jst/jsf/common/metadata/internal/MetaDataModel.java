@@ -97,7 +97,7 @@ public class MetaDataModel {
 	 * Flag that model is stale
 	 */
 	public void setNeedsRefresh() {		
-		refresh = false;//true; //FIX ME!!!! Model lifecycle requires work
+		refresh = true;
 	}
 	
 	/**

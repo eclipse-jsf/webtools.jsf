@@ -36,6 +36,7 @@ public class DomainSourceModelTypeDescriptor {
 	private Set translatorDescriptors;
 	private String bundleId = JSFCommonPlugin.PLUGIN_ID;
 	private int ordinal;
+	private IDomainSourceModelType _instance;
 	
 	/**
 	 * Constructor
@@ -96,10 +97,16 @@ public class DomainSourceModelTypeDescriptor {
 		return domain;
 	}
 	 
+	public IDomainSourceModelType getInstance(){
+		if (_instance == null){
+			_instance = newInstance();
+		}
+		return _instance;
+	}
 	/**
 	 * @return new instance of {@link IDomainSourceModelType} 
 	 */
-	public IDomainSourceModelType newInstance(){		
+	private IDomainSourceModelType newInstance(){		
 
 		return new DomainSourceModelTypeImpl();
 	}
@@ -131,16 +138,7 @@ public class DomainSourceModelTypeDescriptor {
 		 */
 		public IMetaDataLocator getLocator() {
 			if (locator == null){
-				Class klass = JSFCommonPlugin.loadClass(locatorClassName, bundleId);
-				try {
-					locator = (IMetaDataLocator)klass.newInstance();
-				} catch (InstantiationException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				locator = MetaDataLocatorFactory.getInstance().getLocator(locatorClassName, bundleId);
 			}
 								
 			return locator;
