@@ -65,9 +65,7 @@ public class JSFContentAssistProcessor implements IContentAssistProcessor {
 
 	private String defaultIconPath = "/icons/attr_val.gif";
 	
-	//move to plugin and have plugin destroy this on shutdown 
-	private Image defaultAttrValImg;
-	private ImageRegistry imgRegistry = new ImageRegistry();
+	private ImageDescriptor defaultAttrValImgDesc;
 	
 	private MarkupTagInfoProvider fInfoProvider;
 
@@ -230,11 +228,14 @@ public class JSFContentAssistProcessor implements IContentAssistProcessor {
 	}
 
 	private Image getOrCreateImage(ImageDescriptor icon) {
-		Image img = imgRegistry.get(icon.toString());
+		if (icon == null)
+			return null;
+			
+		Image img = JSFUiPlugin.getDefault().getImageRegistry().get(icon.toString());
 		if (img == null){
 			try {
 				img = icon.createImage();
-				imgRegistry.put(icon.toString(), img);
+				JSFUiPlugin.getDefault().getImageRegistry().put(icon.toString(), img);
 			} catch (RuntimeException e) {
                 // empty block; C.B: handle exception?
 			}
@@ -243,12 +244,12 @@ public class JSFContentAssistProcessor implements IContentAssistProcessor {
 	}
 
 	private Image getDefaultAttributeValueImage() {
-		if (defaultAttrValImg == null){
+		if (defaultAttrValImgDesc == null){
 			Bundle bundle = Platform.getBundle(JSFUiPlugin.PLUGIN_ID);
 			URL url= FileLocator.find(bundle,new Path(defaultIconPath ), null);
-			defaultAttrValImg = ImageDescriptor.createFromURL(url).createImage();
+			defaultAttrValImgDesc = ImageDescriptor.createFromURL(url);
 		}
-		return defaultAttrValImg;
+		return getOrCreateImage(defaultAttrValImgDesc);
 	}
 
 	private Attr getAttribute(IStructuredDocumentContext context) {
@@ -264,12 +265,6 @@ public class JSFContentAssistProcessor implements IContentAssistProcessor {
 		}
 		return null;
 
-	}
-
-	public void finalize() throws Throwable{
-		defaultAttrValImg.dispose();
-		imgRegistry.dispose();
-		super.finalize();
 	}
 
 	public IContextInformation[] computeContextInformation(ITextViewer viewer,
