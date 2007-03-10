@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PaletteInfoImpl.java,v 1.1 2007/02/28 05:04:41 gkessler Exp $
+ * $Id: PaletteInfoImpl.java,v 1.2 2007/03/10 00:08:07 gkessler Exp $
  */
 package org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl;
 
@@ -551,7 +551,7 @@ public class PaletteInfoImpl extends EObjectImpl implements PaletteInfo {
 	public boolean isExpert() {
 		if (expert == null){
 			String val = getTagTraitValueAsString(getId(), "expert");
-			return Boolean.parseBoolean(val);
+			return Boolean.valueOf(val).booleanValue();			
 		}
 		return expert.booleanValue();
 	}
@@ -564,7 +564,7 @@ public class PaletteInfoImpl extends EObjectImpl implements PaletteInfo {
 	public boolean isHidden() {
 		if (hidden == null){
 			String val = getTagTraitValueAsString(getId(), "hidden");
-			return Boolean.parseBoolean(val);
+			return Boolean.valueOf(val).booleanValue();	
 		}
 		return hidden.booleanValue();
 	}
