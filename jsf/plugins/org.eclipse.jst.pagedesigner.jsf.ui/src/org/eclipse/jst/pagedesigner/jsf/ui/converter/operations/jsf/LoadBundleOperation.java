@@ -58,7 +58,7 @@ public class LoadBundleOperation extends AbstractTransformOperation {
 			String basename = srcElement.getAttribute(IJSFConstants.ATTR_BASENAME);
 			if (var != null && basename != null && var.length() > 0 && basename.length() > 0) {
 				String basePath =
-					basename.replace(".", IFileFolderConstants.PATH_SEPARATOR) +
+					basename.replace('.', IFileFolderConstants.PATH_SEPARATOR.charAt(0)) +
 							IFileFolderConstants.DOT +
 							IFileFolderConstants.EXT_PROPERTIES;
 				if (srcElement instanceof IDOMNode) {

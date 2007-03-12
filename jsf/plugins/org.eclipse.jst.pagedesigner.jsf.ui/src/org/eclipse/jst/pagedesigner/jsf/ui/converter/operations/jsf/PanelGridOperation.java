@@ -16,12 +16,9 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import org.eclipse.jst.pagedesigner.converter.ConvertPosition;
-import org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.ITransformOperation;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.AbstractTransformOperation;
-import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.AppendChildElementOperation;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.CopyAllAttributesOperation;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.CreateAttributeOperation;
-import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.CreateElementOperation;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.RenameAttributeOperation;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -129,32 +126,6 @@ public class PanelGridOperation extends AbstractTransformOperation {
 	}
 
 	/**
-	 * Creates a new Element.
-	 * 
-	 * @param tagName Name of Element to be created.
-	 * @return New Element instance.
-	 */
-	protected Element createElement(String tagName) {
-		ITransformOperation operation = new CreateElementOperation(tagName);
-		operation.setTagConverterContext(tagConverterContext);
-		return operation.transform(null, null);
-	}
-
-	/**
-	 * Creates and appends a new child Element.
-	 * 
-	 * @param tagName Name of child Element to be created.
-	 * @param parentElement Element instance to which to append the new
-	 * Element.
-	 * @return New Element instance.
-	 */
-	protected Element appendChildElement(String tagName, Element parentElement) {
-		ITransformOperation operation = new AppendChildElementOperation(tagName);
-		operation.setTagConverterContext(tagConverterContext);
-		return operation.transform(null, parentElement);
-	}
-
-	/**
 	 * Gets a child Element of the specified parent Element that has the node
 	 * name "facet" and the specified value of the "name" attribute.
 	 * 
@@ -162,18 +133,15 @@ public class PanelGridOperation extends AbstractTransformOperation {
 	 * @param facetName Name of the facet Element for which to search.
 	 * @return Child Element that is a facet with the specified name.
 	 */
-	protected Element getChildFacetByName(Element srcElement, String facetName) {
+	private Element getChildFacetByName(Element srcElement, String facetName) {
 		Element element = null;
-		NodeList childNodes = srcElement.getChildNodes();
-		for (int i = 0; i < childNodes.getLength(); i++) {
-			Node childNode = childNodes.item(i);
-			if (childNode.getNodeType() == Node.ELEMENT_NODE && childNode.getLocalName().equalsIgnoreCase("facet")) {
-				Element facetElement = (Element)childNode;
-				String facetElementName = facetElement.getAttribute("name");
-				if (facetElementName != null && facetElementName.equals(facetName)) {
-					element = facetElement;
-					break;
-				}
+		List facets = getChildElements(srcElement, "facet");
+		Iterator itFacets = facets.iterator();
+		while (itFacets.hasNext()) {
+			Element facet = (Element)itFacets.next();
+			if (facet.getAttribute("name").equals(facetName)) {
+				element = facet;
+				break;
 			}
 		}
 		return element;
@@ -187,7 +155,7 @@ public class PanelGridOperation extends AbstractTransformOperation {
 	 * @return List of child Elements of the specified parent Element that does
 	 * not include any child "facet" Elements.
 	 */
-	protected List getChildElementsSkipFacets(Element srcElement) {
+	private List getChildElementsSkipFacets(Element srcElement) {
 		List childElementsList = new ArrayList();
 		NodeList childNodes = srcElement.getChildNodes();
 		for (int i = 0; i < childNodes.getLength(); i++) {

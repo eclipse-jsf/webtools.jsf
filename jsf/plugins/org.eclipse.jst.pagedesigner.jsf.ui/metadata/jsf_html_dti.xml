@@ -6,6 +6,78 @@
 	id="http://java.sun.com/jsf/html"
 	type="tagFile">
 
+	<entity id="column" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info classname="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.ColumnOperation"/>
+				<tag-decorate-info id="vpd-decorate-design"
+					multiLevel="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="commandButton" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info classname="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.CommandButtonOperation"/>
+				<tag-decorate-info id="vpd-decorate-design"
+					multiLevel="true"
+					widget="true"
+					setNonVisualChildElements="true"
+				/>
+				<tag-decorate-info id="vpd-decorate-preview">
+					<resolve-attribute-value attributeName="value"/>
+				</tag-decorate-info>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="commandLink" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info>
+					<operation id="CreateElementOperation">
+						<parameter value="a"/>
+					</operation>
+					<operation id="CopyAllAttributesOperation"/>
+					<operation id="RenameAttributeOperation">
+						<parameter value="styleClass"/>
+						<parameter value="class"/>
+					</operation>
+					<operation id="CreateAttributeOperation">
+						<parameter value="href"/>
+						<parameter value="#"/>
+					</operation>
+					<operation id="ConvertAttributeToTextOperation">
+						<parameter value="value"/>
+					</operation>
+					<operation id="CopyChildrenOperation"/>
+				</tag-convert-info>
+				<tag-decorate-info id="vpd-decorate-design"
+					multiLevel="true"
+					needBorderDecorator="true"
+				/>
+				<tag-decorate-info id="vpd-decorate-preview"
+					resolveChildText="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="dataTable" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info classname="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.DataTableOperation"/>
+				<tag-decorate-info id="vpd-decorate-design"
+					multiLevel="true"
+					needBorderDecorator="true"
+					needTableDecorator="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
 	<entity id="form" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
@@ -199,6 +271,35 @@
 		</trait>
 	</entity>
 
+	<entity id="outputFormat" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info>
+					<operation id="CreateElementOperation">
+						<parameter value="span"/>
+					</operation>
+					<operation id="CopyAllAttributesOperation"/>
+					<operation id="RenameAttributeOperation">
+						<parameter value="styleClass"/>
+						<parameter value="class"/>
+					</operation>
+					<operation id="ConvertAttributeToTextOperation">
+						<parameter value="value"/>
+					</operation>
+				</tag-convert-info>
+				<tag-decorate-info id="vpd-decorate-design"
+					needBorderDecorator="true"
+					multiLevel="true"
+					widget="true"
+					setNonVisualChildElements="true"
+				/>
+				<tag-decorate-info id="vpd-decorate-preview"
+					resolveChildText="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
 	<entity id="outputLabel" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
@@ -223,6 +324,36 @@
 				/>
 				<tag-decorate-info id="vpd-decorate-preview"
 					resolveChildText="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="outputLink" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info>
+					<operation id="CreateElementOperation">
+						<parameter value="a"/>
+					</operation>
+					<operation id="CopyAllAttributesOperation"/>
+					<operation id="RenameAttributeOperation">
+						<parameter value="styleClass"/>
+						<parameter value="class"/>
+					</operation>
+					<operation id="CreateAttributeOperation">
+						<parameter value="href"/>
+						<parameter value="#"/>
+					</operation>
+					<operation id="RenameAttributeOperation">
+						<parameter value="value"/>
+						<parameter value="href"/>
+					</operation>
+					<operation id="CopyChildrenOperation"/>
+				</tag-convert-info>
+				<tag-decorate-info id="vpd-decorate-design"
+					multiLevel="true"
+					needBorderDecorator="true"
 				/>
 			</value>
 		</trait>
@@ -265,6 +396,40 @@
 					multiLevel="true"
 					needBorderDecorator="true"
 					needTableDecorator="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="panelGroup" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info>
+					<operation id="CreateElementOperation">
+						<parameter value="div"/>
+					</operation>
+					<operation id="CopyAllAttributesOperation"/>
+					<operation id="RenameAttributeOperation">
+						<parameter value="styleClass"/>
+						<parameter value="class"/>
+					</operation>
+					<operation id="CopyChildrenOperation"/>
+				</tag-convert-info>
+				<tag-decorate-info id="vpd-decorate-design"
+					multiLevel="true"
+					needBorderDecorator="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="selectBooleanCheckbox" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info classname="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.SelectBooleanCheckboxOperation"/>
+				<tag-decorate-info id="vpd-decorate-design"
+					multiLevel="true"
+					widget="true"
 				/>
 			</value>
 		</trait>

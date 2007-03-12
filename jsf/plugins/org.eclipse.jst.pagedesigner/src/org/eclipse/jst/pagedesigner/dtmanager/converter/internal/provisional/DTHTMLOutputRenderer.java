@@ -18,6 +18,7 @@ import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
 import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.AppendChildElementOperation;
+import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.AppendChildTextOperation;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.ConvertAttributeToTextOperation;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.CopyAllAttributesOperation;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.CopyAttributeOperation;
@@ -127,6 +128,14 @@ public class DTHTMLOutputRenderer implements IOutputRenderer {
 									boolean makeChildCurrent = Boolean.valueOf(((Parameter)parameters.get(1)).getValue()).booleanValue();
 									transformer.appendTransformOperation(new AppendChildElementOperation(elementName, makeChildCurrent));
 								}
+							} else if (opID.equals("AppendChildTextOperation")) {
+								EList parameters = operation.getParameters();
+								if (parameters.size() < 1) {
+									log.error("Warning.DTHTMLOutputRenderer.TooFewParameters", opID);
+									return null;
+								}
+								String content = ((Parameter)parameters.get(0)).getValue();
+								transformer.appendTransformOperation(new AppendChildTextOperation(content));
 							} else if (opID.equals("ConvertAttributeToTextOperation")) {
 								EList parameters = operation.getParameters();
 								if (parameters.size() < 1) {
