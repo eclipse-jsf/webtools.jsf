@@ -10,11 +10,9 @@
  *******************************************************************************/ 
 package org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf;
 
-import org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.ITransformOperation;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.AbstractTransformOperation;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.CopyAllAttributesOperation;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.CreateAttributeOperation;
-import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.CreateElementOperation;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.RenameAttributeOperation;
 import org.w3c.dom.Element;
 
@@ -48,18 +46,6 @@ public class SelectBooleanCheckboxOperation extends AbstractTransformOperation {
 			new CreateAttributeOperation("checked", "checked").transform(srcElement, inputElement);
 		}
 		return inputElement;
-	}
-
-	/**
-	 * Creates a new Element.
-	 * 
-	 * @param tagName Name of Element to be created.
-	 * @return New Element instance.
-	 */
-	protected Element createElement(String tagName) {
-		ITransformOperation operation = new CreateElementOperation(tagName);
-		operation.setTagConverterContext(tagConverterContext);
-		return operation.transform(null, null);
 	}
 
 }

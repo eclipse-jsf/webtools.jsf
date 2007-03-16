@@ -435,4 +435,78 @@
 		</trait>
 	</entity>
 
+	<entity id="selectManyCheckbox" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info classname="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.SelectManyCheckboxOperation"/>
+				<tag-decorate-info id="vpd-decorate-design"
+					multiLevel="true"
+					widget="true"
+					needBorderDecorator="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="selectManyListbox" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info classname="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.SelectManyListboxOperation"/>
+				<tag-decorate-info id="vpd-decorate-design"
+					multiLevel="true"
+					widget="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="selectManyMenu" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info classname="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.SelectManyMenuOperation"/>
+				<tag-decorate-info id="vpd-decorate-design"
+					multiLevel="true"
+					widget="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="selectOneListbox" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info classname="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.SelectOneListboxOperation"/>
+				<tag-decorate-info id="vpd-decorate-design"
+					multiLevel="true"
+					widget="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="selectOneMenu" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info classname="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.SelectOneMenuOperation"/>
+				<tag-decorate-info id="vpd-decorate-design"
+					multiLevel="true"
+					widget="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="selectOneRadio" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info classname="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.SelectOneRadioOperation"/>
+				<tag-decorate-info id="vpd-decorate-design"
+					multiLevel="true"
+					widget="true"
+					needBorderDecorator="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
 </md:metadatamodel>
