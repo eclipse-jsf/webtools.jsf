@@ -416,6 +416,7 @@ public class JSPSemanticsValidator extends JSPValidator implements ISourceValida
 		if (!vv.isEmpty()){
 			for (Iterator it = vv.iterator();it.hasNext();){
 				IValidValues v = (IValidValues)it.next();
+				if (attributeVal == null) attributeVal = "";//ensure to be non-null
 				if (!v.isValidValue(attributeVal.trim())){	
 					if (DEBUG)
 						System.out.println(addDebugSpacer(4)+"NOT VALID ");
