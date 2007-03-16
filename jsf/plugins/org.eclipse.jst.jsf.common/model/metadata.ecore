@@ -15,7 +15,7 @@
       <eParameters name="visitor" eType="#//IEntityVisitor"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="entityGroups" upperBound="-1"
-        eType="#//EntityGroup">
+        eType="#//EntityGroup" eKeys="#//Entity/id #//Entity/type">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
         <details key="kind" value="element"/>
         <details key="name" value="entityGroup"/>
@@ -37,14 +37,14 @@
     </eOperations>
     <eOperations name="getModel" eType="#//Model"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="childEntities" upperBound="-1"
-        eType="#//Entity" containment="true">
+        eType="#//Entity" containment="true" eKeys="#//Entity/id #//Entity/type">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
         <details key="kind" value="element"/>
         <details key="name" value="entity"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="traits" upperBound="-1"
-        eType="#//Trait" containment="true">
+        eType="#//Trait" containment="true" eKeys="#//Trait/id">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
         <details key="kind" value="element"/>
         <details key="name" value="trait"/>
