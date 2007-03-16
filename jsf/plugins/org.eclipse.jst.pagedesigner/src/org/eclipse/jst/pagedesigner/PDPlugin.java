@@ -27,6 +27,7 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
@@ -236,7 +237,7 @@ public class PDPlugin extends AbstractUIPlugin {
 	}
 
 	/**
-	 * Returns a shared image for the given name
+	 * Returns a shared image for the given name.  Image must exist in icons folder of pagedesigner plugin.
 	 * <p>
 	 * Note: Images returned from this method will be automitically disposed of
 	 * when this plug-in shuts down. Callers must not dispose of these images
@@ -255,16 +256,8 @@ public class PDPlugin extends AbstractUIPlugin {
 		ImageRegistry images = getImageRegistry();
 		Image image = images.get(name);
 		if (image == null) {
-			try {
-				ImageDescriptor id = ImageDescriptor.createFromURL(new URL(
-						_pluginBase, ICONS_LIB_PATH + "/" + name));
-				images.put(name, id);
-
-				image = images.get(name);
-			} catch (MalformedURLException ee) {
-				// log.PDPlugin.image.error=Image {0} not found.
-				_log.error("Error.PDPlugin.Installation.10", name, ee); //$NON-NLS-2$
-			}
+			getImageDescriptor(name);		
+			image = images.get(name);
 		}
 		return image;
 	}
@@ -272,7 +265,7 @@ public class PDPlugin extends AbstractUIPlugin {
 	/**
 	 * Returns a shared ImageDescriptor for the given name
 	 * <p>
-	 * Note: ImageDescriptor returned from this method will be automitically
+	 * Note: ImageDescriptor returned from this method will be automatically
 	 * disposed of when this plug-in shuts down. Callers must not dispose of
 	 * these ImageDescriptor themselves.
 	 * </p>
@@ -289,14 +282,21 @@ public class PDPlugin extends AbstractUIPlugin {
 		ImageRegistry images = getImageRegistry();
 		ImageDescriptor id = images.getDescriptor(name);
 		if (id == null) {
-			try {
-				id = ImageDescriptor.createFromURL(new URL(_pluginBase,
-						ICONS_LIB_PATH + "/" + name));
+			InputStream stream = null;
+			try {//check existance of file
+				URL url = new URL(_pluginBase,
+						ICONS_LIB_PATH + "/" + name);
+				
+				//doing the following to check existance... exception will be caught and null descriptor returned
+				stream = url.openStream();
+				stream.close();
+				
+				id = ImageDescriptor.createFromURL(url);
 				images.put(name, id);
-			} catch (MalformedURLException ee) {
-				// log.PDPlugin.image.error=Image {0} not found.
-				_log.error("Error.PDPlugin.Installation.13", name, ee); //$NON-NLS-1$ //$NON-NLS-2$
-			}
+			} catch (IOException e1) {
+				_log.info("Unable to create ImageDescriptor for: "+name, e1);
+				return null;
+			} 
 		}
 		return id;
 	}
