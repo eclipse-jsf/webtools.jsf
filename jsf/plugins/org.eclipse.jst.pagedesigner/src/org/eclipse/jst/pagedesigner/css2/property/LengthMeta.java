@@ -72,8 +72,9 @@ public class LengthMeta extends CSSPropertyMeta {
 		try {
 			fvalue = primitive.getFloatValue(unitType);
 		} catch (DOMException ex) {
-			_log.info("Get length failed, use auto value instead ("
-					+ value.getCssText() + ")");
+// Hide this info.   Consider adding DEBUG option			
+//			_log.info("Get length failed, use auto value instead ("
+//					+ value.getCssText() + ")");
 			return ICSSPropertyID.VAL_AUTO;
 		}
 		return toLength(fvalue, unitType, style, this.getPercentageType(),
