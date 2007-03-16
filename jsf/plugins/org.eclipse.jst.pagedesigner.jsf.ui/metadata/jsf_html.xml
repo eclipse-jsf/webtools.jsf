@@ -326,10 +326,10 @@
 			<value>Select Boolean Checkbox</value>
 		</trait>
 		<trait id="small-icon">
-			<value>small/JSF_selectBooleanCheckbox.gif</value>
+			<value>small/JSF_SELECTBOOLEANCHECKBOX.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSF_selectBooleanCheckbox.gif</value>
+			<value>large/JSF_SELECTBOOLEANCHECKBOX.gif</value>
 		</trait>
 		<trait id="requires-html-form">
 			<value>true</value>
@@ -340,10 +340,10 @@
 			<value>Select Many Checkbox</value>
 		</trait>
 		<trait id="small-icon">
-			<value>small/JSF_selectManyCheckbox.gif</value>
+			<value>small/JSF_SELECTMANYCHECKBOX.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSF_selectManyCheckbox.gif</value>
+			<value>large/JSF_SELECTMANYCHECKBOX.gif</value>
 		</trait>
 		<trait id="requires-html-form">
 			<value>true</value>
@@ -354,10 +354,10 @@
 			<value>Select Many Listbox</value>
 		</trait>
 		<trait id="small-icon">
-			<value>small/JSF_selectManyListbox.gif</value>
+			<value>small/JSF_SELECTMANYLISTBOX.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSF_selectManyListbox.gif</value>
+			<value>large/JSF_SELECTMANYLISTBOX.gif.gif</value>
 		</trait>	
 		<trait id="requires-html-form">
 			<value>true</value>
@@ -368,10 +368,10 @@
 			<value>Select Many Menu</value>
 		</trait>
 		<trait id="small-icon">
-			<value>small/JSF_selectManyMenu.gif</value>
+			<value>small/small/JSF_SELECTMANYMENU.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSF_selectManyMenu.gif</value>
+			<value>large/JSF_SELECTMANYMENU.gif</value>
 		</trait>		
 		<trait id="requires-html-form">
 			<value>true</value>
@@ -382,10 +382,10 @@
 			<value>Select One Listbox</value>
 		</trait>
 		<trait id="small-icon">
-			<value>small/JSF_selectOneListbox.gif</value>
+			<value>small/JSF_SELECTONELISTBOX.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSF_selectOneListbox.gif</value>
+			<value>large/JSF_SELECTONELISTBOX.gif</value>
 		</trait>		
 		<trait id="requires-html-form">
 			<value>true</value>
@@ -396,10 +396,10 @@
 			<value>Select One Menu</value>
 		</trait>
 		<trait id="small-icon">
-			<value>small/JSF_selectOneMenu.gif</value>
+			<value>small/JSF_SELECTONEMENU.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSF_selectOneMenu.gif</value>
+			<value>large/JSF_SELECTONEMENU.gif</value>
 		</trait>
 		<trait id="requires-html-form">
 			<value>true</value>
@@ -410,10 +410,10 @@
 			<value>Select One Radio</value>
 		</trait>
 		<trait id="small-icon">
-			<value>small/JSF_selectOneRadio.gif</value>
+			<value>small/JSF_SELECTONERADIO.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSF_selectOneRadio.gif</value>
+			<value>large/JSF_SELECTONERADIO.gif</value>
 		</trait>
 		<trait id="requires-html-form">
 			<value>true</value>
