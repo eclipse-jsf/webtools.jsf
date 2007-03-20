@@ -357,7 +357,7 @@
 			<value>small/JSF_SELECTMANYLISTBOX.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSF_SELECTMANYLISTBOX.gif.gif</value>
+			<value>large/JSF_SELECTMANYLISTBOX.gif</value>
 		</trait>	
 		<trait id="requires-html-form">
 			<value>true</value>
@@ -368,7 +368,7 @@
 			<value>Select Many Menu</value>
 		</trait>
 		<trait id="small-icon">
-			<value>small/small/JSF_SELECTMANYMENU.gif</value>
+			<value>small/JSF_SELECTMANYMENU.gif</value>
 		</trait>
 		<trait id="large-icon">
 			<value>large/JSF_SELECTMANYMENU.gif</value>
