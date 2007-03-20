@@ -35,7 +35,8 @@ public class StandardAnnotationFilesTranslator implements IMetaDataTranslator {
 		else {
 			//for each entity and trait call "add".   assistant will handle merge.
 			Model mk = (Model)assistant.getSourceModelProvider().getSourceModel();
-			traverseAndAdd(assistant, mk);
+			if (mk != null)//possible that model was not loaded
+				traverseAndAdd(assistant, mk);
 		}			
 	}
 	

@@ -12,6 +12,7 @@
 
 package org.eclipse.jst.jsf.common.metadata.internal;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -42,7 +43,10 @@ public class PluginRelativeStandardMetaDataSourceFileLocator extends StandardMet
 		if (url != null) {
 			return url.openStream();
 		}
-		return null;
+		else {
+			String  fileName = fileInfo.getBundleId()+"/"+ Path.fromOSString(fileInfo.getLocation()).toString();
+			throw new FileNotFoundException("Metadata file not found: "+ fileName);
+		}
 	}
 
 	

@@ -13,6 +13,7 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.common.metadata.internal;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -118,14 +119,9 @@ class StandardMetaDataFilesProvider implements IMetaDataSourceModelProvider {
 		return fileLocator;
 	}
 	
-	private InputStream getInputStream() {				
+	private InputStream getInputStream() throws IOException {				
 		if (getFileLocator() != null){
-			try {
-				return	getFileLocator().getInputStream();
-			} catch (IOException e) {
-				JSFCommonPlugin.log(IStatus.ERROR, "IOException: StandardMetaDataFilesProvider.getInputStream()", e);				
-
-			}
+			return	getFileLocator().getInputStream();			
 		}
 		return null;
 		
@@ -138,8 +134,9 @@ class StandardMetaDataFilesProvider implements IMetaDataSourceModelProvider {
 		if (model != null)
 			return model;
 		
-		InputStream inputStream = getInputStream();
+		InputStream inputStream = null;
 		try {
+			inputStream = getInputStream();
 			if (inputStream != null){
 				EList contents = StandardModelFactory.getInstance().loadStandardFileResource(inputStream, this);
 				//check to see if this is a Model
@@ -148,6 +145,8 @@ class StandardMetaDataFilesProvider implements IMetaDataSourceModelProvider {
 					((Model)model).setSourceModelProvider(this);
 				}
 			}
+		} catch (FileNotFoundException e){
+			JSFCommonPlugin.log(IStatus.ERROR,e.getLocalizedMessage(), e);
 		} catch (IOException e) {
 			JSFCommonPlugin.log(IStatus.ERROR,"IOException(1): StandardMetaDataFilesProvider.getSourceModel()", e);
 		} finally {
