@@ -1,7 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: %plugin.Name
-Bundle-SymbolicName: org.eclipse.jsf
-Bundle-Version: 0.5.0.qualifier
-Bundle-Localization: plugin
-Bundle-Vendor: %plugin.Provider
