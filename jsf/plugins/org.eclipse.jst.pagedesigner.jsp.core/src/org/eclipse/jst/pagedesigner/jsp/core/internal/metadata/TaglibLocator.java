@@ -12,29 +12,21 @@
 package org.eclipse.jst.pagedesigner.jsp.core.internal.metadata;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.runtime.ISafeRunnable;
-import org.eclipse.jface.util.SafeRunnable;
 import org.eclipse.jst.jsf.common.metadata.internal.AbstractMetaDataLocator;
-import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataChangeNotificationEvent;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataLocator;
-import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataObserver;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider;
 import org.eclipse.jst.jsf.common.metadata.internal.IPathSensitiveMetaDataLocator;
-import org.eclipse.jst.jsf.common.metadata.internal.MetaDataChangeNotificationEvent;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.CMDocumentFactoryTLD;
-import org.eclipse.jst.jsp.core.taglib.ITaglibIndexListener;
 import org.eclipse.jst.jsp.core.taglib.ITaglibRecord;
-import org.eclipse.jst.jsp.core.taglib.ITaglibRecordEvent;
 import org.eclipse.jst.jsp.core.taglib.TaglibIndex;
 import org.eclipse.wst.html.core.internal.contentmodel.HTMLCMDocumentFactory;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMDocument;
 import org.eclipse.wst.xml.core.internal.provisional.contentmodel.CMDocType;
 
-public class TaglibLocator extends AbstractMetaDataLocator implements IPathSensitiveMetaDataLocator, ITaglibIndexListener{
+public class TaglibLocator extends AbstractMetaDataLocator implements IPathSensitiveMetaDataLocator{
 	//project must be set to the current project context during locate only...  should not be used when noifying observers
 	private IProject project;
 	private TaglibMetaDataSource source;
@@ -92,47 +84,47 @@ public class TaglibLocator extends AbstractMetaDataLocator implements IPathSensi
 	}
 	
 	//not currently listening, so will not be called
-	public void indexChanged(ITaglibRecordEvent event) {
-		if (event.getTaglibRecord().getDescriptor().getURI() != null && event.getTaglibRecord().getDescriptor().getURI().equals(uri)){
-			if (!_notificationEventOccuring){
-				_notificationEventOccuring = true;
-				int type = adaptTagLibEvent(event);
-				IMetaDataChangeNotificationEvent mdEvent = new MetaDataChangeNotificationEvent(this, uri, type);
-				fireEvent(mdEvent);						
-				_notificationEventOccuring = false;
-			}
-		}
-	}
+//	public void indexChanged(ITaglibDescriptor event) {
+//		if (event.getURI() != null && event.getURI().equals(uri)){
+//			if (!_notificationEventOccuring){
+//				_notificationEventOccuring = true;
+//				int type = adaptTagLibEvent(event);
+//				IMetaDataChangeNotificationEvent mdEvent = new MetaDataChangeNotificationEvent(this, uri, type);
+//				fireEvent(mdEvent);						
+//				_notificationEventOccuring = false;
+//			}
+//		}
+//	}
 
-	private int adaptTagLibEvent(ITaglibRecordEvent event) {
-		switch (event.getType()){
-		case ITaglibRecordEvent.ADDED:
-			return IMetaDataChangeNotificationEvent.ADDED;
-		case ITaglibRecordEvent.REMOVED:
-			return IMetaDataChangeNotificationEvent.REMOVED;
-		default:
-			return IMetaDataChangeNotificationEvent.CHANGED;
-		}		
-	}
+//	private int adaptTagLibEvent(ITaglibRecordEvent event) {
+//		switch (event.getType()){
+//		case ITaglibRecordEvent.ADDED:
+//			return IMetaDataChangeNotificationEvent.ADDED;
+//		case ITaglibRecordEvent.REMOVED:
+//			return IMetaDataChangeNotificationEvent.REMOVED;
+//		default:
+//			return IMetaDataChangeNotificationEvent.CHANGED;
+//		}		
+//	}
 
-	private void fireEvent(final IMetaDataChangeNotificationEvent event) {
-		SafeRunnable.run(new ISafeRunnable(){
-
-			public void handleException(Throwable exception) {
-				// TODO Auto-generated method stub				
-			}
-
-			public void run() throws Exception {
-				Iterator it = getObservers().iterator();
-				while (it.hasNext()){
-					IMetaDataObserver observer = (IMetaDataObserver)it.next();
-					observer.notifyMetadataChanged(event);
-				}
-			}
-
-		});
-		
-	}
+//	private void fireEvent(final IMetaDataChangeNotificationEvent event) {
+//		SafeRunnable.run(new ISafeRunnable(){
+//
+//			public void handleException(Throwable exception) {
+//				// TODO Auto-generated method stub				
+//			}
+//
+//			public void run() throws Exception {
+//				Iterator it = getObservers().iterator();
+//				while (it.hasNext()){
+//					IMetaDataObserver observer = (IMetaDataObserver)it.next();
+//					observer.notifyMetadataChanged(event);
+//				}
+//			}
+//
+//		});
+//		
+//	}
 
 	public void setProjectContext(IProject project) {
 		this.project = project;		

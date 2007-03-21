@@ -26,38 +26,21 @@ import java.util.TimerTask;
 
 import javax.xml.parsers.DocumentBuilder;
 
-import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResourceChangeEvent;
-import org.eclipse.core.resources.IResourceChangeListener;
-import org.eclipse.core.resources.IResourceDelta;
-import org.eclipse.core.resources.IResourceDeltaVisitor;
-import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.gef.palette.PaletteDrawer;
 import org.eclipse.gef.palette.PaletteEntry;
-import org.eclipse.jst.jsf.common.ui.IFileFolderConstants;
 import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
-import org.eclipse.jst.jsf.common.ui.internal.utils.WebrootUtil;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.CMDocumentFactoryTLD;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDDocument;
-import org.eclipse.jst.jsp.core.taglib.ITaglibIndexListener;
+import org.eclipse.jst.jsp.core.taglib.ITaglibIndexDelta;
 import org.eclipse.jst.jsp.core.taglib.ITaglibRecord;
-import org.eclipse.jst.jsp.core.taglib.ITaglibRecordEvent;
 import org.eclipse.jst.jsp.core.taglib.TaglibIndex;
-import org.eclipse.jst.pagedesigner.IJMTConstants;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.editors.palette.IEntryChangeListener;
 import org.eclipse.jst.pagedesigner.editors.palette.IPaletteConstants;
 import org.eclipse.jst.pagedesigner.editors.palette.IPaletteItemManager;
 import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
 import org.eclipse.jst.pagedesigner.utils.XMLUtil;
-import org.eclipse.wst.common.componentcore.ComponentCore;
-import org.eclipse.wst.common.componentcore.resources.IVirtualComponent;
-import org.eclipse.wst.common.componentcore.resources.IVirtualFile;
 import org.eclipse.wst.html.core.internal.contentmodel.HTMLCMDocumentFactory;
 import org.eclipse.wst.xml.core.internal.provisional.contentmodel.CMDocType;
 import org.osgi.framework.Bundle;
@@ -74,7 +57,7 @@ import org.xml.sax.SAXException;
  * @author mengbo
  */
 public class PaletteItemManager implements IPaletteItemManager,
-		IPaletteConstants, ITaglibIndexListener {
+		IPaletteConstants {
 	
 	private static Logger _log = PDPlugin.getLogger(PaletteItemManager.class);
 	private static Map _managers = new HashMap();
@@ -121,11 +104,7 @@ public class PaletteItemManager implements IPaletteItemManager,
 	 * 
 	 */
 	public void dispose() {
-		TaglibIndex.removeTaglibIndexListener(this);
-		if (_refreshTimer != null){
-//			_refreshTimer.cancel();
-			_refreshTimer = null;
-		}
+		
 	}
 
 	private IProject getCurProject() {
@@ -183,18 +162,13 @@ public class PaletteItemManager implements IPaletteItemManager,
 	protected synchronized void init() {
 		getAllCategories().clear();
 		initFromProject(_curProject);
-		
-		synchronized (this) {
-			TaglibIndex.removeTaglibIndexListener(this);
-			TaglibIndex.addTaglibIndexListener(this);
-		}
 
 		loadUserCustomizations();
 	}
 
 	public void reset() {
 		init();
-//		_refreshTimer = null; 
+
 		fireModelChanged(null, null);
 	}
 
@@ -600,51 +574,6 @@ public class PaletteItemManager implements IPaletteItemManager,
 		for (int i = 0; i < _listeners.length; i++) {
 			_listeners[i].modelChanged(oldDefinitions, newDefinitions);
 		}
-	}
-
-//	/**
-//	 * Return location path of the file which the relative path to web project
-//	 * contextroot equal param path.
-//	 * 
-//	 * @param project
-//	 *            web project
-//	 * @param path
-//	 *            relative path(example: WEB-INF/web.xml)
-//	 * @return
-//	 */
-//	public String getRelativeProjectFile(IProject project, String path) {
-//		IVirtualComponent wbModule = ComponentCore.createComponent(_curProject);
-//		if (wbModule != null) {
-//			IVirtualFile reFile = wbModule.getRootFolder().getFile(path);
-//			if (reFile.exists()) {
-//				return reFile.getUnderlyingFile().getLocation().toOSString()
-//						+ "/";
-//			}
-//		}
-//		return null;
-//	}
-
-	public void indexChanged(ITaglibRecordEvent event) {
-//		createOrResetRefreshTimer();
-	}
-
-	private void createOrResetRefreshTimer() {
-		if (_refreshTimer == null)
-			_refreshTimer = new Timer();			
-		
-//		else
-//			_refreshTimer.cancel();
-		
-		_refreshTimer.schedule(new TimerTask(){
-
-			public void run() {
-				System.out.println("reset timer");
-				reset();				
-				_refreshTimer.cancel();
-				_refreshTimer = null;
-			}
-			
-		}, 200);
 	}
 
 	/* (non-Javadoc)
