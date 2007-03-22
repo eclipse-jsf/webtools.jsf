@@ -53,7 +53,7 @@ public class TestDefaultBeanSymbolSourceProvider extends TestCase
                                   "/WEB-INF/faces-config.xml");
 
         _jsfFactedTestEnvironment = new JSFFacetedTestEnvironment(projectTestEnvironment);
-        _jsfFactedTestEnvironment.initialize();
+        _jsfFactedTestEnvironment.initialize(JSFFacetedTestEnvironment.FACET_VERSION_1_1);
         
         _jdtTestEnvironment = new JDTTestEnvironment(projectTestEnvironment);
 

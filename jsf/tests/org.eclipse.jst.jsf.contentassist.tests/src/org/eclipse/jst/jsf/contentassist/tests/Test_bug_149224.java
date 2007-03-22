@@ -53,7 +53,7 @@ public class Test_bug_149224 extends TestCase
         assertTrue(_testEnv.getTestProject().isAccessible());
         
         JSFFacetedTestEnvironment jsfFacedEnv = new JSFFacetedTestEnvironment(_testEnv);
-        jsfFacedEnv.initialize();
+        jsfFacedEnv.initialize(JSFFacetedTestEnvironment.FACET_VERSION_1_1);
         
         _testEnv.loadResourceInWebRoot(ContentAssistTestsPlugin.getDefault().getBundle(),
                                       "/testdata/bug_149224_1.jsp.data",

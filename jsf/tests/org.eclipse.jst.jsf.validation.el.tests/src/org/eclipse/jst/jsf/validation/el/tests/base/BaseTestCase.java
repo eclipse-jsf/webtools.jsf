@@ -58,7 +58,7 @@ public class BaseTestCase extends TestCase
 
         JSFTestUtil.setValidationEnabled(false);
         
-        JSFTestUtil.setInternetProxyPreferences(true, "www-proxy.uk.oracle.com", "80");
+        JSFTestUtil.setInternetProxyPreferences(true, "www-proxy.us.oracle.com", "80");
         
         _testEnv = new WebProjectTestEnvironment("ELValidationTest_"+this.getClass().getName()+"_"+getName());
         _testEnv.createProject();
@@ -67,7 +67,7 @@ public class BaseTestCase extends TestCase
         assertTrue(_testEnv.getTestProject().isAccessible());
 
         JSFFacetedTestEnvironment jsfFacedEnv = new JSFFacetedTestEnvironment(_testEnv);
-        jsfFacedEnv.initialize();
+        jsfFacedEnv.initialize(JSFFacetedTestEnvironment.FACET_VERSION_1_1);
 
         _testEnv.loadResourceInWebRoot(ELValidationTestPlugin.getDefault().getBundle(),
                                       "/testdata/web/faces-config.xml.data", 

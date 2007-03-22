@@ -26,7 +26,7 @@ public class TestFunctionCompletionStrategy extends TestCase {
         assertTrue(_testEnv.getTestProject().isAccessible());
         
         JSFFacetedTestEnvironment jsfFacedEnv = new JSFFacetedTestEnvironment(_testEnv);
-        jsfFacedEnv.initialize();
+        jsfFacedEnv.initialize(JSFFacetedTestEnvironment.FACET_VERSION_1_1);
         
         _testEnv.loadResourceInWebRoot(ContentAssistTestsPlugin.getDefault().getBundle(),
                                       "/testdata/faces-config_bug149743.xml.data", 

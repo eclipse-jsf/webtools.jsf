@@ -26,6 +26,7 @@ import org.eclipse.wst.common.componentcore.internal.operation.FacetProjectCreat
 import org.eclipse.wst.common.frameworks.datamodel.DataModelFactory;
 import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
 import org.eclipse.wst.common.project.facet.core.IFacetedProject;
+import org.eclipse.wst.common.project.facet.core.IProjectFacet;
 import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
 import org.eclipse.wst.common.project.facet.core.ProjectFacetsManager;
 import org.eclipse.wst.common.project.facet.core.IFacetedProject.Action.Type;
@@ -38,6 +39,9 @@ import org.eclipse.wst.common.project.facet.core.IFacetedProject.Action.Type;
  */
 public class JSFFacetedTestEnvironment 
 {
+    public final static String                  FACET_VERSION_1_1 = "1.1";
+    public final static String                  FACET_VERSION_1_2 = "1.2";
+    
     private final WebProjectTestEnvironment        _projectTestEnvironment;
     private JSFFacetInstallDataModelProvider    _modelProvider;
     private IDataModel                          _model;
@@ -53,8 +57,10 @@ public class JSFFacetedTestEnvironment
     
     /**
      * Initialize the facet
+     * @param version -- the version of the facet.  Valid strings are constant
+     * publics on this class starting FACET_VERSION
      */
-    public void initialize()
+    public void initialize(final String version)
     {
         try
         {
@@ -70,7 +76,7 @@ public class JSFFacetedTestEnvironment
             
             Set actions = new HashSet();
             actions.add(new IFacetedProject.Action((Type) _model.getProperty(IFacetDataModelProperties.FACET_TYPE),
-                (IProjectFacetVersion) _model.getProperty(IFacetDataModelProperties.FACET_VERSION),
+                    getJSFFacet(version),
                 _model));
             
             IFacetedProject facetedProject = ProjectFacetsManager.create(project);
@@ -84,6 +90,12 @@ public class JSFFacetedTestEnvironment
         } catch (CoreException e) {
             Logger.getLogger().logError(e);
         }       
+    }
+    
+    private IProjectFacetVersion getJSFFacet(String version)
+    {
+        IProjectFacet facet = ProjectFacetsManager.getProjectFacet("jst.jsf");
+        return facet.getVersion(version);
     }
     
     /**
