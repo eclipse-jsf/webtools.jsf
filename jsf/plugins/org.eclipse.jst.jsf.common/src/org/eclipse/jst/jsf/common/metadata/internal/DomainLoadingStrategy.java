@@ -108,7 +108,7 @@ public class DomainLoadingStrategy implements IDomainLoadingStrategy, IMetaDataO
 	 * for the specified uri
 	 */
 	protected List/*<IDomainSourceModelType>*/ loadDomainSourceModelTypes() {
-		return (List)DomainSourceTypesRegistry.getInstance().getDomainSourceTypes(domain); 
+		return DomainSourceTypesRegistry.getInstance().getDomainSourceTypes(domain); 
 	}
 
 	/**
