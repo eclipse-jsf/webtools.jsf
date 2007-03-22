@@ -1,26 +1,6 @@
 package org.eclipse.jst.pagedesigner.itemcreation.internal;
 
-import java.util.Iterator;
-
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.Model;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IMetaDataModelContext;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.MetaDataQueryHelper;
-import org.eclipse.jst.pagedesigner.IJMTConstants;
-import org.eclipse.jst.pagedesigner.dom.DOMPositionHelper;
-import org.eclipse.jst.pagedesigner.dom.IDOMPosition;
-import org.eclipse.jst.pagedesigner.dom.JSFValidatorSupport;
-import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
-import org.eclipse.jst.pagedesigner.editors.palette.impl.PaletteElementTemplateHelper;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.TagCreationAttribute;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.TagCreationInfo;
-import org.eclipse.jst.pagedesigner.utils.BodyHelper;
-import org.eclipse.jst.pagedesigner.utils.JSPUtil;
-import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
-import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
-import org.w3c.dom.Element;
 
 //JUNK!
 public class TagCreatorFromMetaData extends DefaultTagCreator {

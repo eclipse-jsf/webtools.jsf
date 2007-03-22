@@ -11,8 +11,6 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.css2.property;
 
-import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
-import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.css2.ICSSStyle;
 import org.eclipse.jst.pagedesigner.css2.font.ICSSFont;
 import org.eclipse.jst.pagedesigner.css2.value.Length;
@@ -26,8 +24,6 @@ import org.w3c.dom.css.CSSValue;
  */
 public class LengthMeta extends CSSPropertyMeta {
 	private static final String[] KEYWORDS = new String[] { ICSSPropertyID.VAL_AUTO };
-
-	private static Logger _log = PDPlugin.getLogger(LengthMeta.class);
 
 	/**
 	 * @param inherit
