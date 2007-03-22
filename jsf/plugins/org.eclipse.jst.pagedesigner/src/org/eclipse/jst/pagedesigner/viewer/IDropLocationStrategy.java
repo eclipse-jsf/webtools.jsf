@@ -35,7 +35,7 @@ public interface IDropLocationStrategy
      * @param position
      * @return must contain all IFigure objects that were added to the feedback layer by
      * this call.  Once returned, these IFigure's must not be kept as state information
-     * by the strategy because they may be manipulated at any after return by the caller.
+     * by the strategy because they may be manipulated at any time after return to the caller.
      * This includes erasing them from the feedback layer.  List must be modifiable by
      * the caller.
      * 
