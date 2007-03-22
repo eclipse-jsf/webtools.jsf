@@ -204,7 +204,12 @@ public class SimpleMetaDataQueryVisitorImpl implements IEntityQueryVisitor, ITra
 	 * Stack used for determining relative key of an entity from the initial context.
 	 */
 	private class EntityStack extends Stack/*<Entity>*/ {
-		public EntityStack(){
+		/**
+         * 
+         */
+        private static final long serialVersionUID = -6010267544968175003L;
+
+        public EntityStack(){
 			super();
 		}
 	}
