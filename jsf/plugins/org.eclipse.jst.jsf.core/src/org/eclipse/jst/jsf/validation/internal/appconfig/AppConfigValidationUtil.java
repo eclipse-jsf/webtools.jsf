@@ -112,18 +112,11 @@ public final class AppConfigValidationUtil
      */
     public static IMessage validateELExpression(final String textContent)
     {
-        final String elRegex = "#\\{(.*)\\}";
-        Pattern pattern = Pattern.compile(elRegex);
-        Matcher matcher = pattern.matcher(textContent.trim());
-        if (matcher.matches())
+        final ELResultWrapper result = extractELExpression(textContent);
+        
+        if (result.elText != null)
         {
-            final String elText = matcher.group(1).trim();
-            
-            if ("".equals(elText) || elText == null)
-            {
-                return DiagnosticFactory.create_SYNTAX_ERROR_IN_EL();
-            }
-            JSPELParser parser = new JSPELParser(new StringReader(elText));
+             JSPELParser parser = new JSPELParser(new StringReader(result.elText));
             
             try {
                 parser.Expression();
@@ -134,9 +127,69 @@ public final class AppConfigValidationUtil
             
             return null;
         }
-        return DiagnosticFactory.create_EL_EXPR_MUST_BE_IN_HASH_BRACES();
+        
+        return result.message;
     }
 
+    /**
+     * @param textContent
+     * @return the result of trying to extract an EL  expression from the
+     * textContent string.  The content is expected to be of the form
+     * #{elText}.  elText in the return value will be set to this value
+     * from within the braces.  If a syntax error occurs in this extraction
+     * message property of the result object will contain a validation message
+     * and elText will be set to null.
+     */
+    public static ELResultWrapper extractELExpression(final String textContent)
+    {
+        final String elRegex = "#\\{(.*)\\}";
+        Pattern pattern = Pattern.compile(elRegex);
+        Matcher matcher = pattern.matcher(textContent.trim());
+        if (matcher.matches())
+        {
+           final String elText = matcher.group(1).trim();
+            
+            if ("".equals(elText) || elText == null)
+            {
+                return new ELResultWrapper(DiagnosticFactory.create_SYNTAX_ERROR_IN_EL(), null);
+            }
+            return new ELResultWrapper(null, elText);
+        }
+        return new ELResultWrapper(DiagnosticFactory.create_EL_EXPR_MUST_BE_IN_HASH_BRACES(), null);
+    }
+
+    /**
+     * Value object that wraps the result of trying
+     * to extract an EL expression from an arbitrary String
+     */
+    public static class ELResultWrapper
+    {
+        private final IMessage    message;
+        private final String      elText;
+        
+        ELResultWrapper(IMessage message, String elText) {
+            super();
+            this.message = message;
+            this.elText = elText;
+        }
+
+        /**
+         * @return a message indicating a problem encountered
+         * trying to extract, or null if no problem was encountered
+         */
+        public IMessage getMessage() {
+            return message;
+        }
+
+        /**
+         * @return the el expression string raw, stripped of any
+         * sorrounding #{} syntax or null if could not be extracted
+         */
+        public String getElText() {
+            return elText;
+        }
+    }
+    
     /**
      * @param eObj
      * @return the offset character offset in to the XML document of the
