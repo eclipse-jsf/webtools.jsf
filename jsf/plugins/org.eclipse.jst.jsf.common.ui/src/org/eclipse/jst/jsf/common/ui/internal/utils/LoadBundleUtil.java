@@ -31,7 +31,7 @@ import org.eclipse.jdt.core.JavaModelException;
 public class LoadBundleUtil {
 
 	private LoadBundleUtil() {
-
+	    // no external instantiation
 	}
 
 	/*
@@ -125,18 +125,16 @@ public class LoadBundleUtil {
 		int index = baseName.lastIndexOf('.');//$NON-NLS-1$
 		if (index == -1) {
 			return "";//$NON-NLS-1$
-		} else {
-			return baseName.substring(0, index);
 		}
+        return baseName.substring(0, index);
 	}
 
 	private static String getFileName(String baseName) {
 		int index = baseName.lastIndexOf('.');//$NON-NLS-1$
 		if (index == -1) {
 			return baseName + ".properties";
-		} else {
-			return baseName.substring(index + 1).concat(".properties");//$NON-NLS-1$
 		}
+        return baseName.substring(index + 1).concat(".properties");//$NON-NLS-1$
 	}
 
 }
