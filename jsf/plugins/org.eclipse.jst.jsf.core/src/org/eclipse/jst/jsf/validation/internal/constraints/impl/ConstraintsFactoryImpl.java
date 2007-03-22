@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConstraintsFactoryImpl.java,v 1.1 2007/02/28 21:16:02 cbateman Exp $
+ * $Id: ConstraintsFactoryImpl.java,v 1.2 2007/03/22 23:56:16 cbateman Exp $
  */
 package org.eclipse.jst.jsf.validation.internal.constraints.impl;
 
@@ -27,6 +27,7 @@ public class ConstraintsFactoryImpl extends EFactoryImpl implements ConstraintsF
      * Creates the default factory implementation.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     * @return the constraints factory
      * @generated
      */
     public static ConstraintsFactory init() {
@@ -55,6 +56,8 @@ public class ConstraintsFactoryImpl extends EFactoryImpl implements ConstraintsF
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     * @param eClass 
+     * @return the eobject for the class
      * @generated
      */
     public EObject create(EClass eClass) {
@@ -70,6 +73,7 @@ public class ConstraintsFactoryImpl extends EFactoryImpl implements ConstraintsF
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     * @return a new tag id
      * @generated
      */
     public TagId createTagId() {
@@ -80,6 +84,7 @@ public class ConstraintsFactoryImpl extends EFactoryImpl implements ConstraintsF
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     * @return a new tag set
      * @generated
      */
     public TagSet createTagSet() {
@@ -90,6 +95,7 @@ public class ConstraintsFactoryImpl extends EFactoryImpl implements ConstraintsF
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     * @return a new Contains Tag Constraint
      * @generated
      */
     public ContainsTagConstraint createContainsTagConstraint() {
@@ -100,6 +106,7 @@ public class ConstraintsFactoryImpl extends EFactoryImpl implements ConstraintsF
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     * @return the constraints package
      * @generated
      */
     public ConstraintsPackage getConstraintsPackage() {
@@ -109,6 +116,7 @@ public class ConstraintsFactoryImpl extends EFactoryImpl implements ConstraintsF
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     * @return the package
      * @deprecated
      * @generated
      */
