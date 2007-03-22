@@ -30,6 +30,7 @@ public class DTManager {
 	private IDTInfoFactory dtInfoFactory;
 
 	private DTManager() {
+        // no external instantiation
 	}
 
 	/**
