@@ -25,6 +25,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.ISafeRunnable;
 import org.eclipse.core.runtime.QualifiedName;
 import org.eclipse.jface.util.SafeRunnable;
+import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Model;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IMetaDataModelContext;
 
@@ -106,6 +107,7 @@ public class MetaDataModelManager implements IResourceChangeListener{
 		try {
 			project.setSessionProperty(KEY_SESSIONPROPERTY, null);
 		} catch (CoreException e) {
+            JSFCommonPlugin.log(e, "Error removing session property");
 		}
 	}
 	
