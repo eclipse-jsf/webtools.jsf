@@ -93,6 +93,7 @@ Binds metadata source types to a particular domain of metadata.
          <meta.section type="examples"/>
       </appInfo>
       <documentation>
+      <pre>
          &lt;extension
          point=&quot;org.eclipse.jst.jsf.common.domainSourceModelTypes&quot;&gt;
       &lt;domainSourceModelTypes
@@ -100,7 +101,7 @@ Binds metadata source types to a particular domain of metadata.
             domainSourceModelTypeId=&quot;DefaultMetaDataTagLibraryHandler&quot;
             locator=&quot;org.eclipse.jst.jsf.common.metadata.internal.StandardMetaDataLocator&quot;
             ordinal=&quot;10&quot;&gt;
-      &lt;/domainSourceModelTypes&gt;
+      &lt;/domainSourceModelTypes&gt;</pre>
       </documentation>
    </annotation>
 
