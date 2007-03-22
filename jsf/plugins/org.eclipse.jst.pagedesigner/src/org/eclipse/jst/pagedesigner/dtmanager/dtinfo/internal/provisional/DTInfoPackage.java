@@ -123,22 +123,13 @@ public interface DTInfoPackage extends EPackage {
 	int TAG_CONVERT_INFO__OPERATIONS = 0;
 
 	/**
-	 * The feature id for the '<em><b>Classname</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TAG_CONVERT_INFO__CLASSNAME = 1;
-
-	/**
 	 * The number of structural features of the '<em>Tag Convert Info</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TAG_CONVERT_INFO_FEATURE_COUNT = 2;
+	int TAG_CONVERT_INFO_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.impl.OperationImpl <em>Operation</em>}' class.
@@ -413,17 +404,6 @@ public interface DTInfoPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTagConvertInfo_Operations();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.TagConvertInfo#getClassname <em>Classname</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Classname</em>'.
-	 * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.TagConvertInfo#getClassname()
-	 * @see #getTagConvertInfo()
-	 * @generated
-	 */
-	EAttribute getTagConvertInfo_Classname();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.Operation <em>Operation</em>}'.
@@ -706,14 +686,6 @@ public interface DTInfoPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TAG_CONVERT_INFO__OPERATIONS = eINSTANCE.getTagConvertInfo_Operations();
-
-		/**
-		 * The meta object literal for the '<em><b>Classname</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TAG_CONVERT_INFO__CLASSNAME = eINSTANCE.getTagConvertInfo_Classname();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.impl.OperationImpl <em>Operation</em>}' class.

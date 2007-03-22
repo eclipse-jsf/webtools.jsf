@@ -196,15 +196,6 @@ public class DTInfoPackageImpl extends EPackageImpl implements DTInfoPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTagConvertInfo_Classname() {
-		return (EAttribute)tagConvertInfoEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getOperation() {
 		return operationEClass;
 	}
@@ -414,7 +405,6 @@ public class DTInfoPackageImpl extends EPackageImpl implements DTInfoPackage {
 
 		tagConvertInfoEClass = createEClass(TAG_CONVERT_INFO);
 		createEReference(tagConvertInfoEClass, TAG_CONVERT_INFO__OPERATIONS);
-		createEAttribute(tagConvertInfoEClass, TAG_CONVERT_INFO__CLASSNAME);
 
 		operationEClass = createEClass(OPERATION);
 		createEAttribute(operationEClass, OPERATION__ID);
@@ -473,7 +463,6 @@ public class DTInfoPackageImpl extends EPackageImpl implements DTInfoPackage {
 
 		initEClass(tagConvertInfoEClass, TagConvertInfo.class, "TagConvertInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTagConvertInfo_Operations(), this.getOperation(), null, "operations", null, 0, -1, TagConvertInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTagConvertInfo_Classname(), ecorePackage.getEString(), "classname", null, 0, 1, TagConvertInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(operationEClass, Operation.class, "Operation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getOperation_Id(), ecorePackage.getEString(), "id", null, 1, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

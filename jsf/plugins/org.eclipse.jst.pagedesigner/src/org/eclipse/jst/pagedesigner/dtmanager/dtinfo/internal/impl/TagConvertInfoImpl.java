@@ -8,20 +8,13 @@ package org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.impl;
 
 import java.util.Collection;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.DTInfoPackage;
 import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.Operation;
 import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.TagConvertInfo;
@@ -34,7 +27,6 @@ import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.TagCon
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.impl.TagConvertInfoImpl#getOperations <em>Operations</em>}</li>
- *   <li>{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.impl.TagConvertInfoImpl#getClassname <em>Classname</em>}</li>
  * </ul>
  * </p>
  *
@@ -57,26 +49,6 @@ public class TagConvertInfoImpl extends EObjectImpl implements TagConvertInfo {
 	 * @ordered
 	 */
 	protected EList operations = null;
-
-	/**
-	 * The default value of the '{@link #getClassname() <em>Classname</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getClassname()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String CLASSNAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getClassname() <em>Classname</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getClassname()
-	 * @generated
-	 * @ordered
-	 */
-	protected String classname = CLASSNAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -113,27 +85,6 @@ public class TagConvertInfoImpl extends EObjectImpl implements TagConvertInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getClassname() {
-		return classname;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setClassname(String newClassname) {
-		String oldClassname = classname;
-		classname = newClassname;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DTInfoPackage.TAG_CONVERT_INFO__CLASSNAME, oldClassname, classname));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case DTInfoPackage.TAG_CONVERT_INFO__OPERATIONS:
@@ -151,8 +102,6 @@ public class TagConvertInfoImpl extends EObjectImpl implements TagConvertInfo {
 		switch (featureID) {
 			case DTInfoPackage.TAG_CONVERT_INFO__OPERATIONS:
 				return getOperations();
-			case DTInfoPackage.TAG_CONVERT_INFO__CLASSNAME:
-				return getClassname();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -168,9 +117,6 @@ public class TagConvertInfoImpl extends EObjectImpl implements TagConvertInfo {
 				getOperations().clear();
 				getOperations().addAll((Collection)newValue);
 				return;
-			case DTInfoPackage.TAG_CONVERT_INFO__CLASSNAME:
-				setClassname((String)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -185,9 +131,6 @@ public class TagConvertInfoImpl extends EObjectImpl implements TagConvertInfo {
 			case DTInfoPackage.TAG_CONVERT_INFO__OPERATIONS:
 				getOperations().clear();
 				return;
-			case DTInfoPackage.TAG_CONVERT_INFO__CLASSNAME:
-				setClassname(CLASSNAME_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -201,25 +144,8 @@ public class TagConvertInfoImpl extends EObjectImpl implements TagConvertInfo {
 		switch (featureID) {
 			case DTInfoPackage.TAG_CONVERT_INFO__OPERATIONS:
 				return operations != null && !operations.isEmpty();
-			case DTInfoPackage.TAG_CONVERT_INFO__CLASSNAME:
-				return CLASSNAME_EDEFAULT == null ? classname != null : !CLASSNAME_EDEFAULT.equals(classname);
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (classname: ");
-		result.append(classname);
-		result.append(')');
-		return result.toString();
 	}
 
 } //TagConvertInfoImpl

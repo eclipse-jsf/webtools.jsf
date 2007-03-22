@@ -9,7 +9,11 @@
 	<entity id="column" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
-				<tag-convert-info classname="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.ColumnOperation"/>
+				<tag-convert-info>
+					<operation id="CustomTransformOperation">
+						<parameter value="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.ColumnOperation"/>
+					</operation>
+				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
 					multiLevel="true"
 				/>
@@ -20,7 +24,11 @@
 	<entity id="commandButton" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
-				<tag-convert-info classname="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.CommandButtonOperation"/>
+				<tag-convert-info>
+					<operation id="CustomTransformOperation">
+						<parameter value="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.CommandButtonOperation"/>
+					</operation>
+				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
 					multiLevel="true"
 					widget="true"
@@ -68,7 +76,11 @@
 	<entity id="dataTable" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
-				<tag-convert-info classname="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.DataTableOperation"/>
+				<tag-convert-info>
+					<operation id="CustomTransformOperation">
+						<parameter value="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.DataTableOperation"/>
+					</operation>
+				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
 					multiLevel="true"
 					needBorderDecorator="true"
@@ -144,7 +156,6 @@
 					nonVisual="true"
 					nonVisualImagePath="icons/palette/JSFHTML/small/JSF_INPUTHIDDEN.gif"
 					widget="true"
-					
 				/>
 				<tag-decorate-info id="vpd-decorate-preview"
 					nonVisual="true"
@@ -246,7 +257,6 @@
 					nonVisual="true"
 					nonVisualImagePath="icons/palette/JSFHTML/small/JSF_MESSAGE.gif"
 					widget="true"
-					
 				/>
 				<tag-decorate-info id="vpd-decorate-preview"
 					nonVisual="true"
@@ -262,7 +272,6 @@
 					nonVisual="true"
 					nonVisualImagePath="icons/palette/JSFHTML/small/JSF_MESSAGES.gif"
 					widget="true"
-					
 				/>
 				<tag-decorate-info id="vpd-decorate-preview"
 					nonVisual="true"
@@ -391,7 +400,11 @@
 	<entity id="panelGrid" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
-				<tag-convert-info classname="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.PanelGridOperation"/>
+				<tag-convert-info>
+					<operation id="CustomTransformOperation">
+						<parameter value="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.PanelGridOperation"/>
+					</operation>
+				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
 					multiLevel="true"
 					needBorderDecorator="true"
@@ -426,7 +439,11 @@
 	<entity id="selectBooleanCheckbox" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
-				<tag-convert-info classname="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.SelectBooleanCheckboxOperation"/>
+				<tag-convert-info>
+					<operation id="CustomTransformOperation">
+						<parameter value="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.SelectBooleanCheckboxOperation"/>
+					</operation>
+				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
 					multiLevel="true"
 					widget="true"
@@ -438,7 +455,11 @@
 	<entity id="selectManyCheckbox" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
-				<tag-convert-info classname="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.SelectManyCheckboxOperation"/>
+				<tag-convert-info>
+					<operation id="CustomTransformOperation">
+						<parameter value="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.SelectManyCheckboxOperation"/>
+					</operation>
+				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
 					multiLevel="true"
 					widget="true"
@@ -451,7 +472,11 @@
 	<entity id="selectManyListbox" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
-				<tag-convert-info classname="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.SelectManyListboxOperation"/>
+				<tag-convert-info>
+					<operation id="CustomTransformOperation">
+						<parameter value="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.SelectManyListboxOperation"/>
+					</operation>
+				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
 					multiLevel="true"
 					widget="true"
@@ -463,7 +488,11 @@
 	<entity id="selectManyMenu" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
-				<tag-convert-info classname="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.SelectManyMenuOperation"/>
+				<tag-convert-info>
+					<operation id="CustomTransformOperation">
+						<parameter value="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.SelectManyMenuOperation"/>
+					</operation>
+				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
 					multiLevel="true"
 					widget="true"
@@ -475,7 +504,11 @@
 	<entity id="selectOneListbox" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
-				<tag-convert-info classname="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.SelectOneListboxOperation"/>
+				<tag-convert-info>
+					<operation id="CustomTransformOperation">
+						<parameter value="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.SelectOneListboxOperation"/>
+					</operation>
+				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
 					multiLevel="true"
 					widget="true"
@@ -487,7 +520,11 @@
 	<entity id="selectOneMenu" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
-				<tag-convert-info classname="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.SelectOneMenuOperation"/>
+				<tag-convert-info>
+					<operation id="CustomTransformOperation">
+						<parameter value="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.SelectOneMenuOperation"/>
+					</operation>
+				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
 					multiLevel="true"
 					widget="true"
@@ -499,7 +536,11 @@
 	<entity id="selectOneRadio" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
-				<tag-convert-info classname="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.SelectOneRadioOperation"/>
+				<tag-convert-info>
+					<operation id="CustomTransformOperation">
+						<parameter value="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.SelectOneRadioOperation"/>
+					</operation>
+				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
 					multiLevel="true"
 					widget="true"
