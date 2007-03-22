@@ -14,8 +14,8 @@ package org.eclipse.jst.pagedesigner.commands.range;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
 import org.eclipse.jst.pagedesigner.IHTMLConstants;
-import org.eclipse.jst.pagedesigner.IJSFConstants;
 import org.eclipse.jst.pagedesigner.dom.DOMPosition;
 import org.eclipse.jst.pagedesigner.dom.DOMRefPosition;
 import org.eclipse.jst.pagedesigner.dom.EditModelQuery;

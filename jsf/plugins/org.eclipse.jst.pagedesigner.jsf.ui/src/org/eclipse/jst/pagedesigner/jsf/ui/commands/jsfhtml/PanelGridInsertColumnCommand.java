@@ -18,8 +18,8 @@ import org.eclipse.jface.viewers.ISelection;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
+import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
 import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
-import org.eclipse.jst.pagedesigner.IJSFConstants;
 import org.eclipse.jst.pagedesigner.commands.DesignerCommand;
 import org.eclipse.jst.pagedesigner.jsf.core.dom.JSFDOMUtil;
 import org.eclipse.jst.pagedesigner.jsf.ui.elementedit.util.PanelGridUtil;

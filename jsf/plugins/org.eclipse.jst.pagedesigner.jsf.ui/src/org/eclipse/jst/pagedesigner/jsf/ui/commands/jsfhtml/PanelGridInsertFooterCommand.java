@@ -14,7 +14,7 @@ package org.eclipse.jst.pagedesigner.jsf.ui.commands.jsfhtml;
 import java.util.List;
 
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jst.pagedesigner.IJSFConstants;
+import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
 import org.eclipse.jst.pagedesigner.commands.DesignerCommand;
 import org.eclipse.jst.pagedesigner.jsf.core.dom.JSFDOMUtil;
 import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;

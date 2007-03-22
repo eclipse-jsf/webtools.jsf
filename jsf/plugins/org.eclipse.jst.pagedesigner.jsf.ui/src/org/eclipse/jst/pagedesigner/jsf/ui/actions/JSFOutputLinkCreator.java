@@ -20,8 +20,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.Text;
 
+import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
 import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
-import org.eclipse.jst.pagedesigner.IJSFConstants;
 import org.eclipse.jst.pagedesigner.actions.link.AbstractLinkCreator;
 import org.eclipse.jst.pagedesigner.actions.link.LinkUtil;
 import org.eclipse.jst.pagedesigner.parts.TextEditPart;

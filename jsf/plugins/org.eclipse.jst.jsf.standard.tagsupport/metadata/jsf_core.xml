@@ -181,6 +181,17 @@
 				</satisfies-set>
 			</value>
 		</trait>
+		<entity id="var">
+			<trait id="contributes-value-binding">
+				<value>true</value>
+			</trait>
+			<trait id="value-binding-scope">
+				<value>request</value>
+			</trait>
+			<trait id="value-binding-symbol-factory">
+				<value>org.eclipse.jst.jsf.designtime.core.loadBundle</value>
+			</trait>
+		</entity>
 	</entity>
 	<entity id="param" type="tag"><include-entity-group id="common-core-attributes"/></entity>
 	<entity id="selectItem" type="tag">

@@ -11,8 +11,8 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.jsf.ui.converter.jsfhtml;
 
+import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
 import org.eclipse.jst.pagedesigner.IHTMLConstants;
-import org.eclipse.jst.pagedesigner.IJSFConstants;
 import org.eclipse.jst.pagedesigner.converter.AbstractTagConverter;
 import org.eclipse.jst.pagedesigner.converter.JSFConverterUtil;
 import org.w3c.dom.Element;

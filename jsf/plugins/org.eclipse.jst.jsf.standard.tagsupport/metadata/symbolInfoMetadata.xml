@@ -6,19 +6,7 @@
 	id="http://java.sun.com/jsf/core"
 	type="tagFile">
 	
-	<entity id="loadBundle" type="tag">
-		<entity id="var">
-			<trait id="contributes-value-binding">
-				<value>true</value>
-			</trait>
-			<trait id="value-binding-scope">
-				<value>request</value>
-			</trait>
-			<trait id="value-binding-symbol-factory">
-				<value>org.eclipse.jst.jsf.designtime.core.loadBundle</value>
-			</trait>
-		</entity>
-	</entity>
+
 	<entity id="view" type="tag">
 		<entity id="locale">
 			<trait id="sets-locale">

@@ -142,7 +142,9 @@ public class JSPModelProcessor
     private Map                     _applicationMap;
     private Map                     _noneMap;
     private long                    _lastModificationStamp;
-    private Object                  _lastModificationStampMonitor = new Object();
+    
+    // used to avoid infinite recursion in refresh.  Must never be null
+    private final CountingMutex     _lastModificationStampMonitor = new CountingMutex();
     
     /**
      * Construct a new JSPModelProcessor for model
@@ -231,24 +233,43 @@ public class JSPModelProcessor
      * then it only refreshes if the file's modification has changed
      * since the last refresh
      */
-    public void refresh(boolean forceRefresh)
+    public void refresh(final boolean forceRefresh)
     {
         synchronized(_lastModificationStampMonitor)
         {
-            long currentModificationStamp;
-            
-            currentModificationStamp = _file.getModificationStamp();
-
-            // only refresh if forced or if the underlying file has changed
-            // since the last run
-            if (forceRefresh
-                    || _lastModificationStamp != currentModificationStamp)
+            if (_lastModificationStampMonitor.isSignalled())
             {
-                refreshInternal();
-                _lastModificationStamp = _file.getModificationStamp();
+                // if this calls succeeds, then this thread has obtained the
+                // lock already and has called through here before.  
+                // return immediately to ensure that we don't recurse infinitely
+                return;
+            }
+
+            try
+            {
+                _lastModificationStampMonitor.setSignalled(true);
+                
+                long currentModificationStamp;
+                
+                currentModificationStamp = _file.getModificationStamp();
+    
+                // only refresh if forced or if the underlying file has changed
+                // since the last run
+                if (forceRefresh
+                        || _lastModificationStamp != currentModificationStamp)
+                {
+                    refreshInternal();
+                    _lastModificationStamp = _file.getModificationStamp();
+                }
+            }
+            // make sure that we unsignal the monitor before releasing the
+            // mutex
+            finally
+            {
+                _lastModificationStampMonitor.setSignalled(false);
             }
         }
-     }
+    }
     
     private void refreshInternal()
     {
@@ -306,7 +327,7 @@ public class JSPModelProcessor
   
         if (aggregator != null)
         {    
-            final AbstractContextSymbolFactory factory =aggregator.getFactory();
+            final AbstractContextSymbolFactory factory = aggregator.getFactory();
             final String symbolName = attribute.getNodeValue();
 
             if (factory != null)
@@ -578,5 +599,26 @@ public class JSPModelProcessor
             return (AbstractContextSymbolFactory) 
                 JSFCommonPlugin.getSymbolFactories().get(_metadata.get("factory"));
         }
+    }
+    
+    private static class CountingMutex extends Object
+    {
+        private boolean _signalled = false;
+
+        /**
+         * @return true if the state of mutex is signalled
+         */
+        public synchronized boolean isSignalled() {
+            return _signalled;
+        }
+
+        /**
+         * @param signalled
+         */
+        public synchronized void setSignalled(boolean signalled) {
+            this._signalled = signalled;
+        }
+        
+
     }
 }

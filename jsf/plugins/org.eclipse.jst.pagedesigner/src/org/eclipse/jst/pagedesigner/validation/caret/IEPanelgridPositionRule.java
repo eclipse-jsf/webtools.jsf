@@ -11,7 +11,7 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.validation.caret;
 
-import org.eclipse.jst.pagedesigner.IJSFConstants;
+import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
 import org.eclipse.jst.pagedesigner.dom.EditModelQuery;
 import org.w3c.dom.Node;
 

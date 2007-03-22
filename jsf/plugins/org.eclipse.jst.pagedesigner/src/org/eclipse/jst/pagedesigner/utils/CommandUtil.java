@@ -11,20 +11,12 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.utils;
 
-import java.util.Iterator;
-import java.util.Map;
-
 import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
-import org.eclipse.jst.pagedesigner.IJMTConstants;
 import org.eclipse.jst.pagedesigner.PDPlugin;
-import org.eclipse.jst.pagedesigner.dom.DOMPositionHelper;
 import org.eclipse.jst.pagedesigner.dom.IDOMPosition;
-import org.eclipse.jst.pagedesigner.dom.JSFValidatorSupport;
 import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
-import org.eclipse.jst.pagedesigner.editors.palette.impl.PaletteElementTemplateHelper;
 import org.eclipse.jst.pagedesigner.itemcreation.ITagCreator;
 import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
-import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.w3c.dom.Element;
 

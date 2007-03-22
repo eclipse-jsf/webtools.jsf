@@ -13,10 +13,10 @@ package org.eclipse.jst.pagedesigner.jsf.ui.elementedit.util;
 
 import java.util.List;
 
+import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
 import org.eclipse.jst.pagedesigner.jsf.core.dom.JSFDOMUtil;
 import org.w3c.dom.Element;
 
-import org.eclipse.jst.pagedesigner.IJSFConstants;
 import org.eclipse.jst.pagedesigner.utils.DOMUtil;
 
 /**

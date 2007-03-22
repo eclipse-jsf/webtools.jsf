@@ -11,7 +11,7 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.jsf.ui.actions;
 
-import org.eclipse.jst.pagedesigner.IJSFConstants;
+import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
 import org.eclipse.jst.pagedesigner.jsf.ui.commands.jsfhtml.AddJSFCoreChildCommand;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
 

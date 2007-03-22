@@ -13,8 +13,8 @@ package org.eclipse.jst.pagedesigner.dom;
 
 import javax.xml.namespace.QName;
 
+import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
 import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
-import org.eclipse.jst.pagedesigner.IJSFConstants;
 import org.eclipse.jst.pagedesigner.utils.BodyHelper;
 import org.eclipse.jst.pagedesigner.validation.caret.JSFRootContainerPositionRule;
 import org.w3c.dom.Document;

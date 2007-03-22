@@ -9,18 +9,15 @@
  * Contributors:
  *     Sybase, Inc. - initial API and implementation
  *******************************************************************************/
-package org.eclipse.jst.pagedesigner;
+package org.eclipse.jst.jsf.core.internal.tld;
 
 import org.eclipse.jst.jsf.common.internal.provisional.dom.TagIdentifier;
-import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
-import org.eclipse.jst.jsf.core.internal.tld.TagIdentifierFactory;
 
 /**
  * @author mengbo
  */
-public interface IJSFConstants {
-    
-    
+public interface IJSFConstants 
+{
 	// tag name
 	final static public String TAG_ACTIONLISTENER = "actionListener";
 

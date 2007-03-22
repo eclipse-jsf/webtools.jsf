@@ -13,7 +13,7 @@ package org.eclipse.jst.pagedesigner.properties.celleditors;
 
 import org.eclipse.jface.preference.PreferenceManager;
 import org.eclipse.jface.window.Window;
-import org.eclipse.jst.pagedesigner.IJSFConstants;
+import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
 import org.eclipse.jst.pagedesigner.commands.single.ChangeStyleCommand;
 import org.eclipse.jst.pagedesigner.ui.dialogs.StyleDialog;
 import org.eclipse.swt.widgets.Composite;

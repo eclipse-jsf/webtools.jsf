@@ -19,7 +19,7 @@ import org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogField;
 import org.eclipse.jst.jsf.common.ui.internal.dialogfield.IDialogFieldApplyListener;
 import org.eclipse.jst.jsf.common.ui.internal.dialogfield.LayoutUtil;
 import org.eclipse.jst.jsf.common.ui.internal.dialogfield.RadiosDialogField;
-import org.eclipse.jst.pagedesigner.IJSFConstants;
+import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
 import org.eclipse.jst.pagedesigner.commands.single.ChangeTagCommand;
 import org.eclipse.jst.pagedesigner.properties.BaseCustomSection;
 import org.eclipse.swt.layout.GridLayout;

@@ -65,7 +65,20 @@
 			</value>
 		</trait>
 	</entity>
-	<entity id="dataTable" type="tag"><include-entity-group id="common-attributes"/></entity>
+	<entity id="dataTable" type="tag">
+		<include-entity-group id="common-attributes"/>
+				<entity id="var">
+			<trait id="contributes-value-binding">
+				<value>true</value>
+			</trait>
+			<trait id="value-binding-scope">
+				<value>request</value>
+			</trait>
+			<trait id="value-binding-symbol-factory">
+				<value>org.eclipse.jst.jsf.designtime.core.loadBundle</value>
+			</trait>
+		</entity>
+	</entity>
 	<entity id="form" type="tag"><include-entity-group id="common-attributes"/></entity>
 	<entity id="graphicImage" type="tag">
 		<include-entity-group id="common-attributes"/>

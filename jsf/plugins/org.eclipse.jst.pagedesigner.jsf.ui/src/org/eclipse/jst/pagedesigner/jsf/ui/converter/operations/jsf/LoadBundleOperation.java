@@ -27,7 +27,7 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jst.jsf.common.ui.IFileFolderConstants;
 import org.eclipse.jst.jsf.common.ui.internal.utils.ResourceUtils;
-import org.eclipse.jst.pagedesigner.IJSFConstants;
+import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.AbstractTransformOperation;
 import org.eclipse.jst.pagedesigner.utils.PreviewUtil;

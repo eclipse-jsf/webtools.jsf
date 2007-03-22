@@ -13,7 +13,7 @@ package org.eclipse.jst.pagedesigner.commands.single;
 
 import java.util.Map;
 
-import org.eclipse.jst.pagedesigner.IJSFConstants;
+import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
 import org.eclipse.jst.pagedesigner.commands.CommandResources;
 import org.eclipse.jst.pagedesigner.dom.DOMStyleUtil;
 import org.eclipse.wst.css.core.internal.provisional.document.ICSSStyleDeclaration;

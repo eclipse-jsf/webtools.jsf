@@ -13,8 +13,8 @@ package org.eclipse.jst.pagedesigner.validation.caret;
 
 import java.util.Arrays;
 
+import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
 import org.eclipse.jst.pagedesigner.IHTMLConstants;
-import org.eclipse.jst.pagedesigner.IJSFConstants;
 import org.eclipse.jst.pagedesigner.dom.EditModelQuery;
 import org.w3c.dom.Node;
 
