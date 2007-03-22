@@ -43,10 +43,8 @@ public class PluginRelativeStandardMetaDataSourceFileLocator extends StandardMet
 		if (url != null) {
 			return url.openStream();
 		}
-		else {
-			String  fileName = fileInfo.getBundleId()+"/"+ Path.fromOSString(fileInfo.getLocation()).toString();
-			throw new FileNotFoundException("Metadata file not found: "+ fileName);
-		}
+        String  fileName = fileInfo.getBundleId()+"/"+ Path.fromOSString(fileInfo.getLocation()).toString();
+        throw new FileNotFoundException("Metadata file not found: "+ fileName);
 	}
 
 	
