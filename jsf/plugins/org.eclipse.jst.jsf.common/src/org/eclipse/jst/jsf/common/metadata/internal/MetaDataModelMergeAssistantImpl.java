@@ -13,7 +13,6 @@ package org.eclipse.jst.jsf.common.metadata.internal;
 
 import java.util.Iterator;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.EntityGroup;
@@ -166,7 +165,7 @@ public class MetaDataModelMergeAssistantImpl implements
 	}
 
 	private synchronized Entity addEntityInternal(final Entity parent, final Entity entity) {
-		Entity mmEntity =(Entity)copier.copy((EObject)entity);
+		Entity mmEntity =(Entity)copier.copy(entity);
 		copier.copyReferences();
 		parent.getChildEntities().add(mmEntity);
 		return mmEntity;
@@ -213,7 +212,7 @@ public class MetaDataModelMergeAssistantImpl implements
 	 * @return merged Trait
 	 */
 	private Trait addTraitInternal(final Entity parent, final Trait trait) {		
-		Trait mmTrait =(Trait)copier.copy((EObject)trait);
+		Trait mmTrait =(Trait)copier.copy(trait);
 		copier.copyReferences();
 		parent.getTraits().add(mmTrait);
 		//set the model key to know from where the trait came
@@ -273,7 +272,7 @@ public class MetaDataModelMergeAssistantImpl implements
 	}
 	
 	private void processIncludeGroups(final Model root) {
-		addEntityGroupReferencesRecursively((Entity)root);
+		addEntityGroupReferencesRecursively(root);
 	}
 
 	private void addEntityGroupReferencesRecursively(final Entity entity) {
