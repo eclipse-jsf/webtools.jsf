@@ -34,7 +34,7 @@ import org.eclipse.core.runtime.IAdaptable;
 public interface IDelegatingFactory 
 {
 	/** -- Delegates */
-	/** If this factory is asked to construct but does not know how
+	/** If this factory is asked to construct but does not know how to,
 	 *  it will ask each of its registered delegates to do so in the order
 	 *  they were added.
 	 */
