@@ -116,7 +116,8 @@ public class DomainSourceModelTypeDescriptor {
 		private Set translators;
 		private IMetaDataLocator locator;
 
-		DomainSourceModelTypeImpl(){			
+		DomainSourceModelTypeImpl(){
+            // restrict construction to package scope
 		}
 		
 		/* (non-Javadoc)
@@ -174,14 +175,14 @@ public class DomainSourceModelTypeDescriptor {
 				//we could/should raise exception
 				Class klass = JSFCommonPlugin.loadClass(STANDARD_FILE_NULL_TRANSLATOR, JSFCommonPlugin.PLUGIN_ID);
 				try {
-					translators.add((IMetaDataTranslator)klass.newInstance());
+					translators.add(klass.newInstance());
 					return translators;
 				} catch (InstantiationException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+                    // TODO: other error handling?
+					JSFCommonPlugin.log(e, "Error in createTranslatorInstances");
 				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+                    // TODO: other error handling?
+                    JSFCommonPlugin.log(e, "Error in createTranslatorInstances");
 				}
 
 			}
@@ -191,13 +192,13 @@ public class DomainSourceModelTypeDescriptor {
 				DomainSourceModelTranslatorDescriptor d = (DomainSourceModelTranslatorDescriptor)it.next();
 				Class klass = JSFCommonPlugin.loadClass(d.translator, d.bundleId);
 				try {
-					translators.add((IMetaDataTranslator)klass.newInstance());
+					translators.add(klass.newInstance());
 				} catch (InstantiationException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+                    // TODO: other error handling?
+                    JSFCommonPlugin.log(e, "Error in createTranslatorInstances");
 				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+                    // TODO: other error handling?
+                    JSFCommonPlugin.log(e, "Error in createTranslatorInstances");
 				}
 			}
 			return translators;
