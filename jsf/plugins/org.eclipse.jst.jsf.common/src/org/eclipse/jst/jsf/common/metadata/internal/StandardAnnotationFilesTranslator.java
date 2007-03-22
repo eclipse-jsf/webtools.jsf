@@ -30,7 +30,7 @@ public class StandardAnnotationFilesTranslator implements IMetaDataTranslator {
 		
 		MetaDataModel mm = assistant.getMergedModel();
 		if (mm.getRoot() == null)
-			mm.setRoot((Model)assistant.getSourceModelProvider().getSourceModel());
+			mm.setRoot(assistant.getSourceModelProvider().getSourceModel());
 		
 		else {
 			//for each entity and trait call "add".   assistant will handle merge.
