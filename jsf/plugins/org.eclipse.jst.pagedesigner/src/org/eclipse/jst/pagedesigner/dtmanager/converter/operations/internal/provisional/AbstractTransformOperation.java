@@ -101,7 +101,7 @@ public abstract class AbstractTransformOperation implements ITransformOperation 
 			if (curNode.getNodeType() == Node.ELEMENT_NODE) {
 				String curNodeName = curNode.getLocalName();
 				if (curNode != null && curNodeName.equals(tagName)) {
-					childElements.add((Element)curNode);
+					childElements.add(curNode);
 				}
 			}
 		}
