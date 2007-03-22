@@ -117,5 +117,18 @@ public class MyBean
 	public String[][] getArrayOfArrayOfStringProperty()
 	{
 		return new String[3][];
-	}	
+	}
+	
+	public ArrayElementType[] getArrayElements()
+	{
+		return new ArrayElementType[] {new ArrayElementType()};
+	}
+	
+	private static class ArrayElementType
+	{
+		public String getName()
+		{
+			return "foo";
+		}
+	}
 }
