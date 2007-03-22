@@ -56,7 +56,7 @@ public class ItemCreationEditPolicy extends DropEditPolicy
 			return new CreateItemCommand(
 					PDPlugin
 							.getResourceString("ItemCreationEditPolicy.CommandLabel.CreateItem"),//$NON-NLS-1$
-					getViewer(getHost()), domposition, ((ItemCreationRequest)r).getTagToolPaletteEntry());
+					getViewer(getHost()), domposition, r.getTagToolPaletteEntry());
 		}
 		return null;
 	}
