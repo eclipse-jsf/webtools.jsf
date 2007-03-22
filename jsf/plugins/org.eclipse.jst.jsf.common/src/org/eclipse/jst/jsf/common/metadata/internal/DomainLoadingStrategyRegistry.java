@@ -83,9 +83,7 @@ public class DomainLoadingStrategyRegistry{
 		if (strategy == null){
 			return createDefaultLoadingStrategy();
 		}
-		else {			
-			return createLoadingStrategy(domain);
-		}
+        return createLoadingStrategy(domain);
 	}
 
 	
