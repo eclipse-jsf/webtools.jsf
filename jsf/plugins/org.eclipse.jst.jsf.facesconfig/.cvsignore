@@ -1,1 +1,4 @@
 bin
+build.xml
+javaCompiler...args
+@dot
