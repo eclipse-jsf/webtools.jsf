@@ -16,7 +16,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.action.Action;
-import org.eclipse.jst.jsf.common.ui.internal.utils.LoadBundleUtil;
+import org.eclipse.jst.jsf.core.internal.tld.LoadBundleUtil;
 import org.eclipse.jst.pagedesigner.jsf.ui.JSFUIPlugin;
 import org.eclipse.ui.IEditorDescriptor;
 import org.eclipse.ui.IEditorInput;

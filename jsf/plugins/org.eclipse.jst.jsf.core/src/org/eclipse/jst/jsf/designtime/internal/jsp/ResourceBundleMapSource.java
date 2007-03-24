@@ -14,31 +14,19 @@ package org.eclipse.jst.jsf.designtime.internal.jsp;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.AbstractMap;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.QualifiedName;
-import org.eclipse.jdt.core.IJavaElement;
-import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
-import org.eclipse.jdt.core.search.IJavaSearchConstants;
-import org.eclipse.jdt.core.search.IJavaSearchScope;
-import org.eclipse.jdt.core.search.SearchEngine;
-import org.eclipse.jdt.core.search.SearchMatch;
-import org.eclipse.jdt.core.search.SearchParticipant;
-import org.eclipse.jdt.core.search.SearchPattern;
-import org.eclipse.jdt.core.search.SearchRequestor;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
+import org.eclipse.jst.jsf.core.internal.tld.LoadBundleUtil;
 
 class ResourceBundleMapSource extends AbstractMap
 {
@@ -87,78 +75,19 @@ class ResourceBundleMapSource extends AbstractMap
                                                    final String  resourcePathStr)
                       throws IOException, JavaModelException, CoreException
     {
-        final IJavaProject javaProject = JavaCore.create(project);
-        final String pathStr = 
-            resourcePathStr.
-                substring(0, resourcePathStr.lastIndexOf('.'));
-        final String bundleName = 
-            resourcePathStr.substring(resourcePathStr.lastIndexOf('.')+1);
-        
-        if (pathStr == null
-                || pathStr.length() < 1
-                || bundleName == null
-                || bundleName.length() < 1)
+        IStorage storage = LoadBundleUtil.getLoadBundleResource(project, resourcePathStr);
+          
+        IFile bundleRes = null;
+         
+        if (storage != null
+                && storage.getAdapter(IFile.class) != null)
         {
-            throw new IOException("Cannot resolve bundle name to file");
+            bundleRes = (IFile) storage.getAdapter(IFile.class);
+            getBundleFileCache(project).put(resourcePathStr, bundleRes);
+            return bundleRes;
         }
-
-        final SearchPattern jdtSearchPattern = 
-            SearchPattern.createPattern(pathStr, 
-                                        IJavaSearchConstants.PACKAGE, 
-                                        IJavaSearchConstants.DECLARATIONS, 
-                                        SearchPattern.R_EQUIVALENT_MATCH);
-        
-        if (jdtSearchPattern == null)
-        {
-            throw new IOException("Cannot resolve bundle name to file");
-        }
-        
-        final IJavaSearchScope searchScope = 
-            SearchEngine.createJavaSearchScope(new IJavaElement[]{javaProject});
-        
-        final List matches = new ArrayList();
-        
-        final SearchRequestor requestor = new SearchRequestor()
-        {
-            public void acceptSearchMatch(SearchMatch match)
-            {
-                if (match.isExact()
-                        && match.getResource() != null)
-                {
-                    matches.add(match);
-                }
-            }
-        };
-        
-        final SearchEngine searchEngine = new SearchEngine();
-        searchEngine.search(jdtSearchPattern, new SearchParticipant[] {SearchEngine.getDefaultSearchParticipant()}, searchScope, requestor, null);
-
-        if (matches.size() < 1)
-        {
-            throw new IOException("Cannot resolve bundle name to package");
-        }
-        
-        final SearchMatch firstMatch = ((SearchMatch)matches.get(0));
-        final IResource res = firstMatch.getResource();
-        
-        if (res.getType() != IResource.FOLDER)
-        {
-            throw new IOException("Cannot resolve bundle package to folder");
-        }
-        
-        final IFolder folder = (IFolder) res;
-        
-        final IResource bundleRes = folder.findMember(bundleName+".properties");
-        
-        if (bundleRes == null
-                || bundleRes.getType() != IResource.FILE)
-        {
-            throw new IOException("Cannot resolve bundle name to file");
-        }
-
-        getBundleFileCache(project).put(resourcePathStr, bundleRes);
-        
-        return (IFile) bundleRes;
+          
+        throw new IOException("Bundle "+resourcePathStr+" not found in classpath for project: "+project.getName());
     }
     
     private Properties                  _resourceBundle; // = null; set on first access or changes
@@ -169,7 +98,7 @@ class ResourceBundleMapSource extends AbstractMap
     
     ResourceBundleMapSource(final IProject context, 
                             final String  resourcePathStr)
-                                    throws IOException, JavaModelException, CoreException
+                                throws IOException, JavaModelException, CoreException
     {
         IFile cachedBundleFile = getCachedBundleFile(context, resourcePathStr);
         
@@ -194,7 +123,11 @@ class ResourceBundleMapSource extends AbstractMap
                 _resourceBundle.load(bundleStream);
                 _lastModificationStamp = _bundleFile.getModificationStamp();
             }
-            catch (Exception ioe)
+            catch (CoreException ce)
+            {
+                JSFCorePlugin.log("Error refreshing bundle", ce);
+            }
+            catch (IOException ioe)
             {
                 JSFCorePlugin.log("Error refreshing bundle", ioe);
             }

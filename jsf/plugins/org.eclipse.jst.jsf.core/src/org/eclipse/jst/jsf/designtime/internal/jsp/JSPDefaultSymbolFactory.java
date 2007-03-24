@@ -12,13 +12,16 @@
 
 package org.eclipse.jst.jsf.designtime.internal.jsp;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.IDOMContextResolver;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.IStructuredDocumentContextResolverFactory;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.ITaglibContextResolver;
@@ -131,46 +134,66 @@ public class JSPDefaultSymbolFactory extends AbstractContextSymbolFactory
     private ISymbol handleCoreTags(String symbolName, Node owningElement, Attr attr, IStructuredDocumentContext context, List problems)
     {
         final String elementName = owningElement.getLocalName();
-        final String attrName = attr.getName();
         
         if (IJSFConstants.TAG_LOADBUNDLE.equals(elementName))
         {
-            if (IJSFConstants.ATTR_VAR.equals(attrName))
-            {
-                final NamedNodeMap attrMap = owningElement.getAttributes();
-                final Node baseNameNode = attrMap.getNamedItem(IJSFConstants.ATTR_BASENAME);
+//            long startTime = System.currentTimeMillis();
+            ISymbol symbol = handleLoadBundleTag(symbolName, owningElement, attr, context, problems);
+            
+//            long endTime = System.currentTimeMillis();
+//            long totalTime = endTime-startTime;
+            //System.out.println("Loadbundle resolution for symbol "+symbolName+" took: "+totalTime+"ms");
+            return symbol;
+        }
+        return null;
+    }
+    
+    private ISymbol handleLoadBundleTag(String symbolName, Node owningElement, Attr attr, IStructuredDocumentContext context, List problems)
+    {
+        final String attrName = attr.getName();
+        if (IJSFConstants.ATTR_VAR.equals(attrName))
+        {
+            final NamedNodeMap attrMap = owningElement.getAttributes();
+            final Node baseNameNode = attrMap.getNamedItem(IJSFConstants.ATTR_BASENAME);
 
-                
-                if (baseNameNode != null)
+            
+            if (baseNameNode != null)
+            {
+                try
                 {
-                    try
+                    final IWorkspaceContextResolver wkspaceResolver =
+                        IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver(context);
+                    IProject project = wkspaceResolver.getProject();
+                    
+                    if (project == null)
                     {
-                        final IWorkspaceContextResolver wkspaceResolver =
-                            IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver(context);
-                        IProject project = wkspaceResolver.getProject();
-                        
-                        if (project == null)
-                        {
-                            throw new RuntimeException("Error acquiring project");
-                        }
-                        
-                        final Map source = 
-                            new ResourceBundleMapSource(project, baseNameNode.getNodeValue());
-                        final IMapTypeDescriptor typeDesc = 
-                            SymbolFactory.eINSTANCE.createIMapTypeDescriptor();
-                        typeDesc.setMapSource(source);
-                        final IComponentSymbol symbol = 
-                            SymbolFactory.eINSTANCE.createIComponentSymbol();
-                        symbol.setName(symbolName);
-                        symbol.setTypeDescriptor(typeDesc);
-                        symbol.setDetailedDescription("Resource bundle map for bundle <i>"+baseNameNode.getNodeValue()+"</i>");
-                        
-                        return symbol;
+                        throw new RuntimeException("Error acquiring project");
                     }
-                    catch (Exception e)
-                    {
-                        problems.add(new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID, 0,"Error creating loadBundle variable", e));
-                    }
+                    
+                    final Map source = 
+                        new ResourceBundleMapSource(project, baseNameNode.getNodeValue());
+                    final IMapTypeDescriptor typeDesc = 
+                        SymbolFactory.eINSTANCE.createIMapTypeDescriptor();
+                    typeDesc.setMapSource(source);
+                    final IComponentSymbol symbol = 
+                        SymbolFactory.eINSTANCE.createIComponentSymbol();
+                    symbol.setName(symbolName);
+                    symbol.setTypeDescriptor(typeDesc);
+                    symbol.setDetailedDescription("Resource bundle map for bundle <i>"+baseNameNode.getNodeValue()+"</i>");
+                    
+                    return symbol;
+                }
+                catch (IOException ioe)
+                {
+                    problems.add(new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID, 0,"Error creating loadBundle variable", ioe));
+                }
+                catch (JavaModelException jme)
+                {
+                    problems.add(new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID, 0,"Error creating loadBundle variable", jme));
+                }
+                catch (CoreException ce)
+                {
+                    problems.add(new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID, 0,"Error creating loadBundle variable", ce));
                 }
             }
         }

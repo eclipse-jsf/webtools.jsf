@@ -9,7 +9,7 @@
  * Contributors:
  *     Sybase, Inc. - initial API and implementation
  *******************************************************************************/
-package org.eclipse.jst.jsf.common.ui.internal.utils;
+package org.eclipse.jst.jsf.core.internal.tld;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -34,10 +34,12 @@ public class LoadBundleUtil {
 	    // no external instantiation
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.jface.action.IAction#run()
+
+	/**
+	 * @param project
+	 * @param baseName
+	 * @return an IStorage pointing to the request bundle or null if not found
+	 * @throws CoreException if the search for the file encounters a problem
 	 */
 	public static IStorage getLoadBundleResource(IProject project,
 			String baseName) throws CoreException {
