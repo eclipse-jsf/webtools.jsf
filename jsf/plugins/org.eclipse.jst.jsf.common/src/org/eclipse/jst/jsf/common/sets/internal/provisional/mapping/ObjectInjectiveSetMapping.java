@@ -5,13 +5,13 @@ import java.util.Iterator;
 import org.eclipse.jst.jsf.common.sets.internal.provisional.AxiomaticSet;
 
 /**
- * A type of axiomatic set mapping that operates injective on the output
- * set to create its result set.  Not that the injection (one-to-oneness)
- * of the mapping is based Java object and not on the value of the object.
+ * A type of axiomatic set mapping that operates injectively on the output
+ * set to create its result set.  Note that the injection (one-to-oneness)
+ * of the mapping is based on Java objects and not on the value of the object.
  * Therefore, the result set is not guaranteed to be injective on the basis
  * of value.
  * 
- * For example, consider the a set of integers:
+ * For example, consider a set of integers:
  * 
  * X = {new Integer(4), new Integer(6), new Integer(9)}
  * 
@@ -26,7 +26,7 @@ import org.eclipse.jst.jsf.common.sets.internal.provisional.AxiomaticSet;
  * 
  * Note that boolean TRUE maps twice, so based on the value of the set members,
  * the mapping is not injective.  However, each Java object in X maps to a
- * distict Java object in map(X)
+ * distinct Java object in map(X)
  * 
  * This interface should not be implemented by clients. Clients should
  * sub-class AbstractObjectInjectiveSetMapping to avoid future API breakage.
