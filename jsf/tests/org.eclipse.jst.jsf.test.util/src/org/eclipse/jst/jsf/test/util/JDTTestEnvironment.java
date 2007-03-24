@@ -186,18 +186,6 @@ public class JDTTestEnvironment {
      */
     public IFile addResourceFile(final String folderName, final InputStream src, final String path, final String fileName) throws CoreException
     {
-//        IPackageFragmentRoot root = getPackageFragmentRoot(folderName);
-//        
-//        IFolder folder = (IFolder) root.getUnderlyingResource();
-//        IFolder newFolder = folder.getFolder(new Path(path));
-//        if (!newFolder.exists())
-//        {
-//            newFolder.create(true, true, null);
-//        }
-//        
-//        IFile file = newFolder.getFile(new Path(fileName));
-//        file.create(src, true, null);
-//        return file;
         IPackageFragmentRoot root = getPackageFragmentRoot(folderName);
         
         IPackageFragment packageFrag = root.getPackageFragment(path);
