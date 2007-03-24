@@ -22,23 +22,27 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
     <f:view>
     <f:loadBundle var="bundle" basename="beans.Bundle"/>
     <f:loadBundle var="msg" basename="TestMessages"/>
+    <f:loadBundle var="noPackageBundle" basename="Bundle"/>
    
     <h1>JSP Page</h1>
     	<!--  no errors -->
     	<h:outputText value="#{bundle.bundleProp2}"/>
+		<h:outputText value="#{noPackageBundle.bundleProp2}"/>
     	<h:outputText value="#{bundle.bundleProp1 && myBean.stringProperty}"/>
     	<h:outputText value="#{empty bundle}"/>
     	<h:outputText value="#{empty bundle.bundleProp2}"/>
     	<h:outputText value="#{bundle.bundleProp2 + 5}"/>
 		<h:outputText value="#{bundleProp2}"/>
 		<h:outputText value="#{bundle.x.y}"/>
+		<h:outputText value="#{noPackageBundle.x.y}"/>
 
 		<!--  warnings -->
     	<h:outputText value="#{-bundle.bundleProp1}"/>
     	<h:outputText value="#{bundle.bundleProp3}"/>
 	   	<h:outputText value="#{msg}"/>
 	   	<h:outputText value="#{bundle.x}"/>
-
+		<h:outputText value="#{noPackageBundle.notAProperty}"/>
+		
 		<!-- errors -->
 
     </f:view>

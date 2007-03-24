@@ -1,9 +1,12 @@
 package org.eclipse.jst.jsf.validation.el.tests.jsp;
 
+import java.io.ByteArrayInputStream;
 import java.util.List;
 
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
+import org.eclipse.jst.jsf.test.util.TestFileResource;
+import org.eclipse.jst.jsf.validation.el.tests.ELValidationTestPlugin;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
@@ -19,50 +22,67 @@ public class LoadBundleResolutionTestCase extends SingleJSPTestCase
         _srcFileName = "/testdata/jsps/loadBundleResolution.jsp.data";
         _destFileName = "/loadBundleResolution.jsp";
         super.setUp();
+        
+        // add a resource bundle to the default package to test regression on bug 144525
+        TestFileResource resource = new TestFileResource();
+        resource = new TestFileResource();
+        resource.load(ELValidationTestPlugin.getDefault().getBundle(), 
+                      "/testdata/classes/Bundle.properties.data");
+        _jdtTestEnv.addResourceFile("src", new ByteArrayInputStream(resource.toBytes()), 
+                      "", "Bundle.properties");
+
     }
 
     public void testSanity()
     {
-        assertEquals("bundle.bundleProp2", getELText(_structuredDocument,972));
-        assertEquals("bundle.bundleProp1 && myBean.stringProperty", getELText(_structuredDocument,1024));
-        assertEquals("empty bundle", getELText(_structuredDocument,1101));
-        assertEquals("empty bundle.bundleProp2", getELText(_structuredDocument,1147));
-        assertEquals("bundle.bundleProp2 + 5", getELText(_structuredDocument,1205));
-        assertEquals("bundleProp2", getELText(_structuredDocument,1258));
-        assertEquals("bundle.x.y", getELText(_structuredDocument,1300));
-
-        assertEquals("-bundle.bundleProp1", getELText(_structuredDocument,1368));
-        assertEquals("bundle.bundleProp3", getELText(_structuredDocument,1421));
-        assertEquals("msg", getELText(_structuredDocument,1473));
-        assertEquals("bundle.x", getELText(_structuredDocument,1510));
+        assertEquals("bundle.bundleProp2", getELText(_structuredDocument,1031));
+        assertEquals("noPackageBundle.bundleProp2", getELText(_structuredDocument,1080));
+        assertEquals("bundle.bundleProp1 && myBean.stringProperty", getELText(_structuredDocument,1141));
+        assertEquals("empty bundle", getELText(_structuredDocument,1218));
+        assertEquals("empty bundle.bundleProp2", getELText(_structuredDocument,1264));
+        assertEquals("bundle.bundleProp2 + 5", getELText(_structuredDocument,1322));
+        assertEquals("bundleProp2", getELText(_structuredDocument,1375));
+        assertEquals("bundle.x.y", getELText(_structuredDocument,1417));
+        assertEquals("noPackageBundle.x.y", getELText(_structuredDocument,1458));
+        
+        assertEquals("-bundle.bundleProp1", getELText(_structuredDocument,1535));
+        assertEquals("bundle.bundleProp3", getELText(_structuredDocument,1588));
+        assertEquals("msg", getELText(_structuredDocument,1640));
+        assertEquals("bundle.x", getELText(_structuredDocument,1677));
+        assertEquals("noPackageBundle.notAProperty", getELText(_structuredDocument,1716));
     }
 
     public void testNoErrorExprs() 
     {
-        assertNoError(972, TypeConstants.TYPE_STRING);
-        assertNoError(1024, Signature.SIG_BOOLEAN);
-        assertNoError(1101, Signature.SIG_BOOLEAN);
-        assertNoError(1147, Signature.SIG_BOOLEAN);
-        assertNoError(1205, Signature.SIG_LONG);
-        //assertNoError(1258, TypeConstants.TYPE_STRING);
-        assertNoError(1300, TypeConstants.TYPE_STRING);
+        assertNoError(1031, TypeConstants.TYPE_STRING);
+        assertNoError(1080, TypeConstants.TYPE_STRING);
+        assertNoError(1141, Signature.SIG_BOOLEAN);
+        assertNoError(1218, Signature.SIG_BOOLEAN);
+        assertNoError(1264, Signature.SIG_BOOLEAN);
+        assertNoError(1322, Signature.SIG_LONG);
+        //assertNoError(1375, TypeConstants.TYPE_STRING);
+        assertNoError(1417, TypeConstants.TYPE_STRING);
+        assertNoError(1458, TypeConstants.TYPE_STRING);
     }
 
     public void testWarningExprs() 
     {
-        List list = assertSemanticWarning(1368, Signature.SIG_LONG, 1);
+        List list = assertSemanticWarning(1535, Signature.SIG_LONG, 1);
         assertContainsProblem(list, DiagnosticFactory.UNARY_OP_STRING_CONVERSION_NOT_GUARANTEED_ID);
 
-        list = assertSemanticWarning(1421, null, 1);
+        list = assertSemanticWarning(1588, null, 1);
         assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
 
-        list = assertSemanticWarning(1473, null, 1);
+        list = assertSemanticWarning(1640, null, 1);
         assertContainsProblem(list, DiagnosticFactory.VARIABLE_NOT_FOUND_ID);
         
-        list = assertSemanticWarning(1510, null, 1);
+        list = assertSemanticWarning(1677, null, 1);
+        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
+        
+        list = assertSemanticWarning(1716, null, 1);
         assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
     }
-    
+
     public void testErrorExprs() 
     {
         // no error

@@ -20,6 +20,7 @@ import org.eclipse.jst.jsf.validation.el.tests.jsp.BadSyntaxTestCase;
 import org.eclipse.jst.jsf.validation.el.tests.jsp.BeanPropertyResolutionTestCase;
 import org.eclipse.jst.jsf.validation.el.tests.jsp.BeanVariableResolutionTestCase;
 import org.eclipse.jst.jsf.validation.el.tests.jsp.BuiltInSymbolsTestCase;
+import org.eclipse.jst.jsf.validation.el.tests.jsp.DataTableResolutionTestCase;
 import org.eclipse.jst.jsf.validation.el.tests.jsp.GreaterThanEqTestCase;
 import org.eclipse.jst.jsf.validation.el.tests.jsp.GreaterThanTestCase;
 import org.eclipse.jst.jsf.validation.el.tests.jsp.JSPFunctionsTestCase;
@@ -59,6 +60,7 @@ public class AllTests {
         suite.addTestSuite(BeanPropertyResolutionTestCase.class);
         suite.addTestSuite(BeanVariableResolutionTestCase.class);
         suite.addTestSuite(LoadBundleResolutionTestCase.class);
+        suite.addTestSuite(DataTableResolutionTestCase.class);
         suite.addTestSuite(BuiltInSymbolsTestCase.class);
         suite.addTestSuite(AssignabilityTestCase.class);
         suite.addTestSuite(JSPFunctionsTestCase.class);

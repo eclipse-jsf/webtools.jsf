@@ -115,6 +115,7 @@ public class BaseTestCase extends TestCase
                       "/testdata/classes/Bundle.properties.data");
         _jdtTestEnv.addResourceFile("src", new ByteArrayInputStream(resource.toBytes()), 
                       "beans", "Bundle.properties");
+
 	}
     
     protected void tearDown() throws Exception
