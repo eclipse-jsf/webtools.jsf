@@ -1,10 +1,7 @@
 package org.eclipse.jst.jsf.validation.internal.appconfig;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.ecore.EObject;
@@ -13,7 +10,6 @@ import org.eclipse.jst.jsf.facesconfig.emf.DefaultLocaleType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.jst.jsf.facesconfig.emf.LocaleConfigType;
-import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanType;
 import org.eclipse.jst.jsf.facesconfig.emf.SupportedLocaleType;
 
 /**
@@ -53,24 +49,29 @@ public class ApplicationValidationVisitor extends EObjectValidationVisitor
         };
     }
     
+    /**
+     * @param facesConfig
+     * @param messages
+     * @param file
+     */
     protected void validateManagedBeanNames(FacesConfigType facesConfig, List messages, IFile file)
     {
-        final Map  foundBeans = new HashMap();
-        final List firstCollisionInstance = new ArrayList();
-        
-        for (final Iterator it = facesConfig.getManagedBean().iterator(); it.hasNext();)
-        {
-            final ManagedBeanType managedBean = (ManagedBeanType) it.next();
-            
-            if (managedBean.getManagedBeanName() == null
-                    || managedBean.getManagedBeanName().getTextContent() == null
-                    || "".equals(managedBean.getManagedBeanName().getTextContent()))
-            {
-                
-            }
+//        final Map  foundBeans = new HashMap();
+//        final List firstCollisionInstance = new ArrayList();
+//        
+//        for (final Iterator it = facesConfig.getManagedBean().iterator(); it.hasNext();)
+//        {
+//            final ManagedBeanType managedBean = (ManagedBeanType) it.next();
+//            
+//            if (managedBean.getManagedBeanName() == null
+//                    || managedBean.getManagedBeanName().getTextContent() == null
+//                    || "".equals(managedBean.getManagedBeanName().getTextContent()))
+//            {
+//                
+//            }
             
 //            if (!foundBeans.containsKey(managedBean.getManagedBeanName()))
-        }
+//        }
     }
     
     private static class LocaleConfigValidationVisitor extends EObjectValidationVisitor
