@@ -124,7 +124,7 @@ public class TraitValueHelper {
 				result = rawValue;
 			}
 		}
-		return result;
+		return result == null ? null : result.trim();
 	}
 
 	//will return null if there is an IOException with ResourceBundle

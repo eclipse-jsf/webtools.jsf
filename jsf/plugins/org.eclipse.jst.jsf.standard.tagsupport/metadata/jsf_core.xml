@@ -158,11 +158,11 @@
 		<entity id="converterId">
 			<trait id="attribute-value-runtime-type">
 				<value>
-					org.eclipse.jst.jsf.core.attributevalues.FacesConfigIdentifierType
+					org.eclipse.jst.jsf.core.attributevalues.FacesConfigConverterIDType
 				</value>
 			</trait>
 			<trait id="config-type">
-				<value>javax.faces.converter.Converter</value>
+				<value>javax.faces.convert.Converter</value>
 			</trait>
 		</entity>
 	</entity>
@@ -288,7 +288,7 @@
 		<entity id="validatorId">
 			<trait id="attribute-value-runtime-type">
 				<value>
-					org.eclipse.jst.jsf.core.attributevalues.FacesConfigIdentifierType
+					org.eclipse.jst.jsf.core.attributevalues.FacesConfigValidatorIDType
 				</value>
 			</trait>
 			<trait id="config-type">
