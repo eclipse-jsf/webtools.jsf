@@ -239,7 +239,7 @@ public class TagDecorateInfoImpl extends EObjectImpl implements TagDecorateInfo 
 	 * @generated
 	 * @ordered
 	 */
-	protected ResolveAttributeValue resolveAttributeValue = null;
+	protected ResolveAttributeValue resolveAttributeValue;
 
 	/**
 	 * The default value of the '{@link #isSetNonVisualChildElements() <em>Set Non Visual Child Elements</em>}' attribute.

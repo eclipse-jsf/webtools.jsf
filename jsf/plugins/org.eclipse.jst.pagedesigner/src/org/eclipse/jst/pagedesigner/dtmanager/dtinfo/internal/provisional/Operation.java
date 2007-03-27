@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.Operation#getId <em>Id</em>}</li>
  *   <li>{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.Operation#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.Operation#getOperations <em>Operations</em>}</li>
  * </ul>
  * </p>
  *
@@ -77,5 +78,22 @@ public interface Operation extends EObject {
 	 * @generated
 	 */
 	EList getParameters();
+
+	/**
+	 * Returns the value of the '<em><b>Operations</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.Operation}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Operations</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Operations</em>' containment reference list.
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.DTInfoPackage#getOperation_Operations()
+	 * @model type="org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.Operation" containment="true"
+	 *        extendedMetaData="kind='element' name='operation'"
+	 * @generated
+	 */
+	EList getOperations();
 
 } // Operation

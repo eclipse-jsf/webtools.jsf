@@ -160,13 +160,22 @@ public interface DTInfoPackage extends EPackage {
 	int OPERATION__PARAMETERS = 1;
 
 	/**
+	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__OPERATIONS = 2;
+
+	/**
 	 * The number of structural features of the '<em>Operation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_FEATURE_COUNT = 2;
+	int OPERATION_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.impl.ParameterImpl <em>Parameter</em>}' class.
@@ -436,6 +445,17 @@ public interface DTInfoPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getOperation_Parameters();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.Operation#getOperations <em>Operations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Operations</em>'.
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.Operation#getOperations()
+	 * @see #getOperation()
+	 * @generated
+	 */
+	EReference getOperation_Operations();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.Parameter <em>Parameter</em>}'.
@@ -712,6 +732,14 @@ public interface DTInfoPackage extends EPackage {
 		 * @generated
 		 */
 		EReference OPERATION__PARAMETERS = eINSTANCE.getOperation_Parameters();
+
+		/**
+		 * The meta object literal for the '<em><b>Operations</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OPERATION__OPERATIONS = eINSTANCE.getOperation_Operations();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.impl.ParameterImpl <em>Parameter</em>}' class.

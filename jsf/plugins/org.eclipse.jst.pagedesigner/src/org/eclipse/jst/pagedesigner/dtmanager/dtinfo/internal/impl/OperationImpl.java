@@ -35,6 +35,7 @@ import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.Parame
  * <ul>
  *   <li>{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.impl.OperationImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.impl.OperationImpl#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.impl.OperationImpl#getOperations <em>Operations</em>}</li>
  * </ul>
  * </p>
  *
@@ -76,7 +77,17 @@ public class OperationImpl extends EObjectImpl implements Operation {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList parameters = null;
+	protected EList parameters;
+
+	/**
+	 * The cached value of the '{@link #getOperations() <em>Operations</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOperations()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList operations;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -134,10 +145,24 @@ public class OperationImpl extends EObjectImpl implements Operation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList getOperations() {
+		if (operations == null) {
+			operations = new EObjectContainmentEList(Operation.class, this, DTInfoPackage.OPERATION__OPERATIONS);
+		}
+		return operations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case DTInfoPackage.OPERATION__PARAMETERS:
 				return ((InternalEList)getParameters()).basicRemove(otherEnd, msgs);
+			case DTInfoPackage.OPERATION__OPERATIONS:
+				return ((InternalEList)getOperations()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -153,6 +178,8 @@ public class OperationImpl extends EObjectImpl implements Operation {
 				return getId();
 			case DTInfoPackage.OPERATION__PARAMETERS:
 				return getParameters();
+			case DTInfoPackage.OPERATION__OPERATIONS:
+				return getOperations();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -171,6 +198,10 @@ public class OperationImpl extends EObjectImpl implements Operation {
 				getParameters().clear();
 				getParameters().addAll((Collection)newValue);
 				return;
+			case DTInfoPackage.OPERATION__OPERATIONS:
+				getOperations().clear();
+				getOperations().addAll((Collection)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -188,6 +219,9 @@ public class OperationImpl extends EObjectImpl implements Operation {
 			case DTInfoPackage.OPERATION__PARAMETERS:
 				getParameters().clear();
 				return;
+			case DTInfoPackage.OPERATION__OPERATIONS:
+				getOperations().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -203,6 +237,8 @@ public class OperationImpl extends EObjectImpl implements Operation {
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 			case DTInfoPackage.OPERATION__PARAMETERS:
 				return parameters != null && !parameters.isEmpty();
+			case DTInfoPackage.OPERATION__OPERATIONS:
+				return operations != null && !operations.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -11,6 +11,7 @@
 package org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.ITagConverterContext;
@@ -21,7 +22,7 @@ import org.w3c.dom.NodeList;
 
 /**
  * Abstract ITransformOperation implementation. Maintains ITagConverterContext
- * instance.
+ * instance and collection of child ITransformOperation instances.
  * 
  * @author Ian Trimble - Oracle
  */
@@ -31,6 +32,11 @@ public abstract class AbstractTransformOperation implements ITransformOperation 
 	 * ITagConverterContext instance.
 	 */
 	protected ITagConverterContext tagConverterContext;
+
+	/**
+	 * Collection of child ITransformOperation instances.
+	 */
+	protected List childOperations;
 
 	/*
 	 * (non-Javadoc)
@@ -44,6 +50,47 @@ public abstract class AbstractTransformOperation implements ITransformOperation 
 	 */
 	public void setTagConverterContext(ITagConverterContext tagConverterContext) {
 		this.tagConverterContext = tagConverterContext;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.ITransformOperation#appendChildOperation(org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.ITransformOperation)
+	 */
+	public void appendChildOperation(ITransformOperation operation) {
+		if (operation != null) {
+			if (childOperations == null) {
+				childOperations = new ArrayList();
+			}
+			operation.setTagConverterContext(tagConverterContext);
+			childOperations.add(operation);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.ITransformOperation#getChildOperations()
+	 */
+	public List getChildOperations() {
+		return childOperations;
+	}
+
+	/**
+	 * Convenience method to execute child ITransformOperation instances.
+	 * 
+	 * @param srcElement Source Element instance.
+	 * @param curElement Current Element instance (that is being transformed).
+	 * @return New current Element instance.
+	 */
+	protected Element executeChildOperations(Element srcElement, Element curElement) {
+		Element retElement = curElement;
+		if (childOperations != null && childOperations.size() > 0) {
+			Iterator itChildOperations = childOperations.iterator();
+			while (itChildOperations.hasNext()) {
+				ITransformOperation childOperation = (ITransformOperation)itChildOperations.next();
+				retElement = childOperation.transform(srcElement, retElement);
+			}
+		}
+		return retElement;
 	}
 
 	/**

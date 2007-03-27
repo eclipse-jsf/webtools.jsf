@@ -223,6 +223,15 @@ public class DTInfoPackageImpl extends EPackageImpl implements DTInfoPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getOperation_Operations() {
+		return (EReference)operationEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getParameter() {
 		return parameterEClass;
 	}
@@ -409,6 +418,7 @@ public class DTInfoPackageImpl extends EPackageImpl implements DTInfoPackage {
 		operationEClass = createEClass(OPERATION);
 		createEAttribute(operationEClass, OPERATION__ID);
 		createEReference(operationEClass, OPERATION__PARAMETERS);
+		createEReference(operationEClass, OPERATION__OPERATIONS);
 
 		parameterEClass = createEClass(PARAMETER);
 		createEAttribute(parameterEClass, PARAMETER__VALUE);
@@ -467,6 +477,7 @@ public class DTInfoPackageImpl extends EPackageImpl implements DTInfoPackage {
 		initEClass(operationEClass, Operation.class, "Operation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getOperation_Id(), ecorePackage.getEString(), "id", null, 1, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getOperation_Parameters(), this.getParameter(), null, "parameters", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getOperation_Operations(), this.getOperation(), null, "operations", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(parameterEClass, Parameter.class, "Parameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getParameter_Value(), ecorePackage.getEString(), "value", null, 1, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -531,6 +542,13 @@ public class DTInfoPackageImpl extends EPackageImpl implements DTInfoPackage {
 		   new String[] {
 			 "kind", "element",
 			 "name", "parameter"
+		   });		
+		addAnnotation
+		  (getOperation_Operations(), 
+		   source, 
+		   new String[] {
+			 "kind", "element",
+			 "name", "operation"
 		   });		
 		addAnnotation
 		  (getTagDecorateInfo_ResolveAttributeValue(), 

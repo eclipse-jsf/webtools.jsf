@@ -25,8 +25,38 @@
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
 				<tag-convert-info>
-					<operation id="CustomTransformOperation">
-						<parameter value="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.CommandButtonOperation"/>
+					<operation id="CreateElementOperation">
+						<parameter value="input"/>
+					</operation>
+					<operation id="CopyAllAttributesOperation"/>
+					<operation id="RenameAttributeOperation">
+						<parameter value="styleClass"/>
+						<parameter value="class"/>
+					</operation>
+					<!-- if image attribute exists -->
+					<operation id="IfOperation">
+						<parameter value="@image"/>
+						<operation id="CreateAttributeOperation">
+							<parameter value="type"/>
+							<parameter value="image"/>
+						</operation>
+						<operation id="RenameAttributeOperation">
+							<parameter value="image"/>
+							<parameter value="src"/>
+						</operation>
+					</operation>
+					<!-- if image attribute does not exist -->
+					<operation id="IfNotOperation">
+						<parameter value="@image"/>
+						<!-- create default type attribute (submit) -->
+						<operation id="CreateAttributeOperation">
+							<parameter value="type"/>
+							<parameter value="submit"/>
+						</operation>
+						<!-- override default if type attribute is set (e.g. reset) -->
+						<operation id="CopyAttributeOperation">
+							<parameter value="type"/>
+						</operation>
 					</operation>
 				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"

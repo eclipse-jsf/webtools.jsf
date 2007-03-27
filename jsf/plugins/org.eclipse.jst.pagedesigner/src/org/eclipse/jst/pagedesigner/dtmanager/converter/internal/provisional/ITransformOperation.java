@@ -10,6 +10,8 @@
  *******************************************************************************/ 
 package org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional;
 
+import java.util.List;
+
 import org.w3c.dom.Element;
 
 /**
@@ -37,5 +39,19 @@ public interface ITransformOperation {
 	 * to context and functionality of the current ITagConverter instance.
 	 */
 	public void setTagConverterContext(ITagConverterContext tagConverterContext);
+
+	/**
+	 * Appends a child ITransformOperation instance.
+	 * 
+	 * @param operation Child ITransformOperation instance to be appended.
+	 */
+	public void appendChildOperation(ITransformOperation operation);
+
+	/**
+	 * Gets collection of child ITransformOperation instances.
+	 * 
+	 * @return Collection of child ITransformOperation instances (may be null).
+	 */
+	public List getChildOperations();
 
 }

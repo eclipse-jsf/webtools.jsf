@@ -25,6 +25,8 @@ import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.prov
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.CopyChildrenOperation;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.CreateAttributeOperation;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.CreateElementOperation;
+import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.IfNotOperation;
+import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.IfOperation;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.MakeParentElementCurrentOperation;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.RemoveAttributeOperation;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.RenameAttributeOperation;
@@ -54,6 +56,8 @@ public class DTHTMLOutputRenderer implements IOutputRenderer {
 	private static final String OP_RemoveAttributeOperation = "RemoveAttributeOperation";
 	private static final String OP_RenameAttributeOperation = "RenameAttributeOperation";
 	private static final String OP_CustomTransformOperation = "CustomTransformOperation";
+	private static final String OP_IfOperation = "IfOperation";
+	private static final String OP_IfNotOperation = "IfNotOperation";
 
 	private ITagConverterContext tagConverterContext;
 
@@ -94,7 +98,7 @@ public class DTHTMLOutputRenderer implements IOutputRenderer {
 				transformer = new DefaultTransformer();
 				transformer.setTagConverterContext(tagConverterContext);
 				EList operations = tcInfo.getOperations();
-				if (!appendOperations(transformer, operations, dtInfo)) {
+				if (!appendOperationsToTransformer(transformer, operations, dtInfo)) {
 					transformer = null;
 				}
 			}
@@ -102,10 +106,11 @@ public class DTHTMLOutputRenderer implements IOutputRenderer {
 		return transformer;
 	}
 
-	private boolean appendOperations(ITransformer transformer, EList operations, IDTInfo dtInfo) {
+	private boolean appendOperationsToTransformer(ITransformer transformer, EList operations, IDTInfo dtInfo) {
 		Iterator itOperations = operations.iterator();
 		while (itOperations.hasNext()) {
 			Operation operation = (Operation)itOperations.next();
+			ITransformOperation currentTransformOperation = null;
 			String opID = operation.getId();
 			if (opID != null) {
 				if (opID.equals(OP_AppendChildElementOperation)) {
@@ -116,11 +121,13 @@ public class DTHTMLOutputRenderer implements IOutputRenderer {
 					}
 					if (parameters.size() < 2) {
 						String elementName = ((Parameter)parameters.get(0)).getValue();
-						transformer.appendTransformOperation(new AppendChildElementOperation(elementName));
+						currentTransformOperation = new AppendChildElementOperation(elementName);
+						transformer.appendTransformOperation(currentTransformOperation);
 					} else {
 						String elementName = ((Parameter)parameters.get(0)).getValue();
 						boolean makeChildCurrent = Boolean.valueOf(((Parameter)parameters.get(1)).getValue()).booleanValue();
-						transformer.appendTransformOperation(new AppendChildElementOperation(elementName, makeChildCurrent));
+						currentTransformOperation = new AppendChildElementOperation(elementName, makeChildCurrent);
+						transformer.appendTransformOperation(currentTransformOperation);
 					}
 				} else if (opID.equals(OP_AppendChildTextOperation)) {
 					EList parameters = operation.getParameters();
@@ -129,7 +136,8 @@ public class DTHTMLOutputRenderer implements IOutputRenderer {
 						return false;
 					}
 					String content = ((Parameter)parameters.get(0)).getValue();
-					transformer.appendTransformOperation(new AppendChildTextOperation(content));
+					currentTransformOperation = new AppendChildTextOperation(content);
+					transformer.appendTransformOperation(currentTransformOperation);
 				} else if (opID.equals(OP_ConvertAttributeToTextOperation)) {
 					EList parameters = operation.getParameters();
 					if (parameters.size() < 1) {
@@ -138,11 +146,13 @@ public class DTHTMLOutputRenderer implements IOutputRenderer {
 					}
 					if (parameters.size() < 2) {
 						String attributeName = ((Parameter)parameters.get(0)).getValue();
-						transformer.appendTransformOperation(new ConvertAttributeToTextOperation(attributeName));
+						currentTransformOperation = new ConvertAttributeToTextOperation(attributeName);
+						transformer.appendTransformOperation(currentTransformOperation);
 					} else {
 						String attributeName = ((Parameter)parameters.get(0)).getValue();
 						boolean removeAttribute = Boolean.valueOf(((Parameter)parameters.get(1)).getValue()).booleanValue();
-						transformer.appendTransformOperation(new ConvertAttributeToTextOperation(attributeName, removeAttribute));
+						currentTransformOperation = new ConvertAttributeToTextOperation(attributeName, removeAttribute);
+						transformer.appendTransformOperation(currentTransformOperation);
 					}
 				} else if (opID.equals(OP_CopyAllAttributesOperation)) {
 					transformer.appendTransformOperation(new CopyAllAttributesOperation());
@@ -154,15 +164,18 @@ public class DTHTMLOutputRenderer implements IOutputRenderer {
 					}
 					if (parameters.size() < 3) {
 						String attributeName = ((Parameter)parameters.get(0)).getValue();
-						transformer.appendTransformOperation(new CopyAttributeOperation(attributeName));
+						currentTransformOperation = new CopyAttributeOperation(attributeName);
+						transformer.appendTransformOperation(currentTransformOperation);
 					} else {
 						String attributeName = ((Parameter)parameters.get(0)).getValue();
 						boolean create = Boolean.valueOf(((Parameter)parameters.get(1)).getValue()).booleanValue();
 						String newAttributeValue = ((Parameter)parameters.get(2)).getValue();
-						transformer.appendTransformOperation(new CopyAttributeOperation(attributeName, create, newAttributeValue));
+						currentTransformOperation = new CopyAttributeOperation(attributeName, create, newAttributeValue);
+						transformer.appendTransformOperation(currentTransformOperation);
 					}
 				} else if (opID.equals(OP_CopyChildrenOperation)) {
-					transformer.appendTransformOperation(new CopyChildrenOperation());
+					currentTransformOperation = new CopyChildrenOperation();
+					transformer.appendTransformOperation(currentTransformOperation);
 				} else if (opID.equals(OP_CreateAttributeOperation)) {
 					EList parameters = operation.getParameters();
 					if (parameters.size() < 2) {
@@ -171,7 +184,8 @@ public class DTHTMLOutputRenderer implements IOutputRenderer {
 					}
 					String attributeName = ((Parameter)parameters.get(0)).getValue();
 					String attributeValue = ((Parameter)parameters.get(1)).getValue();
-					transformer.appendTransformOperation(new CreateAttributeOperation(attributeName, attributeValue));
+					currentTransformOperation = new CreateAttributeOperation(attributeName, attributeValue);
+					transformer.appendTransformOperation(currentTransformOperation);
 				} else if (opID.equals(OP_CreateElementOperation)) {
 					EList parameters = operation.getParameters();
 					if (parameters.size() < 1) {
@@ -179,9 +193,11 @@ public class DTHTMLOutputRenderer implements IOutputRenderer {
 						return false;
 					}
 					String elementName = ((Parameter)parameters.get(0)).getValue();
-					transformer.appendTransformOperation(new CreateElementOperation(elementName));
+					currentTransformOperation = new CreateElementOperation(elementName);
+					transformer.appendTransformOperation(currentTransformOperation);
 				} else if (opID.equals(OP_MakeParentElementCurrentOperation)) {
-					transformer.appendTransformOperation(new MakeParentElementCurrentOperation());
+					currentTransformOperation = new MakeParentElementCurrentOperation();
+					transformer.appendTransformOperation(currentTransformOperation);
 				} else if (opID.equals(OP_RemoveAttributeOperation)) {
 					EList parameters = operation.getParameters();
 					if (parameters.size() < 1) {
@@ -189,7 +205,8 @@ public class DTHTMLOutputRenderer implements IOutputRenderer {
 						return false;
 					}
 					String attributeName = ((Parameter)parameters.get(0)).getValue();
-					transformer.appendTransformOperation(new RemoveAttributeOperation(attributeName));
+					currentTransformOperation = new RemoveAttributeOperation(attributeName);
+					transformer.appendTransformOperation(currentTransformOperation);
 				} else if (opID.equals(OP_RenameAttributeOperation)) {
 					EList parameters = operation.getParameters();
 					if (parameters.size() < 2) {
@@ -198,7 +215,8 @@ public class DTHTMLOutputRenderer implements IOutputRenderer {
 					}
 					String oldAttributeName = ((Parameter)parameters.get(0)).getValue();
 					String newAttributeName = ((Parameter)parameters.get(1)).getValue();
-					transformer.appendTransformOperation(new RenameAttributeOperation(oldAttributeName, newAttributeName));
+					currentTransformOperation = new RenameAttributeOperation(oldAttributeName, newAttributeName);
+					transformer.appendTransformOperation(currentTransformOperation);
 				} else if (opID.equals(OP_CustomTransformOperation)) {
 					EList parameters = operation.getParameters();
 					if (parameters.size() < 1) {
@@ -213,7 +231,8 @@ public class DTHTMLOutputRenderer implements IOutputRenderer {
 							if (opClass != null) {
 								Object opObject = opClass.newInstance();
 								if (opObject instanceof ITransformOperation) {
-									transformer.appendTransformOperation((ITransformOperation)opObject);
+									currentTransformOperation = (ITransformOperation)opObject;
+									transformer.appendTransformOperation(currentTransformOperation);
 								} else {
 									log.error("Warning.DTHTMLOutputRenderer.NotITransformOperation", className);
 									return false;
@@ -230,10 +249,211 @@ public class DTHTMLOutputRenderer implements IOutputRenderer {
 						log.error("Warning.DTHTMLOutputRenderer.Instantiation", className, ie);
 						return false;
 					}
-					
+				} else if (opID.equals(OP_IfOperation)) {
+					EList parameters = operation.getParameters();
+					if (parameters.size() < 1) {
+						log.error("Warning.DTHTMLOutputRenderer.TooFewParameters", opID);
+						return false;
+					}
+					String xPathExpression = ((Parameter)parameters.get(0)).getValue();
+					currentTransformOperation = new IfOperation(xPathExpression);
+					transformer.appendTransformOperation(currentTransformOperation);
+				} else if (opID.equals(OP_IfNotOperation)) {
+					EList parameters = operation.getParameters();
+					if (parameters.size() < 1) {
+						log.error("Warning.DTHTMLOutputRenderer.TooFewParameters", opID);
+						return false;
+					}
+					String xPathExpression = ((Parameter)parameters.get(0)).getValue();
+					currentTransformOperation = new IfNotOperation(xPathExpression);
+					transformer.appendTransformOperation(currentTransformOperation);
 				} else {
 					log.error("Warning.DTHTMLOutputRenderer.UnknownOperationID", opID);
 					return false;
+				}
+				
+				EList childOperations = operation.getOperations();
+				if (childOperations != null && childOperations.size() > 0) {
+					if (!appendChildOperations(currentTransformOperation, childOperations, dtInfo)) {
+						return false;
+					}
+				}
+			}
+		}
+		return true;
+	}
+
+	private boolean appendChildOperations(ITransformOperation parentOperation, EList operations, IDTInfo dtInfo) {
+		Iterator itOperations = operations.iterator();
+		while (itOperations.hasNext()) {
+			Operation operation = (Operation)itOperations.next();
+			ITransformOperation currentTransformOperation = null;
+			String opID = operation.getId();
+			if (opID != null) {
+				if (opID.equals(OP_AppendChildElementOperation)) {
+					EList parameters = operation.getParameters();
+					if (parameters.size() < 1) {
+						log.error("Warning.DTHTMLOutputRenderer.TooFewParameters", opID);
+						return false;
+					}
+					if (parameters.size() < 2) {
+						String elementName = ((Parameter)parameters.get(0)).getValue();
+						currentTransformOperation = new AppendChildElementOperation(elementName);
+						parentOperation.appendChildOperation(currentTransformOperation);
+					} else {
+						String elementName = ((Parameter)parameters.get(0)).getValue();
+						boolean makeChildCurrent = Boolean.valueOf(((Parameter)parameters.get(1)).getValue()).booleanValue();
+						currentTransformOperation = new AppendChildElementOperation(elementName, makeChildCurrent);
+						parentOperation.appendChildOperation(currentTransformOperation);
+					}
+				} else if (opID.equals(OP_AppendChildTextOperation)) {
+					EList parameters = operation.getParameters();
+					if (parameters.size() < 1) {
+						log.error("Warning.DTHTMLOutputRenderer.TooFewParameters", opID);
+						return false;
+					}
+					String content = ((Parameter)parameters.get(0)).getValue();
+					currentTransformOperation = new AppendChildTextOperation(content);
+					parentOperation.appendChildOperation(currentTransformOperation);
+				} else if (opID.equals(OP_ConvertAttributeToTextOperation)) {
+					EList parameters = operation.getParameters();
+					if (parameters.size() < 1) {
+						log.error("Warning.DTHTMLOutputRenderer.TooFewParameters", opID);
+						return false;
+					}
+					if (parameters.size() < 2) {
+						String attributeName = ((Parameter)parameters.get(0)).getValue();
+						currentTransformOperation = new ConvertAttributeToTextOperation(attributeName);
+						parentOperation.appendChildOperation(currentTransformOperation);
+					} else {
+						String attributeName = ((Parameter)parameters.get(0)).getValue();
+						boolean removeAttribute = Boolean.valueOf(((Parameter)parameters.get(1)).getValue()).booleanValue();
+						currentTransformOperation = new ConvertAttributeToTextOperation(attributeName, removeAttribute);
+						parentOperation.appendChildOperation(currentTransformOperation);
+					}
+				} else if (opID.equals(OP_CopyAllAttributesOperation)) {
+					parentOperation.appendChildOperation(new CopyAllAttributesOperation());
+				} else if (opID.equals(OP_CopyAttributeOperation)) {
+					EList parameters = operation.getParameters();
+					if (parameters.size() < 1) {
+						log.error("Warning.DTHTMLOutputRenderer.TooFewParameters", opID);
+						return false;
+					}
+					if (parameters.size() < 3) {
+						String attributeName = ((Parameter)parameters.get(0)).getValue();
+						currentTransformOperation = new CopyAttributeOperation(attributeName);
+						parentOperation.appendChildOperation(currentTransformOperation);
+					} else {
+						String attributeName = ((Parameter)parameters.get(0)).getValue();
+						boolean create = Boolean.valueOf(((Parameter)parameters.get(1)).getValue()).booleanValue();
+						String newAttributeValue = ((Parameter)parameters.get(2)).getValue();
+						currentTransformOperation = new CopyAttributeOperation(attributeName, create, newAttributeValue);
+						parentOperation.appendChildOperation(currentTransformOperation);
+					}
+				} else if (opID.equals(OP_CopyChildrenOperation)) {
+					currentTransformOperation = new CopyChildrenOperation();
+					parentOperation.appendChildOperation(currentTransformOperation);
+				} else if (opID.equals(OP_CreateAttributeOperation)) {
+					EList parameters = operation.getParameters();
+					if (parameters.size() < 2) {
+						log.error("Warning.DTHTMLOutputRenderer.TooFewParameters", opID);
+						return false;
+					}
+					String attributeName = ((Parameter)parameters.get(0)).getValue();
+					String attributeValue = ((Parameter)parameters.get(1)).getValue();
+					currentTransformOperation = new CreateAttributeOperation(attributeName, attributeValue);
+					parentOperation.appendChildOperation(currentTransformOperation);
+				} else if (opID.equals(OP_CreateElementOperation)) {
+					EList parameters = operation.getParameters();
+					if (parameters.size() < 1) {
+						log.error("Warning.DTHTMLOutputRenderer.TooFewParameters", opID);
+						return false;
+					}
+					String elementName = ((Parameter)parameters.get(0)).getValue();
+					currentTransformOperation = new CreateElementOperation(elementName);
+					parentOperation.appendChildOperation(currentTransformOperation);
+				} else if (opID.equals(OP_MakeParentElementCurrentOperation)) {
+					currentTransformOperation = new MakeParentElementCurrentOperation();
+					parentOperation.appendChildOperation(currentTransformOperation);
+				} else if (opID.equals(OP_RemoveAttributeOperation)) {
+					EList parameters = operation.getParameters();
+					if (parameters.size() < 1) {
+						log.error("Warning.DTHTMLOutputRenderer.TooFewParameters", opID);
+						return false;
+					}
+					String attributeName = ((Parameter)parameters.get(0)).getValue();
+					currentTransformOperation = new RemoveAttributeOperation(attributeName);
+					parentOperation.appendChildOperation(currentTransformOperation);
+				} else if (opID.equals(OP_RenameAttributeOperation)) {
+					EList parameters = operation.getParameters();
+					if (parameters.size() < 2) {
+						log.error("Warning.DTHTMLOutputRenderer.TooFewParameters", opID);
+						return false;
+					}
+					String oldAttributeName = ((Parameter)parameters.get(0)).getValue();
+					String newAttributeName = ((Parameter)parameters.get(1)).getValue();
+					currentTransformOperation = new RenameAttributeOperation(oldAttributeName, newAttributeName);
+					parentOperation.appendChildOperation(currentTransformOperation);
+				} else if (opID.equals(OP_CustomTransformOperation)) {
+					EList parameters = operation.getParameters();
+					if (parameters.size() < 1) {
+						log.error("Warning.DTHTMLOutputRenderer.TooFewParameters", opID);
+					}
+					String className = ((Parameter)parameters.get(0)).getValue();
+					try {
+						Trait trait = dtInfo.getTrait();
+						IClassLoaderProvider classLoaderProvider = (IClassLoaderProvider)trait.getSourceModelProvider().getAdapter(IClassLoaderProvider.class);
+						if (classLoaderProvider != null) {
+							Class opClass = classLoaderProvider.loadClass(className);
+							if (opClass != null) {
+								Object opObject = opClass.newInstance();
+								if (opObject instanceof ITransformOperation) {
+									currentTransformOperation = (ITransformOperation)opObject;
+									parentOperation.appendChildOperation(currentTransformOperation);
+								} else {
+									log.error("Warning.DTHTMLOutputRenderer.NotITransformOperation", className);
+									return false;
+								}
+							} else {
+								log.error("Warning.DTHTMLOutputRenderer.ClassNotFound", className);
+								return false;
+							}
+						}
+					} catch(IllegalAccessException iae) {
+						log.error("Warning.DTHTMLOutputRenderer.IllegalAccess", className, iae);
+						return false;
+					} catch(InstantiationException ie) {
+						log.error("Warning.DTHTMLOutputRenderer.Instantiation", className, ie);
+						return false;
+					}
+				} else if (opID.equals(OP_IfOperation)) {
+					EList parameters = operation.getParameters();
+					if (parameters.size() < 1) {
+						log.error("Warning.DTHTMLOutputRenderer.TooFewParameters", opID);
+						return false;
+					}
+					String xPathExpression = ((Parameter)parameters.get(0)).getValue();
+					currentTransformOperation = new IfOperation(xPathExpression);
+					parentOperation.appendChildOperation(currentTransformOperation);
+				} else if (opID.equals(OP_IfNotOperation)) {
+					EList parameters = operation.getParameters();
+					if (parameters.size() < 1) {
+						log.error("Warning.DTHTMLOutputRenderer.TooFewParameters", opID);
+						return false;
+					}
+					String xPathExpression = ((Parameter)parameters.get(0)).getValue();
+					currentTransformOperation = new IfNotOperation(xPathExpression);
+					parentOperation.appendChildOperation(currentTransformOperation);
+				} else {
+					log.error("Warning.DTHTMLOutputRenderer.UnknownOperationID", opID);
+					return false;
+				}
+				
+				EList childOperations = operation.getOperations();
+				if (childOperations != null && childOperations.size() > 0) {
+					if (!appendChildOperations(currentTransformOperation, childOperations, dtInfo)) {
+						return false;
+					}
 				}
 			}
 		}

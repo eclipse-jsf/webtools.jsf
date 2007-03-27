@@ -48,7 +48,7 @@ public class TagConvertInfoImpl extends EObjectImpl implements TagConvertInfo {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList operations = null;
+	protected EList operations;
 
 	/**
 	 * <!-- begin-user-doc -->

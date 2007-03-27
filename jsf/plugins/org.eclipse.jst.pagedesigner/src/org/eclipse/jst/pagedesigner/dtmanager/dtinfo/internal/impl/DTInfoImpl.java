@@ -57,7 +57,7 @@ public class DTInfoImpl extends EObjectImpl implements DTInfo {
 	 * @generated
 	 * @ordered
 	 */
-	protected TagConvertInfo tagConvertInfo = null;
+	protected TagConvertInfo tagConvertInfo;
 
 	/**
 	 * The cached value of the '{@link #getTagDecorateInfos() <em>Tag Decorate Infos</em>}' containment reference list.
@@ -67,7 +67,7 @@ public class DTInfoImpl extends EObjectImpl implements DTInfo {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList tagDecorateInfos = null;
+	protected EList tagDecorateInfos;
 
 	/**
 	 * <!-- begin-user-doc -->
