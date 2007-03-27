@@ -470,8 +470,25 @@
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
 				<tag-convert-info>
-					<operation id="CustomTransformOperation">
-						<parameter value="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.SelectBooleanCheckboxOperation"/>
+					<operation id="CreateElementOperation">
+						<parameter value="input"/>
+					</operation>
+					<operation id="CopyAllAttributesOperation"/>
+					<operation id="RenameAttributeOperation">
+						<parameter value="styleClass"/>
+						<parameter value="class"/>
+					</operation>
+					<operation id="CreateAttributeOperation">
+						<parameter value="type"/>
+						<parameter value="checkbox"/>
+					</operation>
+					<!-- if value attribute exists and is "true" -->
+					<operation id="IfOperation">
+						<parameter value="self::node()[@value='true']"/>
+						<operation id="CreateAttributeOperation">
+							<parameter value="checked"/>
+							<parameter value="checked"/>
+						</operation>
 					</operation>
 				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
