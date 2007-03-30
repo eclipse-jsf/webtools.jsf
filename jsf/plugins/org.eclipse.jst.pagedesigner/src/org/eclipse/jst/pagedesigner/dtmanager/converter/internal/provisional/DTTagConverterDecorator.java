@@ -32,6 +32,9 @@ import org.w3c.dom.Text;
  */
 public class DTTagConverterDecorator implements ITagConverterDecorator {
 
+	private static final String DECORATE_INFO_ID_DESIGN = "vpd-decorate-design";
+	private static final String DECORATE_INFO_ID_PREVIEW = "vpd-decorate-preview";
+
 	/*
 	 * (non-Javadoc)
 	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.ITagConverterDecorator#decorate(org.eclipse.jst.pagedesigner.converter.ITagConverter)
@@ -43,9 +46,9 @@ public class DTTagConverterDecorator implements ITagConverterDecorator {
 		DTTagConverter dtTagConverter = (DTTagConverter)tagConverter;
 
 		if (dtTagConverter.getMode() == IConverterFactory.MODE_DESIGNER) {
-			decorateFromDTInfo(dtTagConverter, "vpd-decorate-design");
+			decorateFromDTInfo(dtTagConverter, DECORATE_INFO_ID_DESIGN);
 		} else if (dtTagConverter.getMode() == IConverterFactory.MODE_PREVIEW) {
-			decorateFromDTInfo(dtTagConverter, "vpd-decorate-preview");
+			decorateFromDTInfo(dtTagConverter, DECORATE_INFO_ID_PREVIEW);
 		}
 
 		if (tagConverter.getResultElement() == null && tagConverter.isVisualByHTML()) {

@@ -520,8 +520,75 @@
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
 				<tag-convert-info>
-					<operation id="CustomTransformOperation">
-						<parameter value="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.SelectManyListboxOperation"/>
+					<operation id="CreateElementOperation">
+						<parameter value="select"/>
+					</operation>
+					<operation id="CopyAllAttributesOperation"/>
+					<operation id="RenameAttributeOperation">
+						<parameter value="styleClass"/>
+						<parameter value="class"/>
+					</operation>
+					<operation id="RenameAttributeOperation">
+						<parameter value="id"/>
+						<parameter value="name"/>
+					</operation>
+					<!-- multiple select allowed -->
+					<operation id="CreateAttributeOperation">
+						<parameter value="multiple"/>
+						<parameter value="multiple"/>
+					</operation>
+					<!-- if no "size" attribute -->
+					<operation id="IfNotOperation">
+						<parameter value="@size"/>
+						<operation id="CreateAttributeFromXPathOperation">
+							<parameter value="size"/>
+							<parameter value="count(selectItem)"/>
+						</operation>
+					</operation>
+					<!-- iterate over "selectItem" children -->
+					<operation id="IterateOverElementsOperation">
+						<parameter value="selectItem"/>
+						<operation id="AppendChildElementOperation">
+							<parameter value="option"/>
+						</operation>
+						<operation id="CopyAttributeOperation">
+							<parameter value="itemValue"/>
+						</operation>
+						<operation id="RenameAttributeOperation">
+							<parameter value="itemValue"/>
+							<parameter value="value"/>
+						</operation>
+						<operation id="IfOperation">
+							<parameter value="@itemLabel"/>
+							<operation id="AppendChildTextFromXPathOperation">
+								<parameter value="@itemLabel"/>
+							</operation>
+						</operation>
+						<operation id="IfNotOperation">
+							<parameter value="@itemLabel"/>
+							<operation id="IfOperation">
+								<parameter value="@value"/>
+								<operation id="AppendChildTextFromXPathOperation">
+									<parameter value="@value"/>
+								</operation>
+							</operation>
+							<operation id="IfNotOperation">
+								<parameter value="@value"/>
+								<operation id="IfOperation">
+									<parameter value="@itemValue"/>
+									<operation id="AppendChildTextFromXPathOperation">
+										<parameter value="@itemValue"/>
+									</operation>
+								</operation>
+								<operation id="IfNotOperation">
+									<parameter value="@itemValue"/>
+									<operation id="AppendChildTextOperation">
+										<parameter value="selectItem"/>
+									</operation>
+								</operation>
+							</operation>
+						</operation>
+						<operation id="MakeParentElementCurrentOperation"/>
 					</operation>
 				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
@@ -536,8 +603,72 @@
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
 				<tag-convert-info>
-					<operation id="CustomTransformOperation">
-						<parameter value="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.SelectManyMenuOperation"/>
+					<operation id="CreateElementOperation">
+						<parameter value="select"/>
+					</operation>
+					<operation id="CopyAllAttributesOperation"/>
+					<operation id="RenameAttributeOperation">
+						<parameter value="styleClass"/>
+						<parameter value="class"/>
+					</operation>
+					<operation id="RenameAttributeOperation">
+						<parameter value="id"/>
+						<parameter value="name"/>
+					</operation>
+					<!-- multiple select allowed -->
+					<operation id="CreateAttributeOperation">
+						<parameter value="multiple"/>
+						<parameter value="multiple"/>
+					</operation>
+					<!-- size fixed at 1 -->
+					<operation id="CreateAttributeOperation">
+						<parameter value="size"/>
+						<parameter value="1"/>
+					</operation>
+					<!-- iterate over "selectItem" children -->
+					<operation id="IterateOverElementsOperation">
+						<parameter value="selectItem"/>
+						<operation id="AppendChildElementOperation">
+							<parameter value="option"/>
+						</operation>
+						<operation id="CopyAttributeOperation">
+							<parameter value="itemValue"/>
+						</operation>
+						<operation id="RenameAttributeOperation">
+							<parameter value="itemValue"/>
+							<parameter value="value"/>
+						</operation>
+						<operation id="IfOperation">
+							<parameter value="@itemLabel"/>
+							<operation id="AppendChildTextFromXPathOperation">
+								<parameter value="@itemLabel"/>
+							</operation>
+						</operation>
+						<operation id="IfNotOperation">
+							<parameter value="@itemLabel"/>
+							<operation id="IfOperation">
+								<parameter value="@value"/>
+								<operation id="AppendChildTextFromXPathOperation">
+									<parameter value="@value"/>
+								</operation>
+							</operation>
+							<operation id="IfNotOperation">
+								<parameter value="@value"/>
+								<operation id="IfOperation">
+									<parameter value="@itemValue"/>
+									<operation id="AppendChildTextFromXPathOperation">
+										<parameter value="@itemValue"/>
+									</operation>
+								</operation>
+								<operation id="IfNotOperation">
+									<parameter value="@itemValue"/>
+									<operation id="AppendChildTextOperation">
+										<parameter value="selectItem"/>
+									</operation>
+								</operation>
+							</operation>
+						</operation>
+						<operation id="MakeParentElementCurrentOperation"/>
 					</operation>
 				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
@@ -552,8 +683,70 @@
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
 				<tag-convert-info>
-					<operation id="CustomTransformOperation">
-						<parameter value="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.SelectOneListboxOperation"/>
+					<operation id="CreateElementOperation">
+						<parameter value="select"/>
+					</operation>
+					<operation id="CopyAllAttributesOperation"/>
+					<operation id="RenameAttributeOperation">
+						<parameter value="styleClass"/>
+						<parameter value="class"/>
+					</operation>
+					<operation id="RenameAttributeOperation">
+						<parameter value="id"/>
+						<parameter value="name"/>
+					</operation>
+					<!-- if no "size" attribute -->
+					<operation id="IfNotOperation">
+						<parameter value="@size"/>
+						<operation id="CreateAttributeFromXPathOperation">
+							<parameter value="size"/>
+							<parameter value="count(selectItem)"/>
+						</operation>
+					</operation>
+					<!-- iterate over "selectItem" children -->
+					<operation id="IterateOverElementsOperation">
+						<parameter value="selectItem"/>
+						<operation id="AppendChildElementOperation">
+							<parameter value="option"/>
+						</operation>
+						<operation id="CopyAttributeOperation">
+							<parameter value="itemValue"/>
+						</operation>
+						<operation id="RenameAttributeOperation">
+							<parameter value="itemValue"/>
+							<parameter value="value"/>
+						</operation>
+						<operation id="IfOperation">
+							<parameter value="@itemLabel"/>
+							<operation id="AppendChildTextFromXPathOperation">
+								<parameter value="@itemLabel"/>
+							</operation>
+						</operation>
+						<operation id="IfNotOperation">
+							<parameter value="@itemLabel"/>
+							<operation id="IfOperation">
+								<parameter value="@value"/>
+								<operation id="AppendChildTextFromXPathOperation">
+									<parameter value="@value"/>
+								</operation>
+							</operation>
+							<operation id="IfNotOperation">
+								<parameter value="@value"/>
+								<operation id="IfOperation">
+									<parameter value="@itemValue"/>
+									<operation id="AppendChildTextFromXPathOperation">
+										<parameter value="@itemValue"/>
+									</operation>
+								</operation>
+								<operation id="IfNotOperation">
+									<parameter value="@itemValue"/>
+									<operation id="AppendChildTextOperation">
+										<parameter value="selectItem"/>
+									</operation>
+								</operation>
+							</operation>
+						</operation>
+						<operation id="MakeParentElementCurrentOperation"/>
 					</operation>
 				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
@@ -568,8 +761,67 @@
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
 				<tag-convert-info>
-					<operation id="CustomTransformOperation">
-						<parameter value="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.SelectOneMenuOperation"/>
+					<operation id="CreateElementOperation">
+						<parameter value="select"/>
+					</operation>
+					<operation id="CopyAllAttributesOperation"/>
+					<operation id="RenameAttributeOperation">
+						<parameter value="styleClass"/>
+						<parameter value="class"/>
+					</operation>
+					<operation id="RenameAttributeOperation">
+						<parameter value="id"/>
+						<parameter value="name"/>
+					</operation>
+					<!-- size fixed at 1 -->
+					<operation id="CreateAttributeOperation">
+						<parameter value="size"/>
+						<parameter value="1"/>
+					</operation>
+					<!-- iterate over "selectItem" children -->
+					<operation id="IterateOverElementsOperation">
+						<parameter value="selectItem"/>
+						<operation id="AppendChildElementOperation">
+							<parameter value="option"/>
+						</operation>
+						<operation id="CopyAttributeOperation">
+							<parameter value="itemValue"/>
+						</operation>
+						<operation id="RenameAttributeOperation">
+							<parameter value="itemValue"/>
+							<parameter value="value"/>
+						</operation>
+						<operation id="IfOperation">
+							<parameter value="@itemLabel"/>
+							<operation id="AppendChildTextFromXPathOperation">
+								<parameter value="@itemLabel"/>
+							</operation>
+						</operation>
+						<operation id="IfNotOperation">
+							<parameter value="@itemLabel"/>
+							<operation id="IfOperation">
+								<parameter value="@value"/>
+								<operation id="AppendChildTextFromXPathOperation">
+									<parameter value="@value"/>
+								</operation>
+							</operation>
+							<operation id="IfNotOperation">
+								<parameter value="@value"/>
+								<operation id="IfOperation">
+									<parameter value="@itemValue"/>
+									<operation id="AppendChildTextFromXPathOperation">
+										<parameter value="@itemValue"/>
+									</operation>
+								</operation>
+								<operation id="IfNotOperation">
+									<parameter value="@itemValue"/>
+									<operation id="AppendChildTextOperation">
+										<parameter value="selectItem"/>
+									</operation>
+								</operation>
+							</operation>
+						</operation>
+						<operation id="MakeParentElementCurrentOperation"/>
 					</operation>
 				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"

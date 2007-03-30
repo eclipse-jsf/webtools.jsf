@@ -18,15 +18,18 @@ import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
 import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.AppendChildElementOperation;
+import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.AppendChildTextFromXPathOperation;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.AppendChildTextOperation;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.ConvertAttributeToTextOperation;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.CopyAllAttributesOperation;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.CopyAttributeOperation;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.CopyChildrenOperation;
+import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.CreateAttributeFromXPathOperation;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.CreateAttributeOperation;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.CreateElementOperation;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.IfNotOperation;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.IfOperation;
+import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.IterateOverElementsOperation;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.MakeParentElementCurrentOperation;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.RemoveAttributeOperation;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.RenameAttributeOperation;
@@ -58,6 +61,9 @@ public class DTHTMLOutputRenderer implements IOutputRenderer {
 	private static final String OP_CustomTransformOperation = "CustomTransformOperation";
 	private static final String OP_IfOperation = "IfOperation";
 	private static final String OP_IfNotOperation = "IfNotOperation";
+	private static final String OP_IterateOverElementsOperation = "IterateOverElementsOperation";
+	private static final String OP_CreateAttributeFromXPathOperation = "CreateAttributeFromXPathOperation";
+	private static final String OP_AppendChildTextFromXPathOperation = "AppendChildTextFromXPathOperation";
 
 	private ITagConverterContext tagConverterContext;
 
@@ -267,6 +273,34 @@ public class DTHTMLOutputRenderer implements IOutputRenderer {
 					String xPathExpression = ((Parameter)parameters.get(0)).getValue();
 					currentTransformOperation = new IfNotOperation(xPathExpression);
 					transformer.appendTransformOperation(currentTransformOperation);
+				} else if (opID.equals(OP_IterateOverElementsOperation)) {
+					EList parameters = operation.getParameters();
+					if (parameters.size() < 1) {
+						log.error("Warning.DTHTMLOutputRenderer.TooFewParameters", opID);
+						return false;
+					}
+					String xPathExpression = ((Parameter)parameters.get(0)).getValue();
+					currentTransformOperation = new IterateOverElementsOperation(xPathExpression);
+					transformer.appendTransformOperation(currentTransformOperation);
+				} else if (opID.equals(OP_CreateAttributeFromXPathOperation)) {
+					EList parameters = operation.getParameters();
+					if (parameters.size() < 2) {
+						log.error("Warning.DTHTMLOutputRenderer.TooFewParameters", opID);
+						return false;
+					}
+					String attributeName = ((Parameter)parameters.get(0)).getValue();
+					String xPathExpression = ((Parameter)parameters.get(1)).getValue();
+					currentTransformOperation = new CreateAttributeFromXPathOperation(attributeName, xPathExpression);
+					transformer.appendTransformOperation(currentTransformOperation);
+				} else if (opID.equals(OP_AppendChildTextFromXPathOperation)) {
+					EList parameters = operation.getParameters();
+					if (parameters.size() < 1) {
+						log.error("Warning.DTHTMLOutputRenderer.TooFewParameters", opID);
+						return false;
+					}
+					String xPathExpression = ((Parameter)parameters.get(0)).getValue();
+					currentTransformOperation = new AppendChildTextFromXPathOperation(xPathExpression);
+					transformer.appendTransformOperation(currentTransformOperation);
 				} else {
 					log.error("Warning.DTHTMLOutputRenderer.UnknownOperationID", opID);
 					return false;
@@ -443,6 +477,34 @@ public class DTHTMLOutputRenderer implements IOutputRenderer {
 					}
 					String xPathExpression = ((Parameter)parameters.get(0)).getValue();
 					currentTransformOperation = new IfNotOperation(xPathExpression);
+					parentOperation.appendChildOperation(currentTransformOperation);
+				} else if (opID.equals(OP_IterateOverElementsOperation)) {
+					EList parameters = operation.getParameters();
+					if (parameters.size() < 1) {
+						log.error("Warning.DTHTMLOutputRenderer.TooFewParameters", opID);
+						return false;
+					}
+					String xPathExpression = ((Parameter)parameters.get(0)).getValue();
+					currentTransformOperation = new IterateOverElementsOperation(xPathExpression);
+					parentOperation.appendChildOperation(currentTransformOperation);
+				} else if (opID.equals(OP_CreateAttributeFromXPathOperation)) {
+					EList parameters = operation.getParameters();
+					if (parameters.size() < 2) {
+						log.error("Warning.DTHTMLOutputRenderer.TooFewParameters", opID);
+						return false;
+					}
+					String attributeName = ((Parameter)parameters.get(0)).getValue();
+					String xPathExpression = ((Parameter)parameters.get(1)).getValue();
+					currentTransformOperation = new CreateAttributeFromXPathOperation(attributeName, xPathExpression);
+					parentOperation.appendChildOperation(currentTransformOperation);
+				} else if (opID.equals(OP_AppendChildTextFromXPathOperation)) {
+					EList parameters = operation.getParameters();
+					if (parameters.size() < 1) {
+						log.error("Warning.DTHTMLOutputRenderer.TooFewParameters", opID);
+						return false;
+					}
+					String xPathExpression = ((Parameter)parameters.get(0)).getValue();
+					currentTransformOperation = new AppendChildTextFromXPathOperation(xPathExpression);
 					parentOperation.appendChildOperation(currentTransformOperation);
 				} else {
 					log.error("Warning.DTHTMLOutputRenderer.UnknownOperationID", opID);
