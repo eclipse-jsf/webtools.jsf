@@ -6,8 +6,7 @@
 	<extension-point id="propertyContributor" name="property contributor" schema="schema/propertyContributor.exsd" />
 	<extension-point id="popupMenuContributor" name="popupMenu Contributor" schema="schema/popupMenuContributor.exsd"/>
 	<extension-point id="cmRegistry" name="Content Model Meta Data" schema="schema/cmRegistry.exsd"/>
-	<extension-point id="PaletteItemConfigContributions" name="%PaletteItem_Config_Contributions_Extension.name" schema="schema/PaletteItemConfigContributions.exsd"/>
- <extension-point id="tagCreationFactories" name="tagCreationFactories" schema="schema/tagCreationFactories.exsd"/>
+    <extension-point id="tagCreationFactories" name="tagCreationFactories" schema="schema/tagCreationFactories.exsd"/>
 
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.eclipse.jst.pagedesigner.editors.HTMLEditor"
@@ -59,11 +58,6 @@
 	<extension point="org.eclipse.jst.pagedesigner.pageDesignerExtension">
 		<linkCreator class="org.eclipse.jst.pagedesigner.actions.link.HtmlLinkCreator" linkIdentifier="Html Link"/>
 	</extension>
-
-	<extension point="org.eclipse.jst.pagedesigner.PaletteItemConfigContributions">
-		<config path="configs/html_pi.xml" index="10"/>
-		<config path="configs/jsp_pi.xml" index="20" />
-	</extension>
 	
 	<extension id="org.eclipse.jst.pagedesigner.commands" point="org.eclipse.ui.commands">
 		<category id="org.eclipse.jst.pagedesigner.pagelayout" name="Page Layout"/>
@@ -111,7 +105,7 @@
        uri = "http://org.eclipse.jsf.pagedesigner/paletteInfos.ecore" 
        class = "org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.PaletteInfosPackage"
        genModel = "model/paletteInfos.genmodel" /> 
-        <package
+    <package
           class="org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.DTInfoPackage"
           genModel="model/DTInfo.genmodel"
           uri="http://org.eclipse.jsf.pagedesigner/dtinfo.ecore">

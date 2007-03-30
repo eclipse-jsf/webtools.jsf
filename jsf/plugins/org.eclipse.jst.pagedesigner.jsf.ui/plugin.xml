@@ -671,10 +671,6 @@
       </propertySections>
    </extension>
    
-   <extension point="org.eclipse.jst.pagedesigner.PaletteItemConfigContributions">
-      <config index="30" path="configs/jsfcore_pi.xml" />
-      <config index="40" path="configs/jsfhtml_pi.xml" />
-   </extension>
    <extension
          point="org.eclipse.jst.jsf.common.standardMetaDataFiles">
       <standardMetaDataFile
