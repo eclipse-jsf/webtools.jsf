@@ -31,6 +31,7 @@ public abstract class AbstractTransformOperation implements ITransformOperation 
 	/**
 	 * ITagConverterContext instance.
 	 */
+    // API: should make private and provide a getter.
 	protected ITagConverterContext tagConverterContext;
 
 	/**
@@ -49,6 +50,8 @@ public abstract class AbstractTransformOperation implements ITransformOperation 
 	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.ITransformOperation#setTagConverterContext(org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.ITagConverterContext)
 	 */
 	public void setTagConverterContext(ITagConverterContext tagConverterContext) {
+        // API: this should really be set on construction since other methods
+        // cannot be called until it is set.
 		this.tagConverterContext = tagConverterContext;
 	}
 

@@ -44,6 +44,9 @@ import org.w3c.dom.Element;
  * Design-time metadata-driven HTML IOutputRenderer implementation.
  * 
  * @author Ian Trimble - Oracle
+ * API: as we have discussed I really think this should be done through a factory.
+ * Even if we don't go full blown extension point right away, we should split out
+ * the transform construction responsibility to a separate factory.
  */
 public class DTHTMLOutputRenderer implements IOutputRenderer {
 

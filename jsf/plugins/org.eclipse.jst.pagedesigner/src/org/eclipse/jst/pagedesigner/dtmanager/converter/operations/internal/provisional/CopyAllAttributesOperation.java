@@ -19,6 +19,8 @@ import org.w3c.dom.NamedNodeMap;
  * source Element instance to the current Element instance.
  * 
  * @author Ian Trimble - Oracle
+ * API: should this be public or should we restrict so can only be constructed
+ * through a factory?
  */
 public class CopyAllAttributesOperation extends AbstractTransformOperation {
 

@@ -44,6 +44,9 @@ public abstract class AbstractResultSet/*<T>*/ implements IResultSet/*<T>*/ {
 		getInternalResults().add(item);
 	}
 
+    // API: should return Collection so that subs can use
+    // co-variance to return other sorts of collections
+    // API: consider making final and make getInternalResults protected abstract
 	public List/*<T>*/ getResults() {
 		if (results == null)
 			return Collections.EMPTY_LIST;
@@ -54,6 +57,8 @@ public abstract class AbstractResultSet/*<T>*/ implements IResultSet/*<T>*/ {
 	/**
 	 * @return resultset size
 	 */
+    // API: should make this final and force
+    // implementers to handle getInternalResults
 	public int size(){
 		if (results == null)
 			return 0;

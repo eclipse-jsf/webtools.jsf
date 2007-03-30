@@ -15,7 +15,7 @@ import org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity;
 
 /**
  * Visitor interface for Entities
- *
+ * API: should we force extension through an abstract class?
  */
 public abstract interface IEntityVisitor extends IMetaDataVisitor {
 	/**
@@ -26,6 +26,7 @@ public abstract interface IEntityVisitor extends IMetaDataVisitor {
 	/**
 	 * Signal that the last visited entity is now completely 'visited'.  
 	 * Needed to signal that all children have also been visited.
+     * API: what is the contract here for implementers of this interface?
 	 */
 	public void visitCompleted();
 }

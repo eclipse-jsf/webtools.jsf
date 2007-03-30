@@ -21,6 +21,8 @@ public abstract interface ITraitVisitor extends IMetaDataVisitor {
 	/**
 	 * Visit the Trait
 	 * @param trait
+     * API: what is the responsibilit of the implementor? pre/post-conditions?
+     * API: what is the order of the visitation (or should it not be assumed)
 	 */
 	abstract void visit(final Trait trait);
 }

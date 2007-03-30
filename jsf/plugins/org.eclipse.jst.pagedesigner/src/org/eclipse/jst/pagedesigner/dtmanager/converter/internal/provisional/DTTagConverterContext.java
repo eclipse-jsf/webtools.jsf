@@ -19,6 +19,10 @@ import org.w3c.dom.Text;
  * Design-time tag converter implementation of ITagConverterContext.
  * 
  * @author Ian Trimble - Oracle
+ * API: should we make some these public methods?  Is it reasonable
+ * to allow people to reuse/override these methods?  Perhaps it
+ * makes sense to split this to an AbstractTagConverterContext usable
+ * by all?
  */
 public class DTTagConverterContext implements ITagConverterContext {
 

@@ -18,16 +18,22 @@ import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 
 /**
- * A class that does bean introspector on a JDT IType
+ * A class that does bean introspection on a JDT IType
+ * 
+ * This functionality is not meant to replace runtime bean 
+ * introspection.  Rather, it is meant to provide a 
+ * more "lightweight" (in terms of class loading as well as
+ * error handling of bean instantiation out of context) way
+ * to determine a bean's properties at design time
  * 
  * @author cbateman
  *
  */
 public class JDTBeanIntrospector 
 {
-	private final static String GET_PREFIX = "get";
-	private final static String SET_PREFIX = "set";
-	private final static String IS_PREFIX = "is";
+	private final static String GET_PREFIX = "get"; //$NON-NLS-1$
+	private final static String SET_PREFIX = "set"; //$NON-NLS-1$
+	private final static String IS_PREFIX = "is"; //$NON-NLS-1$
 	
 	private final IType 	_type;
 
@@ -60,7 +66,7 @@ public class JDTBeanIntrospector
 			catch (JavaModelException jme)
 			{
 				// log and then proceed to next method
-				JSFCommonPlugin.log(jme, "Error processing IMethod for bean property info");
+				JSFCommonPlugin.log(jme, "Error processing IMethod for bean property info"); //$NON-NLS-1$
 			}
 		}
 		
@@ -160,7 +166,7 @@ public class JDTBeanIntrospector
 		}
 		catch(JavaModelException jme)
 		{
-            JSFCommonPlugin.log(jme, "Error getting type information for bean");
+            JSFCommonPlugin.log(jme, "Error getting type information for bean"); //$NON-NLS-1$
 		}
 
 		return methods;
@@ -185,7 +191,7 @@ public class JDTBeanIntrospector
                 final IType superType = closure[i];
                 methods.addAll(Arrays.asList(superType.getMethods()));
             } catch (JavaModelException e) {
-                JSFCommonPlugin.log(e, "Error getting super type information for bean");
+                JSFCommonPlugin.log(e, "Error getting super type information for bean"); //$NON-NLS-1$
             }
         }
             

@@ -18,4 +18,6 @@ package org.eclipse.jst.jsf.common.metadata.internal.provisional.query;
  *
  */
 public class SimpleResultSet/*<T>*/ extends AbstractResultSet/*<T>*/ {
+    // API: Should push down overridable functionality from AbstractResultSet
+    // and make final all functionality left in AbstractResultSet
 }

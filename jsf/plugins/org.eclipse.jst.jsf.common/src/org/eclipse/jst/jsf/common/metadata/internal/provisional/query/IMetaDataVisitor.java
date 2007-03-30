@@ -15,5 +15,6 @@ package org.eclipse.jst.jsf.common.metadata.internal.provisional.query;
  * Common interface for Entity and Trait visitors
  */
 public abstract interface IMetaDataVisitor {
+    // API: contract?
 	public boolean stopVisiting();
 }

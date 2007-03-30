@@ -24,6 +24,8 @@ public interface ITransformer {
 	 * Appends an ITransformOperation instance to the collection.
 	 * 
 	 * @param operation ITransformOperation instance to be appended.
+     * API: does this need to be on the interface or could it be pushed
+     * into the instance constructor (i.e. factory).
 	 */
 	public void appendTransformOperation(ITransformOperation operation);
 
@@ -34,6 +36,9 @@ public interface ITransformer {
 	 * 
 	 * @param srcElement Original input Element instance.
 	 * @return Transformed output Element instance.
+     * API: I'd like to consider templating the generic ITransformer
+     * interface to ITransformer<I,O> and making this a normative instance
+     * case of ITransformer<Element, Element>
 	 */
 	public Element transform(Element srcElement);
 
@@ -43,6 +48,9 @@ public interface ITransformer {
 	 * 
 	 * @param tagConverterContext ITagConverterContext instance allowing access
 	 * to context and functionality of the current ITagConverter instance.
+     * API: does this need to be on the interface?  Why couldn't this be set
+     * at construction time from a factory?  Alternatively, should it be passed
+     * as an argument to tranform()?
 	 */
 	public void setTagConverterContext(ITagConverterContext tagConverterContext);
 

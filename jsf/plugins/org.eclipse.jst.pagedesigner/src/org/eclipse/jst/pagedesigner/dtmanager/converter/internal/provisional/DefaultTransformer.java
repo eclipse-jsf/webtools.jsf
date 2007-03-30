@@ -24,14 +24,9 @@ import org.w3c.dom.Element;
 public class DefaultTransformer implements ITransformer {
 
 	private ITagConverterContext tagConverterContext;
-	private Collection transformOperations;
-
-	/**
-	 * Constructs an instance.
-	 */
-	public DefaultTransformer() {
-		transformOperations = new ArrayList();
-	}
+    // synchronization occurs on this object, so it must never
+    // be allowed to be null
+	private final Collection transformOperations = new ArrayList();
 
 	/*
 	 * (non-Javadoc)

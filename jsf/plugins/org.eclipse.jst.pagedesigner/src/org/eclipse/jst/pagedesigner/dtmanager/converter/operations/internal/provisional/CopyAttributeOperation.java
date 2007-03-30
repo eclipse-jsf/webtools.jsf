@@ -19,6 +19,8 @@ import org.w3c.dom.Element;
  * Element instance if no such attribute exists on the source Element instance.
  * 
  * @author Ian Trimble - Oracle
+ * API: should this be public or should we restrict so can only be constructed
+ * through a factory?
  */
 public class CopyAttributeOperation extends AbstractTransformOperation {
 

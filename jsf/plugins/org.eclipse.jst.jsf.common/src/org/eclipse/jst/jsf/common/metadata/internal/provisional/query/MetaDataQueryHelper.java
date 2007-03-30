@@ -31,6 +31,8 @@ import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
  * @see IEntityQueryVisitor
  * @see ITraitQueryVisitor
  * @see IMetaDataModelContext
+ * 
+ * API: class should be final, constructor made private.
  */
 public class MetaDataQueryHelper{
 	public static final String TAGLIB_DOMAIN = "TagLibraryDomain"; //need better place for this

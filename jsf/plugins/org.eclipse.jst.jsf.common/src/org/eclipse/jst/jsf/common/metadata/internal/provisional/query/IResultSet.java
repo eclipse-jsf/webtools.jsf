@@ -28,6 +28,7 @@ public interface IResultSet/*<T>*/{
 	
 	/**
 	 * Signal that the query results are no longer required allowing for any cleanup that may be required
+     * API: event to signal that result set is no longer valid?
 	 */
 	public void close();
 }

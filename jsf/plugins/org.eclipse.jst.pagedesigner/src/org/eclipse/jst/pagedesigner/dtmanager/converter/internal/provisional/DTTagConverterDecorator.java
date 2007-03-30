@@ -29,6 +29,7 @@ import org.w3c.dom.Text;
  * ITagConverterDecorator implementation for DTTagConverter.
  * 
  * @author Ian Trimble - Oracle
+ * API: should this really be API?
  */
 public class DTTagConverterDecorator implements ITagConverterDecorator {
 

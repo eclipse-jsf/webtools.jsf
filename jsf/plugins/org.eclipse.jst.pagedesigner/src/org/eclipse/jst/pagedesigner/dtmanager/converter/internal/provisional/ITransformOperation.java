@@ -19,6 +19,9 @@ import org.w3c.dom.Element;
  * to output Element instances.
  * 
  * @author Ian Trimble - Oracle
+ * API: as with ITransformer, I'd like to consider 
+ * ITransfomOperation<SRC, RESULT>
+ * API: extensibilty? Should clients be allowed to implement/sub-class?
  */
 public interface ITransformOperation {
 
@@ -37,6 +40,7 @@ public interface ITransformOperation {
 	 * 
 	 * @param tagConverterContext ITagConverterContext instance allowing access
 	 * to context and functionality of the current ITagConverter instance.
+     * 
 	 */
 	public void setTagConverterContext(ITagConverterContext tagConverterContext);
 

@@ -18,6 +18,8 @@ import org.w3c.dom.Node;
  * Element the new current Element.
  * 
  * @author Ian Trimble - Oracle
+ * API: should this be public or should we restrict so can only be constructed
+ * through a factory?
  */
 public class MakeParentElementCurrentOperation extends AbstractTransformOperation {
 
