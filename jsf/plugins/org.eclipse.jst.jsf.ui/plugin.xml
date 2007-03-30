@@ -27,7 +27,7 @@
            hasPages="true"
            icon="icons/obj16/library_obj.gif"
            id="org.eclipse.jst.jsf.ui.jsfLibraryWizard"
-           name="New JSF Library"
+           name="%jsf.library.wizard.name"
            preferredPerspectives="org.eclipse.jst.j2ee.J2EEPerspective"/>
   </extension>
   <extension 
