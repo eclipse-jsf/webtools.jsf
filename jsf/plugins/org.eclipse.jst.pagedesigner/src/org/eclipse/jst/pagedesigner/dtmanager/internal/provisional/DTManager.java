@@ -50,7 +50,7 @@ public class DTManager {
 	 * 
 	 * @param element Element instance for which to locate and return an
 	 * ITagConverter instance.
-	 * @param mode Mode falg (use IConverterFactory constants).
+	 * @param mode Mode flag (use IConverterFactory constants).
 	 * @param document Target IDOMDocument instance.
 	 * @return An ITagConverter instance for the specified Element and mode.
 	 */
