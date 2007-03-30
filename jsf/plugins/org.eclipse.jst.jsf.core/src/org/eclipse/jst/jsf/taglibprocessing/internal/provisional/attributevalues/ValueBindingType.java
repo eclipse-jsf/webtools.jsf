@@ -24,6 +24,9 @@ import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IVal
  * @author Gerry Kessler - Oracle
  */
 public class ValueBindingType extends ExpressionBindingType implements IValidELValues{
+	/* (non-Javadoc)
+	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IValidELValues#getExpectedRuntimeType()
+	 */
 	public CompositeType getExpectedRuntimeType() throws ELIsNotValidException {
 		String returnType = getReturnType();
 		if (returnType == null)
@@ -33,11 +36,17 @@ public class ValueBindingType extends ExpressionBindingType implements IValidELV
 		return new CompositeType(methodSig, getAssignmentValue());
 	}
 	
+	/**
+	 * @return {@link IAssignable}.LHS or {@link IAssignable}.RHS 
+	 */
 	protected int getAssignmentValue(){
 		return (getIsSetValueRequired() ? IAssignable.ASSIGNMENT_TYPE_LHS : 0) | IAssignable.ASSIGNMENT_TYPE_RHS;
 		
 	}
 	
+	/**
+	 * @return is runtime setter required?
+	 */
 	protected boolean getIsSetValueRequired(){
 		String value = getTraitValueAsString(RUNTIME_SETTER_REQUIRED);
 		if (value == null || value.trim().length() == 0)

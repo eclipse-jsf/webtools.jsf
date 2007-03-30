@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006 Oracle Corporation.
+ * Copyright (c) 2006, 2007 Oracle Corporation.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -42,6 +42,12 @@ public abstract class AbstractMetaDataEnabledTypeRegistry {
 		readRegistry();
 	}
 	
+	/**
+	 * @param bundleID
+	 * @param id
+	 * @param klass
+	 * @param runtimeType
+	 */
 	protected void registerType(String bundleID, String id, String klass, String runtimeType){
 		AbstractMetaDataEnabledType atype = new AbstractMetaDataEnabledType(bundleID, id, klass);
 		if (!typeMap.containsKey(atype.getTypeID())){
@@ -53,6 +59,11 @@ public abstract class AbstractMetaDataEnabledTypeRegistry {
 		}
 	}
 	
+	/**
+	 * Return the metadata enabled type for the given id
+	 * @param id
+	 * @return type
+	 */
 	public AbstractMetaDataEnabledType getType(String id){
 		if (typeMap.containsKey(id))
         {
@@ -61,6 +72,9 @@ public abstract class AbstractMetaDataEnabledTypeRegistry {
         return null;
 	}
 
+	/**
+	 * Reads the extensions for a particular type id
+	 */
 	protected void readRegistry() {
 		try {
 			IExtensionPoint point = Platform.getExtensionRegistry().getExtensionPoint(JSFCorePlugin.PLUGIN_ID, ext_pt_id);
@@ -83,6 +97,9 @@ public abstract class AbstractMetaDataEnabledTypeRegistry {
 		}
 	}
 	
+	/**
+	 * @return default classname to use for the type
+	 */
 	protected abstract String getDefaultClassName();
 
 

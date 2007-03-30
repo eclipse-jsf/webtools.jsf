@@ -18,10 +18,22 @@ import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IVal
  * @author Gerry Kessler - Oracle
  */
 public abstract class NumberType extends EnumerationType{
+	/**
+	 * flag indicating max value metadata was found
+	 */
 	protected boolean maxFound = false;
+	/**
+	 *  flag indicating min value metadata was found
+	 */
 	protected boolean minFound = false;
 	
+	/**
+	 * Validation message when value has exceeded maximum
+	 */
 	protected String EXCEEDS_MAX = Messages.NumberType_max_val;
+	/**
+	 * Validation message when value is less than minimum
+	 */
 	protected String LESS_THAN_MIN = Messages.NumberType_min_val;
 	
 	/**

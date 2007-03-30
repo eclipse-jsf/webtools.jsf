@@ -15,6 +15,10 @@ package org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features;
 import org.eclipse.jface.resource.ImageDescriptor;
 
 
+/**
+ * Implements {@link IPossibleValues}
+ *
+ */
 public class PossibleValue implements IPossibleValue {
 	private String value;
 	private String displayValue;
@@ -22,59 +26,105 @@ public class PossibleValue implements IPossibleValue {
 	private boolean isDefault = false;
 	private String additionalInfo;
 
+	/**
+	 * Constructor when display value is same as stored value
+	 * @param value
+	 */
 	public PossibleValue(String value){
 		this.value = value;
 	}
 	
+	/**
+	 * Constructor when display-value may be different than stored value
+	 * @param value
+	 * @param displayValue
+	 */
 	public PossibleValue(String value, String displayValue){
 		this.value = value;
 		this.displayValue = displayValue;
 	}
 
+	/**
+	 * Constructor when display-value may be different than stored value 
+	 * and a default value is known
+	 * @param value
+	 * @param displayValue
+	 * @param isDefaultValue
+	 */
 	public PossibleValue(String value, String displayValue, boolean isDefaultValue) {
 		this.value = value;
 		this.displayValue = displayValue;
 		this.isDefault = isDefaultValue;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IPossibleValue#getValue()
+	 */
 	public String getValue() { 
 		return value;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IPossibleValue#getDisplayValue()
+	 */
 	public String getDisplayValue() {
 		if (displayValue == null)
 			return value;
 		return displayValue;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IPossibleValue#getIcon()
+	 */
 	public ImageDescriptor getIcon() {		
 		return smallIcon;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IPossibleValue#isDefaultValue()
+	 */
 	public boolean isDefaultValue() {
 		return isDefault;
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IPossibleValue#getAdditionalInformation()
+	 */
 	public String getAdditionalInformation() {
 		return additionalInfo;
 	}
 	
+	/**
+	 * @param value
+	 */
 	public void setValue(String value) {
 		this.value = value;
 	}
 
+	/**
+	 * @param displayValue
+	 */
 	public void setDisplayValue(String displayValue) {
 		this.displayValue = displayValue;
 	}
 
+	/**
+	 * @param smallIcon
+	 */
 	public void setIcon(ImageDescriptor smallIcon) {
 		this.smallIcon = smallIcon;
 	}
 
+	/**
+	 * @param isDefault
+	 */
 	public void setIsDefault(boolean isDefault) {
 		this.isDefault = isDefault;
 	}
 	
+	/**
+	 * @param additionalInfo
+	 */
 	public void setAdditionalInformation(String additionalInfo){
 		this.additionalInfo = additionalInfo;
 	}

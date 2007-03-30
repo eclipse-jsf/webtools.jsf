@@ -17,9 +17,12 @@ import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.IMetaDataEnab
 /**
  * @author Gerry Kessler - Oracle
  * 
- * Experimental
+ * Experimental - not currently used
  *
  */
 public interface ICreateValues extends IMetaDataEnabledFeature{
+	/**
+	 * @return object created
+	 */
 	public Object createValue();
 }

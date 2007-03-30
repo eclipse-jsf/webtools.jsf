@@ -17,6 +17,7 @@ import java.util.List;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.internal.types.CompositeType;
+import org.eclipse.jst.jsf.common.internal.types.IAssignable;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.AbstractRootTypeDescriptor;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.ELIsNotValidException;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IDefaultValue;
@@ -31,6 +32,10 @@ import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.Vali
  */
 public abstract class EnumerationType extends AbstractRootTypeDescriptor implements IValidValues, IDefaultValue, IValidELValues{
 	private List validationMessages;
+	
+	/**
+	 * An empty list
+	 */
 	protected static List EMPTY_LIST = new ArrayList(0);
 	
 	/* (non-Javadoc)
@@ -50,22 +55,42 @@ public abstract class EnumerationType extends AbstractRootTypeDescriptor impleme
 		return getTraitValueAsString(IDefaultValue.DEFAULT_VALUE_PROP_NAME);		
 	}
 	
+	/**
+	 * @return possible values of type as list of Strings using 
+	 * {@link IPossibleValues}.POSSIBLE_VALUES_PROP_NAME trait name
+	 */
 	protected List getMDPossibleValues() {
 		return getTraitValueAsListOfStrings(IPossibleValues.POSSIBLE_VALUES_PROP_NAME);
 	}
 	
+	/**
+	 * @return possible values of type to dislay as list of Strings using 
+	 * {@link IPossibleValues}.POSSIBLE_VALUES_FOR_DISPLAY_PROP_NAME trait name
+	 */
 	protected List getMDPossibleValuesForDisplay() {
 		return getTraitValueAsListOfStrings(IPossibleValues.POSSIBLE_VALUES_FOR_DISPLAY_PROP_NAME);
 	}
 	
+	/**
+	 * @return  list of valid values as list of Strings using 
+	 * {@link IValidValues}.VALID_VALUES_PROP_NAME trait name
+	 */
 	protected List getMDValidValues() {
 		return getTraitValueAsListOfStrings(IValidValues.VALID_VALUES_PROP_NAME);		
 	}
 	
+	/**
+	 * @return Validation message for type using
+	 * {@link IValidValues}.VALID_VALUES_MESSAGE_PROP_NAME trait name
+	 */
 	protected String getMDValidationMessage() {
 		return getTraitValueAsString(IValidValues.VALID_VALUES_MESSAGE_PROP_NAME);			
 	}
 
+	/**
+	 * @return Validation severity int value for type using
+	 * {@link IValidValues}.VALID_VALUES_SEVERITY_PROP_NAME trait name
+	 */
 	protected int getMDValidationSeverity() {
 		String val = getTraitValueAsString(IValidValues.VALID_VALUES_SEVERITY_PROP_NAME);		
 		if (val == null)
@@ -75,10 +100,19 @@ public abstract class EnumerationType extends AbstractRootTypeDescriptor impleme
 		return severity;
 	}
 
+	/**
+	 * @return Validation code as String value for type using
+	 * {@link IValidValues}.VALID_VALUES_CODE_PROP_NAME trait name
+	 */
 	protected String getMDValidationCode() {
 		return getTraitValueAsString(IValidValues.VALID_VALUES_CODE_PROP_NAME);		
 	}
 	
+	/**
+	 * Create a {@link ValidationMessage} from metadata or use default message
+	 * and add it to the collection of validation messages
+	 * @param defaultMsg
+	 */
 	protected void addNewValidationMessage(String defaultMsg) {
 		String msg = getMDValidationMessage();
 		if (msg == null || msg.equals("")) //$NON-NLS-1$
@@ -95,10 +129,17 @@ public abstract class EnumerationType extends AbstractRootTypeDescriptor impleme
 	 * Must not be null.
 	 */
 	protected abstract String getReturnType();
+	
+	/**
+	 * @return the value of {@link IAssignable}.ASSIGNMENT_TYPE_NONE.  Subclasses to override.
+	 */
 	protected int getAssignmentType(){
 		return 0;
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IValidELValues#getExpectedRuntimeType()
+	 */
 	public CompositeType getExpectedRuntimeType() throws ELIsNotValidException {
 		String type = Signature.createTypeSignature(getReturnType(), true);
 		return new CompositeType(type, getAssignmentType());

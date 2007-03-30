@@ -28,7 +28,13 @@ import org.eclipse.osgi.util.NLS;
  */
 public class FacesConfigConverterIDFeatures extends FacesConfigIdentifierFeatures {
 
+	/**
+	 * Faces converter classname
+	 */
 	protected static final String CONVERTER = "javax.faces.convert.Converter"; //$NON-NLS-1$
+	/**
+	 * Imagename to use when displaying converter
+	 */
 	protected static final String IMAGE_NAME = "/icons/full/obj16/FacesConfig_Converter.gif"; //$NON-NLS-1$
 	
 	/* (non-Javadoc)

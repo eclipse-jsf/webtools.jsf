@@ -21,7 +21,16 @@ package org.eclipse.jst.jsf.metadataprocessors.internal.provisional;
  *
  */
 public interface IType {
+	/**
+	 * @return type id
+	 */
 	public String getTypeID();	
+	/**
+	 * @return bundle id where it is defined
+	 */
 	public String getBundleID();
+	/**
+	 * @return classname for the type that must be located within the bundle
+	 */
 	public String getClassName();
 }

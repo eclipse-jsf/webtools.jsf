@@ -56,7 +56,13 @@ import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.Vali
  *
  */
 public class JavaClassType extends ObjectType implements IPossibleValues, IValidValues{
+	/**
+	 * Trait name for valid interfaces
+	 */
 	public static final String POSSIBLE_VALUES_INTERFACES_PROP_NAME = "valid-interfaces"; //$NON-NLS-1$
+	/**
+	 * Trait name for valid superclass
+	 */
 	public static final String POSSIBLE_VALUES_SUPERCLASS_PROP_NAME = "valid-superclass"; //$NON-NLS-1$
 	
 	private List validationMsgs;
@@ -296,9 +302,13 @@ public class JavaClassType extends ObjectType implements IPossibleValues, IValid
 
 	}
 
-	
-	//need to refactor below as this as also in Enumeration
+	/**
+	 * Create a {@link ValidationMessage} from metadata or use default message
+	 * and add it to the collection of validation messages
+	 * @param defaultMsg
+	 */
 	protected void addNewValidationMessage(String defaultMsg) {
+		//TODO: need to refactor below as this as also in Enumeration
 		String msg = getCMValidationMessage();
 		if (msg == null || msg.equals("")) //$NON-NLS-1$
 			msg = defaultMsg;
@@ -311,14 +321,14 @@ public class JavaClassType extends ObjectType implements IPossibleValues, IValid
 	
 	
 	/**
-	 * @return validation message from meta-data.   Can be null.
+	 * @return validation message from meta-data using {@link IValidValues}.VALID_VALUES_MESSAGE_PROP_NAME trait.   Can be null.
 	 */
 	protected String getCMValidationMessage() {
 		return getTraitValueAsString(IValidValues.VALID_VALUES_MESSAGE_PROP_NAME);			
 	}
 	
 	/**
-	 * @return validation severity as int from meta-data.   IStatus.WARNING is default.
+	 * @return validation severity as int from meta-data using {@link IValidValues}.VALID_VALUES_SEVERITY_PROP_NAME trait.   IStatus.WARNING is default.
 	 */
 	protected int getValidationSeverity() {
 		String val = getTraitValueAsString(IValidValues.VALID_VALUES_SEVERITY_PROP_NAME);		
@@ -365,6 +375,9 @@ public class JavaClassType extends ObjectType implements IPossibleValues, IValid
 			results.add(match);
 		}
 		
+		/**
+		 * @return list of serach results
+		 */
 		public List getResults(){
 			return results;
 		}

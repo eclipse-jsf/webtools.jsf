@@ -42,6 +42,12 @@ public final class MetaDataEnabledFeatureAdapterFactory {
 		super();
 	}
 	
+	/**
+	 * Given the feature extension, create and return the {@link IMetaDataEnabledFeature} for a given processing feature
+	 * @param feature
+	 * @param processingFeature class
+	 * @return IMetaDataEnabledFeature
+	 */
 	public IMetaDataEnabledFeature getFeatureAdapter(IMetaDataEnabledFeatureExtension feature, Class processingFeature){ 
 		if (feature != null){
 			return createFeature(feature, processingFeature);			

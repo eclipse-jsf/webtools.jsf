@@ -22,9 +22,19 @@ import org.eclipse.jst.jsf.facesconfig.emf.ValidatorType;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.PossibleValue;
 import org.eclipse.osgi.util.NLS;
 
+/**
+ * ValidatorID attribute feature
+ *
+ */
 public class FacesConfigValidatorIDFeatures extends FacesConfigIdentifierFeatures {
 
+	/**
+	 * Faces validator classname
+	 */
 	protected static final String VALIDATOR = "javax.faces.validator.Validator"; //$NON-NLS-1$
+	/**
+	 * Imagename to use when displaying validator
+	 */
 	protected static final String IMAGE_NAME = "/icons/full/obj16/FacesConfig_Validator.gif"; //$NON-NLS-1$
 	
 	/* (non-Javadoc)

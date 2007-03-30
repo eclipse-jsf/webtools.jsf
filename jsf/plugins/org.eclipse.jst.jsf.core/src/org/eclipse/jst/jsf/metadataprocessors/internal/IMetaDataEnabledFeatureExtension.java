@@ -12,8 +12,21 @@
 
 package org.eclipse.jst.jsf.metadataprocessors.internal;
 
+/**
+ * Interface used to bind feature extensions to metadata enabled types 
+ *
+ */
 public interface IMetaDataEnabledFeatureExtension {
+	/**
+	 * @return bundle id
+	 */
 	public String getBundleID();
+	/**
+	 * @return type id
+	 */
 	public String getTypeID();
+	/**
+	 * @return class name to use for type.   Must be located within the bundle.
+	 */
 	public String getClassName();
 }

@@ -12,6 +12,9 @@
 
 package org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features;
 
+/**
+ * Interface for validation messages for metadata features
+ */
 public interface IValidationMessage {
 	/**
 	 * @return localized string desribing validation issue

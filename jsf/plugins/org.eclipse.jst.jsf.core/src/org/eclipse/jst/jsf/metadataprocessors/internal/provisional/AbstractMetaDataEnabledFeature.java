@@ -15,26 +15,18 @@ package org.eclipse.jst.jsf.metadataprocessors.internal.provisional;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.core.resources.IProject;
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.jst.jsf.common.metadata.internal.DomainLoadingStrategyRegistry;
 import org.eclipse.jst.jsf.common.metadata.internal.IImageDescriptorProvider;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider;
 import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IMetaDataModelContext;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.MetaDataQueryHelper;
-import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.IDOMContextResolver;
-import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.IStructuredDocumentContextResolverFactory;
 import org.eclipse.jst.jsf.context.structureddocument.internal.provisional.IStructuredDocumentContext;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IPossibleValues;
-import org.w3c.dom.Attr;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 
 /**
- * Simple abstract class that implementers of {@link IMetaDataEnabledFeature} can subclass in the <b>TagLibDomain</b>
+ * Simple abstract class that implementers of {@link IMetaDataEnabledFeature} can subclass in the <b>TagLibDomain</b> of metadata
  * 
  * @author Gerry Kessler - Oracle
  *
@@ -43,8 +35,9 @@ public abstract class AbstractMetaDataEnabledFeature implements IMetaDataEnabled
 	
 	private MetaDataContext mdContext;
 	private IStructuredDocumentContext sdContext;
-	private IProject _project;
+	
 	private static final List EMPTY_LIST = new ArrayList(0);
+	
 	/* (non-Javadoc)
 	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.IMetaDataEnabledFeature#setMetaDataContext(org.eclipse.jst.jsf.metadataprocessors.internal.provisional.MetaDataContext)
 	 */
@@ -73,12 +66,12 @@ public abstract class AbstractMetaDataEnabledFeature implements IMetaDataEnabled
 		return sdContext;
 	}
 	
-	private IProject getProject(){
-		if (_project == null){
-			_project = IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver(sdContext).getProject();
-		}
-		return _project;
-	}
+//	private IProject getProject(){
+//		if (_project == null){
+//			_project = IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver(sdContext).getProject();
+//		}
+//		return _project;
+//	}
 
 	
 	//common metadata accessors
@@ -94,31 +87,10 @@ public abstract class AbstractMetaDataEnabledFeature implements IMetaDataEnabled
 	 * @return String value
 	 */
 	protected String getTraitValueAsString(final String traitName){	
-		//look for trait on given entity
-		final TaglibMetadataContext context = (TaglibMetadataContext)getMetaDataContext();
-		final IMetaDataModelContext modelContext = MetaDataQueryHelper.createMetaDataModelContext(getProject(), DomainLoadingStrategyRegistry.TAGLIB_DOMAIN, ((TaglibMetadataContext)getMetaDataContext()).getUri());
-		
-		final String entityKey = context.getTagName() +"/"+ context.getAttributeName();
-		final Trait t = MetaDataQueryHelper.getTrait(modelContext, entityKey, traitName);
+		Trait t = getTraitForEntityUsingContext(traitName);
 		if (t != null){
 			return TraitValueHelper.getValueAsString(t);
 		}
-		
-//		//if not present look on */attributeName 				
-//		entityKey = "*/"+ ((TaglibMetadataContext)getMetaDataContext()).getAttributeName();
-//		t = MetaDataQueryHelper.getTrait(modelContext, entityKey, traitName);
-//
-//		if (t!= null){
-//			return TraitValueHelper.getValueAsString(t);
-//		}
-//		
-//		//now look for the '*' entity
-//		entityKey = "*";
-//		t = MetaDataQueryHelper.getTrait(modelContext, entityKey, traitName);
-//
-//		if (t!= null){
-//			return TraitValueHelper.getValueAsString(t);
-//		}
 				
 		return null;
 
@@ -136,13 +108,7 @@ public abstract class AbstractMetaDataEnabledFeature implements IMetaDataEnabled
 	 * @return List of String values
 	 */
 	protected List getTraitValueAsListOfStrings(final String traitName){
-		//look for trait on given entity
-		final TaglibMetadataContext context = (TaglibMetadataContext)getMetaDataContext();		
-		final IMetaDataModelContext modelContext = MetaDataQueryHelper.createMetaDataModelContext(getProject(), DomainLoadingStrategyRegistry.TAGLIB_DOMAIN, ((TaglibMetadataContext)getMetaDataContext()).getUri());
-		
-		final String entityKey = context.getTagName() +"/"+ context.getAttributeName();
-		final Entity entity = ((TaglibMetadataContext)getMetaDataContext()).getEntity();
-		final Trait t = MetaDataQueryHelper.getTrait(entity, traitName);
+		Trait t = getTraitForEntityUsingContext(traitName);
 		if (t != null){
 			return TraitValueHelper.getValueAsListOfStrings(t);
 		}
@@ -150,18 +116,10 @@ public abstract class AbstractMetaDataEnabledFeature implements IMetaDataEnabled
 		return EMPTY_LIST;
 	}
 
-	private String getDocContextElementName() {
-		final IDOMContextResolver dom = IStructuredDocumentContextResolverFactory.INSTANCE.getDOMContextResolver(getStructuredDocumentContext());
-		if (dom == null)
-			return null;
-		
-		if (dom.getNode().getNodeType() == Node.ATTRIBUTE_NODE){
-			final Attr anode = (Attr)dom.getNode();
-			final Element elem = anode.getOwnerElement();
-			return elem.getLocalName();
-		}
-        return dom.getNode().getLocalName();
-			
+	private Trait getTraitForEntityUsingContext(final String traitName) {
+		//look for trait on given entity
+		final Entity entity = ((TaglibMetadataContext)getMetaDataContext()).getEntity();
+		return MetaDataQueryHelper.getTrait(entity, traitName);
 	}
 
 	/**

@@ -15,13 +15,36 @@ package org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features;
 import java.util.List;
 
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.IMetaDataEnabledFeature;
-//experimental and subject to change
+
+/**
+ * An {@link IMetaDataEnabledFeature} for validating values using metadata
+ *
+ */
 public interface IValidValues extends IMetaDataEnabledFeature{
+	/**
+	 * Trait name for valid-values
+	 */
 	public static final String VALID_VALUES_PROP_NAME = "valid-values";
+	
+	/**
+	 * Trait name for valid-values-code
+	 */
 	public static final String VALID_VALUES_CODE_PROP_NAME = VALID_VALUES_PROP_NAME + "-code";
+	/**
+	 * Trait name for valid-values-severity
+	 */
 	public static final String VALID_VALUES_SEVERITY_PROP_NAME = VALID_VALUES_PROP_NAME + "-severity";
+	/**
+	 * Trait name for valid-values-message
+	 */
 	public static final String VALID_VALUES_MESSAGE_PROP_NAME = VALID_VALUES_PROP_NAME + "-message";
+	/**
+	 * Trait name for valid-maximum
+	 */
 	public static final String VALID_VALUES_MAX_PROP_NAME = "valid-maximum";
+	/**
+	 * Trait name for valid-minimum
+	 */
 	public static final String VALID_VALUES_MIN_PROP_NAME = "valid-minimum";
 	/**
 	 * @param value fully resolved value as String

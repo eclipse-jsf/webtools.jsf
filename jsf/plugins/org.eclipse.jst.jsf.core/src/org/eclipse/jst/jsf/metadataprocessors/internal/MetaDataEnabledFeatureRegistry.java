@@ -27,6 +27,8 @@ import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
  * Registry of <code>AbstractMetaDataEnabledType</code>s loaded from 
  * the <code>MetaDataEnabledFeatures</code> extension point
  * 
+ * A map of features keyed by type id
+ * 
  * @author Gerry Kessler - Oracle
  *
  */
@@ -37,7 +39,10 @@ public class MetaDataEnabledFeatureRegistry{
 	
 	private static MetaDataEnabledFeatureRegistry INSTANCE;
 	
-	public static MetaDataEnabledFeatureRegistry getInstance(){
+	/**
+	 * @return the singleton instance of the MetaDataEnabledFeatureRegistry
+	 */
+	public static synchronized MetaDataEnabledFeatureRegistry getInstance(){
 		if (INSTANCE == null){
 			INSTANCE = new MetaDataEnabledFeatureRegistry();	
 		}
@@ -49,6 +54,9 @@ public class MetaDataEnabledFeatureRegistry{
 		readRegistry();		
 	}
 	
+	/**
+	 * Reads the MetaDataEnabledFeatures extensions into a registry
+	 */
 	protected void readRegistry() {
 		try {
 			IExtensionPoint point = Platform.getExtensionRegistry().getExtensionPoint(JSFCorePlugin.PLUGIN_ID, EXTPTID);
@@ -67,6 +75,12 @@ public class MetaDataEnabledFeatureRegistry{
 		}
 	}
 	
+	/**
+	 * Create {@link IMetaDataEnabledFeatureExtension}s and add to registry
+	 * @param bundleID
+	 * @param typeId
+	 * @param klass
+	 */
 	protected void registerFeature(String bundleID, String typeId, String klass){
 		IMetaDataEnabledFeatureExtension aFeature = new MetaDataEnabledFeatureExtension(bundleID, typeId, klass);
 		if (!featuresMap.containsKey(typeId)){

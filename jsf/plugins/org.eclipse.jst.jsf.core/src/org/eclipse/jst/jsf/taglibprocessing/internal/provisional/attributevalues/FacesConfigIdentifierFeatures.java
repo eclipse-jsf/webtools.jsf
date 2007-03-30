@@ -116,7 +116,7 @@ public abstract class FacesConfigIdentifierFeatures extends AbstractMetaDataEnab
 	}
 
 	/**
-	 * @param attribute value
+	 * @param value of the attribute
 	 * @return the validation message String
 	 */
 	protected abstract String getMyValidationMessage(String value);
@@ -159,10 +159,10 @@ public abstract class FacesConfigIdentifierFeatures extends AbstractMetaDataEnab
 	}
 	
 	/**
-	 * @param JSFAppConfigManager
+	 * @param jsfAppConfigManager
 	 * @return list of faces-config element for the specified config-type
 	 */
-	protected abstract List getElements(JSFAppConfigManager mgr);
+	protected abstract List getElements(JSFAppConfigManager jsfAppConfigManager);
 	/**
 	 * @param elements
 	 * @return list of IPossibleValue objects for the specified list of config elements
@@ -249,15 +249,18 @@ public abstract class FacesConfigIdentifierFeatures extends AbstractMetaDataEnab
 	}
 
 	/**
-	 * @param JSFAppConfigManager
+	 * @param jsfAppConfigManager
 	 * @return list of identifier Strings for config-type
 	 */
-	protected abstract List getElementIDs(JSFAppConfigManager mgr);
+	protected abstract List getElementIDs(JSFAppConfigManager jsfAppConfigManager);
 
 	/**
 	 * @return the config-type
 	 */
 	protected abstract String getReturnType();
+	/**
+	 * @return int value of {@link IAssignable}.ASSIGNMENT_TYPE_RHS & {@link IAssignable}.ASSIGNMENT_TYPE_LHS 
+	 */
 	protected int getAssignmentType(){
 		//TODO: fix me to get from meta-data(?)
 		return IAssignable.ASSIGNMENT_TYPE_RHS & IAssignable.ASSIGNMENT_TYPE_LHS;
@@ -267,11 +270,17 @@ public abstract class FacesConfigIdentifierFeatures extends AbstractMetaDataEnab
 		return new CompositeType(type, getAssignmentType());
 	}
 	
-	//Standard Validation stuff - should be moved somewhere else
+	/**
+	 * @return String value of {@link IValidValues}.VALID_VALUES_MESSAGE_PROP_NAME trait
+	 */
 	protected String getCMValidationMessage() {
+		//TODO: Standard Validation stuff - should be moved somewhere else
 		return getTraitValueAsString(IValidValues.VALID_VALUES_MESSAGE_PROP_NAME);			
 	}
 
+	/**
+	 * @return int value of {@link IValidValues}.VALID_VALUES_SEVERITY_PROP_NAME trait
+	 */
 	protected int getCMValidationSeverity() {
 		String val = getTraitValueAsString(IValidValues.VALID_VALUES_SEVERITY_PROP_NAME);		
 		if (val == null)
@@ -281,6 +290,9 @@ public abstract class FacesConfigIdentifierFeatures extends AbstractMetaDataEnab
 		return severity;
 	}
 
+	/**
+	 * @return String value of {@link IValidValues}.VALID_VALUES_CODE_PROP_NAME trait
+	 */
 	protected String getCMValidationCode() {
 		return getTraitValueAsString(IValidValues.VALID_VALUES_CODE_PROP_NAME);		
 	}

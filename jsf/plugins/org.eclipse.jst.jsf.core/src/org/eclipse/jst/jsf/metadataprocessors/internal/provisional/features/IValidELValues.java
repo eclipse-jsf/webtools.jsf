@@ -15,7 +15,15 @@ package org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features;
 import org.eclipse.jst.jsf.common.internal.types.CompositeType;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.IMetaDataEnabledFeature;
 
-//experimental and subject to change
+/**
+ * An {@link IMetaDataEnabledFeature} for semantic validation of EL Values 
+ * Experimental and subject to change
+ */
 public interface IValidELValues extends IMetaDataEnabledFeature {
+	/**
+	 * Expected runtime type for EL value
+	 * @return CompositeType
+	 * @throws ELIsNotValidException
+	 */
 	public CompositeType getExpectedRuntimeType() throws ELIsNotValidException;
 }

@@ -13,7 +13,12 @@
 package org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features;
 
 import org.eclipse.jface.resource.ImageDescriptor;
-//experimental and subject to change
+
+/**
+ * Interface for providing lists of possible values
+ * Values can be different than displayed values.
+ *
+ */
 public interface IPossibleValue {
 	/**
 	 * @return value to set.  should not return null.

@@ -35,16 +35,25 @@ public abstract class ExpressionBindingType extends BindingType  {
 	private List validationMessages;
 	
 
+	/**
+	 * @return String value of the "runtime-return-type" trait 
+	 */
 	protected String getReturnType() {
 		return getTraitValueAsString(RUNTIME_RETURN_TYPE);		
 	}
 
+	/**
+	 * @return String[] value of the "runtime-param-types" trait 
+	 */
 	protected String[] getParams() {
 		List params = getTraitValueAsListOfStrings(RUNTIME_PARAMS_TYPES);
 		
 		return (String[])params.toArray(new String[0]);
 	}
 
+	/**
+	 * @return lits of validation messages
+	 */
 	public List getValidationMessages() {
 		if (validationMessages == null){
 			validationMessages = new ArrayList();

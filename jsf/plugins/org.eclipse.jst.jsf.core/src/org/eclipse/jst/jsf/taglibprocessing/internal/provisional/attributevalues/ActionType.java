@@ -40,10 +40,14 @@ import org.osgi.framework.Bundle;
  * @author Gerry Kessler - Oracle
  */
 public class ActionType extends MethodBindingType implements IPossibleValues{
+	/**
+	 * Image to use if metadata defined image cannot be created
+	 */
 	protected static final ImageDescriptor MISSING_IMAGE = ImageDescriptor.getMissingImageDescriptor();
 	
 	private static final String IMAGE_NAME = "/icons/full/obj16/NavigationCaseType.gif"; //$NON-NLS-1$
 	private ImageDescriptor imageDescriptor;
+	
 	/* (non-Javadoc)
 	 * @see org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.MethodBindingType#isValidValue(java.lang.String)
 	 */

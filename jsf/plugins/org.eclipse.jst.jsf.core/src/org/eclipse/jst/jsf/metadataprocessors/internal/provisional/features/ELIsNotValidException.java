@@ -12,9 +12,16 @@
 
 package org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features;
 
+/**
+ * Exception
+ */
 public class ELIsNotValidException extends Exception {
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * Constructor
+	 * @param msg
+	 */
 	public ELIsNotValidException(String msg){
 		super(msg);
 	}
