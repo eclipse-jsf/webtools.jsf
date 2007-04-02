@@ -73,7 +73,7 @@ public class JSFFacetInstallDataModelProvider extends
 		if (propertyName.equals(IMPLEMENTATION)) {
 			if (JSFCorePlugin.getDefault().getJSFLibraryRegistry() == null)
 				return null;
-			return JSFCorePlugin.getDefault().getJSFLibraryRegistry().getDefaultImplementation();
+			return getDefaultImplementationLibrary();//JSFCorePlugin.getDefault().getJSFLibraryRegistry().getDefaultImplementation();
 		} else if (propertyName.equals(DEPLOY_IMPLEMENTATION)) {
 			return Boolean.TRUE;
 		} else if (propertyName.equals(CONFIG_PATH)) {
@@ -89,7 +89,7 @@ public class JSFFacetInstallDataModelProvider extends
 		} else if (propertyName.equals(WEBCONTENT_DIR)){
 			return "WebContent";  //not sure I need this
 		} else if (propertyName.equals(COMPONENT_LIBRARIES)) {
-			return new Object[0];
+			return new JSFLibraryReference[0];
 		} else if (propertyName.equals(IMPLEMENTATION_LIBRARIES)) {
 			return getDefaultJSFImplementationLibraries();
 		} else if (propertyName.equals(DEFAULT_IMPLEMENTATION_LIBRARY)) {
@@ -226,21 +226,29 @@ public class JSFFacetInstallDataModelProvider extends
 	
 		}
 		
-		IStatus status = checkForDupeArchiveFiles(jars, ((JSFLibraryReference)getProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION)).getLibrary());
-		if (!OK_STATUS.equals(status)){
-			return status;
+		IStatus status = null;
+		JSFLibraryReference ref =  ((JSFLibraryReference)getProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION));
+		if (ref != null){
+			status = checkForDupeArchiveFiles(jars, ((JSFLibraryReference)getProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION)).getLibrary());
+			if (!OK_STATUS.equals(status)){
+				return status;
+			}
+		} else {
+			return createErrorStatus("JSF Implementation library must be specified.");
 		}
 		
-		JSFLibraryReference[] compLibs = (JSFLibraryReference[])getProperty(IJSFFacetInstallDataModelProperties.COMPONENT_LIBRARIES);
-		for (int i=0;i<compLibs.length;i++){
-			JSFLibrary lib = compLibs[i].getLibrary();
-			 status = checkForDupeArchiveFiles(jars, lib);
-				if (!OK_STATUS.equals(status)){
-					return status;
-				}
-		}		
-			return OK_STATUS;
+		JSFLibraryReference[] compLibs = (JSFLibraryReference[]) getProperty(IJSFFacetInstallDataModelProperties.COMPONENT_LIBRARIES);
+		if (compLibs != null){
+			for (int i=0;i<compLibs.length;i++){
+				JSFLibrary lib = compLibs[i].getLibrary();
+				 status = checkForDupeArchiveFiles(jars, lib);
+					if (!OK_STATUS.equals(status)){
+						return status;
+					}
+			}		
 		}
+		return OK_STATUS;
+	}
 
 	private IJavaProject getJavaProject() {
 		IProject proj = getProject();
