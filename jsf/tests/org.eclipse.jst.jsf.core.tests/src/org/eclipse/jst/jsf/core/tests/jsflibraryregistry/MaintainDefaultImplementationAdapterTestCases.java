@@ -38,7 +38,7 @@ public class MaintainDefaultImplementationAdapterTestCases extends TestCase {
 		//get prepared registry
 		JSFLibraryRegistry registry = getPreparedJSFLibraryRegistry();
 		//create and add impl
-		JSFLibrary impl1 = JSFCoreUtilHelper.constructJSFLib("impl1", "impl1", "testfiles/JSFLib", true, false);
+		JSFLibrary impl1 = JSFCoreUtilHelper.constructJSFLib("impl1", "testfiles/JSFLib", true, false);
 		registry.addJSFLibrary(impl1);
 		//test
 		Assert.assertEquals(impl1, registry.getDefaultImplementation());
@@ -48,10 +48,10 @@ public class MaintainDefaultImplementationAdapterTestCases extends TestCase {
 		//get prepared registry
 		JSFLibraryRegistry registry = getPreparedJSFLibraryRegistry();
 		//create and add impl
-		JSFLibrary impl1 = JSFCoreUtilHelper.constructJSFLib("impl1", "impl1", "testfiles/JSFLib", true, false);
+		JSFLibrary impl1 = JSFCoreUtilHelper.constructJSFLib("impl1", "testfiles/JSFLib", true, false);
 		registry.addJSFLibrary(impl1);
 		//create and add impl
-		JSFLibrary impl2 = JSFCoreUtilHelper.constructJSFLib("impl2", "impl2", "testfiles/JSFLib", true, false);
+		JSFLibrary impl2 = JSFCoreUtilHelper.constructJSFLib("impl2", "testfiles/JSFLib", true, false);
 		registry.addJSFLibrary(impl2);
 		//test
 		Assert.assertEquals(impl1, registry.getDefaultImplementation());
@@ -65,7 +65,7 @@ public class MaintainDefaultImplementationAdapterTestCases extends TestCase {
 		//get prepared registry
 		JSFLibraryRegistry registry = getPreparedJSFLibraryRegistry();
 		//create and add impl
-		JSFLibrary impl1 = JSFCoreUtilHelper.constructJSFLib("impl1", "impl1", "testfiles/JSFLib", true, false);
+		JSFLibrary impl1 = JSFCoreUtilHelper.constructJSFLib("impl1", "testfiles/JSFLib", true, false);
 		registry.addJSFLibrary(impl1);
 		//test
 		Assert.assertEquals(impl1, registry.getDefaultImplementation());
@@ -79,7 +79,7 @@ public class MaintainDefaultImplementationAdapterTestCases extends TestCase {
 		//get prepared registry
 		JSFLibraryRegistry registry = getPreparedJSFLibraryRegistry();
 		//create and add lib
-		JSFLibrary lib1 = JSFCoreUtilHelper.constructJSFLib("lib1", "lib1", "testfiles/JSFLib", false, false);
+		JSFLibrary lib1 = JSFCoreUtilHelper.constructJSFLib("lib1", "testfiles/JSFLib", false, false);
 		registry.addJSFLibrary(lib1);
 		//test
 		Assert.assertNull(registry.getDefaultImplementation());
@@ -93,10 +93,10 @@ public class MaintainDefaultImplementationAdapterTestCases extends TestCase {
 		//get prepared registry
 		JSFLibraryRegistry registry = getPreparedJSFLibraryRegistry();
 		//create and add impl
-		JSFLibrary impl1 = JSFCoreUtilHelper.constructJSFLib("impl1", "impl1", "testfiles/JSFLib", true, false);
+		JSFLibrary impl1 = JSFCoreUtilHelper.constructJSFLib("impl1", "testfiles/JSFLib", true, false);
 		registry.addJSFLibrary(impl1);
 		//create and add impl
-		JSFLibrary impl2 = JSFCoreUtilHelper.constructJSFLib("impl2", "impl2", "testfiles/JSFLib", true, false);
+		JSFLibrary impl2 = JSFCoreUtilHelper.constructJSFLib("impl2", "testfiles/JSFLib", true, false);
 		registry.addJSFLibrary(impl2);
 		//test
 		Assert.assertEquals(impl1, registry.getDefaultImplementation());
@@ -110,7 +110,7 @@ public class MaintainDefaultImplementationAdapterTestCases extends TestCase {
 		//get prepared registry
 		JSFLibraryRegistry registry = getPreparedJSFLibraryRegistry();
 		//create and add impl
-		JSFLibrary impl1 = JSFCoreUtilHelper.constructJSFLib("impl1", "impl1", "testfiles/JSFLib", true, false);
+		JSFLibrary impl1 = JSFCoreUtilHelper.constructJSFLib("impl1", "testfiles/JSFLib", true, false);
 		registry.addJSFLibrary(impl1);
 		//test
 		Assert.assertEquals(impl1, registry.getDefaultImplementation());

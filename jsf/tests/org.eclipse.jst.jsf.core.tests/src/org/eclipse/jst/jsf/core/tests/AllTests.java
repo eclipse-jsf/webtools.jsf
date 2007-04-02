@@ -13,7 +13,6 @@ package org.eclipse.jst.jsf.core.tests;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-import org.eclipse.jst.jsf.core.tests.jsflibraryconfig.J2EEModuleDependencyDelegateTestCases;
 import org.eclipse.jst.jsf.core.tests.jsflibraryconfig.JSFLibraryConfigDialogSettingDataTestCases;
 import org.eclipse.jst.jsf.core.tests.jsflibraryconfig.JSFLibraryConfigModelTestCases;
 import org.eclipse.jst.jsf.core.tests.jsflibraryconfig.JSFLibraryRegistryUtilTestCases;
@@ -56,7 +55,6 @@ public class AllTests {
 		
 		suite.addTestSuite(JSFFacetInstallDataModelProviderTestCases.class);
 		
-		suite.addTestSuite(J2EEModuleDependencyDelegateTestCases.class);
 		suite.addTestSuite(JSFLibraryConfigDialogSettingDataTestCases.class);
 		suite.addTestSuite(JSFProjectLibraryReferenceTestCases.class);
 		suite.addTestSuite(JSFLibraryConfigModelTestCases.class);

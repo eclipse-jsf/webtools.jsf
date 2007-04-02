@@ -39,7 +39,7 @@ public class JSFCoreUtilHelper {
 		String testData;		
 		String pathTestFiles = TestsPlugin.getInstallLocation().getPath() + "testfiles/";
 		JSFLibrary jsfLib = JSFLibraryRegistryFactory.eINSTANCE.createJSFLibrary();
-		jsfLib.setID(id);
+//		jsfLib.setID(id);
 		jsfLib.setName(name);	
 		jsfLib.setImplementation(bImpl);
 		
@@ -134,7 +134,7 @@ public class JSFCoreUtilHelper {
 		JSFLibrary jsfLib = null;
 		if (isFakedPlugginLib){
 			jsfLib = JSFLibraryRegistryFactory.eINSTANCE.createPluginProvidedJSFLibrary();
-			jsfLib.setID("fakePluginLib_"+name);
+//			jsfLib.setID("fakePluginLib_"+name);
 		}
 		else
 			jsfLib = JSFLibraryRegistryFactory.eINSTANCE.createJSFLibrary();
@@ -167,27 +167,27 @@ public class JSFCoreUtilHelper {
 		return jsfLib;
 	}
 
-	/**
-	 * Creates a JSF Library from all the jars and zips found at the relative
-	 * path from this plugin.
-	 * 
-	 * @param ID
-	 * @param name
-	 * @param relPathToArchives
-	 * @param isImpl
-	 * @param isFakedPlugginLib 
-	 * @return JSFLibrary
-	 */
-	public static JSFLibrary constructJSFLib(
-			String ID,
-			String name,			
-			String relPathToArchives, 
-			boolean isImpl,
-			boolean isFakedPlugginLib) {
-
-		JSFLibrary jsfLib = constructJSFLib(name, relPathToArchives, isImpl, isFakedPlugginLib);
-		jsfLib.setID(ID);
-		return jsfLib;
-	}
+//	/**
+//	 * Creates a JSF Library from all the jars and zips found at the relative
+//	 * path from this plugin.
+//	 * 
+//	 * @param ID
+//	 * @param name
+//	 * @param relPathToArchives
+//	 * @param isImpl
+//	 * @param isFakedPlugginLib 
+//	 * @return JSFLibrary
+//	 */
+//	public static JSFLibrary constructJSFLib(
+//			String ID,
+//			String name,			
+//			String relPathToArchives, 
+//			boolean isImpl,
+//			boolean isFakedPlugginLib) {
+//
+//		JSFLibrary jsfLib = constructJSFLib(name, relPathToArchives, isImpl, isFakedPlugginLib);
+////		jsfLib.setID(ID);
+//		return jsfLib;
+//	}
 
 }

@@ -3,7 +3,7 @@ package org.eclipse.jst.jsf.core.tests.jsflibraryconfig;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
-import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFProjectLibraryReference;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryReference;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.ArchiveFile;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryFactory;
@@ -11,10 +11,10 @@ import org.eclipse.jst.jsf.core.tests.TestsPlugin;
 
 public class JSFProjectLibraryReferenceTestCases extends TestCase {
 	private String JSF_NAME = "MockJSFLib";
-	private String JSF_ID = "123456789";
+//	private String JSF_ID = "123456789";
 	private boolean isImpl = false;
 	private JSFLibrary jsfLib = null;
-	private JSFProjectLibraryReference jsfLibRef = null;
+	private JSFLibraryReference jsfLibRef = null;
 	
 	public JSFProjectLibraryReferenceTestCases(String name) {
 		super(name);
@@ -24,11 +24,11 @@ public class JSFProjectLibraryReferenceTestCases extends TestCase {
 		super.setUp();
 		
 		jsfLib = JSFLibraryRegistryFactory.eINSTANCE.createJSFLibrary();		
-		jsfLib.setID(JSF_ID);
+//		jsfLib.setID(JSF_ID);
 		jsfLib.setName(JSF_NAME);
 		jsfLib.setImplementation(false);
 				
-		jsfLibRef = new JSFProjectLibraryReference(jsfLib, 
+		jsfLibRef = new JSFLibraryReference(jsfLib, 
 	   											   true,	// selected 
 												   true);	// to be deployed
 	}
@@ -41,21 +41,21 @@ public class JSFProjectLibraryReferenceTestCases extends TestCase {
 	}
 
 	/*
-	 * General test class for JSFProjectLibraryReference class
+	 * General test class for JSFLibraryReference class
 	 */
 	public void testJSFProjectLibraryReference() {		
-		JSFProjectLibraryReference jsfLibRef_ = new JSFProjectLibraryReference(jsfLib, true, true);
+		JSFLibraryReference jsfLibRef_ = new JSFLibraryReference(jsfLib, true, true);
 		
 		Assert.assertNotNull(jsfLibRef_);		
 		Assert.assertTrue(jsfLibRef_.isSelected());
 		Assert.assertTrue(jsfLibRef_.isCheckedToBeDeployed());		
 		Assert.assertTrue(JSF_NAME.equals(jsfLibRef_.getName()));
-		Assert.assertTrue(JSF_ID.equals(jsfLibRef_.getID()));
+		Assert.assertTrue(JSF_NAME.equals(jsfLibRef_.getID()));
 		Assert.assertTrue(isImpl == jsfLibRef_.isImplementation());
 	}		
 	
 	/*
-	 * test method for JSFProjectLibraryReference.getLibrary()
+	 * test method for JSFLibraryReference.getLibrary()
 	 */
 	public void testGetLibrary() {
 		Assert.assertNotNull(jsfLibRef);
@@ -63,19 +63,19 @@ public class JSFProjectLibraryReferenceTestCases extends TestCase {
 	}
 
 	/*
-	 * test method for JSFProjectLibraryReference.isCheckedToBeDeployed()
+	 * test method for JSFLibraryReference.isCheckedToBeDeployed()
 	 */
 	public void testIsCheckedToBeDeployed() {
-		JSFProjectLibraryReference jsfLibRef_ = new JSFProjectLibraryReference(jsfLib, true, true);
+		JSFLibraryReference jsfLibRef_ = new JSFLibraryReference(jsfLib, true, true);
 		Assert.assertNotNull(jsfLibRef_);		
 		Assert.assertTrue(jsfLibRef_.isCheckedToBeDeployed());
 	}
 
 	/*
-	 * test method for JSFProjectLibraryReference.setSelected()
+	 * test method for JSFLibraryReference.setSelected()
 	 */
 	public void testSetSelected() {
-		JSFProjectLibraryReference jsfLibRef_ = new JSFProjectLibraryReference(jsfLib, true, true);
+		JSFLibraryReference jsfLibRef_ = new JSFLibraryReference(jsfLib, true, true);
 		Assert.assertNotNull(jsfLibRef_);		
 		
 		Assert.assertTrue(jsfLibRef_.isSelected());
@@ -85,14 +85,14 @@ public class JSFProjectLibraryReferenceTestCases extends TestCase {
 	}
 
 	/*
-	 * test method for JSFProjectLibraryReference.isImplementation()
+	 * test method for JSFLibraryReference.isImplementation()
 	 */
 	public void testIsImplementation() {
 		Assert.assertFalse(jsfLibRef.isImplementation());
 	}
 
 	/*
-	 * test method for JSFProjectLibraryReference.getArchiveFiles()
+	 * test method for JSFLibraryReference.getArchiveFiles()
 	 */	
 	public void testGetArchiveFiles() {
 		String path2TestJAR = TestsPlugin.getInstallLocation().getPath() + "testfiles/faces-all-bogus.jar";

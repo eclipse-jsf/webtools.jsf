@@ -12,7 +12,7 @@ import org.eclipse.core.runtime.QualifiedName;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfigDialogSettingData;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfigModel;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfiglModelSource;
-import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFProjectLibraryReference;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryReference;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfigModel.JSFLibraryConfigModelFactory;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistry;
@@ -75,7 +75,7 @@ public class JSFLibraryConfigModelTestCases extends TestCase {
 		JSFLibraryConfigModel model = JSFLibraryConfigModelFactory.createInstance(modelSrc);
 
 		JSFLibraryRegistry libReg = JSFCoreUtilHelper.getJSFLibraryRegistryFromJSFCorePlugin();
-		JSFProjectLibraryReference libImplRef = model.getCurrentJSFImplementationLibrarySelection();
+		JSFLibraryReference libImplRef = model.getCurrentJSFImplementationLibrarySelection();
 		Assert.assertNotNull(libImplRef);
 		Assert.assertTrue(libReg.getDefaultImplementation().getID().equals(libImplRef.getID()));
 	}
@@ -88,7 +88,7 @@ public class JSFLibraryConfigModelTestCases extends TestCase {
 		
 		Assert.assertTrue(lstCompRef.size() == 1);
 		
-		JSFProjectLibraryReference libCompRef = (JSFProjectLibraryReference) lstCompRef.get(0);  
+		JSFLibraryReference libCompRef = (JSFLibraryReference) lstCompRef.get(0);  
 		Assert.assertNotNull(libCompRef);
 		Assert.assertTrue(libCompRef.isSelected());
 		Assert.assertTrue(libCompRef.isCheckedToBeDeployed());

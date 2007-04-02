@@ -1,7 +1,7 @@
 package org.eclipse.jst.jsf.core.tests.jsflibraryconfig;
 
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryRegistryUtil;
-import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFProjectLibraryReference;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryReference;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistry;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryFactory;
@@ -36,24 +36,24 @@ public class JSFLibraryRegistryUtilTestCases extends TestCase {
 	}
 
 	public void testGetDefaultJSFImplementationLibrary() {
-		JSFProjectLibraryReference dftImplLib = libUtilInstance.getDefaultJSFImplementationLibrary();
+		JSFLibraryReference dftImplLib = libUtilInstance.getDefaultJSFImplementationLibrary();
 		Assert.assertNotNull(dftImplLib);
 		Assert.assertEquals(libReg.getDefaultImplementation().getID(), dftImplLib.getID());
 	}
 
 	public void testGetJSFLibryReferencebyID() {
-		JSFProjectLibraryReference lib = libUtilInstance.getJSFLibryReferencebyID(libReg.getDefaultImplementationID());
+		JSFLibraryReference lib = libUtilInstance.getJSFLibraryReferencebyID(libReg.getDefaultImplementationID());
 		Assert.assertNotNull(lib);
 		Assert.assertEquals(libReg.getDefaultImplementation().getID(), lib.getID());
 	}
 
 	public void testAddJSFLibrary() {
 		JSFLibrary jsfLib = JSFLibraryRegistryFactory.eINSTANCE.createJSFLibrary();		
-		jsfLib.setID("124365879");
+//		jsfLib.setID("124365879");
 		jsfLib.setName("A_COMP_LIB");
 		jsfLib.setImplementation(false);
 				
-		JSFProjectLibraryReference jsfLibRef = new JSFProjectLibraryReference(jsfLib, 
+		JSFLibraryReference jsfLibRef = new JSFLibraryReference(jsfLib, 
 	   											   			false,	// selected 
 	   											   			false);	// to be deployed
 		Assert.assertTrue(libReg.getNonImplJSFLibraries().size() == numCompLibs);

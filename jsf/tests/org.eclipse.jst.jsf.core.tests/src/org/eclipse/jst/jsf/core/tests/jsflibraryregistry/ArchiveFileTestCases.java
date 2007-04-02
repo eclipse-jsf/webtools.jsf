@@ -50,7 +50,7 @@ public class ArchiveFileTestCases extends TestCase {
 
 	public void testArchiveFile() {		
 		JSFLibrary jsfLib = JSFLibraryRegistryFactory.eINSTANCE.createJSFLibrary();		
-		jsfLib.setID("Myfaces");
+//		jsfLib.setID("Myfaces");
 		jsfLib.setName("Myfaces");
 		
 		ArchiveFile archiveFile = null;	

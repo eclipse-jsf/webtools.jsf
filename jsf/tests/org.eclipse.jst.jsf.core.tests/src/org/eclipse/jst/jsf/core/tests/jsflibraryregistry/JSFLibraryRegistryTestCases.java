@@ -122,8 +122,8 @@ public class JSFLibraryRegistryTestCases extends TestCase {
 		JSFLibraryRegistry jsfLibRegistry = JSFCoreUtilHelper.getNewJSFLibraryRegistry();
 		JSFLibrary lib = JSFCoreUtilHelper.constructJSFLib("lib", "testfiles/JSFLib", true, false);
 		jsfLibRegistry.addJSFLibrary(lib);
-		String libID = "myNewID";
-		lib.setID(libID);
+		String libID = "lib";
+//		lib.setID(libID);
 		Assert.assertEquals(lib, jsfLibRegistry.getJSFLibraryByID(libID));
 	}
 
