@@ -14,9 +14,9 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.wst.common.frameworks,
  org.eclipse.jdt.core;visibility:=reexport,
  org.junit,
- org.eclipse.wst.internet.proxy,
  org.eclipse.wst.common.core,
  org.eclipse.wst.validation,
- org.eclipse.wst.internet.cache
+ org.eclipse.wst.internet.cache,
+ org.eclipse.core.net
 Export-Package: org.eclipse.jst.jsf.test.util
 Eclipse-LazyStart: true

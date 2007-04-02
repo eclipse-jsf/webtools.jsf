@@ -2,9 +2,11 @@ package org.eclipse.jst.jsf.test.util;
 
 import java.lang.reflect.InvocationTargetException;
 
-import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.wst.internet.cache.internal.CacheMessages;
-import org.eclipse.wst.internet.internal.proxy.InternetPlugin;
+import org.eclipse.core.internal.net.ProxyData;
+import org.eclipse.core.internal.net.ProxyManager;
+import org.eclipse.core.net.proxy.IProxyData;
+import org.eclipse.core.net.proxy.IProxyService;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.wst.validation.internal.ConfigurationManager;
 import org.eclipse.wst.validation.internal.GlobalConfiguration;
 import org.osgi.framework.Bundle;
@@ -39,24 +41,40 @@ public class JSFTestUtil
      */
     public static void setInternetProxyPreferences(final boolean proxied, final String proxyHostName, final String proxyPort)
     {
-        InternetPlugin plugin = InternetPlugin.getInstance();
+        IProxyService proxy = ProxyManager.getProxyManager();
+//        InternetPlugin plugin = InternetPlugin.getInstance();
 
         if (proxied)
         {
-            // setup local proxy
-            System.setProperty(CacheMessages.WTP_NO_USER_INTERACTION_SYSTEM_PROP, "true");
-            IPreferenceStore prefStore = plugin.getPreferenceStore();
-            prefStore.setValue( InternetPlugin.PREFERENCE_PROXYCHECKED, true);
-            prefStore.setValue( InternetPlugin.PREFERENCE_SOCKSCHECKED, false );
-            prefStore.setValue("http.proxySet", true);
-            prefStore.setValue(InternetPlugin.PREFERENCE_HOSTNAME, proxyHostName);
-            prefStore.setValue(InternetPlugin.PREFERENCE_PORT, proxyPort);
-            plugin.updateProxyProperties();
+            ProxyData proxyData = new ProxyData(IProxyData.HTTP_PROXY_TYPE);
+            proxyData.setHost(proxyHostName);
+            proxyData.setPassword(proxyPort);
+            try
+            {
+                proxy.setProxyData(new ProxyData[] {proxyData});
+                proxy.setProxiesEnabled(true);
+            }
+            catch (CoreException ce)
+            {
+                // TODO: is this recoverable? Maybe should throw up.
+                Activator.log("Error setting web proxy.  Tests may fail or take a long time to run", ce);
+            }
+
+             // setup local proxy
+//            System.setProperty(CacheMessages.WTP_NO_USER_INTERACTION_SYSTEM_PROP, "true");
+//            IPreferenceStore prefStore = plugin.getPreferenceStore();
+//            prefStore.setValue(InternetPlugin.PREFERENCE_PROXYCHECKED, true);
+//            prefStore.setValue(InternetPlugin.PREFERENCE_SOCKSCHECKED, false);
+//            prefStore.setValue("http.proxySet", true);
+//            prefStore.setValue(InternetPlugin.PREFERENCE_HOSTNAME, proxyHostName);
+//            prefStore.setValue(InternetPlugin.PREFERENCE_PORT, proxyPort);
+//            plugin.updateProxyProperties();
         }
         else
         {
-            System.setProperty(CacheMessages.WTP_NO_USER_INTERACTION_SYSTEM_PROP, "false");
-            plugin.updateProxyProperties();
+            proxy.setProxiesEnabled(false);
+//            System.setProperty(CacheMessages.WTP_NO_USER_INTERACTION_SYSTEM_PROP, "false");
+//            plugin.updateProxyProperties();
         }
     }
     

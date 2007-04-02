@@ -19,6 +19,5 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.jst.jsp.core,
  org.eclipse.wst.validation,
  org.eclipse.wst.internet.cache,
- org.eclipse.wst.internet.proxy,
  org.eclipse.jface.text
 Eclipse-LazyStart: true
