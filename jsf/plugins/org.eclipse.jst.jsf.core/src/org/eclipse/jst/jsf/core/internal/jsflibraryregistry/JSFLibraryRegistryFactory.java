@@ -34,7 +34,7 @@ public interface JSFLibraryRegistryFactory extends EFactory{
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	JSFLibraryRegistryFactory eINSTANCE = new org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl.JSFLibraryRegistryFactoryImpl();
+	JSFLibraryRegistryFactory eINSTANCE = org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl.JSFLibraryRegistryFactoryImpl.init();
 
 	/**
 	 * Returns a new object of class '<em>JSF Library Registry</em>'.

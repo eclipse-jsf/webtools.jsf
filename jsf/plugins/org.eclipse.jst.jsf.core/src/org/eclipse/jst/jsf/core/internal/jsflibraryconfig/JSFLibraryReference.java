@@ -18,7 +18,7 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
  * 
  * @author Justin Chen - Oracle
  */
-public class JSFProjectLibraryReference {
+public class JSFLibraryReference {
 	final private JSFLibrary jsfLib;
 	private boolean check4Deploy;			// Initialized from default in workspace
 	private boolean selected; 				// selected for project
@@ -29,7 +29,7 @@ public class JSFProjectLibraryReference {
 	 * @param selected boolean  true if selected, otherwise, not selected.
 	 * @param deploy boolean  true if needs to be deployed, otherwise, won't be deployed.
 	 */
-	public JSFProjectLibraryReference(JSFLibrary jsfLib, boolean selected, boolean deploy) {
+	public JSFLibraryReference(JSFLibrary jsfLib, boolean selected, boolean deploy) {
 		this.jsfLib = jsfLib;
 		this.selected = selected;
 		this.check4Deploy = deploy;		

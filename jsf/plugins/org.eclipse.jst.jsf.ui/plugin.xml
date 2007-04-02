@@ -27,30 +27,8 @@
            hasPages="true"
            icon="icons/obj16/library_obj.gif"
            id="org.eclipse.jst.jsf.ui.jsfLibraryWizard"
-           name="%jsf.library.wizard.name"
+           name="JSF Library"
            preferredPerspectives="org.eclipse.jst.j2ee.J2EEPerspective"/>
-  </extension>
-  <extension 
-  		point="org.eclipse.ui.propertyPages">
-     <page
-           adaptable="true"
-           class="org.eclipse.jst.jsf.ui.internal.jsflibraryconfig.JSFLibraryPropertyPage"
-           id="org.eclipse.jst.jsf.ui.properties.jsfLibraryPropertyPage"
-           name="%jsf.library.reference"
-           objectClass="org.eclipse.core.resources.IProject">
-        <enabledWhen>
-           <and>
-              <adapt type="org.eclipse.core.resources.IProject">
-                 <or>
-                    <test
-                          forcePluginActivation="true"
-                          property="org.eclipse.wst.common.project.facet.core.projectFacet"
-                          value="jst.jsf"/>
-                 </or>
-              </adapt>
-           </and>
-        </enabledWhen>
-     </page>
   </extension>
   <extension 
         point="org.eclipse.wst.common.project.facet.ui.wizardPages">
@@ -93,5 +71,13 @@
 			</contentTypeIdentifier>
 		</validator>
 	</extension>
+    <extension
+          point="org.eclipse.jdt.ui.classpathContainerPage">
+       <classpathContainerPage
+             class="org.eclipse.jst.jsf.ui.internal.classpath.JSFLibraryContainerWizardPage"
+             id="org.eclipse.jst.jsf.core.internal.jsflibrarycontainer"
+             name="JSF Libraries">
+       </classpathContainerPage>
+    </extension>
     
 </plugin>

@@ -27,6 +27,7 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jface.viewers.ViewerComparator;
 import org.eclipse.jface.window.Window;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
@@ -87,6 +88,7 @@ public class JSFLibrariesPreferencePage extends PreferencePage implements IWorkb
 		tv.setLabelProvider(tvLabelProvider);
 		tv.addSelectionChangedListener(tvAdapter);
 		tv.addDoubleClickListener(tvAdapter);
+		tv.setComparator(tvAdapter);
 		tv.getTree().setLayoutData(new GridData(GridData.FILL_BOTH));
 		tv.setInput(getJSFLibraries());
 		
@@ -198,7 +200,7 @@ public class JSFLibrariesPreferencePage extends PreferencePage implements IWorkb
 		return tv;
 	}
 	
-	private class TreeViewerAdapter implements ITreeContentProvider, ISelectionChangedListener, IDoubleClickListener {
+	private class TreeViewerAdapter extends ViewerComparator implements ITreeContentProvider, ISelectionChangedListener, IDoubleClickListener {
 		private final Object[] NO_ELEMENTS= new Object[0];
 
 		// ------- ITreeContentProvider Interface ------------
@@ -252,6 +254,18 @@ public class JSFLibrariesPreferencePage extends PreferencePage implements IWorkb
 		public void doubleClick(DoubleClickEvent event) {
 			doDoubleClick(event);
 		}		
+		
+		public int compare(Viewer viewer, Object e1, Object e2) {
+			if (e1 instanceof JSFLibrary && e2 instanceof JSFLibrary){
+				JSFLibrary lib1 = (JSFLibrary)e1;
+				JSFLibrary lib2 = (JSFLibrary)e2;
+				
+				return getComparator().compare(lib1.getName(), lib2.getName());
+			}
+			return super.compare(viewer, e1, e2);
+		}
+		
+		
 	}
 
 	protected void doListSelected(SelectionChangedEvent event) {

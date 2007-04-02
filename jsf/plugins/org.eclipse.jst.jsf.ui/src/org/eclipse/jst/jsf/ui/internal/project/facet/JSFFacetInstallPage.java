@@ -21,13 +21,14 @@ import org.eclipse.jface.dialogs.IInputValidator;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.window.Window;
 import org.eclipse.jst.j2ee.project.facet.IJ2EEModuleFacetInstallDataModelProperties;
-import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfigDialogSettingData;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfiglModelSource;
-import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFProjectLibraryReference;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryReference;
 import org.eclipse.jst.jsf.core.internal.project.facet.IJSFFacetInstallDataModelProperties;
 import org.eclipse.jst.jsf.ui.internal.JSFUiPlugin;
 import org.eclipse.jst.jsf.ui.internal.Messages;
+import org.eclipse.jst.jsf.ui.internal.jsflibraryconfig.JSFLibraryConfigControlChangeEvent;
+import org.eclipse.jst.jsf.ui.internal.jsflibraryconfig.JSFLibraryConfigControlChangeListener;
 import org.eclipse.jst.jsf.ui.internal.jsflibraryconfig.IJSFImplLibraryCreationListener;
 import org.eclipse.jst.jsf.ui.internal.jsflibraryconfig.JSFImplLibraryCreationEvent;
 import org.eclipse.jst.jsf.ui.internal.jsflibraryconfig.JSFLibraryConfigControl;
@@ -64,6 +65,8 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 	private Text txtJSFConfig;
 	private Label lblJSFServletName;
 	private Text txtJSFServletName;
+	private Label lblJSFServletClassName;
+	private Text txtJSFServletClassName;	
 	private Label lblJSFServletURLPatterns;
 	private List lstJSFServletURLPatterns;
 	private Button btnAddPattern;
@@ -75,6 +78,7 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 			+ ".jsfFacetInstall"; //$NON-NLS-1$
 	private static final String SETTINGS_CONFIG = "configPath"; //$NON-NLS-1$
 	private static final String SETTINGS_SERVLET = "servletName"; //$NON-NLS-1$
+	private static final String SETTINGS_SERVLET_CLASSNAME = "servletClassname"; //$NON-NLS-1$
 	private static final String SETTINGS_URL_MAPPINGS = "urlMappings"; //$NON-NLS-1$
 	private static final String SETTINGS_URL_PATTERN = "pattern"; //$NON-NLS-1$
 	private static final String SETTINGS_DEPLOY_IMPL = "deployImplementation"; //$NON-NLS-1$
@@ -133,6 +137,13 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 					}
 				});
 
+		jsfLibCfgComp.addChangeListener( new JSFLibraryConfigControlChangeListener(){
+
+			public void changed(JSFLibraryConfigControlChangeEvent e) {
+				validatePage();				
+			}
+			
+		});
 		GridData gd_comp = new GridData(GridData.FILL, GridData.FILL, true,
 				true);
 		gd_comp.horizontalSpan = 2;
@@ -158,6 +169,16 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 		gd2.horizontalSpan = 2;
 		txtJSFServletName.setLayoutData(gd2);
 
+		lblJSFServletClassName = new Label(composite, SWT.NONE);
+		lblJSFServletClassName
+				.setText(Messages.JSFFacetInstallPage_JSFServletClassNameLabel);
+		lblJSFServletClassName.setLayoutData(new GridData(GridData.BEGINNING));
+
+		txtJSFServletClassName = new Text(composite, SWT.BORDER);
+		GridData gd2c = new GridData(GridData.FILL_HORIZONTAL);
+		gd2c.horizontalSpan = 2;
+		txtJSFServletClassName.setLayoutData(gd2c);
+		
 		lblJSFServletURLPatterns = new Label(composite, SWT.NULL);
 		lblJSFServletURLPatterns
 				.setText(Messages.JSFFacetInstallPage_JSFURLMappingLabel);
@@ -249,6 +270,15 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 		}
 		txtJSFServletName.setText(servletName);
 
+		String servletClassname = null;
+		if (root != null)
+			servletClassname = root.get(SETTINGS_SERVLET_CLASSNAME);
+		if (servletClassname == null || servletClassname.equals("")) { //$NON-NLS-1$
+			servletClassname = (String) model
+					.getDefaultProperty(IJSFFacetInstallDataModelProperties.SERVLET_CLASSNAME);
+		}
+		txtJSFServletClassName.setText(servletClassname);
+
 		loadURLMappingPatterns(root);
 	}
 
@@ -278,6 +308,7 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 		jsfLibCfgComp.loadControlValuesFromModel(source);
 	}
 
+	
 	private void saveSettings() {
 		DialogSettings root = new DialogSettings(SETTINGS_ROOT);
 		dialogSettings.addSection(root);
@@ -285,6 +316,7 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 		root.put(SETTINGS_DEPLOY_IMPL, String.valueOf(getDeployJSFImpl()));
 		root.put(SETTINGS_CONFIG, getJSFConfig());
 		root.put(SETTINGS_SERVLET, getJSFServletName());
+		root.put(SETTINGS_SERVLET_CLASSNAME, getJSFServletClassname());
 		DialogSettings mappings = new DialogSettings(SETTINGS_URL_MAPPINGS);
 		root.addSection(mappings);
 		mappings.put(SETTINGS_URL_PATTERN, getJSFPatterns());
@@ -310,6 +342,10 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 		return txtJSFServletName.getText().trim();
 	}
 
+	private String getJSFServletClassname() {
+		return txtJSFServletClassName.getText().trim();
+	}
+	
 	private String[] getJSFPatterns() {
 		return lstJSFServletURLPatterns.getItems();
 	}
@@ -319,14 +355,14 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 		 * Iterate thru the selected component libraries and return selected
 		 * component libraries and their deployment flags in a string array.
 		 */
-		JSFProjectLibraryReference complib = null;
+		JSFLibraryReference complib = null;
 		String str = null;
 		ArrayList al = new ArrayList();
 
 		java.util.List list = jsfLibCfgComp.getSelectedJSFLibComponents();
 		Iterator it = list.iterator();
 		while (it.hasNext()) {
-			complib = (JSFProjectLibraryReference) it.next();
+			complib = (JSFLibraryReference) it.next();
 			str = complib.getID() + SEPARATOR + complib.isCheckedToBeDeployed();
 			al.add(str);
 		}
@@ -359,40 +395,35 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 		// do nothing else now. being handled by synchHelper
 		// config.setProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION,
 		// getJSFImpl());
-		model
-				.setStringProperty(
-						IJSFFacetInstallDataModelProperties.CONFIG_PATH,
-						getJSFConfig());
-		model.setStringProperty(
-				IJSFFacetInstallDataModelProperties.SERVLET_NAME,
-				getJSFServletName());
+//		model
+//				.setStringProperty(
+//						IJSFFacetInstallDataModelProperties.CONFIG_PATH,
+//						getJSFConfig());
+//		model.setStringProperty(
+//				IJSFFacetInstallDataModelProperties.SERVLET_NAME,
+//				getJSFServletName());
 		// config.setProperty(IJSFFacetInstallDataModelProperties.SERVLET_URL_PATTERNS,
 		// getJSFPatterns());
 
-		java.util.List implLibs = new ArrayList();
-		implLibs.add(jsfLibCfgComp.getSelectedJSFLibImplementation());
-		java.util.List compLibs = jsfLibCfgComp.getSelectedJSFLibComponents();
-		model.setProperty(
-				IJSFFacetInstallDataModelProperties.IMPLEMENTATION_LIBRARIES,
-				implLibs);
-		model.setProperty(
-				IJSFFacetInstallDataModelProperties.COMPONENT_LIBRARIES,
-				compLibs);
+//		java.util.List implLibs = new ArrayList();
+//		implLibs.add(jsfLibCfgComp.getSelectedJSFLibImplementation());
+//		java.util.List compLibs = jsfLibCfgComp.getSelectedJSFLibComponents();
+//		model.setProperty(
+//				IJSFFacetInstallDataModelProperties.IMPLEMENTATION_LIBRARIES,
+//				implLibs);
+//		model.setProperty(
+//				IJSFFacetInstallDataModelProperties.COMPONENT_LIBRARIES,
+//				compLibs);
 	}
 
 	private void addModificationListeners() {
-		// 119330 - enhancement request for ComboViewer support. Manually update
-		// model for now
-		// addJSFImplComboListeners();
-		// synchHelper.synchComboViewer(cboJSFImplViewer, IMPLEMENTATION, null);
-		// synchHelper.synchText(txtJSFConfig, CONFIG_PATH, null);
-		// synchHelper.synchText(txtJSFServletName, SERVLET_NAME, null);
+		 jsfLibCfgComp.setSynchHelper(synchHelper);		 
+		 synchHelper.synchText(txtJSFConfig, CONFIG_PATH, null);
+		 synchHelper.synchText(txtJSFServletName, SERVLET_NAME, null);
+		 synchHelper.synchText(txtJSFServletClassName, SERVLET_CLASSNAME, null);
+		 synchHelper.synchList(lstJSFServletURLPatterns, SERVLET_URL_PATTERNS, null);
+		 
 		// synchHelper.synchCheckbox(chkDeployImpl, DEPLOY_IMPLEMENTATION,
-		// null);
-		// Until 119321 is fixed, need to comment out below and handle model
-		// updates 'manually'.
-		// This is being done on Add and Remove, currently
-		// synchHelper.synchList(lstJSFServletURLPatterns, SERVLET_URL_PATTERNS,
 		// null);
 	}
 
@@ -447,11 +478,17 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 				lstJSFServletURLPatterns.getItems());
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.wst.common.frameworks.internal.datamodel.ui.DataModelWizardPage#getValidationPropertyNames()
+	 */
 	protected String[] getValidationPropertyNames() {
 		return new String[] { IMPLEMENTATION, DEPLOY_IMPLEMENTATION,
-				CONFIG_PATH, SERVLET_NAME };
+				CONFIG_PATH, SERVLET_NAME, SERVLET_CLASSNAME, COMPONENT_LIBRARIES };
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.wst.common.project.facet.ui.IFacetWizardPage#setWizardContext(org.eclipse.wst.common.project.facet.ui.IWizardContext)
+	 */
 	public void setWizardContext(IWizardContext context) {
 		// hook into web datamodel if new project wizard.
 		Iterator it = context.getSelectedProjectFacets().iterator();
@@ -479,6 +516,9 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.wst.common.frameworks.internal.datamodel.ui.DataModelWizardPage#propertyChanged(org.eclipse.wst.common.frameworks.datamodel.DataModelEvent)
+	 */
 	public void propertyChanged(DataModelEvent event) {
 		if (webAppDataModel != null) {
 			String propertyName = event.getPropertyName();
@@ -491,12 +531,20 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 		super.propertyChanged(event);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.wst.common.frameworks.internal.datamodel.ui.DataModelWizardPage#dispose()
+	 */
 	public void dispose() {
 		if (webAppDataModel != null)
 			webAppDataModel.removeListener(this);
+		
+		jsfLibCfgComp.dispose();
 		super.dispose();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.wst.common.frameworks.internal.datamodel.ui.DataModelWizardPage#restoreDefaultSettings()
+	 */
 	protected void restoreDefaultSettings() {
 		initializeValues();
 
@@ -514,5 +562,13 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 		} 
 		setPageComplete(enableFinish);
 	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.wst.common.frameworks.internal.datamodel.ui.DataModelWizardPage#showValidationErrorsOnEnter()
+	 */
+	protected boolean showValidationErrorsOnEnter() {
+		return true;
+	}
+
 
 }

@@ -86,7 +86,7 @@ public final class JSFVersion extends AbstractEnumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final JSFVersion V1_1_LITERAL = new JSFVersion(V1_1, "v1_1");
+	public static final JSFVersion V1_1_LITERAL = new JSFVersion(V1_1, "v1_1", "v1_1");
 
 	/**
 	 * The '<em><b>V1 2</b></em>' literal object.
@@ -96,7 +96,7 @@ public final class JSFVersion extends AbstractEnumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final JSFVersion V1_2_LITERAL = new JSFVersion(V1_2, "v1_2");
+	public static final JSFVersion V1_2_LITERAL = new JSFVersion(V1_2, "v1_2", "v1_2");
 
 	/**
 	 * The '<em><b>UNKNOWN</b></em>' literal object.
@@ -106,7 +106,7 @@ public final class JSFVersion extends AbstractEnumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final JSFVersion UNKNOWN_LITERAL = new JSFVersion(UNKNOWN, "UNKNOWN");
+	public static final JSFVersion UNKNOWN_LITERAL = new JSFVersion(UNKNOWN, "UNKNOWN", "UNKNOWN");
 
 	/**
 	 * An array of all the '<em><b>JSF Version</b></em>' enumerators.
@@ -130,17 +130,17 @@ public final class JSFVersion extends AbstractEnumerator {
 	public static final List VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the '<em><b>JSF Version</b></em>' literal with the specified name.
+	 * Returns the '<em><b>JSF Version</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
-	 * @param name 
+	 * @param literal value
 	 * @return the JSF version for name value 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static JSFVersion get(String name) {
+	public static JSFVersion get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
 			JSFVersion result = VALUES_ARRAY[i];
-			if (result.toString().equals(name)) {
+			if (result.toString().equals(literal)) {
 				return result;
 			}
 		}
@@ -148,7 +148,25 @@ public final class JSFVersion extends AbstractEnumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>JSF Version</b></em>' literal with the specified value.
+	 * Returns the '<em><b>JSF Version</b></em>' literal with the specified name.
+	 * <!-- begin-user-doc -->
+	 * @param name 
+	 * @return JSFVersion
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static JSFVersion getByName(String name) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+			JSFVersion result = VALUES_ARRAY[i];
+			if (result.getName().equals(name)) {
+				return result;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Returns the '<em><b>JSF Version</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
 	 * @param value 
 	 * @return the JSFVersion for the integer 'value' 
@@ -161,7 +179,7 @@ public final class JSFVersion extends AbstractEnumerator {
 			case V1_2: return V1_2_LITERAL;
 			case UNKNOWN: return UNKNOWN_LITERAL;
 		}
-		return null;	
+		return null;
 	}
 
 	/**
@@ -170,8 +188,8 @@ public final class JSFVersion extends AbstractEnumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private JSFVersion(int value, String name) {
-		super(value, name);
+	private JSFVersion(int value, String name, String literal) {
+		super(value, name, literal);
 	}
 
 	/**

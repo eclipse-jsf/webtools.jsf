@@ -31,6 +31,7 @@ public class Messages extends NLS {
 	public static String JSFFacetInstallPage_DeployJarsLabel;
 	public static String JSFFacetInstallPage_JSFConfigLabel;
 	public static String JSFFacetInstallPage_JSFServletNameLabel;
+	public static String JSFFacetInstallPage_JSFServletClassNameLabel;
 	public static String JSFFacetInstallPage_JSFURLMappingLabel;
 	public static String JSFFacetInstallPage_PatternDialogTitle;
 	public static String JSFFacetInstallPage_PatternDialogDesc;
@@ -80,7 +81,10 @@ public class Messages extends NLS {
 	public static String JSFLibraryContainerWizardPage_WarningNoJSFFacet;
 	public static String JSFLibraryContainerWizardPage_JSFLibraries;
 	public static String JSFLibraryContainerWizardPage_Add;
+	public static String JSFLibraryContainerWizardPage_Edit;
 	public static String JSFLibraryContainerWizardPage_ErrorInitializing;
+	public static String JSFLibraryContainerWizardPage_ImplAlreadyPresent;
+	public static String JSFLibraryContainerWizardPage_SelectOneImpl;
 
 	public static String JSFLibraryPropertyPage_No_JSF_Facet_Installed;
 

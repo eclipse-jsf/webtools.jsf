@@ -10,9 +10,12 @@
  *******************************************************************************/ 
 package org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -23,12 +26,21 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.jdt.core.IAccessRule;
+import org.eclipse.jdt.core.IClasspathAttribute;
+import org.eclipse.jdt.core.IClasspathEntry;
+import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jdt.internal.core.ClasspathEntry;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.ArchiveFile;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryFactory;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryPackage;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFVersion;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.adapter.MaintainDefaultImplementationAdapter;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * <!-- begin-user-doc -->
@@ -176,8 +188,8 @@ public class JSFLibraryImpl extends EObjectImpl implements JSFLibrary {
 	 */
 	protected JSFLibraryImpl() {
 		super();
-		//set initial ID; will be overwritten from XML if already persisted
-		setID(String.valueOf(System.currentTimeMillis()));
+//		//set initial ID; will be overwritten from XML if already persisted
+//		setID(String.valueOf(System.currentTimeMillis()));
 		//add adapter to maintain a default implementation
 		eAdapters().add(MaintainDefaultImplementationAdapter.getInstance());
 	}
@@ -189,30 +201,16 @@ public class JSFLibraryImpl extends EObjectImpl implements JSFLibrary {
 	 * @generated
 	 */
 	protected EClass eStaticClass() {
-		return JSFLibraryRegistryPackage.eINSTANCE.getJSFLibrary();
+		return JSFLibraryRegistryPackage.Literals.JSF_LIBRARY;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * @return the id 
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public String getID() {
-		return id;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * @param newID 
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setID(String newID) {
-		String oldID = id;
-		id = newID;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, JSFLibraryRegistryPackage.JSF_LIBRARY__ID, oldID, id));
+		return getName();
 	}
 
 	/**
@@ -351,7 +349,7 @@ public class JSFLibraryImpl extends EObjectImpl implements JSFLibrary {
 	 */
 	public JSFLibrary getWorkingCopy() {
 		JSFLibrary workingCopyLib = JSFLibraryRegistryFactory.eINSTANCE.createJSFLibrary();
-		workingCopyLib.setID(getID());
+//		workingCopyLib.setID(getID());
 		workingCopyLib.setName(getName());
 		workingCopyLib.setJSFVersion(getJSFVersion());
 		workingCopyLib.setDeployed(isDeployed());
@@ -376,7 +374,7 @@ public class JSFLibraryImpl extends EObjectImpl implements JSFLibrary {
 	 */
 	public void updateValues(JSFLibrary otherLibrary) {
 		if (otherLibrary != null) {
-			setID(otherLibrary.getID());
+//			setID(otherLibrary.getID());
 			setName(otherLibrary.getName());
 			setJSFVersion(otherLibrary.getJSFVersion());
 			setDeployed(otherLibrary.isDeployed());
@@ -414,60 +412,37 @@ public class JSFLibraryImpl extends EObjectImpl implements JSFLibrary {
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * @param otherEnd 
-	 * @param featureID 
-	 * @param baseClass 
-	 * @param msgs 
-	 * @return the notification chain 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case JSFLibraryRegistryPackage.JSF_LIBRARY__ARCHIVE_FILES:
-					return ((InternalEList)getArchiveFiles()).basicAdd(otherEnd, msgs);
-				default:
-					return eDynamicInverseAdd(otherEnd, featureID, baseClass, msgs);
-			}
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case JSFLibraryRegistryPackage.JSF_LIBRARY__ARCHIVE_FILES:
+				return ((InternalEList)getArchiveFiles()).basicAdd(otherEnd, msgs);
 		}
-		if (eContainer != null)
-			msgs = eBasicRemoveFromContainer(msgs);
-		return eBasicSetContainer(otherEnd, featureID, msgs);
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * @param otherEnd 
-	 * @param featureID 
-	 * @param baseClass 
-	 * @param msgs 
-	 * @return the notification chain 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case JSFLibraryRegistryPackage.JSF_LIBRARY__ARCHIVE_FILES:
-					return ((InternalEList)getArchiveFiles()).basicRemove(otherEnd, msgs);
-				default:
-					return eDynamicInverseRemove(otherEnd, featureID, baseClass, msgs);
-			}
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case JSFLibraryRegistryPackage.JSF_LIBRARY__ARCHIVE_FILES:
+				return ((InternalEList)getArchiveFiles()).basicRemove(otherEnd, msgs);
 		}
-		return eBasicSetContainer(null, featureID, msgs);
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * @param eFeature 
-	 * @param resolve 
-	 * @return the value of the indicated feature 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Object eGet(EStructuralFeature eFeature, boolean resolve) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
 			case JSFLibraryRegistryPackage.JSF_LIBRARY__ID:
 				return getID();
 			case JSFLibraryRegistryPackage.JSF_LIBRARY__NAME:
@@ -481,21 +456,16 @@ public class JSFLibraryImpl extends EObjectImpl implements JSFLibrary {
 			case JSFLibraryRegistryPackage.JSF_LIBRARY__ARCHIVE_FILES:
 				return getArchiveFiles();
 		}
-		return eDynamicGet(eFeature, resolve);
+		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * @param eFeature 
-	 * @param newValue 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eSet(EStructuralFeature eFeature, Object newValue) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case JSFLibraryRegistryPackage.JSF_LIBRARY__ID:
-				setID((String)newValue);
-				return;
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
 			case JSFLibraryRegistryPackage.JSF_LIBRARY__NAME:
 				setName((String)newValue);
 				return;
@@ -513,20 +483,16 @@ public class JSFLibraryImpl extends EObjectImpl implements JSFLibrary {
 				getArchiveFiles().addAll((Collection)newValue);
 				return;
 		}
-		eDynamicSet(eFeature, newValue);
+		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * @param eFeature 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eUnset(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case JSFLibraryRegistryPackage.JSF_LIBRARY__ID:
-				setID(ID_EDEFAULT);
-				return;
+	public void eUnset(int featureID) {
+		switch (featureID) {
 			case JSFLibraryRegistryPackage.JSF_LIBRARY__NAME:
 				setName(NAME_EDEFAULT);
 				return;
@@ -543,18 +509,16 @@ public class JSFLibraryImpl extends EObjectImpl implements JSFLibrary {
 				getArchiveFiles().clear();
 				return;
 		}
-		eDynamicUnset(eFeature);
+		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * @param eFeature 
-	 * @return true if the feature's value is set 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean eIsSet(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
 			case JSFLibraryRegistryPackage.JSF_LIBRARY__ID:
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 			case JSFLibraryRegistryPackage.JSF_LIBRARY__NAME:
@@ -568,7 +532,7 @@ public class JSFLibraryImpl extends EObjectImpl implements JSFLibrary {
 			case JSFLibraryRegistryPackage.JSF_LIBRARY__ARCHIVE_FILES:
 				return archiveFiles != null && !archiveFiles.isEmpty();
 		}
-		return eDynamicIsSet(eFeature);
+		return super.eIsSet(featureID);
 	}
 
 	/**

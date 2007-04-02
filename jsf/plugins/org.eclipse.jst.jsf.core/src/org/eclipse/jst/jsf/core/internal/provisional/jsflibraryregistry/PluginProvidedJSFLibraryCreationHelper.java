@@ -68,7 +68,7 @@ public final class PluginProvidedJSFLibraryCreationHelper {
 	 */
 	public JSFLibrary create(){
 		PluginProvidedJSFLibrary newLib = JSFLibraryRegistryFactory.eINSTANCE.createPluginProvidedJSFLibrary();
-		newLib.setID(getLibID());
+//		newLib.setID(getLibID());
 		newLib.setPluginID(getPluginID());
 		newLib.setName(config_element.getAttribute(NAME));
 		newLib.setImplementation(config_element.getAttribute(IS_IMPL).equals("true") ? true : false); //$NON-NLS-1$		
@@ -124,18 +124,7 @@ public final class PluginProvidedJSFLibraryCreationHelper {
 			}
 		}
 	}
-
-	/**
-	 * Returns the JSFLibrary instance's ID as specified in the plugin.
-	 * 
-	 * @return The JSFLibrary instance's ID
-	 */
-	private String getLibID(){
-		StringBuffer buf = new StringBuffer(config_element.getDeclaringExtension().getUniqueIdentifier());
-		buf.append("/").append(config_element.getAttribute(NAME)); //$NON-NLS-1$
-		return buf.toString();
-	}
-
+	
 	/**
 	 * Returns the plugin's ID.
 	 * 

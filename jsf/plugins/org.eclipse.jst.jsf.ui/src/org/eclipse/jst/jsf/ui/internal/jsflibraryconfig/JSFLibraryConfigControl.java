@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006 Oracle Corporation.
+ * Copyright (c) 2006, 2007 Oracle Corporation.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,12 +12,17 @@ package org.eclipse.jst.jsf.ui.internal.jsflibraryconfig;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.EventObject;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.Vector;
 
+import org.eclipse.core.runtime.ISafeRunnable;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.util.SafeRunnable;
 import org.eclipse.jface.viewers.CheckStateChangedEvent;
 import org.eclipse.jface.viewers.CheckboxTableViewer;
 import org.eclipse.jface.viewers.ComboViewer;
@@ -42,17 +47,16 @@ import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfigModel;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfiglModelSource;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryReference;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryRegistryUtil;
-import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFProjectLibraryReference;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.ArchiveFile;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistry;
+import org.eclipse.jst.jsf.core.internal.project.facet.IJSFFacetInstallDataModelProperties;
 import org.eclipse.jst.jsf.ui.internal.JSFUiPlugin;
 import org.eclipse.jst.jsf.ui.internal.Messages;
 import org.eclipse.jst.jsf.ui.internal.classpath.JSFLibraryWizard;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.MouseAdapter;
-import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Image;
@@ -64,8 +68,11 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
+import org.eclipse.wst.common.frameworks.internal.datamodel.ui.DataModelSynchHelper;
 
 /**
  * A custom control used in wizard and property pages.
@@ -77,7 +84,6 @@ public class JSFLibraryConfigControl extends Composite {
 	final private int COLUMN_LIB_NAME = 1;
 
 	private JSFLibraryConfigModel workingCopyModel = null;
-	// TODO: never read private JSFLibraryConfiglModelSource persistentModel = null;
 	
 	private ComboViewer cvImplLib;
 	private CheckboxTableViewer ctvSelCompLib;
@@ -86,14 +92,60 @@ public class JSFLibraryConfigControl extends Composite {
 	private TreeViewerAdapter tvAdapter;
 	private TreeLabelProvider tvLabelProvider;
 	private Combo comboImplLib;
-		
-	private Vector newJSFLibCreatedListeners = new Vector();	
+	private Button btnAddAll;
+	private Button btnRemoveAll;
+	
+	private Vector newJSFLibCreatedListeners = new Vector();
+	private Set _changeListeners;
+	private boolean _initing;
+	private IDataModel model;	
 
+	/**
+	 * @param listener
+	 */
 	public void addOkClickedListener(IJSFImplLibraryCreationListener listener) {
 		newJSFLibCreatedListeners.addElement(listener);
 	}
+	/**
+	 * @param listener
+	 */
 	public void removeOkClickedListener(IJSFImplLibraryCreationListener listener) {
 		newJSFLibCreatedListeners.removeElement(listener);
+	}
+	
+	/**
+	 * @param listener
+	 */
+	public void addChangeListener(JSFLibraryConfigControlChangeListener listener){
+		getChangeListeners().add(listener);
+	}
+	
+	/**
+	 * @param listener
+	 */
+	public void removeChangeListener(JSFLibraryConfigControlChangeListener listener){
+		if (getChangeListeners().contains(listener))
+			getChangeListeners().remove(listener);
+	}
+	
+	private Set getChangeListeners() {
+		if (_changeListeners == null){
+			_changeListeners = new HashSet();
+		}
+		return _changeListeners;
+	}
+	
+	private void fireChangedEvent(final EventObject e){
+		if (_initing) return;
+		SafeRunnable.run(new ISafeRunnable(){
+			public void handleException(Throwable exception) {
+			}
+			public void run() throws Exception {
+				for (Iterator it=getChangeListeners().iterator();it.hasNext();){
+					((JSFLibraryConfigControlChangeListener)it.next()).changed(new JSFLibraryConfigControlChangeEvent(e));
+				}
+			}
+		});
 	}
 	
 	/**
@@ -103,7 +155,7 @@ public class JSFLibraryConfigControl extends Composite {
 	 */	
 	public JSFLibraryConfigControl(Composite parent, int style) {
 		super(parent, style);
-		
+		_initing = true;
 		createControls();
 	}	
 	
@@ -117,9 +169,11 @@ public class JSFLibraryConfigControl extends Composite {
 			// never read persistentModel = source;
 			workingCopyModel = JSFLibraryConfigModel.JSFLibraryConfigModelFactory.createInstance(source);
 			initializeControlValues();
+			_initing = false;
 		} else {
 			JSFUiPlugin.log(IStatus.ERROR, Messages.JSFLibraryConfigControl_NullProject);
 		}
+		
 	}
 		
 	/* (non-Javadoc)
@@ -128,13 +182,6 @@ public class JSFLibraryConfigControl extends Composite {
 	public void dispose() {
 		super.dispose();
 	}
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.swt.widgets.Composite#checkSubclass()
-	 */
-	protected void checkSubclass() {
-        // TODO: overriding sub-class checking? why?
-	}
 	
 	/**
 	 * Return current selected JSF Implementation Library.
@@ -142,7 +189,7 @@ public class JSFLibraryConfigControl extends Composite {
 	 *  
 	 * @return JSFLibraryDecorator
 	 */
-	public JSFProjectLibraryReference getSelectedJSFLibImplementation() {
+	public JSFLibraryReference getSelectedJSFLibImplementation() {
 		return workingCopyModel.getCurrentJSFImplementationLibrarySelection();
 	}
 	 
@@ -169,18 +216,18 @@ public class JSFLibraryConfigControl extends Composite {
 		
 		btnDeployJars.setSelection(false);
 		//JSFLibraryDecorator savedImplLib = persistentModel.getJSFImplementationLibrary();
-		JSFProjectLibraryReference savedImplLib = workingCopyModel.getSavedJSFImplementationLibrary();
+		JSFLibraryReference savedImplLib = workingCopyModel.getSavedJSFImplementationLibrary();
 		if ( savedImplLib != null ) {
 			/*
 			 * Get the input for the control to set selection.
 			 */
-			JSFProjectLibraryReference selected = JSFLibraryRegistryUtil.getInstance().getJSFLibryReferencebyID(savedImplLib.getID());
+			JSFLibraryReference selected = JSFLibraryRegistryUtil.getInstance().getJSFLibraryReferencebyID(savedImplLib.getID());
 			if (selected != null) {
 				btnDeployJars.setSelection(selected.isCheckedToBeDeployed());			
 				cvImplLib.setSelection(new StructuredSelection(selected), true);
 			}
 		} else {
-			JSFProjectLibraryReference dftJSFImplLib = JSFLibraryRegistryUtil.getInstance().getDefaultJSFImplementationLibrary();
+			JSFLibraryReference dftJSFImplLib = JSFLibraryRegistryUtil.getInstance().getDefaultJSFImplementationLibrary();
 			if (dftJSFImplLib != null) {			
 				btnDeployJars.setSelection(dftJSFImplLib.isCheckedToBeDeployed());	
 				cvImplLib.setSelection(new StructuredSelection(dftJSFImplLib), true);				
@@ -189,18 +236,19 @@ public class JSFLibraryConfigControl extends Composite {
 		
 		loadJSFCompList();
 
-		JSFProjectLibraryReference savedCompLib = null; 
-		JSFProjectLibraryReference selected = null;
+		JSFLibraryReference savedCompLib = null; 
+		JSFLibraryReference selected = null;
 		//Iterator it = persistentModel.getJSFComponentLibraries().iterator();
 		Iterator it = workingCopyModel.getJSFComponentLibraries().iterator();
 		while (it.hasNext()) {
-			savedCompLib = (JSFProjectLibraryReference) it.next();
-			selected = JSFLibraryRegistryUtil.getInstance().getJSFLibryReferencebyID(savedCompLib.getID());
+			savedCompLib = (JSFLibraryReference) it.next();
+			selected = JSFLibraryRegistryUtil.getInstance().getJSFLibraryReferencebyID(savedCompLib.getID());
 			if (selected != null) {
 				ctvSelCompLib.setChecked(selected, selected.isCheckedToBeDeployed());
 			}
 		}
-		
+
+		setCompListModelProperty();
 		redraw();
 	}
 	
@@ -213,12 +261,12 @@ public class JSFLibraryConfigControl extends Composite {
 		ctvSelCompLib.setInput(workingCopyModel.getJSFComponentLibraries());		
 	}
 	
-	private JSFProjectLibraryReference getCurrentSelectedJSFImplLib() {
-		JSFProjectLibraryReference selJSFImpl = null;
+	private JSFLibraryReference getCurrentSelectedJSFImplLib() {
+		JSFLibraryReference selJSFImpl = null;
 		StructuredSelection objs = (StructuredSelection)cvImplLib.getSelection();
 		if (objs != null){
-			if (objs.getFirstElement() instanceof JSFProjectLibraryReference){
-				selJSFImpl = (JSFProjectLibraryReference)objs.getFirstElement();
+			if (objs.getFirstElement() instanceof JSFLibraryReference){
+				selJSFImpl = (JSFLibraryReference)objs.getFirstElement();
 			}
 		}
 		return selJSFImpl;		
@@ -243,9 +291,13 @@ public class JSFLibraryConfigControl extends Composite {
 		btnDeployJars.setText(Messages.JSFLibraryConfigControl_DeployJAR);
 		btnDeployJars.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
-				JSFProjectLibraryReference jsflib = getCurrentSelectedJSFImplLib();
-				jsflib.setToBeDeployed(btnDeployJars.getSelection());
-				workingCopyModel.setCurrentJSFImplementationLibrarySelection(jsflib);
+				if (! _initing){
+					JSFLibraryReference jsflib = getCurrentSelectedJSFImplLib();
+					jsflib.setToBeDeployed(btnDeployJars.getSelection());
+					workingCopyModel.setCurrentJSFImplementationLibrarySelection(jsflib);//why r we doing this here???
+	//				model.setProperty(IJSFFacetInstallDataModelProperties.DEPLOY_IMPLEMENTATION, btnDeployJars.getSelection());
+					fireChangedEvent(e);
+				}
 			}
 		}
 		);
@@ -271,9 +323,11 @@ public class JSFLibraryConfigControl extends Composite {
 			new ISelectionChangedListener() {
 				public void selectionChanged(SelectionChangedEvent event) {
 					StructuredSelection ss = (StructuredSelection) event.getSelection();
-					JSFProjectLibraryReference crtSelImplLib = (JSFProjectLibraryReference) ss.getFirstElement();
+					JSFLibraryReference crtSelImplLib = (JSFLibraryReference) ss.getFirstElement();
 					crtSelImplLib.setToBeDeployed(btnDeployJars.getSelection());
 					workingCopyModel.setCurrentJSFImplementationLibrarySelection(crtSelImplLib);
+					model.setProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION, crtSelImplLib);
+					fireChangedEvent(event);
 				}
 			}
 		);
@@ -283,14 +337,14 @@ public class JSFLibraryConfigControl extends Composite {
 		btnNewImpl.setText(Messages.JSFLibraryConfigControl_NewImplementationLibrary);	
 		btnNewImpl.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
-				JSFLibraryWizard wizard = new JSFLibraryWizard(true);
+				JSFLibraryWizard wizard = new JSFLibraryWizard(JSFLibraryWizard.IMPLS);
 				IWorkbench wb = PlatformUI.getWorkbench();
 				wizard.init(wb, null);
 				WizardDialog dialog = new WizardDialog(wb
 						.getActiveWorkbenchWindow().getShell(), wizard);
 				int ret = dialog.open();
 				if (ret == Window.OK) {	
-					JSFProjectLibraryReference lib = new JSFProjectLibraryReference(wizard.getJSFLibrary(), true, true);
+					JSFLibraryReference lib = new JSFLibraryReference(wizard.getJSFLibrary(), true, true);
 					JSFLibraryRegistryUtil.getInstance().addJSFLibrary(lib);
 					workingCopyModel.getJSFImplementationLibraries().add(lib);
 					workingCopyModel.setCurrentJSFImplementationLibrarySelection(lib);
@@ -325,8 +379,15 @@ public class JSFLibraryConfigControl extends Composite {
 		tvLabelProvider = new TreeLabelProvider();
 		tvCompLib.setContentProvider(tvAdapter);
 		tvCompLib.setLabelProvider(tvLabelProvider);
-		tvCompLib.addSelectionChangedListener(tvAdapter);
-		tvCompLib.addDoubleClickListener(tvAdapter);
+		tvCompLib.addDoubleClickListener(new IDoubleClickListener(){
+			public void doubleClick(DoubleClickEvent event) {
+				resetComponentLibSelection((StructuredSelection)event.getSelection(), 
+						tvCompLib, 
+						ctvSelCompLib, 
+						true);	
+				fireChangedEvent(event);
+			}			
+		});
 		tvCompLib.getTree().setLayoutData(new GridData(GridData.FILL_BOTH));
 		tvCompLib.addFilter(new TreeViewerFilter());		
 		
@@ -343,22 +404,24 @@ public class JSFLibraryConfigControl extends Composite {
 		final Button btnAdd = new Button(composite_Single, SWT.NONE);
 		btnAdd.setLayoutData(new GridData(GridData.FILL, GridData.CENTER, true, false));
 		btnAdd.setText(Messages.JSFLibraryConfigControl_Add);
+		btnAdd.setEnabled(false);
 
 		final Button btnRemove = new Button(composite_Single, SWT.NONE);
 		btnRemove.setLayoutData(new GridData(GridData.FILL, GridData.CENTER, true, false));
 		btnRemove.setText(Messages.JSFLibraryConfigControl_Remove);
-
+		btnRemove.setEnabled(false);
+		
 		final Composite composite_All = new Composite(composite_buttons, SWT.None);
 		composite_All.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		final GridLayout gl_All = new GridLayout();
 		gl_Single.marginHeight = 4;
 		composite_All.setLayout(gl_All);
 		
-		final Button btnAddAll = new Button(composite_All, SWT.NONE);
+		btnAddAll = new Button(composite_All, SWT.NONE);
 		btnAddAll.setLayoutData(new GridData(GridData.FILL, GridData.CENTER, true, false));
 		btnAddAll.setText(Messages.JSFLibraryConfigControl_AddAll);
 
-		final Button btnRemoveAll = new Button(composite_All, SWT.NONE);
+		btnRemoveAll = new Button(composite_All, SWT.NONE);
 		btnRemoveAll.setLayoutData(new GridData(GridData.FILL, GridData.CENTER, true, false));
 		btnRemoveAll.setText(Messages.JSFLibraryConfigControl_RemoveAll);
 
@@ -373,14 +436,14 @@ public class JSFLibraryConfigControl extends Composite {
 		btnNewCompLib.setText(Messages.JSFLibraryConfigControl_NewComponentLibrary);		
 		btnNewCompLib.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
-				JSFLibraryWizard wizard = new JSFLibraryWizard(false);				
+				JSFLibraryWizard wizard = new JSFLibraryWizard(JSFLibraryWizard.NONIMPLS);				
 				IWorkbench wb = PlatformUI.getWorkbench();
-				wizard.init(wb, null, true);
+				wizard.init(wb, null);
 				WizardDialog dialog = new WizardDialog(wb
 						.getActiveWorkbenchWindow().getShell(), wizard);						
 				int ret = dialog.open();
 				if (ret == Window.OK) {
-					JSFProjectLibraryReference lib = new JSFProjectLibraryReference(
+					JSFLibraryReference lib = new JSFLibraryReference(
 							wizard.getJSFLibrary(), 
 							true, 
 							true);
@@ -388,6 +451,7 @@ public class JSFLibraryConfigControl extends Composite {
 					workingCopyModel.getJSFComponentLibraries().add(lib);
 					
 					loadJSFCompList();
+					setCompListModelProperty();
 					ctvSelCompLib.setChecked(lib, true);
 				}
 			}
@@ -409,51 +473,82 @@ public class JSFLibraryConfigControl extends Composite {
 		ctvSelCompLib.setSorter(new SelectedCompLibCTVSorter());
 		ctvSelCompLib.setLabelProvider(new SelectedCompLibCTVLabelProvider());
 		ctvSelCompLib.setContentProvider(new CompLibCTVContentProvider());
+		ctvSelCompLib.addDoubleClickListener(new IDoubleClickListener(){
+			public void doubleClick(DoubleClickEvent event) {
+				resetComponentLibSelection((StructuredSelection)event.getSelection(), 
+						tvCompLib, 
+						ctvSelCompLib, 
+						false);	
+				fireChangedEvent(event);
+			}			
+		});
 		ctvSelCompLib.addCheckStateListener(new ICheckStateListener() {
 			public void checkStateChanged(CheckStateChangedEvent event) {
-				JSFProjectLibraryReference changedItem = (JSFProjectLibraryReference) event.getElement();
+				JSFLibraryReference changedItem = (JSFLibraryReference) event.getElement();
 				boolean isChecked4Deploy = event.getChecked();
 				
 				List list = workingCopyModel.getJSFComponentLibraries();
 				Iterator it = list.iterator();
-				JSFProjectLibraryReference crtjsflib = null;
+				JSFLibraryReference crtjsflib = null;
 				while (it.hasNext()) {
-					crtjsflib = (JSFProjectLibraryReference) it.next();
+					crtjsflib = (JSFLibraryReference) it.next();
 					if (crtjsflib.getID().equals(changedItem.getID())) {
 						crtjsflib.setToBeDeployed(isChecked4Deploy);
+						fireChangedEvent(event);
 						break;
 					}
 				}
 			}
 		});
 		
-		btnAdd.addMouseListener(new MouseAdapter() {
-			public void mouseDown(MouseEvent e) {
+		btnAdd.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
 				resetComponentLibSelection((StructuredSelection)tvCompLib.getSelection(), 
 						tvCompLib, 
 						ctvSelCompLib, 
 						true);	
+				fireChangedEvent(e);
 			}
 		});
-		btnAddAll.addMouseListener(new MouseAdapter() {
-			public void mouseDown(MouseEvent e) {
+		
+		btnAddAll.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
 				resetCompontLibSelectionAll(tvCompLib, ctvSelCompLib, true);
+				fireChangedEvent(e);
 			}
 		});		
-		btnRemove.addMouseListener(new MouseAdapter() {
-			public void mouseDown(MouseEvent e) {
+		btnRemove.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
 				resetComponentLibSelection((StructuredSelection)ctvSelCompLib.getSelection(), 
 						tvCompLib, 
 						ctvSelCompLib, 
 						false);	
+				fireChangedEvent(e);
 			}
 		});
-		btnRemoveAll.addMouseListener(new MouseAdapter() {
-			public void mouseDown(MouseEvent e) {
+		
+		btnRemoveAll.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
 				resetCompontLibSelectionAll(tvCompLib, ctvSelCompLib, false);
+				fireChangedEvent(e);
 			}
 		});
-			
+		
+		tvCompLib.addSelectionChangedListener(new ISelectionChangedListener(){
+			public void selectionChanged(SelectionChangedEvent event) {
+				StructuredSelection sel= (StructuredSelection)event.getSelection();
+				btnAdd.setEnabled(!sel.isEmpty() && sel.getFirstElement() instanceof JSFLibraryReference);
+				btnAddAll.setEnabled(tvCompLib.getTree().getItemCount() > 0);
+			}			
+		});
+		
+		ctvSelCompLib.addSelectionChangedListener(new ISelectionChangedListener(){
+			public void selectionChanged(SelectionChangedEvent event) {
+				StructuredSelection sel= (StructuredSelection)event.getSelection();
+				btnRemove.setEnabled(!sel.isEmpty());
+				btnRemoveAll.setEnabled(ctvSelCompLib.getTable().getItemCount() > 0);
+			}			
+		});
 	}
 
 	/*
@@ -465,24 +560,32 @@ public class JSFLibraryConfigControl extends Composite {
 			TreeViewer srcViewer, 
 			CheckboxTableViewer destViewer,
 			boolean state) {
-		if (item != null && item.getFirstElement() != null) {
-			JSFProjectLibraryReference jsfLibDctr = (JSFProjectLibraryReference)item.getFirstElement();
-			List list = workingCopyModel.getJSFComponentLibraries();
-			Iterator it = list.iterator();
-			JSFProjectLibraryReference crtjsfLibDctr = null;
-			while(it.hasNext()) {
-				crtjsfLibDctr = (JSFProjectLibraryReference)it.next();
-				if (crtjsfLibDctr.getID().equals(jsfLibDctr.getID())) {
-					crtjsfLibDctr.setToBeDeployed(state);
-					crtjsfLibDctr.setSelected(state);
-				}
-			}					
+		if (item != null && !item.isEmpty()) {
+			List selected = new ArrayList(item.size());
+			for (Iterator sel=item.iterator();sel.hasNext();){
+				JSFLibraryReference jsfLibDctr = (JSFLibraryReference)sel.next();
+				selected.add(jsfLibDctr);
+				List list = workingCopyModel.getJSFComponentLibraries();
+				Iterator it = list.iterator();
+				JSFLibraryReference crtjsfLibDctr = null;
+				while(it.hasNext()) {
+					crtjsfLibDctr = (JSFLibraryReference)it.next();
+					if (crtjsfLibDctr.getID().equals(jsfLibDctr.getID())) {
+						crtjsfLibDctr.setToBeDeployed(state);
+						crtjsfLibDctr.setSelected(state);
+					}
+				}					
+			}
 						
 			loadJSFCompList();
 			
 			srcViewer.refresh();
 			destViewer.refresh();	
-			destViewer.setChecked(jsfLibDctr, state);
+			for (Iterator it=selected.iterator();it.hasNext();){
+				destViewer.setChecked(it.next(), state);
+			}
+			
+			setCompListModelProperty();
 		}		
 	}
 	
@@ -493,28 +596,56 @@ public class JSFLibraryConfigControl extends Composite {
 
 			List list = workingCopyModel.getJSFComponentLibraries();
 			Iterator it = list.iterator();
-			JSFProjectLibraryReference jsfLibDctr;
+			JSFLibraryReference jsfLibDctr;
 			while(it.hasNext()) {
-				jsfLibDctr = (JSFProjectLibraryReference)it.next();
+				jsfLibDctr = (JSFLibraryReference)it.next();
 				jsfLibDctr.setSelected(state);
 				jsfLibDctr.setToBeDeployed(state);
 			}				
 			
 			loadJSFCompList();
-			
+
 			srcViewer.refresh();
 			destViewer.refresh();
-			destViewer.setAllChecked(state);					
+			destViewer.setAllChecked(state);		
+			
+			btnAddAll.setEnabled(! state);
+			btnRemoveAll.setEnabled(state);
+			
+			setCompListModelProperty();
 	}
 	
+	//synchHelper is not able to track changes to data elements in tableviewer... manual set of property
+	private void setCompListModelProperty() {		
+		TableItem[] tableItems = ctvSelCompLib.getTable().getItems();
+		List compLibs = new ArrayList(tableItems.length);
+		for (int i=0;i<tableItems.length;i++){
+			compLibs.add(tableItems[i].getData());
+		}
+		JSFLibraryReference[] libs = (JSFLibraryReference[])compLibs.toArray(new JSFLibraryReference[0]);		
+		model.setProperty(IJSFFacetInstallDataModelProperties.COMPONENT_LIBRARIES, libs);		
+	}
+	
+
+	/**
+	 * Configure the JSFLibraryConfigControl elements to used the containers synchHelper
+	 * @param synchHelper
+	 */
+	public void setSynchHelper(DataModelSynchHelper synchHelper) {	
+		model = synchHelper.getDataModel();
+		synchHelper.synchCombo(cvImplLib.getCombo(), IJSFFacetInstallDataModelProperties.IMPLEMENTATION_LIBRARIES, null);
+		synchHelper.synchCheckbox(btnDeployJars, IJSFFacetInstallDataModelProperties.DEPLOY_IMPLEMENTATION, null);
+//		synchHelper.synchCheckBoxTableViewer(ctvSelCompLib, IJSFFacetInstallDataModelProperties.COMPONENT_LIBRARIES, new Control[]{hiddenList});
+	}
+
 	/**
 	 * 	Inner Classes for filtering.
 	 *
 	 */
 	class CheckedTableViewerFilter extends ViewerFilter {
 		public boolean select(Viewer viewer, Object parentElement, Object element) {
-			if (element instanceof JSFProjectLibraryReference) {
-				return ((JSFProjectLibraryReference)element).isSelected();
+			if (element instanceof JSFLibraryReference) {
+				return ((JSFLibraryReference)element).isSelected();
 			}
 			return false;
 		}
@@ -522,8 +653,8 @@ public class JSFLibraryConfigControl extends Composite {
 	class TreeViewerFilter extends ViewerFilter {
 
 		public boolean select(Viewer viewer, Object parentElement, Object element) {
-			if (element instanceof JSFProjectLibraryReference) {
-				return !((JSFProjectLibraryReference)element).isSelected();
+			if (element instanceof JSFLibraryReference) {
+				return !((JSFLibraryReference)element).isSelected();
 			}
 			return true;
 		}
@@ -532,7 +663,7 @@ public class JSFLibraryConfigControl extends Composite {
 	class CompLibCTVContentProvider implements IStructuredContentProvider {
 		private List jsfComplLibs = new ArrayList(0);
 		
-		public Object[] getElements(Object inputElement) {
+		public Object[] getElements(Object inputElement) {						
 			return jsfComplLibs.toArray();
 		}
 		public void dispose() {
@@ -567,13 +698,13 @@ public class JSFLibraryConfigControl extends Composite {
 	// Label Provider
 	class SelectedCompLibCTVLabelProvider extends LabelProvider implements ITableLabelProvider {
 		public String getColumnText(Object element, int columnIndex) {
-			if (element instanceof JSFProjectLibraryReference){
+			if (element instanceof JSFLibraryReference){
 				
 			    switch(columnIndex) {
 			    case COLUMN_DEPLOY:
 			    	return " ";	  //$NON-NLS-1$
 			    case COLUMN_LIB_NAME:
-			    	return ((JSFProjectLibraryReference)element).getName();
+			    	return ((JSFLibraryReference)element).getName();
 			    }				
 			}			
 		    return ""; //$NON-NLS-1$
@@ -587,9 +718,9 @@ public class JSFLibraryConfigControl extends Composite {
 		private JSFLibrary defaultImpl = null;
 		
 		public String getText(Object element) {
-			if (element instanceof JSFProjectLibraryReference){
-				StringBuffer nameBuf = new StringBuffer(((JSFProjectLibraryReference)element).getName());
-				if ((((JSFProjectLibraryReference)element).getLibrary()).getID().equals(getDefaultImpl().getID()))
+			if (element instanceof JSFLibraryReference){
+				StringBuffer nameBuf = new StringBuffer(((JSFLibraryReference)element).getName());
+				if ((((JSFLibraryReference)element).getLibrary()).getID().equals(getDefaultImpl().getID()))
 					nameBuf.append(" ").append(JSFLibraryRegistry.DEFAULT_IMPL_LABEL); //$NON-NLS-1$
 				return nameBuf.toString() ;
 			}
@@ -610,10 +741,10 @@ public class JSFLibraryConfigControl extends Composite {
 	// Sorter
 	class SelectedCompLibCTVSorter extends ViewerSorter {
 		public int compare(Viewer viewer, Object e1, Object e2) {
-			if (e1 instanceof JSFProjectLibraryReference && 
-					e2 instanceof JSFProjectLibraryReference) {
-			JSFProjectLibraryReference item1 = (JSFProjectLibraryReference)e1;
-			JSFProjectLibraryReference item2 = (JSFProjectLibraryReference)e2;			
+			if (e1 instanceof JSFLibraryReference && 
+					e2 instanceof JSFLibraryReference) {
+			JSFLibraryReference item1 = (JSFLibraryReference)e1;
+			JSFLibraryReference item2 = (JSFLibraryReference)e2;			
 			return item1.getName().compareToIgnoreCase(item2.getName());
 			}
 			return 0;
@@ -623,7 +754,7 @@ public class JSFLibraryConfigControl extends Composite {
 	/*
 	 * Content provider Adapter for TreeViewer
 	 */
-	private class TreeViewerAdapter implements ITreeContentProvider, ISelectionChangedListener, IDoubleClickListener {
+	private class TreeViewerAdapter implements ITreeContentProvider {
 		private final Object[] NO_ELEMENTS= new Object[0];
 
 		// ------- ITreeContentProvider Interface ------------
@@ -645,8 +776,8 @@ public class JSFLibraryConfigControl extends Composite {
 		}
 		
 		public Object[] getChildren(Object element) {
-			if (element instanceof JSFProjectLibraryReference) {
-				return ((JSFProjectLibraryReference)element).getArchiveFiles().toArray();				
+			if (element instanceof JSFLibraryReference) {
+				return ((JSFLibraryReference)element).getArchiveFiles().toArray();				
 			}
 			return NO_ELEMENTS;
 		}
@@ -656,24 +787,12 @@ public class JSFLibraryConfigControl extends Composite {
 		}
 
 		public boolean hasChildren(Object element) {
-			if (element instanceof JSFProjectLibraryReference) {
+			if (element instanceof JSFLibraryReference) {
 				return true;
 			}
 			return false;
 		}		
-
-		// ------- ISelectionChangedListener Interface ------------
-
-		public void selectionChanged(SelectionChangedEvent event) {
-		    // do nothing; TODO: what's the point then?
-		}
 		
-		/* (non-Javadoc)
-		 * @see org.eclipse.jface.viewers.IDoubleClickListener#doubleClick(org.eclipse.jface.viewers.DoubleClickEvent)
-		 */
-		public void doubleClick(DoubleClickEvent event) {
-		    // do nothing; TODO: what's the point then?
-		}		
 	}
 	
 	private class TreeLabelProvider implements ILabelProvider {
@@ -692,7 +811,7 @@ public class JSFLibraryConfigControl extends Composite {
 		}
 		
 		public Image getImage(Object element) {
-			if (element instanceof JSFProjectLibraryReference)
+			if (element instanceof JSFLibraryReference)
             {
 			    return libImg;
             }
@@ -701,8 +820,8 @@ public class JSFLibraryConfigControl extends Composite {
 
 		public String getText(Object element) {
 			StringBuffer labelBuf = new StringBuffer();
-			if (element instanceof JSFProjectLibraryReference) {
-				JSFProjectLibraryReference libWrapper = (JSFProjectLibraryReference)element;
+			if (element instanceof JSFLibraryReference) {
+				JSFLibraryReference libWrapper = (JSFLibraryReference)element;
 				JSFLibrary lib = libWrapper.getLibrary();
 				labelBuf.append(lib.getName());
 				if (lib.isImplementation()) {

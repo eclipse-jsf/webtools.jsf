@@ -42,6 +42,11 @@ public interface IJSFFacetInstallDataModelProperties extends
     /**
      * TODO:
      */
+    public static final String SERVLET_CLASSNAME = "IJSFFacetInstallDataModelProperties.SERVLET_CLASSNAME"; //$NON-NLS-1$
+
+    /**
+     * TODO:
+     */
     public static final String SERVLET_URL_PATTERNS = "IJSFFacetInstallDataModelProperties.SERVLET_URL_PATTERNS"; //$NON-NLS-1$
 
     /**

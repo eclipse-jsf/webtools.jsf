@@ -88,7 +88,7 @@ public class PluginProvidedJSFLibraryImpl extends JSFLibraryImpl implements Plug
 	 * @generated
 	 */
 	protected EClass eStaticClass() {
-		return JSFLibraryRegistryPackage.eINSTANCE.getPluginProvidedJSFLibrary();
+		return JSFLibraryRegistryPackage.Literals.PLUGIN_PROVIDED_JSF_LIBRARY;
 	}
 
 	/**
@@ -116,13 +116,76 @@ public class PluginProvidedJSFLibraryImpl extends JSFLibraryImpl implements Plug
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__PLUGIN_ID:
+				return getPluginID();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__PLUGIN_ID:
+				setPluginID((String)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__PLUGIN_ID:
+				setPluginID(PLUGIN_ID_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__PLUGIN_ID:
+				return PLUGIN_ID_EDEFAULT == null ? pluginID != null : !PLUGIN_ID_EDEFAULT.equals(pluginID);
+		}
+		return super.eIsSet(featureID);
+	}
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String getID() {
+		return getPluginID() + ID_SEPARATOR + getName();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
 	 * @return the working copy 
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public JSFLibrary getWorkingCopy() {
 		PluginProvidedJSFLibrary workingCopyLib = JSFLibraryRegistryFactory.eINSTANCE.createPluginProvidedJSFLibrary();
-		workingCopyLib.setID(getID());
+//		workingCopyLib.setID(getID());
 		workingCopyLib.setName(getName());
 		workingCopyLib.setJSFVersion(getJSFVersion());
 		workingCopyLib.setDeployed(isDeployed());
@@ -138,175 +201,6 @@ public class PluginProvidedJSFLibraryImpl extends JSFLibraryImpl implements Plug
 			workingCopyLib.getArchiveFiles().add(destArchiveFile);
 		}
 		return workingCopyLib;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-     * @param otherEnd 
-     * @param featureID 
-     * @param baseClass 
-     * @param msgs 
-     * @return the notification chain 
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__ARCHIVE_FILES:
-					return ((InternalEList)getArchiveFiles()).basicAdd(otherEnd, msgs);
-				default:
-					return eDynamicInverseAdd(otherEnd, featureID, baseClass, msgs);
-			}
-		}
-		if (eContainer != null)
-			msgs = eBasicRemoveFromContainer(msgs);
-		return eBasicSetContainer(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-     * @param otherEnd 
-     * @param featureID 
-     * @param baseClass 
-     * @param msgs 
-     * @return the notification chain 
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__ARCHIVE_FILES:
-					return ((InternalEList)getArchiveFiles()).basicRemove(otherEnd, msgs);
-				default:
-					return eDynamicInverseRemove(otherEnd, featureID, baseClass, msgs);
-			}
-		}
-		return eBasicSetContainer(null, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-     * @param eFeature 
-     * @param resolve 
-     * @return the value of the feature 
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Object eGet(EStructuralFeature eFeature, boolean resolve) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__ID:
-				return getID();
-			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__NAME:
-				return getName();
-			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__JSF_VERSION:
-				return getJSFVersion();
-			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__DEPLOYED:
-				return isDeployed() ? Boolean.TRUE : Boolean.FALSE;
-			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__IMPLEMENTATION:
-				return isImplementation() ? Boolean.TRUE : Boolean.FALSE;
-			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__ARCHIVE_FILES:
-				return getArchiveFiles();
-			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__PLUGIN_ID:
-				return getPluginID();
-		}
-		return eDynamicGet(eFeature, resolve);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-     * @param eFeature 
-     * @param newValue 
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void eSet(EStructuralFeature eFeature, Object newValue) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__ID:
-				setID((String)newValue);
-				return;
-			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__NAME:
-				setName((String)newValue);
-				return;
-			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__JSF_VERSION:
-				setJSFVersion((JSFVersion)newValue);
-				return;
-			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__DEPLOYED:
-				setDeployed(((Boolean)newValue).booleanValue());
-				return;
-			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__IMPLEMENTATION:
-				setImplementation(((Boolean)newValue).booleanValue());
-				return;
-			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__ARCHIVE_FILES:
-				getArchiveFiles().clear();
-				getArchiveFiles().addAll((Collection)newValue);
-				return;
-			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__PLUGIN_ID:
-				setPluginID((String)newValue);
-				return;
-		}
-		eDynamicSet(eFeature, newValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-     * @param eFeature 
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void eUnset(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__ID:
-				setID(ID_EDEFAULT);
-				return;
-			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__NAME:
-				setName(NAME_EDEFAULT);
-				return;
-			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__JSF_VERSION:
-				setJSFVersion(JSF_VERSION_EDEFAULT);
-				return;
-			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__DEPLOYED:
-				setDeployed(DEPLOYED_EDEFAULT);
-				return;
-			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__IMPLEMENTATION:
-				setImplementation(IMPLEMENTATION_EDEFAULT);
-				return;
-			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__ARCHIVE_FILES:
-				getArchiveFiles().clear();
-				return;
-			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__PLUGIN_ID:
-				setPluginID(PLUGIN_ID_EDEFAULT);
-				return;
-		}
-		eDynamicUnset(eFeature);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-     * @param eFeature 
-     * @return true if the value of eFeature is set 
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean eIsSet(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__ID:
-				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
-			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__JSF_VERSION:
-				return jsfVersion != JSF_VERSION_EDEFAULT;
-			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__DEPLOYED:
-				return deployed != DEPLOYED_EDEFAULT;
-			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__IMPLEMENTATION:
-				return implementation != IMPLEMENTATION_EDEFAULT;
-			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__ARCHIVE_FILES:
-				return archiveFiles != null && !archiveFiles.isEmpty();
-			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__PLUGIN_ID:
-				return PLUGIN_ID_EDEFAULT == null ? pluginID != null : !PLUGIN_ID_EDEFAULT.equals(pluginID);
-		}
-		return eDynamicIsSet(eFeature);
 	}
 
 	/**

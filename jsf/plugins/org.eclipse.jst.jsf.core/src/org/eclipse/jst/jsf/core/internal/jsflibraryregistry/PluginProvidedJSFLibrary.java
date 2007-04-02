@@ -29,6 +29,10 @@ package org.eclipse.jst.jsf.core.internal.jsflibraryregistry;
  */
 public interface PluginProvidedJSFLibrary extends JSFLibrary{
 	/**
+	 * Separator between plugin id and JSF Library name
+	 */
+	public static final String ID_SEPARATOR = "$$";
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

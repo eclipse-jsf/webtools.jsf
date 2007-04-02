@@ -109,7 +109,7 @@ public interface JSFLibraryRegistryPackage extends EPackage{
 	int JSF_LIBRARY_REGISTRY__PLUGIN_PROVIDED_JSF_LIBRARIES = 2;
 
 	/**
-	 * The number of structural features of the the '<em>JSF Library Registry</em>' class.
+	 * The number of structural features of the '<em>JSF Library Registry</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -182,7 +182,7 @@ public interface JSFLibraryRegistryPackage extends EPackage{
 	int JSF_LIBRARY__ARCHIVE_FILES = 5;
 
 	/**
-	 * The number of structural features of the the '<em>JSF Library</em>' class.
+	 * The number of structural features of the '<em>JSF Library</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -237,7 +237,7 @@ public interface JSFLibraryRegistryPackage extends EPackage{
 	int ARCHIVE_FILE__JSF_LIBRARY = 3;
 
 	/**
-	 * The number of structural features of the the '<em>Archive File</em>' class.
+	 * The number of structural features of the '<em>Archive File</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -319,7 +319,7 @@ public interface JSFLibraryRegistryPackage extends EPackage{
 	int PLUGIN_PROVIDED_JSF_LIBRARY__PLUGIN_ID = JSF_LIBRARY_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the the '<em>Plugin Provided JSF Library</em>' class.
+	 * The number of structural features of the '<em>Plugin Provided JSF Library</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -550,5 +550,182 @@ public interface JSFLibraryRegistryPackage extends EPackage{
 	 * @generated
 	 */
 	JSFLibraryRegistryFactory getJSFLibraryRegistryFactory();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * Defines literals for the meta objects that represent
+	 * <ul>
+	 *   <li>each class,</li>
+	 *   <li>each feature of each class,</li>
+	 *   <li>each enum,</li>
+	 *   <li>and each data type</li>
+	 * </ul>
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	interface Literals {
+		/**
+		 * The meta object literal for the '{@link org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl.JSFLibraryRegistryImpl <em>JSF Library Registry</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl.JSFLibraryRegistryImpl
+		 * @see org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl.JSFLibraryRegistryPackageImpl#getJSFLibraryRegistry()
+		 * @generated
+		 */
+		EClass JSF_LIBRARY_REGISTRY = eINSTANCE.getJSFLibraryRegistry();
+
+		/**
+		 * The meta object literal for the '<em><b>Default Implementation ID</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute JSF_LIBRARY_REGISTRY__DEFAULT_IMPLEMENTATION_ID = eINSTANCE.getJSFLibraryRegistry_DefaultImplementationID();
+
+		/**
+		 * The meta object literal for the '<em><b>JSF Libraries</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference JSF_LIBRARY_REGISTRY__JSF_LIBRARIES = eINSTANCE.getJSFLibraryRegistry_JSFLibraries();
+
+		/**
+		 * The meta object literal for the '<em><b>Plugin Provided JSF Libraries</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference JSF_LIBRARY_REGISTRY__PLUGIN_PROVIDED_JSF_LIBRARIES = eINSTANCE.getJSFLibraryRegistry_PluginProvidedJSFLibraries();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl.JSFLibraryImpl <em>JSF Library</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl.JSFLibraryImpl
+		 * @see org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl.JSFLibraryRegistryPackageImpl#getJSFLibrary()
+		 * @generated
+		 */
+		EClass JSF_LIBRARY = eINSTANCE.getJSFLibrary();
+
+		/**
+		 * The meta object literal for the '<em><b>ID</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute JSF_LIBRARY__ID = eINSTANCE.getJSFLibrary_ID();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute JSF_LIBRARY__NAME = eINSTANCE.getJSFLibrary_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>JSF Version</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute JSF_LIBRARY__JSF_VERSION = eINSTANCE.getJSFLibrary_JSFVersion();
+
+		/**
+		 * The meta object literal for the '<em><b>Deployed</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute JSF_LIBRARY__DEPLOYED = eINSTANCE.getJSFLibrary_Deployed();
+
+		/**
+		 * The meta object literal for the '<em><b>Implementation</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute JSF_LIBRARY__IMPLEMENTATION = eINSTANCE.getJSFLibrary_Implementation();
+
+		/**
+		 * The meta object literal for the '<em><b>Archive Files</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference JSF_LIBRARY__ARCHIVE_FILES = eINSTANCE.getJSFLibrary_ArchiveFiles();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl.ArchiveFileImpl <em>Archive File</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl.ArchiveFileImpl
+		 * @see org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl.JSFLibraryRegistryPackageImpl#getArchiveFile()
+		 * @generated
+		 */
+		EClass ARCHIVE_FILE = eINSTANCE.getArchiveFile();
+
+		/**
+		 * The meta object literal for the '<em><b>Relative To Workspace</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ARCHIVE_FILE__RELATIVE_TO_WORKSPACE = eINSTANCE.getArchiveFile_RelativeToWorkspace();
+
+		/**
+		 * The meta object literal for the '<em><b>Source Location</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ARCHIVE_FILE__SOURCE_LOCATION = eINSTANCE.getArchiveFile_SourceLocation();
+
+		/**
+		 * The meta object literal for the '<em><b>Relative Dest Location</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ARCHIVE_FILE__RELATIVE_DEST_LOCATION = eINSTANCE.getArchiveFile_RelativeDestLocation();
+
+		/**
+		 * The meta object literal for the '<em><b>JSF Library</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ARCHIVE_FILE__JSF_LIBRARY = eINSTANCE.getArchiveFile_JSFLibrary();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl.PluginProvidedJSFLibraryImpl <em>Plugin Provided JSF Library</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl.PluginProvidedJSFLibraryImpl
+		 * @see org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl.JSFLibraryRegistryPackageImpl#getPluginProvidedJSFLibrary()
+		 * @generated
+		 */
+		EClass PLUGIN_PROVIDED_JSF_LIBRARY = eINSTANCE.getPluginProvidedJSFLibrary();
+
+		/**
+		 * The meta object literal for the '<em><b>Plugin ID</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PLUGIN_PROVIDED_JSF_LIBRARY__PLUGIN_ID = eINSTANCE.getPluginProvidedJSFLibrary_PluginID();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFVersion <em>JSF Version</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFVersion
+		 * @see org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl.JSFLibraryRegistryPackageImpl#getJSFVersion()
+		 * @generated
+		 */
+		EEnum JSF_VERSION = eINSTANCE.getJSFVersion();
+
+	}
 
 } //JSFLibraryRegistryPackage

@@ -11,6 +11,8 @@
 package org.eclipse.jst.jsf.core.internal.project.facet;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -19,17 +21,24 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.jdt.core.IClasspathEntry;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jst.j2ee.web.componentcore.util.WebArtifactEdit;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.Messages;
-import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFProjectLibraryReference;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryReference;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryRegistryUtil;
+import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.ArchiveFile;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
+import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistry;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.wst.common.componentcore.datamodel.FacetInstallDataModelProvider;
 import org.eclipse.wst.common.componentcore.datamodel.properties.IFacetDataModelProperties;
 import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
 import org.eclipse.wst.common.frameworks.internal.operations.IProjectCreationPropertiesNew;
-import org.eclipse.wst.common.frameworks.internal.plugin.WTPCommonPlugin;
 
 /**
  * Provides a data model used by the JSF facet install.
@@ -49,6 +58,7 @@ public class JSFFacetInstallDataModelProvider extends
 		names.add(DEPLOY_IMPLEMENTATION);
 		names.add(CONFIG_PATH);
 		names.add(SERVLET_NAME);
+		names.add(SERVLET_CLASSNAME);
 		names.add(SERVLET_URL_PATTERNS);
 		names.add(WEBCONTENT_DIR);
 		
@@ -69,7 +79,9 @@ public class JSFFacetInstallDataModelProvider extends
 		} else if (propertyName.equals(CONFIG_PATH)) {
 			return JSFUtils.JSF_DEFAULT_CONFIG_PATH; //$NON-NLS-1$;
 		} else if (propertyName.equals(SERVLET_NAME)) {
-			return "Faces Servlet"; //$NON-NLS-1$
+			return JSFUtils.JSF_DEFAULT_SERVLET_NAME; //$NON-NLS-1$
+		} else if (propertyName.equals(SERVLET_CLASSNAME)) {
+			return JSFUtils.JSF_SERVLET_CLASS;	
 		} else if (propertyName.equals(SERVLET_URL_PATTERNS)) {
 			return new String[] { "*.faces" }; //$NON-NLS-1$
 		} else if (propertyName.equals(FACET_ID)) {
@@ -77,7 +89,7 @@ public class JSFFacetInstallDataModelProvider extends
 		} else if (propertyName.equals(WEBCONTENT_DIR)){
 			return "WebContent";  //not sure I need this
 		} else if (propertyName.equals(COMPONENT_LIBRARIES)) {
-			return new ArrayList(0);
+			return new Object[0];
 		} else if (propertyName.equals(IMPLEMENTATION_LIBRARIES)) {
 			return getDefaultJSFImplementationLibraries();
 		} else if (propertyName.equals(DEFAULT_IMPLEMENTATION_LIBRARY)) {
@@ -87,20 +99,42 @@ public class JSFFacetInstallDataModelProvider extends
 	}
 	public IStatus validate(String name) {
 		errorMessage = null;
-		if (name.equals(IMPLEMENTATION) && getBooleanProperty(DEPLOY_IMPLEMENTATION)) {
-			return validateImpl((JSFLibrary)getProperty(IMPLEMENTATION));
+		if (name.equals(IMPLEMENTATION_LIBRARIES) && getBooleanProperty(DEPLOY_IMPLEMENTATION)) {
+			List libs = JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry().getJSFLibrariesByName(getStringPropertyWithDefaultStripped(IMPLEMENTATION_LIBRARIES));
+			JSFLibrary lib = ! libs.isEmpty() ? (JSFLibrary)libs.get(0) : null; 
+			IStatus status = validateImpl(lib);
+			if (!OK_STATUS.equals(status))
+				return status;
+			else 
+				return validateClasspath();
 		} else if (name.equals(CONFIG_PATH)) {
 			return validateConfigLocation(getStringProperty(CONFIG_PATH));
 		} else if (name.equals(SERVLET_NAME)) {			
 			return validateServletName(getStringProperty(SERVLET_NAME));
 		}
+		else if (name.equals(COMPONENT_LIBRARIES)) {
+			return validateClasspath();
+		}
 		return super.validate(name);
 	}
 	
+	private IStatus createErrorStatus(String msg) {		
+		return new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID, msg);
+	}
+	
+	private String getStringPropertyWithDefaultStripped(String propertyName) {
+		String val = getStringProperty(propertyName);
+		if (val.endsWith(JSFLibraryRegistry.DEFAULT_IMPL_LABEL)){
+			val = val.substring(0, val.indexOf(JSFLibraryRegistry.DEFAULT_IMPL_LABEL)).trim();
+			setProperty(propertyName, val);
+		}		
+		return val;
+	}
+
 	private IStatus validateServletName(String servletName) {
 		if (servletName == null || servletName.trim().length() == 0) {
 			errorMessage = Messages.JSFFacetInstallDataModelProvider_ValidateServletName;
-			return WTPCommonPlugin.createErrorStatus(errorMessage);				
+			return createErrorStatus(errorMessage);				
 		}
 		
 		return OK_STATUS;
@@ -111,7 +145,7 @@ public class JSFFacetInstallDataModelProvider extends
 			errorMessage = Messages.JSFFacetInstallDataModelProvider_ValidateJSFImpl; 
 		}
 		if (errorMessage != null) {
-			return WTPCommonPlugin.createErrorStatus(errorMessage);
+			return createErrorStatus(errorMessage);
 		}
 		return OK_STATUS;
 	}
@@ -119,7 +153,7 @@ public class JSFFacetInstallDataModelProvider extends
 	private IStatus validateConfigLocation(String text) {
 		if (text == null || text.trim().equals("")) { //$NON-NLS-1$
 			errorMessage = Messages.JSFFacetInstallDataModelProvider_ValidateConfigFileEmpty;
-			return WTPCommonPlugin.createErrorStatus(errorMessage);
+			return createErrorStatus(errorMessage);
 		}
 		text = text.trim();
 		
@@ -130,18 +164,18 @@ public class JSFFacetInstallDataModelProvider extends
 		IPath passedPath = new Path(text);
 		if (!fullPath.isValidPath(text)){
 			errorMessage = Messages.JSFFacetInstallDataModelProvider_ValidateConfigFilePath;
-			return WTPCommonPlugin.createErrorStatus(errorMessage);
+			return createErrorStatus(errorMessage);
 		}
 		
 		//FIXME:  check for valid file path also [passedPath.toFile().isFile()] 
 		if (text.toLowerCase().lastIndexOf(".xml") != text.length() - 4) { //$NON-NLS-1$
 			errorMessage = Messages.JSFFacetInstallDataModelProvider_ValidateConfigFileXML;
-			return WTPCommonPlugin.createErrorStatus(errorMessage);
+			return createErrorStatus(errorMessage);
 		}
 		
 		if (text.lastIndexOf("\\") >= 0){ //$NON-NLS-1$
 			errorMessage = Messages.JSFFacetInstallDataModelProvider_ValidateConfigFileSlashes;
-			return WTPCommonPlugin.createErrorStatus(errorMessage);
+			return createErrorStatus(errorMessage);
 		} 
 //		if (1 == 1){
 //			//FIXME!!!!
@@ -153,7 +187,7 @@ public class JSFFacetInstallDataModelProvider extends
 			errorMessage = NLS.bind(
 					Messages.JSFFacetInstallDataModelProvider_ValidateConfigFileRelative1,
 					getWebContentFolder().removeFirstSegments(getWebContentFolder().segmentCount() - 1).toString());
-			return WTPCommonPlugin.createErrorStatus(errorMessage);
+			return createErrorStatus(errorMessage);
 		}
 
 		IPath setPath = getWebContentFolder().append(passedPath);
@@ -161,9 +195,84 @@ public class JSFFacetInstallDataModelProvider extends
 			errorMessage = NLS.bind(
 					Messages.JSFFacetInstallDataModelProvider_ValidateConfigFileRelative2,
 					getWebContentFolder().removeFirstSegments(getWebContentFolder().segmentCount() - 1).toString());
-			return WTPCommonPlugin.createErrorStatus(errorMessage);
+			return createErrorStatus(errorMessage);
 		}
 
+		return OK_STATUS;
+	}
+	
+	private IStatus validateClasspath(){
+		Set jars = new HashSet();
+		if (doesProjectExist()){
+			//validate actual classpath by loading jars from cp
+			try {
+				IClasspathEntry[] entries = getJavaProject().getResolvedClasspath(true);
+				for (int i=0;i<entries.length;i++){
+					IClasspathEntry entry = entries[i];
+					if (entry.getEntryKind() == IClasspathEntry.CPE_LIBRARY){
+						jars.add(entry.getPath().makeAbsolute().toString());
+					}
+//					else if (entry.getEntryKind() == IClasspathEntry.CPE_CONTAINER){
+//						IClasspathContainer cont = (IClasspathContainer)entry;
+//						for (int j=0;j<cont.getClasspathEntries().length;j++){
+//							jars.add(cont.getClasspathEntries()[j].getPath().makeAbsolute().toString());
+//						}
+//					}
+				}
+			} catch (JavaModelException e) {
+			}			
+		}
+		else {//as we do not have a javaProject yet, all we can do is validate that there is no duplicate jars (absolute path)
+	
+		}
+		
+		IStatus status = checkForDupeArchiveFiles(jars, ((JSFLibraryReference)getProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION)).getLibrary());
+		if (!OK_STATUS.equals(status)){
+			return status;
+		}
+		
+		JSFLibraryReference[] compLibs = (JSFLibraryReference[])getProperty(IJSFFacetInstallDataModelProperties.COMPONENT_LIBRARIES);
+		for (int i=0;i<compLibs.length;i++){
+			JSFLibrary lib = compLibs[i].getLibrary();
+			 status = checkForDupeArchiveFiles(jars, lib);
+				if (!OK_STATUS.equals(status)){
+					return status;
+				}
+		}		
+			return OK_STATUS;
+		}
+
+	private IJavaProject getJavaProject() {
+		IProject proj = getProject();
+		if (proj != null)
+			return JavaCore.create(proj); 
+		return null;
+	}
+
+	private IProject getProject(){
+		String projName = (String)getProperty(FACET_PROJECT_NAME);
+		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(projName);
+		return project;
+	}
+	private boolean doesProjectExist() {
+		IProject project = getProject();
+		return (project != null) && project.exists();
+	}
+
+	private IStatus checkForDupeArchiveFiles(Set jars,
+			JSFLibrary selectedJSFLibImplementation) {
+		if (selectedJSFLibImplementation == null)
+			return OK_STATUS;
+		
+		for (Iterator it=selectedJSFLibImplementation.getArchiveFiles().iterator();it.hasNext();){
+			ArchiveFile jar = (ArchiveFile)it.next();
+			if (jars.contains(jar.getResolvedSourceLocation())){
+				return createErrorStatus("Duplicated jar on classpath: "+jar.getResolvedSourceLocation());				
+			}
+			else {
+				jars.add(jar.getSourceLocation());
+			}
+		}
 		return OK_STATUS;
 	}
 	
@@ -214,16 +323,16 @@ public class JSFFacetInstallDataModelProvider extends
 		List list = new ArrayList();
 		if (JSFCorePlugin.getDefault().getJSFLibraryRegistry() != null) {
 			JSFLibrary jsfLib = JSFCorePlugin.getDefault().getJSFLibraryRegistry().getDefaultImplementation();
-			JSFProjectLibraryReference prjJSFLib = new JSFProjectLibraryReference(jsfLib, true, true);
+			JSFLibraryReference prjJSFLib = new JSFLibraryReference(jsfLib, true, true);
 			list.add(prjJSFLib);			
 		}
 		return list;
 	}	
 	
-	private JSFProjectLibraryReference getDefaultImplementationLibrary() {		
+	private JSFLibraryReference getDefaultImplementationLibrary() {		
 		if (JSFCorePlugin.getDefault().getJSFLibraryRegistry() != null) {
 			JSFLibrary jsfLib = JSFCorePlugin.getDefault().getJSFLibraryRegistry().getDefaultImplementation();
-			return new JSFProjectLibraryReference(jsfLib, true, true);	
+			return new JSFLibraryReference(jsfLib, true, true);	
 		}
 		return null;	
 	}	

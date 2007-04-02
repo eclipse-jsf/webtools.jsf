@@ -13,8 +13,20 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.jdt.core.IClasspathContainer;
+import org.eclipse.jdt.core.IClasspathEntry;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
+import org.eclipse.jst.jsf.core.internal.JSFLibrariesContainerInitializer;
+import org.eclipse.jst.jsf.core.internal.JSFLibraryClasspathContainer;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.ArchiveFile;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistry;
@@ -28,11 +40,11 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistry;
  * 
  * The lists are updated when there are changes in JSF library registry.
  * 
- * @author Justin Chen - Oracle
+ * @author Justin Chen, etc. - Oracle
+ * TODO: consider making all methods static
  */
 public class JSFLibraryRegistryUtil {
 	private static JSFLibraryRegistryUtil instance = null;
-	final private JSFLibraryRegistry jsfLibReg;
 	private List implLibs = null;
 	private List compLibs = null;
 	
@@ -40,7 +52,6 @@ public class JSFLibraryRegistryUtil {
 	 * Private constructor
 	 */
 	private JSFLibraryRegistryUtil() {
-		jsfLibReg = JSFCorePlugin.getDefault().getJSFLibraryRegistry();
 	}
 	
 	/**
@@ -48,7 +59,7 @@ public class JSFLibraryRegistryUtil {
 	 *   
 	 * @return JSFLibraryRegistryUtil
 	 */
-	public static JSFLibraryRegistryUtil getInstance() {
+	public synchronized static JSFLibraryRegistryUtil getInstance() {
 		if ( instance == null ) {
 			instance = new JSFLibraryRegistryUtil();
 		}
@@ -56,12 +67,12 @@ public class JSFLibraryRegistryUtil {
 	}
 
 	/**
-	 * Return the JSFLibraryRegistry instance.
+	 * Convenience method to return the JSFLibraryRegistry instance.
 	 * 
 	 * @return jsfLibReg JSFLibraryRegistry
 	 */
 	public JSFLibraryRegistry getJSFLibraryRegistry() {
-		return jsfLibReg;
+		return JSFCorePlugin.getDefault().getJSFLibraryRegistry();
 	}
 	
 	/**
@@ -70,11 +81,11 @@ public class JSFLibraryRegistryUtil {
 	 * 
 	 * @return JSFLibraryDecorator
 	 */
-	public JSFProjectLibraryReference getDefaultJSFImplementationLibrary() {
-		JSFLibrary dftImplLib = jsfLibReg.getDefaultImplementation();
+	public JSFLibraryReference getDefaultJSFImplementationLibrary() {
+		JSFLibrary dftImplLib = getJSFLibraryRegistry().getDefaultImplementation();
 		
 		return ((dftImplLib != null) ? 
-				getJSFLibryReferencebyID(dftImplLib.getID()) :
+				getJSFLibraryReferencebyID(dftImplLib.getID()) :
 				null);
 	}
 	
@@ -86,12 +97,12 @@ public class JSFLibraryRegistryUtil {
 	 */
 	List getJSFImplementationLibraries() {
 		if (implLibs == null) {
-			implLibs = wrapJSFLibraries(jsfLibReg.getImplJSFLibraries());
+			implLibs = wrapJSFLibraries(getJSFLibraryRegistry().getImplJSFLibraries());
 		} else {
-			if (implLibs.size() != jsfLibReg.getImplJSFLibraries().size() || 
+			if (implLibs.size() != getJSFLibraryRegistry().getImplJSFLibraries().size() || 
 					isAnyLibraryChanged(implLibs)) {
 				implLibs.clear();
-				implLibs = wrapJSFLibraries(jsfLibReg.getImplJSFLibraries());
+				implLibs = wrapJSFLibraries(getJSFLibraryRegistry().getImplJSFLibraries());
 			}
 		}
 		return implLibs;
@@ -105,12 +116,12 @@ public class JSFLibraryRegistryUtil {
 	 */
 	List getJSFComponentLibraries() {
 		if (compLibs == null) {
-			compLibs = wrapJSFLibraries(jsfLibReg.getNonImplJSFLibraries());
+			compLibs = wrapJSFLibraries(getJSFLibraryRegistry().getNonImplJSFLibraries());
 		} else {
-			if (compLibs.size() != jsfLibReg.getNonImplJSFLibraries().size() || 
+			if (compLibs.size() != getJSFLibraryRegistry().getNonImplJSFLibraries().size() || 
 					isAnyLibraryChanged(compLibs)) {
 				compLibs.clear();
-				compLibs = wrapJSFLibraries(jsfLibReg.getNonImplJSFLibraries());
+				compLibs = wrapJSFLibraries(getJSFLibraryRegistry().getNonImplJSFLibraries());
 			}			
 		}
 		return compLibs;
@@ -123,13 +134,13 @@ public class JSFLibraryRegistryUtil {
 	 * @param id String
 	 * @return JSFLibraryDecorator
 	 */
-	public JSFProjectLibraryReference getJSFLibryReferencebyID(final String id) {
+	public JSFLibraryReference getJSFLibraryReferencebyID(final String id) {
 		Iterator it = getJSFImplementationLibraries().iterator();
-		JSFProjectLibraryReference crtItem = null;
+		JSFLibraryReference crtItem = null;
 		
 		// search implementation libraries
 		while(it.hasNext()) {
-			crtItem = (JSFProjectLibraryReference)it.next();
+			crtItem = (JSFLibraryReference)it.next();
 			if (id.equals(crtItem.getID())) {
 				return crtItem;
 			}
@@ -137,7 +148,7 @@ public class JSFLibraryRegistryUtil {
 		// search component libraries
 		it = getJSFComponentLibraries().iterator();
 		while(it.hasNext()) {
-			crtItem = (JSFProjectLibraryReference)it.next();
+			crtItem = (JSFLibraryReference)it.next();
 			if (id.equals(crtItem.getID())) {
 				return crtItem;
 			}
@@ -150,14 +161,14 @@ public class JSFLibraryRegistryUtil {
 	 * JSF implementation libraries or component libraries.  
 	 * The decision is based on if a JSF library is an implementation.
 	 * 
-	 * @param library JSFProjectLibraryReference
+	 * @param library JSFLibraryReference
 	 */
-	public void addJSFLibrary(final JSFProjectLibraryReference library) {
+	public void addJSFLibrary(final JSFLibraryReference library) {
 		 // Library is added only if it does not exist in registry 
-		if (library != null && jsfLibReg.getJSFLibraryByID(library.getID()) == null) {
+		if (library != null && getJSFLibraryRegistry().getJSFLibraryByID(library.getID()) == null) {
 			// Add the library working copy into workspace registry.
 			JSFLibrary jsfLib = library.getLibrary();
-			jsfLibReg.addJSFLibrary(jsfLib.getWorkingCopy());
+			getJSFLibraryRegistry().addJSFLibrary(jsfLib.getWorkingCopy());
 			
 			// Add library into the collection depends on its type.
 			List list = (library.isImplementation() ? 
@@ -171,13 +182,13 @@ public class JSFLibraryRegistryUtil {
 		List list = new ArrayList();
 		if (libs != null) {
 			JSFLibrary jsfLib;
-			JSFProjectLibraryReference jsfLibDctr;
+			JSFLibraryReference jsfLibDctr;
 			
 			Iterator it = libs.iterator();
 			while (it.hasNext()) {
 				jsfLib = (JSFLibrary) it.next();
 				 // Set unselected and undeployed initially.
-				jsfLibDctr = new JSFProjectLibraryReference(jsfLib.getWorkingCopy(), 
+				jsfLibDctr = new JSFLibraryReference(jsfLib, //.getWorkingCopy(), 
 								false, 
 								false);
 				list.add(jsfLibDctr);
@@ -188,11 +199,11 @@ public class JSFLibraryRegistryUtil {
 
 	private boolean isAnyLibraryChanged(final List list) {
 		Iterator it = list.iterator();
-		JSFProjectLibraryReference wclib = null;		// working copy library
+		JSFLibraryReference wclib = null;		// working copy library
 		JSFLibrary lib = null;
 		
 		while(it.hasNext()) {
-			wclib = (JSFProjectLibraryReference)it.next();
+			wclib = (JSFLibraryReference)it.next();
 			lib = getJSFLibraryRegistry().getJSFLibraryByID(wclib.getID());
 			if (lib == null) {					// removed. Hence, changed.
 				return true;
@@ -232,5 +243,128 @@ public class JSFLibraryRegistryUtil {
 		}
 		return false;
 	}
+
+	/**
+	 * Get the classpath entries for a JSF Library
+	 * @param lib
+	 * @return IClasspathEntry[]
+	 */
+	public IClasspathEntry[] getClasspathEntries(JSFLibrary lib){		
+		//TODO: cache to optimize.   probably belongs inside JSFLibrary model.
+		ArrayList res= new ArrayList(lib.getArchiveFiles().size());
+		for (Iterator it=lib.getArchiveFiles().iterator();it.hasNext();) {
+			ArchiveFile jar= (ArchiveFile)it.next();			
+			if (jar != null && jar.exists()) {
+				IClasspathEntry entry = getClasspathEntry(jar);
+				if (entry != null)
+					res.add(entry);
+			}
+		}
+		IClasspathEntry[] entries= (IClasspathEntry[]) res.toArray(new IClasspathEntry[res.size()]);
+		return entries;
+	}
 	
+	/**
+	 * Create IClasspathEntry for ArchiveFile
+	 * @param jar
+	 * @return IClasspathEntry
+	 */
+	public IClasspathEntry getClasspathEntry(ArchiveFile jar){
+		IClasspathEntry entry = null;
+		if (jar !=null && jar.exists()){
+			entry = JavaCore.newLibraryEntry(new Path(jar.getResolvedSourceLocation()), null, null);//, nu, sourceAttachRoot, accessRules, extraAttributes, false/*not exported*/);
+		}
+		return entry;
+	}
+	
+	/**
+	 * Binds JSF Libraries to classpath containers when the library changes.
+	 * 
+	 * This method will deal with library/cp container renames by removing the old classpath container and then adding.
+	 * 
+	 * @param oldId
+	 * @param newId
+	 * @param removeAndAddBecauseOfRename
+	 * @param monitor
+	 * @throws JavaModelException
+	 */
+	public static void rebindClasspathContainerEntries(String oldId, String newId, boolean removeAndAddBecauseOfRename, IProgressMonitor monitor) throws JavaModelException {
+		IWorkspaceRoot root= ResourcesPlugin.getWorkspace().getRoot();
+		IJavaProject[] projects= JavaCore.create(root).getJavaProjects();
+		IPath containerPath= new Path(JSFLibrariesContainerInitializer.JSF_LIBRARY_CP_CONTAINER_ID).append(newId);
+		IPath oldContainerPath = new Path(JSFLibrariesContainerInitializer.JSF_LIBRARY_CP_CONTAINER_ID).append(oldId);
+		
+		JSFLibrary lib = JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry().getJSFLibraryByID(newId);
+		List affectedProjects= new ArrayList();
+		removeAndAddBecauseOfRename = (!oldId.equals(newId));
+		// find all projects using the old container name...
+		for (int i= 0; i < projects.length; i++) {
+			IJavaProject project= projects[i];
+			IClasspathEntry[] entries= project.getRawClasspath();
+			for (int k= 0; k < entries.length; k++) {
+				IClasspathEntry curr= entries[k];
+				if (curr.getEntryKind() == IClasspathEntry.CPE_CONTAINER) {
+					if (oldContainerPath.equals(curr.getPath())) {
+						affectedProjects.add(project);
+						break;
+					}				
+				}
+			}
+		}
+		
+		if (!affectedProjects.isEmpty()) {
+			IJavaProject[] affected= (IJavaProject[]) affectedProjects.toArray(new IJavaProject[affectedProjects.size()]);
+			IClasspathContainer[] containers= new IClasspathContainer[affected.length];
+			removeAndAddBecauseOfRename = (!oldId.equals(newId));
+			if (removeAndAddBecauseOfRename){//not very pretty... remove and add new container				
+				IClasspathEntry newEntry = JavaCore.newContainerEntry(containerPath);
+				for (int i= 0; i < affected.length; i++) {
+					IJavaProject project= affected[i];
+					IClasspathEntry[] entries= project.getRawClasspath();
+					List keptEntries = new ArrayList();
+					//keep all entries except the old one
+					for (int k= 0; k < entries.length; k++) {
+						IClasspathEntry curr= entries[k];
+						if (curr.getEntryKind() == IClasspathEntry.CPE_CONTAINER){
+								if( ! oldContainerPath.equals(curr.getPath())) 
+							keptEntries.add(curr);						
+						}
+						else {
+							keptEntries.add(curr);
+						}						
+					}
+					// add new container entry
+					keptEntries.add(newEntry);
+					setRawClasspath(project, keptEntries, monitor);
+				}
+				
+			}
+			else {//rebind
+
+				JSFLibraryClasspathContainer container= new JSFLibraryClasspathContainer(lib);
+				containers[0] = container;
+	
+				JavaCore.setClasspathContainer(containerPath, affected, containers, monitor);
+			}
+		} else {
+			if (monitor != null) {
+				monitor.done();
+			}
+		}
+	}
+
+	/**
+	 * Sets the raw classpath on a project and logs an error if it when a JavaModelException occurs
+	 * @param project
+	 * @param cpEntries
+	 * @param monitor
+	 */
+	public static void setRawClasspath(IJavaProject project, List cpEntries, IProgressMonitor monitor) {
+		IClasspathEntry[] entries = (IClasspathEntry[])cpEntries.toArray(new IClasspathEntry[0]);
+		try {
+			project.setRawClasspath(entries, monitor);
+		} catch (JavaModelException e) {
+			JSFCorePlugin.log(e, "Unable to set classpath for: "+project.getProject().getName());
+		}
+	}
 }

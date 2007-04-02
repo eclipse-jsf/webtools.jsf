@@ -42,7 +42,7 @@ public class JSFLibraryConfigProjectData implements JSFLibraryConfiglModelSource
 	
 	final private IProject project;
 	final private JSFLibraryRegistryUtil jsfLibReg;
-	private JSFProjectLibraryReference selJSFLibImpl = null;	
+	private JSFLibraryReference selJSFLibImpl = null;	
 	private List selJSFLibComp = null;
 
 	/**
@@ -67,7 +67,7 @@ public class JSFLibraryConfigProjectData implements JSFLibraryConfiglModelSource
 	 * 
 	 * @return selJSFLibImpl JSFLibraryDecorator
 	 */
- 	public JSFProjectLibraryReference getJSFImplementationLibrary() {
+ 	public JSFLibraryReference getJSFImplementationLibrary() {
 		try {
 			if (!isProjectFirstCreated() && 
 					selJSFLibImpl == null ) {
@@ -76,7 +76,7 @@ public class JSFLibraryConfigProjectData implements JSFLibraryConfiglModelSource
 					selJSFLibImpl = getJSFImplLibfromPersistentProperties(getTuples(strImplLibs));
 			}
 		} catch (CoreException e) {
-			JSFCorePlugin.getDefault().getMsgLogger().log(e);
+			JSFCorePlugin.log(e, "Exception occured while returning reference to the JSF implementation library");
 		}
 		return selJSFLibImpl; 
 	}
@@ -99,13 +99,13 @@ public class JSFLibraryConfigProjectData implements JSFLibraryConfiglModelSource
 					
 					Iterator it = savedList.iterator();
 					Tuple crtTuple = null;
-					JSFProjectLibraryReference srcItem = null;
+					JSFLibraryReference srcItem = null;
 					while (it.hasNext()) {
 						crtTuple = (Tuple) it.next();
 						
-						srcItem = jsfLibReg.getJSFLibryReferencebyID(crtTuple.getID());
+						srcItem = jsfLibReg.getJSFLibraryReferencebyID(crtTuple.getID());
 						if (srcItem != null) {
-							selJSFLibComp.add( new JSFProjectLibraryReference(srcItem.getLibrary(), 
+							selJSFLibComp.add( new JSFLibraryReference(srcItem.getLibrary(), 
 													true, 
 													crtTuple.needDeploy()) );
 						} /*else {
@@ -117,7 +117,7 @@ public class JSFLibraryConfigProjectData implements JSFLibraryConfiglModelSource
 				selJSFLibComp = new ArrayList(0);  
 			}
 		} catch (CoreException e) {
-			JSFCorePlugin.getDefault().getMsgLogger().log(e);
+			JSFCorePlugin.log(e, "Exception occured while returning references to the JSF component libraries.");
 		}
 		return selJSFLibComp;
 	}
@@ -141,7 +141,7 @@ public class JSFLibraryConfigProjectData implements JSFLibraryConfiglModelSource
 			selJSFLibComp = null;
 			
 		} catch (CoreException e) {
-			JSFCorePlugin.getDefault().getMsgLogger().log(e);
+			JSFCorePlugin.log(e, "Exception occured while persisting the JSF Library preferences");
 		}
 	}
 	
@@ -169,7 +169,7 @@ public class JSFLibraryConfigProjectData implements JSFLibraryConfiglModelSource
 	 		logMissingLib(getTuples(strCompLibs), false);
 	 		
 		} catch (CoreException e) {
-			JSFCorePlugin.getDefault().getMsgLogger().log(e);
+			JSFCorePlugin.log(e, "Exception occured while verifying saved JSF Library preferences");
 		}		
  	} 	
  	
@@ -178,7 +178,7 @@ public class JSFLibraryConfigProjectData implements JSFLibraryConfiglModelSource
 			Iterator itTuple = jsfLibTuples.iterator();
 			while(itTuple.hasNext()) {
 				Tuple tuple = (Tuple)itTuple.next();			
-				JSFProjectLibraryReference jsfLib = jsfLibReg.getJSFLibryReferencebyID(tuple.getID());				
+				JSFLibraryReference jsfLib = jsfLibReg.getJSFLibraryReferencebyID(tuple.getID());				
 				/* Information logged when saved JSF lib is removed from registry.
 				 * One log entry is created for each missing library.
 				 */
@@ -193,16 +193,16 @@ public class JSFLibraryConfigProjectData implements JSFLibraryConfiglModelSource
 		} 		
  	}	
 	
-	private JSFProjectLibraryReference getJSFImplLibfromPersistentProperties(final List jsfLibTuples) {
+	private JSFLibraryReference getJSFImplLibfromPersistentProperties(final List jsfLibTuples) {
 		if (jsfLibReg != null) {			
 			Tuple tuple = null;
-			JSFProjectLibraryReference lib = null;
+			JSFLibraryReference lib = null;
 			Iterator itTuple = jsfLibTuples.iterator();			
 			while(itTuple.hasNext()) {
 				tuple = (Tuple) itTuple.next();			
-				lib = jsfLibReg.getJSFLibryReferencebyID(tuple.id);				
+				lib = jsfLibReg.getJSFLibraryReferencebyID(tuple.id);				
 				if (lib != null) {
-					return new JSFProjectLibraryReference(lib.getLibrary(), 
+					return new JSFLibraryReference(lib.getLibrary(), 
 							tuple.selected, 
 							tuple.deploy);
 				} /*else {
@@ -214,10 +214,10 @@ public class JSFLibraryConfigProjectData implements JSFLibraryConfiglModelSource
 	}
 		
 	private String generatePersistString(List list) {
-		JSFProjectLibraryReference jsfLibItem;
+		JSFLibraryReference jsfLibItem;
 		StringBuffer sb = new StringBuffer();
 		for (int i = 0; i < list.size(); i++) {
-			jsfLibItem = (JSFProjectLibraryReference)list.get(i);
+			jsfLibItem = (JSFLibraryReference)list.get(i);
 			sb = sb.append(jsfLibItem.generatePersistString());
 			sb.append(JSFLibraryConfigProjectData.EO_TUPLE);
 		}

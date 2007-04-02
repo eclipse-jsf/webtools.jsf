@@ -13,7 +13,10 @@ package org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.*;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.ArchiveFile;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistry;
@@ -35,6 +38,25 @@ public class JSFLibraryRegistryFactoryImpl extends EFactoryImpl implements JSFLi
 	 * @generated
 	 */
 	public static final String copyright = "Copyright (c) 2005 Oracle Corporation";
+
+	/**
+	 * Creates the default factory implementation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static JSFLibraryRegistryFactory init() {
+		try {
+			JSFLibraryRegistryFactory theJSFLibraryRegistryFactory = (JSFLibraryRegistryFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/webtools/jsf/schema/jsflibraryregistry.xsd"); 
+			if (theJSFLibraryRegistryFactory != null) {
+				return theJSFLibraryRegistryFactory;
+			}
+		}
+		catch (Exception exception) {
+			EcorePlugin.INSTANCE.log(exception);
+		}
+		return new JSFLibraryRegistryFactoryImpl();
+	}
 
 	/**
 	 * Creates an instance of the factory.
@@ -74,11 +96,8 @@ public class JSFLibraryRegistryFactoryImpl extends EFactoryImpl implements JSFLi
 	 */
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case JSFLibraryRegistryPackage.JSF_VERSION: {
-				JSFVersion result = JSFVersion.get(initialValue);
-				if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-				return result;
-			}
+			case JSFLibraryRegistryPackage.JSF_VERSION:
+				return createJSFVersionFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -95,7 +114,7 @@ public class JSFLibraryRegistryFactoryImpl extends EFactoryImpl implements JSFLi
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
 			case JSFLibraryRegistryPackage.JSF_VERSION:
-				return instanceValue == null ? null : instanceValue.toString();
+				return convertJSFVersionToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -143,6 +162,26 @@ public class JSFLibraryRegistryFactoryImpl extends EFactoryImpl implements JSFLi
 	public PluginProvidedJSFLibrary createPluginProvidedJSFLibrary() {
 		PluginProvidedJSFLibraryImpl pluginProvidedJSFLibrary = new PluginProvidedJSFLibraryImpl();
 		return pluginProvidedJSFLibrary;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JSFVersion createJSFVersionFromString(EDataType eDataType, String initialValue) {
+		JSFVersion result = JSFVersion.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertJSFVersionToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**

@@ -161,6 +161,8 @@ public class JSFCorePlugin extends WTPPlugin {
 //				log(IStatus.INFO, Messages.JSFLibraryRegistry_NoLoadCreatingNew);
 				
 				jsfLibraryRegistry = JSFLibraryRegistryFactory.eINSTANCE.createJSFLibraryRegistry();
+				//next line ensures that old registry does not get written out on exit when save occurs
+				jsfLibraryRegistryResource = (JSFLibraryRegistryResourceImpl)resourceFactory.createResource(jsfLibRegURI);
 				jsfLibraryRegistryResource.getContents().add(jsfLibraryRegistry);
 				loadJSFLibraryExtensions();
 			}

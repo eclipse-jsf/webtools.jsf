@@ -11,7 +11,6 @@
 package org.eclipse.jst.jsf.core.internal.jsflibraryregistry;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -53,22 +52,11 @@ public interface JSFLibrary extends EObject{
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>ID</em>' attribute.
-	 * @see #setID(String)
 	 * @see org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryPackage#getJSFLibrary_ID()
-	 * @model default="" id="true" required="true"
+	 * @model default="" transient="true" changeable="false" derived="true"
 	 * @generated
 	 */
 	String getID();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary#getID <em>ID</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>ID</em>' attribute.
-	 * @see #getID()
-	 * @generated
-	 */
-	void setID(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.

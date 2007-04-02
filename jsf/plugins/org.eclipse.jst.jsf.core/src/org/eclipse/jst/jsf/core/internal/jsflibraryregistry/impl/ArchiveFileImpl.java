@@ -144,7 +144,7 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 	 * @generated
 	 */
 	protected EClass eStaticClass() {
-		return JSFLibraryRegistryPackage.eINSTANCE.getArchiveFile();
+		return JSFLibraryRegistryPackage.Literals.ARCHIVE_FILE;
 	}
 
 	/**
@@ -252,7 +252,17 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 	 */
 	public JSFLibrary getJSFLibrary() {
 		if (eContainerFeatureID != JSFLibraryRegistryPackage.ARCHIVE_FILE__JSF_LIBRARY) return null;
-		return (JSFLibrary)eContainer;
+		return (JSFLibrary)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetJSFLibrary(JSFLibrary newJSFLibrary, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newJSFLibrary, JSFLibraryRegistryPackage.ARCHIVE_FILE__JSF_LIBRARY, msgs);
+		return msgs;
 	}
 
 	/**
@@ -262,15 +272,15 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 	 * @generated
 	 */
 	public void setJSFLibrary(JSFLibrary newJSFLibrary) {
-		if (newJSFLibrary != eContainer || (eContainerFeatureID != JSFLibraryRegistryPackage.ARCHIVE_FILE__JSF_LIBRARY && newJSFLibrary != null)) {
+		if (newJSFLibrary != eInternalContainer() || (eContainerFeatureID != JSFLibraryRegistryPackage.ARCHIVE_FILE__JSF_LIBRARY && newJSFLibrary != null)) {
 			if (EcoreUtil.isAncestor(this, newJSFLibrary))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
-			if (eContainer != null)
+			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newJSFLibrary != null)
 				msgs = ((InternalEObject)newJSFLibrary).eInverseAdd(this, JSFLibraryRegistryPackage.JSF_LIBRARY__ARCHIVE_FILES, JSFLibrary.class, msgs);
-			msgs = eBasicSetContainer((InternalEObject)newJSFLibrary, JSFLibraryRegistryPackage.ARCHIVE_FILE__JSF_LIBRARY, msgs);
+			msgs = basicSetJSFLibrary(newJSFLibrary, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
@@ -490,6 +500,131 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case JSFLibraryRegistryPackage.ARCHIVE_FILE__JSF_LIBRARY:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetJSFLibrary((JSFLibrary)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case JSFLibraryRegistryPackage.ARCHIVE_FILE__JSF_LIBRARY:
+				return basicSetJSFLibrary(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID) {
+			case JSFLibraryRegistryPackage.ARCHIVE_FILE__JSF_LIBRARY:
+				return eInternalContainer().eInverseRemove(this, JSFLibraryRegistryPackage.JSF_LIBRARY__ARCHIVE_FILES, JSFLibrary.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case JSFLibraryRegistryPackage.ARCHIVE_FILE__RELATIVE_TO_WORKSPACE:
+				return isRelativeToWorkspace() ? Boolean.TRUE : Boolean.FALSE;
+			case JSFLibraryRegistryPackage.ARCHIVE_FILE__SOURCE_LOCATION:
+				return getSourceLocation();
+			case JSFLibraryRegistryPackage.ARCHIVE_FILE__RELATIVE_DEST_LOCATION:
+				return getRelativeDestLocation();
+			case JSFLibraryRegistryPackage.ARCHIVE_FILE__JSF_LIBRARY:
+				return getJSFLibrary();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case JSFLibraryRegistryPackage.ARCHIVE_FILE__RELATIVE_TO_WORKSPACE:
+				setRelativeToWorkspace(((Boolean)newValue).booleanValue());
+				return;
+			case JSFLibraryRegistryPackage.ARCHIVE_FILE__SOURCE_LOCATION:
+				setSourceLocation((String)newValue);
+				return;
+			case JSFLibraryRegistryPackage.ARCHIVE_FILE__RELATIVE_DEST_LOCATION:
+				setRelativeDestLocation((String)newValue);
+				return;
+			case JSFLibraryRegistryPackage.ARCHIVE_FILE__JSF_LIBRARY:
+				setJSFLibrary((JSFLibrary)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case JSFLibraryRegistryPackage.ARCHIVE_FILE__RELATIVE_TO_WORKSPACE:
+				setRelativeToWorkspace(RELATIVE_TO_WORKSPACE_EDEFAULT);
+				return;
+			case JSFLibraryRegistryPackage.ARCHIVE_FILE__SOURCE_LOCATION:
+				setSourceLocation(SOURCE_LOCATION_EDEFAULT);
+				return;
+			case JSFLibraryRegistryPackage.ARCHIVE_FILE__RELATIVE_DEST_LOCATION:
+				setRelativeDestLocation(RELATIVE_DEST_LOCATION_EDEFAULT);
+				return;
+			case JSFLibraryRegistryPackage.ARCHIVE_FILE__JSF_LIBRARY:
+				setJSFLibrary((JSFLibrary)null);
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case JSFLibraryRegistryPackage.ARCHIVE_FILE__RELATIVE_TO_WORKSPACE:
+				return relativeToWorkspace != RELATIVE_TO_WORKSPACE_EDEFAULT;
+			case JSFLibraryRegistryPackage.ARCHIVE_FILE__SOURCE_LOCATION:
+				return SOURCE_LOCATION_EDEFAULT == null ? sourceLocation != null : !SOURCE_LOCATION_EDEFAULT.equals(sourceLocation);
+			case JSFLibraryRegistryPackage.ARCHIVE_FILE__RELATIVE_DEST_LOCATION:
+				return RELATIVE_DEST_LOCATION_EDEFAULT == null ? relativeDestLocation != null : !RELATIVE_DEST_LOCATION_EDEFAULT.equals(relativeDestLocation);
+			case JSFLibraryRegistryPackage.ARCHIVE_FILE__JSF_LIBRARY:
+				return getJSFLibrary() != null;
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
 	 * Gets the Bundle instance by parent PluginProvidedJSFLibrary instance's
 	 * pluginID property, if and only if the parent JSFLibrary instance IS a
 	 * PluginProvidedJSFLibrary, else returns null.
@@ -531,165 +666,6 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 			newPath = path;
 		}
 		return newPath;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * @param otherEnd 
-	 * @param featureID 
-	 * @param baseClass 
-	 * @param msgs 
-	 * @return the inverse notification chain 
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case JSFLibraryRegistryPackage.ARCHIVE_FILE__JSF_LIBRARY:
-					if (eContainer != null)
-						msgs = eBasicRemoveFromContainer(msgs);
-					return eBasicSetContainer(otherEnd, JSFLibraryRegistryPackage.ARCHIVE_FILE__JSF_LIBRARY, msgs);
-				default:
-					return eDynamicInverseAdd(otherEnd, featureID, baseClass, msgs);
-			}
-		}
-		if (eContainer != null)
-			msgs = eBasicRemoveFromContainer(msgs);
-		return eBasicSetContainer(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * @param otherEnd 
-	 * @param featureID 
-	 * @param baseClass 
-	 * @param msgs 
-	 * @return the notification chain 
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case JSFLibraryRegistryPackage.ARCHIVE_FILE__JSF_LIBRARY:
-					return eBasicSetContainer(null, JSFLibraryRegistryPackage.ARCHIVE_FILE__JSF_LIBRARY, msgs);
-				default:
-					return eDynamicInverseRemove(otherEnd, featureID, baseClass, msgs);
-			}
-		}
-		return eBasicSetContainer(null, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * @param msgs 
-	 * @return the notification chain 
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain eBasicRemoveFromContainer(NotificationChain msgs) {
-		if (eContainerFeatureID >= 0) {
-			switch (eContainerFeatureID) {
-				case JSFLibraryRegistryPackage.ARCHIVE_FILE__JSF_LIBRARY:
-					return eContainer.eInverseRemove(this, JSFLibraryRegistryPackage.JSF_LIBRARY__ARCHIVE_FILES, JSFLibrary.class, msgs);
-				default:
-					return eDynamicBasicRemoveFromContainer(msgs);
-			}
-		}
-		return eContainer.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - eContainerFeatureID, null, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * @param eFeature 
-	 * @param resolve 
-	 * @return the request feature value 
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Object eGet(EStructuralFeature eFeature, boolean resolve) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case JSFLibraryRegistryPackage.ARCHIVE_FILE__RELATIVE_TO_WORKSPACE:
-				return isRelativeToWorkspace() ? Boolean.TRUE : Boolean.FALSE;
-			case JSFLibraryRegistryPackage.ARCHIVE_FILE__SOURCE_LOCATION:
-				return getSourceLocation();
-			case JSFLibraryRegistryPackage.ARCHIVE_FILE__RELATIVE_DEST_LOCATION:
-				return getRelativeDestLocation();
-			case JSFLibraryRegistryPackage.ARCHIVE_FILE__JSF_LIBRARY:
-				return getJSFLibrary();
-		}
-		return eDynamicGet(eFeature, resolve);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * @param eFeature 
-	 * @param newValue 
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void eSet(EStructuralFeature eFeature, Object newValue) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case JSFLibraryRegistryPackage.ARCHIVE_FILE__RELATIVE_TO_WORKSPACE:
-				setRelativeToWorkspace(((Boolean)newValue).booleanValue());
-				return;
-			case JSFLibraryRegistryPackage.ARCHIVE_FILE__SOURCE_LOCATION:
-				setSourceLocation((String)newValue);
-				return;
-			case JSFLibraryRegistryPackage.ARCHIVE_FILE__RELATIVE_DEST_LOCATION:
-				setRelativeDestLocation((String)newValue);
-				return;
-			case JSFLibraryRegistryPackage.ARCHIVE_FILE__JSF_LIBRARY:
-				setJSFLibrary((JSFLibrary)newValue);
-				return;
-		}
-		eDynamicSet(eFeature, newValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * @param eFeature 
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void eUnset(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case JSFLibraryRegistryPackage.ARCHIVE_FILE__RELATIVE_TO_WORKSPACE:
-				setRelativeToWorkspace(RELATIVE_TO_WORKSPACE_EDEFAULT);
-				return;
-			case JSFLibraryRegistryPackage.ARCHIVE_FILE__SOURCE_LOCATION:
-				setSourceLocation(SOURCE_LOCATION_EDEFAULT);
-				return;
-			case JSFLibraryRegistryPackage.ARCHIVE_FILE__RELATIVE_DEST_LOCATION:
-				setRelativeDestLocation(RELATIVE_DEST_LOCATION_EDEFAULT);
-				return;
-			case JSFLibraryRegistryPackage.ARCHIVE_FILE__JSF_LIBRARY:
-				setJSFLibrary((JSFLibrary)null);
-				return;
-		}
-		eDynamicUnset(eFeature);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * @param eFeature 
-	 * @return true if the feature is set 
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean eIsSet(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case JSFLibraryRegistryPackage.ARCHIVE_FILE__RELATIVE_TO_WORKSPACE:
-				return relativeToWorkspace != RELATIVE_TO_WORKSPACE_EDEFAULT;
-			case JSFLibraryRegistryPackage.ARCHIVE_FILE__SOURCE_LOCATION:
-				return SOURCE_LOCATION_EDEFAULT == null ? sourceLocation != null : !SOURCE_LOCATION_EDEFAULT.equals(sourceLocation);
-			case JSFLibraryRegistryPackage.ARCHIVE_FILE__RELATIVE_DEST_LOCATION:
-				return RELATIVE_DEST_LOCATION_EDEFAULT == null ? relativeDestLocation != null : !RELATIVE_DEST_LOCATION_EDEFAULT.equals(relativeDestLocation);
-			case JSFLibraryRegistryPackage.ARCHIVE_FILE__JSF_LIBRARY:
-				return getJSFLibrary() != null;
-		}
-		return eDynamicIsSet(eFeature);
 	}
 
 	/**

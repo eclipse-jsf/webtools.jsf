@@ -119,12 +119,12 @@ public interface JSFLibraryRegistry extends EObject{
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * @param value 
 	 * <!-- end-user-doc -->
+	 * @param implementation library 
 	 * @model implementationRequired="true"
 	 * @generated
 	 */
-	void setDefaultImplementation(JSFLibrary value);
+	void setDefaultImplementation(JSFLibrary implementation);
 
 	/**
 	 * <!-- begin-user-doc -->

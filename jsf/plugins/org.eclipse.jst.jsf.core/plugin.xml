@@ -244,4 +244,10 @@
             type="org.eclipse.wst.validation.problemmarker">
       </super>
    </extension>
+   
+  <extension point="org.eclipse.jdt.core.classpathContainerInitializer">
+    <classpathContainerInitializer
+      class="org.eclipse.jst.jsf.core.internal.JSFLibrariesContainerInitializer"
+      id="org.eclipse.jst.jsf.core.internal.jsflibrarycontainer"/>
+  </extension>
 </plugin>

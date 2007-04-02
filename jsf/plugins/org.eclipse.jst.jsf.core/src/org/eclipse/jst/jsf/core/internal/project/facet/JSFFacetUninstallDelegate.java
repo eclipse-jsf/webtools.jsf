@@ -10,17 +10,25 @@
  *******************************************************************************/ 
 package org.eclipse.jst.jsf.core.internal.project.facet;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.jdt.core.IClasspathEntry;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jst.j2ee.common.ParamValue;
 import org.eclipse.jst.j2ee.internal.J2EEVersionConstants;
 import org.eclipse.jst.j2ee.web.componentcore.util.WebArtifactEdit;
 import org.eclipse.jst.j2ee.webapplication.ContextParam;
 import org.eclipse.jst.j2ee.webapplication.Servlet;
 import org.eclipse.jst.j2ee.webapplication.WebApp;
+import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
+import org.eclipse.jst.jsf.core.internal.JSFLibrariesContainerInitializer;
 import org.eclipse.wst.common.project.facet.core.IDelegate;
 import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
 
@@ -46,14 +54,8 @@ public class JSFFacetUninstallDelegate implements IDelegate {
 
 			try {
 
-				// Remove JSF App Model
-
-				// Rempoe JSF Impl Class Container
-				// Add JSF Impl Class Container
-				// final IJavaProject jproj = JavaCore.create(project);
-				// final IPath cont = new
-				// Path(JSFImplContainer.CONTAINER_ID).append(project.getName());
-				// removeClasspathContainer(jproj, cont);
+				// Remove JSF Libraries
+				removeJSFLibaries(project, monitor);
 
 				// remove servlet stuff from web.xml
 				uninstallJSFReferencesFromWebApp(project, monitor);
@@ -67,6 +69,34 @@ public class JSFFacetUninstallDelegate implements IDelegate {
 				}
 			}
 		}
+	}
+
+	private void removeJSFLibaries(IProject project, IProgressMonitor monitor) {
+		 final IJavaProject jproj = JavaCore.create(project);
+		 List keptEntries = new ArrayList();
+		 try {
+			IClasspathEntry[] entries = jproj.getRawClasspath();
+			  keptEntries = new ArrayList();
+			 for (int i=0;i<entries.length;i++){
+				 IClasspathEntry entry = entries[i];
+				 if (entry.getEntryKind() == IClasspathEntry.CPE_CONTAINER && 
+						 ! entry.getPath().segment(0)
+						 	.equals(JSFLibrariesContainerInitializer.JSF_LIBRARY_CP_CONTAINER_ID))
+					 keptEntries.add(entry);
+			 }
+		} catch (JavaModelException e) {
+			JSFCorePlugin.log(e, "Cannot get classpath entries to remove JSF Libraries for: "+project.getName());
+		}
+		 
+		 if (keptEntries.size() > 0){
+			 try {
+				jproj.setRawClasspath((IClasspathEntry[])keptEntries.toArray(new IClasspathEntry[0]), monitor);
+			} catch (JavaModelException e) {
+				JSFCorePlugin.log(e, "Exception occured while removing JSF Libraries during JSF Facet uninstall");
+			}
+		 }
+	
+		
 	}
 
 	private void uninstallJSFReferencesFromWebApp(IProject project,

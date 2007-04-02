@@ -21,16 +21,21 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.jdt.core.IClasspathAttribute;
+import org.eclipse.jdt.core.IClasspathEntry;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jst.j2ee.classpathdep.ClasspathDependencyUtil;
+import org.eclipse.jst.j2ee.classpathdep.IClasspathDependencyConstants;
 import org.eclipse.jst.j2ee.internal.J2EEVersionConstants;
 import org.eclipse.jst.j2ee.web.componentcore.util.WebArtifactEdit;
 import org.eclipse.jst.j2ee.webapplication.Servlet;
 import org.eclipse.jst.j2ee.webapplication.WebApp;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
-import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.J2EEModuleDependencyDelegate;
-import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfiglModelSource;
-import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfigProjectData;
-import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfigModel;
-import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFProjectLibraryReference;
+import org.eclipse.jst.jsf.core.internal.JSFLibrariesContainerInitializer;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryReference;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryRegistryUtil;
 import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
 import org.eclipse.wst.common.project.facet.core.IDelegate;
 import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
@@ -39,7 +44,6 @@ import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
  * JSF Facet Install Delegate for WTP faceted web projects.
  * 
  * Uses <code>com.eclispe.jst.jsf.core.internal.project.facet.JSFFacetInstallDataModelProvider<code> for model
- * 	 <li> TODO: creates JSF Application Model
  * 	 <li> creates JSF configuration file if not present
  * 	 <li> updates web.xml for: servlet, servlet-mapping and context-param
  * 	 <li> adds implementation jars to WEB-INF/lib if user requests
@@ -72,21 +76,9 @@ public class JSFFacetInstallDelegate implements IDelegate {
 //				config = new JSFFacetInstallConfig();
 //				config.setJsfImplID(jsfImplID);
 			}
-			// Create JSF App Model
-			// tbd
 			
-			// Update project dependencies and save configiuration data
-			java.util.List implLibs = (List) config.getProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION_LIBRARIES);
-			java.util.List compLibs = (List) config.getProperty(IJSFFacetInstallDataModelProperties.COMPONENT_LIBRARIES);
-			
-			JSFLibraryConfiglModelSource source = new JSFLibraryConfigProjectData(project);		
-			JSFLibraryConfigModel model = JSFLibraryConfigModel.JSFLibraryConfigModelFactory.createInstance(source);
-			model.setCurrentJSFImplementationLibrarySelection((JSFProjectLibraryReference) implLibs.get(0));
-			model.setCurrentJSFComponentLibrarySelection(compLibs);	
-			
-			J2EEModuleDependencyDelegate updateDependecnies = new J2EEModuleDependencyDelegate(project);
-			updateDependecnies.updateProjectDependencies(model, monitor);			
-			model.saveData(project);			
+			// Create JSF Libs as classpath containers and set WTP dependencies as required					
+			createClasspathEntries(project, config, monitor);
 			
 			// Create config file
 			createConfigFile(project, fv, config, monitor);
@@ -105,19 +97,61 @@ public class JSFFacetInstallDelegate implements IDelegate {
 		}
 	}
 
-	/** Obsoleted M1 approach
-	private void deployJSFLibraries(IProject project,
-			final IDataModel config, IProgressMonitor monitor) {
-		
-		if (config.getBooleanProperty(IJSFFacetInstallDataModelProperties.DEPLOY_IMPLEMENTATION)){
-			JSFLibrary impl = (JSFLibrary)config.getProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION);
-			if (impl != null){
-				IPath destPath = project.getLocation().append(getWebContentPath(project));
-				impl.copyTo(destPath.toOSString());			
+	private void createClasspathEntries(IProject project, IDataModel config, IProgressMonitor monitor) {
+		IJavaProject javaProject = JavaCore.create(project);	
+		List cpEntries = new ArrayList();
+		try {
+			for (int i=0;i<javaProject.getRawClasspath().length;i++){
+				cpEntries.add(javaProject.getRawClasspath()[i]);
 			}
+		} catch (JavaModelException e) {
+			JSFCorePlugin.log(e, "Unable to read classpath");
 		}
+		
+		//Implementation
+		IPath cp = new Path(JSFLibrariesContainerInitializer.JSF_LIBRARY_CP_CONTAINER_ID);		
+		JSFLibraryReference libref = (JSFLibraryReference)config.getProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION);
+		IPath path = cp.append(new Path(libref.getID()));
+		IClasspathEntry entry = getNewCPEntry(path, libref);		
+		cpEntries.add(entry);
+
+		JSFLibraryReference[] compLibs = (JSFLibraryReference[])config.getProperty(IJSFFacetInstallDataModelProperties.COMPONENT_LIBRARIES);
+		for (int i=0;i<compLibs.length;i++){
+			libref = (JSFLibraryReference)compLibs[i];		
+			cp = new Path(JSFLibrariesContainerInitializer.JSF_LIBRARY_CP_CONTAINER_ID);		
+			path = cp.append(new Path(libref.getID()));
+			entry = getNewCPEntry(path, libref);
+			if (entry != null)
+				cpEntries.add(entry);
+		}	
+
+		JSFLibraryRegistryUtil.setRawClasspath(javaProject, cpEntries, monitor);
 	}
-	*/
+
+	//creates new IClasspathEntry with WTP dependency attribute set, if required
+	private IClasspathEntry getNewCPEntry(IPath path, JSFLibraryReference lib) {
+		
+		IClasspathEntry entry = null;
+		if (lib.isCheckedToBeDeployed()){
+			IClasspathAttribute depAttrib = JavaCore.newClasspathAttribute(IClasspathDependencyConstants.CLASSPATH_COMPONENT_DEPENDENCY,
+					 ClasspathDependencyUtil.getDefaultRuntimePath(true).toString());
+			entry = JavaCore.newContainerEntry(path,null, new IClasspathAttribute[]{depAttrib}, true);
+		}
+		else {
+			entry = JavaCore.newContainerEntry(path);
+		}
+		
+		return entry;
+	}
+
+	//revisit when can set attr on new cp container.   curren
+//	private void addWTPDependencyAttribute(IProject project, IClasspathEntry entry) {
+//		try {
+//			UpdateClasspathAttributeUtil.addDependencyAttribute(null, project.getProject().getName(), entry);
+//		} catch (ExecutionException e) {
+//			JSFCorePlugin.log(e, "Unable to set WTP J2EE Module Dependency for: "+entry.getPath().lastSegment());
+//		}
+//	}
 	
 	private void createConfigFile(final IProject project,
 			final IProjectFacetVersion fv, final IDataModel config,
@@ -140,8 +174,7 @@ public class JSFFacetInstallDelegate implements IDelegate {
 				op.run(monitor);
 			}
 		} catch (CoreException e) {
-			JSFCorePlugin.getDefault().getMsgLogger().log(e);
-			e.printStackTrace();
+			JSFCorePlugin.log(e, "Exception occured while creating faces-config.xml");
 		}
 
 	}

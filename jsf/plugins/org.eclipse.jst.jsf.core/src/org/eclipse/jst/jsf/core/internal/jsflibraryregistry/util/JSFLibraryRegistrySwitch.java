@@ -64,6 +64,7 @@ public class JSFLibraryRegistrySwitch {
      * @param theEObject 
      * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * <!-- end-user-doc -->
+	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
 	public Object doSwitch(EObject theEObject) {
@@ -77,17 +78,20 @@ public class JSFLibraryRegistrySwitch {
      * @param theEObject 
      * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * <!-- end-user-doc -->
+	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
 	protected Object doSwitch(EClass theEClass, EObject theEObject) {
 		if (theEClass.eContainer() == modelPackage) {
 			return doSwitch(theEClass.getClassifierID(), theEObject);
 		}
-		List eSuperTypes = theEClass.getESuperTypes();
-		return
-			eSuperTypes.isEmpty() ?
-				defaultCase(theEObject) :
-				doSwitch((EClass)eSuperTypes.get(0), theEObject);
+		else {
+			List eSuperTypes = theEClass.getESuperTypes();
+			return
+				eSuperTypes.isEmpty() ?
+					defaultCase(theEObject) :
+					doSwitch((EClass)eSuperTypes.get(0), theEObject);
+		}
 	}
 
 	/**
@@ -97,6 +101,7 @@ public class JSFLibraryRegistrySwitch {
      * @param theEObject 
      * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * <!-- end-user-doc -->
+	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
 	protected Object doSwitch(int classifierID, EObject theEObject) {

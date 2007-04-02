@@ -49,7 +49,11 @@ import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
  */
 public class JSFUtils {
 	/**
-	 * The name of the Faces servlet class
+	 * The default name for the Faces servlet
+	 */
+	public static final String JSF_DEFAULT_SERVLET_NAME = "Faces Servlet"; //$NON-NLS-1$
+	/**
+	 * The default name of the Faces servlet class
 	 */
 	public static final String JSF_SERVLET_CLASS = "javax.faces.webapp.FacesServlet"; //$NON-NLS-1$
 	/**
@@ -205,8 +209,15 @@ public class JSFUtils {
 	 */
 	public static Servlet createOrUpdateServletRef(WebApp webApp,
 			IDataModel config, Servlet servlet) {
+		
 		String displayName = config.getStringProperty(IJSFFacetInstallDataModelProperties.SERVLET_NAME);
-
+		if (displayName.equals(""))
+			displayName = JSF_DEFAULT_SERVLET_NAME;
+		
+		String className = config.getStringProperty(IJSFFacetInstallDataModelProperties.SERVLET_CLASSNAME);
+		if (className.equals(""))
+			className = JSF_SERVLET_CLASS;
+		
 		if (servlet == null) {
 			// Create the servlet instance and set up the parameters from data
 			// model
@@ -215,7 +226,7 @@ public class JSFUtils {
 
 			ServletType servletType = WebapplicationFactory.eINSTANCE
 					.createServletType();
-			servletType.setClassName(JSF_SERVLET_CLASS);
+			servletType.setClassName(className);
 			servlet.setWebType(servletType);
 			servlet.setLoadOnStartup(new Integer(1));
 			// Add the servlet to the web application model

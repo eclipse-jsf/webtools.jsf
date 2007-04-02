@@ -10,9 +10,15 @@
  *******************************************************************************/ 
 package org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicEList;
@@ -24,6 +30,14 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.jdt.core.IClasspathContainer;
+import org.eclipse.jdt.core.IClasspathEntry;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jdt.internal.core.UserLibraryClasspathContainer;
+import org.eclipse.jst.jsf.core.internal.JSFLibrariesContainerInitializer;
+import org.eclipse.jst.jsf.core.internal.JSFLibraryClasspathContainer;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistry;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryPackage;
@@ -109,7 +123,7 @@ public class JSFLibraryRegistryImpl extends EObjectImpl implements JSFLibraryReg
 	 * @generated
 	 */
 	protected EClass eStaticClass() {
-		return JSFLibraryRegistryPackage.eINSTANCE.getJSFLibraryRegistry();
+		return JSFLibraryRegistryPackage.Literals.JSF_LIBRARY_REGISTRY;
 	}
 
 	/**
@@ -183,6 +197,97 @@ public class JSFLibraryRegistryImpl extends EObjectImpl implements JSFLibraryReg
 		} else {
 			setDefaultImplementationID(null);
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case JSFLibraryRegistryPackage.JSF_LIBRARY_REGISTRY__JSF_LIBRARIES:
+				return ((InternalEList)getJSFLibraries()).basicRemove(otherEnd, msgs);
+			case JSFLibraryRegistryPackage.JSF_LIBRARY_REGISTRY__PLUGIN_PROVIDED_JSF_LIBRARIES:
+				return ((InternalEList)getPluginProvidedJSFLibraries()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case JSFLibraryRegistryPackage.JSF_LIBRARY_REGISTRY__DEFAULT_IMPLEMENTATION_ID:
+				return getDefaultImplementationID();
+			case JSFLibraryRegistryPackage.JSF_LIBRARY_REGISTRY__JSF_LIBRARIES:
+				return getJSFLibraries();
+			case JSFLibraryRegistryPackage.JSF_LIBRARY_REGISTRY__PLUGIN_PROVIDED_JSF_LIBRARIES:
+				return getPluginProvidedJSFLibraries();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case JSFLibraryRegistryPackage.JSF_LIBRARY_REGISTRY__DEFAULT_IMPLEMENTATION_ID:
+				setDefaultImplementationID((String)newValue);
+				return;
+			case JSFLibraryRegistryPackage.JSF_LIBRARY_REGISTRY__JSF_LIBRARIES:
+				getJSFLibraries().clear();
+				getJSFLibraries().addAll((Collection)newValue);
+				return;
+			case JSFLibraryRegistryPackage.JSF_LIBRARY_REGISTRY__PLUGIN_PROVIDED_JSF_LIBRARIES:
+				getPluginProvidedJSFLibraries().clear();
+				getPluginProvidedJSFLibraries().addAll((Collection)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case JSFLibraryRegistryPackage.JSF_LIBRARY_REGISTRY__DEFAULT_IMPLEMENTATION_ID:
+				setDefaultImplementationID(DEFAULT_IMPLEMENTATION_ID_EDEFAULT);
+				return;
+			case JSFLibraryRegistryPackage.JSF_LIBRARY_REGISTRY__JSF_LIBRARIES:
+				getJSFLibraries().clear();
+				return;
+			case JSFLibraryRegistryPackage.JSF_LIBRARY_REGISTRY__PLUGIN_PROVIDED_JSF_LIBRARIES:
+				getPluginProvidedJSFLibraries().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case JSFLibraryRegistryPackage.JSF_LIBRARY_REGISTRY__DEFAULT_IMPLEMENTATION_ID:
+				return DEFAULT_IMPLEMENTATION_ID_EDEFAULT == null ? defaultImplementationID != null : !DEFAULT_IMPLEMENTATION_ID_EDEFAULT.equals(defaultImplementationID);
+			case JSFLibraryRegistryPackage.JSF_LIBRARY_REGISTRY__JSF_LIBRARIES:
+				return jsfLibraries != null && !jsfLibraries.isEmpty();
+			case JSFLibraryRegistryPackage.JSF_LIBRARY_REGISTRY__PLUGIN_PROVIDED_JSF_LIBRARIES:
+				return pluginProvidedJSFLibraries != null && !pluginProvidedJSFLibraries.isEmpty();
+		}
+		return super.eIsSet(featureID);
 	}
 
 	/**
@@ -326,114 +431,6 @@ public class JSFLibraryRegistryImpl extends EObjectImpl implements JSFLibraryReg
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * @param otherEnd 
-	 * @param featureID 
-	 * @param baseClass 
-	 * @param msgs 
-	 * @return the notification chain 
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case JSFLibraryRegistryPackage.JSF_LIBRARY_REGISTRY__JSF_LIBRARIES:
-					return ((InternalEList)getJSFLibraries()).basicRemove(otherEnd, msgs);
-				case JSFLibraryRegistryPackage.JSF_LIBRARY_REGISTRY__PLUGIN_PROVIDED_JSF_LIBRARIES:
-					return ((InternalEList)getPluginProvidedJSFLibraries()).basicRemove(otherEnd, msgs);
-				default:
-					return eDynamicInverseRemove(otherEnd, featureID, baseClass, msgs);
-			}
-		}
-		return eBasicSetContainer(null, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * @param eFeature 
-	 * @param resolve 
-	 * @return the value of the feature 
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Object eGet(EStructuralFeature eFeature, boolean resolve) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case JSFLibraryRegistryPackage.JSF_LIBRARY_REGISTRY__DEFAULT_IMPLEMENTATION_ID:
-				return getDefaultImplementationID();
-			case JSFLibraryRegistryPackage.JSF_LIBRARY_REGISTRY__JSF_LIBRARIES:
-				return getJSFLibraries();
-			case JSFLibraryRegistryPackage.JSF_LIBRARY_REGISTRY__PLUGIN_PROVIDED_JSF_LIBRARIES:
-				return getPluginProvidedJSFLibraries();
-		}
-		return eDynamicGet(eFeature, resolve);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * @param eFeature 
-	 * @param newValue 
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void eSet(EStructuralFeature eFeature, Object newValue) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case JSFLibraryRegistryPackage.JSF_LIBRARY_REGISTRY__DEFAULT_IMPLEMENTATION_ID:
-				setDefaultImplementationID((String)newValue);
-				return;
-			case JSFLibraryRegistryPackage.JSF_LIBRARY_REGISTRY__JSF_LIBRARIES:
-				getJSFLibraries().clear();
-				getJSFLibraries().addAll((Collection)newValue);
-				return;
-			case JSFLibraryRegistryPackage.JSF_LIBRARY_REGISTRY__PLUGIN_PROVIDED_JSF_LIBRARIES:
-				getPluginProvidedJSFLibraries().clear();
-				getPluginProvidedJSFLibraries().addAll((Collection)newValue);
-				return;
-		}
-		eDynamicSet(eFeature, newValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * @param eFeature 
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void eUnset(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case JSFLibraryRegistryPackage.JSF_LIBRARY_REGISTRY__DEFAULT_IMPLEMENTATION_ID:
-				setDefaultImplementationID(DEFAULT_IMPLEMENTATION_ID_EDEFAULT);
-				return;
-			case JSFLibraryRegistryPackage.JSF_LIBRARY_REGISTRY__JSF_LIBRARIES:
-				getJSFLibraries().clear();
-				return;
-			case JSFLibraryRegistryPackage.JSF_LIBRARY_REGISTRY__PLUGIN_PROVIDED_JSF_LIBRARIES:
-				getPluginProvidedJSFLibraries().clear();
-				return;
-		}
-		eDynamicUnset(eFeature);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * @param eFeature 
-	 * @return true if the feature value is set 
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean eIsSet(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case JSFLibraryRegistryPackage.JSF_LIBRARY_REGISTRY__DEFAULT_IMPLEMENTATION_ID:
-				return DEFAULT_IMPLEMENTATION_ID_EDEFAULT == null ? defaultImplementationID != null : !DEFAULT_IMPLEMENTATION_ID_EDEFAULT.equals(defaultImplementationID);
-			case JSFLibraryRegistryPackage.JSF_LIBRARY_REGISTRY__JSF_LIBRARIES:
-				return jsfLibraries != null && !jsfLibraries.isEmpty();
-			case JSFLibraryRegistryPackage.JSF_LIBRARY_REGISTRY__PLUGIN_PROVIDED_JSF_LIBRARIES:
-				return pluginProvidedJSFLibraries != null && !pluginProvidedJSFLibraries.isEmpty();
-		}
-		return eDynamicIsSet(eFeature);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
 	 * @return the string representation 
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -447,5 +444,56 @@ public class JSFLibraryRegistryImpl extends EObjectImpl implements JSFLibraryReg
 		result.append(')');
 		return result.toString();
 	}
-
+	
+	/**
+	 * Copied from JDT UserLibraryManager
+	 * @generated NOT
+	 * @param name
+	 * @param remove
+	 * @param monitor
+	 * @throws JavaModelException
+	 */
+	private void rebindClasspathEntries(String name, boolean remove, IProgressMonitor monitor) throws JavaModelException {
+		IWorkspaceRoot root= ResourcesPlugin.getWorkspace().getRoot();
+		IJavaProject[] projects= JavaCore.create(root).getJavaProjects();
+		IPath containerPath= new Path(JSFLibrariesContainerInitializer.JSF_LIBRARY_CP_CONTAINER_ID).append(name);
+		
+		ArrayList affectedProjects= new ArrayList();
+		
+		for (int i= 0; i < projects.length; i++) {
+			IJavaProject project= projects[i];
+			IClasspathEntry[] entries= project.getRawClasspath();
+			for (int k= 0; k < entries.length; k++) {
+				IClasspathEntry curr= entries[k];
+				if (curr.getEntryKind() == IClasspathEntry.CPE_CONTAINER) {
+					if (containerPath.equals(curr.getPath())) {
+						affectedProjects.add(project);
+						break;
+					}				
+				}
+			}
+		}
+		if (!affectedProjects.isEmpty()) {
+			IJavaProject[] affected= (IJavaProject[]) affectedProjects.toArray(new IJavaProject[affectedProjects.size()]);
+			IClasspathContainer[] containers= new IClasspathContainer[affected.length];
+			if (!remove) {
+				// Previously, containers array only contained a null value. Then, user library classpath entry was first removed
+				// and then added a while after when post change delta event on .classpath file was fired...
+				// Unfortunately, in some cases, this event was fired a little bit too late and missed the refresh of Package Explorer
+				// (see bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=61872)
+				// So now, instanciate a new user library classpath container instead which allow to refresh its content immediately
+				// as there's no classpath entry removal...
+				// Note that it works because equals(Object) method is not overridden for UserLibraryClasspathContainer.
+				// If it was, the update wouldn't happen while setting classpath container
+				// @see javaCore.setClasspathContainer(IPath, IJavaProject[], IClasspathContainer[], IProgressMonitor)
+				JSFLibraryClasspathContainer container= new JSFLibraryClasspathContainer(null);
+				containers[0] = container;
+			}
+			JavaCore.setClasspathContainer(containerPath, affected, containers, monitor);
+		} else {
+			if (monitor != null) {
+				monitor.done();
+			}
+		}
+	}
 } //JSFLibraryRegistryImpl
