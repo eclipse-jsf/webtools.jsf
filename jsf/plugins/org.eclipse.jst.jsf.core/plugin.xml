@@ -86,6 +86,9 @@
   <extension
          point="org.eclipse.ui.startup">
       <startup class="org.eclipse.jst.jsf.designtime.internal.jsp.StartupHandler"/>
+      <startup
+            class="org.eclipse.jst.jsf.core.internal.RegistryMigrationStartupHandler">
+      </startup>
    </extension>
       <extension
          point="org.eclipse.jst.jsf.common.symbolSourceProvider">

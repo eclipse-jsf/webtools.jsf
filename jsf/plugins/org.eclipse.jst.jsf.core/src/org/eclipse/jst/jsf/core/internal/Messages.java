@@ -21,47 +21,164 @@ import org.eclipse.osgi.util.NLS;
 public class Messages extends NLS {
 	private static final String BUNDLE_NAME = "org.eclipse.jst.jsf.core.internal.messages"; //$NON-NLS-1$
 
+
+	/**
+	 * see messages.properties
+	 */
 	public static String JSFLibCfgDialogSettingData_Sticky_Component_Lib_Not_Exist;
 
+    /**
+     * see messages.properties
+     */
 	public static String JSFLibraryConfigModel_Null_Data_Source;
 
+    /**
+     * see messages.properties
+     */
 	public static String JSFLibraryConfigPersistData_SAVED_COMPLIB_NOT_FOUND;
 
+    /**
+     * see messages.properties
+     */
 	public static String JSFLibraryConfigPersistData_SAVED_IMPLLIB_NOT_FOUND;
 
+    /**
+     * see messages.properties
+     */
 	public static String JSFLibraryRegistry_ErrorCreatingURL;
+    /**
+     * see messages.properties
+     */
 	public static String JSFLibraryRegistry_NoLoadCreatingNew;
+    /**
+     * see messages.properties
+     */
 	public static String JSFLibraryRegistry_ErrorSaving;
+    /**
+     * see messages.properties
+     */
 	public static String JSFLibraryRegistry_DEFAULT_IMPL_LABEL;
+    /**
+     * see messages.properties
+     */
 	public static String JSFLibraryRegistry_ErrorLoadingFromExtPt;
 
+    /**
+     * see messages.properties
+     */
 	public static String JSFFacetInstallDataModelProvider_ValidateServletName;
+    /**
+     * see messages.properties
+     */
 	public static String JSFFacetInstallDataModelProvider_ValidateJSFImpl;
+    /**
+     * see messages.properties
+     */
 	public static String JSFFacetInstallDataModelProvider_ValidateConfigFileEmpty;
+    /**
+     * see messages.properties
+     */
 	public static String JSFFacetInstallDataModelProvider_ValidateConfigFilePath;
+    /**
+     * see messages.properties
+     */
 	public static String JSFFacetInstallDataModelProvider_ValidateConfigFileRelative1;
+    /**
+     * see messages.properties
+     */
 	public static String JSFFacetInstallDataModelProvider_ValidateConfigFileRelative2;
+    /**
+     * see messages.properties
+     */
 	public static String JSFFacetInstallDataModelProvider_ValidateConfigFileXML;
+    /**
+     * see messages.properties
+     */
 	public static String JSFFacetInstallDataModelProvider_ValidateConfigFileSlashes;
 
+    /**
+     * see messages.properties
+     */
 	public static String ArchiveFileImpl_CannotCopyFile;
+    /**
+     * see messages.properties
+     */
 	public static String ArchiveFileImpl_CannotCloseFile;
+    /**
+     * see messages.properties
+     */
 	public static String ArchiveFileImpl_CannotLocatePluginRelativeFile;
 
+    /**
+     * see messages.properties
+     */
 	public static String JSFUtils_MissingJAR;
 
+    /**
+     * see messages.properties
+     */
 	public static String PluginProvidedJSFLibraryCreationHelper_ErrorCreating;
+    /**
+     * see messages.properties
+     */
 	public static String PluginProvidedJSFLibraryCreationHelper_ErrorMultipleDefinition;
 
+    /**
+     * see messages.properties
+     */
 	public static String JSFUtils_ErrorCreatingConfigFile;
+    /**
+     * see messages.properties
+     */
 	public static String JSFUtils_ErrorClosingConfigFile;
 
+    /**
+     * see messages.properties
+     */
 	public static String JSFAppConfigUtils_ErrorOpeningJarFile;
 
+    /**
+     * see messages.properties
+     */
 	public static String JARFileJSFAppConfigProvider_ErrorLoadingModel;
 
+    /**
+     * see messages.properties
+     */
 	public static String J2EEModuleDependencyDelegate_UpdatingJ2EEModuleDependencies;
+    /**
+     * see messages.properties
+     */
 	public static String J2EEModuleDependencyDelegate_UpdatingJ2EEModuleDependenciesForProject;
+
+    /**
+     * see messages.properties
+     */
+	public static String JSFRegistryMigration05_to_10_title;
+    /**
+     * see messages.properties
+     */
+	public static String JSFRegistryMigration05_to_10_message;
+
+    /**
+     * see messages.properties
+     */
+    public static String JSFRegistryMigration05_to_10_customMessage;
+    
+
+    /**
+     * see messages.properties
+     */
+	public static String JSFRegistryMigrationCannot05_to_10_title;
+    /**
+     * see messages.properties
+     */
+	public static String JSFRegistryMigrationCannot05_to_10_message;
+
+    /**
+     * see messages.properties
+     */
+    public static String JSFRegistryMigrationCannot05_to_10_customMessage;
 
 	static {
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
