@@ -17,6 +17,7 @@ import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryReference;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.project.facet.IJSFFacetInstallDataModelProperties;
 import org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDataModelProvider;
@@ -62,7 +63,10 @@ public class JSFFacetInstallDataModelProviderTestCases extends TestCase {
 	 * Test method for 'org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDataModelProvider.getDefaultProperty(String)'
 	 */
 	public void testGetDefaultPropertyString() {
-		Assert.assertTrue(dm.getDefaultProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION) == jsfLib);
+		Assert.assertNotNull(dm.getDefaultProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION));
+		Assert.assertTrue(dm.getDefaultProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION) instanceof JSFLibraryReference);
+		JSFLibraryReference ref = (JSFLibraryReference)dm.getDefaultProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION) ;
+		Assert.assertTrue(ref.getLibrary() == jsfLib);
 		Assert.assertTrue(dm.getDefaultProperty(IJSFFacetInstallDataModelProperties.DEPLOY_IMPLEMENTATION) == Boolean.TRUE);
 		Assert.assertTrue(dm.getDefaultProperty(IJSFFacetInstallDataModelProperties.CONFIG_PATH) != null);
 		Assert.assertTrue(dm.getDefaultProperty(IJSFFacetInstallDataModelProperties.SERVLET_NAME) != null);
