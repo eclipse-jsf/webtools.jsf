@@ -232,6 +232,8 @@ public class JSFLibraryConfigControl extends Composite {
 				btnDeployJars.setSelection(dftJSFImplLib.isCheckedToBeDeployed());	
 				cvImplLib.setSelection(new StructuredSelection(dftJSFImplLib), true);				
 			}
+			else 
+				btnDeployJars.setEnabled(false);
 		}
 		
 		loadJSFCompList();
@@ -293,7 +295,8 @@ public class JSFLibraryConfigControl extends Composite {
 			public void widgetSelected(SelectionEvent e) {
 				if (! _initing){
 					JSFLibraryReference jsflib = getCurrentSelectedJSFImplLib();
-					jsflib.setToBeDeployed(btnDeployJars.getSelection());
+					if (jsflib != null)
+						jsflib.setToBeDeployed(btnDeployJars.getSelection());
 					workingCopyModel.setCurrentJSFImplementationLibrarySelection(jsflib);//why r we doing this here???
 	//				model.setProperty(IJSFFacetInstallDataModelProperties.DEPLOY_IMPLEMENTATION, btnDeployJars.getSelection());
 					fireChangedEvent(e);
@@ -324,6 +327,7 @@ public class JSFLibraryConfigControl extends Composite {
 				public void selectionChanged(SelectionChangedEvent event) {
 					StructuredSelection ss = (StructuredSelection) event.getSelection();
 					JSFLibraryReference crtSelImplLib = (JSFLibraryReference) ss.getFirstElement();
+					if (crtSelImplLib != null) btnDeployJars.setEnabled(true);
 					crtSelImplLib.setToBeDeployed(btnDeployJars.getSelection());
 					workingCopyModel.setCurrentJSFImplementationLibrarySelection(crtSelImplLib);
 					model.setProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION, crtSelImplLib);
