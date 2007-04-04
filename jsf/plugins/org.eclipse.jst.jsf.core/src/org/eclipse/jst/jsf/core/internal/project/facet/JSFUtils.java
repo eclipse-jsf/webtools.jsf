@@ -38,6 +38,7 @@ import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.Messages;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.ArchiveFile;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
+import org.eclipse.jst.jsf.core.internal.provisional.IJSFCoreConstants;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
 
@@ -65,17 +66,6 @@ public class JSFUtils {
 	 */
 	public static final String JSF_DEFAULT_CONFIG_PATH = "/WEB-INF/faces-config.xml"; //$NON-NLS-1$
 
-	/**
-	 * The key that identifies
-	 */
-	// TODO: this seem not to be used; dead code?
-//	public static final String PP_JSF_FACET_INSTALLED = "is.jsf.project"; //$NON-NLS-1$
-//	public static final String PP_JSF_DEPLOY_ME = "deploy.jsf.libraries"; //$NON-NLS-1$
-//	public static final String PP_JSF_IMPL_LIB = "jsf.impl.lib"; //$NON-NLS-1$
-//	public static final String PP_JSF_NONIMPL_LIB = "jsf.nonimpl.lib"; //$NON-NLS-1$
-//	public static final String PP_JSF_AVAIL_COMP_LIB = "jsf.comp.lib.avail"; //$NON-NLS-1$
-//	public static final String PP_JSF_SEL_COMP_LIB = "jsf.comp.lib.selected"; //$NON-NLS-1$
-//	
 	/**
 	 * the key for implementation libraries in persistent properties
      * TODO: should encapsulate the property somewhere and hide the constant
@@ -111,23 +101,25 @@ public class JSFUtils {
 	 * @return Servlet - the JSF Servlet for the specified WebApp or null if not present
 	 */
 	public static Servlet findJSFServlet(WebApp webApp) {
-		Servlet servlet = null;
 		Iterator it = webApp.getServlets().iterator();
 		while (it.hasNext()) {
-			servlet = (Servlet) it.next();
+            Servlet servlet = (Servlet) it.next();
 			if (servlet.getWebType().isServletType()) {
 				if (((ServletType) servlet.getWebType()).getClassName().equals(
 						JSF_SERVLET_CLASS)) {
-					break;
+					return servlet;
 				}
 			} else if (servlet.getWebType().isJspType()) {
 				if (((JSPType) servlet.getWebType()).getJspFile().equals(
 						JSF_SERVLET_CLASS)) {
-					break;
+					return servlet;
 				}
 			}
 		}
-		return servlet;
+        
+        // if we get to here then we have finished the loop
+        // without finding the servlet we're looking for
+		return null;
 	}
 
 	/**
@@ -149,7 +141,8 @@ public class JSFUtils {
 			pw.write("<?xml version=" + QUOTE + "1.0" + QUOTE + " encoding=" //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 					+ QUOTE + "UTF-8" + QUOTE + "?>\n\n"); //$NON-NLS-1$ //$NON-NLS-2$
 
-			if (jsfVersion.equals("1.1")) { //$NON-NLS-1$
+			if (jsfVersion.equals(IJSFCoreConstants.FACET_VERSION_1_1)) 
+            { 
 				pw.write("<!DOCTYPE faces-config PUBLIC\n"); //$NON-NLS-1$
 				pw
 						.write("    " //$NON-NLS-1$
@@ -162,7 +155,9 @@ public class JSFUtils {
 
 				pw.write("<faces-config>\n\n"); //$NON-NLS-1$
 				pw.write("</faces-config>\n"); //$NON-NLS-1$
-			} else if (jsfVersion.equals("1.2")) { //$NON-NLS-1$
+			} 
+            else if (jsfVersion.equals(IJSFCoreConstants.FACET_VERSION_1_2)) 
+            {
 				pw.write("<faces-config\n"); //$NON-NLS-1$
 				pw.write("    " + "xmlns=" + QUOTE //$NON-NLS-1$ //$NON-NLS-2$
 						+ "http://java.sun.com/xml/ns/javaee" + QUOTE + "\n"); //$NON-NLS-1$ //$NON-NLS-2$
