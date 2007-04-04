@@ -163,6 +163,7 @@ public class JSFCorePlugin extends WTPPlugin {
 				JSFLibrary defLib = jsfLibraryRegistry.getDefaultImplementation();
 				if (defLib == null && jsfLibraryRegistry.getImplJSFLibraries().size() > 0){
 					jsfLibraryRegistry.setDefaultImplementation((JSFLibrary)jsfLibraryRegistry.getImplJSFLibraries().get(0));
+					saveJSFLibraryRegistry();
 				}
 				jsfLibraryRegistry.eAdapters().add(MaintainDefaultImplementationAdapter.getInstance());
 
