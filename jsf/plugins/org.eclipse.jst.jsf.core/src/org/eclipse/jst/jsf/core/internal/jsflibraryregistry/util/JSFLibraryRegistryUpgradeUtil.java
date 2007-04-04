@@ -46,6 +46,8 @@ public class JSFLibraryRegistryUpgradeUtil {
 	 * The latest version value.
 	 */
 	public static final int	   LATESTVERSION = 2;
+
+	private static final int NO_VERSION = 0;
 	
 	private static JSFLibraryRegistryUpgradeUtil INSTANCE;
 		
@@ -81,7 +83,7 @@ public class JSFLibraryRegistryUpgradeUtil {
 		{
 			int curVersion = getCurVersion();
 			
-			if (curVersion < expectedVersion)
+			if (curVersion < expectedVersion && curVersion != NO_VERSION)
 			{
 				UpgradeOperation op = getUpgradeOperation(curVersion);
 				
@@ -133,7 +135,14 @@ public class JSFLibraryRegistryUpgradeUtil {
 		{
 			return 2;
 		}
-		return 1;
+		
+		URI v1File = getRegistryURI(JSF_LIBRARY_REGISTRY_V1_URL);
+		file = new File(v1File.toFileString());
+		if (file.exists())
+		{
+			return 1;
+		}
+		return NO_VERSION;
 	}
 	
 	/**
