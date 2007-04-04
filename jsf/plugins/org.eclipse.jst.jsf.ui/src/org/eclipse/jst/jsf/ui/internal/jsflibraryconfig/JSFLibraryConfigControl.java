@@ -720,7 +720,8 @@ public class JSFLibraryConfigControl extends Composite {
 		public String getText(Object element) {
 			if (element instanceof JSFLibraryReference){
 				StringBuffer nameBuf = new StringBuffer(((JSFLibraryReference)element).getName());
-				if ((((JSFLibraryReference)element).getLibrary()).getID().equals(getDefaultImpl().getID()))
+				JSFLibrary lib = ((JSFLibraryReference)element).getLibrary();
+				if (getDefaultImpl()!= null && lib != null && lib.getID().equals(getDefaultImpl().getID()))
 					nameBuf.append(" ").append(JSFLibraryRegistry.DEFAULT_IMPL_LABEL); //$NON-NLS-1$
 				return nameBuf.toString() ;
 			}
