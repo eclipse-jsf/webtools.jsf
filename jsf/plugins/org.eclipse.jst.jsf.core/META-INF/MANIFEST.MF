@@ -32,7 +32,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.wst.html.core,
  org.eclipse.wst.validation,
  org.eclipse.wst.sse.ui,
- org.eclipse.wst.common.emf
+ org.eclipse.wst.common.emf,
+ org.eclipse.ui.browser
 Eclipse-LazyStart: true
 Export-Package: org.eclipse.jst.jsf.core.internal;x-friends:="org.eclipse.jst.jsf.core.tests,org.eclipse.jst.jsf.ui,org.eclipse.jst.jsf.ui.tests",
  org.eclipse.jst.jsf.core.internal.contentassist.el;x-friends:="org.eclipse.jst.jsf.contentassist.tests",
@@ -45,7 +46,7 @@ Export-Package: org.eclipse.jst.jsf.core.internal;x-friends:="org.eclipse.jst.js
  org.eclipse.jst.jsf.core.internal.project.facet;x-friends:="org.eclipse.jst.jsf.core.tests,org.eclipse.jst.jsf.ui,org.eclipse.jst.jsf.ui.tests",
  org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig,
  org.eclipse.jst.jsf.core.internal.provisional.jsflibraryregistry,
- org.eclipse.jst.jsf.designtime.internal.jsp;x-friends:="org.eclipse.jst.jsf.designtime.tests",
+ org.eclipse.jst.jsf.designtime.internal.jsp,
  org.eclipse.jst.jsf.designtime.internal.provisional,
  org.eclipse.jst.jsf.designtime.internal.provisional.context,
  org.eclipse.jst.jsf.designtime.internal.provisional.el,
@@ -62,4 +63,6 @@ Export-Package: org.eclipse.jst.jsf.core.internal;x-friends:="org.eclipse.jst.js
  org.eclipse.jst.jsf.core.internal.provisional.tagmatcher,
  org.eclipse.jst.jsf.core.internal.tld;x-friends:="org.eclipse.jst.pagedesigner",
  org.eclipse.jst.jsf.core.internal.provisional.set.constraint,
- org.eclipse.jst.jsf.core.internal.provisional.set.mapping
+ org.eclipse.jst.jsf.core.internal.provisional.set.mapping,
+ org.eclipse.jst.jsf.core.internal.provisional,
+ org.eclipse.jst.jsf.designtime.internal.symbols;x-friends:="org.eclipse.jst.jsf.designtime.tests"

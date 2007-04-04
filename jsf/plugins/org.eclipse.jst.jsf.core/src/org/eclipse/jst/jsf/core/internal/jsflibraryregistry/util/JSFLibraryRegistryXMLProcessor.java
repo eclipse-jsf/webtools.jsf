@@ -2,16 +2,14 @@
  * <copyright>
  * </copyright>
  *
- * $Id: JSFLibraryRegistryXMLProcessor.java,v 1.1 2007/04/02 17:07:34 gkessler Exp $
+ * $Id: JSFLibraryRegistryXMLProcessor.java,v 1.2 2007/04/04 18:50:17 cbateman Exp $
  */
 package org.eclipse.jst.jsf.core.internal.jsflibraryregistry.util;
 
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.xmi.util.XMLProcessor;
-
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryPackage;
 
 /**
@@ -43,6 +41,7 @@ public class JSFLibraryRegistryXMLProcessor extends XMLProcessor {
 	/**
 	 * Register for "*" and "xml" file extensions the JSFLibraryRegistryResourceFactoryImpl factory.
 	 * <!-- begin-user-doc -->
+	 * @return Map of registrations 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */

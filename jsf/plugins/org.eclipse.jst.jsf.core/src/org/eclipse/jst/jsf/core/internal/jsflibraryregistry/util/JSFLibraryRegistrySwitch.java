@@ -14,7 +14,11 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.*;
+import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.ArchiveFile;
+import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
+import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistry;
+import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryPackage;
+import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.PluginProvidedJSFLibrary;
 
 
 /**
@@ -64,7 +68,6 @@ public class JSFLibraryRegistrySwitch {
      * @param theEObject 
      * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * <!-- end-user-doc -->
-	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
 	public Object doSwitch(EObject theEObject) {
@@ -78,20 +81,17 @@ public class JSFLibraryRegistrySwitch {
      * @param theEObject 
      * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * <!-- end-user-doc -->
-	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
 	protected Object doSwitch(EClass theEClass, EObject theEObject) {
 		if (theEClass.eContainer() == modelPackage) {
 			return doSwitch(theEClass.getClassifierID(), theEObject);
 		}
-		else {
-			List eSuperTypes = theEClass.getESuperTypes();
-			return
-				eSuperTypes.isEmpty() ?
-					defaultCase(theEObject) :
-					doSwitch((EClass)eSuperTypes.get(0), theEObject);
-		}
+        List eSuperTypes = theEClass.getESuperTypes();
+        return
+        	eSuperTypes.isEmpty() ?
+        		defaultCase(theEObject) :
+        		doSwitch((EClass)eSuperTypes.get(0), theEObject);
 	}
 
 	/**
@@ -101,7 +101,6 @@ public class JSFLibraryRegistrySwitch {
      * @param theEObject 
      * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * <!-- end-user-doc -->
-	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
 	protected Object doSwitch(int classifierID, EObject theEObject) {

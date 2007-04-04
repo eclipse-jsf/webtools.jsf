@@ -30,7 +30,6 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
@@ -257,6 +256,9 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param newJSFLibrary 
+	 * @param msgs 
+	 * @return NotificationChain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -529,6 +531,8 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param msgs 
+	 * @return NotificationChain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -542,6 +546,10 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param featureID 
+	 * @param resolve 
+	 * @param coreType 
+	 * @return 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -561,6 +569,8 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param featureID 
+	 * @param newValue 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */

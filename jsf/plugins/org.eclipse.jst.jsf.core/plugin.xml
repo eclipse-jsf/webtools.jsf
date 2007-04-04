@@ -72,8 +72,7 @@
   <extension point="org.eclipse.wst.common.project.facet.core.runtimes">
     <supported>
 		<runtime-component any="true"/>
-<!--        	<facet id="jst.jsf" version="1.1,1.2"/> -->
-		<facet id="jst.jsf" version="1.1"/>
+        	<facet id="jst.jsf" version="1.1,1.2"/> 
     </supported>
   </extension>
     
@@ -86,6 +85,9 @@
   <extension
          point="org.eclipse.ui.startup">
       <startup class="org.eclipse.jst.jsf.designtime.internal.jsp.StartupHandler"/>
+      <startup
+            class="org.eclipse.jst.jsf.core.internal.RegistryMigrationStartupHandler">
+      </startup>
    </extension>
       <extension
          point="org.eclipse.jst.jsf.common.symbolSourceProvider">
@@ -244,6 +246,12 @@
             type="org.eclipse.wst.validation.problemmarker">
       </super>
    </extension>
+ <extension
+       point="org.eclipse.jst.jsf.common.symbolSourceProvider">
+    <symbolSourceId
+          factory="org.eclipse.jst.jsf.designtime.internal.symbols.ResourceBundleSymbolSourceProvider">
+    </symbolSourceId>
+ </extension>
    
   <extension point="org.eclipse.jdt.core.classpathContainerInitializer">
     <classpathContainerInitializer

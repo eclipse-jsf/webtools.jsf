@@ -14,7 +14,6 @@ package org.eclipse.jst.jsf.core.internal;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -41,6 +40,7 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.adapter.MaintainDefa
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl.JSFLibraryRegistryPackageImpl;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.util.JSFLibraryRegistryResourceFactoryImpl;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.util.JSFLibraryRegistryResourceImpl;
+import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.util.JSFLibraryRegistryUpgradeUtil;
 import org.eclipse.jst.jsf.core.internal.provisional.jsflibraryregistry.PluginProvidedJSFLibraryCreationHelper;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.wst.common.frameworks.internal.WTPPlugin;
@@ -65,11 +65,7 @@ public class JSFCorePlugin extends WTPPlugin {
 	
 	// The shared instance.
 	private static JSFCorePlugin plugin;
-
-	// The workspace-relative part of the URL of the JSF Library Registry
-	// persistence store.
-	private static final String JSF_LIBRARY_REGISTRY_URL = ".metadata/.plugins/org.eclipse.jst.jsf.core/JSFLibraryRegistry.xml"; //$NON-NLS-1$
-
+	
 	// The NS URI of the JSF Library Registry's Ecore package. (Must match
 	// setting on package in Ecore model.)
 	private static final String JSF_LIBRARY_REGISTRY_NSURI = "http://www.eclipse.org/webtools/jsf/schema/jsflibraryregistry.xsd"; //$NON-NLS-1$
@@ -110,7 +106,6 @@ public class JSFCorePlugin extends WTPPlugin {
 	 * @throws Exception 
 	 */
 	public void stop(BundleContext context) throws Exception {
-		saveJSFLibraryRegistry();
 		super.stop(context);
 		plugin = null;
 	}
@@ -128,7 +123,7 @@ public class JSFCorePlugin extends WTPPlugin {
 	 * 
 	 * @return the JSFLibraryRegistry EMF object.
 	 */
-	public JSFLibraryRegistry getJSFLibraryRegistry() {
+	public synchronized JSFLibraryRegistry getJSFLibraryRegistry() {
 		return jsfLibraryRegistry;
 	}
 
@@ -138,9 +133,11 @@ public class JSFCorePlugin extends WTPPlugin {
 	 */
 	public void loadJSFLibraryRegistry() {
 		try {
-			URL jsfLibRegURL = new URL(Platform.getInstanceLocation().getURL(), JSF_LIBRARY_REGISTRY_URL);
-			URI jsfLibRegURI = URI.createURI(jsfLibRegURL.toString());
+			
 			EPackage.Registry.INSTANCE.put(JSF_LIBRARY_REGISTRY_NSURI, JSFLibraryRegistryPackageImpl.init());
+			URI jsfLibRegURI = JSFLibraryRegistryUpgradeUtil.getRegistryURI(JSFLibraryRegistryUpgradeUtil.JSF_LIBRARY_REGISTRY_LATESTVERSION_URL);			
+			JSFLibraryRegistryUpgradeUtil.getInstance().upgradeRegistryIfNecessary(JSFLibraryRegistryUpgradeUtil.LATESTVERSION);
+
 			JSFLibraryRegistryResourceFactoryImpl resourceFactory = new JSFLibraryRegistryResourceFactoryImpl();
 			jsfLibraryRegistryResource = (JSFLibraryRegistryResourceImpl)resourceFactory.createResource(jsfLibRegURI);
 			try {
@@ -149,31 +146,35 @@ public class JSFCorePlugin extends WTPPlugin {
 				options.put(XMLResource.OPTION_DISABLE_NOTIFY, Boolean.TRUE);
 				jsfLibraryRegistryResource.load(options);
 				jsfLibraryRegistry = (JSFLibraryRegistry)jsfLibraryRegistryResource.getContents().get(0);
+			 	
 				loadJSFLibraryExtensions();
-			} catch(IOException ioe) {
-				/**
-				 * Remove the 3rd throwable parameter in the statement below 
-				 * to surpress error stack in log file since it is only 
-				 * informational.  Bug 144947.
-				 */  
-				//log(IStatus.INFO, Messages.JSFLibraryRegistry_NoLoadCreatingNew, ioe);
-				//removed below [174679]
-//				log(IStatus.INFO, Messages.JSFLibraryRegistry_NoLoadCreatingNew);
 				
+			} catch(IOException ioe) {
+				//Create a new Registry instance
 				jsfLibraryRegistry = JSFLibraryRegistryFactory.eINSTANCE.createJSFLibraryRegistry();
-				//next line ensures that old registry does not get written out on exit when save occurs
 				jsfLibraryRegistryResource = (JSFLibraryRegistryResourceImpl)resourceFactory.createResource(jsfLibRegURI);
 				jsfLibraryRegistryResource.getContents().add(jsfLibraryRegistry);
 				loadJSFLibraryExtensions();
+				saveJSFLibraryRegistry();
 			}
 			//add adapter to maintain default implementation
 			if (jsfLibraryRegistry != null) {
+				//check that a default impl is set.   if not pick first one if available.
+				JSFLibrary defLib = jsfLibraryRegistry.getDefaultImplementation();
+				if (defLib == null && jsfLibraryRegistry.getImplJSFLibraries().size() > 0){
+					jsfLibraryRegistry.setDefaultImplementation((JSFLibrary)jsfLibraryRegistry.getImplJSFLibraries().get(0));
+					saveJSFLibraryRegistry();
+				}
 				jsfLibraryRegistry.eAdapters().add(MaintainDefaultImplementationAdapter.getInstance());
+
 			}
 		} catch(MalformedURLException mue) {
 			log(IStatus.ERROR, Messages.JSFLibraryRegistry_ErrorCreatingURL, mue);
 		}
 	}
+
+
+
 
 	/**
 	 * Creates library registry items from extension points.

@@ -52,6 +52,7 @@ public class JSFLibraryRegistryUtil {
 	 * Private constructor
 	 */
 	private JSFLibraryRegistryUtil() {
+	    // no external instantiation
 	}
 	
 	/**
