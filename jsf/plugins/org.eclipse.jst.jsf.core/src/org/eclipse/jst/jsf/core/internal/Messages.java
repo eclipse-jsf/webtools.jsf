@@ -180,6 +180,21 @@ public class Messages extends NLS {
      */
     public static String JSFRegistryMigrationCannot05_to_10_customMessage;
 
+
+	public static String RegistryMigrationStartupHandler_Dialog_Abort_And_Exit_Migration;
+
+
+	public static String RegistryMigrationStartupHandler_Dialog_Confirm_Migration;
+
+
+	public static String RegistryMigrationStartupHandler_Error_committing_migration;
+
+
+	public static String RegistryMigrationStartupHandler_Error_Rolling_Back_Migration;
+
+
+	public static String RegistryMigrationStartupHandler_Launch_Migration_Doc_On_Confirm;
+
 	static {
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
 	}

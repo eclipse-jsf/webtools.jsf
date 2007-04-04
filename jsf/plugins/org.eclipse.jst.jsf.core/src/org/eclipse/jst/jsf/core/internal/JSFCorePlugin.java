@@ -12,11 +12,8 @@
 package org.eclipse.jst.jsf.core.internal;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -139,7 +136,7 @@ public class JSFCorePlugin extends WTPPlugin {
 			
 			EPackage.Registry.INSTANCE.put(JSF_LIBRARY_REGISTRY_NSURI, JSFLibraryRegistryPackageImpl.init());
 			URI jsfLibRegURI = JSFLibraryRegistryUpgradeUtil.getRegistryURI(JSFLibraryRegistryUpgradeUtil.JSF_LIBRARY_REGISTRY_LATESTVERSION_URL);			
-			JSFLibraryRegistryUpgradeUtil.getInstance().upgradeRegistryIfNecessary(jsfLibRegURI);
+			JSFLibraryRegistryUpgradeUtil.getInstance().upgradeRegistryIfNecessary(JSFLibraryRegistryUpgradeUtil.LATESTVERSION);
 
 			JSFLibraryRegistryResourceFactoryImpl resourceFactory = new JSFLibraryRegistryResourceFactoryImpl();
 			jsfLibraryRegistryResource = (JSFLibraryRegistryResourceImpl)resourceFactory.createResource(jsfLibRegURI);

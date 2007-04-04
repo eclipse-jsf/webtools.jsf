@@ -4,7 +4,6 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jdt.core.IClasspathContainer;
 import org.eclipse.jdt.core.IClasspathEntry;
-import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryReference;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryRegistryUtil;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 
@@ -16,6 +15,7 @@ public class JSFLibraryClasspathContainer implements IClasspathContainer {
 	private JSFLibrary lib;
 	
 	/**
+	 * @param lib 
 	 * @param JSFLibrary
 	 */
 	public JSFLibraryClasspathContainer(JSFLibrary lib) {

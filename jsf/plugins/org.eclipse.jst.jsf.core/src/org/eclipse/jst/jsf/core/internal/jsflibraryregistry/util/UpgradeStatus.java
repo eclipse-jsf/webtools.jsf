@@ -1,32 +1,33 @@
 package org.eclipse.jst.jsf.core.internal.jsflibraryregistry.util;
 
+import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
+
 /**
  * Communicates the status of the JSF Library Registry
  *
  */
-public class UpgradeStatus {
-	public static final int OK = 0;
-	public static final int UPGRADED = 1;
-	public static final int CANNOT_UPGRADE = 2;
-	
-	
-	private String shortMsg;
-	private String msg;
-	private int state = OK;
-	private String helpRef;
-	private String initialRegistry;
-	private String upgradedRegistry;
+public class UpgradeStatus extends Status
+{
+	private final boolean upgradeOccurred;
+	private UpgradeOperation  upgradeOperation;
 	
 	/**
 	 * All-is-well UpgradeStatus constructor 
 	 */
 	public UpgradeStatus(){		
+		super(IStatus.OK, JSFCorePlugin.getDefault().getPluginID(), "OK");
+		this.upgradeOccurred = false;
 	}
 	
 	/**
 	 * Constructor when registry upgrade has occured or there is a problem during upgrade
-	 * 
-	 * @param state
+	 * @param severity 
+	 * @param upgradeOccurred 
+	 * @param upgradeOperation 
 	 * @param shortMessage - cannot be null
 	 * @param message - cannot be null
 	 * @param helpRef - href to page with additional information.  may be null.
@@ -34,54 +35,66 @@ public class UpgradeStatus {
 	 * @param upgradedRegistryURL - may be null
 	 * 
 	 */
-	public UpgradeStatus(int state, String shortMessage, String message, String helpRef, String initialRegistryURL,  String upgradedRegistryURL){	
-		this.state = state;
-		this.shortMsg = shortMessage;
-		this.msg = message;
-		this.helpRef = helpRef;
-		this.initialRegistry = initialRegistryURL;
-		this.upgradedRegistry = upgradedRegistryURL;
+	public UpgradeStatus(int severity, boolean upgradeOccurred, String message){	
+		super(severity, JSFCorePlugin.getDefault().getPluginID(), message);
+		this.upgradeOccurred = upgradeOccurred;
 	}
 
 	/**
-	 * @return message useful for dialog titles
+	 * @return true if a registry upgrade occurred
 	 */
-	public String getShortMessage() {
-		return shortMsg;
+	public boolean isUpgradeOccurred() {
+		return upgradeOccurred;
 	}
 
 	/**
-	 * @return main message of upgrade status
+	 * @return the operation used to do the upgrade.
 	 */
-	public String getMessage() {
-		return msg;
+	protected UpgradeOperation getUpgradeOperation() {
+		return upgradeOperation;
 	}
-
-	/**
-	 * @return OK, UPGRADED, CANNOT_UPGRADE
-	 */
-	public int getState() {
-		return state;
+	
+	void setUpgradeOperation(UpgradeOperation upgradeOperation)
+	{
+		this.upgradeOperation = upgradeOperation;
 	}
-
+	
 	/**
-	 * @return intended to be the href string to a url with more help information
+	 * Commits any upgrade that has occurred
+	 * @return the result of the commit
 	 */
-	public String getHelpReference() {
-		return helpRef;
+	public IStatus commit()
+	{
+		if (upgradeOperation != null)
+		{
+			try
+			{
+				return upgradeOperation.commit();
+			}
+			catch (ExecutionException e)
+			{
+				return new Status(IStatus.ERROR, JSFCorePlugin.getDefault().getPluginID(), "Error committing status", e);
+			}
+		}
+		return Status.OK_STATUS;
 	}
-
+	
 	/**
-	 * @return the URL of the registry needing upgrade
+	 * @return the result of rolling back any changes
 	 */
-	public String getInitialRegistryURL() {
-		return initialRegistry;
-	}
-
-	/**
-	 * @return te URL of the registry that is/was to be upgraded to
-	 */
-	public String getUpgradedRegistryURL() {
-		return upgradedRegistry;
+	public IStatus rollback()
+	{
+		if (upgradeOperation != null)
+		{
+			try
+			{
+				return upgradeOperation.undo(new NullProgressMonitor(), null);
+			}
+			catch (ExecutionException e)
+			{
+				return new Status(IStatus.ERROR, JSFCorePlugin.getDefault().getPluginID(), "Error committing status", e);
+			}
+		}
+		return Status.OK_STATUS;
 	}
 }
