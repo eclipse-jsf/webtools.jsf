@@ -1,10 +1,6 @@
 package org.eclipse.jst.jsf.core.tests.set;
 
-import junit.framework.TestCase;
-
-import org.apache.xerces.dom.ElementImpl;
 import org.eclipse.jst.jsf.core.tests.tagmatcher.BaseTagMatcherTestCase;
-import org.w3c.dom.Element;
 
 public class TestElementToTagIdentifierMapping extends BaseTagMatcherTestCase
 {
