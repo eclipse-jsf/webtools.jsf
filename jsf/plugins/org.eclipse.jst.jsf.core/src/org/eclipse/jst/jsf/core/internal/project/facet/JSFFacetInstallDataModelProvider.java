@@ -99,7 +99,7 @@ public class JSFFacetInstallDataModelProvider extends
 	}
 	public IStatus validate(String name) {
 		errorMessage = null;
-		if (name.equals(IMPLEMENTATION_LIBRARIES) && getBooleanProperty(DEPLOY_IMPLEMENTATION)) {
+		if (name.equals(IMPLEMENTATION)) {//&& getBooleanProperty(DEPLOY_IMPLEMENTATION)
 			List libs = JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry().getJSFLibrariesByName(getStringPropertyWithDefaultStripped(IMPLEMENTATION_LIBRARIES));
 			JSFLibrary lib = ! libs.isEmpty() ? (JSFLibrary)libs.get(0) : null; 
 			IStatus status = validateImpl(lib);
@@ -331,8 +331,10 @@ public class JSFFacetInstallDataModelProvider extends
 		List list = new ArrayList();
 		if (JSFCorePlugin.getDefault().getJSFLibraryRegistry() != null) {
 			JSFLibrary jsfLib = JSFCorePlugin.getDefault().getJSFLibraryRegistry().getDefaultImplementation();
-			JSFLibraryReference prjJSFLib = new JSFLibraryReference(jsfLib, true, true);
-			list.add(prjJSFLib);			
+			if (jsfLib != null){
+				JSFLibraryReference prjJSFLib = new JSFLibraryReference(jsfLib, true, true);
+				list.add(prjJSFLib);
+			}
 		}
 		return list;
 	}	

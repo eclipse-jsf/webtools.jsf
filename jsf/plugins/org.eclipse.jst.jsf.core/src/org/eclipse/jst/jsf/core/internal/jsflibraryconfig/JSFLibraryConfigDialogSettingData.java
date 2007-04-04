@@ -31,7 +31,7 @@ public class JSFLibraryConfigDialogSettingData implements JSFLibraryConfiglModel
 
 	final private JSFLibraryRegistryUtil jsfLibReg;
 	final private boolean dftImplLibDeployFlag;
-	final private String[] savedCompLibs;
+	private String[] savedCompLibs;
 	private JSFLibraryReference selJSFLibImpl;	// lazy initialized	
 	private List selJSFLibComp;							// lazy initialized
 	
@@ -120,19 +120,32 @@ public class JSFLibraryConfigDialogSettingData implements JSFLibraryConfiglModel
 	 * Only need to verify component library availability from sticky settings.
 	 */
  	private void verifySavedLibAvailability() {
+ 		List validLibs = new ArrayList();
 		if (savedCompLibs != null && savedCompLibs.length > 0) {
 			String item = null;
 			String[] attributes;
-
+			boolean invalidRefs = false;
 			for (int i = 0; i < savedCompLibs.length; i++) {
 				item = savedCompLibs[i];
 				attributes = item.split(SEPARATOR);
 													
-				if (jsfLibReg.getJSFLibraryReferencebyID(attributes[0]) == null) {
-					JSFCorePlugin.log(IStatus.INFO, Messages.JSFLibCfgDialogSettingData_Sticky_Component_Lib_Not_Exist);
+				if (jsfLibReg.getJSFLibraryReferencebyID(attributes[0]) != null) {
+					validLibs.add(item);
+				} else {
+					invalidRefs = true;
+//					JSFCorePlugin.log(IStatus.INFO, Messages.JSFLibCfgDialogSettingData_Sticky_Component_Lib_Not_Exist);
 				}
 			}  				
+			if (invalidRefs){
+				String [] validCompLibs = (String[])validLibs.toArray(new String[validLibs.size()]);
+				if (validCompLibs.length > 0)
+					System.arraycopy(validCompLibs, 0, savedCompLibs, 0, validCompLibs.length);
+				else
+					savedCompLibs = new String[]{};
+			}
 		}	
+		
+
  	}
 	
 }

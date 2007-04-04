@@ -109,7 +109,6 @@ public class JSFCorePlugin extends WTPPlugin {
 	 * @throws Exception 
 	 */
 	public void stop(BundleContext context) throws Exception {
-		saveJSFLibraryRegistry();
 		super.stop(context);
 		plugin = null;
 	}
@@ -163,7 +162,13 @@ public class JSFCorePlugin extends WTPPlugin {
 			}
 			//add adapter to maintain default implementation
 			if (jsfLibraryRegistry != null) {
+				//check that a default impl is set.   if not pick first one if available.
+				JSFLibrary defLib = jsfLibraryRegistry.getDefaultImplementation();
+				if (defLib == null && jsfLibraryRegistry.getImplJSFLibraries().size() > 0){
+					jsfLibraryRegistry.setDefaultImplementation((JSFLibrary)jsfLibraryRegistry.getImplJSFLibraries().get(0));
+				}
 				jsfLibraryRegistry.eAdapters().add(MaintainDefaultImplementationAdapter.getInstance());
+
 			}
 		} catch(MalformedURLException mue) {
 			log(IStatus.ERROR, Messages.JSFLibraryRegistry_ErrorCreatingURL, mue);
