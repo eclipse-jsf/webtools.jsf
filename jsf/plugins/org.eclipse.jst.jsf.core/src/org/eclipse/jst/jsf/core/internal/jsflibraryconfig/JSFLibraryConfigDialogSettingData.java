@@ -13,10 +13,6 @@ package org.eclipse.jst.jsf.core.internal.jsflibraryconfig;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
-import org.eclipse.jst.jsf.core.internal.Messages;
-
 /**
  * To construct implementation library and component libraries from sticky values 
  * in DialogSettings as saved libraries.  

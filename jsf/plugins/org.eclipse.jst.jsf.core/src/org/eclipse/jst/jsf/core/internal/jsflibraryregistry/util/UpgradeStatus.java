@@ -26,13 +26,8 @@ public class UpgradeStatus extends Status
 	/**
 	 * Constructor when registry upgrade has occured or there is a problem during upgrade
 	 * @param severity 
-	 * @param upgradeOccurred 
-	 * @param upgradeOperation 
-	 * @param shortMessage - cannot be null
-	 * @param message - cannot be null
-	 * @param helpRef - href to page with additional information.  may be null.
-	 * @param initialRegistryURL - may be null
-	 * @param upgradedRegistryURL - may be null
+	 * @param upgradeOccurred flag
+	 * @param message 
 	 * 
 	 */
 	public UpgradeStatus(int severity, boolean upgradeOccurred, String message){	

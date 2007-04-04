@@ -55,9 +55,8 @@ class MigrateV1toV2Operation extends VersionUpgradeOperation {
 			JSFCorePlugin.getDefault().saveJSFLibraryRegistry();
 			JSFLibraryRegistryUpgradeUtil.copyFile(_v1Registry.toFileString(), newRegURI.toFileString());//save as v2 file	
 			JSFLibraryRegistryUpgradeUtil.deleteFile(_v1Registry.toFileString());
-			// TODO: so treat this as though no upgrade occurred even though it has?
-			// shouldn't being the upgrade if this is the case...
-			return new UpgradeStatus();
+
+			return new UpgradeStatus();//all is ok and no need to alert user
 			
 		} catch(IOException ioe) {
 			//this was expected... if there was actual v1 contents in the regsistry... upgrade by saving
@@ -101,8 +100,11 @@ class MigrateV1toV2Operation extends VersionUpgradeOperation {
 		//restore backup to v1 name
 		JSFLibraryRegistryUpgradeUtil.copyFile(_v1Registry.toFileString().concat(".bkp"), _v1Registry.toFileString());
 
-		// delete the new registry... delete the backup?
+		// delete the new registry 
 		JSFLibraryRegistryUpgradeUtil.deleteFile(_v2Registry.toFileString());
+		
+		//and the backup
+		JSFLibraryRegistryUpgradeUtil.deleteFile(_v1Registry.toFileString().concat(".bkp"));
 		
 		return Status.OK_STATUS;
 	}

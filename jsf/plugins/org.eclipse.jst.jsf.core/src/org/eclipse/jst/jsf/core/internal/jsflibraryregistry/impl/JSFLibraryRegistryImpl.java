@@ -24,7 +24,6 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
@@ -35,7 +34,6 @@ import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
-import org.eclipse.jdt.internal.core.UserLibraryClasspathContainer;
 import org.eclipse.jst.jsf.core.internal.JSFLibrariesContainerInitializer;
 import org.eclipse.jst.jsf.core.internal.JSFLibraryClasspathContainer;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
@@ -445,55 +443,5 @@ public class JSFLibraryRegistryImpl extends EObjectImpl implements JSFLibraryReg
 		return result.toString();
 	}
 	
-	/**
-	 * Copied from JDT UserLibraryManager
-	 * @generated NOT
-	 * @param name
-	 * @param remove
-	 * @param monitor
-	 * @throws JavaModelException
-	 */
-	private void rebindClasspathEntries(String name, boolean remove, IProgressMonitor monitor) throws JavaModelException {
-		IWorkspaceRoot root= ResourcesPlugin.getWorkspace().getRoot();
-		IJavaProject[] projects= JavaCore.create(root).getJavaProjects();
-		IPath containerPath= new Path(JSFLibrariesContainerInitializer.JSF_LIBRARY_CP_CONTAINER_ID).append(name);
-		
-		ArrayList affectedProjects= new ArrayList();
-		
-		for (int i= 0; i < projects.length; i++) {
-			IJavaProject project= projects[i];
-			IClasspathEntry[] entries= project.getRawClasspath();
-			for (int k= 0; k < entries.length; k++) {
-				IClasspathEntry curr= entries[k];
-				if (curr.getEntryKind() == IClasspathEntry.CPE_CONTAINER) {
-					if (containerPath.equals(curr.getPath())) {
-						affectedProjects.add(project);
-						break;
-					}				
-				}
-			}
-		}
-		if (!affectedProjects.isEmpty()) {
-			IJavaProject[] affected= (IJavaProject[]) affectedProjects.toArray(new IJavaProject[affectedProjects.size()]);
-			IClasspathContainer[] containers= new IClasspathContainer[affected.length];
-			if (!remove) {
-				// Previously, containers array only contained a null value. Then, user library classpath entry was first removed
-				// and then added a while after when post change delta event on .classpath file was fired...
-				// Unfortunately, in some cases, this event was fired a little bit too late and missed the refresh of Package Explorer
-				// (see bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=61872)
-				// So now, instanciate a new user library classpath container instead which allow to refresh its content immediately
-				// as there's no classpath entry removal...
-				// Note that it works because equals(Object) method is not overridden for UserLibraryClasspathContainer.
-				// If it was, the update wouldn't happen while setting classpath container
-				// @see javaCore.setClasspathContainer(IPath, IJavaProject[], IClasspathContainer[], IProgressMonitor)
-				JSFLibraryClasspathContainer container= new JSFLibraryClasspathContainer(null);
-				containers[0] = container;
-			}
-			JavaCore.setClasspathContainer(containerPath, affected, containers, monitor);
-		} else {
-			if (monitor != null) {
-				monitor.done();
-			}
-		}
-	}
+
 } //JSFLibraryRegistryImpl

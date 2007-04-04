@@ -12,11 +12,13 @@ package org.eclipse.jst.jsf.core.internal.jsflibraryregistry.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.*;
+import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.ArchiveFile;
+import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
+import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistry;
+import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryPackage;
+import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.PluginProvidedJSFLibrary;
 
 
 /**
