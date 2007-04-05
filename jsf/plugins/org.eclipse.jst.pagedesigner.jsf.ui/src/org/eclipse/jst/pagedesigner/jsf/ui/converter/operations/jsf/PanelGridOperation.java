@@ -139,7 +139,8 @@ public class PanelGridOperation extends AbstractTransformOperation {
 		Iterator itFacets = facets.iterator();
 		while (itFacets.hasNext()) {
 			Element facet = (Element)itFacets.next();
-			if (facet.getAttribute("name").equals(facetName)) {
+			String facetAttrName = facet.getAttribute("name");
+			if (facetAttrName != null && facetAttrName.equals(facetName)) {
 				element = facet;
 				break;
 			}
