@@ -12,6 +12,7 @@ package org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -37,12 +38,12 @@ import org.eclipse.jst.j2ee.webapplication.ContextParam;
 import org.eclipse.jst.j2ee.webapplication.WebApp;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.Messages;
+import org.eclipse.jst.jsf.core.internal.provisional.IJSFCoreConstants;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.wst.common.componentcore.ComponentCore;
 import org.eclipse.wst.common.componentcore.resources.IVirtualComponent;
 import org.eclipse.wst.common.componentcore.resources.IVirtualFolder;
 import org.eclipse.wst.common.project.facet.core.IFacetedProject;
-import org.eclipse.wst.common.project.facet.core.IProjectFacet;
 import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
 import org.eclipse.wst.common.project.facet.core.ProjectFacetsManager;
 
@@ -65,12 +66,49 @@ public class JSFAppConfigUtils {
 	 */
 	public static final String FACES_CONFIG_IN_JAR_PATH = "META-INF/faces-config.xml";
 
+    
+    /**
+     * @param project
+     * @param minVersion
+     * @return true if project is a JSF facet project and the version of the project
+     * is at least minVersion.
+     */
+    public static boolean isValidJSFProject(IProject project, String minVersion)
+    {
+        boolean isValid = false;
+        
+        final IProjectFacetVersion projectFacetVersion = getProjectFacet(project);
+        
+        if (projectFacetVersion != null)
+        {
+            try
+            {
+                final String versionString = 
+                    projectFacetVersion.getVersionString();
+                final Comparator comparator = 
+                    projectFacetVersion.getProjectFacet().getVersionComparator();
+                final int compareToMin = 
+                    comparator.compare(versionString, minVersion);
+                
+                if (compareToMin >=0)
+                {
+                    return true;
+                }
+            }
+            catch (CoreException ce)
+            {
+                JSFCorePlugin.log(ce, "Error checking facet version");
+            }
+        }
+        return isValid;
+    }
+    
 	/**
 	 * Tests if the passed IProject instance is a valid JSF project in the
 	 * following ways:
 	 * <ul>
 	 * <li>project is not null and is accessible, </li>
-	 * <li>project has the "jst.jsf" facet set on it.</li>
+	 * <li>project has the JSF facet set on it.</li>
 	 * </ul>
 	 * 
 	 * @param project IProject instance to be tested.
@@ -79,31 +117,40 @@ public class JSFAppConfigUtils {
 	 */
 	public static boolean isValidJSFProject(IProject project) {
 		boolean isValid = false;
-		//check for null or inaccessible project
-		if (project != null && project.isAccessible()) {
-			//check for "jst.jsf" facet on project
-			try {
-				IFacetedProject facetedProject = ProjectFacetsManager.create(project);
-				if (facetedProject != null) {
-					Set projectFacets = facetedProject.getProjectFacets();
-					Iterator itProjectFacets = projectFacets.iterator();
-					while (itProjectFacets.hasNext()) {
-						IProjectFacetVersion projectFacetVersion = (IProjectFacetVersion)itProjectFacets.next();
-						IProjectFacet projectFacet = projectFacetVersion.getProjectFacet();
-						if ("jst.jsf".equals(projectFacet.getId())) { //$NON-NLS-1$
-							isValid = true;
-							break;
-						}
-					}
-				}
-			} catch(CoreException ce) {
-				//log error
-				JSFCorePlugin.log(IStatus.ERROR, ce.getLocalizedMessage(), ce);
-			}
-		}
+        IProjectFacetVersion projectFacet = getProjectFacet(project);
+        if (projectFacet != null)
+        {
+            isValid = true;
+        }
 		return isValid;
 	}
 
+    private static IProjectFacetVersion getProjectFacet(IProject project)
+    {
+        //check for null or inaccessible project
+        if (project != null && project.isAccessible()) {
+            //check for JSF facet on project
+            try {
+                IFacetedProject facetedProject = ProjectFacetsManager.create(project);
+                if (facetedProject != null) {
+                    Set projectFacets = facetedProject.getProjectFacets();
+                    Iterator itProjectFacets = projectFacets.iterator();
+                    while (itProjectFacets.hasNext()) {
+                        IProjectFacetVersion projectFacetVersion = (IProjectFacetVersion)itProjectFacets.next();
+                        if (IJSFCoreConstants.JSF_CORE_FACET_ID.equals(projectFacetVersion.getProjectFacet().getId()))
+                        {
+                            return projectFacetVersion;
+                        }
+                    }
+                }
+            } catch(CoreException ce) {
+                //log error
+                JSFCorePlugin.log(IStatus.ERROR, ce.getLocalizedMessage(), ce);
+            }
+        }
+        return null;
+    }
+    
 	/**
 	 * Gets an IVirtualFolder instance which represents the root context's
 	 * web content folder.
