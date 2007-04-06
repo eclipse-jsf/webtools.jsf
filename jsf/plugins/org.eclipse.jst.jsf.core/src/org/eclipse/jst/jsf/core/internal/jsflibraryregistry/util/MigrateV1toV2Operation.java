@@ -39,7 +39,7 @@ class MigrateV1toV2Operation extends VersionUpgradeOperation {
 	public IStatus doExecute(IProgressMonitor monitor, IAdaptable info)
 	{
 		JSFLibraryRegistryUpgradeUtil.copyFile
-			(_v1Registry.toFileString(), _v1Registry.toFileString().concat(".bkp"));
+			(_v1Registry.toFileString(), JSFLibraryRegistryUpgradeUtil.getBackupFileName(_v1Registry.toFileString()));
 		JSFLibraryRegistryResourceFactoryImpl resourceFactory = new JSFLibraryRegistryResourceFactoryImpl();
 		JSFLibraryRegistryResourceImpl res = (JSFLibraryRegistryResourceImpl)resourceFactory.createResource(_v1Registry);
 		try {

@@ -50,19 +50,29 @@ public class UpgradeOperation extends AbstractOperation {
 	 */
 	public IStatus execute(IProgressMonitor monitor, IAdaptable info)
 			throws ExecutionException {
+	    
+	    boolean upgraded = false;
+	    
 		for (final Iterator it = _stepOperations.iterator(); it.hasNext();)
 		{
 			VersionUpgradeOperation op = (VersionUpgradeOperation) it.next();
-			IStatus status = op.execute(monitor, info);
+			// TODO: move to covariant
+			UpgradeStatus status = (UpgradeStatus) op.execute(monitor, info);
 			
 			// fail fast
 			if (status.getSeverity() != IStatus.OK)
 			{
 				return status;
 			}
+			
+			// once an upgrade is flagged, set flag
+			if (status.isUpgradeOccurred())
+			{
+			    upgraded = true;
+			}
 		}
 
-		return new UpgradeStatus(IStatus.OK, true, "Upgrade succeeded");
+		return new UpgradeStatus(IStatus.OK, upgraded, "Upgrade succeeded");
 	}
 
 	/**

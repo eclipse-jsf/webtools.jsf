@@ -23,7 +23,7 @@ public class JSFLibraryRegistryUpgradeUtil {
 	/**
 	 * default state is OK, no upgrade
 	 */
-	private UpgradeStatus	upgradeStatus = new UpgradeStatus();
+	private UpgradeStatus	upgradeStatus;
 
 	/**
 	 * The workspace-relative part of the URL of the JSF Library Registry 
@@ -73,6 +73,15 @@ public class JSFLibraryRegistryUpgradeUtil {
 	}
 	
 	/**
+	 * @param originalFile
+	 * @return the backup file name for a file
+	 */
+	public static String getBackupFileName(final String originalFile)
+	{
+	    return originalFile.concat(".bkp");
+	}
+	
+	/**
 	 * Upgrades the JSF Library registry from oldest to newest
 	 * @param expectedVersion 
 	 * @param aJsfLibRegURI - URI of current version registry file
@@ -105,25 +114,23 @@ public class JSFLibraryRegistryUpgradeUtil {
 							new UpgradeStatus(IStatus.ERROR, true, "Error detected during upgrade!");
 					}
 				}
+				else
+				{
+    				// TODO: what if can't execute?
+                    upgradeStatus = 
+                        new UpgradeStatus(IStatus.ERROR, false, "Error detected during upgrade!");
+				}
 			}
-			// on fall-through we will be left in the default
-			// state which says no upgrade was attempted and
-			// everything is good
+			else
+			{
+			    // everything ok, not upgrade
+			    upgradeStatus = new UpgradeStatus();
+			}
 		}
-		//does v1 exist?  
-//		URI v1Reg;
-//		try {
-//			v1Reg = getRegistryURI(JSF_LIBRARY_REGISTRY_URL);
-//			file = new File(v1Reg.toFileString());
-//			if (file.exists()){
-//				upgradeJSFLibraryRegistryFromV1ToV2(v1Reg);
-//			}
 	    catch (MalformedURLException e) {	
 			// should never happen since we control the URL's
 			JSFCorePlugin.log(IStatus.ERROR, "Error during loading JSF Library registry", e);
 		}
-
-		
 	}
 
 	private int getCurVersion() throws MalformedURLException
