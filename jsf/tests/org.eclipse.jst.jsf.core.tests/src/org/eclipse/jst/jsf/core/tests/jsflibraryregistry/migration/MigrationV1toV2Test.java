@@ -1,5 +1,6 @@
 package org.eclipse.jst.jsf.core.tests.jsflibraryregistry.migration;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -23,6 +24,9 @@ import org.osgi.framework.Bundle;
  */
 public class MigrationV1toV2Test extends TestCase 
 {
+    private ByteArrayOutputStream       _v1RegistryFile;
+    private ByteArrayOutputStream       _v2RegistryFile;
+    private ByteArrayOutputStream       _v1RegistryBackup;
    
     protected void setUp() throws Exception 
     {
@@ -31,21 +35,48 @@ public class MigrationV1toV2Test extends TestCase
         assertEquals(Bundle.ACTIVE, JSFCorePlugin.getDefault().getBundle().getState());
         
         // clear plugin meta-data on every call
-        clearRegistryFile(JSFLibraryRegistryUpgradeUtil.JSF_LIBRARY_REGISTRY_V1_URL);
-        clearRegistryFile(JSFLibraryRegistryUpgradeUtil.JSF_LIBRARY_REGISTRY_V2_URL);
-        clearRegistryFile(JSFLibraryRegistryUpgradeUtil.getBackupFileName(JSFLibraryRegistryUpgradeUtil.JSF_LIBRARY_REGISTRY_V1_URL));
+        _v1RegistryFile = clearRegistryFile(JSFLibraryRegistryUpgradeUtil.JSF_LIBRARY_REGISTRY_V1_URL);
+        _v2RegistryFile = clearRegistryFile(JSFLibraryRegistryUpgradeUtil.JSF_LIBRARY_REGISTRY_V2_URL);
+        _v1RegistryBackup = clearRegistryFile(JSFLibraryRegistryUpgradeUtil.getBackupFileName(JSFLibraryRegistryUpgradeUtil.JSF_LIBRARY_REGISTRY_V1_URL));
     }
 
-    private void clearRegistryFile(String fileName) throws Exception
+    private ByteArrayOutputStream clearRegistryFile(String fileName) throws Exception
     {
-        File file = getRegistryFile(fileName);
+        final File file = getRegistryFile(fileName);
+        
+        ByteArrayOutputStream   backup = null;
         
         if (file.exists())
         {
+            // backup the file so that we can restore it on tear down.
+            backup = JSFTestUtil.loadFromFile(file);
+
             assertTrue("Must be able to delete file: ".concat(fileName), file.delete());
         }
+        return backup;
     }
     
+    protected void tearDown() throws Exception {
+ 
+        tearDownRegistryFile(_v1RegistryFile, JSFLibraryRegistryUpgradeUtil.JSF_LIBRARY_REGISTRY_V1_URL);
+        tearDownRegistryFile(_v2RegistryFile, JSFLibraryRegistryUpgradeUtil.JSF_LIBRARY_REGISTRY_V2_URL);
+        tearDownRegistryFile(_v1RegistryBackup, JSFLibraryRegistryUpgradeUtil.getBackupFileName(JSFLibraryRegistryUpgradeUtil.JSF_LIBRARY_REGISTRY_V1_URL));
+     }
+
+    private void tearDownRegistryFile(final ByteArrayOutputStream backup, final String name) throws Exception
+    {
+        // restore the registries as they were before setup
+        if (backup != null)
+        {
+            JSFTestUtil.saveToFileSystem(backup.toByteArray(), JSFTestUtil.getPlatformAbsPath(name));
+        }
+        // if wasn't there, make sure to delete it
+        else
+        {
+            clearRegistryFile(name);
+        }
+
+    }
     private File getRegistryFile(String fileName) throws Exception
     {
         URI uri = JSFTestUtil.getPlatformAbsPath(fileName);

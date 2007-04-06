@@ -22,6 +22,7 @@ import org.eclipse.jst.jsf.core.tests.jsflibraryregistry.JSFLibraryRegistryPacka
 import org.eclipse.jst.jsf.core.tests.jsflibraryregistry.JSFLibraryRegistryTestCases;
 import org.eclipse.jst.jsf.core.tests.jsflibraryregistry.JSFLibraryTestCases;
 import org.eclipse.jst.jsf.core.tests.jsflibraryregistry.MaintainDefaultImplementationAdapterTestCases;
+import org.eclipse.jst.jsf.core.tests.jsflibraryregistry.migration.MigrationV1toV2Test;
 import org.eclipse.jst.jsf.core.tests.project.facet.JSFFacetInstallDataModelProviderTestCases;
 import org.eclipse.jst.jsf.core.tests.types.TypeComparatorTests;
 import org.eclipse.jst.jsf.core.tests.types.TypeTransformerTests;
@@ -33,8 +34,8 @@ import org.eclipse.jst.jsf.core.tests.util.TestJDTBeanPropertyWorkingCopy;
  * @author cbateman
  *
  */
-public class AllTests {
-
+public class AllTests 
+{
 	/**
 	 * @return the test suite
 	 */
@@ -54,20 +55,20 @@ public class AllTests {
 		suite.addTestSuite(JSFLibraryRegistryPackageTestCases.class);
 		
 		suite.addTestSuite(JSFFacetInstallDataModelProviderTestCases.class);
+
 		
 		suite.addTestSuite(JSFLibraryConfigDialogSettingDataTestCases.class);
 		suite.addTestSuite(JSFProjectLibraryReferenceTestCases.class);
 		suite.addTestSuite(JSFLibraryConfigModelTestCases.class);
 		suite.addTestSuite(JSFLibraryRegistryUtilTestCases.class);
-		//annotations 
-/*		suite.addTestSuite(AnnotationMapTestCases.class);
-		suite.addTestSuite(AnnotationHelperTestCases.class);
-		suite.addTestSuite(DuplicateAnnotationsTestCases.class);
-		suite.addTestSuite(CaseInsensitiveAnnotationsTestCases.class);
-		suite.addTestSuite(NegativeAnnotationFileTestCases.class);
-*/
+
+		
+        // NOTE: migration tests affect workspace meta-data files, but they
+        // should play nice with others
+		// BUT, to be on the safe side, always run them LAST.
+        suite.addTestSuite(MigrationV1toV2Test.class);
+
 		//$JUnit-END$
 		return suite;
 	}
-	
 }
