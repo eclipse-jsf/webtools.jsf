@@ -1,12 +1,23 @@
 package org.eclipse.jst.jsf.test.util;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.Arrays;
 
 import org.eclipse.core.internal.net.ProxyData;
 import org.eclipse.core.internal.net.ProxyManager;
 import org.eclipse.core.net.proxy.IProxyData;
 import org.eclipse.core.net.proxy.IProxyService;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.wst.validation.internal.ConfigurationManager;
 import org.eclipse.wst.validation.internal.GlobalConfiguration;
 import org.osgi.framework.Bundle;
@@ -101,5 +112,80 @@ public class JSFTestUtil
         codeRes.load(bundle, fileName);
         String code = codeRes.toString();
         jdtTestEnvironment.addSourceFile(srcFolderName, packageName, beanClassName, code);
+    }
+    
+    public static URI getPlatformAbsPath(String relativePath) throws MalformedURLException, URISyntaxException
+    {
+        URL url = new URL(Platform.getInstanceLocation().getURL(), relativePath);
+        return url.toURI();
+    }
+    
+    public static void savePlatformRelative(TestFileResource testFile, String relativePath) throws IOException, URISyntaxException
+    {
+        saveToFileSystem(testFile, getPlatformAbsPath(relativePath));
+    }
+    
+    public static void saveToFileSystem(TestFileResource testFile, URI absPath) throws IOException
+    {
+        final File file = new File(absPath);
+        
+        FileOutputStream  outFile = null;
+        
+        try
+        {
+            outFile=new FileOutputStream(file);
+            outFile.write(testFile.toBytes());
+        }
+        finally
+        {
+            if (outFile != null)
+            {
+                outFile.close();
+            }
+        }
+    }
+    
+    /**
+     * @param testFile
+     * @param absPath
+     * @return true if the contents of testFile and the contents of what absPath point to
+     * are the same based on a byte for byte comparison (Arrays.equal(byte[], byte[]).
+     * 
+     * @throws IOException
+     */
+    public static boolean areEqual(TestFileResource testFile, URI absPath) throws IOException
+    {
+        final File file = new File(absPath);
+        FileInputStream  inFile = null;
+        ByteArrayOutputStream buffer = null;
+        try
+        {
+            inFile=new FileInputStream(file);
+            
+            buffer = new ByteArrayOutputStream();
+            byte[]  inBuffer = new byte[1024];
+            int bytesRead;
+            int curPos = 0;
+            while ((bytesRead = inFile.read(inBuffer)) != -1)
+            {
+                buffer.write(inBuffer,0,bytesRead);
+                curPos+=bytesRead;
+            }
+            
+            return Arrays.equals(buffer.toByteArray(), testFile.toBytes());
+        }
+        finally
+        {
+            if (buffer != null )
+            {
+                buffer.close();
+            }
+
+            if (inFile != null)
+            {
+                inFile.close();
+            }
+        }
+
     }
 }
