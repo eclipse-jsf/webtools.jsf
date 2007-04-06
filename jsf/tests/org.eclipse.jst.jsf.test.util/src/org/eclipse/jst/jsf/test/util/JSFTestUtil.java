@@ -127,6 +127,11 @@ public class JSFTestUtil
     
     public static void saveToFileSystem(TestFileResource testFile, URI absPath) throws IOException
     {
+        saveToFileSystem(testFile.toBytes(), absPath);
+    }
+    
+    public static void saveToFileSystem(byte[] buffer, URI absPath) throws IOException
+    {
         final File file = new File(absPath);
         
         FileOutputStream  outFile = null;
@@ -134,7 +139,7 @@ public class JSFTestUtil
         try
         {
             outFile=new FileOutputStream(file);
-            outFile.write(testFile.toBytes());
+            outFile.write(buffer);
         }
         finally
         {
@@ -143,6 +148,7 @@ public class JSFTestUtil
                 outFile.close();
             }
         }
+
     }
     
     /**
@@ -156,8 +162,15 @@ public class JSFTestUtil
     public static boolean areEqual(TestFileResource testFile, URI absPath) throws IOException
     {
         final File file = new File(absPath);
+            
+        return Arrays.equals(loadFromFile(file).toByteArray(), testFile.toBytes());
+    }
+    
+    public static ByteArrayOutputStream loadFromFile(File file) throws IOException
+    {
         FileInputStream  inFile = null;
         ByteArrayOutputStream buffer = null;
+
         try
         {
             inFile=new FileInputStream(file);
@@ -172,20 +185,14 @@ public class JSFTestUtil
                 curPos+=bytesRead;
             }
             
-            return Arrays.equals(buffer.toByteArray(), testFile.toBytes());
+            return buffer;
         }
         finally
         {
-            if (buffer != null )
-            {
-                buffer.close();
-            }
-
             if (inFile != null)
             {
                 inFile.close();
             }
         }
-
     }
 }
