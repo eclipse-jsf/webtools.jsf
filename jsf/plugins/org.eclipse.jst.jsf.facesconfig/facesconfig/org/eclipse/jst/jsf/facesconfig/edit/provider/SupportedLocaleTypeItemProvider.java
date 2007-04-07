@@ -131,13 +131,13 @@ public class SupportedLocaleTypeItemProvider extends ItemProviderAdapter
      * This returns the label text for the adapted class.
      * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-     * @generated
+     * @generated NOT
      */
 	public String getText(Object object) {
-        String label = ((SupportedLocaleType)object).getId();
+        String label = ((SupportedLocaleType)object).getTextContent();
         return label == null || label.length() == 0 ?
             getString("_UI_SupportedLocaleType_type") :
-            getString("_UI_SupportedLocaleType_type") + " " + label;
+            label;
     }
 
     /**
