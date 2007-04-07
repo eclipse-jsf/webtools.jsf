@@ -22,6 +22,7 @@ import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.ITextReg
 import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.IStructuredDocumentContextResolverFactory;
 import org.eclipse.jst.jsf.context.structureddocument.internal.provisional.IStructuredDocumentContext;
 import org.eclipse.jst.jsf.context.structureddocument.internal.provisional.IStructuredDocumentContextFactory;
+import org.eclipse.jst.jsf.core.internal.provisional.IJSFCoreConstants;
 import org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.JSFAppConfigManager;
 import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
 import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanType;
@@ -67,7 +68,7 @@ public class BaseTestCase extends TestCase
         assertTrue(_testEnv.getTestProject().isAccessible());
 
         JSFFacetedTestEnvironment jsfFacedEnv = new JSFFacetedTestEnvironment(_testEnv);
-        jsfFacedEnv.initialize(JSFFacetedTestEnvironment.FACET_VERSION_1_1);
+        jsfFacedEnv.initialize(IJSFCoreConstants.FACET_VERSION_1_1);
 
         _testEnv.loadResourceInWebRoot(ELValidationTestPlugin.getDefault().getBundle(),
                                       "/testdata/web/faces-config.xml.data", 
