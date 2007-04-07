@@ -221,7 +221,7 @@ public class WebrootUtil {
 	 * following ways:
 	 * <ul>
 	 * <li>project is not null and is accessible, </li>
-	 * <li>project has the "jst.jsf" facet set on it.</li>
+	 * <li>project has the "jst.web" facet set on it.</li> 
 	 * </ul>
 	 * 
 	 * @param project
@@ -232,7 +232,9 @@ public class WebrootUtil {
 		boolean isValid = false;
 		// check for null or inaccessible project
 		if (project != null && project.isAccessible()) {
-			// check for "jst.jsf" facet on project
+            // TODO: this was jst.jsf before, but we are checking for jst.web
+            // the javadoc seems out of sync with the method name
+			// check for "jst.web" facet on project
 			try {
 				IFacetedProject facetedProject = ProjectFacetsManager
 						.create(project);
