@@ -1,5 +1,6 @@
 package org.eclipse.jst.jsf.facesconfig.tests.read;
 
+import org.eclipse.jst.jsf.core.internal.provisional.IJSFCoreConstants;
 import org.eclipse.jst.jsf.facesconfig.emf.DynamicElement;
 import org.eclipse.jst.jsf.facesconfig.emf.ValidatorExtensionType;
 import org.eclipse.jst.jsf.facesconfig.emf.ValidatorType;
@@ -16,7 +17,7 @@ public class ReadValidatorTestCase_1_2 extends ReadValidatorTestCase
         if(_testConfiguration == null)
         {
             _facesConfigFile = "WEB-INF/faces-config_1_2.xml";
-            _facesVersion = "1.2";
+            _facesVersion = IJSFCoreConstants.JSF_VERSION_1_2;
         }
         else
         {

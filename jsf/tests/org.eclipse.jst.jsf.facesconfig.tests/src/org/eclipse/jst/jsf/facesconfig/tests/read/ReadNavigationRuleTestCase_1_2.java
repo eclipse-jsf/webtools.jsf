@@ -1,6 +1,7 @@
 package org.eclipse.jst.jsf.facesconfig.tests.read;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.jst.jsf.core.internal.provisional.IJSFCoreConstants;
 import org.eclipse.jst.jsf.facesconfig.emf.DynamicElement;
 import org.eclipse.jst.jsf.facesconfig.emf.NavigationRuleExtensionType;
 import org.eclipse.jst.jsf.facesconfig.emf.NavigationRuleType;
@@ -16,7 +17,7 @@ public class ReadNavigationRuleTestCase_1_2 extends ReadNavigationRuleTestCase
         if(_testConfiguration == null)
         {
             _facesConfigFile = "WEB-INF/faces-config_1_2.xml";
-            _facesVersion = "1.2";
+            _facesVersion = IJSFCoreConstants.JSF_VERSION_1_2;
         }
         else
         {

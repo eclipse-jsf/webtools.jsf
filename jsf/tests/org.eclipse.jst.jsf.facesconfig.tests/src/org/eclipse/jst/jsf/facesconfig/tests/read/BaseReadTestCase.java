@@ -1,6 +1,7 @@
 package org.eclipse.jst.jsf.facesconfig.tests.read;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.jst.jsf.core.internal.provisional.IJSFCoreConstants;
 import org.eclipse.jst.jsf.facesconfig.tests.util.WizardUtil;
 import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
 import org.eclipse.jst.jsf.test.util.ConfigurableTestCase;
@@ -61,7 +62,7 @@ public class BaseReadTestCase extends ConfigurableTestCase
         {
             // defaults to 1.1; subs should override for higher versions
             _facesConfigFile = CONFIG_FILE_DEFAULT;
-            _facesVersion = "1.1";
+            _facesVersion = IJSFCoreConstants.JSF_VERSION_1_1;
         }
     }
 }
