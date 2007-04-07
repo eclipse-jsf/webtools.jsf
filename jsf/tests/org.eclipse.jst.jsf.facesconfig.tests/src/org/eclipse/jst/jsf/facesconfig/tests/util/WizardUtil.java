@@ -14,6 +14,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+import junit.framework.Assert;
+
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -27,6 +29,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jst.j2ee.internal.web.archive.operations.WebFacetProjectCreationDataModelProvider;
+import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
 import org.eclipse.wst.common.componentcore.ComponentCore;
 import org.eclipse.wst.common.componentcore.datamodel.properties.IFacetProjectCreationDataModelProperties;
 import org.eclipse.wst.common.frameworks.datamodel.DataModelFactory;
@@ -38,7 +41,7 @@ import org.osgi.framework.Bundle;
  *
  * @author spaxton
  */
-public class WizardUtil {
+public class WizardUtil extends Assert {
 	private static boolean projectCreated = false;
 	private static final String FACESCONFIG_PROJECT_NAME = "FacesConfigUnitTest";
 	private static final String FACESCONFIG_EAR_PROJECT_NAME = FACESCONFIG_PROJECT_NAME + "EAR";
@@ -62,7 +65,13 @@ public class WizardUtil {
 	
 			
 			try {
-				IProject project = createWebProject(createProjectName(nameSuffix));
+			    WebProjectTestEnvironment testEnv = new WebProjectTestEnvironment(createProjectName(nameSuffix));
+		        testEnv.createProject();
+		        assertNotNull(testEnv);       
+		        assertNotNull(testEnv.getTestProject());
+		        assertTrue(testEnv.getTestProject().isAccessible());
+
+				IProject project = testEnv.getTestProject();
 				checkAndAddFacesConfig(project);
 			} catch (Throwable t) {
 				t.printStackTrace();
