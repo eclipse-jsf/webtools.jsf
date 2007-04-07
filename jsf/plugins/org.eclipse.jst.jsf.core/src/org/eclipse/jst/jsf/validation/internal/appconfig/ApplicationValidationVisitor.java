@@ -6,6 +6,7 @@ import java.util.List;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jst.jsf.core.internal.provisional.IJSFCoreConstants;
 import org.eclipse.jst.jsf.facesconfig.emf.DefaultLocaleType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
@@ -177,11 +178,11 @@ public class ApplicationValidationVisitor extends EObjectValidationVisitor
             // if this version greater than 1.1 then property resolvers are
             // deprecated in favour of el-resolvers
             final String version = getVersion();
-            if (!"1.0".equals(version) && !"1.1".equals(version))
+            if (!IJSFCoreConstants.FACET_VERSION_1_0.equals(version) && !IJSFCoreConstants.FACET_VERSION_1_1.equals(version))
             {
                 addMessageInfo(messages, 
                         DiagnosticFactory.create_API_DEPRECATED_AFTER_VERSION_ID
-                            ("property-resolver", "1.1", "el-resolver")
+                            ("property-resolver", IJSFCoreConstants.FACET_VERSION_1_1, "el-resolver")
                         , object, file);
             }
         }
@@ -200,11 +201,11 @@ public class ApplicationValidationVisitor extends EObjectValidationVisitor
             // if this version greater than 1.1 then property resolvers are
             // deprecated in favour of el-resolvers
             final String version = getVersion();
-            if (!"1.0".equals(version) && !"1.1".equals(version))
+            if (!IJSFCoreConstants.JSF_VERSION_1_0.equals(version) && !IJSFCoreConstants.JSF_VERSION_1_1.equals(version))
             {
                 addMessageInfo(messages, 
                         DiagnosticFactory.create_API_DEPRECATED_AFTER_VERSION_ID
-                            ("variable-resolver", "1.1", "el-resolver")
+                            ("variable-resolver", IJSFCoreConstants.JSF_VERSION_1_1, "el-resolver")
                         , object, file);
             }
 
@@ -223,11 +224,11 @@ public class ApplicationValidationVisitor extends EObjectValidationVisitor
             // if this version less than 1.2 then property resolvers are
             // deprecated in favour of el-resolvers
             final String version = getVersion();
-            if ("1.0".equals(version) || "1.1".equals(version))
+            if (IJSFCoreConstants.JSF_VERSION_1_0.equals(version) || IJSFCoreConstants.JSF_VERSION_1_1.equals(version))
             {
                 addMessageInfo(messages, 
                         DiagnosticFactory.create_API_NOT_AVAILABLE_BEFORE_VERSION
-                            ("el-resolver", "1.2", "variable-resolver or property-resolver")
+                            ("el-resolver", IJSFCoreConstants.JSF_VERSION_1_2, "variable-resolver or property-resolver")
                         , object, file);
             }
             else

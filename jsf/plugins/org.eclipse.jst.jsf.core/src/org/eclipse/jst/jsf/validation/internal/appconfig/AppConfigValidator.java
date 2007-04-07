@@ -18,6 +18,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
+import org.eclipse.jst.jsf.core.internal.provisional.IJSFCoreConstants;
 import org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.JSFAppConfigUtils;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
@@ -163,20 +164,20 @@ public class AppConfigValidator implements IValidatorJob {
         {
             final String projectVersion = getJSFVersion(file.getProject());
             
-            if ("1.1".equals(projectVersion)
-                    || "1.0".equals(projectVersion))
+            if (IJSFCoreConstants.FACET_VERSION_1_1.equals(projectVersion)
+                    || IJSFCoreConstants.FACET_VERSION_1_0.equals(projectVersion))
             {
-                if ("1.2".equals(appConfigFileVersion))
+                if (IJSFCoreConstants.FACET_VERSION_1_2.equals(appConfigFileVersion))
                 {
                     reporter.addMessage(this, 
                         DiagnosticFactory
                             .create_APP_CONFIG_IS_NEWER_THAN_JSF_VERSION(file));
                 }
             }
-            else if ("1.2".equals(projectVersion))
+            else if (IJSFCoreConstants.FACET_VERSION_1_2.equals(projectVersion))
             {
-                if ("1.1".equals(appConfigFileVersion) 
-                        || "1.0".equals(appConfigFileVersion))
+                if (IJSFCoreConstants.FACET_VERSION_1_1.equals(appConfigFileVersion) 
+                        || IJSFCoreConstants.FACET_VERSION_1_0.equals(appConfigFileVersion))
                 {
                     reporter.addMessage(this, 
                         DiagnosticFactory
@@ -278,7 +279,7 @@ public class AppConfigValidator implements IValidatorJob {
                 IProjectFacetVersion  facetVersion = 
                     (IProjectFacetVersion) it.next();
                 
-                if ("jst.jsf".equals(facetVersion.getProjectFacet().getId()))
+                if (IJSFCoreConstants.JSF_CORE_FACET_ID.equals(facetVersion.getProjectFacet().getId()))
                 {
                     return facetVersion.getVersionString();
                 }
@@ -312,12 +313,12 @@ public class AppConfigValidator implements IValidatorJob {
                         && "DTD".equals(classTypes[0]))
                 {
                     // either 1.0 or 1.1; be most conservative
-                    String appConfigVersion = "1.0";
+                    String appConfigVersion = IJSFCoreConstants.JSF_VERSION_1_0;
                    
                     // see if the version is in the public id
-                    if ("1.1".equals(classTypes[classTypes.length-1]))
+                    if (IJSFCoreConstants.JSF_VERSION_1_1.equals(classTypes[classTypes.length-1]))
                     {
-                        appConfigVersion = "1.1";
+                        appConfigVersion = IJSFCoreConstants.FACET_VERSION_1_1;
                     }
                     
                     return appConfigVersion;
