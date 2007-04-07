@@ -10,11 +10,14 @@
  *    
  ********************************************************************************/
  
-package org.eclipse.jst.jsf.designtime.internal.jsp;
+package org.eclipse.jst.jsf.designtime.internal.symbols;
 
+import java.io.IOException;
 import java.util.Map;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.jdt.core.JavaModelException;
 
 /**
  * Factory class for acquiring a ResourceBundleMapSourceFactory outside the local
@@ -30,11 +33,13 @@ public class ResourceBundleMapSourceFactory
      * @param project
      * @param resourcePathStr
      * @return a ResourceBundleMapSource
-     * @throws Exception if construction fails
+     * @throws CoreException 
+     * @throws IOException 
+     * @throws JavaModelException 
      */
     public static Map getResourceBundleMapSource(final IProject project, 
-                                                                     final String resourcePathStr) 
-        throws Exception
+                                                 final String resourcePathStr) 
+            throws JavaModelException, IOException, CoreException 
     {
         return new ResourceBundleMapSource(project, resourcePathStr);
     }

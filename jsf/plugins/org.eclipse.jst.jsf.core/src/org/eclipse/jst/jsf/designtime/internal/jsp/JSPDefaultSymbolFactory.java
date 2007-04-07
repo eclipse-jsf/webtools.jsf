@@ -35,6 +35,7 @@ import org.eclipse.jst.jsf.context.symbol.internal.provisional.source.AbstractCo
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
 import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
+import org.eclipse.jst.jsf.designtime.internal.symbols.ResourceBundleMapSourceFactory;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
@@ -171,7 +172,8 @@ public class JSPDefaultSymbolFactory extends AbstractContextSymbolFactory
                     }
                     
                     final Map source = 
-                        new ResourceBundleMapSource(project, baseNameNode.getNodeValue());
+                        ResourceBundleMapSourceFactory
+                            .getResourceBundleMapSource(project, baseNameNode.getNodeValue());
                     final IMapTypeDescriptor typeDesc = 
                         SymbolFactory.eINSTANCE.createIMapTypeDescriptor();
                     typeDesc.setMapSource(source);

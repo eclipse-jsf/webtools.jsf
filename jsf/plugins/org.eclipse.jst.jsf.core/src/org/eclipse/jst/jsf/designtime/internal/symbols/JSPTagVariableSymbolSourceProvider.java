@@ -32,7 +32,8 @@ import org.eclipse.jst.jsf.designtime.internal.provisional.symbols.SymbolUtil;
 
 /**
  * Self-factory for a symbol provider that derives symbol information from
- * meta-data annotations on 
+ * meta-data annotations on tag attributes that declare runtime EL variables
+ * 
  * @author cbateman
  *
  */

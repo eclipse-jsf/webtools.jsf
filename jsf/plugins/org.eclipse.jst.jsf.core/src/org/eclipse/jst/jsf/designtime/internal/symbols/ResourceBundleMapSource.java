@@ -9,7 +9,7 @@
  *    Cameron Bateman/Oracle - initial API and implementation
  *    
  ********************************************************************************/
-package org.eclipse.jst.jsf.designtime.internal.jsp;
+package org.eclipse.jst.jsf.designtime.internal.symbols;
 
 import java.io.IOException;
 import java.io.InputStream;
