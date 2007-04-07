@@ -20,7 +20,6 @@ import org.eclipse.core.runtime.content.IContentType;
 import org.eclipse.core.runtime.content.IContentTypeManager;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.JSFAppConfigUtils;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IPartListener2;
@@ -31,6 +30,7 @@ import org.eclipse.ui.IWorkbenchPartReference;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.internal.Workbench;
 
 /**
  * On workbench startup, registers a part listener that triggers when
@@ -45,7 +45,7 @@ public class StartupHandler implements IStartup
     
 	public void earlyStartup() 
     {
-        Display.getDefault().asyncExec(new Runnable()
+        Workbench.getInstance().getDisplay().asyncExec(new Runnable()
         {
             public void run()
             {
