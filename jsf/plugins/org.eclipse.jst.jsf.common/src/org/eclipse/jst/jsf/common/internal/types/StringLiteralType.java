@@ -39,7 +39,7 @@ public class StringLiteralType extends LiteralType
         {
             if (T == BigInteger.class)
             {
-                if ("".equals(_literalValue))
+                if ("".equals(_literalValue)) //$NON-NLS-1$
                 {
                     return BigInteger.ZERO;
                 }
@@ -47,7 +47,7 @@ public class StringLiteralType extends LiteralType
             }
             else if (T == BigDecimal.class)
             {
-                if ("".equals(_literalValue))
+                if ("".equals(_literalValue)) //$NON-NLS-1$
                 {
                     return new BigDecimal(0.0);
                 }
@@ -55,7 +55,7 @@ public class StringLiteralType extends LiteralType
             }
             else if (T == Double.class || T == Double.TYPE)
             {
-                if ("".equals(_literalValue))
+                if ("".equals(_literalValue)) //$NON-NLS-1$
                 {
                     return new Double(0.0);
                 }
@@ -64,7 +64,7 @@ public class StringLiteralType extends LiteralType
             }
             else if (T == Float.class || T == Float.TYPE)
             {
-                if ("".equals(_literalValue))
+                if ("".equals(_literalValue)) //$NON-NLS-1$
                 {
                     return new Float(0.0);
                 }
@@ -72,7 +72,7 @@ public class StringLiteralType extends LiteralType
             }
             else if (T == Long.class || T == Long.TYPE)
             {
-                if ("".equals(_literalValue))
+                if ("".equals(_literalValue)) //$NON-NLS-1$
                 {
                     return new Long(0L);
                 }
@@ -80,7 +80,7 @@ public class StringLiteralType extends LiteralType
             }
             else if (T == Integer.class || T == Integer.TYPE)
             {
-                if ("".equals(_literalValue))
+                if ("".equals(_literalValue)) //$NON-NLS-1$
                 {
                     return new Integer(0);
                 }
@@ -88,7 +88,7 @@ public class StringLiteralType extends LiteralType
             }
             else if (T == Short.class || T == Short.TYPE)
             {
-                if ("".equals(_literalValue))
+                if ("".equals(_literalValue)) //$NON-NLS-1$
                 {
                     return new Short((short)0);
                 }
@@ -96,7 +96,7 @@ public class StringLiteralType extends LiteralType
             }
             else if (T == Byte.class || T == Byte.TYPE)
             {
-                if ("".equals(_literalValue))
+                if ("".equals(_literalValue)) //$NON-NLS-1$
                 {
                     return new Byte((byte)0);
                 }
@@ -104,7 +104,7 @@ public class StringLiteralType extends LiteralType
             }
             else
             {
-                throw new IllegalArgumentException("Not a target numeric type: "+T);
+                throw new IllegalArgumentException("Not a target numeric type: "+T); //$NON-NLS-1$
             }
         }
         catch (NumberFormatException nfe)

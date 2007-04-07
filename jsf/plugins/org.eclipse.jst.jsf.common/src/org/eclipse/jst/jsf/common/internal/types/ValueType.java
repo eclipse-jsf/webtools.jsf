@@ -51,7 +51,7 @@ public class ValueType implements SignatureBasedType, IAssignable
     {
         if (signature == null)
         {
-            throw new AssertionError("signature can never be null");
+            throw new AssertionError("signature can never be null"); //$NON-NLS-1$
         }
     
         _signature = signature;

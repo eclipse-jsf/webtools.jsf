@@ -230,9 +230,9 @@ public class IJavaSymbolImpl extends EObjectImpl implements IJavaSymbol {
         if (eIsProxy()) return super.toString();
 
         StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (name: ");
+        result.append(" (name: "); //$NON-NLS-1$
         result.append(name);
-        result.append(", javaElement: ");
+        result.append(", javaElement: "); //$NON-NLS-1$
         result.append(javaElement);
         result.append(')');
         return result.toString();

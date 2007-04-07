@@ -45,7 +45,7 @@ public class BooleanLiteralType extends LiteralType
     public Number coerceToNumber(Class T) throws TypeCoercionException 
     {
         // illegal to coerce boolean to number per JSP.2.8.3 step 3
-        throw new TypeCoercionException("Cannot coerce boolean to number");
+        throw new TypeCoercionException("Cannot coerce boolean to number"); //$NON-NLS-1$
     }
 
     public String getLiteralValue() 

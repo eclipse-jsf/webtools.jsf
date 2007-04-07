@@ -37,16 +37,16 @@ public class TypeTransformer
     static
     {
         // see jdt.core.Signature or JVM link spec for more details
-        boxConversions.put("B", "Ljava.lang.Byte;");
-        boxConversions.put("C", "Ljava.lang.Character;");
-        boxConversions.put("D", "Ljava.lang.Double;");
-        boxConversions.put("F", "Ljava.lang.Float;");
-        boxConversions.put("I", "Ljava.lang.Integer;");
-        boxConversions.put("J", "Ljava.lang.Long;");
-        boxConversions.put("S", "Ljava.lang.Short;");
-        boxConversions.put("Z", "Ljava.lang.Boolean;");
+        boxConversions.put("B", "Ljava.lang.Byte;");  //$NON-NLS-1$//$NON-NLS-2$
+        boxConversions.put("C", "Ljava.lang.Character;"); //$NON-NLS-1$ //$NON-NLS-2$
+        boxConversions.put("D", "Ljava.lang.Double;"); //$NON-NLS-1$ //$NON-NLS-2$
+        boxConversions.put("F", "Ljava.lang.Float;"); //$NON-NLS-1$ //$NON-NLS-2$
+        boxConversions.put("I", "Ljava.lang.Integer;"); //$NON-NLS-1$ //$NON-NLS-2$
+        boxConversions.put("J", "Ljava.lang.Long;"); //$NON-NLS-1$ //$NON-NLS-2$
+        boxConversions.put("S", "Ljava.lang.Short;"); //$NON-NLS-1$ //$NON-NLS-2$
+        boxConversions.put("Z", "Ljava.lang.Boolean;"); //$NON-NLS-1$ //$NON-NLS-2$
         // don't box V
-        boxConversions.put("V", "V");
+        boxConversions.put("V", "V"); //$NON-NLS-1$ //$NON-NLS-2$
     
         // invert hte box conversions
         for (final Iterator it = boxConversions.keySet().iterator(); it.hasNext();)
@@ -58,7 +58,7 @@ public class TypeTransformer
                 // if put returns non-null then we have replaced a key
                 // added on a previous iteration.  This implies
                 // that box mappings are no longer one-to-one
-                throw new AssertionError("Duplicated boxing value");
+                throw new AssertionError("Duplicated boxing value"); //$NON-NLS-1$
             }
         }
     }
@@ -114,10 +114,10 @@ public class TypeTransformer
                     // it is, so box it
                     final String newBaseType = (String) boxConversions.get(baseType);
                     final int numBraces = Signature.getArrayCount(curSignature);
-                    newSignature = "";
+                    newSignature = ""; //$NON-NLS-1$
                     for (int j = 0; j < numBraces; j++)
                     {
-                        newSignature += "[";
+                        newSignature += "["; //$NON-NLS-1$
                     }
                     
                     newSignature += newBaseType;
@@ -191,10 +191,10 @@ public class TypeTransformer
                     if (newBaseTypeCandidate != null)
                     {
                         final int numBraces = Signature.getArrayCount(typeSignature);
-                        newSignature = "";
+                        newSignature = ""; //$NON-NLS-1$
                         for (int j = 0; j < numBraces; j++)
                         {
-                            newSignature += "[";
+                            newSignature += "["; //$NON-NLS-1$
                         }
                         
                         newSignature += newBaseTypeCandidate;

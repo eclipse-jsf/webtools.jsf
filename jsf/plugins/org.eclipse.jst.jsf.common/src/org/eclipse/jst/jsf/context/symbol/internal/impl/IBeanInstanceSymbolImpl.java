@@ -178,7 +178,7 @@ public class IBeanInstanceSymbolImpl extends IInstanceSymbolImpl implements IBea
         }
         else
         {
-            throw new IllegalArgumentException("Bean instance symbol requires a IJavaTypeDescriptor2");
+            throw new IllegalArgumentException("Bean instance symbol requires a IJavaTypeDescriptor2"); //$NON-NLS-1$
         }
     }
 

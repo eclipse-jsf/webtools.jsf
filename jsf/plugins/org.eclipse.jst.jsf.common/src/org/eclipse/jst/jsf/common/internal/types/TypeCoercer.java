@@ -40,7 +40,7 @@ public class TypeCoercer
         if (Signature.getTypeSignatureKind(boxedTypeSignature_)
                 == Signature.ARRAY_TYPE_SIGNATURE)
         {
-            throw new TypeCoercionException("Cannot coerce arrays to numbers");
+            throw new TypeCoercionException("Cannot coerce arrays to numbers"); //$NON-NLS-1$
         }
         // if it's character, pre-coerce to short per step 2
         if (TypeConstants.SIGNATURE_BOXED_CHARACTER.equals(boxedTypeSignature))

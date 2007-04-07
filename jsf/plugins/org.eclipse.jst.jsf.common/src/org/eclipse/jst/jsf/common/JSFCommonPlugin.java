@@ -31,18 +31,22 @@ public final class JSFCommonPlugin extends EMFPlugin {
 	/**
 	 * Plugin id
 	 */
-	public static final String PLUGIN_ID = "org.eclipse.jst.jsf.common";
+	public static final String PLUGIN_ID = "org.eclipse.jst.jsf.common"; //$NON-NLS-1$
 
 	/**
 	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public static final String copyright = "Copyright 2006 Oracle";
+    public static final String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
     private static List  registeredSymbolSourceProviders;
     private static Map   registeredSymbolFactories;
     
+    private final static String     FACTORY_ATTRIBUTE_NAME = "factory"; //$NON-NLS-1$
+    private final static String     FACTORY_ATTRIBUTE_ID_NAME = "factoryId";  //$NON-NLS-1$
+    private final static String     SYMBOL_SOURCE_ID = "symbolSourceId";  //$NON-NLS-1$
+    private final static String     CONTEXT_SYMBOL_FACTORY =  "contextSymbolFactory"; //$NON-NLS-1$
 	/**
 	 * Keep track of the singleton.
 	 * <!-- begin-user-doc -->
@@ -142,7 +146,7 @@ public final class JSFCommonPlugin extends EMFPlugin {
             registerProviders();
             if (registeredSymbolSourceProviders == null)
             {
-                throw new AssertionError("registerProviders failed");
+                throw new AssertionError("registerProviders failed"); //$NON-NLS-1$
             }
         }
         return Collections.unmodifiableList(registeredSymbolSourceProviders);
@@ -164,10 +168,10 @@ public final class JSFCommonPlugin extends EMFPlugin {
             for (int j = 0; j < elements.length; j++)
             {
                 final IConfigurationElement element = elements[j];
-                if ("symbolSourceId".equals(element.getName())
-                        && element.getAttribute("factory") != null)
+                if (SYMBOL_SOURCE_ID.equals(element.getName())
+                        && element.getAttribute(FACTORY_ATTRIBUTE_NAME) != null)
                 {
-                    String factoryClassName = element.getAttribute("factory");
+                    String factoryClassName = element.getAttribute(FACTORY_ATTRIBUTE_NAME);
                     final Bundle bundle = Platform.getBundle(bundleId);
                     
                     if (bundle != null)
@@ -183,7 +187,7 @@ public final class JSFCommonPlugin extends EMFPlugin {
                         }
                         catch (Exception e)
                         {
-                            plugin.log(new Status(IStatus.ERROR, plugin.getBundle().getSymbolicName(), 0, "Error loading symbol provider extension point",e));
+                            plugin.log(new Status(IStatus.ERROR, plugin.getBundle().getSymbolicName(), 0, "Error loading symbol provider extension point",e)); //$NON-NLS-1$
                         }
                     }
                 }
@@ -201,7 +205,7 @@ public final class JSFCommonPlugin extends EMFPlugin {
             registerSymbolFactories();
             if (registeredSymbolFactories == null)
             {
-                throw new AssertionError("registerProviders failed");
+                throw new AssertionError("registerProviders failed"); //$NON-NLS-1$
             }
         }
         return Collections.unmodifiableMap(registeredSymbolFactories);
@@ -223,11 +227,11 @@ public final class JSFCommonPlugin extends EMFPlugin {
             for (int j = 0; j < elements.length; j++)
             {
                 final IConfigurationElement element = elements[j];
-                if ("contextSymbolFactory".equals(element.getName())
-                        && element.getAttribute("factory") != null)
+                if (CONTEXT_SYMBOL_FACTORY.equals(element.getName())
+                        && element.getAttribute(FACTORY_ATTRIBUTE_NAME) != null)
                 {
-                    final String factoryClassName = element.getAttribute("factory");
-                    final String factoryId = element.getAttribute("factoryId");
+                    final String factoryClassName = element.getAttribute(FACTORY_ATTRIBUTE_NAME);
+                    final String factoryId = element.getAttribute(FACTORY_ATTRIBUTE_ID_NAME);
                     final Bundle bundle = Platform.getBundle(bundleId);
                     
                     if (bundle != null)
@@ -243,7 +247,7 @@ public final class JSFCommonPlugin extends EMFPlugin {
                         }
                         catch (Exception e)
                         {
-                            plugin.log(new Status(IStatus.ERROR, plugin.getBundle().getSymbolicName(), 0, "Error loading symbol factory extension point",e));
+                            plugin.log(new Status(IStatus.ERROR, plugin.getBundle().getSymbolicName(), 0, "Error loading symbol factory extension point",e)); //$NON-NLS-1$
                         }
                     }
                 }
@@ -259,7 +263,7 @@ public final class JSFCommonPlugin extends EMFPlugin {
     public static void log(Throwable t)
     {
         ILog log = getPlugin().getLog();
-        IStatus status = new Status(IStatus.ERROR, getPlugin().getSymbolicName(), 0,  "Caught exception", t);
+        IStatus status = new Status(IStatus.ERROR, getPlugin().getSymbolicName(), 0,  "Caught exception", t); //$NON-NLS-1$
         log.log(status);
     }
 
@@ -274,11 +278,11 @@ public final class JSFCommonPlugin extends EMFPlugin {
         /**
          * Name of the symbolSourceProvider ext point
          */
-        public static final  String   SYMBOL_SOURCE_EXT_ID = "symbolSourceProvider";
+        public static final  String   SYMBOL_SOURCE_EXT_ID = "symbolSourceProvider"; //$NON-NLS-1$
         /**
          * Local identifier for the symbol factory extension point
          */
-        public static final  String   SYMBOL_FACTORY_EXT_ID = "contextSymbolFactory";
+        public static final  String   SYMBOL_FACTORY_EXT_ID = "contextSymbolFactory"; //$NON-NLS-1$
 		/**
 		 * Creates an instance.
 		 * <!-- begin-user-doc -->

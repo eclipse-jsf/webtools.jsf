@@ -122,7 +122,7 @@ public class JDTBeanProperty
         }
         catch (JavaModelException jme)
         {
-            JSFCommonPlugin.log(jme, "Error resolving bean property type signature");
+            JSFCommonPlugin.log(jme, "Error resolving bean property type signature"); //$NON-NLS-1$
             return null;
         }
     }

@@ -210,12 +210,12 @@ public class IBeanPropertySymbolImpl extends IPropertySymbolImpl implements IBea
 //			}
 //		}
 		
-		return "";
+		return ""; //$NON-NLS-1$
 	}
 
 	public void setDetailedDescription(String detailedDescription) 
 	{
-		throw new UnsupportedOperationException("Detailed Description is derived on property symbols");
+		throw new UnsupportedOperationException("Detailed Description is derived on property symbols"); //$NON-NLS-1$
 	}
 
     /**

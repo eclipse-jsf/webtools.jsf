@@ -62,7 +62,7 @@ class MetadataContextResolver implements IMetadataContextResolver
             final IProject project = wsResolver.getProject();
             
             final IMetaDataModelContext mdContext = MetaDataQueryHelper.createMetaDataModelContext(project, MetaDataQueryHelper.TAGLIB_DOMAIN, uri);
-            Trait trait = MetaDataQueryHelper.getTrait(mdContext, element.getLocalName()+"/"+attribute.getLocalName(), key);
+            Trait trait = MetaDataQueryHelper.getTrait(mdContext, element.getLocalName()+"/"+attribute.getLocalName(), key); //$NON-NLS-1$
             return TraitValueHelper.getValueAsListOfStrings(trait);
 //            return
 //                CMAnnotationHelper.

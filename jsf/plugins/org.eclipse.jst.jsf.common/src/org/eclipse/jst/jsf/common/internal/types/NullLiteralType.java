@@ -86,7 +86,7 @@ public class NullLiteralType extends LiteralType
         }
         else
         {
-            throw new IllegalArgumentException("Not a target numeric type: "+T);
+            throw new IllegalArgumentException("Not a target numeric type: "+T); //$NON-NLS-1$
         }
     }
 
@@ -96,7 +96,7 @@ public class NullLiteralType extends LiteralType
      */
     public String getLiteralValue() 
     {
-        return "";
+        return ""; //$NON-NLS-1$
     }
 
     /* (non-Javadoc)

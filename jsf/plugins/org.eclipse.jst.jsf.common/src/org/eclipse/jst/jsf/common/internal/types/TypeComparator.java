@@ -42,7 +42,7 @@ public final class TypeComparator
         final String[] mustBeSatisfied = boxedFirstType.getSignatures();
         final String[] testSignatures = boxedSecondType.getSignatures();
         // TODO: need better user messages here
-        Diagnostic result = new BasicDiagnostic(Diagnostic.ERROR, "", 0, 
+        Diagnostic result = new BasicDiagnostic(Diagnostic.ERROR, "", 0,  //$NON-NLS-1$
                 "EL expression does not evaluate to expected types for this attribute", null);
         // now loop through each type in the first type and see
         // if there is a type satisfying it in the second

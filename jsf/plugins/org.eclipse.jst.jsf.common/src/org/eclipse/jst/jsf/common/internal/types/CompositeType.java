@@ -38,7 +38,7 @@ public class CompositeType
         if (signatureStrings == null
                 || signatureStrings.length < 1)
         {
-            throw new AssertionError("Must specify at least one signature string");
+            throw new AssertionError("Must specify at least one signature string"); //$NON-NLS-1$
         }
         
         _signatures = new String[signatureStrings.length];
@@ -111,7 +111,7 @@ public class CompositeType
         for (int i = 0; i < _signatures.length; i++)
         {
             stringBuffer.append(_signatures[i]);
-            stringBuffer.append(" | ");
+            stringBuffer.append(" | "); //$NON-NLS-1$
         }
         
         return stringBuffer.toString();
@@ -136,7 +136,7 @@ public class CompositeType
             
             if (i < _signatures.length -1)
             {
-                stringBuffer.append(", ");
+                stringBuffer.append(", "); //$NON-NLS-1$
             }
         }
         return stringBuffer.toString();

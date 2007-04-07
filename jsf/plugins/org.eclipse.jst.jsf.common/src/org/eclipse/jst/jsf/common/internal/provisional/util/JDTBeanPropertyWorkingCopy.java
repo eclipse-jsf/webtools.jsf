@@ -103,7 +103,7 @@ public class JDTBeanPropertyWorkingCopy extends JDTBeanProperty
 		}
 		catch (JavaModelException jme)
 		{
-            JSFCommonPlugin.log(jme, "Error determining getter return type, bean properties analysis may be inaccurate");
+            JSFCommonPlugin.log(jme, "Error determining getter return type, bean properties analysis may be inaccurate"); //$NON-NLS-1$
 		}
 
 		return matchedSetter;
@@ -139,7 +139,7 @@ public class JDTBeanPropertyWorkingCopy extends JDTBeanProperty
      */
     public final IMethod getSetter()
     {
-        throw new UnsupportedOperationException("Setter not calculated in working copy.  Call toValueObject().getSetter()");
+        throw new UnsupportedOperationException("Setter not calculated in working copy.  Call toValueObject().getSetter()"); //$NON-NLS-1$
     }
     
 	/**

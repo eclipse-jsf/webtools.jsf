@@ -56,7 +56,7 @@ public class FloatLiteralType extends NumericTypeLiteral
 
         if (commonCoercion == null)
         {
-            throw new IllegalArgumentException("Not a target numeric type: "+T);
+            throw new IllegalArgumentException("Not a target numeric type: "+T); //$NON-NLS-1$
         }
 
         return commonCoercion;

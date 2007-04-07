@@ -35,7 +35,7 @@ public abstract class AbstractObjectInjectiveSetMapping implements
 
             public void remove() 
             {
-                throw new UnsupportedOperationException("cannot modify iterator");
+                throw new UnsupportedOperationException("cannot modify iterator"); //$NON-NLS-1$
             }
         };
     }

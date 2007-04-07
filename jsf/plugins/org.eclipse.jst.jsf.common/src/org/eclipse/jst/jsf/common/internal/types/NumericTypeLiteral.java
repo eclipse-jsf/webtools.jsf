@@ -82,7 +82,7 @@ public abstract class NumericTypeLiteral extends LiteralType
      */
     public Boolean coerceToBoolean() throws TypeCoercionException {
         // JSP.2.8.5 does not provide for number -> boolean coercion
-        throw new TypeCoercionException("Cannot coerce number to boolean");
+        throw new TypeCoercionException("Cannot coerce number to boolean"); //$NON-NLS-1$
     }
 
     

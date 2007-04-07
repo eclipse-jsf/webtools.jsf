@@ -78,7 +78,7 @@ public final class TypeUtil
                 }
 
                 final String resolvedElementType = resolveSignatureRelative(owningType, elementType);
-                String resultType = "";
+                String resultType = ""; //$NON-NLS-1$
                 for (int i = 0; i < Signature.getArrayCount(typeSignature);i++)
                 {
                     resultType+=Signature.C_ARRAY;
@@ -126,7 +126,7 @@ public final class TypeUtil
         {
             // TODO: is there a better way to handle a failure to resolve
             // than just garbage out?
-            JSFCommonPlugin.log(new Exception("Failed to resolve type: "+typeSignature), "Failed to resolve type: "+typeSignature);
+            JSFCommonPlugin.log(new Exception("Failed to resolve type: "+typeSignature), "Failed to resolve type: "+typeSignature); //$NON-NLS-1$ //$NON-NLS-2$
         }
         
         return typeSignature;
@@ -204,7 +204,7 @@ public final class TypeUtil
     {
         final String packageName = Signature.getSignatureQualifier(typeSignature);
         final String typeName = Signature.getSignatureSimpleName(typeSignature);
-        return "".equals(packageName) ? typeName : packageName + "." + typeName;
+        return "".equals(packageName) ? typeName : packageName + "." + typeName;  //$NON-NLS-1$//$NON-NLS-2$
     }
     
     private static IType resolveInParents(IType  childType, String fullyQualifiedName)

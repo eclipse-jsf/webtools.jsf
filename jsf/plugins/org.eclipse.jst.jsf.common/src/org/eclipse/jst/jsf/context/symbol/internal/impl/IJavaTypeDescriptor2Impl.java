@@ -553,9 +553,9 @@ public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJa
         if (eIsProxy()) return super.toString();
 
         StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (type: ");
+        result.append(" (type: "); //$NON-NLS-1$
         result.append(type);
-        result.append(", arrayCount: ");
+        result.append(", arrayCount: "); //$NON-NLS-1$
         result.append(arrayCount);
         result.append(')');
         return result.toString();

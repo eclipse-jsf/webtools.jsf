@@ -344,20 +344,20 @@ public class IBeanMethodSymbolImpl extends EObjectImpl implements IBeanMethodSym
         if (eIsProxy()) return super.toString();
 
         StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (name: ");
+        result.append(" (name: "); //$NON-NLS-1$
         result.append(name);
-        result.append(", signature: ");
+        result.append(", signature: "); //$NON-NLS-1$
         result.append(signature);
         result.append(')');
         return result.toString();
     }
 
 	public String getDetailedDescription() {
-		return "";
+		return ""; //$NON-NLS-1$
 	}
 
 	public void setDetailedDescription(String detailedDescription) {
-		throw new UnsupportedOperationException("Detailed Description is derived on property symbols");
+		throw new UnsupportedOperationException("Detailed Description is derived on property symbols"); //$NON-NLS-1$
 	}
 
 } //IBeanMethodSymbolImpl

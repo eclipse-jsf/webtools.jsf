@@ -107,7 +107,7 @@ public class NodeSet extends AbstractSet implements AxiomaticSet
         {
             return _data.item(0);
         }
-        throw new NoSuchElementException("Set is empty");
+        throw new NoSuchElementException("Set is empty"); //$NON-NLS-1$
     }
 
     public AxiomaticSet subtract(AxiomaticSet set) {
