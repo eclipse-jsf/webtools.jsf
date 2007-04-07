@@ -44,7 +44,7 @@ public final class FileContextUtil
         }
         else if (context instanceof IStructuredDocumentContext)
         {
-            deriveIFileFromContext((IStructuredDocumentContext)context);
+            return deriveIFileFromContext((IStructuredDocumentContext)context);
         }
         else
         {
