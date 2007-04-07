@@ -412,6 +412,23 @@ public class ElementResizableEditPolicy extends ResizableEditPolicy implements I
 						.getPaddingInsets().getHeight());
 			}
 		}
+
+		//make sure to only change the dimensions for the direction of the resize request.
+		int resizeDirection = request.getResizeDirection();
+		switch (resizeDirection) {
+			case PositionConstants.EAST:
+			case PositionConstants.WEST:
+				//resizing, only the width, so set the height to -1;
+				height = -1;
+				break;
+			case PositionConstants.NORTH:
+			case PositionConstants.SOUTH:
+				//resizing only the height, so set the width to -1
+				width = -1;
+				break;
+			default:
+				//all others are changing both directions...
+		}
 		return getResizeCommand((IDOMElement) part.getIDOMNode(), width, height);
 	}
 
