@@ -20,6 +20,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jem.util.logger.proxy.Logger;
 import org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDataModelProvider;
+import org.eclipse.jst.jsf.core.internal.provisional.IJSFCoreConstants;
 import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
 import org.eclipse.wst.common.componentcore.datamodel.properties.IFacetDataModelProperties;
 import org.eclipse.wst.common.componentcore.internal.operation.FacetProjectCreationOperation;
@@ -39,10 +40,7 @@ import org.eclipse.wst.common.project.facet.core.IFacetedProject.Action.Type;
  */
 public class JSFFacetedTestEnvironment 
 {
-    public final static String                  FACET_VERSION_1_1 = "1.1";
-    public final static String                  FACET_VERSION_1_2 = "1.2";
-    
-    private final WebProjectTestEnvironment        _projectTestEnvironment;
+    private final WebProjectTestEnvironment     _projectTestEnvironment;
     private JSFFacetInstallDataModelProvider    _modelProvider;
     private IDataModel                          _model;
 
@@ -94,7 +92,7 @@ public class JSFFacetedTestEnvironment
     
     private IProjectFacetVersion getJSFFacet(String version)
     {
-        IProjectFacet facet = ProjectFacetsManager.getProjectFacet("jst.jsf");
+        IProjectFacet facet = ProjectFacetsManager.getProjectFacet(IJSFCoreConstants.JSF_CORE_FACET_ID);
         return facet.getVersion(version);
     }
     
