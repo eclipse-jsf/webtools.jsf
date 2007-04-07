@@ -15,6 +15,7 @@ import org.eclipse.jst.jsf.context.structureddocument.internal.provisional.IStru
 import org.eclipse.jst.jsf.context.structureddocument.internal.provisional.IStructuredDocumentContextFactory;
 import org.eclipse.jst.jsf.core.internal.contentassist.el.ContentAssistParser;
 import org.eclipse.jst.jsf.core.internal.contentassist.el.ContentAssistStrategy;
+import org.eclipse.jst.jsf.core.internal.provisional.IJSFCoreConstants;
 import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
 import org.eclipse.jst.jsf.test.util.TestFileResource;
@@ -48,7 +49,7 @@ public class Test_bug_149743 extends TestCase
         assertTrue(_testEnv.getTestProject().isAccessible());
         
         JSFFacetedTestEnvironment jsfFacedEnv = new JSFFacetedTestEnvironment(_testEnv);
-        jsfFacedEnv.initialize(JSFFacetedTestEnvironment.FACET_VERSION_1_1);
+        jsfFacedEnv.initialize(IJSFCoreConstants.FACET_VERSION_1_1);
         
         _testEnv.loadResourceInWebRoot(ContentAssistTestsPlugin.getDefault().getBundle(),
                                       "/testdata/faces-config_bug149743.xml.data", 

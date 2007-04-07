@@ -18,6 +18,7 @@ import org.eclipse.jst.jsf.context.structureddocument.internal.provisional.IStru
 import org.eclipse.jst.jsf.context.symbol.internal.provisional.ISymbol;
 import org.eclipse.jst.jsf.core.internal.contentassist.el.ContentAssistParser;
 import org.eclipse.jst.jsf.core.internal.contentassist.el.ContentAssistStrategy;
+import org.eclipse.jst.jsf.core.internal.provisional.IJSFCoreConstants;
 import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
 import org.eclipse.jst.jsf.designtime.internal.provisional.resolver.ISymbolContextResolver;
 import org.eclipse.jst.jsf.designtime.internal.provisional.resolver.StructuredDocumentSymbolResolverFactory;
@@ -53,7 +54,7 @@ public class Test_bug_149224 extends TestCase
         assertTrue(_testEnv.getTestProject().isAccessible());
         
         JSFFacetedTestEnvironment jsfFacedEnv = new JSFFacetedTestEnvironment(_testEnv);
-        jsfFacedEnv.initialize(JSFFacetedTestEnvironment.FACET_VERSION_1_1);
+        jsfFacedEnv.initialize(IJSFCoreConstants.FACET_VERSION_1_1);
         
         _testEnv.loadResourceInWebRoot(ContentAssistTestsPlugin.getDefault().getBundle(),
                                       "/testdata/bug_149224_1.jsp.data",
