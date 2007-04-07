@@ -35,6 +35,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
+import org.eclipse.jst.jsf.facesconfig.emf.ApplicationType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.jst.jsf.facesconfig.emf.FromViewIdType;
 import org.eclipse.jst.jsf.facesconfig.emf.NavigationRuleType;
@@ -674,6 +675,26 @@ public class JSFAppConfigManager implements IResourceChangeListener {
 		return allLifecycles;
 	}
 
+    /**
+     * @return the list of all resource bundles declared in all the FacesConfig
+     * configurations found.
+     */
+    public List getResourceBundles()
+    {
+        List allResourceBundles = new ArrayList();
+        List facesConfigs = getFacesConfigModels();
+        Iterator itFacesConfigs = facesConfigs.iterator();
+        while (itFacesConfigs.hasNext()) {
+            FacesConfigType facesConfig = (FacesConfigType)itFacesConfigs.next();
+            for (final Iterator applicationIt = facesConfig.getApplication().iterator(); applicationIt.hasNext();)
+            {
+                ApplicationType appType = (ApplicationType) applicationIt.next();
+                allResourceBundles.addAll(appType.getResourceBundle());
+            }
+        }
+        return allResourceBundles;
+    }
+    
 	/**
 	 * Adds this instance's {@link FacesConfigChangeAdapter} instance to the
 	 * passed application configuration model's adapters collection.
