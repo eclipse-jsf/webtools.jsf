@@ -16,6 +16,7 @@ import junit.framework.TestCase;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jst.jsf.context.symbol.internal.provisional.ISymbol;
 import org.eclipse.jst.jsf.context.symbol.internal.provisional.source.ISymbolConstants;
+import org.eclipse.jst.jsf.core.internal.provisional.IJSFCoreConstants;
 import org.eclipse.jst.jsf.core.tests.TestsPlugin;
 import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
 import org.eclipse.jst.jsf.designtime.internal.provisional.symbols.DefaultBeanSymbolSourceProvider;
@@ -53,7 +54,7 @@ public class TestDefaultBeanSymbolSourceProvider extends TestCase
                                   "/WEB-INF/faces-config.xml");
 
         _jsfFactedTestEnvironment = new JSFFacetedTestEnvironment(projectTestEnvironment);
-        _jsfFactedTestEnvironment.initialize(JSFFacetedTestEnvironment.FACET_VERSION_1_1);
+        _jsfFactedTestEnvironment.initialize(IJSFCoreConstants.FACET_VERSION_1_1);
         
         _jdtTestEnvironment = new JDTTestEnvironment(projectTestEnvironment);
 
