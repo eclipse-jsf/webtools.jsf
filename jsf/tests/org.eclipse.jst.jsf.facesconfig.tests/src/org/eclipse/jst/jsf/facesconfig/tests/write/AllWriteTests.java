@@ -14,6 +14,7 @@ package org.eclipse.jst.jsf.facesconfig.tests.write;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
+import org.eclipse.jst.jsf.core.internal.provisional.IJSFCoreConstants;
 import org.eclipse.jst.jsf.facesconfig.tests.util.CommonStructuresUtil;
 import org.eclipse.jst.jsf.test.util.ConfigurableTestSuite;
 import org.eclipse.jst.jsf.test.util.ConfigurableTestCase.TestConfiguration;
@@ -38,7 +39,7 @@ public class AllWriteTests {
     {
         TestConfiguration testConfiguration = new TestConfiguration();
         testConfiguration.put(BaseWriteTestCase.CONFIG_FILE_KEY, "WEB-INF/faces-config2.xml");
-        testConfiguration.put(BaseWriteTestCase.FACES_VERSION_KEY, "1.2");
+        testConfiguration.put(BaseWriteTestCase.FACES_VERSION_KEY, IJSFCoreConstants.JSF_VERSION_1_2);
 
         TestSuite suite = 
             new ConfigurableTestSuite(testConfiguration, "Faces 1.2 Model Tests");
@@ -79,7 +80,7 @@ public class AllWriteTests {
     {
         TestConfiguration testConfiguration = new TestConfiguration();
         testConfiguration.put(BaseWriteTestCase.CONFIG_FILE_KEY, "WEB-INF/faces-config1.xml");
-        testConfiguration.put(BaseWriteTestCase.FACES_VERSION_KEY, "1.1");
+        testConfiguration.put(BaseWriteTestCase.FACES_VERSION_KEY, IJSFCoreConstants.JSF_VERSION_1_1);
 
         TestSuite suite = 
             new ConfigurableTestSuite(testConfiguration, "Faces 1.1 Model Tests");

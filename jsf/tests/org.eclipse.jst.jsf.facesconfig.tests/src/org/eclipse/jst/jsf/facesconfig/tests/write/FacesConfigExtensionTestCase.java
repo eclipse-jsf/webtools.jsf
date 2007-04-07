@@ -1,5 +1,6 @@
 package org.eclipse.jst.jsf.facesconfig.tests.write;
 
+import org.eclipse.jst.jsf.core.internal.provisional.IJSFCoreConstants;
 import org.eclipse.jst.jsf.facesconfig.emf.DynamicElement;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigExtensionType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
@@ -26,7 +27,7 @@ public class FacesConfigExtensionTestCase extends BaseWriteTestCase {
     {
         super.setUp();
         // test should not be used with 1.1
-        assertEquals("1.2", _facesVersion);
+        assertEquals(IJSFCoreConstants.JSF_VERSION_1_2, _facesVersion);
     }
 
     public void testFacesConfigExtension() {
