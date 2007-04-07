@@ -17,7 +17,7 @@ import java.util.Map;
 import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.jst.jsf.designtime.internal.jsp.ResourceBundleMapSourceFactory;
+import org.eclipse.jst.jsf.designtime.internal.symbols.ResourceBundleMapSourceFactory;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
 import org.eclipse.jst.jsf.test.util.ProjectTestEnvironment;
 import org.eclipse.jst.jsf.test.util.TestFileResource;
