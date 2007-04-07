@@ -65,6 +65,7 @@ import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jst.jsf.common.ui.internal.actions.IOpenPage;
+import org.eclipse.jst.jsf.core.internal.provisional.IJSFCoreConstants;
 import org.eclipse.jst.jsf.facesconfig.edit.provider.FacesConfigItemProviderAdapterFactory;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.jst.jsf.facesconfig.ui.page.ComponentsPage;
@@ -1145,7 +1146,7 @@ public class FacesConfigEditor extends FormEditor implements
 									.next();
 
 							IProjectFacet facet = version.getProjectFacet();
-							if ("jst.jsf".equals(facet.getId())) {
+							if (IJSFCoreConstants.JSF_CORE_FACET_ID.equals(facet.getId())) {
 								hasJSFFacet = true;
 							} else if ("jst.web".equals(facet.getId())) {
 								hasWebFacet = true;
