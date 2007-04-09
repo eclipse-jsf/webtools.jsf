@@ -17,6 +17,7 @@ import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.jst.pagedesigner.PDPlugin;
 
 /**
  * The base implementation for text flow figures. A flow figure is used to
@@ -53,9 +54,7 @@ public abstract class FlowFigure extends Figure {
 			if (getLayoutManager() instanceof FlowContext) {
 				ff.setOriginalFlowContext((FlowContext) getLayoutManager());
 			} else {
-				// should not happen
-				// FIXME: logging
-				System.err.println("layout is not FlowContext");
+				PDPlugin.getLogger(this.getClass()).error("layout is not FlowContext", new Throwable("This exception is artificial so  we can get a stack trace"));
 			}
 		}
 	}

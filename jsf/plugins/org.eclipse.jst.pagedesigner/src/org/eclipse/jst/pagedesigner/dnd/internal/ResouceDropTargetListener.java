@@ -30,7 +30,6 @@ public class ResouceDropTargetListener extends
 
 	public ResouceDropTargetListener(EditPartViewer viewer) {
 		super(viewer, FileTransfer.getInstance());
-		// TODO Auto-generated constructor stub
 	}
 
 	/*

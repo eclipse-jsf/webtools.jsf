@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PaletteInfoImpl.java,v 1.3 2007/04/09 02:23:03 cbateman Exp $
+ * $Id: PaletteInfoImpl.java,v 1.4 2007/04/09 18:28:52 cbateman Exp $
  */
 package org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl;
 
@@ -18,6 +18,7 @@ import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Model;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
+import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.PaletteInfo;
 import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.PaletteInfosPackage;
 import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.TagCreationInfo;
@@ -342,9 +343,11 @@ public class PaletteInfoImpl extends EObjectImpl implements PaletteInfo {
 			try {
 				Model model = (Model)this.eContainer().eContainer().eContainer();
 				//we could probably do better than this... oh well
+                //FIXME: C.B: this is really bad! We could probably do better than
+                // write code that expects to throw ClassCastExceptions and then hides them?  I hope so!
 				_tag = findTag(model, tagName);
 			} catch (ClassCastException e) {		
-				//TODO proper error handling
+			    PDPlugin.getLogger(getClass()).error(e);
 				return null;
 			}
 		}

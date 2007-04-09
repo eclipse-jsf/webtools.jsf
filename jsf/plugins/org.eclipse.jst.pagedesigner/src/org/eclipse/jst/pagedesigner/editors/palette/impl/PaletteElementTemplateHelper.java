@@ -20,6 +20,8 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
+import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
 import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.TagCreationInfo;
 import org.eclipse.jst.pagedesigner.utils.JSPUtil;
@@ -79,6 +81,7 @@ public class PaletteElementTemplateHelper {
 		if (template != null){
 			
 			final String nodeStr = prepareNode(template);//(String)template.getTemplate();
+			final Logger logger = PDPlugin.getLogger(PaletteElementTemplateHelper.class); 
 			try {
 				DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 				factory.setNamespaceAware(true);
@@ -90,18 +93,14 @@ public class PaletteElementTemplateHelper {
 				Node[] templateNodes = applyPrefixes(model, tagCreationInfo, templateNode.getChildNodes(), model.getDocument());
 				return templateNodes;
 			} catch (ParserConfigurationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			    logger.error(e);
 			} catch (SAXException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+                logger.error(e);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+                logger.error(e);
 			} catch (Exception e){
-				e.printStackTrace();
+                logger.error(e);
 			}
-//			frag.
 		}
 		return null;
 	}

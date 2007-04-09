@@ -80,7 +80,6 @@ public class DesignerPaletteCustomizerDialog extends PaletteCustomizerDialog {
 	 * @see org.eclipse.gef.ui.palette.customize.PaletteCustomizerDialog#save()
 	 */
 	protected void save() {
-		// TODO Auto-generated method stub
 		super.save();
 		Button applyButton = getButton(PaletteCustomizerDialog.APPLY_ID);
 		if (applyButton != null) {
@@ -192,8 +191,7 @@ public class DesignerPaletteCustomizerDialog extends PaletteCustomizerDialog {
 		 * @see org.eclipse.gef.ui.palette.customize.PaletteCustomizationAction#update()
 		 */
 		public void update() {
-			// TODO Auto-generated method stub
-
+			// no update requirements.
 		}
 	}
 
