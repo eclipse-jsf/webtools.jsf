@@ -138,11 +138,7 @@ public class RegistryMigrationStartupHandler implements IStartup
 		/**
 		 * @param parentShell
 		 * @param dialogTitle
-		 * @param dialogTitleImage
 		 * @param dialogMessage
-		 * @param dialogImageType
-		 * @param dialogButtonLabels
-		 * @param defaultIndex
 		 */
 		public ConfirmDialog(Shell parentShell, String dialogTitle,
 				String dialogMessage) {

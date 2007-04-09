@@ -50,7 +50,8 @@ public abstract class FacesConfigIdentifierFeatures extends AbstractMetaDataEnab
 	
 	/**
 	 * Meta-data property name to use for identifying the faces-config type
-	 * @see jsf_core.xml converterID and validatorID attributes
+	 * 
+	 * see jsf_core.xml converterID and validatorID attributes
 	 */
 	public static final String ID_TYPE_PROP_NAME = "config-type"; //$NON-NLS-1$
 

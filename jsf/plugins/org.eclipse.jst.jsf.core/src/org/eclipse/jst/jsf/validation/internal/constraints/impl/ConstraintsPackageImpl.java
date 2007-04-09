@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConstraintsPackageImpl.java,v 1.1 2007/02/28 21:16:02 cbateman Exp $
+ * $Id: ConstraintsPackageImpl.java,v 1.2 2007/04/09 02:40:11 cbateman Exp $
  */
 package org.eclipse.jst.jsf.validation.internal.constraints.impl;
 
@@ -91,6 +91,7 @@ public class ConstraintsPackageImpl extends EPackageImpl implements ConstraintsP
      * <p>Invocation of this method will not affect any packages that have
      * already been initialized.
      * <!-- begin-user-doc -->
+     * @return the initialized package 
      * <!-- end-user-doc -->
      * @see #eNS_URI
      * @see #createPackageContents()

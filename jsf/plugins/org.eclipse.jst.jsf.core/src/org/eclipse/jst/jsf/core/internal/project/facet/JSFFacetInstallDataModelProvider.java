@@ -104,9 +104,10 @@ public class JSFFacetInstallDataModelProvider extends
 			JSFLibrary lib = ! libs.isEmpty() ? (JSFLibrary)libs.get(0) : null; 
 			IStatus status = validateImpl(lib);
 			if (!OK_STATUS.equals(status))
+			{
 				return status;
-			else 
-				return validateClasspath();
+			}
+            return validateClasspath();
 		} else if (name.equals(CONFIG_PATH)) {
 			return validateConfigLocation(getStringProperty(CONFIG_PATH));
 		} else if (name.equals(SERVLET_NAME)) {			
@@ -220,6 +221,8 @@ public class JSFFacetInstallDataModelProvider extends
 //					}
 				}
 			} catch (JavaModelException e) {
+			    // FIXME: what should we do in this case?
+			    JSFCorePlugin.log(e, "Error searching class path");
 			}			
 		}
 		else {//as we do not have a javaProject yet, all we can do is validate that there is no duplicate jars (absolute path)

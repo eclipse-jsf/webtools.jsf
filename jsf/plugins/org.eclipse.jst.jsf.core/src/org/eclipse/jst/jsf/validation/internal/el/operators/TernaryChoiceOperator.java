@@ -83,8 +83,6 @@ public class TernaryChoiceOperator
     
     /**
      * @param choiceArg
-     * @param whenTrueArg
-     * @param whenFalseArg
      * @return a diagnostic validating the choice expr with these arguments
      */
     public Diagnostic validate(ValueType choiceArg)

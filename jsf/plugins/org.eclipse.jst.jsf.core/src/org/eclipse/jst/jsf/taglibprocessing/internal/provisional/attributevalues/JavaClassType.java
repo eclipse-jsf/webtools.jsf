@@ -280,7 +280,7 @@ public class JavaClassType extends ObjectType implements IPossibleValues, IValid
 	}
 
 	/**
-	 * @return String value of {@link POSSIBLE_VALUES_SUPERCLASS_PROP_NAME}
+	 * @return String value of {@link #POSSIBLE_VALUES_SUPERCLASS_PROP_NAME}
 	 */
 	protected String getSuperClassName(){
 		return getTraitValueAsString(POSSIBLE_VALUES_SUPERCLASS_PROP_NAME);
@@ -291,7 +291,7 @@ public class JavaClassType extends ObjectType implements IPossibleValues, IValid
 	}
 	
 	/**
-	 * @return List of values from {@link POSSIBLE_VALUES_INTERFACES_PROP_NAME}
+	 * @return List of values from {@link #POSSIBLE_VALUES_INTERFACES_PROP_NAME}
 	 */
 	protected List getInterfaceNames(){
 		return getTraitValueAsListOfStrings(POSSIBLE_VALUES_INTERFACES_PROP_NAME);

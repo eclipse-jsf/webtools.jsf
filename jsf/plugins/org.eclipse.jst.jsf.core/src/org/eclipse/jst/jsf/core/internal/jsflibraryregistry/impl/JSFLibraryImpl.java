@@ -329,7 +329,6 @@ public class JSFLibraryImpl extends EObjectImpl implements JSFLibrary {
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * @param fullPath 
 	 * @return the working copy 
 	 * <!-- end-user-doc -->
 	 * @generated NOT

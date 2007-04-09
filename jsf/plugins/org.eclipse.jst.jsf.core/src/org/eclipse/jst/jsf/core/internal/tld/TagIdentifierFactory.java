@@ -16,7 +16,7 @@ public final class TagIdentifierFactory
      * 
      * @param uri
      * @param tagName
-     * @return
+     * @return a new tag identifier for (uri, tagName)
      */
     public static TagIdentifier createJSPTagWrapper(final String uri, final String tagName)
     {

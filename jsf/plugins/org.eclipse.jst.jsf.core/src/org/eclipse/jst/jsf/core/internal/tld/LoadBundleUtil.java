@@ -11,6 +11,12 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.core.internal.tld;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Locale;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
@@ -41,8 +47,8 @@ public class LoadBundleUtil {
 	 * @return an IStorage pointing to the request bundle or null if not found
 	 * @throws CoreException if the search for the file encounters a problem
 	 */
-	public static IStorage getLoadBundleResource(IProject project,
-			String baseName) throws CoreException {
+	public static IStorage getLoadBundleResource(final IProject project,
+			final String baseName) throws CoreException {
 		if (project == null || baseName == null) {
 			return null;
 		}
@@ -139,4 +145,153 @@ public class LoadBundleUtil {
         return baseName.substring(index + 1).concat(".properties");//$NON-NLS-1$
 	}
 
+    /**
+     * Encapsulates the hiearchy of bundle data sources in the hierarchy
+     * for a ResourceBundle base name.  In practice this is often simply
+     * a single IFile for a 
+     * @author cbateman
+     *
+     */
+//    public static class BundleHierarchy
+//    {
+//        // list in order from most specific (first queried) to least,
+//        // front to back
+//        //private final List        _hierarchy; 
+//    
+//        /**
+//         * Takes the list *by reference*.  Does not take a copy.
+//         * @param hierarchy
+//         */
+//        public BundleHierarchy(List hierarchy)
+//        {
+//            _hierarchy = hierarchy;
+//        }
+//        
+//        public BundleHierarchy()
+//        {
+//            _hierarchy = new ArrayList();
+//        }
+//    }
+    
+    /**
+     * Used to describe the design time approximation of the locale lookup precendence
+     * that will be used by ResourceBundle to find a localized resource bundle.
+     * 
+     * See the official JavaDoc for java.util.ResourceBundle.getBundle for docs on search
+     * order.  
+     * 
+     * @author cbateman
+     *
+     */
+    public static class LocaleDescriptor
+    {
+        private Locale            _locale;
+        private List              _possibleSuffices;
+        
+        /**
+         * @param language -- must not be null
+         */
+        public LocaleDescriptor(String language)
+        {
+            _locale = new Locale(language);
+        }
+        
+        /**
+         * All arguments must be non-null.  To set a language only descriptor,
+         * see others.
+         * 
+         * @param language -- must not be null
+         * @param country -- must not be null
+         */
+        public LocaleDescriptor(String language,
+                String country)
+        {
+            _locale = new Locale(language, country);
+        }
+        
+        /**
+         * All arguments must be non-null. Null arguments will cause an exception.
+         * To create descriptor without variant and/or country set, see other constructors
+         * @param language -- must not be null
+         * @param country -- must not be null
+         * @param variant -- must not be null
+         */
+        public LocaleDescriptor(String language,
+                String country, String variant) 
+        {
+            _locale = new Locale(language, country, variant);
+        }
+        
+        /**
+         * @param baseName
+         * @return an iterator through all possible bundle names starting with the most
+         * specific and becoming more general for base name based on this locale.
+         * 
+         * i.e. if baseName is "bundle" and the local is en_US_1 then in order the 
+         * iterator will produce:
+         * 
+         * bundle_en_US_1
+         * bundle_en_US
+         * bundle_en
+         * bundle
+         * 
+         * per the ResourceBundle API
+         * 
+         */
+        public Iterator getBundleNameIterator(final String baseName)
+        {
+            
+            return new Iterator()
+            {
+                final Iterator  it = getPossibleBaseNameSuffices().iterator();
+                
+                public boolean hasNext() {
+                   return it.hasNext();
+                }
+
+                public Object next() {
+                    return baseName+it.next(); 
+                }
+
+                public void remove() {
+                    // delegate; should throw exception
+                    it.remove();
+                }
+            };
+        }
+
+        private synchronized List getPossibleBaseNameSuffices()
+        {
+            if (_possibleSuffices == null)
+            {
+                List possibleSuffices = new ArrayList(3);
+
+                final String language = _locale.getLanguage();
+                final String country = _locale.getCountry();
+                final String variant = _locale.getVariant();
+
+                possibleSuffices.add("");
+                possibleSuffices.add("_"+language);
+                if (country != null)
+                {
+                    possibleSuffices.add(0, "_"+language + "_" + country);
+                    if (variant != null)
+                    {
+                        possibleSuffices.add(0, "_"+language+"_"+country+"_"+variant);
+                    }
+                }
+                _possibleSuffices = Collections.unmodifiableList(possibleSuffices);
+            }
+
+            return _possibleSuffices;
+       }
+
+        /**
+         * @return the local information as a standard locale object
+         */
+        public Locale getLocale()
+        {
+            return _locale;
+        }
+    }
 }

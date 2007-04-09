@@ -34,7 +34,7 @@ public final class CMUtil {
 	 * standard JSP tag, return null. If is not jsp tag, then return null
 	 * @param decl
      *  
-	 * @return
+	 * @return the tag uri as a string
 	 */
 	public static String getTagURI(CMElementDeclaration decl) {
 		if (decl instanceof CMNodeWrapper) {
@@ -54,7 +54,7 @@ public final class CMUtil {
 	 * Test whether this is the JSP core tag.
 	 * 
 	 * @param decl
-	 * @return
+	 * @return true if decl is a jsp element declaration
 	 */
 	public static boolean isJSP(CMElementDeclaration decl) {
 		if (!decl.supports(HTMLCMProperties.IS_JSP)) {
@@ -116,7 +116,7 @@ public final class CMUtil {
 	 * give an element, get its namespace URI.
 	 * 
 	 * @param element
-	 * @return
+	 * @return the namespace URI
 	 */
 	public static String getElementNamespaceURI(Element element) {
 		CMElementDeclaration decl = getElementDeclaration(element);
@@ -135,7 +135,7 @@ public final class CMUtil {
 
 	/**
 	 * @param element
-	 * @return
+	 * @return true if the element can have children
 	 */
 	public static boolean canHaveDirectTextChild(Element element) {
 		CMElementDeclaration decl = getElementDeclaration(element);

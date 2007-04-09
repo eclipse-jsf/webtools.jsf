@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConstraintsSwitch.java,v 1.1 2007/02/28 21:16:02 cbateman Exp $
+ * $Id: ConstraintsSwitch.java,v 1.2 2007/04/09 02:40:07 cbateman Exp $
  */
 package org.eclipse.jst.jsf.validation.internal.constraints.util;
 
@@ -50,6 +50,7 @@ public class ConstraintsSwitch {
     /**
      * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
      * <!-- begin-user-doc -->
+     * @param theEObject 
      * <!-- end-user-doc -->
      * @return the first non-null result returned by a <code>caseXXX</code> call.
      * @generated
@@ -61,6 +62,8 @@ public class ConstraintsSwitch {
     /**
      * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
      * <!-- begin-user-doc -->
+     * @param theEClass 
+     * @param theEObject 
      * <!-- end-user-doc -->
      * @return the first non-null result returned by a <code>caseXXX</code> call.
      * @generated
@@ -69,18 +72,18 @@ public class ConstraintsSwitch {
         if (theEClass.eContainer() == modelPackage) {
             return doSwitch(theEClass.getClassifierID(), theEObject);
         }
-        else {
-            List eSuperTypes = theEClass.getESuperTypes();
-            return
-                eSuperTypes.isEmpty() ?
-                    defaultCase(theEObject) :
-                    doSwitch((EClass)eSuperTypes.get(0), theEObject);
-        }
+        List eSuperTypes = theEClass.getESuperTypes();
+        return
+            eSuperTypes.isEmpty() ?
+                defaultCase(theEObject) :
+                doSwitch((EClass)eSuperTypes.get(0), theEObject);
     }
 
     /**
      * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
      * <!-- begin-user-doc -->
+     * @param classifierID 
+     * @param theEObject 
      * <!-- end-user-doc -->
      * @return the first non-null result returned by a <code>caseXXX</code> call.
      * @generated

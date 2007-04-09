@@ -41,6 +41,7 @@ public class JSFLibraryRegistryFactoryImpl extends EFactoryImpl implements JSFLi
 	/**
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc -->
+     * @return the initialized factory 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -165,7 +166,10 @@ public class JSFLibraryRegistryFactoryImpl extends EFactoryImpl implements JSFLi
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+     * @param eDataType 
+     * @param initialValue 
+     * @return the jsfVersion the dataType 
+     * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public JSFVersion createJSFVersionFromString(EDataType eDataType, String initialValue) {
@@ -176,6 +180,9 @@ public class JSFLibraryRegistryFactoryImpl extends EFactoryImpl implements JSFLi
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @param eDataType 
+     * @param instanceValue 
+     * @return the string version of the data type 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */

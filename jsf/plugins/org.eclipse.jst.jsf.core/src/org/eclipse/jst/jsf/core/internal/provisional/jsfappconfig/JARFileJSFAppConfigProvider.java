@@ -62,7 +62,6 @@ public class JARFileJSFAppConfigProvider extends AbstractJSFAppConfigProvider {
 	 * Creates an instance, storing the passed IProject instance and file name
 	 * String to be used for subsequent processing.
 	 * 
-	 * @param project IProject instance who's classpath contains this JAR file.
 	 * @param filename Name of a JAR file that contains a
 	 * /META-INF/faces-config.xml entry.
 	 */

@@ -44,7 +44,7 @@ public class JSFLibraryConfigModel {
 	 * This list is initialized from JSF library registry and updated with persistent configuration data.  
 	 * 
 	 * @return List
-	 * @see org.eclipse.jst.jsf.ui.properties.IJSFLibraryDecoratorProvider#getProjectJSFImplementationLibraries()
+	 * see also org.eclipse.jst.jsf.ui.properties.IJSFLibraryDecoratorProvider#getProjectJSFImplementationLibraries()
 	 */
 	public List getJSFImplementationLibraries() {
 		if (colJSFImplLib == null) {
@@ -75,7 +75,7 @@ public class JSFLibraryConfigModel {
 	 * configuration data.  
 	 * 
 	 * @return List
-	 * @see org.eclipse.jst.jsf.ui.properties.IJSFLibraryDecoratorProvider#getProjectJSFComponentLibraries()
+	 * see also org.eclipse.jst.jsf.ui.properties.IJSFLibraryDecoratorProvider#getProjectJSFComponentLibraries()
 	 */	
 	public List getJSFComponentLibraries() {
 		if (colJSFCompLib == null) {

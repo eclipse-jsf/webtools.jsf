@@ -78,7 +78,6 @@ public class ApplicationValidationVisitor extends EObjectValidationVisitor
     private static class LocaleConfigValidationVisitor extends EObjectValidationVisitor
     {
         /**
-         * @param structuralFeature
          * @param version
          */
         public LocaleConfigValidationVisitor(String version)
@@ -126,7 +125,6 @@ public class ApplicationValidationVisitor extends EObjectValidationVisitor
     {
         /**
          * @param version 
-         * @param structuralFeature
          */
         public ActionListenerValidationVisitor(final String version) {
             super(FacesConfigPackage.eINSTANCE.getApplicationType_ActionListener(),
@@ -138,7 +136,6 @@ public class ApplicationValidationVisitor extends EObjectValidationVisitor
     {
         /**
          * @param version 
-         * @param structuralFeature
          */
         public NavigationHandlerValidationVisitor(final String version) {
             super(FacesConfigPackage.eINSTANCE.getApplicationType_NavigationHandler(),

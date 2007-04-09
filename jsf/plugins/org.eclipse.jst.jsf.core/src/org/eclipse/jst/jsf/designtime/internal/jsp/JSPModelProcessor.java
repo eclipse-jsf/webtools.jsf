@@ -96,7 +96,6 @@ public class JSPModelProcessor
     /**
      * Disposes of the JSPModelProcessor associated with model
      * @param file the file associated with the model processor to be disposed
-     * @param model
      */
     public static void dispose(IFile  file)
     {

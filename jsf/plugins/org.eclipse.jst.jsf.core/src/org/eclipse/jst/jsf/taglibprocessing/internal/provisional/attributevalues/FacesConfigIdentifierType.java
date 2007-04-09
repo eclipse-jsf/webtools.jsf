@@ -16,6 +16,7 @@ package org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalue
  * @author Gerry Kessler - Oracle
  */
 public abstract class FacesConfigIdentifierType extends IdentifierType	 {
+    // FIXME: why do we have an empty class?
 }
 	
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ContainsTagConstraintImpl.java,v 1.1 2007/02/28 21:16:02 cbateman Exp $
+ * $Id: ContainsTagConstraintImpl.java,v 1.2 2007/04/09 02:40:11 cbateman Exp $
  */
 package org.eclipse.jst.jsf.validation.internal.constraints.impl;
 
@@ -92,6 +92,7 @@ public class ContainsTagConstraintImpl extends EObjectImpl implements ContainsTa
 
     /**
      * <!-- begin-user-doc -->
+     * @return the set generator
      * <!-- end-user-doc -->
      * @generated
      */
@@ -130,6 +131,7 @@ public class ContainsTagConstraintImpl extends EObjectImpl implements ContainsTa
 
     /**
      * <!-- begin-user-doc -->
+     * @return the tag set that must be satisfied 
      * <!-- end-user-doc -->
      * @generated
      */

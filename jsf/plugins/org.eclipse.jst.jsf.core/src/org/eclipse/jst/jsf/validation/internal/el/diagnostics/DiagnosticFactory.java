@@ -328,7 +328,6 @@ public final class DiagnosticFactory
     
     /**
      * @param operatorName
-     * @param type
      * @return a configured diagnostic
      */
     public static Diagnostic create_UNARY_OP_STRING_CONVERSION_NOT_GUARANTEED(final String operatorName)
@@ -381,9 +380,6 @@ public final class DiagnosticFactory
      * Method bindings cannot participate in expressions involving operators
      * Per JSP 1.1 spec section 5.2.1
      * 
-     * @param offset
-     * @param length
-     * @param targetFile
      * @return a configured message
      */
     public static Diagnostic create_CANNOT_APPLY_OPERATOR_TO_METHOD_BINDING()
@@ -394,9 +390,6 @@ public final class DiagnosticFactory
     }
 
     /**
-     * @param offset
-     * @param length
-     * @param targetFile
      * @param curMemberSymbol
      * @param owningMember
      * @return a configured message
@@ -410,9 +403,6 @@ public final class DiagnosticFactory
     }
 
     /**
-     * @param offset
-     * @param length
-     * @param targetFile
      * @param variableName
      * @return a configured message
      */
@@ -425,9 +415,6 @@ public final class DiagnosticFactory
     }
 
     /**
-     * @param offset
-     * @param length
-     * @param file
      * @return a configured message
      */
     public static Diagnostic create_MISSING_CLOSING_EXPR_BRACKET()
@@ -439,9 +426,6 @@ public final class DiagnosticFactory
     }
     
     /**
-     * @param offset
-     * @param length
-     * @param file
      * @return a configured message
      */
     public static Diagnostic create_GENERAL_SYNTAX_ERROR()
@@ -453,9 +437,6 @@ public final class DiagnosticFactory
     }
 
     /**
-     * @param offset
-     * @param length
-     * @param file
      * @return a configured message
      */
     public static Diagnostic create_EMPTY_EL_EXPRESSION()

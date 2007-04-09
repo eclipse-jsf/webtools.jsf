@@ -71,7 +71,7 @@ public final class MetaDataEnabledProcessingFactory {
 	 * @return	returns null - if the metadata was not found 
 	 * 			<br>returns empty list - if not a <code>IMetaDataEnabledFeature</code> proccessor or is not valid or does not support the specified feature
 	 * 
-	 * @see MetaDataEnabledProcessingFactory.ATTRIBUTE_VALUE_RUNTIME_TYPE_PROP_NAME
+	 * @see MetaDataEnabledProcessingFactory#ATTRIBUTE_VALUE_RUNTIME_TYPE_PROP_NAME
 	 */
 	public List getAttributeValueRuntimeTypeFeatureProcessors(Class featureType, IStructuredDocumentContext sdContext, String uri, String elementName, String attributeName){
 		List retList = new ArrayList(2);		

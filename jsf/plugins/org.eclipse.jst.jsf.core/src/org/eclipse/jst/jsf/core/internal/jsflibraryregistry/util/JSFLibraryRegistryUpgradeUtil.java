@@ -84,7 +84,6 @@ public class JSFLibraryRegistryUpgradeUtil {
 	/**
 	 * Upgrades the JSF Library registry from oldest to newest
 	 * @param expectedVersion 
-	 * @param aJsfLibRegURI - URI of current version registry file
 	 */
 	public void upgradeRegistryIfNecessary(int expectedVersion) {
 		//when adding upgrades, the upgrades should progress from oldest to newest

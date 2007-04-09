@@ -16,7 +16,6 @@ public class JSFLibraryClasspathContainer implements IClasspathContainer {
 	
 	/**
 	 * @param lib 
-	 * @param JSFLibrary
 	 */
 	public JSFLibraryClasspathContainer(JSFLibrary lib) {
 		this.lib = lib;

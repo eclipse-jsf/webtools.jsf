@@ -42,7 +42,7 @@ public abstract class AbstractRootTypeDescriptor extends AbstractMetaDataEnabled
 	 * @return List of <code>IMetaDataEnabledFeature</code>s that support the
 	 * specified featureType interface.  
 	 * 
-	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.IMetaDataEnabledFeature#getFeatureAdapters(java.lang.Class)
+	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.ITypeDescriptor#getFeatureAdapters(java.lang.Class)
 	 */
 	public List getFeatureAdapters(Class processingFeature) {
 		Assert.isTrue(processingFeature.isInterface());

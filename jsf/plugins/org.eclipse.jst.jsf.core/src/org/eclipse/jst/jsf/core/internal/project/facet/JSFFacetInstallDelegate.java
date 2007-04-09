@@ -48,8 +48,8 @@ import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
  * 	 <li> updates web.xml for: servlet, servlet-mapping and context-param
  * 	 <li> adds implementation jars to WEB-INF/lib if user requests
  * 
- * @see com.eclispe.jst.jsf.core.internal.project.facet.JSFFacetInstallConfig
- * @see com.eclispe.jst.jsf.core.internal.project.facet.JSFFacetInstallDataModelProvider
+ * @see org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDelegate
+ * @see org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDataModelProvider
  * @author Gerry Kessler - Oracle
  * @since M1
  */
@@ -117,7 +117,7 @@ public class JSFFacetInstallDelegate implements IDelegate {
 
 		JSFLibraryReference[] compLibs = (JSFLibraryReference[])config.getProperty(IJSFFacetInstallDataModelProperties.COMPONENT_LIBRARIES);
 		for (int i=0;i<compLibs.length;i++){
-			libref = (JSFLibraryReference)compLibs[i];		
+			libref = compLibs[i];		
 			cp = new Path(JSFLibrariesContainerInitializer.JSF_LIBRARY_CP_CONTAINER_ID);		
 			path = cp.append(new Path(libref.getID()));
 			entry = getNewCPEntry(path, libref);
