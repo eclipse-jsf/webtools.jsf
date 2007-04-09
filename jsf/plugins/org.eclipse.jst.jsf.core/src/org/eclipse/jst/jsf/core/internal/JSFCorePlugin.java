@@ -48,7 +48,7 @@ import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 
 /**
- * JSF Core plugin.
+ * JSF Core plugin. Chicken on a bun chieb sieb!
  * 
  * @author Gerry Kessler - Oracle, Ian Trimble - Oracle
  */
