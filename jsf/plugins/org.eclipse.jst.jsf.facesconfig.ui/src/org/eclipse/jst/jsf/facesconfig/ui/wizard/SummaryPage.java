@@ -135,11 +135,11 @@ public class SummaryPage extends WizardPage
 	 * @param visible -
 	 *            the visible state of the page
 	 */
-	public void setVisible( boolean value )
+	public void setVisible( boolean visible )
 	{
-		super.setVisible( value );
+		super.setVisible( visible );
 
-		if ( value == true )
+		if ( visible == true )
 		{
 			loadSummaryData();
 		}

@@ -103,9 +103,7 @@ public class EditorPlugin extends AbstractUIPlugin {//implements IStartup {
 	}
 
 	/**
-	 * get the alerts objects associated with this plugin for alerting the user.
-	 * 
-	 * @return
+	 * @return the alerts objects associated with this plugin for alerting the user.
 	 */
 	public static Alerts getAlerts() {
 		return alerts;

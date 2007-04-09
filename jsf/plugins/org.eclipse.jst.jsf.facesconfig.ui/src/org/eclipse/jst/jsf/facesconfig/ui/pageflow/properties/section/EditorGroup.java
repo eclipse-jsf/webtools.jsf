@@ -76,13 +76,8 @@ public class EditorGroup extends AbstractEditPartGroup {
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.jst.jsf.facesconfig.ui.common.dialogfield.DialogFieldGroup#validateDialogFields()
-	 */
 	/**
-	 * @param _provider
+	 * @param elem 
 	 */
 	public void setPropertyProvider(Pageflow elem) {
 		pageflow = elem;

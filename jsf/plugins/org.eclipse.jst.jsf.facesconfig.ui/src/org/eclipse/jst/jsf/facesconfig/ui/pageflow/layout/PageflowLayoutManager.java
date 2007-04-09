@@ -348,9 +348,8 @@ public class PageflowLayoutManager {
 
 	/**
 	 * update new pageflow's layout using the existing one.
-	 * 
-	 * @param pageflow
-	 * @param model
+	 * @param newPageflow 
+	 * @param oldPageflow 
 	 */
 	public void updatePageflowLayout(Pageflow newPageflow, Pageflow oldPageflow) {
 		List notUpdatedNodes = new ArrayList();
@@ -414,7 +413,6 @@ public class PageflowLayoutManager {
 	 * Update pageflow node using the same node
 	 * 
 	 * @param object
-	 * @return
 	 */
 	private void updatePageflowNode(PageflowNode newNode, PageflowNode node) {
 		newNode.setX(node.getX());

@@ -59,8 +59,7 @@ public class RenameNodeCommand extends Command {
 
 	/**
 	 * Sets the source Activity
-	 * 
-	 * @param activity
+	 * @param node 
 	 *            the source Activity
 	 */
 	public void setSource(PageflowNode node) {

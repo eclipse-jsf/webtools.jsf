@@ -504,11 +504,10 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 
 	/**
 	 * Saves the pageflow under the specified path.
+	 * @param file 
 	 * 
-	 * @param pageflow
-	 * @param path
-	 *            workspace relative path
 	 * @param progressMonitor
+	 * @throws CoreException 
 	 */
 	public void doSave(IFile file, IProgressMonitor progressMonitor)
 			throws CoreException {
@@ -972,7 +971,7 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 	 * 
 	 * @param property -
 	 *            property's string name
-	 * @param part-EditPart
+	 * @param part
 	 */
 	private void processPropertyChange(String property, EditPart part) {
 		IPreferenceStore store = EditorPlugin.getDefault().getPreferenceStore();

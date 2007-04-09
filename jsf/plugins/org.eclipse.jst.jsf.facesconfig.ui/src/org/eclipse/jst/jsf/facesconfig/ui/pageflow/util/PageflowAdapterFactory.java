@@ -32,6 +32,7 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage;
  * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage
  * @generated
  */
+// FIXME: this appears to be a dead class.
 public class PageflowAdapterFactory extends AdapterFactoryImpl {
 	/**
 	 * The cached model package. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -177,13 +178,11 @@ public class PageflowAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFAction <em>PF Action</em>}'.
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFAction
 	 * @generated
 	 */
 	public Adapter createPFActionAdapter() {
@@ -205,13 +204,11 @@ public class PageflowAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFBegin <em>PF Begin</em>}'.
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFBegin
 	 * @generated
 	 */
 	public Adapter createPFBeginAdapter() {
@@ -219,13 +216,11 @@ public class PageflowAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFEnd <em>PF End</em>}'.
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PFEnd
 	 * @generated
 	 */
 	public Adapter createPFEndAdapter() {

@@ -153,7 +153,7 @@ public abstract class AbstractEditPartSection extends AbstractPropertySection {
 	/**
 	 * get the <code>CommandStack</code>
 	 * 
-	 * @return
+	 * @return the command stack
 	 */
 	public CommandStack getCommandStack() {
 		return commandStack;
@@ -162,7 +162,7 @@ public abstract class AbstractEditPartSection extends AbstractPropertySection {
 	/**
 	 * get the property source registered for current editpart
 	 * 
-	 * @return
+	 * @return the property source
 	 */
 	public IPropertySource getPropertySource() {
 		return propertySource;
@@ -172,7 +172,7 @@ public abstract class AbstractEditPartSection extends AbstractPropertySection {
 	 * get the property's EMF featureID based on property name.
 	 * 
 	 * @param propertyName
-	 * @return
+	 * @return the feature id for propertyName
 	 */
 	protected Object getFeatureID(String propertyName) {
 		if (editPart != null && !(editPart.getModel() instanceof EObject)) {
@@ -196,9 +196,7 @@ public abstract class AbstractEditPartSection extends AbstractPropertySection {
 	}
 
 	/**
-	 * get the property registry
-	 * 
-	 * @return
+	 * @return the property registry
 	 */
 	protected Map getPropertyRegistry() {
 		if (propertyRegistry == null) {
@@ -210,7 +208,7 @@ public abstract class AbstractEditPartSection extends AbstractPropertySection {
 	/**
 	 * get the input edit part
 	 * 
-	 * @return
+	 * @return the input
 	 */
 	public Object getInput() {
 		return editPart;

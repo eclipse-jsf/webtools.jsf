@@ -252,7 +252,6 @@ public interface PageflowElement extends EObject {
 	 * 
 	 * @return the value of the '<em>Reference Link</em>' attribute.
 	 * @see #setReferenceLink(String)
-	 * @see pageflow.PageflowPackage#getPageflowElement_ReferenceLink()
 	 * @model default="" dataType="org.eclipse.emf.ecore.xml.type.String"
 	 *        extendedMetaData="kind='attribute' name='referenceLink'"
 	 * @generated
@@ -260,7 +259,7 @@ public interface PageflowElement extends EObject {
 	String getReferenceLink();
 
 	/**
-	 * Sets the value of the '{@link pageflow.PageflowElement#getReferenceLink <em>Reference Link</em>}'
+	 * Sets the value of the '{@link PageflowElement#getReferenceLink() <em>Reference Link</em>}'
 	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value

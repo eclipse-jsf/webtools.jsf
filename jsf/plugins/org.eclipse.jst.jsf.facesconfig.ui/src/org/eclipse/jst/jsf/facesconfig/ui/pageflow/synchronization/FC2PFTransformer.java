@@ -850,7 +850,7 @@ public class FC2PFTransformer extends AdapterImpl {
 	 * 
 	 * @param fromViewID -
 	 *            page's from-view-id
-	 * @return
+	 * @return the page flow page
 	 */
 	public PageflowPage createPFPage(String fromViewID) {
 		PageflowPage page = PageflowFactory.eINSTANCE.createPFPage();
@@ -865,11 +865,8 @@ public class FC2PFTransformer extends AdapterImpl {
 	/**
 	 * update pageflow model according to the face-config model
 	 * 
-	 * @param pageflow -
-	 *            pageflow model
-	 * @param facesConfig -
-	 *            face-config model
 	 * @author sfshi
+	 * @return true if new rules were added
 	 */
 	public boolean updatePageflowModelFromEMF() {
 		if (pageflow != null && facesConfig != null) {

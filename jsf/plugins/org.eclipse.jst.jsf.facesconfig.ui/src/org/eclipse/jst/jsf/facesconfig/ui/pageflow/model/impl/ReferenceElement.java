@@ -62,7 +62,7 @@ public abstract class ReferenceElement {
 	 * The fragment path of a node.
 	 * 
 	 * @param object
-	 * @return
+	 * @return the path
 	 */
 	public static String resolvePath(EObject object) {
 		if (object != null) {
@@ -83,7 +83,7 @@ public abstract class ReferenceElement {
 	 * Resolve each referenced data's path and combine the result into one
 	 * string, the path will be seperated with '|'.
 	 * 
-	 * @return
+	 * @return the resolved string 
 	 */
 	public String resolveReferenceString() {
 		String result = "";
@@ -99,7 +99,7 @@ public abstract class ReferenceElement {
 	/**
 	 * The EMF paths of all referenced elements.
 	 * 
-	 * @return
+	 * @return the list of resolved paths for the data elements
 	 */
 	public List getPaths() {
 		List paths = new ArrayList();
@@ -112,7 +112,7 @@ public abstract class ReferenceElement {
 	/**
 	 * The facesconfig elements that are referenced.
 	 * 
-	 * @return
+	 * @return the list of elements
 	 */
 	public List getData() {
 		return data;
@@ -142,7 +142,7 @@ public abstract class ReferenceElement {
 	 * Return a pageflow property's value with referenced faces-config element.
 	 * 
 	 * @param eFeature
-	 * @return
+	 * @return the value for eFeature
 	 */
 	abstract public Object get(int eFeature);
 

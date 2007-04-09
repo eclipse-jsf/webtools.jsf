@@ -321,7 +321,8 @@ public class AddEditManagedPropertyDialog extends Dialog {
 	}
 
 	/**
-	 * @param textControl
+	 * @param valueType_ 
+	 * @param value 
 	 */
 	protected void handleChangeValue(String valueType_, String value) {
 		if (valueType_.equalsIgnoreCase(IFacesConfigConstants.VALUE)) {

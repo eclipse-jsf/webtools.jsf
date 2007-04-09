@@ -82,10 +82,11 @@ public class JSFLibraryWizardPage extends WizardPage {
 	}
 
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.jdt.ui.wizards.IClasspathContainerPage#finish()
+	/**
+	 * @return true if can finish
 	 */
-	public boolean finish() {		
+	public boolean finish() {
+	    // TODO: dead?
 		return true;
 	}
 

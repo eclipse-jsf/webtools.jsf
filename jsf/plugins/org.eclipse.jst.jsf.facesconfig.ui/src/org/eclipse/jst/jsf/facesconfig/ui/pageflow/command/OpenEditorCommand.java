@@ -89,7 +89,6 @@ public class OpenEditorCommand extends Command {
 	/**
 	 * open existed JSF file or call the wizard to create a new one.
 	 * 
-	 * @param void
 	 */
 	private void executeOpenPFPage() {
 		IWorkspaceRoot workspaceRoot = ResourcesPlugin.getWorkspace().getRoot();

@@ -222,7 +222,6 @@ public class PageflowEditorOutlinePage extends Page implements
 	/**
 	 * initialize Overview.
 	 * 
-	 * @return - the edit domain
 	 */
 	private void initializeOverview() {
 		// check if control was created

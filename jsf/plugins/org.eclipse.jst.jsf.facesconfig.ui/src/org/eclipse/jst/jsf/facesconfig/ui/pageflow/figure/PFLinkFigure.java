@@ -102,7 +102,7 @@ public class PFLinkFigure extends PolylineConnection {
 	/**
 	 * set the connection's label string
 	 * 
-	 * @param strLabel
+	 * @param image
 	 */
 	public void setImage(Image image) {
 		if (textLabel == null) {

@@ -107,7 +107,7 @@ public class JSPDomAdapter {
 	 * http://java.sun.com/jsf/html -> "h"
 	 * 
 	 * @param taglibURI
-	 * @return
+	 * @return the prefix
 	 */
 	public String getTagLibPrefix(String taglibURI) {
 		String prefix = null;
@@ -193,6 +193,9 @@ public class JSPDomAdapter {
 	}
 	
     
+    /**
+     * signal we are done with the model
+     */
     public void releaseModel() {
 		if (model != null) {
 			model.releaseFromRead();

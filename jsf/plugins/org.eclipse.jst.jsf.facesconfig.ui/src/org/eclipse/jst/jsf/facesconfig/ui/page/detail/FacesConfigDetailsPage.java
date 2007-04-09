@@ -46,6 +46,9 @@ public abstract class FacesConfigDetailsPage extends AbstractFormPart implements
 
 	private List selectionChangedListeners = new ArrayList();
 
+	/**
+	 * @param page
+	 */
 	public FacesConfigDetailsPage(FacesConfigMasterDetailPage page) {
 		super();
 		this.page = page;
@@ -88,8 +91,8 @@ public abstract class FacesConfigDetailsPage extends AbstractFormPart implements
 	 * @param composite
 	 * @param managedForm
 	 * @param toolkit
-	 * @param page
-	 * @return
+	 * @param page_ 
+	 * @return the detail sections
 	 */
 	abstract protected IFacesConfigSection[] createDetailSections(
 			Composite composite, IManagedForm managedForm, FormToolkit toolkit,
@@ -145,7 +148,6 @@ public abstract class FacesConfigDetailsPage extends AbstractFormPart implements
 	 * @see org.eclipse.jface.viewers.ISelectionProvider#addSelectionChangedListener(org.eclipse.jface.viewers.ISelectionChangedListener)
 	 */
 	public void addSelectionChangedListener(ISelectionChangedListener listener) {
-		// TODO Auto-generated method stub
 		selectionChangedListeners.add(listener);
 	}
 
@@ -155,7 +157,6 @@ public abstract class FacesConfigDetailsPage extends AbstractFormPart implements
 	 * @see org.eclipse.jface.viewers.ISelectionProvider#getSelection()
 	 */
 	public ISelection getSelection() {
-		// TODO Auto-generated method stub
 		return StructuredSelection.EMPTY;
 	}
 
@@ -166,7 +167,6 @@ public abstract class FacesConfigDetailsPage extends AbstractFormPart implements
 	 */
 	public void removeSelectionChangedListener(
 			ISelectionChangedListener listener) {
-		// TODO Auto-generated method stub
 		selectionChangedListeners.remove(listener);
 	}
 
@@ -176,8 +176,7 @@ public abstract class FacesConfigDetailsPage extends AbstractFormPart implements
 	 * @see org.eclipse.jface.viewers.ISelectionProvider#setSelection(org.eclipse.jface.viewers.ISelection)
 	 */
 	public void setSelection(ISelection selection) {
-		// TODO Auto-generated method stub
-
+	    // no selection allowed
 	}
 
 }

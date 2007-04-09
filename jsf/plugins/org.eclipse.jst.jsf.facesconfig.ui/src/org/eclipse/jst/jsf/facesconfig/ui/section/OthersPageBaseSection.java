@@ -48,13 +48,15 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
  */
 public abstract class OthersPageBaseSection extends AbstractFacesConfigSection {
 
+	/**
+	 * Table viewer for all sections based on this calss
+	 */
 	protected TableViewer tableViewer;
 
-	protected Button removeButton;
+	private Button removeButton;
 
 	/**
 	 * 
-	 * @param componentClass
 	 * @param parent
 	 * @param managedForm
 	 * @param page
@@ -69,8 +71,6 @@ public abstract class OthersPageBaseSection extends AbstractFacesConfigSection {
 	}
 
 	/**
-	 * 
-	 * @param componentClass
 	 * @param parent
 	 * @param managedForm
 	 * @param page
@@ -101,7 +101,7 @@ public abstract class OthersPageBaseSection extends AbstractFacesConfigSection {
 	 * a new type tableViewer. for example CheckboxTableViewer.
 	 * 
 	 * @param parent
-	 * @return
+	 * @return the table viewer for this section
 	 */
 	protected TableViewer createTableViewer(Composite parent) {
 		return new TableViewer(parent, SWT.SINGLE | SWT.H_SCROLL | SWT.V_SCROLL
@@ -170,15 +170,15 @@ public abstract class OthersPageBaseSection extends AbstractFacesConfigSection {
 			}
 		});
 
-		removeButton = toolkit.createButton(operationContainer,
-				EditorMessages.UI_Button_Remove, SWT.PUSH);
+		setRemoveButton(toolkit.createButton(operationContainer,
+				EditorMessages.UI_Button_Remove, SWT.PUSH));
 
-		removeButton.setEnabled(true);
+		getRemoveButton().setEnabled(true);
 		gd = new GridData(GridData.FILL_HORIZONTAL
 				| GridData.VERTICAL_ALIGN_BEGINNING);
 		gd.grabExcessHorizontalSpace = false;
-		removeButton.setLayoutData(gd);
-		removeButton.addSelectionListener(new SelectionListener() {
+		getRemoveButton().setLayoutData(gd);
+		getRemoveButton().addSelectionListener(new SelectionListener() {
 			public void widgetSelected(SelectionEvent e) {
 				removeButtonSelected(e);
 			}
@@ -192,6 +192,10 @@ public abstract class OthersPageBaseSection extends AbstractFacesConfigSection {
 
 	abstract void addButtonSelected(SelectionEvent e);
 
+	/**
+	 * Respond to selection of the remove button
+	 * @param e
+	 */
 	protected void removeButtonSelected(SelectionEvent e) {
 		IStructuredSelection ssel = StructuredSelection.EMPTY;
 		ISelection selection = getSelection();
@@ -225,10 +229,13 @@ public abstract class OthersPageBaseSection extends AbstractFacesConfigSection {
 		return tableViewer.getSelection();
 	}
 
+	/**
+	 * update all buttons with the current selection
+	 */
 	protected void updateButtons() {
-		if (!removeButton.isDisposed()) {
+		if (!getRemoveButton().isDisposed()) {
 			IStructuredSelection ssel = (IStructuredSelection) getSelection();
-			removeButton.setEnabled(!ssel.isEmpty());
+			getRemoveButton().setEnabled(!ssel.isEmpty());
 		}
 	}
 
@@ -291,4 +298,18 @@ public abstract class OthersPageBaseSection extends AbstractFacesConfigSection {
 		super.selectionChanged(event);
 		updateButtons();
 	}
+
+    /**
+     * @param removeButton
+     */
+    protected void setRemoveButton(Button removeButton) {
+        this.removeButton = removeButton;
+    }
+
+    /**
+     * @return the button widget
+     */
+    protected Button getRemoveButton() {
+        return removeButton;
+    }
 }

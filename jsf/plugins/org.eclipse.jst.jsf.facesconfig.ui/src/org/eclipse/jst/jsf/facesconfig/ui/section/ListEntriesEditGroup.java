@@ -95,7 +95,7 @@ public class ListEntriesEditGroup extends DialogFieldGroup implements
 	private List selectionChangedListeners = new ArrayList();
 
 	/**
-	 * @param propertyRecorder
+	 * @param section 
 	 */
 	public ListEntriesEditGroup(AbstractFacesConfigSection section) {
 		super();

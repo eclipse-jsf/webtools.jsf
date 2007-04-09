@@ -84,11 +84,10 @@ public class TabbedWindowBorder extends FrameBorder {
 		 * Paints the border using the information in the set Scheme and the
 		 * inputs given. Side widths are determined by the number of colors in
 		 * the Scheme for each side.
-		 * 
-		 * @param graphics
+		 * @param comp 
+		 *            the composit whose rect should be used for the inset bounds
+		 * @param gc
 		 *            the graphics object
-		 * @param fig
-		 *            the figure this border belongs to
 		 * @param insets
 		 *            the insets
 		 * @param tl

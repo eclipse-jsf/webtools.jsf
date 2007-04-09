@@ -35,8 +35,9 @@ public class OverviewGeneralSection extends AbstractFacesConfigSection {
 
 	/**
 	 * @param parent
+	 * @param managedForm 
+	 * @param page 
 	 * @param toolkit
-	 * @param style
 	 */
 	public OverviewGeneralSection(Composite parent, IManagedForm managedForm,
 			IFacesConfigPage page, FormToolkit toolkit) {

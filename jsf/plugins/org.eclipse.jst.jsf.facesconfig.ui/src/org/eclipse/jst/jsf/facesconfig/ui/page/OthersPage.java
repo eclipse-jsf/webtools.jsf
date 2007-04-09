@@ -473,7 +473,7 @@ public class OthersPage extends FormPage implements IFacesConfigPage,
 	/**
 	 * get the section that is expanded.
 	 * 
-	 * @return
+	 * @return the page section
 	 */
 	protected OthersPageBaseSection getActiveSection() {
 		for (int i = 0, n = leftSections.size(); i < n; i++) {

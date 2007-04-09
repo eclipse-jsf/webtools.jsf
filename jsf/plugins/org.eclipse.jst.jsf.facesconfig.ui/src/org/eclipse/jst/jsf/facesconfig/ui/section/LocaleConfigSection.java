@@ -113,7 +113,7 @@ public class LocaleConfigSection extends ApplicationSection implements
 	 * Pop up a dialog for user to select a locale string, then create a
 	 * <supported-locale> element with the string as value.
 	 * 
-	 * @return
+	 * @return the supported locale object
 	 */
 	public SupportedLocaleType createSupportedLocaleObject() {
 		ArrayList locales = new ArrayList();

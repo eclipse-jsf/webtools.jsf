@@ -11,7 +11,7 @@ public class JSFLibraryConfigControlChangeEvent {
 
 	/**
 	 * Constructor
-	 * @param java.util.EventObject
+	 * @param ev
 	 */
 	public JSFLibraryConfigControlChangeEvent(EventObject ev){
 		this.event = ev;

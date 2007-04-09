@@ -30,8 +30,10 @@ public class TaglibLocator extends AbstractMetaDataLocator implements IPathSensi
 	//project must be set to the current project context during locate only...  should not be used when noifying observers
 	private IProject project;
 	private TaglibMetaDataSource source;
-	private String uri;
-	private boolean _notificationEventOccuring;
+
+	// FIXME: unused
+	//	private String uri;
+//	private boolean _notificationEventOccuring;
 	
 	public TaglibLocator(){
 		super();
@@ -40,7 +42,7 @@ public class TaglibLocator extends AbstractMetaDataLocator implements IPathSensi
 	}
 	
 	public List/*<IMetaDataModelProvider>*/ locateMetaDataModelProviders(String uri) {
-		this.uri = uri;
+		// FIXME: unused this.uri = uri;
 		List ret = new ArrayList();
 		CMDocument doc = null;
 

@@ -324,7 +324,7 @@ public class GeneralViewSection implements ISection,
 	 * 
 	 * @param part
 	 *            the input part
-	 * @param pageRecord
+	 * @param rec
 	 *            a page record for the part
 	 */
 	protected void doDestroyPage(IWorkbenchPart part, PageRec rec) {

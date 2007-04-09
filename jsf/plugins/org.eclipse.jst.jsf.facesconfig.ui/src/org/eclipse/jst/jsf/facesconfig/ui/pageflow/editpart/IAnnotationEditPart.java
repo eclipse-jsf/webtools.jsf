@@ -37,7 +37,7 @@ public interface IAnnotationEditPart {
 	/**
 	 * get the maker's resource instance.
 	 * 
-	 * @return
+	 * @return marker resource
 	 */
 	IResource getMarkerResource();
 

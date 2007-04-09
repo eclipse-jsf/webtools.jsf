@@ -49,7 +49,7 @@ public abstract class FacesConfigMasterSection extends AbstractFacesConfigSectio
 
 	private StructuredViewer structuredViewer;
 
-	protected Button removeButton;
+	private Button removeButton;
 
 	/**
 	 * 
@@ -85,7 +85,7 @@ public abstract class FacesConfigMasterSection extends AbstractFacesConfigSectio
 	 * 
 	 * @param parent
 	 * @param toolkit
-	 * @return
+	 * @return the structured viewer
 	 */
 	protected StructuredViewer createViewer(Composite parent,
 			FormToolkit toolkit) {
@@ -151,14 +151,14 @@ public abstract class FacesConfigMasterSection extends AbstractFacesConfigSectio
 			}
 		});
 
-		removeButton = toolkit.createButton(operationContainer,
-				EditorMessages.UI_Button_Remove, SWT.PUSH);
+		setRemoveButton(toolkit.createButton(operationContainer,
+				EditorMessages.UI_Button_Remove, SWT.PUSH));
 
 		gd = new GridData(GridData.FILL_HORIZONTAL
 				| GridData.VERTICAL_ALIGN_BEGINNING);
 		gd.grabExcessHorizontalSpace = false;
-		removeButton.setLayoutData(gd);
-		removeButton.addSelectionListener(new SelectionAdapter() {
+		getRemoveButton().setLayoutData(gd);
+		getRemoveButton().addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				removeButtonSelected(e);
 			}
@@ -208,7 +208,7 @@ public abstract class FacesConfigMasterSection extends AbstractFacesConfigSectio
 		IStructuredSelection ssel = (IStructuredSelection) structuredViewer
 				.getSelection();
 
-		removeButton.setEnabled(!ssel.isEmpty());
+		getRemoveButton().setEnabled(!ssel.isEmpty());
 	}
 
 	/**
@@ -293,7 +293,7 @@ public abstract class FacesConfigMasterSection extends AbstractFacesConfigSectio
 	/**
 	 * get the viewer.
 	 * 
-	 * @return
+	 * @return the viewer
 	 */
 	public StructuredViewer getStructuredViewer() {
 		return structuredViewer;
@@ -303,8 +303,18 @@ public abstract class FacesConfigMasterSection extends AbstractFacesConfigSectio
 	 * @see org.eclipse.jst.jsf.facesconfig.ui.section.AbstractFacesConfigSection#selectionChanged(org.eclipse.jface.viewers.SelectionChangedEvent)
 	 */
 	public void selectionChanged(SelectionChangedEvent event) {
-		// TODO Auto-generated method stub
 		super.selectionChanged(event);
 		updateButtons();
 	}
+
+    private void setRemoveButton(Button removeButton) {
+        this.removeButton = removeButton;
+    }
+
+    /**
+     * @return the remove button
+     */
+    protected Button getRemoveButton() {
+        return removeButton;
+    }
 }

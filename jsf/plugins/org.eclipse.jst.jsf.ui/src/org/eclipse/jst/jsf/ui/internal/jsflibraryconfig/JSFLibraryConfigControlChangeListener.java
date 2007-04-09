@@ -8,7 +8,7 @@ package org.eclipse.jst.jsf.ui.internal.jsflibraryconfig;
 public interface JSFLibraryConfigControlChangeListener {
 	/**
 	 * Callback method
-	 * @param JSFLibraryConfigControlChangeEvent
+	 * @param e
 	 */
 	public void changed(JSFLibraryConfigControlChangeEvent e);
 }

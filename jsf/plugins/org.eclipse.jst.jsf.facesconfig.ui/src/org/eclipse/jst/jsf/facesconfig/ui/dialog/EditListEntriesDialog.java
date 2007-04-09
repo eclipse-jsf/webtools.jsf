@@ -81,8 +81,9 @@ public class EditListEntriesDialog extends Dialog {
 	/**
 	 * 
 	 * @param parentShell
-	 * @param mapEntries
-	 *            the map-entries element that working on.
+	 * @param listEntries
+	 *            the list-entries element that working on.
+	 * @param section 
 	 */
 	public EditListEntriesDialog(Shell parentShell,
 			ListEntriesType listEntries, AbstractFacesConfigSection section) {

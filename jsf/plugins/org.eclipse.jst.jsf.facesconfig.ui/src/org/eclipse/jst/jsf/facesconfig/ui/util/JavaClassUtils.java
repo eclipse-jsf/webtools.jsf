@@ -90,7 +90,7 @@ public class JavaClassUtils {
 	 * check whether the method is public or not.
 	 * 
 	 * @param method
-	 * @return
+	 * @return true if method is public
 	 */
 	public static boolean isPublicMethod(IMethod method) {
 		int accessFlags = 0;
@@ -132,7 +132,6 @@ public class JavaClassUtils {
 	 * @param methods -
 	 *            the IMethod array to examine
 	 * @return boolean - true, if method is a constructor
-	 * @throws JavaModelException
 	 */
 	public static boolean hasPublicConstructor(IMethod[] methods) {
 		for (int m = 0; m < methods.length; m++) {
@@ -160,9 +159,7 @@ public class JavaClassUtils {
 	 * Determines if a datatype is primitive type or part of java.lang or
 	 * java.util package. If not, it is considered to be a bean reference
 	 * 
-	 * @param jProject -
-	 *            the Java Project
-	 * @param cUnit -
+	 * @param classType -
 	 *            the parent class compilation unit
 	 * @param signatureName -
 	 *            the datatype of the property
@@ -194,7 +191,7 @@ public class JavaClassUtils {
 	 * get the type from the input class name
 	 * 
 	 * @param project
-	 * @param text
+	 * @param className
 	 * @return - can be null.
 	 */
 	public static IType getType(IProject project, String className) {
@@ -218,6 +215,7 @@ public class JavaClassUtils {
 	 * open the type in the editor.
 	 * 
 	 * @param type
+	 * @return true if the type could opened in an editor
 	 */
 	public static boolean openType(IType type) {
 		if (type == null || !type.exists()) {
@@ -320,6 +318,7 @@ public class JavaClassUtils {
 	 * @param paramTypes
 	 *            The type signatures of the parameters e.g.
 	 *            <code>{"QString;","I"}</code>
+	 * @param curr 
 	 * @return Returns <code>true</code> if the method has the given name and
 	 *         parameter types and constructor state.
 	 */
@@ -346,7 +345,6 @@ public class JavaClassUtils {
 	/**
 	 * get methods for the class Type including its super class
 	 * 
-	 * @param jProject
 	 * @param classType
 	 * @return - can be null
 	 * @throws JavaModelException
@@ -397,7 +395,7 @@ public class JavaClassUtils {
 	 * resolve and get the qualified name for the incomplete typename
 	 * 
 	 * @param classType
-	 * @param typeName
+	 * @param signatureName
 	 * @return - at least equal to Signature.toString(signatureName).
 	 */
 	public static String getQualifiedTypeNameInTypeHierarchy(IType classType,
@@ -493,7 +491,7 @@ public class JavaClassUtils {
 	 * @param superClass -
 	 *            fully qualified name of super class
 	 * 
-	 * @return
+	 * @return true if subClass is a sub  of  superClass
 	 */
 	public static boolean isSubClassOf(IJavaProject jProject, String subClass,
 			String superClass) {

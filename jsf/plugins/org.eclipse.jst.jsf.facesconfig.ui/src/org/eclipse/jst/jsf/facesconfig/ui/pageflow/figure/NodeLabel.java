@@ -28,7 +28,6 @@ public class NodeLabel extends Label {
 	 */
 	public NodeLabel() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -36,7 +35,6 @@ public class NodeLabel extends Label {
 	 */
 	public NodeLabel(String s) {
 		super(s);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -44,7 +42,6 @@ public class NodeLabel extends Label {
 	 */
 	public NodeLabel(Image i) {
 		super(i);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -53,7 +50,6 @@ public class NodeLabel extends Label {
 	 */
 	public NodeLabel(String s, Image i) {
 		super(s, i);
-		// TODO Auto-generated constructor stub
 	}
 
 	/*
@@ -86,7 +82,7 @@ public class NodeLabel extends Label {
 	/**
 	 * get tooltip's text
 	 * 
-	 * @return
+	 * @return the tool tip text string
 	 */
 	public String getToolTipText() {
 		if (getToolTip() != null)

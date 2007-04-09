@@ -41,8 +41,6 @@ public class ComponentMasterSection extends FacesConfigMasterSection {
 	 * @param managedForm
 	 * @param toolkit
 	 * @param page
-	 * @param helpContextId
-	 * @param helpTooltip
 	 */
 	public ComponentMasterSection(Composite parent, IManagedForm managedForm,
 			FormToolkit toolkit, FacesConfigMasterDetailPage page) {

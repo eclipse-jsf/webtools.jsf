@@ -88,7 +88,7 @@ public class ApplicationSection extends OthersPageBaseSection {
 	/**
 	 * Create an object which is instance of <code>applicationChildClass</code>.
 	 * 
-	 * @return
+	 * @return the child class object
 	 */
 	public EObject createApplicationChildObject() {
 		String textValue = null;

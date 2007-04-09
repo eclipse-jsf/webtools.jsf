@@ -34,6 +34,9 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 public abstract class AbstractOverviewSection extends
 		AbstractFacesConfigSection {
 
+	/**
+	 * the common table viewer used for  the contents
+	 */
 	protected TableViewer tableViewer;
 
 	private String targetPageID;
@@ -100,7 +103,8 @@ public abstract class AbstractOverviewSection extends
 
 	/**
 	 * 
-	 * @return
+	 * @param container 
+	 * @return the table
 	 */
 	abstract protected Table createTable(Composite container);
 

@@ -148,7 +148,8 @@ public class IconFigure extends Label implements IBaseFigure {
 	}
 
 	/**
-	 * @param s
+	 * @param name 
+	 * @param icon 
 	 */
 	public IconFigure(String name, Image icon) {
 		super(name, icon);

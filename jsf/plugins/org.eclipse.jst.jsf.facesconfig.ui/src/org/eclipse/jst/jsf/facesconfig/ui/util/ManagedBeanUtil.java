@@ -29,6 +29,7 @@ public class ManagedBeanUtil {
 	/**
 	 * Determines if the new bean to be added is already a member of the
 	 * configuration set.
+	 * @param project 
 	 * 
 	 * @param beanName -
 	 *            The name of the bean being added

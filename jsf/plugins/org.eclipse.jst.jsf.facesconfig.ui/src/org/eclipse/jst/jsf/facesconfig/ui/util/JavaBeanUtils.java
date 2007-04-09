@@ -34,9 +34,15 @@ import org.eclipse.jst.jsf.common.ui.internal.utils.JavaModelUtil;
  * @version
  */
 public final class JavaBeanUtils {
-	public static final String JAVA_UTIL_LIST = "java.util.List";
+	/**
+	 * fully qualified name of a List
+	 */
+	private static final String JAVA_UTIL_LIST = "java.util.List";
 
-	public static final String JAVA_UTIL_MAP = "java.util.Map";
+	/**
+	 * fully qualifed name of a Map
+	 */
+	private static final String JAVA_UTIL_MAP = "java.util.Map";
 
 	/**
 	 * 
@@ -244,7 +250,6 @@ public final class JavaBeanUtils {
 	 * @return - True means the property name is valid bean's property,
 	 *         otherwise, not.
 	 * 
-	 * @throws JavaModelException
 	 */
 	public static boolean isBeanProperty(IType baseType, String propertyName)
     {
@@ -262,7 +267,6 @@ public final class JavaBeanUtils {
 	 * @param propertyName
 	 * @return - can be <b>null</b>, if not found
 	 * 
-	 * @throws JavaModelException
 	 */
 	public static IType getBeanPropertyType(IType baseType, String propertyName) {
 		if (baseType == null || !baseType.exists() || propertyName == null) {
@@ -496,7 +500,7 @@ public final class JavaBeanUtils {
 	 * set the first character into low case.
 	 * 
 	 * @param str
-	 * @return
+	 * @return str with the first char lower cased
 	 */
 	public static String toLowCaseFirstChar(String str) {
 		// change the first alphabet to lowcase.
@@ -514,7 +518,7 @@ public final class JavaBeanUtils {
 	 * set the first character into low case.
 	 * 
 	 * @param str
-	 * @return
+	 * @return str with the first char upper-cased
 	 */
 	public static String toUpperCaseFirstChar(String str) {
 		// change the first alphabet to lowcase.
@@ -661,7 +665,7 @@ public final class JavaBeanUtils {
 	/**
 	 * Creates an array of bean properties
 	 * 
-	 * @param classType
+	 * @param type
 	 * @param methods
 	 * 
 	 * @return - the array of java bean properties.

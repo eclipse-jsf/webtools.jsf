@@ -40,8 +40,6 @@ public class ValidatorMasterSection extends FacesConfigMasterSection {
 	 * @param managedForm
 	 * @param toolkit
 	 * @param page
-	 * @param helpContextId
-	 * @param helpTooltip
 	 */
 	public ValidatorMasterSection(Composite parent, IManagedForm managedForm,
 			FormToolkit toolkit, FacesConfigMasterDetailPage page) {

@@ -40,8 +40,6 @@ public class RenderkitMasterSection extends FacesConfigMasterSection {
 	 * @param managedForm
 	 * @param toolkit
 	 * @param page
-	 * @param helpContextId
-	 * @param helpTooltip
 	 */
 	public RenderkitMasterSection(Composite parent, IManagedForm managedForm,
 			FormToolkit toolkit, FacesConfigMasterDetailPage page) {

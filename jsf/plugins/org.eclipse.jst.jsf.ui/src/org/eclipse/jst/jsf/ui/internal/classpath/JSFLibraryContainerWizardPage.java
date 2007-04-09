@@ -104,9 +104,9 @@ public class JSFLibraryContainerWizardPage extends WizardPage implements
 	/* (non-Javadoc)
 	 * @see org.eclipse.jdt.ui.wizards.IClasspathContainerPageExtension#initialize(org.eclipse.jdt.core.IJavaProject, org.eclipse.jdt.core.IClasspathEntry[])
 	 */
-	public void initialize(IJavaProject project, IClasspathEntry[] currentEntries) {		
+	public void initialize(IJavaProject project, IClasspathEntry[] currentEntries_) {		
 		isJSFProject = false;
-		this.currentEntries = currentEntries;
+		this.currentEntries = currentEntries_;
 		try {
 			//check for faceted nature
 			//NOTE: use of following constant produces warnings; this was known
@@ -210,11 +210,11 @@ public class JSFLibraryContainerWizardPage extends WizardPage implements
 			JSFLibrary lib = (JSFLibrary)lv.getCheckedElements()[0];
 			if (lib != null){
 				if (lib == getJSFLibraryForEdit(containerEntry))
+				{
 					return containerEntry;
-				else {					
-					IPath path = new Path(JSFLibrariesContainerInitializer.JSF_LIBRARY_CP_CONTAINER_ID).append(new Path(lib.getID()));
-					entry = JavaCore.newContainerEntry(path, containerEntry.getAccessRules(), containerEntry.getExtraAttributes(),containerEntry.isExported());
 				}
+                IPath path = new Path(JSFLibrariesContainerInitializer.JSF_LIBRARY_CP_CONTAINER_ID).append(new Path(lib.getID()));
+                entry = JavaCore.newContainerEntry(path, containerEntry.getAccessRules(), containerEntry.getExtraAttributes(),containerEntry.isExported());
 			}			
 		}
 		return entry;
@@ -434,9 +434,9 @@ public class JSFLibraryContainerWizardPage extends WizardPage implements
 
 
 	private JSFLibrary getJSFLibraryForEdit(
-			IClasspathEntry containerEntry) {
+			IClasspathEntry containerEntry_) {
 		if (currentLib == null){
-			String id = containerEntry.getPath().segment(1);
+			String id = containerEntry_.getPath().segment(1);
 			currentLib = JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry().getJSFLibraryByID(id);	
 		}
 		return currentLib;

@@ -837,10 +837,10 @@ public class BaseNodeFigure extends Figure implements IBaseFigure {
 	 * This method is used to set it. Passing a null or zero-length string will
 	 * remove the tool tip
 	 * 
-	 * @param description
+	 * @param text
 	 *            the description to use for this node's tool tip
 	 * 
-	 * @see com.sybase.stf.gem.diagram.editor.figures.IBaseFigure#setToolTipText(java.lang.String)
+	 * @see IBaseFigure#setToolTipText(java.lang.String)
 	 */
 	public void setToolTipText(String text) {
 		baseFigure.setToolTipText(text);

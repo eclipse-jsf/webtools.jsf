@@ -291,8 +291,8 @@ public class TabbedTitleBarBorder extends SchemeBorder {
 	/**
 	 * Calculates and returns the Insets for this border.
 	 * 
-	 * @param pane
-	 *            the pane on which Insets calculations are based
+	 * @param figure
+	 *            the figure on which Insets calculations are based
 	 * @return the calculated Insets
 	 * @since 2.0
 	 */
@@ -314,7 +314,7 @@ public class TabbedTitleBarBorder extends SchemeBorder {
 	}
 
 	/**
-	 * @see Border#paint(IFigure, Graphics, Insets)
+	 * @see org.eclipse.draw2d.Border#paint(IFigure, Graphics, Insets)
 	 */
 	public void paint(IFigure figure, Graphics g, Insets in) {
 		if (!visible)

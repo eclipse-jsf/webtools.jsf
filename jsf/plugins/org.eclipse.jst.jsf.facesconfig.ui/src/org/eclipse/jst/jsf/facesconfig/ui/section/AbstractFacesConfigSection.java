@@ -73,10 +73,10 @@ public abstract class AbstractFacesConfigSection extends SectionPart implements
 
 	/**
 	 * Constructor with help option.
-	 * 
-	 * @param editorId
-	 *            id of the editor this page is for.
+
+	 * @param parent 
 	 * @param managedForm
+	 * @param page 
 	 * @param toolkit
 	 * @param helpContextId
 	 * @param helpTooltip
@@ -154,7 +154,7 @@ public abstract class AbstractFacesConfigSection extends SectionPart implements
 	 * contents in the section
 	 * 
 	 * @param container
-	 * @param toolkit
+	 * @param toolkit_
 	 */
 	protected abstract void createContents(Composite container,
 			FormToolkit toolkit_);
@@ -203,9 +203,7 @@ public abstract class AbstractFacesConfigSection extends SectionPart implements
 	}
 
 	/**
-	 * get the page that this section lies in.
-	 * 
-	 * @return
+	 * @return the page that this section lies in.
 	 */
 	public IFacesConfigPage getPage() {
 		return page;

@@ -42,7 +42,8 @@ public class JSPUtil {
 	 * 
 	 * @param model
 	 * @param uri
-	 * @return
+	 * @param defaultPrefix 
+	 * @return the prefix if model has one or the default
 	 */
 	public static String getOrCreatePrefix(IDOMModel model, String uri,
 			String defaultPrefix) {
@@ -82,6 +83,11 @@ public class JSPUtil {
 		return null;
 	}
 
+	/**
+	 * @param model
+	 * @param suggestion
+	 * @return the unsued prefix
+	 */
 	public static String findUnusedPrefix(IDOMModel model, String suggestion) {
 		if (suggestion == null)
 			suggestion = "p";
@@ -108,7 +114,7 @@ public class JSPUtil {
 	 * 
 	 * @param model
 	 * @param prefix
-	 * @return
+	 * @return the uri corresponding to the prefix
 	 */
 	public static String findURIForPrefix(IDOMModel model, String prefix) {
 		if (prefix == null || model == null)
@@ -134,6 +140,7 @@ public class JSPUtil {
 
 	/**
 	 * get the action list in the jsp file
+	 * @param jspFileName 
 	 * 
 	 * @return - action list
 	 */

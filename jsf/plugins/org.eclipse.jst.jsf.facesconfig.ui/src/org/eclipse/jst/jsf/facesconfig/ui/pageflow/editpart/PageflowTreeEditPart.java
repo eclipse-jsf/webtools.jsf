@@ -28,7 +28,6 @@ public class PageflowTreeEditPart extends PageflowElementTreeEditPart {
 	 * Creates a new PageflowTreeEditPart instance.
 	 * 
 	 * @param pageflow
-	 * @param showOnlyCompoundTasks
 	 */
 	public PageflowTreeEditPart(Pageflow pageflow) {
 		super(pageflow);

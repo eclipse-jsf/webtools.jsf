@@ -187,7 +187,7 @@ public abstract class FacesConfigMasterDetailPage extends FormPage implements
 	 * @param managedForm
 	 * @param toolkit
 	 * @param page
-	 * @return
+	 * @return the detail sections
 	 */
 	abstract protected FacesConfigMasterSection[] createMasterSections(
 			Composite composite, IManagedForm managedForm, FormToolkit toolkit,
@@ -231,7 +231,7 @@ public abstract class FacesConfigMasterDetailPage extends FormPage implements
 	 * what the key is. Defaultly the EClass object of the selected object in
 	 * the structured viewer will be taken as the page key.
 	 * 
-	 * @see getPageKey
+	 * @see #getPageKey
 	 * 
 	 */
 	abstract public IDetailsPage getPage(Object key);
@@ -303,7 +303,7 @@ public abstract class FacesConfigMasterDetailPage extends FormPage implements
 	/**
 	 * get the section that is expanded.
 	 * 
-	 * @return
+	 * @return the master section
 	 */
 	protected FacesConfigMasterSection getActiveSection() {
 		for (int i = 0, n = facesConfigMasterSections.length; i < n; i++) {
@@ -317,7 +317,6 @@ public abstract class FacesConfigMasterDetailPage extends FormPage implements
 	}
 
 	public void addSelectionChangedListener(ISelectionChangedListener listener) {
-		// TODO Auto-generated method stub
 		selectionChangedListeners.add(listener);
 	}
 
@@ -334,8 +333,7 @@ public abstract class FacesConfigMasterDetailPage extends FormPage implements
 	}
 
 	public void setSelection(ISelection selection) {
-		// TODO Auto-generated method stub
-
+	    // no selection setting
 	}
 
 	public Object getAdapter(Class adapter) {

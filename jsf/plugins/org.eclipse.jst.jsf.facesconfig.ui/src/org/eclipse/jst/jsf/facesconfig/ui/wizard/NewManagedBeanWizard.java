@@ -45,13 +45,13 @@ public class NewManagedBeanWizard extends Wizard implements ISummaryDataSource {
 
 	private ManagedBeanPropertyPage managedBeanPropertyPage;
 
-	public String managedBeanName;
+	private String managedBeanName;
 
-	public String managedBeanScope;
+	private String managedBeanScope;
 
-	public String managedBeanClass;
+	private String managedBeanClass;
 
-	public String managedBeanDescription;
+	private String managedBeanDescription;
 
 	private IProject project;
 
@@ -152,7 +152,7 @@ public class NewManagedBeanWizard extends Wizard implements ISummaryDataSource {
 	}
 
 	/**
-	 * @return
+	 * @return the suggested bean name
 	 */
 	public String getSuggestedBeanName() {
 		return suggestedBeanName;
@@ -170,7 +170,7 @@ public class NewManagedBeanWizard extends Wizard implements ISummaryDataSource {
 	}
 
 	/**
-	 * @return
+	 * @return the default scope value
 	 */
 	public String getDefaultScope() {
 		return defaultScope;
@@ -185,18 +185,30 @@ public class NewManagedBeanWizard extends Wizard implements ISummaryDataSource {
 		this.defaultScope = defaultScope;
 	}
 
+	/**
+	 * @return the class name
+	 */
 	public String getManagedBeanClass() {
 		return managedBeanClass;
 	}
 
+	/**
+	 * @return the bean description
+	 */
 	public String getManagedBeanDescription() {
 		return managedBeanDescription;
 	}
 
+	/**
+	 * @return the managed bean's symbolic name
+	 */
 	public String getManagedBeanName() {
 		return managedBeanName;
 	}
 
+	/**
+	 * @return the managed bean's scope
+	 */
 	public String getManagedBeanScope() {
 		return managedBeanScope;
 	}

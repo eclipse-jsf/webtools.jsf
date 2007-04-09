@@ -139,6 +139,8 @@ public class JSFLibraryConfigControl extends Composite {
 		if (_initing) return;
 		SafeRunnable.run(new ISafeRunnable(){
 			public void handleException(Throwable exception) {
+			    // TODO: should we perhaps do something here?
+			    JSFUiPlugin.log(IStatus.ERROR, exception.getLocalizedMessage());
 			}
 			public void run() throws Exception {
 				for (Iterator it=getChangeListeners().iterator();it.hasNext();){
@@ -766,10 +768,6 @@ public class JSFLibraryConfigControl extends Composite {
 
 		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 			// will never happen
-		}
-
-		public boolean isDeleted(Object element) {
-			return false;
 		}
 
 		public void dispose() {

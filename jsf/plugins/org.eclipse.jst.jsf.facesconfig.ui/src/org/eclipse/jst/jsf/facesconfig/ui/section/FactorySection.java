@@ -76,9 +76,7 @@ public class FactorySection extends OthersPageBaseSection {
 	}
 
 	/**
-	 * Create an object which is instance of <code>factoryChildClass</code>.
-	 * 
-	 * @return
+	 * @return an new object which is instance of <code>factoryChildClass</code>.
 	 */
 	public EObject createFactoryChildObject() {
 		String superType = ModelUtil.getSuperType(factoryChildClass);

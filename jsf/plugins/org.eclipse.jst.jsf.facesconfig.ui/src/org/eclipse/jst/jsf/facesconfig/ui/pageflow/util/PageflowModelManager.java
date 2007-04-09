@@ -74,11 +74,11 @@ public class PageflowModelManager {
 	}
 
 	/**
-	 * Returns the resource containing the pageflow. Uses lazy initialization.
+	 * Uses lazy initialization.
 	 * 
 	 * @param path -
 	 *            pageflow file name
-	 * @return
+	 * @return the resource containing the pageflow
 	 */
 	public Resource getResource(IPath path) {
 		if (resourcePageflow == null) {
@@ -92,9 +92,8 @@ public class PageflowModelManager {
 	}
 
 	/**
-	 * Gets the top level pageflow model.
 	 * 
-	 * @return
+	 * @return the top level pageflow model
 	 */
 	public Pageflow getModel() {
 		if (null == pageflow) {
@@ -230,10 +229,8 @@ public class PageflowModelManager {
 	}
 
 	/**
-	 * found page node according the web path.
-	 * 
 	 * @param webPath
-	 * @return
+	 * @return found page node according the web path.
 	 */
 	public PageflowPage foundPage(String webPath) {
 		PageflowPage page = null;
@@ -264,7 +261,7 @@ public class PageflowModelManager {
 	 * @param pathFacesConfig -
 	 *            faces-config file path.
 	 * 
-	 * @return
+	 * @return the ipath
 	 */
 	public static IPath makePageflowPath(IPath pathFacesConfig) {
 		IPath pageflowPath;

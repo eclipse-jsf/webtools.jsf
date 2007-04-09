@@ -40,6 +40,7 @@ public class EditPartMarkerUtil {
 	 * 
 	 * @param model -
 	 *            the emf model related with edit part
+	 * @throws CoreException 
 	 */
 	public static void removeAllMarkers(EObject model) throws CoreException {
 		IResource resource = getResource(model);
@@ -108,11 +109,9 @@ public class EditPartMarkerUtil {
 	/**
 	 * Create a problem marker.
 	 * 
-	 * @param part -
-	 *            the target editpart. It can be null, then the editpart will
-	 *            not be updated.
 	 * @param model -
 	 *            the model related with this edit part.
+	 * @param sMarkerType 
 	 * @param severity -
 	 *            the problem severity, one of IMarker.SEVERITY_ERROR,
 	 *            IMarker.SEVERITY_WARNING or IMarker.SEVERITY_INFO
@@ -145,17 +144,10 @@ public class EditPartMarkerUtil {
 	/**
 	 * Removes a specific problem marker type with the given severity.
 	 * 
-	 * @param part -
-	 *            the target editpart. It can be null, then the editpart will
-	 *            not be updated.
 	 * @param model -
 	 *            the model related with this edit part.
 	 * @param sMarkerType -
 	 *            the marker type, either IMarker.PROBLEM or IMarker.TASK
-	 * @param iSeverity -
-	 *            severity/priority: if sMarkerType is IMarker.PROBLEM, then
-	 *            this value is one of the PROBLEM severities; if sMarkerType is
-	 *            IMarker.TASK, this is a task priority.
 	 * @throws CoreException
 	 *             passed on from IResource.findMarkers()
 	 */

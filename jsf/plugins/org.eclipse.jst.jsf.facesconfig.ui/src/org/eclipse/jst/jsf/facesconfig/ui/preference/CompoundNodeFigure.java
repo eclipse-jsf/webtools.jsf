@@ -296,7 +296,7 @@ public class CompoundNodeFigure extends BaseNodeFigure implements
 	}
 
 	/**
-	 * @return
+	 * @return the window figure
 	 */
 	public WindowFigure getWindowFigure() {
 		return windowFigure;

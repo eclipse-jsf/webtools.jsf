@@ -7,7 +7,7 @@ package org.eclipse.jst.jsf.ui.internal.classpath;
 public interface JSFLibraryValidationListener {
 	/**
 	 * Callback 
-	 * @param JSFLibraryValidationEvent
+	 * @param e
 	 */
 	public void notifyValidation(JSFLibraryValidationEvent e);
 }

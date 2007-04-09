@@ -31,7 +31,7 @@ import org.eclipse.draw2d.geometry.Rectangle;
  * Apparently there is a bug in the GEF XYLayout class because it does not
  * observe visibility.
  * 
- * @see AbstractLayout.isObservingVisibility()
+ * @see org.eclipse.draw2d.AbstractLayout#isObservingVisibility()
  */
 public class ObserveVisibleXYLayout extends FreeformLayout {
 	protected Dimension calculatePreferredSize(IFigure f, int wHint, int hHint) {

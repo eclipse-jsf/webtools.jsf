@@ -220,7 +220,7 @@ public class ManagedBeanClassSelectionPage extends WizardPage {
 	/**
 	 * create a new java class or not
 	 * 
-	 * @return
+	 * @return true if the create new java class radio button is selected
 	 */
 	public boolean isCreateNewJavaClass() {
 		return createRadioButton.getSelection();
@@ -238,6 +238,9 @@ public class ManagedBeanClassSelectionPage extends WizardPage {
 		return searchedType;
 	}
 
+	/**
+	 * @return the class name
+	 */
 	public String getClassName() {
 		return className;
 	}

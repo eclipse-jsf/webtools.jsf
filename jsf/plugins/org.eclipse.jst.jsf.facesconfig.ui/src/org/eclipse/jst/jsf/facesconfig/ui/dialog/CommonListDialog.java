@@ -111,8 +111,7 @@ public class CommonListDialog extends Dialog implements
 	 * Defaultly create a tableviewer.
 	 * 
 	 * @param parent
-	 * @param toolkit
-	 * @return
+	 * @return the structured viewer
 	 */
 	protected StructuredViewer createViewer(Composite parent) {
 
@@ -167,7 +166,7 @@ public class CommonListDialog extends Dialog implements
 	 * Config the viewer, such as set a filter and so on. Sub classes should
 	 * override this method to add filter.
 	 * 
-	 * @param structuredViewer
+	 * @param structuredViewer_
 	 */
 	protected void configViewer(StructuredViewer structuredViewer_) {
         // do nothing; sub-classes should override

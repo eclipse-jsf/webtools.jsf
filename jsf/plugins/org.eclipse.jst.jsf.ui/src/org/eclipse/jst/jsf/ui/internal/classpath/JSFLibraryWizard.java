@@ -64,8 +64,8 @@ public class JSFLibraryWizard extends Wizard implements INewWizard {
 	
 	/**
 	 * Constructor
-	 * @see IMPLS
-	 * @see NONIMPLS
+	 * see IMPLS
+	 * see NONIMPLS
 	 * @param libTypes 
 	 */
 	public JSFLibraryWizard(int libTypes) {

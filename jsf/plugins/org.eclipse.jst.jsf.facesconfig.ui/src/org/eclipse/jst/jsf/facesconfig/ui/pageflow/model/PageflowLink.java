@@ -34,7 +34,7 @@ import org.eclipse.emf.common.util.EList;
  * </ul>
  * </p>
  * 
- * @see org.eclipse.jst.jsf.facesconfig.ui.org.eclipse.jst.jsf.facesconfig.editor.pageflow.model.model.PageflowPackage#getPFLink()
+ * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage#getPFLink()
  * @model
  * @generated
  */
@@ -137,7 +137,6 @@ public interface PageflowLink extends PageflowElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Smallicon</em>' attribute.
 	 * @see #setSmallicon(String)
-	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage#getPFLink_Smallicon()
 	 * @model
 	 * @generated
 	 */
@@ -163,7 +162,6 @@ public interface PageflowLink extends PageflowElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Largeicon</em>' attribute.
 	 * @see #setLargeicon(String)
-	 * @see org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage#getPFLink_Largeicon()
 	 * @model
 	 * @generated
 	 */

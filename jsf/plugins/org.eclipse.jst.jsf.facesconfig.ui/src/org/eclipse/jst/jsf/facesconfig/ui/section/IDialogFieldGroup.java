@@ -27,9 +27,7 @@ public interface IDialogFieldGroup {
 	void setInput(Object newInput);
 
 	/**
-	 * get the input of this section
-	 * 
-	 * @return
+	 * @return the input of this section 
 	 */
 	Object getInput();
 }

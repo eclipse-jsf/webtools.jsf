@@ -187,7 +187,7 @@ public class ManagedBeanMasterSection extends FacesConfigMasterSection {
 				isRemoveEnable = true;
 			}
 		}
-		removeButton.setEnabled(isRemoveEnable);
+		getRemoveButton().setEnabled(isRemoveEnable);
 	}
 
 	/**

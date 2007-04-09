@@ -209,10 +209,6 @@ public class JSFLibrariesPreferencePage extends PreferencePage implements IWorkb
 			// will never happen
 		}
 
-		public boolean isDeleted(Object element) {
-			return false;
-		}
-
 		public void dispose() {
             // do nothing
 		}
@@ -268,10 +264,19 @@ public class JSFLibrariesPreferencePage extends PreferencePage implements IWorkb
 		
 	}
 
+	/**
+	 * Respond to a list selection event
+	 * 
+	 * @param event
+	 */
 	protected void doListSelected(SelectionChangedEvent event) {
 		updateButtonState();
 	}
 
+	/**
+	 * Respond to a double click event by opening the edit dialog
+	 * @param event
+	 */
 	protected void doDoubleClick(DoubleClickEvent event) {
 		openJSFLibraryEditDialog(tv.getTree().getSelection()[0]);
 	}

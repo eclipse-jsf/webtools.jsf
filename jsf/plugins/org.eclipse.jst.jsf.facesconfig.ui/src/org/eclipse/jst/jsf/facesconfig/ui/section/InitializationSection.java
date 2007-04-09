@@ -72,9 +72,10 @@ public class InitializationSection extends AbstractFacesConfigSection {
 	private int currentPageIndex = 0;
 
 	/**
+	 * @param parent 
 	 * @param managedForm
+	 * @param page 
 	 * @param toolkit
-	 * @param editor
 	 */
 	public InitializationSection(Composite parent, IManagedForm managedForm,
 			IFacesConfigPage page, FormToolkit toolkit) {

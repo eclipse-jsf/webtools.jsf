@@ -43,7 +43,7 @@ public class PageflowValidation {
 	/**
 	 * get the singleton instance of pageflow validation
 	 * 
-	 * @return
+	 * @return the singleton instance of pageflow validation
 	 */
 	public static PageflowValidation getInstance() {
 		if (instance == null) {
@@ -154,7 +154,7 @@ public class PageflowValidation {
 	 * 
 	 * @param pageflow
 	 * @param page
-	 * @return
+	 * @return true if page exists (?)
 	 */
 	public boolean isExistedPage(Pageflow pageflow, PageflowPage page) {
 		if (pageflow == null || page == null || page.getPath() == null) {
@@ -169,7 +169,7 @@ public class PageflowValidation {
 	 * 
 	 * @param pageflow
 	 * @param pagePath
-	 * @return
+	 * @return true if pageflow's path is equal to pagePath
 	 */
 	public boolean isExistedPage(Pageflow pageflow, String pagePath) {
 		if (pageflow == null || pagePath == null) {
@@ -199,8 +199,8 @@ public class PageflowValidation {
 	 * the form of /foldername/* (it contains the folder), the folder should be
 	 * existed.
 	 * 
-	 * @param element
-	 * @return
+	 * @param page
+	 * @return the notify message for page
 	 */
 	public String getNotifyMessage(PageflowPage page) {
 		String errorMessage = null;
@@ -269,7 +269,7 @@ public class PageflowValidation {
 	 * The return will be beanName.
 	 * 
 	 * @param actionEL
-	 * @return
+	 * @return the managed bean name
 	 */
 	public static String getManagedBeanforAction(String actionEL) {
 		String managedBeanName = null;

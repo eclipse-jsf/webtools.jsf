@@ -79,7 +79,7 @@ public class PageflowEditorContextMenuProvider extends ContextMenuProvider {
 	/**
 	 * Appends the alignment subment.
 	 * 
-	 * @param menuManager-menu
+	 * @param menuManager
 	 *            manager of workbench
 	 */
 	private void appendShowViewSubmenu(IMenuManager menuManager) {
@@ -107,7 +107,7 @@ public class PageflowEditorContextMenuProvider extends ContextMenuProvider {
 	/**
 	 * Appends the alignment subment.
 	 * 
-	 * @param menuManager-menu
+	 * @param menuManager
 	 *            manager of workbench
 	 */
 	private void appendAlignmentSubmenu(IMenuManager menuManager) {

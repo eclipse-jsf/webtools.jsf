@@ -67,7 +67,7 @@ public class PageflowEditPart extends PageflowContainerEditPart implements
 	/**
 	 * Creates a new PageflowEditPart instance.
 	 * 
-	 * @param element -
+	 * @param pageflow -
 	 *            pageflow model
 	 */
 	protected PageflowEditPart(Pageflow pageflow) {
@@ -300,6 +300,7 @@ public class PageflowEditPart extends PageflowContainerEditPart implements
 
 	/**
 	 * get the foreground color from preference
+	 * @return the router style value
 	 * 
 	 */
 	public int getConnectionRouterStyle() {

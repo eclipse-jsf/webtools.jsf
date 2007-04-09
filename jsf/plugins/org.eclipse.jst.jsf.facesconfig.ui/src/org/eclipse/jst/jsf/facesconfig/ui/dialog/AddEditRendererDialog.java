@@ -63,6 +63,11 @@ public class AddEditRendererDialog extends Dialog {
 
 	private IFacesConfigPage page;
 
+	/**
+	 * @param parentShell
+	 * @param page
+	 * @param isNew
+	 */
 	public AddEditRendererDialog(Shell parentShell, IFacesConfigPage page,
 			boolean isNew) {
 		super(parentShell);
@@ -73,10 +78,10 @@ public class AddEditRendererDialog extends Dialog {
 	/**
 	 * 
 	 * @param parentShell
-	 * @param attributeName
-	 * @param attributeClass
-	 * @param defaultValue
-	 * @param suggestedValue
+	 * @param rendererName 
+	 * @param rendererClass 
+	 * @param componentFamily 
+	 * @param renderType 
 	 */
 	public AddEditRendererDialog(Shell parentShell, String rendererName,
 			String rendererClass, String componentFamily, String renderType) {
@@ -207,6 +212,9 @@ public class AddEditRendererDialog extends Dialog {
 				shellSize.y);
 	}
 
+	/**
+	 * @return the associated project
+	 */
 	public IProject getProject() {
 		return project;
 	}

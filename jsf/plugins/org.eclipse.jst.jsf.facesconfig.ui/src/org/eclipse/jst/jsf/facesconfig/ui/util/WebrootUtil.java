@@ -36,6 +36,7 @@ public class WebrootUtil extends
 	 * "/projectname/webroot/filename.jsp", or "/projectname/webroot/folder".
 	 * The project information should be removed from project path, e.g,
 	 * "/filename.jsp" or "/folder/*";
+	 * @param model 
 	 * 
 	 * @param strPath -
 	 *            the web path
@@ -68,11 +69,9 @@ public class WebrootUtil extends
 	}
 
 	/**
-	 * get the current resource according to EMF model
-	 * 
 	 * @param model -
 	 *            emf model
-	 * @return
+	 * @return the current resource according to EMF model
 	 */
 	static public IResource getResource(EObject model) {
 		IResource resource = null;
@@ -98,7 +97,7 @@ public class WebrootUtil extends
 	 * 
 	 * @param model -
 	 *            emf model
-	 * @return
+	 * @return the current project according to EMF model
 	 */
 	static public IProject getProject(EObject model) {
 		IProject project = null;

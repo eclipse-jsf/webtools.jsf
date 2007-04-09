@@ -23,6 +23,10 @@ public class JSFImplLibraryCreationEvent extends EventObject {
 	private static final long serialVersionUID = 6390319185522362453L;
 	private boolean isLibCreated; 
 	
+	/**
+	 * @param source
+	 * @param okClicked
+	 */
 	public JSFImplLibraryCreationEvent(Object source, boolean okClicked) {
 		super(source);
 		this.isLibCreated = okClicked;

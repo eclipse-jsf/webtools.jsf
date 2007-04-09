@@ -29,7 +29,8 @@ public class ModelUtil {
 	 * 
 	 * @param key
 	 *            the EClass object of the application child.
-	 * @return
+	 * @return the expected super type for a particular element
+	 * TODO: could make common with the faces-config validator
 	 */
 	public static String getSuperType(Object key) {
 		if (key == FacesConfigPackage.eINSTANCE.getActionListenerType()) {
@@ -147,6 +148,10 @@ public class ModelUtil {
 		return (buffer == null) ? str : buffer.toString();
 	}
 
+	/**
+	 * @param str
+	 * @return removes XML/HTML escaped characters from str.
+	 */
 	public static String unEscapeEntities(String str) {
 		if (isEmptyString(str)) {
 			return "";
