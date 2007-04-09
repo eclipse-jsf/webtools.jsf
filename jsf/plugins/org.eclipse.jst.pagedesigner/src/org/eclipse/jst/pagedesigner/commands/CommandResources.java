@@ -28,6 +28,10 @@ public class CommandResources {
         // no local instantiation
 	}
 
+	/**
+	 * @param key
+	 * @return the resource value for key or  !key! if not foudnd
+	 */
 	public static String getString(String key) {
 		try {
 			return RESOURCE_BUNDLE.getString(key);

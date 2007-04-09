@@ -23,7 +23,7 @@ import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
  */
 public class CutAction extends DesignAction implements UpdateAction {
 	/**
-	 * @param text
+	 * @param editor
 	 */
 	public CutAction(GraphicalEditor editor) {
 		super(editor, PDPlugin.getResourceString("Action.Name.Cut"));//$NON-NLS-1$

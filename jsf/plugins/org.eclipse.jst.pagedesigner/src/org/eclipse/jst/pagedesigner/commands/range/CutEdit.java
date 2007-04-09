@@ -22,6 +22,7 @@ import org.eclipse.jst.pagedesigner.dom.DOMRange;
 public class CutEdit extends DeleteEdit {
 	/**
 	 * @param range
+	 * @param viewer 
 	 */
 	public CutEdit(DOMRange range, GraphicalViewer viewer) {
 		super(range, viewer);

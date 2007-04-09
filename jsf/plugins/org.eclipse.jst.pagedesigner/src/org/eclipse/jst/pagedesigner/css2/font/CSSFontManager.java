@@ -172,6 +172,9 @@ public class CSSFontManager implements ICSSFontManager {
 		_cacheManager.disposeAll();
 	}
 
+	/**
+	 * @return the default css font
+	 */
 	public ICSSFont createDefaultFont() {
 		CSSFont result = new CSSFont(FontFamilyMeta.DEFAULT_FONT,
 				(int) FontSizeMeta.MEDIUM_VAL_INT, SWT.NORMAL,
@@ -179,12 +182,16 @@ public class CSSFontManager implements ICSSFontManager {
 		return result;
 	}
 
+	/**
+	 * @param f
+	 * @return the swt font for f
+	 */
 	public Font getSwtFont(CSSFont f) {
 		return (Font) _cacheManager.getEntry(f);
 	}
 
 	/**
-	 * @return
+	 * @return the singleton font manager
 	 */
 	public static CSSFontManager getInstance() {
 		if (_instance == null) {

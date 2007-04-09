@@ -34,10 +34,8 @@ public class CSSTRGroupLayout extends CSSBlockFlowLayout {
 	}
 
 	/**
-	 * the parent figure of TRGroup should be table figure. If so, return the
-	 * corresponding table layout.
-	 * 
-	 * @return
+	 * @return the parent figure of TRGroup should be table figure. If so, return the
+     * corresponding table layout. 
 	 */
 	public CSSTableLayout2 getTableLayoutContext() {
 		IFigure parent = getCSSFigure().getParent();

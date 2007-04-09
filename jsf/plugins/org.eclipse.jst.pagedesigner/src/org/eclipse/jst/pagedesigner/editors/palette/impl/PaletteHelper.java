@@ -12,7 +12,6 @@
 package org.eclipse.jst.pagedesigner.editors.palette.impl;
 
 import java.io.InputStream;
-import java.net.URL;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -31,14 +30,12 @@ import org.eclipse.jst.jsf.common.metadata.internal.IImageDescriptorProvider;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider;
 import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.MetadataFactory;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Model;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IMetaDataModelContext;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.MetaDataQueryHelper;
 import org.eclipse.jst.jsf.common.ui.internal.utils.ResourceUtils;
 import org.eclipse.jst.jsf.common.ui.internal.utils.StringUtil;
-import org.eclipse.jst.jsp.core.internal.contentmodel.tld.TLDCMDocumentManager;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDDocument;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDElementDeclaration;
 import org.eclipse.jst.pagedesigner.IHTMLConstants;
@@ -366,16 +363,13 @@ private final static ImageDescriptor DEFAULT_LARGE_ICON = PDPlugin
 		String tagName = eledecl.getElementName();
 		String label = null;
 		String desc = null;
-		ImageDescriptor smallIcon = null;
 
 		if (eledecl instanceof TLDElementDeclaration){
 			TLDElementDeclaration tag = (TLDElementDeclaration)eledecl;			
 			label = tag.getDisplayName();			
 			desc = tag.getDescription();						
 		}
-		else {
-			
-		}
+		
 		if (label == null || label.equals(""))
 			label = tagName;
 		
@@ -463,23 +457,14 @@ private final static ImageDescriptor DEFAULT_LARGE_ICON = PDPlugin
 				}
 			});
 			for (int i = 0, size = elements.length; i < size; i++) {
-				IConfigurationElement ce = elements[i];
-				String id = ce.getDeclaringExtension().getNamespaceIdentifier();
-				Bundle bundle = Platform.getBundle(id);
-				String path = ce
-						.getAttribute(IJMTConstants.ATTRIBUTE_PATH_PALETTEITEMCONFIG);
-				readConfig(manager, bundle, path);
+				//IConfigurationElement ce = elements[i];
+				//String id = ce.getDeclaringExtension().getNamespaceIdentifier();
+				//readConfig(manager, bundle, path);
 			}
 		}
 
 	}
 
-	static void readConfig(IPaletteItemManager manager, Bundle bundle, String path) {
-		
-		
-		
-	}
-	
 	static void readConfigX(IPaletteItemManager manager, Bundle bundle,
 			String path) {
 		try {
@@ -496,13 +481,13 @@ private final static ImageDescriptor DEFAULT_LARGE_ICON = PDPlugin
 					.getElementsByTagName(IPaletteConstants.CATEGORY_TAG);
 			for (int i = 0, ilength = categories.getLength(); i < ilength; i++) {
 				Element cat = (Element) categories.item(i);
-				String prefix = cat.getAttribute(IPaletteConstants.ICONPREFIX);
+//				String prefix = cat.getAttribute(IPaletteConstants.ICONPREFIX);
 				String uri = cat.getAttribute(IPaletteConstants.URI);
 				String catlabel = cat.getAttribute(IPaletteConstants.LABEL);
-				TaglibPaletteDrawer category = manager.findOrCreateCategory(
+				/*FIXME: TaglibPaletteDrawer category =*/ manager.findOrCreateCategory(
 						uri, catlabel);
 				
-	//FIX ME			
+	//FIXME			
 //				String jsfComponentCategory = cat
 //						.getAttribute(IPaletteConstants.JSFCOMPONENTCATEGORY);
 //				boolean bJSF = Boolean.TRUE.toString().equalsIgnoreCase(
@@ -513,8 +498,8 @@ private final static ImageDescriptor DEFAULT_LARGE_ICON = PDPlugin
 //					category.setJSFComponentCategory(bJSF);
 //				}
 
-				NodeList items = cat
-						.getElementsByTagName(IPaletteConstants.ITEM_TAG);
+// FIXME:				NodeList items = cat
+//						.getElementsByTagName(IPaletteConstants.ITEM_TAG);
 //FIX ME
 //				for (int j = 0, jlength = items.getLength(); j < jlength; j++) {
 //					Element item = (Element) items.item(j);
@@ -590,15 +575,16 @@ private final static ImageDescriptor DEFAULT_LARGE_ICON = PDPlugin
 	 * @param smallIcon2
 	 * @return
 	 */
-	private static ImageDescriptor getImageDescriptor(Bundle bundle,
-			String prefix, String u) {
-		if (u == null || u.length() == 0) {
-			return null;
-		}
-		String path = (prefix == null ? "" : prefix) + u;
-		URL url = bundle.getEntry(path);
-		return ImageDescriptor.createFromURL(url);
-	}
+	// FIXME: dead?
+//	private static ImageDescriptor getImageDescriptor(Bundle bundle,
+//			String prefix, String u) {
+//		if (u == null || u.length() == 0) {
+//			return null;
+//		}
+//		String path = (prefix == null ? "" : prefix) + u;
+//		URL url = bundle.getEntry(path);
+//		return ImageDescriptor.createFromURL(url);
+//	}
 	
 	/**
 	 * @return

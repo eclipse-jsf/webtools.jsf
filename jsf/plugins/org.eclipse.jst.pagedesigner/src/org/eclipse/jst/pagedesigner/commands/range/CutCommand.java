@@ -21,7 +21,6 @@ import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
  */
 public class CutCommand extends RangeModeCommand {
 	/**
-	 * @param label
 	 * @param viewer
 	 */
 	public CutCommand(IHTMLGraphicalViewer viewer) {

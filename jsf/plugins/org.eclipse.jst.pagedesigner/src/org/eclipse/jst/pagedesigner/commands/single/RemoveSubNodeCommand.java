@@ -22,7 +22,8 @@ public class RemoveSubNodeCommand extends SingleNodeCommand {
 
 	/**
 	 * @param label
-	 * @param node
+	 * @param parent
+	 * @param child 
 	 */
 	public RemoveSubNodeCommand(String label, IDOMElement parent,
 			IDOMElement child) {

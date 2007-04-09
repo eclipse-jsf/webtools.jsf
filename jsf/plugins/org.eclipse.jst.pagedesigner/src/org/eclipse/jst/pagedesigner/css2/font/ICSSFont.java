@@ -28,28 +28,27 @@ public interface ICSSFont {
 	 * The caller should not hold reference on the returned Font object, since
 	 * system may dispose it at any time.
 	 * 
-	 * @return
+	 * @return the swt font
 	 */
 	public Font getSwtFont();
 
+	/**
+	 * @return the css font family
+	 */
 	public String getFontFamily();
 
 	/**
-	 * get font size in pixel
-	 * 
-	 * @return
+	 * @return font size in pixel 
 	 */
 	public int getFontSize();
 
 	/**
-	 * get font x height in pixel
-	 * 
-	 * @return
+	 * @return font x height in pixel
 	 */
 	public int getXHeight();
 
 	/**
-	 * @return
+	 * @return the font weight
 	 */
 	public int getWeight();
 
@@ -59,5 +58,8 @@ public interface ICSSFont {
 	 */
 	public int getFontStyle();
 
+	/**
+	 * @return the css string
+	 */
 	public String getCSSString();
 }

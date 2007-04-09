@@ -14,19 +14,11 @@ package org.eclipse.jst.pagedesigner.editors.palette;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.gef.palette.PaletteDrawer;
 import org.eclipse.gef.palette.PaletteEntry;
 import org.eclipse.gef.ui.palette.PaletteCustomizer;
 import org.eclipse.gef.ui.palette.customize.PaletteSeparatorFactory;
 import org.eclipse.gef.ui.palette.customize.PaletteStackFactory;
-import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.editors.palette.impl.PaletteItemManager;
-import org.eclipse.jst.pagedesigner.editors.palette.impl.TaglibPaletteDrawer;
-import org.eclipse.ui.IEditorInput;
-import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IFileEditorInput;
 
 /**
  * @author mengbo

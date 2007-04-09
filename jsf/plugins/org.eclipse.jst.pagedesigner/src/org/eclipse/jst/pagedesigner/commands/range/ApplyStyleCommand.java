@@ -36,8 +36,10 @@ public class ApplyStyleCommand extends RangeModeCommand {
 	protected Element _applyingNode;
 
 	/**
-	 * @param label
 	 * @param viewer
+	 * @param tag 
+	 * @param property 
+	 * @param value 
 	 */
 	public ApplyStyleCommand(IHTMLGraphicalViewer viewer, String tag,
 			String property, String value) {
@@ -399,7 +401,7 @@ public class ApplyStyleCommand extends RangeModeCommand {
 	}
 
 	/**
-	 * @return
+	 * @return a style element (cached on create)
 	 */
 	protected Element createStyleElement() {
 		if (_applyingNode != null) {

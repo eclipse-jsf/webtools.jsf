@@ -25,7 +25,7 @@ import org.eclipse.swt.dnd.TextTransfer;
 public class PasteAction extends DesignAction {
 
 	/**
-	 * @param text
+	 * @param editor
 	 */
 	public PasteAction(GraphicalEditor editor) {
 		super(editor, PDPlugin.getResourceString("Action.Name.Paste"));//$NON-NLS-1$

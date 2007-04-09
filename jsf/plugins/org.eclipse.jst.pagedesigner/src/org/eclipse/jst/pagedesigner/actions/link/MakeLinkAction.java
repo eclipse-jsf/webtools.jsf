@@ -50,7 +50,7 @@ public class MakeLinkAction extends Action {
 	private String _linkType;
 
 	/**
-	 * @param text
+	 * @param range
 	 */
 	public MakeLinkAction(DesignRange range) {
 		super(MAKE_LINK);

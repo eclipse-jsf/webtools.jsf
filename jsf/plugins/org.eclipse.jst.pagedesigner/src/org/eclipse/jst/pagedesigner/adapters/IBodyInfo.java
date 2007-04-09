@@ -72,7 +72,8 @@ public interface IBodyInfo // extends INodeAdapter
 	 * element node like "HTML", "BODY", "f:view", "f:subview" as body node. At
 	 * design time we may want to move those visual node into the body.
 	 * 
-	 * @return
+	 * @param node 
+	 * @return true if node is a body container
 	 */
 	public boolean isBodyContainer(IDOMNode node);
 
@@ -81,9 +82,10 @@ public interface IBodyInfo // extends INodeAdapter
 	 * whether the uri/localname should belong to the head part of this body
 	 * container.
 	 * 
+	 * @param node 
 	 * @param uri
 	 * @param localname
-	 * @return
+	 * @return true if node is a header
 	 */
 	public boolean isBodyHeader(IDOMNode node, String uri, String localname);
 }

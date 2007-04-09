@@ -21,6 +21,9 @@ import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
  * @author mengbo
  */
 public class DeleteAction extends DesignAction {
+	/**
+	 * @param editor
+	 */
 	public DeleteAction(GraphicalEditor editor) {
 		super(editor, CommandResources
 				.getString("DeleteAction.CommandLabel.Delete")); //$NON-NLS-1$

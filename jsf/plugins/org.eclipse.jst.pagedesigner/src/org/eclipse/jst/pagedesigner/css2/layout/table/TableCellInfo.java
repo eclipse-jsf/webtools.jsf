@@ -44,42 +44,42 @@ public class TableCellInfo extends TableItemInfo {
 	}
 
 	/**
-	 * @return
+	 * @return column span
 	 */
 	public int getColSpan() {
 		return _colSpan;
 	}
 
 	/**
-	 * @return
+	 * @return row span
 	 */
 	public int getRowSpan() {
 		return _rowSpan;
 	}
 
 	/**
-	 * @return
+	 * @return the row index
 	 */
 	public int getRowIndex() {
 		return _rowIndex;
 	}
 
 	/**
-	 * @return
+	 * @return the column index
 	 */
 	public int getColumnIndex() {
 		return _colIndex;
 	}
 
 	/**
-	 * @return
+	 * @return the minimum cell dimensions
 	 */
 	public Dimension getMinCWDimension() {
 		return getFigure().getPreferredSize(_cellWidth, _cellHeight);
 	}
 
 	/**
-	 * @return
+	 * @return the max cell dimensions
 	 */
 	public Dimension getMaxCWDimension() {
 		ICSSFigure figure = getFigure();
@@ -131,6 +131,7 @@ public class TableCellInfo extends TableItemInfo {
 	}
 
 	/**
+	 * @param tableInfo 
 	 * @param tablewidth
 	 *            table width
 	 */
@@ -173,7 +174,8 @@ public class TableCellInfo extends TableItemInfo {
 	}
 
 	/**
-	 * @param height
+	 * @param tableInfo 
+	 * @param tableheight 
 	 */
 	public void calculateHeight(TableInfo tableInfo, int tableheight) {
 		ICSSStyle style = this.getFigure().getCSSStyle();
@@ -208,7 +210,7 @@ public class TableCellInfo extends TableItemInfo {
 	}
 
 	/**
-	 * @return
+	 * @return the height
 	 */
 	public int getHeight() {
 		return _cellHeight;

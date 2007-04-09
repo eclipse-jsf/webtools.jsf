@@ -24,7 +24,7 @@ import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
  */
 public class CopyAction extends DesignAction implements UpdateAction {
 	/**
-	 * @param text
+	 * @param editor
 	 */
 	public CopyAction(GraphicalEditor editor) {
 		super(editor, PDPlugin.getResourceString("Action.Name.Copy"));//$NON-NLS-1$

@@ -60,12 +60,10 @@ public class CutNodeCommand extends DesignerCommand {
 	}
 
 	/**
-	 * @param label
 	 * @param viewer
 	 */
 	public CutNodeCommand(IHTMLGraphicalViewer viewer) {
 		super(COMMAND_LABEL, viewer);
-		// TODO Auto-generated constructor stub
 	}
 
 	private void setClipboard(Vector result) {

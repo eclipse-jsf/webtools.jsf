@@ -34,6 +34,10 @@ public abstract class RangeModeCommand extends DesignerCommand {
 
 	DOMRange _resultRange = null;
 
+	/**
+	 * @param label
+	 * @param viewer
+	 */
 	public RangeModeCommand(String label, IHTMLGraphicalViewer viewer) {
 		super(label, viewer);
 	}
@@ -145,12 +149,18 @@ public abstract class RangeModeCommand extends DesignerCommand {
 	 * In the implementation of this method, should not do anything relating to
 	 * EditPart. (maybe even not ICSSStyle, since not style information not
 	 * refreshed yet)
+	 * @param selection 
 	 * 
 	 * @return null means no change have been done to the model. In this case,
 	 *         system may choose to cancel undo recorrding, etc.
 	 */
 	protected abstract DOMRange doRangeExecute(DOMRange selection);
 
+	/**
+	 * @param parent
+	 * @param ref
+	 * @param child
+	 */
 	protected static void appendChild(Node parent, Node ref, Node child) {
 		Node next = ref.getNextSibling();
 		if (next == null)

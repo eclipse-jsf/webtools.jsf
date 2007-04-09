@@ -85,7 +85,7 @@ public class ChangeStyleAction extends DesignerToolBarAction {
 	}
 
 	/**
-	 * @return
+	 * @return the expected tag
 	 */
 	protected String getExpectedTag() {
 		return _expectedTag;

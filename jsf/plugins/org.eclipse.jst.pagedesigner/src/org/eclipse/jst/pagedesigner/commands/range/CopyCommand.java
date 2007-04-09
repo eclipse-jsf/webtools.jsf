@@ -21,7 +21,6 @@ import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
 public class CopyCommand extends RangeModeCommand {
 
 	/**
-	 * @param label
 	 * @param viewer
 	 */
 	public CopyCommand(IHTMLGraphicalViewer viewer) {

@@ -30,6 +30,7 @@ public class StyleClassSupport {
 
 	/**
 	 * @param classmenu
+	 * @param ele 
 	 */
 	public static void createStyleClassActions(IMenuManager classmenu,
 			IDOMElement ele) {
@@ -70,7 +71,7 @@ public class StyleClassSupport {
 
 	/**
 	 * @param ele
-	 * @return
+	 * @return the style class for ele or null if none
 	 */
 	public static String getStyleClass(IDOMElement ele) {
 		String styleClassAttr = getStyleClassAttributeName(ele);
@@ -86,7 +87,7 @@ public class StyleClassSupport {
 	 * tell the style class attribute name.
 	 * 
 	 * @param ele
-	 * @return
+	 * @return the style class attribute name or null if none applies
 	 */
 	public static String getStyleClassAttributeName(IDOMElement ele) {
 		CMElementDeclaration decl = CMUtil.getElementDeclaration(ele);

@@ -23,6 +23,10 @@ import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
 public abstract class DesignAction extends Action implements UpdateAction {
 	private GraphicalEditor _editor;
 
+	/**
+	 * @param editor
+	 * @param text
+	 */
 	public DesignAction(GraphicalEditor editor, String text) {
 		super(text);
 		_editor = editor;
@@ -58,6 +62,9 @@ public abstract class DesignAction extends Action implements UpdateAction {
 		setEnabled(isEnabled());
 	}
 
+	/**
+	 * @return the viewer
+	 */
 	protected IHTMLGraphicalViewer getViewer() {
 		return ((IDesignViewer) _editor).getGraphicViewer();
 	}

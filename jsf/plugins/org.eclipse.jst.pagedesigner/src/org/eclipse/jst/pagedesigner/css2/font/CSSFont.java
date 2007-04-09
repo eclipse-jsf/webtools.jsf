@@ -29,6 +29,11 @@ public class CSSFont implements ICSSFont {
 	private String _cssString;
 
 	/**
+	 * @param family 
+	 * @param size 
+	 * @param style 
+	 * @param weight 
+	 * @param cssString 
 	 * 
 	 */
 	public CSSFont(String family, int size, int style, int weight,
@@ -103,7 +108,7 @@ public class CSSFont implements ICSSFont {
 	}
 
 	/**
-	 * @return
+	 * @return the style mask for the font style
 	 */
 	public int getSwtFontStyle() {
 		int style = SWT.NONE;

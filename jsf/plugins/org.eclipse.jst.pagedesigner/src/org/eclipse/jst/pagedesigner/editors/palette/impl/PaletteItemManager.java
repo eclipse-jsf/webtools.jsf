@@ -21,7 +21,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Timer;
 
 import javax.xml.parsers.DocumentBuilder;
 
@@ -71,8 +70,9 @@ public class PaletteItemManager implements IPaletteItemManager,
 
 	private static PaletteItemManager _currentInstance;
 
-	private boolean isUpdateNeeded;
-	private Timer _refreshTimer;
+	// FIXME: unused
+//	private boolean isUpdateNeeded;
+//	private Timer _refreshTimer;
 
 //	private IPath classpath, webinf;
 
@@ -99,11 +99,11 @@ public class PaletteItemManager implements IPaletteItemManager,
 	}
 
 	/**
-	 * 
+	 * FIXME dead?  
 	 */
-	public void dispose() {
-		
-	}
+//	public void dispose() {
+//		
+//	}
 
 	private IProject getCurProject() {
 		return _curProject;
@@ -111,7 +111,7 @@ public class PaletteItemManager implements IPaletteItemManager,
 
 	public static synchronized void removePaletteItemManager(
 			PaletteItemManager manager) {
-		manager.dispose();
+		// FIXME: does nothing? manager.dispose();
 		_managers.remove(manager.getCurProject());
 	}
 

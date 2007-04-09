@@ -2,25 +2,20 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PaletteInfosImpl.java,v 1.1 2007/02/28 05:04:41 gkessler Exp $
+ * $Id: PaletteInfosImpl.java,v 1.2 2007/04/09 02:23:03 cbateman Exp $
  */
 package org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl;
 
 import java.util.Collection;
-import org.eclipse.emf.common.notify.NotificationChain;
 import java.util.Iterator;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-
 import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.PaletteInfo;
 import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.PaletteInfos;
 import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.PaletteInfosPackage;

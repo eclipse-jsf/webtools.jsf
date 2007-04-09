@@ -27,7 +27,7 @@ public class DeleteCommand extends RangeModeCommand implements
 	private boolean _forward;
 
 	/**
-	 * @param label
+	 * @param forward
 	 * @param viewer
 	 */
 	public DeleteCommand(boolean forward, IHTMLGraphicalViewer viewer) {

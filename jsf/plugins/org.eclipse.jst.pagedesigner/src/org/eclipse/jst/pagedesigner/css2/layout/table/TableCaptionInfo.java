@@ -37,12 +37,17 @@ public class TableCaptionInfo extends TableItemInfo {
 	}
 
 	/**
-	 * @return
+	 * @param width 
+	 * @param height 
+	 * @return the preferred dimension of the figure
 	 */
 	public Dimension getDimension(int width, int height) {
 		return getFigure().getPreferredSize(width, height);
 	}
 
+	/**
+	 * @return getDimension(width, height)
+	 */
 	public Dimension getDimension() {
 		return getDimension(SWT.DEFAULT, SWT.DEFAULT);
 	}

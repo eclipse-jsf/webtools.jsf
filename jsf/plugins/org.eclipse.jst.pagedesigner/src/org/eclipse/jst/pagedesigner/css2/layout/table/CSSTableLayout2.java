@@ -31,7 +31,7 @@ import org.eclipse.jst.pagedesigner.css2.style.ITagEditInfo;
 import org.eclipse.swt.SWT;
 
 /**
- * @see http://www.w3.org/TR/REC-CSS2/tables.html
+ * see also http://www.w3.org/TR/REC-CSS2/tables.html
  * 
  * @author mengbo
  * @version 1.5
@@ -449,7 +449,7 @@ public class CSSTableLayout2 extends CSSBlockFlowLayout implements ICSSPainter {
 	/**
 	 * @param cellinfo
 	 * @param heights
-	 * @return
+	 * @return the cell height
 	 */
 	public int getCellHeight(TableCellInfo cellinfo, int[] heights) {
 		int rowIndex = cellinfo.getRowIndex();
@@ -465,7 +465,7 @@ public class CSSTableLayout2 extends CSSBlockFlowLayout implements ICSSPainter {
 	/**
 	 * @param cellinfo
 	 * @param widths
-	 * @return
+	 * @return the cell width
 	 */
 	public int getCellWidth(TableCellInfo cellinfo, int[] widths) {
 		int columnIndex = cellinfo.getColumnIndex();
@@ -524,28 +524,28 @@ public class CSSTableLayout2 extends CSSBlockFlowLayout implements ICSSPainter {
 	}
 
 	/**
-	 * @return
+	 * @return the row heights
 	 */
 	public int[] getRowHeights() {
 		return _rowHeights;
 	}
 
 	/**
-	 * @return
+	 * @return the column widths
 	 */
 	public int[] getColumnWidths() {
 		return _columnWidths;
 	}
 
 	/**
-	 * @return
+	 * @return the vertical spacing value
 	 */
 	public int getVSpacing() {
 		return _vspacing;
 	}
 
 	/**
-	 * @return
+	 * @return the horizontal spacing value
 	 */
 	public int getHSpacing() {
 		return _hspacing;
@@ -553,33 +553,36 @@ public class CSSTableLayout2 extends CSSBlockFlowLayout implements ICSSPainter {
 
 	/**
 	 * @param figure
-	 * @return
+	 * @return the table row info for the figure
 	 */
 	public TableRowInfo getRowInfo(CSSFigure figure) {
 		return _tableInfo.findRowInfo(figure);
 	}
 
+	/**
+	 * @return the table caption info
+	 */
 	public TableCaptionInfo getCaptionInfo() {
 		return _tableInfo._caption;
 	}
 
 	/**
 	 * @param figure
-	 * @return
+	 * @return the table row group info for the figure
 	 */
 	public TableRowGroupInfo getGroupInfo(CSSFigure figure) {
 		return _tableInfo.findGroupInfo(figure);
 	}
 
 	/**
-	 * @return
+	 * @return the row's x
 	 */
 	public int getRowX() {
 		return _rowx;
 	}
 
 	/**
-	 * @return
+	 * @return the row's width
 	 */
 	public int getRowWidth() {
 		return _rowwidth;
@@ -594,6 +597,9 @@ public class CSSTableLayout2 extends CSSBlockFlowLayout implements ICSSPainter {
 		return false;
 	}
 
+	/**
+	 * @return the rendered dimensions of the table caption
+	 */
 	public Dimension getCaptionSize() {
 		return _captionSize;
 	}

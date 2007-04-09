@@ -50,7 +50,7 @@ public abstract class SingleNodeCommand extends DesignerCommand {
 
 	/**
 	 * @param label
-	 * @param viewer
+	 * @param node
 	 */
 	public SingleNodeCommand(String label, IDOMElement node) {
 		super(label, node);
@@ -87,10 +87,16 @@ public abstract class SingleNodeCommand extends DesignerCommand {
 		_replacement = ele;
 	}
 
+	/**
+	 * @return the replacement element
+	 */
 	protected IDOMElement getReplacedElment() {
 		return _replacement;
 	}
 
+	/**
+	 * @return the original element
+	 */
 	protected IDOMElement getOriginalElement() {
 		return _originalElement;
 	}

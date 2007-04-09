@@ -26,7 +26,7 @@ import org.w3c.dom.Node;
  * @author mengbo
  */
 public class ParagraphFinder {
-	private IDOMPosition _position;
+	private final IDOMPosition _position;
 
 	/**
 	 * @param position
@@ -35,6 +35,9 @@ public class ParagraphFinder {
 		_position = position;
 	}
 
+	/**
+	 * @return the dom position
+	 */
 	public IDOMPosition getPosition() {
 		return _position;
 	}
@@ -98,7 +101,7 @@ public class ParagraphFinder {
 	 * found, then go up the node tree to search again.
 	 * 
 	 * @param position
-	 * @param result
+	 * @return the paragraph
 	 */
 	public Paragraph getParagraph(IDOMPosition position) {
 		List tempResult = new ArrayList();

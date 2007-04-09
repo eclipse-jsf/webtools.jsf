@@ -21,6 +21,9 @@ public class CSSColorManager {
         // no external instantiation
 	}
 
+	/**
+	 * @return the single instance
+	 */
 	public static CSSColorManager getInstance() {
 		if (_instance == null) {
 			_instance = new CSSColorManager();
@@ -33,7 +36,7 @@ public class CSSColorManager {
 	 * color, caller should NOT dispose the returned color
 	 * 
 	 * @param cssText
-	 * @return
+	 * @return the color object for cssText
 	 */
 	public Object getColor(String cssText) {
 		return CSSColorConverter.getInstantce().getCSSColor(cssText);

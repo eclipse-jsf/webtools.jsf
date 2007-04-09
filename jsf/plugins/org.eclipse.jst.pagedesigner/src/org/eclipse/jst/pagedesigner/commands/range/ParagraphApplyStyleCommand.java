@@ -16,7 +16,6 @@ import java.util.Arrays;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.gef.EditPart;
 import org.eclipse.jst.pagedesigner.IHTMLConstants;
-import org.eclipse.jst.pagedesigner.actions.range.NoneParagraphStyleAction;
 import org.eclipse.jst.pagedesigner.dom.DOMPosition;
 import org.eclipse.jst.pagedesigner.dom.DOMPositionHelper;
 import org.eclipse.jst.pagedesigner.dom.DOMRange;
@@ -38,7 +37,13 @@ import org.w3c.dom.Text;
  * @author mengbo
  */
 public class ParagraphApplyStyleCommand extends ApplyStyleCommand {
-	/**
+
+    /**
+     * the list of possible html heading tags
+     */
+    private static final String[] HH = { "h1", "h2", "h3", "h4", "h5", "h6" };
+
+    /**
 	 * @param viewer
 	 * @param tag
 	 * @param property
@@ -49,6 +54,12 @@ public class ParagraphApplyStyleCommand extends ApplyStyleCommand {
 		super(viewer, tag, property, value);
 	}
 
+	/**
+	 * @param viewer
+	 * @param node
+	 * @param property
+	 * @param value
+	 */
 	public ParagraphApplyStyleCommand(IHTMLGraphicalViewer viewer,
 			Element node, String property, String value) {
 		super(viewer, node, property, value);
@@ -177,9 +188,9 @@ public class ParagraphApplyStyleCommand extends ApplyStyleCommand {
 				.getCommonAncestor(start, end);
 		// Here we insert some code to avoid creating tags duplicated. but these
 		// are not the entire cases.
-		if (Arrays.asList(NoneParagraphStyleAction.HH).contains(
+		if (Arrays.asList(HH).contains(
 				getAName(getTag()).toLowerCase())
-				&& Arrays.asList(NoneParagraphStyleAction.HH).contains(
+				&& Arrays.asList(HH).contains(
 						getAName(common.getNodeName()).toLowerCase())) {
 			// uncheck action menu
 			if (getAName(getTag()).toLowerCase().equalsIgnoreCase(

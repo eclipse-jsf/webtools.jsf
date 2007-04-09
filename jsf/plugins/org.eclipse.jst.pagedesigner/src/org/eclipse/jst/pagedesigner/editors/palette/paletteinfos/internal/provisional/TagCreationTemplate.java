@@ -2,13 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TagCreationTemplate.java,v 1.1 2007/02/28 05:04:45 gkessler Exp $
+ * $Id: TagCreationTemplate.java,v 1.2 2007/04/09 02:23:05 cbateman Exp $
  */
 package org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional;
 
-import org.apache.xerces.dom.DocumentFragmentImpl;
 import org.eclipse.emf.ecore.EObject;
-import org.w3c.dom.NodeList;
 
 /**
  * <!-- begin-user-doc -->

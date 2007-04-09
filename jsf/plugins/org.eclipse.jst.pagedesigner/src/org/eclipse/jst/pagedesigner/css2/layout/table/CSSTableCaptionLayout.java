@@ -69,8 +69,8 @@ public class CSSTableCaptionLayout extends CachedTableCellLayout {
 	 * the parent figure of TRGroup should be table figure. If so, return the
 	 * corresponding table layout.
 	 * 
-	 * @return
-	 */
+	 * @return the css table layout context or null if none.
+	 */ 
 	public CSSTableLayout2 getTableLayoutContext() {
 		IFigure parent = getCSSFigure().getParent();
 		if (parent != null) {
@@ -83,7 +83,7 @@ public class CSSTableCaptionLayout extends CachedTableCellLayout {
 	}
 
 	/**
-	 * @return
+	 * @return true if the table has a caption
 	 */
 	public boolean initializeTableInfo() {
 		_caption = null;
@@ -95,6 +95,9 @@ public class CSSTableCaptionLayout extends CachedTableCellLayout {
 		return false;
 	}
 
+	/**
+	 * @return the table layout
+	 */
 	public CSSTableLayout2 getTableLayout() {
 		return _tableLayout;
 	}

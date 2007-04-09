@@ -25,7 +25,7 @@ public interface IDOMFactory {
 	 * create element
 	 * 
 	 * @param tag
-	 * @return
+	 * @return a new element using tag as its name
 	 */
 	public Element createElement(String tag);
 
@@ -33,7 +33,7 @@ public interface IDOMFactory {
 	 * create text node
 	 * 
 	 * @param content
-	 * @return
+	 * @return a new text node using content as its body
 	 */
 	public Text createText(String content);
 }

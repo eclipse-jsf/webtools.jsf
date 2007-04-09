@@ -25,7 +25,6 @@ import org.eclipse.jst.pagedesigner.dom.IDOMPosition;
 import org.eclipse.jst.pagedesigner.dom.JSFValidatorSupport;
 import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
 import org.eclipse.jst.pagedesigner.utils.CommandUtil;
-import org.eclipse.jst.pagedesigner.utils.JSPUtil;
 import org.eclipse.wst.sse.ui.StructuredTextEditor;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.w3c.dom.Element;
@@ -46,6 +45,12 @@ public class PaletteDropInsertCommand extends SourceViewerCommand {
 
 	private Element _element;
 
+	/**
+	 * @param label
+	 * @param editor
+	 * @param tagItem
+	 * @param location
+	 */
 	public PaletteDropInsertCommand(String label, StructuredTextEditor editor,
 			TagToolPaletteEntry tagItem, int location) {
 		super(label, editor);
@@ -90,22 +95,23 @@ public class PaletteDropInsertCommand extends SourceViewerCommand {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.jst.pagedesigner.requests.NodeCreationFactory#getPrefix(int)
-	 */
-	public String getPrefix(String uri, IDOMModel model, String suggested,
-			Node nodes[]) {
-		if (ITLDConstants.URI_HTML.equals(uri)
-				|| ITLDConstants.URI_JSP.equals(uri)) {
-			return null;
-		}
 
-		// now handles custom tag lib
-
-		return JSPUtil.getOrCreatePrefix(model, uri, suggested, nodes);
-	}
+	 //TODO: dead	/*
+//	 * (non-Javadoc)
+//	 * 
+//	 * @see org.eclipse.jst.pagedesigner.requests.NodeCreationFactory#getPrefix(int)
+//	 */
+//	public String getPrefix(String uri, IDOMModel model, String suggested,
+//			Node nodes[]) {
+//		if (ITLDConstants.URI_HTML.equals(uri)
+//				|| ITLDConstants.URI_JSP.equals(uri)) {
+//			return null;
+//		}
+//
+//		// now handles custom tag lib
+//
+//		return JSPUtil.getOrCreatePrefix(model, uri, suggested, nodes);
+//	}
 
 	public void setSelection() {
 		if (_element != null) {

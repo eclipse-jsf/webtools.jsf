@@ -34,6 +34,10 @@ public class DesignResizeComponentCommand extends Command {
 
 	private SourceViewer _viewer;
 
+	/**
+	 * @param child
+	 * @param constraint
+	 */
 	public DesignResizeComponentCommand(EditPart child, Object constraint) {
 		this._part = child;
 		this._constraint = constraint;
@@ -94,6 +98,11 @@ public class DesignResizeComponentCommand extends Command {
 		_viewer.doOperation(ITextOperationTarget.REDO);
 	}
 
+	/**
+	 * @param style
+	 * @param item
+	 * @return ?
+	 */
 	public String removeOthers(String style, String item) {
 		String result = null;
 		int pos = style.indexOf(item);

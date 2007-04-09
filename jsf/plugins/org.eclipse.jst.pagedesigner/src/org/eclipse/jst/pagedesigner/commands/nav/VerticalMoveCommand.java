@@ -43,7 +43,7 @@ public class VerticalMoveCommand extends Command {
 
 	/**
 	 * @param viewer
-	 * @param b
+	 * @param up
 	 * @param c
 	 */
 	public VerticalMoveCommand(IHTMLGraphicalViewer viewer, boolean up,

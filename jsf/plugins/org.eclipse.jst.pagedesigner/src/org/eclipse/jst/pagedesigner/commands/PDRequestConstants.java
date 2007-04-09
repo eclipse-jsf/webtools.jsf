@@ -16,5 +16,8 @@ package org.eclipse.jst.pagedesigner.commands;
  */
 public interface PDRequestConstants {
 
+	/**
+	 * TODO: purpose?
+	 */
 	String REQ_DROP = "pd drop";
 }

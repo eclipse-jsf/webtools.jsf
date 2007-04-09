@@ -2,35 +2,25 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PaletteInfoImpl.java,v 1.2 2007/03/10 00:08:07 gkessler Exp $
+ * $Id: PaletteInfoImpl.java,v 1.3 2007/04/09 02:23:03 cbateman Exp $
  */
 package org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl;
 
 import java.util.Iterator;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
-import org.eclipse.jst.jsf.common.JSFCommonPlugin;
-import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider;
-import org.eclipse.jst.jsf.common.metadata.internal.IResourceBundleProvider;
 import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Model;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
-import org.eclipse.jst.jsf.contentmodel.annotation.internal.Messages;
 import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.PaletteInfo;
 import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.PaletteInfosPackage;
 import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.TagCreationInfo;
-import org.eclipse.osgi.util.NLS;
 
 /**
  * <!-- begin-user-doc -->

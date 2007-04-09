@@ -288,7 +288,6 @@ public abstract class DesignEdit {
 	 * that either are clones or the nodes cuted.
 	 * 
 	 * @param node
-	 * @param pos
 	 * @param result
 	 */
 	protected final void processNodes(WorkNode node, Stack result) {

@@ -28,9 +28,10 @@ public class ChangeAttributeAction extends Action {
 	private String _attrName;
 
 	/**
-	 * @param string
+	 * @param label 
 	 * @param ele
-	 * @param string2
+	 * @param attrName 
+	 * @param attrValue 
 	 */
 	public ChangeAttributeAction(String label, IDOMElement ele,
 			String attrName, String attrValue) {

@@ -50,11 +50,18 @@ import org.w3c.dom.Node;
 public abstract class DesignerCommand extends Command {
 	private IDOMModel _model;
 
+	/**
+	 * the graphical viewer
+	 */
 	protected IHTMLGraphicalViewer _viewer;
 
 	private static final Logger _log = PDPlugin
 			.getLogger(DesignerCommand.class);
 
+	/**
+	 * @param label
+	 * @param viewer
+	 */
 	public DesignerCommand(String label, IHTMLGraphicalViewer viewer) {
 		super(label);
 		this._viewer = viewer;
@@ -235,7 +242,7 @@ public abstract class DesignerCommand extends Command {
 	 * command. This method is called after model changed. So at time of this
 	 * call, the editpart should be valid. Default implementation.
 	 * 
-	 * @return
+	 * @return the selection
 	 */
 	protected abstract ISelection getAfterCommandDesignerSelection();
 
@@ -329,7 +336,7 @@ public abstract class DesignerCommand extends Command {
 	 * anything in the model.
 	 * 
 	 * @param ele
-	 * @return
+	 * @return the figure info for the  element
 	 */
 	public IFigure getFigureInfo(Element ele) {
 		if (ele instanceof IDOMElement) {

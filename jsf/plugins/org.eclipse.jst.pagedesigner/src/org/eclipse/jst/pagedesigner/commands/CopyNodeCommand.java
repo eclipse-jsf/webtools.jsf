@@ -32,19 +32,14 @@ import org.w3c.dom.Node;
  * @author mengbo
  */
 public class CopyNodeCommand extends Command {
-	IHTMLGraphicalViewer _viewer;
+	private IHTMLGraphicalViewer _viewer;
 
 	/**
-	 * @param label
 	 * @param viewer
 	 */
 	public CopyNodeCommand(IHTMLGraphicalViewer viewer) {
 		super("");
 		this._viewer = viewer;
-	}
-
-	public IHTMLGraphicalViewer getViewer() {
-		return _viewer;
 	}
 
 	/*
@@ -53,7 +48,7 @@ public class CopyNodeCommand extends Command {
 	 * @see org.eclipse.jst.pagedesigner.commands.DesignerCommand#doExecute()
 	 */
 	public void execute() {
-		List parts = getViewer().getSelectedEditParts();
+		List parts = _viewer.getSelectedEditParts();
 		Vector result = new Vector();
 		if (parts.size() > 0) {
 			for (int i = 0, n = parts.size(); i < n; i++) {

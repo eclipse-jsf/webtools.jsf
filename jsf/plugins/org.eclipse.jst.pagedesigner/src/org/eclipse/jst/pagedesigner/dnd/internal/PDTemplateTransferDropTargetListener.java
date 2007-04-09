@@ -41,7 +41,7 @@ public class PDTemplateTransferDropTargetListener extends
 	 */
 	protected Request createTargetRequest() {
 		ItemCreationRequest request = new ItemCreationRequest();
-		TagToolPaletteEntry tagItem = (TagToolPaletteEntry)TemplateTransfer.getInstance().getTemplate();
+		/*TODO: nothing is done with this var.  Does the method have a side-effect? TagToolPaletteEntry tagItem =*/ (TagToolPaletteEntry)TemplateTransfer.getInstance().getTemplate();
 		return request;
 	}
 

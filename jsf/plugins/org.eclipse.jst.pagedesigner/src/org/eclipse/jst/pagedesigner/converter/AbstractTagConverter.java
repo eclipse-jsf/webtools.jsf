@@ -240,7 +240,7 @@ public abstract class AbstractTagConverter implements ITagConverter,
 	 * In the future, the conversion result HTML DOM tree could be in another
 	 * document.
 	 * 
-	 * @return
+	 * @return the destination document
 	 */
 	public IDOMDocument getDestDocument() {
 		if (this._targetDocument != null) {
@@ -254,7 +254,7 @@ public abstract class AbstractTagConverter implements ITagConverter,
 	 * result element.
 	 * 
 	 * @param tagName
-	 * @return
+	 * @return a new element named tagName
 	 */
 	public Element createElement(String tagName) {
 		return getDestDocument().createElement(tagName);
@@ -265,7 +265,7 @@ public abstract class AbstractTagConverter implements ITagConverter,
 	 * text node.
 	 * 
 	 * @param text
-	 * @return
+	 * @return a new text node using text as the value
 	 */
 	public Text createText(String text) {
 		return getDestDocument().createTextNode(text);

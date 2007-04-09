@@ -46,10 +46,6 @@ public class DumDeepTagConverter extends AbstractTagConverter {
 		return true;
 	}
 
-	/**
-	 * @param result
-	 * @return
-	 */
     // TODO: dead?
 //	private boolean internalIsWidget(Element result) {
 //		String tagname = result.getTagName();

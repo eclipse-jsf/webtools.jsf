@@ -27,7 +27,7 @@ public class ParagraphUnapplyStyleCommand extends ApplyStyleCommand {
 
 	/**
 	 * @param viewer
-	 * @param tag
+	 * @param tags
 	 * @param property
 	 * @param value
 	 */
@@ -46,7 +46,6 @@ public class ParagraphUnapplyStyleCommand extends ApplyStyleCommand {
 	public ParagraphUnapplyStyleCommand(IHTMLGraphicalViewer viewer,
 			Element node, String property, String value) {
 		super(viewer, node, property, value);
-		// TODO Auto-generated constructor stub
 	}
 
 	private DOMRange removeExistingStyles(IDOMPosition start, IDOMPosition end) {

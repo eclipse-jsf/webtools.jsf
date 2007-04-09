@@ -2,13 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PaletteInfosPackage.java,v 1.1 2007/02/28 05:04:45 gkessler Exp $
+ * $Id: PaletteInfosPackage.java,v 1.2 2007/04/09 02:23:05 cbateman Exp $
  */
 package org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 

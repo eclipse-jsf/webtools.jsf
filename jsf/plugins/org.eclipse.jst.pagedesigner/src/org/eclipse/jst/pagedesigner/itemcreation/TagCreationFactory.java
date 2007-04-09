@@ -1,19 +1,10 @@
 package org.eclipse.jst.pagedesigner.itemcreation;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.xml.type.AnyType;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.Model;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IMetaDataModelContext;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.MetaDataQueryHelper;
 import org.eclipse.jst.pagedesigner.editors.palette.DesignerPaletteRoot;
 import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.PaletteInfo;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.PaletteInfos;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.PaletteInfosFactory;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.TagCreationInfo;
 import org.eclipse.jst.pagedesigner.itemcreation.internal.DefaultTagCreator;
 import org.eclipse.jst.pagedesigner.itemcreation.internal.TagCreatorFromMetaData;
 

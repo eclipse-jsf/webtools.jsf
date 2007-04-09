@@ -11,11 +11,9 @@
  ********************************************************************************/
 package org.eclipse.jst.pagedesigner.editors.palette.internal.metadata;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jst.jsf.common.metadata.internal.AbstractTagLibDomainContentModelMetaDataTranslator;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataModelMergeAssistant;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataTranslator;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.Model;
 import org.eclipse.wst.html.core.internal.contentmodel.HTMLCMDocument;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMDocument;
 

@@ -29,7 +29,7 @@ import org.w3c.dom.Node;
 // dynamically
 // support other taglibs.
 public class BodyInfo implements IBodyInfo {
-	public static final BodyInfo _instance = new BodyInfo();
+	private static final BodyInfo _instance = new BodyInfo();
 
 	/*
 	 * (non-Javadoc)
@@ -121,31 +121,15 @@ public class BodyInfo implements IBodyInfo {
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.wst.sse.core.internal.provisional.INodeAdapter#isAdapterForType(java.lang.Object)
-	 */
-	public boolean isAdapterForType(Object type) {
-		return (type == IBodyInfo.class);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.wst.sse.core.internal.provisional.INodeAdapter#notifyChanged(org.eclipse.wst.sse.core.internal.provisional.INodeNotifier,
-	 *      int, java.lang.Object, java.lang.Object, java.lang.Object, int)
-	 */
-    // TODO: dead code?
-//	public void notifyChanged(INodeNotifier notifier, int eventType,
-//			Object changedFeature, Object oldValue, Object newValue, int pos) {
-//	}
-
 	/**
-	 * @return
+	 * @return the singleton
 	 */
 	public static IBodyInfo getInstance() {
 		return _instance;
 	}
 
+	private BodyInfo()
+	{
+	    // no external instantiation
+	}
 }

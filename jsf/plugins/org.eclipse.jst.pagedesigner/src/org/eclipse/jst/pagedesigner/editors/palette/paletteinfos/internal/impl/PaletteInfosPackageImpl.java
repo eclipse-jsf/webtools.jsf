@@ -2,23 +2,17 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PaletteInfosPackageImpl.java,v 1.1 2007/02/28 05:04:41 gkessler Exp $
+ * $Id: PaletteInfosPackageImpl.java,v 1.2 2007/04/09 02:23:03 cbateman Exp $
  */
 package org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl;
 
-import org.apache.xerces.dom.DocumentFragmentImpl;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.MetadataPackage;
-
 import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.PaletteInfo;
 import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.PaletteInfos;
 import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.PaletteInfosFactory;
@@ -26,7 +20,6 @@ import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provis
 import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.TagCreationAttribute;
 import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.TagCreationInfo;
 import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.TagCreationTemplate;
-import org.w3c.dom.NodeList;
 
 /**
  * <!-- begin-user-doc -->

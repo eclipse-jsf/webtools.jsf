@@ -42,7 +42,7 @@ public class ChangeStyleCommand extends SingleNodeCommand {
 
 	/**
 	 * @param node
-	 * @param map
+	 * @param context
 	 */
 	public ChangeStyleCommand(IDOMElement node, CSSPropertyContext context) {
 		super(CommandResources

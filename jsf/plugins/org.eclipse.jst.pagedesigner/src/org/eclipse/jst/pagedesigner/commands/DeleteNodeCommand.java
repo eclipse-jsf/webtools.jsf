@@ -38,7 +38,6 @@ public class DeleteNodeCommand extends DesignerCommand {
 	private DesignRange _prevRange;
 
 	/**
-	 * @param label
 	 * @param viewer
 	 */
 	public DeleteNodeCommand(IHTMLGraphicalViewer viewer) {

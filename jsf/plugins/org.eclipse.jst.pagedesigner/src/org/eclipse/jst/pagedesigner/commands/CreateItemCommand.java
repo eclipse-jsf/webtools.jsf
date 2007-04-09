@@ -31,6 +31,8 @@ public class CreateItemCommand extends DesignerCommand {
 	/**
 	 * @param label
 	 * @param viewer
+	 * @param position 
+	 * @param tagItem 
 	 */
 	public CreateItemCommand(String label, IHTMLGraphicalViewer viewer,
 			IDOMPosition position, TagToolPaletteEntry tagItem) {

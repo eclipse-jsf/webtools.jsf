@@ -41,6 +41,13 @@ public class ChangeTagCommand extends SingleNodeCommand {
 
 	private String _totalTag;
 
+	/**
+	 * @param label
+	 * @param node
+	 * @param totaltag
+	 * @param attributes
+	 * @param movecontent
+	 */
 	public ChangeTagCommand(String label, IDOMElement node, String totaltag,
 			Map attributes, boolean movecontent) {
 		super(label, node);
@@ -53,6 +60,10 @@ public class ChangeTagCommand extends SingleNodeCommand {
 	/**
 	 * @param label
 	 * @param node
+	 * @param uri 
+	 * @param tag 
+	 * @param attributes 
+	 * @param movecontent 
 	 */
 	public ChangeTagCommand(String label, IDOMElement node, String uri,
 			String tag, Map attributes, boolean movecontent) {

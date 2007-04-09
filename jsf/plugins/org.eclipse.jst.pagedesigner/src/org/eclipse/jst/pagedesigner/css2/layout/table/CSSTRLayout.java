@@ -33,10 +33,8 @@ public class CSSTRLayout extends CSSBlockFlowLayout {
 	}
 
 	/**
-	 * the parent figure of TRGroup should be table figure. If so, return the
-	 * corresponding table layout.
-	 * 
-	 * @return
+	 * @return the parent figure of TRGroup should be table figure. If so, return the
+     * corresponding table layout.
 	 */
 	public CSSTableLayout2 getTableLayoutContext() {
 		IFigure parent = getCSSFigure().getParent();
@@ -53,6 +51,9 @@ public class CSSTRLayout extends CSSBlockFlowLayout {
 		return null;
 	}
 
+	/**
+	 * @return the group layout or null
+	 */
 	public CSSTRGroupLayout getTRGroupLayout() {
 		IFigure parent = getCSSFigure().getParent();
 		if (parent != null) {
@@ -132,55 +133,6 @@ public class CSSTRLayout extends CSSBlockFlowLayout {
 				.getRowWidth(), height);
 	}
 
-	/**
-	 * @param tableLayout
-	 * @param groupLayout
-	 * @return
-	 */
-	// private Rectangle getTRRect(CSSTableLayout2 tableLayout, CSSTRGroupLayout
-	// groupLayout)
-	// {
-	// TableRowGroupInfo groupInfo = null;
-	// if (groupLayout != null)
-	// {
-	// groupInfo = tableLayout.getGroupInfo(groupLayout.getCSSFigure());
-	// }
-	// if (groupInfo != null)
-	// {
-	// // This TR is in tr group
-	// int[] rowHeights = tableLayout.getRowHeights();
-	// int vspacing = tableLayout.getVSpacing();
-	// int rowwidth = tableLayout.getRowWidth();
-	// int grouprowindex = groupInfo.getRowIndex();
-	// TableRowInfo rowinfo = tableLayout.getRowInfo(this.getCSSFigure());
-	// ICSSFigure figure = rowinfo.getFigure();
-	//
-	// int y = 0;
-	// int rowindex = rowinfo.getRowIndex();
-	// for (int row = grouprowindex; row < rowindex; row++)
-	// {
-	// y += rowHeights[row];
-	// y += vspacing;
-	// }
-	// int height = rowHeights[rowindex];
-	// Rectangle rect = new Rectangle(0, y, rowwidth, height);
-	// return rect;
-	// }
-	// else
-	// {
-	// TableRowInfo rowinfo = tableLayout.getRowInfo(this.getCSSFigure());
-	// int rowIndex = rowinfo.getRowIndex();
-	// int y = (rowIndex+1) * tableLayout.getVSpacing();
-	// int rowHeights[] = tableLayout.getRowHeights();
-	// for (int k=0; k<rowIndex; k++)
-	// {
-	// y += rowHeights[k];
-	// }
-	// int height = rowHeights[rowIndex];
-	// return new Rectangle(tableLayout.getRowX(), y, tableLayout.getRowWidth(),
-	// height);
-	// }
-	// }
 	/*
 	 * (non-Javadoc)
 	 * 

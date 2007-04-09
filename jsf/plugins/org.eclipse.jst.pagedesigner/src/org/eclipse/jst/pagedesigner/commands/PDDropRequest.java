@@ -50,10 +50,16 @@ public class PDDropRequest extends Request implements DropRequest {
 		this._location = location;
 	}
 
+	/**
+	 * @param ev
+	 */
 	public void setCurrentEvent(DropTargetEvent ev) {
 		_currentEvent = ev;
 	}
 
+	/**
+	 * @return the current drop target event
+	 */
 	public DropTargetEvent getCurrentEvent() {
 		return _currentEvent;
 	}

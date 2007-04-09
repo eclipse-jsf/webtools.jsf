@@ -21,14 +21,15 @@ import org.w3c.dom.Element;
  */
 public class PaletteViewAction extends ShowViewAction {
 	public final static String ID = "org.eclipse.jst.pagedesigner.editors.actions.PaletteViewAction"; //$NON-NLS-1$
-	private final Element   _element;
-    private final EditDomain _editDomain;
+	// TODO: dead?
+	//private final Element   _element;
+    //private final EditDomain _editDomain;
     
 	public PaletteViewAction(Element element, EditDomain editDomain) {
         super(ActionsMessages.getString("PaletteViewAction.Menu.PaletteView")
                 , PaletteView.ID); //$NON-NLS-1$
-        _element = element;
-        _editDomain = editDomain;
+        //_element = element;
+        //_editDomain = editDomain;
 	}
     
     /** 

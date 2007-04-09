@@ -31,8 +31,9 @@ public class MoveNodeCommand extends DesignerCommand {
 	private Node originalNode;
 
 	/**
-	 * @param label
 	 * @param viewer
+	 * @param insertionPoint 
+	 * @param originalNode 
 	 */
 	public MoveNodeCommand(IHTMLGraphicalViewer viewer,
 			IDOMPosition insertionPoint, Node originalNode) {

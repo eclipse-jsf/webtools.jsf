@@ -42,9 +42,7 @@ public interface ITagConverter {
 	public void convertRefresh(Object context);
 
 	/**
-	 * The host element being converted.
-	 * 
-	 * @return
+	 * @return The host element being converted.
 	 */
 	public Element getHostElement();
 
@@ -54,7 +52,7 @@ public interface ITagConverter {
 	 * should return an image in <code>getVisualImage()</code> for displaying
 	 * in the designer.
 	 * 
-	 * @return
+	 * @return true if the tag represents something that will be rendered visually at runtime
 	 */
 	public boolean isVisualByHTML();
 
@@ -66,21 +64,17 @@ public interface ITagConverter {
 	 * is this class's responsibility to dispose the image if the image is not a
 	 * shared one.
 	 * 
-	 * @return
+	 * @return the placeholder image for non-visual tags
 	 */
 	public Image getVisualImage();
 
 	/**
-	 * the element after conversion.
-	 * 
-	 * @return
+	 * @return the result element after conversion
 	 */
 	public Element getResultElement();
 
 	/**
-	 * get the list of children that should be continuely converted.
-	 * 
-	 * @return
+	 * @return the list of children that should be continuely converted.
 	 */
 	public List getChildModeList();
     
@@ -95,7 +89,7 @@ public interface ITagConverter {
 	 * converted DOM tree.
 	 * 
 	 * @param childModel
-	 * @return
+	 * @return the position of child nodes
 	 */
 	public ConvertPosition getChildVisualPosition(Node childModel);
 
@@ -104,18 +98,18 @@ public interface ITagConverter {
 	 * false, then the caller should not use child nodes of
 	 * <code>getHostElement()</code>
 	 * 
-	 * @return
+	 * @return true if the host element has convertable children
 	 */
 	public boolean isMultiLevel();
 
 	/**
 	 * 
-	 * @return
+	 * @return true if the host element is a widget
 	 */
 	public boolean isWidget();
 
 	/**
-	 * 
+	 * API contract needed here
 	 * 
 	 */
 	public void dispose();

@@ -17,7 +17,14 @@ import org.eclipse.jst.pagedesigner.css2.ICSSStyle;
  * @author mengbo
  */
 public interface ICSSFontManager {
+	/**
+	 * @param style
+	 * @return ??
+	 */
 	public ICSSFont createFont(ICSSStyle style);
 
+	/**
+	 * FIXME: purpose?
+	 */
 	public void dispose();
 }

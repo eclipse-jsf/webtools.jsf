@@ -31,8 +31,9 @@ public class CloneNodeCommand extends DesignerCommand {
 	Node _resultNode;
 
 	/**
-	 * @param label
 	 * @param viewer
+	 * @param insertionPoint 
+	 * @param originalNode 
 	 */
 	public CloneNodeCommand(IHTMLGraphicalViewer viewer,
 			IDOMPosition insertionPoint, Node originalNode) {

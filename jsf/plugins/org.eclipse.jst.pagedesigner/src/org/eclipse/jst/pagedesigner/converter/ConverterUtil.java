@@ -63,7 +63,7 @@ public class ConverterUtil {
 
 	/**
 	 * @param hostElement
-	 * @return
+	 * @return true if hostElement represents an empty container
 	 */
 	public static boolean isEmptyContainer(Element hostElement) {
 		NodeList nl = hostElement.getChildNodes();

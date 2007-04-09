@@ -66,6 +66,9 @@ public class CSSTableCellLayout extends CachedTableCellLayout {
 		}
 	}
 
+	/**
+	 * process the vertical layout lines
+	 */
 	protected void verticalLayoutLines() {
 		List lines = _blockBox.getFragments();
 
@@ -155,7 +158,7 @@ public class CSSTableCellLayout extends CachedTableCellLayout {
 	 * the parent figure of TRGroup should be table figure. If so, return the
 	 * corresponding table layout.
 	 * 
-	 * @return
+	 * @return the table layout context
 	 */
 	public CSSTableLayout2 getTableLayoutContext() {
 		IFigure parent = getCSSFigure().getParent();
@@ -170,7 +173,7 @@ public class CSSTableCellLayout extends CachedTableCellLayout {
 	}
 
 	/**
-	 * @return
+	 * @return true if the table layout has cell info
 	 */
 	public boolean initializeTableInfo() {
 		_rowinfo = null;
@@ -189,10 +192,16 @@ public class CSSTableCellLayout extends CachedTableCellLayout {
 		return false;
 	}
 
+	/**
+	 * @return the table layout or nul if none
+	 */
 	public CSSTableLayout2 getTableLayout() {
 		return _tableLayout;
 	}
 
+	/**
+	 * @return the table cell info or null
+	 */
 	public TableCellInfo getTableCellInfo() {
 		return _cellinfo;
 	}

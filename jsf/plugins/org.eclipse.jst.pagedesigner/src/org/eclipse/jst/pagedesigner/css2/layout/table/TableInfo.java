@@ -175,7 +175,7 @@ public class TableInfo extends TableItemInfo {
 	/**
 	 * width percentage will be used to calculate remaining width distribution.
 	 * 
-	 * @return
+	 * @return the width percentages
 	 */
 	public int[] getWidthPercentages() {
 		return this._widthPercentage;
@@ -242,9 +242,10 @@ public class TableInfo extends TableItemInfo {
 	}
 
 	/**
-	 * @param containerWidth
+	 * @param contentWidth
 	 *            if the width specification is percentage, then will use
 	 *            container width.
+	 * @param availableWidth 
 	 */
 	public void calculateWidth(int contentWidth, int availableWidth) {
 		_tableWidth = contentWidth;
@@ -276,7 +277,7 @@ public class TableInfo extends TableItemInfo {
 	}
 
 	/**
-	 * @return
+	 * @return table width
 	 */
 	public int getTableWidth() {
 		return _tableWidth;
@@ -284,7 +285,7 @@ public class TableInfo extends TableItemInfo {
 
 	/**
 	 * @param figure
-	 * @return
+	 * @return find the group info
 	 */
 	public TableRowGroupInfo findGroupInfo(CSSFigure figure) {
 		for (int i = 0, size = _tableHeaderGroups.size(); i < size; i++) {
@@ -316,7 +317,7 @@ public class TableInfo extends TableItemInfo {
 
 	/**
 	 * @param figure
-	 * @return
+ 	 * @return the row info
 	 */
 	public TableRowInfo findRowInfo(CSSFigure figure) {
 		for (int i = 0, size = _tableHeaderGroups.size(); i < size; i++) {
@@ -355,7 +356,7 @@ public class TableInfo extends TableItemInfo {
 
 	/**
 	 * 
-	 * @return
+	 * @return the width percentage
 	 */
 	public boolean hasWidthPercentage() {
 		for (int i = 0; i < this._widthPercentage.length; i++) {

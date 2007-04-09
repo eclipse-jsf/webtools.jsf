@@ -31,15 +31,18 @@ public class ContentCommand extends RangeModeCommand {
 	private String _content;
 
 	/**
-	 * @param label
-	 * @param model
 	 * @param viewer
+	 * @param content 
 	 */
 	public ContentCommand(IHTMLGraphicalViewer viewer, String content) {
 		super("", viewer);
 		_content = content;
 	}
 
+	/**
+	 * @param viewer
+	 * @param c
+	 */
 	public ContentCommand(IHTMLGraphicalViewer viewer, char c) {
 		super("", viewer);
 		_content = String.valueOf(c);
@@ -60,6 +63,10 @@ public class ContentCommand extends RangeModeCommand {
 
 	}
 
+	/**
+	 * @param position
+	 * @return ??
+	 */
 	protected IDOMPosition doContent(IDOMPosition position) {
 		position = DOMPositionHelper.mergeIntoText(position);
 

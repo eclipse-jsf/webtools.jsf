@@ -78,8 +78,8 @@ public class RelatedViewActionGroup extends ActionGroup
 							.get(views[0]));
 					manager.add(action);
 				}
-				if (manager.find(PaletteViewAction.ID) == null) {
                     ISelection selection = context.getSelection();
+                    if (manager.find(PaletteViewAction.ID) == null) {
                     if (selection instanceof IStructuredSelection)
                     {
                         IStructuredSelection strucSelection = 

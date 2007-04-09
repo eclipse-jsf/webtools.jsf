@@ -20,7 +20,7 @@ import org.eclipse.jface.action.Action;
 public class ParagraphAction extends Action {
 	/**
 	 * @param text
-	 * @param string
+	 * @param htmlTag
 	 */
 	public ParagraphAction(String text, String htmlTag) {
 		super(text);

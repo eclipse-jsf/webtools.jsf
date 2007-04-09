@@ -25,13 +25,12 @@ import org.w3c.dom.Node;
  * @author mengbo
  */
 public class NoneParagraphStyleAction extends ParagraphStyleAction {
-	public static final String[] HH = { "h1", "h2", "h3", "h4", "h5", "h6" };
 
 	private String[] _applyingTags;
 
 	/**
 	 * @param text
-	 * @param name
+	 * @param tags
 	 * @param image
 	 * @param style
 	 */

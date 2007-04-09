@@ -29,6 +29,9 @@ public class PasteNodeCommand extends Command implements ICaretPositionMover {
 
 	private SourceViewer _sourceViewer;
 
+	/**
+	 * @param viewer
+	 */
 	public PasteNodeCommand(SourceViewer viewer) {
 		super(COMMAND_LABEL);
 		this._sourceViewer = viewer;
