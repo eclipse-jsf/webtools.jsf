@@ -18,7 +18,7 @@ package org.eclipse.jst.jsf.common.metadata.internal;
 public interface IMetaDataObserver {
 	/**
 	 * Callback to observer when an {@link IMetaDataObservable} throws an event
-	 * @param IMetaDataChangeNotificationEvent
+	 * @param event
 	 */
 	public void notifyMetadataChanged(IMetaDataChangeNotificationEvent event);
 }

@@ -26,7 +26,7 @@ import org.eclipse.jst.jsf.common.JSFCommonPlugin;
  * Registry of strategies used to load domains of metadata.
  * Uses the <code>org.eclipse.jst.jsf.common.domainLoadingStrategies</code> ext-pt to load.  
  * 
- *@see <code>org.eclipse.jst.jsf.common.domainLoadingStrategies</code> ext-pt 
+ * see <code>org.eclipse.jst.jsf.common.domainLoadingStrategies</code> ext-pt 
  */
 public class DomainLoadingStrategyRegistry{
 	private static DomainLoadingStrategyRegistry INSTANCE;

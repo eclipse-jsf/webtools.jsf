@@ -21,6 +21,9 @@ public class NodeSet extends AbstractSet implements AxiomaticSet
 {
     private NodeList        _data;
     
+    /**
+     * @param data  -- wrap the actual data source
+     */
     public NodeSet(NodeList data)
     {
         _data = data;

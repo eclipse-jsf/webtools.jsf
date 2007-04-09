@@ -19,7 +19,7 @@ import java.util.List;
  * Default class used for loading metadata.  
  * Loads the source types from extensions defined against the domain.
  * 
- * @see <code>org.eclipse.jst.jsf.common.domainLoadingStrategies</code> ext-pt
+ * see org.eclipse.jst.jsf.common.domainLoadingStrategies ext-pt
  */
 public class DomainLoadingStrategy implements IDomainLoadingStrategy, IMetaDataObserver {
 

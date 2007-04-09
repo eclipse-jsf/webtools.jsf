@@ -199,6 +199,7 @@ public final class TypeUtil
     /**
      * @param typeSignature     * @return a fully qualified Java class name from a type signature
      * i.e. Ljava.lang.String; -> java.lang.String
+     * @return the fully qualifed classname
      */
     public static String getFullyQualifiedName(final String typeSignature)
     {

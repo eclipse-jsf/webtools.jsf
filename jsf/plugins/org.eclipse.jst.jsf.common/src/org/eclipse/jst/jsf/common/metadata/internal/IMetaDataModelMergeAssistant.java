@@ -44,7 +44,7 @@ public interface IMetaDataModelMergeAssistant {
 	
 	/**
 	 * Method will add an entityGroup to the model if not already exiting in the merged model (by id).
-	 * @param model
+	 * @param entityGroup
 	 */
 	public void addEntityGroup(EntityGroup entityGroup);
 	/**

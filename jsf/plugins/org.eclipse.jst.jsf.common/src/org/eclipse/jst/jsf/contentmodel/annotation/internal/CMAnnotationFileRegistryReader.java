@@ -26,7 +26,7 @@ import org.eclipse.osgi.util.NLS;
  * annotation file to the CMAnnotationsRegistry.
  * 
  * @see CMAnnotationFileRegistry
- * @see org.eclipse.jst.jsf.contentmodel.annotations.annotationFiles extension-point
+ * also see org.eclipse.jst.jsf.contentmodel.annotations.annotationFiles extension-point
  * @deprecated see common.metadata package
  */
 public class CMAnnotationFileRegistryReader {

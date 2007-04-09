@@ -47,7 +47,7 @@ public class CMElementAnnotation extends CMAnnotation {
 	/**
 	 * Add an attribute annotation to this element's attribute annotations map
 	 * 
-	 * @param attribute annotation
+	 * @param annotation
 	 */
 	public void addCMAttributeAnnotation(CMAttributeAnnotation annotation){
 		attributes.put(annotation.getName(), annotation);		

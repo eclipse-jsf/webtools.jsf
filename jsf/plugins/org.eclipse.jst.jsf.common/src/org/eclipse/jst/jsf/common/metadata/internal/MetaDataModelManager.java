@@ -206,7 +206,7 @@ public class MetaDataModelManager implements IResourceChangeListener{
 		
 		/**
 		 * @param modelKeyDescriptor
-		 * @param adds model to the map using the given key descriptor
+		 * @param model adds model to the map using the given key descriptor
 		 */
 		public void put(ModelKeyDescriptor modelKeyDescriptor, MetaDataModel model){
 			String key = modelKeyDescriptor.toString();

@@ -73,7 +73,6 @@ public class MetaDataQueryHelper{
 	/**
 	 * @param modelContext 
 	 * @param entityKey relative to root of model 
-	 * @param entityQueryVisitor
 	 * @return an IResultSet of entity objects
 	 */
 	public static IResultSet/*<Entity>*/ getEntities(final IMetaDataModelContext modelContext,
@@ -130,7 +129,7 @@ public class MetaDataQueryHelper{
 
 	/**
 	 * @param initialEntityContext
-	 * @param entityKey relative to initial passed entity
+	 * @param entityQuery relative to initial passed entity
 	 * @param entityKeyQueryVisitor
 	 * @return IResultSet of entities located by key using entityQueryVisitor.  IResultSet should NOT be null.
 	 */

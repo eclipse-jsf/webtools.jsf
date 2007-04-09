@@ -59,7 +59,7 @@ public class SearchControl {
 	}
 	
 	/**
-	 * @param query results count limit
+	 * @param limit results count limit
 	 */
 	public void setCountLimit(int limit){
 		this.countLimit = limit;

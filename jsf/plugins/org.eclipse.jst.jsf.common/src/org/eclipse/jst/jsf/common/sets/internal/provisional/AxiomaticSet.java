@@ -21,6 +21,8 @@ public interface AxiomaticSet extends Set
      * the implementation must call isEquivalent on those subsets
      * recursively.
      * 
+     * @param toSet 
+     * 
      * @return true iff this set is equivalent toSet.  Note
      * that extensionality holds that two sets are equivalent
      * if and only if they contain exactly the same elements.
@@ -68,7 +70,7 @@ public interface AxiomaticSet extends Set
      * for multiple invocations on the same set.  Generally this is a convience method
      * for when the set only contains one element.
      * 
-     * @throws NoSuchElementException if the set is empty.
+     * @throws java.util.NoSuchElementException if the set is empty.
      */
     Object getFirstElement();
 }

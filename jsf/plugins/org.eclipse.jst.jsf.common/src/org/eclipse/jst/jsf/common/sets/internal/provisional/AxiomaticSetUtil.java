@@ -3,6 +3,12 @@ package org.eclipse.jst.jsf.common.sets.internal.provisional;
 import java.util.Iterator;
 import java.util.Set;
 
+/**
+ * Generic (unoptimized) utilities for doing set operations.
+ * 
+ * @author cbateman
+ *
+ */
 public class AxiomaticSetUtil 
 {
     /**
@@ -17,6 +23,12 @@ public class AxiomaticSetUtil
         newSet.addAll(secondSet);
     }
     
+    /**
+     * Creates an intersection of firstSet and secondSet in newSet
+     * @param newSet
+     * @param firstSet
+     * @param secondSet
+     */
     public static void intersect(AxiomaticSet newSet, AxiomaticSet firstSet, AxiomaticSet secondSet)
     {
         // minor optimization: always iterator through the smaller of the
@@ -48,11 +60,22 @@ public class AxiomaticSetUtil
         }
     }
     
+    /**
+     * @param firstSet
+     * @param secondSet
+     * @return true firstSet and secondSet have no common elements (their intersection is empty)
+     */
     public static boolean isDisjoint(AxiomaticSet firstSet, AxiomaticSet secondSet)
     {
         return firstSet.intersect(secondSet).isEmpty();
     }
 
+    /**
+     * @param firstOperand
+     * @param secondOperand
+     * @return the set formed by removing the intersection of firstOperand and secondOperand
+     * from firstOperand, leaving only those elements in firstOperand that are not in secondOperand
+     */
     public static AxiomaticSet subtract(
             AxiomaticSet firstOperand, AxiomaticSet secondOperand) 
     {

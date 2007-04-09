@@ -14,13 +14,13 @@ package org.eclipse.jst.jsf.common.metadata.internal;
 
 /**
  * Defines a strategy to use for loading a standard metadata model for a certain domain.
- * @see <code>org.eclipse.jst.jsf.common.domainLoadingStrategies</code> ext-pt 
+ * see <code>org.eclipse.jst.jsf.common.domainLoadingStrategies</code> ext-pt 
  */
 public interface IDomainLoadingStrategy {
 	
 	/**
 	 * Create a merged "standard" metadata model.  
-	 * @param MetaDataModel to load
+	 * @param model to load
 	 * 
 	 */
 	public void load(MetaDataModel model);
@@ -28,8 +28,6 @@ public interface IDomainLoadingStrategy {
 	/**
 	 * Reload a merged "standard" metadata model.  
 	 * Allows for some optimization for reload.
-	 * 
-	 * @param MetaDataModel to reload
 	 * 
 	 */
 	public void reload() throws ModelNotSetException;

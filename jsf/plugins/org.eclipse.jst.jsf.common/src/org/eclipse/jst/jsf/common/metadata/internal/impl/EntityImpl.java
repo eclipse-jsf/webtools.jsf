@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EntityImpl.java,v 1.2 2007/02/07 00:03:49 gkessler Exp $
+ * $Id: EntityImpl.java,v 1.3 2007/04/09 02:29:53 cbateman Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.impl;
 
@@ -20,16 +20,12 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.jst.jsf.common.metadata.internal.MetaDataModelContextImpl;
-import org.eclipse.jst.jsf.common.metadata.internal.ModelKeyDescriptor;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.IncludeEntityGroup;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.MetadataPackage;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Model;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
 import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IEntityVisitor;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IMetaDataModelContext;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.MetaDataQueryHelper;
 
 /**
  * <!-- begin-user-doc -->
@@ -270,14 +266,15 @@ public class EntityImpl extends EObjectImpl implements Entity {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	private synchronized Model getModel(IncludeEntityGroup group) {
-		if (group.getModelUri() == null || group.getModelUri().equals(getModel().getCurrentModelContext().getUri()))
-			return getModel();
-		
-		ModelKeyDescriptor currentModelKey = getModel().getCurrentModelContext();
-		IMetaDataModelContext modelContext = new MetaDataModelContextImpl(currentModelKey.getProject(), currentModelKey.getDomain(), group.getModelUri());
-		return MetaDataQueryHelper.getModel(modelContext);	
-	}
+	// TODO: never used
+//	private synchronized Model getModel(IncludeEntityGroup group) {
+//		if (group.getModelUri() == null || group.getModelUri().equals(getModel().getCurrentModelContext().getUri()))
+//			return getModel();
+//		
+//		ModelKeyDescriptor currentModelKey = getModel().getCurrentModelContext();
+//		IMetaDataModelContext modelContext = new MetaDataModelContextImpl(currentModelKey.getProject(), currentModelKey.getDomain(), group.getModelUri());
+//		return MetaDataQueryHelper.getModel(modelContext);	
+//	}
 
 	/**
 	 * <!-- begin-user-doc -->

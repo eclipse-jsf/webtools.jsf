@@ -60,6 +60,10 @@ public abstract class TagIdentifier
         return hashCode;
     }
     
+    /**
+     * @param tagWrapper
+     * @return true if tagWrapper represents the same tag as this.
+     */
     public final boolean isSameTagType(TagIdentifier tagWrapper)
     {
         if (tagWrapper == this)

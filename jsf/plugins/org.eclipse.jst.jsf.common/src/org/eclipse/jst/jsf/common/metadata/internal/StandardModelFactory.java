@@ -30,7 +30,7 @@ import org.eclipse.jst.jsf.common.metadata.internal.util.MetadataResourceImpl;
  * Singelton that produces and loads standard metadata models.  
  * All models are loaded into the same ResourceSet 
  *
- * @see Model
+ * see Model
  */
 public class StandardModelFactory {
 	private static StandardModelFactory INSTANCE;
@@ -84,7 +84,7 @@ public class StandardModelFactory {
 
 	/**
 	 * Factory method that probably belongs somewhere else!
-	 * @param IMetaDataModelContext
+	 * @param modelContext 
 	 * @return a ModelKeyDescriptor for the context
 	 */
 	public ModelKeyDescriptor createModelKeyDescriptor(final IMetaDataModelContext modelContext) {
@@ -107,8 +107,7 @@ public class StandardModelFactory {
 
 	/**
 	 * Sets default load options for the resource
-	 * @param ResourceSet
-	 * @param XMLResource
+	 * @param resource 
 	 */
 	protected void setLoadOptions(XMLResource resource) {
 		Map options = resource.getDefaultLoadOptions();

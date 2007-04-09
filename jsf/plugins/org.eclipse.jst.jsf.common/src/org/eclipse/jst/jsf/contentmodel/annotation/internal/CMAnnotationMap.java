@@ -36,8 +36,8 @@ import org.eclipse.osgi.util.NLS;
  * Map of annotations for content model elements keyed by tag element name.
  * Attribute annotations are stored in a map inside the element annotation.
  * 
- *  @see <code>org.eclipse.jst.jsf.contentmodel.annotation.internal.CMElementAnnotation</code>
- *  @see <code>org.eclipse.jst.jsf.contentmodel.annotation.internal.CMAttributeAnnotation</code>
+ *  @see org.eclipse.jst.jsf.contentmodel.annotation.internal.CMElementAnnotation
+ *  @see org.eclipse.jst.jsf.contentmodel.annotation.internal.CMAttributeAnnotation
  * 
  * @deprecated see common.metadata package
  */
@@ -51,7 +51,7 @@ public class CMAnnotationMap {
 
 	/**
 	 * Constructor
-	 * @param ICMAnnotationSourceFileInfo
+	 * @param fileInfo 
 	 */
 	public CMAnnotationMap(ICMAnnotationSourceFileInfo fileInfo) {
 		this.fileInfo = fileInfo;
@@ -59,8 +59,7 @@ public class CMAnnotationMap {
 
 	/**
 	 * Set whether or not the model should be queried in a case sensitive manner
-	 * 
-	 * @param boolean
+	 * @param isCaseSensitive 
 	 */
 	public void setCaseSensitive(boolean isCaseSensitive) {
 		this.isCaseSensitive = isCaseSensitive;
@@ -292,7 +291,7 @@ public class CMAnnotationMap {
 	}
 	
 	/**
-	 * @param String
+	 * @param val 
 	 * @return string value used for case sensitive or insensitive queries.
 	 */
 	public String getStringValueForCaseSensitivity(String val){

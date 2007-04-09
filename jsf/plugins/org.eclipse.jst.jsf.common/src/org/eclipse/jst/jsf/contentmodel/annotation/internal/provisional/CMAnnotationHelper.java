@@ -37,7 +37,8 @@ import org.eclipse.jst.jsf.contentmodel.annotation.internal.CMAnnotationMap;
  * @see org.eclipse.jst.jsf.contentmodel.annotation.internal.CMElementAnnotation
  * @see org.eclipse.jst.jsf.contentmodel.annotation.internal.CMAttributeAnnotation
  * @see CMAnnotationPropertyValue
- * @see org.eclipse.jst.jsf.contentmodel.annotations.annotationFiles extension-point
+ * 
+ * also see org.eclipse.jst.jsf.contentmodel.annotations.annotationFiles extension-point
  * 
  * @deprecated see common.metadata package
  */
@@ -155,7 +156,6 @@ public class CMAnnotationHelper {
 	 * 
 	 * @param uri
 	 * @param cmElementName
-	 * @param cmAttrName
 	 * @param meta_prop_name
 	 * @return list of CMAnnotationPropertyValue objects
 	 */
@@ -176,7 +176,6 @@ public class CMAnnotationHelper {
 	 * @param bundleId
 	 * @param uri
 	 * @param cmElementName
-	 * @param cmAttrName
 	 * @param meta_prop_name
 	 * @return list of CMAnnotationPropertyValue objects
 	 */

@@ -25,7 +25,7 @@ import org.eclipse.jst.jsf.common.JSFCommonPlugin;
  * file to the StandardMetaDataFileRegistry.
  * 
  * @see StandardMetaDataFileRegistry
- * @see StandardMetaDataFile extension-point
+ * also see StandardMetaDataFile extension-point
  */
 public class StandardMetaDataFileRegistryReader {
 	protected static final String EXTENSION_POINT_ID = "standardMetaDataFiles"; //$NON-NLS-1$

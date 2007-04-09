@@ -17,7 +17,7 @@ public interface AxiomaticSetMapping
 {
     /**
      * @param set
-     * @return
+     * @return the new set resulting from applying the map to set
      */
     AxiomaticSet map(AxiomaticSet set);
 }

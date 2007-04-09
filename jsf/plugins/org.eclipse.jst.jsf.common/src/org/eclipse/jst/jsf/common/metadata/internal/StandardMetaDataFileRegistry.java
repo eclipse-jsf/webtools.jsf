@@ -72,7 +72,7 @@ public final class StandardMetaDataFileRegistry {
 	/**
 	 * For use by registry reader only
 	 * @param uri
-	 * @param StandardMetaDataFileInfo
+	 * @param fileInfo 
 	 */
 	public synchronized void addStandardMetaDataFileInfo(String uri, IStandardMetaDataSourceInfo fileInfo) {
 		List/*<IMetaDataSourceModelProvider>*/ providers = (List) mdFilesMap.get(uri);

@@ -28,7 +28,6 @@ public abstract class LiteralType extends ValueType
      * Consider a new literal type
      * 
      * @param signature
-     * @param literalValue
      */
     protected LiteralType(final String signature)
     {

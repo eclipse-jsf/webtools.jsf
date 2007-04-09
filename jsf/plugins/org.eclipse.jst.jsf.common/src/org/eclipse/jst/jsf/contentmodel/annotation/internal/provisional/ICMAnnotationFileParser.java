@@ -18,10 +18,10 @@ import org.eclipse.jst.jsf.contentmodel.annotation.internal.ICMAnnotationAdvisor
  *  
  * @author Gerry Kessler - Oracle
  * 
- * @see ext-pt: org.eclipse.jst.jsf.contentmodel.annotations.annotationFile  
- * @see xml schema defn: <code>http://org.eclipse.jst.jsf.contentmodel.annotations/grammarAnnotationSchema</code>
- * @see <code>org.eclipse.jst.jsf.contentmodel.annotation.internal.ICMAnnotationAdvisor</code>
- * @see <code>org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.CMAnnotationSourceFileLocator</code>
+ * also see ext-pt: org.eclipse.jst.jsf.contentmodel.annotations.annotationFile  
+ * also see xml schema defn: <code>http://org.eclipse.jst.jsf.contentmodel.annotations/grammarAnnotationSchema</code>
+ * @see org.eclipse.jst.jsf.contentmodel.annotation.internal.ICMAnnotationAdvisor
+ * @see org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.CMAnnotationSourceFileLocator
  * 
  * @deprecated see common.metadata package
  */
@@ -33,8 +33,9 @@ public interface ICMAnnotationFileParser {
 	 * 
 	 * The implementor is responsible for closing the inputstream when parse is complete.
 	 * 
-	 * @param ICMAnnotationAdvisor advisor
-	 * @param ICMAnnotationSourceFileLocator locator
+	 * @param advisor 
+	 * @param locator 
+	 * 
 	 * @throws Exception
 	 */
 	public void parse(ICMAnnotationAdvisor advisor, CMAnnotationSourceFileLocator locator) throws Exception;

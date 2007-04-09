@@ -28,11 +28,11 @@ public interface IMetaDataLocator {
 	public void stopLocating();
 
 	/**
-	 * @param add a {@link IMetaDataObserver} of this locator 
+	 * @param observer add a {@link IMetaDataObserver} of this locator 
 	 */
 	public void addObserver(IMetaDataObserver observer);
 	/**
-	 * @param remove a {@link IMetaDataObserver} of this locator 
+	 * @param observer remove a {@link IMetaDataObserver} of this locator 
 	 */
 	public void removeObserver(IMetaDataObserver observer);
 	
@@ -41,7 +41,7 @@ public interface IMetaDataLocator {
 	 */
 	public IDomainSourceModelType getDomainSourceModelType();
 	/**
-	 * @param set the domainSourceModelType instance that created this locator
+	 * @param domainSourceModelType set the domainSourceModelType instance that created this locator
 	 */
 	public void setDomainSourceModelType(IDomainSourceModelType domainSourceModelType);
 

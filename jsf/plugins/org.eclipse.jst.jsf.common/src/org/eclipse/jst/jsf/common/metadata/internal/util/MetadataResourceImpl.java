@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MetadataResourceImpl.java,v 1.4 2007/02/28 05:04:22 gkessler Exp $
+ * $Id: MetadataResourceImpl.java,v 1.5 2007/04/09 02:29:53 cbateman Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.util;
 
@@ -12,7 +12,6 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.xmi.XMLHelper;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMLHelperImpl;
@@ -81,7 +80,8 @@ public class MetadataResourceImpl extends XMLResourceImpl implements XMLResource
 	}
 
 	private void setModelKeyInTraits(Model root, Entity currentEntity) {
-		EStructuralFeature feature = MetadataPackage.eINSTANCE.getTrait_SourceModelProvider();
+		// TODO: does this have side effect that we care about? nothing is done with the return value
+	    MetadataPackage.eINSTANCE.getTrait_SourceModelProvider();
 		for (int i=0;i < currentEntity.getTraits().size();i++){
 			((Trait)currentEntity.getTraits().get(i)).setSourceModelProvider(_provider);
 		}

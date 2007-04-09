@@ -37,10 +37,9 @@ import org.eclipse.osgi.util.NLS;
  * 
  * When queried, CMAnnotationPropertyValue objects are returned for each named property found in each annotation file for a particular uri.
  * 
- * @see org.eclipse.jst.jsf.contentmodel.annotations.annotationFiles extension-point
+ * also see org.eclipse.jst.jsf.contentmodel.annotations.annotationFiles extension-point
  * @see CMAnnotationFileRegistryReader
  * @see CMAnnotationMap
- * @see 
  * @see org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.ICMAnnotationSourceFileInfo
  * 
  * @deprecated see common.metadata package
@@ -77,7 +76,7 @@ public final class CMAnnotationFileRegistry {
 	/**
 	 * For use by registry reader only
 	 * @param uri
-	 * @param CMAnnotationFileInfo
+	 * @param fileInfo 
 	 */
 	public synchronized void addAnnotationFileInfo(String uri, ICMAnnotationSourceFileInfo fileInfo) {
 		List fileInfos = (List) annotationFilesMap.get(uri);
@@ -128,9 +127,9 @@ public final class CMAnnotationFileRegistry {
 	 * @return boolean
 	 */
 	public boolean hasAnnotations(String bundleId, String uri) {
-		if (DISABLED){
-			
-		}
+//		if (DISABLED){
+//			
+//		}
 		List maps = (List)annotationFilesMap.get(uri);
 		if (maps == null || maps.size() ==0)
 			return false;

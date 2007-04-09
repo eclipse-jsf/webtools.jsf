@@ -187,8 +187,8 @@ public class IBeanMethodSymbolItemProvider
     }
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached
-	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * This handles model notifications by calling {@link #updateChildren(Notification)} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged(Notification)}.
 	 * <!-- begin-user-doc -->
      * @param notification 
 	 * <!-- end-user-doc -->

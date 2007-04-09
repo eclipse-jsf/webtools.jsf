@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IBoundedMapTypeDescriptorItemProvider.java,v 1.2 2006/11/29 00:08:21 cbateman Exp $
+ * $Id: IBoundedMapTypeDescriptorItemProvider.java,v 1.3 2007/04/09 02:29:53 cbateman Exp $
  */
 package org.eclipse.jst.jsf.context.symbol.internal.provider;
 
@@ -91,8 +91,8 @@ public class IBoundedMapTypeDescriptorItemProvider
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached
-	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * This handles model notifications by calling {@link #updateChildren(Notification)} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged(Notification)}.
 	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
 	 * @generated

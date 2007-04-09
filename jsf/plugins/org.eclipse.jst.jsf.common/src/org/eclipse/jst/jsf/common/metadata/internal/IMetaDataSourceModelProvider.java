@@ -28,7 +28,7 @@ public interface IMetaDataSourceModelProvider extends IAdaptable{
 	 */
 	public IMetaDataLocator getLocator();
 	/**
-	 * @param IMetaDataLocator instance that located this model provider instance
+	 * @param locator instance that located this model provider instance
 	 */
 	public void setLocator(IMetaDataLocator locator);
 }

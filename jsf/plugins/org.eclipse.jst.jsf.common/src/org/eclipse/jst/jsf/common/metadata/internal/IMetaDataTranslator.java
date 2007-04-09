@@ -17,7 +17,7 @@ package org.eclipse.jst.jsf.common.metadata.internal;
  */
 public interface IMetaDataTranslator {
 	/**
-	 * @param perform translation using the IMetaDataModelMergeAssistant
+	 * @param assistant perform translation using the IMetaDataModelMergeAssistant
 	 */
 	public void translate(IMetaDataModelMergeAssistant assistant);
 }

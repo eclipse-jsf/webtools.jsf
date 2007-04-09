@@ -33,7 +33,7 @@ public interface ICMAnnotationAdvisor {
 	public ICMAnnotationSourceFileInfo getFileInfo();
 	/**
 	 * Set whether or not elements, attributes and property name querying is case sensitive or not.
-	 * @param boolean
+	 * @param val 
 	 */
 	public void setCaseSensitive(boolean val);
 	/**
