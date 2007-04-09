@@ -42,7 +42,7 @@ public class WebrootUtil {
 	 * "/filename.jsp" or "/folder/*";
 	 * 
 	 * @param path
-	 * @return
+	 * @return the web path
 	 */
 	public static String getWebPath(IPath path) {
 		String strWebrootPath = "";
@@ -63,7 +63,7 @@ public class WebrootUtil {
 	 * To see if a resource is under the webcontent folder.
 	 * 
 	 * @param resource
-	 * @return
+	 * @return true if resource is within the web content folder hierarchy
 	 */
 	public static boolean isUnderWebContentFolder(IResource resource) {
 		IPath webContentPath = getWebContentPath(resource.getProject());
@@ -96,7 +96,7 @@ public class WebrootUtil {
 	 * Return the name of the web content folder. i.e, "WebContent"
 	 * 
 	 * @param project
-	 * @return
+	 * @return the web content folder name
 	 */
 	public static String getWebContentFolderName(IProject project) {
 		IPath webContentPath = getWebContentPath(project);

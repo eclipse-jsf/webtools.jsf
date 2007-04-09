@@ -144,8 +144,9 @@ public class StringUtil {
 	/**
 	 * Determine whether a string is empty or not Example: null string -> return
 	 * true; Example: "" string -> return true; Otherwise, will return false;
+	 * @param str 
 	 * 
-	 * @return
+	 * @return true if str is null or empty
 	 */
 	public static boolean isEmptyString(String str) {
 		if (str == null || str.length() == 0) {

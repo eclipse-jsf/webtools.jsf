@@ -78,8 +78,7 @@ public class OpenPageAction extends Action implements IExecutableExtension {
 
 	/**
 	 * set the class name to open.
-	 * 
-	 * @param pageID
+	 * @param className 
 	 */
 	public void setPageName(String className) {
 		this.pageID = className;
@@ -88,7 +87,7 @@ public class OpenPageAction extends Action implements IExecutableExtension {
 	/**
 	 * get the current active editor
 	 * 
-	 * @return
+	 * @return the active editor part
 	 */
 	public static IEditorPart getActiveEditor() {
 		IEditorPart editor = null;
@@ -103,10 +102,16 @@ public class OpenPageAction extends Action implements IExecutableExtension {
 		return editor;
 	}
 
+	/**
+	 * @return stored selection
+	 */
 	public ISelection getSelection() {
 		return selection;
 	}
 
+	/**
+	 * @param selection
+	 */
 	public void setSelection(ISelection selection) {
 		this.selection = selection;
 	}

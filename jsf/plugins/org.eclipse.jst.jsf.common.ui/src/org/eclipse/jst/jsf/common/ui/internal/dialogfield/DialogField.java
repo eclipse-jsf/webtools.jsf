@@ -74,7 +74,7 @@ public interface DialogField {
 	 * Get attached data by key.
 	 * 
 	 * @param key
-	 * @return
+	 * @return the attached data object for key
 	 */
 	public abstract Object getAttachedData(Object key);
 

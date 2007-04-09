@@ -210,7 +210,7 @@ public class FavoriteConfigurations {
 	/**
 	 * Get a list of all the favorites stored in this file.
 	 * 
-	 * @return
+	 * @return list of favorites
 	 */
 	public String[] getFavoritesList() {
 		Object[] objs = _favorites.keySet().toArray();

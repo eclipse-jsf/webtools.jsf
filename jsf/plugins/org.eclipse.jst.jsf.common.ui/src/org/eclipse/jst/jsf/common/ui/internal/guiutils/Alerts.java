@@ -53,8 +53,7 @@ public class Alerts {
 	 * be used from the root plugin that has access to the resource bundle for
 	 * this plugin.
 	 * 
-	 * @param AbstractUIPlugin
-	 *            the name plugin.
+	 * @param plugin 
 	 * @param rb
 	 *            the resource bundle to use.
 	 */
@@ -351,7 +350,7 @@ public class Alerts {
 	 *            user
 	 * @param arg0 -
 	 *            arg to place into the resource bundle message.
-	 * @param arg0 -
+	 * @param arg1 -
 	 *            arg to place into the resource bundle message.
 	 * @param tt -
 	 *            exception to place in the details.
@@ -429,7 +428,7 @@ public class Alerts {
 	 * @param pluginId
 	 * @param message
 	 * @param tt
-	 * @return
+	 * @return the result of the operation
 	 */
 	public IStatus buildStackTraceStatus(int code, String pluginId,
 			String message, Throwable tt) {

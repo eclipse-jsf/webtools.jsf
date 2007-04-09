@@ -58,7 +58,7 @@ public class SourceFolderButtonDialogField extends StringButtonDialogField {
 	private IProject _project;
 
 	/**
-	 * @param adapter
+	 * @param project 
 	 */
 	public SourceFolderButtonDialogField(IProject project) {
 		super(null);

@@ -52,13 +52,13 @@ public abstract class CollapsableSection {
 	/**
 	 * Creates a class to be used to build the control for a collapseable area.
 	 * 
+	 * @param toolkit 
+	 * 
 	 * @param scomp
 	 *            the scrollable composite used inside the container. This is
 	 *            used to force resizing of the bars on dinking the control.
 	 * @param title
 	 *            the string to place next to the collapsable icon.
-	 * @param innerComposite
-	 *            this should be the composite to place this widget on.
 	 * @param bCollapsed
 	 *            should this area start collapsed?
 	 */

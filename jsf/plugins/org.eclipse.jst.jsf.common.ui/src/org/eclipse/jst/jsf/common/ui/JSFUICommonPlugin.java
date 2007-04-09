@@ -160,7 +160,7 @@ public class JSFUICommonPlugin extends AbstractUIPlugin implements ICommonConsta
 	/**
 	 * get the alerts objects associated with this plugin for alerting the user.
 	 * 
-	 * @return
+	 * @return the alerts object
 	 */
 	public static Alerts getAlerts() {
 		return _alerts;

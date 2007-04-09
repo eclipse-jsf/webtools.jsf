@@ -60,9 +60,9 @@ public class OverviewSection extends SectionPart {
 	protected FormEditor editor;
 
 	/**
-	 * @param parent
+	 * @param editorId 
+	 * @param managedForm 
 	 * @param toolkit
-	 * @param style
 	 */
 	public OverviewSection(String editorId, IManagedForm managedForm,
 			FormToolkit toolkit) {
@@ -101,7 +101,8 @@ public class OverviewSection extends SectionPart {
 	}
 
 	/**
-	 * @param parent
+	 * @param editor 
+	 * @param managedForm 
 	 * @param toolkit
 	 * @param style
 	 */

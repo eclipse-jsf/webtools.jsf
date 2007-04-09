@@ -70,7 +70,7 @@ public abstract class ResourceUtils {
 	 * 
 	 * @param key
 	 *            the key in the resource bundle.
-	 * @param theDefault
+	 * @param defaultValue
 	 *            default int to return if no value is found for the key.
 	 */
 	public int getValue(String key, int defaultValue) {
@@ -94,7 +94,7 @@ public abstract class ResourceUtils {
 	 * 
 	 * @param key
 	 *            the key in the resource bundle.
-	 * @param theDefault
+	 * @param defaultValue
 	 *            default long to return if no value is found for the key.
 	 */
 	public long getValue(String key, long defaultValue) {

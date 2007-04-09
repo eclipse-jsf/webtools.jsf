@@ -45,7 +45,7 @@ public class PackageButtonDialogField extends StringButtonDialogField {
 	private IPackageFragment _fCurrPackage;
 
 	/**
-	 * @param adapter
+	 * @param packageRoot 
 	 */
 	public PackageButtonDialogField(IPackageFragmentRoot packageRoot) {
 		super(null);
@@ -82,10 +82,6 @@ public class PackageButtonDialogField extends StringButtonDialogField {
 	 * 
 	 * @param root
 	 *            The new root.
-	 * @param canBeModified
-	 *            if <code>false</code> the source folder field can not be
-	 *            changed by the user. If <code>true</code> the field is
-	 *            editable
 	 */
 	public void setPackageFragmentRoot(IPackageFragmentRoot root) {
 		_fCurrRoot = root;

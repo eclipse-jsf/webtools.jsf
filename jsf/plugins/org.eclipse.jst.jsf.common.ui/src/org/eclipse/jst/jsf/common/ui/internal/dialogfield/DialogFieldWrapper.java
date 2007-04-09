@@ -33,7 +33,7 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
  * 
  * @author mengbo
  * @version 1.5
- * @see org.eclipse.jst.pagedesigner.properties.celleditors.CellEditorWrapper
+ * see CellEditorWrapper TODO: what relation to page designer?
  */
 
 public class DialogFieldWrapper implements DialogField, ISupportTextValue {

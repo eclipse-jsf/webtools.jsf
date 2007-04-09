@@ -103,7 +103,7 @@ public final class StyleCombo extends Composite {
 	 *                <ul>
 	 *                <li>ERROR_NULL_ARGUMENT - if the parent is null</li>
 	 *                </ul>
-	 * @exception org.eclipse.swt.org.eclipse.swt.SWTException
+	 * @exception org.eclipse.swt.SWTException
 	 *                <ul>
 	 *                <li>ERROR_THREAD_INVALID_ACCESS - if not called from the
 	 *                thread that created the parent</li>
@@ -112,7 +112,6 @@ public final class StyleCombo extends Composite {
 	 * @see SWT#BORDER
 	 * @see SWT#READ_ONLY
 	 * @see SWT#FLAT
-	 * @see Widget#getStyle()
 	 */
 	public StyleCombo(Composite parent, int style) {
 		super(parent, style = checkStyle(style));
@@ -215,7 +214,7 @@ public final class StyleCombo extends Composite {
 	 *                <ul>
 	 *                <li>ERROR_NULL_ARGUMENT - if the string is null</li>
 	 *                </ul>
-	 * @exception org.eclipse.swt.org.eclipse.swt.SWTException
+	 * @exception org.eclipse.swt.SWTException
 	 *                <ul>
 	 *                <li>ERROR_WIDGET_DISPOSED - if the receiver has been
 	 *                disposed</li>
@@ -254,7 +253,7 @@ public final class StyleCombo extends Composite {
 	 *                <li>ERROR_INVALID_RANGE - if the index is not between 0
 	 *                and the number of elements in the list (inclusive)</li>
 	 *                </ul>
-	 * @exception org.eclipse.swt.org.eclipse.swt.SWTException
+	 * @exception org.eclipse.swt.SWTException
 	 *                <ul>
 	 *                <li>ERROR_WIDGET_DISPOSED - if the receiver has been
 	 *                disposed</li>
@@ -285,7 +284,7 @@ public final class StyleCombo extends Composite {
 	 *                <ul>
 	 *                <li>ERROR_NULL_ARGUMENT - if the listener is null</li>
 	 *                </ul>
-	 * @exception org.eclipse.swt.org.eclipse.swt.SWTException
+	 * @exception org.eclipse.swt.SWTException
 	 *                <ul>
 	 *                <li>ERROR_WIDGET_DISPOSED - if the receiver has been
 	 *                disposed</li>
@@ -322,7 +321,7 @@ public final class StyleCombo extends Composite {
 	 *                <ul>
 	 *                <li>ERROR_NULL_ARGUMENT - if the listener is null</li>
 	 *                </ul>
-	 * @exception org.eclipse.swt.org.eclipse.swt.SWTException
+	 * @exception org.eclipse.swt.SWTException
 	 *                <ul>
 	 *                <li>ERROR_WIDGET_DISPOSED - if the receiver has been
 	 *                disposed</li>
@@ -332,7 +331,6 @@ public final class StyleCombo extends Composite {
 	 * 
 	 * @see SelectionListener
 	 * @see #removeSelectionListener
-	 * @see SelectionEvent
 	 */
 	public void addSelectionListener(SelectionListener listener1) {
 		checkWidget();
@@ -366,7 +364,7 @@ public final class StyleCombo extends Composite {
 	 * <code>deselectAll()</code>.
 	 * </p>
 	 * 
-	 * @exception org.eclipse.swt.org.eclipse.swt.SWTException
+	 * @exception org.eclipse.swt.SWTException
 	 *                <ul>
 	 *                <li>ERROR_WIDGET_DISPOSED - if the receiver has been
 	 *                disposed</li>
@@ -479,7 +477,7 @@ public final class StyleCombo extends Composite {
 	 * @param index
 	 *            the index of the item to deselect
 	 * 
-	 * @exception org.eclipse.swt.org.eclipse.swt.SWTException
+	 * @exception org.eclipse.swt.SWTException
 	 *                <ul>
 	 *                <li>ERROR_WIDGET_DISPOSED - if the receiver has been
 	 *                disposed</li>
@@ -499,7 +497,7 @@ public final class StyleCombo extends Composite {
 	 * <code>clearSelection()</code>.
 	 * </p>
 	 * 
-	 * @exception org.eclipse.swt.org.eclipse.swt.SWTException
+	 * @exception org.eclipse.swt.SWTException
 	 *                <ul>
 	 *                <li>ERROR_WIDGET_DISPOSED - if the receiver has been
 	 *                disposed</li>
@@ -600,7 +598,7 @@ public final class StyleCombo extends Composite {
 	 * 
 	 * @return whether or not the reciever is editable
 	 * 
-	 * @exception org.eclipse.swt.org.eclipse.swt.SWTException
+	 * @exception org.eclipse.swt.SWTException
 	 *                <ul>
 	 *                <li>ERROR_WIDGET_DISPOSED - if the receiver has been
 	 *                disposed</li>
@@ -628,7 +626,7 @@ public final class StyleCombo extends Composite {
 	 *                <li>ERROR_INVALID_RANGE - if the index is not between 0
 	 *                and the number of elements in the list minus 1 (inclusive)</li>
 	 *                </ul>
-	 * @exception org.eclipse.swt.org.eclipse.swt.SWTException
+	 * @exception org.eclipse.swt.SWTException
 	 *                <ul>
 	 *                <li>ERROR_WIDGET_DISPOSED - if the receiver has been
 	 *                disposed</li>
@@ -646,7 +644,7 @@ public final class StyleCombo extends Composite {
 	 * 
 	 * @return the number of items
 	 * 
-	 * @exception org.eclipse.swt.org.eclipse.swt.SWTException
+	 * @exception org.eclipse.swt.SWTException
 	 *                <ul>
 	 *                <li>ERROR_WIDGET_DISPOSED - if the receiver has been
 	 *                disposed</li>
@@ -665,7 +663,7 @@ public final class StyleCombo extends Composite {
 	 * 
 	 * @return the height of one item
 	 * 
-	 * @exception org.eclipse.swt.org.eclipse.swt.SWTException
+	 * @exception org.eclipse.swt.SWTException
 	 *                <ul>
 	 *                <li>ERROR_WIDGET_DISPOSED - if the receiver has been
 	 *                disposed</li>
@@ -688,7 +686,7 @@ public final class StyleCombo extends Composite {
 	 * 
 	 * @return the items in the receiver's list
 	 * 
-	 * @exception org.eclipse.swt.org.eclipse.swt.SWTException
+	 * @exception org.eclipse.swt.SWTException
 	 *                <ul>
 	 *                <li>ERROR_WIDGET_DISPOSED - if the receiver has been
 	 *                disposed</li>
@@ -728,7 +726,7 @@ public final class StyleCombo extends Composite {
 	 * 
 	 * @return a point representing the selection start and end
 	 * 
-	 * @exception org.eclipse.swt.org.eclipse.swt.SWTException
+	 * @exception org.eclipse.swt.SWTException
 	 *                <ul>
 	 *                <li>ERROR_WIDGET_DISPOSED - if the receiver has been
 	 *                disposed</li>
@@ -747,7 +745,7 @@ public final class StyleCombo extends Composite {
 	 * 
 	 * @return the index of the selected item
 	 * 
-	 * @exception org.eclipse.swt.org.eclipse.swt.SWTException
+	 * @exception org.eclipse.swt.SWTException
 	 *                <ul>
 	 *                <li>ERROR_WIDGET_DISPOSED - if the receiver has been
 	 *                disposed</li>

@@ -29,14 +29,10 @@ public abstract class DialogFieldGroup {
 
 	private IDialogFieldApplyListener _defaultApplyListener;
 
-	public DialogFieldGroup() {
-		// initialize();
-	}
-
 	/**
 	 * set default handler, should be called before <code>initialize()</code>
+	 * @param changelistener 
 	 * 
-	 * @param applylistener
 	 */
 	public void setDefaultChangeListener(
 			IDialogFieldChangeListener changelistener) {

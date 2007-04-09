@@ -481,7 +481,7 @@ public class DialogFieldBase implements DialogField {
 	 * Get attached data by key.
 	 * 
 	 * @param key
-	 * @return
+	 * @return the attached data object for key
 	 */
 	public Object getAttachedData(Object key) {
 		if (_attachedData != null) {

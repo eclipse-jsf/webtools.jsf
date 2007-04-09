@@ -55,10 +55,6 @@ public class SWTUtils {
 	 * 
 	 * @param parent
 	 *            the composite in which to create the checkbox
-	 * @param label
-	 *            the string to set into the checkbox
-	 * @param numColumns
-	 *            the number of columns the new checkbox is to occupy
 	 * @return the new checkbox
 	 */
 	public static Button createCheckBox(Composite parent) {
@@ -185,8 +181,7 @@ public class SWTUtils {
 	 * 
 	 * @param parent
 	 *            the composite in which to create the combo
-	 * @param items
-	 *            the items in the combo
+	 * @param tokenString 
 	 * @param numColumns
 	 *            the number of columns the new combo is to occupy
 	 * @param minWidth
@@ -366,7 +361,7 @@ public class SWTUtils {
 	 * @param horizontalSpan
 	 *            the number of columns this group should span on the parent
 	 *            composite.
-	 * @param fill
+	 * @param gridDataFill
 	 *            the fill style of the new group -- set to for filling just
 	 *            around the object: GridData.BEGINNING | GridData.CENTER
 	 * @return the newly created group
@@ -506,7 +501,7 @@ public class SWTUtils {
 	 * 
 	 * @param parent
 	 *            the parent for the new button
-	 * @param label
+	 * @param theImage
 	 *            the label for the new button
 	 * @param widthHint
 	 *            use this width for the button.
@@ -594,7 +589,7 @@ public class SWTUtils {
 	 *            the parent for the new label
 	 * @param numColumns
 	 *            the number of columns for the new composite
-	 * @param int
+	 * @param minWidth
 	 *            minimum width of spacer
 	 */
 	public static void createSpacer(Composite parent, int numColumns,
@@ -957,8 +952,6 @@ public class SWTUtils {
 	 *            the items in the list
 	 * @param bmulti
 	 *            whether multiple item selection is allowed
-	 * @param verticalSpan
-	 *            the number of rows the list box is to occupy
 	 * @return the new list
 	 */
 	public static List createList(Composite parent, int numColumns,
@@ -1081,6 +1074,7 @@ public class SWTUtils {
 		}
 
 		public void controlMoved(ControlEvent e) {
+		    // nothing for move
 		}
 	};
 

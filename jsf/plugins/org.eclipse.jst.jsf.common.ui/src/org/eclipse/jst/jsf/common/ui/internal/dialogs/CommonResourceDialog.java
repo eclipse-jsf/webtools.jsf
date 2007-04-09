@@ -100,7 +100,7 @@ public class CommonResourceDialog extends TreeViewerSelectionDialog {
 		}
 
 		/**
-		 * @see ITreeContentProvider#getElements
+		 * @see org.eclipse.jface.viewers.IStructuredContentProvider#getElements(Object)
 		 */
 		public Object[] getElements(Object element) {
 			return getChildren(element);
@@ -124,7 +124,7 @@ public class CommonResourceDialog extends TreeViewerSelectionDialog {
 		}
 
 		/**
-		 * @see IContentProvider#inputChanged
+		 * @see org.eclipse.jface.viewers.IContentProvider#inputChanged(Viewer, Object, Object)
 		 */
 		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
             // no viewer change support required
@@ -235,7 +235,8 @@ public class CommonResourceDialog extends TreeViewerSelectionDialog {
 	 * include IFolder, IProject, IFile, user can provide
 	 * 
 	 * @param parentShell
-	 * @param project
+	 * @param folder 
+	 * @param style 
 	 */
 	public CommonResourceDialog(Shell parentShell, IFolder folder, int style) {
 		this(parentShell, (folder == null ? null : folder.getProject()), style);
@@ -318,8 +319,8 @@ public class CommonResourceDialog extends TreeViewerSelectionDialog {
 	}
 
 	/**
-	 * @param _suffixs
-	 *            The _suffixs to set.
+	 * @param suffixs
+	 *            The suffixs to set.
 	 */
 	public void setSuffixs(String[] suffixs) {
 		this._suffixs = convertTolowercase(suffixs);

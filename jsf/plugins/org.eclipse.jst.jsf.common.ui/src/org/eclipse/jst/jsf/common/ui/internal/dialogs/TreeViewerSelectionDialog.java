@@ -121,9 +121,7 @@ public abstract class TreeViewerSelectionDialog extends SelectionDialog {
 
 	/**
 	 * Returns a new drill down viewer for this dialog.
-	 * 
-	 * @param heightHint -
-	 *            height hint for the drill down composite
+	 * @param parent 
 	 */
 	protected void createTreeViewer(Composite parent) {
 		// Create drill down
@@ -195,9 +193,7 @@ public abstract class TreeViewerSelectionDialog extends SelectionDialog {
 
 	/**
 	 * Sets the selected existing container.
-	 * 
-	 * @param container -
-	 *            the current selected container.
+	 * @param selection 
 	 */
 	public void setSelectedElement(Object[] selection) {
 		// Expand to and select the specified container

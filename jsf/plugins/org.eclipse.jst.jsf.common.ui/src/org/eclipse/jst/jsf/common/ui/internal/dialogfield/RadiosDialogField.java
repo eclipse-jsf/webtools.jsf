@@ -45,7 +45,7 @@ public class RadiosDialogField extends DialogFieldBase {
 	private boolean _fireEvent = true;
 
 	/**
-	 * @param formToolkit
+	 * Default constructor
 	 */
 	public RadiosDialogField() {
 		super();

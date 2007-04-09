@@ -90,7 +90,7 @@ public class IntroductionSection extends SectionPart {
 	 *            id of the editor this page is for.
 	 * @param managedForm
 	 * @param toolkit
-	 * @param helpContextId
+	 * @param contextId 
 	 * @param helpTooltip
 	 */
 	public IntroductionSection(String editorId, IManagedForm managedForm,

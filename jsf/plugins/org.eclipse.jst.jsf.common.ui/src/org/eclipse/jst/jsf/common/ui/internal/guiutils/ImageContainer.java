@@ -38,7 +38,6 @@ public class ImageContainer extends Composite {
 
 	/**
 	 * @param parent
-	 * @param style
 	 */
 	public ImageContainer(Composite parent) {
 		super(parent, SWT.NONE);// SWT.NO_BACKGROUND );//|
