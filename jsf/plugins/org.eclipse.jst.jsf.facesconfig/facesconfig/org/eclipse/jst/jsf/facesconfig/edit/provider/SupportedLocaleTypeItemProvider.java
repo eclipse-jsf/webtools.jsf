@@ -33,7 +33,7 @@ import org.eclipse.jst.jsf.facesconfig.emf.SupportedLocaleType;
 
 /**
  * This is the item provider adapter for a
- * {@link org.eclipse.wtp.jsf.facesconfig.emf.SupportedLocaleType} object. <!--
+ * {@link org.eclipse.jst.jsf.facesconfig.emf.SupportedLocaleType} object. <!--
  * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
@@ -141,8 +141,8 @@ public class SupportedLocaleTypeItemProvider extends ItemProviderAdapter
     }
 
     /**
-     * This handles model notifications by calling {@link #updateChildren} to update any cached
-     * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+     * This handles model notifications by calling {@link #updateChildren(Notification)} to update any cached
+     * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged(Notification)}.
      * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
      * @generated

@@ -56,6 +56,7 @@ public class AttributeNameTypeItemProvider
     /**
      * This constructs an instance from a factory and a notifier.
      * <!-- begin-user-doc -->
+     * @param adapterFactory 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -82,6 +83,7 @@ public class AttributeNameTypeItemProvider
     /**
      * This adds a property descriptor for the Text Content feature.
      * <!-- begin-user-doc -->
+     * @param object 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -104,6 +106,7 @@ public class AttributeNameTypeItemProvider
     /**
      * This adds a property descriptor for the Id feature.
      * <!-- begin-user-doc -->
+     * @param object 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -147,8 +150,8 @@ public class AttributeNameTypeItemProvider
     }
 
     /**
-     * This handles model notifications by calling {@link #updateChildren} to update any cached
-     * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+     * This handles model notifications by calling {@link #updateChildren(Notification)} to update any cached
+     * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged(Notification)}.
      * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
      * @generated

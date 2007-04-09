@@ -50,6 +50,7 @@ public class AttributeExtensionTypeItemProvider
     /**
      * This constructs an instance from a factory and a notifier.
      * <!-- begin-user-doc -->
+     * @param adapterFactory 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -95,8 +96,8 @@ public class AttributeExtensionTypeItemProvider
     }
 
     /**
-     * This handles model notifications by calling {@link #updateChildren} to update any cached
-     * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+     * This handles model notifications by calling {@link #updateChildren(Notification)} to update any cached
+     * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged(Notification)}.
      * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
      * @generated

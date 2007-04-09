@@ -55,19 +55,24 @@ public class FacesConfigResourceFactory extends TranslatorResourceFactory {
 
 	/**
 	 * register using the default renderer factory.
-	 * @see #registerWith(RendererFactory)
+	 * @see #registerWith(String, RendererFactory)
 	 */
 	public static void register() {
 		register((String)null);
 	}
 
+	/**
+	 * Register the sFileName with the default renderer factory
+	 * @param sFileName
+	 */
 	public static void register(String sFileName) {
 		registerWith(sFileName, FacesRendererFactory.INSTANCE/*RendererFactory.getDefaultRendererFactory()*/);
 	}
 
 	/**
 	 * register using the default renderer factory.
-	 * @see #registerWith(RendererFactory)
+	 * @param aRegistry 
+	 * @see #registerWith(String, RendererFactory)
 	 */
 	public static void register(FileNameResourceFactoryRegistry aRegistry) {
 		aRegistry.registerLastFileSegment("faces-config.xml", new FacesConfigResourceFactory(RendererFactory.getDefaultRendererFactory()));//$NON-NLS-1$
@@ -75,6 +80,8 @@ public class FacesConfigResourceFactory extends TranslatorResourceFactory {
 	
 	/**
 	 * Register myself with the Resource.Factory.Registry
+	 * @param sFileName 
+	 * @param aRendererFactory 
 	 */
 	public static void registerWith(String sFileName, RendererFactory aRendererFactory) {
 		if (sFileName != null) {
@@ -84,6 +91,10 @@ public class FacesConfigResourceFactory extends TranslatorResourceFactory {
 		}
 	}
 
+	/**
+	 * @param uri
+	 * @return the the factory associated with uri
+	 */
 	public static Resource.Factory getRegisteredFactory(URI uri) {
 		return WTPResourceFactoryRegistry.INSTANCE.getFactory(uri);
 	}

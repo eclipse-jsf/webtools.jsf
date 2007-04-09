@@ -29,7 +29,7 @@ import org.xml.sax.SAXException;
  * <!-- begin-user-doc -->
  * The <b>Resource </b> associated with the package.
  * <!-- end-user-doc -->
- * @see webFacesconfig10.util.FacesConfigResourceFactoryImpl
+ * @see FacesConfigResourceFactory
  * @generated
  */
 public class FacesConfigResourceImpl extends TranslatorResourceImpl implements IFacesConfigResource {

@@ -32,7 +32,7 @@ import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 
 /**
  * This is the item provider adapter for a
- * {@link org.eclipse.wtp.jsf.facesconfig.emf.ActionListenerType} object. <!--
+ * {@link org.eclipse.jst.jsf.facesconfig.emf.ActionListenerType} object. <!--
  * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
@@ -46,8 +46,10 @@ public class ActionListenerTypeItemProvider extends ItemProviderAdapter
 	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
 
 	/**
-	 * This constructs an instance from a factory and a notifier. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * This constructs an instance from a factory and a notifier. 
+	 * <!--begin-user-doc --> 
+     * @param adapterFactory 
+	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -56,8 +58,9 @@ public class ActionListenerTypeItemProvider extends ItemProviderAdapter
     }
 
 	/**
-	 * This returns the property descriptors for the adapted class. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * This returns the property descriptors for the adapted class. 
+	 * <!-- begin-user-doc --> 
+	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -74,6 +77,7 @@ public class ActionListenerTypeItemProvider extends ItemProviderAdapter
 	/**
 	 * This adds a property descriptor for the Text Content feature. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
+	 * @param object 
 	 * 
 	 * @generated
 	 */
@@ -97,6 +101,7 @@ public class ActionListenerTypeItemProvider extends ItemProviderAdapter
      * This adds a property descriptor for the Id feature.
      * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
+     * @param object 
      * @generated
      */
 	protected void addIdPropertyDescriptor(Object object) {
@@ -139,8 +144,8 @@ public class ActionListenerTypeItemProvider extends ItemProviderAdapter
     }
 
     /**
-     * This handles model notifications by calling {@link #updateChildren} to update any cached
-     * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+     * This handles model notifications by calling {@link #updateChildren(Notification)} to update any cached
+     * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged(Notification)}.
      * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
      * @generated

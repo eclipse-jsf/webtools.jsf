@@ -22,7 +22,8 @@ import org.eclipse.wst.common.internal.emf.resource.Translator;
  */
 public class ApplicationFactoryTranslator extends Translator {
 	/**
-	 * @param node
+	 * @param domNameAndPath 
+	 * @param aFeature 
 	 */
 	public ApplicationFactoryTranslator(String domNameAndPath, EStructuralFeature aFeature) {
 		super(domNameAndPath, aFeature);

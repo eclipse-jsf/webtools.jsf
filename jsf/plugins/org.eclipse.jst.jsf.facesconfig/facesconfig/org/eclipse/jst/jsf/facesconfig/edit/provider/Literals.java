@@ -5,13 +5,19 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 
+/**
+ * Literal package types
+ * 
+ * @author cbateman
+ *
+ */
 public interface Literals {
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.ActionListenerTypeImpl <em>Action Listener Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ActionListenerTypeImpl <em>Action Listener Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.ActionListenerTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesconfigPackageImpl#getActionListenerType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.ActionListenerTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getActionListenerType()
 	 * @generated
 	 */
 	EClass ACTION_LISTENER_TYPE = FacesConfigPackage.eINSTANCE.getActionListenerType();
@@ -33,11 +39,11 @@ public interface Literals {
 	EAttribute ACTION_LISTENER_TYPE__ID = FacesConfigPackage.eINSTANCE.getActionListenerType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.ApplicationFactoryTypeImpl <em>Application Factory Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ApplicationFactoryTypeImpl <em>Application Factory Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.ApplicationFactoryTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getApplicationFactoryType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.ApplicationFactoryTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getApplicationFactoryType()
 	 * @generated
 	 */
 	EClass APPLICATION_FACTORY_TYPE = FacesConfigPackage.eINSTANCE.getApplicationFactoryType();
@@ -59,11 +65,11 @@ public interface Literals {
 	EAttribute APPLICATION_FACTORY_TYPE__ID = FacesConfigPackage.eINSTANCE.getApplicationFactoryType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.ApplicationTypeImpl <em>Application Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ApplicationTypeImpl <em>Application Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.ApplicationTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getApplicationType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.ApplicationTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getApplicationType()
 	 * @generated
 	 */
 	EClass APPLICATION_TYPE = FacesConfigPackage.eINSTANCE.getApplicationType();
@@ -149,11 +155,11 @@ public interface Literals {
 	EAttribute APPLICATION_TYPE__ID = FacesConfigPackage.eINSTANCE.getApplicationType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.AttributeClassTypeImpl <em>Attribute Class Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.AttributeClassTypeImpl <em>Attribute Class Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.AttributeClassTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getAttributeClassType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.AttributeClassTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getAttributeClassType()
 	 * @generated
 	 */
 	EClass ATTRIBUTE_CLASS_TYPE = FacesConfigPackage.eINSTANCE.getAttributeClassType();
@@ -175,21 +181,21 @@ public interface Literals {
 	EAttribute ATTRIBUTE_CLASS_TYPE__ID = FacesConfigPackage.eINSTANCE.getAttributeClassType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.AttributeExtensionTypeImpl <em>Attribute Extension Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.AttributeExtensionTypeImpl <em>Attribute Extension Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.AttributeExtensionTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getAttributeExtensionType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.AttributeExtensionTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getAttributeExtensionType()
 	 * @generated
 	 */
 	EClass ATTRIBUTE_EXTENSION_TYPE = FacesConfigPackage.eINSTANCE.getAttributeExtensionType();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.AttributeNameTypeImpl <em>Attribute Name Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.AttributeNameTypeImpl <em>Attribute Name Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.AttributeNameTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getAttributeNameType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.AttributeNameTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getAttributeNameType()
 	 * @generated
 	 */
 	EClass ATTRIBUTE_NAME_TYPE = FacesConfigPackage.eINSTANCE.getAttributeNameType();
@@ -211,11 +217,11 @@ public interface Literals {
 	EAttribute ATTRIBUTE_NAME_TYPE__ID = FacesConfigPackage.eINSTANCE.getAttributeNameType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.AttributeTypeImpl <em>Attribute Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.AttributeTypeImpl <em>Attribute Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.AttributeTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getAttributeType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.AttributeTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getAttributeType()
 	 * @generated
 	 */
 	EClass ATTRIBUTE_TYPE = FacesConfigPackage.eINSTANCE.getAttributeType();
@@ -293,11 +299,11 @@ public interface Literals {
 	EAttribute ATTRIBUTE_TYPE__ID = FacesConfigPackage.eINSTANCE.getAttributeType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.ComponentClassTypeImpl <em>Component Class Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ComponentClassTypeImpl <em>Component Class Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.ComponentClassTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getComponentClassType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.ComponentClassTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getComponentClassType()
 	 * @generated
 	 */
 	EClass COMPONENT_CLASS_TYPE = FacesConfigPackage.eINSTANCE.getComponentClassType();
@@ -319,21 +325,21 @@ public interface Literals {
 	EAttribute COMPONENT_CLASS_TYPE__ID = FacesConfigPackage.eINSTANCE.getComponentClassType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.ComponentExtensionTypeImpl <em>Component Extension Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ComponentExtensionTypeImpl <em>Component Extension Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.ComponentExtensionTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getComponentExtensionType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.ComponentExtensionTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getComponentExtensionType()
 	 * @generated
 	 */
 	EClass COMPONENT_EXTENSION_TYPE = FacesConfigPackage.eINSTANCE.getComponentExtensionType();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.ComponentFamilyTypeImpl <em>Component Family Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ComponentFamilyTypeImpl <em>Component Family Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.ComponentFamilyTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getComponentFamilyType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.ComponentFamilyTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getComponentFamilyType()
 	 * @generated
 	 */
 	EClass COMPONENT_FAMILY_TYPE = FacesConfigPackage.eINSTANCE.getComponentFamilyType();
@@ -355,11 +361,11 @@ public interface Literals {
 	EAttribute COMPONENT_FAMILY_TYPE__ID = FacesConfigPackage.eINSTANCE.getComponentFamilyType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.ComponentTypeImpl <em>Component Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ComponentTypeImpl <em>Component Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.ComponentTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getComponentType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.ComponentTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getComponentType()
 	 * @generated
 	 */
 	EClass COMPONENT_TYPE = FacesConfigPackage.eINSTANCE.getComponentType();
@@ -445,11 +451,11 @@ public interface Literals {
 	EAttribute COMPONENT_TYPE__ID = FacesConfigPackage.eINSTANCE.getComponentType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.ComponentTypeTypeImpl <em>Component Type Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ComponentTypeTypeImpl <em>Component Type Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.ComponentTypeTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getComponentTypeType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.ComponentTypeTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getComponentTypeType()
 	 * @generated
 	 */
 	EClass COMPONENT_TYPE_TYPE = FacesConfigPackage.eINSTANCE.getComponentTypeType();
@@ -471,11 +477,11 @@ public interface Literals {
 	EAttribute COMPONENT_TYPE_TYPE__ID = FacesConfigPackage.eINSTANCE.getComponentTypeType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.ConverterClassTypeImpl <em>Converter Class Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ConverterClassTypeImpl <em>Converter Class Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.ConverterClassTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getConverterClassType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.ConverterClassTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getConverterClassType()
 	 * @generated
 	 */
 	EClass CONVERTER_CLASS_TYPE = FacesConfigPackage.eINSTANCE.getConverterClassType();
@@ -497,11 +503,11 @@ public interface Literals {
 	EAttribute CONVERTER_CLASS_TYPE__ID = FacesConfigPackage.eINSTANCE.getConverterClassType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.ConverterForClassTypeImpl <em>Converter For Class Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ConverterForClassTypeImpl <em>Converter For Class Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.ConverterForClassTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getConverterForClassType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.ConverterForClassTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getConverterForClassType()
 	 * @generated
 	 */
 	EClass CONVERTER_FOR_CLASS_TYPE = FacesConfigPackage.eINSTANCE.getConverterForClassType();
@@ -523,11 +529,11 @@ public interface Literals {
 	EAttribute CONVERTER_FOR_CLASS_TYPE__ID = FacesConfigPackage.eINSTANCE.getConverterForClassType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.ConverterIdTypeImpl <em>Converter Id Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ConverterIdTypeImpl <em>Converter Id Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.ConverterIdTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getConverterIdType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.ConverterIdTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getConverterIdType()
 	 * @generated
 	 */
 	EClass CONVERTER_ID_TYPE = FacesConfigPackage.eINSTANCE.getConverterIdType();
@@ -549,11 +555,11 @@ public interface Literals {
 	EAttribute CONVERTER_ID_TYPE__ID = FacesConfigPackage.eINSTANCE.getConverterIdType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.ConverterTypeImpl <em>Converter Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ConverterTypeImpl <em>Converter Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.ConverterTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getConverterType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.ConverterTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getConverterType()
 	 * @generated
 	 */
 	EClass CONVERTER_TYPE = FacesConfigPackage.eINSTANCE.getConverterType();
@@ -631,11 +637,11 @@ public interface Literals {
 	EAttribute CONVERTER_TYPE__ID = FacesConfigPackage.eINSTANCE.getConverterType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.DefaultLocaleTypeImpl <em>Default Locale Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.DefaultLocaleTypeImpl <em>Default Locale Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.DefaultLocaleTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getDefaultLocaleType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.DefaultLocaleTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getDefaultLocaleType()
 	 * @generated
 	 */
 	EClass DEFAULT_LOCALE_TYPE = FacesConfigPackage.eINSTANCE.getDefaultLocaleType();
@@ -657,11 +663,11 @@ public interface Literals {
 	EAttribute DEFAULT_LOCALE_TYPE__ID = FacesConfigPackage.eINSTANCE.getDefaultLocaleType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.DefaultRenderKitIdTypeImpl <em>Default Render Kit Id Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.DefaultRenderKitIdTypeImpl <em>Default Render Kit Id Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.DefaultRenderKitIdTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getDefaultRenderKitIdType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.DefaultRenderKitIdTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getDefaultRenderKitIdType()
 	 * @generated
 	 */
 	EClass DEFAULT_RENDER_KIT_ID_TYPE = FacesConfigPackage.eINSTANCE.getDefaultRenderKitIdType();
@@ -683,11 +689,11 @@ public interface Literals {
 	EAttribute DEFAULT_RENDER_KIT_ID_TYPE__ID = FacesConfigPackage.eINSTANCE.getDefaultRenderKitIdType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.DefaultValueTypeImpl <em>Default Value Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.DefaultValueTypeImpl <em>Default Value Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.DefaultValueTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getDefaultValueType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.DefaultValueTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getDefaultValueType()
 	 * @generated
 	 */
 	EClass DEFAULT_VALUE_TYPE = FacesConfigPackage.eINSTANCE.getDefaultValueType();
@@ -709,11 +715,11 @@ public interface Literals {
 	EAttribute DEFAULT_VALUE_TYPE__ID = FacesConfigPackage.eINSTANCE.getDefaultValueType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.DescriptionTypeImpl <em>Description Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.DescriptionTypeImpl <em>Description Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.DescriptionTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getDescriptionType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.DescriptionTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getDescriptionType()
 	 * @generated
 	 */
 	EClass DESCRIPTION_TYPE = FacesConfigPackage.eINSTANCE.getDescriptionType();
@@ -743,11 +749,11 @@ public interface Literals {
 	EAttribute DESCRIPTION_TYPE__ID = FacesConfigPackage.eINSTANCE.getDescriptionType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.DisplayNameTypeImpl <em>Display Name Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.DisplayNameTypeImpl <em>Display Name Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.DisplayNameTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getDisplayNameType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.DisplayNameTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getDisplayNameType()
 	 * @generated
 	 */
 	EClass DISPLAY_NAME_TYPE = FacesConfigPackage.eINSTANCE.getDisplayNameType();
@@ -777,11 +783,11 @@ public interface Literals {
 	EAttribute DISPLAY_NAME_TYPE__ID = FacesConfigPackage.eINSTANCE.getDisplayNameType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.DocumentRootImpl <em>Document Root</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.DocumentRootImpl <em>Document Root</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.DocumentRootImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getDocumentRoot()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.DocumentRootImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getDocumentRoot()
 	 * @generated
 	 */
 	EClass DOCUMENT_ROOT = FacesConfigPackage.eINSTANCE.getDocumentRoot();
@@ -1451,11 +1457,11 @@ public interface Literals {
 	EReference DOCUMENT_ROOT__VIEW_HANDLER = FacesConfigPackage.eINSTANCE.getDocumentRoot_ViewHandler();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigTypeImpl <em>Faces Config Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigTypeImpl <em>Faces Config Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getFacesConfigType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getFacesConfigType()
 	 * @generated
 	 */
 	EClass FACES_CONFIG_TYPE = FacesConfigPackage.eINSTANCE.getFacesConfigType();
@@ -1557,11 +1563,11 @@ public interface Literals {
 	EAttribute FACES_CONFIG_TYPE__ID = FacesConfigPackage.eINSTANCE.getFacesConfigType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesContextFactoryTypeImpl <em>Faces Context Factory Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.FacesContextFactoryTypeImpl <em>Faces Context Factory Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesContextFactoryTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getFacesContextFactoryType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesContextFactoryTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getFacesContextFactoryType()
 	 * @generated
 	 */
 	EClass FACES_CONTEXT_FACTORY_TYPE = FacesConfigPackage.eINSTANCE.getFacesContextFactoryType();
@@ -1583,21 +1589,21 @@ public interface Literals {
 	EAttribute FACES_CONTEXT_FACTORY_TYPE__ID = FacesConfigPackage.eINSTANCE.getFacesContextFactoryType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.FacetExtensionTypeImpl <em>Facet Extension Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.FacetExtensionTypeImpl <em>Facet Extension Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacetExtensionTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getFacetExtensionType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacetExtensionTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getFacetExtensionType()
 	 * @generated
 	 */
 	EClass FACET_EXTENSION_TYPE = FacesConfigPackage.eINSTANCE.getFacetExtensionType();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.FacetNameTypeImpl <em>Facet Name Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.FacetNameTypeImpl <em>Facet Name Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacetNameTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getFacetNameType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacetNameTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getFacetNameType()
 	 * @generated
 	 */
 	EClass FACET_NAME_TYPE = FacesConfigPackage.eINSTANCE.getFacetNameType();
@@ -1619,11 +1625,11 @@ public interface Literals {
 	EAttribute FACET_NAME_TYPE__ID = FacesConfigPackage.eINSTANCE.getFacetNameType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.FacetTypeImpl <em>Facet Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.FacetTypeImpl <em>Facet Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacetTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getFacetType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacetTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getFacetType()
 	 * @generated
 	 */
 	EClass FACET_TYPE = FacesConfigPackage.eINSTANCE.getFacetType();
@@ -1677,11 +1683,11 @@ public interface Literals {
 	EAttribute FACET_TYPE__ID = FacesConfigPackage.eINSTANCE.getFacetType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.FactoryTypeImpl <em>Factory Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.FactoryTypeImpl <em>Factory Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FactoryTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getFactoryType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FactoryTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getFactoryType()
 	 * @generated
 	 */
 	EClass FACTORY_TYPE = FacesConfigPackage.eINSTANCE.getFactoryType();
@@ -1727,11 +1733,11 @@ public interface Literals {
 	EAttribute FACTORY_TYPE__ID = FacesConfigPackage.eINSTANCE.getFactoryType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.FromActionTypeImpl <em>From Action Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.FromActionTypeImpl <em>From Action Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FromActionTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getFromActionType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FromActionTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getFromActionType()
 	 * @generated
 	 */
 	EClass FROM_ACTION_TYPE = FacesConfigPackage.eINSTANCE.getFromActionType();
@@ -1753,11 +1759,11 @@ public interface Literals {
 	EAttribute FROM_ACTION_TYPE__ID = FacesConfigPackage.eINSTANCE.getFromActionType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.FromOutcomeTypeImpl <em>From Outcome Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.FromOutcomeTypeImpl <em>From Outcome Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FromOutcomeTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getFromOutcomeType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FromOutcomeTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getFromOutcomeType()
 	 * @generated
 	 */
 	EClass FROM_OUTCOME_TYPE = FacesConfigPackage.eINSTANCE.getFromOutcomeType();
@@ -1779,11 +1785,11 @@ public interface Literals {
 	EAttribute FROM_OUTCOME_TYPE__ID = FacesConfigPackage.eINSTANCE.getFromOutcomeType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.FromViewIdTypeImpl <em>From View Id Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.FromViewIdTypeImpl <em>From View Id Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FromViewIdTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getFromViewIdType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FromViewIdTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getFromViewIdType()
 	 * @generated
 	 */
 	EClass FROM_VIEW_ID_TYPE = FacesConfigPackage.eINSTANCE.getFromViewIdType();
@@ -1805,11 +1811,11 @@ public interface Literals {
 	EAttribute FROM_VIEW_ID_TYPE__ID = FacesConfigPackage.eINSTANCE.getFromViewIdType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.IconTypeImpl <em>Icon Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.IconTypeImpl <em>Icon Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.IconTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getIconType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.IconTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getIconType()
 	 * @generated
 	 */
 	EClass ICON_TYPE = FacesConfigPackage.eINSTANCE.getIconType();
@@ -1847,11 +1853,11 @@ public interface Literals {
 	EAttribute ICON_TYPE__ID = FacesConfigPackage.eINSTANCE.getIconType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.KeyClassTypeImpl <em>Key Class Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.KeyClassTypeImpl <em>Key Class Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.KeyClassTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getKeyClassType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.KeyClassTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getKeyClassType()
 	 * @generated
 	 */
 	EClass KEY_CLASS_TYPE = FacesConfigPackage.eINSTANCE.getKeyClassType();
@@ -1873,11 +1879,11 @@ public interface Literals {
 	EAttribute KEY_CLASS_TYPE__ID = FacesConfigPackage.eINSTANCE.getKeyClassType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.KeyTypeImpl <em>Key Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.KeyTypeImpl <em>Key Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.KeyTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getKeyType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.KeyTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getKeyType()
 	 * @generated
 	 */
 	EClass KEY_TYPE = FacesConfigPackage.eINSTANCE.getKeyType();
@@ -1899,11 +1905,11 @@ public interface Literals {
 	EAttribute KEY_TYPE__ID = FacesConfigPackage.eINSTANCE.getKeyType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.LargeIconTypeImpl <em>Large Icon Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.LargeIconTypeImpl <em>Large Icon Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.LargeIconTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getLargeIconType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.LargeIconTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getLargeIconType()
 	 * @generated
 	 */
 	EClass LARGE_ICON_TYPE = FacesConfigPackage.eINSTANCE.getLargeIconType();
@@ -1925,11 +1931,11 @@ public interface Literals {
 	EAttribute LARGE_ICON_TYPE__ID = FacesConfigPackage.eINSTANCE.getLargeIconType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.LifecycleFactoryTypeImpl <em>Lifecycle Factory Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.LifecycleFactoryTypeImpl <em>Lifecycle Factory Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.LifecycleFactoryTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getLifecycleFactoryType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.LifecycleFactoryTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getLifecycleFactoryType()
 	 * @generated
 	 */
 	EClass LIFECYCLE_FACTORY_TYPE = FacesConfigPackage.eINSTANCE.getLifecycleFactoryType();
@@ -1951,11 +1957,11 @@ public interface Literals {
 	EAttribute LIFECYCLE_FACTORY_TYPE__ID = FacesConfigPackage.eINSTANCE.getLifecycleFactoryType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.LifecycleTypeImpl <em>Lifecycle Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.LifecycleTypeImpl <em>Lifecycle Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.LifecycleTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getLifecycleType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.LifecycleTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getLifecycleType()
 	 * @generated
 	 */
 	EClass LIFECYCLE_TYPE = FacesConfigPackage.eINSTANCE.getLifecycleType();
@@ -1977,11 +1983,11 @@ public interface Literals {
 	EAttribute LIFECYCLE_TYPE__ID = FacesConfigPackage.eINSTANCE.getLifecycleType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.ListEntriesTypeImpl <em>List Entries Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ListEntriesTypeImpl <em>List Entries Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.ListEntriesTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getListEntriesType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.ListEntriesTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getListEntriesType()
 	 * @generated
 	 */
 	EClass LIST_ENTRIES_TYPE = FacesConfigPackage.eINSTANCE.getListEntriesType();
@@ -2019,11 +2025,11 @@ public interface Literals {
 	EAttribute LIST_ENTRIES_TYPE__ID = FacesConfigPackage.eINSTANCE.getListEntriesType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.LocaleConfigTypeImpl <em>Locale Config Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.LocaleConfigTypeImpl <em>Locale Config Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.LocaleConfigTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getLocaleConfigType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.LocaleConfigTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getLocaleConfigType()
 	 * @generated
 	 */
 	EClass LOCALE_CONFIG_TYPE = FacesConfigPackage.eINSTANCE.getLocaleConfigType();
@@ -2053,11 +2059,11 @@ public interface Literals {
 	EAttribute LOCALE_CONFIG_TYPE__ID = FacesConfigPackage.eINSTANCE.getLocaleConfigType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.ManagedBeanClassTypeImpl <em>Managed Bean Class Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ManagedBeanClassTypeImpl <em>Managed Bean Class Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.ManagedBeanClassTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getManagedBeanClassType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.ManagedBeanClassTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getManagedBeanClassType()
 	 * @generated
 	 */
 	EClass MANAGED_BEAN_CLASS_TYPE = FacesConfigPackage.eINSTANCE.getManagedBeanClassType();
@@ -2079,11 +2085,11 @@ public interface Literals {
 	EAttribute MANAGED_BEAN_CLASS_TYPE__ID = FacesConfigPackage.eINSTANCE.getManagedBeanClassType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.ManagedBeanNameTypeImpl <em>Managed Bean Name Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ManagedBeanNameTypeImpl <em>Managed Bean Name Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.ManagedBeanNameTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getManagedBeanNameType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.ManagedBeanNameTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getManagedBeanNameType()
 	 * @generated
 	 */
 	EClass MANAGED_BEAN_NAME_TYPE = FacesConfigPackage.eINSTANCE.getManagedBeanNameType();
@@ -2105,11 +2111,11 @@ public interface Literals {
 	EAttribute MANAGED_BEAN_NAME_TYPE__ID = FacesConfigPackage.eINSTANCE.getManagedBeanNameType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.ManagedBeanScopeTypeImpl <em>Managed Bean Scope Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ManagedBeanScopeTypeImpl <em>Managed Bean Scope Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.ManagedBeanScopeTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getManagedBeanScopeType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.ManagedBeanScopeTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getManagedBeanScopeType()
 	 * @generated
 	 */
 	EClass MANAGED_BEAN_SCOPE_TYPE = FacesConfigPackage.eINSTANCE.getManagedBeanScopeType();
@@ -2131,11 +2137,11 @@ public interface Literals {
 	EAttribute MANAGED_BEAN_SCOPE_TYPE__ID = FacesConfigPackage.eINSTANCE.getManagedBeanScopeType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.ManagedBeanTypeImpl <em>Managed Bean Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ManagedBeanTypeImpl <em>Managed Bean Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.ManagedBeanTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getManagedBeanType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.ManagedBeanTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getManagedBeanType()
 	 * @generated
 	 */
 	EClass MANAGED_BEAN_TYPE = FacesConfigPackage.eINSTANCE.getManagedBeanType();
@@ -2221,11 +2227,11 @@ public interface Literals {
 	EAttribute MANAGED_BEAN_TYPE__ID = FacesConfigPackage.eINSTANCE.getManagedBeanType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.ManagedPropertyTypeImpl <em>Managed Property Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ManagedPropertyTypeImpl <em>Managed Property Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.ManagedPropertyTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getManagedPropertyType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.ManagedPropertyTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getManagedPropertyType()
 	 * @generated
 	 */
 	EClass MANAGED_PROPERTY_TYPE = FacesConfigPackage.eINSTANCE.getManagedPropertyType();
@@ -2311,11 +2317,11 @@ public interface Literals {
 	EAttribute MANAGED_PROPERTY_TYPE__ID = FacesConfigPackage.eINSTANCE.getManagedPropertyType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.MapEntriesTypeImpl <em>Map Entries Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.MapEntriesTypeImpl <em>Map Entries Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.MapEntriesTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getMapEntriesType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.MapEntriesTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getMapEntriesType()
 	 * @generated
 	 */
 	EClass MAP_ENTRIES_TYPE = FacesConfigPackage.eINSTANCE.getMapEntriesType();
@@ -2353,11 +2359,11 @@ public interface Literals {
 	EAttribute MAP_ENTRIES_TYPE__ID = FacesConfigPackage.eINSTANCE.getMapEntriesType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.MapEntryTypeImpl <em>Map Entry Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.MapEntryTypeImpl <em>Map Entry Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.MapEntryTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getMapEntryType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.MapEntryTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getMapEntryType()
 	 * @generated
 	 */
 	EClass MAP_ENTRY_TYPE = FacesConfigPackage.eINSTANCE.getMapEntryType();
@@ -2395,11 +2401,11 @@ public interface Literals {
 	EAttribute MAP_ENTRY_TYPE__ID = FacesConfigPackage.eINSTANCE.getMapEntryType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.MessageBundleTypeImpl <em>Message Bundle Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.MessageBundleTypeImpl <em>Message Bundle Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.MessageBundleTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getMessageBundleType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.MessageBundleTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getMessageBundleType()
 	 * @generated
 	 */
 	EClass MESSAGE_BUNDLE_TYPE = FacesConfigPackage.eINSTANCE.getMessageBundleType();
@@ -2421,11 +2427,11 @@ public interface Literals {
 	EAttribute MESSAGE_BUNDLE_TYPE__ID = FacesConfigPackage.eINSTANCE.getMessageBundleType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.NavigationCaseTypeImpl <em>Navigation Case Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.NavigationCaseTypeImpl <em>Navigation Case Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.NavigationCaseTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getNavigationCaseType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.NavigationCaseTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getNavigationCaseType()
 	 * @generated
 	 */
 	EClass NAVIGATION_CASE_TYPE = FacesConfigPackage.eINSTANCE.getNavigationCaseType();
@@ -2495,11 +2501,11 @@ public interface Literals {
 	EAttribute NAVIGATION_CASE_TYPE__ID = FacesConfigPackage.eINSTANCE.getNavigationCaseType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.NavigationHandlerTypeImpl <em>Navigation Handler Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.NavigationHandlerTypeImpl <em>Navigation Handler Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.NavigationHandlerTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getNavigationHandlerType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.NavigationHandlerTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getNavigationHandlerType()
 	 * @generated
 	 */
 	EClass NAVIGATION_HANDLER_TYPE = FacesConfigPackage.eINSTANCE.getNavigationHandlerType();
@@ -2521,11 +2527,11 @@ public interface Literals {
 	EAttribute NAVIGATION_HANDLER_TYPE__ID = FacesConfigPackage.eINSTANCE.getNavigationHandlerType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.NavigationRuleTypeImpl <em>Navigation Rule Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.NavigationRuleTypeImpl <em>Navigation Rule Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.NavigationRuleTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getNavigationRuleType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.NavigationRuleTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getNavigationRuleType()
 	 * @generated
 	 */
 	EClass NAVIGATION_RULE_TYPE = FacesConfigPackage.eINSTANCE.getNavigationRuleType();
@@ -2579,11 +2585,11 @@ public interface Literals {
 	EAttribute NAVIGATION_RULE_TYPE__ID = FacesConfigPackage.eINSTANCE.getNavigationRuleType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.NullValueTypeImpl <em>Null Value Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.NullValueTypeImpl <em>Null Value Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.NullValueTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getNullValueType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.NullValueTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getNullValueType()
 	 * @generated
 	 */
 	EClass NULL_VALUE_TYPE = FacesConfigPackage.eINSTANCE.getNullValueType();
@@ -2597,11 +2603,11 @@ public interface Literals {
 	EAttribute NULL_VALUE_TYPE__ID = FacesConfigPackage.eINSTANCE.getNullValueType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.PhaseListenerTypeImpl <em>Phase Listener Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.PhaseListenerTypeImpl <em>Phase Listener Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.PhaseListenerTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getPhaseListenerType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.PhaseListenerTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getPhaseListenerType()
 	 * @generated
 	 */
 	EClass PHASE_LISTENER_TYPE = FacesConfigPackage.eINSTANCE.getPhaseListenerType();
@@ -2623,11 +2629,11 @@ public interface Literals {
 	EAttribute PHASE_LISTENER_TYPE__ID = FacesConfigPackage.eINSTANCE.getPhaseListenerType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.PropertyClassTypeImpl <em>Property Class Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.PropertyClassTypeImpl <em>Property Class Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.PropertyClassTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getPropertyClassType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.PropertyClassTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getPropertyClassType()
 	 * @generated
 	 */
 	EClass PROPERTY_CLASS_TYPE = FacesConfigPackage.eINSTANCE.getPropertyClassType();
@@ -2649,21 +2655,21 @@ public interface Literals {
 	EAttribute PROPERTY_CLASS_TYPE__ID = FacesConfigPackage.eINSTANCE.getPropertyClassType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.PropertyExtensionTypeImpl <em>Property Extension Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.PropertyExtensionTypeImpl <em>Property Extension Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.PropertyExtensionTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getPropertyExtensionType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.PropertyExtensionTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getPropertyExtensionType()
 	 * @generated
 	 */
 	EClass PROPERTY_EXTENSION_TYPE = FacesConfigPackage.eINSTANCE.getPropertyExtensionType();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.PropertyNameTypeImpl <em>Property Name Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.PropertyNameTypeImpl <em>Property Name Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.PropertyNameTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getPropertyNameType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.PropertyNameTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getPropertyNameType()
 	 * @generated
 	 */
 	EClass PROPERTY_NAME_TYPE = FacesConfigPackage.eINSTANCE.getPropertyNameType();
@@ -2685,11 +2691,11 @@ public interface Literals {
 	EAttribute PROPERTY_NAME_TYPE__ID = FacesConfigPackage.eINSTANCE.getPropertyNameType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.PropertyResolverTypeImpl <em>Property Resolver Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.PropertyResolverTypeImpl <em>Property Resolver Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.PropertyResolverTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getPropertyResolverType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.PropertyResolverTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getPropertyResolverType()
 	 * @generated
 	 */
 	EClass PROPERTY_RESOLVER_TYPE = FacesConfigPackage.eINSTANCE.getPropertyResolverType();
@@ -2711,11 +2717,11 @@ public interface Literals {
 	EAttribute PROPERTY_RESOLVER_TYPE__ID = FacesConfigPackage.eINSTANCE.getPropertyResolverType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.PropertyTypeImpl <em>Property Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.PropertyTypeImpl <em>Property Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.PropertyTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getPropertyType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.PropertyTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getPropertyType()
 	 * @generated
 	 */
 	EClass PROPERTY_TYPE = FacesConfigPackage.eINSTANCE.getPropertyType();
@@ -2793,11 +2799,11 @@ public interface Literals {
 	EAttribute PROPERTY_TYPE__ID = FacesConfigPackage.eINSTANCE.getPropertyType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.RedirectTypeImpl <em>Redirect Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.RedirectTypeImpl <em>Redirect Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.RedirectTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getRedirectType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.RedirectTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getRedirectType()
 	 * @generated
 	 */
 	EClass REDIRECT_TYPE = FacesConfigPackage.eINSTANCE.getRedirectType();
@@ -2811,11 +2817,11 @@ public interface Literals {
 	EAttribute REDIRECT_TYPE__ID = FacesConfigPackage.eINSTANCE.getRedirectType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.ReferencedBeanClassTypeImpl <em>Referenced Bean Class Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ReferencedBeanClassTypeImpl <em>Referenced Bean Class Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.ReferencedBeanClassTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getReferencedBeanClassType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.ReferencedBeanClassTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getReferencedBeanClassType()
 	 * @generated
 	 */
 	EClass REFERENCED_BEAN_CLASS_TYPE = FacesConfigPackage.eINSTANCE.getReferencedBeanClassType();
@@ -2837,11 +2843,11 @@ public interface Literals {
 	EAttribute REFERENCED_BEAN_CLASS_TYPE__ID = FacesConfigPackage.eINSTANCE.getReferencedBeanClassType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.ReferencedBeanNameTypeImpl <em>Referenced Bean Name Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ReferencedBeanNameTypeImpl <em>Referenced Bean Name Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.ReferencedBeanNameTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getReferencedBeanNameType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.ReferencedBeanNameTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getReferencedBeanNameType()
 	 * @generated
 	 */
 	EClass REFERENCED_BEAN_NAME_TYPE = FacesConfigPackage.eINSTANCE.getReferencedBeanNameType();
@@ -2863,11 +2869,11 @@ public interface Literals {
 	EAttribute REFERENCED_BEAN_NAME_TYPE__ID = FacesConfigPackage.eINSTANCE.getReferencedBeanNameType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.ReferencedBeanTypeImpl <em>Referenced Bean Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ReferencedBeanTypeImpl <em>Referenced Bean Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.ReferencedBeanTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getReferencedBeanType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.ReferencedBeanTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getReferencedBeanType()
 	 * @generated
 	 */
 	EClass REFERENCED_BEAN_TYPE = FacesConfigPackage.eINSTANCE.getReferencedBeanType();
@@ -2921,11 +2927,11 @@ public interface Literals {
 	EAttribute REFERENCED_BEAN_TYPE__ID = FacesConfigPackage.eINSTANCE.getReferencedBeanType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.RendererClassTypeImpl <em>Renderer Class Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.RendererClassTypeImpl <em>Renderer Class Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.RendererClassTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getRendererClassType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.RendererClassTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getRendererClassType()
 	 * @generated
 	 */
 	EClass RENDERER_CLASS_TYPE = FacesConfigPackage.eINSTANCE.getRendererClassType();
@@ -2947,21 +2953,21 @@ public interface Literals {
 	EAttribute RENDERER_CLASS_TYPE__ID = FacesConfigPackage.eINSTANCE.getRendererClassType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.RendererExtensionTypeImpl <em>Renderer Extension Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.RendererExtensionTypeImpl <em>Renderer Extension Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.RendererExtensionTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getRendererExtensionType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.RendererExtensionTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getRendererExtensionType()
 	 * @generated
 	 */
 	EClass RENDERER_EXTENSION_TYPE = FacesConfigPackage.eINSTANCE.getRendererExtensionType();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.RendererTypeImpl <em>Renderer Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.RendererTypeImpl <em>Renderer Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.RendererTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getRendererType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.RendererTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getRendererType()
 	 * @generated
 	 */
 	EClass RENDERER_TYPE = FacesConfigPackage.eINSTANCE.getRendererType();
@@ -3047,11 +3053,11 @@ public interface Literals {
 	EAttribute RENDERER_TYPE__ID = FacesConfigPackage.eINSTANCE.getRendererType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.RendererTypeTypeImpl <em>Renderer Type Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.RendererTypeTypeImpl <em>Renderer Type Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.RendererTypeTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getRendererTypeType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.RendererTypeTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getRendererTypeType()
 	 * @generated
 	 */
 	EClass RENDERER_TYPE_TYPE = FacesConfigPackage.eINSTANCE.getRendererTypeType();
@@ -3073,11 +3079,11 @@ public interface Literals {
 	EAttribute RENDERER_TYPE_TYPE__ID = FacesConfigPackage.eINSTANCE.getRendererTypeType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.RenderKitClassTypeImpl <em>Render Kit Class Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.RenderKitClassTypeImpl <em>Render Kit Class Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.RenderKitClassTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getRenderKitClassType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.RenderKitClassTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getRenderKitClassType()
 	 * @generated
 	 */
 	EClass RENDER_KIT_CLASS_TYPE = FacesConfigPackage.eINSTANCE.getRenderKitClassType();
@@ -3099,11 +3105,11 @@ public interface Literals {
 	EAttribute RENDER_KIT_CLASS_TYPE__ID = FacesConfigPackage.eINSTANCE.getRenderKitClassType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.RenderKitFactoryTypeImpl <em>Render Kit Factory Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.RenderKitFactoryTypeImpl <em>Render Kit Factory Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.RenderKitFactoryTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getRenderKitFactoryType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.RenderKitFactoryTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getRenderKitFactoryType()
 	 * @generated
 	 */
 	EClass RENDER_KIT_FACTORY_TYPE = FacesConfigPackage.eINSTANCE.getRenderKitFactoryType();
@@ -3125,11 +3131,11 @@ public interface Literals {
 	EAttribute RENDER_KIT_FACTORY_TYPE__ID = FacesConfigPackage.eINSTANCE.getRenderKitFactoryType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.RenderKitIdTypeImpl <em>Render Kit Id Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.RenderKitIdTypeImpl <em>Render Kit Id Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.RenderKitIdTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getRenderKitIdType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.RenderKitIdTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getRenderKitIdType()
 	 * @generated
 	 */
 	EClass RENDER_KIT_ID_TYPE = FacesConfigPackage.eINSTANCE.getRenderKitIdType();
@@ -3151,11 +3157,11 @@ public interface Literals {
 	EAttribute RENDER_KIT_ID_TYPE__ID = FacesConfigPackage.eINSTANCE.getRenderKitIdType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.RenderKitTypeImpl <em>Render Kit Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.RenderKitTypeImpl <em>Render Kit Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.RenderKitTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getRenderKitType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.RenderKitTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getRenderKitType()
 	 * @generated
 	 */
 	EClass RENDER_KIT_TYPE = FacesConfigPackage.eINSTANCE.getRenderKitType();
@@ -3217,11 +3223,11 @@ public interface Literals {
 	EAttribute RENDER_KIT_TYPE__ID = FacesConfigPackage.eINSTANCE.getRenderKitType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.SmallIconTypeImpl <em>Small Icon Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.SmallIconTypeImpl <em>Small Icon Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.SmallIconTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getSmallIconType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.SmallIconTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getSmallIconType()
 	 * @generated
 	 */
 	EClass SMALL_ICON_TYPE = FacesConfigPackage.eINSTANCE.getSmallIconType();
@@ -3243,11 +3249,11 @@ public interface Literals {
 	EAttribute SMALL_ICON_TYPE__ID = FacesConfigPackage.eINSTANCE.getSmallIconType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.StateManagerTypeImpl <em>State Manager Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.StateManagerTypeImpl <em>State Manager Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.StateManagerTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getStateManagerType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.StateManagerTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getStateManagerType()
 	 * @generated
 	 */
 	EClass STATE_MANAGER_TYPE = FacesConfigPackage.eINSTANCE.getStateManagerType();
@@ -3269,11 +3275,11 @@ public interface Literals {
 	EAttribute STATE_MANAGER_TYPE__ID = FacesConfigPackage.eINSTANCE.getStateManagerType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.SuggestedValueTypeImpl <em>Suggested Value Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.SuggestedValueTypeImpl <em>Suggested Value Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.SuggestedValueTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getSuggestedValueType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.SuggestedValueTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getSuggestedValueType()
 	 * @generated
 	 */
 	EClass SUGGESTED_VALUE_TYPE = FacesConfigPackage.eINSTANCE.getSuggestedValueType();
@@ -3295,11 +3301,11 @@ public interface Literals {
 	EAttribute SUGGESTED_VALUE_TYPE__ID = FacesConfigPackage.eINSTANCE.getSuggestedValueType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.SupportedLocaleTypeImpl <em>Supported Locale Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.SupportedLocaleTypeImpl <em>Supported Locale Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.SupportedLocaleTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getSupportedLocaleType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.SupportedLocaleTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getSupportedLocaleType()
 	 * @generated
 	 */
 	EClass SUPPORTED_LOCALE_TYPE = FacesConfigPackage.eINSTANCE.getSupportedLocaleType();
@@ -3321,11 +3327,11 @@ public interface Literals {
 	EAttribute SUPPORTED_LOCALE_TYPE__ID = FacesConfigPackage.eINSTANCE.getSupportedLocaleType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.ToViewIdTypeImpl <em>To View Id Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ToViewIdTypeImpl <em>To View Id Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.ToViewIdTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getToViewIdType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.ToViewIdTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getToViewIdType()
 	 * @generated
 	 */
 	EClass TO_VIEW_ID_TYPE = FacesConfigPackage.eINSTANCE.getToViewIdType();
@@ -3347,11 +3353,11 @@ public interface Literals {
 	EAttribute TO_VIEW_ID_TYPE__ID = FacesConfigPackage.eINSTANCE.getToViewIdType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.ValidatorClassTypeImpl <em>Validator Class Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ValidatorClassTypeImpl <em>Validator Class Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.ValidatorClassTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getValidatorClassType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.ValidatorClassTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getValidatorClassType()
 	 * @generated
 	 */
 	EClass VALIDATOR_CLASS_TYPE = FacesConfigPackage.eINSTANCE.getValidatorClassType();
@@ -3373,11 +3379,11 @@ public interface Literals {
 	EAttribute VALIDATOR_CLASS_TYPE__ID = FacesConfigPackage.eINSTANCE.getValidatorClassType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.ValidatorIdTypeImpl <em>Validator Id Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ValidatorIdTypeImpl <em>Validator Id Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.ValidatorIdTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getValidatorIdType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.ValidatorIdTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getValidatorIdType()
 	 * @generated
 	 */
 	EClass VALIDATOR_ID_TYPE = FacesConfigPackage.eINSTANCE.getValidatorIdType();
@@ -3399,11 +3405,11 @@ public interface Literals {
 	EAttribute VALIDATOR_ID_TYPE__ID = FacesConfigPackage.eINSTANCE.getValidatorIdType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.ValidatorTypeImpl <em>Validator Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ValidatorTypeImpl <em>Validator Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.ValidatorTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getValidatorType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.ValidatorTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getValidatorType()
 	 * @generated
 	 */
 	EClass VALIDATOR_TYPE = FacesConfigPackage.eINSTANCE.getValidatorType();
@@ -3473,11 +3479,11 @@ public interface Literals {
 	EAttribute VALIDATOR_TYPE__ID = FacesConfigPackage.eINSTANCE.getValidatorType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.ValueClassTypeImpl <em>Value Class Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ValueClassTypeImpl <em>Value Class Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.ValueClassTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getValueClassType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.ValueClassTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getValueClassType()
 	 * @generated
 	 */
 	EClass VALUE_CLASS_TYPE = FacesConfigPackage.eINSTANCE.getValueClassType();
@@ -3499,11 +3505,11 @@ public interface Literals {
 	EAttribute VALUE_CLASS_TYPE__ID = FacesConfigPackage.eINSTANCE.getValueClassType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.ValueTypeImpl <em>Value Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ValueTypeImpl <em>Value Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.ValueTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getValueType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.ValueTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getValueType()
 	 * @generated
 	 */
 	EClass VALUE_TYPE = FacesConfigPackage.eINSTANCE.getValueType();
@@ -3525,11 +3531,11 @@ public interface Literals {
 	EAttribute VALUE_TYPE__ID = FacesConfigPackage.eINSTANCE.getValueType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.VariableResolverTypeImpl <em>Variable Resolver Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.VariableResolverTypeImpl <em>Variable Resolver Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.VariableResolverTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getVariableResolverType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.VariableResolverTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getVariableResolverType()
 	 * @generated
 	 */
 	EClass VARIABLE_RESOLVER_TYPE = FacesConfigPackage.eINSTANCE.getVariableResolverType();
@@ -3551,11 +3557,11 @@ public interface Literals {
 	EAttribute VARIABLE_RESOLVER_TYPE__ID = FacesConfigPackage.eINSTANCE.getVariableResolverType_Id();
 
 	/**
-	 * The meta object literal for the '{@link org.eclipse.wtp.jsf.facesconfig.emf.impl.ViewHandlerTypeImpl <em>View Handler Type</em>}' class.
+	 * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ViewHandlerTypeImpl <em>View Handler Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.ViewHandlerTypeImpl
-	 * @see org.eclipse.wtp.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getViewHandlerType()
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.ViewHandlerTypeImpl
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getViewHandlerType()
 	 * @generated
 	 */
 	EClass VIEW_HANDLER_TYPE = FacesConfigPackage.eINSTANCE.getViewHandlerType();

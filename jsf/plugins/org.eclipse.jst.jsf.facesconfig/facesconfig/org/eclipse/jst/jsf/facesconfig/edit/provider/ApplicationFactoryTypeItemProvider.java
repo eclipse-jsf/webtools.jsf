@@ -22,6 +22,7 @@ import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
+import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
@@ -32,11 +33,13 @@ import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 
 /**
  * This is the item provider adapter for a {@link org.eclipse.jst.jsf.facesconfig.emf.ApplicationFactoryType} object.
- * <!-- begin-user-doc --> <!-- end-user-doc -->
+ * <!-- begin-user-doc --> 
+ * @extends {@link ITableItemLabelProvider}
+ * <!-- end-user-doc -->
  * @generated
  */
 public class ApplicationFactoryTypeItemProvider extends ItemProviderAdapter
-		implements IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+		implements IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource,ITableItemLabelProvider {
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
@@ -44,8 +47,10 @@ public class ApplicationFactoryTypeItemProvider extends ItemProviderAdapter
 	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
 
 	/**
-	 * This constructs an instance from a factory and a notifier. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * This constructs an instance from a factory and a notifier. 
+	 * <!-- begin-user-doc --> 
+     * @param adapterFactory 
+	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -70,8 +75,10 @@ public class ApplicationFactoryTypeItemProvider extends ItemProviderAdapter
     }
 
 	/**
-	 * This adds a property descriptor for the Text Content feature. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * This adds a property descriptor for the Text Content feature. 
+	 * <!--begin-user-doc --> 
+     * @param object 
+	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -93,8 +100,9 @@ public class ApplicationFactoryTypeItemProvider extends ItemProviderAdapter
 
     /**
      * This adds a property descriptor for the Id feature.
-     * <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
+     * <!-- begin-user-doc --> 
+     * @param object 
+     * <!-- end-user-doc -->
      * @generated
      */
 	protected void addIdPropertyDescriptor(Object object) {
@@ -137,8 +145,8 @@ public class ApplicationFactoryTypeItemProvider extends ItemProviderAdapter
     }
 
     /**
-     * This handles model notifications by calling {@link #updateChildren} to update any cached
-     * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+     * This handles model notifications by calling {@link #updateChildren(Notification)} to update any cached
+     * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged(Notification)}.
      * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
      * @generated
@@ -176,8 +184,11 @@ public class ApplicationFactoryTypeItemProvider extends ItemProviderAdapter
         return FacesConfigPlugin.INSTANCE;
     }
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.emf.edit.provider.ITableItemLabelProvider#getColumnImage(java.lang.Object, int)
+
+	/**
+	 * @param object
+	 * @param columnIndex
+	 * @return the column image
 	 */
 	public Object getColumnImage(Object object, int columnIndex) {
 		if(columnIndex ==0)

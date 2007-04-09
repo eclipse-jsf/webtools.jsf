@@ -28,7 +28,7 @@ public class FacesRendererFactory extends EMF2DOMSSERendererFactory
     }
 
     /**
-     * @see com.ibm.etools.emf2xml.RendererFactory#createRenderer()
+     * @see org.eclipse.wst.common.internal.emf.resource.RendererFactory#createRenderer()
      */
     public Renderer createRenderer() {
         return new MyRenderer();
@@ -162,7 +162,7 @@ public class FacesRendererFactory extends EMF2DOMSSERendererFactory
         /**
          * Create an adapter for a child DOM node
          * 
-         * @param node
+         * @param mofObject
          *            org.w3c.dom.Node The node to create the adapter for.
          */
         protected EMF2DOMAdapter primCreateAdapter(EObject mofObject, Translator childMap) {

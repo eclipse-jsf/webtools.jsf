@@ -33,7 +33,7 @@ import org.eclipse.jst.jsf.facesconfig.emf.RendererTypeType;
 
 /**
  * This is the item provider adapter for a
- * {@link org.eclipse.wtp.jsf.facesconfig.emf.RendererTypeType} object. <!--
+ * {@link org.eclipse.jst.jsf.facesconfig.emf.RendererTypeType} object. <!--
  * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated
@@ -140,8 +140,8 @@ public class RendererTypeTypeItemProvider extends ItemProviderAdapter implements
     }
 
     /**
-     * This handles model notifications by calling {@link #updateChildren} to update any cached
-     * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+     * This handles model notifications by calling {@link #updateChildren(Notification)} to update any cached
+     * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged(Notification)}.
      * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
      * @generated
