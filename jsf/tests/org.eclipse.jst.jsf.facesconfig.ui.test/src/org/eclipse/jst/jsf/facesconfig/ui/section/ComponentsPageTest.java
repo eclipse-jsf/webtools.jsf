@@ -63,7 +63,7 @@ public class ComponentsPageTest extends FacesConfigEditorTest {
 		/** Expand the "Component" secton, then click "Add" button */
 		ComponentMasterSection componentSection = (ComponentMasterSection) facesConfigMasterSections[0];
 		componentSection.getSection().setExpanded(true);
-		assertFalse(componentSection.removeButton.isEnabled());
+		assertFalse(componentSection.getRemoveButton().isEnabled());
 		componentSection.addButtonSelected(null);
 		ISelection selection = componentSection.getSelection();
 		assertTrue(selection != null && !selection.isEmpty());
@@ -76,13 +76,13 @@ public class ComponentsPageTest extends FacesConfigEditorTest {
 								.getFirstElement()));
 		assertNotNull(detailPage);
 
-		assertTrue(componentSection.removeButton.isEnabled());
+		assertTrue(componentSection.getRemoveButton().isEnabled());
 		componentSection.removeButtonSelected(null);
 		componentSection.refresh();
 		selection = componentSection.getSelection();
 		assertTrue(selection == null || selection.isEmpty());
 		assertEquals(facesConfig.getComponent().size(), 0);
-		assertFalse(componentSection.removeButton.isEnabled());
+		assertFalse(componentSection.getRemoveButton().isEnabled());
 	}
 
 	public void testConverterMasterSection() {
@@ -90,7 +90,7 @@ public class ComponentsPageTest extends FacesConfigEditorTest {
 		/** Expand the "Converter" secton, then click "Add" button */
 		ConverterMasterSection converterSection = (ConverterMasterSection) facesConfigMasterSections[1];
 		converterSection.getSection().setExpanded(true);
-		assertFalse(converterSection.removeButton.isEnabled());
+		assertFalse(converterSection.getRemoveButton().isEnabled());
 		converterSection.addButtonSelected(null);
 		ISelection selection = converterSection.getSelection();
 		assertTrue(selection != null && !selection.isEmpty());
@@ -103,13 +103,13 @@ public class ComponentsPageTest extends FacesConfigEditorTest {
 								.getFirstElement()));
 		assertNotNull(detailPage);
 		
-		assertTrue(converterSection.removeButton.isEnabled());
+		assertTrue(converterSection.getRemoveButton().isEnabled());
 		converterSection.removeButtonSelected(null);
 		converterSection.refresh();
 		selection = converterSection.getSelection();
 		assertTrue(selection == null || selection.isEmpty());
 		assertEquals(facesConfig.getConverter().size(), 0);
-		assertFalse(converterSection.removeButton.isEnabled());
+		assertFalse(converterSection.getRemoveButton().isEnabled());
 	}
 
 	public void testRenderKitMasterSection() {
@@ -117,7 +117,7 @@ public class ComponentsPageTest extends FacesConfigEditorTest {
 		/** Expand the "RenderKit" secton, then click "Add" button */
 		RenderkitMasterSection renderkitSection = (RenderkitMasterSection) facesConfigMasterSections[2];
 		renderkitSection.getSection().setExpanded(true);
-		assertFalse(renderkitSection.removeButton.isEnabled());
+		assertFalse(renderkitSection.getRemoveButton().isEnabled());
 		renderkitSection.addButtonSelected(null);
 		ISelection selection = renderkitSection.getSelection();
 		assertTrue(selection != null && !selection.isEmpty());
@@ -130,13 +130,13 @@ public class ComponentsPageTest extends FacesConfigEditorTest {
 								.getFirstElement()));
 		assertNotNull(detailPage);
 
-		assertTrue(renderkitSection.removeButton.isEnabled());
+		assertTrue(renderkitSection.getRemoveButton().isEnabled());
 		renderkitSection.removeButtonSelected(null);
 		renderkitSection.refresh();
 		selection = renderkitSection.getSelection();
 		assertTrue(selection == null || selection.isEmpty());
 		assertEquals(facesConfig.getRenderKit().size(), 0);
-		assertFalse(renderkitSection.removeButton.isEnabled());
+		assertFalse(renderkitSection.getRemoveButton().isEnabled());
 	}
 
 	public void testValidatorMasterSection() {
@@ -144,7 +144,7 @@ public class ComponentsPageTest extends FacesConfigEditorTest {
 		/** Expand the "Validator" secton, then click "Add" button */
 		ValidatorMasterSection section = (ValidatorMasterSection) facesConfigMasterSections[3];
 		section.getSection().setExpanded(true);
-		assertFalse(section.removeButton.isEnabled());
+		assertFalse(section.getRemoveButton().isEnabled());
 		section.addButtonSelected(null);
 		ISelection selection = section.getSelection();
 		assertTrue(selection != null && !selection.isEmpty());
@@ -157,12 +157,12 @@ public class ComponentsPageTest extends FacesConfigEditorTest {
 								.getFirstElement()));
 		assertNotNull(detailPage);
 
-		assertTrue(section.removeButton.isEnabled());
+		assertTrue(section.getRemoveButton().isEnabled());
 		section.removeButtonSelected(null);
 		section.refresh();
 		selection = section.getSelection();
 		assertTrue(selection == null || selection.isEmpty());
 		assertEquals(facesConfig.getValidator().size(), 0);
-		assertFalse(section.removeButton.isEnabled());
+		assertFalse(section.getRemoveButton().isEnabled());
 	}
 }
