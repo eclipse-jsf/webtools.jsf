@@ -20,3 +20,4 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.jst.jsf.common
 Eclipse-LazyStart: true
 Bundle-Activator: org.eclipse.jst.jsf.context.symbol.tests.ContextSymbolTestPlugin
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
