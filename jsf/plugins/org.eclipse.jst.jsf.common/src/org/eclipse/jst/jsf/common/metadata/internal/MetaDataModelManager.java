@@ -160,7 +160,7 @@ public class MetaDataModelManager implements IResourceChangeListener{
 				SafeRunnable.run(new ISafeRunnable(){
 
 					public void handleException(Throwable exception) {
-						// TODO Auto-generated method stub
+						// FIXME: what to do here?
 						
 					}
 

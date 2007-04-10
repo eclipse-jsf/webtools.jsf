@@ -126,13 +126,6 @@ public class StringLiteralType extends LiteralType
     public Boolean coerceToBoolean() throws TypeCoercionException 
     {
         // JSP.2.8.5
-        try
-        {
-            return Boolean.valueOf(_literalValue);
-        }
-        catch (Throwable t)
-        {
-            throw new TypeCoercionException(t);
-        }
+        return Boolean.valueOf(_literalValue);
     }
 }
