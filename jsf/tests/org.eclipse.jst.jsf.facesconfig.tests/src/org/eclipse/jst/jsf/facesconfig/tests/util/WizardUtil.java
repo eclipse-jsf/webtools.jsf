@@ -73,8 +73,8 @@ public class WizardUtil extends Assert {
 
 				IProject project = testEnv.getTestProject();
 				checkAndAddFacesConfig(project);
-			} catch (Throwable t) {
-				t.printStackTrace();
+			} catch (Exception t) {
+				throw new RuntimeException(t);
 			}
 		
 			projectCreated = true;
