@@ -51,8 +51,8 @@ public class WebProjectTestEnvironment extends ProjectTestEnvironment {
         {
             _project = createWebProject(_projectName);
             _projectCreated = true;
-        } catch (Throwable t) {
-            t.printStackTrace();
+        } catch (Exception t) {
+            throw new RuntimeException();
         }
     }
 
