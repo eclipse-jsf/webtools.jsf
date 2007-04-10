@@ -85,6 +85,7 @@ public class ListenerList {
 	 * garbage is created). Use this method when notifying listeners, so that
 	 * any modifications to the listener list during the notification will have
 	 * no effect on the notification itself.
+	 * @return the array of registered listeners
 	 */
 	public synchronized Object[] getListeners() {
 		if (_size == 0) {

@@ -31,24 +31,54 @@ import org.w3c.dom.Element;
  * @version 1.5
  */
 public class PageVariableAdatperRegistry {
+	/**
+	 * pageVar
+	 */
 	public static final String PAGEVAR = "pageVar";
 
+	/**
+	 * taglib
+	 */
 	public static final String TAGLIB = "taglib";
 
+	/**
+	 * tag
+	 */
 	public static final String TAG = "tag";
 
+	/**
+	 * varName
+	 */
 	public static final String VARNAME = "varName";
 
+	/**
+	 * varNameIsAttr
+	 */
 	public static final String VARNAMEISATTR = "varNameIsAttr";
 
+	/**
+	 * varTypeMode
+	 */
 	public static final String VARTYPEMODE = "varTypeMode";
 
+	/**
+	 * tagName
+	 */
 	public static final String TAGNAME = "tagName";
 
+	/**
+	 * varTypeString
+	 */
 	public static final String VARTYPESTRING = "varTypeString";
 
+	/**
+	 * varTypeStringIsAttr
+	 */
 	public static final String VARTYPESTRINGISATTR = "varTypeStringIsAttr";
 
+	/**
+	 * uri
+	 */
 	public static final String URI = "uri";
 
 	private static PageVariableAdatperRegistry _instance = null;
@@ -57,6 +87,9 @@ public class PageVariableAdatperRegistry {
 
 	private TagVarDescriptor _useBeanDescriptor;
 
+	/**
+	 * @return the singleton instance
+	 */
 	public static PageVariableAdatperRegistry getInstance() {
 		if (_instance == null) {
 			_instance = new PageVariableAdatperRegistry();
@@ -142,7 +175,7 @@ public class PageVariableAdatperRegistry {
 
 	/**
 	 * @param varTypeModeString
-	 * @return
+	 * @return variable typemode
 	 */
 	public static int toVarTypeMode(String varTypeModeString) {
 		if ("CLASSNAME".equalsIgnoreCase(varTypeModeString)) {
@@ -159,6 +192,11 @@ public class PageVariableAdatperRegistry {
 		}
 	}
 
+	/**
+	 * @param uri
+	 * @param tagname
+	 * @return the tag variable descriptor for the given tag (may be null)
+	 */
 	public TagVarDescriptor getTagVarDescriptor(String uri, String tagname) {
 		String key = uri + "#" + tagname;
 		return (TagVarDescriptor) _registry.get(key);
@@ -187,8 +225,8 @@ public class PageVariableAdatperRegistry {
 	}
 
 	/**
-	 * @param element
-	 * @return
+	 * @param target 
+	 * @return the tag variable descriptor for the target
 	 */
 	public TagVarDescriptor getTagVarDescriptor(Element target) {
 		if (target instanceof IDOMElement) {

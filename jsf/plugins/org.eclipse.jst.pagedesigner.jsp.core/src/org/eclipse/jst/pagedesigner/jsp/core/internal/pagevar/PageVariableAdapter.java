@@ -31,12 +31,15 @@ import org.w3c.dom.Element;
 public class PageVariableAdapter implements IPageVariableAdapter {
 	static final PageVariableAdapter _instance = new PageVariableAdapter();
 
+	/**
+	 * @return the singleton instance
+	 */
 	public static PageVariableAdapter getInstance() {
 		return _instance;
 	}
 
 	/**
-	 * 
+	 * no external instatiation
 	 */
 	private PageVariableAdapter() {
 		super();

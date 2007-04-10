@@ -19,6 +19,10 @@ import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDElement
 import org.eclipse.wst.xml.core.internal.contentmodel.CMDocument;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMElementDeclaration;
 
+/**
+ * Translator for tag lib meta-data
+ *
+ */
 public class TaglibMetaDataTLDTranslator extends AbstractTagLibDomainContentModelMetaDataTranslator implements IMetaDataTranslator {
 
 	public void translate(final IMetaDataModelMergeAssistant assistant) {
@@ -34,6 +38,10 @@ public class TaglibMetaDataTLDTranslator extends AbstractTagLibDomainContentMode
 		return getTLDDocument().getShortname();
 	}
 	
+	/**
+	 * @param tag
+	 * @return the label for the tag
+	 */
 	protected String getTagDisplayLabel(CMElementDeclaration tag){
 		String label = ((TLDElementDeclaration)tag).getDisplayName();
 		if (label == null)
@@ -70,6 +78,9 @@ public class TaglibMetaDataTLDTranslator extends AbstractTagLibDomainContentMode
 		return getTLDDocument().getDisplayName();
 	}
 	
+	/**
+	 * @return the tld document for the source model
+	 */
 	protected TLDDocument getTLDDocument(){
 		return (TLDDocument)getSourceModel();
 	}

@@ -26,8 +26,14 @@ import org.apache.commons.el.parser.ParseException;
  * @version 1.5
  */
 public final class JSFELParserHelper {
+	/**
+	 * an EL left brace
+	 */
 	public static String JSF_EL_LEFT_BRACE = "#{";
 
+	/**
+	 * an EL right brace
+	 */
 	public static String JSF_EL_RIGHT_BRACE = "}";
 
 	private JSFELParserHelper() {
@@ -37,6 +43,8 @@ public final class JSFELParserHelper {
 	/**
 	 * Gets the parsed form of the given expression string. Returns either an
 	 * Expression or ExpressionString.
+	 * @param expressionString 
+	 * @return the result of parsing expressionString
 	 */
 	public static Object parseExpression(String expressionString) {
 		expressionString = toJspElExpression(expressionString);
@@ -59,6 +67,10 @@ public final class JSFELParserHelper {
 		return null;
 	}
 
+	/**
+	 * @param expressionString
+	 * @return true if the expression is 'valid'
+	 */
 	public static boolean isValidEL(String expressionString) {
 		if (expressionString == null || expressionString.length() == 0) {
 			return false;
@@ -68,6 +80,11 @@ public final class JSFELParserHelper {
 				&& expressionString.endsWith(JSF_EL_RIGHT_BRACE);
 	}
 
+	/**
+	 * @param expressionString
+	 * @return expressionString with the left and right braces removed
+	 * or the original string if isValidEL(expression) == false
+	 */
 	public static String trimELBrace(String expressionString) {
 		if (!isValidEL(expressionString)) {
 			return expressionString;
@@ -239,6 +256,9 @@ public final class JSFELParserHelper {
 	 * Use to find the first of two characters in a string:<br>
 	 * <code>minIndex(s.indexOf('/'), indexOf('\'))</code>
 	 * </p>
+	 * @param a 
+	 * @param b 
+	 * @return the minimum index >= 0, if any
 	 * 
 	 */
 	public static int minIndex(int a, int b) {

@@ -31,9 +31,8 @@ public class CMUtil {
 	/**
 	 * If the element is a custom tag, get the URI of it. If the element is a
 	 * standard JSP tag, return null. If is not jsp tag, then return null
-	 * 
-	 * @param element
-	 * @return
+	 * @param decl 
+	 * @return the tag uri for decl
 	 */
 	public static String getTagURI(CMElementDeclaration decl) {
 		if (decl instanceof CMNodeWrapper) {
@@ -68,6 +67,10 @@ public class CMUtil {
 		return mqa.getModelQuery().getCMElementDeclaration(element);
 	}
 
+	/**
+	 * @param element
+	 * @return the tld element declaration for element
+	 */
 	public static TLDElementDeclaration getTLDElementDeclaration(
 			IDOMElement element) {
 		CMNode decl = getElementDeclaration(element);
@@ -81,6 +84,8 @@ public class CMUtil {
 	}
 
 	/**
+	 * @param decl 
+	 * @return true if decl is a JSP tag 
 	 */
 	public static boolean isJSP(CMElementDeclaration decl) {
 		if (!decl.supports(HTMLCMProperties.IS_JSP)) {

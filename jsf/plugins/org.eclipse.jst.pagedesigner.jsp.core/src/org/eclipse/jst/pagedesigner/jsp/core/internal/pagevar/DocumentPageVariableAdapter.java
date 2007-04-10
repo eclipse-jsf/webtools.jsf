@@ -42,6 +42,7 @@ public class DocumentPageVariableAdapter implements
 	private boolean _readingInfo = false;
 
 	/**
+	 * @param doc 
 	 * 
 	 */
 	public DocumentPageVariableAdapter(IDOMDocument doc) {
@@ -78,6 +79,9 @@ public class DocumentPageVariableAdapter implements
 		_changeListeners.remove(listener);
 	}
 
+	/**
+	 * fire change events on all listeners
+	 */
 	protected void fireChanged() {
 		Object[] listeners = _changeListeners.getListeners();
 		for (int i = 0; i < listeners.length; i++) {
@@ -125,6 +129,9 @@ public class DocumentPageVariableAdapter implements
 		reReadInfo();
 	}
 
+	/**
+	 * re-read page variable info
+	 */
 	protected void reReadInfo() {
 		if (this._readingInfo) {
 			return;

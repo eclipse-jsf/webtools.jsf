@@ -28,6 +28,7 @@ public class ELParser {
 	private List _expressionList;
 
 	/**
+	 * @param expression 
 	 * 
 	 */
 	public ELParser(String expression) {
@@ -55,6 +56,9 @@ public class ELParser {
 
 	}
 
+	/**
+	 * @return the expression elements of null if none
+	 */
 	public Object[] getElements() {
 		if (_expressionList == null) {
 			return null;

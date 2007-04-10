@@ -16,11 +16,23 @@ package org.eclipse.jst.pagedesigner.jsp.core.pagevar;
  * @version 1.5
  */
 public interface IPageVariablesProvider {
+	/**
+	 * 
+	 */
 	public void refresh();
 
+	/**
+	 * @return the bean infos
+	 */
 	public IVariableInfo[] getBeanInfos();
 
+	/**
+	 * @param listener
+	 */
 	public void addChangeListener(IChangeListener listener);
 
+	/**
+	 * @param listener
+	 */
 	public void removeChangeListener(IChangeListener listener);
 }

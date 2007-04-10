@@ -16,22 +16,40 @@ package org.eclipse.jst.pagedesigner.jsp.core.pagevar;
  * @version 1.5
  */
 public interface IVariableInfo {
+	/**
+	 * @return the name
+	 */
 	public String getName();
 
+	/**
+	 * TODO
+	 */
 	public static final int CLASSNAME = 0;
 
+	/**
+	 * TODO
+	 */
 	public static final int EXPRESSION = 1;
 
+	/**
+	 * TODO
+	 */
 	public static final int EXPRESSION_LISTITEM = 2;
 
+	/**
+	 * TODO
+	 */
 	public static final int RESOURCEBUNDLE = 3;
 
+	/**
+	 * @return one of CLASSNAME, EXPRESSION, EXPRESSION_LISTITEM, RESOURCEBUNDLE
+	 */
 	public int getMode();
 
 	/**
 	 * type info string will have different meaning for different mode.
 	 * 
-	 * @return
+	 * @return the type info string
 	 */
 	public String getTypeInfoString();
 

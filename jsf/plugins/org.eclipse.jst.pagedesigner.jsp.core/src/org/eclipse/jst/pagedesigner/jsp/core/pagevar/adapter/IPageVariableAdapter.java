@@ -26,8 +26,9 @@ import org.w3c.dom.Element;
 public interface IPageVariableAdapter extends INodeAdapter {
 	/**
 	 * most JSP tags will only support a single variable.
+	 * @param element 
 	 * 
-	 * @return
+	 * @return true if the tag supports multiple variables
 	 */
 	public boolean supportMultipleVariable(Element element);
 
@@ -35,14 +36,16 @@ public interface IPageVariableAdapter extends INodeAdapter {
 	 * If only support single variable, this method will return the variable
 	 * info. This method is provided for better performance.
 	 * 
+	 * @param element 
 	 * @return null means no variable info provided.
 	 */
 	public IVariableInfo getVariableInfo(Element element);
 
 	/**
 	 * should return a list of IVariableInfo
+	 * @param element 
 	 * 
-	 * @return
+	 * @return the list of variable infos
 	 */
 	public List getVariableInfos(Element element);
 }

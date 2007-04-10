@@ -25,6 +25,9 @@ public class VariableInfo implements IVariableInfo {
 	private String _name;
 
 	/**
+	 * @param name 
+	 * @param mode 
+	 * @param typeInfo 
 	 * 
 	 */
 	public VariableInfo(String name, int mode, String typeInfo) {

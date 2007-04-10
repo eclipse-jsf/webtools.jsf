@@ -26,6 +26,10 @@ import org.eclipse.wst.html.core.internal.contentmodel.HTMLCMDocumentFactory;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMDocument;
 import org.eclipse.wst.xml.core.internal.provisional.contentmodel.CMDocType;
 
+/**
+ * Locator for tag library meta data
+ *
+ */
 public class TaglibLocator extends AbstractMetaDataLocator implements IPathSensitiveMetaDataLocator{
 	//project must be set to the current project context during locate only...  should not be used when noifying observers
 	private IProject project;
@@ -35,6 +39,9 @@ public class TaglibLocator extends AbstractMetaDataLocator implements IPathSensi
 	//	private String uri;
 //	private boolean _notificationEventOccuring;
 	
+	/**
+	 * Constructor
+	 */
 	public TaglibLocator(){
 		super();
 		//we will continue listening for the tag lib uri, even if none are found initially

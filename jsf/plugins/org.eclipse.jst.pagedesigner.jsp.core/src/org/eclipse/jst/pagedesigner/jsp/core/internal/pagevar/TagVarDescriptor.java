@@ -28,42 +28,72 @@ public class TagVarDescriptor {
 
 	private String _tagName;
 
+	/**
+	 * @return the varName
+	 */
 	public String getVarName() {
 		return _varName;
 	}
 
+	/**
+	 * @param varName
+	 */
 	public void setVarName(String varName) {
 		this._varName = varName;
 	}
 
+	/**
+	 * @return true if var name is attribute
+	 */
 	public boolean isVarNameIsAttr() {
 		return _varNameIsAttr;
 	}
 
+	/**
+	 * @param varNameIsAttr
+	 */
 	public void setVarNameIsAttr(boolean varNameIsAttr) {
 		this._varNameIsAttr = varNameIsAttr;
 	}
 
+	/**
+	 * @return the variable type mode
+	 */
 	public int getVarTypeMode() {
 		return _varTypeMode;
 	}
 
+	/**
+	 * @param varTypeMode
+	 */
 	public void setVarTypeMode(int varTypeMode) {
 		this._varTypeMode = varTypeMode;
 	}
 
+	/**
+	 * @return the variable type string
+	 */
 	public String getVarTypeString() {
 		return _varTypeString;
 	}
 
+	/**
+	 * @param varTypeString
+	 */
 	public void setVarTypeString(String varTypeString) {
 		this._varTypeString = varTypeString;
 	}
 
+	/**
+	 * @return true if variable type string is attr
+	 */
 	public boolean isVarTypeStringIsAttr() {
 		return _varTypeStringIsAttr;
 	}
 
+	/**
+	 * @param varTypeStringIsAttr
+	 */
 	public void setVarTypeStringIsAttr(boolean varTypeStringIsAttr) {
 		this._varTypeStringIsAttr = varTypeStringIsAttr;
 	}
@@ -75,6 +105,9 @@ public class TagVarDescriptor {
 		this._tagName = tag;
 	}
 
+	/**
+	 * @return the tag name
+	 */
 	public String getTagName() {
 		return this._tagName;
 	}

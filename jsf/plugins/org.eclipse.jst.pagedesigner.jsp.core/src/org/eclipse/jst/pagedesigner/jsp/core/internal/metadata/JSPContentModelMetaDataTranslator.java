@@ -17,6 +17,9 @@ import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataTranslator;
 import org.eclipse.wst.html.core.internal.contentmodel.JSPCMDocument;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMDocument;
 
+/**
+ * Meta-data translator for JSP content modle meta-data
+ */
 public class JSPContentModelMetaDataTranslator extends AbstractTagLibDomainContentModelMetaDataTranslator implements IMetaDataTranslator {
 
 	public void translate(final IMetaDataModelMergeAssistant assistant) {

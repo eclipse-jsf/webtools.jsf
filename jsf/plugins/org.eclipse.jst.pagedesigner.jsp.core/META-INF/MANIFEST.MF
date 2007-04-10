@@ -39,3 +39,4 @@ Export-Package: org.eclipse.jst.pagedesigner.jsp.core,
  org.eclipse.jst.pagedesigner.jsp.core.pagevar,
  org.eclipse.jst.pagedesigner.jsp.core.pagevar.adapter,
  org.eclipse.jst.pagedesigner.jsp.core.util
+Bundle-RequiredExecutionEnvironment: J2SE-1.5

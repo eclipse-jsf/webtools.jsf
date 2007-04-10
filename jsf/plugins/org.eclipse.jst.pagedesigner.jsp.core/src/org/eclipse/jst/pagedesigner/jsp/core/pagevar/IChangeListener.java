@@ -18,5 +18,8 @@ import java.util.EventListener;
  * @version 1.5
  */
 public interface IChangeListener extends EventListener {
+	/**
+	 * fire a changed indication
+	 */
 	public void changed();
 }

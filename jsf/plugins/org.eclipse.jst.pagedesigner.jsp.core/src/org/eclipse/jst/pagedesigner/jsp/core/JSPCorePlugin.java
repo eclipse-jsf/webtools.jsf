@@ -57,6 +57,7 @@ public class JSPCorePlugin extends Plugin {
 
 	/**
 	 * Returns the shared instance.
+	 * @return the default plugin instance
 	 */
 	public static JSPCorePlugin getDefault() {
 		return plugin;
@@ -65,6 +66,8 @@ public class JSPCorePlugin extends Plugin {
 	/**
 	 * Returns the string from the plugin's resource bundle, or 'key' if not
 	 * found.
+	 * @param key 
+	 * @return the string for key or 'key' if not found in the default resource bundle
 	 */
 	public static String getResourceString(String key) {
 		ResourceBundle bundle = JSPCorePlugin.getDefault().getResourceBundle();
@@ -77,11 +80,15 @@ public class JSPCorePlugin extends Plugin {
 
 	/**
 	 * Returns the plugin's resource bundle,
+	 * @return the resource bundle
 	 */
 	public ResourceBundle getResourceBundle() {
 		return resourceBundle;
 	}
 
+	/**
+	 * @return the plugin id
+	 */
 	public static String getPluginId() {
 		return getDefault().getBundle().getSymbolicName();
 	}
