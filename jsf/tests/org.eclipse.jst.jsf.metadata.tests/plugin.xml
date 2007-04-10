@@ -8,8 +8,7 @@
             uri="http://org.eclipse.jsf/test"/>
       <standardMetaDataFile
             location="/testfiles/metadata/jsf_test.xml"
-            uri="http://org.eclipse.jsf/test2"
-            parser="com.foobar.DifferentParser"/>
+            uri="http://org.eclipse.jsf/test2"/>
       <standardMetaDataFile
             location="/testfiles/metadata/FileA.xml"
             uri="http://org.eclipse.jsf/mergetest1"/>
