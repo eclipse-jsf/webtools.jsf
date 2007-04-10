@@ -28,7 +28,6 @@ import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaConventions;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
-import org.eclipse.jdt.internal.compiler.impl.CompilerOptions;
 import org.eclipse.jdt.ui.wizards.NewClassWizardPage;
 
 /**
@@ -45,6 +44,8 @@ public class JavaClassWizardPage extends NewClassWizardPage {
 
 	private IStatus _fClassNameStatus, _fPackageNameStatus;
 
+	private final static String  SOURCE_COMPLIANCE_1_3 = JavaCore.VERSION_1_3;
+	
 	class InitialClassProperties {
 		// populate new wizard page
 		IType superClassType;
@@ -120,16 +121,16 @@ public class JavaClassWizardPage extends NewClassWizardPage {
 			}
 		}
 		_fClassNameStatus = JavaConventions
-		    .validateJavaTypeName(_initialValues.className, CompilerOptions.VERSION_1_3,CompilerOptions.VERSION_1_3);
+		    .validateJavaTypeName(_initialValues.className, SOURCE_COMPLIANCE_1_3,SOURCE_COMPLIANCE_1_3);
 
 		loc = _className.lastIndexOf('.');
 		if (loc != -1) {
 			_initialValues.packageName = _className.substring(0, loc);
 			_initialValues.className = _className.substring(loc + 1);
 			_fPackageNameStatus = JavaConventions
-                    .validateJavaTypeName(_initialValues.packageName, CompilerOptions.VERSION_1_3,CompilerOptions.VERSION_1_3);
+                    .validateJavaTypeName(_initialValues.packageName, SOURCE_COMPLIANCE_1_3,SOURCE_COMPLIANCE_1_3);
 			_fClassNameStatus = JavaConventions
-                    .validateJavaTypeName(_initialValues.className, CompilerOptions.VERSION_1_3,CompilerOptions.VERSION_1_3);
+                    .validateJavaTypeName(_initialValues.className, SOURCE_COMPLIANCE_1_3,SOURCE_COMPLIANCE_1_3);
 		}
 		if (_javaProject == null) {
 			return;

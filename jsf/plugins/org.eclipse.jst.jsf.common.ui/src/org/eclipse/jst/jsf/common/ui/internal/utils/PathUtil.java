@@ -180,6 +180,11 @@ public class PathUtil {
 		return uri;
 	}
 
+	/**
+	 * @param javaProject
+	 * @param parent
+	 * @return the IPath for a a classpath object (?)
+	 */
 	public static IPath getPathOnClasspath(IJavaProject javaProject,
 			Object parent) {
 		IPath result = null;

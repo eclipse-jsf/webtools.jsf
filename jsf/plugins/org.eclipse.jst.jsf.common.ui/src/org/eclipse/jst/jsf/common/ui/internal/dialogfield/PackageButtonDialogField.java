@@ -17,8 +17,9 @@ import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaConventions;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
-import org.eclipse.jdt.internal.compiler.impl.CompilerOptions;
+//import org.eclipse.jdt.internal.compiler.impl.CompilerOptions;
 import org.eclipse.jdt.ui.JavaElementLabelProvider;
 import org.eclipse.jface.window.Window;
 import org.eclipse.jst.jsf.common.ui.JSFUICommonPlugin;
@@ -44,6 +45,8 @@ public class PackageButtonDialogField extends StringButtonDialogField {
 
 	private IPackageFragment _fCurrPackage;
 
+    private final static String  SOURCE_COMPLIANCE_1_3 = JavaCore.VERSION_1_3;
+    
 	/**
 	 * @param packageRoot 
 	 */
@@ -189,7 +192,7 @@ public class PackageButtonDialogField extends StringButtonDialogField {
 
 		String packName = getPackageText();
 		if (packName.length() > 0) {
-			IStatus val = JavaConventions.validatePackageName(packName, CompilerOptions.VERSION_1_3,CompilerOptions.VERSION_1_3);
+			IStatus val = JavaConventions.validatePackageName(packName,SOURCE_COMPLIANCE_1_3,SOURCE_COMPLIANCE_1_3);
 			if (val.getSeverity() == IStatus.ERROR) {
 				status
 						.setError(DialogFieldResources

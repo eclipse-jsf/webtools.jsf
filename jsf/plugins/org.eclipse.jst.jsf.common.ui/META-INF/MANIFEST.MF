@@ -27,3 +27,4 @@ Export-Package: org.eclipse.jst.jsf.common.ui;x-friends:="org.eclipse.jst.pagede
  org.eclipse.jst.jsf.common.ui.internal.utils;x-friends:="org.eclipse.jst.pagedesigner,org.eclipse.jst.jsf.facesconfig.ui,org.eclipse.jst.pagedesigner.jsf.ui"
 Eclipse-LazyStart: true
 Bundle-Vendor: %plugin.provider
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
