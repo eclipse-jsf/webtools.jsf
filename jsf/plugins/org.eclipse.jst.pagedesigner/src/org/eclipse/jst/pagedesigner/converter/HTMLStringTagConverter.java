@@ -75,7 +75,7 @@ public abstract class HTMLStringTagConverter extends AbstractTagConverter {
 					getDestDocument(), root);
 			model.releaseFromRead();
 			return resultEle;
-		} catch (Throwable ex) {
+		} catch (Exception ex) {
 			_log.error("Log.Error.HTMLStringTagConverter.Error", ex);
 			Element temp = createElement("div");
 			temp.appendChild(createText("Error loading: " + ex.getMessage()));
@@ -85,6 +85,10 @@ public abstract class HTMLStringTagConverter extends AbstractTagConverter {
 		}
 	}
 
+	/**
+	 * @return the generated HTML string
+	 * @throws Exception
+	 */
 	public abstract String getGeneratedHTML() throws Exception;
 
 	/*

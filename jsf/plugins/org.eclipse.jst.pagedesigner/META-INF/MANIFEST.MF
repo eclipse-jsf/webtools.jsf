@@ -173,4 +173,7 @@ Export-Package: org.eclipse.jst.pagedesigner,
  org.eclipse.jst.pagedesigner.utils,
  org.eclipse.jst.pagedesigner.validation.caret,
  org.eclipse.jst.pagedesigner.viewer
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+
+
 

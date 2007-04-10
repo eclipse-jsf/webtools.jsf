@@ -20,7 +20,6 @@ import java.util.MissingResourceException;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
-import org.eclipse.core.internal.runtime.InternalPlatform;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
@@ -334,12 +333,6 @@ public class PDPlugin extends AbstractUIPlugin {
 			_log.error("Error.PDPlugin.Installation.15", exception); //$NON-NLS-1$
 			return null;
 		}
-	}
-
-	public static String getEclipseDir() {
-		URL installedIn = InternalPlatform.getDefault().getInstallURL();
-		String url = installedIn.getPath();
-		return url;
 	}
 
 	public static IModelManager getModelManager() {

@@ -446,6 +446,7 @@ public class HTMLEditor extends PostSelectionMultiPageEditorPart implements
 			if (fileDoesNotExist((IFileEditorInput) input, coreExceptionArray)) {
 				// todo use message formatter for {0}
 				Throwable coreException = coreExceptionArray[0];
+				// FIXME: WTF?
 				if (coreException instanceof ResourceException) {
 					// I'm assuming this is always 'does not exist'
 					// we'll refresh local go mimic behavior of default

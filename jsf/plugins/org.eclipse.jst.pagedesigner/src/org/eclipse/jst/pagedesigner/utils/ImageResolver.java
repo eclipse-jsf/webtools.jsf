@@ -48,18 +48,12 @@ public class ImageResolver {
 	 * 
 	 * @param element
 	 * @param attrName
-	 * @return
+	 * @return the new image
 	 */
 	public static Image initializeImage(Element element, String attrName) {
-		try {
-			String url = getResolvedURL(element, attrName);
-			if (url == null)
-				return null;
-			return new Image(null, url);
-		} catch (Throwable ex) {
-			// skip exception
-			// ex.printStackTrace();
+		String url = getResolvedURL(element, attrName);
+		if (url == null)
 			return null;
-		}
+		return new Image(null, url);
 	}
 }

@@ -11,22 +11,12 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.actions.menuextension;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.debug.internal.ui.DebugUIPlugin;
-import org.eclipse.debug.internal.ui.launchConfigurations.LaunchShortcutExtension;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.jst.pagedesigner.editors.HTMLEditor;
-import org.eclipse.ui.IEditorInput;
+import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.ui.part.EditorPart;
-import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 /**
@@ -34,50 +24,62 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
  * @version 1.5
  */
 public class RunAction extends Action {
+	/**
+	 * constant for debug launch mode
+	 */
 	public static final String LAUNCH_MODE_DEBUG = "debug";
 
+	/**
+	 * constant for run launch mode
+	 */
 	public static final String LAUNCH_MODE_RUN = "run";
 
 	private final String ID = "org.eclipse.jst.pagedesigner.actions.menuextension.RunAction";
 
-	private EditorPart _editor;
+	//private EditorPart _editor;
 
 	private String _mode;
 
+	/**
+	 * @param editor
+	 * @param mode
+	 */
 	public RunAction(EditorPart editor, String mode) {
-		_editor = editor;
+		//_editor = editor;
 		_mode = mode;
 	}
 
 	public void run() {
-
-		List allShortCuts = DebugUIPlugin.getDefault()
-				.getLaunchConfigurationManager().getLaunchShortcuts();
-		Iterator iter = allShortCuts.iterator();
-		LaunchShortcutExtension ext = null;
-		while (iter.hasNext()) {
-			ext = (LaunchShortcutExtension) iter.next();
-			try {
-				if (ext.getId().equals("org.eclipse.wst.server.launchShortcut")) {
-					break;
-				}
-			} catch (Exception e) {
-				// not supported
-			}
-		}
-		if (ext != null) {
-			ext.launch(getSelection(), _mode);
-		}
+	    PDPlugin.getLogger(getClass()).error("Obsolete.  Shouldn't be used", new Throwable());
+	    // FIXME: we don't support this feature and it seems to depend
+	    // on debugger internal code anyway...
+	    //		List allShortCuts = DebugUIPlugin.getDefault()
+//				.getLaunchConfigurationManager().getLaunchShortcuts();
+//		Iterator iter = allShortCuts.iterator();
+//		LaunchShortcutExtension ext = null;
+//		while (iter.hasNext()) {
+//			ext = (LaunchShortcutExtension) iter.next();
+//			try {
+//				if (ext.getId().equals("org.eclipse.wst.server.launchShortcut")) {
+//					break;
+//				}
+//			} catch (Exception e) {
+//				// not supported
+//			}
+//		}
+//		if (ext != null) {
+//			ext.launch(getSelection(), _mode);
+//		}
 	}
 
-	private IStructuredSelection getSelection() {
-		IEditorInput input = ((HTMLEditor) _editor).getEditorInput();
-		List elements = new ArrayList();
-		if (input instanceof FileEditorInput) {
-			elements.add(((FileEditorInput) input).getFile());
-		}
-		return new StructuredSelection(elements);
-	}
+//	private IStructuredSelection getSelection() {
+//		IEditorInput input = ((HTMLEditor) _editor).getEditorInput();
+//		List elements = new ArrayList();
+//		if (input instanceof FileEditorInput) {
+//			elements.add(((FileEditorInput) input).getFile());
+//		}
+//		return new StructuredSelection(elements);
+//	}
 
 	public String getId() {
 		return ID;

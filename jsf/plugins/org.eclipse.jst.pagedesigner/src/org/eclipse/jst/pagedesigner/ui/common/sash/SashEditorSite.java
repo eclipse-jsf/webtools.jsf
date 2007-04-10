@@ -11,8 +11,6 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.ui.common.sash;
 
-import java.util.ArrayList;
-
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.action.MenuManager;
@@ -31,7 +29,7 @@ import org.eclipse.ui.INestableKeyBindingService;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.internal.PopupMenuExtender;
+//import org.eclipse.ui.internal.PopupMenuExtender;
 
 /**
  * @author mengbo
@@ -70,7 +68,7 @@ public class SashEditorSite implements IEditorSite {
 	/**
 	 * The list of popup menu extenders; <code>null</code> if none registered.
 	 */
-	private ArrayList _menuExtenders;
+	// TODO: dead? private ArrayList _menuExtenders;
 
 	/**
 	 * Creates a site for the given editor nested within the given multi-page
@@ -92,12 +90,12 @@ public class SashEditorSite implements IEditorSite {
 	 * Dispose the contributions.
 	 */
 	public void dispose() {
-		if (_menuExtenders != null) {
-			for (int i = 0, size = _menuExtenders.size(); i < size; i++) {
-				((PopupMenuExtender) _menuExtenders.get(i)).dispose();
-			}
-			_menuExtenders = null;
-		}
+//		if (_menuExtenders != null) {
+//			for (int i = 0, size = _menuExtenders.size(); i < size; i++) {
+//				((PopupMenuExtender) _menuExtenders.get(i)).dispose();
+//			}
+//			_menuExtenders = null;
+//		}
 
 		// Remove myself from the list of nested key binding services.
 		if (_service != null) {
@@ -327,9 +325,9 @@ public class SashEditorSite implements IEditorSite {
 	 */
 	public void registerContextMenu(String menuID, MenuManager menuMgr,
 			ISelectionProvider selProvider) {
-		if (_menuExtenders == null) {
-			_menuExtenders = new ArrayList(1);
-		}
+//		if (_menuExtenders == null) {
+//			_menuExtenders = new ArrayList(1);
+//		}
 		// cancel the registration of PopupMenuExtender since the
 		// PopupMenuExtender's behavior
 		// is different between eclipse 3.0 and eclipse 3.1,and we always have

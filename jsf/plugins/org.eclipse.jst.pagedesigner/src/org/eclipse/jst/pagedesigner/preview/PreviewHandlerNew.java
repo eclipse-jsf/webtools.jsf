@@ -36,6 +36,10 @@ import org.w3c.dom.Node;
 public class PreviewHandlerNew {
 	//private static Logger _log = PDPlugin.getLogger(PreviewHandlerNew.class);
 
+	/**
+	 * @param part
+	 * @param result
+	 */
 	public static void generatePreview(DocumentEditPart part,
 			StringBuffer result) {
 		try {
@@ -99,15 +103,7 @@ public class PreviewHandlerNew {
 				}
 
 			}
-			// XXX: seemed in WTP0.7, releaseFromEdit for a unmanaged model may
-			// fail
-			try {
-				sModel.releaseFromEdit();
-			} catch (Throwable th) {
-				// "Error in model release:"
-				// _log.info("PreviewHandlerNew.Error.0", th); //$NON-NLS-1$
-			}
-			return;
+			sModel.releaseFromEdit();
 		} finally {
 			PageExpressionContext.reset();
 		}

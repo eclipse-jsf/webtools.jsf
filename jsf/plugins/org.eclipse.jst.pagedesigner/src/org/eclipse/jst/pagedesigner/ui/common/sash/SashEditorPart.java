@@ -25,6 +25,7 @@ import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jst.jsf.common.ui.internal.guiutils.SWTUtils;
+import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.layout.FillLayout;
@@ -40,7 +41,7 @@ import org.eclipse.ui.INestableKeyBindingService;
 import org.eclipse.ui.IPropertyListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.internal.WorkbenchPlugin;
+//import org.eclipse.ui.internal.WorkbenchPlugin;
 import org.eclipse.ui.part.EditorPart;
 import org.eclipse.ui.part.MultiPageEditorActionBarContributor;
 import org.eclipse.ui.part.MultiPageEditorSite;
@@ -457,8 +458,9 @@ public abstract class SashEditorPart extends EditorPart {
 				final INestableKeyBindingService nestableService = (INestableKeyBindingService) service;
 				nestableService.activateKeyBindingService(null);
 			} else {
-				WorkbenchPlugin
-						.log("MultiPageEditorPart.setFocus()   Parent key binding service was not an instance of INestableKeyBindingService.  It was an instance of " + service.getClass().getName() + " instead."); //$NON-NLS-1$ //$NON-NLS-2$
+				//WorkbenchPlugin
+				PDPlugin
+				    .getLogger(getClass()).error("MultiPageEditorPart.setFocus()   Parent key binding service was not an instance of INestableKeyBindingService.  It was an instance of " + service.getClass().getName() + " instead."); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 			return;
 		}
@@ -473,8 +475,8 @@ public abstract class SashEditorPart extends EditorPart {
         		nestableService.activateKeyBindingService(null);
         	}
         } else {
-        	WorkbenchPlugin
-        			.log("MultiPageEditorPart.setFocus()   Parent key binding service was not an instance of INestableKeyBindingService.  It was an instance of " + service.getClass().getName() + " instead."); //$NON-NLS-1$ //$NON-NLS-2$
+            PDPlugin
+                .getLogger(getClass()).error("MultiPageEditorPart.setFocus()   Parent key binding service was not an instance of INestableKeyBindingService.  It was an instance of " + service.getClass().getName() + " instead."); //$NON-NLS-1$ //$NON-NLS-2$
         }
 	}
 

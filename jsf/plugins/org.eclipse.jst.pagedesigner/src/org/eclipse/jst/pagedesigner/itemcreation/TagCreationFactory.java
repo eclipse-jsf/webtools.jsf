@@ -6,12 +6,11 @@ import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.MetaDataQu
 import org.eclipse.jst.pagedesigner.editors.palette.DesignerPaletteRoot;
 import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
 import org.eclipse.jst.pagedesigner.itemcreation.internal.DefaultTagCreator;
-import org.eclipse.jst.pagedesigner.itemcreation.internal.TagCreatorFromMetaData;
 
 /**
  * Creates instances of {@link ITagCreator}s for a the given {@link TagToolPaletteEntry}
  * Will use TagCreatorFactories registered using org.eclipse.jst.jsf.pagedesigner.tagcreationfactories ext-pt.  
- * If none located, will use {@link TagCreatorFromMetaData} by default.
+ * If none located, will use {@link org.eclipse.jst.pagedesigner.itemcreation.internal.TagCreatorFromMetaData} by default.
  */
 public class TagCreationFactory {
 	private static TagCreationFactory INSTANCE = null;

@@ -15,7 +15,6 @@ import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.dnd.AbstractTransferDropTargetListener;
 import org.eclipse.gef.dnd.TemplateTransfer;
-import org.eclipse.gef.requests.CreateRequest;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
 import org.eclipse.jst.pagedesigner.itemcreation.ItemCreationRequest;
@@ -78,7 +77,7 @@ public class PDTemplateTransferDropTargetListener extends
 	}
 
 	/**
-	 * Assumes that the target request is a {@link CreateRequest}.
+	 * Assumes that the target request is a {@link org.eclipse.gef.requests.CreateRequest}.
 	 */
 	protected void updateTargetRequest() {
 		// We should never see request that is not of ItemCreationRequest type,
