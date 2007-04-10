@@ -248,7 +248,7 @@ public abstract class PageflowElementEditPart extends AbstractGraphicalEditPart
 	protected void hookIntoPageflowElement(PageflowElement element) {
 		if (null != element) {
 			if (!element.eAdapters().contains(getAdapter(Adapter.class))) {
-				element.eAdapters().add(getAdapter(Adapter.class));
+				element.eAdapters().add((Adapter) getAdapter(Adapter.class));
 			}
 		}
 	}

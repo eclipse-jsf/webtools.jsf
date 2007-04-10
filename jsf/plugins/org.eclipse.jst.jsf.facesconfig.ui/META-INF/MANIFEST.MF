@@ -52,3 +52,4 @@ Export-Package: org.eclipse.jst.jsf.facesconfig.ui,
  org.eclipse.jst.jsf.facesconfig.ui.section,
  org.eclipse.jst.jsf.facesconfig.ui.util,
  org.eclipse.jst.jsf.facesconfig.ui.wizard
+Bundle-RequiredExecutionEnvironment: J2SE-1.5

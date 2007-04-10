@@ -50,9 +50,9 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.widgets.FormToolkit;
-import org.eclipse.ui.internal.Workbench;
 
 /**
  * @author sfshi
@@ -290,7 +290,7 @@ public class ManagedBeanMasterSection extends FacesConfigMasterSection {
 						}
 
 					};
-					Workbench.getInstance().getDisplay().asyncExec(run);
+					PlatformUI.getWorkbench().getDisplay().asyncExec(run);
 				} else if (msg.getEventType() == Notification.REMOVE) {
 
 					Runnable run = new Runnable() {
@@ -299,7 +299,7 @@ public class ManagedBeanMasterSection extends FacesConfigMasterSection {
 						}
 
 					};
-					Workbench.getInstance().getDisplay().asyncExec(run);
+					PlatformUI.getWorkbench().getDisplay().asyncExec(run);
 				}
 
 				else if (msg.getEventType() == Notification.SET) {
@@ -310,7 +310,7 @@ public class ManagedBeanMasterSection extends FacesConfigMasterSection {
 						}
 
 					};
-					Workbench.getInstance().getDisplay().asyncExec(run);
+					PlatformUI.getWorkbench().getDisplay().asyncExec(run);
 				}
 			}
 
@@ -328,7 +328,7 @@ public class ManagedBeanMasterSection extends FacesConfigMasterSection {
 					}
 
 				};
-				Workbench.getInstance().getDisplay().asyncExec(run);
+				PlatformUI.getWorkbench().getDisplay().asyncExec(run);
 
 			} else if (msg.getFeature() == FacesConfigPackage.eINSTANCE
 					.getManagedBeanType_ManagedBeanScope()) {
@@ -345,7 +345,7 @@ public class ManagedBeanMasterSection extends FacesConfigMasterSection {
 					}
 
 				};
-				Workbench.getInstance().getDisplay().asyncExec(run1);
+				PlatformUI.getWorkbench().getDisplay().asyncExec(run1);
 			}
 
 		}
