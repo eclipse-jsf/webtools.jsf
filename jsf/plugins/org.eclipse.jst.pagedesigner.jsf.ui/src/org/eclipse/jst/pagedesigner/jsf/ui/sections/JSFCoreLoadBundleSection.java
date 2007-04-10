@@ -20,6 +20,9 @@ import org.eclipse.jst.pagedesigner.properties.attrgroup.AttributeGroupSection;
  */
 public class JSFCoreLoadBundleSection extends AttributeGroupSection
 {
+    /**
+     * The default constructor
+     */
     public JSFCoreLoadBundleSection()
     {
         super(ITLDConstants.URI_JSF_CORE, IJSFConstants.TAG_LOADBUNDLE, 

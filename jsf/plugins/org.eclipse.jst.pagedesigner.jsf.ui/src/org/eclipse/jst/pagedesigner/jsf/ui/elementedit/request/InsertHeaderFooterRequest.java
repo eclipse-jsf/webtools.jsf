@@ -21,6 +21,10 @@ public class InsertHeaderFooterRequest extends Request
 {
     private boolean _isHeader;
 
+    /**
+     * @param type
+     * @param isHeader
+     */
     public InsertHeaderFooterRequest(String type, boolean isHeader)
     {
         super(type);

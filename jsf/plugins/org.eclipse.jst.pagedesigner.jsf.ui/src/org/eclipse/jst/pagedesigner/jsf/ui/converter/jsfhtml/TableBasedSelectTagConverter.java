@@ -30,6 +30,7 @@ public class TableBasedSelectTagConverter extends SelectTagConverter
 
     /**
      * @param host
+     * @param inputType 
      */
     public TableBasedSelectTagConverter(Element host, String inputType)
     {
@@ -158,6 +159,9 @@ public class TableBasedSelectTagConverter extends SelectTagConverter
         return (tableEle);
     }
 
+    /**
+     * @return the input type
+     */
     protected String getInputType()
     {
         return _inputType;

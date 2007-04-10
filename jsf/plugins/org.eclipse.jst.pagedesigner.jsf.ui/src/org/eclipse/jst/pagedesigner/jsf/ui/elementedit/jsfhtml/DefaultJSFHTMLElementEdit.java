@@ -42,6 +42,9 @@ public class DefaultJSFHTMLElementEdit extends AbstractElementEdit
     {
         String _localName;
 
+        /**
+         * @param localtag
+         */
         public JSFCoreSupport(String localtag)
         {
             _localName = localtag;

@@ -30,6 +30,10 @@ public final class SectionResources
         // no external instantiation
     }
 
+    /**
+     * @param key
+     * @return the resource for key or !key! if not found
+     */
     public static String getString(String key)
     {
         try

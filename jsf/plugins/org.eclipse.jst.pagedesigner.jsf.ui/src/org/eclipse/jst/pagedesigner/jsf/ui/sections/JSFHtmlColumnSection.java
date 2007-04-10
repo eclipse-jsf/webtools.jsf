@@ -20,6 +20,9 @@ import org.eclipse.jst.pagedesigner.properties.attrgroup.AttributeGroupSection;
  */
 public class JSFHtmlColumnSection extends AttributeGroupSection
 {
+    /**
+     * The default constructor
+     */
     public JSFHtmlColumnSection()
     {
         super(ITLDConstants.URI_JSF_HTML, IJSFConstants.TAG_COLUMN, 

@@ -35,8 +35,9 @@ public class PanelGridDeleteRowCommand extends DesignerCommand
     int     _rowIndex;
 
     /**
-     * @param label
      * @param viewer
+     * @param panelGrid 
+     * @param index 
      */
     public PanelGridDeleteRowCommand(IHTMLGraphicalViewer viewer, Element panelGrid, int index)
     {

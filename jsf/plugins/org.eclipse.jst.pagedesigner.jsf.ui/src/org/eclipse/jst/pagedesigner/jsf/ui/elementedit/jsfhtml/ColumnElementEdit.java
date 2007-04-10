@@ -68,6 +68,9 @@ public class ColumnElementEdit extends DefaultJSFHTMLElementEdit
 
     private static class MyDropLocationStrategy extends DefaultDropLocationStrategy
     {
+        /**
+         * @param viewer
+         */
         public MyDropLocationStrategy(EditPartViewer viewer) {
             super(viewer);
         }

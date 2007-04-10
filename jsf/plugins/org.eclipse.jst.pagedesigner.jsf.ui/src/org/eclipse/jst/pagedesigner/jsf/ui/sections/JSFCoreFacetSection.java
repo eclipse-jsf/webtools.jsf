@@ -20,6 +20,9 @@ import org.eclipse.jst.pagedesigner.properties.attrgroup.AttributeGroupSection;
  */
 public class JSFCoreFacetSection extends AttributeGroupSection
 {
+    /**
+     * The default constructor
+     */
     public JSFCoreFacetSection()
     {
         super(ITLDConstants.URI_JSF_CORE, IJSFConstants.TAG_FACET, 

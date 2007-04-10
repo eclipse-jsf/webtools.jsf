@@ -20,6 +20,9 @@ import org.eclipse.jst.pagedesigner.properties.attrgroup.AttributeGroupSection;
  */
 public class JSFHtmlSelectManyCheckboxSection extends AttributeGroupSection
 {
+    /**
+     * The default constructor 
+     */
     public JSFHtmlSelectManyCheckboxSection()
     {
         super(ITLDConstants.URI_JSF_HTML, IJSFConstants.TAG_SELECTMANYCHECKBOX, 

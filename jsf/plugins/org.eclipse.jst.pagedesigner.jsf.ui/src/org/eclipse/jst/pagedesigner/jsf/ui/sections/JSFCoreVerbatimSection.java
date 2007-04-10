@@ -20,6 +20,9 @@ import org.eclipse.jst.pagedesigner.properties.attrgroup.AttributeGroupSection;
  */
 public class JSFCoreVerbatimSection extends AttributeGroupSection
 {
+    /**
+     * The default constructor
+     */
     public JSFCoreVerbatimSection()
     {
         super(ITLDConstants.URI_JSF_CORE, IJSFConstants.TAG_VERBATIM, 

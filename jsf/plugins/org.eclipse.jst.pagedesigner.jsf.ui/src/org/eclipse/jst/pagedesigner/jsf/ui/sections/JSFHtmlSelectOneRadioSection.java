@@ -20,6 +20,9 @@ import org.eclipse.jst.pagedesigner.properties.attrgroup.AttributeGroupSection;
  */
 public class JSFHtmlSelectOneRadioSection extends AttributeGroupSection
 {
+    /**
+     * The default constructor 
+     */
     public JSFHtmlSelectOneRadioSection()
     {
         super(ITLDConstants.URI_JSF_HTML, IJSFConstants.TAG_SELECTONERADIO, 

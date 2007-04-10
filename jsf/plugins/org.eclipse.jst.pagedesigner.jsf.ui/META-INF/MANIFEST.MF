@@ -44,3 +44,4 @@ Export-Package: org.eclipse.jst.pagedesigner.jsf.core.dom,
  org.eclipse.jst.pagedesigner.jsf.ui.elementedit.util,
  org.eclipse.jst.pagedesigner.jsf.ui.sections,
  org.eclipse.jst.pagedesigner.jsf.ui.util
+Bundle-RequiredExecutionEnvironment: J2SE-1.5

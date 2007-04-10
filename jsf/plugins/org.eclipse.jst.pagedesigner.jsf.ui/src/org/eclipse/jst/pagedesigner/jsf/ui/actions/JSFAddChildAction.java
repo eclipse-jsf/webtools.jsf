@@ -29,7 +29,8 @@ public class JSFAddChildAction extends Action
     private IDOMElement _parentEle;
 
     /**
-     * 
+     * @param text 
+     * @param parentNode 
      */
     public JSFAddChildAction(String text, IDOMElement parentNode)
     {
@@ -37,11 +38,17 @@ public class JSFAddChildAction extends Action
         this._parentEle = parentNode;
     }
 
+    /**
+     * @return the parent element
+     */
     public IDOMElement getParentElement()
     {
         return _parentEle;
     }
 
+    /**
+     * @return the active shell
+     */
     public Shell getShell()
     {
         IWorkbench bench = PlatformUI.getWorkbench();

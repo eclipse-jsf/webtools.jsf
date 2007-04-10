@@ -21,6 +21,11 @@ import org.eclipse.ui.internal.dialogs.NewWizard;
 public class CommonDialogFieldWizard extends NewWizard
 {
     DialogFieldGroupPage mainPage;
+    /**
+     * Constructg a new wizard using page as the wizard mage
+     * 
+     * @param page
+     */
     public CommonDialogFieldWizard(DialogFieldGroupPage page)
     {
         this.mainPage = page;

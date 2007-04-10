@@ -20,6 +20,9 @@ import org.eclipse.jst.pagedesigner.properties.attrgroup.AttributeGroupSection;
  */
 public class JSFCoreParamSection extends AttributeGroupSection
 {
+    /**
+     * The default constructor
+     */
     public JSFCoreParamSection()
     {
         super(ITLDConstants.URI_JSF_CORE, IJSFConstants.TAG_PARAM, 

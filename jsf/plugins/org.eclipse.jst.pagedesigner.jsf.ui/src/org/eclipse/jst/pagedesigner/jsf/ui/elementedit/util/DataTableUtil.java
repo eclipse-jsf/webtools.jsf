@@ -27,11 +27,18 @@ public class DataTableUtil
     private static final int INVALID_POSITION = -10;
     private Element          _dataTable       = null;
 
+    /**
+     * @param dataTable
+     */
     public DataTableUtil(Element dataTable)
     {
         this._dataTable = dataTable;
     }
 
+    /**
+     * @param column
+     * @return the column index for column
+     */
     public int getColumnIndex(Element column)
     {
         NodeList nodeList = this._dataTable.getElementsByTagName("h:column");
@@ -48,6 +55,10 @@ public class DataTableUtil
         return INVALID_POSITION;
     }
 
+    /**
+     * @param child
+     * @return the hcolumn parent of child or null if not found
+     */
     public Element findHColumnParent(Node child)
     {
         if (child == null)

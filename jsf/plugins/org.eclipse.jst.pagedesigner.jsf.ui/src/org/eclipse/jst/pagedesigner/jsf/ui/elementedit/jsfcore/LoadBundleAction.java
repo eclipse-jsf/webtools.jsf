@@ -37,6 +37,9 @@ public class LoadBundleAction extends Action
     private String   _baseName;
     private IProject _project;
 
+    /**
+     * Create a new action
+     */
     public LoadBundleAction()
     {
         setText(JSFUIPlugin.getResourceString("ElementEdit.Submenu.LoadBundle"));//$NON-NLS-1$
@@ -112,6 +115,11 @@ public class LoadBundleAction extends Action
         this._project = projectFor;
     }
 
+    /**
+     * @param inputName
+     * @return the editor id of theditor to open for the inputName or null
+     * if none can be ascertained
+     */
     public String getEditorID(String inputName)
     {
         IEditorRegistry registry = PlatformUI.getWorkbench().getEditorRegistry();

@@ -69,9 +69,9 @@ public class JSFOutputLinkCreator extends AbstractLinkCreator
     }
 
     /* (non-Javadoc)
-     * @see org.eclipse.jst.pagedesigner.actions.link.ILinkCreator#canExcute(org.eclipse.jst.pagedesigner.viewer.DesignRange)
+     * @see org.eclipse.jst.pagedesigner.actions.link.AbstractLinkCreator#canExecute(org.eclipse.jst.pagedesigner.viewer.DesignRange)
      */
-    public boolean canExcute(DesignRange range)
+    public boolean canExecute(DesignRange range)
     {
         DesignPosition startPosition = range.getStartPosition();
         EditPart part = startPosition.getContainerPart();

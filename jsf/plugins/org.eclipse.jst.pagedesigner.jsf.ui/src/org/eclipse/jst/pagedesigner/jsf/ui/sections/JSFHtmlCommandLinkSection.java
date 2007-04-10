@@ -20,6 +20,9 @@ import org.eclipse.jst.pagedesigner.properties.attrgroup.AttributeGroupSection;
  */
 public class JSFHtmlCommandLinkSection extends AttributeGroupSection
 {
+    /**
+     * The default constructor
+     */
     public JSFHtmlCommandLinkSection()
     {
         super(ITLDConstants.URI_JSF_HTML, IJSFConstants.TAG_COMMANDLINK, 

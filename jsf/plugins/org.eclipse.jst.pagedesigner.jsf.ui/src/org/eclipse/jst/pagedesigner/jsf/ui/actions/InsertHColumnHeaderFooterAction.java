@@ -27,6 +27,8 @@ public class InsertHColumnHeaderFooterAction extends Action
 
     /**
      * @param text
+     * @param editPart 
+     * @param isHeader 
      */
     public InsertHColumnHeaderFooterAction(String text, EditPart editPart, boolean isHeader)
     {

@@ -20,6 +20,9 @@ import org.eclipse.jst.pagedesigner.properties.attrgroup.AttributeGroupSection;
  */
 public class JSFHtmlSelectOneMenuSection extends AttributeGroupSection
 {
+    /**
+     * The default constructor 
+     */
     public JSFHtmlSelectOneMenuSection()
     {
         super(ITLDConstants.URI_JSF_HTML, IJSFConstants.TAG_SELECTONEMENU, 

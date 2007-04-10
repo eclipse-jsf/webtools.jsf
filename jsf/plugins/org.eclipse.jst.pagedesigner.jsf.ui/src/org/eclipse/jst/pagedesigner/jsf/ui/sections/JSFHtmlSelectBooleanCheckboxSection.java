@@ -20,6 +20,9 @@ import org.eclipse.jst.pagedesigner.properties.attrgroup.AttributeGroupSection;
  */
 public class JSFHtmlSelectBooleanCheckboxSection extends AttributeGroupSection
 {
+    /**
+     * The default constructor 
+     */
     public JSFHtmlSelectBooleanCheckboxSection()
     {
         super(ITLDConstants.URI_JSF_HTML, IJSFConstants.TAG_SELECTBOOLEANCHECKBOX, 

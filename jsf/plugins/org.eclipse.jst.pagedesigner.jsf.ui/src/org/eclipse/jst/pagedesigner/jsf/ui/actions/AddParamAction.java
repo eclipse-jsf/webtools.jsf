@@ -25,7 +25,6 @@ public class AddParamAction extends JSFAddChildAction
 {
 
     /**
-     * @param text
      * @param parentNode
      */
     public AddParamAction(IDOMElement parentNode)

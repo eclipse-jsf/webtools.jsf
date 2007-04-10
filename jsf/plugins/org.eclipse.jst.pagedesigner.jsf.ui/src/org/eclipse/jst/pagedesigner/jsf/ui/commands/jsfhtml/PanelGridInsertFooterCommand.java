@@ -30,6 +30,10 @@ public class PanelGridInsertFooterCommand extends DesignerCommand
 {
     private Element _panelGrid;
 
+    /**
+     * @param viewer
+     * @param panelGrid
+     */
     public PanelGridInsertFooterCommand(IHTMLGraphicalViewer viewer, Element panelGrid)
     {
         super(CommandResources.getString("PanelGridInsertFooterCommand.Label.InsertFooter"), viewer); //$NON-NLS-1$

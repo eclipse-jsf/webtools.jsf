@@ -44,6 +44,7 @@ public class SelectItemModel
     
     /**
      * Return a description of this item, for use in development tools.
+     * @return the description
      */ 
     public String 	getDescription()
     {
@@ -52,7 +53,7 @@ public class SelectItemModel
 
     /**
      * Return the label of this item, to be rendered visibly for the user.
-     * @return
+     * @return the label for this item
      */
     public String 	getLabel()
     {
@@ -76,36 +77,57 @@ public class SelectItemModel
     {
         this._label = label;
     }
+    /**
+     * @return the item value
+     */
     public String getItemValue()
     {
         return _itemValue;
     }
 
+    /**
+     * @param itemValue
+     */
     public void setItemValue(String itemValue)
     {
         this._itemValue = itemValue;
     }
 
+    /**
+     * @return the value
+     */
     public String getValue()
     {
         return _value;
     }
 
+    /**
+     * @param value
+     */
     public void setValue(String value)
     {
         this._value = value;
     }
 
+    /**
+     * @return the id
+     */
     public String getId()
     {
         return _id;
     }
 
+    /**
+     * @param id
+     */
     public void setId(String id)
     {
         _id = id;
     }
 
+    /**
+     * @return the display string
+     */
     public String getDisplayString()
     {
         if (_label != null && _label.length() > 0)

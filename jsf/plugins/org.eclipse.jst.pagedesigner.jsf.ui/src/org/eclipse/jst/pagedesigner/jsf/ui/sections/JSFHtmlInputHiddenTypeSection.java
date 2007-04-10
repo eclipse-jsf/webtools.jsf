@@ -37,16 +37,15 @@ public class JSFHtmlInputHiddenTypeSection extends BaseCustomSection
 {
     private RadiosDialogField     _typesField;
 
-    public static final int       HIDDEN   = 0;
-    public static final int       SECRET   = 1;
-    public static final int       TEXT     = 2;
-    public static final int       TEXTAREA = 3;
     final private static String[] TYPES    = { SectionResources.getString("JSFHtmlInputHiddenSection.Type0"), //$NON-NLS-1$
                                            SectionResources.getString("JSFHtmlInputHiddenSection.Type1"), //$NON-NLS-1$
                                            SectionResources.getString("JSFHtmlInputHiddenSection.Type2"), //$NON-NLS-1$
                                            SectionResources.getString("JSFHtmlInputHiddenSection.Type3") //$NON-NLS-1$
                                            };
 
+    /**
+     * The default constructor
+     */
     public JSFHtmlInputHiddenTypeSection()
     {
         super();
@@ -62,7 +61,7 @@ public class JSFHtmlInputHiddenTypeSection extends BaseCustomSection
                 String localTag = toLocalTag(type);
                 String newtag = prefix + ":" + localTag; //$NON-NLS-1$
                 Map attrs = new HashMap();
-                if (type == TEXTAREA)
+                if (type == IInputWidgetTypes.TEXTAREA)
                 {
                     // need to change "size" attribute to "cols"
                     String size = _element.getAttribute(IJSFConstants.ATTR_SIZE);
@@ -108,13 +107,13 @@ public class JSFHtmlInputHiddenTypeSection extends BaseCustomSection
     {
         switch (type)
         {
-            case SECRET:
+            case IInputWidgetTypes.SECRET:
                 return IJSFConstants.TAG_INPUTSECRET;
-            case HIDDEN:
+            case IInputWidgetTypes.HIDDEN:
                 return IJSFConstants.TAG_INPUTHIDDEN;
-            case TEXTAREA:
+            case IInputWidgetTypes.TEXTAREA:
                 return IJSFConstants.TAG_INPUTTEXTAREA;
-            case TEXT:
+            case IInputWidgetTypes.TEXT:
                 return IJSFConstants.TAG_INPUTTEXT;
             default:
                 return IJSFConstants.TAG_INPUTHIDDEN;
@@ -128,28 +127,31 @@ public class JSFHtmlInputHiddenTypeSection extends BaseCustomSection
         _typesField.setSelectedIndexWithoutUpdate(getInputType());
     }
 
+    /**
+     * @return the type of the input.  One of TEXT, TEXTAREA, HIDDEN, SECRET.
+     */
     public int getInputType()
     {
         String localTag = _element.getLocalName();
         if (IJSFConstants.TAG_INPUTTEXT.equals(localTag))
         {
-            return TEXT;
+            return IInputWidgetTypes.TEXT;
         }
         else if (IJSFConstants.TAG_INPUTSECRET.equals(localTag))
         {
-            return SECRET;
+            return IInputWidgetTypes.SECRET;
         }
         else if (IJSFConstants.TAG_INPUTHIDDEN.equals(localTag))
         {
-            return HIDDEN;
+            return IInputWidgetTypes.HIDDEN;
         }
         else if (IJSFConstants.TAG_INPUTTEXTAREA.equals(localTag))
         {
-            return TEXTAREA;
+            return IInputWidgetTypes.TEXTAREA;
         }
         else
         {
-            return HIDDEN;
+            return IInputWidgetTypes.HIDDEN;
         }
     }
 

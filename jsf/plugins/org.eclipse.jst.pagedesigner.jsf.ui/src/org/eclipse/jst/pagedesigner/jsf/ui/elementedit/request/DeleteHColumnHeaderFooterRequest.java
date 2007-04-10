@@ -21,6 +21,10 @@ public class DeleteHColumnHeaderFooterRequest extends Request
 {
     private boolean _isHeader;
 
+    /**
+     * @param type
+     * @param isHeader
+     */
     public DeleteHColumnHeaderFooterRequest(String type, boolean isHeader)
     {
         super(type);

@@ -39,6 +39,9 @@ public class JSFUIPluginResourcesUtil extends ResourceUtils
         }
     }
 
+    /**
+     * @return the singleton instance
+     */
     public static JSFUIPluginResourcesUtil getInstance()
     {
         if (_resource == null)

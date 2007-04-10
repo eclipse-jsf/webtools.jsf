@@ -74,7 +74,7 @@ public class JSFUIPlugin extends AbstractUIPlugin
 
     /**
      * get the alerts objects associated with this plugin for alerting the user.
-     * @return
+     * @return the alerts
      */
     public static Alerts getAlerts()
     {
@@ -91,6 +91,7 @@ public class JSFUIPlugin extends AbstractUIPlugin
 
     /**
      * Returns the shared instance.
+     * @return the default plugin
      */
     public static JSFUIPlugin getDefault()
     {
@@ -100,6 +101,8 @@ public class JSFUIPlugin extends AbstractUIPlugin
     /**
      * Returns the string from the plugin's resource bundle,
      * or 'key' if not found.
+     * @param key 
+     * @return the resource string for key or 'key' if not found
      */
     public static String getResourceString(String key)
     {
@@ -116,6 +119,7 @@ public class JSFUIPlugin extends AbstractUIPlugin
 
     /**
      * Returns the plugin's resource bundle,
+     * @return the resource bundle
      */
     public ResourceBundle getResourceBundle()
     {

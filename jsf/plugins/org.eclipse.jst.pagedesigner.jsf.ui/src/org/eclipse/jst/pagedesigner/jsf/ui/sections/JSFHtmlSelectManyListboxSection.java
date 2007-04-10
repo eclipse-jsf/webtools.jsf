@@ -20,6 +20,9 @@ import org.eclipse.jst.pagedesigner.properties.attrgroup.AttributeGroupSection;
  */
 public class JSFHtmlSelectManyListboxSection extends AttributeGroupSection
 {
+    /**
+     * The default constructor 
+     */
     public JSFHtmlSelectManyListboxSection()
     {
         super(ITLDConstants.URI_JSF_HTML, IJSFConstants.TAG_SELECTMANYLISTBOX, 

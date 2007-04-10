@@ -27,6 +27,9 @@ public class JarEntryEditorInput implements IStorageEditorInput
 
     private IStorage fJarEntryFile;
 
+    /**
+     * @param jarEntryFile
+     */
     public JarEntryEditorInput(IStorage jarEntryFile)
     {
         fJarEntryFile = jarEntryFile;
@@ -64,16 +67,18 @@ public class JarEntryEditorInput implements IStorageEditorInput
         return fJarEntryFile.getName();
     }
 
-    /*
-     * @see IEditorInput#getFullPath()
+
+    /**
+     * @return the full path of the entry as a string
      */
     public String getFullPath()
     {
         return fJarEntryFile.getFullPath().toString();
     }
 
-    /*
-     * @see IEditorInput#getContentType()
+
+    /**
+     * @return the file extension of this input
      */
     public String getContentType()
     {

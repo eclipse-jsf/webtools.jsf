@@ -29,6 +29,10 @@ import org.eclipse.jst.pagedesigner.meta.internal.CMRegistry;
  */
 public class DialogFieldFactory
 {
+    /**
+     * @param data
+     * @return the dialog field for data
+     */
     public static DialogField getDialogField(AttributeData data)
     {
         IAttributeDescriptor descriptor = getAttributeDescriptor(data.uri, data.elementName, data.attributeName);
@@ -58,6 +62,10 @@ public class DialogFieldFactory
         return elementDescriptor.getAttributeDescriptor(attributeName);
     }
 
+    /**
+     * @param field
+     * @param value
+     */
     public static void setDialogFiledValue(DialogField field, Object value)
     {
         if (field instanceof StringDialogField)
@@ -90,9 +98,8 @@ public class DialogFieldFactory
     }
 
     /**
-     * @param element
-     * @param string
-     * @return
+     * @param data
+     * @return the dialog field label for data
      */
     public static String getDialogFieldLabel(AttributeData data)
     {

@@ -57,9 +57,7 @@ public class JSFCoreConvertDateTimeGroup extends AttributeGroup
                                                    };
 
     /**
-     * @param uri
-     * @param tagName
-     * @param attrNames
+     * The default constructor
      */
     public JSFCoreConvertDateTimeGroup()
     {

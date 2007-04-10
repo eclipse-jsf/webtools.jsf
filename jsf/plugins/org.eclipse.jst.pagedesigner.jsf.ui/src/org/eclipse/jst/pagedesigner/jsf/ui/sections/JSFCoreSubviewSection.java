@@ -20,6 +20,9 @@ import org.eclipse.jst.pagedesigner.properties.attrgroup.AttributeGroupSection;
  */
 public class JSFCoreSubviewSection extends AttributeGroupSection
 {
+    /**
+     * The default constructor
+     */
     public JSFCoreSubviewSection()
     {
         super(ITLDConstants.URI_JSF_CORE, IJSFConstants.TAG_SUBVIEW, 

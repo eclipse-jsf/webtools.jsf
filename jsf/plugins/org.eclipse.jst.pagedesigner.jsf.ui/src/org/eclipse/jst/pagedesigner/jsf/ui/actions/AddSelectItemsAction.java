@@ -23,6 +23,9 @@ import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
 public class AddSelectItemsAction extends JSFAddChildAction
 {
 
+    /**
+     * @param parentNode
+     */
     public AddSelectItemsAction(IDOMElement parentNode)
     {
         super(ActionsResources.getString("AddSelectItemsAction.ActionLabel.SelectItems"), parentNode); //$NON-NLS-1$

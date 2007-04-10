@@ -20,6 +20,9 @@ import org.eclipse.jst.pagedesigner.properties.attrgroup.AttributeGroupSection;
  */
 public class JSFCoreValidateDoubleRangeSection extends AttributeGroupSection
 {
+    /**
+     * The default constructor
+     */
     public JSFCoreValidateDoubleRangeSection()
     {
         super(ITLDConstants.URI_JSF_CORE, IJSFConstants.TAG_VALIDATEDOUBLERANGE, 

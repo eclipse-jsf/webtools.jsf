@@ -21,6 +21,10 @@ public class InsertHColumnHeaderFooterRequest extends Request
 {
     private boolean _isHeader;
 
+    /**
+     * @param type
+     * @param isHeader
+     */
     public InsertHColumnHeaderFooterRequest(String type, boolean isHeader)
     {
         super(type);

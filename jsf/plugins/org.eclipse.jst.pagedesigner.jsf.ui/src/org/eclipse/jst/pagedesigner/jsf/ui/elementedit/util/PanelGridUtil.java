@@ -28,11 +28,18 @@ public class PanelGridUtil
     private static final int INVALID_POSITION = -10;
     private Element          _panelGrid       = null;
 
+    /**
+     * @param panelGrid
+     */
     public PanelGridUtil(Element panelGrid)
     {
         this._panelGrid = panelGrid;
     }
 
+    /**
+     * @param domIndex
+     * @return the row index in the panel of the relative dom index
+     */
     public int convertRowIndexFromDomToView(int domIndex)
     {
         boolean hasHeaderRow = (JSFDOMUtil.findFacet(this._panelGrid, "header") != null);
@@ -64,6 +71,10 @@ public class PanelGridUtil
         return domIndex + uiRows;
     }
 
+    /**
+     * @param cell
+     * @return the dom row index of cell in the panel
+     */
     public int getDomRowIndex(Element cell)
     {
         boolean hasHeaderRow = (JSFDOMUtil.findFacet(this._panelGrid, "header") != null);
@@ -113,6 +124,10 @@ public class PanelGridUtil
         return rowIndex;
     }
 
+    /**
+     * @param cell
+     * @return the column index of cell in the panel
+     */
     public int getDomColumnIndex(Element cell)
     {
         int columns = DOMUtil.getIntAttributeIgnoreCase(this._panelGrid, IJSFConstants.ATTR_COLUMNS, 1);
@@ -131,6 +146,9 @@ public class PanelGridUtil
         return columnIndex;
     }
 
+    /**
+     * @return the row count in the panel
+     */
     public int getUIRowCount()
     {
         int columns = DOMUtil.getIntAttributeIgnoreCase(this._panelGrid, IJSFConstants.ATTR_COLUMNS, 1);

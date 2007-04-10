@@ -29,9 +29,9 @@ public class JSFDOMUtil
 {
 
     /**
-     * @param panelGridEle
-     * @param string
-     * @return
+     * @param parentEle 
+     * @param name 
+     * @return the facet element or null if not found
      */
     public static Element findFacet(Element parentEle, String name)
     {
@@ -51,6 +51,10 @@ public class JSFDOMUtil
         return null;
     }
 
+    /**
+     * @param node
+     * @return true if node is a JSF column
+     */
     public static boolean isHColumn(Node node)
     {
         if (node instanceof Element)
@@ -67,7 +71,7 @@ public class JSFDOMUtil
 
     /**
      * @param panelGridEle
-     * @return
+     * @return the list of UI component children
      */
     public static List getUIComponentChildren(Element panelGridEle)
     {
@@ -90,6 +94,10 @@ public class JSFDOMUtil
         return list;
     }
 
+    /**
+     * @param ele
+     * @return true if ele is a facet
+     */
     public static boolean isFacet(Element ele)
     {
         // XXX: here we are not checking namespace! for error tolerant.
@@ -97,8 +105,8 @@ public class JSFDOMUtil
     }
 
     /**
-     * @param child
-     * @return
+     * @param ele 
+     * @return true if the local name of ele is "param"
      */
     public static boolean isUIParameter(Element ele)
     {

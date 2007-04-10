@@ -121,7 +121,7 @@ public class LoadBundleOperation extends AbstractTransformOperation {
 	 * 
 	 * @param project IProject instance.
 	 * @param filePath Source folder-relative path of the file to be located.
-	 * @return
+	 * @return the specified file in any source folder of the specified project.
 	 */
 	protected IResource findFileInSrcFolder(IProject project, String filePath) {
 		IResource resource = null;

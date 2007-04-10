@@ -42,9 +42,7 @@ public class JSFCoreConvertNumberGroup extends AttributeGroup
                                         };
 
     /**
-     * @param uri
-     * @param tagName
-     * @param attrNames
+     * The default constructor
      */
     public JSFCoreConvertNumberGroup()
     {

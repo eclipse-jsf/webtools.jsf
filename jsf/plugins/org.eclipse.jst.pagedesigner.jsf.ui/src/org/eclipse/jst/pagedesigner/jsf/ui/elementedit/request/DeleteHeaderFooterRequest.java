@@ -21,6 +21,10 @@ public class DeleteHeaderFooterRequest extends Request
 {
     private boolean _isHeader;
 
+    /**
+     * @param type
+     * @param isHeader
+     */
     public DeleteHeaderFooterRequest(String type, boolean isHeader)
     {
         super(type);

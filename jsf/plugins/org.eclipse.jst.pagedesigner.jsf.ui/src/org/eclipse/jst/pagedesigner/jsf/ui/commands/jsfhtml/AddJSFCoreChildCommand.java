@@ -38,7 +38,9 @@ public class AddJSFCoreChildCommand extends DesignerCommand
     private IDOMElement _parent;
 
     /**
-     * 
+     * @param parent 
+     * @param coreChildLocalName 
+     * @param attributes 
      */
     public AddJSFCoreChildCommand(IDOMElement parent, String coreChildLocalName, Map attributes)
     {
@@ -56,10 +58,10 @@ public class AddJSFCoreChildCommand extends DesignerCommand
     }
 
     /**
-     * @param parentElement
-     * @param string
-     * @param string2
-     * @param newClassName
+     * @param parent 
+     * @param coreChildLocalName 
+     * @param aname 
+     * @param avalue 
      */
     public AddJSFCoreChildCommand(IDOMElement parent, String coreChildLocalName, String aname, String avalue)
     {

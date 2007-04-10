@@ -25,7 +25,6 @@ public class AddValidateLongRangeAction extends JSFAddChildAction
 {
 
     /**
-     * @param text
      * @param parentNode
      */
     public AddValidateLongRangeAction(IDOMElement parentNode)

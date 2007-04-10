@@ -74,14 +74,23 @@ public class PageFlowContributor implements IContextMenuItemContributor
 
     class PageFlowAction extends Action
     {
+        /**
+         * this action's id
+         */
         public final static String ID = "org.eclipse.jst.pagedesigner.jsf.ui.actions.PageFlowAction"; //$NON-NLS-1$
         private IStructuredModel   model;
 
+        /**
+         * construct the action
+         */
         public PageFlowAction()
         {
             setText(ActionsResources.getString("PageFlowContributor.Menu.PageFlow"));//$NON-NLS-1$
         }
 
+        /**
+         * @param model
+         */
         public void setModel(IStructuredModel model)
         {
             this.model = model;

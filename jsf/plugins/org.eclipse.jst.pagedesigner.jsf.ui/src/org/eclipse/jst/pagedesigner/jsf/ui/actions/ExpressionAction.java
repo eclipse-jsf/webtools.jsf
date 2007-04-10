@@ -28,7 +28,13 @@ import org.eclipse.ui.PlatformUI;
  */
 public class ExpressionAction extends Action
 {
+    /**
+     * enumerates a method-binding expression
+     */
     public static final int METHOD   = 0;
+    /**
+     * enumerates a value-binding expression
+     */
     public static final int VARIABLE = 1;
 
     private String          _action;
@@ -36,6 +42,9 @@ public class ExpressionAction extends Action
     private IFile           _file;
     private int             _type;
 
+    /**
+     * @param type
+     */
     public ExpressionAction(int type)
     {
         _type = type;
@@ -108,11 +117,17 @@ public class ExpressionAction extends Action
         return window.getActivePage();
     }
 
+    /**
+     * @param fileFor
+     */
     public void setFile(IFile fileFor)
     {
         _file = fileFor;
     }
 
+    /**
+     * @return the file
+     */
     public IFile getFile()
     {
         return _file;

@@ -20,6 +20,9 @@ import org.eclipse.jst.pagedesigner.properties.attrgroup.AttributeGroupSection;
  */
 public class JSFCoreActionListenerSection extends AttributeGroupSection
 {
+    /**
+     * The default constructor
+     */
     public JSFCoreActionListenerSection()
     {
         super(ITLDConstants.URI_JSF_CORE, IJSFConstants.TAG_ACTIONLISTENER, 

@@ -30,8 +30,9 @@ public class DataTableDeleteColumnHeaderCommand extends DesignerCommand
     private Element _dataTable;
 
     /**
-     * @param label
      * @param viewer
+     * @param dataTable 
+     * @param header 
      */
     public DataTableDeleteColumnHeaderCommand(IHTMLGraphicalViewer viewer, Element dataTable, boolean header)
     {

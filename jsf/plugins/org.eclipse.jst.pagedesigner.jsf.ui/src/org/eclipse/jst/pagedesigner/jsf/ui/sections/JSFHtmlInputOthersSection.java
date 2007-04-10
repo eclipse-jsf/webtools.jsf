@@ -470,6 +470,9 @@ public class JSFHtmlInputOthersSection extends BaseCustomSection
         }
     }
 
+    /**
+     * The default constructor
+     */
     public JSFHtmlInputOthersSection()
     {
         super();

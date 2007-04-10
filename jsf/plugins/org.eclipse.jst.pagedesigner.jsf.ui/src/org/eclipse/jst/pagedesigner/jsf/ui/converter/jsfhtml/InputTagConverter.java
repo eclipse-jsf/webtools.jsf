@@ -30,6 +30,7 @@ public class InputTagConverter extends AbstractTagConverter
 
     /**
      * @param host
+     * @param inputType 
      */
     public InputTagConverter(Element host, String inputType)
     {

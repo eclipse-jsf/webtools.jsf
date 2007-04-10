@@ -24,7 +24,6 @@ public class AddConvertNumberAction extends JSFAddChildAction
 {
 
     /**
-     * @param text
      * @param parentNode
      */
     public AddConvertNumberAction(IDOMElement parentNode)

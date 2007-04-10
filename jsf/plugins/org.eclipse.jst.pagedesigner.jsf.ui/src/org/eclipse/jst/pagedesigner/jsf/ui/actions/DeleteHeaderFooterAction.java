@@ -27,6 +27,8 @@ public class DeleteHeaderFooterAction extends Action
 
     /**
      * @param text
+     * @param editPart 
+     * @param isHeader 
      */
     public DeleteHeaderFooterAction(String text, EditPart editPart, boolean isHeader)
     {

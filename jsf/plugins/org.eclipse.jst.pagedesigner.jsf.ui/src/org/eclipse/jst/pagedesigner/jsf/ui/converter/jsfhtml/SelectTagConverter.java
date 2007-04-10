@@ -40,7 +40,7 @@ public abstract class SelectTagConverter extends AbstractTagConverter
      * Return a list of SelectItem
      * 
      * @param parent
-     * @return
+     * @return the select item list for parent
      */
     protected List getSelectItems(Element parent)
     {
@@ -88,6 +88,10 @@ public abstract class SelectTagConverter extends AbstractTagConverter
         return result;
     }
 
+    /**
+     * @param parent
+     * @return the select item model for parent
+     */
     public SelectItemModel getDefault(Element parent)
     {
         SelectItemModel item = new SelectItemModel();

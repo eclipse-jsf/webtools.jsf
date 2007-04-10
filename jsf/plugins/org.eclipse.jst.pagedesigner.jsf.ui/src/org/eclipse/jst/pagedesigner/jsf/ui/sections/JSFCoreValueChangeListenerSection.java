@@ -20,6 +20,9 @@ import org.eclipse.jst.pagedesigner.properties.attrgroup.AttributeGroupSection;
  */
 public class JSFCoreValueChangeListenerSection extends AttributeGroupSection
 {
+    /**
+     * The default constructor
+     */
     public JSFCoreValueChangeListenerSection()
     {
         super(ITLDConstants.URI_JSF_CORE, IJSFConstants.TAG_VALUECHANGELISTENER, 

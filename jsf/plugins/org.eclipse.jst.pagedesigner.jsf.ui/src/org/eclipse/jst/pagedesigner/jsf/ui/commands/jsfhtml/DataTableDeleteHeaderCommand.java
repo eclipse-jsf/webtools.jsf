@@ -30,6 +30,11 @@ public class DataTableDeleteHeaderCommand extends DesignerCommand
     boolean         _isHeader;
     private Element _dataTable;
 
+    /**
+     * @param viewer
+     * @param dataTable
+     * @param isHeader
+     */
     public DataTableDeleteHeaderCommand(IHTMLGraphicalViewer viewer, Element dataTable, boolean isHeader)
     {
         super(isHeader ? CommandResources.getString("DataTableDeleteHeaderCommand.Label.DeleteHeader") : //$NON-NLS-1$

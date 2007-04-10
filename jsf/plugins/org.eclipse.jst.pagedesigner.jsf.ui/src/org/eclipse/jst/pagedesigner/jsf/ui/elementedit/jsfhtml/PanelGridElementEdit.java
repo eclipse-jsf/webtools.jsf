@@ -235,6 +235,9 @@ public class PanelGridElementEdit extends DefaultJSFHTMLElementEdit
     {
         ElementEditPart _part;
 
+        /**
+         * @param part
+         */
         public PanelGridResizePolicy(ElementEditPart part)
         {
             _part = part;
@@ -275,7 +278,7 @@ public class PanelGridElementEdit extends DefaultJSFHTMLElementEdit
             Element panelGrid = (Element) _part.getIDOMNode();
             if (request instanceof TableResizeRequest)
             {
-                // TODO: FIXME:
+                return super.getCommand(request);
             }
             else if (request instanceof TableInsertRequest)
             {

@@ -27,6 +27,8 @@ public class InsertHeaderFooterAction extends Action
 
     /**
      * @param text
+     * @param editPart 
+     * @param isHeader 
      */
     public InsertHeaderFooterAction(String text, EditPart editPart, boolean isHeader)
     {

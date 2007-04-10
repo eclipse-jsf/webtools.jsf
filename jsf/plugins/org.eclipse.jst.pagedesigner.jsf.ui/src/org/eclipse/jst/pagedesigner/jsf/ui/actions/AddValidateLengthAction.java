@@ -25,7 +25,6 @@ public class AddValidateLengthAction extends JSFAddChildAction
 {
 
     /**
-     * @param text
      * @param parentNode
      */
     public AddValidateLengthAction(IDOMElement parentNode)

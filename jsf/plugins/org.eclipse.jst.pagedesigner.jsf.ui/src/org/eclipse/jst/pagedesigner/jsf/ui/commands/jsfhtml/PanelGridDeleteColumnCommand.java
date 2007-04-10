@@ -14,12 +14,14 @@ package org.eclipse.jst.pagedesigner.jsf.ui.commands.jsfhtml;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jface.viewers.ISelection;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 import org.eclipse.jst.pagedesigner.commands.DesignerCommand;
 import org.eclipse.jst.pagedesigner.jsf.core.dom.JSFDOMUtil;
+import org.eclipse.jst.pagedesigner.jsf.ui.JSFUIPlugin;
 import org.eclipse.jst.pagedesigner.utils.DOMUtil;
 import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
 
@@ -36,8 +38,9 @@ public class PanelGridDeleteColumnCommand extends DesignerCommand
     private Element _panelGridEle;
 
     /**
-     * @param label
      * @param viewer
+     * @param panelGrid 
+     * @param columnIndex 
      */
     public PanelGridDeleteColumnCommand(IHTMLGraphicalViewer viewer, Element panelGrid, int columnIndex)
     {
@@ -77,8 +80,7 @@ public class PanelGridDeleteColumnCommand extends DesignerCommand
 
         if (_columnIndex >= columns)
         {
-            // should not happen
-            // TODO: log.
+            JSFUIPlugin.log(IStatus.ERROR, "Should not happen", new Throwable());
             return;
         }
         List children = JSFDOMUtil.getUIComponentChildren(_panelGridEle);

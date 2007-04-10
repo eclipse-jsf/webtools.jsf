@@ -24,7 +24,6 @@ public class AddConvertDateTimeAction extends JSFAddChildAction
 {
 
     /**
-     * @param text
      * @param parentNode
      */
     public AddConvertDateTimeAction(IDOMElement parentNode)

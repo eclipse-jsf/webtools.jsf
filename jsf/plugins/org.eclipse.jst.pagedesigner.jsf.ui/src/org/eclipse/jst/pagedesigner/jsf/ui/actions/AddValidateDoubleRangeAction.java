@@ -25,7 +25,6 @@ public class AddValidateDoubleRangeAction extends JSFAddChildAction
 {
 
     /**
-     * @param text
      * @param parentNode
      */
     public AddValidateDoubleRangeAction(IDOMElement parentNode)

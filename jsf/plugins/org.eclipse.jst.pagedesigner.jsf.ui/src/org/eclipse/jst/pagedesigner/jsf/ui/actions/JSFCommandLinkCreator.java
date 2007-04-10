@@ -67,10 +67,12 @@ public class JSFCommandLinkCreator extends AbstractLinkCreator
 
     }
 
-    /* (non-Javadoc)
-     * @see org.eclipse.jst.pagedesigner.actions.link.ILinkCreator#canExcute(org.eclipse.jst.pagedesigner.viewer.DesignRange)
+
+    /**
+     * @param range
+     * @return true if can execute
      */
-    public boolean canExcute(DesignRange range)
+    public boolean canExecute(DesignRange range)
     {
         DesignPosition startPosition = range.getStartPosition();
         EditPart part = startPosition.getContainerPart();

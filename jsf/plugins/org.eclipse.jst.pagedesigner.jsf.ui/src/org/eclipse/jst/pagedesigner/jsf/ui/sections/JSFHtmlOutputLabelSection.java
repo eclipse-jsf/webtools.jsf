@@ -20,6 +20,9 @@ import org.eclipse.jst.pagedesigner.properties.attrgroup.AttributeGroupSection;
  */
 public class JSFHtmlOutputLabelSection extends AttributeGroupSection
 {
+    /**
+     * The default constructor 
+     */
     public JSFHtmlOutputLabelSection()
     {
         super(ITLDConstants.URI_JSF_HTML, IJSFConstants.TAG_OUTPUTLABEL, 

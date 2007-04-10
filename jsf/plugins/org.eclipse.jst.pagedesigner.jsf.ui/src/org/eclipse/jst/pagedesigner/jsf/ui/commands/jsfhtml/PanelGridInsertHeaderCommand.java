@@ -28,6 +28,10 @@ public class PanelGridInsertHeaderCommand extends DesignerCommand
 {
     private Element _panelGrid;
 
+    /**
+     * @param viewer
+     * @param panelGrid
+     */
     public PanelGridInsertHeaderCommand(IHTMLGraphicalViewer viewer, Element panelGrid)
     {
         super(CommandResources.getString("PanelGridInsertHeaderCommand.Label.InsertHeader"), viewer); //$NON-NLS-1$

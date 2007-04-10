@@ -35,8 +35,11 @@ public class JSFNavigationGroup
         // TODO: why?
     };
 
-    /* (non-Javadoc)
-     * @see org.eclipse.ui.actions.ActionGroup#fillContextMenu(org.eclipse.jface.action.IMenuManager)
+
+    /**
+     * @param menu
+     * @param element
+     * @param support
      */
     public void fillContextMenu(IMenuManager menu, final IDOMElement element, final IJSFCoreSupport support)
     {

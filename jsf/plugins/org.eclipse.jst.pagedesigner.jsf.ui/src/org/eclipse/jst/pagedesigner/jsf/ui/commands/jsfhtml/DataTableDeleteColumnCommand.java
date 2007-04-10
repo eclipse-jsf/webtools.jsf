@@ -33,8 +33,9 @@ public class DataTableDeleteColumnCommand extends DesignerCommand
     private int     _index;
 
     /**
-     * @param label
      * @param viewer
+     * @param dataTable 
+     * @param columnIndex 
      */
     public DataTableDeleteColumnCommand(IHTMLGraphicalViewer viewer, Element dataTable, int columnIndex)
     {

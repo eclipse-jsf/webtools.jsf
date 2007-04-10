@@ -24,6 +24,7 @@ import org.eclipse.jst.pagedesigner.properties.attrgroup.DialogUtil;
 public class AddActionListenerAction extends JSFAddChildAction
 {
     /**
+     * @param parentEle 
      * 
      */
     public AddActionListenerAction(IDOMElement parentEle)

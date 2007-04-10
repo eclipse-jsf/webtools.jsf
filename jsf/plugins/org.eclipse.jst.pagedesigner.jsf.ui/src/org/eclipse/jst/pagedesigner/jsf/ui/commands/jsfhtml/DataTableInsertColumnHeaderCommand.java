@@ -33,8 +33,9 @@ public class DataTableInsertColumnHeaderCommand extends DesignerCommand
     private Element _dataTable;
 
     /**
-     * @param label
      * @param viewer
+     * @param dataTable 
+     * @param header 
      */
     public DataTableInsertColumnHeaderCommand(IHTMLGraphicalViewer viewer, Element dataTable, boolean header)
     {

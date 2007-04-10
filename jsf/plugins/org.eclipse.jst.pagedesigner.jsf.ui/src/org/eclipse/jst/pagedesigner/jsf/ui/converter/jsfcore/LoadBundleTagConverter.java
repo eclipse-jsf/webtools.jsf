@@ -44,7 +44,7 @@ public class LoadBundleTagConverter extends HiddenTagConverter
 
     /**
      * @param host
-     * @param image
+     * @param labelProvider 
      */
     public LoadBundleTagConverter(Element host, ILabelProvider labelProvider)
     {

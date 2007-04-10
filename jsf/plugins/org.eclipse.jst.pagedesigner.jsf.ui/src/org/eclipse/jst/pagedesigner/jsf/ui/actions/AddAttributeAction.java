@@ -24,7 +24,6 @@ public class AddAttributeAction extends JSFAddChildAction
 {
 
     /**
-     * @param text
      * @param parentNode
      */
     public AddAttributeAction(IDOMElement parentNode)

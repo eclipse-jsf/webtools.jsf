@@ -25,7 +25,6 @@ public class AddValueChangeListenerAction extends JSFAddChildAction
 {
 
     /**
-     * @param text
      * @param parentNode
      */
     public AddValueChangeListenerAction(IDOMElement parentNode)

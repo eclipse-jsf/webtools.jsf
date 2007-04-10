@@ -28,7 +28,7 @@ public class AddConverterAction extends JSFAddChildAction
     String	_converterId;
 
     /**
-     * @param text
+     * @param converterId 
      * @param parentNode
      */
     public AddConverterAction(String converterId, IDOMElement parentNode)

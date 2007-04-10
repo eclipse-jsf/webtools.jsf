@@ -28,7 +28,7 @@ public class ConverterValidatorIdDialogField extends ComboDialogField implements
     private String _elementId = "";
 
     /**
-     * @param flags
+     * The default constructor
      */
     public ConverterValidatorIdDialogField()
     {
@@ -61,11 +61,19 @@ public class ConverterValidatorIdDialogField extends ComboDialogField implements
         }
     }
 
+    /**
+     * @return the element id
+     */
     public String getElementId()
     {
         return _elementId;
     }
 
+    /**
+     * Set the element id
+     * 
+     * @param elementId
+     */
     public void setElementId(String elementId)
     {
         this._elementId = elementId;

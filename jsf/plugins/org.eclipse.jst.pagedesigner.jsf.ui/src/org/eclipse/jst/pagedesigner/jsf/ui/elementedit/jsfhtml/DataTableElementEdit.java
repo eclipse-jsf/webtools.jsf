@@ -235,6 +235,9 @@ public class DataTableElementEdit extends DefaultJSFHTMLElementEdit
         ElementEditPart _part;
         Cursor          _columnSelectCursor;
 
+        /**
+         * @param part
+         */
         public DataTableResizePolicy(ElementEditPart part)
         {
             _part = part;
@@ -268,7 +271,7 @@ public class DataTableElementEdit extends DefaultJSFHTMLElementEdit
             Element dataTable = (Element) _part.getIDOMNode();
             if (request instanceof TableResizeRequest)
             {
-                // TODO: FIXME:
+                return super.getCommand(request);
             }
             else if (request instanceof TableInsertRequest)
             {
@@ -362,6 +365,10 @@ public class DataTableElementEdit extends DefaultJSFHTMLElementEdit
             return getSelectionTracker(request);
         }
 
+        /**
+         * @param mouseLocation
+         * @return the edit part fo the given mouse location
+         */
         public EditPart getRetargetSelectionEditPart(Point mouseLocation) {
             if (hitTestColumnSelection(mouseLocation))
             {
@@ -415,6 +422,10 @@ public class DataTableElementEdit extends DefaultJSFHTMLElementEdit
         }
     }
     
+    /**
+     * @author cbateman
+     *
+     */
     public static class MyDragMoveEditPolicy extends DragMoveEditPolicy 
     {
         protected IPositionMediator createDropChildValidator(
@@ -435,6 +446,10 @@ public class DataTableElementEdit extends DefaultJSFHTMLElementEdit
         
         private static class OnlyColumnsAndFacetsRule extends DefaultPositionRule
         {
+            /**
+             * @param mediator
+             * @param actionData
+             */
             public OnlyColumnsAndFacetsRule(IPositionMediator mediator,
                     ActionData actionData) {
                 super(mediator, actionData);

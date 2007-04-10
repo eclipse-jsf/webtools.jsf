@@ -20,6 +20,9 @@ import org.eclipse.jst.pagedesigner.properties.attrgroup.AttributeGroupSection;
  */
 public class JSFCoreSelectItemsSection extends AttributeGroupSection
 {
+    /**
+     * The default constructor
+     */
     public JSFCoreSelectItemsSection()
     {
         super(ITLDConstants.URI_JSF_CORE, IJSFConstants.TAG_SELECTITEMS, 

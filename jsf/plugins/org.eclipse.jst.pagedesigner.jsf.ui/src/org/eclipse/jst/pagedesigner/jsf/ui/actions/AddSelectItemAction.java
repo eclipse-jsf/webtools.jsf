@@ -25,7 +25,6 @@ public class AddSelectItemAction extends JSFAddChildAction
 {
 
     /**
-     * @param text
      * @param parentNode
      */
     public AddSelectItemAction(IDOMElement parentNode)

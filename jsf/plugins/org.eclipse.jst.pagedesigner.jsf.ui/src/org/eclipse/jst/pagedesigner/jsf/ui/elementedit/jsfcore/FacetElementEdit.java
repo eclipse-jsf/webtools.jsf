@@ -16,6 +16,12 @@ import org.eclipse.jst.pagedesigner.elementedit.AbstractElementEdit;
 import org.eclipse.jst.pagedesigner.parts.ElementEditPart;
 import org.w3c.dom.Element;
 
+/**
+ * Element edit for a f:facet
+ * 
+ * @author cbateman
+ *
+ */
 public class FacetElementEdit extends AbstractElementEdit
 {
     /* (non-Javadoc)

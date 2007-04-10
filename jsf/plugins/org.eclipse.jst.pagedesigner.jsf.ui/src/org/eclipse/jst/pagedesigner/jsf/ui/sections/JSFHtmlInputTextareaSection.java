@@ -20,6 +20,9 @@ import org.eclipse.jst.pagedesigner.properties.attrgroup.AttributeGroupSection;
  */
 public class JSFHtmlInputTextareaSection extends AttributeGroupSection
 {
+    /**
+     * The default constructor 
+     */
     public JSFHtmlInputTextareaSection()
     {
         super(ITLDConstants.URI_JSF_HTML, IJSFConstants.TAG_INPUTTEXTAREA, 

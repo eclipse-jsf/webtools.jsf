@@ -20,6 +20,9 @@ import org.eclipse.jst.pagedesigner.properties.attrgroup.AttributeGroupSection;
  */
 public class JSFHtmlGraphicImageSection extends AttributeGroupSection
 {
+    /**
+     * The default constructor
+     */
     public JSFHtmlGraphicImageSection()
     {
         super(ITLDConstants.URI_JSF_HTML, IJSFConstants.TAG_GRAPHICIMAGE, 

@@ -20,6 +20,9 @@ import org.eclipse.jst.pagedesigner.properties.attrgroup.AttributeGroupSection;
  */
 public class JSFHtmlCommandButtonSection extends AttributeGroupSection
 {
+    /**
+     * The default constructor
+     */
     public JSFHtmlCommandButtonSection()
     {
         super(ITLDConstants.URI_JSF_HTML, IJSFConstants.TAG_COMMANDBUTTON, 

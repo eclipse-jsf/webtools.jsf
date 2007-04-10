@@ -26,31 +26,31 @@ public interface IJSFCoreSupport
 {
     /**
      * actionListener can only be added to those ActionSource component.
-     * @return
+     * @return if is an action source
      */
     public boolean isActionSource();
 
     /**
      * 
-     * @return
+     * @return true if is a UI component
      */
     public boolean isUIComponent();
 
     /**
      * converter (convertXXX) can only be added to those ValueHolder
-     * @return
+     * @return true if is a value holder
      */
     public boolean isValueHolder();
 
     /**
      * validator can only be added to EditableValueHolder
-     * @return
+     * @return true if is an editable value holder
      */
     public boolean isEditableValueHolder();
 
     /**
      * whether support selectItem and selectItems
-     * @return
+     * @return true if supports the UISelectItem(s) contract
      */
     public boolean supportSelectItems();
 }

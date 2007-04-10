@@ -20,7 +20,10 @@ import org.eclipse.jst.pagedesigner.properties.attrgroup.AttributeGroupSection;
  */
 public class JSFHtmlFormSection extends AttributeGroupSection
 {
-    public JSFHtmlFormSection()
+    /**
+     * The default constructor
+     */
+   public JSFHtmlFormSection()
     {
         super(ITLDConstants.URI_JSF_HTML, IJSFConstants.TAG_FORM, 
                 new String[] {

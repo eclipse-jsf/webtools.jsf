@@ -15,7 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import org.eclipse.jst.jsf.common.internal.provisional.dom.TagIdentifier;
 import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
+import org.eclipse.jst.jsf.core.internal.tld.TagIdentifierFactory;
 import org.eclipse.jst.pagedesigner.IHTMLConstants;
 import org.eclipse.jst.pagedesigner.converter.AbstractTagConverter;
 import org.eclipse.jst.pagedesigner.converter.ConvertPosition;
@@ -94,8 +96,8 @@ public class DataTableTagConverter extends AbstractTagConverter
                 if (child instanceof Element)
                 {
                     Element ele = (Element) child;
-                    // XXX: we are not handling namespace here
-                    if (IJSFConstants.TAG_COLUMN.equals(ele.getLocalName()))
+                    TagIdentifier  tagId = TagIdentifierFactory.createDocumentTagWrapper(ele);
+                    if (IJSFConstants.TAG_IDENTIFIER_COLUMN.isSameTagType(tagId))
                     {
                         result.add(ele);
                     }
@@ -106,6 +108,11 @@ public class DataTableTagConverter extends AbstractTagConverter
         return result;
     }
 
+    /**
+     * @param hostEle
+     * @param tableEle
+     * @param columns
+     */
     protected void convertTBody(Element hostEle, Element tableEle, List columns)
     {
         // Rendering the table body
@@ -172,6 +179,7 @@ public class DataTableTagConverter extends AbstractTagConverter
     /**
      * @param hostEle
      * @param tableEle
+     * @param columns 
      * @param header true means header, false means footer
      */
     protected void convertTHeader(Element hostEle, Element tableEle, List columns, boolean header)
