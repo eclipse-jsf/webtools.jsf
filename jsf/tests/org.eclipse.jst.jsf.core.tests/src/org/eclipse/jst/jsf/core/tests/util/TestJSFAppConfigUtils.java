@@ -2,6 +2,7 @@ package org.eclipse.jst.jsf.core.tests.util;
 
 import junit.framework.TestCase;
 
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jst.jsf.core.internal.provisional.IJSFCoreConstants;
 import org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.JSFAppConfigUtils;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
@@ -62,7 +63,16 @@ public class TestJSFAppConfigUtils extends TestCase
         {
             JSFFacetedTestEnvironment jsfFacedEnv = 
                 new JSFFacetedTestEnvironment(testEnv);
-            jsfFacedEnv.initialize(facetVersion);
+            
+            try
+            {
+                jsfFacedEnv.initialize(facetVersion);
+            }
+            catch (CoreException ce)
+            {
+                // propagate
+                throw new RuntimeException(ce);
+            }
         }
 
         return testEnv;

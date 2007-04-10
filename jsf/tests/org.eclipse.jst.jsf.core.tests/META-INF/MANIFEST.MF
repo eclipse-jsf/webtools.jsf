@@ -38,3 +38,4 @@ Export-Package: org.eclipse.jst.jsf.core.tests;x-friends:="org.eclipse.jst.jsf.u
  org.eclipse.jst.jsf.core.tests.project.facet,
  org.eclipse.jst.jsf.core.tests.util
 Plugin-Class: org.eclipse.jst.jsf.core.tests.TestsPlugin
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
