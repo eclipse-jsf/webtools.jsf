@@ -63,6 +63,7 @@ import org.eclipse.jst.jsp.core.internal.java.jspel.ASTValueSuffix;
 import org.eclipse.jst.jsp.core.internal.java.jspel.JSPELParser;
 import org.eclipse.jst.jsp.core.internal.java.jspel.JSPELParserConstants;
 import org.eclipse.jst.jsp.core.internal.java.jspel.JSPELParserVisitor;
+import org.eclipse.jst.jsp.core.internal.java.jspel.ParseException;
 import org.eclipse.jst.jsp.core.internal.java.jspel.SimpleNode;
 import org.eclipse.jst.jsp.core.internal.java.jspel.Token;
 import org.eclipse.wst.validation.internal.core.Message;
@@ -592,8 +593,9 @@ class ASTSemanticValidator implements JSPELParserVisitor, IExpressionSemanticVal
     /**
      * @param args
      * @throws IOException
+     * @throws ParseException 
      */
-    public static void main(String[] args) throws IOException
+    public static void main(String[] args) throws IOException, ParseException
     {
         String elText = "";
         int nextCharacter;
@@ -604,16 +606,9 @@ class ASTSemanticValidator implements JSPELParserVisitor, IExpressionSemanticVal
             
             if (nextChar == '\n')
             {
-                try
-                {
-                    JSPELParser parser = JSPELParser.createParser(elText);
-                    ASTExpression expr = parser.Expression();
-                    expr.dump("");
-                }
-                catch (Throwable t)
-                {
-                    t.printStackTrace(System.err);
-                }
+                JSPELParser parser = JSPELParser.createParser(elText);
+                ASTExpression expr = parser.Expression();
+                expr.dump("");
                 
                 elText = "";
             }

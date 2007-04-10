@@ -17,7 +17,6 @@ import java.util.List;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.internal.types.CompositeType;
-import org.eclipse.jst.jsf.common.internal.types.IAssignable;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.AbstractRootTypeDescriptor;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.ELIsNotValidException;
 import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IDefaultValue;
@@ -131,7 +130,7 @@ public abstract class EnumerationType extends AbstractRootTypeDescriptor impleme
 	protected abstract String getReturnType();
 	
 	/**
-	 * @return the value of {@link IAssignable}.ASSIGNMENT_TYPE_NONE.  Subclasses to override.
+	 * @return the value of {@link org.eclipse.jst.jsf.common.internal.types.IAssignable}.ASSIGNMENT_TYPE_NONE.  Subclasses to override.
 	 */
 	protected int getAssignmentType(){
 		return 0;

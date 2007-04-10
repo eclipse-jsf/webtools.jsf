@@ -30,7 +30,6 @@ import org.eclipse.ui.IWorkbenchPartReference;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.internal.Workbench;
 
 /**
  * On workbench startup, registers a part listener that triggers when
@@ -45,7 +44,7 @@ public class StartupHandler implements IStartup
     
 	public void earlyStartup() 
     {
-        Workbench.getInstance().getDisplay().asyncExec(new Runnable()
+        PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable()
         {
             public void run()
             {

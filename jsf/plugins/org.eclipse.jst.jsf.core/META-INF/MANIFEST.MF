@@ -66,3 +66,4 @@ Export-Package: org.eclipse.jst.jsf.core.internal;x-friends:="org.eclipse.jst.js
  org.eclipse.jst.jsf.core.internal.provisional.set.mapping,
  org.eclipse.jst.jsf.core.internal.provisional,
  org.eclipse.jst.jsf.designtime.internal.symbols;x-friends:="org.eclipse.jst.jsf.designtime.tests"
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
