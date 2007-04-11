@@ -21,3 +21,4 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.wst.internet.cache,
  org.eclipse.jface.text
 Eclipse-LazyStart: true
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
