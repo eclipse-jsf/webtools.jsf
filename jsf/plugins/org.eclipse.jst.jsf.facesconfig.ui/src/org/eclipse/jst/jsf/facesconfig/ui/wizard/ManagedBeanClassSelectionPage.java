@@ -13,7 +13,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaConventions;
-import org.eclipse.jdt.internal.compiler.impl.CompilerOptions;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.jst.jsf.common.ui.internal.dialogfield.ClassButtonDialogField;
@@ -264,7 +264,7 @@ public class ManagedBeanClassSelectionPage extends WizardPage {
 		} else {
 			// ensure the name follows the java conventsions.
 			status = JavaConventions
-					    .validateJavaTypeName(classSearchDialogField.getText(), CompilerOptions.VERSION_1_3,CompilerOptions.VERSION_1_3);
+					    .validateJavaTypeName(classSearchDialogField.getText(), JavaCore.VERSION_1_3,JavaCore.VERSION_1_3);
 			if (status.getSeverity() != IStatus.ERROR) {
 				// ensure the input or selected type is defined in the current
 				// project
