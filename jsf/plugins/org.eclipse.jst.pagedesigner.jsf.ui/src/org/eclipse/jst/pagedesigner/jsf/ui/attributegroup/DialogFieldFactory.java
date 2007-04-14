@@ -35,19 +35,19 @@ public class DialogFieldFactory
      */
     public static DialogField getDialogField(AttributeData data)
     {
-        IAttributeDescriptor descriptor = getAttributeDescriptor(data.uri, data.elementName, data.attributeName);
+        IAttributeDescriptor descriptor = getAttributeDescriptor(data.getUri(), data.getElementName(), data.getAttributeName());
         if(descriptor != null)
         {
             String type = descriptor.getValueType();
             if (IValueType.CLASSNAME.equalsIgnoreCase(type))
             {
                 ClassButtonDialogField field = new ClassButtonDialogField(null);
-                Object project = data.paramMap.get(AttributeData.Project);
+                Object project = data.getParamMap().get(AttributeData.Project);
                 if (project instanceof IProject)
                 {
                     field.setProject((IProject) project);
                 }
-                Object superType = data.paramMap.get(AttributeData.SuperType);
+                Object superType = data.getParamMap().get(AttributeData.SuperType);
                 field.setSuperClassName((String) superType);
                 return field;
             }
@@ -93,7 +93,7 @@ public class DialogFieldFactory
     {
         if (field instanceof StringDialogField)
         {
-            pair.value = ((StringDialogField) field).getText();
+            pair.setValue(((StringDialogField) field).getText());
         }
     }
 
@@ -103,7 +103,7 @@ public class DialogFieldFactory
      */
     public static String getDialogFieldLabel(AttributeData data)
     {
-        String name = data.attributeName;
+        String name = data.getAttributeName();
         int gap = 'a' - 'A';//$NON-NLS-1$ //$NON-NLS-2$
         if(name != null)
         {
