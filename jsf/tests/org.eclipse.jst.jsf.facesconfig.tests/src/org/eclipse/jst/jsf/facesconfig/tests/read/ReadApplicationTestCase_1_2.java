@@ -1,6 +1,6 @@
 package org.eclipse.jst.jsf.facesconfig.tests.read;
 
-import org.eclipse.jst.jsf.core.internal.provisional.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.facesconfig.emf.ApplicationExtensionType;
 import org.eclipse.jst.jsf.facesconfig.emf.ApplicationType;
 import org.eclipse.jst.jsf.facesconfig.emf.BaseNameType;

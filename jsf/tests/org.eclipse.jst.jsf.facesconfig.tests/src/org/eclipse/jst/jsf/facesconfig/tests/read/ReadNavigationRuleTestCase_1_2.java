@@ -1,7 +1,7 @@
 package org.eclipse.jst.jsf.facesconfig.tests.read;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.jst.jsf.core.internal.provisional.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.facesconfig.emf.DynamicElement;
 import org.eclipse.jst.jsf.facesconfig.emf.NavigationRuleExtensionType;
 import org.eclipse.jst.jsf.facesconfig.emf.NavigationRuleType;

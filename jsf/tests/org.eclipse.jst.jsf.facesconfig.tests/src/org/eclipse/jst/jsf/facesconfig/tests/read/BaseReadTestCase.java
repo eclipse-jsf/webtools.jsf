@@ -1,7 +1,7 @@
 package org.eclipse.jst.jsf.facesconfig.tests.read;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.jst.jsf.core.internal.provisional.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.facesconfig.tests.util.WizardUtil;
 import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
 import org.eclipse.jst.jsf.test.util.ConfigurableTestCase;

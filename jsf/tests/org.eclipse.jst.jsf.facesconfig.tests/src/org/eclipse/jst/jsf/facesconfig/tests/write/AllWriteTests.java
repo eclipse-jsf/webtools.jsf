@@ -14,7 +14,7 @@ package org.eclipse.jst.jsf.facesconfig.tests.write;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-import org.eclipse.jst.jsf.core.internal.provisional.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.facesconfig.tests.util.CommonStructuresUtil;
 import org.eclipse.jst.jsf.test.util.ConfigurableTestSuite;
 import org.eclipse.jst.jsf.test.util.ConfigurableTestCase.TestConfiguration;

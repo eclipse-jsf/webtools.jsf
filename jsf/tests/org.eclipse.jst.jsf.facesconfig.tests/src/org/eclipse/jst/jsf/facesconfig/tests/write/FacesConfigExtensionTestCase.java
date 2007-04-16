@@ -1,6 +1,6 @@
 package org.eclipse.jst.jsf.facesconfig.tests.write;
 
-import org.eclipse.jst.jsf.core.internal.provisional.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.facesconfig.emf.DynamicElement;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigExtensionType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
