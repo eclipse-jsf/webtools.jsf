@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraitTypesPackageImpl.java,v 1.3 2007/02/28 21:12:40 cbateman Exp $
+ * $Id: TraitTypesPackageImpl.java,v 1.3.4.1 2007/04/16 19:39:58 itrimble Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.impl;
 
@@ -15,10 +15,10 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
 
-import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.ListOfValues;
-import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.SetGenerator;
-import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.TraitTypesFactory;
-import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.TraitTypesPackage;
+import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.ListOfValues;
+import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.SetGenerator;
+import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.TraitTypesFactory;
+import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.TraitTypesPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -59,7 +59,7 @@ public class TraitTypesPackageImpl extends EPackageImpl implements TraitTypesPac
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @see org.eclipse.emf.ecore.EPackage.Registry
-     * @see org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.TraitTypesPackage#eNS_URI
+     * @see org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.TraitTypesPackage#eNS_URI
      * @see #init()
      * @generated
      */

@@ -41,7 +41,7 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl.JSFLibraryRegis
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.util.JSFLibraryRegistryResourceFactoryImpl;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.util.JSFLibraryRegistryResourceImpl;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.util.JSFLibraryRegistryUpgradeUtil;
-import org.eclipse.jst.jsf.core.internal.provisional.jsflibraryregistry.PluginProvidedJSFLibraryCreationHelper;
+import org.eclipse.jst.jsf.core.jsflibraryregistry.PluginProvidedJSFLibraryCreationHelper;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.wst.common.frameworks.internal.WTPPlugin;
 import org.osgi.framework.Bundle;

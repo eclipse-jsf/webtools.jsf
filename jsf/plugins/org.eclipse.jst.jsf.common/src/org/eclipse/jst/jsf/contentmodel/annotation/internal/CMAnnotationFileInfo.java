@@ -14,7 +14,7 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.contentmodel.annotation.internal;
 
-import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.ICMAnnotationSourceFileInfo;
+import org.eclipse.jst.jsf.contentmodel.annotation.ICMAnnotationSourceFileInfo;
 
 /**
  * Contains information about annotation files.  

@@ -2,10 +2,10 @@ package org.eclipse.jst.jsf.context.symbol.internal.util;
 
 import org.eclipse.jst.jsf.common.internal.types.IAssignable;
 import org.eclipse.jst.jsf.common.internal.types.ValueType;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IInstanceSymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IObjectSymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IPropertySymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.ISymbol;
+import org.eclipse.jst.jsf.context.symbol.IInstanceSymbol;
+import org.eclipse.jst.jsf.context.symbol.IObjectSymbol;
+import org.eclipse.jst.jsf.context.symbol.IPropertySymbol;
+import org.eclipse.jst.jsf.context.symbol.ISymbol;
 
 /**
  * A value type adapter class for IObjectSymbol's

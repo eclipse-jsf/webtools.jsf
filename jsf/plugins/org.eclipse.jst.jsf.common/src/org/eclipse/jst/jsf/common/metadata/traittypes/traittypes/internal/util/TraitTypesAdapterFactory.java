@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraitTypesAdapterFactory.java,v 1.3 2007/02/28 21:12:40 cbateman Exp $
+ * $Id: TraitTypesAdapterFactory.java,v 1.3.4.1 2007/04/16 19:40:16 itrimble Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.util;
 
@@ -13,14 +13,14 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.*;
+import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.*;
 
 /**
  * <!-- begin-user-doc -->
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
- * @see org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.TraitTypesPackage
+ * @see org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.TraitTypesPackage
  * @generated
  */
 public class TraitTypesAdapterFactory extends AdapterFactoryImpl {
@@ -102,13 +102,13 @@ public class TraitTypesAdapterFactory extends AdapterFactoryImpl {
 
 
     /**
-     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.ListOfValues <em>List Of Values</em>}'.
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.ListOfValues <em>List Of Values</em>}'.
      * <!-- begin-user-doc -->
      * This default implementation returns null so that we can easily ignore cases;
      * it's useful to ignore a case when inheritance will catch all the cases anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
-     * @see org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.ListOfValues
+     * @see org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.ListOfValues
      * @generated
      */
     public Adapter createListOfValuesAdapter() {
@@ -116,13 +116,13 @@ public class TraitTypesAdapterFactory extends AdapterFactoryImpl {
     }
 
     /**
-     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.SetGenerator <em>Set Generator</em>}'.
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.SetGenerator <em>Set Generator</em>}'.
      * <!-- begin-user-doc -->
      * This default implementation returns null so that we can easily ignore cases;
      * it's useful to ignore a case when inheritance will catch all the cases anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
-     * @see org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.SetGenerator
+     * @see org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.SetGenerator
      * @generated
      */
     public Adapter createSetGeneratorAdapter() {

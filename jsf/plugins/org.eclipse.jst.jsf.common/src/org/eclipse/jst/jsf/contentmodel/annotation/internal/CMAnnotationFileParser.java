@@ -20,8 +20,8 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
-import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.CMAnnotationSourceFileLocator;
-import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.ICMAnnotationFileParser;
+import org.eclipse.jst.jsf.contentmodel.annotation.CMAnnotationSourceFileLocator;
+import org.eclipse.jst.jsf.contentmodel.annotation.ICMAnnotationFileParser;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;

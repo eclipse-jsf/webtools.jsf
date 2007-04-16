@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PaletteInfosAdapterFactory.java,v 1.1 2007/02/28 05:04:45 gkessler Exp $
+ * $Id: PaletteInfosAdapterFactory.java,v 1.1.4.1 2007/04/16 19:41:11 itrimble Exp $
  */
 package org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.util;
 
@@ -13,14 +13,14 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.*;
+import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.*;
 
 /**
  * <!-- begin-user-doc -->
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
- * @see org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.PaletteInfosPackage
+ * @see org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfosPackage
  * @generated
  */
 public class PaletteInfosAdapterFactory extends AdapterFactoryImpl {
@@ -111,13 +111,13 @@ public class PaletteInfosAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.PaletteInfo <em>Palette Info</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfo <em>Palette Info</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.PaletteInfo
+	 * @see org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfo
 	 * @generated
 	 */
 	public Adapter createPaletteInfoAdapter() {
@@ -125,13 +125,13 @@ public class PaletteInfosAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.TagCreationInfo <em>Tag Creation Info</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.TagCreationInfo <em>Tag Creation Info</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.TagCreationInfo
+	 * @see org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.TagCreationInfo
 	 * @generated
 	 */
 	public Adapter createTagCreationInfoAdapter() {
@@ -139,13 +139,13 @@ public class PaletteInfosAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.TagCreationTemplate <em>Tag Creation Template</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.TagCreationTemplate <em>Tag Creation Template</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.TagCreationTemplate
+	 * @see org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.TagCreationTemplate
 	 * @generated
 	 */
 	public Adapter createTagCreationTemplateAdapter() {
@@ -153,13 +153,13 @@ public class PaletteInfosAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.TagCreationAttribute <em>Tag Creation Attribute</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.TagCreationAttribute <em>Tag Creation Attribute</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.TagCreationAttribute
+	 * @see org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.TagCreationAttribute
 	 * @generated
 	 */
 	public Adapter createTagCreationAttributeAdapter() {
@@ -167,13 +167,13 @@ public class PaletteInfosAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.PaletteInfos <em>Palette Infos</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfos <em>Palette Infos</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.PaletteInfos
+	 * @see org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfos
 	 * @generated
 	 */
 	public Adapter createPaletteInfosAdapter() {

@@ -14,7 +14,7 @@ package org.eclipse.jst.jsf.validation.internal.el.operators;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.jst.jsf.common.internal.types.ValueType;
-import org.eclipse.jst.jsf.context.structureddocument.internal.provisional.IStructuredDocumentContext;
+import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.eclipse.jst.jsp.core.internal.java.jspel.JSPELParserConstants;
 import org.eclipse.jst.jsp.core.internal.java.jspel.Token;
 

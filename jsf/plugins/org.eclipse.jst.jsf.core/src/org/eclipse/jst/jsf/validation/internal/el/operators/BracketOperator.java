@@ -10,10 +10,10 @@ import org.eclipse.jst.jsf.common.internal.types.TypeCoercionException;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
 import org.eclipse.jst.jsf.common.internal.types.TypeTransformer;
 import org.eclipse.jst.jsf.common.internal.types.ValueType;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IObjectSymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.ISymbol;
+import org.eclipse.jst.jsf.context.symbol.IObjectSymbol;
+import org.eclipse.jst.jsf.context.symbol.ISymbol;
 import org.eclipse.jst.jsf.context.symbol.internal.util.IObjectSymbolBasedValueType;
-import org.eclipse.jst.jsf.designtime.internal.provisional.el.AbstractDTPropertyResolver;
+import org.eclipse.jst.jsf.designtime.el.AbstractDTPropertyResolver;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
 /**

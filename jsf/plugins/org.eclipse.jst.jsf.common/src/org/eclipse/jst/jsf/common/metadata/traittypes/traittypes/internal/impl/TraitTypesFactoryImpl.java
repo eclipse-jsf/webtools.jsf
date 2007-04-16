@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraitTypesFactoryImpl.java,v 1.3 2007/02/28 21:12:40 cbateman Exp $
+ * $Id: TraitTypesFactoryImpl.java,v 1.3.4.1 2007/04/16 19:39:58 itrimble Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.impl;
 
@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.*;
+import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.*;
 
 /**
  * <!-- begin-user-doc -->

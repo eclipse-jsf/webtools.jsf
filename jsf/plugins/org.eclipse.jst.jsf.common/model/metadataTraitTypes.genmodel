@@ -6,19 +6,15 @@
     modelName="TraitTypes" importerID="org.eclipse.emf.importer.ecore">
   <foreignModel>metadataTraitTypes.ecore</foreignModel>
   <genPackages prefix="TraitTypes" basePackage="org.eclipse.jst.jsf.common.metadata.traittypes"
-      resource="XML" disposableProviderFactory="true" interfacePackageSuffix="internal.provisional"
-      metaDataPackageSuffix="internal.provisional" classPackageSuffix="internal.impl"
+      resource="XML" disposableProviderFactory="true" classPackageSuffix="internal.impl"
       utilityPackageSuffix="internal.util" providerPackageSuffix="internal.provider"
       presentationPackageSuffix="internal.presentation" ecorePackage="metadataTraitTypes.ecore#/">
     <genClasses ecoreClass="metadataTraitTypes.ecore#//ListOfValues">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metadataTraitTypes.ecore#//ListOfValues/entries"/>
     </genClasses>
-    <genClasses ecoreClass="metadataTraitTypes.ecore#//ListOfEntities">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metadataTraitTypes.ecore#//ListOfEntities/entityProxies"/>
-    </genClasses>
-    <genClasses ecoreClass="metadataTraitTypes.ecore#//EntityProxy">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metadataTraitTypes.ecore#//EntityProxy/uri"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metadataTraitTypes.ecore#//EntityProxy/key"/>
+    <genClasses ecoreClass="metadataTraitTypes.ecore#//SetGenerator">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metadataTraitTypes.ecore#//SetGenerator/algorithm"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metadataTraitTypes.ecore#//SetGenerator/expression"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

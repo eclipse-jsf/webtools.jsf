@@ -15,9 +15,9 @@ package org.eclipse.jst.jsf.contentmodel.annotation.internal;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
-import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.CMAnnotationSourceFileLocator;
-import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.ICMAnnotationFileParser;
-import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.ICMAnnotationSourceFileInfo;
+import org.eclipse.jst.jsf.contentmodel.annotation.CMAnnotationSourceFileLocator;
+import org.eclipse.jst.jsf.contentmodel.annotation.ICMAnnotationFileParser;
+import org.eclipse.jst.jsf.contentmodel.annotation.ICMAnnotationSourceFileInfo;
 import org.eclipse.osgi.util.NLS;
 import org.osgi.framework.Bundle;
 

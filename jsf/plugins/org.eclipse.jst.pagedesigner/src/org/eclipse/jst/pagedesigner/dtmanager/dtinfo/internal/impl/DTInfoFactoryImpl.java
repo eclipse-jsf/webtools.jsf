@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.*;
+import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.*;
 
 /**
  * <!-- begin-user-doc -->

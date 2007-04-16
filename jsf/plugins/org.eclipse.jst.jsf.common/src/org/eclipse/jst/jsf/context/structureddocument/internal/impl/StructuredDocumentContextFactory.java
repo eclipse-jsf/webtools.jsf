@@ -17,9 +17,9 @@ import java.util.Iterator;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextViewer;
-import org.eclipse.jst.jsf.context.internal.provisional.AbstractDelegatingFactory;
-import org.eclipse.jst.jsf.context.structureddocument.internal.provisional.IStructuredDocumentContext;
-import org.eclipse.jst.jsf.context.structureddocument.internal.provisional.IStructuredDocumentContextFactory;
+import org.eclipse.jst.jsf.context.AbstractDelegatingFactory;
+import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
+import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
 import org.eclipse.wst.sse.core.internal.provisional.IndexedRegion;
 import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
 import org.eclipse.wst.sse.ui.internal.StructuredTextViewer;
@@ -116,7 +116,7 @@ public class StructuredDocumentContextFactory extends AbstractDelegatingFactory
 	}
 
 	/**
-	 * @see org.eclipse.jst.jsf.context.structureddocument.internal.provisional.IStructuredDocumentContextFactory#getContext(org.eclipse.jface.text.IDocument, int)
+	 * @see org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory#getContext(org.eclipse.jface.text.IDocument, int)
 	 */
 	public IStructuredDocumentContext getContext(IDocument document, int documentPosition) {
 		// first see if I know how to make one

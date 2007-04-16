@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraitTypesXMLProcessor.java,v 1.3 2007/02/28 21:12:40 cbateman Exp $
+ * $Id: TraitTypesXMLProcessor.java,v 1.3.4.1 2007/04/16 19:40:16 itrimble Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.util;
 
@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.xmi.util.XMLProcessor;
 
-import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.TraitTypesPackage;
+import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.TraitTypesPackage;
 
 /**
  * This class contains helper methods to serialize and deserialize XML documents

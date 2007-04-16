@@ -14,7 +14,7 @@ package org.eclipse.jst.jsf.designtime.internal.jsp;
 
 import java.util.HashMap;
 
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.ISymbol;
+import org.eclipse.jst.jsf.context.symbol.ISymbol;
 
 /**
  * Hashmap that ensures only ISymbols are added.  This will be obsoleted when

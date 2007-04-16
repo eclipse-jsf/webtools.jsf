@@ -11,7 +11,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.*;
+import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,7 +23,7 @@ import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.*;
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.DTInfoPackage
+ * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.DTInfoPackage
  * @generated
  */
 public class DTInfoSwitch {

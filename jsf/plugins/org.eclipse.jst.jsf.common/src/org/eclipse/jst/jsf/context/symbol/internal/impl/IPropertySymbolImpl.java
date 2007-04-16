@@ -16,9 +16,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.jst.jsf.context.symbol.IPropertySymbol;
+import org.eclipse.jst.jsf.context.symbol.ITypeDescriptor;
 import org.eclipse.jst.jsf.context.symbol.SymbolPackage;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IPropertySymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.ITypeDescriptor;
 
 
 /**

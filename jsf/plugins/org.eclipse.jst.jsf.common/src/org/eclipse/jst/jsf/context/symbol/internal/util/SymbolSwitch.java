@@ -15,22 +15,27 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jst.jsf.context.symbol.IBeanInstanceSymbol;
+import org.eclipse.jst.jsf.context.symbol.IBeanMethodSymbol;
+import org.eclipse.jst.jsf.context.symbol.IBeanPropertySymbol;
+import org.eclipse.jst.jsf.context.symbol.IBoundedJavaTypeDescriptor;
+import org.eclipse.jst.jsf.context.symbol.IBoundedListTypeDescriptor;
+import org.eclipse.jst.jsf.context.symbol.IBoundedMapTypeDescriptor;
+import org.eclipse.jst.jsf.context.symbol.IBoundedTypeDescriptor;
+import org.eclipse.jst.jsf.context.symbol.IComponentSymbol;
+import org.eclipse.jst.jsf.context.symbol.IDescribedInDetail;
+import org.eclipse.jst.jsf.context.symbol.IInstanceSymbol;
+import org.eclipse.jst.jsf.context.symbol.IJavaSymbol;
+import org.eclipse.jst.jsf.context.symbol.IJavaTypeDescriptor2;
+import org.eclipse.jst.jsf.context.symbol.IListTypeDescriptor;
+import org.eclipse.jst.jsf.context.symbol.IMapTypeDescriptor;
+import org.eclipse.jst.jsf.context.symbol.IMethodSymbol;
+import org.eclipse.jst.jsf.context.symbol.IObjectSymbol;
+import org.eclipse.jst.jsf.context.symbol.IPropertySymbol;
+import org.eclipse.jst.jsf.context.symbol.ISymbol;
+import org.eclipse.jst.jsf.context.symbol.ITypeDescriptor;
 import org.eclipse.jst.jsf.context.symbol.SymbolPackage;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.*;
 
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanInstanceSymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanMethodSymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanPropertySymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IComponentSymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IDescribedInDetail;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IInstanceSymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaSymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaTypeDescriptor2;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IMapTypeDescriptor;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IMethodSymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IPropertySymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.ISymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.ITypeDescriptor;
 
 
 /**

@@ -15,9 +15,9 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.DTInfoPackage;
-import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.Operation;
-import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.TagConvertInfo;
+import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.DTInfoPackage;
+import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.Operation;
+import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.TagConvertInfo;
 
 /**
  * <!-- begin-user-doc -->

@@ -12,7 +12,7 @@
 
 package org.eclipse.jst.jsf.contentmodel.annotation.internal;
 
-import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.ICMAnnotationSourceFileInfo;
+import org.eclipse.jst.jsf.contentmodel.annotation.ICMAnnotationSourceFileInfo;
 
 /**
  * An internal class implementing ICMAnnotationAdvisor that allows us to decouple the parser

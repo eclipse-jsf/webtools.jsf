@@ -9,8 +9,7 @@
     testSuiteClass="org.eclipse.jst.jsf.context.symbol.tests.MyAllTests" importerID="org.eclipse.emf.importer.java">
   <foreignModel>@model</foreignModel>
   <genPackages prefix="Symbol" basePackage="org.eclipse.jst.jsf.context" disposableProviderFactory="true"
-      interfacePackageSuffix="internal.provisional" classPackageSuffix="internal.impl"
-      utilityPackageSuffix="internal.util" providerPackageSuffix="internal.provider"
+      classPackageSuffix="internal.impl" utilityPackageSuffix="internal.util" providerPackageSuffix="internal.provider"
       ecorePackage="symbol.ecore#/">
     <genEnums ecoreEnum="symbol.ecore#//ERuntimeSource">
       <genEnumLiterals ecoreEnumLiteral="symbol.ecore#//ERuntimeSource/BUILT_IN_SYMBOL"/>
@@ -59,6 +58,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute symbol.ecore#//IJavaTypeDescriptor2/type"/>
       <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference symbol.ecore#//IJavaTypeDescriptor2/beanProperties"/>
       <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference symbol.ecore#//IJavaTypeDescriptor2/beanMethods"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute symbol.ecore#//IJavaTypeDescriptor2/arrayCount"/>
     </genClasses>
     <genClasses ecoreClass="symbol.ecore#//IBeanMethodSymbol">
       <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference symbol.ecore#//IBeanMethodSymbol/owner"/>
@@ -96,5 +96,9 @@
     </genClasses>
     <genClasses ecoreClass="symbol.ecore#//IBoundedMapTypeDescriptor"/>
     <genClasses ecoreClass="symbol.ecore#//IBoundedJavaTypeDescriptor"/>
+    <genClasses ecoreClass="symbol.ecore#//IListTypeDescriptor">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute symbol.ecore#//IListTypeDescriptor/listSource"/>
+    </genClasses>
+    <genClasses ecoreClass="symbol.ecore#//IBoundedListTypeDescriptor"/>
   </genPackages>
 </genmodel:GenModel>

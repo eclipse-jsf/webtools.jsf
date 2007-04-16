@@ -11,7 +11,7 @@
  ********************************************************************************/
 package org.eclipse.jst.jsf.common.metadata.internal;
 
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.Model;
+import org.eclipse.jst.jsf.common.metadata.Model;
 
 /**
  * Responsible for loading and holding onto the standard metadata model using the IDomainLoadingStrategy.

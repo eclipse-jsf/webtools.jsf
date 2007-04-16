@@ -1,6 +1,6 @@
 package org.eclipse.jst.pagedesigner.itemcreation.internal;
 
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IMetaDataModelContext;
+import org.eclipse.jst.jsf.common.metadata.query.IMetaDataModelContext;
 
 //JUNK!
 public class TagCreatorFromMetaData extends DefaultTagCreator {

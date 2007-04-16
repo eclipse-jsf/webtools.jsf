@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MetadataAdapterFactory.java,v 1.3 2007/02/07 00:03:50 gkessler Exp $
+ * $Id: MetadataAdapterFactory.java,v 1.3.4.1 2007/04/16 19:39:58 itrimble Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.util;
 
@@ -11,12 +11,12 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.EntityGroup;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.IncludeEntityGroup;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.MetadataPackage;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.Model;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
+import org.eclipse.jst.jsf.common.metadata.Entity;
+import org.eclipse.jst.jsf.common.metadata.EntityGroup;
+import org.eclipse.jst.jsf.common.metadata.IncludeEntityGroup;
+import org.eclipse.jst.jsf.common.metadata.MetadataPackage;
+import org.eclipse.jst.jsf.common.metadata.Model;
+import org.eclipse.jst.jsf.common.metadata.Trait;
 
 
 
@@ -25,7 +25,7 @@ import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
- * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.MetadataPackage
+ * @see org.eclipse.jst.jsf.common.metadata.MetadataPackage
  * @generated
  */
 public class MetadataAdapterFactory extends AdapterFactoryImpl {
@@ -116,13 +116,13 @@ public class MetadataAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait <em>Trait</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.common.metadata.Trait <em>Trait</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait
+	 * @see org.eclipse.jst.jsf.common.metadata.Trait
 	 * @generated
 	 */
 	public Adapter createTraitAdapter() {
@@ -130,13 +130,13 @@ public class MetadataAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.IncludeEntityGroup <em>Include Entity Group</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.common.metadata.IncludeEntityGroup <em>Include Entity Group</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.IncludeEntityGroup
+	 * @see org.eclipse.jst.jsf.common.metadata.IncludeEntityGroup
 	 * @generated
 	 */
 	public Adapter createIncludeEntityGroupAdapter() {
@@ -144,13 +144,13 @@ public class MetadataAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.Model <em>Model</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.common.metadata.Model <em>Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.Model
+	 * @see org.eclipse.jst.jsf.common.metadata.Model
 	 * @generated
 	 */
 	public Adapter createModelAdapter() {
@@ -158,13 +158,13 @@ public class MetadataAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity <em>Entity</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.common.metadata.Entity <em>Entity</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity
+	 * @see org.eclipse.jst.jsf.common.metadata.Entity
 	 * @generated
 	 */
 	public Adapter createEntityAdapter() {
@@ -172,13 +172,13 @@ public class MetadataAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.common.metadata.internal.provisional.EntityGroup <em>Entity Group</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.common.metadata.EntityGroup <em>Entity Group</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.EntityGroup
+	 * @see org.eclipse.jst.jsf.common.metadata.EntityGroup
 	 * @generated
 	 */
 	public Adapter createEntityGroupAdapter() {

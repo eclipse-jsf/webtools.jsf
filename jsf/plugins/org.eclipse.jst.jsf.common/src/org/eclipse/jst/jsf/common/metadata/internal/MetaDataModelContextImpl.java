@@ -12,7 +12,7 @@
 package org.eclipse.jst.jsf.common.metadata.internal;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IMetaDataModelContext;
+import org.eclipse.jst.jsf.common.metadata.query.IMetaDataModelContext;
 
 /**
  * Simple implementation of {@link IMetaDataModelContext}

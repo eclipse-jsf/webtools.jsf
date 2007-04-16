@@ -12,7 +12,7 @@
 
 package org.eclipse.jst.jsf.metadataprocessors.internal;
 
-import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.IType;
+import org.eclipse.jst.jsf.metadataprocessors.IType;
 
 
 /**

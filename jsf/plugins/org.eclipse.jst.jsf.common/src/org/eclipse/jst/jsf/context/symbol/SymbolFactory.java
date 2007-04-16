@@ -12,20 +12,6 @@
 package org.eclipse.jst.jsf.context.symbol;
 
 import org.eclipse.emf.ecore.EFactory;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanInstanceSymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanMethodSymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanPropertySymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedJavaTypeDescriptor;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedListTypeDescriptor;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedMapTypeDescriptor;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IComponentSymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IInstanceSymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaSymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaTypeDescriptor2;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IListTypeDescriptor;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IMapTypeDescriptor;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IMethodSymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IPropertySymbol;
 
 /**
  * <!-- begin-user-doc -->

@@ -15,15 +15,15 @@ package org.eclipse.jst.jsf.context.resolver.structureddocument.internal.impl;
 import java.util.Iterator;
 
 import org.eclipse.core.runtime.IAdaptable;
-import org.eclipse.jst.jsf.context.internal.provisional.AbstractDelegatingFactory;
+import org.eclipse.jst.jsf.context.AbstractDelegatingFactory;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.IDOMContextResolver;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.IMetadataContextResolver;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.ITaglibContextResolver;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.IWorkspaceContextResolver;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.ITextRegionContextResolver;
-import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.IDOMContextResolver;
-import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.IMetadataContextResolver;
-import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.IStructuredDocumentContextResolverFactory;
-import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.ITaglibContextResolver;
-import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.IWorkspaceContextResolver;
-import org.eclipse.jst.jsf.context.structureddocument.internal.provisional.IStructuredDocumentContext;
-import org.eclipse.jst.jsf.context.structureddocument.internal.provisional.IStructuredDocumentContextFactory;
+import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
+import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
 import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
 
 /**
@@ -62,7 +62,7 @@ public class StructuredDocumentContextResolverFactory extends
 	}
 
 	/**
-	 * @see org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.IStructuredDocumentContextResolverFactory#getDOMContextResolver(org.eclipse.jst.jsf.context.structureddocument.internal.provisional.IStructuredDocumentContext)
+	 * @see org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory#getDOMContextResolver(org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext)
 	 */
 	public IDOMContextResolver getDOMContextResolver(IStructuredDocumentContext context) 
 	{
@@ -106,7 +106,7 @@ public class StructuredDocumentContextResolverFactory extends
 
     
 	/**
-	 * @see org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.IStructuredDocumentContextResolverFactory#getTextRegionResolver(org.eclipse.jst.jsf.context.structureddocument.internal.provisional.IStructuredDocumentContext)
+	 * @see org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory#getTextRegionResolver(org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext)
 	 */
 	public ITextRegionContextResolver getTextRegionResolver(IStructuredDocumentContext context) 	
 	{

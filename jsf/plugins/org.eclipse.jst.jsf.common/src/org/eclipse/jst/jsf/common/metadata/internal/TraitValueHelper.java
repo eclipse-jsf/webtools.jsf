@@ -23,8 +23,8 @@ import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.ecore.xml.type.AnyType;
 import org.eclipse.emf.ecore.xml.type.SimpleAnyType;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
-import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.ListOfValues;
+import org.eclipse.jst.jsf.common.metadata.Trait;
+import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.ListOfValues;
 import org.eclipse.jst.jsf.contentmodel.annotation.internal.Messages;
 import org.eclipse.osgi.util.NLS;
 

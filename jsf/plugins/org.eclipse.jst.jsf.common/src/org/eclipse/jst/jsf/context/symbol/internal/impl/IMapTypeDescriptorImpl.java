@@ -24,14 +24,14 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.Signature;
+import org.eclipse.jst.jsf.context.symbol.IInstanceSymbol;
+import org.eclipse.jst.jsf.context.symbol.IJavaTypeDescriptor2;
+import org.eclipse.jst.jsf.context.symbol.IMapTypeDescriptor;
+import org.eclipse.jst.jsf.context.symbol.IObjectSymbol;
+import org.eclipse.jst.jsf.context.symbol.IPropertySymbol;
+import org.eclipse.jst.jsf.context.symbol.ITypeDescriptor;
 import org.eclipse.jst.jsf.context.symbol.SymbolFactory;
 import org.eclipse.jst.jsf.context.symbol.SymbolPackage;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IInstanceSymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaTypeDescriptor2;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IMapTypeDescriptor;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IObjectSymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IPropertySymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.ITypeDescriptor;
 
 /**
  * <!-- begin-user-doc -->

@@ -23,9 +23,9 @@ import java.util.ResourceBundle;
 import java.util.Vector;
 
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
-import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.CMAnnotationPropertyValue;
-import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.CMAnnotationSourceFileLocator;
-import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.ICMAnnotationSourceFileInfo;
+import org.eclipse.jst.jsf.contentmodel.annotation.CMAnnotationPropertyValue;
+import org.eclipse.jst.jsf.contentmodel.annotation.CMAnnotationSourceFileLocator;
+import org.eclipse.jst.jsf.contentmodel.annotation.ICMAnnotationSourceFileInfo;
 import org.eclipse.osgi.util.NLS;
 
 

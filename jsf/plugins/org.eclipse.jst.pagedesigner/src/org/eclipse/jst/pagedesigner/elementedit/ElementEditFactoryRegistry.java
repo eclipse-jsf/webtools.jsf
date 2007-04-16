@@ -14,7 +14,7 @@ package org.eclipse.jst.pagedesigner.elementedit;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.jst.jsf.common.internal.provisional.dom.TagIdentifier;
+import org.eclipse.jst.jsf.common.dom.TagIdentifier;
 import org.eclipse.jst.jsf.core.internal.tld.TagIdentifierFactory;
 import org.eclipse.jst.pagedesigner.elementedit.html.HTMLElementEditFactory;
 import org.eclipse.jst.pagedesigner.elementedit.jsp.JSPElementEditFactory;

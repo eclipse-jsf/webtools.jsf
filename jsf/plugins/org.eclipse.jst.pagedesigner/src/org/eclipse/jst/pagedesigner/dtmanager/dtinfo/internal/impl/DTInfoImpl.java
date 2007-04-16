@@ -22,10 +22,10 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.DTInfo;
-import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.DTInfoPackage;
-import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.TagConvertInfo;
-import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.TagDecorateInfo;
+import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.DTInfo;
+import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.DTInfoPackage;
+import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.TagConvertInfo;
+import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.TagDecorateInfo;
 
 /**
  * <!-- begin-user-doc -->

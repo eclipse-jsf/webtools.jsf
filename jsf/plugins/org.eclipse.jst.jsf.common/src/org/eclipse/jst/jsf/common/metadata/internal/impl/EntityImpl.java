@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EntityImpl.java,v 1.3 2007/04/09 02:29:53 cbateman Exp $
+ * $Id: EntityImpl.java,v 1.3.4.1 2007/04/16 19:40:04 itrimble Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.impl;
 
@@ -20,12 +20,12 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.IncludeEntityGroup;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.MetadataPackage;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.Model;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IEntityVisitor;
+import org.eclipse.jst.jsf.common.metadata.Entity;
+import org.eclipse.jst.jsf.common.metadata.IncludeEntityGroup;
+import org.eclipse.jst.jsf.common.metadata.MetadataPackage;
+import org.eclipse.jst.jsf.common.metadata.Model;
+import org.eclipse.jst.jsf.common.metadata.Trait;
+import org.eclipse.jst.jsf.common.metadata.query.IEntityVisitor;
 
 /**
  * <!-- begin-user-doc -->

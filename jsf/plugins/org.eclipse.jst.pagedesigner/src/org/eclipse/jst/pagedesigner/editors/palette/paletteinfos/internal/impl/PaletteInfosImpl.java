@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PaletteInfosImpl.java,v 1.2 2007/04/09 02:23:03 cbateman Exp $
+ * $Id: PaletteInfosImpl.java,v 1.2.4.1 2007/04/16 19:41:05 itrimble Exp $
  */
 package org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl;
 
@@ -16,9 +16,9 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.PaletteInfo;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.PaletteInfos;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.PaletteInfosPackage;
+import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfo;
+import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfos;
+import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfosPackage;
 
 /**
  * <!-- begin-user-doc -->

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MetadataResourceImpl.java,v 1.5 2007/04/09 02:29:53 cbateman Exp $
+ * $Id: MetadataResourceImpl.java,v 1.5.4.1 2007/04/16 19:39:58 itrimble Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.util;
 
@@ -16,11 +16,11 @@ import org.eclipse.emf.ecore.xmi.XMLHelper;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMLHelperImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
+import org.eclipse.jst.jsf.common.metadata.Entity;
+import org.eclipse.jst.jsf.common.metadata.MetadataPackage;
+import org.eclipse.jst.jsf.common.metadata.Model;
+import org.eclipse.jst.jsf.common.metadata.Trait;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.MetadataPackage;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.Model;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
 
 /**
  * <!-- begin-user-doc -->

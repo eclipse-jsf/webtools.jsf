@@ -25,12 +25,12 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
+import org.eclipse.jst.jsf.context.symbol.IBeanPropertySymbol;
 import org.eclipse.jst.jsf.context.symbol.SymbolPackage;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanPropertySymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.provider.IContentProposalProvider;
+import org.eclipse.jst.jsf.context.symbol.provider.IContentProposalProvider;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanPropertySymbol} object.
+ * This is the item provider adapter for a {@link org.eclipse.jst.jsf.context.symbol.IBeanPropertySymbol} object.
  * <!-- begin-user-doc -->
  * @extends IContentProposalProvider
  * <!-- end-user-doc -->

@@ -16,10 +16,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.jst.jsf.context.internal.provisional.IModelContext;
+import org.eclipse.jst.jsf.context.IModelContext;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.ITextRegionContextResolver;
-import org.eclipse.jst.jsf.context.structureddocument.internal.provisional.IStructuredDocumentContext;
-import org.eclipse.jst.jsf.context.structureddocument.internal.provisional.IStructuredDocumentContextFactory;
+import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
+import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
 import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
 import org.eclipse.wst.sse.core.internal.provisional.text.ITextRegion;
 import org.eclipse.wst.sse.core.internal.provisional.text.ITextRegionCollection;
@@ -268,7 +268,7 @@ import org.eclipse.wst.sse.core.internal.provisional.text.ITextRegionList;
 	}
 	
 	/**
-	 * @see org.eclipse.jst.jsf.context.resolver.internal.provisional.IContextResolver#canResolveContext(org.eclipse.jst.jsf.context.internal.provisional.IModelContext)
+	 * @see org.eclipse.jst.jsf.context.resolver.IContextResolver#canResolveContext(org.eclipse.jst.jsf.context.IModelContext)
 	 */
 	public boolean canResolveContext(IModelContext modelContext) 
 	{

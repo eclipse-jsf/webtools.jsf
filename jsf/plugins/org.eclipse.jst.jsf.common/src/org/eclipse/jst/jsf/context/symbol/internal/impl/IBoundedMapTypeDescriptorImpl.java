@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IBoundedMapTypeDescriptorImpl.java,v 1.3 2006/12/05 18:36:43 cbateman Exp $
+ * $Id: IBoundedMapTypeDescriptorImpl.java,v 1.3.4.1 2007/04/16 19:39:53 itrimble Exp $
  */
 package org.eclipse.jst.jsf.context.symbol.internal.impl;
 
@@ -11,12 +11,12 @@ import java.util.Iterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
+import org.eclipse.jst.jsf.context.symbol.IBoundedJavaTypeDescriptor;
+import org.eclipse.jst.jsf.context.symbol.IBoundedMapTypeDescriptor;
+import org.eclipse.jst.jsf.context.symbol.IPropertySymbol;
+import org.eclipse.jst.jsf.context.symbol.ISymbol;
 import org.eclipse.jst.jsf.context.symbol.SymbolFactory;
 import org.eclipse.jst.jsf.context.symbol.SymbolPackage;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedJavaTypeDescriptor;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedMapTypeDescriptor;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IPropertySymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.ISymbol;
 
 /**
  * <!-- begin-user-doc -->

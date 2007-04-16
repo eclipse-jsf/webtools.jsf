@@ -5,11 +5,11 @@ import java.util.Iterator;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.xml.type.SimpleAnyType;
 import org.eclipse.emf.ecore.xml.type.XMLTypeFactory;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.MetadataFactory;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.MetadataPackage;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.Model;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
+import org.eclipse.jst.jsf.common.metadata.Entity;
+import org.eclipse.jst.jsf.common.metadata.MetadataFactory;
+import org.eclipse.jst.jsf.common.metadata.MetadataPackage;
+import org.eclipse.jst.jsf.common.metadata.Model;
+import org.eclipse.jst.jsf.common.metadata.Trait;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMDocument;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMElementDeclaration;
 

@@ -26,8 +26,8 @@ import org.eclipse.core.runtime.ISafeRunnable;
 import org.eclipse.core.runtime.QualifiedName;
 import org.eclipse.jface.util.SafeRunnable;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.Model;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IMetaDataModelContext;
+import org.eclipse.jst.jsf.common.metadata.Model;
+import org.eclipse.jst.jsf.common.metadata.query.IMetaDataModelContext;
 
 /*
  * Singleton instance for each IProject used to manage all standard metdata models for that project.

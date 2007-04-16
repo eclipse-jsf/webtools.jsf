@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraitTypesSwitch.java,v 1.3 2007/02/28 21:12:40 cbateman Exp $
+ * $Id: TraitTypesSwitch.java,v 1.3.4.1 2007/04/16 19:40:16 itrimble Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.util;
 
@@ -11,7 +11,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.*;
+import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,7 +23,7 @@ import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provis
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * @see org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.TraitTypesPackage
+ * @see org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.TraitTypesPackage
  * @generated
  */
 public class TraitTypesSwitch {

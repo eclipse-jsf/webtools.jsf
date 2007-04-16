@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ContainsTagConstraintImpl.java,v 1.2 2007/04/09 02:40:11 cbateman Exp $
+ * $Id: ContainsTagConstraintImpl.java,v 1.2.4.1 2007/04/16 19:39:13 itrimble Exp $
  */
 package org.eclipse.jst.jsf.validation.internal.constraints.impl;
 
@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.SetGenerator;
+import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.SetGenerator;
 
 import org.eclipse.jst.jsf.validation.internal.constraints.ConstraintsPackage;
 import org.eclipse.jst.jsf.validation.internal.constraints.ContainsTagConstraint;

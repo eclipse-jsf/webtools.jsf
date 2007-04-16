@@ -14,9 +14,9 @@ package org.eclipse.jst.jsf.context.resolver.structureddocument.internal.impl;
 
 import java.util.Iterator;
 
-import org.eclipse.jst.jsf.context.internal.provisional.IModelContext;
-import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.ITaglibContextResolver;
-import org.eclipse.jst.jsf.context.structureddocument.internal.provisional.IStructuredDocumentContext;
+import org.eclipse.jst.jsf.context.IModelContext;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.ITaglibContextResolver;
+import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.eclipse.jst.jsp.core.internal.contentmodel.TaglibController;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.TLDCMDocumentManager;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.TaglibTracker;

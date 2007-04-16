@@ -12,9 +12,9 @@
 package org.eclipse.jst.jsf.context.symbol.internal.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.jst.jsf.context.symbol.IComponentSymbol;
+import org.eclipse.jst.jsf.context.symbol.ITypeDescriptor;
 import org.eclipse.jst.jsf.context.symbol.SymbolPackage;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IComponentSymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.ITypeDescriptor;
 
 
 /**

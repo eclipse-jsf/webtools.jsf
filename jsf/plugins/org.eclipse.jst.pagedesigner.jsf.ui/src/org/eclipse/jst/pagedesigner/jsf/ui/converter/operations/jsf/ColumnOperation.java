@@ -16,8 +16,8 @@ import java.util.StringTokenizer;
 
 import org.eclipse.jst.pagedesigner.converter.ConvertPosition;
 import org.eclipse.jst.pagedesigner.dom.EditModelQuery;
-import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.AbstractTransformOperation;
-import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.CreateAttributeOperation;
+import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.AbstractTransformOperation;
+import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.CreateAttributeOperation;
 import org.eclipse.jst.pagedesigner.jsf.core.dom.JSFDOMUtil;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;

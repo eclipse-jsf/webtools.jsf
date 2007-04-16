@@ -15,9 +15,9 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.ResourceLocator;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.source.AbstractContextSymbolFactory;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.source.ISymbolSourceProvider;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.source.ISymbolSourceProviderFactory;
+import org.eclipse.jst.jsf.context.symbol.source.AbstractContextSymbolFactory;
+import org.eclipse.jst.jsf.context.symbol.source.ISymbolSourceProvider;
+import org.eclipse.jst.jsf.context.symbol.source.ISymbolSourceProviderFactory;
 import org.osgi.framework.Bundle;
 
 /**

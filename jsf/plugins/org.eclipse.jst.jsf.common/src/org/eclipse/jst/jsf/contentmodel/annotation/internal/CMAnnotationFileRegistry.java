@@ -22,7 +22,7 @@ import java.util.Map;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
-import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.ICMAnnotationSourceFileInfo;
+import org.eclipse.jst.jsf.contentmodel.annotation.ICMAnnotationSourceFileInfo;
 import org.eclipse.osgi.util.NLS;
 
 /**
@@ -40,7 +40,7 @@ import org.eclipse.osgi.util.NLS;
  * also see org.eclipse.jst.jsf.contentmodel.annotations.annotationFiles extension-point
  * @see CMAnnotationFileRegistryReader
  * @see CMAnnotationMap
- * @see org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.ICMAnnotationSourceFileInfo
+ * @see org.eclipse.jst.jsf.contentmodel.annotation.ICMAnnotationSourceFileInfo
  * 
  * @deprecated see common.metadata package
  */

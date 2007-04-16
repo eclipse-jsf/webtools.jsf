@@ -37,7 +37,7 @@ import org.eclipse.jst.pagedesigner.css2.layout.CSSFigure;
 import org.eclipse.jst.pagedesigner.css2.layout.CSSWidgetLayout;
 import org.eclipse.jst.pagedesigner.css2.style.AbstractStyle;
 import org.eclipse.jst.pagedesigner.css2.widget.HiddenProvider;
-import org.eclipse.jst.pagedesigner.dtmanager.internal.provisional.DTManager;
+import org.eclipse.jst.pagedesigner.dtmanager.DTManager;
 import org.eclipse.jst.pagedesigner.editpolicies.ElementMenuBar;
 import org.eclipse.jst.pagedesigner.editpolicies.ElementResizableEditPolicy;
 import org.eclipse.jst.pagedesigner.editpolicies.IEnhancedSelectionEditPolicy;

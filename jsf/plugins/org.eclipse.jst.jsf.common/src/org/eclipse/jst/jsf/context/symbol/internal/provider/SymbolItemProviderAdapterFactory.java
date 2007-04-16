@@ -28,8 +28,8 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.INotifyChangedListener;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.provider.IContentProposalProvider;
 import org.eclipse.jst.jsf.context.symbol.internal.util.SymbolAdapterFactory;
+import org.eclipse.jst.jsf.context.symbol.provider.IContentProposalProvider;
 
 /**
  * This is the factory that is used to provide the interfaces needed to support Viewers.
@@ -90,7 +90,7 @@ public class SymbolItemProviderAdapterFactory extends SymbolAdapterFactory imple
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanInstanceSymbol} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.IBeanInstanceSymbol} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -98,7 +98,7 @@ public class SymbolItemProviderAdapterFactory extends SymbolAdapterFactory imple
 	protected IBeanInstanceSymbolItemProvider iBeanInstanceSymbolItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanInstanceSymbol}.
+	 * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.IBeanInstanceSymbol}.
 	 * <!-- begin-user-doc -->
      * @return the adapter 
 	 * <!-- end-user-doc -->
@@ -113,7 +113,7 @@ public class SymbolItemProviderAdapterFactory extends SymbolAdapterFactory imple
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanPropertySymbol} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.IBeanPropertySymbol} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -121,7 +121,7 @@ public class SymbolItemProviderAdapterFactory extends SymbolAdapterFactory imple
 	protected IBeanPropertySymbolItemProvider iBeanPropertySymbolItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanPropertySymbol}.
+	 * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.IBeanPropertySymbol}.
 	 * <!-- begin-user-doc -->
      * @return the adapter 
 	 * <!-- end-user-doc -->
@@ -136,7 +136,7 @@ public class SymbolItemProviderAdapterFactory extends SymbolAdapterFactory imple
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IInstanceSymbol} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.IInstanceSymbol} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -144,7 +144,7 @@ public class SymbolItemProviderAdapterFactory extends SymbolAdapterFactory imple
 	protected IInstanceSymbolItemProvider iInstanceSymbolItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IInstanceSymbol}.
+	 * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.IInstanceSymbol}.
 	 * <!-- begin-user-doc -->
      * @return the adapter 
 	 * <!-- end-user-doc -->
@@ -159,7 +159,7 @@ public class SymbolItemProviderAdapterFactory extends SymbolAdapterFactory imple
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaSymbol} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.IJavaSymbol} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -167,7 +167,7 @@ public class SymbolItemProviderAdapterFactory extends SymbolAdapterFactory imple
 	protected IJavaSymbolItemProvider iJavaSymbolItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaSymbol}.
+	 * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.IJavaSymbol}.
 	 * <!-- begin-user-doc -->
      * @return the adapter 
 	 * <!-- end-user-doc -->
@@ -182,7 +182,7 @@ public class SymbolItemProviderAdapterFactory extends SymbolAdapterFactory imple
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaTypeDescriptor2} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.IJavaTypeDescriptor2} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -190,7 +190,7 @@ public class SymbolItemProviderAdapterFactory extends SymbolAdapterFactory imple
 	protected IJavaTypeDescriptor2ItemProvider iJavaTypeDescriptor2ItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaTypeDescriptor2}.
+	 * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.IJavaTypeDescriptor2}.
 	 * <!-- begin-user-doc -->
      * @return the adapter 
 	 * <!-- end-user-doc -->
@@ -205,7 +205,7 @@ public class SymbolItemProviderAdapterFactory extends SymbolAdapterFactory imple
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanMethodSymbol} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.IBeanMethodSymbol} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -213,7 +213,7 @@ public class SymbolItemProviderAdapterFactory extends SymbolAdapterFactory imple
 	protected IBeanMethodSymbolItemProvider iBeanMethodSymbolItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanMethodSymbol}.
+	 * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.IBeanMethodSymbol}.
 	 * <!-- begin-user-doc -->
      * @return the adapter 
 	 * <!-- end-user-doc -->
@@ -228,7 +228,7 @@ public class SymbolItemProviderAdapterFactory extends SymbolAdapterFactory imple
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IComponentSymbol} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.IComponentSymbol} instances.
 	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
 	 * @generated
@@ -236,7 +236,7 @@ public class SymbolItemProviderAdapterFactory extends SymbolAdapterFactory imple
     protected IComponentSymbolItemProvider iComponentSymbolItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IComponentSymbol}.
+	 * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.IComponentSymbol}.
 	 * <!-- begin-user-doc -->
      * @return the adapter 
      * <!-- end-user-doc -->
@@ -251,7 +251,7 @@ public class SymbolItemProviderAdapterFactory extends SymbolAdapterFactory imple
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IPropertySymbol} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.IPropertySymbol} instances.
 	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
 	 * @generated
@@ -259,7 +259,7 @@ public class SymbolItemProviderAdapterFactory extends SymbolAdapterFactory imple
     protected IPropertySymbolItemProvider iPropertySymbolItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IPropertySymbol}.
+	 * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.IPropertySymbol}.
 	 * <!-- begin-user-doc -->
      * @return the property symbol adapter 
      * <!-- end-user-doc -->
@@ -274,7 +274,7 @@ public class SymbolItemProviderAdapterFactory extends SymbolAdapterFactory imple
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IMapTypeDescriptor} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.IMapTypeDescriptor} instances.
 	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
 	 * @generated
@@ -282,7 +282,7 @@ public class SymbolItemProviderAdapterFactory extends SymbolAdapterFactory imple
     protected IMapTypeDescriptorItemProvider iMapTypeDescriptorItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IMapTypeDescriptor}.
+	 * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.IMapTypeDescriptor}.
 	 * <!-- begin-user-doc -->
      * @return the adapter 
      * <!-- end-user-doc -->
@@ -297,7 +297,7 @@ public class SymbolItemProviderAdapterFactory extends SymbolAdapterFactory imple
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IMethodSymbol} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.IMethodSymbol} instances.
 	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
 	 * @generated
@@ -305,7 +305,7 @@ public class SymbolItemProviderAdapterFactory extends SymbolAdapterFactory imple
     protected IMethodSymbolItemProvider iMethodSymbolItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IMethodSymbol}.
+	 * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.IMethodSymbol}.
 	 * <!-- begin-user-doc -->
      * @return the adapter for method symbols 
      * <!-- end-user-doc -->
@@ -320,7 +320,7 @@ public class SymbolItemProviderAdapterFactory extends SymbolAdapterFactory imple
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedMapTypeDescriptor} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.IBoundedMapTypeDescriptor} instances.
 	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
 	 * @generated
@@ -328,7 +328,7 @@ public class SymbolItemProviderAdapterFactory extends SymbolAdapterFactory imple
     protected IBoundedMapTypeDescriptorItemProvider iBoundedMapTypeDescriptorItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedMapTypeDescriptor}.
+	 * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.IBoundedMapTypeDescriptor}.
 	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
 	 * @generated
@@ -342,7 +342,7 @@ public class SymbolItemProviderAdapterFactory extends SymbolAdapterFactory imple
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedJavaTypeDescriptor} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.IBoundedJavaTypeDescriptor} instances.
 	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
 	 * @generated
@@ -350,7 +350,7 @@ public class SymbolItemProviderAdapterFactory extends SymbolAdapterFactory imple
     protected IBoundedJavaTypeDescriptorItemProvider iBoundedJavaTypeDescriptorItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedJavaTypeDescriptor}.
+	 * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.IBoundedJavaTypeDescriptor}.
 	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
 	 * @generated

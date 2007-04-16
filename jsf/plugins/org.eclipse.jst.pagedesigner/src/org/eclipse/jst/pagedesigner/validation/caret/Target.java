@@ -13,7 +13,7 @@ package org.eclipse.jst.pagedesigner.validation.caret;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.gef.EditPart;
-import org.eclipse.jst.jsf.common.internal.provisional.dom.TagIdentifier;
+import org.eclipse.jst.jsf.common.dom.TagIdentifier;
 import org.eclipse.jst.jsf.core.internal.tld.TagIdentifierFactory;
 import org.eclipse.jst.pagedesigner.converter.ITagConverter;
 import org.eclipse.wst.sse.core.internal.provisional.INodeNotifier;
