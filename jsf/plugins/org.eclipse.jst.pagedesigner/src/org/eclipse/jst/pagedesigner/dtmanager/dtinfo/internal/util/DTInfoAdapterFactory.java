@@ -13,14 +13,14 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.*;
+import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.*;
 
 /**
  * <!-- begin-user-doc -->
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
- * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.DTInfoPackage
+ * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.DTInfoPackage
  * @generated
  */
 public class DTInfoAdapterFactory extends AdapterFactoryImpl {
@@ -114,13 +114,13 @@ public class DTInfoAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.DTInfo <em>DT Info</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.DTInfo <em>DT Info</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.DTInfo
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.DTInfo
 	 * @generated
 	 */
 	public Adapter createDTInfoAdapter() {
@@ -128,13 +128,13 @@ public class DTInfoAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.TagConvertInfo <em>Tag Convert Info</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.TagConvertInfo <em>Tag Convert Info</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.TagConvertInfo
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.TagConvertInfo
 	 * @generated
 	 */
 	public Adapter createTagConvertInfoAdapter() {
@@ -142,13 +142,13 @@ public class DTInfoAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.Operation <em>Operation</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.Operation <em>Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.Operation
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.Operation
 	 * @generated
 	 */
 	public Adapter createOperationAdapter() {
@@ -156,13 +156,13 @@ public class DTInfoAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.Parameter <em>Parameter</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.Parameter <em>Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.Parameter
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.Parameter
 	 * @generated
 	 */
 	public Adapter createParameterAdapter() {
@@ -170,13 +170,13 @@ public class DTInfoAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.TagDecorateInfo <em>Tag Decorate Info</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.TagDecorateInfo <em>Tag Decorate Info</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.TagDecorateInfo
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.TagDecorateInfo
 	 * @generated
 	 */
 	public Adapter createTagDecorateInfoAdapter() {
@@ -184,13 +184,13 @@ public class DTInfoAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.ResolveAttributeValue <em>Resolve Attribute Value</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.ResolveAttributeValue <em>Resolve Attribute Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.ResolveAttributeValue
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.ResolveAttributeValue
 	 * @generated
 	 */
 	public Adapter createResolveAttributeValueAdapter() {

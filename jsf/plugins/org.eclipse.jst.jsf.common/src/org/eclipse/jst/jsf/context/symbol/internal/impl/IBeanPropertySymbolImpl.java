@@ -18,13 +18,13 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
+import org.eclipse.jst.jsf.context.symbol.IBeanPropertySymbol;
+import org.eclipse.jst.jsf.context.symbol.IBoundedListTypeDescriptor;
+import org.eclipse.jst.jsf.context.symbol.IBoundedMapTypeDescriptor;
+import org.eclipse.jst.jsf.context.symbol.IJavaTypeDescriptor2;
+import org.eclipse.jst.jsf.context.symbol.ITypeDescriptor;
 import org.eclipse.jst.jsf.context.symbol.SymbolFactory;
 import org.eclipse.jst.jsf.context.symbol.SymbolPackage;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanPropertySymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedListTypeDescriptor;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedMapTypeDescriptor;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaTypeDescriptor2;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.ITypeDescriptor;
 
 /**
  * <!-- begin-user-doc -->

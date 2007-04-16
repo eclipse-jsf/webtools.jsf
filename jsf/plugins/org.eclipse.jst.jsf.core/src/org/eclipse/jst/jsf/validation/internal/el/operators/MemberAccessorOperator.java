@@ -8,16 +8,16 @@ import org.eclipse.jst.jsf.common.internal.types.SignatureBasedType;
 import org.eclipse.jst.jsf.common.internal.types.TypeCoercer;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
 import org.eclipse.jst.jsf.common.internal.types.ValueType;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IMethodSymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IObjectSymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IPropertySymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.ISymbol;
+import org.eclipse.jst.jsf.context.symbol.IMethodSymbol;
+import org.eclipse.jst.jsf.context.symbol.IObjectSymbol;
+import org.eclipse.jst.jsf.context.symbol.IPropertySymbol;
+import org.eclipse.jst.jsf.context.symbol.ISymbol;
 import org.eclipse.jst.jsf.context.symbol.internal.util.IMethodSymbolBasedType;
 import org.eclipse.jst.jsf.context.symbol.internal.util.IObjectSymbolBasedValueType;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
-import org.eclipse.jst.jsf.designtime.internal.provisional.DesignTimeApplicationManager;
-import org.eclipse.jst.jsf.designtime.internal.provisional.el.AbstractDTMethodResolver;
-import org.eclipse.jst.jsf.designtime.internal.provisional.el.AbstractDTPropertyResolver;
+import org.eclipse.jst.jsf.designtime.DesignTimeApplicationManager;
+import org.eclipse.jst.jsf.designtime.el.AbstractDTMethodResolver;
+import org.eclipse.jst.jsf.designtime.el.AbstractDTPropertyResolver;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
 /**

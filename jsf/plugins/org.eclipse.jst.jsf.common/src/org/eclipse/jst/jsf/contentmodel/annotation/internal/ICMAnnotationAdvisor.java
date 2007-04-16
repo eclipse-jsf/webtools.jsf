@@ -12,7 +12,7 @@
 
 package org.eclipse.jst.jsf.contentmodel.annotation.internal;
 
-import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.ICMAnnotationSourceFileInfo;
+import org.eclipse.jst.jsf.contentmodel.annotation.ICMAnnotationSourceFileInfo;
 
 
 /**
@@ -44,8 +44,8 @@ public interface ICMAnnotationAdvisor {
 	 * @param propertyName
 	 * @param propertyValue
 	 * 
-	 * @see org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.ICMAnnotationFileParser
-	 * @see org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.ICMAnnotationSourceFileInfo
+	 * @see org.eclipse.jst.jsf.contentmodel.annotation.ICMAnnotationFileParser
+	 * @see org.eclipse.jst.jsf.contentmodel.annotation.ICMAnnotationSourceFileInfo
 	 */
 	public void addElementAnnotation(String elementName, String propertyName, String propertyValue);
 	/**
@@ -56,8 +56,8 @@ public interface ICMAnnotationAdvisor {
 	 * @param propertyName
 	 * @param propertyValue
 	 * 
-	 * @see org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.ICMAnnotationFileParser
-	 * @see org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.ICMAnnotationSourceFileInfo
+	 * @see org.eclipse.jst.jsf.contentmodel.annotation.ICMAnnotationFileParser
+	 * @see org.eclipse.jst.jsf.contentmodel.annotation.ICMAnnotationSourceFileInfo
 	 */
 	public void addAttributeAnnotation(String elementName, String attributeName, String propertyName, String propertyValue);
 }

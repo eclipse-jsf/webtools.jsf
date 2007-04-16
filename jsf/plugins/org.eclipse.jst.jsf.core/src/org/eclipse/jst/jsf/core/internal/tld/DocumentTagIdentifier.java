@@ -1,6 +1,6 @@
 package org.eclipse.jst.jsf.core.internal.tld;
 
-import org.eclipse.jst.jsf.common.internal.provisional.dom.TagIdentifier;
+import org.eclipse.jst.jsf.common.dom.TagIdentifier;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMElementDeclaration;
 import org.w3c.dom.Element;
 

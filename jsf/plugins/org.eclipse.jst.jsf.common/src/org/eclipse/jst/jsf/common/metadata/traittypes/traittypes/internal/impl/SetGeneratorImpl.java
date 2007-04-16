@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SetGeneratorImpl.java,v 1.1 2007/02/28 21:12:40 cbateman Exp $
+ * $Id: SetGeneratorImpl.java,v 1.2 2007/04/16 19:54:01 itrimble Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.impl;
 
@@ -13,8 +13,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.SetGenerator;
-import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.TraitTypesPackage;
+import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.SetGenerator;
+import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.TraitTypesPackage;
 
 /**
  * <!-- begin-user-doc -->

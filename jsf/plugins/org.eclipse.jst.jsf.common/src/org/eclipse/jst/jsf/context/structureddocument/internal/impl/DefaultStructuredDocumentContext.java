@@ -13,7 +13,7 @@
 package org.eclipse.jst.jsf.context.structureddocument.internal.impl;
 
 import org.eclipse.jface.text.IDocument;
-import org.eclipse.jst.jsf.context.structureddocument.internal.provisional.AbstractStructuredDocumentContext;
+import org.eclipse.jst.jsf.context.structureddocument.AbstractStructuredDocumentContext;
 import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
 
 /*package*/ class DefaultStructuredDocumentContext extends AbstractStructuredDocumentContext

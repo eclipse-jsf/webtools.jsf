@@ -31,16 +31,16 @@ import org.eclipse.jdt.core.ITypeHierarchy;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
-import org.eclipse.jst.jsf.common.internal.provisional.util.JDTBeanIntrospector;
-import org.eclipse.jst.jsf.common.internal.provisional.util.JDTBeanProperty;
-import org.eclipse.jst.jsf.common.internal.provisional.util.TypeUtil;
+import org.eclipse.jst.jsf.common.util.JDTBeanIntrospector;
+import org.eclipse.jst.jsf.common.util.JDTBeanProperty;
+import org.eclipse.jst.jsf.common.util.TypeUtil;
+import org.eclipse.jst.jsf.context.symbol.IBeanMethodSymbol;
+import org.eclipse.jst.jsf.context.symbol.IBeanPropertySymbol;
+import org.eclipse.jst.jsf.context.symbol.IJavaTypeDescriptor2;
+import org.eclipse.jst.jsf.context.symbol.IObjectSymbol;
+import org.eclipse.jst.jsf.context.symbol.IPropertySymbol;
 import org.eclipse.jst.jsf.context.symbol.SymbolFactory;
 import org.eclipse.jst.jsf.context.symbol.SymbolPackage;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanMethodSymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanPropertySymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaTypeDescriptor2;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IObjectSymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IPropertySymbol;
 
 
 /**

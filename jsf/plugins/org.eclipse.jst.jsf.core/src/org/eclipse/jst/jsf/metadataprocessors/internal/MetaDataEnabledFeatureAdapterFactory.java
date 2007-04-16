@@ -15,7 +15,7 @@ package org.eclipse.jst.jsf.metadataprocessors.internal;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
-import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.IMetaDataEnabledFeature;
+import org.eclipse.jst.jsf.metadataprocessors.IMetaDataEnabledFeature;
 import org.osgi.framework.Bundle;
 
 /**

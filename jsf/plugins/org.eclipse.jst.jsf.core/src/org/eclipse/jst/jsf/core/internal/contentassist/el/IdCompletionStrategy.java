@@ -18,17 +18,17 @@ import java.util.List;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
-import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.IStructuredDocumentContextResolverFactory;
-import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.IWorkspaceContextResolver;
-import org.eclipse.jst.jsf.context.structureddocument.internal.provisional.IStructuredDocumentContext;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.ERuntimeSource;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IInstanceSymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.ISymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.provider.IContentProposalProvider;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.provider.ProposalCreationFactoryAdapter;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.provider.IContentProposalProvider.IProposalCreationFactory;
-import org.eclipse.jst.jsf.designtime.internal.provisional.resolver.ISymbolContextResolver;
-import org.eclipse.jst.jsf.designtime.internal.provisional.resolver.StructuredDocumentSymbolResolverFactory;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.IWorkspaceContextResolver;
+import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
+import org.eclipse.jst.jsf.context.symbol.ERuntimeSource;
+import org.eclipse.jst.jsf.context.symbol.IInstanceSymbol;
+import org.eclipse.jst.jsf.context.symbol.ISymbol;
+import org.eclipse.jst.jsf.context.symbol.provider.IContentProposalProvider;
+import org.eclipse.jst.jsf.context.symbol.provider.ProposalCreationFactoryAdapter;
+import org.eclipse.jst.jsf.context.symbol.provider.IContentProposalProvider.IProposalCreationFactory;
+import org.eclipse.jst.jsf.designtime.resolver.ISymbolContextResolver;
+import org.eclipse.jst.jsf.designtime.resolver.StructuredDocumentSymbolResolverFactory;
 import org.eclipse.swt.graphics.Image;
 
 /**
@@ -55,7 +55,7 @@ class IdCompletionStrategy extends ContentAssistStrategy
     }
 
     /**
-     * @see org.eclipse.jst.jsf.core.internal.contentassist.el.ContentAssistStrategy#getProposals(org.eclipse.jst.jsf.context.structureddocument.internal.provisional.IStructuredDocumentContext)
+     * @see org.eclipse.jst.jsf.core.internal.contentassist.el.ContentAssistStrategy#getProposals(org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext)
      */
     public List getProposals(IStructuredDocumentContext context) 
     {

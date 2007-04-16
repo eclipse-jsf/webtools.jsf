@@ -22,7 +22,7 @@ import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.CMAnnotationSourceFileLocator;
+import org.eclipse.jst.jsf.contentmodel.annotation.CMAnnotationSourceFileLocator;
 
 /**
  * Default implementation of CMAnnotationSourceFileLocator that will locate annotations

@@ -2,13 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ContainsTagConstraint.java,v 1.1 2007/02/28 21:16:02 cbateman Exp $
+ * $Id: ContainsTagConstraint.java,v 1.2 2007/04/16 19:53:29 itrimble Exp $
  */
 package org.eclipse.jst.jsf.validation.internal.constraints;
 
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.SetGenerator;
+import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.SetGenerator;
 
 /**
  * <!-- begin-user-doc -->

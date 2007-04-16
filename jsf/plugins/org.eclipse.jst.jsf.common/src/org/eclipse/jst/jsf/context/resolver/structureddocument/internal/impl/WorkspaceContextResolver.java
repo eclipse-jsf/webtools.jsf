@@ -18,9 +18,9 @@ import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.jst.jsf.context.internal.provisional.IModelContext;
-import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.IWorkspaceContextResolver;
-import org.eclipse.jst.jsf.context.structureddocument.internal.provisional.IStructuredDocumentContext;
+import org.eclipse.jst.jsf.context.IModelContext;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.IWorkspaceContextResolver;
+import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.eclipse.wst.sse.core.StructuredModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
 
@@ -39,7 +39,7 @@ import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
 	}
 	
 	/**
-	 * @see org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.IWorkspaceContextResolver#getProject()
+	 * @see org.eclipse.jst.jsf.context.resolver.structureddocument.IWorkspaceContextResolver#getProject()
 	 */
 	public IProject getProject() 
 	{
@@ -126,7 +126,7 @@ import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
 	}
 
 	/**
-	 * @see org.eclipse.jst.jsf.context.resolver.internal.provisional.IContextResolver#canResolveContext(org.eclipse.jst.jsf.context.internal.provisional.IModelContext)
+	 * @see org.eclipse.jst.jsf.context.resolver.IContextResolver#canResolveContext(org.eclipse.jst.jsf.context.IModelContext)
 	 */
 	public boolean canResolveContext(IModelContext modelContext) 
 	{

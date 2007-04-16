@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MetadataFactoryImpl.java,v 1.2 2007/02/07 00:03:49 gkessler Exp $
+ * $Id: MetadataFactoryImpl.java,v 1.3 2007/04/16 19:54:10 itrimble Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.impl;
 
@@ -13,15 +13,15 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.jst.jsf.common.metadata.Entity;
+import org.eclipse.jst.jsf.common.metadata.EntityGroup;
+import org.eclipse.jst.jsf.common.metadata.IncludeEntityGroup;
+import org.eclipse.jst.jsf.common.metadata.MetadataFactory;
+import org.eclipse.jst.jsf.common.metadata.MetadataPackage;
+import org.eclipse.jst.jsf.common.metadata.Model;
+import org.eclipse.jst.jsf.common.metadata.Trait;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider;
 import org.eclipse.jst.jsf.common.metadata.internal.ModelKeyDescriptor;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.EntityGroup;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.IncludeEntityGroup;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.MetadataFactory;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.MetadataPackage;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.Model;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
 
 
 

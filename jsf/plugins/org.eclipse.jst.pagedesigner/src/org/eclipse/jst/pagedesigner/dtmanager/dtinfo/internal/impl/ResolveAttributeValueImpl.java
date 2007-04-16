@@ -13,8 +13,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.DTInfoPackage;
-import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.ResolveAttributeValue;
+import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.DTInfoPackage;
+import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.ResolveAttributeValue;
 
 /**
  * <!-- begin-user-doc -->

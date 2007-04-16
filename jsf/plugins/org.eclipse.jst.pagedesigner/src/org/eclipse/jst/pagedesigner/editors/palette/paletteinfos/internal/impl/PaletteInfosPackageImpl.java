@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PaletteInfosPackageImpl.java,v 1.2 2007/04/09 02:23:03 cbateman Exp $
+ * $Id: PaletteInfosPackageImpl.java,v 1.3 2007/04/16 19:55:08 itrimble Exp $
  */
 package org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl;
 
@@ -13,13 +13,13 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.PaletteInfo;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.PaletteInfos;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.PaletteInfosFactory;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.PaletteInfosPackage;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.TagCreationAttribute;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.TagCreationInfo;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.TagCreationTemplate;
+import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfo;
+import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfos;
+import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfosFactory;
+import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfosPackage;
+import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.TagCreationAttribute;
+import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.TagCreationInfo;
+import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.TagCreationTemplate;
 
 /**
  * <!-- begin-user-doc -->
@@ -81,7 +81,7 @@ public class PaletteInfosPackageImpl extends EPackageImpl implements PaletteInfo
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.PaletteInfosPackage#eNS_URI
+	 * @see org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfosPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */

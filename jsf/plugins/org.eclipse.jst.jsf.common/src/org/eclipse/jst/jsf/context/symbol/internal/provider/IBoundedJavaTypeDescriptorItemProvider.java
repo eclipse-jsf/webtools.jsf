@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IBoundedJavaTypeDescriptorItemProvider.java,v 1.3 2007/04/09 02:29:53 cbateman Exp $
+ * $Id: IBoundedJavaTypeDescriptorItemProvider.java,v 1.4 2007/04/16 19:54:00 itrimble Exp $
  */
 package org.eclipse.jst.jsf.context.symbol.internal.provider;
 
@@ -19,10 +19,10 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedJavaTypeDescriptor;
+import org.eclipse.jst.jsf.context.symbol.IBoundedJavaTypeDescriptor;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedJavaTypeDescriptor} object.
+ * This is the item provider adapter for a {@link org.eclipse.jst.jsf.context.symbol.IBoundedJavaTypeDescriptor} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated

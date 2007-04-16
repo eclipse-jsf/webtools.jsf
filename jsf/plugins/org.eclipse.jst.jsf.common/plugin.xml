@@ -30,11 +30,11 @@
        genModel = "model/symbol.genmodel" /> 
 	<package 
        uri = "http://org.eclipse.jst.jsf.common.metadata/metadata.ecore" 
-       class = "org.eclipse.jst.jsf.common.metadata.internal.provisional.MetadataPackage"
+       class = "org.eclipse.jst.jsf.common.metadata.MetadataPackage"
        genModel = "model/metadata.genmodel" />        
 	<package 
        uri = "http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore" 
-       class = "org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.TraitTypesPackage"
+       class = "org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.TraitTypesPackage"
        genModel = "model/metadataTraitTypes.genmodel" />
   </extension>
   <extension

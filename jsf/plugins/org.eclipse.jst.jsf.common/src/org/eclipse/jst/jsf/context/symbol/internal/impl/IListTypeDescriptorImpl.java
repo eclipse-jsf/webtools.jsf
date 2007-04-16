@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IListTypeDescriptorImpl.java,v 1.1 2006/12/05 18:36:42 cbateman Exp $
+ * $Id: IListTypeDescriptorImpl.java,v 1.2 2007/04/16 19:53:58 itrimble Exp $
  */
 package org.eclipse.jst.jsf.context.symbol.internal.impl;
 
@@ -16,9 +16,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
+import org.eclipse.jst.jsf.context.symbol.IListTypeDescriptor;
 import org.eclipse.jst.jsf.context.symbol.SymbolPackage;
 
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IListTypeDescriptor;
 
 /**
  * <!-- begin-user-doc -->

@@ -11,9 +11,9 @@
  ********************************************************************************/
 package org.eclipse.jst.jsf.common.metadata.internal;
 
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.EntityGroup;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
+import org.eclipse.jst.jsf.common.metadata.Entity;
+import org.eclipse.jst.jsf.common.metadata.EntityGroup;
+import org.eclipse.jst.jsf.common.metadata.Trait;
 
 
 /**

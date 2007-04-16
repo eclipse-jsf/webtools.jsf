@@ -14,7 +14,7 @@ package org.eclipse.jst.jsf.core.internal.contentassist.el;
 import java.util.List;
 
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
-import org.eclipse.jst.jsf.context.structureddocument.internal.provisional.IStructuredDocumentContext;
+import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 
 /**
  * Encapsulates an EL content assist completion prefix

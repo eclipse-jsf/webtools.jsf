@@ -74,10 +74,10 @@ public interface SymbolPackage extends EPackage {
     SymbolPackage eINSTANCE = org.eclipse.jst.jsf.context.symbol.internal.impl.SymbolPackageImpl.init();
 
     /**
-     * The meta object id for the '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.ISymbol <em>ISymbol</em>}' class.
+     * The meta object id for the '{@link org.eclipse.jst.jsf.context.symbol.ISymbol <em>ISymbol</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.ISymbol
+     * @see org.eclipse.jst.jsf.context.symbol.ISymbol
      * @see org.eclipse.jst.jsf.context.symbol.internal.impl.SymbolPackageImpl#getISymbol()
      * @generated
      */
@@ -102,10 +102,10 @@ public interface SymbolPackage extends EPackage {
     int ISYMBOL_FEATURE_COUNT = 1;
 
     /**
-     * The meta object id for the '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IObjectSymbol <em>IObject Symbol</em>}' class.
+     * The meta object id for the '{@link org.eclipse.jst.jsf.context.symbol.IObjectSymbol <em>IObject Symbol</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IObjectSymbol
+     * @see org.eclipse.jst.jsf.context.symbol.IObjectSymbol
      * @see org.eclipse.jst.jsf.context.symbol.internal.impl.SymbolPackageImpl#getIObjectSymbol()
      * @generated
      */
@@ -568,10 +568,10 @@ public interface SymbolPackage extends EPackage {
     int ITYPE_DESCRIPTOR_FEATURE_COUNT = 6;
 
     /**
-     * The meta object id for the '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IDescribedInDetail <em>IDescribed In Detail</em>}' class.
+     * The meta object id for the '{@link org.eclipse.jst.jsf.context.symbol.IDescribedInDetail <em>IDescribed In Detail</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IDescribedInDetail
+     * @see org.eclipse.jst.jsf.context.symbol.IDescribedInDetail
      * @see org.eclipse.jst.jsf.context.symbol.internal.impl.SymbolPackageImpl#getIDescribedInDetail()
      * @generated
      */
@@ -943,10 +943,10 @@ public interface SymbolPackage extends EPackage {
     int IMETHOD_SYMBOL_FEATURE_COUNT = ISYMBOL_FEATURE_COUNT + 1;
 
     /**
-     * The meta object id for the '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedTypeDescriptor <em>IBounded Type Descriptor</em>}' class.
+     * The meta object id for the '{@link org.eclipse.jst.jsf.context.symbol.IBoundedTypeDescriptor <em>IBounded Type Descriptor</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedTypeDescriptor
+     * @see org.eclipse.jst.jsf.context.symbol.IBoundedTypeDescriptor
      * @see org.eclipse.jst.jsf.context.symbol.internal.impl.SymbolPackageImpl#getIBoundedTypeDescriptor()
      * @generated
      */
@@ -1380,10 +1380,10 @@ public interface SymbolPackage extends EPackage {
     int IBOUNDED_LIST_TYPE_DESCRIPTOR_FEATURE_COUNT = ILIST_TYPE_DESCRIPTOR_FEATURE_COUNT + 0;
 
     /**
-     * The meta object id for the '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.ERuntimeSource <em>ERuntime Source</em>}' enum.
+     * The meta object id for the '{@link org.eclipse.jst.jsf.context.symbol.ERuntimeSource <em>ERuntime Source</em>}' enum.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.ERuntimeSource
+     * @see org.eclipse.jst.jsf.context.symbol.ERuntimeSource
      * @see org.eclipse.jst.jsf.context.symbol.internal.impl.SymbolPackageImpl#getERuntimeSource()
      * @generated
      */
@@ -1411,487 +1411,487 @@ public interface SymbolPackage extends EPackage {
 
 
     /**
-     * Returns the meta object for class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanInstanceSymbol <em>IBean Instance Symbol</em>}'.
+     * Returns the meta object for class '{@link org.eclipse.jst.jsf.context.symbol.IBeanInstanceSymbol <em>IBean Instance Symbol</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for class '<em>IBean Instance Symbol</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanInstanceSymbol
+     * @see org.eclipse.jst.jsf.context.symbol.IBeanInstanceSymbol
      * @generated
      */
     EClass getIBeanInstanceSymbol();
 
     /**
-     * Returns the meta object for the reference list '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanInstanceSymbol#getProperties <em>Properties</em>}'.
+     * Returns the meta object for the reference list '{@link org.eclipse.jst.jsf.context.symbol.IBeanInstanceSymbol#getProperties <em>Properties</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the reference list '<em>Properties</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanInstanceSymbol#getProperties()
+     * @see org.eclipse.jst.jsf.context.symbol.IBeanInstanceSymbol#getProperties()
      * @see #getIBeanInstanceSymbol()
      * @generated
      */
     EReference getIBeanInstanceSymbol_Properties();
 
     /**
-     * Returns the meta object for the reference list '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanInstanceSymbol#getMethods <em>Methods</em>}'.
+     * Returns the meta object for the reference list '{@link org.eclipse.jst.jsf.context.symbol.IBeanInstanceSymbol#getMethods <em>Methods</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the reference list '<em>Methods</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanInstanceSymbol#getMethods()
+     * @see org.eclipse.jst.jsf.context.symbol.IBeanInstanceSymbol#getMethods()
      * @see #getIBeanInstanceSymbol()
      * @generated
      */
     EReference getIBeanInstanceSymbol_Methods();
 
     /**
-     * Returns the meta object for class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanPropertySymbol <em>IBean Property Symbol</em>}'.
+     * Returns the meta object for class '{@link org.eclipse.jst.jsf.context.symbol.IBeanPropertySymbol <em>IBean Property Symbol</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for class '<em>IBean Property Symbol</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanPropertySymbol
+     * @see org.eclipse.jst.jsf.context.symbol.IBeanPropertySymbol
      * @generated
      */
     EClass getIBeanPropertySymbol();
 
     /**
-     * Returns the meta object for the reference '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanPropertySymbol#getOwner <em>Owner</em>}'.
+     * Returns the meta object for the reference '{@link org.eclipse.jst.jsf.context.symbol.IBeanPropertySymbol#getOwner <em>Owner</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the reference '<em>Owner</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanPropertySymbol#getOwner()
+     * @see org.eclipse.jst.jsf.context.symbol.IBeanPropertySymbol#getOwner()
      * @see #getIBeanPropertySymbol()
      * @generated
      */
     EReference getIBeanPropertySymbol_Owner();
 
     /**
-     * Returns the meta object for class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IInstanceSymbol <em>IInstance Symbol</em>}'.
+     * Returns the meta object for class '{@link org.eclipse.jst.jsf.context.symbol.IInstanceSymbol <em>IInstance Symbol</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for class '<em>IInstance Symbol</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IInstanceSymbol
+     * @see org.eclipse.jst.jsf.context.symbol.IInstanceSymbol
      * @generated
      */
     EClass getIInstanceSymbol();
 
     /**
-     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IInstanceSymbol#isTypeResolved <em>Type Resolved</em>}'.
+     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.context.symbol.IInstanceSymbol#isTypeResolved <em>Type Resolved</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the attribute '<em>Type Resolved</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IInstanceSymbol#isTypeResolved()
+     * @see org.eclipse.jst.jsf.context.symbol.IInstanceSymbol#isTypeResolved()
      * @see #getIInstanceSymbol()
      * @generated
      */
     EAttribute getIInstanceSymbol_TypeResolved();
 
     /**
-     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IInstanceSymbol#getRuntimeSource <em>Runtime Source</em>}'.
+     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.context.symbol.IInstanceSymbol#getRuntimeSource <em>Runtime Source</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the attribute '<em>Runtime Source</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IInstanceSymbol#getRuntimeSource()
+     * @see org.eclipse.jst.jsf.context.symbol.IInstanceSymbol#getRuntimeSource()
      * @see #getIInstanceSymbol()
      * @generated
      */
     EAttribute getIInstanceSymbol_RuntimeSource();
 
     /**
-     * Returns the meta object for class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaSymbol <em>IJava Symbol</em>}'.
+     * Returns the meta object for class '{@link org.eclipse.jst.jsf.context.symbol.IJavaSymbol <em>IJava Symbol</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for class '<em>IJava Symbol</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaSymbol
+     * @see org.eclipse.jst.jsf.context.symbol.IJavaSymbol
      * @generated
      */
     EClass getIJavaSymbol();
 
     /**
-     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaSymbol#getJavaElement <em>Java Element</em>}'.
+     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.context.symbol.IJavaSymbol#getJavaElement <em>Java Element</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the attribute '<em>Java Element</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaSymbol#getJavaElement()
+     * @see org.eclipse.jst.jsf.context.symbol.IJavaSymbol#getJavaElement()
      * @see #getIJavaSymbol()
      * @generated
      */
     EAttribute getIJavaSymbol_JavaElement();
 
     /**
-     * Returns the meta object for class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.ISymbol <em>ISymbol</em>}'.
+     * Returns the meta object for class '{@link org.eclipse.jst.jsf.context.symbol.ISymbol <em>ISymbol</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for class '<em>ISymbol</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.ISymbol
+     * @see org.eclipse.jst.jsf.context.symbol.ISymbol
      * @generated
      */
     EClass getISymbol();
 
     /**
-     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.ISymbol#getName <em>Name</em>}'.
+     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.context.symbol.ISymbol#getName <em>Name</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the attribute '<em>Name</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.ISymbol#getName()
+     * @see org.eclipse.jst.jsf.context.symbol.ISymbol#getName()
      * @see #getISymbol()
      * @generated
      */
     EAttribute getISymbol_Name();
 
     /**
-     * Returns the meta object for class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.ITypeDescriptor <em>IType Descriptor</em>}'.
+     * Returns the meta object for class '{@link org.eclipse.jst.jsf.context.symbol.ITypeDescriptor <em>IType Descriptor</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for class '<em>IType Descriptor</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.ITypeDescriptor
+     * @see org.eclipse.jst.jsf.context.symbol.ITypeDescriptor
      * @generated
      */
     EClass getITypeDescriptor();
 
     /**
-     * Returns the meta object for the reference list '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.ITypeDescriptor#getProperties <em>Properties</em>}'.
+     * Returns the meta object for the reference list '{@link org.eclipse.jst.jsf.context.symbol.ITypeDescriptor#getProperties <em>Properties</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the reference list '<em>Properties</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.ITypeDescriptor#getProperties()
+     * @see org.eclipse.jst.jsf.context.symbol.ITypeDescriptor#getProperties()
      * @see #getITypeDescriptor()
      * @generated
      */
     EReference getITypeDescriptor_Properties();
 
     /**
-     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.ITypeDescriptor#getTypeSignature <em>Type Signature</em>}'.
+     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.context.symbol.ITypeDescriptor#getTypeSignature <em>Type Signature</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the attribute '<em>Type Signature</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.ITypeDescriptor#getTypeSignature()
+     * @see org.eclipse.jst.jsf.context.symbol.ITypeDescriptor#getTypeSignature()
      * @see #getITypeDescriptor()
      * @generated
      */
     EAttribute getITypeDescriptor_TypeSignature();
 
     /**
-     * Returns the meta object for the attribute list '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.ITypeDescriptor#getSuperTypeSignatures <em>Super Type Signatures</em>}'.
+     * Returns the meta object for the attribute list '{@link org.eclipse.jst.jsf.context.symbol.ITypeDescriptor#getSuperTypeSignatures <em>Super Type Signatures</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the attribute list '<em>Super Type Signatures</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.ITypeDescriptor#getSuperTypeSignatures()
+     * @see org.eclipse.jst.jsf.context.symbol.ITypeDescriptor#getSuperTypeSignatures()
      * @see #getITypeDescriptor()
      * @generated
      */
     EAttribute getITypeDescriptor_SuperTypeSignatures();
 
     /**
-     * Returns the meta object for the attribute list '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.ITypeDescriptor#getInterfaceTypeSignatures <em>Interface Type Signatures</em>}'.
+     * Returns the meta object for the attribute list '{@link org.eclipse.jst.jsf.context.symbol.ITypeDescriptor#getInterfaceTypeSignatures <em>Interface Type Signatures</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the attribute list '<em>Interface Type Signatures</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.ITypeDescriptor#getInterfaceTypeSignatures()
+     * @see org.eclipse.jst.jsf.context.symbol.ITypeDescriptor#getInterfaceTypeSignatures()
      * @see #getITypeDescriptor()
      * @generated
      */
     EAttribute getITypeDescriptor_InterfaceTypeSignatures();
 
     /**
-     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.ITypeDescriptor#getTypeSignatureDelegate <em>Type Signature Delegate</em>}'.
+     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.context.symbol.ITypeDescriptor#getTypeSignatureDelegate <em>Type Signature Delegate</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the attribute '<em>Type Signature Delegate</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.ITypeDescriptor#getTypeSignatureDelegate()
+     * @see org.eclipse.jst.jsf.context.symbol.ITypeDescriptor#getTypeSignatureDelegate()
      * @see #getITypeDescriptor()
      * @generated
      */
     EAttribute getITypeDescriptor_TypeSignatureDelegate();
 
     /**
-     * Returns the meta object for the reference list '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.ITypeDescriptor#getMethods <em>Methods</em>}'.
+     * Returns the meta object for the reference list '{@link org.eclipse.jst.jsf.context.symbol.ITypeDescriptor#getMethods <em>Methods</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the reference list '<em>Methods</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.ITypeDescriptor#getMethods()
+     * @see org.eclipse.jst.jsf.context.symbol.ITypeDescriptor#getMethods()
      * @see #getITypeDescriptor()
      * @generated
      */
     EReference getITypeDescriptor_Methods();
 
     /**
-     * Returns the meta object for class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IDescribedInDetail <em>IDescribed In Detail</em>}'.
+     * Returns the meta object for class '{@link org.eclipse.jst.jsf.context.symbol.IDescribedInDetail <em>IDescribed In Detail</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for class '<em>IDescribed In Detail</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IDescribedInDetail
+     * @see org.eclipse.jst.jsf.context.symbol.IDescribedInDetail
      * @generated
      */
     EClass getIDescribedInDetail();
 
     /**
-     * Returns the meta object for class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaTypeDescriptor2 <em>IJava Type Descriptor2</em>}'.
+     * Returns the meta object for class '{@link org.eclipse.jst.jsf.context.symbol.IJavaTypeDescriptor2 <em>IJava Type Descriptor2</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for class '<em>IJava Type Descriptor2</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaTypeDescriptor2
+     * @see org.eclipse.jst.jsf.context.symbol.IJavaTypeDescriptor2
      * @generated
      */
     EClass getIJavaTypeDescriptor2();
 
     /**
-     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaTypeDescriptor2#getType <em>Type</em>}'.
+     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.context.symbol.IJavaTypeDescriptor2#getType <em>Type</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the attribute '<em>Type</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaTypeDescriptor2#getType()
+     * @see org.eclipse.jst.jsf.context.symbol.IJavaTypeDescriptor2#getType()
      * @see #getIJavaTypeDescriptor2()
      * @generated
      */
     EAttribute getIJavaTypeDescriptor2_Type();
 
     /**
-     * Returns the meta object for the reference list '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaTypeDescriptor2#getBeanProperties <em>Bean Properties</em>}'.
+     * Returns the meta object for the reference list '{@link org.eclipse.jst.jsf.context.symbol.IJavaTypeDescriptor2#getBeanProperties <em>Bean Properties</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the reference list '<em>Bean Properties</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaTypeDescriptor2#getBeanProperties()
+     * @see org.eclipse.jst.jsf.context.symbol.IJavaTypeDescriptor2#getBeanProperties()
      * @see #getIJavaTypeDescriptor2()
      * @generated
      */
     EReference getIJavaTypeDescriptor2_BeanProperties();
 
     /**
-     * Returns the meta object for the reference list '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaTypeDescriptor2#getBeanMethods <em>Bean Methods</em>}'.
+     * Returns the meta object for the reference list '{@link org.eclipse.jst.jsf.context.symbol.IJavaTypeDescriptor2#getBeanMethods <em>Bean Methods</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the reference list '<em>Bean Methods</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaTypeDescriptor2#getBeanMethods()
+     * @see org.eclipse.jst.jsf.context.symbol.IJavaTypeDescriptor2#getBeanMethods()
      * @see #getIJavaTypeDescriptor2()
      * @generated
      */
     EReference getIJavaTypeDescriptor2_BeanMethods();
 
     /**
-     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaTypeDescriptor2#getArrayCount <em>Array Count</em>}'.
+     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.context.symbol.IJavaTypeDescriptor2#getArrayCount <em>Array Count</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the attribute '<em>Array Count</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaTypeDescriptor2#getArrayCount()
+     * @see org.eclipse.jst.jsf.context.symbol.IJavaTypeDescriptor2#getArrayCount()
      * @see #getIJavaTypeDescriptor2()
      * @generated
      */
     EAttribute getIJavaTypeDescriptor2_ArrayCount();
 
     /**
-     * Returns the meta object for class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanMethodSymbol <em>IBean Method Symbol</em>}'.
+     * Returns the meta object for class '{@link org.eclipse.jst.jsf.context.symbol.IBeanMethodSymbol <em>IBean Method Symbol</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for class '<em>IBean Method Symbol</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanMethodSymbol
+     * @see org.eclipse.jst.jsf.context.symbol.IBeanMethodSymbol
      * @generated
      */
     EClass getIBeanMethodSymbol();
 
     /**
-     * Returns the meta object for the reference '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanMethodSymbol#getOwner <em>Owner</em>}'.
+     * Returns the meta object for the reference '{@link org.eclipse.jst.jsf.context.symbol.IBeanMethodSymbol#getOwner <em>Owner</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the reference '<em>Owner</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanMethodSymbol#getOwner()
+     * @see org.eclipse.jst.jsf.context.symbol.IBeanMethodSymbol#getOwner()
      * @see #getIBeanMethodSymbol()
      * @generated
      */
     EReference getIBeanMethodSymbol_Owner();
 
     /**
-     * Returns the meta object for class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IComponentSymbol <em>IComponent Symbol</em>}'.
+     * Returns the meta object for class '{@link org.eclipse.jst.jsf.context.symbol.IComponentSymbol <em>IComponent Symbol</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for class '<em>IComponent Symbol</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IComponentSymbol
+     * @see org.eclipse.jst.jsf.context.symbol.IComponentSymbol
      * @generated
      */
     EClass getIComponentSymbol();
 
     /**
-     * Returns the meta object for class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IPropertySymbol <em>IProperty Symbol</em>}'.
+     * Returns the meta object for class '{@link org.eclipse.jst.jsf.context.symbol.IPropertySymbol <em>IProperty Symbol</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for class '<em>IProperty Symbol</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IPropertySymbol
+     * @see org.eclipse.jst.jsf.context.symbol.IPropertySymbol
      * @generated
      */
     EClass getIPropertySymbol();
 
     /**
-     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IPropertySymbol#isIntermediate <em>Intermediate</em>}'.
+     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.context.symbol.IPropertySymbol#isIntermediate <em>Intermediate</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the attribute '<em>Intermediate</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IPropertySymbol#isIntermediate()
+     * @see org.eclipse.jst.jsf.context.symbol.IPropertySymbol#isIntermediate()
      * @see #getIPropertySymbol()
      * @generated
      */
     EAttribute getIPropertySymbol_Intermediate();
 
     /**
-     * Returns the meta object for class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IMapTypeDescriptor <em>IMap Type Descriptor</em>}'.
+     * Returns the meta object for class '{@link org.eclipse.jst.jsf.context.symbol.IMapTypeDescriptor <em>IMap Type Descriptor</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for class '<em>IMap Type Descriptor</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IMapTypeDescriptor
+     * @see org.eclipse.jst.jsf.context.symbol.IMapTypeDescriptor
      * @generated
      */
     EClass getIMapTypeDescriptor();
 
     /**
-     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IMapTypeDescriptor#getMapSource <em>Map Source</em>}'.
+     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.context.symbol.IMapTypeDescriptor#getMapSource <em>Map Source</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the attribute '<em>Map Source</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IMapTypeDescriptor#getMapSource()
+     * @see org.eclipse.jst.jsf.context.symbol.IMapTypeDescriptor#getMapSource()
      * @see #getIMapTypeDescriptor()
      * @generated
      */
     EAttribute getIMapTypeDescriptor_MapSource();
 
     /**
-     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IMapTypeDescriptor#isImmutable <em>Immutable</em>}'.
+     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.context.symbol.IMapTypeDescriptor#isImmutable <em>Immutable</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the attribute '<em>Immutable</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IMapTypeDescriptor#isImmutable()
+     * @see org.eclipse.jst.jsf.context.symbol.IMapTypeDescriptor#isImmutable()
      * @see #getIMapTypeDescriptor()
      * @generated
      */
     EAttribute getIMapTypeDescriptor_Immutable();
 
     /**
-     * Returns the meta object for class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IMethodSymbol <em>IMethod Symbol</em>}'.
+     * Returns the meta object for class '{@link org.eclipse.jst.jsf.context.symbol.IMethodSymbol <em>IMethod Symbol</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for class '<em>IMethod Symbol</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IMethodSymbol
+     * @see org.eclipse.jst.jsf.context.symbol.IMethodSymbol
      * @generated
      */
     EClass getIMethodSymbol();
 
     /**
-     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IMethodSymbol#getSignature <em>Signature</em>}'.
+     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.context.symbol.IMethodSymbol#getSignature <em>Signature</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the attribute '<em>Signature</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IMethodSymbol#getSignature()
+     * @see org.eclipse.jst.jsf.context.symbol.IMethodSymbol#getSignature()
      * @see #getIMethodSymbol()
      * @generated
      */
     EAttribute getIMethodSymbol_Signature();
 
     /**
-     * Returns the meta object for class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IObjectSymbol <em>IObject Symbol</em>}'.
+     * Returns the meta object for class '{@link org.eclipse.jst.jsf.context.symbol.IObjectSymbol <em>IObject Symbol</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for class '<em>IObject Symbol</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IObjectSymbol
+     * @see org.eclipse.jst.jsf.context.symbol.IObjectSymbol
      * @generated
      */
     EClass getIObjectSymbol();
 
     /**
-     * Returns the meta object for the reference '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IObjectSymbol#getTypeDescriptor <em>Type Descriptor</em>}'.
+     * Returns the meta object for the reference '{@link org.eclipse.jst.jsf.context.symbol.IObjectSymbol#getTypeDescriptor <em>Type Descriptor</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the reference '<em>Type Descriptor</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IObjectSymbol#getTypeDescriptor()
+     * @see org.eclipse.jst.jsf.context.symbol.IObjectSymbol#getTypeDescriptor()
      * @see #getIObjectSymbol()
      * @generated
      */
     EReference getIObjectSymbol_TypeDescriptor();
 
     /**
-     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IObjectSymbol#isReadable <em>Readable</em>}'.
+     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.context.symbol.IObjectSymbol#isReadable <em>Readable</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the attribute '<em>Readable</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IObjectSymbol#isReadable()
+     * @see org.eclipse.jst.jsf.context.symbol.IObjectSymbol#isReadable()
      * @see #getIObjectSymbol()
      * @generated
      */
     EAttribute getIObjectSymbol_Readable();
 
     /**
-     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IObjectSymbol#isWritable <em>Writable</em>}'.
+     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.context.symbol.IObjectSymbol#isWritable <em>Writable</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the attribute '<em>Writable</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IObjectSymbol#isWritable()
+     * @see org.eclipse.jst.jsf.context.symbol.IObjectSymbol#isWritable()
      * @see #getIObjectSymbol()
      * @generated
      */
     EAttribute getIObjectSymbol_Writable();
 
     /**
-     * Returns the meta object for class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedTypeDescriptor <em>IBounded Type Descriptor</em>}'.
+     * Returns the meta object for class '{@link org.eclipse.jst.jsf.context.symbol.IBoundedTypeDescriptor <em>IBounded Type Descriptor</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for class '<em>IBounded Type Descriptor</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedTypeDescriptor
+     * @see org.eclipse.jst.jsf.context.symbol.IBoundedTypeDescriptor
      * @generated
      */
     EClass getIBoundedTypeDescriptor();
 
     /**
-     * Returns the meta object for class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedMapTypeDescriptor <em>IBounded Map Type Descriptor</em>}'.
+     * Returns the meta object for class '{@link org.eclipse.jst.jsf.context.symbol.IBoundedMapTypeDescriptor <em>IBounded Map Type Descriptor</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for class '<em>IBounded Map Type Descriptor</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedMapTypeDescriptor
+     * @see org.eclipse.jst.jsf.context.symbol.IBoundedMapTypeDescriptor
      * @generated
      */
     EClass getIBoundedMapTypeDescriptor();
 
     /**
-     * Returns the meta object for class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedJavaTypeDescriptor <em>IBounded Java Type Descriptor</em>}'.
+     * Returns the meta object for class '{@link org.eclipse.jst.jsf.context.symbol.IBoundedJavaTypeDescriptor <em>IBounded Java Type Descriptor</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for class '<em>IBounded Java Type Descriptor</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedJavaTypeDescriptor
+     * @see org.eclipse.jst.jsf.context.symbol.IBoundedJavaTypeDescriptor
      * @generated
      */
     EClass getIBoundedJavaTypeDescriptor();
 
     /**
-     * Returns the meta object for class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IListTypeDescriptor <em>IList Type Descriptor</em>}'.
+     * Returns the meta object for class '{@link org.eclipse.jst.jsf.context.symbol.IListTypeDescriptor <em>IList Type Descriptor</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for class '<em>IList Type Descriptor</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IListTypeDescriptor
+     * @see org.eclipse.jst.jsf.context.symbol.IListTypeDescriptor
      * @generated
      */
     EClass getIListTypeDescriptor();
 
     /**
-     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IListTypeDescriptor#getListSource <em>List Source</em>}'.
+     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.context.symbol.IListTypeDescriptor#getListSource <em>List Source</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the attribute '<em>List Source</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IListTypeDescriptor#getListSource()
+     * @see org.eclipse.jst.jsf.context.symbol.IListTypeDescriptor#getListSource()
      * @see #getIListTypeDescriptor()
      * @generated
      */
     EAttribute getIListTypeDescriptor_ListSource();
 
     /**
-     * Returns the meta object for class '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedListTypeDescriptor <em>IBounded List Type Descriptor</em>}'.
+     * Returns the meta object for class '{@link org.eclipse.jst.jsf.context.symbol.IBoundedListTypeDescriptor <em>IBounded List Type Descriptor</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for class '<em>IBounded List Type Descriptor</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedListTypeDescriptor
+     * @see org.eclipse.jst.jsf.context.symbol.IBoundedListTypeDescriptor
      * @generated
      */
     EClass getIBoundedListTypeDescriptor();
 
     /**
-     * Returns the meta object for enum '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.ERuntimeSource <em>ERuntime Source</em>}'.
+     * Returns the meta object for enum '{@link org.eclipse.jst.jsf.context.symbol.ERuntimeSource <em>ERuntime Source</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for enum '<em>ERuntime Source</em>'.
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.ERuntimeSource
+     * @see org.eclipse.jst.jsf.context.symbol.ERuntimeSource
      * @generated
      */
     EEnum getERuntimeSource();
@@ -2029,10 +2029,10 @@ public interface SymbolPackage extends EPackage {
         EAttribute IJAVA_SYMBOL__JAVA_ELEMENT = eINSTANCE.getIJavaSymbol_JavaElement();
 
         /**
-         * The meta object literal for the '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.ISymbol <em>ISymbol</em>}' class.
+         * The meta object literal for the '{@link org.eclipse.jst.jsf.context.symbol.ISymbol <em>ISymbol</em>}' class.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
-         * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.ISymbol
+         * @see org.eclipse.jst.jsf.context.symbol.ISymbol
          * @see org.eclipse.jst.jsf.context.symbol.internal.impl.SymbolPackageImpl#getISymbol()
          * @generated
          */
@@ -2105,10 +2105,10 @@ public interface SymbolPackage extends EPackage {
         EReference ITYPE_DESCRIPTOR__METHODS = eINSTANCE.getITypeDescriptor_Methods();
 
         /**
-         * The meta object literal for the '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IDescribedInDetail <em>IDescribed In Detail</em>}' class.
+         * The meta object literal for the '{@link org.eclipse.jst.jsf.context.symbol.IDescribedInDetail <em>IDescribed In Detail</em>}' class.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
-         * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IDescribedInDetail
+         * @see org.eclipse.jst.jsf.context.symbol.IDescribedInDetail
          * @see org.eclipse.jst.jsf.context.symbol.internal.impl.SymbolPackageImpl#getIDescribedInDetail()
          * @generated
          */
@@ -2247,10 +2247,10 @@ public interface SymbolPackage extends EPackage {
         EAttribute IMETHOD_SYMBOL__SIGNATURE = eINSTANCE.getIMethodSymbol_Signature();
 
         /**
-         * The meta object literal for the '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IObjectSymbol <em>IObject Symbol</em>}' class.
+         * The meta object literal for the '{@link org.eclipse.jst.jsf.context.symbol.IObjectSymbol <em>IObject Symbol</em>}' class.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
-         * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IObjectSymbol
+         * @see org.eclipse.jst.jsf.context.symbol.IObjectSymbol
          * @see org.eclipse.jst.jsf.context.symbol.internal.impl.SymbolPackageImpl#getIObjectSymbol()
          * @generated
          */
@@ -2281,10 +2281,10 @@ public interface SymbolPackage extends EPackage {
         EAttribute IOBJECT_SYMBOL__WRITABLE = eINSTANCE.getIObjectSymbol_Writable();
 
         /**
-         * The meta object literal for the '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedTypeDescriptor <em>IBounded Type Descriptor</em>}' class.
+         * The meta object literal for the '{@link org.eclipse.jst.jsf.context.symbol.IBoundedTypeDescriptor <em>IBounded Type Descriptor</em>}' class.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
-         * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedTypeDescriptor
+         * @see org.eclipse.jst.jsf.context.symbol.IBoundedTypeDescriptor
          * @see org.eclipse.jst.jsf.context.symbol.internal.impl.SymbolPackageImpl#getIBoundedTypeDescriptor()
          * @generated
          */
@@ -2339,10 +2339,10 @@ public interface SymbolPackage extends EPackage {
         EClass IBOUNDED_LIST_TYPE_DESCRIPTOR = eINSTANCE.getIBoundedListTypeDescriptor();
 
         /**
-         * The meta object literal for the '{@link org.eclipse.jst.jsf.context.symbol.internal.provisional.ERuntimeSource <em>ERuntime Source</em>}' enum.
+         * The meta object literal for the '{@link org.eclipse.jst.jsf.context.symbol.ERuntimeSource <em>ERuntime Source</em>}' enum.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
-         * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.ERuntimeSource
+         * @see org.eclipse.jst.jsf.context.symbol.ERuntimeSource
          * @see org.eclipse.jst.jsf.context.symbol.internal.impl.SymbolPackageImpl#getERuntimeSource()
          * @generated
          */

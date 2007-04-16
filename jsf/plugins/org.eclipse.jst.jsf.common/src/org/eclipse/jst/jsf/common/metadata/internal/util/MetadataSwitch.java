@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MetadataSwitch.java,v 1.3 2007/02/07 00:03:50 gkessler Exp $
+ * $Id: MetadataSwitch.java,v 1.4 2007/04/16 19:54:01 itrimble Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.util;
 
@@ -11,12 +11,12 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.EntityGroup;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.IncludeEntityGroup;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.MetadataPackage;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.Model;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
+import org.eclipse.jst.jsf.common.metadata.Entity;
+import org.eclipse.jst.jsf.common.metadata.EntityGroup;
+import org.eclipse.jst.jsf.common.metadata.IncludeEntityGroup;
+import org.eclipse.jst.jsf.common.metadata.MetadataPackage;
+import org.eclipse.jst.jsf.common.metadata.Model;
+import org.eclipse.jst.jsf.common.metadata.Trait;
 
 
 
@@ -30,7 +30,7 @@ import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.MetadataPackage
+ * @see org.eclipse.jst.jsf.common.metadata.MetadataPackage
  * @generated
  */
 public class MetadataSwitch {

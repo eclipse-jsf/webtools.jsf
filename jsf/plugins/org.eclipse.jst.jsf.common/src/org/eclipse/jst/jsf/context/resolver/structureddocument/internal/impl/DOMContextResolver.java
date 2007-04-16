@@ -12,9 +12,9 @@
 
 package org.eclipse.jst.jsf.context.resolver.structureddocument.internal.impl;
 
-import org.eclipse.jst.jsf.context.internal.provisional.IModelContext;
-import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.IDOMContextResolver;
-import org.eclipse.jst.jsf.context.structureddocument.internal.provisional.IStructuredDocumentContext;
+import org.eclipse.jst.jsf.context.IModelContext;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.IDOMContextResolver;
+import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.eclipse.wst.sse.core.internal.provisional.IndexedRegion;
 import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
 import org.w3c.dom.Document;

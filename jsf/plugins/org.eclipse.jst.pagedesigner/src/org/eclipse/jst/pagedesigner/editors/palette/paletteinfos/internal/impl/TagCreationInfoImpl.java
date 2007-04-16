@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TagCreationInfoImpl.java,v 1.2 2007/04/09 02:23:03 cbateman Exp $
+ * $Id: TagCreationInfoImpl.java,v 1.3 2007/04/16 19:55:08 itrimble Exp $
  */
 package org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl;
 
@@ -17,9 +17,9 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.PaletteInfosPackage;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.TagCreationAttribute;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.TagCreationInfo;
+import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfosPackage;
+import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.TagCreationAttribute;
+import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.TagCreationInfo;
 
 /**
  * <!-- begin-user-doc -->

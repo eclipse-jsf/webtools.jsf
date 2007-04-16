@@ -28,14 +28,14 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
+import org.eclipse.jst.jsf.context.symbol.IJavaSymbol;
 import org.eclipse.jst.jsf.context.symbol.SymbolPackage;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaSymbol;
 
 
 
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaSymbol} object.
+ * This is the item provider adapter for a {@link org.eclipse.jst.jsf.context.symbol.IJavaSymbol} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated

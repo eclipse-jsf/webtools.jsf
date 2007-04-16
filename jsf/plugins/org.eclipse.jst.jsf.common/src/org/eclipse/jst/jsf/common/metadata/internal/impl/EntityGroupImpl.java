@@ -2,13 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EntityGroupImpl.java,v 1.2 2007/02/28 05:04:20 gkessler Exp $
+ * $Id: EntityGroupImpl.java,v 1.3 2007/04/16 19:54:10 itrimble Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.impl;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.EntityGroup;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.MetadataPackage;
+import org.eclipse.jst.jsf.common.metadata.EntityGroup;
+import org.eclipse.jst.jsf.common.metadata.MetadataPackage;
 
 /**
  * <!-- begin-user-doc -->

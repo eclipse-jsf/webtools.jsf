@@ -15,10 +15,10 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import org.eclipse.jst.pagedesigner.converter.ConvertPosition;
-import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.AbstractTransformOperation;
-import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.CopyAllAttributesOperation;
-import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.CreateAttributeOperation;
-import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.RenameAttributeOperation;
+import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.AbstractTransformOperation;
+import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.CopyAllAttributesOperation;
+import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.CreateAttributeOperation;
+import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.RenameAttributeOperation;
 import org.w3c.dom.Element;
 
 /**

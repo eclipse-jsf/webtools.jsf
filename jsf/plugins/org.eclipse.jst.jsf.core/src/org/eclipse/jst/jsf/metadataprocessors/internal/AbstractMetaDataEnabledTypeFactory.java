@@ -15,8 +15,8 @@ package org.eclipse.jst.jsf.metadataprocessors.internal;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
-import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.IType;
-import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.ITypeDescriptor;
+import org.eclipse.jst.jsf.metadataprocessors.IType;
+import org.eclipse.jst.jsf.metadataprocessors.ITypeDescriptor;
 import org.osgi.framework.Bundle;
 
 /**

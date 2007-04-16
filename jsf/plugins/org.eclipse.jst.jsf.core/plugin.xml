@@ -102,25 +102,25 @@
    <extension
          point="org.eclipse.jst.jsf.core.variableresolver">
       <variableresolver
-            class="org.eclipse.jst.jsf.designtime.internal.provisional.el.DefaultDTVariableResolver"
+            class="org.eclipse.jst.jsf.designtime.el.DefaultDTVariableResolver"
             id="org.eclipse.jst.jsf.core.variableresolver.default"/>
    </extension>
    <extension
          point="org.eclipse.jst.jsf.core.propertyresolver">
       <propertyresolver
-            class="org.eclipse.jst.jsf.designtime.internal.provisional.el.DefaultDTPropertyResolver"
+            class="org.eclipse.jst.jsf.designtime.el.DefaultDTPropertyResolver"
             id="org.eclipse.jst.jsf.core.propertyresolver.default"/>
    </extension>
    <extension
          point="org.eclipse.jst.jsf.core.methodresolver">
       <methodresolver
-            class="org.eclipse.jst.jsf.designtime.internal.provisional.el.DefaultDTMethodResolver"
+            class="org.eclipse.jst.jsf.designtime.el.DefaultDTMethodResolver"
             id="org.eclipse.jst.jsf.core.methodresolver.default"/>
    </extension>
    <extension
          point="org.eclipse.jst.jsf.core.externalcontext">
       <externalcontext
-            class="org.eclipse.jst.jsf.designtime.internal.provisional.context.DefaultDTExternalContextFactory"
+            class="org.eclipse.jst.jsf.designtime.context.DefaultDTExternalContextFactory"
             id="org.eclipse.jst.jsf.core.externalcontext.default"/>
    </extension>
    
@@ -128,59 +128,59 @@
          point="org.eclipse.jst.jsf.core.AttributeValueRuntimeTypes">
 
       <attributeValueRuntimeType
-            class="org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.StringType"
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.StringType"
             id="attributevalues.StringType"/>
       <attributeValueRuntimeType
-            class="org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.BooleanType"
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.BooleanType"
             id="attributevalues.BooleanType"/>
       <attributeValueRuntimeType
-            class="org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.LongType"
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.LongType"
             id="attributevalues.LongType"/>
       <attributeValueRuntimeType
-            class="org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.IntegerType"
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.IntegerType"
             id="attributevalues.IntegerType"/>
       <attributeValueRuntimeType
-            class="org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.DoubleType"
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.DoubleType"
             id="attributevalues.DoubleType"/>
       <attributeValueRuntimeType
-            class="org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.JavaClassType"
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.JavaClassType"
             id="attributevalues.JavaClassType"/>                                                
       <attributeValueRuntimeType
-            class="org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.MethodBindingType"
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.MethodBindingType"
             id="attributevalues.MethodBindingType"/>
       <attributeValueRuntimeType
-            class="org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.ActionType"
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.ActionType"
             id="attributevalues.ActionType"/>
       <attributeValueRuntimeType
-            class="org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.ValueBindingType"
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.ValueBindingType"
             id="attributevalues.ValueBindingType"/>
       <attributeValueRuntimeType
-            class="org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.ValueType"
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.ValueType"
             id="attributevalues.ValueType"/>
       <attributeValueRuntimeType
-            class="org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.FacesConfigIdentifierType"
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.FacesConfigIdentifierType"
             id="attributevalues.FacesConfigIdentifierType"/>
       <attributeValueRuntimeType
-            class="org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.FacesConfigValidatorIDType"
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.FacesConfigValidatorIDType"
             id="attributevalues.FacesConfigValidatorIDType"/>           
       <attributeValueRuntimeType
-            class="org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.FacesConfigConverterIDType"
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.FacesConfigConverterIDType"
             id="attributevalues.FacesConfigConverterIDType"/>
       <attributeValueRuntimeType
-            class="org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.ComponentBindingType"
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.ComponentBindingType"
             id="attributevalues.ComponentBindingType"/>            
       <attributeValueRuntimeType
-            class="org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.ComponentIDType"
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.ComponentIDType"
             id="attributevalues.ComponentIDType"/>                  
    </extension>
    
    <extension
          point="org.eclipse.jst.jsf.core.MetaDataEnabledFeatures">       
       <MetaDataEnabledFeature
-            class="org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.FacesConfigValidatorIDFeatures"
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.FacesConfigValidatorIDFeatures"
             typeid="org.eclipse.jst.jsf.core.attributevalues.FacesConfigValidatorIDType"/>
      <MetaDataEnabledFeature
-            class="org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.FacesConfigConverterIDFeatures"
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.FacesConfigConverterIDFeatures"
             typeid="org.eclipse.jst.jsf.core.attributevalues.FacesConfigConverterIDType"/>            
    </extension>
    

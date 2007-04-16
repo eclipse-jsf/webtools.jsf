@@ -20,14 +20,14 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.ISymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.source.AbstractSymbolSourceProviderFactory;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.source.ISymbolConstants;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.source.ISymbolSourceProvider;
+import org.eclipse.jst.jsf.context.symbol.ISymbol;
+import org.eclipse.jst.jsf.context.symbol.source.AbstractSymbolSourceProviderFactory;
+import org.eclipse.jst.jsf.context.symbol.source.ISymbolConstants;
+import org.eclipse.jst.jsf.context.symbol.source.ISymbolSourceProvider;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.designtime.internal.jsp.JSPModelProcessor;
-import org.eclipse.jst.jsf.designtime.internal.provisional.symbols.FileContextUtil;
-import org.eclipse.jst.jsf.designtime.internal.provisional.symbols.SymbolUtil;
+import org.eclipse.jst.jsf.designtime.symbols.FileContextUtil;
+import org.eclipse.jst.jsf.designtime.symbols.SymbolUtil;
 
 
 /**

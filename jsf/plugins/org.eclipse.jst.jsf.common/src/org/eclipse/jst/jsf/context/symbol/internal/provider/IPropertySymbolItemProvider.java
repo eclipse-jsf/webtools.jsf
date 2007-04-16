@@ -34,14 +34,14 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.eclipse.emf.edit.ui.provider.ExtendedImageRegistry;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
+import org.eclipse.jst.jsf.context.symbol.IPropertySymbol;
 import org.eclipse.jst.jsf.context.symbol.SymbolPackage;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IPropertySymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.provider.IContentProposalProvider;
+import org.eclipse.jst.jsf.context.symbol.provider.IContentProposalProvider;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.wst.sse.ui.internal.contentassist.CustomCompletionProposal;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IPropertySymbol} object.
+ * This is the item provider adapter for a {@link org.eclipse.jst.jsf.context.symbol.IPropertySymbol} object.
  * <!-- begin-user-doc -->
  * @extends IContentProposalProvider
  * <!-- end-user-doc -->
@@ -294,7 +294,7 @@ public class IPropertySymbolItemProvider
     }
 
     /**
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.provider.IContentProposalProvider#getProposals(Object, org.eclipse.jst.jsf.context.symbol.internal.provisional.provider.IContentProposalProvider.IProposalCreationFactory)
+     * @see org.eclipse.jst.jsf.context.symbol.provider.IContentProposalProvider#getProposals(Object, org.eclipse.jst.jsf.context.symbol.provider.IContentProposalProvider.IProposalCreationFactory)
      */
     public ICompletionProposal[] getProposals(Object target1, IProposalCreationFactory proposalFactory) 
     {

@@ -1,7 +1,7 @@
 package org.eclipse.jst.jsf.context.symbol.internal.util;
 
 import org.eclipse.jst.jsf.common.internal.types.MethodType;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IMethodSymbol;
+import org.eclipse.jst.jsf.context.symbol.IMethodSymbol;
 
 /**
  * 

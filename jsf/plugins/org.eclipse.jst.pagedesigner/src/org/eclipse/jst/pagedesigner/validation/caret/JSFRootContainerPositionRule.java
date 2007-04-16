@@ -13,7 +13,7 @@ package org.eclipse.jst.pagedesigner.validation.caret;
 
 import java.util.Arrays;
 
-import org.eclipse.jst.jsf.common.internal.provisional.dom.TagIdentifier;
+import org.eclipse.jst.jsf.common.dom.TagIdentifier;
 import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.pagedesigner.dom.EditModelQuery;
 import org.w3c.dom.Document;

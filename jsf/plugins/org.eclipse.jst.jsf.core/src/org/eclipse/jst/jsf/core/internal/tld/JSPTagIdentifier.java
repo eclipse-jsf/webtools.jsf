@@ -1,6 +1,6 @@
 package org.eclipse.jst.jsf.core.internal.tld;
 
-import org.eclipse.jst.jsf.common.internal.provisional.dom.TagIdentifier;
+import org.eclipse.jst.jsf.common.dom.TagIdentifier;
 
 /**
  * A tag wrapper for a JSP tag.

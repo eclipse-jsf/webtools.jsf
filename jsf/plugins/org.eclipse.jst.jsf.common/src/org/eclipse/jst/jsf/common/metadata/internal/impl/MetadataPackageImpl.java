@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MetadataPackageImpl.java,v 1.4 2007/03/16 21:48:10 gkessler Exp $
+ * $Id: MetadataPackageImpl.java,v 1.5 2007/04/16 19:54:10 itrimble Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.impl;
 
@@ -13,17 +13,17 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+import org.eclipse.jst.jsf.common.metadata.Entity;
+import org.eclipse.jst.jsf.common.metadata.EntityGroup;
+import org.eclipse.jst.jsf.common.metadata.IncludeEntityGroup;
+import org.eclipse.jst.jsf.common.metadata.MetadataFactory;
+import org.eclipse.jst.jsf.common.metadata.MetadataPackage;
+import org.eclipse.jst.jsf.common.metadata.Model;
+import org.eclipse.jst.jsf.common.metadata.Trait;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider;
 import org.eclipse.jst.jsf.common.metadata.internal.ModelKeyDescriptor;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.EntityGroup;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.IncludeEntityGroup;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.MetadataFactory;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.MetadataPackage;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.Model;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IEntityVisitor;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.ITraitVisitor;
+import org.eclipse.jst.jsf.common.metadata.query.IEntityVisitor;
+import org.eclipse.jst.jsf.common.metadata.query.ITraitVisitor;
 
 
 /**
@@ -114,7 +114,7 @@ public class MetadataPackageImpl extends EPackageImpl implements MetadataPackage
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.MetadataPackage#eNS_URI
+	 * @see org.eclipse.jst.jsf.common.metadata.MetadataPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */

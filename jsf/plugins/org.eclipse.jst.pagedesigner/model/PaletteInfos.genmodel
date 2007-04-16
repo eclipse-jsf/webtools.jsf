@@ -7,15 +7,13 @@
     modelName="PaletteInfos" editPluginClass="org.eclipse.jst.pagedesigner.PDPlugin"
     editorPluginClass="org.eclipse.jst.pagedesigner.PDPlugin" testsDirectory="/org.eclipse.jst.pagedesigner/src"
     testSuiteClass="org.eclipse.jst.pagedesigner.PDPlugin" importerID="org.eclipse.emf.importer.ecore"
-    usedGenPackages="../../../plugin/org.eclipse.emf.ecore/model/XMLType.genmodel#//type">
+    usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/XMLType.genmodel#//type">
   <foreignModel>PaletteInfos.ecore</foreignModel>
   <genPackages prefix="PaletteInfos" basePackage="org.eclipse.jst.pagedesigner.editors.palette"
-      disposableProviderFactory="true" interfacePackageSuffix="internal.provisional"
-      metaDataPackageSuffix="internal.provisional" classPackageSuffix="internal.impl"
-      utilityPackageSuffix="internal.util" providerPackageSuffix="internal.provider"
-      presentationPackageSuffix="internal.presentation" testsPackageSuffix="internal.tests"
-      generateExampleClass="false" multipleEditorPages="false" generateModelWizard="false"
-      ecorePackage="PaletteInfos.ecore#/">
+      disposableProviderFactory="true" classPackageSuffix="internal.impl" utilityPackageSuffix="internal.util"
+      providerPackageSuffix="internal.provider" presentationPackageSuffix="internal.presentation"
+      testsPackageSuffix="internal.tests" generateExampleClass="false" multipleEditorPages="false"
+      generateModelWizard="false" ecorePackage="PaletteInfos.ecore#/">
     <genClasses ecoreClass="PaletteInfos.ecore#//PaletteInfos">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PaletteInfos.ecore#//PaletteInfos/infos"/>
       <genOperations ecoreOperation="PaletteInfos.ecore#//PaletteInfos/findPaletteInfoById">

@@ -26,12 +26,12 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.ui.provider.ExtendedImageRegistry;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IComponentSymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.provider.IContentProposalProvider;
+import org.eclipse.jst.jsf.context.symbol.IComponentSymbol;
+import org.eclipse.jst.jsf.context.symbol.provider.IContentProposalProvider;
 import org.eclipse.swt.graphics.Image;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IComponentSymbol} object.
+ * This is the item provider adapter for a {@link org.eclipse.jst.jsf.context.symbol.IComponentSymbol} object.
  * <!-- begin-user-doc -->
  * @extends IContentProposalProvider
  * <!-- end-user-doc -->

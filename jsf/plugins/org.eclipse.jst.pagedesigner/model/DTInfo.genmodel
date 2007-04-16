@@ -9,22 +9,20 @@
     importerID="org.eclipse.emf.importer.ecore">
   <foreignModel>DTInfo.ecore</foreignModel>
   <genPackages prefix="DTInfo" basePackage="org.eclipse.jst.pagedesigner.dtmanager"
-      disposableProviderFactory="true" interfacePackageSuffix="internal.provisional"
-      metaDataPackageSuffix="internal.provisional" classPackageSuffix="internal.impl"
-      utilityPackageSuffix="internal.util" providerPackageSuffix="internal.provider"
-      presentationPackageSuffix="internal.presentation" testsPackageSuffix="internal.tests"
-      generateExampleClass="false" ecorePackage="DTInfo.ecore#/">
+      disposableProviderFactory="true" classPackageSuffix="internal.impl" utilityPackageSuffix="internal.util"
+      providerPackageSuffix="internal.provider" presentationPackageSuffix="internal.presentation"
+      testsPackageSuffix="internal.tests" generateExampleClass="false" ecorePackage="DTInfo.ecore#/">
     <genClasses ecoreClass="DTInfo.ecore#//DTInfo">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DTInfo.ecore#//DTInfo/tagConvertInfo"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DTInfo.ecore#//DTInfo/tagDecorateInfos"/>
     </genClasses>
     <genClasses ecoreClass="DTInfo.ecore#//TagConvertInfo">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DTInfo.ecore#//TagConvertInfo/operations"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DTInfo.ecore#//TagConvertInfo/classname"/>
     </genClasses>
     <genClasses image="false" ecoreClass="DTInfo.ecore#//Operation">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DTInfo.ecore#//Operation/id"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DTInfo.ecore#//Operation/parameters"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DTInfo.ecore#//Operation/operations"/>
     </genClasses>
     <genClasses ecoreClass="DTInfo.ecore#//Parameter">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DTInfo.ecore#//Parameter/value"/>

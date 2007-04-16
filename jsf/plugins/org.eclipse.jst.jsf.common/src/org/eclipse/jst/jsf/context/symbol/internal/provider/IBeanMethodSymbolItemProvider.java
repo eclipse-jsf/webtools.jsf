@@ -30,15 +30,15 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.eclipse.emf.edit.ui.provider.ExtendedImageRegistry;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
+import org.eclipse.jst.jsf.context.symbol.IBeanMethodSymbol;
 import org.eclipse.jst.jsf.context.symbol.SymbolPackage;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanMethodSymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.provider.IContentProposalProvider;
+import org.eclipse.jst.jsf.context.symbol.provider.IContentProposalProvider;
 import org.eclipse.swt.graphics.Image;
 
 
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanMethodSymbol} object.
+ * This is the item provider adapter for a {@link org.eclipse.jst.jsf.context.symbol.IBeanMethodSymbol} object.
  * <!-- begin-user-doc -->
  * @extends IContentProposalProvider
  * <!-- end-user-doc -->

@@ -13,14 +13,14 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.DTInfo;
-import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.DTInfoFactory;
-import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.DTInfoPackage;
-import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.Operation;
-import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.Parameter;
-import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.ResolveAttributeValue;
-import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.TagConvertInfo;
-import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.TagDecorateInfo;
+import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.DTInfo;
+import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.DTInfoFactory;
+import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.DTInfoPackage;
+import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.Operation;
+import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.Parameter;
+import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.ResolveAttributeValue;
+import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.TagConvertInfo;
+import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.TagDecorateInfo;
 
 /**
  * <!-- begin-user-doc -->
@@ -89,7 +89,7 @@ public class DTInfoPackageImpl extends EPackageImpl implements DTInfoPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.DTInfoPackage#eNS_URI
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.dtinfo.DTInfoPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */

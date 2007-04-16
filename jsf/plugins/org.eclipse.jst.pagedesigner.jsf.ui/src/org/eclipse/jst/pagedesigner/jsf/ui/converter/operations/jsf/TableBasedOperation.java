@@ -13,9 +13,9 @@ package org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.AbstractTransformOperation;
-import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.CopyAttributeOperation;
-import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.RenameAttributeOperation;
+import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.AbstractTransformOperation;
+import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.CopyAttributeOperation;
+import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.RenameAttributeOperation;
 import org.w3c.dom.Element;
 
 /**

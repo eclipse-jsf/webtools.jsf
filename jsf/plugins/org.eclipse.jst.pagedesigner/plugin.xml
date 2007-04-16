@@ -103,10 +103,10 @@
 	<extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://org.eclipse.jsf.pagedesigner/paletteInfos.ecore" 
-       class = "org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.PaletteInfosPackage"
+       class = "org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfosPackage"
        genModel = "model/paletteInfos.genmodel" /> 
     <package
-          class="org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.provisional.DTInfoPackage"
+          class="org.eclipse.jst.pagedesigner.dtmanager.dtinfo.DTInfoPackage"
           genModel="model/DTInfo.genmodel"
           uri="http://org.eclipse.jsf.pagedesigner/dtinfo.ecore">
     </package>

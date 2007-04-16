@@ -11,7 +11,7 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.core.internal.tld;
 
-import org.eclipse.jst.jsf.common.internal.provisional.dom.TagIdentifier;
+import org.eclipse.jst.jsf.common.dom.TagIdentifier;
 
 /**
  * Constants covering the JSF Core and JSF HTML tag and tag attribute names

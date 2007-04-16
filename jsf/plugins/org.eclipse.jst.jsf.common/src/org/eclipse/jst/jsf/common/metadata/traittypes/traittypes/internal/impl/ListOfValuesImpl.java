@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ListOfValuesImpl.java,v 1.2 2007/02/28 21:12:40 cbateman Exp $
+ * $Id: ListOfValuesImpl.java,v 1.3 2007/04/16 19:54:01 itrimble Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.impl;
 
@@ -22,8 +22,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.emf.ecore.xml.type.SimpleAnyType;
 
-import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.ListOfValues;
-import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.provisional.TraitTypesPackage;
+import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.ListOfValues;
+import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.TraitTypesPackage;
 
 /**
  * <!-- begin-user-doc -->

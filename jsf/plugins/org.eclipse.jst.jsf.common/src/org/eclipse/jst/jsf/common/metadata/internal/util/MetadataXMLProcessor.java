@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MetadataXMLProcessor.java,v 1.2 2007/01/24 17:22:47 gkessler Exp $
+ * $Id: MetadataXMLProcessor.java,v 1.3 2007/04/16 19:54:01 itrimble Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.util;
 
@@ -10,7 +10,7 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.xmi.util.XMLProcessor;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.MetadataPackage;
+import org.eclipse.jst.jsf.common.metadata.MetadataPackage;
 
 
 /**

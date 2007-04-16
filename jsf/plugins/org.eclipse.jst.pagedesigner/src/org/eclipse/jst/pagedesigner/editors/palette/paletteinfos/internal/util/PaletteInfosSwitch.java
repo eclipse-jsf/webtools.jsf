@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PaletteInfosSwitch.java,v 1.1 2007/02/28 05:04:45 gkessler Exp $
+ * $Id: PaletteInfosSwitch.java,v 1.2 2007/04/16 19:55:16 itrimble Exp $
  */
 package org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.util;
 
@@ -11,7 +11,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.*;
+import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,7 +23,7 @@ import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provis
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * @see org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.PaletteInfosPackage
+ * @see org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfosPackage
  * @generated
  */
 public class PaletteInfosSwitch {

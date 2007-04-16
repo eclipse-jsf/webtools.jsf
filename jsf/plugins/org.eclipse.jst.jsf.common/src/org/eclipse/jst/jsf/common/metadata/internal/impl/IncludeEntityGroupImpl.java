@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IncludeEntityGroupImpl.java,v 1.1 2007/02/07 00:03:49 gkessler Exp $
+ * $Id: IncludeEntityGroupImpl.java,v 1.2 2007/04/16 19:54:10 itrimble Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.impl;
 
@@ -10,8 +10,8 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.IncludeEntityGroup;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.MetadataPackage;
+import org.eclipse.jst.jsf.common.metadata.IncludeEntityGroup;
+import org.eclipse.jst.jsf.common.metadata.MetadataPackage;
 
 /**
  * <!-- begin-user-doc -->

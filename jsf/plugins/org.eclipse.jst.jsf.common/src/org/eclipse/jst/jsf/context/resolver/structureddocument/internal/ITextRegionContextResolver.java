@@ -12,8 +12,8 @@
 
 package org.eclipse.jst.jsf.context.resolver.structureddocument.internal;
 
-import org.eclipse.jst.jsf.context.resolver.internal.provisional.IDocumentContextResolver;
-import org.eclipse.jst.jsf.context.structureddocument.internal.provisional.IStructuredDocumentContext;
+import org.eclipse.jst.jsf.context.resolver.IDocumentContextResolver;
+import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 
 /**
  * Defines a resolver that can resolve context information in the

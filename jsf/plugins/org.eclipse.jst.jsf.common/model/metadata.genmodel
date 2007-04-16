@@ -16,11 +16,9 @@
   </genAnnotations>
   <foreignModel>metadata.ecore</foreignModel>
   <genPackages prefix="Metadata" basePackage="org.eclipse.jst.jsf.common" resource="XML"
-      disposableProviderFactory="true" interfacePackageSuffix="internal.provisional"
-      metaDataPackageSuffix="internal.provisional" classPackageSuffix="internal.impl"
-      utilityPackageSuffix="internal.util" providerPackageSuffix="internal.provider"
-      presentationPackageSuffix="internal.presentation" testsPackageSuffix="internal.tests"
-      generateExampleClass="false" ecorePackage="metadata.ecore#/">
+      disposableProviderFactory="true" classPackageSuffix="internal.impl" utilityPackageSuffix="internal.util"
+      providerPackageSuffix="internal.provider" presentationPackageSuffix="internal.presentation"
+      testsPackageSuffix="internal.tests" generateExampleClass="false" ecorePackage="metadata.ecore#/">
     <genAnnotations source="http://www.eclipse.org/emf/2002/GenModel/exporter/org.eclipse.xsd.ecore.exporter">
       <genAnnotations source="schema/metadata.xsd"/>
     </genAnnotations>
@@ -54,7 +52,7 @@
     <genClasses ecoreClass="metadata.ecore#//Trait">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metadata.ecore#//Trait/id"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metadata.ecore#//Trait/value"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference metadata.ecore#//Trait/sourceModel"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metadata.ecore#//Trait/sourceModelProvider"/>
       <genOperations ecoreOperation="metadata.ecore#//Trait/accept">
         <genParameters ecoreParameter="metadata.ecore#//Trait/accept/visitor"/>
       </genOperations>
