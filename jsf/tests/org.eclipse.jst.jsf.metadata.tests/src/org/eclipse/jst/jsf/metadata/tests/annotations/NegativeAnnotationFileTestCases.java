@@ -14,7 +14,7 @@ package org.eclipse.jst.jsf.metadata.tests.annotations;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
-import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.CMAnnotationHelper;
+import org.eclipse.jst.jsf.contentmodel.annotation.CMAnnotationHelper;
 
 /**
  * CMAnnotatations Metadata framework has been "taken out of service"

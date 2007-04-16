@@ -13,10 +13,10 @@ package org.eclipse.jst.jsf.metadata.tests.taglibprocessing;
 
 import junit.framework.Assert;
 
-import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IDefaultValue;
-import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IPossibleValue;
-import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IPossibleValues;
-import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IValidValues;
+import org.eclipse.jst.jsf.metadataprocessors.features.IDefaultValue;
+import org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValue;
+import org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValues;
+import org.eclipse.jst.jsf.metadataprocessors.features.IValidValues;
 
 
 public class StringTypeTest extends TaglibProcessingTestCase {

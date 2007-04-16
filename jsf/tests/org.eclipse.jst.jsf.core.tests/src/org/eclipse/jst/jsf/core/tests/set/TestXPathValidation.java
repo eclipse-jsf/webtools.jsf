@@ -1,12 +1,12 @@
 package org.eclipse.jst.jsf.core.tests.set;
 
-import org.eclipse.jst.jsf.common.sets.internal.provisional.AxiomaticSet;
-import org.eclipse.jst.jsf.common.sets.internal.provisional.ConcreteAxiomaticSet;
-import org.eclipse.jst.jsf.core.internal.provisional.set.constraint.MemberConstraint;
-import org.eclipse.jst.jsf.core.internal.provisional.set.mapping.ElementToTagIdentifierMapping;
-import org.eclipse.jst.jsf.core.internal.provisional.tagmatcher.XPathMatchingAlgorithm;
+import org.eclipse.jst.jsf.common.sets.AxiomaticSet;
+import org.eclipse.jst.jsf.common.sets.ConcreteAxiomaticSet;
 import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.jsf.core.internal.tld.TagIdentifierFactory;
+import org.eclipse.jst.jsf.core.set.constraint.MemberConstraint;
+import org.eclipse.jst.jsf.core.set.mapping.ElementToTagIdentifierMapping;
+import org.eclipse.jst.jsf.core.tagmatcher.XPathMatchingAlgorithm;
 import org.eclipse.jst.jsf.core.tests.tagmatcher.BaseTagMatcherTestCase;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.w3c.dom.Document;

@@ -19,9 +19,9 @@ import junit.framework.TestCase;
 
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.Signature;
-import org.eclipse.jst.jsf.common.internal.provisional.util.JDTBeanIntrospector;
-import org.eclipse.jst.jsf.common.internal.provisional.util.JDTBeanProperty;
-import org.eclipse.jst.jsf.common.internal.provisional.util.JDTBeanPropertyWorkingCopy;
+import org.eclipse.jst.jsf.common.util.JDTBeanIntrospector;
+import org.eclipse.jst.jsf.common.util.JDTBeanProperty;
+import org.eclipse.jst.jsf.common.util.JDTBeanPropertyWorkingCopy;
 import org.eclipse.jst.jsf.core.tests.TestsPlugin;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
 import org.eclipse.jst.jsf.test.util.TestFileResource;

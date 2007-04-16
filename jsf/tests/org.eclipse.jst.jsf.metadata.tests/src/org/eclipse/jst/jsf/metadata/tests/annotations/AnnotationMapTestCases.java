@@ -17,9 +17,9 @@ import java.util.List;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
+import org.eclipse.jst.jsf.contentmodel.annotation.CMAnnotationHelper;
 import org.eclipse.jst.jsf.contentmodel.annotation.internal.CMAnnotationFileRegistry;
 import org.eclipse.jst.jsf.contentmodel.annotation.internal.CMAnnotationMap;
-import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.CMAnnotationHelper;
 
 /**
   * CMAnnotatations Metadata framework has been "taken out of service"

@@ -13,8 +13,8 @@ package org.eclipse.jst.jsf.metadata.tests.taglibprocessing;
 
 import junit.framework.Assert;
 
-import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IDefaultValue;
-import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IValidValues;
+import org.eclipse.jst.jsf.metadataprocessors.features.IDefaultValue;
+import org.eclipse.jst.jsf.metadataprocessors.features.IValidValues;
 
 public class LongTypeTest extends TaglibProcessingTestCase {
 	public void testPossibleValues(){		

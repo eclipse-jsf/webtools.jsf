@@ -7,9 +7,9 @@ import java.util.List;
 import junit.framework.TestCase;
 
 import org.eclipse.emf.common.util.Diagnostic;
-import org.eclipse.jst.jsf.common.sets.internal.provisional.AxiomaticSet;
-import org.eclipse.jst.jsf.common.sets.internal.provisional.ConcreteAxiomaticSet;
-import org.eclipse.jst.jsf.core.internal.provisional.set.constraint.MemberConstraint;
+import org.eclipse.jst.jsf.common.sets.AxiomaticSet;
+import org.eclipse.jst.jsf.common.sets.ConcreteAxiomaticSet;
+import org.eclipse.jst.jsf.core.set.constraint.MemberConstraint;
 
 public class TestMemberConstraint extends TestCase 
 {

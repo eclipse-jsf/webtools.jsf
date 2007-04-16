@@ -2,8 +2,8 @@ package org.eclipse.jst.jsf.core.tests.util;
 
 import junit.framework.TestCase;
 
-import org.eclipse.jst.jsf.core.internal.provisional.IJSFCoreConstants;
-import org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.JSFAppConfigUtils;
+import org.eclipse.jst.jsf.core.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigUtils;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
 

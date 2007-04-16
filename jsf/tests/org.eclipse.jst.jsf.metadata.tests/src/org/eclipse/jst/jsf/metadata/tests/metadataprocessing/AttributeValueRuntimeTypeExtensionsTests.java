@@ -18,8 +18,8 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 
 import org.eclipse.jst.jsf.metadata.tests.metadataprocessing.features.IBarker;
-import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.MetaDataEnabledProcessingFactory;
-import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IPossibleValues;
+import org.eclipse.jst.jsf.metadataprocessors.MetaDataEnabledProcessingFactory;
+import org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValues;
 
 public class AttributeValueRuntimeTypeExtensionsTests extends TestCase {
 	private String uri1 = "http://org.eclipse.jsf/metadataprocessing";

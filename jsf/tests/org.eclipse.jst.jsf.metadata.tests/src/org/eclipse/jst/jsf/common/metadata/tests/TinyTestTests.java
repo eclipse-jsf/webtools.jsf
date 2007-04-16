@@ -2,13 +2,13 @@ package org.eclipse.jst.jsf.common.metadata.tests;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.xml.type.AnyType;
+import org.eclipse.jst.jsf.common.metadata.Entity;
+import org.eclipse.jst.jsf.common.metadata.Model;
+import org.eclipse.jst.jsf.common.metadata.Trait;
 import org.eclipse.jst.jsf.common.metadata.internal.MetaDataModelContextImpl;
 import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.Model;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IMetaDataModelContext;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.MetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.metadata.query.IMetaDataModelContext;
+import org.eclipse.jst.jsf.common.metadata.query.MetaDataQueryHelper;
 
 import junit.framework.TestCase;
 

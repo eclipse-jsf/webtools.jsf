@@ -17,9 +17,9 @@ import junit.framework.Assert;
 import junit.framework.TestCase;
 
 import org.eclipse.jst.jsf.metadata.tests.MetadataTestsPlugin;
+import org.eclipse.jst.jsf.metadataprocessors.ITypeDescriptor;
+import org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValues;
 import org.eclipse.jst.jsf.metadataprocessors.internal.AttributeValueRuntimeTypeFactory;
-import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.ITypeDescriptor;
-import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IPossibleValues;
 
 public class AttributeValueRuntimeTypeFactoryTests extends TestCase {
 

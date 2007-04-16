@@ -2,7 +2,7 @@ package org.eclipse.jst.jsf.contentassist.tests;
 
 import junit.framework.TestCase;
 
-import org.eclipse.jst.jsf.core.internal.provisional.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
 import org.eclipse.jst.jsf.test.util.TestFileResource;

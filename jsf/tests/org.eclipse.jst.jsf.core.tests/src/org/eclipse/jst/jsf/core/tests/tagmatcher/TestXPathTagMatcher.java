@@ -2,8 +2,8 @@ package org.eclipse.jst.jsf.core.tests.tagmatcher;
 
 import java.util.Iterator;
 
-import org.eclipse.jst.jsf.common.sets.internal.provisional.AxiomaticSet;
-import org.eclipse.jst.jsf.core.internal.provisional.tagmatcher.XPathMatchingAlgorithm;
+import org.eclipse.jst.jsf.common.sets.AxiomaticSet;
+import org.eclipse.jst.jsf.core.tagmatcher.XPathMatchingAlgorithm;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;

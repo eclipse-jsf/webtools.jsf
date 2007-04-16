@@ -1,11 +1,11 @@
 package org.eclipse.jst.jsf.common.metadata.tests;
 
+import org.eclipse.jst.jsf.common.metadata.Entity;
+import org.eclipse.jst.jsf.common.metadata.IncludeEntityGroup;
+import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.internal.MetaDataModelContextImpl;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.IncludeEntityGroup;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.Model;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IMetaDataModelContext;
-import org.eclipse.jst.jsf.common.metadata.internal.provisional.query.MetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.metadata.query.IMetaDataModelContext;
+import org.eclipse.jst.jsf.common.metadata.query.MetaDataQueryHelper;
 
 import junit.framework.TestCase;
 

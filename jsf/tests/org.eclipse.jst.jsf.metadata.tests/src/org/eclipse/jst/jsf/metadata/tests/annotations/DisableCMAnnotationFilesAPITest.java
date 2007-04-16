@@ -9,8 +9,8 @@ import org.eclipse.core.runtime.ILog;
 import org.eclipse.core.runtime.ILogListener;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.CMAnnotationHelper;
-import org.eclipse.jst.jsf.metadataprocessors.internal.provisional.MetaDataEnabledProcessingFactory;
+import org.eclipse.jst.jsf.contentmodel.annotation.CMAnnotationHelper;
+import org.eclipse.jst.jsf.metadataprocessors.MetaDataEnabledProcessingFactory;
 
 public class DisableCMAnnotationFilesAPITest extends TestCase implements ILogListener {
 	private boolean errorLogged;
