@@ -572,6 +572,7 @@ public interface JSFLibraryRegistryPackage extends EPackage{
 		 * @see org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl.JSFLibraryRegistryPackageImpl#getJSFLibraryRegistry()
 		 * @generated
 		 */
+        @SuppressWarnings("hiding")
 		EClass JSF_LIBRARY_REGISTRY = eINSTANCE.getJSFLibraryRegistry();
 
 		/**
@@ -580,7 +581,8 @@ public interface JSFLibraryRegistryPackage extends EPackage{
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute JSF_LIBRARY_REGISTRY__DEFAULT_IMPLEMENTATION_ID = eINSTANCE.getJSFLibraryRegistry_DefaultImplementationID();
+        @SuppressWarnings("hiding")
+        EAttribute JSF_LIBRARY_REGISTRY__DEFAULT_IMPLEMENTATION_ID = eINSTANCE.getJSFLibraryRegistry_DefaultImplementationID();
 
 		/**
 		 * The meta object literal for the '<em><b>JSF Libraries</b></em>' containment reference list feature.
@@ -588,6 +590,7 @@ public interface JSFLibraryRegistryPackage extends EPackage{
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+        @SuppressWarnings("hiding")
 		EReference JSF_LIBRARY_REGISTRY__JSF_LIBRARIES = eINSTANCE.getJSFLibraryRegistry_JSFLibraries();
 
 		/**
@@ -596,6 +599,7 @@ public interface JSFLibraryRegistryPackage extends EPackage{
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+        @SuppressWarnings("hiding")
 		EReference JSF_LIBRARY_REGISTRY__PLUGIN_PROVIDED_JSF_LIBRARIES = eINSTANCE.getJSFLibraryRegistry_PluginProvidedJSFLibraries();
 
 		/**
@@ -606,6 +610,7 @@ public interface JSFLibraryRegistryPackage extends EPackage{
 		 * @see org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl.JSFLibraryRegistryPackageImpl#getJSFLibrary()
 		 * @generated
 		 */
+        @SuppressWarnings("hiding")
 		EClass JSF_LIBRARY = eINSTANCE.getJSFLibrary();
 
 		/**
@@ -614,6 +619,7 @@ public interface JSFLibraryRegistryPackage extends EPackage{
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+        @SuppressWarnings("hiding")
 		EAttribute JSF_LIBRARY__ID = eINSTANCE.getJSFLibrary_ID();
 
 		/**
@@ -622,6 +628,7 @@ public interface JSFLibraryRegistryPackage extends EPackage{
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+        @SuppressWarnings("hiding")
 		EAttribute JSF_LIBRARY__NAME = eINSTANCE.getJSFLibrary_Name();
 
 		/**
@@ -630,6 +637,7 @@ public interface JSFLibraryRegistryPackage extends EPackage{
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+        @SuppressWarnings("hiding")
 		EAttribute JSF_LIBRARY__JSF_VERSION = eINSTANCE.getJSFLibrary_JSFVersion();
 
 		/**
@@ -638,6 +646,7 @@ public interface JSFLibraryRegistryPackage extends EPackage{
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+        @SuppressWarnings("hiding")
 		EAttribute JSF_LIBRARY__DEPLOYED = eINSTANCE.getJSFLibrary_Deployed();
 
 		/**
@@ -646,6 +655,7 @@ public interface JSFLibraryRegistryPackage extends EPackage{
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+        @SuppressWarnings("hiding")
 		EAttribute JSF_LIBRARY__IMPLEMENTATION = eINSTANCE.getJSFLibrary_Implementation();
 
 		/**
@@ -654,6 +664,7 @@ public interface JSFLibraryRegistryPackage extends EPackage{
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+        @SuppressWarnings("hiding")
 		EReference JSF_LIBRARY__ARCHIVE_FILES = eINSTANCE.getJSFLibrary_ArchiveFiles();
 
 		/**
@@ -664,6 +675,7 @@ public interface JSFLibraryRegistryPackage extends EPackage{
 		 * @see org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl.JSFLibraryRegistryPackageImpl#getArchiveFile()
 		 * @generated
 		 */
+        @SuppressWarnings("hiding")
 		EClass ARCHIVE_FILE = eINSTANCE.getArchiveFile();
 
 		/**
@@ -672,6 +684,7 @@ public interface JSFLibraryRegistryPackage extends EPackage{
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+        @SuppressWarnings("hiding")
 		EAttribute ARCHIVE_FILE__RELATIVE_TO_WORKSPACE = eINSTANCE.getArchiveFile_RelativeToWorkspace();
 
 		/**
@@ -680,6 +693,7 @@ public interface JSFLibraryRegistryPackage extends EPackage{
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+        @SuppressWarnings("hiding")
 		EAttribute ARCHIVE_FILE__SOURCE_LOCATION = eINSTANCE.getArchiveFile_SourceLocation();
 
 		/**
@@ -688,6 +702,7 @@ public interface JSFLibraryRegistryPackage extends EPackage{
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+        @SuppressWarnings("hiding")
 		EAttribute ARCHIVE_FILE__RELATIVE_DEST_LOCATION = eINSTANCE.getArchiveFile_RelativeDestLocation();
 
 		/**
@@ -696,6 +711,7 @@ public interface JSFLibraryRegistryPackage extends EPackage{
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+        @SuppressWarnings("hiding")
 		EReference ARCHIVE_FILE__JSF_LIBRARY = eINSTANCE.getArchiveFile_JSFLibrary();
 
 		/**
@@ -706,6 +722,7 @@ public interface JSFLibraryRegistryPackage extends EPackage{
 		 * @see org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl.JSFLibraryRegistryPackageImpl#getPluginProvidedJSFLibrary()
 		 * @generated
 		 */
+        @SuppressWarnings("hiding")
 		EClass PLUGIN_PROVIDED_JSF_LIBRARY = eINSTANCE.getPluginProvidedJSFLibrary();
 
 		/**
@@ -714,6 +731,7 @@ public interface JSFLibraryRegistryPackage extends EPackage{
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+        @SuppressWarnings("hiding")
 		EAttribute PLUGIN_PROVIDED_JSF_LIBRARY__PLUGIN_ID = eINSTANCE.getPluginProvidedJSFLibrary_PluginID();
 
 		/**
@@ -724,6 +742,7 @@ public interface JSFLibraryRegistryPackage extends EPackage{
 		 * @see org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl.JSFLibraryRegistryPackageImpl#getJSFVersion()
 		 * @generated
 		 */
+        @SuppressWarnings("hiding")
 		EEnum JSF_VERSION = eINSTANCE.getJSFVersion();
 
 	}

@@ -34,6 +34,7 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryRegistryUtil
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.ArchiveFile;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistry;
+import org.eclipse.jst.jsf.core.internal.provisional.IJSFCoreConstants;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.wst.common.componentcore.datamodel.FacetInstallDataModelProvider;
 import org.eclipse.wst.common.componentcore.datamodel.properties.IFacetDataModelProperties;
@@ -85,7 +86,7 @@ public class JSFFacetInstallDataModelProvider extends
 		} else if (propertyName.equals(SERVLET_URL_PATTERNS)) {
 			return new String[] { "*.faces" }; //$NON-NLS-1$
 		} else if (propertyName.equals(FACET_ID)) {
-			return JSFCorePlugin.FACET_ID;
+			return IJSFCoreConstants.JSF_CORE_FACET_ID;
 		} else if (propertyName.equals(WEBCONTENT_DIR)){
 			return "WebContent";  //not sure I need this
 		} else if (propertyName.equals(COMPONENT_LIBRARIES)) {
@@ -280,9 +281,7 @@ public class JSFFacetInstallDataModelProvider extends
 			if (jars.contains(jar.getResolvedSourceLocation())){
 				return createErrorStatus("Duplicated jar on classpath: "+jar.getResolvedSourceLocation());				
 			}
-			else {
-				jars.add(jar.getSourceLocation());
-			}
+            jars.add(jar.getSourceLocation());
 		}
 		return OK_STATUS;
 	}
