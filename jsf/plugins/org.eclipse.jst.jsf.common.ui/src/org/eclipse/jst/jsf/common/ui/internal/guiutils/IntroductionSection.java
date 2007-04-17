@@ -310,19 +310,19 @@ public class IntroductionSection extends SectionPart {
 		return element;
 	}
 
-	public void setText(String text) {
+	private void setText(String text) {
 		getSection().setText(text);
 	}
 
-	public void setDescription(String text) {
+	private void setDescription(String text) {
 		getSection().setDescription(text);
 	}
 
+	/**
+	 * Set this section's layout data
+	 * @param layoutData
+	 */
 	public void setLayoutData(Object layoutData) {
 		getSection().setLayoutData(layoutData);
-	}
-
-	public void setExpanded(boolean expanded) {
-		getSection().setExpanded(expanded);
 	}
 }
