@@ -65,17 +65,4 @@ public class LoadHelpAction extends Action implements IExecutableExtension {
 			String propertyName, Object data) throws CoreException {
 		_helpContextId = config.getAttribute("actionparameters"); //$NON-NLS-1$
 	}
-
-	/**
-	 * set the help reference to open.
-	 * 
-	 * @param href
-	 */
-	public void setContextId(String href) {
-		_helpContextId = href;
-	}
-    
-    protected String getContextId() {
-        return _helpContextId;
-    }
 }
