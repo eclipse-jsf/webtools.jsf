@@ -41,6 +41,9 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
+/**
+ * Common control for adding JSF library instances
+ */
 public class JSFLibraryEditControl extends Composite implements ModifyListener, SelectionListener {
 	private Text txtName;
 	private Label lblName;
@@ -61,6 +64,10 @@ public class JSFLibraryEditControl extends Composite implements ModifyListener, 
 	private Set _listeners;
 	private int _isNew = -1;//use isNew() method.. not this variable directly
 
+	/**
+	 * @param workingCopyLibrary  working copy of the JSF library
+	 * @param parent parent SWT control
+	 */
 	public JSFLibraryEditControl(JSFLibrary workingCopyLibrary, Composite parent){
 		super(parent, SWT.NONE);
 		this.workingCopyLibrary = workingCopyLibrary;
@@ -68,15 +75,24 @@ public class JSFLibraryEditControl extends Composite implements ModifyListener, 
 		createControl(parent);
 	}
 	
+	/**
+	 * @param listener
+	 */
 	public void addValidationListener(JSFLibraryValidationListener listener){
 		removeValidationListener(listener);
 		_listeners.add(listener);
 	}
 	
+	/**
+	 * @param listener
+	 */
 	public void removeValidationListener(JSFLibraryValidationListener listener){
 		_listeners.remove(listener);
 	}
 	
+	/**
+	 * @param parent
+	 */
 	public void createControl(Composite parent) {
 		initing = true;
 
@@ -407,20 +423,32 @@ public class JSFLibraryEditControl extends Composite implements ModifyListener, 
 		return false;
 	}
 
+	/**
+	 * @return the trimmed name of the user input for jsf library name
+	 */
 	public String getJSFLibraryName() {		
 		return txtName.getText().trim();
 	}
 
 
+	/**
+	 * @return the value of the user input for the isDeployed checkbox
+	 */
 	public boolean getIsDeployed() {		
 		return chkDeploy.getSelection();
 	}
 
 
+	/**
+	 * @return the value of the user input for the isJSFImplementation checkbox
+	 */
 	public boolean getIsImplementation() {
 		return chkImpl.getSelection();
 	}
 
+	/**
+	 * @return the jsf version selected in the version dropping
+	 */
 	public JSFVersion getJSFVersion() {
 		if (cboVersions.getSelectionIndex() >= 0) {
 			JSFVersion ver = (JSFVersion) JSFVersion.VALUES.get(cboVersions
@@ -430,6 +458,9 @@ public class JSFLibraryEditControl extends Composite implements ModifyListener, 
 		return JSFVersion.UNKNOWN_LITERAL;
 	}
 
+	/**
+	 * @param implsOnly
+	 */
 	public void setImplOnly(boolean implsOnly) {
 		if (implsOnly){
 			chkImpl.setSelection(true);
@@ -437,6 +468,9 @@ public class JSFLibraryEditControl extends Composite implements ModifyListener, 
 		}
 	}
 	
+	/**
+	 * @param nonImplsOnly
+	 */
 	public void setNonImplOnly(boolean nonImplsOnly) {
 		if (nonImplsOnly){
 			chkImpl.setSelection(false);
