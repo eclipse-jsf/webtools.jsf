@@ -21,15 +21,15 @@ import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
+import org.eclipse.jst.jsf.context.symbol.IBeanInstanceSymbol;
+import org.eclipse.jst.jsf.context.symbol.IBeanMethodSymbol;
+import org.eclipse.jst.jsf.context.symbol.IBeanPropertySymbol;
+import org.eclipse.jst.jsf.context.symbol.IJavaTypeDescriptor2;
+import org.eclipse.jst.jsf.context.symbol.IObjectSymbol;
+import org.eclipse.jst.jsf.context.symbol.IPropertySymbol;
+import org.eclipse.jst.jsf.context.symbol.ITypeDescriptor;
 import org.eclipse.jst.jsf.context.symbol.SymbolFactory;
 import org.eclipse.jst.jsf.context.symbol.SymbolPackage;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanInstanceSymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanMethodSymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanPropertySymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaTypeDescriptor2;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IObjectSymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IPropertySymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.ITypeDescriptor;
 import org.eclipse.jst.jsf.core.tests.TestsPlugin;
 
 /**

@@ -22,12 +22,12 @@ import junit.framework.TestCase;
 
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.jst.jsf.context.symbol.IComponentSymbol;
+import org.eclipse.jst.jsf.context.symbol.IMapTypeDescriptor;
+import org.eclipse.jst.jsf.context.symbol.ISymbol;
 import org.eclipse.jst.jsf.context.symbol.SymbolFactory;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IComponentSymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IMapTypeDescriptor;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.ISymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.provider.IContentProposalProvider;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.provider.ProposalCreationFactoryAdapter;
+import org.eclipse.jst.jsf.context.symbol.provider.IContentProposalProvider;
+import org.eclipse.jst.jsf.context.symbol.provider.ProposalCreationFactoryAdapter;
 import org.eclipse.jst.jsf.test.util.TestFileResource;
 import org.eclipse.swt.graphics.Image;
 

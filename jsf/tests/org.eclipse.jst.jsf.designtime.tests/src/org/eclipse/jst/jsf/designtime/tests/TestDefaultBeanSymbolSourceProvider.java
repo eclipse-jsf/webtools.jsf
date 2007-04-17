@@ -14,12 +14,12 @@ package org.eclipse.jst.jsf.designtime.tests;
 import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.ISymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.source.ISymbolConstants;
-import org.eclipse.jst.jsf.core.internal.provisional.IJSFCoreConstants;
+import org.eclipse.jst.jsf.context.symbol.ISymbol;
+import org.eclipse.jst.jsf.context.symbol.source.ISymbolConstants;
+import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.core.tests.TestsPlugin;
 import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
-import org.eclipse.jst.jsf.designtime.internal.provisional.symbols.DefaultBeanSymbolSourceProvider;
+import org.eclipse.jst.jsf.designtime.symbols.DefaultBeanSymbolSourceProvider;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;

@@ -3,11 +3,11 @@ package org.eclipse.jst.jsf.context.symbol.tests;
 import java.util.HashMap;
 
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanInstanceSymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedListTypeDescriptor;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBoundedMapTypeDescriptor;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.ISymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.ITypeDescriptor;
+import org.eclipse.jst.jsf.context.symbol.IBeanInstanceSymbol;
+import org.eclipse.jst.jsf.context.symbol.IBoundedListTypeDescriptor;
+import org.eclipse.jst.jsf.context.symbol.IBoundedMapTypeDescriptor;
+import org.eclipse.jst.jsf.context.symbol.ISymbol;
+import org.eclipse.jst.jsf.context.symbol.ITypeDescriptor;
 
 /**
  * 

@@ -7,10 +7,10 @@ import java.util.Map;
 import junit.framework.TestCase;
 
 import org.eclipse.jdt.core.IType;
+import org.eclipse.jst.jsf.context.symbol.IBeanInstanceSymbol;
+import org.eclipse.jst.jsf.context.symbol.IBeanPropertySymbol;
+import org.eclipse.jst.jsf.context.symbol.IJavaTypeDescriptor2;
 import org.eclipse.jst.jsf.context.symbol.SymbolFactory;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanInstanceSymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanPropertySymbol;
-import org.eclipse.jst.jsf.context.symbol.internal.provisional.IJavaTypeDescriptor2;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.jst.jsf.test.util.TestFileResource;
