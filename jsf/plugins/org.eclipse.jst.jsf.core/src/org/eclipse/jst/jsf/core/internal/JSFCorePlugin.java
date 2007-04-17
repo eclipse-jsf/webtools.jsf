@@ -58,11 +58,6 @@ public class JSFCorePlugin extends WTPPlugin {
 	 */
 	public static final String PLUGIN_ID = "org.eclipse.jst.jsf.core";//org.eclipse.jst.jsf.core.internal.JSFCorePlugin"; //$NON-NLS-1$
 
-	/**
-	 * The JSF facet identifier
-	 */
-	public static final String FACET_ID = "jst.jsf"; //$NON-NLS-1$
-	
 	// The shared instance.
 	private static JSFCorePlugin plugin;
 	

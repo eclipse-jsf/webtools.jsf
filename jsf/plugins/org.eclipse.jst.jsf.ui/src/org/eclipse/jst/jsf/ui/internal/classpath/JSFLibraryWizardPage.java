@@ -33,7 +33,7 @@ public class JSFLibraryWizardPage extends WizardPage {
 	 * Constructor
 	 */
 	public JSFLibraryWizardPage(){
-		super("JSFLibrary");		
+		super("JSFLibrary");
 	}
 
 	/**
@@ -80,15 +80,4 @@ public class JSFLibraryWizardPage extends WizardPage {
 		setControl(editControl);
 		setPageComplete(false);
 	}
-
-
-	/**
-	 * @return true if can finish
-	 */
-	public boolean finish() {
-	    // TODO: dead?
-		return true;
-	}
-
-
 }

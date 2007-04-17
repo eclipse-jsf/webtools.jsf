@@ -13,11 +13,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.QualifiedName;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jdt.core.IClasspathContainer;
 import org.eclipse.jdt.core.IClasspathEntry;
@@ -30,6 +33,7 @@ import org.eclipse.jst.jsf.core.internal.JSFLibraryClasspathContainer;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.ArchiveFile;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistry;
+import org.eclipse.jst.jsf.core.internal.project.facet.JSFUtils;
 
 /**
  * A singleton maintains lists of implementation and component libraries 
@@ -367,5 +371,49 @@ public class JSFLibraryRegistryUtil {
 		} catch (JavaModelException e) {
 			JSFCorePlugin.log(e, "Unable to set classpath for: "+project.getProject().getName());
 		}
+	}
+	
+	/**
+	 * @param iproject
+	 * @return true if iproject has persistent properties indicating that it may still
+	 * be using V1 JSF Library references
+	 */
+	public static boolean doesProjectHaveV1JSFLibraries(IProject iproject)
+	{
+       try
+        {
+            Object compLib = iproject.getPersistentProperty(new QualifiedName(JSFLibraryConfigProjectData.QUALIFIEDNAME, JSFUtils.PP_JSF_COMPONENT_LIBRARIES));
+            Object implLib = iproject.getPersistentProperty(new QualifiedName(JSFLibraryConfigProjectData.QUALIFIEDNAME, JSFUtils.PP_JSF_IMPLEMENTATION_LIBRARIES));
+            
+            if (compLib != null || implLib != null)
+            {
+                return true;
+            }
+            return false;
+        }
+        catch(CoreException ce)
+        {
+            JSFCorePlugin.log(ce, "Error checking age of project");
+            return false;
+        }
+	}
+	
+	/**
+	 * Removes the persistent property from JSF projects tagged with
+	 * V1 JSF libraries.
+	 * @param projects
+	 */
+	public static void removeV1JSFLibraryProperty(List<IProject> projects)
+	{
+	    for (final Iterator<IProject> it = projects.iterator(); it.hasNext();)
+	    {
+	        IProject project = it.next();
+            try {
+                project.setPersistentProperty(new QualifiedName(JSFLibraryConfigProjectData.QUALIFIEDNAME, JSFUtils.PP_JSF_COMPONENT_LIBRARIES), null);
+                project.setPersistentProperty(new QualifiedName(JSFLibraryConfigProjectData.QUALIFIEDNAME, JSFUtils.PP_JSF_IMPLEMENTATION_LIBRARIES), null);
+            } catch (CoreException e) {
+                JSFCorePlugin.log(e, "Error removing JSF library persistent property");
+            }
+	    }
 	}
 }

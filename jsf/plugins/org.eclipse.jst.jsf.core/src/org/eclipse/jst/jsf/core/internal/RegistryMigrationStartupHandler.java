@@ -5,11 +5,8 @@ import java.net.URL;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.dialogs.MessageDialogWithToggle;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.util.JSFLibraryRegistryUpgradeUtil;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.util.UpgradeStatus;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IStartup;
 import org.eclipse.ui.PartInitException;
@@ -74,21 +71,8 @@ public class RegistryMigrationStartupHandler implements IStartup
 
         public void run()
         {
-            final Shell  shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-            MessageDialogWithToggle  dialog = 
-            	new ConfirmDialog(shell, Messages.JSFRegistryMigration05_to_10_title, Messages.JSFRegistryMigration05_to_10_customMessage);
-            int result = dialog.open();
-            
-            switch(result)
-            {
-            	case ConfirmDialog.CONFIRMED:
-            		doConfirmed(dialog.getToggleState());
-            	break;
-            	
-            	default:
-            		// all other cases than explicit proceed, abort and exit
-            		doAbortAndExit();
-            }
+            // no prompting necessary.  just commit.
+       		doConfirmed(false);
         }
         
     	private void doConfirmed(boolean userWantsMigrationDocLaunch) {
@@ -115,62 +99,62 @@ public class RegistryMigrationStartupHandler implements IStartup
 				}
     	}
     	
-    	private void doAbortAndExit()
-    	{
-    		// rollback
-    		IStatus result = _status.rollback();
-    		
-    		if (result.getSeverity() != IStatus.OK)
-    		{
-    			final Shell  shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-    			MessageDialog.openError(shell, Messages.RegistryMigrationStartupHandler_Error_Rolling_Back_Migration, result.getMessage());
-    		}
-    		// close workbench
-    		PlatformUI.getWorkbench().close();
-    	}
-    }
-    
-    private static class ConfirmDialog extends MessageDialogWithToggle
-    {
-    	final static int	CONFIRMED = 0;
-    	final static int	ABORT_AND_EXIT = 1;
-    	
-		/**
-		 * @param parentShell
-		 * @param dialogTitle
-		 * @param dialogMessage
-		 */
-		public ConfirmDialog(Shell parentShell, String dialogTitle,
-				String dialogMessage) {
-			super(parentShell
-					, dialogTitle
-					, null
-					, dialogMessage
-					, WARNING
-					, new String[] { Messages.RegistryMigrationStartupHandler_Dialog_Confirm_Migration, Messages.RegistryMigrationStartupHandler_Dialog_Abort_And_Exit_Migration }
-					, ABORT_AND_EXIT
-					, Messages.RegistryMigrationStartupHandler_Launch_Migration_Doc_On_Confirm, true);
-		}
-
-		/**
-		 * Override so that the button ids line up with the constants
-		 * expected
-		 * @param parent 
-		 */
-		protected void createButtonsForButtonBar(Composite parent) {
-	        final String[] buttonLabels = getButtonLabels();
-	        final Button[] buttons = new Button[buttonLabels.length];
-	        final int defaultButtonIndex = getDefaultButtonIndex();
-
-	        for (int i = 0; i < buttonLabels.length; i++) {
-	            String label = buttonLabels[i];
-	            Button button = createButton(parent, i, label,
-	                    defaultButtonIndex == i);
-	            buttons[i] = button;
-	 
-	        }
-	        setButtons(buttons);
-		}
-		
+//    	private void doAbortAndExit()
+//    	{
+//    		// rollback
+//    		IStatus result = _status.rollback();
+//    		
+//    		if (result.getSeverity() != IStatus.OK)
+//    		{
+//    			final Shell  shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+//    			MessageDialog.openError(shell, Messages.RegistryMigrationStartupHandler_Error_Rolling_Back_Migration, result.getMessage());
+//    		}
+//    		// close workbench
+//    		PlatformUI.getWorkbench().close();
+//    	}
+//    }
+//    
+//    private static class ConfirmDialog extends MessageDialogWithToggle
+//    {
+//    	final static int	CONFIRMED = 0;
+//    	final static int	ABORT_AND_EXIT = 1;
+//    	
+//		/**
+//		 * @param parentShell
+//		 * @param dialogTitle
+//		 * @param dialogMessage
+//		 */
+//		public ConfirmDialog(Shell parentShell, String dialogTitle,
+//				String dialogMessage) {
+//			super(parentShell
+//					, dialogTitle
+//					, null
+//					, dialogMessage
+//					, WARNING
+//					, new String[] { Messages.RegistryMigrationStartupHandler_Dialog_Confirm_Migration, Messages.RegistryMigrationStartupHandler_Dialog_Abort_And_Exit_Migration }
+//					, ABORT_AND_EXIT
+//					, Messages.RegistryMigrationStartupHandler_Launch_Migration_Doc_On_Confirm, true);
+//		}
+//
+//		/**
+//		 * Override so that the button ids line up with the constants
+//		 * expected
+//		 * @param parent 
+//		 */
+//		protected void createButtonsForButtonBar(Composite parent) {
+//	        final String[] buttonLabels = getButtonLabels();
+//	        final Button[] buttons = new Button[buttonLabels.length];
+//	        final int defaultButtonIndex = getDefaultButtonIndex();
+//
+//	        for (int i = 0; i < buttonLabels.length; i++) {
+//	            String label = buttonLabels[i];
+//	            Button button = createButton(parent, i, label,
+//	                    defaultButtonIndex == i);
+//	            buttons[i] = button;
+//	 
+//	        }
+//	        setButtons(buttons);
+//		}
+//		
     }
 }

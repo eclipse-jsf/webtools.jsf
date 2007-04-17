@@ -30,7 +30,7 @@ import org.eclipse.osgi.util.NLS;
  * @author Justin Chen - Oracle
  */
 public class JSFLibraryConfigProjectData implements JSFLibraryConfiglModelSource {
-	final static private String QUALIFIEDNAME = "org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfigProjectData"; 
+	final static String QUALIFIEDNAME = "org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfigProjectData"; 
 	/**
 	 * Parsing delimnitor for elements in a tuple.
 	 */
@@ -247,8 +247,11 @@ public class JSFLibraryConfigProjectData implements JSFLibraryConfiglModelSource
 	 * To Do: Take out selected attribute since it is not needed.
 	 *        Add the library name as an attribute.
 	 *        Provide code path to migrate earlier project.
+	 *        
+	 * NOTE: this class should no longer be used except to support
+	 * legacy (pre-2.0M6 library registries)
 	 */
-	private static class Tuple {
+	static class Tuple {
 		final private String id;
 		final private boolean selected;
 		final private boolean deploy;
@@ -261,9 +264,17 @@ public class JSFLibraryConfigProjectData implements JSFLibraryConfiglModelSource
 		// parse tuple = ID:selected:deploy
 		Tuple(String tuple) {
 			String[] fields = tuple.split(JSFLibraryConfigProjectData.SPTR_TUPLE);
-			this.id = fields[0];
-			this.selected = Boolean.valueOf(fields[1]).booleanValue();
-			this.deploy = Boolean.valueOf(fields[2]).booleanValue();
+			
+			if (fields.length >= 3)
+			{
+    			this.id = fields[0];
+    			this.selected = Boolean.valueOf(fields[1]).booleanValue();
+    			this.deploy = Boolean.valueOf(fields[2]).booleanValue();
+			}
+			else
+			{
+			    throw new IllegalStateException("Library registry is corrupt");
+			}
 		}
 		
 		String getID() {

@@ -10,8 +10,17 @@
  *******************************************************************************/ 
 package org.eclipse.jst.jsf.ui.internal.classpath;
 
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jface.dialogs.IDialogConstants;
+import org.eclipse.jface.dialogs.MessageDialogWithToggle;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.jface.wizard.WizardPage;
@@ -46,7 +55,7 @@ public class JSFLibraryWizard extends Wizard implements INewWizard {
 	 */
 	public static int NONIMPLS = 2;
 	
-	private JSFLibraryEditControl c;
+	private JSFLibraryEditControl jsfLibraryEditControl;
 	
 	private boolean isNew = false;
 	private boolean modified = false;
@@ -61,6 +70,8 @@ public class JSFLibraryWizard extends Wizard implements INewWizard {
 
 	private boolean _impls;	
 	private boolean _nonimpls;
+	
+    private List<IProject>        _projectsWithV1JSFLibraries = new ArrayList<IProject>();
 	
 	/**
 	 * Constructor
@@ -102,7 +113,10 @@ public class JSFLibraryWizard extends Wizard implements INewWizard {
 	/* (non-Javadoc)
 	 * @see org.eclipse.ui.IWorkbenchWizard#init(org.eclipse.ui.IWorkbench, org.eclipse.jface.viewers.IStructuredSelection)
 	 */
-	public void init(IWorkbench workbench, IStructuredSelection selection) {
+	public void init(IWorkbench workbench, IStructuredSelection selection) 
+	{
+	    initV1LibrariesList();
+	    
 		if (selection != null
 				&& selection.getFirstElement() instanceof JSFLibrary) {
 			curLibrary = (JSFLibrary) selection.getFirstElement();
@@ -118,6 +132,22 @@ public class JSFLibraryWizard extends Wizard implements INewWizard {
 		}
 	}
 
+	private void initV1LibrariesList()
+	{
+        final IProject[] projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
+        
+        // loop through the workspace and look for projects that are still using the V1 way
+        // of doing JSF libraries
+        for (int i = 0; i < projects.length; i++)
+        {
+            final IProject project = projects[i];
+            if (JSFLibraryRegistryUtil.doesProjectHaveV1JSFLibraries(project))
+            {
+                _projectsWithV1JSFLibraries.add(project);
+            }
+        }
+    }
+
 	/**
 	 * Updates the JSF Library instance with the values from the working copy and 
 	 * persists the registry.
@@ -126,11 +156,48 @@ public class JSFLibraryWizard extends Wizard implements INewWizard {
 	 *  
 	 * @see org.eclipse.jface.wizard.Wizard#performFinish()
 	 */
-	public boolean performFinish() {	
-		final String name = c.getJSFLibraryName();
-		final boolean isDeployed = c.getIsDeployed();
-		final boolean isImplementation = c.getIsImplementation();
-		final JSFVersion version = c.getJSFVersion();
+	public boolean performFinish() 
+	{
+	    // on init, if we detected any projects with old library
+	    // refs, we need to warn the user
+	    if (!isNew &&  // can ignore new libraries, since old projects can't possibly have dependencies on them
+	            _projectsWithV1JSFLibraries.size() > 0)
+	    {
+	        String  projectNames = ""; //$NON-NLS-1$
+	        for (Iterator<IProject> it = _projectsWithV1JSFLibraries.iterator(); it.hasNext();)
+	        {
+	            IProject project = it.next();
+	            projectNames += project.getName() + ","; //$NON-NLS-1$
+	        }
+	        // trim trailing comma
+	        if (projectNames.length() > 0)
+	        {
+	            projectNames = projectNames.substring(0, projectNames.length()-1);
+	        }
+	        
+	        final String messageText = MessageFormat.format(Messages.JSFLibraryWizard_V1JSFLibrary_DialogMessage,
+	                                        new Object[] {projectNames});
+	        MessageDialogWithToggle dialog = 
+	            WarningMessageDialogWithToggle.openOkCancelConfirm
+	                (getShell(), Messages.JSFLibraryWizard_V1JSFLibrary_DialogTitle, messageText, Messages.JSFLibraryWizard_JSFLibraryWizard_DontShowThisAgain_CheckBoxLabel, false, null, null);
+	        if (dialog.getReturnCode() != IDialogConstants.OK_ID)
+	        {
+	            // abort if the user doesn't really want to commit this change
+	            return false;
+	        }
+
+	        // if user accepted and asked not be warned again, clear the 
+	        // the project properties.
+	        if (dialog.getToggleState())
+            {
+	            JSFLibraryRegistryUtil.removeV1JSFLibraryProperty(_projectsWithV1JSFLibraries);
+            }
+	    }
+	    
+		final String name = jsfLibraryEditControl.getJSFLibraryName();
+		final boolean isDeployed = jsfLibraryEditControl.getIsDeployed();
+		final boolean isImplementation = jsfLibraryEditControl.getIsImplementation();
+		final JSFVersion version = jsfLibraryEditControl.getJSFVersion();
 		
 		workingCopyLibrary.setName(name);
 		workingCopyLibrary.setDeployed(isDeployed);
@@ -147,7 +214,7 @@ public class JSFLibraryWizard extends Wizard implements INewWizard {
 			try {
 				JSFLibraryRegistryUtil.rebindClasspathContainerEntries(originalID, workingCopyLibrary.getID(), false, null);
 			} catch (JavaModelException e) {
-				JSFUiPlugin.log(IStatus.ERROR, "Exception while updating JSF Library containers", e);
+				JSFUiPlugin.log(IStatus.ERROR, "Exception while updating JSF Library containers", e); //$NON-NLS-1$
 			}
 		}
 		JSFCorePlugin.getDefault().saveJSFLibraryRegistry();
@@ -197,13 +264,13 @@ public class JSFLibraryWizard extends Wizard implements INewWizard {
 		public void createControl(Composite parent) {
 			initializeDialogUnits(parent);
 
-			c = new JSFLibraryEditControl(workingCopyLibrary, parent);
-			c.setImplOnly(isImplsOnly());
-			c.setNonImplOnly(isNonImplsOnly());
-			c.setLayout(new GridLayout(2, false));
-			c.setLayoutData(new GridData(GridData.FILL_BOTH));
+			jsfLibraryEditControl = new JSFLibraryEditControl(workingCopyLibrary, parent);
+			jsfLibraryEditControl.setImplOnly(isImplsOnly());
+			jsfLibraryEditControl.setNonImplOnly(isNonImplsOnly());
+			jsfLibraryEditControl.setLayout(new GridLayout(2, false));
+			jsfLibraryEditControl.setLayoutData(new GridData(GridData.FILL_BOTH));
 
-			c.addValidationListener(new JSFLibraryValidationListener(){
+			jsfLibraryEditControl.addValidationListener(new JSFLibraryValidationListener(){
 				public void notifyValidation(JSFLibraryValidationEvent e) {
 					setErrorMessage(e.getMessage());
 					modified = true;
@@ -211,7 +278,7 @@ public class JSFLibraryWizard extends Wizard implements INewWizard {
 				}				
 			});
 
-			setControl(c);
+			setControl(jsfLibraryEditControl);
 			setPageComplete(false);
 		}
 

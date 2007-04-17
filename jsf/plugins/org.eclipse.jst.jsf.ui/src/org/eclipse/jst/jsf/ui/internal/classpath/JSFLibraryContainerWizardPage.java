@@ -12,14 +12,14 @@ package org.eclipse.jst.jsf.ui.internal.classpath;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
@@ -51,6 +51,7 @@ import org.eclipse.jst.jsf.core.internal.JSFLibrariesContainerInitializer;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryRegistryUtil;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.PluginProvidedJSFLibrary;
+import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigUtils;
 import org.eclipse.jst.jsf.ui.internal.JSFUiPlugin;
 import org.eclipse.jst.jsf.ui.internal.Messages;
 import org.eclipse.swt.SWT;
@@ -66,11 +67,6 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.wst.common.project.facet.core.IFacetedProject;
-import org.eclipse.wst.common.project.facet.core.IProjectFacet;
-import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
-import org.eclipse.wst.common.project.facet.core.ProjectFacetsManager;
-import org.eclipse.wst.common.project.facet.core.internal.FacetedProjectNature;
 
 /**
  * Provides a classpath container wizard page for JSF Libraries.
@@ -88,7 +84,10 @@ public class JSFLibraryContainerWizardPage extends WizardPage implements
 	private IClasspathEntry containerEntry;
 	private IClasspathEntry[] currentEntries;
 	private Map _currentLibs;
-	private JSFLibrary currentLib;		
+	private JSFLibrary currentLib;
+	
+	private boolean   _projectHaveV1JSFLibraries; // = false;
+	private IProject  _iproject;
 
 	/**
 	 * Zero arg constructor
@@ -104,31 +103,15 @@ public class JSFLibraryContainerWizardPage extends WizardPage implements
 	/* (non-Javadoc)
 	 * @see org.eclipse.jdt.ui.wizards.IClasspathContainerPageExtension#initialize(org.eclipse.jdt.core.IJavaProject, org.eclipse.jdt.core.IClasspathEntry[])
 	 */
-	public void initialize(IJavaProject project, IClasspathEntry[] currentEntries_) {		
-		isJSFProject = false;
+	public void initialize(IJavaProject project, IClasspathEntry[] currentEntries_) {
 		this.currentEntries = currentEntries_;
-		try {
-			//check for faceted nature
-			//NOTE: use of following constant produces warnings; this was known
-			//but at time of writing no public API was available
-			if (project.getProject().hasNature(FacetedProjectNature.NATURE_ID)){
-				//check for jsf facet
-				IFacetedProject fproj = ProjectFacetsManager.create(project.getProject());
-				Iterator it = fproj.getProjectFacets().iterator();
-				while (it.hasNext()){
-					IProjectFacetVersion facetVersion = (IProjectFacetVersion)it.next();
-					IProjectFacet facet = facetVersion.getProjectFacet();
-					if (facet.getId().equals(JSFCorePlugin.FACET_ID)){
-						isJSFProject = true;
-						return;
-					}
-				}				
-			}
-		} catch (CoreException e) {
-			JSFUiPlugin.log(
-					IStatus.ERROR,
-					Messages.JSFLibraryContainerWizardPage_ErrorInitializing,
-					e);
+
+        _iproject = project.getProject();
+        this.isJSFProject = JSFAppConfigUtils.isValidJSFProject(_iproject);
+        if (this.isJSFProject)
+		{
+			_projectHaveV1JSFLibraries = 
+			    JSFLibraryRegistryUtil.doesProjectHaveV1JSFLibraries(_iproject);
 		}
 	}
 
@@ -136,7 +119,22 @@ public class JSFLibraryContainerWizardPage extends WizardPage implements
 	 * @see org.eclipse.jdt.ui.wizards.IClasspathContainerPage#finish()
 	 */
 	public boolean finish() {
-		return true;
+	    boolean finish = true;
+	    if (_projectHaveV1JSFLibraries)
+	    {
+	        // if the user doesn't want to confirm, back off on the change
+	        // and let them decide if they want to hit cancel
+	        finish = WarningMessageDialog.
+	            openConfirm(getShell()
+	                        , Messages.JSFLibraryContainerWizardPage_V1Registry_Warning_DialogTitle
+	                        , Messages.JSFLibraryContainerWizardPage_V1Registry_Warning_DialogText);
+	        
+	        if (finish)
+	        {
+	            JSFLibraryRegistryUtil.removeV1JSFLibraryProperty(Collections.singletonList(_iproject));
+	        }
+	    }
+		return finish;
 	}
 
 	/* (non-Javadoc)
@@ -314,7 +312,7 @@ public class JSFLibraryContainerWizardPage extends WizardPage implements
 			JSFLibrary lib = getJSFLibraryForEdit(containerEntry);
 			lv.setInput(getAllUnselectedJSFLibrariesExceptReferencedLib(lib));	
 			selectAndCheckCurrentLib(lib);
-			setDescription("Select JSF Libary for this reference to use.  Choose 'Edit...' to modify contents of the selected libarary.");
+			setDescription(Messages.JSFLibraryContainerWizardPage_EditLibrary_DescriptionText);
 		} 
 		else {
 			lv.setInput(getAllJSFLibraries());		
