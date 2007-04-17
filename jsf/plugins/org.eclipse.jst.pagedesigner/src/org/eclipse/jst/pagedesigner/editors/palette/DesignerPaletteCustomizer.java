@@ -25,6 +25,38 @@ import org.eclipse.jst.pagedesigner.editors.palette.impl.PaletteItemManager;
  */
 public class DesignerPaletteCustomizer extends PaletteCustomizer {
 
+	
+	private DesignerPaletteRoot root;
+
+	/**
+	 * Set the palette root.   Must be set before the customizer can be used
+	 * @param root
+	 */
+	public void setPaletteRoot(DesignerPaletteRoot root){
+		this.root = root;
+	}
+	
+	/**
+	 * Return the palette root for this customizer
+	 * @return DesignerPaletteRoot
+	 */
+	public DesignerPaletteRoot getDesignerPaletteRoot(){
+		return root;
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.ui.palette.PaletteCustomizer#canMoveDown(org.eclipse.gef.palette.PaletteEntry)
+	 */
+	public boolean canMoveDown(PaletteEntry entry) {
+		return false;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.ui.palette.PaletteCustomizer#canMoveUp(org.eclipse.gef.palette.PaletteEntry)
+	 */
+	public boolean canMoveUp(PaletteEntry entry) {
+		return false;
+	}
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -113,8 +145,8 @@ public class DesignerPaletteCustomizer extends PaletteCustomizer {
 	 * @see org.eclipse.gef.ui.palette.PaletteCustomizer#revertToSaved()
 	 */
 	public void revertToSaved() {
-		// PaletteItemManager.getInstance(getCurrentProject()).
-		PaletteItemManager.getCurrentInstance().reset();
+		//note that reset is not currently part of IPaletteItemManager interface...
+		((PaletteItemManager)root.getPaletteManager()).reset();
 	}
 
 	/*
@@ -123,21 +155,10 @@ public class DesignerPaletteCustomizer extends PaletteCustomizer {
 	 * @see org.eclipse.gef.ui.palette.PaletteCustomizer#save()
 	 */
 	public void save() {
-		PaletteItemManager.getCurrentInstance().save();
+		DesignerPaletteCustomizationsHelper.save(root);
 //		PaletteItemManager.getCurrentInstance().reset();
 	}
 
-//	private IProject getCurrentProject() {
-//		IProject curProject = null;
-//		IEditorPart editor = PDPlugin.getDefault().getWorkbench()
-//				.getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-//		IEditorInput input = editor.getEditorInput();
-//		IFile inputFile = null;
-//		if (input instanceof IFileEditorInput) {
-//			inputFile = ((IFileEditorInput) input).getFile();
-//			curProject = inputFile.getProject();
-//		}
-//		return curProject;
-//	}
+
 
 }

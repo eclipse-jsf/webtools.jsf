@@ -37,6 +37,7 @@ import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
 
 /**
+ * 
  * @author mengbo
  */
 public class PaletteElementTemplateHelper {
@@ -119,12 +120,12 @@ public class PaletteElementTemplateHelper {
 	/**
 	 * Use the actrual prefixs of jsf html and jsf core to set the prefix of
 	 * each node declared in template.
+	 * @param model 
+	 * @param info 
+	 * @param templateNodes 
+	 * @param document 
+	 * @return Node[]
 	 * 
-	 * @param prefixH
-	 * @param prefixC
-	 * @param nl
-	 * @param document
-	 * @return
 	 */
 	public static Node[] applyPrefixes(IDOMModel model, TagCreationInfo info,
 			NodeList templateNodes, Document document) {
@@ -141,12 +142,6 @@ public class PaletteElementTemplateHelper {
 	/**
 	 * TODO: Later we may add some logic to reference the tld file through tag
 	 * name to resolve the prefixs directly.
-	 * 
-	 * @param model
-	 * @param prefixH
-	 * @param prefixC
-	 * @param node
-	 * @return
 	 */
 	private static void internalApplyPrefixes(IDOMModel model, Element refNode, Element node) {
 		if (node != null && refNode != null) {
@@ -159,6 +154,13 @@ public class PaletteElementTemplateHelper {
 	}
 
 
+	/**
+	 * A deep clone of the sourceNode
+	 * @param model
+	 * @param destDoc
+	 * @param sourceNode
+	 * @return Node
+	 */
 	public static Node cloneNodeDeep(IDOMModel model, Document destDoc, Node sourceNode) {
 		switch (sourceNode.getNodeType()) {
 		case Node.ELEMENT_NODE:

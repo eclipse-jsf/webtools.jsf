@@ -53,7 +53,7 @@ import org.eclipse.jst.pagedesigner.editors.actions.DesignerUndoRedoAction;
 import org.eclipse.jst.pagedesigner.editors.actions.RelatedViewActionGroup;
 import org.eclipse.jst.pagedesigner.editors.palette.DesignerPaletteCustomizer;
 import org.eclipse.jst.pagedesigner.editors.palette.DesignerPaletteViewerProvider;
-import org.eclipse.jst.pagedesigner.editors.palette.VPDPaletteRootFactory;
+import org.eclipse.jst.pagedesigner.editors.palette.DesignerPaletteRootFactory;
 import org.eclipse.jst.pagedesigner.jsp.core.internal.pagevar.DocumentPageVariableAdapter;
 import org.eclipse.jst.pagedesigner.jsp.core.pagevar.adapter.PageVariableAdapterFactory;
 import org.eclipse.jst.pagedesigner.parts.CSSStyleAdapterFactory;
@@ -442,7 +442,7 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
 	 * @see org.eclipse.gef.ui.parts.GraphicalEditorWithFlyoutPalette#getPalettePreferences()
 	 */
 	protected FlyoutPreferences getPalettePreferences() {
-		return VPDPaletteRootFactory.createPalettePreferences();
+		return DesignerPaletteRootFactory.createPalettePreferences();
 	}
 
 	/*
@@ -452,7 +452,7 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
 	 */
 	protected PaletteRoot getPaletteRoot() {
 		if (_palette == null) {
-			_palette = VPDPaletteRootFactory
+			_palette = DesignerPaletteRootFactory
 					.createPaletteRoot(getCurrentProject(_delegate.getEditorInput()));
 		}
 		return _palette;

@@ -19,24 +19,26 @@ import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.editors.palette.impl.PaletteItemManager;
 
 /**
+ * Factory for creating DesignerPaletteRoots
  * @author mengbo 
  */
-public class VPDPaletteRootFactory {
+public class DesignerPaletteRootFactory {
 	/** Default palette size. */
 	private static final int DEFAULT_PALETTE_SIZE = 125;
 
 	/** Preference ID used to persist the palette location. */
-	private static final String PALETTE_DOCK_LOCATION = "VPDPaletteRootFactory.Location";
+	private static final String PALETTE_DOCK_LOCATION = "DesignerPaletteRootFactory.Location";
 
 	/** Preference ID used to persist the palette size. */
-	private static final String PALETTE_SIZE = "VPDPaletteRootFactory.Size";
+	private static final String PALETTE_SIZE = "DesignerPaletteRootFactory.Size";
 
 	/** Preference ID used to persist the flyout palette's state. */
-	private static final String PALETTE_STATE = "VPDPaletteRootFactory.State";
+	private static final String PALETTE_STATE = "DesignerPaletteRootFactory.State";
 
 	/**
-	 * Return a FlyoutPreferences instance used to save/load the preferences of
+	 * Return a {@link FlyoutPreferences} instance used to save/load the preferences of
 	 * a flyout palette.
+	 * @return FlyoutPreferences
 	 */
 	public static FlyoutPreferences createPalettePreferences() {
 		// set default flyout palette preference values, in case the preference
@@ -85,7 +87,7 @@ public class VPDPaletteRootFactory {
 	/**
 	 * Creates the PaletteRoot and adds all palette elements. Use this factory
 	 * method to create a new palette for your graphical editor.
-	 * 
+	 * @param project 
 	 * @return a new PaletteRoot
 	 */
 	public static PaletteRoot createPaletteRoot(IProject project) {

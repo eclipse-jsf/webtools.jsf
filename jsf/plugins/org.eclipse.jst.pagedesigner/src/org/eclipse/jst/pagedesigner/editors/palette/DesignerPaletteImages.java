@@ -12,19 +12,38 @@
 package org.eclipse.jst.pagedesigner.editors.palette;
 
 /**
+ * Palette Image constants
  * @author mengbo
  */
 public class DesignerPaletteImages {
+	/**
+	 * Import hover image
+	 */
 	public static final String IMG_CLCL_IMPORT = "icons/palette/GENERIC/small/PD_Palette_Import_Hover.gif";
 
+	/**
+	 * Export hover image
+	 */
 	public static final String IMG_CLCL_EXPORT = "icons/palette/GENERIC/small/PD_Palette_Export_Hover.gif";
 
+	/**
+	 * Import disabled image
+	 */
 	public static final String IMG_DLCL_IMPORT = "icons/palette/GENERIC/small/PD_Palette_Import_Disabled.gif";
 
+	/**
+	 * Export disabled image
+	 */
 	public static final String IMG_DLCL_EXPORT = "icons/palette/GENERIC/small/PD_Palette_Export_Disabled.gif";
 
+	/**
+	 * Import image
+	 */
 	public static final String IMG_ELCL_IMPORT = "icons/palette/GENERIC/small/PD_Palette_Import.gif";
 
+	/**
+	 * Export image
+	 */
 	public static final String IMG_ELCL_EXPORT = "icons/palette/GENERIC/small/PD_Palette_Export.gif";
 
 }

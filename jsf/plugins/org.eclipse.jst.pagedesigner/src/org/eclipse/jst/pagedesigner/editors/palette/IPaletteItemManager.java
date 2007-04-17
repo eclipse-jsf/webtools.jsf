@@ -17,29 +17,46 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.pagedesigner.editors.palette.impl.TaglibPaletteDrawer;
 
 /**
+ * PaletteItemManager interface.
+ * 
+ * NOT intended to be implemented by clients
+ * 
  * @author mengbo
  */
 public interface IPaletteItemManager {
+	/**
+	 * @return IProject
+	 */
 	public IProject getProject();
 	
+	/**
+	 * @return list of {@link TaglibPaletteDrawer}s being managed for this project 
+	 */
 	public List/*TaglibPaletteDrawer*/ getAllCategories();
 
 	/**
+	 * Create a TaglibPaletteDrawer with given label for given id
+	 * 
 	 * @param id
-	 * @return
+	 * @param label 
+	 * @return TaglibPaletteDrawer
 	 */
 	public TaglibPaletteDrawer createTaglibPaletteDrawer(String id, String label);
 
 	/**
+	 * Retrieve the TaglibPaletteDrawer by id.  May be null.
+	 * 
 	 * @param id
-	 * @return
+	 * @return TaglibPaletteDrawer
 	 */
 	public TaglibPaletteDrawer getTaglibPalletteDrawer(String id);
 
 	/**
+	 * Locate by id, and if not found,  create a TaglibPaletteDrawer using label and id
+	 * 
 	 * @param id
 	 * @param label
-	 * @return
+	 * @return TaglibPaletteDrawer
 	 */
 	public TaglibPaletteDrawer findOrCreateCategory(String id, String label);
 

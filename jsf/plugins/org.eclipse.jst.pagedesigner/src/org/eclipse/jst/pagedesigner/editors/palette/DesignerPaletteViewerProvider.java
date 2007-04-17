@@ -12,12 +12,16 @@
 package org.eclipse.jst.pagedesigner.editors.palette;
 
 import org.eclipse.gef.EditDomain;
+import org.eclipse.gef.internal.ui.palette.editparts.DrawerEditPart;
 import org.eclipse.gef.ui.palette.PaletteContextMenuProvider;
 import org.eclipse.gef.ui.palette.PaletteViewer;
 import org.eclipse.gef.ui.palette.PaletteViewerProvider;
+import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.dnd.internal.DesignerTemplateTransferDragSourceListener;
+import org.eclipse.jst.pagedesigner.editors.palette.impl.TaglibPaletteDrawer;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.PlatformUI;
 
@@ -41,6 +45,11 @@ public class DesignerPaletteViewerProvider extends PaletteViewerProvider {
 		// super.configurePaletteViewer(viewer);
 		viewer.setContextMenu(new PaletteContextMenuProvider(viewer) {
 			public void buildContextMenu(IMenuManager menu) {
+				StructuredSelection sel = (StructuredSelection)getViewer().getSelection();
+				if (sel != null 
+						&& sel.getFirstElement() instanceof DrawerEditPart
+						&& ((DrawerEditPart)sel.getFirstElement()).getDrawer() instanceof TaglibPaletteDrawer)
+					menu.add(new HideTagLibAction((DrawerEditPart)sel.getFirstElement(), "Hide"));
 				super.buildContextMenu(menu);
 			}
 		});
@@ -72,5 +81,29 @@ public class DesignerPaletteViewerProvider extends PaletteViewerProvider {
 								.getResourceString("DesignerPaletteViewerProvider.help.id"));
 
 		return pViewer;
+	}
+	
+	private class HideTagLibAction extends Action {
+		private DrawerEditPart tagLib;
+		
+		/**
+		 * Constructor
+		 * @param tagLibDrawer
+		 * @param string
+		 */
+		public HideTagLibAction(DrawerEditPart tagLibDrawer, String string) {
+			super(string);
+			this.tagLib = tagLibDrawer;
+		}
+
+		/* (non-Javadoc)
+		 * @see org.eclipse.jface.action.Action#run()
+		 */
+		public void run() {
+			TaglibPaletteDrawer pd = (TaglibPaletteDrawer)tagLib.getDrawer();
+			pd.setVisible(false);
+			DesignerPaletteCustomizationsHelper.hideTaglibDrawer(pd);
+		}		
+		
 	}
 }

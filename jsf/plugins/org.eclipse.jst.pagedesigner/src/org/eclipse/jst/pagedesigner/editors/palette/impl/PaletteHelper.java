@@ -11,20 +11,15 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.editors.palette.impl;
 
-import java.io.InputStream;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
+import java.util.List;
+import java.util.regex.Pattern;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.core.runtime.IExtensionPoint;
-import org.eclipse.core.runtime.IExtensionRegistry;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.gef.palette.PaletteDrawer;
+import org.eclipse.gef.palette.PaletteEntry;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.Model;
@@ -34,14 +29,10 @@ import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider
 import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
 import org.eclipse.jst.jsf.common.metadata.query.IMetaDataModelContext;
 import org.eclipse.jst.jsf.common.metadata.query.MetaDataQueryHelper;
-import org.eclipse.jst.jsf.common.ui.internal.utils.ResourceUtils;
-import org.eclipse.jst.jsf.common.ui.internal.utils.StringUtil;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDDocument;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDElementDeclaration;
 import org.eclipse.jst.pagedesigner.IHTMLConstants;
-import org.eclipse.jst.pagedesigner.IJMTConstants;
 import org.eclipse.jst.pagedesigner.PDPlugin;
-import org.eclipse.jst.pagedesigner.editors.palette.IPaletteConstants;
 import org.eclipse.jst.pagedesigner.editors.palette.IPaletteItemManager;
 import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
 import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfo;
@@ -52,10 +43,6 @@ import org.eclipse.wst.xml.core.internal.contentmodel.CMDocument;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMElementDeclaration;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMNamedNodeMap;
 import org.eclipse.wst.xml.core.internal.provisional.contentmodel.CMDocType;
-import org.osgi.framework.Bundle;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 
 /**
  * Helper class.
@@ -63,57 +50,49 @@ import org.w3c.dom.NodeList;
  * @author mengbo
  */
 public class PaletteHelper {
+	
+    // pattern to strip all <x> and </x> HTML tags
+    final private static Pattern removeHTMLTags = Pattern.compile("<[/?\\w\\s=\"\\.\\#]+>");
+    
+    // pattern to find all runs of spaces longer than one
+    final private static Pattern trimInteriorWhitespace = Pattern.compile("[ ]+");
+    
+    // pattern to find all new lines for removal
+    final private static Pattern removeNewLines = Pattern.compile("[\n]");
+    
 	private final static ImageDescriptor DEFAULT_SMALL_ICON = PDPlugin
 	.getDefault().getImageDescriptor(
 			"palette/GENERIC/small/PD_Palette_Default.gif");
 
-private final static ImageDescriptor DEFAULT_LARGE_ICON = PDPlugin
-	.getDefault().getImageDescriptor(
-			"palette/GENERIC/large/PD_Palette_Default.gif");
+	private final static ImageDescriptor DEFAULT_LARGE_ICON = PDPlugin
+		.getDefault().getImageDescriptor(
+				"palette/GENERIC/large/PD_Palette_Default.gif");
 
-//	public static void configPaletteItemsByTLDOLD(IPaletteItemManager manager,
-//			TLDDocument tldDoc) {
-//		
-//		String tldURI = tldDoc.getUri();
-//		if (tldURI == null) {
-//			return;
-//		}
-//		TaglibPaletteDrawer category = findCategory(manager, tldURI);
-//		if (category != null) 
-//			return;
-//		
-//		
-//		// category is in what user selected in Component Support Property Page
-//		// ,so set state to be Visible
-//		category.setVisible(true);
-//		category.setInitialState(PaletteDrawer.INITIAL_STATE_CLOSED);
-//		
-//		String prefix = category.getDefaultPrefix();
-//		if (prefix == null || prefix.length() == 0) {
-//			category.setDefaultPrefix(tldDoc.getShortname());
-//		}
-//		String label = category.getLabel();
-//		if (label == null || label.length() == 0) {
-//			label = tldDoc.getDisplayName();
-//			if (label == null || label.length() == 0)
-//				label = tldURI;
-//			category.setLabel(label);
-//		}
-//		String desc = category.getDescription();
-//		if (desc == null || desc.length() == 0) {
-//			desc = tldDoc.getDescription();
-//			if (desc == null || desc.length() == 0) 
-//				desc = tldURI;
-//			category.setDescription(desc);
-//		}
-//		loadFromCMDocument(category, tldDoc);
-//		
-//	}
+
+
+// how many characters to truncate a palette item's description to.
+// TODO: add preference?
+// the soft length is the ideal length we try to truncate to. We first
+// try to find a period (end of sentence; TODO: should have a character class)
+// inside the first SOFT_LENGTH chars at which to truncate a description string.
+// if we can't find one then we search for the first one between SOFT_LENGTH
+// and min(HARD_LENGTH, str.length()).  If found, we truncate there.  If not,
+// we truncate to HARD_LENGTH-" ...".length() and append the ellipsis.
+// In all cases the truncated description string returned should <= HARD_LENGTH.
+//	private final static int  DESCRIPTION_TRUNCATE_SOFT_LENGTH = 150;
+	private final static int  DESCRIPTION_TRUNCATE_HARD_LENGTH = 250;
 	
-
-	public static void configPaletteItemsByTLD(IPaletteItemManager manager, IProject project,
+	
+	/**
+	 * Creates a TaglibPaletteDrawer with TagTool palette entries for each tag from the CMDocument
+	 * @param manager
+	 * @param project
+	 * @param doc
+	 * @return TaglibPaletteDrawer
+	 */
+	public static TaglibPaletteDrawer configPaletteItemsByTLD(IPaletteItemManager manager, IProject project,
 			CMDocument doc) {
-//bit of a hack... could be greatly improved		
+		//bit of a hack... could be greatly improved		
 		String tldURI = null;
 		if (doc instanceof TLDDocument){
 			tldURI = ((TLDDocument)doc).getUri();
@@ -126,25 +105,43 @@ private final static ImageDescriptor DEFAULT_LARGE_ICON = PDPlugin
 		}
 		
 		if (tldURI == null) 
-			return;
+			return null;
 			
 		TaglibPaletteDrawer category = findCategory(manager, tldURI);
 		if (category != null) 
-			return;
+			return category;
 		
 		IMetaDataModelContext modelContext = MetaDataQueryHelper.createMetaDataModelContext(project, MetaDataQueryHelper.TAGLIB_DOMAIN, tldURI);
 		Model model = MetaDataQueryHelper.getModel(modelContext);
 		category = createTaglibPaletteDrawer(manager, doc, model);
 		
 		if (category != null){		
-			loadTags(category, doc, model);			
+			loadTags(category, doc, model);		
+			sortTags(category.getChildren());
 		}
+		return category;
+	}
+
+	private static void sortTags(List tags) {
+		//note that once we store ordering customizations, we will need to do something different
+		//it will also be complicated if we decide to do 181958 and 181866
+		Collections.sort(tags, new Comparator(){
+
+			public int compare(Object o1, Object o2) {
+				String label1 = ((PaletteEntry)o1).getLabel();
+				String label2 = ((PaletteEntry)o2).getLabel();
+				
+				return label1.compareTo(label2);
+			}
+			
+		});
+		
 	}
 
 	private static void loadTags(TaglibPaletteDrawer category,
 			CMDocument doc,Model model) {
 		
-		if (model != null) {
+		if (model != null) {//load from metadata - should always drop in here
 			Trait trait = MetaDataQueryHelper.getTrait(model, "paletteInfos");
 			if (trait != null){
 				PaletteInfos tags = (PaletteInfos)trait.getValue();
@@ -159,10 +156,10 @@ private final static ImageDescriptor DEFAULT_LARGE_ICON = PDPlugin
 				}
 			}
 		}
-		else {
+		else {//fail safe loading from cmDoc... should no longer go in here 
 			loadFromCMDocument(category, doc);
 		}
-			
+		
 	}
 
 	private static TaglibPaletteDrawer createTaglibPaletteDrawer(IPaletteItemManager manager,
@@ -181,12 +178,11 @@ private final static ImageDescriptor DEFAULT_LARGE_ICON = PDPlugin
 			category = manager.createTaglibPaletteDrawer(model.getId(), label);
 			
 			String desc = getStringTagTraitValue(model, "description", model.getId());
-			category.setDescription(StringUtil.filterConvertString(desc));
+			category.setDescription(formatDescription(desc));
 			
 			ImageDescriptor largeIconImage = getImageDescriptorFromTagTraitValueAsString(model, "small-icon", null);
 			if (largeIconImage != null)
-				category.setLargeIcon(largeIconImage);
-			
+				category.setLargeIcon(largeIconImage);			
 			
 			String prefix = getStringTagTraitValue(model, "default-prefix", null);
 			category.setDefaultPrefix(prefix);
@@ -197,31 +193,6 @@ private final static ImageDescriptor DEFAULT_LARGE_ICON = PDPlugin
 			category.setInitialState(PaletteDrawer.INITIAL_STATE_CLOSED);
 		
 		}
-//		else { //shouldn't get here!
-//			category = manager.createTaglibPaletteDrawer(tldDoc.getUri(), tldDoc.getDescription());
-//
-//			category.setVisible(true);
-//			category.setInitialState(PaletteDrawer.INITIAL_STATE_CLOSED);
-//			
-//			String prefix = category.getDefaultPrefix();
-//			if (prefix == null || prefix.length() == 0) {
-//				category.setDefaultPrefix(tldDoc.getShortname());
-//			}
-//			String label = category.getLabel();
-//			if (label == null || label.length() == 0) {
-//				label = tldDoc.getDisplayName();
-//				if (label == null || label.length() == 0)
-//					label = tldDoc.getUri();
-//				category.setLabel(label);
-//			}
-//			String desc = category.getDescription();
-//			if (desc == null || desc.length() == 0) {
-//				desc = tldDoc.getDescription();
-//				if (desc == null || desc.length() == 0) 
-//					desc = tldDoc.getUri();
-//				category.setDescription(desc);
-//			}
-//		}
 		return category;
 	}
 
@@ -236,19 +207,20 @@ private final static ImageDescriptor DEFAULT_LARGE_ICON = PDPlugin
 		return null;
 	}
 
-	/**
-	 * basically, this method will read information from the CMDocument. It will
+	/* (non-JavaDoc)
+	 * This method will read information from the CMDocument to create the tag entries. It will
 	 * check the existing items in the registry. If the corresponding tag is not
 	 * in palette manager, then it will create one, and mark the newly created
 	 * item as "expert". Otherwise, it will check whether the tld contains more
 	 * information than the palette manager, and adding those information to it
 	 * (such as description, icons for tags)
 	 * 
-	 * @param manager
-	 * @param tldDoc
+	 * @param category 
+	 * @param cmdoc
 	 */
-	public static void loadFromCMDocument(TaglibPaletteDrawer category,
+	private static void loadFromCMDocument(TaglibPaletteDrawer category,
 			CMDocument cmdoc) {
+		
 		CMNamedNodeMap nodeMap = cmdoc.getElements();
 		for (int i = 0, size = nodeMap.getLength(); i < size; i++) {
 			CMElementDeclaration eledecl = (CMElementDeclaration) nodeMap
@@ -266,8 +238,6 @@ private final static ImageDescriptor DEFAULT_LARGE_ICON = PDPlugin
 				createTagEntry(category, eledecl);
 
 			}
-//			configItem(item, eledecl);
-//			item.setDefaultPrefix(category.getDefaultPrefix());
 		}
 	}
 	
@@ -282,7 +252,7 @@ private final static ImageDescriptor DEFAULT_LARGE_ICON = PDPlugin
 		String tagName = info.getTag();
 		String id = info.getId();		
 		String label = info.getDisplayLabel();
-		String desc = StringUtil.filterConvertString(info.getDescription());		
+		String desc = formatDescription(info.getDescription());		
 		ImageDescriptor smallIcon = getImageDescriptorFromString(sourceProvider, info.getSmallIcon(), DEFAULT_SMALL_ICON);
 		ImageDescriptor largeIcon = getImageDescriptorFromString(sourceProvider, info.getLargeIcon(), DEFAULT_LARGE_ICON);
 		Boolean expert = info.getExpert();
@@ -300,7 +270,7 @@ private final static ImageDescriptor DEFAULT_LARGE_ICON = PDPlugin
 		
 		String tagName = entity.getId();
 		String label = getStringTagTraitValue(entity, "display-label", tagName);
-		String desc = StringUtil.filterConvertString(getStringTagTraitValue(entity, "description", tagName));		
+		String desc = formatDescription(getStringTagTraitValue(entity, "description", tagName));		
 		ImageDescriptor smallIcon = getImageDescriptorFromTagTraitValueAsString(entity, "small-icon", DEFAULT_SMALL_ICON);
 		ImageDescriptor largeIcon = getImageDescriptorFromTagTraitValueAsString(entity, "large-icon", DEFAULT_LARGE_ICON);
 		boolean expert = getBooleanTagTraitValue(entity, "expert", false);
@@ -311,8 +281,6 @@ private final static ImageDescriptor DEFAULT_LARGE_ICON = PDPlugin
 
 	private static TagToolPaletteEntry internalCreateTagEntry(TaglibPaletteDrawer category, String id, String tagName, String label, String desc, ImageDescriptor smallIcon, ImageDescriptor largeIcon, boolean expert){
 		TagToolPaletteEntry item = new TagToolPaletteEntry(tagName, label, desc, smallIcon, largeIcon);
-//		StringBuffer name = new StringBuffer(category.getURI());
-//		name.append(":").append(tagName).append(":").append(tagName);
 		item.setId(id);
 		
 		item.setVisible(!expert);
@@ -376,227 +344,51 @@ private final static ImageDescriptor DEFAULT_LARGE_ICON = PDPlugin
 		if (desc == null )
 			desc = "";
 		else
-			desc = StringUtil.filterConvertString(desc);
+			desc = formatDescription(desc);
 		
 		TagToolPaletteEntry item = internalCreateTagEntry(category, tagName, tagName, label, desc, getDefaultSmallIcon(), getDefaultLargeIcon(), false);
 		item.setToolProperty("CMElementDeclaration", eledecl);
-//		TagToolPaletteEntry item = new TagToolPaletteEntry(tagName, label, desc, getDefaultSmallIcon(), getDefaultLargeIcon());
-//		StringBuffer name = new StringBuffer(category.getURI());
-//		name.append(":").append(tagName).append(":").append(tagName);//what is this?
-//		item.setId(name.toString());
-//		category.getChildren().add(item);
-//		item.setParent(category);
-//		// for newly created item, set expert to true.
-//		item.setVisible(true);
-//		if (category.getURI().equals(IJMTConstants.URI_HTML))//$NON-NLS-1$
-//		{
-////			item.setVisible(false);
-//		}
 		
 	}
-//
-//	/**
-//	 * @param item
-//	 * @param eledecl
-//	 */
-//	private static void configItem(TagToolPaletteEntry item,
-//			CMElementDeclaration eledecl) {
-//		if (eledecl instanceof HTMLElementDeclaration) {
-//			// TODO: does nothing: configHTMLItem(item, (HTMLElementDeclaration) eledecl);
-//		} else if (eledecl instanceof TLDElementDeclaration) {
-//			configTLDItem(item, (TLDElementDeclaration) eledecl);
-//		}
-//	}
-
-//	/**
-//	 * @param item
-//	 * @param declaration
-//	 */
-//	private static void configTLDItem(TagToolPaletteEntry item,
-//			TLDElementDeclaration declaration) {
-//		String olddesc = item.getDescription();
-//		if (olddesc == null || olddesc.length() == 0) {
-//			String des = declaration.getDescription();
-//			des = StringUtil.filterConvertString(des);
-//			item.setDescription(des);
-//		}
-//	}
-
-	/**
-	 * @param item
-	 * @param declaration
-	 */
-//	private static void configHTMLItem(IPaletteItemDescriptor item,
-//			HTMLElementDeclaration declaration) {
-//        // TODO: does nothing
-//	}
-
-	public static void readConfigFromPlugin(IPaletteItemManager manager) {
-		IExtensionRegistry extensionRegistry = Platform.getExtensionRegistry();
-		IExtensionPoint point = extensionRegistry
-				.getExtensionPoint(PDPlugin.getPluginId(),
-						IJMTConstants.EXTENSION_POINT_PALETTEITEMCONFIG);
-		if (point != null) {
-			IConfigurationElement[] elements = point.getConfigurationElements();
-			Arrays.sort(elements, new Comparator() {
-				/*
-				 * (non-Javadoc)
-				 * 
-				 * @see java.util.Comparator#compare(java.lang.Object,
-				 *      java.lang.Object)
-				 */
-				public int compare(Object o1, Object o2) {
-					IConfigurationElement d1 = (IConfigurationElement) o1;
-					IConfigurationElement d2 = (IConfigurationElement) o2;
-					return d1
-							.getAttribute(
-									IJMTConstants.ATTRIBUTE_INDEX_PALETTEITEMCONFIG)
-							.compareToIgnoreCase(
-									d2
-											.getAttribute(IJMTConstants.ATTRIBUTE_INDEX_PALETTEITEMCONFIG));
-				}
-			});
-			for (int i = 0, size = elements.length; i < size; i++) {
-				//IConfigurationElement ce = elements[i];
-				//String id = ce.getDeclaringExtension().getNamespaceIdentifier();
-				//readConfig(manager, bundle, path);
-			}
-		}
-
-	}
-
-	static void readConfigX(IPaletteItemManager manager, Bundle bundle,
-			String path) {
-		try {
-			if (bundle.getEntry(path) == null) {
-				return;
-			}
-			InputStream stream = bundle.getEntry(path).openStream();
-			DocumentBuilder builder = DocumentBuilderFactory.newInstance()
-					.newDocumentBuilder();
-			Document doc = builder.parse(stream);
-			ResourceUtils.ensureClosed(stream);
-
-			NodeList categories = doc
-					.getElementsByTagName(IPaletteConstants.CATEGORY_TAG);
-			for (int i = 0, ilength = categories.getLength(); i < ilength; i++) {
-				Element cat = (Element) categories.item(i);
-//				String prefix = cat.getAttribute(IPaletteConstants.ICONPREFIX);
-				String uri = cat.getAttribute(IPaletteConstants.URI);
-				String catlabel = cat.getAttribute(IPaletteConstants.LABEL);
-				/*FIXME: TaglibPaletteDrawer category =*/ manager.findOrCreateCategory(
-						uri, catlabel);
-				
-	//FIXME			
-//				String jsfComponentCategory = cat
-//						.getAttribute(IPaletteConstants.JSFCOMPONENTCATEGORY);
-//				boolean bJSF = Boolean.TRUE.toString().equalsIgnoreCase(
-//						jsfComponentCategory);
-//				if (bJSF) {
-//					// avoid override. maybe someother place has already set it
-//					// to be true.
-//					category.setJSFComponentCategory(bJSF);
-//				}
-
-// FIXME:				NodeList items = cat
-//						.getElementsByTagName(IPaletteConstants.ITEM_TAG);
-//FIX ME
-//				for (int j = 0, jlength = items.getLength(); j < jlength; j++) {
-//					Element item = (Element) items.item(j);
-//					PaletteItemDescriptor descriptor = new PaletteItemDescriptor();
-//					descriptor.setJSFComponent(category
-//							.isJSFComponentCategory());
-//					descriptor.setURI(uri);
-//
-//					String tagName = item
-//							.getAttribute(IPaletteConstants.TAGNAME);
-//					descriptor.setTagName(tagName);
-//
-//					String label = item.getAttribute(IPaletteConstants.LABEL);
-//					descriptor.setLabel(label);
-//
-//					StringBuffer id = new StringBuffer(uri);
-//					id.append(":").append(tagName).append(":").append(label);
-//					descriptor.setId(id.toString());
-//
-//					String shortDesc = item
-//							.getAttribute(IPaletteConstants.SHORTDESC);
-//					descriptor.setDescription(shortDesc);
-//
-//					String smallIcon = item
-//							.getAttribute(IPaletteConstants.SMALLICON);
-//					descriptor.setSmallIcon(getImageDescriptor(bundle, prefix,
-//							smallIcon));
-//
-//					String largeIcon = item
-//							.getAttribute(IPaletteConstants.LARGEICON);
-//					descriptor.setLargeIcon(getImageDescriptor(bundle, prefix,
-//							largeIcon));
-//
-//					String expert = item.getAttribute(IPaletteConstants.EXPERT);
-//					boolean isVisible = !Boolean.TRUE.toString()
-//							.equalsIgnoreCase(expert); //$NON-NLS-1$
-//					descriptor.setVisible(isVisible);
-//
-//					String requireHForm = item
-//							.getAttribute(IPaletteConstants.REQUIREHFORM);
-//					boolean r = Boolean.TRUE.toString().equalsIgnoreCase(
-//							requireHForm);
-//					descriptor.setRequireHForm(r);
-//
-//					NodeList attributes = item
-//							.getElementsByTagName(IPaletteConstants.ATTRIBUTE_TAG);
-//					if (attributes.getLength() > 0) {
-//						Map attrMap = new HashMap();
-//						for (int k = 0, klength = attributes.getLength(); k < klength; k++) {
-//							Element attr = (Element) attributes.item(k);
-//							String name = attr
-//									.getAttribute(IPaletteConstants.NAME);
-//							String value = attr
-//									.getAttribute(IPaletteConstants.VALUE);
-//							attrMap.put(name, value);
-//						}
-//						descriptor.setInitialAttributes(attrMap);
-//					}
-//
-//					descriptor.setTemplateSubNodes(PaletteElementTemplateHelper
-//							.readTemplate(item));
-////					category.addPaletteItem(descriptor);
-//				}
-			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-	}
-
-	/**
-	 * @param plugin
-	 * @param prefix
-	 * @param smallIcon2
-	 * @return
-	 */
-	// FIXME: dead?
-//	private static ImageDescriptor getImageDescriptor(Bundle bundle,
-//			String prefix, String u) {
-//		if (u == null || u.length() == 0) {
-//			return null;
-//		}
-//		String path = (prefix == null ? "" : prefix) + u;
-//		URL url = bundle.getEntry(path);
-//		return ImageDescriptor.createFromURL(url);
-//	}
 	
 	/**
-	 * @return
+	 * @return DEFAULT_LARGE_ICON
 	 */
 	private static ImageDescriptor getDefaultLargeIcon() {
 		return DEFAULT_LARGE_ICON;
 	}
 
 	/**
-	 * @return
+	 * @return DEFAULT_SMALL_ICON
 	 */
 	private static ImageDescriptor getDefaultSmallIcon() {
 		return DEFAULT_SMALL_ICON;
+	}
+	
+	private static String formatDescription(final String desc) {
+		//TODO: modify and use a formatter in the future?
+		String aDesc = filterConvertString(desc);
+		if (aDesc != null){
+			if (aDesc.length() > DESCRIPTION_TRUNCATE_HARD_LENGTH) {
+				StringBuffer result = new StringBuffer(aDesc.substring(0, DESCRIPTION_TRUNCATE_HARD_LENGTH));
+				result.append("...");
+				return result.toString();
+			}
+			return aDesc;
+
+		}
+		return "";
+	}
+	
+	private static String filterConvertString(String text) {
+		if (text == null) {
+			return "";
+		}
+         
+		String result = removeHTMLTags.matcher(text).replaceAll("");
+		result = removeNewLines.matcher(result).replaceAll(" ");
+        result = trimInteriorWhitespace.matcher(result).replaceAll(" ");        
+
+		return result;
 	}
 }
