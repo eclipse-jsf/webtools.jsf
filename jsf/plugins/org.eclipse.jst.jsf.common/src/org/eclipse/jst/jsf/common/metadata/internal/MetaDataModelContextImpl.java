@@ -34,21 +34,21 @@ public class MetaDataModelContextImpl implements IMetaDataModelContext, Cloneabl
 		this.uri = uri;
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IMetaDataModelContext#getDomain()
+	 * @see org.eclipse.jst.jsf.common.metadata.query.IMetaDataModelContext#getDomain()
 	 */
 	public String getDomain() {
 		return domain;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IMetaDataModelContext#getProject()
+	 * @see org.eclipse.jst.jsf.common.metadata.query.IMetaDataModelContext#getProject()
 	 */
 	public IProject getProject() {		
 		return project;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IMetaDataModelContext#getURI()
+	 * @see org.eclipse.jst.jsf.common.metadata.query.IMetaDataModelContext#getURI()
 	 */
 	public String getURI() {
 		return uri;

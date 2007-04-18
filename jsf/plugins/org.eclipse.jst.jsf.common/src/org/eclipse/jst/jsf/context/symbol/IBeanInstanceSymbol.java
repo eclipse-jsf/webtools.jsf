@@ -40,7 +40,7 @@ public interface IBeanInstanceSymbol extends IInstanceSymbol, IDescribedInDetail
 	 * <!-- end-user-doc -->
      * @return the value of the '<em>Properties</em>' reference list.
      * @see org.eclipse.jst.jsf.context.symbol.SymbolPackage#getIBeanInstanceSymbol_Properties()
-     * @model type="org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanPropertySymbol" changeable="false" volatile="true"
+     * @model type="org.eclipse.jst.jsf.context.symbol.IBeanPropertySymbol" changeable="false" volatile="true"
      * @generated
      */
 	EList getProperties();
@@ -56,7 +56,7 @@ public interface IBeanInstanceSymbol extends IInstanceSymbol, IDescribedInDetail
 	 * <!-- end-user-doc -->
      * @return the value of the '<em>Methods</em>' reference list.
      * @see org.eclipse.jst.jsf.context.symbol.SymbolPackage#getIBeanInstanceSymbol_Methods()
-     * @model type="org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanMethodSymbol" changeable="false" volatile="true"
+     * @model type="org.eclipse.jst.jsf.context.symbol.IBeanMethodSymbol" changeable="false" volatile="true"
      * @generated
      */
 	EList getMethods();

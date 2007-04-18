@@ -37,7 +37,7 @@ public class DOMContextResolver implements IDOMContextResolver
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.IDOMContextResolver#getDOMDocument()
+	 * @see org.eclipse.jst.jsf.context.resolver.structureddocument.IDOMContextResolver#getDOMDocument()
 	 */
 	public Document getDOMDocument() 
 	{

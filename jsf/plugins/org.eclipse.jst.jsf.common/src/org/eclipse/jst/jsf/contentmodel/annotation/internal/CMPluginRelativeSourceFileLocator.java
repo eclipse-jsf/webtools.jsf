@@ -51,7 +51,7 @@ public class CMPluginRelativeSourceFileLocator extends CMAnnotationSourceFileLoc
 	 * This implementation assumes that the basename of the bundle is the same 
 	 * as the source file name and in the same directory.
 	 * 
-	 * @see org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.ICMAnnotationSourceFileLocator#getResourceBundle()
+	 * @see org.eclipse.jst.jsf.contentmodel.annotation.ICMAnnotationSourceFileLocator#getResourceBundle()
 	 */
 	public ResourceBundle getResourceBundle() throws IOException, MalformedURLException {
 		URL bundleURL = getAnnotationPropertiesFileBasenameURL();

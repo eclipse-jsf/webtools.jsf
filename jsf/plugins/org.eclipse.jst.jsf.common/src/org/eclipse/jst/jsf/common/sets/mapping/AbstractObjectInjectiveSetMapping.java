@@ -15,7 +15,7 @@ public abstract class AbstractObjectInjectiveSetMapping implements
         ObjectInjectiveSetMapping {
 
     /* (non-Javadoc)
-     * @see org.eclipse.jst.jsf.common.sets.internal.provisional.mapping.ObjectInjectiveSetMapping#mapIterator(org.eclipse.jst.jsf.common.sets.internal.provisional.AxiomaticSet)
+     * @see org.eclipse.jst.jsf.common.sets.mapping.ObjectInjectiveSetMapping#mapIterator(org.eclipse.jst.jsf.common.sets.AxiomaticSet)
      */
     public Iterator mapIterator(final AxiomaticSet set) 
     {
@@ -47,7 +47,7 @@ public abstract class AbstractObjectInjectiveSetMapping implements
     public abstract Object map(Object element);
     
     /* (non-Javadoc)
-     * @see org.eclipse.jst.jsf.common.sets.internal.provisional.mapping.AxiomaticSetMapping#map(org.eclipse.jst.jsf.common.sets.internal.provisional.AxiomaticSet)
+     * @see org.eclipse.jst.jsf.common.sets.mapping.AxiomaticSetMapping#map(org.eclipse.jst.jsf.common.sets.AxiomaticSet)
      */
     public final AxiomaticSet map(AxiomaticSet set) {
        AxiomaticSet resultSet = new ConcreteAxiomaticSet();

@@ -71,7 +71,7 @@ public class MetaDataModelMergeAssistantImpl implements
 
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.common.metadata.internal.IMetaDataModelMergeAssistant#addEntityGroup(org.eclipse.jst.jsf.common.metadata.internal.provisional.EntityGroup)
+	 * @see org.eclipse.jst.jsf.common.metadata.internal.IMetaDataModelMergeAssistant#addEntityGroup(org.eclipse.jst.jsf.common.metadata.EntityGroup)
 	 */
 	public void addEntityGroup(EntityGroup entityGroup) {
 		Model model = (Model)getMergedModel().getRoot();
@@ -81,7 +81,7 @@ public class MetaDataModelMergeAssistantImpl implements
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.common.metadata.internal.IMetaDataModelMergeAssistant#addEntity(org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity)
+	 * @see org.eclipse.jst.jsf.common.metadata.internal.IMetaDataModelMergeAssistant#addEntity(org.eclipse.jst.jsf.common.metadata.Entity)
 	 */
 	public boolean addEntity(final Entity entity) {
 		Entity mmEntity = getMergedEntity(entity);
@@ -172,7 +172,7 @@ public class MetaDataModelMergeAssistantImpl implements
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.common.metadata.internal.IMetaDataModelMergeAssistant#addTrait(org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity, org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait)
+	 * @see org.eclipse.jst.jsf.common.metadata.internal.IMetaDataModelMergeAssistant#addTrait(org.eclipse.jst.jsf.common.metadata.Entity, org.eclipse.jst.jsf.common.metadata.Trait)
 	 */
 	public boolean addTrait(Entity entity, Trait trait) {
 		Entity returnedEntity = getMergedEntity(entity);

@@ -35,7 +35,7 @@ public abstract class AbstractSymbolSourceProviderFactory implements
     }
     
     /* (non-Javadoc)
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.source.ISymbolSourceProviderFactory#createInstance(org.eclipse.core.resources.IProject)
+     * @see org.eclipse.jst.jsf.context.symbol.source.ISymbolSourceProviderFactory#createInstance(org.eclipse.core.resources.IProject)
      */
     public final ISymbolSourceProvider createInstance(IProject project) 
     {

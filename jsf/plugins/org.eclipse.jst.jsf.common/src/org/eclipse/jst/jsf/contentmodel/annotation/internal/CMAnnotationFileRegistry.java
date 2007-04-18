@@ -32,7 +32,7 @@ import org.eclipse.osgi.util.NLS;
  * Using the CMAnnotationFileRegistryReader, extenders of <code>org.eclipse.jst.jsf.contentmodel.annotations.annotationFiles</code> are loaded
  * into the annotationFilesMap keyed by uri.   There can be multiple annotationFiles mapped to the same uri.
  * 
- * This registry should only be accessed by clients using the <code>org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.CMAnnotationHelper</code>.
+ * This registry should only be accessed by clients using the <code>org.eclipse.jst.jsf.contentmodel.annotation.CMAnnotationHelper</code>.
  * Only when the system attempts to access an annotation for a content model, will the file be parsed and cached.
  * 
  * When queried, CMAnnotationPropertyValue objects are returned for each named property found in each annotation file for a particular uri.

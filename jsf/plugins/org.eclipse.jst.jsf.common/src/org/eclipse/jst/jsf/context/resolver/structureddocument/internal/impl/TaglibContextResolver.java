@@ -45,7 +45,7 @@ class TaglibContextResolver implements ITaglibContextResolver
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.ITaglibContextResolver#getTagPrefixForURI(java.lang.String)
+	 * @see org.eclipse.jst.jsf.context.resolver.structureddocument.ITaglibContextResolver#getTagPrefixForURI(java.lang.String)
 	 */
 	public String getTagPrefixForURI(String uri) 
 	{
@@ -94,7 +94,7 @@ class TaglibContextResolver implements ITaglibContextResolver
     }
     
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.ITaglibContextResolver#getTagURIForNodeName(org.w3c.dom.Node)
+	 * @see org.eclipse.jst.jsf.context.resolver.structureddocument.ITaglibContextResolver#getTagURIForNodeName(org.w3c.dom.Node)
 	 */
 	public String getTagURIForNodeName(final Node node) 
     {
@@ -119,7 +119,7 @@ class TaglibContextResolver implements ITaglibContextResolver
 
 
 	/* (non-Javadoc)
-     * @see org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.ITaglibContextResolver#getTagsByNamespaceURI(java.lang.String, java.lang.String)
+     * @see org.eclipse.jst.jsf.context.resolver.structureddocument.ITaglibContextResolver#getTagsByNamespaceURI(java.lang.String, java.lang.String)
      */
     public NodeList getTagsByNamespaceURI(String uri, String tagName) 
 	{

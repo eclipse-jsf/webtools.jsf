@@ -48,7 +48,7 @@ public interface Model extends Entity {
 	 * @return the value of the '<em>Source Model Provider</em>' attribute.
 	 * @see #setSourceModelProvider(IMetaDataSourceModelProvider)
 	 * @see org.eclipse.jst.jsf.common.metadata.MetadataPackage#getModel_SourceModelProvider()
-	 * @model unique="false" dataType="org.eclipse.jst.jsf.common.metadata.internal.provisional.IMetaDataSourceModelProvider" transient="true" volatile="true"
+	 * @model unique="false" dataType="org.eclipse.jst.jsf.common.metadata.IMetaDataSourceModelProvider" transient="true" volatile="true"
 	 * @generated
 	 */
 	IMetaDataSourceModelProvider getSourceModelProvider();
@@ -74,7 +74,7 @@ public interface Model extends Entity {
 	 * @return the value of the '<em>Current Model Context</em>' attribute.
 	 * @see #setCurrentModelContext(ModelKeyDescriptor)
 	 * @see org.eclipse.jst.jsf.common.metadata.MetadataPackage#getModel_CurrentModelContext()
-	 * @model dataType="org.eclipse.jst.jsf.common.metadata.internal.provisional.ModelContext" transient="true" volatile="true"
+	 * @model dataType="org.eclipse.jst.jsf.common.metadata.ModelContext" transient="true" volatile="true"
 	 * @generated
 	 */
 	ModelKeyDescriptor getCurrentModelContext();
@@ -100,7 +100,7 @@ public interface Model extends Entity {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Entity Groups</em>' reference list.
 	 * @see org.eclipse.jst.jsf.common.metadata.MetadataPackage#getModel_EntityGroups()
-	 * @model type="org.eclipse.jst.jsf.common.metadata.internal.provisional.EntityGroup"
+	 * @model type="org.eclipse.jst.jsf.common.metadata.EntityGroup"
 	 *        extendedMetaData="kind='element' name='entityGroup'"
 	 * @generated
 	 */
@@ -117,7 +117,7 @@ public interface Model extends Entity {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model visitorDataType="org.eclipse.jst.jsf.common.metadata.internal.provisional.IEntityVisitor"
+	 * @model visitorDataType="org.eclipse.jst.jsf.common.metadata.IEntityVisitor"
 	 * @generated
 	 */
 	void accept(IEntityVisitor visitor);

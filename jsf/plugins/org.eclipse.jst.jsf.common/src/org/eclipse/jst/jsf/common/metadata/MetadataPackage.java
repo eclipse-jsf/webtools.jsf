@@ -610,7 +610,7 @@ public interface MetadataPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>ITrait Visitor</em>'.
 	 * @see org.eclipse.jst.jsf.common.metadata.query.ITraitVisitor
-	 * @model instanceClass="org.eclipse.jst.jsf.common.metadata.internal.provisional.query.ITraitVisitor" serializable="false"
+	 * @model instanceClass="org.eclipse.jst.jsf.common.metadata.query.ITraitVisitor" serializable="false"
 	 * @generated
 	 */
 	EDataType getITraitVisitor();
@@ -621,7 +621,7 @@ public interface MetadataPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>IEntity Visitor</em>'.
 	 * @see org.eclipse.jst.jsf.common.metadata.query.IEntityVisitor
-	 * @model instanceClass="org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IEntityVisitor" serializable="false"
+	 * @model instanceClass="org.eclipse.jst.jsf.common.metadata.query.IEntityVisitor" serializable="false"
 	 * @generated
 	 */
 	EDataType getIEntityVisitor();

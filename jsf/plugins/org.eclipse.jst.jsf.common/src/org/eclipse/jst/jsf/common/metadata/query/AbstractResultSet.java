@@ -29,7 +29,7 @@ public abstract class AbstractResultSet/*<T>*/ implements IResultSet/*<T>*/ {
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IResultSet#close()
+	 * @see org.eclipse.jst.jsf.common.metadata.query.IResultSet#close()
 	 */
 	public void close() {
 		//nothing to do really

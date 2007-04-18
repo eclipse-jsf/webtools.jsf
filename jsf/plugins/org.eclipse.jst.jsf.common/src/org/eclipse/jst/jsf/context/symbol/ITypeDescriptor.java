@@ -41,7 +41,7 @@ public interface ITypeDescriptor extends EObject {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Properties</em>' reference list.
      * @see org.eclipse.jst.jsf.context.symbol.SymbolPackage#getITypeDescriptor_Properties()
-     * @model type="org.eclipse.jst.jsf.context.symbol.internal.provisional.IPropertySymbol" volatile="true"
+     * @model type="org.eclipse.jst.jsf.context.symbol.IPropertySymbol" volatile="true"
      * @generated
      */
     EList getProperties();
@@ -131,7 +131,7 @@ public interface ITypeDescriptor extends EObject {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Methods</em>' reference list.
      * @see org.eclipse.jst.jsf.context.symbol.SymbolPackage#getITypeDescriptor_Methods()
-     * @model type="org.eclipse.jst.jsf.context.symbol.internal.provisional.IMethodSymbol" volatile="true"
+     * @model type="org.eclipse.jst.jsf.context.symbol.IMethodSymbol" volatile="true"
      * @generated
      */
     EList getMethods();

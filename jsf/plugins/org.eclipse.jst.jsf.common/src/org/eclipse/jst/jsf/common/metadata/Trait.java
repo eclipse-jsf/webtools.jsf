@@ -100,7 +100,7 @@ public interface Trait extends EObject {
 	 * @return the value of the '<em>Source Model Provider</em>' attribute.
 	 * @see #setSourceModelProvider(IMetaDataSourceModelProvider)
 	 * @see org.eclipse.jst.jsf.common.metadata.MetadataPackage#getTrait_SourceModelProvider()
-	 * @model dataType="org.eclipse.jst.jsf.common.metadata.internal.provisional.IMetaDataSourceModelProvider"
+	 * @model dataType="org.eclipse.jst.jsf.common.metadata.IMetaDataSourceModelProvider"
 	 * @generated
 	 */
 	IMetaDataSourceModelProvider getSourceModelProvider();
@@ -118,7 +118,7 @@ public interface Trait extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model visitorDataType="org.eclipse.jst.jsf.common.metadata.internal.provisional.ITraitVisitor"
+	 * @model visitorDataType="org.eclipse.jst.jsf.common.metadata.query.ITraitVisitor"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='visitor.visit(this);'"
 	 * @generated
 	 */

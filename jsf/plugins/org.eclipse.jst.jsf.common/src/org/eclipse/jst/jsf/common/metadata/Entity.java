@@ -49,7 +49,7 @@ public interface Entity extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Child Entities</em>' containment reference list.
 	 * @see org.eclipse.jst.jsf.common.metadata.MetadataPackage#getEntity_ChildEntities()
-	 * @model type="org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity" containment="true"
+	 * @model type="org.eclipse.jst.jsf.common.metadata.Entity" containment="true"
 	 *        extendedMetaData="kind='element' name='entity'"
 	 * @generated
 	 */
@@ -66,7 +66,7 @@ public interface Entity extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Traits</em>' containment reference list.
 	 * @see org.eclipse.jst.jsf.common.metadata.MetadataPackage#getEntity_Traits()
-	 * @model type="org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait" containment="true"
+	 * @model type="org.eclipse.jst.jsf.common.metadata.Trait" containment="true"
 	 *        extendedMetaData="kind='element' name='trait'"
 	 * @generated
 	 */
@@ -135,7 +135,7 @@ public interface Entity extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Include Groups</em>' reference list.
 	 * @see org.eclipse.jst.jsf.common.metadata.MetadataPackage#getEntity_IncludeGroups()
-	 * @model type="org.eclipse.jst.jsf.common.metadata.internal.provisional.IncludeEntityGroup"
+	 * @model type="org.eclipse.jst.jsf.common.metadata.IncludeEntityGroup"
 	 *        extendedMetaData="kind='element' name='include-entity-group'"
 	 * @generated
 	 */
@@ -144,7 +144,7 @@ public interface Entity extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model visitorDataType="org.eclipse.jst.jsf.common.metadata.internal.provisional.IEntityVisitor"
+	 * @model visitorDataType="org.eclipse.jst.jsf.common.metadata.query.IEntityVisitor"
 	 * @generated
 	 */
 	void accept(IEntityVisitor visitor);

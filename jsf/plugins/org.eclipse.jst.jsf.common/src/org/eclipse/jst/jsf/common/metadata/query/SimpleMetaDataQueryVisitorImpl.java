@@ -53,7 +53,7 @@ public class SimpleMetaDataQueryVisitorImpl implements IEntityQueryVisitor, ITra
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.query.ITraitQueryVisitor#findTraits(org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity, java.lang.String)
+	 * @see org.eclipse.jst.jsf.common.metadata.query.ITraitQueryVisitor#findTraits(org.eclipse.jst.jsf.common.metadata.Entity, java.lang.String)
 	 */
 	public IResultSet/*<Trait>*/ findTraits(final Entity entity, final String traitQuery){
 		
@@ -71,7 +71,7 @@ public class SimpleMetaDataQueryVisitorImpl implements IEntityQueryVisitor, ITra
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.query.ITraitVisitor#visit(org.eclipse.jst.jsf.common.metadata.internal.provisional.Trait)
+	 * @see org.eclipse.jst.jsf.common.metadata.query.ITraitVisitor#visit(org.eclipse.jst.jsf.common.metadata.Trait)
 	 */
 	public void visit(Trait trait) {		
 		if (trait.equals(traitQuery))
@@ -82,7 +82,7 @@ public class SimpleMetaDataQueryVisitorImpl implements IEntityQueryVisitor, ITra
 
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IEntityQueryVisitor#findEntities(org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity, java.lang.String)
+	 * @see org.eclipse.jst.jsf.common.metadata.query.IEntityQueryVisitor#findEntities(org.eclipse.jst.jsf.common.metadata.Entity, java.lang.String)
 	 */
 	public IResultSet/*<Entity>*/ findEntities(Entity initialEntityContext,
 			String entityKey) {
@@ -122,7 +122,7 @@ public class SimpleMetaDataQueryVisitorImpl implements IEntityQueryVisitor, ITra
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IEntityVisitor#visit(org.eclipse.jst.jsf.common.metadata.internal.provisional.Entity)
+	 * @see org.eclipse.jst.jsf.common.metadata.query.IEntityVisitor#visit(org.eclipse.jst.jsf.common.metadata.Entity)
 	 */
 	public void visit(Entity key) {		
 		switch (entityComparator.compareTo(key)){
@@ -136,14 +136,14 @@ public class SimpleMetaDataQueryVisitorImpl implements IEntityQueryVisitor, ITra
 		checkShouldStopVisitingEntities();
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IEntityVisitor#visitCompleted()
+	 * @see org.eclipse.jst.jsf.common.metadata.query.IEntityVisitor#visitCompleted()
 	 */
 	public void visitCompleted() {
 		entityComparator.popContext();
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IMetaDataVisitor#stopVisiting()
+	 * @see org.eclipse.jst.jsf.common.metadata.query.IMetaDataVisitor#stopVisiting()
 	 */
 	public boolean stopVisiting() {
 		return _stop;

@@ -68,7 +68,7 @@ public class CMAnnotationFileParser implements ICMAnnotationFileParser {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.ICMAnnotationFileParser#parse(org.eclipse.jst.jsf.contentmodel.annotation.internal.ICMAnnotationAdvisor, org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional.CMAnnotationSourceFileLocator)
+	 * @see org.eclipse.jst.jsf.contentmodel.annotation.ICMAnnotationFileParser#parse(org.eclipse.jst.jsf.contentmodel.annotation.internal.ICMAnnotationAdvisor, org.eclipse.jst.jsf.contentmodel.annotation.CMAnnotationSourceFileLocator)
 	 */
 	public void parse(ICMAnnotationAdvisor advisor, CMAnnotationSourceFileLocator locator)
 			throws Exception {

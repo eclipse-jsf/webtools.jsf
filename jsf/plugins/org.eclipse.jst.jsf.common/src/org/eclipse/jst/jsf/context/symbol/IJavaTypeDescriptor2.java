@@ -53,7 +53,7 @@ public interface IJavaTypeDescriptor2 extends ITypeDescriptor {
      * @return the value of the '<em>Type</em>' attribute.
      * @see #setType(IType)
      * @see org.eclipse.jst.jsf.context.symbol.SymbolPackage#getIJavaTypeDescriptor2_Type()
-     * @model dataType="org.eclipse.jst.jsf.context.symbol.internal.provisional.IType"
+     * @model dataType="org.eclipse.jst.jsf.context.symbol.IType"
      * @generated
      */
 	IType getType();
@@ -79,7 +79,7 @@ public interface IJavaTypeDescriptor2 extends ITypeDescriptor {
 	 * <!-- end-user-doc -->
      * @return the value of the '<em>Bean Properties</em>' reference list.
      * @see org.eclipse.jst.jsf.context.symbol.SymbolPackage#getIJavaTypeDescriptor2_BeanProperties()
-     * @model type="org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanPropertySymbol" volatile="true"
+     * @model type="org.eclipse.jst.jsf.context.symbol.IBeanPropertySymbol" volatile="true"
      * @generated
      */
 	EList getBeanProperties();
@@ -95,7 +95,7 @@ public interface IJavaTypeDescriptor2 extends ITypeDescriptor {
 	 * <!-- end-user-doc -->
      * @return the value of the '<em>Bean Methods</em>' reference list.
      * @see org.eclipse.jst.jsf.context.symbol.SymbolPackage#getIJavaTypeDescriptor2_BeanMethods()
-     * @model type="org.eclipse.jst.jsf.context.symbol.internal.provisional.IBeanPropertySymbol" volatile="true"
+     * @model type="org.eclipse.jst.jsf.context.symbol.IBeanPropertySymbol" volatile="true"
      * @generated
      */
 	EList getBeanMethods();
