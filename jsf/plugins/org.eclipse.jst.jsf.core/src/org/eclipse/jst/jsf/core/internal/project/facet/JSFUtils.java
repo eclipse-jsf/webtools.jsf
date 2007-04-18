@@ -61,10 +61,21 @@ public class JSFUtils {
 	 * The name of the context parameter used for JSF configuration files
 	 */
 	public static final String JSF_CONFIG_CONTEXT_PARAM = "javax.faces.CONFIG_FILES"; //$NON-NLS-1$
+	
+	/**
+	 * The name of the context parameter used for defining the default JSP file extension
+	 */
+	public static final String JSF_DEFAULT_SUFFIX_CONTEXT_PARAM = "javax.faces.DEFAULT_SUFFIX"; //$NON-NLS-1$
+	
 	/**
 	 * The path to the default application configuration file
 	 */
-	public static final String JSF_DEFAULT_CONFIG_PATH = "/WEB-INF/faces-config.xml"; //$NON-NLS-1$
+	public static final String JSF_DEFAULT_CONFIG_PATH = "/WEB-INF/faces-config.xml"; 
+
+	/**
+	 * Default URL mapping to faces servlet
+	 */
+	public static final String JSF_DEFAULT_URL_MAPPING = "/faces/*"; //$NON-NLS-1$
 
 	/**
 	 * the key for implementation libraries in persistent properties

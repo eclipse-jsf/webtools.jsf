@@ -31,10 +31,8 @@ import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.Messages;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryReference;
-import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryRegistryUtil;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.ArchiveFile;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
-import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistry;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.wst.common.componentcore.datamodel.FacetInstallDataModelProvider;
 import org.eclipse.wst.common.componentcore.datamodel.properties.IFacetDataModelProperties;
@@ -78,13 +76,13 @@ public class JSFFacetInstallDataModelProvider extends
 		} else if (propertyName.equals(DEPLOY_IMPLEMENTATION)) {
 			return Boolean.TRUE;
 		} else if (propertyName.equals(CONFIG_PATH)) {
-			return JSFUtils.JSF_DEFAULT_CONFIG_PATH; //$NON-NLS-1$;
+			return JSFUtils.JSF_DEFAULT_CONFIG_PATH; 
 		} else if (propertyName.equals(SERVLET_NAME)) {
-			return JSFUtils.JSF_DEFAULT_SERVLET_NAME; //$NON-NLS-1$
+			return JSFUtils.JSF_DEFAULT_SERVLET_NAME;
 		} else if (propertyName.equals(SERVLET_CLASSNAME)) {
 			return JSFUtils.JSF_SERVLET_CLASS;	
 		} else if (propertyName.equals(SERVLET_URL_PATTERNS)) {
-			return new String[] { "*.faces" }; //$NON-NLS-1$
+			return new String[] {JSFUtils.JSF_DEFAULT_URL_MAPPING };
 		} else if (propertyName.equals(FACET_ID)) {
 			return IJSFCoreConstants.JSF_CORE_FACET_ID;
 		} else if (propertyName.equals(WEBCONTENT_DIR)){
@@ -98,16 +96,15 @@ public class JSFFacetInstallDataModelProvider extends
 		}
 		return super.getDefaultProperty(propertyName);
 	}
+	
 	public IStatus validate(String name) {
 		errorMessage = null;
-		if (name.equals(IMPLEMENTATION)) {//&& getBooleanProperty(DEPLOY_IMPLEMENTATION)
-			List libs = JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry().getJSFLibrariesByName(getStringPropertyWithDefaultStripped(IMPLEMENTATION_LIBRARIES));
-			JSFLibrary lib = ! libs.isEmpty() ? (JSFLibrary)libs.get(0) : null; 
-			IStatus status = validateImpl(lib);
+		if (name.equals(IMPLEMENTATION)) {
+			JSFLibraryReference lib = (JSFLibraryReference)getProperty(IMPLEMENTATION);
+			IStatus status = validateImpl(lib.getLibrary());
 			if (!OK_STATUS.equals(status))
-			{
 				return status;
-			}
+				
             return validateClasspath();
 		} else if (name.equals(CONFIG_PATH)) {
 			return validateConfigLocation(getStringProperty(CONFIG_PATH));
@@ -122,15 +119,6 @@ public class JSFFacetInstallDataModelProvider extends
 	
 	private IStatus createErrorStatus(String msg) {		
 		return new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID, msg);
-	}
-	
-	private String getStringPropertyWithDefaultStripped(String propertyName) {
-		String val = getStringProperty(propertyName);
-		if (val.endsWith(JSFLibraryRegistry.DEFAULT_IMPL_LABEL)){
-			val = val.substring(0, val.indexOf(JSFLibraryRegistry.DEFAULT_IMPL_LABEL)).trim();
-			setProperty(propertyName, val);
-		}		
-		return val;
 	}
 
 	private IStatus validateServletName(String servletName) {
@@ -214,21 +202,13 @@ public class JSFFacetInstallDataModelProvider extends
 					if (entry.getEntryKind() == IClasspathEntry.CPE_LIBRARY){
 						jars.add(entry.getPath().makeAbsolute().toString());
 					}
-//					else if (entry.getEntryKind() == IClasspathEntry.CPE_CONTAINER){
-//						IClasspathContainer cont = (IClasspathContainer)entry;
-//						for (int j=0;j<cont.getClasspathEntries().length;j++){
-//							jars.add(cont.getClasspathEntries()[j].getPath().makeAbsolute().toString());
-//						}
-//					}
 				}
 			} catch (JavaModelException e) {
 			    // FIXME: what should we do in this case?
 			    JSFCorePlugin.log(e, "Error searching class path");
 			}			
 		}
-		else {//as we do not have a javaProject yet, all we can do is validate that there is no duplicate jars (absolute path)
-	
-		}
+		//else as we do not have a javaProject yet, all we can do is validate that there is no duplicate jars (absolute path)
 		
 		IStatus status = null;
 		JSFLibraryReference ref =  ((JSFLibraryReference)getProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION));
