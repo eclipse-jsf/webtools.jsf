@@ -37,7 +37,7 @@ public class MetaDataProcessorsFactoryTests extends AbstractBaseMetaDataTestCase
 
 	/*
 	 * Test method for
-	 * 'org.eclipse.jst.jsf.metadataprocessors.internal.provisional.MetaDataEnabledProcessorsFactory.getAttributeValueRuntimeTypeProcessors(Class,
+	 * 'org.eclipse.jst.jsf.metadataprocessors.MetaDataEnabledProcessorsFactory.getAttributeValueRuntimeTypeProcessors(Class,
 	 * String, String, String)'
 	 */
 	public void testGetAttributeValueRuntimeTypeProcessors() {

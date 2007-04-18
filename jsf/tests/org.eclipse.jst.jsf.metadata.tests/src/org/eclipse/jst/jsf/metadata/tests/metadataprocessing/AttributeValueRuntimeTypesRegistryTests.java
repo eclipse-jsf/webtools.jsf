@@ -45,7 +45,7 @@ public class AttributeValueRuntimeTypesRegistryTests extends TestCase {
 		
 		Assert.assertTrue(type.getBundleID().equals(MetadataTestsPlugin.ID_BUNDLE));
 		Assert.assertTrue(type.getTypeID().equals(STRINGARRAYTYPE_ID));
-		Assert.assertTrue(type.getClassName().equals("org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.StringType"));
+		Assert.assertTrue(type.getClassName().equals("org.eclipse.jst.jsf.taglibprocessing.attributevalues.StringType"));
 		
 	}
 

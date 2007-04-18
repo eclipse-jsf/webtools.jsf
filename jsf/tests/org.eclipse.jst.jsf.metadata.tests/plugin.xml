@@ -34,13 +34,13 @@
    <extension
          point="org.eclipse.jst.jsf.core.AttributeValueRuntimeTypes">
       <attributeValueRuntimeType
-            class="org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.StringType"
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.StringType"
             id="MyStringArrayType"/>
       <attributeValueRuntimeType
             class="org.eclipse.jst.jsf.metadata.tests.metadataprocessing.types.MyBooleanType"
             id="MyBooleanType"/>
       <attributeValueRuntimeType
-            class="org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.LongType"
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.LongType"
             id="MyLongType"/>
       <attributeValueRuntimeType id="NoImplType"/>
    </extension>
