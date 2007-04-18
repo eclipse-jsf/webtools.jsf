@@ -57,7 +57,7 @@
                   The factory class to be used to instantiate new IDTExternalContext instances.
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn="org.eclipse.jst.jsf.designtime.internal.provisional.context.AbstractDTExternalContextFactory"/>
+                  <meta.attribute kind="java" basedOn="org.eclipse.jst.jsf.designtime.context.AbstractDTExternalContextFactory"/>
                </appInfo>
             </annotation>
          </attribute>

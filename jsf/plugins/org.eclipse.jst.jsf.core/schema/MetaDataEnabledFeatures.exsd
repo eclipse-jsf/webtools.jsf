@@ -59,10 +59,10 @@
          <attribute name="class" type="string" use="required">
             <annotation>
                <documentation>
-                  Fully qualified implementing class that must implement &lt;code&gt;org.eclipse.jst.jsf.metadataprocessors.internal.provisional.IMetaDataEnabledFeature&lt;/code&gt;.
+                  Fully qualified implementing class that must implement &lt;code&gt;org.eclipse.jst.jsf.metadataprocessors.IMetaDataEnabledFeature&lt;/code&gt;.
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn="org.eclipse.jst.jsf.metadataprocessors.internal.provisional.AbstractMetaDataEnabledFeature:org.eclipse.jst.jsf.metadataprocessors.internal.provisional.IMetaDataEnabledFeature"/>
+                  <meta.attribute kind="java" basedOn="org.eclipse.jst.jsf.metadataprocessors.AbstractMetaDataEnabledFeature:org.eclipse.jst.jsf.metadataprocessors.IMetaDataEnabledFeature"/>
                </appInfo>
             </annotation>
          </attribute>

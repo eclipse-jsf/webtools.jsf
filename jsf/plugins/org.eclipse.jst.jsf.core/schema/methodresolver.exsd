@@ -57,7 +57,7 @@
                   The class implementing the method resolver.
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn="org.eclipse.jst.jsf.designtime.internal.provisional.el.AbstractDTMethodResolver"/>
+                  <meta.attribute kind="java" basedOn="org.eclipse.jst.jsf.designtime.el.AbstractDTMethodResolver"/>
                </appInfo>
             </annotation>
          </attribute>

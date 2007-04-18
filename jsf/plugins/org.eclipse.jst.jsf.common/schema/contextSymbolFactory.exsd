@@ -61,7 +61,7 @@ See developer docs on decorating variable contributing tags for more information
                   An instance of AbstractContextSymbolFactory that implements the context symbol factory.
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn="org.eclipse.jst.jsf.context.symbol.internal.provisional.source.AbstractContextSymbolFactory"/>
+                  <meta.attribute kind="java" basedOn="org.eclipse.jst.jsf.context.symbol.source.AbstractContextSymbolFactory"/>
                </appInfo>
             </annotation>
          </attribute>

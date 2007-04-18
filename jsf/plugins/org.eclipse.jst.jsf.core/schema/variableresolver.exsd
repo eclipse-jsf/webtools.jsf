@@ -57,7 +57,7 @@
                   The class implementing the property resolver.
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn="org.eclipse.jst.jsf.designtime.internal.provisional.el.AbstractDTVariableResolver"/>
+                  <meta.attribute kind="java" basedOn="org.eclipse.jst.jsf.designtime.el.AbstractDTVariableResolver"/>
                </appInfo>
             </annotation>
          </attribute>

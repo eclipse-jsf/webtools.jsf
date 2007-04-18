@@ -91,9 +91,9 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourceModelProvider" eType="#//IMetaDataSourceModelProvider"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EDataType" name="ITraitVisitor" instanceClassName="org.eclipse.jst.jsf.common.metadata.internal.provisional.query.ITraitVisitor"
+  <eClassifiers xsi:type="ecore:EDataType" name="ITraitVisitor" instanceClassName="org.eclipse.jst.jsf.common.metadata.query.ITraitVisitor"
       serializable="false"/>
-  <eClassifiers xsi:type="ecore:EDataType" name="IEntityVisitor" instanceClassName="org.eclipse.jst.jsf.common.metadata.internal.provisional.query.IEntityVisitor"
+  <eClassifiers xsi:type="ecore:EDataType" name="IEntityVisitor" instanceClassName="org.eclipse.jst.jsf.common.metadata.query.IEntityVisitor"
       serializable="false"/>
   <eClassifiers xsi:type="ecore:EDataType" name="IMetaDataSourceModelProvider" instanceClassName="org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider"/>
   <eClassifiers xsi:type="ecore:EDataType" name="ModelContext" instanceClassName="org.eclipse.jst.jsf.common.metadata.internal.ModelKeyDescriptor"/>

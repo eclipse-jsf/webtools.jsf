@@ -17,7 +17,7 @@ import org.eclipse.osgi.util.NLS;
  * Message bundle for attributevalue types/features
  */
 public class Messages extends NLS {
-	private static final String BUNDLE_NAME = "org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.messages"; //$NON-NLS-1$
+	private static final String BUNDLE_NAME = "org.eclipse.jst.jsf.taglibprocessing.attributevalues.messages"; //$NON-NLS-1$
 	static {
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
 	}

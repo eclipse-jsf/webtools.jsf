@@ -48,7 +48,7 @@
           org.eclipse.emf.edit.provider.ITreeItemContentProvider
           org.eclipse.emf.edit.provider.IItemLabelProvider
           org.eclipse.emf.edit.provider.IItemPropertySource
-          org.eclipse.jst.jsf.context.symbol.internal.provisional.provider.IContentProposalProvider" />
+          org.eclipse.jst.jsf.context.symbol.provider.IContentProposalProvider" />
   </extension>
  
 </plugin>

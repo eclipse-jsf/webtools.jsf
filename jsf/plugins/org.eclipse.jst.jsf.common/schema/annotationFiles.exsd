@@ -70,7 +70,7 @@ eg. /metadata/jsf_core.xml
                   Class implementing the abstract &lt;code&gt;CMAnnotationSourceFileLocator&lt;/code&gt; class.  Responsible for locating the annotation file and returning an InputStream to the parser and returning a &lt;code&gt;ResourceBundle&lt;/code&gt; if there is one.   If a locator is not supplied, the default implementation for a plugin relative file, &lt;code&gt;CMPluginRelativeSourceFileLocator&lt;/code&gt; will be used.
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn="org.eclipse.jst.jsf.contentmodel.annotations.internal.provisional.CMAnnotationSourceFileLocator"/>
+                  <meta.attribute kind="java" basedOn="org.eclipse.jst.jsf.contentmodel.annotation.CMAnnotationSourceFileLocator:org.eclipse.jst.jsf.contentmodel.annotation.ICMAnnotationFileParser"/>
                </appInfo>
             </annotation>
          </attribute>
@@ -80,7 +80,7 @@ eg. /metadata/jsf_core.xml
                   The name of the parser class used to fill the internal model.  If not specified the default, &lt;code&gt;CMAnnotationFileParser&lt;/code&gt;, will be used which conforms to the default schema &lt;code&gt;http://org.eclipse.jst.jsf.contentmodel.annotations/grammarAnnotationSchema&lt;/code&gt;.   If parser is provided, it must implement &lt;code&gt;ICMAnnotationFileParser&lt;/code&gt;.
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn="org.eclipse.jst.jsf.contentmodel.annotations.internal.provisional.ICMAnnotationFileParser"/>
+                  <meta.attribute kind="java" basedOn="org.eclipse.jst.jsf.contentmodel.annotation.CMAnnotationSourceFileLocator:org.eclipse.jst.jsf.contentmodel.annotations.ICMAnnotationFileParser"/>
                </appInfo>
             </annotation>
          </attribute>
