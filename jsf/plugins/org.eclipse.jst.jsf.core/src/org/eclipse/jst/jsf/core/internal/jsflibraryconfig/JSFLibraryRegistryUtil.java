@@ -380,6 +380,11 @@ public class JSFLibraryRegistryUtil {
 	 */
 	public static boolean doesProjectHaveV1JSFLibraries(IProject iproject)
 	{
+	   if (iproject == null || !iproject.isAccessible())
+	   {
+	       return false; // won't be able to get reading on a null or closed project
+	   }
+	   
        try
         {
             Object compLib = iproject.getPersistentProperty(new QualifiedName(JSFLibraryConfigProjectData.QUALIFIEDNAME, JSFUtils.PP_JSF_COMPONENT_LIBRARIES));
@@ -389,13 +394,13 @@ public class JSFLibraryRegistryUtil {
             {
                 return true;
             }
-            return false;
         }
         catch(CoreException ce)
         {
             JSFCorePlugin.log(ce, "Error checking age of project");
-            return false;
         }
+        // by default, fall through to false
+        return false;
 	}
 	
 	/**
@@ -409,8 +414,11 @@ public class JSFLibraryRegistryUtil {
 	    {
 	        IProject project = it.next();
             try {
-                project.setPersistentProperty(new QualifiedName(JSFLibraryConfigProjectData.QUALIFIEDNAME, JSFUtils.PP_JSF_COMPONENT_LIBRARIES), null);
-                project.setPersistentProperty(new QualifiedName(JSFLibraryConfigProjectData.QUALIFIEDNAME, JSFUtils.PP_JSF_IMPLEMENTATION_LIBRARIES), null);
+                if (project.isAccessible())
+                {
+                    project.setPersistentProperty(new QualifiedName(JSFLibraryConfigProjectData.QUALIFIEDNAME, JSFUtils.PP_JSF_COMPONENT_LIBRARIES), null);
+                    project.setPersistentProperty(new QualifiedName(JSFLibraryConfigProjectData.QUALIFIEDNAME, JSFUtils.PP_JSF_IMPLEMENTATION_LIBRARIES), null);
+                }
             } catch (CoreException e) {
                 JSFCorePlugin.log(e, "Error removing JSF library persistent property");
             }
