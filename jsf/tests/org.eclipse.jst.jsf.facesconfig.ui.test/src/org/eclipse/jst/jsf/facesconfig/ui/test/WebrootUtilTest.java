@@ -17,8 +17,8 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.jst.jsf.facesconfig.ui.test.util.MockProgressMonitor;
 import org.eclipse.jst.jsf.facesconfig.ui.util.WebrootUtil;
 
 /**
@@ -49,12 +49,12 @@ public class WebrootUtilTest extends FacesConfigEditorTest {
 
 		IFolder folder = WebrootUtil.getWebContentFolder(project);
 		IFile page1 = folder.getFile("page1.jsp");
-		page1.create(null, true, new MockProgressMonitor());
+		page1.create(null, true, new NullProgressMonitor());
 
 		assertTrue(WebrootUtil.isUnderWebContentFolder(page1));
 
 		IFile file1 = project.getFile("file1.txt");
-		file1.create(null, true, new MockProgressMonitor());
+		file1.create(null, true, new NullProgressMonitor());
 
 		assertFalse(WebrootUtil.isUnderWebContentFolder(file1));
 	}
@@ -98,16 +98,16 @@ public class WebrootUtilTest extends FacesConfigEditorTest {
 		
 		IFolder folder = WebrootUtil.getWebContentFolder(project);
 		IFile page1 = folder.getFile("page1.jsp");
-		page1.create(null, true, new MockProgressMonitor());
+		page1.create(null, true, new NullProgressMonitor());
 
 		assertTrue(WebrootUtil.isValidWebFile(page1.getFullPath()));
 
 		IFile page2 = folder.getFile("page2.jsv");
-		page2.create(null, true, new MockProgressMonitor());
+		page2.create(null, true, new NullProgressMonitor());
 		assertTrue(WebrootUtil.isValidWebFile(page2.getFullPath()));
 
 		IFile file1 = project.getFile("file1.txt");
-		file1.create(null, true, new MockProgressMonitor());
+		file1.create(null, true, new NullProgressMonitor());
 
 		assertFalse(WebrootUtil.isValidWebFile(file1.getFullPath()));
 

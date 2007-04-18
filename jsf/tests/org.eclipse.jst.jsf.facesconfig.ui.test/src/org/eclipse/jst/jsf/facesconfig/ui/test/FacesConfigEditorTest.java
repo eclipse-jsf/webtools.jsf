@@ -19,8 +19,8 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor;
-import org.eclipse.jst.jsf.facesconfig.ui.test.util.MockProgressMonitor;
 import org.eclipse.jst.jsf.facesconfig.ui.test.util.TestUtil;
+import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IPerspectiveDescriptor;
@@ -49,6 +49,8 @@ public abstract class FacesConfigEditorTest extends TestCase {
 	 */
 	protected void setUp() throws Exception {
 		super.setUp();
+		JSFTestUtil.setInternetProxyPreferences(true, "www-proxy.us.oracle.com", "80");
+		
 		project = TestUtil.createProjectFromZip("emptyjsfproject",
 				"emptyjsfproject.zip");
 		IPerspectiveRegistry reg = PlatformUI.getWorkbench()
@@ -59,10 +61,14 @@ public abstract class FacesConfigEditorTest extends TestCase {
 		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
 				.setPerspective(j2eePersp);
 		openEditor();
+		
 	}
 
-	protected void openEditor() throws PartInitException {
+	protected void openEditor() throws PartInitException, InterruptedException {
 		editor = (FacesConfigEditor) openWithEditor("WebContent/WEB-INF/faces-config.xml");
+
+		// wait for pages to load for up to 30s
+        editor.doPageLoad(60000);
 	}
 
 	protected IEditorPart openWithEditor(String name) throws PartInitException {
@@ -76,6 +82,7 @@ public abstract class FacesConfigEditorTest extends TestCase {
 				.getActiveWorkbenchWindow().getActivePage().openEditor(
 						fileInput, FacesConfigEditor.EDITOR_ID);
 		assertNotNull(editor1);
+
 		return editor1;
 	}
 
@@ -89,7 +96,7 @@ public abstract class FacesConfigEditorTest extends TestCase {
 		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
 				.closeEditor(editor, false);
 		project.delete(IProject.FORCE | IProject.ALWAYS_DELETE_PROJECT_CONTENT,
-				new MockProgressMonitor());
+				null);
 	}
 
 }

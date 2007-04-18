@@ -20,8 +20,8 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor;
-import org.eclipse.jst.jsf.facesconfig.ui.test.util.MockProgressMonitor;
 import org.eclipse.jst.jsf.facesconfig.ui.test.util.TestUtil;
+import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
@@ -43,6 +43,7 @@ public class OpenADFDemoFacesConfigTest extends TestCase {
 	 */
 	protected void setUp() throws Exception {
 		super.setUp();
+		JSFTestUtil.setInternetProxyPreferences(true, "www-proxy.us.oracle.com", "80");
 		project = TestUtil.createProjectFromZip("adfDemoProject",
 				"adfDemoProject.zip");
 	}
@@ -56,8 +57,9 @@ public class OpenADFDemoFacesConfigTest extends TestCase {
 		super.tearDown();
 		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
 				.closeEditor(editor, false);
-		project.delete(IProject.FORCE | IProject.ALWAYS_DELETE_PROJECT_CONTENT,
-				new MockProgressMonitor());
+		project.close(null);
+//		project.delete(IProject.FORCE | IProject.ALWAYS_DELETE_PROJECT_CONTENT,
+//				new MockProgressMonitor());
 	}
 
 	/**
@@ -65,10 +67,10 @@ public class OpenADFDemoFacesConfigTest extends TestCase {
 	 * 
 	 * @throws CoreException
 	 */
-	public void testOpenFacesConfigFile() throws CoreException {
+	public void testOpenFacesConfigFile() throws CoreException, InterruptedException {
 		IPath filePath = new Path("WebContent/WEB-INF/faces-config.xml");
 		IFile facesConfigFile = project.getFile(filePath);
-		assertNotNull(facesConfigFile);
+		assertNotNull(facesConfigFile);   
 		assertTrue("The facesconfig file doesn't exists.", facesConfigFile
 				.exists());
 		IEditorInput fileInput = new FileEditorInput(facesConfigFile);
@@ -76,5 +78,9 @@ public class OpenADFDemoFacesConfigTest extends TestCase {
 				.getActiveWorkbenchWindow().getActivePage().openEditor(
 						fileInput, FacesConfigEditor.EDITOR_ID);
 		assertNotNull(editor);
+		
+		// wait for the editor to signal its pages have been loaded.
+		// throw exception of wait is longer than
+        editor.doPageLoad(60000);
 	}
 }
