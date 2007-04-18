@@ -18,6 +18,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jst.j2ee.internal.web.jfaces.extension.FileURL;
 import org.eclipse.jst.j2ee.web.componentcore.util.WebArtifactEdit;
+import org.eclipse.jst.j2ee.webapplication.ContextParam;
 import org.eclipse.jst.j2ee.webapplication.Servlet;
 import org.eclipse.jst.j2ee.webapplication.ServletMapping;
 import org.eclipse.jst.j2ee.webapplication.WebApp;
@@ -37,16 +38,19 @@ public class JSFFileURL implements FileURL {
 	 * If this is a JSP page, this will return a URL using the first valid servlet-mapping to the Faces Servlet
 	 * if found.   If the faces servlet is not defined in the web.xml or there is no servlet-mapping, this will return null.
 	 * 
-	 * Currently (11/21/05) this will only work if file extension is .jsf 
+	 * The resource's file extension is compared with the javax.faces.DEFAULT_SUFFIX context-param if set.   If the same, then 
+	 * extension mapping will be used if found in the web.xml.  If not set, "jsp" default is assumed.   If resource does not have the default
+	 * file extension, then it must have either: jsp,jspx, or jsf file extensions in order to be considered for launch.
+	 * 
+	 * This will not guarentee a page to be run.  The user will still need a properly configured server with valid URL mappings and
+	 * context-params.
+	 * 
+	 * TODO: We could detect and insert or just warn for context-params and url mappings to run.  However, this would better detected during a JSF App validation step.
 	 * 
 	 * @see org.eclipse.jst.j2ee.internal.web.jfaces.extension.FileURL#getFileURL(org.eclipse.core.resources.IResource, org.eclipse.core.runtime.IPath)
 	 */
 	public IPath getFileURL(IResource resource, IPath existingURL) {
 		WebArtifactEdit webAppEdit = null;
-
-		//temporarily, we will filter on jsp file extensions only.
-		if (!resource.getFileExtension().equalsIgnoreCase("jsp")) //$NON-NLS-1$
-			return null;
 		
 		try {
 			//is this is a Faces Project with a Faces Servlet?
@@ -65,20 +69,39 @@ public class JSFFileURL implements FileURL {
 					if (!isJSFPage(resource))
 						return null;
 					
+					String defaultSuffix = getDefaultSuffix(webApp);
+					//is the resource using default_suffix
+					boolean canUseExtensionMapping = resource.getFileExtension().equalsIgnoreCase(defaultSuffix);
+					
+					//if not using default extension and is not a known file extension, then we will abort
+					if (! canUseExtensionMapping && ! isValidKnownExtension(resource.getFileExtension()))
+						return null;
+					
 					Iterator mappings = servlet.getMappings().iterator();
 					ServletMapping map = null;
+					String foundFileExtension = null;
 					while (mappings.hasNext()){
 						map = (ServletMapping)mappings.next();
 						
-						String foundFileExtension = getFileExtensionFromMap(map);
-						if (foundFileExtension != null)
+						foundFileExtension = getFileExtensionFromMap(map);
+						if (foundFileExtension != null && canUseExtensionMapping) {
 							return existingURL.removeFileExtension().addFileExtension(foundFileExtension);
-
-						String foundDirectoryMapping = getDirectoryMapping(map);
-						if (foundDirectoryMapping != null){						
-							return new Path(foundDirectoryMapping).append(existingURL); 
 						}
-					}					
+							
+						String foundPrefixMapping = getPrefixMapping(map);
+						if (foundPrefixMapping != null){						
+							return new Path(foundPrefixMapping).append(existingURL); 
+						}
+						
+					}
+					
+					if (! canUseExtensionMapping && foundFileExtension != null){
+						//we could prompt user that this may not work...
+						//for now we will return the extension mapping
+						return existingURL.removeFileExtension().addFileExtension(foundFileExtension);
+					}
+					
+					//we could, at this point, add a url mapping to the faces servlet, or prompt user that it may be a good idea to add one... ;-
 				}
 			}
 			return null;
@@ -88,7 +111,31 @@ public class JSFFileURL implements FileURL {
 		}
 	}
 	
-	private String getDirectoryMapping(ServletMapping map) {
+	private boolean isValidKnownExtension(String fileExtension) {
+		if ((	fileExtension.equalsIgnoreCase("jsp") ||  //$NON-NLS-1$
+				fileExtension.equalsIgnoreCase("jspx") ||  //$NON-NLS-1$
+				fileExtension.equalsIgnoreCase("jsf"))) //$NON-NLS-1$
+			return true;
+
+		return false;
+	}
+
+	private String getDefaultSuffix(WebApp webApp) {
+		String defaultSuffix = "jsp"; //$NON-NLS-1$
+		for (Iterator it = webApp.getContexts().iterator();it.hasNext();) {		
+			ContextParam cp = (ContextParam) it.next();		
+			if (cp.getParamName().equals(JSFUtils.JSF_DEFAULT_SUFFIX_CONTEXT_PARAM)){				
+				String defSuffix = cp.getParamValue();
+				if (defSuffix.startsWith(".")) //$NON-NLS-1$
+					defSuffix = defSuffix.substring(1);
+								
+				return defSuffix;
+			}
+		}
+		return defaultSuffix;
+	}
+	
+	private String getPrefixMapping(ServletMapping map) {
 		IPath extPath = new Path(map.getUrlPattern());
 		if (extPath != null){
 			String ext = extPath.getFileExtension();
