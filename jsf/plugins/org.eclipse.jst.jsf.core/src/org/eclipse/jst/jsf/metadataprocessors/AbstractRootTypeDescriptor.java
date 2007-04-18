@@ -83,14 +83,14 @@ public abstract class AbstractRootTypeDescriptor extends AbstractMetaDataEnabled
 	}	
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.ITypeDescriptor#getRuntimeType()
+	 * @see org.eclipse.jst.jsf.metadataprocessors.ITypeDescriptor#getRuntimeType()
 	 */
 	public IType getTypeExtension() {
 		return type;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.ITypeDescriptor#setRuntimeType(org.eclipse.jst.jsf.metadataprocessors.internal.AbstractMetaDataEnabledType)
+	 * @see org.eclipse.jst.jsf.metadataprocessors.ITypeDescriptor#setRuntimeType(org.eclipse.jst.jsf.metadataprocessors.internal.AbstractMetaDataEnabledType)
 	 */
 	public void setTypeExtension(IType type) {
 		this.type = type;

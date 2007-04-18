@@ -25,7 +25,7 @@ import org.eclipse.jst.jsf.metadataprocessors.features.IValidELValues;
  */
 public class ValueBindingType extends ExpressionBindingType implements IValidELValues{
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IValidELValues#getExpectedRuntimeType()
+	 * @see org.eclipse.jst.jsf.metadataprocessors.features.IValidELValues#getExpectedRuntimeType()
 	 */
 	public CompositeType getExpectedRuntimeType() throws ELIsNotValidException {
 		String returnType = getReturnType();

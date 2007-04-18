@@ -38,7 +38,7 @@ public class FacesConfigConverterIDFeatures extends FacesConfigIdentifierFeature
 	protected static final String IMAGE_NAME = "/icons/full/obj16/FacesConfig_Converter.gif"; //$NON-NLS-1$
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.FacesConfigIdentifierFeatures#getElements(org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.JSFAppConfigManager)
+	 * @see org.eclipse.jst.jsf.taglibprocessing.attributevalues.FacesConfigIdentifierFeatures#getElements(org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigManager)
 	 */
 	protected List getElements(JSFAppConfigManager mgr) {
 		if (mgr != null)
@@ -47,12 +47,12 @@ public class FacesConfigConverterIDFeatures extends FacesConfigIdentifierFeature
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.FacesConfigIdentifierFeatures#getReturnType()
+	 * @see org.eclipse.jst.jsf.taglibprocessing.attributevalues.FacesConfigIdentifierFeatures#getReturnType()
 	 */
 	protected String getReturnType(){ return CONVERTER;}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.FacesConfigIdentifierFeatures#getPossibleValueProposals(java.util.List)
+	 * @see org.eclipse.jst.jsf.taglibprocessing.attributevalues.FacesConfigIdentifierFeatures#getPossibleValueProposals(java.util.List)
 	 */
 	protected List getPossibleValueProposals(List elements) {
 		List ret = new ArrayList();
@@ -71,14 +71,14 @@ public class FacesConfigConverterIDFeatures extends FacesConfigIdentifierFeature
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.FacesConfigIdentifierFeatures#getImageName()
+	 * @see org.eclipse.jst.jsf.taglibprocessing.attributevalues.FacesConfigIdentifierFeatures#getImageName()
 	 */
 	protected String getImageName() {		
 		return IMAGE_NAME;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.FacesConfigIdentifierFeatures#getMyValidationMessage(java.lang.String)
+	 * @see org.eclipse.jst.jsf.taglibprocessing.attributevalues.FacesConfigIdentifierFeatures#getMyValidationMessage(java.lang.String)
 	 */
 	protected String getMyValidationMessage(String value) {		
 		if (value == null || value.trim().equals("")) //$NON-NLS-1$
@@ -88,7 +88,7 @@ public class FacesConfigConverterIDFeatures extends FacesConfigIdentifierFeature
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.FacesConfigIdentifierFeatures#getElementIDs(org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.JSFAppConfigManager)
+	 * @see org.eclipse.jst.jsf.taglibprocessing.attributevalues.FacesConfigIdentifierFeatures#getElementIDs(org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigManager)
 	 */
 	protected List getElementIDs(JSFAppConfigManager mgr) {
 		List elements = getElements(mgr);

@@ -36,7 +36,7 @@ public class ContextParamSpecifiedJSFAppConfigLocater extends WebContentRelative
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.AbstractJSFAppConfigLocater#startLocating()
+	 * @see org.eclipse.jst.jsf.core.jsfappconfig.AbstractJSFAppConfigLocater#startLocating()
 	 */
 	public void startLocating() {
 		locateProviders();
@@ -68,7 +68,7 @@ public class ContextParamSpecifiedJSFAppConfigLocater extends WebContentRelative
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.AbstractJSFAppConfigLocater#stopLocating()
+	 * @see org.eclipse.jst.jsf.core.jsfappconfig.AbstractJSFAppConfigLocater#stopLocating()
 	 */
 	public void stopLocating() {
 		if (contextParamAdapter != null) {
@@ -100,7 +100,7 @@ public class ContextParamSpecifiedJSFAppConfigLocater extends WebContentRelative
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.WebContentRelativeJSFAppConfigLocater#getFilenames()
+	 * @see org.eclipse.jst.jsf.core.jsfappconfig.WebContentRelativeJSFAppConfigLocater#getFilenames()
 	 */
 	protected List getFilenames() {
 		return JSFAppConfigUtils.getConfigFilesFromContextParam(manager.getProject());

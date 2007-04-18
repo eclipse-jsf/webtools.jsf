@@ -27,14 +27,14 @@ public class ComponentIDType extends ValueBindingType implements
 		IValidValues, IValidELValues {
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.ValueBindingType#getExpectedRuntimeType()
+	 * @see org.eclipse.jst.jsf.taglibprocessing.attributevalues.ValueBindingType#getExpectedRuntimeType()
 	 */
 	public CompositeType getExpectedRuntimeType() throws ELIsNotValidException {
 		throw new ELIsNotValidException(Messages.ComponentIDType_invalid_as_el);
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IValidValues#isValidValue(java.lang.String)
+	 * @see org.eclipse.jst.jsf.metadataprocessors.features.IValidValues#isValidValue(java.lang.String)
 	 */
 	public boolean isValidValue(String value) {
 		IValidationMessage msg = null;

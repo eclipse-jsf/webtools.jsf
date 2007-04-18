@@ -70,7 +70,7 @@ public class JARFileJSFAppConfigProvider extends AbstractJSFAppConfigProvider {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.IJSFAppConfigProvider#getFacesConfigModel()
+	 * @see org.eclipse.jst.jsf.core.jsfappconfig.IJSFAppConfigProvider#getFacesConfigModel()
 	 */
 	public FacesConfigType getFacesConfigModel() {
 		if (facesConfig == null) {
@@ -106,7 +106,7 @@ public class JARFileJSFAppConfigProvider extends AbstractJSFAppConfigProvider {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.IJSFAppConfigProvider#releaseFacesConfigModel()
+	 * @see org.eclipse.jst.jsf.core.jsfappconfig.IJSFAppConfigProvider#releaseFacesConfigModel()
 	 */
 	public void releaseFacesConfigModel() {
 		jsfAppConfigLocater.getJSFAppConfigManager().removeFacesConfigChangeAdapter(facesConfig);

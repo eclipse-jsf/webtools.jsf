@@ -23,7 +23,7 @@ public class DoubleType extends NumberType {
 	private static final String INVALID_DOUBLE = Messages.DoubleType_invalid_double;
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.EnumerationType#getReturnType()
+	 * @see org.eclipse.jst.jsf.taglibprocessing.attributevalues.EnumerationType#getReturnType()
 	 */
 	protected String getReturnType(){ return "double";} //$NON-NLS-1$
 	

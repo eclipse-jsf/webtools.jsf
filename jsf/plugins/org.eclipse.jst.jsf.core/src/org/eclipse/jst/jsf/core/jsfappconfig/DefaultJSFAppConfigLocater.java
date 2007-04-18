@@ -44,7 +44,7 @@ public class DefaultJSFAppConfigLocater extends WebContentRelativeJSFAppConfigLo
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.AbstractJSFAppConfigLocater#startLocating()
+	 * @see org.eclipse.jst.jsf.core.jsfappconfig.AbstractJSFAppConfigLocater#startLocating()
 	 */
 	public void startLocating() {
 		locateProviders();
@@ -54,7 +54,7 @@ public class DefaultJSFAppConfigLocater extends WebContentRelativeJSFAppConfigLo
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.AbstractJSFAppConfigLocater#stopLocating()
+	 * @see org.eclipse.jst.jsf.core.jsfappconfig.AbstractJSFAppConfigLocater#stopLocating()
 	 */
 	public void stopLocating() {
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
@@ -63,7 +63,7 @@ public class DefaultJSFAppConfigLocater extends WebContentRelativeJSFAppConfigLo
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.WebContentRelativeJSFAppConfigLocater#getFilenames()
+	 * @see org.eclipse.jst.jsf.core.jsfappconfig.WebContentRelativeJSFAppConfigLocater#getFilenames()
 	 */
 	protected List getFilenames() {
 		List filenames = new ArrayList();

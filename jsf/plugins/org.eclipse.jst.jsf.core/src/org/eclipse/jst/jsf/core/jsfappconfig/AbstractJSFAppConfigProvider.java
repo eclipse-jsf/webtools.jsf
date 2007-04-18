@@ -28,19 +28,19 @@ public abstract class AbstractJSFAppConfigProvider implements IJSFAppConfigProvi
 	protected IJSFAppConfigLocater jsfAppConfigLocater = null;
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.IJSFAppConfigProvider#setJSFAppConfigLocater(org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.IJSFAppConfigLocater)
+	 * @see org.eclipse.jst.jsf.core.jsfappconfig.IJSFAppConfigProvider#setJSFAppConfigLocater(org.eclipse.jst.jsf.core.jsfappconfig.IJSFAppConfigLocater)
 	 */
 	public void setJSFAppConfigLocater(IJSFAppConfigLocater locater) {
 		this.jsfAppConfigLocater = locater;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.IJSFAppConfigProvider#getFacesConfigModel()
+	 * @see org.eclipse.jst.jsf.core.jsfappconfig.IJSFAppConfigProvider#getFacesConfigModel()
 	 */
 	public abstract FacesConfigType getFacesConfigModel();
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.IJSFAppConfigProvider#releaseFacesConfigModel()
+	 * @see org.eclipse.jst.jsf.core.jsfappconfig.IJSFAppConfigProvider#releaseFacesConfigModel()
 	 */
 	public abstract void releaseFacesConfigModel();
 

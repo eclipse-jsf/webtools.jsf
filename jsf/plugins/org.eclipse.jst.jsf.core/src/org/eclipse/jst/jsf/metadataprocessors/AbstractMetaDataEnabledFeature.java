@@ -39,28 +39,28 @@ public abstract class AbstractMetaDataEnabledFeature implements IMetaDataEnabled
 	private static final List EMPTY_LIST = new ArrayList(0);
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.IMetaDataEnabledFeature#setMetaDataContext(org.eclipse.jst.jsf.metadataprocessors.internal.provisional.MetaDataContext)
+	 * @see org.eclipse.jst.jsf.metadataprocessors.IMetaDataEnabledFeature#setMetaDataContext(org.eclipse.jst.jsf.metadataprocessors.MetaDataContext)
 	 */
 	public void setMetaDataContext(final MetaDataContext context) {
 		this.mdContext = context;		
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.IMetaDataEnabledFeature#getMetaDataContext()
+	 * @see org.eclipse.jst.jsf.metadataprocessors.IMetaDataEnabledFeature#getMetaDataContext()
 	 */
 	public MetaDataContext getMetaDataContext() {
 		return mdContext;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.IMetaDataEnabledFeature#setStructuredDocumentContext(org.eclipse.wtp.jsf.context.structureddocument.IStructuredDocumentContext)
+	 * @see org.eclipse.jst.jsf.metadataprocessors.IMetaDataEnabledFeature#setStructuredDocumentContext(org.eclipse.wtp.jsf.context.structureddocument.IStructuredDocumentContext)
 	 */
 	public void setStructuredDocumentContext(final IStructuredDocumentContext context) {
 		this.sdContext = context;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.IMetaDataEnabledFeature#getStructuredDocumentContext()
+	 * @see org.eclipse.jst.jsf.metadataprocessors.IMetaDataEnabledFeature#getStructuredDocumentContext()
 	 */
 	public IStructuredDocumentContext getStructuredDocumentContext() {
 		return sdContext;

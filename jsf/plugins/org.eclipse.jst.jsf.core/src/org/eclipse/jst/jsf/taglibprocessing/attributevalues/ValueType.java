@@ -24,7 +24,7 @@ import org.eclipse.jst.jsf.metadataprocessors.features.IValidValues;
 public class ValueType extends ValueBindingType implements IValidValues, IValidELValues {
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IValidValues#isValidValue(java.lang.String)
+	 * @see org.eclipse.jst.jsf.metadataprocessors.features.IValidValues#isValidValue(java.lang.String)
 	 */
 	public boolean isValidValue(String value){
 		//value can be a string or a value binding expression

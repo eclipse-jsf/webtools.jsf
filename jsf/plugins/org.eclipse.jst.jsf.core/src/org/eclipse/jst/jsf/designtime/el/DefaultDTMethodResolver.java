@@ -54,7 +54,7 @@ public class DefaultDTMethodResolver extends AbstractDTMethodResolver
     }
 
     /* (non-Javadoc)
-     * @see org.eclipse.jst.jsf.designtime.internal.provisional.el.AbstractDTMethodResolver#getMethods(org.eclipse.jst.jsf.context.symbol.internal.provisional.IInstanceSymbol)
+     * @see org.eclipse.jst.jsf.designtime.el.AbstractDTMethodResolver#getMethods(org.eclipse.jst.jsf.context.symbol.IInstanceSymbol)
      */
     public ISymbol[] getMethods(IObjectSymbol base) 
     {

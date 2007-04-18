@@ -25,7 +25,7 @@ public class LongType extends NumberType {
 	private static final String INVALID_LONG = Messages.LongType_invalid_long;
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.EnumerationType#getReturnType()
+	 * @see org.eclipse.jst.jsf.taglibprocessing.attributevalues.EnumerationType#getReturnType()
 	 */
 	protected String getReturnType(){ return "long";} //$NON-NLS-1$
 

@@ -25,7 +25,7 @@ public class ComponentBindingType extends ValueBindingType implements
 		IValidValues, IValidELValues {
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IValidValues#isValidValue(java.lang.String)
+	 * @see org.eclipse.jst.jsf.metadataprocessors.features.IValidValues#isValidValue(java.lang.String)
 	 */
 	public boolean isValidValue(String value) {
 		//Strings are invalid.   Requires a EL value binding.

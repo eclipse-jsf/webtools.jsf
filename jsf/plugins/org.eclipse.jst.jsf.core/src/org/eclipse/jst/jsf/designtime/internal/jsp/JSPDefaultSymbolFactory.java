@@ -108,7 +108,7 @@ public class JSPDefaultSymbolFactory extends AbstractContextSymbolFactory
     }
     
     /* (non-Javadoc)
-     * @see org.eclipse.jst.jsf.context.symbol.internal.provisional.source.AbstractContextSymbolFactory#supports(org.eclipse.core.runtime.IAdaptable)
+     * @see org.eclipse.jst.jsf.context.symbol.source.AbstractContextSymbolFactory#supports(org.eclipse.core.runtime.IAdaptable)
      */
     public boolean supports(IAdaptable context) 
     {

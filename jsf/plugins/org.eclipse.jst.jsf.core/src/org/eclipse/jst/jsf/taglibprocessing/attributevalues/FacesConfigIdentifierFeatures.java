@@ -71,7 +71,7 @@ public abstract class FacesConfigIdentifierFeatures extends AbstractMetaDataEnab
 	protected List validationMessages;
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IPossibleValues#getPossibleValues()
+	 * @see org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValues#getPossibleValues()
 	 */
 	public List getPossibleValues() {
 		List ret = new ArrayList();
@@ -90,7 +90,7 @@ public abstract class FacesConfigIdentifierFeatures extends AbstractMetaDataEnab
 	}
 		
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IValidValues#isValidValue(java.lang.String)
+	 * @see org.eclipse.jst.jsf.metadataprocessors.features.IValidValues#isValidValue(java.lang.String)
 	 */
 	public boolean isValidValue(String value) {	
 		List idTypes = getConfigTypes();
@@ -150,7 +150,7 @@ public abstract class FacesConfigIdentifierFeatures extends AbstractMetaDataEnab
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IValidValues#getValidationMessages()
+	 * @see org.eclipse.jst.jsf.metadataprocessors.features.IValidValues#getValidationMessages()
 	 */
 	public List getValidationMessages(){
 		if (validationMessages == null){
@@ -179,7 +179,7 @@ public abstract class FacesConfigIdentifierFeatures extends AbstractMetaDataEnab
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.AbstractMetaDataEnabledFeature#getImage()
+	 * @see org.eclipse.jst.jsf.metadataprocessors.AbstractMetaDataEnabledFeature#getImage()
 	 */
 	protected ImageDescriptor getImage() {
 		ImageDescriptor ret = super.getImage();

@@ -38,7 +38,7 @@ public class RuntimeClasspathJSFAppConfigLocater extends AbstractJSFAppConfigLoc
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.AbstractJSFAppConfigLocater#startLocating()
+	 * @see org.eclipse.jst.jsf.core.jsfappconfig.AbstractJSFAppConfigLocater#startLocating()
 	 */
 	public void startLocating() {
 		locateProviders();
@@ -47,7 +47,7 @@ public class RuntimeClasspathJSFAppConfigLocater extends AbstractJSFAppConfigLoc
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.AbstractJSFAppConfigLocater#stopLocating()
+	 * @see org.eclipse.jst.jsf.core.jsfappconfig.AbstractJSFAppConfigLocater#stopLocating()
 	 */
 	public void stopLocating() {
 		JavaCore.removeElementChangedListener(this);

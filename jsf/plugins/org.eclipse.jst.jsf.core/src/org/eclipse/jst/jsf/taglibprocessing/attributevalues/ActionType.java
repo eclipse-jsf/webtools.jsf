@@ -49,7 +49,7 @@ public class ActionType extends MethodBindingType implements IPossibleValues{
 	private ImageDescriptor imageDescriptor;
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.MethodBindingType#isValidValue(java.lang.String)
+	 * @see org.eclipse.jst.jsf.taglibprocessing.attributevalues.MethodBindingType#isValidValue(java.lang.String)
 	 */
 	public boolean isValidValue(String value){
 		if (value != null && value.length() > 0)	
@@ -62,7 +62,7 @@ public class ActionType extends MethodBindingType implements IPossibleValues{
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IPossibleValues#getPossibleValues()
+	 * @see org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValues#getPossibleValues()
 	 */
 	public List getPossibleValues() {
 		// TODO getNavigationRules for this page from JSFAppMgr

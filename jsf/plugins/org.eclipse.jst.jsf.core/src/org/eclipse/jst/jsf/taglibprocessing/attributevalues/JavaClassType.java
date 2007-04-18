@@ -68,7 +68,7 @@ public class JavaClassType extends ObjectType implements IPossibleValues, IValid
 	private List validationMsgs;
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IPossibleValues#getPossibleValues()
+	 * @see org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValues#getPossibleValues()
 	 */
 	public List getPossibleValues() {
 		List results = getTypes();
@@ -217,7 +217,7 @@ public class JavaClassType extends ObjectType implements IPossibleValues, IValid
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IValidValues#getValidationMessages()
+	 * @see org.eclipse.jst.jsf.metadataprocessors.features.IValidValues#getValidationMessages()
 	 */
 	public List getValidationMessages() {
 		if (validationMsgs == null){
@@ -227,7 +227,7 @@ public class JavaClassType extends ObjectType implements IPossibleValues, IValid
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IValidValues#isValidValue(java.lang.String)
+	 * @see org.eclipse.jst.jsf.metadataprocessors.features.IValidValues#isValidValue(java.lang.String)
 	 */
 	public boolean isValidValue(String value) {
 		if (value == null || value.trim().equals("")){ //$NON-NLS-1$

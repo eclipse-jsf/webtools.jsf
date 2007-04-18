@@ -75,7 +75,7 @@ public class DTJSPExternalContext implements IDTExternalContext
     }
     
     /* (non-Javadoc)
-     * @see org.eclipse.jst.jsf.designtime.internal.provisional.context.IDTExternalContext#getMapForScope(int)
+     * @see org.eclipse.jst.jsf.designtime.context.IDTExternalContext#getMapForScope(int)
      */
     public Map getMapForScope(int scopeMask)
     {
@@ -98,7 +98,7 @@ public class DTJSPExternalContext implements IDTExternalContext
     }
     
     /* (non-Javadoc)
-     * @see org.eclipse.jst.jsf.designtime.internal.provisional.context.IDTExternalContext#getRequestMap()
+     * @see org.eclipse.jst.jsf.designtime.context.IDTExternalContext#getRequestMap()
      */
     public Map getRequestMap()
     {
@@ -106,7 +106,7 @@ public class DTJSPExternalContext implements IDTExternalContext
     }
 
     /* (non-Javadoc)
-     * @see org.eclipse.jst.jsf.designtime.internal.provisional.context.IDTExternalContext#getSessionMap()
+     * @see org.eclipse.jst.jsf.designtime.context.IDTExternalContext#getSessionMap()
      */
     public Map getSessionMap()
     {
@@ -114,7 +114,7 @@ public class DTJSPExternalContext implements IDTExternalContext
     }
 
     /* (non-Javadoc)
-     * @see org.eclipse.jst.jsf.designtime.internal.provisional.context.IDTExternalContext#getApplicationMap()
+     * @see org.eclipse.jst.jsf.designtime.context.IDTExternalContext#getApplicationMap()
      */
     public Map getApplicationMap()
     {
@@ -122,7 +122,7 @@ public class DTJSPExternalContext implements IDTExternalContext
     }
     
     /* (non-Javadoc)
-     * @see org.eclipse.jst.jsf.designtime.internal.provisional.context.IDTExternalContext#getNoneMap()
+     * @see org.eclipse.jst.jsf.designtime.context.IDTExternalContext#getNoneMap()
      */
     public Map getNoneMap() 
     {

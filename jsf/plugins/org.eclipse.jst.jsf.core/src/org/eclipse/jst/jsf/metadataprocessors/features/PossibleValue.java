@@ -58,14 +58,14 @@ public class PossibleValue implements IPossibleValue {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IPossibleValue#getValue()
+	 * @see org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValue#getValue()
 	 */
 	public String getValue() { 
 		return value;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IPossibleValue#getDisplayValue()
+	 * @see org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValue#getDisplayValue()
 	 */
 	public String getDisplayValue() {
 		if (displayValue == null)
@@ -74,21 +74,21 @@ public class PossibleValue implements IPossibleValue {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IPossibleValue#getIcon()
+	 * @see org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValue#getIcon()
 	 */
 	public ImageDescriptor getIcon() {		
 		return smallIcon;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IPossibleValue#isDefaultValue()
+	 * @see org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValue#isDefaultValue()
 	 */
 	public boolean isDefaultValue() {
 		return isDefault;
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IPossibleValue#getAdditionalInformation()
+	 * @see org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValue#getAdditionalInformation()
 	 */
 	public String getAdditionalInformation() {
 		return additionalInfo;

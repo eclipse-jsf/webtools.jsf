@@ -25,7 +25,7 @@ public class IntegerType extends NumberType {
 	private static final String INVALID_INTEGER = Messages.IntegerType_invalid_integer;
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.EnumerationType#getReturnType()
+	 * @see org.eclipse.jst.jsf.taglibprocessing.attributevalues.EnumerationType#getReturnType()
 	 */
 	protected String getReturnType(){ return "int";} //$NON-NLS-1$
 	

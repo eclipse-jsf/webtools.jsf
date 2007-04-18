@@ -38,7 +38,7 @@ public abstract class EnumerationType extends AbstractRootTypeDescriptor impleme
 	protected static List EMPTY_LIST = new ArrayList(0);
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IValidValues#getValidationMessages()
+	 * @see org.eclipse.jst.jsf.metadataprocessors.features.IValidValues#getValidationMessages()
 	 */
 	public List getValidationMessages() {
 		if (validationMessages == null){
@@ -48,7 +48,7 @@ public abstract class EnumerationType extends AbstractRootTypeDescriptor impleme
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IDefaultValue#getDefaultValue()
+	 * @see org.eclipse.jst.jsf.metadataprocessors.features.IDefaultValue#getDefaultValue()
 	 */
 	public String getDefaultValue() {
 		return getTraitValueAsString(IDefaultValue.DEFAULT_VALUE_PROP_NAME);		
@@ -137,7 +137,7 @@ public abstract class EnumerationType extends AbstractRootTypeDescriptor impleme
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IValidELValues#getExpectedRuntimeType()
+	 * @see org.eclipse.jst.jsf.metadataprocessors.features.IValidELValues#getExpectedRuntimeType()
 	 */
 	public CompositeType getExpectedRuntimeType() throws ELIsNotValidException {
 		String type = Signature.createTypeSignature(getReturnType(), true);

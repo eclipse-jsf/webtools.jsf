@@ -45,21 +45,21 @@ public class ValidationMessage implements IValidationMessage {
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IValidationMessage#getMessage()
+	 * @see org.eclipse.jst.jsf.metadataprocessors.features.IValidationMessage#getMessage()
 	 */
 	public String getMessage() {
 		return msg;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IValidationMessage#getCode()
+	 * @see org.eclipse.jst.jsf.metadataprocessors.features.IValidationMessage#getCode()
 	 */
 	public String getCode() {
 		return code;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IValidationMessage#getSeverity()
+	 * @see org.eclipse.jst.jsf.metadataprocessors.features.IValidationMessage#getSeverity()
 	 */
 	public int getSeverity() {
 		return severity;

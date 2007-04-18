@@ -32,12 +32,12 @@ public class BooleanType extends EnumerationType implements IValidValues, IPossi
 	private static final String BOOLTYPE_VALIDATION_MSG = Messages.BooleanType_invalid_values;
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.EnumerationType#getReturnType()
+	 * @see org.eclipse.jst.jsf.taglibprocessing.attributevalues.EnumerationType#getReturnType()
 	 */
 	protected String getReturnType(){ return "boolean";} //$NON-NLS-1$
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IPossibleValues#getPossibleValues()
+	 * @see org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValues#getPossibleValues()
 	 */
 	public List getPossibleValues() {
 		String def = getDefaultValue();

@@ -24,14 +24,14 @@ import java.util.Set;
 public class ImplicitRuntimeJSFAppConfigLocater extends AbstractJSFAppConfigLocater {
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.AbstractJSFAppConfigLocater#startLocating()
+	 * @see org.eclipse.jst.jsf.core.jsfappconfig.AbstractJSFAppConfigLocater#startLocating()
 	 */
 	public void startLocating() {
 		locateProviders();
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.AbstractJSFAppConfigLocater#stopLocating()
+	 * @see org.eclipse.jst.jsf.core.jsfappconfig.AbstractJSFAppConfigLocater#stopLocating()
 	 */
 	public void stopLocating() {
 		//nothing to do

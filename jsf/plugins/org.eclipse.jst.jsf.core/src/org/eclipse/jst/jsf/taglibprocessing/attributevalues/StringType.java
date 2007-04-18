@@ -30,12 +30,12 @@ public class StringType extends EnumerationType implements IValidValues,
 		IPossibleValues, IDefaultValue {
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.EnumerationType#getReturnType()
+	 * @see org.eclipse.jst.jsf.taglibprocessing.attributevalues.EnumerationType#getReturnType()
 	 */
 	protected String getReturnType(){ return "java.lang.String";} //$NON-NLS-1$
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IValidValues#isValidValue(java.lang.String)
+	 * @see org.eclipse.jst.jsf.metadataprocessors.features.IValidValues#isValidValue(java.lang.String)
 	 */
 	public boolean isValidValue(String value) {		
 		List vals = getMDValidValues();
@@ -53,7 +53,7 @@ public class StringType extends EnumerationType implements IValidValues,
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features.IPossibleValues#getPossibleValues()
+	 * @see org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValues#getPossibleValues()
 	 */
 	public List getPossibleValues() {
 		List pvs = getMDPossibleValues();

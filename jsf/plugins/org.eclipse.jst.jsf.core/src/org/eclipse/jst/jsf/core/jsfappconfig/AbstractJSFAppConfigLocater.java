@@ -35,7 +35,7 @@ public abstract class AbstractJSFAppConfigLocater implements IJSFAppConfigLocate
 	protected Set configProviders = new LinkedHashSet();
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.IJSFAppConfigLocater#setJSFAppConfigManager(org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.JSFAppConfigManager)
+	 * @see org.eclipse.jst.jsf.core.jsfappconfig.IJSFAppConfigLocater#setJSFAppConfigManager(org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigManager)
 	 */
 	public void setJSFAppConfigManager(JSFAppConfigManager manager) {
 		this.manager = manager;
@@ -43,24 +43,24 @@ public abstract class AbstractJSFAppConfigLocater implements IJSFAppConfigLocate
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.IJSFAppConfigLocater#getJSFAppConfigManager()
+	 * @see org.eclipse.jst.jsf.core.jsfappconfig.IJSFAppConfigLocater#getJSFAppConfigManager()
 	 */
 	public JSFAppConfigManager getJSFAppConfigManager() {
 		return manager;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.IJSFAppConfigLocater#startLocating()
+	 * @see org.eclipse.jst.jsf.core.jsfappconfig.IJSFAppConfigLocater#startLocating()
 	 */
 	public abstract void startLocating();
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.IJSFAppConfigLocater#stopLocating()
+	 * @see org.eclipse.jst.jsf.core.jsfappconfig.IJSFAppConfigLocater#stopLocating()
 	 */
 	public abstract void stopLocating();
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig.IJSFAppConfigLocater#getJSFAppConfigProviders()
+	 * @see org.eclipse.jst.jsf.core.jsfappconfig.IJSFAppConfigLocater#getJSFAppConfigProviders()
 	 */
 	public Set getJSFAppConfigProviders() {
 		return configProviders;
