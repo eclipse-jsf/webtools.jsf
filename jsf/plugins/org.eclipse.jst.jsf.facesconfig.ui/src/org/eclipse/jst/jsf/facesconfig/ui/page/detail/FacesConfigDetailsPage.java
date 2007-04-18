@@ -113,6 +113,9 @@ public abstract class FacesConfigDetailsPage extends AbstractFormPart implements
 
 	}
 
+	/**
+	 * @return the master/detail page for this page
+	 */
 	public FacesConfigMasterDetailPage getPage() {
 		return page;
 	}

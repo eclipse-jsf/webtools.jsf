@@ -58,6 +58,9 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
  */
 public class ComponentsPage extends FacesConfigMasterDetailPage {
 
+	/**
+	 * The id of this page in the faces-config editor.
+	 */
 	public static final String PAGE_ID = "org.eclipse.jst.jsf.facesconfig.ui.page.ComponentsPage";
 
 	private IContentOutlinePage contentOutlinePage;
@@ -255,16 +258,16 @@ public class ComponentsPage extends FacesConfigMasterDetailPage {
 				FacesConfigMasterSection section = null;
 				if (FacesConfigPackage.eINSTANCE.getComponentType().isInstance(
 						component)) {
-					section = facesConfigMasterSections[0];
+					section = getFacesConfigMasterSections()[0];
 				} else if (FacesConfigPackage.eINSTANCE.getConverterType()
 						.isInstance(component)) {
-					section = facesConfigMasterSections[1];
+					section = getFacesConfigMasterSections()[1];
 				} else if (FacesConfigPackage.eINSTANCE.getRenderKitType()
 						.isInstance(component)) {
-					section = facesConfigMasterSections[2];
+					section = getFacesConfigMasterSections()[2];
 				} else if (FacesConfigPackage.eINSTANCE.getValidatorType()
 						.isInstance(component)) {
-					section = facesConfigMasterSections[3];
+					section = getFacesConfigMasterSections()[3];
 				}
 
 				if (!section.getSection().isExpanded()) {

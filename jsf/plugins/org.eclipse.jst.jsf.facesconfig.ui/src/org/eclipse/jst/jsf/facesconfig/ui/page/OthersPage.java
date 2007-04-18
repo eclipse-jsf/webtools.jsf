@@ -75,6 +75,9 @@ import org.eclipse.ui.views.properties.IPropertySheetPage;
 public class OthersPage extends FormPage implements IFacesConfigPage,
 		ISelectionProvider, ISelectionChangedListener, IEditingDomainProvider {
 
+    /**
+     * The id of this page in the faces-config editor.
+     */
 	public static final String PAGE_ID = "org.eclipse.jst.jsf.facesconfig.ui.page.OthersPage";
 
 	private final static Image BANNER_IMAGE = EditorPlugin.getDefault()
@@ -300,24 +303,37 @@ public class OthersPage extends FormPage implements IFacesConfigPage,
 		return true;
 	}
 
+	/**
+	 * Reset the editor input for the application section
+	 */
 	public void resetApplicationInput() {
 		if (getInput() instanceof FacesConfigType) {
 			setInputForApplicationSections((FacesConfigType) getInput());
 		}
 	}
 
+	/**
+	 * Reset the editor input for the factory sections
+	 */
 	public void resetFactoryInput() {
 		if (getInput() instanceof FacesConfigType) {
 			setInputForFactorySections((FacesConfigType) getInput());
 		}
 	}
 
+	/**
+	 * Reset the editor input for the lifecycle section
+	 */
 	public void resetLifecycleInput() {
 		if (getInput() instanceof FacesConfigType) {
 			setInputForLifecycleSections((FacesConfigType) getInput());
 		}
 	}
 
+	/**
+	 * Sets the model for all Application sub-model elements to facesConfig
+	 * @param facesConfig
+	 */
 	protected void setInputForApplicationSections(FacesConfigType facesConfig) {
 		ApplicationType application;
 		if (facesConfig.getApplication().size() > 0) {
@@ -331,6 +347,10 @@ public class OthersPage extends FormPage implements IFacesConfigPage,
 		}
 	}
 
+	/**
+	 * Sets the model for all Factory  sub-model elements to facesConfig
+	 * @param facesConfig
+	 */
 	protected void setInputForFactorySections(FacesConfigType facesConfig) {
 		FactoryType factory;
 		if (facesConfig.getFactory().size() > 0) {
@@ -346,6 +366,10 @@ public class OthersPage extends FormPage implements IFacesConfigPage,
 		}
 	}
 
+	/**
+	 * Sets the model for all Lifecycle sub-model elements to facesConfig
+	 * @param facesConfig
+	 */
 	protected void setInputForLifecycleSections(FacesConfigType facesConfig) {
 		LifecycleType lifecycle;
 		if (facesConfig.getLifecycle().size() > 0) {

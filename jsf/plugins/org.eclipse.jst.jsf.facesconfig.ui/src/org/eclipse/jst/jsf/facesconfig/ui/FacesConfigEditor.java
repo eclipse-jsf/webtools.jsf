@@ -20,9 +20,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -31,7 +31,6 @@ import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -73,12 +72,13 @@ import org.eclipse.jst.jsf.facesconfig.ui.page.IntroductionPage;
 import org.eclipse.jst.jsf.facesconfig.ui.page.ManagedBeanPage;
 import org.eclipse.jst.jsf.facesconfig.ui.page.OthersPage;
 import org.eclipse.jst.jsf.facesconfig.ui.page.OverviewPage;
+import org.eclipse.jst.jsf.facesconfig.ui.page.WaitForLoadPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.DelegatingZoomManager;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowEditor;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.command.DelegatingCommandStack;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.command.EMFCommandStackGEFAdapter;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.layout.PageflowLayoutManager;
-import org.eclipse.jst.jsf.facesconfig.ui.util.WebrootUtil;
+import org.eclipse.jst.jsf.facesconfig.ui.preference.GEMPreferences;
 import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.ui.IActionBars;
@@ -111,12 +111,23 @@ import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
 import org.eclipse.wst.sse.ui.StructuredTextEditor;
 
 /**
+ * This is the main editor for the faces-config file.  Note that the model
+ * load can involve long-running socket operations (shouldn't but can),
+ * so the editor UI is load asynchronously.  This is means that any 
+ * operations that need to be executed on editor open should be run
+ * using AddPagesTask.pageSafeExecute() to ensure that they occur
+ * after all editor pages have finished loading.
  * 
  * @author sfshi
  * 
  */
 public class FacesConfigEditor extends FormEditor implements
 		IEditingDomainProvider, ISelectionProvider {
+
+    /**
+     * This editor's ID.  TODO: this should prob be in plugin.properties?
+     */
+    public static final String EDITOR_ID = "org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor"; //$NON-NLS-1$
 
 	/**
 	 * editing domain that is used to track all changes to the model
@@ -144,20 +155,32 @@ public class FacesConfigEditor extends FormEditor implements
 	/** The source text editor. */
 	private StructuredTextEditor sourcePage;
 
-	protected Collection selectionChangedListeners = new ArrayList();
+	private Collection selectionChangedListeners = new ArrayList();
 
-	private FacesConfigArtifactEdit facesConfigAtrifactEdit;
-
-	public static final String EDITOR_ID = "org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor";
-
-	protected ISelection editorSelection = StructuredSelection.EMPTY;
+	private ISelection editorSelection = StructuredSelection.EMPTY;
 
 	private IContentOutlinePage outlinePage;
 
 	private IProject currentProject;
 
 	private boolean isWebProject;
-
+	
+	private ModelLoader        _modelLoader;
+	
+	/**
+	 * only true once dispose() has been called
+	 * used to signal that the editor was disposed.
+	 */
+	private boolean _isDisposed; // = false;
+	
+    /**
+     * Used to load editor pages when the model is loaded
+     */
+    private final AddPagesTask     _addPagesTask = new AddPagesTask();
+        
+	/**
+	 * Default constructor
+	 */
 	public FacesConfigEditor() {
 		initializeEMF();
 	}
@@ -179,9 +202,11 @@ public class FacesConfigEditor extends FormEditor implements
 						protected ResourceSet resourceSet = editingDomain
 								.getResourceSet();
 
-						protected Collection changedResources = new ArrayList();
+						@SuppressWarnings("hiding") //$NON-NLS-1$
+                        protected Collection changedResources = new ArrayList();
 
-						protected Collection removedResources = new ArrayList();
+						@SuppressWarnings("hiding") //$NON-NLS-1$
+                        protected Collection removedResources = new ArrayList();
 
 						public boolean visit(IResourceDelta delta_) {
 							if (delta_.getFlags() != IResourceDelta.MARKERS
@@ -239,7 +264,7 @@ public class FacesConfigEditor extends FormEditor implements
 					EditorPlugin.getDefault().getLog().log(
 							new Status(IStatus.ERROR, EditorPlugin
 									.getPluginId(), IStatus.OK, exception
-									.getMessage() == null ? "" : exception
+									.getMessage() == null ? "" : exception //$NON-NLS-1$
 									.getMessage(), exception));
 				}
 			}
@@ -335,82 +360,210 @@ public class FacesConfigEditor extends FormEditor implements
 	/*
 	 * @see org.eclipse.ui.part.EditorPart#setInput(org.eclipse.ui.IEditorInput)
 	 */
-	protected void setInput(IEditorInput input) {
-		super.setInput(input);
-		isWebProject = matches(input);
+	protected void setInput(IEditorInput input) 
+	{
+        isWebProject = matches(input);
+        super.setInput(input);
 
 		IFile inputFile = (IFile) input.getAdapter(IFile.class);
-		if (inputFile != null) {
-			IProject project = inputFile.getProject();
-			IPath inputPath = inputFile.getFullPath();
-			loadModel(project, inputPath);
+		if (inputFile != null) 
+		{
+			final IProject project = inputFile.getProject();
+			final IPath inputPath = inputFile.getFullPath();
+			
+			_modelLoader = new ModelLoader(); 
+			_modelLoader.load(project, inputPath, isWebProject, _addPagesTask);
 		}
+	}
+
+
+	protected void addPages() 
+	{
+	    // try loading wait page
+	    // if we get to here before model load completes,
+	    // then wait page will give the user the indication
+	    // that something is happening in the background before
+	    // the editor full loads.
+	    // if the model is already loaded, this call should do nothing
+	    _addPagesTask.maybeAddWaitPage();
 	}
 
 	/**
-	 * Loads the configuration model from the given path.
+	 * This runnable is used to used to manage the loading of the 
+	 * editor pages for editor in a deferred fashion.  Because the model
+	 * loading for this editor can be noticably long and (unfortunately)
+	 * may involve socket calls that block, loadModel(), runs this on a
+	 * separate thread. This class is intended to be used in two ways:
 	 * 
+	 * 1) by the model loading code to signal it is finished by executing
+	 * the run() via a display.asyncExec().
+	 * 
+	 * 2) by the addPages() call back on the the main editor as a way to
+	 * load a "Please wait for loading" page if the loading is still running
+	 * by the time the editor is ready to visualize itself.
+	 * 
+	 * Note that in both cases methods of this class *must* be running on the
+	 * main display thread.
+	 * 
+	 * @author cbateman
+	 *
 	 */
-	private void loadModel(IProject project, IPath modelPath) {
-		if (isWebProject) {
-			IFolder webContentFolder = WebrootUtil.getWebContentFolder(project);
-			Assert
-					.isTrue(webContentFolder != null
-							&& webContentFolder.exists());
+	private class AddPagesTask extends ModelLoader.ModelLoaderComplete
+	{
+	    private final AtomicBoolean    _arePagesLoaded = new AtomicBoolean(false);     // set to true when the regular editor pages are loaded
+	    private FormPage               _waitPage;
+	    private List<Runnable>         _deferredRunnables = new ArrayList<Runnable>();
+	    
+	    /**
+	     * If the editor pages are loaded, runnable.run() is invoked immediately
+	     * If the editor pages are not loaded yet, runnable is queued and will be 
+	     * executed in the order they are added immediately after the pages are loaded
+	     * 
+	     * @param runnable
+	     */
+	    public synchronized void pageSafeExecute(Runnable runnable)
+	    {
+	        if (!_isDisposed)
+	        {
+    	        if (!_arePagesLoaded.get())
+    	        {
+    	            _deferredRunnables.add(runnable);
+    	        }
+    	        else
+    	        {
+    	            runnable.run();
+    	        }
+	        }
+	    }
+	    
+        /**
+         * @return true if the pages are loaded
+         */
+        public synchronized boolean getArePagesLoaded() 
+        {
+            return _arePagesLoaded.get();
+        }
+        
+        /**
+         * Remove the wait page if present.
+         */
+        public synchronized void removeWaitPage()
+        {
+            if (_waitPage != null)
+            {
+                int index = _waitPage.getIndex();
+                
+                if (index >= 0)
+                {
+                    removePage(index);
+                }
+            }
+        }
+        
+        /**
+         * Add the wait page if the main pages aren't already loaded
+         */
+        public synchronized void maybeAddWaitPage()
+        {
+            // only load the wait page if the other pages haven't been loaded
+            if (!getArePagesLoaded())
+            {
+                _waitPage = new WaitForLoadPage(FacesConfigEditor.this, "WaitForLoad", EditorMessages.FacesConfigEditor_WaitForLoad_EditorTabTitle); //$NON-NLS-1$
+                
+                try
+                {
+                    addPage(0,_waitPage);
+                }
+                catch(PartInitException pie)
+                {
+                    _waitPage =null;
+                    EditorPlugin.getDefault().getLog().log(
+                            new Status(IStatus.ERROR, EditorPlugin.getPluginId(),
+                                    IStatus.OK, pie.getMessage() == null ? "" : pie //$NON-NLS-1$
+                                            .getMessage(), pie));
+                }
+            }
+        }
 
-			IPath relativePath = modelPath;
-			if (webContentFolder.getFullPath().isPrefixOf(modelPath)) {
-				relativePath = modelPath.removeFirstSegments(webContentFolder
-						.getFullPath().segmentCount());
-			}
+        /**
+         * Must be run on the UI thread
+         */
+        public void doRun(FacesConfigArtifactEdit  edit) 
+        {
+            synchronized(this)
+            {
+                // ensure wait page gets removed
+                removeWaitPage();
+                
+                if (!getArePagesLoaded()
+                        && !_isDisposed)  // NOTE: we assume that access to variable does not need to
+                                          // to be synchronous since this method must 
+                                          // be run on the UI thread.  The only way
+                                          // that isDisposed should be true is if model loading took a long
+                                          // time and the user closed the editor before it completed (trigger dispose to be called)
+                {
+                    try 
+                    {
+                        if (isWebProject
+                                && edit != null) 
+                        {
+                            // only add the intro editor if the preference
+                            // is set to do so.
+                            if (GEMPreferences.getShowIntroEditor())
+                            {
+                                IntroductionPage page1 = new IntroductionPage(FacesConfigEditor.this);
+                                addPage(page1, null);
+                            }
+                            
+                            IFormPage overviewPage = new OverviewPage(FacesConfigEditor.this);
+                            addPage(overviewPage, null);
+        
+                            // Page flow
+                            createAndAddPageflowPage();
+        
+                            // pages
+                            IFormPage managedBeanPage = new ManagedBeanPage(FacesConfigEditor.this);
+                            managedBeanPageID = addPage(managedBeanPage, null);
+                            IFormPage componentsPage = new ComponentsPage(FacesConfigEditor.this);
+                            componentsPageID = addPage(componentsPage, null);
+                            IFormPage othersPage = new OthersPage(FacesConfigEditor.this);
+                            othersPageID = addPage(othersPage, null);
+                        }
+        
+                        sourcePage = new StructuredTextEditor();
+        
+                        sourcePage.setEditorPart(FacesConfigEditor.this);
+        
+                        sourcePageId = addPage(sourcePage, FacesConfigEditor.this.getEditorInput());
+                        setPageText(sourcePageId,
+                                EditorMessages.FacesConfigEditor_Source_TabName);
+                        sourcePage.update();
+                        
+                        // default active page to 0
+                        setActivePage(0);
 
-			facesConfigAtrifactEdit = FacesConfigArtifactEdit
-					.getFacesConfigArtifactEditForWrite(project, relativePath
-							.toString());
-		}
+                        // execute deferred runnables
+                        for (Runnable runnable : _deferredRunnables)
+                        {
+                            runnable.run();
+                        }
+                        
+                        // flag the fact that the regular editor pages have been added
+                        _arePagesLoaded.set(true);
+                    } catch (PartInitException e) {
+                        EditorPlugin.getDefault().getLog().log(
+                                new Status(IStatus.ERROR, EditorPlugin.getPluginId(),
+                                        IStatus.OK, e.getMessage() == null ? "" : e //$NON-NLS-1$
+                                                .getMessage(), e));
+                    }
+                }
+            }
+        }
 	}
-
-	protected void addPages() {
-		try {
-			if (isWebProject) {
-				IntroductionPage page1 = new IntroductionPage(this);
-				addPage(page1, null);
-
-				IFormPage overviewPage = new OverviewPage(this);
-				addPage(overviewPage, null);
-
-				// Page flow
-				createAndAddPageflowPage();
-
-				// pages
-				IFormPage managedBeanPage = new ManagedBeanPage(this);
-				managedBeanPageID = addPage(managedBeanPage, null);
-				IFormPage componentsPage = new ComponentsPage(this);
-				componentsPageID = addPage(componentsPage, null);
-				IFormPage othersPage = new OthersPage(this);
-				othersPageID = addPage(othersPage, null);
-			}
-
-			sourcePage = new StructuredTextEditor();
-
-			sourcePage.setEditorPart(this);
-
-			sourcePageId = addPage(sourcePage, this.getEditorInput());
-			setPageText(sourcePageId,
-					EditorMessages.FacesConfigEditor_Source_TabName);
-			sourcePage.update();
-
-		} catch (PartInitException e) {
-			EditorPlugin.getDefault().getLog().log(
-					new Status(IStatus.ERROR, EditorPlugin.getPluginId(),
-							IStatus.OK, e.getMessage() == null ? "" : e
-									.getMessage(), e));
-		}
-
-	}
-
+	
 	/**
 	 * Creates the pageflow page of the multi-page editor.
+	 * @throws PartInitException 
 	 */
 	protected void createAndAddPageflowPage() throws PartInitException {
 		pageflowPage = new PageflowEditor(this);
@@ -431,12 +584,17 @@ public class FacesConfigEditor extends FormEditor implements
 		pageflowPage.getModelsTransform().setListenToNotify(true);
 	}
 
+	/**
+	 * TODO: this is used only for testing
+	 * @return the page flow editor
+	 */
 	public PageflowEditor getPageflowPage() {
 		return pageflowPage;
 	}
 
 	/**
 	 * get the action's registry of sub pages.
+	 * @param page 
 	 * 
 	 */
 	protected void addPageActionRegistry(IEditorPart page) {
@@ -470,11 +628,16 @@ public class FacesConfigEditor extends FormEditor implements
 	/**
 	 * Returns the root object of the configuration model.
 	 * 
-	 * @return the root object
+	 * @return the root object.  Should not, but may return null.
 	 */
-	public FacesConfigType getFacesConfig() {
-		FacesConfigType facesConfig = facesConfigAtrifactEdit.getFacesConfig();
-		return facesConfig;
+	public FacesConfigType getFacesConfig() 
+	{
+	    FacesConfigArtifactEdit  edit = _modelLoader.getEdit();
+	    if (edit != null)
+	    {
+	        return edit.getFacesConfig();
+	    }
+	    return null;
 	}
 
 	/*
@@ -504,6 +667,7 @@ public class FacesConfigEditor extends FormEditor implements
 		 * Adds a <code>CommandStack</code> to observe.
 		 * 
 		 * @param commandStack
+		 * @param editor 
 		 */
 		public void addCommandStack(CommandStack commandStack,
 				IEditorPart editor) {
@@ -651,9 +815,10 @@ public class FacesConfigEditor extends FormEditor implements
 		WorkspaceModifyOperation operation = new WorkspaceModifyOperation() {
 			public void execute(IProgressMonitor monitor_) {
 				try {
-					if (isWebProject) {
+					if (isWebProject &&
+					        _modelLoader.getEdit() != null) {
 						// modelResource.save(Collections.EMPTY_MAP);
-						facesConfigAtrifactEdit
+						_modelLoader.getEdit()
 								.getDeploymentDescriptorResource().save(
 										Collections.EMPTY_MAP);
 						IFile file = ((IFileEditorInput) getEditorInput())
@@ -666,7 +831,7 @@ public class FacesConfigEditor extends FormEditor implements
 					EditorPlugin.getDefault().getLog().log(
 							new Status(IStatus.ERROR, EditorPlugin
 									.getPluginId(), IStatus.OK,
-									e.getMessage() == null ? "" : e
+									e.getMessage() == null ? "" : e //$NON-NLS-1$
 											.getMessage(), e));
 				}
 			}
@@ -712,8 +877,12 @@ public class FacesConfigEditor extends FormEditor implements
 		}
 	}
 
+	/**
+	 * @param uri
+	 * @param editorInput
+	 */
 	protected void doSaveAs(URI uri, IEditorInput editorInput) {
-		((Resource) editingDomain.getResourceSet().getResources().get(0))
+		editingDomain.getResourceSet().getResources().get(0)
 				.setURI(uri);
 		setInputWithNotify(editorInput);
 		setPartName(editorInput.getName());
@@ -768,7 +937,7 @@ public class FacesConfigEditor extends FormEditor implements
 	 * @return - the <code>DelegatingZoomManager</code>
 	 */
 	protected DelegatingZoomManager getDelegatingZoomManager() {
-		if (!isValidInput(getEditorInput()) || !isWebProject) {
+		if (!isValidInput(getEditorInput()) || !isWebProject || !_addPagesTask.getArePagesLoaded()) {
 			return null;
 		}
 		if (null == delegatingZoomManager) {
@@ -828,8 +997,16 @@ public class FacesConfigEditor extends FormEditor implements
 		}
 		if (adapter == IGotoMarker.class) {
 			return new IGotoMarker() {
-				public void gotoMarker(IMarker marker) {
-					FacesConfigEditor.this.gotoMarker(marker);
+				public void gotoMarker(final IMarker marker) {
+				    // this may be called on an editor open (i.e. double-click the Problems view)
+				    // so ensure it runs safely with respect to the page load
+				    _addPagesTask.pageSafeExecute(new Runnable()
+				    {
+				        public void run()
+				        {
+		                    FacesConfigEditor.this.gotoMarker(marker);
+				        }
+				    });
 				}
 			};
 		}
@@ -890,7 +1067,7 @@ public class FacesConfigEditor extends FormEditor implements
             {
                 EditorPlugin.getDefault().getLog().log(
                    new Status(IStatus.ERROR, EditorPlugin.getPluginId(), 0, 
-                           "Error getting undo stack for Faces Config editor.  Undo may be disabled",
+                           "Error getting undo stack for Faces Config editor.  Undo may be disabled", //$NON-NLS-1$
                            new Throwable()));
             }
 		}
@@ -986,10 +1163,14 @@ public class FacesConfigEditor extends FormEditor implements
 		currentPageChanged();
 	}
 
-	public void dispose() {
-		if (facesConfigAtrifactEdit != null)
-			facesConfigAtrifactEdit.dispose();
-		ResourcesPlugin.getWorkspace().removeResourceChangeListener(
+	public void dispose() 
+	{
+        // signal that we have been disposed
+        // do this before anything else
+	    _isDisposed = true;
+	    _modelLoader.dispose();
+	    
+	    ResourcesPlugin.getWorkspace().removeResourceChangeListener(
 				resourceChangeListener);
 
 		adapterFactory.dispose();
@@ -1008,8 +1189,8 @@ public class FacesConfigEditor extends FormEditor implements
 	 */
 	public IProject getProject() {
 		if (currentProject == null) {
-			if (facesConfigAtrifactEdit != null) {
-				IFile file = facesConfigAtrifactEdit.getFile();
+			if (_modelLoader.getEdit() != null) {
+				IFile file = _modelLoader.getEdit().getFile();
 				if (file != null)
 					currentProject = file.getProject();
 			}
@@ -1057,31 +1238,34 @@ public class FacesConfigEditor extends FormEditor implements
 		}
 	}
 
-	public void gotoMarker(IMarker marker) {
+	private void gotoMarker(IMarker marker) {
 		setActivePage(sourcePageId);
 		IDE.gotoMarker(this.sourcePage, marker);
 	}
 
+	/**
+	 * FIXME: this is used only for testing. Should isolate better
+	 * @return the action bar
+	 */
 	public FacesConfigActionBarContributor getActionBarContributor() {
 		return (FacesConfigActionBarContributor) getEditorSite()
 				.getActionBarContributor();
 	}
 
-	public IActionBars getActionBars() {
+	private IActionBars getActionBars() {
 		return getActionBarContributor().getActionBars();
 	}
 
 	/**
 	 * Shows a dialog that asks if conflicting changes should be discarded.
-	 * 
-	 * @generated
+	 * @return the user's response.
 	 */
 	protected boolean handleDirtyConflict() {
 		return MessageDialog
 				.openQuestion(
 						getSite().getShell(),
-						"File Conflict",
-						"There are unsaved changes that conflict with changes made outside the editor.  Do you wish to discard this editor's changes?");
+						EditorMessages.FacesConfigEditor_ErrorHandlingUndoConflicts_DialogTitle,
+						EditorMessages.FacesConfigEditor_ErrorHandlingUndoConflicts_DialogMessage);
 	}
 
 	/**
@@ -1104,7 +1288,7 @@ public class FacesConfigEditor extends FormEditor implements
 						EditorPlugin.getDefault().getLog().log(
 								new Status(IStatus.ERROR, EditorPlugin
 										.getPluginId(), IStatus.OK, exception
-										.getMessage() == null ? "" : exception
+										.getMessage() == null ? "" : exception //$NON-NLS-1$
 										.getMessage(), exception));
 					}
 				}
@@ -1112,6 +1296,11 @@ public class FacesConfigEditor extends FormEditor implements
 		}
 	}
 
+	/**
+	 * TODO this is used only for testing.  Should be able to remove if we
+	 * go to true automated UI testing
+	 * @param pageID
+	 */
 	public void setActiveEditorPage(String pageID) {
 		if (pageID.equals(PageflowEditor.PAGE_ID)) {
 			setActivePage(pageflowPageID);
@@ -1148,7 +1337,7 @@ public class FacesConfigEditor extends FormEditor implements
 							IProjectFacet facet = version.getProjectFacet();
 							if (IJSFCoreConstants.JSF_CORE_FACET_ID.equals(facet.getId())) {
 								hasJSFFacet = true;
-							} else if ("jst.web".equals(facet.getId())) {
+							} else if ("jst.web".equals(facet.getId())) { //$NON-NLS-1$
 								hasWebFacet = true;
 							}
 						}
@@ -1157,12 +1346,24 @@ public class FacesConfigEditor extends FormEditor implements
 					EditorPlugin.getDefault().getLog().log(
 							new Status(IStatus.ERROR, EditorPlugin
 									.getPluginId(), IStatus.OK,
-									ex.getMessage() == null ? "" : ex
+									ex.getMessage() == null ? "" : ex //$NON-NLS-1$
 											.getMessage(), ex));
 				}
 			}
 		}
 
 		return hasWebFacet && hasJSFFacet;
+	}
+	
+    /**
+     * DANGER!  This call is for testing only!  Should not be used,
+     * even internally, by production code.
+     * @param timeoutMs the time to wait in milliseconds
+     * @throws InterruptedException 
+     */	
+	public void doPageLoad(long timeoutMs) throws InterruptedException
+	{
+	    _modelLoader.waitForLoad(timeoutMs);
+	    _addPagesTask.doRun(_modelLoader.getEdit());
 	}
 }

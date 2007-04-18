@@ -11,23 +11,14 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.facesconfig.ui.preference;
 
-import java.util.Iterator;
-
 import org.eclipse.draw2d.ColorConstants;
-import org.eclipse.draw2d.Figure;
-import org.eclipse.draw2d.PositionConstants;
-import org.eclipse.draw2d.geometry.Dimension;
-import org.eclipse.gef.EditPart;
-import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.ColorFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.IntegerFieldEditor;
 import org.eclipse.jface.preference.PreferenceConverter;
-import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.jface.resource.ColorRegistry;
-import org.eclipse.jface.resource.FontRegistry;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.swt.SWT;
@@ -35,7 +26,6 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
-import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -59,6 +49,11 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
 public class GEMPreferences extends FieldEditorPreferencePage implements
 		IWorkbenchPreferencePage {
 	// appearance
+    /**
+     * Key for preference for whether or not the intro editor should be shown
+     */
+    public final static String SHOW_INTRO_EDITOR = "ShowIntroEditor";
+    
 	public final static String USE_SYSTEM_COLORS = "UseSystemColors"; //$NON-NLS-1$
 
 	public final static String CANVAS_COLOR = "CanvasColor"; //$NON-NLS-1$
@@ -174,18 +169,30 @@ public class GEMPreferences extends FieldEditorPreferencePage implements
 	private class BooleanField extends BooleanFieldEditor {
 		private Composite parent;
 
+		/**
+		 * @param name
+		 * @param label
+		 * @param parent
+		 */
 		public BooleanField(String name, String label, Composite parent) {
 			super(name, label, parent);
 			this.parent = parent;
 		}
 
+		/**
+		 * @return the change control button
+		 */
 		public Button getButton() {
 			return getChangeControl(parent);
 		}
 	}
 
+	/**
+	 * Constructor
+	 */
 	public GEMPreferences() {
 		super(GRID);
+		// FIXME: we should be encapsulating what pref store is used for all callers of this class
 		setPreferenceStore(EditorPlugin.getDefault().getPreferenceStore());
 		setDescription("Preferences for the graphical page of FacesConfig editor.");
 		initializeDefaults();
@@ -199,6 +206,7 @@ public class GEMPreferences extends FieldEditorPreferencePage implements
 		Font f = JFaceResources.getFontRegistry().get(
 				JFaceResources.DEFAULT_FONT);
 
+		store.setDefault(SHOW_INTRO_EDITOR, true);
 		store.setDefault(USE_SYSTEM_COLORS, true);
 		PreferenceConverter.setDefault(store, CANVAS_COLOR, new RGB(255, 255,
 				255));
@@ -226,6 +234,14 @@ public class GEMPreferences extends FieldEditorPreferencePage implements
 	 */
 
 	public void createFieldEditors() {
+	    
+	    // note, we aren't saving the reference.  It's assumed that parent
+	    // worries about destruction, persistence etc.
+	    addBooleanField(
+	            SHOW_INTRO_EDITOR,
+	            PreferenceMessages.EditorPreferences_LABEL_ShowIntroEditor,
+	            getFieldEditorParent());
+	            
 		useSystemColors = addBooleanField(
 				USE_SYSTEM_COLORS,
 				PreferenceMessages.CanvasPreferenceTab_LABEL_UseSystemColors,
@@ -388,14 +404,14 @@ public class GEMPreferences extends FieldEditorPreferencePage implements
         // no initialization
 	}
 
-	protected ColorFieldEditor addColorField(String name, String labelText,
+	private ColorFieldEditor addColorField(String name, String labelText,
 			Composite parent) {
 		ColorFieldEditor f = new ColorFieldEditor(name, labelText, parent);
 		addField(f);
 		return f;
 	}
 
-	protected ComboFieldEditor addComboField(String name, String labelText,
+	private ComboFieldEditor addComboField(String name, String labelText,
 			String[][] entryNamesAndValues, Composite parent) {
 		ComboFieldEditor f = new ComboFieldEditor(name, labelText,
 				entryNamesAndValues, parent);
@@ -403,26 +419,26 @@ public class GEMPreferences extends FieldEditorPreferencePage implements
 		return f;
 	}
 
-	protected IntegerFieldEditor addIntegerField(String name, String labelText,
+	private IntegerFieldEditor addIntegerField(String name, String labelText,
 			Composite parent) {
 		IntegerFieldEditor f = new IntegerFieldEditor(name, labelText, parent);
 		addField(f);
 		return f;
 	}
 
-	protected BooleanField addBooleanField(String name, String labelText,
+	private BooleanField addBooleanField(String name, String labelText,
 			Composite parent) {
 		BooleanField f = new BooleanField(name, labelText, parent);
 		addField(f);
 		return f;
 	}
 
-	protected StringFieldEditor addStringField(String name, String labelText,
-			Composite parent) {
-		StringFieldEditor f = new StringFieldEditor(name, labelText, parent);
-		addField(f);
-		return f;
-	}
+//	private StringFieldEditor addStringField(String name, String labelText,
+//			Composite parent) {
+//		StringFieldEditor f = new StringFieldEditor(name, labelText, parent);
+//		addField(f);
+//		return f;
+//	}
 
 	// protected NumberField addNumberField(String name, String labelText,
 	// Composite parent)
@@ -432,7 +448,7 @@ public class GEMPreferences extends FieldEditorPreferencePage implements
 	// return f;
 	// }
 
-	protected ColorFontFieldEditor addFontField(String name, String labelText,
+	private ColorFontFieldEditor addFontField(String name, String labelText,
 			Composite parent) {
 		ColorFontFieldEditor f = new ColorFontFieldEditor(name, labelText,
 				parent);
@@ -440,24 +456,39 @@ public class GEMPreferences extends FieldEditorPreferencePage implements
 		return f;
 	}
 
-	public static String[][] getLineRoutingLabels() {
+	private static String[][] getLineRoutingLabels() {
 		return m_lineRoutingLabels;
 	}
 
-	public static String[][] getLabelPlacementLabels() {
+	private static String[][] getLabelPlacementLabels() {
 		return m_labelPlacementLabels;
 	}
 
-	public static void propagateProperty(String property, EditPart part) {
-		Iterator iter = part.getChildren().iterator();
-		while (iter.hasNext()) {
-			EditPart child = (EditPart) iter.next();
-			Figure fig = (Figure) ((GraphicalEditPart) child).getFigure();
-			GEMPreferences.propagateProperty(property, fig);
-			propagateProperty(property, child);
-		}
-	}
+//	private static void propagateProperty(String property, EditPart part) {
+//		Iterator iter = part.getChildren().iterator();
+//		while (iter.hasNext()) {
+//			EditPart child = (EditPart) iter.next();
+//			Figure fig = (Figure) ((GraphicalEditPart) child).getFigure();
+//			GEMPreferences.propagateProperty(property, fig);
+//			propagateProperty(property, child);
+//		}
+//	}
 
+	/**
+	 * @return true if the preference is set to show the introduction
+	 * editor.  false otherwise.
+	 */
+	public static boolean getShowIntroEditor()
+	{
+	    IPreferenceStore store = EditorPlugin.getDefault().getPreferenceStore();
+	    return store.getBoolean(SHOW_INTRO_EDITOR);
+	}
+	
+	/**
+	 * @param store
+	 * @param property
+	 * @return the color property for the key 'property'
+	 */
 	public static Color getColor(IPreferenceStore store, String property) {
 		boolean useSystemColors = store.getBoolean(USE_SYSTEM_COLORS);
 
@@ -492,196 +523,196 @@ public class GEMPreferences extends FieldEditorPreferencePage implements
 		return c;
 	}
 
-	// CR392586: resource leaks
-	public static Font getFont(IPreferenceStore store, String property) {
-		FontData fd = PreferenceConverter.getFontData(store, property);
-		FontRegistry registry = JFaceResources.getFontRegistry();
-		if (!registry.get(fd.toString()).equals(registry.defaultFont()))
-			return registry.get(fd.toString());
+//	// CR392586: resource leaks
+//	private static Font getFont(IPreferenceStore store, String property) {
+//		FontData fd = PreferenceConverter.getFontData(store, property);
+//		FontRegistry registry = JFaceResources.getFontRegistry();
+//		if (!registry.get(fd.toString()).equals(registry.defaultFont()))
+//			return registry.get(fd.toString());
+//
+//		registry.put(fd.toString(), new FontData[] {fd});
+//		return registry.get(fd.toString());
+//	}
 
-		registry.put(fd.toString(), new FontData[] {fd});
-		return registry.get(fd.toString());
-	}
-
-	public static void propagateProperty(String property, Figure fig) {
-		IPreferenceStore store = EditorPlugin.getDefault().getPreferenceStore();
-		WindowFigure window = null;
-		IconFigure icon = null;
-		LinkFigure link = null;
-		if (fig instanceof CompoundNodeFigure) {
-			window = ((CompoundNodeFigure) fig).getWindowFigure();
-			icon = ((CompoundNodeFigure) fig).getIconFigure();
-		} else if (fig instanceof WindowFigure)
-			window = (WindowFigure) fig;
-		else if (fig instanceof LinkFigure)
-			link = (LinkFigure) fig;
-
-		if (property != null && property.equals(USE_SYSTEM_COLORS))
-			// reload all properties - it's easiest
-			property = null;
-
-		if (property == null || SNAP_TO_GRID.equals(property)) {
-			boolean b = store.getBoolean(SNAP_TO_GRID);
-			WindowFigure.defaultGridEnabled = b;
-
-			if (window != null)
-				window.getGridLayer().setVisible(b);
-		}
-
-		if (property == null || GRID_WIDTH.equals(property)
-				|| GRID_HEIGHT.equals(property)) {
-			Dimension d = new Dimension(store.getInt(GRID_WIDTH), store
-					.getInt(GRID_HEIGHT));
-			WindowFigure.defaultGridSpacing = d;
-
-			if (window != null)
-				window.getGridLayer().setSpacing(d);
-		}
-
-		if (property == null || GRID_COLOR.equals(property)) {
-			Color c = getColor(store, GRID_COLOR);
-			WindowFigure.defaultGridColor = c;
-
-			if (window != null)
-				window.getGridLayer().setForegroundColor(c);
-		}
-
-		// TODO: since the line router is managed by the EditPart for the
-		// container figure, setting the line routing style in the WindowFigure
-		// does not change the line routing immediately. The editor must be
-		// restarted for line routing to take effect.
-		if (property == null || LINE_ROUTING.equals(property)) {
-			String s = store.getString(LINE_ROUTING);
-			int style;
-			if (LINE_ROUTING_MANHATTAN.equals(s))
-				style = WindowFigure.LINE_ROUTING_MANHATTAN;
-			else
-				style = WindowFigure.LINE_ROUTING_MANUAL;
-
-			WindowFigure.defaultLineRoutingStyle = style;
-			if (window != null)
-				window.setLineRoutingStyle(style);
-		}
-
-		if (property == null || LINE_WIDTH.equals(property)) {
-			int w = store.getInt(LINE_WIDTH);
-			LinkFigure.defaultLineWidth = w;
-
-			if (link != null)
-				link.setLineWidth(w);
-		}
-
-		if (property == null || LINE_COLOR.equals(property)) {
-			Color c = getColor(store, LINE_COLOR);
-			LinkFigure.defaultLineColor = c;
-
-			if (link != null)
-				link.setForegroundColor(c);
-		}
-
-		if (property == null || SHOW_LINE_LABELS.equals(property)) {
-			boolean b = store.getBoolean(SHOW_LINE_LABELS);
-			LinkFigure.defaultLabelVisible = b;
-
-			if (link != null)
-				link.setLabelVisible(b);
-		}
-
-		if (property == null || LINE_LABEL_FONT.equals(property)
-				|| LINE_LABEL_FONT_COLOR.equals(property)) {
-			// CR392586: resource leaks
-			Font f = getFont(store, LINE_LABEL_FONT);
-			Color c = getColor(store, LINE_LABEL_FONT_COLOR);
-			LinkFigure.defaultFont = f;
-			LinkFigure.defaultLabelForeground = c;
-
-			if (link != null) {
-				link.setFont(f);
-				link.setLabelForeground(c);
-			}
-		}
-
-		if (property == null || LINE_LABEL_COLOR.equals(property)) {
-			Color c = getColor(store, LINE_LABEL_COLOR);
-			LinkFigure.defaultLabelBackground = c;
-
-			if (link != null)
-				link.setLabelBackground(c);
-		}
-
-		if (property == null || CANVAS_COLOR.equals(property)) {
-			Color c = getColor(store, CANVAS_COLOR);
-			WindowFigure.defaultBackgroundColor = c;
-
-			if (window != null)
-				window.setBackgroundColor(c);
-			if (icon != null)
-				icon.setBackgroundColor(c);
-		}
-
-		if (property == null || INPUT_PORT_COLOR.equals(property)) {
-			Color c = getColor(store, INPUT_PORT_COLOR);
-			InputPortFigure.defaultForegroundColor = c;
-
-			if (fig instanceof InputPortFigure)
-				fig.setForegroundColor(c);
-		}
-
-		if (property == null || OUTPUT_PORT_COLOR.equals(property)) {
-			Color c = getColor(store, OUTPUT_PORT_COLOR);
-			OutputPortFigure.defaultForegroundColor = c;
-
-			if (fig instanceof OutputPortFigure)
-				fig.setForegroundColor(c);
-		}
-
-		if (property == null || FIGURE_LABEL_FONT.equals(property)
-				|| FIGURE_LABEL_FONT_COLOR.equals(property)) {
-			// CR392586: resource leaks
-			Font f = getFont(store, FIGURE_LABEL_FONT);
-			Color c = getColor(store, FIGURE_LABEL_FONT_COLOR);
-			IconFigure.defaultFont = f;
-			IconFigure.defaultForegroundColor = c;
-			WindowFigure.defaultFont = f;
-			WindowFigure.defaultForegroundColor = c;
-
-			if (window != null) {
-				window.setFont(f);
-				window.setForegroundColor(c);
-			}
-			if (icon != null) {
-				icon.setFont(f);
-				icon.setForegroundColor(c);
-			}
-			if (fig instanceof IconFigure) {
-				fig.setFont(f);
-				fig.setForegroundColor(c);
-			}
-		}
-
-		if (property == null || LABEL_PLACEMENT.equals(property)) {
-			int placement = PositionConstants.SOUTH;
-			String s = store.getString(LABEL_PLACEMENT);
-			if (LABEL_PLACEMENT_TOP.equals(s))
-				placement = PositionConstants.NORTH;
-			if (LABEL_PLACEMENT_BOTTOM.equals(s))
-				placement = PositionConstants.SOUTH;
-			if (LABEL_PLACEMENT_LEFT.equals(s))
-				placement = PositionConstants.WEST;
-			if (LABEL_PLACEMENT_RIGHT.equals(s))
-				placement = PositionConstants.EAST;
-			IconFigure.defaultTextPlacement = placement;
-
-			if (icon != null)
-				icon.setTextPlacement(placement);
-			if (fig instanceof IconFigure)
-				((IconFigure) fig).setTextPlacement(placement);
-		}
-
-		Iterator iter = fig.getChildren().iterator();
-		while (iter.hasNext()) {
-			Figure child = (Figure) iter.next();
-			propagateProperty(property, child);
-		}
-	}
+//	private static void propagateProperty(String property, Figure fig) {
+//		IPreferenceStore store = EditorPlugin.getDefault().getPreferenceStore();
+//		WindowFigure window = null;
+//		IconFigure icon = null;
+//		LinkFigure link = null;
+//		if (fig instanceof CompoundNodeFigure) {
+//			window = ((CompoundNodeFigure) fig).getWindowFigure();
+//			icon = ((CompoundNodeFigure) fig).getIconFigure();
+//		} else if (fig instanceof WindowFigure)
+//			window = (WindowFigure) fig;
+//		else if (fig instanceof LinkFigure)
+//			link = (LinkFigure) fig;
+//
+//		if (property != null && property.equals(USE_SYSTEM_COLORS))
+//			// reload all properties - it's easiest
+//			property = null;
+//
+//		if (property == null || SNAP_TO_GRID.equals(property)) {
+//			boolean b = store.getBoolean(SNAP_TO_GRID);
+//			WindowFigure.defaultGridEnabled = b;
+//
+//			if (window != null)
+//				window.getGridLayer().setVisible(b);
+//		}
+//
+//		if (property == null || GRID_WIDTH.equals(property)
+//				|| GRID_HEIGHT.equals(property)) {
+//			Dimension d = new Dimension(store.getInt(GRID_WIDTH), store
+//					.getInt(GRID_HEIGHT));
+//			WindowFigure.defaultGridSpacing = d;
+//
+//			if (window != null)
+//				window.getGridLayer().setSpacing(d);
+//		}
+//
+//		if (property == null || GRID_COLOR.equals(property)) {
+//			Color c = getColor(store, GRID_COLOR);
+//			WindowFigure.defaultGridColor = c;
+//
+//			if (window != null)
+//				window.getGridLayer().setForegroundColor(c);
+//		}
+//
+//		// TODO: since the line router is managed by the EditPart for the
+//		// container figure, setting the line routing style in the WindowFigure
+//		// does not change the line routing immediately. The editor must be
+//		// restarted for line routing to take effect.
+//		if (property == null || LINE_ROUTING.equals(property)) {
+//			String s = store.getString(LINE_ROUTING);
+//			int style;
+//			if (LINE_ROUTING_MANHATTAN.equals(s))
+//				style = WindowFigure.LINE_ROUTING_MANHATTAN;
+//			else
+//				style = WindowFigure.LINE_ROUTING_MANUAL;
+//
+//			WindowFigure.defaultLineRoutingStyle = style;
+//			if (window != null)
+//				window.setLineRoutingStyle(style);
+//		}
+//
+//		if (property == null || LINE_WIDTH.equals(property)) {
+//			int w = store.getInt(LINE_WIDTH);
+//			LinkFigure.defaultLineWidth = w;
+//
+//			if (link != null)
+//				link.setLineWidth(w);
+//		}
+//
+//		if (property == null || LINE_COLOR.equals(property)) {
+//			Color c = getColor(store, LINE_COLOR);
+//			LinkFigure.defaultLineColor = c;
+//
+//			if (link != null)
+//				link.setForegroundColor(c);
+//		}
+//
+//		if (property == null || SHOW_LINE_LABELS.equals(property)) {
+//			boolean b = store.getBoolean(SHOW_LINE_LABELS);
+//			LinkFigure.defaultLabelVisible = b;
+//
+//			if (link != null)
+//				link.setLabelVisible(b);
+//		}
+//
+//		if (property == null || LINE_LABEL_FONT.equals(property)
+//				|| LINE_LABEL_FONT_COLOR.equals(property)) {
+//			// CR392586: resource leaks
+//			Font f = getFont(store, LINE_LABEL_FONT);
+//			Color c = getColor(store, LINE_LABEL_FONT_COLOR);
+//			LinkFigure.defaultFont = f;
+//			LinkFigure.defaultLabelForeground = c;
+//
+//			if (link != null) {
+//				link.setFont(f);
+//				link.setLabelForeground(c);
+//			}
+//		}
+//
+//		if (property == null || LINE_LABEL_COLOR.equals(property)) {
+//			Color c = getColor(store, LINE_LABEL_COLOR);
+//			LinkFigure.defaultLabelBackground = c;
+//
+//			if (link != null)
+//				link.setLabelBackground(c);
+//		}
+//
+//		if (property == null || CANVAS_COLOR.equals(property)) {
+//			Color c = getColor(store, CANVAS_COLOR);
+//			WindowFigure.defaultBackgroundColor = c;
+//
+//			if (window != null)
+//				window.setBackgroundColor(c);
+//			if (icon != null)
+//				icon.setBackgroundColor(c);
+//		}
+//
+//		if (property == null || INPUT_PORT_COLOR.equals(property)) {
+//			Color c = getColor(store, INPUT_PORT_COLOR);
+//			InputPortFigure.defaultForegroundColor = c;
+//
+//			if (fig instanceof InputPortFigure)
+//				fig.setForegroundColor(c);
+//		}
+//
+//		if (property == null || OUTPUT_PORT_COLOR.equals(property)) {
+//			Color c = getColor(store, OUTPUT_PORT_COLOR);
+//			OutputPortFigure.defaultForegroundColor = c;
+//
+//			if (fig instanceof OutputPortFigure)
+//				fig.setForegroundColor(c);
+//		}
+//
+//		if (property == null || FIGURE_LABEL_FONT.equals(property)
+//				|| FIGURE_LABEL_FONT_COLOR.equals(property)) {
+//			// CR392586: resource leaks
+//			Font f = getFont(store, FIGURE_LABEL_FONT);
+//			Color c = getColor(store, FIGURE_LABEL_FONT_COLOR);
+//			IconFigure.defaultFont = f;
+//			IconFigure.defaultForegroundColor = c;
+//			WindowFigure.defaultFont = f;
+//			WindowFigure.defaultForegroundColor = c;
+//
+//			if (window != null) {
+//				window.setFont(f);
+//				window.setForegroundColor(c);
+//			}
+//			if (icon != null) {
+//				icon.setFont(f);
+//				icon.setForegroundColor(c);
+//			}
+//			if (fig instanceof IconFigure) {
+//				fig.setFont(f);
+//				fig.setForegroundColor(c);
+//			}
+//		}
+//
+//		if (property == null || LABEL_PLACEMENT.equals(property)) {
+//			int placement = PositionConstants.SOUTH;
+//			String s = store.getString(LABEL_PLACEMENT);
+//			if (LABEL_PLACEMENT_TOP.equals(s))
+//				placement = PositionConstants.NORTH;
+//			if (LABEL_PLACEMENT_BOTTOM.equals(s))
+//				placement = PositionConstants.SOUTH;
+//			if (LABEL_PLACEMENT_LEFT.equals(s))
+//				placement = PositionConstants.WEST;
+//			if (LABEL_PLACEMENT_RIGHT.equals(s))
+//				placement = PositionConstants.EAST;
+//			IconFigure.defaultTextPlacement = placement;
+//
+//			if (icon != null)
+//				icon.setTextPlacement(placement);
+//			if (fig instanceof IconFigure)
+//				((IconFigure) fig).setTextPlacement(placement);
+//		}
+//
+//		Iterator iter = fig.getChildren().iterator();
+//		while (iter.hasNext()) {
+//			Figure child = (Figure) iter.next();
+//			propagateProperty(property, child);
+//		}
+//	}
 }

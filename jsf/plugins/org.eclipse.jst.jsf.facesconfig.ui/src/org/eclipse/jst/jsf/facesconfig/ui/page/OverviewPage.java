@@ -40,9 +40,9 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 public class OverviewPage extends FormPage implements ISelectionProvider,
 		IFacesConfigPage {
 
-	protected static final int LAYOUT_MARGIN_HEIGHT = 2;
+	private static final int LAYOUT_MARGIN_HEIGHT = 2;
 
-	protected static final int LAYOUT_MARGIN_WIDTH = 2;
+	private static final int LAYOUT_MARGIN_WIDTH = 2;
 
 	private Object input;
 
@@ -162,6 +162,9 @@ public class OverviewPage extends FormPage implements ISelectionProvider,
 		}
 	}
 
+	/**
+	 * Call refreshAll on all sections on this page
+	 */
 	public void refreshAll() {
 		generalSection.refreshAll();
 		navigationSection.refreshAll();

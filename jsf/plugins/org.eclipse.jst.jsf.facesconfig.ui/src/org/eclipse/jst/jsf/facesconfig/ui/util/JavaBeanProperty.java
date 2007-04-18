@@ -32,7 +32,10 @@ public class JavaBeanProperty {
 	private IMethod setterMethod;
 
 	/**
-	 * 
+	 * @param name 
+	 * @param signatureType 
+	 * @param getterMethod 
+	 * @param setterMethod 
 	 */
 	public JavaBeanProperty(String name, String signatureType,
 			IMethod getterMethod, IMethod setterMethod) {

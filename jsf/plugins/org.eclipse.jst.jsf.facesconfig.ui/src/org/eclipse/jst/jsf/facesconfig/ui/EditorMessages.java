@@ -26,7 +26,13 @@ public final class EditorMessages extends NLS {
 		NLS.initializeMessages(BUNDLE_NAME, EditorMessages.class);
 	}
 
-	public static String UI_Button_Add;
+	public static String FacesConfigEditor_ErrorHandlingUndoConflicts_DialogMessage;
+
+    public static String FacesConfigEditor_ErrorHandlingUndoConflicts_DialogTitle;
+
+    public static String FacesConfigEditor_WaitForLoad_EditorTabTitle;
+
+    public static String UI_Button_Add;
 
 	public static String UI_Button_Edit;
 
@@ -675,4 +681,8 @@ public final class EditorMessages extends NLS {
 	public static String FacesConfigEditor_Error_OpenModel_Title;
 
 	public static String FacesConfigEditor_Error_OpenModel;
+	
+	public static String FacesConfigEditor_WaitForLoadPage_Title;
+	
+	public static String ModelLoader_LoadingModelJobName;
 }

@@ -48,10 +48,16 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
  */
 public class ManagedBeanPage extends FacesConfigMasterDetailPage {
 
+    /**
+     * The id of this page in the faces-config editor.
+     */
 	public static final String PAGE_ID = "org.eclipse.jst.jsf.facesconfig.ui.page.ManagedBeanPage";
 
 	private IContentOutlinePage contentOutlinePage;
 
+	/**
+	 * @param editor
+	 */
 	public ManagedBeanPage(FacesConfigEditor editor) {
 		super(editor, "ManagedBeanPage",
 				EditorMessages.FacesConfigEditor_ManagedBeans_TabName);
@@ -187,6 +193,6 @@ public class ManagedBeanPage extends FacesConfigMasterDetailPage {
 	}
 
 	private ManagedBeanMasterSection getManagedBeanMasterSection() {
-		return (ManagedBeanMasterSection) facesConfigMasterSections[0];
+		return (ManagedBeanMasterSection) getFacesConfigMasterSections()[0];
 	}
 }

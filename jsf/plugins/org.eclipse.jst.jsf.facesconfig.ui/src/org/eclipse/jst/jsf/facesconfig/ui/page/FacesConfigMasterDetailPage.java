@@ -62,7 +62,7 @@ public abstract class FacesConfigMasterDetailPage extends FormPage implements
 	private final static Image BANNER_IMAGE = EditorPlugin.getDefault()
 			.getImage("form_banner.gif");
 
-	protected FacesConfigMasterSection[] facesConfigMasterSections;
+	private FacesConfigMasterSection[] facesConfigMasterSections;
 
 	private DetailsPart detailsPart;
 

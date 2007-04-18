@@ -516,9 +516,17 @@ public class FC2PFTransformer extends AdapterImpl {
 		mapCases2Links.clear();
 	}
 
+	/**
+	 * dispose of this object.
+	 */
 	public void dispose() {
 		clearCaches();
-		getPageflow().dispose();
+		Pageflow pageFlow = getPageflow();
+		
+		if (pageFlow != null)
+		{
+		    pageFlow.dispose();
+		}
 	}
 
 	public Notifier getTarget() {
