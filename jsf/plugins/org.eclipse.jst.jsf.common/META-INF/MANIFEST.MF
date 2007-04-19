@@ -7,7 +7,7 @@ Bundle-Activator: org.eclipse.jst.jsf.common.JSFCommonPlugin$Implementation
 Bundle-Localization: plugin
 Export-Package: org.eclipse.jst.jsf.common,
  org.eclipse.jst.jsf.common.dom,
- org.eclipse.jst.jsf.common.internal.types;x-friends:="org.eclipse.jst.jsf.core",
+ org.eclipse.jst.jsf.common.internal.types;x-friends:="org.eclipse.jst.jsf.core,org.eclipse.jst.jsf.core.tests,org.eclipse.jst.jsf.validation.el.tests,org.eclipse.jst.jsf.designtime.tests,org.eclipse.jst.jsf.context.symbol.tests",
  org.eclipse.jst.jsf.common.metadata,
  org.eclipse.jst.jsf.common.metadata.internal,
  org.eclipse.jst.jsf.common.metadata.internal.impl,
