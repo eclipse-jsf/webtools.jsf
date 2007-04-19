@@ -18,6 +18,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.wst.validation,
  org.eclipse.wst.internet.cache,
  org.eclipse.core.net
-Export-Package: org.eclipse.jst.jsf.test.util
+Export-Package: org.eclipse.jst.jsf.test.util,
+ org.eclipse.jst.jsf.test.util.sanity
 Eclipse-LazyStart: true
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
