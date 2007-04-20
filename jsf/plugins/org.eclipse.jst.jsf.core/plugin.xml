@@ -79,7 +79,7 @@
   <extension
      name="JSF JSP File URL"
      point="org.eclipse.jst.j2ee.web.fileURL">
-     <fileURL run="org.eclipse.jst.jsf.core.internal.launch.JSFFileURL"/>
+     <fileURL id="jsfPage"><run class="org.eclipse.jst.jsf.core.internal.launch.JSFFileURL"/></fileURL>
   </extension>
   
   <extension
