@@ -72,7 +72,7 @@ public class TestMemberConstraint extends TestCase
     {
         super.setUp();
         
-        List items = new ArrayList();
+        List<String> items = new ArrayList<String>();
         items.add("element1");
         items.add("element2");
         items.add("element3");
@@ -112,11 +112,11 @@ public class TestMemberConstraint extends TestCase
         _constraintSet3 = createSet(items);
     }
 
-    protected AxiomaticSet createSet(List items) 
+    protected AxiomaticSet createSet(List<String> items) 
     {
         ConcreteAxiomaticSet  set = new ConcreteAxiomaticSet();
         set = new ConcreteAxiomaticSet();
-        for (Iterator it = items.iterator(); it.hasNext();)
+        for (Iterator<String> it = items.iterator(); it.hasNext();)
         {
             set.add(it.next());
         }

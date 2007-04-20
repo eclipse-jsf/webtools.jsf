@@ -13,6 +13,7 @@ package org.eclipse.jst.jsf.core.tests;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
+import org.eclipse.jst.jsf.core.tests.appconfig.provider.TestJARFileJSFAppConfigProvider;
 import org.eclipse.jst.jsf.core.tests.jsflibraryconfig.JSFLibraryConfigDialogSettingDataTestCases;
 import org.eclipse.jst.jsf.core.tests.jsflibraryconfig.JSFLibraryConfigModelTestCases;
 import org.eclipse.jst.jsf.core.tests.jsflibraryconfig.JSFLibraryRegistryUtilTestCases;
@@ -56,13 +57,14 @@ public class AllTests
 		
 		suite.addTestSuite(JSFFacetInstallDataModelProviderTestCases.class);
 
+		// test the jar file appconfig provider
+		suite.addTestSuite(TestJARFileJSFAppConfigProvider.class);
 		
 		suite.addTestSuite(JSFLibraryConfigDialogSettingDataTestCases.class);
 		suite.addTestSuite(JSFProjectLibraryReferenceTestCases.class);
 		suite.addTestSuite(JSFLibraryConfigModelTestCases.class);
 		suite.addTestSuite(JSFLibraryRegistryUtilTestCases.class);
 
-		
         // NOTE: migration tests affect workspace meta-data files, but they
         // should play nice with others
 		// BUT, to be on the safe side, always run them LAST.

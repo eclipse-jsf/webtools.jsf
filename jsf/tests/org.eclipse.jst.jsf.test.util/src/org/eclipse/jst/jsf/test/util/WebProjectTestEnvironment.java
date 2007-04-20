@@ -13,6 +13,8 @@ package org.eclipse.jst.jsf.test.util;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -21,6 +23,9 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.jem.util.emf.workbench.ProjectUtilities;
+import org.eclipse.jst.common.project.facet.JavaFacetUtils;
+import org.eclipse.jst.common.project.facet.JavaProjectFacetCreationDataModelProvider;
 import org.eclipse.jst.j2ee.internal.web.archive.operations.WebFacetProjectCreationDataModelProvider;
 import org.eclipse.wst.common.componentcore.ComponentCore;
 import org.eclipse.wst.common.componentcore.datamodel.properties.IFacetProjectCreationDataModelProperties;
@@ -28,6 +33,11 @@ import org.eclipse.wst.common.componentcore.resources.IVirtualContainer;
 import org.eclipse.wst.common.componentcore.resources.IVirtualResource;
 import org.eclipse.wst.common.frameworks.datamodel.DataModelFactory;
 import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
+import org.eclipse.wst.common.project.facet.core.IFacetedProject;
+import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
+import org.eclipse.wst.common.project.facet.core.ProjectFacetsManager;
+import org.eclipse.wst.common.project.facet.core.IFacetedProject.Action;
+import org.eclipse.wst.common.project.facet.core.internal.FacetedProjectNature;
 import org.osgi.framework.Bundle;
 
 /**
@@ -37,13 +47,26 @@ import org.osgi.framework.Bundle;
  */
 public class WebProjectTestEnvironment extends ProjectTestEnvironment {
 
+    private final IProjectFacetVersion  _javaFacetVersion;
+    private final IProjectFacetVersion  _webFacetVersion;
     /**
      * @param projectName
      */
     public WebProjectTestEnvironment(String projectName) {
-        super(projectName);
+        this(projectName, JavaFacetUtils.JAVA_50, ProjectFacetsManager.getProjectFacet( "jst.web" ).getVersion("2.4"));
     }
 
+    /**
+     * @param projectName
+     * @param javaVersion
+     * @param webVersion
+     */
+    public WebProjectTestEnvironment(String projectName, IProjectFacetVersion javaVersion, IProjectFacetVersion webVersion)
+    {
+        super(projectName);
+        _javaFacetVersion = javaVersion;
+        _webFacetVersion = webVersion;
+    }
     
     public void createProject() 
     {
@@ -52,7 +75,7 @@ public class WebProjectTestEnvironment extends ProjectTestEnvironment {
             _project = createWebProject(_projectName);
             _projectCreated = true;
         } catch (Exception t) {
-            throw new RuntimeException();
+            throw new RuntimeException(t);
         }
     }
 
@@ -61,14 +84,36 @@ public class WebProjectTestEnvironment extends ProjectTestEnvironment {
      * @return the web project
      * @throws Exception
      */
-    private IProject createWebProject(String projectName) throws Exception {
-        if(!isProjectCreated()) {
-            IDataModel dataModel = DataModelFactory.createDataModel(new WebFacetProjectCreationDataModelProvider());
+    private IProject createWebProject(String projectName) throws Exception 
+    {
+        IProject project =  ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
+
+        if(!isProjectCreated()) 
+        {
+            if (!project.exists())
+            {
+                project.create(null);
+                project.open(null);
+                ProjectUtilities.addNatureToProject(project, FacetedProjectNature.NATURE_ID);
+            }
+            
+            Set<Action> actions = new HashSet<Action>();
+            IDataModel dataModel = DataModelFactory.createDataModel(new JavaProjectFacetCreationDataModelProvider());
             dataModel.setProperty(IFacetProjectCreationDataModelProperties.FACET_PROJECT_NAME, projectName);
-            dataModel.getDefaultOperation().execute(new NullProgressMonitor(), null);
-            dataModel.dispose();
+            actions.add(new IFacetedProject.Action(Action.Type.INSTALL,_javaFacetVersion,null));
+//            dataModel.setProperty(IFacetProjectCreationDataModelProperties.FACET_ACTION_MAP, actions);
+//            dataModel.getDefaultOperation().execute(new NullProgressMonitor(), null);
+//            dataModel.dispose();
+            
+            dataModel = DataModelFactory.createDataModel(new WebFacetProjectCreationDataModelProvider());
+            dataModel.setProperty(IFacetProjectCreationDataModelProperties.FACET_PROJECT_NAME, projectName);
+            actions.add(new IFacetedProject.Action(Action.Type.INSTALL,_webFacetVersion,null));
+
+            IFacetedProject facetedProject = ProjectFacetsManager.create(project);
+            facetedProject.modify(actions, null);
         }
-        return ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
+        
+        return project;
     }
 
     /**

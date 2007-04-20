@@ -2,6 +2,8 @@ package org.eclipse.jst.jsf.core.tests.util;
 
 import junit.framework.TestCase;
 
+import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigUtils;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
@@ -63,7 +65,18 @@ public class TestJSFAppConfigUtils extends TestCase
             JSFFacetedTestEnvironment jsfFacedEnv = 
                 new JSFFacetedTestEnvironment(testEnv);
             
-               jsfFacedEnv.initialize(facetVersion);
+            try
+            {
+                jsfFacedEnv.initialize(facetVersion);
+            }
+            catch (CoreException ce)
+            {
+                // propagate
+                throw new RuntimeException(ce);
+            } catch (ExecutionException e) {
+                // propagate
+                throw new RuntimeException(e);
+            }
         }
 
         return testEnv;

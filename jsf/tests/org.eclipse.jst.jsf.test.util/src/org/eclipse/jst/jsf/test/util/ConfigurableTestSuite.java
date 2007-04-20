@@ -20,6 +20,11 @@ public class ConfigurableTestSuite extends TestSuite
         super(theClass, name);
     }
 
+    public ConfigurableTestSuite(Class theClass)
+    {
+        super(theClass);
+    }
+    
     public ConfigurableTestSuite(TestConfiguration configuration, String name)
     {
         super(name);

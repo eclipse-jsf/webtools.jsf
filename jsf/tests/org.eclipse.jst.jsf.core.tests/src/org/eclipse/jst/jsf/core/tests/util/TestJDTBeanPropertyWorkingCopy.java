@@ -13,6 +13,7 @@ package org.eclipse.jst.jsf.core.tests.util;
 
 import junit.framework.TestCase;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.Signature;
@@ -20,6 +21,7 @@ import org.eclipse.jst.jsf.common.util.JDTBeanProperty;
 import org.eclipse.jst.jsf.common.util.JDTBeanPropertyWorkingCopy;
 import org.eclipse.jst.jsf.core.tests.TestsPlugin;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
+import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.jst.jsf.test.util.TestFileResource;
 import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
 
@@ -39,6 +41,9 @@ public class TestJDTBeanPropertyWorkingCopy extends TestCase {
     
 	protected void setUp() throws Exception {
 		super.setUp();
+
+		JSFTestUtil.setInternetProxyPreferences(true, "www-proxy.us.oracle.com", "80");
+
 		final WebProjectTestEnvironment  projectTestEnvironment = 
 			new WebProjectTestEnvironment("TestJDTBeanPropertyWorkingCopyProject");
 		projectTestEnvironment.createProject();
@@ -55,6 +60,13 @@ public class TestJDTBeanPropertyWorkingCopy extends TestCase {
         assertNotNull(_testBean1Type);
 	}
 	
+    @Override
+    protected void tearDown() throws Exception {
+        super.tearDown();
+        IProject project = _jdtTestEnvironment.getJavaProject().getProject();
+        project.delete(true, null);
+    }
+
     /**
      * Test simple dt bean introspection
      */

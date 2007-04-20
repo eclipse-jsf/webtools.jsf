@@ -31,7 +31,8 @@ Require-Bundle: org.eclipse.jst.jsf.core,
  org.eclipse.jst.jsf.test.util,
  org.eclipse.jst.jsf.common,
  org.eclipse.wst.validation,
- org.eclipse.wst.sse.core
+ org.eclipse.wst.sse.core,
+ org.eclipse.jst.jsf.facesconfig
 Eclipse-LazyStart: true
 Export-Package: org.eclipse.jst.jsf.core.tests;x-friends:="org.eclipse.jst.jsf.ui.tests,org.eclipse.jst.jsf.context.symbol.tests,org.eclipse.jst.jsf.designtime.tests",
  org.eclipse.jst.jsf.core.tests.appconfig.validation,

@@ -17,6 +17,9 @@ import org.eclipse.core.internal.net.ProxyManager;
 import org.eclipse.core.net.proxy.IProxyData;
 import org.eclipse.core.net.proxy.IProxyService;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.wst.validation.internal.ConfigurationManager;
 import org.eclipse.wst.validation.internal.GlobalConfiguration;
@@ -118,6 +121,12 @@ public class JSFTestUtil
     {
         URL url = new URL(Platform.getInstanceLocation().getURL(), relativePath);
         return url.toURI();
+    }
+    
+    public static IPath getAbsolutePath(Bundle bundle, String relativePath) throws IOException, URISyntaxException
+    {
+        URL url = FileLocator.resolve(bundle.getEntry(relativePath));
+        return new Path(new File(url.toURI()).getAbsolutePath());//url.toExternalForm();
     }
     
     public static void savePlatformRelative(TestFileResource testFile, String relativePath) throws IOException, URISyntaxException

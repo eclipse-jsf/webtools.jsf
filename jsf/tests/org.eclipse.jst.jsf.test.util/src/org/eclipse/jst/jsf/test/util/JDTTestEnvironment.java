@@ -11,7 +11,9 @@
  ********************************************************************************/
 package org.eclipse.jst.jsf.test.util;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +32,7 @@ import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
+import org.osgi.framework.Bundle;
 
 /**
  * Test environment for doing project tests involving JDT dependencies
@@ -64,7 +67,7 @@ public class JDTTestEnvironment {
         // make sure that the project root is not on the classpath
         IClasspathEntry[] entries = 
             javaProject.getRawClasspath();
-        List preservedEntries = new ArrayList();
+        List<IClasspathEntry> preservedEntries = new ArrayList<IClasspathEntry>();
         
         for (int i=0; i < entries.length; i++)
         {
@@ -76,7 +79,7 @@ public class JDTTestEnvironment {
             }
         }
         
-        javaProject.setRawClasspath((IClasspathEntry[]) preservedEntries.toArray(new IClasspathEntry[0]), 
+        javaProject.setRawClasspath(preservedEntries.toArray(new IClasspathEntry[0]), 
                                     new NullProgressMonitor());
 	}
 
@@ -114,20 +117,31 @@ public class JDTTestEnvironment {
      * Tries to add the newEntry to the java project's classpath
      * @param newEntry
      */
-    public void addClasspathEntry(IClasspathEntry newEntry)
+    public void addClasspathEntry(IClasspathEntry newEntry) throws JavaModelException
     {
-        try
-        {
-            IClasspathEntry[] entries = getJavaProject().getRawClasspath();
-            IClasspathEntry[] newEntries = new IClasspathEntry[entries.length+1];
-            System.arraycopy(entries, 0, newEntries, 0, entries.length);
-            newEntries[entries.length] = newEntry;
-            getJavaProject().setRawClasspath(newEntries, new NullProgressMonitor());
-        }
-        catch (JavaModelException jme)
-        {
-            jme.printStackTrace();
-        }
+        IClasspathEntry[] entries = getJavaProject().getRawClasspath();
+        IClasspathEntry[] newEntries = new IClasspathEntry[entries.length+1];
+        System.arraycopy(entries, 0, newEntries, 0, entries.length);
+        newEntries[entries.length] = newEntry;
+        getJavaProject().setRawClasspath(newEntries, new NullProgressMonitor());
+    }
+    
+    /**
+     * Try to load the jar file at pathToJarFile in bundle as a jar classpath entry
+     * 
+     * @param bundle
+     * @param pathToJarFile
+     * @return the class path entry or null if unable to create
+     * @throws JavaModelException if a problem occurs adding the classpath entry
+     */
+    public IClasspathEntry addJarClasspathEntry(Bundle bundle, String pathToJarFile) throws JavaModelException, IOException, URISyntaxException
+    {
+        IPath path = JSFTestUtil.getAbsolutePath(bundle, pathToJarFile);
+        IClasspathEntry entry = JavaCore.newLibraryEntry(path, null, null);
+        
+        addClasspathEntry(entry);
+        
+        return entry;
     }
     
 	/**
@@ -204,7 +218,7 @@ public class JDTTestEnvironment {
         file.create(src, true, null);
         return file;
     }
-    
+
     /**
      * @return the IJavaProject instance for this test environment object
      */

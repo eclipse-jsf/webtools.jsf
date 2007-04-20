@@ -18,7 +18,6 @@ import java.util.Set;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.jem.util.logger.proxy.Logger;
 import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDataModelProvider;
 import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
@@ -30,6 +29,7 @@ import org.eclipse.wst.common.project.facet.core.IFacetedProject;
 import org.eclipse.wst.common.project.facet.core.IProjectFacet;
 import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
 import org.eclipse.wst.common.project.facet.core.ProjectFacetsManager;
+import org.eclipse.wst.common.project.facet.core.IFacetedProject.Action;
 import org.eclipse.wst.common.project.facet.core.IFacetedProject.Action.Type;
 
 /**
@@ -58,36 +58,36 @@ public class JSFFacetedTestEnvironment
      * @param version -- the version of the facet.  Valid strings are constant
      * publics on this class starting FACET_VERSION
      */
-    public void initialize(final String version)
+    public void initialize(final String version) throws CoreException, ExecutionException
     {
-        try
-        {
-            final IProject project = 
-               _projectTestEnvironment.getTestProject();
-            //seed JSFLib registry if not present
-            // TODO: is this really necessary for the facet?
-            JSFCoreUtilHelper.createJSFLibraryRegistry();
+        final IProject project = 
+           _projectTestEnvironment.getTestProject();
+        //seed JSFLib registry if not present
+        // TODO: is this really necessary for the facet?
+        JSFCoreUtilHelper.createJSFLibraryRegistry();
 
-            _modelProvider = new JSFFacetInstallDataModelProvider();
-            _model = DataModelFactory.createDataModel(_modelProvider);    
-            _model.setStringProperty(IFacetDataModelProperties.FACET_PROJECT_NAME, project.getName());
-            
-            Set actions = new HashSet();
-            actions.add(new IFacetedProject.Action((Type) _model.getProperty(IFacetDataModelProperties.FACET_TYPE),
-                    getJSFFacet(version),
-                _model));
-            
-            IFacetedProject facetedProject = ProjectFacetsManager.create(project);
-            facetedProject.modify(actions, null);
-            
-            try {
-                FacetProjectCreationOperation.addDefaultFactets(facetedProject, null);
-            } catch (ExecutionException e) {
-                Logger.getLogger().logError(e);
-            }           
-        } catch (CoreException e) {
-            Logger.getLogger().logError(e);
-        }       
+        _modelProvider = new JSFFacetInstallDataModelProvider();
+        _model = DataModelFactory.createDataModel(_modelProvider);    
+        _model.setStringProperty(IFacetDataModelProperties.FACET_PROJECT_NAME, project.getName());
+        
+        Set<Action> actions = getAddFacetActions(version);
+        
+        IFacetedProject facetedProject = ProjectFacetsManager.create(project);
+        facetedProject.modify(actions, null);
+        
+        FacetProjectCreationOperation.addDefaultFactets(facetedProject, null);
+    }
+    
+    private Set<Action> getAddFacetActions(String jsfVersion)
+    {
+        Set<Action> actions = new HashSet<Action>();
+        final IProjectFacetVersion jsfFacet = getJSFFacet(jsfVersion);
+
+        actions.add(new IFacetedProject.Action((Type) _model.getProperty(IFacetDataModelProperties.FACET_TYPE),
+                jsfFacet,
+            _model));
+
+        return actions;
     }
     
     private IProjectFacetVersion getJSFFacet(String version)

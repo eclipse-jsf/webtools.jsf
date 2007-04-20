@@ -17,6 +17,7 @@ import java.util.Map;
 
 import junit.framework.TestCase;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.util.JDTBeanIntrospector;
@@ -24,6 +25,7 @@ import org.eclipse.jst.jsf.common.util.JDTBeanProperty;
 import org.eclipse.jst.jsf.common.util.JDTBeanPropertyWorkingCopy;
 import org.eclipse.jst.jsf.core.tests.TestsPlugin;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
+import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.jst.jsf.test.util.TestFileResource;
 import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
 
@@ -49,6 +51,9 @@ public class TestJDTBeanIntrospector extends TestCase
     
     protected void setUp() throws Exception {
         super.setUp();
+        
+        JSFTestUtil.setInternetProxyPreferences(true, "www-proxy.us.oracle.com", "80");
+        
         final WebProjectTestEnvironment  projectTestEnvironment = 
             new WebProjectTestEnvironment("TestJDTBeanIntrospectorProject");
         projectTestEnvironment.createProject();
@@ -93,6 +98,15 @@ public class TestJDTBeanIntrospector extends TestCase
         
         _subClassProperties = beanIntrospector.getProperties();
     }
+
+    
+    @Override
+    protected void tearDown() throws Exception {
+        super.tearDown();
+        IProject project = _jdtTestEnvironment.getJavaProject().getProject();
+        project.delete(true, null);
+    }
+
 
     /**
      * Basic high-level sanity check on the generate properties map
