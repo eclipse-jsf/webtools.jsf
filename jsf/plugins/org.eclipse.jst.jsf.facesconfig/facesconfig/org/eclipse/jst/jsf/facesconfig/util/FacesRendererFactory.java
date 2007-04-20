@@ -19,8 +19,16 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
+/**
+ * The custom render factory for the Faces Config model EMF2DOM translations.
+ * A singleton factory.
+ */
 public class FacesRendererFactory extends EMF2DOMSSERendererFactory 
 {
+    /**
+     * The singleton factory instance.
+     */
+    @SuppressWarnings("hiding")
     public static  FacesRendererFactory INSTANCE = new FacesRendererFactory();
     
     private FacesRendererFactory() {
@@ -50,16 +58,33 @@ public class FacesRendererFactory extends EMF2DOMSSERendererFactory
     private static class MyEMF2DOMAdapterRoot extends EMF2DOMSSEAdapter
     {
 
+        /**
+         * @param object
+         * @param node
+         * @param renderer
+         * @param translator
+         */
         public MyEMF2DOMAdapterRoot(org.eclipse.emf.common.notify.Notifier object, Node node,
                 EMF2DOMRenderer renderer, Translator translator) {
             super(object, node, renderer, translator);
         }
 
+        /**
+         * @param node
+         * @param renderer
+         * @param translator
+         */
         public MyEMF2DOMAdapterRoot(Node node, EMF2DOMRenderer renderer,
                 Translator translator) {
             super(node, renderer, translator);
         }
 
+        /**
+         * @param resource
+         * @param document
+         * @param renderer
+         * @param translator
+         */
         public MyEMF2DOMAdapterRoot(TranslatorResource resource, Document document,
                 EMF2DOMRenderer renderer, Translator translator) {
             super(resource, document, renderer, translator);

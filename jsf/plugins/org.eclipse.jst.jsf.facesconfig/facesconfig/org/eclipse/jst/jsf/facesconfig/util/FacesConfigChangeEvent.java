@@ -32,12 +32,4 @@ public class FacesConfigChangeEvent implements IFacesConfigChangeEvent {
 	public boolean isNavigationRuleChanged() {
 		return bNavigationRuleChanged;
 	}
-	
-	public void setManagedBeanChanged(boolean b) {
-		bManagedBeandChanged = b;
-	}
-	
-	public void setNavigationRuleChanged(boolean b) {
-		bNavigationRuleChanged = b;
-	}
 }

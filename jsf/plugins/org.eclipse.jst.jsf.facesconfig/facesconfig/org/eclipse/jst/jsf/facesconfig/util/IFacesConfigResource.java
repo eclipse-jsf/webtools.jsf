@@ -21,8 +21,8 @@ import org.eclipse.wst.common.internal.emf.resource.TranslatorResource;
  */
 public interface IFacesConfigResource extends TranslatorResource {
 	
+	/**
+	 * @return the root faces config object
+	 */
 	public FacesConfigType getFacesConfig();
-	public boolean isFaces1_0();
-	public boolean isFaces1_1();
-
 }

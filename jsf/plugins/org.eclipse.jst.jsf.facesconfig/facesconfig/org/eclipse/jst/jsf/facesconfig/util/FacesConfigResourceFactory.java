@@ -11,9 +11,8 @@
 package org.eclipse.jst.jsf.facesconfig.util;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.wst.common.componentcore.internal.impl.WTPResourceFactoryRegistry;
-import org.eclipse.wst.common.internal.emf.resource.FileNameResourceFactoryRegistry;
+import org.eclipse.wst.common.internal.emf.resource.EMF2DOMRendererFactory;
 import org.eclipse.wst.common.internal.emf.resource.Renderer;
 import org.eclipse.wst.common.internal.emf.resource.RendererFactory;
 import org.eclipse.wst.common.internal.emf.resource.TranslatorResource;
@@ -22,16 +21,25 @@ import org.eclipse.wst.common.internal.emf.resource.TranslatorResourceFactory;
 /**
  * @author xjiang
  *
- * To change the template for this generated type comment go to
- * Window>Preferences>Java>Code Generation>Code and Comments
  */
-public class FacesConfigResourceFactory extends TranslatorResourceFactory {
-
+public class FacesConfigResourceFactory extends TranslatorResourceFactory 
+{
+    /**
+     * @return a faces config resource factory for use with faces-config
+     * files contained in JARs
+     */
+    public static FacesConfigResourceFactory createResourceFactoryForJar()
+    {
+        return new FacesConfigResourceFactory(EMF2DOMRendererFactory.INSTANCE);
+    }
+    
 	/**
-	 * @param aRendererFactory
+	 * Construct a faces resource factory.
+	 * 
+	 * @param rendererFactory 
 	 */
-	public FacesConfigResourceFactory(RendererFactory aRendererFactory) {
-		super(aRendererFactory);
+	protected FacesConfigResourceFactory(RendererFactory rendererFactory) {
+		super(rendererFactory);
 	}
 
 
@@ -46,16 +54,13 @@ public class FacesConfigResourceFactory extends TranslatorResourceFactory {
 	 * Method registerDtds.
 	 */
 	public static void registerDtds() {
-		//J2EEXmlDtDEntityResolver.registerDtD(J2EEConstants.WEBAPP_SYSTEMID_2_2, "web-app_2_2.dtd"); //$NON-NLS-1$
-		//J2EEXmlDtDEntityResolver.registerDtD(J2EEConstants.WEBAPP_ALT_SYSTEMID_2_2, "web-app_2.2.dtd");		//$NON-NLS-1$
-		//J2EEXmlDtDEntityResolver.registerDtD(J2EEConstants.WEBAPP_SYSTEMID_2_3, "web-app_2_3.dtd"); //$NON-NLS-1$
-		//J2EEXmlDtDEntityResolver.registerDtD(J2EEConstants.WEB_APP_SCHEMA_LOC_2_4, "web-app_2_4.xsd"); //$NON-NLS-1$
-		//J2EEXmlDtDEntityResolver.registerDtD(J2EEConstants.JSP_SCHEMA_LOC_2_0, "jsp_2_0.xsd"); //$NON-NLS-1$
+	    // TODO: should we be registering dtd/xsd here?
+	    // how does MyEntityResolver in the resource affect this (see https://bugs.eclipse.org/bugs/show_bug.cgi?id=154439)
 	}
 
 	/**
 	 * register using the default renderer factory.
-	 * @see #registerWith(String, RendererFactory)
+	 * @see #registerWith(String, FacesRendererFactory)
 	 */
 	public static void register() {
 		register((String)null);
@@ -66,7 +71,7 @@ public class FacesConfigResourceFactory extends TranslatorResourceFactory {
 	 * @param sFileName
 	 */
 	public static void register(String sFileName) {
-		registerWith(sFileName, FacesRendererFactory.INSTANCE/*RendererFactory.getDefaultRendererFactory()*/);
+		registerWith(sFileName, FacesRendererFactory.INSTANCE);
 	}
 
 	/**
@@ -74,28 +79,28 @@ public class FacesConfigResourceFactory extends TranslatorResourceFactory {
 	 * @param aRegistry 
 	 * @see #registerWith(String, RendererFactory)
 	 */
-	public static void register(FileNameResourceFactoryRegistry aRegistry) {
-		aRegistry.registerLastFileSegment("faces-config.xml", new FacesConfigResourceFactory(RendererFactory.getDefaultRendererFactory()));//$NON-NLS-1$
-	}
+//	public static void register(FileNameResourceFactoryRegistry aRegistry) {
+//		aRegistry.registerLastFileSegment("faces-config.xml", new FacesConfigResourceFactory(RendererFactory.getDefaultRendererFactory()));//$NON-NLS-1$
+//	}
 	
 	/**
 	 * Register myself with the Resource.Factory.Registry
 	 * @param sFileName 
 	 * @param aRendererFactory 
 	 */
-	public static void registerWith(String sFileName, RendererFactory aRendererFactory) {
+	private static void registerWith(String sFileName, FacesRendererFactory aRendererFactory) {
 		if (sFileName != null) {
-			WTPResourceFactoryRegistry.INSTANCE.registerLastFileSegment(sFileName, new FacesConfigResourceFactory(aRendererFactory)); //$NON-NLS-1$
+			WTPResourceFactoryRegistry.INSTANCE.registerLastFileSegment(sFileName, new FacesConfigResourceFactory(FacesRendererFactory.INSTANCE)); //$NON-NLS-1$
 		} else {
-			WTPResourceFactoryRegistry.INSTANCE.registerLastFileSegment("faces-config.xml", new FacesConfigResourceFactory(aRendererFactory)); //$NON-NLS-1$
+			WTPResourceFactoryRegistry.INSTANCE.registerLastFileSegment("faces-config.xml", new FacesConfigResourceFactory(FacesRendererFactory.INSTANCE)); //$NON-NLS-1$
 		}
 	}
 
-	/**
-	 * @param uri
-	 * @return the the factory associated with uri
-	 */
-	public static Resource.Factory getRegisteredFactory(URI uri) {
-		return WTPResourceFactoryRegistry.INSTANCE.getFactory(uri);
-	}
+//	/**
+//	 * @param uri
+//	 * @return the the factory associated with uri
+//	 */
+//	public static Resource.Factory getRegisteredFactory(URI uri) {
+//		return WTPResourceFactoryRegistry.INSTANCE.getFactory(uri);
+//	}
 }

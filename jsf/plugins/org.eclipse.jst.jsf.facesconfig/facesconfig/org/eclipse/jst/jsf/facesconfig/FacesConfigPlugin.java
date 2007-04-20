@@ -31,8 +31,14 @@ public class FacesConfigPlugin extends EMFPlugin {
      */
     public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
 
+	/**
+	 * Editor id string.  TODO: broken?
+	 */
 	public static final String FACES_CONFIG_EDITOR_ID = "org.eclipse.jst.jsf.facesconfig.internal.presentation.FacesConfigEditor";
 
+	/**
+	 * The plugin instance
+	 */
 	public static final FacesConfigPlugin INSTANCE = new FacesConfigPlugin();
 	private static Implementation plugin;
 
@@ -54,6 +60,7 @@ public class FacesConfigPlugin extends EMFPlugin {
 
     /**
      * Returns the singleton instance of the Eclipse plugin.
+     * @param exception 
      */
     public static void write(Exception exception)
     {
@@ -64,6 +71,9 @@ public class FacesConfigPlugin extends EMFPlugin {
 	 * The actual implementation of the Eclipse <b>Plugin</b>.
 	 */
 	public static class Implementation extends EMFPlugin.EclipsePlugin {
+		/**
+		 * Internal constructor
+		 */
 		public Implementation() {
 			super();
 			// Remember the static instance.
@@ -82,10 +92,18 @@ public class FacesConfigPlugin extends EMFPlugin {
 			FacesConfigResourceFactory.register();
 		}
 
+		/**
+		 * @return The faces config package instance
+		 * TODO: used?
+		 */
 		public FacesConfigPackage getFacesconfigPackage() {
 			return FacesConfigPackage.eINSTANCE;
 		}
 		
+		/**
+		 * @return the faces config factory instance.
+		 * TODO: used?
+		 */
 		public FacesConfigFactory getFacesconfigFactory() {
 			return (FacesConfigFactory) getFacesconfigPackage().getEFactoryInstance();
 		}

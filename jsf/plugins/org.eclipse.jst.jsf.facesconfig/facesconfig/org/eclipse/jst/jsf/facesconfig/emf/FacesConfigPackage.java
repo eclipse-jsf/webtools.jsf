@@ -11562,6 +11562,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EReference CONVERTER_TYPE__CONVERTER_EXTENSION = eINSTANCE.getConverterType_ConverterExtension();
 
         /**
@@ -11570,6 +11571,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EAttribute CONVERTER_TYPE__ID = eINSTANCE.getConverterType_Id();
 
         /**
@@ -12494,6 +12496,7 @@ public interface FacesConfigPackage extends EPackage {
          * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getFacesConfigType()
          * @generated
          */
+        @SuppressWarnings("hiding")
         EClass FACES_CONFIG_TYPE = eINSTANCE.getFacesConfigType();
 
         /**
@@ -12502,6 +12505,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EReference FACES_CONFIG_TYPE__APPLICATION = eINSTANCE.getFacesConfigType_Application();
 
         /**
@@ -12510,6 +12514,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EReference FACES_CONFIG_TYPE__FACTORY = eINSTANCE.getFacesConfigType_Factory();
 
         /**
@@ -12518,6 +12523,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EReference FACES_CONFIG_TYPE__COMPONENT = eINSTANCE.getFacesConfigType_Component();
 
         /**
@@ -12526,6 +12532,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EReference FACES_CONFIG_TYPE__CONVERTER = eINSTANCE.getFacesConfigType_Converter();
 
         /**
@@ -12534,6 +12541,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EReference FACES_CONFIG_TYPE__MANAGED_BEAN = eINSTANCE.getFacesConfigType_ManagedBean();
 
         /**
@@ -12542,6 +12550,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EReference FACES_CONFIG_TYPE__NAVIGATION_RULE = eINSTANCE.getFacesConfigType_NavigationRule();
 
         /**
@@ -12550,6 +12559,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EReference FACES_CONFIG_TYPE__REFERENCED_BEAN = eINSTANCE.getFacesConfigType_ReferencedBean();
 
         /**
@@ -12558,6 +12568,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EReference FACES_CONFIG_TYPE__RENDER_KIT = eINSTANCE.getFacesConfigType_RenderKit();
 
         /**
@@ -12566,6 +12577,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EReference FACES_CONFIG_TYPE__LIFECYCLE = eINSTANCE.getFacesConfigType_Lifecycle();
 
         /**
@@ -12574,6 +12586,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EReference FACES_CONFIG_TYPE__VALIDATOR = eINSTANCE.getFacesConfigType_Validator();
 
         /**
@@ -12582,6 +12595,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EReference FACES_CONFIG_TYPE__FACES_CONFIG_EXTENSION = eINSTANCE.getFacesConfigType_FacesConfigExtension();
 
         /**
@@ -12590,6 +12604,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EAttribute FACES_CONFIG_TYPE__XMLNS = eINSTANCE.getFacesConfigType_Xmlns();
 
         /**
@@ -12598,6 +12613,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EAttribute FACES_CONFIG_TYPE__ID = eINSTANCE.getFacesConfigType_Id();
 
         /**
@@ -12608,6 +12624,7 @@ public interface FacesConfigPackage extends EPackage {
          * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getFacesContextFactoryType()
          * @generated
          */
+        @SuppressWarnings("hiding")
         EClass FACES_CONTEXT_FACTORY_TYPE = eINSTANCE.getFacesContextFactoryType();
 
         /**
@@ -12616,6 +12633,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EAttribute FACES_CONTEXT_FACTORY_TYPE__TEXT_CONTENT = eINSTANCE.getFacesContextFactoryType_TextContent();
 
         /**
@@ -12624,6 +12642,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EAttribute FACES_CONTEXT_FACTORY_TYPE__ID = eINSTANCE.getFacesContextFactoryType_Id();
 
         /**
@@ -12634,6 +12653,7 @@ public interface FacesConfigPackage extends EPackage {
          * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getFacetExtensionType()
          * @generated
          */
+        @SuppressWarnings("hiding")
         EClass FACET_EXTENSION_TYPE = eINSTANCE.getFacetExtensionType();
 
         /**
@@ -12644,6 +12664,7 @@ public interface FacesConfigPackage extends EPackage {
          * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getFacetNameType()
          * @generated
          */
+        @SuppressWarnings("hiding")
         EClass FACET_NAME_TYPE = eINSTANCE.getFacetNameType();
 
         /**
@@ -12652,6 +12673,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EAttribute FACET_NAME_TYPE__TEXT_CONTENT = eINSTANCE.getFacetNameType_TextContent();
 
         /**
@@ -12660,6 +12682,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EAttribute FACET_NAME_TYPE__ID = eINSTANCE.getFacetNameType_Id();
 
         /**
@@ -12670,6 +12693,7 @@ public interface FacesConfigPackage extends EPackage {
          * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getFacetType()
          * @generated
          */
+        @SuppressWarnings("hiding")
         EClass FACET_TYPE = eINSTANCE.getFacetType();
 
         /**
@@ -12678,6 +12702,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EReference FACET_TYPE__DESCRIPTION = eINSTANCE.getFacetType_Description();
 
         /**
@@ -12686,6 +12711,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EReference FACET_TYPE__DISPLAY_NAME = eINSTANCE.getFacetType_DisplayName();
 
         /**
@@ -12694,6 +12720,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EReference FACET_TYPE__ICON = eINSTANCE.getFacetType_Icon();
 
         /**
@@ -12702,6 +12729,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EReference FACET_TYPE__FACET_NAME = eINSTANCE.getFacetType_FacetName();
 
         /**
@@ -12710,6 +12738,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EReference FACET_TYPE__FACET_EXTENSION = eINSTANCE.getFacetType_FacetExtension();
 
         /**
@@ -12718,6 +12747,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EAttribute FACET_TYPE__ID = eINSTANCE.getFacetType_Id();
 
         /**
@@ -12728,6 +12758,7 @@ public interface FacesConfigPackage extends EPackage {
          * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getFactoryType()
          * @generated
          */
+        @SuppressWarnings("hiding")
         EClass FACTORY_TYPE = eINSTANCE.getFactoryType();
 
         /**
@@ -12736,6 +12767,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EReference FACTORY_TYPE__APPLICATION_FACTORY = eINSTANCE.getFactoryType_ApplicationFactory();
 
         /**
@@ -12744,6 +12776,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EReference FACTORY_TYPE__FACES_CONTEXT_FACTORY = eINSTANCE.getFactoryType_FacesContextFactory();
 
         /**
@@ -12752,6 +12785,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EReference FACTORY_TYPE__LIFECYCLE_FACTORY = eINSTANCE.getFactoryType_LifecycleFactory();
 
         /**
@@ -12760,6 +12794,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EReference FACTORY_TYPE__RENDER_KIT_FACTORY = eINSTANCE.getFactoryType_RenderKitFactory();
 
         /**
@@ -12768,6 +12803,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EReference FACTORY_TYPE__FACTORY_EXTENSION = eINSTANCE.getFactoryType_FactoryExtension();
 
         /**
@@ -12776,6 +12812,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EAttribute FACTORY_TYPE__ID = eINSTANCE.getFactoryType_Id();
 
         /**
@@ -12786,6 +12823,7 @@ public interface FacesConfigPackage extends EPackage {
          * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getFromActionType()
          * @generated
          */
+        @SuppressWarnings("hiding")
         EClass FROM_ACTION_TYPE = eINSTANCE.getFromActionType();
 
         /**
@@ -12794,6 +12832,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EAttribute FROM_ACTION_TYPE__TEXT_CONTENT = eINSTANCE.getFromActionType_TextContent();
 
         /**
@@ -12802,6 +12841,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EAttribute FROM_ACTION_TYPE__ID = eINSTANCE.getFromActionType_Id();
 
         /**
@@ -12812,6 +12852,7 @@ public interface FacesConfigPackage extends EPackage {
          * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getFromOutcomeType()
          * @generated
          */
+        @SuppressWarnings("hiding")
         EClass FROM_OUTCOME_TYPE = eINSTANCE.getFromOutcomeType();
 
         /**
@@ -12820,6 +12861,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EAttribute FROM_OUTCOME_TYPE__TEXT_CONTENT = eINSTANCE.getFromOutcomeType_TextContent();
 
         /**
@@ -12828,6 +12870,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EAttribute FROM_OUTCOME_TYPE__ID = eINSTANCE.getFromOutcomeType_Id();
 
         /**
@@ -12838,6 +12881,7 @@ public interface FacesConfigPackage extends EPackage {
          * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getFromViewIdType()
          * @generated
          */
+        @SuppressWarnings("hiding")
         EClass FROM_VIEW_ID_TYPE = eINSTANCE.getFromViewIdType();
 
         /**
@@ -12846,6 +12890,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EAttribute FROM_VIEW_ID_TYPE__TEXT_CONTENT = eINSTANCE.getFromViewIdType_TextContent();
 
         /**
@@ -12854,6 +12899,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EAttribute FROM_VIEW_ID_TYPE__ID = eINSTANCE.getFromViewIdType_Id();
 
         /**
@@ -12864,6 +12910,7 @@ public interface FacesConfigPackage extends EPackage {
          * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getIconType()
          * @generated
          */
+        @SuppressWarnings("hiding")
         EClass ICON_TYPE = eINSTANCE.getIconType();
 
         /**
@@ -12872,6 +12919,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EReference ICON_TYPE__SMALL_ICON = eINSTANCE.getIconType_SmallIcon();
 
         /**
@@ -12880,6 +12928,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EReference ICON_TYPE__LARGE_ICON = eINSTANCE.getIconType_LargeIcon();
 
         /**
@@ -12888,6 +12937,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EAttribute ICON_TYPE__LANG = eINSTANCE.getIconType_Lang();
 
         /**
@@ -12896,6 +12946,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EAttribute ICON_TYPE__ID = eINSTANCE.getIconType_Id();
 
         /**
@@ -12906,6 +12957,7 @@ public interface FacesConfigPackage extends EPackage {
          * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getKeyClassType()
          * @generated
          */
+        @SuppressWarnings("hiding")
         EClass KEY_CLASS_TYPE = eINSTANCE.getKeyClassType();
 
         /**
@@ -12914,6 +12966,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EAttribute KEY_CLASS_TYPE__TEXT_CONTENT = eINSTANCE.getKeyClassType_TextContent();
 
         /**
@@ -12922,6 +12975,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EAttribute KEY_CLASS_TYPE__ID = eINSTANCE.getKeyClassType_Id();
 
         /**
@@ -12932,6 +12986,7 @@ public interface FacesConfigPackage extends EPackage {
          * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getKeyType()
          * @generated
          */
+        @SuppressWarnings("hiding")
         EClass KEY_TYPE = eINSTANCE.getKeyType();
 
         /**
@@ -12940,6 +12995,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EAttribute KEY_TYPE__TEXT_CONTENT = eINSTANCE.getKeyType_TextContent();
 
         /**
@@ -12948,6 +13004,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EAttribute KEY_TYPE__ID = eINSTANCE.getKeyType_Id();
 
         /**
@@ -12958,6 +13015,7 @@ public interface FacesConfigPackage extends EPackage {
          * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getLargeIconType()
          * @generated
          */
+        @SuppressWarnings("hiding")
         EClass LARGE_ICON_TYPE = eINSTANCE.getLargeIconType();
 
         /**
@@ -12966,6 +13024,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EAttribute LARGE_ICON_TYPE__TEXT_CONTENT = eINSTANCE.getLargeIconType_TextContent();
 
         /**
@@ -12974,6 +13033,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EAttribute LARGE_ICON_TYPE__ID = eINSTANCE.getLargeIconType_Id();
 
         /**
@@ -12984,6 +13044,7 @@ public interface FacesConfigPackage extends EPackage {
          * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getLifecycleFactoryType()
          * @generated
          */
+        @SuppressWarnings("hiding")
         EClass LIFECYCLE_FACTORY_TYPE = eINSTANCE.getLifecycleFactoryType();
 
         /**
@@ -12992,6 +13053,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EAttribute LIFECYCLE_FACTORY_TYPE__TEXT_CONTENT = eINSTANCE.getLifecycleFactoryType_TextContent();
 
         /**
@@ -13000,6 +13062,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EAttribute LIFECYCLE_FACTORY_TYPE__ID = eINSTANCE.getLifecycleFactoryType_Id();
 
         /**
@@ -13010,6 +13073,7 @@ public interface FacesConfigPackage extends EPackage {
          * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getLifecycleType()
          * @generated
          */
+        @SuppressWarnings("hiding")
         EClass LIFECYCLE_TYPE = eINSTANCE.getLifecycleType();
 
         /**
@@ -13018,6 +13082,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EReference LIFECYCLE_TYPE__PHASE_LISTENER = eINSTANCE.getLifecycleType_PhaseListener();
 
         /**
@@ -13026,6 +13091,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EReference LIFECYCLE_TYPE__LIFECYCLE_EXTENSION = eINSTANCE.getLifecycleType_LifecycleExtension();
 
         /**
@@ -13034,6 +13100,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EAttribute LIFECYCLE_TYPE__ID = eINSTANCE.getLifecycleType_Id();
 
         /**
@@ -13044,6 +13111,7 @@ public interface FacesConfigPackage extends EPackage {
          * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getListEntriesType()
          * @generated
          */
+        @SuppressWarnings("hiding")
         EClass LIST_ENTRIES_TYPE = eINSTANCE.getListEntriesType();
 
         /**
@@ -13052,6 +13120,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EReference LIST_ENTRIES_TYPE__VALUE_CLASS = eINSTANCE.getListEntriesType_ValueClass();
 
         /**
@@ -13060,6 +13129,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EReference LIST_ENTRIES_TYPE__NULL_VALUE = eINSTANCE.getListEntriesType_NullValue();
 
         /**
@@ -13068,6 +13138,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EReference LIST_ENTRIES_TYPE__VALUE = eINSTANCE.getListEntriesType_Value();
 
         /**
@@ -13076,6 +13147,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EAttribute LIST_ENTRIES_TYPE__ID = eINSTANCE.getListEntriesType_Id();
 
         /**
@@ -13086,6 +13158,7 @@ public interface FacesConfigPackage extends EPackage {
          * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getLocaleConfigType()
          * @generated
          */
+        @SuppressWarnings("hiding")
         EClass LOCALE_CONFIG_TYPE = eINSTANCE.getLocaleConfigType();
 
         /**
@@ -13094,6 +13167,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EReference LOCALE_CONFIG_TYPE__DEFAULT_LOCALE = eINSTANCE.getLocaleConfigType_DefaultLocale();
 
         /**
@@ -13102,6 +13176,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EReference LOCALE_CONFIG_TYPE__SUPPORTED_LOCALE = eINSTANCE.getLocaleConfigType_SupportedLocale();
 
         /**
@@ -13110,6 +13185,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EAttribute LOCALE_CONFIG_TYPE__ID = eINSTANCE.getLocaleConfigType_Id();
 
         /**
@@ -13120,6 +13196,7 @@ public interface FacesConfigPackage extends EPackage {
          * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getManagedBeanClassType()
          * @generated
          */
+        @SuppressWarnings("hiding")
         EClass MANAGED_BEAN_CLASS_TYPE = eINSTANCE.getManagedBeanClassType();
 
         /**
@@ -13128,6 +13205,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EAttribute MANAGED_BEAN_CLASS_TYPE__TEXT_CONTENT = eINSTANCE.getManagedBeanClassType_TextContent();
 
         /**
@@ -13136,6 +13214,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EAttribute MANAGED_BEAN_CLASS_TYPE__ID = eINSTANCE.getManagedBeanClassType_Id();
 
         /**
@@ -13146,6 +13225,7 @@ public interface FacesConfigPackage extends EPackage {
          * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getManagedBeanNameType()
          * @generated
          */
+        @SuppressWarnings("hiding")
         EClass MANAGED_BEAN_NAME_TYPE = eINSTANCE.getManagedBeanNameType();
 
         /**
@@ -13154,6 +13234,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EAttribute MANAGED_BEAN_NAME_TYPE__TEXT_CONTENT = eINSTANCE.getManagedBeanNameType_TextContent();
 
         /**
@@ -13162,6 +13243,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EAttribute MANAGED_BEAN_NAME_TYPE__ID = eINSTANCE.getManagedBeanNameType_Id();
 
         /**
@@ -13172,6 +13254,7 @@ public interface FacesConfigPackage extends EPackage {
          * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getManagedBeanScopeType()
          * @generated
          */
+        @SuppressWarnings("hiding")
         EClass MANAGED_BEAN_SCOPE_TYPE = eINSTANCE.getManagedBeanScopeType();
 
         /**
@@ -13180,6 +13263,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EAttribute MANAGED_BEAN_SCOPE_TYPE__TEXT_CONTENT = eINSTANCE.getManagedBeanScopeType_TextContent();
 
         /**
@@ -13188,6 +13272,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EAttribute MANAGED_BEAN_SCOPE_TYPE__ID = eINSTANCE.getManagedBeanScopeType_Id();
 
         /**
@@ -13198,6 +13283,7 @@ public interface FacesConfigPackage extends EPackage {
          * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getManagedBeanType()
          * @generated
          */
+        @SuppressWarnings("hiding")
         EClass MANAGED_BEAN_TYPE = eINSTANCE.getManagedBeanType();
 
         /**
@@ -13254,6 +13340,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EReference MANAGED_BEAN_TYPE__MANAGED_PROPERTY = eINSTANCE.getManagedBeanType_ManagedProperty();
 
         /**
@@ -13262,6 +13349,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EReference MANAGED_BEAN_TYPE__MAP_ENTRIES = eINSTANCE.getManagedBeanType_MapEntries();
 
         /**
@@ -13270,6 +13358,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EReference MANAGED_BEAN_TYPE__LIST_ENTRIES = eINSTANCE.getManagedBeanType_ListEntries();
 
         /**
@@ -13278,6 +13367,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EReference MANAGED_BEAN_TYPE__MANAGED_BEAN_EXTENSION = eINSTANCE.getManagedBeanType_ManagedBeanExtension();
 
         /**
@@ -13286,6 +13376,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EAttribute MANAGED_BEAN_TYPE__ID = eINSTANCE.getManagedBeanType_Id();
 
         /**
@@ -13296,6 +13387,7 @@ public interface FacesConfigPackage extends EPackage {
          * @see org.eclipse.jst.jsf.facesconfig.emf.impl.FacesConfigPackageImpl#getManagedPropertyType()
          * @generated
          */
+        @SuppressWarnings("hiding")
         EClass MANAGED_PROPERTY_TYPE = eINSTANCE.getManagedPropertyType();
 
         /**
@@ -13304,6 +13396,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EReference MANAGED_PROPERTY_TYPE__DESCRIPTION = eINSTANCE.getManagedPropertyType_Description();
 
         /**
@@ -13312,6 +13405,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EReference MANAGED_PROPERTY_TYPE__DISPLAY_NAME = eINSTANCE.getManagedPropertyType_DisplayName();
 
         /**
@@ -13320,6 +13414,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EReference MANAGED_PROPERTY_TYPE__ICON = eINSTANCE.getManagedPropertyType_Icon();
 
         /**
@@ -13328,6 +13423,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EReference MANAGED_PROPERTY_TYPE__PROPERTY_NAME = eINSTANCE.getManagedPropertyType_PropertyName();
 
         /**
@@ -13336,6 +13432,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
+        @SuppressWarnings("hiding")
         EReference MANAGED_PROPERTY_TYPE__PROPERTY_CLASS = eINSTANCE.getManagedPropertyType_PropertyClass();
 
         /**

@@ -22,7 +22,6 @@ import org.eclipse.jst.jsf.core.internal.Messages;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.jst.jsf.facesconfig.util.FacesConfigResourceFactory;
 import org.eclipse.osgi.util.NLS;
-import org.eclipse.wst.common.internal.emf.resource.EMF2SAXRendererFactory;
 
 /**
  * JARFileJSFAppConfigProvider provides the root element of an application
@@ -73,6 +72,7 @@ public class JARFileJSFAppConfigProvider extends AbstractJSFAppConfigProvider {
 	 * @see org.eclipse.jst.jsf.core.jsfappconfig.IJSFAppConfigProvider#getFacesConfigModel()
 	 */
 	public FacesConfigType getFacesConfigModel() {
+	    // TODO: should this job be pushed into the model?
 		if (facesConfig == null) {
 			if (filename != null) {
 				StringBuffer sb = new StringBuffer();
@@ -80,7 +80,7 @@ public class JARFileJSFAppConfigProvider extends AbstractJSFAppConfigProvider {
 				sb.append(filename);
 				sb.append(FACES_CONFIG_IN_JAR_SUFFIX);
 				URI jarFileURI = URI.createURI(sb.toString());
-				FacesConfigResourceFactory resourceFactory = new FacesConfigResourceFactory(EMF2SAXRendererFactory.INSTANCE);
+				FacesConfigResourceFactory resourceFactory = FacesConfigResourceFactory.createResourceFactoryForJar();
 				Resource resource = resourceFactory.createResource(jarFileURI);
 				try {
 					resource.load(Collections.EMPTY_MAP);
@@ -134,7 +134,7 @@ public class JARFileJSFAppConfigProvider extends AbstractJSFAppConfigProvider {
 	 */
 	public boolean equals(Object otherObject) {
 		boolean equals = false;
-		if (otherObject != null && otherObject instanceof JARFileJSFAppConfigProvider) {
+		if (otherObject instanceof JARFileJSFAppConfigProvider) {
 			String otherFilename = ((JARFileJSFAppConfigProvider)otherObject).filename;
 			if (filename != null) {
 				equals = filename.equals(otherFilename);

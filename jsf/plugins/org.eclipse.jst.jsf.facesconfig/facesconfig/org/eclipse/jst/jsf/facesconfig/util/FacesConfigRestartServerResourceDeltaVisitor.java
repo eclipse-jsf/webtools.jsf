@@ -71,6 +71,9 @@ public class FacesConfigRestartServerResourceDeltaVisitor implements IResourceDe
 		}
 	}
 
+	/**
+	 * @return the components
+	 */
 	public Collection getComponents() {
 		return components;
 	}

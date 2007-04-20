@@ -34,11 +34,17 @@ import org.xml.sax.SAXException;
  */
 public class FacesConfigResourceImpl extends TranslatorResourceImpl implements IFacesConfigResource {
 
+	/**
+	 * Local entity resolver used to help loading entities
+	 */
 	public static class MyEntityResolver implements EntityResolver {
 
 		private final String baseLocation;
 		private URIResolver uriResolver = null;
 		
+		/**
+		 * @param baseLocation
+		 */
 		public MyEntityResolver(String baseLocation) {
 			super();
 			this.baseLocation = baseLocation;
@@ -72,19 +78,6 @@ public class FacesConfigResourceImpl extends TranslatorResourceImpl implements I
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.j2ee.common.impl.XMLResourceImpl#getType()
-	 */
-	public int getType() {
-		return IFacesConfigConstants.JSF_CONFIG_TYPE;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.jst.j2ee.common.impl.XMLResourceImpl#syncVersionOfRootObject()
-	 */
-	protected void syncVersionOfRootObject() {
-		// TODO: V6 migration - 
-	}
-	/* (non-Javadoc)
 	 * @see org.eclipse.wst.common.internal.emf.resource.TranslatorResource#getDoctype()
 	 */
 	public String getDoctype() {
@@ -102,20 +95,6 @@ public class FacesConfigResourceImpl extends TranslatorResourceImpl implements I
      */
     public FacesConfigType getFacesConfig() {
 		return (FacesConfigType) getRootObject();
-    }
-    /* (non-Javadoc)
-     * @see org.eclipse.jst.jsf.emf.facesconfig.xml.FacesConfigResource#isFaces1_0()
-     */
-    public boolean isFaces1_0() {
-        // TODO:  XN: 
-        return false;
-    }
-    /* (non-Javadoc)
-     * @see org.eclipse.jst.jsf.emf.facesconfig.xml.FacesConfigResource#isFaces1_1()
-     */
-    public boolean isFaces1_1() {
-        // TODO: XN
-        return false;
     }
     
 	/* (non-Javadoc)

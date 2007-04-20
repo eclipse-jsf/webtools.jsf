@@ -16,7 +16,13 @@ package org.eclipse.jst.jsf.facesconfig.util;
  */
 public interface IFacesConfigChangeEvent {
 
+	/**
+	 * @return true if a managed bean has changed
+	 */
 	public boolean isManagedBeanChanged();
+	/**
+	 * @return true if a navigation rule has changed
+	 */
 	public boolean isNavigationRuleChanged();
 	
 }

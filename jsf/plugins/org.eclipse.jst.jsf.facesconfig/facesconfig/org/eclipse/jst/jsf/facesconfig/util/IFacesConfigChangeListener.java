@@ -17,5 +17,8 @@ package org.eclipse.jst.jsf.facesconfig.util;
  */
 public interface IFacesConfigChangeListener {
 
+	/**
+	 * @param event
+	 */
 	public void resourceChanged(IFacesConfigChangeEvent event);
 }

@@ -55,6 +55,10 @@ class DynamicElementTranslator extends Translator implements IAnyTranslator
         };
     }
 
+    /**
+     * @param domNameAndPath
+     * @param feature
+     */
     public DynamicElementTranslator(String domNameAndPath,
             EStructuralFeature feature) 
     {
@@ -110,6 +114,10 @@ class DynamicElementTranslator extends Translator implements IAnyTranslator
     private static class DynamicAttributeTranslator extends Translator
     {
 
+        /**
+         * @param domNameAndPath
+         * @param feature
+         */
         public DynamicAttributeTranslator(String domNameAndPath, EStructuralFeature feature) 
         {
             // the "*" is a place holder.  The dom path gets ignored in

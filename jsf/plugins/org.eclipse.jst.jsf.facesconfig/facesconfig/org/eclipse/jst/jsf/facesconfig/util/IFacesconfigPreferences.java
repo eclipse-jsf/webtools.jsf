@@ -17,6 +17,9 @@ package org.eclipse.jst.jsf.facesconfig.util;
  */
 public interface IFacesconfigPreferences {
 	
+	/**
+	 * Preference for whether or not to restart the server
+	 */
 	String PREFSKEY_SERVER_RESTART = "jsf.project.restart"; //$NON-NLS-1$
 	
 }

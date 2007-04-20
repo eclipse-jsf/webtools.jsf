@@ -22,21 +22,34 @@ import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.wst.common.componentcore.ArtifactEdit;
 import org.eclipse.wst.common.componentcore.resources.IVirtualFile;
 import org.eclipse.wst.common.componentcore.resources.IVirtualResource;
-import org.eclipse.wst.common.internal.emf.resource.TranslatorResource;
 import org.eclipse.wst.xml.core.internal.emf2xml.EMF2DOMSSERenderer;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 
 
+/**
+ * The artifact edit for the JSF Application Configuration (faces-config) model
+ */
 public class FacesConfigArtifactEdit extends ArtifactEdit {
 	private String sFileName = null;
 	private FacesConfigType facesConfig = null;
 	private URI facesConfigURI = URI.createURI(IFacesConfigConstants.FACES_CONFIG_URI);
 	private boolean bRegistered = false;
 
+	/**
+	 * @param aProject
+	 * @param toAccessAsReadOnly
+	 * @throws IllegalArgumentException
+	 */
 	public FacesConfigArtifactEdit(IProject aProject, boolean toAccessAsReadOnly) throws IllegalArgumentException {
 		super(aProject, toAccessAsReadOnly);
 	}
 
+	/**
+	 * @param aProject
+	 * @param sConfigFile
+	 * @return the faces config artifact for the file config file sConfig in project aProject.
+	 * Opened only for read access (no write)
+	 */
 	public static FacesConfigArtifactEdit getFacesConfigArtifactEditForRead(IProject aProject, String sConfigFile) {
 		FacesConfigArtifactEdit artifactEdit = null;
 		try {
@@ -61,6 +74,12 @@ public class FacesConfigArtifactEdit extends ArtifactEdit {
 		return getFacesConfigArtifactEditForRead(aProject, null);
 	}
 
+    /**
+     * @param aProject
+     * @param sConfigFile
+     * @return the faces config artifact for the file config file sConfig in project aProject.
+     * Opened for both write and read access
+     */	
 	public static FacesConfigArtifactEdit getFacesConfigArtifactEditForWrite(IProject aProject, String sConfigFile) {
 		FacesConfigArtifactEdit artifactEdit = null;
 		try {
@@ -87,6 +106,9 @@ public class FacesConfigArtifactEdit extends ArtifactEdit {
 		return getFacesConfigArtifactEditForWrite(aProject, null);
 	}
 
+	/**
+	 * @return the root model object for this artifact edit model
+	 */
 	public FacesConfigType getFacesConfig() {
 		if (facesConfig == null) {
 			// TODO: XN - does not seem a good way to check whether the resource has been registered each time.
@@ -111,10 +133,16 @@ public class FacesConfigArtifactEdit extends ArtifactEdit {
 		return facesConfig;
 	}
 	
+	/**
+	 * @return the uri pointing to the source of this faces config artifact
+	 */
 	public URI getFacesConfigURI() {
 		return facesConfigURI;
 	}
 
+	/**
+	 * @return the model root
+	 */
 	public EObject getDeploymentDescriptorRoot() {
 		List contents = getDeploymentDescriptorResource().getContents();
 		if (contents.size() > 0)
@@ -125,6 +153,9 @@ public class FacesConfigArtifactEdit extends ArtifactEdit {
 		//return (EObject) contents.get(0);
 	}
 
+	/**
+	 * @return the EMF resource retrieved for this artifact's uri
+	 */
 	public Resource getDeploymentDescriptorResource() {
 		if (sFileName != null) {
 			facesConfigURI = URI.createURI(sFileName);
@@ -143,30 +174,31 @@ public class FacesConfigArtifactEdit extends ArtifactEdit {
 		sFileName = filename;
 	}
 
-	protected void addFacesConfigIfNecessary(TranslatorResource aResource) {
-		//TO: XN - See how to create one if the config file does not exist
-		/*if (aResource != null) {
-		    if(aResource.getContents() == null || aResource.getContents().isEmpty()) {
-		        FacesConfigType facesConfigNew = WebapplicationFactory.eINSTANCE.createWebApp();
-				aResource.getContents().add(facesConfigNew);
-				aResource.setModified(true);
-		    } 
-		    FacesConfigType facesConfig = (FacesConfigType)aResource.getContents().get(0);
-			URI moduleURI = getArtifactEditModel().getModuleURI();
-			try {
-				facesConfig.setDisplayName(StructureEdit.getDeployedName(moduleURI));
-			} catch (UnresolveableURIException e) {
-				//Ignore
-			}
-			aResource.setID(facesConfig, J2EEConstants.WEBAPP_ID);
-	
-			try{
-				aResource.saveIfNecessary();
-			}catch(Exception e){
-				e.printStackTrace();
-			}
-		}*/
-	}
+	// TODO: appears to be dead
+//	protected void addFacesConfigIfNecessary(TranslatorResource aResource) {
+//		//TO: XN - See how to create one if the config file does not exist
+//		/*if (aResource != null) {
+//		    if(aResource.getContents() == null || aResource.getContents().isEmpty()) {
+//		        FacesConfigType facesConfigNew = WebapplicationFactory.eINSTANCE.createWebApp();
+//				aResource.getContents().add(facesConfigNew);
+//				aResource.setModified(true);
+//		    } 
+//		    FacesConfigType facesConfig = (FacesConfigType)aResource.getContents().get(0);
+//			URI moduleURI = getArtifactEditModel().getModuleURI();
+//			try {
+//				facesConfig.setDisplayName(StructureEdit.getDeployedName(moduleURI));
+//			} catch (UnresolveableURIException e) {
+//				//Ignore
+//			}
+//			aResource.setID(facesConfig, J2EEConstants.WEBAPP_ID);
+//	
+//			try{
+//				aResource.saveIfNecessary();
+//			}catch(Exception e){
+//				e.printStackTrace();
+//			}
+//		}*/
+//	}
 
 	/**
 	 * @return the DOM model for the Struts config. file.
@@ -184,6 +216,9 @@ public class FacesConfigArtifactEdit extends ArtifactEdit {
 		return null;
 	}
 
+	/**
+	 * @return the IFile used to load the model or null if none.
+	 */
 	public IFile getFile() {
 		IVirtualResource resource = getComponent().getRootFolder().findMember(facesConfigURI.toString());
 		if ((resource != null) && (resource.getType() == IVirtualResource.FILE))
@@ -191,6 +226,9 @@ public class FacesConfigArtifactEdit extends ArtifactEdit {
 		return null;
 	}
     
+    /**
+     * @return true if the underlying model has been disposed
+     */
     public boolean isDisposed()
     {
         return getArtifactEditModel().isDisposed();

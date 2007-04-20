@@ -16,6 +16,9 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.content.IContentDescription;
 import org.eclipse.core.runtime.content.IContentType;
 
+/**
+ * Utility class for faces-config model management
+ */
 public class FacesConfigUtil {
 
 	/** Must match the id specified in plugin.xml. */

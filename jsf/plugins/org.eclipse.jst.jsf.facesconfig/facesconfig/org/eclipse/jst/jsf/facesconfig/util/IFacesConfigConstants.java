@@ -10,7 +10,12 @@
  **************************************************************************************************/
 package org.eclipse.jst.jsf.facesconfig.util;
 
+/**
+ * Common constants
+ */
 public interface IFacesConfigConstants {
-	final static public int JSF_CONFIG_TYPE = 10;
+	/**
+	 * the relative URI for the default faces config file.
+	 */
 	final String FACES_CONFIG_URI		= 	"WEB-INF/faces-config.xml"; //$NON-NLS-1$
 }

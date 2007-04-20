@@ -58,7 +58,7 @@ public class FacesResourceChangeListener implements IResourceChangeListener,
 	
 	private static IPreferenceStore preferenceStore = null;
 
-	public static final QualifiedName EDITOR_KEY = new QualifiedName(
+	private static final QualifiedName EDITOR_KEY = new QualifiedName(
 			"org.eclipse.ui.internal.registry.ResourceEditorRegistry", "EditorProperty");//$NON-NLS-2$//$NON-NLS-1$
 
 	/** Start up the singleton instance. */
@@ -318,9 +318,20 @@ public class FacesResourceChangeListener implements IResourceChangeListener,
 		return listener;
 	}
 	
+	/**
+	 * Adds a change listener to the list of listeners that will be notified
+	 * when a change is fired.
+	 * 
+	 * @param facesConfigChangeListener
+	 */
 	public void addFacesConfigChangeListener(IFacesConfigChangeListener facesConfigChangeListener) {
 		facesConfigChangeListeners.add(facesConfigChangeListener);
 	}
+	/**
+	 * Removes the listener from the list.
+	 * 
+	 * @param facesConfigChangeListener
+	 */
 	public void removeFacesConfigChangeListener(IFacesConfigChangeListener facesConfigChangeListener) {
 		facesConfigChangeListeners.remove(facesConfigChangeListener);
 	}
@@ -336,6 +347,11 @@ public class FacesResourceChangeListener implements IResourceChangeListener,
 		}
 	}
 
+	/** 
+	 * Set the internally used preference store to preferenceStore
+	 * 
+	 * @param preferenceStore
+	 */
 	public static void setPreferenceStore(IPreferenceStore preferenceStore) {
 		FacesResourceChangeListener.preferenceStore = preferenceStore;
 	}
