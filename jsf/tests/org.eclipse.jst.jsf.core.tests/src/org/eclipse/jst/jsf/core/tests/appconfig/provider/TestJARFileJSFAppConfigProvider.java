@@ -15,9 +15,9 @@ import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigUtils;
 import org.eclipse.jst.jsf.core.jsfappconfig.RuntimeClasspathJSFAppConfigLocater;
 import org.eclipse.jst.jsf.core.tests.TestsPlugin;
 import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
+import org.eclipse.jst.jsf.facesconfig.emf.ComponentExtensionType;
 import org.eclipse.jst.jsf.facesconfig.emf.ComponentType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
-import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanExtensionType;
 import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanType;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
@@ -95,11 +95,11 @@ public class TestJARFileJSFAppConfigProvider extends TestCase
 
         verifyCommonElements(facesConfig);
         
-        ManagedBeanType beanType = (ManagedBeanType) facesConfig.getManagedBean().get(0);
-        assertEquals(1, beanType.getManagedBeanExtension().size());
+        ComponentType componentType = (ComponentType) facesConfig.getComponent().get(0);
+        assertEquals(1, componentType.getComponentExtension().size());
         
-        ManagedBeanExtensionType extType = 
-            (ManagedBeanExtensionType) beanType.getManagedBeanExtension().get(0);
+        ComponentExtensionType extType = 
+            (ComponentExtensionType) componentType.getComponentExtension().get(0);
         // this value should actually be 1, but we are not able to use our worked-around
         // translation renderer for jar files.  This assertion is intended to break
         // once translation of ANY content is fixed for JAR-contained faces-config models
@@ -117,8 +117,8 @@ public class TestJARFileJSFAppConfigProvider extends TestCase
         assertEquals(1, facesConfig.getManagedBean().size());
         ManagedBeanType managedBean = 
             (ManagedBeanType) facesConfig.getManagedBean().get(0);
-        assertEquals("foo", managedBean.getManagedBeanName().getTextContent());
-        assertEquals("beans.Blah", managedBean.getManagedBeanClass().getTextContent());
+        assertEquals("jarBean", managedBean.getManagedBeanName().getTextContent());
+        assertEquals("java.util.List", managedBean.getManagedBeanClass().getTextContent());
         assertEquals("request", managedBean.getManagedBeanScope().getTextContent());
     }
     
