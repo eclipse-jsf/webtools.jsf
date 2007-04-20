@@ -24,7 +24,7 @@ import org.eclipse.wst.xml.core.internal.regions.DOMRegionContext;
  */
 public class CreateTestCaseForJSP extends TestCase 
 {
-    private final static String  jspFile = "loadBundleResolution";
+    private final static String  jspFile = "resourceBundleResolution";
     private static IFile  file;
     private static IStructuredModel model;
 

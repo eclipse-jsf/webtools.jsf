@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
+import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.test.util.TestFileResource;
 import org.eclipse.jst.jsf.validation.el.tests.ELValidationTestPlugin;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
@@ -17,15 +18,17 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
  */
 public class LoadBundleResolutionTestCase extends SingleJSPTestCase 
 {
+    public LoadBundleResolutionTestCase() 
+    {
+        super("/testdata/jsps/loadBundleResolution.jsp.data", "/loadBundleResolution.jsp", IJSFCoreConstants.FACET_VERSION_1_1,FACES_CONFIG_FILE_NAME_1_1);
+    }
+
     protected void setUp() throws Exception
     {
-        _srcFileName = "/testdata/jsps/loadBundleResolution.jsp.data";
-        _destFileName = "/loadBundleResolution.jsp";
         super.setUp();
         
         // add a resource bundle to the default package to test regression on bug 144525
         TestFileResource resource = new TestFileResource();
-        resource = new TestFileResource();
         resource.load(ELValidationTestPlugin.getDefault().getBundle(), 
                       "/testdata/classes/Bundle.properties.data");
         _jdtTestEnv.addResourceFile("src", new ByteArrayInputStream(resource.toBytes()), 

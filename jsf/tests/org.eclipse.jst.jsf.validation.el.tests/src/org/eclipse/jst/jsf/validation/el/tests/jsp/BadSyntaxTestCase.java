@@ -2,6 +2,7 @@ package org.eclipse.jst.jsf.validation.el.tests.jsp;
 
 import java.util.List;
 
+import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
@@ -13,10 +14,12 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
  */
 public class BadSyntaxTestCase extends SingleJSPTestCase 
 {
+    public BadSyntaxTestCase() {
+        super("/testdata/jsps/badSyntax.jsp.data", "/badSyntax.jsp", IJSFCoreConstants.FACET_VERSION_1_1,FACES_CONFIG_FILE_NAME_1_1);
+    }
+
     protected void setUp() throws Exception
     {
-        _srcFileName = "/testdata/jsps/badSyntax.jsp.data";
-        _destFileName = "/badSyntax.jsp";
         super.setUp();
     }
 

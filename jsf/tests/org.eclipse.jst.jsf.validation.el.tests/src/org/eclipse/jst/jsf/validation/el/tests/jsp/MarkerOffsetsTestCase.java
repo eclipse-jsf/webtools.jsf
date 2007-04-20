@@ -2,6 +2,7 @@ package org.eclipse.jst.jsf.validation.el.tests.jsp;
 
 import java.util.List;
 
+import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
@@ -17,10 +18,12 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
  */
 public class MarkerOffsetsTestCase extends SingleJSPTestCase 
 {
+    public MarkerOffsetsTestCase() {
+        super("/testdata/jsps/markerOffsets.jsp.data", "/markerOffsets.jsp", IJSFCoreConstants.FACET_VERSION_1_1,FACES_CONFIG_FILE_NAME_1_1);
+    }
+
     protected void setUp() throws Exception
     {
-        _srcFileName = "/testdata/jsps/markerOffsets.jsp.data";
-        _destFileName = "/markerOffsets.jsp";
         super.setUp();
     }
 

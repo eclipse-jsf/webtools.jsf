@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import junit.framework.TestCase;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.runtime.CoreException;
@@ -22,10 +20,10 @@ import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocume
 import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.ITextRegionContextResolver;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
-import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigManager;
 import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
 import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanType;
+import org.eclipse.jst.jsf.test.util.ConfigurableTestCase;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.jst.jsf.test.util.TestFileResource;
@@ -42,9 +40,32 @@ import org.eclipse.wst.validation.internal.provisional.core.IMessage;
  * @author cbateman
  *
  */
-public class BaseTestCase extends TestCase 
+public abstract class BaseTestCase extends ConfigurableTestCase 
 {
+    public static final String      PROXY_SETTING_HOST = "proxySettings_Host";
+    public static final String      PROXY_SETTING_PORT = "proxySettings_Port";
+    public static final String      JSF_FACET_VERSION  = "jsfFacetVersion";    
+    
+    private final String            _defaultJSFVersion;
+    
+    /**
+     * Default constructor
+     */
+    public BaseTestCase(String defaultJSFVersion)
+    {
+        super();
+        _defaultJSFVersion = defaultJSFVersion;
+    }
+    
 	/**
+	 * @param name
+	 */
+	public BaseTestCase(String name, String defaultJSFVersion) {
+        super(name);
+        _defaultJSFVersion = defaultJSFVersion;
+    }
+
+    /**
 	 * The dynamic web project test environment
 	 */
 	protected WebProjectTestEnvironment  _testEnv;
@@ -53,72 +74,109 @@ public class BaseTestCase extends TestCase
 	 */
 	protected JDTTestEnvironment         _jdtTestEnv;
     
-	protected void setUp() throws Exception    
+	private MyConfiguration              _configuration;
+
+	
+	protected void doStandaloneSetup() 
+	{
+	    super.doStandaloneSetup();
+	    _configuration = new MyConfiguration("www-proxy.uk.oracle.com","80",_defaultJSFVersion);
+    }
+
+    protected void doTestSuiteSetup() 
+    {
+        super.doTestSuiteSetup();
+        _configuration = new MyConfiguration(_testConfiguration);
+    }
+
+    protected void setUp() throws Exception    
 	{
 		super.setUp();
 
         JSFTestUtil.setValidationEnabled(false);
         
-        JSFTestUtil.setInternetProxyPreferences(true, "www-proxy.us.oracle.com", "80");
-        
-        _testEnv = new WebProjectTestEnvironment("ELValidationTest_"+this.getClass().getName()+"_"+getName());
+        if (_configuration.isProxyEnabled())
+        {
+            JSFTestUtil.setInternetProxyPreferences
+                (true, _configuration.getProxyHostName()
+                        , _configuration.getProxyPort());
+        }
+
+        _testEnv = new WebProjectTestEnvironment("ELValidationTest_"+this.getClass().getName()+"_"+getName()+"_"+_configuration.getJsfVersion());
         _testEnv.createProject();
         assertNotNull(_testEnv);       
         assertNotNull(_testEnv.getTestProject());
         assertTrue(_testEnv.getTestProject().isAccessible());
 
-        JSFFacetedTestEnvironment jsfFacedEnv = new JSFFacetedTestEnvironment(_testEnv);
-        jsfFacedEnv.initialize(IJSFCoreConstants.FACET_VERSION_1_1);
-
-        _testEnv.loadResourceInWebRoot(ELValidationTestPlugin.getDefault().getBundle(),
-                                      "/testdata/web/faces-config.xml.data", 
-                                      "/WEB-INF/faces-config.xml");
-
+        // sub-classes may custom their JSF env; primarily to decide what version
+        // of JSF
+        configureJSFEnvironment();
+        
         _jdtTestEnv = new JDTTestEnvironment(_testEnv);
-
+        configureJDTTestEnvironment(_jdtTestEnv);
+	}
+    
+	/**
+	 * Used to configure the JSF environment. After successful 
+	 * return, sub-classes must ensure that their JSF facet is
+	 * installed and that there is at least one faces-config (in WEB-INF)
+	 * installed
+	 * 
+	 * @throws Exception
+	 */
+	protected abstract JSFFacetedTestEnvironment configureJSFEnvironment() throws Exception;
+	
+	/**
+	 * Add all Java and property file resources to the Java source path
+	 * needed for testing.  Sub-classes may override.
+	 * 
+	 * @param jdtTestEnv
+	 * @throws Exception
+	 */
+	protected void configureJDTTestEnvironment(JDTTestEnvironment jdtTestEnv) throws Exception
+	{
         TestFileResource resource = new TestFileResource();
         resource.load(ELValidationTestPlugin.getDefault().getBundle(), 
                       "/testdata/classes/MyBean.java.data");
-        _jdtTestEnv.addSourceFile("src", "beans", "MyBean", resource.toString());
+        jdtTestEnv.addSourceFile("src", "beans", "MyBean", resource.toString());
 
         resource = new TestFileResource();
         resource.load(ELValidationTestPlugin.getDefault().getBundle(), 
                       "/testdata/classes/MapBean.java.data");
-        _jdtTestEnv.addSourceFile("src", "beans", "MapBean", resource.toString());
+        jdtTestEnv.addSourceFile("src", "beans", "MapBean", resource.toString());
 
         resource = new TestFileResource();
         resource.load(ELValidationTestPlugin.getDefault().getBundle(), 
                       "/testdata/classes/MyBeanSettable.java.data");
-        _jdtTestEnv.addSourceFile("src", "beans", "MyBeanSettable", resource.toString());
+        jdtTestEnv.addSourceFile("src", "beans", "MyBeanSettable", resource.toString());
 
         resource = new TestFileResource();
         resource.load(ELValidationTestPlugin.getDefault().getBundle(), 
                       "/testdata/classes/MyBeanSubClass.java.data");
-        _jdtTestEnv.addSourceFile("src", "beans", "MyBeanSubClass", resource.toString());
+        jdtTestEnv.addSourceFile("src", "beans", "MyBeanSubClass", resource.toString());
 
         resource = new TestFileResource();
         resource.load(ELValidationTestPlugin.getDefault().getBundle(), 
                       "/testdata/classes/BeanWithMapProperties.java.data");
-        _jdtTestEnv.addSourceFile("src", "beans", "BeanWithMapProperties", resource.toString());
+        jdtTestEnv.addSourceFile("src", "beans", "BeanWithMapProperties", resource.toString());
 
         resource = new TestFileResource();
         resource.load(ELValidationTestPlugin.getDefault().getBundle(), 
                       "/testdata/classes/BeanWithListProperties.java.data");
-        _jdtTestEnv.addSourceFile("src", "beans", "BeanWithListProperties", resource.toString());
+        jdtTestEnv.addSourceFile("src", "beans", "BeanWithListProperties", resource.toString());
         
         resource = new TestFileResource();
         resource.load(ELValidationTestPlugin.getDefault().getBundle(), 
                       "/testdata/classes/ListBean.java.data");
-        _jdtTestEnv.addSourceFile("src", "beans", "ListBean", resource.toString());
+        jdtTestEnv.addSourceFile("src", "beans", "ListBean", resource.toString());
         
         resource = new TestFileResource();
         resource.load(ELValidationTestPlugin.getDefault().getBundle(), 
                       "/testdata/classes/Bundle.properties.data");
-        _jdtTestEnv.addResourceFile("src", new ByteArrayInputStream(resource.toBytes()), 
+        jdtTestEnv.addResourceFile("src", new ByteArrayInputStream(resource.toBytes()), 
                       "beans", "Bundle.properties");
-
 	}
-    
+	
     protected void tearDown() throws Exception
     {
         _testEnv.getTestProject().close(null);
@@ -496,5 +554,44 @@ public class BaseTestCase extends TestCase
             // if both are non-0, then the most sever is the lowest value
             return Math.min(sev1, sev2);
         }
+    }
+    
+    private static class MyConfiguration
+    {
+        private final String  _proxyHostName;
+        private final String  _proxyPort;
+        private final String  _jsfVersion;
+        
+        MyConfiguration(final String proxyHostName, final String proxyPort, final String jsfVersion)
+        {
+            _proxyHostName = proxyHostName;
+            _proxyPort = proxyPort;
+            _jsfVersion = jsfVersion;
+        }
+        
+        MyConfiguration(TestConfiguration  configuration)
+        {
+            _proxyHostName = (String) configuration.get(BaseTestCase.PROXY_SETTING_HOST);
+            _proxyPort = (String) configuration.get(BaseTestCase.PROXY_SETTING_PORT);
+            _jsfVersion = (String) configuration.get(BaseTestCase.JSF_FACET_VERSION);
+        }
+        
+        public boolean isProxyEnabled()
+        {
+            return _proxyHostName != null && _proxyPort != null;
+        }
+
+        public String getProxyHostName() {
+            return _proxyHostName;
+        }
+
+        public String getProxyPort() {
+            return _proxyPort;
+        }
+
+        public String getJsfVersion() {
+            return _jsfVersion;
+        }
+        
     }
 }

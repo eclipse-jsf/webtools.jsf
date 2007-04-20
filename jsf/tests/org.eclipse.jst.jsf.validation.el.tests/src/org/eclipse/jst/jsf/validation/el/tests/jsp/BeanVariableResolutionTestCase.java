@@ -2,6 +2,7 @@ package org.eclipse.jst.jsf.validation.el.tests.jsp;
 
 import java.util.List;
 
+import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
@@ -13,10 +14,12 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
  */
 public class BeanVariableResolutionTestCase extends SingleJSPTestCase 
 {
+    public BeanVariableResolutionTestCase() {
+        super("/testdata/jsps/beanVariableResolution.jsp.data", "/beanVariableResolution.jsp", IJSFCoreConstants.FACET_VERSION_1_1,FACES_CONFIG_FILE_NAME_1_1);
+    }
+
     protected void setUp() throws Exception
     {
-        _srcFileName = "/testdata/jsps/beanVariableResolution.jsp.data";
-        _destFileName = "/beanVariableResolution.jsp";
         super.setUp();
     }
 

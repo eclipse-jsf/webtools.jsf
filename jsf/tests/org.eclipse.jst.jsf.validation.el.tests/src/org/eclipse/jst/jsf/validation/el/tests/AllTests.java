@@ -10,88 +10,31 @@ package org.eclipse.jst.jsf.validation.el.tests;
  *    Oracle - initial API and implementation
  *******************************************************************************/ 
 
-import org.eclipse.jst.jsf.validation.el.tests.jsp.ArithmeticAddTestCase;
-import org.eclipse.jst.jsf.validation.el.tests.jsp.ArithmeticDivideTestCase;
-import org.eclipse.jst.jsf.validation.el.tests.jsp.ArithmeticMinusTestCase;
-import org.eclipse.jst.jsf.validation.el.tests.jsp.ArithmeticModuloTestCase;
-import org.eclipse.jst.jsf.validation.el.tests.jsp.ArithmeticMultiplyTestCase;
-import org.eclipse.jst.jsf.validation.el.tests.jsp.AssignabilityTestCase;
-import org.eclipse.jst.jsf.validation.el.tests.jsp.BadSyntaxTestCase;
-import org.eclipse.jst.jsf.validation.el.tests.jsp.BeanPropertyResolutionTestCase;
-import org.eclipse.jst.jsf.validation.el.tests.jsp.BeanVariableResolutionTestCase;
-import org.eclipse.jst.jsf.validation.el.tests.jsp.BuiltInSymbolsTestCase;
-import org.eclipse.jst.jsf.validation.el.tests.jsp.DataTableResolutionTestCase;
-import org.eclipse.jst.jsf.validation.el.tests.jsp.GreaterThanEqTestCase;
-import org.eclipse.jst.jsf.validation.el.tests.jsp.GreaterThanTestCase;
-import org.eclipse.jst.jsf.validation.el.tests.jsp.JSPFunctionsTestCase;
-import org.eclipse.jst.jsf.validation.el.tests.jsp.LessThanEqTestCase;
-import org.eclipse.jst.jsf.validation.el.tests.jsp.LessThanTestCase;
-import org.eclipse.jst.jsf.validation.el.tests.jsp.LoadBundleResolutionTestCase;
-import org.eclipse.jst.jsf.validation.el.tests.jsp.LogicalAndTestCase;
-import org.eclipse.jst.jsf.validation.el.tests.jsp.LogicalEqualsTestCase;
-import org.eclipse.jst.jsf.validation.el.tests.jsp.LogicalNotEqualsTestCase;
-import org.eclipse.jst.jsf.validation.el.tests.jsp.LogicalNotTestCase;
-import org.eclipse.jst.jsf.validation.el.tests.jsp.LogicalOrTestCase;
-import org.eclipse.jst.jsf.validation.el.tests.jsp.MarkerOffsetsTestCase;
-import org.eclipse.jst.jsf.validation.el.tests.jsp.MethodBindingTestCase;
-import org.eclipse.jst.jsf.validation.el.tests.jsp.PropertiesOfMapsTestCase;
-import org.eclipse.jst.jsf.validation.el.tests.jsp.UnaryEmptyTestCase;
-import org.eclipse.jst.jsf.validation.el.tests.jsp.UnaryMinusTestCase;
-
 import junit.framework.Test;
 import junit.framework.TestSuite;
+
+import org.eclipse.jst.jsf.test.util.ConfigurableTestCase.TestConfiguration;
+import org.eclipse.jst.jsf.validation.el.tests.base.BaseTestCase;
 
 
 /**
  * The full test suite for core.tests
+ * 
  * @author cbateman
  *
  */
-public class AllTests {
-
-    /**
-     * @return the test suite
-     */
+public class AllTests 
+{
     public static Test suite() 
     {
-        TestSuite suite = new TestSuite("Test for org.eclipse.jst.jsf.validation.el.tests");
-        //$JUnit-BEGIN$
-        suite.addTestSuite(BadSyntaxTestCase.class);
-        suite.addTestSuite(BeanPropertyResolutionTestCase.class);
-        suite.addTestSuite(BeanVariableResolutionTestCase.class);
-        suite.addTestSuite(LoadBundleResolutionTestCase.class);
-        suite.addTestSuite(DataTableResolutionTestCase.class);
-        suite.addTestSuite(BuiltInSymbolsTestCase.class);
-        suite.addTestSuite(AssignabilityTestCase.class);
-        suite.addTestSuite(JSPFunctionsTestCase.class);
-        suite.addTestSuite(MethodBindingTestCase.class);
-        suite.addTestSuite(PropertiesOfMapsTestCase.class);
+        TestSuite suite = new TestSuite("EL Validation Testing");
         
-        suite.addTestSuite(ArithmeticAddTestCase.class);
-        suite.addTestSuite(ArithmeticDivideTestCase.class);
-        suite.addTestSuite(ArithmeticMinusTestCase.class);
-        suite.addTestSuite(ArithmeticModuloTestCase.class);
-        suite.addTestSuite(ArithmeticMultiplyTestCase.class);
+        TestConfiguration  configuration = new TestConfiguration();
+        configuration.put(BaseTestCase.PROXY_SETTING_HOST, "www-proxy.uk.oracle.com");
+        configuration.put(BaseTestCase.PROXY_SETTING_PORT, "80");
 
-        suite.addTestSuite(GreaterThanEqTestCase.class);
-        suite.addTestSuite(GreaterThanTestCase.class);
-        suite.addTestSuite(LessThanEqTestCase.class);
-        suite.addTestSuite(LessThanTestCase.class);
-
-        suite.addTestSuite(LogicalAndTestCase.class);
-        suite.addTestSuite(LogicalOrTestCase.class);
-        suite.addTestSuite(LogicalEqualsTestCase.class);
-        suite.addTestSuite(LogicalNotEqualsTestCase.class);
-        suite.addTestSuite(LogicalNotTestCase.class);
-
-        suite.addTestSuite(UnaryEmptyTestCase.class);
-        suite.addTestSuite(UnaryMinusTestCase.class);
-        
-        suite.addTestSuite(MarkerOffsetsTestCase.class);
-
-        //$JUnit-END$
+        suite.addTest(AllTests_1_1.getFacesSuite((TestConfiguration) configuration.clone()));
+        suite.addTest(AllTests_1_2.getFacesSuite((TestConfiguration) configuration.clone()));
         return suite;
     }
-    
 }
-

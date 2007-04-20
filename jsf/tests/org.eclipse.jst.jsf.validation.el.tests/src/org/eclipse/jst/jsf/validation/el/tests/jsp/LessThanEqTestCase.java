@@ -3,6 +3,7 @@ package org.eclipse.jst.jsf.validation.el.tests.jsp;
 import java.util.List;
 
 import org.eclipse.jdt.core.Signature;
+import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
@@ -14,11 +15,12 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 public class LessThanEqTestCase extends SingleJSPTestCase 
 {
 
+    public LessThanEqTestCase() {
+        super("/testdata/jsps/lessThanEq.jsp.data", "/lessThanEq.jsp", IJSFCoreConstants.FACET_VERSION_1_1,FACES_CONFIG_FILE_NAME_1_1);
+    }
+
     protected void setUp() throws Exception 
     {
-        _srcFileName = "/testdata/jsps/lessThanEq.jsp.data";
-        _destFileName = "/lessThanEq.jsp";
-
         super.setUp();
     }
 

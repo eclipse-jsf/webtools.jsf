@@ -3,6 +3,7 @@ package org.eclipse.jst.jsf.validation.el.tests.jsp;
 import java.util.List;
 
 import org.eclipse.jdt.core.Signature;
+import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
@@ -13,10 +14,13 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
  */
 public class LogicalOrTestCase extends SingleJSPTestCase 
 {
+    public LogicalOrTestCase()
+    {
+        super("/testdata/jsps/logicalOR.jsp.data", "/logicalOR.jsp", IJSFCoreConstants.FACET_VERSION_1_1,FACES_CONFIG_FILE_NAME_1_1);
+    }
+
     protected void setUp() throws Exception
     {
-        _srcFileName = "/testdata/jsps/logicalOR.jsp.data";
-        _destFileName = "/logicalOR.jsp";
         super.setUp();
     }
 

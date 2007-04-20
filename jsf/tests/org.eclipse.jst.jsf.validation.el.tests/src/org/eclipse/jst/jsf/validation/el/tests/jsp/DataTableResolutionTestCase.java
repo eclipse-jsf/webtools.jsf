@@ -3,15 +3,19 @@ package org.eclipse.jst.jsf.validation.el.tests.jsp;
 import java.util.List;
 
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
+import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
 public class DataTableResolutionTestCase extends SingleJSPTestCase 
 {
+    public DataTableResolutionTestCase() 
+    {
+        super("/testdata/jsps/dataTableResolution.jsp.data", "/dataTableResolution.jsp", IJSFCoreConstants.FACET_VERSION_1_1,FACES_CONFIG_FILE_NAME_1_1);
+    }
+
     protected void setUp() throws Exception
     {
-        _srcFileName = "/testdata/jsps/dataTableResolution.jsp.data";
-        _destFileName = "/dataTableResolution.jsp";
         super.setUp();
     }
 

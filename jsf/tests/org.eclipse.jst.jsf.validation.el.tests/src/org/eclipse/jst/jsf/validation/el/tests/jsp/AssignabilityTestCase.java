@@ -3,6 +3,7 @@ package org.eclipse.jst.jsf.validation.el.tests.jsp;
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.internal.types.IAssignable;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
+import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 
 /**
@@ -12,10 +13,13 @@ import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
  */
 public class AssignabilityTestCase extends SingleJSPTestCase 
 {
+    public AssignabilityTestCase() 
+    {
+        super("/testdata/jsps/assignability.jsp.data", "/assignability.jsp", IJSFCoreConstants.FACET_VERSION_1_1,FACES_CONFIG_FILE_NAME_1_1);
+    }
+
     protected void setUp() throws Exception
     {
-        _srcFileName = "/testdata/jsps/assignability.jsp.data";
-        _destFileName = "/assignability.jsp";
         super.setUp();
     }
 
