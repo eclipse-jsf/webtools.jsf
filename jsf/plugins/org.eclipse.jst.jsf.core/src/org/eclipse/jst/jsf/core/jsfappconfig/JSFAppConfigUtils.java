@@ -269,7 +269,8 @@ public class JSFAppConfigUtils {
 	 */
 	public static List getConfigFileJARsFromClasspath(IProject project) throws CoreException, IOException {
 		ArrayList JARsList = new ArrayList();
-		if (project.hasNature(JavaCore.NATURE_ID)) {
+		if (project.isAccessible()
+		        && project.hasNature(JavaCore.NATURE_ID)) {
 			IJavaProject javaProject = JavaCore.create(project);
 			if (javaProject != null) {
 				IClasspathEntry[] classpathEntries = javaProject.getResolvedClasspath(true);

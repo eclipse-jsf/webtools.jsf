@@ -21,7 +21,6 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jdt.core.ElementChangedEvent;
 import org.eclipse.jdt.core.IElementChangedListener;
 import org.eclipse.jdt.core.IJavaElementDelta;
-import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 
@@ -84,20 +83,9 @@ public class RuntimeClasspathJSFAppConfigLocater extends AbstractJSFAppConfigLoc
 	 * @param event ElementChangedEvent instance describing the change.
 	 */
 	public void elementChanged(ElementChangedEvent event) {
-        // TODO: should this ever fire if it's not the project expected?
-        // should the listener have been deregistered?
-        final IJavaProject javaProject = event.getDelta().getElement().getJavaProject();
-        if (javaProject != null
-                && javaProject.getProject().isAccessible()
-                && this.manager.getProject().isAccessible())
-        {
-            if (event.getDelta().getElement().getJavaProject().getProject().isAccessible())
-            {
-        		if (classpathChanged(event.getDelta())) {
-        			locateProviders();
-        		}
-            }
-        }
+		if (classpathChanged(event.getDelta())) {
+			locateProviders();
+		}
 	}
 
 	/**
