@@ -21,4 +21,4 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.jst.jsf.core
 Eclipse-LazyStart: true
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: org.eclipse.jst.jsf.contentassist.tests
+Export-Package: org.eclipse.jst.jsf.contentassist.tests;x-internal:=true

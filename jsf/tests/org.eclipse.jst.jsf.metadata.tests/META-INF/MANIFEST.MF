@@ -30,13 +30,13 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.wst.xml.core,
  org.eclipse.jst.pagedesigner
 Eclipse-LazyStart: true
-Export-Package: com.foobar,
- org.eclipse.jst.jsf.common.metadata.tests,
- org.eclipse.jst.jsf.metadata.tests,
- org.eclipse.jst.jsf.metadata.tests.annotations,
- org.eclipse.jst.jsf.metadata.tests.metadataprocessing,
- org.eclipse.jst.jsf.metadata.tests.metadataprocessing.features,
- org.eclipse.jst.jsf.metadata.tests.metadataprocessing.types,
- org.eclipse.jst.jsf.metadata.tests.taglibprocessing
+Export-Package: com.foobar;x-internal:=true,
+ org.eclipse.jst.jsf.common.metadata.tests;x-internal:=true,
+ org.eclipse.jst.jsf.metadata.tests;x-internal:=true,
+ org.eclipse.jst.jsf.metadata.tests.annotations;x-internal:=true,
+ org.eclipse.jst.jsf.metadata.tests.metadataprocessing;x-internal:=true,
+ org.eclipse.jst.jsf.metadata.tests.metadataprocessing.features;x-internal:=true,
+ org.eclipse.jst.jsf.metadata.tests.metadataprocessing.types;x-internal:=true,
+ org.eclipse.jst.jsf.metadata.tests.taglibprocessing;x-internal:=true
 Plugin-Class: org.eclipse.jst.jsf.metadata.tests.MetadataTestsPlugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

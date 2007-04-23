@@ -15,4 +15,4 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.jst.jsf.common
 Eclipse-LazyStart: true
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: org.eclipse.jst.jsf.designtime.tests
+Export-Package: org.eclipse.jst.jsf.designtime.tests;x-internal:=true

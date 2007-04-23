@@ -22,7 +22,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.jface.text
 Eclipse-LazyStart: true
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: org.eclipse.jst.jsf.validation.el.tests,
- org.eclipse.jst.jsf.validation.el.tests.base,
- org.eclipse.jst.jsf.validation.el.tests.jsp,
- org.eclipse.jst.jsf.validation.el.tests.util
+Export-Package: org.eclipse.jst.jsf.validation.el.tests;x-internal:=true,
+ org.eclipse.jst.jsf.validation.el.tests.base;x-internal:=true,
+ org.eclipse.jst.jsf.validation.el.tests.jsp;x-internal:=true,
+ org.eclipse.jst.jsf.validation.el.tests.util;x-internal:=true

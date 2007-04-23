@@ -31,7 +31,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.jst.jsf.ui,
  org.junit
 Eclipse-LazyStart: true
-Export-Package: org.eclipse.jst.jsf.ui.tests,
- org.eclipse.jst.jsf.ui.tests.classpath,
- org.eclipse.jst.jsf.ui.tests.util
+Export-Package: org.eclipse.jst.jsf.ui.tests;x-internal:=true,
+ org.eclipse.jst.jsf.ui.tests.classpath;x-internal:=true,
+ org.eclipse.jst.jsf.ui.tests.util;x-internal:=true
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

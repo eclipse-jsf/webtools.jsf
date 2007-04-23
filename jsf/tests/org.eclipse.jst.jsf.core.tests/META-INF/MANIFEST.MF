@@ -35,14 +35,14 @@ Require-Bundle: org.eclipse.jst.jsf.core,
  org.eclipse.jst.jsf.facesconfig
 Eclipse-LazyStart: true
 Export-Package: org.eclipse.jst.jsf.core.tests;x-friends:="org.eclipse.jst.jsf.ui.tests,org.eclipse.jst.jsf.context.symbol.tests,org.eclipse.jst.jsf.designtime.tests",
- org.eclipse.jst.jsf.core.tests.appconfig.validation,
- org.eclipse.jst.jsf.core.tests.jsflibraryconfig,
- org.eclipse.jst.jsf.core.tests.jsflibraryregistry,
- org.eclipse.jst.jsf.core.tests.jsflibraryregistry.migration,
- org.eclipse.jst.jsf.core.tests.project.facet,
- org.eclipse.jst.jsf.core.tests.set,
- org.eclipse.jst.jsf.core.tests.tagmatcher,
- org.eclipse.jst.jsf.core.tests.types,
- org.eclipse.jst.jsf.core.tests.util
+ org.eclipse.jst.jsf.core.tests.appconfig.validation;x-internal:=true,
+ org.eclipse.jst.jsf.core.tests.jsflibraryconfig;x-internal:=true,
+ org.eclipse.jst.jsf.core.tests.jsflibraryregistry;x-internal:=true,
+ org.eclipse.jst.jsf.core.tests.jsflibraryregistry.migration;x-internal:=true,
+ org.eclipse.jst.jsf.core.tests.project.facet;x-internal:=true,
+ org.eclipse.jst.jsf.core.tests.set;x-internal:=true,
+ org.eclipse.jst.jsf.core.tests.tagmatcher;x-internal:=true,
+ org.eclipse.jst.jsf.core.tests.types;x-internal:=true,
+ org.eclipse.jst.jsf.core.tests.util;x-friends:="org.eclipse.jst.jsf.contentassist.tests,org.eclipse.jst.jsf.designtime.tests,org.eclipse.jst.jsf.validation.el.tests,org.eclipse.jst.jsf.ui.tests"
 Plugin-Class: org.eclipse.jst.jsf.core.tests.TestsPlugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
