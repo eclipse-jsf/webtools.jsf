@@ -9,12 +9,15 @@ import org.eclipse.jst.pagedesigner.itemcreation.internal.DefaultTagCreator;
 
 /**
  * Creates instances of {@link ITagCreator}s for a the given {@link TagToolPaletteEntry}
- * Will use TagCreatorFactories registered using org.eclipse.jst.jsf.pagedesigner.tagcreationfactories ext-pt.  
- * If none located, will use {@link org.eclipse.jst.pagedesigner.itemcreation.internal.TagCreatorFromMetaData} by default.
+ * (Eventually) Will use TagCreavtorFactories registered using org.eclipse.jst.jsf.pagedesigner.tagcreationfactories ext-pt.  
+ * Currently only using DefaultTagCreator.
  */
 public class TagCreationFactory {
 	private static TagCreationFactory INSTANCE = null;
 	
+	/**
+	 * @return singleton instance
+	 */
 	public static TagCreationFactory getInstance(){
 		if (INSTANCE == null){
 			INSTANCE = new TagCreationFactory();
@@ -22,6 +25,12 @@ public class TagCreationFactory {
 		return INSTANCE;
 	}
 
+	/**
+	 * Using the TagToolPaletteEntry, locate the factory to use for tag creation
+	 * 
+	 * @param tagToolPaletteEntry
+	 * @return ITagCreator
+	 */
 	public ITagCreator createTagCreator(TagToolPaletteEntry tagToolPaletteEntry) {
 		tagToolPaletteEntry.getURI();
 
@@ -33,41 +42,7 @@ public class TagCreationFactory {
 		IMetaDataModelContext modelContext = MetaDataQueryHelper.createMetaDataModelContext(project, MetaDataQueryHelper.TAGLIB_DOMAIN, tagToolPaletteEntry.getURI());
 		
 		return new DefaultTagCreator(modelContext);	
-		
-//		//do we have paletteInfo?
-//		Model model = MetaDataQueryHelper.getModel(modelContext);
-//		if (model != null){
-//			Trait trait = MetaDataQueryHelper.getTrait(model, PaletteInfos.TRAIT_ID);
-//			if (trait != null){
-//				PaletteInfos pis = (PaletteInfos)trait.getValue();
-//				PaletteInfo pi = pis.findPaletteInfoById(tagToolPaletteEntry.getId());
-//				if (pi != null){
-//					TagCreationInfo info = pi.getTagCreation();
-//					if (info != null)
-//						return new TagCreatorFromMetaData(modelContext, tagToolPaletteEntry, info);	
-//				}
-//			}
-//			//tag-creation trait on entity directly?
-//			Entity tag = MetaDataQueryHelper.getEntity(modelContext, tagToolPaletteEntry.getTagName());
-//			if (tag != null){//metadata exists
-//				trait = MetaDataQueryHelper.getTrait(tag, "tag-create");
-//				if (trait != null && trait.getValue() != null){
-//					return new TagCreatorFromMetaData(modelContext, tagToolPaletteEntry, (TagCreationInfo)trait.getValue());
-//				}
-//				else {//are there creation constraints of any kind?
-////					trait = MetaDataQueryHelper.getTrait(model, "is-jsf-component-library");
-////					if (trait != null && trait.getValue() != null){
-////						return new TagCreatorFromMetaData(modelContext, tagToolPaletteEntry, wrapTraitInCreationInfo(trait.getValue()));
-////					}
-////					trait = MetaDataQueryHelper.getTrait(tag, "requires-html-form");
-////					if (trait != null && trait.getValue() != null){
-////						return new TagCreatorFromMetaData(modelContext, tagToolPaletteEntry, (TagCreationInfo)trait.getValue());
-////					}
-//					
-//				}
-//			}
-//		}
-//		return new DefaultTagCreator(tagToolPaletteEntry);
+
 	}
 
 }

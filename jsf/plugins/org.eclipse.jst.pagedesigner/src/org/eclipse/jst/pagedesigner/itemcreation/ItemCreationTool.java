@@ -11,6 +11,7 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.itemcreation;
 
+import org.eclipse.gef.EditPart;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.SharedCursors;
 import org.eclipse.gef.tools.TargetingTool;
@@ -31,12 +32,13 @@ public class ItemCreationTool extends TargetingTool {
 
 	/**
 	 * Default constructor. Sets the default and disabled cursors.
+	 * @param tagToolPaletteEntryItem 
 	 */
-	public ItemCreationTool(TagToolPaletteEntry item) {
+	public ItemCreationTool(TagToolPaletteEntry tagToolPaletteEntryItem) {
 		setDefaultCursor(SharedCursors.CURSOR_TREE_ADD);
 		setDisabledCursor(SharedCursors.NO);
 
-		this._tagPaletteItem = item;  
+		this._tagPaletteItem = tagToolPaletteEntryItem;  
 	}
 
 	/**
@@ -56,7 +58,7 @@ public class ItemCreationTool extends TargetingTool {
 	}
 
 	/**
-	 * Creates a {@link CreateRequest}and sets this tool's factory on the
+	 * Creates a {@link ItemCreationRequest}and sets this tool's factory on the
 	 * request.
 	 * 
 	 * @see org.eclipse.gef.tools.TargetingTool#createTargetRequest()

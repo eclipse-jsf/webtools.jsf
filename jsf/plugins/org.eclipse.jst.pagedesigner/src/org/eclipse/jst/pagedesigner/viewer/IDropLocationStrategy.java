@@ -8,7 +8,7 @@ import org.eclipse.gef.requests.DropRequest;
 import org.eclipse.jst.pagedesigner.validation.caret.IPositionMediator;
 
 /**
- * A strategy used to determine the closest validt drop location given
+ * A strategy used to determine the closest valid drop location given
  * a current position.
  * 
  * Note: clients should not implement or sub-class this interface.  Instead,
@@ -32,7 +32,9 @@ public interface IDropLocationStrategy
      * May choose to contribute target feedback given a target part host and given
      * the proposed drops location given by position
      * 
+     * @param host 
      * @param position
+     * @param request 
      * @return must contain all IFigure objects that were added to the feedback layer by
      * this call.  Once returned, these IFigure's must not be kept as state information
      * by the strategy because they may be manipulated at any time after return to the caller.

@@ -61,7 +61,7 @@ public class PaletteHelper {
     final private static Pattern removeNewLines = Pattern.compile("[\n]");
     
 	private final static ImageDescriptor DEFAULT_SMALL_ICON = PDPlugin
-	.getDefault().getImageDescriptor(
+		.getDefault().getImageDescriptor(
 			"palette/GENERIC/small/PD_Palette_Default.gif");
 
 	private final static ImageDescriptor DEFAULT_LARGE_ICON = PDPlugin

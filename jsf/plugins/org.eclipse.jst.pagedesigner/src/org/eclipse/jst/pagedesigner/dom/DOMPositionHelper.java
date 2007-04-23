@@ -207,12 +207,12 @@ public class DOMPositionHelper {
 
 	/**
 	 * if "position" is inside a text node, then split the text node and return
-	 * a new IDOMPosition semantically equals to the position in the two
+	 * a new IDOMPosition semantically equal to the position in the two
 	 * splitted text. If the "position" is not a text position, then no action
-	 * will be done.
+	 * will be taken and will return the original position.
 	 * 
 	 * @param position
-	 * @return
+	 * @return IDOMPosition
 	 */
 	public static IDOMPosition splitText(IDOMPosition position) {
 		Node container = position.getContainerNode();
@@ -371,7 +371,7 @@ public class DOMPositionHelper {
 	 * IDOMRefPosition, will return the original one.
 	 * 
 	 * @param position
-	 * @return
+	 * @return IDOMPosition
 	 */
 	public static IDOMPosition toDOMRefPosition(IDOMPosition position) {
 		if (position.isText()) {

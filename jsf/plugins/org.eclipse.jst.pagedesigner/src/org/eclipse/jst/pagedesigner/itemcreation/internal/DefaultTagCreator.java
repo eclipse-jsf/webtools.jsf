@@ -37,23 +37,42 @@ import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.w3c.dom.Element;
 
+/**
+ * {@link ITagCreator} used by the Web Page Editor palette. 
+ * 
+ * Uses org.eclipse.jst.jsf.common.metadata 
+ */
 public class DefaultTagCreator implements ITagCreator {
 	
 	private static final QName _qnameHTMLForm = new QName(CMDocType.HTML_DOC_TYPE, IHTMLConstants.TAG_FORM);
 	
-	protected TagToolPaletteEntry tagItem;
-	protected IMetaDataModelContext modelContext;
+	/**
+	 * The {@link TagToolPaletteEntry} being used
+	 */
+	protected TagToolPaletteEntry _tagItem;
+	/**
+	 * The {@link IMetaDataModelContext} for the tag creation
+	 */
+	protected IMetaDataModelContext _modelContext;
+	/**
+	 * The tag {@link Entity} being created
+	 */
 	private Entity _tagEntity;
 	
+	/**
+	 * Construct a tag creator for the _modelContext
+	 * @param _modelContext
+	 */
 	public DefaultTagCreator(IMetaDataModelContext modelContext) {
-		this.modelContext = modelContext;
+		this._modelContext = modelContext;
 	}
+
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.jst.pagedesigner.itemcreation.ITagCreator#createTag(org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry, org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel, org.eclipse.jst.pagedesigner.dom.IDOMPosition)
 	 */
-	public Element createTag(TagToolPaletteEntry tagItem, IDOMModel model, IDOMPosition domPosition) {
-		this.tagItem = tagItem;
+	public Element createTag(TagToolPaletteEntry tagToolPaletteEntry, IDOMModel model, IDOMPosition domPosition) {
+		this._tagItem = tagToolPaletteEntry;
 	
 		IDOMPosition position = preAdjustPositionForNecessaryContainers(model, domPosition);
 		if (position == null)//throw exception?
@@ -75,13 +94,23 @@ public class DefaultTagCreator implements ITagCreator {
 		return ele;
 	}
 
+	/**
+	 * @param model
+	 * @param prefix
+	 * @return {@link Element}
+	 */
 	protected Element createElement(IDOMModel model, String prefix){
-		Element ele =  model.getDocument().createElement(tagItem.getTagName());
+		Element ele =  model.getDocument().createElement(_tagItem.getTagName());
 		if (ele == null)
 			return null;
 		
 		//ugly... fix me
-		if (ITLDConstants.URI_JSP.equals(getUri())
+		
+		// XXX: we are using "startsWith("directive.")" to test whether
+		// should setJSPTag, this
+		// maybe is not the best way. Need check whether SSE have special
+		// API for it.
+		if (ITLDConstants.URI_JSP.equals(getURI())
 				&& (ele.getLocalName().startsWith("directive.")
 						|| "declaration".equals(ele.getLocalName())
 						|| "expression".equals(ele.getLocalName()) || "scriptlet"
@@ -95,13 +124,17 @@ public class DefaultTagCreator implements ITagCreator {
 	}
 	/**
 	 * @param position
-	 * @param element
+	 * @param tagElement
 	 */
-	protected void addTagToContainer(IDOMPosition position, Element ele) {
+	protected void addTagToContainer(IDOMPosition position, Element tagElement) {
+		if (position == null || position.getContainerNode() == null) {
+			return;
+		}
+		
 		if (position.getNextSiblingNode() == null) {
-			position.getContainerNode().appendChild(ele);
+			position.getContainerNode().appendChild(tagElement);
 		} else {
-			position.getContainerNode().insertBefore(ele,
+			position.getContainerNode().insertBefore(tagElement,
 					position.getNextSiblingNode());
 		}
 		
@@ -117,13 +150,13 @@ public class DefaultTagCreator implements ITagCreator {
 	 */
 	protected IDOMPosition preAdjustPositionForNecessaryContainers(IDOMModel model,
 			IDOMPosition domPosition) {
-		
-		
+				
 		IDOMPosition position = DOMPositionHelper.splitText(domPosition);
+
 		position = BodyHelper
-				.adjustInsertPosition(getUri(), getLocalTagName(), domPosition);
+				.adjustInsertPosition(getURI(), getLocalTagName(), position);
 		
-		position = createContainers(position, getTagToolItem());
+		position = createContainers(position);
 		if (position == null) {
 			// user cancelled
 			return null;
@@ -138,16 +171,13 @@ public class DefaultTagCreator implements ITagCreator {
 
 	/**
 	 * @param position
-	 * @param tagToolItem
-	 * @return position after creating necessary containers
+	 * @return position after creating required containers
 	 */
-	protected IDOMPosition createContainers(IDOMPosition position,
-			TagToolPaletteEntry tagToolItem) {
+	protected IDOMPosition createContainers(IDOMPosition position) {
 		
 		//FIX ME - should be done in subclass
 		if (isJSFComponent()) {
-			return JSFValidatorSupport.prepareInsertJSFComponent(position, tagItem
-					.getURI(), tagItem.getTagName(), isHTMLFormRequired());
+			return JSFValidatorSupport.prepareInsertJSFComponent(position, getURI(), getLocalTagName(), isHTMLFormRequired());
 		}
 		else if (isHTMLFormRequired()){
 			boolean hasform = ValidatorSupport.checkContainer(position, _qnameHTMLForm);
@@ -165,58 +195,73 @@ public class DefaultTagCreator implements ITagCreator {
 	}
 
 	private boolean isJSFComponent() {		
-		Model model = MetaDataQueryHelper.getModel(modelContext);
+		Model model = MetaDataQueryHelper.getModel(_modelContext);
 		Trait t = MetaDataQueryHelper.getTrait(model, "is-jsf-component-library");
 		if (t != null)
 			return TraitValueHelper.getValueAsBoolean(t);
 		
 		return false;
 	}
-	protected String getFullTagName(String localName, String prefix) {		
-		if (prefix != null)
-			return prefix + ":" + localName;
-		return localName;
+
+	/**
+	 * @return convenience method returning default prefix to be used by the tag item
+	 */
+	private  String getDefaultPrefix() {
+		return _tagItem.getDefaultPrefix();
 	}
 
-	protected String getDefaultPrefix() {
-		return tagItem.getDefaultPrefix();
-	}
-
-	protected String getURI() {		
-		return tagItem.getURI();
+	/**
+	 * @return convenience method returning uri of the tag item's library
+	 */
+	private String getURI() {		
+		return _tagItem.getURI();
 	}
 	
-	protected void applyRequiredAttrs(Element ele) {
+	/**
+	 * @return convenience method returning the tag name without prefix
+	 * 
+	 */
+	private String getLocalTagName(){
+		return _tagItem.getTagName();
+	}
+	/**
+	 * Add required attributes and default values, if set, to the created tag element
+	 * @param element
+	 */
+	protected void applyRequiredAttrs(Element element) {
 		TagCreationInfo info = getTagCreationInfo();
 		if (info != null){
 			EList list = info.getAttributes();
 			if (list != null) {
 				for (Iterator it = list.iterator(); it.hasNext();) {
 					TagCreationAttribute attr = (TagCreationAttribute)it.next();
-					ele.setAttribute(attr.getId(), (attr.getValue() == null ? "" : attr.getValue()));
+					element.setAttribute(attr.getId(), (attr.getValue() == null ? "" : attr.getValue()));
 				}
 			}
-			
-		} else {
-//			createRequiredAttributes(ele);
-		}
-			
-		
+		}			
 	}
 
-	protected void applyTemplate(IDOMModel model, Element ele) {
+	/**
+	 * If TagCreationInfo is defined for the tag element, apply the template if defined
+	 * @param model
+	 * @param tagElement
+	 */
+	protected void applyTemplate(IDOMModel model, Element tagElement) {
 		TagCreationInfo tagCreationInfo = getTagCreationInfo();
 		if (tagCreationInfo != null)
-			PaletteElementTemplateHelper.applyTemplate(model, ele, getTagToolItem(), tagCreationInfo); 		
+			PaletteElementTemplateHelper.applyTemplate(model, tagElement, getTagToolItem(), tagCreationInfo); 		
 	}
 
+	/**
+	 * @return {@link TagCreationInfo} for the tag entity
+	 */
 	protected TagCreationInfo getTagCreationInfo(){
-		Model model = MetaDataQueryHelper.getModel(modelContext);
+		Model model = MetaDataQueryHelper.getModel(_modelContext);
 		if (model != null){
 			Trait trait = MetaDataQueryHelper.getTrait(model, PaletteInfos.TRAIT_ID);
 			if (trait != null){
 				PaletteInfos pis = (PaletteInfos)trait.getValue();
-				PaletteInfo pi = pis.findPaletteInfoById(tagItem.getId());
+				PaletteInfo pi = pis.findPaletteInfoById(_tagItem.getId());
 				if (pi != null){
 					return pi.getTagCreation();					
 				}
@@ -232,36 +277,17 @@ public class DefaultTagCreator implements ITagCreator {
 		}
 		return null;
 	}
-//	protected void createRequiredAttributes(Element ele) {
-//		Entity tagEntity = MetaDataQueryHelper.getEntity(modelContext, tagItem.getTagName());
-//		if(tagEntity != null){
-//			
-//		}
-//		CMElementDeclaration elemDecl = getElementDeclaration();
-//		if (elemDecl != null){
-//			Trait t = createRequiredAttrTraits(elemDecl);
-//			TagCreationInfo info = (TagCreationInfo)t.getValue();
-//			for (Iterator it=info.getAttributes().iterator();it.hasNext();){
-//				TagCreationAttribute attrInfo = (TagCreationAttribute)it.next();
-//				ele.setAttribute(attrInfo.getId(), attrInfo.getValue() == null ? "" : attrInfo.getValue());
-//			}
-//		}
-//	}
 
+	/**
+	 * @return the {@link TagToolPaletteEntry}
+	 */
 	protected TagToolPaletteEntry getTagToolItem(){
-		return tagItem;
+		return _tagItem;
 	}
 	
-	protected String getUri(){
-		return tagItem.getURI();
-	}
-	
-	protected String getLocalTagName(){
-		return tagItem.getTagName();
-	}
 	
 	/**
-	 * Creates taglib directive if necessary
+	 * Returns the ns prefix for the tag and also creates taglib reference if necessary
 	 * @param uri
 	 * @param model
 	 * @param suggested
@@ -279,6 +305,10 @@ public class DefaultTagCreator implements ITagCreator {
 		return JSPUtil.getOrCreatePrefix(model, uri, suggested);
 	}
 	
+	/**
+	 * @param tag
+	 * @return a "create-tag" {@link Trait} for the tag.  May be null there are no required attrs.
+	 */
 	protected Trait createRequiredAttrTraits(CMElementDeclaration tag) {
 
 		List reqs = new ArrayList();
@@ -293,7 +323,6 @@ public class DefaultTagCreator implements ITagCreator {
 		
 		return null;
 	}		
-
 	
 	private Trait internalCreateTagCreateAttributes(List reqs) {
 		Trait t = MetadataFactory.eINSTANCE.createTrait();
@@ -307,18 +336,13 @@ public class DefaultTagCreator implements ITagCreator {
 			attrInfo.setValue("");//TODO: use default value?
 			info.getAttributes().add(attrInfo);
 		}
-		t.setValue(info);
-//		entity.getTraits().add(t);
+		t.setValue(info); 
 		return t;
 	}
-	/**
-	 * @return CMElementDeclaration - may be null
-	 */
-	protected CMElementDeclaration getElementDeclaration(){
-		CMElementDeclaration decl = (CMElementDeclaration)getTagToolItem().getToolProperty("CMElementDeclaration");
-		return decl;
-	}
 	
+	/**
+	 * @return flag indicating that html form container ancestor is required
+	 */
 	protected boolean isHTMLFormRequired() {
 		Trait t = MetaDataQueryHelper.getTrait(getTagEntity(), "requires-html-form");
 		if (t != null)
@@ -327,9 +351,12 @@ public class DefaultTagCreator implements ITagCreator {
 		return false;
 	}
 
+	/**
+	 * @return the {@link Entity} for this tag element being created
+	 */
 	protected Entity getTagEntity() {
 		if (_tagEntity == null){
-			_tagEntity = MetaDataQueryHelper.getEntity(modelContext, tagItem.getTagName());
+			_tagEntity = MetaDataQueryHelper.getEntity(_modelContext, _tagItem.getTagName());
 			
 		}
 		return _tagEntity;

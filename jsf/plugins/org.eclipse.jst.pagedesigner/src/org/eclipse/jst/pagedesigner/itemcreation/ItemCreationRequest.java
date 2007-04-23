@@ -17,22 +17,33 @@ import org.eclipse.gef.requests.DropRequest;
 import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
 
 /**
+ * Tag tool item creation request class
  * @author mengbo
  */
 public class ItemCreationRequest extends Request implements DropRequest {
+	/**
+	 * Constant used for item creation request
+	 */
 	public static final String REQ_ITEM_CREATION = "Item Creation";
+	/**
+	 * Constant used for tag tool item
+	 */
 	public static final String TAG_TOOL_PALETTE_ENTRY = "TagToolPaletteEntry";
+	/**
+	 * Constant used for location during creation request
+	 */
 	public static final String LOCATION = "location";
 	
 
 	/**
-	 * 
+	 * Constructor
 	 */
 	public ItemCreationRequest() {
 		super(REQ_ITEM_CREATION);
 	}
 
 	/**
+	 * Constructor
 	 * @param type
 	 */
 	public ItemCreationRequest(Object type) {
@@ -59,11 +70,18 @@ public class ItemCreationRequest extends Request implements DropRequest {
 		getExtendedData().put(LOCATION, location);
 	}
 
-	public void setTagToolPaletteEntry(TagToolPaletteEntry tag) {
+	/**
+	 * Set the tag tool item for creation request
+	 * @param tagToolPaletteEntryItem
+	 */
+	public void setTagToolPaletteEntry(TagToolPaletteEntry tagToolPaletteEntryItem) {
 		getExtendedData().remove(TAG_TOOL_PALETTE_ENTRY);
-		getExtendedData().put(TAG_TOOL_PALETTE_ENTRY, tag);
+		getExtendedData().put(TAG_TOOL_PALETTE_ENTRY, tagToolPaletteEntryItem);
 	}
 
+	/**
+	 * @return {@link TagToolPaletteEntry} requesting creation
+	 */
 	public TagToolPaletteEntry getTagToolPaletteEntry() {
 		return (TagToolPaletteEntry)getExtendedData().get(TAG_TOOL_PALETTE_ENTRY);
 	}

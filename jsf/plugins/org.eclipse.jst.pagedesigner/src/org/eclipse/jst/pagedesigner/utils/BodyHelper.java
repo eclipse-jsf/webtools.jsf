@@ -41,16 +41,25 @@ import org.w3c.dom.NodeList;
  */
 public class BodyHelper {
 	// bit flags used for child skipping.
+	/**
+	 * Bit flag for empty text node
+	 */
 	public static final int EMPTY_TEXT = 1;
 
+	/**
+	 * Bit flag for comment node
+	 */
 	public static final int COMMENT = 2;
 
+	/**
+	 * Bit flag for HEAD node
+	 */
 	public static final int HEADER = 3;
 
 	/**
 	 * 
 	 * @param child
-	 * @return
+	 * @return boolean
 	 */
 	private static boolean isSkippableChild(Node parent, Node child, int flag) {
 		if ((flag & COMMENT) != 0 && child.getNodeType() == Node.COMMENT_NODE)
@@ -77,7 +86,7 @@ public class BodyHelper {
 	 * @param start
 	 * @param uri
 	 * @param tag
-	 * @return
+	 * @return IDOMNode
 	 */
 	public static IDOMNode findHeaderContainer(IDOMNode start, String uri,
 			String tag) {
@@ -95,9 +104,8 @@ public class BodyHelper {
 	/**
 	 * find the closest body insertion point, to make it as deep as possible.
 	 * (Move into as more body as possible)
-	 * 
-	 * @param parent
-	 * @param start
+	 * @param position 
+	 * @return IDOMPosition
 	 */
 	public static IDOMPosition findBodyInsertLocation(IDOMPosition position) {
 		// forward first.
@@ -142,12 +150,14 @@ public class BodyHelper {
 	}
 
 	/**
-	 * The element type identifiered by "uri" and "tag" is going to be inserted
+	 * The element type identified by "uri" and "tag" is going to be inserted
 	 * into the document. This method is used to adjust the insert position so
 	 * it can be put into correct body or header section.
+	 * @param uri 
+	 * @param tag 
+	 * @param position 
+	 * @return IDOMPosition
 	 * 
-	 * @param parent
-	 * @param reference
 	 */
 	public static IDOMPosition adjustInsertPosition(String uri, String tag,
 			IDOMPosition position) {
@@ -165,7 +175,7 @@ public class BodyHelper {
 				return position;
 			}
 
-			// new node is not body header. So should inside the inner most
+			// new node is not body header. So should place inside the inner most
 			// body.
 			if (!designInfo.isBodyContainer(parent)) {
 				return position; // it's parent is not body, so we suggest
@@ -213,6 +223,7 @@ public class BodyHelper {
 	 * @param uri
 	 * @param tag
 	 * @param parent
+	 * @param ref 
 	 */
 	public static void findHeaderInsertPosition(String uri, String tag,
 			Node parent, Node[] ref) {
@@ -231,6 +242,12 @@ public class BodyHelper {
 		return;
 	}
 
+	/**
+	 * @param position
+	 * @param body
+	 * @param defaultPrefix
+	 * @return
+	 */
 	public static IDOMPosition insertBody(IDOMPosition position, QName body,
 			String defaultPrefix) {
 		IBodyInfo bodyInfo = getBodyInfo((IDOMNode) position.getContainerNode());
@@ -309,7 +326,7 @@ public class BodyHelper {
 	 */
 	public static boolean shouldIgnoreAdjust(String uri, String tag) {
 		// FIXME:
-		return (ITLDConstants.URI_HTML.equals(uri) && "script"
+		return (ITLDConstants.URI_HTML.equalsIgnoreCase(uri) && "script"
 				.equalsIgnoreCase(tag))
 				|| (ITLDConstants.URI_JSP.equals(uri));
 	}
