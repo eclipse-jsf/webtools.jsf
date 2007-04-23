@@ -28,10 +28,10 @@
 	<extension id="org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor"
 		name="%pageflow.editor.intro.name"
 		point="org.eclipse.jst.jsf.common.ui.introductionPage">
-		<introductionpage name="Introduction"
+		<introductionpage name="%pageflow.editor.intro.name"
 			description="%pageflow.editor.intro.description">
 			<introductionelement icon="icons/FacesConfig_Introduction.gif"
-				heading="The Faces Configuration Editor"
+				heading="%pageflow.editor.intro.section.heading"
 				text="%pageflow.editor.intro.section.description"/>
 			<introductionelement
 				actionparameters="org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowEditor"

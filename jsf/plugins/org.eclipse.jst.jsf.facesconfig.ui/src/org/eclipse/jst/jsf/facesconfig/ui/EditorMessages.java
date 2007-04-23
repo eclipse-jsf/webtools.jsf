@@ -168,6 +168,8 @@ public final class EditorMessages extends NLS {
 
 	public static String ListEntriesEditPage_Description;
 
+	public static String OverviewPage_page_name;
+
 	public static String OverviewPage_page_id;
 
 	public static String OverviewPage_page_title;

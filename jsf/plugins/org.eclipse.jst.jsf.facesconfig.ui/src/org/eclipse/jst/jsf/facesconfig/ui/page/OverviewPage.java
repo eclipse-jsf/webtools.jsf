@@ -63,7 +63,7 @@ public class OverviewPage extends FormPage implements ISelectionProvider,
 	 * @param editor
 	 */
 	public OverviewPage(FormEditor editor) {
-		super(editor, "OverviewPage", "Overview");
+		super(editor, "OverviewPage", EditorMessages.OverviewPage_page_name);
 	}
 
 	/*
