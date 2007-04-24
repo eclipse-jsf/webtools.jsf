@@ -335,6 +335,11 @@ public class Messages extends NLS {
      */
     public static String JSFValidationPreferencePage_ELPrefPanel_IncrementalValidationCheckBoxTitle;
 
+    /**
+     * see messages.properties
+     */
+    public static String JSFLibraryEditControl_ImplVersion_UNKNOWN;
+
     static {
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
 	}

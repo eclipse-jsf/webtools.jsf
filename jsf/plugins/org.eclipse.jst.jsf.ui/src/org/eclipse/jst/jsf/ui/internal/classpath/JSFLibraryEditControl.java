@@ -147,7 +147,11 @@ public class JSFLibraryEditControl extends Composite implements ModifyListener, 
 
 		if (!isNew()) {
 			txtName.setText(workingCopyLibrary.getName());
-			cboVersions.setText(workingCopyLibrary.getJSFVersion().getName());
+			if (workingCopyLibrary.getJSFVersion().getName().equals(JSFVersion.UNKNOWN_LITERAL.getName())) {
+				cboVersions.setText(Messages.JSFLibraryEditControl_ImplVersion_UNKNOWN);
+			} else {
+				cboVersions.setText(workingCopyLibrary.getJSFVersion().getName());
+			}
 			chkDeploy.setSelection(workingCopyLibrary.isDeployed());
 			chkImpl.setSelection(workingCopyLibrary.isImplementation());
 		}
@@ -297,7 +301,11 @@ public class JSFLibraryEditControl extends Composite implements ModifyListener, 
 		Iterator it = JSFVersion.VALUES.iterator();
 		while (it.hasNext()) {
 			JSFVersion ver = (JSFVersion) it.next();
-			cboVersions.add(ver.getName());
+			if (ver.getName().equals(JSFVersion.UNKNOWN_LITERAL.getName())) {
+				cboVersions.add(Messages.JSFLibraryEditControl_ImplVersion_UNKNOWN);
+			} else {
+				cboVersions.add(ver.getName());
+			}
 		}
 	}
 
