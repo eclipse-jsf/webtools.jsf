@@ -22,7 +22,7 @@ public class TestJSFFacetedTestEnvironment extends TestCase
     public void testVersion_1_1_Facet() throws Exception
     {
         WebProjectTestEnvironment  webTestEnv = new WebProjectTestEnvironment(getName());
-        webTestEnv.createProject();
+        webTestEnv.createProject(false);
         
         JSFFacetedTestEnvironment  testEnv = new JSFFacetedTestEnvironment(webTestEnv);
         testEnv.initialize(IJSFCoreConstants.FACET_VERSION_1_1);
@@ -35,7 +35,7 @@ public class TestJSFFacetedTestEnvironment extends TestCase
     public void testVersion_1_2_Facet() throws Exception
     {
         WebProjectTestEnvironment  webTestEnv = new WebProjectTestEnvironment(getName());
-        webTestEnv.createProject();
+        webTestEnv.createProject(false);
         
         JSFFacetedTestEnvironment  testEnv = new JSFFacetedTestEnvironment(webTestEnv);
         testEnv.initialize(IJSFCoreConstants.FACET_VERSION_1_2);

@@ -46,7 +46,7 @@ public class TestJDTBeanPropertyWorkingCopy extends TestCase {
 
 		final WebProjectTestEnvironment  projectTestEnvironment = 
 			new WebProjectTestEnvironment("TestJDTBeanPropertyWorkingCopyProject");
-		projectTestEnvironment.createProject();
+		projectTestEnvironment.createProject(true);
 		
 		_jdtTestEnvironment = new JDTTestEnvironment(projectTestEnvironment);
         

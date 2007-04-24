@@ -56,7 +56,7 @@ public class TestJDTBeanIntrospector extends TestCase
         
         final WebProjectTestEnvironment  projectTestEnvironment = 
             new WebProjectTestEnvironment("TestJDTBeanIntrospectorProject");
-        projectTestEnvironment.createProject();
+        projectTestEnvironment.createProject(true);
         
         _jdtTestEnvironment = new JDTTestEnvironment(projectTestEnvironment);
         TestFileResource codeRes = new TestFileResource();

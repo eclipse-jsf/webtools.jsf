@@ -39,8 +39,8 @@ public abstract class AbstractBaseMetaDataTestCase extends TestCase {
 	    JSFTestUtil.setInternetProxyPreferences(true, "www-proxy.us.oracle.com", "80");
 	    
 	    projectTestEnvironment = 
-	        new WebProjectTestEnvironment(projName);
-	    projectTestEnvironment.createProject();
+	        new WebProjectTestEnvironment(projName/*+"_"+getClass().getName()+"_"+getName()*/);
+	    projectTestEnvironment.createProject(true);
 	    
 	    project = projectTestEnvironment.getTestProject();
 	    
@@ -53,8 +53,17 @@ public abstract class AbstractBaseMetaDataTestCase extends TestCase {
 		
 		docContext = getDocContext(path, offset);
 	}
+	
+	@Override
+    protected void tearDown() throws Exception {
+        super.tearDown();
+//        projectTestEnvironment.getTestProject().close(null);
+//        projectTestEnvironment.getTestProject().delete(true, null);
+    }
 
-	private IStructuredDocumentContext getDocContext(String path, int offset) throws Exception{
+
+
+    private IStructuredDocumentContext getDocContext(String path, int offset) throws Exception{
 		IFile jspFile = project.getFile(new Path(path));
 		assertTrue(jspFile.exists());
 	

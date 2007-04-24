@@ -54,7 +54,7 @@ public class BaseTagMatcherTestCase extends TestCase {
         JSFTestUtil.setInternetProxyPreferences(true, "www-proxy.uk.oracle.com", "80");
         
         _testEnv = new WebProjectTestEnvironment("ELValidationTest_"+this.getClass().getName()+"_"+getName());
-        _testEnv.createProject();
+        _testEnv.createProject(false);
         assertNotNull(_testEnv);       
         assertNotNull(_testEnv.getTestProject());
         assertTrue(_testEnv.getTestProject().isAccessible());

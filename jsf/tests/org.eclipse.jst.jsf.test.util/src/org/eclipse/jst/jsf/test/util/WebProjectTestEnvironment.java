@@ -68,15 +68,102 @@ public class WebProjectTestEnvironment extends ProjectTestEnvironment {
         _webFacetVersion = webVersion;
     }
     
-    public void createProject() 
+    /**
+     * NOTE: behaviour override compared to super.  This method doesn't 
+     * delete existing
+     * 
+     * Create the web project. If this method completes successfully
+     * without throwing RuntimeExceptions, this test environment will
+     * point to an IProject with Java and Web facets set as configured
+     * in the constructor.
+     * 
+     * NOTE: create behaviour is significantly altered by the ignoreExisting
+     * flag
+     * 
+     * @param ignoreProjectExists -- only has impact if _projectName already
+     * exists in the workspace.  In this case, if set to true, then createProject
+     * will return without error if the project exists and is properly facted, but
+     * throw a RuntimeException if faceting doesn't match what is expected.
+     * 
+     * If set to false and the project exists, a runtime exception will be thrown
+     *
+     */
+    @Override
+    public void createProject(boolean ignoreProjectExists) 
     {
+        boolean  doCreate = true;
+        
         try 
         {
-            _project = createWebProject(_projectName);
+            _project = ResourcesPlugin.getWorkspace().getRoot().getProject(_projectName);
+            
+            if (_project.isAccessible())
+            {
+                if (ignoreProjectExists)
+                {
+                    if (hasFacets(_project))
+                    {
+                       doCreate = false;
+                    }
+                }
+                else
+                {
+                    throw new RuntimeException("Project was not expected to exist but does: "+_project.getName());
+                }
+            }
+            
+            if (doCreate)
+            {
+                 _project = createWebProject(_projectName);
+            }
             _projectCreated = true;
         } catch (Exception t) {
             throw new RuntimeException(t);
         }
+    }
+    
+    private boolean hasFacets(IProject project) throws CoreException
+    {
+        boolean  javaInstalled = false;
+        boolean  webInstalled = false;
+        
+        IFacetedProject facetedProject = ProjectFacetsManager.create(project);
+        
+        IProjectFacetVersion version = 
+            facetedProject.getInstalledVersion(_javaFacetVersion.getProjectFacet());
+        
+        if (version != null)
+        {
+            if (version.compareTo(_javaFacetVersion) == 0)
+            {
+                javaInstalled = true;
+            }
+            else
+            {
+                throw new RuntimeException("Wrong Java version already installed. Has: "+version.getVersionString()+" but was expecting: "+_javaFacetVersion.getVersionString());
+            }
+        }
+        
+        version = facetedProject.getInstalledVersion(_webFacetVersion.getProjectFacet());
+        
+        if (version != null)
+        {
+            if (version.compareTo(_webFacetVersion) == 0)
+            {
+                webInstalled = true;
+            }
+            else
+            {
+                throw new RuntimeException("Wrong web version already installed. Has: "+version.getVersionString()+" but was expecting: "+_javaFacetVersion.getVersionString());
+            }
+        }
+        
+        if (javaInstalled && webInstalled)
+        {
+            return true;
+        }
+        
+        return false;
     }
 
     /**

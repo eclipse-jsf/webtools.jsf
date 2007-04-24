@@ -57,16 +57,25 @@ public class ProjectTestEnvironment
 	}
 	
 	/**
-	 * Construct the basic web project
+     * @param ignoreProjectExists -- only has impact if _projectName already
+     * exists in the workspace.  In this case, if set to true, then createProject
+     * will return without error if the project exists (it will be deleted and recreated)
+     * 
+     * If set to false and the project exists, a runtime exception will be thrown
 	 */
-	public void createProject() 
+	public void createProject(boolean ignoreProjectExists) 
     {
+        IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(_projectName);
+        
+        if (project.isAccessible() && !ignoreProjectExists)
+        {
+            throw new RuntimeException("Project was not expected to exist but does: "+project.getName());
+        }
+        
 		if(!isProjectCreated()) 
         {
 			// first delete the projects of these names, if present
             deleteProject();
-		
-            IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(_projectName);
             
             if (!project.exists())
             {
@@ -122,7 +131,7 @@ public class ProjectTestEnvironment
 	 */
 	public void recreateProject() {
 		setProjectDirtied();
-		createProject();
+		createProject(true);
 	}
 
 	/**

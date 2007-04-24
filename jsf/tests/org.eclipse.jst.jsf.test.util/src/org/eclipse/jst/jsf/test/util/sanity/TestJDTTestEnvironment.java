@@ -34,7 +34,7 @@ public class TestJDTTestEnvironment extends TestCase
 	protected void setUp() throws Exception {
 		super.setUp();
 		_projectTestEnvironment = new ProjectTestEnvironment("JDTTestProject");
-		_projectTestEnvironment.createProject();
+		_projectTestEnvironment.createProject(false);
         _jdtTestEnv = new JDTTestEnvironment(_projectTestEnvironment);
         TestFileResource codeRes = new TestFileResource();
         codeRes.load(Activator.getDefault().getBundle(), "/testdata/TestClass1.java.data");

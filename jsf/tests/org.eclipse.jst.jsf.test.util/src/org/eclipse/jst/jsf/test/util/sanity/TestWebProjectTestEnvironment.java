@@ -34,7 +34,7 @@ public class TestWebProjectTestEnvironment extends TestCase
 //      IPreferenceStore store = iPlugin.getPreferenceStore();
         
         WebProjectTestEnvironment testEnv = new WebProjectTestEnvironment("TestProject1");
-        testEnv.createProject();
+        testEnv.createProject(false);
         assertTrue(testEnv.isProjectCreated());
         
         IProject project = testEnv.getTestProject();
@@ -49,7 +49,7 @@ public class TestWebProjectTestEnvironment extends TestCase
     public void testAddFileToWebRoot()
     {
         WebProjectTestEnvironment testEnv = new WebProjectTestEnvironment("TestProject2");
-        testEnv.createProject();
+        testEnv.createProject(false);
         assertTrue(testEnv.isProjectCreated());
         
         try

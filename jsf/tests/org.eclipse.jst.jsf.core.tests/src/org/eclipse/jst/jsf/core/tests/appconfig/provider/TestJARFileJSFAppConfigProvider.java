@@ -49,7 +49,7 @@ public class TestJARFileJSFAppConfigProvider extends TestCase
                 (true, "www-proxy.us.oracle.com", "80");
 
         _testEnv = new WebProjectTestEnvironment("ELValidationTest_"+this.getClass().getName()+"_"+getName());
-        _testEnv.createProject();
+        _testEnv.createProject(false);
         assertNotNull(_testEnv);       
         assertNotNull(_testEnv.getTestProject());
         assertTrue(_testEnv.getTestProject().isAccessible());

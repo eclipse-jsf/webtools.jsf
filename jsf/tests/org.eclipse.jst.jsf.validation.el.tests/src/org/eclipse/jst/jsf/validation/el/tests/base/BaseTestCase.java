@@ -103,7 +103,7 @@ public abstract class BaseTestCase extends ConfigurableTestCase
         }
 
         _testEnv = new WebProjectTestEnvironment("ELValidationTest_"+this.getClass().getName()+"_"+getName()+"_"+_configuration.getJsfVersion());
-        _testEnv.createProject();
+        _testEnv.createProject(false);
         assertNotNull(_testEnv);       
         assertNotNull(_testEnv.getTestProject());
         assertTrue(_testEnv.getTestProject().isAccessible());

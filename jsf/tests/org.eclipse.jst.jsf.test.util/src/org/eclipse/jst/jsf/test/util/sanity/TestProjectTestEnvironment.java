@@ -30,7 +30,7 @@ public class TestProjectTestEnvironment extends TestCase
 	public void testCreateProject()
 	{
 		ProjectTestEnvironment testEnv = new ProjectTestEnvironment("TestProject1");
-		testEnv.createProject();
+		testEnv.createProject(false);
 		assertTrue(testEnv.isProjectCreated());
 		
 		IProject project = testEnv.getTestProject();

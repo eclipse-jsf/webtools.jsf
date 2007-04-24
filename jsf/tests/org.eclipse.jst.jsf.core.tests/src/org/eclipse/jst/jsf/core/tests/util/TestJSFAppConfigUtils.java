@@ -55,7 +55,7 @@ public class TestJSFAppConfigUtils extends TestCase
     {
         WebProjectTestEnvironment testEnv = 
             new WebProjectTestEnvironment(this.getClass().getName()+"_"+name);
-        testEnv.createProject();
+        testEnv.createProject(true);
         assertNotNull(testEnv);       
         assertNotNull(testEnv.getTestProject());
         assertTrue(testEnv.getTestProject().isAccessible());

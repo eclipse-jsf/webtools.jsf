@@ -34,7 +34,7 @@ public class CreateTestCaseForJSP extends TestCase
         super.setUp();
 
         _testEnv = new WebProjectTestEnvironment("ELValidationTest_"+getName());
-        _testEnv.createProject();
+        _testEnv.createProject(false);
         assertNotNull(_testEnv);    
         assertNotNull(_testEnv.getTestProject());
         assertTrue(_testEnv.getTestProject().isAccessible());
