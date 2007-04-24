@@ -61,7 +61,7 @@ public class TestDefaultPropertyResolver extends TestCase
 
         final WebProjectTestEnvironment  projectTestEnvironment = 
             new WebProjectTestEnvironment("TestDefaultBeanSymbolSourceProvider_"+getName());
-        projectTestEnvironment.createProject();
+        projectTestEnvironment.createProject(false);
 //        _facesConfigFile = (IFile) projectTestEnvironment.
 //            loadResourceInWebRoot(DesignTimeTestsPlugin.getDefault().getBundle(),
 //                                  "/testdata/faces-config.xml.data", 

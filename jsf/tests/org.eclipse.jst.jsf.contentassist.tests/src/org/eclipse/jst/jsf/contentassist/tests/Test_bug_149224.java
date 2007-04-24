@@ -48,7 +48,7 @@ public class Test_bug_149224 extends TestCase
         super.setUp();
 
         _testEnv = new WebProjectTestEnvironment("Test_bug_149224_"+getName());
-        _testEnv.createProject();
+        _testEnv.createProject(false);
         assertNotNull(_testEnv);       
         assertNotNull(_testEnv.getTestProject());
         assertTrue(_testEnv.getTestProject().isAccessible());

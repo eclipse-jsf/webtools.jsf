@@ -42,7 +42,7 @@ public class ModelBaseTestCase extends TestCase
         
         final WebProjectTestEnvironment  projectTestEnvironment = 
             new WebProjectTestEnvironment("TestJDTBeanIntrospectorProject");
-        projectTestEnvironment.createProject();
+        projectTestEnvironment.createProject(true);
         
         _jdtTestEnvironment = new JDTTestEnvironment(projectTestEnvironment);
     }

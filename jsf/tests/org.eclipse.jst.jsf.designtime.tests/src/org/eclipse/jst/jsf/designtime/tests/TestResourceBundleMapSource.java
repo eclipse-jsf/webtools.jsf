@@ -56,7 +56,7 @@ public class TestResourceBundleMapSource extends TestCase
                                     throws Exception
     {
         final ProjectTestEnvironment  testEnv = new ProjectTestEnvironment(projectName);
-        testEnv.createProject();
+        testEnv.createProject(false);
         final JDTTestEnvironment jdtTestEnv = new JDTTestEnvironment(testEnv);
         final TestFileResource input = new TestFileResource();
         input.load(DesignTimeTestsPlugin.getDefault().getBundle(), 

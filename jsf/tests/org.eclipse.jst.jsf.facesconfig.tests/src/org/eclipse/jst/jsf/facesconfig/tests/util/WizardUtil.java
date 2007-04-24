@@ -66,7 +66,7 @@ public class WizardUtil extends Assert {
 			
 			try {
 			    WebProjectTestEnvironment testEnv = new WebProjectTestEnvironment(createProjectName(nameSuffix));
-		        testEnv.createProject();
+		        testEnv.createProject(false);
 		        assertNotNull(testEnv);       
 		        assertNotNull(testEnv.getTestProject());
 		        assertTrue(testEnv.getTestProject().isAccessible());
