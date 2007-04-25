@@ -55,41 +55,28 @@ public class JSFTestUtil
      */
     public static void setInternetProxyPreferences(final boolean proxied, final String proxyHostName, final String proxyPort)
     {
-        IProxyService proxy = ProxyManager.getProxyManager();
-//        InternetPlugin plugin = InternetPlugin.getInstance();
-
-        if (proxied)
-        {
-            ProxyData proxyData = new ProxyData(IProxyData.HTTP_PROXY_TYPE);
-            proxyData.setHost(proxyHostName);
-            proxyData.setPassword(proxyPort);
-            try
-            {
-                proxy.setProxyData(new ProxyData[] {proxyData});
-                proxy.setProxiesEnabled(true);
-            }
-            catch (CoreException ce)
-            {
-                // TODO: is this recoverable? Maybe should throw up.
-                Activator.log("Error setting web proxy.  Tests may fail or take a long time to run", ce);
-            }
-
-             // setup local proxy
-//            System.setProperty(CacheMessages.WTP_NO_USER_INTERACTION_SYSTEM_PROP, "true");
-//            IPreferenceStore prefStore = plugin.getPreferenceStore();
-//            prefStore.setValue(InternetPlugin.PREFERENCE_PROXYCHECKED, true);
-//            prefStore.setValue(InternetPlugin.PREFERENCE_SOCKSCHECKED, false);
-//            prefStore.setValue("http.proxySet", true);
-//            prefStore.setValue(InternetPlugin.PREFERENCE_HOSTNAME, proxyHostName);
-//            prefStore.setValue(InternetPlugin.PREFERENCE_PORT, proxyPort);
-//            plugin.updateProxyProperties();
-        }
-        else
-        {
-            proxy.setProxiesEnabled(false);
-//            System.setProperty(CacheMessages.WTP_NO_USER_INTERACTION_SYSTEM_PROP, "false");
-//            plugin.updateProxyProperties();
-        }
+//        IProxyService proxy = ProxyManager.getProxyManager();
+//
+//        if (proxied)
+//        {
+//            ProxyData proxyData = new ProxyData(IProxyData.HTTP_PROXY_TYPE);
+//            proxyData.setHost(proxyHostName);
+//            proxyData.setPassword(proxyPort);
+//            try
+//            {
+//                proxy.setProxyData(new ProxyData[] {proxyData});
+//                proxy.setProxiesEnabled(true);
+//            }
+//            catch (CoreException ce)
+//            {
+//                // TODO: is this recoverable? Maybe should throw up.
+//                Activator.log("Error setting web proxy.  Tests may fail or take a long time to run", ce);
+//            }
+//        }
+//        else
+//        {
+//            proxy.setProxiesEnabled(false);
+//        }
     }
     
     /**
