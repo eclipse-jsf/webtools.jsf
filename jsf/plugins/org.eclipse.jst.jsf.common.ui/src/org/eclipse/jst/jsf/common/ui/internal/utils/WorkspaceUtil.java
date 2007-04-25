@@ -185,14 +185,21 @@ public class WorkspaceUtil {
 			return null;
 		}
 
-		try {
-			project.refreshLocal(IResource.DEPTH_INFINITE, null);
-		} catch (CoreException e) {
-            // TODO C.B.:pushing this down to a warning because it creates really
-            // spurious output.  Don't know why we are calling refreshLocal at all.
-            JSFUICommonPlugin.getLogger(WorkspaceUtil.class).info("Error.RefreshingLocal", e);
+		// TODO: still don't understand why this refreshLocal is necessary
+		// for now, going to only allow it if this method is called 
+		// when the tree isn't locked.  This shouldn't cause a regression, since
+		// when the call fails currently things keep on going due to the catch
+		if (!project.getWorkspace().isTreeLocked())
+		{
+    		try {
+    			project.refreshLocal(IResource.DEPTH_INFINITE, null);
+    		} catch (CoreException e) {
+                // TODO C.B.:pushing this down to a warning because it creates really
+                // spurious output.  Don't know why we are calling refreshLocal at all.
+                JSFUICommonPlugin.getLogger(WorkspaceUtil.class).info("Error.RefreshingLocal", e);
+    		}
 		}
-
+		
 		IResource res = project.findMember(new Path(projectPath));
 		if ((res != null) && (res.exists())) {
 			return project;
