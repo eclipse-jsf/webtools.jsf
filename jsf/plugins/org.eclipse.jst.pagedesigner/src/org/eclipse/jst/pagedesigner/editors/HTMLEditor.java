@@ -13,6 +13,8 @@ package org.eclipse.jst.pagedesigner.editors;
 
 import java.io.File;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.internal.resources.ResourceException;
@@ -126,6 +128,8 @@ public class HTMLEditor extends PostSelectionMultiPageEditorPart implements
 	private DefaultEditDomain _editDomain;
 
 	private WindowsIEBrowser _browser;
+
+	private List PREVIEW_FILES_LIST = new ArrayList();
 
     // TODO:This class is never used locally
 //	private class TextInputListener implements ITextInputListener {
@@ -402,6 +406,9 @@ public class HTMLEditor extends PostSelectionMultiPageEditorPart implements
 	}
 
 	public void dispose() {
+
+		deletePreviewFiles();
+
 		disconnectDesignPage();
 
 		IWorkbenchWindow window = getSite().getWorkbenchWindow();
@@ -914,6 +921,9 @@ public class HTMLEditor extends PostSelectionMultiPageEditorPart implements
 	 */
 	protected void pageChange(int newPageIndex) {
 		super.pageChange(newPageIndex);
+
+		deletePreviewFiles();
+
 		if (newPageIndex == _previewPageIndex) {
 			// preview page activate, need to regenerate the preview text and
 			// display it.
@@ -935,6 +945,7 @@ public class HTMLEditor extends PostSelectionMultiPageEditorPart implements
 			}
 			File file = PreviewUtil.toFile(result, getEditorInput());
 			if (file != null) {
+				PREVIEW_FILES_LIST.add(file);
 				_browser.loadFile(file);
 			} else {
 				_browser.getBrowser().setUrl("about:blank"); //$NON-NLS-1$
@@ -1007,4 +1018,16 @@ public class HTMLEditor extends PostSelectionMultiPageEditorPart implements
 		}
         return super.getPartName();
 	}
+
+	private void deletePreviewFiles() {
+		Iterator itPreviewFiles = PREVIEW_FILES_LIST.iterator();
+		while (itPreviewFiles.hasNext()) {
+			File file = (File)itPreviewFiles.next();
+			if (file != null && file.exists()) {
+				file.delete();
+			}
+		}
+		PREVIEW_FILES_LIST.clear();
+	}
+
 }
