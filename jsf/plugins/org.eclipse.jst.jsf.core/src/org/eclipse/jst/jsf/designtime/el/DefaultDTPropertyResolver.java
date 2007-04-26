@@ -172,7 +172,7 @@ public class DefaultDTPropertyResolver extends AbstractDTPropertyResolver
         	final IObjectSymbol objSymbol = (IObjectSymbol) base;
             typeDesc = objSymbol.getTypeDescriptor();
 
-            // per JSP.2.3.4, if instance of map (unconstrained in our terminology)
+            // per JSP.2.3.4, if instance of array (unconstrained in our terminology)
             if (typeDesc.isArray())
             {
                 ISymbol arrayElement = typeDesc.getArrayElement();
@@ -195,7 +195,9 @@ public class DefaultDTPropertyResolver extends AbstractDTPropertyResolver
                 if (((IBoundedTypeDescriptor)typeDesc).isUnboundedForType(TypeConstants.TYPE_JAVAOBJECT))
                 {
                     // the most we know is that it could be an Object
-                    return ((IBoundedTypeDescriptor)typeDesc).getUnboundedProperty(new Integer(offset), TypeConstants.TYPE_JAVAOBJECT);
+                    return ((IBoundedTypeDescriptor)typeDesc)
+                        .getUnboundedProperty
+                            (new Integer(offset), TypeConstants.TYPE_BOXED_INTEGER);
                 }
             }
         }
