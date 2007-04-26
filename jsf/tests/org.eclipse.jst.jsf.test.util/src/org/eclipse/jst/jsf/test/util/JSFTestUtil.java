@@ -11,12 +11,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.List;
 
-import org.eclipse.core.internal.net.ProxyData;
-import org.eclipse.core.internal.net.ProxyManager;
-import org.eclipse.core.net.proxy.IProxyData;
-import org.eclipse.core.net.proxy.IProxyService;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
@@ -55,6 +51,7 @@ public class JSFTestUtil
      */
     public static void setInternetProxyPreferences(final boolean proxied, final String proxyHostName, final String proxyPort)
     {
+        // disable
 //        IProxyService proxy = ProxyManager.getProxyManager();
 //
 //        if (proxied)
@@ -72,6 +69,7 @@ public class JSFTestUtil
 //                // TODO: is this recoverable? Maybe should throw up.
 //                Activator.log("Error setting web proxy.  Tests may fail or take a long time to run", ce);
 //            }
+//
 //        }
 //        else
 //        {
