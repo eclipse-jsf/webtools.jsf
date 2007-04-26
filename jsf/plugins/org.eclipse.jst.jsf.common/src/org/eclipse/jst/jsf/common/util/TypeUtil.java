@@ -15,9 +15,11 @@ package org.eclipse.jst.jsf.common.util;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.ITypeHierarchy;
+import org.eclipse.jdt.core.ITypeParameter;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
+import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
 
 /**
  * Utility for handling IType's and type signatures
@@ -57,7 +59,8 @@ public final class TypeUtil
     /**
      * @param owningType
      * @param typeSignature
-     * @return the resolved type signature for typeSignature in owningType
+     * @return the resolved type signature for typeSignature in owningType or
+     * typeSignature unchanged if cannot resolve.
      */
     public static String resolveTypeSignature(final IType owningType, final String typeSignature)
     {
@@ -124,6 +127,20 @@ public final class TypeUtil
         if (Signature.getTypeSignatureKind(typeSignature) == 
                 Signature.CLASS_TYPE_SIGNATURE)
         {
+            // if we are unable to resolve, check to see if the owning type has
+            // a parameter by this name
+            ITypeParameter typeParam = owningType.getTypeParameter(Signature.getSignatureSimpleName(typeSignature));
+            
+            // if we have a type parameter and it hasn't been resolved to a type,
+            // then assume it is a method template placeholder (i.e. T in ArrayList).
+            // at runtime these unresolved parameter variables are effectively 
+            // turned into Object's.  For example, think List.add(E o).  At runtime,
+            // E will behave exactly like java.lang.Object in that signature
+            if (typeParam.exists())
+            {
+                return TypeConstants.TYPE_JAVAOBJECT;
+            }
+            
             // TODO: is there a better way to handle a failure to resolve
             // than just garbage out?
             JSFCommonPlugin.log(new Exception("Failed to resolve type: "+typeSignature), "Failed to resolve type: "+typeSignature); //$NON-NLS-1$ //$NON-NLS-2$

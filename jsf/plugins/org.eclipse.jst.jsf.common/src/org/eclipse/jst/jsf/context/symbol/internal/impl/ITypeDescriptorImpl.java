@@ -166,13 +166,21 @@ public abstract class ITypeDescriptorImpl extends EObjectImpl implements ITypeDe
 
     /**
      * <!-- begin-user-doc -->
+     * Note about generics:
+     * 
+     * This call mimics the runtime instanceOf to the degree possible.
+     * Therefore, any type parameters (<...>) in typeSignature will be
+     * deleted using Signature.getTypeErasure() since this data won't be
+     * available at runtime.
      * <!-- end-user-doc -->
      * @generated NOT
      */
     public boolean instanceOf(final String typeSignature) 
     {
+        final String typeErasedSignature = Signature.getTypeErasure(typeSignature);
+        
         if (getTypeSignature() != null
-                && getTypeSignature().equals(typeSignature))
+                && getTypeSignature().equals(typeErasedSignature))
         {
             return true;
         }
@@ -181,7 +189,7 @@ public abstract class ITypeDescriptorImpl extends EObjectImpl implements ITypeDe
         {
             final String superType = (String) it.next();
             
-            if (superType.equals(typeSignature))
+            if (superType.equals(typeErasedSignature))
             {
                 return true;
             }
@@ -191,7 +199,7 @@ public abstract class ITypeDescriptorImpl extends EObjectImpl implements ITypeDe
         {
             final String superType = (String) it.next();
             
-            if (superType.equals(typeSignature))
+            if (superType.equals(typeErasedSignature))
             {
                 return true;
             }
@@ -354,6 +362,5 @@ public abstract class ITypeDescriptorImpl extends EObjectImpl implements ITypeDe
         result.append(')');
         return result.toString();
     }
-
 } //ITypeDescriptorImpl
 

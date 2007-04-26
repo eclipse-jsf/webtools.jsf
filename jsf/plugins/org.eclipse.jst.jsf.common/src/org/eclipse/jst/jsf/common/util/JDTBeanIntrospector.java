@@ -50,9 +50,9 @@ public class JDTBeanIntrospector
      * as keys and the values being JDTBeanProperty objects representing
      * the properties.
 	 */
-	public Map getProperties()
+	public Map<String, JDTBeanProperty> getProperties()
 	{
-		final Map	    propertiesWorkingCopy = new HashMap();
+		final Map<String, JDTBeanProperty>   propertiesWorkingCopy = new HashMap<String, JDTBeanProperty>();
 		final IMethod[] methods = getAllMethods();
 		
 		for (int i = 0; i < methods.length; i++)
@@ -83,7 +83,7 @@ public class JDTBeanIntrospector
 		return properties;
 	}
 	
-	private void processPropertyMethod(IMethod method, Map properties) throws JavaModelException
+	private void processPropertyMethod(IMethod method, Map<String, JDTBeanProperty> properties) throws JavaModelException
 	{
 		// to be a bean method, it must not a constructor, must be public
 		// and must not be static
@@ -179,7 +179,7 @@ public class JDTBeanIntrospector
      */
     private static IMethod[] getAllMethods(final ITypeHierarchy typeHierarchy, final IType type)
     {
-        final List   methods = new ArrayList();
+        final List<IMethod>   methods = new ArrayList<IMethod>();
         final IType[] superTypes = typeHierarchy.getAllSuperclasses(type);
         final IType[] closure = new IType[superTypes.length+1];
         closure[0] = type;
@@ -195,7 +195,7 @@ public class JDTBeanIntrospector
             }
         }
             
-        return (IMethod[]) methods.toArray(new IMethod[0]);
+        return methods.toArray(new IMethod[methods.size()]);
     }
 
 	

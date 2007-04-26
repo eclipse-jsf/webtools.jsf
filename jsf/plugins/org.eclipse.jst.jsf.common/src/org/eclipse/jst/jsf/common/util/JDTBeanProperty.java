@@ -1,5 +1,8 @@
 package org.eclipse.jst.jsf.common.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
@@ -65,7 +68,7 @@ public class JDTBeanProperty
 	
 	/**
 	 * Set the get accessor IMethod
-	 * @param getter -- maybe null to indicate none
+	 * @param getter -- may be null to indicate none
 	 */
 	void setGetter(IMethod getter) {
 		_getter = getter;
@@ -117,8 +120,7 @@ public class JDTBeanProperty
         try
         {
             String unResolvedSig = getUnresolvedType();
-            final String signature = TypeUtil.resolveTypeSignature(_type, unResolvedSig);
-            return signature;
+            return TypeUtil.resolveTypeSignature(_type, unResolvedSig);
         }
         catch (JavaModelException jme)
         {
@@ -126,6 +128,35 @@ public class JDTBeanProperty
             return null;
         }
     }
+	
+	/**
+	 * For example, if this property was formed from: List<String> getListOfStrings()
+	 * then the list would consist of the signature "Ljava.lang.String;".
+	 * 
+	 * @return a list of type signatures (fully resolved if possible)
+	 * of this property's bounding type parameters.
+	 */
+	public List<String> getTypeParameterSignatures()
+	{
+	    List<String>  signatures = new ArrayList<String>();
+	    
+	    try
+	    {
+	        final String[] typeParameters = Signature.getTypeArguments(getUnresolvedType());
+	        
+	        for (String parameter : typeParameters)
+	        {
+	            signatures.add(TypeUtil.resolveTypeSignature(_type, parameter));
+	        }
+	    }
+	    catch (JavaModelException jme)
+	    {
+            JSFCommonPlugin.log(jme, "Error resolving bean property type signature"); //$NON-NLS-1$
+            // fall-through and return empty array
+	    }
+
+	    return signatures;
+	}
 
     private String getUnresolvedType() throws JavaModelException
     {
