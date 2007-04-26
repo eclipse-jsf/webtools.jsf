@@ -36,19 +36,22 @@ import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
  */
 public class TestJDTBeanIntrospector extends TestCase 
 {
-    private JDTTestEnvironment  _jdtTestEnvironment;
-    private IType               _testBean1Type;
-    private IType               _testBeanSubclassType;
-    private Map                 _properties;
-    private Map                 _subClassProperties;
+    private JDTTestEnvironment                      _jdtTestEnvironment;
+    private IType                                   _testBean1Type;
+    private IType                                   _testBeanSubclassType;
+    private IType                                   _testBeanGenericType;
+    private Map<String, JDTBeanProperty>            _properties;
+    private Map<String, JDTBeanProperty>            _subClassProperties;
 
     private final static String srcFolderName = "src";
     private final static String packageName1 = "com.test";
     private final static String testBeanName1 = "TestBean1";
     private final static String testBeanSubclassName1 = "TestBean1Subclass";
     private final static String testAnotherBeanName = "AnotherBean";
+    private final static String testBeanGenericName = "TestBeanGeneric";
 
     
+    @SuppressWarnings("unchecked")
     protected void setUp() throws Exception {
         super.setUp();
         
@@ -87,6 +90,15 @@ public class TestJDTBeanIntrospector extends TestCase
         
         assertNotNull(_jdtTestEnvironment.getJavaProject().findType(packageName1+"."+testAnotherBeanName));
         
+        // load TestBeanGeneric
+        codeRes = new TestFileResource();
+        codeRes.load(TestsPlugin.getDefault().getBundle(), "/testfiles/TestBeanGeneric.java.data");
+        code = codeRes.toString();
+        _jdtTestEnvironment.addSourceFile(srcFolderName, packageName1, testBeanGenericName, code);
+
+        _testBeanGenericType = _jdtTestEnvironment.getJavaProject().findType(packageName1+"."+testBeanGenericName); 
+        assertNotNull(_testBeanGenericType);
+        
         // introspect after classes loaded to ensure all dependencies
         // are in the project
         JDTBeanIntrospector  beanIntrospector = 
@@ -122,17 +134,16 @@ public class TestJDTBeanIntrospector extends TestCase
         checkMapSanity(_subClassProperties, NUM_PROPS+1);
     }
 
-    private void checkMapSanity(Map properties, int numProps)
+    private void checkMapSanity(Map<String, JDTBeanProperty> properties, int numProps)
     {
         assertEquals("Check extra or missing properties",numProps,properties.size());
         assertNull("Empty string is invalid property name", properties.get(""));
         assertNull("Null is not a valid property name", properties.get(null));
         
         // ensure type correctness of all values
-        for (final Iterator it = properties.values().iterator(); it.hasNext();)
+        for (final Iterator<JDTBeanProperty> it = properties.values().iterator(); it.hasNext();)
         {
-            Object value = it.next();
-            assertTrue(value instanceof JDTBeanProperty);
+            JDTBeanProperty value = it.next();
             // no working copies should slip their way in
             assertFalse(value instanceof JDTBeanPropertyWorkingCopy);
         }
@@ -154,9 +165,9 @@ public class TestJDTBeanIntrospector extends TestCase
         testStringProp1(_subClassProperties);
     }
     
-    private void testStringProp1(Map properties)
+    private void testStringProp1(Map<String, JDTBeanProperty> properties)
     {
-        JDTBeanProperty  property = (JDTBeanProperty) properties.get("stringProp1");
+        JDTBeanProperty  property = properties.get("stringProp1");
         assertNotNull(property);
         
         assertTrue(property.isReadable());
@@ -182,9 +193,9 @@ public class TestJDTBeanIntrospector extends TestCase
         testBooleanIsProp1(_subClassProperties);
     }
     
-    private void testBooleanIsProp1(Map properties)
+    private void testBooleanIsProp1(Map<String, JDTBeanProperty> properties)
     {
-        JDTBeanProperty  property = (JDTBeanProperty) properties.get("booleanIsProp1");
+        JDTBeanProperty  property = properties.get("booleanIsProp1");
         assertNotNull(property);
         
         assertTrue(property.isReadable());
@@ -210,9 +221,9 @@ public class TestJDTBeanIntrospector extends TestCase
         testBooleanIsProp2(_subClassProperties);
     }
     
-    private void testBooleanIsProp2(Map properties)
+    private void testBooleanIsProp2(Map<String, JDTBeanProperty> properties)
     {
-        JDTBeanProperty  property = (JDTBeanProperty) properties.get("booleanIsProp2");
+        JDTBeanProperty  property = properties.get("booleanIsProp2");
         assertNotNull(property);
         
         assertTrue(property.isReadable());
@@ -243,9 +254,9 @@ public class TestJDTBeanIntrospector extends TestCase
     /**
      * 
      */
-    private void testNotBooleanIsProp1(Map properties)
+    private void testNotBooleanIsProp1(Map<String, JDTBeanProperty> properties)
     {
-        JDTBeanProperty  property = (JDTBeanProperty) properties.get("notBooleanIsProp1");
+        JDTBeanProperty  property = properties.get("notBooleanIsProp1");
         assertNotNull(property);
         
         assertTrue(property.isReadable());
@@ -275,9 +286,9 @@ public class TestJDTBeanIntrospector extends TestCase
     /**
      * 
      */
-    private void testStringProperty2(Map properties)
+    private void testStringProperty2(Map<String, JDTBeanProperty> properties)
     {
-        JDTBeanProperty  property = (JDTBeanProperty) properties.get("stringProperty2");
+        JDTBeanProperty  property = properties.get("stringProperty2");
         assertNotNull(property);
         
         assertTrue(property.isReadable());
@@ -307,9 +318,9 @@ public class TestJDTBeanIntrospector extends TestCase
     /**
      * 
      */
-    private void testReadonlyStringProperty(Map properties)
+    private void testReadonlyStringProperty(Map<String, JDTBeanProperty> properties)
     {
-        JDTBeanProperty  property = (JDTBeanProperty) properties.get("readonlyStringProperty");
+        JDTBeanProperty  property = properties.get("readonlyStringProperty");
         assertNotNull(property);
         
         assertTrue(property.isReadable());
@@ -338,9 +349,9 @@ public class TestJDTBeanIntrospector extends TestCase
     /**
      * 
      */
-    private void testReadonlyBooleanProperty(Map properties)
+    private void testReadonlyBooleanProperty(Map<String, JDTBeanProperty> properties)
     {
-        JDTBeanProperty  property = (JDTBeanProperty) properties.get("readonlyBooleanProperty");
+        JDTBeanProperty  property = properties.get("readonlyBooleanProperty");
         assertNotNull(property);
         
         assertTrue(property.isReadable());
@@ -369,9 +380,9 @@ public class TestJDTBeanIntrospector extends TestCase
     /**
      * 
      */
-    private void testWriteonlyStringProperty(Map properties)
+    private void testWriteonlyStringProperty(Map<String, JDTBeanProperty> properties)
     {
-        JDTBeanProperty  property = (JDTBeanProperty) properties.get("writeonlyStringProperty");
+        JDTBeanProperty  property = properties.get("writeonlyStringProperty");
         assertNotNull(property);
         
         assertFalse("No getter for this property", property.isReadable());
@@ -400,9 +411,9 @@ public class TestJDTBeanIntrospector extends TestCase
     /**
      * 
      */
-    private void testStringArrayProperty(Map properties)
+    private void testStringArrayProperty(Map<String, JDTBeanProperty> properties)
     {
-        JDTBeanProperty property = (JDTBeanProperty) properties.get("stringArrayProperty");
+        JDTBeanProperty property = properties.get("stringArrayProperty");
         assertNotNull(property);
         
         assertTrue(property.isReadable());
@@ -432,9 +443,9 @@ public class TestJDTBeanIntrospector extends TestCase
     /**
      * 
      */
-    private void testCollectionProperty(Map properties)
+    private void testCollectionProperty(Map<String, JDTBeanProperty> properties)
     {
-        JDTBeanProperty property = (JDTBeanProperty) properties.get("collectionProperty");
+        JDTBeanProperty property = properties.get("collectionProperty");
         assertNotNull(property);
         
         assertTrue(property.isReadable());
@@ -463,9 +474,9 @@ public class TestJDTBeanIntrospector extends TestCase
     /**
      * 
      */
-    private void testMapProperty(Map properties)
+    private void testMapProperty(Map<String, JDTBeanProperty> properties)
     {
-        JDTBeanProperty property = (JDTBeanProperty) properties.get("mapProperty");
+        JDTBeanProperty property = properties.get("mapProperty");
         assertNotNull(property);
         
         assertTrue(property.isReadable());
@@ -491,9 +502,9 @@ public class TestJDTBeanIntrospector extends TestCase
         testAnotherBean(_subClassProperties);
     }
 
-    private void testAnotherBean(Map properties)
+    private void testAnotherBean(Map<String, JDTBeanProperty> properties)
     {
-        JDTBeanProperty property = (JDTBeanProperty) properties.get("anotherBean");
+        JDTBeanProperty property = properties.get("anotherBean");
         assertNotNull(property);
         
         assertTrue(property.isReadable());
@@ -513,7 +524,7 @@ public class TestJDTBeanIntrospector extends TestCase
         // ensure we didn't some how put an inherited property into the
         // parent
         assertNull(_properties.get(inheritedPropertyName));
-        JDTBeanProperty property = (JDTBeanProperty) _subClassProperties.get(inheritedPropertyName);
+        JDTBeanProperty property = _subClassProperties.get(inheritedPropertyName);
         assertNotNull(property);
         
         assertTrue(property.isReadable());
@@ -523,5 +534,32 @@ public class TestJDTBeanIntrospector extends TestCase
                 "Ljava.lang.String;", property.getTypeSignature());
         assertNotNull("Should have a type", property.getType());
 
+    }
+    
+    public void testGenericProperty() throws Exception
+    {
+        JDTBeanIntrospector introspector = new JDTBeanIntrospector(_testBeanGenericType);
+        Map<String, JDTBeanProperty> props = introspector.getProperties();
+        JDTBeanProperty property = props.get("listOfStrings");
+        System.out.println(property.getTypeSignature());
+        System.out.println(property.getType().getFullyQualifiedName());
+        System.out.println(property.getType().getFullyQualifiedParameterizedName());
+
+//        for (ITypeParameter parameter : property.getType().getTypeParameters())
+//        {
+//            System.out.println(parameter.getElementName());
+//            System.out.println(parameter.getElementType());
+//            System.out.print("\n");
+//            
+//            for (String bound : parameter.getBounds())
+//            {
+//                System.out.println(bound);
+//            }
+//        }
+
+        for (String param : property.getTypeParameterSignatures())
+        {
+            System.out.println(param);
+        }
     }
 }

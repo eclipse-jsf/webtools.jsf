@@ -1,0 +1,17 @@
+package com.test;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class TestBeanGeneric 
+{
+    public List<String> getListOfStrings()
+    {
+        return new ArrayList<String>();
+    }
+    
+    public ArrayList<String> getArrayListOfStrings()
+    {
+        return new ArrayList<String>();
+    }
+}

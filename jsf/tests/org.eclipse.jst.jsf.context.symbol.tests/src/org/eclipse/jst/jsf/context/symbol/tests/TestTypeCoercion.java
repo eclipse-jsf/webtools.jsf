@@ -77,13 +77,15 @@ public class TestTypeCoercion extends ModelBaseTestCase
         assertNotNull(typeDesc);
         assertTrue(typeDesc.instanceOf(TypeConstants.TYPE_LIST));
         assertTrue(typeDesc instanceof IBoundedListTypeDescriptor);
-        assertTrue(((IBoundedListTypeDescriptor)typeDesc).isUnboundedForType(TypeConstants.TYPE_LIST));
-        final String testSymbolName = "chelsea";
+        
+        // a list can only be indexed numerically (i.e. get(int))
+        assertTrue(((IBoundedListTypeDescriptor)typeDesc).isUnboundedForType(TypeConstants.TYPE_BOXED_INTEGER));
+        final Integer symbolKey = Integer.valueOf(0);
         ISymbol symbol = 
             ((IBoundedListTypeDescriptor)typeDesc).
-                getUnboundedProperty(testSymbolName, TypeConstants.TYPE_LIST);
+                getUnboundedProperty(symbolKey, TypeConstants.TYPE_BOXED_INTEGER);
         
-        assertEquals(testSymbolName, symbol.getName());
+        assertEquals(symbolKey.toString(), symbol.getName());
 
     }
 }

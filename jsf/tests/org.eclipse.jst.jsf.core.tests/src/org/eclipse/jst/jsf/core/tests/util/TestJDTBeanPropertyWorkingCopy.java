@@ -42,6 +42,7 @@ public class TestJDTBeanPropertyWorkingCopy extends TestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
+		JSFTestUtil.setValidationEnabled(false);
 		JSFTestUtil.setInternetProxyPreferences(true, "www-proxy.us.oracle.com", "80");
 
 		final WebProjectTestEnvironment  projectTestEnvironment = 
