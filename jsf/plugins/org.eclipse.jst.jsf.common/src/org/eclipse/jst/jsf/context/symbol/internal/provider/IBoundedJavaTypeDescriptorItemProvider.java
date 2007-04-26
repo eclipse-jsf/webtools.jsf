@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IBoundedJavaTypeDescriptorItemProvider.java,v 1.4 2007/04/16 19:54:00 itrimble Exp $
+ * $Id: IBoundedJavaTypeDescriptorItemProvider.java,v 1.5 2007/04/26 00:08:06 cbateman Exp $
  */
 package org.eclipse.jst.jsf.context.symbol.internal.provider;
 
@@ -40,6 +40,7 @@ public class IBoundedJavaTypeDescriptorItemProvider
      * <!-- end-user-doc -->
 	 * @generated
 	 */
+    @SuppressWarnings("hiding")
     public static final String copyright = "Copyright 2006 Oracle";
 
 	/**

@@ -66,6 +66,7 @@ public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJa
      * <!-- end-user-doc -->
      * @generated
      */
+    @SuppressWarnings("hiding")
     public static final String copyright = "Copyright 2006 Oracle";
 
     /**
@@ -280,16 +281,16 @@ public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJa
     }
 
     /**
-	 * 
+	 * @generated NOT
 	 */
 	public IObjectSymbol getArrayElement() 
 	{
 		if (isArray())
 		{
 			final String typeSignature = getTypeSignature();
-			final int arrayCount = Signature.getArrayCount(typeSignature);
+			final int arrayCount_ = Signature.getArrayCount(typeSignature);
 			final String baseType = Signature.getElementType(typeSignature);
-			final String elementTypeSignature = Signature.createArraySignature(baseType, arrayCount-1);
+			final String elementTypeSignature = Signature.createArraySignature(baseType, arrayCount_-1);
 
 			final IJavaTypeDescriptor2 elementTypeDesc = 
 				SymbolFactory.eINSTANCE.createIJavaTypeDescriptor2();

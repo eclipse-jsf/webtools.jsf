@@ -32,7 +32,8 @@ public class IComponentSymbolImpl extends IInstanceSymbolImpl implements ICompon
 	 * <!-- end-user-doc -->
      * @generated
      */
-	public static final String copyright = "Copyright 2006 Oracle";
+	@SuppressWarnings("hiding")
+    public static final String copyright = "Copyright 2006 Oracle";
 
     /**
      * A human readable description of this symbol

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IBoundedMapTypeDescriptorImpl.java,v 1.4 2007/04/16 19:53:58 itrimble Exp $
+ * $Id: IBoundedMapTypeDescriptorImpl.java,v 1.5 2007/04/26 00:08:52 cbateman Exp $
  */
 package org.eclipse.jst.jsf.context.symbol.internal.impl;
 
@@ -33,6 +33,7 @@ public class IBoundedMapTypeDescriptorImpl extends IMapTypeDescriptorImpl implem
      * <!-- end-user-doc -->
      * @generated
      */
+    @SuppressWarnings("hiding")
     public static final String copyright = "Copyright 2006 Oracle";
 
     /**

@@ -51,7 +51,8 @@ public class IJavaTypeDescriptor2ItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright 2006 Oracle";
+	@SuppressWarnings("hiding")
+    public static final String copyright = "Copyright 2006 Oracle";
 
 	/**
 	 * This constructs an instance from a factory and a notifier.

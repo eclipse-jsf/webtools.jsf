@@ -46,6 +46,7 @@ public class IBeanPropertySymbolItemProvider
      * <!-- end-user-doc -->
 	 * @generated
 	 */
+    @SuppressWarnings("hiding")
     public static final String copyright = "Copyright 2006 Oracle";
 
 	/**
