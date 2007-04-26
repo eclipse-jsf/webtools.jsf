@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IListTypeDescriptorImpl.java,v 1.2 2007/04/16 19:53:58 itrimble Exp $
+ * $Id: IListTypeDescriptorImpl.java,v 1.3 2007/04/26 00:20:19 cbateman Exp $
  */
 package org.eclipse.jst.jsf.context.symbol.internal.impl;
 
@@ -39,6 +39,7 @@ public class IListTypeDescriptorImpl extends ITypeDescriptorImpl implements ILis
      * <!-- end-user-doc -->
      * @generated
      */
+    @SuppressWarnings("hiding")
     public static final String copyright = "Copyright 2006 Oracle";
 
     /**
