@@ -19,6 +19,7 @@ import junit.framework.TestCase;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.designtime.internal.symbols.ResourceBundleMapSourceFactory;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
+import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.jst.jsf.test.util.ProjectTestEnvironment;
 import org.eclipse.jst.jsf.test.util.TestFileResource;
 
@@ -43,6 +44,9 @@ public class TestResourceBundleMapSource extends TestCase
     protected void setUp() throws Exception 
     {
         super.setUp();
+        
+        JSFTestUtil.setValidationEnabled(false);
+        
         _project1 = initProject("BundleResourceTestProject1", 
                                 "/testdata/bundle1.resources.data",
                                 BUNDLE1_PATH, BUNDLE1_NAME);
@@ -91,6 +95,14 @@ public class TestResourceBundleMapSource extends TestCase
         }
     }
     
+    @Override
+    protected void tearDown() throws Exception {
+        super.tearDown();
+        
+        _project1.delete(true, null);
+        _project2.delete(true, null);
+    }
+
     /**
      * Verify the expected contents of bundle1 in project1
      */

@@ -60,7 +60,7 @@ public class TestDefaultPropertyResolver extends TestCase
         JSFTestUtil.setInternetProxyPreferences(true, "www-proxy.uk.oracle.com","80");
 
         final WebProjectTestEnvironment  projectTestEnvironment = 
-            new WebProjectTestEnvironment("TestDefaultBeanSymbolSourceProvider_"+getName());
+            new WebProjectTestEnvironment("TestDefaultPropertyResolver"+getName());
         projectTestEnvironment.createProject(false);
 //        _facesConfigFile = (IFile) projectTestEnvironment.
 //            loadResourceInWebRoot(DesignTimeTestsPlugin.getDefault().getBundle(),
@@ -122,6 +122,16 @@ public class TestDefaultPropertyResolver extends TestCase
         assertNotNull(_testBeanWithListPropType);
     }
     
+    
+    @Override
+    protected void tearDown() throws Exception {
+        super.tearDown();
+        
+        _jdtTestEnvironment.getJavaProject().getProject().delete(true, null);
+    }
+
+
+
     /**
      * Test precondition sanity
      */
