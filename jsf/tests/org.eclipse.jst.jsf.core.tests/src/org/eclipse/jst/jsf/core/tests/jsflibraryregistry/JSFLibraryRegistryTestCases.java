@@ -225,7 +225,7 @@ public class JSFLibraryRegistryTestCases extends TestCase {
 		JSFLibrary lib = (JSFLibrary)libs.get(0);
 		Assert.assertTrue(lib instanceof PluginProvidedJSFLibrary);
 		Assert.assertEquals(2, lib.getArchiveFiles().size());
-		Assert.assertEquals("2_JAR_LIB", lib.getLabel());
+		Assert.assertEquals("FAKE LIB FROM jsf.core.tests (1)", lib.getLabel());
 		Assert.assertTrue(lib.isImplementation());
 		
 		//empty jar lib
@@ -235,7 +235,7 @@ public class JSFLibraryRegistryTestCases extends TestCase {
 		lib = (JSFLibrary)libs.get(0);
 		Assert.assertTrue(lib instanceof PluginProvidedJSFLibrary);
 		Assert.assertEquals(0, lib.getArchiveFiles().size());
-		Assert.assertEquals("EMPTY_LIB", lib.getLabel());
+		Assert.assertEquals("FAKE LIB FROM jsf.core.tests (2)", lib.getLabel());
 		Assert.assertFalse(lib.isImplementation());
 		
 	}
