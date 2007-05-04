@@ -13,15 +13,14 @@ import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.jsflibraryconfiguration.internal.JSFLibraryReferenceFacadeFactory;
 
 /**
- * @author gekessle
- *
+ * Helper class for adopters needing to deal with JSF Library References
+ * @since WTP JSF 1.0
  */
 public final class JSFLibraryConfigurationHelper {
 	/**
 	 * container id for JSF Library Classpath Containers 
 	 */
 	public static final String JSF_LIBRARY_CP_CONTAINER_ID="org.eclipse.jst.jsf.core.internal.jsflibrarycontainer";
-
 
 	/**
 	 * @param project 

@@ -10,8 +10,7 @@ import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFLibraryReference;
 import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFLibraryReferenceServerSupplied;
 
 /**
- * @author gekessle
- *
+ * Factory for producing facade objects for references to the internal EMF JSF Library classes
  */
 public class JSFLibraryReferenceFacadeFactory {
 	/**
