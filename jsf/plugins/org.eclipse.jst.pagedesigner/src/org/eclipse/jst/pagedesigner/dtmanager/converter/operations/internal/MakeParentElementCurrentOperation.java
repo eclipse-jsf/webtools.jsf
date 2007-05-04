@@ -8,33 +8,37 @@
  * Contributors:
  *    Ian Trimble - initial API and implementation
  *******************************************************************************/ 
-package org.eclipse.jst.pagedesigner.dtmanager.converter.operations;
+package org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal;
 
+import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.AbstractTransformOperation;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 /**
- * ITransformOperation implementation that copies all child Elements as Nodes
- * requiring subsequent tag conversion.
- * 
- * <br><b>Note:</b> requires ITransformOperation.setTagConverterContext(...) to
- * have been called to provide a valid ITagConverterContext instance prior to
- * a call to the transform(...) method.
+ * ITransformOperation implementation that makes the current Element's parent
+ * Element the new current Element.
  * 
  * @author Ian Trimble - Oracle
- * API: should this be public or should we restrict so can only be constructed
- * through a factory?
  */
-public class CopyChildrenOperation extends AbstractTransformOperation {
+public class MakeParentElementCurrentOperation extends AbstractTransformOperation {
 
 	/*
 	 * (non-Javadoc)
 	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.AbstractTransformOperation#transform(org.w3c.dom.Element, org.w3c.dom.Element)
 	 */
 	public Element transform(Element srcElement, Element curElement) {
-		if (tagConverterContext != null) {
-			tagConverterContext.copyChildren(srcElement, curElement);
+		Element resultElement = null;
+		if (curElement != null) {
+			Node parentNode = curElement.getParentNode();
+			while (parentNode != null && parentNode.getNodeType() != Node.DOCUMENT_NODE) {
+				if (parentNode.getNodeType() == Node.ELEMENT_NODE) {
+					resultElement = (Element)parentNode;
+					break;
+				}
+                parentNode = parentNode.getParentNode();
+			}
 		}
-		return curElement;
+		return resultElement;
 	}
 
 }

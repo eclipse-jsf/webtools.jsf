@@ -41,13 +41,13 @@ public abstract class AbstractTransformOperation implements ITransformOperation 
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.ITransformOperation#transform(org.w3c.dom.Element, org.w3c.dom.Element)
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.ITransformOperation#transform(org.w3c.dom.Element, org.w3c.dom.Element)
 	 */
 	public abstract Element transform(Element srcElement, Element curElement);
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.ITransformOperation#setTagConverterContext(org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.ITagConverterContext)
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.ITransformOperation#setTagConverterContext(org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.ITagConverterContext)
 	 */
 	public void setTagConverterContext(ITagConverterContext tagConverterContext) {
         // API: this should really be set on construction since other methods
@@ -57,7 +57,7 @@ public abstract class AbstractTransformOperation implements ITransformOperation 
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.ITransformOperation#appendChildOperation(org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.ITransformOperation)
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.ITransformOperation#appendChildOperation(org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.ITransformOperation)
 	 */
 	public void appendChildOperation(ITransformOperation operation) {
 		if (operation != null) {
@@ -71,7 +71,7 @@ public abstract class AbstractTransformOperation implements ITransformOperation 
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.ITransformOperation#getChildOperations()
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.ITransformOperation#getChildOperations()
 	 */
 	public List getChildOperations() {
 		return childOperations;
@@ -103,7 +103,10 @@ public abstract class AbstractTransformOperation implements ITransformOperation 
 	 * @return New Element instance.
 	 */
 	protected Element createElement(String tagName) {
-		ITransformOperation operation = new CreateElementOperation(tagName);
+		ITransformOperation operation =
+			TransformOperationFactory.getInstance().getTransformOperation(
+					TransformOperationFactory.OP_CreateElementOperation,
+					new String[]{tagName});
 		operation.setTagConverterContext(tagConverterContext);
 		return operation.transform(null, null);
 	}
@@ -117,7 +120,10 @@ public abstract class AbstractTransformOperation implements ITransformOperation 
 	 * @return New Element instance.
 	 */
 	protected Element appendChildElement(String tagName, Element parentElement) {
-		ITransformOperation operation = new AppendChildElementOperation(tagName);
+		ITransformOperation operation =
+			TransformOperationFactory.getInstance().getTransformOperation(
+					TransformOperationFactory.OP_AppendChildElementOperation,
+					new String[]{tagName});
 		operation.setTagConverterContext(tagConverterContext);
 		return operation.transform(null, parentElement);
 	}
@@ -129,7 +135,10 @@ public abstract class AbstractTransformOperation implements ITransformOperation 
 	 * @param parentElement Element instance to which to append the new Text.
 	 */
 	protected void appendChildText(String content, Element parentElement) {
-		ITransformOperation operation = new AppendChildTextOperation(content);
+		ITransformOperation operation =
+			TransformOperationFactory.getInstance().getTransformOperation(
+					TransformOperationFactory.OP_AppendChildTextOperation,
+					new String[]{content});
 		operation.setTagConverterContext(tagConverterContext);
 		operation.transform(null, parentElement);
 	}

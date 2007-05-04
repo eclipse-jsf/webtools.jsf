@@ -8,33 +8,31 @@
  * Contributors:
  *    Ian Trimble - initial API and implementation
  *******************************************************************************/ 
-package org.eclipse.jst.pagedesigner.dtmanager.converter.operations;
+package org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal;
 
+import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.AbstractTransformOperation;
 import org.w3c.dom.Element;
-import org.w3c.dom.Text;
 
 /**
- * ITransformOperation implementation that appends a child Text.
+ * ITransformOperation implementation that creates a new Element.
  * 
  * <br><b>Note:</b> requires ITransformOperation.setTagConverterContext(...) to
  * have been called to provide a valid ITagConverterContext instance prior to
  * a call to the transform(...) method.
  * 
  * @author Ian Trimble - Oracle
- * API: should this be public or should we restrict so can only be constructed
- * through a factory?
  */
-public class AppendChildTextOperation extends AbstractTransformOperation {
+public class CreateElementOperation extends AbstractTransformOperation {
 
-	private String content;
+	private String tagName;
 
 	/**
-	 * Constructs an instance with the specified content.
+	 * Constructs an instance with the specified Element name.
 	 * 
-	 * @param content Content of child Text to be created.
+	 * @param tagName Name of Element to be created.
 	 */
-	public AppendChildTextOperation(String content) {
-		this.content = content;
+	public CreateElementOperation(String tagName) {
+		this.tagName = tagName;
 	}
 
 	/*
@@ -42,11 +40,11 @@ public class AppendChildTextOperation extends AbstractTransformOperation {
 	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.AbstractTransformOperation#transform(org.w3c.dom.Element, org.w3c.dom.Element)
 	 */
 	public Element transform(Element srcElement, Element curElement) {
-		if (tagConverterContext != null && curElement != null && content != null && content.length() > 0) {
-			Text childText = tagConverterContext.createText(content);
-			curElement.appendChild(childText);
+		Element element = null;
+		if (tagConverterContext != null && tagName != null && tagName.length() > 0) {
+			element = tagConverterContext.createElement(tagName);
 		}
-		return curElement;
+		return element;
 	}
 
 }

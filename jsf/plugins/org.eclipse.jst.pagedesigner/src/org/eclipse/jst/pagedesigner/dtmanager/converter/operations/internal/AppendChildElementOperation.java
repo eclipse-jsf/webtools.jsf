@@ -8,8 +8,9 @@
  * Contributors:
  *    Ian Trimble - initial API and implementation
  *******************************************************************************/ 
-package org.eclipse.jst.pagedesigner.dtmanager.converter.operations;
+package org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal;
 
+import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.AbstractTransformOperation;
 import org.w3c.dom.Element;
 
 /**

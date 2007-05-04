@@ -16,8 +16,9 @@ import java.util.StringTokenizer;
 
 import org.eclipse.jst.pagedesigner.converter.ConvertPosition;
 import org.eclipse.jst.pagedesigner.dom.EditModelQuery;
+import org.eclipse.jst.pagedesigner.dtmanager.converter.ITransformOperation;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.AbstractTransformOperation;
-import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.CreateAttributeOperation;
+import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.TransformOperationFactory;
 import org.eclipse.jst.pagedesigner.jsf.core.dom.JSFDOMUtil;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -60,7 +61,11 @@ public class ColumnOperation extends AbstractTransformOperation {
 			//set "class" attribute
 			int offset = EditModelQuery.getInstance().getSameTypeNodeIndex(srcElement);
 			if (offset < columnClassesList.size()) {
-				new CreateAttributeOperation("class", (String)columnClassesList.get(offset)).transform(srcElement, tdElement);
+				ITransformOperation operation =
+					TransformOperationFactory.getInstance().getTransformOperation(
+							TransformOperationFactory.OP_CreateAttributeOperation,
+							new String[]{"class", (String)columnClassesList.get(offset)});
+				operation.transform(srcElement, tdElement);
 			}
 		}
 

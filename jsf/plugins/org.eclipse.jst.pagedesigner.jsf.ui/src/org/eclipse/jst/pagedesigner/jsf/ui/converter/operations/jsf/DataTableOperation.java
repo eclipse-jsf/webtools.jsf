@@ -15,10 +15,9 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import org.eclipse.jst.pagedesigner.converter.ConvertPosition;
+import org.eclipse.jst.pagedesigner.dtmanager.converter.ITransformOperation;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.AbstractTransformOperation;
-import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.CopyAllAttributesOperation;
-import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.CreateAttributeOperation;
-import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.RenameAttributeOperation;
+import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.TransformOperationFactory;
 import org.w3c.dom.Element;
 
 /**
@@ -41,8 +40,16 @@ public class DataTableOperation extends AbstractTransformOperation {
 		Element tableElement = null;
 		//create table element, copy all attributes, rename "styleClass" attribute to "class"
 		tableElement = createElement("table");
-		new CopyAllAttributesOperation().transform(srcElement, tableElement);
-		new RenameAttributeOperation("styleClass", "class").transform(srcElement, tableElement);
+		ITransformOperation operation =
+			TransformOperationFactory.getInstance().getTransformOperation(
+					TransformOperationFactory.OP_CopyAllAttributesOperation,
+					new String[]{});
+		operation.transform(srcElement, tableElement);
+		operation =
+			TransformOperationFactory.getInstance().getTransformOperation(
+					TransformOperationFactory.OP_RenameAttributeOperation,
+					new String[]{"styleClass", "class"});
+		operation.transform(srcElement, tableElement);
 		//build thead
 		buildHeaderOrFooter(srcElement, tableElement, true);
 		//build tbody
@@ -94,11 +101,19 @@ public class DataTableOperation extends AbstractTransformOperation {
 			//set "class" attribute
 			String headerClassOrFooterClassAttribute = srcElement.getAttribute(headerClassOrFooterClassAttrName);
 			if (headerClassOrFooterClassAttribute != null && headerClassOrFooterClassAttribute.length() > 0) {
-				new CreateAttributeOperation("class", headerClassOrFooterClassAttribute).transform(srcElement, thOrTdElement);
+				ITransformOperation operation =
+					TransformOperationFactory.getInstance().getTransformOperation(
+							TransformOperationFactory.OP_CreateAttributeOperation,
+							new String[]{"class", headerClassOrFooterClassAttribute});
+				operation.transform(srcElement, thOrTdElement);
 			}
 			//set "colspan" attribute
 			if (columnElementList.size() > 0) {
-				new CreateAttributeOperation("colspan", String.valueOf(columnElementList.size())).transform(srcElement, thOrTdElement);
+				ITransformOperation operation =
+					TransformOperationFactory.getInstance().getTransformOperation(
+							TransformOperationFactory.OP_CreateAttributeOperation,
+							new String[]{"colspan", String.valueOf(columnElementList.size())});
+				operation.transform(srcElement, thOrTdElement);
 			}
 			//add facet Element as child (to be processed further)
 			tagConverterContext.addChild(facetElement, new ConvertPosition(thOrTdElement, 0));
@@ -119,7 +134,11 @@ public class DataTableOperation extends AbstractTransformOperation {
 				//set "class" attribute
 				String headerClassOrFooterClassAttribute = srcElement.getAttribute(headerClassOrFooterClassAttrName);
 				if (headerClassOrFooterClassAttribute != null && headerClassOrFooterClassAttribute.length() > 0) {
-					new CreateAttributeOperation("class", headerClassOrFooterClassAttribute).transform(srcElement, thOrTdElement);
+					ITransformOperation operation =
+						TransformOperationFactory.getInstance().getTransformOperation(
+								TransformOperationFactory.OP_CreateAttributeOperation,
+								new String[]{"class", headerClassOrFooterClassAttribute});
+					operation.transform(srcElement, thOrTdElement);
 				}
 				//if facet exists, add facet Element as child (to be processed further)
 				if (columnFacet != null) {
@@ -139,7 +158,11 @@ public class DataTableOperation extends AbstractTransformOperation {
 		if (rowClassesAttribute != null && rowClassesAttribute.length() > 0) {
 			StringTokenizer tokenizer = new StringTokenizer(rowClassesAttribute, ", ");
 			if (tokenizer.hasMoreTokens()) {
-				new CreateAttributeOperation("class", tokenizer.nextToken()).transform(srcElement, trElement);
+				ITransformOperation operation =
+					TransformOperationFactory.getInstance().getTransformOperation(
+							TransformOperationFactory.OP_CreateAttributeOperation,
+							new String[]{"class", tokenizer.nextToken()});
+				operation.transform(srcElement, trElement);
 			}
 		}
 		//add child columns (to be processed further)

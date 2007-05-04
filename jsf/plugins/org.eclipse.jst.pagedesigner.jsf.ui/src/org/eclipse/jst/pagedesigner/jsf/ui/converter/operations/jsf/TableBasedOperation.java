@@ -13,9 +13,9 @@ package org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.jst.pagedesigner.dtmanager.converter.ITransformOperation;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.AbstractTransformOperation;
-import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.CopyAttributeOperation;
-import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.RenameAttributeOperation;
+import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.TransformOperationFactory;
 import org.w3c.dom.Element;
 
 /**
@@ -36,10 +36,26 @@ public abstract class TableBasedOperation extends AbstractTransformOperation {
 	 */
 	public Element transform(Element srcElement, Element curElement) {
 		Element tableElement = createElement("table");
-		new CopyAttributeOperation("styleClass").transform(srcElement, tableElement);
-		new RenameAttributeOperation("styleClass", "class").transform(srcElement, tableElement);
-		new CopyAttributeOperation("style").transform(srcElement, tableElement);
-		new CopyAttributeOperation("border").transform(srcElement, tableElement);
+		ITransformOperation operation =
+			TransformOperationFactory.getInstance().getTransformOperation(
+					TransformOperationFactory.OP_CopyAttributeOperation,
+					new String[]{"styleClass"});
+		operation.transform(srcElement, tableElement);
+		operation =
+			TransformOperationFactory.getInstance().getTransformOperation(
+					TransformOperationFactory.OP_RenameAttributeOperation,
+					new String[]{"styleClass", "class"});
+		operation.transform(srcElement, tableElement);
+		operation =
+			TransformOperationFactory.getInstance().getTransformOperation(
+					TransformOperationFactory.OP_CopyAttributeOperation,
+					new String[]{"style"});
+		operation.transform(srcElement, tableElement);
+		operation =
+			TransformOperationFactory.getInstance().getTransformOperation(
+					TransformOperationFactory.OP_CopyAttributeOperation,
+					new String[]{"border"});
+		operation.transform(srcElement, tableElement);
 		boolean layoutHorizontal = true;
 		if ("pageDirection".equalsIgnoreCase(srcElement.getAttribute("layout"))) {
 			layoutHorizontal = false;

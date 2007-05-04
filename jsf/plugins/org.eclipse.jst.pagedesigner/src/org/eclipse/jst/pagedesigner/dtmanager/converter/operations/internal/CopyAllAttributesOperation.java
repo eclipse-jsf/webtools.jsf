@@ -8,38 +8,34 @@
  * Contributors:
  *    Ian Trimble - initial API and implementation
  *******************************************************************************/ 
-package org.eclipse.jst.pagedesigner.dtmanager.converter.operations;
+package org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal;
 
+import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.AbstractTransformOperation;
+import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
+import org.w3c.dom.NamedNodeMap;
 
 /**
- * ITransformOperation implementation that makes the current Element's parent
- * Element the new current Element.
+ * ITransformOperation implementation that copies all attributes from the
+ * source Element instance to the current Element instance.
  * 
  * @author Ian Trimble - Oracle
- * API: should this be public or should we restrict so can only be constructed
- * through a factory?
  */
-public class MakeParentElementCurrentOperation extends AbstractTransformOperation {
+public class CopyAllAttributesOperation extends AbstractTransformOperation {
 
 	/*
 	 * (non-Javadoc)
 	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.AbstractTransformOperation#transform(org.w3c.dom.Element, org.w3c.dom.Element)
 	 */
 	public Element transform(Element srcElement, Element curElement) {
-		Element resultElement = null;
-		if (curElement != null) {
-			Node parentNode = curElement.getParentNode();
-			while (parentNode != null && parentNode.getNodeType() != Node.DOCUMENT_NODE) {
-				if (parentNode.getNodeType() == Node.ELEMENT_NODE) {
-					resultElement = (Element)parentNode;
-					break;
-				}
-                parentNode = parentNode.getParentNode();
+		if (srcElement != null && curElement != null) {
+			NamedNodeMap attributes = srcElement.getAttributes();
+			for (int i = 0; i < attributes.getLength(); i++) {
+				Attr attribute = (Attr)attributes.item(i);
+				curElement.setAttribute(attribute.getName(), attribute.getValue());
 			}
 		}
-		return resultElement;
+		return curElement;
 	}
 
 }

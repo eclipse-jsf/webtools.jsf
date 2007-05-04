@@ -8,8 +8,9 @@
  * Contributors:
  *    Ian Trimble - initial API and implementation
  *******************************************************************************/ 
-package org.eclipse.jst.pagedesigner.dtmanager.converter.operations;
+package org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal;
 
+import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.AbstractTransformOperation;
 import org.w3c.dom.Element;
 import org.w3c.dom.Text;
 
@@ -22,8 +23,6 @@ import org.w3c.dom.Text;
  * a call to the transform(...) method.
  * 
  * @author Ian Trimble - Oracle
- * API: should this be public or should we restrict so can only be constructed
- * through a factory?
  */
 public class ConvertAttributeToTextOperation extends AbstractTransformOperation {
 

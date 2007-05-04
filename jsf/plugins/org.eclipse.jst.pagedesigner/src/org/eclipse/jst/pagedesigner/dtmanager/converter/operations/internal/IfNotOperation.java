@@ -8,19 +8,20 @@
  * Contributors:
  *    Ian Trimble - initial API and implementation
  *******************************************************************************/ 
-package org.eclipse.jst.pagedesigner.dtmanager.converter.operations;
+package org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
+import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.AbstractTransformOperation;
 import org.w3c.dom.Element;
 
 /**
  * ITransformOperation implementation that executes child ITransformOperation
  * instances if the XPath expression evaluated against the source Element
- * instance returns a "true" result.
+ * instance returns a "false" result.
  * 
  * <br><b>Note:</b> requires ITransformOperation.setTagConverterContext(...) to
  * have been called to provide a valid ITagConverterContext instance prior to
@@ -28,7 +29,7 @@ import org.w3c.dom.Element;
  * 
  * @author Ian Trimble - Oracle
  */
-public class IfOperation extends AbstractTransformOperation {
+public class IfNotOperation extends AbstractTransformOperation {
 
 	private String xPathExpression;
 
@@ -38,7 +39,7 @@ public class IfOperation extends AbstractTransformOperation {
 	 * @param xPathExpression XPath expression to be evaluated against the
 	 * source Element instance.
 	 */
-	public IfOperation(String xPathExpression) {
+	public IfNotOperation(String xPathExpression) {
 		this.xPathExpression = xPathExpression;
 	}
 
@@ -52,7 +53,7 @@ public class IfOperation extends AbstractTransformOperation {
 			XPath xPath = XPathFactory.newInstance().newXPath();
 			try {
 				Object resultObject = xPath.evaluate(xPathExpression, srcElement, XPathConstants.BOOLEAN);
-				if (((Boolean)resultObject).booleanValue()) {
+				if (!((Boolean)resultObject).booleanValue()) {
 					retElement = executeChildOperations(srcElement, retElement);
 				}
 			} catch(XPathExpressionException xee) {

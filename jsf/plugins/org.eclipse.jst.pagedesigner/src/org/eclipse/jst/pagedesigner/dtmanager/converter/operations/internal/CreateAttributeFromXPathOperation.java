@@ -8,37 +8,36 @@
  * Contributors:
  *    Ian Trimble - initial API and implementation
  *******************************************************************************/ 
-package org.eclipse.jst.pagedesigner.dtmanager.converter.operations;
+package org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
+import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.AbstractTransformOperation;
 import org.w3c.dom.Element;
 
 /**
- * ITransformOperation implementation that executes child ITransformOperation
- * instances if the XPath expression evaluated against the source Element
- * instance returns a "false" result.
- * 
- * <br><b>Note:</b> requires ITransformOperation.setTagConverterContext(...) to
- * have been called to provide a valid ITagConverterContext instance prior to
- * a call to the transform(...) method.
+ * ITransformOperation implementation that creates a new attribute on the
+ * current Element by getting a value from the specified XPath expression.
  * 
  * @author Ian Trimble - Oracle
  */
-public class IfNotOperation extends AbstractTransformOperation {
+public class CreateAttributeFromXPathOperation extends AbstractTransformOperation {
 
+	private String attributeName;
 	private String xPathExpression;
 
 	/**
 	 * Constructs an instance with the specified XPath expression.
 	 * 
+	 * @param attributeName Name of attribute to be created.
 	 * @param xPathExpression XPath expression to be evaluated against the
 	 * source Element instance.
 	 */
-	public IfNotOperation(String xPathExpression) {
+	public CreateAttributeFromXPathOperation(String attributeName, String xPathExpression) {
+		this.attributeName = attributeName;
 		this.xPathExpression = xPathExpression;
 	}
 
@@ -47,19 +46,18 @@ public class IfNotOperation extends AbstractTransformOperation {
 	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.AbstractTransformOperation#transform(org.w3c.dom.Element, org.w3c.dom.Element)
 	 */
 	public Element transform(Element srcElement, Element curElement) {
-		Element retElement = curElement;
 		if (srcElement != null) {
 			XPath xPath = XPathFactory.newInstance().newXPath();
 			try {
-				Object resultObject = xPath.evaluate(xPathExpression, srcElement, XPathConstants.BOOLEAN);
-				if (!((Boolean)resultObject).booleanValue()) {
-					retElement = executeChildOperations(srcElement, retElement);
+				Object resultObject = xPath.evaluate(xPathExpression, srcElement, XPathConstants.STRING);
+				if (resultObject instanceof String && curElement != null) {
+					curElement.setAttribute(attributeName, (String)resultObject);
 				}
 			} catch(XPathExpressionException xee) {
 				//could not evaluate - return curElement
 			}
 		}
-		return retElement;
+		return curElement;
 	}
 
 }

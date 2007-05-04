@@ -8,8 +8,9 @@
  * Contributors:
  *    Ian Trimble - initial API and implementation
  *******************************************************************************/ 
-package org.eclipse.jst.pagedesigner.dtmanager.converter.operations;
+package org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal;
 
+import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.AbstractTransformOperation;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
 
@@ -19,8 +20,6 @@ import org.w3c.dom.Element;
  * Element instance if no such attribute exists on the source Element instance.
  * 
  * @author Ian Trimble - Oracle
- * API: should this be public or should we restrict so can only be constructed
- * through a factory?
  */
 public class CopyAttributeOperation extends AbstractTransformOperation {
 

@@ -8,35 +8,38 @@
  * Contributors:
  *    Ian Trimble - initial API and implementation
  *******************************************************************************/ 
-package org.eclipse.jst.pagedesigner.dtmanager.converter.operations;
+package org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
+import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.AbstractTransformOperation;
 import org.w3c.dom.Element;
+import org.w3c.dom.Text;
 
 /**
- * ITransformOperation implementation that creates a new attribute on the
- * current Element by getting a value from the specified XPath expression.
+ * ITransformOperation implementation that creates a new child Text node by
+ * getting a value from the specified XPath expression.
+ * 
+ * <br><b>Note:</b> requires ITransformOperation.setTagConverterContext(...) to
+ * have been called to provide a valid ITagConverterContext instance prior to
+ * a call to the transform(...) method.
  * 
  * @author Ian Trimble - Oracle
  */
-public class CreateAttributeFromXPathOperation extends AbstractTransformOperation {
+public class AppendChildTextFromXPathOperation extends AbstractTransformOperation {
 
-	private String attributeName;
 	private String xPathExpression;
 
 	/**
 	 * Constructs an instance with the specified XPath expression.
 	 * 
-	 * @param attributeName Name of attribute to be created.
 	 * @param xPathExpression XPath expression to be evaluated against the
 	 * source Element instance.
 	 */
-	public CreateAttributeFromXPathOperation(String attributeName, String xPathExpression) {
-		this.attributeName = attributeName;
+	public AppendChildTextFromXPathOperation(String xPathExpression) {
 		this.xPathExpression = xPathExpression;
 	}
 
@@ -49,8 +52,9 @@ public class CreateAttributeFromXPathOperation extends AbstractTransformOperatio
 			XPath xPath = XPathFactory.newInstance().newXPath();
 			try {
 				Object resultObject = xPath.evaluate(xPathExpression, srcElement, XPathConstants.STRING);
-				if (resultObject instanceof String && curElement != null) {
-					curElement.setAttribute(attributeName, (String)resultObject);
+				if (tagConverterContext != null && resultObject instanceof String && curElement != null) {
+					Text childText = tagConverterContext.createText((String)resultObject);
+					curElement.appendChild(childText);
 				}
 			} catch(XPathExpressionException xee) {
 				//could not evaluate - return curElement

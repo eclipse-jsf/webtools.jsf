@@ -8,44 +8,32 @@
  * Contributors:
  *    Ian Trimble - initial API and implementation
  *******************************************************************************/ 
-package org.eclipse.jst.pagedesigner.dtmanager.converter.operations;
+package org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal;
 
+import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.AbstractTransformOperation;
 import org.w3c.dom.Element;
 
 /**
- * ITransformOperation implementation that creates a new Element.
+ * ITransformOperation implementation that copies all child Elements as Nodes
+ * requiring subsequent tag conversion.
  * 
  * <br><b>Note:</b> requires ITransformOperation.setTagConverterContext(...) to
  * have been called to provide a valid ITagConverterContext instance prior to
  * a call to the transform(...) method.
  * 
  * @author Ian Trimble - Oracle
- * API: should this be public or should we restrict so can only be constructed
- * through a factory?
  */
-public class CreateElementOperation extends AbstractTransformOperation {
-
-	private String tagName;
-
-	/**
-	 * Constructs an instance with the specified Element name.
-	 * 
-	 * @param tagName Name of Element to be created.
-	 */
-	public CreateElementOperation(String tagName) {
-		this.tagName = tagName;
-	}
+public class CopyChildrenOperation extends AbstractTransformOperation {
 
 	/*
 	 * (non-Javadoc)
 	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.AbstractTransformOperation#transform(org.w3c.dom.Element, org.w3c.dom.Element)
 	 */
 	public Element transform(Element srcElement, Element curElement) {
-		Element element = null;
-		if (tagConverterContext != null && tagName != null && tagName.length() > 0) {
-			element = tagConverterContext.createElement(tagName);
+		if (tagConverterContext != null) {
+			tagConverterContext.copyChildren(srcElement, curElement);
 		}
-		return element;
+		return curElement;
 	}
 
 }

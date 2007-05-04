@@ -8,29 +8,31 @@
  * Contributors:
  *    Ian Trimble - initial API and implementation
  *******************************************************************************/ 
-package org.eclipse.jst.pagedesigner.dtmanager.converter.operations;
+package org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal;
 
+import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.AbstractTransformOperation;
 import org.w3c.dom.Element;
 
 /**
- * ITransformOperation implementation that removes an attribute from the
+ * ITransformOperation implementation that creates a new attribute on the
  * current Element.
  * 
  * @author Ian Trimble - Oracle
- * API: should this be public or should we restrict so can only be constructed
- * through a factory?
  */
-public class RemoveAttributeOperation extends AbstractTransformOperation {
+public class CreateAttributeOperation extends AbstractTransformOperation {
 
 	private String attributeName;
+	private String attributeValue;
 
 	/**
-	 * Constructs an instance with the specified attribute name.
+	 * Constructs an instance with the specified attribute name and value.
 	 * 
-	 * @param attributeName Name of attribute to be removed.
+	 * @param attributeName Name of attribute to be created.
+	 * @param attributeValue Value of attribute to be set.
 	 */
-	public RemoveAttributeOperation(String attributeName) {
+	public CreateAttributeOperation(String attributeName, String attributeValue) {
 		this.attributeName = attributeName;
+		this.attributeValue = attributeValue;
 	}
 
 	/*
@@ -39,7 +41,7 @@ public class RemoveAttributeOperation extends AbstractTransformOperation {
 	 */
 	public Element transform(Element srcElement, Element curElement) {
 		if (curElement != null) {
-			curElement.removeAttribute(attributeName);
+			curElement.setAttribute(attributeName, attributeValue);
 		}
 		return curElement;
 	}
