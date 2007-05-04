@@ -10,11 +10,11 @@
  *******************************************************************************/ 
 package org.eclipse.jst.jsf.core.tests.jsflibraryregistry;
 
-import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryPackage;
-import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl.JSFLibraryRegistryPackageImpl;
-
 import junit.framework.Assert;
 import junit.framework.TestCase;
+
+import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryPackage;
+import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl.JSFLibraryRegistryPackageImpl;
 
 public class JSFLibraryRegistryPackageTestCases extends TestCase {
 

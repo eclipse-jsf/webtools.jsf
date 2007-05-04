@@ -12,18 +12,18 @@ package org.eclipse.jst.jsf.core.tests.jsflibraryregistry;
 
 import java.io.File;
 
+import junit.framework.Assert;
+import junit.framework.TestCase;
+
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.jst.jsf.core.tests.TestsPlugin;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.ArchiveFile;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryFactory;
-
-import junit.framework.Assert;
-import junit.framework.TestCase;
+import org.eclipse.jst.jsf.core.tests.TestsPlugin;
 
 public class ArchiveFileTestCases extends TestCase { 
 	private String path4TestFiles;

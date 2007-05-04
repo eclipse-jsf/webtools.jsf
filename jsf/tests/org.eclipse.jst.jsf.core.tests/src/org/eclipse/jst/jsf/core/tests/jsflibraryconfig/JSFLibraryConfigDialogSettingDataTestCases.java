@@ -17,7 +17,7 @@ public class JSFLibraryConfigDialogSettingDataTestCases extends TestCase {
 		super.setUp();
 		
 		JSFCoreUtilHelper.createJSFLibraryRegistry();
-		libReg = JSFCoreUtilHelper.getJSFLibraryRegistryFromJSFCorePlugin();
+		libReg = JSFCoreUtilHelper.getJSFLibraryRegistryFromJSFLibraryHelper();
 		
 		compLibs = new String[1];  // test data has one component library
 		JSFLibrary lib = (JSFLibrary)libReg.getNonImplJSFLibraries().get(0);

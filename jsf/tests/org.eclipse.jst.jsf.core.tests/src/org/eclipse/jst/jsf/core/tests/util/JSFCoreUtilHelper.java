@@ -17,15 +17,15 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jst.j2ee.internal.web.archive.operations.WebFacetProjectCreationDataModelProvider;
-import org.eclipse.jst.jsf.core.tests.TestsPlugin;
-import org.eclipse.wst.common.componentcore.datamodel.properties.IFacetProjectCreationDataModelProperties;
-import org.eclipse.wst.common.frameworks.datamodel.DataModelFactory;
-import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
-import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryRegistryUtil;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.ArchiveFile;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistry;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryFactory;
+import org.eclipse.jst.jsf.core.tests.TestsPlugin;
+import org.eclipse.wst.common.componentcore.datamodel.properties.IFacetProjectCreationDataModelProperties;
+import org.eclipse.wst.common.frameworks.datamodel.DataModelFactory;
+import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
 
 public class JSFCoreUtilHelper {
 
@@ -76,16 +76,16 @@ public class JSFCoreUtilHelper {
 	 * If the JSF Library registry is empty, it will seed it with an Impl and non-Impl library
 	 */
 	public static void createJSFLibraryRegistry(){
-		if (JSFCorePlugin.getDefault().getJSFLibraryRegistry().getAllJSFLibraries().size() < 2){
+		if (JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry().getAllJSFLibraries().size() < 2){
 			//create Impl 
 			JSFLibrary lib = constructJSFLib("AN-IMPL-LIB", "/testfiles/JSFLib/", true, false);
-			JSFCorePlugin.getDefault().getJSFLibraryRegistry().addJSFLibrary(lib);
+			JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry().addJSFLibrary(lib);
 			//create non-Impl.   Uses same jars but declares it to be non implementation
 			lib = constructJSFLib("A-NON-IMPL-LIB", "/testfiles/JSFLib/", false, false);
-			JSFCorePlugin.getDefault().getJSFLibraryRegistry().addJSFLibrary(lib);
+			JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry().addJSFLibrary(lib);
 			//create plugin impl
-			lib = constructJSFLib("AN-IMPL-LIB", "/testfiles/JSFLib/", true, true);
-			JSFCorePlugin.getDefault().getJSFLibraryRegistry().addJSFLibrary(lib);
+			lib = constructJSFLib("AN-IMPL-LIB-PP", "/testfiles/JSFLib/", true, true);
+			JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry().addJSFLibrary(lib);
 			//create plugin-non impl
 			
 		}
@@ -104,16 +104,16 @@ public class JSFCoreUtilHelper {
 	}
 
 	/**
-	 * Convenience method to get JSFLibraryRegistry instance from JSFCorePlugin
-	 * (which will cause the JSFCorePlugin.loadJSFLibraryRegistry() and
-	 * JSFCorePlugin.loadJSFLibraryExtensions() methods to be called and will
-	 * subsequently allow JSFCorePlugin.saveJSFLibraryRegistry() to be called,
+	 * Convenience method to get the JSFLibraryRegistry instance 
+	 * (which will cause the loadJSFLibraryRegistry() and
+	 * loadJSFLibraryExtensions() methods to be called and will
+	 * subsequently allow saveJSFLibraryRegistry() to be called,
 	 * if desired).
 	 * 
 	 * @return JSFLibraryRegistry instance from JSFCorePlugin.
 	 */
-	public static JSFLibraryRegistry getJSFLibraryRegistryFromJSFCorePlugin() {
-		return JSFCorePlugin.getDefault().getJSFLibraryRegistry(); 
+	public static JSFLibraryRegistry getJSFLibraryRegistryFromJSFLibraryHelper() {
+		return JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry(); 
 	}
 	
 	/**

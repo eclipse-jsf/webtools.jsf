@@ -16,8 +16,8 @@ import junit.framework.Assert;
 import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
-import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryReference;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryInternalReference;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryRegistryUtil;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.project.facet.IJSFFacetInstallDataModelProperties;
 import org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDataModelProvider;
@@ -38,7 +38,7 @@ public class JSFFacetInstallDataModelProviderTestCases extends TestCase {
 		//create a project, if one doesn't exist in the current workspace
 		IProject project = JSFCoreUtilHelper.createWebProject(PROJ_2_3_NAME);
 		//create lib
-		jsfLib = JSFCorePlugin.getDefault().getJSFLibraryRegistry().getDefaultImplementation();
+		jsfLib = JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry().getDefaultImplementation();
 		
 		dm = new JSFFacetInstallDataModelProvider();
 		IDataModel model = DataModelFactory.createDataModel(dm);	
@@ -64,8 +64,8 @@ public class JSFFacetInstallDataModelProviderTestCases extends TestCase {
 	 */
 	public void testGetDefaultPropertyString() {
 		Assert.assertNotNull(dm.getDefaultProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION));
-		Assert.assertTrue(dm.getDefaultProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION) instanceof JSFLibraryReference);
-		JSFLibraryReference ref = (JSFLibraryReference)dm.getDefaultProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION) ;
+		Assert.assertTrue(dm.getDefaultProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION) instanceof JSFLibraryInternalReference);
+		JSFLibraryInternalReference ref = (JSFLibraryInternalReference)dm.getDefaultProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION) ;
 		Assert.assertTrue(ref.getLibrary() == jsfLib);
 		Assert.assertTrue(dm.getDefaultProperty(IJSFFacetInstallDataModelProperties.DEPLOY_IMPLEMENTATION) == Boolean.TRUE);
 		Assert.assertTrue(dm.getDefaultProperty(IJSFFacetInstallDataModelProperties.CONFIG_PATH) != null);

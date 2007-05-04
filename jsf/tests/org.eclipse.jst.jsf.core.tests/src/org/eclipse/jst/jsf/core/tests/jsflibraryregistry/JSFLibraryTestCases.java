@@ -16,10 +16,10 @@ import junit.framework.Assert;
 import junit.framework.TestCase;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.jst.jsf.core.tests.TestsPlugin;
-import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.ArchiveFile;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
+import org.eclipse.jst.jsf.core.tests.TestsPlugin;
+import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
 
 public class JSFLibraryTestCases extends TestCase {
 	private JSFLibrary jsfLib = null;

@@ -62,8 +62,10 @@ public class ProjectTestEnvironment
      * will return without error if the project exists (it will be deleted and recreated)
      * 
      * If set to false and the project exists, a runtime exception will be thrown
+     * 
+     * @return true if project is created
 	 */
-	public void createProject(boolean ignoreProjectExists) 
+	public boolean createProject(boolean ignoreProjectExists) 
     {
         IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(_projectName);
         
@@ -86,6 +88,7 @@ public class ProjectTestEnvironment
                     project.open(monitor);
                     _project = project;
                     _projectCreated = true;
+                    return true;
                 }
                 catch (CoreException ce)
                 {
@@ -93,6 +96,7 @@ public class ProjectTestEnvironment
                 }
             }
 		}
+		return false;
 	}
 
     /**

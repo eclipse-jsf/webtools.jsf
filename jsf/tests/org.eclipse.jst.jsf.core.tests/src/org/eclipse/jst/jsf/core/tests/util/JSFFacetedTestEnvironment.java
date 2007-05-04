@@ -18,8 +18,18 @@ import java.util.Set;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.jdt.core.IClasspathAttribute;
+import org.eclipse.jdt.core.IClasspathEntry;
+import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jst.j2ee.classpathdep.ClasspathDependencyUtil;
+import org.eclipse.jst.j2ee.classpathdep.IClasspathDependencyConstants;
 import org.eclipse.jst.jsf.core.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDataModelProvider;
+import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFLibraryConfigurationHelper;
+import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
 import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
 import org.eclipse.wst.common.componentcore.datamodel.properties.IFacetDataModelProperties;
 import org.eclipse.wst.common.componentcore.internal.operation.FacetProjectCreationOperation;
@@ -62,9 +72,8 @@ public class JSFFacetedTestEnvironment
     {
         final IProject project = 
            _projectTestEnvironment.getTestProject();
-        //seed JSFLib registry if not present
-        // TODO: is this really necessary for the facet?
-        JSFCoreUtilHelper.createJSFLibraryRegistry();
+        //NO LONGER seeding JSFLib registry if not present
+		// call generateJSFLibraryRegistry if needed
 
         _modelProvider = new JSFFacetInstallDataModelProvider();
         _model = DataModelFactory.createDataModel(_modelProvider);    
@@ -94,6 +103,25 @@ public class JSFFacetedTestEnvironment
     {
         IProjectFacet facet = ProjectFacetsManager.getProjectFacet(IJSFCoreConstants.JSF_CORE_FACET_ID);
         return facet.getVersion(version);
+    }
+    
+    public void generateJSFLibraryRegistry() {
+    	JSFCoreUtilHelper.createJSFLibraryRegistry();
+    }
+    
+    public void addJSFLibraryReference(JSFLibrary lib, boolean isDeployed) throws CoreException{ 
+    	JDTTestEnvironment jdtTestEnv = new JDTTestEnvironment(this._projectTestEnvironment);
+        IPath path =  new Path(JSFLibraryConfigurationHelper.JSF_LIBRARY_CP_CONTAINER_ID).append(lib.getID());
+        
+        IClasspathEntry cpEntry = null;
+        if (isDeployed) {
+        	IClasspathAttribute depAttrib = JavaCore.newClasspathAttribute(IClasspathDependencyConstants.CLASSPATH_COMPONENT_DEPENDENCY,
+        		ClasspathDependencyUtil.getDefaultRuntimePath(true).toString());	
+        	cpEntry = JavaCore.newContainerEntry( path ,null, new IClasspathAttribute[]{depAttrib}, true);
+        } else {
+        	cpEntry = JavaCore.newContainerEntry(path);
+        }
+        jdtTestEnv.addClasspathEntry(cpEntry);
     }
     
     /**

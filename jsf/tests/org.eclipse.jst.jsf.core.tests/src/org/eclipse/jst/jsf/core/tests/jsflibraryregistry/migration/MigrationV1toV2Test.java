@@ -10,6 +10,7 @@ import junit.framework.TestCase;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryRegistryUtil;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.util.JSFLibraryRegistryUpgradeUtil;
 import org.eclipse.jst.jsf.core.tests.TestsPlugin;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
@@ -34,6 +35,7 @@ public class MigrationV1toV2Test extends TestCase
         // the test data when start is called
         assertEquals(Bundle.ACTIVE, JSFCorePlugin.getDefault().getBundle().getState());
         
+        JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry();
         // clear plugin meta-data on every call
         _v1RegistryFile = clearRegistryFile(JSFLibraryRegistryUpgradeUtil.JSF_LIBRARY_REGISTRY_V1_URL);
         _v2RegistryFile = clearRegistryFile(JSFLibraryRegistryUpgradeUtil.JSF_LIBRARY_REGISTRY_V2_URL);

@@ -12,7 +12,7 @@ import org.eclipse.core.runtime.QualifiedName;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfigDialogSettingData;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfigModel;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfiglModelSource;
-import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryReference;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryInternalReference;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfigModel.JSFLibraryConfigModelFactory;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistry;
@@ -31,7 +31,7 @@ public class JSFLibraryConfigModelTestCases extends TestCase {
 		super.setUp();
 		
 		JSFCoreUtilHelper.createJSFLibraryRegistry();		
-		JSFLibraryRegistry libReg = JSFCoreUtilHelper.getJSFLibraryRegistryFromJSFCorePlugin();
+		JSFLibraryRegistry libReg = JSFCoreUtilHelper.getJSFLibraryRegistryFromJSFLibraryHelper();
 		
 		/* number of components is changed in workspace when running the whole test suite.
 		 * Recording the number from registry for testing.
@@ -74,8 +74,8 @@ public class JSFLibraryConfigModelTestCases extends TestCase {
 	public void testGetSavedJSFImplementationLibrary() {
 		JSFLibraryConfigModel model = JSFLibraryConfigModelFactory.createInstance(modelSrc);
 
-		JSFLibraryRegistry libReg = JSFCoreUtilHelper.getJSFLibraryRegistryFromJSFCorePlugin();
-		JSFLibraryReference libImplRef = model.getCurrentJSFImplementationLibrarySelection();
+		JSFLibraryRegistry libReg = JSFCoreUtilHelper.getJSFLibraryRegistryFromJSFLibraryHelper();
+		JSFLibraryInternalReference libImplRef = model.getCurrentJSFImplementationLibrarySelection();
 		Assert.assertNotNull(libImplRef);
 		Assert.assertTrue(libReg.getDefaultImplementation().getID().equals(libImplRef.getID()));
 	}
@@ -83,12 +83,12 @@ public class JSFLibraryConfigModelTestCases extends TestCase {
 	public void testGetSavedJSFComponentLibraries() {
 		JSFLibraryConfigModel model = JSFLibraryConfigModelFactory.createInstance(modelSrc);
 
-		/*JSFLibraryRegistry libReg = */JSFCoreUtilHelper.getJSFLibraryRegistryFromJSFCorePlugin();
+		/*JSFLibraryRegistry libReg = */JSFCoreUtilHelper.getJSFLibraryRegistryFromJSFLibraryHelper();
 		List lstCompRef = model.getCurrentJSFComponentLibrarySelection();
 		
 		Assert.assertTrue(lstCompRef.size() == 1);
 		
-		JSFLibraryReference libCompRef = (JSFLibraryReference) lstCompRef.get(0);  
+		JSFLibraryInternalReference libCompRef = (JSFLibraryInternalReference) lstCompRef.get(0);  
 		Assert.assertNotNull(libCompRef);
 		Assert.assertTrue(libCompRef.isSelected());
 		Assert.assertTrue(libCompRef.isCheckedToBeDeployed());

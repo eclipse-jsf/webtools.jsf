@@ -13,11 +13,11 @@ package org.eclipse.jst.jsf.core.tests;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-import org.eclipse.jst.jsf.core.tests.appconfig.provider.TestJARFileJSFAppConfigProvider;
 import org.eclipse.jst.jsf.core.tests.jsflibraryconfig.JSFLibraryConfigDialogSettingDataTestCases;
 import org.eclipse.jst.jsf.core.tests.jsflibraryconfig.JSFLibraryConfigModelTestCases;
 import org.eclipse.jst.jsf.core.tests.jsflibraryconfig.JSFLibraryRegistryUtilTestCases;
 import org.eclipse.jst.jsf.core.tests.jsflibraryconfig.JSFProjectLibraryReferenceTestCases;
+import org.eclipse.jst.jsf.core.tests.jsflibraryconfiguration.JSFLibraryReferenceTestCases;
 import org.eclipse.jst.jsf.core.tests.jsflibraryregistry.ArchiveFileTestCases;
 import org.eclipse.jst.jsf.core.tests.jsflibraryregistry.JSFLibraryRegistryPackageTestCases;
 import org.eclipse.jst.jsf.core.tests.jsflibraryregistry.JSFLibraryRegistryTestCases;
@@ -70,6 +70,9 @@ public class AllTests
 		// BUT, to be on the safe side, always run them LAST.
         suite.addTestSuite(MigrationV1toV2Test.class);
 
+        suite.addTestSuite(JSFLibraryReferenceTestCases.class);
+        
+        //
 		//$JUnit-END$
 		return suite;
 	}

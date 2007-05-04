@@ -10,12 +10,16 @@
  *******************************************************************************/ 
 package org.eclipse.jst.jsf.core.tests.jsflibraryregistry;
 
+import java.util.List;
+
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
-import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryRegistryUtil;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistry;
+import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.PluginProvidedJSFLibrary;
+import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
 
 public class JSFLibraryRegistryTestCases extends TestCase {
 	
@@ -86,15 +90,22 @@ public class JSFLibraryRegistryTestCases extends TestCase {
 	 */
 	public void testGetPluginProvidedJSFLibraries() {
 		JSFLibraryRegistry jsfLibRegistry = JSFCoreUtilHelper.getNewJSFLibraryRegistry();
-		JSFLibrary pluginLib = JSFCoreUtilHelper.constructJSFLib("plugin_provided", "testfiles/JSFLib", true, true);
+		PluginProvidedJSFLibrary pluginLib = (PluginProvidedJSFLibrary)JSFCoreUtilHelper.constructJSFLib("plugin_provided", "testfiles/JSFLib", true, true);
 		jsfLibRegistry.addJSFLibrary(pluginLib);
 		JSFLibrary nonPluginLib = JSFCoreUtilHelper.constructJSFLib("non_plugin_provided", "testfiles/JSFLib", true, false);
 		jsfLibRegistry.addJSFLibrary(nonPluginLib);
-		Assert.assertEquals(1, jsfLibRegistry.getPluginProvidedJSFLibraries().size());
-	}
+		Assert.assertEquals(1, jsfLibRegistry.getPluginProvidedJSFLibraries().size());		
+		
+		Assert.assertEquals(pluginLib.getName(), pluginLib.getLabel());
+		pluginLib.setLabel("plugin_providedLABEL");
+		Assert.assertEquals("plugin_providedLABEL", pluginLib.getLabel());
+		
+		Assert.assertEquals(nonPluginLib.getName(), nonPluginLib.getLabel());
+		Assert.assertEquals(nonPluginLib.getName(), nonPluginLib.getID());
+	}	
 
 	/*
-	 * Test method for 'org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl.JSFLibraryRegistryImpl.getDefaultImplementation()'
+	 * Test method for 'org.eclipse.jst.jsf.core.jsflibraryregistry.internal.internal.impl.JSFLibraryRegistryImpl.getDefaultImplementation()'
 	 */
 	public void testGetDefaultImplementation() {
 		JSFLibraryRegistry jsfLibRegistry = JSFCoreUtilHelper.getNewJSFLibraryRegistry();
@@ -177,6 +188,7 @@ public class JSFLibraryRegistryTestCases extends TestCase {
 		Assert.assertEquals(2, jsfLibRegistry.getAllJSFLibraries().size());
 	}
 
+
 	/*
 	 * Test method for 'org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl.JSFLibraryRegistryImpl.addJSFLibrary(JSFLibrary)'
 	 */
@@ -202,6 +214,30 @@ public class JSFLibraryRegistryTestCases extends TestCase {
 		Assert.assertEquals(1, jsfLibRegistry.getJSFLibraries().size());
 		jsfLibRegistry.removeJSFLibrary(lib);
 		Assert.assertEquals(0, jsfLibRegistry.getJSFLibraries().size());
+	}
+
+	public void testPluginProvidedJSFLibCreationFromExtPt() {
+		//2 jar lib
+ 		JSFLibraryRegistry jsfLibRegistry = JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry();
+		List libs = jsfLibRegistry.getJSFLibrariesByName("TEST_PP_LIB_2");
+		Assert.assertNotNull(libs);
+		Assert.assertEquals(1, libs.size());
+		JSFLibrary lib = (JSFLibrary)libs.get(0);
+		Assert.assertTrue(lib instanceof PluginProvidedJSFLibrary);
+		Assert.assertEquals(2, lib.getArchiveFiles().size());
+		Assert.assertEquals("2_JAR_LIB", lib.getLabel());
+		Assert.assertTrue(lib.isImplementation());
+		
+		//empty jar lib
+		libs = jsfLibRegistry.getJSFLibrariesByName("TEST_PP_LIB_EMPTY");
+		Assert.assertNotNull(libs);
+		Assert.assertEquals(1, libs.size());
+		lib = (JSFLibrary)libs.get(0);
+		Assert.assertTrue(lib instanceof PluginProvidedJSFLibrary);
+		Assert.assertEquals(0, lib.getArchiveFiles().size());
+		Assert.assertEquals("EMPTY_LIB", lib.getLabel());
+		Assert.assertFalse(lib.isImplementation());
+		
 	}
 	
 }	// end of JSFLibraryRegistryTestCases

@@ -13,9 +13,9 @@ package org.eclipse.jst.jsf.core.tests.jsflibraryregistry;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
-import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistry;
+import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
 
 public class MaintainDefaultImplementationAdapterTestCases extends TestCase {
 
@@ -25,7 +25,7 @@ public class MaintainDefaultImplementationAdapterTestCases extends TestCase {
 
 	protected JSFLibraryRegistry getPreparedJSFLibraryRegistry() {
 		//get registry from JSFCorePlugin
-		JSFLibraryRegistry registry = JSFCoreUtilHelper.getJSFLibraryRegistryFromJSFCorePlugin();
+		JSFLibraryRegistry registry = JSFCoreUtilHelper.getJSFLibraryRegistryFromJSFLibraryHelper();
 		//clear registry (loaded and plugin-provided libs may have crept in)
 		registry.getJSFLibraries().clear();
 		registry.getPluginProvidedJSFLibraries().clear();

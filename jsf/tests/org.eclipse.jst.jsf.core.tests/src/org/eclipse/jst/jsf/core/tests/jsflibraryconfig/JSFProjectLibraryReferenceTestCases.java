@@ -3,7 +3,7 @@ package org.eclipse.jst.jsf.core.tests.jsflibraryconfig;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
-import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryReference;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryInternalReference;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.ArchiveFile;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryFactory;
@@ -14,7 +14,7 @@ public class JSFProjectLibraryReferenceTestCases extends TestCase {
 //	private String JSF_ID = "123456789";
 	private boolean isImpl = false;
 	private JSFLibrary jsfLib = null;
-	private JSFLibraryReference jsfLibRef = null;
+	private JSFLibraryInternalReference jsfLibRef = null;
 	
 	public JSFProjectLibraryReferenceTestCases(String name) {
 		super(name);
@@ -24,11 +24,10 @@ public class JSFProjectLibraryReferenceTestCases extends TestCase {
 		super.setUp();
 		
 		jsfLib = JSFLibraryRegistryFactory.eINSTANCE.createJSFLibrary();		
-//		jsfLib.setID(JSF_ID);
 		jsfLib.setName(JSF_NAME);
 		jsfLib.setImplementation(false);
 				
-		jsfLibRef = new JSFLibraryReference(jsfLib, 
+		jsfLibRef = new JSFLibraryInternalReference(jsfLib, 
 	   											   true,	// selected 
 												   true);	// to be deployed
 	}
@@ -41,21 +40,22 @@ public class JSFProjectLibraryReferenceTestCases extends TestCase {
 	}
 
 	/*
-	 * General test class for JSFLibraryReference class
+	 * General test class for JSFLibraryInternalReference class
 	 */
 	public void testJSFProjectLibraryReference() {		
-		JSFLibraryReference jsfLibRef_ = new JSFLibraryReference(jsfLib, true, true);
+		JSFLibraryInternalReference jsfLibRef_ = new JSFLibraryInternalReference(jsfLib, true, true);
 		
 		Assert.assertNotNull(jsfLibRef_);		
 		Assert.assertTrue(jsfLibRef_.isSelected());
 		Assert.assertTrue(jsfLibRef_.isCheckedToBeDeployed());		
 		Assert.assertTrue(JSF_NAME.equals(jsfLibRef_.getName()));
 		Assert.assertTrue(JSF_NAME.equals(jsfLibRef_.getID()));
+		Assert.assertTrue(JSF_NAME.equals(jsfLibRef_.getLabel()));
 		Assert.assertTrue(isImpl == jsfLibRef_.isImplementation());
 	}		
 	
 	/*
-	 * test method for JSFLibraryReference.getLibrary()
+	 * test method for JSFLibraryInternalReference.getLibrary()
 	 */
 	public void testGetLibrary() {
 		Assert.assertNotNull(jsfLibRef);
@@ -63,19 +63,19 @@ public class JSFProjectLibraryReferenceTestCases extends TestCase {
 	}
 
 	/*
-	 * test method for JSFLibraryReference.isCheckedToBeDeployed()
+	 * test method for JSFLibraryInternalReference.isCheckedToBeDeployed()
 	 */
 	public void testIsCheckedToBeDeployed() {
-		JSFLibraryReference jsfLibRef_ = new JSFLibraryReference(jsfLib, true, true);
+		JSFLibraryInternalReference jsfLibRef_ = new JSFLibraryInternalReference(jsfLib, true, true);
 		Assert.assertNotNull(jsfLibRef_);		
 		Assert.assertTrue(jsfLibRef_.isCheckedToBeDeployed());
 	}
 
 	/*
-	 * test method for JSFLibraryReference.setSelected()
+	 * test method for JSFLibraryInternalReference.setSelected()
 	 */
 	public void testSetSelected() {
-		JSFLibraryReference jsfLibRef_ = new JSFLibraryReference(jsfLib, true, true);
+		JSFLibraryInternalReference jsfLibRef_ = new JSFLibraryInternalReference(jsfLib, true, true);
 		Assert.assertNotNull(jsfLibRef_);		
 		
 		Assert.assertTrue(jsfLibRef_.isSelected());
@@ -85,14 +85,14 @@ public class JSFProjectLibraryReferenceTestCases extends TestCase {
 	}
 
 	/*
-	 * test method for JSFLibraryReference.isImplementation()
+	 * test method for JSFLibraryInternalReference.isImplementation()
 	 */
 	public void testIsImplementation() {
 		Assert.assertFalse(jsfLibRef.isImplementation());
 	}
 
 	/*
-	 * test method for JSFLibraryReference.getArchiveFiles()
+	 * test method for JSFLibraryInternalReferenceJSFLibraryInternalReference.getArchiveFiles()
 	 */	
 	public void testGetArchiveFiles() {
 		String path2TestJAR = TestsPlugin.getInstallLocation().getPath() + "testfiles/faces-all-bogus.jar";

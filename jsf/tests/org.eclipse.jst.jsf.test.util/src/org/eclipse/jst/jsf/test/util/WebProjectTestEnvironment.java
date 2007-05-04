@@ -86,10 +86,10 @@ public class WebProjectTestEnvironment extends ProjectTestEnvironment {
      * throw a RuntimeException if faceting doesn't match what is expected.
      * 
      * If set to false and the project exists, a runtime exception will be thrown
-     *
+     * @return true if project was created
      */
     @Override
-    public void createProject(boolean ignoreProjectExists) 
+    public boolean createProject(boolean ignoreProjectExists) 
     {
         boolean  doCreate = true;
         
@@ -117,6 +117,8 @@ public class WebProjectTestEnvironment extends ProjectTestEnvironment {
                  _project = createWebProject(_projectName);
             }
             _projectCreated = true;
+            
+            return doCreate;
         } catch (Exception t) {
             throw new RuntimeException(t);
         }

@@ -20,16 +20,16 @@ import org.eclipse.jface.preference.PreferenceDialog;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.jst.jsf.ui.tests.util.JSFUITestHelper;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Control;
-import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryRegistryUtil;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.PluginProvidedJSFLibrary;
 import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
 import org.eclipse.jst.jsf.ui.internal.Messages;
 import org.eclipse.jst.jsf.ui.internal.classpath.JSFLibrariesPreferencePage;
+import org.eclipse.jst.jsf.ui.tests.util.JSFUITestHelper;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 
 /**
  * Tests the <code>org.eclipse.jsf.ui.internal.classpaths.JSFLibrariesPreferencePage</code>
@@ -74,7 +74,7 @@ public class JSFLibrariesPreferencePageTestCases extends TestCase {
 		Assert.assertFalse(controls.getRemoveLibraryButton().getEnabled());
 		Assert.assertFalse(controls.getMakeDefaultLibraryButton().getVisible());
 		
-		Iterator it = JSFCorePlugin.getDefault().getJSFLibraryRegistry().getAllJSFLibraries().iterator();
+		Iterator it = JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry().getAllJSFLibraries().iterator();
 		while (it.hasNext()){
 			JSFLibrary lib = (JSFLibrary)it.next();
 			tv.setSelection(new StructuredSelection(lib));
@@ -99,7 +99,7 @@ public class JSFLibrariesPreferencePageTestCases extends TestCase {
 		}
 		
 		//now select an Archive file of a library
-		JSFLibrary lib = JSFCorePlugin.getDefault().getJSFLibraryRegistry().getDefaultImplementation();		
+		JSFLibrary lib = JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry().getDefaultImplementation();		
 		tv.setSelection(new StructuredSelection(lib));
 		((TreeViewer)tv).expandAll();
 		tv.setSelection(new StructuredSelection(lib.getArchiveFiles().get(0)));

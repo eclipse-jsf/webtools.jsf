@@ -1,4 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
 <plugin>
+   <extension
+         id="id1"
+         point="org.eclipse.jst.jsf.core.pluginProvidedJsfLibraries">
+      <jsfLibrary
+            archiveFilesDelegate="org.eclipse.jst.jsf.core.tests.jsflibraryregistry.TEST_PP_LIBArchiveFilesDelegate"
+            isImplementation="true"
+            label="2_JAR_LIB"
+            maxVersionSupported="v1_1"
+            name="TEST_PP_LIB_2">
+      </jsfLibrary>      
+      <jsfLibrary
+            archiveFilesDelegate="org.eclipse.jst.jsf.core.tests.jsflibraryregistry.TEST_PP_LIB_EMPTYArchiveFilesDelegate"
+            isImplementation="false"
+            label="EMPTY_LIB"
+            maxVersionSupported="v1_2"
+            name="TEST_PP_LIB_EMPTY">
+      </jsfLibrary>
+   </extension>
 </plugin>
