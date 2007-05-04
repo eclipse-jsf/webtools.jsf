@@ -14,6 +14,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.Messages;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryRegistryUtil;
 
 class MigrateV1toV2Operation extends VersionUpgradeOperation {
 
@@ -52,7 +53,7 @@ class MigrateV1toV2Operation extends VersionUpgradeOperation {
 			res.load(options);
 			//if we got this far then the registry was empty
 			//"upgrade" to v2 and then delete old.   no point in upgrade status being sent
-			JSFCorePlugin.getDefault().saveJSFLibraryRegistry();
+			JSFLibraryRegistryUtil.getInstance().saveJSFLibraryRegistry();
 			JSFLibraryRegistryUpgradeUtil.copyFile(_v1Registry.toFileString(), newRegURI.toFileString());//save as v2 file	
 			JSFLibraryRegistryUpgradeUtil.deleteFile(_v1Registry.toFileString());
 

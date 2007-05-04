@@ -326,6 +326,15 @@ public class JSFLibraryRegistryPackageImpl extends EPackageImpl implements JSFLi
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPluginProvidedJSFLibrary_Label() {
+		return (EAttribute)pluginProvidedJSFLibraryEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
      * @return the eenum 
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -376,14 +385,15 @@ public class JSFLibraryRegistryPackageImpl extends EPackageImpl implements JSFLi
 		createEAttribute(jsfLibraryEClass, JSF_LIBRARY__IMPLEMENTATION);
 		createEReference(jsfLibraryEClass, JSF_LIBRARY__ARCHIVE_FILES);
 
+		pluginProvidedJSFLibraryEClass = createEClass(PLUGIN_PROVIDED_JSF_LIBRARY);
+		createEAttribute(pluginProvidedJSFLibraryEClass, PLUGIN_PROVIDED_JSF_LIBRARY__PLUGIN_ID);
+		createEAttribute(pluginProvidedJSFLibraryEClass, PLUGIN_PROVIDED_JSF_LIBRARY__LABEL);
+
 		archiveFileEClass = createEClass(ARCHIVE_FILE);
 		createEAttribute(archiveFileEClass, ARCHIVE_FILE__RELATIVE_TO_WORKSPACE);
 		createEAttribute(archiveFileEClass, ARCHIVE_FILE__SOURCE_LOCATION);
 		createEAttribute(archiveFileEClass, ARCHIVE_FILE__RELATIVE_DEST_LOCATION);
 		createEReference(archiveFileEClass, ARCHIVE_FILE__JSF_LIBRARY);
-
-		pluginProvidedJSFLibraryEClass = createEClass(PLUGIN_PROVIDED_JSF_LIBRARY);
-		createEAttribute(pluginProvidedJSFLibraryEClass, PLUGIN_PROVIDED_JSF_LIBRARY__PLUGIN_ID);
 
 		// Create enums
 		jsfVersionEEnum = createEEnum(JSF_VERSION);
@@ -421,17 +431,17 @@ public class JSFLibraryRegistryPackageImpl extends EPackageImpl implements JSFLi
 		initEReference(getJSFLibraryRegistry_JSFLibraries(), this.getJSFLibrary(), null, "JSFLibraries", null, 0, -1, JSFLibraryRegistry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getJSFLibraryRegistry_PluginProvidedJSFLibraries(), this.getPluginProvidedJSFLibrary(), null, "PluginProvidedJSFLibraries", null, 0, -1, JSFLibraryRegistry.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		EOperation op = addEOperation(jsfLibraryRegistryEClass, ecorePackage.getEEList(), "getImplJSFLibraries", 1, 1);
-
-		op = addEOperation(jsfLibraryRegistryEClass, ecorePackage.getEEList(), "getNonImplJSFLibraries", 1, 1);
-
-		op = addEOperation(jsfLibraryRegistryEClass, this.getJSFLibrary(), "getJSFLibraryByID", 1, 1);
+		EOperation op = addEOperation(jsfLibraryRegistryEClass, this.getJSFLibrary(), "getJSFLibraryByID", 1, 1);
 		addEParameter(op, ecorePackage.getEString(), "ID", 1, 1);
 
 		op = addEOperation(jsfLibraryRegistryEClass, ecorePackage.getEEList(), "getJSFLibrariesByName", 1, 1);
 		addEParameter(op, ecorePackage.getEString(), "name", 1, 1);
 
-		op = addEOperation(jsfLibraryRegistryEClass, ecorePackage.getEEList(), "getAllJSFLibraries", 1, 1);
+		addEOperation(jsfLibraryRegistryEClass, ecorePackage.getEEList(), "getImplJSFLibraries", 1, 1);
+
+		addEOperation(jsfLibraryRegistryEClass, ecorePackage.getEEList(), "getNonImplJSFLibraries", 1, 1);
+
+		addEOperation(jsfLibraryRegistryEClass, ecorePackage.getEEList(), "getAllJSFLibraries", 1, 1);
 
 		op = addEOperation(jsfLibraryRegistryEClass, ecorePackage.getEBoolean(), "addJSFLibrary", 1, 1);
 		addEParameter(op, this.getJSFLibrary(), "library", 1, 1);
@@ -439,7 +449,7 @@ public class JSFLibraryRegistryPackageImpl extends EPackageImpl implements JSFLi
 		op = addEOperation(jsfLibraryRegistryEClass, ecorePackage.getEBoolean(), "removeJSFLibrary", 1, 1);
 		addEParameter(op, this.getJSFLibrary(), "library", 1, 1);
 
-		op = addEOperation(jsfLibraryRegistryEClass, this.getJSFLibrary(), "getDefaultImplementation", 1, 1);
+		addEOperation(jsfLibraryRegistryEClass, this.getJSFLibrary(), "getDefaultImplementation", 1, 1);
 
 		op = addEOperation(jsfLibraryRegistryEClass, null, "setDefaultImplementation");
 		addEParameter(op, this.getJSFLibrary(), "implementation", 1, 1);
@@ -455,7 +465,7 @@ public class JSFLibraryRegistryPackageImpl extends EPackageImpl implements JSFLi
 		op = addEOperation(jsfLibraryEClass, ecorePackage.getEBoolean(), "containsArchiveFile", 1, 1);
 		addEParameter(op, ecorePackage.getEString(), "fullPath", 1, 1);
 
-		op = addEOperation(jsfLibraryEClass, this.getJSFLibrary(), "getWorkingCopy", 1, 1);
+		addEOperation(jsfLibraryEClass, this.getJSFLibrary(), "getWorkingCopy", 1, 1);
 
 		op = addEOperation(jsfLibraryEClass, null, "updateValues");
 		addEParameter(op, this.getJSFLibrary(), "otherLibrary", 1, 1);
@@ -463,36 +473,39 @@ public class JSFLibraryRegistryPackageImpl extends EPackageImpl implements JSFLi
 		op = addEOperation(jsfLibraryEClass, ecorePackage.getEBoolean(), "copyTo", 1, 1);
 		addEParameter(op, ecorePackage.getEString(), "baseDestLocation", 1, 1);
 
+		addEOperation(jsfLibraryEClass, ecorePackage.getEString(), "getLabel", 1, 1);
+
+		initEClass(pluginProvidedJSFLibraryEClass, PluginProvidedJSFLibrary.class, "PluginProvidedJSFLibrary", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPluginProvidedJSFLibrary_PluginID(), ecorePackage.getEString(), "pluginID", null, 1, 1, PluginProvidedJSFLibrary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPluginProvidedJSFLibrary_Label(), ecorePackage.getEString(), "Label", null, 1, 1, PluginProvidedJSFLibrary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(archiveFileEClass, ArchiveFile.class, "ArchiveFile", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getArchiveFile_RelativeToWorkspace(), ecorePackage.getEBoolean(), "RelativeToWorkspace", "true", 1, 1, ArchiveFile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getArchiveFile_SourceLocation(), ecorePackage.getEString(), "SourceLocation", null, 1, 1, ArchiveFile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getArchiveFile_RelativeDestLocation(), ecorePackage.getEString(), "RelativeDestLocation", null, 1, 1, ArchiveFile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getArchiveFile_JSFLibrary(), this.getJSFLibrary(), this.getJSFLibrary_ArchiveFiles(), "JSFLibrary", null, 1, 1, ArchiveFile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		op = addEOperation(archiveFileEClass, ecorePackage.getEString(), "getName", 1, 1);
+		addEOperation(archiveFileEClass, ecorePackage.getEString(), "getName", 1, 1);
 
-		op = addEOperation(archiveFileEClass, ecorePackage.getEString(), "getPath", 1, 1);
+		addEOperation(archiveFileEClass, ecorePackage.getEString(), "getPath", 1, 1);
 
-		op = addEOperation(archiveFileEClass, ecorePackage.getEBoolean(), "exists", 1, 1);
+		addEOperation(archiveFileEClass, ecorePackage.getEBoolean(), "exists", 1, 1);
 
 		op = addEOperation(archiveFileEClass, ecorePackage.getEBoolean(), "equals", 1, 1);
 		addEParameter(op, ecorePackage.getEJavaObject(), "object", 1, 1);
 
-		op = addEOperation(archiveFileEClass, ecorePackage.getEInt(), "hashCode", 1, 1);
+		addEOperation(archiveFileEClass, ecorePackage.getEInt(), "hashCode", 1, 1);
 
 		op = addEOperation(archiveFileEClass, ecorePackage.getEBoolean(), "copyTo", 1, 1);
 		addEParameter(op, ecorePackage.getEString(), "baseDestLocation", 1, 1);
 
-		op = addEOperation(archiveFileEClass, ecorePackage.getEString(), "getResolvedSourceLocation", 1, 1);
-
-		initEClass(pluginProvidedJSFLibraryEClass, PluginProvidedJSFLibrary.class, "PluginProvidedJSFLibrary", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getPluginProvidedJSFLibrary_PluginID(), ecorePackage.getEString(), "pluginID", null, 1, 1, PluginProvidedJSFLibrary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		addEOperation(archiveFileEClass, ecorePackage.getEString(), "getResolvedSourceLocation", 1, 1);
 
 		// Initialize enums and add enum literals
 		initEEnum(jsfVersionEEnum, JSFVersion.class, "JSFVersion");
+		addEEnumLiteral(jsfVersionEEnum, JSFVersion.UNKNOWN_LITERAL);
 		addEEnumLiteral(jsfVersionEEnum, JSFVersion.V1_1_LITERAL);
 		addEEnumLiteral(jsfVersionEEnum, JSFVersion.V1_2_LITERAL);
-		addEEnumLiteral(jsfVersionEEnum, JSFVersion.UNKNOWN_LITERAL);
 
 		// Create resource
 		createResource(eNS_URI);

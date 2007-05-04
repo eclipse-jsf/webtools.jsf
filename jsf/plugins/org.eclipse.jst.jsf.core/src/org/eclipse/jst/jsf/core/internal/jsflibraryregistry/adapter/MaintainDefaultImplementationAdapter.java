@@ -13,7 +13,7 @@ package org.eclipse.jst.jsf.core.internal.jsflibraryregistry.adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryRegistryUtil;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistry;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryPackage;
@@ -77,7 +77,7 @@ public class MaintainDefaultImplementationAdapter extends AdapterImpl {
 	 */
 	protected void libraryAdded(JSFLibrary library) {
 		if (library != null && library.isImplementation()) {
-			JSFLibraryRegistry jsfLibReg = JSFCorePlugin.getDefault().getJSFLibraryRegistry();
+			JSFLibraryRegistry jsfLibReg = JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry();
 			EList impls = jsfLibReg.getImplJSFLibraries();
 			if (impls.size() == 1) {
 				jsfLibReg.setDefaultImplementation(library);
@@ -94,7 +94,7 @@ public class MaintainDefaultImplementationAdapter extends AdapterImpl {
 	 */
 	protected void libraryRemoved(JSFLibrary library) {
 		if (library != null && library.isImplementation()) {
-			JSFLibraryRegistry jsfLibReg = JSFCorePlugin.getDefault().getJSFLibraryRegistry();
+			JSFLibraryRegistry jsfLibReg = JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry();
 			JSFLibrary defaultImpl = jsfLibReg.getDefaultImplementation(); 
 			if (defaultImpl == null || library.getID().equals(defaultImpl.getID())) { 
 				setNewDefaultImplementation();
@@ -113,7 +113,7 @@ public class MaintainDefaultImplementationAdapter extends AdapterImpl {
 	 * @param library JSFLibrary instance
 	 */
 	protected void implementationFlagSet(JSFLibrary library) {
-		JSFLibraryRegistry jsfLibReg = JSFCorePlugin.getDefault().getJSFLibraryRegistry();
+		JSFLibraryRegistry jsfLibReg = JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry();
 		if (jsfLibReg != null) {
 			JSFLibrary defaultImpl = jsfLibReg.getDefaultImplementation();
 			if (
@@ -136,7 +136,7 @@ public class MaintainDefaultImplementationAdapter extends AdapterImpl {
 	 * JSFLibrary is marked as an implementation.
 	 */
 	protected void setNewDefaultImplementation() {
-		JSFLibraryRegistry jsfLibReg = JSFCorePlugin.getDefault().getJSFLibraryRegistry();
+		JSFLibraryRegistry jsfLibReg = JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry();
 		EList impls = jsfLibReg.getImplJSFLibraries();
 		if (impls.size() > 0) {
 			jsfLibReg.setDefaultImplementation((JSFLibrary)impls.get(0));

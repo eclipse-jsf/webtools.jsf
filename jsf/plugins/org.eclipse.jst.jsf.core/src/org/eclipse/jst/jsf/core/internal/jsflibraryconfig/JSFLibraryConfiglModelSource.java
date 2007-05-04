@@ -25,9 +25,9 @@ public interface JSFLibraryConfiglModelSource {
 	 * 
 	 * A null could be returned when creating first web project in a new workspace.
 	 * 
- 	 * @return JSFLibraryReference
+ 	 * @return JSFLibraryInternalReference
  	 */
- 	public JSFLibraryReference getJSFImplementationLibrary();
+ 	public JSFLibraryInternalReference getJSFImplementationLibrary();
  	
  	/**
 	 * Return a list of saved JSF component libraries.

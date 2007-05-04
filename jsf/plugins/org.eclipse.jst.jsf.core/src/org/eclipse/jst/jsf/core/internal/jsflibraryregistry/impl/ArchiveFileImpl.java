@@ -473,8 +473,12 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 				try {
 					Path srcPath = new Path(sourceLocation);
 					URL fileURL = FileLocator.find(bundle, srcPath, null);
-					URL url = FileLocator.resolve(fileURL);
-					resolvedSourceLocation = url.getPath();
+					if (fileURL != null){
+						URL url = FileLocator.resolve(fileURL);
+						resolvedSourceLocation = url.getPath();
+					}
+					else 
+						resolvedSourceLocation = sourceLocation;
 				} catch (IOException e) {
 					resolvedSourceLocation = sourceLocation;
 				}

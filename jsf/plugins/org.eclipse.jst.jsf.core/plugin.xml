@@ -2,6 +2,7 @@
 <?eclipse version="3.0"?>
 <plugin>
    <extension-point id="jsfLibraries" name="jsfLibraries" schema="schema/jsfLibraries.exsd"/>
+   <extension-point id="pluginProvidedJsfLibraries" name="pluginProvidedJsfLibraries" schema="schema/pluginProvidedJsfLibraries.exsd"/>
    <extension-point id="variableresolver" name="Variable Resolver Ext Point" schema="schema/variableresolver.exsd"/>
    <extension-point id="propertyresolver" name="Property Resolver Ext Point" schema="schema/propertyresolver.exsd"/>
    <extension-point id="methodresolver" name="Method Resolver Ext Point" schema="schema/methodresolver.exsd"/>
@@ -85,9 +86,11 @@
   <extension
          point="org.eclipse.ui.startup">
       <startup class="org.eclipse.jst.jsf.designtime.internal.jsp.StartupHandler"/>
+      <!--
       <startup
             class="org.eclipse.jst.jsf.core.internal.RegistryMigrationStartupHandler">
       </startup>
+      --> 
    </extension>
       <extension
          point="org.eclipse.jst.jsf.common.symbolSourceProvider">

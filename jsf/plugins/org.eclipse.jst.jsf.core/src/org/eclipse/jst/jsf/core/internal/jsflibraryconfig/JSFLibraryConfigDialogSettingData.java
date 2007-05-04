@@ -28,7 +28,7 @@ public class JSFLibraryConfigDialogSettingData implements JSFLibraryConfiglModel
 	final private JSFLibraryRegistryUtil jsfLibReg;
 	final private boolean dftImplLibDeployFlag;
 	private String[] savedCompLibs;
-	private JSFLibraryReference selJSFLibImpl;	// lazy initialized	
+	private JSFLibraryInternalReference selJSFLibImpl;	// lazy initialized	
 	private List selJSFLibComp;							// lazy initialized
 	
 	/**
@@ -62,14 +62,14 @@ public class JSFLibraryConfigDialogSettingData implements JSFLibraryConfiglModel
 	 * A null is returned when there is no default 
 	 * implementation library in registry.
 	 *     
-	 * @return selJSFLibImpl JSFLibraryReference return default implementation library with updated deployment flag 
+	 * @return selJSFLibImpl JSFLibraryInternalReference return default implementation library with updated deployment flag 
 	 */
-	public JSFLibraryReference getJSFImplementationLibrary() {
+	public JSFLibraryInternalReference getJSFImplementationLibrary() {
 		if (selJSFLibImpl == null) {
-			// To instanciate a JSFLibraryReference object from default impl lib as the saved library.  
-			JSFLibraryReference dftImplLib = jsfLibReg.getDefaultJSFImplementationLibrary(); 		
+			// To instanciate a JSFLibraryReferenceUserDefined object from default impl lib as the saved library.  
+			JSFLibraryInternalReference dftImplLib = jsfLibReg.getDefaultJSFImplementationLibrary(); 		
 			if (dftImplLib != null) {
-				selJSFLibImpl = new JSFLibraryReference(dftImplLib.getLibrary(), 
+				selJSFLibImpl = new JSFLibraryInternalReference(dftImplLib.getLibrary(), 
 						true,	// selected 
 						dftImplLibDeployFlag);
 			}
@@ -87,7 +87,7 @@ public class JSFLibraryConfigDialogSettingData implements JSFLibraryConfiglModel
 			selJSFLibComp = new ArrayList();		
 			
 			if (savedCompLibs != null && savedCompLibs.length > 0) {
-				JSFLibraryReference lib = null;
+				JSFLibraryInternalReference lib = null;
 				String item;
 				String[] attributes;
 				String id;
@@ -102,7 +102,7 @@ public class JSFLibraryConfigDialogSettingData implements JSFLibraryConfiglModel
 					
 					lib = jsfLibReg.getJSFLibraryReferencebyID(id);
 					if (lib != null) {
-						selJSFLibComp.add(new JSFLibraryReference(lib.getLibrary(), true, deploy));
+						selJSFLibComp.add(new JSFLibraryInternalReference(lib.getLibrary(), true, deploy));
 					} /*else {
 						// already logged if a saved component library is no longer available.
 					}*/

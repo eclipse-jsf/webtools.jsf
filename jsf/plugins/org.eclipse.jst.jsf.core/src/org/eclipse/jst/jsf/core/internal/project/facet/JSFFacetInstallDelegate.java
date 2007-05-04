@@ -33,9 +33,9 @@ import org.eclipse.jst.j2ee.web.componentcore.util.WebArtifactEdit;
 import org.eclipse.jst.j2ee.webapplication.Servlet;
 import org.eclipse.jst.j2ee.webapplication.WebApp;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
-import org.eclipse.jst.jsf.core.internal.JSFLibrariesContainerInitializer;
-import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryReference;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryInternalReference;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryRegistryUtil;
+import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFLibraryConfigurationHelper;
 import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
 import org.eclipse.wst.common.project.facet.core.IDelegate;
 import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
@@ -109,16 +109,16 @@ public class JSFFacetInstallDelegate implements IDelegate {
 		}
 		
 		//Implementation
-		IPath cp = new Path(JSFLibrariesContainerInitializer.JSF_LIBRARY_CP_CONTAINER_ID);		
-		JSFLibraryReference libref = (JSFLibraryReference)config.getProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION);
+		IPath cp = new Path(JSFLibraryConfigurationHelper.JSF_LIBRARY_CP_CONTAINER_ID);		
+		JSFLibraryInternalReference libref = (JSFLibraryInternalReference)config.getProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION);
 		IPath path = cp.append(new Path(libref.getID()));
 		IClasspathEntry entry = getNewCPEntry(path, libref);		
 		cpEntries.add(entry);
 
-		JSFLibraryReference[] compLibs = (JSFLibraryReference[])config.getProperty(IJSFFacetInstallDataModelProperties.COMPONENT_LIBRARIES);
+		JSFLibraryInternalReference[] compLibs = (JSFLibraryInternalReference[])config.getProperty(IJSFFacetInstallDataModelProperties.COMPONENT_LIBRARIES);
 		for (int i=0;i<compLibs.length;i++){
 			libref = compLibs[i];		
-			cp = new Path(JSFLibrariesContainerInitializer.JSF_LIBRARY_CP_CONTAINER_ID);		
+			cp = new Path(JSFLibraryConfigurationHelper.JSF_LIBRARY_CP_CONTAINER_ID);		
 			path = cp.append(new Path(libref.getID()));
 			entry = getNewCPEntry(path, libref);
 			if (entry != null)
@@ -129,7 +129,7 @@ public class JSFFacetInstallDelegate implements IDelegate {
 	}
 
 	//creates new IClasspathEntry with WTP dependency attribute set, if required
-	private IClasspathEntry getNewCPEntry(IPath path, JSFLibraryReference lib) {
+	private IClasspathEntry getNewCPEntry(IPath path, JSFLibraryInternalReference lib) {
 		
 		IClasspathEntry entry = null;
 		if (lib.isCheckedToBeDeployed()){

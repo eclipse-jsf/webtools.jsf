@@ -93,7 +93,19 @@ public class Messages extends NLS {
     /**
      * see messages.properties
      */
+	public static String JSFLibrariesPreferencePage_DEFAULT_IMPL_DESC;
+    /**
+     * see messages.properties
+     */
 	public static String JSFLibrariesPreferencePage_DefinedJSFLibraries;
+    /**
+     * see messages.properties
+     */
+	public static String JSFLibrariesPreferencePage_IMPL_DESC;
+    /**
+     * see messages.properties
+     */
+	public static String JSFLibrariesPreferencePage_MISSING_DESC;
     /**
      * see messages.properties
      */

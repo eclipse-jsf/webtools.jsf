@@ -62,7 +62,7 @@ public class JSFContentAssistProcessor implements IContentAssistProcessor {
 	private ITaglibContextResolver tlResolver;
 	private String defaultAdditionalInfo;
 
-	private String defaultIconPath = "/icons/attr_val.gif";
+	private String defaultIconPath = "/icons/attr_val.gif"; //$NON-NLS-1$
 	
 	private ImageDescriptor defaultAttrValImgDesc;
 	
@@ -219,7 +219,7 @@ public class JSFContentAssistProcessor implements IContentAssistProcessor {
 
 	private Image getImage(IPossibleValue val) {
 		ImageDescriptor icon = val.getIcon();		
-		if (icon == null || icon.equals("")){
+		if (icon == null || icon.equals("")){ //$NON-NLS-1$
 			return getDefaultAttributeValueImage();
 		}
 		

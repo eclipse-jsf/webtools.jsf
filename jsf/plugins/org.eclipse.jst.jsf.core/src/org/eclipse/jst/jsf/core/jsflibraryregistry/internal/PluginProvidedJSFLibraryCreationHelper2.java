@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2005 Oracle Corporation.
+ * Copyright (c) 2007 Oracle Corporation.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -8,10 +8,7 @@
  * Contributors:
  *    Gerry Kessler - initial API and implementation
  *******************************************************************************/ 
-package org.eclipse.jst.jsf.core.jsflibraryregistry;
-
-import java.util.Collection;
-import java.util.Iterator;
+package org.eclipse.jst.jsf.core.jsflibraryregistry.internal;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
@@ -22,19 +19,21 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryFactory;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFVersion;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.PluginProvidedJSFLibrary;
+import org.eclipse.jst.jsf.core.jsflibraryregistry.PluginProvidedJSFLibraryArchiveFilesDelegate;
 import org.eclipse.osgi.util.NLS;
 
 /**
- * Helper class used to create JSF Libraries from the
- * <code>org.eclipse.jst.jsf.core.jsflibraries</code> extension-point.
+ * Helper class used to create plugin-rovided JSF Libraries from the
+ * <code>org.eclipse.jst.jsf.core.pluginProvidedJsfLibraries</code> extension-point.
  * <br>
- * <em><b>NOTE: experimental and very likely to change.</b></em>
  * 
- * @deprecated - clients should not use
+ * @author Gerry Kessler - Oracle
  */
-public final class PluginProvidedJSFLibraryCreationHelper {
+public final class PluginProvidedJSFLibraryCreationHelper2 {
+	private PluginProvidedJSFLibrary newLib;
 	private IConfigurationElement config_element;
-
+	private String relativeDestLocation = "WEB-INF/lib"; //$NON-NLS-1$
+	
 	/**
 	 * Key of the 'name' attribute of the extension point.
 	 */
@@ -51,31 +50,48 @@ public final class PluginProvidedJSFLibraryCreationHelper {
 	 * Key of the 'archiveFilesDelegate' attribute of the extension point.
 	 */
 	public final static String DELEGATE 	= "archiveFilesDelegate"; //$NON-NLS-1$
-
+	/**
+	 * Key of the 'label' attribute of the extension point.
+	 */
+	public final static String LABEL 		= "label"; //$NON-NLS-1$
+	
 	/**
 	 * Creates an instance with the specified IConfigurationElement instance.
 	 * 
 	 * @param jsfLibrary IConfigurationElement instance
 	 */
-	public PluginProvidedJSFLibraryCreationHelper (IConfigurationElement jsfLibrary){
+	public PluginProvidedJSFLibraryCreationHelper2 (IConfigurationElement jsfLibrary){
 		this.config_element = jsfLibrary;
 	}
-
+	
+	/**
+	 * Add a jar file to the library
+	 * @param pluginRootRelativePath
+	 */
+	public void addArchiveFile(String pluginRootRelativePath) {
+		ArchiveFile jar = createArchiveFile(pluginRootRelativePath);
+		if (!newLib.containsArchiveFile(jar.getSourceLocation()))
+			newLib.getArchiveFiles().add(jar);
+	}
+	
 	/**
 	 * Creates a new PluginProvidedJSFLibrary from the JSFLibrary extension point.
 	 * 
 	 * @return PluginProvidedJSFLibrary instance.
 	 */
 	public JSFLibrary create(){
-		PluginProvidedJSFLibrary newLib = JSFLibraryRegistryFactory.eINSTANCE.createPluginProvidedJSFLibrary();
-//		newLib.setID(getLibID());
+		newLib = JSFLibraryRegistryFactory.eINSTANCE.createPluginProvidedJSFLibrary();
 		newLib.setPluginID(getPluginID());
 		newLib.setName(config_element.getAttribute(NAME));
+		String label = config_element.getAttribute(LABEL);
+		if (label != null && label.length() > 0){
+			newLib.setLabel(label);
+		}
 		newLib.setImplementation(config_element.getAttribute(IS_IMPL).equals("true") ? true : false); //$NON-NLS-1$		
 		newLib.setJSFVersion(JSFVersion.getJSFVersion(config_element.getAttribute(VERSION)));
 		
 		try {
-			addArchives(newLib);			
+			addArchives();			
 			return newLib;
 		} catch (Exception e) {
 			JSFCorePlugin.log(
@@ -91,40 +107,33 @@ public final class PluginProvidedJSFLibraryCreationHelper {
 	 * Adds ArchiveFile instances to the specified JSFLibrary instance.
 	 * 
 	 * @param newLib JSFLibrary instance
-	 * @throws InvalidArchiveFilesCreationException on attempt to create
-	 * multiple instances at same location.
 	 * @throws CoreException on core failure.
 	 */
-	private void addArchives(JSFLibrary newLib) throws InvalidArchiveFilesCreationException, CoreException {
-		JSFLibraryArchiveFilesDelegate jarCol = null;
-		ArchiveFile jar = null;
+	private void addArchives() throws CoreException {
+		PluginProvidedJSFLibraryArchiveFilesDelegate jarCol = null;
 
-		jarCol = (JSFLibraryArchiveFilesDelegate)config_element.createExecutableExtension(DELEGATE);
+		jarCol = (PluginProvidedJSFLibraryArchiveFilesDelegate)config_element.createExecutableExtension(DELEGATE);
 		if (jarCol != null){
-			jarCol.setConfigurationElement(config_element);
-			Collection jars = jarCol.getArchiveFiles();
-			if (jars == null)//TODO: better validation and error handling
-				return;
-			Iterator it = jars.iterator();
-			while (it.hasNext()){
-				Object aJar = it.next();
-				if (aJar instanceof ArchiveFile){//for now check to see ArchiveFiles were being returned
-					jar = (ArchiveFile)aJar;
-					if (!newLib.containsArchiveFile(jar.getSourceLocation()))
-						newLib.getArchiveFiles().add(jar);
-				}
-				else {
-					throw new InvalidArchiveFilesCreationException(
-							NLS.bind(
-									Messages.PluginProvidedJSFLibraryCreationHelper_ErrorMultipleDefinition,
-									jar.getSourceLocation(),
-									config_element.getName()));
-				}
-					
-			}
+			jarCol.setCreationHelper(this);
+			jarCol.getArchiveFiles();
 		}
 	}
-	
+	/**
+	 * Returns ArchiveFile where the location is set relative to the plugin.   
+	 * As long as the ArchiveFile is on the local machine somewhere, it should
+	 * be locatable.
+	 *  
+	 * @param relativePathFileName Relative location of the ArchiveFile
+	 * @return ArchiveFile instance.
+	 */
+	private ArchiveFile createArchiveFile(String pluginRootRelativePath){
+		ArchiveFile file = JSFLibraryRegistryFactory.eINSTANCE.createArchiveFile();
+		file.setRelativeToWorkspace(false);
+		file.setSourceLocation(pluginRootRelativePath);
+		file.setRelativeDestLocation(relativeDestLocation);
+		return file;
+	}
+
 	/**
 	 * Returns the plugin's ID.
 	 * 
@@ -133,4 +142,5 @@ public final class PluginProvidedJSFLibraryCreationHelper {
 	private String getPluginID() {
 		return config_element.getDeclaringExtension().getContributor().getName();
 	}
+
 }

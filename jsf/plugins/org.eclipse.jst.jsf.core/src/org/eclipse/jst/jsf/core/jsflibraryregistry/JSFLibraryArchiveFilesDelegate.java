@@ -29,7 +29,7 @@ import org.osgi.framework.Bundle;
  * <br>
  * <em><b>NOTE: experimental and very likely to change.</b></em>
  * 
- * @author Gerry Kessler - Oracle
+ * @deprecated along with the jsflibraries extension-point
  */
 public abstract class JSFLibraryArchiveFilesDelegate {
 	private IConfigurationElement extPtElement;

@@ -51,14 +51,15 @@ public class JSFLibraryConfigModel {
 			/* To initialze an implementation library list from registry 
 			 * and then update the list with saved implementation library.
 			 */
-			colJSFImplLib = jsfLibReg.getJSFImplementationLibraries();			
-			JSFLibraryReference targetLib = data.getJSFImplementationLibrary();
+			colJSFImplLib = jsfLibReg.getJSFImplementationLibraries();	
+//			colJSFImplLib.add(JSFLibraryRegistryUtil.getInstance().getServerSuppliedJSFLibrary());
+			JSFLibraryInternalReference targetLib = data.getJSFImplementationLibrary();
 			if (targetLib == null) {
 				// no saved implementation, get default implementation library
 				targetLib = jsfLibReg.getDefaultJSFImplementationLibrary();
 			}
 			if (targetLib != null) {
-				JSFLibraryReference srcLib = jsfLibReg.getJSFLibraryReferencebyID(targetLib.getID());				
+				JSFLibraryInternalReference srcLib = jsfLibReg.getJSFLibraryReferencebyID(targetLib.getID());				
 				if (srcLib != null) {
 					srcLib.setSelected(true);
 					srcLib.setToBeDeployed(targetLib.isCheckedToBeDeployed());				
@@ -84,10 +85,10 @@ public class JSFLibraryConfigModel {
 			 */
 			colJSFCompLib = jsfLibReg.getJSFComponentLibraries();			
 			Iterator it = data.getJSFComponentLibraries().iterator();
-			JSFLibraryReference targetItem = null;
-			JSFLibraryReference srcItem = null;
+			JSFLibraryInternalReference targetItem = null;
+			JSFLibraryInternalReference srcItem = null;
 			while (it.hasNext()) {
-				targetItem = (JSFLibraryReference) it.next();
+				targetItem = (JSFLibraryInternalReference) it.next();
 				srcItem = jsfLibReg.getJSFLibraryReferencebyID(targetItem.getID());
 				if (srcItem != null) {
 					srcItem.setSelected(true);
@@ -102,13 +103,13 @@ public class JSFLibraryConfigModel {
 	 * Return the selected JSF implementation library currently.
 	 * A null is returned if none is selected.
 	 * 
-	 * @return JSFLibraryReference 
+	 * @return JSFLibraryInternalReference 
 	 */
-	public JSFLibraryReference getCurrentJSFImplementationLibrarySelection() {
+	public JSFLibraryInternalReference getCurrentJSFImplementationLibrarySelection() {
 		Iterator it = getJSFImplementationLibraries().iterator();
-		JSFLibraryReference crtItem = null;
+		JSFLibraryInternalReference crtItem = null;
 		while (it.hasNext()) {
-			crtItem = (JSFLibraryReference) it.next();
+			crtItem = (JSFLibraryInternalReference) it.next();
 			if (crtItem.isSelected()) {
 				return crtItem;
 			}
@@ -126,9 +127,9 @@ public class JSFLibraryConfigModel {
 		List list = new ArrayList();
 
 		Iterator it = getJSFComponentLibraries().iterator();
-		JSFLibraryReference crtItem = null;
+		JSFLibraryInternalReference crtItem = null;
 		while (it.hasNext()) {
-			crtItem = (JSFLibraryReference) it.next();
+			crtItem = (JSFLibraryInternalReference) it.next();
 			if (crtItem.isSelected()) {
 				list.add(crtItem);
 			}
@@ -140,9 +141,9 @@ public class JSFLibraryConfigModel {
 	 * Returned a saved implementation library which was persisted as 
 	 * DialogSettings or as project properties.
 	 * 
-	 * @return JSFLibraryReference
+	 * @return JSFLibraryInternalReference
 	 */
-	public JSFLibraryReference getSavedJSFImplementationLibrary() {
+	public JSFLibraryInternalReference getSavedJSFImplementationLibrary() {
 		return data.getJSFImplementationLibrary();
 	}
 
@@ -162,14 +163,14 @@ public class JSFLibraryConfigModel {
 	 * Note: The library parameter won't be not added into the collection 
 	 * if it does not exist already. 
 	 * 
-	 * @param library JSFLibraryReference
+	 * @param library JSFLibraryInternalReference
 	 */
-	public void setCurrentJSFImplementationLibrarySelection(final JSFLibraryReference library) {
+	public void setCurrentJSFImplementationLibrarySelection(final JSFLibraryInternalReference library) {
 		if (library != null) {			
 			Iterator it = getJSFImplementationLibraries().iterator();
-			JSFLibraryReference crtjsflib = null;
+			JSFLibraryInternalReference crtjsflib = null;
 			while (it.hasNext()) {
-				crtjsflib = (JSFLibraryReference) it.next();
+				crtjsflib = (JSFLibraryInternalReference) it.next();
 				if (crtjsflib.getID().equals(library.getID())) {
 					crtjsflib.setSelected(true);
 					crtjsflib.setToBeDeployed(library.isCheckedToBeDeployed());
@@ -193,10 +194,10 @@ public class JSFLibraryConfigModel {
 			setJSFLibrariesSelection(getJSFComponentLibraries(), false);
 	
 			Iterator it = libraries.iterator();
-			JSFLibraryReference crtItem;
-			JSFLibraryReference srcItem = null;
+			JSFLibraryInternalReference crtItem;
+			JSFLibraryInternalReference srcItem = null;
 			while (it.hasNext()) {
-				crtItem = (JSFLibraryReference) it.next();
+				crtItem = (JSFLibraryInternalReference) it.next();
 				srcItem = jsfLibReg.getJSFLibraryReferencebyID(crtItem.getID());
 				
 				if (srcItem != null) {
@@ -229,9 +230,9 @@ public class JSFLibraryConfigModel {
 	 */
 	private void setJSFLibrariesSelection(final List libs, final boolean state) {
 		Iterator it = libs.iterator();
-		JSFLibraryReference crtjsflib;
+		JSFLibraryInternalReference crtjsflib;
 		while (it.hasNext()) {
-			crtjsflib = (JSFLibraryReference) it.next();
+			crtjsflib = (JSFLibraryInternalReference) it.next();
 			crtjsflib.setSelected(state);
 		}		
 	}	

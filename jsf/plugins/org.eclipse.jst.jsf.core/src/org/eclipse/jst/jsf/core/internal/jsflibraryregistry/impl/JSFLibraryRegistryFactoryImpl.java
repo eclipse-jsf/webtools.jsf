@@ -79,8 +79,8 @@ public class JSFLibraryRegistryFactoryImpl extends EFactoryImpl implements JSFLi
 		switch (eClass.getClassifierID()) {
 			case JSFLibraryRegistryPackage.JSF_LIBRARY_REGISTRY: return createJSFLibraryRegistry();
 			case JSFLibraryRegistryPackage.JSF_LIBRARY: return createJSFLibrary();
-			case JSFLibraryRegistryPackage.ARCHIVE_FILE: return createArchiveFile();
 			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY: return createPluginProvidedJSFLibrary();
+			case JSFLibraryRegistryPackage.ARCHIVE_FILE: return createArchiveFile();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

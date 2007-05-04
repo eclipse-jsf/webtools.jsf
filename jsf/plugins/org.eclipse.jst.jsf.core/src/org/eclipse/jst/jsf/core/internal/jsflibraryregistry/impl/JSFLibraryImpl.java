@@ -163,7 +163,7 @@ public class JSFLibraryImpl extends EObjectImpl implements JSFLibrary {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList archiveFiles = null;
+	protected EList archiveFiles;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -394,6 +394,15 @@ public class JSFLibraryImpl extends EObjectImpl implements JSFLibrary {
 			allCopied = allCopied && copied;
 		}
 		return allCopied;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String getLabel() {
+		return getName();
 	}
 
 	/**

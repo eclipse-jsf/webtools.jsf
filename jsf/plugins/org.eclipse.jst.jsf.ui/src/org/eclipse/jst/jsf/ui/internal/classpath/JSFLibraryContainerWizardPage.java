@@ -46,12 +46,11 @@ import org.eclipse.jface.viewers.ViewerComparator;
 import org.eclipse.jface.window.Window;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.jface.wizard.WizardPage;
-import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
-import org.eclipse.jst.jsf.core.internal.JSFLibrariesContainerInitializer;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryRegistryUtil;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.PluginProvidedJSFLibrary;
 import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigUtils;
+import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFLibraryConfigurationHelper;
 import org.eclipse.jst.jsf.ui.internal.JSFUiPlugin;
 import org.eclipse.jst.jsf.ui.internal.Messages;
 import org.eclipse.swt.SWT;
@@ -89,6 +88,8 @@ public class JSFLibraryContainerWizardPage extends WizardPage implements
 	private boolean   _projectHaveV1JSFLibraries; // = false;
 	private IProject  _iproject;
 
+	private static final String IMPL_DESC = Messages.JSFLibrariesPreferencePage_IMPL_DESC;
+	
 	/**
 	 * Zero arg constructor
 	 */
@@ -141,7 +142,7 @@ public class JSFLibraryContainerWizardPage extends WizardPage implements
 	 * @see org.eclipse.jdt.ui.wizards.IClasspathContainerPageExtension2#getNewContainers()
 	 */
 	public IClasspathEntry[] getNewContainers() {
-		IPath cp = new Path(JSFLibrariesContainerInitializer.JSF_LIBRARY_CP_CONTAINER_ID);
+		IPath cp = new Path(JSFLibraryConfigurationHelper.JSF_LIBRARY_CP_CONTAINER_ID);
 		List res = new ArrayList();
 		Object[] items = lv.getCheckedElements();
 		for (int i=0;i<items.length;i++){
@@ -211,7 +212,7 @@ public class JSFLibraryContainerWizardPage extends WizardPage implements
 				{
 					return containerEntry;
 				}
-                IPath path = new Path(JSFLibrariesContainerInitializer.JSF_LIBRARY_CP_CONTAINER_ID).append(new Path(lib.getID()));
+                IPath path = new Path(JSFLibraryConfigurationHelper.JSF_LIBRARY_CP_CONTAINER_ID).append(new Path(lib.getID()));
                 entry = JavaCore.newContainerEntry(path, containerEntry.getAccessRules(), containerEntry.getExtraAttributes(),containerEntry.isExported());
 			}			
 		}
@@ -346,8 +347,8 @@ public class JSFLibraryContainerWizardPage extends WizardPage implements
 		List jsfLibs = new ArrayList();
 		for (int i=0;i<entries.length;i++){
 			IClasspathEntry entry = entries[i];
-			if (isJSFLibrary(entry)){
-				JSFLibrary lib = JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry(). getJSFLibraryByID(entry.getPath().segment(1));
+			if (JSFLibraryConfigurationHelper.isJSFLibraryContainer(entry)){
+				JSFLibrary lib = JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry(). getJSFLibraryByID(getLibraryId(entry));
 				if (lib != null){
 					jsfLibs.add(lib);
 				}
@@ -357,8 +358,8 @@ public class JSFLibraryContainerWizardPage extends WizardPage implements
 		return jsfLibs;
 	}
 
-	private boolean isJSFLibrary(IClasspathEntry entry) {
-		return entry.getPath().segment(0).equals(JSFLibrariesContainerInitializer.JSF_LIBRARY_CP_CONTAINER_ID);
+	private String getLibraryId(IClasspathEntry entry) {
+		return entry.getPath().segment(1);
 	}
 
 	private void openJSFLibraryWizard(IStructuredSelection element){
@@ -425,7 +426,7 @@ public class JSFLibraryContainerWizardPage extends WizardPage implements
 	}
 	
 	private List getAllJSFLibraries() {
-		List allLibs = JSFCorePlugin.getDefault().getJSFLibraryRegistry().getAllJSFLibraries();
+		List allLibs = JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry().getAllJSFLibraries();
 
 		return allLibs;
 	}
@@ -434,7 +435,7 @@ public class JSFLibraryContainerWizardPage extends WizardPage implements
 	private JSFLibrary getJSFLibraryForEdit(
 			IClasspathEntry containerEntry_) {
 		if (currentLib == null){
-			String id = containerEntry_.getPath().segment(1);
+			String id = getLibraryId(containerEntry_);
 			currentLib = JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry().getJSFLibraryByID(id);	
 		}
 		return currentLib;
@@ -497,7 +498,7 @@ public class JSFLibraryContainerWizardPage extends WizardPage implements
 			boolean lib2Sel = getSelectedJSFLibariesForProject().get(lib2.getID())!= null;
 			
 			if ((lib1Sel && lib2Sel) || (!lib1Sel && !lib2Sel) ){
-				return getComparator().compare(lib1.getName(), lib2.getName());
+				return getComparator().compare(lib1.getLabel(), lib2.getLabel());
 			}
 			else if (lib1Sel)
 				return -1;
@@ -520,9 +521,9 @@ public class JSFLibraryContainerWizardPage extends WizardPage implements
 			if (element instanceof JSFLibrary) {
 				JSFLibrary lib = (JSFLibrary)element;
 				if (lib.isImplementation()) {
-					return lib.getName() + " [implementation]"; //$NON-NLS-1$
+					return lib.getLabel() + " " + IMPL_DESC; //$NON-NLS-1$
 				}
-                return lib.getName();
+                return lib.getLabel();
 			}
 			return null;
 		}

@@ -21,7 +21,6 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryFa
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryPackage;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.PluginProvidedJSFLibrary;
 
-
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Plugin Provided JSF Library</b></em>'.
@@ -30,6 +29,7 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.PluginProvidedJSFLib
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl.PluginProvidedJSFLibraryImpl#getPluginID <em>Plugin ID</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl.PluginProvidedJSFLibraryImpl#getLabel <em>Label</em>}</li>
  * </ul>
  * </p>
  *
@@ -63,6 +63,26 @@ public class PluginProvidedJSFLibraryImpl extends JSFLibraryImpl implements Plug
 	 * @ordered
 	 */
 	protected String pluginID = PLUGIN_ID_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getLabel() <em>Label</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLabel()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String LABEL_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getLabel() <em>Label</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLabel()
+	 * @generated
+	 * @ordered
+	 */
+	protected String label = LABEL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -108,6 +128,30 @@ public class PluginProvidedJSFLibraryImpl extends JSFLibraryImpl implements Plug
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return translatable label
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String getLabel() {
+		if (label == null)
+			return super.getLabel();
+		return label;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLabel(String newLabel) {
+		String oldLabel = label;
+		label = newLabel;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__LABEL, oldLabel, label));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -115,6 +159,8 @@ public class PluginProvidedJSFLibraryImpl extends JSFLibraryImpl implements Plug
 		switch (featureID) {
 			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__PLUGIN_ID:
 				return getPluginID();
+			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__LABEL:
+				return getLabel();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -128,6 +174,9 @@ public class PluginProvidedJSFLibraryImpl extends JSFLibraryImpl implements Plug
 		switch (featureID) {
 			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__PLUGIN_ID:
 				setPluginID((String)newValue);
+				return;
+			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__LABEL:
+				setLabel((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -143,6 +192,9 @@ public class PluginProvidedJSFLibraryImpl extends JSFLibraryImpl implements Plug
 			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__PLUGIN_ID:
 				setPluginID(PLUGIN_ID_EDEFAULT);
 				return;
+			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__LABEL:
+				setLabel(LABEL_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -156,6 +208,8 @@ public class PluginProvidedJSFLibraryImpl extends JSFLibraryImpl implements Plug
 		switch (featureID) {
 			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__PLUGIN_ID:
 				return PLUGIN_ID_EDEFAULT == null ? pluginID != null : !PLUGIN_ID_EDEFAULT.equals(pluginID);
+			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY__LABEL:
+				return LABEL_EDEFAULT == null ? label != null : !LABEL_EDEFAULT.equals(label);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -179,6 +233,7 @@ public class PluginProvidedJSFLibraryImpl extends JSFLibraryImpl implements Plug
 		PluginProvidedJSFLibrary workingCopyLib = JSFLibraryRegistryFactory.eINSTANCE.createPluginProvidedJSFLibrary();
 //		workingCopyLib.setID(getID());
 		workingCopyLib.setName(getName());
+		if (label != null) workingCopyLib.setLabel(getLabel());
 		workingCopyLib.setJSFVersion(getJSFVersion());
 		workingCopyLib.setDeployed(isDeployed());
 		workingCopyLib.setImplementation(isImplementation());
@@ -207,6 +262,8 @@ public class PluginProvidedJSFLibraryImpl extends JSFLibraryImpl implements Plug
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (pluginID: ");
 		result.append(pluginID);
+		result.append(", Label: ");
+		result.append(label);
 		result.append(')');
 		return result.toString();
 	}

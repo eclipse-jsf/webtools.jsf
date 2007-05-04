@@ -90,11 +90,11 @@ public class JSFLibraryRegistryAdapterFactory extends AdapterFactoryImpl {
 			public Object caseJSFLibrary(JSFLibrary object) {
 				return createJSFLibraryAdapter();
 			}
-			public Object caseArchiveFile(ArchiveFile object) {
-				return createArchiveFileAdapter();
-			}
 			public Object casePluginProvidedJSFLibrary(PluginProvidedJSFLibrary object) {
 				return createPluginProvidedJSFLibraryAdapter();
+			}
+			public Object caseArchiveFile(ArchiveFile object) {
+				return createArchiveFileAdapter();
 			}
 			public Object defaultCase(EObject object) {
 				return createEObjectAdapter();

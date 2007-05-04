@@ -33,7 +33,7 @@ public class JSFLibraryWizardPage extends WizardPage {
 	 * Constructor
 	 */
 	public JSFLibraryWizardPage(){
-		super("JSFLibrary");
+		super("JSFLibrary"); //$NON-NLS-1$
 	}
 
 	/**

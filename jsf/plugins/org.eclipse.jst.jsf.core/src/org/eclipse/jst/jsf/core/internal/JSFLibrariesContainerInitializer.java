@@ -8,6 +8,7 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryRegistryUtil;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
+import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFLibraryConfigurationHelper;
 
 /**
  * Initialize JSF Libraries as classpath containers
@@ -15,11 +16,8 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 public class JSFLibrariesContainerInitializer extends
 		ClasspathContainerInitializer {
 
-	/**
-	 * container id
-	 */
-	public static final String JSF_LIBRARY_CP_CONTAINER_ID="org.eclipse.jst.jsf.core.internal.jsflibrarycontainer";
-	
+	private static final String MISSING_LIBRARY = Messages.JSFLibrariesContainerInitializer_missing_library;
+
 	/**
 	 * Constructor
 	 */
@@ -35,7 +33,6 @@ public class JSFLibrariesContainerInitializer extends
 			String libId= containerPath.lastSegment();
 						
 			JSFLibrary ref= JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry().getJSFLibraryByID(libId);
-//			JSFLibraryReference ref= JSFLibraryRegistryUtil.getInstance().getJSFLibryReferencebyID(libId);
 			if (ref != null) {
 				JSFLibraryClasspathContainer container= new JSFLibraryClasspathContainer(ref);
 				JavaCore.setClasspathContainer(containerPath, new IJavaProject[] { project }, 	new IClasspathContainer[] { container }, null);
@@ -44,7 +41,7 @@ public class JSFLibrariesContainerInitializer extends
 	}
 	
 	private boolean isJSFLibraryContainer(IPath path) {
-		return path != null && path.segmentCount() == 2 && JSFLibrariesContainerInitializer.JSF_LIBRARY_CP_CONTAINER_ID.equals(path.segment(0));
+		return path != null && path.segmentCount() == 2 && JSFLibraryConfigurationHelper.JSF_LIBRARY_CP_CONTAINER_ID.equals(path.segment(0));
 	}
 
 	/* (non-Javadoc)
@@ -64,7 +61,7 @@ public class JSFLibrariesContainerInitializer extends
 			String displayText = id;
 
 			if (libref == null){
-				displayText = displayText + " (missing JSF Library)";
+				displayText = displayText + " " + MISSING_LIBRARY; //$NON-NLS-1$
 			}
 			
 			return displayText;

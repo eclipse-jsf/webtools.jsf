@@ -18,7 +18,7 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
  * 
  * @author Justin Chen - Oracle
  */
-public class JSFLibraryReference {
+public class JSFLibraryInternalReference {
 	final private JSFLibrary jsfLib;
 	private boolean check4Deploy;			// Initialized from default in workspace
 	private boolean selected; 				// selected for project
@@ -29,7 +29,7 @@ public class JSFLibraryReference {
 	 * @param selected boolean  true if selected, otherwise, not selected.
 	 * @param deploy boolean  true if needs to be deployed, otherwise, won't be deployed.
 	 */
-	public JSFLibraryReference(JSFLibrary jsfLib, boolean selected, boolean deploy) {
+	public JSFLibraryInternalReference(JSFLibrary jsfLib, boolean selected, boolean deploy) {
 		this.jsfLib = jsfLib;
 		this.selected = selected;
 		this.check4Deploy = deploy;		
@@ -64,7 +64,7 @@ public class JSFLibraryReference {
 	}
 
 	/**
-	 * Set the selected attribute to a JSFLibraryReference object.
+	 * Set the selected attribute to a JSFLibraryLibraryReference object.
 	 * 
 	 * @param selected boolean
 	 */
@@ -83,7 +83,7 @@ public class JSFLibraryReference {
 	}	
 	
 	/**
-	 * To generate a string that represents the JSFLibraryRefernce 
+	 * To generate a string that represents the JSFLibraryLibraryReference 
 	 * object for persistence. 
 	 * 
 	 * @return String
@@ -114,6 +114,16 @@ public class JSFLibraryReference {
 		return jsfLib.getName();
 	}
 
+	/**
+	 * Helper method to return the label for the library from the embedded 
+	 * JSFLibrary instance. 
+	 * 
+	 * @return name String
+	 */
+	public String getLabel() {
+		return jsfLib.getLabel();
+	}
+	
 	/**
 	 * Return true if the embedded JSF library instance i implementation. 
 	 * Otherwise, return false.

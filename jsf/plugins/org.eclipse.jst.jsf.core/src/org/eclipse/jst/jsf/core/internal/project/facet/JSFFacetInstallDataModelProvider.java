@@ -30,7 +30,8 @@ import org.eclipse.jst.j2ee.web.componentcore.util.WebArtifactEdit;
 import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.Messages;
-import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryReference;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryInternalReference;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryRegistryUtil;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.ArchiveFile;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.osgi.util.NLS;
@@ -70,7 +71,7 @@ public class JSFFacetInstallDataModelProvider extends
 
 	public Object getDefaultProperty(String propertyName) {
 		if (propertyName.equals(IMPLEMENTATION)) {
-			if (JSFCorePlugin.getDefault().getJSFLibraryRegistry() == null)
+			if (JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry() == null)
 				return null;
 			return getDefaultImplementationLibrary();//JSFCorePlugin.getDefault().getJSFLibraryRegistry().getDefaultImplementation();
 		} else if (propertyName.equals(DEPLOY_IMPLEMENTATION)) {
@@ -88,7 +89,7 @@ public class JSFFacetInstallDataModelProvider extends
 		} else if (propertyName.equals(WEBCONTENT_DIR)){
 			return "WebContent";  //not sure I need this
 		} else if (propertyName.equals(COMPONENT_LIBRARIES)) {
-			return new JSFLibraryReference[0];
+			return new JSFLibraryInternalReference[0];
 		} else if (propertyName.equals(IMPLEMENTATION_LIBRARIES)) {
 			return getDefaultJSFImplementationLibraries();
 		} else if (propertyName.equals(DEFAULT_IMPLEMENTATION_LIBRARY)) {
@@ -100,7 +101,7 @@ public class JSFFacetInstallDataModelProvider extends
 	public IStatus validate(String name) {
 		errorMessage = null;
 		if (name.equals(IMPLEMENTATION)) {
-			JSFLibraryReference lib = (JSFLibraryReference)getProperty(IMPLEMENTATION);
+			JSFLibraryInternalReference lib = (JSFLibraryInternalReference)getProperty(IMPLEMENTATION);
 			IStatus status = validateImpl(lib.getLibrary());
 			if (!OK_STATUS.equals(status))
 				return status;
@@ -211,9 +212,9 @@ public class JSFFacetInstallDataModelProvider extends
 		//else as we do not have a javaProject yet, all we can do is validate that there is no duplicate jars (absolute path)
 		
 		IStatus status = null;
-		JSFLibraryReference ref =  ((JSFLibraryReference)getProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION));
+		JSFLibraryInternalReference ref =  ((JSFLibraryInternalReference)getProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION));
 		if (ref != null){
-			status = checkForDupeArchiveFiles(jars, ((JSFLibraryReference)getProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION)).getLibrary());
+			status = checkForDupeArchiveFiles(jars, ((JSFLibraryInternalReference)getProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION)).getLibrary());
 			if (!OK_STATUS.equals(status)){
 				return status;
 			}
@@ -221,11 +222,11 @@ public class JSFFacetInstallDataModelProvider extends
 			return createErrorStatus("JSF Implementation library must be specified.");
 		}
 		
-		JSFLibraryReference[] compLibs = (JSFLibraryReference[]) getProperty(IJSFFacetInstallDataModelProperties.COMPONENT_LIBRARIES);
+		JSFLibraryInternalReference[] compLibs = (JSFLibraryInternalReference[]) getProperty(IJSFFacetInstallDataModelProperties.COMPONENT_LIBRARIES);
 		if (compLibs != null){
 			for (int i=0;i<compLibs.length;i++){
 				JSFLibrary lib = compLibs[i].getLibrary();
-				 status = checkForDupeArchiveFiles(jars, lib);
+				status = checkForDupeArchiveFiles(jars, lib);
 					if (!OK_STATUS.equals(status)){
 						return status;
 					}
@@ -246,22 +247,23 @@ public class JSFFacetInstallDataModelProvider extends
 		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(projName);
 		return project;
 	}
+	
 	private boolean doesProjectExist() {
 		IProject project = getProject();
 		return (project != null) && project.exists();
 	}
 
 	private IStatus checkForDupeArchiveFiles(Set jars,
-			JSFLibrary selectedJSFLibImplementation) {
-		if (selectedJSFLibImplementation == null)
+			JSFLibrary aJSFLib) {
+		if (aJSFLib == null)
 			return OK_STATUS;
 		
-		for (Iterator it=selectedJSFLibImplementation.getArchiveFiles().iterator();it.hasNext();){
+		for (Iterator it=aJSFLib.getArchiveFiles().iterator();it.hasNext();){
 			ArchiveFile jar = (ArchiveFile)it.next();
 			if (jars.contains(jar.getResolvedSourceLocation())){
 				return createErrorStatus("Duplicated jar on classpath: "+jar.getResolvedSourceLocation());				
 			}
-            jars.add(jar.getSourceLocation());
+            jars.add(jar.getResolvedSourceLocation());
 		}
 		return OK_STATUS;
 	}
@@ -311,20 +313,20 @@ public class JSFFacetInstallDataModelProvider extends
 	
 	private List getDefaultJSFImplementationLibraries() {
 		List list = new ArrayList();
-		if (JSFCorePlugin.getDefault().getJSFLibraryRegistry() != null) {
-			JSFLibrary jsfLib = JSFCorePlugin.getDefault().getJSFLibraryRegistry().getDefaultImplementation();
+		if (JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry() != null) {
+			JSFLibrary jsfLib = JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry().getDefaultImplementation();
 			if (jsfLib != null){
-				JSFLibraryReference prjJSFLib = new JSFLibraryReference(jsfLib, true, true);
+				JSFLibraryInternalReference prjJSFLib = new JSFLibraryInternalReference(jsfLib, true, true);
 				list.add(prjJSFLib);
 			}
 		}
 		return list;
 	}	
 	
-	private JSFLibraryReference getDefaultImplementationLibrary() {		
-		if (JSFCorePlugin.getDefault().getJSFLibraryRegistry() != null) {
-			JSFLibrary jsfLib = JSFCorePlugin.getDefault().getJSFLibraryRegistry().getDefaultImplementation();
-			return new JSFLibraryReference(jsfLib, true, true);	
+	private JSFLibraryInternalReference getDefaultImplementationLibrary() {		
+		if (JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry() != null) {
+			JSFLibrary jsfLib = JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry().getDefaultImplementation();
+			return new JSFLibraryInternalReference(jsfLib, true, true);	
 		}
 		return null;	
 	}	

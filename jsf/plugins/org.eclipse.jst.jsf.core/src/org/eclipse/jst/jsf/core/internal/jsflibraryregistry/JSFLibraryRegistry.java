@@ -119,8 +119,8 @@ public interface JSFLibraryRegistry extends EObject{
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param implementation 
 	 * <!-- end-user-doc -->
-	 * @param implementation library 
 	 * @model implementationRequired="true"
 	 * @generated
 	 */

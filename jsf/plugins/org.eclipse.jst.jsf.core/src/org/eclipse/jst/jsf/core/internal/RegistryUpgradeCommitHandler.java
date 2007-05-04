@@ -8,22 +8,22 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.util.JSFLibraryRegistryUpgradeUtil;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.util.UpgradeStatus;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.IStartup;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.browser.IWorkbenchBrowserSupport;
 
 /**
- * Startup controller that handles a situation where the existing JSF
- * Library registry is old and needs to be migrated.
- *
+ * Commits registry migration
  * @author cbateman
  *
  */
-public class RegistryMigrationStartupHandler implements IStartup
+public class RegistryUpgradeCommitHandler
 {
 
-    public void earlyStartup()
+    /**
+     * handle migration
+     */
+    public static void commitMigrationIfNecessary()
     {
         JSFLibraryRegistryUpgradeUtil upgradeUtil =
             JSFLibraryRegistryUpgradeUtil.getInstance();
@@ -43,12 +43,12 @@ public class RegistryMigrationStartupHandler implements IStartup
         }
     }
 
-    private void handle05_to_10(UpgradeStatus status)
+    private static void handle05_to_10(UpgradeStatus status)
     {
         PlatformUI.getWorkbench().getDisplay().asyncExec(new Handle05_to_10_migration(status));
     }
 
-    private void handleErrorInMigration(UpgradeStatus status)
+    private static void handleErrorInMigration(UpgradeStatus status)
     {
     	PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable()
     	{

@@ -9,31 +9,54 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.core.internal.jsflibraryconfig;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IExtension;
+import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.InvalidRegistryObjectException;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.QualifiedName;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.core.IClasspathContainer;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
-import org.eclipse.jst.jsf.core.internal.JSFLibrariesContainerInitializer;
 import org.eclipse.jst.jsf.core.internal.JSFLibraryClasspathContainer;
+import org.eclipse.jst.jsf.core.internal.Messages;
+import org.eclipse.jst.jsf.core.internal.RegistryUpgradeCommitHandler;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.ArchiveFile;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistry;
+import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryFactory;
+import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.adapter.MaintainDefaultImplementationAdapter;
+import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl.JSFLibraryRegistryPackageImpl;
+import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.util.JSFLibraryRegistryResourceFactoryImpl;
+import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.util.JSFLibraryRegistryResourceImpl;
+import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.util.JSFLibraryRegistryUpgradeUtil;
 import org.eclipse.jst.jsf.core.internal.project.facet.JSFUtils;
+import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFLibraryConfigurationHelper;
+import org.eclipse.jst.jsf.core.jsflibraryregistry.PluginProvidedJSFLibraryCreationHelper;
+import org.eclipse.jst.jsf.core.jsflibraryregistry.internal.PluginProvidedJSFLibraryCreationHelper2;
 
 /**
  * A singleton maintains lists of implementation and component libraries 
@@ -45,18 +68,33 @@ import org.eclipse.jst.jsf.core.internal.project.facet.JSFUtils;
  * The lists are updated when there are changes in JSF library registry.
  * 
  * @author Justin Chen, etc. - Oracle
- * TODO: consider making all methods static
  */
 public class JSFLibraryRegistryUtil {
-	private static JSFLibraryRegistryUtil instance = null;
+	private static JSFLibraryRegistryUtil instance = null;	
+	
 	private List implLibs = null;
 	private List compLibs = null;
+	
+
+	// The NS URI of the JSF Library Registry's Ecore package. (Must match
+	// setting on package in Ecore model.)
+	private static final String JSF_LIBRARY_REGISTRY_NSURI = "http://www.eclipse.org/webtools/jsf/schema/jsflibraryregistry.xsd"; //$NON-NLS-1$
+
+	private static final String LIB_EXT_PT 		= "pluginProvidedJsfLibraries"; //$NON-NLS-1$
+	//deprecated ext-pt
+	private static final String OLD_LIB_EXT_PT 	= "jsfLibraries"; //$NON-NLS-1$
+
+	// The JSF Library Registry EMF resource instance.
+	private static JSFLibraryRegistryResourceImpl jsfLibraryRegistryResource = null;
+	
+	//JSFLibraryRegistry singleton
+	private JSFLibraryRegistry jsfLibraryRegistry;
 	
 	/**
 	 * Private constructor
 	 */
 	private JSFLibraryRegistryUtil() {
-	    // no external instantiation
+	    //nothing to do
 	}
 	
 	/**
@@ -67,6 +105,7 @@ public class JSFLibraryRegistryUtil {
 	public synchronized static JSFLibraryRegistryUtil getInstance() {
 		if ( instance == null ) {
 			instance = new JSFLibraryRegistryUtil();
+			instance.loadJSFLibraryRegistry();
 		}
 		return instance;
 	}
@@ -77,16 +116,16 @@ public class JSFLibraryRegistryUtil {
 	 * @return jsfLibReg JSFLibraryRegistry
 	 */
 	public JSFLibraryRegistry getJSFLibraryRegistry() {
-		return JSFCorePlugin.getDefault().getJSFLibraryRegistry();
+		return jsfLibraryRegistry;
 	}
 	
 	/**
 	 * Get the default JSF implementation library instance.
 	 * A null is returned when there is no libraries in the registry.
 	 * 
-	 * @return JSFLibraryDecorator
+	 * @return JSFLibraryInternalReference
 	 */
-	public JSFLibraryReference getDefaultJSFImplementationLibrary() {
+	public JSFLibraryInternalReference getDefaultJSFImplementationLibrary() {
 		JSFLibrary dftImplLib = getJSFLibraryRegistry().getDefaultImplementation();
 		
 		return ((dftImplLib != null) ? 
@@ -139,13 +178,13 @@ public class JSFLibraryRegistryUtil {
 	 * @param id String
 	 * @return JSFLibraryDecorator
 	 */
-	public JSFLibraryReference getJSFLibraryReferencebyID(final String id) {
+	public JSFLibraryInternalReference getJSFLibraryReferencebyID(final String id) {
 		Iterator it = getJSFImplementationLibraries().iterator();
-		JSFLibraryReference crtItem = null;
+		JSFLibraryInternalReference crtItem = null;
 		
 		// search implementation libraries
 		while(it.hasNext()) {
-			crtItem = (JSFLibraryReference)it.next();
+			crtItem = (JSFLibraryInternalReference)it.next();
 			if (id.equals(crtItem.getID())) {
 				return crtItem;
 			}
@@ -153,7 +192,7 @@ public class JSFLibraryRegistryUtil {
 		// search component libraries
 		it = getJSFComponentLibraries().iterator();
 		while(it.hasNext()) {
-			crtItem = (JSFLibraryReference)it.next();
+			crtItem = (JSFLibraryInternalReference)it.next();
 			if (id.equals(crtItem.getID())) {
 				return crtItem;
 			}
@@ -166,9 +205,9 @@ public class JSFLibraryRegistryUtil {
 	 * JSF implementation libraries or component libraries.  
 	 * The decision is based on if a JSF library is an implementation.
 	 * 
-	 * @param library JSFLibraryReference
+	 * @param library JSFLibraryLibraryReference
 	 */
-	public void addJSFLibrary(final JSFLibraryReference library) {
+	public void addJSFLibrary(final JSFLibraryInternalReference library) {
 		 // Library is added only if it does not exist in registry 
 		if (library != null && getJSFLibraryRegistry().getJSFLibraryByID(library.getID()) == null) {
 			// Add the library working copy into workspace registry.
@@ -187,13 +226,13 @@ public class JSFLibraryRegistryUtil {
 		List list = new ArrayList();
 		if (libs != null) {
 			JSFLibrary jsfLib;
-			JSFLibraryReference jsfLibDctr;
+			JSFLibraryInternalReference jsfLibDctr;
 			
 			Iterator it = libs.iterator();
 			while (it.hasNext()) {
 				jsfLib = (JSFLibrary) it.next();
 				 // Set unselected and undeployed initially.
-				jsfLibDctr = new JSFLibraryReference(jsfLib, //.getWorkingCopy(), 
+				jsfLibDctr = new JSFLibraryInternalReference(jsfLib, //.getWorkingCopy(), 
 								false, 
 								false);
 				list.add(jsfLibDctr);
@@ -204,11 +243,11 @@ public class JSFLibraryRegistryUtil {
 
 	private boolean isAnyLibraryChanged(final List list) {
 		Iterator it = list.iterator();
-		JSFLibraryReference wclib = null;		// working copy library
+		JSFLibraryInternalReference wclib = null;		// working copy library
 		JSFLibrary lib = null;
 		
 		while(it.hasNext()) {
-			wclib = (JSFLibraryReference)it.next();
+			wclib = (JSFLibraryInternalReference)it.next();
 			lib = getJSFLibraryRegistry().getJSFLibraryByID(wclib.getID());
 			if (lib == null) {					// removed. Hence, changed.
 				return true;
@@ -296,8 +335,8 @@ public class JSFLibraryRegistryUtil {
 	public static void rebindClasspathContainerEntries(String oldId, String newId, boolean removeAndAddBecauseOfRename, IProgressMonitor monitor) throws JavaModelException {
 		IWorkspaceRoot root= ResourcesPlugin.getWorkspace().getRoot();
 		IJavaProject[] projects= JavaCore.create(root).getJavaProjects();
-		IPath containerPath= new Path(JSFLibrariesContainerInitializer.JSF_LIBRARY_CP_CONTAINER_ID).append(newId);
-		IPath oldContainerPath = new Path(JSFLibrariesContainerInitializer.JSF_LIBRARY_CP_CONTAINER_ID).append(oldId);
+		IPath containerPath= new Path(JSFLibraryConfigurationHelper.JSF_LIBRARY_CP_CONTAINER_ID).append(newId);
+		IPath oldContainerPath = new Path(JSFLibraryConfigurationHelper.JSF_LIBRARY_CP_CONTAINER_ID).append(oldId);
 		
 		JSFLibrary lib = JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry().getJSFLibraryByID(newId);
 		List affectedProjects= new ArrayList();
@@ -424,4 +463,142 @@ public class JSFLibraryRegistryUtil {
             }
 	    }
 	}
+	
+	/**
+	 * Loads the JSFLibraryRegistry EMF object from plugin-specfic workspace
+	 * settings location.
+	 */
+	private void loadJSFLibraryRegistry() {
+		try {
+			
+			EPackage.Registry.INSTANCE.put(JSF_LIBRARY_REGISTRY_NSURI, JSFLibraryRegistryPackageImpl.init());
+			URI jsfLibRegURI = JSFLibraryRegistryUpgradeUtil.getRegistryURI(JSFLibraryRegistryUpgradeUtil.JSF_LIBRARY_REGISTRY_LATESTVERSION_URL);			
+			JSFLibraryRegistryUpgradeUtil.getInstance().upgradeRegistryIfNecessary(JSFLibraryRegistryUpgradeUtil.LATESTVERSION);
+
+			JSFLibraryRegistryResourceFactoryImpl resourceFactory = new JSFLibraryRegistryResourceFactoryImpl();
+			jsfLibraryRegistryResource = (JSFLibraryRegistryResourceImpl)resourceFactory.createResource(jsfLibRegURI);
+			try {
+				Map options = new HashMap();
+				//disable notifications during load to avoid changing stored default implementation
+				options.put(XMLResource.OPTION_DISABLE_NOTIFY, Boolean.TRUE);
+				jsfLibraryRegistryResource.load(options);
+				jsfLibraryRegistry = (JSFLibraryRegistry)jsfLibraryRegistryResource.getContents().get(0);
+			 	
+				loadJSFLibraryExtensions();
+				loadDeprecatedJSFLibraryExtensions();//to be removed 
+				
+			} catch(IOException ioe) {
+				//Create a new Registry instance
+				jsfLibraryRegistry = JSFLibraryRegistryFactory.eINSTANCE.createJSFLibraryRegistry();
+				jsfLibraryRegistryResource = (JSFLibraryRegistryResourceImpl)resourceFactory.createResource(jsfLibRegURI);
+				jsfLibraryRegistryResource.getContents().add(jsfLibraryRegistry);
+				loadJSFLibraryExtensions();
+				loadDeprecatedJSFLibraryExtensions();//to be removed 
+				saveJSFLibraryRegistry();
+			}
+			//add adapter to maintain default implementation
+			if (jsfLibraryRegistry != null) {				
+				//check that a default impl is set.   if not pick first one if available.
+				JSFLibrary defLib = jsfLibraryRegistry.getDefaultImplementation();
+				if (defLib == null && jsfLibraryRegistry.getImplJSFLibraries().size() > 0){
+					jsfLibraryRegistry.setDefaultImplementation((JSFLibrary)jsfLibraryRegistry.getImplJSFLibraries().get(0));
+					saveJSFLibraryRegistry();
+				}
+				jsfLibraryRegistry.eAdapters().add(MaintainDefaultImplementationAdapter.getInstance());
+				
+				//commit 
+				RegistryUpgradeCommitHandler.commitMigrationIfNecessary();
+			}
+		} catch(MalformedURLException mue) {
+			JSFCorePlugin.log(IStatus.ERROR, Messages.JSFLibraryRegistry_ErrorCreatingURL, mue);
+		}
+	}
+/////////////////////////////////   Load and Save JSF Library Registry ////////////////////////////////////////////////
+	
+	/**
+	 * Creates library registry items from extension points.
+	 */
+	private void loadJSFLibraryExtensions() {
+		try {
+			IExtensionPoint point = Platform.getExtensionRegistry().getExtensionPoint(JSFCorePlugin.PLUGIN_ID, LIB_EXT_PT);
+			IExtension[] extensions = point.getExtensions();
+			for (int i=0;i < extensions.length;i++){
+				IExtension ext = extensions[i];
+				for (int j=0;j < ext.getConfigurationElements().length;j++){
+					PluginProvidedJSFLibraryCreationHelper2 newLibCreator = new PluginProvidedJSFLibraryCreationHelper2(ext.getConfigurationElements()[j]);						
+					JSFLibrary newLib = newLibCreator.create();
+					
+					/**
+					 * Additional check on if a plug-in contributes jsflibraries is an expanded folder.
+					 * Fix related to bug 144954.  
+					 * 
+					 * It would be ideal to check if a plug-in is distributed as a JAR 
+					 * before a JSFLibrary is created.
+					 * 
+					 * This is a temporary solution since JARs in a JAR case is not 
+					 * supported in this release.  Bug 14496.
+					 */
+					if (newLib != null) //&& isJSFLibinExpandedFolder(newLib))
+						jsfLibraryRegistry.addJSFLibrary(newLib);
+				}
+			}
+		} catch (InvalidRegistryObjectException e) {
+			JSFCorePlugin.log(IStatus.ERROR, Messages.JSFLibraryRegistry_ErrorLoadingFromExtPt, e);
+		}
+	}
+	
+	/**
+	 * Creates deprecated library registry items from extension points.
+	 * TO BE REMOVED
+	 */
+	private void loadDeprecatedJSFLibraryExtensions() {
+		try {
+			IExtensionPoint point = Platform.getExtensionRegistry().getExtensionPoint(JSFCorePlugin.PLUGIN_ID, OLD_LIB_EXT_PT);
+			IExtension[] extensions = point.getExtensions();
+			for (int i=0;i < extensions.length;i++){
+				IExtension ext = extensions[i];
+				for (int j=0;j < ext.getConfigurationElements().length;j++){
+					PluginProvidedJSFLibraryCreationHelper newLibCreator = new PluginProvidedJSFLibraryCreationHelper(ext.getConfigurationElements()[j]);						
+					JSFLibrary newLib = newLibCreator.create();
+					
+					/**
+					 * Additional check on if a plug-in contributes jsflibraries is an expanded folder.
+					 * Fix related to bug 144954.  
+					 * 
+					 * It would be ideal to check if a plug-in is distributed as a JAR 
+					 * before a JSFLibrary is created.
+					 * 
+					 * This is a temporary solution since JARs in a JAR case is not 
+					 * supported in this release.  Bug 14496.
+					 */
+					if (newLib != null ) //&& isJSFLibinExpandedFolder(newLib))
+						jsfLibraryRegistry.addJSFLibrary(newLib);
+				}
+			}
+		} catch (InvalidRegistryObjectException e) {
+			JSFCorePlugin.log(IStatus.ERROR, Messages.JSFLibraryRegistry_ErrorLoadingFromExtPt, e);
+		}
+	}
+	
+	/**
+	 * Saves the JSFLibraryRegistry EMF object from plugin-specfic workspace
+	 * settings location. (Called from stop(BundleContext).)
+	 * @return true if save is successful
+	 */
+	public boolean saveJSFLibraryRegistry() {
+		boolean saved = false;
+		if (jsfLibraryRegistryResource != null) {
+			try {
+				jsfLibraryRegistryResource.save(Collections.EMPTY_MAP);
+				saved = true;
+			} catch(IOException ioe) {
+				JSFCorePlugin.log(IStatus.ERROR, Messages.JSFLibraryRegistry_ErrorSaving, ioe);
+			}
+		} else {
+			JSFCorePlugin.log(IStatus.ERROR, Messages.JSFLibraryRegistry_ErrorSaving);
+		}
+		return saved;
+	}
+
+
 }

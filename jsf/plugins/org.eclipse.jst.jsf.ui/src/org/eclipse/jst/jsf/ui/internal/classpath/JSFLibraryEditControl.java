@@ -17,7 +17,7 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryRegistryUtil;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.ArchiveFile;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryFactory;
@@ -45,6 +45,7 @@ import org.eclipse.swt.widgets.Text;
  * Common control for adding JSF library instances
  */
 public class JSFLibraryEditControl extends Composite implements ModifyListener, SelectionListener {
+	private static final String MISSING = Messages.JSFLibrariesPreferencePage_MISSING_DESC;
 	private Text txtName;
 	private Label lblName;
 	private CCombo cboVersions;
@@ -197,7 +198,7 @@ public class JSFLibraryEditControl extends Composite implements ModifyListener, 
 					ArchiveFile archive = (ArchiveFile) element;
 					labelBuf.append(archive.getName());	
 					if (!archive.exists())
-						labelBuf.append("[missing]"); //$NON-NLS-1$
+						labelBuf.append(MISSING); 
 					labelBuf.append(" - ").append(archive.getPath()); //$NON-NLS-1$
 				}
 				return labelBuf.toString();
@@ -400,7 +401,7 @@ public class JSFLibraryEditControl extends Composite implements ModifyListener, 
 		}
 		String aName = txtName.getText().trim();
 		if (isNew() || (!isNew() && !getCurrentLibraryName().equals(aName))) {
-			if (isNameInRegistry(JSFCorePlugin.getDefault()
+			if (isNameInRegistry(JSFLibraryRegistryUtil.getInstance()
 					.getJSFLibraryRegistry().getAllJSFLibraries(), aName)) {
 				validationMsg = Messages.JSFLibraryWizard_ValidateExistingLibraryName;
 				return false;

@@ -3,11 +3,10 @@
 <schema targetNamespace="org.eclipse.jst.jsf.core">
 <annotation>
       <appInfo>
-         <meta.schema plugin="org.eclipse.jst.jsf.core" id="jsfLibraries" name="JSF Libraries"/>
+         <meta.schema plugin="org.eclipse.jst.jsf.core" id="pluginProvidedJsfLibraries" name="JSF Libraries"/>
       </appInfo>
       <documentation>
          This extension point allows clients to create named sets of jars for use with JavaServer Faces Applications.
-&lt;b&gt;Deprecated&lt;/b&gt; - adopters should now use &lt;code&gt;org.eclipse.jst.jsf.core.pluginProvidedJsfLibraries&lt;/code&gt;
       </documentation>
    </annotation>
 
@@ -45,6 +44,9 @@
 
    <element name="jsfLibrary">
       <annotation>
+         <appInfo>
+            <meta.element labelAttribute="name"/>
+         </appInfo>
          <documentation>
             A named collection of jars that will be added to the classpath as a classpath container to a project that references it.
          </documentation>
@@ -53,8 +55,18 @@
          <attribute name="name" type="string" use="required">
             <annotation>
                <documentation>
-                  A unique name for the library.
+                  A unique, non-translatable, name for the library.  The plugin developer is responsible for ensuring uniqueness within the plugin.  This name, in combination with the plugin id, is used to identify the classpath container reference.
                </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="label" type="string">
+            <annotation>
+               <documentation>
+                  Translatable string for displaying the library name.
+               </documentation>
+               <appInfo>
+                  <meta.attribute translatable="true"/>
+               </appInfo>
             </annotation>
          </attribute>
          <attribute name="isImplementation" type="boolean" use="required">
@@ -84,10 +96,10 @@
          <attribute name="archiveFilesDelegate" type="string" use="required">
             <annotation>
                <documentation>
-                  class that must extend org.eclipse.jst.jsf.core.jsflibraryregistry.JSFLibraryArchiveFilesDelegate to supply a collection of ArchiveFiles for the library
+                  class that must extend org.eclipse.jst.jsf.core.jsflibraryregistry.JSFLibraryArchiveFilesDelegate to supply a collection of IPaths to jars in the library
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn="org.eclipse.jst.jsf.core.jsflibraryregistry.JSFLibraryArchiveFilesDelegate"/>
+                  <meta.attribute kind="java" basedOn="org.eclipse.jst.jsf.core.jsflibraryregistry.PluginProvidedJSFLibraryArchiveFilesDelegate"/>
                </appInfo>
             </annotation>
          </attribute>
@@ -99,7 +111,7 @@
          <meta.section type="since"/>
       </appInfo>
       <documentation>
-         JSF M10
+         JSF 1.0
       </documentation>
    </annotation>
 
@@ -112,9 +124,10 @@
 
 &lt;p&gt;
 &lt;pre&gt;
-  &lt;extension point=&quot;org.eclipse.jst.jsf.core.jsfLibraries&quot;&gt;
+  &lt;extension point=&quot;org.eclipse.jst.jsf.core.pluginProvidedJsfLibraries&quot;&gt;
     &lt;jsfLibrary       
        name=&quot;MyComponentLib1&quot;
+       label=&quot;%MyComponentLib1.translatableLabel&quot;
        isImplementation=&quot;false&quot;
        maxVersionSupported=&quot;v1_1&quot;
        archiveFilesDelegate=&quot;com.acme.jsf.libraries.MyComponentLibraryFiles&quot;/&gt;
@@ -129,7 +142,7 @@
          <meta.section type="apiInfo"/>
       </appInfo>
       <documentation>
-         Value of the attribute class must be a fully qualified name of a Java class that extends the abstract class &lt;code&gt;org.eclipse.jst.jsf.core.jsflibraryregistry.JSFLibraryArchiveFilesDelegate&lt;/code&gt; and has a public 0-arg constructor.
+         Value of the attribute class must be a fully qualified name of a Java class that extends the abstract class &lt;code&gt;org.eclipse.jst.jsf.core.jsflibraryregistry.PluginProvidedJSFLibraryJarFilesDelegate&lt;/code&gt; and has a public 0-arg constructor.
       </documentation>
    </annotation>
 
@@ -147,7 +160,7 @@
          <meta.section type="copyright"/>
       </appInfo>
       <documentation>
-         Copyright (c) 2005, 2007 Oracle Corporation.
+         Copyright (c) 2007 Oracle Corporation.
 All rights reserved. This program and the accompanying materials
 are made available under the terms of the Eclipse Public License v1.0
 which accompanies this distribution, and is available at

@@ -28,7 +28,6 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistry;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryPackage;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.PluginProvidedJSFLibrary;
 
-
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>JSF Library Registry</b></em>'.
@@ -80,7 +79,7 @@ public class JSFLibraryRegistryImpl extends EObjectImpl implements JSFLibraryReg
 	 * @generated
 	 * @ordered
 	 */
-	protected EList jsfLibraries = null;
+	protected EList jsfLibraries;
 
 	/**
 	 * The cached value of the '{@link #getPluginProvidedJSFLibraries() <em>Plugin Provided JSF Libraries</em>}' containment reference list.
@@ -90,7 +89,7 @@ public class JSFLibraryRegistryImpl extends EObjectImpl implements JSFLibraryReg
 	 * @generated
 	 * @ordered
 	 */
-	protected EList pluginProvidedJSFLibraries = null;
+	protected EList pluginProvidedJSFLibraries;
 
 	/**
 	 * <!-- begin-user-doc -->

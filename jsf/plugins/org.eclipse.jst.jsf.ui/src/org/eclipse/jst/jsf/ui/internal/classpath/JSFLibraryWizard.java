@@ -24,7 +24,6 @@ import org.eclipse.jface.dialogs.MessageDialogWithToggle;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.jface.wizard.WizardPage;
-import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryRegistryUtil;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryFactory;
@@ -207,7 +206,7 @@ public class JSFLibraryWizard extends Wizard implements INewWizard {
 		final String originalID = curLibrary != null ? curLibrary.getID() :workingCopyLibrary.getID();
 		
 		if (isNew){
-			JSFCorePlugin.getDefault().getJSFLibraryRegistry().addJSFLibrary(workingCopyLibrary);
+			JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry().addJSFLibrary(workingCopyLibrary);
 		}
 		else {
 			curLibrary.updateValues(workingCopyLibrary);
@@ -217,7 +216,7 @@ public class JSFLibraryWizard extends Wizard implements INewWizard {
 				JSFUiPlugin.log(IStatus.ERROR, "Exception while updating JSF Library containers", e); //$NON-NLS-1$
 			}
 		}
-		JSFCorePlugin.getDefault().saveJSFLibraryRegistry();
+		JSFLibraryRegistryUtil.getInstance().saveJSFLibraryRegistry();
 		return true;
 	}
 

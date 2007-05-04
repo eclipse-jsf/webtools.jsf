@@ -20,6 +20,7 @@ package org.eclipse.jst.jsf.core.internal.jsflibraryregistry;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.jst.jsf.core.internal.jsflibraryregistry.PluginProvidedJSFLibrary#getPluginID <em>Plugin ID</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.core.internal.jsflibraryregistry.PluginProvidedJSFLibrary#getLabel <em>Label</em>}</li>
  * </ul>
  * </p>
  *
@@ -64,5 +65,31 @@ public interface PluginProvidedJSFLibrary extends JSFLibrary{
 	 * @generated
 	 */
 	void setPluginID(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Label</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Label</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Label</em>' attribute.
+	 * @see #setLabel(String)
+	 * @see org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryPackage#getPluginProvidedJSFLibrary_Label()
+	 * @model required="true"
+	 * @generated
+	 */
+	String getLabel();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.core.internal.jsflibraryregistry.PluginProvidedJSFLibrary#getLabel <em>Label</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Label</em>' attribute.
+	 * @see #getLabel()
+	 * @generated
+	 */
+	void setLabel(String value);
 
 } // PluginProvidedJSFLibrary

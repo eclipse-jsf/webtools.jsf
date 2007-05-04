@@ -90,7 +90,7 @@ public class JSFELContentAssistProcessor implements IContentAssistProcessor
                             }
                             else if (DOMJSPRegionContexts.JSP_VBL_OPEN.equals(prevResolver.getRegionType()))
                             {
-                                elText = "";
+                                elText = ""; //$NON-NLS-1$
                             }
 						}
 					}

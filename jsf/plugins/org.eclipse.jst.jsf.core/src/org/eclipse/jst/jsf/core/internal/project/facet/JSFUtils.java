@@ -430,7 +430,7 @@ public class JSFUtils {
 	private static void logErroronMissingJAR(JSFLibrary jsfLib, ArchiveFile ar) {
 		String msg = NLS.bind(Messages.JSFUtils_MissingJAR, 
 						ar.getName(),
-						jsfLib.getName());
+						jsfLib.getLabel());
 		JSFCorePlugin.log(IStatus.ERROR, msg);
 	}
 	

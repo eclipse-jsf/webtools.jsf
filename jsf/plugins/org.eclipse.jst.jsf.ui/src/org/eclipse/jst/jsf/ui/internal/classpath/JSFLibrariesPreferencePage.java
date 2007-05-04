@@ -30,7 +30,7 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerComparator;
 import org.eclipse.jface.window.Window;
 import org.eclipse.jface.wizard.WizardDialog;
-import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryRegistryUtil;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.ArchiveFile;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.PluginProvidedJSFLibrary;
@@ -57,6 +57,10 @@ import org.eclipse.ui.IWorkbenchWizard;
  * @author Gerry Kessler - Oracle
  */
 public class JSFLibrariesPreferencePage extends PreferencePage implements IWorkbenchPreferencePage{
+	private static final String IMPL_DESC = Messages.JSFLibrariesPreferencePage_IMPL_DESC;
+	private static final String DEFAULT_IMPL_DESC = Messages.JSFLibrariesPreferencePage_DEFAULT_IMPL_DESC;
+	private static final String MISSING = Messages.JSFLibrariesPreferencePage_MISSING_DESC;
+	
 	private IWorkbench wb;
 
 	private TreeViewer tv;
@@ -148,12 +152,12 @@ public class JSFLibrariesPreferencePage extends PreferencePage implements IWorkb
 										Messages.JSFLibrariesPreferencePage_CannotRemovePluginProvidedMessage);
 	
 							else {
-								JSFCorePlugin.getDefault().getJSFLibraryRegistry().removeJSFLibrary(lib);
+								JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry().removeJSFLibrary(lib);
 								modified = true;
 							}
 						}
 						if (modified){
-							JSFCorePlugin.getDefault().saveJSFLibraryRegistry();
+							JSFLibraryRegistryUtil.getInstance().saveJSFLibraryRegistry();
 							tv.refresh();
 						}
 					}
@@ -172,9 +176,9 @@ public class JSFLibrariesPreferencePage extends PreferencePage implements IWorkb
 					if (objs != null){
 						if (objs.getFirstElement() instanceof JSFLibrary){
 							 JSFLibrary lib = (JSFLibrary)objs.getFirstElement();
-							 JSFCorePlugin.getDefault().getJSFLibraryRegistry().setDefaultImplementation(lib);							 							
+							 JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry().setDefaultImplementation(lib);							 							
 						 }
-						 JSFCorePlugin.getDefault().saveJSFLibraryRegistry();
+						 JSFLibraryRegistryUtil.getInstance().saveJSFLibraryRegistry();
 						 tv.refresh();
 					}
 				}
@@ -183,7 +187,7 @@ public class JSFLibrariesPreferencePage extends PreferencePage implements IWorkb
 		
 	}
 	private Object getJSFLibraries() {
-		return JSFCorePlugin.getDefault().getJSFLibraryRegistry().getAllJSFLibraries();
+		return JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry().getAllJSFLibraries();
 	}
 
 	public void init(IWorkbench workbench) {
@@ -256,7 +260,7 @@ public class JSFLibrariesPreferencePage extends PreferencePage implements IWorkb
 				JSFLibrary lib1 = (JSFLibrary)e1;
 				JSFLibrary lib2 = (JSFLibrary)e2;
 				
-				return getComparator().compare(lib1.getName(), lib2.getName());
+				return getComparator().compare(lib1.getLabel(), lib2.getLabel());
 			}
 			return super.compare(viewer, e1, e2);
 		}
@@ -363,20 +367,20 @@ public class JSFLibrariesPreferencePage extends PreferencePage implements IWorkb
 			StringBuffer labelBuf = new StringBuffer();
 			if (element instanceof JSFLibrary) {
 				JSFLibrary lib = (JSFLibrary)element;
-				labelBuf.append(lib.getName());
+				labelBuf.append(lib.getLabel());
 				if (lib.isImplementation()) {
-					labelBuf.append(" [implementation"); //$NON-NLS-1$
-					if (lib == JSFCorePlugin.getDefault().getJSFLibraryRegistry().getDefaultImplementation()) {
-						labelBuf.append(" - default"); //$NON-NLS-1$
+					if (lib == JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry().getDefaultImplementation()) {
+						labelBuf.append(DEFAULT_IMPL_DESC);
+					} else {
+						labelBuf.append(IMPL_DESC);
 					}
-					labelBuf.append("]"); //$NON-NLS-1$
 				}
 			}
 			if (element instanceof ArchiveFile) {
 				ArchiveFile jar = (ArchiveFile)element;
 				labelBuf.append(jar.getName());
 				if (!jar.exists())
-					labelBuf.append("[missing]"); //$NON-NLS-1$
+					labelBuf.append(MISSING);
 				labelBuf.append(" - ").append(((ArchiveFile)element).getSourceLocation()); //$NON-NLS-1$
 			}
 			return labelBuf.toString();

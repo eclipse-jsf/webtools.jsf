@@ -23,7 +23,7 @@ import org.eclipse.jface.window.Window;
 import org.eclipse.jst.j2ee.project.facet.IJ2EEModuleFacetInstallDataModelProperties;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfigDialogSettingData;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfiglModelSource;
-import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryReference;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryInternalReference;
 import org.eclipse.jst.jsf.core.internal.project.facet.IJSFFacetInstallDataModelProperties;
 import org.eclipse.jst.jsf.ui.internal.JSFUiPlugin;
 import org.eclipse.jst.jsf.ui.internal.Messages;
@@ -355,14 +355,14 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 		 * Iterate thru the selected component libraries and return selected
 		 * component libraries and their deployment flags in a string array.
 		 */
-		JSFLibraryReference complib = null;
+		JSFLibraryInternalReference complib = null;
 		String str = null;
 		ArrayList al = new ArrayList();
 
 		java.util.List list = jsfLibCfgComp.getSelectedJSFLibComponents();
 		Iterator it = list.iterator();
 		while (it.hasNext()) {
-			complib = (JSFLibraryReference) it.next();
+			complib = (JSFLibraryInternalReference) it.next();
 			str = complib.getID() + SEPARATOR + complib.isCheckedToBeDeployed();
 			al.add(str);
 		}

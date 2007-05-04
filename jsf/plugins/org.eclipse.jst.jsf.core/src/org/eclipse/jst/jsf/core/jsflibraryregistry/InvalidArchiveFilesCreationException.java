@@ -13,7 +13,7 @@ package org.eclipse.jst.jsf.core.jsflibraryregistry;
 /**
  * Exception class thrown by PluginProvidedJSFLibraryCreationHelper.
  * 
- * @author Gerry Kessler - Oracle
+ * @deprecated
  */
 public class InvalidArchiveFilesCreationException extends Exception {
 	private static final long serialVersionUID = 1L;

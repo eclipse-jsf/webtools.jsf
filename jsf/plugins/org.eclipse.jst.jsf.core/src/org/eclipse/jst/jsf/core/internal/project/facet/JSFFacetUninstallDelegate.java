@@ -28,7 +28,7 @@ import org.eclipse.jst.j2ee.webapplication.ContextParam;
 import org.eclipse.jst.j2ee.webapplication.Servlet;
 import org.eclipse.jst.j2ee.webapplication.WebApp;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
-import org.eclipse.jst.jsf.core.internal.JSFLibrariesContainerInitializer;
+import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFLibraryConfigurationHelper;
 import org.eclipse.wst.common.project.facet.core.IDelegate;
 import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
 
@@ -81,7 +81,7 @@ public class JSFFacetUninstallDelegate implements IDelegate {
 				 IClasspathEntry entry = entries[i];
 				 if (entry.getEntryKind() == IClasspathEntry.CPE_CONTAINER && 
 						 ! entry.getPath().segment(0)
-						 	.equals(JSFLibrariesContainerInitializer.JSF_LIBRARY_CP_CONTAINER_ID))
+						 	.equals(JSFLibraryConfigurationHelper.JSF_LIBRARY_CP_CONTAINER_ID))
 					 keptEntries.add(entry);
 			 }
 		} catch (JavaModelException e) {

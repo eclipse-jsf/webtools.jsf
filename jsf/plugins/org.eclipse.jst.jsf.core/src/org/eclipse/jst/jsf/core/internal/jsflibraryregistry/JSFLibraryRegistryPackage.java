@@ -198,52 +198,7 @@ public interface JSFLibraryRegistryPackage extends EPackage{
 	 * @see org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl.JSFLibraryRegistryPackageImpl#getArchiveFile()
 	 * @generated
 	 */
-	int ARCHIVE_FILE = 2;
-
-	/**
-	 * The feature id for the '<em><b>Relative To Workspace</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARCHIVE_FILE__RELATIVE_TO_WORKSPACE = 0;
-
-	/**
-	 * The feature id for the '<em><b>Source Location</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARCHIVE_FILE__SOURCE_LOCATION = 1;
-
-	/**
-	 * The feature id for the '<em><b>Relative Dest Location</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARCHIVE_FILE__RELATIVE_DEST_LOCATION = 2;
-
-	/**
-	 * The feature id for the '<em><b>JSF Library</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARCHIVE_FILE__JSF_LIBRARY = 3;
-
-	/**
-	 * The number of structural features of the '<em>Archive File</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARCHIVE_FILE_FEATURE_COUNT = 4;
+	int ARCHIVE_FILE = 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl.PluginProvidedJSFLibraryImpl <em>Plugin Provided JSF Library</em>}' class.
@@ -253,7 +208,7 @@ public interface JSFLibraryRegistryPackage extends EPackage{
 	 * @see org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl.JSFLibraryRegistryPackageImpl#getPluginProvidedJSFLibrary()
 	 * @generated
 	 */
-	int PLUGIN_PROVIDED_JSF_LIBRARY = 3;
+	int PLUGIN_PROVIDED_JSF_LIBRARY = 2;
 
 	/**
 	 * The feature id for the '<em><b>ID</b></em>' attribute.
@@ -319,13 +274,67 @@ public interface JSFLibraryRegistryPackage extends EPackage{
 	int PLUGIN_PROVIDED_JSF_LIBRARY__PLUGIN_ID = JSF_LIBRARY_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PLUGIN_PROVIDED_JSF_LIBRARY__LABEL = JSF_LIBRARY_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Plugin Provided JSF Library</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PLUGIN_PROVIDED_JSF_LIBRARY_FEATURE_COUNT = JSF_LIBRARY_FEATURE_COUNT + 1;
+	int PLUGIN_PROVIDED_JSF_LIBRARY_FEATURE_COUNT = JSF_LIBRARY_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Relative To Workspace</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARCHIVE_FILE__RELATIVE_TO_WORKSPACE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Source Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARCHIVE_FILE__SOURCE_LOCATION = 1;
+
+	/**
+	 * The feature id for the '<em><b>Relative Dest Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARCHIVE_FILE__RELATIVE_DEST_LOCATION = 2;
+
+	/**
+	 * The feature id for the '<em><b>JSF Library</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARCHIVE_FILE__JSF_LIBRARY = 3;
+
+	/**
+	 * The number of structural features of the '<em>Archive File</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARCHIVE_FILE_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFVersion <em>JSF Version</em>}' enum.
@@ -533,6 +542,17 @@ public interface JSFLibraryRegistryPackage extends EPackage{
 	EAttribute getPluginProvidedJSFLibrary_PluginID();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.core.internal.jsflibraryregistry.PluginProvidedJSFLibrary#getLabel <em>Label</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Label</em>'.
+	 * @see org.eclipse.jst.jsf.core.internal.jsflibraryregistry.PluginProvidedJSFLibrary#getLabel()
+	 * @see #getPluginProvidedJSFLibrary()
+	 * @generated
+	 */
+	EAttribute getPluginProvidedJSFLibrary_Label();
+
+	/**
 	 * Returns the meta object for enum '{@link org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFVersion <em>JSF Version</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -733,6 +753,15 @@ public interface JSFLibraryRegistryPackage extends EPackage{
 		 */
         @SuppressWarnings("hiding")
 		EAttribute PLUGIN_PROVIDED_JSF_LIBRARY__PLUGIN_ID = eINSTANCE.getPluginProvidedJSFLibrary_PluginID();
+
+		/**
+		 * The meta object literal for the '<em><b>Label</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		@SuppressWarnings("hiding")
+		EAttribute PLUGIN_PROVIDED_JSF_LIBRARY__LABEL = eINSTANCE.getPluginProvidedJSFLibrary_Label();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFVersion <em>JSF Version</em>}' enum.

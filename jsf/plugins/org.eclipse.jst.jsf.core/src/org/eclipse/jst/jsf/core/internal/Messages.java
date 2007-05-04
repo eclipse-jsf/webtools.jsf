@@ -27,6 +27,21 @@ public class Messages extends NLS {
 	 */
 	public static String JSFLibCfgDialogSettingData_Sticky_Component_Lib_Not_Exist;
 
+	/**
+	 * see messages.properties
+	 */
+	public static String JSFLibrariesContainerInitializer_missing_library;
+
+	/**
+	 * see messages.properties
+	 */
+	public static String JSFLibraryClasspathContainer_IMPL_LIBRARY;
+
+	/**
+	 * see messages.properties
+	 */
+	public static String JSFLibraryClasspathContainer_NON_IMPL_LIBRARY;
+
     /**
      * see messages.properties
      */

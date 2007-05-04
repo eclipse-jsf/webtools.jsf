@@ -224,4 +224,13 @@ public interface JSFLibrary extends EObject{
 	 */
 	boolean copyTo(String baseDestLocation);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * @return label
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" required="true"
+	 * @generated
+	 */
+	String getLabel();
+
 } // JSFLibrary

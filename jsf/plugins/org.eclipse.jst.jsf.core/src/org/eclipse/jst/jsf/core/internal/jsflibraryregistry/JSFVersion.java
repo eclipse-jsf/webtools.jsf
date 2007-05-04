@@ -34,6 +34,21 @@ public final class JSFVersion extends AbstractEnumerator {
 	public static final String copyright = "Copyright (c) 2005 Oracle Corporation";
 
 	/**
+	 * The '<em><b>UNKNOWN</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>UNKNOWN</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #UNKNOWN_LITERAL
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int UNKNOWN = -1;
+
+	/**
 	 * The '<em><b>V1 1</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -64,19 +79,14 @@ public final class JSFVersion extends AbstractEnumerator {
 	public static final int V1_2 = 2;
 
 	/**
-	 * The '<em><b>UNKNOWN</b></em>' literal value.
+	 * The '<em><b>UNKNOWN</b></em>' literal object.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>UNKNOWN</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #UNKNOWN_LITERAL
-	 * @model
+	 * @see #UNKNOWN
 	 * @generated
 	 * @ordered
 	 */
-	public static final int UNKNOWN = -1;
+	public static final JSFVersion UNKNOWN_LITERAL = new JSFVersion(UNKNOWN, "UNKNOWN", "UNKNOWN");
 
 	/**
 	 * The '<em><b>V1 1</b></em>' literal object.
@@ -99,16 +109,6 @@ public final class JSFVersion extends AbstractEnumerator {
 	public static final JSFVersion V1_2_LITERAL = new JSFVersion(V1_2, "v1_2", "v1_2");
 
 	/**
-	 * The '<em><b>UNKNOWN</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #UNKNOWN
-	 * @generated
-	 * @ordered
-	 */
-	public static final JSFVersion UNKNOWN_LITERAL = new JSFVersion(UNKNOWN, "UNKNOWN", "UNKNOWN");
-
-	/**
 	 * An array of all the '<em><b>JSF Version</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -116,9 +116,9 @@ public final class JSFVersion extends AbstractEnumerator {
 	 */
 	private static final JSFVersion[] VALUES_ARRAY =
 		new JSFVersion[] {
+			UNKNOWN_LITERAL,
 			V1_1_LITERAL,
 			V1_2_LITERAL,
-			UNKNOWN_LITERAL,
 		};
 
 	/**
@@ -175,9 +175,9 @@ public final class JSFVersion extends AbstractEnumerator {
 	 */
 	public static JSFVersion get(int value) {
 		switch (value) {
+			case UNKNOWN: return UNKNOWN_LITERAL;
 			case V1_1: return V1_1_LITERAL;
 			case V1_2: return V1_2_LITERAL;
-			case UNKNOWN: return UNKNOWN_LITERAL;
 		}
 		return null;
 	}
