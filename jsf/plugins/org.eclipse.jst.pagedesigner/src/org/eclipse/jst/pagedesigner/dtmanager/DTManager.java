@@ -14,7 +14,7 @@ import org.eclipse.jst.jsf.core.internal.tld.CMUtil;
 import org.eclipse.jst.pagedesigner.converter.ConverterFactoryRegistry;
 import org.eclipse.jst.pagedesigner.converter.IConverterFactory;
 import org.eclipse.jst.pagedesigner.converter.ITagConverter;
-import org.eclipse.jst.pagedesigner.dtmanager.converter.DTTagConverterFactory;
+import org.eclipse.jst.pagedesigner.dtmanager.converter.internal.DTTagConverterFactory;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMDocument;
 import org.w3c.dom.Element;
 

@@ -21,7 +21,6 @@ import org.w3c.dom.Element;
  * @author Ian Trimble - Oracle
  * API: as with ITransformer, I'd like to consider 
  * ITransfomOperation<SRC, RESULT>
- * API: extensibilty? Should clients be allowed to implement/sub-class?
  */
 public interface ITransformOperation {
 

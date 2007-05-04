@@ -8,13 +8,17 @@
  * Contributors:
  *    Ian Trimble - initial API and implementation
  *******************************************************************************/ 
-package org.eclipse.jst.pagedesigner.dtmanager.converter;
+package org.eclipse.jst.pagedesigner.dtmanager.converter.internal;
 
 import java.util.Iterator;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jst.pagedesigner.dtmanager.DTManager;
 import org.eclipse.jst.pagedesigner.dtmanager.IDTInfo;
+import org.eclipse.jst.pagedesigner.dtmanager.converter.IOutputRenderer;
+import org.eclipse.jst.pagedesigner.dtmanager.converter.ITagConverterContext;
+import org.eclipse.jst.pagedesigner.dtmanager.converter.ITransformOperation;
+import org.eclipse.jst.pagedesigner.dtmanager.converter.ITransformer;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.TransformOperationFactory;
 import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.Operation;
 import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.Parameter;

@@ -31,7 +31,6 @@ public abstract class AbstractTransformOperation implements ITransformOperation 
 	/**
 	 * ITagConverterContext instance.
 	 */
-    // API: should make private and provide a getter.
 	protected ITagConverterContext tagConverterContext;
 
 	/**

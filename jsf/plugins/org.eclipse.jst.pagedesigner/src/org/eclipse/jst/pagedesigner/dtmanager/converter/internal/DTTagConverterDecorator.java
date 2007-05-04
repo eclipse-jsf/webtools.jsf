@@ -8,7 +8,7 @@
  * Contributors:
  *    Ian Trimble - initial API and implementation
  *******************************************************************************/ 
-package org.eclipse.jst.pagedesigner.dtmanager.converter;
+package org.eclipse.jst.pagedesigner.dtmanager.converter.internal;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jst.jsf.common.metadata.Trait;
@@ -17,6 +17,7 @@ import org.eclipse.jst.pagedesigner.converter.IConverterFactory;
 import org.eclipse.jst.pagedesigner.converter.ITagConverter;
 import org.eclipse.jst.pagedesigner.dtmanager.DTManager;
 import org.eclipse.jst.pagedesigner.dtmanager.IDTInfo;
+import org.eclipse.jst.pagedesigner.dtmanager.converter.ITagConverterDecorator;
 import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.ResolveAttributeValue;
 import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.TagDecorateInfo;
 import org.eclipse.jst.pagedesigner.preview.PageExpressionContext;
@@ -29,7 +30,6 @@ import org.w3c.dom.Text;
  * ITagConverterDecorator implementation for DTTagConverter.
  * 
  * @author Ian Trimble - Oracle
- * API: should this really be API?
  */
 public class DTTagConverterDecorator implements ITagConverterDecorator {
 

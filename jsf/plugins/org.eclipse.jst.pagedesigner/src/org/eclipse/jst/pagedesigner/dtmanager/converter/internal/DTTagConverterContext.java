@@ -8,9 +8,10 @@
  * Contributors:
  *    Ian Trimble - initial API and implementation
  *******************************************************************************/ 
-package org.eclipse.jst.pagedesigner.dtmanager.converter;
+package org.eclipse.jst.pagedesigner.dtmanager.converter.internal;
 
 import org.eclipse.jst.pagedesigner.converter.ConvertPosition;
+import org.eclipse.jst.pagedesigner.dtmanager.converter.ITagConverterContext;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.Text;

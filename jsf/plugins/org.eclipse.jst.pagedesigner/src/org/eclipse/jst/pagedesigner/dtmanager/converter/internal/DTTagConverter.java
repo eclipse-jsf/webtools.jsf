@@ -8,7 +8,7 @@
  * Contributors:
  *    Ian Trimble - initial API and implementation
  *******************************************************************************/ 
-package org.eclipse.jst.pagedesigner.dtmanager.converter;
+package org.eclipse.jst.pagedesigner.dtmanager.converter.internal;
 
 import java.util.ArrayList;
 import java.util.Collections;
