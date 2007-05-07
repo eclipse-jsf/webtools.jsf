@@ -1,6 +1,5 @@
 package org.eclipse.jst.jsf.common.metadata.tests;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.xml.type.AnyType;
 import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.Model;
@@ -9,8 +8,6 @@ import org.eclipse.jst.jsf.common.metadata.internal.MetaDataModelContextImpl;
 import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
 import org.eclipse.jst.jsf.common.metadata.query.IMetaDataModelContext;
 import org.eclipse.jst.jsf.common.metadata.query.MetaDataQueryHelper;
-
-import junit.framework.TestCase;
 
 public class TinyTestTests extends AbstractBaseMetaDataTestCase {
 	protected IMetaDataModelContext baseContext;

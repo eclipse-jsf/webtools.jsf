@@ -3,7 +3,6 @@ package org.eclipse.jst.jsf.common.metadata.tests;
 import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider;
 import org.eclipse.jst.jsf.common.metadata.internal.MetaDataModelContextImpl;
-import org.eclipse.jst.jsf.common.metadata.internal.StandardMetaDataSourceFileLocator;
 import org.eclipse.jst.jsf.common.metadata.query.IMetaDataModelContext;
 import org.eclipse.jst.jsf.common.metadata.query.MetaDataQueryHelper;
 

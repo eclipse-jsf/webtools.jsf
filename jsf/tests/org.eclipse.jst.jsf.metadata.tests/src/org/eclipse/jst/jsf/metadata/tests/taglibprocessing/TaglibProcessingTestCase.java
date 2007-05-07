@@ -13,12 +13,7 @@ package org.eclipse.jst.jsf.metadata.tests.taglibprocessing;
 
 import java.util.List;
 
-import junit.framework.TestCase;
-
-import org.eclipse.jface.text.IDocument;
 import org.eclipse.jst.jsf.common.metadata.tests.AbstractBaseMetaDataTestCase;
-import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
-import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
 import org.eclipse.jst.jsf.metadata.tests.MetadataTestsPlugin;
 import org.eclipse.jst.jsf.metadataprocessors.MetaDataEnabledProcessingFactory;
 import org.eclipse.jst.jsf.metadataprocessors.features.ICreateValues;

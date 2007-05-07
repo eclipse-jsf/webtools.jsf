@@ -20,9 +20,7 @@ import org.eclipse.jst.jsf.common.metadata.tests.AbstractBaseMetaDataTestCase;
 import org.eclipse.jst.jsf.metadata.tests.MetadataTestsPlugin;
 import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfo;
 import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfos;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.TagCreationAttribute;
 import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.TagCreationInfo;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.TagCreationTemplate;
 
 public class JSFHTMLTestCase extends AbstractBaseMetaDataTestCase{
 	private String _uri;

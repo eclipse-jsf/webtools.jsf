@@ -2,12 +2,9 @@ package org.eclipse.jst.jsf.common.metadata.tests;
 
 import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.IncludeEntityGroup;
-import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.internal.MetaDataModelContextImpl;
 import org.eclipse.jst.jsf.common.metadata.query.IMetaDataModelContext;
 import org.eclipse.jst.jsf.common.metadata.query.MetaDataQueryHelper;
-
-import junit.framework.TestCase;
 
 public class IncludeEntityGroupImplTests extends AbstractBaseMetaDataTestCase {
 	protected IMetaDataModelContext baseContext;

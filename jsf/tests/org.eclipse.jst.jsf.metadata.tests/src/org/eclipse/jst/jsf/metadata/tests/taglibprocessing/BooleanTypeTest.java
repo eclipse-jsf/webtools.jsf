@@ -14,7 +14,6 @@ package org.eclipse.jst.jsf.metadata.tests.taglibprocessing;
 
 import junit.framework.Assert;
 
-import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider;
 import org.eclipse.jst.jsf.metadataprocessors.features.IDefaultValue;
 import org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValues;
 import org.eclipse.jst.jsf.metadataprocessors.features.IValidValues;

@@ -1,8 +1,6 @@
 package org.eclipse.jst.jsf.common.metadata.tests;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.xml.type.SimpleAnyType;
-import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.Trait;
 import org.eclipse.jst.jsf.common.metadata.internal.MetaDataModelContextImpl;

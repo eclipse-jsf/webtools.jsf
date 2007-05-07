@@ -13,7 +13,6 @@ package org.eclipse.jst.jsf.metadata.tests.taglibprocessing;
 
 import junit.framework.Assert;
 
-import org.eclipse.jst.jsf.metadataprocessors.MetaDataEnabledProcessingFactory;
 import org.eclipse.jst.jsf.metadataprocessors.features.IDefaultValue;
 import org.eclipse.jst.jsf.metadataprocessors.features.IValidValues;
 

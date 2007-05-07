@@ -2,8 +2,6 @@ package org.eclipse.jst.jsf.common.metadata.tests;
 
 import java.util.Collections;
 
-import junit.framework.TestCase;
-
 import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.Trait;
