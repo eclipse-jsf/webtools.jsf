@@ -43,7 +43,7 @@ public final class TypeComparator
         final String[] testSignatures = boxedSecondType.getSignatures();
         // TODO: need better user messages here
         Diagnostic result = new BasicDiagnostic(Diagnostic.ERROR, "", 0,  //$NON-NLS-1$
-                "EL expression does not evaluate to expected types for this attribute", null);
+                Messages.getString("TypeComparator.Expression.Doesnt.Match.Expected.Types"), null); //$NON-NLS-1$
         // now loop through each type in the first type and see
         // if there is a type satisfying it in the second
         MAIN_LOOP:
@@ -166,8 +166,8 @@ public final class TypeComparator
         // fail fast if param count doesn't match
         if (firstMethodParams.length != secondMethodParams.length)
         {
-            return new BasicDiagnostic(Diagnostic.ERROR, "", 0, 
-                    "Parameter count mismatch", null);
+            return new BasicDiagnostic(Diagnostic.ERROR, "", 0,  //$NON-NLS-1$
+                    Messages.getString("TypeComparator.Parameter.count.mismatch"), null); //$NON-NLS-1$
         }
         
         // now check each parameter
@@ -181,8 +181,8 @@ public final class TypeComparator
             
             if (!firstMethodParam.equals(secondMethodParam))
             {
-                return new BasicDiagnostic(Diagnostic.ERROR, "", 0,
-                        "Type mismatch on parameter "+i, null);
+                return new BasicDiagnostic(Diagnostic.ERROR, "", 0, //$NON-NLS-1$
+                        Messages.getString("TypeComparator.Type.mismatch.on.parameter")+i, null); //$NON-NLS-1$
             }
         }
         
@@ -194,8 +194,8 @@ public final class TypeComparator
         
         if (!firstReturn.equals(secondReturn))
         {
-            return new BasicDiagnostic(Diagnostic.ERROR, "", 0,
-                    "Return types don't match", null);
+            return new BasicDiagnostic(Diagnostic.ERROR, "", 0, //$NON-NLS-1$
+                    Messages.getString("TypeComparator.Return.Types.Dont.Match"), null); //$NON-NLS-1$
         }
         
         // if we get to here, then everything checks out
@@ -214,14 +214,14 @@ public final class TypeComparator
     {
         if (firstType.isRHS() && !secondType.isRHS())
         {
-            return new BasicDiagnostic(Diagnostic.ERROR, "", 0, 
-                            "Expression is not gettable", null);
+            return new BasicDiagnostic(Diagnostic.ERROR, "", 0,  //$NON-NLS-1$
+                            Messages.getString("TypeComparator.Expression.Not.Gettable"), null); //$NON-NLS-1$
         }
         
         if (firstType.isLHS() && !secondType.isLHS())
         {
-            return new BasicDiagnostic(Diagnostic.WARNING, "", 0,
-                            "Attribute expects settable value, but expression is not settable", null);
+            return new BasicDiagnostic(Diagnostic.WARNING, "", 0, //$NON-NLS-1$
+                            Messages.getString("TypeComparator.Expression.Expected.Settable"), null); //$NON-NLS-1$
         }
         
         return Diagnostic.OK_INSTANCE;

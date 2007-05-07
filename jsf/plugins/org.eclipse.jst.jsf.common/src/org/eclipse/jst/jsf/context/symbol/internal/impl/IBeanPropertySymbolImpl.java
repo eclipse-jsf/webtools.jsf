@@ -14,14 +14,18 @@ package org.eclipse.jst.jsf.context.symbol.internal.impl;
 import java.util.HashMap;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.jdt.core.IJavaElement;
+import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
 import org.eclipse.jst.jsf.context.symbol.IBeanPropertySymbol;
 import org.eclipse.jst.jsf.context.symbol.IBoundedListTypeDescriptor;
 import org.eclipse.jst.jsf.context.symbol.IBoundedMapTypeDescriptor;
 import org.eclipse.jst.jsf.context.symbol.IJavaTypeDescriptor2;
+import org.eclipse.jst.jsf.context.symbol.ISymbol;
 import org.eclipse.jst.jsf.context.symbol.ITypeDescriptor;
 import org.eclipse.jst.jsf.context.symbol.SymbolFactory;
 import org.eclipse.jst.jsf.context.symbol.SymbolPackage;
@@ -45,8 +49,8 @@ public class IBeanPropertySymbolImpl extends IPropertySymbolImpl implements IBea
      * <!-- end-user-doc -->
      * @generated
      */
-    @SuppressWarnings("hiding")
-    public static final String copyright = "Copyright 2006 Oracle";
+    public static final String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
+
 
     /**
      * The cached value of the '{@link #getOwner() <em>Owner</em>}' reference.
@@ -222,11 +226,14 @@ public class IBeanPropertySymbolImpl extends IPropertySymbolImpl implements IBea
     /**
      * @generated NOT
      */
-    public ITypeDescriptor coerce(String typeSignature) 
+    public ITypeDescriptor coerce(final String typeSignature) 
     {
+        // ensure that we have an erased version
+        final String erasedTypeSignature = Signature.getTypeErasure(typeSignature);
+        
         if (supportsCoercion(typeSignature))
         {
-            if (TypeConstants.TYPE_MAP.equals(typeSignature))
+            if (TypeConstants.TYPE_MAP.equals(erasedTypeSignature))
             {
                 IBoundedMapTypeDescriptor mapDesc =  
                     SymbolFactory.eINSTANCE.createIBoundedMapTypeDescriptor();
@@ -235,10 +242,12 @@ public class IBeanPropertySymbolImpl extends IPropertySymbolImpl implements IBea
                 mapDesc.setMapSource(new HashMap());  // give it an empty map
                 return mapDesc;
             }
-            else if (TypeConstants.TYPE_LIST.equals(typeSignature))
+            else if (TypeConstants.TYPE_LIST.equals(erasedTypeSignature))
             {
                 IBoundedListTypeDescriptor listDesc =  
                     SymbolFactory.eINSTANCE.createIBoundedListTypeDescriptor();
+                listDesc.setJdtContext(deriveBestJdtContext());
+                 
                 // bean maps are generally writable
                 return listDesc;
             }
@@ -247,6 +256,50 @@ public class IBeanPropertySymbolImpl extends IPropertySymbolImpl implements IBea
         return null;
 
     }
+
+    private IJavaElement deriveBestJdtContext()
+    {
+        IJavaElement contextElement = null;
+        if (getTypeDescriptor() instanceof IJavaTypeDescriptor2)
+        {
+            contextElement = 
+                ((IJavaTypeDescriptor2)getTypeDescriptor()).getType();
+        }
+        
+        if (contextElement == null)
+        {
+            contextElement = getTypeDescriptor().getJdtContext();
+        }
+
+        return contextElement;
+    }
+    
+    /** (non-Javadoc)
+     * @see org.eclipse.jst.jsf.context.symbol.internal.impl.IPropertySymbolImpl#call(java.lang.String, org.eclipse.emf.common.util.EList, java.lang.String)
+     * 
+     * @generated NOT
+     */
+    public ISymbol call(String methodName, EList methodArguments,
+            String symbolName) 
+    {
+        return Util.call(methodName, methodArguments, symbolName, getTypeDescriptor());
+    }
+
+
+//    private List convertArgsToSignatures(List methodArgs)
+//    {
+//        List args = new ArrayList();
+//        
+//        for (final Iterator it = methodArgs.iterator(); it.hasNext();)
+//        {
+//            Object arg = it.next();
+//            String className = arg.getClass().getName();
+//            String resolvedName = Signature.createTypeSignature(className, true);
+//            args.add(resolvedName);
+//        }
+//        
+//        return args;
+//    }
 
     /**
      * @generated NOT
@@ -259,11 +312,11 @@ public class IBeanPropertySymbolImpl extends IPropertySymbolImpl implements IBea
             // for java bean instances, we need to minimally support
             // Map, List and Array to conform to the basic spec
             // for JSF EL
-            if (TypeConstants.TYPE_MAP.equals(typeSignature))
+            if (TypeConstants.TYPE_MAP.equals(Signature.getTypeErasure(typeSignature)))
             {
                 return true;
             }
-            else if (TypeConstants.TYPE_LIST.equals(typeSignature))
+            else if (TypeConstants.TYPE_LIST.equals(Signature.getTypeErasure(typeSignature)))
             {
                 return true;
             }

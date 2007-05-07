@@ -23,6 +23,6 @@ public interface IBoundedListTypeDescriptor extends IListTypeDescriptor, IBounde
      * <!-- end-user-doc -->
      * @generated
      */
-    String copyright = "Copyright 2006 Oracle";
+    String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
 } // IBoundedListTypeDescriptor

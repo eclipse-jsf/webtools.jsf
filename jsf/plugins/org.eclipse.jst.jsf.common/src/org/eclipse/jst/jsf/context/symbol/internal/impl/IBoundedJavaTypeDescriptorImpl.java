@@ -2,10 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IBoundedJavaTypeDescriptorImpl.java,v 1.6 2007/04/26 00:08:52 cbateman Exp $
+ * $Id: IBoundedJavaTypeDescriptorImpl.java,v 1.7 2007/05/07 17:30:20 cbateman Exp $
  */
 package org.eclipse.jst.jsf.context.symbol.internal.impl;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
@@ -30,8 +31,7 @@ public class IBoundedJavaTypeDescriptorImpl extends IJavaTypeDescriptor2Impl imp
      * <!-- end-user-doc -->
      * @generated
      */
-    @SuppressWarnings("hiding")
-    public static final String copyright = "Copyright 2006 Oracle";
+    public static final String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
     /**
      * <!-- begin-user-doc -->
@@ -80,14 +80,18 @@ public class IBoundedJavaTypeDescriptorImpl extends IJavaTypeDescriptor2Impl imp
             propSymbol.setReadable(true);
             IBoundedJavaTypeDescriptor typeDesc = 
                 SymbolFactory.eINSTANCE.createIBoundedJavaTypeDescriptor();
-            
+
             typeDesc.setTypeSignatureDelegate(TypeConstants.TYPE_JAVAOBJECT);
             propSymbol.setTypeDescriptor(typeDesc);
             retValue = propSymbol;
         }
-        
-        return retValue;
 
+        return retValue;
 	}
 
+    public ISymbol calculateSyntheticCall(String methodName, EList methodArgs,
+            String symbolName) 
+    {
+        return getUnboundedProperty(symbolName, TypeConstants.TYPE_JAVAOBJECT);
+    }
 } //IBoundedJavaTypeDescriptorImpl

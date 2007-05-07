@@ -11,6 +11,8 @@
  ********************************************************************************/
 package org.eclipse.jst.jsf.context.symbol;
 
+import org.eclipse.emf.common.util.EList;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -36,7 +38,7 @@ public interface IObjectSymbol extends ISymbol {
      * <!-- end-user-doc -->
      * @generated
      */
-    String copyright = "Copyright 2006 Oracle";
+    String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
     /**
      * Returns the value of the '<em><b>Type Descriptor</b></em>' reference.
@@ -138,5 +140,20 @@ public interface IObjectSymbol extends ISymbol {
      * @generated
      */
     ITypeDescriptor coerce(String typeSignature);
+
+    /**
+     * <!-- begin-user-doc -->
+     * @param methodName 
+     * @param methodArguments 
+     * @param symbolName 
+     * @return a symbol resulting from calling the call or null if can't be determined.
+     * Generally, the symbolName should be used for the getName() value of the returned
+     * symbol, although implementers are not bound to this if a more meaningful value
+     * can be calculated.
+     * <!-- end-user-doc -->
+     * @model methodArgumentsType="org.eclipse.jst.jsf.common.internal.types.ValueType" methodArgumentsDataType="org.eclipse.jst.jsf.context.symbol.ValueType" methodArgumentsMany="true"
+     * @generated
+     */
+    ISymbol call(String methodName, EList methodArguments, String symbolName);
 
 } // IObjectSymbol

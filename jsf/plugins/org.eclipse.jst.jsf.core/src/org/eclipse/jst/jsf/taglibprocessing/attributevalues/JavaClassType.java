@@ -349,8 +349,8 @@ public class JavaClassType extends ObjectType implements IPossibleValues, IValid
 	private boolean isInnerOrAnonymousClass(IType res) {
 		try {
 			if (res.isClass() && (res.isAnonymous() || 
-									((res.getFlags() & Flags.AccPrivate)  == Flags.AccPrivate ) || 
-									res.getFullyQualifiedName().indexOf("$") > 0)) //must be better way to discover if it is an inner class
+									(Flags.isPrivate(res.getFlags())) || 
+									res.getFullyQualifiedName().indexOf("$") > 0)) //must be better way to discover if it is an inner class //$NON-NLS-1$
 				return true;
 		} catch (JavaModelException e) {
 			//ignore
@@ -361,7 +361,7 @@ public class JavaClassType extends ObjectType implements IPossibleValues, IValid
 
 	private boolean isAbstractClass(IType res) {	
 		try {
-			if (res.isClass() && (res.getFlags() & Flags.AccAbstract) == Flags.AccAbstract)
+			if (res.isClass() && Flags.isAbstract(res.getFlags()))
 				return true;
 		} catch (JavaModelException e) {
 			//ignore

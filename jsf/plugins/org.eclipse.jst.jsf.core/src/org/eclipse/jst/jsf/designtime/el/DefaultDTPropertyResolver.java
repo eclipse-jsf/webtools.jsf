@@ -17,7 +17,12 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.jdt.core.Signature;
+import org.eclipse.jst.jsf.common.internal.types.StringLiteralType;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
+import org.eclipse.jst.jsf.common.internal.types.ValueType;
 import org.eclipse.jst.jsf.context.symbol.IBoundedTypeDescriptor;
 import org.eclipse.jst.jsf.context.symbol.IObjectSymbol;
 import org.eclipse.jst.jsf.context.symbol.ISymbol;
@@ -67,6 +72,16 @@ public class DefaultDTPropertyResolver extends AbstractDTPropertyResolver
             // per JSP.2.3.4, if instance of map (unconstrained in our terminology)
             else if (objSymbol.supportsCoercion(TypeConstants.TYPE_MAP))
             {
+                EList<ValueType>  args = new BasicEList<ValueType>();
+                args.add(new StringLiteralType(propertyId.toString()));
+                
+                ISymbol prop = objSymbol.call("get", args, propertyId.toString()); //$NON-NLS-1$
+                
+                if (prop != null)
+                {
+                    return prop;
+                }
+                
                 typeDesc = objSymbol.coerce(TypeConstants.TYPE_MAP);
 
                 // handle string keys into maps that contain dots.  Because type descriptor
@@ -155,6 +170,9 @@ public class DefaultDTPropertyResolver extends AbstractDTPropertyResolver
         return (ISymbol[]) symbolsList.toArray(ISymbol.EMPTY_SYMBOL_ARRAY);
     }
 
+    /* (non-Javadoc)
+     * @see org.eclipse.jst.jsf.designtime.el.AbstractDTPropertyResolver#getProperty(org.eclipse.jst.jsf.context.symbol.ISymbol, int)
+     */
     public ISymbol getProperty(ISymbol base, int offset) 
     {
         ITypeDescriptor typeDesc = null;
@@ -162,7 +180,7 @@ public class DefaultDTPropertyResolver extends AbstractDTPropertyResolver
         if (offset < 0)
         {
         	// should never be called with offset < 0
-        	throw new AssertionError("offsets must be >=0 to be valid");
+        	throw new AssertionError("offsets must be >=0 to be valid"); //$NON-NLS-1$
         }
         
         // check for expected interface types per JSP.2.3.4
@@ -177,29 +195,36 @@ public class DefaultDTPropertyResolver extends AbstractDTPropertyResolver
             {
                 ISymbol arrayElement = typeDesc.getArrayElement();
                 // reset the name
-                arrayElement.setName(base.getName()+"["+offset+"]");
+                arrayElement.setName(base.getName()+"["+offset+"]"); //$NON-NLS-1$ //$NON-NLS-2$
                 return arrayElement;
             }
             
             // per JSP.2.3.4, if instance of list (unbounded in our terminology)
             if (objSymbol.supportsCoercion(TypeConstants.TYPE_LIST))
             {
-                typeDesc = objSymbol.coerce(TypeConstants.TYPE_LIST);
+                //typeDesc = objSymbol.coerce(TypeConstants.TYPE_LIST);
+                final EList<ValueType> args = new BasicEList<ValueType>();
+                args.add(new ValueType(Signature.SIG_INT, ValueType.ASSIGNMENT_TYPE_RHS));
+                return objSymbol.call("get", args, base.getName()+"["+offset+"]"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
             }
 
             // check unconstrained type
-            if (typeDesc instanceof IBoundedTypeDescriptor)
-            {
-                // TODO: propertyId may need to change when supporting
-                // template types
-                if (((IBoundedTypeDescriptor)typeDesc).isUnboundedForType(TypeConstants.TYPE_JAVAOBJECT))
-                {
+//            if (typeDesc instanceof IBoundedTypeDescriptor)
+//            {
+//                // TODO: propertyId may need to change when supporting
+//                // template types
+//                if (((IBoundedTypeDescriptor)typeDesc).isUnboundedForType(TypeConstants.TYPE_BOXED_INTEGER))
+//                {
                     // the most we know is that it could be an Object
-                    return ((IBoundedTypeDescriptor)typeDesc)
-                        .getUnboundedProperty
-                            (new Integer(offset), TypeConstants.TYPE_BOXED_INTEGER);
-                }
-            }
+//                    return ((IBoundedTypeDescriptor)typeDesc)
+//                        .getUnboundedProperty
+//                            (new Integer(offset), TypeConstants.TYPE_BOXED_INTEGER);
+//                    final EList<Object> args = new BasicEList<Object>();
+//                    args.add(offset);
+//                    return ((IBoundedTypeDescriptor)typeDesc)
+//                          .call("get", args, base.getName()+"["+offset+"]");
+//                }
+//            }
         }
         
         return null;

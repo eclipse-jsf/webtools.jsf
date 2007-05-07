@@ -63,4 +63,9 @@ public final class SymbolUtil
         return (ISymbol[])
             filteredSymbols.toArray(ISymbol.EMPTY_SYMBOL_ARRAY);
     }
+    
+    private SymbolUtil()
+    {
+        // no external instantiation
+    }
 }

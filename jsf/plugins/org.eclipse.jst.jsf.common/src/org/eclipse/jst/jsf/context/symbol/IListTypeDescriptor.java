@@ -30,7 +30,7 @@ public interface IListTypeDescriptor extends ITypeDescriptor {
      * <!-- end-user-doc -->
      * @generated
      */
-    String copyright = "Copyright 2006 Oracle";
+    String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
     /**
      * Returns the value of the '<em><b>List Source</b></em>' attribute.

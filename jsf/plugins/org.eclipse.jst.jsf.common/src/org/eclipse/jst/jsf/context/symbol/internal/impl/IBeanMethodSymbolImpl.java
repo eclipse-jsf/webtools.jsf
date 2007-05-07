@@ -44,7 +44,7 @@ public class IBeanMethodSymbolImpl extends EObjectImpl implements IBeanMethodSym
 	 * <!-- end-user-doc -->
      * @generated
      */
-	public static final String copyright = "Copyright 2006 Oracle";
+	public static final String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
     /**
      * The default value of the '{@link #getName() <em>Name</em>}' attribute.

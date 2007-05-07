@@ -1,14 +1,9 @@
-/*******************************************************************************
- * Copyright (c) 2006 Oracle Corporation.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+/**
+ * <copyright>
+ * </copyright>
  *
- * Contributors:
- *    Cameron Bateman/Oracle - initial API and implementation
- *    
- ********************************************************************************/
+ * $Id: SymbolPackage.java,v 1.6 2007/05/07 17:30:19 cbateman Exp $
+ */
 package org.eclipse.jst.jsf.context.symbol;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -39,7 +34,7 @@ public interface SymbolPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    String copyright = "Copyright 2006 Oracle";
+    String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
     /**
      * The package name.
@@ -47,7 +42,7 @@ public interface SymbolPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    String eNAME = "symbol";
+    String eNAME = "symbol"; //$NON-NLS-1$
 
     /**
      * The package namespace URI.
@@ -55,7 +50,7 @@ public interface SymbolPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    String eNS_URI = "http:///org/eclipse/jst/jsf/context/symbol.ecore";
+    String eNS_URI = "http:///org/eclipse/jst/jsf/context/symbol.ecore"; //$NON-NLS-1$
 
     /**
      * The package namespace name.
@@ -63,7 +58,7 @@ public interface SymbolPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    String eNS_PREFIX = "org.eclipse.jst.jsf.context.symbol";
+    String eNS_PREFIX = "org.eclipse.jst.jsf.context.symbol"; //$NON-NLS-1$
 
     /**
      * The singleton instance of the package.
@@ -559,13 +554,31 @@ public interface SymbolPackage extends EPackage {
     int ITYPE_DESCRIPTOR__METHODS = 5;
 
     /**
+     * The feature id for the '<em><b>Type Parameter Signatures</b></em>' attribute list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int ITYPE_DESCRIPTOR__TYPE_PARAMETER_SIGNATURES = 6;
+
+    /**
+     * The feature id for the '<em><b>Jdt Context</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int ITYPE_DESCRIPTOR__JDT_CONTEXT = 7;
+
+    /**
      * The number of structural features of the '<em>IType Descriptor</em>' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int ITYPE_DESCRIPTOR_FEATURE_COUNT = 6;
+    int ITYPE_DESCRIPTOR_FEATURE_COUNT = 8;
 
     /**
      * The meta object id for the '{@link org.eclipse.jst.jsf.context.symbol.IDescribedInDetail <em>IDescribed In Detail</em>}' class.
@@ -649,6 +662,24 @@ public interface SymbolPackage extends EPackage {
      * @ordered
      */
     int IJAVA_TYPE_DESCRIPTOR2__METHODS = ITYPE_DESCRIPTOR__METHODS;
+
+    /**
+     * The feature id for the '<em><b>Type Parameter Signatures</b></em>' attribute list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int IJAVA_TYPE_DESCRIPTOR2__TYPE_PARAMETER_SIGNATURES = ITYPE_DESCRIPTOR__TYPE_PARAMETER_SIGNATURES;
+
+    /**
+     * The feature id for the '<em><b>Jdt Context</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int IJAVA_TYPE_DESCRIPTOR2__JDT_CONTEXT = ITYPE_DESCRIPTOR__JDT_CONTEXT;
 
     /**
      * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -879,6 +910,24 @@ public interface SymbolPackage extends EPackage {
     int IMAP_TYPE_DESCRIPTOR__METHODS = ITYPE_DESCRIPTOR__METHODS;
 
     /**
+     * The feature id for the '<em><b>Type Parameter Signatures</b></em>' attribute list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int IMAP_TYPE_DESCRIPTOR__TYPE_PARAMETER_SIGNATURES = ITYPE_DESCRIPTOR__TYPE_PARAMETER_SIGNATURES;
+
+    /**
+     * The feature id for the '<em><b>Jdt Context</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int IMAP_TYPE_DESCRIPTOR__JDT_CONTEXT = ITYPE_DESCRIPTOR__JDT_CONTEXT;
+
+    /**
      * The feature id for the '<em><b>Map Source</b></em>' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1007,6 +1056,24 @@ public interface SymbolPackage extends EPackage {
     int IBOUNDED_TYPE_DESCRIPTOR__METHODS = ITYPE_DESCRIPTOR__METHODS;
 
     /**
+     * The feature id for the '<em><b>Type Parameter Signatures</b></em>' attribute list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int IBOUNDED_TYPE_DESCRIPTOR__TYPE_PARAMETER_SIGNATURES = ITYPE_DESCRIPTOR__TYPE_PARAMETER_SIGNATURES;
+
+    /**
+     * The feature id for the '<em><b>Jdt Context</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int IBOUNDED_TYPE_DESCRIPTOR__JDT_CONTEXT = ITYPE_DESCRIPTOR__JDT_CONTEXT;
+
+    /**
      * The number of structural features of the '<em>IBounded Type Descriptor</em>' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1078,6 +1145,24 @@ public interface SymbolPackage extends EPackage {
      * @ordered
      */
     int IBOUNDED_MAP_TYPE_DESCRIPTOR__METHODS = IMAP_TYPE_DESCRIPTOR__METHODS;
+
+    /**
+     * The feature id for the '<em><b>Type Parameter Signatures</b></em>' attribute list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int IBOUNDED_MAP_TYPE_DESCRIPTOR__TYPE_PARAMETER_SIGNATURES = IMAP_TYPE_DESCRIPTOR__TYPE_PARAMETER_SIGNATURES;
+
+    /**
+     * The feature id for the '<em><b>Jdt Context</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int IBOUNDED_MAP_TYPE_DESCRIPTOR__JDT_CONTEXT = IMAP_TYPE_DESCRIPTOR__JDT_CONTEXT;
 
     /**
      * The feature id for the '<em><b>Map Source</b></em>' attribute.
@@ -1169,6 +1254,24 @@ public interface SymbolPackage extends EPackage {
      * @ordered
      */
     int IBOUNDED_JAVA_TYPE_DESCRIPTOR__METHODS = IJAVA_TYPE_DESCRIPTOR2__METHODS;
+
+    /**
+     * The feature id for the '<em><b>Type Parameter Signatures</b></em>' attribute list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int IBOUNDED_JAVA_TYPE_DESCRIPTOR__TYPE_PARAMETER_SIGNATURES = IJAVA_TYPE_DESCRIPTOR2__TYPE_PARAMETER_SIGNATURES;
+
+    /**
+     * The feature id for the '<em><b>Jdt Context</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int IBOUNDED_JAVA_TYPE_DESCRIPTOR__JDT_CONTEXT = IJAVA_TYPE_DESCRIPTOR2__JDT_CONTEXT;
 
     /**
      * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -1280,6 +1383,24 @@ public interface SymbolPackage extends EPackage {
     int ILIST_TYPE_DESCRIPTOR__METHODS = ITYPE_DESCRIPTOR__METHODS;
 
     /**
+     * The feature id for the '<em><b>Type Parameter Signatures</b></em>' attribute list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int ILIST_TYPE_DESCRIPTOR__TYPE_PARAMETER_SIGNATURES = ITYPE_DESCRIPTOR__TYPE_PARAMETER_SIGNATURES;
+
+    /**
+     * The feature id for the '<em><b>Jdt Context</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int ILIST_TYPE_DESCRIPTOR__JDT_CONTEXT = ITYPE_DESCRIPTOR__JDT_CONTEXT;
+
+    /**
      * The feature id for the '<em><b>List Source</b></em>' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1362,6 +1483,24 @@ public interface SymbolPackage extends EPackage {
     int IBOUNDED_LIST_TYPE_DESCRIPTOR__METHODS = ILIST_TYPE_DESCRIPTOR__METHODS;
 
     /**
+     * The feature id for the '<em><b>Type Parameter Signatures</b></em>' attribute list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int IBOUNDED_LIST_TYPE_DESCRIPTOR__TYPE_PARAMETER_SIGNATURES = ILIST_TYPE_DESCRIPTOR__TYPE_PARAMETER_SIGNATURES;
+
+    /**
+     * The feature id for the '<em><b>Jdt Context</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int IBOUNDED_LIST_TYPE_DESCRIPTOR__JDT_CONTEXT = ILIST_TYPE_DESCRIPTOR__JDT_CONTEXT;
+
+    /**
      * The feature id for the '<em><b>List Source</b></em>' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1408,6 +1547,16 @@ public interface SymbolPackage extends EPackage {
      * @generated
      */
     int IJAVA_ELEMENT = 21;
+
+    /**
+     * The meta object id for the '<em>Value Type</em>' data type.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.jst.jsf.common.internal.types.ValueType
+     * @see org.eclipse.jst.jsf.context.symbol.internal.impl.SymbolPackageImpl#getValueType()
+     * @generated
+     */
+    int VALUE_TYPE = 22;
 
 
     /**
@@ -1612,6 +1761,28 @@ public interface SymbolPackage extends EPackage {
      * @generated
      */
     EReference getITypeDescriptor_Methods();
+
+    /**
+     * Returns the meta object for the attribute list '{@link org.eclipse.jst.jsf.context.symbol.ITypeDescriptor#getTypeParameterSignatures <em>Type Parameter Signatures</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute list '<em>Type Parameter Signatures</em>'.
+     * @see org.eclipse.jst.jsf.context.symbol.ITypeDescriptor#getTypeParameterSignatures()
+     * @see #getITypeDescriptor()
+     * @generated
+     */
+    EAttribute getITypeDescriptor_TypeParameterSignatures();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.context.symbol.ITypeDescriptor#getJdtContext <em>Jdt Context</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Jdt Context</em>'.
+     * @see org.eclipse.jst.jsf.context.symbol.ITypeDescriptor#getJdtContext()
+     * @see #getITypeDescriptor()
+     * @generated
+     */
+    EAttribute getITypeDescriptor_JdtContext();
 
     /**
      * Returns the meta object for class '{@link org.eclipse.jst.jsf.context.symbol.IDescribedInDetail <em>IDescribed In Detail</em>}'.
@@ -1919,6 +2090,17 @@ public interface SymbolPackage extends EPackage {
     EDataType getIJavaElement();
 
     /**
+     * Returns the meta object for data type '{@link org.eclipse.jst.jsf.common.internal.types.ValueType <em>Value Type</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for data type '<em>Value Type</em>'.
+     * @see org.eclipse.jst.jsf.common.internal.types.ValueType
+     * @model instanceClass="org.eclipse.jst.jsf.common.internal.types.ValueType"
+     * @generated
+     */
+    EDataType getValueType();
+
+    /**
      * Returns the factory that creates the instances of the model.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1939,7 +2121,7 @@ public interface SymbolPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    interface Literals  {
+    interface Literals {
         /**
          * The meta object literal for the '{@link org.eclipse.jst.jsf.context.symbol.internal.impl.IBeanInstanceSymbolImpl <em>IBean Instance Symbol</em>}' class.
          * <!-- begin-user-doc -->
@@ -1948,7 +2130,6 @@ public interface SymbolPackage extends EPackage {
          * @see org.eclipse.jst.jsf.context.symbol.internal.impl.SymbolPackageImpl#getIBeanInstanceSymbol()
          * @generated
          */
-        @SuppressWarnings("hiding")
         EClass IBEAN_INSTANCE_SYMBOL = eINSTANCE.getIBeanInstanceSymbol();
 
         /**
@@ -1957,7 +2138,6 @@ public interface SymbolPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
-        @SuppressWarnings("hiding")
         EReference IBEAN_INSTANCE_SYMBOL__PROPERTIES = eINSTANCE.getIBeanInstanceSymbol_Properties();
 
         /**
@@ -1966,7 +2146,6 @@ public interface SymbolPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
-        @SuppressWarnings("hiding")
         EReference IBEAN_INSTANCE_SYMBOL__METHODS = eINSTANCE.getIBeanInstanceSymbol_Methods();
 
         /**
@@ -1977,7 +2156,6 @@ public interface SymbolPackage extends EPackage {
          * @see org.eclipse.jst.jsf.context.symbol.internal.impl.SymbolPackageImpl#getIBeanPropertySymbol()
          * @generated
          */
-        @SuppressWarnings("hiding")
         EClass IBEAN_PROPERTY_SYMBOL = eINSTANCE.getIBeanPropertySymbol();
 
         /**
@@ -1986,7 +2164,6 @@ public interface SymbolPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
-        @SuppressWarnings("hiding")
         EReference IBEAN_PROPERTY_SYMBOL__OWNER = eINSTANCE.getIBeanPropertySymbol_Owner();
 
         /**
@@ -1997,7 +2174,6 @@ public interface SymbolPackage extends EPackage {
          * @see org.eclipse.jst.jsf.context.symbol.internal.impl.SymbolPackageImpl#getIInstanceSymbol()
          * @generated
          */
-        @SuppressWarnings("hiding")
         EClass IINSTANCE_SYMBOL = eINSTANCE.getIInstanceSymbol();
 
         /**
@@ -2006,7 +2182,6 @@ public interface SymbolPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
-        @SuppressWarnings("hiding")
         EAttribute IINSTANCE_SYMBOL__TYPE_RESOLVED = eINSTANCE.getIInstanceSymbol_TypeResolved();
 
         /**
@@ -2015,7 +2190,6 @@ public interface SymbolPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
-        @SuppressWarnings("hiding")
         EAttribute IINSTANCE_SYMBOL__RUNTIME_SOURCE = eINSTANCE.getIInstanceSymbol_RuntimeSource();
 
         /**
@@ -2026,7 +2200,6 @@ public interface SymbolPackage extends EPackage {
          * @see org.eclipse.jst.jsf.context.symbol.internal.impl.SymbolPackageImpl#getIJavaSymbol()
          * @generated
          */
-        @SuppressWarnings("hiding")
         EClass IJAVA_SYMBOL = eINSTANCE.getIJavaSymbol();
 
         /**
@@ -2035,7 +2208,6 @@ public interface SymbolPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
-        @SuppressWarnings("hiding")
         EAttribute IJAVA_SYMBOL__JAVA_ELEMENT = eINSTANCE.getIJavaSymbol_JavaElement();
 
         /**
@@ -2046,7 +2218,6 @@ public interface SymbolPackage extends EPackage {
          * @see org.eclipse.jst.jsf.context.symbol.internal.impl.SymbolPackageImpl#getISymbol()
          * @generated
          */
-        @SuppressWarnings("hiding")
         EClass ISYMBOL = eINSTANCE.getISymbol();
 
         /**
@@ -2055,7 +2226,6 @@ public interface SymbolPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
-        @SuppressWarnings("hiding")
         EAttribute ISYMBOL__NAME = eINSTANCE.getISymbol_Name();
 
         /**
@@ -2066,7 +2236,6 @@ public interface SymbolPackage extends EPackage {
          * @see org.eclipse.jst.jsf.context.symbol.internal.impl.SymbolPackageImpl#getITypeDescriptor()
          * @generated
          */
-        @SuppressWarnings("hiding")
         EClass ITYPE_DESCRIPTOR = eINSTANCE.getITypeDescriptor();
 
         /**
@@ -2075,7 +2244,6 @@ public interface SymbolPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
-        @SuppressWarnings("hiding")
         EReference ITYPE_DESCRIPTOR__PROPERTIES = eINSTANCE.getITypeDescriptor_Properties();
 
         /**
@@ -2084,7 +2252,6 @@ public interface SymbolPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
-        @SuppressWarnings("hiding")
         EAttribute ITYPE_DESCRIPTOR__TYPE_SIGNATURE = eINSTANCE.getITypeDescriptor_TypeSignature();
 
         /**
@@ -2093,7 +2260,6 @@ public interface SymbolPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
-        @SuppressWarnings("hiding")
         EAttribute ITYPE_DESCRIPTOR__SUPER_TYPE_SIGNATURES = eINSTANCE.getITypeDescriptor_SuperTypeSignatures();
 
         /**
@@ -2102,7 +2268,6 @@ public interface SymbolPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
-        @SuppressWarnings("hiding")
         EAttribute ITYPE_DESCRIPTOR__INTERFACE_TYPE_SIGNATURES = eINSTANCE.getITypeDescriptor_InterfaceTypeSignatures();
 
         /**
@@ -2111,7 +2276,6 @@ public interface SymbolPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
-        @SuppressWarnings("hiding")
         EAttribute ITYPE_DESCRIPTOR__TYPE_SIGNATURE_DELEGATE = eINSTANCE.getITypeDescriptor_TypeSignatureDelegate();
 
         /**
@@ -2120,8 +2284,23 @@ public interface SymbolPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
-        @SuppressWarnings("hiding")
         EReference ITYPE_DESCRIPTOR__METHODS = eINSTANCE.getITypeDescriptor_Methods();
+
+        /**
+         * The meta object literal for the '<em><b>Type Parameter Signatures</b></em>' attribute list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute ITYPE_DESCRIPTOR__TYPE_PARAMETER_SIGNATURES = eINSTANCE.getITypeDescriptor_TypeParameterSignatures();
+
+        /**
+         * The meta object literal for the '<em><b>Jdt Context</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute ITYPE_DESCRIPTOR__JDT_CONTEXT = eINSTANCE.getITypeDescriptor_JdtContext();
 
         /**
          * The meta object literal for the '{@link org.eclipse.jst.jsf.context.symbol.IDescribedInDetail <em>IDescribed In Detail</em>}' class.
@@ -2131,7 +2310,6 @@ public interface SymbolPackage extends EPackage {
          * @see org.eclipse.jst.jsf.context.symbol.internal.impl.SymbolPackageImpl#getIDescribedInDetail()
          * @generated
          */
-        @SuppressWarnings("hiding")
         EClass IDESCRIBED_IN_DETAIL = eINSTANCE.getIDescribedInDetail();
 
         /**
@@ -2142,7 +2320,6 @@ public interface SymbolPackage extends EPackage {
          * @see org.eclipse.jst.jsf.context.symbol.internal.impl.SymbolPackageImpl#getIJavaTypeDescriptor2()
          * @generated
          */
-        @SuppressWarnings("hiding")
         EClass IJAVA_TYPE_DESCRIPTOR2 = eINSTANCE.getIJavaTypeDescriptor2();
 
         /**
@@ -2151,7 +2328,6 @@ public interface SymbolPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
-        @SuppressWarnings("hiding")
         EAttribute IJAVA_TYPE_DESCRIPTOR2__TYPE = eINSTANCE.getIJavaTypeDescriptor2_Type();
 
         /**
@@ -2160,7 +2336,6 @@ public interface SymbolPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
-        @SuppressWarnings("hiding")
         EReference IJAVA_TYPE_DESCRIPTOR2__BEAN_PROPERTIES = eINSTANCE.getIJavaTypeDescriptor2_BeanProperties();
 
         /**
@@ -2169,7 +2344,6 @@ public interface SymbolPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
-        @SuppressWarnings("hiding")
         EReference IJAVA_TYPE_DESCRIPTOR2__BEAN_METHODS = eINSTANCE.getIJavaTypeDescriptor2_BeanMethods();
 
         /**
@@ -2178,7 +2352,6 @@ public interface SymbolPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
-        @SuppressWarnings("hiding")
         EAttribute IJAVA_TYPE_DESCRIPTOR2__ARRAY_COUNT = eINSTANCE.getIJavaTypeDescriptor2_ArrayCount();
 
         /**
@@ -2189,7 +2362,6 @@ public interface SymbolPackage extends EPackage {
          * @see org.eclipse.jst.jsf.context.symbol.internal.impl.SymbolPackageImpl#getIBeanMethodSymbol()
          * @generated
          */
-        @SuppressWarnings("hiding")
         EClass IBEAN_METHOD_SYMBOL = eINSTANCE.getIBeanMethodSymbol();
 
         /**
@@ -2198,7 +2370,6 @@ public interface SymbolPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
-        @SuppressWarnings("hiding")
         EReference IBEAN_METHOD_SYMBOL__OWNER = eINSTANCE.getIBeanMethodSymbol_Owner();
 
         /**
@@ -2209,7 +2380,6 @@ public interface SymbolPackage extends EPackage {
          * @see org.eclipse.jst.jsf.context.symbol.internal.impl.SymbolPackageImpl#getIComponentSymbol()
          * @generated
          */
-        @SuppressWarnings("hiding")
         EClass ICOMPONENT_SYMBOL = eINSTANCE.getIComponentSymbol();
 
         /**
@@ -2220,7 +2390,6 @@ public interface SymbolPackage extends EPackage {
          * @see org.eclipse.jst.jsf.context.symbol.internal.impl.SymbolPackageImpl#getIPropertySymbol()
          * @generated
          */
-        @SuppressWarnings("hiding")
         EClass IPROPERTY_SYMBOL = eINSTANCE.getIPropertySymbol();
 
         /**
@@ -2229,7 +2398,6 @@ public interface SymbolPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
-        @SuppressWarnings("hiding")
         EAttribute IPROPERTY_SYMBOL__INTERMEDIATE = eINSTANCE.getIPropertySymbol_Intermediate();
 
         /**
@@ -2240,7 +2408,6 @@ public interface SymbolPackage extends EPackage {
          * @see org.eclipse.jst.jsf.context.symbol.internal.impl.SymbolPackageImpl#getIMapTypeDescriptor()
          * @generated
          */
-        @SuppressWarnings("hiding")
         EClass IMAP_TYPE_DESCRIPTOR = eINSTANCE.getIMapTypeDescriptor();
 
         /**
@@ -2249,7 +2416,6 @@ public interface SymbolPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
-        @SuppressWarnings("hiding")
         EAttribute IMAP_TYPE_DESCRIPTOR__MAP_SOURCE = eINSTANCE.getIMapTypeDescriptor_MapSource();
 
         /**
@@ -2258,7 +2424,6 @@ public interface SymbolPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
-        @SuppressWarnings("hiding")
         EAttribute IMAP_TYPE_DESCRIPTOR__IMMUTABLE = eINSTANCE.getIMapTypeDescriptor_Immutable();
 
         /**
@@ -2269,7 +2434,6 @@ public interface SymbolPackage extends EPackage {
          * @see org.eclipse.jst.jsf.context.symbol.internal.impl.SymbolPackageImpl#getIMethodSymbol()
          * @generated
          */
-        @SuppressWarnings("hiding")
         EClass IMETHOD_SYMBOL = eINSTANCE.getIMethodSymbol();
 
         /**
@@ -2278,7 +2442,6 @@ public interface SymbolPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
-        @SuppressWarnings("hiding")
         EAttribute IMETHOD_SYMBOL__SIGNATURE = eINSTANCE.getIMethodSymbol_Signature();
 
         /**
@@ -2289,7 +2452,6 @@ public interface SymbolPackage extends EPackage {
          * @see org.eclipse.jst.jsf.context.symbol.internal.impl.SymbolPackageImpl#getIObjectSymbol()
          * @generated
          */
-        @SuppressWarnings("hiding")
         EClass IOBJECT_SYMBOL = eINSTANCE.getIObjectSymbol();
 
         /**
@@ -2298,7 +2460,6 @@ public interface SymbolPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
-        @SuppressWarnings("hiding")
         EReference IOBJECT_SYMBOL__TYPE_DESCRIPTOR = eINSTANCE.getIObjectSymbol_TypeDescriptor();
 
         /**
@@ -2307,7 +2468,6 @@ public interface SymbolPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
-        @SuppressWarnings("hiding")
         EAttribute IOBJECT_SYMBOL__READABLE = eINSTANCE.getIObjectSymbol_Readable();
 
         /**
@@ -2316,7 +2476,6 @@ public interface SymbolPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
-        @SuppressWarnings("hiding")
         EAttribute IOBJECT_SYMBOL__WRITABLE = eINSTANCE.getIObjectSymbol_Writable();
 
         /**
@@ -2327,7 +2486,6 @@ public interface SymbolPackage extends EPackage {
          * @see org.eclipse.jst.jsf.context.symbol.internal.impl.SymbolPackageImpl#getIBoundedTypeDescriptor()
          * @generated
          */
-        @SuppressWarnings("hiding")
         EClass IBOUNDED_TYPE_DESCRIPTOR = eINSTANCE.getIBoundedTypeDescriptor();
 
         /**
@@ -2338,7 +2496,6 @@ public interface SymbolPackage extends EPackage {
          * @see org.eclipse.jst.jsf.context.symbol.internal.impl.SymbolPackageImpl#getIBoundedMapTypeDescriptor()
          * @generated
          */
-        @SuppressWarnings("hiding")
         EClass IBOUNDED_MAP_TYPE_DESCRIPTOR = eINSTANCE.getIBoundedMapTypeDescriptor();
 
         /**
@@ -2349,7 +2506,6 @@ public interface SymbolPackage extends EPackage {
          * @see org.eclipse.jst.jsf.context.symbol.internal.impl.SymbolPackageImpl#getIBoundedJavaTypeDescriptor()
          * @generated
          */
-        @SuppressWarnings("hiding")
         EClass IBOUNDED_JAVA_TYPE_DESCRIPTOR = eINSTANCE.getIBoundedJavaTypeDescriptor();
 
         /**
@@ -2360,7 +2516,6 @@ public interface SymbolPackage extends EPackage {
          * @see org.eclipse.jst.jsf.context.symbol.internal.impl.SymbolPackageImpl#getIListTypeDescriptor()
          * @generated
          */
-        @SuppressWarnings("hiding")
         EClass ILIST_TYPE_DESCRIPTOR = eINSTANCE.getIListTypeDescriptor();
 
         /**
@@ -2369,7 +2524,6 @@ public interface SymbolPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
-        @SuppressWarnings("hiding")
         EAttribute ILIST_TYPE_DESCRIPTOR__LIST_SOURCE = eINSTANCE.getIListTypeDescriptor_ListSource();
 
         /**
@@ -2380,7 +2534,6 @@ public interface SymbolPackage extends EPackage {
          * @see org.eclipse.jst.jsf.context.symbol.internal.impl.SymbolPackageImpl#getIBoundedListTypeDescriptor()
          * @generated
          */
-        @SuppressWarnings("hiding")
         EClass IBOUNDED_LIST_TYPE_DESCRIPTOR = eINSTANCE.getIBoundedListTypeDescriptor();
 
         /**
@@ -2391,7 +2544,6 @@ public interface SymbolPackage extends EPackage {
          * @see org.eclipse.jst.jsf.context.symbol.internal.impl.SymbolPackageImpl#getERuntimeSource()
          * @generated
          */
-        @SuppressWarnings("hiding")
         EEnum ERUNTIME_SOURCE = eINSTANCE.getERuntimeSource();
 
         /**
@@ -2402,7 +2554,6 @@ public interface SymbolPackage extends EPackage {
          * @see org.eclipse.jst.jsf.context.symbol.internal.impl.SymbolPackageImpl#getIType()
          * @generated
          */
-        @SuppressWarnings("hiding")
         EDataType ITYPE = eINSTANCE.getIType();
 
         /**
@@ -2413,8 +2564,17 @@ public interface SymbolPackage extends EPackage {
          * @see org.eclipse.jst.jsf.context.symbol.internal.impl.SymbolPackageImpl#getIJavaElement()
          * @generated
          */
-        @SuppressWarnings("hiding")
         EDataType IJAVA_ELEMENT = eINSTANCE.getIJavaElement();
+
+        /**
+         * The meta object literal for the '<em>Value Type</em>' data type.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see org.eclipse.jst.jsf.common.internal.types.ValueType
+         * @see org.eclipse.jst.jsf.context.symbol.internal.impl.SymbolPackageImpl#getValueType()
+         * @generated
+         */
+        EDataType VALUE_TYPE = eINSTANCE.getValueType();
 
     }
 

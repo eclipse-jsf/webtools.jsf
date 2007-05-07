@@ -41,11 +41,11 @@ public abstract class AbstractContextSymbolFactory
     {
         if (!supports(context))
         {
-            throw new IllegalArgumentException("Unsupported context");
+            throw new IllegalArgumentException("Unsupported context"); //$NON-NLS-1$
         }
         else if (!ISymbolConstants.isValid(scope))
         {
-            throw new IllegalArgumentException("Unsupported symbol constant:"+scope);
+            throw new IllegalArgumentException("Unsupported symbol constant:"+scope); //$NON-NLS-1$
         }
         
         return internalCreate(symbolName, scope, context, problems);

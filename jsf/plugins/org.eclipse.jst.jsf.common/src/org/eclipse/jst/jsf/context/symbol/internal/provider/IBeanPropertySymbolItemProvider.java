@@ -46,8 +46,7 @@ public class IBeanPropertySymbolItemProvider
      * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @SuppressWarnings("hiding")
-    public static final String copyright = "Copyright 2006 Oracle";
+    public static final String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -90,8 +89,8 @@ public class IBeanPropertySymbolItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_IBeanPropertySymbol_owner_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_IBeanPropertySymbol_owner_feature", "_UI_IBeanPropertySymbol_type"),
+				 getString("_UI_IBeanPropertySymbol_owner_feature"), //$NON-NLS-1$
+				 getString("_UI_PropertyDescriptor_description", "_UI_IBeanPropertySymbol_owner_feature", "_UI_IBeanPropertySymbol_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				 SymbolPackage.Literals.IBEAN_PROPERTY_SYMBOL__OWNER,
 				 true,
 				 false,
@@ -110,7 +109,7 @@ public class IBeanPropertySymbolItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/IBeanPropertySymbol"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/IBeanPropertySymbol")); //$NON-NLS-1$
 	}
 
 	/**
@@ -124,8 +123,8 @@ public class IBeanPropertySymbolItemProvider
 	public String getText(Object object) {
 		String label = ((IBeanPropertySymbol)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_IBeanPropertySymbol_type") :
-			getString("_UI_IBeanPropertySymbol_type") + " " + label;
+			getString("_UI_IBeanPropertySymbol_type") : //$NON-NLS-1$
+			getString("_UI_IBeanPropertySymbol_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**

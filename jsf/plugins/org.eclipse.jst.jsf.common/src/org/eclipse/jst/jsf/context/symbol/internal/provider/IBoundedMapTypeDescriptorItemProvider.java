@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IBoundedMapTypeDescriptorItemProvider.java,v 1.5 2007/04/26 00:08:06 cbateman Exp $
+ * $Id: IBoundedMapTypeDescriptorItemProvider.java,v 1.6 2007/05/07 17:30:21 cbateman Exp $
  */
 package org.eclipse.jst.jsf.context.symbol.internal.provider;
 
@@ -40,8 +40,7 @@ public class IBoundedMapTypeDescriptorItemProvider
      * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @SuppressWarnings("hiding")
-    public static final String copyright = "Copyright 2006 Oracle";
+    public static final String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -75,7 +74,7 @@ public class IBoundedMapTypeDescriptorItemProvider
 	 * @generated
 	 */
     public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/IBoundedMapTypeDescriptor"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/IBoundedMapTypeDescriptor")); //$NON-NLS-1$
 	}
 
 	/**
@@ -87,8 +86,8 @@ public class IBoundedMapTypeDescriptorItemProvider
     public String getText(Object object) {
 		String label = ((IBoundedMapTypeDescriptor)object).getTypeSignature();
 		return label == null || label.length() == 0 ?
-			getString("_UI_IBoundedMapTypeDescriptor_type") :
-			getString("_UI_IBoundedMapTypeDescriptor_type") + " " + label;
+			getString("_UI_IBoundedMapTypeDescriptor_type") : //$NON-NLS-1$
+			getString("_UI_IBoundedMapTypeDescriptor_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**

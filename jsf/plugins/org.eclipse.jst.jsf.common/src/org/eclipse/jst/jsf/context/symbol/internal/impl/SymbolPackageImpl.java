@@ -1,14 +1,9 @@
-/*******************************************************************************
- * Copyright (c) 2006 Oracle Corporation.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+/**
+ * <copyright>
+ * </copyright>
  *
- * Contributors:
- *    Cameron Bateman/Oracle - initial API and implementation
- *    
- ********************************************************************************/
+ * $Id: SymbolPackageImpl.java,v 1.5 2007/05/07 17:30:20 cbateman Exp $
+ */
 package org.eclipse.jst.jsf.context.symbol.internal.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -18,9 +13,14 @@ import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IType;
+
+import org.eclipse.jst.jsf.common.internal.types.ValueType;
+
 import org.eclipse.jst.jsf.context.symbol.ERuntimeSource;
 import org.eclipse.jst.jsf.context.symbol.IBeanInstanceSymbol;
 import org.eclipse.jst.jsf.context.symbol.IBeanMethodSymbol;
@@ -53,94 +53,94 @@ import org.eclipse.jst.jsf.context.symbol.SymbolPackage;
 public class SymbolPackageImpl extends EPackageImpl implements SymbolPackage {
     /**
      * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	public static final String copyright = "Copyright 2006 Oracle";
+    public static final String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
     /**
      * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	private EClass iBeanInstanceSymbolEClass = null;
+    private EClass iBeanInstanceSymbolEClass = null;
 
     /**
      * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	private EClass iBeanPropertySymbolEClass = null;
+    private EClass iBeanPropertySymbolEClass = null;
 
     /**
      * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	private EClass iInstanceSymbolEClass = null;
+    private EClass iInstanceSymbolEClass = null;
 
     /**
      * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	private EClass iJavaSymbolEClass = null;
+    private EClass iJavaSymbolEClass = null;
 
     /**
      * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	private EClass iSymbolEClass = null;
+    private EClass iSymbolEClass = null;
 
     /**
      * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	private EClass iTypeDescriptorEClass = null;
+    private EClass iTypeDescriptorEClass = null;
 
     /**
      * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	private EClass iDescribedInDetailEClass = null;
+    private EClass iDescribedInDetailEClass = null;
 
     /**
      * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	private EClass iJavaTypeDescriptor2EClass = null;
+    private EClass iJavaTypeDescriptor2EClass = null;
 
     /**
      * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	private EClass iBeanMethodSymbolEClass = null;
+    private EClass iBeanMethodSymbolEClass = null;
 
     /**
      * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	private EClass iComponentSymbolEClass = null;
+    private EClass iComponentSymbolEClass = null;
 
     /**
      * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	private EClass iPropertySymbolEClass = null;
+    private EClass iPropertySymbolEClass = null;
 
     /**
      * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	private EClass iMapTypeDescriptorEClass = null;
+    private EClass iMapTypeDescriptorEClass = null;
 
     /**
      * <!-- begin-user-doc -->
@@ -200,17 +200,24 @@ public class SymbolPackageImpl extends EPackageImpl implements SymbolPackage {
 
     /**
      * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	private EDataType iTypeEDataType = null;
+    private EDataType iTypeEDataType = null;
 
     /**
      * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	private EDataType iJavaElementEDataType = null;
+    private EDataType iJavaElementEDataType = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EDataType valueTypeEDataType = null;
 
     /**
      * Creates an instance of the model <b>Package</b>, registered with
@@ -221,22 +228,22 @@ public class SymbolPackageImpl extends EPackageImpl implements SymbolPackage {
      * initialization of the package, or returns the registered package,
      * if one already exists.
      * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @see org.eclipse.emf.ecore.EPackage.Registry
      * @see org.eclipse.jst.jsf.context.symbol.SymbolPackage#eNS_URI
      * @see #init()
      * @generated
      */
-	private SymbolPackageImpl() {
+    private SymbolPackageImpl() {
         super(eNS_URI, SymbolFactory.eINSTANCE);
     }
 
     /**
      * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	private static boolean isInited = false;
+    private static boolean isInited = false;
 
     /**
      * Creates, registers, and initializes the <b>Package</b> for this
@@ -254,14 +261,13 @@ public class SymbolPackageImpl extends EPackageImpl implements SymbolPackage {
      * <p>Invocation of this method will not affect any packages that have
      * already been initialized.
      * <!-- begin-user-doc -->
-	 * @return a symbol package
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @see #eNS_URI
      * @see #createPackageContents()
      * @see #initializePackageContents()
      * @generated
      */
-	public static SymbolPackage init() {
+    public static SymbolPackage init() {
         if (isInited) return (SymbolPackage)EPackage.Registry.INSTANCE.getEPackage(SymbolPackage.eNS_URI);
 
         // Obtain or create and register package
@@ -283,77 +289,69 @@ public class SymbolPackageImpl extends EPackageImpl implements SymbolPackage {
 
     /**
      * <!-- begin-user-doc -->
-     * @return eclass 
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	public EClass getIBeanInstanceSymbol() {
+    public EClass getIBeanInstanceSymbol() {
         return iBeanInstanceSymbolEClass;
     }
 
     /**
      * <!-- begin-user-doc -->
-     * @return ereference
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	public EReference getIBeanInstanceSymbol_Properties() {
+    public EReference getIBeanInstanceSymbol_Properties() {
         return (EReference)iBeanInstanceSymbolEClass.getEStructuralFeatures().get(0);
     }
 
     /**
      * <!-- begin-user-doc -->
-     * @return ereference
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	public EReference getIBeanInstanceSymbol_Methods() {
+    public EReference getIBeanInstanceSymbol_Methods() {
         return (EReference)iBeanInstanceSymbolEClass.getEStructuralFeatures().get(1);
     }
 
     /**
      * <!-- begin-user-doc -->
-     * @return eclass 
      * <!-- end-user-doc -->
      * @generated
      */
-	public EClass getIBeanPropertySymbol() {
+    public EClass getIBeanPropertySymbol() {
         return iBeanPropertySymbolEClass;
     }
 
     /**
      * <!-- begin-user-doc -->
-     * @return ereference
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	public EReference getIBeanPropertySymbol_Owner() {
+    public EReference getIBeanPropertySymbol_Owner() {
         return (EReference)iBeanPropertySymbolEClass.getEStructuralFeatures().get(0);
     }
 
     /**
      * <!-- begin-user-doc -->
-     * @return eclass 
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	public EClass getIInstanceSymbol() {
+    public EClass getIInstanceSymbol() {
         return iInstanceSymbolEClass;
     }
 
     /**
      * <!-- begin-user-doc -->
-     * @return eattribute
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	public EAttribute getIInstanceSymbol_TypeResolved() {
+    public EAttribute getIInstanceSymbol_TypeResolved() {
         return (EAttribute)iInstanceSymbolEClass.getEStructuralFeatures().get(0);
     }
 
     /**
      * <!-- begin-user-doc -->
-     * @return eattribute 
      * <!-- end-user-doc -->
      * @generated
      */
@@ -363,67 +361,60 @@ public class SymbolPackageImpl extends EPackageImpl implements SymbolPackage {
 
     /**
      * <!-- begin-user-doc -->
-     * @return eclass 
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	public EClass getIJavaSymbol() {
+    public EClass getIJavaSymbol() {
         return iJavaSymbolEClass;
     }
 
     /**
      * <!-- begin-user-doc -->
-     * @return eattribute
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	public EAttribute getIJavaSymbol_JavaElement() {
+    public EAttribute getIJavaSymbol_JavaElement() {
         return (EAttribute)iJavaSymbolEClass.getEStructuralFeatures().get(0);
     }
 
     /**
      * <!-- begin-user-doc -->
-     * @return eclass 
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	public EClass getISymbol() {
+    public EClass getISymbol() {
         return iSymbolEClass;
     }
 
     /**
      * <!-- begin-user-doc -->
-     * @return eattribute
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	public EAttribute getISymbol_Name() {
+    public EAttribute getISymbol_Name() {
         return (EAttribute)iSymbolEClass.getEStructuralFeatures().get(0);
     }
 
     /**
      * <!-- begin-user-doc -->
-     * @return eclass 
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	public EClass getITypeDescriptor() {
+    public EClass getITypeDescriptor() {
         return iTypeDescriptorEClass;
     }
 
     /**
      * <!-- begin-user-doc -->
-     * @return ereference
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	public EReference getITypeDescriptor_Properties() {
+    public EReference getITypeDescriptor_Properties() {
         return (EReference)iTypeDescriptorEClass.getEStructuralFeatures().get(0);
     }
 
     /**
      * <!-- begin-user-doc -->
-     * @return the type signature eattribute 
      * <!-- end-user-doc -->
      * @generated
      */
@@ -433,7 +424,6 @@ public class SymbolPackageImpl extends EPackageImpl implements SymbolPackage {
 
     /**
      * <!-- begin-user-doc -->
-     * @return the eattribute
      * <!-- end-user-doc -->
      * @generated
      */
@@ -443,7 +433,6 @@ public class SymbolPackageImpl extends EPackageImpl implements SymbolPackage {
 
     /**
      * <!-- begin-user-doc -->
-     * @return the eattribute
      * <!-- end-user-doc -->
      * @generated
      */
@@ -453,7 +442,6 @@ public class SymbolPackageImpl extends EPackageImpl implements SymbolPackage {
 
     /**
      * <!-- begin-user-doc -->
-     * @return  the eattribute
      * <!-- end-user-doc -->
      * @generated
      */
@@ -463,7 +451,6 @@ public class SymbolPackageImpl extends EPackageImpl implements SymbolPackage {
 
     /**
      * <!-- begin-user-doc -->
-     * @return the ereference 
      * <!-- end-user-doc -->
      * @generated
      */
@@ -473,51 +460,64 @@ public class SymbolPackageImpl extends EPackageImpl implements SymbolPackage {
 
     /**
      * <!-- begin-user-doc -->
-     * @return eclass 
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	public EClass getIDescribedInDetail() {
+    public EAttribute getITypeDescriptor_TypeParameterSignatures() {
+        return (EAttribute)iTypeDescriptorEClass.getEStructuralFeatures().get(6);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getITypeDescriptor_JdtContext() {
+        return (EAttribute)iTypeDescriptorEClass.getEStructuralFeatures().get(7);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getIDescribedInDetail() {
         return iDescribedInDetailEClass;
     }
 
     /**
      * <!-- begin-user-doc -->
-     * @return eclass 
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	public EClass getIJavaTypeDescriptor2() {
+    public EClass getIJavaTypeDescriptor2() {
         return iJavaTypeDescriptor2EClass;
     }
 
     /**
      * <!-- begin-user-doc -->
-     * @return eattribute
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	public EAttribute getIJavaTypeDescriptor2_Type() {
+    public EAttribute getIJavaTypeDescriptor2_Type() {
         return (EAttribute)iJavaTypeDescriptor2EClass.getEStructuralFeatures().get(0);
     }
 
     /**
      * <!-- begin-user-doc -->
-     * @return ereference
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	public EReference getIJavaTypeDescriptor2_BeanProperties() {
+    public EReference getIJavaTypeDescriptor2_BeanProperties() {
         return (EReference)iJavaTypeDescriptor2EClass.getEStructuralFeatures().get(1);
     }
 
     /**
      * <!-- begin-user-doc -->
-     * @return ereference
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	public EReference getIJavaTypeDescriptor2_BeanMethods() {
+    public EReference getIJavaTypeDescriptor2_BeanMethods() {
         return (EReference)iJavaTypeDescriptor2EClass.getEStructuralFeatures().get(2);
     }
 
@@ -532,77 +532,69 @@ public class SymbolPackageImpl extends EPackageImpl implements SymbolPackage {
 
     /**
      * <!-- begin-user-doc -->
-     * @return eclass 
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	public EClass getIBeanMethodSymbol() {
+    public EClass getIBeanMethodSymbol() {
         return iBeanMethodSymbolEClass;
     }
 
     /**
      * <!-- begin-user-doc -->
-     * @return ereference
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	public EReference getIBeanMethodSymbol_Owner() {
+    public EReference getIBeanMethodSymbol_Owner() {
         return (EReference)iBeanMethodSymbolEClass.getEStructuralFeatures().get(0);
     }
 
     /**
      * <!-- begin-user-doc -->
-     * @return eclass 
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	public EClass getIComponentSymbol() {
+    public EClass getIComponentSymbol() {
         return iComponentSymbolEClass;
     }
 
     /**
      * <!-- begin-user-doc -->
-     * @return eclass 
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	public EClass getIPropertySymbol() {
+    public EClass getIPropertySymbol() {
         return iPropertySymbolEClass;
     }
 
     /**
      * <!-- begin-user-doc -->
-     * @return eattribute
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	public EAttribute getIPropertySymbol_Intermediate() {
+    public EAttribute getIPropertySymbol_Intermediate() {
         return (EAttribute)iPropertySymbolEClass.getEStructuralFeatures().get(0);
     }
 
     /**
      * <!-- begin-user-doc -->
-     * @return eclass 
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	public EClass getIMapTypeDescriptor() {
+    public EClass getIMapTypeDescriptor() {
         return iMapTypeDescriptorEClass;
     }
 
     /**
      * <!-- begin-user-doc -->
-     * @return eattribute
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	public EAttribute getIMapTypeDescriptor_MapSource() {
+    public EAttribute getIMapTypeDescriptor_MapSource() {
         return (EAttribute)iMapTypeDescriptorEClass.getEStructuralFeatures().get(0);
     }
 
     /**
      * <!-- begin-user-doc -->
-     * @return the eattribute 
      * <!-- end-user-doc -->
      * @generated
      */
@@ -612,7 +604,6 @@ public class SymbolPackageImpl extends EPackageImpl implements SymbolPackage {
 
     /**
      * <!-- begin-user-doc -->
-     * @return the eclass for a method symbol 
      * <!-- end-user-doc -->
      * @generated
      */
@@ -622,7 +613,6 @@ public class SymbolPackageImpl extends EPackageImpl implements SymbolPackage {
 
     /**
      * <!-- begin-user-doc -->
-     * @return the signature attribute of the method symbol 
      * <!-- end-user-doc -->
      * @generated
      */
@@ -632,7 +622,6 @@ public class SymbolPackageImpl extends EPackageImpl implements SymbolPackage {
 
     /**
      * <!-- begin-user-doc -->
-     * @return eclass 
      * <!-- end-user-doc -->
      * @generated
      */
@@ -642,7 +631,6 @@ public class SymbolPackageImpl extends EPackageImpl implements SymbolPackage {
 
     /**
      * <!-- begin-user-doc -->
-     * @return ereference 
      * <!-- end-user-doc -->
      * @generated
      */
@@ -652,7 +640,6 @@ public class SymbolPackageImpl extends EPackageImpl implements SymbolPackage {
 
     /**
      * <!-- begin-user-doc -->
-     * @return the eattribute 
      * <!-- end-user-doc -->
      * @generated
      */
@@ -662,7 +649,6 @@ public class SymbolPackageImpl extends EPackageImpl implements SymbolPackage {
 
     /**
      * <!-- begin-user-doc -->
-     * @return the eattribute 
      * <!-- end-user-doc -->
      * @generated
      */
@@ -726,7 +712,6 @@ public class SymbolPackageImpl extends EPackageImpl implements SymbolPackage {
 
     /**
      * <!-- begin-user-doc -->
-     * @return eenum 
      * <!-- end-user-doc -->
      * @generated
      */
@@ -736,49 +721,55 @@ public class SymbolPackageImpl extends EPackageImpl implements SymbolPackage {
 
     /**
      * <!-- begin-user-doc -->
-     * @return edatatype
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	public EDataType getIType() {
+    public EDataType getIType() {
         return iTypeEDataType;
     }
 
     /**
      * <!-- begin-user-doc -->
-     * @return edatatype
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	public EDataType getIJavaElement() {
+    public EDataType getIJavaElement() {
         return iJavaElementEDataType;
     }
 
     /**
      * <!-- begin-user-doc -->
-     * @return the symbol factory
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	public SymbolFactory getSymbolFactory() {
+    public EDataType getValueType() {
+        return valueTypeEDataType;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public SymbolFactory getSymbolFactory() {
         return (SymbolFactory)getEFactoryInstance();
     }
 
     /**
      * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	private boolean isCreated = false;
+    private boolean isCreated = false;
 
     /**
      * Creates the meta-model objects for the package.  This method is
      * guarded to have no affect on any invocation but its first.
      * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	public void createPackageContents() {
+    public void createPackageContents() {
         if (isCreated) return;
         isCreated = true;
 
@@ -807,6 +798,8 @@ public class SymbolPackageImpl extends EPackageImpl implements SymbolPackage {
         createEAttribute(iTypeDescriptorEClass, ITYPE_DESCRIPTOR__INTERFACE_TYPE_SIGNATURES);
         createEAttribute(iTypeDescriptorEClass, ITYPE_DESCRIPTOR__TYPE_SIGNATURE_DELEGATE);
         createEReference(iTypeDescriptorEClass, ITYPE_DESCRIPTOR__METHODS);
+        createEAttribute(iTypeDescriptorEClass, ITYPE_DESCRIPTOR__TYPE_PARAMETER_SIGNATURES);
+        createEAttribute(iTypeDescriptorEClass, ITYPE_DESCRIPTOR__JDT_CONTEXT);
 
         iDescribedInDetailEClass = createEClass(IDESCRIBED_IN_DETAIL);
 
@@ -853,23 +846,24 @@ public class SymbolPackageImpl extends EPackageImpl implements SymbolPackage {
         // Create data types
         iTypeEDataType = createEDataType(ITYPE);
         iJavaElementEDataType = createEDataType(IJAVA_ELEMENT);
+        valueTypeEDataType = createEDataType(VALUE_TYPE);
     }
 
     /**
      * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	private boolean isInitialized = false;
+    private boolean isInitialized = false;
 
     /**
      * Complete the initialization of the package and its meta-model.  This
      * method is guarded to have no affect on any invocation but its first.
      * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	public void initializePackageContents() {
+    public void initializePackageContents() {
         if (isInitialized) return;
         isInitialized = true;
 
@@ -904,105 +898,116 @@ public class SymbolPackageImpl extends EPackageImpl implements SymbolPackage {
         iBoundedListTypeDescriptorEClass.getESuperTypes().add(this.getIBoundedTypeDescriptor());
 
         // Initialize classes and features; add operations and parameters
-        initEClass(iBeanInstanceSymbolEClass, IBeanInstanceSymbol.class, "IBeanInstanceSymbol", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getIBeanInstanceSymbol_Properties(), this.getIBeanPropertySymbol(), null, "properties", null, 0, -1, IBeanInstanceSymbol.class, !IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getIBeanInstanceSymbol_Methods(), this.getIBeanMethodSymbol(), null, "methods", null, 0, -1, IBeanInstanceSymbol.class, !IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEClass(iBeanInstanceSymbolEClass, IBeanInstanceSymbol.class, "IBeanInstanceSymbol", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEReference(getIBeanInstanceSymbol_Properties(), this.getIBeanPropertySymbol(), null, "properties", null, 0, -1, IBeanInstanceSymbol.class, !IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getIBeanInstanceSymbol_Methods(), this.getIBeanMethodSymbol(), null, "methods", null, 0, -1, IBeanInstanceSymbol.class, !IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-        addEOperation(iBeanInstanceSymbolEClass, this.getIJavaTypeDescriptor2(), "getJavaTypeDescriptor", 0, 1);
+        addEOperation(iBeanInstanceSymbolEClass, this.getIJavaTypeDescriptor2(), "getJavaTypeDescriptor", 0, 1); //$NON-NLS-1$
 
-        EOperation op = addEOperation(iBeanInstanceSymbolEClass, null, "setJavaTypeDescriptor");
-        addEParameter(op, this.getIJavaTypeDescriptor2(), "newTypeDescriptor", 0, 1);
+        EOperation op = addEOperation(iBeanInstanceSymbolEClass, null, "setJavaTypeDescriptor"); //$NON-NLS-1$
+        addEParameter(op, this.getIJavaTypeDescriptor2(), "newTypeDescriptor", 0, 1); //$NON-NLS-1$
 
-        initEClass(iBeanPropertySymbolEClass, IBeanPropertySymbol.class, "IBeanPropertySymbol", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getIBeanPropertySymbol_Owner(), this.getIJavaTypeDescriptor2(), null, "owner", null, 0, 1, IBeanPropertySymbol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEClass(iBeanPropertySymbolEClass, IBeanPropertySymbol.class, "IBeanPropertySymbol", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEReference(getIBeanPropertySymbol_Owner(), this.getIJavaTypeDescriptor2(), null, "owner", null, 0, 1, IBeanPropertySymbol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-        initEClass(iInstanceSymbolEClass, IInstanceSymbol.class, "IInstanceSymbol", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getIInstanceSymbol_TypeResolved(), ecorePackage.getEBoolean(), "typeResolved", null, 0, 1, IInstanceSymbol.class, !IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getIInstanceSymbol_RuntimeSource(), this.getERuntimeSource(), "runtimeSource", "TAG_INSTANTIATED_SYMBOL", 0, 1, IInstanceSymbol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEClass(iInstanceSymbolEClass, IInstanceSymbol.class, "IInstanceSymbol", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getIInstanceSymbol_TypeResolved(), ecorePackage.getEBoolean(), "typeResolved", null, 0, 1, IInstanceSymbol.class, !IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getIInstanceSymbol_RuntimeSource(), this.getERuntimeSource(), "runtimeSource", "TAG_INSTANTIATED_SYMBOL", 0, 1, IInstanceSymbol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
 
-        initEClass(iJavaSymbolEClass, IJavaSymbol.class, "IJavaSymbol", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getIJavaSymbol_JavaElement(), this.getIJavaElement(), "javaElement", null, 0, 1, IJavaSymbol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEClass(iJavaSymbolEClass, IJavaSymbol.class, "IJavaSymbol", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getIJavaSymbol_JavaElement(), this.getIJavaElement(), "javaElement", null, 0, 1, IJavaSymbol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-        initEClass(iSymbolEClass, ISymbol.class, "ISymbol", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getISymbol_Name(), ecorePackage.getEString(), "name", null, 0, 1, ISymbol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEClass(iSymbolEClass, ISymbol.class, "ISymbol", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getISymbol_Name(), ecorePackage.getEString(), "name", null, 0, 1, ISymbol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-        initEClass(iTypeDescriptorEClass, ITypeDescriptor.class, "ITypeDescriptor", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getITypeDescriptor_Properties(), this.getIPropertySymbol(), null, "properties", null, 0, -1, ITypeDescriptor.class, !IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getITypeDescriptor_TypeSignature(), ecorePackage.getEString(), "typeSignature", "", 0, 1, ITypeDescriptor.class, !IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getITypeDescriptor_SuperTypeSignatures(), ecorePackage.getEString(), "superTypeSignatures", null, 0, -1, ITypeDescriptor.class, !IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getITypeDescriptor_InterfaceTypeSignatures(), ecorePackage.getEString(), "interfaceTypeSignatures", null, 0, -1, ITypeDescriptor.class, !IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getITypeDescriptor_TypeSignatureDelegate(), ecorePackage.getEString(), "typeSignatureDelegate", null, 0, 1, ITypeDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getITypeDescriptor_Methods(), this.getIMethodSymbol(), null, "methods", null, 0, -1, ITypeDescriptor.class, !IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEClass(iTypeDescriptorEClass, ITypeDescriptor.class, "ITypeDescriptor", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEReference(getITypeDescriptor_Properties(), this.getIPropertySymbol(), null, "properties", null, 0, -1, ITypeDescriptor.class, !IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getITypeDescriptor_TypeSignature(), ecorePackage.getEString(), "typeSignature", "", 0, 1, ITypeDescriptor.class, !IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
+        initEAttribute(getITypeDescriptor_SuperTypeSignatures(), ecorePackage.getEString(), "superTypeSignatures", null, 0, -1, ITypeDescriptor.class, !IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getITypeDescriptor_InterfaceTypeSignatures(), ecorePackage.getEString(), "interfaceTypeSignatures", null, 0, -1, ITypeDescriptor.class, !IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getITypeDescriptor_TypeSignatureDelegate(), ecorePackage.getEString(), "typeSignatureDelegate", null, 0, 1, ITypeDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getITypeDescriptor_Methods(), this.getIMethodSymbol(), null, "methods", null, 0, -1, ITypeDescriptor.class, !IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getITypeDescriptor_TypeParameterSignatures(), ecorePackage.getEString(), "typeParameterSignatures", null, 0, -1, ITypeDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getITypeDescriptor_JdtContext(), this.getIJavaElement(), "jdtContext", null, 0, 1, ITypeDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-        op = addEOperation(iTypeDescriptorEClass, ecorePackage.getEBoolean(), "instanceOf", 0, 1);
-        addEParameter(op, ecorePackage.getEString(), "typeSignature", 0, 1);
+        op = addEOperation(iTypeDescriptorEClass, ecorePackage.getEBoolean(), "instanceOf", 0, 1); //$NON-NLS-1$
+        addEParameter(op, ecorePackage.getEString(), "typeSignature", 0, 1); //$NON-NLS-1$
 
-        addEOperation(iTypeDescriptorEClass, ecorePackage.getEBoolean(), "isArray", 0, 1);
+        addEOperation(iTypeDescriptorEClass, ecorePackage.getEBoolean(), "isArray", 0, 1); //$NON-NLS-1$
 
-        addEOperation(iTypeDescriptorEClass, this.getIObjectSymbol(), "getArrayElement", 0, 1);
+        addEOperation(iTypeDescriptorEClass, this.getIObjectSymbol(), "getArrayElement", 0, 1); //$NON-NLS-1$
 
-        initEClass(iDescribedInDetailEClass, IDescribedInDetail.class, "IDescribedInDetail", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        op = addEOperation(iTypeDescriptorEClass, this.getIType(), "resolveType", 0, 1); //$NON-NLS-1$
+        addEParameter(op, ecorePackage.getEString(), "resolvedTypeSignature", 0, 1); //$NON-NLS-1$
 
-        initEClass(iJavaTypeDescriptor2EClass, IJavaTypeDescriptor2.class, "IJavaTypeDescriptor2", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getIJavaTypeDescriptor2_Type(), this.getIType(), "type", null, 0, 1, IJavaTypeDescriptor2.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getIJavaTypeDescriptor2_BeanProperties(), this.getIBeanPropertySymbol(), null, "beanProperties", null, 0, -1, IJavaTypeDescriptor2.class, !IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getIJavaTypeDescriptor2_BeanMethods(), this.getIBeanPropertySymbol(), null, "beanMethods", null, 0, -1, IJavaTypeDescriptor2.class, !IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getIJavaTypeDescriptor2_ArrayCount(), ecorePackage.getEInt(), "arrayCount", null, 0, 1, IJavaTypeDescriptor2.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEClass(iDescribedInDetailEClass, IDescribedInDetail.class, "IDescribedInDetail", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
-        initEClass(iBeanMethodSymbolEClass, IBeanMethodSymbol.class, "IBeanMethodSymbol", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getIBeanMethodSymbol_Owner(), this.getIJavaTypeDescriptor2(), null, "owner", null, 0, 1, IBeanMethodSymbol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEClass(iJavaTypeDescriptor2EClass, IJavaTypeDescriptor2.class, "IJavaTypeDescriptor2", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getIJavaTypeDescriptor2_Type(), this.getIType(), "type", null, 0, 1, IJavaTypeDescriptor2.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getIJavaTypeDescriptor2_BeanProperties(), this.getIBeanPropertySymbol(), null, "beanProperties", null, 0, -1, IJavaTypeDescriptor2.class, !IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getIJavaTypeDescriptor2_BeanMethods(), this.getIBeanPropertySymbol(), null, "beanMethods", null, 0, -1, IJavaTypeDescriptor2.class, !IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getIJavaTypeDescriptor2_ArrayCount(), ecorePackage.getEInt(), "arrayCount", null, 0, 1, IJavaTypeDescriptor2.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-        initEClass(iComponentSymbolEClass, IComponentSymbol.class, "IComponentSymbol", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        initEClass(iBeanMethodSymbolEClass, IBeanMethodSymbol.class, "IBeanMethodSymbol", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEReference(getIBeanMethodSymbol_Owner(), this.getIJavaTypeDescriptor2(), null, "owner", null, 0, 1, IBeanMethodSymbol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-        initEClass(iPropertySymbolEClass, IPropertySymbol.class, "IPropertySymbol", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getIPropertySymbol_Intermediate(), ecorePackage.getEBoolean(), "intermediate", null, 0, 1, IPropertySymbol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEClass(iComponentSymbolEClass, IComponentSymbol.class, "IComponentSymbol", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
-        initEClass(iMapTypeDescriptorEClass, IMapTypeDescriptor.class, "IMapTypeDescriptor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getIMapTypeDescriptor_MapSource(), ecorePackage.getEMap(), "mapSource", null, 0, 1, IMapTypeDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getIMapTypeDescriptor_Immutable(), ecorePackage.getEBoolean(), "immutable", "true", 0, 1, IMapTypeDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEClass(iPropertySymbolEClass, IPropertySymbol.class, "IPropertySymbol", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getIPropertySymbol_Intermediate(), ecorePackage.getEBoolean(), "intermediate", null, 0, 1, IPropertySymbol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-        initEClass(iMethodSymbolEClass, IMethodSymbol.class, "IMethodSymbol", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getIMethodSymbol_Signature(), ecorePackage.getEString(), "signature", null, 0, 1, IMethodSymbol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEClass(iMapTypeDescriptorEClass, IMapTypeDescriptor.class, "IMapTypeDescriptor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getIMapTypeDescriptor_MapSource(), ecorePackage.getEMap(), "mapSource", null, 0, 1, IMapTypeDescriptor.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getIMapTypeDescriptor_Immutable(), ecorePackage.getEBoolean(), "immutable", "true", 0, 1, IMapTypeDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
 
-        initEClass(iObjectSymbolEClass, IObjectSymbol.class, "IObjectSymbol", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getIObjectSymbol_TypeDescriptor(), this.getITypeDescriptor(), null, "typeDescriptor", null, 0, 1, IObjectSymbol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getIObjectSymbol_Readable(), ecorePackage.getEBoolean(), "readable", null, 0, 1, IObjectSymbol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getIObjectSymbol_Writable(), ecorePackage.getEBoolean(), "writable", null, 0, 1, IObjectSymbol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEClass(iMethodSymbolEClass, IMethodSymbol.class, "IMethodSymbol", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getIMethodSymbol_Signature(), ecorePackage.getEString(), "signature", null, 0, 1, IMethodSymbol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-        op = addEOperation(iObjectSymbolEClass, ecorePackage.getEBoolean(), "supportsCoercion", 0, 1);
-        addEParameter(op, ecorePackage.getEString(), "typeSignature", 0, 1);
+        initEClass(iObjectSymbolEClass, IObjectSymbol.class, "IObjectSymbol", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEReference(getIObjectSymbol_TypeDescriptor(), this.getITypeDescriptor(), null, "typeDescriptor", null, 0, 1, IObjectSymbol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getIObjectSymbol_Readable(), ecorePackage.getEBoolean(), "readable", null, 0, 1, IObjectSymbol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getIObjectSymbol_Writable(), ecorePackage.getEBoolean(), "writable", null, 0, 1, IObjectSymbol.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-        op = addEOperation(iObjectSymbolEClass, this.getITypeDescriptor(), "coerce", 0, 1);
-        addEParameter(op, ecorePackage.getEString(), "typeSignature", 0, 1);
+        op = addEOperation(iObjectSymbolEClass, ecorePackage.getEBoolean(), "supportsCoercion", 0, 1); //$NON-NLS-1$
+        addEParameter(op, ecorePackage.getEString(), "typeSignature", 0, 1); //$NON-NLS-1$
 
-        initEClass(iBoundedTypeDescriptorEClass, IBoundedTypeDescriptor.class, "IBoundedTypeDescriptor", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        op = addEOperation(iObjectSymbolEClass, this.getITypeDescriptor(), "coerce", 0, 1); //$NON-NLS-1$
+        addEParameter(op, ecorePackage.getEString(), "typeSignature", 0, 1); //$NON-NLS-1$
 
-        op = addEOperation(iBoundedTypeDescriptorEClass, ecorePackage.getEBoolean(), "isUnboundedForType", 0, 1);
-        addEParameter(op, ecorePackage.getEString(), "typeSignature", 0, 1);
+        op = addEOperation(iObjectSymbolEClass, this.getISymbol(), "call", 0, 1); //$NON-NLS-1$
+        addEParameter(op, ecorePackage.getEString(), "methodName", 0, 1); //$NON-NLS-1$
+        addEParameter(op, this.getValueType(), "methodArguments", 0, -1); //$NON-NLS-1$
+        addEParameter(op, ecorePackage.getEString(), "symbolName", 0, 1); //$NON-NLS-1$
 
-        op = addEOperation(iBoundedTypeDescriptorEClass, this.getISymbol(), "getUnboundedProperty", 0, 1);
-        addEParameter(op, ecorePackage.getEJavaObject(), "name", 0, 1);
-        addEParameter(op, ecorePackage.getEString(), "typeSignature", 0, 1);
+        initEClass(iBoundedTypeDescriptorEClass, IBoundedTypeDescriptor.class, "IBoundedTypeDescriptor", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
-        initEClass(iBoundedMapTypeDescriptorEClass, IBoundedMapTypeDescriptor.class, "IBoundedMapTypeDescriptor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        op = addEOperation(iBoundedTypeDescriptorEClass, ecorePackage.getEBoolean(), "isUnboundedForType", 0, 1); //$NON-NLS-1$
+        addEParameter(op, ecorePackage.getEString(), "typeSignature", 0, 1); //$NON-NLS-1$
 
-        initEClass(iBoundedJavaTypeDescriptorEClass, IBoundedJavaTypeDescriptor.class, "IBoundedJavaTypeDescriptor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        op = addEOperation(iBoundedTypeDescriptorEClass, this.getISymbol(), "getUnboundedProperty", 0, 1); //$NON-NLS-1$
+        addEParameter(op, ecorePackage.getEJavaObject(), "name", 0, 1); //$NON-NLS-1$
+        addEParameter(op, ecorePackage.getEString(), "typeSignature", 0, 1); //$NON-NLS-1$
 
-        initEClass(iListTypeDescriptorEClass, IListTypeDescriptor.class, "IListTypeDescriptor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getIListTypeDescriptor_ListSource(), ecorePackage.getEEList(), "listSource", null, 0, 1, IListTypeDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEClass(iBoundedMapTypeDescriptorEClass, IBoundedMapTypeDescriptor.class, "IBoundedMapTypeDescriptor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
-        initEClass(iBoundedListTypeDescriptorEClass, IBoundedListTypeDescriptor.class, "IBoundedListTypeDescriptor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        initEClass(iBoundedJavaTypeDescriptorEClass, IBoundedJavaTypeDescriptor.class, "IBoundedJavaTypeDescriptor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+
+        initEClass(iListTypeDescriptorEClass, IListTypeDescriptor.class, "IListTypeDescriptor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getIListTypeDescriptor_ListSource(), ecorePackage.getEEList(), "listSource", null, 0, 1, IListTypeDescriptor.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(iBoundedListTypeDescriptorEClass, IBoundedListTypeDescriptor.class, "IBoundedListTypeDescriptor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
         // Initialize enums and add enum literals
-        initEEnum(eRuntimeSourceEEnum, ERuntimeSource.class, "ERuntimeSource");
+        initEEnum(eRuntimeSourceEEnum, ERuntimeSource.class, "ERuntimeSource"); //$NON-NLS-1$
         addEEnumLiteral(eRuntimeSourceEEnum, ERuntimeSource.BUILT_IN_SYMBOL_LITERAL);
         addEEnumLiteral(eRuntimeSourceEEnum, ERuntimeSource.MANAGED_BEAN_SYMBOL_LITERAL);
         addEEnumLiteral(eRuntimeSourceEEnum, ERuntimeSource.TAG_INSTANTIATED_SYMBOL_LITERAL);
         addEEnumLiteral(eRuntimeSourceEEnum, ERuntimeSource.OTHER_LITERAL);
 
         // Initialize data types
-        initEDataType(iTypeEDataType, IType.class, "IType", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
-        initEDataType(iJavaElementEDataType, IJavaElement.class, "IJavaElement", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+        initEDataType(iTypeEDataType, IType.class, "IType", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEDataType(iJavaElementEDataType, IJavaElement.class, "IJavaElement", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEDataType(valueTypeEDataType, ValueType.class, "ValueType", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
         // Create resource
         createResource(eNS_URI);

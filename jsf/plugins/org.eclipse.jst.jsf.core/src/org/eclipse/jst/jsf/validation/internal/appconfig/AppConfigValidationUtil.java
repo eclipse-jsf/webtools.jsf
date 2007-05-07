@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * Copyright (c) 2007 Oracle Corporation.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Cameron Bateman/Oracle - initial API and implementation
+ *    
+ ********************************************************************************/
 package org.eclipse.jst.jsf.validation.internal.appconfig;
 
 import java.io.StringReader;
@@ -67,7 +78,7 @@ public final class AppConfigValidationUtil
             }
             
             // must not be abstract since it must instantiable
-            if ((type.getFlags() & Flags.AccAbstract) != 0)
+            if (Flags.isAbstract(type.getFlags()))
             {
                 return DiagnosticFactory
                         .create_CLASS_MUST_BE_CONCRETE(fullyQualifiedName);
@@ -80,7 +91,7 @@ public final class AppConfigValidationUtil
                     // if we get to here, we haven't found the expected
                     // the super type so error
                     return DiagnosticFactory.create_CLASS_MUST_BE_INSTANCE_OF
-                        (fullyQualifiedName, "extend", instanceOf);
+                        (fullyQualifiedName, Messages.AppConfigValidationUtil_0, instanceOf);
                 }
             }
         }
@@ -88,7 +99,7 @@ public final class AppConfigValidationUtil
         {
             // fall-through, not found
             JSFCorePlugin.log(jme, 
-                "Error resolving fully qualified class name: "+fullyQualifiedName);
+                "Error resolving fully qualified class name: "+fullyQualifiedName); //$NON-NLS-1$
         }
 
         // either found the class or had an exception so don't report error
@@ -142,14 +153,14 @@ public final class AppConfigValidationUtil
      */
     public static ELResultWrapper extractELExpression(final String textContent)
     {
-        final String elRegex = "#\\{(.*)\\}";
+        final String elRegex = "#\\{(.*)\\}"; //$NON-NLS-1$
         Pattern pattern = Pattern.compile(elRegex);
         Matcher matcher = pattern.matcher(textContent.trim());
         if (matcher.matches())
         {
            final String elText = matcher.group(1).trim();
             
-            if ("".equals(elText) || elText == null)
+            if ("".equals(elText) || elText == null) //$NON-NLS-1$
             {
                 return new ELResultWrapper(DiagnosticFactory.create_SYNTAX_ERROR_IN_EL(), null);
             }
@@ -259,10 +270,10 @@ public final class AppConfigValidationUtil
     public static IMessage validateManagedBeanScope(ManagedBeanScopeType scope)
     {
         // scope must be one of a few enums
-        if (!"request".equals(scope.getTextContent())
-                && !"session".equals(scope.getTextContent())
-                && !"application".equals(scope.getTextContent())
-                && !"none".equals(scope.getTextContent()))
+        if (!"request".equals(scope.getTextContent()) //$NON-NLS-1$
+                && !"session".equals(scope.getTextContent()) //$NON-NLS-1$
+                && !"application".equals(scope.getTextContent()) //$NON-NLS-1$
+                && !"none".equals(scope.getTextContent())) //$NON-NLS-1$
         {
             return DiagnosticFactory.create_BEAN_SCOPE_NOT_VALID();
         }
@@ -283,7 +294,7 @@ public final class AppConfigValidationUtil
     {
         if (mapEntries == null || targetType == null || project == null)
         {
-            throw new AssertionError("Arguments to validateMapEntries can't be null");
+            throw new AssertionError("Arguments to validateMapEntries can't be null"); //$NON-NLS-1$
         }
         
         try
@@ -304,7 +315,7 @@ public final class AppConfigValidationUtil
         }
         catch (JavaModelException jme)
         {
-            JSFCorePlugin.log(new Exception(jme), "Exception while validating mapEntries");
+            JSFCorePlugin.log(new Exception(jme), "Exception while validating mapEntries"); //$NON-NLS-1$
         }
         // if we get to here, we have not found anything meaningful to report
         return null;
@@ -323,7 +334,7 @@ public final class AppConfigValidationUtil
     {
         if (listEntries == null || targetType == null || project == null)
         {
-            throw new AssertionError("Arguments to validateMapEntries can't be null");
+            throw new AssertionError("Arguments to validateMapEntries can't be null"); //$NON-NLS-1$
         }
         
         try
@@ -343,7 +354,7 @@ public final class AppConfigValidationUtil
         }
         catch (JavaModelException jme)
         {
-            JSFCorePlugin.log(new Exception(jme), "Exception while validating mapEntries");
+            JSFCorePlugin.log(new Exception(jme), "Exception while validating mapEntries"); //$NON-NLS-1$
         }
         // if we get to here, we have not found anything meaningful to report
         return null;
@@ -359,7 +370,7 @@ public final class AppConfigValidationUtil
         // based on the localeType in the Faces 1.2 schema.  This is safe
         // to apply to 1.1 since it expects the same pattern even though 
         // the DTD cannot validate it
-        final String localeTypePattern = "[a-z]{2}(_|-)?([\\p{L}\\-\\p{Nd}]{2})?";
+        final String localeTypePattern = "[a-z]{2}(_|-)?([\\p{L}\\-\\p{Nd}]{2})?"; //$NON-NLS-1$
         final Matcher matcher = Pattern.compile(localeTypePattern).matcher(localeType);
         
         if (!matcher.matches())

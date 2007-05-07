@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IType;
+import org.eclipse.jst.jsf.common.internal.types.ValueType;
 import org.eclipse.jst.jsf.context.symbol.ERuntimeSource;
 import org.eclipse.jst.jsf.context.symbol.IBeanInstanceSymbol;
 import org.eclipse.jst.jsf.context.symbol.IBeanMethodSymbol;
@@ -51,7 +52,7 @@ public class SymbolFactoryImpl extends EFactoryImpl implements SymbolFactory {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final String copyright = "Copyright 2006 Oracle";
+    public static final String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
     /**
      * Creates the default factory implementation.
@@ -62,7 +63,7 @@ public class SymbolFactoryImpl extends EFactoryImpl implements SymbolFactory {
      */
 	public static SymbolFactory init() {
         try {
-            SymbolFactory theSymbolFactory = (SymbolFactory)EPackage.Registry.INSTANCE.getEFactory("http:///org/eclipse/jst/jsf/context/symbol.ecore"); 
+            SymbolFactory theSymbolFactory = (SymbolFactory)EPackage.Registry.INSTANCE.getEFactory("http:///org/eclipse/jst/jsf/context/symbol.ecore");  //$NON-NLS-1$
             if (theSymbolFactory != null) {
                 return theSymbolFactory;
             }
@@ -107,7 +108,7 @@ public class SymbolFactoryImpl extends EFactoryImpl implements SymbolFactory {
             case SymbolPackage.ILIST_TYPE_DESCRIPTOR: return createIListTypeDescriptor();
             case SymbolPackage.IBOUNDED_LIST_TYPE_DESCRIPTOR: return createIBoundedListTypeDescriptor();
             default:
-                throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+                throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
         }
     }
 
@@ -128,7 +129,7 @@ public class SymbolFactoryImpl extends EFactoryImpl implements SymbolFactory {
             case SymbolPackage.IJAVA_ELEMENT:
                 return createIJavaElementFromString(eDataType, initialValue);
             default:
-                throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+                throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
         }
     }
 
@@ -149,7 +150,7 @@ public class SymbolFactoryImpl extends EFactoryImpl implements SymbolFactory {
             case SymbolPackage.IJAVA_ELEMENT:
                 return convertIJavaElementToString(eDataType, instanceValue);
             default:
-                throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+                throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
         }
     }
 
@@ -312,7 +313,7 @@ public class SymbolFactoryImpl extends EFactoryImpl implements SymbolFactory {
      */
     public ERuntimeSource createERuntimeSourceFromString(EDataType eDataType, String initialValue) {
         ERuntimeSource result = ERuntimeSource.get(initialValue);
-        if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+        if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
         return result;
     }
 
@@ -373,6 +374,24 @@ public class SymbolFactoryImpl extends EFactoryImpl implements SymbolFactory {
      * @generated
      */
 	public String convertIJavaElementToString(EDataType eDataType, Object instanceValue) {
+        return super.convertToString(eDataType, instanceValue);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public ValueType createValueTypeFromString(EDataType eDataType, String initialValue) {
+        return (ValueType)super.createFromString(eDataType, initialValue);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public String convertValueTypeToString(EDataType eDataType, Object instanceValue) {
         return super.convertToString(eDataType, instanceValue);
     }
 

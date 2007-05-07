@@ -12,7 +12,6 @@
 package org.eclipse.jst.jsf.context.symbol;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.jdt.core.IType;
 
 /**
@@ -40,7 +39,7 @@ public interface IJavaTypeDescriptor2 extends ITypeDescriptor {
      * <!-- end-user-doc -->
      * @generated
      */
-    String copyright = "Copyright 2006 Oracle";
+    String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
     /**
      * Returns the value of the '<em><b>Type</b></em>' attribute.
@@ -129,5 +128,15 @@ public interface IJavaTypeDescriptor2 extends ITypeDescriptor {
      * @generated
      */
     void setArrayCount(int value);
+
+    /**
+     * <!-- begin-user-doc -->
+     * @param resolvedTypeSignature 
+     * @return the resolved type or null. 
+     * <!-- end-user-doc -->
+     * @model dataType="org.eclipse.jst.jsf.context.symbol.IType"
+     * @generated
+     */
+    IType resolveType(String resolvedTypeSignature);
 
 } // IJavaTypeDescriptor2

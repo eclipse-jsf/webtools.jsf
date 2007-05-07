@@ -38,7 +38,7 @@ public class IMethodSymbolImpl extends EObjectImpl implements IMethodSymbol {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final String copyright = "Copyright 2006 Oracle";
+    public static final String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
     /**
      * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -228,9 +228,9 @@ public class IMethodSymbolImpl extends EObjectImpl implements IMethodSymbol {
         if (eIsProxy()) return super.toString();
 
         StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (name: ");
+        result.append(" (name: "); //$NON-NLS-1$
         result.append(name);
-        result.append(", signature: ");
+        result.append(", signature: "); //$NON-NLS-1$
         result.append(signature);
         result.append(')');
         return result.toString();

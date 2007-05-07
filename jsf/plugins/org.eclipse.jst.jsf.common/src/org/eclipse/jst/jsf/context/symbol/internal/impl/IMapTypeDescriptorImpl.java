@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.Signature;
+import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
 import org.eclipse.jst.jsf.context.symbol.IInstanceSymbol;
 import org.eclipse.jst.jsf.context.symbol.IJavaTypeDescriptor2;
 import org.eclipse.jst.jsf.context.symbol.IMapTypeDescriptor;
@@ -53,8 +54,7 @@ public class IMapTypeDescriptorImpl extends ITypeDescriptorImpl implements IMapT
      * <!-- end-user-doc -->
      * @generated
      */
-    @SuppressWarnings("hiding")
-    public static final String copyright = "Copyright 2006 Oracle";
+    public static final String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
     /**
      * The default value of the '{@link #getMapSource() <em>Map Source</em>}' attribute.
@@ -175,7 +175,7 @@ public class IMapTypeDescriptorImpl extends ITypeDescriptorImpl implements IMapT
         }
         
         // otherwise use Map
-        return "Ljava.util.Map;";
+        return TypeConstants.TYPE_MAP;
     }
 
     public EList getInterfaceTypeSignatures() {
@@ -227,7 +227,7 @@ public class IMapTypeDescriptorImpl extends ITypeDescriptorImpl implements IMapT
         for (final Iterator it = keys.iterator(); it.hasNext();)
         {
             final String key = (String) it.next();
-            final String segments[] = key.split("\\.");
+            final String segments[] = key.split("\\."); //$NON-NLS-1$
             
             IPropertySymbol  property = 
                 (IPropertySymbol) segmentMap.get(segments[0]);
@@ -382,9 +382,9 @@ public class IMapTypeDescriptorImpl extends ITypeDescriptorImpl implements IMapT
         if (eIsProxy()) return super.toString();
 
         StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (mapSource: ");
+        result.append(" (mapSource: "); //$NON-NLS-1$
         result.append(mapSource);
-        result.append(", immutable: ");
+        result.append(", immutable: ");  //$NON-NLS-1$
         result.append(immutable);
         result.append(')');
         return result.toString();

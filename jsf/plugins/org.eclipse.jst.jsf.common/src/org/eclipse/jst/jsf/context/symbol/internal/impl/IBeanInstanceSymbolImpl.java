@@ -21,6 +21,7 @@ import org.eclipse.jst.jsf.context.symbol.IBeanInstanceSymbol;
 import org.eclipse.jst.jsf.context.symbol.IBoundedListTypeDescriptor;
 import org.eclipse.jst.jsf.context.symbol.IBoundedMapTypeDescriptor;
 import org.eclipse.jst.jsf.context.symbol.IJavaTypeDescriptor2;
+import org.eclipse.jst.jsf.context.symbol.ISymbol;
 import org.eclipse.jst.jsf.context.symbol.ITypeDescriptor;
 import org.eclipse.jst.jsf.context.symbol.SymbolFactory;
 import org.eclipse.jst.jsf.context.symbol.SymbolPackage;
@@ -45,8 +46,7 @@ public class IBeanInstanceSymbolImpl extends IInstanceSymbolImpl implements IBea
      * <!-- end-user-doc -->
      * @generated
      */
-    @SuppressWarnings("hiding")
-    public static final String copyright = "Copyright 2006 Oracle";
+    public static final String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
 	/**
 	 * A detailed description (human readable) about this instance symbol
@@ -223,6 +223,7 @@ public class IBeanInstanceSymbolImpl extends IInstanceSymbolImpl implements IBea
             {
                 IBoundedListTypeDescriptor listDesc =  
                     SymbolFactory.eINSTANCE.createIBoundedListTypeDescriptor();
+
                 // bean maps are generally writable
                 listDesc.setListSource(new BasicEList());  // give it an empty list
                 return listDesc;
@@ -230,6 +231,17 @@ public class IBeanInstanceSymbolImpl extends IInstanceSymbolImpl implements IBea
         }
         
         return null;
+    }
+
+    /** (non-Javadoc)
+     * @see org.eclipse.jst.jsf.context.symbol.internal.impl.IPropertySymbolImpl#call(java.lang.String, org.eclipse.emf.common.util.EList, java.lang.String)
+     * 
+     * @generated NOT
+     */
+    public ISymbol call(String methodName, EList methodArguments,
+            String symbolName) 
+    {
+        return Util.call(methodName, methodArguments, symbolName, getTypeDescriptor());
     }
 
 } //IBeanInstanceSymbolImpl

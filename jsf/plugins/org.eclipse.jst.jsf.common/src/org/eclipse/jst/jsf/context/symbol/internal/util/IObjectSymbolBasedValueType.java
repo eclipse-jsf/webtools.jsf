@@ -48,6 +48,7 @@ public class IObjectSymbolBasedValueType extends ValueType
     public IObjectSymbolBasedValueType(final IInstanceSymbol symbol)
     {
         this(symbol.getTypeDescriptor().getTypeSignature(), 
+                (String[])symbol.getTypeDescriptor().getTypeParameterSignatures().toArray(EMPTY_STRING_ARRAY),
                 (String[])symbol.getTypeDescriptor().getSuperTypeSignatures().toArray(EMPTY_STRING_ARRAY),
                 (String[])symbol.getTypeDescriptor().getInterfaceTypeSignatures().toArray(EMPTY_STRING_ARRAY),
                 IAssignable.ASSIGNMENT_TYPE_RHS /* variables are not assignable */
@@ -62,19 +63,21 @@ public class IObjectSymbolBasedValueType extends ValueType
     public IObjectSymbolBasedValueType(final IPropertySymbol symbol)
     {
         this(symbol.getTypeDescriptor().getTypeSignature(), 
-        (String[])symbol.getTypeDescriptor().getSuperTypeSignatures().toArray(EMPTY_STRING_ARRAY),
-        (String[])symbol.getTypeDescriptor().getInterfaceTypeSignatures().toArray(EMPTY_STRING_ARRAY),
-        ASSIGNMENT_TYPE_NONE | (symbol.isReadable()?IAssignable.ASSIGNMENT_TYPE_RHS:ASSIGNMENT_TYPE_NONE)|(symbol.isWritable()?IAssignable.ASSIGNMENT_TYPE_LHS:ASSIGNMENT_TYPE_NONE)
+                (String[])symbol.getTypeDescriptor().getTypeParameterSignatures().toArray(EMPTY_STRING_ARRAY),
+                (String[])symbol.getTypeDescriptor().getSuperTypeSignatures().toArray(EMPTY_STRING_ARRAY),
+                (String[])symbol.getTypeDescriptor().getInterfaceTypeSignatures().toArray(EMPTY_STRING_ARRAY),
+                    ASSIGNMENT_TYPE_NONE | (symbol.isReadable()?IAssignable.ASSIGNMENT_TYPE_RHS:ASSIGNMENT_TYPE_NONE)|(symbol.isWritable()?IAssignable.ASSIGNMENT_TYPE_LHS:ASSIGNMENT_TYPE_NONE)
         , symbol);
     }
     
     private IObjectSymbolBasedValueType(final String signature,
+                     final String[] typeArgs,
                      final String[] superTypes,
                      final String[] interfaceTypes,
                      final int assignmentMask,
                      final IObjectSymbol symbol)
     {
-        super(signature, superTypes, interfaceTypes, assignmentMask);
+        super(signature, typeArgs, superTypes, interfaceTypes, assignmentMask);
         _symbol = symbol;
     }
     

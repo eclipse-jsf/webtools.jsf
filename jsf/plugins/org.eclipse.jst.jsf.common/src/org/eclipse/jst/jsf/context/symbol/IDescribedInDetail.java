@@ -13,6 +13,11 @@
 package org.eclipse.jst.jsf.context.symbol;
 
 
+
+
+
+
+
 /** 
  * Tags a symbol that has a detailed, user-readable description
  * @author cbateman
@@ -24,7 +29,7 @@ public interface IDescribedInDetail {
      * <!-- end-user-doc -->s
      * @generated
      */
-    String copyright = "Copyright 2006 Oracle";
+    String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
 	/**
 	 * @return the detailed description

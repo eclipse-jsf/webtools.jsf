@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * Copyright (c) 2007 Oracle Corporation.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Cameron Bateman/Oracle - initial API and implementation
+ *    
+ ********************************************************************************/
 package org.eclipse.jst.jsf.common.util;
 
 import java.util.ArrayList;
@@ -112,15 +123,38 @@ public class JDTBeanProperty
     }
     
 	/**
+	 * Fully equivalent to:
+	 * 
+	 * getTypeSignature(true)
+	 * 
 	 * @return the fully resolved (if possible) type signature for
-     * the property or null if unable to determine
+     * the property or null if unable to determine.
+     * 
+     * NOTE: this is the "type erasure" signature, so any type parameters
+     * will be removed and only the raw type signature will be returned.
 	 */
 	public String getTypeSignature()
+    {
+	    return getTypeSignature(true);
+    }
+	
+	
+    /**
+     * @param eraseTypeParameters if true, the returned type has type parameters
+     * erased. If false, template types are resolved. 
+     * 
+     * @see org.eclipse.jst.jsf.common.util.TypeUtil#resolveTypeSignature(IType, String, boolean)
+     * for more information on how specific kinds of unresolved generics are resolved
+     * 
+     * @return the fully resolved (if possible) type signature for
+     * the property or null if unable to determine.
+     */
+    public String getTypeSignature(boolean eraseTypeParameters)
     {
         try
         {
             String unResolvedSig = getUnresolvedType();
-            return TypeUtil.resolveTypeSignature(_type, unResolvedSig);
+            return TypeUtil.resolveTypeSignature(_type, unResolvedSig, eraseTypeParameters);
         }
         catch (JavaModelException jme)
         {
@@ -128,10 +162,14 @@ public class JDTBeanProperty
             return null;
         }
     }
-	
+    
 	/**
 	 * For example, if this property was formed from: List<String> getListOfStrings()
-	 * then the list would consist of the signature "Ljava.lang.String;".
+	 * then the list would consist of the signature "Ljava.lang.String;".  All 
+	 * nested type paramters are resolved
+	 * 
+     * @see org.eclipse.jst.jsf.common.util.TypeUtil#resolveTypeSignature(IType, String, boolean)
+     * for more information on how specific kinds of unresolved generics are resolved
 	 * 
 	 * @return a list of type signatures (fully resolved if possible)
 	 * of this property's bounding type parameters.
@@ -143,10 +181,11 @@ public class JDTBeanProperty
 	    try
 	    {
 	        final String[] typeParameters = Signature.getTypeArguments(getUnresolvedType());
-	        
+	        //System.err.println(getUnresolvedType());
 	        for (String parameter : typeParameters)
 	        {
-	            signatures.add(TypeUtil.resolveTypeSignature(_type, parameter));
+	            //System.out.println(parameter);
+	            signatures.add(TypeUtil.resolveTypeSignature(_type, parameter, false));
 	        }
 	    }
 	    catch (JavaModelException jme)
@@ -158,6 +197,28 @@ public class JDTBeanProperty
 	    return signatures;
 	}
 
+//	public Map<String, String> getTypeParameterSignatureMap()
+//	{
+//	    Map<String, String>  signatures = new HashMap<String, String>();
+//        
+//        try
+//        {
+//            final String[] typeParameters = Signature.getTypeArguments(getUnresolvedType());
+//            
+//            for (String parameter : typeParameters)
+//            {
+//                signatures.add(TypeUtil.resolveTypeSignature(_type, parameter, false));
+//            }
+//        }
+//        catch (JavaModelException jme)
+//        {
+//            JSFCommonPlugin.log(jme, "Error resolving bean property type signature"); //$NON-NLS-1$
+//            // fall-through and return empty array
+//        }
+//
+//        return signatures;
+//	}
+	
     private String getUnresolvedType() throws JavaModelException
     {
         String   typeSig = null;

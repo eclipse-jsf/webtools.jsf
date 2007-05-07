@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IBoundedJavaTypeDescriptorItemProvider.java,v 1.5 2007/04/26 00:08:06 cbateman Exp $
+ * $Id: IBoundedJavaTypeDescriptorItemProvider.java,v 1.6 2007/05/07 17:30:21 cbateman Exp $
  */
 package org.eclipse.jst.jsf.context.symbol.internal.provider;
 
@@ -40,8 +40,7 @@ public class IBoundedJavaTypeDescriptorItemProvider
      * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @SuppressWarnings("hiding")
-    public static final String copyright = "Copyright 2006 Oracle";
+    public static final String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -75,7 +74,7 @@ public class IBoundedJavaTypeDescriptorItemProvider
 	 * @generated
 	 */
     public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/IBoundedJavaTypeDescriptor"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/IBoundedJavaTypeDescriptor")); //$NON-NLS-1$
 	}
 
 	/**
@@ -87,8 +86,8 @@ public class IBoundedJavaTypeDescriptorItemProvider
     public String getText(Object object) {
 		String label = ((IBoundedJavaTypeDescriptor)object).getTypeSignature();
 		return label == null || label.length() == 0 ?
-			getString("_UI_IBoundedJavaTypeDescriptor_type") :
-			getString("_UI_IBoundedJavaTypeDescriptor_type") + " " + label;
+			getString("_UI_IBoundedJavaTypeDescriptor_type") : //$NON-NLS-1$
+			getString("_UI_IBoundedJavaTypeDescriptor_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**

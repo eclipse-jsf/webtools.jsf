@@ -35,6 +35,7 @@ import org.eclipse.jst.jsf.context.symbol.source.AbstractContextSymbolFactory;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
 import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
+import org.eclipse.jst.jsf.designtime.internal.Messages;
 import org.eclipse.jst.jsf.designtime.internal.symbols.ResourceBundleMapSourceFactory;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
@@ -125,7 +126,7 @@ public class JSPDefaultSymbolFactory extends AbstractContextSymbolFactory
             if (IJSFConstants.ATTR_VAR.equals(attrName))
             {
                 return DataModelVariableFactory.getInstance()
-                    .createSymbol(symbolName, (Element) owningElement, context);
+                    .createSymbolForDataTableValue(symbolName, (Element) owningElement, context);
             }
         }
 
@@ -168,7 +169,7 @@ public class JSPDefaultSymbolFactory extends AbstractContextSymbolFactory
                     
                     if (project == null)
                     {
-                        throw new RuntimeException("Error acquiring project");
+                        throw new RuntimeException("Error acquiring project"); //$NON-NLS-1$
                     }
                     
                     final Map source = 
@@ -181,21 +182,21 @@ public class JSPDefaultSymbolFactory extends AbstractContextSymbolFactory
                         SymbolFactory.eINSTANCE.createIComponentSymbol();
                     symbol.setName(symbolName);
                     symbol.setTypeDescriptor(typeDesc);
-                    symbol.setDetailedDescription("Resource bundle map for bundle <i>"+baseNameNode.getNodeValue()+"</i>");
+                    symbol.setDetailedDescription(Messages.getString("JSPDefaultSymbolFactory.Resource.bundle.map.detailedDescription")+baseNameNode.getNodeValue()+"</i>"); //$NON-NLS-1$ //$NON-NLS-2$
                     
                     return symbol;
                 }
                 catch (IOException ioe)
                 {
-                    problems.add(new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID, 0,"Error creating loadBundle variable", ioe));
+                    problems.add(new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID, 0,Messages.getString("JSPDefaultSymbolFactory.Problem.ErrorCreatingVariable"), ioe)); //$NON-NLS-1$
                 }
                 catch (JavaModelException jme)
                 {
-                    problems.add(new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID, 0,"Error creating loadBundle variable", jme));
+                    problems.add(new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID, 0,Messages.getString("JSPDefaultSymbolFactory.Problem.ErrorCreatingVariable"), jme)); //$NON-NLS-1$
                 }
                 catch (CoreException ce)
                 {
-                    problems.add(new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID, 0,"Error creating loadBundle variable", ce));
+                    problems.add(new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID, 0,Messages.getString("JSPDefaultSymbolFactory.Problem.ErrorCreatingVariable"), ce)); //$NON-NLS-1$
                 }
             }
         }

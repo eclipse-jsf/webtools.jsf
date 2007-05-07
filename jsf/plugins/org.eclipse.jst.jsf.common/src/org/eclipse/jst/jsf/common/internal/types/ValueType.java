@@ -29,6 +29,7 @@ public class ValueType implements SignatureBasedType, IAssignable
     protected final static String[]        EMPTY_STRING_ARRAY = new String[0];
     
     private final String        _signature;
+    private final String[]      _typeArgs;
     private final int           _assignmentMask;
     private final String[]      _superTypes;
     private final String[]      _interfaceTypes;
@@ -40,11 +41,13 @@ public class ValueType implements SignatureBasedType, IAssignable
      * signature
      * 
      * @param signature
+     * @param typeArgs generic type arguments for signature or empty if none
      * @param superTypes 
      * @param interfaceTypes 
      * @param assignmentMask 
      */
     public ValueType(final String signature,
+                     final String[] typeArgs,
                      final String[] superTypes,
                      final String[] interfaceTypes,
                      final int assignmentMask) 
@@ -55,6 +58,7 @@ public class ValueType implements SignatureBasedType, IAssignable
         }
     
         _signature = signature;
+        _typeArgs = typeArgs;
         _assignmentMask = assignmentMask;
         _superTypes = superTypes != null ? superTypes : EMPTY_STRING_ARRAY;
         _interfaceTypes = interfaceTypes != null ? interfaceTypes : EMPTY_STRING_ARRAY;
@@ -69,21 +73,21 @@ public class ValueType implements SignatureBasedType, IAssignable
      */
     public ValueType(final ValueType  template, final int assignmentMask)
     {
-        this(template._signature, template._superTypes, 
+        this(template._signature, template._typeArgs, template._superTypes, 
                 template._interfaceTypes, assignmentMask);
     }
     
     /**
-     * Convienence constructor for creating ValueType's with no supertype
+     * Convienence constructor for creating ValueType's with no supertype, type argument
      * or interface info.  Equivilent to:
-     *  ValueType(signature, new String[0], new String[0], assignmentMask)
+     *  ValueType(signature, new String[0], new String[0], new String[0], assignmentMask)
      *  
      * @param signature
      * @param assignmentMask
      */
     public ValueType(final String signature, final int assignmentMask)
     {
-        this(signature, EMPTY_STRING_ARRAY, EMPTY_STRING_ARRAY, assignmentMask);
+        this(signature, EMPTY_STRING_ARRAY, EMPTY_STRING_ARRAY, EMPTY_STRING_ARRAY, assignmentMask);
     }
     
     /* (non-Javadoc)
@@ -167,6 +171,14 @@ public class ValueType implements SignatureBasedType, IAssignable
             System.arraycopy(_interfaceTypes, 0, _allTypes, 1+_superTypes.length, _interfaceTypes.length);
         }
         return _allTypes;
+    }
+    
+    /**
+     * @return the type arguments for getSignature() if any or empty array if none
+     */
+    public String[] getTypeArguments()
+    {
+        return _typeArgs;
     }
     
     /**

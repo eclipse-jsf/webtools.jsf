@@ -34,7 +34,7 @@ public interface IMethodSymbol extends ISymbol {
      * <!-- end-user-doc -->
      * @generated
      */
-    String copyright = "Copyright 2006 Oracle";
+    String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
     /**
      * Returns the value of the '<em><b>Signature</b></em>' attribute.

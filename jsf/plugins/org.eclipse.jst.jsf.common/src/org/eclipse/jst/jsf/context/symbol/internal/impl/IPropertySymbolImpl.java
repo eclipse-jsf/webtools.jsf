@@ -12,11 +12,13 @@
 package org.eclipse.jst.jsf.context.symbol.internal.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.jst.jsf.context.symbol.IPropertySymbol;
+import org.eclipse.jst.jsf.context.symbol.ISymbol;
 import org.eclipse.jst.jsf.context.symbol.ITypeDescriptor;
 import org.eclipse.jst.jsf.context.symbol.SymbolPackage;
 
@@ -44,7 +46,7 @@ public class IPropertySymbolImpl extends EObjectImpl implements IPropertySymbol 
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final String copyright = "Copyright 2006 Oracle";
+    public static final String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
     /**
      * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -329,6 +331,17 @@ public class IPropertySymbolImpl extends EObjectImpl implements IPropertySymbol 
 
     /**
      * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public ISymbol call(String methodName, EList methodArguments, String symbolName) {
+        // TODO: implement this method
+        // Ensure that you remove @generated or mark it @generated NOT
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * <!-- begin-user-doc -->
      * @param featureID 
      * @param resolve 
      * @param coreType 
@@ -441,13 +454,13 @@ public class IPropertySymbolImpl extends EObjectImpl implements IPropertySymbol 
         if (eIsProxy()) return super.toString();
 
         StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (name: ");
+        result.append(" (name: "); //$NON-NLS-1$
         result.append(name);
-        result.append(", readable: ");
+        result.append(", readable: "); //$NON-NLS-1$
         result.append(readable);
-        result.append(", writable: ");
+        result.append(", writable: "); //$NON-NLS-1$
         result.append(writable);
-        result.append(", intermediate: ");
+        result.append(", intermediate: "); //$NON-NLS-1$
         result.append(intermediate);
         result.append(')');
         return result.toString();

@@ -7,6 +7,7 @@
 package org.eclipse.jst.jsf.context.symbol;
 
 
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>IBounded Type Descriptor</b></em>'.
@@ -23,7 +24,7 @@ public interface IBoundedTypeDescriptor extends ITypeDescriptor {
      * <!-- end-user-doc -->
      * @generated
      */
-    String copyright = "Copyright 2006 Oracle";
+    String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
     /**
      * <!-- begin-user-doc -->

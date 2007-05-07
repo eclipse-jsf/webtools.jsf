@@ -51,8 +51,7 @@ public class IJavaTypeDescriptor2ItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("hiding")
-    public static final String copyright = "Copyright 2006 Oracle";
+    public static final String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -96,8 +95,8 @@ public class IJavaTypeDescriptor2ItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_IJavaTypeDescriptor2_type_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_IJavaTypeDescriptor2_type_feature", "_UI_IJavaTypeDescriptor2_type"),
+				 getString("_UI_IJavaTypeDescriptor2_type_feature"), //$NON-NLS-1$
+				 getString("_UI_PropertyDescriptor_description", "_UI_IJavaTypeDescriptor2_type_feature", "_UI_IJavaTypeDescriptor2_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				 SymbolPackage.Literals.IJAVA_TYPE_DESCRIPTOR2__TYPE,
 				 true,
 				 false,
@@ -119,8 +118,8 @@ public class IJavaTypeDescriptor2ItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_IJavaTypeDescriptor2_beanProperties_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_IJavaTypeDescriptor2_beanProperties_feature", "_UI_IJavaTypeDescriptor2_type"),
+				 getString("_UI_IJavaTypeDescriptor2_beanProperties_feature"), //$NON-NLS-1$
+				 getString("_UI_PropertyDescriptor_description", "_UI_IJavaTypeDescriptor2_beanProperties_feature", "_UI_IJavaTypeDescriptor2_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				 SymbolPackage.Literals.IJAVA_TYPE_DESCRIPTOR2__BEAN_PROPERTIES,
 				 true,
 				 false,
@@ -142,8 +141,8 @@ public class IJavaTypeDescriptor2ItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_IJavaTypeDescriptor2_beanMethods_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_IJavaTypeDescriptor2_beanMethods_feature", "_UI_IJavaTypeDescriptor2_type"),
+				 getString("_UI_IJavaTypeDescriptor2_beanMethods_feature"), //$NON-NLS-1$
+				 getString("_UI_PropertyDescriptor_description", "_UI_IJavaTypeDescriptor2_beanMethods_feature", "_UI_IJavaTypeDescriptor2_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				 SymbolPackage.Literals.IJAVA_TYPE_DESCRIPTOR2__BEAN_METHODS,
 				 true,
 				 false,
@@ -154,6 +153,29 @@ public class IJavaTypeDescriptor2ItemProvider
 	}
 
 	/**
+     * This adds a property descriptor for the Array Count feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected void addArrayCountPropertyDescriptor(Object object) {
+        itemPropertyDescriptors.add
+            (createItemPropertyDescriptor
+                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+                 getResourceLocator(),
+                 getString("_UI_IJavaTypeDescriptor2_arrayCount_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_IJavaTypeDescriptor2_arrayCount_feature", "_UI_IJavaTypeDescriptor2_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+                 SymbolPackage.Literals.IJAVA_TYPE_DESCRIPTOR2__ARRAY_COUNT,
+                 true,
+                 false,
+                 false,
+                 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+                 null,
+                 null));
+    }
+
+
+    /**
 	 * This returns IJavaTypeDescriptor2.gif.
 	 * <!-- begin-user-doc -->
      * @param object 
@@ -162,7 +184,7 @@ public class IJavaTypeDescriptor2ItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/IJavaTypeDescriptor2"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/IJavaTypeDescriptor2")); //$NON-NLS-1$
 	}
 
 	/**
@@ -176,8 +198,8 @@ public class IJavaTypeDescriptor2ItemProvider
 	public String getText(Object object) {
 		String label = ((IJavaTypeDescriptor2)object).getTypeSignature();
 		return label == null || label.length() == 0 ?
-			getString("_UI_IJavaTypeDescriptor2_type") :
-			getString("_UI_IJavaTypeDescriptor2_type") + " " + label;
+			getString("_UI_IJavaTypeDescriptor2_type") : //$NON-NLS-1$
+			getString("_UI_IJavaTypeDescriptor2_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**

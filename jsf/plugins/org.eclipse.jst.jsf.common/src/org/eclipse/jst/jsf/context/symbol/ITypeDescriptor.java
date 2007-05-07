@@ -15,6 +15,8 @@ package org.eclipse.jst.jsf.context.symbol;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.core.IJavaElement;
+import org.eclipse.jdt.core.IType;
 
 /**
  * A generic descriptor for symbol information
@@ -28,7 +30,7 @@ public interface ITypeDescriptor extends EObject {
      * <!-- end-user-doc -->
      * @generated
      */
-    String copyright = "Copyright 2006 Oracle";
+    String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
     /**
      * Returns the value of the '<em><b>Properties</b></em>' reference list.
@@ -137,6 +139,48 @@ public interface ITypeDescriptor extends EObject {
     EList getMethods();
 
     /**
+     * Returns the value of the '<em><b>Type Parameter Signatures</b></em>' attribute list.
+     * The list contents are of type {@link java.lang.String}.
+     * <!-- begin-user-doc -->
+     * <p>
+     * If the meaning of the '<em>Type Parameter Signatures</em>' attribute list isn't clear,
+     * there really should be more of a description here...
+     * </p>
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Type Parameter Signatures</em>' attribute list.
+     * @see org.eclipse.jst.jsf.context.symbol.SymbolPackage#getITypeDescriptor_TypeParameterSignatures()
+     * @model type="java.lang.String" unique="false" transient="true"
+     * @generated
+     */
+    EList getTypeParameterSignatures();
+
+    /**
+     * Returns the value of the '<em><b>Jdt Context</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <p>
+     * If the meaning of the '<em>Jdt Context</em>' attribute isn't clear,
+     * there really should be more of a description here...
+     * </p>
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Jdt Context</em>' attribute.
+     * @see #setJdtContext(IJavaElement)
+     * @see org.eclipse.jst.jsf.context.symbol.SymbolPackage#getITypeDescriptor_JdtContext()
+     * @model dataType="org.eclipse.jst.jsf.context.symbol.IJavaElement"
+     * @generated
+     */
+    IJavaElement getJdtContext();
+
+    /**
+     * Sets the value of the '{@link org.eclipse.jst.jsf.context.symbol.ITypeDescriptor#getJdtContext <em>Jdt Context</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Jdt Context</em>' attribute.
+     * @see #getJdtContext()
+     * @generated
+     */
+    void setJdtContext(IJavaElement value);
+
+    /**
      * <!-- begin-user-doc -->
      * @param typeSignature 
      * @return true if the type descriptor's underlying type would resolve true == (type instanceof typeSignature)
@@ -165,5 +209,25 @@ public interface ITypeDescriptor extends EObject {
      * @generated
      */
 	IObjectSymbol getArrayElement();
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @model dataType="org.eclipse.jst.jsf.context.symbol.IType"
+     * @generated
+     */
+    IType resolveType(String resolvedTypeSignature);
+
+    /**
+     * <!-- begin-user-doc -->
+     * @param methodName 
+     * @param methodArgs 
+     * @param symbolName 
+     * @return a symbol or null if not handling 
+     * <!-- end-user-doc -->
+     * @model methodArgsType="java.lang.String" methodArgsMany="true"
+     * @generated
+     */
+    ISymbol calculateSyntheticCall(String methodName, EList methodArgs, String symbolName);
 
 }

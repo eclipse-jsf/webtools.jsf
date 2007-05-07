@@ -49,8 +49,7 @@ public class IBeanInstanceSymbolItemProvider
      * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @SuppressWarnings("hiding")
-    public static final String copyright = "Copyright 2006 Oracle";
+    public static final String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -93,8 +92,8 @@ public class IBeanInstanceSymbolItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_IBeanInstanceSymbol_properties_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_IBeanInstanceSymbol_properties_feature", "_UI_IBeanInstanceSymbol_type"),
+				 getString("_UI_IBeanInstanceSymbol_properties_feature"), //$NON-NLS-1$
+				 getString("_UI_PropertyDescriptor_description", "_UI_IBeanInstanceSymbol_properties_feature", "_UI_IBeanInstanceSymbol_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				 SymbolPackage.Literals.IBEAN_INSTANCE_SYMBOL__PROPERTIES,
 				 false,
 				 false,
@@ -116,8 +115,8 @@ public class IBeanInstanceSymbolItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_IBeanInstanceSymbol_methods_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_IBeanInstanceSymbol_methods_feature", "_UI_IBeanInstanceSymbol_type"),
+				 getString("_UI_IBeanInstanceSymbol_methods_feature"), //$NON-NLS-1$
+				 getString("_UI_PropertyDescriptor_description", "_UI_IBeanInstanceSymbol_methods_feature", "_UI_IBeanInstanceSymbol_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				 SymbolPackage.Literals.IBEAN_INSTANCE_SYMBOL__METHODS,
 				 false,
 				 false,
@@ -136,7 +135,7 @@ public class IBeanInstanceSymbolItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/IBeanInstanceSymbol"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/IBeanInstanceSymbol")); //$NON-NLS-1$
 	}
 
     /**
@@ -150,7 +149,7 @@ public class IBeanInstanceSymbolItemProvider
 	public String getText(Object object) {
         String label = ((IBeanInstanceSymbol)object).getName();
         return label == null || label.length() == 0 ?
-            getString("_UI_IBeanInstanceSymbol_type") :
+            getString("_UI_IBeanInstanceSymbol_type") : //$NON-NLS-1$
             label;
     }
 

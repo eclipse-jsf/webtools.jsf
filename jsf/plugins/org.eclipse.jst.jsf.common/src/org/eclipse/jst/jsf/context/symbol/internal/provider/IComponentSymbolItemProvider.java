@@ -52,8 +52,7 @@ public class IComponentSymbolItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("hiding")
-    public static final String copyright = "Copyright 2006 Oracle";
+    public static final String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -91,7 +90,7 @@ public class IComponentSymbolItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/IComponentSymbol"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/IComponentSymbol")); //$NON-NLS-1$
 	}
 
     /**
@@ -105,7 +104,7 @@ public class IComponentSymbolItemProvider
 	public String getText(Object object) {
         String label = ((IComponentSymbol)object).getName();
         return label == null || label.length() == 0 ?
-            getString("_UI_IComponentSymbol_type") :
+            getString("_UI_IComponentSymbol_type") : //$NON-NLS-1$
             label;
     }
 

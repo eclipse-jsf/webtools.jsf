@@ -51,23 +51,23 @@ public class ISymbolConstants {
     /**
      * the string representation for request scope
      */
-    public final static String SYMBOL_SCOPE_REQUEST_STRING = "request";
+    public final static String SYMBOL_SCOPE_REQUEST_STRING = "request"; //$NON-NLS-1$
     
     
     /**
      * the string representation for session scope
      */
-    public final static String SYMBOL_SCOPE_SESSION_STRING = "session";
+    public final static String SYMBOL_SCOPE_SESSION_STRING = "session"; //$NON-NLS-1$
 
     /**
      * the string representation for application scope
      */
-    public final static String SYMBOL_SCOPE_APPLICATION_STRING = "application";
+    public final static String SYMBOL_SCOPE_APPLICATION_STRING = "application"; //$NON-NLS-1$
 
     /**
      * the string representation for none scope
      */
-    public final static String  SYMBOL_SCOPE_NONE_STRING = "none";
+    public final static String  SYMBOL_SCOPE_NONE_STRING = "none"; //$NON-NLS-1$
 
     /**
      * @param scope

@@ -61,7 +61,7 @@ public class IPropertySymbolItemProvider
      * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public static final String copyright = "Copyright 2006 Oracle";
+    public static final String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -107,8 +107,8 @@ public class IPropertySymbolItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ISymbol_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ISymbol_name_feature", "_UI_ISymbol_type"),
+				 getString("_UI_ISymbol_name_feature"), //$NON-NLS-1$
+				 getString("_UI_PropertyDescriptor_description", "_UI_ISymbol_name_feature", "_UI_ISymbol_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				 SymbolPackage.Literals.ISYMBOL__NAME,
 				 true,
 				 false,
@@ -130,8 +130,8 @@ public class IPropertySymbolItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_IObjectSymbol_typeDescriptor_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_IObjectSymbol_typeDescriptor_feature", "_UI_IObjectSymbol_type"),
+				 getString("_UI_IObjectSymbol_typeDescriptor_feature"), //$NON-NLS-1$
+				 getString("_UI_PropertyDescriptor_description", "_UI_IObjectSymbol_typeDescriptor_feature", "_UI_IObjectSymbol_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				 SymbolPackage.Literals.IOBJECT_SYMBOL__TYPE_DESCRIPTOR,
 				 true,
 				 false,
@@ -153,8 +153,8 @@ public class IPropertySymbolItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_IObjectSymbol_readable_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_IObjectSymbol_readable_feature", "_UI_IObjectSymbol_type"),
+				 getString("_UI_IObjectSymbol_readable_feature"), //$NON-NLS-1$
+				 getString("_UI_PropertyDescriptor_description", "_UI_IObjectSymbol_readable_feature", "_UI_IObjectSymbol_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				 SymbolPackage.Literals.IOBJECT_SYMBOL__READABLE,
 				 true,
 				 false,
@@ -176,8 +176,8 @@ public class IPropertySymbolItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_IObjectSymbol_writable_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_IObjectSymbol_writable_feature", "_UI_IObjectSymbol_type"),
+				 getString("_UI_IObjectSymbol_writable_feature"), //$NON-NLS-1$
+				 getString("_UI_PropertyDescriptor_description", "_UI_IObjectSymbol_writable_feature", "_UI_IObjectSymbol_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				 SymbolPackage.Literals.IOBJECT_SYMBOL__WRITABLE,
 				 true,
 				 false,
@@ -199,8 +199,8 @@ public class IPropertySymbolItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_IPropertySymbol_intermediate_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_IPropertySymbol_intermediate_feature", "_UI_IPropertySymbol_type"),
+				 getString("_UI_IPropertySymbol_intermediate_feature"), //$NON-NLS-1$
+				 getString("_UI_PropertyDescriptor_description", "_UI_IPropertySymbol_intermediate_feature", "_UI_IPropertySymbol_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				 SymbolPackage.Literals.IPROPERTY_SYMBOL__INTERMEDIATE,
 				 true,
 				 false,
@@ -219,7 +219,7 @@ public class IPropertySymbolItemProvider
 	 * @generated
 	 */
     public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/IPropertySymbol"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/IPropertySymbol")); //$NON-NLS-1$
 	}
 
     /**
@@ -233,7 +233,7 @@ public class IPropertySymbolItemProvider
     public String getText(Object object) {
         String label = ((IPropertySymbol)object).getName();
         return label == null || label.length() == 0 ?
-            getString("_UI_IPropertySymbol_type") :
+            getString("_UI_IPropertySymbol_type") : //$NON-NLS-1$
             label;
     }
 
@@ -298,7 +298,7 @@ public class IPropertySymbolItemProvider
      */
     public ICompletionProposal[] getProposals(Object target1, IProposalCreationFactory proposalFactory) 
     {
-        return getProposalsInternal((IPropertySymbol) target1, proposalFactory, "");
+        return getProposalsInternal((IPropertySymbol) target1, proposalFactory, ""); //$NON-NLS-1$
     }
     
     private ICompletionProposal[] getProposalsInternal(IPropertySymbol symbol, IProposalCreationFactory proposalFactory,  String intermediatePrefix)
@@ -318,7 +318,7 @@ public class IPropertySymbolItemProvider
 
                 if (!propSymbol.isIntermediate())
                 {
-                    final String replacementText = "['" + intermediatePrefix + symbol.getName() + "." + propSymbol.getName() + "']";
+                    final String replacementText = "['" + intermediatePrefix + symbol.getName() + "." + propSymbol.getName() + "']"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                     completions.add(proposalFactory.createProposal(                          
                                         replacementText, 
                                         replacementText, 
@@ -327,7 +327,7 @@ public class IPropertySymbolItemProvider
                 }
                 else
                 {
-                    completions.addAll(Arrays.asList(getProposalsInternal(propSymbol, proposalFactory, intermediatePrefix+symbol.getName()+".")));
+                    completions.addAll(Arrays.asList(getProposalsInternal(propSymbol, proposalFactory, intermediatePrefix+symbol.getName()+"."))); //$NON-NLS-1$
                 }
             }
         }

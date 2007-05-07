@@ -51,8 +51,7 @@ public class IMapTypeDescriptorItemProvider
      * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @SuppressWarnings("hiding")
-    public static final String copyright = "Copyright 2006 Oracle";
+    public static final String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -95,8 +94,8 @@ public class IMapTypeDescriptorItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_IMapTypeDescriptor_mapSource_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_IMapTypeDescriptor_mapSource_feature", "_UI_IMapTypeDescriptor_type"),
+				 getString("_UI_IMapTypeDescriptor_mapSource_feature"), //$NON-NLS-1$
+				 getString("_UI_PropertyDescriptor_description", "_UI_IMapTypeDescriptor_mapSource_feature", "_UI_IMapTypeDescriptor_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				 SymbolPackage.Literals.IMAP_TYPE_DESCRIPTOR__MAP_SOURCE,
 				 true,
 				 false,
@@ -118,8 +117,8 @@ public class IMapTypeDescriptorItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_IMapTypeDescriptor_immutable_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_IMapTypeDescriptor_immutable_feature", "_UI_IMapTypeDescriptor_type"),
+				 getString("_UI_IMapTypeDescriptor_immutable_feature"), //$NON-NLS-1$
+				 getString("_UI_PropertyDescriptor_description", "_UI_IMapTypeDescriptor_immutable_feature", "_UI_IMapTypeDescriptor_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				 SymbolPackage.Literals.IMAP_TYPE_DESCRIPTOR__IMMUTABLE,
 				 true,
 				 false,
@@ -138,7 +137,7 @@ public class IMapTypeDescriptorItemProvider
 	 * @generated
 	 */
     public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/IMapTypeDescriptor"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/IMapTypeDescriptor")); //$NON-NLS-1$
 	}
 
 	/**
@@ -152,8 +151,8 @@ public class IMapTypeDescriptorItemProvider
     public String getText(Object object) {
 		String label = ((IMapTypeDescriptor)object).getTypeSignature();
 		return label == null || label.length() == 0 ?
-			getString("_UI_IMapTypeDescriptor_type") :
-			getString("_UI_IMapTypeDescriptor_type") + " " + label;
+			getString("_UI_IMapTypeDescriptor_type") : //$NON-NLS-1$
+			getString("_UI_IMapTypeDescriptor_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IListTypeDescriptorImpl.java,v 1.3 2007/04/26 00:20:19 cbateman Exp $
+ * $Id: IListTypeDescriptorImpl.java,v 1.4 2007/05/07 17:30:20 cbateman Exp $
  */
 package org.eclipse.jst.jsf.context.symbol.internal.impl;
 
@@ -39,8 +39,7 @@ public class IListTypeDescriptorImpl extends ITypeDescriptorImpl implements ILis
      * <!-- end-user-doc -->
      * @generated
      */
-    @SuppressWarnings("hiding")
-    public static final String copyright = "Copyright 2006 Oracle";
+    public static final String copyright = "Copyright 2006 Oracle";  //$NON-NLS-1$
 
     /**
      * The default value of the '{@link #getListSource() <em>List Source</em>}' attribute.
@@ -164,7 +163,7 @@ public class IListTypeDescriptorImpl extends ITypeDescriptorImpl implements ILis
         if (eIsProxy()) return super.toString();
 
         StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (listSource: ");
+        result.append(" (listSource: ");  //$NON-NLS-1$
         result.append(listSource);
         result.append(')');
         return result.toString();

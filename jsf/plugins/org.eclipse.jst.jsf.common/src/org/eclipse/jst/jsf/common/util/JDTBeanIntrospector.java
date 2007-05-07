@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * Copyright (c) 2007 Oracle Corporation.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Cameron Bateman/Oracle - initial API and implementation
+ *    
+ ********************************************************************************/
 package org.eclipse.jst.jsf.common.util;
 
 import java.beans.Introspector;
@@ -24,7 +35,7 @@ import org.eclipse.jst.jsf.common.JSFCommonPlugin;
  * introspection.  Rather, it is meant to provide a 
  * more "lightweight" (in terms of class loading as well as
  * error handling of bean instantiation out of context) way
- * to determine a bean's properties at design time
+ * to determine a bean's properties at design time.
  * 
  * @author cbateman
  *
@@ -52,7 +63,8 @@ public class JDTBeanIntrospector
 	 */
 	public Map<String, JDTBeanProperty> getProperties()
 	{
-		final Map<String, JDTBeanProperty>   propertiesWorkingCopy = new HashMap<String, JDTBeanProperty>();
+		final Map<String, JDTBeanProperty>   propertiesWorkingCopy = 
+		    new HashMap<String, JDTBeanProperty>();
 		final IMethod[] methods = getAllMethods();
 		
 		for (int i = 0; i < methods.length; i++)
@@ -69,7 +81,7 @@ public class JDTBeanIntrospector
 				JSFCommonPlugin.log(jme, "Error processing IMethod for bean property info"); //$NON-NLS-1$
 			}
 		}
-		
+
         final Map properties = new HashMap();
         
         for (final Iterator it = propertiesWorkingCopy.keySet().iterator(); it.hasNext();)
@@ -79,17 +91,17 @@ public class JDTBeanIntrospector
                 (JDTBeanPropertyWorkingCopy) propertiesWorkingCopy.get(key);
             properties.put(key, wcopy.toValueObject());
         }
-        
+
 		return properties;
 	}
-	
+
 	private void processPropertyMethod(IMethod method, Map<String, JDTBeanProperty> properties) throws JavaModelException
 	{
 		// to be a bean method, it must not a constructor, must be public
 		// and must not be static
 		if (!method.isConstructor()
-				&& (method.getFlags() & Flags.AccPublic) != 0
-				&& (method.getFlags() & Flags.AccStatic) == 0)
+				&& Flags.isPublic(method.getFlags())
+				&& !Flags.isStatic(method.getFlags()))
 		{
 			final String methodName = method.getElementName();
 			final String returnType = method.getReturnType();
@@ -121,13 +133,13 @@ public class JDTBeanIntrospector
 
 				JDTBeanPropertyWorkingCopy workingCopy = 
 					(JDTBeanPropertyWorkingCopy) properties.get(propertyName);
-				
+
 				if (workingCopy == null)
 				{
 					workingCopy = new JDTBeanPropertyWorkingCopy(_type);
 					properties.put(propertyName, workingCopy);
 				}
-				
+
 				if  (startsWithIs)
 				{
 					workingCopy.setIsGetter(method);
@@ -143,8 +155,7 @@ public class JDTBeanIntrospector
 			}
 		}
 	}
-	
-	
+
 	/**
 	 * @return all methods for the type including inherited ones
 	 */
@@ -171,7 +182,7 @@ public class JDTBeanIntrospector
 
 		return methods;
 	}
-	
+
     /**
      * @param typeHierarchy
      * @param type
@@ -185,7 +196,7 @@ public class JDTBeanIntrospector
         closure[0] = type;
         System.arraycopy(superTypes, 0, closure, 1, superTypes.length);
         
-        for (int i = 0; i < superTypes.length; i++)
+        for (int i = 0; i < closure.length; i++)
         {
             try {
                 final IType superType = closure[i];
@@ -197,6 +208,4 @@ public class JDTBeanIntrospector
             
         return methods.toArray(new IMethod[methods.size()]);
     }
-
-	
 }

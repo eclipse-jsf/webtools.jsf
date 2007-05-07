@@ -59,7 +59,7 @@ public class IInstanceSymbolItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright 2006 Oracle";
+	public static final String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -106,8 +106,8 @@ public class IInstanceSymbolItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ISymbol_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ISymbol_name_feature", "_UI_ISymbol_type"),
+				 getString("_UI_ISymbol_name_feature"), //$NON-NLS-1$
+				 getString("_UI_PropertyDescriptor_description", "_UI_ISymbol_name_feature", "_UI_ISymbol_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				 SymbolPackage.Literals.ISYMBOL__NAME,
 				 true,
 				 false,
@@ -129,8 +129,8 @@ public class IInstanceSymbolItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_IObjectSymbol_typeDescriptor_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_IObjectSymbol_typeDescriptor_feature", "_UI_IObjectSymbol_type"),
+				 getString("_UI_IObjectSymbol_typeDescriptor_feature"), //$NON-NLS-1$
+				 getString("_UI_PropertyDescriptor_description", "_UI_IObjectSymbol_typeDescriptor_feature", "_UI_IObjectSymbol_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				 SymbolPackage.Literals.IOBJECT_SYMBOL__TYPE_DESCRIPTOR,
 				 true,
 				 false,
@@ -152,8 +152,8 @@ public class IInstanceSymbolItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_IObjectSymbol_readable_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_IObjectSymbol_readable_feature", "_UI_IObjectSymbol_type"),
+				 getString("_UI_IObjectSymbol_readable_feature"), //$NON-NLS-1$
+				 getString("_UI_PropertyDescriptor_description", "_UI_IObjectSymbol_readable_feature", "_UI_IObjectSymbol_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				 SymbolPackage.Literals.IOBJECT_SYMBOL__READABLE,
 				 true,
 				 false,
@@ -175,8 +175,8 @@ public class IInstanceSymbolItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_IObjectSymbol_writable_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_IObjectSymbol_writable_feature", "_UI_IObjectSymbol_type"),
+				 getString("_UI_IObjectSymbol_writable_feature"), //$NON-NLS-1$
+				 getString("_UI_PropertyDescriptor_description", "_UI_IObjectSymbol_writable_feature", "_UI_IObjectSymbol_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				 SymbolPackage.Literals.IOBJECT_SYMBOL__WRITABLE,
 				 true,
 				 false,
@@ -198,8 +198,8 @@ public class IInstanceSymbolItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_IInstanceSymbol_typeResolved_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_IInstanceSymbol_typeResolved_feature", "_UI_IInstanceSymbol_type"),
+				 getString("_UI_IInstanceSymbol_typeResolved_feature"), //$NON-NLS-1$
+				 getString("_UI_PropertyDescriptor_description", "_UI_IInstanceSymbol_typeResolved_feature", "_UI_IInstanceSymbol_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				 SymbolPackage.Literals.IINSTANCE_SYMBOL__TYPE_RESOLVED,
 				 false,
 				 false,
@@ -221,8 +221,8 @@ public class IInstanceSymbolItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_IInstanceSymbol_runtimeSource_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_IInstanceSymbol_runtimeSource_feature", "_UI_IInstanceSymbol_type"),
+				 getString("_UI_IInstanceSymbol_runtimeSource_feature"), //$NON-NLS-1$
+				 getString("_UI_PropertyDescriptor_description", "_UI_IInstanceSymbol_runtimeSource_feature", "_UI_IInstanceSymbol_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				 SymbolPackage.Literals.IINSTANCE_SYMBOL__RUNTIME_SOURCE,
 				 true,
 				 false,
@@ -241,7 +241,7 @@ public class IInstanceSymbolItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/IInstanceSymbol"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/IInstanceSymbol")); //$NON-NLS-1$
 	}
 
     /**
@@ -255,7 +255,7 @@ public class IInstanceSymbolItemProvider
 	public String getText(Object object) {
         String label = ((IInstanceSymbol)object).getName();
         return label == null || label.length() == 0 ?
-            getString("_UI_IInstanceSymbol_type") :
+            getString("_UI_IInstanceSymbol_type") : //$NON-NLS-1$
             label;
     }
 

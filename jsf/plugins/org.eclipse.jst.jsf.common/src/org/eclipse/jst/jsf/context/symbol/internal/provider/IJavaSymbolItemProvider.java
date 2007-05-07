@@ -53,7 +53,7 @@ public class IJavaSymbolItemProvider
      * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public static final String copyright = "Copyright 2006 Oracle";
+    public static final String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -96,8 +96,8 @@ public class IJavaSymbolItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ISymbol_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ISymbol_name_feature", "_UI_ISymbol_type"),
+				 getString("_UI_ISymbol_name_feature"), //$NON-NLS-1$
+				 getString("_UI_PropertyDescriptor_description", "_UI_ISymbol_name_feature", "_UI_ISymbol_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				 SymbolPackage.Literals.ISYMBOL__NAME,
 				 true,
 				 false,
@@ -119,8 +119,8 @@ public class IJavaSymbolItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_IJavaSymbol_javaElement_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_IJavaSymbol_javaElement_feature", "_UI_IJavaSymbol_type"),
+				 getString("_UI_IJavaSymbol_javaElement_feature"), //$NON-NLS-1$
+				 getString("_UI_PropertyDescriptor_description", "_UI_IJavaSymbol_javaElement_feature", "_UI_IJavaSymbol_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				 SymbolPackage.Literals.IJAVA_SYMBOL__JAVA_ELEMENT,
 				 true,
 				 false,
@@ -139,7 +139,7 @@ public class IJavaSymbolItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/IJavaSymbol"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/IJavaSymbol")); //$NON-NLS-1$
 	}
 
 	/**
@@ -153,8 +153,8 @@ public class IJavaSymbolItemProvider
 	public String getText(Object object) {
 		String label = ((IJavaSymbol)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_IJavaSymbol_type") :
-			getString("_UI_IJavaSymbol_type") + " " + label;
+			getString("_UI_IJavaSymbol_type") : //$NON-NLS-1$
+			getString("_UI_IJavaSymbol_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**

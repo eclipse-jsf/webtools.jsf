@@ -64,8 +64,8 @@ import org.w3c.dom.NodeList;
  */
 public class JSPModelProcessor
 {
-    private final static String SESSION_PROPERTY_QUALIFIER = "net.eclipse.jst.jsf.jsp";
-    private final static String SESSION_PROPERTY_NAME_JSPMODELPROCESSOR = "JSPModelProcessor";
+    private final static String SESSION_PROPERTY_QUALIFIER = "net.eclipse.jst.jsf.jsp"; //$NON-NLS-1$
+    private final static String SESSION_PROPERTY_NAME_JSPMODELPROCESSOR = "JSPModelProcessor"; //$NON-NLS-1$
     private final static QualifiedName SESSION_PROPERTY_JSPMODELPROCESSOR_KEY = 
         new QualifiedName(SESSION_PROPERTY_QUALIFIER,SESSION_PROPERTY_NAME_JSPMODELPROCESSOR);
     /**
@@ -123,12 +123,12 @@ public class JSPModelProcessor
         catch (CoreException ce)
         {
             Platform.getLog(JSFCorePlugin.getDefault().getBundle()).log(
-                    new Status(IStatus.ERROR, JSFCorePlugin.getDefault().getBundle().getSymbolicName(), 0, "Problem disposing JSPModelProcessor", new Throwable(ce)));
+                    new Status(IStatus.ERROR, JSFCorePlugin.getDefault().getBundle().getSymbolicName(), 0, "Problem disposing JSPModelProcessor", new Throwable(ce))); //$NON-NLS-1$
         }
         catch (IOException ioe)
         {
             Platform.getLog(JSFCorePlugin.getDefault().getBundle()).log(
-                    new Status(IStatus.ERROR, JSFCorePlugin.getDefault().getBundle().getSymbolicName(), 0, "Problem disposing JSPModelProcessor", new Throwable(ioe)));
+                    new Status(IStatus.ERROR, JSFCorePlugin.getDefault().getBundle().getSymbolicName(), 0, "Problem disposing JSPModelProcessor", new Throwable(ioe))); //$NON-NLS-1$
         }
     }
     
@@ -177,8 +177,8 @@ public class JSPModelProcessor
 
         model.releaseFromRead();
         
-        throw new CoreException(new Status(IStatus.ERROR, "org.eclipse.blah", 0, 
-                        "model not of expected type", new Throwable()));
+        throw new CoreException(new Status(IStatus.ERROR, "org.eclipse.blah", 0,  //$NON-NLS-1$
+                        "model not of expected type", new Throwable())); //$NON-NLS-1$
     }
     
     private void dispose()
@@ -406,7 +406,7 @@ public class JSPModelProcessor
         }
         else
         {
-            Platform.getLog(JSFCorePlugin.getDefault().getBundle()).log(new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID, 0, "Scope not found: "+scopeName, new Throwable()));
+            Platform.getLog(JSFCorePlugin.getDefault().getBundle()).log(new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID, 0, "Scope not found: "+scopeName, new Throwable())); //$NON-NLS-1$
         }
     }
 
@@ -429,7 +429,7 @@ public class JSPModelProcessor
             return getNoneMap();
         }
         
-        Platform.getLog(JSFCorePlugin.getDefault().getBundle()).log(new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID, 0, "Scope not found: "+scopeName, new Throwable()));
+        Platform.getLog(JSFCorePlugin.getDefault().getBundle()).log(new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID, 0, "Scope not found: "+scopeName, new Throwable())); //$NON-NLS-1$
         return null;
     
     }
@@ -507,14 +507,14 @@ public class JSPModelProcessor
      */
     private static class LocaleSetAggregator
     {
-        private final static String SETS_LOCALE = "sets-locale";
+        private final static String SETS_LOCALE = "sets-locale"; //$NON-NLS-1$
         
         static LocaleSetAggregator create(IProject project, 
                                               final String uri, 
                                               final String elementName, final String attributeName)
         {            
         	final IMetaDataModelContext mdContext = MetaDataQueryHelper.createMetaDataModelContext(project, MetaDataQueryHelper.TAGLIB_DOMAIN, uri);
-            Trait trait = MetaDataQueryHelper.getTrait(mdContext, elementName+"/"+attributeName, SETS_LOCALE);
+            Trait trait = MetaDataQueryHelper.getTrait(mdContext, elementName+"/"+attributeName, SETS_LOCALE); //$NON-NLS-1$
 
             if (TraitValueHelper.getValueAsBoolean(trait))
             {
@@ -534,10 +534,10 @@ public class JSPModelProcessor
     private static class SymbolContribAggregator
     {
         private final static String CONTRIBUTES_VALUE_BINDING = 
-            "contributes-value-binding";
-        private final static String VALUE_BINDING_SCOPE = "value-binding-scope";
+            "contributes-value-binding"; //$NON-NLS-1$
+        private final static String VALUE_BINDING_SCOPE = "value-binding-scope"; //$NON-NLS-1$
         private final static String VALUE_BINDING_SYMBOL_FACTORY = 
-            "value-binding-symbol-factory";
+            "value-binding-symbol-factory"; //$NON-NLS-1$
 
         /**
          * @param attributeName
@@ -548,7 +548,7 @@ public class JSPModelProcessor
                                               final String elementName, 
                                               final String attributeName)
         {
-        	final String entityKey = elementName+"/"+attributeName;
+        	final String entityKey = elementName+"/"+attributeName; //$NON-NLS-1$
         	final IMetaDataModelContext mdContext = MetaDataQueryHelper.createMetaDataModelContext(project, MetaDataQueryHelper.TAGLIB_DOMAIN, uri);
             Trait trait = MetaDataQueryHelper.getTrait(mdContext, entityKey, CONTRIBUTES_VALUE_BINDING);
 
@@ -562,7 +562,7 @@ public class JSPModelProcessor
                 trait = MetaDataQueryHelper.getTrait(mdContext, entityKey, VALUE_BINDING_SCOPE);
                 scope = TraitValueHelper.getValueAsString(trait);
 
-                if (scope != null & !scope.equals(""))
+                if (scope != null & !scope.equals("")) //$NON-NLS-1$
                 {
                 	trait = MetaDataQueryHelper.getTrait(mdContext, entityKey, VALUE_BINDING_SYMBOL_FACTORY);
                 	symbolFactory = TraitValueHelper.getValueAsString(trait);                      
@@ -578,8 +578,8 @@ public class JSPModelProcessor
 
         SymbolContribAggregator(final String scope, final String factory)
         {
-            _metadata.put("scope", scope);
-            _metadata.put("factory", factory);
+            _metadata.put("scope", scope); //$NON-NLS-1$
+            _metadata.put("factory", factory); //$NON-NLS-1$
         }
 
         /**
@@ -587,7 +587,7 @@ public class JSPModelProcessor
          */
         public String getScope()
         {
-            return (String) _metadata.get("scope");
+            return (String) _metadata.get("scope"); //$NON-NLS-1$
         }
         
         /**
@@ -596,7 +596,7 @@ public class JSPModelProcessor
         public AbstractContextSymbolFactory getFactory()
         {
             return (AbstractContextSymbolFactory) 
-                JSFCommonPlugin.getSymbolFactories().get(_metadata.get("factory"));
+                JSFCommonPlugin.getSymbolFactories().get(_metadata.get("factory")); //$NON-NLS-1$
         }
     }
     

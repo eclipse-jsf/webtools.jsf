@@ -79,4 +79,9 @@ public final class FileContextUtil
         
         return null;
     }
+    
+    private FileContextUtil()
+    {
+        // no instantiation
+    }
 }

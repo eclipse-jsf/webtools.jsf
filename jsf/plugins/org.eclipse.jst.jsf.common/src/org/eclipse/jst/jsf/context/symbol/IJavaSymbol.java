@@ -27,7 +27,7 @@ public interface IJavaSymbol extends ISymbol {
      * <!-- end-user-doc -->
      * @generated
      */
-    String copyright = "Copyright 2006 Oracle";
+    String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
 	/**
 	 * A IJavaElement may not exist for a symbol if it is synthetic at

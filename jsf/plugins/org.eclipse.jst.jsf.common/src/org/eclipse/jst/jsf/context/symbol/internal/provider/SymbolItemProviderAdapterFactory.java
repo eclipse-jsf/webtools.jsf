@@ -46,8 +46,7 @@ public class SymbolItemProviderAdapterFactory extends SymbolAdapterFactory imple
      * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @SuppressWarnings("hiding")
-    public static final String copyright = "Copyright 2006 Oracle";
+    public static final String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
 	/**
 	 * This keeps track of the root adapter factory that delegates to this adapter factory.
@@ -365,6 +364,50 @@ public class SymbolItemProviderAdapterFactory extends SymbolAdapterFactory imple
 	}
 
 	/**
+     * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.IListTypeDescriptor} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected IListTypeDescriptorItemProvider iListTypeDescriptorItemProvider;
+
+    /**
+     * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.IListTypeDescriptor}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public Adapter createIListTypeDescriptorAdapter() {
+        if (iListTypeDescriptorItemProvider == null) {
+            iListTypeDescriptorItemProvider = new IListTypeDescriptorItemProvider(this);
+        }
+
+        return iListTypeDescriptorItemProvider;
+    }
+
+    /**
+     * This keeps track of the one adapter used for all {@link org.eclipse.jst.jsf.context.symbol.IBoundedListTypeDescriptor} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected IBoundedListTypeDescriptorItemProvider iBoundedListTypeDescriptorItemProvider;
+
+    /**
+     * This creates an adapter for a {@link org.eclipse.jst.jsf.context.symbol.IBoundedListTypeDescriptor}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public Adapter createIBoundedListTypeDescriptorAdapter() {
+        if (iBoundedListTypeDescriptorItemProvider == null) {
+            iBoundedListTypeDescriptorItemProvider = new IBoundedListTypeDescriptorItemProvider(this);
+        }
+
+        return iBoundedListTypeDescriptorItemProvider;
+    }
+
+    /**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
      * @return the adapter factory

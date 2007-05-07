@@ -52,7 +52,7 @@ public class SymbolAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
      * @generated
      */
-	public static final String copyright = "Copyright 2006 Oracle";
+	public static final String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
     /**
      * The cached model package.

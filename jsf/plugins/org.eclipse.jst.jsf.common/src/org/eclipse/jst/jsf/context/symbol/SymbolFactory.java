@@ -27,7 +27,7 @@ public interface SymbolFactory extends EFactory {
      * <!-- end-user-doc -->
      * @generated
      */
-    String copyright = "Copyright 2006 Oracle";
+    String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
     /**
      * The singleton instance of the factory.

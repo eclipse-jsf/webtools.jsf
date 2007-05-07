@@ -95,4 +95,16 @@ public class TypeConstants
      * java.lang.Object type signature
      */
     public static final String TYPE_JAVAOBJECT = "Ljava.lang.Object;"; //$NON-NLS-1$
+    /**
+     * Type signature for the JSF Data Model type
+     */
+    public static final String TYPE_DATA_MODEL = "Ljavax.faces.model.DataModel;"; //$NON-NLS-1$
+    /**
+     * Type signature for the Result Set type
+     */
+    public static final String TYPE_RESULT_SET = "Ljava.sql.ResultSet;"; //$NON-NLS-1$
+    /**
+     * Type signature for the JSTL ResultSet type
+     */
+    public static final String TYPE_JAVAX_SERVLET_JSP_JSTL_SQL_RESULT = "Ljavax.servlet.jsp.jstl.sql.Result;"; //$NON-NLS-1$
 }

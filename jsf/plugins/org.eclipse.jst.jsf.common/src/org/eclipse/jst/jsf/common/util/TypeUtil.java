@@ -12,7 +12,11 @@
 
 package org.eclipse.jst.jsf.common.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.ITypeHierarchy;
 import org.eclipse.jdt.core.ITypeParameter;
@@ -55,14 +59,59 @@ public final class TypeUtil
         return resolveTypeRelative(owningType, typeSignature);
     }
 
-    
     /**
+     * Fully equivalent to:
+     * 
+     * #resolveTypeSignature(owningType, typeSignature, true)
+     * 
+     * If resolved, type signature has generic type parameters erased (absent).
+     * 
      * @param owningType
      * @param typeSignature
      * @return the resolved type signature for typeSignature in owningType or
      * typeSignature unchanged if cannot resolve.
      */
     public static String resolveTypeSignature(final IType owningType, final String typeSignature)
+    {
+        return resolveTypeSignature(owningType, typeSignature, true);
+    }
+    
+    /**
+     * Resolve typeSignature in the context of owningType.  This method will return 
+     * a type erased signture if eraseTypeParameters == true and will attempt to
+     * resolve and include parameters if eraseTypeParamters
+     * 
+     * NOTE: special rules apply to the way unresolved type parameters and wildcards
+     * are resolved:
+     * 
+     * 1) If a fully unresolved type parameter is found, then it will be replaced with Ljava.lang.Object;
+     * 
+     * i.e.  List<T>  -> Ljava.util.List<Ljava.lang.Object;>;  for any unresolved T.
+     * 
+     * 2) Any bounded wildcard will be replaced by the bound:
+     * 
+     * i.e. List<? extends String> -> Ljava.util.List<Ljava.lang.String;>;
+     * i.e. List<? super String> -> Ljava.util.List<Ljava.lang.String;>;
+     * 
+     * Note limitation here: bounds that use 'super' will take the "best case" scenario that the list
+     * type is of that type.
+     * 
+     * 3) The unbounded wildcard will be replaced by Ljava.lang.Object;
+     * 
+     * i.e. List<?> -> Ljava.util.List<Ljava.lang.Object;>;
+     * 
+     * 
+     * The reason for this substitions is to return the most accurate reasonable approximation
+     * of the type within what is known by owningType
+     * 
+     * @param owningType
+     * @param typeSignature
+     * @param eraseTypeParameters if set to false, type parameters are resolved included
+     * in the signature
+     * @return the resolved type signature for typeSignature in owningType or
+     * typeSignature unchanged if cannot resolve.
+     */
+    public static String resolveTypeSignature(final IType owningType, final String typeSignature, boolean eraseTypeParameters)
     {
         final int sigKind = Signature.getTypeSignatureKind(typeSignature);
     
@@ -80,7 +129,7 @@ public final class TypeUtil
                     return typeSignature;
                 }
 
-                final String resolvedElementType = resolveSignatureRelative(owningType, elementType);
+                final String resolvedElementType = resolveSignatureRelative(owningType, elementType, eraseTypeParameters);
                 String resultType = ""; //$NON-NLS-1$
                 for (int i = 0; i < Signature.getArrayCount(typeSignature);i++)
                 {
@@ -91,8 +140,10 @@ public final class TypeUtil
             }
             
             case Signature.CLASS_TYPE_SIGNATURE:
-                return resolveSignatureRelative(owningType, typeSignature);
+                return resolveSignatureRelative(owningType, typeSignature, eraseTypeParameters);
     
+            case Signature.TYPE_VARIABLE_SIGNATURE:
+                resolveSignatureRelative(owningType, typeSignature, eraseTypeParameters);
             default:
                 return typeSignature;
         }
@@ -103,29 +154,63 @@ public final class TypeUtil
      * @param typeSignature -- non-array type signature
      * @return the resolved type signature if possible or typeSignature if not
      */
-    private static String resolveSignatureRelative(final IType owningType, final String typeSignature)
+    private static String resolveSignatureRelative(final IType owningType, final String typeSignature, final boolean eraseTypeParameters)
     {
-        String  adjustedTypeSignature = typeSignature;
-       
         // if already fully resolved, return the input
-        if (adjustedTypeSignature.charAt(0) == Signature.C_RESOLVED)
+        if (typeSignature.charAt(0) == Signature.C_RESOLVED)
         {
             return typeSignature;
         }
 
-        IType resolvedType = resolveTypeRelative(owningType, adjustedTypeSignature);
+        List<String> typeParameters = new ArrayList<String>();
+
+        IType resolvedType = resolveTypeRelative(owningType, typeSignature);
 
         if (resolvedType != null)
         {
-            String  resolvedTypeSignature = 
+            if (!eraseTypeParameters)
+            {
+                // ensure that type parameters are resolved recursively
+                for (String typeParam : Signature.getTypeArguments(typeSignature))
+                {
+                    typeParameters.add(resolveSignatureRelative(owningType, //use the enclosing type, *not* the resolved type because we need to resolve in that context
+                            typeParam, eraseTypeParameters));
+                }
+            }
+            
+            final String  resolvedTypeSignature = 
                 Signature.createTypeSignature
                     (resolvedType.getFullyQualifiedName(), true);
            
+
+            if (typeParameters.size() > 0 && !eraseTypeParameters)
+            {
+                StringBuffer sb = new StringBuffer(resolvedTypeSignature);
+
+                if (sb.charAt(sb.length()-1) == ';')
+                {
+                    sb = sb.delete(sb.length()-1, sb.length());
+                }
+                
+                sb.append("<"); //$NON-NLS-1$
+                for(String param : typeParameters)
+                {
+                    //System.out.println("type param: "+resolvedType.getTypeParameter(param));
+                    sb.append(param);
+                }
+                
+                // replace the dangling ',' with the closing ">"
+                sb.append(">;"); //$NON-NLS-1$
+                return sb.toString();
+            }
+            
             return resolvedTypeSignature;
         }
 
         if (Signature.getTypeSignatureKind(typeSignature) == 
-                Signature.CLASS_TYPE_SIGNATURE)
+                Signature.CLASS_TYPE_SIGNATURE
+            || Signature.getTypeSignatureKind(typeSignature)
+                == Signature.TYPE_VARIABLE_SIGNATURE)
         {
             // if we are unable to resolve, check to see if the owning type has
             // a parameter by this name
@@ -143,7 +228,7 @@ public final class TypeUtil
             
             // TODO: is there a better way to handle a failure to resolve
             // than just garbage out?
-            JSFCommonPlugin.log(new Exception("Failed to resolve type: "+typeSignature), "Failed to resolve type: "+typeSignature); //$NON-NLS-1$ //$NON-NLS-2$
+            //JSFCommonPlugin.log(new Exception("Failed to resolve type: "+typeSignature), "Failed to resolve type: "+typeSignature); //$NON-NLS-1$ //$NON-NLS-2$
         }
         
         return typeSignature;
@@ -157,6 +242,7 @@ public final class TypeUtil
         
         try
         {
+            // TODO: this call is only supported on sourceTypes!
             String[][] resolved = owningType.resolveType(fullName);
     
             if (resolved != null && resolved.length > 0)
@@ -214,9 +300,9 @@ public final class TypeUtil
     }
     
     /**
-     * @param typeSignature     * @return a fully qualified Java class name from a type signature
+     * @param typeSignature     
+     * @return a fully qualified Java class name from a type signature
      * i.e. Ljava.lang.String; -> java.lang.String
-     * @return the fully qualifed classname
      */
     public static String getFullyQualifiedName(final String typeSignature)
     {
@@ -250,5 +336,67 @@ public final class TypeUtil
         }
 
         return resolvedType;
+    }
+    
+    /**
+     * Attempts to get a Java IType for a fully qualified signature.  Note that
+     * generic type arguments are generally ignored by JDT when doing such 
+     * look ups.
+     * 
+     * @param javaProject the project context inside which to resolve the type
+     * @param fullyResolvedTypeSignature a fully resolved type signature
+     * @return the IType if resolved, null otherwise
+     */
+    public static IType resolveType(final IJavaProject javaProject, final String fullyResolvedTypeSignature)
+    {
+        final String fullyQualifiedName =
+            getFullyQualifiedName(fullyResolvedTypeSignature);
+        
+        try {
+            return javaProject.findType(fullyQualifiedName);
+        } catch (JavaModelException e) {
+            // accessible problem
+            JSFCommonPlugin.log(e);
+            return null;
+        }
+    }
+    
+    /**
+     * @param type
+     * @param typeParamSignature
+     * @param typeArguments
+     * @return the signature for the type argument in typeArguments that matches the
+     * named typeParamSignature in type.
+     * 
+     * For example, given type for java.util.Map, typeParamSignature == "V" and
+     * typeArguments = {Ljava.util.String;, Lcom.test.Blah;}, the result would be
+     * the typeArgument that matches "V", which is "Lcom.test.Blah;}
+     * 
+     * returns null if the match cannot be found.
+     */
+    public static String matchTypeParameterToArgument(final IType type, final String typeParamSignature, final List<String> typeArguments)
+    {
+        try
+        {
+            ITypeParameter[] typeParams = type.getTypeParameters();
+
+            for (int pos = 0; pos < typeParams.length; pos++)
+            {
+                if (typeParams[pos].getElementName().equals(Signature.getSignatureSimpleName(typeParamSignature)))
+                {
+                    if (pos < typeArguments.size())
+                    {
+                        // TODO: should typeArguments.size ever != typeParams.length?
+                        return typeArguments.get(pos);
+                    }
+                }
+            }
+        } 
+        catch (JavaModelException e) 
+        {
+            JSFCommonPlugin.log(e);
+        }
+        
+        return null;
     }
 }

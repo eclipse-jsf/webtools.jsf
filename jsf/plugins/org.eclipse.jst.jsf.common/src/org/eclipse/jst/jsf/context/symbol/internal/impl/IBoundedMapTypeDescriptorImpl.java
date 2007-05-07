@@ -2,15 +2,17 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IBoundedMapTypeDescriptorImpl.java,v 1.5 2007/04/26 00:08:52 cbateman Exp $
+ * $Id: IBoundedMapTypeDescriptorImpl.java,v 1.6 2007/05/07 17:30:20 cbateman Exp $
  */
 package org.eclipse.jst.jsf.context.symbol.internal.impl;
 
 import java.util.Iterator;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
+import org.eclipse.jst.jsf.common.internal.types.ValueType;
 import org.eclipse.jst.jsf.context.symbol.IBoundedJavaTypeDescriptor;
 import org.eclipse.jst.jsf.context.symbol.IBoundedMapTypeDescriptor;
 import org.eclipse.jst.jsf.context.symbol.IPropertySymbol;
@@ -33,8 +35,7 @@ public class IBoundedMapTypeDescriptorImpl extends IMapTypeDescriptorImpl implem
      * <!-- end-user-doc -->
      * @generated
      */
-    @SuppressWarnings("hiding")
-    public static final String copyright = "Copyright 2006 Oracle";
+    public static final String copyright = "Copyright 2006 Oracle";  //$NON-NLS-1$
 
     /**
      * <!-- begin-user-doc -->
@@ -99,7 +100,23 @@ public class IBoundedMapTypeDescriptorImpl extends IMapTypeDescriptorImpl implem
 
     }
 
-   
+    /**
+     * @see org.eclipse.jst.jsf.context.symbol.internal.impl.ITypeDescriptorImpl#calculateSyntheticCall(java.lang.String, org.eclipse.emf.common.util.EList, java.lang.String)
+     * @generated NOT
+     */
+    public ISymbol calculateSyntheticCall(String methodName, EList methodArgs,
+            String symbolName) {
+        if ("get".equals(methodName)  //$NON-NLS-1$
+                && methodArgs.size() == 1)
+        {
+            return getUnboundedProperty(symbolName, ((ValueType) methodArgs.get(0)).getSignature());
+        }
+            
+        // default is return null
+        return null;
+    }
+
+
     /**
      * @generated NOT
      */

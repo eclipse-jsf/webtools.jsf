@@ -53,7 +53,7 @@ public class ITypeDescriptorItemProvider
      * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public static final String copyright = "Copyright 2006 Oracle";
+    public static final String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -100,8 +100,8 @@ public class ITypeDescriptorItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ITypeDescriptor_properties_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ITypeDescriptor_properties_feature", "_UI_ITypeDescriptor_type"),
+				 getString("_UI_ITypeDescriptor_properties_feature"), //$NON-NLS-1$
+				 getString("_UI_PropertyDescriptor_description", "_UI_ITypeDescriptor_properties_feature", "_UI_ITypeDescriptor_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				 SymbolPackage.Literals.ITYPE_DESCRIPTOR__PROPERTIES,
 				 true,
 				 false,
@@ -123,8 +123,8 @@ public class ITypeDescriptorItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ITypeDescriptor_typeSignature_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ITypeDescriptor_typeSignature_feature", "_UI_ITypeDescriptor_type"),
+				 getString("_UI_ITypeDescriptor_typeSignature_feature"), //$NON-NLS-1$
+				 getString("_UI_PropertyDescriptor_description", "_UI_ITypeDescriptor_typeSignature_feature", "_UI_ITypeDescriptor_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				 SymbolPackage.Literals.ITYPE_DESCRIPTOR__TYPE_SIGNATURE,
 				 false,
 				 false,
@@ -146,8 +146,8 @@ public class ITypeDescriptorItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ITypeDescriptor_superTypeSignatures_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ITypeDescriptor_superTypeSignatures_feature", "_UI_ITypeDescriptor_type"),
+				 getString("_UI_ITypeDescriptor_superTypeSignatures_feature"), //$NON-NLS-1$
+				 getString("_UI_PropertyDescriptor_description", "_UI_ITypeDescriptor_superTypeSignatures_feature", "_UI_ITypeDescriptor_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				 SymbolPackage.Literals.ITYPE_DESCRIPTOR__SUPER_TYPE_SIGNATURES,
 				 true,
 				 false,
@@ -169,8 +169,8 @@ public class ITypeDescriptorItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ITypeDescriptor_interfaceTypeSignatures_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ITypeDescriptor_interfaceTypeSignatures_feature", "_UI_ITypeDescriptor_type"),
+				 getString("_UI_ITypeDescriptor_interfaceTypeSignatures_feature"), //$NON-NLS-1$
+				 getString("_UI_PropertyDescriptor_description", "_UI_ITypeDescriptor_interfaceTypeSignatures_feature", "_UI_ITypeDescriptor_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				 SymbolPackage.Literals.ITYPE_DESCRIPTOR__INTERFACE_TYPE_SIGNATURES,
 				 true,
 				 false,
@@ -192,8 +192,8 @@ public class ITypeDescriptorItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ITypeDescriptor_typeSignatureDelegate_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ITypeDescriptor_typeSignatureDelegate_feature", "_UI_ITypeDescriptor_type"),
+				 getString("_UI_ITypeDescriptor_typeSignatureDelegate_feature"), //$NON-NLS-1$
+				 getString("_UI_PropertyDescriptor_description", "_UI_ITypeDescriptor_typeSignatureDelegate_feature", "_UI_ITypeDescriptor_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				 SymbolPackage.Literals.ITYPE_DESCRIPTOR__TYPE_SIGNATURE_DELEGATE,
 				 true,
 				 false,
@@ -215,8 +215,8 @@ public class ITypeDescriptorItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ITypeDescriptor_methods_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ITypeDescriptor_methods_feature", "_UI_ITypeDescriptor_type"),
+				 getString("_UI_ITypeDescriptor_methods_feature"), //$NON-NLS-1$
+				 getString("_UI_PropertyDescriptor_description", "_UI_ITypeDescriptor_methods_feature", "_UI_ITypeDescriptor_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				 SymbolPackage.Literals.ITYPE_DESCRIPTOR__METHODS,
 				 true,
 				 false,
@@ -227,6 +227,50 @@ public class ITypeDescriptorItemProvider
 	}
 
 	/**
+     * This adds a property descriptor for the Type Parameter Signatures feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected void addTypeParameterSignaturesPropertyDescriptor(Object object) {
+        itemPropertyDescriptors.add
+            (createItemPropertyDescriptor
+                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+                 getResourceLocator(),
+                 getString("_UI_ITypeDescriptor_typeParameterSignatures_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_ITypeDescriptor_typeParameterSignatures_feature", "_UI_ITypeDescriptor_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+                 SymbolPackage.Literals.ITYPE_DESCRIPTOR__TYPE_PARAMETER_SIGNATURES,
+                 true,
+                 false,
+                 false,
+                 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+                 null,
+                 null));
+    }
+
+    /**
+     * This adds a property descriptor for the Jdt Context feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected void addJdtContextPropertyDescriptor(Object object) {
+        itemPropertyDescriptors.add
+            (createItemPropertyDescriptor
+                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+                 getResourceLocator(),
+                 getString("_UI_ITypeDescriptor_jdtContext_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_ITypeDescriptor_jdtContext_feature", "_UI_ITypeDescriptor_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+                 SymbolPackage.Literals.ITYPE_DESCRIPTOR__JDT_CONTEXT,
+                 true,
+                 false,
+                 false,
+                 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+                 null,
+                 null));
+    }
+
+    /**
 	 * This returns ITypeDescriptor.gif.
 	 * <!-- begin-user-doc -->
      * @param object 
@@ -235,7 +279,7 @@ public class ITypeDescriptorItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/ITypeDescriptor"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/ITypeDescriptor")); //$NON-NLS-1$
 	}
 
 	/**
@@ -249,8 +293,8 @@ public class ITypeDescriptorItemProvider
 	public String getText(Object object) {
 		String label = ((ITypeDescriptor)object).getTypeSignature();
 		return label == null || label.length() == 0 ?
-			getString("_UI_ITypeDescriptor_type") :
-			getString("_UI_ITypeDescriptor_type") + " " + label;
+			getString("_UI_ITypeDescriptor_type") : //$NON-NLS-1$
+			getString("_UI_ITypeDescriptor_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**

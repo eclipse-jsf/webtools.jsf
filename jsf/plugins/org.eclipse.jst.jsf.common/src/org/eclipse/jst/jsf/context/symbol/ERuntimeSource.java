@@ -42,7 +42,7 @@ public final class ERuntimeSource extends AbstractEnumerator {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final String copyright = "Copyright 2006 Oracle";
+    public static final String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
     /**
      * The '<em><b>BUILT IN SYMBOL</b></em>' literal value.
@@ -112,7 +112,7 @@ public final class ERuntimeSource extends AbstractEnumerator {
      * @generated
      * @ordered
      */
-    public static final ERuntimeSource BUILT_IN_SYMBOL_LITERAL = new ERuntimeSource(BUILT_IN_SYMBOL, "BUILT_IN_SYMBOL", "BUILT_IN_SYMBOL");
+    public static final ERuntimeSource BUILT_IN_SYMBOL_LITERAL = new ERuntimeSource(BUILT_IN_SYMBOL, "BUILT_IN_SYMBOL", "BUILT_IN_SYMBOL"); //$NON-NLS-1$ //$NON-NLS-2$
 
     /**
      * The '<em><b>MANAGED BEAN SYMBOL</b></em>' literal object.
@@ -122,7 +122,7 @@ public final class ERuntimeSource extends AbstractEnumerator {
      * @generated
      * @ordered
      */
-    public static final ERuntimeSource MANAGED_BEAN_SYMBOL_LITERAL = new ERuntimeSource(MANAGED_BEAN_SYMBOL, "MANAGED_BEAN_SYMBOL", "MANAGED_BEAN_SYMBOL");
+    public static final ERuntimeSource MANAGED_BEAN_SYMBOL_LITERAL = new ERuntimeSource(MANAGED_BEAN_SYMBOL, "MANAGED_BEAN_SYMBOL", "MANAGED_BEAN_SYMBOL"); //$NON-NLS-1$ //$NON-NLS-2$
 
     /**
      * The '<em><b>TAG INSTANTIATED SYMBOL</b></em>' literal object.
@@ -132,7 +132,7 @@ public final class ERuntimeSource extends AbstractEnumerator {
      * @generated
      * @ordered
      */
-    public static final ERuntimeSource TAG_INSTANTIATED_SYMBOL_LITERAL = new ERuntimeSource(TAG_INSTANTIATED_SYMBOL, "TAG_INSTANTIATED_SYMBOL", "TAG_INSTANTIATED_SYMBOL");
+    public static final ERuntimeSource TAG_INSTANTIATED_SYMBOL_LITERAL = new ERuntimeSource(TAG_INSTANTIATED_SYMBOL, "TAG_INSTANTIATED_SYMBOL", "TAG_INSTANTIATED_SYMBOL"); //$NON-NLS-1$ //$NON-NLS-2$
 
     /**
      * The '<em><b>OTHER</b></em>' literal object.
@@ -142,7 +142,7 @@ public final class ERuntimeSource extends AbstractEnumerator {
      * @generated
      * @ordered
      */
-    public static final ERuntimeSource OTHER_LITERAL = new ERuntimeSource(OTHER, "OTHER", "OTHER");
+    public static final ERuntimeSource OTHER_LITERAL = new ERuntimeSource(OTHER, "OTHER", "OTHER"); //$NON-NLS-1$ //$NON-NLS-2$
 
     /**
      * An array of all the '<em><b>ERuntime Source</b></em>' enumerators.

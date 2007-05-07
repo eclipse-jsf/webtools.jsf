@@ -17,7 +17,6 @@ import java.util.List;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -90,7 +89,7 @@ public class FactorySection extends OthersPageBaseSection {
 			EObject component = FacesConfigFactory.eINSTANCE
 					.create(factoryChildClass);
 			// set the text content value.
-			EStructuralFeature feature = (EAttribute) factoryChildClass
+			EStructuralFeature feature = factoryChildClass
 					.getEStructuralFeatures().get(0);
 			component.eSet(feature, result);
 			return component;

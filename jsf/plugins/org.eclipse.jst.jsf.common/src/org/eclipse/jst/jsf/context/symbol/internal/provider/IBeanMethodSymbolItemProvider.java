@@ -58,7 +58,7 @@ public class IBeanMethodSymbolItemProvider
      * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public static final String copyright = "Copyright 2006 Oracle";
+    public static final String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -102,8 +102,8 @@ public class IBeanMethodSymbolItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ISymbol_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ISymbol_name_feature", "_UI_ISymbol_type"),
+				 getString("_UI_ISymbol_name_feature"), //$NON-NLS-1$
+				 getString("_UI_PropertyDescriptor_description", "_UI_ISymbol_name_feature", "_UI_ISymbol_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				 SymbolPackage.Literals.ISYMBOL__NAME,
 				 true,
 				 false,
@@ -125,8 +125,8 @@ public class IBeanMethodSymbolItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_IMethodSymbol_signature_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_IMethodSymbol_signature_feature", "_UI_IMethodSymbol_type"),
+				 getString("_UI_IMethodSymbol_signature_feature"), //$NON-NLS-1$
+				 getString("_UI_PropertyDescriptor_description", "_UI_IMethodSymbol_signature_feature", "_UI_IMethodSymbol_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				 SymbolPackage.Literals.IMETHOD_SYMBOL__SIGNATURE,
 				 true,
 				 false,
@@ -148,8 +148,8 @@ public class IBeanMethodSymbolItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_IBeanMethodSymbol_owner_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_IBeanMethodSymbol_owner_feature", "_UI_IBeanMethodSymbol_type"),
+				 getString("_UI_IBeanMethodSymbol_owner_feature"), //$NON-NLS-1$
+				 getString("_UI_PropertyDescriptor_description", "_UI_IBeanMethodSymbol_owner_feature", "_UI_IBeanMethodSymbol_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				 SymbolPackage.Literals.IBEAN_METHOD_SYMBOL__OWNER,
 				 true,
 				 false,
@@ -168,7 +168,7 @@ public class IBeanMethodSymbolItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/IBeanMethodSymbol"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/IBeanMethodSymbol")); //$NON-NLS-1$
 	}
 
     /**
@@ -182,7 +182,7 @@ public class IBeanMethodSymbolItemProvider
 	public String getText(Object object) {
         String label = ((IBeanMethodSymbol)object).getName();
         return label == null || label.length() == 0 ?
-            getString("_UI_IBeanMethodSymbol_type") :
+            getString("_UI_IBeanMethodSymbol_type") : //$NON-NLS-1$
             label;
     }
 

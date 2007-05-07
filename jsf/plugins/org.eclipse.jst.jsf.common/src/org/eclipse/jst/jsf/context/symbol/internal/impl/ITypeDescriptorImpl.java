@@ -19,8 +19,14 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EDataTypeEList;
+import org.eclipse.jdt.core.IJavaElement;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.Signature;
+import org.eclipse.jst.jsf.common.util.TypeUtil;
 import org.eclipse.jst.jsf.context.symbol.IObjectSymbol;
+import org.eclipse.jst.jsf.context.symbol.ISymbol;
 import org.eclipse.jst.jsf.context.symbol.ITypeDescriptor;
 import org.eclipse.jst.jsf.context.symbol.SymbolPackage;
 
@@ -48,7 +54,7 @@ public abstract class ITypeDescriptorImpl extends EObjectImpl implements ITypeDe
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final String copyright = "Copyright 2006 Oracle";
+    public static final String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
     /**
      * The default value of the '{@link #getTypeSignature() <em>Type Signature</em>}' attribute.
@@ -58,7 +64,7 @@ public abstract class ITypeDescriptorImpl extends EObjectImpl implements ITypeDe
      * @generated
      * @ordered
      */
-    protected static final String TYPE_SIGNATURE_EDEFAULT = "";
+    protected static final String TYPE_SIGNATURE_EDEFAULT = ""; //$NON-NLS-1$
 
     /**
      * The default value of the '{@link #getTypeSignatureDelegate() <em>Type Signature Delegate</em>}' attribute.
@@ -79,6 +85,36 @@ public abstract class ITypeDescriptorImpl extends EObjectImpl implements ITypeDe
      * @ordered
      */
     protected String typeSignatureDelegate = TYPE_SIGNATURE_DELEGATE_EDEFAULT;
+
+    /**
+     * The cached value of the '{@link #getTypeParameterSignatures() <em>Type Parameter Signatures</em>}' attribute list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getTypeParameterSignatures()
+     * @generated
+     * @ordered
+     */
+    protected EList typeParameterSignatures;
+
+    /**
+     * The default value of the '{@link #getJdtContext() <em>Jdt Context</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getJdtContext()
+     * @generated
+     * @ordered
+     */
+    protected static final IJavaElement JDT_CONTEXT_EDEFAULT = null;
+
+    /**
+     * The cached value of the '{@link #getJdtContext() <em>Jdt Context</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getJdtContext()
+     * @generated
+     * @ordered
+     */
+    protected IJavaElement jdtContext = JDT_CONTEXT_EDEFAULT;
 
     /**
      * <!-- begin-user-doc -->
@@ -166,6 +202,39 @@ public abstract class ITypeDescriptorImpl extends EObjectImpl implements ITypeDe
 
     /**
      * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EList getTypeParameterSignatures() {
+        if (typeParameterSignatures == null) {
+            typeParameterSignatures = new EDataTypeEList(String.class, this, SymbolPackage.ITYPE_DESCRIPTOR__TYPE_PARAMETER_SIGNATURES);
+        }
+        return typeParameterSignatures;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public IJavaElement getJdtContext() {
+        return jdtContext;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void setJdtContext(IJavaElement newJdtContext) {
+        IJavaElement oldJdtContext = jdtContext;
+        jdtContext = newJdtContext;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, SymbolPackage.ITYPE_DESCRIPTOR__JDT_CONTEXT, oldJdtContext, jdtContext));
+    }
+
+    /**
+     * <!-- begin-user-doc -->
      * Note about generics:
      * 
      * This call mimics the runtime instanceOf to the degree possible.
@@ -179,8 +248,8 @@ public abstract class ITypeDescriptorImpl extends EObjectImpl implements ITypeDe
     {
         final String typeErasedSignature = Signature.getTypeErasure(typeSignature);
         
-        if (getTypeSignature() != null
-                && getTypeSignature().equals(typeErasedSignature))
+        if (Signature.getTypeErasure(getTypeSignature()) != null
+                && Signature.getTypeErasure(getTypeSignature()).equals(typeErasedSignature))
         {
             return true;
         }
@@ -189,7 +258,7 @@ public abstract class ITypeDescriptorImpl extends EObjectImpl implements ITypeDe
         {
             final String superType = (String) it.next();
             
-            if (superType.equals(typeErasedSignature))
+            if (Signature.getTypeErasure(superType).equals(typeErasedSignature))
             {
                 return true;
             }
@@ -199,7 +268,7 @@ public abstract class ITypeDescriptorImpl extends EObjectImpl implements ITypeDe
         {
             final String superType = (String) it.next();
             
-            if (superType.equals(typeErasedSignature))
+            if (Signature.getTypeErasure(superType).equals(typeErasedSignature))
             {
                 return true;
             }
@@ -229,12 +298,57 @@ public abstract class ITypeDescriptorImpl extends EObjectImpl implements ITypeDe
 		{
 			// sub-class of ITypeDescriptor must implement this if they which to provide
 			// array element support
-			throw new UnsupportedOperationException("Base type descriptor does not support this function");
+			throw new UnsupportedOperationException("Base type descriptor does not support this function"); //$NON-NLS-1$
 		}
 		
 		// shouldn't be called if not an array
 		return null;
 	}
+
+    /**
+    /**
+     * <!-- begin-user-doc -->
+     * 
+     * Tries to load an IType for a fully resolved (i.e. starts with L not Q)
+     * type signature using the current jdtContext.
+     * 
+     * @return the resolved IType or null if none could be resolved.
+     * 
+     * <!-- end-user-doc -->
+     * @generated NOT
+     */
+      public IType resolveType(String resolvedTypeSignature) 
+      {
+          // we need to obtain an IJavaProject within which to resolve
+          // the type.
+          IJavaProject project = null;
+          
+          // see if a jdtContext hint has been set
+          if (getJdtContext() != null)
+          {
+              project = getJdtContext().getJavaProject();
+          }
+          
+          if (project != null)
+          {
+              return TypeUtil.resolveType(project, resolvedTypeSignature);
+          }
+          
+          return null;
+      }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated NOT
+     */
+    public ISymbol calculateSyntheticCall(String methodName, EList methodArgs, String symbolName) {
+        // sub-classes need only implement if they have something meaningful
+        // the want to do here
+        // by default return null to indicate this type descriptor doesn't
+        // wish to handle calls
+        return null;
+    }
 
     /**
      * <!-- begin-user-doc -->
@@ -357,7 +471,7 @@ public abstract class ITypeDescriptorImpl extends EObjectImpl implements ITypeDe
         if (eIsProxy()) return super.toString();
 
         StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (typeSignatureDelegate: ");
+        result.append(" (typeSignatureDelegate: "); //$NON-NLS-1$
         result.append(typeSignatureDelegate);
         result.append(')');
         return result.toString();
