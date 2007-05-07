@@ -2,6 +2,8 @@ package com.test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 public class TestBeanGeneric 
 {
@@ -13,5 +15,15 @@ public class TestBeanGeneric
     public ArrayList<String> getArrayListOfStrings()
     {
         return new ArrayList<String>();
+    }
+    
+    public List<List<String>> getListOfListOfStrings()
+    {
+    	return new ArrayList<List<String>>();
+    }
+
+    public Map<String, String> getMapOfString_String()
+    {
+        return new HashMap<String, String>();
     }
 }

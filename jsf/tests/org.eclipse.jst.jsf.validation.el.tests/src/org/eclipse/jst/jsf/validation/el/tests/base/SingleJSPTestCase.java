@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * Copyright (c) 2007 Oracle Corporation.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Cameron Bateman/Oracle - initial API and implementation
+ *    
+ ********************************************************************************/
 package org.eclipse.jst.jsf.validation.el.tests.base;
 
 import java.util.List;
@@ -214,8 +225,8 @@ public abstract class SingleJSPTestCase extends BaseTestCase
         
         MyConfiguration(TestConfiguration testConfiguration)
         {
-            _facetVersion = (String) testConfiguration.get(BaseTestCase.JSF_FACET_VERSION);
-            _facesConfigFile = (String) testConfiguration.get(FACES_CONFIG_FILE);
+            _facetVersion = testConfiguration.get(BaseTestCase.JSF_FACET_VERSION);
+            _facesConfigFile = testConfiguration.get(FACES_CONFIG_FILE);
         }
 
         public String getFacetVersion() {

@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * Copyright (c) 2007 Oracle Corporation.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Cameron Bateman/Oracle - initial API and implementation
+ *    
+ ********************************************************************************/
 package org.eclipse.jst.jsf.designtime.tests;
 
 import junit.framework.Test;
@@ -16,11 +27,13 @@ public class AllTests
      */
     public static Test suite() 
     {
-        TestSuite suite = new TestSuite("Test for org.eclipse.jst.jsf.validation.el.tests");
+        TestSuite suite = new TestSuite("Test for org.eclipse.jst.jsf.designtime.tests");
         //$JUnit-BEGIN$
         suite.addTestSuite(TestDefaultBeanSymbolSourceProvider.class);
         suite.addTestSuite(TestResourceBundleMapSource.class);
         suite.addTestSuite(TestDefaultPropertyResolver.class);
+        suite.addTestSuite(TestAbstractDataModelVariableFactory.class);
+        
         //$JUnit-END$
         return suite;
     }

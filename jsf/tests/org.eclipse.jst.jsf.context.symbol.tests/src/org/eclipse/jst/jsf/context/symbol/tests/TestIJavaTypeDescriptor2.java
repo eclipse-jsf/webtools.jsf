@@ -44,14 +44,17 @@ public class TestIJavaTypeDescriptor2 extends ModelBaseTestCase
     private Map                     _beanSubclassProperties;
     private Map                     _beanMethods;
     private Map                     _beanMethodsSubclass;     
+    private Map<String, IPropertySymbol> _genericProperties;
     
     private IBeanInstanceSymbol     _testBean1Symbol;
     private IBeanInstanceSymbol     _testBean1SubclassSymbol;
     private IBeanInstanceSymbol     _testBean2Symbol;
     private IBeanInstanceSymbol     _testBean2SubclassSymbol;
+    private IBeanInstanceSymbol     _testBeanWithGenericProperties;
     
     private final static String packageName1 = "com.test";
     private final static String testBeanName1 = "TestBean1";
+    private final static String testBean1Sig = "L"+packageName1+"."+testBeanName1+";";
     private final static String testBeanSubclass1 = "TestBean1Subclass";
     private final static String testBeanName2 = "TestBean2";
     private final static String testBean2Subclass = "TestBean2Subclass";
@@ -80,6 +83,13 @@ public class TestIJavaTypeDescriptor2 extends ModelBaseTestCase
             setupBeanProperty(TestsPlugin.getDefault().getBundle(), 
                               "/testfiles/TestBean1Subclass.java.data", packageName1, 
                               testBeanSubclass1, _beanSubclassProperties);
+
+        _genericProperties = new HashMap<String, IPropertySymbol>();
+        
+        _testBeanWithGenericProperties =
+            setupBeanProperty(ContextSymbolTestPlugin.getDefault().getBundle(),
+                    "/testdata/TestBeanWithGenericProperties.java.data", packageName1, 
+                    "TestBeanWithGenericProperties",_genericProperties);
 
         _beanMethods = new HashMap();
         _testBean2Symbol = 
@@ -126,11 +136,12 @@ public class TestIJavaTypeDescriptor2 extends ModelBaseTestCase
      */
     public void testMapSanity()
     {
-        final int NUM_PROPS_IN_BEAN = 14;
-        assertEquals("Check extra or missing properties",_beanProperties.size(), NUM_PROPS_IN_BEAN);
-        assertEquals("Check extra or missing properties",_beanSubclassProperties.size(), NUM_PROPS_IN_BEAN+1);
-        assertEquals("Check extra or missing methods",_beanMethods.size(), 5);
-        assertEquals("Check extra or missing methods",_beanMethodsSubclass.size(), 6);
+        final int NUM_PROPS_IN_BEAN = 15; // includes getClass on parent java.lang.Object
+        assertEquals("Check extra or missing properties",NUM_PROPS_IN_BEAN, _beanProperties.size());
+        assertEquals("Check extra or missing properties",NUM_PROPS_IN_BEAN+1, _beanSubclassProperties.size());
+        assertEquals("Check extra or missing methods",12,_beanMethods.size()); // includes java.lang.Object methods
+        assertEquals("Check extra or missing methods",13,_beanMethodsSubclass.size());
+        assertEquals("Check extra or missing methods", 5, _genericProperties.size());
     }
     
     /**
@@ -695,6 +706,62 @@ public class TestIJavaTypeDescriptor2 extends ModelBaseTestCase
         assertNotNull(nestedSymbol);
         assertEquals(TypeConstants.TYPE_STRING, 
                 nestedSymbol.getTypeDescriptor().getTypeSignature());
+    }
+    
+/* ------ Properties with generics ------- */
+    
+    public void testGenericGetterBeans()
+    {
+        // list of strings
+        {
+            final IPropertySymbol propSymbol = _genericProperties.get("listOfStrings");
+            assertNotNull(propSymbol);
+            
+            ITypeDescriptor typeDesc = propSymbol.getTypeDescriptor();
+            assertNotNull(typeDesc);
+            assertEquals(TypeConstants.TYPE_LIST, typeDesc.getTypeSignature());
+            assertEquals(1, typeDesc.getTypeParameterSignatures().size());
+            assertEquals(TypeConstants.TYPE_STRING, typeDesc.getTypeParameterSignatures().get(0));
+        }
+        
+        // map of strings keyed on strings
+        {
+            final IPropertySymbol propSymbol = _genericProperties.get("mapOfStringsKeyedByString");
+            assertNotNull(propSymbol);
+            
+            ITypeDescriptor typeDesc = propSymbol.getTypeDescriptor();
+            assertNotNull(typeDesc);
+            assertEquals(TypeConstants.TYPE_MAP, typeDesc.getTypeSignature());
+            assertEquals(2, typeDesc.getTypeParameterSignatures().size());
+            assertEquals(TypeConstants.TYPE_STRING, typeDesc.getTypeParameterSignatures().get(0));
+            assertEquals(TypeConstants.TYPE_STRING, typeDesc.getTypeParameterSignatures().get(1));
+        }
+        
+        // map of user (source) defined type keyed  on strings
+        {
+            final IPropertySymbol propSymbol = _genericProperties.get("mapOfTestBeansByString");
+            assertNotNull(propSymbol);
+            
+            ITypeDescriptor typeDesc = propSymbol.getTypeDescriptor();
+            assertNotNull(typeDesc);
+            assertEquals(TypeConstants.TYPE_MAP, typeDesc.getTypeSignature());
+            assertEquals(2, typeDesc.getTypeParameterSignatures().size());
+            assertEquals(TypeConstants.TYPE_STRING, typeDesc.getTypeParameterSignatures().get(0));
+            assertEquals(testBean1Sig, typeDesc.getTypeParameterSignatures().get(1));
+        }
+        
+        // mutable map
+        {
+            final IPropertySymbol propSymbol = _genericProperties.get("mutableMapOfStringByString");
+            assertNotNull(propSymbol);
+            
+            ITypeDescriptor typeDesc = propSymbol.getTypeDescriptor();
+            assertNotNull(typeDesc);
+            assertEquals(TypeConstants.TYPE_MAP, typeDesc.getTypeSignature());
+            assertEquals(2, typeDesc.getTypeParameterSignatures().size());
+            assertEquals(TypeConstants.TYPE_STRING, typeDesc.getTypeParameterSignatures().get(0));
+            assertEquals(TypeConstants.TYPE_STRING, typeDesc.getTypeParameterSignatures().get(1));
+        }
     }
     
 /* ------ Method signature testing -----------------------*/

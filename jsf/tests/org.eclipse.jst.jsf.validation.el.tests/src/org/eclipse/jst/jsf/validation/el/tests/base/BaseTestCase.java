@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * Copyright (c) 2007 Oracle Corporation.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Cameron Bateman/Oracle - initial API and implementation
+ *    
+ ********************************************************************************/
 package org.eclipse.jst.jsf.validation.el.tests.base;
 
 import java.io.ByteArrayInputStream;
@@ -571,9 +582,9 @@ public abstract class BaseTestCase extends ConfigurableTestCase
         
         MyConfiguration(TestConfiguration  configuration)
         {
-            _proxyHostName = (String) configuration.get(BaseTestCase.PROXY_SETTING_HOST);
-            _proxyPort = (String) configuration.get(BaseTestCase.PROXY_SETTING_PORT);
-            _jsfVersion = (String) configuration.get(BaseTestCase.JSF_FACET_VERSION);
+            _proxyHostName = configuration.get(BaseTestCase.PROXY_SETTING_HOST);
+            _proxyPort = configuration.get(BaseTestCase.PROXY_SETTING_PORT);
+            _jsfVersion = configuration.get(BaseTestCase.JSF_FACET_VERSION);
         }
         
         public boolean isProxyEnabled()

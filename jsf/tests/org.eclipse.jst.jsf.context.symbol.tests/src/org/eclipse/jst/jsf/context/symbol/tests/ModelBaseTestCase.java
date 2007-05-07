@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * Copyright (c) 2007 Oracle Corporation.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Cameron Bateman/Oracle - initial API and implementation
+ *    
+ ********************************************************************************/
 package org.eclipse.jst.jsf.context.symbol.tests;
 
 import java.util.Iterator;
@@ -10,6 +21,7 @@ import org.eclipse.jdt.core.IType;
 import org.eclipse.jst.jsf.context.symbol.IBeanInstanceSymbol;
 import org.eclipse.jst.jsf.context.symbol.IBeanPropertySymbol;
 import org.eclipse.jst.jsf.context.symbol.IJavaTypeDescriptor2;
+import org.eclipse.jst.jsf.context.symbol.IPropertySymbol;
 import org.eclipse.jst.jsf.context.symbol.SymbolFactory;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
@@ -72,7 +84,7 @@ public class ModelBaseTestCase extends TestCase
      * @return a bean instance set up for the indicated test class
      * @throws Exception
      */
-    protected IBeanInstanceSymbol setupBeanProperty(Bundle bundle, String fileName, String packageName, String beanClassName, Map properties) throws Exception
+    protected IBeanInstanceSymbol setupBeanProperty(Bundle bundle, String fileName, String packageName, String beanClassName, Map<String, IPropertySymbol> properties) throws Exception
     {
         loadSourceClass(bundle, fileName, packageName, beanClassName);
         
@@ -88,11 +100,10 @@ public class ModelBaseTestCase extends TestCase
             SymbolFactory.eINSTANCE.createIBeanInstanceSymbol();
         bean.setTypeDescriptor(testBeanDescriptor);
         bean.setName(beanClassName);
-        List propertyList = bean.getProperties();
-        for(final Iterator it = propertyList.iterator(); it.hasNext();)
+        List<IPropertySymbol> propertyList = bean.getProperties();
+        for(final Iterator<IPropertySymbol> it = propertyList.iterator(); it.hasNext();)
         {
-            final IBeanPropertySymbol  property = 
-                (IBeanPropertySymbol) it.next();
+            final IPropertySymbol  property = it.next();
             properties.put(property.getName(), property);
         }
         

@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * Copyright (c) 2007 Oracle Corporation.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Cameron Bateman/Oracle - initial API and implementation
+ *    
+ ********************************************************************************/
 package org.eclipse.jst.jsf.designtime.tests;
 
 import java.util.HashMap;
@@ -31,7 +42,7 @@ import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
  */
 public class TestDefaultPropertyResolver extends TestCase 
 {
-    private static final int NUM_PROPERTIES_TEST_BEAN_1 = 5;
+    private static final int NUM_PROPERTIES_TEST_BEAN_1 = 6;  // includes java.lang.Object.getClass()
     private JDTTestEnvironment              _jdtTestEnvironment;
     private JSFFacetedTestEnvironment       _jsfFactedTestEnvironment;
 
@@ -42,6 +53,7 @@ public class TestDefaultPropertyResolver extends TestCase
     private IType                           _testBeanWithMapProp;
     private IType                           _testListBeanType;
     private IType                           _testBeanWithListPropType;
+    private IType                           _testBeanWithGenericProperties;
     
     private final static String     SRC_FOLDER_NAME = "src";
     private final static String     PACKAGE_NAME = "com.test";
@@ -52,6 +64,7 @@ public class TestDefaultPropertyResolver extends TestCase
     private final static String     BEANWITHMAPPROP_NAME = "BeanWithMapProp";  
     private final static String     LISTBEAN_NAME = "ListBean";
     private final static String     BEANWITHLISTPROP_NAME = "BeanWithListProp";
+    private final static String     BEANWITHGENERICPROP_NAME = "TestBeanWithGenericProperties";
     
     protected void setUp() throws Exception 
     {
@@ -120,6 +133,13 @@ public class TestDefaultPropertyResolver extends TestCase
         _testBeanWithListPropType =
             _jdtTestEnvironment.getJavaProject().findType(PACKAGE_NAME+"."+BEANWITHLISTPROP_NAME);
         assertNotNull(_testBeanWithListPropType);
+        
+        JSFTestUtil.loadSourceClass(
+                DesignTimeTestsPlugin.getDefault().getBundle(), 
+                    "/testdata/TestBeanWithGenericProperties.java.data", BEANWITHGENERICPROP_NAME, SRC_FOLDER_NAME, PACKAGE_NAME, _jdtTestEnvironment);
+        _testBeanWithGenericProperties = 
+            _jdtTestEnvironment.getJavaProject().findType(PACKAGE_NAME+"."+BEANWITHGENERICPROP_NAME);
+        assertNotNull(_testBeanWithGenericProperties);
     }
     
     
@@ -145,32 +165,36 @@ public class TestDefaultPropertyResolver extends TestCase
         
         beanIntrospector = new JDTBeanIntrospector(_testMapBean1Type);
         props = beanIntrospector.getProperties();
-        // has 1 as a bean: isEmpty -> empty property
-        assertEquals(1, props.size());
+        // has 2 as a bean: isEmpty -> empty property + class
+        assertEquals(2, props.size());
 
         beanIntrospector = new JDTBeanIntrospector(_testBean2Type);
         props = beanIntrospector.getProperties();
-        // two props: one TestBean3
-        assertEquals(1, props.size());
+        // two props: myBean3, class
+        assertEquals(2, props.size());
         
         beanIntrospector = new JDTBeanIntrospector(_testBean3Type);
         props = beanIntrospector.getProperties();
-        // one props: one of type TestBean2
-        assertEquals(1, props.size());
+        // two props: one of type TestBean2 + class
+        assertEquals(2, props.size());
         
         beanIntrospector = new JDTBeanIntrospector(_testBeanWithMapProp);
         props = beanIntrospector.getProperties();
-        // one props: one of type Map
-        assertEquals(1, props.size());
+        // two props: one of type Map + class
+        assertEquals(2, props.size());
         
         beanIntrospector = new JDTBeanIntrospector(_testListBeanType);
         props = beanIntrospector.getProperties();
-        // includes isEmpty
-        assertEquals(2, props.size());
+        // includes isEmpty and class
+        assertEquals(3, props.size());
         
         beanIntrospector = new JDTBeanIntrospector(_testBeanWithListPropType);
         props = beanIntrospector.getProperties();
-        assertEquals(1, props.size());
+        assertEquals(2, props.size());
+        
+        beanIntrospector = new JDTBeanIntrospector(_testBeanWithGenericProperties);
+        props = beanIntrospector.getProperties();
+        assertEquals(3, props.size());
     }
     
     /**
@@ -325,7 +349,7 @@ public class TestDefaultPropertyResolver extends TestCase
         final DefaultDTPropertyResolver propResolver = new DefaultDTPropertyResolver();
         {
             final ISymbol[]  properties = propResolver.getAllProperties(symbol);
-            assertEquals(1, properties.length);
+            assertEquals(2, properties.length);  // should have defined property plus class
             
             // check props
             final Map  gotProps  = new HashMap();
@@ -340,6 +364,7 @@ public class TestDefaultPropertyResolver extends TestCase
             }
             
             assertTrue(gotProps.containsKey("myBean3"));
+            assertTrue(gotProps.containsKey("class"));
         }
         // next run recursively on myBean3 10 props deep
         ISymbol curBase = symbol;
@@ -348,8 +373,8 @@ public class TestDefaultPropertyResolver extends TestCase
         for (int i = 0; i < 10; i++)
         {
             final ISymbol[] properties = propResolver.getAllProperties(curBase);
-            assertEquals(1, properties.length);
-            final IPropertySymbol  propSymbol = (IPropertySymbol) properties[0];
+            assertEquals(2, properties.length); // has class property as well as expected  in it
+            final IPropertySymbol  propSymbol = (IPropertySymbol) findSymbol(i % 2 == 0 ? "myBean3" : "myBean2", properties);
 
             // i is even
             if (i % 2 == 0)
@@ -383,10 +408,10 @@ public class TestDefaultPropertyResolver extends TestCase
         DefaultDTPropertyResolver propResolver = new DefaultDTPropertyResolver();
         ISymbol[]  properties = propResolver.getAllProperties(symbol);
 
-        // should be just one property
-        assertEquals(1, properties.length);
-        assertEquals(properties[0].getName(), "mapProp");
-        assertEquals(properties[0].getName(),
+        // should be two properties: mapProp and class
+        assertEquals(2, properties.length);
+        assertNotNull(findSymbol("mapProp",properties));
+        assertEquals(findSymbol("mapProp",properties).getName(),
                      propResolver.getProperty(symbol, "mapProp").getName());
         
         IPropertySymbol  mapProp = (IPropertySymbol) propResolver.getProperty(symbol, "mapProp");
@@ -543,11 +568,11 @@ public class TestDefaultPropertyResolver extends TestCase
         DefaultDTPropertyResolver propResolver = new DefaultDTPropertyResolver();
         ISymbol[]  properties = propResolver.getAllProperties(symbol);
 
-        // should be just one property
-        assertEquals(1, properties.length);
-        assertEquals(properties[0].getName(), "listProp");
-        assertEquals(properties[0].getName(),
-                     propResolver.getProperty(symbol, "listProp").getName());
+        // should be just one property plus Object.class
+        assertEquals(2, properties.length);
+        assertNotNull(findSymbol("listProp", properties));
+        assertEquals(findSymbol("listProp", properties).getName(),
+                propResolver.getProperty(symbol, "listProp").getName());
         
         IPropertySymbol  listProp = (IPropertySymbol) propResolver.getProperty(symbol, "listProp");
         assertEquals("Lcom.test.ListBean;", listProp.getTypeDescriptor().getTypeSignature());
@@ -560,4 +585,46 @@ public class TestDefaultPropertyResolver extends TestCase
         IPropertySymbol unboundedProp = (IPropertySymbol) propResolver.getProperty(listProp, 0);
         assertEquals(TypeConstants.TYPE_JAVAOBJECT, unboundedProp.getTypeDescriptor().getTypeSignature());
     }
+    
+    public void testGenericListProperty()
+    {
+        final IBeanInstanceSymbol symbol = SymbolFactory.eINSTANCE.createIBeanInstanceSymbol();
+        symbol.setName("beanWithListProp");
+        final IJavaTypeDescriptor2 typeDesc = SymbolFactory.eINSTANCE.createIJavaTypeDescriptor2();
+        typeDesc.setType(_testBeanWithGenericProperties);
+        symbol.setTypeDescriptor(typeDesc);
+        
+        DefaultDTPropertyResolver propResolver = new DefaultDTPropertyResolver();
+        ISymbol[]  properties = propResolver.getAllProperties(symbol);
+
+        // should be just one property plus Object.class
+        assertEquals(3, properties.length);
+        assertNotNull(findSymbol("listOfStrings", properties));
+        assertEquals(findSymbol("listOfStrings", properties).getName(),
+                propResolver.getProperty(symbol, "listOfStrings").getName());
+        
+        IPropertySymbol  listProp = (IPropertySymbol) propResolver.getProperty(symbol, "listOfStrings");
+        assertEquals(TypeConstants.TYPE_LIST, listProp.getTypeDescriptor().getTypeSignature());
+        
+        properties = propResolver.getAllProperties(listProp);
+        
+        // has isEmpty and one bean props
+        assertEquals(0, properties.length);
+        
+        IPropertySymbol unboundedProp = (IPropertySymbol) propResolver.getProperty(listProp, 0);
+        assertEquals(TypeConstants.TYPE_STRING, unboundedProp.getTypeDescriptor().getTypeSignature());
+    }
+    
+    private ISymbol findSymbol(final String name, ISymbol[] symbols)
+    {
+        for (ISymbol symbol : symbols)
+        {
+            if (symbol.getName().equals(name))
+            {
+                return symbol;
+            }
+        }
+        
+        return null;
+     }
 }

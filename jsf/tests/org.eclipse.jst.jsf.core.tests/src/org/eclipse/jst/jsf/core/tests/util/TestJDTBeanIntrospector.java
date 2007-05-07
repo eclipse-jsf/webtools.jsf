@@ -20,6 +20,7 @@ import junit.framework.TestCase;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.Signature;
+import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
 import org.eclipse.jst.jsf.common.util.JDTBeanIntrospector;
 import org.eclipse.jst.jsf.common.util.JDTBeanProperty;
 import org.eclipse.jst.jsf.common.util.JDTBeanPropertyWorkingCopy;
@@ -36,12 +37,15 @@ import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
  */
 public class TestJDTBeanIntrospector extends TestCase 
 {
+    // TODO: test the getAllMethods.  also ensure that we get coverage of the case
+    // where a type has no supers
     private JDTTestEnvironment                      _jdtTestEnvironment;
     private IType                                   _testBean1Type;
     private IType                                   _testBeanSubclassType;
     private IType                                   _testBeanGenericType;
     private Map<String, JDTBeanProperty>            _properties;
     private Map<String, JDTBeanProperty>            _subClassProperties;
+    private Map<String, JDTBeanProperty>            _genericTypeProperties;
 
     private final static String srcFolderName = "src";
     private final static String packageName1 = "com.test";
@@ -110,6 +114,11 @@ public class TestJDTBeanIntrospector extends TestCase
             new JDTBeanIntrospector(_testBeanSubclassType);
         
         _subClassProperties = beanIntrospector.getProperties();
+        
+        beanIntrospector = 
+            new JDTBeanIntrospector(_testBeanGenericType);
+        
+        _genericTypeProperties = beanIntrospector.getProperties();
     }
 
     
@@ -126,12 +135,14 @@ public class TestJDTBeanIntrospector extends TestCase
      */
     public void testMapSanity()
     {
-        final int NUM_PROPS = 14;
+        final int NUM_PROPS = 15;
         
         checkMapSanity(_properties, NUM_PROPS);
         // sub class an locally defined property in addition to what
         // is inherited
         checkMapSanity(_subClassProperties, NUM_PROPS+1);
+        
+        checkMapSanity(_genericTypeProperties, 5);
     }
 
     private void checkMapSanity(Map<String, JDTBeanProperty> properties, int numProps)
@@ -536,30 +547,42 @@ public class TestJDTBeanIntrospector extends TestCase
 
     }
     
-    public void testGenericProperty() throws Exception
+    public void testGenericListOfStringProperty() throws Exception
     {
-        JDTBeanIntrospector introspector = new JDTBeanIntrospector(_testBeanGenericType);
-        Map<String, JDTBeanProperty> props = introspector.getProperties();
-        JDTBeanProperty property = props.get("listOfStrings");
-        System.out.println(property.getTypeSignature());
-        System.out.println(property.getType().getFullyQualifiedName());
-        System.out.println(property.getType().getFullyQualifiedParameterizedName());
+        JDTBeanProperty property = _genericTypeProperties.get("listOfStrings");
+        assertEquals(TypeConstants.TYPE_LIST, property.getTypeSignature());
 
-//        for (ITypeParameter parameter : property.getType().getTypeParameters())
-//        {
-//            System.out.println(parameter.getElementName());
-//            System.out.println(parameter.getElementType());
-//            System.out.print("\n");
-//            
-//            for (String bound : parameter.getBounds())
-//            {
-//                System.out.println(bound);
-//            }
-//        }
-
-        for (String param : property.getTypeParameterSignatures())
-        {
-            System.out.println(param);
-        }
+        assertEquals(1, property.getTypeParameterSignatures().size());
+        assertEquals(TypeConstants.TYPE_STRING, property.getTypeParameterSignatures().get(0));
     }
+    
+    public void testGenericArrayListOfStringProperty() throws Exception
+    {
+        JDTBeanProperty property = _genericTypeProperties.get("arrayListOfStrings");
+        assertEquals("Ljava.util.ArrayList;", property.getTypeSignature());
+
+        assertEquals(1, property.getTypeParameterSignatures().size());
+        assertEquals(TypeConstants.TYPE_STRING, property.getTypeParameterSignatures().get(0));
+    }
+    public void testGenericListOfListOfStringProperty() throws Exception
+    {
+        JDTBeanProperty property = _genericTypeProperties.get("listOfListOfStrings");
+        assertEquals("Ljava.util.List;", property.getTypeSignature(true));
+        assertEquals("Ljava.util.List<Ljava.util.List<Ljava.lang.String;>;>;", property.getTypeSignature(false));
+        
+        assertEquals(1, property.getTypeParameterSignatures().size());
+        assertEquals("Ljava.util.List<Ljava.lang.String;>;", property.getTypeParameterSignatures().get(0));
+    }
+    
+    public void testGenericMapOfString_StringProperty() throws Exception
+    {
+        JDTBeanProperty property = _genericTypeProperties.get("mapOfString_String");
+        assertEquals("Ljava.util.Map;", property.getTypeSignature(true));
+        assertEquals("Ljava.util.Map<Ljava.lang.String;Ljava.lang.String;>;", property.getTypeSignature(false));
+        
+        assertEquals(2, property.getTypeParameterSignatures().size());
+        assertEquals("Ljava.lang.String;", property.getTypeParameterSignatures().get(0));
+        assertEquals("Ljava.lang.String;", property.getTypeParameterSignatures().get(1));
+    }
+
 }

@@ -54,9 +54,9 @@ public class BaseWriteTestCase extends ConfigurableTestCase
     {
         if (_testConfiguration != null)
         {
-            _facesConfigFile = (String) _testConfiguration.get(CONFIG_FILE_KEY);
+            _facesConfigFile = _testConfiguration.get(CONFIG_FILE_KEY);
             assertNotNull(_facesConfigFile);
-            _facesVersion = (String) _testConfiguration.get(FACES_VERSION_KEY);
+            _facesVersion = _testConfiguration.get(FACES_VERSION_KEY);
             assertNotNull(_facesVersion);
         }
     }
