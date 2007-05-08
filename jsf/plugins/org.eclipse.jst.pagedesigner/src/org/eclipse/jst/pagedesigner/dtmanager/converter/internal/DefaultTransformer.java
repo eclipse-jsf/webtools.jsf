@@ -31,9 +31,18 @@ public class DefaultTransformer implements ITransformer {
     // be allowed to be null
 	private final Collection transformOperations = new ArrayList();
 
+	/**
+	 * Instantiates an instance.
+	 * 
+	 * @param context ITagConverterContext instance.
+	 */
+	public DefaultTransformer(ITagConverterContext context) {
+		this.tagConverterContext = context;
+	}
+
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.ITransformer#appendTransformOperation(org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.ITransformOperation)
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.ITransformer#appendTransformOperation(org.eclipse.jst.pagedesigner.dtmanager.converter.ITransformOperation)
 	 */
 	public void appendTransformOperation(ITransformOperation operation) {
 		synchronized(transformOperations) {
@@ -63,14 +72,6 @@ public class DefaultTransformer implements ITransformer {
 			}
 		}
 		return curElement;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.ITransformer#setTagConverterContext(org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.ITagConverterContext)
-	 */
-	public void setTagConverterContext(ITagConverterContext tagConverterContext) {
-		this.tagConverterContext = tagConverterContext;
 	}
 
 }

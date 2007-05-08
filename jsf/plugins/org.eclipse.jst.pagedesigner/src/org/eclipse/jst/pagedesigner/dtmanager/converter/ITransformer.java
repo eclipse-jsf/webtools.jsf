@@ -36,22 +36,11 @@ public interface ITransformer {
 	 * 
 	 * @param srcElement Original input Element instance.
 	 * @return Transformed output Element instance.
-     * API: I'd like to consider templating the generic ITransformer
+	 * 
+     * TODO: I'd like to consider templating the generic ITransformer
      * interface to ITransformer<I,O> and making this a normative instance
      * case of ITransformer<Element, Element>
 	 */
 	public Element transform(Element srcElement);
-
-	/**
-	 * Sets the ITagConverterContext instance allowing access to context and
-	 * functionality of the current ITagConverter instance.
-	 * 
-	 * @param tagConverterContext ITagConverterContext instance allowing access
-	 * to context and functionality of the current ITagConverter instance.
-     * API: does this need to be on the interface?  Why couldn't this be set
-     * at construction time from a factory?  Alternatively, should it be passed
-     * as an argument to tranform()?
-	 */
-	public void setTagConverterContext(ITagConverterContext tagConverterContext);
 
 }

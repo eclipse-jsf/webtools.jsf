@@ -34,8 +34,6 @@ import org.w3c.dom.Text;
  * Design-Time metadata-driven tag converter.
  * 
  * @author Ian Trimble - Oracle
- * API: should consider splitting out an AbstractDTTagConverter public and making
- * this package private (or simply non-API)
  */
 public class DTTagConverter implements
 	ITagConverter, ITagEditInfo, INodeAdapter, IDOMFactory {

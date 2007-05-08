@@ -66,8 +66,7 @@ public class DTHTMLOutputRenderer implements IOutputRenderer {
 		if (dtInfo != null) {
 			TagConvertInfo tcInfo = dtInfo.getTagConvertInfo();
 			if (tcInfo != null) {
-				transformer = new DefaultTransformer();
-				transformer.setTagConverterContext(tagConverterContext);
+				transformer = new DefaultTransformer(tagConverterContext);
 				EList operations = tcInfo.getOperations();
 				if (!appendOperationsToTransformer(transformer, operations, dtInfo)) {
 					transformer = null;

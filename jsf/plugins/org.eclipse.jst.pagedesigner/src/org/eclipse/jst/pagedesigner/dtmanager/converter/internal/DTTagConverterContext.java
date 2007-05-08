@@ -11,7 +11,7 @@
 package org.eclipse.jst.pagedesigner.dtmanager.converter.internal;
 
 import org.eclipse.jst.pagedesigner.converter.ConvertPosition;
-import org.eclipse.jst.pagedesigner.dtmanager.converter.ITagConverterContext;
+import org.eclipse.jst.pagedesigner.dtmanager.converter.AbstractTagConverterContext;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.Text;
@@ -20,77 +20,59 @@ import org.w3c.dom.Text;
  * Design-time tag converter implementation of ITagConverterContext.
  * 
  * @author Ian Trimble - Oracle
- * API: should we make some these public methods?  Is it reasonable
- * to allow people to reuse/override these methods?  Perhaps it
- * makes sense to split this to an AbstractTagConverterContext usable
- * by all?
  */
-public class DTTagConverterContext implements ITagConverterContext {
-
-	private DTTagConverter tagConverter;
+public class DTTagConverterContext extends AbstractTagConverterContext {
 
 	/**
-	 * Constructs an instance for the specified DTTagConverter.
+	 * Constructs an instance for the specified DTTagConverter instance.
 	 * 
 	 * @param tagConverter DTTagConverter instance.
 	 */
 	public DTTagConverterContext(DTTagConverter tagConverter) {
-		this.tagConverter = tagConverter;
+		super(tagConverter);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.ITagConverterContext#getHostElement()
-	 */
-	public Element getHostElement() {
-		Element hostElement = null;
-		if (tagConverter != null) {
-			hostElement = tagConverter.getHostElement();
-		}
-		return hostElement;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.ITagConverterContext#createElement(java.lang.String)
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.ITagConverterContext#createElement(java.lang.String)
 	 */
 	public Element createElement(String tag) {
 		Element element = null;
 		if (tagConverter != null) {
-			element = tagConverter.createElement(tag);
+			element = ((DTTagConverter)tagConverter).createElement(tag);
 		}
 		return element;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.ITagConverterContext#createText(java.lang.String)
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.ITagConverterContext#createText(java.lang.String)
 	 */
 	public Text createText(String content) {
 		Text text = null;
 		if (tagConverter != null) {
-			text = tagConverter.createText(content);
+			text = ((DTTagConverter)tagConverter).createText(content);
 		}
 		return text;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.ITagConverterContext#addChild(org.w3c.dom.Node, org.eclipse.jst.pagedesigner.converter.ConvertPosition)
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.ITagConverterContext#addChild(org.w3c.dom.Node, org.eclipse.jst.pagedesigner.converter.ConvertPosition)
 	 */
 	public void addChild(Node childNode, ConvertPosition position) {
 		if (tagConverter != null) {
-			tagConverter.addChild(childNode, position);
+			((DTTagConverter)tagConverter).addChild(childNode, position);
 		}
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.ITagConverterContext#copyChildren(org.w3c.dom.Element, org.w3c.dom.Element)
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.ITagConverterContext#copyChildren(org.w3c.dom.Element, org.w3c.dom.Element)
 	 */
 	public void copyChildren(Element srcElement, Element destElement) {
 		if (tagConverter != null) {
-			tagConverter.copyChildren(srcElement, destElement);
+			((DTTagConverter)tagConverter).copyChildren(srcElement, destElement);
 		}
 	}
 

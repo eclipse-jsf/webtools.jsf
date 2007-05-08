@@ -19,7 +19,8 @@ import org.w3c.dom.Element;
  * to output Element instances.
  * 
  * @author Ian Trimble - Oracle
- * API: as with ITransformer, I'd like to consider 
+ * 
+ * TODO: as with ITransformer, I'd like to consider
  * ITransfomOperation<SRC, RESULT>
  */
 public interface ITransformOperation {

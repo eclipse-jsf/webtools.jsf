@@ -26,7 +26,8 @@ public interface IOutputRenderer {
 	 * ITagConverter-specific context and functionality.
 	 * @return Element instance representing top Element in resulting output
 	 * tree.
-     * API: let's parameterize the return type either with a generic type
+	 * 
+     * TODO: let's parameterize the return type either with a generic type
      * or with Object so that sub-classes can co-vary
 	 */
 	public Element render(ITagConverterContext tagConverterContext);
