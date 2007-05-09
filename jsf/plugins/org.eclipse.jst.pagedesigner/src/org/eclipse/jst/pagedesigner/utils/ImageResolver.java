@@ -11,6 +11,11 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.utils;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.swt.SWTException;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.wst.sse.core.internal.util.URIResolver;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
@@ -52,8 +57,36 @@ public class ImageResolver {
 	 */
 	public static Image initializeImage(Element element, String attrName) {
 		String url = getResolvedURL(element, attrName);
-		if (url == null)
+		if (url == null) {
 			return null;
-		return new Image(null, url);
+		}
+		Image img = null;
+		int colonIndex = url.indexOf(":");
+		int slashIndex = url.indexOf("/");
+		if (colonIndex != -1 && (slashIndex != -1 && colonIndex < slashIndex)) {
+			//the url seems to have a protocol, so try to load it as a URL
+			try {
+				URL urlObj = new URL(url);
+				ImageDescriptor imgDesc = ImageDescriptor.createFromURL(urlObj);
+				img = imgDesc.createImage(false);
+			} catch(MalformedURLException mfe) {
+				//attempt to load as a file
+				try {
+					img = new Image(null, url);
+				} catch(SWTException se) {
+					//img remains null on return
+				}
+			} catch(SWTException se) {
+				//img remains null on return
+			}
+		} else {
+			//no protocol, so load it as a file
+			try {
+				img = new Image(null, url);
+			} catch(SWTException se) {
+				//img remains null on return
+			}
+		}
+		return img;
 	}
 }
