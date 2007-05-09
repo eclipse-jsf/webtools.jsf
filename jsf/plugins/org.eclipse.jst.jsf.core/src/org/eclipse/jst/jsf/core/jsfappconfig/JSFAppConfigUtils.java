@@ -208,47 +208,50 @@ public class JSFAppConfigUtils {
 		if (isValidJSFProject(project)) {
 			WebArtifactEdit webArtifactEdit = WebArtifactEdit.getWebArtifactEditForRead(project);
 			if (webArtifactEdit != null) {
-				WebApp webApp = null;
 				try {
-					webApp = webArtifactEdit.getWebApp();
-				} catch(ClassCastException cce) {
-					//occasionally thrown from WTP code in RC3 and possibly later
-					JSFCorePlugin.log(IStatus.ERROR, cce.getLocalizedMessage(), cce);
-					return filesList;
-				}
-				if (webApp != null) {
-					String filesString = null;
-					//need to branch here due to model version differences (BugZilla #119442)
-					if (webApp.getVersionID() == J2EEVersionConstants.WEB_2_3_ID) {
-						EList contexts = webApp.getContexts();
-						Iterator itContexts = contexts.iterator();
-						while (itContexts.hasNext()) {
-							ContextParam contextParam = (ContextParam)itContexts.next();
-							if (contextParam.getParamName().equals(CONFIG_FILES_CONTEXT_PARAM_NAME)) {
-								filesString = contextParam.getParamValue();
-								break;
+					WebApp webApp = null;
+					try {
+						webApp = webArtifactEdit.getWebApp();
+					} catch(ClassCastException cce) {
+						//occasionally thrown from WTP code in RC3 and possibly later
+						JSFCorePlugin.log(IStatus.ERROR, cce.getLocalizedMessage(), cce);
+						return filesList;
+					}
+					if (webApp != null) {
+						String filesString = null;
+						//need to branch here due to model version differences (BugZilla #119442)
+						if (webApp.getVersionID() == J2EEVersionConstants.WEB_2_3_ID) {
+							EList contexts = webApp.getContexts();
+							Iterator itContexts = contexts.iterator();
+							while (itContexts.hasNext()) {
+								ContextParam contextParam = (ContextParam)itContexts.next();
+								if (contextParam.getParamName().equals(CONFIG_FILES_CONTEXT_PARAM_NAME)) {
+									filesString = contextParam.getParamValue();
+									break;
+								}
+							}
+						} else {
+							EList contextParams = webApp.getContextParams();
+							Iterator itContextParams = contextParams.iterator();
+							while (itContextParams.hasNext()) {
+								ParamValue paramValue = (ParamValue)itContextParams.next();
+								if (paramValue.getName().equals(CONFIG_FILES_CONTEXT_PARAM_NAME)) {
+									filesString = paramValue.getValue();
+									break;
+								}
 							}
 						}
-					} else {
-						EList contextParams = webApp.getContextParams();
-						Iterator itContextParams = contextParams.iterator();
-						while (itContextParams.hasNext()) {
-							ParamValue paramValue = (ParamValue)itContextParams.next();
-							if (paramValue.getName().equals(CONFIG_FILES_CONTEXT_PARAM_NAME)) {
-								filesString = paramValue.getValue();
-								break;
+						if (filesString != null && filesString.trim().length() > 0) {
+							StringTokenizer stFilesString = new StringTokenizer(filesString, ",");
+							while (stFilesString.hasMoreTokens()) {
+								String configFile = stFilesString.nextToken().trim();
+								filesList.add(configFile);
 							}
 						}
 					}
-					if (filesString != null && filesString.trim().length() > 0) {
-						StringTokenizer stFilesString = new StringTokenizer(filesString, ",");
-						while (stFilesString.hasMoreTokens()) {
-							String configFile = stFilesString.nextToken().trim();
-							filesList.add(configFile);
-						}
-					}
+				} finally {
+					webArtifactEdit.dispose();
 				}
-				webArtifactEdit.dispose();
 			}
 		}
 		return filesList;
