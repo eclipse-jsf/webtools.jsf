@@ -146,7 +146,7 @@ class StandardMetaDataFilesProvider implements IMetaDataSourceModelProvider {
 				}
 			}
 		} catch (FileNotFoundException e){
-			JSFCommonPlugin.log(IStatus.ERROR,e.getLocalizedMessage(), e);
+			JSFCommonPlugin.log(IStatus.ERROR, e.getLocalizedMessage());
 		} catch (IOException e) {
 			JSFCommonPlugin.log(IStatus.ERROR,"IOException(1): StandardMetaDataFilesProvider.getSourceModel()", e);
 		} finally {
@@ -208,8 +208,8 @@ class StandardMetaDataFilesProvider implements IMetaDataSourceModelProvider {
 				
 				private String getImageBase(){
 					if (imageBase == null){
-						Model model = (Model)getSourceModel();
-						Trait t = MetaDataQueryHelper.getTrait(model, "images-base-path");
+						Model aModel = (Model)getSourceModel();
+						Trait t = MetaDataQueryHelper.getTrait(aModel, "images-base-path");
 						if (t == null){
 							imageBase = "";		
 						} else {
