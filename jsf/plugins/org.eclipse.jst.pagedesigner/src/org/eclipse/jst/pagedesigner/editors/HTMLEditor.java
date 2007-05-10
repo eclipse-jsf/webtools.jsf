@@ -425,8 +425,6 @@ public class HTMLEditor extends PostSelectionMultiPageEditorPart implements
 		// or something.
 		super.dispose();
 		
-        // TODO: passing null?
-		//_log.info("Debug.HTMLEditor.0", (String)null);
 	}
 
 	public void doSave(IProgressMonitor monitor) {

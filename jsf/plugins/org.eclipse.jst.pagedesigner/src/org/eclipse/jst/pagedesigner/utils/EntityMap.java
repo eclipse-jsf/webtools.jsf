@@ -145,7 +145,7 @@ public class EntityMap {
 				return true;
 			} catch (Exception ex) {
 				// Error in integer formating
-				_log.info("Debug.EntityMap.0", ex); //$NON-NLS-1$
+				_log.info("Error occurred in integer formatting", ex); //$NON-NLS-1$
 				strBuf.append(s);
 				return false;
 			}
