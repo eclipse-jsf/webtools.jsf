@@ -49,16 +49,14 @@ public class BooleanType extends EnumerationType implements IValidValues, IPossi
 	
 	/**
 	 * Type coercion according to JSP 2.0 spec: JSP.1.14.2.1 Conversions from String values
+	 * Although not completely faithful to spec, we will validate values as either 'true' or 'false'
 	 * @see org.eclipse.jst.jsf.metadataprocessors.features.IValidValues#isValidValue(java.lang.String)
 	 **/
 	public boolean isValidValue(String value) {		
-		try {
-            // TODO: I don't think this method ever throws an exception 
-			Boolean.valueOf(value);
+		if(TRUE_VAL.equalsIgnoreCase(value) || FALSE_VAL.equalsIgnoreCase(value)) {
 			return true;
-		} catch (Exception e) {
-			addNewValidationMessage(BOOLTYPE_VALIDATION_MSG);	
-		}		
+		}
+		addNewValidationMessage(BOOLTYPE_VALIDATION_MSG);	
 		return false;
 	}
 
