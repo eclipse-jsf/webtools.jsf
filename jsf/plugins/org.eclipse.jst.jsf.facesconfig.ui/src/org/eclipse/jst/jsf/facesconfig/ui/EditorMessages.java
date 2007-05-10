@@ -80,17 +80,17 @@ public final class EditorMessages extends NLS {
 
 	public static String ManagedBeanMasterSection_Description;
 
-	public static String ManagedBeanMasterSection_HelpContextID;
-
-	public static String ManagedBeanMasterSection_HelpToolTip;
+//	public static String ManagedBeanMasterSection_HelpContextID;
+//
+//	public static String ManagedBeanMasterSection_HelpToolTip;
 
 	public static String ManagedBeanGeneralSection_Name;
 
 	public static String ManagedBeanGeneralSection_Desc;
 
-	public static String ManagedBeanGeneralSection_HelpContextID;
-
-	public static String ManagedBeanGeneralSection_HelpToolTip;
+//	public static String ManagedBeanGeneralSection_HelpContextID;
+//
+//	public static String ManagedBeanGeneralSection_HelpToolTip;
 
 	public static String ManagedBeanGeneralSection_ManagedBeanName;
 
@@ -102,9 +102,9 @@ public final class EditorMessages extends NLS {
 
 	public static String InitializationSection_Description;
 
-	public static String InitializationSection_HelpContextID;
-
-	public static String InitializationSection_HelpToolTip;
+//	public static String InitializationSection_HelpContextID;
+//
+//	public static String InitializationSection_HelpToolTip;
 
 	public static String ManagedBeanPropertyEditDialog_Title_NewPropertyEntry;
 
@@ -184,9 +184,9 @@ public final class EditorMessages extends NLS {
 
 	public static String OverviewPage_EditorSection_nooverview;
 
-	public static String OverviewPage_EditorSection_Help_HelpContextID;
-
-	public static String OverviewPage_EditorSection_Help_HelpToolTip;
+//	public static String OverviewPage_EditorSection_Help_HelpContextID;
+//
+//	public static String OverviewPage_EditorSection_Help_HelpToolTip;
 
 	public static String OverviewPage_GeneralSection_name;
 
@@ -196,9 +196,9 @@ public final class EditorMessages extends NLS {
 
 	public static String OverviewPage_GeneralSection_label_version;
 
-	public static String OverviewPage_GeneralSection_Help_HelpContextID;
-
-	public static String OverviewPage_GeneralSection_Help_HelpToolTip;
+//	public static String OverviewPage_GeneralSection_Help_HelpContextID;
+//
+//	public static String OverviewPage_GeneralSection_Help_HelpToolTip;
 
 	public static String OverviewPage_NavigationSection_name;
 
@@ -212,9 +212,9 @@ public final class EditorMessages extends NLS {
 
 	public static String OverviewPage_NavigationSection_pageflowPageID;
 
-	public static String OverviewPage_NavigationSection_Help_HelpContextID;
-
-	public static String OverviewPage_NavigationSection_Help_HelpToolTip;
+//	public static String OverviewPage_NavigationSection_Help_HelpContextID;
+//
+//	public static String OverviewPage_NavigationSection_Help_HelpToolTip;
 
 	public static String OverviewPage_ManagedBeanSection_name;
 
@@ -228,9 +228,9 @@ public final class EditorMessages extends NLS {
 
 	public static String OverviewPage_ManagedBeanSection_managedbeanPageID;
 
-	public static String OverviewPage_ManagedBeanSection_Help_HelpContextID;
-
-	public static String OverviewPage_ManagedBeanSection_Help_HelpToolTip;
+//	public static String OverviewPage_ManagedBeanSection_Help_HelpContextID;
+//
+//	public static String OverviewPage_ManagedBeanSection_Help_HelpToolTip;
 
 	public static String OverviewPage_ComponentsSection_name;
 
@@ -242,9 +242,9 @@ public final class EditorMessages extends NLS {
 
 	public static String OverviewPage_ComponentsSection_componentsPageID;
 
-	public static String OverviewPage_ComponentsSection_Help_HelpContextID;
-
-	public static String OverviewPage_ComponentsSection_Help_HelpToolTip;
+//	public static String OverviewPage_ComponentsSection_Help_HelpContextID;
+//
+//	public static String OverviewPage_ComponentsSection_Help_HelpToolTip;
 
 	public static String OverviewPage_OthersSection_name;
 
@@ -258,9 +258,9 @@ public final class EditorMessages extends NLS {
 
 	public static String OverviewPage_OthersSection_othersPageID;
 
-	public static String OverviewPage_OthersSection_Help_HelpContextID;
-
-	public static String OverviewPage_OthersSection_Help_HelpToolTip;
+//	public static String OverviewPage_OthersSection_Help_HelpContextID;
+//
+//	public static String OverviewPage_OthersSection_Help_HelpToolTip;
 
 	public static String ManagedBeanPropertyGroup_error_EmptyName;
 
@@ -302,17 +302,17 @@ public final class EditorMessages extends NLS {
 
 	public static String ComponentMasterSection_Description;
 
-	public static String ComponentMasterSection_HelpContextID;
-
-	public static String ComponentMasterSection_HelpToolTip;
+//	public static String ComponentMasterSection_HelpContextID;
+//
+//	public static String ComponentMasterSection_HelpToolTip;
 
 	public static String ComponentGeneralSection_Name;
 
 	public static String ComponentGeneralSection_Description;
 
-	public static String ComponentGeneralSection_HelpContextID;
-
-	public static String ComponentGeneralSection_HelpToolTip;
+//	public static String ComponentGeneralSection_HelpContextID;
+//
+//	public static String ComponentGeneralSection_HelpToolTip;
 
 	public static String ComponentGeneralSection_Label_DisplayName;
 
@@ -326,17 +326,17 @@ public final class EditorMessages extends NLS {
 
 	public static String RenderKitMasterSection_Description;
 
-	public static String RenderKitMasterSection_HelpContextID;
-
-	public static String RenderKitMasterSection_HelpToolTip;
+//	public static String RenderKitMasterSection_HelpContextID;
+//
+//	public static String RenderKitMasterSection_HelpToolTip;
 
 	public static String RenderKitGeneralSection_Name;
 
 	public static String RenderKitGeneralSection_Description;
 
-	public static String RenderKitGeneralSection_HelpContextID;
-
-	public static String RenderKitGeneralSection_HelpToolTip;
+//	public static String RenderKitGeneralSection_HelpContextID;
+//
+//	public static String RenderKitGeneralSection_HelpToolTip;
 
 	public static String RenderKitGeneralSection_Label_DisplayName;
 
@@ -392,17 +392,17 @@ public final class EditorMessages extends NLS {
 
 	public static String ConverterMasterSection_Description;
 
-	public static String ConverterMasterSection_HelpContextID;
-
-	public static String ConverterMasterSection_HelpToolTip;
+//	public static String ConverterMasterSection_HelpContextID;
+//
+//	public static String ConverterMasterSection_HelpToolTip;
 
 	public static String ConverterGeneralSection_Name;
 
 	public static String ConverterGeneralSection_Description;
 
-	public static String ConverterGeneralSection_HelpContextID;
-
-	public static String ConverterGeneralSection_HelpToolTip;
+//	public static String ConverterGeneralSection_HelpContextID;
+//
+//	public static String ConverterGeneralSection_HelpToolTip;
 
 	public static String ConverterGeneralSection_Label_DisplayName;
 
@@ -418,17 +418,17 @@ public final class EditorMessages extends NLS {
 
 	public static String ValidatorMasterSection_Description;
 
-	public static String ValidatorMasterSection_HelpContextID;
-
-	public static String ValidatorMasterSection_HelpToolTip;
+//	public static String ValidatorMasterSection_HelpContextID;
+//
+//	public static String ValidatorMasterSection_HelpToolTip;
 
 	public static String ValidatorGeneralSection_Name;
 
 	public static String ValidatorGeneralSection_Description;
 
-	public static String ValidatorGeneralSection_HelpContextID;
-
-	public static String ValidatorGeneralSection_HelpToolTip;
+//	public static String ValidatorGeneralSection_HelpContextID;
+//
+//	public static String ValidatorGeneralSection_HelpToolTip;
 
 	public static String ValidatorGeneralSection_Label_DisplayName;
 
@@ -442,9 +442,9 @@ public final class EditorMessages extends NLS {
 
 	public static String AttributeSection_Description;
 
-	public static String AttributeSection_HelpContextID;
-
-	public static String AttributeSection_HelpToolTip;
+//	public static String AttributeSection_HelpContextID;
+//
+//	public static String AttributeSection_HelpToolTip;
 
 	public static String AttributeSection_Table_NameColumn;
 
@@ -476,9 +476,9 @@ public final class EditorMessages extends NLS {
 
 	public static String PropertySection_Description;
 
-	public static String PropertySection_HelpContextID;
-
-	public static String PropertySection_HelpToolTip;
+//	public static String PropertySection_HelpContextID;
+//
+//	public static String PropertySection_HelpToolTip;
 
 	public static String PropertySection_Table_NameColumn;
 
@@ -510,9 +510,9 @@ public final class EditorMessages extends NLS {
 
 	public static String FacetSection_Description;
 
-	public static String FacetSection_HelpContextID;
-
-	public static String FacetsSection_HelpToolTip;
+//	public static String FacetSection_HelpContextID;
+//
+//	public static String FacetsSection_HelpToolTip;
 
 	public static String FacetSection_Table_DisplayNameColumn;
 
@@ -540,9 +540,9 @@ public final class EditorMessages extends NLS {
 
 	public static String ActionListenerSection_Description;
 
-	public static String ActionListenerSection_HelpContextID;
-
-	public static String ActionListenerSection_HelpToolTip;
+//	public static String ActionListenerSection_HelpContextID;
+//
+//	public static String ActionListenerSection_HelpToolTip;
 
 	public static String MessageBundleSection_Name;
 
@@ -562,9 +562,9 @@ public final class EditorMessages extends NLS {
 
 	public static String LocaleConfigSection_Description;
 
-	public static String LocaleConfigSection_HelpContextID;
-
-	public static String LocaleConfigSection_HelpToolTip;
+//	public static String LocaleConfigSection_HelpContextID;
+//
+//	public static String LocaleConfigSection_HelpToolTip;
 
 	public static String LocaleConfigSection_Wizard_WindowTitle;
 
@@ -582,9 +582,9 @@ public final class EditorMessages extends NLS {
 
 	public static String DefaultRenderKitIDSection_Description;
 
-	public static String DefaultRenderKitIDSection_HelpContextID;
-
-	public static String DefaultRenderKitIDSection_HelpToolTip;
+//	public static String DefaultRenderKitIDSection_HelpContextID;
+//
+//	public static String DefaultRenderKitIDSection_HelpToolTip;
 
 	public static String DefaultRenderKitIDSection_Wizard_WindowTitle;
 
@@ -602,81 +602,81 @@ public final class EditorMessages extends NLS {
 
 	public static String NavigationHandlerSection_Description;
 
-	public static String NavigationHandlerSection_HelpContextID;
-
-	public static String NavigationHandlerSection_HelpToolTip;
+//	public static String NavigationHandlerSection_HelpContextID;
+//
+//	public static String NavigationHandlerSection_HelpToolTip;
 
 	public static String ViewHandlerSection_Name;
 
 	public static String ViewHandlerSection_Description;
 
-	public static String ViewHandlerSection_HelpContextID;
-
-	public static String ViewHandlerSection_HelpToolTip;
+//	public static String ViewHandlerSection_HelpContextID;
+//
+//	public static String ViewHandlerSection_HelpToolTip;
 
 	public static String StateManagerSection_Name;
 
 	public static String StateManagerSection_Description;
 
-	public static String StateManagerSection_HelpContextID;
-
-	public static String StateManagerSection_HelpToolTip;
+//	public static String StateManagerSection_HelpContextID;
+//
+//	public static String StateManagerSection_HelpToolTip;
 
 	public static String PropertyResolverSection_Name;
 
 	public static String PropertyResolverSection_Description;
 
-	public static String PropertyResolverSection_HelpContextID;
-
-	public static String PropertyResolverSection_HelpToolTip;
+//	public static String PropertyResolverSection_HelpContextID;
+//
+//	public static String PropertyResolverSection_HelpToolTip;
 
 	public static String VariableResolverSection_Name;
 
 	public static String VariableResolverSection_Description;
 
-	public static String VariableResolverSection_HelpContextID;
-
-	public static String VariableResolverSection_HelpToolTip;
+//	public static String VariableResolverSection_HelpContextID;
+//
+//	public static String VariableResolverSection_HelpToolTip;
 
 	public static String ApplicationFactorySection_Name;
 
 	public static String ApplicationFactorySection_Description;
 
-	public static String ApplicationFactorySection_HelpContextID;
-
-	public static String ApplicationFactorySection_HelpToolTip;
+//	public static String ApplicationFactorySection_HelpContextID;
+//
+//	public static String ApplicationFactorySection_HelpToolTip;
 
 	public static String FacesContextFactorySection_Name;
 
 	public static String FacesContextFactorySection_Description;
 
-	public static String FacesContextFactorySection_HelpContextID;
-
-	public static String FacesContextFactorySection_HelpToolTip;
+//	public static String FacesContextFactorySection_HelpContextID;
+//
+//	public static String FacesContextFactorySection_HelpToolTip;
 
 	public static String LifecycleFactorySection_Name;
 
 	public static String LifecycleFactorySection_Description;
 
-	public static String LifecycleFactorySection_HelpContextID;
-
-	public static String LifecycleFactorySection_HelpToolTip;
+//	public static String LifecycleFactorySection_HelpContextID;
+//
+//	public static String LifecycleFactorySection_HelpToolTip;
 
 	public static String RenderKitFactorySection_Name;
 
 	public static String RenderKitFactorySection_Description;
 
-	public static String RenderKitFactorySection_HelpContextID;
-
-	public static String RenderKitFactorySection_HelpToolTip;
+//	public static String RenderKitFactorySection_HelpContextID;
+//
+//	public static String RenderKitFactorySection_HelpToolTip;
 
 	public static String PhaseListenerSection_Name;
 
 	public static String PhaseListenerSection_Description;
 
-	public static String PhaseListenerSection_HelpContextID;
-
-	public static String PhaseListenerSection_HelpToolTip;
+//	public static String PhaseListenerSection_HelpContextID;
+//
+//	public static String PhaseListenerSection_HelpToolTip;
 
 	public static String MultiPageEditorOutlinePage_noOutline;
 
