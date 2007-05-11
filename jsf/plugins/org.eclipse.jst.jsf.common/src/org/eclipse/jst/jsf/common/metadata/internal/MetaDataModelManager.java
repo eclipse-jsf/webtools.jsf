@@ -23,13 +23,14 @@ import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.ISafeRunnable;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.QualifiedName;
 import org.eclipse.jface.util.SafeRunnable;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.query.IMetaDataModelContext;
 
-/*
+/**
  * Singleton instance for each IProject used to manage all standard metdata models for that project.
  *
  * Manager is responsible for loading and caching MetaDataModels.  Models are keyed by URI.
@@ -76,6 +77,10 @@ public class MetaDataModelManager implements IResourceChangeListener{
 		init();
 	}
 	
+	/**
+	 * @param project
+	 * @return MetaDataModelManager instance for the project
+	 */
 	protected static MetaDataModelManager getFromSessionProperty(IProject project) {
 		MetaDataModelManager repo = null;
 		try {
@@ -84,7 +89,7 @@ public class MetaDataModelManager implements IResourceChangeListener{
 				repo = (MetaDataModelManager)obj;
 			}
 		} catch(CoreException ce) {
-			//log error
+			JSFCommonPlugin.log(IStatus.ERROR, "Internal Error: Unable to recover MetaDataModelManager for: "+project.getName(), ce); //$NON-NLS-1$
 		}
 		return repo;
 	}
@@ -98,16 +103,20 @@ public class MetaDataModelManager implements IResourceChangeListener{
 			try {
 				project.setSessionProperty(KEY_SESSIONPROPERTY, this);
 			} catch(CoreException ce) {
-				//log error			}
+				JSFCommonPlugin.log(IStatus.ERROR, "Internal Error: Unable to store MetaDataModelManager for: "+project.getName(), ce); //$NON-NLS-1$		}
 			}
 		}
 	}
 	
-	protected void removeAsSessionProperty(IProject project){
+	/**
+	 * Releases a project's MetaDataModelManager instance by removing from project session property
+	 * @param aProject
+	 */
+	protected void removeAsSessionProperty(IProject aProject){
 		try {
-			project.setSessionProperty(KEY_SESSIONPROPERTY, null);
+			aProject.setSessionProperty(KEY_SESSIONPROPERTY, null);
 		} catch (CoreException e) {
-            JSFCommonPlugin.log(e, "Error removing session property");
+            JSFCommonPlugin.log(e, "Error removing session property"); //$NON-NLS-1$
 		}
 	}
 	
@@ -155,8 +164,8 @@ public class MetaDataModelManager implements IResourceChangeListener{
 	public void resourceChanged(IResourceChangeEvent event) {
 		if (event.getType() == IResourceChangeEvent.PRE_CLOSE){
 			//a project is closing - release and cleanup
-			final IProject project = (IProject)event.getResource();
-			if (project == this.project){
+			final IProject aProject = (IProject)event.getResource();
+			if (aProject == this.project){
 				SafeRunnable.run(new ISafeRunnable(){
 
 					public void handleException(Throwable exception) {
@@ -171,8 +180,7 @@ public class MetaDataModelManager implements IResourceChangeListener{
 							model.cleanup();					
 						}
 						removeAsSessionProperty(project);
-					}
-					
+					}					
 				});			
 			}
 		}
@@ -180,10 +188,9 @@ public class MetaDataModelManager implements IResourceChangeListener{
 	}
 	
 	private synchronized MetaDataModel loadMetadata(ModelKeyDescriptor modelKeyDescriptor){
-//		System.out.println("loadMetadata");//debug
 		IDomainLoadingStrategy strategy = DomainLoadingStrategyRegistry.getInstance().getLoadingStrategy(modelKeyDescriptor.getDomain());;
 		if (strategy == null){
-			//TODO log internal error
+			JSFCommonPlugin.log(IStatus.ERROR, "Internal Error: Unable to locate metadata loading strategy for: "+modelKeyDescriptor.toString()); //$NON-NLS-1$
 			return null;
 		}
 		MetaDataModel model = StandardModelFactory.getInstance().createModel(modelKeyDescriptor, strategy);//new MetaDataModel(modelKey, strategy);

@@ -32,7 +32,6 @@ import org.eclipse.jst.jsf.common.internal.types.CompositeType;
 import org.eclipse.jst.jsf.common.internal.types.TypeComparator;
 import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.Trait;
-import org.eclipse.jst.jsf.common.metadata.internal.DomainLoadingStrategyRegistry;
 import org.eclipse.jst.jsf.common.metadata.internal.MetaDataModelContextImpl;
 import org.eclipse.jst.jsf.common.metadata.query.IMetaDataModelContext;
 import org.eclipse.jst.jsf.common.metadata.query.MetaDataQueryHelper;
@@ -521,7 +520,7 @@ public class JSPSemanticsValidator extends JSPValidator implements ISourceValida
     {
         final IMetaDataModelContext modelContext = 
             new MetaDataModelContextImpl(file.getProject()
-                , DomainLoadingStrategyRegistry.TAGLIB_DOMAIN, uri);
+                , MetaDataQueryHelper.TAGLIB_DOMAIN, uri);
         final Entity entity = 
             MetaDataQueryHelper.getEntity(modelContext, tagName);
         if (entity != null)

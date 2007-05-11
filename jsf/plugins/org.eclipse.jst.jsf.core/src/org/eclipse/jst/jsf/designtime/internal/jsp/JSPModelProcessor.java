@@ -513,7 +513,7 @@ public class JSPModelProcessor
                                               final String uri, 
                                               final String elementName, final String attributeName)
         {            
-        	final IMetaDataModelContext mdContext = MetaDataQueryHelper.createMetaDataModelContext(project, MetaDataQueryHelper.TAGLIB_DOMAIN, uri);
+        	final IMetaDataModelContext mdContext = MetaDataQueryHelper.createTagLibraryDomainMetaDataModelContext(project, uri);
             Trait trait = MetaDataQueryHelper.getTrait(mdContext, elementName+"/"+attributeName, SETS_LOCALE); //$NON-NLS-1$
 
             if (TraitValueHelper.getValueAsBoolean(trait))
@@ -549,7 +549,7 @@ public class JSPModelProcessor
                                               final String attributeName)
         {
         	final String entityKey = elementName+"/"+attributeName; //$NON-NLS-1$
-        	final IMetaDataModelContext mdContext = MetaDataQueryHelper.createMetaDataModelContext(project, MetaDataQueryHelper.TAGLIB_DOMAIN, uri);
+        	final IMetaDataModelContext mdContext = MetaDataQueryHelper.createTagLibraryDomainMetaDataModelContext(project, uri);
             Trait trait = MetaDataQueryHelper.getTrait(mdContext, entityKey, CONTRIBUTES_VALUE_BINDING);
 
             boolean contribsValueBindings = TraitValueHelper.getValueAsBoolean(trait);

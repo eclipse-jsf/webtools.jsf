@@ -34,11 +34,30 @@ import org.eclipse.jst.jsf.common.metadata.internal.MetaDataModelManager;
  * 
  * API: class should be final, constructor made private.
  */
-public class MetaDataQueryHelper{
+public final class MetaDataQueryHelper{
+	/**
+	 * Domain id for Tag library domain of metatdata  
+	 */
 	public static final String TAGLIB_DOMAIN = "TagLibraryDomain"; //need better place for this
 	
+	/**
+	 * @param project
+	 * @param domain id
+	 * @param uri
+	 * @return IMetaDataModelContext
+	 */
 	public static IMetaDataModelContext createMetaDataModelContext(IProject project, String domain, String uri){
 		return new MetaDataModelContextImpl(project, domain, uri);
+	}
+	
+	/**
+	 * Convenience method for creating {@link IMetaDataModelContext}s for TAGLIB_DOMAIN
+	 * @param project
+	 * @param uri
+	 * @return IMetaDataModelContext where the domain id is TAGLIB_DOMAIN
+	 */
+	public static IMetaDataModelContext createTagLibraryDomainMetaDataModelContext(IProject project, String uri){
+		return new MetaDataModelContextImpl(project, TAGLIB_DOMAIN, uri);
 	}
 	/**
 	 * @param modelContext
@@ -73,6 +92,7 @@ public class MetaDataQueryHelper{
 	/**
 	 * @param modelContext 
 	 * @param entityKey relative to root of model 
+	 * @param visitor 
 	 * @return an IResultSet of entity objects
 	 */
 	public static IResultSet/*<Entity>*/ getEntities(final IMetaDataModelContext modelContext,

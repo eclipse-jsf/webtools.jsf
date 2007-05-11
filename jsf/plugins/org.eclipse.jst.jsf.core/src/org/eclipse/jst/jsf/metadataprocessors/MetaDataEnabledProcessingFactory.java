@@ -18,7 +18,6 @@ import java.util.List;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.Trait;
-import org.eclipse.jst.jsf.common.metadata.internal.DomainLoadingStrategyRegistry;
 import org.eclipse.jst.jsf.common.metadata.internal.MetaDataModelContextImpl;
 import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
 import org.eclipse.jst.jsf.common.metadata.query.IMetaDataModelContext;
@@ -83,7 +82,7 @@ public final class MetaDataEnabledProcessingFactory {
 		}
 		String _elem = elementName + "/" + attributeName;
 		String _uri = uri;
-		IMetaDataModelContext modelContext = createModelContext(_project, DomainLoadingStrategyRegistry.TAGLIB_DOMAIN, _uri);
+		IMetaDataModelContext modelContext = createModelContext(_project, MetaDataQueryHelper.TAGLIB_DOMAIN, _uri);
 		Entity entity = MetaDataQueryHelper.getEntity(modelContext, _elem);
 		Trait trait = null;
 		if (entity != null){

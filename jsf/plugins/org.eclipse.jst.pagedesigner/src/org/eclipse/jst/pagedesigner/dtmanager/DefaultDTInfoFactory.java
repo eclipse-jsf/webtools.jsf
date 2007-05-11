@@ -42,7 +42,7 @@ public class DefaultDTInfoFactory implements IDTInfoFactory {
 		String nsURI = CMUtil.getElementNamespaceURI(element);
 		IProject project = getProject(element);
 		if (project != null) {
-			IMetaDataModelContext context = MetaDataQueryHelper.createMetaDataModelContext(project, MetaDataQueryHelper.TAGLIB_DOMAIN, nsURI);
+			IMetaDataModelContext context = MetaDataQueryHelper.createTagLibraryDomainMetaDataModelContext(project, nsURI);
 			if (context != null) {
 				Trait trait = MetaDataQueryHelper.getTrait(context, element.getLocalName(), DTINFO_TRAIT_KEY);
 				if (trait != null) {

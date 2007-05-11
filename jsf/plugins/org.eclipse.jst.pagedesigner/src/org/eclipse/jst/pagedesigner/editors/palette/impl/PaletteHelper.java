@@ -111,7 +111,7 @@ public class PaletteHelper {
 		if (category != null) 
 			return category;
 		
-		IMetaDataModelContext modelContext = MetaDataQueryHelper.createMetaDataModelContext(project, MetaDataQueryHelper.TAGLIB_DOMAIN, tldURI);
+		IMetaDataModelContext modelContext = MetaDataQueryHelper.createTagLibraryDomainMetaDataModelContext(project, tldURI);
 		Model model = MetaDataQueryHelper.getModel(modelContext);
 		category = createTaglibPaletteDrawer(manager, doc, model);
 		

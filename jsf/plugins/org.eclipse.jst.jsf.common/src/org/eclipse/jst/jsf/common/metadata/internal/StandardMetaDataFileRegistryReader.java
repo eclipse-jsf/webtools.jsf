@@ -16,6 +16,7 @@ package org.eclipse.jst.jsf.common.metadata.internal;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.IExtensionRegistry;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 
@@ -28,17 +29,31 @@ import org.eclipse.jst.jsf.common.JSFCommonPlugin;
  * also see StandardMetaDataFile extension-point
  */
 public class StandardMetaDataFileRegistryReader {
+	/**
+	 * EXTENSION POINT ID
+	 */
 	protected static final String EXTENSION_POINT_ID = "standardMetaDataFiles"; //$NON-NLS-1$
+	/**
+	 * IConfigurationElement element name
+	 */
 	protected static final String TAG_NAME = "StandardMetaDataFile"; //$NON-NLS-1$
+	/**
+	 * Uri attribute name for IConfigurationElement
+	 */
 	protected static final String ATT_URI = "uri"; //$NON-NLS-1$
+	/**
+	 * Location attribute name for IConfigurationElement
+	 */
 	protected static final String ATT_LOCATION = "location"; //$NON-NLS-1$
+	/**
+	 * Locator attribute name for IConfigurationElement
+	 */
 	protected static final String ATT_LOCATOR = "locator"; //$NON-NLS-1$
-//	protected static final String ATT_PARSER = "parser"; //$NON-NLS-1$
 
 	private StandardMetaDataFileRegistry annotationFileRegistry;
 
 	/**
-	 * 
+	 * Constructor
 	 * @param registry
 	 */
 	public StandardMetaDataFileRegistryReader(StandardMetaDataFileRegistry registry) {
@@ -72,8 +87,7 @@ public class StandardMetaDataFileRegistryReader {
 					annotationFileRegistry.addStandardMetaDataFileInfo(uri, fileInfo);
 				}
 				catch (Exception e) {
-					//TODO log
-					//Activator.log(e, NLS.bind(Messages.CMAnnotationFileRegistryReader_problem, new String[]{bundleId, uri, location})); 
+					JSFCommonPlugin.log(IStatus.ERROR, "Internal Error: exception occurred while reading StandardMetaDataFile ext-pt: "+location + ":"+uri, e); //$NON-NLS-1$		}
 				}
 			}
 		}

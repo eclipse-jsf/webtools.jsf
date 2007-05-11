@@ -18,6 +18,7 @@ import java.util.Map;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.IExtensionRegistry;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 
@@ -32,9 +33,8 @@ public class DomainLoadingStrategyRegistry{
 	private static DomainLoadingStrategyRegistry INSTANCE;
 	
 	private HashMap/*<String, DomainLoadingStrategyDescriptorImpl>*/ domainLoadingStrategyDescriptors;
-//	private HashMap/*<String, IDomainLoadingStrategy>*/ domainLoadingStrategies;
 	
-	public static final String TAGLIB_DOMAIN ="TagLibraryDomain"; //this does *not* belong here.  FIX ME
+//	public static final String TAGLIB_DOMAIN ="TagLibraryDomain"; //this does *not* belong here.  FIX ME
 //	public static final String TAGLIB_DOMAIN_SOURCE_HANDLER_ID = TAGLIB_DOMAIN + "SourceHandler";
 //	public static final String TAGLIB_DOMAIN_TRANSLATOR = "com.foo.translators."+TAGLIB_DOMAIN + "Translator";
 
@@ -45,7 +45,7 @@ public class DomainLoadingStrategyRegistry{
 	}
 	
 	/**
-	 * @return singelton instance of the DomainLoadingStrategyRegistry
+	 * @return singleton instance of the DomainLoadingStrategyRegistry
 	 */
 	public synchronized static DomainLoadingStrategyRegistry getInstance() {
 		if (INSTANCE == null){
@@ -70,6 +70,10 @@ public class DomainLoadingStrategyRegistry{
 		}
 	}
 
+	/**
+	 * Add domain loading strategy descriptor for a domain to the registry domains
+	 * @param strategy
+	 */
 	protected void addDomainLoadingStrategyDescriptor(DomainLoadingStrategyDescriptorImpl strategy){
 		getDescriptors().put(strategy.getDomain(), strategy);
 	}
@@ -95,7 +99,6 @@ public class DomainLoadingStrategyRegistry{
 	}
 
 	private IDomainLoadingStrategy createLoadingStrategy(String domain){
-//		System.out.println("createLoadingStrategy"); //debug
 		return ((DomainLoadingStrategyDescriptorImpl)getDescriptors().get(domain)).newInstance();			
 	}
 	
@@ -127,6 +130,9 @@ public class DomainLoadingStrategyRegistry{
 			loadingStrategyClassName = element.getAttribute("domainLoadingStrategy");			
 		}
 
+		/**
+		 * @return domain id
+		 */
 		public String getDomain() {	
 			return domain;
 		}
@@ -135,33 +141,24 @@ public class DomainLoadingStrategyRegistry{
 		 * @return new instance of IDomainLoadingStrategy
 		 */
 		public IDomainLoadingStrategy newInstance(){
-			//TODO err handling
 			try {
-//				Class[] parameterTypes = new Class[]{MetaDataModelManager.class, String.class};
-//				Object[] initargs = new Object[]{mdr, domain};
 				Class[] parameterTypes = new Class[]{String.class};
 				Object[] initargs = new Object[]{domain};
 				Object loader = this.getLoadingStrategy().getConstructor(parameterTypes).newInstance(initargs);
 				if (loader instanceof IDomainLoadingStrategy)
 					return (IDomainLoadingStrategy)loader;
 			} catch (InstantiationException e) {
-				// TODO log
-				e.printStackTrace();
+				JSFCommonPlugin.log(IStatus.ERROR, "Unable to instantiate IDomainLoadingStrategy for: "+ domain,e);
 			} catch (IllegalAccessException e) {
-				// TODO log
-				e.printStackTrace();
+				JSFCommonPlugin.log(IStatus.ERROR, "IllegalAccessException during creation of IDomainLoadingStrategy for: "+ domain,e);
 			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				JSFCommonPlugin.log(IStatus.ERROR, "IllegalArgumentException during creation of IDomainLoadingStrategy for: "+ domain,e);
 			} catch (SecurityException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				JSFCommonPlugin.log(IStatus.ERROR, "SecurityException during creation of IDomainLoadingStrategy for: "+ domain,e);
 			} catch (InvocationTargetException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				JSFCommonPlugin.log(IStatus.ERROR, "InvocationTargetException during creation of IDomainLoadingStrategy for: "+ domain,e);
 			} catch (NoSuchMethodException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				JSFCommonPlugin.log(IStatus.ERROR, "NoSuchMethodException during creation of IDomainLoadingStrategy for: "+ domain,e);
 			}
 			return null;
 		}

@@ -25,20 +25,27 @@ import org.eclipse.emf.ecore.xml.type.SimpleAnyType;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 import org.eclipse.jst.jsf.common.metadata.Trait;
 import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.ListOfValues;
-import org.eclipse.jst.jsf.contentmodel.annotation.internal.Messages;
 import org.eclipse.osgi.util.NLS;
 
 /**
  * Experimental/prototype class to assist with decoding trait values
  */
 public class TraitValueHelper {
-	
+	private static final String KEY_NOT_FOUND = Messages.Key_not_found;
+	/**
+	 * @param trait
+	 * @return EClass of trait value
+	 */
 	public static EClass getValueType(Trait trait){
 		if (trait.getValue() != null)
 			return trait.getValue().eClass();
 		return null;
 	}
 	
+	/**
+	 * @param trait
+	 * @return value of trait as Object
+	 */
 	public static Object getValue(Trait trait){
 		if (trait == null)
 			return null;
@@ -69,6 +76,10 @@ public class TraitValueHelper {
 		return null;
 	}
 
+	/**
+	 * @param trait
+	 * @return value of trait as String.  If externalized, will resolve from resource bundle.
+	 */
 	public static String getValueAsString(Trait trait){
 		Object val = getValue(trait);
 		if (val != null && val instanceof String){			
@@ -81,7 +92,8 @@ public class TraitValueHelper {
 	/**
 	 * 
 	 * @param trait whose value a {@link ListOfValues} or is a single string
-	 * @return List of Strings
+	 * @return List of Strings.  If externalized, will resolve from resource bundle 
+	 * using getNLSValue(Trait trait, String rawValue)
 	 */
 	public static List getValueAsListOfStrings(Trait trait){
 		//PROTO ONLY!!! Need to make WAY more robust!
@@ -129,8 +141,7 @@ public class TraitValueHelper {
 
 	//will return null if there is an IOException with ResourceBundle
 	private static String getNLSPropertyValue(Trait trait, String key){
-		String NOT_FOUND = Messages.CMAnnotationMap_key_not_found;//FIX ME
-		try{
+		try{			
 			IMetaDataSourceModelProvider provider = trait.getSourceModelProvider();
 			IResourceBundleProvider resourceBundleProvider = (IResourceBundleProvider)provider.getAdapter(IResourceBundleProvider.class);		
 			if (resourceBundleProvider != null){
@@ -142,14 +153,12 @@ public class TraitValueHelper {
 			}
 			//return original string 
 			return key; 
-//		} catch (IOException e) {
-//			JSFCommonPlugin.log(e, NLS.bind(Messages.CMAnnotationMap_IOException, new String[]{val}));
-//			return null;
+
 		} catch (MissingResourceException e){
 			//fall thru
-			JSFCommonPlugin.log(e,  NLS.bind(Messages.CMAnnotationMap_MissingResource_exception, new String[]{key}));
+			JSFCommonPlugin.log(e,  NLS.bind(Messages.MissingResource_exception, new String[]{key}));
 		}
-		return key + NOT_FOUND;
+		return key + KEY_NOT_FOUND;
 	}
 
 	/**
@@ -164,25 +173,6 @@ public class TraitValueHelper {
 			return false;
 		
 		return Boolean.valueOf(val).booleanValue();
-
 	}
-	
-	/**
-	 * Caller must know to expect a Boolean object trait type.  Null will be returned if it is not. 
-	 * @param trait
-	 * @return Boolean or null
-	 */
-	public static Boolean getValueAsBooleanObject(Trait trait) {
-
-		Object val = getValue(trait);
-		if (val == null)
-			return null;
-		
-//		if ()
-			return null;
-//		return Boolean.valueOf(val).booleanValue();
-
-	}
-
 
 }

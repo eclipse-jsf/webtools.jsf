@@ -12,7 +12,6 @@
 
 package org.eclipse.jst.jsf.common.metadata.internal;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.MissingResourceException;
@@ -27,6 +26,9 @@ import java.util.ResourceBundle;
  *
  */ 
 public abstract class StandardMetaDataSourceFileLocator {
+	/**
+	 * metadata file to locate
+	 */
 	protected IStandardMetaDataSourceInfo fileInfo;
 	
 	/**
@@ -49,7 +51,7 @@ public abstract class StandardMetaDataSourceFileLocator {
 	 * @return InputStream
 	 * @throws IOException
 	 */
-	public abstract InputStream getInputStream() throws IOException, FileNotFoundException;
+	public abstract InputStream getInputStream() throws IOException;
 	
 	/**
 	 * Return ResourceBundle for the property files if there are any.  Return null if not.

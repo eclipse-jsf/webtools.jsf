@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.itemcreation;
 
-import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.common.metadata.query.IMetaDataModelContext;
 import org.eclipse.jst.jsf.common.metadata.query.MetaDataQueryHelper;
 import org.eclipse.jst.pagedesigner.editors.palette.DesignerPaletteRoot;
@@ -48,8 +47,7 @@ public class TagCreationFactory {
 		//for now return default metadata-enabled factory
 		
 		DesignerPaletteRoot root = (DesignerPaletteRoot)  tagToolPaletteEntry.getParent().getParent();
-		IProject project = root.getPaletteManager().getProject();
-		IMetaDataModelContext modelContext = MetaDataQueryHelper.createMetaDataModelContext(project, MetaDataQueryHelper.TAGLIB_DOMAIN, tagToolPaletteEntry.getURI());
+		IMetaDataModelContext modelContext = MetaDataQueryHelper.createTagLibraryDomainMetaDataModelContext(root.getPaletteManager().getProject(),  tagToolPaletteEntry.getURI());
 		
 		return new DefaultTagCreator(modelContext);	
 
