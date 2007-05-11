@@ -12,6 +12,9 @@ package org.eclipse.jst.jsf.common.metadata.internal;
 
 import java.util.ResourceBundle;
 
+/**
+ * Provides the resource bundle from the plugin that defined an item of metadata.
+ */
 public interface IResourceBundleProvider {
 	/**
 	 * @return ResourceBundle - implementers should eat exceptions and return null whenever resourceBundle cannot be returned

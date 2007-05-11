@@ -109,6 +109,8 @@ public interface Model extends Entity {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param groupId 
+	 * @return EntityGroup
 	 * @model
 	 * @generated
 	 */

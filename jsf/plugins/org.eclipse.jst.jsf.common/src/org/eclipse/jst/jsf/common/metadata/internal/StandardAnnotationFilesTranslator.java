@@ -19,6 +19,10 @@ import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.Trait;
 
 
+/**
+ * A 'null' translation of a metadata file.  Entities and traits are not transformed.
+ *
+ */
 public class StandardAnnotationFilesTranslator implements IMetaDataTranslator {
 
 	public void translate(IMetaDataModelMergeAssistant assistant) {//TODO: throw proper errors
@@ -40,6 +44,11 @@ public class StandardAnnotationFilesTranslator implements IMetaDataTranslator {
 		}			
 	}
 	
+	/**
+	 * Add entity and any children
+	 * @param assistant
+	 * @param entity
+	 */
 	protected void traverseAndAdd(IMetaDataModelMergeAssistant assistant, final Entity entity){
 		assistant.addEntity(entity);
 		

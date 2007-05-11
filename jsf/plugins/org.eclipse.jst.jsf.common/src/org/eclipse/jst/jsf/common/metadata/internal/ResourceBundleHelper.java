@@ -21,12 +21,29 @@ import java.util.ResourceBundle;
 
 import org.eclipse.core.runtime.FileLocator;
 
+/**
+ * ResourceBundleHelper
+ *
+ */
 public class ResourceBundleHelper {
 
+	/**
+	 * @param resourceURI
+	 * @return ResourceBundle
+	 * @throws MalformedURLException - may return null
+	 * @throws IOException
+	 */
 	public static ResourceBundle getResourceBundle(String resourceURI) throws MalformedURLException, IOException {
 		return getResourceBundle(resourceURI, Locale.getDefault());
 	}
 
+	/**
+	 * @param resourceURI
+	 * @param targetLocale
+	 * @return ResourceBundle - may return null
+	 * @throws MalformedURLException
+	 * @throws IOException
+	 */
 	public static ResourceBundle getResourceBundle(String resourceURI, Locale targetLocale) throws MalformedURLException, IOException {
 		// try to load bundle from the location specified in the resourceURI
 		// we make the assumption that the resourceURI points to the local

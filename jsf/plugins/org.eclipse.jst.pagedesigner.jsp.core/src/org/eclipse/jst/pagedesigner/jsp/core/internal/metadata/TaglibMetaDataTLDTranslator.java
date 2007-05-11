@@ -20,11 +20,14 @@ import org.eclipse.wst.xml.core.internal.contentmodel.CMDocument;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMElementDeclaration;
 
 /**
- * Translator for tag lib meta-data
+ * Translates a TLD CMDocument to standard metadata model entities and traits
  *
  */
 public class TaglibMetaDataTLDTranslator extends AbstractTagLibDomainContentModelMetaDataTranslator implements IMetaDataTranslator {
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.jst.jsf.common.metadata.internal.IMetaDataTranslator#translate(org.eclipse.jst.jsf.common.metadata.internal.IMetaDataModelMergeAssistant)
+	 */
 	public void translate(final IMetaDataModelMergeAssistant assistant) {
 		setAssistant(assistant);
 		CMDocument doc = getSourceModel();
@@ -34,13 +37,16 @@ public class TaglibMetaDataTLDTranslator extends AbstractTagLibDomainContentMode
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.jst.jsf.common.metadata.internal.AbstractTagLibDomainContentModelMetaDataTranslator#getURIDefaultPrefix()
+	 */
 	protected String getURIDefaultPrefix(){
 		return getTLDDocument().getShortname();
 	}
 	
 	/**
 	 * @param tag
-	 * @return the label for the tag
+	 * @return the tag.getDisplayName() if available
 	 */
 	protected String getTagDisplayLabel(CMElementDeclaration tag){
 		String label = ((TLDElementDeclaration)tag).getDisplayName();
@@ -49,6 +55,10 @@ public class TaglibMetaDataTLDTranslator extends AbstractTagLibDomainContentMode
 		return label;		
 	}
 	
+	/**
+	 * @param tag
+	 * @return the tag.getDescription() if available
+	 */
 	protected String getTagDescription(CMElementDeclaration tag){
 		String desc = ((TLDElementDeclaration)tag).getDescription();
 		if (desc == null)
@@ -56,6 +66,10 @@ public class TaglibMetaDataTLDTranslator extends AbstractTagLibDomainContentMode
 		return desc;		
 	}
 	
+	/**
+	 * @param tag
+	 * @return the tag.getSmallIcon() if available
+	 */
 	protected String getTagSmallIcon(CMElementDeclaration tag){
 		String smallIcon = ((TLDElementDeclaration)tag).getSmallIcon();
 		if (smallIcon == null)
@@ -63,6 +77,10 @@ public class TaglibMetaDataTLDTranslator extends AbstractTagLibDomainContentMode
 		return smallIcon;		
 	}
 	
+	/**
+	 * @param tag
+	 * @return the tag.getLargeIcon() if available
+	 */
 	protected String getTagLargeIcon(CMElementDeclaration tag){
 		String largeIcon = ((TLDElementDeclaration)tag).getLargeIcon();
 		if (largeIcon == null)
@@ -70,10 +88,16 @@ public class TaglibMetaDataTLDTranslator extends AbstractTagLibDomainContentMode
 		return largeIcon;		
 	}
 	
+	/**
+	 * @return the tag.getDescription() if available
+	 */
 	protected String getURIDescription() {		
 		return getTLDDocument().getDescription();
 	}
 
+	/**
+	 * @return the tag.getDisplayName()
+	 */
 	protected String getURIDisplayLabel() {		
 		return getTLDDocument().getDisplayName();
 	}

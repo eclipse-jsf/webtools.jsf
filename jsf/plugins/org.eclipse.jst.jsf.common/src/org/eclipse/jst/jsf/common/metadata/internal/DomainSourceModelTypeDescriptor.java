@@ -97,6 +97,9 @@ public class DomainSourceModelTypeDescriptor {
 		return domain;
 	}
 	 
+	/**
+	 * @return singleton instance of the {@link IDomainSourceModelType}
+	 */
 	public IDomainSourceModelType getInstance(){
 		if (_instance == null){
 			_instance = newInstance();
@@ -111,6 +114,9 @@ public class DomainSourceModelTypeDescriptor {
 		return new DomainSourceModelTypeImpl();
 	}
 	
+	/**
+	 * Internal class implementing {@link IDomainSourceModelType}
+	 */
 	class DomainSourceModelTypeImpl implements IDomainSourceModelType{
 
 		private Set translators;
@@ -190,7 +196,7 @@ public class DomainSourceModelTypeDescriptor {
 			Iterator/*<DomainSourceModelTranslatorDescriptor>*/it = translatorDescriptors.iterator();
 			while (it.hasNext()){
 				DomainSourceModelTranslatorDescriptor d = (DomainSourceModelTranslatorDescriptor)it.next();
-				Class klass = JSFCommonPlugin.loadClass(d.translator, d.bundleId);
+				Class klass = JSFCommonPlugin.loadClass(d.getTranslator(), d.getBundleId());
 				try {
 					translators.add(klass.newInstance());
 				} catch (InstantiationException e) {
@@ -207,16 +213,29 @@ public class DomainSourceModelTypeDescriptor {
 	}
 	
 	/**
-	 * Implements a descriptor for DomainSourceModelTranslators
+	 * Internal class implementing a descriptor for DomainSourceModelTranslators
 	 */
 	class DomainSourceModelTranslatorDescriptor {
 
-		private String translator;
-		private String bundleId;
+		private String _translator;
+		private String _bundleId;
 
+		/**
+		 * Constructor
+		 * @param translator
+		 * @param bundleId
+		 */
 		public DomainSourceModelTranslatorDescriptor(String translator, String bundleId) {
-			this.translator = translator;
-			this.bundleId = bundleId;
+			this._translator = translator;
+			this._bundleId = bundleId;
+		}
+		
+		String getTranslator(){
+			return _translator;
+		}
+		
+		String getBundleId(){
+			return _bundleId;
 		}
 		
 	}

@@ -11,6 +11,10 @@
  ********************************************************************************/
 package org.eclipse.jst.jsf.common.metadata.internal;
 
+/**
+ * Experimental and not used at the moment.
+ *
+ */
 public interface IMetaDataChangeNotificationEvent {
 	//change to enums if we do Java5
 	public static final int ADDED = 1;

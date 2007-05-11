@@ -20,6 +20,12 @@ public final class StandardMetaDataFileInfo implements IStandardMetaDataSourceIn
 	private String fileLocatorClassname;
 	private String bundleId;
 
+	/**
+	 * Constructor
+	 * @param fileLocation
+	 * @param bundleId
+	 * @param fileLocatorClassname
+	 */
 	public StandardMetaDataFileInfo( String fileLocation, String bundleId, String fileLocatorClassname) {
 		this.fileLocation = fileLocation.trim();
 		this.bundleId = bundleId.trim();
@@ -53,12 +59,17 @@ public final class StandardMetaDataFileInfo implements IStandardMetaDataSourceIn
 	public String getBundleId() {
 		return bundleId;
 	}
-	
 
-//	public URI getLocation() {
-//		// TODO Auto-generated method stub
-//		return URI.createPlatformResourceURI(bundleId + "/" + fileLocation, false);
-//	}
-
-
+	public String toString(){
+		StringBuffer buf = new StringBuffer("StandardMetaDataFileInfo");
+		buf.append(": ");
+		buf.append(bundleId);
+		buf.append("/");
+		buf.append(fileLocation);
+		if (getLocatorClassname() != null){
+			buf.append(": ");
+			buf.append(getLocatorClassname());
+		}
+		return buf.toString();
+	}
 }

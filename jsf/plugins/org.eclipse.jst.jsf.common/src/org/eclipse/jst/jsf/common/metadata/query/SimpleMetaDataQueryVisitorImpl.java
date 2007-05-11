@@ -27,7 +27,7 @@ import org.eclipse.jst.jsf.common.metadata.Trait;
  */
 public class SimpleMetaDataQueryVisitorImpl implements IEntityQueryVisitor, ITraitQueryVisitor  {
 
-	private String traitQuery;
+	private String _traitQuery;
 	private SearchControl control;
 	private boolean _stop;
 
@@ -59,7 +59,7 @@ public class SimpleMetaDataQueryVisitorImpl implements IEntityQueryVisitor, ITra
 		
 		resetQuery();
 		if (entity != null){			
-			this.traitQuery = traitQuery;			
+			this._traitQuery = traitQuery;			
 			for (Iterator/*<Trait>*/ it=entity.getTraits().iterator();it.hasNext();){
 				Trait t = (Trait)it.next();
 				t.accept(this);
@@ -74,7 +74,7 @@ public class SimpleMetaDataQueryVisitorImpl implements IEntityQueryVisitor, ITra
 	 * @see org.eclipse.jst.jsf.common.metadata.query.ITraitVisitor#visit(org.eclipse.jst.jsf.common.metadata.Trait)
 	 */
 	public void visit(Trait trait) {		
-		if (trait.equals(traitQuery))
+		if (trait.equals(_traitQuery))
 			getTraitResultSet().addItem(trait);		
 		
 		checkShouldStopVisitingTraits();
@@ -170,6 +170,10 @@ public class SimpleMetaDataQueryVisitorImpl implements IEntityQueryVisitor, ITra
 		private String entityKey;
 		private EntityStack stack;
 
+		/**
+		 * Constructor
+		 * @param entityKey
+		 */
 		public EntityQueryComparator(String entityKey){
 			this.entityKey = entityKey;		
 			stack = new EntityStack();
@@ -180,6 +184,9 @@ public class SimpleMetaDataQueryVisitorImpl implements IEntityQueryVisitor, ITra
 			return entityKey.compareTo(getRelativeId());			
 		}
 		
+		/**
+		 * Pop stack
+		 */
 		public void popContext(){
 			stack.pop();
 		}
@@ -210,6 +217,9 @@ public class SimpleMetaDataQueryVisitorImpl implements IEntityQueryVisitor, ITra
          */
         private static final long serialVersionUID = -6010267544968175003L;
 
+        /**
+         * Constructor
+         */
         public EntityStack(){
 			super();
 		}

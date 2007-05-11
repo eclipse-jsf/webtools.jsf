@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MetadataPackageImpl.java,v 1.5 2007/04/16 19:54:10 itrimble Exp $
+ * $Id: MetadataPackageImpl.java,v 1.6 2007/05/11 17:54:55 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.impl;
 
@@ -146,6 +146,7 @@ public class MetadataPackageImpl extends EPackageImpl implements MetadataPackage
 	 * already been initialized.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @return MetadataPackage
 	 * @see #eNS_URI
 	 * @see #createPackageContents()
 	 * @see #initializePackageContents()
@@ -589,6 +590,7 @@ public class MetadataPackageImpl extends EPackageImpl implements MetadataPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("cast")
 	protected void createGenModelAnnotations() {
 		String source = "http://www.eclipse.org/emf/2002/GenModel";										
 		addAnnotation

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraitTypesFactoryImpl.java,v 1.4 2007/04/16 19:54:01 itrimble Exp $
+ * $Id: TraitTypesFactoryImpl.java,v 1.5 2007/05/11 17:54:57 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.impl;
 
@@ -34,6 +34,7 @@ public class TraitTypesFactoryImpl extends EFactoryImpl implements TraitTypesFac
      * Creates the default factory implementation.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     * @return TraitTypesFactory
      * @generated
      */
     public static TraitTypesFactory init() {
@@ -105,6 +106,7 @@ public class TraitTypesFactoryImpl extends EFactoryImpl implements TraitTypesFac
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     * @return TraitTypesPackage
      * @deprecated
      * @generated
      */

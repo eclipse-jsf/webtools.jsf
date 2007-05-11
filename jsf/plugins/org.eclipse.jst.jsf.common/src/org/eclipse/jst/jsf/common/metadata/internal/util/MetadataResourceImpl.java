@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MetadataResourceImpl.java,v 1.6 2007/04/16 19:54:01 itrimble Exp $
+ * $Id: MetadataResourceImpl.java,v 1.7 2007/05/11 17:54:56 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.util;
 
@@ -31,8 +31,40 @@ import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider
  */
 public class MetadataResourceImpl extends XMLResourceImpl implements XMLResource.ResourceHandler {
 	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "Oracle inc.";
+	
+	/**
+	 * IMetaDataSourceModelProvider
+	 */
 	protected IMetaDataSourceModelProvider _provider;
+	/**
+	 * Creates an instance of the resource.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param uri the URI of the new resource.
+	 * @generated
+	 */
+	public MetadataResourceImpl(URI uri) {
+		super(uri);
+	}
 
+	/**
+	 * Constructor
+	 */
+	public MetadataResourceImpl() {
+		super();
+	}
+
+
+	/**
+	 * Constructorb
+	 * @param provider
+	 */
 	public MetadataResourceImpl(IMetaDataSourceModelProvider provider){
 		super();
 		_provider = provider;
@@ -47,28 +79,6 @@ public class MetadataResourceImpl extends XMLResourceImpl implements XMLResource
 				return MetadataPackage.eINSTANCE;
 			}
 		};
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final String copyright = "Oracle inc.";
-
-	/**
-	 * Creates an instance of the resource.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param uri the URI of the new resource.
-	 * @generated
-	 */
-	public MetadataResourceImpl(URI uri) {
-		super(uri);
-	}
-
-	public MetadataResourceImpl() {
-		super();
 	}
 	
 	public void postLoad(XMLResource resource, InputStream inputStream,

@@ -24,6 +24,9 @@ import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 public class MetaDataLocatorFactory {
 	private static MetaDataLocatorFactory INSTANCE = null;
 	
+	/**
+	 * @return singleton instance of the MetaDataLocatorFactory
+	 */
 	public synchronized static MetaDataLocatorFactory getInstance(){
 		if (INSTANCE == null){
 			INSTANCE = new MetaDataLocatorFactory();
@@ -40,6 +43,11 @@ public class MetaDataLocatorFactory {
 		return _locators;
 	}
 	
+	/**
+	 * @param locatorClassName
+	 * @param bundleId
+	 * @return IMetaDataLocator
+	 */
 	public IMetaDataLocator getLocator(String locatorClassName, String bundleId){
 		String key = getKey(locatorClassName, bundleId);
 		IMetaDataLocator locator = (IMetaDataLocator)getLocators().get(key);
@@ -65,6 +73,9 @@ public class MetaDataLocatorFactory {
 		return buf.toString();
 	}
 	
+	/**
+	 * Stops and disposes all locators
+	 */
 	public void dispose(){
 		for (Iterator it=getLocators().values().iterator();it.hasNext();){
 			IMetaDataLocator locator = (IMetaDataLocator)it.next();

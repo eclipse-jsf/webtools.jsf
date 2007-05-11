@@ -13,6 +13,10 @@ package org.eclipse.jst.jsf.common.metadata.query;
 
 import org.eclipse.jst.jsf.common.metadata.Entity;
 
+/**
+ * Entity querying interface
+ *
+ */
 public interface IEntityQueryVisitor extends IEntityVisitor{
 	/**
 	 * @param initialEntityContext

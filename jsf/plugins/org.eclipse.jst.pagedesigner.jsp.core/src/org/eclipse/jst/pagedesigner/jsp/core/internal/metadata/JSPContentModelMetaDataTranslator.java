@@ -18,7 +18,7 @@ import org.eclipse.wst.html.core.internal.contentmodel.JSPCMDocument;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMDocument;
 
 /**
- * Meta-data translator for JSP content modle meta-data
+ * Translates the JSP CMDocument to standard metadata model entities and traits
  */
 public class JSPContentModelMetaDataTranslator extends AbstractTagLibDomainContentModelMetaDataTranslator implements IMetaDataTranslator {
 
@@ -30,11 +30,16 @@ public class JSPContentModelMetaDataTranslator extends AbstractTagLibDomainConte
 		}
 	}
 
-
+	/* (non-Javadoc)
+	 * @see org.eclipse.jst.jsf.common.metadata.internal.AbstractTagLibDomainContentModelMetaDataTranslator#getURIDescription()
+	 */
 	protected String getURIDescription() {		
 		return "JSP Tags";
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.jst.jsf.common.metadata.internal.AbstractTagLibDomainContentModelMetaDataTranslator#getURIDisplayLabel()
+	 */
 	protected String getURIDisplayLabel() {		
 		return "JSP";
 	}

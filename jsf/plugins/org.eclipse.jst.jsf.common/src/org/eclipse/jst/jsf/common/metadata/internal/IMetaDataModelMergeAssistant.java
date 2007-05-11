@@ -53,7 +53,13 @@ public interface IMetaDataModelMergeAssistant {
 	 */
 	public void setMergeComplete();
 
+	/**
+	 * @param mds - {@link IMetaDataSourceModelProvider}
+	 */
 	public void setSourceModelProvider(IMetaDataSourceModelProvider mds);
+	/**
+	 * @return {@link IMetaDataSourceModelProvider} for current operation
+	 */
 	public IMetaDataSourceModelProvider getSourceModelProvider();
 	
 

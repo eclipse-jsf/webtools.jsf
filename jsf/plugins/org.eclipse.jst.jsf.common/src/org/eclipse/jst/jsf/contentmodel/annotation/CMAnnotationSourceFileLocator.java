@@ -28,6 +28,9 @@ import java.util.ResourceBundle;
  * @deprecated see common.metadata package
  */ 
 public abstract class CMAnnotationSourceFileLocator{
+	/**
+	 * ICMAnnotationSourceFileInfo
+	 */
 	protected ICMAnnotationSourceFileInfo fileInfo;
 	
 	/**

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MetadataSwitch.java,v 1.4 2007/04/16 19:54:01 itrimble Exp $
+ * $Id: MetadataSwitch.java,v 1.5 2007/05/11 17:54:56 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.util;
 
@@ -65,6 +65,7 @@ public class MetadataSwitch {
 	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param theEObject 
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
@@ -76,6 +77,8 @@ public class MetadataSwitch {
 	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param theEClass 
+	 * @param theEObject 
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
@@ -96,6 +99,8 @@ public class MetadataSwitch {
 	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param classifierID 
+	 * @param theEObject 
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */

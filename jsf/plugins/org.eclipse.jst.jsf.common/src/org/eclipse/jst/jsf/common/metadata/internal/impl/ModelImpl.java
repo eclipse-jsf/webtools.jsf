@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelImpl.java,v 1.3 2007/04/16 19:54:10 itrimble Exp $
+ * $Id: ModelImpl.java,v 1.4 2007/05/11 17:54:55 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.impl;
 
@@ -41,6 +41,7 @@ public class ModelImpl extends EntityImpl implements Model {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("hiding")
 	public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
 
 	/**

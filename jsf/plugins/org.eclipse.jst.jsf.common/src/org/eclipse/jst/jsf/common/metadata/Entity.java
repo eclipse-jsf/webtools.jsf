@@ -143,6 +143,7 @@ public interface Entity extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @param visitor 	 
 	 * <!-- end-user-doc -->
 	 * @model visitorDataType="org.eclipse.jst.jsf.common.metadata.query.IEntityVisitor"
 	 * @generated
@@ -151,6 +152,7 @@ public interface Entity extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return Model 
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
 	 * @generated

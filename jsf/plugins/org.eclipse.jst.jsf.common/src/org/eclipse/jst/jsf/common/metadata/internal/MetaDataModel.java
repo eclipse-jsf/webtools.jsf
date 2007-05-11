@@ -62,6 +62,9 @@ public class MetaDataModel {
 //			visitor.visit((Model)getRoot());
 //	}
 
+	/**
+	 * @return true if the model is null or is not, in fact, a {@link Model}
+	 */
 	public boolean isEmpty() {
 		if (root == null || !(root instanceof Model))
 			return true;

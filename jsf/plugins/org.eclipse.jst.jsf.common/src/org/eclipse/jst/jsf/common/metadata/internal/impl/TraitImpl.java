@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraitImpl.java,v 1.3 2007/04/16 19:54:10 itrimble Exp $
+ * $Id: TraitImpl.java,v 1.4 2007/05/11 17:54:55 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.impl;
 
@@ -125,6 +125,9 @@ public class TraitImpl extends EObjectImpl implements Trait {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param newValue 
+	 * @param msgs 
+	 * @return NotificationChain
 	 * @generated
 	 */
 	public NotificationChain basicSetValue(EObject newValue, NotificationChain msgs) {
@@ -311,7 +314,7 @@ public class TraitImpl extends EObjectImpl implements Trait {
 		return result.toString();
 	}
 
-	public boolean equals(Object value){
+	public boolean equals(@SuppressWarnings("hiding")Object value){
 		if (!(value instanceof String))
 			return super.equals(value);
 		

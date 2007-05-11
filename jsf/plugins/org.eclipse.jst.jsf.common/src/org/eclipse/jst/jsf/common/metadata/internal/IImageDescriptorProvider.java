@@ -12,6 +12,10 @@ package org.eclipse.jst.jsf.common.metadata.internal;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 
+/**
+ * Provides image descriptors relative to the plugin that provided the image metadata
+ *
+ */
 public interface IImageDescriptorProvider {
 	/**
 	 * @param imagePath

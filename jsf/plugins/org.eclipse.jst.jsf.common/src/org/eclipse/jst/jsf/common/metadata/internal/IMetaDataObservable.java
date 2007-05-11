@@ -12,7 +12,8 @@
 package org.eclipse.jst.jsf.common.metadata.internal;
 
 /**
- * Allows {@link IMetaDataObserver}s to observe changes
+ * Allows {@link IMetaDataObserver}s to observe changes.
+ * Experimental.
  *
  */
 public interface IMetaDataObservable {

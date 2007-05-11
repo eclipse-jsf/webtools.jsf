@@ -17,8 +17,14 @@ import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataTranslator;
 import org.eclipse.wst.html.core.internal.contentmodel.HTMLCMDocument;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMDocument;
 
+/**
+ * Translates the HTML CMDocument to standard metadata model entities and traits
+ */
 public class HTMLContentModelMetaDataTranslator extends AbstractTagLibDomainContentModelMetaDataTranslator implements IMetaDataTranslator {
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.jst.jsf.common.metadata.internal.IMetaDataTranslator#translate(org.eclipse.jst.jsf.common.metadata.internal.IMetaDataModelMergeAssistant)
+	 */
 	public void translate(final IMetaDataModelMergeAssistant assistant) {
 		_assistant = assistant;
 		CMDocument doc = getSourceModel();
@@ -27,11 +33,16 @@ public class HTMLContentModelMetaDataTranslator extends AbstractTagLibDomainCont
 		}
 	}
 
-
+	/**
+	 *  @return getURIDisplayLabel()
+	 */
 	protected String getURIDescription() {
 		return getURIDisplayLabel();
 	}
 
+	/**
+	 * return "HTML 4.0"
+	 */
 	protected String getURIDisplayLabel() {
 		return "HTML 4.0";
 	}

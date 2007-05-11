@@ -84,7 +84,7 @@ public final class StandardMetaDataFileRegistry {
 	}	
 	
 /**
- * Implementation of IMetaDataSourceModelProvider for "standard" metadata sources
+ * Internal implementation of IMetaDataSourceModelProvider for "standard" metadata sources
  *
  */
 class StandardMetaDataFilesProvider implements IMetaDataSourceModelProvider {
@@ -94,6 +94,11 @@ class StandardMetaDataFilesProvider implements IMetaDataSourceModelProvider {
 	private IMetaDataLocator locator;
 	private StandardMetaDataSourceFileLocator fileLocator = null;
 	
+	/**
+	 * Constructor
+	 * @param info
+	 * @param uri
+	 */
 	StandardMetaDataFilesProvider(IStandardMetaDataSourceInfo info, String uri){
 		this.info = info;
 	}
@@ -108,9 +113,9 @@ class StandardMetaDataFilesProvider implements IMetaDataSourceModelProvider {
 				try {
 					fileLocator = (StandardMetaDataSourceFileLocator)klass.newInstance();
 				} catch (InstantiationException e) {
-					JSFCommonPlugin.log(IStatus.ERROR, "InstantiationException: StandardMetaDataFilesProvider.getFileLocator()", e);
+					JSFCommonPlugin.log(IStatus.ERROR, "InstantiationException: StandardMetaDataFilesProvider.getFileLocator()", e); //$NON-NLS-1$
 				} catch (IllegalAccessException e) {
-					JSFCommonPlugin.log(IStatus.ERROR, "IllegalAccessException: StandardMetaDataFilesProvider.getFileLocator()", e);				
+					JSFCommonPlugin.log(IStatus.ERROR, "IllegalAccessException: StandardMetaDataFilesProvider.getFileLocator()", e);				 //$NON-NLS-1$
 				}			
 			}
 			if (fileLocator != null)
@@ -148,13 +153,13 @@ class StandardMetaDataFilesProvider implements IMetaDataSourceModelProvider {
 		} catch (FileNotFoundException e){
 			JSFCommonPlugin.log(IStatus.ERROR, e.getLocalizedMessage());
 		} catch (IOException e) {
-			JSFCommonPlugin.log(IStatus.ERROR,"IOException(1): StandardMetaDataFilesProvider.getSourceModel()", e);
+			JSFCommonPlugin.log(IStatus.ERROR,"IOException(1): StandardMetaDataFilesProvider.getSourceModel()", e); //$NON-NLS-1$
 		} finally {
 			if (inputStream != null){
 				try {
 					inputStream.close();
 				} catch (IOException e) {
-					JSFCommonPlugin.log( IStatus.ERROR,"IOException (2): StandardMetaDataFilesProvider.getSourceModel()", e);
+					JSFCommonPlugin.log( IStatus.ERROR,"IOException (2): StandardMetaDataFilesProvider.getSourceModel()", e); //$NON-NLS-1$
 				}
 			}
 		}
@@ -209,13 +214,13 @@ class StandardMetaDataFilesProvider implements IMetaDataSourceModelProvider {
 				private String getImageBase(){
 					if (imageBase == null){
 						Model aModel = (Model)getSourceModel();
-						Trait t = MetaDataQueryHelper.getTrait(aModel, "images-base-path");
+						Trait t = MetaDataQueryHelper.getTrait(aModel, "images-base-path"); //$NON-NLS-1$
 						if (t == null){
-							imageBase = "";		
+							imageBase = "";		 //$NON-NLS-1$
 						} else {
 							imageBase = TraitValueHelper.getValueAsString(t);
 							if (imageBase != null && imageBase.length() > 0){
-								imageBase = imageBase +"/";
+								imageBase = imageBase +"/"; //$NON-NLS-1$
 							}
 						}
 					}

@@ -678,6 +678,7 @@ public interface MetadataPackage extends EPackage {
 		 * @see org.eclipse.jst.jsf.common.metadata.internal.impl.MetadataPackageImpl#getTrait()
 		 * @generated
 		 */
+		@SuppressWarnings("hiding")
 		EClass TRAIT = eINSTANCE.getTrait();
 
 		/**
@@ -686,6 +687,7 @@ public interface MetadataPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+		@SuppressWarnings("hiding")
 		EAttribute TRAIT__ID = eINSTANCE.getTrait_Id();
 
 		/**
@@ -694,6 +696,7 @@ public interface MetadataPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+		@SuppressWarnings("hiding")
 		EReference TRAIT__VALUE = eINSTANCE.getTrait_Value();
 
 		/**
@@ -702,6 +705,7 @@ public interface MetadataPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+		@SuppressWarnings("hiding")
 		EAttribute TRAIT__SOURCE_MODEL_PROVIDER = eINSTANCE.getTrait_SourceModelProvider();
 
 		/**
@@ -712,6 +716,7 @@ public interface MetadataPackage extends EPackage {
 		 * @see org.eclipse.jst.jsf.common.metadata.internal.impl.MetadataPackageImpl#getIncludeEntityGroup()
 		 * @generated
 		 */
+		@SuppressWarnings("hiding")
 		EClass INCLUDE_ENTITY_GROUP = eINSTANCE.getIncludeEntityGroup();
 
 		/**
@@ -720,6 +725,7 @@ public interface MetadataPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+		@SuppressWarnings("hiding")
 		EAttribute INCLUDE_ENTITY_GROUP__ID = eINSTANCE.getIncludeEntityGroup_Id();
 
 		/**
@@ -728,6 +734,7 @@ public interface MetadataPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+		@SuppressWarnings("hiding")
 		EAttribute INCLUDE_ENTITY_GROUP__MODEL_URI = eINSTANCE.getIncludeEntityGroup_ModelUri();
 
 		/**
@@ -738,6 +745,7 @@ public interface MetadataPackage extends EPackage {
 		 * @see org.eclipse.jst.jsf.common.metadata.internal.impl.MetadataPackageImpl#getModel()
 		 * @generated
 		 */
+		@SuppressWarnings("hiding")
 		EClass MODEL = eINSTANCE.getModel();
 
 		/**
@@ -746,6 +754,7 @@ public interface MetadataPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+		@SuppressWarnings("hiding")
 		EAttribute MODEL__SOURCE_MODEL_PROVIDER = eINSTANCE.getModel_SourceModelProvider();
 
 		/**
@@ -754,6 +763,7 @@ public interface MetadataPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+		@SuppressWarnings("hiding")
 		EAttribute MODEL__CURRENT_MODEL_CONTEXT = eINSTANCE.getModel_CurrentModelContext();
 
 		/**
@@ -762,6 +772,7 @@ public interface MetadataPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+		@SuppressWarnings("hiding")
 		EReference MODEL__ENTITY_GROUPS = eINSTANCE.getModel_EntityGroups();
 
 		/**
@@ -772,6 +783,7 @@ public interface MetadataPackage extends EPackage {
 		 * @see org.eclipse.jst.jsf.common.metadata.internal.impl.MetadataPackageImpl#getEntity()
 		 * @generated
 		 */
+		@SuppressWarnings("hiding")
 		EClass ENTITY = eINSTANCE.getEntity();
 
 		/**
@@ -780,6 +792,7 @@ public interface MetadataPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+		@SuppressWarnings("hiding")
 		EReference ENTITY__CHILD_ENTITIES = eINSTANCE.getEntity_ChildEntities();
 
 		/**
@@ -788,6 +801,7 @@ public interface MetadataPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+		@SuppressWarnings("hiding")
 		EReference ENTITY__TRAITS = eINSTANCE.getEntity_Traits();
 
 		/**
@@ -796,6 +810,7 @@ public interface MetadataPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+		@SuppressWarnings("hiding")
 		EAttribute ENTITY__ID = eINSTANCE.getEntity_Id();
 
 		/**
@@ -804,6 +819,7 @@ public interface MetadataPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+		@SuppressWarnings("hiding")
 		EAttribute ENTITY__TYPE = eINSTANCE.getEntity_Type();
 
 		/**
@@ -812,6 +828,7 @@ public interface MetadataPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+		@SuppressWarnings("hiding")
 		EReference ENTITY__INCLUDE_GROUPS = eINSTANCE.getEntity_IncludeGroups();
 
 		/**
@@ -822,6 +839,7 @@ public interface MetadataPackage extends EPackage {
 		 * @see org.eclipse.jst.jsf.common.metadata.internal.impl.MetadataPackageImpl#getEntityGroup()
 		 * @generated
 		 */
+		@SuppressWarnings("hiding")
 		EClass ENTITY_GROUP = eINSTANCE.getEntityGroup();
 
 		/**
@@ -832,6 +850,7 @@ public interface MetadataPackage extends EPackage {
 		 * @see org.eclipse.jst.jsf.common.metadata.internal.impl.MetadataPackageImpl#getITraitVisitor()
 		 * @generated
 		 */
+		@SuppressWarnings("hiding")
 		EDataType ITRAIT_VISITOR = eINSTANCE.getITraitVisitor();
 
 		/**
@@ -842,6 +861,7 @@ public interface MetadataPackage extends EPackage {
 		 * @see org.eclipse.jst.jsf.common.metadata.internal.impl.MetadataPackageImpl#getIEntityVisitor()
 		 * @generated
 		 */
+		@SuppressWarnings("hiding")
 		EDataType IENTITY_VISITOR = eINSTANCE.getIEntityVisitor();
 
 		/**
@@ -852,6 +872,7 @@ public interface MetadataPackage extends EPackage {
 		 * @see org.eclipse.jst.jsf.common.metadata.internal.impl.MetadataPackageImpl#getIMetaDataSourceModelProvider()
 		 * @generated
 		 */
+		@SuppressWarnings("hiding")
 		EDataType IMETA_DATA_SOURCE_MODEL_PROVIDER = eINSTANCE.getIMetaDataSourceModelProvider();
 
 		/**
@@ -862,6 +883,7 @@ public interface MetadataPackage extends EPackage {
 		 * @see org.eclipse.jst.jsf.common.metadata.internal.impl.MetadataPackageImpl#getModelContext()
 		 * @generated
 		 */
+		@SuppressWarnings("hiding")
 		EDataType MODEL_CONTEXT = eINSTANCE.getModelContext();
 
 	}

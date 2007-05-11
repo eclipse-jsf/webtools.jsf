@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MetadataFactoryImpl.java,v 1.3 2007/04/16 19:54:10 itrimble Exp $
+ * $Id: MetadataFactoryImpl.java,v 1.4 2007/05/11 17:54:55 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.impl;
 
@@ -43,6 +43,7 @@ public class MetadataFactoryImpl extends EFactoryImpl implements MetadataFactory
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @return MetadataFactory
 	 * @generated
 	 */
 	public static MetadataFactory init() {
@@ -170,6 +171,9 @@ public class MetadataFactoryImpl extends EFactoryImpl implements MetadataFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param eDataType IMetaDataSourceModelProvider
+	 * @param initialValue 
+	 * @return IMetaDataSourceModelProvider
 	 * @generated
 	 */
 	public IMetaDataSourceModelProvider createIMetaDataSourceModelProviderFromString(EDataType eDataType, String initialValue) {
@@ -179,6 +183,9 @@ public class MetadataFactoryImpl extends EFactoryImpl implements MetadataFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param eDataType 
+	 * @param instanceValue 
+	 * @return String
 	 * @generated
 	 */
 	public String convertIMetaDataSourceModelProviderToString(EDataType eDataType, Object instanceValue) {
@@ -188,6 +195,9 @@ public class MetadataFactoryImpl extends EFactoryImpl implements MetadataFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param eDataType 
+	 * @param initialValue 
+	 * @return ModelKeyDescriptor
 	 * @generated
 	 */
 	public ModelKeyDescriptor createModelContextFromString(EDataType eDataType, String initialValue) {
@@ -197,6 +207,9 @@ public class MetadataFactoryImpl extends EFactoryImpl implements MetadataFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param eDataType 
+	 * @param instanceValue 
+	 * @return String
 	 * @generated
 	 */
 	public String convertModelContextToString(EDataType eDataType, Object instanceValue) {
@@ -215,6 +228,7 @@ public class MetadataFactoryImpl extends EFactoryImpl implements MetadataFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @return MetadataPackage
 	 * @deprecated
 	 * @generated
 	 */

@@ -16,5 +16,8 @@ package org.eclipse.jst.jsf.common.metadata.query;
  */
 public abstract interface IMetaDataVisitor {
     // API: contract?
+	/**
+	 * @return true if visitor has recognized that visiting should stop
+	 */
 	public boolean stopVisiting();
 }

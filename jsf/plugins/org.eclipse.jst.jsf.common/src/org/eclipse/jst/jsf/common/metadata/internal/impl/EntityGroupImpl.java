@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EntityGroupImpl.java,v 1.3 2007/04/16 19:54:10 itrimble Exp $
+ * $Id: EntityGroupImpl.java,v 1.4 2007/05/11 17:54:55 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.impl;
 
@@ -25,6 +25,7 @@ public class EntityGroupImpl extends EntityImpl implements EntityGroup {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("hiding")
 	public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
 
 	/**

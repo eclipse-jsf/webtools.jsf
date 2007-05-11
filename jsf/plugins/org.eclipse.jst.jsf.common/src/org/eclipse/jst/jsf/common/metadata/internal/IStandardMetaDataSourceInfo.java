@@ -12,13 +12,17 @@
 package org.eclipse.jst.jsf.common.metadata.internal;
 
 
+/**
+ * Represents the metadata file defined by the StandardMetaDataFile extension-point
+ * Not intended to be implemented by clients
+ */
 public interface IStandardMetaDataSourceInfo {
 	/**
 	 * @return location of metadata file that the locator class will use 
 	 */
 	public String getLocation();
 	/**
-	 * @return bundle id of plugin defining the annotation file
+	 * @return bundle id of plugin defining the metadata file
 	 */
 	public String getBundleId();
 	/**

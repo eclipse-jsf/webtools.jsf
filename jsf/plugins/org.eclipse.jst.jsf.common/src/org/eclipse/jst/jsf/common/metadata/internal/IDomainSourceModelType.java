@@ -14,13 +14,22 @@ package org.eclipse.jst.jsf.common.metadata.internal;
 import java.util.Set;
 
 /**
- * Binds a domain of metatdata to a source model type which is defined by a {@link IMetaDataLocator} 
+ * Binds a domain of metadata to a source model type which is defined by a {@link IMetaDataLocator} 
  * and set of {@link IMetaDataTranslator}s
  * Not intended to be implemented by clients.  Created from ext-pts.
  */
 public interface IDomainSourceModelType {
+	/**
+	 * @return domain id
+	 */
 	public String getDomain();
+	/**
+	 * @return IMetaDataLocator
+	 */
 	public IMetaDataLocator getLocator();
 //	public int getOrdinal();
+	/**
+	 * @return set of {@link IMetaDataTranslator}s for the domain source model type
+	 */
 	public Set/*<IMetaDataTranslator>*/ getTranslators();
 }

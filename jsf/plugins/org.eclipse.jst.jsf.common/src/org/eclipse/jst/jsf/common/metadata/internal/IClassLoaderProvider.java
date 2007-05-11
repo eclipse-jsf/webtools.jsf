@@ -10,6 +10,9 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.common.metadata.internal;
 
+/**
+ * Provides class loading by using the plugin's classloader that defined an item of metadata
+ */
 public interface IClassLoaderProvider {
 	/**
 	 * @param className

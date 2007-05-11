@@ -216,6 +216,7 @@ public interface TraitTypesPackage extends EPackage {
 		 * @see org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.impl.TraitTypesPackageImpl#getListOfValues()
 		 * @generated
 		 */
+		@SuppressWarnings("hiding")
 		EClass LIST_OF_VALUES = eINSTANCE.getListOfValues();
 
 		/**
@@ -224,6 +225,7 @@ public interface TraitTypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+		@SuppressWarnings("hiding")
 		EReference LIST_OF_VALUES__ENTRIES = eINSTANCE.getListOfValues_Entries();
 
         /**
@@ -234,7 +236,8 @@ public interface TraitTypesPackage extends EPackage {
          * @see org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.impl.TraitTypesPackageImpl#getSetGenerator()
          * @generated
          */
-        EClass SET_GENERATOR = eINSTANCE.getSetGenerator();
+        @SuppressWarnings("hiding")
+		EClass SET_GENERATOR = eINSTANCE.getSetGenerator();
 
         /**
          * The meta object literal for the '<em><b>Algorithm</b></em>' attribute feature.
@@ -242,7 +245,8 @@ public interface TraitTypesPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
-        EAttribute SET_GENERATOR__ALGORITHM = eINSTANCE.getSetGenerator_Algorithm();
+        @SuppressWarnings("hiding")
+		EAttribute SET_GENERATOR__ALGORITHM = eINSTANCE.getSetGenerator_Algorithm();
 
         /**
          * The meta object literal for the '<em><b>Expression</b></em>' attribute feature.
@@ -250,7 +254,8 @@ public interface TraitTypesPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
-        EAttribute SET_GENERATOR__EXPRESSION = eINSTANCE.getSetGenerator_Expression();
+        @SuppressWarnings("hiding")
+		EAttribute SET_GENERATOR__EXPRESSION = eINSTANCE.getSetGenerator_Expression();
 
 	}
 

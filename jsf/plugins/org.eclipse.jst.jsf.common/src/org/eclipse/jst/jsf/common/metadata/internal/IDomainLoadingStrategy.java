@@ -28,6 +28,7 @@ public interface IDomainLoadingStrategy {
 	/**
 	 * Reload a merged "standard" metadata model.  
 	 * Allows for some optimization for reload.
+	 * @throws ModelNotSetException 
 	 * 
 	 */
 	public void reload() throws ModelNotSetException;

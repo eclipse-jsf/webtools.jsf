@@ -34,7 +34,7 @@ public interface Trait extends EObject {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = "Copyright (c) 2007 Oracle Corporation";
+	String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
 	/**
 	 * Returns the value of the '<em><b>Id</b></em>' attribute.
@@ -118,6 +118,7 @@ public interface Trait extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param visitor 
 	 * @model visitorDataType="org.eclipse.jst.jsf.common.metadata.query.ITraitVisitor"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='visitor.visit(this);'"
 	 * @generated

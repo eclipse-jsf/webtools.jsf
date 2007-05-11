@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraitTypesPackageImpl.java,v 1.4 2007/04/16 19:54:01 itrimble Exp $
+ * $Id: TraitTypesPackageImpl.java,v 1.5 2007/05/11 17:54:57 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.impl;
 
@@ -91,6 +91,7 @@ public class TraitTypesPackageImpl extends EPackageImpl implements TraitTypesPac
      * already been initialized.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     * @return TraitTypesPackage
      * @see #eNS_URI
      * @see #createPackageContents()
      * @see #initializePackageContents()

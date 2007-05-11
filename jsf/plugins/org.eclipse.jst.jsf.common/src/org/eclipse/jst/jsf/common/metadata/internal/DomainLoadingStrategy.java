@@ -28,9 +28,9 @@ public class DomainLoadingStrategy implements IDomainLoadingStrategy, IMetaDataO
 	 */
 	protected String domain;
 
-	private MetaDataModel model;
-	private List /*<IDomainSourceModelType>*/ sourceTypes;
-	private List /*<IMetaDataSourceModelProvider>*/ sources;
+	private MetaDataModel _model;
+	private List /*<IDomainSourceModelType>*/ _sourceTypes;
+	private List /*<IMetaDataSourceModelProvider>*/ _sources;
 	
 	/**
 	 * Constructor
@@ -45,11 +45,11 @@ public class DomainLoadingStrategy implements IDomainLoadingStrategy, IMetaDataO
 	 * @see org.eclipse.jst.jsf.common.metadata.internal.IDomainLoadingStrategy#load(org.eclipse.jst.jsf.common.metadata.internal.MetaDataModel)
 	 */
 	public void load(MetaDataModel model) {
-		this.model = model;
-		sourceTypes = loadDomainSourceModelTypes();
-		sortSourceTypes(sourceTypes);
-		sources = locateMetaDataSourceInstances(sourceTypes, model);
-	    mergeModel(model, sources);		
+		this._model = model;
+		_sourceTypes = loadDomainSourceModelTypes();
+		sortSourceTypes(_sourceTypes);
+		_sources = locateMetaDataSourceInstances(_sourceTypes, model);
+	    mergeModel(model, _sources);		
 	}
 	
 	/* (non-Javadoc)
@@ -57,12 +57,12 @@ public class DomainLoadingStrategy implements IDomainLoadingStrategy, IMetaDataO
 	 */
 	public void reload() throws ModelNotSetException {
 		System.out.println("reload");//debug
-		if (model == null)
+		if (_model == null)
 			throw new ModelNotSetException();
 		
 		removeOldLocatorObservers();
-		sources = locateMetaDataSourceInstances(sourceTypes, model);
-	    mergeModel(model, sources);		
+		_sources = locateMetaDataSourceInstances(_sourceTypes, _model);
+	    mergeModel(_model, _sources);		
 	}
 	
 	/**
@@ -148,8 +148,8 @@ public class DomainLoadingStrategy implements IDomainLoadingStrategy, IMetaDataO
 	 * @see org.eclipse.jst.jsf.common.metadata.internal.IMetaDataObserver#notifyMetadataChanged(org.eclipse.jst.jsf.common.metadata.internal.IMetaDataChangeNotificationEvent)
 	 */
 	public void notifyMetadataChanged(IMetaDataChangeNotificationEvent event) {
-		//for now, if any event occurs, we need to flush the model so that it will rebuild
-		model.setNeedsRefresh();
+		//for now, if any event occurs, we need to flush the _model so that it will rebuild
+		_model.setNeedsRefresh();
 	}
 	
 	/* (non-Javadoc)
@@ -157,14 +157,14 @@ public class DomainLoadingStrategy implements IDomainLoadingStrategy, IMetaDataO
 	 */
 	public void cleanup(){
 		removeOldLocatorObservers();
-		sources = null;
-		sourceTypes = null;
-		model = null;
+		_sources = null;
+		_sourceTypes = null;
+		_model = null;
 	}
 	
 	private void removeOldLocatorObservers(){
-		if (sources != null){
-			for (Iterator it= sources.iterator();it.hasNext();){				
+		if (_sources != null){
+			for (Iterator it= _sources.iterator();it.hasNext();){				
 				IMetaDataSourceModelProvider provider = (IMetaDataSourceModelProvider)it.next();
 				IMetaDataLocator locator = provider.getLocator();
 				locator.removeObserver(this);		

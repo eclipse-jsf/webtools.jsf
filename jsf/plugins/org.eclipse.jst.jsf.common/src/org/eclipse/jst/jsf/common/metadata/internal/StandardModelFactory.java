@@ -34,11 +34,13 @@ import org.eclipse.jst.jsf.common.metadata.query.IMetaDataModelContext;
  */
 public class StandardModelFactory {
 	private static StandardModelFactory INSTANCE;
-//	private static final String EXT_MD = ExtendedMetaData.ANNOTATION_URI;
 	private ExtendedMetaData extendedMetaData;
 	private ResourceSet resourceSet;
 	
 	
+	/**
+	 * @return singleton instance of the metadata model factory
+	 */
 	public synchronized static StandardModelFactory getInstance(){
 		if (INSTANCE == null){
 			INSTANCE = new StandardModelFactory();
@@ -93,6 +95,7 @@ public class StandardModelFactory {
 	
 	/**
 	 * @param inputStream
+	 * @param provider
 	 * @return the root of the standard model from the resource as an EList
 	 * @throws IOException
 	 */
@@ -120,16 +123,5 @@ public class StandardModelFactory {
 //		options.put(XMLResource.OPTION_DOM_USE_NAMESPACES_IN_SCOPE, Boolean.TRUE);
 	}
 
-//	private Map getOptions(Resource resource) {
-//		Map options = new HashMap/*<String, Object>*/();
-////		options.put(XMLResource.OPTION_SAVE_TYPE_INFORMATION, true);				
-//		options.put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
-//		options.put(XMLResource.OPTION_EXTENDED_META_DATA, extendedMetaData);
-//		options.put(XMLResource.OPTION_RESOURCE_HANDLER, resource);
-//		options.put(XMLResource.OPTION_LAX_FEATURE_PROCESSING, Boolean.TRUE);
-//		options.put(XMLResource.OPTION_RECORD_UNKNOWN_FEATURE, Boolean.TRUE);
-////		options.put(XMLResource.OPTION_DOM_USE_NAMESPACES_IN_SCOPE, Boolean.TRUE);
-//		return options;
-//	}
 
 }
