@@ -51,8 +51,8 @@ public class BooleanTypeTest extends TaglibProcessingTestCase {
 		Assert.assertTrue(vv.isValidValue("False"));
 		Assert.assertEquals(vv.getValidationMessages().size(), 0);
 		vv.getValidationMessages().clear();
-		Assert.assertEquals(vv.isValidValue("blue"), true);//valueOf("bougus") == false so it is a valid boolean
-		Assert.assertEquals(vv.getValidationMessages().size(), 0);
+		Assert.assertFalse(vv.isValidValue("bogus"));
+		Assert.assertEquals(vv.getValidationMessages().size(), 1);
 	}
 	
 	public void testDefaultValues(){		
