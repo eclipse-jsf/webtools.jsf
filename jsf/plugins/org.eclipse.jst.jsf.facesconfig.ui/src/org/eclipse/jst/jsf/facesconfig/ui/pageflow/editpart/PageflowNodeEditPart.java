@@ -27,7 +27,6 @@ import org.eclipse.gef.Request;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.requests.DropRequest;
 import org.eclipse.gef.tools.DirectEditManager;
-import org.eclipse.jdt.internal.ui.viewsupport.ImageImageDescriptor;
 import org.eclipse.jdt.ui.JavaElementImageDescriptor;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.text.source.Annotation;
@@ -81,7 +80,7 @@ public class PageflowNodeEditPart extends PageflowElementEditPart implements
 			dispose();
 			int adornmentFlags = computeAdornmentFlags(element);
 			if (adornmentFlags != 0) {
-				ImageDescriptor baseImage = new ImageImageDescriptor(image);
+				ImageDescriptor baseImage = ImageDescriptor.createFromImage(image);
 				org.eclipse.swt.graphics.Rectangle bounds = image.getBounds();
 				decrateImage = (new JavaElementImageDescriptor(baseImage,
 						adornmentFlags, new org.eclipse.swt.graphics.Point(
@@ -92,13 +91,21 @@ public class PageflowNodeEditPart extends PageflowElementEditPart implements
 		}
 
 		/**
+		 * Computes adornment flags for specified object.
+		 * 
 		 * Note: This method is for internal use only. Clients should not call
 		 * this method.
+		 * 
+		 * @param obj Object to complute flags for.
+		 * @return Adornment flags.
 		 */
 		protected int computeAdornmentFlags(Object obj) {
 			return JavaElementImageDescriptor.WARNING;
 		}
 
+		/**
+		 * Disposes this instance.
+		 */
 		public void dispose() {
 			if (decrateImage != null) {
 				decrateImage.dispose();
@@ -118,6 +125,9 @@ public class PageflowNodeEditPart extends PageflowElementEditPart implements
 
 	}
 
+	/**
+	 * Disposes this instance.
+	 */
 	public void dispose() {
 		if (imageDecorator != null) {
 			imageDecorator.dispose();

@@ -25,12 +25,11 @@ import org.eclipse.gef.Request;
 import org.eclipse.gef.RequestConstants;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.commands.CompoundCommand;
-import org.eclipse.gef.internal.GEFMessages;
-import org.eclipse.gef.internal.InternalImages;
 import org.eclipse.gef.requests.AlignmentRequest;
 import org.eclipse.gef.tools.ToolUtilities;
 import org.eclipse.gef.ui.actions.GEFActionConstants;
 import org.eclipse.gef.ui.actions.SelectionAction;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorMessages;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPart;
 
@@ -271,48 +270,48 @@ public final class AlignmentAction extends SelectionAction {
 		switch (alignment) {
 		case PositionConstants.LEFT:
 			setId(GEFActionConstants.ALIGN_LEFT);
-			setText(GEFMessages.AlignLeftAction_Label);
-			setToolTipText(GEFMessages.AlignLeftAction_Tooltip);
+			setText(EditorMessages.AlignmentAction_AlignLeftAction_Label);
+			setToolTipText(EditorMessages.AlignmentAction_AlignLeftAction_Tooltip);
 			setImageDescriptor(InternalImages.DESC_HORZ_ALIGN_LEFT);
 			setDisabledImageDescriptor(InternalImages.DESC_HORZ_ALIGN_LEFT_DIS);
 			break;
 
 		case PositionConstants.RIGHT:
 			setId(GEFActionConstants.ALIGN_RIGHT);
-			setText(GEFMessages.AlignRightAction_Label);
-			setToolTipText(GEFMessages.AlignRightAction_Tooltip);
+			setText(EditorMessages.AlignmentAction_AlignRightAction_Label);
+			setToolTipText(EditorMessages.AlignmentAction_AlignRightAction_Tooltip);
 			setImageDescriptor(InternalImages.DESC_HORZ_ALIGN_RIGHT);
 			setDisabledImageDescriptor(InternalImages.DESC_HORZ_ALIGN_RIGHT_DIS);
 			break;
 
 		case PositionConstants.TOP:
 			setId(GEFActionConstants.ALIGN_TOP);
-			setText(GEFMessages.AlignTopAction_Label);
-			setToolTipText(GEFMessages.AlignTopAction_Tooltip);
+			setText(EditorMessages.AlignmentAction_AlignTopAction_Label);
+			setToolTipText(EditorMessages.AlignmentAction_AlignTopAction_Tooltip);
 			setImageDescriptor(InternalImages.DESC_VERT_ALIGN_TOP);
 			setDisabledImageDescriptor(InternalImages.DESC_VERT_ALIGN_TOP_DIS);
 			break;
 
 		case PositionConstants.BOTTOM:
 			setId(GEFActionConstants.ALIGN_BOTTOM);
-			setText(GEFMessages.AlignBottomAction_Label);
-			setToolTipText(GEFMessages.AlignBottomAction_Tooltip);
+			setText(EditorMessages.AlignmentAction_AlignBottomAction_Label);
+			setToolTipText(EditorMessages.AlignmentAction_AlignBottomAction_Tooltip);
 			setImageDescriptor(InternalImages.DESC_VERT_ALIGN_BOTTOM);
 			setDisabledImageDescriptor(InternalImages.DESC_VERT_ALIGN_BOTTOM_DIS);
 			break;
 
 		case PositionConstants.CENTER:
 			setId(GEFActionConstants.ALIGN_CENTER);
-			setText(GEFMessages.AlignCenterAction_Label);
-			setToolTipText(GEFMessages.AlignCenterAction_Tooltip);
+			setText(EditorMessages.AlignmentAction_AlignCenterAction_Label);
+			setToolTipText(EditorMessages.AlignmentAction_AlignCenterAction_Tooltip);
 			setImageDescriptor(InternalImages.DESC_HORZ_ALIGN_CENTER);
 			setDisabledImageDescriptor(InternalImages.DESC_HORZ_ALIGN_CENTER_DIS);
 			break;
 
 		case PositionConstants.MIDDLE:
 			setId(GEFActionConstants.ALIGN_MIDDLE);
-			setText(GEFMessages.AlignMiddleAction_Label);
-			setToolTipText(GEFMessages.AlignMiddleAction_Tooltip);
+			setText(EditorMessages.AlignmentAction_AlignMiddleAction_Label);
+			setToolTipText(EditorMessages.AlignmentAction_AlignMiddleAction_Tooltip);
 			setImageDescriptor(InternalImages.DESC_VERT_ALIGN_MIDDLE);
 			setDisabledImageDescriptor(InternalImages.DESC_VERT_ALIGN_MIDDLE_DIS);
 			break;

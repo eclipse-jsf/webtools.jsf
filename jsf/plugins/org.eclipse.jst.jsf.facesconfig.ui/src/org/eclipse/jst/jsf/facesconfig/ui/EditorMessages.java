@@ -687,4 +687,65 @@ public final class EditorMessages extends NLS {
 	public static String FacesConfigEditor_WaitForLoadPage_Title;
 	
 	public static String ModelLoader_LoadingModelJobName;
+
+	/**
+	 * Align bottom action label.
+	 */
+	public static String AlignmentAction_AlignBottomAction_Label;
+
+	/**
+	 * Align bottom action tooltip.
+	 */
+	public static String AlignmentAction_AlignBottomAction_Tooltip;
+
+	/**
+	 * Align center action label.
+	 */
+	public static String AlignmentAction_AlignCenterAction_Label;
+
+	/**
+	 * Align center action tooltip.
+	 */
+	public static String AlignmentAction_AlignCenterAction_Tooltip;
+
+	/**
+	 * Align left action label.
+	 */
+	public static String AlignmentAction_AlignLeftAction_Label;
+
+	/**
+	 * Align left action tooltip.
+	 */
+	public static String AlignmentAction_AlignLeftAction_Tooltip;
+
+	/**
+	 * Align middle action label.
+	 */
+	public static String AlignmentAction_AlignMiddleAction_Label;
+
+	/**
+	 * Align middle action tooltip.
+	 */
+	public static String AlignmentAction_AlignMiddleAction_Tooltip;
+
+	/**
+	 * Align right action label.
+	 */
+	public static String AlignmentAction_AlignRightAction_Label;
+
+	/**
+	 * Align right action tooltip.
+	 */
+	public static String AlignmentAction_AlignRightAction_Tooltip;
+
+	/**
+	 * Align top action label.
+	 */
+	public static String AlignmentAction_AlignTopAction_Label;
+
+	/**
+	 * Align top action tooltip.
+	 */
+	public static String AlignmentAction_AlignTopAction_Tooltip;
+
 }
