@@ -92,7 +92,7 @@ public class JSFAppConfigManager implements IResourceChangeListener {
 	 * JSFAppConfigManager instance is keyed.
 	 * @return JSFAppConfigManager instance, or null.
 	 */
-	public static JSFAppConfigManager getInstance(IProject project) {
+	public static synchronized JSFAppConfigManager getInstance(IProject project) {
 		JSFAppConfigManager manager = null;
 		if (JSFAppConfigUtils.isValidJSFProject(project)) {
 			manager = getFromSessionProperty(project);
