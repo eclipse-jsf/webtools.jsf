@@ -444,12 +444,14 @@ public class FC2PFTransformer extends AdapterImpl {
 
 	void refreshFCAdapter(EObject object) {
 		List rules = facesConfig.getNavigationRule();
-		for (int i = 0; i < rules.size(); i++) {
-			NavigationRuleType rule = (NavigationRuleType) rules.get(i);
-			adapt(rule);
-			TreeIterator children = rule.eAllContents();
-			while (children.hasNext()) {
-				adapt((EObject) children.next());
+		if (rules != null) {
+			for (int i = 0; i < rules.size(); i++) {
+				NavigationRuleType rule = (NavigationRuleType) rules.get(i);
+				adapt(rule);
+				TreeIterator children = rule.eAllContents();
+				while (children.hasNext()) {
+					adapt((EObject) children.next());
+				}
 			}
 		}
 		adapt(facesConfig);
