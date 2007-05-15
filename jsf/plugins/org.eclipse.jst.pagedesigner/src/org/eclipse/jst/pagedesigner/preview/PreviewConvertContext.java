@@ -24,6 +24,7 @@ import org.eclipse.wst.xml.core.internal.provisional.document.IDOMDocument;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMText;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 
 /**
@@ -36,15 +37,19 @@ public class PreviewConvertContext {
 	private IDOMDocument _destDocument;
 
 	/**
+	 * Instantiates an instance for the specified IDOMDocument.
 	 * 
+	 * @param destDocument IDOMDocument instance.
 	 */
 	public PreviewConvertContext(IDOMDocument destDocument) {
 		this._destDocument = destDocument;
 	}
 
 	/**
-	 * @param ele
-	 * @return
+	 * Converts specified Node for preview.
+	 * 
+	 * @param ele Node instance to convert.
+	 * @return Converted Node instance.
 	 */
 	public Node previewConvert(Node ele) {
 		if (ele instanceof Element) {
@@ -74,6 +79,12 @@ public class PreviewConvertContext {
 		return previewText;
 	}
 
+	/**
+	 * Converts specified Element instance for preview.
+	 * 
+	 * @param ele Element instance to be converted.
+	 * @return Converted Node instance.
+	 */
 	protected Node previewConvertElement(Element ele) {
 		ITagConverter converter = createTagConverter(ele);
 		if (!converter.isVisualByHTML()) {
@@ -91,8 +102,17 @@ public class PreviewConvertContext {
 						ConvertPosition position = converter
 								.getChildVisualPosition(child);
 						if (position != null) {
+							/* FIX for bug #179403
 							// FIXME: not using index here, need fix.
 							position.getParentNode().appendChild(childPreview);
+							*/
+							NodeList childNodes = position.getParentNode().getChildNodes();
+							if (childNodes.getLength() > position.getIndex()) {
+								Node item = childNodes.item(position.getIndex());
+								position.getParentNode().insertBefore(childPreview, item);
+							} else {
+								position.getParentNode().appendChild(childPreview);
+							}
 						}
 					}
 				}
