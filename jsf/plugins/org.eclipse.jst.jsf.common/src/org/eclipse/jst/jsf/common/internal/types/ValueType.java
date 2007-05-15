@@ -34,6 +34,8 @@ public class ValueType implements SignatureBasedType, IAssignable
     private final String[]      _superTypes;
     private final String[]      _interfaceTypes;
     
+    private final boolean       _isEnumType;
+    
     private String[]            _allTypes;  // lazy creation on getAllTypes
 
     /**
@@ -44,12 +46,14 @@ public class ValueType implements SignatureBasedType, IAssignable
      * @param typeArgs generic type arguments for signature or empty if none
      * @param superTypes 
      * @param interfaceTypes 
+     * @param isEnumType 
      * @param assignmentMask 
      */
     public ValueType(final String signature,
                      final String[] typeArgs,
                      final String[] superTypes,
                      final String[] interfaceTypes,
+                     final boolean  isEnumType,
                      final int assignmentMask) 
     {
         if (signature == null)
@@ -62,11 +66,12 @@ public class ValueType implements SignatureBasedType, IAssignable
         _assignmentMask = assignmentMask;
         _superTypes = superTypes != null ? superTypes : EMPTY_STRING_ARRAY;
         _interfaceTypes = interfaceTypes != null ? interfaceTypes : EMPTY_STRING_ARRAY;
+        _isEnumType = isEnumType;
     }
     
     /**
      * Copy constructor equivilent to 
-     * ValueType(template.getSignature(), template.getSuperTypes(), template.getInterfaceTypes(),assingmentMask)
+     * ValueType(template.getSignature(), template.getSuperTypes(), template.getInterfaceTypes(),assingmentMask, template._isEnumType)
      * 
      * @param template
      * @param assignmentMask
@@ -74,20 +79,20 @@ public class ValueType implements SignatureBasedType, IAssignable
     public ValueType(final ValueType  template, final int assignmentMask)
     {
         this(template._signature, template._typeArgs, template._superTypes, 
-                template._interfaceTypes, assignmentMask);
+                template._interfaceTypes, template._isEnumType, assignmentMask);
     }
     
     /**
      * Convienence constructor for creating ValueType's with no supertype, type argument
      * or interface info.  Equivilent to:
-     *  ValueType(signature, new String[0], new String[0], new String[0], assignmentMask)
+     *  ValueType(signature, new String[0], new String[0], new String[0], false, assignmentMask)
      *  
      * @param signature
      * @param assignmentMask
      */
     public ValueType(final String signature, final int assignmentMask)
     {
-        this(signature, EMPTY_STRING_ARRAY, EMPTY_STRING_ARRAY, EMPTY_STRING_ARRAY, assignmentMask);
+        this(signature, EMPTY_STRING_ARRAY, EMPTY_STRING_ARRAY, EMPTY_STRING_ARRAY, false, assignmentMask);
     }
     
     /* (non-Javadoc)
@@ -222,5 +227,12 @@ public class ValueType implements SignatureBasedType, IAssignable
     public boolean isArray()
     {
         return Signature.getArrayCount(getSignature()) > 0;
+    }
+
+    /**
+     * @return true if the value type represents a (>=Java5) enum type
+     */
+    public boolean isEnumType() {
+        return _isEnumType;
     }
 }

@@ -107,4 +107,8 @@ public class TypeConstants
      * Type signature for the JSTL ResultSet type
      */
     public static final String TYPE_JAVAX_SERVLET_JSP_JSTL_SQL_RESULT = "Ljavax.servlet.jsp.jstl.sql.Result;"; //$NON-NLS-1$
+    /**
+     * Type signature of the base type of all enum types
+     */
+    public static final String TYPE_ENUM_BASE = "Ljava.lang.Enum;";  // $NON-NLS-1$
 }

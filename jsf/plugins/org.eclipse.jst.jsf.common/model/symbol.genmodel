@@ -50,6 +50,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference symbol.ecore#//ITypeDescriptor/methods"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute symbol.ecore#//ITypeDescriptor/typeParameterSignatures"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute symbol.ecore#//ITypeDescriptor/jdtContext"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute symbol.ecore#//ITypeDescriptor/enumType"/>
       <genOperations ecoreOperation="symbol.ecore#//ITypeDescriptor/instanceOf">
         <genParameters ecoreParameter="symbol.ecore#//ITypeDescriptor/instanceOf/typeSignature"/>
       </genOperations>
@@ -57,6 +58,11 @@
       <genOperations ecoreOperation="symbol.ecore#//ITypeDescriptor/getArrayElement"/>
       <genOperations ecoreOperation="symbol.ecore#//ITypeDescriptor/resolveType">
         <genParameters ecoreParameter="symbol.ecore#//ITypeDescriptor/resolveType/resolvedTypeSignature"/>
+      </genOperations>
+      <genOperations ecoreOperation="symbol.ecore#//ITypeDescriptor/calculateSyntheticCall">
+        <genParameters ecoreParameter="symbol.ecore#//ITypeDescriptor/calculateSyntheticCall/methodName"/>
+        <genParameters ecoreParameter="symbol.ecore#//ITypeDescriptor/calculateSyntheticCall/methodArgs"/>
+        <genParameters ecoreParameter="symbol.ecore#//ITypeDescriptor/calculateSyntheticCall/symbolName"/>
       </genOperations>
     </genClasses>
     <genClasses image="false" ecoreClass="symbol.ecore#//IDescribedInDetail"/>

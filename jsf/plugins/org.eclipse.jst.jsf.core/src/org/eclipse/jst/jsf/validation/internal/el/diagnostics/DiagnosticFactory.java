@@ -142,6 +142,20 @@ public final class DiagnosticFactory
     public final static int POSSIBLE_ARRAY_INDEX_OUT_OF_BOUNDS_ID = 26;
     
     /**
+     * Identifies the problem where an expr like bean.enumProp == 'blah'
+     * but 'blah' does not match any of the possible enum constants, meaning
+     * that the operation will always resolve to a constant value (in this case false)
+     */
+    public final static int BINARY_COMPARISON_WITH_ENUM_ALWAYS_SAME_ID = 27;
+    
+    /**
+     * Identifies a problem where two enum variables are compared but the enums are
+     * not compatible.  i.e. bean.enum1 < bean.enum2.  Enum.compareTo() may throw
+     * an exception in this case (CCE).
+     */
+    public final static int BINARY_OP_COMPARISON_OF_ENUMS_INCOMPATIBLE_ID = 28;
+    
+    /**
      * @param operatorName
      * @return a configured diagnostic
      */
@@ -272,7 +286,7 @@ public final class DiagnosticFactory
             DIAGNOSTIC_COULD_NOT_COERCE_LITERALS = 
                 new BasicDiagnostic(Diagnostic.ERROR, "",  //$NON-NLS-1$
                     BINARY_OP_COULD_NOT_COERCE_LITERALS_TO_NUMBERS_ID, 
-                    Messages.BINARY_OP_COULD_NOT_COERCE_LITERALS_TO_NUMBERS, null); //$NON-NLS-1$
+                    Messages.BINARY_OP_COULD_NOT_COERCE_LITERALS_TO_NUMBERS, null);
         }
         
         return DIAGNOSTIC_COULD_NOT_COERCE_LITERALS;
@@ -338,7 +352,7 @@ public final class DiagnosticFactory
         return
             new BasicDiagnostic
                 (Diagnostic.WARNING, "", UNARY_OP_STRING_CONVERSION_NOT_GUARANTEED_ID,  //$NON-NLS-1$
-                   message,null); //$NON-NLS-1$ //$NON-NLS-2$
+                   message,null);
     }
     
     /**
@@ -363,7 +377,7 @@ public final class DiagnosticFactory
                     Boolean.valueOf(result), whichSelected);
         return new BasicDiagnostic(Diagnostic.WARNING, "",  //$NON-NLS-1$
                 TERNARY_OP_CHOICE_IS_ALWAYS_SAME_ID, 
-                 message, null); //$NON-NLS-1$
+                 message, null);
     }
     
     /**
@@ -396,7 +410,7 @@ public final class DiagnosticFactory
      */
     public static Diagnostic create_MEMBER_NOT_FOUND(String curMemberSymbol, String owningMember)
     {
-        return new BasicDiagnostic(Diagnostic.WARNING, "",
+        return new BasicDiagnostic(Diagnostic.WARNING, "", //$NON-NLS-1$
                 MEMBER_NOT_FOUND_ID,
                 NLS.bind(Messages.VM_PROP_NAME_NOT_FOUND, curMemberSymbol, owningMember), 
                 null);
@@ -408,7 +422,7 @@ public final class DiagnosticFactory
      */
     public static Diagnostic create_VARIABLE_NOT_FOUND(String variableName)
     {
-        return new BasicDiagnostic(Diagnostic.WARNING, "",
+        return new BasicDiagnostic(Diagnostic.WARNING, "", //$NON-NLS-1$
                 VARIABLE_NOT_FOUND_ID,
                 NLS.bind(Messages.VM_ROOT_NAME_NOT_FOUND, variableName), 
                 null);
@@ -419,7 +433,7 @@ public final class DiagnosticFactory
      */
     public static Diagnostic create_MISSING_CLOSING_EXPR_BRACKET()
     {
-        return new BasicDiagnostic(Diagnostic.ERROR, "",
+        return new BasicDiagnostic(Diagnostic.ERROR, "", //$NON-NLS-1$
                 MISSING_CLOSING_EXPR_BRACKET_ID,
                 Messages.MISSING_CLOSING_EXPR_BRACKET, 
                 null);
@@ -430,7 +444,7 @@ public final class DiagnosticFactory
      */
     public static Diagnostic create_GENERAL_SYNTAX_ERROR()
     {
-        return new BasicDiagnostic(Diagnostic.WARNING, "",
+        return new BasicDiagnostic(Diagnostic.WARNING, "", //$NON-NLS-1$
                 GENERAL_SYNTAX_ERROR_ID,
                 Messages.GENERAL_SYNTAX_ERROR, 
                 null);
@@ -441,7 +455,7 @@ public final class DiagnosticFactory
      */
     public static Diagnostic create_EMPTY_EL_EXPRESSION()
     {
-        return new BasicDiagnostic(Diagnostic.WARNING, "",
+        return new BasicDiagnostic(Diagnostic.WARNING, "", //$NON-NLS-1$
                 EMPTY_EL_EXPRESSION_ID,
                 Messages.EMPTY_EL_EXPRESSION, 
                 null);
@@ -452,7 +466,7 @@ public final class DiagnosticFactory
      */
     public static Diagnostic create_BINARY_OP_DOT_WITH_VALUEB_NULL()
     {
-        return new BasicDiagnostic(Diagnostic.WARNING, "",
+        return new BasicDiagnostic(Diagnostic.WARNING, "", //$NON-NLS-1$
                 BINARY_OP_DOT_WITH_VALUEB_NULL_ID, 
                 Messages.BINARY_OP_DOT_WITH_VALUEB_NULL,
                 null);
@@ -466,7 +480,7 @@ public final class DiagnosticFactory
     public static Diagnostic create_BINARY_OP_DOT_WITH_VALUEA_MAP_SHOULD_USE_ARRAY(final String valAName, final String valueBName)
     {
         final Object[] formatArgs = new Object[] {valAName, valueBName};
-        return new BasicDiagnostic(Diagnostic.WARNING, "",
+        return new BasicDiagnostic(Diagnostic.WARNING, "", //$NON-NLS-1$
                 BINARY_OP_DOT_WITH_DOTTED_KEY_SHOULD_USE_ARRAY_ID,
                 MessageFormat.format(Messages.BINARY_OP_DOT_WITH_DOTTED_KEY_SHOULD_USE_ARRAY,formatArgs), 
                 null);
@@ -480,10 +494,72 @@ public final class DiagnosticFactory
     {
         final Object[] formatArgs = new Object[] {value};
 
-        return new BasicDiagnostic(Diagnostic.WARNING, "",
+        return new BasicDiagnostic(Diagnostic.WARNING, "", //$NON-NLS-1$
                 POSSIBLE_ARRAY_INDEX_OUT_OF_BOUNDS_ID,
                 MessageFormat.format(Messages.POSSIBLE_ARRAY_INDEX_OUT_OF_BOUNDS,formatArgs), 
                 null);
+    }
+    
+    /**
+     * @param operatorName
+     * @param invariantResult
+     * @param enumName
+     * @param fieldName
+     * @return a diagnostic
+     */
+    public static Diagnostic create_BINARY_COMPARISON_WITH_ENUM_AND_CONST_ALWAYS_SAME(final String operatorName, final boolean invariantResult, final String enumName,  final String fieldName)
+    {
+        return new BasicDiagnostic(Diagnostic.WARNING,"" //$NON-NLS-1$
+                , BINARY_COMPARISON_WITH_ENUM_ALWAYS_SAME_ID
+                , MessageFormat.format(Messages.BINARY_COMPARISON_WITH_ENUM_AND_CONST_ALWAYS_SAME
+                                      , new Object[] {operatorName
+                                      , Boolean.valueOf(invariantResult), enumName, fieldName})
+                , null);
+    }
+
+    /**
+     * @param operatorName
+     * @param invariantResult
+     * @param enumName1
+     * @param enumName2
+     * @return a diagnostic
+     */
+    public static Diagnostic create_BINARY_COMPARISON_WITH_TWO_ENUMS_ALWAYS_SAME(final String operatorName, final boolean invariantResult, final String enumName1, final String enumName2)
+    {
+        return new BasicDiagnostic(Diagnostic.WARNING,"" //$NON-NLS-1$
+                , BINARY_COMPARISON_WITH_ENUM_ALWAYS_SAME_ID
+                , MessageFormat.format(Messages.BINARY_COMPARISON_WITH_TWO_ENUMS_ALWAYS_SAME
+                                      , new Object[] {operatorName
+                                      , Boolean.valueOf(invariantResult), enumName1, enumName2})
+                , null);
+    }
+    
+    /**
+     * @param operatorName
+     * @param invariantResult
+     * @param enumName
+     * @param nonEnum
+     * @return a diagnostic
+     */
+    public static Diagnostic create_BINARY_COMPARISON_WITH_ENUM_AND_UNCOERCABLE_NONCONST_ALWAYS_SAME(final String operatorName, final boolean invariantResult, final String enumName, final String nonEnum)
+    {
+        return new BasicDiagnostic(Diagnostic.WARNING,"" //$NON-NLS-1$
+                , BINARY_COMPARISON_WITH_ENUM_ALWAYS_SAME_ID
+                , MessageFormat.format(Messages.BINARY_COMPARISON_WITH_ENUM_AND_UNCOERCABLE_NONCONST_ALWAYS_SAME
+                                      , new Object[] {operatorName
+                                      , Boolean.valueOf(invariantResult), enumName, nonEnum})
+                , null);
+    }
+    
+    /**
+     * @return a diagnostic
+     */
+    public static Diagnostic create_BINARY_OP_COMPARISON_OF_ENUMS_INCOMPATIBLE()
+    {
+        return new BasicDiagnostic(Diagnostic.ERROR,"" //$NON-NLS-1$
+                , BINARY_OP_COMPARISON_OF_ENUMS_INCOMPATIBLE_ID
+                , Messages.BINARY_OP_COMPARISON_OF_ENUMS_INCOMPATIBLE
+                , null);
     }
     
     private DiagnosticFactory()

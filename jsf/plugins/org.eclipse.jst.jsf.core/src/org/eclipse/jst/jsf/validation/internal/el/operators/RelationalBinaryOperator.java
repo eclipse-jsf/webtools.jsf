@@ -21,6 +21,7 @@ import org.eclipse.jst.jsf.common.internal.types.TypeCoercionException;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
 import org.eclipse.jst.jsf.common.internal.types.TypeTransformer;
 import org.eclipse.jst.jsf.common.internal.types.ValueType;
+import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
 
@@ -31,6 +32,12 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
  */
 /*package*/ abstract class RelationalBinaryOperator extends BinaryOperator 
 {
+    private final String        _jsfVersion;
+    
+    RelationalBinaryOperator(final String jsfVersion)
+    {
+        _jsfVersion = jsfVersion;
+    }
     
     /**
      * @param firstArg
@@ -202,5 +209,30 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
         
         // if don't have all literals, just return boolean type
         return Diagnostic.OK_INSTANCE;
+    }
+    
+
+    /**
+     * @return the current JSF version string
+     */
+    protected final String getJsfVersion() {
+        return _jsfVersion;
+    }
+    
+    /**
+     * @return true if the JSF version for this operator is JSF 1.1 or 1.0
+     */
+    protected final boolean isPreJSF12()
+    {
+        return IJSFCoreConstants.JSF_VERSION_1_1.equals(_jsfVersion) 
+                || IJSFCoreConstants.JSF_VERSION_1_0.equals(_jsfVersion);
+    }
+    
+    /**
+     * @return true if the JSF version for this operator is JSF 1.2 or later
+     */
+    protected final boolean isJSF12OrLater()
+    {
+        return !isPreJSF12();
     }
 }

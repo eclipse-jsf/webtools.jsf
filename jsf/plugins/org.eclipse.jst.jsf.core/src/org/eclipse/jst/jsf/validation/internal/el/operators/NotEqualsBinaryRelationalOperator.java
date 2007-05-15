@@ -20,6 +20,11 @@ package org.eclipse.jst.jsf.validation.internal.el.operators;
 /*package*/ class NotEqualsBinaryRelationalOperator extends
         EqualityRelationalBinaryOperator {
 
+    NotEqualsBinaryRelationalOperator(String jsfVersion) 
+    {
+        super(jsfVersion);
+    }
+
     protected boolean doRealOperation(Number firstArg, Number secondArg) {
         return !firstArg.equals(secondArg);
     }
@@ -34,6 +39,6 @@ package org.eclipse.jst.jsf.validation.internal.el.operators;
 
     protected String getOperationName() 
     {
-        return "not equals";
+        return Messages.getString("NotEqualsBinaryRelationalOperator.OperationName"); //$NON-NLS-1$
     }
 }

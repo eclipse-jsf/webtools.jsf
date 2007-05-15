@@ -19,6 +19,7 @@ import org.eclipse.jst.jsf.context.symbol.ISymbol;
 
 /**
  * A value type adapter class for IObjectSymbol's
+ * 
  * @author cbateman
  *
  */
@@ -61,6 +62,7 @@ public class IObjectSymbolBasedValueType extends ValueType
                 (String[])symbol.getTypeDescriptor().getTypeParameterSignatures().toArray(EMPTY_STRING_ARRAY),
                 (String[])symbol.getTypeDescriptor().getSuperTypeSignatures().toArray(EMPTY_STRING_ARRAY),
                 (String[])symbol.getTypeDescriptor().getInterfaceTypeSignatures().toArray(EMPTY_STRING_ARRAY),
+                symbol.getTypeDescriptor().isEnumType(),
                 IAssignable.ASSIGNMENT_TYPE_RHS /* variables are not assignable */
                 , symbol);
     }
@@ -76,6 +78,7 @@ public class IObjectSymbolBasedValueType extends ValueType
                 (String[])symbol.getTypeDescriptor().getTypeParameterSignatures().toArray(EMPTY_STRING_ARRAY),
                 (String[])symbol.getTypeDescriptor().getSuperTypeSignatures().toArray(EMPTY_STRING_ARRAY),
                 (String[])symbol.getTypeDescriptor().getInterfaceTypeSignatures().toArray(EMPTY_STRING_ARRAY),
+                symbol.getTypeDescriptor().isEnumType(),
                     ASSIGNMENT_TYPE_NONE | (symbol.isReadable()?IAssignable.ASSIGNMENT_TYPE_RHS:ASSIGNMENT_TYPE_NONE)|(symbol.isWritable()?IAssignable.ASSIGNMENT_TYPE_LHS:ASSIGNMENT_TYPE_NONE)
         , symbol);
     }
@@ -84,10 +87,11 @@ public class IObjectSymbolBasedValueType extends ValueType
                      final String[] typeArgs,
                      final String[] superTypes,
                      final String[] interfaceTypes,
+                     final boolean isEnumType,
                      final int assignmentMask,
                      final IObjectSymbol symbol)
     {
-        super(signature, typeArgs, superTypes, interfaceTypes, assignmentMask);
+        super(signature, typeArgs, superTypes, interfaceTypes, isEnumType, assignmentMask);
         _symbol = symbol;
     }
     

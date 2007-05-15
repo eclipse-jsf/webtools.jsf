@@ -58,13 +58,13 @@ public class JSFAppConfigUtils {
 	/**
 	 * Name of JSF CONFIG_FILES context parameter ("javax.faces.CONFIG_FILES").
 	 */
-	public static final String CONFIG_FILES_CONTEXT_PARAM_NAME = "javax.faces.CONFIG_FILES";
+	public static final String CONFIG_FILES_CONTEXT_PARAM_NAME = "javax.faces.CONFIG_FILES"; //$NON-NLS-1$
 
 	/**
 	 * Location in JAR file of application configuration resource file
 	 * ("META-INF/faces-config.xml"). 
 	 */
-	public static final String FACES_CONFIG_IN_JAR_PATH = "META-INF/faces-config.xml";
+	public static final String FACES_CONFIG_IN_JAR_PATH = "META-INF/faces-config.xml"; //$NON-NLS-1$
 
     
     /**
@@ -97,7 +97,7 @@ public class JSFAppConfigUtils {
             }
             catch (CoreException ce)
             {
-                JSFCorePlugin.log(ce, "Error checking facet version");
+                JSFCorePlugin.log(ce, "Error checking facet version"); //$NON-NLS-1$
             }
         }
         return isValid;
@@ -125,7 +125,13 @@ public class JSFAppConfigUtils {
 		return isValid;
 	}
 
-    private static IProjectFacetVersion getProjectFacet(IProject project)
+    /**
+     * Get the facet version for the project 
+     * @param project
+     * @return the project facet version or null if could not be found or if
+     * project is not accessible
+     */
+    public static IProjectFacetVersion getProjectFacet(IProject project)
     {
         //check for null or inaccessible project
         if (project != null && project.isAccessible()) {
@@ -242,7 +248,7 @@ public class JSFAppConfigUtils {
 							}
 						}
 						if (filesString != null && filesString.trim().length() > 0) {
-							StringTokenizer stFilesString = new StringTokenizer(filesString, ",");
+							StringTokenizer stFilesString = new StringTokenizer(filesString, ","); //$NON-NLS-1$
 							while (stFilesString.hasMoreTokens()) {
 								String configFile = stFilesString.nextToken().trim();
 								filesList.add(configFile);

@@ -17,6 +17,7 @@ import org.eclipse.osgi.util.NLS;
 class Messages extends NLS {
     private static final String BUNDLE_NAME = "org.eclipse.jst.jsf.validation.internal.el.diagnostics.messages"; //$NON-NLS-1$
 
+
     static {
         NLS.initializeMessages(BUNDLE_NAME, Messages.class);
     }
@@ -130,7 +131,24 @@ class Messages extends NLS {
      * see messages.properties
      */
     public static String POSSIBLE_ARRAY_INDEX_OUT_OF_BOUNDS;
-    
+    /**
+     * see messages.properties
+     */
+    public static String BINARY_COMPARISON_WITH_ENUM_AND_CONST_ALWAYS_SAME;
+    /**
+     * see messages.properties
+     */
+    public static String BINARY_COMPARISON_WITH_TWO_ENUMS_ALWAYS_SAME;
+    /**
+     * see messages.properties
+     */
+    public static String BINARY_OP_COMPARISON_OF_ENUMS_INCOMPATIBLE;
+
+    /**
+     * see messages.properties
+     */
+    public static String BINARY_COMPARISON_WITH_ENUM_AND_UNCOERCABLE_NONCONST_ALWAYS_SAME;
+
     private Messages() {
         // do nothing; no external instantiation
     }

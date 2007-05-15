@@ -117,6 +117,26 @@ public abstract class ITypeDescriptorImpl extends EObjectImpl implements ITypeDe
     protected IJavaElement jdtContext = JDT_CONTEXT_EDEFAULT;
 
     /**
+     * The default value of the '{@link #isEnumType() <em>Enum Type</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #isEnumType()
+     * @generated
+     * @ordered
+     */
+    protected static final boolean ENUM_TYPE_EDEFAULT = false;
+
+    /**
+     * The cached value of the '{@link #isEnumType() <em>Enum Type</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #isEnumType()
+     * @generated
+     * @ordered
+     */
+    protected boolean enumType = ENUM_TYPE_EDEFAULT;
+
+    /**
      * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
      * @generated
@@ -231,6 +251,27 @@ public abstract class ITypeDescriptorImpl extends EObjectImpl implements ITypeDe
         jdtContext = newJdtContext;
         if (eNotificationRequired())
             eNotify(new ENotificationImpl(this, Notification.SET, SymbolPackage.ITYPE_DESCRIPTOR__JDT_CONTEXT, oldJdtContext, jdtContext));
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public boolean isEnumType() {
+        return enumType;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void setEnumType(boolean newEnumType) {
+        boolean oldEnumType = enumType;
+        enumType = newEnumType;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, SymbolPackage.ITYPE_DESCRIPTOR__ENUM_TYPE, oldEnumType, enumType));
     }
 
     /**

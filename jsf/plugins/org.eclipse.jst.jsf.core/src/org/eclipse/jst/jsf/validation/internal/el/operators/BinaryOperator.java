@@ -12,11 +12,16 @@
 
 package org.eclipse.jst.jsf.validation.internal.el.operators;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.jst.jsf.common.internal.types.ValueType;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.IWorkspaceContextResolver;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
+import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigUtils;
 import org.eclipse.jst.jsp.core.internal.java.jspel.JSPELParserConstants;
 import org.eclipse.jst.jsp.core.internal.java.jspel.Token;
+import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
 
 /**
  * Represents an abstract EL binary operator that always
@@ -38,8 +43,9 @@ public abstract class BinaryOperator
     {
         if (context == null)
         {
-            throw new IllegalArgumentException("Context must not be null");
+            throw new IllegalArgumentException("Context must not be null"); //$NON-NLS-1$
         }
+        final String facetVersion = determineJSFVersion(context);
         
         switch (operatorToken.kind)
         {
@@ -53,27 +59,27 @@ public abstract class BinaryOperator
                 
             case JSPELParserConstants.EQ1:
             case JSPELParserConstants.EQ2:
-                return new EqualsBinaryRelationalOperator();
+                return new EqualsBinaryRelationalOperator(facetVersion);
                 
             case JSPELParserConstants.NEQ1:
             case JSPELParserConstants.NEQ2:
-                return new NotEqualsBinaryRelationalOperator();
+                return new NotEqualsBinaryRelationalOperator(facetVersion);
                 
             case JSPELParserConstants.GT1:
             case JSPELParserConstants.GT2:
-                return new GreaterThanRelationalBinaryOperator();
+                return new GreaterThanRelationalBinaryOperator(facetVersion);
                 
             case JSPELParserConstants.GE1:
             case JSPELParserConstants.GE2:
-                return new GreaterThanEqRelationalBinaryOperator();
+                return new GreaterThanEqRelationalBinaryOperator(facetVersion);
                 
             case JSPELParserConstants.LT1:
             case JSPELParserConstants.LT2:
-                return new LessThanRelationalBinaryOperator();
+                return new LessThanRelationalBinaryOperator(facetVersion);
                 
             case JSPELParserConstants.LE1:
             case JSPELParserConstants.LE2:
-                return new LessThanEqRelationalBinaryOperator();
+                return new LessThanEqRelationalBinaryOperator(facetVersion);
                 
             case JSPELParserConstants.PLUS:
                 return new AddArithmeticBinaryOperator();
@@ -93,7 +99,7 @@ public abstract class BinaryOperator
                 return new ModArithmeticBinaryOperator();
         }
         
-        throw new IllegalArgumentException("Unknown binary operator: "+operatorToken.image);
+        throw new IllegalArgumentException("Unknown binary operator: "+operatorToken.image); //$NON-NLS-1$
     }
     
     /**
@@ -125,4 +131,22 @@ public abstract class BinaryOperator
      * operation on the two arguments
      */
     public abstract Diagnostic validate(ValueType firstArg, ValueType secondArg);
+    
+    private static String determineJSFVersion(IStructuredDocumentContext context)
+    {
+        final IWorkspaceContextResolver wkResolver = 
+            IStructuredDocumentContextResolverFactory.
+                INSTANCE.getWorkspaceContextResolver(context);
+        
+        IProject project = wkResolver.getProject();
+        
+        IProjectFacetVersion  projectVersion = JSFAppConfigUtils.getProjectFacet(project);
+        
+        if (projectVersion != null)
+        {
+            return projectVersion.getVersionString();
+        }
+        
+        return null;
+    }
 }

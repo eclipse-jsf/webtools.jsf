@@ -13,11 +13,6 @@
 package org.eclipse.jst.jsf.context.symbol;
 
 
-
-
-
-
-
 /** 
  * Tags a symbol that has a detailed, user-readable description
  * @author cbateman

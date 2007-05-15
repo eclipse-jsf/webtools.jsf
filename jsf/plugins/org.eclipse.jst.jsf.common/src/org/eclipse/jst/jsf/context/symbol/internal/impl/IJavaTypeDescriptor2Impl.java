@@ -339,11 +339,19 @@ public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJa
         // first, see if we have an IType
         if (getType() != null)
         {
-            project = getType().getJavaProject();
-            
-            if (project != null)
+            // optimize: if the type sig is my type sig, then return getType()
+            if (resolvedTypeSignature.equals(getTypeSignature()))
             {
-                resolvedType =  TypeUtil.resolveType(project, resolvedTypeSignature);
+                resolvedType = getType();
+            }
+            else
+            {
+                project = getType().getJavaProject();
+                
+                if (project != null)
+                {
+                    resolvedType =  TypeUtil.resolveType(project, resolvedTypeSignature);
+                }
             }
         }        
         
@@ -556,6 +564,7 @@ public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJa
                             
             workingCopyDesc.setArrayCount(property.getArrayCount());
             workingCopyDesc.getTypeParameterSignatures().addAll(property.getTypeParameterSignatures());
+            workingCopyDesc.setEnumType(property.isEnumType());
            
             final IType newType = property.getType();
             final String signature = property.getTypeSignature();

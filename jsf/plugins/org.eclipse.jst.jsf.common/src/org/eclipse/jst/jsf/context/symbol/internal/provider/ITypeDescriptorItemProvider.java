@@ -271,6 +271,28 @@ public class ITypeDescriptorItemProvider
     }
 
     /**
+     * This adds a property descriptor for the Enum Type feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected void addEnumTypePropertyDescriptor(Object object) {
+        itemPropertyDescriptors.add
+            (createItemPropertyDescriptor
+                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+                 getResourceLocator(),
+                 getString("_UI_ITypeDescriptor_enumType_feature"),
+                 getString("_UI_PropertyDescriptor_description", "_UI_ITypeDescriptor_enumType_feature", "_UI_ITypeDescriptor_type"),
+                 SymbolPackage.Literals.ITYPE_DESCRIPTOR__ENUM_TYPE,
+                 true,
+                 false,
+                 false,
+                 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+                 null,
+                 null));
+    }
+
+    /**
 	 * This returns ITypeDescriptor.gif.
 	 * <!-- begin-user-doc -->
      * @param object 

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.jdt.core.IField;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.ITypeHierarchy;
@@ -398,5 +399,144 @@ public final class TypeUtil
         }
         
         return null;
+    }
+    
+    /**
+     * @param type
+     * @param fieldName
+     * @return true if fieldName is a member of type.  Note that if type is java.lang.Enum
+     * then this will always return true since we cannot know what fields the instance has (it could be any enum)
+     */
+    public static boolean isEnumMember(final IType type, final String fieldName)
+    {
+        try
+        {
+            if (type == null || !isEnumType(type))
+            {
+                throw new IllegalArgumentException("type must be non-null and isEnum()==true");
+            }
+            
+            if (fieldName == null)
+            {
+                throw new IllegalArgumentException("fieldName must be non-null");
+            }
+
+            // if type is the java.lang.Enum, always true
+            if (TypeConstants.TYPE_ENUM_BASE.equals(Signature.createTypeSignature(type.getFullyQualifiedName(), true)))
+            {
+                return true;
+            }
+            
+            final IField field = type.getField(fieldName);
+
+            if (field.exists() && field.isEnumConstant())
+            {
+                return true;
+            }
+        }
+        catch (JavaModelException jme)
+        {
+            // fall through and return false
+        }
+        
+        return false;
+    }
+    
+    /**
+     * @param typeSig1 the type signature of the first enum. Must be non-null, fully resolved enum type.
+     * @param typeSig2 the type signature of the second enum.  Must be non-null, fully resolved enum type.
+     * 
+     * @return true if typeSig1.compareTo(typeSig2) is a legal operation (won't throw a CCE)
+     */
+    public static boolean isEnumsCompareCompatible(final String typeSig1, final String typeSig2)
+    {
+        if (typeSig1 == null || typeSig2 == null)
+        {
+            throw new IllegalArgumentException("args must not be null");
+        }
+        
+        if (Signature.getTypeSignatureKind(typeSig1) != Signature.CLASS_TYPE_SIGNATURE
+             || Signature.getTypeSignatureKind(typeSig2) != Signature.CLASS_TYPE_SIGNATURE)
+        {
+            throw new IllegalArgumentException("args must be resolved class types");
+        }
+        
+        // if one or the other is the raw enum type, then they *may* be comparable; we don't know
+        if (TypeConstants.TYPE_ENUM_BASE.equals(typeSig1) 
+                || TypeConstants.TYPE_ENUM_BASE.equals(typeSig2))
+        {
+            return true;
+        }
+        
+        // TODO: support the case of enum base type with generic type argument
+        
+        // only comparable if is the same class
+        return typeSig1.equals(typeSig2);
+    }
+    
+    /**
+     * @param typeSig1 the type signature of the first enum. Must be non-null, fully resolved enum type.
+     * @param typeSig2 the type signature of the second enum. Must be non-null, fully resolved enum type.
+     * @return true if instances typeSig1 and typeSig2 can never be equal due
+     * their being definitively different enum types
+     */
+    public static boolean canNeverBeEqual(final String typeSig1, final String typeSig2)
+    {
+        if (typeSig1 == null || typeSig2 == null)
+        {
+            throw new IllegalArgumentException("args must not be null");
+        }
+        
+        if (Signature.getTypeSignatureKind(typeSig1) != Signature.CLASS_TYPE_SIGNATURE
+             || Signature.getTypeSignatureKind(typeSig2) != Signature.CLASS_TYPE_SIGNATURE)
+        {
+            throw new IllegalArgumentException("args must be resolved class types");
+        }
+
+        // if either one is the base enum type, then we can't be sure
+        if (TypeConstants.TYPE_ENUM_BASE.equals(typeSig1) 
+                || TypeConstants.TYPE_ENUM_BASE.equals(typeSig2))
+        {
+            return false;
+        }
+
+        // if they are definitely not the same enum types, then their values
+        // can never be equal
+        return !typeSig1.equals(typeSig2);
+    }
+    
+
+    /**
+     * NOTE: we diverge from IType.isEnum() because we also return true if the base type
+     * is a java.lang.Enum since we consider this to be "any enumeration type" whereas JDT considers
+     * it merely a class since it doesn't use an "enum" keyword declaration.
+     * @param type
+     * @return true if type is an enum type or is java.lang.Enum
+     */
+    static boolean isEnumType(IType type)
+    {
+        if (type == null)
+        {
+            return false;
+        }
+        
+        // check if it's the enumeration base type
+        if (TypeConstants.TYPE_ENUM_BASE.equals(Signature.createTypeSignature(type.getFullyQualifiedName(), true)))
+        {
+            return true;
+        }
+    
+        try
+        {
+            return type.isEnum();
+        }
+        catch (JavaModelException jme)
+        {
+            // log and fallthrough to return false
+            JSFCommonPlugin.log(jme, "Problem resolving isEnum");
+        }
+        
+        // if unresolved assume false
+        return false;
     }
 }

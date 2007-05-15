@@ -20,6 +20,11 @@ package org.eclipse.jst.jsf.validation.internal.el.operators;
 /*package*/ class GreaterThanRelationalBinaryOperator extends
         LtGtRelationalBinaryOperator {
 
+    GreaterThanRelationalBinaryOperator(String jsfVersion) 
+    {
+        super(jsfVersion);
+    }
+
     protected boolean doRealOperation(Number firstArg, Number secondArg) 
     {
         return ((Comparable)firstArg).compareTo(secondArg) > 0;
@@ -32,6 +37,6 @@ package org.eclipse.jst.jsf.validation.internal.el.operators;
 
     protected String getOperationName() 
     {
-        return "greater than";
+        return Messages.getString("GreaterThanRelationalBinaryOperator.OperationName"); //$NON-NLS-1$
     }
 }

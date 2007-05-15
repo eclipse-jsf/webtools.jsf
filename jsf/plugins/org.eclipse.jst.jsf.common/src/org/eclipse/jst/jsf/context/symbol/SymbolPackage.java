@@ -1,8 +1,7 @@
 /**
- * <copyright>
- * </copyright>
+ * Copyright 2006 Oracle
  *
- * $Id: SymbolPackage.java,v 1.6 2007/05/07 17:30:19 cbateman Exp $
+ * $Id: SymbolPackage.java,v 1.7 2007/05/15 22:00:28 cbateman Exp $
  */
 package org.eclipse.jst.jsf.context.symbol;
 
@@ -34,7 +33,7 @@ public interface SymbolPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
+    String copyright = "Copyright 2006 Oracle";
 
     /**
      * The package name.
@@ -42,7 +41,7 @@ public interface SymbolPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    String eNAME = "symbol"; //$NON-NLS-1$
+    String eNAME = "symbol";
 
     /**
      * The package namespace URI.
@@ -50,7 +49,7 @@ public interface SymbolPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    String eNS_URI = "http:///org/eclipse/jst/jsf/context/symbol.ecore"; //$NON-NLS-1$
+    String eNS_URI = "http:///org/eclipse/jst/jsf/context/symbol.ecore";
 
     /**
      * The package namespace name.
@@ -58,7 +57,7 @@ public interface SymbolPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    String eNS_PREFIX = "org.eclipse.jst.jsf.context.symbol"; //$NON-NLS-1$
+    String eNS_PREFIX = "org.eclipse.jst.jsf.context.symbol";
 
     /**
      * The singleton instance of the package.
@@ -572,13 +571,22 @@ public interface SymbolPackage extends EPackage {
     int ITYPE_DESCRIPTOR__JDT_CONTEXT = 7;
 
     /**
+     * The feature id for the '<em><b>Enum Type</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int ITYPE_DESCRIPTOR__ENUM_TYPE = 8;
+
+    /**
      * The number of structural features of the '<em>IType Descriptor</em>' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int ITYPE_DESCRIPTOR_FEATURE_COUNT = 8;
+    int ITYPE_DESCRIPTOR_FEATURE_COUNT = 9;
 
     /**
      * The meta object id for the '{@link org.eclipse.jst.jsf.context.symbol.IDescribedInDetail <em>IDescribed In Detail</em>}' class.
@@ -680,6 +688,15 @@ public interface SymbolPackage extends EPackage {
      * @ordered
      */
     int IJAVA_TYPE_DESCRIPTOR2__JDT_CONTEXT = ITYPE_DESCRIPTOR__JDT_CONTEXT;
+
+    /**
+     * The feature id for the '<em><b>Enum Type</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int IJAVA_TYPE_DESCRIPTOR2__ENUM_TYPE = ITYPE_DESCRIPTOR__ENUM_TYPE;
 
     /**
      * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -928,6 +945,15 @@ public interface SymbolPackage extends EPackage {
     int IMAP_TYPE_DESCRIPTOR__JDT_CONTEXT = ITYPE_DESCRIPTOR__JDT_CONTEXT;
 
     /**
+     * The feature id for the '<em><b>Enum Type</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int IMAP_TYPE_DESCRIPTOR__ENUM_TYPE = ITYPE_DESCRIPTOR__ENUM_TYPE;
+
+    /**
      * The feature id for the '<em><b>Map Source</b></em>' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1074,6 +1100,15 @@ public interface SymbolPackage extends EPackage {
     int IBOUNDED_TYPE_DESCRIPTOR__JDT_CONTEXT = ITYPE_DESCRIPTOR__JDT_CONTEXT;
 
     /**
+     * The feature id for the '<em><b>Enum Type</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int IBOUNDED_TYPE_DESCRIPTOR__ENUM_TYPE = ITYPE_DESCRIPTOR__ENUM_TYPE;
+
+    /**
      * The number of structural features of the '<em>IBounded Type Descriptor</em>' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1163,6 +1198,15 @@ public interface SymbolPackage extends EPackage {
      * @ordered
      */
     int IBOUNDED_MAP_TYPE_DESCRIPTOR__JDT_CONTEXT = IMAP_TYPE_DESCRIPTOR__JDT_CONTEXT;
+
+    /**
+     * The feature id for the '<em><b>Enum Type</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int IBOUNDED_MAP_TYPE_DESCRIPTOR__ENUM_TYPE = IMAP_TYPE_DESCRIPTOR__ENUM_TYPE;
 
     /**
      * The feature id for the '<em><b>Map Source</b></em>' attribute.
@@ -1272,6 +1316,15 @@ public interface SymbolPackage extends EPackage {
      * @ordered
      */
     int IBOUNDED_JAVA_TYPE_DESCRIPTOR__JDT_CONTEXT = IJAVA_TYPE_DESCRIPTOR2__JDT_CONTEXT;
+
+    /**
+     * The feature id for the '<em><b>Enum Type</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int IBOUNDED_JAVA_TYPE_DESCRIPTOR__ENUM_TYPE = IJAVA_TYPE_DESCRIPTOR2__ENUM_TYPE;
 
     /**
      * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -1401,6 +1454,15 @@ public interface SymbolPackage extends EPackage {
     int ILIST_TYPE_DESCRIPTOR__JDT_CONTEXT = ITYPE_DESCRIPTOR__JDT_CONTEXT;
 
     /**
+     * The feature id for the '<em><b>Enum Type</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int ILIST_TYPE_DESCRIPTOR__ENUM_TYPE = ITYPE_DESCRIPTOR__ENUM_TYPE;
+
+    /**
      * The feature id for the '<em><b>List Source</b></em>' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1499,6 +1561,15 @@ public interface SymbolPackage extends EPackage {
      * @ordered
      */
     int IBOUNDED_LIST_TYPE_DESCRIPTOR__JDT_CONTEXT = ILIST_TYPE_DESCRIPTOR__JDT_CONTEXT;
+
+    /**
+     * The feature id for the '<em><b>Enum Type</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int IBOUNDED_LIST_TYPE_DESCRIPTOR__ENUM_TYPE = ILIST_TYPE_DESCRIPTOR__ENUM_TYPE;
 
     /**
      * The feature id for the '<em><b>List Source</b></em>' attribute.
@@ -1783,6 +1854,17 @@ public interface SymbolPackage extends EPackage {
      * @generated
      */
     EAttribute getITypeDescriptor_JdtContext();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.jst.jsf.context.symbol.ITypeDescriptor#isEnumType <em>Enum Type</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Enum Type</em>'.
+     * @see org.eclipse.jst.jsf.context.symbol.ITypeDescriptor#isEnumType()
+     * @see #getITypeDescriptor()
+     * @generated
+     */
+    EAttribute getITypeDescriptor_EnumType();
 
     /**
      * Returns the meta object for class '{@link org.eclipse.jst.jsf.context.symbol.IDescribedInDetail <em>IDescribed In Detail</em>}'.
@@ -2301,6 +2383,14 @@ public interface SymbolPackage extends EPackage {
          * @generated
          */
         EAttribute ITYPE_DESCRIPTOR__JDT_CONTEXT = eINSTANCE.getITypeDescriptor_JdtContext();
+
+        /**
+         * The meta object literal for the '<em><b>Enum Type</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute ITYPE_DESCRIPTOR__ENUM_TYPE = eINSTANCE.getITypeDescriptor_EnumType();
 
         /**
          * The meta object literal for the '{@link org.eclipse.jst.jsf.context.symbol.IDescribedInDetail <em>IDescribed In Detail</em>}' class.

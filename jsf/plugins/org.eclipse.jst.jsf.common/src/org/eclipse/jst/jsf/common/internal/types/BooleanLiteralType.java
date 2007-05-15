@@ -33,6 +33,16 @@ public class BooleanLiteralType extends LiteralType
     
     private final boolean       _literalValue;
     
+    
+    /**
+     * @param value
+     * @return a constant boolean literal type corresponding to value
+     */
+    public static BooleanLiteralType valueOf(boolean value)
+    {
+        return value ? TRUE : FALSE;
+    }
+    
     /**
      * @param literalValue
      */

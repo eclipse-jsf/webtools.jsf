@@ -122,6 +122,14 @@ public class JDTBeanProperty
         return Signature.getArrayCount(getTypeSignature());
     }
     
+    /**
+     * @return true if property is an enum type, false otherwise or if cannot be resolved
+     */
+    public boolean isEnumType()
+    {
+        return TypeUtil.isEnumType(getType());
+    }
+    
 	/**
 	 * Fully equivalent to:
 	 * 

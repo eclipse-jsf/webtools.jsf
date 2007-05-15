@@ -181,6 +181,32 @@ public interface ITypeDescriptor extends EObject {
     void setJdtContext(IJavaElement value);
 
     /**
+     * Returns the value of the '<em><b>Enum Type</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <p>
+     * If the meaning of the '<em>Enum Type</em>' attribute isn't clear,
+     * there really should be more of a description here...
+     * </p>
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Enum Type</em>' attribute.
+     * @see #setEnumType(boolean)
+     * @see org.eclipse.jst.jsf.context.symbol.SymbolPackage#getITypeDescriptor_EnumType()
+     * @model
+     * @generated
+     */
+    boolean isEnumType();
+
+    /**
+     * Sets the value of the '{@link org.eclipse.jst.jsf.context.symbol.ITypeDescriptor#isEnumType <em>Enum Type</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Enum Type</em>' attribute.
+     * @see #isEnumType()
+     * @generated
+     */
+    void setEnumType(boolean value);
+
+    /**
      * <!-- begin-user-doc -->
      * @param typeSignature 
      * @return true if the type descriptor's underlying type would resolve true == (type instanceof typeSignature)
@@ -212,6 +238,8 @@ public interface ITypeDescriptor extends EObject {
 
     /**
      * <!-- begin-user-doc -->
+     * @param resolvedTypeSignature 
+     * @return the IType for resolvedTypeSignature or null if  can't be resolved 
      * <!-- end-user-doc -->
      * @model dataType="org.eclipse.jst.jsf.context.symbol.IType"
      * @generated

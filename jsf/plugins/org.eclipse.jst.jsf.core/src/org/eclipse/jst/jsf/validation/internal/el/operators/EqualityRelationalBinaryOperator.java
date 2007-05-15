@@ -16,14 +16,18 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.jdt.core.IType;
 import org.eclipse.jst.jsf.common.internal.types.BooleanLiteralType;
 import org.eclipse.jst.jsf.common.internal.types.IAssignable;
 import org.eclipse.jst.jsf.common.internal.types.LiteralType;
+import org.eclipse.jst.jsf.common.internal.types.StringLiteralType;
 import org.eclipse.jst.jsf.common.internal.types.TypeCoercer;
 import org.eclipse.jst.jsf.common.internal.types.TypeCoercionException;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
 import org.eclipse.jst.jsf.common.internal.types.TypeTransformer;
 import org.eclipse.jst.jsf.common.internal.types.ValueType;
+import org.eclipse.jst.jsf.common.util.TypeUtil;
+import org.eclipse.jst.jsf.context.symbol.internal.util.IObjectSymbolBasedValueType;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
 /**
@@ -34,6 +38,11 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
  */
 /*package*/ abstract class EqualityRelationalBinaryOperator extends RelationalBinaryOperator 
 {
+    EqualityRelationalBinaryOperator(String jsfVersion) 
+    {
+        super(jsfVersion);
+    }
+
     /**
      * @param firstArg
      * @param secondArg
@@ -102,6 +111,14 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
             return handleBooleanComparison(firstArg, secondArg);
         }
         
+        // Unified EL 1.8.2, step 8 if either is a enum, then coerce both to enum
+        // NOTE: we handle the JSF 1.1 case also where enums are treated as non-coercable
+        // Object's
+        if (firstArg.isEnumType() || secondArg.isEnumType())
+        {
+            return handleEnumComparison(firstArg, secondArg);
+        }
+        
         // JSP.2.3.5.7, step 8 if either is a string, coerce to string and
         // compare lexically
         if (TypeConstants.TYPE_STRING.equals(boxedFirstType)
@@ -112,6 +129,66 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
         
         // otherwise, an equal compare will be done A.equals(B).  Since 
         return new ValueType(TypeConstants.TYPE_BOOLEAN, IAssignable.ASSIGNMENT_TYPE_RHS);        
+    }
+
+    private ValueType handleEnumComparison(ValueType firstArg,
+            ValueType secondArg) 
+    {
+        assert firstArg.isEnumType() || secondArg.isEnumType();
+        
+        // if the first is not an enum, then we have non-Enum == Enum case
+        if (!firstArg.isEnumType())
+        {
+            return handleComparsionOfEnumAndNonEnum(firstArg, secondArg);
+        }
+        
+        // if the second is not an enum, then we have Enum == non-Enum case
+        if (!secondArg.isEnumType())
+        {
+            return handleComparsionOfEnumAndNonEnum(secondArg, firstArg);
+        }
+        
+        // only other case is they are both enums.  Check if they are directly
+        // comparable.
+        if (TypeUtil.canNeverBeEqual(firstArg.getSignature(), secondArg.getSignature()))
+        {
+            boolean result = doRealOperation("foo", "notFoo");  // just simulate the operation where the operands are not equal //$NON-NLS-1$ //$NON-NLS-2$
+            
+            return BooleanLiteralType.valueOf(result);
+        }
+        
+        // otherwise, all we know is that it's a boolean
+        return new ValueType(TypeConstants.TYPE_BOOLEAN, IAssignable.ASSIGNMENT_TYPE_RHS);
+    }
+
+    private ValueType handleComparsionOfEnumAndNonEnum(ValueType enumType,
+            ValueType nonEnumType) 
+    {
+        // the only literal value that could have got us here is a 
+        // StringLiteralValue since the others a filtered out before this is
+        // called
+        if (nonEnumType instanceof LiteralType)
+        {
+            assert nonEnumType instanceof StringLiteralType;
+            
+            Diagnostic result = validateIfEnumToStringComparison(((StringLiteralType)nonEnumType).getLiteralValue(), enumType);
+            
+            if (result != null)
+            {
+                // compare two things that aren't equal
+                return BooleanLiteralType.valueOf(doRealOperation("foo", "foo_")); //$NON-NLS-1$ //$NON-NLS-2$
+            }
+            return new ValueType(TypeConstants.TYPE_BOOLEAN, IAssignable.ASSIGNMENT_TYPE_RHS);
+        }
+        
+        // if the arg is a String, then we can't prove anything before runtime
+        if (nonEnumType.isInstanceOf(TypeConstants.TYPE_STRING))
+        {
+            return new ValueType(TypeConstants.TYPE_BOOLEAN, IAssignable.ASSIGNMENT_TYPE_RHS);
+        }
+        // otherwise, we know it will result in a problem since one is an enum
+        // and the other isn't so simply do a comparison on two things that aren't equals
+        return BooleanLiteralType.valueOf(doRealOperation("foo", "foo_")); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     public Diagnostic validate(ValueType firstArg, ValueType secondArg) {
@@ -175,6 +252,14 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
             return validateBooleanComparison(firstArg, secondArg);
         }
         
+        // Unified EL 1.8.2, step 8 if either is a enum, then coerce both to enum
+        // NOTE: we handle the JSF 1.1 case also where enums are treated as non-coercable
+        // Object's
+        if (firstArg.isEnumType() || secondArg.isEnumType())
+        {
+            return validateEnumComparison(firstArg, secondArg);
+        }
+        
         // JSP.2.3.5.7, step 8 if either is a string, coerce to string and
         // compare lexically
         if (TypeConstants.TYPE_STRING.equals(boxedFirstType)
@@ -223,7 +308,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
             }
             catch (TypeCoercionException tce)
             {
-                throw new AssertionError("should never get here; have already checked coercability above");
+                throw new AssertionError("should never get here; have already checked coercability above"); //$NON-NLS-1$
             }
         }
         
@@ -239,12 +324,12 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
         if (!canCoerceFirstArg)
         {
-            return DiagnosticFactory.create_BINARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN("first");
+            return DiagnosticFactory.create_BINARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN(Messages.getString("EqualityRelationalBinaryOperator.FirstArgument")); //$NON-NLS-1$
         }
         
         if (!canCoerceSecondArg)
         {
-            return DiagnosticFactory.create_BINARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN("second");
+            return DiagnosticFactory.create_BINARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN(Messages.getString("EqualityRelationalBinaryOperator.SecondArgument")); //$NON-NLS-1$
         }
         
         if (firstType instanceof LiteralType && secondType instanceof LiteralType)
@@ -264,11 +349,190 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
             }
             catch (TypeCoercionException tce)
             {
-                throw new AssertionError("should never get here; have already checked coercability above");
+                throw new AssertionError("should never get here; have already checked coercability above"); //$NON-NLS-1$
             }
         }
         
         // otherwise, we have a valid comparison
         return Diagnostic.OK_INSTANCE;
+    }
+    
+    @Override
+    protected Diagnostic validateStringComparison(ValueType firstType,
+            ValueType secondType) 
+    {
+        String firstValue = null;
+
+        if (firstType instanceof LiteralType)
+        {
+            firstValue = ((LiteralType)firstType).getLiteralValue();
+        }
+
+        String secondValue = null;
+        if (secondType instanceof LiteralType)
+        {
+            secondValue = ((LiteralType)secondType).getLiteralValue();
+        }
+
+        if (firstValue != null)
+        { 
+            Diagnostic result = validateIfEnumToStringComparison(firstValue, secondType);
+            
+            if (result != null)
+            {
+                return result;
+            }
+        }
+
+        if (secondValue != null)
+        {
+            Diagnostic result = validateIfEnumToStringComparison(secondValue, firstType);
+            
+            if (result != null)
+            {
+                return result;
+            }
+        }
+        
+        // if it's a string to enum compare, do the default parent thing
+        return super.validateStringComparison(firstType, secondType);
+    }
+
+    
+    @Override
+    protected ValueType handleStringComparison(ValueType firstType,
+            ValueType secondType) 
+    {
+        String firstValue = null;
+
+        if (firstType instanceof LiteralType)
+        {
+            firstValue = ((LiteralType)firstType).getLiteralValue();
+        }
+
+        String secondValue = null;
+        if (secondType instanceof LiteralType)
+        {
+            secondValue = ((LiteralType)secondType).getLiteralValue();
+        }
+
+        if (firstValue != null)
+        { 
+            Diagnostic result = validateIfEnumToStringComparison(firstValue, secondType);
+            
+            if (result != null)
+            {
+                return handleIfEnumToNonMemberStringComparison(firstValue, secondType);
+            }
+        }
+
+        if (secondValue != null)
+        {
+            Diagnostic result = validateIfEnumToStringComparison(secondValue, firstType);
+            
+            if (result != null)
+            {
+                return handleIfEnumToNonMemberStringComparison(secondValue, firstType);
+            }
+        }
+
+        // otherwise, do the super thing
+        return super.handleStringComparison(firstType, secondType);
+    }
+
+    private Diagnostic validateEnumComparison(final ValueType firstArg, final ValueType secondArg)
+    {
+        assert firstArg.isEnumType() || secondArg.isEnumType();
+        
+        // if the first is not an enum, then we have non-Enum == Enum case
+        if (!firstArg.isEnumType())
+        {
+            return validateComparsionOfEnumAndNonEnum(firstArg, secondArg);
+        }
+        
+        // if the second is not an enum, then we have Enum == non-Enum case
+        if (!secondArg.isEnumType())
+        {
+            return validateComparsionOfEnumAndNonEnum(secondArg, firstArg);
+        }
+        
+        // only other case is they are both enums.  Check if they are directly
+        // comparable.
+        if (TypeUtil.canNeverBeEqual(firstArg.getSignature(), secondArg.getSignature()))
+        {
+            return DiagnosticFactory.
+                create_BINARY_COMPARISON_WITH_TWO_ENUMS_ALWAYS_SAME
+                    (getOperationName()
+                     , doRealOperation("foo", "notFoo")  // just simulate the operation where the operands are not equal //$NON-NLS-1$ //$NON-NLS-2$
+                     , TypeUtil.getFullyQualifiedName(firstArg.getSignature())
+                     , TypeUtil.getFullyQualifiedName(secondArg.getSignature())); 
+        }
+        
+        // otherwise, it's all good
+        return Diagnostic.OK_INSTANCE;
+    }
+    
+    private Diagnostic validateComparsionOfEnumAndNonEnum(final ValueType nonEnumType, final ValueType enumType)
+    {
+        // the only literal value that could have got us here is a 
+        // StringLiteralValue since the others a filtered out before this is
+        // called
+        if (nonEnumType instanceof LiteralType)
+        {
+            assert nonEnumType instanceof StringLiteralType;
+            
+            Diagnostic result = validateIfEnumToStringComparison(((StringLiteralType)nonEnumType).getLiteralValue(), enumType);
+            
+            if (result != null)
+            {
+                return result;
+            }
+            return Diagnostic.OK_INSTANCE;
+        }
+        
+        // if the arg is a String, then we can't prove anything before runtime
+        if (nonEnumType.isInstanceOf(TypeConstants.TYPE_STRING))
+        {
+            return Diagnostic.OK_INSTANCE;
+        }
+        // otherwise, we know it will result in a problem since one is an enum
+        // and the other isn't
+        return DiagnosticFactory.
+            create_BINARY_COMPARISON_WITH_ENUM_AND_UNCOERCABLE_NONCONST_ALWAYS_SAME
+                (getOperationName()
+                 , doRealOperation("foo", "notFoo")  // just simulate the operation where the operands are not equal //$NON-NLS-1$ //$NON-NLS-2$
+                 , TypeUtil.getFullyQualifiedName(enumType.getSignature())
+                 , TypeUtil.getFullyQualifiedName(nonEnumType.getSignature())); 
+    }
+    
+    private Diagnostic validateIfEnumToStringComparison(final String literalValue, final ValueType validateIfEnum)
+    {
+        if (validateIfEnum.isEnumType()
+                && validateIfEnum instanceof IObjectSymbolBasedValueType)
+        {
+            final IObjectSymbolBasedValueType symbolValueType =
+                (IObjectSymbolBasedValueType) validateIfEnum;
+            
+            IType type = symbolValueType.getSymbol().getTypeDescriptor().resolveType(symbolValueType.getSymbol().getTypeDescriptor().getTypeSignature());
+            
+            if (type != null && !TypeUtil.isEnumMember(type, literalValue))
+            {
+                return DiagnosticFactory.
+                    create_BINARY_COMPARISON_WITH_ENUM_AND_CONST_ALWAYS_SAME
+                        (getOperationName()
+                         , doRealOperation(literalValue, literalValue+"_")  // just simulate the operation where the operands are not equal //$NON-NLS-1$
+                         , TypeUtil.getFullyQualifiedName(validateIfEnum.getSignature())
+                         , literalValue);
+            }
+        }
+       
+        return null;
+    }
+    
+    private ValueType handleIfEnumToNonMemberStringComparison(final String literalValue, final ValueType enumValueType)
+    {
+        // we need to apply the real operation to literalValue and any string that !equals(literalValue)
+        // since it's not a member of the enum
+        return BooleanLiteralType.valueOf(doRealOperation(literalValue, literalValue+"_")); //$NON-NLS-1$
     }
 }

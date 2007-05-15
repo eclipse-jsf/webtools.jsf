@@ -23,6 +23,7 @@ import org.eclipse.jst.jsf.common.internal.types.TypeCoercer;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
 import org.eclipse.jst.jsf.common.internal.types.TypeTransformer;
 import org.eclipse.jst.jsf.common.internal.types.ValueType;
+import org.eclipse.jst.jsf.common.util.TypeUtil;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
 /**
@@ -31,7 +32,12 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
  * @author cbateman
  *
  */
-/*package*/ abstract class LtGtRelationalBinaryOperator extends RelationalBinaryOperator {
+/*package*/ abstract class LtGtRelationalBinaryOperator extends RelationalBinaryOperator 
+{
+    LtGtRelationalBinaryOperator(String jsfVersion) 
+    {
+        super(jsfVersion);
+    }
 
     protected abstract boolean doRealOperation(Number firstArg, Number secondArg);
 
@@ -103,6 +109,12 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
         if (firstArg.isInstanceOf(TypeConstants.TYPE_COMPARABLE)
                 || secondArg.isInstanceOf(TypeConstants.TYPE_COMPARABLE))
         {
+            if (checkIfIncompatibleEnums(firstArg, secondArg))
+            {
+                // error: no point in validating further since expr will probably throw an exception
+                return null;
+            }
+            
             return new ValueType(Signature.SIG_BOOLEAN, IAssignable.ASSIGNMENT_TYPE_RHS);
         }
         
@@ -118,7 +130,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
                 || TypeCoercer.typeIsNull(secondArg.getSignature()))
         {
             return DiagnosticFactory.
-                create_BINARY_OP_EQUALITY_COMP_WITH_NULL_ALWAYS_EVAL_SAME("false");
+                create_BINARY_OP_EQUALITY_COMP_WITH_NULL_ALWAYS_EVAL_SAME(Messages.getString("LtGtRelationalBinaryOperator.ConstantName.False")); //$NON-NLS-1$
         }
         
         String boxedFirstType = TypeTransformer.transformBoxPrimitives(firstArg.getSignature());
@@ -178,11 +190,36 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
         if (firstArg.isInstanceOf(TypeConstants.TYPE_COMPARABLE)
                 || secondArg.isInstanceOf(TypeConstants.TYPE_COMPARABLE))
         {
-            return Diagnostic.OK_INSTANCE;
+            Diagnostic diag = Diagnostic.OK_INSTANCE;
+            if(checkIfIncompatibleEnums(firstArg, secondArg))
+            {
+                diag = DiagnosticFactory.create_BINARY_OP_COMPARISON_OF_ENUMS_INCOMPATIBLE();
+            }
+            return diag;
         }
         
         // JSP.2.3.5.6, step 10 -- otherwise, error
         return DiagnosticFactory.create_BINARY_OP_NO_AVAILABLE_TYPE_COERCION();
+    }
+
+    /**
+     * @param firstArg
+     * @param secondArg
+     * @return diagnostic if firstArg and secondArg are incompatible with each other
+     * for compareTo purpose or OK if not
+     */
+    private boolean checkIfIncompatibleEnums(ValueType firstArg,
+            ValueType secondArg) 
+    {
+        if (firstArg.isEnumType()
+                && secondArg.isEnumType()
+                && !TypeUtil.isEnumsCompareCompatible(firstArg.getSignature()
+                                                    , secondArg.getSignature()))
+        {
+            return true;
+        }
+        
+        return false;
     }
 
 }

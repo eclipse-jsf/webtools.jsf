@@ -21,6 +21,11 @@ package org.eclipse.jst.jsf.validation.internal.el.operators;
 /*package*/ class EqualsBinaryRelationalOperator extends
         EqualityRelationalBinaryOperator 
 {
+
+    EqualsBinaryRelationalOperator(String jsfVersion) {
+        super(jsfVersion);
+    }
+
     /**
      * @param firstArg
      * @param secondArg
@@ -53,6 +58,6 @@ package org.eclipse.jst.jsf.validation.internal.el.operators;
 
     protected String getOperationName() 
     {
-        return "equals";
+        return Messages.getString("EqualsBinaryRelationalOperator.OperationName"); //$NON-NLS-1$
     }
 }
