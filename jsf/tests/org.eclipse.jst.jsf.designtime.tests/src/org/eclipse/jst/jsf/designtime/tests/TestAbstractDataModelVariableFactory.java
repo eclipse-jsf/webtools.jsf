@@ -95,7 +95,7 @@ public class TestAbstractDataModelVariableFactory extends TestCase
         final DataModelVariableTestFacade testFacade = new DataModelVariableTestFacade();
 
         // test non-parameterized list
-        ValueType valueType = new ValueType(TypeConstants.TYPE_LIST, new String[0], new String[0], new String[0], ValueType.ASSIGNMENT_TYPE_RHS);
+        ValueType valueType = new ValueType(TypeConstants.TYPE_LIST, new String[0], new String[0], new String[0],false, ValueType.ASSIGNMENT_TYPE_RHS);
         ISymbol symbol = testFacade.testCreateFromList("rawList", valueType, _jdtTestEnvironment.getJavaProject());
         {
             // should create the same as passing directly to default
@@ -109,7 +109,7 @@ public class TestAbstractDataModelVariableFactory extends TestCase
         }
         
         // test list of strings
-        valueType = new ValueType(TypeConstants.TYPE_LIST, stringArgType, new String[0], new String[0], ValueType.ASSIGNMENT_TYPE_RHS);
+        valueType = new ValueType(TypeConstants.TYPE_LIST, stringArgType, new String[0], new String[0], false, ValueType.ASSIGNMENT_TYPE_RHS);
         symbol = testFacade.testCreateFromList("string", valueType, _jdtTestEnvironment.getJavaProject());
         assertTrue(symbol instanceof IComponentSymbol);
         assertEquals(ERuntimeSource.TAG_INSTANTIATED_SYMBOL_LITERAL, ((IComponentSymbol)symbol).getRuntimeSource());
@@ -117,7 +117,7 @@ public class TestAbstractDataModelVariableFactory extends TestCase
         assertEquals(0, ((IComponentSymbol)symbol).getTypeDescriptor().getTypeParameterSignatures().size());
         
         // test list of list of strings
-        valueType = new ValueType(TypeConstants.TYPE_LIST, listOfStringArgType, new String[0], new String[0], ValueType.ASSIGNMENT_TYPE_RHS);
+        valueType = new ValueType(TypeConstants.TYPE_LIST, listOfStringArgType, new String[0], new String[0], false, ValueType.ASSIGNMENT_TYPE_RHS);
         symbol = testFacade.testCreateFromList("listOfString", valueType, _jdtTestEnvironment.getJavaProject());
         assertTrue(symbol instanceof IComponentSymbol);
         assertEquals(ERuntimeSource.TAG_INSTANTIATED_SYMBOL_LITERAL, ((IComponentSymbol)symbol).getRuntimeSource());
@@ -187,7 +187,7 @@ public class TestAbstractDataModelVariableFactory extends TestCase
         // an array of something should yield the same thing as createArraySymbol
         {
             final String arraySig = "[Ljava.lang.String;";
-            ValueType valueType = new ValueType(arraySig, new String[0], new String[0], new String[0], ValueType.ASSIGNMENT_TYPE_RHS);
+            ValueType valueType = new ValueType(arraySig, new String[0], new String[0], new String[0], false, ValueType.ASSIGNMENT_TYPE_RHS);
             ISymbol array1 = testFacade.createFromType("array", valueType, _jdtTestEnvironment.getJavaProject()); 
             ISymbol array2 = testFacade.testCreateArraySymbol("array2", arraySig, _jdtTestEnvironment.getJavaProject());
             assertSame((IComponentSymbol)array1, (IComponentSymbol)array2);
@@ -196,7 +196,7 @@ public class TestAbstractDataModelVariableFactory extends TestCase
         // if it's a list should be the same as createFromList
         {
             final String listSig = TypeConstants.TYPE_LIST;
-            ValueType valueType = new ValueType(listSig, new String[0], new String[0], new String[0], ValueType.ASSIGNMENT_TYPE_RHS);
+            ValueType valueType = new ValueType(listSig, new String[0], new String[0], new String[0], false, ValueType.ASSIGNMENT_TYPE_RHS);
             ISymbol list1 = testFacade.createFromType("list", valueType, _jdtTestEnvironment.getJavaProject()); 
             ISymbol list2 = testFacade.testCreateFromList("list2", valueType, _jdtTestEnvironment.getJavaProject());
             assertSame((IComponentSymbol)list1, (IComponentSymbol)list2);
@@ -205,7 +205,7 @@ public class TestAbstractDataModelVariableFactory extends TestCase
         // if it's a DataModel, should be the same as default
         {
             final String dataModelSig = TypeConstants.TYPE_DATA_MODEL;
-            ValueType valueType = new ValueType(dataModelSig, new String[0], new String[0], new String[0], ValueType.ASSIGNMENT_TYPE_RHS);
+            ValueType valueType = new ValueType(dataModelSig, new String[0], new String[0], new String[0], false, ValueType.ASSIGNMENT_TYPE_RHS);
             ISymbol dataModel1 = testFacade.createFromType("dataModel", valueType, _jdtTestEnvironment.getJavaProject()); 
             ISymbol dataModel2 = testFacade.createDefaultSymbol("dataModel2");
             assertSame((IComponentSymbol)dataModel1, (IComponentSymbol)dataModel2);
@@ -214,7 +214,7 @@ public class TestAbstractDataModelVariableFactory extends TestCase
         // if it's just some non-special object, like a String, then should be same a scalar
         {
             final String stringSig = TypeConstants.TYPE_STRING;
-            ValueType valueType = new ValueType(stringSig, new String[0], new String[0], new String[0], ValueType.ASSIGNMENT_TYPE_RHS);
+            ValueType valueType = new ValueType(stringSig, new String[0], new String[0], new String[0], false, ValueType.ASSIGNMENT_TYPE_RHS);
             ISymbol scalar1 = testFacade.createFromType("scalar1", valueType, _jdtTestEnvironment.getJavaProject()); 
             ISymbol scalar2 = testFacade.testCreateScalarSymbol("scalar2", stringSig, _jdtTestEnvironment.getJavaProject());
             assertSame((IComponentSymbol)scalar1, (IComponentSymbol)scalar2);

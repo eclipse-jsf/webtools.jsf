@@ -29,8 +29,10 @@
     	<h:outputText value="#{myBean.bigDoubleProperty}"/>
     	<h:outputText value="#{myBean.writableStringProperty}"/>
     	<h:outputText value="#{myBean.isStyleBooleanProperty}"/>
-
-		<!-- sub-class resolution -->
+    	<h:outputText value="#{myBean.colors}"/>
+    	<h:outputText value="#{myBean.coins}"/>
+	
+	<!-- sub-class resolution -->
     	<h:outputText value="#{myBeanSubClass.stringProperty}"/>
     	<h:outputText value="#{myBeanSubClass.integerProperty}"/>
     	<h:outputText value="#{myBeanSubClass.booleanProperty}"/>
@@ -45,9 +47,11 @@
     	<h:outputText value="#{myBeanSubClass.writableStringProperty}"/>
     	<h:outputText value="#{myBeanSubClass.isStyleBooleanProperty}"/>
     	<h:outputText value="#{myBeanSubClass.subClassStringProperty}"/>
+    	<h:outputText value="#{myBeanSubClass.colors}"/>
+    	<h:outputText value="#{myBeanSubClass.coins}"/>
 
-		<!-- settable properties -->
-		<h:outputText value="#{myBeanSubClass.stringProperty}"/>
+	<!-- settable properties -->
+	<h:outputText value="#{myBeanSubClass.stringProperty}"/>
     	<h:outputText value="#{myBeanSettable.integerProperty}"/>
     	<h:outputText value="#{myBeanSettable.booleanProperty}"/>
     	<h:outputText value="#{myBeanSettable.doubleProperty}"/>
@@ -60,6 +64,8 @@
     	<h:outputText value="#{myBeanSettable.bigDoubleProperty}"/>
     	<h:outputText value="#{myBeanSettable.writableStringProperty}"/>
     	<h:outputText value="#{myBeanSettable.isStyleBooleanProperty}"/>
+    	<h:outputText value="#{myBeanSettable.colors}"/>
+    	<h:outputText value="#{myBeanSettable.coins}"/>
     	
 		<!--  warnings -->
     	<h:outputText value="#{myBean.subClassStringProperty}"/>

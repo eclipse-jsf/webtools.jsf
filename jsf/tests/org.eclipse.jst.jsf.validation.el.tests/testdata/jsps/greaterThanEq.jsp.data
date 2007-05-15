@@ -31,9 +31,15 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
      	<h:outputText value="#{myBean.comparableProperty >= myBean.collectionProperty}"/>
     	<h:outputText value="#{myBean.comparableProperty ge myBean.collectionProperty}"/>
   	    <h:outputText value="#{myBean.integerProperty >= -3}"/>
-    	<h:outputText value="#{myBean.doubleProperty > 5}"/>
-    	<h:outputText value="#{5 gt myBean.bigIntegerProperty}"/>
-    	<h:outputText value="#{myBean.bigDoubleProperty > myBean.bigIntegerProperty}"/>
+    	<h:outputText value="#{myBean.doubleProperty >= 5}"/>
+    	<h:outputText value="#{5 ge myBean.bigIntegerProperty}"/>
+    	<h:outputText value="#{myBean.bigDoubleProperty >= myBean.bigIntegerProperty}"/>
+    	<h:outputText value="#{myBean.coins >= 'quarter'}"/>
+    	<h:outputText value="#{myBean.coins ge 'quarter'}"/>
+    	<h:outputText value="#{myBean.rawEnum >= 'quarter'}"/>
+    	<h:outputText value="#{myBean.coinEnum ge 'quarter'}"/>
+	<h:outputText value="#{myBean.rawEnum >= myBean.coins}"/>
+	<h:outputText value="#{myBean.coinEnum >= myBean.colors}"/>
   	    	
 		<!--  warnings -->
 		<h:outputText value="#{5 >= 3}"/>
@@ -48,8 +54,8 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
 		<h:outputText value="#{2 ge -5}"/>
 		<h:outputText value="#{-5 >= -5}"/>
 		<h:outputText value="#{-5 ge -5}"/>
-		<h:outputText value="#{myBean.integerProperty > null}"/>
-		<h:outputText value="#{null gt myBean.integerProperty}"/>
+		<h:outputText value="#{myBean.integerProperty >= null}"/>
+		<h:outputText value="#{null ge myBean.integerProperty}"/>
 		
 		<!-- errors -->
 		<h:outputText value="#{5 >= true}"/>
@@ -64,6 +70,8 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
     	<h:outputText value="#{myBean.booleanProperty ge true}"/>
  		<h:outputText value="#{true >= false}"/>
  		<h:outputText value="#{true ge false}"/>
+		<h:outputText value="#{myBean.coins >= myBean.colors}"/>
+		<h:outputText value="#{myBean.coins ge myBean.colors}"/>
     </f:view>
     </body>
 </html>

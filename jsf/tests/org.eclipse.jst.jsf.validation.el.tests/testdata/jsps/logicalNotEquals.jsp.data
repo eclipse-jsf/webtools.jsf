@@ -35,6 +35,14 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
     	<h:outputText value="#{myBean.bigIntegerProperty != 500}"/>
     	<h:outputText value="#{myBean.stringArrayProperty != '3'}"/>
     	<h:outputText value="#{myBean.stringArrayProperty ne myBean.listProperty}"/>
+	<h:outputText value="#{myBean.coins != 'dime'}" />
+	<h:outputText value="#{myBean.coins ne 'dime'}" />
+	<h:outputText value="#{myBean.colors != 'red'}"/>
+	<h:outputText value="#{myBean.colors ne 'red'}"/>
+	<h:outputText value="#{myBean.coins != myBean.stringProperty}"/>
+	<h:outputText value="#{myBean.coins ne myBean.stringProperty}"/>
+	<h:outputText value="#{myBean.rawEnum != 'red'}"/>
+	<h:outputText value="#{myBean.coinEnum ne myBean.coins}"/>
 
 		<!--  warnings -->
 		<h:outputText value="#{5 != 3}"/>
@@ -49,6 +57,11 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
 		<h:outputText value="#{null ne myBean.integerProperty}"/>
 		<h:outputText value="#{5.4 != 4.3}"/>
 		<h:outputText value="#{true != true}"/>
+		<h:outputText value="#{myBean.coins != 'notAValue'}"/>
+		<h:outputText value="#{myBean.coins ne 'notAValue'}"/>
+		<h:outputText value="#{myBean.coins != 'notAValue' || myBean.coins != 'dime'}"/>
+		<h:outputText value="#{myBean.coins ne 'notAValue' || myBean.coins ne 'dime'}"/>
+		<h:outputText value="#{myBean.coins != myBean.colors}"/>
 
 		<!-- errors -->
 		<h:outputText value="#{5 != true}"/>

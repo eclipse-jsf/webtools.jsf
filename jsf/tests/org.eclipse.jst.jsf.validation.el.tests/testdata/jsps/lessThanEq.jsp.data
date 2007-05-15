@@ -1,4 +1,4 @@
-<%@page contentType="text/html"%>
+%@page contentType="text/html"%>
 <%@page pageEncoding="UTF-8"%>
 <%--
 The taglib directive below imports the JSTL library. If you uncomment it,
@@ -34,6 +34,12 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
     	<h:outputText value="#{myBean.doubleProperty <= 5}"/>
     	<h:outputText value="#{5 le myBean.bigIntegerProperty}"/>
     	<h:outputText value="#{myBean.bigDoubleProperty <= myBean.bigIntegerProperty}"/>
+    	<h:outputText value="#{myBean.coins <= 'quarter'}"/>
+    	<h:outputText value="#{myBean.coins le 'quarter'}"/>
+    	<h:outputText value="#{myBean.rawEnum <= 'quarter'}"/>
+    	<h:outputText value="#{myBean.coinEnum le 'quarter'}"/>
+	<h:outputText value="#{myBean.rawEnum <= myBean.coins}"/>
+	<h:outputText value="#{myBean.coinEnum <= myBean.colors}"/>
   	    
 		<!--  warnings -->
 		<h:outputText value="#{5 <= 3}"/>
@@ -64,6 +70,8 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
     	<h:outputText value="#{myBean.booleanProperty le true}"/>
  		<h:outputText value="#{true <= false}"/>
  		<h:outputText value="#{true le false}"/>
+		<h:outputText value="#{myBean.coins <= myBean.colors}"/>
+		<h:outputText value="#{myBean.coins le myBean.colors}"/>
     </f:view>
     </body>
 </html>

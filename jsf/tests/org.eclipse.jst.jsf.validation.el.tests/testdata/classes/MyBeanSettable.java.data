@@ -93,7 +93,7 @@ public class MyBeanSettable
 		return Collections.EMPTY_LIST;
 	}
 
-	public void setComparablePropety(Comparable comp)
+	public void setComparableProperty(Comparable comp)
 	{
 		
 	}
@@ -168,4 +168,21 @@ public class MyBeanSettable
 	{
 		
 	}
+
+	public MyEnum1 getCoins() {
+		return this.coins;
+	}
+
+	public void setCoins(MyEnum1 coins) {
+		this.coins = coins;
+	}
+
+	public MyEnum2 getColors() {
+		return colors;
+	}
+
+	public void setColors(MyEnum2 colors) {
+		this.colors = colors;
+	}
+
 }

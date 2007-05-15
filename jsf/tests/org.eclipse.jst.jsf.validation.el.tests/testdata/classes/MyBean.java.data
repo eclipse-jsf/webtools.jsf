@@ -131,4 +131,24 @@ public class MyBean
 			return "foo";
 		}
 	}
+
+	public MyEnum1 getCoins() {
+		return MyEnum1.dime;
+	}
+
+	public MyEnum2 getColors() {
+		return MyEnum2.red;
+	}
+
+	public java.lang.Enum getRawEnum()
+	{
+		// doesn't matter what we return as long as is an enum
+		return MyEnum2.red;
+        }
+
+        public java.lang.Enum<MyEnum1> getCoinEnum()
+        {
+             // doesn't matter what we return as long as is an enum of  type MyEnum1
+		return MyEnum1.dime;
+        }
 }

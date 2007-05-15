@@ -3,6 +3,7 @@ package org.eclipse.jst.jsf.validation.el.tests.jsp;
 import java.util.List;
 
 import org.eclipse.jdt.core.Signature;
+import org.eclipse.jst.jsf.common.internal.types.IAssignable;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
 import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
@@ -39,94 +40,108 @@ public class BeanPropertyResolutionTestCase extends SingleJSPTestCase
         assertEquals("myBean.bigDoubleProperty", getELText(_structuredDocument,1105));
         assertEquals("myBean.writableStringProperty", getELText(_structuredDocument,1163));
         assertEquals("myBean.isStyleBooleanProperty", getELText(_structuredDocument,1226));
-        assertEquals("myBeanSubClass.stringProperty", getELText(_structuredDocument,1324));
-        assertEquals("myBeanSubClass.integerProperty", getELText(_structuredDocument,1387));
-        assertEquals("myBeanSubClass.booleanProperty", getELText(_structuredDocument,1451));
-        assertEquals("myBeanSubClass.doubleProperty", getELText(_structuredDocument,1515));
-        assertEquals("myBeanSubClass.mapProperty", getELText(_structuredDocument,1578));
-        assertEquals("myBeanSubClass.stringArrayProperty", getELText(_structuredDocument,1638));
-        assertEquals("myBeanSubClass.collectionProperty", getELText(_structuredDocument,1706));
-        assertEquals("myBeanSubClass.listProperty", getELText(_structuredDocument,1773));
-        assertEquals("myBeanSubClass.comparableProperty", getELText(_structuredDocument,1834));
-        assertEquals("myBeanSubClass.bigIntegerProperty", getELText(_structuredDocument,1901));
-        assertEquals("myBeanSubClass.bigDoubleProperty", getELText(_structuredDocument,1968));
-        assertEquals("myBeanSubClass.writableStringProperty", getELText(_structuredDocument,2034));
-        assertEquals("myBeanSubClass.isStyleBooleanProperty", getELText(_structuredDocument,2105));
-        assertEquals("myBeanSubClass.subClassStringProperty", getELText(_structuredDocument,2176));
-        assertEquals("myBeanSubClass.stringProperty", getELText(_structuredDocument,2278));
-        assertEquals("myBeanSettable.integerProperty", getELText(_structuredDocument,2341));
-        assertEquals("myBeanSettable.booleanProperty", getELText(_structuredDocument,2405));
-        assertEquals("myBeanSettable.doubleProperty", getELText(_structuredDocument,2469));
-        assertEquals("myBeanSettable.mapProperty", getELText(_structuredDocument,2532));
-        assertEquals("myBeanSettable.stringArrayProperty", getELText(_structuredDocument,2592));
-        assertEquals("myBeanSettable.collectionProperty", getELText(_structuredDocument,2660));
-        assertEquals("myBeanSettable.listProperty", getELText(_structuredDocument,2727));
-        assertEquals("myBeanSettable.comparableProperty", getELText(_structuredDocument,2788));
-        assertEquals("myBeanSettable.bigIntegerProperty", getELText(_structuredDocument,2855));
-        assertEquals("myBeanSettable.bigDoubleProperty", getELText(_structuredDocument,2922));
-        assertEquals("myBeanSettable.writableStringProperty", getELText(_structuredDocument,2988));
-        assertEquals("myBeanSettable.isStyleBooleanProperty", getELText(_structuredDocument,3059));
+        assertEquals("myBean.colors", getELText(_structuredDocument,1289));
+        assertEquals("myBean.coins", getELText(_structuredDocument,1336));
+        
+        assertEquals("myBeanSubClass.stringProperty", getELText(_structuredDocument,1417));
+        assertEquals("myBeanSubClass.integerProperty", getELText(_structuredDocument,1480));
+        assertEquals("myBeanSubClass.booleanProperty", getELText(_structuredDocument,1544));
+        assertEquals("myBeanSubClass.doubleProperty", getELText(_structuredDocument,1608));
+        assertEquals("myBeanSubClass.mapProperty", getELText(_structuredDocument,1671));
+        assertEquals("myBeanSubClass.stringArrayProperty", getELText(_structuredDocument,1731));
+        assertEquals("myBeanSubClass.collectionProperty", getELText(_structuredDocument,1799));
+        assertEquals("myBeanSubClass.listProperty", getELText(_structuredDocument,1866));
+        assertEquals("myBeanSubClass.comparableProperty", getELText(_structuredDocument,1927));
+        assertEquals("myBeanSubClass.bigIntegerProperty", getELText(_structuredDocument,1994));
+        assertEquals("myBeanSubClass.bigDoubleProperty", getELText(_structuredDocument,2061));
+        assertEquals("myBeanSubClass.writableStringProperty", getELText(_structuredDocument,2127));
+        assertEquals("myBeanSubClass.isStyleBooleanProperty", getELText(_structuredDocument,2198));
+        assertEquals("myBeanSubClass.subClassStringProperty", getELText(_structuredDocument,2269));
+        assertEquals("myBeanSubClass.colors", getELText(_structuredDocument,2340));
+        assertEquals("myBeanSubClass.coins", getELText(_structuredDocument,2395));
 
-        assertEquals("myBean.subClassStringProperty", getELText(_structuredDocument,3159));
-        assertEquals("myBeanSubClass.notAMember", getELText(_structuredDocument,3222));
-        assertEquals("myBeanSettable.alsoNotAMember", getELText(_structuredDocument,3281));
+        assertEquals("myBeanSubClass.stringProperty", getELText(_structuredDocument,2478));
+        assertEquals("myBeanSettable.integerProperty", getELText(_structuredDocument,2541));
+        assertEquals("myBeanSettable.booleanProperty", getELText(_structuredDocument,2605));
+        assertEquals("myBeanSettable.doubleProperty", getELText(_structuredDocument,2669));
+        assertEquals("myBeanSettable.mapProperty", getELText(_structuredDocument,2732));
+        assertEquals("myBeanSettable.stringArrayProperty", getELText(_structuredDocument,2792));
+        assertEquals("myBeanSettable.collectionProperty", getELText(_structuredDocument,2860));
+        assertEquals("myBeanSettable.listProperty", getELText(_structuredDocument,2927));
+        assertEquals("myBeanSettable.comparableProperty", getELText(_structuredDocument,2988));
+        assertEquals("myBeanSettable.bigIntegerProperty", getELText(_structuredDocument,3055));
+        assertEquals("myBeanSettable.bigDoubleProperty", getELText(_structuredDocument,3122));
+        assertEquals("myBeanSettable.writableStringProperty", getELText(_structuredDocument,3188));
+        assertEquals("myBeanSettable.isStyleBooleanProperty", getELText(_structuredDocument,3259));
+        assertEquals("myBeanSettable.colors", getELText(_structuredDocument,3330));
+        assertEquals("myBeanSettable.coins", getELText(_structuredDocument,3385));
+        
+        assertEquals("myBean.subClassStringProperty", getELText(_structuredDocument,3468));
+        assertEquals("myBeanSubClass.notAMember", getELText(_structuredDocument,3531));
+        assertEquals("myBeanSettable.alsoNotAMember", getELText(_structuredDocument,3590));
     }
     
     public void testNoErrorExprs() 
     {
-        assertNoError(541, TypeConstants.TYPE_STRING);
-        assertNoError(596, Signature.SIG_INT);
-        assertNoError(652, Signature.SIG_BOOLEAN);
-        assertNoError(708, Signature.SIG_DOUBLE);
-        assertNoError(763, TypeConstants.TYPE_MAP);
-        assertNoError(815, Signature.createArraySignature(TypeConstants.TYPE_STRING, 1));
-        assertNoError(875, TypeConstants.TYPE_COLLECTION);
-        assertNoError(934, "Ljava.util.List;");
-        assertNoError(987, TypeConstants.TYPE_COMPARABLE);
-        assertNoError(1046, TypeConstants.TYPE_BIG_INTEGER);
-        assertNoError(1105, TypeConstants.TYPE_BIG_DOUBLE);
-        assertNoError(1163, TypeConstants.TYPE_STRING);
-        assertNoError(1226, Signature.SIG_BOOLEAN);
+        assertNoError(541, TypeConstants.TYPE_STRING, IAssignable.ASSIGNMENT_TYPE_RHS);
+        assertNoError(596, Signature.SIG_INT, IAssignable.ASSIGNMENT_TYPE_RHS);
+        assertNoError(652, Signature.SIG_BOOLEAN, IAssignable.ASSIGNMENT_TYPE_RHS);
+        assertNoError(708, Signature.SIG_DOUBLE, IAssignable.ASSIGNMENT_TYPE_RHS);
+        assertNoError(763, TypeConstants.TYPE_MAP, IAssignable.ASSIGNMENT_TYPE_RHS);
+        assertNoError(815, Signature.createArraySignature(TypeConstants.TYPE_STRING, 1), IAssignable.ASSIGNMENT_TYPE_RHS);
+        assertNoError(875, TypeConstants.TYPE_COLLECTION, IAssignable.ASSIGNMENT_TYPE_RHS);
+        assertNoError(934, "Ljava.util.List;", IAssignable.ASSIGNMENT_TYPE_RHS);
+        assertNoError(987, TypeConstants.TYPE_COMPARABLE, IAssignable.ASSIGNMENT_TYPE_RHS);
+        assertNoError(1046, TypeConstants.TYPE_BIG_INTEGER, IAssignable.ASSIGNMENT_TYPE_RHS);
+        assertNoError(1105, TypeConstants.TYPE_BIG_DOUBLE, IAssignable.ASSIGNMENT_TYPE_RHS);
+        assertNoError(1163, TypeConstants.TYPE_STRING, IAssignable.ASSIGNMENT_TYPE_RHS|IAssignable.ASSIGNMENT_TYPE_LHS);
+        assertNoError(1226, Signature.SIG_BOOLEAN, IAssignable.ASSIGNMENT_TYPE_RHS);
+        assertNoError(1289, "Lbeans.MyEnum2;", IAssignable.ASSIGNMENT_TYPE_RHS);
+        assertNoError(1336, "Lbeans.MyEnum1;", IAssignable.ASSIGNMENT_TYPE_RHS);
 
-        assertNoError(1324, TypeConstants.TYPE_STRING);
-        assertNoError(1387, Signature.SIG_INT);
-        assertNoError(1451, Signature.SIG_BOOLEAN);
-        assertNoError(1515, Signature.SIG_DOUBLE);
-        assertNoError(1578, TypeConstants.TYPE_MAP);
-        assertNoError(1638, Signature.createArraySignature(TypeConstants.TYPE_STRING, 1));
-        assertNoError(1706, TypeConstants.TYPE_COLLECTION);
-        assertNoError(1773, "Ljava.util.List;");
-        assertNoError(1834, TypeConstants.TYPE_COMPARABLE);
-        assertNoError(1901, TypeConstants.TYPE_BIG_INTEGER);
-        assertNoError(1968, TypeConstants.TYPE_BIG_DOUBLE);
-        assertNoError(2034, TypeConstants.TYPE_STRING);
-        assertNoError(2105, Signature.SIG_BOOLEAN);
-        assertNoError(2176, TypeConstants.TYPE_STRING);
-        assertNoError(2278, TypeConstants.TYPE_STRING);
-
-        assertNoError(2341, Signature.SIG_INT);
-        assertNoError(2405, Signature.SIG_BOOLEAN);
-        assertNoError(2469, Signature.SIG_DOUBLE);
-        assertNoError(2532, TypeConstants.TYPE_MAP);
-        assertNoError(2592, Signature.createArraySignature(TypeConstants.TYPE_STRING, 1));
-        assertNoError(2660, TypeConstants.TYPE_COLLECTION);
-        assertNoError(2727, "Ljava.util.List;");
-        assertNoError(2788, TypeConstants.TYPE_COMPARABLE);
-        assertNoError(2855, TypeConstants.TYPE_BIG_INTEGER);
-        assertNoError(2922, TypeConstants.TYPE_BIG_DOUBLE);
-        assertNoError(2988, TypeConstants.TYPE_STRING);
-        assertNoError(3059, Signature.SIG_BOOLEAN);
+        assertNoError(1417, TypeConstants.TYPE_STRING, IAssignable.ASSIGNMENT_TYPE_RHS);
+        assertNoError(1480, Signature.SIG_INT, IAssignable.ASSIGNMENT_TYPE_RHS);
+        assertNoError(1544, Signature.SIG_BOOLEAN, IAssignable.ASSIGNMENT_TYPE_RHS);
+        assertNoError(1608, Signature.SIG_DOUBLE, IAssignable.ASSIGNMENT_TYPE_RHS);
+        assertNoError(1671, TypeConstants.TYPE_MAP, IAssignable.ASSIGNMENT_TYPE_RHS);
+        assertNoError(1731, Signature.createArraySignature(TypeConstants.TYPE_STRING, 1), IAssignable.ASSIGNMENT_TYPE_RHS);
+        assertNoError(1799, TypeConstants.TYPE_COLLECTION, IAssignable.ASSIGNMENT_TYPE_RHS);
+        assertNoError(1866, "Ljava.util.List;", IAssignable.ASSIGNMENT_TYPE_RHS);
+        assertNoError(1927, TypeConstants.TYPE_COMPARABLE, IAssignable.ASSIGNMENT_TYPE_RHS);
+        assertNoError(1994, TypeConstants.TYPE_BIG_INTEGER, IAssignable.ASSIGNMENT_TYPE_RHS);
+        assertNoError(2061, TypeConstants.TYPE_BIG_DOUBLE, IAssignable.ASSIGNMENT_TYPE_RHS);
+        assertNoError(2127, TypeConstants.TYPE_STRING, IAssignable.ASSIGNMENT_TYPE_RHS|IAssignable.ASSIGNMENT_TYPE_LHS);
+        assertNoError(2198, Signature.SIG_BOOLEAN, IAssignable.ASSIGNMENT_TYPE_RHS);
+        assertNoError(2269, TypeConstants.TYPE_STRING, IAssignable.ASSIGNMENT_TYPE_RHS);
+        assertNoError(2340, "Lbeans.MyEnum2;", IAssignable.ASSIGNMENT_TYPE_RHS);
+        assertNoError(2395, "Lbeans.MyEnum1;", IAssignable.ASSIGNMENT_TYPE_RHS);
+        
+        assertNoError(2478, TypeConstants.TYPE_STRING, IAssignable.ASSIGNMENT_TYPE_RHS);
+        assertNoError(2541, Signature.SIG_INT, IAssignable.ASSIGNMENT_TYPE_RHS|IAssignable.ASSIGNMENT_TYPE_LHS);
+        assertNoError(2605, Signature.SIG_BOOLEAN, IAssignable.ASSIGNMENT_TYPE_RHS|IAssignable.ASSIGNMENT_TYPE_LHS);
+        assertNoError(2669, Signature.SIG_DOUBLE, IAssignable.ASSIGNMENT_TYPE_RHS|IAssignable.ASSIGNMENT_TYPE_LHS);
+        assertNoError(2732, TypeConstants.TYPE_MAP, IAssignable.ASSIGNMENT_TYPE_RHS|IAssignable.ASSIGNMENT_TYPE_LHS);
+        assertNoError(2792, Signature.createArraySignature(TypeConstants.TYPE_STRING, 1), IAssignable.ASSIGNMENT_TYPE_RHS|IAssignable.ASSIGNMENT_TYPE_LHS);
+        assertNoError(2860, TypeConstants.TYPE_COLLECTION, IAssignable.ASSIGNMENT_TYPE_RHS|IAssignable.ASSIGNMENT_TYPE_LHS);
+        assertNoError(2927, "Ljava.util.List;", IAssignable.ASSIGNMENT_TYPE_RHS|IAssignable.ASSIGNMENT_TYPE_LHS);
+        assertNoError(2988, TypeConstants.TYPE_COMPARABLE, IAssignable.ASSIGNMENT_TYPE_RHS|IAssignable.ASSIGNMENT_TYPE_LHS);
+        assertNoError(3055, TypeConstants.TYPE_BIG_INTEGER, IAssignable.ASSIGNMENT_TYPE_RHS|IAssignable.ASSIGNMENT_TYPE_LHS);
+        assertNoError(3122, TypeConstants.TYPE_BIG_DOUBLE, IAssignable.ASSIGNMENT_TYPE_RHS|IAssignable.ASSIGNMENT_TYPE_LHS);
+        assertNoError(3188, TypeConstants.TYPE_STRING, IAssignable.ASSIGNMENT_TYPE_RHS|IAssignable.ASSIGNMENT_TYPE_LHS);
+        assertNoError(3259, Signature.SIG_BOOLEAN, IAssignable.ASSIGNMENT_TYPE_RHS|IAssignable.ASSIGNMENT_TYPE_LHS);
+        assertNoError(3330, "Lbeans.MyEnum2;", IAssignable.ASSIGNMENT_TYPE_RHS|IAssignable.ASSIGNMENT_TYPE_LHS);
+        assertNoError(3385, "Lbeans.MyEnum1;", IAssignable.ASSIGNMENT_TYPE_RHS|IAssignable.ASSIGNMENT_TYPE_LHS);
     }
 
     public void testWarningExprs() 
     {
-        List list = assertSemanticWarning(3159,null,1);
+        List list = assertSemanticWarning(3468,null,1);
         assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
 
-        list = assertSemanticWarning(3222,null,1);
+        list = assertSemanticWarning(3531,null,1);
         assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
         
-        list = assertSemanticWarning(3281,null,1);
+        list = assertSemanticWarning(3590,null,1);
         assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
     }
 

@@ -146,7 +146,18 @@ public abstract class BaseTestCase extends ConfigurableTestCase
 	 */
 	protected void configureJDTTestEnvironment(JDTTestEnvironment jdtTestEnv) throws Exception
 	{
+	    // load enums first, since other classes have dependencies
         TestFileResource resource = new TestFileResource();
+        resource.load(ELValidationTestPlugin.getDefault().getBundle(), 
+                      "/testdata/classes/MyEnum1.java.data");
+        jdtTestEnv.addSourceFile("src", "beans", "MyEnum1", resource.toString());
+
+        resource = new TestFileResource();
+        resource.load(ELValidationTestPlugin.getDefault().getBundle(), 
+                      "/testdata/classes/MyEnum2.java.data");
+        jdtTestEnv.addSourceFile("src", "beans", "MyEnum2", resource.toString());
+        
+        resource = new TestFileResource();
         resource.load(ELValidationTestPlugin.getDefault().getBundle(), 
                       "/testdata/classes/MyBean.java.data");
         jdtTestEnv.addSourceFile("src", "beans", "MyBean", resource.toString());

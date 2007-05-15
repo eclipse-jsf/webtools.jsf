@@ -1,0 +1,7 @@
+package beans;
+
+public enum MyEnum2 
+{
+	red, green, blue, tRuE;
+}
+

@@ -34,6 +34,12 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
     	<h:outputText value="#{myBean.doubleProperty > 5}"/>
     	<h:outputText value="#{5 gt myBean.bigIntegerProperty}"/>
     	<h:outputText value="#{myBean.bigDoubleProperty > myBean.bigIntegerProperty}"/>
+    	<h:outputText value="#{myBean.coins > 'quarter'}"/>
+    	<h:outputText value="#{myBean.coins gt 'quarter'}"/>
+    	<h:outputText value="#{myBean.rawEnum > 'quarter'}"/>
+    	<h:outputText value="#{myBean.coinEnum gt 'quarter'}"/>
+	<h:outputText value="#{myBean.rawEnum > myBean.coins}"/>
+	<h:outputText value="#{myBean.coinEnum > myBean.colors}"/>
     	
 		<!--  warnings -->
 		<h:outputText value="#{5 > 3}"/>
@@ -64,6 +70,9 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
     	<h:outputText value="#{myBean.booleanProperty gt true}"/>
  		<h:outputText value="#{true > false}"/>
  		<h:outputText value="#{true gt false}"/>
+ 		<h:outputText value="#{true > false}"/>
+		<h:outputText value="#{myBean.coins > myBean.colors}"/>
+		<h:outputText value="#{myBean.coins gt myBean.colors}"/>
     </f:view>
     </body>
 </html>
