@@ -1,28 +1,23 @@
-/*******************************************************************************
- * Copyright (c) 2001, 2007 Oracle Corporation and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *     Oracle Corporation - initial API and implementation
- *******************************************************************************/
 package org.eclipse.jst.jsf.common.metadata.tests;
 
 import java.util.Collections;
+import java.util.Iterator;
 
 import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.Trait;
 import org.eclipse.jst.jsf.common.metadata.internal.MetaDataModelContextImpl;
+import org.eclipse.jst.jsf.common.metadata.query.EmptyResultSet;
 import org.eclipse.jst.jsf.common.metadata.query.IEntityQueryVisitor;
 import org.eclipse.jst.jsf.common.metadata.query.IMetaDataModelContext;
 import org.eclipse.jst.jsf.common.metadata.query.IResultSet;
 import org.eclipse.jst.jsf.common.metadata.query.ITraitQueryVisitor;
+import org.eclipse.jst.jsf.common.metadata.query.MetaDataException;
 import org.eclipse.jst.jsf.common.metadata.query.MetaDataQueryHelper;
-import org.eclipse.jst.jsf.common.metadata.query.SearchControl;
-import org.eclipse.jst.jsf.common.metadata.query.SimpleMetaDataQueryVisitorImpl;
+import org.eclipse.jst.jsf.common.metadata.query.internal.SearchControl;
+import org.eclipse.jst.jsf.common.metadata.query.internal.SimpleEntityQueryVisitorImpl;
+import org.eclipse.jst.jsf.common.metadata.query.internal.SimpleTraitQueryVisitorImpl;
+import org.eclipse.jst.jsf.common.metadata.query.internal.HierarchicalSearchControl;
 
 /**
  * Thoroughly excercises the MetaDataQueryHelper APIs that will end up touching many of the metadata areas in normal circumstances
@@ -104,33 +99,46 @@ public class MetaDataQueryHelperTests extends AbstractBaseMetaDataTestCase {
 
 	/**
 	 * Return multiple entities
-	 * Partially tests SimpleMetaDataQueryVisitorImpl searchControl
+	 * Partially tests SimpleEntityQueryVisitorImpl searchControl
 	 */
 	public void testGetEntitiesIMetaDataModelContextStringIEntityQueryVisitor() {
-		IEntityQueryVisitor visitor = new SimpleMetaDataQueryVisitorImpl(new SearchControl(1, SearchControl.SCOPE_ALL_LEVELS));
+		IEntityQueryVisitor visitor = new SimpleEntityQueryVisitorImpl(new HierarchicalSearchControl(1, HierarchicalSearchControl.SCOPE_ALL_LEVELS));
 		IResultSet rs = MetaDataQueryHelper.getEntities(baseContext, "loaded", visitor);
 		assertNotNull(rs);
-		assertNotNull(rs.getResults());
-		assertTrue(rs.getResults().size() == 1);
-		Entity entity = (Entity)rs.getResults().get(0);
-		assertNotNull(entity);
-		assertEquals(entity.getId(), "loaded");
-		rs.close();
+		Entity entity = null;
+		try {
+			assertFalse(rs instanceof EmptyResultSet);
+			assertEquals(1, rs.getSize());
+			assertTrue(rs.hasNext());
+			entity = (Entity)rs.next();
+			assertNotNull(entity);
+			assertEquals(entity.getId(), "loaded");
+			rs.close();
+		} catch (MetaDataException e) {
+			//MetaDataException not currently being thrown
+			fail();
+		}
 		
 		//test returning multiple (2)
-		visitor = new SimpleMetaDataQueryVisitorImpl(new SearchControl(SearchControl.COUNT_LIMIT_NONE, SearchControl.SCOPE_ALL_LEVELS));
+		visitor = new SimpleEntityQueryVisitorImpl(new HierarchicalSearchControl(SearchControl.COUNT_LIMIT_NONE, HierarchicalSearchControl.SCOPE_ALL_LEVELS));
 		rs = MetaDataQueryHelper.getEntities(baseContext, "loaded", visitor);
 		assertNotNull(rs);
-		assertNotNull(rs.getResults());
-		assertTrue(rs.getResults().size() == 2);
-		entity = (Entity)rs.getResults().get(0);
-		assertNotNull(entity);
-		assertEquals("loaded", entity.getId());
-		Entity secondentity = (Entity)rs.getResults().get(1);
-		assertNotNull(secondentity);
-		assertEquals("loaded", secondentity.getId());
-		assertFalse(secondentity == entity);
-		rs.close();
+		try {
+			assertFalse(rs instanceof EmptyResultSet);
+			assertEquals(2, rs.getSize());
+			assertTrue(rs.hasNext());
+			entity = (Entity)rs.next();
+			assertNotNull(entity);
+			assertEquals(entity.getId(), "loaded");
+			Entity secondentity = (Entity)rs.next();
+			assertNotNull(secondentity);
+			assertEquals("loaded", secondentity.getId());
+			assertFalse(secondentity == entity);
+			rs.close();
+		} catch (MetaDataException e) {
+			//MetaDataException not currently being thrown
+			fail();
+		}
 	}
 
 	public void testGetTraitEntityString() {
@@ -147,40 +155,50 @@ public class MetaDataQueryHelperTests extends AbstractBaseMetaDataTestCase {
 
 	/**
 	 * Return multiple traits
-	 * Also tests SimpleMetaDataQueryVisitorImpl and IResultSet
+	 * Also tests SimpleEntityQueryVisitorImpl and IResultSet
 	 */
 	public void testGetTraits() {
 		//TEST with 1 count
-		ITraitQueryVisitor visitor = new SimpleMetaDataQueryVisitorImpl(new SearchControl(1, SearchControl.SCOPE_ALL_LEVELS));
+		ITraitQueryVisitor visitor = new SimpleTraitQueryVisitorImpl(new SearchControl(1));
 		Model model = MetaDataQueryHelper.getModel(baseContext);
 		IResultSet rs = MetaDataQueryHelper.getTraits(model, "model-trait", visitor);
 		assertNotNull(rs);
-		assertNotNull(rs.getResults());
-		assertTrue(rs.getResults().size() == 1);
-		Trait trait = (Trait)rs.getResults().get(0);
-		assertNotNull(trait);
-		assertEquals("model-trait", trait.getId());
-		rs.close();
+		Trait trait = null;
+		try {
+			assertFalse(rs instanceof EmptyResultSet);
+			assertEquals(1, rs.getSize());
+			assertTrue(rs.hasNext());
+			trait = (Trait)rs.next();
+			assertNotNull(trait);
+			assertEquals("model-trait", trait.getId());
+			rs.close();
+		} catch (MetaDataException e) {
+			//MetaDataException not currently being thrown
+			fail();
+		}
 		
 		//test with COUNT_LIMIT_NONE
-		visitor = new SimpleMetaDataQueryVisitorImpl(new SearchControl(SearchControl.COUNT_LIMIT_NONE, SearchControl.SCOPE_ALL_LEVELS));
+		visitor = new SimpleTraitQueryVisitorImpl(new SearchControl(SearchControl.COUNT_LIMIT_NONE));
 		rs = MetaDataQueryHelper.getTraits(model, "model-trait", visitor);
 		assertNotNull(rs);
-		assertNotNull(rs.getResults());
-		assertTrue(rs.getResults().size() == 1); //SimpleMetaDataQueryVisitorImpl only returns 1 trait currently!
-		trait = (Trait)rs.getResults().get(0);
-		assertNotNull(trait);
-		assertEquals("model-trait", trait.getId());
+		try {
+			assertFalse(rs instanceof EmptyResultSet);
+			assertEquals(2, rs.getSize());
+			assertTrue(rs.hasNext());
+			trait = (Trait)rs.next();
+			assertNotNull(trait);
+			assertEquals("model-trait", trait.getId());		
+			assertTrue(rs.hasNext());
+			Trait secondTrait = (Trait)rs.next();
+			assertNotNull(secondTrait);
+			assertEquals("model-trait", secondTrait.getId());	
+			assertFalse(trait == secondTrait);
+			rs.close();
+		} catch (MetaDataException e) {
+			//MetaDataException not currently being thrown
+			fail();
+		}
 		
-		//SimpleMetaDataQueryVisitorImpl only returns 1 trait currently!
-//		assertFalse(rs.hasMoreElements());
-//		assertTrue(rs.hasMoreElements());
-//		Trait secondTrait = (Trait)rs.nextElement();
-//		assertNotNull(secondTrait);
-//		assertEquals("model-trait", secondTrait.getId());
-//		assertFalse(secondTrait == trait);
-//		assertFalse(rs.hasMoreElements());
-		rs.close();
 	}
 
 	public void testGetEntityEntityString() {
@@ -197,10 +215,15 @@ public class MetaDataQueryHelperTests extends AbstractBaseMetaDataTestCase {
 	public void testGetEntitiesEntityStringIEntityQueryVisitor() {
 		//negative test
 		
-		IResultSet rs = MetaDataQueryHelper.getEntities(negativeContextBadUri, "foo", new SimpleMetaDataQueryVisitorImpl());
+		IResultSet rs = MetaDataQueryHelper.getEntities(negativeContextBadUri, "foo", new SimpleEntityQueryVisitorImpl());
 		assertNotNull(rs);
-		assertNotNull(rs.getResults());
-		assertEquals(Collections.EMPTY_LIST, rs.getResults());
+		try {
+			assertEquals(0, rs.getSize());
+			assertFalse(rs.hasNext());
+		} catch (MetaDataException e) {
+			//MetaDataException not currently being thrown
+			fail();
+		}
 	}
 
 	public void testGetTraitIMetaDataModelContextStringString() {
