@@ -55,8 +55,10 @@ public class MetaDataLocatorFactory {
 			Class klass = JSFCommonPlugin.loadClass(locatorClassName, bundleId);
 			try {
 				locator = (IMetaDataLocator)klass.newInstance();
-				if (locator != null)
+				if (locator != null) {
 					getLocators().put(key, locator);
+					locator.startLocating();
+				}
 			} catch (InstantiationException e) {
 				JSFCommonPlugin.log(IStatus.ERROR, "Could not instantiate IMetaDataLocator: "+key, e);
 			} catch (IllegalAccessException e) {

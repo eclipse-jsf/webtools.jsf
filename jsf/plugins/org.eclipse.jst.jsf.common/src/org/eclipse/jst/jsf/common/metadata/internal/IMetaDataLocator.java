@@ -22,6 +22,12 @@ public interface IMetaDataLocator {
 	 * @return a list of <code>IMetaDataModelProvider</code>s for the uri located by this instance 
 	 */
 	public List/*<IMetaDataModelProvider>*/ locateMetaDataModelProviders(String uri);
+	
+	/**
+	 * Opportunity for service to start (add listeners, etc.). 
+	 * Framework calls this immediately after construction and all setup should occur at this time.
+	 */
+	public void startLocating();
 	/**
 	 * Stop looking for instances of metadata model sources.  An opporttunity to cleanup. 
 	 */

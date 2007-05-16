@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EntityImpl.java,v 1.4 2007/04/16 19:54:10 itrimble Exp $
+ * $Id: EntityImpl.java,v 1.5 2007/05/16 23:51:15 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.impl;
 
@@ -258,7 +258,7 @@ public class EntityImpl extends EObjectImpl implements Entity {
 //				}
 //			}
 //		}
-		visitor.visitCompleted();
+		visitor.visitCompleted(this);
 	}
 
 	/**

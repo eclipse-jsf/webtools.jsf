@@ -1,86 +1,59 @@
 /*******************************************************************************
- * Copyright (c) 2001, 2007 Oracle Corporation and others.
+ * Copyright (c) 2007 Oracle Corporation.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
- *     Oracle Corporation - initial API and implementation
- *******************************************************************************/
+ *    Oracle - initial API and implementation
+ *    
+ ********************************************************************************/
+
 package org.eclipse.jst.jsf.common.metadata.query;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Collection;
+import java.util.Iterator;
 
 /**
  * Default implementation of {@link IResultSet}.   Developers may subclass.
- *
+ * Currently MetaDataException is not being thrown but is in the interface for the future.
+ * Users should assume that the results are only valid at the time of the query.  This may change in the future. 
  */
 public abstract class AbstractResultSet/*<T>*/ implements IResultSet/*<T>*/ {
+	private Iterator 	_iterator;
+	private Collection	_results;
 	
-	private List/*<T>*/ results;
 	
-	/**
-	 * Constructor passing a list to hold the results
-	 * @param results 
-	 */
-	public AbstractResultSet(List/*<T>*/ results){
-		super();
-		this.results = results;
-	}
-	
-	/**
-	 * Constructor
-	 */
-	public AbstractResultSet(){
-		results = new ArrayList/*<T>*/();
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.common.metadata.query.IResultSet#close()
-	 */
-	public void close() {
-		//nothing to do really
-		if (results != null)
-			results.clear();
-	}
-	
-	/**
-	 * @param item
-	 */
-	public void addItem(Object item){
-		getInternalResults().add(item);
+	public void close() throws MetaDataException {
+		_results = null;
+		_iterator = null;
 	}
 
-    // API: should return Collection so that subs can use
-    // co-variance to return other sorts of collections
-    // API: consider making final and make getInternalResults protected abstract
-	public List/*<T>*/ getResults() {
-		if (results == null)
-			return Collections.EMPTY_LIST;
-	
-		return results;
+	public final int getSize(){
+		initIfNecessary();
+		return _results.size();		
 	}
 
+	public boolean hasNext() throws MetaDataException {
+		initIfNecessary();
+		return _iterator.hasNext();			
+	}
+
+	public Object next() throws MetaDataException {
+		initIfNecessary();		
+		return _iterator.next();
+	}
 	/**
-	 * @return resultset size
+	 * @return Collection of results.  Implementer must NOT return null.  Return Collections.EMPTY_LIST instead.
 	 */
-    // API: should make this final and force
-    // implementers to handle getInternalResults
-	public int size(){
-		if (results == null)
-			return 0;
-		
-		return getInternalResults().size();
-	}
-
-	private List getInternalResults() {
-		if (results == null){
-			results = new ArrayList();
+	protected abstract Collection getInternalResults();
+	
+	private void initIfNecessary() {
+		if (_results == null) {
+			_results = getInternalResults();
+			_iterator = _results.iterator();
 		}
-		return results;
 	}
 
 }

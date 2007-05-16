@@ -18,6 +18,9 @@ import org.eclipse.jst.jsf.common.metadata.Trait;
 import org.eclipse.jst.jsf.common.metadata.internal.MetaDataModel;
 import org.eclipse.jst.jsf.common.metadata.internal.MetaDataModelContextImpl;
 import org.eclipse.jst.jsf.common.metadata.internal.MetaDataModelManager;
+import org.eclipse.jst.jsf.common.metadata.query.internal.SimpleEntityQueryVisitorImpl;
+import org.eclipse.jst.jsf.common.metadata.query.internal.SimpleTraitQueryVisitorImpl;
+import org.eclipse.jst.jsf.common.metadata.query.internal.HierarchicalSearchControl;
 
 
 /**
@@ -27,7 +30,7 @@ import org.eclipse.jst.jsf.common.metadata.internal.MetaDataModelManager;
  * 
  * This class need not be used.   Visitors can be created and used directly on the model.
  * 
- * @see SimpleMetaDataQueryVisitorImpl
+ * @see SimpleEntityQueryVisitorImpl
  * @see IEntityQueryVisitor
  * @see ITraitQueryVisitor
  * @see IMetaDataModelContext
@@ -39,6 +42,13 @@ public final class MetaDataQueryHelper{
 	 * Domain id for Tag library domain of metatdata  
 	 */
 	public static final String TAGLIB_DOMAIN = "TagLibraryDomain"; //need better place for this
+	
+	/**
+	 * private constructor
+	 */
+	private MetaDataQueryHelper (){
+		super();
+	}
 	
 	/**
 	 * @param project
@@ -79,13 +89,18 @@ public final class MetaDataQueryHelper{
 	 */
 	public static Entity getEntity(final IMetaDataModelContext modelContext,
 			final String entityKey) {
-		IEntityQueryVisitor visitor = new SimpleMetaDataQueryVisitorImpl(new SearchControl(1, SearchControl.SCOPE_ALL_LEVELS));
+		IEntityQueryVisitor visitor = new SimpleEntityQueryVisitorImpl(new HierarchicalSearchControl(1, HierarchicalSearchControl.SCOPE_ALL_LEVELS));
 		IResultSet/*<Entity>*/ rs = getEntities(modelContext,entityKey,  visitor);
 		Entity e = null;
-		if (rs.getResults().size() > 0){
-			e = (Entity)rs.getResults().get(0);				
+		try {
+			if (rs.getSize() > 0){
+				e = (Entity)rs.next();				
+			}
+			rs.close();
+		} catch (MetaDataException ex) {
+			//Currently MetaDataException is never actually thrown
 		}
-		rs.close();
+
 		return e;
 	}
 
@@ -106,16 +121,21 @@ public final class MetaDataQueryHelper{
 	/**
 	 * @param entity
 	 * @param traitKey
-	 * @return a trait or null for the given entity and traitKey using a SimpleMetaDataQueryVisitorImpl 
+	 * @return a trait or null for the given entity and traitKey using a SimpleEntityQueryVisitorImpl 
 	 */
 	public static Trait getTrait(final Entity entity, final String traitKey){
-		ITraitQueryVisitor visitor = new SimpleMetaDataQueryVisitorImpl();	
+		ITraitQueryVisitor visitor = new SimpleTraitQueryVisitorImpl();	
 		Trait t= null;
 		IResultSet/*<Trait>*/ rs = getTraits(entity, traitKey, visitor);
-		if (rs.getResults().size() > 0){
-			t = (Trait)rs.getResults().get(0);				
+		try {
+			if (rs.getSize() > 0){
+				t = (Trait)rs.next();				
+			}
+			rs.close();
+		} catch (MetaDataException ex) {
+			//Currently MetaDataException is never actually thrown
 		}
-		rs.close();
+
 		return t;
 	}
 
@@ -134,16 +154,20 @@ public final class MetaDataQueryHelper{
 	/**
 	 * @param initialEntityContext
 	 * @param entityKey relative to initial passed entity
-	 * @return the first entity located by key using SimpleMetaDataQueryVisitorImpl
+	 * @return the first entity located by key using SimpleEntityQueryVisitorImpl
 	 */
 	public static Entity getEntity(Entity initialEntityContext, String entityKey) {
-		IEntityQueryVisitor visitor = new SimpleMetaDataQueryVisitorImpl(new SearchControl(1, SearchControl.SCOPE_ALL_LEVELS));
+		IEntityQueryVisitor visitor = new SimpleEntityQueryVisitorImpl(new HierarchicalSearchControl(1, HierarchicalSearchControl.SCOPE_ALL_LEVELS));
 		Entity e= null;
 		IResultSet/*<Entity>*/ rs = getEntities(initialEntityContext, entityKey, visitor);
-		if (rs.getResults().size() > 0)
-			e = (Entity)rs.getResults().get(0);
-		
-		rs.close();
+		try {
+			if (rs.getSize() > 0)
+				e = (Entity)rs.next();	
+			rs.close();
+		} catch (MetaDataException ex) {
+			//Currently MetaDataException is never actually thrown
+		}		
+
 		return e;		
 	}
 

@@ -15,18 +15,19 @@ import org.eclipse.jst.jsf.common.metadata.Entity;
 
 /**
  * Visitor interface for Entities
- * API: should we force extension through an abstract class?
+ * NOT to implemented by clients directly.   Clients should subclass AbstractEntityVisitor instead.
  */
-public abstract interface IEntityVisitor extends IMetaDataVisitor {
+public interface IEntityVisitor extends IMetaDataVisitor {
 	/**
-	 * Visit the entity
-	 * @param entity
+	 * Visit the entity. 
+	 * The entity and then it's children are visited
+	 * @param entity - must not be NULL
 	 */
 	public void visit(final Entity entity);
 	/**
-	 * Signal that the last visited entity is now completely 'visited'.  
-	 * Needed to signal that all children have also been visited.
-     * API: what is the contract here for implementers of this interface?
+	 * Signal that the entity and all it's children is now completely 'visited'.  
+	 * The entity will call this method at the end of the accept method.
+	 * @param entity - must not be NULL
 	 */
-	public void visitCompleted();
+	public void visitCompleted(Entity entity);
 }

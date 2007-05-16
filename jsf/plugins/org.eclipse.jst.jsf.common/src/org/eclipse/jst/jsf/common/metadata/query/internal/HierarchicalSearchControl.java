@@ -9,15 +9,13 @@
  *    Oracle - initial API and implementation
  *    
  ********************************************************************************/
-package org.eclipse.jst.jsf.common.metadata.query;
+
+package org.eclipse.jst.jsf.common.metadata.query.internal;
 
 /**
- * Simple class used by {@link SimpleMetaDataQueryVisitorImpl} allowing some control of a metadata query.  
- * A query visitor can use this to optimize the query results and signal completion.
- * API: extensibility?  should this be package private? 
+ * Sets controls on how a tree of nodes can be searched
  */
-public class SearchControl {
-	
+public class HierarchicalSearchControl extends SearchControl {
 	//scope levels
 	/**
 	 * Do not recurse.  
@@ -32,45 +30,24 @@ public class SearchControl {
 	 */
 	public static final int SCOPE_ALL_LEVELS = 2;
 	
-	/**
-	 * No limit on query results
-	 */
-	public static final int COUNT_LIMIT_NONE = -1;
-	
-	//default settings
-	private int countLimit = COUNT_LIMIT_NONE;
 	private int scope = SCOPE_ALL_LEVELS;
 	
 	/**
 	 * Constructor using defaults of COUNT_LIMIT_NONE and SCOPE_ALL_LEVELS 
 	 */
-	public SearchControl(){
-		//use default settings
+	public HierarchicalSearchControl(){
+		super();
 	}
-	
 	/**
 	 * Constructor
 	 * @param countLimit
 	 * @param scope
 	 */
-	public SearchControl(int countLimit, int scope){
+	public HierarchicalSearchControl(int countLimit, int scope){
+		super(countLimit);
 		this.scope = scope;
-		this.countLimit = countLimit;
 	}
 	
-	/**
-	 * @param limit results count limit
-	 */
-	public void setCountLimit(int limit){
-		this.countLimit = limit;
-	}
-	
-	/**
-	 * @return query results count limit
-	 */
-	public int getCountLimit(){
-		return countLimit;
-	}
 	
 	/**
 	 * @param scope

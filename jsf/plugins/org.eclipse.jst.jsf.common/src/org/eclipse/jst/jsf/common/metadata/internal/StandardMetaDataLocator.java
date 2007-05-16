@@ -31,9 +31,15 @@ public class StandardMetaDataLocator extends AbstractMetaDataLocator {
 	/* 
 	 * Does nothing.
 	 */
+	public void startLocating() {
+		//do nothing
+	}
+
+	/* 
+	 * Does nothing.
+	 */
 	public void stopLocating() {
 		//do nothing
-
 	}
 
 

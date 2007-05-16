@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelImpl.java,v 1.4 2007/05/11 17:54:55 gkessler Exp $
+ * $Id: ModelImpl.java,v 1.5 2007/05/16 23:51:15 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.impl;
 
@@ -239,7 +239,7 @@ public class ModelImpl extends EntityImpl implements Model {
 			}
 		}
 
-		visitor.visitCompleted();
+		visitor.visitCompleted(this);
 	}
 	/**
 	 * <!-- begin-user-doc -->

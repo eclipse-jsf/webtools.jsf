@@ -9,21 +9,23 @@
  *    Oracle - initial API and implementation
  *    
  ********************************************************************************/
+
 package org.eclipse.jst.jsf.common.metadata.query;
 
 import org.eclipse.jst.jsf.common.metadata.Entity;
 
 /**
- * Trait querying interface
- * NOT to implemented by clients directly.   Clients should subclass AbstractTraitQueryVisitor instead.
+ * Abstract implementation that concrete subclasses should ovveride
  */
-public interface ITraitQueryVisitor extends ITraitVisitor{
-	/**
-	 * @param entity
-	 * @param traitKey
-	 * @return IResultSet of Traits.  IResultSet must NOT be null.  Implementers may return {@link EmptyResultSet}.
-	 */
-	public IResultSet/*<Trait>*/ findTraits(final Entity entity,
-			final String traitKey);
+public abstract class AbstractEntityVisitor extends AbstractMetaDataVisitor
+		implements IEntityVisitor {
+
+	public void visit(Entity entity){
+		//
+	}
+
+	public void visitCompleted(Entity entity) {
+		//
+	}
 
 }

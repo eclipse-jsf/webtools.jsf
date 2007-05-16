@@ -20,10 +20,13 @@ import org.eclipse.jst.jsf.common.metadata.IncludeEntityGroup;
 import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.Trait;
 import org.eclipse.jst.jsf.common.metadata.query.IMetaDataModelContext;
+import org.eclipse.jst.jsf.common.metadata.query.MetaDataException;
 import org.eclipse.jst.jsf.common.metadata.query.MetaDataQueryHelper;
-import org.eclipse.jst.jsf.common.metadata.query.SearchControl;
-import org.eclipse.jst.jsf.common.metadata.query.SimpleMetaDataQueryVisitorImpl;
-import org.eclipse.jst.jsf.common.metadata.query.SimpleResultSet;
+import org.eclipse.jst.jsf.common.metadata.query.internal.SearchControl;
+import org.eclipse.jst.jsf.common.metadata.query.internal.SimpleEntityQueryVisitorImpl;
+import org.eclipse.jst.jsf.common.metadata.query.internal.SimpleResultSet;
+import org.eclipse.jst.jsf.common.metadata.query.internal.SimpleTraitQueryVisitorImpl;
+import org.eclipse.jst.jsf.common.metadata.query.internal.HierarchicalSearchControl;
 /**
  * Implements {@link IMetaDataModelMergeAssistant}
  * 
@@ -38,17 +41,19 @@ public class MetaDataModelMergeAssistantImpl implements
 	
 	private MetaDataModel mergedModel;
 	private Copier copier;
-	private SimpleMetaDataQueryVisitorImpl visitor;
+	private SimpleEntityQueryVisitorImpl entityVisitor;
+	private SimpleTraitQueryVisitorImpl traitVisitor;
 	private IMetaDataSourceModelProvider provider;
 	
 	/**
-	 * Constructor
+	 * Constructor.   Queries with search control limited to first found.
 	 * @param model
 	 */
 	public MetaDataModelMergeAssistantImpl(MetaDataModel model) {
 		this.mergedModel = model;
 		copier = new Copier();
-		visitor = new SimpleMetaDataQueryVisitorImpl(new SearchControl(1, SearchControl.SCOPE_ALL_LEVELS));
+		entityVisitor = new SimpleEntityQueryVisitorImpl(new HierarchicalSearchControl(1, HierarchicalSearchControl.SCOPE_ALL_LEVELS));
+		traitVisitor = new SimpleTraitQueryVisitorImpl(new SearchControl(1));
 	}
 
 	/* (non-Javadoc)
@@ -233,11 +238,15 @@ public class MetaDataModelMergeAssistantImpl implements
 		
 		Entity ret = null;
 		String entityKey = getIdRelativeToRoot(entity);
-		SimpleResultSet rs = (SimpleResultSet)visitor.findEntities((Entity)mergedModel.getRoot(), entityKey);
-		if (rs.getResults().size() >0)
-			ret = (Entity)rs.getResults().get(0);
-		
-		rs.close();
+		SimpleResultSet rs = (SimpleResultSet)entityVisitor.findEntities((Entity)mergedModel.getRoot(), entityKey);
+		if (rs.getSize() >0) {
+			try {
+				ret = (Entity)rs.next();				
+				rs.close();
+			} catch (MetaDataException e) {
+				//MetaDataException is not currently being thrown
+			}
+		}
 		return ret;
 	}
 	
@@ -262,15 +271,19 @@ public class MetaDataModelMergeAssistantImpl implements
 	 * @return merged Trait
 	 */
 	public Trait getMergedTrait(Entity entity, Trait trait){
-		SimpleResultSet rs = (SimpleResultSet)visitor.findTraits(entity, trait.getId());
+		SimpleResultSet rs = (SimpleResultSet)traitVisitor.findTraits(entity, trait.getId());
 		Trait ret = null;
-		if (rs.getResults().size() >0)
-			ret = (Trait)rs.getResults().get(0);
-		
-		rs.close();
+		if (rs.getSize() > 0) {
+			try {
+				ret = (Trait)rs.next();				
+				rs.close();
+			} catch (MetaDataException e) {
+				//MetaDataException not currently being thrown
+			}
+		}
 		return ret;
 	}
-	
+
 	private void processIncludeGroups(final Model root) {
 		addEntityGroupReferencesRecursively(root);
 	}

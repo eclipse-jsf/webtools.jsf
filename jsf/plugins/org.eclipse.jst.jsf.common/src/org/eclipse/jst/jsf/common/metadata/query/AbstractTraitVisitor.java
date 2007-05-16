@@ -9,15 +9,17 @@
  *    Oracle - initial API and implementation
  *    
  ********************************************************************************/
+
 package org.eclipse.jst.jsf.common.metadata.query;
 
-
+import org.eclipse.jst.jsf.common.metadata.Trait;
 
 /**
- * Simple implementation of {@link IResultSet} by extending AbstractResultSet
  *
  */
-public class SimpleResultSet/*<T>*/ extends AbstractResultSet/*<T>*/ {
-    // API: Should push down overridable functionality from AbstractResultSet
-    // and make final all functionality left in AbstractResultSet
+public abstract class AbstractTraitVisitor extends AbstractMetaDataVisitor implements ITraitVisitor{
+
+	public void visit(Trait trait) { // 
+	}
+
 }

@@ -9,19 +9,27 @@
  *    Oracle - initial API and implementation
  *    
  ********************************************************************************/
+
 package org.eclipse.jst.jsf.common.metadata.query;
 
-import org.eclipse.jst.jsf.common.metadata.Trait;
-
 /**
- * Visitor interface for Traits
- * NOT to implemented by clients directly.   Clients should subclass AbstractTraitVisitor instead.
+ * Implementation of an empty result set
  */
-public interface ITraitVisitor extends IMetaDataVisitor {
-	/**
-	 * Visit the Trait.
-	 * Implementer cannot assume ordering of trait visiting. 
-	 * @param trait - must not be null
- 	 */
-	public void visit(final Trait trait);
+public class EmptyResultSet implements IResultSet {
+
+	public void close() {//
+	}
+
+	public int getSize() throws MetaDataException {
+		return 0;
+	}
+
+	public boolean hasNext() throws MetaDataException {				
+		return false;
+	}
+
+	public Object next() throws MetaDataException {
+		return null;
+	}
+
 }

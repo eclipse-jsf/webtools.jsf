@@ -15,13 +15,14 @@ import org.eclipse.jst.jsf.common.metadata.Entity;
 
 /**
  * Entity querying interface
+ * NOT to implemented by clients directly.   Clients should subclass AbstractEntityQueryVisitor instead.
  *
  */
 public interface IEntityQueryVisitor extends IEntityVisitor{
 	/**
 	 * @param initialEntityContext
 	 * @param entityKey to find relative to the passed intialEntityContext
-	 * @return IResultSet of Entities matching the key.  IResultSet should NOT be null.
+	 * @return IResultSet of Entities matching the key.  IResultSet must NOT be null.  Implementers may return {@link EmptyResultSet}.
 	 */
 	public IResultSet/*<Entity>*/ findEntities(final Entity initialEntityContext,
 			final String entityKey);

@@ -9,14 +9,18 @@
  *    Oracle - initial API and implementation
  *    
  ********************************************************************************/
-package org.eclipse.jst.jsf.common.metadata.query;
+package org.eclipse.jst.jsf.common.metadata.query.internal;
 
-import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.EntityGroup;
-import org.eclipse.jst.jsf.common.metadata.Trait;
+import org.eclipse.jst.jsf.common.metadata.query.AbstractEntityQueryVisitor;
+import org.eclipse.jst.jsf.common.metadata.query.IEntityQueryVisitor;
+import org.eclipse.jst.jsf.common.metadata.query.IResultSet;
+import org.eclipse.jst.jsf.common.metadata.query.ITraitQueryVisitor;
 
 
 /**
@@ -25,61 +29,29 @@ import org.eclipse.jst.jsf.common.metadata.Trait;
  * - Does not allow for wild card searchs
  * API: extensibility?
  */
-public class SimpleMetaDataQueryVisitorImpl implements IEntityQueryVisitor, ITraitQueryVisitor  {
-
-	private String _traitQuery;
-	private SearchControl control;
+public class SimpleEntityQueryVisitorImpl extends AbstractEntityQueryVisitor  {
+	private HierarchicalSearchControl control;
 	private boolean _stop;
 
 	private EntityQueryComparator entityComparator;
-	private SimpleResultSet/*<Entity>*/ entityResultSet;
-	private SimpleResultSet/*<Trait>*/ traitResultSet;
+	private List/*<Entity>*/ _entityResults;
 
 	/**
 	 * Constructor that also creates a default SearchControl
 	 */
-	public SimpleMetaDataQueryVisitorImpl() {
+	public SimpleEntityQueryVisitorImpl() {
 		super();
-		control = new SearchControl();
+		control = new HierarchicalSearchControl();
 	}
 	
 	/**
 	 * Constructor
 	 * @param control
 	 */
-	public SimpleMetaDataQueryVisitorImpl(SearchControl control) {
+	public SimpleEntityQueryVisitorImpl(HierarchicalSearchControl control) {
 		super();
 		this.control = control;
 	}
-	
-	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.common.metadata.query.ITraitQueryVisitor#findTraits(org.eclipse.jst.jsf.common.metadata.Entity, java.lang.String)
-	 */
-	public IResultSet/*<Trait>*/ findTraits(final Entity entity, final String traitQuery){
-		
-		resetQuery();
-		if (entity != null){			
-			this._traitQuery = traitQuery;			
-			for (Iterator/*<Trait>*/ it=entity.getTraits().iterator();it.hasNext();){
-				Trait t = (Trait)it.next();
-				t.accept(this);
-				if (stopVisiting())
-					break;
-			}
-		}
-		return getTraitResultSet();
-	}
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.common.metadata.query.ITraitVisitor#visit(org.eclipse.jst.jsf.common.metadata.Trait)
-	 */
-	public void visit(Trait trait) {		
-		if (trait.equals(_traitQuery))
-			getTraitResultSet().addItem(trait);		
-		
-		checkShouldStopVisitingTraits();
-	}
-
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.jst.jsf.common.metadata.query.IEntityQueryVisitor#findEntities(org.eclipse.jst.jsf.common.metadata.Entity, java.lang.String)
@@ -94,40 +66,28 @@ public class SimpleMetaDataQueryVisitorImpl implements IEntityQueryVisitor, ITra
 			initialEntityContext.accept(this);			
 		}
 		
-		return getEntityResultSet();
+		return new SimpleResultSet(getInternalEntityResults());
 	}
 
 	private void resetQuery() {
 		_stop = false;
+		_entityResults = null;
 	}
 
-	/**
-	 * @return @return lazy init of a SimpleResultSet of Entities
-	 */
-	private SimpleResultSet/*<Entity>*/ getEntityResultSet(){
-		if (entityResultSet == null){
-			entityResultSet = new SimpleResultSet/*<Entity>*/();
+	private List/*<Entity>*/ getInternalEntityResults(){
+		if (_entityResults == null){
+			_entityResults = new ArrayList/*<Entity>*/();
 		}
-		return entityResultSet;
+		return _entityResults;
 	}
 
-	/**
-	 * @return lazy init of a SimpleResultSet of Traits
-	 */
-	private SimpleResultSet/*<Trait>*/ getTraitResultSet(){
-		if (traitResultSet == null){
-			traitResultSet = new SimpleResultSet/*<Trait>*/();
-		}
-		return traitResultSet;
-	}
-	
 	/* (non-Javadoc)
 	 * @see org.eclipse.jst.jsf.common.metadata.query.IEntityVisitor#visit(org.eclipse.jst.jsf.common.metadata.Entity)
 	 */
 	public void visit(Entity key) {		
 		switch (entityComparator.compareTo(key)){
 			case 0:
-				getEntityResultSet().addItem(key);
+				getInternalEntityResults().add(key);
 				break;
 			default:
 				break;
@@ -136,9 +96,9 @@ public class SimpleMetaDataQueryVisitorImpl implements IEntityQueryVisitor, ITra
 		checkShouldStopVisitingEntities();
 	}
 	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.common.metadata.query.IEntityVisitor#visitCompleted()
+	 * @see org.eclipse.jst.jsf.common.metadata.query.IEntityVisitor#visitCompleted(Entity entity)
 	 */
-	public void visitCompleted() {
+	public void visitCompleted(Entity entity) {
 		entityComparator.popContext();
 	}
 	
@@ -151,16 +111,9 @@ public class SimpleMetaDataQueryVisitorImpl implements IEntityQueryVisitor, ITra
 
 	private void checkShouldStopVisitingEntities(){
 		//implement how to set stop to signal to the entity accept() to skip visiting
-		if (control.getCountLimit()== getEntityResultSet().size() && control.getCountLimit() != SearchControl.COUNT_LIMIT_NONE )
+		if (control.getCountLimit()== getInternalEntityResults().size() && control.getCountLimit() != SearchControl.COUNT_LIMIT_NONE )
 			_stop = true;
 	}
-	
-	private void checkShouldStopVisitingTraits(){
-		//this simple visitor will only find a single trait as it checks for exact match only currently 
-		if (getTraitResultSet().size() > 0 )
-			_stop = true;
-	}
-
 
 	/**
 	 * Simple comparator that compares that an entity's id for with another

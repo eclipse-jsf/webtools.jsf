@@ -11,24 +11,36 @@
  ********************************************************************************/
 package org.eclipse.jst.jsf.common.metadata.query;
 
-import java.util.List;
 
 
 /**
- * Results from a metadata query.
+ * Results from a metadata query.  The resultset should be considered valid only at the time that the query is performed.
  * 
- * Not intended to be implemented directly by clients.  Developers may extend {@link AbstractResultSet} instead.
+ * Not intended to be implemented directly by clients.  Developers should extend {@link AbstractResultSet} instead.
  */
 public interface IResultSet/*<T>*/{
 	
 	/**
-	 * @return List of results.  May NOT be null.  Implementer must return Collections.EMPTY_LIST instead.
+	 * @return size of the resultset.  
+	 * @throws MetaDataException 
 	 */
-	public List/*<T>*/ getResults();
+	public int getSize() throws MetaDataException;
+		
+	/**
+	 * @return next result.   Clients should check hasNext() before calling.
+	 * @throws MetaDataException 
+	 */
+	public Object/*<T>*/ next() throws MetaDataException;
 	
 	/**
-	 * Signal that the query results are no longer required allowing for any cleanup that may be required
-     * API: event to signal that result set is no longer valid?
+	 * @return true if the resultset has more elements
+	 * @throws MetaDataException
 	 */
-	public void close();
+	public boolean hasNext() throws MetaDataException;
+
+	/**
+	 * Signal that the query results are no longer required allowing for any cleanup that may be required
+	 * @throws MetaDataException 
+	 */
+	public void close() throws MetaDataException;
 }
