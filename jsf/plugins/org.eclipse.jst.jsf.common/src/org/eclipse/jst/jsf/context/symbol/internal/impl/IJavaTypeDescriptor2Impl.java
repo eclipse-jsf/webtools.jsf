@@ -18,7 +18,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -29,10 +28,10 @@ import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
-import org.eclipse.jdt.core.ITypeHierarchy;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
+import org.eclipse.jst.jsf.common.internal.types.TypeInfoCache;
 import org.eclipse.jst.jsf.common.util.JDTBeanIntrospector;
 import org.eclipse.jst.jsf.common.util.JDTBeanProperty;
 import org.eclipse.jst.jsf.common.util.TypeUtil;
@@ -177,6 +176,10 @@ public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJa
             eNotify(new ENotificationImpl(this, Notification.SET, SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__TYPE, oldType, type));
     }
 
+	/**
+	 * @see org.eclipse.jst.jsf.context.symbol.internal.impl.ITypeDescriptorImpl#getInterfaceTypeSignatures()
+	 * @generated NOT
+	 */
 	public EList getInterfaceTypeSignatures() 
     {
         EList  interfaces = new BasicEList();
@@ -185,22 +188,21 @@ public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJa
         
         if (type_ != null)
         {
-            // TODO: type hierarchy is potentially expensive, should
-            // cache once and listen for changes
-            try {
-                final ITypeHierarchy  hierarchy = 
-                    type_.newSupertypeHierarchy(new NullProgressMonitor());
-                final IType[] interfaceTypes = hierarchy.getAllInterfaces();
-                copySignatures(interfaces, interfaceTypes);
-            } catch (JavaModelException e) {
-                JSFCommonPlugin.log(e);
+            final TypeInfoCache typeInfoCache = TypeInfoCache.getInstance();
+            IType[] interfaceTypes = typeInfoCache.getCachedInterfaceTypes(type_);
+            if (interfaceTypes == null) {
+               interfaceTypes = typeInfoCache.cacheInterfaceTypesFor(type_);
             }
-
+            copySignatures(interfaces, interfaceTypes);
         }
         
         return interfaces;
     }
 
+    /**
+     * @see org.eclipse.jst.jsf.context.symbol.internal.impl.ITypeDescriptorImpl#getSuperTypeSignatures()
+     * @generated NOT
+     */
     public EList getSuperTypeSignatures() 
     {
         EList  interfaces = new BasicEList();
@@ -209,16 +211,14 @@ public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJa
         
         if (type_ != null)
         {
-            // TODO: type hierarchy is potentially expensive, should
-            // cache once and listen for changes
-            try {
-                final ITypeHierarchy  hierarchy = 
-                    type_.newSupertypeHierarchy(new NullProgressMonitor());
-                final IType[] interfaceTypes = hierarchy.getAllSuperclasses(type_);
-                copySignatures(interfaces, interfaceTypes);
-            } catch (JavaModelException e) {
-                JSFCommonPlugin.log(e);
+            final TypeInfoCache typeInfoCache = TypeInfoCache.getInstance();
+            IType[] interfaceTypes = typeInfoCache.getCachedSupertypes(type_);
+
+            if (interfaceTypes == null) 
+            {
+               interfaceTypes = typeInfoCache.cacheSupertypesFor(type_);
             }
+            copySignatures(interfaces, interfaceTypes);
         }
         
         return interfaces;
@@ -256,10 +256,23 @@ public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJa
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public EList getBeanProperties() {
-		BasicEList list = new BasicEList();
-		list.addAll(getPropertiesInternal());
-		return list;
+	public EList getBeanProperties() 
+	{
+	    TypeInfoCache typeInfoCache = TypeInfoCache.getInstance();
+	    IBeanPropertySymbol[] properties = typeInfoCache.getCachedPropertySymbols(type);
+	    Collection propertyColl;
+	    if (properties == null) {
+	        propertyColl = getPropertiesInternal();
+	        properties = (IBeanPropertySymbol[]) propertyColl.toArray(new IBeanPropertySymbol[propertyColl.size()]);
+	        typeInfoCache.cachePropertySymbols(type, properties);
+	    } 
+	    else 
+	    {
+            propertyColl = new ArrayList(properties.length);
+            Collections.addAll(propertyColl, properties);
+	    }
+	    BasicEList list = new BasicEList(propertyColl);
+	    return list;
 	}
 
 	/**
@@ -269,8 +282,19 @@ public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJa
 	 * @generated NOT
 	 */
 	public EList getBeanMethods() {
-		BasicEList list = new BasicEList();
-		list.addAll(getMethodsInternal());
+	    TypeInfoCache typeInfoCache = TypeInfoCache.getInstance();
+	    IBeanMethodSymbol[] methods = typeInfoCache.getCachedMethodSymbols(type);
+	    Collection methodColl;
+	    if (methods == null) 
+	    {
+	        methodColl = getMethodsInternal();
+	        methods = (IBeanMethodSymbol[]) methodColl.toArray(new IBeanMethodSymbol[methodColl.size()]);
+	        typeInfoCache.cacheMethodSymbols(type, methods);
+	    } else {
+	        methodColl = new ArrayList(methods.length);
+	        Collections.addAll(methodColl, methods);
+	    }
+	    BasicEList list = new BasicEList(methodColl);
 		return list;
 	}
 

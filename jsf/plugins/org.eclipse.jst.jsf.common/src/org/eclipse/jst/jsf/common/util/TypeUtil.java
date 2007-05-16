@@ -80,7 +80,7 @@ public final class TypeUtil
     /**
      * Resolve typeSignature in the context of owningType.  This method will return 
      * a type erased signture if eraseTypeParameters == true and will attempt to
-     * resolve and include parameters if eraseTypeParamters
+     * resolve and include parameters if eraseTypeParamters == false
      * 
      * NOTE: special rules apply to the way unresolved type parameters and wildcards
      * are resolved:
@@ -102,7 +102,7 @@ public final class TypeUtil
      * i.e. List<?> -> Ljava.util.List<Ljava.lang.Object;>;
      * 
      * 
-     * The reason for this substitions is to return the most accurate reasonable approximation
+     * The reason for this substition is to return the most accurate reasonable approximation
      * of the type within what is known by owningType
      * 
      * @param owningType
@@ -413,12 +413,12 @@ public final class TypeUtil
         {
             if (type == null || !isEnumType(type))
             {
-                throw new IllegalArgumentException("type must be non-null and isEnum()==true");
+                throw new IllegalArgumentException("type must be non-null and isEnum()==true"); //$NON-NLS-1$
             }
             
             if (fieldName == null)
             {
-                throw new IllegalArgumentException("fieldName must be non-null");
+                throw new IllegalArgumentException("fieldName must be non-null"); //$NON-NLS-1$
             }
 
             // if type is the java.lang.Enum, always true
@@ -452,13 +452,13 @@ public final class TypeUtil
     {
         if (typeSig1 == null || typeSig2 == null)
         {
-            throw new IllegalArgumentException("args must not be null");
+            throw new IllegalArgumentException("args must not be null"); //$NON-NLS-1$
         }
         
         if (Signature.getTypeSignatureKind(typeSig1) != Signature.CLASS_TYPE_SIGNATURE
              || Signature.getTypeSignatureKind(typeSig2) != Signature.CLASS_TYPE_SIGNATURE)
         {
-            throw new IllegalArgumentException("args must be resolved class types");
+            throw new IllegalArgumentException("args must be resolved class types"); //$NON-NLS-1$
         }
         
         // if one or the other is the raw enum type, then they *may* be comparable; we don't know
@@ -484,13 +484,13 @@ public final class TypeUtil
     {
         if (typeSig1 == null || typeSig2 == null)
         {
-            throw new IllegalArgumentException("args must not be null");
+            throw new IllegalArgumentException("args must not be null"); //$NON-NLS-1$
         }
         
         if (Signature.getTypeSignatureKind(typeSig1) != Signature.CLASS_TYPE_SIGNATURE
              || Signature.getTypeSignatureKind(typeSig2) != Signature.CLASS_TYPE_SIGNATURE)
         {
-            throw new IllegalArgumentException("args must be resolved class types");
+            throw new IllegalArgumentException("args must be resolved class types"); //$NON-NLS-1$
         }
 
         // if either one is the base enum type, then we can't be sure
@@ -533,7 +533,7 @@ public final class TypeUtil
         catch (JavaModelException jme)
         {
             // log and fallthrough to return false
-            JSFCommonPlugin.log(jme, "Problem resolving isEnum");
+            JSFCommonPlugin.log(jme, "Problem resolving isEnum"); //$NON-NLS-1$
         }
         
         // if unresolved assume false
