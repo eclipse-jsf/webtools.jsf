@@ -33,7 +33,9 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.wst.validation,
  org.eclipse.wst.sse.ui,
  org.eclipse.wst.common.emf,
- org.eclipse.ui.browser
+ org.eclipse.ui.browser,
+ org.eclipse.jst.jee.web,
+ org.eclipse.jst.jee
 Eclipse-LazyStart: true
 Export-Package: org.eclipse.jst.jsf.core,
  org.eclipse.jst.jsf.core.internal;x-friends:="org.eclipse.jst.jsf.core.tests,org.eclipse.jst.jsf.ui,org.eclipse.jst.jsf.ui.tests",

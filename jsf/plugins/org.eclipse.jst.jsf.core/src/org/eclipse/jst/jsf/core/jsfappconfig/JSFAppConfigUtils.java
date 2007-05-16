@@ -12,6 +12,7 @@ package org.eclipse.jst.jsf.core.jsfappconfig;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -33,6 +34,8 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jst.j2ee.common.ParamValue;
 import org.eclipse.jst.j2ee.internal.J2EEVersionConstants;
+import org.eclipse.jst.j2ee.model.IModelProvider;
+import org.eclipse.jst.j2ee.model.ModelProviderManager;
 import org.eclipse.jst.j2ee.web.componentcore.util.WebArtifactEdit;
 import org.eclipse.jst.j2ee.webapplication.ContextParam;
 import org.eclipse.jst.j2ee.webapplication.WebApp;
@@ -124,7 +127,6 @@ public class JSFAppConfigUtils {
         }
 		return isValid;
 	}
-
     /**
      * Get the facet version for the project 
      * @param project
@@ -210,54 +212,89 @@ public class JSFAppConfigUtils {
 	 * may be empty.
 	 */
 	public static List getConfigFilesFromContextParam(IProject project) {
-		ArrayList filesList = new ArrayList();
+		List filesList = Collections.EMPTY_LIST;
 		if (isValidJSFProject(project)) {
-			WebArtifactEdit webArtifactEdit = WebArtifactEdit.getWebArtifactEditForRead(project);
-			if (webArtifactEdit != null) {
+			IModelProvider provider = ModelProviderManager.getModelProvider(project);
+			Object webAppObj = provider.getModelObject();
+			if (webAppObj != null){
+				if (webAppObj instanceof WebApp)
+					filesList = getConfigFilesForJ2EEApp(project);
+				else if (webAppObj instanceof org.eclipse.jst.javaee.web.WebApp)
+					filesList = getConfigFilesForJEEApp((org.eclipse.jst.javaee.web.WebApp)webAppObj);
+			}
+			
+		}
+		return filesList;
+	}
+
+	private static List getConfigFilesForJEEApp(org.eclipse.jst.javaee.web.WebApp webApp) {
+		String filesString = null;
+		List contextParams = webApp.getContextParams();
+		Iterator itContextParams = contextParams.iterator();
+		while (itContextParams.hasNext()) {
+			org.eclipse.jst.javaee.core.ParamValue paramValue = (org.eclipse.jst.javaee.core.ParamValue)itContextParams.next();
+			if (paramValue.getParamName().equals(CONFIG_FILES_CONTEXT_PARAM_NAME)) {
+				filesString = paramValue.getParamValue();
+				break;
+			}
+		}		
+		return parseFilesString(filesString);	
+	}
+
+	private static List getConfigFilesForJ2EEApp(IProject project){
+		List filesList = new ArrayList();
+		WebArtifactEdit webArtifactEdit = WebArtifactEdit.getWebArtifactEditForRead(project);
+		if (webArtifactEdit != null) {
+			try {
+				WebApp webApp = null;
 				try {
-					WebApp webApp = null;
-					try {
-						webApp = webArtifactEdit.getWebApp();
-					} catch(ClassCastException cce) {
-						//occasionally thrown from WTP code in RC3 and possibly later
-						JSFCorePlugin.log(IStatus.ERROR, cce.getLocalizedMessage(), cce);
-						return filesList;
-					}
-					if (webApp != null) {
-						String filesString = null;
-						//need to branch here due to model version differences (BugZilla #119442)
-						if (webApp.getVersionID() == J2EEVersionConstants.WEB_2_3_ID) {
-							EList contexts = webApp.getContexts();
-							Iterator itContexts = contexts.iterator();
-							while (itContexts.hasNext()) {
-								ContextParam contextParam = (ContextParam)itContexts.next();
-								if (contextParam.getParamName().equals(CONFIG_FILES_CONTEXT_PARAM_NAME)) {
-									filesString = contextParam.getParamValue();
-									break;
-								}
-							}
-						} else {
-							EList contextParams = webApp.getContextParams();
-							Iterator itContextParams = contextParams.iterator();
-							while (itContextParams.hasNext()) {
-								ParamValue paramValue = (ParamValue)itContextParams.next();
-								if (paramValue.getName().equals(CONFIG_FILES_CONTEXT_PARAM_NAME)) {
-									filesString = paramValue.getValue();
-									break;
-								}
-							}
-						}
-						if (filesString != null && filesString.trim().length() > 0) {
-							StringTokenizer stFilesString = new StringTokenizer(filesString, ","); //$NON-NLS-1$
-							while (stFilesString.hasMoreTokens()) {
-								String configFile = stFilesString.nextToken().trim();
-								filesList.add(configFile);
-							}
-						}
-					}
-				} finally {
-					webArtifactEdit.dispose();
+					webApp = webArtifactEdit.getWebApp();
+				} catch(ClassCastException cce) {
+					//occasionally thrown from WTP code in RC3 and possibly later
+					JSFCorePlugin.log(IStatus.ERROR, cce.getLocalizedMessage(), cce);
+					return filesList;
 				}
+				if (webApp != null) {
+					String filesString = null;
+					//need to branch here due to model version differences (BugZilla #119442)
+					if (webApp.getVersionID() == J2EEVersionConstants.WEB_2_3_ID) {
+						EList contexts = webApp.getContexts();
+						Iterator itContexts = contexts.iterator();
+						while (itContexts.hasNext()) {
+							ContextParam contextParam = (ContextParam)itContexts.next();
+							if (contextParam.getParamName().equals(CONFIG_FILES_CONTEXT_PARAM_NAME)) {
+								filesString = contextParam.getParamValue();
+								break;
+							}
+						}
+					} else {
+						EList contextParams = webApp.getContextParams();
+						Iterator itContextParams = contextParams.iterator();
+						while (itContextParams.hasNext()) {
+							ParamValue paramValue = (ParamValue)itContextParams.next();
+							if (paramValue.getName().equals(CONFIG_FILES_CONTEXT_PARAM_NAME)) {
+								filesString = paramValue.getValue();
+								break;
+							}
+						}
+					}					
+					filesList = parseFilesString(filesString);				
+				}
+			} finally {
+				webArtifactEdit.dispose();
+			}
+		}
+
+		return filesList;
+	}
+	
+	private static List parseFilesString(String filesString) {
+		List filesList = new ArrayList();
+		if (filesString != null && filesString.trim().length() > 0) {			
+			StringTokenizer stFilesString = new StringTokenizer(filesString, ","); //$NON-NLS-1$
+			while (stFilesString.hasMoreTokens()) {
+				String configFile = stFilesString.nextToken().trim();
+				filesList.add(configFile);
 			}
 		}
 		return filesList;

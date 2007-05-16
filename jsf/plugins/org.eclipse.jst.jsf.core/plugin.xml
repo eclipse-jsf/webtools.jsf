@@ -38,38 +38,54 @@
     <project-facet-version facet="jst.jsf" version="1.2">
        <constraint>
         <and>
-          <requires facet="jst.web" version="[2.4"/>
-          <requires facet="jst.java" version="[5.0"/>
+          <requires facet="jst.web" version="[2.5"/>
         </and>
       </constraint>
     </project-facet-version> 
 
-    <action id="jst.jsf.v11.install" facet="jst.jsf" type="INSTALL" version="[1.1-1.2]">
-      <delegate class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDelegate"/>
+    <action id="jst.jsf.v11.install" facet="jst.jsf" type="INSTALL" version="1.1">
+      	<delegate class="org.eclipse.jst.jsf.core.internal.project.facet.JSFJ2EEFacetInstallDelegate"/>
         <config-factory class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDataModelProvider"/>
     </action>  
       
-    <action id="jst.jsf.v11.uninstall" facet="jst.jsf" version="[1.1-1.2]" type="UNINSTALL">
+    <action id="jst.jsf.v11.uninstall" facet="jst.jsf" version="1.1" type="UNINSTALL">
 	 	<delegate
-        class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetUninstallDelegate"/>
- 	</action>      
-
-	<preset id="preset.jst.jsf.v1_1">
-	    <label>JavaServer Faces v1.1 Project</label>
+        class="org.eclipse.jst.jsf.core.internal.project.facet.JSFJ2EEFacetUninstallDelegate"/>
+ 	</action>
+ 	
+ 	<action id="jst.jsf.v12.install" facet="jst.jsf" type="INSTALL" version="[1.2">
+      	<delegate class="org.eclipse.jst.jsf.core.internal.project.facet.JSFJavaEEFacetInstallDelegate"/>
+        <config-factory class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDataModelProvider"/>
+    </action>  
+      
+    <action id="jst.jsf.v12.uninstall" facet="jst.jsf" version="[1.2" type="UNINSTALL">
+	 	<delegate
+        class="org.eclipse.jst.jsf.core.internal.project.facet.JSFJavaEEFacetUninstallDelegate"/>
+ 	</action>          	
+  </extension> 
+  <extension
+        point="org.eclipse.wst.common.project.facet.core.presets">
+     <static-preset
+           id="preset.jst.jsf.v1_1">
+	    <label>%JSFv11Project</label>
 	    <facet id="jst.java" version="1.4" />
 	    <facet id="jst.web" version="2.3"/>
 	    <facet id="jst.jsf" version="1.1" />
-	</preset>    
-
-	<preset id="preset.jst.jsf.v1_2">
-	    <label>JavaServer Faces v1.2 Project</label>
+     <description>
+        %JSFv11PresetDesc
+     </description>
+     </static-preset>
+     <static-preset
+           id="preset.jst.jsf.v1_2">
+	    <label>%JSFv12Project</label>
 	    <facet id="jst.java" version="5.0" />
-	    <facet id="jst.web" version="2.4"/>
+	    <facet id="jst.web" version="2.5"/>
 	    <facet id="jst.jsf" version="1.2" />
-	</preset>    
- 	
-  </extension> 
-  
+     <description>
+        %JSFv12PresetDesc
+     </description>
+     </static-preset>
+  </extension>
   <extension point="org.eclipse.wst.common.project.facet.core.runtimes">
     <supported>
 		<runtime-component any="true"/>
@@ -261,4 +277,5 @@
       class="org.eclipse.jst.jsf.core.internal.JSFLibrariesContainerInitializer"
       id="org.eclipse.jst.jsf.core.internal.jsflibrarycontainer"/>
   </extension>
+  
 </plugin>

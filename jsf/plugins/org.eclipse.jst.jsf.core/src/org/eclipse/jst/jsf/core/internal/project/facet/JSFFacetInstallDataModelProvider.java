@@ -26,7 +26,7 @@ import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
-import org.eclipse.jst.j2ee.web.componentcore.util.WebArtifactEdit;
+import org.eclipse.jst.j2ee.project.facet.IJ2EEModuleFacetInstallDataModelProperties;
 import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.Messages;
@@ -35,8 +35,11 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryRegistryUtil
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.ArchiveFile;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.osgi.util.NLS;
+import org.eclipse.wst.common.componentcore.ComponentCore;
 import org.eclipse.wst.common.componentcore.datamodel.FacetInstallDataModelProvider;
 import org.eclipse.wst.common.componentcore.datamodel.properties.IFacetDataModelProperties;
+import org.eclipse.wst.common.componentcore.datamodel.properties.IFacetProjectCreationDataModelProperties;
+import org.eclipse.wst.common.componentcore.datamodel.properties.IFacetProjectCreationDataModelProperties.FacetDataModelMap;
 import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
 import org.eclipse.wst.common.frameworks.internal.operations.IProjectCreationPropertiesNew;
 
@@ -50,7 +53,6 @@ public class JSFFacetInstallDataModelProvider extends
 		IJSFFacetInstallDataModelProperties {
 
 	private String 	errorMessage;
-	private IPath 	webContentPath;
 	
 	public Set getPropertyNames() {
 		Set names = super.getPropertyNames();
@@ -177,15 +179,15 @@ public class JSFFacetInstallDataModelProvider extends
 		if (passedPath.getDevice() != null) {
 			errorMessage = NLS.bind(
 					Messages.JSFFacetInstallDataModelProvider_ValidateConfigFileRelative1,
-					getWebContentFolder().removeFirstSegments(getWebContentFolder().segmentCount() - 1).toString());
+					getWebContentFolderName());
 			return createErrorStatus(errorMessage);
 		}
-
-		IPath setPath = getWebContentFolder().append(passedPath);
+		IPath webContentFolder = getWebContentFolder();
+		IPath setPath = webContentFolder.append(passedPath);
 		if (!getWebContentFolder().isPrefixOf(setPath)) {
 			errorMessage = NLS.bind(
 					Messages.JSFFacetInstallDataModelProvider_ValidateConfigFileRelative2,
-					getWebContentFolder().removeFirstSegments(getWebContentFolder().segmentCount() - 1).toString());
+					getWebContentFolderName());
 			return createErrorStatus(errorMessage);
 		}
 
@@ -287,30 +289,67 @@ public class JSFFacetInstallDataModelProvider extends
 		//One can get here 2 ways:
 		//if web app exists and user is adding a facet, or
 		// if creating a new web app.
-		if (webContentPath != null)
-			return webContentPath;
-		
-		WebArtifactEdit webApp = null;
-		try {
-			String projName = model.getStringProperty(IFacetDataModelProperties.FACET_PROJECT_NAME);
-			IProject proj = ResourcesPlugin.getWorkspace().getRoot()
-					.getProject(projName);
-			webApp = JSFUtils.getWebArtifactEditForRead(proj);
-			if (webApp != null) {
-				webContentPath = JSFUtils.getWebArtifactEditForRead(proj)
-					.getDeploymentDescriptorPath().removeLastSegments(2);
-				return webContentPath;
-			}
-			webContentPath = new Path(getStringProperty(WEBCONTENT_DIR));
-			return webContentPath;
-		} finally {
-			if (webApp != null) {
-				webApp.dispose();
-			}
-		}
 
+		IPath webContentPath = null;
+		String projName = model.getStringProperty(IFacetDataModelProperties.FACET_PROJECT_NAME);
+		IProject proj = ResourcesPlugin.getWorkspace().getRoot()
+				.getProject(projName);
+		
+		String webFolder = getWebContentFolderName();
+		if (proj.exists()) {
+			
+			webContentPath = ComponentCore.createComponent(proj).getRootFolder()
+						.getUnderlyingFolder().getRawLocation();
+		}
+		else {			
+
+			if (webFolder == null){
+				//we got problems... should not happen
+				return proj.getFullPath();
+			}
+			webContentPath = proj.getFullPath().append(webFolder);
+
+		}
+		return webContentPath;
 	}
 	
+	private String getWebContentFolderName() {
+		String projName = (String)getProperty(FACET_PROJECT_NAME);
+		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(projName);
+		if (project.exists()){
+			IPath webContentPath = ComponentCore.createComponent(project).getRootFolder()
+			.getUnderlyingFolder().getProjectRelativePath();
+
+			return webContentPath.toString();
+		}
+		
+		IDataModel projModel = (IDataModel)getProperty(MASTER_PROJECT_DM);
+		FacetDataModelMap dmMap = (FacetDataModelMap)projModel.getProperty(IFacetProjectCreationDataModelProperties.FACET_DM_MAP);
+		IDataModel webFacet = dmMap.getFacetDataModel("jst.web");
+		return webFacet.getStringProperty(IJ2EEModuleFacetInstallDataModelProperties.CONFIG_FOLDER );
+	}
+
+//	private String getStringPropertyValueRecursively(final IDataModel amodel, final  String propName){
+//		if (hasProperty(amodel, propName))
+//			return amodel.getStringProperty(propName);
+//		for (Iterator it=amodel.getNestedModels().iterator();it.hasNext();){
+//			IDataModel nestedModel = (IDataModel)it.next();
+//			String propvalue = getStringPropertyValueRecursively(nestedModel, propName);
+//			if(propvalue != null)
+//				return propvalue;
+//		}
+//		return null;
+//	}
+//	private boolean hasProperty(IDataModel model, String propertyName) {
+//		for (Iterator it= model.getAllProperties().iterator();it.hasNext();){
+//			String prop = (String)it.next();
+////			System.out.println(prop);
+//			if (propertyName.equals(prop))
+//				return true;
+//		}
+//		return false;
+//	}
+
 	private List getDefaultJSFImplementationLibraries() {
 		List list = new ArrayList();
 		if (JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry() != null) {

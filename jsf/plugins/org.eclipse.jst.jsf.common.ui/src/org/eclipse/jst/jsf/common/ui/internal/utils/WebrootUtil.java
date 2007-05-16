@@ -18,21 +18,23 @@ import java.util.Set;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.content.IContentType;
 import org.eclipse.core.runtime.content.IContentTypeManager;
-import org.eclipse.jst.j2ee.web.componentcore.util.WebArtifactEdit;
 import org.eclipse.jst.jsf.common.ui.IFileFolderConstants;
 import org.eclipse.jst.jsf.common.ui.JSFUICommonPlugin;
+import org.eclipse.wst.common.componentcore.ComponentCore;
 import org.eclipse.wst.common.project.facet.core.IFacetedProject;
 import org.eclipse.wst.common.project.facet.core.IProjectFacet;
 import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
 import org.eclipse.wst.common.project.facet.core.ProjectFacetsManager;
 
+/**
+ * Web app utility methods
+ */
 public class WebrootUtil {
 
 	/**
@@ -73,21 +75,13 @@ public class WebrootUtil {
 		return true;
 	}
 
+	/**
+	 * @param project
+	 * @return full path to web content folder
+	 */
 	public static IPath getWebContentPath(IProject project) {
 		if (project != null) {
-			WebArtifactEdit web = null;
-			try {
-				web = WebArtifactEdit.getWebArtifactEditForRead(project);
-				if (web != null) {
-					IPath webxml = web.getDeploymentDescriptorPath();
-					IPath webContentPath = webxml.removeLastSegments(2);
-					return webContentPath;
-				}
-			} finally {
-				if (web != null) {
-					web.dispose();
-				}
-			}
+			return ComponentCore.createComponent(project).getRootFolder().getUnderlyingFolder().getFullPath();
 		}
 		return null;
 	}
@@ -105,20 +99,18 @@ public class WebrootUtil {
 		return null;
 	}
 
+	/**
+	 * @param project
+	 * @return folder where for web content
+	 */
 	public static IFolder getWebContentFolder(IProject project) {
 		IPath webContentPath = getWebContentPath(project);
-		if (webContentPath != null) {
-			IFolder folder;
-			if (webContentPath.segmentCount() > 1) {
-				folder = project.getFolder(webContentPath
-						.removeFirstSegments(1));
-			} else {
-				folder = ResourcesPlugin.getWorkspace().getRoot().getFolder(
-						webContentPath);
-			}
-			return folder;
+		IFolder folder = null;
+		if (webContentPath != null) {			
+			folder = project.getFolder(webContentPath.removeFirstSegments(webContentPath.segmentCount() - 1));
+
 		}
-		return null;
+		return folder;
 	}
 
 	/**

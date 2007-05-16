@@ -15,8 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -28,32 +26,26 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jst.j2ee.classpathdep.ClasspathDependencyUtil;
 import org.eclipse.jst.j2ee.classpathdep.IClasspathDependencyConstants;
-import org.eclipse.jst.j2ee.internal.J2EEVersionConstants;
-import org.eclipse.jst.j2ee.web.componentcore.util.WebArtifactEdit;
-import org.eclipse.jst.j2ee.webapplication.Servlet;
-import org.eclipse.jst.j2ee.webapplication.WebApp;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryInternalReference;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryRegistryUtil;
 import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFLibraryConfigurationHelper;
+import org.eclipse.wst.common.componentcore.ComponentCore;
 import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
 import org.eclipse.wst.common.project.facet.core.IDelegate;
 import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
 
 /**
- * JSF Facet Install Delegate for WTP faceted web projects.
+ * Abstract JSF Facet Install Delegate for WTP faceted web projects.
  * 
  * Uses <code>com.eclispe.jst.jsf.core.internal.project.facet.JSFFacetInstallDataModelProvider<code> for model
- * 	 <li> creates JSF configuration file if not present
- * 	 <li> updates web.xml for: servlet, servlet-mapping and context-param
+ * 	 <li> concrete delegat creates JSF configuration file if not present
+ * 	 <li> concrete delegate updates web app for: servlet, servlet-mapping and context-params
  * 	 <li> adds implementation jars to WEB-INF/lib if user requests
  * 
- * @see org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDelegate
  * @see org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDataModelProvider
- * @author Gerry Kessler - Oracle
- * @since M1
  */
-public class JSFFacetInstallDelegate implements IDelegate {
+public abstract class AbstractJSFFacetInstallDelegate implements IDelegate {
 
 	public void execute(final IProject project, final IProjectFacetVersion fv,
 			final Object cfg, final IProgressMonitor monitor)
@@ -97,7 +89,15 @@ public class JSFFacetInstallDelegate implements IDelegate {
 		}
 	}
 
-	private void createClasspathEntries(IProject project, IDataModel config, IProgressMonitor monitor) {
+	/**
+	 * Adds the JSF Library references specified in the wizard to the project as classpath containers.
+	 * Marks the containers as J2EE module dependencies as required
+	 * 
+	 * @param project
+	 * @param config
+	 * @param monitor
+	 */
+	protected void createClasspathEntries(IProject project, IDataModel config, IProgressMonitor monitor) {
 		IJavaProject javaProject = JavaCore.create(project);	
 		List cpEntries = new ArrayList();
 		try {
@@ -128,8 +128,12 @@ public class JSFFacetInstallDelegate implements IDelegate {
 		JSFLibraryRegistryUtil.setRawClasspath(javaProject, cpEntries, monitor);
 	}
 
-	//creates new IClasspathEntry with WTP dependency attribute set, if required
-	private IClasspathEntry getNewCPEntry(IPath path, JSFLibraryInternalReference lib) {
+	/**
+	 * @param path
+	 * @param lib
+	 * @return creates new IClasspathEntry with WTP dependency attribute set, if required
+	 */
+	protected IClasspathEntry getNewCPEntry(IPath path, JSFLibraryInternalReference lib) {
 		
 		IClasspathEntry entry = null;
 		if (lib.isCheckedToBeDeployed()){
@@ -144,81 +148,33 @@ public class JSFFacetInstallDelegate implements IDelegate {
 		return entry;
 	}
 
-	//revisit when can set attr on new cp container.   curren
-//	private void addWTPDependencyAttribute(IProject project, IClasspathEntry entry) {
-//		try {
-//			UpdateClasspathAttributeUtil.addDependencyAttribute(null, project.getProject().getName(), entry);
-//		} catch (ExecutionException e) {
-//			JSFCorePlugin.log(e, "Unable to set WTP J2EE Module Dependency for: "+entry.getPath().lastSegment());
-//		}
-//	}
 	
-	private void createConfigFile(final IProject project,
+	/**
+	 * Create the faces configuration file
+	 * @param project
+	 * @param fv
+	 * @param config
+	 * @param monitor
+	 */
+	protected abstract void createConfigFile(final IProject project,
 			final IProjectFacetVersion fv, final IDataModel config,
-			IProgressMonitor monitor) {
-		final IPath configPath = resolveConfigPath(project, config.getStringProperty(IJSFFacetInstallDataModelProperties.CONFIG_PATH));
+			IProgressMonitor monitor) ;
+	
+	/**
+	 * Create servlet and URL mappings and update the webapp
+	 * @param project
+	 * @param config
+	 * @param monitor
+	 */
+	protected abstract void createServletAndModifyWebXML(IProject project,
+			final IDataModel config, IProgressMonitor monitor);
+		
 
-		try {
-			// do not overwrite if the file exists
-			if (!configPath.toFile().exists()) {
-				IWorkspaceRunnable op = new IWorkspaceRunnable(){
-
-					public void run(IProgressMonitor monitor_inner)
-							throws CoreException{ 
-						JSFUtils.createConfigFile(fv.getVersionString(),
-								configPath);
-						project.refreshLocal(IResource.DEPTH_INFINITE, monitor_inner);
-					}
-
-				};
-				op.run(monitor);
-			}
-		} catch (CoreException e) {
-			JSFCorePlugin.log(e, "Exception occured while creating faces-config.xml");
-		}
-
-	}
-
-	private void createServletAndModifyWebXML(IProject project,
-			final IDataModel config, IProgressMonitor monitor) {
-		WebApp webApp = null;
-		WebArtifactEdit artifactEdit = null;
-		try {
-			artifactEdit = JSFUtils.getWebArtifactEditForWrite(project);
-			webApp = artifactEdit.getWebApp();
-
-			// create or update servlet ref
-			Servlet servlet = JSFUtils.findJSFServlet(webApp);// check to see
-																// if already
-																// present
-			if (servlet != null) {
-				// remove old mappings
-				JSFUtils.removeURLMappings(webApp, servlet);
-			}
-			
-			servlet = JSFUtils
-					.createOrUpdateServletRef(webApp, config, servlet);
-
-			// init mappings
-			List listOfMappings = getServletMappings(config);
-			JSFUtils.setUpURLMappings(webApp, listOfMappings, servlet);
-
-			// setup context params
-			if (webApp.getVersionID() == J2EEVersionConstants.WEB_2_3_ID)//shouldn't have to do it this way, but that's the way it goes 119442
-				JSFUtils.setupConfigFileContextParamForV2_3(webApp, config);
-			else
-				JSFUtils.setupConfigFileContextParamForV2_4(webApp, config);
-			
-		} finally {
-			if (artifactEdit != null) {
-				// save and dispose
-				artifactEdit.saveIfNecessary(monitor);
-				artifactEdit.dispose();
-			}
-		}
-	}
-
-	private List getServletMappings(IDataModel config) {
+	/**
+	 * @param config
+	 * @return list of URL patterns from the datamodel
+	 */
+	protected List getServletMappings(IDataModel config) {
 		List mappings = new ArrayList();
 		String[] patterns = (String[])config.getProperty(IJSFFacetInstallDataModelProperties.SERVLET_URL_PATTERNS);
 		for (int i = 0; i < patterns.length; i++) {
@@ -228,37 +184,17 @@ public class JSFFacetInstallDelegate implements IDelegate {
 
 		return mappings;
 	}
-	/*
-	private IPath getWebContentPath(IProject project) {
-		WebArtifactEdit web = null;
-		try {
-			web = WebArtifactEdit.getWebArtifactEditForRead(project);
-			IPath webxml = web.getDeploymentDescriptorPath();
-			//remove project name, WEB-INF an web.xml from path
-			IPath webContentPath = webxml.removeLastSegments(2).removeFirstSegments(1);
-			return webContentPath;
-		} finally {
-			if (web != null) {
-				web.dispose();
-			}
-		}
-	}
-	*/
-	private IPath resolveConfigPath(IProject project, String jsfConfigPath) {
-		// TODO: fix me
-		WebArtifactEdit web = null;
-		try {
-			web = WebArtifactEdit.getWebArtifactEditForRead(project);
-			IPath webxml = web.getDeploymentDescriptorPath();
-			IPath webcontent = webxml.removeLastSegments(2)
-					.removeFirstSegments(1);
 
-			return project.getLocation().append(
-					webcontent.append(new Path(jsfConfigPath)));
-		} finally {
-			if (web != null)
-				web.dispose();
-		}
+	/**
+	 * @param project
+	 * @param jsfConfigPath
+	 * @return absolute IPath to jsfConfig
+	 */
+	protected IPath resolveConfigPath(IProject project, String jsfConfigPath) {
+		return ComponentCore.createComponent(project).getRootFolder()
+				.getUnderlyingFolder().getRawLocation().append(
+						new Path(jsfConfigPath));
+
 	}
 	
 }
