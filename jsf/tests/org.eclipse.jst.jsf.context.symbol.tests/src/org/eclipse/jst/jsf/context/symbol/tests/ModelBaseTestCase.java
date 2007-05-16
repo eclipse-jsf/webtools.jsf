@@ -19,7 +19,6 @@ import junit.framework.TestCase;
 
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jst.jsf.context.symbol.IBeanInstanceSymbol;
-import org.eclipse.jst.jsf.context.symbol.IBeanPropertySymbol;
 import org.eclipse.jst.jsf.context.symbol.IJavaTypeDescriptor2;
 import org.eclipse.jst.jsf.context.symbol.IPropertySymbol;
 import org.eclipse.jst.jsf.context.symbol.SymbolFactory;
@@ -100,13 +99,17 @@ public class ModelBaseTestCase extends TestCase
             SymbolFactory.eINSTANCE.createIBeanInstanceSymbol();
         bean.setTypeDescriptor(testBeanDescriptor);
         bean.setName(beanClassName);
+        populatePropertyMap(bean, properties);
+        return bean;
+    }
+    
+    protected void populatePropertyMap(IBeanInstanceSymbol bean, Map<String, IPropertySymbol> properties)
+    {
         List<IPropertySymbol> propertyList = bean.getProperties();
         for(final Iterator<IPropertySymbol> it = propertyList.iterator(); it.hasNext();)
         {
             final IPropertySymbol  property = it.next();
             properties.put(property.getName(), property);
         }
-        
-        return bean;
     }
 }

@@ -25,11 +25,12 @@ public class AllTests {
      */
     public static Test suite() 
     {
-        TestSuite suite = new TestSuite("Test for org.eclipse.jst.jsf.validation.el.tests");
+        TestSuite suite = new TestSuite("Test for base symbols framework");
         //$JUnit-BEGIN$
         suite.addTestSuite(TestIJavaTypeDescriptor2.class);
         suite.addTestSuite(TestIPropertySymbolItemProvider.class);
         suite.addTestSuite(TestTypeCoercion.class);
+        suite.addTestSuite(TestIJavaTypeDescriptor2_ChangeStability.class);
         //$JUnit-END$
         return suite;
     }
