@@ -27,29 +27,22 @@ import org.eclipse.wst.xml.core.internal.contentmodel.CMDocument;
 import org.eclipse.wst.xml.core.internal.provisional.contentmodel.CMDocType;
 
 /**
- * Locator for tag library meta data
+ * Locator of tag library meta data
  *
  */
-public class TaglibLocator extends AbstractMetaDataLocator implements IPathSensitiveMetaDataLocator{
+public class TaglibMetaDataLocator extends AbstractMetaDataLocator implements IPathSensitiveMetaDataLocator{
 	//project must be set to the current project context during locate only...  should not be used when noifying observers
 	private IProject project;
 	private TaglibMetaDataSource source;
-
-	// FIXME: unused
-	//	private String uri;
-//	private boolean _notificationEventOccuring;
 	
 	/**
 	 * Constructor
 	 */
-	public TaglibLocator(){
+	public TaglibMetaDataLocator(){
 		super();
-		//we will continue listening for the tag lib uri, even if none are found initially
-//		TaglibIndex.addTaglibIndexListener(this);//non-api call.... danger!
 	}
 	
 	public List/*<IMetaDataModelProvider>*/ locateMetaDataModelProviders(String uri) {
-		// FIXME: unused this.uri = uri;
 		List ret = new ArrayList();
 		CMDocument doc = null;
 
@@ -61,7 +54,12 @@ public class TaglibLocator extends AbstractMetaDataLocator implements IPathSensi
 		}
 		else if (uri.equalsIgnoreCase(CMDocType.JSP11_DOC_TYPE)){
 			doc = HTMLCMDocumentFactory.getCMDocument(CMDocType.JSP11_DOC_TYPE);
-			//what about JSP 1.2???
+		}
+		else if (uri.equalsIgnoreCase(CMDocType.JSP12_DOC_TYPE)){
+			doc = HTMLCMDocumentFactory.getCMDocument(CMDocType.JSP12_DOC_TYPE);
+		}
+		else if (uri.equalsIgnoreCase(CMDocType.JSP20_DOC_TYPE)){
+			doc = HTMLCMDocumentFactory.getCMDocument(CMDocType.JSP20_DOC_TYPE);
 		}
 		else if (project != null ){//TLD
 			CMDocumentFactoryTLD factory = new CMDocumentFactoryTLD();
@@ -78,7 +76,7 @@ public class TaglibLocator extends AbstractMetaDataLocator implements IPathSensi
 				
 		return ret;
 	}
-	
+
 	private ITaglibRecord findTLD(ITaglibRecord[] tldRecs, String uri) {
 		for (int i=0;i<tldRecs.length;i++){
 			ITaglibRecord tld = tldRecs[i];
@@ -88,6 +86,9 @@ public class TaglibLocator extends AbstractMetaDataLocator implements IPathSensi
 		return null;
 	}
 
+	public void startLocating() {
+//		TaglibIndex.addTaglibIndexListener(this);
+	}
 	public void stopLocating() {		
 //		TaglibIndex.removeTaglibIndexListener(this);//non-api call.... danger
 	}
@@ -162,7 +163,6 @@ public class TaglibLocator extends AbstractMetaDataLocator implements IPathSensi
 		}
 
 		public Object getAdapter(Class klass) {
-			// TODO Auto-generated method stub
 			return null;
 		}
 	}

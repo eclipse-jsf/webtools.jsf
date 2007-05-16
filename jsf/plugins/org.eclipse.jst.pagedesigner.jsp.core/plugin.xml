@@ -25,7 +25,7 @@
       <domainSourceModelTypes
             domainId="TagLibraryDomain"
             domainSourceModelTypeId="TaglibContentModelHandler"
-            locator="org.eclipse.jst.pagedesigner.jsp.core.internal.metadata.TaglibLocator"
+            locator="org.eclipse.jst.pagedesigner.jsp.core.internal.metadata.TaglibMetaDataLocator"
             ordinal="0">
       </domainSourceModelTypes>
    </extension>
