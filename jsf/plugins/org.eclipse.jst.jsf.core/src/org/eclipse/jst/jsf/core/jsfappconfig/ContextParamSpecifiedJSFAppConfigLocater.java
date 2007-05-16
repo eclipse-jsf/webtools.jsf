@@ -101,7 +101,7 @@ public class ContextParamSpecifiedJSFAppConfigLocater extends WebContentRelative
 	
 	private void startLocatingJEEConfigs(org.eclipse.jst.javaee.web.WebApp webApp){
 		((EObject)webApp).eAdapters().add(contextParamAdapter);		
-		System.out.println(((EObject)webApp).eDeliver());
+//		System.out.println(((EObject)webApp).eDeliver());
 		List params = webApp.getContextParams();
 		if (params != null) {
 			Iterator itContexts = params.iterator();
@@ -167,7 +167,7 @@ public class ContextParamSpecifiedJSFAppConfigLocater extends WebContentRelative
 		 */
 		public void notifyChanged(Notification notification) {
 			Object objNotifier = notification.getNotifier();
-			System.out.println(objNotifier.toString());
+//			System.out.println(objNotifier.toString());
 			if (objNotifier instanceof WebApp ||
 					objNotifier instanceof org.eclipse.jst.javaee.web.WebApp) {
 				int eventType = notification.getEventType();
