@@ -276,7 +276,7 @@ public class JSFUtils12 extends JSFUtils{
 	public static String getPrefixMapping(ServletMapping map) {
 		List urls = map.getUrlPatterns();
 		for (Iterator it=urls.iterator();it.hasNext();){
-			IPath extPath = new Path((String)it.next());
+			IPath extPath = new Path(((UrlPatternType)it.next()).getValue());
 			if (extPath != null){
 				String ext = extPath.getFileExtension();
 				if (ext == null){
@@ -300,7 +300,7 @@ public class JSFUtils12 extends JSFUtils{
 	public static String getFileExtensionFromMap(ServletMapping map) {
 		List urls = map.getUrlPatterns();
 		for (Iterator it=urls.iterator();it.hasNext();){
-			IPath extPath = new Path((String)it.next());
+			IPath extPath = new Path(((UrlPatternType)it.next()).getValue());
 			if (extPath != null){
 				String ext = extPath.getFileExtension();
 				if (ext != null && !ext.equals("")) //$NON-NLS-1$
