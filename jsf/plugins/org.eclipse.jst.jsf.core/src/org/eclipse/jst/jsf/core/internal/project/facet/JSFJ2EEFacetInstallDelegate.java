@@ -64,7 +64,7 @@ public class JSFJ2EEFacetInstallDelegate extends AbstractJSFFacetInstallDelegate
 				op.run(monitor);
 			}
 		} catch (CoreException e) {
-			JSFCorePlugin.log(e, "Exception occured while creating faces-config.xml");
+			JSFCorePlugin.log(e, "Exception occured while creating faces-config.xml"); //$NON-NLS-1$
 		}
 
 	}

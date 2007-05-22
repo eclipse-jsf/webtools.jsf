@@ -21,6 +21,21 @@ import org.eclipse.osgi.util.NLS;
 public class Messages extends NLS {
 	private static final String BUNDLE_NAME = "org.eclipse.jst.jsf.core.internal.messages"; //$NON-NLS-1$
 
+	/**
+	 * see messages.properties
+	 */
+	public static String JSFFacetInstallDataModelProvider_ClientImplValidationMsg;
+
+	/**
+	 * see messages.properties
+	 */
+	public static String JSFFacetInstallDataModelProvider_DupeJarValidation;
+
+	/**
+	 * see messages.properties
+	 */
+	public static String JSFFacetInstallDataModelProvider_INITIAL_VALIDATION_IMPL_TYPE;
+
 
 	/**
 	 * see messages.properties

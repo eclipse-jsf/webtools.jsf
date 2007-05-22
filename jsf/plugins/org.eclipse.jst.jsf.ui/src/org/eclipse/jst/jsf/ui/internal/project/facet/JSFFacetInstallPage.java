@@ -82,6 +82,7 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 	private static final String SETTINGS_URL_MAPPINGS = "urlMappings"; //$NON-NLS-1$
 	private static final String SETTINGS_URL_PATTERN = "pattern"; //$NON-NLS-1$
 	private static final String SETTINGS_DEPLOY_IMPL = "deployImplementation"; //$NON-NLS-1$
+	private static final String SETTINGS_IMPL_TYPE = "deployImplType";//$NON-NLS-1$
 	private static final String SETTINGS_COMPLIB = "selectedComponent"; //$NON-NLS-1$
 	private static final String SETTINGS_COMPLIB_SELECT_DEPLOY = "selectdeploycomplib"; //$NON-NLS-1$
 
@@ -117,16 +118,19 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 		initializeDialogUnits(parent);
 		composite = new Composite(parent, SWT.NONE);
 		final GridLayout jsfCompositeLayout = new GridLayout(3, false);
+		jsfCompositeLayout.marginTop = 0;
+		jsfCompositeLayout.marginBottom = 0;
+		jsfCompositeLayout.marginRight = 0;
 		jsfCompositeLayout.marginLeft = 0;
 		composite.setLayout(jsfCompositeLayout);
 
 		lblJSFImpl = new Label(composite, SWT.None);
-		lblJSFImpl.setLayoutData(new GridData(GridData.BEGINNING,
-				GridData.BEGINNING, false, false));
+		GridData gdLbl = new GridData();
+		gdLbl.verticalIndent = 5;
+		gdLbl.verticalAlignment = SWT.BEGINNING;
+		lblJSFImpl.setLayoutData(gdLbl);
 		lblJSFImpl.setText(Messages.JSFFacetInstallPage_JSFLibraryLabel0);
-
-		((GridLayout) composite.getLayout()).marginLeft = 0;
-
+		
 		jsfLibCfgComp = new JSFLibraryConfigControl(composite, SWT.NONE);
 		jsfLibCfgComp
 				.addOkClickedListener(new IJSFImplLibraryCreationListener() {
@@ -136,7 +140,7 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 						}
 					}
 				});
-
+		
 		jsfLibCfgComp.addChangeListener( new JSFLibraryConfigControlChangeListener(){
 
 			public void changed(JSFLibraryConfigControlChangeEvent e) {
@@ -144,10 +148,11 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 			}
 			
 		});
-		GridData gd_comp = new GridData(GridData.FILL, GridData.FILL, true,
-				true);
+		GridData gd_comp = new GridData();
 		gd_comp.horizontalSpan = 2;
-		((GridLayout) jsfLibCfgComp.getLayout()).marginLeft = 0;
+		gd_comp.grabExcessHorizontalSpace = true;
+		gd_comp.grabExcessVerticalSpace = true;
+		gd_comp.horizontalAlignment = SWT.FILL;
 		jsfLibCfgComp.setLayoutData(gd_comp);
 
 		lblJSFConfig = new Label(composite, SWT.NONE);
@@ -283,10 +288,15 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 	}
 
 	private void initJSFCfgCtrlValues(IDialogSettings root) {
+		IMPLEMENTATION_TYPE implType = IMPLEMENTATION_TYPE.UNKNOWN;
 		String deployImpl = null;
+		
 		if (root != null) {
+			implType = IMPLEMENTATION_TYPE.getValue(root.get(SETTINGS_IMPL_TYPE));
 			deployImpl = root.get(SETTINGS_DEPLOY_IMPL);
+			
 		}
+
 		if (deployImpl == null || deployImpl.equals("")) { //$NON-NLS-1$
 			deployImpl = ((Boolean) model
 					.getDefaultProperty(IJSFFacetInstallDataModelProperties.DEPLOY_IMPLEMENTATION))
@@ -303,7 +313,7 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 			selection = complibs.getArray(SETTINGS_COMPLIB_SELECT_DEPLOY);
 		}
 
-		JSFLibraryConfiglModelSource source = new JSFLibraryConfigDialogSettingData(
+		JSFLibraryConfiglModelSource source = new JSFLibraryConfigDialogSettingData(implType,
 				Boolean.valueOf(deployImpl).booleanValue(), selection);
 		jsfLibCfgComp.loadControlValuesFromModel(source);
 	}
@@ -313,6 +323,7 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 		DialogSettings root = new DialogSettings(SETTINGS_ROOT);
 		dialogSettings.addSection(root);
 
+		root.put(SETTINGS_IMPL_TYPE, getJSFImplType());
 		root.put(SETTINGS_DEPLOY_IMPL, String.valueOf(getDeployJSFImpl()));
 		root.put(SETTINGS_CONFIG, getJSFConfig());
 		root.put(SETTINGS_SERVLET, getJSFServletName());
@@ -324,6 +335,10 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 		DialogSettings complibs = new DialogSettings(SETTINGS_COMPLIB);
 		root.addSection(complibs);
 		complibs.put(SETTINGS_COMPLIB_SELECT_DEPLOY, getCompLibSelections());
+	}
+
+	private String getJSFImplType() {
+		return IMPLEMENTATION_TYPE.getStringValue((IMPLEMENTATION_TYPE)model.getProperty(IMPLEMENTATION_TYPE_PROPERTY_NAME));
 	}
 
 	private boolean getDeployJSFImpl() {
@@ -482,7 +497,7 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 	 * @see org.eclipse.wst.common.frameworks.internal.datamodel.ui.DataModelWizardPage#getValidationPropertyNames()
 	 */
 	protected String[] getValidationPropertyNames() {
-		return new String[] { IMPLEMENTATION, DEPLOY_IMPLEMENTATION,
+		return new String[] { IMPLEMENTATION_TYPE_PROPERTY_NAME, IMPLEMENTATION, DEPLOY_IMPLEMENTATION,
 				CONFIG_PATH, SERVLET_NAME, SERVLET_CLASSNAME, COMPONENT_LIBRARIES };
 	}
 
@@ -557,9 +572,13 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 	 */
 	private void checkToCompletePage(Composite control) {
 		boolean enableFinish = false;
-		if (control != null && control instanceof JSFLibraryConfigControl) {
+		IMPLEMENTATION_TYPE implType = (IMPLEMENTATION_TYPE)model.getProperty(IMPLEMENTATION_TYPE_PROPERTY_NAME);
+		if (implType == IMPLEMENTATION_TYPE.SERVER_SUPPLIED)
+			enableFinish = true;
+		else if (implType == IMPLEMENTATION_TYPE.CLIENT_SUPPLIED && 
+				control != null && control instanceof JSFLibraryConfigControl) {
 			enableFinish = (((JSFLibraryConfigControl)control).getSelectedJSFLibImplementation() != null);
-		} 
+		} //else must be unknown type and requires user interaction
 		setPageComplete(enableFinish);
 	}
 

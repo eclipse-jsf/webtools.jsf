@@ -13,6 +13,9 @@ package org.eclipse.jst.jsf.core.internal.jsflibraryconfig;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.jst.jsf.core.internal.project.facet.IJSFFacetInstallDataModelProperties;
+import org.eclipse.jst.jsf.core.internal.project.facet.IJSFFacetInstallDataModelProperties.IMPLEMENTATION_TYPE;
+
 /**
  * To construct implementation library and component libraries from sticky values 
  * in DialogSettings as saved libraries.  
@@ -30,9 +33,22 @@ public class JSFLibraryConfigDialogSettingData implements JSFLibraryConfiglModel
 	private String[] savedCompLibs;
 	private JSFLibraryInternalReference selJSFLibImpl;	// lazy initialized	
 	private List selJSFLibComp;							// lazy initialized
+
+	private IMPLEMENTATION_TYPE implType;
+	
+	
+	/**
+	 * Constructor where implementation type was chosen to be CLIENT_SUPPLIED.  Created for backwards compatibilty when server supplied was not an option.
+	 * @param implLibDeployFlag
+	 * @param compLibs
+	 */
+	public JSFLibraryConfigDialogSettingData(boolean implLibDeployFlag, String[] compLibs) {
+		this(IMPLEMENTATION_TYPE.CLIENT_SUPPLIED, implLibDeployFlag, compLibs);		
+	}
 	
 	/**
 	 * Constructor
+	 * @param implType {@link IMPLEMENTATION_TYPE}
 	 * @param implLibDeployFlag String  valid options are "true" or "false"
 	 * @param compLibs String[]  saved component library settings in string array
 	 * 
@@ -45,10 +61,12 @@ public class JSFLibraryConfigDialogSettingData implements JSFLibraryConfiglModel
 		verifySavedLibAvailability();
 	}
 	*/
-	public JSFLibraryConfigDialogSettingData(boolean implLibDeployFlag, String[] compLibs) {
+	public JSFLibraryConfigDialogSettingData(IMPLEMENTATION_TYPE implType, boolean implLibDeployFlag, String[] compLibs) {
+		
 		this.jsfLibReg = JSFLibraryRegistryUtil.getInstance();
 		this.dftImplLibDeployFlag = implLibDeployFlag;
 		this.savedCompLibs = compLibs;
+		this.implType = implType;
 		
 		// Verify and log a message if a saved component library no longer exists. 
 		verifySavedLibAvailability();
@@ -144,4 +162,10 @@ public class JSFLibraryConfigDialogSettingData implements JSFLibraryConfiglModel
 
  	}
 	
+ 	/**
+ 	 * @return {@link IMPLEMENTATION_TYPE}
+ 	 */
+ 	public IJSFFacetInstallDataModelProperties.IMPLEMENTATION_TYPE getImplementationType(){
+ 		return implType;
+ 	}
 }

@@ -105,15 +105,22 @@ public abstract class AbstractJSFFacetInstallDelegate implements IDelegate {
 				cpEntries.add(javaProject.getRawClasspath()[i]);
 			}
 		} catch (JavaModelException e) {
-			JSFCorePlugin.log(e, "Unable to read classpath");
+			JSFCorePlugin.log(e, "Unable to read classpath"); //$NON-NLS-1$
 		}
 		
+		IPath path, cp = null;
+		IClasspathEntry entry = null;
+		JSFLibraryInternalReference libref = null;
+		
 		//Implementation
-		IPath cp = new Path(JSFLibraryConfigurationHelper.JSF_LIBRARY_CP_CONTAINER_ID);		
-		JSFLibraryInternalReference libref = (JSFLibraryInternalReference)config.getProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION);
-		IPath path = cp.append(new Path(libref.getID()));
-		IClasspathEntry entry = getNewCPEntry(path, libref);		
-		cpEntries.add(entry);
+		if (config.getProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION_TYPE_PROPERTY_NAME) 
+				== IJSFFacetInstallDataModelProperties.IMPLEMENTATION_TYPE.CLIENT_SUPPLIED){
+			cp = new Path(JSFLibraryConfigurationHelper.JSF_LIBRARY_CP_CONTAINER_ID);		
+			libref = (JSFLibraryInternalReference)config.getProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION);
+			path = cp.append(new Path(libref.getID()));
+			entry = getNewCPEntry(path, libref);		
+			cpEntries.add(entry);
+		}
 
 		JSFLibraryInternalReference[] compLibs = (JSFLibraryInternalReference[])config.getProperty(IJSFFacetInstallDataModelProperties.COMPONENT_LIBRARIES);
 		for (int i=0;i<compLibs.length;i++){

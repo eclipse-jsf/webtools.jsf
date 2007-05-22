@@ -157,6 +157,10 @@ public class Messages extends NLS {
     /**
      * see messages.properties
      */
+	public static String JSFLibraryConfigControl_DeployButtonLabel;
+    /**
+     * see messages.properties
+     */
 	public static String JSFLibraryConfigControl_DeployJAR;
     /**
      * see messages.properties
@@ -166,6 +170,10 @@ public class Messages extends NLS {
      * see messages.properties
      */
 	public static String JSFLibraryConfigControl_NewComponentLibrary;
+    /**
+     * see messages.properties
+     */
+	public static String JSFLibraryConfigControl_NewImplButtonTooltip;
     /**
      * see messages.properties
      */
@@ -182,6 +190,14 @@ public class Messages extends NLS {
      * see messages.properties
      */
 	public static String JSFLibraryConfigControl_RemoveAll;
+    /**
+     * see messages.properties
+     */
+	public static String JSFLibraryConfigControl_ServerSuppliedButtonLabel;
+    /**
+     * see messages.properties
+     */
+	public static String JSFLibraryConfigControl_ServerSuppliedButtonTooltip;
     /**
      * see messages.properties
      */

@@ -56,6 +56,7 @@ public class JSFFacetInstallDataModelProvider extends
 	
 	public Set getPropertyNames() {
 		Set names = super.getPropertyNames();
+		names.add(IMPLEMENTATION_TYPE_PROPERTY_NAME);
 		names.add(IMPLEMENTATION);
 		names.add(DEPLOY_IMPLEMENTATION);
 		names.add(CONFIG_PATH);
@@ -72,7 +73,10 @@ public class JSFFacetInstallDataModelProvider extends
 	}
 
 	public Object getDefaultProperty(String propertyName) {
-		if (propertyName.equals(IMPLEMENTATION)) {
+		if (propertyName.equals(IMPLEMENTATION_TYPE_PROPERTY_NAME)){
+			return IMPLEMENTATION_TYPE.UNKNOWN;
+		}
+		else if (propertyName.equals(IMPLEMENTATION)) {
 			if (JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry() == null)
 				return null;
 			return getDefaultImplementationLibrary();//JSFCorePlugin.getDefault().getJSFLibraryRegistry().getDefaultImplementation();
@@ -89,7 +93,7 @@ public class JSFFacetInstallDataModelProvider extends
 		} else if (propertyName.equals(FACET_ID)) {
 			return IJSFCoreConstants.JSF_CORE_FACET_ID;
 		} else if (propertyName.equals(WEBCONTENT_DIR)){
-			return "WebContent";  //not sure I need this
+			return "WebContent";  //not sure I need this //$NON-NLS-1$
 		} else if (propertyName.equals(COMPONENT_LIBRARIES)) {
 			return new JSFLibraryInternalReference[0];
 		} else if (propertyName.equals(IMPLEMENTATION_LIBRARIES)) {
@@ -102,13 +106,20 @@ public class JSFFacetInstallDataModelProvider extends
 	
 	public IStatus validate(String name) {
 		errorMessage = null;
-		if (name.equals(IMPLEMENTATION)) {
-			JSFLibraryInternalReference lib = (JSFLibraryInternalReference)getProperty(IMPLEMENTATION);
-			IStatus status = validateImpl(lib.getLibrary());
-			if (!OK_STATUS.equals(status))
-				return status;
-				
-            return validateClasspath();
+		if (name.equals(IMPLEMENTATION_TYPE_PROPERTY_NAME)) {
+			if (getProperty(IMPLEMENTATION_TYPE_PROPERTY_NAME) == IMPLEMENTATION_TYPE.UNKNOWN) {
+				return createErrorStatus(Messages.JSFFacetInstallDataModelProvider_INITIAL_VALIDATION_IMPL_TYPE);
+			}
+		}
+		else if (name.equals(IMPLEMENTATION)) {
+			if (getProperty(IMPLEMENTATION_TYPE_PROPERTY_NAME) == IMPLEMENTATION_TYPE.CLIENT_SUPPLIED) {
+				JSFLibraryInternalReference lib = (JSFLibraryInternalReference)getProperty(IMPLEMENTATION);
+				IStatus status = validateImpl(lib.getLibrary());
+				if (!OK_STATUS.equals(status))
+					return status;
+					
+	            return validateClasspath();
+			}
 		} else if (name.equals(CONFIG_PATH)) {
 			return validateConfigLocation(getStringProperty(CONFIG_PATH));
 		} else if (name.equals(SERVLET_NAME)) {			
@@ -123,7 +134,7 @@ public class JSFFacetInstallDataModelProvider extends
 	private IStatus createErrorStatus(String msg) {		
 		return new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID, msg);
 	}
-
+	
 	private IStatus validateServletName(String servletName) {
 		if (servletName == null || servletName.trim().length() == 0) {
 			errorMessage = Messages.JSFFacetInstallDataModelProvider_ValidateServletName;
@@ -208,22 +219,26 @@ public class JSFFacetInstallDataModelProvider extends
 				}
 			} catch (JavaModelException e) {
 			    // FIXME: what should we do in this case?
-			    JSFCorePlugin.log(e, "Error searching class path");
+			    JSFCorePlugin.log(e, "Error searching class path"); //$NON-NLS-1$
 			}			
 		}
 		//else as we do not have a javaProject yet, all we can do is validate that there is no duplicate jars (absolute path)
 		
 		IStatus status = null;
-		JSFLibraryInternalReference ref =  ((JSFLibraryInternalReference)getProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION));
-		if (ref != null){
-			status = checkForDupeArchiveFiles(jars, ((JSFLibraryInternalReference)getProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION)).getLibrary());
-			if (!OK_STATUS.equals(status)){
-				return status;
-			}
-		} else {
-			return createErrorStatus("JSF Implementation library must be specified.");
-		}
 		
+		JSFLibraryInternalReference ref = null;
+		if (getProperty(IMPLEMENTATION_TYPE_PROPERTY_NAME) == IMPLEMENTATION_TYPE.CLIENT_SUPPLIED) {
+			ref = ((JSFLibraryInternalReference)getProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION));
+			if (ref != null){
+				status = checkForDupeArchiveFiles(jars, ((JSFLibraryInternalReference)getProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION)).getLibrary());
+				if (!OK_STATUS.equals(status)){
+					return status;
+				}
+			} else {
+				return createErrorStatus(Messages.JSFFacetInstallDataModelProvider_ClientImplValidationMsg);
+			}
+		}
+
 		JSFLibraryInternalReference[] compLibs = (JSFLibraryInternalReference[]) getProperty(IJSFFacetInstallDataModelProperties.COMPONENT_LIBRARIES);
 		if (compLibs != null){
 			for (int i=0;i<compLibs.length;i++){
@@ -263,7 +278,7 @@ public class JSFFacetInstallDataModelProvider extends
 		for (Iterator it=aJSFLib.getArchiveFiles().iterator();it.hasNext();){
 			ArchiveFile jar = (ArchiveFile)it.next();
 			if (jars.contains(jar.getResolvedSourceLocation())){
-				return createErrorStatus("Duplicated jar on classpath: "+jar.getResolvedSourceLocation());				
+				return createErrorStatus(NLS.bind(Messages.JSFFacetInstallDataModelProvider_DupeJarValidation,jar.getResolvedSourceLocation()));				
 			}
             jars.add(jar.getResolvedSourceLocation());
 		}
@@ -325,7 +340,7 @@ public class JSFFacetInstallDataModelProvider extends
 		
 		IDataModel projModel = (IDataModel)getProperty(MASTER_PROJECT_DM);
 		FacetDataModelMap dmMap = (FacetDataModelMap)projModel.getProperty(IFacetProjectCreationDataModelProperties.FACET_DM_MAP);
-		IDataModel webFacet = dmMap.getFacetDataModel("jst.web");
+		IDataModel webFacet = dmMap.getFacetDataModel("jst.web"); //$NON-NLS-1$
 		return webFacet.getStringProperty(IJ2EEModuleFacetInstallDataModelProperties.CONFIG_FOLDER );
 	}
 

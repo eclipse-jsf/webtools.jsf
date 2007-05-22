@@ -21,6 +21,7 @@ import org.eclipse.core.runtime.QualifiedName;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.Messages;
 import org.eclipse.jst.jsf.core.internal.project.facet.JSFUtils;
+import org.eclipse.jst.jsf.core.internal.project.facet.IJSFFacetInstallDataModelProperties.IMPLEMENTATION_TYPE;
 import org.eclipse.osgi.util.NLS;
 
 /**
@@ -42,8 +43,8 @@ public class JSFLibraryConfigProjectData implements JSFLibraryConfiglModelSource
 	
 	final private IProject project;
 	final private JSFLibraryRegistryUtil jsfLibReg;
-	private JSFLibraryInternalReference selJSFLibImpl = null;	
-	private List selJSFLibComp = null;
+	private JSFLibraryInternalReference selJSFLibImpl;	
+	private List selJSFLibComp;
 
 	/**
 	 * Constructor
@@ -61,6 +62,16 @@ public class JSFLibraryConfigProjectData implements JSFLibraryConfiglModelSource
 		}		
 	}
 	 	
+	public IMPLEMENTATION_TYPE getImplementationType() {
+		try {
+			String type = ((IResource)project).getPersistentProperty(new QualifiedName(QUALIFIEDNAME, 
+					JSFUtils.PP_JSF_IMPLEMENTATION_TYPE));
+			return IMPLEMENTATION_TYPE.getValue(type);
+		} catch (CoreException e) {//
+		}
+		return IMPLEMENTATION_TYPE.UNKNOWN;
+	}	
+	
 	/**
 	 * Return the previously selected JSF implementation library from project persistent properties.
 	 * Return null if none exists.
@@ -128,10 +139,11 @@ public class JSFLibraryConfigProjectData implements JSFLibraryConfiglModelSource
 	 * @param implementation
 	 * @param component
 	 */
-	void saveData(final List implementation, final List component) {
+	void saveData(final List implementation, final List component, final IMPLEMENTATION_TYPE implType) {
 		try {
 			((IResource)project).setPersistentProperty(new QualifiedName(QUALIFIEDNAME, JSFUtils.PP_JSF_IMPLEMENTATION_LIBRARIES), generatePersistString(implementation));
 			((IResource)project).setPersistentProperty(new QualifiedName(QUALIFIEDNAME, JSFUtils.PP_JSF_COMPONENT_LIBRARIES), generatePersistString(component));
+			((IResource)project).setPersistentProperty(new QualifiedName(QUALIFIEDNAME, JSFUtils.PP_JSF_IMPLEMENTATION_TYPE), IMPLEMENTATION_TYPE.getStringValue(implType));
 			
 			/* Flush the selection so that they can be reconstructed from 
 			 * persistent properties when getSavedJSFImplLib and getSavedJSFCompLibs 
@@ -288,6 +300,6 @@ public class JSFLibraryConfigProjectData implements JSFLibraryConfiglModelSource
 		boolean needDeploy() {
 			return deploy;
 		}		
-	}	
+	}
 	
 }

@@ -15,6 +15,7 @@ import java.util.List;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.core.internal.Messages;
+import org.eclipse.jst.jsf.core.internal.project.facet.IJSFFacetInstallDataModelProperties.IMPLEMENTATION_TYPE;
 
 /**
  * Model for the custom control <b>JSFLibraryConfigControl</b>.
@@ -38,6 +39,12 @@ public class JSFLibraryConfigModel {
 		this.jsfLibReg = JSFLibraryRegistryUtil.getInstance();
 	}
 		
+	/**
+	 * @return IMPLEMENTATION_TYPE
+	 */
+	public IMPLEMENTATION_TYPE getImplementationType() {
+		return data.getImplementationType();
+	}
 	/**
 	 * Return JSF implementation libraries.
 	 * 
@@ -219,7 +226,7 @@ public class JSFLibraryConfigModel {
 		JSFLibraryConfigProjectData data_ = new JSFLibraryConfigProjectData(project);
 		List implLibs = new ArrayList();
 		implLibs.add(getCurrentJSFImplementationLibrarySelection());
-		data_.saveData(implLibs, getCurrentJSFComponentLibrarySelection());
+		data_.saveData(implLibs, getCurrentJSFComponentLibrarySelection(), getImplementationType());
 	}	
 	
 	/**

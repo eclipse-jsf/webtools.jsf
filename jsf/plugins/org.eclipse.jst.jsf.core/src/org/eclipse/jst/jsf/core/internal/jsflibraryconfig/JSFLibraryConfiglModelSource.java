@@ -12,6 +12,8 @@ package org.eclipse.jst.jsf.core.internal.jsflibraryconfig;
 
 import java.util.List;
 
+import org.eclipse.jst.jsf.core.internal.project.facet.IJSFFacetInstallDataModelProperties.IMPLEMENTATION_TYPE;
+
 /**
  * Interface for data source to instanciate a <b>JSFLibraryConfigModel</b> object. 
  * 
@@ -35,5 +37,12 @@ public interface JSFLibraryConfiglModelSource {
 	 *  
  	 * @return List
  	 */
- 	public List getJSFComponentLibraries(); 	
+ 	public List getJSFComponentLibraries(); 
+ 	
+ 	/**
+	 * Return type of implementation
+	 *  
+ 	 * @return {@link IMPLEMENTATION_TYPE}
+ 	 */
+ 	public IMPLEMENTATION_TYPE getImplementationType(); 	
 }

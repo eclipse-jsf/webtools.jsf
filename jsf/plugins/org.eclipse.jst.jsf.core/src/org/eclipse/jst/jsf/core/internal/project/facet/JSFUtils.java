@@ -50,7 +50,7 @@ public class JSFUtils {
 	/**
 	 * The path to the default application configuration file
 	 */
-	public static final String JSF_DEFAULT_CONFIG_PATH = "/WEB-INF/faces-config.xml"; 
+	public static final String JSF_DEFAULT_CONFIG_PATH = "/WEB-INF/faces-config.xml";  //$NON-NLS-1$
 
 	/**
 	 * Default URL mapping to faces servlet
@@ -67,7 +67,11 @@ public class JSFUtils {
      * TODO: should encapsulate the property somewhere and hide the constant
 	 */
 	public static final String PP_JSF_COMPONENT_LIBRARIES = "jsf.component.libraries"; //$NON-NLS-1$
-	
+	/**
+	 * the key for implementation type in persistent properties
+     * TODO: should encapsulate the property somewhere and hide the constant
+	 */
+	public static final String PP_JSF_IMPLEMENTATION_TYPE = "jsf.implementation.type"; //$NON-NLS-1$
 	/**
 	 * Construct an array that hold paths for all JARs in a JSF library. 
 	 * However, archive files that no longer exist are filtered out.  
@@ -145,7 +149,7 @@ public class JSFUtils {
 	 */
 	protected static String getDisplayName(IDataModel config) {
 		String displayName = config.getStringProperty(IJSFFacetInstallDataModelProperties.SERVLET_NAME);
-		if (displayName.equals(""))
+		if (displayName.equals("")) //$NON-NLS-1$
 			displayName = JSF_DEFAULT_SERVLET_NAME;
 		return displayName;
 	}
@@ -156,7 +160,7 @@ public class JSFUtils {
 	 */
 	protected static String getServletClassname(IDataModel config) {
 		String className = config.getStringProperty(IJSFFacetInstallDataModelProperties.SERVLET_CLASSNAME);
-		if (className.equals(""))
+		if (className.equals("")) //$NON-NLS-1$
 			className = JSF_SERVLET_CLASS;
 		return className;
 	}
