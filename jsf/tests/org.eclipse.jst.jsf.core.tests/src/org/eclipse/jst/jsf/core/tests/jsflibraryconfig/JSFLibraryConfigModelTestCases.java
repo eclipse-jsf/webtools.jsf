@@ -27,12 +27,15 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfigModel.
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistry;
 import org.eclipse.jst.jsf.core.internal.project.facet.JSFUtils;
+import org.eclipse.jst.jsf.core.internal.project.facet.IJSFFacetInstallDataModelProperties.IMPLEMENTATION_TYPE;
 import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
 
 public class JSFLibraryConfigModelTestCases extends TestCase {
 	final static private String QUALIFIEDNAME = "org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfigProjectData";	
 	private static final String PROJ_NAME = "_TEST_CFGLIBRARYMODEL_PROJECT";
+	private static final String PROJ_NAME2 = "_TEST_CFGLIBRARYMODEL_PROJECT2";
 	private JSFLibraryConfiglModelSource modelSrc = null;
+	private JSFLibraryConfiglModelSource modelSrcWithServerSupplied = null;
 	private IProject project;
 	private int numCompLibs;	
 	
@@ -52,7 +55,8 @@ public class JSFLibraryConfigModelTestCases extends TestCase {
 		JSFLibrary lib = (JSFLibrary)libReg.getNonImplJSFLibraries().get(0);
 		compLibs[0] = lib.getID() + ":" + "true";
 		
-		modelSrc = new JSFLibraryConfigDialogSettingData(true, compLibs);		
+		modelSrc = new JSFLibraryConfigDialogSettingData(true, compLibs);	
+		modelSrcWithServerSupplied = new JSFLibraryConfigDialogSettingData(IMPLEMENTATION_TYPE.SERVER_SUPPLIED, true, compLibs);
 	}
 
 	protected void tearDown() throws Exception {
@@ -128,9 +132,55 @@ public class JSFLibraryConfigModelTestCases extends TestCase {
 													JSFUtils.PP_JSF_IMPLEMENTATION_LIBRARIES));
 			Assert.assertNotNull(content);
 			Assert.assertTrue(content.length() > 1);
+			
+			
+			String type = ((IResource)project).getPersistentProperty(new QualifiedName(QUALIFIEDNAME, 
+					JSFUtils.PP_JSF_IMPLEMENTATION_TYPE));
+			
+			Assert.assertNotNull(type);
+			Assert.assertEquals(IMPLEMENTATION_TYPE.getStringValue(IMPLEMENTATION_TYPE.CLIENT_SUPPLIED), type);
+		} catch (CoreException e) {
+			fail("Not expecting an exception.");
+		}
+	}
+	
+	public void testSaveDataWithServerSuppliedImplSelection() {		
+		try {
+			project = JSFCoreUtilHelper.createWebProject(PROJ_NAME2);
+		} catch (Exception e1) {
+			fail("Unable to create project for testing.");
+		}
+		
+		JSFLibraryConfigModel model = JSFLibraryConfigModelFactory.createInstance(modelSrcWithServerSupplied);				
+		model.saveData(project);
+		
+ 		try {
+			String content = ((IResource)project).getPersistentProperty(new QualifiedName(QUALIFIEDNAME, 
+													JSFUtils.PP_JSF_IMPLEMENTATION_LIBRARIES));
+			Assert.assertNotNull(content);
+			Assert.assertTrue(content.length() > 1);
+			
+			String type = ((IResource)project).getPersistentProperty(new QualifiedName(QUALIFIEDNAME, 
+					JSFUtils.PP_JSF_IMPLEMENTATION_TYPE));
+			
+			Assert.assertNotNull(type);
+			Assert.assertEquals(IMPLEMENTATION_TYPE.getStringValue(IMPLEMENTATION_TYPE.SERVER_SUPPLIED), type);
 		} catch (CoreException e) {
 			fail("Not expecting an exception.");
 		}
 	}
 
+	public void testGetSavedImplementationType() {
+		JSFLibraryConfigModel model = JSFLibraryConfigModelFactory.createInstance(modelSrc);
+		Assert.assertNotNull(model.getImplementationType());		
+		Assert.assertTrue(model.getImplementationType() == IMPLEMENTATION_TYPE.CLIENT_SUPPLIED);
+		
+		model = JSFLibraryConfigModelFactory.createInstance(modelSrcWithServerSupplied);
+		Assert.assertNotNull(model.getImplementationType());		
+		Assert.assertTrue(model.getImplementationType() == IMPLEMENTATION_TYPE.SERVER_SUPPLIED);
+		
+		model = JSFLibraryConfigModelFactory.createInstance(new JSFLibraryConfigDialogSettingData(IMPLEMENTATION_TYPE.UNKNOWN, true, null));
+		Assert.assertNotNull(model.getImplementationType());		
+		Assert.assertTrue(model.getImplementationType() == IMPLEMENTATION_TYPE.UNKNOWN);
+	}
 }
