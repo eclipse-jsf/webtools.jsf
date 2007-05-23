@@ -35,8 +35,14 @@ import org.eclipse.swt.graphics.FontMetrics;
 public class CSSBlockFlowLayout extends CSSLayout implements ICSSPainter2 {
 	private LineBox _previousLine = null;
 
+	/**
+	 * the block box for the layout object
+	 */
 	protected BlockBox _blockBox = null;
 
+	/**
+	 * The font metrics for this layout object
+	 */
 	protected FontMetrics _fontMetrices;
 
 	int _userSpecifiedWidth;
@@ -52,16 +58,23 @@ public class CSSBlockFlowLayout extends CSSLayout implements ICSSPainter2 {
 	boolean _needVScroll = false;
 
 	/**
-	 * Creates a new CSSBlockFlowLayout with the given BlockFlow.
+     * Creates a new CSSBlockFlowLayout with the given BlockFlow.
+	 * @param cssfigure
 	 */
 	public CSSBlockFlowLayout(CSSFigure cssfigure) {
 		super(cssfigure);
 	}
 
+	/**
+	 * @return true if this layout box has more than one line
+	 */
 	protected boolean hasMoreThanOneLine() {
 		return _previousLine != null;
 	}
 
+	/**
+	 * @return true if this layout block is inline
+	 */
 	public boolean isInlineBlock() {
 		String obj = getCSSStyle().getDisplay();
 		return ICSSPropertyID.VAL_INLINE_BLOCK.equals(obj)
@@ -69,9 +82,7 @@ public class CSSBlockFlowLayout extends CSSLayout implements ICSSPainter2 {
 	}
 
 	/**
-	 * whether should expand the width to all available width.
-	 * 
-	 * @return
+	 * @return true if should expand the width to all available width. 
 	 */
 	public boolean shouldExpand() {
 		ICSSStyle style = getCSSStyle();
@@ -244,6 +255,11 @@ public class CSSBlockFlowLayout extends CSSLayout implements ICSSPainter2 {
 		setBlockVerticalAlign(_blockBox);
 	}
 
+	/**
+	 * @param style
+	 * @param property
+	 * @return the length value
+	 */
 	protected int getLengthValue(ICSSStyle style, String property) {
 		int lengthValue = 0;
 		if (style != null) {
@@ -257,7 +273,7 @@ public class CSSBlockFlowLayout extends CSSLayout implements ICSSPainter2 {
 					if (ICSSPropertyID.ATTR_WIDTH.equalsIgnoreCase(property)
 							|| ICSSPropertyID.ATTR_MIN_WIDTH
 									.equalsIgnoreCase(property)) {
-						lengthValue = this.getFlowContext().getContainerWidth()
+						lengthValue = this.getFlowContext().getCurrentLine().getRecommendedContentWidth()
 								* lengthValue / 100;
 					} else if (ICSSPropertyID.ATTR_HEIGHT
 							.equalsIgnoreCase(property)
@@ -292,6 +308,9 @@ public class CSSBlockFlowLayout extends CSSLayout implements ICSSPainter2 {
 	}
 
 	// -------------------------------------------------------------------------------------------------------
+	/**
+	 * layout the lines in this layout
+	 */
 	protected void layoutLines() {
 		List lines = _blockBox.getFragments();
 		if (lines != null) {
@@ -424,6 +443,9 @@ public class CSSBlockFlowLayout extends CSSLayout implements ICSSPainter2 {
 		}
 	}
 
+	/**
+	 * @param line
+	 */
 	protected void layoutLine(LineBox line) {
 		// currentLine.x = 0; //XXX: comment out, don't understand why set to 0,
 		// because it has already
@@ -529,6 +551,7 @@ public class CSSBlockFlowLayout extends CSSLayout implements ICSSPainter2 {
 	 * 
 	 * @param line
 	 *            the LineBox to set up
+	 * @param topMargin 
 	 */
 	protected void setupLine(LineBox line, int topMargin) {
 		line.clear();
