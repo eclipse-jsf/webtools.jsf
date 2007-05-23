@@ -27,10 +27,12 @@ import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jst.common.project.facet.JavaFacetUtils;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.ITextRegionContextResolver;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
+import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigManager;
 import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
 import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanType;
@@ -42,6 +44,7 @@ import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
 import org.eclipse.jst.jsf.validation.el.tests.ELValidationTestPlugin;
 import org.eclipse.jst.jsf.validation.internal.el.ELExpressionValidator;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.IELLocalizedMessage;
+import org.eclipse.wst.common.project.facet.core.ProjectFacetsManager;
 import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
 import org.eclipse.wst.validation.internal.provisional.core.IMessage;
 
@@ -113,7 +116,16 @@ public abstract class BaseTestCase extends ConfigurableTestCase
                         , _configuration.getProxyPort());
         }
 
-        _testEnv = new WebProjectTestEnvironment("ELValidationTest_"+this.getClass().getName()+"_"+getName()+"_"+_configuration.getJsfVersion());
+        // if JSF 1.1, use web facet 2.4, if higher then use 2.5
+        final String webProjVersion = 
+            (IJSFCoreConstants.FACET_VERSION_1_0.equals(_configuration.getJsfVersion())
+                    || IJSFCoreConstants.FACET_VERSION_1_1.equals(_configuration.getJsfVersion()))
+                ? "2.4" : "2.5";
+        
+        _testEnv = new WebProjectTestEnvironment
+            ("ELValidationTest_"+this.getClass().getName()+"_"+getName()+"_"+_configuration.getJsfVersion()
+                    , JavaFacetUtils.JAVA_50
+                    , ProjectFacetsManager.getProjectFacet( "jst.web" ).getVersion(webProjVersion));
         _testEnv.createProject(false);
         assertNotNull(_testEnv);       
         assertNotNull(_testEnv.getTestProject());
