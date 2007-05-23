@@ -35,9 +35,9 @@ public abstract class AbstractDelegatingFactory implements IDelegatingFactory {
 	/**
 	 * the list of registered factory delegates
 	 */
-	protected 	final List		_delegates;
+	protected 	final List<IAdaptable>  _delegates;
 	
-	private 	final List		_supportedDelegates;
+	private 	final List<Class>		_supportedDelegates;
 
 	/**
 	 * @param supportedDelegateTypes -- populates the list of classes used
@@ -45,9 +45,9 @@ public abstract class AbstractDelegatingFactory implements IDelegatingFactory {
 	 */
 	protected AbstractDelegatingFactory(Class[]  supportedDelegateTypes)
 	{
-		_delegates = new ArrayList();
+		_delegates = new ArrayList<IAdaptable>();
 		
-		final List supportedTypes = new ArrayList();
+		final List<Class> supportedTypes = new ArrayList<Class>();
 		supportedTypes.addAll(Arrays.asList(supportedDelegateTypes));
 		_supportedDelegates = Collections.unmodifiableList(supportedTypes);
 	}
@@ -55,7 +55,7 @@ public abstract class AbstractDelegatingFactory implements IDelegatingFactory {
 	/**
 	 * @see org.eclipse.jst.jsf.context.IDelegatingFactory#addFactoryDelegate(org.eclipse.core.runtime.IAdaptable)
 	 */
-	public void addFactoryDelegate(IAdaptable delegate) 
+	public final void addFactoryDelegate(IAdaptable delegate) 
 	{
 		synchronized(_delegates)
 		{
@@ -71,7 +71,7 @@ public abstract class AbstractDelegatingFactory implements IDelegatingFactory {
 	/**
 	 * @see org.eclipse.jst.jsf.context.IDelegatingFactory#removeFactoryDelegate(org.eclipse.core.runtime.IAdaptable)
 	 */
-	public boolean removeFactoryDelegate(IAdaptable delegate) 
+	public final boolean removeFactoryDelegate(IAdaptable delegate) 
 	{
 		synchronized(_delegates)
 		{
@@ -82,7 +82,7 @@ public abstract class AbstractDelegatingFactory implements IDelegatingFactory {
 	/**
 	 * @see org.eclipse.jst.jsf.context.IDelegatingFactory#getValidDelegateTypes()
 	 */
-	public List getValidDelegateTypes() 
+	public final List<Class> getValidDelegateTypes() 
 	{
 		return _supportedDelegates;
 	}
@@ -90,11 +90,11 @@ public abstract class AbstractDelegatingFactory implements IDelegatingFactory {
 	/**
 	 * @see org.eclipse.jst.jsf.context.IDelegatingFactory#isValidDelegate(org.eclipse.core.runtime.IAdaptable)
 	 */
-	public boolean isValidDelegate(IAdaptable delegate) 
+	public final boolean isValidDelegate(IAdaptable delegate) 
 	{
-		for (final Iterator it = _supportedDelegates.iterator(); it.hasNext();)
+		for (final Iterator<Class> it = _supportedDelegates.iterator(); it.hasNext();)
 		{
-			final Class clazz = (Class) it.next();
+			final Class clazz = it.next();
 			
 			// if the delegate supports one of the valid delegate classes
 			// via adaptation, then it is a valid delegate

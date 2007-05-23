@@ -26,7 +26,8 @@ import org.eclipse.core.runtime.IAdaptable;
  *    if cannot do it yourself.  Deviations from this rule must be
  *    clearly documented to ensure clients understand how the factory works.
  * 
- * Clients may implement this interface
+ * Clients may NOT implement this interface.  
+ * Extend AbstractDelegatingFactory instead.
  * 
  * @author cbateman
  *
@@ -63,7 +64,7 @@ public interface IDelegatingFactory
 	 * that may be passed to addFactoryDelegate.  Implementor should 
 	 * return at least one supported class.
 	 */
-	List  getValidDelegateTypes();
+	List<Class>  getValidDelegateTypes();
 	
 	
 	/**

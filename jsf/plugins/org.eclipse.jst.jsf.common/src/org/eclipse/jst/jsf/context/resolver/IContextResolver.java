@@ -16,7 +16,8 @@ import org.eclipse.jst.jsf.context.IModelContext;
 /**
  * Super type of all context resolvers.  
  * 
- * May be sub-classed but should not be implemented directly
+ * May be sub-classed but should not be implemented directly.
+ * Use AbstractContextResolver to implement.
  * 
  * @author cbateman
  *

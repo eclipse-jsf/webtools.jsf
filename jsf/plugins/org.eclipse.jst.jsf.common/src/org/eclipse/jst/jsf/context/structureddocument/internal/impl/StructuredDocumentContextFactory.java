@@ -17,7 +17,7 @@ import java.util.Iterator;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextViewer;
-import org.eclipse.jst.jsf.context.AbstractDelegatingFactory;
+import org.eclipse.jst.jsf.context.structureddocument.AbstractStructuredDocumentContextFactory;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
 import org.eclipse.wst.sse.core.internal.provisional.IndexedRegion;
@@ -30,12 +30,20 @@ import org.w3c.dom.Node;
  * @author cbateman
  *
  */
-public class StructuredDocumentContextFactory extends AbstractDelegatingFactory
+public class StructuredDocumentContextFactory extends AbstractStructuredDocumentContextFactory
 			 implements IStructuredDocumentContextFactory
 {
 	/* static attributes */
 	private static StructuredDocumentContextFactory  INSTANCE;
 
+	/**
+	 * @param supportedDelegateTypes
+	 */
+	public StructuredDocumentContextFactory(Class[]  supportedDelegateTypes)
+	{
+	    super(supportedDelegateTypes);
+	}
+	
 	/**
 	 * @return an instance (possibly shared) of the this factory
 	 */

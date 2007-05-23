@@ -17,7 +17,7 @@ import org.eclipse.core.runtime.IAdaptable;
 /**
  * Encapsulates the current runtime context in some model.
  * 
- * This interface may be sub-classed but not implemented
+ * This interface may be sub-classed but not implemented directly
  */
 public interface IModelContext extends IAdaptable
 {

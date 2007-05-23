@@ -26,7 +26,7 @@ import org.w3c.dom.Node;
  * @author cbateman
  *
  */
-public class DOMContextResolver implements IDOMContextResolver 
+class DOMContextResolver implements IDOMContextResolver 
 {
 	private final IStructuredDocumentContext		_context;
     //private ITextRegionContextResolver              _regionResolver; // null; lazy initialized if needed

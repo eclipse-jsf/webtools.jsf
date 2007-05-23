@@ -16,7 +16,8 @@ package org.eclipse.jst.jsf.context.resolver;
  * The super-interface for all context resolvers that are related
  * to IDocumentContext's.
  * 
- * This interface may be sub-classed or implemented by clients.
+ * This interface may NOT be implemented by clients directly but may be sub-classed.
+ * Use AbstractDocumentContextResolver for implementation.
  * 
  * @author cbateman
  *

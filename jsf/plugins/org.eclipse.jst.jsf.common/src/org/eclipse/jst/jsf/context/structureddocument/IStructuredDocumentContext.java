@@ -19,7 +19,8 @@ import org.eclipse.jst.jsf.context.IDocumentContext;
  * Encapsulates runtime context in an SSE IStructuredDocument
  * @author cbateman
  *
- * Interface may sub-classed or implemented by clients.
+ * Interface must NOT be implemented by clients.
+ * Implementers should sub-class AbstractStructuredDocumentContext
  *
  */
 public interface IStructuredDocumentContext extends IDocumentContext

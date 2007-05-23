@@ -30,7 +30,7 @@ import org.w3c.dom.Node;
 public interface IStructuredDocumentContextFactory
 {
 	/**
-	 * The singleton instance of the factory
+	 * The default singleton instance of the factory
 	 */
 	public static final IStructuredDocumentContextFactory  INSTANCE = 
         StructuredDocumentContextFactory.getInstance();

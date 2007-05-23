@@ -17,12 +17,11 @@ package org.eclipse.jst.jsf.context;
  * A convenience super-type for all context instances that implement
  * IDocumentContext or one of its sub-types. 
  * 
- * Clients may extend this class
  * 
  * @author cbateman
  *
  */
-public class AbstractDocumentContext implements IDocumentContext {
+public abstract class AbstractDocumentContext implements IDocumentContext {
 
 	/**
 	 * @see org.eclipse.core.runtime.IAdaptable#getAdapter(java.lang.Class)

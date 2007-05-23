@@ -15,8 +15,9 @@ package org.eclipse.jst.jsf.context;
 /**
  * Encapsulates runtime context in a JFace IDocument model
  * 
- * Clients may implement this interface
- * 
+ * Clients may NOT implement this interface directly but may sub-class
+ * Extend AbstractDocumentContext instead.
+
  * @author cbateman
  *
  */
