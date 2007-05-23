@@ -33,6 +33,12 @@ public class ExtensionsPreferencePage extends PreferencePage {
 
 	private StyleCombo _beforeCombo, _afterCombo, _cursorCombo;
 
+	/**
+	 * Creates an instance.
+	 * 
+	 * @param element IDOMElement instance.
+	 * @param style CSSPropertyContext instance.
+	 */
 	public ExtensionsPreferencePage(IDOMElement element,
 			CSSPropertyContext style) {
 		super();
@@ -117,8 +123,8 @@ public class ExtensionsPreferencePage extends PreferencePage {
 		_cursorCombo.setLayoutData(data);
 		_cursorCombo.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
-				String position = _cursorCombo.getText();
-				_style.setListStylePosition(position);
+				String cursor = _cursorCombo.getText();
+				_style.setCursor(cursor);
 			}
 		});
 
