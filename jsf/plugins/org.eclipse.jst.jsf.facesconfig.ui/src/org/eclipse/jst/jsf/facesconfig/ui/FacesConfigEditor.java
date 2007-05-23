@@ -504,8 +504,7 @@ public class FacesConfigEditor extends FormEditor implements
                 {
                     try 
                     {
-                        if (isWebProject
-                                && edit != null) 
+                        if (isWebProject && edit != null && edit.getFacesConfig() != null) 
                         {
                             // only add the intro editor if the preference
                             // is set to do so.
