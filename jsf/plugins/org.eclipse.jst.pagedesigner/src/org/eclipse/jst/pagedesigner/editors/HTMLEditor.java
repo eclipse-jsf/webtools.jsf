@@ -67,6 +67,7 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.contexts.IContextService;
 import org.eclipse.ui.ide.IGotoMarker;
 import org.eclipse.ui.part.MultiPageSelectionProvider;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
@@ -722,6 +723,13 @@ public class HTMLEditor extends PostSelectionMultiPageEditorPart implements
 			IWorkbenchWindow window = getSite().getWorkbenchWindow();
 			window.getPartService().addPartListener(_partListener);
 			window.getShell().addShellListener(_partListener);
+			
+			// TODO: is this the right place to do this?
+			// enable our editor context
+			IContextService contextService = (IContextService) getSite()
+			  .getService(IContextService.class);
+			contextService.activateContext("org.eclipse.jst.pagedesigner.editorContext");
+
 		} catch (Exception e) {
 			// Error in editor initialization
 			_log.error("Error.HTMLEditor.5", e); //$NON-NLS-1$
