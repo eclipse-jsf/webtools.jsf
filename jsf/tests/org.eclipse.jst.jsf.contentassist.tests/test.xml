@@ -27,7 +27,7 @@
     <ant target="core-test" antfile="${library-file}" dir="${eclipse-home}">
       <property name="data-dir" value="${jsf-folder}"/>
       <property name="plugin-name" value="${plugin-name}"/>
-      <property name="classname" value="org.eclipse.jst.jsf.contentassist.tests.CompletionPrefixTest" />
+      <property name="classname" value="org.eclipse.jst.jsf.contentassist.tests.AllTests" />
    	<property name="plugin-path" value="${eclipse-home}/plugins/${plugin-name}"/>
     </ant>
   </target>
