@@ -112,7 +112,7 @@ public class Test_bug_149743 extends TestCase
     /**
      * Checks the scenario for Test_bug_149743
      */
-    public void testCompletionProposalsForId()
+    public void testCompletionProposalsForId() throws Exception
     {
         ContextWrapper wrapper = null;
         
@@ -135,10 +135,6 @@ public class Test_bug_149743 extends TestCase
             assertEquals(2, proposals.size());
             final ICompletionProposal proposal = (ICompletionProposal) proposals.get(0);
             assertEquals("property", proposal.getDisplayString());
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
         }
         finally
         {
