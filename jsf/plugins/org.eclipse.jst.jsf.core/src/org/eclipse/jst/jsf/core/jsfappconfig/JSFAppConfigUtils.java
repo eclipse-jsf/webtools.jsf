@@ -321,16 +321,14 @@ public class JSFAppConfigUtils {
 			if (javaProject != null) {
 				IClasspathEntry[] classpathEntries = javaProject.getResolvedClasspath(true);
 				if (classpathEntries != null && classpathEntries.length > 0) {
+					IWorkspaceRoot workspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
 					for (int i = 0; i < classpathEntries.length; i++) {
 						IClasspathEntry classpathEntry = classpathEntries[i];
 						if (classpathEntry.getEntryKind() == IClasspathEntry.CPE_LIBRARY) {
 							IPath libraryPath = classpathEntry.getPath();
 							if (libraryPath.getFileExtension() != null && libraryPath.getFileExtension().length() > 0) {
-								//TODO: find better way to determine if workspace must be prepended to path
-								if (libraryPath.getDevice() == null) {
-									IWorkspaceRoot workspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
-									IPath workspaceRootPath = workspaceRoot.getLocation();
-									libraryPath = workspaceRootPath.append(libraryPath);
+								if (libraryPath.getDevice() == null && workspaceRoot.getProject(libraryPath.segment(0)).exists()) {
+									libraryPath = workspaceRoot.getFile(libraryPath).getLocation();
 								}
 								String libraryPathString = libraryPath.toString();
 								JarFile jarFile = null;
