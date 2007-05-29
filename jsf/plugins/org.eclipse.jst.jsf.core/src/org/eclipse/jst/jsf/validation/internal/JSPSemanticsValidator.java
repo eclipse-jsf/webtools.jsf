@@ -105,15 +105,19 @@ public class JSPSemanticsValidator extends JSPValidator implements ISourceValida
 			System.out.println("executing JSPSemanticsValidator.validateFile");
 		try {
 			model = StructuredModelManager.getModelManager().getModelForRead(file);
-			DOMModelForJSP jspModel = (DOMModelForJSP) model;
-			IStructuredDocument structuredDoc = jspModel.getStructuredDocument();
-			IStructuredDocumentRegion curNode = structuredDoc.getFirstStructuredDocumentRegion();
-			while (null != curNode && !reporter.isCancelled()) {
-				if (curNode.getFirstRegion().getType() == DOMRegionContext.XML_TAG_OPEN ) 
-                {
-					validateTag(curNode, reporter, file, false);
-				}				
-				curNode = curNode.getNext();
+			
+			if (model instanceof DOMModelForJSP)
+			{
+    			DOMModelForJSP jspModel = (DOMModelForJSP) model;
+    			IStructuredDocument structuredDoc = jspModel.getStructuredDocument();
+    			IStructuredDocumentRegion curNode = structuredDoc.getFirstStructuredDocumentRegion();
+    			while (null != curNode && !reporter.isCancelled()) {
+    				if (curNode.getFirstRegion().getType() == DOMRegionContext.XML_TAG_OPEN ) 
+                    {
+    					validateTag(curNode, reporter, file, false);
+    				}				
+    				curNode = curNode.getNext();
+    			}
 			}
 		}
         catch (CoreException e)
