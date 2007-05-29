@@ -20,7 +20,8 @@ import org.eclipse.jst.jsf.context.symbol.ISymbol;
 /**
  * Resolves symbols and possible symbols in a given context
  * 
- * May be sub-classed or implemented by clients
+ * May NOT be sub-classed or implemented by clients.
+ * Sub-class SymbolContextResolver.
  * 
  * @author cbateman
  *

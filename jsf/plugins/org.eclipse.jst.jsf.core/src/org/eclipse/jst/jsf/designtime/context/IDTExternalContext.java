@@ -14,10 +14,13 @@ package org.eclipse.jst.jsf.designtime.context;
 
 import java.util.Map;
 
+import org.eclipse.jst.jsf.context.symbol.ISymbol;
+
 /**
  * Interface that must be implemented by all design time external contexts
  * 
- * Clients may implement but should not sub-class
+ * Clients may implement but should not sub-class. If implementing, sub-class
+ * AbstractDTExternalContext instead.
  * 
  * @author cbateman
  *
@@ -31,7 +34,7 @@ public interface IDTExternalContext
      * 
      * Map is unmodifiable (throws exception on mutation operations)
      */
-    public abstract Map getMapForScope(int scopeMask);
+    public abstract Map<String, ISymbol> getMapForScope(int scopeMask);
 
     /**
      * @return a map of ISymbols representing the currently available
@@ -39,26 +42,26 @@ public interface IDTExternalContext
      * 
      * Map is unmodifiable (throws exception on mutation operations)
      */
-    public abstract Map getRequestMap();
+    public abstract Map<String, ISymbol> getRequestMap();
 
     /**
      * @return a map of ISymbols representing the currently available
      * session scope variables.  Never null, empty if no symbols
      * Map is unmodifiable (throws exception on mutation operations)
      */
-    public abstract Map getSessionMap();
+    public abstract Map<String, ISymbol> getSessionMap();
 
     /**
      * @return a map of ISymbols representing the currently available
      * application scope variables.  Never null, empty if no symbols
      * Map is unmodifiable (throws exception on mutation operations)
      */
-    public abstract Map getApplicationMap();
+    public abstract Map<String, ISymbol> getApplicationMap();
     
     /**
      * @return a map of ISymbols representing the currently available
      * none scope variables.  Never null, empty if no symbols
      * Map is unmodifiable (throws exception on mutation operations)
      */
-    public abstract Map getNoneMap();
+    public abstract Map<String, ISymbol> getNoneMap();
 }

@@ -24,6 +24,8 @@ import org.w3c.dom.Element;
  * The default factory for creating DataModel symbols based on an value expression
  * in a dataTable.
  * 
+ * Clients may sub-class.
+ * 
  * @author cbateman
  *
  */

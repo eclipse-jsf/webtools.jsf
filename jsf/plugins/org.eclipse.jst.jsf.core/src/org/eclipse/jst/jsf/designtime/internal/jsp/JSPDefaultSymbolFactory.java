@@ -35,7 +35,6 @@ import org.eclipse.jst.jsf.context.symbol.source.AbstractContextSymbolFactory;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
 import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
-import org.eclipse.jst.jsf.designtime.internal.Messages;
 import org.eclipse.jst.jsf.designtime.internal.symbols.ResourceBundleMapSourceFactory;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Element;

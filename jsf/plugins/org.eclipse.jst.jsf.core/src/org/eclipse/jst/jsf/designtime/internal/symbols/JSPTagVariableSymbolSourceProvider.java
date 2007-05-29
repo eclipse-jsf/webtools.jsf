@@ -59,7 +59,7 @@ public class JSPTagVariableSymbolSourceProvider extends
                 // ensure internal model is sync'ed with document
                 // but don't force refresh
                 modelProcessor.refresh(false);
-                final List symbols = new ArrayList();
+                final List<ISymbol> symbols = new ArrayList();
                 
                 if ((symbolScopeMask & ISymbolConstants.SYMBOL_SCOPE_REQUEST) != 0)
                 {
@@ -78,11 +78,11 @@ public class JSPTagVariableSymbolSourceProvider extends
                     symbols.addAll(modelProcessor.getMapForScope(ISymbolConstants.SYMBOL_SCOPE_NONE_STRING).values());
                 }
                     
-                return (ISymbol[]) symbols.toArray(ISymbol.EMPTY_SYMBOL_ARRAY);
+                return symbols.toArray(ISymbol.EMPTY_SYMBOL_ARRAY);
             }
             catch (Exception e)
             {
-                JSFCorePlugin.getDefault().getLog().log(new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID, 0, "Error acquiring model processor",e));
+                JSFCorePlugin.getDefault().getLog().log(new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID, 0, "Error acquiring model processor",e)); //$NON-NLS-1$
                 // fall-through to empty symbol array
             }
         }

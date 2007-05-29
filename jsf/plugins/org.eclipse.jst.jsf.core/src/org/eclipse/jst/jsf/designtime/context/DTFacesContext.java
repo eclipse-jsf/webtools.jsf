@@ -24,14 +24,14 @@ import org.eclipse.core.runtime.IAdaptable;
  * @author cbateman
  *
  */
-public class DTFacesContext 
+public final class DTFacesContext 
 {
     private final IExternalContextFactoryLocator   _locator;
     
     /**
      * @param locator
      */
-    public DTFacesContext(IExternalContextFactoryLocator locator)
+    public DTFacesContext(final IExternalContextFactoryLocator locator)
     {
         _locator = locator;
     }
@@ -44,7 +44,7 @@ public class DTFacesContext
      * @return the designtime external context or null if one is not defined
      * for this contextObject
      */
-    public IDTExternalContext getDTExternalContext(IAdaptable contextObject)
+    public IDTExternalContext getDTExternalContext(final IAdaptable contextObject)
     {
         
         IDTExternalContext externalContext = null;
@@ -62,7 +62,7 @@ public class DTFacesContext
         return externalContext;
     }
     
-    private String _localeString = "";
+    private String _localeString = ""; //$NON-NLS-1$
     
     /**
      * @return the current locale string

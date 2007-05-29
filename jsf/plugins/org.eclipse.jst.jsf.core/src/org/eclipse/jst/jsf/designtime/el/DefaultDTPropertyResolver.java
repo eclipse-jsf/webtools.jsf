@@ -230,7 +230,12 @@ public class DefaultDTPropertyResolver extends AbstractDTPropertyResolver
         return null;
     }
     
-    private Iterator getIterator(ITypeDescriptor typeDesc)
+    /**
+     * @param typeDesc
+     * @return the type descriptor's property iterator or empty list
+     * if null
+     */
+    protected final Iterator getIterator(ITypeDescriptor typeDesc)
     {
         if (typeDesc != null)
         {
@@ -247,7 +252,7 @@ public class DefaultDTPropertyResolver extends AbstractDTPropertyResolver
      * @return an array containing all property segments of the key.  If the key contains only
      * one property, then this is returned a single element in the array
      */
-    private Object[] factorKey(Object key)
+    protected final Object[] factorKey(Object key)
     {
         if (key instanceof String)
         {

@@ -64,17 +64,17 @@ public class DefaultDTVariableResolver extends AbstractDTVariableResolver
             return null;
         }
         
-        symbol = (ISymbol) externalContext.getRequestMap().get(name);
+        symbol = externalContext.getRequestMap().get(name);
         
         // check request scope
         if (symbol == null)
         {
-            symbol = (ISymbol) externalContext.getSessionMap().get(name);
+            symbol = externalContext.getSessionMap().get(name);
             
             // then check session scope
             if (symbol == null)
             {
-                symbol = (ISymbol) externalContext.getApplicationMap().get(name);
+                symbol = externalContext.getApplicationMap().get(name);
                 
                 // if the symbol is not found at any scope, then look for a
                 // a bean.
@@ -117,7 +117,15 @@ public class DefaultDTVariableResolver extends AbstractDTVariableResolver
         return (ISymbol[]) allSymbols.toArray(ISymbol.EMPTY_SYMBOL_ARRAY);
     }
         
-    private void addBuiltins(final List list, final IAdaptable externalContextKey)
+    /**
+     * Adds the built-in symbols to the list.  This behaviour is standarized and should
+     * not be overriden in general.  However, you may wish to change the default
+     * built-in symbol provider with your own.
+     * 
+     * @param list
+     * @param externalContextKey
+     */
+    protected  void addBuiltins(final List list, final IAdaptable externalContextKey)
     {
         // check implicits first
         final DefaultBuiltInSymbolProvider builtins =
@@ -127,20 +135,35 @@ public class DefaultDTVariableResolver extends AbstractDTVariableResolver
                                      ISymbolConstants.SYMBOL_SCOPE_ALL)));
     }
     
-    private void addExternalContextSymbols(final List list, 
+    /**
+     * Simulate resolution of symbols from the request, session, application and none
+     * scope maps.  Use a symbol provider instead if you simply want to add
+     * new symbols for a tag variable or other symbol source.
+     * 
+     * @param list
+     * @param externalContext
+     */
+    protected void addExternalContextSymbols(final List list, 
                                            final IDTExternalContext externalContext)
     {
         if (externalContext != null)
         {
             final ISymbol[] externalContextSymbols =
-                    (ISymbol[]) externalContext.getMapForScope
-                          (ISymbolConstants.SYMBOL_SCOPE_ALL).values().
-                                            toArray(ISymbol.EMPTY_SYMBOL_ARRAY);
+                    externalContext.getMapForScope
+                  (ISymbolConstants.SYMBOL_SCOPE_ALL).values().
+                                    toArray(ISymbol.EMPTY_SYMBOL_ARRAY);
             list.addAll(Arrays.asList(externalContextSymbols));
         }
     }
 
-    private void addBeanSymbols(final List list, final IAdaptable externalContextKey)
+    /**
+     * Gets all the bean symbols.  If you wish to override it would be advisable
+     * to look at and/or sub-class the default bean symbol source provider
+     * 
+     * @param list
+     * @param externalContextKey
+     */
+    protected void addBeanSymbols(final List list, final IAdaptable externalContextKey)
     {
         final DefaultBeanSymbolSourceProvider beanProvider =
             DefaultBeanSymbolSourceProvider.getInstance();

@@ -65,22 +65,22 @@ public class DefaultBuiltInSymbolProvider
     }
     
     
-    private static final String APPLICATION_SCOPE = "applicationScope";
-    private static final String SESSION_SCOPE = "sessionScope";
-    private static final String REQUEST_SCOPE = "requestScope";
-    private static final String COOKIE_IMPLICIT_OBJ = "cookie";
-    private static final String FACES_CONTEXT_IMPLICIT_OBJ = "facesContext";
-    private static final String HEADER_IMPLICIT_OBJ = "header";
-    private static final String HEADER_VALUES_IMPLICIT_OBJ = "headerValues";
-    private static final String INIT_PARAM_IMPLICIT_OBJ = "initParam";
-    private static final String PARAM_IMPLICIT_OBJ = "param";
-    private static final String PARAM_VALUES_IMPLICIT_OBJ = "paramValues";
-    private static final String VIEW_IMPLICIT_OBJ = "view";
+    private static final String APPLICATION_SCOPE = "applicationScope"; //$NON-NLS-1$
+    private static final String SESSION_SCOPE = "sessionScope"; //$NON-NLS-1$
+    private static final String REQUEST_SCOPE = "requestScope"; //$NON-NLS-1$
+    private static final String COOKIE_IMPLICIT_OBJ = "cookie"; //$NON-NLS-1$
+    private static final String FACES_CONTEXT_IMPLICIT_OBJ = "facesContext"; //$NON-NLS-1$
+    private static final String HEADER_IMPLICIT_OBJ = "header"; //$NON-NLS-1$
+    private static final String HEADER_VALUES_IMPLICIT_OBJ = "headerValues"; //$NON-NLS-1$
+    private static final String INIT_PARAM_IMPLICIT_OBJ = "initParam"; //$NON-NLS-1$
+    private static final String PARAM_IMPLICIT_OBJ = "param"; //$NON-NLS-1$
+    private static final String PARAM_VALUES_IMPLICIT_OBJ = "paramValues"; //$NON-NLS-1$
+    private static final String VIEW_IMPLICIT_OBJ = "view"; //$NON-NLS-1$
 
     private static final String FACES_CONTEXT_FULLY_QUALIFIED_CLASS =
-        "javax.faces.context.FacesContext";
+        "javax.faces.context.FacesContext"; //$NON-NLS-1$
     private static final String VIEW_FULLY_QUALIFIED_CLASS =
-        "javax.faces.component.UIViewRoot";
+        "javax.faces.component.UIViewRoot"; //$NON-NLS-1$
     
     /**
      * Now direct instantiation -- use getInstance

@@ -10,7 +10,7 @@
  *    
  ********************************************************************************/
 
-package org.eclipse.jst.jsf.designtime.internal;
+package org.eclipse.jst.jsf.designtime.internal.jsp;
 
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
@@ -21,7 +21,7 @@ import java.util.ResourceBundle;
  * @author cbateman
  *
  */
-public class Messages {
+/*package*/ final class Messages {
     private static final String BUNDLE_NAME = "org.eclipse.jst.jsf.designtime.messages"; //$NON-NLS-1$
 
     private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle

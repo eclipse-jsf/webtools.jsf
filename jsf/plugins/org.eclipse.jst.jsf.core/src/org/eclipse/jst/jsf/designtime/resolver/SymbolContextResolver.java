@@ -26,15 +26,19 @@ import org.eclipse.jst.jsf.designtime.context.DTFacesContext;
 
 /**
  * A symbol context resolver
+ * Clients may NOT sub-class.
  * 
  * @author cbateman
  *
  */
-/*package*/ class SymbolContextResolver implements ISymbolContextResolver 
+/*package*/ final class SymbolContextResolver extends AbstractSymbolContextResolver 
 {
     private final IStructuredDocumentContext		_context;
     private IWorkspaceContextResolver               _wkspResolver; // = null; lazy created through getWorkspaceResolver
-	
+
+	/**
+	 * @param context
+	 */
 	/*package*/ SymbolContextResolver(IStructuredDocumentContext context)
 	{
 		_context = context;
@@ -134,7 +138,30 @@ import org.eclipse.jst.jsf.designtime.context.DTFacesContext;
         return new IMethodSymbol[0];
     }
 
-    private IFile getFile()
+    
+	public boolean canResolveContext(IModelContext modelContext)
+    {
+		return modelContext.getAdapter(IStructuredDocumentContext.class) != null;
+	}
+	
+    /**
+     * @return a lazily loaded workspace resolver for this resolver's context
+     */
+    protected final IWorkspaceContextResolver  getWorkspaceResolver()
+    {
+        if (_wkspResolver == null)
+        {
+            _wkspResolver = IStructuredDocumentContextResolverFactory.
+                                INSTANCE.getWorkspaceContextResolver(_context);
+        }
+        
+        return _wkspResolver;
+    }
+    
+    /**
+     * @return the underlying IFile for my context or null if can't be determined
+     */
+    protected final IFile getFile()
     {
         final IWorkspaceContextResolver  resolver = getWorkspaceResolver();
         
@@ -150,21 +177,4 @@ import org.eclipse.jst.jsf.designtime.context.DTFacesContext;
         
         return null;
     }
-    
-	private IWorkspaceContextResolver  getWorkspaceResolver()
-    {
-        if (_wkspResolver == null)
-        {
-            _wkspResolver = IStructuredDocumentContextResolverFactory.
-                                INSTANCE.getWorkspaceContextResolver(_context);
-        }
-        
-        return _wkspResolver;
-    }
-    
-	public boolean canResolveContext(IModelContext modelContext)
-    {
-		return modelContext.getAdapter(IStructuredDocumentContext.class) != null;
-	}
-
 }

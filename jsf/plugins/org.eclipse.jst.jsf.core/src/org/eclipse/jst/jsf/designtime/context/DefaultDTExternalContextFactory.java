@@ -17,6 +17,8 @@ import org.eclipse.core.runtime.IAdaptable;
 /**
  * Creates external contexts for JSPs
  * 
+ * Clients may sub-class
+ * 
  * @author cbateman
  *
  */
@@ -30,7 +32,7 @@ public class DefaultDTExternalContextFactory extends
      *  
      * @return a new DT external context
      */
-    public IDTExternalContext create(IAdaptable containerContext) 
+    public IDTExternalContext create(final IAdaptable containerContext) 
     {
         return new DTJSPExternalContext(containerContext);
     }

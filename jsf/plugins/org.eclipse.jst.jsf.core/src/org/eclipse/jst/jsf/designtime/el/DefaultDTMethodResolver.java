@@ -24,7 +24,7 @@ import org.eclipse.jst.jsf.context.symbol.ISymbol;
  * we have no direct DTComponent so instead we use this resolver to resolve
  * an IInstanceSymbol and method name to an IMethodSymbol (if one exists).
  * 
- * Clients may implement
+ * Clients may sub-class
  * 
  * @author cbateman
  *

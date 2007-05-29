@@ -30,8 +30,8 @@ import org.eclipse.jst.jsf.core.internal.tld.LoadBundleUtil;
 
 class ResourceBundleMapSource extends AbstractMap
 {
-    private static final String   PROPERTY_QUALIFIER = "org.eclipse.jst.jsf.designtime.internal.jsp";
-    private static final String   SESSION_PROPERTY_NAME_PROJECT = "ResourceBundleMapSource";
+    private static final String   PROPERTY_QUALIFIER = "org.eclipse.jst.jsf.designtime.internal.jsp"; //$NON-NLS-1$
+    private static final String   SESSION_PROPERTY_NAME_PROJECT = "ResourceBundleMapSource"; //$NON-NLS-1$
     private static final QualifiedName  SESSION_PROPERTY_KEY_PROJECT 
         = new QualifiedName(PROPERTY_QUALIFIER, SESSION_PROPERTY_NAME_PROJECT);
  
@@ -64,7 +64,7 @@ class ResourceBundleMapSource extends AbstractMap
             }
             catch (CoreException ce)
             {
-                JSFCorePlugin.log("Error creating bundle file cache", ce);
+                JSFCorePlugin.log("Error creating bundle file cache", ce); //$NON-NLS-1$
             }
             
             return bundleFileCache;
@@ -87,7 +87,7 @@ class ResourceBundleMapSource extends AbstractMap
             return bundleRes;
         }
           
-        throw new IOException("Bundle "+resourcePathStr+" not found in classpath for project: "+project.getName());
+        throw new IOException("Bundle "+resourcePathStr+" not found in classpath for project: "+project.getName()); //$NON-NLS-1$ //$NON-NLS-2$
     }
     
     private Properties                  _resourceBundle; // = null; set on first access or changes
@@ -125,11 +125,11 @@ class ResourceBundleMapSource extends AbstractMap
             }
             catch (CoreException ce)
             {
-                JSFCorePlugin.log("Error refreshing bundle", ce);
+                JSFCorePlugin.log("Error refreshing bundle", ce); //$NON-NLS-1$
             }
             catch (IOException ioe)
             {
-                JSFCorePlugin.log("Error refreshing bundle", ioe);
+                JSFCorePlugin.log("Error refreshing bundle", ioe); //$NON-NLS-1$
             }
             finally
             {
@@ -141,7 +141,7 @@ class ResourceBundleMapSource extends AbstractMap
                     }
                     catch (IOException ioe)
                     {
-                        JSFCorePlugin.log("Error closing bundle", ioe);
+                        JSFCorePlugin.log("Error closing bundle", ioe); //$NON-NLS-1$
                     }
                 }
             }

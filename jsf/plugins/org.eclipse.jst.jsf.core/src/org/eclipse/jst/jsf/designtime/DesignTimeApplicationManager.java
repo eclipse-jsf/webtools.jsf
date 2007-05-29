@@ -34,54 +34,52 @@ import org.eclipse.jst.jsf.designtime.el.AbstractDTVariableResolver;
  * Per-web-application manager that manages design time information for a corresponding
  * project.
  * 
- * Clients should not sub-class.
- * 
  * @author cbateman
  *
  */
-public class DesignTimeApplicationManager 
+public final class DesignTimeApplicationManager 
 {
     // TODO: load from property file?
-    private static final String   PROPERTY_QUALIFIER = "org.eclipse.jst.jsf.designtime.internal";
-    private static final String   SESSION_PROPERTY_NAME_PROJECT = "DesignTimeApplicationManager";
+    private static final String   PROPERTY_QUALIFIER = "org.eclipse.jst.jsf.designtime.internal"; //$NON-NLS-1$
+    private static final String   SESSION_PROPERTY_NAME_PROJECT = "DesignTimeApplicationManager"; //$NON-NLS-1$
     private static final QualifiedName  SESSION_PROPERTY_KEY_PROJECT 
         = new QualifiedName(PROPERTY_QUALIFIER, SESSION_PROPERTY_NAME_PROJECT);
     
-    private static final String   SESSION_PROPERTY_NAME_FACES_CONTEXT = "DTFacesContext";
+    private static final String   SESSION_PROPERTY_NAME_FACES_CONTEXT = "DTFacesContext"; //$NON-NLS-1$
     private static final QualifiedName SESSION_PROPERTY_KEY_FACES_CONTEXT
        =  new QualifiedName(PROPERTY_QUALIFIER, SESSION_PROPERTY_NAME_FACES_CONTEXT);
     
     private static final String   PERSIST_PROPERTY_NAME_EXTERNAL_CONTEXT_PROVIDER =
-        "ExternalContextProvider";
+        "ExternalContextProvider"; //$NON-NLS-1$
     private static final QualifiedName PERSIST_PROPERTY_KEY_EXTERNAL_CONTEXT_PROVIDER =
         new QualifiedName(PROPERTY_QUALIFIER, PERSIST_PROPERTY_NAME_EXTERNAL_CONTEXT_PROVIDER);
     
     private static final String   PERSIST_PROPERTY_NAME_VARIABLE_RESOLVER_PROVIDER =
-        "VariableResolverProvider";
+        "VariableResolverProvider"; //$NON-NLS-1$
     private static final QualifiedName PERSIST_PROPERTY_KEY_VARIABLE_RESOLVER_PROVIDER 
        = new QualifiedName(PROPERTY_QUALIFIER, PERSIST_PROPERTY_NAME_VARIABLE_RESOLVER_PROVIDER);
 
     private static final String   PERSIST_PROPERTY_NAME_PROPERTY_RESOLVER_PROVIDER =
-        "PropertyResolverProvider";
+        "PropertyResolverProvider"; //$NON-NLS-1$
     private static final QualifiedName PERSIST_PROPERTY_KEY_PROPERTY_RESOLVER_PROVIDER =
         new QualifiedName(PROPERTY_QUALIFIER, PERSIST_PROPERTY_NAME_PROPERTY_RESOLVER_PROVIDER);
 
     private static final String    PERSIST_PROPERTY_NAME_METHOD_RESOLVER_PROVIDER =
-        "MethodResolverProvider";
+        "MethodResolverProvider"; //$NON-NLS-1$
     private static final QualifiedName PERSIST_PROPERTY_KEY_METHOD_RESOLVER_PROVIDER =
         new QualifiedName(PROPERTY_QUALIFIER, PERSIST_PROPERTY_NAME_METHOD_RESOLVER_PROVIDER);
 
     private static final String   DEFAULT_EXTERNAL_CONTEXT_ID = 
-        "org.eclipse.jst.jsf.core.externalcontext.default";
+        "org.eclipse.jst.jsf.core.externalcontext.default"; //$NON-NLS-1$
     
     private static final String   DEFAULT_VARIABLE_RESOLVER_ID = 
-        "org.eclipse.jst.jsf.core.variableresolver.default";
+        "org.eclipse.jst.jsf.core.variableresolver.default"; //$NON-NLS-1$
     
     private static final String   DEFAULT_PROPERTY_RESOLVER_ID =
-        "org.eclipse.jst.jsf.core.propertyresolver.default";
+        "org.eclipse.jst.jsf.core.propertyresolver.default"; //$NON-NLS-1$
         
     private static final String   DEFAULT_METHOD_RESOLVER_ID =
-        "org.eclipse.jst.jsf.core.methodresolver.default";
+        "org.eclipse.jst.jsf.core.methodresolver.default"; //$NON-NLS-1$
     
     /**
      * @param project
@@ -112,26 +110,30 @@ public class DesignTimeApplicationManager
         }
         catch (CoreException ce)
         {
-            Platform.getLog(JSFCorePlugin.getDefault().getBundle()).log(new Status(IStatus.ERROR, JSFCorePlugin.getDefault().getBundle().getSymbolicName(), 0, "Problem loading design time appmanager", new Throwable(ce)));
+            Platform.getLog(JSFCorePlugin.getDefault().getBundle()).log(new Status(IStatus.ERROR, JSFCorePlugin.getDefault().getBundle().getSymbolicName(), 0, "Problem loading design time appmanager", new Throwable(ce))); //$NON-NLS-1$
         }
         
         return null;
     }
     
     // instance definition
-    private final IProject                      _project;
+    private final IProject                              _project;
+    private final IExternalContextFactoryLocator        _locator;
     
     private DesignTimeApplicationManager(IProject project)
     {
         _project = project;
+        _locator = new MyExternalContextFactoryLocator();
     }
     
     /**
-     * @param file
+     * @param file must not be null
      * @return the faces context for the file or null if not found
      */
     public DTFacesContext getFacesContext(IFile file)
     {
+        assert file != null;
+        
         try
         {
             synchronized(file)
@@ -140,20 +142,7 @@ public class DesignTimeApplicationManager
                 
                 if (context == null)
                 {
-                    // TODO: change to non-anonymous class
-                    IExternalContextFactoryLocator  locator = 
-                        new IExternalContextFactoryLocator()
-                    {
-                        public AbstractDTExternalContextFactory getFactory() 
-                        {
-                            return (AbstractDTExternalContextFactory) 
-                                     getResolver(PERSIST_PROPERTY_KEY_EXTERNAL_CONTEXT_PROVIDER,
-                                           JSFCorePlugin.getExternalContextProviders(),
-                                           DEFAULT_EXTERNAL_CONTEXT_ID);
-                        }
-                    };
-                    
-                    context = new DTFacesContext(locator);
+                    context = new DTFacesContext(_locator);
                     file.setSessionProperty(SESSION_PROPERTY_KEY_PROJECT, context);
                 }
                 
@@ -165,7 +154,7 @@ public class DesignTimeApplicationManager
             Platform.getLog(JSFCorePlugin.getDefault().getBundle())
                 .log(new Status(IStatus.ERROR, 
                         JSFCorePlugin.getDefault().getBundle().getSymbolicName(), 
-                        0, "Problem loading design time facescontext", 
+                        0, "Problem loading design time facescontext",  //$NON-NLS-1$
                         new Throwable(ce)));
         }
         
@@ -197,7 +186,7 @@ public class DesignTimeApplicationManager
      */
     public synchronized AbstractDTVariableResolver getVariableResolver()
     {
-        return (AbstractDTVariableResolver) getResolver(PERSIST_PROPERTY_KEY_VARIABLE_RESOLVER_PROVIDER,
+        return getResolver(PERSIST_PROPERTY_KEY_VARIABLE_RESOLVER_PROVIDER,
                                                         JSFCorePlugin.getVariableResolvers(),
                                                         DEFAULT_VARIABLE_RESOLVER_ID);
     }
@@ -231,7 +220,7 @@ public class DesignTimeApplicationManager
      */
     public synchronized AbstractDTPropertyResolver getPropertyResolver()
     {
-        return (AbstractDTPropertyResolver) getResolver(PERSIST_PROPERTY_KEY_PROPERTY_RESOLVER_PROVIDER,
+        return getResolver(PERSIST_PROPERTY_KEY_PROPERTY_RESOLVER_PROVIDER,
                 JSFCorePlugin.getPropertyResolvers(),
                 DEFAULT_PROPERTY_RESOLVER_ID);
     }
@@ -261,7 +250,7 @@ public class DesignTimeApplicationManager
      */
     public synchronized AbstractDTMethodResolver getMethodResolver()
     {
-        return (AbstractDTMethodResolver) getResolver(PERSIST_PROPERTY_KEY_METHOD_RESOLVER_PROVIDER,
+        return getResolver(PERSIST_PROPERTY_KEY_METHOD_RESOLVER_PROVIDER,
                 JSFCorePlugin.getMethodResolvers(),
                 DEFAULT_METHOD_RESOLVER_ID);
     }
@@ -288,8 +277,8 @@ public class DesignTimeApplicationManager
     }
 
     
-    private Object getResolver(final QualifiedName pluginKey,
-                               final Map   registry,
+    private <ResolverProvider> ResolverProvider getResolver(final QualifiedName pluginKey,
+                               final Map<String, ResolverProvider>   registry,
                                final String defaultId)
     {
         String pluginId = defaultId;
@@ -309,7 +298,7 @@ public class DesignTimeApplicationManager
            {
                JSFCorePlugin.getDefault().getLog().log(
                        new Status(IStatus.WARNING, JSFCorePlugin.PLUGIN_ID,
-                                   0, "Plugin: "+pluginId+" not found",
+                                   0, "Plugin: "+pluginId+" not found", //$NON-NLS-1$ //$NON-NLS-2$
                                    new Throwable()));
                pluginId = defaultId;
            }
@@ -318,7 +307,7 @@ public class DesignTimeApplicationManager
         {
             JSFCorePlugin.getDefault().getLog().log(
                     new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID,
-                                0, "Error getting plugin property",
+                                0, "Error getting plugin property", //$NON-NLS-1$
                                 ce));
             pluginId = defaultId;
             // fall-through and use the default
@@ -347,5 +336,14 @@ public class DesignTimeApplicationManager
         }
 
         return id;
+    }
+    
+    private class MyExternalContextFactoryLocator implements IExternalContextFactoryLocator
+    {
+        public AbstractDTExternalContextFactory getFactory() {
+            return getResolver(PERSIST_PROPERTY_KEY_EXTERNAL_CONTEXT_PROVIDER,
+                    JSFCorePlugin.getExternalContextProviders(),
+                        DEFAULT_EXTERNAL_CONTEXT_ID);
+        }
     }
 }

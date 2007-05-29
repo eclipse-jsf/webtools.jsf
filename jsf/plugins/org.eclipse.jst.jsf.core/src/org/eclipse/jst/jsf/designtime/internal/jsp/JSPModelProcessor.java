@@ -136,10 +136,10 @@ public class JSPModelProcessor
     private final DOMModelForJSP    _model;
     private final ModelListener     _modelListener;
     private boolean                 isDisposed;
-    private Map                     _requestMap;
-    private Map                     _sessionMap;
-    private Map                     _applicationMap;
-    private Map                     _noneMap;
+    private Map<Object, ISymbol>    _requestMap;
+    private Map<Object, ISymbol>    _sessionMap;
+    private Map<Object, ISymbol>    _applicationMap;
+    private Map<Object, ISymbol>    _noneMap;
     private long                    _lastModificationStamp;
     
     // used to avoid infinite recursion in refresh.  Must never be null
@@ -384,9 +384,9 @@ public class JSPModelProcessor
      * @return an unmodifable map containing all known symbols for
      * that scope.  If scopeName is not found, returns the empty map.
      */
-    public Map getMapForScope(String scopeName)
+    public Map<Object, ISymbol> getMapForScope(String scopeName)
     {
-        final Map map = getMapForScopeInternal(scopeName);
+        final Map<Object, ISymbol> map = getMapForScopeInternal(scopeName);
         
         if (map != null)
         {
@@ -398,7 +398,7 @@ public class JSPModelProcessor
     
     private void updateMap(ISymbol symbol, String  scopeName)
     {
-        final Map map = getMapForScopeInternal(scopeName);
+        final Map<Object, ISymbol> map = getMapForScopeInternal(scopeName);
         
         if (map != null)
         {
@@ -410,7 +410,7 @@ public class JSPModelProcessor
         }
     }
 
-    private Map getMapForScopeInternal(String scopeName)
+    private Map<Object, ISymbol> getMapForScopeInternal(String scopeName)
     {
         if (ISymbolConstants.SYMBOL_SCOPE_REQUEST_STRING.equals(scopeName))
         {
@@ -438,37 +438,37 @@ public class JSPModelProcessor
     {
         if (_requestMap == null)
         {
-            _requestMap = new SymbolMap();
+            _requestMap = new HashMap<Object, ISymbol>();
         }
         
         return _requestMap;
     }
     
-    private Map getSessionMap()
+    private Map<Object, ISymbol> getSessionMap()
     {
         if (_sessionMap == null)
         {
-            _sessionMap = new SymbolMap();
+            _sessionMap = new HashMap<Object, ISymbol>();
         }
         
         return _sessionMap;
     }
     
-    private Map getApplicationMap()
+    private Map<Object, ISymbol> getApplicationMap()
     {
         if (_applicationMap == null)
         {
-            _applicationMap = new SymbolMap();
+            _applicationMap = new HashMap<Object, ISymbol>();
         }
         
         return _applicationMap;
     }
     
-    private Map getNoneMap()
+    private Map<Object, ISymbol> getNoneMap()
     {
         if (_noneMap == null)
         {
-            _noneMap = new SymbolMap();
+            _noneMap = new HashMap<Object, ISymbol>();
         }
         
         return _noneMap;

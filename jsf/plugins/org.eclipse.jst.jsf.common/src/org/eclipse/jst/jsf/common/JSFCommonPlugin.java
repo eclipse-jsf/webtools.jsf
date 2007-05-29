@@ -50,8 +50,8 @@ public final class JSFCommonPlugin extends EMFPlugin {
 	 */
     public static final String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
-    private static List  registeredSymbolSourceProviders;
-    private static Map   registeredSymbolFactories;
+    private static List<ISymbolSourceProviderFactory>  registeredSymbolSourceProviders;
+    private static Map<String,AbstractContextSymbolFactory>   registeredSymbolFactories;
     
     private final static String     FACTORY_ATTRIBUTE_NAME = "factory"; //$NON-NLS-1$
     private final static String     FACTORY_ATTRIBUTE_ID_NAME = "factoryId";  //$NON-NLS-1$
@@ -142,14 +142,13 @@ public final class JSFCommonPlugin extends EMFPlugin {
      */
     public static ISymbolSourceProvider[]  getSymbolSourceProvider()
     {
-        return (ISymbolSourceProvider[]) 
-            registeredSymbolSourceProviders.toArray(new ISymbolSourceProvider[0]);
+        return registeredSymbolSourceProviders.toArray(new ISymbolSourceProvider[0]);
     }
     
     /**
      * @return all registered symbol source providers
      */
-    public synchronized static List getSymbolSourceProviders()
+    public synchronized static List<ISymbolSourceProviderFactory> getSymbolSourceProviders()
     {
         if (registeredSymbolSourceProviders == null)
         {
@@ -166,7 +165,7 @@ public final class JSFCommonPlugin extends EMFPlugin {
     {
         final IExtensionPoint point = Platform.getExtensionRegistry().getExtensionPoint(plugin.getBundle().getSymbolicName(), Implementation.SYMBOL_SOURCE_EXT_ID);
         final IExtension[] extensions = point.getExtensions();
-        registeredSymbolSourceProviders = new ArrayList(extensions.length);
+        registeredSymbolSourceProviders = new ArrayList<ISymbolSourceProviderFactory>(extensions.length);
 
         for (int i = 0; i < extensions.length; i++)
         {
@@ -208,7 +207,7 @@ public final class JSFCommonPlugin extends EMFPlugin {
     /**
      * @return the list of registed symbol factories
      */
-    public synchronized static Map getSymbolFactories()
+    public synchronized static Map<String, AbstractContextSymbolFactory> getSymbolFactories()
     {
         if (registeredSymbolFactories == null)
         {
@@ -225,7 +224,7 @@ public final class JSFCommonPlugin extends EMFPlugin {
     {
         final IExtensionPoint point = Platform.getExtensionRegistry().getExtensionPoint(plugin.getBundle().getSymbolicName(), Implementation.SYMBOL_FACTORY_EXT_ID);
         final IExtension[] extensions = point.getExtensions();
-        registeredSymbolFactories = new HashMap(extensions.length);
+        registeredSymbolFactories = new HashMap<String, AbstractContextSymbolFactory>(extensions.length);
 
         for (int i = 0; i < extensions.length; i++)
         {
@@ -246,17 +245,17 @@ public final class JSFCommonPlugin extends EMFPlugin {
                     
                     if (bundle != null)
                     {
-                        try
-                        {
+                        try {
                             Class factoryClass = bundle.loadClass(factoryClassName);
-                            
+                        
                             AbstractContextSymbolFactory factory = 
                                 (AbstractContextSymbolFactory) factoryClass.newInstance();
-
                             registeredSymbolFactories.put(factoryId, factory);
-                        }
-                        catch (Exception e)
-                        {
+                        } catch (InstantiationException e) {
+                            plugin.log(new Status(IStatus.ERROR, plugin.getBundle().getSymbolicName(), 0, "Error loading symbol factory extension point",e)); //$NON-NLS-1$
+                        } catch (IllegalAccessException e) {
+                            plugin.log(new Status(IStatus.ERROR, plugin.getBundle().getSymbolicName(), 0, "Error loading symbol factory extension point",e)); //$NON-NLS-1$
+                        } catch (ClassNotFoundException e) {
                             plugin.log(new Status(IStatus.ERROR, plugin.getBundle().getSymbolicName(), 0, "Error loading symbol factory extension point",e)); //$NON-NLS-1$
                         }
                     }
@@ -315,8 +314,8 @@ public final class JSFCommonPlugin extends EMFPlugin {
 	 * @param bundleId
 	 * @return Class
 	 */
-	public static Class loadClass(String className, String bundleId) {
-		Class aClass = null;
+	public static Class<?> loadClass(String className, String bundleId) {
+		Class<?> aClass = null;
 		try {
 			if (bundleId != null){
 				Bundle bundle = Platform.getBundle(bundleId);
@@ -325,8 +324,7 @@ public final class JSFCommonPlugin extends EMFPlugin {
 				}
 			}
 		} catch (ClassNotFoundException e) {
-			// TODO log
-			e.printStackTrace();
+			log(e);
 		}
 		return aClass;
 	}

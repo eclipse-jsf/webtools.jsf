@@ -30,7 +30,6 @@ import org.eclipse.jst.jsf.context.symbol.ISymbol;
 import org.eclipse.jst.jsf.context.symbol.SymbolFactory;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
-import org.eclipse.jst.jsf.designtime.internal.Messages;
 import org.eclipse.jst.jsf.validation.internal.appconfig.AppConfigValidationUtil;
 import org.eclipse.jst.jsf.validation.internal.el.ELExpressionValidator;
 import org.eclipse.jst.jsf.validation.internal.el.IExpressionSemanticValidator;

@@ -162,16 +162,19 @@ public class DefaultBeanSymbolSourceProvider
     
     private String createAdditionalProposalInfo(ManagedBeanType beanType)
     {
-        StringBuffer additionalInfo = new StringBuffer("<p><b>");
-        additionalInfo.append("Name: </b>");
+        StringBuffer additionalInfo = new StringBuffer("<p><b>"); //$NON-NLS-1$
+        additionalInfo.append(Messages.getString("DefaultBeanSymbolSourceProvider.AdditionalInformation.Name")); //$NON-NLS-1$
+        additionalInfo.append("</b>"); //$NON-NLS-1$
         additionalInfo.append(beanType.getManagedBeanName().getTextContent());
-        additionalInfo.append("</p>");
-        additionalInfo.append("<p><b>Type: </b>");
+        additionalInfo.append("</p><p><b>"); //$NON-NLS-1$
+        additionalInfo.append(Messages.getString("DefaultBeanSymbolSourceProvider.AdditionalInformation.Type")); //$NON-NLS-1$
+        additionalInfo.append(" </b>"); //$NON-NLS-1$
         additionalInfo.append(beanType.getManagedBeanClass().getTextContent());
-        additionalInfo.append("</p>");
-        additionalInfo.append("<p><b>Scope: </b>");
+        additionalInfo.append("</p><p><b>"); //$NON-NLS-1$
+        additionalInfo.append(Messages.getString("DefaultBeanSymbolSourceProvider.AdditionalInformation.Scope")); //$NON-NLS-1$
+        additionalInfo.append("</b>"); //$NON-NLS-1$
         additionalInfo.append(beanType.getManagedBeanScope().getTextContent());
-        additionalInfo.append("</p>");
+        additionalInfo.append("</p>"); //$NON-NLS-1$
         
         StringBuffer descBuffer = new StringBuffer();
         
@@ -187,9 +190,11 @@ public class DefaultBeanSymbolSourceProvider
         
         if (descBuffer.length() > 0)
         {
-            additionalInfo.append("<p><b>Description: </b>");
+            additionalInfo.append("<p><b>"); //$NON-NLS-1$
+            additionalInfo.append(Messages.getString("DefaultBeanSymbolSourceProvider.AdditionalInformation.Description")); //$NON-NLS-1$
+            additionalInfo.append("</b>"); //$NON-NLS-1$
             additionalInfo.append(descBuffer);
-            additionalInfo.append("</p>");
+            additionalInfo.append("</p>"); //$NON-NLS-1$
         }
         
         return additionalInfo.toString();

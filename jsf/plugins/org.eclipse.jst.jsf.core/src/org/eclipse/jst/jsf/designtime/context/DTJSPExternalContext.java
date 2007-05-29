@@ -13,7 +13,6 @@
 package org.eclipse.jst.jsf.designtime.context;
 
 import java.io.PrintStream;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -35,7 +34,7 @@ import org.eclipse.jst.jsf.context.symbol.source.ISymbolSourceProviderFactory;
  * @author cbateman
  *
  */
-public class DTJSPExternalContext implements IDTExternalContext 
+public class DTJSPExternalContext extends AbstractDTExternalContext 
 {
     /**
      * 
@@ -47,7 +46,7 @@ public class DTJSPExternalContext implements IDTExternalContext
      * 
      * @param jspFile
      */
-    DTJSPExternalContext(IAdaptable  jspFile)
+    protected DTJSPExternalContext(final IAdaptable  jspFile)
     {
         if (jspFile instanceof IFile)
         {
@@ -64,21 +63,18 @@ public class DTJSPExternalContext implements IDTExternalContext
             else
             {
                 _jspFile = null;
-                throw new AssertionError("jspFile must be adapable to an IFile");
+                throw new AssertionError("jspFile must be adapable to an IFile"); //$NON-NLS-1$
             }
         }
         else
         {
             _jspFile = null;
-            throw new AssertionError("jspFile must be adapable to an IFile");
+            throw new AssertionError("jspFile must be adapable to an IFile"); //$NON-NLS-1$
         }
     }
     
-    /* (non-Javadoc)
-     * @see org.eclipse.jst.jsf.designtime.context.IDTExternalContext#getMapForScope(int)
-     */
-    public Map getMapForScope(int scopeMask)
-    {
+    @Override
+    protected Map doGetMapForScope(final int scopeMask) {
         final Map  map = new HashMap();
         
         for (final Iterator it = JSFCommonPlugin.getSymbolSourceProviders().iterator(); it.hasNext();)
@@ -94,45 +90,14 @@ public class DTJSPExternalContext implements IDTExternalContext
             }
         }
         
-        return Collections.unmodifiableMap(map);
-    }
-    
-    /* (non-Javadoc)
-     * @see org.eclipse.jst.jsf.designtime.context.IDTExternalContext#getRequestMap()
-     */
-    public Map getRequestMap()
-    {
-        return getMapForScope(ISymbolConstants.SYMBOL_SCOPE_REQUEST);
+        return map;
     }
 
-    /* (non-Javadoc)
-     * @see org.eclipse.jst.jsf.designtime.context.IDTExternalContext#getSessionMap()
-     */
-    public Map getSessionMap()
-    {
-        return getMapForScope(ISymbolConstants.SYMBOL_SCOPE_SESSION);
-    }
-
-    /* (non-Javadoc)
-     * @see org.eclipse.jst.jsf.designtime.context.IDTExternalContext#getApplicationMap()
-     */
-    public Map getApplicationMap()
-    {
-        return getMapForScope(ISymbolConstants.SYMBOL_SCOPE_APPLICATION);
-    }
-    
-    /* (non-Javadoc)
-     * @see org.eclipse.jst.jsf.designtime.context.IDTExternalContext#getNoneMap()
-     */
-    public Map getNoneMap() 
-    {
-        return getMapForScope(ISymbolConstants.SYMBOL_SCOPE_NONE);
-    }
     
     /**
      * @param stream
      */
-    public void trace(PrintStream stream)
+    public final void trace(PrintStream stream)
     {
         String[]  scopeNames = {ISymbolConstants.SYMBOL_SCOPE_REQUEST_STRING, 
                                 ISymbolConstants.SYMBOL_SCOPE_SESSION_STRING, 
@@ -143,9 +108,9 @@ public class DTJSPExternalContext implements IDTExternalContext
 
         for (int i = 0; i < scopeNames.length; i++)
         {
-            stream.println("--------------");
-            stream.println(scopeNames[i]+" Scope:");
-            stream.println("--------------");
+            stream.println("--------------"); //$NON-NLS-1$
+            stream.println(scopeNames[i]+" Scope:"); //$NON-NLS-1$
+            stream.println("--------------"); //$NON-NLS-1$
 
             for (final Iterator it = symbolMaps[i].values().iterator(); it.hasNext();)
             {

@@ -16,7 +16,8 @@ package org.eclipse.jst.jsf.designtime.context;
  * This interface is used to decouple the faces context from the 
  * DesignTimeApplicationManager
  * 
- * Client must implement or subclass
+ * Client must NOT implement or subclass.
+ * Extend AbstractExternalContextFactoryLocator instead
  * 
  * @author cbateman
  *

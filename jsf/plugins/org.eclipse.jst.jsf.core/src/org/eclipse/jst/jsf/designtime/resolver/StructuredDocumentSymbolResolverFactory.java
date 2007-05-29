@@ -12,12 +12,15 @@
 
 package org.eclipse.jst.jsf.designtime.resolver;
 
-import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
 import org.eclipse.jst.jsf.context.AbstractDelegatingFactory;
+import org.eclipse.jst.jsf.context.IModelContext;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
+import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
 
 /**
  * Factory create resolver capable of resolving symbols in a structured document
+ * 
+ * Clients may not sub-class.
  * 
  * @author cbateman
  *
@@ -50,28 +53,29 @@ public final class StructuredDocumentSymbolResolverFactory extends
      * @param context
      * @return a new instance of symbol resolver for context
      */
-    public ISymbolContextResolver getSymbolContextResolver(IStructuredDocumentContext context) {
+    public ISymbolContextResolver getSymbolContextResolver(IModelContext context) {
         ISymbolContextResolver  resolver = internalGetSymbolContextResolver(context);
         
         if (resolver == null)
         {
-            resolver = delegateGetSymbolContextResolver();
+            resolver = delegateGetSymbolContextResolver(context);
         }
         
         return resolver;
     }
     
-    private ISymbolContextResolver internalGetSymbolContextResolver(IStructuredDocumentContext context)
+    private ISymbolContextResolver internalGetSymbolContextResolver(IModelContext context)
     {
-        if (context.getStructuredDocument() instanceof IStructuredDocument)
+        if (context instanceof IStructuredDocumentContext &&
+                ((IStructuredDocumentContext)context).getStructuredDocument() instanceof IStructuredDocument)
         {
-            return new SymbolContextResolver(context);
+            return new SymbolContextResolver((IStructuredDocumentContext) context);
         }
         
         return null;
     }
     
-    private ISymbolContextResolver delegateGetSymbolContextResolver()
+    private ISymbolContextResolver delegateGetSymbolContextResolver(IModelContext context)
     {
         // no delegates currently supported
         return null;

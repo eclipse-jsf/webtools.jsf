@@ -144,7 +144,7 @@ public class StartupHandler implements IStartup
             {
                 IContentTypeManager typeManager = Platform.getContentTypeManager();
                 IContentType jspContentType = 
-                    typeManager.getContentType("org.eclipse.jst.jsp.core.jspsource");
+                    typeManager.getContentType("org.eclipse.jst.jsp.core.jspsource"); //$NON-NLS-1$
                 if (jspContentType != null
                         && jspContentType.isAssociatedWith(file.getName()))
                 {
@@ -194,7 +194,7 @@ public class StartupHandler implements IStartup
                 }
                 catch (Exception e)
                 {
-                    JSFCorePlugin.getDefault().getLog().log(new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID, 0, "Error acquiring model processor",e));
+                    JSFCorePlugin.getDefault().getLog().log(new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID, 0, "Error acquiring model processor",e)); //$NON-NLS-1$
                 }
             }
         }
@@ -223,7 +223,7 @@ public class StartupHandler implements IStartup
             }
             catch (PartInitException excp)
             {
-                JSFCorePlugin.getDefault().getLog().log(new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID, 0, "Error acquiring editor input",excp));
+                JSFCorePlugin.getDefault().getLog().log(new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID, 0, "Error acquiring editor input",excp)); //$NON-NLS-1$
             }
             
             return null;

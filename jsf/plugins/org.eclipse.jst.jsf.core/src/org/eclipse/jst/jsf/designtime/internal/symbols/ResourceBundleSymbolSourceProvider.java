@@ -82,11 +82,11 @@ public final class ResourceBundleSymbolSourceProvider extends
                    {
                        symbols.add(createSymbolForResourceBundle(project, name, basename));
                    } catch (JavaModelException e) {
-                       JSFCorePlugin.log(e, "Error creating base name for: "+basename);
+                       JSFCorePlugin.log(e, "Error creating base name for: "+basename); //$NON-NLS-1$
                     } catch (IOException e) {
-                        JSFCorePlugin.log(e, "Error creating base name for: "+basename);
+                        JSFCorePlugin.log(e, "Error creating base name for: "+basename); //$NON-NLS-1$
                     } catch (CoreException e) {
-                        JSFCorePlugin.log(e, "Error creating base name for: "+basename);
+                        JSFCorePlugin.log(e, "Error creating base name for: "+basename); //$NON-NLS-1$
                     }
                }
            }     
@@ -110,7 +110,7 @@ public final class ResourceBundleSymbolSourceProvider extends
             SymbolFactory.eINSTANCE.createIComponentSymbol();
         symbol.setName(name);
         symbol.setTypeDescriptor(typeDesc);
-        symbol.setDetailedDescription("Resource bundle map for bundle <i>"+basename+"</i>");
+        symbol.setDetailedDescription(Messages.getString("ResourceBundleSymbolSourceProvider.DetailedDescription")+basename+"</i>");  //$NON-NLS-1$//$NON-NLS-2$
         return symbol;
     }
 

@@ -24,6 +24,10 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jst.jsf.designtime.context.AbstractDTExternalContextFactory;
+import org.eclipse.jst.jsf.designtime.el.AbstractDTMethodResolver;
+import org.eclipse.jst.jsf.designtime.el.AbstractDTPropertyResolver;
+import org.eclipse.jst.jsf.designtime.el.AbstractDTVariableResolver;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.wst.common.frameworks.internal.WTPPlugin;
 import org.osgi.framework.Bundle;
@@ -131,118 +135,118 @@ public class JSFCorePlugin extends WTPPlugin {
     /**
      * @return all registered symbol source providers
      */
-    public synchronized static Map getVariableResolvers()
+    public synchronized static Map<String, AbstractDTVariableResolver> getVariableResolvers()
     {
         if (_registeredVariableResolvers == null)
         {
             registerVariableResolverProviders();
             if (_registeredVariableResolvers == null)
             {
-                throw new AssertionError("registerProviders failed");
+                throw new AssertionError("registerProviders failed"); //$NON-NLS-1$
             }
         }
         return Collections.unmodifiableMap(_registeredVariableResolvers);
     }
     
-    private static Map    _registeredVariableResolvers;
-    private final static String VARIABLE_RESOLVER_EXT_POINT_NAME = "variableresolver";
+    private static Map<String, AbstractDTVariableResolver>    _registeredVariableResolvers;
+    private final static String VARIABLE_RESOLVER_EXT_POINT_NAME = "variableresolver"; //$NON-NLS-1$
     
     private static void registerVariableResolverProviders()
     {
         _registeredVariableResolvers = new HashMap();
         loadRegisteredExtensions(VARIABLE_RESOLVER_EXT_POINT_NAME,
                                 _registeredVariableResolvers,
-                                 "variableresolver");
+                                VARIABLE_RESOLVER_EXT_POINT_NAME);
     }
     
     /**
      * @return a map of all registered property resolvers by id
      */
-    public synchronized static Map getPropertyResolvers()
+    public synchronized static Map<String, AbstractDTPropertyResolver> getPropertyResolvers()
     {
         if (_registeredPropertyResolvers == null)
         {
             registerPropertyResolverProviders();
             if (_registeredPropertyResolvers == null)
             {
-                throw new AssertionError("registerProviders failed");
+                throw new AssertionError("registerProviders failed"); //$NON-NLS-1$
             }
         }
         return Collections.unmodifiableMap(_registeredPropertyResolvers);
     }
     
-    private static Map    _registeredPropertyResolvers;
+    private static Map<String, AbstractDTPropertyResolver>    _registeredPropertyResolvers;
     private final static String PROPERTY_RESOLVER_EXT_POINT_NAME = 
-                                                             "propertyresolver";
+                                                             "propertyresolver"; //$NON-NLS-1$
     
     private static void registerPropertyResolverProviders()
     {
         _registeredPropertyResolvers = new HashMap();
         loadRegisteredExtensions(PROPERTY_RESOLVER_EXT_POINT_NAME,
                                 _registeredPropertyResolvers,
-                                 "propertyresolver");
+                                PROPERTY_RESOLVER_EXT_POINT_NAME);
     }
     
     
     /**
      * @return a map of all registered method resolvers by id
      */
-    public synchronized static Map getMethodResolvers()
+    public synchronized static Map<String, AbstractDTMethodResolver> getMethodResolvers()
     {
         if (_registeredMethodResolvers == null)
         {
             registerMethodResolverProviders();
             if (_registeredMethodResolvers == null)
             {
-                throw new AssertionError("registerProviders failed");
+                throw new AssertionError("registerProviders failed"); //$NON-NLS-1$
             }
         }
         return Collections.unmodifiableMap(_registeredMethodResolvers);
     }
 
-    private static Map     _registeredMethodResolvers;
+    private static Map<String, AbstractDTMethodResolver>     _registeredMethodResolvers;
     private final static String METHOD_RESOLVER_EXT_POINT_NAME = 
-                                                               "methodresolver";
+                                                               "methodresolver"; //$NON-NLS-1$
     
     private static void registerMethodResolverProviders()
     {
         _registeredMethodResolvers = new HashMap();
         loadRegisteredExtensions(METHOD_RESOLVER_EXT_POINT_NAME,
                 _registeredMethodResolvers,
-                 "methodresolver");
+                METHOD_RESOLVER_EXT_POINT_NAME);
 
     }
 
     /**
      * @return a map of all registered external context providers by id
      */
-    public synchronized static Map getExternalContextProviders()
+    public synchronized static Map<String, AbstractDTExternalContextFactory> getExternalContextProviders()
     {
         if (_registeredExternalContextProviders == null)
         {
             registerExternalContextProviders();
             if (_registeredExternalContextProviders == null)
             {
-                throw new AssertionError("registerProviders failed");
+                throw new AssertionError("registerProviders failed"); //$NON-NLS-1$
             }
         }
         return Collections.unmodifiableMap(_registeredExternalContextProviders);
     }
     
-    private static Map     _registeredExternalContextProviders;
+    private static Map<String, AbstractDTExternalContextFactory>     _registeredExternalContextProviders;
     private final static String EXTERNAL_CONTEXT_EXT_POINT_NAME = 
-                                                               "externalcontext";
+                                                               "externalcontext"; //$NON-NLS-1$
 
     private static void registerExternalContextProviders()
     {
         _registeredExternalContextProviders = new HashMap();
         loadRegisteredExtensions(EXTERNAL_CONTEXT_EXT_POINT_NAME,
                                  _registeredExternalContextProviders,
-                                 "externalcontext");
+                                 EXTERNAL_CONTEXT_EXT_POINT_NAME);
     }
     
-    private static void loadRegisteredExtensions(final String extName,
-                                                 final Map    registry,
+    private static <ResolverProvider> void loadRegisteredExtensions(final String extName,
+                                                 final Map<String, ResolverProvider>    registry,
                                                  final String elementName)
     {
         final IExtensionPoint point = Platform.getExtensionRegistry().
@@ -261,11 +265,11 @@ public class JSFCorePlugin extends WTPPlugin {
             {
                 final IConfigurationElement element = elements[j];
                 if (elementName.equals(element.getName())
-                        && element.getAttribute("class") != null
-                        && element.getAttribute("id") != null)
+                        && element.getAttribute("class") != null //$NON-NLS-1$
+                        && element.getAttribute("id") != null) //$NON-NLS-1$
                 {
-                    final String factoryClassName = element.getAttribute("class");
-                    final String id = element.getAttribute("id");
+                    final String factoryClassName = element.getAttribute("class"); //$NON-NLS-1$
+                    final String id = element.getAttribute("id"); //$NON-NLS-1$
                     final Bundle bundle = Platform.getBundle(bundleId);
                     
                     if (bundle != null)
@@ -278,14 +282,14 @@ public class JSFCorePlugin extends WTPPlugin {
                             final Object variableResolver= 
                                 factoryClass.newInstance();
     
-                            registry.put(id, variableResolver);
+                            registry.put(id, (ResolverProvider) variableResolver);
                         }
                         catch (Exception e)
                         {
                             final ILog        logger_ = getDefault().getLog();
                             logger_.log(new Status(IStatus.ERROR, plugin.getBundle()
                                     .getSymbolicName(), 0, 
-                                    "Error loading property resolver provider extension point",e));
+                                    "Error loading resolver provider extension point",e)); //$NON-NLS-1$
                         }
                     }
                 }
