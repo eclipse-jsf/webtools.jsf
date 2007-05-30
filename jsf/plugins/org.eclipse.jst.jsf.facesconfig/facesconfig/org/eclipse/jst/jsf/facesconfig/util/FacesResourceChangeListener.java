@@ -47,8 +47,11 @@ import org.eclipse.wst.common.componentcore.resources.IVirtualComponent;
  * It arguably should be multiple classes, but the things it does are closely
  * related and splitting it up would result in duplicate work as well as
  * multiple delta traversals.
+ * 
+ * This class is not intended for external use. 
+ * Should NOT be referenced or extended externally.
  */
-public class FacesResourceChangeListener implements IResourceChangeListener,
+final class FacesResourceChangeListener implements IResourceChangeListener,
 		IResourceDeltaVisitor, ISaveParticipant, IResourceVisitor {
 
 	/** The singleton instance. */

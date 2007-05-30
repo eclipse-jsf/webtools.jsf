@@ -11,10 +11,12 @@
 package org.eclipse.jst.jsf.facesconfig.util;
 
 /**
+ * Not intended for external use.
+ * 
  * @author xnjiang
  *
  */
-public interface IFacesConfigChangeEvent {
+/*package*/ interface IFacesConfigChangeEvent {
 
 	/**
 	 * @return true if a managed bean has changed

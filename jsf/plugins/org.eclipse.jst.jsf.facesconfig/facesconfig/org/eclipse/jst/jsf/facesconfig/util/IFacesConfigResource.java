@@ -16,10 +16,12 @@ import org.eclipse.wst.common.internal.emf.resource.TranslatorResource;
 
 
 /**
+ * Should not be used or extended by clients.
+ * 
  * @author gjohnsto
  * @version $Id$
  */
-public interface IFacesConfigResource extends TranslatorResource {
+/*package*/ interface IFacesConfigResource extends TranslatorResource {
 	
 	/**
 	 * @return the root faces config object

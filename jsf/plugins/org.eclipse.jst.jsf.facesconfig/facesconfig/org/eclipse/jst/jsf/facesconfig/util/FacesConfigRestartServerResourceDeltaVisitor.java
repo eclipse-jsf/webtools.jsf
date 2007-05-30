@@ -23,15 +23,14 @@ import org.eclipse.wst.common.componentcore.internal.util.ComponentUtilities;
 import org.eclipse.wst.common.componentcore.resources.IVirtualComponent;
 
 /**
+ * This class is NOT intended for external use.
+ * 
  * @version $Id$
  */
-public class FacesConfigRestartServerResourceDeltaVisitor implements IResourceDeltaVisitor {
+final class FacesConfigRestartServerResourceDeltaVisitor implements IResourceDeltaVisitor {
 
 	/** Set of IProjects. */
 	private Set components = new HashSet();
-
-	/** Maps IProject --> Set of Strings. */
-	//private Map configMap = new HashMap();
 
 	/**
 	 * @see org.eclipse.core.resources.IResourceDeltaVisitor#visit(org.eclipse.core.resources.IResourceDelta)

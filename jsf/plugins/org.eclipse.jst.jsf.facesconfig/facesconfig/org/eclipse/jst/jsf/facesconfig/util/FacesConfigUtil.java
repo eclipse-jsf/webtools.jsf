@@ -18,8 +18,11 @@ import org.eclipse.core.runtime.content.IContentType;
 
 /**
  * Utility class for faces-config model management
+ * 
+ * This class is NOT intended for external use.
+ * 
  */
-public class FacesConfigUtil {
+final class FacesConfigUtil {
 
 	/** Must match the id specified in plugin.xml. */
 	public static final String FACES_CONFIG_CONTENT_TYPE_ID = "org.eclipse.jst.jsf.facesconfig.facesConfigFile";

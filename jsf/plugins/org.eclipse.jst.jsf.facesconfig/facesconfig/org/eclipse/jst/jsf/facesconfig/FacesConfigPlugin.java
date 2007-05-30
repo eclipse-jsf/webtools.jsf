@@ -20,9 +20,11 @@ import org.osgi.framework.BundleContext;
 
 
 /**
+ * This class should not be extended by clients.
+ * 
  * The main plugin class to be used in the desktop.
  */
-public class FacesConfigPlugin extends EMFPlugin {
+public final class FacesConfigPlugin extends EMFPlugin {
 
     /**
      * <!-- begin-user-doc -->
@@ -70,7 +72,7 @@ public class FacesConfigPlugin extends EMFPlugin {
 	/**
 	 * The actual implementation of the Eclipse <b>Plugin</b>.
 	 */
-	public static class Implementation extends EMFPlugin.EclipsePlugin {
+	public final static class Implementation extends EMFPlugin.EclipsePlugin {
 		/**
 		 * Internal constructor
 		 */

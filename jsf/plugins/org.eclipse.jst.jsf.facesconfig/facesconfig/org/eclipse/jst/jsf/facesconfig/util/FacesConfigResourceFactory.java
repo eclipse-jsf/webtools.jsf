@@ -19,10 +19,12 @@ import org.eclipse.wst.common.internal.emf.resource.TranslatorResource;
 import org.eclipse.wst.common.internal.emf.resource.TranslatorResourceFactory;
 
 /**
+ * May be referenced by should NOT be extended by clients
+ * 
  * @author xjiang
  *
  */
-public class FacesConfigResourceFactory extends TranslatorResourceFactory 
+public final class FacesConfigResourceFactory extends TranslatorResourceFactory 
 {
     /**
      * @return a faces config resource factory for use with faces-config
@@ -75,15 +77,6 @@ public class FacesConfigResourceFactory extends TranslatorResourceFactory
 	}
 
 	/**
-	 * register using the default renderer factory.
-	 * @param aRegistry 
-	 * @see #registerWith(String, RendererFactory)
-	 */
-//	public static void register(FileNameResourceFactoryRegistry aRegistry) {
-//		aRegistry.registerLastFileSegment("faces-config.xml", new FacesConfigResourceFactory(RendererFactory.getDefaultRendererFactory()));//$NON-NLS-1$
-//	}
-	
-	/**
 	 * Register myself with the Resource.Factory.Registry
 	 * @param sFileName 
 	 * @param aRendererFactory 
@@ -95,12 +88,4 @@ public class FacesConfigResourceFactory extends TranslatorResourceFactory
 			WTPResourceFactoryRegistry.INSTANCE.registerLastFileSegment("faces-config.xml", new FacesConfigResourceFactory(FacesRendererFactory.INSTANCE)); //$NON-NLS-1$
 		}
 	}
-
-//	/**
-//	 * @param uri
-//	 * @return the the factory associated with uri
-//	 */
-//	public static Resource.Factory getRegisteredFactory(URI uri) {
-//		return WTPResourceFactoryRegistry.INSTANCE.getFactory(uri);
-//	}
 }

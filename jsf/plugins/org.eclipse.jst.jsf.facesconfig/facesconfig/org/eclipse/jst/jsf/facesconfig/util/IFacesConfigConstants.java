@@ -11,9 +11,11 @@
 package org.eclipse.jst.jsf.facesconfig.util;
 
 /**
+ * Not intended for external use.
+ * 
  * Common constants
  */
-public interface IFacesConfigConstants {
+/*package*/ interface IFacesConfigConstants {
 	/**
 	 * the relative URI for the default faces config file.
 	 */

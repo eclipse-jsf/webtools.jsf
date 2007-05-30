@@ -11,11 +11,13 @@
 package org.eclipse.jst.jsf.facesconfig.util;
 
 /**
+ * Should NOT be used or extended by clients.
+ * 
  * constants for JSF preferences pages
  *
  * @author spaxton
  */
-public interface IFacesconfigPreferences {
+/*package*/ interface IFacesconfigPreferences {
 	
 	/**
 	 * Preference for whether or not to restart the server

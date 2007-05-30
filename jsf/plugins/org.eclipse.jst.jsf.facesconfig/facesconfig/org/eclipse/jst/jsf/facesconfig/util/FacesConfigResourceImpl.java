@@ -28,6 +28,10 @@ import org.xml.sax.SAXException;
 /**
  * <!-- begin-user-doc -->
  * The <b>Resource </b> associated with the package.
+ * 
+ * This class is NOT intended for external use.
+ * Should not be used or implemented by external clients
+ * 
  * <!-- end-user-doc -->
  * @see FacesConfigResourceFactory
  * @generated

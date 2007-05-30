@@ -12,10 +12,12 @@ package org.eclipse.jst.jsf.facesconfig.util;
 
 
 /**
+ * Not intended for external use.
+ * 
  * @author xnjiang
  *
  */
-public interface IFacesConfigChangeListener {
+/*package*/interface IFacesConfigChangeListener {
 
 	/**
 	 * @param event

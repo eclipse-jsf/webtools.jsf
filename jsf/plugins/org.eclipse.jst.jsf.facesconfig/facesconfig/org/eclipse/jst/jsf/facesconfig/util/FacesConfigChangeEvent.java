@@ -11,10 +11,12 @@
 package org.eclipse.jst.jsf.facesconfig.util;
 
 /**
+ * This class should NOT be referenced or extended by clients.
+ * 
  * @author xnjiang
  *
  */
-public class FacesConfigChangeEvent implements IFacesConfigChangeEvent {
+final class FacesConfigChangeEvent implements IFacesConfigChangeEvent {
 
 	private boolean bManagedBeandChanged = true;
 	private boolean bNavigationRuleChanged = true;
