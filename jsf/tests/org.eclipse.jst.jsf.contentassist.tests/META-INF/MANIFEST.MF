@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: org.eclipse.jst.jsf.contentassist Tests Plug-in
+Bundle-Name: %Bundle-Name.0
 Bundle-SymbolicName: org.eclipse.jst.jsf.contentassist.tests
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.eclipse.jst.jsf.contentassist.tests.ContentAssistTestsPlugin

@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: org.eclipse.jst.jsf.core.tests Plug-in
+Bundle-Name: %Bundle-Name.0
 Bundle-SymbolicName: org.eclipse.jst.jsf.core.tests;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.eclipse.jst.jsf.core.tests.TestsPlugin
-Bundle-Vendor: Oracle
+Bundle-Vendor: %Bundle-Vendor.0
 Bundle-Localization: plugin
 Bundle-ClassPath: jsfcoretests.jar
 Require-Bundle: org.eclipse.jst.jsf.core;bundle-version="[1.0.0,1.1.0)",
@@ -26,11 +26,14 @@ Require-Bundle: org.eclipse.jst.jsf.core;bundle-version="[1.0.0,1.1.0)",
  org.eclipse.jst.jsf.facesconfig;bundle-version="[1.0.0,1.1.0)"
 Eclipse-LazyStart: true
 Export-Package: org.eclipse.jst.jsf.core.tests;x-friends:="org.eclipse.jst.jsf.ui.tests,org.eclipse.jst.jsf.context.symbol.tests,org.eclipse.jst.jsf.designtime.tests",
+ org.eclipse.jst.jsf.core.tests.appconfig.provider;x-internal:=true,
  org.eclipse.jst.jsf.core.tests.appconfig.validation;x-internal:=true,
  org.eclipse.jst.jsf.core.tests.jsflibraryconfig;x-internal:=true,
+ org.eclipse.jst.jsf.core.tests.jsflibraryconfiguration;x-internal:=true,
  org.eclipse.jst.jsf.core.tests.jsflibraryregistry;x-internal:=true,
  org.eclipse.jst.jsf.core.tests.jsflibraryregistry.migration;x-internal:=true,
  org.eclipse.jst.jsf.core.tests.project.facet;x-internal:=true,
+ org.eclipse.jst.jsf.core.tests.sanity;x-internal:=true,
  org.eclipse.jst.jsf.core.tests.set;x-internal:=true,
  org.eclipse.jst.jsf.core.tests.tagmatcher;x-internal:=true,
  org.eclipse.jst.jsf.core.tests.types;x-internal:=true,

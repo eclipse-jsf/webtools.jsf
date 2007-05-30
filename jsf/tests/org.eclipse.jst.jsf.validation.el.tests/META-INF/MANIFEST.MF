@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Tests Plug-in
+Bundle-Name: %Bundle-Name.0
 Bundle-SymbolicName: org.eclipse.jst.jsf.validation.el.tests
 Bundle-Version: 1.0.0
 Bundle-Activator: org.eclipse.jst.jsf.validation.el.tests.ELValidationTestPlugin
@@ -27,4 +27,5 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.jst.jsf.validation.el.tests;x-internal:=true,
  org.eclipse.jst.jsf.validation.el.tests.base;x-internal:=true,
  org.eclipse.jst.jsf.validation.el.tests.jsp;x-internal:=true,
+ org.eclipse.jst.jsf.validation.el.tests.perf;x-internal:=true,
  org.eclipse.jst.jsf.validation.el.tests.util;x-internal:=true

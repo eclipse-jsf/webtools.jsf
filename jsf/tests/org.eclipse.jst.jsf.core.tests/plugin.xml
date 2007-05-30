@@ -7,14 +7,14 @@
       <jsfLibrary
             archiveFilesDelegate="org.eclipse.jst.jsf.core.tests.jsflibraryregistry.TEST_PP_LIBArchiveFilesDelegate"
             isImplementation="true"
-            label="FAKE LIB FROM jsf.core.tests (1)"
+            label="%jsfLibrary.label.0"
             maxVersionSupported="v1_1"
             name="TEST_PP_LIB_2">
       </jsfLibrary>      
       <jsfLibrary
             archiveFilesDelegate="org.eclipse.jst.jsf.core.tests.jsflibraryregistry.TEST_PP_LIB_EMPTYArchiveFilesDelegate"
             isImplementation="false"
-            label="FAKE LIB FROM jsf.core.tests (2)"
+            label="%jsfLibrary.label.1"
             maxVersionSupported="v1_2"
             name="TEST_PP_LIB_EMPTY">
       </jsfLibrary>

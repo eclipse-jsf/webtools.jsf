@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: org.eclipse.jst.jsf.ui.tests Plug-in
+Bundle-Name: %Bundle-Name.0
 Bundle-SymbolicName: org.eclipse.jst.jsf.ui.tests
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.eclipse.jst.jsf.ui.tests.JSFUITestsPlugin
-Bundle-Vendor: Oracle
+Bundle-Vendor: %Bundle-Vendor.0
 Bundle-Localization: plugin
 Bundle-ClassPath: jsfuitests.jar
 Require-Bundle: org.eclipse.jst.jsf.core;bundle-version="[1.0.0,1.1.0)",
