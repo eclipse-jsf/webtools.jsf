@@ -78,7 +78,7 @@
        <classpathContainerPage
              class="org.eclipse.jst.jsf.ui.internal.classpath.JSFLibraryContainerWizardPage"
              id="org.eclipse.jst.jsf.core.internal.jsflibrarycontainer"
-             name="JSF Libraries">
+             name="%classpathContainerPage.name.0">
        </classpathContainerPage>
     </extension>
     

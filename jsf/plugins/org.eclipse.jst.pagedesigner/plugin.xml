@@ -15,7 +15,7 @@
 			extensions="jsp,jsf,html,htm,xhtml"
 			icon="icons/PD_Plugin.gif"
 			id="org.eclipse.jst.pagedesigner.PageDesignerEditor"
-			name="Web Page Editor">
+			name="%editor.name.0">
 		</editor>
 	</extension>
 
@@ -60,19 +60,19 @@
 	</extension>
 	
 	<extension id="org.eclipse.jst.pagedesigner.commands" point="org.eclipse.ui.commands">
-		<category id="org.eclipse.jst.pagedesigner.pagelayout" name="Page Layout"/>
+		<category id="org.eclipse.jst.pagedesigner.pagelayout" name="%category.name.0"/>
 		<command categoryId="org.eclipse.jst.pagedesigner.pagelayout"
 			id="org.eclipse.jst.pagedesigner.vertical"
-			name="vertical Layout"/>
+			name="%command.name.0"/>
 		<command categoryId="org.eclipse.jst.pagedesigner.pagelayout" 
 			id="org.eclipse.jst.pagedesigner.horizotal"
-			name="horizotal Layout"/>
+			name="%command.name.1"/>
 		<command categoryId="org.eclipse.jst.pagedesigner.pagelayout"
 			id="org.eclipse.jst.pagedesigner.design"
-			name="graphical designer"/>
+			name="%command.name.2"/>
 		<command categoryId="org.eclipse.jst.pagedesigner.pagelayout"
 			id="org.eclipse.jst.pagedesigner.source"
-			name="source code"/>
+			name="%command.name.3"/>
 	</extension>
 	
 	<extension point="org.eclipse.ui.bindings">

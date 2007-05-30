@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
- <extension-point id="annotationFiles" name="annotationFiles" schema="schema/annotationFiles.exsd"/>
- <extension-point id="symbolSourceProvider" name="JSF EL Symbol Source Provider" schema="schema/symbols.exsd"/>
- <extension-point id="contextSymbolFactory" name="Contextual Symbol Factory" schema="schema/contextSymbolFactory.exsd"/>
- <extension-point id="domainLoadingStrategies" name="Metadata Domain Loading Strategies (internal)" schema="schema/DomainLoadingStrategies.exsd"/>
- <extension-point id="domainSourceModelTypes" name="Metadata Domain Source Model Types (internal)" schema="schema/DomainSourceModelTypes.exsd"/>
- <extension-point id="domainSourceModelTypeTranslators" name="Metadata Domain Source Model Type Translators (internal)" schema="schema/DomainSourceModelTypeTranslators.exsd"/>
- <extension-point id="standardMetaDataFiles" name="Standard Metadata Files" schema="schema/StandardMetaDataFiles.exsd"/>
+ <extension-point id="annotationFiles" name="%extension-point.name.0" schema="schema/annotationFiles.exsd"/>
+ <extension-point id="symbolSourceProvider" name="%extension-point.name.1" schema="schema/symbols.exsd"/>
+ <extension-point id="contextSymbolFactory" name="%extension-point.name.2" schema="schema/contextSymbolFactory.exsd"/>
+ <extension-point id="domainLoadingStrategies" name="%extension-point.name.3" schema="schema/DomainLoadingStrategies.exsd"/>
+ <extension-point id="domainSourceModelTypes" name="%extension-point.name.4" schema="schema/DomainSourceModelTypes.exsd"/>
+ <extension-point id="domainSourceModelTypeTranslators" name="%extension-point.name.5" schema="schema/DomainSourceModelTypeTranslators.exsd"/>
+ <extension-point id="standardMetaDataFiles" name="%extension-point.name.6" schema="schema/StandardMetaDataFiles.exsd"/>
    <extension
          point="org.eclipse.jst.jsf.common.domainLoadingStrategies">
       <domainLoader
