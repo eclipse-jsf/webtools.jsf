@@ -141,6 +141,7 @@ Export-Package: org.eclipse.jst.pagedesigner;
  org.eclipse.jst.pagedesigner.utils;x-internal:=true,
  org.eclipse.jst.pagedesigner.validation.caret;x-internal:=true,
  org.eclipse.jst.pagedesigner.viewer;x-internal:=true
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
 
 
 
