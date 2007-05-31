@@ -138,7 +138,6 @@ public class JSFUtils12 extends JSFUtils{
 			// Create the servlet instance and set up the parameters from data
 			// model
 			servlet = WebFactory.eINSTANCE.createServlet();
-			servlet.setId(displayName);
 			servlet.setServletName(displayName);
 			servlet.setServletClass(className);
 			servlet.setLoadOnStartup(new Integer(1));
@@ -147,7 +146,6 @@ public class JSFUtils12 extends JSFUtils{
 
 		} else {
 			// update
-			servlet.setId(displayName);
 			servlet.setServletName(displayName);
 			servlet.setLoadOnStartup(new Integer(1));
 		}
@@ -177,7 +175,6 @@ public class JSFUtils12 extends JSFUtils{
 		
 		if (urlMappingList.size() > 0) {
 			ServletMapping mapping = WebFactory.eINSTANCE.createServletMapping();
-			mapping.setId(servlet.getServletName());
 			mapping.setServletName(servlet.getServletName());
 			webApp.getServletMappings().add(mapping);
 			// Add patterns
