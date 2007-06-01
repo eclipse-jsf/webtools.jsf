@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: %plugin.name
+Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.jst.jsf.standard.tagsupport;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Localization: plugin
@@ -12,4 +12,4 @@ Require-Bundle: org.eclipse.ui;bundle-version="[3.2.0,4.0.0)",
 Eclipse-LazyStart: true
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.jst.jsf.standard.tagsupport;x-internal:=true
-Bundle-Vendor: %plugin.provider
+Bundle-Vendor: %pluginProvider
