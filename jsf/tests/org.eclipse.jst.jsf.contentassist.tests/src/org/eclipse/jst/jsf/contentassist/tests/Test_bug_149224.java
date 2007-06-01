@@ -33,6 +33,7 @@ import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
 import org.eclipse.jst.jsf.designtime.resolver.ISymbolContextResolver;
 import org.eclipse.jst.jsf.designtime.resolver.StructuredDocumentSymbolResolverFactory;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
+import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.jst.jsf.test.util.TestFileResource;
 import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
 import org.eclipse.jst.jsp.core.internal.domdocument.DOMModelForJSP;
@@ -57,6 +58,8 @@ public class Test_bug_149224 extends TestCase
     {
         super.setUp();
 
+        JSFTestUtil.setValidationEnabled(false);
+        
         _testEnv = new WebProjectTestEnvironment("Test_bug_149224_"+getName());
         _testEnv.createProject(false);
         assertNotNull(_testEnv);       

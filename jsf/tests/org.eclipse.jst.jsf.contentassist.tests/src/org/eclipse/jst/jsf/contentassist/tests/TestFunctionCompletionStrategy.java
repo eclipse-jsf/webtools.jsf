@@ -15,6 +15,7 @@ import junit.framework.TestCase;
 import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
+import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.jst.jsf.test.util.TestFileResource;
 import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
 
@@ -29,6 +30,8 @@ public class TestFunctionCompletionStrategy extends TestCase {
     protected void setUp() throws Exception 
     {
         super.setUp();
+
+        JSFTestUtil.setValidationEnabled(false);
 
         _testEnv = new WebProjectTestEnvironment(getClass().getName()+"_"+getName());
         _testEnv.createProject(false);

@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %Bundle-Name.0
 Bundle-SymbolicName: org.eclipse.jst.jsf.validation.el.tests
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.eclipse.jst.jsf.validation.el.tests.ELValidationTestPlugin
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.ui;bundle-version="[3.2.0,4.0.0)",
@@ -29,3 +29,4 @@ Export-Package: org.eclipse.jst.jsf.validation.el.tests;x-internal:=true,
  org.eclipse.jst.jsf.validation.el.tests.jsp;x-internal:=true,
  org.eclipse.jst.jsf.validation.el.tests.perf;x-internal:=true,
  org.eclipse.jst.jsf.validation.el.tests.util;x-internal:=true
+Bundle-Vendor: %Bundle-Vendor.0
