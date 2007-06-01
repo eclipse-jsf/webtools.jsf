@@ -16,6 +16,8 @@ import org.eclipse.jst.pagedesigner.converter.ITagConverter;
  * Decorates an ITagConverter instance as appropriate (generally
  * client-specific decoration performed after tag conversion).
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author Ian Trimble - Oracle
  */
 public interface ITagConverterDecorator {

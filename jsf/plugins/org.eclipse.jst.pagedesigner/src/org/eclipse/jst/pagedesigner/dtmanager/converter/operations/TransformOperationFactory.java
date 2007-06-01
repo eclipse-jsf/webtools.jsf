@@ -36,6 +36,8 @@ import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.Rena
  * Factory responsible for producing ITransformOperation instances from a known
  * set.
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author Ian Trimble - Oracle
  */
 public class TransformOperationFactory {

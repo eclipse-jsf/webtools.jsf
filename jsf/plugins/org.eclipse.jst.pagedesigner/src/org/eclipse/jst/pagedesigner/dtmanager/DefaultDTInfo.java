@@ -22,6 +22,8 @@ import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.TagDecorateInfo;
 /**
  * Default IDTInfo implementation.
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author Ian Trimble - Oracle
  */
 public class DefaultDTInfo implements IDTInfo {

@@ -16,6 +16,8 @@ import java.util.Set;
  * IJSFAppConfigLocater is the interface that Objects capable of locating
  * and providing JSF application configuration resources must implement.
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author Ian Trimble - Oracle
  */
 public interface IJSFAppConfigLocater {

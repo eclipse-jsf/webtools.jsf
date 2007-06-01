@@ -15,6 +15,8 @@ import org.w3c.dom.Element;
 /**
  * Produces output rendering for ITagConverter instances.
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author Ian Trimble - Oracle
  */
 public interface IOutputRenderer {

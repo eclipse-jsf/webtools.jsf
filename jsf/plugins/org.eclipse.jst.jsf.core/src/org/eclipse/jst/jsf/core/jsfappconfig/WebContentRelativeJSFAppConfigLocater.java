@@ -27,6 +27,8 @@ import org.eclipse.wst.common.componentcore.resources.IVirtualResource;
  * return a list of filenames that the locateProviders() method will attempt to
  * locate, and call locateProviders().
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author Ian Trimble - Oracle
  */
 public abstract class WebContentRelativeJSFAppConfigLocater extends AbstractJSFAppConfigLocater {

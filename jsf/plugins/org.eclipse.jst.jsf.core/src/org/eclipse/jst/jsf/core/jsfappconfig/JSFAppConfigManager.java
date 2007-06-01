@@ -45,6 +45,8 @@ import org.eclipse.jst.jsf.facesconfig.emf.NavigationRuleType;
  * configuration, which is defined in one or more application configuration
  * resource files.
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author Ian Trimble - Oracle
  */
 public class JSFAppConfigManager implements IResourceChangeListener {

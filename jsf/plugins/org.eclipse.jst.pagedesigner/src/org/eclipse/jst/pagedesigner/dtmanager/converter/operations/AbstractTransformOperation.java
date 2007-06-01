@@ -24,6 +24,8 @@ import org.w3c.dom.NodeList;
  * Abstract ITransformOperation implementation. Maintains ITagConverterContext
  * instance and collection of child ITransformOperation instances.
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author Ian Trimble - Oracle
  */
 public abstract class AbstractTransformOperation implements ITransformOperation {

@@ -30,6 +30,8 @@ import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
  * classpath includes the server runtime classpath and the JAR files that will
  * be deployed to the web application's /WEB-INF/lib folder.
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author Ian Trimble - Oracle
  */
 public class RuntimeClasspathJSFAppConfigLocater extends AbstractJSFAppConfigLocater

@@ -19,6 +19,8 @@ import org.w3c.dom.Text;
 /**
  * Abstract ITagConverter implementation of ITagConverterContext.
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author Ian Trimble - Oracle
  */
 public abstract class AbstractTagConverterContext implements ITagConverterContext {

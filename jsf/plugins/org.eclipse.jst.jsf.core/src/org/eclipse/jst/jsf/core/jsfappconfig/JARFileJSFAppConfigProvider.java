@@ -28,6 +28,8 @@ import org.eclipse.osgi.util.NLS;
  * configuration model by loading the model from a /META-INF/faces-config.xml
  * entry in a JAR file.
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author Ian Trimble - Oracle
  */
 public class JARFileJSFAppConfigProvider extends AbstractJSFAppConfigProvider {

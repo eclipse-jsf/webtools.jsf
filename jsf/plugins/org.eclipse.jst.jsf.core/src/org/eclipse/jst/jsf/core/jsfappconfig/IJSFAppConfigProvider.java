@@ -16,6 +16,8 @@ import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
  * IJSFAppConfigProvider is the interface that Objects capable of providing
  * JSF application configuration models must implement.
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author Ian Trimble - Oracle
  */
 public interface IJSFAppConfigProvider {

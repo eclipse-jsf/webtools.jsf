@@ -14,6 +14,8 @@ package org.eclipse.jst.jsf.core.jsfappconfig;
  * Interface that an Object wishing to be notified about changes to the Set of
  * IJSFAppConfigProvider instances implements.
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author Ian Trimble - Oracle.
  */
 public interface IJSFAppConfigProvidersChangeListener {

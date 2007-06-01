@@ -20,6 +20,8 @@ import java.util.Set;
  * locater functionality. {@link IJSFAppConfigLocater} implementations should
  * extend this class or provide similar functionality.
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author Ian Trimble - Oracle
  */
 public abstract class AbstractJSFAppConfigLocater implements IJSFAppConfigLocater {

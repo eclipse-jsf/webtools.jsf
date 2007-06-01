@@ -19,6 +19,8 @@ import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.TagDecorateInfo;
 /**
  * Encapsulates design-time (DT) information.
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author Ian Trimble - Oracle
  */
 public interface IDTInfo {

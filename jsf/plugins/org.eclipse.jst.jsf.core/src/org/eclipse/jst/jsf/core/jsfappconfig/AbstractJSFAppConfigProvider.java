@@ -17,8 +17,9 @@ import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
  * common provider functionality. {@link IJSFAppConfigProvider} instances
  * should extend this class or provide similar functionality.
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author Ian Trimble - Oracle
- *
  */
 public abstract class AbstractJSFAppConfigProvider implements IJSFAppConfigProvider {
 

@@ -27,6 +27,8 @@ import org.eclipse.jst.j2ee.webapplication.WebApp;
  * ContextParamSpecifiedJSFAppConfigLocater attempts to locate application
  * configuration files specified by the JSF CONFIG_FILES context parameter.
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author Ian Trimble - Oracle
  * TODO:cleanup once JavaEE API's stabilize
  */

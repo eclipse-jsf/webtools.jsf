@@ -19,6 +19,8 @@ import java.util.Set;
  * implicit configuration elements that are specified as required to be
  * provided by a JSF implementation.
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author Ian Trimble - Oracle
  */
 public class ImplicitRuntimeJSFAppConfigLocater extends AbstractJSFAppConfigLocater {

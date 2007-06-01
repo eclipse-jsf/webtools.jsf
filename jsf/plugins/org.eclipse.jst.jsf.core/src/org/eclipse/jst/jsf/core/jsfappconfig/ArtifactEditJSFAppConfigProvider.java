@@ -20,6 +20,8 @@ import org.eclipse.jst.jsf.facesconfig.util.FacesConfigArtifactEdit;
  * ArtifactEditJSFAppConfigProvider uses FacesConfigArtifactEdit to provide
  * the root element of an application configuration model.
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author Ian Trimble - Oracle
  */
 public class ArtifactEditJSFAppConfigProvider extends AbstractJSFAppConfigProvider {

@@ -54,6 +54,8 @@ import org.eclipse.wst.common.project.facet.core.ProjectFacetsManager;
  * JSFAppConfigUtils provides utility methods useful in processing of a JSF
  * application configuration.
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author Ian Trimble - Oracle
  */
 public class JSFAppConfigUtils {

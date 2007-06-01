@@ -18,6 +18,8 @@ import org.w3c.dom.Element;
  * Defines an operation used during transformation of input Element instances
  * to output Element instances.
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author Ian Trimble - Oracle
  * 
  * TODO: as with ITransformer, I'd like to consider

@@ -14,6 +14,8 @@ package org.eclipse.jst.jsf.core.jsfappconfig;
  * JSFAppConfigProvidersChangeEvent provides change information to instances of
  * IJSFAppConfigProvidersChangeListener.
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author Ian Trimble - Oracle
  */
 public class JSFAppConfigProvidersChangeEvent {

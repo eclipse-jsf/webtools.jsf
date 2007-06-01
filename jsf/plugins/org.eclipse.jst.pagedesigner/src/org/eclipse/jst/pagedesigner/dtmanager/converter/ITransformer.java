@@ -16,6 +16,8 @@ import org.w3c.dom.Element;
  * Transforms an original input Element instance to an output Element instance
  * by invoking a collection of ITransformOperation instances.  
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author Ian Trimble - Oracle
  */
 public interface ITransformer {

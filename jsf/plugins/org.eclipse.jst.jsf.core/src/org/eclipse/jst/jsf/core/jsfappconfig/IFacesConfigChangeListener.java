@@ -17,6 +17,8 @@ import org.eclipse.emf.common.notify.Notification;
  * objects interested in receiving notification of changes to application
  * configuration models.
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author Ian Trimble - Oracle
  */
 public interface IFacesConfigChangeListener {

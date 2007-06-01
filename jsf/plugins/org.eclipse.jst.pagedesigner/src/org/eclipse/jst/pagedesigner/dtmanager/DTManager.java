@@ -22,6 +22,8 @@ import org.w3c.dom.Element;
  * DTManager is the top-level entry point for design-time (DT) services, such
  * as tag converters and design-time information.
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author Ian Trimble - Oracle
  */
 public class DTManager {

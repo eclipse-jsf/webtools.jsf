@@ -31,6 +31,8 @@ import org.eclipse.wst.common.componentcore.resources.IVirtualResource;
  * DefaultJSFAppConfigLocater attempts to locate the default application
  * configuration file, located at "/WEB-INF/faces-config.xml".
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author Ian Trimble - Oracle
  */
 public class DefaultJSFAppConfigLocater extends WebContentRelativeJSFAppConfigLocater 

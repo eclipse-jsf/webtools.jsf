@@ -28,6 +28,8 @@ import org.eclipse.jst.jsf.facesconfig.emf.ValidatorType;
  * model that contains implicit configuration objects provided by a JSF
  * implementation at runtime.
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author Ian Trimble - Oracle
  */
 public class ImplicitRuntimeJSFAppConfigProvider extends AbstractJSFAppConfigProvider {
