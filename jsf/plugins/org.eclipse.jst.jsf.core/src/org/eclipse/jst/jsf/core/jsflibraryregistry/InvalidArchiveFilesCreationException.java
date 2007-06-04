@@ -13,6 +13,8 @@ package org.eclipse.jst.jsf.core.jsflibraryregistry;
 /**
  * Exception class thrown by PluginProvidedJSFLibraryCreationHelper.
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @deprecated
  */
 public class InvalidArchiveFilesCreationException extends Exception {

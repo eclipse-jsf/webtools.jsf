@@ -27,8 +27,8 @@ import org.eclipse.osgi.util.NLS;
 /**
  * Helper class used to create JSF Libraries from the
  * <code>org.eclipse.jst.jsf.core.jsflibraries</code> extension-point.
- * <br>
- * <em><b>NOTE: experimental and very likely to change.</b></em>
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  * 
  * @deprecated - clients should not use
  */

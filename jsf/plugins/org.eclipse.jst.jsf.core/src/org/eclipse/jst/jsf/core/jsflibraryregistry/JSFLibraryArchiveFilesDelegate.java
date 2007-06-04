@@ -26,8 +26,8 @@ import org.osgi.framework.Bundle;
  * 
  * Caller must first setConfigurationElement(IConfigurationElement element)
  * before a call to getArchiveFiles().
- * <br>
- * <em><b>NOTE: experimental and very likely to change.</b></em>
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  * 
  * @deprecated along with the jsflibraries extension-point
  */
