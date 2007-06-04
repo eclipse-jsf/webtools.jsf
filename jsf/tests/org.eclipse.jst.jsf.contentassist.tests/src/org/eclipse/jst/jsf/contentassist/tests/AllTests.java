@@ -28,8 +28,8 @@ public class AllTests {
         TestSuite suite = new TestSuite("Test for org.eclipse.jst.jsf.contentassist");
         //$JUnit-BEGIN$
         suite.addTestSuite(CompletionPrefixTest.class);
-        suite.addTestSuite(Test_bug_149224.class);
-        suite.addTestSuite(Test_bug_149743.class);
+//        suite.addTestSuite(Test_bug_149224.class);
+//        suite.addTestSuite(Test_bug_149743.class);
         //$JUnit-END$
         return suite;
     }
