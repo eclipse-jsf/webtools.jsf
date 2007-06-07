@@ -210,14 +210,6 @@
 		<validator>
 			<projectNature id="org.eclipse.wst.common.modulecore.ModuleCoreNature" />
 			<projectNature id="org.eclipse.jdt.core.javanature" />
-			<filter
-				objectClass="org.eclipse.core.resources.IFile"
-				nameFilter="*.jsp">
-			</filter>
-			<filter
-				objectClass="org.eclipse.core.resources.IFile"
-				nameFilter="*.jspx">
-			</filter> 
 			<markerId
                markerIdValue="JSPSemanticsValidatorMarker">
          	</markerId>
@@ -229,6 +221,12 @@
          		incremental="true"
          		fullBuild="true"
          	/>
+   <contentTypeBinding
+         contentTypeId="org.eclipse.jst.jsp.core.jspsource">
+   </contentTypeBinding>
+   <contentTypeBinding
+         contentTypeId="org.eclipse.jst.jsp.core.jspfragmentsource">
+   </contentTypeBinding>
 		</validator>
 		</extension>
 

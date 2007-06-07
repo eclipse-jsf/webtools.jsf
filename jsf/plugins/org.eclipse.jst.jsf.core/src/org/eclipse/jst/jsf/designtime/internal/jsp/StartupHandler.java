@@ -14,10 +14,8 @@ package org.eclipse.jst.jsf.designtime.internal.jsp;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.content.IContentType;
-import org.eclipse.core.runtime.content.IContentTypeManager;
+import org.eclipse.jst.jsf.common.internal.JSPUtil;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigUtils;
 import org.eclipse.ui.IEditorInput;
@@ -142,14 +140,7 @@ public class StartupHandler implements IStartup
 
             if (file != null)
             {
-                IContentTypeManager typeManager = Platform.getContentTypeManager();
-                IContentType jspContentType = 
-                    typeManager.getContentType("org.eclipse.jst.jsp.core.jspsource"); //$NON-NLS-1$
-                if (jspContentType != null
-                        && jspContentType.isAssociatedWith(file.getName()))
-                {
-                    return true;
-                }
+                return JSPUtil.isJSPContentType(file);
             }
 
             return false;
