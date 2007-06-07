@@ -20,6 +20,17 @@ public class BeanPropertyResolutionTestCase extends SingleJSPTestCase
         super("/testdata/jsps/beanPropertyResolution.jsp.data", "/beanPropertyResolution.jsp", IJSFCoreConstants.FACET_VERSION_1_1,FACES_CONFIG_FILE_NAME_1_1);
     }
 
+    /**
+     * Allow sub-classing for sensitivity analysis (i.e. different dest file extensions)
+     * 
+     * @param srcFile
+     * @param destFile
+     */
+    protected BeanPropertyResolutionTestCase(final String srcFile, final String destFile)
+    {
+        super(srcFile,destFile, IJSFCoreConstants.FACET_VERSION_1_1,FACES_CONFIG_FILE_NAME_1_1);
+    }
+    
     protected void setUp() throws Exception
     {
         super.setUp();

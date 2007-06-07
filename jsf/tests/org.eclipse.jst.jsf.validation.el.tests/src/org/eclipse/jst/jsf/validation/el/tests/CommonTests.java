@@ -30,6 +30,9 @@ import org.eclipse.jst.jsf.validation.el.tests.jsp.MethodBindingTestCase;
 import org.eclipse.jst.jsf.validation.el.tests.jsp.PropertiesOfMapsTestCase;
 import org.eclipse.jst.jsf.validation.el.tests.jsp.UnaryEmptyTestCase;
 import org.eclipse.jst.jsf.validation.el.tests.jsp.UnaryMinusTestCase;
+import org.eclipse.jst.jsf.validation.el.tests.jsp.ext.BeanPropertyResolutionTestCase_JSFExt;
+import org.eclipse.jst.jsf.validation.el.tests.jsp.ext.BeanPropertyResolutionTestCase_JSPFExt;
+import org.eclipse.jst.jsf.validation.el.tests.jsp.ext.BeanPropertyResolutionTestCase_JSPXExt;
 
 public class CommonTests 
 {
@@ -68,6 +71,12 @@ public class CommonTests
         suite.addTest(new ConfigurableTestSuite(UnaryMinusTestCase.class));
         
         suite.addTest(new ConfigurableTestSuite(MarkerOffsetsTestCase.class));
+        
+        // file extension sensitivity
+        suite.addTest(new ConfigurableTestSuite(BeanPropertyResolutionTestCase_JSFExt.class));
+        suite.addTest(new ConfigurableTestSuite(BeanPropertyResolutionTestCase_JSPXExt.class));
+        suite.addTest(new ConfigurableTestSuite(BeanPropertyResolutionTestCase_JSPFExt.class));
+        
         //$JUnit-END$
     }
 }
