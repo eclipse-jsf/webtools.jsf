@@ -15,7 +15,8 @@ import org.eclipse.jst.jsf.common.metadata.Trait;
 
 /**
  * Visitor interface for Traits
- * NOT to implemented by clients directly.   Clients should subclass AbstractTraitVisitor instead.
+ * <p>NOT to implemented by clients directly.   Clients should subclass AbstractTraitVisitor instead.
+ * <p><b>Provisional API - subject to change</b></p>
  */
 public interface ITraitVisitor extends IMetaDataVisitor {
 	/**
@@ -24,4 +25,10 @@ public interface ITraitVisitor extends IMetaDataVisitor {
 	 * @param trait - must not be null
  	 */
 	public void visit(final Trait trait);
+	
+	/**
+	 * Signal that the the trait has been completely visited
+	 * @param trait
+	 */
+	public void visitCompleted(final Trait trait);
 }

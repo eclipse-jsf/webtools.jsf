@@ -10,6 +10,7 @@ package org.eclipse.jst.jsf.common.metadata;
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Entity Group</b></em>'.
+ * <p><b>Provisional API - subject to change</b></p>
  * <!-- end-user-doc -->
  *
  *

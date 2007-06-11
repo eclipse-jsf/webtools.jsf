@@ -14,10 +14,8 @@ package org.eclipse.jst.jsf.common.metadata.query.internal;
 /**
  * Simple class used by {@link SimpleEntityQueryVisitorImpl} allowing some control of a metadata query.  
  * A query visitor can use this to optimize the query results and signal completion.
- * API: extensibility?  should this be package private? 
  */
-public class SearchControl {
-	
+public class SearchControl {	
 
 	/**
 	 * No limit on query results

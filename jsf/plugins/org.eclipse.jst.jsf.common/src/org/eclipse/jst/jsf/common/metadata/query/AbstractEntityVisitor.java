@@ -16,16 +16,15 @@ import org.eclipse.jst.jsf.common.metadata.Entity;
 
 /**
  * Abstract implementation that concrete subclasses should ovveride
+ * <p><b>Provisional API - subject to change</b></p>
  */
 public abstract class AbstractEntityVisitor extends AbstractMetaDataVisitor
 		implements IEntityVisitor {
 
-	public void visit(Entity entity){
-		//
-	}
+	public abstract void visit(Entity entity);
 
-	public void visitCompleted(Entity entity) {
-		//
+	public void visitCompleted(Entity entity){
+		//subclasses should override if needed
 	}
 
 }

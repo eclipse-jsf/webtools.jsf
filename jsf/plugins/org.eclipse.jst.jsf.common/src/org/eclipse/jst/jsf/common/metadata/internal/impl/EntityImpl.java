@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EntityImpl.java,v 1.5 2007/05/16 23:51:15 gkessler Exp $
+ * $Id: EntityImpl.java,v 1.6 2007/06/11 20:55:58 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.impl;
 
@@ -260,21 +260,6 @@ public class EntityImpl extends EObjectImpl implements Entity {
 //		}
 		visitor.visitCompleted(this);
 	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	// TODO: never used
-//	private synchronized Model getModel(IncludeEntityGroup group) {
-//		if (group.getModelUri() == null || group.getModelUri().equals(getModel().getCurrentModelContext().getUri()))
-//			return getModel();
-//		
-//		ModelKeyDescriptor currentModelKey = getModel().getCurrentModelContext();
-//		IMetaDataModelContext modelContext = new MetaDataModelContextImpl(currentModelKey.getProject(), currentModelKey.getDomain(), group.getModelUri());
-//		return MetaDataQueryHelper.getModel(modelContext);	
-//	}
 
 	/**
 	 * <!-- begin-user-doc -->

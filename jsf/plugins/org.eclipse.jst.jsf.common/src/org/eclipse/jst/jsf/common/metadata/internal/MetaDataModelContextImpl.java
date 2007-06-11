@@ -11,47 +11,31 @@
  ********************************************************************************/
 package org.eclipse.jst.jsf.common.metadata.internal;
 
-import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.common.metadata.query.IMetaDataModelContext;
 
 /**
  * Simple implementation of {@link IMetaDataModelContext}
+ *
  */
-public class MetaDataModelContextImpl implements IMetaDataModelContext, Cloneable{
-	private IProject project;
-	private String domain;
-	private String uri;
+public class MetaDataModelContextImpl implements IMetaDataModelContext {
+	private String _domain;
 	
 	/**
 	 * Constructor
-	 * @param project
-	 * @param domain
-	 * @param uri
+	 * @param domain id
 	 */
-	public MetaDataModelContextImpl(IProject project, String domain, String uri){
-		this.project = project;
-		this.domain = domain;
-		this.uri = uri;
+	public MetaDataModelContextImpl(String domain){
+		_domain = domain;
 	}
-	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.common.metadata.query.IMetaDataModelContext#getDomain()
-	 */
-	public String getDomain() {
-		return domain;
+	
+	public String getDomainID() {
+		return _domain;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.common.metadata.query.IMetaDataModelContext#getProject()
-	 */
-	public IProject getProject() {		
-		return project;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.common.metadata.query.IMetaDataModelContext#getURI()
-	 */
-	public String getURI() {
-		return uri;
+	public Object getAdapter(Class adapter) {
+		if (adapter.equals(IMetaDataModelContext.class))
+			return this;
+		return null;
 	}
 
 }

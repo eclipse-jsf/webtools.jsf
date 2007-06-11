@@ -18,8 +18,8 @@ import java.util.List;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.common.metadata.Trait;
 import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
-import org.eclipse.jst.jsf.common.metadata.query.IMetaDataModelContext;
-import org.eclipse.jst.jsf.common.metadata.query.MetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
+import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
 import org.eclipse.jst.jsf.context.IModelContext;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IMetadataContextResolver;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
@@ -61,8 +61,8 @@ class MetadataContextResolver implements IMetadataContextResolver
             final String uri = tagResolver.getTagURIForNodeName(element);
             final IProject project = wsResolver.getProject();
             
-            final IMetaDataModelContext mdContext = MetaDataQueryHelper.createTagLibraryDomainMetaDataModelContext(project, uri);
-            Trait trait = MetaDataQueryHelper.getTrait(mdContext, element.getLocalName()+"/"+attribute.getLocalName(), key); //$NON-NLS-1$
+            final ITaglibDomainMetaDataModelContext mdContext = TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(project, uri);
+            Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(mdContext, element.getLocalName()+"/"+attribute.getLocalName(), key); //$NON-NLS-1$
             return TraitValueHelper.getValueAsListOfStrings(trait);
 //            return
 //                CMAnnotationHelper.
@@ -78,8 +78,8 @@ class MetadataContextResolver implements IMetadataContextResolver
             final String uri = tagResolver.getTagURIForNodeName(element);
             final IProject project = wsResolver.getProject();
             
-            final IMetaDataModelContext mdContext = MetaDataQueryHelper.createMetaDataModelContext(project, MetaDataQueryHelper.TAGLIB_DOMAIN, uri);
-            Trait trait = MetaDataQueryHelper.getTrait(mdContext, element.getLocalName(), key);
+            final ITaglibDomainMetaDataModelContext mdContext = TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(project, uri);
+            Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(mdContext, element.getLocalName(), key);
             return TraitValueHelper.getValueAsListOfStrings(trait);
 //            return
 //                CMAnnotationHelper.

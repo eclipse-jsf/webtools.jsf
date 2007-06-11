@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EReference;
  *   <li>each enum,</li>
  *   <li>and each data type</li>
  * </ul>
+ * <p><b>NOT API</b></p>
  * <!-- end-user-doc -->
  * @see org.eclipse.jst.jsf.common.metadata.MetadataFactory
  * @model kind="package"

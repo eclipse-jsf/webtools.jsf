@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraitImpl.java,v 1.4 2007/05/11 17:54:55 gkessler Exp $
+ * $Id: TraitImpl.java,v 1.5 2007/06/11 20:55:58 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.impl;
 
@@ -208,6 +208,7 @@ public class TraitImpl extends EObjectImpl implements Trait {
 	 */
 	public void accept(ITraitVisitor visitor) {
 		visitor.visit(this);
+		visitor.visitCompleted(this);
 	}
 
 	/**

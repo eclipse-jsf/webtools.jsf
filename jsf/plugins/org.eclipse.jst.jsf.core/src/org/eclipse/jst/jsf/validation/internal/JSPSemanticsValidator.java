@@ -33,9 +33,8 @@ import org.eclipse.jst.jsf.common.internal.types.CompositeType;
 import org.eclipse.jst.jsf.common.internal.types.TypeComparator;
 import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.Trait;
-import org.eclipse.jst.jsf.common.metadata.internal.MetaDataModelContextImpl;
-import org.eclipse.jst.jsf.common.metadata.query.IMetaDataModelContext;
-import org.eclipse.jst.jsf.common.metadata.query.MetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
+import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
 import org.eclipse.jst.jsf.common.sets.AxiomaticSet;
 import org.eclipse.jst.jsf.common.sets.ConcreteAxiomaticSet;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IDOMContextResolver;
@@ -558,15 +557,14 @@ public class JSPSemanticsValidator extends JSPValidator implements ISourceValida
     		return;
     	}
     	
-        final IMetaDataModelContext modelContext = 
-            new MetaDataModelContextImpl(file.getProject()
-                , MetaDataQueryHelper.TAGLIB_DOMAIN, uri);
+        final ITaglibDomainMetaDataModelContext modelContext = 
+            TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(file.getProject(), uri);
         final Entity entity = 
-            MetaDataQueryHelper.getEntity(modelContext, tagName);
+        	TaglibDomainMetaDataQueryHelper.getEntity(modelContext, tagName);
         if (entity != null)
         {
             final Trait trait = 
-                MetaDataQueryHelper.getTrait
+            	TaglibDomainMetaDataQueryHelper.getTrait
                     (entity, "containment-constraint");
             
             if (trait != null)

@@ -12,47 +12,57 @@
 
 package org.eclipse.jst.jsf.common.metadata.query;
 
-import java.util.Collection;
-import java.util.Iterator;
+import java.util.Collections;
+import java.util.List;
 
 /**
- * Default implementation of {@link IResultSet}.   Developers may subclass.
- * Currently MetaDataException is not being thrown but is in the interface for the future.
- * Users should assume that the results are only valid at the time of the query.  This may change in the future. 
+ * Abstract implementation of {@link IResultSet} that developers may subclass.
+ * Users should assume that the results are only valid at the time of the query.  This may change in the future.
+ * <p><b>Provisional API - subject to change</b></p>
  */
 public abstract class AbstractResultSet/*<T>*/ implements IResultSet/*<T>*/ {
-	private Iterator 	_iterator;
-	private Collection	_results;
+	private List		_results;
+	private boolean 	_isClosed = false;
 	
+	public List getResults() throws MetaDataException {
+		initIfNecessary();
+		return _results;
+	}
 	
-	public void close() throws MetaDataException {
+	public final void close() throws MetaDataException {
+		doClose();
+		_isClosed = true;
 		_results = null;
-		_iterator = null;
 	}
 
-	public final int getSize(){
-		initIfNecessary();
-		return _results.size();		
-	}
-
-	public boolean hasNext() throws MetaDataException {
-		initIfNecessary();
-		return _iterator.hasNext();			
-	}
-
-	public Object next() throws MetaDataException {
-		initIfNecessary();		
-		return _iterator.next();
-	}
 	/**
-	 * @return Collection of results.  Implementer must NOT return null.  Return Collections.EMPTY_LIST instead.
+	 * Overridable method to close resultset.  This is called by close()
+	 * @throws MetaDataException
 	 */
-	protected abstract Collection getInternalResults();
+	@SuppressWarnings("unused")
+	protected void doClose() throws MetaDataException {
+		//subclasses to provide override
+	}
 	
-	private void initIfNecessary() {
+	public final boolean isClosed() {		
+		return _isClosed;
+	}
+
+	/**
+	 * @return List of results.  Null is tolerated.
+	 */
+	protected abstract List getInternalResults();
+	
+	private void initIfNecessary() throws MetaDataException {
+		if (_isClosed)
+			throw new MetaDataException("Attempt to access a closed resultset.");
+		
 		if (_results == null) {
-			_results = getInternalResults();
-			_iterator = _results.iterator();
+			List checkNullResults = getInternalResults();
+			if (checkNullResults == null){
+				checkNullResults = Collections.EMPTY_LIST;
+			} 
+			_results = Collections.unmodifiableList(checkNullResults);
 		}
 	}
 

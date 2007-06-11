@@ -9,20 +9,22 @@
  *    Oracle - initial API and implementation
  *    
  ********************************************************************************/
-
 package org.eclipse.jst.jsf.common.metadata.query;
 
+import org.eclipse.core.resources.IProject;
+
 /**
- * Abstract class implementing {@link IMetaDataVisitor}
+ * Context for determining the Model to locate in the MetaDataManager
+ * <p>Should NOT be implemented by clients
  * <p><b>Provisional API - subject to change</b></p>
  */
-public abstract class AbstractMetaDataVisitor implements IMetaDataVisitor {
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.common.metadata.query.IMetaDataVisitor#stopVisiting()
+public interface ITaglibDomainMetaDataModelContext extends IMetaDataModelContext {
+	/**
+	 * @return project 
 	 */
-	public boolean stopVisiting() {		
-		return false;
-	}
-
+	public IProject getProject();
+	/**
+	 * @return the namespace URI as String
+	 */
+	public String getURI();
 }

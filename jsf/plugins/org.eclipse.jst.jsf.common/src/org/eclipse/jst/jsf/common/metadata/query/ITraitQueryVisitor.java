@@ -15,7 +15,8 @@ import org.eclipse.jst.jsf.common.metadata.Entity;
 
 /**
  * Trait querying interface
- * NOT to implemented by clients directly.   Clients should subclass AbstractTraitQueryVisitor instead.
+ * <p>NOT to implemented by clients directly.   Clients should subclass AbstractTraitQueryVisitor instead.
+ * <p><b>Provisional API - subject to change</b></p>
  */
 public interface ITraitQueryVisitor extends ITraitVisitor{
 	/**

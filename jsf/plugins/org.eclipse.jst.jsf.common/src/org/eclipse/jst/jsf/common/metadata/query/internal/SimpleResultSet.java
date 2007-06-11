@@ -12,7 +12,7 @@
 package org.eclipse.jst.jsf.common.metadata.query.internal;
 
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.jst.jsf.common.metadata.query.AbstractResultSet;
@@ -22,12 +22,8 @@ import org.eclipse.jst.jsf.common.metadata.query.IResultSet;
  * Simple implementation of {@link IResultSet} by extending AbstractResultSet
  *
  */
-public final class SimpleResultSet/*<T>*/ extends AbstractResultSet/*<T>*/ {
-    // APIx: Should push down overridable functionality from AbstractResultSet
-    // and make final all functionality left in AbstractResultSet
-	
-	
-	private List/*<T>*/ results;
+public final class SimpleResultSet/*<T>*/ extends AbstractResultSet/*<T>*/ {	
+	private List/*<T>*/ results;	
 	
 	/**
 	 * Constructor passing a list to hold the results
@@ -38,17 +34,13 @@ public final class SimpleResultSet/*<T>*/ extends AbstractResultSet/*<T>*/ {
 		this.results = results;
 	}
 
-
-	/**
-	 * @return List of results
-	 */
 	protected List getInternalResults(){
 		if (results == null){
-			results = new ArrayList();
+			results = Collections.EMPTY_LIST;
 		}
 		return results;
 	}
-
+	
 
 }
 

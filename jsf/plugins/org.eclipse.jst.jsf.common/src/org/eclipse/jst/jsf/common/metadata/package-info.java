@@ -10,19 +10,8 @@
  *    
  ********************************************************************************/
 
-package org.eclipse.jst.jsf.common.metadata.query;
-
 /**
- * Abstract class implementing {@link IMetaDataVisitor}
+ * EMF interface objects for design-time metadata.   
  * <p><b>Provisional API - subject to change</b></p>
  */
-public abstract class AbstractMetaDataVisitor implements IMetaDataVisitor {
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.common.metadata.query.IMetaDataVisitor#stopVisiting()
-	 */
-	public boolean stopVisiting() {		
-		return false;
-	}
-
-}
+package org.eclipse.jst.jsf.common.metadata;

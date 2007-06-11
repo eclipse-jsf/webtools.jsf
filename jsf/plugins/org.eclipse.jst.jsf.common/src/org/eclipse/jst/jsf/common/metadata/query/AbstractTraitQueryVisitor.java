@@ -15,11 +15,15 @@ package org.eclipse.jst.jsf.common.metadata.query;
 import org.eclipse.jst.jsf.common.metadata.Entity;
 
 /**
- * Abstract implmentation of {@link ITraitQueryVisitor} that subclasses should use to provide implmentation 
+ * Abstract implmentation of {@link ITraitQueryVisitor} that subclasses should use to provide implmentation
+ * <p><b>Provisional API - subject to change</b></p> 
  */
 public abstract class AbstractTraitQueryVisitor extends AbstractTraitVisitor implements
 		ITraitQueryVisitor {
 
+	/** 
+	 * @return EmptyResultSet.   Subclasses should override.
+	 */
 	public IResultSet findTraits(Entity entity, String traitKey) {
 		return new EmptyResultSet();
 	}

@@ -27,8 +27,8 @@ import org.eclipse.jst.jsf.common.metadata.Trait;
 import org.eclipse.jst.jsf.common.metadata.internal.IImageDescriptorProvider;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider;
 import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
-import org.eclipse.jst.jsf.common.metadata.query.IMetaDataModelContext;
-import org.eclipse.jst.jsf.common.metadata.query.MetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
+import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDDocument;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDElementDeclaration;
 import org.eclipse.jst.pagedesigner.IHTMLConstants;
@@ -111,8 +111,8 @@ public class PaletteHelper {
 		if (category != null) 
 			return category;
 		
-		IMetaDataModelContext modelContext = MetaDataQueryHelper.createTagLibraryDomainMetaDataModelContext(project, tldURI);
-		Model model = MetaDataQueryHelper.getModel(modelContext);
+		ITaglibDomainMetaDataModelContext modelContext = TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(project, tldURI);
+		Model model = TaglibDomainMetaDataQueryHelper.getModel(modelContext);
 		category = createTaglibPaletteDrawer(manager, doc, model);
 		
 		if (category != null){		
@@ -142,7 +142,7 @@ public class PaletteHelper {
 			CMDocument doc,Model model) {
 		
 		if (model != null) {//load from metadata - should always drop in here
-			Trait trait = MetaDataQueryHelper.getTrait(model, "paletteInfos");
+			Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(model, "paletteInfos");
 			if (trait != null){
 				PaletteInfos tags = (PaletteInfos)trait.getValue();
 				for (Iterator it=tags.getInfos().iterator();it.hasNext();){
@@ -292,7 +292,7 @@ public class PaletteHelper {
 
 	private static boolean getBooleanTagTraitValue(Entity entity,
 			String key, boolean defaultValue) {
-		Trait trait = MetaDataQueryHelper.getTrait(entity, key);
+		Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(entity, key);
 		if (trait != null){
 			return TraitValueHelper.getValueAsBoolean(trait);
 		}
@@ -300,7 +300,7 @@ public class PaletteHelper {
 	}
 
 	private static String getStringTagTraitValue(Entity entity, String key, String defaultValue){
-		Trait trait = MetaDataQueryHelper.getTrait(entity, key);
+		Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(entity, key);
 		if (trait != null){
 			return TraitValueHelper.getValueAsString(trait);
 		}
@@ -308,7 +308,7 @@ public class PaletteHelper {
 	}
 
 	private static ImageDescriptor getImageDescriptorFromTagTraitValueAsString(Entity entity, String key, ImageDescriptor defaultValue){
-		Trait t = MetaDataQueryHelper.getTrait(entity, key);
+		Trait t = TaglibDomainMetaDataQueryHelper.getTrait(entity, key);
 		if (t != null){
 			String imgDesc = TraitValueHelper.getValueAsString(t);
 			return getImageDescriptorFromString(t.getSourceModelProvider(), imgDesc, defaultValue);

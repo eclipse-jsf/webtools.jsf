@@ -27,7 +27,6 @@ import org.eclipse.jst.jsf.common.metadata.query.ITraitQueryVisitor;
  * A simple metadata query visitor implementing {@link IEntityQueryVisitor} and {@link ITraitQueryVisitor}.
  * - simple find entity and traits by id only 	
  * - Does not allow for wild card searchs
- * API: extensibility?
  */
 public class SimpleEntityQueryVisitorImpl extends AbstractEntityQueryVisitor  {
 	private HierarchicalSearchControl control;

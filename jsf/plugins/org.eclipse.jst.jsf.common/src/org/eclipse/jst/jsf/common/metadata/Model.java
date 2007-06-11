@@ -14,6 +14,7 @@ import org.eclipse.jst.jsf.common.metadata.query.IEntityVisitor;
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Model</b></em>'.
+ * <p><b>Provisional API - subject to change</b></p>
  * <!-- end-user-doc -->
  *
  * <p>

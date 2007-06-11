@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Include Entity Group</b></em>'.
+ * <p><b>Provisional API - subject to change</b></p>
  * <!-- end-user-doc -->
  *
  * <p>

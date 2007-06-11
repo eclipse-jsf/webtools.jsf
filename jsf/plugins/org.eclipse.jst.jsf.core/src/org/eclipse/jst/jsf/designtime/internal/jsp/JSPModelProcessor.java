@@ -29,8 +29,8 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 import org.eclipse.jst.jsf.common.metadata.Trait;
 import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
-import org.eclipse.jst.jsf.common.metadata.query.IMetaDataModelContext;
-import org.eclipse.jst.jsf.common.metadata.query.MetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
+import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.ITaglibContextResolver;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
@@ -513,8 +513,8 @@ public class JSPModelProcessor
                                               final String uri, 
                                               final String elementName, final String attributeName)
         {            
-        	final IMetaDataModelContext mdContext = MetaDataQueryHelper.createTagLibraryDomainMetaDataModelContext(project, uri);
-            Trait trait = MetaDataQueryHelper.getTrait(mdContext, elementName+"/"+attributeName, SETS_LOCALE); //$NON-NLS-1$
+        	final ITaglibDomainMetaDataModelContext mdContext = TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(project, uri);
+            Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(mdContext, elementName+"/"+attributeName, SETS_LOCALE); //$NON-NLS-1$
 
             if (TraitValueHelper.getValueAsBoolean(trait))
             {
@@ -549,8 +549,8 @@ public class JSPModelProcessor
                                               final String attributeName)
         {
         	final String entityKey = elementName+"/"+attributeName; //$NON-NLS-1$
-        	final IMetaDataModelContext mdContext = MetaDataQueryHelper.createTagLibraryDomainMetaDataModelContext(project, uri);
-            Trait trait = MetaDataQueryHelper.getTrait(mdContext, entityKey, CONTRIBUTES_VALUE_BINDING);
+        	final ITaglibDomainMetaDataModelContext mdContext = TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(project, uri);
+            Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(mdContext, entityKey, CONTRIBUTES_VALUE_BINDING);
 
             boolean contribsValueBindings = TraitValueHelper.getValueAsBoolean(trait);
 
@@ -559,12 +559,12 @@ public class JSPModelProcessor
                 String scope = null;
                 String symbolFactory = null;
                 
-                trait = MetaDataQueryHelper.getTrait(mdContext, entityKey, VALUE_BINDING_SCOPE);
+                trait = TaglibDomainMetaDataQueryHelper.getTrait(mdContext, entityKey, VALUE_BINDING_SCOPE);
                 scope = TraitValueHelper.getValueAsString(trait);
 
                 if (scope != null & !scope.equals("")) //$NON-NLS-1$
                 {
-                	trait = MetaDataQueryHelper.getTrait(mdContext, entityKey, VALUE_BINDING_SYMBOL_FACTORY);
+                	trait = TaglibDomainMetaDataQueryHelper.getTrait(mdContext, entityKey, VALUE_BINDING_SYMBOL_FACTORY);
                 	symbolFactory = TraitValueHelper.getValueAsString(trait);                      
                 }
 

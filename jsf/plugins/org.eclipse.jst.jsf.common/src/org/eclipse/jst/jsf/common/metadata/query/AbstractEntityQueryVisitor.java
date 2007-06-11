@@ -16,11 +16,14 @@ import org.eclipse.jst.jsf.common.metadata.Entity;
 
 /**
  * Abstract class implmenting {@link IEntityQueryVisitor} that concrete subclasses should provide implementations
- *
+ * <p><b>Provisional API - subject to change</b></p>
  */
-public class AbstractEntityQueryVisitor extends AbstractEntityVisitor
+public abstract class AbstractEntityQueryVisitor extends AbstractEntityVisitor
 		implements IEntityQueryVisitor {
 
+	/** 
+	 * @return EmptyResultSet.   Subclasses should override.
+	 */
 	public IResultSet findEntities(Entity initialEntityContext, String entityKey) {
 		return new EmptyResultSet();
 	}

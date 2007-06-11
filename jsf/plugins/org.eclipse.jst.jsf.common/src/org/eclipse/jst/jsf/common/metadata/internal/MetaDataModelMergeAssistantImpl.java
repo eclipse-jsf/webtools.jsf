@@ -13,15 +13,17 @@ package org.eclipse.jst.jsf.common.metadata.internal;
 
 import java.util.Iterator;
 
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
+import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.EntityGroup;
 import org.eclipse.jst.jsf.common.metadata.IncludeEntityGroup;
 import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.Trait;
-import org.eclipse.jst.jsf.common.metadata.query.IMetaDataModelContext;
+import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
 import org.eclipse.jst.jsf.common.metadata.query.MetaDataException;
-import org.eclipse.jst.jsf.common.metadata.query.MetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
 import org.eclipse.jst.jsf.common.metadata.query.internal.SearchControl;
 import org.eclipse.jst.jsf.common.metadata.query.internal.SimpleEntityQueryVisitorImpl;
 import org.eclipse.jst.jsf.common.metadata.query.internal.SimpleResultSet;
@@ -239,13 +241,12 @@ public class MetaDataModelMergeAssistantImpl implements
 		Entity ret = null;
 		String entityKey = getIdRelativeToRoot(entity);
 		SimpleResultSet rs = (SimpleResultSet)entityVisitor.findEntities((Entity)mergedModel.getRoot(), entityKey);
-		if (rs.getSize() >0) {
-			try {
-				ret = (Entity)rs.next();				
-				rs.close();
-			} catch (MetaDataException e) {
-				//MetaDataException is not currently being thrown
-			}
+		try {
+			if (! rs.getResults().isEmpty()) 
+				ret = (Entity)rs.getResults().get(0);				
+			rs.close();
+		} catch (MetaDataException e) {
+			JSFCommonPlugin.log(IStatus.ERROR, "Error in getMergedEntity()", e);			
 		}
 		return ret;
 	}
@@ -273,13 +274,12 @@ public class MetaDataModelMergeAssistantImpl implements
 	public Trait getMergedTrait(Entity entity, Trait trait){
 		SimpleResultSet rs = (SimpleResultSet)traitVisitor.findTraits(entity, trait.getId());
 		Trait ret = null;
-		if (rs.getSize() > 0) {
-			try {
-				ret = (Trait)rs.next();				
-				rs.close();
-			} catch (MetaDataException e) {
-				//MetaDataException not currently being thrown
-			}
+		try {
+			if (! rs.getResults().isEmpty()) 
+				ret = (Trait)rs.getResults().get(0);				
+			rs.close();
+		} catch (MetaDataException e) {
+			JSFCommonPlugin.log(IStatus.ERROR, "Error in getMergedTrait()", e);
 		}
 		return ret;
 	}
@@ -314,11 +314,13 @@ public class MetaDataModelMergeAssistantImpl implements
 	 * @param include
 	 */
 	private void addIncludeRefs(final Entity entity, final IncludeEntityGroup include) {
-		IMetaDataModelContext modelContext = new MetaDataModelContextImpl(
-				getMergedModel().getModelKey().getProject(), getMergedModel()
-						.getModelKey().getDomain(), include.getModelUri());
+		ITaglibDomainMetaDataModelContext modelContext = new TaglibDomainMetaDataModelContextImpl(				
+				getMergedModel().getModelKey().getDomain(), 
+				getMergedModel().getModelKey().getProject(), 
+				include.getModelUri()
+		);
 		
-		Model externalModel = MetaDataQueryHelper.getModel(modelContext);
+		Model externalModel = TaglibDomainMetaDataQueryHelper.getModel(modelContext);
 		EntityGroup entityGroup = externalModel.findIncludeGroup(include.getId());
 		
 		addIncludeRefs(entity, entityGroup);

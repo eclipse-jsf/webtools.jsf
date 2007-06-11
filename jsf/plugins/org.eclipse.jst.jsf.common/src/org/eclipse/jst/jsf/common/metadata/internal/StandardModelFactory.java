@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.util.ExtendedMetaData;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceFactoryImpl;
 import org.eclipse.jst.jsf.common.metadata.internal.util.MetadataResourceImpl;
-import org.eclipse.jst.jsf.common.metadata.query.IMetaDataModelContext;
+import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
 
 /**
  * Singelton that produces and loads standard metadata models.  
@@ -89,8 +89,8 @@ public class StandardModelFactory {
 	 * @param modelContext 
 	 * @return a ModelKeyDescriptor for the context
 	 */
-	public ModelKeyDescriptor createModelKeyDescriptor(final IMetaDataModelContext modelContext) {
-		return new ModelKeyDescriptor(modelContext.getProject(), modelContext.getDomain(), modelContext.getURI());
+	public ModelKeyDescriptor createModelKeyDescriptor(final ITaglibDomainMetaDataModelContext modelContext) {
+		return new ModelKeyDescriptor(modelContext.getProject(), modelContext.getDomainID(), modelContext.getURI());
 	}
 	
 	/**

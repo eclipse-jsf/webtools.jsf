@@ -15,7 +15,8 @@ import org.eclipse.jst.jsf.common.metadata.Entity;
 
 /**
  * Visitor interface for Entities
- * NOT to implemented by clients directly.   Clients should subclass AbstractEntityVisitor instead.
+ * <p>NOT to implemented by clients directly.   Clients should subclass AbstractEntityVisitor instead.
+ * <p><b>Provisional API - subject to change</b></p>
  */
 public interface IEntityVisitor extends IMetaDataVisitor {
 	/**

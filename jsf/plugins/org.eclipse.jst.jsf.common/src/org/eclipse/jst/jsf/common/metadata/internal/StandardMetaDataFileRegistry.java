@@ -33,7 +33,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.Trait;
-import org.eclipse.jst.jsf.common.metadata.query.MetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
 
 
 /**
@@ -214,7 +214,7 @@ class StandardMetaDataFilesProvider implements IMetaDataSourceModelProvider {
 				private String getImageBase(){
 					if (imageBase == null){
 						Model aModel = (Model)getSourceModel();
-						Trait t = MetaDataQueryHelper.getTrait(aModel, "images-base-path"); //$NON-NLS-1$
+						Trait t = TaglibDomainMetaDataQueryHelper.getTrait(aModel, "images-base-path"); //$NON-NLS-1$
 						if (t == null){
 							imageBase = "";		 //$NON-NLS-1$
 						} else {

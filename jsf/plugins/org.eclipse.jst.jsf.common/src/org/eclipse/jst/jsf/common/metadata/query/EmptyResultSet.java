@@ -12,24 +12,36 @@
 
 package org.eclipse.jst.jsf.common.metadata.query;
 
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Implementation of an empty result set
+ * <p><b>Provisional API - subject to change</b></p>
  */
-public class EmptyResultSet implements IResultSet {
+public final class EmptyResultSet implements IResultSet {
 
 	public void close() {//
 	}
-
-	public int getSize() throws MetaDataException {
-		return 0;
+	
+	public List getResults(){
+		return Collections.EMPTY_LIST;		
 	}
+//
+//	public int getSize() throws MetaDataException {
+//		return 0;
+//	}
+//
+//	public boolean hasNext() throws MetaDataException {				
+//		return false;
+//	}
+//
+//	public Object next() throws MetaDataException {
+//		return null;
+//	}
 
-	public boolean hasNext() throws MetaDataException {				
+	public boolean isClosed() {
 		return false;
-	}
-
-	public Object next() throws MetaDataException {
-		return null;
 	}
 
 }

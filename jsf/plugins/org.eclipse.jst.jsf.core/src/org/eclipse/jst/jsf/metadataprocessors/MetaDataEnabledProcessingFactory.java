@@ -18,10 +18,9 @@ import java.util.List;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.Trait;
-import org.eclipse.jst.jsf.common.metadata.internal.MetaDataModelContextImpl;
 import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
-import org.eclipse.jst.jsf.common.metadata.query.IMetaDataModelContext;
-import org.eclipse.jst.jsf.common.metadata.query.MetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
+import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IWorkspaceContextResolver;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
@@ -31,7 +30,7 @@ import org.eclipse.jst.jsf.metadataprocessors.internal.AttributeValueRuntimeType
 /**
  * Singleton class that will produce <code>IMetaDataEnabledFeature</code>s that the
  * caller can use for processing.
- * 
+ * <p><b>Provisional API - subject to change</b></p>
  * @author Gerry Kessler - Oracle
  *
  */
@@ -82,11 +81,11 @@ public final class MetaDataEnabledProcessingFactory {
 		}
 		String _elem = elementName + "/" + attributeName;
 		String _uri = uri;
-		IMetaDataModelContext modelContext = createModelContext(_project, MetaDataQueryHelper.TAGLIB_DOMAIN, _uri);
-		Entity entity = MetaDataQueryHelper.getEntity(modelContext, _elem);
+		ITaglibDomainMetaDataModelContext modelContext = TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(_project, _uri);
+		Entity entity = TaglibDomainMetaDataQueryHelper.getEntity(modelContext, _elem);
 		Trait trait = null;
 		if (entity != null){
-			trait = MetaDataQueryHelper.getTrait(entity, ATTRIBUTE_VALUE_RUNTIME_TYPE_PROP_NAME);
+			trait = TaglibDomainMetaDataQueryHelper.getTrait(entity, ATTRIBUTE_VALUE_RUNTIME_TYPE_PROP_NAME);
 		}
 		
 		if (trait==null){
@@ -112,12 +111,6 @@ public final class MetaDataEnabledProcessingFactory {
 		//return list of IMetaDataEnabledFeatures for this type
 		return retList;
 
-	}
-	
-	private IMetaDataModelContext createModelContext(IProject project, String taglibDomain,
-			String uri) {		
-		return new MetaDataModelContextImpl(project, taglibDomain, uri);
-		
 	}
 
 }

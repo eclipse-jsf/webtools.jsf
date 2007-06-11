@@ -12,11 +12,13 @@
 package org.eclipse.jst.jsf.common.metadata.query;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.Trait;
 import org.eclipse.jst.jsf.common.metadata.internal.MetaDataModel;
-import org.eclipse.jst.jsf.common.metadata.internal.MetaDataModelContextImpl;
+import org.eclipse.jst.jsf.common.metadata.internal.TaglibDomainMetaDataModelContextImpl;
 import org.eclipse.jst.jsf.common.metadata.internal.MetaDataModelManager;
 import org.eclipse.jst.jsf.common.metadata.query.internal.SimpleEntityQueryVisitorImpl;
 import org.eclipse.jst.jsf.common.metadata.query.internal.SimpleTraitQueryVisitorImpl;
@@ -24,20 +26,21 @@ import org.eclipse.jst.jsf.common.metadata.query.internal.HierarchicalSearchCont
 
 
 /**
- * Helper class with static methods to simplify querying of a metadata model.  Essentially when a visitor is not supplied, 
- * a <code>SimpleMetaDataQueryVisitor</code> is created.  User may choose to use an implmentation of IEntity/TraitQueryVisitor directly, 
- * as these perform actual querying.
+ * Helper class with static methods to simplify querying of a metadata model. 
  * 
- * This class need not be used.   Visitors can be created and used directly on the model.
- * 
- * @see SimpleEntityQueryVisitorImpl
+ * <p>Steps for use:
+ * 	<br>1) Get the ITaglibDomainMetaDataModelContext using createMetaDataModelContext or createTagLibraryDomainMetaDataModelContext
+ * 	<br>2) Use appropriate getXXX methods using the ITaglibDomainMetaDataModelContext.
+ * <p><b>Provisional API - subject to change</b></p>
+ * @see IResultSet
  * @see IEntityQueryVisitor
  * @see ITraitQueryVisitor
- * @see IMetaDataModelContext
- * 
- * API: class should be final, constructor made private.
+ * @see ITaglibDomainMetaDataModelContext
+ * @see Model
+ * @see Entity
+ * @see Trait
  */
-public final class MetaDataQueryHelper{
+public final class TaglibDomainMetaDataQueryHelper{
 	/**
 	 * Domain id for Tag library domain of metatdata  
 	 */
@@ -46,34 +49,24 @@ public final class MetaDataQueryHelper{
 	/**
 	 * private constructor
 	 */
-	private MetaDataQueryHelper (){
+	private TaglibDomainMetaDataQueryHelper (){
 		super();
 	}
 	
 	/**
-	 * @param project
-	 * @param domain id
-	 * @param uri
-	 * @return IMetaDataModelContext
-	 */
-	public static IMetaDataModelContext createMetaDataModelContext(IProject project, String domain, String uri){
-		return new MetaDataModelContextImpl(project, domain, uri);
-	}
-	
-	/**
-	 * Convenience method for creating {@link IMetaDataModelContext}s for TAGLIB_DOMAIN
+	 * Convenience method for creating {@link ITaglibDomainMetaDataModelContext}s for TAGLIB_DOMAIN
 	 * @param project
 	 * @param uri
-	 * @return IMetaDataModelContext where the domain id is TAGLIB_DOMAIN
+	 * @return ITaglibDomainMetaDataModelContext
 	 */
-	public static IMetaDataModelContext createTagLibraryDomainMetaDataModelContext(IProject project, String uri){
-		return new MetaDataModelContextImpl(project, TAGLIB_DOMAIN, uri);
+	public static ITaglibDomainMetaDataModelContext createMetaDataModelContext(IProject project, String uri){
+		return new TaglibDomainMetaDataModelContextImpl(TAGLIB_DOMAIN, project, uri);
 	}
 	/**
 	 * @param modelContext
 	 * @return Model object for given context.   May return null if not located.
 	 */
-	public static Model getModel(final IMetaDataModelContext modelContext) {
+	public static Model getModel(final ITaglibDomainMetaDataModelContext modelContext) {
 		MetaDataModel model = getMDModel(modelContext);
 		//we may want to throw error that model is empty
 		if (model != null && !model.isEmpty()){			
@@ -87,18 +80,18 @@ public final class MetaDataQueryHelper{
 	 * @param entityKey relative to root of the model
 	 * @return the first entity match from the root of the model.   May return null.
 	 */
-	public static Entity getEntity(final IMetaDataModelContext modelContext,
+	public static Entity getEntity(final ITaglibDomainMetaDataModelContext modelContext,
 			final String entityKey) {
 		IEntityQueryVisitor visitor = new SimpleEntityQueryVisitorImpl(new HierarchicalSearchControl(1, HierarchicalSearchControl.SCOPE_ALL_LEVELS));
 		IResultSet/*<Entity>*/ rs = getEntities(modelContext,entityKey,  visitor);
 		Entity e = null;
 		try {
-			if (rs.getSize() > 0){
-				e = (Entity)rs.next();				
+			if (! rs.getResults().isEmpty()){
+				e = (Entity)rs.getResults().get(0);				
 			}
 			rs.close();
 		} catch (MetaDataException ex) {
-			//Currently MetaDataException is never actually thrown
+			JSFCommonPlugin.log(IStatus.ERROR, "Error in Helper.getEntity() - 1", ex);
 		}
 
 		return e;
@@ -110,7 +103,7 @@ public final class MetaDataQueryHelper{
 	 * @param visitor 
 	 * @return an IResultSet of entity objects
 	 */
-	public static IResultSet/*<Entity>*/ getEntities(final IMetaDataModelContext modelContext,
+	public static IResultSet/*<Entity>*/ getEntities(final ITaglibDomainMetaDataModelContext modelContext,
 				final String entityKey, final IEntityQueryVisitor visitor){
 		Model model = getModel(modelContext);
 		//we may want to throw error that model is empty
@@ -128,12 +121,12 @@ public final class MetaDataQueryHelper{
 		Trait t= null;
 		IResultSet/*<Trait>*/ rs = getTraits(entity, traitKey, visitor);
 		try {
-			if (rs.getSize() > 0){
-				t = (Trait)rs.next();				
+			if (! rs.getResults().isEmpty()){
+				t = (Trait)rs.getResults().get(0);				
 			}
 			rs.close();
 		} catch (MetaDataException ex) {
-			//Currently MetaDataException is never actually thrown
+			JSFCommonPlugin.log(IStatus.ERROR, "Error in Helper.getTrait()", ex);
 		}
 
 		return t;
@@ -161,11 +154,12 @@ public final class MetaDataQueryHelper{
 		Entity e= null;
 		IResultSet/*<Entity>*/ rs = getEntities(initialEntityContext, entityKey, visitor);
 		try {
-			if (rs.getSize() > 0)
-				e = (Entity)rs.next();	
+			if (! rs.getResults().isEmpty()){
+				e = (Entity)rs.getResults().get(0);				
+			}
 			rs.close();
 		} catch (MetaDataException ex) {
-			//Currently MetaDataException is never actually thrown
+			JSFCommonPlugin.log(IStatus.ERROR, "Error in Helper.getEntity() - 0", ex);
 		}		
 
 		return e;		
@@ -189,7 +183,7 @@ public final class MetaDataQueryHelper{
 	 * @param modelContext
 	 * @return MetaDataModel
 	 */
-	private static MetaDataModel getMDModel(final IMetaDataModelContext modelContext){
+	private static MetaDataModel getMDModel(final ITaglibDomainMetaDataModelContext modelContext){
 		MetaDataModelManager mgr = null;
 		if (modelContext.getProject() != null)
 			mgr = MetaDataModelManager.getInstance(modelContext.getProject());
@@ -205,7 +199,7 @@ public final class MetaDataQueryHelper{
 	 * @param traitKey
 	 * @return first trait found for entity and trait key starting from root of the model using SimpleMetaDataQueryImpl
 	 */
-	public static Trait getTrait(final IMetaDataModelContext modelContext,
+	public static Trait getTrait(final ITaglibDomainMetaDataModelContext modelContext,
 			final String entityKey, final String traitKey) { 
 		Entity entity = getEntity(modelContext, entityKey);
 		Trait t = null;

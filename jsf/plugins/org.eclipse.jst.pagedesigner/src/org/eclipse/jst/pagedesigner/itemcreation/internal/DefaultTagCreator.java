@@ -22,8 +22,8 @@ import org.eclipse.jst.jsf.common.metadata.MetadataFactory;
 import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.Trait;
 import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
-import org.eclipse.jst.jsf.common.metadata.query.IMetaDataModelContext;
-import org.eclipse.jst.jsf.common.metadata.query.MetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
+import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
 import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.pagedesigner.IHTMLConstants;
 import org.eclipse.jst.pagedesigner.dom.DOMPositionHelper;
@@ -61,9 +61,9 @@ public class DefaultTagCreator implements ITagCreator {
 	 */
 	protected TagToolPaletteEntry _tagItem;
 	/**
-	 * The {@link IMetaDataModelContext} for the tag creation
+	 * The {@link ITaglibDomainMetaDataModelContext} for the tag creation
 	 */
-	protected IMetaDataModelContext _modelContext;
+	protected ITaglibDomainMetaDataModelContext _modelContext;
 	/**
 	 * The tag {@link Entity} being created
 	 */
@@ -71,9 +71,9 @@ public class DefaultTagCreator implements ITagCreator {
 	
 	/**
 	 * Construct a tag creator for the _modelContext
-	 * @param _modelContext
+	 * @param modelContext
 	 */
-	public DefaultTagCreator(IMetaDataModelContext modelContext) {
+	public DefaultTagCreator(ITaglibDomainMetaDataModelContext modelContext) {
 		this._modelContext = modelContext;
 	}
 
@@ -205,8 +205,8 @@ public class DefaultTagCreator implements ITagCreator {
 	}
 
 	private boolean isJSFComponent() {		
-		Model model = MetaDataQueryHelper.getModel(_modelContext);
-		Trait t = MetaDataQueryHelper.getTrait(model, "is-jsf-component-library");
+		Model model = TaglibDomainMetaDataQueryHelper.getModel(_modelContext);
+		Trait t = TaglibDomainMetaDataQueryHelper.getTrait(model, "is-jsf-component-library");
 		if (t != null)
 			return TraitValueHelper.getValueAsBoolean(t);
 		
@@ -266,9 +266,9 @@ public class DefaultTagCreator implements ITagCreator {
 	 * @return {@link TagCreationInfo} for the tag entity
 	 */
 	protected TagCreationInfo getTagCreationInfo(){
-		Model model = MetaDataQueryHelper.getModel(_modelContext);
+		Model model = TaglibDomainMetaDataQueryHelper.getModel(_modelContext);
 		if (model != null){
-			Trait trait = MetaDataQueryHelper.getTrait(model, PaletteInfos.TRAIT_ID);
+			Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(model, PaletteInfos.TRAIT_ID);
 			if (trait != null){
 				PaletteInfos pis = (PaletteInfos)trait.getValue();
 				PaletteInfo pi = pis.findPaletteInfoById(_tagItem.getId());
@@ -279,7 +279,7 @@ public class DefaultTagCreator implements ITagCreator {
 			//tag-creation trait on entity directly?
 			Entity tag = getTagEntity();
 			if (tag != null){//metadata exists
-				trait = MetaDataQueryHelper.getTrait(tag, "tag-create");
+				trait = TaglibDomainMetaDataQueryHelper.getTrait(tag, "tag-create");
 				if (trait != null && trait.getValue() != null){
 					return (TagCreationInfo)trait.getValue();					
 				}
@@ -354,7 +354,7 @@ public class DefaultTagCreator implements ITagCreator {
 	 * @return flag indicating that html form container ancestor is required
 	 */
 	protected boolean isHTMLFormRequired() {
-		Trait t = MetaDataQueryHelper.getTrait(getTagEntity(), "requires-html-form");
+		Trait t = TaglibDomainMetaDataQueryHelper.getTrait(getTagEntity(), "requires-html-form");
 		if (t != null)
 			return TraitValueHelper.getValueAsBoolean(t);
 		
@@ -366,7 +366,7 @@ public class DefaultTagCreator implements ITagCreator {
 	 */
 	protected Entity getTagEntity() {
 		if (_tagEntity == null){
-			_tagEntity = MetaDataQueryHelper.getEntity(_modelContext, _tagItem.getTagName());
+			_tagEntity = TaglibDomainMetaDataQueryHelper.getEntity(_modelContext, _tagItem.getTagName());
 			
 		}
 		return _tagEntity;

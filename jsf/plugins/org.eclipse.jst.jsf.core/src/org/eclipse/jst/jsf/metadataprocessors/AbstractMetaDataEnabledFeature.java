@@ -21,14 +21,15 @@ import org.eclipse.jst.jsf.common.metadata.Trait;
 import org.eclipse.jst.jsf.common.metadata.internal.IImageDescriptorProvider;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider;
 import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
-import org.eclipse.jst.jsf.common.metadata.query.MetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValues;
 
 /**
  * Simple abstract class that implementers of {@link IMetaDataEnabledFeature} can subclass in the <b>TagLibDomain</b> of metadata
- * 
+ * <p><b>Provisional API - subject to change</b></p>
  * @author Gerry Kessler - Oracle
+ * 
  *
  */
 public abstract class AbstractMetaDataEnabledFeature implements IMetaDataEnabledFeature{
@@ -119,7 +120,7 @@ public abstract class AbstractMetaDataEnabledFeature implements IMetaDataEnabled
 	private Trait getTraitForEntityUsingContext(final String traitName) {
 		//look for trait on given entity
 		final Entity entity = ((TaglibMetadataContext)getMetaDataContext()).getEntity();
-		return MetaDataQueryHelper.getTrait(entity, traitName);
+		return TaglibDomainMetaDataQueryHelper.getTrait(entity, traitName);
 	}
 
 	/**

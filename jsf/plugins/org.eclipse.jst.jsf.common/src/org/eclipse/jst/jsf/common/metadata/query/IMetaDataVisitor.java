@@ -13,7 +13,8 @@ package org.eclipse.jst.jsf.common.metadata.query;
 
 /**
  * Common interface for Entity and Trait visitors
- * NOT to implemented by clients directly.   Clients should subclass AbstractMetaDataVisitor instead.
+ * <p>NOT to implemented by clients directly.   Clients should subclass AbstractMetaDataVisitor instead.
+ * <p><b>Provisional API - subject to change</b></p>
  */
 public interface IMetaDataVisitor {
 	/**

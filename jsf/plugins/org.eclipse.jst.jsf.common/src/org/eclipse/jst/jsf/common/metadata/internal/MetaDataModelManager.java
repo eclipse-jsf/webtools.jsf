@@ -28,7 +28,7 @@ import org.eclipse.core.runtime.QualifiedName;
 import org.eclipse.jface.util.SafeRunnable;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 import org.eclipse.jst.jsf.common.metadata.Model;
-import org.eclipse.jst.jsf.common.metadata.query.IMetaDataModelContext;
+import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
 
 /**
  * Singleton instance for each IProject used to manage all standard metdata models for that project.
@@ -129,13 +129,15 @@ public class MetaDataModelManager implements IResourceChangeListener{
 	/**
 	 * Will locate the cached MetaDataModel.   Sets the model context in the model.
 	 * @param modelContext
-	 * @return the MetaDataModel for the given IMetaDataModelContext
+	 * @return the MetaDataModel for the given ITaglibDomainMetaDataModelContext
 	 */
-	public synchronized MetaDataModel getModel(final IMetaDataModelContext modelContext){
+	public synchronized MetaDataModel getModel(final ITaglibDomainMetaDataModelContext modelContext){
 		ModelKeyDescriptor modelKeyDescriptor = StandardModelFactory.getInstance().createModelKeyDescriptor(modelContext);
 		MetaDataModel model = models.get(modelKeyDescriptor);
 		if (model == null || project == null){
+//			long in = System.currentTimeMillis();					
 			model = loadMetadata(modelKeyDescriptor);			
+//			System.out.println("Time to load "+modelContext.getURI()+": "+String.valueOf(System.currentTimeMillis() - in));
 		}
 		else if (model.needsRefresh()){
 			try {

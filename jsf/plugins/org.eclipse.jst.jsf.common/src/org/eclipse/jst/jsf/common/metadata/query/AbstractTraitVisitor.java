@@ -15,11 +15,15 @@ package org.eclipse.jst.jsf.common.metadata.query;
 import org.eclipse.jst.jsf.common.metadata.Trait;
 
 /**
- *
+ * Abstract Trait visitor
+ * <p><b>Provisional API - subject to change</b></p>
  */
 public abstract class AbstractTraitVisitor extends AbstractMetaDataVisitor implements ITraitVisitor{
 
-	public void visit(Trait trait) { // 
+	public abstract void visit(final Trait trait); 
+	
+	public void visitCompleted(final Trait trait) {
+		//subclasses should override if needed
 	}
 
 }

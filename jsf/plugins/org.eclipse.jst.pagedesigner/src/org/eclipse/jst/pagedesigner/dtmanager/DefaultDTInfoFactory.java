@@ -12,8 +12,8 @@ package org.eclipse.jst.pagedesigner.dtmanager;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.common.metadata.Trait;
-import org.eclipse.jst.jsf.common.metadata.query.IMetaDataModelContext;
-import org.eclipse.jst.jsf.common.metadata.query.MetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
+import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
 import org.eclipse.jst.jsf.core.internal.tld.CMUtil;
 import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.DTInfo;
 import org.eclipse.jst.pagedesigner.utils.StructuredModelUtil;
@@ -44,9 +44,9 @@ public class DefaultDTInfoFactory implements IDTInfoFactory {
 		String nsURI = CMUtil.getElementNamespaceURI(element);
 		IProject project = getProject(element);
 		if (project != null) {
-			IMetaDataModelContext context = MetaDataQueryHelper.createTagLibraryDomainMetaDataModelContext(project, nsURI);
+			ITaglibDomainMetaDataModelContext context = TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(project, nsURI);
 			if (context != null) {
-				Trait trait = MetaDataQueryHelper.getTrait(context, element.getLocalName(), DTINFO_TRAIT_KEY);
+				Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(context, element.getLocalName(), DTINFO_TRAIT_KEY);
 				if (trait != null) {
 					DTInfo dtInfoModelObject = (DTInfo)trait.getValue();
 					if (dtInfoModelObject != null) {
