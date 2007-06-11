@@ -14,6 +14,8 @@ package org.eclipse.jst.jsf.validation.internal.el.operators;
 
 import java.math.BigDecimal;
 
+import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
+
 /**
  * Represents the arithmetic + operator in EL
  * 
@@ -23,6 +25,10 @@ import java.math.BigDecimal;
 /*package*/ class AddArithmeticBinaryOperator extends NoDivArithmeticBinaryOperator {
 
     private static final String ADDITION = "addition";
+
+    AddArithmeticBinaryOperator(DiagnosticFactory diagnosticFactory) {
+        super(diagnosticFactory);
+    }
 
     protected Long doRealOperation(Long firstArg, Long secondArg) 
     {

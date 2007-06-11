@@ -31,6 +31,11 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
  */
 /*package*/ class NotUnaryOperator extends UnaryOperator 
 {
+    NotUnaryOperator(DiagnosticFactory diagnosticFactory) 
+    {
+        super(diagnosticFactory);
+    }
+
     public Diagnostic validate(ValueType type)
     {
         boolean canCoerce =
@@ -47,7 +52,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
                     
                     // we are logically notting, so coerced is true, then false
                     // if false then true
-                    return DiagnosticFactory.create_UNARY_OP_CONSTANT_EXPRESSION_EVAL_SAME_ID(
+                    return _diagnosticFactory.create_UNARY_OP_CONSTANT_EXPRESSION_EVAL_SAME_ID(
                                  "not"
                                  , Boolean.valueOf(!coercedValue.booleanValue()).toString()); 
                         
@@ -60,7 +65,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
             
             return Diagnostic.OK_INSTANCE;
         }
-        return DiagnosticFactory.create_UNARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN();
+        return _diagnosticFactory.create_UNARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN();
     }
     
     public ValueType performOperation(ValueType type)

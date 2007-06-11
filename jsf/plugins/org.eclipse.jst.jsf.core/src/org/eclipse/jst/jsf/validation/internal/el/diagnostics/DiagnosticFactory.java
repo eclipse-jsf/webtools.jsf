@@ -16,6 +16,7 @@ import java.text.MessageFormat;
 
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.jst.jsf.validation.internal.ELValidationPreferences;
 import org.eclipse.osgi.util.NLS;
 
 /**
@@ -27,6 +28,7 @@ import org.eclipse.osgi.util.NLS;
  */
 public final class DiagnosticFactory 
 {
+    
     /**
      * Problem id
      */
@@ -156,14 +158,19 @@ public final class DiagnosticFactory
     public final static int BINARY_OP_COMPARISON_OF_ENUMS_INCOMPATIBLE_ID = 28;
     
     /**
+     * Count of ids
+     */
+    public final static int NUM_IDS = 29;
+    
+    /**
      * @param operatorName
      * @return a configured diagnostic
      */
-    public static Diagnostic create_BINARY_OP_BOTH_OPERANDS_NULL(final String operatorName)
+    public Diagnostic create_BINARY_OP_BOTH_OPERANDS_NULL(final String operatorName)
     {
         final String message = NLS.bind(
                 Messages.BINARY_OP_BOTH_OPERANDS_NULL, operatorName);
-        return new BasicDiagnostic(Diagnostic.WARNING, "", BINARY_OP_BOTH_OPERANDS_NULL_ID, message, null); //$NON-NLS-1$
+        return create(BINARY_OP_BOTH_OPERANDS_NULL_ID, message);
     }
     
     private static Diagnostic DIAGNOSTIC_POSSIBLE_DIV_BY_ZERO;
@@ -171,13 +178,13 @@ public final class DiagnosticFactory
     /**
      * @return a configured diagnostic
      */
-    public static Diagnostic create_BINARY_OP_POSSIBLE_DIVISION_BY_ZERO()
+    public Diagnostic create_BINARY_OP_POSSIBLE_DIVISION_BY_ZERO()
     {
         if (DIAGNOSTIC_POSSIBLE_DIV_BY_ZERO == null)
         {
             final String message = Messages.POSSIBLE_DIV_BY_ZERO;
             DIAGNOSTIC_POSSIBLE_DIV_BY_ZERO = 
-                new BasicDiagnostic(Diagnostic.ERROR, "", BINARY_OP_POSSIBLE_DIVISION_BY_ZERO_ID, message, null); //$NON-NLS-1$
+                create(BINARY_OP_POSSIBLE_DIVISION_BY_ZERO_ID, message);
         }
         return DIAGNOSTIC_POSSIBLE_DIV_BY_ZERO;
     }
@@ -186,11 +193,11 @@ public final class DiagnosticFactory
      * @param operatorName
      * @return a configured diagnostic
      */
-    public static Diagnostic create_BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION(final String operatorName)
+    public Diagnostic create_BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION(final String operatorName)
     {
         final String message = 
             NLS.bind(Messages.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION, operatorName);
-        return new BasicDiagnostic(Diagnostic.ERROR, "", BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID, message, null); //$NON-NLS-1$
+        return create(BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID, message);
     }
     
     /**
@@ -198,33 +205,33 @@ public final class DiagnosticFactory
      * @param value
      * @return a configured diagnostic
      */
-    public static Diagnostic create_BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME(final String operatorName, final String value)
+    public Diagnostic create_BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME(final String operatorName, final String value)
     {
         final String message =  
             NLS.bind(Messages.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME,operatorName, value);
-        return new BasicDiagnostic(Diagnostic.WARNING, "", BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID, message, null); //$NON-NLS-1$
+        return create(BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID, message);
     }
     
     /**
      * @param value
      * @return a configured diagnostic
      */
-    public static Diagnostic create_BINARY_OP_EQUALITY_COMP_WITH_NULL_ALWAYS_EVAL_SAME(final String value)
+    public Diagnostic create_BINARY_OP_EQUALITY_COMP_WITH_NULL_ALWAYS_EVAL_SAME(final String value)
     {
         final String message = 
             NLS.bind(Messages.BINARY_OP_EQUALITY_COMP_WITH_NULL_ALWAYS_EVAL_SAME, value);
-        return new BasicDiagnostic(Diagnostic.WARNING, "", BINARY_OP_EQUALITY_COMP_WITH_NULL_ALWAYS_EVAL_SAME_ID, message, null); //$NON-NLS-1$
+        return create(BINARY_OP_EQUALITY_COMP_WITH_NULL_ALWAYS_EVAL_SAME_ID, message);
     }
 
     /**
      * @param whichArgument
      * @return a configured diagnostic
      */
-    public static Diagnostic create_BINARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN(final String whichArgument)
+    public Diagnostic create_BINARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN(final String whichArgument)
     {
         final String message = 
             NLS.bind(Messages.BINARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN, whichArgument);
-        return new BasicDiagnostic(Diagnostic.ERROR, "", BINARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN_ID, message, null); //$NON-NLS-1$
+        return create(BINARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN_ID, message);
     }
     
     /**
@@ -232,13 +239,12 @@ public final class DiagnosticFactory
      * @param operatorName
      * @return a configured diagnostic
      */
-    public static Diagnostic create_BINARY_OP_FIRST_ARGUMENT_SHORT_CIRCUITS(boolean shortCircuitValue, String operatorName)
+    public Diagnostic create_BINARY_OP_FIRST_ARGUMENT_SHORT_CIRCUITS(boolean shortCircuitValue, String operatorName)
     {
         final String message = 
             NLS.bind(Messages.BINARY_OP_FIRST_ARGUMENT_SHORT_CIRCUITS, 
                     Boolean.valueOf(shortCircuitValue), operatorName);
-        return new BasicDiagnostic(Diagnostic.WARNING, "" //$NON-NLS-1$
-                , BINARY_OP_FIRST_ARGUMENT_SHORT_CIRCUITS_ID, message, null); 
+        return create(BINARY_OP_FIRST_ARGUMENT_SHORT_CIRCUITS_ID, message); 
     }
     
     /**
@@ -246,14 +252,13 @@ public final class DiagnosticFactory
      * @param operatorName
      * @return a configured diagnostic
      */
-    public static Diagnostic create_BINARY_OP_SECOND_ARGUMENT_ALWAYS_EVAL_SAME(final boolean shortCircuitValue, final String operatorName)
+    public Diagnostic create_BINARY_OP_SECOND_ARGUMENT_ALWAYS_EVAL_SAME(final boolean shortCircuitValue, final String operatorName)
     {
         final String message =
             NLS.bind(Messages.BINARY_OP_SECOND_ARGUMENT_ALWAYS_EVAL_SAME, 
                     Boolean.valueOf(shortCircuitValue), operatorName);
         
-        return new BasicDiagnostic(Diagnostic.WARNING, "" //$NON-NLS-1$
-                , BINARY_OP_SECOND_ARGUMENT_ALWAYS_EVAL_SAME_ID, message, null); 
+        return create(BINARY_OP_SECOND_ARGUMENT_ALWAYS_EVAL_SAME_ID, message); 
     }
 
     private static Diagnostic DIAGNOSTIC_NO_AVAILABLE_TYPE_COERCION;
@@ -261,14 +266,13 @@ public final class DiagnosticFactory
     /**
      * @return a configured diagnostic
      */
-    public static Diagnostic create_BINARY_OP_NO_AVAILABLE_TYPE_COERCION()
+    public Diagnostic create_BINARY_OP_NO_AVAILABLE_TYPE_COERCION()
     {
         if (DIAGNOSTIC_NO_AVAILABLE_TYPE_COERCION == null)
         {
             DIAGNOSTIC_NO_AVAILABLE_TYPE_COERCION = 
-              new BasicDiagnostic(Diagnostic.ERROR, "",  //$NON-NLS-1$
-                    BINARY_OP_NO_AVAILABLE_TYPE_COERCION_ID, 
-                    Messages.BINARY_OP_NO_AVAILABLE_TYPE_COERCION, null);
+              create(BINARY_OP_NO_AVAILABLE_TYPE_COERCION_ID, 
+                    Messages.BINARY_OP_NO_AVAILABLE_TYPE_COERCION);
         }
         
         return DIAGNOSTIC_NO_AVAILABLE_TYPE_COERCION;
@@ -279,14 +283,13 @@ public final class DiagnosticFactory
     /**
      * @return a configured diagnostic
      */
-    public static Diagnostic create_BINARY_OP_COULD_NOT_COERCE_LITERALS_TO_NUMBERS()
+    public Diagnostic create_BINARY_OP_COULD_NOT_COERCE_LITERALS_TO_NUMBERS()
     {
         if (DIAGNOSTIC_COULD_NOT_COERCE_LITERALS == null)
         {
             DIAGNOSTIC_COULD_NOT_COERCE_LITERALS = 
-                new BasicDiagnostic(Diagnostic.ERROR, "",  //$NON-NLS-1$
-                    BINARY_OP_COULD_NOT_COERCE_LITERALS_TO_NUMBERS_ID, 
-                    Messages.BINARY_OP_COULD_NOT_COERCE_LITERALS_TO_NUMBERS, null);
+                create(BINARY_OP_COULD_NOT_COERCE_LITERALS_TO_NUMBERS_ID, 
+                    Messages.BINARY_OP_COULD_NOT_COERCE_LITERALS_TO_NUMBERS);
         }
         
         return DIAGNOSTIC_COULD_NOT_COERCE_LITERALS;
@@ -297,72 +300,63 @@ public final class DiagnosticFactory
      * @param value
      * @return a configured diagnostic
      */
-    public static Diagnostic create_UNARY_OP_CONSTANT_EXPRESSION_EVAL_SAME_ID(final String operatorName, final String value)
+    public Diagnostic create_UNARY_OP_CONSTANT_EXPRESSION_EVAL_SAME_ID(final String operatorName, final String value)
     {
         final String message = 
             NLS.bind(Messages.UNARY_OP_CONSTANT_EXPRESSION_EVAL_SAME, 
                     operatorName, value);
-        return new BasicDiagnostic(Diagnostic.WARNING, "", UNARY_OP_CONSTANT_EXPRESSION_EVAL_SAME_ID, message, null); //$NON-NLS-1$
+        return create(UNARY_OP_CONSTANT_EXPRESSION_EVAL_SAME_ID, message);
     }
     
     /**
      * @return a configured diagnostic
      */
-    public static Diagnostic create_UNARY_OP_EMPTY_ALWAYS_FALSE_ON_TYPE()
+    public Diagnostic create_UNARY_OP_EMPTY_ALWAYS_FALSE_ON_TYPE()
     {
-        return new BasicDiagnostic
-            (Diagnostic.WARNING, "",  //$NON-NLS-1$
-             UNARY_OP_EMPTY_ALWAYS_FALSE_ON_TYPE_ID, 
-             Messages.UNARY_OP_EMPTY_ALWAYS_FALSE_ON_TYPE, null);
+        return create(UNARY_OP_EMPTY_ALWAYS_FALSE_ON_TYPE_ID, 
+             Messages.UNARY_OP_EMPTY_ALWAYS_FALSE_ON_TYPE);
     }
     
     /**
      * @return a configured diagnostic
      */
-    public static Diagnostic create_UNARY_OP_MINUS_ON_NULL_ALWAYS_ZERO()
+    public Diagnostic create_UNARY_OP_MINUS_ON_NULL_ALWAYS_ZERO()
     {
-        return new BasicDiagnostic
-            (Diagnostic.WARNING, "",  //$NON-NLS-1$
-            UNARY_OP_MINUS_ON_NULL_ALWAYS_ZERO_ID, 
-            Messages.UNARY_OP_MINUS_ON_NULL_ALWAYS_ZERO, null);
+        return create(UNARY_OP_MINUS_ON_NULL_ALWAYS_ZERO_ID, 
+            Messages.UNARY_OP_MINUS_ON_NULL_ALWAYS_ZERO);
     }
     
     /**
      * @param operatorName
      * @return a configured diagnostic
      */
-    public static Diagnostic create_UNARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION(final String operatorName)
+    public Diagnostic create_UNARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION(final String operatorName)
     {
         final String message = 
             NLS.bind(Messages.UNARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION,
                     operatorName);
-        return new BasicDiagnostic(Diagnostic.ERROR, "",  //$NON-NLS-1$
-                UNARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID, message, null);
+        return create(UNARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID, message);
     }
     
     /**
      * @param operatorName
      * @return a configured diagnostic
      */
-    public static Diagnostic create_UNARY_OP_STRING_CONVERSION_NOT_GUARANTEED(final String operatorName)
+    public Diagnostic create_UNARY_OP_STRING_CONVERSION_NOT_GUARANTEED(final String operatorName)
     {
         final String message =
             NLS.bind(Messages.UNARY_OP_STRING_CONVERSION_NOT_GUARANTEED,
                                 operatorName);
-        return
-            new BasicDiagnostic
-                (Diagnostic.WARNING, "", UNARY_OP_STRING_CONVERSION_NOT_GUARANTEED_ID,  //$NON-NLS-1$
-                   message,null);
+        return create(UNARY_OP_STRING_CONVERSION_NOT_GUARANTEED_ID, message);
     }
     
     /**
      * @return a configured diagnostic
      */
-    public static Diagnostic create_UNARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN()
+    public Diagnostic create_UNARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN()
     {
-        return new BasicDiagnostic(Diagnostic.ERROR, "",  //$NON-NLS-1$
-                UNARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN_ID, 
-                Messages.UNARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN, null);
+        return create(UNARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN_ID, 
+                Messages.UNARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN);
     }
     
     /**
@@ -370,24 +364,21 @@ public final class DiagnosticFactory
      * @param whichSelected
      * @return a configured diagnostic
      */
-    public static Diagnostic create_TERNARY_OP_CHOICE_IS_ALWAYS_SAME(boolean result, String whichSelected)
+    public Diagnostic create_TERNARY_OP_CHOICE_IS_ALWAYS_SAME(boolean result, String whichSelected)
     {
         final String message =
             NLS.bind(Messages.TERNARY_OP_CHOICE_IS_ALWAYS_SAME, 
                     Boolean.valueOf(result), whichSelected);
-        return new BasicDiagnostic(Diagnostic.WARNING, "",  //$NON-NLS-1$
-                TERNARY_OP_CHOICE_IS_ALWAYS_SAME_ID, 
-                 message, null);
+        return create(TERNARY_OP_CHOICE_IS_ALWAYS_SAME_ID, message);
     }
     
     /**
      * @return a configured diagnostic
      */
-    public static Diagnostic create_TERNARY_OP_CANNOT_COERCE_CHOICE_TO_BOOLEAN()
+    public Diagnostic create_TERNARY_OP_CANNOT_COERCE_CHOICE_TO_BOOLEAN()
     {
-        return new BasicDiagnostic(Diagnostic.ERROR, "",  //$NON-NLS-1$
-                TERNARY_OP_CANNOT_COERCE_CHOICE_TO_BOOLEAN_ID, 
-                Messages.TERNARY_OP_CANNOT_COERCE_CHOICE_TO_BOOLEAN_ID, null);
+        return create(TERNARY_OP_CANNOT_COERCE_CHOICE_TO_BOOLEAN_ID, 
+                Messages.TERNARY_OP_CANNOT_COERCE_CHOICE_TO_BOOLEAN_ID);
     }
     
     /**
@@ -396,11 +387,10 @@ public final class DiagnosticFactory
      * 
      * @return a configured message
      */
-    public static Diagnostic create_CANNOT_APPLY_OPERATOR_TO_METHOD_BINDING()
+    public Diagnostic create_CANNOT_APPLY_OPERATOR_TO_METHOD_BINDING()
     {
-        return new BasicDiagnostic(Diagnostic.ERROR, "",  //$NON-NLS-1$
-                CANNOT_APPLY_OPERATOR_TO_METHOD_BINDING_ID, 
-                Messages.CANNOT_APPLY_OPERATORS_TO_MB, null);
+        return create(CANNOT_APPLY_OPERATOR_TO_METHOD_BINDING_ID, 
+                Messages.CANNOT_APPLY_OPERATORS_TO_MB);
     }
 
     /**
@@ -408,68 +398,54 @@ public final class DiagnosticFactory
      * @param owningMember
      * @return a configured message
      */
-    public static Diagnostic create_MEMBER_NOT_FOUND(String curMemberSymbol, String owningMember)
+    public Diagnostic create_MEMBER_NOT_FOUND(String curMemberSymbol, String owningMember)
     {
-        return new BasicDiagnostic(Diagnostic.WARNING, "", //$NON-NLS-1$
-                MEMBER_NOT_FOUND_ID,
-                NLS.bind(Messages.VM_PROP_NAME_NOT_FOUND, curMemberSymbol, owningMember), 
-                null);
+        return create(MEMBER_NOT_FOUND_ID,
+                NLS.bind(Messages.VM_PROP_NAME_NOT_FOUND, curMemberSymbol, owningMember));
     }
 
     /**
      * @param variableName
      * @return a configured message
      */
-    public static Diagnostic create_VARIABLE_NOT_FOUND(String variableName)
+    public Diagnostic create_VARIABLE_NOT_FOUND(String variableName)
     {
-        return new BasicDiagnostic(Diagnostic.WARNING, "", //$NON-NLS-1$
-                VARIABLE_NOT_FOUND_ID,
-                NLS.bind(Messages.VM_ROOT_NAME_NOT_FOUND, variableName), 
-                null);
+        return create(VARIABLE_NOT_FOUND_ID
+                , NLS.bind(Messages.VM_ROOT_NAME_NOT_FOUND, variableName));
     }
 
     /**
      * @return a configured message
      */
-    public static Diagnostic create_MISSING_CLOSING_EXPR_BRACKET()
+    public Diagnostic create_MISSING_CLOSING_EXPR_BRACKET()
     {
-        return new BasicDiagnostic(Diagnostic.ERROR, "", //$NON-NLS-1$
-                MISSING_CLOSING_EXPR_BRACKET_ID,
-                Messages.MISSING_CLOSING_EXPR_BRACKET, 
-                null);
+        return create(MISSING_CLOSING_EXPR_BRACKET_ID
+                , Messages.MISSING_CLOSING_EXPR_BRACKET);
     }
     
     /**
      * @return a configured message
      */
-    public static Diagnostic create_GENERAL_SYNTAX_ERROR()
+    public Diagnostic create_GENERAL_SYNTAX_ERROR()
     {
-        return new BasicDiagnostic(Diagnostic.WARNING, "", //$NON-NLS-1$
-                GENERAL_SYNTAX_ERROR_ID,
-                Messages.GENERAL_SYNTAX_ERROR, 
-                null);
+        return create(GENERAL_SYNTAX_ERROR_ID, Messages.GENERAL_SYNTAX_ERROR);
     }
 
     /**
      * @return a configured message
      */
-    public static Diagnostic create_EMPTY_EL_EXPRESSION()
+    public Diagnostic create_EMPTY_EL_EXPRESSION()
     {
-        return new BasicDiagnostic(Diagnostic.WARNING, "", //$NON-NLS-1$
-                EMPTY_EL_EXPRESSION_ID,
-                Messages.EMPTY_EL_EXPRESSION, 
-                null);
+        return create(EMPTY_EL_EXPRESSION_ID, Messages.EMPTY_EL_EXPRESSION);
     }
 
     /**
      * @return a configured diagnostic
      */
-    public static Diagnostic create_BINARY_OP_DOT_WITH_VALUEB_NULL()
+    public Diagnostic create_BINARY_OP_DOT_WITH_VALUEB_NULL()
     {
-        return new BasicDiagnostic(Diagnostic.WARNING, "", //$NON-NLS-1$
-                BINARY_OP_DOT_WITH_VALUEB_NULL_ID, 
-                Messages.BINARY_OP_DOT_WITH_VALUEB_NULL,
-                null);
+        return create(BINARY_OP_DOT_WITH_VALUEB_NULL_ID
+                , Messages.BINARY_OP_DOT_WITH_VALUEB_NULL);
     }
     
     /**
@@ -477,27 +453,23 @@ public final class DiagnosticFactory
      * @param valueBName
      * @return a configured diagnostic
      */
-    public static Diagnostic create_BINARY_OP_DOT_WITH_VALUEA_MAP_SHOULD_USE_ARRAY(final String valAName, final String valueBName)
+    public Diagnostic create_BINARY_OP_DOT_WITH_VALUEA_MAP_SHOULD_USE_ARRAY(final String valAName, final String valueBName)
     {
         final Object[] formatArgs = new Object[] {valAName, valueBName};
-        return new BasicDiagnostic(Diagnostic.WARNING, "", //$NON-NLS-1$
-                BINARY_OP_DOT_WITH_DOTTED_KEY_SHOULD_USE_ARRAY_ID,
-                MessageFormat.format(Messages.BINARY_OP_DOT_WITH_DOTTED_KEY_SHOULD_USE_ARRAY,formatArgs), 
-                null);
+        return create(BINARY_OP_DOT_WITH_DOTTED_KEY_SHOULD_USE_ARRAY_ID,
+                MessageFormat.format(Messages.BINARY_OP_DOT_WITH_DOTTED_KEY_SHOULD_USE_ARRAY,formatArgs));
     }
     
     /**
      * @param value
      * @return an array index out of bounds diagnostic
      */
-    public static Diagnostic create_POSSIBLE_ARRAY_INDEX_OUT_OF_BOUNDS(final Integer value)
+    public Diagnostic create_POSSIBLE_ARRAY_INDEX_OUT_OF_BOUNDS(final Integer value)
     {
         final Object[] formatArgs = new Object[] {value};
 
-        return new BasicDiagnostic(Diagnostic.WARNING, "", //$NON-NLS-1$
-                POSSIBLE_ARRAY_INDEX_OUT_OF_BOUNDS_ID,
-                MessageFormat.format(Messages.POSSIBLE_ARRAY_INDEX_OUT_OF_BOUNDS,formatArgs), 
-                null);
+        return create(POSSIBLE_ARRAY_INDEX_OUT_OF_BOUNDS_ID
+                , MessageFormat.format(Messages.POSSIBLE_ARRAY_INDEX_OUT_OF_BOUNDS,formatArgs));
     }
     
     /**
@@ -507,14 +479,12 @@ public final class DiagnosticFactory
      * @param fieldName
      * @return a diagnostic
      */
-    public static Diagnostic create_BINARY_COMPARISON_WITH_ENUM_AND_CONST_ALWAYS_SAME(final String operatorName, final boolean invariantResult, final String enumName,  final String fieldName)
+    public Diagnostic create_BINARY_COMPARISON_WITH_ENUM_AND_CONST_ALWAYS_SAME(final String operatorName, final boolean invariantResult, final String enumName,  final String fieldName)
     {
-        return new BasicDiagnostic(Diagnostic.WARNING,"" //$NON-NLS-1$
-                , BINARY_COMPARISON_WITH_ENUM_ALWAYS_SAME_ID
+        return create(BINARY_COMPARISON_WITH_ENUM_ALWAYS_SAME_ID
                 , MessageFormat.format(Messages.BINARY_COMPARISON_WITH_ENUM_AND_CONST_ALWAYS_SAME
                                       , new Object[] {operatorName
-                                      , Boolean.valueOf(invariantResult), enumName, fieldName})
-                , null);
+                                      , Boolean.valueOf(invariantResult), enumName, fieldName}));
     }
 
     /**
@@ -524,14 +494,12 @@ public final class DiagnosticFactory
      * @param enumName2
      * @return a diagnostic
      */
-    public static Diagnostic create_BINARY_COMPARISON_WITH_TWO_ENUMS_ALWAYS_SAME(final String operatorName, final boolean invariantResult, final String enumName1, final String enumName2)
+    public Diagnostic create_BINARY_COMPARISON_WITH_TWO_ENUMS_ALWAYS_SAME(final String operatorName, final boolean invariantResult, final String enumName1, final String enumName2)
     {
-        return new BasicDiagnostic(Diagnostic.WARNING,"" //$NON-NLS-1$
-                , BINARY_COMPARISON_WITH_ENUM_ALWAYS_SAME_ID
+        return create(BINARY_COMPARISON_WITH_ENUM_ALWAYS_SAME_ID
                 , MessageFormat.format(Messages.BINARY_COMPARISON_WITH_TWO_ENUMS_ALWAYS_SAME
                                       , new Object[] {operatorName
-                                      , Boolean.valueOf(invariantResult), enumName1, enumName2})
-                , null);
+                                      , Boolean.valueOf(invariantResult), enumName1, enumName2}));
     }
     
     /**
@@ -541,29 +509,31 @@ public final class DiagnosticFactory
      * @param nonEnum
      * @return a diagnostic
      */
-    public static Diagnostic create_BINARY_COMPARISON_WITH_ENUM_AND_UNCOERCABLE_NONCONST_ALWAYS_SAME(final String operatorName, final boolean invariantResult, final String enumName, final String nonEnum)
+    public Diagnostic create_BINARY_COMPARISON_WITH_ENUM_AND_UNCOERCABLE_NONCONST_ALWAYS_SAME(final String operatorName, final boolean invariantResult, final String enumName, final String nonEnum)
     {
-        return new BasicDiagnostic(Diagnostic.WARNING,"" //$NON-NLS-1$
-                , BINARY_COMPARISON_WITH_ENUM_ALWAYS_SAME_ID
+        return create(BINARY_COMPARISON_WITH_ENUM_ALWAYS_SAME_ID
                 , MessageFormat.format(Messages.BINARY_COMPARISON_WITH_ENUM_AND_UNCOERCABLE_NONCONST_ALWAYS_SAME
                                       , new Object[] {operatorName
-                                      , Boolean.valueOf(invariantResult), enumName, nonEnum})
-                , null);
+                                      , Boolean.valueOf(invariantResult), enumName, nonEnum}));
     }
     
     /**
      * @return a diagnostic
      */
-    public static Diagnostic create_BINARY_OP_COMPARISON_OF_ENUMS_INCOMPATIBLE()
+    public Diagnostic create_BINARY_OP_COMPARISON_OF_ENUMS_INCOMPATIBLE()
     {
-        return new BasicDiagnostic(Diagnostic.ERROR,"" //$NON-NLS-1$
-                , BINARY_OP_COMPARISON_OF_ENUMS_INCOMPATIBLE_ID
-                , Messages.BINARY_OP_COMPARISON_OF_ENUMS_INCOMPATIBLE
-                , null);
+        return create(BINARY_OP_COMPARISON_OF_ENUMS_INCOMPATIBLE_ID
+                , Messages.BINARY_OP_COMPARISON_OF_ENUMS_INCOMPATIBLE);
     }
-    
-    private DiagnosticFactory()
+
+    private BasicDiagnostic create(int diagnosticId, String message)
     {
-        // no instantiation
+        final int severity = ELValidationPreferences.getDefaultSeverity(diagnosticId);
+        final String messageWithId = 
+            MessageFormat.format("{1}: {0}", new Object[] {message, String.valueOf(diagnosticId)});
+        return new BasicDiagnostic(severity, "" //$NON-NLS-1$
+                , diagnosticId
+                , messageWithId
+                , null);
     }
 }

@@ -12,7 +12,6 @@
 package org.eclipse.jst.jsf.validation.internal;
 
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 
 /**
  * @author cbateman
@@ -20,13 +19,16 @@ import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
  */
 public class ValidationPreferences 
 {
-    private final ELValidationPreferences _elPrefs;
-
+    private final IPreferenceStore          _prefStore;
+    private final ELValidationPreferences   _elPrefs;
+    
     /**
      * Constructor
+     * @param prefStore 
      */
-    public ValidationPreferences()
+    public ValidationPreferences(IPreferenceStore  prefStore)
     {
+        _prefStore = prefStore;
         _elPrefs = new ELValidationPreferences();
     }
 
@@ -38,12 +40,12 @@ public class ValidationPreferences
         return _elPrefs;
     }
 
-    /**
+    /**IPreferenceStore
      * The default preference loader
      */
     public void load()
     {
-        load(JSFCorePlugin.getDefault().getPreferenceStore());
+        load(_prefStore);
     }
     
     /**
@@ -51,7 +53,7 @@ public class ValidationPreferences
      * 
      * @param prefStore
      */
-    public void load(IPreferenceStore prefStore)
+    private void load(IPreferenceStore prefStore)
     {
         _elPrefs.load(prefStore);
     }

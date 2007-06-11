@@ -16,6 +16,7 @@ import org.eclipse.jst.jsf.common.internal.types.LiteralType;
 import org.eclipse.jst.jsf.common.internal.types.SignatureBasedType;
 import org.eclipse.jst.jsf.common.internal.types.ValueType;
 import org.eclipse.jst.jsf.context.symbol.internal.util.IObjectSymbolBasedValueType;
+import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
 /**
  * Handles the operator 'dot' where dot(expr-a, id-b) == 'expr-a.id-b' in EL syntax
@@ -26,11 +27,12 @@ import org.eclipse.jst.jsf.context.symbol.internal.util.IObjectSymbolBasedValueT
 public class DotOperator extends MemberAccessorOperator
 {
     /**
+     * @param diagnosticFactory 
      * @param file
      */
-    public DotOperator(IFile file) 
+    public DotOperator(final DiagnosticFactory diagnosticFactory, final IFile file) 
     {
-        super(file);
+        super(file, diagnosticFactory);
     }
 
 	protected SignatureBasedType handlePerformObjectSymbolValue(

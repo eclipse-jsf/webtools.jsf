@@ -16,6 +16,7 @@ import java.math.BigDecimal;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.jst.jsf.common.internal.types.ValueType;
+import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
 /**
  * Super for all arithmetic binary operators -- +, -, *,/,%
@@ -23,8 +24,13 @@ import org.eclipse.jst.jsf.common.internal.types.ValueType;
  * @author cbateman
  *
  */
-/*package*/ abstract class ArithmeticBinaryOperator extends BinaryOperator {
-
+/*package*/ abstract class ArithmeticBinaryOperator extends BinaryOperator 
+{
+    ArithmeticBinaryOperator(DiagnosticFactory diagnosticFactory) 
+    {
+        super(diagnosticFactory);
+    }
+    
     public abstract ValueType performOperation(ValueType firstArg, ValueType secondArg); 
     public abstract Diagnostic validate(ValueType firstArg, ValueType secondArg);
     

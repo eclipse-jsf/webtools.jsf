@@ -12,6 +12,8 @@
 
 package org.eclipse.jst.jsf.validation.internal.el.operators;
 
+import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
+
 
 /**
  * Encapsulates the 'and'/'&&' boolean-AND operator
@@ -22,6 +24,10 @@ package org.eclipse.jst.jsf.validation.internal.el.operators;
  */
 /*package*/class AndBinaryOperator extends LogicalBinaryOperator 
 {
+
+    AndBinaryOperator(DiagnosticFactory diagnosticFactory) {
+        super(diagnosticFactory);
+    }
 
     protected boolean doRealOperation(Boolean firstArg, Boolean secondArg) 
     {

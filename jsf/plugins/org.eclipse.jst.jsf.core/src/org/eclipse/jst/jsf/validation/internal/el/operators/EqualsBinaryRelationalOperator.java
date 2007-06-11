@@ -12,6 +12,8 @@
 
 package org.eclipse.jst.jsf.validation.internal.el.operators;
 
+import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
+
 /**
  * Represents the equals -- ==/eq EL binary operator
  * 
@@ -22,8 +24,8 @@ package org.eclipse.jst.jsf.validation.internal.el.operators;
         EqualityRelationalBinaryOperator 
 {
 
-    EqualsBinaryRelationalOperator(String jsfVersion) {
-        super(jsfVersion);
+    EqualsBinaryRelationalOperator(final DiagnosticFactory diagnosticFactory, String jsfVersion) {
+        super(diagnosticFactory, jsfVersion);
     }
 
     /**

@@ -38,6 +38,11 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 {
     private static final String UNARY_MINUS = "unary minus";
 
+    MinusUnaryOperator(DiagnosticFactory diagnosticFactory) 
+    {
+        super(diagnosticFactory);
+    }
+
     public Diagnostic validate(ValueType type)
     {
         // must coerce to numeric type
@@ -53,7 +58,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
             if (TypeCoercer.typeIsNull(coercedType))
             {
                 // null always coerces to 0L on this operator
-                return DiagnosticFactory.
+                return _diagnosticFactory.
                     create_UNARY_OP_MINUS_ON_NULL_ALWAYS_ZERO();
             }
 
@@ -93,7 +98,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
                 // if non-literal string, warn that coercion to number is not 
                 // guaranteed since Long.valueOf and Double.valueOf 
                 // (unlike Boolean.valueOf) throw NumberFormatExceptions
-                return DiagnosticFactory.create_UNARY_OP_STRING_CONVERSION_NOT_GUARANTEED(UNARY_MINUS);
+                return _diagnosticFactory.create_UNARY_OP_STRING_CONVERSION_NOT_GUARANTEED(UNARY_MINUS);
             }
             
             // JSP.2.3.5.4, step 4, for all numeric types, retain type,
@@ -112,7 +117,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
             // fallthrough to error below
         }
         // otherwise, error
-        return DiagnosticFactory.create_UNARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION(UNARY_MINUS);
+        return _diagnosticFactory.create_UNARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION(UNARY_MINUS);
     }
     
     /**

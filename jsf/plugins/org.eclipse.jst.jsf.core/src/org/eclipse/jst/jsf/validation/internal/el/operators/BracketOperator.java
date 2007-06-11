@@ -37,11 +37,12 @@ public class BracketOperator extends MemberAccessorOperator
     private static final String OPERATOR_NAME_ARRAY_ACCESSOR = "array ('[]') accessor";
 
     /**
+     * @param diagnosticFactory 
      * @param file 
      */
-    public BracketOperator(final IFile file)
+    public BracketOperator(final DiagnosticFactory diagnosticFactory, final IFile file)
     {
-        super(file);
+        super(file, diagnosticFactory);
     }
 
 	protected SignatureBasedType handlePerformObjectSymbolValue(
@@ -106,7 +107,7 @@ public class BracketOperator extends MemberAccessorOperator
 
         		if (integerValue.intValue() < 0)
                 {
-        		    return DiagnosticFactory.create_POSSIBLE_ARRAY_INDEX_OUT_OF_BOUNDS(integerValue);
+        		    return _diagnosticFactory.create_POSSIBLE_ARRAY_INDEX_OUT_OF_BOUNDS(integerValue);
                 }
         	}
             else
@@ -116,7 +117,7 @@ public class BracketOperator extends MemberAccessorOperator
                 // at runtime
                 if (TypeCoercer.typeIsString(secondArg.getSignature()))
                 {
-                    return DiagnosticFactory.create_UNARY_OP_STRING_CONVERSION_NOT_GUARANTEED(OPERATOR_NAME_ARRAY_ACCESSOR);
+                    return _diagnosticFactory.create_UNARY_OP_STRING_CONVERSION_NOT_GUARANTEED(OPERATOR_NAME_ARRAY_ACCESSOR);
                 }
             }
             
@@ -125,7 +126,7 @@ public class BracketOperator extends MemberAccessorOperator
         }
         catch (TypeCoercionException e)
         {
-        	return DiagnosticFactory.create_BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION(OPERATOR_NAME_ARRAY_ACCESSOR);
+        	return _diagnosticFactory.create_BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION(OPERATOR_NAME_ARRAY_ACCESSOR);
         }
 	}
     

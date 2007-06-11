@@ -31,6 +31,10 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
  */
 /*package*/abstract class LogicalBinaryOperator extends BinaryOperator 
 {
+    LogicalBinaryOperator(DiagnosticFactory diagnosticFactory) {
+        super(diagnosticFactory);
+    }
+
     public ValueType performOperation(ValueType firstArg, ValueType secondArg) 
     {
         final boolean canCoerceFirstArg = 
@@ -96,14 +100,14 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
        
         if (!canCoerceFirstArg)
         {
-            return DiagnosticFactory.
+            return _diagnosticFactory.
                     create_BINARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN("first");
             //return new BasicDiagnostic(Diagnostic.ERROR, "", 0, "Cannot coerce first argument of "+readableOperatorName()+" to boolean", null);
         }
        
         if (!canCoerceSecondArg)
         {
-            return DiagnosticFactory.
+            return _diagnosticFactory.
                 create_BINARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN("first");
 
             //return new BasicDiagnostic(Diagnostic.ERROR, "", 0, "Cannot coerce second argument of "+readableOperatorName()+" to boolean", null);
@@ -118,7 +122,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
          
                 if (boolValue.booleanValue() == shortCircuitValue())
                 {
-                    return DiagnosticFactory.
+                    return _diagnosticFactory.
                         create_BINARY_OP_FIRST_ARGUMENT_SHORT_CIRCUITS
                             (shortCircuitValue(), readableOperatorName());
                 }
@@ -139,7 +143,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
  
                 if (boolValue.booleanValue() == shortCircuitValue())
                 {
-                    return DiagnosticFactory.
+                    return _diagnosticFactory.
                         create_BINARY_OP_SECOND_ARGUMENT_ALWAYS_EVAL_SAME
                             (shortCircuitValue(), readableOperatorName());
                 }

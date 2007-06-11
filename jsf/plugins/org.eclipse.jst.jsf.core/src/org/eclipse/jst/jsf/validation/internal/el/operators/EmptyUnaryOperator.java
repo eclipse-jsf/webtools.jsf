@@ -30,8 +30,12 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
  */
 /*package*/ class EmptyUnaryOperator extends UnaryOperator 
 {
-
     private static final String EMPTY = "empty";
+
+    EmptyUnaryOperator(DiagnosticFactory diagnosticFactory) 
+    {
+        super(diagnosticFactory);
+    }
 
     public ValueType performOperation(ValueType type) 
     {
@@ -88,7 +92,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
                 condition = "false";
             }
 
-            return DiagnosticFactory.
+            return _diagnosticFactory.
                 create_UNARY_OP_CONSTANT_EXPRESSION_EVAL_SAME_ID
                     (EMPTY,condition);
         }
@@ -96,7 +100,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
         // empty(null) is always true
         if (type instanceof NullLiteralType)
         {
-            return DiagnosticFactory.
+            return _diagnosticFactory.
             create_UNARY_OP_CONSTANT_EXPRESSION_EVAL_SAME_ID
                 (EMPTY,"true");
         }
@@ -110,7 +114,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
                 && !type.isInstanceOf(TypeConstants.TYPE_MAP)
                 && Signature.getTypeSignatureKind(testSig) != Signature.ARRAY_TYPE_SIGNATURE)
         {
-            return DiagnosticFactory.create_UNARY_OP_EMPTY_ALWAYS_FALSE_ON_TYPE();
+            return _diagnosticFactory.create_UNARY_OP_EMPTY_ALWAYS_FALSE_ON_TYPE();
         }
         
         return Diagnostic.OK_INSTANCE;

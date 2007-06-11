@@ -43,17 +43,24 @@ public abstract class MemberAccessorOperator
      * The source file for the EL expression in which this operator
      * is being evaluated.
      */
-    protected final IFile         _file;
+    protected final IFile                   _file;
 
+    /**
+     * the common factory used to create diagnostics
+     */
+    protected final DiagnosticFactory       _diagnosticFactory;
+    
     // TODO: need to reconcile with BinaryOperator? performOperation must return
     // SignatureBasedType since it may return a method.  This can't happen
     // with other operators (besides eqiv [])
     /**
      * @param file 
+     * @param diagnosticFactory 
      */
-    protected MemberAccessorOperator(final IFile file)
+    protected MemberAccessorOperator(final IFile file, final DiagnosticFactory diagnosticFactory)
     {
         _file = file;
+        _diagnosticFactory = diagnosticFactory;
     }
 
     /**
@@ -70,7 +77,7 @@ public abstract class MemberAccessorOperator
         
         if (TypeCoercer.typeIsNull(secondArg.getSignature()))
         {
-            return DiagnosticFactory.create_BINARY_OP_DOT_WITH_VALUEB_NULL();
+            return _diagnosticFactory.create_BINARY_OP_DOT_WITH_VALUEB_NULL();
         }
 
         return validateObjectSymbolValue((IObjectSymbolBasedValueType) firstArg, secondArg);
@@ -113,7 +120,7 @@ public abstract class MemberAccessorOperator
 		
 		if (nextSymbol == null)
 		{
-			return DiagnosticFactory.create_MEMBER_NOT_FOUND(secondArg.getLiteralValue()
+			return _diagnosticFactory.create_MEMBER_NOT_FOUND(secondArg.getLiteralValue()
 			,firstArg.getSymbol().getName());
 		}
 		

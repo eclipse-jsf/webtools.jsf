@@ -34,8 +34,9 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 {
     private final String        _jsfVersion;
     
-    RelationalBinaryOperator(final String jsfVersion)
+    RelationalBinaryOperator(final DiagnosticFactory diagnosticFactory, final String jsfVersion)
     {
+        super(diagnosticFactory);
         _jsfVersion = jsfVersion;
     }
     
@@ -133,7 +134,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
             {
                 boolean result = doRealOperation(firstValue, secondValue);
                 
-                return DiagnosticFactory.
+                return _diagnosticFactory.
                     create_BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME
                         (getOperationName(), Boolean.toString(result));
             }
@@ -145,7 +146,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
         catch (TypeCoercionException tce)
         {
             // could not make numeric coercion for valid comparison
-            return DiagnosticFactory.create_BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION(getOperationName());
+            return _diagnosticFactory.create_BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION(getOperationName());
         }
     }
 
@@ -202,7 +203,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
         if (firstValue != null && secondValue != null)
         {
             boolean newValue = doRealOperation(firstValue, secondValue);
-            return DiagnosticFactory.
+            return _diagnosticFactory.
                 create_BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME
                     (getOperationName(), Boolean.toString(newValue));
         }

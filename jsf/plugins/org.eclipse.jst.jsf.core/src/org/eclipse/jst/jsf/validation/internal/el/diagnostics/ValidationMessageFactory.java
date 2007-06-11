@@ -14,6 +14,7 @@ package org.eclipse.jst.jsf.validation.internal.el.diagnostics;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.jst.jsf.validation.internal.ELValidationPreferences;
 import org.eclipse.wst.validation.internal.core.Message;
 import org.eclipse.wst.validation.internal.provisional.core.IMessage;
 
@@ -30,13 +31,17 @@ public final class ValidationMessageFactory
      * @param offset
      * @param length
      * @param file
+     * @param prefs 
      * @return a configured message
      */
-    public static Message createFromDiagnostic(final Diagnostic diagnostic, int offset, int length, IFile file)
+    public static Message createFromDiagnostic(final Diagnostic diagnostic, int offset, int length, IFile file, ELValidationPreferences prefs)
     {
+        final int severity = 
+            prefs.getDiagnosticSeverity(diagnostic.getCode()); 
+
         final Message message =
             new MyLocalizedMessage(
-                    convertSeverity(diagnostic), 
+                    convertSeverity(severity), 
                     diagnostic.getMessage(), 
                     file, 
                     diagnostic.getCode());
@@ -51,9 +56,9 @@ public final class ValidationMessageFactory
      * @param diagnostic
      * @return a Message severity equivilent to diagnostic.getSeverity()
      */
-    private static int convertSeverity(Diagnostic diagnostic)
+    private static int convertSeverity(int severity)
     {
-        switch (diagnostic.getSeverity())
+        switch (severity)
         {
             case Diagnostic.ERROR:
                 return IMessage.HIGH_SEVERITY;
@@ -61,16 +66,16 @@ public final class ValidationMessageFactory
                 return IMessage.NORMAL_SEVERITY;
             case Diagnostic.INFO:
                 return IMessage.LOW_SEVERITY;
-                
+            case Diagnostic.OK:
             default:
-                return IMessage.LOW_SEVERITY;
+                // no bits set
+                return 0;
         }
     }
     
-    
-
     private ValidationMessageFactory()
     {
-        // do nothing; no external instantiation
+        // no external instantiation
     }
-}
+}    
+

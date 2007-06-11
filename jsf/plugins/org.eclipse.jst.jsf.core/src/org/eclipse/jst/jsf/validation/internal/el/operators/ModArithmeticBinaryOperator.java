@@ -39,6 +39,11 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 {
     private static final String MODULO = "modulo";
 
+    ModArithmeticBinaryOperator(DiagnosticFactory diagnosticFactory) {
+        super(diagnosticFactory);
+        // TODO Auto-generated constructor stub
+    }
+
     public ValueType performOperation(ValueType firstArg, ValueType secondArg) 
     {
         // JSP.2.3.5.3, step 1 if both null, then return zero
@@ -83,7 +88,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
         if (TypeCoercer.typeIsNull(firstArg.getSignature())
                 && TypeCoercer.typeIsNull(secondArg.getSignature()))
         {
-            return DiagnosticFactory.create_BINARY_OP_BOTH_OPERANDS_NULL(MODULO);
+            return _diagnosticFactory.create_BINARY_OP_BOTH_OPERANDS_NULL(MODULO);
         }
 
         final String boxedFirstArg = TypeTransformer.transformBoxPrimitives(firstArg.getSignature());
@@ -251,7 +256,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
                 if (secondValue.doubleValue() == 0.0)
                 {
                     // division by zero
-                    return DiagnosticFactory.create_BINARY_OP_POSSIBLE_DIVISION_BY_ZERO();
+                    return _diagnosticFactory.create_BINARY_OP_POSSIBLE_DIVISION_BY_ZERO();
                 }
             }
             
@@ -264,7 +269,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
             
             if (firstValue != null && secondValue != null)
             {
-                return DiagnosticFactory.
+                return _diagnosticFactory.
                     create_BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME
                         (MODULO, Double.toString(
                                 firstValue.doubleValue()%secondValue.doubleValue()));
@@ -277,7 +282,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
         catch (TypeCoercionException tce)
         {
             // could not coerce, so error
-            return DiagnosticFactory.
+            return _diagnosticFactory.
                 create_BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION(MODULO);
         }
     }
@@ -295,7 +300,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
                 if (((LiteralType)secondArg).coerceToNumber(BigInteger.class).equals(BigInteger.ZERO))
                 {
                     // division by zero
-                    return DiagnosticFactory.create_BINARY_OP_POSSIBLE_DIVISION_BY_ZERO();
+                    return _diagnosticFactory.create_BINARY_OP_POSSIBLE_DIVISION_BY_ZERO();
                 }
             }
             
@@ -307,7 +312,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
         catch (TypeCoercionException tce)
         {
             // no coercion
-            return DiagnosticFactory.
+            return _diagnosticFactory.
                 create_BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION(MODULO);
         }        
     }
@@ -328,7 +333,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
                 if (secondValue.longValue() == 0)
                 {
                     // division by zero
-                    return DiagnosticFactory.
+                    return _diagnosticFactory.
                         create_BINARY_OP_POSSIBLE_DIVISION_BY_ZERO();
                 }
             }
@@ -342,7 +347,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
             
             if (firstValue != null && secondValue != null)
             {
-                return DiagnosticFactory.
+                return _diagnosticFactory.
                     create_BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME
                         (MODULO, Long.toString(firstValue.longValue()%secondValue.longValue())); 
             }
@@ -354,7 +359,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
         catch (TypeCoercionException tce)
         {
             // could not coerce, so error
-            return DiagnosticFactory.
+            return _diagnosticFactory.
                 create_BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION(MODULO);
         }
     }

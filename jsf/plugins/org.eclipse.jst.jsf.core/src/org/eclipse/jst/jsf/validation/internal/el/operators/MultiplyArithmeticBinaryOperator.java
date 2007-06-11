@@ -14,6 +14,8 @@ package org.eclipse.jst.jsf.validation.internal.el.operators;
 
 import java.math.BigDecimal;
 
+import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
+
 /**
  * Represents the EL Multiply arithmetic binary operator "*"
  * 
@@ -21,9 +23,15 @@ import java.math.BigDecimal;
  *
  */
 /*package*/ class MultiplyArithmeticBinaryOperator extends
-        NoDivArithmeticBinaryOperator {
-
+        NoDivArithmeticBinaryOperator 
+{
     private static final String MULTIPLICATION = "multiplication";
+
+
+    MultiplyArithmeticBinaryOperator(DiagnosticFactory diagnosticFactory) 
+    {
+        super(diagnosticFactory);
+    }
 
     protected Long doRealOperation(Long firstArg, Long secondArg) 
     {

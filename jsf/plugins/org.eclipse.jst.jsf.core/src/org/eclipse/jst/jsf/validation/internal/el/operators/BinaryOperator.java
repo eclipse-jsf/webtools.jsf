@@ -19,6 +19,7 @@ import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocume
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IWorkspaceContextResolver;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigUtils;
+import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 import org.eclipse.jst.jsp.core.internal.java.jspel.JSPELParserConstants;
 import org.eclipse.jst.jsp.core.internal.java.jspel.Token;
 import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
@@ -33,13 +34,19 @@ import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
 public abstract class BinaryOperator 
 {
     /**
+     * the factory used to construct diagnostics
+     */
+    protected final DiagnosticFactory   _diagnosticFactory;
+    
+    /**
      * @param operatorToken
+     * @param diagnosticFactory 
      * @param context -- the current EL document context; must not be null
      * @return a binary operator based on the provided token
      * @throws IllegalArgumentException if the token is not a recognized
      * EL binary operator token or if context is null
      */
-    public static BinaryOperator getBinaryOperator(Token operatorToken, IStructuredDocumentContext context)
+    public static BinaryOperator getBinaryOperator(Token operatorToken, DiagnosticFactory diagnosticFactory, IStructuredDocumentContext context)
     {
         if (context == null)
         {
@@ -51,52 +58,52 @@ public abstract class BinaryOperator
         {
             case JSPELParserConstants.AND1:
             case JSPELParserConstants.AND2:
-                return new AndBinaryOperator();
+                return new AndBinaryOperator(diagnosticFactory);
                 
             case JSPELParserConstants.OR1:
             case JSPELParserConstants.OR2:
-                return new OrBinaryOperator();
+                return new OrBinaryOperator(diagnosticFactory);
                 
             case JSPELParserConstants.EQ1:
             case JSPELParserConstants.EQ2:
-                return new EqualsBinaryRelationalOperator(facetVersion);
+                return new EqualsBinaryRelationalOperator(diagnosticFactory,facetVersion);
                 
             case JSPELParserConstants.NEQ1:
             case JSPELParserConstants.NEQ2:
-                return new NotEqualsBinaryRelationalOperator(facetVersion);
+                return new NotEqualsBinaryRelationalOperator(diagnosticFactory,facetVersion);
                 
             case JSPELParserConstants.GT1:
             case JSPELParserConstants.GT2:
-                return new GreaterThanRelationalBinaryOperator(facetVersion);
+                return new GreaterThanRelationalBinaryOperator(diagnosticFactory,facetVersion);
                 
             case JSPELParserConstants.GE1:
             case JSPELParserConstants.GE2:
-                return new GreaterThanEqRelationalBinaryOperator(facetVersion);
+                return new GreaterThanEqRelationalBinaryOperator(diagnosticFactory,facetVersion);
                 
             case JSPELParserConstants.LT1:
             case JSPELParserConstants.LT2:
-                return new LessThanRelationalBinaryOperator(facetVersion);
+                return new LessThanRelationalBinaryOperator(diagnosticFactory,facetVersion);
                 
             case JSPELParserConstants.LE1:
             case JSPELParserConstants.LE2:
-                return new LessThanEqRelationalBinaryOperator(facetVersion);
+                return new LessThanEqRelationalBinaryOperator(diagnosticFactory,facetVersion);
                 
             case JSPELParserConstants.PLUS:
-                return new AddArithmeticBinaryOperator();
+                return new AddArithmeticBinaryOperator(diagnosticFactory);
                 
             case JSPELParserConstants.MINUS:
-                return new SubtractArithmeticBinaryOperator();
+                return new SubtractArithmeticBinaryOperator(diagnosticFactory);
                 
             case JSPELParserConstants.MULTIPLY:
-                return new MultiplyArithmeticBinaryOperator();
+                return new MultiplyArithmeticBinaryOperator(diagnosticFactory);
                 
             case JSPELParserConstants.DIVIDE1:
             case JSPELParserConstants.DIVIDE2:
-                return new DivArithmeticBinaryOperator();
+                return new DivArithmeticBinaryOperator(diagnosticFactory);
             
             case JSPELParserConstants.MODULUS1:
             case JSPELParserConstants.MODULUS2:
-                return new ModArithmeticBinaryOperator();
+                return new ModArithmeticBinaryOperator(diagnosticFactory);
         }
         
         throw new IllegalArgumentException("Unknown binary operator: "+operatorToken.image); //$NON-NLS-1$
@@ -106,7 +113,11 @@ public abstract class BinaryOperator
      * 
      * Constructor
      */
-    BinaryOperator() {/* no construction or sub-classing outside package*/}
+    BinaryOperator(DiagnosticFactory diagnosticFactory) 
+    {
+        /* no construction or sub-classing outside package*/
+        _diagnosticFactory = diagnosticFactory;
+    }
     
     /**
      * If both arguments are literals and the operation can be performed, then

@@ -36,7 +36,13 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
  */
 /*package*/ class DivArithmeticBinaryOperator extends ArithmeticBinaryOperator 
 {
+
     private static final String DIVISION = "division";
+
+    DivArithmeticBinaryOperator(DiagnosticFactory diagnosticFactory) {
+        super(diagnosticFactory);
+        // TODO Auto-generated constructor stub
+    }
 
     public ValueType performOperation(ValueType firstArg, ValueType secondArg) 
     {
@@ -68,7 +74,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
         if (TypeCoercer.typeIsNull(firstArg.getSignature())
                 && TypeCoercer.typeIsNull(secondArg.getSignature()))
         {
-            return DiagnosticFactory.create_BINARY_OP_BOTH_OPERANDS_NULL(DIVISION);
+            return _diagnosticFactory.create_BINARY_OP_BOTH_OPERANDS_NULL(DIVISION);
         }
         
         final String boxedFirstArg = TypeTransformer.transformBoxPrimitives(firstArg.getSignature());
@@ -176,7 +182,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
                 final Number coercedValue = ((LiteralType)secondArg).coerceToNumber(BigDecimal.class);
                 if (((BigDecimal)coercedValue).equals(new BigDecimal(0)))
                 {
-                    return DiagnosticFactory.create_BINARY_OP_POSSIBLE_DIVISION_BY_ZERO();
+                    return _diagnosticFactory.create_BINARY_OP_POSSIBLE_DIVISION_BY_ZERO();
                 }
             }
             
@@ -185,7 +191,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
         }
         catch (TypeCoercionException ce)
         {
-            return DiagnosticFactory.create_BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION(DIVISION);
+            return _diagnosticFactory.create_BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION(DIVISION);
         }
     }
     
@@ -204,7 +210,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
                 // we have a div by zero
                 if (secondValue.doubleValue() == 0.0)
                 {
-                    return DiagnosticFactory.create_BINARY_OP_POSSIBLE_DIVISION_BY_ZERO();
+                    return _diagnosticFactory.create_BINARY_OP_POSSIBLE_DIVISION_BY_ZERO();
                 }
             }
 
@@ -222,7 +228,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
                             doRealOperation(new Double(firstValue.doubleValue()), 
                                             new Double(secondValue.doubleValue())).doubleValue());
 
-                return DiagnosticFactory.create_BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME(DIVISION, result);
+                return _diagnosticFactory.create_BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME(DIVISION, result);
             }
 
             // if not both literals and could coerce, then the type is double
@@ -231,7 +237,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
         catch (TypeCoercionException ce)
         {
             // could not coerce for the operation
-            return DiagnosticFactory.create_BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION(DIVISION);
+            return _diagnosticFactory.create_BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION(DIVISION);
         }
     }
 

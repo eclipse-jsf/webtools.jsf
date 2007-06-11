@@ -38,9 +38,9 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
  */
 /*package*/ abstract class EqualityRelationalBinaryOperator extends RelationalBinaryOperator 
 {
-    EqualityRelationalBinaryOperator(String jsfVersion) 
+    EqualityRelationalBinaryOperator(final DiagnosticFactory diagnosticFactory, String jsfVersion) 
     {
-        super(jsfVersion);
+        super(diagnosticFactory, jsfVersion);
     }
 
     /**
@@ -198,7 +198,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
                 || TypeCoercer.typeIsNull(secondArg.getSignature()))
         {
             final boolean result = doRealOperation(new Integer(4), null);
-            return DiagnosticFactory.create_BINARY_OP_EQUALITY_COMP_WITH_NULL_ALWAYS_EVAL_SAME(Boolean.toString(result));
+            return _diagnosticFactory.create_BINARY_OP_EQUALITY_COMP_WITH_NULL_ALWAYS_EVAL_SAME(Boolean.toString(result));
         }
 
         final String boxedFirstType = 
@@ -324,12 +324,12 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
         if (!canCoerceFirstArg)
         {
-            return DiagnosticFactory.create_BINARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN(Messages.getString("EqualityRelationalBinaryOperator.FirstArgument")); //$NON-NLS-1$
+            return _diagnosticFactory.create_BINARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN(Messages.getString("EqualityRelationalBinaryOperator.FirstArgument")); //$NON-NLS-1$
         }
         
         if (!canCoerceSecondArg)
         {
-            return DiagnosticFactory.create_BINARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN(Messages.getString("EqualityRelationalBinaryOperator.SecondArgument")); //$NON-NLS-1$
+            return _diagnosticFactory.create_BINARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN(Messages.getString("EqualityRelationalBinaryOperator.SecondArgument")); //$NON-NLS-1$
         }
         
         if (firstType instanceof LiteralType && secondType instanceof LiteralType)
@@ -343,7 +343,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
                 {
                     final boolean result = 
                         doRealOperation(firstValue, secondValue);
-                    return DiagnosticFactory.
+                    return _diagnosticFactory.
                         create_BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME(getOperationName(), Boolean.toString(result));
                 }
             }
@@ -460,7 +460,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
         // comparable.
         if (TypeUtil.canNeverBeEqual(firstArg.getSignature(), secondArg.getSignature()))
         {
-            return DiagnosticFactory.
+            return _diagnosticFactory.
                 create_BINARY_COMPARISON_WITH_TWO_ENUMS_ALWAYS_SAME
                     (getOperationName()
                      , doRealOperation("foo", "notFoo")  // just simulate the operation where the operands are not equal //$NON-NLS-1$ //$NON-NLS-2$
@@ -497,7 +497,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
         }
         // otherwise, we know it will result in a problem since one is an enum
         // and the other isn't
-        return DiagnosticFactory.
+        return _diagnosticFactory.
             create_BINARY_COMPARISON_WITH_ENUM_AND_UNCOERCABLE_NONCONST_ALWAYS_SAME
                 (getOperationName()
                  , doRealOperation("foo", "notFoo")  // just simulate the operation where the operands are not equal //$NON-NLS-1$ //$NON-NLS-2$
@@ -517,7 +517,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
             
             if (type != null && !TypeUtil.isEnumMember(type, literalValue))
             {
-                return DiagnosticFactory.
+                return _diagnosticFactory.
                     create_BINARY_COMPARISON_WITH_ENUM_AND_CONST_ALWAYS_SAME
                         (getOperationName()
                          , doRealOperation(literalValue, literalValue+"_")  // just simulate the operation where the operands are not equal //$NON-NLS-1$

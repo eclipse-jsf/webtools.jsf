@@ -30,6 +30,18 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
  */
 public class TernaryChoiceOperator 
 {
+    private final DiagnosticFactory     _diagnosticFactory;
+    
+    
+    /**
+     * @param diagnosticFactory
+     */
+    public TernaryChoiceOperator(DiagnosticFactory diagnosticFactory)
+    {
+        super();
+        _diagnosticFactory = diagnosticFactory;
+    }
+
     /**
      * @param choiceArg
      * @param whenTrueArg
@@ -101,14 +113,14 @@ public class TernaryChoiceOperator
                     if (result != null)
                     {
                         String whichSelected = result.booleanValue() ? "first" : "second";
-                        return DiagnosticFactory.
+                        return _diagnosticFactory.
                             create_TERNARY_OP_CHOICE_IS_ALWAYS_SAME
                                 (result.booleanValue(), whichSelected);
                     }
                 }
                 catch (TypeCoercionException tce)
                 {
-                    return DiagnosticFactory.
+                    return _diagnosticFactory.
                         create_TERNARY_OP_CANNOT_COERCE_CHOICE_TO_BOOLEAN();
                 }
             }
@@ -120,7 +132,7 @@ public class TernaryChoiceOperator
         }
         
         // if choice is not boolean, then can't resolve
-        return DiagnosticFactory.
+        return _diagnosticFactory.
             create_TERNARY_OP_CANNOT_COERCE_CHOICE_TO_BOOLEAN();
     }
 }

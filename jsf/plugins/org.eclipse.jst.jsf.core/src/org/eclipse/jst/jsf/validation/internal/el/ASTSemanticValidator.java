@@ -38,6 +38,7 @@ import org.eclipse.jst.jsf.context.symbol.internal.util.IObjectSymbolBasedValueT
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.designtime.resolver.ISymbolContextResolver;
 import org.eclipse.jst.jsf.designtime.resolver.StructuredDocumentSymbolResolverFactory;
+import org.eclipse.jst.jsf.validation.internal.ELValidationPreferences;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.ValidationMessageFactory;
 import org.eclipse.jst.jsf.validation.internal.el.operators.BinaryOperator;
@@ -78,11 +79,13 @@ class ASTSemanticValidator implements JSPELParserVisitor, IExpressionSemanticVal
 	private final ASTExpression 					_expr;
 	private final IStructuredDocumentContext		_context;
 	private final ISymbolContextResolver			_symbolResolver;
-	private final List								_messages;
+	private final List<IMessage>					_messages;
 	private final EvaluationTracker                 _tracker;
+	private final DiagnosticFactory                 _diagnosticFactory;
+	private final ELValidationPreferences           _prefs;
     private boolean                                 _validatorHasBeenCalled; //=false
     
-	ASTSemanticValidator(ASTExpression expr, IStructuredDocumentContext context)
+	ASTSemanticValidator(ASTExpression expr, IStructuredDocumentContext context, ELValidationPreferences prefs)
 	{
 		final IWorkspaceContextResolver resolver = 
             IStructuredDocumentContextResolverFactory.
@@ -100,8 +103,10 @@ class ASTSemanticValidator implements JSPELParserVisitor, IExpressionSemanticVal
 		_expr = expr;
 		_context = context;
 		_symbolResolver = StructuredDocumentSymbolResolverFactory.getInstance().getSymbolContextResolver(_context);
-		_messages = new ArrayList();
+		_messages = new ArrayList<IMessage>();
         _tracker = new EvaluationTracker();
+        _diagnosticFactory = new DiagnosticFactory();
+        _prefs = prefs;
 	}
 	
 	/* (non-Javadoc)
@@ -146,7 +151,7 @@ class ASTSemanticValidator implements JSPELParserVisitor, IExpressionSemanticVal
         if (choiceArg != null && whenTrueArg != null && whenFalseArg != null)
         {
             final TernaryChoiceOperator operator = 
-                new TernaryChoiceOperator();
+                new TernaryChoiceOperator(_diagnosticFactory);
             
             final Diagnostic diagnostic = 
                 operator.validate(choiceArg/* whenTrueArg, whenFalseArg*/);
@@ -158,7 +163,7 @@ class ASTSemanticValidator implements JSPELParserVisitor, IExpressionSemanticVal
                 final int length = node.getLastToken().endColumn - firstToken.beginColumn+1;
                 final Message message = 
                     ValidationMessageFactory.createFromDiagnostic(diagnostic, 
-                                                   offset, length, _targetFile);
+                                                   offset, length, _targetFile, _prefs);
                 _messages.add(message);
             }
             
@@ -291,7 +296,7 @@ class ASTSemanticValidator implements JSPELParserVisitor, IExpressionSemanticVal
             {
                 if (type instanceof ValueType)
                 {
-                    final UnaryOperator unaryOp = UnaryOperator.createUnaryOperator(firstToken);
+                    final UnaryOperator unaryOp = UnaryOperator.createUnaryOperator(firstToken, _diagnosticFactory);
                     final Diagnostic diagnostic = unaryOp.validate((ValueType)type);
                     
                     if (diagnostic.getSeverity() != Diagnostic.OK)
@@ -299,7 +304,7 @@ class ASTSemanticValidator implements JSPELParserVisitor, IExpressionSemanticVal
                         final int offset = _context.getDocumentPosition() + firstToken.beginColumn - 1;
                         final int length = node.getLastToken().endColumn - firstToken.beginColumn+1;
                         final Message message = 
-                            ValidationMessageFactory.createFromDiagnostic(diagnostic, offset, length, _targetFile);
+                            ValidationMessageFactory.createFromDiagnostic(diagnostic, offset, length, _targetFile,_prefs);
                         _messages.add(message);
                     }
    
@@ -315,8 +320,8 @@ class ASTSemanticValidator implements JSPELParserVisitor, IExpressionSemanticVal
                                         firstToken.beginColumn+1;
                     
                     _messages.add(ValidationMessageFactory.
-                            createFromDiagnostic(DiagnosticFactory.create_CANNOT_APPLY_OPERATOR_TO_METHOD_BINDING(),
-                                    offset, length, _targetFile));
+                            createFromDiagnostic(_diagnosticFactory.create_CANNOT_APPLY_OPERATOR_TO_METHOD_BINDING(),
+                                    offset, length, _targetFile,_prefs));
                 }
             }
         }
@@ -344,10 +349,10 @@ class ASTSemanticValidator implements JSPELParserVisitor, IExpressionSemanticVal
             final int problemStartOffset = tracker.getCurPropertySymbolOffset();
             final int length = tracker.getCurPropertySymbolLength();
             _messages.add(ValidationMessageFactory.createFromDiagnostic(
-                    DiagnosticFactory.create_MEMBER_NOT_FOUND(
+                    _diagnosticFactory.create_MEMBER_NOT_FOUND(
                         ((IPropertySymbol)((IObjectSymbolBasedValueType)type).getSymbol()).getName()
                         , tracker.getRootSymbolName())
-                        , problemStartOffset, length, _targetFile));
+                        , problemStartOffset, length, _targetFile, _prefs));
         }
             
         return data;
@@ -368,9 +373,15 @@ class ASTSemanticValidator implements JSPELParserVisitor, IExpressionSemanticVal
                     _context.getDocumentPosition() + token.beginColumn - 1;
                 final int length = token.endColumn - token.beginColumn + 1;
  
-				_messages.add(ValidationMessageFactory.createFromDiagnostic(
-                        DiagnosticFactory.create_VARIABLE_NOT_FOUND(image), 
-                        problemStartOffset, length, _targetFile));
+                final Diagnostic diag =  
+                    _diagnosticFactory.create_VARIABLE_NOT_FOUND(image);
+                
+                if (diag.getSeverity() != Diagnostic.OK)
+                {
+    				_messages.add(
+    				    ValidationMessageFactory.createFromDiagnostic(diag, 
+    	                        problemStartOffset, length, _targetFile, _prefs));
+                }
 			}
 			else if (symbol instanceof IInstanceSymbol)
 			{
@@ -403,7 +414,7 @@ class ASTSemanticValidator implements JSPELParserVisitor, IExpressionSemanticVal
                     _context.getDocumentPosition() + dotId.beginColumn - 1;
                 final int length = dotId.endColumn - dotId.beginColumn + 1;
 
-                final DotOperator dotOp = new DotOperator(_targetFile);
+                final DotOperator dotOp = new DotOperator(_diagnosticFactory, _targetFile);
 
                 final StringLiteralType  suffixLiteral = new StringLiteralType(dotId.image);
                 Diagnostic diag = 
@@ -413,7 +424,7 @@ class ASTSemanticValidator implements JSPELParserVisitor, IExpressionSemanticVal
 			    if (diag.getSeverity() != Diagnostic.OK)
 			    {
 			        _messages.add(ValidationMessageFactory.createFromDiagnostic(
-                         diag, startOffset, length, _targetFile));
+                         diag, startOffset, length, _targetFile, _prefs));
                     ((EvaluationTracker) data).setType(null);
                 }
                 else
@@ -454,7 +465,7 @@ class ASTSemanticValidator implements JSPELParserVisitor, IExpressionSemanticVal
                         _context.getDocumentPosition() + firstToken.beginColumn - 1;
                     final int length = lastToken.endColumn - firstToken.beginColumn + 1;
 
-                    final BracketOperator  bracketOperator = new BracketOperator(_targetFile);
+                    final BracketOperator  bracketOperator = new BracketOperator(_diagnosticFactory, _targetFile);
                     
                     final Diagnostic diag = 
                         bracketOperator.validate(symbolType, 
@@ -464,7 +475,7 @@ class ASTSemanticValidator implements JSPELParserVisitor, IExpressionSemanticVal
                     {
                         _messages.add(ValidationMessageFactory.createFromDiagnostic(
                                 diag, 
-                                startOffset, length, _targetFile));
+                                startOffset, length, _targetFile, _prefs));
                         ((EvaluationTracker) data).setType(null);
                     }
                     else
@@ -497,9 +508,15 @@ class ASTSemanticValidator implements JSPELParserVisitor, IExpressionSemanticVal
 	 */
 	public void reportFindings(IValidator validator, IReporter reporter)
 	{
-		for (final Iterator it = _messages.iterator(); it.hasNext();)
+		for (final Iterator<IMessage> it = _messages.iterator(); it.hasNext();)
 		{
-			reporter.addMessage(validator, (IMessage) it.next());
+		    IMessage message = it.next();
+		    
+		    // don't report messages that have no severity.
+		    if ((message.getSeverity() & IMessage.ALL_MESSAGES) != 0)
+		    {
+		        reporter.addMessage(validator, message);
+		    }
 		}
 	}
     
@@ -529,7 +546,7 @@ class ASTSemanticValidator implements JSPELParserVisitor, IExpressionSemanticVal
             if (curType != null && secondType != null)
             {
                 final BinaryOperator operator = 
-                    BinaryOperator.getBinaryOperator((Token)node.getOperatorTokens().get(child-1), _context);
+                    BinaryOperator.getBinaryOperator((Token)node.getOperatorTokens().get(child-1), _diagnosticFactory, _context);
                 
                 final Diagnostic diagnostic = operator.validate(curType, secondType);
                 
@@ -540,7 +557,7 @@ class ASTSemanticValidator implements JSPELParserVisitor, IExpressionSemanticVal
                     final int length = node.getLastToken().endColumn - firstToken.beginColumn+1;
                     final Message message = 
                         ValidationMessageFactory.createFromDiagnostic
-                                (diagnostic, offset, length, _targetFile);
+                                (diagnostic, offset, length, _targetFile, _prefs);
                     _messages.add(message);
                 }
                 
@@ -563,8 +580,8 @@ class ASTSemanticValidator implements JSPELParserVisitor, IExpressionSemanticVal
             final int length = node.getLastToken().endColumn - node.getFirstToken().beginColumn+1;
             
             _messages.add(ValidationMessageFactory.createFromDiagnostic
-                    (DiagnosticFactory.create_CANNOT_APPLY_OPERATOR_TO_METHOD_BINDING(), 
-                            offset, length, _targetFile));
+                    (_diagnosticFactory.create_CANNOT_APPLY_OPERATOR_TO_METHOD_BINDING(), 
+                            offset, length, _targetFile, _prefs));
         }
 
         return null;

@@ -12,6 +12,8 @@
 
 package org.eclipse.jst.jsf.validation.internal.el.operators;
 
+import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
+
 
 /**
  * Encapsulates the EL less-than-equal operator -- "<="/le
@@ -22,8 +24,8 @@ package org.eclipse.jst.jsf.validation.internal.el.operators;
 /*package*/ class LessThanEqRelationalBinaryOperator extends
         LtGtRelationalBinaryOperator 
 {
-    LessThanEqRelationalBinaryOperator(String jsfVersion) {
-        super(jsfVersion);
+    LessThanEqRelationalBinaryOperator(final DiagnosticFactory diagnosticFactory, String jsfVersion) {
+        super(diagnosticFactory, jsfVersion);
     }
 
     protected boolean doRealOperation(Number firstArg, Number secondArg) 

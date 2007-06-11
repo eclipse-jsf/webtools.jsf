@@ -34,9 +34,9 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
  */
 /*package*/ abstract class LtGtRelationalBinaryOperator extends RelationalBinaryOperator 
 {
-    LtGtRelationalBinaryOperator(String jsfVersion) 
+    LtGtRelationalBinaryOperator(final DiagnosticFactory diagnosticFactory, String jsfVersion) 
     {
-        super(jsfVersion);
+        super(diagnosticFactory, jsfVersion);
     }
 
     protected abstract boolean doRealOperation(Number firstArg, Number secondArg);
@@ -129,7 +129,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
         if (TypeCoercer.typeIsNull(firstArg.getSignature())
                 || TypeCoercer.typeIsNull(secondArg.getSignature()))
         {
-            return DiagnosticFactory.
+            return _diagnosticFactory.
                 create_BINARY_OP_EQUALITY_COMP_WITH_NULL_ALWAYS_EVAL_SAME(Messages.getString("LtGtRelationalBinaryOperator.ConstantName.False")); //$NON-NLS-1$
         }
         
@@ -193,13 +193,13 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
             Diagnostic diag = Diagnostic.OK_INSTANCE;
             if(checkIfIncompatibleEnums(firstArg, secondArg))
             {
-                diag = DiagnosticFactory.create_BINARY_OP_COMPARISON_OF_ENUMS_INCOMPATIBLE();
+                diag = _diagnosticFactory.create_BINARY_OP_COMPARISON_OF_ENUMS_INCOMPATIBLE();
             }
             return diag;
         }
         
         // JSP.2.3.5.6, step 10 -- otherwise, error
-        return DiagnosticFactory.create_BINARY_OP_NO_AVAILABLE_TYPE_COERCION();
+        return _diagnosticFactory.create_BINARY_OP_NO_AVAILABLE_TYPE_COERCION();
     }
 
     /**

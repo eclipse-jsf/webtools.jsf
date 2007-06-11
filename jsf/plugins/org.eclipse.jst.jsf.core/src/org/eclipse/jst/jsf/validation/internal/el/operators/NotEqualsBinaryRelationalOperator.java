@@ -12,6 +12,8 @@
 
 package org.eclipse.jst.jsf.validation.internal.el.operators;
 
+import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
+
 /**
  * Represents the not equals -- "!="/ne EL binary operator
  * @author cbateman
@@ -20,9 +22,9 @@ package org.eclipse.jst.jsf.validation.internal.el.operators;
 /*package*/ class NotEqualsBinaryRelationalOperator extends
         EqualityRelationalBinaryOperator {
 
-    NotEqualsBinaryRelationalOperator(String jsfVersion) 
+    NotEqualsBinaryRelationalOperator(final DiagnosticFactory diagnosticFactory, String jsfVersion) 
     {
-        super(jsfVersion);
+        super(diagnosticFactory, jsfVersion);
     }
 
     protected boolean doRealOperation(Number firstArg, Number secondArg) {

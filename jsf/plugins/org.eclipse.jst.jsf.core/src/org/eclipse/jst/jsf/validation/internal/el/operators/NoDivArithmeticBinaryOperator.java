@@ -37,6 +37,10 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
  */
 /*package*/ abstract class NoDivArithmeticBinaryOperator extends ArithmeticBinaryOperator 
 {
+    NoDivArithmeticBinaryOperator(DiagnosticFactory diagnosticFactory) {
+        super(diagnosticFactory);
+    }
+
     protected abstract Long doRealOperation(Long firstArg, Long secondArg);
     
     protected abstract Double doRealOperation(Double firstArg, Double secondArg);
@@ -99,7 +103,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
         if (TypeCoercer.typeIsNull(firstArg.getSignature())
                 && TypeCoercer.typeIsNull(secondArg.getSignature()))
         {
-            return DiagnosticFactory.create_BINARY_OP_BOTH_OPERANDS_NULL(getOperatorName());
+            return _diagnosticFactory.create_BINARY_OP_BOTH_OPERANDS_NULL(getOperatorName());
         }
         
         final String boxedFirstArg = TypeTransformer.transformBoxPrimitives(firstArg.getSignature());
@@ -268,14 +272,14 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
                         throw new AssertionError("unsupport arithmetic upcast type");
                     }
                     
-                    return DiagnosticFactory.
+                    return _diagnosticFactory.
                         create_BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME
                             (getOperatorName(), result.toString());  
                 }
                 catch (TypeCoercionException tce)
                 {
                     // could happen when two strings are passed
-                    return DiagnosticFactory.
+                    return _diagnosticFactory.
                         create_BINARY_OP_COULD_NOT_COERCE_LITERALS_TO_NUMBERS();
                 }
             }
@@ -288,7 +292,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
         catch (TypeCoercionException tce)
         {
             // coercion to number failed, so no go
-            return DiagnosticFactory.
+            return _diagnosticFactory.
                 create_BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION(getOperatorName());
         }
     }

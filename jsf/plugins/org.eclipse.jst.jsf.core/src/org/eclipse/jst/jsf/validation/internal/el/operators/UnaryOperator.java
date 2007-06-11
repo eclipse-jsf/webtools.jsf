@@ -14,6 +14,7 @@ package org.eclipse.jst.jsf.validation.internal.el.operators;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.jst.jsf.common.internal.types.ValueType;
+import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 import org.eclipse.jst.jsp.core.internal.java.jspel.JSPELParserConstants;
 import org.eclipse.jst.jsp.core.internal.java.jspel.Token;
 
@@ -24,6 +25,11 @@ import org.eclipse.jst.jsp.core.internal.java.jspel.Token;
  */
 public abstract class UnaryOperator 
 {
+    /**
+     * The common factory used to construct diagnostics
+     */
+    protected final DiagnosticFactory     _diagnosticFactory;
+    
     /**
      * @param token
      * @return true if the token is a unary operator
@@ -38,9 +44,10 @@ public abstract class UnaryOperator
 
     /**
      * @param token 
+     * @param diagnosticFactory 
      * @return a new UnaryOperator instance matching token 
      */
-    public static UnaryOperator createUnaryOperator(Token token)
+    public static UnaryOperator createUnaryOperator(Token token, DiagnosticFactory diagnosticFactory)
     {
         if (!isUnaryOperator(token))
         {
@@ -50,14 +57,14 @@ public abstract class UnaryOperator
         switch(token.kind)
         {
             case JSPELParserConstants.MINUS:
-                return new MinusUnaryOperator();
+                return new MinusUnaryOperator(diagnosticFactory);
 
             case JSPELParserConstants.NOT1:
             case JSPELParserConstants.NOT2:
-                return new NotUnaryOperator();
+                return new NotUnaryOperator(diagnosticFactory);
                 
             case JSPELParserConstants.EMPTY:
-                return new EmptyUnaryOperator();
+                return new EmptyUnaryOperator(diagnosticFactory);
         }
 
         // should never get here because all four ops are covered
@@ -67,7 +74,11 @@ public abstract class UnaryOperator
     /**
      * Constructor
      */
-    UnaryOperator() {/* no construction or sub-classing outside package*/}
+    UnaryOperator(DiagnosticFactory diagnosticFactory) 
+    {
+        /* no construction or sub-classing outside package*/
+        _diagnosticFactory = diagnosticFactory;
+    }
     
     /**
      * If ValueType is a literal and the operation can be performed, then

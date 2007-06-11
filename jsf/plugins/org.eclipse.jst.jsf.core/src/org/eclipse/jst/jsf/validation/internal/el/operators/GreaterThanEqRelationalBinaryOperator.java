@@ -12,6 +12,8 @@
 
 package org.eclipse.jst.jsf.validation.internal.el.operators;
 
+import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
+
 /**
  * Encapsulates the EL greater-than-eq operator -- ">="/ge
  * 
@@ -21,8 +23,8 @@ package org.eclipse.jst.jsf.validation.internal.el.operators;
 /*package*/ class GreaterThanEqRelationalBinaryOperator extends
         LtGtRelationalBinaryOperator 
 {
-    GreaterThanEqRelationalBinaryOperator(String jsfVersion) {
-        super(jsfVersion);
+    GreaterThanEqRelationalBinaryOperator(final DiagnosticFactory diagnosticFactory, String jsfVersion) {
+        super(diagnosticFactory, jsfVersion);
     }
 
     protected boolean doRealOperation(Number firstArg, Number secondArg) 

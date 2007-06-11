@@ -20,6 +20,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
+import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
 
 /**
  * Workbench preference page for configuring JSF validation
@@ -40,14 +41,13 @@ public class JSFValidationPreferencePage extends PreferencePage implements
     public JSFValidationPreferencePage()
     {
         super(/* TODO: title*/);
-        _prefs = new ValidationPreferences();
-        _prefs.load(getPreferenceStore());
+        _prefs = new ValidationPreferences(getPreferenceStore());
+        _prefs.load();
     }
     
     protected Control createContents(Composite parent) 
     {
-        _elPrefPanel = new ELPrefPanel(parent);
-        _elPrefPanel.setModel(_prefs.getElPrefs());
+        _elPrefPanel = new ELPrefPanel(parent, (IWorkbenchPreferenceContainer) getContainer(), _prefs.getElPrefs());
         _elPrefPanel.refresh();
         return _elPrefPanel.getControl();
     }
@@ -59,6 +59,8 @@ public class JSFValidationPreferencePage extends PreferencePage implements
 
     protected void performApply() 
     {
+        // process changes before committing to pref store
+        _elPrefPanel.processChanges();
         _prefs.commit(getPreferenceStore());
     }
 

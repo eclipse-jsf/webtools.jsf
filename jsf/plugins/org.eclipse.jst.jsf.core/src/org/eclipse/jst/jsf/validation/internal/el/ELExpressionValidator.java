@@ -21,6 +21,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.jst.jsf.common.internal.types.CompositeType;
 import org.eclipse.jst.jsf.common.internal.types.SignatureBasedType;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
+import org.eclipse.jst.jsf.validation.internal.ELValidationPreferences;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.ValidationMessageFactory;
 import org.eclipse.jst.jsp.core.internal.java.jspel.ASTExpression;
@@ -43,23 +44,29 @@ public class ELExpressionValidator
     private final IStructuredDocumentContext        _context;
     private final String                            _elText;
     private final IFile                             _file;
+    private final DiagnosticFactory                 _diagnosticFactory;
+    private final ELValidationPreferences           _prefs;
     
-    private final List                              _syntaxProblems;
+    private final List<IMessage>                    _syntaxProblems;
     private ASTSemanticValidator                    _semanticValidator;
     
     /**
      * @param context
      * @param elText
      * @param file
+     * @param prefs 
      */
     public ELExpressionValidator(final IStructuredDocumentContext context,
                                  final String elText, 
-                                 final IFile file)
+                                 final IFile file,
+                                 final ELValidationPreferences prefs)
     {
         _context = context;
         _elText = elText;
         _file = file;
-        _syntaxProblems = new ArrayList();
+        _prefs = prefs;
+        _diagnosticFactory = new DiagnosticFactory();
+        _syntaxProblems = new ArrayList<IMessage>();
     }
     
     /**
@@ -92,8 +99,8 @@ public class ELExpressionValidator
 
                 _syntaxProblems.add(
                     ValidationMessageFactory.createFromDiagnostic(
-                            DiagnosticFactory.create_GENERAL_SYNTAX_ERROR(), 
-                                offset, length, _file));
+                            _diagnosticFactory.create_GENERAL_SYNTAX_ERROR(), 
+                                offset, length, _file, _prefs));
             }
             
             return expr;
@@ -104,8 +111,8 @@ public class ELExpressionValidator
             int length = curTok.endColumn - curTok.beginColumn + 1;
             _syntaxProblems.add(
                     ValidationMessageFactory.createFromDiagnostic(
-                            DiagnosticFactory.create_GENERAL_SYNTAX_ERROR(), 
-                                offset, length, _file));
+                            _diagnosticFactory.create_GENERAL_SYNTAX_ERROR(), 
+                                offset, length, _file, _prefs));
             return null;
         }
         catch (TokenMgrError te) {
@@ -113,8 +120,8 @@ public class ELExpressionValidator
             final int length = _elText.length();
             _syntaxProblems.add(
                     ValidationMessageFactory.createFromDiagnostic(
-                            DiagnosticFactory.create_GENERAL_SYNTAX_ERROR(), 
-                                offset, length, _file));
+                            _diagnosticFactory.create_GENERAL_SYNTAX_ERROR(), 
+                                offset, length, _file, _prefs));
             return null;
         }
     }
@@ -128,10 +135,15 @@ public class ELExpressionValidator
      */
     public void reportFindings(IValidator validator, IReporter reporter)
     {
-        for (final Iterator it = _syntaxProblems.iterator(); it.hasNext();)
+        for (final Iterator<IMessage> it = _syntaxProblems.iterator(); it.hasNext();)
         {
-            IMessage message = (IMessage) it.next();
-            reporter.addMessage(validator, message);
+            IMessage message = it.next();
+            
+            // don't report messages that have no severity level
+            if ((message.getSeverity() & IMessage.ALL_MESSAGES) != 0)
+            {
+                reporter.addMessage(validator, message);
+            }
         }
         
         if (_semanticValidator != null)
@@ -189,7 +201,7 @@ public class ELExpressionValidator
      */
     private void validateSemantics(ASTExpression expr,IStructuredDocumentContext context)
     {
-        _semanticValidator = new ASTSemanticValidator(expr, context);
+        _semanticValidator = new ASTSemanticValidator(expr, context, _prefs);
         _semanticValidator.validate();
     }
 }

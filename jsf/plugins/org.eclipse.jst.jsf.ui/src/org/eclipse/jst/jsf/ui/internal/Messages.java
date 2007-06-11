@@ -368,6 +368,11 @@ public class Messages extends NLS {
      */
     public static String JSFLibraryEditControl_ImplVersion_UNKNOWN;
 
+    /**
+     * see messages.properties
+     */
+    public static String JSFPreferences_RootPage_Description;
+    
     static {
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
 	}

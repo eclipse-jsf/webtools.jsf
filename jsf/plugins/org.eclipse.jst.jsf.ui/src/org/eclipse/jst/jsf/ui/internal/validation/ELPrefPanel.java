@@ -22,6 +22,8 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
 
 /**
  * Creates and manages a panel for configuring 
@@ -31,9 +33,10 @@ import org.eclipse.swt.widgets.Group;
 /*package*/ class ELPrefPanel 
 {
     /* view */
-    private final Group     _container;
-    private final Button    _chkBuildValidation;
-    private final Button    _chkIncrementalValidation;
+    private final Group                                 _container;
+    private final Button                                _chkBuildValidation;
+    private final Button                                _chkIncrementalValidation;
+    private final ProblemSeveritiesConfigurationBlock   _problemSeverities;
     
     /* model */
     private ELValidationPreferences  _prefs;
@@ -41,13 +44,20 @@ import org.eclipse.swt.widgets.Group;
     /**
      * Allocates new container in parent.
      * @param parent
+     * @param container 
+     * @param prefs 
      */
-    public ELPrefPanel(Composite parent)
+    public ELPrefPanel(Composite parent, IWorkbenchPreferenceContainer container, ELValidationPreferences prefs)
     {
+        _prefs = prefs;
+
         _container = new Group(parent, SWT.NONE);
         _container.setText(Messages.JSFValidationPreferencePage_ELPrefPanel_Title);
-        _container.setLayout(new RowLayout(SWT.VERTICAL));
-        
+        RowLayout rowLayout = new RowLayout(SWT.VERTICAL);
+        rowLayout.marginTop = 5;
+        rowLayout.marginLeft = 5; 
+        _container.setLayout(rowLayout);
+
         _chkBuildValidation = new Button(_container, SWT.CHECK);
         _chkBuildValidation.setText(Messages.JSFValidationPreferencePage_ELPrefPanel_BuildValidationCheckBoxTitle);
         _chkBuildValidation.addSelectionListener(new SelectionAdapter()
@@ -70,6 +80,10 @@ import org.eclipse.swt.widgets.Group;
             }
         });
 
+        new Label(_container, SWT.NONE);
+        
+        _problemSeverities = new ProblemSeveritiesConfigurationBlock(prefs, null, container);
+        _problemSeverities.createContents(_container);
     }
     
     /**
@@ -80,15 +94,6 @@ import org.eclipse.swt.widgets.Group;
         return _container;
     }
     
-    /**
-     * Sets the model for panel
-     * 
-     * @param prefs
-     */
-    public void setModel(ELValidationPreferences  prefs)
-    {
-        _prefs = prefs;
-    }
     
     /**
      * Refreshes the UI from the model
@@ -98,5 +103,13 @@ import org.eclipse.swt.widgets.Group;
         _chkBuildValidation.setSelection(_prefs.isEnableBuildValidation());
         _chkIncrementalValidation.
             setSelection(_prefs.isEnableIncrementalValidation());
+        _problemSeverities.updateControls();
+    }
+
+    /**
+     * 
+     */
+    public void processChanges() {
+        _problemSeverities.performOk();
     }
 }

@@ -14,6 +14,8 @@ package org.eclipse.jst.jsf.validation.internal.el.operators;
 
 import java.math.BigDecimal;
 
+import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
+
 /**
  * Represents the EL arithmetic subtraction binary operator
  * 
@@ -21,9 +23,14 @@ import java.math.BigDecimal;
  *
  */
 /*package*/  class SubtractArithmeticBinaryOperator extends
-        NoDivArithmeticBinaryOperator {
+        NoDivArithmeticBinaryOperator 
+{
 
     private static final String SUBTRACTION = "subtraction";
+
+    SubtractArithmeticBinaryOperator(DiagnosticFactory diagnosticFactory) {
+        super(diagnosticFactory);
+    }
 
     protected Long doRealOperation(Long firstArg, Long secondArg) 
     {
