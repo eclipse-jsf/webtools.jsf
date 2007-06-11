@@ -29,6 +29,7 @@ import org.eclipse.jst.jsf.core.tests.types.TypeComparatorTests;
 import org.eclipse.jst.jsf.core.tests.types.TypeTransformerTests;
 import org.eclipse.jst.jsf.core.tests.util.TestJDTBeanIntrospector;
 import org.eclipse.jst.jsf.core.tests.util.TestJDTBeanPropertyWorkingCopy;
+import org.eclipse.jst.jsf.core.tests.validation.TestJSPSemanticsValidator;
 
 /**
  * The full test suite for core.tests
@@ -65,6 +66,8 @@ public class AllTests
 		suite.addTestSuite(JSFLibraryConfigModelTestCases.class);
 		suite.addTestSuite(JSFLibraryRegistryUtilTestCases.class);
 
+		suite.addTestSuite(TestJSPSemanticsValidator.class);
+		
         // NOTE: migration tests affect workspace meta-data files, but they
         // should play nice with others
 		// BUT, to be on the safe side, always run them LAST.
