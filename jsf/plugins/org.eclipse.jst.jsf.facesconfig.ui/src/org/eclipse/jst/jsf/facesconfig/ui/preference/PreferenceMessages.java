@@ -197,4 +197,6 @@ public final class PreferenceMessages extends NLS {
      */
     public static String EditorPreferences_LABEL_ShowIntroEditor;
 
+	public static String GEMPreferences_description;
+
 }

@@ -52,7 +52,7 @@ public class GEMPreferences extends FieldEditorPreferencePage implements
     /**
      * Key for preference for whether or not the intro editor should be shown
      */
-    public final static String SHOW_INTRO_EDITOR = "ShowIntroEditor";
+    public final static String SHOW_INTRO_EDITOR = "ShowIntroEditor"; //$NON-NLS-1$
     
 	public final static String USE_SYSTEM_COLORS = "UseSystemColors"; //$NON-NLS-1$
 
@@ -62,13 +62,13 @@ public class GEMPreferences extends FieldEditorPreferencePage implements
 
 	public final static String FIGURE_LABEL_FONT_COLOR = "FigureLabelFontColor"; //$NON-NLS-1$
 
-	public final static String LABEL_PLACEMENT = "LabelPlacement";
+	public final static String LABEL_PLACEMENT = "LabelPlacement"; //$NON-NLS-1$
 
-	public final static String INPUT_PORT_COLOR = "InputPortColor";
+	public final static String INPUT_PORT_COLOR = "InputPortColor"; //$NON-NLS-1$
 
-	public final static String OUTPUT_PORT_COLOR = "OutputPortColor";
+	public final static String OUTPUT_PORT_COLOR = "OutputPortColor"; //$NON-NLS-1$
 
-	public final static String SHOW_LINE_LABELS = "ShowLineLabels";
+	public final static String SHOW_LINE_LABELS = "ShowLineLabels"; //$NON-NLS-1$
 
 	public final static String LINE_LABEL_FONT = "LineLabelFont"; //$NON-NLS-1$
 
@@ -92,22 +92,22 @@ public class GEMPreferences extends FieldEditorPreferencePage implements
 
 	public final static String GRID_COLOR = "GridColor"; //$NON-NLS-1$
 
-	public final static String LABEL_PLACEMENT_TOP = "Top";
+	public final static String LABEL_PLACEMENT_TOP = "Top"; //$NON-NLS-1$
 
-	public final static String LABEL_PLACEMENT_BOTTOM = "Bottom";
+	public final static String LABEL_PLACEMENT_BOTTOM = "Bottom"; //$NON-NLS-1$
 
-	public final static String LABEL_PLACEMENT_LEFT = "Left";
+	public final static String LABEL_PLACEMENT_LEFT = "Left"; //$NON-NLS-1$
 
-	public final static String LABEL_PLACEMENT_RIGHT = "Right";
+	public final static String LABEL_PLACEMENT_RIGHT = "Right"; //$NON-NLS-1$
 
 	// "Direct" routing was intended for connections lines without bendpoints;
 	// this has been removed because it is unnecessary.
 	// public final static String LINE_ROUTING_DIRECT = "Direct";
 	// "Manhattan" line routing creates orthogonal lines
-	public final static String LINE_ROUTING_MANHATTAN = "Manhattan";
+	public final static String LINE_ROUTING_MANHATTAN = "Manhattan"; //$NON-NLS-1$
 
 	// "Manual" routing allows user to create bendpoints
-	public final static String LINE_ROUTING_MANUAL = "Manaul";
+	public final static String LINE_ROUTING_MANUAL = "Manaul"; //$NON-NLS-1$
 
 	private final static String[][] m_lineRoutingLabels = {
 			// display, key
@@ -194,7 +194,7 @@ public class GEMPreferences extends FieldEditorPreferencePage implements
 		super(GRID);
 		// FIXME: we should be encapsulating what pref store is used for all callers of this class
 		setPreferenceStore(EditorPlugin.getDefault().getPreferenceStore());
-		setDescription("Preferences for the graphical page of FacesConfig editor.");
+		setDescription(PreferenceMessages.GEMPreferences_description);
 		initializeDefaults();
 	}
 

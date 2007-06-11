@@ -139,9 +139,9 @@ public class AddEditManagedPropertyDialog extends Dialog {
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
 		if (isNew)
-			newShell.setText("Add Managed Property");
+			newShell.setText(EditorMessages.AddEditManagedPropertyDialog_Add);
 		else
-			newShell.setText("Edit Managed Property");
+			newShell.setText(EditorMessages.AddEditManagedPropertyDialog_Edit);
 	}
 
 	/*
@@ -314,7 +314,7 @@ public class AddEditManagedPropertyDialog extends Dialog {
 			valueField.getTextControl(null, parent).setEditable(false);
 			valueField.setEnabled(true);
 		} else {
-			valueObject = "";
+			valueObject = ""; //$NON-NLS-1$
 			valueField.getTextControl(null, parent).setEditable(true);
 			valueField.setEnabled(true);
 		}
