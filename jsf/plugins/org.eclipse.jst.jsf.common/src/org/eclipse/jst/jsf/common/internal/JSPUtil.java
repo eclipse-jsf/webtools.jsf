@@ -33,23 +33,17 @@ public final class JSPUtil
      */
     public static boolean isJSPContentType(final IFile file)
     {
-        final IContentTypeManager typeManager = Platform.getContentTypeManager();
-        IContentType jspContentType = 
-            typeManager.getContentType(CTYPE_JSPSOURCE);
-        if (jspContentType != null
-                && jspContentType.isAssociatedWith(file.getName()))
+    	final boolean isJSPSource = isJSPSource(file);
+        if (isJSPSource)
         {
             return true;
         }
 
-        jspContentType = 
-            typeManager.getContentType(CTYPE_JSPFRAGMENTSOURCE); 
+        final boolean isJSPFragment = isJSPFragment(file);
         
-        // otherwise check if fragment
-        if (jspContentType != null
-                && jspContentType.isAssociatedWith(file.getName()))
+        if  (isJSPFragment)
         {
-            return true;
+        	return true;
         }
         
         return false;
@@ -59,4 +53,35 @@ public final class JSPUtil
     {
         // no instantiation
     }
+
+	/**
+	 * @param file
+	 * @return true if file is associated with the JSP source content type
+	 * (returns if JSP fragment)
+	 */
+	public static boolean isJSPSource(IFile file) {
+		return isAssociatedWithContentType(file, CTYPE_JSPSOURCE);
+	}
+
+	/**
+	 * @param file
+	 * @return true if the file is associated with the JSP fragment content type
+	 */
+	public static boolean isJSPFragment(IFile file) {
+		return isAssociatedWithContentType(file, CTYPE_JSPFRAGMENTSOURCE);
+	}
+	
+	private static boolean isAssociatedWithContentType(final IFile file, final String contentType)
+	{
+        final IContentTypeManager typeManager = Platform.getContentTypeManager();
+        IContentType jspContentType = 
+            typeManager.getContentType(contentType);
+        if (jspContentType != null
+                && jspContentType.isAssociatedWith(file.getName()))
+        {
+            return true;
+        }
+      
+        return false;
+	}
 }

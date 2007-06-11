@@ -28,6 +28,7 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jst.jsf.common.dom.TagIdentifier;
+import org.eclipse.jst.jsf.common.internal.JSPUtil;
 import org.eclipse.jst.jsf.common.internal.types.CompositeType;
 import org.eclipse.jst.jsf.common.internal.types.TypeComparator;
 import org.eclipse.jst.jsf.common.metadata.Entity;
@@ -95,6 +96,7 @@ public class JSPSemanticsValidator extends JSPValidator implements ISourceValida
 	}
     private final static ElementToTagIdentifierMapping elem2TagIdMapper = new ElementToTagIdentifierMapping();
 	private IDocument fDocument;
+	private int		  containmentValidationCount;  // = 0; 
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.jst.jsp.core.internal.validation.JSPValidator#validateFile(org.eclipse.core.resources.IFile, org.eclipse.wst.validation.internal.provisional.core.IReporter)
@@ -108,6 +110,8 @@ public class JSPSemanticsValidator extends JSPValidator implements ISourceValida
 			
 			if (model instanceof DOMModelForJSP)
 			{
+				// zero the containment validation count for each mondel
+				containmentValidationCount = 0;
     			DOMModelForJSP jspModel = (DOMModelForJSP) model;
     			IStructuredDocument structuredDoc = jspModel.getStructuredDocument();
     			IStructuredDocumentRegion curNode = structuredDoc.getFirstStructuredDocumentRegion();
@@ -132,6 +136,9 @@ public class JSPSemanticsValidator extends JSPValidator implements ISourceValida
         {
 			if (null != model)
 				model.releaseFromRead();
+			
+			// zero the containment count before exit
+			containmentValidationCount = 0;
 		}
 	}
 
@@ -483,14 +490,15 @@ public class JSPSemanticsValidator extends JSPValidator implements ISourceValida
 	 * @see org.eclipse.wst.sse.ui.internal.reconcile.validator.ISourceValidator#connect(org.eclipse.jface.text.IDocument)
 	 */
 	public void connect(IDocument document) {
-		fDocument = document;		
+		fDocument = document;
+		containmentValidationCount = 0; // ensure is zeroed before we start
 	}
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.wst.sse.ui.internal.reconcile.validator.ISourceValidator#disconnect(org.eclipse.jface.text.IDocument)
 	 */
 	public void disconnect(IDocument document) {
-        // do nothing; no disconnect logic
+		containmentValidationCount = 0; // ensure is zeroed when we are finished
 	}
 	
 	private String addDebugSpacer(int count){
@@ -522,6 +530,14 @@ public class JSPSemanticsValidator extends JSPValidator implements ISourceValida
     
     private void validateContainment(Element node, String uri, String tagName, IReporter reporter, IFile file, IStructuredDocumentContext context)
     {
+    	// don't validate JSP fragments since the necessary containment may existing
+    	// in the JSP files that include them
+    	// also only validate the first instance of containment violation in a file
+    	if (JSPUtil.isJSPFragment(file) || containmentValidationCount > 0)
+    	{
+    		return;
+    	}
+    	
         final IMetaDataModelContext modelContext = 
             new MetaDataModelContextImpl(file.getProject()
                 , MetaDataQueryHelper.TAGLIB_DOMAIN, uri);
@@ -584,6 +600,8 @@ public class JSPSemanticsValidator extends JSPValidator implements ISourceValida
 
                 if (diag.getSeverity() != Diagnostic.OK)
                 {
+                	containmentValidationCount++; // found a violation
+                	
                     final String messagePattern = "Tag {0} is missing required parent tag \"{1}\" ({2})";
 
                     List data = diag.getData();
@@ -602,6 +620,22 @@ public class JSPSemanticsValidator extends JSPValidator implements ISourceValida
                 }
             }
         }
+    }
+    
+    /**
+     * @return the test interface
+     */
+    public IJSPSemanticValidatorTest getTestInterface()
+    {
+    	return new IJSPSemanticValidatorTest()
+    	{
+			public void validateContainment(Element node, String uri,
+					String tagName, IReporter reporter, IFile file,
+					IStructuredDocumentContext context) {
+				
+				JSPSemanticsValidator.this.validateContainment(node, uri, tagName, reporter, file, context);
+			}
+    	};
     }
     
     // TODO: need a diagnostic factory
