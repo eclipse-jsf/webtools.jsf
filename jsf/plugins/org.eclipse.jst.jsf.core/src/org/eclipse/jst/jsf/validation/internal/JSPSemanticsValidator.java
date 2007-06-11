@@ -86,8 +86,9 @@ import org.w3c.dom.Node;
  * This implementation currently only validates attribute values. 
  * @author Gerry Kessler - Oracle
  */
-public class JSPSemanticsValidator extends JSPValidator implements ISourceValidator{
-// TODO: should the source validator be a separate class in jsp.ui?
+public class JSPSemanticsValidator extends JSPValidator implements ISourceValidator
+{
+    // TODO: should the source validator be a separate class in jsp.ui?
     // problem with simple split off is that preference must also be split off
 	static final boolean DEBUG;
 	static {
@@ -107,9 +108,13 @@ public class JSPSemanticsValidator extends JSPValidator implements ISourceValida
 			System.out.println("executing JSPSemanticsValidator.validateFile");
 		try {
 			model = StructuredModelManager.getModelManager().getModelForRead(file);
-			
+
 			if (model instanceof DOMModelForJSP)
 			{
+			    ValidationPreferences prefs= new ValidationPreferences(JSFCorePlugin.getDefault().getPreferenceStore());
+			    prefs.load();
+			    DiagnosticFactory diagnosticFactory = new DiagnosticFactory();
+
 				// zero the containment validation count for each mondel
 				containmentValidationCount = 0;
     			DOMModelForJSP jspModel = (DOMModelForJSP) model;
@@ -118,7 +123,7 @@ public class JSPSemanticsValidator extends JSPValidator implements ISourceValida
     			while (null != curNode && !reporter.isCancelled()) {
     				if (curNode.getFirstRegion().getType() == DOMRegionContext.XML_TAG_OPEN ) 
                     {
-    					validateTag(curNode, reporter, file, false);
+    					validateTag(curNode, reporter, file, false, prefs, diagnosticFactory);
     				}				
     				curNode = curNode.getNext();
     			}
@@ -149,15 +154,18 @@ public class JSPSemanticsValidator extends JSPValidator implements ISourceValida
 		if (DEBUG)
 			System.out.println("exec JSPSemanticsValidator.validateRegion");
 
+		ValidationPreferences prefs = new ValidationPreferences(JSFCorePlugin.getDefault().getPreferenceStore());
+		prefs.load();
+		DiagnosticFactory diagnosticFactory = new DiagnosticFactory();
 		if (fDocument instanceof IStructuredDocument) {
 			IStructuredDocument sDoc = (IStructuredDocument) fDocument;
 			IStructuredDocumentRegion[] regions = sDoc.getStructuredDocumentRegions(dirtyRegion.getOffset(), dirtyRegion.getLength());
 			if (regions != null){
-					validateTag(regions[0], reporter, getFile(helper), true);
+					validateTag(regions[0], reporter, getFile(helper), true, prefs, diagnosticFactory);
 			}
 		}		
 	}
-	
+
 	private IFile getFile(IValidationContext helper) {
 		String[] uris = helper.getURIs();
 		IWorkspaceRoot wsRoot = ResourcesPlugin.getWorkspace().getRoot();
@@ -183,22 +191,26 @@ public class JSPSemanticsValidator extends JSPValidator implements ISourceValida
 	 * @param isIncremental -- true if this validation is "as you type"
 	 *  
 	 */
-	private void validateTag(ITextRegionCollection container, IReporter reporter, IFile file, boolean isIncremental) {
+	private void validateTag(ITextRegionCollection container, IReporter reporter, IFile file, boolean isIncremental, ValidationPreferences prefs, DiagnosticFactory diagnosticFactory) 
+	{
 		ITextRegionCollection containerRegion = container;
 		Iterator regions = containerRegion.getRegions().iterator();
 		ITextRegion region = null;
 		String uri = null;
 		String tagName = null;
 		String attrName = null;		
-		while (regions.hasNext() && !reporter.isCancelled()) {
+		while (regions.hasNext() && !reporter.isCancelled()) 
+		{
 			region = (ITextRegion) regions.next();
 			String type = region.getType();
 			IDOMContextResolver resolver = null;
 			ITaglibContextResolver tagLibResolver = null; 
-			if (type != null  && (type == DOMRegionContext.XML_TAG_NAME || type == DOMRegionContext.XML_TAG_ATTRIBUTE_NAME || type == DOMRegionContext.XML_TAG_ATTRIBUTE_VALUE)){											
+			if (type != null  && (type == DOMRegionContext.XML_TAG_NAME || type == DOMRegionContext.XML_TAG_ATTRIBUTE_NAME || type == DOMRegionContext.XML_TAG_ATTRIBUTE_VALUE))
+			{											
 				IStructuredDocumentContext context = IStructuredDocumentContextFactory.INSTANCE.getContext(((IStructuredDocumentRegion)containerRegion).getParentDocument(), containerRegion.getStartOffset() + region.getStart());
 				resolver = IStructuredDocumentContextResolverFactory.INSTANCE.getDOMContextResolver(context);
-				if	(type == DOMRegionContext.XML_TAG_NAME) {					
+				if	(type == DOMRegionContext.XML_TAG_NAME) 
+				{					
 					tagLibResolver = IStructuredDocumentContextResolverFactory.INSTANCE.getTaglibContextResolver(context);
                     Node node = resolver.getNode();
 					tagName = resolver.getNode().getLocalName();
@@ -212,7 +224,8 @@ public class JSPSemanticsValidator extends JSPValidator implements ISourceValida
 					if (DEBUG)
 						System.out.println(addDebugSpacer(1)+"tagName= "+ (tagName!= null ? tagName : "null") +": uri= "+(uri != null ? uri : "null") );
 				} 
-				else if (type == DOMRegionContext.XML_TAG_ATTRIBUTE_NAME){
+				else if (type == DOMRegionContext.XML_TAG_ATTRIBUTE_NAME)
+				{
 					attrName = resolver.getNode().getNodeName();
 					if (DEBUG)
 						System.out.println(addDebugSpacer(2)+"attrName= "+(attrName != null ? attrName : "null" ));
@@ -221,7 +234,8 @@ public class JSPSemanticsValidator extends JSPValidator implements ISourceValida
 						// TODO: validateAttribute(context, region, uri, resolver.getNode(), file);
                     }
 				}
-				else if (type == DOMRegionContext.XML_TAG_ATTRIBUTE_VALUE){
+				else if (type == DOMRegionContext.XML_TAG_ATTRIBUTE_VALUE)
+				{
                     final String attributeVal = 
                         resolver.getNode().getNodeValue();    
 
@@ -235,7 +249,9 @@ public class JSPSemanticsValidator extends JSPValidator implements ISourceValida
                                               attributeVal,
                                               isIncremental,
                                               reporter,
-                                              file)
+                                              file,
+                                              prefs,
+                                              diagnosticFactory)
                                               )
                     {
                         // else validate as static attribute value 
@@ -263,7 +279,9 @@ public class JSPSemanticsValidator extends JSPValidator implements ISourceValida
                                          String attrValue,
                                          boolean isIncremental,
                                          IReporter reporter,
-                                         IFile  file)
+                                         IFile  file,
+                                         ValidationPreferences validationPrefs,
+                                         DiagnosticFactory  diagnosticFactory)
     {
         if (region instanceof ITextRegionCollection) {
             ITextRegionCollection parentRegion = ((ITextRegionCollection) region);
@@ -300,7 +318,7 @@ public class JSPSemanticsValidator extends JSPValidator implements ISourceValida
 
                             // EL validation is user configurable because
                             // it can be computationally costly.
-                            if (checkShouldValidateEL(isIncremental))
+                            if (checkShouldValidateEL(validationPrefs, isIncremental))
                             {
                                 List elVals = MetaDataEnabledProcessingFactory.getInstance().getAttributeValueRuntimeTypeFeatureProcessors(IValidELValues.class, elContext, uri, tagName, attrName);
                                 validateELExpression(context, 
@@ -309,7 +327,8 @@ public class JSPSemanticsValidator extends JSPValidator implements ISourceValida
                                                      attrValue,
                                                      elText, 
                                                      reporter, 
-                                                     file);
+                                                     file,
+                                                     validationPrefs.getElPrefs());
                             }
                         }
                         else if (content.getType() == DOMJSPRegionContexts.JSP_VBL_CLOSE)
@@ -318,10 +337,11 @@ public class JSPSemanticsValidator extends JSPValidator implements ISourceValida
                             final int length = 2;
                             
                             // detected empty EL expression
-                            reporter.addMessage(this, 
-                              ValidationMessageFactory.createFromDiagnostic(
-                                   DiagnosticFactory.create_EMPTY_EL_EXPRESSION(),
-                                       offset, length, file));
+                            IMessage message = ValidationMessageFactory.createFromDiagnostic(
+                                    diagnosticFactory.create_EMPTY_EL_EXPRESSION(),
+                                     offset, length, file, validationPrefs.getElPrefs());
+                            
+                            reportFinding(reporter, message);
                         }
                         
                         boolean foundClosingQuote = false;
@@ -339,11 +359,11 @@ public class JSPSemanticsValidator extends JSPValidator implements ISourceValida
                             int offset = context.getDocumentPosition()+1;
                             int length = parentRegion.getText().length();
 
-                            reporter.addMessage(this, 
-                              ValidationMessageFactory.
+                            reportFinding(reporter, 
+                               ValidationMessageFactory.
                                   createFromDiagnostic(
-                                          DiagnosticFactory.create_MISSING_CLOSING_EXPR_BRACKET(), 
-                                              offset, length, file));
+                                          diagnosticFactory.create_MISSING_CLOSING_EXPR_BRACKET(), 
+                                              offset, length, file, validationPrefs.getElPrefs()));
                         }
                         
                         return true;
@@ -360,11 +380,12 @@ public class JSPSemanticsValidator extends JSPValidator implements ISourceValida
                                      String attributeVal,
                                      String elText, 
                                      IReporter reporter, 
-                                     IFile file) 
+                                     IFile file,
+                                     ELValidationPreferences prefs) 
     {
         //Call EL validator which will perform at least the syntactical validation
         final ELExpressionValidator elValidator = 
-            new ELExpressionValidator(elContext, elText,file);
+            new ELExpressionValidator(elContext, elText,file,prefs);
         elValidator.validateXMLNode();
         elValidator.reportFindings(this, reporter);
         
@@ -390,7 +411,7 @@ public class JSPSemanticsValidator extends JSPValidator implements ISourceValida
 					message = createValidationMessage(context, attributeVal, IMessage.NORMAL_SEVERITY, e.getMessage(), file);						
 				}
 				if (message != null) {
-					reporter.addMessage(this, message);
+					reportFinding(reporter, message);
 				}
 			}
         }
@@ -435,7 +456,7 @@ public class JSPSemanticsValidator extends JSPValidator implements ISourceValida
 						IValidationMessage msg = (IValidationMessage)msgs.next();
 						IMessage message = createValidationMessage(context, attributeVal, getSeverity(msg.getSeverity()), msg.getMessage(), file);						
 						if (message != null) {
-							reporter.addMessage(this, message);
+							reportFinding(reporter, message);
 						}
 					}
 				}
@@ -516,9 +537,8 @@ public class JSPSemanticsValidator extends JSPValidator implements ISourceValida
      * @return true if user preferences say we should do EL validation,
      * false otherwise
      */
-    private boolean checkShouldValidateEL(boolean isIncremental)
+    private boolean checkShouldValidateEL(ValidationPreferences prefs, boolean isIncremental)
     {
-        final ValidationPreferences  prefs = new ValidationPreferences();
         prefs.load();
         if (isIncremental)
         {
@@ -615,7 +635,7 @@ public class JSPSemanticsValidator extends JSPValidator implements ISourceValida
                                 IMessage.NORMAL_SEVERITY, 
                                 MessageFormat.format(messagePattern, new Object[]{node.getNodeName(), missingParent.getTagName(), missingParent.getUri()})
                                 , file);
-                        reporter.addMessage(this, message);
+                        reportFinding(reporter, message);
                     }
                 }
             }
@@ -648,5 +668,13 @@ public class JSPSemanticsValidator extends JSPValidator implements ISourceValida
         message.setOffset(start);
         message.setLength(length);
         return message;
+    }
+    
+    private void reportFinding(IReporter reporter, IMessage message)
+    {
+        if ((message.getSeverity() & IMessage.ALL_MESSAGES) != 0)
+        {
+            reporter.addMessage(this, message);
+        }
     }
 }
