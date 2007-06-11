@@ -529,11 +529,9 @@ public final class DiagnosticFactory
     private BasicDiagnostic create(int diagnosticId, String message)
     {
         final int severity = ELValidationPreferences.getDefaultSeverity(diagnosticId);
-        final String messageWithId = 
-            MessageFormat.format("{1}: {0}", new Object[] {message, String.valueOf(diagnosticId)});
         return new BasicDiagnostic(severity, "" //$NON-NLS-1$
                 , diagnosticId
-                , messageWithId
+                , message
                 , null);
     }
 }

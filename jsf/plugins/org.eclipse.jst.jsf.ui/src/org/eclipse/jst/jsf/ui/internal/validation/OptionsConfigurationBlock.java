@@ -32,7 +32,6 @@ import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jst.jsf.core.internal.IJSFPreferenceModel;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.ui.internal.JSFUiPlugin;
-import org.eclipse.jst.jsf.validation.internal.ELValidationPreferences;
 import org.eclipse.jst.jsf.validation.internal.ELValidationPreferences.Severity;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
@@ -481,9 +480,7 @@ abstract class OptionsConfigurationBlock
         Label labelControl= new Label(parent, SWT.LEFT);
         labelControl.setFont(JFaceResources.getDialogFont());
         
-        // append the diagnostic id to the label
-        int diagnosticId = ELValidationPreferences.getIdByKey(key.fKey);
-        labelControl.setText(diagnosticId+": " + label);
+        labelControl.setText(label);
         labelControl.setLayoutData(gd);
                 
         Combo comboBox= newComboControl(parent, key, values, valueLabels);
