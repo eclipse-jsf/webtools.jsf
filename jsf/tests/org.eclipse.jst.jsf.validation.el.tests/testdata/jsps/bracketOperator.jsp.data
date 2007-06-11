@@ -79,7 +79,7 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
 		<h:outputText value="#{beanWithListProperties.arrayListProperty.someProperty"}/>
 		<h:outputText value="#{beanWithListProperties.arrayListProperty[-1]}"/>
 		<h:outputText value="#{listBean[-1]}"/>
-		<!-- because it is a list the bean properties are invisible
+		<!-- because it is a list the bean properties are invisible -->
 		<h:outputText value="#{listBean.stringProperty}"}/>
 		<h:outputText value="#{listBean['stringProperty']}"}/>
 		

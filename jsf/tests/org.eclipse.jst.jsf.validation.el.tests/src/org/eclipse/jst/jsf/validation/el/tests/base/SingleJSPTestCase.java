@@ -14,21 +14,15 @@ package org.eclipse.jst.jsf.validation.el.tests.base;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
-import org.eclipse.jst.jsf.validation.el.tests.ELValidationTestPlugin;
 import org.eclipse.wst.sse.core.StructuredModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
 import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
 
-public abstract class SingleJSPTestCase extends BaseTestCase 
+public abstract class SingleJSPTestCase extends JSPTestCase 
 {
-    public static final String   FACES_CONFIG_FILE = "facesConfigFile";
     
     public static final String FACES_CONFIG_FILE_NAME_1_1 = "/testdata/web/faces-config_1_1.xml.data";
     public static final String FACES_CONFIG_FILE_NAME_1_2 = "/testdata/web/faces-config_1_2.xml.data";
-    
-    private final       String          _defaultJSFVersion;
-    private  final      String          _defaultFacesConfigFile; 
     
     /**
      * The file handle to the JSP in the workspace
@@ -53,58 +47,25 @@ public abstract class SingleJSPTestCase extends BaseTestCase
      */
     protected final String                      _destFileName;
     
-    /**
-     * Test config
-     */
-    private MyConfiguration                 _myConfig;
 
     protected SingleJSPTestCase(final String srcFileName, final String destFileName, final String defaultJSFVersion, final String defaultFacesConfigFile)
     {
-        super(defaultJSFVersion);
+        super(defaultJSFVersion, defaultFacesConfigFile);
         _srcFileName = srcFileName;
         _destFileName = destFileName;
-        _defaultJSFVersion = defaultJSFVersion;
-        _defaultFacesConfigFile = defaultFacesConfigFile;
     }
     
-    protected void doStandaloneSetup() 
-    {
-        super.doStandaloneSetup();
-        
-        // NOTE: defaults to 1.1 tests for standalone testing
-        _myConfig = new MyConfiguration
-            (_defaultJSFVersion
-                    , _defaultFacesConfigFile);
-    }
-
-    protected void doTestSuiteSetup() 
-    {
-        super.doTestSuiteSetup();
-        
-        _myConfig = new MyConfiguration(_testConfiguration);
-    }
 
     protected void setUp() throws Exception 
     {
         super.setUp();
 
-        _testJSP = (IFile) _testEnv.loadResourceInWebRoot
-                            (ELValidationTestPlugin.getDefault().getBundle(),
-                               _srcFileName, _destFileName);
+        _testJSP = loadJSP(_srcFileName, _destFileName);
         
         _structuredModel = StructuredModelManager.getModelManager().getModelForRead(_testJSP);
         _structuredDocument = _structuredModel.getStructuredDocument();
     }
-    protected JSFFacetedTestEnvironment configureJSFEnvironment() throws Exception
-    {
-        JSFFacetedTestEnvironment jsfFacedEnv = new JSFFacetedTestEnvironment(_testEnv);
-        jsfFacedEnv.initialize(_myConfig.getFacetVersion());
 
-        _testEnv.loadResourceInWebRoot(ELValidationTestPlugin.getDefault().getBundle(),
-                                      _myConfig.getFacesConfigFile(), 
-                                      "/WEB-INF/faces-config.xml");
-        return jsfFacedEnv;
-    }
     protected void tearDown() throws Exception 
     {
         super.tearDown();
@@ -209,32 +170,5 @@ public abstract class SingleJSPTestCase extends BaseTestCase
     protected List assertSemanticWarning(int docPos, String expectedSignature, int expectedProblems) {
         return super.assertSemanticWarning(_structuredDocument, docPos, _testJSP, expectedSignature,
                 expectedProblems);
-    }
-    
-    private static class MyConfiguration
-    {
-        private final String        _facetVersion;
-        private final String        _facesConfigFile;
-        
-        MyConfiguration(String facetVersion, String facesConfigFile) 
-        {
-            super();
-            _facetVersion = facetVersion;
-            _facesConfigFile = facesConfigFile;
-        }
-        
-        MyConfiguration(TestConfiguration testConfiguration)
-        {
-            _facetVersion = testConfiguration.get(BaseTestCase.JSF_FACET_VERSION);
-            _facesConfigFile = testConfiguration.get(FACES_CONFIG_FILE);
-        }
-
-        public String getFacetVersion() {
-            return _facetVersion;
-        }
-
-        public String getFacesConfigFile() {
-            return _facesConfigFile;
-        }
     }
 }

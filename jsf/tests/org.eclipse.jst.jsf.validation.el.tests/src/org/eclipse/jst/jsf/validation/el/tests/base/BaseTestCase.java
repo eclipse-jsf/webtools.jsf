@@ -33,6 +33,7 @@ import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.ITextReg
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
 import org.eclipse.jst.jsf.core.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigManager;
 import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
 import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanType;
@@ -42,6 +43,7 @@ import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.jst.jsf.test.util.TestFileResource;
 import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
 import org.eclipse.jst.jsf.validation.el.tests.ELValidationTestPlugin;
+import org.eclipse.jst.jsf.validation.internal.ValidationPreferences;
 import org.eclipse.jst.jsf.validation.internal.el.ELExpressionValidator;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.IELLocalizedMessage;
 import org.eclipse.wst.common.project.facet.core.ProjectFacetsManager;
@@ -312,7 +314,11 @@ public abstract class BaseTestCase extends ConfigurableTestCase
         final String elText = getELText(document, docPos);
         final IStructuredDocumentContext context = 
             IStructuredDocumentContextFactory.INSTANCE.getContext(document, docPos);
-        return new ELExpressionValidator(context, elText, file);
+        final ValidationPreferences prefs =
+            new ValidationPreferences(JSFCorePlugin.getDefault().getPreferenceStore());
+        prefs.load();
+
+        return new ELExpressionValidator(context, elText, file, prefs.getElPrefs());
     }
     
     /**
@@ -481,28 +487,28 @@ public abstract class BaseTestCase extends ConfigurableTestCase
      * @param expectedMaxSeverity
      * @return the list of semantic problems found
      */
-    protected List assertSemanticProblems(IStructuredDocument document, 
-                                          int docPos, 
-                                          IFile file, 
-                                          String expectedSignature, 
-                                          int expectedProblems,
-                                          int expectedMaxSeverity)
+    protected List assertSemanticProblems(final IStructuredDocument document, 
+                                          final int docPos, 
+                                          final IFile file, 
+                                          final String expectedSignature, 
+                                          final int expectedProblems,
+                                          final int expectedMaxSeverity)
     {
         final ELExpressionValidator validator = 
                 createELValidator(document, docPos, file);
         validator.validateXMLNode();
-        
+
         if (expectedSignature != null
                 && validator.getExpressionType() != null)
         {
             assertEquals(expectedSignature, validator.getExpressionType().getSignatures()[0]);
         }
-        
+
         assertEquals(0, validator.getSyntaxProblems().size());
         final List problems = validator.getSemanticValidator().getMessages();
         assertEquals(expectedProblems, problems.size());
         int worstSeverity = 0;
-        
+
         for (final Iterator it = problems.iterator(); it.hasNext();)
         {
             IMessage message = (IMessage) it.next();
@@ -512,9 +518,8 @@ public abstract class BaseTestCase extends ConfigurableTestCase
             worstSeverity = maxSeverity(worstSeverity, message.getSeverity());
         }
 
-        
         assertEquals(expectedMaxSeverity, worstSeverity);
-        
+
         return problems;
     }
     

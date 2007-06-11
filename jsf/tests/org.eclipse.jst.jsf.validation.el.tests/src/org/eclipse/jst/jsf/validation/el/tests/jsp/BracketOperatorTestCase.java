@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2007 Oracle Corporation.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Cameron Bateman - initial implementation
+ *******************************************************************************/ 
 package org.eclipse.jst.jsf.validation.el.tests.jsp;
 
 import java.util.List;
@@ -77,11 +87,15 @@ public class BracketOperatorTestCase extends SingleJSPTestCase
         assertEquals("beanWithListProperties.arrayListProperty.someProperty", getELText(_structuredDocument,3845));
         assertEquals("beanWithListProperties.arrayListProperty[-1]", getELText(_structuredDocument,3929));
         assertEquals("listBean[-1]", getELText(_structuredDocument,4004));
-        assertEquals("myBean.stringArrayProperty['a']", getELText(_structuredDocument,4249));
-        assertEquals("beanWithListProperties.arrayListProperty['a']", getELText(_structuredDocument,4311));
-        assertEquals("beanWithListProperties.arrayListProperty[true]", getELText(_structuredDocument,4387));
-        assertEquals("listBean['a']", getELText(_structuredDocument,4464));
-        assertEquals("listBean[true]", getELText(_structuredDocument,4508));    }
+        assertEquals("listBean.stringProperty", getELText(_structuredDocument,4114));
+        assertEquals("listBean['stringProperty']", getELText(_structuredDocument,4169));
+        assertEquals("myBean.stringArrayProperty['a']", getELText(_structuredDocument,4253));
+        assertEquals("beanWithListProperties.arrayListProperty['a']", getELText(_structuredDocument,4315));
+        assertEquals("beanWithListProperties.arrayListProperty[true]", getELText(_structuredDocument,4391));
+        assertEquals("listBean['a']", getELText(_structuredDocument,4468));
+        assertEquals("listBean[true]", getELText(_structuredDocument,4512));    
+    }
+    
     
     public void testNoErrorExprs() 
     {
@@ -170,19 +184,22 @@ public class BracketOperatorTestCase extends SingleJSPTestCase
     
     public void testErrorExprs() 
     {        
-        List list = assertSemanticError(4249, null, 1);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
-        
-        list = assertSemanticError(4311, null, 1);
+        List list = assertSemanticError(4169, null, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
 
-        list = assertSemanticError(4387, null, 1);
+        list = assertSemanticError(4253, null, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
         
-        list = assertSemanticError(4464, null, 1);
+        list = assertSemanticError(4315, null, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
 
-        list = assertSemanticError(4508, null, 1);
+        list = assertSemanticError(4391, null, 1);
+        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
+        
+        list = assertSemanticError(4468, null, 1);
+        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
+
+        list = assertSemanticError(4512, null, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
     }
 }
