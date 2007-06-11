@@ -12,18 +12,18 @@ package org.eclipse.jst.jsf.common.metadata.tests;
 
 import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider;
-import org.eclipse.jst.jsf.common.metadata.internal.MetaDataModelContextImpl;
-import org.eclipse.jst.jsf.common.metadata.query.IMetaDataModelContext;
-import org.eclipse.jst.jsf.common.metadata.query.MetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.metadata.internal.TaglibDomainMetaDataModelContextImpl;
+import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
+import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
 
 public class ModelImplTests extends AbstractBaseMetaDataTestCase {
-	protected IMetaDataModelContext baseContext;
+	protected ITaglibDomainMetaDataModelContext baseContext;
 	Model model;
 	public void setUp() throws Exception {
 		super.setUp();
 		
-		baseContext = new MetaDataModelContextImpl(project, domain, baseTestUri);
-		model = MetaDataQueryHelper.getModel(baseContext);
+		baseContext = new TaglibDomainMetaDataModelContextImpl(domain, project, baseTestUri);
+		model = TaglibDomainMetaDataQueryHelper.getModel(baseContext);
 		assertNotNull(model);
 	}
 	public void testAccept() {

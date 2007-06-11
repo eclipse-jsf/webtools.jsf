@@ -12,19 +12,19 @@ package org.eclipse.jst.jsf.common.metadata.tests;
 
 import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.IncludeEntityGroup;
-import org.eclipse.jst.jsf.common.metadata.internal.MetaDataModelContextImpl;
-import org.eclipse.jst.jsf.common.metadata.query.IMetaDataModelContext;
-import org.eclipse.jst.jsf.common.metadata.query.MetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.metadata.internal.TaglibDomainMetaDataModelContextImpl;
+import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
+import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
 
 public class IncludeEntityGroupImplTests extends AbstractBaseMetaDataTestCase {
-	protected IMetaDataModelContext baseContext;
+	protected ITaglibDomainMetaDataModelContext baseContext;
 	IncludeEntityGroup group;
 	
 	public void setUp() throws Exception {
 		super.setUp();
 		
-		baseContext = new MetaDataModelContextImpl(project, domain, baseTestUri);
-		Entity entity = MetaDataQueryHelper.getEntity(baseContext, "loaded");
+		baseContext = new TaglibDomainMetaDataModelContextImpl(domain, project, baseTestUri);
+		Entity entity = TaglibDomainMetaDataQueryHelper.getEntity(baseContext, "loaded");
 		assertNotNull(entity);
 		group = (IncludeEntityGroup)entity.getIncludeGroups().get(0);
 	}

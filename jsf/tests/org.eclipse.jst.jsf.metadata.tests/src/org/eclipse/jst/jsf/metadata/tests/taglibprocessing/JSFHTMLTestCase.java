@@ -13,9 +13,8 @@ package org.eclipse.jst.jsf.metadata.tests.taglibprocessing;
 
 import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.Trait;
-import org.eclipse.jst.jsf.common.metadata.internal.MetaDataModelContextImpl;
-import org.eclipse.jst.jsf.common.metadata.query.IMetaDataModelContext;
-import org.eclipse.jst.jsf.common.metadata.query.MetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
+import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
 import org.eclipse.jst.jsf.common.metadata.tests.AbstractBaseMetaDataTestCase;
 import org.eclipse.jst.jsf.metadata.tests.MetadataTestsPlugin;
 import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfo;
@@ -24,7 +23,7 @@ import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.TagCreationInfo
 
 public class JSFHTMLTestCase extends AbstractBaseMetaDataTestCase{
 	private String _uri;
-	private IMetaDataModelContext _context;
+	private ITaglibDomainMetaDataModelContext _context;
 	
 	public void setUp() throws Exception{
 		super.setUp();
@@ -34,12 +33,12 @@ public class JSFHTMLTestCase extends AbstractBaseMetaDataTestCase{
 	            "/WEB-INF/lib/html_basic.tld");
 	    
 		_uri = "http://java.sun.com/jsf/html";
-		_context = new MetaDataModelContextImpl( project, MetaDataQueryHelper.TAGLIB_DOMAIN, _uri );
+		_context = TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(project, _uri);
 	}
 	
 	public void testPaletteInfos(){
-		Model model = MetaDataQueryHelper.getModel(_context);
-		Trait trait = MetaDataQueryHelper.getTrait(model , PaletteInfos.TRAIT_ID);
+		Model model = TaglibDomainMetaDataQueryHelper.getModel(_context);
+		Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(model , PaletteInfos.TRAIT_ID);
 		assertNotNull(trait);
 		assertTrue(trait.getValue() instanceof PaletteInfos);
 		PaletteInfos pis = (PaletteInfos)trait.getValue();
@@ -61,7 +60,7 @@ public class JSFHTMLTestCase extends AbstractBaseMetaDataTestCase{
 	}
 	
 	public void testCreateInfos(){
-		Trait trait = MetaDataQueryHelper.getTrait(_context , "dataTable", TagCreationInfo.TRAIT_ID);
+		Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(_context , "dataTable", TagCreationInfo.TRAIT_ID);
 		assertNotNull(trait);
 		assertTrue(trait.getValue() instanceof TagCreationInfo);
 		TagCreationInfo tci = (TagCreationInfo)trait.getValue();
@@ -70,7 +69,7 @@ public class JSFHTMLTestCase extends AbstractBaseMetaDataTestCase{
 		assertNotNull(template);
 		assertTrue(template instanceof String);
 
-		trait = MetaDataQueryHelper.getTrait(_context , "commandLink", TagCreationInfo.TRAIT_ID);
+		trait = TaglibDomainMetaDataQueryHelper.getTrait(_context , "commandLink", TagCreationInfo.TRAIT_ID);
 		assertNotNull(trait);
 		assertTrue(trait.getValue() instanceof TagCreationInfo);
 		tci = (TagCreationInfo)trait.getValue();
