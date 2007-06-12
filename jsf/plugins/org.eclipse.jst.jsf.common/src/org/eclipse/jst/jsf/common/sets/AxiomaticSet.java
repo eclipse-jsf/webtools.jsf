@@ -17,6 +17,8 @@ import java.util.Set;
  * extensionality (equality), union, intersection, 
  * relative complement (set subtraction) and empty (already 
  * supported by Set).
+ *
+ * <p><b>Provisional API - subject to change</b></p>
  * 
  * @author cbateman
  *
@@ -25,7 +27,7 @@ public interface AxiomaticSet extends Set
 {
     /**
      * Implementations should aim to provide O(mn) time cost
-     * where n is the number of elements in this set.  And
+     * where n is the number of elements in this set and
      * m is the cost to check membership of an element in this
      * set in toSet.  When a set is itself a member of a set,
      * the implementation must call isEquivalent on those subsets

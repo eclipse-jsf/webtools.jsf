@@ -11,8 +11,10 @@
 package org.eclipse.jst.jsf.core.tagmatcher;
 
 /**
- * Indicates an exception trapped will compiling or evaluating an
+ * Indicates an exception trapped while compiling or evaluating an
  * expression.
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  * 
  * @author cbateman
  *

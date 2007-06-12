@@ -15,7 +15,7 @@ import java.util.Iterator;
 import org.eclipse.jst.jsf.common.sets.AxiomaticSet;
 
 /**
- * A type of axiomatic set mapping that operates injectively on the output
+ * A type of axiomatic set mapping that operates injectively on the input
  * set to create its result set.  Note that the injection (one-to-oneness)
  * of the mapping is based on Java objects and not on the value of the object.
  * Therefore, the result set is not guaranteed to be injective on the basis
@@ -40,6 +40,8 @@ import org.eclipse.jst.jsf.common.sets.AxiomaticSet;
  * 
  * This interface should not be implemented by clients. Clients should
  * sub-class AbstractObjectInjectiveSetMapping to avoid future API breakage.
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  * 
  * @author cbateman
  *

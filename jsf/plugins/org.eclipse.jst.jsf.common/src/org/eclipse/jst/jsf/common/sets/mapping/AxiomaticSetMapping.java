@@ -20,6 +20,8 @@ import org.eclipse.jst.jsf.common.sets.AxiomaticSet;
  * 
  * AxiomaticSetMapping: set -> map(set)
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author cbateman
  *
  */

@@ -20,6 +20,8 @@ import org.eclipse.jst.jsf.common.sets.AxiomaticSet;
  * and returns a diagnostic that flags whether or not the set
  * satisfies that constraint or not.
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author cbateman
  *
  */

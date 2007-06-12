@@ -27,7 +27,9 @@ import org.w3c.dom.Node;
  *    the same node in the same DOM tree.
  * 2) evaluate must be able to be called on any number of nodes in order and always
  * produce the same result independent of what was called before and in what order.
- * 
+ *  
+ * <p><b>Provisional API - subject to change</b></p>
+ *
  * @author cbateman
  *
  */

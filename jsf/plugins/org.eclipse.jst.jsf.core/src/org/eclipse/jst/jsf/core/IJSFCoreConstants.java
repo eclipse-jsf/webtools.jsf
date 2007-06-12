@@ -13,6 +13,8 @@ package org.eclipse.jst.jsf.core;
 /**
  * JSF Core framework constants
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author cbateman
  *
  */

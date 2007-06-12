@@ -15,6 +15,9 @@ import org.eclipse.jst.jsf.common.sets.AxiomaticSet;
 
 /**
  * A set constraint that is specific to members of the set.
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author cbateman
  *
  */

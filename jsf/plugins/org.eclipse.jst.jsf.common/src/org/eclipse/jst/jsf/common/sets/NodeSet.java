@@ -24,6 +24,8 @@ import org.w3c.dom.NodeList;
  * 
  * This set is immutable (mutation methods throw exceptions)
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author cbateman
  *
  */

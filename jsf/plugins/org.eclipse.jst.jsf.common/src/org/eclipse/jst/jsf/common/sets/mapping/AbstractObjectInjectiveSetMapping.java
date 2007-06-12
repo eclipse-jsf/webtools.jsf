@@ -18,6 +18,8 @@ import org.eclipse.jst.jsf.common.sets.ConcreteAxiomaticSet;
 /**
  * Super-class of all ObjectInjectiveSetMapping.
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author cbateman
  *
  */

@@ -14,6 +14,9 @@ import java.util.HashSet;
 
 /**
  * Implements a simple axiomatic set based on a hashset
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author cbateman
  *
  */

@@ -33,6 +33,7 @@ import org.osgi.framework.Bundle;
 /**
  * This is the central singleton for the My edit plugin.
  * <!-- begin-user-doc -->
+ * This class is not API.
  * <!-- end-user-doc -->
  * @generated
  */

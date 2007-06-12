@@ -23,6 +23,8 @@ import javax.xml.namespace.QName;
  * All tag TagIdentifier<i>s</i> should be considered immutable and idempotent.  
  * TagIdentifier instances may be cached by the factory.
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author cbateman
  *
  */

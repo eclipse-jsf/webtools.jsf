@@ -31,6 +31,8 @@ import org.w3c.dom.NodeList;
  * an empty set (no match) unless the strictMatching flag is set to true, in which
  * case it will re-throw the exception wrapped as an unchecked EvaluationException.
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author cbateman
  *
  */

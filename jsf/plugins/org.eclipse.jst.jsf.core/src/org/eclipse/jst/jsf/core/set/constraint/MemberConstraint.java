@@ -16,8 +16,10 @@ import org.eclipse.jst.jsf.common.sets.AxiomaticSet;
 import org.eclipse.jst.jsf.common.sets.constraint.AbstractSetConstraint;
 
 /**
- * A set constraints that satisfies if a test set contains all of the specified
+ * A set constraint that is satisfied if a test set contains all of the specified
  * mustBeMembers.
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  * 
  * @author cbateman
  *

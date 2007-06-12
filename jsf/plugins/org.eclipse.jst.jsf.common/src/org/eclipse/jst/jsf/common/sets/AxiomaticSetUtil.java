@@ -16,6 +16,8 @@ import java.util.Set;
 /**
  * Generic (unoptimized) utilities for doing set operations.
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author cbateman
  *
  */
@@ -41,7 +43,7 @@ public class AxiomaticSetUtil
      */
     public static void intersect(AxiomaticSet newSet, AxiomaticSet firstSet, AxiomaticSet secondSet)
     {
-        // minor optimization: always iterator through the smaller of the
+        // minor optimization: always iterate through the smaller of the
         // two sets.  This way we iterate through the smallest number
         // of elements
         Iterator it = null;

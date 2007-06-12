@@ -23,6 +23,8 @@ import org.w3c.dom.Element;
  * maintain immutability and idempotency as long as the input dom elements
  * do not change. 
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author cbateman
  *
  */
