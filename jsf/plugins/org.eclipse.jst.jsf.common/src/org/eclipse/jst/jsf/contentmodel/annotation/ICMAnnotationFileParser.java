@@ -23,7 +23,7 @@ import org.eclipse.jst.jsf.contentmodel.annotation.internal.ICMAnnotationAdvisor
  * @see org.eclipse.jst.jsf.contentmodel.annotation.internal.ICMAnnotationAdvisor
  * @see org.eclipse.jst.jsf.contentmodel.annotation.CMAnnotationSourceFileLocator
  * 
- * @deprecated see common.metadata package
+ * @deprecated see <code>org.eclipse.jst.jsf.common.metadata</code>  package
  */
 public interface ICMAnnotationFileParser {
 

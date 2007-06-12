@@ -14,6 +14,8 @@ package org.eclipse.jst.jsf.metadataprocessors.features;
 
 /**
  * Exception
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  */
 public class ELIsNotValidException extends Exception {
 	private static final long serialVersionUID = 1L;

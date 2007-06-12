@@ -43,6 +43,8 @@ import org.osgi.framework.Bundle;
 
 /**
  * Abstract meta-data processing feature representing a faces-config type
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  * @author Gerry Kessler - Oracle
  */
 public abstract class FacesConfigIdentifierFeatures extends AbstractMetaDataEnabledFeature  

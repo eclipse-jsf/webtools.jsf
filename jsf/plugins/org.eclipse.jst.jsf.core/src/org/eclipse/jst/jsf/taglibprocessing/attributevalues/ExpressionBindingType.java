@@ -16,6 +16,8 @@ import java.util.List;
 
 /**
  * Abstract meta-data processing type representing an expression binding attribute value runtime type
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  * @author Gerry Kessler - Oracle
  */
 public abstract class ExpressionBindingType extends BindingType  {

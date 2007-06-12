@@ -18,7 +18,7 @@ package org.eclipse.jst.jsf.contentmodel.annotation;
  * Not intended to be implemented by clients.
  * @author Gerry Kessler - Oracle
  * 
- * @deprecated see common.metadata package
+ * @deprecated see <code>org.eclipse.jst.jsf.common.metadata</code>  package
  */
 public interface ICMAnnotationSourceFileInfo {
 	/**

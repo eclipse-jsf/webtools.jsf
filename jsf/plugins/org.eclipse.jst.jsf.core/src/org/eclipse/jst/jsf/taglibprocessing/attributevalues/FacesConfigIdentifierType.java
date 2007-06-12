@@ -13,6 +13,8 @@ package org.eclipse.jst.jsf.taglibprocessing.attributevalues;
 
 /**
  * Meta-data processing type representing a faces-config type
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  * @author Gerry Kessler - Oracle
  */
 public abstract class FacesConfigIdentifierType extends IdentifierType	 {

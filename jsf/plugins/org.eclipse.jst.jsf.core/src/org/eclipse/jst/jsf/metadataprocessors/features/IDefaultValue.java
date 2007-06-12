@@ -19,7 +19,7 @@ import org.eclipse.jst.jsf.metadataprocessors.IMetaDataEnabledFeature;
  * 
  * @author Gerry Kessler - Oracle
  * 
- * Experimental
+ * <p><b>Provisional API - subject to change</b></p>
  *
  */
 public interface IDefaultValue extends IMetaDataEnabledFeature {

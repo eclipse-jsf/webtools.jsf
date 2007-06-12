@@ -21,6 +21,7 @@ import org.eclipse.jst.jsf.metadataprocessors.features.IValidELValues;
  * Meta-data processing type representing a Value Bound attribute value runtime type
  * that implements IValidValues
  * 
+ * <p><b>Provisional API - subject to change</b></p>
  * @author Gerry Kessler - Oracle
  */
 public class ValueBindingType extends ExpressionBindingType implements IValidELValues{

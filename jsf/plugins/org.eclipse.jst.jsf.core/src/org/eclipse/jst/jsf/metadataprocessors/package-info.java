@@ -9,14 +9,13 @@
  *    Gerry Kessler/Oracle - initial API and implementation
  *    
  ********************************************************************************/
-package org.eclipse.jst.jsf.taglibprocessing.attributevalues;
 
 /**
- * Abstract meta-data processing type representing an Object attribute value runtime type
- * 
+ * This package is used to provide tooling support for taglibraries using the Design-time Metadata
+ * feature (org.eclipse.jst.jsf.common.metadata).<p>
+ * The MetaDataEnabledProcessingFactory singleton instance is the entry point.   The tool requests
+ * the IMetaDataEnabled feature for a particular tag attribute, and through metadata, will locate the 
+ * "metadata processing" feature using the attribute value runtime type system.
  * <p><b>Provisional API - subject to change</b></p>
- * @author Gerry Kessler - Oracle
  */
-public abstract class ObjectType extends DirectBindingType {
-    // TODO: ????
-}
+package org.eclipse.jst.jsf.metadataprocessors;

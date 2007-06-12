@@ -18,10 +18,9 @@ import org.eclipse.jst.jsf.metadataprocessors.IMetaDataEnabledFeature;
 
 /**
  * Interface for providing possible values.
- *  
- * @author Gerry Kessler - Oracle
  * 
- * Experimental
+ * <p><b>Provisional API - subject to change</b></p>
+ * @author Gerry Kessler - Oracle
  *
  */
 public interface IPossibleValues extends IMetaDataEnabledFeature{

@@ -12,6 +12,8 @@
 package org.eclipse.jst.jsf.taglibprocessing.attributevalues;
 /**
  * Abstract meta-data processing type
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  * @author Gerry Kessler - Oracle
  */
 public abstract class DirectBindingType extends BindingType {

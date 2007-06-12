@@ -18,6 +18,7 @@ import org.eclipse.jst.jsf.metadataprocessors.IMetaDataEnabledFeature;
  * @author Gerry Kessler - Oracle
  * 
  * Experimental - not currently used
+ * <p><b>Provisional API - subject to change</b></p>
  *
  */
 public interface ICreateValues extends IMetaDataEnabledFeature{

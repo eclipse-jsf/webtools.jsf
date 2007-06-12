@@ -37,6 +37,8 @@ import org.osgi.framework.Bundle;
 
 /**
  * Meta-data processing type representing an "action" attribute
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  * @author Gerry Kessler - Oracle
  */
 public class ActionType extends MethodBindingType implements IPossibleValues{

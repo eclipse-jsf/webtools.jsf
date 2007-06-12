@@ -19,6 +19,7 @@ import org.eclipse.jst.jsf.metadataprocessors.features.IValidValues;
  * Meta-data processing type representing a "value" attribute 
  * that implements IValidValues and IValidELValues
  * 
+ * <p><b>Provisional API - subject to change</b></p>
  * @author Gerry Kessler - Oracle
  */
 public class ValueType extends ValueBindingType implements IValidValues, IValidELValues {

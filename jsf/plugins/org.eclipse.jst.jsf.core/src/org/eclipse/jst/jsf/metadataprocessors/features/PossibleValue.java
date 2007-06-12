@@ -17,6 +17,8 @@ import org.eclipse.jface.resource.ImageDescriptor;
 
 /**
  * Implements {@link IPossibleValues}
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  *
  */
 public class PossibleValue implements IPossibleValue {

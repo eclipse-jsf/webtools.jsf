@@ -16,6 +16,8 @@ import org.eclipse.jst.jsf.metadataprocessors.AbstractRootTypeDescriptor;
 
 /**
  * Abstract meta-data processing type representing a binding
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  * @author Gerry Kessler - Oracle
  */
 public abstract class BindingType extends AbstractRootTypeDescriptor{

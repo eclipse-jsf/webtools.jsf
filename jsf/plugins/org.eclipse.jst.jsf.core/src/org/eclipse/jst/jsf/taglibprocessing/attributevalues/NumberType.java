@@ -15,6 +15,8 @@ import org.eclipse.jst.jsf.metadataprocessors.features.IValidValues;
 
 /**
  * Abstract meta-data processing type representing a numeric attribute value runtime type
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  * @author Gerry Kessler - Oracle
  */
 public abstract class NumberType extends EnumerationType{

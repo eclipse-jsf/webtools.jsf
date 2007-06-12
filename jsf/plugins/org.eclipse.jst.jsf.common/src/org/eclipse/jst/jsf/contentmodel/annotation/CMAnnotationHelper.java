@@ -40,7 +40,7 @@ import org.eclipse.jst.jsf.contentmodel.annotation.internal.CMAnnotationMap;
  * 
  * also see org.eclipse.jst.jsf.contentmodel.annotations.annotationFiles extension-point
  * 
- * @deprecated see common.metadata package
+ * @deprecated see <code>org.eclipse.jst.jsf.common.metadata</code>  package
  */
 public class CMAnnotationHelper {
 	private static List EMPTY_LIST = new ArrayList(0);

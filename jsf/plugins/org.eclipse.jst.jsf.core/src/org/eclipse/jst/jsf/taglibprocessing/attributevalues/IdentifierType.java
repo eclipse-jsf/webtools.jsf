@@ -13,6 +13,8 @@ package org.eclipse.jst.jsf.taglibprocessing.attributevalues;
 
 /**
  * Abstract meta-data processing type representing an identifier binding type
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  * @author Gerry Kessler - Oracle
  */
 public abstract class IdentifierType extends DirectBindingType {

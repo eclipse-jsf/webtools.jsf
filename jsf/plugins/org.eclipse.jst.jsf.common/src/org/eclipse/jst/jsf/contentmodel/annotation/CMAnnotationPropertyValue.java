@@ -19,7 +19,7 @@ import java.util.List;
  * 
  * @author Gerry Kessler - Oracle
  *
- * @deprecated see common.metadata package
+ * @deprecated see <code>org.eclipse.jst.jsf.common.metadata</code>  package
  */
 public class CMAnnotationPropertyValue {
 	private ICMAnnotationSourceFileInfo fileInfo;

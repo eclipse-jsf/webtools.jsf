@@ -27,6 +27,8 @@ import org.eclipse.jst.jsf.metadataprocessors.features.ValidationMessage;
 
 /**
  * Abstract meta-data processing type representing an enumeration attribute value runtime type
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  * @author Gerry Kessler - Oracle
  */
 public abstract class EnumerationType extends AbstractRootTypeDescriptor implements IValidValues, IDefaultValue, IValidELValues{

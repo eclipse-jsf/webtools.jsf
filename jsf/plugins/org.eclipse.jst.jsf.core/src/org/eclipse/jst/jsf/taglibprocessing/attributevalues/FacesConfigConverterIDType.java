@@ -12,6 +12,8 @@ package org.eclipse.jst.jsf.taglibprocessing.attributevalues;
 
 /**
  * Type representing a FacesConfig Converter attribute
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  */
 public class FacesConfigConverterIDType extends FacesConfigIdentifierType {
     // FIXME: why do we have an empty class?

@@ -24,6 +24,7 @@ import org.eclipse.jst.jsf.metadataprocessors.features.PossibleValue;
  * Meta-data processing type representing a String attribute value runtime type
  * that implements IPossibleValues, IValidValues and IDefaultValues
  * 
+ * <p><b>Provisional API - subject to change</b></p>
  * @author Gerry Kessler - Oracle
  */
 public class StringType extends EnumerationType implements IValidValues,

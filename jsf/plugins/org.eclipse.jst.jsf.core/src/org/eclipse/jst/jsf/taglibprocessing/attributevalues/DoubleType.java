@@ -17,6 +17,8 @@ import org.eclipse.osgi.util.NLS;
 
 /**
  * Meta-data processing type representing a "double" attribute value runtime type
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  * @author Gerry Kessler - Oracle
  */
 public class DoubleType extends NumberType {

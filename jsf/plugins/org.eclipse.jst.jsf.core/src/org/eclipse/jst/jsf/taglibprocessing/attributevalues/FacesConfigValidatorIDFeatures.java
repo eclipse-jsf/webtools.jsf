@@ -24,6 +24,8 @@ import org.eclipse.osgi.util.NLS;
 
 /**
  * ValidatorID attribute feature
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  *
  */
 public class FacesConfigValidatorIDFeatures extends FacesConfigIdentifierFeatures {

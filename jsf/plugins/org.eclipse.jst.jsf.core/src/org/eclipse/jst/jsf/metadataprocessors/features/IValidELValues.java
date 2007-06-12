@@ -17,7 +17,8 @@ import org.eclipse.jst.jsf.metadataprocessors.IMetaDataEnabledFeature;
 
 /**
  * An {@link IMetaDataEnabledFeature} for semantic validation of EL Values 
- * Experimental and subject to change
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  */
 public interface IValidELValues extends IMetaDataEnabledFeature {
 	/**

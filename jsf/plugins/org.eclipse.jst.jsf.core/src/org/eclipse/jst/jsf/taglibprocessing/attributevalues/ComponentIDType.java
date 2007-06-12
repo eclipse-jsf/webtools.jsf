@@ -21,6 +21,8 @@ import org.eclipse.jst.jsf.metadataprocessors.features.ValidationMessage;
 
 /**
  * Meta-data processing type representing an "id" attribute
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  * @author Gerry Kessler - Oracle
  */
 public class ComponentIDType extends ValueBindingType implements

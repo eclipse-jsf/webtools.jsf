@@ -19,6 +19,7 @@ import org.eclipse.osgi.util.NLS;
  * Meta-data processing type representing a long attribute value runtime type
  * that implements IValidValues, IDefaultValue, IValidELValues
  *  
+ * <p><b>Provisional API - subject to change</b></p>
  * @author Gerry Kessler - Oracle
  */
 public class LongType extends NumberType {

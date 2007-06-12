@@ -52,6 +52,7 @@ import org.eclipse.jst.jsf.metadataprocessors.features.ValidationMessage;
  * 
  * (Until https://bugs.eclipse.org/bugs/show_bug.cgi?id=142044 is fixed, only the first found will be used)
  * 
+ * <p><b>Provisional API - subject to change</b></p>
  * @author Gerry Kessler - Oracle
  *
  */

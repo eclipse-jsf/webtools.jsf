@@ -15,8 +15,8 @@ package org.eclipse.jst.jsf.metadataprocessors;
 
 /**
  * Type descriptor that is created if no class if provided for the implementation 
- * in the AttributeValueRuntimeTypes extension point
- * 
+ * in the AttributeValueRuntimeTypes extension point.
+ * <p><b>Provisional API - subject to change</b></p>
  * @author Gerry Kessler - Oracle
  *
  */

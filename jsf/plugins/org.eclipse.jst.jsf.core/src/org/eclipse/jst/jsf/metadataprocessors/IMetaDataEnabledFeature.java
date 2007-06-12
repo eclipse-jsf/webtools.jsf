@@ -17,7 +17,7 @@ import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext
 /**
  * Required interface used by the MetaData feature processing framework.
  * All features must extend this interface.
- * 
+ * <p><b>Provisional API - subject to change</b></p>
  * @author Gerry Kessler - Oracle
  *
  */

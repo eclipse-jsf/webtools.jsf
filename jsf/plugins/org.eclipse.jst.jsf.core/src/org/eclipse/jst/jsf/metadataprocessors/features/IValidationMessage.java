@@ -14,6 +14,8 @@ package org.eclipse.jst.jsf.metadataprocessors.features;
 
 /**
  * Interface for validation messages for metadata features
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  */
 public interface IValidationMessage {
 	/**

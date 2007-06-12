@@ -16,7 +16,7 @@ package org.eclipse.jst.jsf.metadataprocessors;
 /**
  * Interface representing the information contained by the type registries.
  * Encapsulates the IConfigurationElement information.
- * 
+ * <p><b>Provisional API - subject to change</b></p>
  * @author Gerry Kessler - Oracle
  *
  */

@@ -25,7 +25,7 @@ import java.util.ResourceBundle;
  * Implementors must provide a zero-argument constructor.
  * 
  * @author Gerry Kessler - Oracle
- * @deprecated see common.metadata package
+ * @deprecated see <code>org.eclipse.jst.jsf.common.metadata</code>  package
  */ 
 public abstract class CMAnnotationSourceFileLocator{
 	/**

@@ -18,7 +18,7 @@ import org.eclipse.jst.jsf.common.metadata.Trait;
 
 /**
  * The current metadata model context being used for processing. 
- * 
+ * <p><b>Provisional API - subject to change</b></p>
  * @author Gerry Kessler - Oracle
  *
  */

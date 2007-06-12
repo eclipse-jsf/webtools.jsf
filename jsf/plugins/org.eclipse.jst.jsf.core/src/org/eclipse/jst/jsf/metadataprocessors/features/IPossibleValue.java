@@ -17,6 +17,8 @@ import org.eclipse.jface.resource.ImageDescriptor;
 /**
  * Interface for providing lists of possible values
  * Values can be different than displayed values.
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  *
  */
 public interface IPossibleValue {

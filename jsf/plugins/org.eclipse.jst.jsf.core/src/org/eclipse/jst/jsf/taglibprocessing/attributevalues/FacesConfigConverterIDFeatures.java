@@ -24,6 +24,8 @@ import org.eclipse.osgi.util.NLS;
 
 /**
  * Meta-data processing feature representing an attribute value requiring a "converterid"
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  * @author Gerry Kessler - Oracle
  */
 public class FacesConfigConverterIDFeatures extends FacesConfigIdentifierFeatures {

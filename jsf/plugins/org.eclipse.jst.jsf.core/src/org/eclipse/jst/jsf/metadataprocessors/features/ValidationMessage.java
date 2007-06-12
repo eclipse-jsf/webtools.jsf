@@ -16,7 +16,8 @@ import org.eclipse.core.runtime.IStatus;
 
 /**
  * Metadata Validation Message implementation 
- *
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  */
 public class ValidationMessage implements IValidationMessage {
 

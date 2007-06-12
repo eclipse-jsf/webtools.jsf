@@ -23,6 +23,7 @@ import org.eclipse.jst.jsf.metadataprocessors.features.PossibleValue;
  * Meta-data processing type representing a boolean attribute value runtime type
  * that implements IPossibleValues, IValidValues, IDefaultValue, IValidELValues
  * 
+ * <p><b>Provisional API - subject to change</b></p>
  * @author Gerry Kessler - Oracle
  */
 public class BooleanType extends EnumerationType implements IValidValues, IPossibleValues, IDefaultValue{

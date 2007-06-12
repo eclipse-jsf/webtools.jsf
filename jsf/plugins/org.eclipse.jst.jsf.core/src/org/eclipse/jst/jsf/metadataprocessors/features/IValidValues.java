@@ -18,7 +18,8 @@ import org.eclipse.jst.jsf.metadataprocessors.IMetaDataEnabledFeature;
 
 /**
  * An {@link IMetaDataEnabledFeature} for validating values using metadata
- *
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  */
 public interface IValidValues extends IMetaDataEnabledFeature{
 	/**

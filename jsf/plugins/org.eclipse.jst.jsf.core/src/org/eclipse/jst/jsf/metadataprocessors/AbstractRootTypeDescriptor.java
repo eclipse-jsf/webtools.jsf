@@ -25,7 +25,7 @@ import org.eclipse.jst.jsf.metadataprocessors.internal.MetaDataEnabledFeatureReg
  * Default implementation that a metadata type should strongly consider for using as it's root.
  * This implementation allows for a class implementing {@link ITypeDescriptor} to also contain features so
  * that it is not necessary to declare the features using the MetaDataEnabledFeatures ext-pt 
- * 
+ * <p><b>Provisional API - subject to change</b></p>
  * @author Gerry Kessler - Oracle
  */
 public abstract class AbstractRootTypeDescriptor extends AbstractMetaDataEnabledFeature

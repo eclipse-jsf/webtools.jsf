@@ -9,14 +9,15 @@
  *    Gerry Kessler/Oracle - initial API and implementation
  *    
  ********************************************************************************/
-package org.eclipse.jst.jsf.taglibprocessing.attributevalues;
 
 /**
- * Abstract meta-data processing type representing an Object attribute value runtime type
+ * This package is used to provide tooling services for tag attribute values
+ * based on the org.eclipse.jst.jsf.core.AttributeValueRuntimeTypes. 
+ * 
+ * New features can added to the system using the org.eclipse.jst.jsf.core.MetaDataEnabledFeatures 
+ * extension-point.  This extension point provides the binding of a AttributeValueRuntimeTypes to a feature
+ * so that new behaviors can be added to existing types. 
  * 
  * <p><b>Provisional API - subject to change</b></p>
- * @author Gerry Kessler - Oracle
  */
-public abstract class ObjectType extends DirectBindingType {
-    // TODO: ????
-}
+package org.eclipse.jst.jsf.metadataprocessors.features;

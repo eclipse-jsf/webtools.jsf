@@ -15,10 +15,10 @@ package org.eclipse.jst.jsf.metadataprocessors;
 import java.util.List;
 
 /**
- * Interface describing the runtime type of a metadata enabled annotation.   
+ * Interface describing the runtime type of a metadata enabled annotation. 
  * The type descriptor will load the feature adapters for a certain kind of 
- * feature that it supports.  The type descriptor registered by an extension point.
- * 
+ * feature that it supports.  The type descriptor is registered by an extension point.
+ * <p><b>Provisional API - subject to change</b></p>
  * @see IMetaDataEnabledFeature
  * @see AbstractRootTypeDescriptor
  * @see org.eclipse.jst.jsf.metadataprocessors.internal.AbstractMetaDataEnabledTypeFactory
