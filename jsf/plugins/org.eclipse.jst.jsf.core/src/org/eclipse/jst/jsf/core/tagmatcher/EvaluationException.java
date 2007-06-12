@@ -12,6 +12,9 @@ package org.eclipse.jst.jsf.core.tagmatcher;
 
 /**
  * Wraps an exception thrown during algorithm evaluation
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author cbateman
  *
  */
