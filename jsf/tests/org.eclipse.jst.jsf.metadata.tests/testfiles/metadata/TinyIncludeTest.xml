@@ -1,0 +1,82 @@
+<metadatamodel 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" 
+	xmlns:mdt="http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore"  
+	id="TinyIncludeTest">	
+	
+	<entity id="A">
+		<include-entity-group id="eg"/>
+		<include-entity-group id="eg2"/>
+		<trait id="T1">
+			<value>A1</value>
+		</trait>
+		<entity id="a">
+			<trait id="t1">
+				<value>A1</value>
+			</trait>
+		</entity>
+	</entity>
+	
+	<entityGroup id="eg">
+		<include-entity-group id="egbogus"/> <!-- SHOULD BE IGNORED - entityGroups should not contain entityGroups -->
+		<trait id="T1">
+			<value>T1FromEG</value>
+		</trait>
+		<trait id="T2">
+			<value>T2FromEG</value>
+		</trait>
+		<entity id="sub-A">
+			<trait id="a-T1">T1</trait>
+		</entity>
+		<entity id="a">
+			<trait id="t1">
+				<value>t1FromEG-a</value>
+			</trait>
+			<entity id="sub-a">
+				<trait id="a-T1">a-T1FromEG</trait>
+			</entity>
+			<entity id="bFromEG">
+			</entity>
+		</entity>
+  	</entityGroup>
+  	<entityGroup id="eg2"> <!-- Since "eg" comes before "eg2" in A, none of the eg2 entity and traits should be used as they have all identical ids except for the sub-sub-a entity-->
+  		<trait id="T2">
+			<value>T2FromEG2</value>
+		</trait>
+		<entity id="sub-A">
+			<trait id="a-T1">a-T1FromEG2</trait>
+			<entity id="sub-sub-A"/>
+		</entity>
+		
+  	</entityGroup>
+  	<entityGroup id="egbogus"> 
+  		<trait id="eg2Trait">
+  			<value>never merged</value>
+  		</trait>
+  		<entity id="eg2Entity">
+  		</entity>
+  	</entityGroup>
+  <!-- EXPECTED MERGE RESULT
+  <entity id="A">
+		<trait id="T1">
+			<value>A1</value>
+		</trait>
+		<trait id="T2">
+			<value>T2FromEG</value>
+		</trait>		
+		<entity id="a">
+			<trait id="t1">
+				<value>A1</value>
+			</trait>
+			<entity id="sub-a">
+				<trait id="a-T1">T1</trait>
+			</entity>
+			<entity id="bFromEG">
+			</entity>
+		</entity>  		
+		<entity id="sub-A">
+			<trait id="a-T1">T1</trait>
+		</entity>
+  </entity>		
+  -->
+</metadatamodel>

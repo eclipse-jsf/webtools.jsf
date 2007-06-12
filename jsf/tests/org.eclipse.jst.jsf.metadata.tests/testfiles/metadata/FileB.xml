@@ -63,16 +63,16 @@
 		</trait>
 		<entity id="a">
 			<trait id="A1">
-				<value>A1FromEG1-B</value>
+				<value>A1FromEG1-1</value>
 			</trait>
 			<trait id="aFromEG1">
-				<value>aFromEG1-B</value>
+				<value>aFromEG1-1</value>
 			</trait>
 		</entity>
   	</entityGroup>
   	
 	<entityGroup id="eg2">
-		<!-- All traits and entities should not be merged... Should come from FileA -->
+		<!-- All traits and entities should first come from eg1... Should come from FileA -->
 		<trait id="B">
 			<value>trait SHOULD appear in merge from eg2</value>
 		</trait>
@@ -81,10 +81,10 @@
 		</trait>
 		<entity id="a">
 			<trait id="A1">
-				<value>A1FromEG1-B</value>
+				<value>A1FromEG2-B</value>
 			</trait>
 			<trait id="aFromEG1">
-				<value>aFromEG1-B</value>
+				<value>aFromEG2-B</value>
 			</trait>
 		</entity>
 		<entity id="b">
