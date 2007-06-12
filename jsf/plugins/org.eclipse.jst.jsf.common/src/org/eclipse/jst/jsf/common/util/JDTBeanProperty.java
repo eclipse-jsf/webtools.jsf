@@ -23,6 +23,8 @@ import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 /**
  * Represents a single bean property backed by JDT data
  * 
+ * This class may not be sub-classed by clients.
+ * 
  * @author cbateman
  *
  */

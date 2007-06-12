@@ -22,6 +22,8 @@ import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 /**
  * A writable version of the JDTBeanProperty object
  * 
+ * This class may not be sub-classed by clients
+ * 
  * @author cbateman
  *
  */

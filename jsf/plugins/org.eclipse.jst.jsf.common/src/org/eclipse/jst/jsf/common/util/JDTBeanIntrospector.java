@@ -37,6 +37,8 @@ import org.eclipse.jst.jsf.common.JSFCommonPlugin;
  * error handling of bean instantiation out of context) way
  * to determine a bean's properties at design time.
  * 
+ * This class may not be sub-classed by clients.
+ * 
  * @author cbateman
  *
  */
