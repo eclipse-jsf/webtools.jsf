@@ -36,6 +36,7 @@ import org.eclipse.jst.jsf.common.metadata.query.internal.HierarchicalSearchCont
  * entities and traits added to it.   
  * 
  * TODO - make locating of existing entities and traits in the merged model more efficient
+ * TODO - refactor out Taglibdomain-only aspects of include-group processing 
  *
  */
 public class MetaDataModelMergeAssistantImpl implements
@@ -54,7 +55,8 @@ public class MetaDataModelMergeAssistantImpl implements
 	public MetaDataModelMergeAssistantImpl(MetaDataModel model) {
 		this.mergedModel = model;
 		copier = new Copier();
-		entityVisitor = new SimpleEntityQueryVisitorImpl(new HierarchicalSearchControl(1, HierarchicalSearchControl.SCOPE_ALL_LEVELS));
+		entityVisitor = new SimpleEntityQueryVisitorImpl(new HierarchicalSearchControl(1, 
+			HierarchicalSearchControl.SCOPE_ALL_LEVELS));
 		traitVisitor = new SimpleTraitQueryVisitorImpl(new SearchControl(1));
 	}
 
@@ -121,8 +123,6 @@ public class MetaDataModelMergeAssistantImpl implements
 	 * Checks to see if the entity (by id) is present in the mergedModel or not.
 	 * If not, it will perform a copy of the entity and it's attributes using
 	 * EcoreUtil.Copier.  
-	 *  
-	 * TODO - check: do we need to copy?   Why not use source entity?
 	 * 
 	 * @param parent
 	 * @param entity
@@ -153,25 +153,16 @@ public class MetaDataModelMergeAssistantImpl implements
 		return found;
 	}
 
-	private boolean isExistingChildEntity(final Entity parent, final Entity entity) {
-		boolean found = false;
+	private Entity getExistingChildEntity(final Entity parent, final Entity entity) {
 		for(Iterator it=parent.getChildEntities().iterator();it.hasNext();){
-			if (entity.getId().equals(((Entity)it.next()).getId()))
-				return true;			
+			Entity foundEntity = (Entity)it.next();
+			if (entity.getId().equals(foundEntity.getId()))
+				return foundEntity;			
 		}
-		return found;
-	}
-	
-	private boolean isExistingTrait(final Entity entity, final Trait trait) {
-		boolean found = false;
-		for(Iterator it=entity.getTraits().iterator();it.hasNext();){
-			if (trait.getId().equals(((Trait)it.next()).getId()))
-				return true;			
-		}
-		return found;
+		return null;
 	}
 
-	private synchronized Entity addEntityInternal(final Entity parent, final Entity entity) {
+	private /*synchronized*/ Entity addEntityInternal(final Entity parent, final Entity entity) {
 		Entity mmEntity =(Entity)copier.copy(entity);
 		copier.copyReferences();
 		parent.getChildEntities().add(mmEntity);
@@ -229,12 +220,12 @@ public class MetaDataModelMergeAssistantImpl implements
 
 	/**
 	 * Locates the entity in the merged model matching by id only. 
-	 * If not loacted, this method returns null;
+	 * If not located, this method returns null;
 	 * 
 	 * @param entity
 	 * @return merged entity
 	 */
-	public Entity getMergedEntity(Entity entity){
+	private Entity getMergedEntity(Entity entity){
 		if (entity instanceof Model)
 			return (Entity)mergedModel.getRoot();
 		
@@ -246,7 +237,7 @@ public class MetaDataModelMergeAssistantImpl implements
 				ret = (Entity)rs.getResults().get(0);				
 			rs.close();
 		} catch (MetaDataException e) {
-			JSFCommonPlugin.log(IStatus.ERROR, "Error in getMergedEntity()", e);			
+			JSFCommonPlugin.log(IStatus.ERROR, "Error in getMergedEntity()", e);
 		}
 		return ret;
 	}
@@ -300,7 +291,10 @@ public class MetaDataModelMergeAssistantImpl implements
 			IncludeEntityGroup include = (IncludeEntityGroup)entity.getIncludeGroups().get(j);				
 			if (include.getId() != null){
 				//is this a local merge?
-				if (include.getModelUri() == null|| (include.getModelUri().equals(getMergedModel().getModelKey().getUri())) ){
+				if (include.getModelUri() == null||
+						(include.getModelUri()
+							.equals(getMergedModel()
+								.getModelKey().getUri())) ){
 					EntityGroup eg = ((Model)getMergedModel().getRoot()).findIncludeGroup(include.getId());
 					addIncludeRefs(entity, eg);
 				} else //external model include
@@ -337,34 +331,43 @@ public class MetaDataModelMergeAssistantImpl implements
 			return;
 	
 		for (int i=0, size=entityGroup.getTraits().size();i<size;i++){
-			addIncludedTraitAsNecessary(entity, (Trait)entityGroup.getTraits().get(i));
+			addTrait(entity, (Trait)entityGroup.getTraits().get(i));
 		}
 		
 		for (int i=0, size=entityGroup.getChildEntities().size();i<size;i++){
-			addIncludedEntityAsNecessary(entity, (Entity)entityGroup.getChildEntities().get(i));
-		}
-	}
-
-
-	private void addIncludedTraitAsNecessary(final Entity entity, final Trait trait) {		
-		if (!(isExistingTrait(entity, trait))){
-			addTraitInternal(entity, trait);
+			traverseAndAddIncludes(entity, (Entity)entityGroup.getChildEntities().get(i));
 		}
 	}
 	
+	private void traverseAndAddIncludes(final Entity parent, final Entity entity){
+		Entity mergedEntity = addIncludedEntityAsNecessary(parent, entity);
+		
+		for (final Iterator/*<Trait>*/ it=entity.getTraits().iterator();it.hasNext();){
+			Trait trait = (Trait)it.next();
+			addTraitAsNecessary(mergedEntity, trait);
+		}
+		
+		for (final Iterator/*<EntityKey>*/ it=entity.getChildEntities().iterator();it.hasNext();){
+			Entity e = (Entity)it.next();
+			traverseAndAddIncludes(mergedEntity, e);//add as normal
+		}
+		
+	}
+		
 	/*
 	 * Checks to see if the entity (by id) is present as a child entity in the parent or not.
-	 * If not, it will add the entity to the childEntities <u>without</u> copying.
+	 * If not, it will add the entity to the childEntities without copying.
 	 * 
 	 * @param parent
 	 * @param entity
-	 * @return
+	 * @return Entity
 	 */
-	private void addIncludedEntityAsNecessary(final Entity parent, final Entity entity) {		
-		if (!(isExistingChildEntity(parent, entity))){
-			addEntityInternal(parent, entity);
+	private Entity addIncludedEntityAsNecessary(final Entity parent, final Entity entity) {		
+		Entity mergedEntity = getExistingChildEntity(parent, entity);
+		if (mergedEntity == null){
+			mergedEntity = addEntityInternal(parent, entity);
 		}
+		return mergedEntity;
 	}
-
 
 }

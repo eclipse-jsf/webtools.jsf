@@ -679,7 +679,7 @@
 			<trait id="attribute-value-runtime-type">
 				<value>org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
 			</trait>
-			<trait name="valid-minimum"><value>0</value></trait>	
+			<trait id="valid-minimum"><value>0</value></trait>	
 		</entity>
 	</entityGroup>
 </md:metadatamodel>

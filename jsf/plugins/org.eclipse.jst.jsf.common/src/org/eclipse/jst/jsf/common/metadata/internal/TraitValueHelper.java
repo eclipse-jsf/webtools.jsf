@@ -28,7 +28,8 @@ import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.ListOfValues;
 import org.eclipse.osgi.util.NLS;
 
 /**
- * Experimental/prototype class to assist with decoding trait values
+ * Experimental/prototype class to assist with decoding trait values.
+ * This could/should be made API at some point after "hardening". (https://bugs.eclipse.org/bugs/show_bug.cgi?id=192052) 
  */
 public class TraitValueHelper {
 	private static final String KEY_NOT_FOUND = Messages.Key_not_found;

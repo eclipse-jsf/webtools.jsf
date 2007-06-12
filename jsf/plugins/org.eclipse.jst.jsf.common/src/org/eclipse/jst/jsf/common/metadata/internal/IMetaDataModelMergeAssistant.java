@@ -17,7 +17,7 @@ import org.eclipse.jst.jsf.common.metadata.Trait;
 
 
 /**
- * Helper class to merge source models into a single merged model.
+ * Helper class interface to merge source models into a single merged model.
  * Not intended to be implemented by clients
  *
  */
@@ -35,10 +35,10 @@ public interface IMetaDataModelMergeAssistant {
 	 */
 	public boolean addEntity(Entity entity);
 	/**
-	 * Method will add an entity if not already exsiting in the merged model, and then check for an exisiting trait by id on the merged model's entity.
+	 * Method will add an entity if not already existing in the merged model, and then check for an existing trait by id on the merged model's entity.
 	 * @param entity
 	 * @param trait
-	 * @return flag indicating whether or not the trais was new and therefore added to the merged model's entity
+	 * @return flag indicating whether or not the traits was new and therefore added to the merged model's entity
 	 */
 	public boolean addTrait(Entity entity, Trait trait);
 	
@@ -50,6 +50,7 @@ public interface IMetaDataModelMergeAssistant {
 	/**
 	 * Signal that the merge is complete so that any post-processing may occur.  
 	 * This should be the last call made on the merge assistant and should be done before client calls for the merged model result.
+	 * This should signal that entityGroups processing should begin.
 	 */
 	public void setMergeComplete();
 
