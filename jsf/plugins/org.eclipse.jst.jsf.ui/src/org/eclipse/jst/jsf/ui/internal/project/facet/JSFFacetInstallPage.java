@@ -19,6 +19,7 @@ import org.eclipse.jface.dialogs.DialogSettings;
 import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.dialogs.IInputValidator;
 import org.eclipse.jface.dialogs.InputDialog;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.window.Window;
 import org.eclipse.jst.j2ee.project.facet.IJ2EEModuleFacetInstallDataModelProperties;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfigDialogSettingData;
@@ -27,11 +28,11 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryInternalRefe
 import org.eclipse.jst.jsf.core.internal.project.facet.IJSFFacetInstallDataModelProperties;
 import org.eclipse.jst.jsf.ui.internal.JSFUiPlugin;
 import org.eclipse.jst.jsf.ui.internal.Messages;
-import org.eclipse.jst.jsf.ui.internal.jsflibraryconfig.JSFLibraryConfigControlChangeEvent;
-import org.eclipse.jst.jsf.ui.internal.jsflibraryconfig.JSFLibraryConfigControlChangeListener;
 import org.eclipse.jst.jsf.ui.internal.jsflibraryconfig.IJSFImplLibraryCreationListener;
 import org.eclipse.jst.jsf.ui.internal.jsflibraryconfig.JSFImplLibraryCreationEvent;
 import org.eclipse.jst.jsf.ui.internal.jsflibraryconfig.JSFLibraryConfigControl;
+import org.eclipse.jst.jsf.ui.internal.jsflibraryconfig.JSFLibraryConfigControlChangeEvent;
+import org.eclipse.jst.jsf.ui.internal.jsflibraryconfig.JSFLibraryConfigControlChangeListener;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -87,6 +88,11 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 	private static final String SETTINGS_COMPLIB_SELECT_DEPLOY = "selectdeploycomplib"; //$NON-NLS-1$
 
 	private static final String SEPARATOR = ":"; //$NON-NLS-1$
+	
+	//Part of temporary fix for https://bugs.eclipse.org/bugs/show_bug.cgi?id=190304
+	private static final String DEFAULT_TO_CLIENT = "initialDefaultToClientSupplied";
+	private static final String DEFAULT_TO_SERVER = "initialDefaultToServerSupplied";
+
 
 	private JSFLibraryConfigControl jsfLibCfgComp = null;
 	// private String projectName = null;
@@ -96,8 +102,7 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 	 * Zero argument constructor
 	 */
 	public JSFFacetInstallPage() {
-		// FIXME: following WebFacetInstallPage pattern which will be fixed at
-		// somepoint
+		// FIXME: following WebFacetInstallPage pattern which will be fixed at somepoint
 		super(DataModelFactory.createDataModel(new AbstractDataModelProvider() {/*
 																				 * do
 																				 * nothing
@@ -295,6 +300,18 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 			implType = IMPLEMENTATION_TYPE.getValue(root.get(SETTINGS_IMPL_TYPE));
 			deployImpl = root.get(SETTINGS_DEPLOY_IMPL);
 			
+		}
+				
+		//Part of temporary fix for https://bugs.eclipse.org/bugs/show_bug.cgi?id=190304
+		if (implType == IMPLEMENTATION_TYPE.UNKNOWN) {			
+			// if the impl type is still unknown, check if the product provided a default
+			IPreferenceStore prefs = JSFUiPlugin.getDefault().getPreferenceStore();
+			if(prefs.getBoolean(DEFAULT_TO_CLIENT)) {			
+				implType = IMPLEMENTATION_TYPE.CLIENT_SUPPLIED;
+			}
+			else if(prefs.getBoolean(DEFAULT_TO_SERVER)) {	
+				implType = IMPLEMENTATION_TYPE.SERVER_SUPPLIED;
+			}
 		}
 
 		if (deployImpl == null || deployImpl.equals("")) { //$NON-NLS-1$
