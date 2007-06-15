@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.jst.webpageeditor_sdk.feature"
       label="SDK for WebPageEditor"
-      version="1.0.0"
+      version="1.0.0.qualifer"
       provider-name="Eclipse.org">
 
    <description>
