@@ -21,6 +21,8 @@ import org.eclipse.emf.ecore.EReference;
  *   <li>each enum,</li>
  *   <li>and each data type</li>
  * </ul>
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  * <!-- end-user-doc -->
  * @see org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.TraitTypesFactory
  * @model kind="package"

@@ -18,7 +18,10 @@ import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
 
 /**
  * @author mengbo
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  */
+
 public interface IContextMenuItemContributor {
 	void setURI(String uri);
 

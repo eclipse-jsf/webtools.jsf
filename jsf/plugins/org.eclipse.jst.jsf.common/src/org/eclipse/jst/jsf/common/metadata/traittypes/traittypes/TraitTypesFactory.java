@@ -12,6 +12,8 @@ import org.eclipse.emf.ecore.EFactory;
  * <!-- begin-user-doc -->
  * The <b>Factory</b> for the model.
  * It provides a create method for each non-abstract class of the model.
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  * <!-- end-user-doc -->
  * @see org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.TraitTypesPackage
  * @generated
