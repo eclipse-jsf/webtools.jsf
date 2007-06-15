@@ -13,6 +13,8 @@ package org.eclipse.jst.jsf.context.symbol;
  * unbounded for some set of possible value types.  For example, a managed
  * bean that implements Map, is unconstrained for all values in Java 1.4 and
  * for whatever the template value type is in Java5.
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  * <!-- end-user-doc -->
  *
  *

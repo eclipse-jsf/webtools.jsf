@@ -18,6 +18,8 @@ import org.eclipse.swt.graphics.Image;
 /**
  * Adapts an object to appropriate content proposal
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author cbateman
  *
  */

@@ -17,6 +17,8 @@ import org.eclipse.emf.common.util.EList;
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>IObject Symbol</b></em>'.
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  * <!-- end-user-doc -->
  *
  * <p>

@@ -13,7 +13,12 @@
 package org.eclipse.jst.jsf.context.symbol;
 
 /**
+ * 
+ * <!-- begin-user-doc -->
  * A property of a bean
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * <!-- end-user-doc -->
  * 
  * @author cbateman
  * @model

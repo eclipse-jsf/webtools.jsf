@@ -15,6 +15,8 @@ package org.eclipse.jst.jsf.context.symbol.source;
 /**
  * Defines global constants for symbols
  * 
+ * <p><b>Provisional API - subject to change</b></p> 
+ * 
  * @author cbateman
  *
  */

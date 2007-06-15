@@ -15,9 +15,12 @@ package org.eclipse.jst.jsf.context.symbol;
 import org.eclipse.jdt.core.IJavaElement;
 
 /**
+ * <!-- begin-user-doc -->
  * Represents a symbol that has meaning within Java's context.  This may
  * be the name of a type, an instance, method etc.
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * <!-- end-user-doc -->
  * @author cbateman
  * @model
  */

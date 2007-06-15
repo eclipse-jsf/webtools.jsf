@@ -19,6 +19,8 @@ import org.eclipse.jst.jsf.context.symbol.ISymbol;
  * Defines a provider that acts as source of symbols.  The
  * implementor is usually context specific
  * 
+ * <p><b>Provisional API - subject to change</b></p> 
+ * 
  * @author cbateman
  *
  */

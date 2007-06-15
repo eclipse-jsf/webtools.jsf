@@ -19,8 +19,11 @@ import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IType;
 
 /**
+ * <!-- begin-user-doc -->
  * A generic descriptor for symbol information
- * 
+ *
+ * <p><b>Provisional API - subject to change</b></p>
+ * <!-- end-user-doc -->
  * @author cbateman
  * @model
  */

@@ -10,6 +10,8 @@ package org.eclipse.jst.jsf.context.symbol;
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>IBounded Java Type Descriptor</b></em>'.
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  * <!-- end-user-doc -->
  *
  *

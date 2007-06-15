@@ -17,6 +17,8 @@ import org.eclipse.jdt.core.IType;
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>IJava Type Descriptor2</b></em>'.
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  * <!-- end-user-doc -->
  *
  * <p>

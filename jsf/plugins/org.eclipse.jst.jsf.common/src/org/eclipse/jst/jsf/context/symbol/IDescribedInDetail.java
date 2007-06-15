@@ -15,6 +15,9 @@ package org.eclipse.jst.jsf.context.symbol;
 
 /** 
  * Tags a symbol that has a detailed, user-readable description
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author cbateman
  *
  */

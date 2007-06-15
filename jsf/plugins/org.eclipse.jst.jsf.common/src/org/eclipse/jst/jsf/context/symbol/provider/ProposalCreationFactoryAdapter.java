@@ -21,6 +21,8 @@ import org.eclipse.wst.sse.ui.internal.contentassist.CustomCompletionProposal;
 /**
  * Default implementation of the proposal creation factory
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author cbateman
  *
  */

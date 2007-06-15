@@ -21,6 +21,8 @@ import org.eclipse.jst.jsf.context.symbol.ISymbol;
  * Must be sub-classed by all contextSymbolFactory extension point implementors
  * to create context configured symbols
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author cbateman
  *
  */

@@ -16,6 +16,8 @@ import java.util.Map;
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>IMap Type Descriptor</b></em>'.
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  * <!-- end-user-doc -->
  *
  * <p>

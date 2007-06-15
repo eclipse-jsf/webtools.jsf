@@ -18,6 +18,8 @@ import org.eclipse.core.resources.IProject;
  * Default implementation of ISymbolSourceProviderFactory.  Implementors may 
  * sub-class or create their own separate factory class.
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author cbateman
  *
  */

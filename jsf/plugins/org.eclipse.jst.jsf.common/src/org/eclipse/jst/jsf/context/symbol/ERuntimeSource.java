@@ -26,6 +26,9 @@ import org.eclipse.emf.common.util.AbstractEnumerator;
  * is provided to allow the VariableResolver to resolve
  * conflicts when instance symbols come from more than one
  * source. 
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * <!-- end-user-doc -->
  * @see org.eclipse.jst.jsf.context.symbol.SymbolPackage#getERuntimeSource()
  * @model

@@ -20,6 +20,8 @@ import org.eclipse.core.resources.IProject;
  * 
  * Instance factory class must implement a zero-argument default constructor
  * 
+ * <p><b>Provisional API - subject to change</b></p> 
+ * 
  * @author cbateman
  *
  */

@@ -1,7 +1,7 @@
 /**
  * Copyright 2006 Oracle
  *
- * $Id: SymbolPackage.java,v 1.7 2007/05/15 22:00:28 cbateman Exp $
+ * $Id: SymbolPackage.java,v 1.8 2007/06/15 19:01:44 cbateman Exp $
  */
 package org.eclipse.jst.jsf.context.symbol;
 
@@ -22,6 +22,8 @@ import org.eclipse.emf.ecore.EReference;
  *   <li>each enum,</li>
  *   <li>and each data type</li>
  * </ul>
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  * <!-- end-user-doc -->
  * @see org.eclipse.jst.jsf.context.symbol.SymbolFactory
  * @model kind="package"

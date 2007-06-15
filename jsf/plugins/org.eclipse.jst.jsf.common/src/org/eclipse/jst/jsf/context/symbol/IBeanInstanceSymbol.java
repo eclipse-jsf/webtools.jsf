@@ -15,7 +15,11 @@ package org.eclipse.jst.jsf.context.symbol;
 import org.eclipse.emf.common.util.EList;
 
 /**
+ * <!-- begin-user-doc -->
  * An instance of a java bean
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * <!-- end-user-doc -->
  * 
  * @author cbateman
  * @model

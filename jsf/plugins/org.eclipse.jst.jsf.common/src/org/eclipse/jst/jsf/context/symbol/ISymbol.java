@@ -15,9 +15,12 @@ package org.eclipse.jst.jsf.context.symbol;
 import org.eclipse.emf.ecore.EObject;
 
 /**
+ * <!-- begin-user-doc -->
  * An entity that represents a meaningful named value in some context. 
  * Typically these represent programming language variables, properties and methods.
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * <!-- end-user-doc -->
  * @author cbateman
  * @model
  */
