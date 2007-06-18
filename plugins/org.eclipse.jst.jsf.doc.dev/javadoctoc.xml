@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?NLS TYPE="org.eclipse.help.toc"?>
+	 <toc label="Javadoc Packages Reference">
+<topic label="org.eclipse.jst.jsf.common.dom" href="html/api_reference/org/eclipse/jst/jsf/common/dom/package-summary.html"/>
+<topic label="org.eclipse.jst.jsf.common.metadata" href="html/api_reference/org/eclipse/jst/jsf/common/metadata/package-summary.html"/>
+<topic label="org.eclipse.jst.jsf.common.metadata.query" href="html/api_reference/org/eclipse/jst/jsf/common/metadata/query/package-summary.html"/>
+<topic label="org.eclipse.jst.jsf.common.metadata.traittypes.traittypes" href="html/api_reference/org/eclipse/jst/jsf/common/metadata/traittypes/traittypes/package-summary.html"/>
+<topic label="org.eclipse.jst.jsf.common.sets" href="html/api_reference/org/eclipse/jst/jsf/common/sets/package-summary.html"/>
+<topic label="org.eclipse.jst.jsf.common.sets.constraint" href="html/api_reference/org/eclipse/jst/jsf/common/sets/constraint/package-summary.html"/>
+<topic label="org.eclipse.jst.jsf.common.sets.mapping" href="html/api_reference/org/eclipse/jst/jsf/common/sets/mapping/package-summary.html"/>
+<topic label="org.eclipse.jst.jsf.common.util" href="html/api_reference/org/eclipse/jst/jsf/common/util/package-summary.html"/>
+<topic label="org.eclipse.jst.jsf.contentmodel.annotation" href="html/api_reference/org/eclipse/jst/jsf/contentmodel/annotation/package-summary.html"/>
+<topic label="org.eclipse.jst.jsf.context" href="html/api_reference/org/eclipse/jst/jsf/context/package-summary.html"/>
+<topic label="org.eclipse.jst.jsf.context.resolver" href="html/api_reference/org/eclipse/jst/jsf/context/resolver/package-summary.html"/>
+<topic label="org.eclipse.jst.jsf.context.resolver.structureddocument" href="html/api_reference/org/eclipse/jst/jsf/context/resolver/structureddocument/package-summary.html"/>
+<topic label="org.eclipse.jst.jsf.context.structureddocument" href="html/api_reference/org/eclipse/jst/jsf/context/structureddocument/package-summary.html"/>
+<topic label="org.eclipse.jst.jsf.context.symbol" href="html/api_reference/org/eclipse/jst/jsf/context/symbol/package-summary.html"/>
+<topic label="org.eclipse.jst.jsf.context.symbol.provider" href="html/api_reference/org/eclipse/jst/jsf/context/symbol/provider/package-summary.html"/>
+<topic label="org.eclipse.jst.jsf.context.symbol.source" href="html/api_reference/org/eclipse/jst/jsf/context/symbol/source/package-summary.html"/>
+<topic label="org.eclipse.jst.jsf.core" href="html/api_reference/org/eclipse/jst/jsf/core/package-summary.html"/>
+<topic label="org.eclipse.jst.jsf.core.jsfappconfig" href="html/api_reference/org/eclipse/jst/jsf/core/jsfappconfig/package-summary.html"/>
+<topic label="org.eclipse.jst.jsf.core.jsflibraryconfiguration" href="html/api_reference/org/eclipse/jst/jsf/core/jsflibraryconfiguration/package-summary.html"/>
+<topic label="org.eclipse.jst.jsf.core.jsflibraryregistry" href="html/api_reference/org/eclipse/jst/jsf/core/jsflibraryregistry/package-summary.html"/>
+<topic label="org.eclipse.jst.jsf.core.set" href="html/api_reference/org/eclipse/jst/jsf/core/set/package-summary.html"/>
+<topic label="org.eclipse.jst.jsf.core.set.constraint" href="html/api_reference/org/eclipse/jst/jsf/core/set/constraint/package-summary.html"/>
+<topic label="org.eclipse.jst.jsf.core.set.mapping" href="html/api_reference/org/eclipse/jst/jsf/core/set/mapping/package-summary.html"/>
+<topic label="org.eclipse.jst.jsf.core.tagmatcher" href="html/api_reference/org/eclipse/jst/jsf/core/tagmatcher/package-summary.html"/>
+<topic label="org.eclipse.jst.jsf.designtime" href="html/api_reference/org/eclipse/jst/jsf/designtime/package-summary.html"/>
+<topic label="org.eclipse.jst.jsf.designtime.context" href="html/api_reference/org/eclipse/jst/jsf/designtime/context/package-summary.html"/>
+<topic label="org.eclipse.jst.jsf.designtime.el" href="html/api_reference/org/eclipse/jst/jsf/designtime/el/package-summary.html"/>
+<topic label="org.eclipse.jst.jsf.designtime.resolver" href="html/api_reference/org/eclipse/jst/jsf/designtime/resolver/package-summary.html"/>
+<topic label="org.eclipse.jst.jsf.designtime.symbols" href="html/api_reference/org/eclipse/jst/jsf/designtime/symbols/package-summary.html"/>
+<topic label="org.eclipse.jst.jsf.facesconfig.edit.provider" href="html/api_reference/org/eclipse/jst/jsf/facesconfig/edit/provider/package-summary.html"/>
+<topic label="org.eclipse.jst.jsf.facesconfig.emf" href="html/api_reference/org/eclipse/jst/jsf/facesconfig/emf/package-summary.html"/>
+<topic label="org.eclipse.jst.jsf.facesconfig.emf.impl" href="html/api_reference/org/eclipse/jst/jsf/facesconfig/emf/impl/package-summary.html"/>
+<topic label="org.eclipse.jst.jsf.facesconfig.emf.util" href="html/api_reference/org/eclipse/jst/jsf/facesconfig/emf/util/package-summary.html"/>
+<topic label="org.eclipse.jst.jsf.metadataprocessors" href="html/api_reference/org/eclipse/jst/jsf/metadataprocessors/package-summary.html"/>
+<topic label="org.eclipse.jst.jsf.metadataprocessors.features" href="html/api_reference/org/eclipse/jst/jsf/metadataprocessors/features/package-summary.html"/>
+<topic label="org.eclipse.jst.jsf.taglibprocessing.attributevalues" href="html/api_reference/org/eclipse/jst/jsf/taglibprocessing/attributevalues/package-summary.html"/>
+<topic label="org.eclipse.jst.pagedesigner" href="html/api_reference/org/eclipse/jst/pagedesigner/package-summary.html"/>
+<topic label="org.eclipse.jst.pagedesigner.converter" href="html/api_reference/org/eclipse/jst/pagedesigner/converter/package-summary.html"/>
+<topic label="org.eclipse.jst.pagedesigner.dtmanager" href="html/api_reference/org/eclipse/jst/pagedesigner/dtmanager/package-summary.html"/>
+<topic label="org.eclipse.jst.pagedesigner.dtmanager.converter" href="html/api_reference/org/eclipse/jst/pagedesigner/dtmanager/converter/package-summary.html"/>
+<topic label="org.eclipse.jst.pagedesigner.dtmanager.converter.operations" href="html/api_reference/org/eclipse/jst/pagedesigner/dtmanager/converter/operations/package-summary.html"/>
+<topic label="org.eclipse.jst.pagedesigner.dtmanager.dtinfo" href="html/api_reference/org/eclipse/jst/pagedesigner/dtmanager/dtinfo/package-summary.html"/>
+<topic label="org.eclipse.jst.pagedesigner.extensionpoint" href="html/api_reference/org/eclipse/jst/pagedesigner/extensionpoint/package-summary.html"/>
+</toc>

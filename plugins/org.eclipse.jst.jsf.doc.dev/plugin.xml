@@ -15,6 +15,9 @@
       <toc
             file="toctutorials.xml"
             />
+      <toc
+            file="javadoctoc.xml"
+      		/>
    </extension>
 
 </plugin>

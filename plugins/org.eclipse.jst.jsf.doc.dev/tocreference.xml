@@ -3,24 +3,7 @@
 
 <toc label="Reference" link_to="toc.xml#jsf_dev_reference"> 
 	<topic label="API Reference" href="html/api_reference/overview-summary.html">
-		<topic label="org.eclipse.jst.jsf.contentmodel.annotation.internal.provisional" href="html/api_reference/org/eclipse/jst/jsf/contentmodel/annotation/internal/provisional/package-summary.html"/>
-		<topic label="org.eclipse.jst.jsf.context.internal.provisional" href="html/api_reference/org/eclipse/jst/jsf/context/internal/provisional/package-summary.html"/>
-		<topic label="org.eclipse.jst.jsf.context.resolver.internal.provisional" href="html/api_reference/org/eclipse/jst/jsf/context/resolver/internal/provisional/package-summary.html"/>
-		<topic label="org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional" href="html/api_reference/org/eclipse/jst/jsf/context/resolver/structureddocument/internal/provisional/package-summary.html"/>
-		<topic label="org.eclipse.jst.jsf.context.structureddocument.internal.provisional" href="html/api_reference/org/eclipse/jst/jsf/context/structureddocument/internal/provisional/package-summary.html"/>
-		<topic label="org.eclipse.jst.jsf.context.symbol.internal.provisional" href="html/api_reference/org/eclipse/jst/jsf/context/symbol/internal/provisional/package-summary.html"/>
-		<topic label="org.eclipse.jst.jsf.context.symbol.internal.provisional.provider" href="html/api_reference/org/eclipse/jst/jsf/context/symbol/internal/provisional/provider/package-summary.html"/>
-		<topic label="org.eclipse.jst.jsf.context.symbol.internal.provisional.source" href="html/api_reference/org/eclipse/jst/jsf/context/symbol/internal/provisional/source/package-summary.html"/>
-		<topic label="org.eclipse.jst.jsf.core.internal.provisional.jsfappconfig" href="html/api_reference/org/eclipse/jst/jsf/core/internal/provisional/jsfappconfig/package-summary.html"/>
-		<topic label="org.eclipse.jst.jsf.core.internal.provisional.jsflibraryregistry" href="html/api_reference/org/eclipse/jst/jsf/core/internal/provisional/jsflibraryregistry/package-summary.html"/>
-		<topic label="org.eclipse.jst.jsf.designtime.internal.provisional" href="html/api_reference/org/eclipse/jst/jsf/designtime/internal/provisional/package-summary.html"/>
-		<topic label="org.eclipse.jst.jsf.designtime.internal.provisional.context" href="html/api_reference/org/eclipse/jst/jsf/designtime/internal/provisional/context/package-summary.html"/>
-		<topic label="org.eclipse.jst.jsf.designtime.internal.provisional.el" href="html/api_reference/org/eclipse/jst/jsf/designtime/internal/provisional/el/package-summary.html"/>
-		<topic label="org.eclipse.jst.jsf.designtime.internal.provisional.resolver" href="html/api_reference/org/eclipse/jst/jsf/designtime/internal/provisional/resolver/package-summary.html"/>
-		<topic label="org.eclipse.jst.jsf.designtime.internal.provisional.symbols" href="html/api_reference/org/eclipse/jst/jsf/designtime/internal/provisional/symbols/package-summary.html"/>
-		<topic label="org.eclipse.jst.jsf.metadataprocessors.internal.provisional" href="html/api_reference/org/eclipse/jst/jsf/metadataprocessors/internal/provisional/package-summary.html"/>
-		<topic label="org.eclipse.jst.jsf.metadataprocessors.internal.provisional.features" href="html/api_reference/org/eclipse/jst/jsf/metadataprocessors/internal/provisional/features/package-summary.html"/>
-		<topic label="org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues" href="html/api_reference/org/eclipse/jst/jsf/taglibprocessing/internal/provisional/attributevalues/package-summary.html"/>
+		<link toc="javadoctoc.xml" />
 	</topic>
 	<topic label="Extension Points Reference" href="html/extpts_reference/index.html">
 		<topic label="org.eclipse.jst.jsf.contentmodel.annotations.annotationFiles" href="html/extpts_reference/jsf/org_eclipse_jst_jsf_contentmodel_annotations_annotationFiles.html"/>
