@@ -10,8 +10,8 @@
 <h1>Meta-Data Processing Framework</h1>
 <br>
 <h3>Overview</h3>
-<p>This framework makes use of the meta-data contributed by the content model annotations framework.   It's intention in this release is to simplify how servcies such as Content Assist and Validation can be provided in source editors for tag library based attributes values.</p>
-<p>The goal for this framework is to allow developers to assign "runtime type" information to an attibute's value using annotations and then, because based on that type, "features" can naturally be exposed.</p>
+<p>This framework makes use of the meta-data contributed by the <a href="./metadata_framework.html">Design-time Meta-data Framework</a>.   It's intention in this release is to simplify how services like Content Assist and Validation can be provided in source editors for tag library based attributes values.</p>
+<p>The goal for this framework is to allow developers to assign "runtime type" information to an attibute's value using meta-data and then, because based on that type, "features" can naturally be exposed.</p>
 <p>To make this more concrete, let's consider the example of the JSF Core <code>actionListener</code> tag and its <code>type</code> attribute.  The value should resolve to a Java class type that implements the interface <code>javax.faces.event.ActionListener</code>.   Having this knowledge is enough to provide:</p>
 <ul>
 <li>Validation - ensure that the specified class can be found and implements the correct interface</li>
@@ -19,59 +19,57 @@
 <li>Quick Fix/Quick Assist - open the new Java class wizard with the required interface preset in the dialog</li>
 </ul>
 <h3>Types and Features</h3>
-<p>In the above example, the "Type" is a Java class type and we have identified three "Feature" that the type implements.<p>
-<p>We have created an interface called <code><a href="../api_reference/org/eclipse/jst/jsf/metadataprocessors/internal/provisional/ITypeDescriptor.html">ITypeDescriptor</a></code> that represents the runtime type of the attribute value of a tag.   An implementor needs to return a list of feature adapters that this type supports.   The features must implement the <code><a href="../api_reference/org/eclipse/jst/jsf/metadataprocessors/internal/provisional/IMetaDataEnabledFeature.html">IMetaDataEnabledFeature</a></code> interface.</p>   
-<p>A default implementation, <code><a href="../api_reference/org/eclipse/jst/jsf/metadataprocessors/internal/provisional/AbstractRootTypeDescriptor.html">AbstractRootTypeDescriptor</a></code> has been provided as a convenient starting point for implementing types and it itself implements <code><a href="../api_reference/org/eclipse/jst/jsf/metadataprocessors/internal/provisional/AbstractMetaDataEnabledFeature.html">AbstractMetaDataEnabledFeature</a></code>.   This allows the type descriptor to implement features itself which simplifies development.</p>
+<p>In the above example, the "Type" is a Java class type and we have identified three "Feature" that the type implements.
+<p>We have created an interface called <code><a href="../api_reference/org/eclipse/jst/jsf/metadataprocessors/ITypeDescriptor.html">ITypeDescriptor</a></code> that represents the runtime type of the attribute value of a tag.   An implementor needs to return a list of feature adapters that this type supports.   The features must implement the <code><a href="../api_reference/org/eclipse/jst/jsf/metadataprocessors/IMetaDataEnabledFeature.html">IMetaDataEnabledFeature</a></code> interface.</p>   
+<p>A default implementation, <code><a href="../api_reference/org/eclipse/jst/jsf/metadataprocessors/AbstractRootTypeDescriptor.html">AbstractRootTypeDescriptor</a></code> has been provided as a convenient starting point for implementing types, and it itself implements <code><a href="../api_reference/org/eclipse/jst/jsf/metadataprocessors/AbstractMetaDataEnabledFeature.html">AbstractMetaDataEnabledFeature</a></code>.   This allows the type descriptor to implement features itself which should simplify development.</p>
 <h3>Attribute Value Runtime Type Extension Point</h3>
-<p>We bind a type identifier in meta-data to a class through an extension point. <code><a href="../extpts_reference/jsf/org_eclipse_jst_jsf_metadataprocessors_AttributeValueRuntimeTypes.html">org.eclipse.jst.jsf.metadataprocessing.AttributeValueRuntimeTypes</a></code>.   Please see <a href="./annotations_framework.html">content model annotations</a> extension-point to see how the annotations file is created.</p>
-<p>The JSF Tools project has implemented a type descriptor class <code>org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.JavaClassType</code>.   In order to use this type, it must first be declared as an <code>AttributeValueRuntimeTypes</code> and then refernced in an annotation file.</p>
-<p>Below comes from the <code>org.eclipse.jst.jsf.taglibprocessing</code> plugin that declares this type:</p>
+<p>We bind a type identifier in meta-data to a class through an extension point. <code><a href="../extpts_reference/jsf/org_eclipse_jst_jsf_core_AttributeValueRuntimeTypes.html">org.eclipse.jst.jsf.core.AttributeValueRuntimeTypes</a></code>.   Please see <a href="./metadata_framework.html">Design-time Meta-Data Framework</a> to see how the meta-data files are created.</p>
+<p>The JSF Tools project has implemented a type descriptor class <code>org.eclipse.jst.jsf.core.attributevalues.JavaClassType</code>.   In order to use this type, it must first be declared as an <code>AttributeValueRuntimeType</code> and then referenced in a meta-data file.</p>
+<p>Below comes from the <code>org.eclipse.jst.jsf.core</code> plugin that declares this type:</p>
 <div class="code"><pre>
       &lt;attributeValueRuntimeType
-            class="org.eclipse.jst.jsf.taglibprocessing.internal.provisional.attributevalues.JavaClassType"
+            class="org.eclipse.jst.jsf.core.attributevalues.JavaClassType"
             id="attributevalues.JavaClassType"/&gt;    
 </pre></div>
-<p>Below is the section of the jsf_core.xml annotation file from the taglibprocessing plugin that annotates the <code>actionListener</code> tag:</p>
+<p>Below is the section of the jsf_core.xml meta-data file from the core plugin that supplies meta-data for the <code>actionListener</code> tag:</p>
 <div class="code"><pre>
-	&lt;cm-element name="actionListener"&gt;
-		&lt;cm-attribute name="type"&gt;
-			&lt;property name="attribute-value-runtime-type"&gt;
+	&lt;entity id="actionListener"&gt;
+		&lt;entity id="type"&gt;
+			&lt;trait id="attribute-value-runtime-type"&gt;
 				&lt;value&gt;
-					org.eclipse.jst.jsf.taglibprocessing.attributevalues.JavaClassType
+					org.eclipse.jst.jsf.core.attributevalues.JavaClassType
 				&lt;/value&gt;
-			&lt;/property&gt;
-			&lt;property name="valid-interfaces"&gt;
+			&lt;/trait&gt;
+			&lt;trait id="valid-interfaces"&gt;
 				&lt;value&gt;javax.faces.event.ActionListener&lt;/value&gt;
-			&lt;/property&gt;		
-		&lt;/cm-attribute&gt;
-	&lt;/cm-element&gt;
+			&lt;/trait&gt;		
+		&lt;/entity&gt;
+	&lt;/entity&gt;
 </pre></div>
-<p>Notice that the value of the property named <code>attribute-value-runtime-type</code> uses the plugin qualified id of the AttributeValueRuntimeType extension.   This the property name of the annotation that associates the type identifier with the content model attribute.</p>
-<p>For a complete list of implemented types and features, please see the <a href="../api_reference/org/eclipse/jst/jsf/taglibprocessing/internal/provisional/attributevalues/package-summary.html">API reference</a>
+<p>Notice that the value of the <code>attribute-value-runtime-type</code> trait uses the plugin qualified id of the AttributeValueRuntimeType extension. </p>
+<p>For a complete list of implemented types and features, please see the <a href="../api_reference/org/eclipse/jst/jsf/taglibprocessing/attributevalues/package-summary.html">API reference</a>
 <p>The <code>JavaClassType</code> implements two Features:</p>
 <ul>
-<li><a href="../api_reference/org/eclipse/jst/jsf/metadataprocessors/internal/provisional/features/IValidValues.html">IValidValues</a> - an interface used by a WTP Validation framework validator class to check and provide validation error messages if invalid when being used in a non-EL context</li>
-<li><a href="../api_reference/org/eclipse/jst/jsf/metadataprocessors/internal/provisional/features/IPossibleValues.html">IPossibleValues</a> - an interface used by an extension to the WTP SSE editor for content assistance</li>
+<li><a href="../api_reference/org/eclipse/jst/jsf/metadataprocessors/features/IValidValues.html">IValidValues</a> - an interface used by a WTP Validation framework validator class to check and provide validation error messages if invalid when being used in a non-EL context</li>
+<li><a href="../api_reference/org/eclipse/jst/jsf/metadataprocessors/features/IPossibleValues.html">IPossibleValues</a> - an interface used by an extension to the WTP SSE editor for content assistance</li>
 </ul>
 <p>Although not applicable to the <code>JavaClassType</code>, the following round out the Features defined by this release:</p>
 <ul>
-<li><a href="../api_reference/org/eclipse/jst/jsf/metadataprocessors/internal/provisional/features/IValidELValues.html">IValidELValues</a> - an interface used by a WTP Validation framework validator class to check and provide validation error messages if invalid when being used in an EL context</li>
-<li><a href="../api_reference/org/eclipse/jst/jsf/metadataprocessors/internal/provisional/features/IDefaultValue.html">IDefaultValue</a> - an interface for providing a default value</li>
-<li><a href="../api_reference/org/eclipse/jst/jsf/metadataprocessors/internal/provisional/features/ICreateValues.html">ICreateValues</a> - an unimplemented experimental interface with intentoin of being used for providing Quick Fix/Quick Assist services</li>
+<li><a href="../api_reference/org/eclipse/jst/jsf/metadataprocessors/features/IValidELValues.html">IValidELValues</a> - an interface used by a WTP Validation framework validator class to check and provide validation error messages if invalid when being used in an EL context</li>
+<li><a href="../api_reference/org/eclipse/jst/jsf/metadataprocessors/features/IDefaultValue.html">IDefaultValue</a> - an interface for providing a default value</li>
+<li><a href="../api_reference/org/eclipse/jst/jsf/metadataprocessors/features/ICreateValues.html">ICreateValues</a> - an unimplemented experimental interface with intentoin of being used for providing Quick Fix/Quick Assist services</li>
 </ul>
-<p>The Feature implementer can require additional information from the annotation.  Notice that the <code>JavaClassType</code> gets the list of <code>valid-interface</code> values from the meta-data.  For a complete list of the property names used by the Types and Features from the taglibprocessing plugin see the <a href="../api_reference/constant-values.html" >constant values reference page</a></p>
+<p>The Feature implementer can require additional information from meta-data.  Notice that the <code>JavaClassType</code> calls back to the meta-data to get the list of <code>valid-interface</code> values.  For a complete list of the property names used by the Types and Features from the core plugin see the <a href="../api_reference/constant-values.html" >constant values reference page</a></p>
 <h3>How are these used?</h3>
-<p>A client interested in requesting a set of all the Feature implementers for a given tag attribute will use the <code><a href="../api_reference/org/eclipse/jst/jsf/metadataprocessors/internal/provisional/MetaDataEnabledProcessingFactory.html">MetaDataEnabledProcessingFactory</a> and the <code>getAttributeValueRuntimeTypeFeatureProcessors</code> method.</code>.  
-This method will lookup the runtime type from the annotations file that it will identify from the passed context.    
+<p>A client interested in requesting a set of all the Feature implementers for a given tag attribute will use the <code><a href="../api_reference/org/eclipse/jst/jsf/metadataprocessors/MetaDataEnabledProcessingFactory.html">MetaDataEnabledProcessingFactory</a></code> and the <code>getAttributeValueRuntimeTypeFeatureProcessors method</code>.  
+This method will lookup the runtime type from the meta-data file that it will identify from the passed context.    
 This method is currently being called by the <code>JSPSemanticValidator</code> with <code>IValidValues.class</code> and <code>IValidELValues.class</code> passed as the feature class along with the context.  For content assist, <code>IPossibleValues.class</code> is being passed by the content assist processor.</p>
-<p>A content model can be annotated by multiple plugins.   This means that for a given attribute, there may be multiple runtime type assigned to it each implementing the same or different features.  In other words, the caller could get back a list of multiple feature implementers from different plugins.  
-The <code><a href="../api_reference/org/eclipse/jst/jsf/metadataprocessors/internal/provisional/CMAnnotationContext">CMAnnotationContext</a></code> returned with <code>IMetaDataEnabledFeature</code> could be useful in determining whether or not to use that feature.   Generally, as is the case with the JSF content assist processor, this behaviour is "additive".   All the features will be used which may result in multiple identical values appearing in the content assist popup menu.  Currently there is no capabilty to "disable" Features to avoid this situation.  It is presumed in the design that in most cases, only one plugin will provide annotations for a given content model.</p>
 <h3>Creating New Behaviors</h3>
-<p>Hopefully by now you know enough to create your own types, or reuse existing types in your annotation files.  But what if you wanted to associate a completely new behaviour(Feature) with a runtime type?   This is handled by implementing a new <code>IMetaDataEnabledFeature</code> and registering it against a type identifier.  
-To register, use the <code><a href="../extpts_reference/jsf/org_eclipse_jst_jsf_metadataprocessors_MetaDataEnabledFeatures.html">org.eclipse.jst.jsf.metadataprocessing.MetaDataEnabledFeatures</a></code> extension point. </p>
+<p>Hopefully by now you know enough knowledge to create your own types, or reuse existing types in your meta-data files.  But what if you wanted to associate a completely new behaviour(Feature) with a runtime type?   This is handled by implementing a new <code>IMetaDataEnabledFeature</code> and registering it against a type identifier.  
+To register, use the <code><a href="../extpts_reference/jsf/org_eclipse_jst_jsf_core_MetaDataEnabledFeatures.html">org.eclipse.jst.jsf.metadataprocessing.MetaDataEnabledFeatures</a></code> extension-point. </p>
 <h3>Other Resources</h3>
 <ul>
-<li>For more complete information on the metadata processing framework, please see the MetaDataFrameworksSummary in CVS at /home/webtools/org.eclipse.jsf/components/jsf/developement/design/metadata .</li>
+<!-- <li>For more complete information on the meta-data processing framework, please see the MetaDataFrameworksSummary in CVS at /home/webtools/org.eclipse.jsf/components/jsf/developement/design/metadata .</li> -->
 <li><a href="../tutorials/supplying_tag_library_metadata_for_apache_myfaces_tomahawk.html">Tutorial</a></li>
 </ul>
 </body>

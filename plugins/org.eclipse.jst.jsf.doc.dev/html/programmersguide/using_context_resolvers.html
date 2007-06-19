@@ -3,16 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Using Context Resolvers</title>
-  
-
-
-  
-
   <meta http-equiv="Content-Style-Type" content="text/css">
 
   <meta http-equiv="Content-Script-Type" content="text/javascript">
 
-  <link rel="stylesheet" href="../../book.css" type="text/css"></head>
+  <link rel="stylesheet" href="../../book.css" type="text/css">
+  <link rel="stylesheet" href="../tutorials/default_style.css"></head>
 <body>
 <table summary="" cellpadding="0" cellspacing="0" width="100%">
 
@@ -29,29 +25,20 @@
 
 Context resolvers are an abstraction used by the JSF EL framework to
 decouple sources of context information from the way that information
-is created.&nbsp; Common examples of such contexts are:<br>
+is created.&nbsp; Common examples of such contexts are:
 
-<br>
+<ul>
+<li>a dynamic web project in an Eclipse workspace</li>
+<li>a JSP file in a dynamic web project</li>
+<li>a particular absolute offset into an IDocument</li>
+</ul>
 
-- a dynamic web project in an Eclipse workspace<br>
-
-- a JSP file in a dynamic web project<br>
-
-- a particular absolute offset into an IDocument<br>
-
-<br>
-
-Context resolvers allow us to derive interesting information from these contexts such as:<br>
-
-<br>
-
-- what is the current IProject?<br>
-
-- where are we in an IRegion or DOM tree?<br>
-
-- what JSF EL symbols are available at the current IDocument position?<br>
-
-<br>
+Context resolvers allow us to derive interesting information from these contexts such as:
+<ul>
+<li>what is the current IProject?</li>
+<li>where are we in an IRegion or DOM tree?</li>
+<li>what JSF EL symbols are available at the current IDocument position?</li>
+</ul>
 
 <h3>IStructuredDocumentContext</h3>
 
@@ -61,51 +48,43 @@ manipulated in a number of different ways including as a regular
 IDocument or as a DOM.&nbsp; The IStructuredDocumentContext points to a
 specific absolute offset into such a document.&nbsp; The context can
 then be passed to various resolvers to determine information about this
-position in the document.<br>
-
-<br>
-
+position in the document.
 <h3>Context Resolvers</h3>
-
-<br>
-
-The following is a list of context resolvers that are available as provisional APIs:<br>
-
-<br>
-
+The following is a list of context resolvers that are available as provisional APIs:
+<p></p>
 <table style="width: 100%; text-align: left;" border="1" cellpadding="2" cellspacing="2">
 
   <tbody>
-    <tr>
+    <tr style="font-weight: bold">
       <td style="vertical-align: top;">Resolver Type<br>
       </td>
       <td style="vertical-align: top;">Purpose<br>
       </td>
     </tr>
     <tr>
-      <td style="vertical-align: top;">ITaglibContextResolver</td>
+      <td style="vertical-align: top;"><a href="../api_reference/org/eclipse/jst/jsf/context/resolver/structureddocument/ITaglibContextResolver.html">ITaglibContextResolver</a></td>
       <td style="vertical-align: top;">Resolves taglib information for the current context such
   as retrieving the tag library information for the current tag.</td>
     </tr>
     <tr>
-      <td style="vertical-align: top;">IWorkspaceContextResolver</td>
+      <td style="vertical-align: top;"><a href="../api_reference/org/eclipse/jst/jsf/context/resolver/structureddocument/IWorkspaceContextResolver.html">IWorkspaceContextResolver</a></td>
       <td style="vertical-align: top;">Resolves workspace information for the current document
   context such as IFile and IProject.</td>
     </tr>
     <tr>
-      <td style="vertical-align: top;">IDOMContextResolver</td>
+      <td style="vertical-align: top;"><a href="../api_reference/org/eclipse/jst/jsf/context/resolver/structureddocument/IDOMContextResolver.html">IDOMContextResolver</a></td>
       <td style="vertical-align: top;">Resolves DOM information for the current context such as
   current element and attribute.</td>
     </tr>
     <tr>
-      <td style="vertical-align: top;">IMetadataContextResolver</td>
+      <td style="vertical-align: top;"><a href="../api_reference/org/eclipse/jst/jsf/context/resolver/structureddocument/IMetadataContextResolver.html">IMetadataContextResolver</a></td>
       <td style="vertical-align: top;">Resolves meta-data framework information for a given
   context.<span style="">&nbsp; </span>For example, if the current
   context resolves to an XML attribute, retrieves meta-data associate with that
   attribute/element/uri.</td>
     </tr>
     <tr>
-      <td style="vertical-align: top;">ISymbolContextResolver</td>
+      <td style="vertical-align: top;"><a href="../api_reference/org/eclipse/jst/jsf/designtime/resolver/ISymbolContextResolver.html">ISymbolContextResolver</a></td>
       <td style="vertical-align: top;">Determines what symbols are available or valid within the
   current context.<span style="">&nbsp; </span>For example, if
   context is an EL expression, what bean names are available?</td>
@@ -113,45 +92,44 @@ The following is a list of context resolvers that are available as provisional A
   </tbody>
 </table>
 
-<br>
 <h3>Factories</h3>
-Factories exist to create both contexts and context resolvers.&nbsp; These are:<br>
-<br>
+Factories exist to create both contexts and context resolvers.&nbsp; These are:
+<p></p>
 <table style="width: 100%; text-align: left;" border="1" cellpadding="2" cellspacing="2">
   <tbody>
-    <tr>
+    <tr style="font-weight: bold">
       <td style="vertical-align: top;">Factory Name<br>
       </td>
       <td style="vertical-align: top;">What it does<br>
       </td>
     </tr>
     <tr>
-      <td style="vertical-align: top;">org.eclipse.jst.jsf.context.structureddocument.internal.provisional.IStructuredDocumentContextFactory<br>
+       <td style="vertical-align: top;"><a href="../api_reference/org/eclipse/jst/jsf/context/structureddocument/IStructuredDocumentContextFactory.html">org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory</a>
       </td>
       <td style="vertical-align: top;">Creates new IStructuredDocumentContext objects based on a document and offset.<br>
       </td>
     </tr>
     <tr>
-      <td style="vertical-align: top;">org.eclipse.jst.jsf.context.resolver.structureddocument.internal.provisional.IStructuredDocumentContextResolverFactory<br>
+      <td style="vertical-align: top;"><a href="../api_reference/org/eclipse/jst/jsf/context/resolver/structureddocument/IStructuredDocumentContextResolverFactory.html">org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory</a>
       </td>
       <td style="vertical-align: top;">Creates a new instances of context resolvers for an IStructuredDocumentContext.<br>
       </td>
     </tr>
   </tbody>
 </table>
-<br>
-<h3>Adding Factory Delegates</h3>The existing factories can be extended
+
+<h3>Adding Factory Delegates</h3>
+<p>The existing factories can be extended
 using factory delegates.&nbsp; A delegate for
 IStructuredDocumentContextFactory allows you to extend the existing
 factory to create IStructuredDocumentContext's for document contexts
 other than an IStructuredDocumentContext and offset.&nbsp; Similarly,
 adding factory delegates to IStructuredDocumentContextResolverFactory
 allows you to create context resolvers for structured documents other
-than those already supported.<br>
-<br>
-Factory delegates are added programmatically be calling
-addFactoryDelegate on the appropriate factory.&nbsp; See the JavaDoc
-for IDelegatingFactory for more details.<br>
+than those already supported.</p>
 
+<p>Factory delegates are added programmatically be calling
+addFactoryDelegate on the appropriate factory.&nbsp; See the JavaDoc
+for <a href="../api_reference/org/eclipse/jst/jsf/context/IDelegatingFactory.html">IDelegatingFactory</a> for more details.</p>
 
 </body></html>

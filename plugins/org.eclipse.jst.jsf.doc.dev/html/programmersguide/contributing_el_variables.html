@@ -5,12 +5,13 @@
 <title>Contributing EL Variables</title>
 <meta http-equiv="Content-Style-Type" content="text/css">
 <meta http-equiv="Content-Script-Type" content="text/javascript">
-<link rel="stylesheet" href="../../book.css" type="text/css"></head>
+<link rel="stylesheet" href="../../book.css" type="text/css">
+<link rel="stylesheet" href="../tutorials/default_style.css"></head>
 <body>
 <table summary="" cellpadding="0" cellspacing="0" width="100%">
 <tbody><tr valign="bottom">
 <td align="left" width="86%">
-      <h1>Contributing EL Variables</h1>
+<h1>Contributing EL Variables</h1>
 
 </td>
 </tr>
@@ -32,18 +33,18 @@ variables are resolved, you can use the variableResolver extension.<br>
 <h3>Symbol Factory Extension and Meta-data<br>
 </h3>
 A symbol factory is any factory class that extends
-org.eclipse.jst.jsf.context.symbol.internal.provisional.source.AbstractContextSymbolFactory.&nbsp;
+<code>org.eclipse.jst.jsf.context.symbol.source.AbstractContextSymbolFactory</code>.&nbsp;
 Once you create your implementation, you can declare it to the
 framework using the
-org.eclipse.jst.jsf.context.symbol.contextSymbolFactory extension
+<a href="../extpts_reference/jsf/org_eclipse_jst_jsf_common_contextSymbolFactory.html">org.eclipse.jst.jsf.common.contextSymbolFactory</a> extension
 point.&nbsp; In the extension, you need to provide a unique
 factoryId.&nbsp; This factoryId is used to identify your factory and
 can then be used in your symbol factory meta-data section.&nbsp; See also the <a href="the_design_time_application_manager.html">Design Time Application Manager</a> for information.<br>
 <br>
 Your factory implementation will implement the following method:<br>
-<br>
-&nbsp;&nbsp;&nbsp; protected abstract ISymbol internalCreate(String symbolName, int scope, IAdaptable context, List problems);<br>
-<br>
+<div class="code"><pre>
+protected abstract ISymbol internalCreate(String symbolName, int scope, IAdaptable context, List problems);<br>
+</pre></div>
 The symbolName is the one provided by the system, usually corresponding
 to the tag attribute, that declares the variable.&nbsp; You may use
 this symbol name or ignore it and use your own, depending on how the
@@ -63,37 +64,36 @@ JSF has many ways to contribute variables.&nbsp; If the framework has
 overlooked any or if you have added new ways yourself without affecting
 the way other variables, such as managed beans, are declared, then you
 can do so through the
-org.eclipse.jst.jsf.context.symbol.symbolSourceProvider
+<a href="../extpts_reference/jsf/org_eclipse_jst_jsf_common_symbolSourceProvider.html">org.eclipse.jst.jsf.common.symbolSourceProvider</a>
 extension.&nbsp; Your symbol provider will implement the
-org.eclipse.jst.jsf.context.symbol.internal.provisional.source.ISymbolSourceProviderFactory
+<code>org.eclipse.jst.jsf.context.symbol.source.ISymbolSourceProviderFactory</code>
 interface.&nbsp; Every time the framework requests a list of variables
 through the default VariableResolver and ExternalContext, your provider
 will be queried for all its symbols at one or more scopes.<br>
 <br>
 Note that your symbol provider may not called if:<br>
-<br>
-- the default variable resolver has been replaced by one that does not call the default external context.<br>
-- the default external context has been replaced by one that does not query the symbol providers.<br>
-<br>
-<h3>VariableResolver Extension<br>
-</h3>
-The variable provider extension allows you to register your own design
+<br><ul>
+<li>the default variable resolver has been replaced by one that does not call the default external context.</li>
+<li>the default external context has been replaced by one that does not query the symbol providers.</li>
+</ul>
+<h3>VariableResolver Extension</h3>
+<p>The variable provider extension allows you to register your own design
 time resolver.&nbsp; You declare your resolver using the
-org.eclipse.jst.jsf.designtime.variableresolver extension point.&nbsp;
+<a href="../extpts_reference/jsf/org_eclipse_jst_jsf_core_variableresolver.html">org.eclipse.jst.jsf.core.variableresolver extension point.</a>&nbsp;
 Your extension will declare a unique id and a class.&nbsp; The class
 must extend
-org.eclipse.jst.jsf.designtime.internal.provisional.el.AbstractDTVariableResolver.&nbsp;
+<code>org.eclipse.jst.jsf.designtime.el.AbstractDTVariableResolver</code>.&nbsp;
 To register your resolver as the active one for a project (note: JSF
 1.1 only supports a single variable resolver at a given time.&nbsp;
 Future versions supporting JSF 1.2 will have a more robust scheme
 matching what is defined in the newer specification), you use
 DesignTimeApplicationManager.setVariableResolverProvider specifying the
-id defined in your extension as the argument.<br>
-<br>
-Once your variable resolver is registered and active for a project, all
+id defined in your extension as the argument.</p>
+
+<p>Once your variable resolver is registered and active for a project, all
 variable resolution requests to the framework will call your
 implementation.&nbsp; This gives you complete control over how all EL
 variable symbols are discovered and instantiated by the design time
-framework.<br>
+framework.</p>
 
 </body></html>

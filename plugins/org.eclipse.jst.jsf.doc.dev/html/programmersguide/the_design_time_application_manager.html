@@ -5,7 +5,9 @@
 <title>The Design Time Application Manager</title>
 <meta http-equiv="Content-Style-Type" content="text/css">
 <meta http-equiv="Content-Script-Type" content="text/javascript">
-<link rel="stylesheet" href="../../book.css" type="text/css"></head>
+<link rel="stylesheet" href="../../book.css" type="text/css">
+<link rel="stylesheet" href="../tutorials/default_style.css">
+</head>
 <body>
 <table summary="" cellpadding="0" cellspacing="0" width="100%">
 <tbody><tr valign="bottom">
@@ -22,9 +24,9 @@ design time.&nbsp; While it is not intended to replace a runtime
 simulator, it provides an extensible framework to allow adopters to
 provide end-user features that depend on simulating certain specific
 runtime behavior.&nbsp; These features include validation and content
-assist for EL expressions.<br>
-<br>
-The DTAppMgr is comprised of the following main components:<br>
+assist for EL expressions.
+
+<p>The DTAppMgr is comprised of the following main components:</p>
 <ul>
   <li>a simulated FacesContext, called DTFacesContext, used to simulates part of this key runtime context object.</li>
   <li>a pluggable ExternalContext, called DTExternalContext to support different behaviors in different containers (i.e. JSP).</li>
@@ -35,7 +37,7 @@ The DTAppMgr is comprised of the following main components:<br>
 The simulated FacesContext, called DTFacesContext, currently supports a
 very limited subset of the runtime FacesContext object.&nbsp; Its main
 function is to allow for a pluggable external context.&nbsp; At
-design-time, one FacesContext is created per IFile.<br>
+design-time, one FacesContext is created per IFile.
 <h3>Pluggable ExternalContext</h3>
 The ExternalContext is used to separate container-dependent context
 information from the rest of the FacesContext.&nbsp; At design time, we
@@ -45,26 +47,26 @@ factory extension point.&nbsp; The extension point is
 org.eclipse.jst.jsf.designtime.externalcontext.&nbsp; You extension
 will define an id and class.&nbsp; The id uniquely identifies you
 factory class, which must extend
-org.eclipse.jst.jsf.designtime.internal.provisional.context.AbstractDTExternalContextFactory.&nbsp;
+<code>org.eclipse.jst.jsf.designtime.context.AbstractDTExternalContextFactory</code>.&nbsp;
 To set your external context factory as the current one, use
-DesignTimeApplicationManager.setExternalContextProvider(String).&nbsp;
+<code>DesignTimeApplicationManager.setExternalContextProvider(String)</code>.&nbsp;
 Note that by changing the current ExternalContextProvider on a project,
 you will significantly change the behavior of how variables are
-resolved in EL expressions.<br>
+resolved in EL expressions.
 <h3>Pluggable resolvers</h3>
 JSF EL expressions may contain variable and method bindings that
 reference external objects.&nbsp; At runtime, this is accomplished
 through several mechanisms that convert different types of
 identifier symbols into objects and methods.&nbsp; At design-time the
 JSF tooling tries to parallel these as closely as possible.&nbsp; These
-mechanisms are:<br>
+mechanisms are:
 
 <ul>
-<li>VariableResolver</li><li>PropertyResolver</li><li>MethodBinding<br>
+<li>VariableResolver</li><li>PropertyResolver</li><li>MethodBinding
 </li>
 </ul>
-<h4>VariableResolver</h4>
 
+<h4>VariableResolver</h4>
 All identifier symbol resolution in EL starts with the
 VariableResolver.&nbsp; An expression like "myBean.property" is
 resolved by first extracting the symbol "myBean" and requesting the
@@ -97,24 +99,23 @@ method.&nbsp; However at design time, we want to be able resolve a
 method binding in such a way that we can provide the same kinds of
 features we provide for properties such as signature validation and
 content assist.
-<h3>JSP document processor<br>
-</h3>
+<h3>JSP document processor</h3>
 The JSP document processor parses JSP document models looking for
 information to update in the simulated design time.&nbsp; The primary
 objective of the processor is to allow component writers to add support
 for tags that contribute EL variables.&nbsp; They can accomplish this
 by contributing JSF tooling meta-data for a particular
 uri/element/attribute that defines such a variable.&nbsp; The meta-data
-properties that are supported are as follows:<br>
-<br>
+properties that are supported are as follows:
+
 <table style="width: 100%; text-align: left;" border="1" cellpadding="2" cellspacing="2">
   <tbody>
     <tr>
-      <td style="vertical-align: top;">Meta-data property<br>
+      <td style="vertical-align: top;font-weight: bold">Meta-data Trait<br>
       </td>
-      <td style="vertical-align: top;">Valid Values<br>
+      <td style="vertical-align: top;font-weight: bold">Valid Values<br>
       </td>
-      <td style="vertical-align: top;">Description<br>
+      <td style="vertical-align: top; font-weight: bold">Description<br>
       </td>
     </tr>
     <tr>
@@ -144,44 +145,49 @@ meta-data defined below.<br>
     <tr>
       <td style="vertical-align: top;">value-binding-symbol-factory<br>
       </td>
-      <td style="vertical-align: top;">An corresponding to a 'factoryId' field on a valid extension of 'org.eclipse.jst.jsf.context.symbol.contextSymbolFactory'.<br>
+      <td style="vertical-align: top;">An corresponding to a 'factoryId' field on a valid extension of '<a href="../extpts_reference/jsf/org_eclipse_jst_jsf_common_contextSymbolFactory.html">org.eclipse.jst.jsf.common.contextSymbolFactory</a>'.<br>
       </td>
       <td style="vertical-align: top;">If you wish to customize the
 variable created for this attribute, you can specify this factory
 extension.&nbsp; Your factory will be passed all available context,
 including DOM context, with which you can decide how to create a custom
-symbol for your variable.&nbsp;&nbsp; See "how-to TODO: link me" for
+symbol for your variable.&nbsp;&nbsp; See <a href="./contributing_el_variables.html">Contributing EL Variables</a> for
 more details.<br>
       </td>
     </tr>
   </tbody>
 </table>
-<br>
+
 <h4>Loadbundle example</h4>
-Below is the meta-data markup for the built-in core loadBundle variable contributor meta-data:<br>
-<br>
-<pre>&nbsp;&nbsp;&nbsp; &lt;cm-element name="loadBundle"&gt;</pre>
-<pre>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &lt;cm-attribute name="var"&gt;</pre>
-<pre>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &lt;property name="contributes-value-binding"&gt;</pre>
-<pre>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &lt;value&gt;true&lt;/value&gt;</pre>
-<pre>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &lt;/property&gt;</pre>
-<pre>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &lt;property name="value-binding-scope"&gt;</pre>
-<pre>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &lt;value&gt;request&lt;/value&gt;</pre>
-<pre>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &lt;/property&gt;</pre>
-<pre>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &lt;property name="value-binding-symbol-factory"&gt;</pre>
-<pre>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &lt;value&gt;org.eclipse.jst.jsf.designtime.core.loadBundle&lt;/value&gt;</pre>
-<pre>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &lt;/property&gt;</pre>
-<pre>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &lt;/cm-attribute&gt;</pre>
-<pre>&nbsp;&nbsp;&nbsp; &lt;/cm-element&gt;</pre>
-<br>
-This fragment defines meta-data for the attribute 'var' of tag element
+Below is the meta-data markup for the built-in core loadBundle variable contributor meta-data:
+<div class="code">
+<pre>
+ &lt;entity id="loadBundle"&gt;
+ 	&lt;entity id="var"&gt;
+ 		&lt;trait id="contributes-value-binding"&gt;
+ 			&lt;value&gt;true&lt;/value&gt;
+ 		&lt;/trait&gt;
+ 		&lt;trait id="value-binding-scope"&gt;
+ 			&lt;value&gt;request&lt;/value&gt;
+ 		&lt;/trait&gt;
+ 		&lt;trait id="value-binding-symbol-factory"&gt;
+ 			&lt;value&gt;org.eclipse.jst.jsf.designtime.core.loadBundle&lt;/value&gt;
+ 		&lt;/trait&gt;
+ 	&lt;/entity&gt;
+ &lt;/entity&gt;
+</pre>
+</div>
+<p>This fragment defines meta-data for the attribute 'var' of tag element
 'loadBundle' (the uri for the tag library is declared in the extension
 point).&nbsp; The meta-data tells the processor to add a variable with
 scope 'request' using the factory defined by the extension factory id
-'org.eclipse.jst.jsf.designtime.core.loadBundle'.<br>
-<br>
-See TODO:link me for more information on how to contribute meta-data for a JSF tag library.
-<h2><span style="font-weight: bold;"></span></h2>
+'org.eclipse.jst.jsf.designtime.core.loadBundle'.</p>
 
+<h4>Other Information</h4>
+<ul>
+<li><a href="./metadata_framework.html">Design-time Meta-data Framework</a></li>
+<li><a href="../tutorials/implementing_a_new_tag_based_el_variable_contributor_for_jsp.html">EL Variable Contributor Tutorial</a></li>
+<li><a href="../tutorials/supplying_tag_library_metadata_for_apache_myfaces_tomahawk.html">Contributing Meta-data for Apache Tomahawk Component Tutorial</a></li>
+</ul>
 
 </body></html>

@@ -2,29 +2,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>Implementing a New Tag-Based EL Variable Contributor for JSP</title>
+<title>Implementing a New Tag-Based EL Variable Contributor for
+JSP</title>
 
 
-  <meta http-equiv="Content-Style-Type" content="text/css">
-
-  
-  <meta http-equiv="Content-Script-Type" content="text/javascript">
-
-  
-  <link rel="stylesheet" href="../../book.css" type="text/css">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<link rel="stylesheet" href="../../book.css" type="text/css" />
+<link rel="stylesheet" href="default_style.css" type="text/css" />
 </head>
 
 <body>
 <table summary="" cellpadding="0" cellspacing="0" width="100%">
-
-
-
-
-
-
-
-
-
 
 <tbody><tr valign="bottom">
 <td align="left" width="86%">
@@ -33,15 +22,6 @@
 </tr>
 </tbody>
 </table>
-
-
-
-
-
-
-
-
-
 
 <hr>
 <h3>Summary</h3>
@@ -54,389 +34,109 @@ finish this tutorial, you should have a basic grasp of what is required
 to add tooling support for JSF-JSP tags that contribute variables to
 JSF EL for you own real JSF tag libraries..<br>
 
-
-
-
-
-
-
-
-
-
 <h3>Getting Started</h3>
-
-
-
-
-
-
-
-
-
 
 To begin, create a blank plugin project by using <span style="font-weight: bold;">File &gt; New &gt; Project</span>... and selecting Plug-in Project.&nbsp; Create the project with all of the defaults:<br>
 
-
-
-
-
-
-
-
-
-
 <br>
-
-
-
-
-
-
-
-
- 
 
 <img alt="plugin project" src="images/new_plugin_project_dialog1.png" style="width: 500px; height: 500px;"><br>
-
-
-
-
-
-
-
-
-
-
 <br>
-
-
-
-
-
-
-
-
-
 
 Next, open the plug-in dependencies for your project:<br>
 
-
-
-
-
-
-
-
-
-
 <br>
+<img alt="open_manifest_el" src="images/open_manifest_el.png" style="width: 263px; height: 315px;">
+<p>Add the plugin dependencies highlighted in yellow below:</p>
 
-
-
-
-
-
-
-
-
-
-<img alt="open_manifest_el" src="images/open_manifest_el.png" style="width: 263px; height: 315px;"><br>
-
-
-
-
-
-
-
-
-
-
-<br>
-
-
-
-
-
-
-
-
-
-
-Add the plugin dependencies highlighted in yellow below:<br>
-
-
-
-
-
-
-
-
-
-
-<br>
-
-
-
-
-
-
-
-
-
-
-<img alt="dependency" src="add_dependency.png"><img alt="dependency" src="images/add_dependency.png" style="width: 1093px; height: 381px;"><br>
-
-
-
-
-
-
-
-
-
-
-
+<img alt="dependency" src="images/add_dependency.png"><br>
 <p>
-	<span style="font-style: italic;"><br>
+<span style="font-style: italic;">
 </span><span style="font-style: italic;"></span></p>
-
-
-
-
-
-
-
-
-
-
-<p>Now we are ready to construct our factory and meta-data extensions.<br>
+<p>Now we are ready to construct our factory and meta-data extensions.
 </p>
-
-
-
-
-
-
-
-
-
 
 <h3>Constructing the Factory</h3>
 The symbol factory is delegated the task of constructing your custom
-design time variables.&nbsp; First, we will create the factory class.<br>
-
-
-
-
-
-
-
-
-
-
-<br>
-
-
-
-
-
-
-
-
-
-
+design time variables.&nbsp; First, we will create the factory class.
+<p>
 Create a new java class in your project by clicking on the src folder and clicking <span style="font-weight: bold;">File &gt; New &gt; Class</span>.&nbsp;
 Call the class "LocallyDeclaredBeanFactory" and make sure it extends
-org.eclipse.jst.jsf.context.symbol.internal.provisional.source.AbstractContextSymbolFactory.&nbsp;
-Also be sure enable the check box, <span style="font-weight: bold;">Inherited abstract methods</span>:<br>
-
-
-
-
-
-
-
-
-
-
+<code>org.eclipse.jst.jsf.context.symbol.source.AbstractContextSymbolFactory</code>.&nbsp;
+Also be sure enable the check box, <span style="font-weight: bold;">Inherited abstract methods</span>:</p>
 <br>
-
-
-
-
-
-
-
-
-
-
-<img alt="create_factory_class" src="images/create_factory_class.png" style="width: 495px; height: 599px;"><br>
-
-
-
-
-
-
-
-
-
-
+<img alt="create_factory_class" src="images/create_factory_class.png" style="width: 579px; height: 632px;"><br>
 <br>
-
-
-
-
-
-
-
-
-
-
 Open the new class in the Java editor.&nbsp; You will see two methods
 automatically generated from the abstract parent class.&nbsp; For the <span style="font-style: italic;">supports</span> method, replace the method with the following:<br>
-
-
-
-
-
-
-
-
-
-
 <br>
-
-
-
-
-
-
-
-
-
-
-<div class="code">
-&nbsp;&nbsp;&nbsp; public boolean supports(IAdaptable context) {<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; return context.getAdapter(IStructuredDocumentContext.class) != null;<br>
-&nbsp;&nbsp;&nbsp; }<br>
+<div class="code"><pre>
+	public boolean supports(IAdaptable context) {
+		return context.getAdapter(IStructuredDocumentContext.class) != null;
+	}
+</pre>
 </div>
-
-
-
-
-
-
-
-
-
-
 <br>
-
-
-
-
-
-
-
-
-
-
 This code tells the framework to only call this factory when the context is adaptable to a structured document context.<br>
-
-
-
-
-
-
-
-
-
 <br>
-
-
-
-
-
-
-
-
-
 Next, replace the internalCreate code with the following:<br>
-
-
-
-
-
-
-
-
-
 <br>
+<div class="code">
+<pre>
+	protected ISymbol internalCreate(String symbolName, int scope, IAdaptable context, List problems) 
+	{
+		// get the context
+		final IStructuredDocumentContext sContext =
+			(IStructuredDocumentContext)context.getAdapter(IStructuredDocumentContext.class);
+
+		// construct a dom resolver for this context
+		final IDOMContextResolver domResolver = 
+
+			IStructuredDocumentContextResolverFactory.INSTANCE.getDOMContextResolver(sContext);
+
+		// if resolver can be constructed
+		if (domResolver != null)
+		{
+			// get the current node
+			// this	is the node marked by our meta-data as contributing an el variable
+			final Node curNode = domResolver.getNode();
+
+			// node must be an XML attribute
+			if (curNode instanceof Attr)
+			{
+				final Attr attr = (Attr) curNode;
+
+				final Node owningElement = attr.getOwnerElement();
 
 
+				//attribute must have a owningElement
+				if (owningElement != null)
+				{
+
+					IWorkspaceContextResolver workspaceResolver =
 
 
+						IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver(sContext);
 
 
+					IProject iProject = workspaceResolver.getProject();
 
 
+					if (iProject != null)
+					{
 
-<div class="code">&nbsp;&nbsp;&nbsp; protected ISymbol internalCreate(String symbolName, int scope, IAdaptable context, List problems) <br>
-&nbsp;&nbsp;&nbsp; {<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; // get the contex<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; final IStructuredDocumentContext sContext =<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (IStructuredDocumentContext) <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-context.getAdapter(IStructuredDocumentContext.class);<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // construct a dom resolver for this context<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; final IDOMContextResolver domResolver = <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-IStructuredDocumentContextResolverFactory.INSTANCE.getDOMContextResolver(sContext);<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // if resolver can be constructed<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (domResolver != null)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; // get the current node<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; // this
-is the node marked by our meta-data as contributing an el variable<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; final Node curNode = domResolver.getNode();<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // node must be an XML attribute<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (curNode instanceof Attr)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; final Attr attr = (Attr) curNode;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-final Node owningElement = attr.getOwnerElement();<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-// attribute must have a owningElement<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (owningElement != null)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; IWorkspaceContextResolver workspaceResolver =<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver(sContext);<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; IProject iProject = workspaceResolver.getProject();<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; if (iProject != null)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; return
-handleSymbolCreation(symbolName, sContext, attr, owningElement,
-iProject);<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; }<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return null;<br>
-&nbsp;&nbsp;&nbsp; 
-}
+						return
+						handleSymbolCreation(symbolName, sContext, attr, owningElement,
+								iProject);
+					}
+				}
+			}
+		}
+
+		return null;
+
+	}
+</pre>
 </div>
 
 
@@ -474,235 +174,114 @@ You also need to add this private method that does the symbol creation:<br>
 
 
 
-<div class="code">
-&nbsp;&nbsp;&nbsp; private ISymbol handleSymbolCreation(final String symbolName, <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; final IStructuredDocumentContext context,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; final Attr attr, <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; final Node owningElement,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; final IProject project)<br>
-&nbsp;&nbsp;&nbsp; {<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; // create tag lib resolver for this context<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; final ITaglibContextResolver resolver = IStructuredDocumentContextResolverFactory.INSTANCE<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; .getTaglibContextResolver(context);<br>
+<div class="code"><pre>
+	private ISymbol handleSymbolCreation(final String symbolName, 
+			final IStructuredDocumentContext context,
+			final Attr attr, 
+			final Node owningElement,
+			final IProject project)
+	{
+		// create tag lib resolver for this context
+		final ITaglibContextResolver resolver = IStructuredDocumentContextResolverFactory.INSTANCE
+		.getTaglibContextResolver(context);
+
+		if (resolver == null || !resolver.canResolveContext(context)) {
+			return null;
+		}
+
+
+		final String uri = resolver.getTagURIForNodeName(owningElement);
+		IBeanInstanceSymbol beanSymbol = null;
+
+		// process core taglib
+		if ("http://oracle.com/tutorial/fake/taglib".equals(uri)) {
+			final String elementName = owningElement.getLocalName();
+			final String attrName = attr.getName();
+
+			// protect ourselves by ensuring we are in the var attribute of 
+			// a locallyDeclaredBean
+			if ("locallyDeclaredBean".equals(elementName)) {
+				if ("var".equals(attrName)) {
+
+					final NamedNodeMap attrMap =
+						owningElement.getAttributes();
+
+					final Node baseNameNode =
+						attrMap.getNamedItem("classname");
+
+
+					if (baseNameNode instanceof Attr)
+					{
+
+						// get the name of the bean's class
+
+						final String
+						className = ((Attr)baseNameNode).getValue();
+
+						// create a new empty bean instance symbol
+						// this will encapsulate all of the design time information
+						// about our new variable
+						beanSymbol = 
+							SymbolFactory.eINSTANCE.createIBeanInstanceSymbol();
+
+
+						// name the new variable after the value of the var attribute
+						// in the tag
+
+						beanSymbol.setName(attr.getValue());
+
+						// next, we	will ask JDT to resolve the class name to a type
+						try
+						{
+
+							IJavaProject javaProject = JavaCore.create(project);
+							IType type = javaProject.findType(className);
+
+							// don't bother setting a type descriptor if we
+							// can't find a type
+							if (type != null)
+							{
+								// now we must create a type descriptor that encapsulates 
+								// the specific type information about our bean
+								IJavaTypeDescriptor2 javaTypeDescriptor =
+									SymbolFactory.eINSTANCE.createIJavaTypeDescriptor2();
+								javaTypeDescriptor.setType(type);
+								beanSymbol.setJavaTypeDescriptor(javaTypeDescriptor);
+							}
+						}
+						catch (JavaModelException jme)
+						{
+							// could not construct
+							// fall-through
+						}
+						// finally, add a description that will appear in the content assis
+						// drop-down, to prove that it really worked
+						beanSymbol.setDetailedDescription("Hello world, this is my first tag variable factory");
+					}
+				}
+			}
+		}
+
+		return beanSymbol;
+	}
+</pre></div>
 <br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; if (resolver == null || !resolver.canResolveContext(context)) {<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; return null;<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; }<br>
 <br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; final String uri = resolver.getTagURIForNodeName(owningElement);<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; IBeanInstanceSymbol beanSymbol = null;<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; // process core taglib<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; if ("http://oracle.com/tutorial/fake/taglib".equals(uri)) {<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; final String elementName = owningElement.getLocalName();<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; final String attrName = attr.getName();<br>
-<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; // protect ourselves by ensuring we are in the var attribute of <br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; // a locallyDeclaredBean<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; if ("locallyDeclaredBean".equals(elementName)) {<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; if ("var".equals(attrName)) {<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; final NamedNodeMap attrMap =
-owningElement.getAttributes();<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; final Node baseNameNode =
-attrMap.getNamedItem("classname");<br>
-<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; if (baseNameNode instanceof Attr)
-{<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; // get the
-name of the bean's class<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; final String
-className = ((Attr)baseNameNode).getValue();<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; // create a
-new empty bean instance symbol<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; // this will
-encapsulate all of the design time information<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; // about our
-new variable<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; beanSymbol = <br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; SymbolFactory.eINSTANCE.createIBeanInstanceSymbol();<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; // name the
-new variable after the value of the var attribute<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; // in the tag<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-beanSymbol.setName(attr.getValue());<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; // next, we
-will ask JDT to resolve the class name to a type<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; try<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; {<br>&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-IJavaProject javaProject = JavaCore.create(project);<br>
-&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-IType type = javaProject.findType(className);<br>
-&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<br>
-&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-// don't bother setting a type descriptor if we<br>
-&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-// can't find a type<br>
-&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-if (type != null)<br>
-&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-{<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; // now we must create a type
-descriptor that encapsulates <br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; // the specific type information
-about our bean<br>
-&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-IJavaTypeDescriptor2 javaTypeDescriptor =
-SymbolFactory.eINSTANCE.createIJavaTypeDescriptor2();<br>
-&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-javaTypeDescriptor.setType(type);<br>
-&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-beanSymbol.setJavaTypeDescriptor(javaTypeDescriptor);<br>
-&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-}<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; }<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; catch
-(JavaModelException jme)<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; {<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; // could not construct<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; // fall-through<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; }<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; // finally,
-add a description that will appear in the content assis<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; // drop-down,
-to prove that it really worked<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-beanSymbol.setDetailedDescription("Hello world, this is my first tag
-variable factory");<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; }<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; }<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; }<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; }<br>
-<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; return beanSymbol;<br>
-&nbsp;&nbsp;&nbsp; 
-}
-</div>
-
-
-
-
-
-
-
-
-<br>
-
-
-
-
-
-
-
-
-
-
-<br>
-
-
-
-
-
-
-
-
-
+<p>You may need to hit Ctrl-O to organize your imports.</p>
 
 Save the class and check that it compiles.<br>
-
-
-
-
-
-
-
 <br>
 
-
-
-
-
-
-
-<h3>Adding the Annotation Meta-data</h3>
-
-
-
-
-
-
-
+<h3>Adding the Meta-data</h3>
 Our ultimate goal is to make a tag like this:<br>
-
-
-
-
-
-
-
-
 <div class="code"><pre>&lt;t:locallyDeclaredBean var="x" classname="beans.MyBean"/&gt;<br></pre></div>
-
-
-
-
 
 <p>declare a variable called "x" to the tooling which corresponds to a bean
 of type "beans.MyBean".&nbsp; In order to tell the framework this, we
-must use meta-data to annotate the t::locallyDeclaredBean.&nbsp; <br>
+must use meta-data to annotate the t:locallyDeclaredBean.&nbsp; <br>
 </p>
-
-
-
-
-
-<p>First we create a new folder in our project called meta-data:<br>
+<p>First we create a new folder in our project called metadata:<br>
 </p>
-
-
-
-
 
 <p><img alt="add_meta_data_folder" src="images/add_meta_data_folder.png" style="width: 438px; height: 578px;"><br>
 </p>
@@ -731,19 +310,42 @@ must use meta-data to annotate the t::locallyDeclaredBean.&nbsp; <br>
 
 
 
+<div class="code">
+<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;md:metadatamodel
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" 
+	xmlns:md="http://org.eclipse.jst.jsf.common.metadata/metadata.ecore"
+	xmlns:mdt="http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore"  
+	id="http://oracle.com/tutorial/fake/taglib"&gt;
+	
+	&lt;entity id="locallyDeclaredBean"&gt;
+		&lt;entity id="var"&gt;
+			&lt;trait id="contributes-value-binding"&gt;
+				&lt;value&gt;true&lt;/value&gt;
+			&lt;/trait&gt;
+			&lt;trait id="value-binding-scope"&gt;
+				&lt;value&gt;request&lt;/value&gt;
+			&lt;/trait&gt;
+			&lt;trait id="value-binding-symbol-factory"&gt;
+				&lt;value&gt;tutorial.locallyDeclaredBean&lt;/value&gt;
+			&lt;/trait&gt;
+		&lt;/entity&gt;
+	&lt;/entity&gt;
+		
+&lt;/md:metadatamodel&gt;
+</pre>
+</div>
 
-<pre>&lt;?xml version="1.0" encoding="UTF-8"?&gt;<br>&lt;grammar-annotation <br>	xmlns="http://org.eclipse.jsf.core/grammarAnnotationSchema"<br>	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"<br>	xsi:schemaLocation="http://org.eclipse.jsf.core/grammarAnnotationSchema D:\\EclipseWTPLatest\\WTPWorkspace\\org.eclipse.jst.jsf.core\\schema\\grammar-annotations.xsd "&gt;<br>	&lt;cm-element name="locallyDeclaredBean"&gt;<br>		&lt;cm-attribute name="var"&gt;<br>			&lt;property name="contributes-value-binding"&gt;<br>				&lt;value&gt;true&lt;/value&gt;<br>			&lt;/property&gt;<br>			&lt;property name="value-binding-scope"&gt;<br>				&lt;value&gt;request&lt;/value&gt;<br>			&lt;/property&gt;<br>			&lt;property name="value-binding-symbol-factory"&gt;<br>				&lt;value&gt;tutorial.locallyDeclaredBean&lt;/value&gt;<br>			&lt;/property&gt;<br>		&lt;/cm-attribute&gt;<br>	&lt;/cm-element&gt;<br>&lt;/grammar-annotation&gt;<br><br></pre>
 
 
 
-
-
-The important things to note are "cm-element" and "cm-attribute" that
-declare to the meta-data framework that attribute "var" on element
-"locallyDeclaredBean" is what is of interest.&nbsp; The property
+<p>Notice the entities and traits.  The "var" attribute <code>entity</code> is a child of the "locallyDeclaredBean" <code>entity</code>.
+The property
 "value-binding-symbol-factory" is what points the framework to our
 factory.&nbsp; However the value here is not the factory itself, but an
-id for its extension, which we'll define in the next section.<br>
+id for its extension, which we'll define in the next section.</p>
 
 
 
@@ -761,8 +363,8 @@ id for its extension, which we'll define in the next section.<br>
 
 
 
-Two extension point work together to declare our symbol factory.&nbsp;
-First we will extend the annotations extension point&nbsp; to declare
+Two extension points work together to declare our symbol factory.&nbsp;
+First we will extend an extension point&nbsp; to declare
 the meta-data that we just defined to the framework.&nbsp; Second, we will
 register the factory id.<br>
 
@@ -776,7 +378,7 @@ register the factory id.<br>
 
 
 
-Open the plugin.xml editor for the project and select the <span style="font-weight: bold;">Extensions </span>tab, click <span style="font-weight: bold;">Add...</span> and select <span style="font-weight: bold;">org.eclipse.jst.jsf.contentmodel.annotations.annotationFile</span>.&nbsp; Right click on the new extension element in the tree on the left and add a new <span style="font-weight: bold;">annotationFile</span> entry.&nbsp; Enter the uri and location information as shown.<br>
+Open the plugin.xml editor for the project and select the <span style="font-weight: bold;">Extensions </span>tab, click <span style="font-weight: bold;">Add...</span> and select <span style="font-weight: bold;">org.eclipse.jst.jsf.common.standardMetaDataFiles</span>.&nbsp; Right click on the new extension element in the tree on the left and add a new <span style="font-weight: bold;">standardMetaDataFile</span> entry.&nbsp; Enter the uri and location information as shown.<br>
 
 
 
@@ -788,7 +390,7 @@ Open the plugin.xml editor for the project and select the <span style="font-weig
 
 
 
-<img alt="annotation ext point" src="images/add_annotation.png" style="width: 825px; height: 710px;"><br>
+<img alt="annotation ext point" src="images/add_annotation.png" ><br>
 
 
 
@@ -818,7 +420,7 @@ for this tutorial.<br>
 
 
 
-Next, we need to declare an extension to <span style="font-weight: bold;">org.eclipse.jst.jsf.context.symbol.contextSymbolFactory</span> that declares our factory and gives it a unique id:<br>
+Next, we need to declare an extension to <span style="font-weight: bold;"><a href="../extpts_reference/jsf/org_eclipse_jst_jsf_common_contextSymbolFactory.html">org.eclipse.jst.jsf.common.contextSymbolFactory</a></span> that declares our factory and gives it a unique id:<br>
 
 
 
@@ -830,66 +432,20 @@ Next, we need to declare an extension to <span style="font-weight: bold;">org.ec
 
 
 
-<img alt="add symbol factory" src="images/add_symbol_factory.png" style="width: 827px; height: 708px;"><br>
-
-
-
-
-
-<br>
-
-
-
-
-
+<img alt="add symbol factory" src="images/add_symbol_factory.png"><br>
+<p>
 Notice that the value we put in the <span style="font-weight: bold;">factory</span>
 property matches what is in the "value-binding-symbol-factory" metadata
 property.&nbsp; These values must match so that the framework can find
-our factory.<br>
-
-
-
-
-
-<br>
-
-
-
-
-
-We are now finished with defining our tag contributor (easy
+our factory.</p>
+<p>We are now finished with defining our tag contributor (easy
 huh?).&nbsp; But we're not quite finished.&nbsp; We need to construct a
 dynamic web project complete with our fake tag library to test out what
-we've done.<br>
-
-
-
-
-
-<br>
-
-
-
-
+we've done.</p>
 
 <h3>Setting Up the Dynamic Web Project</h3>
-
-
-
-
-
 First we need to launch a new runtime workbench with our plugin installed.&nbsp; To do this, execute <span style="font-weight: bold;">Run &gt; Run...</span> to create a new launch profile.&nbsp; Create a new Eclipse Application and launch it with the defaults:<br>
-
-
-
-
-
-<br>
-
-
-
-
-
+<p>
 <img alt="run workbench" src="images/run_workbench.png" style="width: 800px; height: 640px;"> <br>
 
 
@@ -941,9 +497,9 @@ Right-click on the META-INF folder under the WebContent folder in your new Dynam
 
 
 
-
+<div class="code">
 <pre>&lt;?xml version="1.0" encoding="ISO-8859-1" ?&gt;<br><br>&lt;!DOCTYPE taglib<br>  PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN"<br>  "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd"&gt;<br><br><br>&lt;taglib&gt;<br><br><br>  &lt;!-- ========== Tag Library Description Elements ========================= --&gt;<br><br><br>  &lt;tlib-version&gt;1.0&lt;/tlib-version&gt;<br>  &lt;jsp-version&gt;1.2&lt;/jsp-version&gt;<br>  &lt;short-name&gt;tutorial&lt;/short-name&gt;<br>  &lt;uri&gt;http://oracle.com/tutorial/fake/taglib&lt;/uri&gt;<br>  &lt;description&gt;<br>    An tld to help demonstrate how to implemented tag contributed EL variables.<br>    NOTE: this is a taglib for demonstration purposes: it is not fully or correctly<br>    implemented and it is not intended to be run in real JSP applications<br>  &lt;/description&gt;<br>  &lt;tag&gt;<br><br>    &lt;name&gt;locallyDeclaredBean&lt;/name&gt;<br>    &lt;tag-class&gt;foo&lt;/tag-class&gt;<br>    &lt;tei-class&gt;foo&lt;/tei-class&gt;<br>    &lt;body-content&gt;empty&lt;/body-content&gt;<br>    &lt;description&gt;<br>      Tag declares a new bean variable at request scope based on the name <br>      and classname provided.<br>    &lt;/description&gt;<br><br>    &lt;attribute&gt;<br>      &lt;name&gt;var&lt;/name&gt;<br>      &lt;required&gt;true&lt;/required&gt;<br>      &lt;rtexprvalue&gt;false&lt;/rtexprvalue&gt;<br>      &lt;description&gt;<br>        The name of the locally declared variable.  This name will be added<br>        to the EL variable namespace for the JSP in which it is used at request scope<br>      &lt;/description&gt;<br>    &lt;/attribute&gt;<br><br>    &lt;attribute&gt;<br>      &lt;name&gt;classname&lt;/name&gt;<br>      &lt;required&gt;true&lt;/required&gt;<br>      &lt;rtexprvalue&gt;false&lt;/rtexprvalue&gt;<br>      &lt;description&gt;<br>        The fully qualified name of the Java class that will be instantiated as<br>        the backing bean for the locally declared bean.<br>      &lt;/description&gt;<br>    &lt;/attribute&gt;<br>  &lt;/tag&gt;<br>  <br>&lt;/taglib&gt;<br><br></pre>
-
+</div>
 
 
 and save and close the file.<br>
@@ -974,49 +530,63 @@ Now we will create a test JSP file by right-clicking on the <span style="font-we
 <br>
 
 
+<div class="code">
+<pre>&lt;%@page contentType="text/html"%&gt;
+&lt;%@page pageEncoding="UTF-8"%&gt;
+&lt;%--
+&gt;The taglib directive below imports the JSTL library. If you uncomment it,&lt;br/&gt;you must also add the JSTL library to the project. The Add Library... action on Libraries node in Projects view can be used to add the JSTL 1.1 library.
+--%&gt;
 
-<pre>&lt;%@page contentType="text/html"%&gt;<br>&lt;%@page pageEncoding="UTF-8"%&gt;<br>&lt;%--<br>The taglib directive below imports the JSTL library. If you uncomment it,<br>you must also add the JSTL library to the project. The Add Library... action<br>on Libraries node in Projects view can be used to add the JSTL 1.1 library.<br>--%&gt;<br><br>&lt;%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%&gt; <br>&lt;%@taglib uri="http://java.sun.com/jsf/core" prefix="f"%&gt;<br>&lt;%@taglib uri="http://java.sun.com/jsf/html" prefix="h"%&gt;<br>&lt;%@taglib uri="http://oracle.com/tutorial/fake/taglib" prefix="t" %&gt;<br><br><br>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"<br>   "http://www.w3.org/TR/html4/loose.dtd"&gt;<br><br>&lt;html&gt;<br>    &lt;head&gt;<br>  &lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;<br>        &lt;title&gt;JSP Page&lt;/title&gt;<br>    &lt;/head&gt;<br>    &lt;body&gt;<br>    &lt;f:view&gt;<br>    &lt;h1&gt;JSP Page&lt;/h1&gt;<br>    	&lt;!--  no errors --&gt;<br>		&lt;t:locallyDeclaredBean var="x" classname="beans.MyBean"/&gt;<br>		&lt;h:outputText value="#{}"/&gt;<br>    &lt;/f:view&gt;<br>    &lt;/body&gt;<br>&lt;/html&gt;<br><br></pre>
+&lt;%@taglib uri="http://java.sun.com/jsf/core" prefix="f"%&gt;
+&lt;%@taglib uri="http://java.sun.com/jsf/html" prefix="h"%&gt;
+&lt;%@taglib uri="http://oracle.com/tutorial/fake/taglib" prefix="t" %&gt;
 
 
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd"&gt;
 
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;
+&lt;title&gt;JSP Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;f:view&gt;
+		&lt;h1&gt;JSP Page&lt;/h1&gt;
+		&lt;!--  no errors --&gt;
+		&lt;t:locallyDeclaredBean var="x" classname="beans.MyBean"/&gt;
+		&lt;h:outputText value="#{}"/&gt;
+	&lt;/f:view&gt;   
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<p>
 Note a few things.&nbsp; First, we have a taglib declared for our "fake"
 tag library with prefix "t".&nbsp; Second, we have declared a bean
-using the locallyDeclaredBean tag to declare a variable "x" of the type "beans.MyBean" that we created above.<br>
-
-<br>
-
-So now let's test it.&nbsp; Position your cursor inside the empty "{}"
+using the locallyDeclaredBean tag to declare a variable "x" of the type "beans.MyBean" that we created above.</p>
+<p>So now let's test it.&nbsp; Position your cursor inside the empty "{}"
 braces in the value attribute of the outputText tag.&nbsp; Type
 Ctrl-Space to request content assist.&nbsp; You should see your bean
 "x" in the list:<br>
 
 <br>
 
-<img alt="content assist" src="images/content_assist_1.png" style="width: 938px; height: 277px;"><br>
+<img alt="content assist" src="images/content_assist_1.png" style="width: 938px; height: 277px;">
 
+<p>You can try requesting content assist for the property we added in the bean by typing a period after the "x":</p>
 
-
-
-
-
-
-<br>
-
-You can try requesting content assist for the property we added in the bean by typing a period after the "x":<br>
-
-<br>
-
+<p>
 <img alt="content assist 2" src="images/content_assist_2.png" style="width: 623px; height: 194px;"><br>
 
-<br>
-
+</p>
+<p>
 Select the property so that the EL text reads "x.fooProperty".&nbsp; Finally, right-click on the JSP file in the <span style="font-weight: bold;">File Explorer</span> and select <span style="font-weight: bold;">Validate</span> to prove that your variable and property are recognized correctly by the validation framework.<br>
-<br>
+</p>
 <h3>Conclusion</h3>
-We hope this tutorial has helped you understand how to use the JSF
+<p>We hope this tutorial has helped you understand how to use the JSF
 tooling to add design time support for your JSF component tag libraries
 that contribute EL variables.&nbsp; If you need further help or have
 trouble with this tutorial please post to our web forum on
 eclipse.org.&nbsp; Putting "EL Variable Contributor" in the subject
-will ensure speedier response from knowledgeable parties.<br>
+will ensure speedier response from knowledgeable parties.</p>
 </body></html>

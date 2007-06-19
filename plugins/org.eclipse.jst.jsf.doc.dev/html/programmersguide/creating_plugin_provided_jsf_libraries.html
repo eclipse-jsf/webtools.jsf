@@ -34,8 +34,8 @@
 	Recognizing that teams are somewhat likely to use the same sets of JSF
 	implementation and component JARs (and, hence, the same JSF Libraries), the
 	JSF Tooling provides an extension point,
-	<a href="../extpts_reference/jsf/org_eclipse_jst_jsf_core_jsfLibraries.html">
-	<code>org.eclipse.jst.jsf.core.jsfLibraries</code></a>, that enables a plugin
+	<a href="../extpts_reference/jsf/org_eclipse_jst_jsf_core_pluginProvidedJsfLibraries.html">
+	<code>org.eclipse.jst.jsf.core.pluginProvidedJsfLibraries</code></a>, that enables a plugin
 	author to provide one or more JSF Libraries as one or more plugins. This
 	frees other team members from needing to use the provided UI to manage
 	commonly-used JSF Libraries and also provides consistent and predictable
@@ -46,47 +46,38 @@
 	Begin by creating a plug-in project, specifying creation of a Java project
 	in the wizard. Once the project is created, add a plugin dependency on
 	<code>org.eclipse.jst.jsf.core</code>. Add an extension of
-	<a href="../extpts_reference/jsf/org_eclipse_jst_jsf_core_jsfLibraries.html">
-	<code>org.eclipse.jst.jsf.core.jsfLibraries</code></a>. Set the extension's
+	<a href="../extpts_reference/jsf/org_eclipse_jst_jsf_core_pluginProvidedJsfLibraries.html">
+	<code>org.eclipse.jst.jsf.core.pluginProvidedJsfLibraries</code></a>. Set the extension's
 	ID to a unique value (fully-qualified in Java package style recommended).
 	Right-click the jsfLibraries extension and select <b>New</b> &gt;
-	<b>jsfLibrary</b>. Give the jsfLibrary a meaningful name (this is its
-	"display name"), specify if it is a JSF implementation, and specify the
-	maximum JSF version that it supports. Supply a fully-qualifed classname for
+	<b>jsfLibrary</b>. Give the jsfLibrary a meaningful id, specify if it is a JSF implementation, 
+	supply a label for display that can be externalized, and specify the
+	maximum JSF version that it supports. A fully-qualifed classname for
 	the archiveFilesDelegate property (see next section for creation of this
-	class).
+	class) is also required.
 </p>
-<h3>Creating JSFLibraryArchiveFilesDelegate Implementation</h3>
+<h3>Creating PluginProvidedJSFLibraryArchiveFilesDelegate Implementation</h3>
 <p>
-	The JSF Tooling provides a base, abstract class (
-	<a href="../api_reference/org/eclipse/jst/jsf/core/internal/provisional/jsflibraryregistry/JSFLibraryArchiveFilesDelegate.html">
-	<code>org.eclipse.jst.jsf.core.internal.provisional.jsflibraryregistry.JSFLibraryArchiveFilesDelegate</code></a>
-	)that your delegate class should extend to provide the archive files that
+	The JSF Tooling provides a base, abstract class
+	<a href="../api_reference/org/eclipse/jst/jsf/core/jsflibraryregistry/PluginProvidedJSFLibraryArchiveFilesDelegate.html">
+	<code>org.eclipse.jst.jsf.core.jsflibraryregistry.PluginProvidedJSFLibraryArchiveFilesDelegate</code></a> that your delegate class must extend to provide the archive files that
 	make up your JSF Library. Create a Java class with the fully-qualified name
 	that matches the archiveFilesDelegate property specified in the previous
-	step, and that extends
-	<code>org.eclipse.jst.jsf.core.internal.provisional.jsflibraryregistry.JSFLibraryArchiveFilesDelegate</code>.
-	Override the <code>getArchiveFiles()</code> method, and supply a method
-	body that sets the relative (to a JSF project's "WebContent" folder)
-	destination location and builds a Collection of archive files (the
-	<code>createArchiveFile(String)</code> method is useful for creating
-	archive files). An example follows.
+	step, and that extends this abstract class.   Override the <code>getArchiveFiles()</code> method, and supply a method
+	body that builds a Collection of archive files using the addArchiveFile() method. An example follows.
 </p>
 <div class="code"><pre>
-public Collection getArchiveFiles() {
-	Collection archiveFiles = new ArrayList();
-	setRelativeDestinationLocation("WEB-INF/lib");
-	archiveFiles.add(createArchiveFile("lib/commons-beanutils.jar"));
-	archiveFiles.add(createArchiveFile("lib/commons-collections.jar"));
-	archiveFiles.add(createArchiveFile("lib/commons-digester.jar"));
-	archiveFiles.add(createArchiveFile("lib/commons-logging.jar"));
-	archiveFiles.add(createArchiveFile("lib/jsf-api.jar"));
-	archiveFiles.add(createArchiveFile("lib/jsf-impl.jar"));
-	archiveFiles.add(createArchiveFile("lib/jstl.jar"));
-	return archiveFiles;
-}
+	public void getArchiveFiles() {
+		addArchiveFile("lib/commons-beanutils.jar");
+		addArchiveFile("lib/commons-collections.jar");
+		addArchiveFile("lib/commons-digester.jar");
+		addArchiveFile("lib/commons-logging.jar");
+		addArchiveFile("lib/jsf-api.jar");
+		addArchiveFile("lib/jsf-impl.jar");
+		addArchiveFile("lib/jstl.jar");
+	}
 </pre></div>
-<h3>Including Archives in Plugin</h3>
+<h3>Including Archives in the Plugin</h3>
 <p>
 	As can be seen in the previous example code, the archive files that make up
 	the JSF Library are specified relative to the plugin itself. Create any

@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../../book.css" type="text/css">
+<link rel="stylesheet" href="../tutorials/default_style.css">
+<title>Design-time Meta-data Framework</title>
+</head>
+<body>
+<h1>Design-time Meta-data Framework</h1>
+<h3>Overview</h3>
+<p>The purpose of the JSF design-time meta-data framework is to provide a mechanism by which Eclipse plugin developers can attach the required meta-data to support improved tooling.  In the JSF Tools 1.0 Release, this is mostly to support improved tooling for tag libraries.
+<p>XML Content models (DTD, Schema, Taglibs), do not contain all of the information that is required to provide high-quality tooling support.  The information that they contain simply does not have all of the information to provide semantic validation, content assistance, graphical tooling support, etc.   This framework is the foundation for providing meta-data driven features used with the JSF JSP source editor in this release.</p>
+<p>A content model can have any number of meta-data files associated with it.   The public id of the content model is the key.  eg. "http://java.sun.com/jsf/core"</p>
+<p>This framework is built using the Eclipse Modeling Framework (EMF).  By leveraging this framework,the meta-data framework allows for a high degree of extensibility, generalization of the meta-data model, and improvements in queryability over the previous, and now deprecated, Content Model Annotations framework.
+<h3>Extension Point</h3>
+<p>The extension-point <a href="../extpts_reference/jsf/org_eclipse_jst_jsf_common_standardMetaDataFiles.html"><code>org.eclipse.jst.jsf.common.standardMetaDataFiles</code></a> to used to associate a meta-data file with the uri identifier of a tag library.  A &quot;standard&quot; meta-data file is an xml file of entities, which represent things like tags and tag attributes, and traits, which represent properties of the entities.</p>	
+<p>Through the extension-point:</p>
+<ul>
+<li>The meta-data file is bound to the tag library using the public uri as the key</li>		
+<li>An extender can specify a meta-data file locator.   If not specified, a plugin-relative file locator is used.  </li>
+</ul>
+<h3>Entities</h3>
+<p>An <a href="../api_reference/org/eclipse/jst/jsf/common/metadata/entity.html"><code>entity</code></a> identifies the object for which meta-data is being provided.   Entities can have 0-N child entities and can have 0-N traits.   They also can reference entityGroups from any model for inclusion.</p><p>An <code>entity</code> has a required <code>id</code> attribute, and a optional <code>type</code>.</p>
+<h3>Traits</h3>
+<p>A <a href="../api_reference/org/eclipse/jst/jsf/common/metadata/trait.html"><code>trait</code></a> is a property of an <code>entity</code>.  The value of a <code>trait</code> is the meta-data that is being applied to the <code>entity</code>.    The value of a <code>trait</code> is an instance of a TraitType and is modeled as an EMF EObject.    
+A TraitType can be any EMF EClass.   This effectively means that it is a "blob" allowing for an arbitrary structure to be stored as the value of that <code>trait</code> giving the ToolsProvider a great deal of flexibility on how meta-data can be provided.</p>
+<p>A <code>trait</code> has a required <code>id</code> attribute, and an optional <code>type</code> which specifies it's EMF EClass type.  If the <code>type</code> is not specified, the EMF resource loader usually treats it as an EMF XML SimpleAnyType.</p>
+<h3>Model</h3>
+<p>The metadata <a href="../api_reference/org/eclipse/jst/jsf/common/metadata/model.html"><code>model</code></a> element is the root element, and extends <code>entity</code>.  It is a collection of entities and traits representing the objects and properties respectively of some identifiable model.  In this release, only the tag library domain of entities is supported, and it is identified by the tag library uri.  The id  for the model element must match the uri supplied by the extension.</p>
+<h3>EntityGroup</h3>
+<p>An <a href="../api_reference/org/eclipse/jst/jsf/common/metadata/entityGroup.html"><code>entityGroup</code></a> is a special <code>entity</code> whose collection of traits and child entities get copied to an <code>entity</code> that references it.  Entity groups are owned by the Model <code>entity</code> and can be referenced by any <code>entity</code> except another <code>entityGroup</code>.  The intention of an <code>entityGroup</code> is to reduce the amount of duplicate meta-data.</p><p>To reference an <code>entityGroup</code> from an <code>entity</code>, use the <code>include-entity-group</code> element.  An <code>entity</code> can have 0-N includes and are processed in the order provided.  To reference an <code>entity</code> group in a different model, the optional uri attribute can be used to identify the model that the <code>entityGroup</code> comes from.  If the uri is not specified, the current model is assumed.</p>
+<h3>A Single Merged Model</h3>
+<p>The framework allows any number of standard meta-data files to be registered for a given tag library uri.  The framework will do the work of merging the meta-data into a single in-memory model so that any tool can access any item of meta-data for that tag library in a uniform manner.</p>
+<p>Although it is currently an internal notion, meta-data sources are not limited to the "standard" meta-data files.   The tag library itself is a source.   It may be possible for other sources of meta-data to also be included in the single merged model of meta-data in the future.</p>
+<p>The model loader will locate all sources of meta-data, prioritize according to a loading strategy, and build up the model by comparing id's for duplicates.  If an <code>entity</code> or <code>trait</code> with a given id is already present in the merged model, it will not be included.  However, the merge will recursively check for the presence of child entities and traits and merge those.</p>
+<p><code>entitygroup</code>s are handled in a special manner during the merge.  They are collected during the processing of all the meta-data sources, and only after all sources of meta-data have been merged, will the <code>include-entity-group</code>'s be processed.  That processing is handled similarly to the processing of entities and traits during the first pass.<p>
+<h4>eg. A Section of one of the supplied JSF HTML Taglibrary Meta-data Files</h4>
+<div class="code"><pre>
+
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;md:metadatamodel
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" 
+	xmlns:md="http://org.eclipse.jst.jsf.common.meta-data/metadata.ecore"
+	xmlns:mdt="http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore"
+	xmlns:cnst="http://org.eclipse.jst.jsf.core/constraints.ecore"  
+	id="http://java.sun.com/jsf/html"
+	type="tagFile"&gt;
+	
+	&lt;entity id="commandButton" type="tag"&gt;	
+		&lt;include-entity-group id="common-attributes"/&gt;
+		&lt;trait id="containment-constraint"&gt;
+			&lt;value xsi:type="cnst:ContainsTagConstraint"&gt;
+				&lt;set-generator&gt;
+					&lt;algorithm&gt;xpath&lt;/algorithm&gt;
+					&lt;expression&gt;ancestor::*&lt;/expression&gt;
+				&lt;/set-generator&gt;
+				&lt;satisfies-set&gt;
+						&lt;tagId&gt;
+							&lt;uri&gt;http://java.sun.com/jsf/core&lt;/uri&gt;
+							&lt;name&gt;view&lt;/name&gt;
+						&lt;/tagId&gt;
+						&lt;tagId&gt;
+							&lt;uri&gt;http://java.sun.com/jsf/html&lt;/uri&gt;
+							&lt;name&gt;form&lt;/name&gt;
+						&lt;/tagId&gt;
+				&lt;/satisfies-set&gt;
+			&lt;/value&gt;
+		&lt;/trait&gt;
+		&lt;entity id="type"&gt;
+			&lt;trait id="attribute-value-runtime-type"&gt;
+				&lt;value&gt;org.eclipse.jst.jsf.core.attributevalues.StringType&lt;/value&gt;
+			&lt;/trait&gt;		
+			&lt;trait id="valid-values"&gt;
+				&lt;value xsi:type="mdt:ListOfValues"&gt;
+					&lt;item&gt;button&lt;/item&gt;
+					&lt;item&gt;reset&lt;/item&gt;
+					&lt;item&gt;submit&lt;/item&gt;
+				&lt;/value&gt;
+			&lt;/trait&gt;
+			&lt;trait id="default-value"&gt;
+				&lt;value&gt;submit&lt;/value&gt;
+			&lt;/trait&gt;
+		&lt;/entity&gt;
+	etc....
+</pre></div>
+<h3>Querying for Meta-data</h3>
+<p>Meta-data should only be accessed thru static calls to the <a href="../api_reference/org/eclipse/jst/jsf/common/metadata/query/TaglibDomainMetaDataQueryHelper.html"><code>TaglibDomainMetaDataQueryHelper</code></a> class.   This class has many convenience methods for locating models, entities and traits. </p>   
+<p>To locate meta-data, first one creates an initial context called the <a href="../api_reference/org/eclipse/jst/jsf/common/metadata/query/ITaglibDomainMetaDataModelContext.html"><code>ITaglibDomainMetaDataModelContext</code></a> using the above helper class.   This identifies which meta-data model to load.  
+Since tag library meta-data comes not only from the standard files, but also the tag libraries themselves, 
+this domain of meta-data is dependent on the classpath and the reason why an <code>IProject</code>, 
+along with the tag library uri, is required for the context.</p><p>
+<p></p>
+<h4>eg. Typical Example of Looking up Meta-data</h4>
+<div class="code"><pre>
+	ITaglibDomainMetaDataModelContext modelContext = 
+		TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(project, uri);
+	Model model = TaglibDomainMetaDataQueryHelper.getModel(modelContext);
+	if (model != null){
+		Entity aTag = TaglibDomainMetaDataQueryHelper.getEntity(model, "ATag");
+		if (aTag != null){
+			Trait displayNameTrait = TaglibDomainMetaDataQueryHelper.getTrait(aTag, "display-name");
+			String displayName = TraitValueHelper.getValueAsString(displayNameTrait) ;
+			...
+		}
+	}
+	...
+</pre></div>
+</body>
+</html>
