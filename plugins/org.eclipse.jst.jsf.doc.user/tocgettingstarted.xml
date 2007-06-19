@@ -12,4 +12,5 @@
 		<topic label="Faces configuration editor" href="html/gettingstarted/tutorial/JSFTools_tutorial.html#facesconfigeditor"/>		
 		<topic label="Test the JSF JSP Page" href="html/gettingstarted/tutorial/JSFTools_tutorial.html#testpage"/>				
 	</topic> 
+	<topic label="Web Page Editor" href="html/gettingstarted/wpe/wpe_getting_started.html"/>
 </toc>
