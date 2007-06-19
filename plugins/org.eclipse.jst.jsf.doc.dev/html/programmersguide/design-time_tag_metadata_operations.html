@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<title>Design-Time Tag Metadata Operations</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta http-equiv="Content-Style-Type" content="text/css"/>
+	<meta http-equiv="Content-Script-Type" content="text/javascript"/>
+	<link rel="stylesheet" href="../../book.css" type="text/css"/>
+</head>
+
+<body>
+
+<h1>Design-Time Tag Metadata Operations</h1>
+
+<h2>Overview</h2>
+This document provides a reference of the operations that are available to
+"design-time" ("DT") metadata for JSP tags. DT metadata is consumed by the DT
+tag conversion / decoration framework to produce close-to-runtime visuals in
+the Web Page Editor.<br/>
+<br/>
+Please see <a href="../tutorials/Providing_Design-Time_Tag_Metadata.html">Providing Design-Time Tag Metadata</a>
+for a tutorial on how to provide DT tag metadata.
+
+<h2>Operations</h2>
+<table border="2" cellspacing="1" cellpadding="2">
+	<tr>
+		<th>Operation</th>
+		<th>Parameters</th>
+		<th>Purpose</th>
+	</tr>
+	<tr valign="top">
+		<td>AppendChildElementOperation</td>
+		<td>
+			<table border="0" cellspacing="0" cellpadding="2">
+				<tr>
+					<td nowrap="nowrap"><b>0:</b></td>
+					<td nowrap="nowrap">Element name</td>
+				</tr>
+				<tr>
+					<td nowrap="nowrap"><b>1 (optional):</b></td>
+					<td nowrap="nowrap">Make child Element current</td>
+				</tr>
+			</table>
+		</td>
+		<td>Appends a new child Element to the current Element, and optionally makes the new child Element current.</td>
+	</tr>
+	<tr valign="top">
+		<td>AppendChildTextFromXPathOperation</td>
+		<td>
+			<table border="0" cellspacing="0" cellpadding="2">
+				<tr>
+					<td nowrap="nowrap"><b>0:</b></td>
+					<td nowrap="nowrap">XPath expression</td>
+				</tr>
+			</table>
+		</td>
+		<td>Appends child Text node containing the value of the evaluated XPath expression.</td>
+	</tr>
+	<tr valign="top">
+		<td>AppendChildTextOperation</td>
+		<td>
+			<table border="0" cellspacing="0" cellpadding="2">
+				<tr>
+					<td nowrap="nowrap"><b>0:</b></td>
+					<td nowrap="nowrap">Text node content</td>
+				</tr>
+			</table>
+		</td>
+		<td>Appends child Text node containing the content specified by the parameter.</td>
+	</tr>
+	<tr valign="top">
+		<td>ConvertAttributeToTextOperation</td>
+		<td>
+			<table border="0" cellspacing="0" cellpadding="2">
+				<tr>
+					<td nowrap="nowrap"><b>0:</b></td>
+					<td nowrap="nowrap">Attribute name</td>
+				</tr>
+				<tr>
+					<td nowrap="nowrap"><b>1 (optional):</b></td>
+					<td nowrap="nowrap">Remove attribute</td>
+				</tr>
+			</table>
+		</td>
+		<td>Creates a new child Text node where the content is the specified attribute's value, and optionally removes the specified attribute.</td>
+	</tr>
+	<tr valign="top">
+		<td>CopyAllAttributesOperation</td>
+		<td>(None)</td>
+		<td>Copies all source Element's attributes to the current Element.</td>
+	</tr>
+	<tr valign="top">
+		<td>CopyAttributeOperation</td>
+		<td>
+			<table border="0" cellspacing="0" cellpadding="2">
+				<tr>
+					<td nowrap="nowrap"><b>0:</b></td>
+					<td nowrap="nowrap">Attribute name</td>
+				</tr>
+				<tr>
+					<td nowrap="nowrap"><b>1 (optional):</b></td>
+					<td nowrap="nowrap">Create if not present</td>
+				</tr>
+				<tr>
+					<td nowrap="nowrap"><b>2 (optional):</b></td>
+					<td nowrap="nowrap">New value if not present</td>
+				</tr>
+			</table>
+		</td>
+		<td>Copies a single source Element's attribute to the current Element, optionally creating a new attribute with the specified new value if not present on the source Element.</td>
+	</tr>
+	<tr valign="top">
+		<td>CopyChildrenOperation</td>
+		<td>(None)</td>
+		<td>Copies all child Elements to be further processed by the framework.</td>
+	</tr>
+	<tr valign="top">
+		<td>CreateAttributeFromXPathOperation</td>
+		<td>
+			<table border="0" cellspacing="0" cellpadding="2">
+				<tr>
+					<td nowrap="nowrap"><b>0:</b></td>
+					<td nowrap="nowrap">Attribute name</td>
+				</tr>
+				<tr>
+					<td nowrap="nowrap"><b>1:</b></td>
+					<td nowrap="nowrap">XPath expression</td>
+				</tr>
+			</table>
+		</td>
+		<td>Creates an attribute on the current Element where the value is the value of the evaluated XPath expression.</td>
+	</tr>
+	<tr valign="top">
+		<td>CreateAttributeOperation</td>
+		<td>
+			<table border="0" cellspacing="0" cellpadding="2">
+				<tr>
+					<td nowrap="nowrap"><b>0:</b></td>
+					<td nowrap="nowrap">Attribute name</td>
+				</tr>
+				<tr>
+					<td nowrap="nowrap"><b>1:</b></td>
+					<td nowrap="nowrap">Attribute value</td>
+				</tr>
+			</table>
+		</td>
+		<td>Creates an attribute with the specified value on the current Element.</td>
+	</tr>
+	<tr valign="top">
+		<td>CreateElementOperation</td>
+		<td>
+			<table border="0" cellspacing="0" cellpadding="2">
+				<tr>
+					<td nowrap="nowrap"><b>0:</b></td>
+					<td nowrap="nowrap">Element name</td>
+				</tr>
+			</table>
+		</td>
+		<td>Creates a new Element in the Document and makes it the current Element.</td>
+	</tr>
+	<tr valign="top">
+		<td>CustomTransformOperation</td>
+		<td>
+			<table border="0" cellspacing="0" cellpadding="2">
+				<tr>
+					<td nowrap="nowrap"><b>0:</b></td>
+					<td nowrap="nowrap">Fully-qualified classname</td>
+				</tr>
+			</table>
+		</td>
+		<td>Instantiates custom class (assumed to be in same plug-in as the metadata file in which it is referenced) that must implement ITransformOperation. This allows custom code to handle transformation operations for which there is currently no adequate pre-defined operation.</td>
+	</tr>
+	<tr valign="top">
+		<td>IfNotOperation</td>
+		<td>
+			<table border="0" cellspacing="0" cellpadding="2">
+				<tr>
+					<td nowrap="nowrap"><b>0:</b></td>
+					<td nowrap="nowrap">XPath expression</td>
+				</tr>
+			</table>
+		</td>
+		<td>Processes child operations only if the XPath expression does not evaluate to "true". IfNotOperation and IfOperation can be nested arbitrarily deep.</td>
+	</tr>
+	<tr valign="top">
+		<td>IfOperation</td>
+		<td>
+			<table border="0" cellspacing="0" cellpadding="2">
+				<tr>
+					<td nowrap="nowrap"><b>0:</b></td>
+					<td nowrap="nowrap">XPath expression</td>
+				</tr>
+			</table>
+		</td>
+		<td>Processes child operations only if the XPath expression evaluates to "true". IfNotOperation and IfOperation can be nested arbitrarily deep.</td>
+	</tr>
+	<tr valign="top">
+		<td>IterateOverElementsOperation</td>
+		<td>
+			<table border="0" cellspacing="0" cellpadding="2">
+				<tr>
+					<td nowrap="nowrap"><b>0:</b></td>
+					<td nowrap="nowrap">XPath expression</td>
+				</tr>
+			</table>
+		</td>
+		<td>Processes child operations for each Element in the set returned by the evaluated XPath expression.</td>
+	</tr>
+	<tr valign="top">
+		<td>MakeParentElementCurrentOperation</td>
+		<td>(None)</td>
+		<td>Makes the current Element's parent Element current.</td>
+	</tr>
+	<tr valign="top">
+		<td>RemoveAttributeOperation</td>
+		<td>
+			<table border="0" cellspacing="0" cellpadding="2">
+				<tr>
+					<td nowrap="nowrap"><b>0:</b></td>
+					<td nowrap="nowrap">Attribute name</td>
+				</tr>
+			</table>
+		</td>
+		<td>Removes the specified attribute from the current Element.</td>
+	</tr>
+	<tr valign="top">
+		<td>RenameAttributeOperation</td>
+		<td>
+			<table border="0" cellspacing="0" cellpadding="2">
+				<tr>
+					<td nowrap="nowrap"><b>0:</b></td>
+					<td nowrap="nowrap">Old attribute name</td>
+				</tr>
+				<tr>
+					<td nowrap="nowrap"><b>1:</b></td>
+					<td nowrap="nowrap">New attribute name</td>
+				</tr>
+			</table>
+		</td>
+		<td>Renames the specified attribute of the current Element.</td>
+	</tr>
+</table>
+
+<h2>References</h2>
+<ul>
+	<li><a href="../tutorials/Providing_Design-Time_Tag_Metadata.html">Providing Design-Time Tag Metadata</a></li>
+</ul>
+
+</body>
+
+</html>

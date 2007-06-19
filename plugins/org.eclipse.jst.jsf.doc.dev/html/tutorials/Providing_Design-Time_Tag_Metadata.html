@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<title>Providing Design-Time Tag Metadata</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta http-equiv="Content-Style-Type" content="text/css"/>
+	<meta http-equiv="Content-Script-Type" content="text/javascript"/>
+	<link rel="stylesheet" href="../../book.css" type="text/css"/>
+</head>
+
+<body>
+
+<h1>Providing Design-Time Tag Metadata</h1>
+
+<h2>Overview</h2>
+This document provides an overview of what is required to provide "design-time"
+("DT") metadata for JSP tags. DT metadata is consumed by the DT tag conversion / decoration
+framework to produce close-to-runtime visuals in the Web Page Editor.<br/>
+<br/>
+This note assumes the following user knowledge:
+<ul>
+	<li>How to create plugin projects</li>
+	<li>How to declare dependencies in plugin projects</li>
+	<li>How to use extension points</li>
+	<li>How to package and deploy plugins</li>
+</ul>
+
+<h2>Setup Steps</h2>
+The following setup steps are described in more details in the sections that follow:
+<ol>
+	<li>Create a Plug-in Project</li>
+	<li>Specify plug-in's dependencies</li>
+	<li>Configure "standardMetaDataFiles" extension point</li>
+	<li>Create DT metadata XML file</li>
+</ol>
+
+<h3>Create a Plug-in Project</h3>
+A plug-in project is required to use the "standardMetaDataFiles" extension point and to contain the DT metadata file.
+<ol>
+	<li>Select menu items, "File" > "New" > "Project..."</li>
+	<li>Select "Plug-in Project" and click "Next >"</li>
+	<li>Provide a reasonable value for "Project name" and click "Next >"</li>
+	<li>Provide reasonable values for "Plug-in Properties"</li>
+	<li>Uncheck "This plug-in will make contributions to the UI"</li>
+	<li>Click "Finish"</li>
+</ol>
+
+<h3>Specify Plug-in's Dependencies</h3>
+<ol>
+	<li>Open the new project's "META-INF/MANIFEST.MF" file in the "Plug-in Manifest Editor"</li>
+	<li>Select the "Dependencies" tab</li>
+	<li>Add "org.eclipse.jst.jsf.common" under "Required Plug-ins"</li>
+</ol>
+
+<h3>Configure "standardMetaDataFiles" Extension Point</h3>
+<ol>
+	<li>Open the new project's "META-INF/MANIFEST.MF" file in the "Plug-in Manifest Editor"</li>
+	<li>Select the "Extensions" tab</li>
+	<li>Add "org.eclipse.jst.jsf.common.standardMetaDataFiles" under "All Extensions"</li>
+	<li>Right-click the new extension and select "New" > "standardMetaDataFile"</li>
+	<li>Select "(standardMetaDataFile)"</li>
+	<li>Under "Extension Element Details", set appropriate values:</li>
+	<ol>
+		<li>For "uri", value should match the URI value as set in the tag library</li>
+		<li>The "location" value is a plugin-relative path and filename (file has not been created yet - value entered will be required in subsequent steps)</li>
+		<li>No value is required for "locator" (leave blank)</li>
+	</ol>
+</ol>
+<img src="images/DTTagMD_1.png" border="0" alt="Extension Details"/>
+
+<h3>Create DT Metadata XML File</h3>
+<ol>
+	<li>Create necessary folder(s) and file, to match value specified for "location" of the "standardMetaDataFile" (e.g. "metadata/jsf_tomahawk_dti.xml")</li>
+</ol>
+
+<h2>Writing the DT Metadata</h2>
+<h3>Document Node</h3>
+Copy the following XML into the DT metadata file as a starting point:<br/>
+<br/>
+<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?>
+&lt;md:metadatamodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" 
+	xmlns:md="http://org.eclipse.jst.jsf.common.metadata/metadata.ecore"
+	xmlns:dti="http://org.eclipse.jsf.pagedesigner/dtinfo.ecore"
+	id="http://myfaces.apache.org/tomahawk"
+	type="tagFile">
+
+
+
+&lt;/md:metadatamodel>
+</pre>
+Note that the "id" attribute of the document node matches the "uri" as specified previously in the plug-in manifest.
+
+<h3>Entity (Tag) Node</h3>
+Insert the following XML inside the previously created document node:<br/>
+<br/>
+<pre>
+	&lt;entity id="inputText" type="tag">
+		&lt;trait id="dt-info">
+			&lt;value xsi:type="dti:DTInfo">
+				&lt;tag-convert-info>
+					&lt;operation id="CreateElementOperation">
+						&lt;parameter value="input"/>
+					&lt;/operation>
+					&lt;operation id="CopyAllAttributesOperation"/>
+					&lt;operation id="RenameAttributeOperation">
+						&lt;parameter value="styleClass"/>
+						&lt;parameter value="class"/>
+					&lt;/operation>
+					&lt;operation id="CreateAttributeOperation">
+						&lt;parameter value="type"/>
+						&lt;parameter value="text"/>
+					&lt;/operation>
+				&lt;/tag-convert-info>
+				&lt;tag-decorate-info id="vpd-decorate-design"
+					multiLevel="true"
+					widget="true"
+					setNonVisualChildElements="true"
+				/>
+				&lt;tag-decorate-info id="vpd-decorate-preview">
+					&lt;resolve-attribute-value attributeName="value"/>
+				&lt;/tag-decorate-info>
+			&lt;/value>
+		&lt;/trait>
+	&lt;/entity>
+</pre>
+Note the following:
+<ul>
+	<li>The "entity" node's "id" attribute specifies the name of the tag for which metadata is being provided (in this example, "inputText")</li>
+	<li>The "entity" node must have a "type" attribute with the value "tag"</li>
+	<li>The "trait" node must have an "id" attribute with the value "dt-info"</li>
+	<li>The "value" node must have an "xsi:type" attribute with the value "dti:DTInfo"</li>
+	<li>A single DT metadata file will typically contain one "entity" node per tag for which metadata is being provided - generally there will be one such file per tag library</li>
+</ul>
+
+<h3>Child Nodes</h3>
+The child nodes specify the tag conversion and decoration operations that will
+be performed to translate the source JSP node into HTML that is rendered in the
+Web Page Editor. Full discussion of the operations available is outside the
+scope of this document. The listings above serve to demonstrate the form of the
+metadata.<br/>
+<br/>
+(Suggested study materials for interested readers are the metadata files
+located in the "org.eclipse.jst.pagedesigner.jsf.ui" plug-in, which provide the
+metadata for JSF core and JSF HTML tag libraries.)
+
+<h2>References</h2>
+<ul>
+	<li><a href="../programmersguide/design-time_tag_metadata_operations.html">Design-Time Tag Metadata Operations</a></li>
+</ul>
+
+</body>
+
+</html>
