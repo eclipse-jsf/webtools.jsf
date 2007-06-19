@@ -6,7 +6,7 @@
          <meta.schema plugin="org.eclipse.jst.pagedesigner" id="popupMenuContributor" name="popupMenu Contributor"/>
       </appInfo>
       <documentation>
-         [Enter description of this extension point.]
+         &lt;p&gt;&lt;b&gt;This extension point is provisional and subject to change&lt;/b&gt;&lt;/p&gt;
       </documentation>
    </annotation>
 
@@ -66,34 +66,7 @@
          <meta.section type="since"/>
       </appInfo>
       <documentation>
-         [Enter the first release in which this extension point appears.]
-      </documentation>
-   </annotation>
-
-   <annotation>
-      <appInfo>
-         <meta.section type="examples"/>
-      </appInfo>
-      <documentation>
-         [Enter extension point usage example here.]
-      </documentation>
-   </annotation>
-
-   <annotation>
-      <appInfo>
-         <meta.section type="apiInfo"/>
-      </appInfo>
-      <documentation>
-         [Enter API information here.]
-      </documentation>
-   </annotation>
-
-   <annotation>
-      <appInfo>
-         <meta.section type="implementation"/>
-      </appInfo>
-      <documentation>
-         [Enter information about supplied implementation of this extension point.]
+         2.0
       </documentation>
    </annotation>
 
@@ -102,18 +75,8 @@
          <meta.section type="copyright"/>
       </appInfo>
       <documentation>
-         /*******************************************************************************
- * Copyright (c) 2006 Sybase, Inc. and others.
- *
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *     Sybase, Inc. - initial API and implementation
- *******************************************************************************/
-
+         Copyright 2006 Sybase and others
+All rights reserved. This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
       </documentation>
    </annotation>
 

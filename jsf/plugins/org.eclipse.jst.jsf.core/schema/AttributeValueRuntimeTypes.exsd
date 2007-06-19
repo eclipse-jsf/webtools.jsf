@@ -7,6 +7,8 @@
       </appInfo>
       <documentation>
          Defines a mapping between an implementing class and an AttributeValue Runtime type.   By categorizing attribute values types in an CMAnnotation file, we can assign types and therefore processing of those types using the CMAnnotation file metadata and context information.
+
+&lt;p&gt;&lt;b&gt;This extension point is provisional and subject to change&lt;/b&gt;&lt;/p&gt;
       </documentation>
    </annotation>
 
@@ -74,7 +76,7 @@
          <meta.section type="since"/>
       </appInfo>
       <documentation>
-         WTP 1.5
+         1.5
       </documentation>
    </annotation>
 

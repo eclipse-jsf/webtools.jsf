@@ -7,6 +7,8 @@
       </appInfo>
       <documentation>
          Defines a mapping between a runtime type defined by a different plugin and an implementing class in the extenders plugin.   This allows a provider to provide additional processing on an element or attribute instance that can be in addition to existing processing or a means to provide a new kind of processing of existing runtime types.
+
+&lt;p&gt;&lt;b&gt;This extension point is provisional and subject to change&lt;/b&gt;&lt;/p&gt;
       </documentation>
    </annotation>
 
@@ -74,7 +76,7 @@
          <meta.section type="since"/>
       </appInfo>
       <documentation>
-         WTP 1.5
+         1.5
       </documentation>
    </annotation>
 
