@@ -2,52 +2,81 @@
     	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 TRANSITIONAL//EN">
 		<html xmlns:xalan="http://xml.apache.org/xslt">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-		<meta name="copyright" content="Copyright (c) Oracle Corporation and others 2006. This page is made available under EPL license."/>
-   		<title>WTP JavaServer Faces Tools (JSF) Extension Points</title>
-		<link REL="STYLESHEET" HREF="../../book.css" CHARSET="ISO-8859-1" TYPE="text/css"/>
-</head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="copyright" content="Copyright (c) IBM Corporation and others 2000, 2005. This page is made available under license. For full details see the LEGAL in the documentation book that contains this page." >
+
+   		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   		<title>JavaServer Faces Extension Points</title>
+		<LINK REL="STYLESHEET" HREF="../../book.css" CHARSET="ISO-8859-1" TYPE="text/css">
+		</head>
 <body link="#0000FF" vlink="#800080">
 <center>
 <h1>JSF Extension Points </h1>
 </center>The following extension points can be used to extend the capabilities of the JSF infrastructure: <h3>
-<a name="jsf"></a>JavaServer Faces</h3>
+<a name="jsf"></a>JavaServer Faces Tools</h3>
 <ul>
 <li>
-<a href="jsf/org_eclipse_jst_jsf_contentmodel_annotations_annotationFiles.html">org.eclipse.jst.jsf.contentmodel.annotations.annotationFiles</a>
+<a href="jsf/org_eclipse_jst_jsf_common_annotationFiles.html">org.eclipse.jst.jsf.common.annotationFiles</a>
 </li>
 <li>
-<a href="jsf/org_eclipse_jst_jsf_context_symbol_contextSymbolFactory.html">org.eclipse.jst.jsf.context.symbol.contextSymbolFactory</a>
+<a href="jsf/org_eclipse_jst_jsf_common_contextSymbolFactory.html">org.eclipse.jst.jsf.common.contextSymbolFactory</a>
 </li>
 <li>
-<a href="jsf/org_eclipse_jst_jsf_context_symbol_symbolSourceProvider.html">org.eclipse.jst.jsf.context.symbol.symbolSourceProvider</a>
+<a href="jsf/org_eclipse_jst_jsf_common_domainLoadingStrategies.html">org.eclipse.jst.jsf.common.domainLoadingStrategies</a>
+</li>
+<li>
+<a href="jsf/org_eclipse_jst_jsf_common_domainSourceModelTypes.html">org.eclipse.jst.jsf.common.domainSourceModelTypes</a>
+</li>
+<li>
+<a href="jsf/org_eclipse_jst_jsf_common_domainSourceModelTypeTranslators.html">org.eclipse.jst.jsf.common.domainSourceModelTypeTranslators</a>
+</li>
+<li>
+<a href="jsf/org_eclipse_jst_jsf_common_standardMetaDataFiles.html">org.eclipse.jst.jsf.common.standardMetaDataFiles</a>
+</li>
+<li>
+<a href="jsf/org_eclipse_jst_jsf_common_symbolSourceProvider.html">org.eclipse.jst.jsf.common.symbolSourceProvider</a>
+</li>
+<li>
+<a href="jsf/org_eclipse_jst_jsf_core_AttributeValueRuntimeTypes.html">org.eclipse.jst.jsf.core.AttributeValueRuntimeTypes</a>
+</li>
+<li>
+<a href="jsf/org_eclipse_jst_jsf_core_externalcontext.html">org.eclipse.jst.jsf.core.externalcontext</a>
 </li>
 <li>
 <a href="jsf/org_eclipse_jst_jsf_core_jsfLibraries.html">org.eclipse.jst.jsf.core.jsfLibraries</a>
 </li>
 <li>
-<a href="jsf/org_eclipse_jst_jsf_designtime_externalcontext.html">org.eclipse.jst.jsf.designtime.externalcontext</a>
+<a href="jsf/org_eclipse_jst_jsf_core_MetaDataEnabledFeatures.html">org.eclipse.jst.jsf.core.MetaDataEnabledFeatures</a>
 </li>
 <li>
-<a href="jsf/org_eclipse_jst_jsf_designtime_methodresolver.html">org.eclipse.jst.jsf.designtime.methodresolver</a>
+<a href="jsf/org_eclipse_jst_jsf_core_methodresolver.html">org.eclipse.jst.jsf.core.methodresolver</a>
 </li>
 <li>
-<a href="jsf/org_eclipse_jst_jsf_designtime_propertyresolver.html">org.eclipse.jst.jsf.designtime.propertyresolver</a>
+<a href="jsf/org_eclipse_jst_jsf_core_pluginProvidedJsfLibraries.html">org.eclipse.jst.jsf.core.pluginProvidedJsfLibraries</a>
 </li>
 <li>
-<a href="jsf/org_eclipse_jst_jsf_designtime_variableresolver.html">org.eclipse.jst.jsf.designtime.variableresolver</a>
+<a href="jsf/org_eclipse_jst_jsf_core_propertyresolver.html">org.eclipse.jst.jsf.core.propertyresolver</a>
 </li>
 <li>
-<a href="jsf/org_eclipse_jst_jsf_facesconfig_common_introductionPage.html">org.eclipse.jst.jsf.facesconfig.common.introductionPage</a>
+<a href="jsf/org_eclipse_jst_jsf_core_variableresolver.html">org.eclipse.jst.jsf.core.variableresolver</a>
 </li>
 <li>
-<a href="jsf/org_eclipse_jst_jsf_facesconfig_common_overviewPage.html">org.eclipse.jst.jsf.facesconfig.common.overviewPage</a>
+<a href="jsf/org_eclipse_jst_pagedesigner_cmRegistry.html">org.eclipse.jst.pagedesigner.cmRegistry</a>
 </li>
 <li>
-<a href="jsf/org_eclipse_jst_jsf_metadataprocessors_AttributeValueRuntimeTypes.html">org.eclipse.jst.jsf.metadataprocessors.AttributeValueRuntimeTypes</a>
+<a href="jsf/org_eclipse_jst_pagedesigner_pageDesignerExtension.html">org.eclipse.jst.pagedesigner.pageDesignerExtension</a>
 </li>
 <li>
-<a href="jsf/org_eclipse_jst_jsf_metadataprocessors_MetaDataEnabledFeatures.html">org.eclipse.jst.jsf.metadataprocessors.MetaDataEnabledFeatures</a>
+<a href="jsf/org_eclipse_jst_pagedesigner_popupMenuContributor.html">org.eclipse.jst.pagedesigner.popupMenuContributor</a>
+</li>
+<li>
+<a href="jsf/org_eclipse_jst_pagedesigner_propertyContributor.html">org.eclipse.jst.pagedesigner.propertyContributor</a>
+</li>
+<li>
+<a href="jsf/org_eclipse_jst_pagedesigner_propertySections.html">org.eclipse.jst.pagedesigner.propertySections</a>
+</li>
+<li>
+<a href="jsf/org_eclipse_jst_pagedesigner_tagCreationFactories.html">org.eclipse.jst.pagedesigner.tagCreationFactories</a>
 </li>
 </ul>
 </body>

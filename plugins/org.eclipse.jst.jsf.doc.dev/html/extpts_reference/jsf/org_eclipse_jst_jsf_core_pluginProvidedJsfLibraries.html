@@ -8,13 +8,14 @@
 <BODY>
 <H1><CENTER>JSF Libraries</CENTER></H1>
 <p></p>
-<h6 class=CaptionFigColumn id=header>Identifier: </h6>org.eclipse.jst.jsf.core.jsfLibraries<p></p>
-<h6 class=CaptionFigColumn id=header>Since: </h6>1.5
+<h6 class=CaptionFigColumn id=header>Identifier: </h6>org.eclipse.jst.jsf.core.pluginProvidedJsfLibraries<p></p>
+<h6 class=CaptionFigColumn id=header>Since: </h6>2.0
 <p></p>
 
 <p>
 <h6 class=CaptionFigColumn id=header>Description: </h6>This extension point allows clients to create named sets of jars for use with JavaServer Faces Applications.
-<b>Deprecated</b> - adopters should now use <code>org.eclipse.jst.jsf.core.pluginProvidedJsfLibraries</code></p>
+
+<p><b>This extension point is provisional and subject to change</b></p></p>
 <p><h6 class=CaptionFigColumn id=header>Configuration Markup:</h6></p>
 <p class=code id=dtd>&lt;!ELEMENT <a name="e.extension">extension</a> (<a href="#e.jsfLibrary">jsfLibrary</a>*)&gt;</p>
 <p class=code id=dtd>&lt;!ATTLIST extension</p>
@@ -24,24 +25,26 @@
 </ul>
 <br><p class=code id=dtd>&lt;!ELEMENT <a name="e.jsfLibrary">jsfLibrary</a> EMPTY&gt;</p>
 <p class=code id=dtd>&lt;!ATTLIST jsfLibrary</p>
-<p class=code id=dtdAttlist>name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CDATA #REQUIRED<p class=code id=dtdAttlist>isImplementation&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(true | false) <p class=code id=dtdAttlist>maxVersionSupported&nbsp;&nbsp;(v1_1|v1_2|UNKNOWN) <p class=code id=dtdAttlist>archiveFilesDelegate&nbsp;CDATA #REQUIRED&gt;</p>
+<p class=code id=dtdAttlist>name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CDATA #REQUIRED<p class=code id=dtdAttlist>label&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CDATA #IMPLIED<p class=code id=dtdAttlist>isImplementation&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(true | false) <p class=code id=dtdAttlist>maxVersionSupported&nbsp;&nbsp;(v1_1|v1_2|UNKNOWN) <p class=code id=dtdAttlist>archiveFilesDelegate&nbsp;CDATA #REQUIRED&gt;</p>
 <p></p>
 <p class=ConfigMarkup id=elementDesc>
 A named collection of jars that will be added to the classpath as a classpath container to a project that references it.</p>
 <br>
 <ul class=ConfigMarkup id=attlistDesc>
-<li><b>name</b> - A unique name for the library.</li>
+<li><b>name</b> - A unique, non-translatable, name for the library.  The plugin developer is responsible for ensuring uniqueness within the plugin.  This name, in combination with the plugin id, is used to identify the classpath container reference.</li>
+<li><b>label</b> - Translatable string for displaying the library name.</li>
 <li><b>isImplementation</b> - Flag indicating that this libary is declared to be a JSF implementation and not just a JSF component library.</li>
 <li><b>maxVersionSupported</b> - Used to declare which JSF specification this library will support.</li>
-<li><b>archiveFilesDelegate</b> - class that must extend org.eclipse.jst.jsf.core.jsflibraryregistry.JSFLibraryArchiveFilesDelegate to supply a collection of ArchiveFiles for the library</li>
+<li><b>archiveFilesDelegate</b> - class that must extend org.eclipse.jst.jsf.core.jsflibraryregistry.JSFLibraryArchiveFilesDelegate to supply a collection of IPaths to jars in the library</li>
 </ul>
 <br><h6 class=CaptionFigColumn id=header>Examples: </h6>The following is an example of usage of pluginProvidedJsfLibraries extension point:
 
 <p>
 <pre>
-  <p class=code id=tag>&lt;extension point=<p class=code id=cstring>&quot;org.eclipse.jst.jsf.core.jsfLibraries&quot;</p><p class=code id=tag>&gt;</p>
+  <p class=code id=tag>&lt;extension point=<p class=code id=cstring>&quot;org.eclipse.jst.jsf.core.pluginProvidedJsfLibraries&quot;</p><p class=code id=tag>&gt;</p>
     <p class=code id=tag>&lt;jsfLibrary       
        name=<p class=code id=cstring>&quot;MyComponentLib1&quot;</p><p class=code id=tag>
+       label=<p class=code id=cstring>&quot;%MyComponentLib1.translatableLabel&quot;</p><p class=code id=tag>
        isImplementation=<p class=code id=cstring>&quot;false&quot;</p><p class=code id=tag>
        maxVersionSupported=<p class=code id=cstring>&quot;v1_1&quot;</p><p class=code id=tag>
        archiveFilesDelegate=<p class=code id=cstring>&quot;com.acme.jsf.libraries.MyComponentLibraryFiles&quot;</p><p class=code id=tag>/&gt;</p>
@@ -50,7 +53,7 @@ A named collection of jars that will be added to the classpath as a classpath co
 </p>
 <p></p>
 
-<h6 class=CaptionFigColumn id=header>API Information: </h6>Value of the attribute class must be a fully qualified name of a Java class that extends the abstract class <code>org.eclipse.jst.jsf.core.jsflibraryregistry.JSFLibraryArchiveFilesDelegate</code> and has a public 0-arg constructor.
+<h6 class=CaptionFigColumn id=header>API Information: </h6>Value of the attribute class must be a fully qualified name of a Java class that extends the abstract class <code>org.eclipse.jst.jsf.core.jsflibraryregistry.PluginProvidedJSFLibraryJarFilesDelegate</code> and has a public 0-arg constructor.
 <p></p>
 
 <h6 class=CaptionFigColumn id=header>Supplied Implementation: </h6>none
@@ -58,7 +61,7 @@ A named collection of jars that will be added to the classpath as a classpath co
 
 <br>
 <p class=note id=copyright>
-Copyright (c) 2005, 2007 Oracle Corporation.
+Copyright (c) 2007 Oracle Corporation.
 All rights reserved. This program and the accompanying materials
 are made available under the terms of the Eclipse Public License v1.0
 which accompanies this distribution, and is available at

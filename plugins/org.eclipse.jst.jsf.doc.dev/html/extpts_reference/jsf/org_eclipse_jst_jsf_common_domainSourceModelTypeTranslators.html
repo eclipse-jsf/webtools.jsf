@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>DomainSourceModelTypeTranslators</title>
+<style>@import url("../../book.css");</style>
+<style>@import url("../../schema.css");</style>
+</HEAD>
+<BODY>
+<H1><CENTER>DomainSourceModelTypeTranslators</CENTER></H1>
+<p></p>
+<h6 class=CaptionFigColumn id=header>Identifier: </h6>org.eclipse.jst.jsf.common.DomainSourceModelTypeTranslators<p></p>
+<h6 class=CaptionFigColumn id=header>Since: </h6>2.0
+<p></p>
+
+<p>
+<h6 class=CaptionFigColumn id=header>Description: </h6>** Should be considered internal at this time.   Subject to change **
+Allows for metadata domain translators to be applied to a metadata domain source type.</p>
+<p><h6 class=CaptionFigColumn id=header>Configuration Markup:</h6></p>
+<p class=code id=dtd>&lt;!ELEMENT <a name="e.extension">extension</a> (<a href="#e.domainSourceModelTypeTranslator">domainSourceModelTypeTranslator</a>)*&gt;</p>
+<p class=code id=dtd>&lt;!ATTLIST extension</p>
+<p class=code id=dtdAttlist>point&nbsp;CDATA #REQUIRED<p class=code id=dtdAttlist>id&nbsp;&nbsp;&nbsp;&nbsp;CDATA #IMPLIED<p class=code id=dtdAttlist>name&nbsp;&nbsp;CDATA #IMPLIED&gt;</p>
+<p></p>
+<ul class=ConfigMarkup id=attlistDesc>
+</ul>
+<br><p class=code id=dtd>&lt;!ELEMENT <a name="e.domainSourceModelTypeTranslator">domainSourceModelTypeTranslator</a> EMPTY&gt;</p>
+<p class=code id=dtd>&lt;!ATTLIST domainSourceModelTypeTranslator</p>
+<p class=code id=dtdAttlist>domainSourceModelTypeId&nbsp;CDATA #REQUIRED<p class=code id=dtdAttlist>translatorClass&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CDATA #REQUIRED&gt;</p>
+<p></p>
+<ul class=ConfigMarkup id=attlistDesc>
+<li><b>domainSourceModelTypeId</b> - The unique id from the domainSourceModelTypes ext-pt that will bind the translator class to that domain source.</li>
+<li><b>translatorClass</b> - Fully qualified class implementing <code>org.eclipse.jst.jsf.common.metadata.IMetaDataTranslator</code> that will translate from the source domain to the "standard" domain of entities and traits.</li>
+</ul>
+<br><h6 class=CaptionFigColumn id=header>Examples: </h6><extension
+         point="org.eclipse.jst.jsf.common.domainSourceModelTypeTranslators">
+      <domainSourceModelTypeTranslator
+            class="org.eclipse.jst.jsf.common.metadata.internal.TaglibMetaDataTLDTranslator"
+            domainSourceModelTypeId="TagLibMetaDataTagLibraryHandler">
+      </domainSourceModelTypeTranslator>
+   </extension>
+<p></p>
+
+<br>
+<p class=note id=copyright>
+Copyright 2007 Oracle
+All rights reserved. This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+<p></p>
+
+</p>
+</BODY>
+</HTML>

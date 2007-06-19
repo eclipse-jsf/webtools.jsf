@@ -8,12 +8,14 @@
 <BODY>
 <H1><CENTER>MetaData Enabled Features</CENTER></H1>
 <p></p>
-<h6 class=CaptionFigColumn id=header>Identifier: </h6>org.eclipse.jst.jsf.metadataprocessors.MetaDataEnabledFeatures<p></p>
-<h6 class=CaptionFigColumn id=header>Since: </h6>WTP 1.5
+<h6 class=CaptionFigColumn id=header>Identifier: </h6>org.eclipse.jst.jsf.core.MetaDataEnabledFeatures<p></p>
+<h6 class=CaptionFigColumn id=header>Since: </h6>1.5
 <p></p>
 
 <p>
-<h6 class=CaptionFigColumn id=header>Description: </h6>Defines a mapping between a runtime type defined by a different plugin and an implementing class in the extenders plugin.   This allows a provider to provide additional processing on an element or attribute instance that can be in addition to existing processing or a means to provide a new kind of processing of existing runtime types.</p>
+<h6 class=CaptionFigColumn id=header>Description: </h6>Defines a mapping between a runtime type defined by a different plugin and an implementing class in the extenders plugin.   This allows a provider to provide additional processing on an element or attribute instance that can be in addition to existing processing or a means to provide a new kind of processing of existing runtime types.
+
+<p><b>This extension point is provisional and subject to change</b></p></p>
 <p><h6 class=CaptionFigColumn id=header>Configuration Markup:</h6></p>
 <p class=code id=dtd>&lt;!ELEMENT <a name="e.extension">extension</a> (<a href="#e.MetaDataEnabledFeature">MetaDataEnabledFeature</a>+)&gt;</p>
 <p class=code id=dtd>&lt;!ATTLIST extension</p>
@@ -30,7 +32,7 @@ mapping between an different extenders runtime type id, and a processing class f
 <br>
 <ul class=ConfigMarkup id=attlistDesc>
 <li><b>typeid</b> - Fully qualified runtime type id</li>
-<li><b>class</b> - Fully qualified implementing class that must implement <code>org.eclipse.jst.jsf.metadataprocessors.internal.provisional.IMetaDataEnabledFeature</code>.</li>
+<li><b>class</b> - Fully qualified implementing class that must implement <code>org.eclipse.jst.jsf.metadataprocessors.IMetaDataEnabledFeature</code>.</li>
 </ul>
 <br><br>
 <p class=note id=copyright>
@@ -39,10 +41,11 @@ All rights reserved. This program and the accompanying materials
 are made available under the terms of the Eclipse Public License v1.0
 which accompanies this distribution, and is available at
 http://www.eclipse.org/legal/epl-v10.html
-<br> 
+ 
 Contributors:
     Gerry Kessler/Oracle - initial API and implementation
 <p></p>
+
 </p>
 </BODY>
 </HTML>
