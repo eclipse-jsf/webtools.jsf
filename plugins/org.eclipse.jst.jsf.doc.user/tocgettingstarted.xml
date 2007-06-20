@@ -3,14 +3,6 @@
 
 <toc label="Getting Started" link_to="toc.xml#jsf_getstarted"> 
 	<topic label="Requirements"  href="html/gettingstarted/jsf_requirements.html" />
-	<topic label="JSF Basic Tutorial" href="html/gettingstarted/tutorial/JSFTools_tutorial.html">
-		<topic label="Setup" href="html/gettingstarted/tutorial/JSFTools_tutorial.html#setup"/>
-		<topic label="Register JSF libraries" href="html/gettingstarted/tutorial/JSFTools_tutorial.html#reglibs"/>
-		<topic label="Create new JSF project" href="html/gettingstarted/tutorial/JSFTools_tutorial.html#newproject"/>
-		<topic label="Create new JSF JSP page" href="html/gettingstarted/tutorial/JSFTools_tutorial.html#newpage"/>
-		<topic label="Create managed bean" href="html/gettingstarted/tutorial/JSFTools_tutorial.html#createbean"/>		
-		<topic label="Faces configuration editor" href="html/gettingstarted/tutorial/JSFTools_tutorial.html#facesconfigeditor"/>		
-		<topic label="Test the JSF JSP Page" href="html/gettingstarted/tutorial/JSFTools_tutorial.html#testpage"/>				
-	</topic> 
+	<topic label="JSF Basic Tutorial" href="html/gettingstarted/tutorial/JSFTools_tutorial.html"/>
 	<topic label="Web Page Editor" href="html/gettingstarted/wpe/wpe_getting_started.html"/>
 </toc>

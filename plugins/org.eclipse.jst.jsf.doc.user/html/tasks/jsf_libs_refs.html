@@ -8,22 +8,31 @@
 <body>
 <h1>Adding and Removing JSF Library References from a Project</h1>
 <br>
-JSF Library References for a project are managed as properties of the project.   To add or remove library referernces:
-	<b>Project -&gt; Properties -&gt; JSF Library References</b>
-	<img alt="Preferences -&gt; Web and XML -&gt; JSF Libraries" src="./images/jsflibs_projectrefs.png">
-<br>
-<br>
-<ul>	
-<li>To modify the choice of implementation, choose from the Implementation dropdown list.</li>
-<li>To add a component library, select the library from list on left and use "&gt;" to add to the selected list</li>
-<li>To add all libraries, use "&gt;&gt;"</li>
-<li>To remove a component library, select library from list on the right and use "&lt;" button</li>
-<li>To remove all libraries, use "&lt;&lt;" button</li>
-<li>To create a new library, use "New...: button</li>
-<li>To change whether or not a selected component library is deployed, use the "Deploy" checkbox</li>
-</ul>
-<p>Click "OK" button to complete the update of the JSF Library References for this project</p>
-<br>
+JSF Library References for a project are managed as Java Build Path Libraries and J2EE Module Dependencies.
+
+<h2>Adding a JSF Library Reference</h2>
+<p><b>Project -&gt; Properties -&gt; Java Build Path</b></p>
+<img src="./images/jsflibref_javabuildpath.png" alt="Project -&gt; Properties -&gt; Java Build Path">
+<p>Click "Add Library..." button.</p>
+<img src="./images/jsflibref_addlibrary.png" alt="Add Library">
+<p>Select "JSF Libraries" and click "<u>N</u>ext &gt;" button.</p>
+<img src="./images/jsflibref_addlibrary_2.png" alt="Add Library">
+<p>Select desired JSF Library and click "<u>F</u>inish" button.</p>
+
+<h2>Removing a JSF Library Reference</h2>
+<p><b>Project -&gt; Properties -&gt; Java Build Path</b></p>
+<img src="./images/jsflibref_javabuildpath.png" alt="Project -&gt; Properties -&gt; Java Build Path">
+<p>Select desired JSF Library and click "<u>R</u>emove" button.</p>
+
+<h2>Selecting JSF Library Deployment Options</h2>
+<p>
+To control which JSF Libraries are deployed to the web application and which
+are not, use the "J2EE Module Dependencies" functionality.
+</p>
+<p><b>Project -&gt; Properties -&gt; J2EE Module Dependencies</b></p>
+<img src="./images/jsflibref_j2eemoddeps.png" alt="Project -&gt; Properties -&gt; J2EE Module Dependencies">
+<p>Select/deselect JSF Libraries as desired (selected means deploy, deselected means do not deploy).</p>
+
 <img src="../../images/ngrelc.png"  alt="Related concepts" border="0"> 
 <p> <br></p>
   

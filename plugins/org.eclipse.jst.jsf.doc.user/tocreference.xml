@@ -3,7 +3,7 @@
 
 <toc label="Reference" link_to="toc.xml#jsf_reference"> 
 	<!--   <topic label="Faces-Config Editor/Wizards"  href="html/reference/facesconfigeditor.html" /> -->
-	<topic label="Taglibrary Support in the JSP Source Editor" href="html/reference/taglibsupport.html" > 
+	<topic label="Tag Library Support in the JSP Source Editor" href="html/reference/taglibsupport.html" > 
 		<topic label="JSF Core" href="html/reference/jsf-c.html" /> 
 		<topic label="JSF HTML" href="html/reference/jsf-h.html" />
 	</topic>
