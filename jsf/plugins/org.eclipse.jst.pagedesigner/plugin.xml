@@ -114,7 +114,7 @@
  <extension
        point="org.eclipse.jst.jsf.common.standardMetaDataFiles">
     <standardMetaDataFile
-          location="/metadata/html.xml"
+          location="$nl$/metadata/html.xml"
           uri="HTML">
     </standardMetaDataFile>
  </extension>

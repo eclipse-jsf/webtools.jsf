@@ -75,7 +75,7 @@
 	</trait>
 
 	<trait id="images-base-path">
-		<value>icons/palette/HTML</value>
+		<value>$nl$/icons/palette/HTML</value>
 	</trait>
 
 	<trait id="display-label">

@@ -29,7 +29,7 @@
 	</trait>
 
 	<trait id="images-base-path">
-		<value>icons/palette/JSP</value>
+		<value>$nl$/icons/palette/JSP</value>
 	</trait>
 
 	<trait id="display-label">

@@ -5,7 +5,7 @@
    <extension
        point="org.eclipse.jst.jsf.common.standardMetaDataFiles">
     <standardMetaDataFile
-          location="/metadata/jsp11.xml"
+          location="$nl$/metadata/jsp11.xml"
           uri="JSP11">
     </standardMetaDataFile>
    </extension>
