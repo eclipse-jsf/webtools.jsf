@@ -80,7 +80,7 @@ public class LoadBundleResolutionTestCase extends SingleJSPTestCase
         assertContainsProblem(list, DiagnosticFactory.VARIABLE_NOT_FOUND_ID);
         
         list = assertSemanticWarning(1677, null, 1);
-        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
+        assertContainsProblem(list, DiagnosticFactory.MEMBER_IS_INTERMEDIATE_ID);
         
         list = assertSemanticWarning(1716, null, 1);
         assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);

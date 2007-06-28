@@ -103,7 +103,7 @@ public class ResourceBundleTestCase extends SingleJSPTestCase {
         assertContainsProblem(problems, DiagnosticFactory.VARIABLE_NOT_FOUND_ID);
 
         problems = assertSemanticWarning(1728, null, 1);
-        assertContainsProblem(problems, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
+        assertContainsProblem(problems, DiagnosticFactory.MEMBER_IS_INTERMEDIATE_ID);
 
         problems = assertSemanticWarning(1775, null, 1);
         assertContainsProblem(problems, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
