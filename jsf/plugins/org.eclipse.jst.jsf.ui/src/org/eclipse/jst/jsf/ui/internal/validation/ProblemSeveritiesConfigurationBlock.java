@@ -12,6 +12,7 @@
 package org.eclipse.jst.jsf.ui.internal.validation;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jst.jsf.core.internal.IJSFPreferenceModel;
 import org.eclipse.jst.jsf.ui.internal.JSFUiPlugin;
@@ -95,6 +96,10 @@ import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
         getJSFCoreKey(ELValidationPreferences.BINARY_COMPARISON_WITH_ENUM_ALWAYS_SAME);
     private final static Key PREF_BINARY_OP_COMPARISON_OF_ENUMS_INCOMPATIBLE = 
         getJSFCoreKey(ELValidationPreferences.BINARY_OP_COMPARISON_OF_ENUMS_INCOMPATIBLE);
+    private final static Key PREF_MEMBER_IS_INTERMEDIATE =
+        getJSFCoreKey(ELValidationPreferences.MEMBER_IS_INTERMEDIATE);
+
+    private final static int EXPECTED_PREFS = 28;
     
     private PixelConverter fPixelConverter;
     
@@ -107,8 +112,9 @@ import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
         super(prefs, project, getKeys(), container);
     }
     
-    private static Key[] getKeys() {
-        return new Key[] {
+    private static Key[] getKeys() 
+    {
+        Key[] keys = new Key[] {
                 PREF_BINARY_OP_BOTH_OPERANDS_NULL
                 , PREF_BINARY_OP_POSSIBLE_DIVISION_BY_ZERO
                 , PREF_BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION 
@@ -136,7 +142,15 @@ import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
                 , PREF_POSSIBLE_ARRAY_INDEX_OUT_OF_BOUNDS 
                 , PREF_BINARY_COMPARISON_WITH_ENUM_ALWAYS_SAME
                 , PREF_BINARY_OP_COMPARISON_OF_ENUMS_INCOMPATIBLE
+                , PREF_MEMBER_IS_INTERMEDIATE
           };
+        
+        if (EXPECTED_PREFS != keys.length)
+        {
+            JSFUiPlugin.log(IStatus.WARNING, "Expected "+EXPECTED_PREFS+" preferences but was "+keys.length, new Throwable());
+        }
+
+        return keys;
     }
     
     /*
@@ -238,6 +252,9 @@ import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
 
         label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_member_not_found; 
         addComboBox(inner, label, PREF_MEMBER_NOT_FOUND, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
+
+        label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_member_is_intermediate; 
+        addComboBox(inner, label, PREF_MEMBER_IS_INTERMEDIATE, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
 
         // --- type coercion problems
         

@@ -15,26 +15,9 @@ package org.eclipse.jst.jsf.validation.internal.el;
 
 class ValueExpressionTracker
 {
-    private String      				_rootSymbol;
-    
     private int                         _curPropertySymbolOffset;
     private int                         _curPropertySymbolLength;
-    
-	/**
-	 * @return the root symbol or null if not set
-	 */
-	public String getRootSymbolName() {
-		return _rootSymbol;
-	}
-	
-    /**
-     * @param newName
-     */
-    public void setRootSymbolName(String newName)
-    {
-        _rootSymbol = newName;
-    }
-    
+
     /**
      * @param offset 
      * @param length 
@@ -60,59 +43,4 @@ class ValueExpressionTracker
     {
         return _curPropertySymbolLength;
     }
-
-    /**
-     * @return the type of this value expression or null if it cannot be
-     * resolved
-     * @throws IllegalStateException if root symbol is not yet set
-     */
-//    public SignatureBasedType resolveType()
-//    {
-//        if (!_isRootValid || _rootSymbol == null)
-//        {
-//            throw new IllegalStateException("Cannot resolve type without root symbol");
-//        }
-//        
-//        // if there's been an error resolving the expression semantics, don't
-//        // bother trying to determine type
-//        if (_errorFlag)
-//        {
-//            return null;
-//        }
-//        
-//        if (_curMemberSymbol instanceof IMethodSymbol)
-//        {
-//            return new MethodType(_curMemberSymbol.getName(),
-//                                  ((IMethodSymbol)_curMemberSymbol).getSignature());
-//        }
-//
-//        IObjectSymbol  objectSymbol = null;
-//        
-//        // no properties, so resolve root's type
-//        if (_curMemberSymbol == null)
-//        {
-//            objectSymbol = _rootSymbol;
-//        }
-//        else 
-//        {
-//            objectSymbol = (IObjectSymbol) _curMemberSymbol;
-//        }
-//
-//        final ITypeDescriptor typeDesc = objectSymbol.getTypeDescriptor();
-//        int   assignability = 0;
-//        assignability |= objectSymbol.isReadable() 
-//                            ? IAssignable.ASSIGNMENT_TYPE_RHS
-//                            : 0;
-//        assignability |= objectSymbol.isWritable() 
-//                            ? IAssignable.ASSIGNMENT_TYPE_LHS
-//                            : 0;
-//        final String typeDescString = typeDesc.getTypeSignature();
-//        final String[] superTypes = (String[]) 
-//            typeDesc.getSuperTypeSignatures().toArray(new String[0]);
-//        final String[] interfaceTypes = (String[]) 
-//            typeDesc.getInterfaceTypeSignatures().toArray(new String[0]);
-//
-//        return new ValueType(typeDescString, superTypes, interfaceTypes,
-//                assignability);
-//    }
 }

@@ -198,6 +198,10 @@ public final class PreferencesMessages extends NLS {
      * see messages.properties
      */
     public static String  ProblemSeveritiesConfigurationBlock_pb_incompatible_enumeration_comparison;
+    /**
+     * see messages.properties
+     */
+    public static String ProblemSeveritiesConfigurationBlock_pb_member_is_intermediate;
     
     static {
         NLS.initializeMessages(BUNDLE_NAME, PreferencesMessages.class);

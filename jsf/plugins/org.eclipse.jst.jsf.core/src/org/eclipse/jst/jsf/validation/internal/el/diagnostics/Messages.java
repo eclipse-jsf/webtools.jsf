@@ -148,6 +148,10 @@ class Messages extends NLS {
      * see messages.properties
      */
     public static String BINARY_COMPARISON_WITH_ENUM_AND_UNCOERCABLE_NONCONST_ALWAYS_SAME;
+    /**
+     * see messages.properties
+     */
+    public static String MEMBER_IS_INTERMEDIATE;
 
     private Messages() {
         // do nothing; no external instantiation

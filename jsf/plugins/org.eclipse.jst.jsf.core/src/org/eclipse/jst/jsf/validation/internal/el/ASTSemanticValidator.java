@@ -349,9 +349,8 @@ class ASTSemanticValidator implements JSPELParserVisitor, IExpressionSemanticVal
             final int problemStartOffset = tracker.getCurPropertySymbolOffset();
             final int length = tracker.getCurPropertySymbolLength();
             _messages.add(ValidationMessageFactory.createFromDiagnostic(
-                    _diagnosticFactory.create_MEMBER_NOT_FOUND(
-                        ((IPropertySymbol)((IObjectSymbolBasedValueType)type).getSymbol()).getName()
-                        , tracker.getRootSymbolName())
+                    _diagnosticFactory.create_MEMBER_IS_INTERMEDIATE(
+                        ((IPropertySymbol)((IObjectSymbolBasedValueType)type).getSymbol()).getName())
                         , problemStartOffset, length, _targetFile, _prefs));
         }
             

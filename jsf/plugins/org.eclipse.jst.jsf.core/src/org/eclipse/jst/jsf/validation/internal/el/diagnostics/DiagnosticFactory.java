@@ -158,9 +158,16 @@ public final class DiagnosticFactory
     public final static int BINARY_OP_COMPARISON_OF_ENUMS_INCOMPATIBLE_ID = 28;
     
     /**
+     * Indicates a situation such as x.y where x is a bundle and 
+     * 'x.y.z' exists, but x.y while partially valid, does not have a value
+     * associated.
+     */
+    public final static int MEMBER_IS_INTERMEDIATE_ID = 29;
+    
+    /**
      * Count of ids
      */
-    public final static int NUM_IDS = 29;
+    public final static int NUM_IDS = 30;
     
     /**
      * @param operatorName
@@ -526,6 +533,17 @@ public final class DiagnosticFactory
                 , Messages.BINARY_OP_COMPARISON_OF_ENUMS_INCOMPATIBLE);
     }
 
+    /**
+     * @param intermediateMemberName
+     * @return a diagnostic
+     */
+    public Diagnostic create_MEMBER_IS_INTERMEDIATE(final String intermediateMemberName)
+    {
+        return create(MEMBER_IS_INTERMEDIATE_ID
+                        ,  NLS.bind(Messages.MEMBER_IS_INTERMEDIATE
+                                , intermediateMemberName));
+    }
+    
     private BasicDiagnostic create(int diagnosticId, String message)
     {
         final int severity = ELValidationPreferences.getDefaultSeverity(diagnosticId);
