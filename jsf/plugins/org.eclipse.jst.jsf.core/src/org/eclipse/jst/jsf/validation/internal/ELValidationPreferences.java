@@ -390,7 +390,8 @@ public class ELValidationPreferences implements IJSFPreferenceModel
                 return Diagnostic.WARNING;
             case DiagnosticFactory.BINARY_OP_COMPARISON_OF_ENUMS_INCOMPATIBLE_ID:
                 return Diagnostic.ERROR;
-            
+            case DiagnosticFactory.MEMBER_IS_INTERMEDIATE_ID:
+                return Diagnostic.WARNING;
             default:
                 throw new IllegalArgumentException("Diagnostic Id: "+ diagnosticId +" is out of range");
         }
@@ -462,7 +463,8 @@ public class ELValidationPreferences implements IJSFPreferenceModel
                 return BINARY_COMPARISON_WITH_ENUM_ALWAYS_SAME;
             case DiagnosticFactory.BINARY_OP_COMPARISON_OF_ENUMS_INCOMPATIBLE_ID:
                 return BINARY_OP_COMPARISON_OF_ENUMS_INCOMPATIBLE;
-            
+            case DiagnosticFactory.MEMBER_IS_INTERMEDIATE_ID:
+                return MEMBER_IS_INTERMEDIATE;
             default:
                 throw new IllegalArgumentException("Diagnostic Id: "+ diagnosticId +" is out of range");
         }
@@ -589,6 +591,10 @@ public class ELValidationPreferences implements IJSFPreferenceModel
         else if (BINARY_OP_COMPARISON_OF_ENUMS_INCOMPATIBLE.equals(key))
         {
             return DiagnosticFactory.BINARY_OP_COMPARISON_OF_ENUMS_INCOMPATIBLE_ID;
+        }
+        else if (MEMBER_IS_INTERMEDIATE.equals(key))
+        {
+            return DiagnosticFactory.MEMBER_IS_INTERMEDIATE_ID;
         }
         else
         {
@@ -752,6 +758,12 @@ public class ELValidationPreferences implements IJSFPreferenceModel
      */
     public final static String BINARY_OP_COMPARISON_OF_ENUMS_INCOMPATIBLE = 
         createQualifiedKeyName("BINARY_OP_COMPARISON_OF_ENUMS_INCOMPATIBLE");
+    
+    /**
+     * preference key.  Match to DiagnosticFactory constants
+     */
+    public final static String MEMBER_IS_INTERMEDIATE =
+        createQualifiedKeyName("MEMBER_IS_INTERMEDIATE");
     
     // values
     /**
