@@ -119,7 +119,8 @@ public class TestTypeUtil extends TestCase
 //        fail("nbla");
 //    }
 
-    public void testResolveTypeSignatureITypeString() {
+    public void testResolveTypeSignatureITypeString() 
+    {
         // this one should be the same regardless of type erasure
         assertEquals(TypeConstants.TYPE_STRING, TypeUtil.resolveTypeSignature(_testBean1Type, "QString;", true));
         assertEquals(TypeConstants.TYPE_STRING, TypeUtil.resolveTypeSignature(_testBean1Type, "QString;", false));
@@ -131,10 +132,44 @@ public class TestTypeUtil extends TestCase
         assertEquals(TypeConstants.TYPE_MAP, TypeUtil.resolveTypeSignature(_testBean1Type, "QMap;", false));
         
         // in this case, the provided signature has type erasure, so the answer will different depending on typeErasure flag
-        assertEquals(TypeConstants.TYPE_MAP, TypeUtil.resolveTypeSignature(_testBean1Type, "QMap<QString;QString;>;", true));
-        assertEquals("Ljava.util.Map<Ljava.lang.String;Ljava.lang.String;>;", TypeUtil.resolveTypeSignature(_testBean1Type, "QMap<QString;QString;>;", false));
+        final String typeSigWithErasure = TypeUtil.resolveTypeSignature(_testBean1Type, "QMap<QString;QString;>;", true);        
+        assertEquals(TypeConstants.TYPE_MAP, typeSigWithErasure);
+        final String typeSigNoErasure = TypeUtil.resolveTypeSignature(_testBean1Type, "QMap<QString;QString;>;", false);
+        assertEquals("Ljava.util.Map<Ljava.lang.String;Ljava.lang.String;>;", typeSigNoErasure);
+        
+        // cover cases where wildcards and/or capture are used.  All should be equivalent to the case for
+        // the same signature without wildcards and capture
+        
+        // with type erasure
+        runWildcardAndCapture(typeSigWithErasure, true);
+        // and without type erasure
+        runWildcardAndCapture(typeSigNoErasure, false);
     }
 
+    private void runWildcardAndCapture(final String expected, boolean typeErasure)
+    {
+        // extends
+        assertEquals(expected, TypeUtil.resolveTypeSignature(_testBean1Type, "QMap<+QString;+QString;>;", typeErasure));
+        assertEquals(expected, TypeUtil.resolveTypeSignature(_testBean1Type, "QMap<+QString;QString;>;", typeErasure));
+        assertEquals(expected, TypeUtil.resolveTypeSignature(_testBean1Type, "QMap<QString;+QString;>;", typeErasure));
+            //super
+        assertEquals(expected, TypeUtil.resolveTypeSignature(_testBean1Type, "QMap<-QString;-QString;>;", typeErasure));
+        assertEquals(expected, TypeUtil.resolveTypeSignature(_testBean1Type, "QMap<-QString;QString;>;", typeErasure));
+        assertEquals(expected, TypeUtil.resolveTypeSignature(_testBean1Type, "QMap<QString;-QString;>;", typeErasure));
+            // star
+        // this one is distinct because * are converted to Object
+        final String expected1 = "Ljava.util.Map" + (typeErasure ? ";" : "<Ljava.lang.Object;Ljava.lang.Object;>;"); 
+        assertEquals(expected1, TypeUtil.resolveTypeSignature(_testBean1Type, "QMap<**>;", typeErasure));
+        final String expected2 = "Ljava.util.Map" + (typeErasure ? ";" : "<Ljava.lang.Object;Ljava.lang.String;>;");
+        assertEquals(expected2, TypeUtil.resolveTypeSignature(_testBean1Type, "QMap<*QString;>;", typeErasure));
+        final String expected3 = "Ljava.util.Map" + (typeErasure ? ";" : "<Ljava.lang.String;Ljava.lang.Object;>;"); 
+        assertEquals(expected3, TypeUtil.resolveTypeSignature(_testBean1Type, "QMap<QString;*>;", typeErasure));
+            // capture extends
+        assertEquals(expected, TypeUtil.resolveTypeSignature(_testBean1Type, "QMap<!+QString;!+QString;>;", typeErasure));
+        assertEquals(expected, TypeUtil.resolveTypeSignature(_testBean1Type, "QMap<!+QString;QString;>;", typeErasure));
+        assertEquals(expected, TypeUtil.resolveTypeSignature(_testBean1Type, "QMap<QString;!+QString;>;", typeErasure));
+    }
+    
 //    public void testResolveTypeSignatureITypeStringBoolean() {
 //        fail("Not yet implemented");
 //    }
