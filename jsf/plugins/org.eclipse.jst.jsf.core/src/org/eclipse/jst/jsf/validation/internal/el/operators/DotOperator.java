@@ -50,13 +50,21 @@ public class DotOperator extends MemberAccessorOperator
 	}
 
 	public Diagnostic validateObjectSymbolValue(IObjectSymbolBasedValueType firstArg,
-															ValueType secondArg) 
+												ValueType secondArg) 
 	{
+	    Diagnostic diag = Diagnostic.OK_INSTANCE;
+	    
         if (secondArg instanceof LiteralType)
         {
-        	return validateNamedPropertyAccessorBase(firstArg, (LiteralType) secondArg);
+        	diag = validateNamedPropertyAccessorBase(firstArg, (LiteralType) secondArg);
         }
 
-        return Diagnostic.OK_INSTANCE;
+        return diag;
 	}
+	
+    @Override
+    protected String getOperatorName()
+    {
+        return Messages.getString("DotOperator.Name");
+    }
 }

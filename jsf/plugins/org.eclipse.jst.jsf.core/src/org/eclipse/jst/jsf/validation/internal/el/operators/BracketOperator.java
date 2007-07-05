@@ -156,4 +156,10 @@ public class BracketOperator extends MemberAccessorOperator
         // if can't be resolved, return null
         return null;
     }
+
+    @Override
+    protected String getOperatorName()
+    {
+        return Messages.getString("BracketOperator.Name");
+    }    
 }

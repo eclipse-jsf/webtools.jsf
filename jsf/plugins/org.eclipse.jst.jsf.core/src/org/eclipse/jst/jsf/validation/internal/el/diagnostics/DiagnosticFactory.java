@@ -447,12 +447,13 @@ public final class DiagnosticFactory
     }
 
     /**
+     * @param operatorName 
      * @return a configured diagnostic
      */
-    public Diagnostic create_BINARY_OP_DOT_WITH_VALUEB_NULL()
+    public Diagnostic create_BINARY_OP_DOT_WITH_VALUEB_NULL(final String operatorName)
     {
         return create(BINARY_OP_DOT_WITH_VALUEB_NULL_ID
-                , Messages.BINARY_OP_DOT_WITH_VALUEB_NULL);
+                , Messages.bind(Messages.BINARY_OP_DOT_WITH_VALUEB_NULL, operatorName));
     }
     
     /**

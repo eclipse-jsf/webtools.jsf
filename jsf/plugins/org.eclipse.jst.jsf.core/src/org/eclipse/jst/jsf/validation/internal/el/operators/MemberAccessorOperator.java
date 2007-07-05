@@ -77,7 +77,7 @@ public abstract class MemberAccessorOperator
         
         if (TypeCoercer.typeIsNull(secondArg.getSignature()))
         {
-            return _diagnosticFactory.create_BINARY_OP_DOT_WITH_VALUEB_NULL();
+            return _diagnosticFactory.create_BINARY_OP_DOT_WITH_VALUEB_NULL(getOperatorName());
         }
 
         return validateObjectSymbolValue((IObjectSymbolBasedValueType) firstArg, secondArg);
@@ -272,4 +272,9 @@ public abstract class MemberAccessorOperator
             DesignTimeApplicationManager.getInstance(_file.getProject())
                 .getMethodResolver();
     }
+    
+    /**
+     * @return a user-readable name of the operator (i.e. dot or bracket)
+     */
+    protected abstract String getOperatorName();
 }

@@ -139,13 +139,13 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
         // if the first is not an enum, then we have non-Enum == Enum case
         if (!firstArg.isEnumType())
         {
-            return handleComparsionOfEnumAndNonEnum(firstArg, secondArg);
+            return handleComparsionOfEnumAndNonEnum(secondArg, firstArg);
         }
         
         // if the second is not an enum, then we have Enum == non-Enum case
         if (!secondArg.isEnumType())
         {
-            return handleComparsionOfEnumAndNonEnum(secondArg, firstArg);
+            return handleComparsionOfEnumAndNonEnum(firstArg, secondArg);
         }
         
         // only other case is they are both enums.  Check if they are directly
