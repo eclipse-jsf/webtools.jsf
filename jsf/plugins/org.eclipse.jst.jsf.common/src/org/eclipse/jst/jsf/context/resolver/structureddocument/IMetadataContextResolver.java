@@ -28,9 +28,6 @@ public interface IMetadataContextResolver extends IDocumentContextResolver
 {
     /**
      * @param key 
-     * @param uri
-     * @param elementName
-     * @param attribute
      * @return a list of one or more String values associated with key
      * for the current context location. 
      */

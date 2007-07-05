@@ -156,6 +156,7 @@ public class IJavaTypeDescriptor2ItemProvider
      * This adds a property descriptor for the Array Count feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+	 * @param object 
      * @generated
      */
     protected void addArrayCountPropertyDescriptor(Object object) {
