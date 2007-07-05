@@ -29,6 +29,8 @@ import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
 /**
  * Utility for handling IType's and type signatures
  * 
+ * Class is static and cannot be extended or instantiated.
+ * 
  * @author cbateman
  *
  */
@@ -142,9 +144,18 @@ public final class TypeUtil
             
             case Signature.CLASS_TYPE_SIGNATURE:
                 return resolveSignatureRelative(owningType, typeSignature, eraseTypeParameters);
-    
-            case Signature.TYPE_VARIABLE_SIGNATURE:
-                resolveSignatureRelative(owningType, typeSignature, eraseTypeParameters);
+
+            case Signature.WILDCARD_TYPE_SIGNATURE:
+                // strip the wildcard and try again.  Too bad Signature doesn't seem to have a method
+                // for this
+                return resolveTypeSignature(owningType, typeSignature.substring(1), eraseTypeParameters);
+            
+            case Signature.CAPTURE_TYPE_SIGNATURE:
+                // strip the capture and try again
+                return resolveTypeSignature(owningType, Signature.removeCapture(typeSignature), eraseTypeParameters);
+//            case Signature.TYPE_VARIABLE_SIGNATURE:
+//                resolveSignatureRelative(owningType, typeSignature, eraseTypeParameters);
+
             default:
                 return typeSignature;
         }
@@ -174,11 +185,26 @@ public final class TypeUtil
                 // ensure that type parameters are resolved recursively
                 for (String typeParam : Signature.getTypeArguments(typeSignature))
                 {
-                    typeParameters.add(resolveSignatureRelative(owningType, //use the enclosing type, *not* the resolved type because we need to resolve in that context
-                            typeParam, eraseTypeParameters));
+                    typeParam = Signature.removeCapture(typeParam);
+                    // check and remove bound wildcarding (extends/super/?)
+                    if (Signature.getTypeSignatureKind(typeParam) == Signature.WILDCARD_TYPE_SIGNATURE)
+                    {
+                        // convert ? to Object, strip extends/super
+                        if (typeParam.charAt(0) == Signature.C_STAR)
+                        {
+                            typeParam = TypeConstants.TYPE_JAVAOBJECT;
+                        }
+                        else
+                        {
+                            typeParam = typeParam.substring(1);
+                        }
+                    }
+                    final String resolvedParameter = resolveSignatureRelative(owningType, //use the enclosing type, *not* the resolved type because we need to resolve in that context
+                            typeParam, eraseTypeParameters);
+                    typeParameters.add(resolvedParameter);
                 }
             }
-            
+
             final String  resolvedTypeSignature = 
                 Signature.createTypeSignature
                     (resolvedType.getFullyQualifiedName(), true);
@@ -538,5 +564,10 @@ public final class TypeUtil
         
         // if unresolved assume false
         return false;
+    }
+    
+    private TypeUtil()
+    {
+        // no external instantiation
     }
 }
