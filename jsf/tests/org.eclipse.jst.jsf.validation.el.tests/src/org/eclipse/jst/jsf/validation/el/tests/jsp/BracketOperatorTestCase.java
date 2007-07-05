@@ -60,7 +60,6 @@ public class BracketOperatorTestCase extends SingleJSPTestCase
         assertEquals("empty myBean.arrayOfArrayOfStringProperty[1]", getELText(_structuredDocument,2013));
         assertEquals("myBean.arrayOfArrayOfStringProperty[0][1]", getELText(_structuredDocument,2088));
         assertEquals("myBean.arrayOfArrayOfStringProperty[myBean.intArrayProperty[0]][myBean.intArrayProperty[1]]", getELText(_structuredDocument,2160));
-        
         assertEquals("beanWithListProperties.listProperty[0]", getELText(_structuredDocument,2284));
         assertEquals("beanWithListProperties.listProperty[myBean.integerProperty]", getELText(_structuredDocument,2353));
         assertEquals("beanWithListProperties.listProperty['0']", getELText(_structuredDocument,2443));
@@ -87,13 +86,16 @@ public class BracketOperatorTestCase extends SingleJSPTestCase
         assertEquals("beanWithListProperties.arrayListProperty.someProperty", getELText(_structuredDocument,3845));
         assertEquals("beanWithListProperties.arrayListProperty[-1]", getELText(_structuredDocument,3929));
         assertEquals("listBean[-1]", getELText(_structuredDocument,4004));
-        assertEquals("listBean.stringProperty", getELText(_structuredDocument,4114));
-        assertEquals("listBean['stringProperty']", getELText(_structuredDocument,4169));
-        assertEquals("myBean.stringArrayProperty['a']", getELText(_structuredDocument,4253));
-        assertEquals("beanWithListProperties.arrayListProperty['a']", getELText(_structuredDocument,4315));
-        assertEquals("beanWithListProperties.arrayListProperty[true]", getELText(_structuredDocument,4391));
-        assertEquals("listBean['a']", getELText(_structuredDocument,4468));
-        assertEquals("listBean[true]", getELText(_structuredDocument,4512));    
+        assertEquals("bundle['y']", getELText(_structuredDocument,4050));
+        assertEquals("bundle[null]", getELText(_structuredDocument,4095));
+        assertEquals("listBean.stringProperty", getELText(_structuredDocument,4205));
+
+        assertEquals("listBean['stringProperty']", getELText(_structuredDocument,4260));
+        assertEquals("myBean.stringArrayProperty['a']", getELText(_structuredDocument,4344));
+        assertEquals("beanWithListProperties.arrayListProperty['a']", getELText(_structuredDocument,4406));
+        assertEquals("beanWithListProperties.arrayListProperty[true]", getELText(_structuredDocument,4482));
+        assertEquals("listBean['a']", getELText(_structuredDocument,4559));
+        assertEquals("listBean[true]", getELText(_structuredDocument,4603));    
     }
     
     
@@ -180,26 +182,36 @@ public class BracketOperatorTestCase extends SingleJSPTestCase
 
         list = assertSemanticWarning(4004, null, 1);
         assertContainsProblem(list, DiagnosticFactory.POSSIBLE_ARRAY_INDEX_OUT_OF_BOUNDS_ID);
+
+        list = assertSemanticWarning(4050, null, 1);
+        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
+
+        list = assertSemanticWarning(4095, null, 1);
+        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_DOT_WITH_VALUEB_NULL_ID);
+
+        // the dot notation member is not found because base is a list
+        list = assertSemanticWarning(4205, null, 1);
+        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
     }
     
     public void testErrorExprs() 
-    {        
-        List list = assertSemanticError(4169, null, 1);
+    { 
+        List list = assertSemanticError(4260, null, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
 
-        list = assertSemanticError(4253, null, 1);
+        list = assertSemanticError(4344, null, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
         
-        list = assertSemanticError(4315, null, 1);
+        list = assertSemanticError(4406, null, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
 
-        list = assertSemanticError(4391, null, 1);
+        list = assertSemanticError(4482, null, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
         
-        list = assertSemanticError(4468, null, 1);
+        list = assertSemanticError(4559, null, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
 
-        list = assertSemanticError(4512, null, 1);
+        list = assertSemanticError(4603, null, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
     }
 }

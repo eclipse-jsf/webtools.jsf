@@ -12,6 +12,7 @@ import org.eclipse.jst.jsf.validation.el.tests.jsp.AssignabilityTestCase;
 import org.eclipse.jst.jsf.validation.el.tests.jsp.BadSyntaxTestCase;
 import org.eclipse.jst.jsf.validation.el.tests.jsp.BeanPropertyResolutionTestCase;
 import org.eclipse.jst.jsf.validation.el.tests.jsp.BeanVariableResolutionTestCase;
+import org.eclipse.jst.jsf.validation.el.tests.jsp.BracketOperatorTestCase;
 import org.eclipse.jst.jsf.validation.el.tests.jsp.BuiltInSymbolsTestCase;
 import org.eclipse.jst.jsf.validation.el.tests.jsp.DataTableResolutionTestCase;
 import org.eclipse.jst.jsf.validation.el.tests.jsp.GreaterThanEqTestCase;
@@ -33,6 +34,8 @@ import org.eclipse.jst.jsf.validation.el.tests.jsp.UnaryMinusTestCase;
 import org.eclipse.jst.jsf.validation.el.tests.jsp.ext.BeanPropertyResolutionTestCase_JSFExt;
 import org.eclipse.jst.jsf.validation.el.tests.jsp.ext.BeanPropertyResolutionTestCase_JSPFExt;
 import org.eclipse.jst.jsf.validation.el.tests.jsp.ext.BeanPropertyResolutionTestCase_JSPXExt;
+import org.eclipse.jst.jsf.validation.el.tests.preferences.EndToEndTestCase;
+import org.eclipse.jst.jsf.validation.el.tests.preferences.TestELValidationPreferences;
 
 public class CommonTests 
 {
@@ -49,6 +52,7 @@ public class CommonTests
         suite.addTest(new ConfigurableTestSuite(JSPFunctionsTestCase.class));
         suite.addTest(new ConfigurableTestSuite(MethodBindingTestCase.class));
         suite.addTest(new ConfigurableTestSuite(PropertiesOfMapsTestCase.class));
+        suite.addTest(new ConfigurableTestSuite(BracketOperatorTestCase.class));
         
         suite.addTest(new ConfigurableTestSuite(ArithmeticAddTestCase.class));
         suite.addTest(new ConfigurableTestSuite(ArithmeticDivideTestCase.class));
@@ -77,6 +81,10 @@ public class CommonTests
         suite.addTest(new ConfigurableTestSuite(BeanPropertyResolutionTestCase_JSPXExt.class));
         suite.addTest(new ConfigurableTestSuite(BeanPropertyResolutionTestCase_JSPFExt.class));
         
+        // preferences
+        suite.addTest(new ConfigurableTestSuite(EndToEndTestCase.class));
+        suite.addTest(new ConfigurableTestSuite(TestELValidationPreferences.class));
+       
         //$JUnit-END$
     }
 }

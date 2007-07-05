@@ -3,14 +3,19 @@ package org.eclipse.jst.jsf.validation.el.tests.perf;
 import java.io.PrintStream;
 import java.text.MessageFormat;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.jst.jsf.context.symbol.ISymbol;
 import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.designtime.DesignTimeApplicationManager;
 import org.eclipse.jst.jsf.designtime.context.DTFacesContext;
 import org.eclipse.jst.jsf.designtime.el.AbstractDTPropertyResolver;
 import org.eclipse.jst.jsf.designtime.el.AbstractDTVariableResolver;
+import org.eclipse.jst.jsf.validation.el.tests.base.JSPTestCase;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.ELExpressionValidator;
+import org.eclipse.wst.sse.core.StructuredModelManager;
+import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
+import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
 
 /**
  * TODO: should the resolver specific stuff be split to different test plugin?
@@ -18,11 +23,38 @@ import org.eclipse.jst.jsf.validation.internal.el.ELExpressionValidator;
  * @author cbateman
  *
  */
-public class StressTest extends SingleJSPTestCase 
+public class StressTest extends JSPTestCase 
 {
     public StressTest() 
     {
-        super("/testdata/jsps/perfTest1.jsp.data", "/perfTest1.jsp", IJSFCoreConstants.FACET_VERSION_1_1, FACES_CONFIG_FILE_NAME_1_1);
+        super(IJSFCoreConstants.FACET_VERSION_1_1, SingleJSPTestCase.FACES_CONFIG_FILE_NAME_1_1);
+    }
+
+    protected IFile _testJSP;
+    private IStructuredModel _structuredModel;
+    private IStructuredDocument _structuredDocument;
+    
+    
+    @Override
+    protected void setUp() throws Exception {
+        // TODO Auto-generated method stub
+        super.setUp();
+        
+        _testJSP = loadJSP("/testdata/jsps/perfTest1.jsp.data", "/perfTest1.jsp");
+        
+        _structuredModel = StructuredModelManager.getModelManager().getModelForRead(_testJSP);
+        _structuredDocument = _structuredModel.getStructuredDocument();
+    }
+
+    @Override
+    protected void tearDown() throws Exception 
+    {
+        super.tearDown();
+        
+        if (_structuredModel != null)
+        {
+            _structuredModel.releaseFromRead();
+        }
     }
 
     public void testStressVariableResolver()
@@ -104,24 +136,6 @@ public class StressTest extends SingleJSPTestCase
         perfTracker.printReport(System.out);
     }
     
-    // TODO: factor off these validation tests
-    @Override
-    public void testErrorExprs() {
-        // none.
-    }
-
-    @Override
-    public void testNoErrorExprs() {
-        // none.
-        
-    }
-
-    @Override
-    public void testWarningExprs() {
-        // none
-        
-   }
-    
    private static class PerfTracker
    {
        private long           _max = Long.MIN_VALUE;  // ensure any value compared to to this will be bigger
@@ -153,7 +167,8 @@ public class StressTest extends SingleJSPTestCase
            _times[_numTimesRecorded] = time;
            _numTimesRecorded++;
        }
-       public void printReport(PrintStream outStream)
+       @SuppressWarnings("boxing")
+    public void printReport(PrintStream outStream)
        {
            outStream.println("===================================================");
            outStream.println("Report for performance test: "+_name);

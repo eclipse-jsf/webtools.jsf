@@ -62,6 +62,9 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
 		<h:outputText value="#{myBean.coins == 'notAValue' && myBean.coins == 'dime'}"/>
 		<h:outputText value="#{myBean.coins eq 'notAValue' && myBean.coins eq 'dime'}"/>
 		<h:outputText value="#{myBean.coins == myBean.colors}"/>
+		<h:outputText value="#{myBean.coins == myBean.stringArrayProperty}"/>
+		<h:outputText value="#{'blah' == myBean.coins}"/>
+		<h:outputText value="#{myBean.coins eq 'blah'}"/>
 
 		<!-- errors -->
 		<h:outputText value="#{5 == true}"/>
