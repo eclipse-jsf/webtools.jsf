@@ -269,7 +269,7 @@ public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJa
 	    else 
 	    {
             propertyColl = new ArrayList(properties.length);
-            Collections.addAll(propertyColl, properties);
+            Collections.addAll(propertyColl, (Object[])properties);
 	    }
 	    BasicEList list = new BasicEList(propertyColl);
 	    return list;
@@ -292,7 +292,7 @@ public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJa
 	        typeInfoCache.cacheMethodSymbols(type, methods);
 	    } else {
 	        methodColl = new ArrayList(methods.length);
-	        Collections.addAll(methodColl, methods);
+	        Collections.addAll(methodColl, (Object[])methods);
 	    }
 	    BasicEList list = new BasicEList(methodColl);
 		return list;
