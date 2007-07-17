@@ -68,6 +68,7 @@ public class JSPModelProcessor
     private final static String SESSION_PROPERTY_NAME_JSPMODELPROCESSOR = "JSPModelProcessor"; //$NON-NLS-1$
     private final static QualifiedName SESSION_PROPERTY_JSPMODELPROCESSOR_KEY = 
         new QualifiedName(SESSION_PROPERTY_QUALIFIER,SESSION_PROPERTY_NAME_JSPMODELPROCESSOR);
+
     /**
      * @param file The file to get the model processor for  
      * @return the processor for a particular model, creating it if it does not
@@ -83,24 +84,30 @@ public class JSPModelProcessor
         {
             JSPModelProcessor processor = 
                 (JSPModelProcessor) file.getSessionProperty(SESSION_PROPERTY_JSPMODELPROCESSOR_KEY);
-            
+
             if (processor == null)
             {
                 processor = new JSPModelProcessor(file);
-                file.setSessionProperty(SESSION_PROPERTY_JSPMODELPROCESSOR_KEY, processor);        
+                file.setSessionProperty(SESSION_PROPERTY_JSPMODELPROCESSOR_KEY, processor);
+                processor._refCount = 1;
             }
-            return processor;        
+            else
+            {
+            	processor._refCount++;
+            }
+            return processor;
          }
     }
-    
+
     /**
      * Disposes of the JSPModelProcessor associated with model
-     * @param file the file associated with the model processor to be disposed
+     * @param processor the model processor to be disposed
      */
-    public static void dispose(IFile  file)
+    public static void dispose(JSPModelProcessor processor)
     {
         try
         {
+        	IFile file = processor._file;
             synchronized(file)
             {
                 // TODO: do we need worry about the processor not being 
@@ -108,11 +115,11 @@ public class JSPModelProcessor
                 // TODO: need isLocal check?
                 if (file.isAccessible())
                 {
-                    JSPModelProcessor processor = 
-                        get(file);
-                    
+                    processor._refCount--;
+
                     if (processor != null
-                            && !processor.isDisposed)
+                            && !processor.isDisposed
+                            && processor._refCount < 1)
                     {
                         file.setSessionProperty(SESSION_PROPERTY_JSPMODELPROCESSOR_KEY, null);
                         processor.dispose();
@@ -123,15 +130,12 @@ public class JSPModelProcessor
         catch (CoreException ce)
         {
             Platform.getLog(JSFCorePlugin.getDefault().getBundle()).log(
-                    new Status(IStatus.ERROR, JSFCorePlugin.getDefault().getBundle().getSymbolicName(), 0, "Problem disposing JSPModelProcessor", new Throwable(ce))); //$NON-NLS-1$
-        }
-        catch (IOException ioe)
-        {
-            Platform.getLog(JSFCorePlugin.getDefault().getBundle()).log(
-                    new Status(IStatus.ERROR, JSFCorePlugin.getDefault().getBundle().getSymbolicName(), 0, "Problem disposing JSPModelProcessor", new Throwable(ioe))); //$NON-NLS-1$
+                new Status(IStatus.ERROR, JSFCorePlugin.getDefault().getBundle().getSymbolicName()
+               		, 0, "Problem disposing JSPModelProcessor"
+               		, new Throwable(ce))); //$NON-NLS-1$
         }
     }
-    
+
     private final IFile             _file;
     private final DOMModelForJSP    _model;
     private final ModelListener     _modelListener;
@@ -141,10 +145,11 @@ public class JSPModelProcessor
     private Map<Object, ISymbol>    _applicationMap;
     private Map<Object, ISymbol>    _noneMap;
     private long                    _lastModificationStamp;
-    
+    private int						_refCount;
+
     // used to avoid infinite recursion in refresh.  Must never be null
     private final CountingMutex     _lastModificationStampMonitor = new CountingMutex();
-    
+
     /**
      * Construct a new JSPModelProcessor for model
      * 
@@ -160,8 +165,7 @@ public class JSPModelProcessor
         // force a refresh on the first run
         _lastModificationStamp = -1;
     }
-    
-    
+
     private DOMModelForJSP getModelForFile(IFile file) 
             throws CoreException, IOException
     {
@@ -169,43 +173,43 @@ public class JSPModelProcessor
             StructuredModelManager.getModelManager();
 
         IStructuredModel model = modelManager.getModelForRead(file);
-        
+
         if (model instanceof DOMModelForJSP)
         {
             return (DOMModelForJSP) model;
         }
 
         model.releaseFromRead();
-        
+
         throw new CoreException(new Status(IStatus.ERROR, "org.eclipse.blah", 0,  //$NON-NLS-1$
                         "model not of expected type", new Throwable())); //$NON-NLS-1$
     }
-    
+
     private void dispose()
     {
         if (!isDisposed)
         {
             _model.releaseFromRead();
             _model.removeModelLifecycleListener(_modelListener);
-            
+
             if (_requestMap != null)
             {
                 _requestMap.clear();
                 _requestMap = null;
             }
-            
+
             if (_sessionMap != null)
             {
                 _sessionMap.clear();
                 _sessionMap = null;
             }
-            
+
             if (_applicationMap != null)
             {
                 _applicationMap.clear();
                 _applicationMap = null;
             }
-            
+
             if (_noneMap != null)
             {
                 _noneMap.clear();
@@ -216,7 +220,7 @@ public class JSPModelProcessor
             isDisposed = true;
         }
     }
-    
+
     /**
      * @return true if this model processor has been disposed.  Disposed
      * processors should not be used.
@@ -225,7 +229,7 @@ public class JSPModelProcessor
     {
         return isDisposed;
     }
-    
+
     /**
      * Updates the internal model
      * @param forceRefresh -- if true, always refreshes, if false,
@@ -595,8 +599,7 @@ public class JSPModelProcessor
          */
         public AbstractContextSymbolFactory getFactory()
         {
-            return (AbstractContextSymbolFactory) 
-                JSFCommonPlugin.getSymbolFactories().get(_metadata.get("factory")); //$NON-NLS-1$
+            return JSFCommonPlugin.getSymbolFactories().get(_metadata.get("factory")); //$NON-NLS-1$
         }
     }
     

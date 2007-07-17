@@ -51,10 +51,11 @@ public class JSPTagVariableSymbolSourceProvider extends
         
         if (isProvider(fileContext))
         {
+        	JSPModelProcessor modelProcessor = null;
+        	
             try
             {
-                final JSPModelProcessor modelProcessor =
-                    JSPModelProcessor.get(fileContext);
+                modelProcessor = JSPModelProcessor.get(fileContext);
                 
                 // ensure internal model is sync'ed with document
                 // but don't force refresh
@@ -84,6 +85,13 @@ public class JSPTagVariableSymbolSourceProvider extends
             {
                 JSFCorePlugin.getDefault().getLog().log(new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID, 0, "Error acquiring model processor",e)); //$NON-NLS-1$
                 // fall-through to empty symbol array
+            }
+            finally
+            {
+            	if (modelProcessor != null)
+            	{
+            		JSPModelProcessor.dispose(modelProcessor);
+            	}
             }
         }
         

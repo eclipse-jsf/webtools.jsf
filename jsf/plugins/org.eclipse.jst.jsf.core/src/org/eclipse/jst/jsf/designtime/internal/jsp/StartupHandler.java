@@ -94,9 +94,10 @@ public class StartupHandler implements IStartup
 
 	private static class JSPEditorListener implements IPartListener2
 	{
+		private JSPModelProcessor 		_processor;
+		
 		public void partActivated(IWorkbenchPartReference partRef) {
 			// do nothing
-			
 		}
 
 		public void partBroughtToTop(IWorkbenchPartReference partRef) {
@@ -131,7 +132,6 @@ public class StartupHandler implements IStartup
 
 		public void partInputChanged(IWorkbenchPartReference partRef) {
 			// do nothing
-			
 		}
        
         private boolean isJSPEditor(IEditorReference editorRef)
@@ -180,8 +180,8 @@ public class StartupHandler implements IStartup
                 try
                 {
                     // implicitly creates if not present
-                    JSPModelProcessor processor = JSPModelProcessor.get(file);
-                    processor.refresh(false);
+                    _processor = JSPModelProcessor.get(file);
+                    _processor.refresh(false);
                 }
                 catch (Exception e)
                 {
@@ -192,11 +192,9 @@ public class StartupHandler implements IStartup
         
         void releaseJSPModelListener(IEditorReference editorRef)
         {
-            IFile file = getIFile(editorRef);
-            
-            if (file != null)
+            if (_processor != null)
             {
-                JSPModelProcessor.dispose(file);
+                JSPModelProcessor.dispose(_processor);
             }
         }
         
