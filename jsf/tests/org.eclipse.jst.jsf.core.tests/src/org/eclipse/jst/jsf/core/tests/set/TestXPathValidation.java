@@ -24,11 +24,13 @@ import org.w3c.dom.Node;
 
 public class TestXPathValidation extends BaseTagMatcherTestCase {
 
-    protected void setUp() throws Exception {
+    protected void setUp() throws Exception 
+    {
         _srcFileName = "/testfiles/jsps/testdata1.jsp.data";
         _destFileName = "/testdata1.jsp";
+        
         super.setUp();
-    }
+   }
 
     public void testValidateParentMembership()
     {
@@ -47,7 +49,7 @@ public class TestXPathValidation extends BaseTagMatcherTestCase {
         
         // test a constraint set that isn't satisfied: no ancestor is inputLabel
         constraintSet.clear();
-        constraintSet.add(TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_HTML, "form"));
+        constraintSet.add(TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_HTML, "inputLabel"));
         memberConstraint = new MemberConstraint(constraintSet);
         assertTrue(memberConstraint.failsConstraint(inputAncestors));
     }

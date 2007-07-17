@@ -13,6 +13,7 @@ package org.eclipse.jst.jsf.core.tests;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
+import org.eclipse.jst.jsf.core.tests.appconfig.validation.AppConfigValidationUtilTestCase;
 import org.eclipse.jst.jsf.core.tests.jsflibraryconfig.JSFLibraryConfigDialogSettingDataTestCases;
 import org.eclipse.jst.jsf.core.tests.jsflibraryconfig.JSFLibraryConfigModelTestCases;
 import org.eclipse.jst.jsf.core.tests.jsflibraryconfig.JSFLibraryRegistryUtilTestCases;
@@ -25,10 +26,16 @@ import org.eclipse.jst.jsf.core.tests.jsflibraryregistry.JSFLibraryTestCases;
 import org.eclipse.jst.jsf.core.tests.jsflibraryregistry.MaintainDefaultImplementationAdapterTestCases;
 import org.eclipse.jst.jsf.core.tests.jsflibraryregistry.migration.MigrationV1toV2Test;
 import org.eclipse.jst.jsf.core.tests.project.facet.JSFFacetInstallDataModelProviderTestCases;
+import org.eclipse.jst.jsf.core.tests.set.ConcreteAxiomaticSetTest;
+import org.eclipse.jst.jsf.core.tests.set.NodeSetTest;
+import org.eclipse.jst.jsf.core.tests.set.TestMemberConstraint;
+import org.eclipse.jst.jsf.core.tests.set.TestXPathValidation;
+import org.eclipse.jst.jsf.core.tests.tagmatcher.TestXPathTagMatcher;
 import org.eclipse.jst.jsf.core.tests.types.TypeComparatorTests;
 import org.eclipse.jst.jsf.core.tests.types.TypeTransformerTests;
 import org.eclipse.jst.jsf.core.tests.util.TestJDTBeanIntrospector;
 import org.eclipse.jst.jsf.core.tests.util.TestJDTBeanPropertyWorkingCopy;
+import org.eclipse.jst.jsf.core.tests.util.TestTypeUtil;
 import org.eclipse.jst.jsf.core.tests.validation.TestJSPSemanticsValidator;
 
 /**
@@ -46,6 +53,7 @@ public class AllTests
 		//$JUnit-BEGIN$
         suite.addTestSuite(TestJDTBeanPropertyWorkingCopy.class);
         suite.addTestSuite(TestJDTBeanIntrospector.class);
+        suite.addTestSuite(TestTypeUtil.class);
 
 		suite.addTestSuite(TypeComparatorTests.class);
 		suite.addTestSuite(TypeTransformerTests.class);
@@ -67,6 +75,12 @@ public class AllTests
 		suite.addTestSuite(JSFLibraryRegistryUtilTestCases.class);
 
 		suite.addTestSuite(TestJSPSemanticsValidator.class);
+		suite.addTestSuite(AppConfigValidationUtilTestCase.class);
+		suite.addTestSuite(TestMemberConstraint.class);
+		suite.addTestSuite(TestXPathValidation.class);
+		suite.addTestSuite(TestXPathTagMatcher.class);
+		suite.addTestSuite(ConcreteAxiomaticSetTest.class);
+		suite.addTestSuite(NodeSetTest.class);
 		
         // NOTE: migration tests affect workspace meta-data files, but they
         // should play nice with others

@@ -33,6 +33,10 @@ public class AllTests
         suite.addTestSuite(TestResourceBundleMapSource.class);
         suite.addTestSuite(TestDefaultPropertyResolver.class);
         suite.addTestSuite(TestAbstractDataModelVariableFactory.class);
+        suite.addTestSuite(TestDefaultDTMethodResolver.class);
+        suite.addTestSuite(TestDefaultDTVariableResolver.class);
+        suite.addTestSuite(TestDTJSPExternalContext.class);
+        suite.addTestSuite(TestJSPDefaultSymbolFactory.class);
         
         //$JUnit-END$
         return suite;

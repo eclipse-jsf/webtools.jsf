@@ -6,12 +6,12 @@ import java.util.List;
 import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IDOMContextResolver;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
 import org.eclipse.jst.jsf.core.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.internal.tld.CMUtil;
 import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
 import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.jsf.core.tests.TestsPlugin;
@@ -22,7 +22,6 @@ import org.eclipse.jst.jsf.validation.internal.JSPSemanticsValidator;
 import org.eclipse.wst.sse.core.StructuredModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
 import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
-import org.eclipse.wst.validation.internal.operations.WorkbenchReporter;
 import org.eclipse.wst.validation.internal.provisional.core.IMessage;
 import org.eclipse.wst.validation.internal.provisional.core.IReporter;
 import org.eclipse.wst.validation.internal.provisional.core.IValidator;
@@ -60,7 +59,10 @@ public class TestJSPSemanticsValidator extends TestCase
         // load a dummy tld for core
         _testEnv.loadResourceInWebRoot(TestsPlugin.getDefault().getBundle()
     			, "/testfiles/jsf-core.tld.data", "META-INF/jsf-core.tld");
-        
+
+        _testEnv.loadResourceInWebRoot(TestsPlugin.getDefault().getBundle()
+    			, "/testfiles/myfaces_html.tld.data", "META-INF/myfaces_html.tld");
+
         _jspFile = (IFile)
         	_testEnv.loadResourceInWebRoot(TestsPlugin.getDefault().getBundle()
         			, "/testfiles/jsps/testContainment.jsp.data", "testContainment.jsp");
@@ -164,6 +166,7 @@ public class TestJSPSemanticsValidator extends TestCase
 		assertTrue(node instanceof Element);
 		Element elem = (Element) node;
 		assertEquals(IJSFConstants.TAG_INPUTTEXT, elem.getLocalName());
+		System.out.println(CMUtil.getElementNamespaceURI(elem));
 
 		MyReporter reporter = new MyReporter();
 		validator.validateContainment(elem, ITLDConstants.URI_JSF_HTML

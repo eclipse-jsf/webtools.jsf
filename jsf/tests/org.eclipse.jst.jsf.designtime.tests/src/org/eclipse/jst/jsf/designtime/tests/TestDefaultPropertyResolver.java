@@ -11,6 +11,7 @@
  ********************************************************************************/
 package org.eclipse.jst.jsf.designtime.tests;
 
+import java.io.ByteArrayInputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,7 +21,9 @@ import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
 import org.eclipse.jst.jsf.common.util.JDTBeanIntrospector;
+import org.eclipse.jst.jsf.common.util.JDTBeanProperty;
 import org.eclipse.jst.jsf.context.symbol.IBeanInstanceSymbol;
+import org.eclipse.jst.jsf.context.symbol.IBoundedMapTypeDescriptor;
 import org.eclipse.jst.jsf.context.symbol.IComponentSymbol;
 import org.eclipse.jst.jsf.context.symbol.IJavaTypeDescriptor2;
 import org.eclipse.jst.jsf.context.symbol.IMapTypeDescriptor;
@@ -31,8 +34,10 @@ import org.eclipse.jst.jsf.context.symbol.SymbolFactory;
 import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
 import org.eclipse.jst.jsf.designtime.el.DefaultDTPropertyResolver;
+import org.eclipse.jst.jsf.designtime.internal.symbols.ResourceBundleMapSourceFactory;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
+import org.eclipse.jst.jsf.test.util.TestFileResource;
 import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
 
 /**
@@ -75,16 +80,19 @@ public class TestDefaultPropertyResolver extends TestCase
         final WebProjectTestEnvironment  projectTestEnvironment = 
             new WebProjectTestEnvironment("TestDefaultPropertyResolver"+getName());
         projectTestEnvironment.createProject(false);
-//        _facesConfigFile = (IFile) projectTestEnvironment.
-//            loadResourceInWebRoot(DesignTimeTestsPlugin.getDefault().getBundle(),
-//                                  "/testdata/faces-config.xml.data", 
-//                                  "/WEB-INF/faces-config.xml");
 
         _jsfFactedTestEnvironment = new JSFFacetedTestEnvironment(projectTestEnvironment);
         _jsfFactedTestEnvironment.initialize(IJSFCoreConstants.FACET_VERSION_1_1);
         
         _jdtTestEnvironment = new JDTTestEnvironment(projectTestEnvironment);
 
+        final TestFileResource input = new TestFileResource();
+        input.load(DesignTimeTestsPlugin.getDefault().getBundle(), 
+        		"/testdata/bundle1.resources.data");
+        _jdtTestEnvironment.addResourceFile(SRC_FOLDER_NAME
+        		, new ByteArrayInputStream(input.toBytes())
+        		, "bundles", "bundle1.properties");
+        
         JSFTestUtil.loadSourceClass(
                 DesignTimeTestsPlugin.getDefault().getBundle(), 
                     "/testdata/TestBean1.java.data", TESTBEAN1_NAME, SRC_FOLDER_NAME, PACKAGE_NAME, _jdtTestEnvironment);
@@ -158,7 +166,7 @@ public class TestDefaultPropertyResolver extends TestCase
     public void testSanity()
     {
         JDTBeanIntrospector  beanIntrospector = new JDTBeanIntrospector(_testBean1Type);
-        Map props = beanIntrospector.getProperties();
+        Map<String, JDTBeanProperty> props = beanIntrospector.getProperties();
         assertEquals(NUM_PROPERTIES_TEST_BEAN_1, props.size());
         assertTrue(props.containsKey("stringProp1"));
         assertTrue(props.containsKey("booleanIsProp1"));
@@ -211,10 +219,10 @@ public class TestDefaultPropertyResolver extends TestCase
         DefaultDTPropertyResolver propResolver = new DefaultDTPropertyResolver();
         ISymbol[]  properties = propResolver.getAllProperties(symbol);
         assertEquals(NUM_PROPERTIES_TEST_BEAN_1, properties.length);
-        Map  checkProps = new HashMap();
-        for (int i = 0; i < properties.length; i++)
+        Map<String, ISymbol>  checkProps = new HashMap<String, ISymbol>();
+        for (ISymbol propSymbol : properties)
         {
-            checkProps.put(properties[i].getName(), properties[i]);
+            checkProps.put(propSymbol.getName(), propSymbol);
         }
         
         assertTrue(checkProps.containsKey("stringProp1"));
@@ -251,7 +259,7 @@ public class TestDefaultPropertyResolver extends TestCase
         IJavaTypeDescriptor2 typeDesc = SymbolFactory.eINSTANCE.createIJavaTypeDescriptor2();
         typeDesc.setType(_testMapBean1Type);
         symbol.setTypeDescriptor(typeDesc);
-        
+
         DefaultDTPropertyResolver propResolver = new DefaultDTPropertyResolver();
         ISymbol[]  properties = propResolver.getAllProperties(symbol);
         // there no design-time identifiable properties
@@ -273,7 +281,7 @@ public class TestDefaultPropertyResolver extends TestCase
             assertEquals(TypeConstants.TYPE_JAVAOBJECT, ((IPropertySymbol)someProperty1).getTypeDescriptor().getTypeSignature());
         }
     }
-    
+
     /**
      * Test a component with map source
      */
@@ -282,7 +290,7 @@ public class TestDefaultPropertyResolver extends TestCase
         final IComponentSymbol symbol = SymbolFactory.eINSTANCE.createIComponentSymbol();
         symbol.setName("myComponentSymbol");
         final IMapTypeDescriptor typeDesc = SymbolFactory.eINSTANCE.createIMapTypeDescriptor();
-        final Map mapSource = new HashMap();
+        final Map<String, String> mapSource = new HashMap<String, String>();
         mapSource.put("prop1", "propValue1");
         mapSource.put("prop2", "propValue2");
         mapSource.put("dotted.property", "dottedPropertyValue");
@@ -352,7 +360,7 @@ public class TestDefaultPropertyResolver extends TestCase
             assertEquals(2, properties.length);  // should have defined property plus class
             
             // check props
-            final Map  gotProps  = new HashMap();
+            final Map<String, IPropertySymbol>  gotProps  = new HashMap<String, IPropertySymbol>();
             
             for (int i = 0; i < properties.length; i++)
             {
@@ -584,6 +592,9 @@ public class TestDefaultPropertyResolver extends TestCase
         
         IPropertySymbol unboundedProp = (IPropertySymbol) propResolver.getProperty(listProp, 0);
         assertEquals(TypeConstants.TYPE_JAVAOBJECT, unboundedProp.getTypeDescriptor().getTypeSignature());
+        
+        // list base symbols do not have non-numeric keys
+        assertNull(propResolver.getProperty(listProp, "anyKey"));
     }
     
     public void testGenericListProperty()
@@ -613,6 +624,80 @@ public class TestDefaultPropertyResolver extends TestCase
         
         IPropertySymbol unboundedProp = (IPropertySymbol) propResolver.getProperty(listProp, 0);
         assertEquals(TypeConstants.TYPE_STRING, unboundedProp.getTypeDescriptor().getTypeSignature());
+    }
+    
+    public void testBoundedTypeDescriptor()
+    {
+    	final IComponentSymbol symbol = 
+    		SymbolFactory.eINSTANCE.createIComponentSymbol();
+        symbol.setName("componentSymbol");
+        final IBoundedMapTypeDescriptor typeDesc = 
+        	SymbolFactory.eINSTANCE.createIBoundedMapTypeDescriptor();
+        typeDesc.setMapSource(new HashMap<String, String>());
+        symbol.setTypeDescriptor(typeDesc);
+        
+        DefaultDTPropertyResolver propResolver = new DefaultDTPropertyResolver();
+        ISymbol propSymbol = propResolver.getProperty(symbol, "anyProp");
+        
+        assertNotNull(propSymbol);
+        assertTrue(propSymbol instanceof IPropertySymbol);
+        assertEquals(TypeConstants.TYPE_JAVAOBJECT, 
+        	((IPropertySymbol)propSymbol).getTypeDescriptor().getTypeSignature());
+    }
+
+    public void testDottedPropertyNames() throws Exception
+    {
+    	checkDottedBundleNames();
+    	// TODO: should add coverage for dotted, non-bundles...
+    }
+    
+    private void checkDottedBundleNames() throws Exception
+    {
+        Map map = 
+        	ResourceBundleMapSourceFactory.getResourceBundleMapSource
+        		(_jdtTestEnvironment.getProjectEnvironment().getTestProject()
+        				, "bundles.bundle1");
+        assertNotNull(map);
+        assertEquals(3, map.size());
+
+        final IMapTypeDescriptor typeDesc = 
+            SymbolFactory.eINSTANCE.createIMapTypeDescriptor();
+        typeDesc.setMapSource(map);
+        final IComponentSymbol symbol = 
+            SymbolFactory.eINSTANCE.createIComponentSymbol();
+        symbol.setName("dottedMapSource");
+        symbol.setTypeDescriptor(typeDesc);
+
+        DefaultDTPropertyResolver propResolver = new DefaultDTPropertyResolver();
+        {
+	        ISymbol oneDot = propResolver.getProperty(symbol, "one");
+	        assertNotNull(oneDot);
+	        assertTrue(oneDot instanceof IPropertySymbol);
+	        assertTrue(((IPropertySymbol)oneDot).isIntermediate());
+
+	        oneDot = propResolver.getProperty(symbol, "one.dot");
+	        assertNotNull(oneDot);
+	        assertTrue(oneDot instanceof IPropertySymbol);
+	        assertFalse(((IPropertySymbol)oneDot).isIntermediate());
+        }
+
+        {
+        	ISymbol twoDots = propResolver.getProperty(symbol, "two");
+            assertNotNull(twoDots);
+            assertTrue(twoDots instanceof IPropertySymbol);
+	        assertTrue(((IPropertySymbol)twoDots).isIntermediate());
+
+        	twoDots = propResolver.getProperty(symbol, "two.dot");
+            assertNotNull(twoDots);
+            assertTrue(twoDots instanceof IPropertySymbol);
+	        assertTrue(((IPropertySymbol)twoDots).isIntermediate());
+
+        	twoDots = propResolver.getProperty(symbol, "two.dot.property");
+            assertNotNull(twoDots);
+            assertTrue(twoDots instanceof IPropertySymbol);
+	        assertFalse(((IPropertySymbol)twoDots).isIntermediate());
+
+        }
     }
     
     private ISymbol findSymbol(final String name, ISymbol[] symbols)

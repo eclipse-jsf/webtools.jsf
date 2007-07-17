@@ -12,10 +12,18 @@ package org.eclipse.jst.jsf.core.tests.tagmatcher;
 
 import java.util.Iterator;
 
+import org.eclipse.jst.jsf.common.dom.TagIdentifier;
 import org.eclipse.jst.jsf.common.sets.AxiomaticSet;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.IDOMContextResolver;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
+import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
+import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
+import org.eclipse.jst.jsf.core.internal.tld.CMUtil;
+import org.eclipse.jst.jsf.core.set.mapping.ElementToTagIdentifierMapping;
 import org.eclipse.jst.jsf.core.tagmatcher.XPathMatchingAlgorithm;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 
@@ -38,7 +46,15 @@ public class TestXPathTagMatcher extends BaseTagMatcherTestCase {
         
         // get an input nested along a form path
         assertEquals(1, set.size());
-        Node node = (Node) set.getFirstElement();
+		IStructuredDocumentContext context =
+			IStructuredDocumentContextFactory.INSTANCE
+				.getContext(_structuredDocument, 544);
+		IDOMContextResolver resolver = 
+			IStructuredDocumentContextResolverFactory.INSTANCE
+				.getDOMContextResolver(context);
+
+        Node node = resolver.getNode();//(Node) set.getFirstElement();
+        System.out.println(CMUtil.getElementNamespaceURI((Element) node));
         XPathMatchingAlgorithm  matcher = new XPathMatchingAlgorithm("html/body/form/panelGrid/inputText");
         set = matcher.evaluate(node);
         System.out.println(System.currentTimeMillis());
@@ -46,13 +62,18 @@ public class TestXPathTagMatcher extends BaseTagMatcherTestCase {
         
         // get all of the ancestors of the inputText
         final Node inputText = (Node) set.getFirstElement();
+        System.out.println(CMUtil.getElementNamespaceURI((Element) inputText));
         matcher = new XPathMatchingAlgorithm("ancestor::*");
         set = matcher.evaluate(inputText);
         assertEquals(5,set.size());
-        
+
+        set = new ElementToTagIdentifierMapping().map(set);
+
         for (final Iterator it = set.iterator(); it.hasNext();)
         {
-            System.out.println(it.next());
+        	TagIdentifier tagId = (TagIdentifier) it.next();
+        	System.out.println(tagId.getUri());
+            System.out.println(tagId.getTagName());
         }
     }
 }
