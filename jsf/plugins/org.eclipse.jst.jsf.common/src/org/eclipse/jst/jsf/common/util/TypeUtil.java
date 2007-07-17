@@ -141,6 +141,9 @@ public final class TypeUtil
                 
                 return resultType+resolvedElementType;
             }
+
+            case Signature.TYPE_VARIABLE_SIGNATURE:
+            	return resolveSignatureRelative(owningType, typeSignature, eraseTypeParameters);
             
             case Signature.CLASS_TYPE_SIGNATURE:
                 return resolveSignatureRelative(owningType, typeSignature, eraseTypeParameters);
@@ -199,8 +202,13 @@ public final class TypeUtil
                             typeParam = typeParam.substring(1);
                         }
                     }
-                    final String resolvedParameter = resolveSignatureRelative(owningType, //use the enclosing type, *not* the resolved type because we need to resolve in that context
-                            typeParam, eraseTypeParameters);
+                    final String resolvedParameter = 
+                    	resolveSignatureRelative(
+                    			// use the enclosing type, 
+                    			// *not* the resolved type because 
+                    			// we need to resolve in that context
+                    			owningType, 
+                    				typeParam, eraseTypeParameters);
                     typeParameters.add(resolvedParameter);
                 }
             }
@@ -390,10 +398,11 @@ public final class TypeUtil
     
     /**
      * @param type
-     * @param typeParamSignature
+     * @param typeParamSignature -- must be a Type Variable Signature
      * @param typeArguments
      * @return the signature for the type argument in typeArguments that matches the
      * named typeParamSignature in type.
+     * @throws IllegalArgumentException if typeParamSignature is not valid
      * 
      * For example, given type for java.util.Map, typeParamSignature == "V" and
      * typeArguments = {Ljava.util.String;, Lcom.test.Blah;}, the result would be
@@ -403,6 +412,11 @@ public final class TypeUtil
      */
     public static String matchTypeParameterToArgument(final IType type, final String typeParamSignature, final List<String> typeArguments)
     {
+    	if (Signature.getTypeSignatureKind(typeParamSignature) != Signature.TYPE_VARIABLE_SIGNATURE)
+    	{
+    		throw new IllegalArgumentException();
+    	}
+    	
         try
         {
             ITypeParameter[] typeParams = type.getTypeParameters();
