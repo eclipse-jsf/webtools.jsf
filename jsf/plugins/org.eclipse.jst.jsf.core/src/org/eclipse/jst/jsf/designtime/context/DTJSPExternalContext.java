@@ -40,7 +40,7 @@ public class DTJSPExternalContext extends AbstractDTExternalContext
      * 
      */
     private final IFile     _jspFile;
-    
+
     /**
      * Construct a default external context
      * 
@@ -72,9 +72,10 @@ public class DTJSPExternalContext extends AbstractDTExternalContext
             throw new AssertionError("jspFile must be adapable to an IFile"); //$NON-NLS-1$
         }
     }
-    
+
     @Override
-    protected Map doGetMapForScope(final int scopeMask) {
+    protected Map doGetMapForScope(final int scopeMask) 
+    {
         final Map  map = new HashMap();
         
         for (final Iterator it = JSFCommonPlugin.getSymbolSourceProviders().iterator(); it.hasNext();)
@@ -89,11 +90,10 @@ public class DTJSPExternalContext extends AbstractDTExternalContext
                 map.put(symbols[i].getName(), symbols[i]);
             }
         }
-        
+
         return map;
     }
 
-    
     /**
      * @param stream
      */
@@ -104,7 +104,7 @@ public class DTJSPExternalContext extends AbstractDTExternalContext
                                 ISymbolConstants.SYMBOL_SCOPE_APPLICATION_STRING,
                                 ISymbolConstants.SYMBOL_SCOPE_NONE_STRING
                                 };
-        Map[]     symbolMaps = {getRequestMap(), getSessionMap(), getApplicationMap()};
+        Map[]     symbolMaps = {getRequestMap(), getSessionMap(), getApplicationMap(), getNoneMap()};
 
         for (int i = 0; i < scopeNames.length; i++)
         {
