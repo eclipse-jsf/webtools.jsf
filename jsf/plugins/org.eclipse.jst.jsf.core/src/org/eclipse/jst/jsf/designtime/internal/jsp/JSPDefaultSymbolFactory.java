@@ -112,7 +112,8 @@ public class JSPDefaultSymbolFactory extends AbstractContextSymbolFactory
      */
     public boolean supports(IAdaptable context) 
     {
-        return context.getAdapter(IStructuredDocumentContext.class) != null;
+        return context != null && 
+        	context.getAdapter(IStructuredDocumentContext.class) != null;
     }
     
     private ISymbol handleHtmlTags(String symbolName, Node owningElement, Attr attr, IStructuredDocumentContext context, List problems)
