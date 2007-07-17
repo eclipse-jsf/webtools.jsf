@@ -55,10 +55,9 @@ final class Util
                 try 
                 {
                     // resolve the method's return type; don't erase parameters
-                    String retTypeSignature = 
-                        TypeUtil.resolveTypeSignature
-                            (type, callMethod.getReturnType(), false);
-
+                    String retTypeSignature = callMethod.getReturnType();
+                        
+                    // if we have a type variable, try to parameter match it
                     if (Signature.getTypeSignatureKind(retTypeSignature) == Signature.TYPE_VARIABLE_SIGNATURE)
                     {
                         retTypeSignature = TypeUtil.matchTypeParameterToArgument
@@ -69,6 +68,12 @@ final class Util
                         {
                             retTypeSignature = TypeConstants.TYPE_JAVAOBJECT;
                         }
+                    }
+                    // otherwise, try and resolve it in type
+                    else
+                    {
+                    	retTypeSignature = TypeUtil.resolveTypeSignature
+                    		(type, callMethod.getReturnType(), false);
                     }
 
                     final IPropertySymbol  propSymbol = 
