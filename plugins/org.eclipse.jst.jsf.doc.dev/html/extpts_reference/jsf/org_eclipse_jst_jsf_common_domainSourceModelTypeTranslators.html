@@ -30,13 +30,13 @@ Allows for metadata domain translators to be applied to a metadata domain source
 <li><b>domainSourceModelTypeId</b> - The unique id from the domainSourceModelTypes ext-pt that will bind the translator class to that domain source.</li>
 <li><b>translatorClass</b> - Fully qualified class implementing <code>org.eclipse.jst.jsf.common.metadata.IMetaDataTranslator</code> that will translate from the source domain to the "standard" domain of entities and traits.</li>
 </ul>
-<br><h6 class=CaptionFigColumn id=header>Examples: </h6><extension
+<br><h6 class=CaptionFigColumn id=header>Examples: </h6>&lt;extension
          point="org.eclipse.jst.jsf.common.domainSourceModelTypeTranslators">
-      <domainSourceModelTypeTranslator
+      &lt;domainSourceModelTypeTranslator
             class="org.eclipse.jst.jsf.common.metadata.internal.TaglibMetaDataTLDTranslator"
             domainSourceModelTypeId="TagLibMetaDataTagLibraryHandler">
-      </domainSourceModelTypeTranslator>
-   </extension>
+      &lt;/domainSourceModelTypeTranslator>
+   &lt;/extension>
 <p></p>
 
 <br>
