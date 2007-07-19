@@ -21,15 +21,23 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Arrays;
-import java.util.List;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.wst.sse.core.StructuredModelManager;
+import org.eclipse.wst.sse.core.internal.provisional.IModelManager;
+import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
+import org.eclipse.wst.sse.core.internal.provisional.IndexedRegion;
+import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
 import org.eclipse.wst.validation.internal.ConfigurationManager;
 import org.eclipse.wst.validation.internal.GlobalConfiguration;
+import org.eclipse.wst.xml.core.internal.provisional.document.IDOMAttr;
+import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
 import org.osgi.framework.Bundle;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
 
 /**
  * Test utility methods
@@ -198,5 +206,91 @@ public class JSFTestUtil
                 inFile.close();
             }
         }
+    }
+    
+    
+    public static IndexedRegion getIndexedRegion(final IStructuredDocument document, final int documentOffset)
+    {
+        // C.B: most of this logic was copied from ContentAssistUtils.getNodeAt
+        // I chose to copy rather than just call that because ContentAssistUtils is
+        // internal
+        IStructuredModel model = getStructuredModel(document);
+        IndexedRegion             region = null;
+        if (model != null)
+        {
+            try
+            {
+                int lastOffset = documentOffset;
+                region = model.getIndexedRegion(documentOffset);
+                trace("Starting at region: "+region.toString());
+                while (region == null && lastOffset >= 0) {
+                    lastOffset--;
+                    region = model.getIndexedRegion(lastOffset);
+                    trace("Iterating on region: "+region.toString());
+                }
+                
+                trace("Finished with: "+region.toString()+", Class: "+region.getClass());
+                
+                // now we assume we have an element.  But our context may be
+                // on an attribute in that node, so we need to check
+                if (region instanceof IDOMElement)
+                {
+                    trace("Region is an IDOMElement");
+                    IDOMElement domElement = (IDOMElement) region;
+                    
+                    NamedNodeMap attributes = domElement.getAttributes();
+                    
+                    for (int i = 0; i < attributes.getLength(); i++)
+                    {
+                        Node  attrNode = attributes.item(i);
+                        
+                        if (attrNode instanceof IDOMAttr)
+                        {
+                            IDOMAttr attr = (IDOMAttr) attrNode;
+                            trace("Examining attribute: "+attr.toString());
+
+                            if (documentOffset >= attr.getStartOffset()
+                                    && documentOffset < attr.getEndOffset())
+                            {
+                                region = attr;
+                                trace("Found attribute: "+region.toString());
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            finally
+            {
+            	trace("releasing model");
+                model.releaseFromRead();
+            }
+        }
+
+        trace("returning: "+region);
+        return region;
+    }
+
+    private static void trace(String message)
+    {
+    	System.out.println("getIndexedRegion: "+message);
+    }
+    
+    /**
+     * @param document
+     * @return a structured model or null if one cannot be opened for document.
+     * Note: the caller is responsible for releasing the instance of structured
+     * model that gets returned.
+     */
+    private static IStructuredModel getStructuredModel(IStructuredDocument document)
+    {
+        IModelManager modelManager = StructuredModelManager.getModelManager();
+        
+        if (modelManager != null)
+        {
+            return StructuredModelManager.getModelManager().getModelForRead(document); 
+        }
+        
+        return null;
     }
 }

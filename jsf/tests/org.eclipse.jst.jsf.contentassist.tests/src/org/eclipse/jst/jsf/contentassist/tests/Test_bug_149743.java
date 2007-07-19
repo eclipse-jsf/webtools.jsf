@@ -36,6 +36,7 @@ import org.eclipse.jst.jsp.core.internal.domdocument.DOMModelForJSP;
 import org.eclipse.wst.sse.core.StructuredModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
+import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Node;
 
@@ -94,6 +95,7 @@ public class Test_bug_149743 extends TestCase
                 IStructuredDocumentContextResolverFactory.INSTANCE.
                     getDOMContextResolver(context);
             Node node = resolver.getNode();
+            JSFTestUtil.getIndexedRegion((IStructuredDocument) context.getStructuredDocument(), context.getDocumentPosition());
             assertTrue(node instanceof Attr);
             assertEquals("value", ((Attr)node).getNodeName());
             assertEquals("#{myBean.property}", ((Attr)node).getNodeValue());
