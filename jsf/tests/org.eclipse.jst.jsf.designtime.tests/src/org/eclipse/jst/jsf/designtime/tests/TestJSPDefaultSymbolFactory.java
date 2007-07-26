@@ -99,7 +99,7 @@ public class TestJSPDefaultSymbolFactory extends TestCase
 
 		var = factory.create("bundle"
 			, ISymbolConstants.SYMBOL_SCOPE_REQUEST
-			, IStructuredDocumentContextFactory.INSTANCE.getContext(_structuredDocument, 569)
+			, IStructuredDocumentContextFactory.INSTANCE.getContext(_structuredDocument, 552)
 			, new ArrayList());
 		
 		// load bundle introduces a variable
@@ -109,7 +109,7 @@ public class TestJSPDefaultSymbolFactory extends TestCase
 		
 		var = factory.create("row"
 				, ISymbolConstants.SYMBOL_SCOPE_REQUEST
-				, IStructuredDocumentContextFactory.INSTANCE.getContext(_structuredDocument, 1397)
+				, IStructuredDocumentContextFactory.INSTANCE.getContext(_structuredDocument, 1361)
 				, new ArrayList());
 		
 		// data table introduces a variable
