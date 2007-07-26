@@ -96,19 +96,19 @@ public class Test_bug_149224 extends TestCase
         
         try
         {
-            wrapper = getDocumentContext("/WebContent/bug_149224.jsp", 609);
+            wrapper = getDocumentContext("/WebContent/bug_149224.jsp", 589);
             IStructuredDocumentContext context = wrapper.getContext();
             IDOMContextResolver resolver =
                 IStructuredDocumentContextResolverFactory.INSTANCE.
                     getDOMContextResolver(context);
             Node node = resolver.getNode();
-            JSFTestUtil.getIndexedRegion((IStructuredDocument) context.getStructuredDocument(), 609);
+            JSFTestUtil.getIndexedRegion((IStructuredDocument) context.getStructuredDocument(), 589);
             assertTrue(node instanceof Attr);
             assertEquals("value", ((Attr)node).getNodeName());
             assertEquals("#{bundle1.}", ((Attr)node).getNodeValue());
             wrapper.dispose();
             
-            wrapper = getDocumentContext("/WebContent/bug_149224.jsp", 650);
+            wrapper = getDocumentContext("/WebContent/bug_149224.jsp", 630);
             context = wrapper.getContext();
             resolver =
                 IStructuredDocumentContextResolverFactory.INSTANCE.
@@ -147,21 +147,21 @@ public class Test_bug_149224 extends TestCase
     public void testCompletionAtCloseBrace()
     {
         ContextWrapper wrapper = null;
-        
+
         try
         {
-            wrapper = getDocumentContext("/WebContent/bug_149224.jsp", 609);
+            wrapper = getDocumentContext("/WebContent/bug_149224.jsp", 589);
             final IStructuredDocumentContext context = wrapper.getContext();
             ITextRegionContextResolver resolver = 
                 IStructuredDocumentContextResolverFactory.INSTANCE.getTextRegionResolver(context);
             final ContentAssistStrategy strategy = 
                 ContentAssistParser.getPrefix(9, "bundle1.");
-            
+
             assertNotNull(strategy);
             List proposals = strategy.getProposals(context);
-            
+
             ICompletionProposal proposal = null;
-            
+
             FIND_ARRAY_PROPOSAL: 
                 for (final Iterator it = proposals.iterator(); it.hasNext();)
             {
@@ -173,11 +173,11 @@ public class Test_bug_149224 extends TestCase
                     break FIND_ARRAY_PROPOSAL;
                 }
             }
-            
+
             assertNotNull(proposal);
-            
+
             proposal.apply(wrapper.getContext().getStructuredDocument());
-            
+
             String newELText = resolver.getRegionText();
             assertEquals("bundle1['prop.with.dots_x']", newELText);
         }
@@ -194,7 +194,7 @@ public class Test_bug_149224 extends TestCase
             }
         }
     }
-    
+
     /**
      * Test the completion:
      * 
@@ -207,7 +207,7 @@ public class Test_bug_149224 extends TestCase
         
         try
         {
-            wrapper = getDocumentContext("/WebContent/bug_149224.jsp", 609);
+            wrapper = getDocumentContext("/WebContent/bug_149224.jsp", 630);
             final IStructuredDocumentContext context = wrapper.getContext();
             ITextRegionContextResolver resolver = 
                 IStructuredDocumentContextResolverFactory.INSTANCE.getTextRegionResolver(context);
@@ -236,7 +236,7 @@ public class Test_bug_149224 extends TestCase
             proposal.apply(wrapper.getContext().getStructuredDocument());
 
             String newELText = resolver.getRegionText();
-            assertEquals("bundle1['prop.with.dots_x']", newELText);
+            assertEquals("bundle1['prop.with.dots_x']x", newELText);
         }
         catch (Exception e)
         {

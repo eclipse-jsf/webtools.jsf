@@ -83,7 +83,7 @@ public class Test_bug_149743 extends TestCase
     /**
      * Sanity check
      */
-    public void testSanity()
+    public void testSanity() throws Exception
     {
         ContextWrapper wrapper = null;
         
@@ -99,11 +99,6 @@ public class Test_bug_149743 extends TestCase
             assertTrue(node instanceof Attr);
             assertEquals("value", ((Attr)node).getNodeName());
             assertEquals("#{myBean.property}", ((Attr)node).getNodeValue());
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            fail(e.getLocalizedMessage());
         }
         finally
         {
@@ -165,7 +160,7 @@ public class Test_bug_149743 extends TestCase
         assertTrue(model instanceof DOMModelForJSP);
         final IStructuredDocumentContext context = 
             IStructuredDocumentContextFactory.INSTANCE.
-                getContext(model.getStructuredDocument(), 548);
+                getContext(model.getStructuredDocument(), 529);
         return new ContextWrapper(context, model);
     }
 
