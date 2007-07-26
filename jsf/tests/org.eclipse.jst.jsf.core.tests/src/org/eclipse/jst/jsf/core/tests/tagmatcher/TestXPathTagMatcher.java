@@ -48,12 +48,13 @@ public class TestXPathTagMatcher extends BaseTagMatcherTestCase {
         assertEquals(1, set.size());
 		IStructuredDocumentContext context =
 			IStructuredDocumentContextFactory.INSTANCE
-				.getContext(_structuredDocument, 544);
+				.getContext(_structuredDocument, 529);
 		IDOMContextResolver resolver = 
 			IStructuredDocumentContextResolverFactory.INSTANCE
 				.getDOMContextResolver(context);
 
         Node node = resolver.getNode();//(Node) set.getFirstElement();
+        assertEquals("f:view", node.getNodeName());
         System.out.println(CMUtil.getElementNamespaceURI((Element) node));
         XPathMatchingAlgorithm  matcher = new XPathMatchingAlgorithm("html/body/form/panelGrid/inputText");
         set = matcher.evaluate(node);
