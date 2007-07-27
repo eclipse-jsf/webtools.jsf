@@ -67,7 +67,7 @@ public class JSFLibraryConfigModelTestCases extends TestCase {
 		JSFLibraryConfigModel model = JSFLibraryConfigModelFactory.createInstance(modelSrc);
 
 		Assert.assertNotNull(model);
-		Assert.assertTrue(model.getJSFImplementationLibraries().size() == 2);		
+		Assert.assertTrue(model.getJSFImplementationLibraries().size() >= 2);		
 	}
 
 	public void testGetJSFComponentLibraries() {

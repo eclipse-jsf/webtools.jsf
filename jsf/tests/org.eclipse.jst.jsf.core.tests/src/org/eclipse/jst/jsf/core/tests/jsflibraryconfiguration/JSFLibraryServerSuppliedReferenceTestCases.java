@@ -11,6 +11,7 @@
 package org.eclipse.jst.jsf.core.tests.jsflibraryconfiguration;
 
 import java.util.Collection;
+import java.util.List;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
@@ -25,17 +26,18 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistry;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.PluginProvidedJSFLibrary;
 import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFLibraryConfigurationHelper;
 import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFLibraryReference;
-import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFLibraryReferencePluginProvided;
+import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFLibraryReferenceServerSupplied;
 import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFVersion;
 import org.eclipse.jst.jsf.core.jsflibraryconfiguration.internal.JSFLibraryReferenceFacadeFactory;
-import org.eclipse.jst.jsf.core.jsflibraryconfiguration.internal.JSFLibraryReferencePluginProvidedImpl;
 import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
 import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
+import org.eclipse.wst.common.componentcore.internal.util.IModuleConstants;
+import org.eclipse.wst.common.project.facet.core.ProjectFacetsManager;
 
-public class JSFLibraryReferenceTestCases extends TestCase {
+public class JSFLibraryServerSuppliedReferenceTestCases extends TestCase {
 	WebProjectTestEnvironment projectTestEnvironment;
 	JDTTestEnvironment jdtTestEnv;
 	
@@ -46,7 +48,8 @@ public class JSFLibraryReferenceTestCases extends TestCase {
         JSFTestUtil.setInternetProxyPreferences(true, "www-proxy.us.oracle.com", "80");
         
         projectTestEnvironment = 
-            new WebProjectTestEnvironment("JSFLibraryReferenceTestCases");
+            new WebProjectTestEnvironment("JSFLibraryServerSuppliedReferenceTestCases", ProjectFacetsManager.getProjectFacet(IModuleConstants.JST_JAVA ).getVersion( "5.0" )
+                    , ProjectFacetsManager.getProjectFacet( "jst.web" ).getVersion("2.5"));
         boolean created = projectTestEnvironment.createProject(true);
 
         assertNotNull(projectTestEnvironment);       
@@ -54,15 +57,15 @@ public class JSFLibraryReferenceTestCases extends TestCase {
         assertTrue(projectTestEnvironment.getTestProject().isAccessible());
         
         if (created) {
-	        // initialize test case for faces 1.1
+	        // initialize test case for faces 1.2
 	        JSFFacetedTestEnvironment jsfFacedEnv = new JSFFacetedTestEnvironment(projectTestEnvironment);
-	        jsfFacedEnv.initialize(IJSFCoreConstants.FACET_VERSION_1_1);
+	        jsfFacedEnv.initialize(IJSFCoreConstants.FACET_VERSION_1_2);
 	        
-	        createRegistryAndAddReferences(projectTestEnvironment, jsfFacedEnv);
+	        createRegistryAndAddreferences(projectTestEnvironment, jsfFacedEnv);
         }
 	}
 
-	private void createRegistryAndAddReferences(WebProjectTestEnvironment projectTestEnvironment, JSFFacetedTestEnvironment jsfFacedEnv) throws CoreException {
+	private void createRegistryAndAddreferences(WebProjectTestEnvironment projectTestEnvironment, JSFFacetedTestEnvironment jsfFacedEnv) throws CoreException {
 		JSFLibraryRegistry jsfLibRegistry = JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry();
 
 		String[] archivefiles1 = {
@@ -74,7 +77,8 @@ public class JSFLibraryReferenceTestCases extends TestCase {
 		String[] archivefiles2 = {
 				"faces-all-bogu2.jar",
 				"faces-api-bogus2.jar", 
-				"faces-impl-bogus2.jar"};
+				"faces-impl-bogus2.jar", 
+				"tomahawk-bogus2.jar"};
 
 		JSFLibrary implJSFLib = JSFCoreUtilHelper.constructJSFLib("JSFLIBIMPL_NAME", 
 				"JSFLIBIMPL_NAME", 
@@ -97,76 +101,23 @@ public class JSFLibraryReferenceTestCases extends TestCase {
 		ppJSFLib.setJSFVersion(org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFVersion.V1_1_LITERAL);
 				
 		jsfLibRegistry.addJSFLibrary(implJSFLib);
-        jsfFacedEnv.addJSFLibraryReference(implJSFLib, false);
+//        jsfFacedEnv.addJSFLibraryReference(implJSFLib, false);
         
 		jsfLibRegistry.addJSFLibrary(nonimplJSFLib);
-		jsfFacedEnv.addJSFLibraryReference(nonimplJSFLib, false);
+//		jsfFacedEnv.addJSFLibraryReference(nonimplJSFLib, false);
 		
 		jsfLibRegistry.addJSFLibrary(ppJSFLib);
-		jsfFacedEnv.addJSFLibraryReference(ppJSFLib, true);
+//		jsfFacedEnv.addJSFLibraryReference(ppJSFLib, true);
 	}
 	
-	public void testGetJSFLibraryReferences() {
-		Collection<JSFLibraryReference> results = JSFLibraryConfigurationHelper.getJSFLibraryReferences(projectTestEnvironment.getTestProject());
-		Assert.assertNotNull(results);
-		Assert.assertTrue(results.size() >= 3);	//expect 3 libs from project...	JSFLIBIMPL_NAME, JSFLIBNOIMPL_NAME, PP-JSFLIBNOIMPL_NAME
-	}
-
-	public void testIsJSFLibraryContainer() throws JavaModelException, CoreException {
-		IClasspathEntry[] entries = null;
-		entries = getJDTTestEnv().getJavaProject().getRawClasspath();			
-		for (int i=0;i<entries.length;i++) {
-			IClasspathEntry cpEntry = entries[i];
-			boolean isJsfLib = JSFLibraryConfigurationHelper.isJSFLibraryContainer(cpEntry);
-			if (cpEntry.getEntryKind() == IClasspathEntry.CPE_CONTAINER &&
-					cpEntry.getPath().segment(0).equals(JSFLibraryConfigurationHelper.JSF_LIBRARY_CP_CONTAINER_ID)) {
-				Assert.assertTrue("Is a JSF LIB: "+cpEntry.toString(), isJsfLib);
-			}
-			else
-				Assert.assertFalse("Is NOT a JSF LIB: "+cpEntry.toString(), isJsfLib);
-		}
-	}
-	
-	public void testJSFLibraryReferenceFacadeFactoryCreate() throws CoreException{
-		IClasspathEntry[] entries = null;
-		try {
-			entries = getJDTTestEnv().getJavaProject().getRawClasspath();			
-			for (int i=0;i<entries.length;i++){
-				IClasspathEntry cpEntry = entries[i];
-				boolean isJsfLib = JSFLibraryConfigurationHelper.isJSFLibraryContainer(cpEntry);
-				JSFLibraryReference ref = JSFLibraryReferenceFacadeFactory.create(cpEntry);
-				if (isJsfLib) {
-					String libID = getLibId(cpEntry);
-					Assert.assertNotNull(libID+": ref", ref);
-					if (libID.equals("JSFLIBIMPL_NAME")){
-						doAsserts(ref, "JSFLibraryReferenceUserDefinedImpl", "JSFLIBIMPL_NAME", "JSFLIBIMPL_NAME", "JSFLIBIMPL_NAME", false, true, JSFVersion.V1_1, 4 );						
-					}
-					else if (libID.equals("JSFLIBNONIMPL_NAME")){
-						doAsserts(ref, "JSFLibraryReferenceUserDefinedImpl", "JSFLIBNONIMPL_NAME", "JSFLIBNONIMPL_NAME", "JSFLIBNONIMPL_NAME", false,false, JSFVersion.V1_2, 3);	
-					}
-					else if (libID.equals("PluginProvidedLib$$PP-JSFLIBNONIMPL_NAME")){
-						doAsserts(ref, "JSFLibraryReferencePluginProvidedImpl", "PluginProvidedLib$$PP-JSFLIBNONIMPL_NAME", "PP-JSFLIBNONIMPL_NAME", "PluginProvidedLib", true, false, JSFVersion.V1_1, 8 );
-					}	
-					ref.toString();//just for coverage
-				}
-				else {
-					Assert.assertNull(ref);
-				}
-			}
-
-//			JSFLibraryReferenceFacadeFactory.create(cpEntry)
-		} catch (JavaModelException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
-
-	private JDTTestEnvironment getJDTTestEnv() throws CoreException {
-		if (jdtTestEnv == null){
-			jdtTestEnv = new JDTTestEnvironment(projectTestEnvironment);
-		}
-		return jdtTestEnv;
+	public void testGetJSFLibraryReferencesAndServerSuppliedRef() throws CoreException{
+	   Collection<JSFLibraryReference> libs = JSFLibraryConfigurationHelper.getJSFLibraryReferences(projectTestEnvironment.getTestProject());
+	   Assert.assertNotNull(libs);
+	   Assert.assertEquals(1, libs.size());
+	   JSFLibraryReference ref = (JSFLibraryReference)libs.iterator().next();
+	   Assert.assertTrue(ref instanceof JSFLibraryReferenceServerSupplied);
+	   doAsserts(ref, "JSFLibraryReferenceServerSuppliedImpl", "_ServerSupplied_", "_ServerSupplied_", "Server Supplied", false, true, JSFVersion.UNKNOWN, 0 );	
+				
 	}
 
 	private void doAsserts(JSFLibraryReference ref, String instanceName, String id, String name, String label, boolean isDeployed, boolean isImpl, JSFVersion version, int jarCount ) {		
@@ -178,17 +129,8 @@ public class JSFLibraryReferenceTestCases extends TestCase {
 		Assert.assertEquals(id+": isImpl", isImpl, ref.isJSFImplementation());
 		Assert.assertEquals(id+": version", version, ref.getMaxSupportedVersion());
 		Assert.assertEquals(id+": jarCount", jarCount, ref.getJars().size());
-		
+		Assert.assertNotNull(ref.toString());
 	}
 	
-
-	
-	private String getLibId(IClasspathEntry cpEntry){
-		return cpEntry.getPath().segment(1);
-	}
-	
-//	public void testCreateServerSuppliedJSFLibRef() {
-//		fail("Not yet implemented");
-//	}
 
 }

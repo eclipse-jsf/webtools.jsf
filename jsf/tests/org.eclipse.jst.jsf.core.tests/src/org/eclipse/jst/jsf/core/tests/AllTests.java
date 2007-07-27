@@ -19,6 +19,7 @@ import org.eclipse.jst.jsf.core.tests.jsflibraryconfig.JSFLibraryConfigModelTest
 import org.eclipse.jst.jsf.core.tests.jsflibraryconfig.JSFLibraryRegistryUtilTestCases;
 import org.eclipse.jst.jsf.core.tests.jsflibraryconfig.JSFProjectLibraryReferenceTestCases;
 import org.eclipse.jst.jsf.core.tests.jsflibraryconfiguration.JSFLibraryReferenceTestCases;
+import org.eclipse.jst.jsf.core.tests.jsflibraryconfiguration.JSFLibraryServerSuppliedReferenceTestCases;
 import org.eclipse.jst.jsf.core.tests.jsflibraryregistry.ArchiveFileTestCases;
 import org.eclipse.jst.jsf.core.tests.jsflibraryregistry.JSFLibraryRegistryPackageTestCases;
 import org.eclipse.jst.jsf.core.tests.jsflibraryregistry.JSFLibraryRegistryTestCases;
@@ -88,7 +89,7 @@ public class AllTests
         suite.addTestSuite(MigrationV1toV2Test.class);
 
         suite.addTestSuite(JSFLibraryReferenceTestCases.class);
-        
+        suite.addTestSuite(JSFLibraryServerSuppliedReferenceTestCases.class);
         //
 		//$JUnit-END$
 		return suite;
