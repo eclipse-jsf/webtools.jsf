@@ -52,7 +52,8 @@ public class JSFUtils12 extends JSFUtils{
 		
 		while (it.hasNext()) {
             Servlet servlet = (Servlet) it.next();
-			if (servlet.getServletClass().equals (JSF_SERVLET_CLASS)) {
+			if (servlet.getServletClass() != null &&
+					servlet.getServletClass().equals (JSF_SERVLET_CLASS)) {
 				return servlet;
 			}
 		}
@@ -199,7 +200,9 @@ public class JSFUtils12 extends JSFUtils{
 		if (servletName != null) {
 			for (int i=mappings.size()-1;i>=0;--i){
 				ServletMapping mapping = (ServletMapping)mappings.get(i);
-				if (mapping.getServletName()
+				if (mapping != null && 
+						mapping.getServletName() != null && 
+						mapping.getServletName()
 						.equals(servletName)) {
 					mappings.remove(mapping);
 				}
@@ -223,7 +226,9 @@ public class JSFUtils12 extends JSFUtils{
 			Iterator it = webApp.getContextParams().iterator();
 			while (it.hasNext()) {
 				cp = (org.eclipse.jst.javaee.core.ParamValue) it.next();
-				if (cp.getParamName().equals(JSF_CONFIG_CONTEXT_PARAM)) {
+				if (cp != null && 
+						cp.getParamName()!= null &&
+						cp.getParamName().equals(JSF_CONFIG_CONTEXT_PARAM)) {
 					foundCP = cp;
 					found = true;
 				}
@@ -255,7 +260,9 @@ public class JSFUtils12 extends JSFUtils{
 		String defaultSuffix = "jsp"; //$NON-NLS-1$
 		for (Iterator it = webApp.getContextParams().iterator();it.hasNext();) {		
 			ParamValue cp = (ParamValue) it.next();		
-			if (cp.getParamName().equals(JSF_DEFAULT_SUFFIX_CONTEXT_PARAM)){				
+			if (cp != null && 
+					cp.getParamName() != null && 
+					cp.getParamName().equals(JSF_DEFAULT_SUFFIX_CONTEXT_PARAM)){				
 				String defSuffix = cp.getParamValue();
 				if (defSuffix.startsWith(".")) //$NON-NLS-1$
 					defSuffix = defSuffix.substring(1);

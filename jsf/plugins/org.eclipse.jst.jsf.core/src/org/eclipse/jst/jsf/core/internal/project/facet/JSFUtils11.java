@@ -80,15 +80,18 @@ public class JSFUtils11 extends JSFUtils {
 		
 		while (it.hasNext()) {
             Servlet servlet = (Servlet) it.next();
-			if (servlet.getWebType().isServletType()) {
-				if (((ServletType) servlet.getWebType()).getClassName().equals(
-						JSF_SERVLET_CLASS)) {
-					return servlet;
-				}
-			} else if (servlet.getWebType().isJspType()) {
-				if (((JSPType) servlet.getWebType()).getJspFile().equals(
-						JSF_SERVLET_CLASS)) {
-					return servlet;
+			if (servlet != null && servlet.getWebType() != null) {
+				
+				if(	servlet.getWebType().isServletType()) {
+					if (((ServletType) servlet.getWebType()).getClassName().equals(
+							JSF_SERVLET_CLASS)) {
+						return servlet;
+					}
+				} else if (servlet.getWebType().isJspType()) {
+					if (((JSPType) servlet.getWebType()).getJspFile().equals(
+							JSF_SERVLET_CLASS)) {
+						return servlet;
+					}
 				}
 			}
 		}
@@ -232,8 +235,11 @@ public class JSFUtils11 extends JSFUtils {
 		if (servletName != null) {
 			for (int i=mappings.size()-1;i>=0;--i){
 				ServletMapping mapping = (ServletMapping)mappings.get(i);
-				if (mapping.getServlet().getServletName()
-						.equals(servletName)) {
+				if (mapping != null && 
+						mapping.getServlet() != null && 
+						mapping.getServlet().getServletName() != null &&
+						mapping.getServlet().getServletName()
+							.equals(servletName)) {
 					mappings.remove(mapping);
 				}
 			}
@@ -256,7 +262,9 @@ public class JSFUtils11 extends JSFUtils {
 			Iterator it = webApp.getContexts().iterator();
 			while (it.hasNext()) {
 				cp = (ContextParam) it.next();
-				if (cp.getParamName().equals(JSF_CONFIG_CONTEXT_PARAM)) {
+				if (cp != null &&
+						cp.getParamName() != null &&
+						cp.getParamName().equals(JSF_CONFIG_CONTEXT_PARAM)) {
 					foundCP = cp;
 					found = true;
 				}
@@ -295,7 +303,9 @@ public class JSFUtils11 extends JSFUtils {
 			Iterator it = webApp.getContextParams().iterator();
 			while (it.hasNext()) {
 				cp = (ParamValue) it.next();
-				if (cp.getName().equals(JSF_CONFIG_CONTEXT_PARAM)) {
+				if (cp != null && 
+						cp.getName() != null &&
+						cp.getName().equals(JSF_CONFIG_CONTEXT_PARAM)) {
 					foundCP = cp;
 					found = true;
 				}
@@ -349,7 +359,9 @@ public class JSFUtils11 extends JSFUtils {
 		String defaultSuffix = "jsp"; //$NON-NLS-1$
 		for (Iterator it = webApp.getContexts().iterator();it.hasNext();) {		
 			ContextParam cp = (ContextParam) it.next();		
-			if (cp.getParamName().equals(JSF_DEFAULT_SUFFIX_CONTEXT_PARAM)){				
+			if (cp != null &&
+					cp.getParamName() != null && 
+					cp.getParamName().equals(JSF_DEFAULT_SUFFIX_CONTEXT_PARAM)){				
 				String defSuffix = cp.getParamValue();
 				if (defSuffix.startsWith(".")) //$NON-NLS-1$
 					defSuffix = defSuffix.substring(1);
@@ -370,7 +382,8 @@ public class JSFUtils11 extends JSFUtils {
 			String ext = extPath.getFileExtension();
 			if (ext == null){
 				String lastSeg = extPath.lastSegment();
-				if (lastSeg.equals("*")) //$NON-NLS-1$
+				if (lastSeg != null && 
+						lastSeg.equals("*")) //$NON-NLS-1$
 				{
 					return extPath.removeLastSegments(1).toString();
 				}
