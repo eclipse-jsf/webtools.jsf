@@ -46,12 +46,12 @@
 	</trait>
 
 	<trait id="display-label">
-		<value>JSF HTML</value>
+		<value>%JSFHTML.display-label</value>
 	</trait>
 		
 	<entity id="commandButton" type="tag">	
 		<trait id="display-label">
-			<value>Command Button</value>
+			<value>%commandButton.display-label</value>
 		</trait>
 		<trait id="small-icon">
 			<value>small/JSF_COMMANDBUTTON.gif</value>
@@ -65,7 +65,7 @@
 	</entity>
 	<entity id="commandLink" type="tag">		
 		<trait id="display-label">
-			<value>Command Link</value>
+			<value>%commandLink.display-label</value>
 		</trait>
 		<trait id="small-icon">
 			<value>small/JSF_COMMANDLINK.gif</value>
@@ -87,7 +87,7 @@
 	</entity>
 	<entity id="dataTable" type="tag">
 		<trait id="display-label">
-			<value>Data Table</value>
+			<value>%dataTable.display-label</value>
 		</trait>
 		<trait id="small-icon">
 			<value>small/JSF_DATATABLE.gif</value>
@@ -121,7 +121,7 @@
 	</entity>
 	<entity id="form" type="tag">
 		<trait id="display-label">
-			<value>Form</value>
+			<value>%form.display-label</value>
 		</trait>
 		<trait id="small-icon">
 			<value>small/JSF_FORM.gif</value>
@@ -133,7 +133,7 @@
 
 	<entity id="graphicImage" type="tag">
 		<trait id="display-label">
-			<value>Graphic Image</value>
+			<value>%graphicImage.display-label</value>
 		</trait>
 		<trait id="small-icon">
 			<value>small/JSF_GRAPHICIMAGE.gif</value>
@@ -144,7 +144,7 @@
 	</entity>
 	<entity id="inputHidden" type="tag">
 		<trait id="display-label">
-			<value>Hidden Input</value>
+			<value>%inputHidden.display-label</value>
 		</trait>
 		<trait id="small-icon">
 			<value>small/JSF_INPUTHIDDEN.gif</value>
@@ -158,7 +158,7 @@
 	</entity>
 	<entity id="inputSecret" type="tag">
 		<trait id="display-label">
-			<value>Secret Input</value>
+			<value>%inputSecret.display-label</value>
 		</trait>
 		<trait id="small-icon">
 			<value>small/JSF_INPUTSECRET.gif</value>
@@ -172,7 +172,7 @@
 	</entity>
 	<entity id="inputText" type="tag">
 		<trait id="display-label">
-			<value>Text Input</value>
+			<value>%inputText.display-label</value>
 		</trait>
 		<trait id="small-icon">
 			<value>small/JSF_INPUTTEXT.gif</value>
@@ -186,7 +186,7 @@
 	</entity>
 	<entity id="inputTextarea" type="tag">
 		<trait id="display-label">
-			<value>Textarea Input</value>
+			<value>%inputTextarea.display-label</value>
 		</trait>
 		<trait id="small-icon">
 			<value>small/JSF_INPUTTEXTAREA.gif</value>
@@ -200,7 +200,7 @@
 	</entity>
 	<entity id="message" type="tag">
 		<trait id="display-label">
-			<value>Message</value>
+			<value>%message.display-label</value>
 		</trait>
 		<trait id="small-icon">
 			<value>small/JSF_MESSAGE.gif</value>
@@ -216,7 +216,7 @@
 	</entity>
 	<entity id="messages" type="tag">
 		<trait id="display-label">
-			<value>Messages</value>
+			<value>%messages.display-label</value>
 		</trait>
 		<trait id="small-icon">
 			<value>small/JSF_MESSAGES.gif</value>
@@ -227,7 +227,7 @@
 	</entity>
 	<entity id="outputFormat" type="tag">
 		<trait id="display-label">
-			<value>Output Format</value>
+			<value>%outputFormat.display-label</value>
 		</trait>
 		<trait id="small-icon">
 			<value>small/JSF_OUTPUTFORMAT.gif</value>
@@ -238,7 +238,7 @@
 	</entity>
 	<entity id="outputLabel" type="tag">		
 		<trait id="display-label">
-			<value>Output Label</value>
+			<value>%outputLabel.display-label</value>
 		</trait>
 		<trait id="small-icon">
 			<value>small/JSF_OUTPUTLABEL.gif</value>
@@ -254,7 +254,7 @@
 	</entity>
 	<entity id="outputLink" type="tag">
 		<trait id="display-label">
-			<value>Output Link</value>
+			<value>%outputLink.display-label</value>
 		</trait>
 		<trait id="small-icon">
 			<value>small/JSF_OUTPUTLINK.gif</value>
@@ -274,7 +274,7 @@
 	</entity>
 	<entity id="outputText" type="tag">
 		<trait id="display-label">
-			<value>Output Text</value>
+			<value>%outputText.display-label</value>
 		</trait>
 		<trait id="small-icon">
 			<value>small/JSF_OUTPUTTEXT.gif</value>
@@ -285,7 +285,7 @@
 	</entity>
 	<entity id="panelGrid" type="tag">
 		<trait id="display-label">
-			<value>Panel Grid</value>
+			<value>%panelGrid.display-label</value>
 		</trait>
 		<trait id="small-icon">
 			<value>small/JSF_PANELGRID.gif</value>
@@ -312,7 +312,7 @@
 	</entity>
 	<entity id="panelGroup" type="tag">
 		<trait id="display-label">
-			<value>Panel Group</value>
+			<value>%panelGroup.display-label</value>
 		</trait>
 		<trait id="small-icon">
 			<value>small/JSF_PANELGROUP.gif</value>
@@ -323,7 +323,7 @@
 	</entity>
 	<entity id="selectBooleanCheckbox" type="tag">
 		<trait id="display-label">
-			<value>Select Boolean Checkbox</value>
+			<value>%selectBooleanCheckbox.display-label</value>
 		</trait>
 		<trait id="small-icon">
 			<value>small/JSF_SELECTBOOLEANCHECKBOX.gif</value>
@@ -337,7 +337,7 @@
 	</entity>
 	<entity id="selectManyCheckbox" type="tag">
 		<trait id="display-label">
-			<value>Select Many Checkbox</value>
+			<value>%selectManyCheckbox.display-label</value>
 		</trait>
 		<trait id="small-icon">
 			<value>small/JSF_SELECTMANYCHECKBOX.gif</value>
@@ -351,7 +351,7 @@
 	</entity>
 	<entity id="selectManyListbox" type="tag">
 		<trait id="display-label">
-			<value>Select Many Listbox</value>
+			<value>%selectManyListbox.display-label</value>
 		</trait>
 		<trait id="small-icon">
 			<value>small/JSF_SELECTMANYLISTBOX.gif</value>
@@ -365,7 +365,7 @@
 	</entity>
 	<entity id="selectManyMenu" type="tag">
 		<trait id="display-label">
-			<value>Select Many Menu</value>
+			<value>%selectManyMenu.display-label</value>
 		</trait>
 		<trait id="small-icon">
 			<value>small/JSF_SELECTMANYMENU.gif</value>
@@ -379,7 +379,7 @@
 	</entity>
 	<entity id="selectOneListbox" type="tag">
 		<trait id="display-label">
-			<value>Select One Listbox</value>
+			<value>%selectOneListbox.display-label</value>
 		</trait>
 		<trait id="small-icon">
 			<value>small/JSF_SELECTONELISTBOX.gif</value>
@@ -393,7 +393,7 @@
 	</entity>
 	<entity id="selectOneMenu" type="tag">
 		<trait id="display-label">
-			<value>Select One Menu</value>
+			<value>%selectOneMenu.display-label</value>
 		</trait>
 		<trait id="small-icon">
 			<value>small/JSF_SELECTONEMENU.gif</value>
@@ -407,7 +407,7 @@
 	</entity>
 	<entity id="selectOneRadio" type="tag">
 		<trait id="display-label">
-			<value>Select One Radio</value>
+			<value>%selectOneRadio.display-label</value>
 		</trait>
 		<trait id="small-icon">
 			<value>small/JSF_SELECTONERADIO.gif</value>
@@ -421,7 +421,7 @@
 	</entity>
 	<entity id="column" type="tag">
 		<trait id="display-label">
-			<value>Column</value>
+			<value>%column.display-label</value>
 		</trait>
 		<trait id="small-icon">
 			<value>small/JSF_COLUMN.gif</value>

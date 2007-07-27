@@ -38,7 +38,7 @@
 	</trait>
 
 	<trait id="display-label">
-		<value>JSF Core</value>
+		<value>%JSFCORE.display-label</value>
 	</trait>
 	
 	<entity id="actionListener" type="tag">
