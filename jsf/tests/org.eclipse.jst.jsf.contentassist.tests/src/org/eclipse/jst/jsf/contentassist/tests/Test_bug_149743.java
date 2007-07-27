@@ -11,7 +11,9 @@
  ********************************************************************************/
 package org.eclipse.jst.jsf.contentassist.tests;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import junit.framework.TestCase;
 
@@ -133,8 +135,14 @@ public class Test_bug_149743 extends TestCase
 
             List proposals = strategy.getProposals(wrapper.getContext());
             assertEquals(2, proposals.size());
-            final ICompletionProposal proposal = (ICompletionProposal) proposals.get(0);
-            assertEquals("property", proposal.getDisplayString());
+            Set<String>  names = new HashSet<String>();
+            
+            for (int i = 0; i < proposals.size(); i++)
+            {
+                names.add(((ICompletionProposal)proposals.get(i)).getDisplayString());
+            }
+            assertTrue(names.contains("class"));
+            assertTrue(names.contains("property"));
         }
         finally
         {
