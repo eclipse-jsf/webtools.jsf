@@ -12,6 +12,7 @@
 package org.eclipse.jst.jsf.taglibprocessing.attributevalues;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -46,7 +47,7 @@ import org.eclipse.jst.jsf.metadataprocessors.features.ValidationMessage;
 
 /**
  * Provides possible values and validates attribute values that should be fully qualified Java types.
- * A type can be verified against muliple "valid-interfaces" and/or a "valid-superclass" from meta-data.
+ * A type can be verified against multiple "valid-interfaces" and/or a "valid-superclass" from meta-data.
  * Code checks to ensure the class can be instantiated (i.e. not abstract, anonymous or inner class)
  * Search is scoped to within the current project only. 
  * 
@@ -144,7 +145,7 @@ public class JavaClassType extends ObjectType implements IPossibleValues, IValid
 			SearchRequestor requestor = new Searcher();
 			SearchEngine engine = new SearchEngine();
 			
-			IJavaSearchScope scope = SearchEngine.createJavaSearchScope(new IJavaElement[]{jp}, IJavaSearchScope.SOURCES | IJavaSearchScope.APPLICATION_LIBRARIES);
+			IJavaSearchScope scope = SearchEngine.createJavaSearchScope(new IJavaElement[]{jp});//, IJavaSearchScope.SOURCES | IJavaSearchScope.APPLICATION_LIBRARIES | IJavaSearchScope.);
 			SearchPattern combined = SearchPattern.createPattern((IJavaElement)elems.get(0), IJavaSearchConstants.IMPLEMENTORS, 0);
 
 //			 Until this bug is fixed, stub it out...  only the first interface/superclass will be used.
@@ -164,7 +165,7 @@ public class JavaClassType extends ObjectType implements IPossibleValues, IValid
 			return ((Searcher)requestor).getResults();	
 		}
 
-		return new ArrayList(0);
+		return Collections.EMPTY_LIST;
 	}
 	
 	private IJavaProject getJavaProject() {
@@ -245,32 +246,71 @@ public class JavaClassType extends ObjectType implements IPossibleValues, IValid
 			//ensure that it is not abstract or anonymous
 			if (!isInnerOrAnonymousClass(type) && !isAbstractClass(type)){
 				//now verify that it meets the criteria
-				List results = getTypes();
-				if (!results.isEmpty()){					
-					for (Iterator it = results.iterator();it.hasNext();){
-						SearchMatch match = (SearchMatch)it.next();
-						IType res = (IType)match.getElement();
-						if (!isInnerOrAnonymousClass(res) ){
-							//if this is the class, then optimize to reduce expense of creating hierarchy
-							if (!isAbstractClass(type) && (res.getFullyQualifiedName().equals(value)) )
-								return true;
-							//check to see if value is in hierarchy
-							try {
-								ITypeHierarchy hierarchy = res.newTypeHierarchy(jp, null);
-								if (hierarchy.contains(type))
-									return true;
-							} catch (JavaModelException e) {
-								//ignore
-							}
-						}
+				ITypeHierarchy hierarchy;
+				try {
+					hierarchy = type.newTypeHierarchy(jp, null);
+				} catch (JavaModelException e) {
+					return false;
+				}
+						
+				//check that all interfaces
+				List<String> interfaceNames = getInterfaceNames();
+				for (Iterator<String> it=interfaceNames.iterator();it.hasNext();){
+					//check that all interfaces are satisfied by type
+					IType interfase = getTypeForValue(jp, it.next());
+					if (interfase == null){
+						addNewValidationMessage(Messages.JavaClassType_not_found);
+						return false;
+					}
+					else if (! containsType(hierarchy.getAllSupertypes(type), interfase)){
+						addNewValidationMessage(Messages.JavaClassType_not_found);
+						return false;
 					}
 				}
+				//interfaces have been satisfied now check the superclass if specified				
+				IType superClass = getSuperClass(jp); 
+				if (superClass != null && superClass.equals(type))
+					return true;
+				else if (superClass != null && !containsType(hierarchy.getAllSuperclasses(type), superClass )){
+					addNewValidationMessage(Messages.JavaClassType_not_found);
+					return false;
+				}
+				return true;
+//				List results = getTypes();
+//				if (!results.isEmpty()){					
+//					for (Iterator it = results.iterator();it.hasNext();){
+//						SearchMatch match = (SearchMatch)it.next();
+//						IType res = (IType)match.getElement();
+//						if (!isInnerOrAnonymousClass(res) ){
+//							//if this is the class, then optimize to reduce expense of creating hierarchy
+//							if (!isAbstractClass(type) && (res.getFullyQualifiedName().equals(value)) )
+//								return true;
+//							//check to see if value is a subtype in the hierarchy
+//							try {
+//								ITypeHierarchy hierarchy = res.newTypeHierarchy(jp, null);
+//								if (containsType(hierarchy.getAllSubtypes(res), type)) 									
+//									return true;
+//								
+//							} catch (JavaModelException e) {
+//								//ignore
+//							}
+//						}
+//					}
+//				}
 			}
 		}
 		addNewValidationMessage(Messages.JavaClassType_not_found);
 		return false;
 	}
 	
+	private boolean containsType(IType[] types, IType type) {
+		for (int i=0;i < types.length;i++) {
+			if (type.equals(types[i]))
+				return true;
+		}
+		return false;
+	}
+
 	private IType getTypeForValue(IJavaProject jp, String value) {
 		try {
 			return findType(jp, value);

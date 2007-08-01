@@ -20,28 +20,20 @@ import java.util.List;
  * <p><b>Provisional API - subject to change</b></p>
  */
 public final class EmptyResultSet implements IResultSet {
-
-	public void close() {//
+	private boolean _isClosed = false;
+	public void close() {
+		_isClosed = true;
 	}
 	
-	public List getResults(){
+	public List getResults() throws MetaDataException{
+		if (_isClosed)
+			throw new MetaDataException("Resultset is closed");
+		
 		return Collections.EMPTY_LIST;		
 	}
-//
-//	public int getSize() throws MetaDataException {
-//		return 0;
-//	}
-//
-//	public boolean hasNext() throws MetaDataException {				
-//		return false;
-//	}
-//
-//	public Object next() throws MetaDataException {
-//		return null;
-//	}
 
 	public boolean isClosed() {
-		return false;
+		return _isClosed;
 	}
 
 }

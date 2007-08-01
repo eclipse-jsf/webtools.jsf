@@ -54,13 +54,33 @@ public class ActionType extends MethodBindingType implements IPossibleValues{
 	 * @see org.eclipse.jst.jsf.taglibprocessing.attributevalues.MethodBindingType#isValidValue(java.lang.String)
 	 */
 	public boolean isValidValue(String value){
-		if (value != null && value.length() > 0)	
-			return true;
-		// what other coercion rules apply???
+		if (value == null || (value != null && value.length() == 0)) {
+			IValidationMessage msg = new ValidationMessage(Messages.ActionType_invalid_empty_value);
+			getValidationMessages().add(msg);
+			return false;
+		}
+		//any other value should be one of the possible values
+		//optimize
+		IWorkspaceContextResolver wr = IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver(getStructuredDocumentContext());
+		if (wr == null)
+			return false;//shouldn't get here
 		
+		IFile jsp = (IFile)wr.getResource();
+		List rules = JSFAppConfigManager.getInstance(wr.getProject()).getNavigationRulesForPage(jsp);
+		for(Iterator it=rules.iterator();it.hasNext();){
+			NavigationRuleType rule = (NavigationRuleType)it.next();
+			for (Iterator cases=rule.getNavigationCase().iterator();cases.hasNext();){				
+				NavigationCaseType navCase = (NavigationCaseType)cases.next();					
+				if (value.equals(navCase.getFromOutcome().getTextContent().trim()))
+					return true;				
+			}
+		}
 		IValidationMessage msg = new ValidationMessage(Messages.ActionType_invalid_value);
 		getValidationMessages().add(msg);
 		return false;
+		
+		
+
 	}
 	
 	/* (non-Javadoc)

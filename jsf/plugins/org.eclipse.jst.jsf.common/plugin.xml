@@ -23,6 +23,13 @@
             ordinal="10">
       </domainSourceModelTypes>   
    </extension>
+   <extension
+         point="org.eclipse.jst.jsf.common.domainSourceModelTypeTranslators">
+      <domainSourceModelTypeTranslator
+            domainSourceModelTypeId="DefaultMetaDataTagLibraryHandler"
+            translatorClass="org.eclipse.jst.jsf.common.metadata.internal.StandardMetaDataFilesTranslator">
+      </domainSourceModelTypeTranslator>
+   </extension>
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http:///org/eclipse/jst/jsf/context/symbol.ecore" 

@@ -13,7 +13,7 @@ Binds metadata source types to a particular domain of metadata.
 
    <element name="extension">
       <complexType>
-         <sequence>
+         <sequence minOccurs="0" maxOccurs="unbounded">
             <element ref="domainSourceModelTypes"/>
          </sequence>
          <attribute name="point" type="string" use="required">

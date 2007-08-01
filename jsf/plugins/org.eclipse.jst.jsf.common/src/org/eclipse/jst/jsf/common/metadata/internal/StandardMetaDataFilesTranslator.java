@@ -23,7 +23,7 @@ import org.eclipse.jst.jsf.common.metadata.Trait;
  * A 'null' translation of a metadata file.  Entities and traits are not transformed.
  *
  */
-public class StandardAnnotationFilesTranslator implements IMetaDataTranslator {
+public class StandardMetaDataFilesTranslator implements IMetaDataTranslator {
 
 	public void translate(IMetaDataModelMergeAssistant assistant) {//TODO: throw proper errors
 		//null translate - sourceModel object are already Entities and traits

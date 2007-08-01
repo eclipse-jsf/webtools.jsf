@@ -29,7 +29,7 @@ import org.eclipse.jst.jsf.common.JSFCommonPlugin;
  */
 public class DomainSourceModelTypeDescriptor {
 	private static final String TRANSLATORS_EXTENSION_POINT_ID = "domainSourceModelTypeTranslators";
-	private static final String STANDARD_FILE_NULL_TRANSLATOR = "org.eclipse.jst.jsf.common.metadata.internal.StandardAnnotationFilesTranslator";
+	private static final String STANDARD_FILE_NULL_TRANSLATOR = "org.eclipse.jst.jsf.common.metadata.internal.StandardMetaDataFilesTranslator";
 	private String domain = "DEFAULT";
 	private String domainSourceModelTypeId;
 	private String locatorClassName = "org.eclipse.jst.jsf.common.metadata.internal.StandardMetaDataLocator";
@@ -59,11 +59,11 @@ public class DomainSourceModelTypeDescriptor {
 	 * Default model type descriptor that will load only standard metadata files
 	 */
 	public DomainSourceModelTypeDescriptor(){
-		translatorDescriptors = new HashSet();
+//		getTranslatorDescriptors();
+		//createTranslatorInstances() will add the standard null translator 
 	}
 	
 	private synchronized void init() {
-		translatorDescriptors = new HashSet();
 		IExtensionRegistry extensionRegistry = Platform.getExtensionRegistry();
 		IExtensionPoint point = extensionRegistry.getExtensionPoint(JSFCommonPlugin.PLUGIN_ID, TRANSLATORS_EXTENSION_POINT_ID );
 		if (point != null) {
@@ -176,24 +176,26 @@ public class DomainSourceModelTypeDescriptor {
 		
 		private Set createTranslatorInstances() {
 			translators = new HashSet/*<IMetaDataTranslator>*/();
-			if (translatorDescriptors.size() == 0){
+			if (getTranslatorDescriptors().size() == 0){// for TagLibDomain, we are adding null translator via extension (as of 7/16/07)
+				//would get here if a domain and source type was defined without a domain translator.  Should not happen, but 
 				//add Null Translator for now....
-				//we could/should raise exception
+				//we could/should raise exception.  
+				//Developers should add a STANDARD_FILE_NULL_TRANSLATOR if using standard metadata format.
 				Class klass = JSFCommonPlugin.loadClass(STANDARD_FILE_NULL_TRANSLATOR, JSFCommonPlugin.PLUGIN_ID);
 				try {
 					translators.add(klass.newInstance());
 					return translators;
 				} catch (InstantiationException e) {
                     // TODO: other error handling?
-					JSFCommonPlugin.log(e, "Error in createTranslatorInstances");
+					JSFCommonPlugin.log(e, "Error in createTranslatorInstances(STANDARD_FILE_NULL_TRANSLATOR)");
 				} catch (IllegalAccessException e) {
                     // TODO: other error handling?
-                    JSFCommonPlugin.log(e, "Error in createTranslatorInstances");
+                    JSFCommonPlugin.log(e, "Error in createTranslatorInstances(STANDARD_FILE_NULL_TRANSLATOR)");
 				}
 
 			}
 			
-			Iterator/*<DomainSourceModelTranslatorDescriptor>*/it = translatorDescriptors.iterator();
+			Iterator/*<DomainSourceModelTranslatorDescriptor>*/it = getTranslatorDescriptors().iterator();
 			while (it.hasNext()){
 				DomainSourceModelTranslatorDescriptor d = (DomainSourceModelTranslatorDescriptor)it.next();
 				Class klass = JSFCommonPlugin.loadClass(d.getTranslator(), d.getBundleId());

@@ -38,6 +38,8 @@ public class TraitValueHelper {
 	 * @return EClass of trait value
 	 */
 	public static EClass getValueType(Trait trait){
+		if (trait == null)
+			return null;
 		if (trait.getValue() != null)
 			return trait.getValue().eClass();
 		return null;
@@ -45,7 +47,7 @@ public class TraitValueHelper {
 	
 	/**
 	 * @param trait
-	 * @return value of trait as Object
+	 * @return value of trait as String Object.  
 	 */
 	public static Object getValue(Trait trait){
 		if (trait == null)
@@ -96,7 +98,7 @@ public class TraitValueHelper {
 	 * @return List of Strings.  If externalized, will resolve from resource bundle 
 	 * using getNLSValue(Trait trait, String rawValue)
 	 */
-	public static List getValueAsListOfStrings(Trait trait){
+	public synchronized static List getValueAsListOfStrings(Trait trait){
 		//PROTO ONLY!!! Need to make WAY more robust!
 		List ret = new ArrayList();
 		if (trait.getValue() instanceof ListOfValues) {
@@ -164,7 +166,7 @@ public class TraitValueHelper {
 
 	/**
 	 * Will take get the value as a String and attempt to coerce to boolean.
-	 * Will return 'false' if coercion fails.
+	 * Will return 'false' if coercion fails, or value was null.
 	 * @param trait
 	 * @return true or false 
 	 */
@@ -175,5 +177,25 @@ public class TraitValueHelper {
 		
 		return Boolean.valueOf(val).booleanValue();
 	}
+	
+//	/**
+//	 * @param trait
+//	 * @return name of class or primitive datatype that the value is defined as.   
+//	 * For SimpleAnyTypes, the getInstanceType().getInstanceClassName() is returned.
+//	 * For AnyType, java.lang.String is always returned.
+//	 * For all others, the class.getName() is returned.
+//	 */
+//	public static String getValueInstanceClassName(Trait trait) {String.class.getName();
+//		if (trait.getValue() instanceof SimpleAnyType) {
+//			return ((SimpleAnyType)trait.getValue()).getInstanceType().getInstanceClassName();
+//		}
+//		else if (trait.getValue() instanceof AnyType) {
+//			return String.class.getName();
+//		}
+//		else {
+//			return trait.getValue().getClass().getName();
+//		}
+//		
+//	}
 
 }

@@ -46,7 +46,7 @@ public final class StandardMetaDataFileRegistry {
 	private static StandardMetaDataFileRegistry reg;
 	
 	/**
-	 * @return the singelton instance of the registry
+	 * @return the singleton instance of the registry
 	 */
 	public static StandardMetaDataFileRegistry getInstance() {
 		if (reg == null){
