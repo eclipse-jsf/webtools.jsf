@@ -13,7 +13,9 @@ package org.eclipse.jst.jsf.metadata.tests.taglibprocessing;
 
 import junit.framework.Assert;
 
+import org.eclipse.jst.jsf.metadataprocessors.features.ELIsNotValidException;
 import org.eclipse.jst.jsf.metadataprocessors.features.IDefaultValue;
+import org.eclipse.jst.jsf.metadataprocessors.features.IValidELValues;
 import org.eclipse.jst.jsf.metadataprocessors.features.IValidValues;
 
 public class DoubleTypeTest extends TaglibProcessingTestCase {
@@ -32,6 +34,7 @@ public class DoubleTypeTest extends TaglibProcessingTestCase {
 		Assert.assertFalse(vv.getValidationMessages().size()==0);
 		vv.getValidationMessages().clear();
 		Assert.assertTrue(vv.isValidValue("188.23"));
+		Assert.assertTrue(vv.isValidValue("245.32"));
 		Assert.assertFalse(vv.isValidValue("0.0"));
 		vv.getValidationMessages().clear();
 		Assert.assertFalse(vv.isValidValue("False"));
@@ -67,5 +70,13 @@ public class DoubleTypeTest extends TaglibProcessingTestCase {
 		Assert.assertTrue(createValuesAdapters.isEmpty());
 	}
 	
-	
+	public void testGetExpectedReturnType(){
+		Assert.assertNotNull(validELValuesAdapters);
+		IValidELValues vvel = (IValidELValues)validELValuesAdapters.get(0);
+		try {
+			Assert.assertEquals("double", vvel.getExpectedRuntimeType().toUserReadableString());
+		} catch (ELIsNotValidException e) {
+			fail("testGetExpectedReturnType");
+		}
+	}
 }

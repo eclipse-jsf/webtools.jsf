@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006 Oracle Corporation.
+ * Copyright (c) 2006, 2007 Oracle Corporation.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -39,7 +39,7 @@ public class AttributeValueRuntimeTypeFactoryTests extends TestCase {
 		List features =  atype.getFeatureAdapters(IPossibleValues.class);
 		Assert.assertNotNull(features);
 		Assert.assertFalse(features.isEmpty());
-		Assert.assertEquals(features.size(), 2);  //we expect MyBooleanType and MetaDataEnabledBarkProcessor  
+		Assert.assertEquals(2, features.size());  //we expect MyBooleanType and MetaDataEnabledBarkProcessor  
 		
 		atype = factory.getType(AttributeValueRuntimeTypesRegistryTests.STRINGARRAYTYPE_ID);
 		Assert.assertNotNull(atype);

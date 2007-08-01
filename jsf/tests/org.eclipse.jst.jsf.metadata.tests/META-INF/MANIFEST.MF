@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %Bundle-Name.0
-Bundle-SymbolicName: org.eclipse.jst.jsf.metadata.tests; singleton:=true
+Bundle-SymbolicName: org.eclipse.jst.jsf.metadata.tests;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.eclipse.jst.jsf.metadata.tests.MetadataTestsPlugin
 Bundle-Localization: plugin
@@ -19,7 +19,12 @@ Require-Bundle: org.eclipse.jst.jsf.common;bundle-version="[1.0.0,1.1.0)",
  org.eclipse.jface;bundle-version="[3.2.0,4.0.0)",
  org.eclipse.wst.html.core;bundle-version="[1.1.0,1.2.0)",
  org.eclipse.wst.xml.core;bundle-version="[1.1.0,1.2.0)",
- org.eclipse.jface.text;bundle-version="[3.2.0,4.0.0)"
+ org.eclipse.jface.text;bundle-version="[3.2.0,4.0.0)",
+ org.eclipse.jdt.core,
+ org.eclipse.wst.common.project.facet.core,
+ org.eclipse.jst.common.frameworks,
+ org.eclipse.jst.jsf.core.tests,
+ org.eclipse.wst.validation
 Eclipse-LazyStart: true
 Export-Package: com.foobar;x-internal:=true,
  org.eclipse.jst.jsf.common.metadata.tests;x-internal:=true,

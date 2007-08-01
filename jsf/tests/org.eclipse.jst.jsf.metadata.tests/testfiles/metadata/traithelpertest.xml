@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadatamodel 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" 
+	xmlns:xmltype="http://www.eclipse.org/emf/2003/XMLType"
+	xmlns:mdt="http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore"  
+	id="http://org.eclipse.jsf/traithelpertest"
+	type="tagFile">
+	
+	<entity id="tag">
+		
+		<entity type="attribute" id="attr1">
+			<trait id="singleString">
+				<value>AString</value>
+			</trait>
+			<trait id="anInteger">
+				<value>1</value>
+			</trait>
+			<trait id="aTrueInt">
+				<value xsi:type="ecore:EInt">1</value>
+			</trait>
+			<trait id="multivalIntegers"> 
+				<value xsi:type="mdt:ListOfValues">
+					<item>1</item>
+					<item>2</item>
+					<item>3</item>
+				</value>
+			</trait>			
+			<trait id="multivalStrings"> 
+				<value xsi:type="mdt:ListOfValues">
+					<item>A</item>
+					<item>B</item>
+					<item>C</item>
+				</value>
+			</trait>
+			<trait id="NullVal">
+				<value></value>
+			</trait>			
+			<trait id="BooleanVal">
+				<value>true</value>
+			</trait>	
+			<trait id="NullBooleanVal">
+				<value></value>
+			</trait>
+		</entity>	
+	</entity>
+	<entity id="NLS">	
+		<entity id="NLS">	
+			<trait id="NLS">
+				<value>%NLS1</value>
+			</trait> 			
+			<trait id="multivalNLS"> 
+				<value xsi:type="mdt:ListOfValues">
+					<item>%NLS1</item>
+					<item>%NLS2</item>
+				</value>
+			</trait>		
+		</entity>	
+		<trait id="NullVal">
+			<value>%NLS3</value>
+		</trait>					
+	</entity>
+
+</metadatamodel>

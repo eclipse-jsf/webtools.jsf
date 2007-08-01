@@ -32,8 +32,11 @@
             uri="http://org.eclipse.jsf/tinytest"/>
       <standardMetaDataFile
             location="testfiles/metadata/TinyIncludeTest.xml"
-            uri="TinyIncludeTest">
-      </standardMetaDataFile>                                                            
+            uri="TinyIncludeTest"/>          
+      <standardMetaDataFile
+            location="/testfiles/metadata/traithelpertest.xml"
+            locator="org.eclipse.jst.jsf.common.metadata.tests.MyMDLocator"
+            uri="http://org.eclipse.jsf/traithelpertest"/>
    </extension>
    <extension
          point="org.eclipse.jst.jsf.core.AttributeValueRuntimeTypes">

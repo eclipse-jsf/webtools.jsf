@@ -21,11 +21,13 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Properties;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.internal.adaptor.EclipseEnvironmentInfo;
 import org.eclipse.wst.sse.core.StructuredModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
@@ -47,6 +49,44 @@ import org.w3c.dom.Node;
  */
 public class JSFTestUtil
 {
+	private static final String JSFRUNTIMEJARSDIR = "jsfRuntimeJarsDirectoryV";
+	/**
+	 * Returns true if the environment property holding the name of the directory that points at the 
+	 * runtime jars exist.  
+	 * <p>
+	 * The expected property name is jsfRuntimeJarsDirectoryVXX where XX is the
+	 * JSFVersion.  <br>i.e "jsfRuntimeJarsDirectoryV1.1", or "jsfRuntimeJarsDirectoryV1.2"
+	 * <p>
+	 * It <b>does</b> check for the existence of the directory.<br>
+	 * It <b>does not</b> check for any jars within that directory.
+	 * 
+	 * @param jsfVersion as String.  ie. "1.1", or "1.2"
+	 * @return true if the property is set
+	 */
+	public static boolean isJSFRuntimeJarsDirectoryPropertySet(String jsfVersion) {
+		String dirName = getJSFRuntimeJarsDirectory(jsfVersion);		
+		if (dirName != null && dirName.trim().length() != 0 &&
+			new File(dirName).exists()) {
+				return true;
+		}		
+		return false;
+	}
+	
+	/**
+	 * @param jsfVersion as String.  <br>ie. "1.1" or "1.2"
+	 * @return Directory name for jsf runtime jars.  
+	 * <br>Will be null if not set in JSFRUNTIMEJARSDIRV<b>X.X</b> system property
+	 */
+	public static String getJSFRuntimeJarsDirectory(String jsfVersion) {
+		String propertyName = JSFRUNTIMEJARSDIR+jsfVersion;
+		String res = System.getProperty(propertyName);
+		if (res == null) {
+			//check env var also
+			res = System.getenv(propertyName);			
+		}
+		return res;
+	}
+	
     /**
      * Used to turn off build validation to speed up testing
      * 

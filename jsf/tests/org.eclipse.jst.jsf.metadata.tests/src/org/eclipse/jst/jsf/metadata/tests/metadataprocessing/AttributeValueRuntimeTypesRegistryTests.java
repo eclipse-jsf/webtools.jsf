@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006 Oracle Corporation.
+ * Copyright (c) 2006, 2007 Oracle Corporation.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -26,6 +26,7 @@ public class AttributeValueRuntimeTypesRegistryTests extends TestCase {
 	/*
 	 * Test method for 'org.eclipse.jst.jsf.metadataprocessors.internal.AbstractMetaDataEnabledTypeRegistry.getTypes(String)'
 	 */
+	@SuppressWarnings("restriction")
 	public void testGetTypes() {
 		AttributeValueRuntimeTypeRegistry reg = AttributeValueRuntimeTypeRegistry.getInstance();
 		

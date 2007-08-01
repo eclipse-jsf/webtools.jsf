@@ -1,0 +1,16 @@
+package com.foo;
+
+import javax.xml.namespace.QName;
+import javax.xml.xpath.XPathFunction;
+
+public class MyConverterSubclass2 extends MyConverter implements javax.xml.xpath.XPathFunctionResolver, javax.xml.xpath.XPathVariableResolver{
+
+	public XPathFunction resolveFunction(QName functionName, int arity) {
+		return null;
+	}
+
+	public Object resolveVariable(QName variableName) {
+		return null;
+	}
+
+}

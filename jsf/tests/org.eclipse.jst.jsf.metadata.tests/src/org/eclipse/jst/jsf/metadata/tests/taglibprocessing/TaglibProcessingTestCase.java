@@ -19,6 +19,7 @@ import org.eclipse.jst.jsf.metadataprocessors.MetaDataEnabledProcessingFactory;
 import org.eclipse.jst.jsf.metadataprocessors.features.ICreateValues;
 import org.eclipse.jst.jsf.metadataprocessors.features.IDefaultValue;
 import org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValues;
+import org.eclipse.jst.jsf.metadataprocessors.features.IValidELValues;
 import org.eclipse.jst.jsf.metadataprocessors.features.IValidValues;
 
 public abstract class TaglibProcessingTestCase extends AbstractBaseMetaDataTestCase {
@@ -33,39 +34,23 @@ public abstract class TaglibProcessingTestCase extends AbstractBaseMetaDataTestC
 	protected List validValuesAdapters;
 	protected List defaultValueAdapters;
 	protected List createValuesAdapters;
+	protected List validELValuesAdapters;
 	
 	public void setUp() throws Exception{
 		super.setUp();
 		
-		// TODO: This won't work currently docContext = getTestDocContext();
 		possibleValueAdapters = getProcessorAdapters(IPossibleValues.class);
 		validValuesAdapters = getProcessorAdapters(IValidValues.class);
 		defaultValueAdapters = getProcessorAdapters(IDefaultValue.class);
 		createValuesAdapters = getProcessorAdapters(ICreateValues.class);
+		validELValuesAdapters = getProcessorAdapters(IValidELValues.class);
 	}
-	
-//	private IStructuredDocumentContext getTestDocContext() {
-//		//IJavaProject jproj = getProject();
-//		IDocument doc = null;//figure it out
-//		return IStructuredDocumentContextFactory.INSTANCE.getContext(doc, 0);
-//	}
-//
-//	private IJavaProject getProject() {
-//		if (ResourcesPlugin.getWorkspace().getRoot().getProject("testProject")==null){
-//			//do we import??? or create new???
-//			Impor
-//			IJavaProject jp = new JavaProject(
-//		}
-//		return JavaCore.create(ResourcesPlugin.getWorkspace().getRoot().getProject("testProject"));
-//		return null;
-//	}
 
 	private String getAttributeNameFromTest(){
 		if (attributeName == null){
-			String test = this.getClass().getName();
-			test = test.substring(test.lastIndexOf(".") + 1);
-			test = test.substring(0,test.length() - 4);
-			return test;
+			attributeName = this.getClass().getName();
+			attributeName = attributeName.substring(attributeName.lastIndexOf(".") + 1);
+			attributeName = attributeName.substring(0,attributeName.length() - 4);			
 		}
         return attributeName;
 	}
@@ -76,27 +61,4 @@ public abstract class TaglibProcessingTestCase extends AbstractBaseMetaDataTestC
 					uri, tag , getAttributeNameFromTest());
 	}
 
-//	private IMetaDataEnabledFeature getProcessorForBundle(List processors, String bundleID){
-//		IMetaDataEnabledFeature ret = null;
-//		Iterator it = processors.iterator();
-//		while(it.hasNext()){
-//			IMetaDataEnabledFeature feature = (IMetaDataEnabledFeature)it.next();
-//			if (feature.getBundleID().equals(bundleID)){
-//				ret = feature;
-//				break;
-//			}
-//		}
-//		return ret;
-//	}
-//	private ITypeDescriptor getType(String typeId){
-//		return AttributeValueRuntimeTypeFactory.getInstance().getType(typeId);
-//	}
-	
-//	protected IMetaDataEnabledFeature getBarkProcessingBundle(List processors) {
-//		return getProcessorForBundle(processors, barkerBundle);		
-//	}
-//	
-//	protected IMetaDataEnabledFeature getProcessorForTaglibProcessingBundle(List processors) {
-//		return getProcessorForBundle(processors, bundle);
-//	}
 }

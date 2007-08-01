@@ -1,0 +1,12 @@
+package com.foo;
+
+import javax.xml.namespace.QName;
+
+public class MyConverterSubclass3 extends MyConverter implements javax.xml.xpath.XPathVariableResolver{
+
+	public Object resolveVariable(QName variableName) {
+		return null;
+	}
+
+}
+

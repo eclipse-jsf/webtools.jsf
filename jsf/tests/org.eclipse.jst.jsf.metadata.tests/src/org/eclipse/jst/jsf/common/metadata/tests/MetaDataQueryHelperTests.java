@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * Copyright (c) 2007 Oracle Corporation and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     Oracle Corporation - initial API and implementation
+ *******************************************************************************/
+
 package org.eclipse.jst.jsf.common.metadata.tests;
 
 import org.eclipse.jst.jsf.common.metadata.Entity;
@@ -214,6 +225,26 @@ public class MetaDataQueryHelperTests extends AbstractBaseMetaDataTestCase {
 		
 		trait = TaglibDomainMetaDataQueryHelper.getTrait(negativeContextBadDomain, "doesnotexist", "A3");
 		assertNull(trait);
+	}
+	
+	public void testResultSets() {
+		IResultSet rs = TaglibDomainMetaDataQueryHelper.getEntities(baseContext, "loaded", new SimpleEntityQueryVisitorImpl());
+		assertNotNull(rs);
+		try {
+			assertEquals(2, rs.getResults().size());
+			assertFalse(rs.isClosed());
+			rs.close();
+			assertTrue(rs.isClosed());
+		} catch (MetaDataException e1) {			
+			fail(e1.getMessage());
+		}
+		
+		try {
+			rs.getResults();
+			fail("Expected MetaDataException ");
+		} catch (MetaDataException e2) {			
+			//pass
+		}
 	}
 
 }

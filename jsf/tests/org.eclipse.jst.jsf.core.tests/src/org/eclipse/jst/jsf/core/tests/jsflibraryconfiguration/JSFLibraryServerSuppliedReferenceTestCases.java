@@ -11,14 +11,11 @@
 package org.eclipse.jst.jsf.core.tests.jsflibraryconfiguration;
 
 import java.util.Collection;
-import java.util.List;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.jdt.core.IClasspathEntry;
-import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryRegistryUtil;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
@@ -28,7 +25,6 @@ import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFLibraryConfigurationH
 import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFLibraryReference;
 import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFLibraryReferenceServerSupplied;
 import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFVersion;
-import org.eclipse.jst.jsf.core.jsflibraryconfiguration.internal.JSFLibraryReferenceFacadeFactory;
 import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
 import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;

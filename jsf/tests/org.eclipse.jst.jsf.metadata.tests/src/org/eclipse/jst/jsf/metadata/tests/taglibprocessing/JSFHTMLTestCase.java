@@ -15,25 +15,31 @@ import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.Trait;
 import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
 import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
-import org.eclipse.jst.jsf.common.metadata.tests.AbstractBaseMetaDataTestCase;
-import org.eclipse.jst.jsf.metadata.tests.MetadataTestsPlugin;
+import org.eclipse.jst.jsf.core.IJSFCoreConstants;
+import org.eclipse.jst.jsf.metadata.tests.util.IJSFRuntimeRequiredV11;
+import org.eclipse.jst.jsf.metadata.tests.util.JSPTestCase;
 import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfo;
 import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfos;
 import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.TagCreationInfo;
 
-public class JSFHTMLTestCase extends AbstractBaseMetaDataTestCase{
+public class JSFHTMLTestCase extends JSPTestCase implements IJSFRuntimeRequiredV11{
 	private String _uri;
 	private ITaglibDomainMetaDataModelContext _context;
 	
+	public JSFHTMLTestCase () {
+		super(	IJSFCoreConstants.FACET_VERSION_1_1,
+				"/testfiles/web/faces-config_1_1.xml.data");
+
+	}
 	public void setUp() throws Exception{
 		super.setUp();
 	    
-	    projectTestEnvironment.loadResourceInWebRoot(MetadataTestsPlugin.getDefault().getBundle(),
-	            "/testfiles/html_basic.tld",
-	            "/WEB-INF/lib/html_basic.tld");
+//	    projectTestEnvironment.loadResourceInWebRoot(MetadataTestsPlugin.getDefault().getBundle(),
+//	            "/testfiles/html_basic.tld",
+//	            "/WEB-INF/lib/html_basic.tld");
 	    
 		_uri = "http://java.sun.com/jsf/html";
-		_context = TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(project, _uri);
+		_context = TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(_testEnv.getTestProject(), _uri);
 	}
 	
 	public void testPaletteInfos(){
@@ -48,7 +54,7 @@ public class JSFHTMLTestCase extends AbstractBaseMetaDataTestCase{
 		
 		PaletteInfo info = pis.findPaletteInfoById("inputText");
 		assertNotNull(info);
-		//required jsf html tld to work!
+		//requires jsf html tld to work!
 		assertNotNull(info.getDisplayLabel());
 		assertNotNull(info.getDescription());
 		assertNull(info.getExpert());

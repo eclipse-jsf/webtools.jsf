@@ -16,7 +16,6 @@ import java.io.FilenameFilter;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.core.runtime.Plugin;
 import org.eclipse.jst.j2ee.internal.web.archive.operations.WebFacetProjectCreationDataModelProvider;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryRegistryUtil;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.ArchiveFile;
@@ -60,7 +59,7 @@ public class JSFCoreUtilHelper {
 	public static JSFLibrary constructJSFLib(
 			String id, 
 			String name,
-			String pluginRelativePathToArchiveFiles,
+			String basePathToArchiveFiles,
 			String[] archivefiles, 
 			boolean bImpl) {
 		
@@ -72,7 +71,7 @@ public class JSFCoreUtilHelper {
 		jsfLib.setImplementation(bImpl);
 		
 		for (int i = 0; i < archivefiles.length; i++) {
-			testData = pluginRelativePathToArchiveFiles + archivefiles[i];						
+			testData = basePathToArchiveFiles + archivefiles[i];						
 			archiveFile = JSFLibraryRegistryFactory.eINSTANCE.createArchiveFile();
 			archiveFile.setRelativeToWorkspace(false);
 			archiveFile.setSourceLocation(testData);			
@@ -81,6 +80,7 @@ public class JSFCoreUtilHelper {
 		
 		return jsfLib;
 	}
+	
 	
 	/**
 	 * Create a Dynamic Web application with given name using default operation.

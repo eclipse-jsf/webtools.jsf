@@ -13,7 +13,9 @@ package org.eclipse.jst.jsf.metadata.tests.taglibprocessing;
 
 import junit.framework.Assert;
 
+import org.eclipse.jst.jsf.metadataprocessors.features.ELIsNotValidException;
 import org.eclipse.jst.jsf.metadataprocessors.features.IDefaultValue;
+import org.eclipse.jst.jsf.metadataprocessors.features.IValidELValues;
 import org.eclipse.jst.jsf.metadataprocessors.features.IValidValues;
 
 public class IntegerTypeTest extends TaglibProcessingTestCase {
@@ -60,4 +62,13 @@ public class IntegerTypeTest extends TaglibProcessingTestCase {
 		Assert.assertTrue(createValuesAdapters.isEmpty());
 	}
 	
+	public void testGetExpectedReturnType(){
+		Assert.assertNotNull(validELValuesAdapters);
+		IValidELValues vvel = (IValidELValues)validELValuesAdapters.get(0);
+		try {
+			Assert.assertEquals("int", vvel.getExpectedRuntimeType().toUserReadableString());
+		} catch (ELIsNotValidException e) {
+			fail("testGetExpectedReturnType");
+		}
+	}
 }

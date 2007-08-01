@@ -47,16 +47,53 @@
   			<value>org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
   		</trait>
   		<trait id="valid-minimum"><value>0</value></trait>
+  		<trait id="valid-maximum"><value>255</value></trait>
   		<trait id="default-value"><value>10</value></trait>
   	</entity> 
+  	<entity id="EnumeratedIntegerType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
+  		</trait>
+	  	<trait id="valid-values">
+	  		<value xsi:type="mdt:ListOfValues">
+	  			<item>0</item>
+	  			<item>3</item>
+	  			<item>5</item>
+	  		</value>
+	  	</trait>
+  		<trait id="default-value"><value>10</value></trait>
+  	</entity>
   	<entity id="LongType">
   		<trait id="attribute-value-runtime-type">
   			<value>org.eclipse.jst.jsf.core.attributevalues.LongType</value>
   		</trait>
 	  	<trait id="valid-minimum"><value>-1000</value></trait>
   		<trait id="valid-maximum"><value>1000</value></trait>
+  	</entity>
+  	<entity id="EnumeratedLongType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.LongType</value>
+  		</trait>
+	  	<trait id="valid-values">
+	  		<value xsi:type="mdt:ListOfValues">
+	  			<item>0</item>
+	  			<item>3</item>
+	  			<item>5</item>
+	  		</value>
+	  	</trait>
+	  	<trait id="valid-values-message"><value>bogus validation message</value></trait>
+	  	<trait id="valid-values-severity"><value>99</value></trait>
+	  	<trait id="valid-values-code"><value>X99</value></trait>
+	  	<trait id="default-value"><value>3</value></trait>
   	</entity>    	
   	<entity id="DoubleType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.DoubleType</value>
+  		</trait>
+  		<trait id="valid-minimum"><value>188.23</value></trait>
+  		<trait id="valid-maximum"><value>245.32</value></trait>
+  	</entity>    	
+  	<entity id="EnumeratedDoubleType">
   		<trait id="attribute-value-runtime-type">
   			<value>org.eclipse.jst.jsf.core.attributevalues.DoubleType</value>
   		</trait>
@@ -67,12 +104,49 @@
 	  			<item>1</item>
 	  		</value>
   		</trait>
-  	</entity>    	
-  	<entity id="JavaClassType">
+  		<trait id="default-value"><value>188.23</value></trait>
+  	</entity> 
+  	<entity id="JavaClassType1">
   		<trait id="attribute-value-runtime-type">
   			<value>org.eclipse.jst.jsf.core.attributevalues.JavaClassType</value>
   		</trait>
+ 		<trait id="valid-interfaces">
+			<value>javax.xml.xpath.XPathFunctionResolver</value>
+		</trait>
+  	</entity>  
+  	<entity id="JavaClassType2">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.JavaClassType</value>
+  		</trait>
+ 		<trait id="valid-superclass">
+			<value>com.foo.MyConverter</value>
+		</trait>
   	</entity>   
+  	<entity id="JavaClassType3">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.JavaClassType</value>
+  		</trait>
+ 		<trait id="valid-interfaces">
+			<value>javax.xml.xpath.XPathVariableResolver</value>
+		</trait>  		
+ 		<trait id="valid-superclass">
+			<value>com.foo.MyConverter</value>
+		</trait>
+  	</entity>  
+  	<entity id="JavaClassType4">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.JavaClassType</value>
+  		</trait>
+ 		<trait id="valid-interfaces">
+			<value xsi:type="mdt:ListOfValues">
+				<item>javax.xml.xpath.XPathVariableResolver</item>
+				<item>javax.xml.xpath.XPathFunctionResolver</item>	
+			</value>		
+		</trait>  		
+ 		<trait id="valid-superclass">
+			<value>com.foo.MyConverter</value>
+		</trait>
+  	</entity>  
   	<entity id="MethodBindingType">
   		<trait id="attribute-value-runtime-type">
   			<value>org.eclipse.jst.jsf.core.attributevalues.MethodBindingType</value>

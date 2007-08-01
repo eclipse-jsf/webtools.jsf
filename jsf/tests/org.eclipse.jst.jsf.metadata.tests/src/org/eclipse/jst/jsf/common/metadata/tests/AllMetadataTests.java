@@ -19,11 +19,22 @@ public class AllMetadataTests {
 		TestSuite suite = new TestSuite(
 				"Test for org.eclipse.jst.jsf.common.metadata.tests");
 		//$JUnit-BEGIN$
+		suite.addTestSuite(EmptyResultSetTest.class);
+		suite.addTestSuite(MetaDataExceptionTest.class);
+		suite.addTestSuite(AbstractMetaDataVisitorTest.class);
+		suite.addTestSuite(AbstractEntityQueryVisitorTest.class);
+		suite.addTestSuite(AbstractTraitQueryVisitorTest.class);
+		suite.addTestSuite(TraitValueHelperTests.class);
+		suite.addTestSuite(MetaDataQueryHelperTests.class);
+		suite.addTestSuite(ModelProviderAdapterTests.class);
+		
 		suite.addTestSuite(TraitImplTests.class);
 		suite.addTestSuite(IncludeEntityGroupImplTests.class);
 		suite.addTestSuite(EntityImplTests.class);
-		suite.addTestSuite(MetaDataQueryHelperTests.class);
 		suite.addTestSuite(ModelImplTests.class);
+		suite.addTestSuite(MergeTests.class);
+		suite.addTestSuite(TinyTestTests.class);
+		
 		//$JUnit-END$
 		return suite;
 	}

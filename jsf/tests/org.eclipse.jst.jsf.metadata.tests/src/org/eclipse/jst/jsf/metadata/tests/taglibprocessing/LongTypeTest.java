@@ -13,10 +13,13 @@ package org.eclipse.jst.jsf.metadata.tests.taglibprocessing;
 
 import junit.framework.Assert;
 
+import org.eclipse.jst.jsf.metadataprocessors.features.ELIsNotValidException;
 import org.eclipse.jst.jsf.metadataprocessors.features.IDefaultValue;
+import org.eclipse.jst.jsf.metadataprocessors.features.IValidELValues;
 import org.eclipse.jst.jsf.metadataprocessors.features.IValidValues;
 
 public class LongTypeTest extends TaglibProcessingTestCase {
+
 	public void testPossibleValues(){		
 		Assert.assertNotNull(possibleValueAdapters);
 		Assert.assertTrue(possibleValueAdapters.isEmpty());
@@ -49,7 +52,7 @@ public class LongTypeTest extends TaglibProcessingTestCase {
 		Assert.assertTrue(vv.getValidationMessages().size()==1);
 		vv.getValidationMessages().clear();
 		Assert.assertFalse(vv.isValidValue("2e1"));
-		Assert.assertTrue(vv.getValidationMessages().size()==1);
+		Assert.assertTrue(vv.getValidationMessages().size()==1);		
 	}
 	
 	public void testDefaultValues(){		
@@ -66,5 +69,14 @@ public class LongTypeTest extends TaglibProcessingTestCase {
 		Assert.assertTrue(createValuesAdapters.isEmpty());
 	}
 	
+	public void testGetExpectedReturnType(){
+		Assert.assertNotNull(validELValuesAdapters);
+		IValidELValues vvel = (IValidELValues)validELValuesAdapters.get(0);
+		try {
+			Assert.assertEquals("long", vvel.getExpectedRuntimeType().toUserReadableString());
+		} catch (ELIsNotValidException e) {
+			fail("testGetExpectedReturnType");
+		}
+	}
 	
 }
