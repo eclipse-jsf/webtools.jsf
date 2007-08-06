@@ -14,6 +14,7 @@ package org.eclipse.jst.jsf.designtime.internal.symbols;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.AbstractMap;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -30,32 +31,34 @@ import org.eclipse.jst.jsf.core.internal.tld.LoadBundleUtil;
 
 class ResourceBundleMapSource extends AbstractMap
 {
-    private static final String   PROPERTY_QUALIFIER = "org.eclipse.jst.jsf.designtime.internal.jsp"; //$NON-NLS-1$
-    private static final String   SESSION_PROPERTY_NAME_PROJECT = "ResourceBundleMapSource"; //$NON-NLS-1$
-    private static final QualifiedName  SESSION_PROPERTY_KEY_PROJECT 
-        = new QualifiedName(PROPERTY_QUALIFIER, SESSION_PROPERTY_NAME_PROJECT);
- 
+    private static final String   PROPERTY_QUALIFIER = 
+    	"org.eclipse.jst.jsf.designtime.internal.jsp"; //$NON-NLS-1$
+    private static final String   SESSION_PROPERTY_NAME_PROJECT = 
+    	"ResourceBundleMapSource"; //$NON-NLS-1$
+    private static final QualifiedName  SESSION_PROPERTY_KEY_PROJECT = 
+        new QualifiedName(PROPERTY_QUALIFIER, SESSION_PROPERTY_NAME_PROJECT);
+
     private static IFile    getCachedBundleFile(final IProject project, final String baseName)
     {
         if (project != null)
         {
             return (IFile) getBundleFileCache(project).get(baseName);
         }
-        
+
         return null;
     }
-    
+
     private static Map getBundleFileCache(IProject project)
     {
         synchronized(project)
         {
             Map bundleFileCache = null;
-            
+
             try
             {
                 bundleFileCache = 
                     (Map) project.getSessionProperty(SESSION_PROPERTY_KEY_PROJECT);
-            
+
                 if (bundleFileCache == null)
                 {
                     bundleFileCache = new HashMap();
@@ -66,19 +69,19 @@ class ResourceBundleMapSource extends AbstractMap
             {
                 JSFCorePlugin.log("Error creating bundle file cache", ce); //$NON-NLS-1$
             }
-            
+
             return bundleFileCache;
         }
     }
-    
-    private static IFile    createCachedBundleFile(final IProject project, 
+
+    private static IFile createCachedBundleFile(final IProject project, 
                                                    final String  resourcePathStr)
-                      throws IOException, JavaModelException, CoreException
+                      throws IOException, CoreException
     {
         IStorage storage = LoadBundleUtil.getLoadBundleResource(project, resourcePathStr);
-          
+
         IFile bundleRes = null;
-         
+
         if (storage != null
                 && storage.getAdapter(IFile.class) != null)
         {
@@ -86,39 +89,41 @@ class ResourceBundleMapSource extends AbstractMap
             getBundleFileCache(project).put(resourcePathStr, bundleRes);
             return bundleRes;
         }
-          
+
         throw new IOException("Bundle "+resourcePathStr+" not found in classpath for project: "+project.getName()); //$NON-NLS-1$ //$NON-NLS-2$
     }
-    
+
     private Properties                  _resourceBundle; // = null; set on first access or changes
     private final IFile                 _bundleFile;   // the resource
     // as returned by IResource.getModificationStamp() 
     // the last time _resourceBundle was loaded
     private long                        _lastModificationStamp;
-    
+
     ResourceBundleMapSource(final IProject context, 
                             final String  resourcePathStr)
                                 throws IOException, JavaModelException, CoreException
     {
         IFile cachedBundleFile = getCachedBundleFile(context, resourcePathStr);
-        
+
         if (cachedBundleFile == null)
         {
             cachedBundleFile = createCachedBundleFile(context, resourcePathStr);
         }
-        
+
         _bundleFile = cachedBundleFile;
     }
 
     private void checkAndRefreshBundle()
     {
-        if (_resourceBundle == null
-                || _bundleFile.getModificationStamp() != _lastModificationStamp)
+        if (_bundleFile.isAccessible()
+        		&& (_resourceBundle == null
+        			|| _bundleFile.getModificationStamp() != _lastModificationStamp))
         {
             InputStream  bundleStream = null;
             try
             {
-                bundleStream = _bundleFile.getContents();
+            	// force refresh if out of sync
+                bundleStream = _bundleFile.getContents(true);
                 _resourceBundle = new Properties();
                 _resourceBundle.load(bundleStream);
                 _lastModificationStamp = _bundleFile.getModificationStamp();
@@ -147,10 +152,15 @@ class ResourceBundleMapSource extends AbstractMap
             }
         }
     }
-    
+
     public Set entrySet() 
     {
         checkAndRefreshBundle();
+
+        if (_resourceBundle == null)
+        {
+        	return Collections.EMPTY_SET;
+        }
         return _resourceBundle.entrySet();
     }
 
@@ -162,6 +172,11 @@ class ResourceBundleMapSource extends AbstractMap
     public Object get(Object key) 
     {
         checkAndRefreshBundle();
+
+        if (_resourceBundle == null)
+        {
+        	return null;
+        }
         return _resourceBundle.get(key);
     }
 }
