@@ -95,6 +95,7 @@ class ResourceBundleMapSource extends AbstractMap
 
     private Properties                  _resourceBundle; // = null; set on first access or changes
     private final IFile                 _bundleFile;   // the resource
+    private final String                _resourcePathStr; // the key used in the file cache
     // as returned by IResource.getModificationStamp() 
     // the last time _resourceBundle was loaded
     private long                        _lastModificationStamp;
@@ -111,44 +112,59 @@ class ResourceBundleMapSource extends AbstractMap
         }
 
         _bundleFile = cachedBundleFile;
+        _resourcePathStr = resourcePathStr;
     }
 
     private void checkAndRefreshBundle()
     {
-        if (_bundleFile.isAccessible()
-        		&& (_resourceBundle == null
-        			|| _bundleFile.getModificationStamp() != _lastModificationStamp))
+        if (_bundleFile.isAccessible())
         {
-            InputStream  bundleStream = null;
-            try
+            if (_resourceBundle == null
+                    || _bundleFile.getModificationStamp() 
+                            != _lastModificationStamp)
             {
-            	// force refresh if out of sync
-                bundleStream = _bundleFile.getContents(true);
-                _resourceBundle = new Properties();
-                _resourceBundle.load(bundleStream);
-                _lastModificationStamp = _bundleFile.getModificationStamp();
-            }
-            catch (CoreException ce)
-            {
-                JSFCorePlugin.log("Error refreshing bundle", ce); //$NON-NLS-1$
-            }
-            catch (IOException ioe)
-            {
-                JSFCorePlugin.log("Error refreshing bundle", ioe); //$NON-NLS-1$
-            }
-            finally
-            {
-                if (bundleStream != null)
+                InputStream  bundleStream = null;
+                try
                 {
-                    try
+                	// force refresh if out of sync
+                    bundleStream = _bundleFile.getContents(true);
+                    _resourceBundle = new Properties();
+                    _resourceBundle.load(bundleStream);
+                    _lastModificationStamp = _bundleFile.getModificationStamp();
+                }
+                catch (CoreException ce)
+                {
+                    JSFCorePlugin.log("Error refreshing bundle", ce); //$NON-NLS-1$
+                }
+                catch (IOException ioe)
+                {
+                    JSFCorePlugin.log("Error refreshing bundle", ioe); //$NON-NLS-1$
+                }
+                finally
+                {
+                    if (bundleStream != null)
                     {
-                        bundleStream.close();
-                    }
-                    catch (IOException ioe)
-                    {
-                        JSFCorePlugin.log("Error closing bundle", ioe); //$NON-NLS-1$
+                        try
+                        {
+                            bundleStream.close();
+                        }
+                        catch (IOException ioe)
+                        {
+                            JSFCorePlugin.log("Error closing bundle", ioe); //$NON-NLS-1$
+                        }
                     }
                 }
+            }
+        }
+        else
+        {
+            // bundle no longer exists so remove it
+            Map bundleFileCache = getBundleFileCache(_bundleFile.getProject());
+
+            if (bundleFileCache.containsKey(_resourcePathStr))
+            {
+                bundleFileCache.remove(_resourcePathStr);
+                _resourceBundle = null;
             }
         }
     }
