@@ -10,8 +10,14 @@
  *******************************************************************************/ 
 package org.eclipse.jst.jsf.core.jsfappconfig;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Collections;
+import java.util.jar.JarFile;
+import java.util.zip.ZipEntry;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.EList;
@@ -58,7 +64,7 @@ public class JARFileJSFAppConfigProvider extends AbstractJSFAppConfigProvider {
 	 * Flag to track if load error has been logged at least once.
 	 */
 	protected boolean loadErrorLogged = false;
-
+	
 	/**
 	 * Creates an instance, storing the passed IProject instance and file name
 	 * String to be used for subsequent processing.
@@ -75,33 +81,13 @@ public class JARFileJSFAppConfigProvider extends AbstractJSFAppConfigProvider {
 	 */
 	public FacesConfigType getFacesConfigModel() {
 	    // TODO: should this job be pushed into the model?
-		if (facesConfig == null) {
-			if (filename != null) {
-				StringBuffer sb = new StringBuffer();
-				sb.append(JARFILE_URI_PREFIX);
-				sb.append(filename);
-				sb.append(FACES_CONFIG_IN_JAR_SUFFIX);
-				URI jarFileURI = URI.createURI(sb.toString());
-				FacesConfigResourceFactory resourceFactory = FacesConfigResourceFactory.createResourceFactoryForJar();
-				Resource resource = resourceFactory.createResource(jarFileURI);
-				try {
-					resource.load(Collections.EMPTY_MAP);
-					if (resource != null) {
-						EList resourceContents = resource.getContents();
-						if (resourceContents != null && resourceContents.size() > 0) {
-							facesConfig = (FacesConfigType)resourceContents.get(0);
-							if (facesConfig != null) {
-								jsfAppConfigLocater.getJSFAppConfigManager().addFacesConfigChangeAdapter(facesConfig);
-							}
-						}
-					}
-				} catch(IllegalStateException ise) {
-					//log error
-					logLoadError(ise);
-				} catch(IOException ioe) {
-					//log error
-					logLoadError(ioe);
-				}
+		if (facesConfig == null && filename != null) 
+		{
+			facesConfig = getFacesConfig();
+			
+			if (facesConfig != null)
+			{
+				jsfAppConfigLocater.getJSFAppConfigManager().addFacesConfigChangeAdapter(facesConfig);
 			}
 		}
 		return facesConfig;
@@ -170,4 +156,99 @@ public class JARFileJSFAppConfigProvider extends AbstractJSFAppConfigProvider {
 		return sb.toString();
 	}
 
+	private FacesConfigType getFacesConfig()
+	{
+		JarFile 		jarFile = null;
+		File    		tempFile = null;
+		OutputStream	tempFileStream = null;
+
+		try
+		{
+			jarFile = new JarFile(filename);
+			ZipEntry entry = jarFile.getEntry("META-INF/faces-config.xml");
+
+			if (entry != null)
+			{
+				InputStream stream = jarFile.getInputStream(entry);
+	
+				tempFile = File.createTempFile("tempfile", ".xml");
+				tempFileStream = new FileOutputStream(tempFile);
+	
+				int read = 0;
+				byte[]  buffer = new byte[4096];
+	
+				while ((read = stream.read(buffer)) != -1)
+				{
+					tempFileStream.write(buffer, 0, read);
+				}
+	
+				tempFileStream.close();
+				tempFileStream = null;
+	
+				FacesConfigResourceFactory factory = FacesConfigResourceFactory.createResourceFactoryForJar();
+				//FacesConfigResourceFactory.register(tempFile.toURI().toString());
+				Resource resource = factory.createResource(URI.createFileURI(tempFile.getAbsolutePath()));
+				
+				try {
+					resource.load(Collections.EMPTY_MAP);
+					if (resource != null) {
+						EList resourceContents = resource.getContents();
+						if (resourceContents != null && resourceContents.size() > 0) {
+							facesConfig = (FacesConfigType)resourceContents.get(0);
+							if (facesConfig != null) {
+								jsfAppConfigLocater.getJSFAppConfigManager().addFacesConfigChangeAdapter(facesConfig);
+							}
+						}
+					}
+				} catch(IllegalStateException ise) {
+					//log error
+					logLoadError(ise);
+				} catch(IOException ioe) {
+					//log error
+					logLoadError(ioe);
+				}
+			}
+
+			return facesConfig;
+		}
+		catch (IOException ioe)
+		{
+			logLoadError(ioe);
+			return null;
+		}
+		finally
+		{
+			if (jarFile != null)
+			{
+				try
+				{
+					jarFile.close();
+				}
+				catch (IOException ioe)
+				{
+					logLoadError(ioe);
+				}
+			}
+
+			if (tempFileStream != null)
+			{
+				try
+				{
+					tempFileStream.close();
+				}
+				catch(IOException ioe)
+				{
+					logLoadError(ioe);
+				}
+			}
+
+			if (tempFile != null && tempFile.exists())
+			{
+				if (!tempFile.delete())
+				{
+					tempFile.deleteOnExit();
+				}
+			}
+		}
+	}
 }
