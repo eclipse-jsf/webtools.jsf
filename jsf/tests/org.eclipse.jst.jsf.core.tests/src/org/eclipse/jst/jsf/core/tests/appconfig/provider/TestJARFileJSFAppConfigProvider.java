@@ -15,6 +15,12 @@ import java.util.jar.JarFile;
 
 import junit.framework.TestCase;
 
+import org.eclipse.core.internal.net.ProxyData;
+import org.eclipse.core.internal.net.ProxyManager;
+import org.eclipse.core.net.proxy.IProxyData;
+import org.eclipse.core.net.proxy.IProxyService;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jst.jsf.core.IJSFCoreConstants;
@@ -32,6 +38,7 @@ import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanType;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
+import org.eclipse.wst.common.componentcore.resources.IVirtualContainer;
 
 /**
  * Unit test for JARFileJSFAppConfigProvider, the app config provider
@@ -42,52 +49,96 @@ import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
  */
 public class TestJARFileJSFAppConfigProvider extends TestCase 
 {
+	private final static String NO_EXT_DATA_JAR_PATH= 
+		"/testfiles/appconfig/noextdata.jar";
+	private final static String WITH_EXT_DATA_JAR_PATH= 
+		"/testfiles/appconfig/withextdata.jar";
+	private final static String NO_FACES_CONFIG_FILE=
+		"/testfiles/appconfig/fail2_nofacesconfig.jar";
+	
+	private final static String FAIL_JAR_PATH=
+		"/testfiles/appconfig/fail2.jar";
+	
     private WebProjectTestEnvironment       _testEnv;
     private JDTTestEnvironment              _jdtTestEnv;
     
     private IClasspathEntry                 _noExtData;
     private IClasspathEntry                 _withExtData;
-    
+    private IClasspathEntry					_noFacesConfigFile;
+    private IResource						_copiedIntoProject;
+
     @Override
     protected void setUp() throws Exception 
     {
         super.setUp();
-        
-        JSFTestUtil.setValidationEnabled(false);
-        
-        JSFTestUtil.setInternetProxyPreferences
-                (true, "www-proxy.us.oracle.com", "80");
 
-        _testEnv = new WebProjectTestEnvironment("ELValidationTest_"+this.getClass().getName()+"_"+getName());
+        JSFTestUtil.setValidationEnabled(false);
+
+        setInternetPrefs();
+//        JSFTestUtil.setInternetProxyPreferences
+//            (true, "www-proxy.us.oracle.com", "80");
+
+        _testEnv = new WebProjectTestEnvironment(
+        				"ELValidationTest_"+this.getClass().getName()+"_"+getName());
         _testEnv.createProject(false);
         assertNotNull(_testEnv);       
         assertNotNull(_testEnv.getTestProject());
         assertTrue(_testEnv.getTestProject().isAccessible());
 
+        _copiedIntoProject =_testEnv.loadResourceInWebRoot(
+        	TestsPlugin.getDefault().getBundle()
+        	     , FAIL_JAR_PATH, "WEB-INF/lib/fail2.jar");
+        assertNotNull(_copiedIntoProject);
+        assertTrue(_copiedIntoProject.exists());
+
         _jdtTestEnv = new JDTTestEnvironment(_testEnv);
-        _noExtData = _jdtTestEnv.addJarClasspathEntry(TestsPlugin.getDefault().getBundle(), "/testfiles/appconfig/noextdata.jar");
+        _noExtData = _jdtTestEnv.addJarClasspathEntry(
+        	TestsPlugin.getDefault().getBundle(), NO_EXT_DATA_JAR_PATH);
         assertNotNull(_noExtData);
-        _withExtData = _jdtTestEnv.addJarClasspathEntry(TestsPlugin.getDefault().getBundle(), "/testfiles/appconfig/withextdata.jar");
+
+        _withExtData = _jdtTestEnv.addJarClasspathEntry(
+        	TestsPlugin.getDefault().getBundle(), WITH_EXT_DATA_JAR_PATH);
         assertNotNull(_withExtData);
+
+        _noFacesConfigFile = _jdtTestEnv.addJarClasspathEntry(
+        	TestsPlugin.getDefault().getBundle(), NO_FACES_CONFIG_FILE);
+        assertNotNull(_noFacesConfigFile);
         
-        // initialize test case for faces 1.2
+        // initialize test case for faces 1.1
         JSFFacetedTestEnvironment jsfFacedEnv = new JSFFacetedTestEnvironment(_testEnv);
-        jsfFacedEnv.initialize(IJSFCoreConstants.FACET_VERSION_1_2);
+        jsfFacedEnv.initialize(IJSFCoreConstants.FACET_VERSION_1_1);
     }
-    
-    /**
-     * Tests model load of a simple jar-based faces config file that has no extension data
-     * in it.
+
+    @Override
+	protected void tearDown() throws Exception 
+	{
+		super.tearDown();
+
+		// ensure the project can be deleted (no jar lock: 
+		// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=195867)
+		IVirtualContainer container = _testEnv.getWebRoot(false, false);
+		assertNotNull(container);
+		IFile file = container.getFile("WEB-INF/lib/fail2.jar").getUnderlyingFile();
+		assertNotNull(file);
+		assertTrue(file.exists());
+		_testEnv.getTestProject().delete(true, null);
+		assertFalse(_testEnv.getTestProject().exists());
+		assertFalse(file.exists());
+	}
+
+	/**
+     * Tests model load of a simple jar-based faces config file that has no 
+     * extension data in it.
      */
     public void testNoExtensionData() throws Exception
     {
-        JARFileJSFAppConfigProvider provider = createProvider(_noExtData);
+        JARFileJSFAppConfigProvider provider = createProvider(_noExtData, true);
         FacesConfigType facesConfig = provider.getFacesConfigModel();
         assertNotNull(facesConfig);
 
         verifyCommonElements(facesConfig);
     }
-    
+
     /**
      * This is a regression for https://bugs.eclipse.org/bugs/show_bug.cgi?id=181643
      * 
@@ -99,7 +150,7 @@ public class TestJARFileJSFAppConfigProvider extends TestCase
      */
     public void testWithExtensionData() throws Exception
     {
-        JARFileJSFAppConfigProvider provider = createProvider(_withExtData);
+        JARFileJSFAppConfigProvider provider = createProvider(_withExtData, true);
         FacesConfigType facesConfig = provider.getFacesConfigModel();
         assertNotNull(facesConfig);
 
@@ -115,7 +166,22 @@ public class TestJARFileJSFAppConfigProvider extends TestCase
         // once translation of ANY content is fixed for JAR-contained faces-config models
         assertEquals(0, extType.getChildNodes().size());
     }
-    
+
+    public void testJarCopiedInProject() throws Exception
+    {
+        JARFileJSFAppConfigProvider provider = 
+        	createProvider((IFile) _copiedIntoProject);
+        FacesConfigType facesConfig = provider.getFacesConfigModel();
+        assertNotNull(facesConfig);
+    }
+
+    public void testNoFacesConfigJar() throws Exception
+    {
+        JARFileJSFAppConfigProvider provider = createProvider(_noFacesConfigFile, false);
+        FacesConfigType facesConfig = provider.getFacesConfigModel();
+        assertNull(facesConfig);
+    }
+
     private void verifyCommonElements(FacesConfigType facesConfig)
     {
         assertEquals(1, facesConfig.getComponent().size());
@@ -131,40 +197,64 @@ public class TestJARFileJSFAppConfigProvider extends TestCase
         assertEquals("java.util.List", managedBean.getManagedBeanClass().getTextContent());
         assertEquals("request", managedBean.getManagedBeanScope().getTextContent());
     }
-    
-    private JARFileJSFAppConfigProvider createProvider(IClasspathEntry forJar) throws Exception
+
+    private JARFileJSFAppConfigProvider createProvider(IFile file) throws Exception
     {
-        final String libName = getLibraryName(forJar);
-        
+        final String libName = file.getLocation().toOSString();
+
         IJSFAppConfigLocater locator = new RuntimeClasspathJSFAppConfigLocater();
         locator.setJSFAppConfigManager(JSFAppConfigManager.getInstance(_testEnv.getTestProject()));
         JARFileJSFAppConfigProvider  provider = new JARFileJSFAppConfigProvider(libName);
         provider.setJSFAppConfigLocater(locator);
         return provider;
     }
-    
-    private static String getLibraryName(IClasspathEntry classPathEntry) throws Exception
+
+    private JARFileJSFAppConfigProvider createProvider(IClasspathEntry forJar, boolean assertFacesConfig) throws Exception
+    {
+        final String libName = getLibraryName(forJar, assertFacesConfig);
+
+        IJSFAppConfigLocater locator = new RuntimeClasspathJSFAppConfigLocater();
+        locator.setJSFAppConfigManager(JSFAppConfigManager.getInstance(_testEnv.getTestProject()));
+        JARFileJSFAppConfigProvider  provider = new JARFileJSFAppConfigProvider(libName);
+        provider.setJSFAppConfigLocater(locator);
+        return provider;
+    }
+
+    private static String getLibraryName(IClasspathEntry classPathEntry, boolean assertFacesConfig) throws Exception
     {
         IPath libraryPath = classPathEntry.getPath();
 
         final String libraryPathString = libraryPath.toOSString();         
 
-        JarFile jarFile = null;
-        
-        try
+        if (assertFacesConfig)
         {
-            jarFile = new JarFile(libraryPathString);
-            if (jarFile != null) {
-                JarEntry jarEntry = jarFile.getJarEntry(JSFAppConfigUtils.FACES_CONFIG_IN_JAR_PATH);
-                if (jarEntry != null) {
-                    return libraryPathString;
-                }
-            }
-            return null;
-        } finally {
-            if (jarFile != null) {
-                jarFile.close();
-            }
+	        JarFile jarFile = null;
+	
+	        try
+	        {
+	            jarFile = new JarFile(libraryPathString);
+	            if (jarFile != null) {
+	                JarEntry jarEntry = jarFile.getJarEntry(JSFAppConfigUtils.FACES_CONFIG_IN_JAR_PATH);
+	                assertNotNull(jarEntry);
+	            }
+	        } finally {
+	            if (jarFile != null) {
+	                jarFile.close();
+	            }
+	        }
         }
+        
+        return libraryPathString;
+    }
+
+    private static void setInternetPrefs() throws Exception
+    {
+    	IProxyService proxy = ProxyManager.getProxyManager();
+
+    	ProxyData proxyData = new ProxyData(IProxyData.HTTP_PROXY_TYPE);
+		proxyData.setHost("www-proxy.us.oracle.com");
+		proxyData.setPassword("80");
+		proxy.setProxyData(new ProxyData[] { proxyData });
+		proxy.setProxiesEnabled(true);
     }
 }
