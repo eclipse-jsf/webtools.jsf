@@ -43,7 +43,7 @@ public class TestAbstractDataModelVariableFactory extends TestCase
         JSFTestUtil.setInternetProxyPreferences(true, "www-proxy.us.oracle.com","80");
 
         final WebProjectTestEnvironment  projectTestEnvironment = 
-            new WebProjectTestEnvironment("TestDefaultPropertyResolver"+getName());
+            new WebProjectTestEnvironment("TestAbstractDataModelFactory"+getName());
         projectTestEnvironment.createProject(false);
 
         _jsfFacetedTestEnvironment = new JSFFacetedTestEnvironment(projectTestEnvironment);

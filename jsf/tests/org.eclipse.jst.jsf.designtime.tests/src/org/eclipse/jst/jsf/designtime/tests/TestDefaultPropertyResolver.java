@@ -651,6 +651,7 @@ public class TestDefaultPropertyResolver extends TestCase
     	// TODO: should add coverage for dotted, non-bundles...
     }
     
+    @SuppressWarnings("unchecked")
     private void checkDottedBundleNames() throws Exception
     {
         Map map = 

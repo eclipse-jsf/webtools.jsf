@@ -37,7 +37,8 @@ public class AllTests
         suite.addTestSuite(TestDefaultDTVariableResolver.class);
         suite.addTestSuite(TestDTJSPExternalContext.class);
         suite.addTestSuite(TestJSPDefaultSymbolFactory.class);
-        
+        suite.addTestSuite(TestJSPModelProcessor.class);
+        suite.addTestSuite(TestStartupHandler.class);
         //$JUnit-END$
         return suite;
     }

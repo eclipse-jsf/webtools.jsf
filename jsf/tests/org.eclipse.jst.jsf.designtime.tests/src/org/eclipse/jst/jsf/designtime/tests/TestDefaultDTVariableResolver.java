@@ -43,7 +43,8 @@ public class TestDefaultDTVariableResolver extends TestCase
     private final static String     TESTBEAN1_NAME = "TestBean1";
 
 	
-	protected void setUp() throws Exception 
+	@SuppressWarnings("unchecked")
+    protected void setUp() throws Exception 
 	{
         super.setUp();
         JSFTestUtil.setValidationEnabled(false);

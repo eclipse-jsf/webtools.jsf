@@ -84,7 +84,8 @@ public class TestJSPDefaultSymbolFactory extends TestCase
 		assertTrue(factory.supports(context));
 	}
 
-	public void testCreate()
+	@SuppressWarnings("unchecked")
+    public void testCreate()
 	{
 		final JSPDefaultSymbolFactory factory = new JSPDefaultSymbolFactory();
 
