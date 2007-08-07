@@ -90,7 +90,7 @@ public class JSPTagVariableSymbolSourceProvider extends
             {
             	if (modelProcessor != null)
             	{
-            		JSPModelProcessor.dispose(modelProcessor);
+            		JSPModelProcessor.dispose(fileContext);
             	}
             }
         }

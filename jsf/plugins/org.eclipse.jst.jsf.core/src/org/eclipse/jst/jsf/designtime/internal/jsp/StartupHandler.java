@@ -105,7 +105,7 @@ public class StartupHandler implements IStartup
 		}
 
         public void partClosed(IWorkbenchPartReference partRef) {
-            if (isValidJSPEditor(partRef))
+            if (partRef instanceof IEditorReference)
             {
                 releaseJSPModelListener((IEditorReference) partRef);
             }
@@ -192,9 +192,11 @@ public class StartupHandler implements IStartup
         
         void releaseJSPModelListener(IEditorReference editorRef)
         {
-            if (_processor != null)
+        	IFile file = getIFile(editorRef);
+        	
+            if (file != null)
             {
-                JSPModelProcessor.dispose(_processor);
+                JSPModelProcessor.dispose(file);
             }
         }
         

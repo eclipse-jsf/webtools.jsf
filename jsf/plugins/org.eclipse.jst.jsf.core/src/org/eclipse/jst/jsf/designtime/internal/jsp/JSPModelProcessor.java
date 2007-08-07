@@ -18,13 +18,14 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.core.runtime.QualifiedName;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 import org.eclipse.jst.jsf.common.metadata.Trait;
@@ -64,11 +65,11 @@ import org.w3c.dom.NodeList;
  */
 public class JSPModelProcessor
 {
-    private final static String SESSION_PROPERTY_QUALIFIER = "net.eclipse.jst.jsf.jsp"; //$NON-NLS-1$
-    private final static String SESSION_PROPERTY_NAME_JSPMODELPROCESSOR = "JSPModelProcessor"; //$NON-NLS-1$
-    private final static QualifiedName SESSION_PROPERTY_JSPMODELPROCESSOR_KEY = 
-        new QualifiedName(SESSION_PROPERTY_QUALIFIER,SESSION_PROPERTY_NAME_JSPMODELPROCESSOR);
-
+    private final static Map<IFile, JSPModelProcessor>  RESOURCE_MAP = 
+    	new HashMap<IFile, JSPModelProcessor>();
+    private final static java.util.concurrent.locks.Lock CRITICAL_SECTION =
+    	new  ReentrantLock();
+    
     /**
      * @param file The file to get the model processor for  
      * @return the processor for a particular model, creating it if it does not
@@ -80,59 +81,68 @@ public class JSPModelProcessor
      */
     public static JSPModelProcessor get(IFile file) throws CoreException, IOException
     {
-        synchronized(file)
-        {
-            JSPModelProcessor processor = 
-                (JSPModelProcessor) file.getSessionProperty(SESSION_PROPERTY_JSPMODELPROCESSOR_KEY);
-
-            if (processor == null)
-            {
-                processor = new JSPModelProcessor(file);
-                file.setSessionProperty(SESSION_PROPERTY_JSPMODELPROCESSOR_KEY, processor);
-                processor._refCount = 1;
-            }
-            else
-            {
-            	processor._refCount++;
-            }
-            return processor;
-         }
+		CRITICAL_SECTION.lock();
+		try
+    	{
+			if (!file.isAccessible())
+			{
+				throw new CoreException(new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID, "File must be accessible"));
+			}
+			
+	        JSPModelProcessor processor = RESOURCE_MAP.get(file);
+	
+	        if (processor == null)
+	        {
+	            processor = new JSPModelProcessor(file);
+	            RESOURCE_MAP.put(file, processor);
+	            processor._refCount.set(1);
+	        }
+	        else
+	        {
+	        	// TODO: should lock refCount separately since this 
+	        	// static method does not have exclusive access
+	        	processor._refCount.incrementAndGet();
+	        }
+	        return processor;
+    	}
+    	finally
+    	{
+    		CRITICAL_SECTION.unlock();
+    	}
     }
 
     /**
      * Disposes of the JSPModelProcessor associated with model
-     * @param processor the model processor to be disposed
+     * @param file the model processor to be disposed
      */
-    public static void dispose(JSPModelProcessor processor)
+    public static void dispose(IFile file)
     {
+    	CRITICAL_SECTION.lock();
         try
         {
-        	IFile file = processor._file;
-            synchronized(file)
-            {
-                // TODO: do we need worry about the processor not being 
-                // disposed if the underlying file has been deleted?
-                // TODO: need isLocal check?
-                if (file.isAccessible())
-                {
-                    processor._refCount--;
-
-                    if (processor != null
-                            && !processor.isDisposed
-                            && processor._refCount < 1)
-                    {
-                        file.setSessionProperty(SESSION_PROPERTY_JSPMODELPROCESSOR_KEY, null);
-                        processor.dispose();
-                    }
-                }
-            }
+        	JSPModelProcessor processor = RESOURCE_MAP.get(file);
+        	
+        	if (processor != null)
+        	{
+	            int refCount = processor._refCount.decrementAndGet();
+	
+	            // if either the ref count drops below zero 
+	            // or the file is no longer accessible, the dispose
+	            if (refCount < 1 
+	            		|| !file.isAccessible())
+	            {
+	                RESOURCE_MAP.remove(file);
+	                
+	                if (!processor.isDisposed())
+	                {
+	                	processor.dispose();
+	                }
+	            }
+        	}
         }
-        catch (CoreException ce)
+        finally
         {
-            Platform.getLog(JSFCorePlugin.getDefault().getBundle()).log(
-                new Status(IStatus.ERROR, JSFCorePlugin.getDefault().getBundle().getSymbolicName()
-               		, 0, "Problem disposing JSPModelProcessor"
-               		, new Throwable(ce))); //$NON-NLS-1$
+        	CRITICAL_SECTION.unlock();
         }
     }
 
@@ -145,8 +155,8 @@ public class JSPModelProcessor
     private Map<Object, ISymbol>    _applicationMap;
     private Map<Object, ISymbol>    _noneMap;
     private long                    _lastModificationStamp;
-    private int						_refCount;
-
+    private AtomicInteger			_refCount = new AtomicInteger(0);
+    
     // used to avoid infinite recursion in refresh.  Must never be null
     private final CountingMutex     _lastModificationStampMonitor = new CountingMutex();
 
@@ -155,7 +165,7 @@ public class JSPModelProcessor
      * 
      * @param model
      */
-    private JSPModelProcessor(IFile  file) throws CoreException, IOException
+    private JSPModelProcessor(final IFile  file) throws CoreException, IOException
     {
         _model = getModelForFile(file);
         _modelListener = new ModelListener();
@@ -166,7 +176,7 @@ public class JSPModelProcessor
         _lastModificationStamp = -1;
     }
 
-    private DOMModelForJSP getModelForFile(IFile file) 
+    private DOMModelForJSP getModelForFile(final IFile file) 
             throws CoreException, IOException
     {
         final IModelManager modelManager = 
@@ -179,6 +189,8 @@ public class JSPModelProcessor
             return (DOMModelForJSP) model;
         }
 
+        // only release from read if we don't find a DOMModelForJSP
+        // if the model is correct, it will be released in dispose
         model.releaseFromRead();
 
         throw new CoreException(new Status(IStatus.ERROR, "org.eclipse.blah", 0,  //$NON-NLS-1$
@@ -189,7 +201,7 @@ public class JSPModelProcessor
     {
         if (!isDisposed)
         {
-            _model.releaseFromRead();
+        	_model.releaseFromRead();
             _model.removeModelLifecycleListener(_modelListener);
 
             if (_requestMap != null)
@@ -216,6 +228,7 @@ public class JSPModelProcessor
                 _noneMap = null;
             }
 
+            _refCount.set(0);
             // mark as disposed
             isDisposed = true;
         }
@@ -230,6 +243,16 @@ public class JSPModelProcessor
         return isDisposed;
     }
 
+    /**
+     * Mainly for test and diagnostic purposes.
+     * 
+     * @return the current number of undisposed references to this model processor
+     */
+    public int getRefCount()
+    {
+    	return _refCount.get();
+    }
+    
     /**
      * Updates the internal model
      * @param forceRefresh -- if true, always refreshes, if false,
@@ -566,7 +589,7 @@ public class JSPModelProcessor
                 trait = TaglibDomainMetaDataQueryHelper.getTrait(mdContext, entityKey, VALUE_BINDING_SCOPE);
                 scope = TraitValueHelper.getValueAsString(trait);
 
-                if (scope != null & !scope.equals("")) //$NON-NLS-1$
+                if (scope != null && !scope.equals("")) //$NON-NLS-1$
                 {
                 	trait = TaglibDomainMetaDataQueryHelper.getTrait(mdContext, entityKey, VALUE_BINDING_SYMBOL_FACTORY);
                 	symbolFactory = TraitValueHelper.getValueAsString(trait);                      
@@ -620,7 +643,5 @@ public class JSPModelProcessor
         public synchronized void setSignalled(boolean signalled) {
             this._signalled = signalled;
         }
-        
-
     }
 }
