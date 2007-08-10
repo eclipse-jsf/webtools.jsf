@@ -39,6 +39,6 @@ Export-Package: org.eclipse.jst.jsf.core.tests;x-friends:="org.eclipse.jst.jsf.u
  org.eclipse.jst.jsf.core.tests.set;x-internal:=true,
  org.eclipse.jst.jsf.core.tests.tagmatcher;x-internal:=true,
  org.eclipse.jst.jsf.core.tests.types;x-internal:=true,
- org.eclipse.jst.jsf.core.tests.util;x-friends:="org.eclipse.jst.jsf.contentassist.tests,org.eclipse.jst.jsf.designtime.tests,org.eclipse.jst.jsf.validation.el.tests,org.eclipse.jst.jsf.ui.tests"
+ org.eclipse.jst.jsf.core.tests.util;x-friends:="org.eclipse.jst.jsf.contentassist.tests,org.eclipse.jst.jsf.designtime.tests,org.eclipse.jst.jsf.validation.el.tests,org.eclipse.jst.jsf.ui.tests,org.eclipse.jst.pagedesigner.tests"
 Plugin-Class: org.eclipse.jst.jsf.core.tests.TestsPlugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
