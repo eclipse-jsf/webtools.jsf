@@ -106,9 +106,8 @@ public class WebrootUtil {
 	public static IFolder getWebContentFolder(IProject project) {
 		IPath webContentPath = getWebContentPath(project);
 		IFolder folder = null;
-		if (webContentPath != null) {			
-			folder = project.getFolder(webContentPath.removeFirstSegments(webContentPath.segmentCount() - 1));
-
+		if (webContentPath != null) {
+			folder = project.getFolder(webContentPath.removeFirstSegments(1));
 		}
 		return folder;
 	}
