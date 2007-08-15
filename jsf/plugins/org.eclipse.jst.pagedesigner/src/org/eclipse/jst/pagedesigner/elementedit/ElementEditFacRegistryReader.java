@@ -29,6 +29,9 @@ import org.eclipse.jst.pagedesigner.PDPlugin;
 public class ElementEditFacRegistryReader {
 	static IElementEditFactory[] _handlers = null;
 
+	/**
+	 * @return all available handers for the ext-pt
+	 */
 	public static synchronized IElementEditFactory[] getAllHandlers() {
 		if (_handlers == null) {
 			_handlers = readAllHandlers();
