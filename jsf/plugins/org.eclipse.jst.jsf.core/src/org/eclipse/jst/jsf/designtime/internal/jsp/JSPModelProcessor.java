@@ -188,11 +188,13 @@ public class JSPModelProcessor
         {
             return (DOMModelForJSP) model;
         }
-
-        // only release from read if we don't find a DOMModelForJSP
-        // if the model is correct, it will be released in dispose
-        model.releaseFromRead();
-
+        else if (model != null)
+        {
+            // only release from read if we don't find a DOMModelForJSP
+            // if the model is correct, it will be released in dispose
+            model.releaseFromRead();
+        }
+        
         throw new CoreException(new Status(IStatus.ERROR, "org.eclipse.blah", 0,  //$NON-NLS-1$
                         "model not of expected type", new Throwable())); //$NON-NLS-1$
     }
