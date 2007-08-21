@@ -319,7 +319,175 @@ public interface IJSFConstants
     final static TagIdentifier TAG_IDENTIFIER_GRAPHICIMAGE =
     	TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_HTML, TAG_GRAPHICIMAGE);
 
-	// attribute names
+    /**
+     * TagIdentifier for TAG_COMMANDBUTTON
+     */
+    final static TagIdentifier TAG_IDENTIFIER_COMMANDBUTTON =
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_HTML, TAG_COMMANDBUTTON);
+
+    /**
+     * TagIdentifier for TAG_COMMANDLINK
+     */
+    final static TagIdentifier TAG_IDENTIFIER_COMMANDLINK =
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_HTML, TAG_COMMANDLINK);
+
+    /**
+     * TagIdentifier for TAG_INPUTHIDDEN
+     */
+    final static TagIdentifier TAG_IDENTIFIER_INPUTHIDDEN =
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_HTML, TAG_INPUTHIDDEN);
+
+    /**
+     * TagIdentifier for TAG_MESSAGE
+     */
+    final static TagIdentifier TAG_IDENTIFIER_MESSAGE =
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_HTML, TAG_MESSAGE);
+
+    /**
+     * TagIdentifier for TAG_MESSAGES
+     */
+    final static  TagIdentifier TAG_IDENTIFIER_MESSAGES =
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_HTML, TAG_MESSAGES);
+
+    /**
+     * TagIdentifier for TAG_OUTPUTFORMAT
+     */
+    final static TagIdentifier TAG_IDENTIFIER_OUTPUTFORMAT =
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_HTML, TAG_OUTPUTFORMAT);
+
+    /**
+     * TagIdentifier for TAG_PANELGROUP
+     */
+    final static TagIdentifier TAG_IDENTIFIER_PANEL_GROUP =
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_HTML, TAG_PANELGROUP);
+
+    /**
+     * TagIdentifier for TAG_SELECTBOOLEANCHECKBOX
+     */
+    final static TagIdentifier TAG_IDENTIFIER_SELECTBOOLEANCHECKBOX = 
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_HTML, TAG_SELECTBOOLEANCHECKBOX);
+
+    /**
+     * TagIdentifier for TAG_SELECTMANYCHECKBOX
+     */
+    final static TagIdentifier TAG_IDENTIFIER_SELECTMANYCHECKBOX = 
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_HTML, TAG_SELECTMANYCHECKBOX);
+
+    /**
+     * TagIdentifier for TAG_SELECTMANYLISTBOX
+     */
+    final static TagIdentifier TAG_IDENTIFIER_SELECTMANYLISTBOX = 
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_HTML, TAG_SELECTMANYLISTBOX);
+
+    /**
+     * TagIdentifier for TAG_SELECTMANYMENU
+     */
+    final static  TagIdentifier TAG_IDENTIFIER_SELECTMANYMENU =
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_HTML, TAG_SELECTMANYMENU);
+
+    /**
+     * TagIdentifier for TAG_SELECTONELISTBOX
+     */
+    final static TagIdentifier TAG_IDENTIFIER_SELECTONELISTBOX =
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_HTML, TAG_SELECTONELISTBOX);
+    
+    /**
+     * TagIdentifier for TAG_SELECTONEMENU
+     */
+    final static TagIdentifier TAG_IDENTIFIER_SELECTONEMENU =
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_HTML, TAG_SELECTONEMENU);
+
+    /**
+     * TagIdentifier for TAG_SELECTONERADIO
+     */
+    final static TagIdentifier TAG_IDENTIFIER_SELECTONERADIO =
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_HTML, TAG_SELECTONERADIO);
+
+    /**
+     * TagIdentifier for TAG_ACTIONLISTENER
+     */
+    final static TagIdentifier TAG_IDENTIFIER_ACTIONLISTENER = 
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_CORE, TAG_ACTIONLISTENER);
+
+    /**
+     * TagIdentifier for TAG_ATTRIBUTE
+     */
+    final static TagIdentifier TAG_IDENTIFIER_ATTRIBUTE = 
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_CORE, TAG_ATTRIBUTE);
+
+    /**
+     * TagIdentifier for TAG_CONVERTDATETIME
+     */
+    final static TagIdentifier TAG_IDENTIFIER_CONVERTDATETIME = 
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_CORE, TAG_CONVERTDATETIME);
+
+    /**
+     * TagIdentifier for TAG_CONVERTNUMBER
+     */
+    final static TagIdentifier TAG_IDENTIFIER_CONVERTNUMBER = 
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_CORE, TAG_CONVERTNUMBER);
+
+    /**
+     * TagIdentifier for TAG_CONVERTER
+     */
+    final static TagIdentifier TAG_IDENTIFIER_CONVERTER = 
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_CORE, TAG_CONVERTER);
+
+    /**
+     * TagIdentifier for TAG_PARAM
+     */
+    final static TagIdentifier TAG_IDENTIFIER_PARAM =
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_CORE, TAG_PARAM);
+
+    /**
+     * TagIdentifier for TAG_SELECTITEM
+     */
+    final static TagIdentifier TAG_IDENTIFIER_SELECTITEM = 
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_CORE, TAG_SELECTITEM);
+
+    /**
+     * TagIdentifier for TAG_SELECTITEMS
+     */
+    final static TagIdentifier TAG_IDENTIFIER_SELECTITEMS =
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_CORE, TAG_SELECTITEMS);
+
+    /**
+     * TagIdentifier for TAG_SUBVIEW
+     */
+    final static TagIdentifier TAG_IDENTIFIER_SUBVIEW =
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_CORE, TAG_SUBVIEW);
+
+    /**
+     * TagIdentifier for TAG_VALIDATEDOUBLERANGE
+     */
+    final static TagIdentifier TAG_IDENTIFIER_VALIDATEDOUBLERANGE =
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_CORE, TAG_VALIDATEDOUBLERANGE);
+
+    /**
+     * TagIdentifier for TAG_VALIDATELENGTH
+     */
+    final static TagIdentifier TAG_IDENTIFIER_VALIDATELENGTH =
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_CORE, TAG_VALIDATELENGTH);
+
+    /**
+     * TagIdentifier for TAG_VALIDATELONGRANGE
+     */
+    final static TagIdentifier TAG_IDENTIFIER_VALIDATELONGRANGE =
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_CORE, TAG_VALIDATELONGRANGE);
+
+    /**
+     * TagIdentifier for TAG_VALIDATOR
+     */
+    final static TagIdentifier TAG_IDENTIFIER_VALIDATOR =
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_CORE, TAG_VALIDATOR);
+
+    /**
+     * TagIdentifier for TAG_VALUECHANGELISTENER
+     */
+    final static TagIdentifier TAG_IDENTIFIER_VALUECHANGELISTENER = 
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_CORE, TAG_VALUECHANGELISTENER);
+
+    // attribute names
 	/**
 	 * accept tag attribute name
 	 */
@@ -779,4 +947,5 @@ public interface IJSFConstants
 	 * width tag attribute name
 	 */
 	final static public String ATTR_WIDTH = "width";
+
 }
