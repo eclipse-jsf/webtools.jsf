@@ -55,18 +55,15 @@ public class PaddingWidthMeta extends LengthMeta {
 				}
 			}
 			if (tableEle != null) {
+				//TODO:  Why is only cellpadding being checked?  Why does this class even exist?  What is difference with BorderWidthMeta?   
 				String padding = DOMUtil.getAttributeIgnoreCase(tableEle,
 						"cellpadding");//$NON-NLS-1$
-				if (padding != null) {
-					Length length = (Length) LengthMeta.toLength(padding, style, this
-							.getPercentageType(), getBaseFont(style));
-                    // TODO should not be hardcoded value.  Either should change to a pref
-                    // or a per-component customization.
-                    if (length.getValue() < MIN_PADDING_THRESHOLD)
-                    {
-                        return new Length(MIN_PADDING_THRESHOLD, false);
-                    }
-                    return length;
+				if (padding != null && padding.trim().length() > 0) {//fix for 200592						
+					Object length = LengthMeta.toLength(padding, style, this
+								.getPercentageType(), getBaseFont(style));
+                    if (length instanceof Length && ((Length)length).getValue() >= MIN_PADDING_THRESHOLD)                    
+                        return length;
+                    
 				}
                 // TODO should not be hardcoded value.  Either should change to a pref
                 // or a per-component customization.
