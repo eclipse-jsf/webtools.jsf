@@ -62,7 +62,8 @@ public abstract class TagIdentifier
     
     public final int hashCode()
     {
-        int hashCode = getTagName().hashCode();
+        // use toLowerCase to ensure equals matches
+        int hashCode = getTagName().toLowerCase().hashCode();
         
         String uri = getUri();
         if (uri != null)
@@ -100,7 +101,9 @@ public abstract class TagIdentifier
 
             // uri and tag name must both the same for it to be the same type
             // TODO: the ignore case thing is dependent on the type of container document
-            if (tagName.equalsIgnoreCase((getTagName())))
+            // Use toLower instead of equalsIgnoreCase to ensure that hashCode generates
+            // a hashCode that guarantees x.equals(y) => x.hashCode == y.hashCode
+            if (tagName.toLowerCase().equals((getTagName().toLowerCase())))
             {
                 return true;
             }
