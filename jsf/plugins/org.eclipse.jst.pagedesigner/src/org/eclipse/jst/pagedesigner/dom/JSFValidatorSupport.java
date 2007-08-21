@@ -45,7 +45,8 @@ public class JSFValidatorSupport {
 	 * @param uri
 	 * @param tagName
 	 * @param generateHForm
-	 * @return
+	 * @return the insertion dom position  based on any required containers
+	 * that have been added.
 	 */
 	public static IDOMPosition prepareInsertJSFComponent(IDOMPosition position,
 			String uri, String tagName, boolean generateHForm) {
@@ -64,13 +65,18 @@ public class JSFValidatorSupport {
 	 * @param position
 	 * @param uri
 	 * @param localname
-	 * @return
+	 * @return the new dom position
 	 */
 	public static IDOMPosition prepareInsertJSFComponent(IDOMPosition position,
 			String uri, String localname) {
 		return prepareInsertJSFComponent(position, uri, localname, false);
 	}
 
+	/**
+	 * @param position
+	 * @return the new dom position if a form has been added or position
+	 * otherwise
+	 */
 	public static IDOMPosition prepareForm(IDOMPosition position) {
 		boolean hasform = ValidatorSupport.checkContainer(position, _qnameForm);
 		IDOMPosition newPosition = position;
@@ -89,7 +95,9 @@ public class JSFValidatorSupport {
 	 * movement rules will ensured the position is within view.
 	 * 
 	 * @param position
-	 * @return
+	 * @param uri 
+	 * @param localname 
+	 * @return the new dom position with the view added
 	 */
 	public static IDOMPosition prepareView(IDOMPosition position, String uri,
 			String localname) {
@@ -109,7 +117,7 @@ public class JSFValidatorSupport {
 
 	/**
 	 * @param position
-	 * @return
+	 * @return the new dom position with the view added
 	 */
 	public static IDOMPosition prepareView(IDOMPosition position) {
 		return prepareView(position, null, null);
