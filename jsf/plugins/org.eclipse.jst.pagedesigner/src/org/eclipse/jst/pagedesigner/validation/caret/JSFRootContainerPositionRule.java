@@ -25,6 +25,13 @@ import org.w3c.dom.Node;
  * @author mengbo
  */
 public class JSFRootContainerPositionRule extends DefaultPositionRule {
+    
+    private final static int  DEFAULT_MAX_DEPTH_SEARCH = 3;
+    
+	/**
+	 * TODO: this is not enough because it ignores the uri and keys on only
+	 * the name of the tag.
+	 */
 	public static final String[] JSF_ROOT_CONTAINERS = { "view", "subview" };
 
 	/**
@@ -43,7 +50,7 @@ public class JSFRootContainerPositionRule extends DefaultPositionRule {
 	 */
 	public boolean hasEditableArea(Target target) {
 		Node node = target.getNode();
-		if (hasBasicContainers(EditModelQuery.getDocumentNode(node))) {
+		if (hasBasicContainers(EditModelQuery.getDocumentNode(node),DEFAULT_MAX_DEPTH_SEARCH)) {
             ActionData actionData = getActionData();
 			if (actionData instanceof DropActionData) {
                 DropActionData dropActionData = (DropActionData) actionData;
@@ -77,7 +84,7 @@ public class JSFRootContainerPositionRule extends DefaultPositionRule {
 	public boolean isEditable(Target target) {
 		boolean result = true;
 		Node node = target.getNode();
-		if (hasBasicContainers(EditModelQuery.getDocumentNode(node))) {
+		if (hasBasicContainers(EditModelQuery.getDocumentNode(node), DEFAULT_MAX_DEPTH_SEARCH)) {
             ActionData actionData = getActionData();
             if (actionData instanceof DropActionData) {
                 DropActionData dropActionData = (DropActionData) actionData;
@@ -99,12 +106,15 @@ public class JSFRootContainerPositionRule extends DefaultPositionRule {
 		return super.isEditable(target);
 	}
 
-	public static boolean isWithinkBasicContainer(Node node) {
-		return EditModelQuery.isChild(JSF_ROOT_CONTAINERS, node, false, false);
-	}
 
-	public static Node getBasicContainer(Document document) {
-		Node node = EditModelQuery.getChild(document, JSF_ROOT_CONTAINERS, 3,
+	/**
+	 * @param document
+	 * @param maxDepth 
+	 * @return the closest tag called "view" or "subview" to the root of document
+	 * search to a maximum tag depth of maxDepth
+	 */
+	public static Node getBasicContainer(Document document, int maxDepth) {
+		Node node = EditModelQuery.getChild(document, JSF_ROOT_CONTAINERS, maxDepth,
 				false);
 		return node;
 	}
@@ -114,10 +124,12 @@ public class JSFRootContainerPositionRule extends DefaultPositionRule {
 	 * second level.
 	 * 
 	 * @param document
-	 * @return
+	 * @param maxDepth 
+	 * @return true if document has a view and subview limited to a maximum search
+	 * depth of maxDepth
 	 */
-	public static boolean hasBasicContainers(Document document) {
-		return getBasicContainer(document) != null;
+	public static boolean hasBasicContainers(Document document, int maxDepth) {
+		return getBasicContainer(document, maxDepth) != null;
 	}
 
 	/*

@@ -27,13 +27,20 @@ import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
+/**
+ * Called in response to a Ctrl-A-style select all action
+ *
+ */
 public class SelectAllCommand extends Command {
 	private IHTMLGraphicalViewer _viewer;
 
+	/**
+	 * @param label
+	 * @param viewer
+	 */
 	public SelectAllCommand(String label, IHTMLGraphicalViewer viewer) {
 		super(label);
 		_viewer = viewer;
-		// TODO Auto-generated constructor stub
 	}
 
 	public void execute() {
@@ -43,7 +50,7 @@ public class SelectAllCommand extends Command {
 		Node htmlRoot = RootContainerPositionRule
 				.getBasicContainer((Document) document);
 		Node jsfRoot = JSFRootContainerPositionRule
-				.getBasicContainer((Document) document);
+				.getBasicContainer((Document) document, 3);
 		Node root;
 		if (htmlRoot != null && jsfRoot != null) {
 			if (EditModelQuery.isChild(htmlRoot, jsfRoot)) {

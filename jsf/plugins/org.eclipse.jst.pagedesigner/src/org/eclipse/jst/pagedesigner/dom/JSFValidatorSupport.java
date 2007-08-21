@@ -34,6 +34,8 @@ public class JSFValidatorSupport {
 	static private QName _qnameForm = new QName(ITLDConstants.URI_JSF_HTML,
 			IJSFConstants.TAG_FORM);
 
+	private static final int  MAX_DEPTH_TO_SEARCH_FOR_CONTAINER = 10;
+	
 //	static private QName[] _views = new QName[] { _qnameView,
 //			new QName(IJMTConstants.URI_JSF_CORE, IJSFConstants.TAG_SUBVIEW) };
 
@@ -104,7 +106,7 @@ public class JSFValidatorSupport {
 		//Node view = null;
 		Document document = EditModelQuery.getDocumentNode(position
 				.getContainerNode());
-		if (JSFRootContainerPositionRule.getBasicContainer(document) == null) {
+		if (!JSFRootContainerPositionRule.hasBasicContainers(document, MAX_DEPTH_TO_SEARCH_FOR_CONTAINER)) {
 			if (!(IJSFConstants.TAG_VIEW.equals(localname))) {
 				position = BodyHelper.insertBody(position, _qnameView, "f");
 			}
