@@ -172,7 +172,8 @@ public class JSFFileURL implements FileURL {
 	private boolean isValidKnownExtension(String fileExtension) {
 		if ((	fileExtension.equalsIgnoreCase("jsp") ||  //$NON-NLS-1$
 				fileExtension.equalsIgnoreCase("jspx") ||  //$NON-NLS-1$
-				fileExtension.equalsIgnoreCase("jsf"))) //$NON-NLS-1$
+				fileExtension.equalsIgnoreCase("jsf") || //$NON-NLS-1$
+				fileExtension.equalsIgnoreCase("xhtml"))) //$NON-NLS-1$
 			return true;
 
 		return false;
