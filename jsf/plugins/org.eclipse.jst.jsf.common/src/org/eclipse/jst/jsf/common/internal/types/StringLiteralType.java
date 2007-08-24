@@ -74,7 +74,7 @@ public class StringLiteralType extends LiteralType
             {
                 if ("".equals(_literalValue)) //$NON-NLS-1$
                 {
-                    return new Long(0L);
+                    return Long.valueOf(0L);
                 }
                 return Long.valueOf(_literalValue);
             }
@@ -82,7 +82,7 @@ public class StringLiteralType extends LiteralType
             {
                 if ("".equals(_literalValue)) //$NON-NLS-1$
                 {
-                    return new Integer(0);
+                    return Integer.valueOf(0);
                 }
                 return Integer.valueOf(_literalValue);
             }
@@ -90,7 +90,7 @@ public class StringLiteralType extends LiteralType
             {
                 if ("".equals(_literalValue)) //$NON-NLS-1$
                 {
-                    return new Short((short)0);
+                    return Short.valueOf((short)0);
                 }
                 return Short.valueOf(_literalValue);
             }
@@ -98,7 +98,7 @@ public class StringLiteralType extends LiteralType
             {
                 if ("".equals(_literalValue)) //$NON-NLS-1$
                 {
-                    return new Byte((byte)0);
+                    return Byte.valueOf((byte)0);
                 }
                 return Byte.valueOf(_literalValue);
             }

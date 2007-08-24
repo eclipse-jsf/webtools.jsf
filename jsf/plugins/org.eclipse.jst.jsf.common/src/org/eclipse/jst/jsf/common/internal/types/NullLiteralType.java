@@ -70,19 +70,19 @@ public class NullLiteralType extends LiteralType
         }
         else if (T == Long.class || T == Long.TYPE)
         {
-            return new Long(0L);
+            return Long.valueOf(0L);
         }
         else if (T == Integer.class || T == Integer.TYPE)
         {
-            return new Integer(0);
+            return Integer.valueOf(0);
         }
         else if (T == Short.class || T == Short.TYPE)
         {
-            return new Short((short)0);
+            return Short.valueOf((short)0);
         }
         else if (T == Byte.class || T == Byte.TYPE)
         {
-            return new Byte((byte)0);
+            return Byte.valueOf((byte)0);
         }
         else
         {

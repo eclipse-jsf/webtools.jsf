@@ -51,15 +51,15 @@ public abstract class NumericTypeLiteral extends LiteralType
         }
         else if (T == Integer.class || T == Integer.TYPE)
         {
-            return new Integer(boxedLiteralValue.intValue());
+            return Integer.valueOf(boxedLiteralValue.intValue());
         }
         else if (T == Short.class || T == Short.TYPE)
         {
-            return new Short(boxedLiteralValue.shortValue());
+            return Short.valueOf(boxedLiteralValue.shortValue());
         }
         else if (T == Byte.class || T == Byte.TYPE)
         {
-            return new Byte(boxedLiteralValue.byteValue());
+            return Byte.valueOf(boxedLiteralValue.byteValue());
         }
         else
         {

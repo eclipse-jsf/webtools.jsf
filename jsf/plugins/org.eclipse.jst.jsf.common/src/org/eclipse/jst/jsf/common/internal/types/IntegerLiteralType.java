@@ -43,7 +43,7 @@ public class IntegerLiteralType extends NumericTypeLiteral
     
     protected Number getBoxedValue() 
     {
-        return new Long(_literalValue);
+        return Long.valueOf(_literalValue);
     }
 
     /**
