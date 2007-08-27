@@ -115,7 +115,7 @@ public class TestTypeUtil extends TestCase
 //            new JDTBeanIntrospector(_testBeanSubclassType);
 //        
 //        _subClassProperties = beanIntrospector.getProperties();
-        
+
 //        beanIntrospector = 
 //            new JDTBeanIntrospector(_testBeanGenericType);
     }
@@ -211,8 +211,10 @@ public class TestTypeUtil extends TestCase
         
         assertEquals("Ljava.lang.String;", TypeUtil.resolveTypeSignature(_testBean1Type, "!+QString;", typeErasure));
         
+        // test regression on https://bugs.eclipse.org/bugs/show_bug.cgi?id=197506
+        assertEquals("Ljava.lang.Object;", TypeUtil.resolveTypeSignature(_testBean1Type, "*", typeErasure));
     }
-    
+
     public void testCanNeverBeEqual()
     {
     	// one of the arguments is the enum base

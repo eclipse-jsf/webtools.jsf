@@ -142,7 +142,7 @@ public class TestJDTBeanIntrospector extends TestCase
         // is inherited
         checkMapSanity(_subClassProperties, NUM_PROPS+1);
         
-        checkMapSanity(_genericTypeProperties, 5);
+        checkMapSanity(_genericTypeProperties, 6);
     }
 
     private void checkMapSanity(Map<String, JDTBeanProperty> properties, int numProps)
@@ -569,7 +569,7 @@ public class TestJDTBeanIntrospector extends TestCase
         JDTBeanProperty property = _genericTypeProperties.get("listOfListOfStrings");
         assertEquals("Ljava.util.List;", property.getTypeSignature(true));
         assertEquals("Ljava.util.List<Ljava.util.List<Ljava.lang.String;>;>;", property.getTypeSignature(false));
-        
+
         assertEquals(1, property.getTypeParameterSignatures().size());
         assertEquals("Ljava.util.List<Ljava.lang.String;>;", property.getTypeParameterSignatures().get(0));
     }
@@ -579,10 +579,20 @@ public class TestJDTBeanIntrospector extends TestCase
         JDTBeanProperty property = _genericTypeProperties.get("mapOfString_String");
         assertEquals("Ljava.util.Map;", property.getTypeSignature(true));
         assertEquals("Ljava.util.Map<Ljava.lang.String;Ljava.lang.String;>;", property.getTypeSignature(false));
-        
+
         assertEquals(2, property.getTypeParameterSignatures().size());
         assertEquals("Ljava.lang.String;", property.getTypeParameterSignatures().get(0));
         assertEquals("Ljava.lang.String;", property.getTypeParameterSignatures().get(1));
     }
 
+    // test regression of https://bugs.eclipse.org/bugs/show_bug.cgi?id=197506
+    public void testUnboundedProperty_List() throws Exception
+    {
+        JDTBeanProperty property = _genericTypeProperties.get("unboundedList");
+        assertEquals("Ljava.util.List;", property.getTypeSignature(true));
+        assertEquals("Ljava.util.List<Ljava.lang.Object;>;", property.getTypeSignature(false));
+
+        assertEquals(1, property.getTypeParameterSignatures().size());
+        assertEquals("Ljava.lang.Object;", property.getTypeParameterSignatures().get(0));
+    }
 }

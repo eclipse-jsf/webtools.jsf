@@ -26,4 +26,9 @@ public class TestBeanGeneric
     {
         return new HashMap<String, String>();
     }
+
+    public List<?> getUnboundedList()
+    {
+        return new ArrayList<Object>();
+    }
 }
