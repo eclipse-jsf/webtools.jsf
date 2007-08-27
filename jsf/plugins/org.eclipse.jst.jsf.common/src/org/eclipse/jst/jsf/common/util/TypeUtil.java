@@ -151,6 +151,10 @@ public final class TypeUtil
             case Signature.WILDCARD_TYPE_SIGNATURE:
                 // strip the wildcard and try again.  Too bad Signature doesn't seem to have a method
                 // for this
+                if (typeSignature.charAt(0) == Signature.C_STAR)
+                {
+                    return TypeConstants.TYPE_JAVAOBJECT;
+                }
                 return resolveTypeSignature(owningType, typeSignature.substring(1), eraseTypeParameters);
             
             case Signature.CAPTURE_TYPE_SIGNATURE:
