@@ -63,8 +63,12 @@ public class ActionType extends MethodBindingType implements IPossibleValues{
 		//optimize
 		IWorkspaceContextResolver wr = IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver(getStructuredDocumentContext());
 		if (wr == null)
-			return false;//shouldn't get here
+			return true;//shouldn't get here
 		
+		//in case that this is not JSF faceted or missing configs, need to pass
+		if (JSFAppConfigManager.getInstance(wr.getProject()) == null) 
+			return true;
+			
 		IFile jsp = (IFile)wr.getResource();
 		List rules = JSFAppConfigManager.getInstance(wr.getProject()).getNavigationRulesForPage(jsp);
 		for(Iterator it=rules.iterator();it.hasNext();){
@@ -79,18 +83,15 @@ public class ActionType extends MethodBindingType implements IPossibleValues{
 		getValidationMessages().add(msg);
 		return false;
 		
-		
-
 	}
 	
 	/* (non-Javadoc)
 	 * @see org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValues#getPossibleValues()
 	 */
 	public List getPossibleValues() {
-		// TODO getNavigationRules for this page from JSFAppMgr
 		List ret = new ArrayList();
 		IWorkspaceContextResolver wr = IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver(getStructuredDocumentContext());
-		if (wr != null){
+		if (wr != null && JSFAppConfigManager.getInstance(wr.getProject()) != null) {//may not be JSF faceted project or know faces-config){			
 			IFile jsp = (IFile)wr.getResource();
 			List rules = JSFAppConfigManager.getInstance(wr.getProject()).getNavigationRulesForPage(jsp);
 			for(Iterator it=rules.iterator();it.hasNext();){
