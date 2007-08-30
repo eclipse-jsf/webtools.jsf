@@ -28,6 +28,7 @@ import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jst.common.project.facet.core.ClasspathHelper;
 import org.eclipse.jst.j2ee.classpathdep.ClasspathDependencyUtil;
 import org.eclipse.jst.j2ee.classpathdep.IClasspathDependencyConstants;
 import org.eclipse.jst.j2ee.internal.J2EEVersionConstants;
@@ -134,7 +135,7 @@ public final class JSFFacetInstallDelegate implements IDelegate {
 			path = cp.append(new Path(libref.getID()));
 			entry = getNewCPEntry(path, libref);		
 			cpEntries.add(entry);
-		}
+		} 
 
 		JSFLibraryInternalReference[] compLibs = (JSFLibraryInternalReference[])config.getProperty(IJSFFacetInstallDataModelProperties.COMPONENT_LIBRARIES);
 		for (int i=0;i<compLibs.length;i++){
@@ -147,6 +148,18 @@ public final class JSFFacetInstallDelegate implements IDelegate {
 		}	
 
 		JSFLibraryRegistryUtil.setRawClasspath(javaProject, cpEntries, monitor);
+	
+		//allow for the raw classpath to be set from JSF Libs before setting the server supplied impl libs from the server, if available
+		if (config.getProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION_TYPE_PROPERTY_NAME) 
+				== IJSFFacetInstallDataModelProperties.IMPLEMENTATION_TYPE.SERVER_SUPPLIED) {
+			try {
+				ClasspathHelper.removeClasspathEntries(project, fv);
+				ClasspathHelper.addClasspathEntries(project, fv);
+			} catch (CoreException e) {
+				JSFCorePlugin.log(IStatus.ERROR, "Unable to add server supplied implementation to the classpath.", e);//$NON-NLS-1$
+			}
+		}
+		
 	}
 
 	/**

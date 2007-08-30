@@ -70,4 +70,17 @@ public final class JSFLibraryConfigurationHelper {
 		IPath path = cpEntry.getPath();
 		return path != null && path.segmentCount() == 2 && JSF_LIBRARY_CP_CONTAINER_ID.equals(path.segment(0));
 	}
+	
+	/**
+	 * @param project
+	 * @return true if the JSF Faceted project is configured to use system supplied implementation
+	 */
+	public static boolean isConfiguredForSystemSuppliedImplementation(IProject project) {
+		Collection<JSFLibraryReference> refs = getJSFLibraryReferences(project);
+		for(JSFLibraryReference ref : refs){			
+			if (ref instanceof JSFLibraryReferenceServerSupplied)
+				return true;
+		}
+		return false;
+	}
 }

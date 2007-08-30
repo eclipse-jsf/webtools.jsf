@@ -17,11 +17,13 @@ import java.util.List;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jst.common.project.facet.core.ClasspathHelper;
 import org.eclipse.jst.j2ee.model.IModelProvider;
 import org.eclipse.jst.j2ee.model.ModelProviderManager;
 import org.eclipse.jst.javaee.core.ParamValue;
@@ -55,7 +57,7 @@ public final class JSFFacetUninstallDelegate implements IDelegate {
 
 			try {
 				// Remove JSF Libraries
-				removeJSFLibaries(project, monitor);
+				removeJSFLibaries(project, fv, monitor);
 
 				// remove servlet stuff from web.xml
 				uninstallJSFReferencesFromWebApp(project, monitor);
@@ -76,7 +78,7 @@ public final class JSFFacetUninstallDelegate implements IDelegate {
 	 * @param project
 	 * @param monitor
 	 */
-	private void removeJSFLibaries(final IProject project, final IProgressMonitor monitor) {
+	private void removeJSFLibaries(final IProject project, final IProjectFacetVersion fv, final IProgressMonitor monitor) {
 		 final IJavaProject jproj = JavaCore.create(project);
 		 List keptEntries = new ArrayList();
 		 try {
@@ -101,6 +103,11 @@ public final class JSFFacetUninstallDelegate implements IDelegate {
 			}
 		 }	
 		
+		try {
+			ClasspathHelper.removeClasspathEntries(project, fv);				
+		} catch (CoreException e) {
+			JSFCorePlugin.log(IStatus.ERROR, "Unable to remove server supplied implementation from the classpath.", e);//$NON-NLS-1$
+		}
 	}
 	
 	private void uninstallJSFReferencesFromWebApp(final IProject project,
