@@ -499,9 +499,8 @@
 		</entity>
 		<entity id="height">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
+				<value>org.eclipse.jst.jsf.core.attributevalues.LengthType</value>
 			</trait>
-			<trait id="valid-minimum"><value>0</value></trait>
 		</entity>
 		<entity id="id">
 			<trait id="attribute-value-runtime-type">
@@ -677,9 +676,8 @@
 		</entity>
 		<entity id="width">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
+				<value>org.eclipse.jst.jsf.core.attributevalues.LengthType</value>
 			</trait>
-			<trait id="valid-minimum"><value>0</value></trait>	
 		</entity>
 	</entityGroup>
 </md:metadatamodel>

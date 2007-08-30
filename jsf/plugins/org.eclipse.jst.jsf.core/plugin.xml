@@ -193,7 +193,13 @@
             id="attributevalues.ComponentBindingType"/>            
       <attributeValueRuntimeType
             class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.ComponentIDType"
-            id="attributevalues.ComponentIDType"/>                  
+            id="attributevalues.ComponentIDType"/>
+      <attributeValueRuntimeType
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.LengthType"
+            id="attributevalues.LengthType"/>           
+      <attributeValueRuntimeType
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.ColorType"
+            id="attributevalues.ColorType"/>          
    </extension>
    
    <extension

@@ -123,4 +123,12 @@ public class Messages extends NLS {
      * see messages.properties
      */
 	public static String ValueType_invalid_value_without_setter;
+    /**
+     * see messages.properties
+     */	
+	public static String LengthType_invalid_integer;
+    /**
+     * see messages.properties
+     */	
+	public static String ColorType_invalid_color;
 }
