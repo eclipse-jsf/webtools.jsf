@@ -50,6 +50,14 @@
   		<trait id="valid-maximum"><value>255</value></trait>
   		<trait id="default-value"><value>10</value></trait>
   	</entity> 
+  	<entity id="LengthType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.LengthType</value>
+  		</trait>
+  		<trait id="valid-minimum"><value>0%</value></trait> <!-- Check that min/max are ignored. Not valid for length type -->
+  		<trait id="valid-maximum"><value>100%</value></trait>
+  		<trait id="default-value"><value>100%</value></trait>
+  	</entity> 
   	<entity id="EnumeratedIntegerType">
   		<trait id="attribute-value-runtime-type">
   			<value>org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
@@ -151,6 +159,12 @@
   		<trait id="attribute-value-runtime-type">
   			<value>org.eclipse.jst.jsf.core.attributevalues.MethodBindingType</value>
   		</trait>
-  	</entity>   
+  	</entity>
+  	<entity id="ColorType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.ColorType</value>
+  		</trait>
+  		<trait id="default-value"><value>Black</value></trait>
+  	</entity>    
   </entity>
  </md:metadatamodel>

@@ -35,6 +35,7 @@ import org.eclipse.jst.jsf.metadata.tests.metadataprocessing.AttributeValueRunti
 import org.eclipse.jst.jsf.metadata.tests.metadataprocessing.MetaDataProcessorsFactoryTests;
 import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.ActionTypeTests;
 import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.BooleanTypeTest;
+import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.ColorTypeTest;
 import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.ComponentBindingTypeTests;
 import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.ComponentIDTypeTests;
 import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.DoubleTypeTest;
@@ -44,8 +45,10 @@ import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.EnumeratedLongTypeTes
 import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.FacesConfigConverterIDTypeTests;
 import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.FacesConfigValidatorIDTypeTests;
 import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.IntegerTypeTest;
+import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.JSFCoreTestCase;
 import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.JSFHTMLTestCase;
 import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.JavaClassTypeTest;
+import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.LengthTypeTest;
 import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.LongTypeTest;
 import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.MethodBindingTypeTests;
 import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.StringTypeTest;
@@ -111,8 +114,11 @@ public class AllTests {
 		addTestSuite(suite, ValueBindingTypeTests.class);
 		addTestSuite(suite, ValueTypeTests.class);
 		addTestSuite(suite, ActionTypeTests.class);
+		addTestSuite(suite, LengthTypeTest.class);
+		addTestSuite(suite, ColorTypeTest.class);
 		
 		addTestSuite(suite, JSFHTMLTestCase.class);
+//		addTestSuite(suite, JSFCoreTestCase.class);
 		//$JUnit-END$
 		return suite;
 	}
