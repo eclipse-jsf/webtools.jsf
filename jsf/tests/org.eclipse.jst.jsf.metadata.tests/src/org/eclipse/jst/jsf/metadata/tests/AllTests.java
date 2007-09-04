@@ -28,6 +28,8 @@ import org.eclipse.jst.jsf.common.metadata.tests.ModelProviderAdapterTests;
 import org.eclipse.jst.jsf.common.metadata.tests.TinyTestTests;
 import org.eclipse.jst.jsf.common.metadata.tests.TraitImplTests;
 import org.eclipse.jst.jsf.common.metadata.tests.TraitValueHelperTests;
+import org.eclipse.jst.jsf.core.JSFVersion;
+import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
 import org.eclipse.jst.jsf.metadata.tests.annotations.DisableCMAnnotationFilesAPITest;
 import org.eclipse.jst.jsf.metadata.tests.metadataprocessing.AttributeValueRuntimeTypeExtensionsTests;
 import org.eclipse.jst.jsf.metadata.tests.metadataprocessing.AttributeValueRuntimeTypeFactoryTests;
@@ -56,7 +58,6 @@ import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.ValueBindingTypeTests
 import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.ValueTypeTests;
 import org.eclipse.jst.jsf.metadata.tests.util.IJSFRuntimeRequiredV11;
 import org.eclipse.jst.jsf.metadata.tests.util.IJSFRuntimeRequiredV12;
-import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 
 public class AllTests {
 
@@ -123,10 +124,10 @@ public class AllTests {
 		return suite;
 	}
 
-	private static void addTestSuite(TestSuite suite, Class klass) {
+	private static void addTestSuite(TestSuite suite, Class<?> klass) {
 		if (!_inited) {
-			_jsfRuntimePresentV11 = JSFTestUtil.isJSFRuntimeJarsDirectoryPropertySet("1.1");
-			_jsfRuntimePresentV12 = JSFTestUtil.isJSFRuntimeJarsDirectoryPropertySet("1.2");
+			_jsfRuntimePresentV11 = JSFCoreUtilHelper.isJSFRuntimeJarsDirectoryPropertySet(JSFVersion.V1_1);
+			_jsfRuntimePresentV12 = JSFCoreUtilHelper.isJSFRuntimeJarsDirectoryPropertySet(JSFVersion.V1_2);
 			_inited = true;
 		}
 		if (IJSFRuntimeRequiredV11.class.isAssignableFrom(klass)){

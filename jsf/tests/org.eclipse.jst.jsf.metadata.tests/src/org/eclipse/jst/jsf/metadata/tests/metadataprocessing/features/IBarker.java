@@ -18,5 +18,5 @@ import org.eclipse.jst.jsf.metadataprocessors.IMetaDataEnabledFeature;
 public interface IBarker extends IMetaDataEnabledFeature {
 
 	public boolean canBark();
-	public List getBarks();
+	public List<?> getBarks();
 }

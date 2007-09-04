@@ -124,7 +124,7 @@ public class MetaDataProcessorsFactoryTests extends AbstractBaseMetaDataTestCase
 //	}
 	
 	private void dumpPossibleValues(IPossibleValues p){
-		Iterator it = p.getPossibleValues().iterator();
+		Iterator<?> it = p.getPossibleValues().iterator();
 		while (it.hasNext()){
 			Object obj = it.next();
 			if (obj instanceof String)

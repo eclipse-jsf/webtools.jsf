@@ -142,7 +142,7 @@ public class TraitValueHelperTests extends ConfigurableTestCase {
 		Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(entity, "multivalStrings");
 		Assert.assertNotNull(trait);
 		Assert.assertTrue(TraitValueHelper.getValueAsListOfStrings(trait) instanceof List);
-		List vals = TraitValueHelper.getValueAsListOfStrings(trait);
+		List<?> vals = TraitValueHelper.getValueAsListOfStrings(trait);
 		Assert.assertEquals(3, vals.size());
 		Assert.assertTrue(vals.get(0) instanceof String);
 		Assert.assertEquals("A", (String)vals.get(0));
@@ -175,7 +175,7 @@ public class TraitValueHelperTests extends ConfigurableTestCase {
 		Assert.assertNotNull(trait);
 		Assert.assertNotNull(trait.getValue());
 		Assert.assertTrue(trait.getValue() instanceof ListOfValues);
-		List vals = TraitValueHelper.getValueAsListOfStrings(trait);
+		List<?> vals = TraitValueHelper.getValueAsListOfStrings(trait);
 		Assert.assertEquals(2, vals.size());
 		Assert.assertEquals("a day in the life(en_US)", vals.get(0));
 		Assert.assertEquals("another string(en_US)", vals.get(1));

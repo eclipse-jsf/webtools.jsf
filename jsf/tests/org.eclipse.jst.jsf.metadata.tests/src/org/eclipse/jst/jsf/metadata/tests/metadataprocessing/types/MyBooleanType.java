@@ -21,7 +21,7 @@ import org.eclipse.jst.jsf.taglibprocessing.attributevalues.BooleanType;
  */
 public class MyBooleanType extends BooleanType {
 
-	public List getPossibleValues() {
+	public List<?> getPossibleValues() {
 		System.out.println("MyBooleanType: getPossibleValues()");
 		return super.getPossibleValues();
 	}

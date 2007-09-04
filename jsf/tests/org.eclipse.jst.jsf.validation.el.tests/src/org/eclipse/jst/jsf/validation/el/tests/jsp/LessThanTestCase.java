@@ -3,9 +3,10 @@ package org.eclipse.jst.jsf.validation.el.tests.jsp;
 import java.util.List;
 
 import org.eclipse.jdt.core.Signature;
-import org.eclipse.jst.jsf.core.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
+import org.eclipse.wst.validation.internal.provisional.core.IMessage;
 
 /**
  * Test cases for less than (<, lt)
@@ -16,7 +17,7 @@ public class LessThanTestCase extends SingleJSPTestCase
 {
     public LessThanTestCase() 
     {
-        super("/testdata/jsps/lessThan.jsp.data", "/lessThan.jsp", IJSFCoreConstants.FACET_VERSION_1_1,FACES_CONFIG_FILE_NAME_1_1);
+        super("/testdata/jsps/lessThan.jsp.data", "/lessThan.jsp", JSFVersion.V1_1,FACES_CONFIG_FILE_NAME_1_1);
     }
 
     protected void setUp() throws Exception 
@@ -102,7 +103,7 @@ public class LessThanTestCase extends SingleJSPTestCase
 
     public void testWarningExprs() 
     {
-        List list = assertSemanticWarning(2054, Signature.SIG_BOOLEAN, 1);
+        List<IMessage> list = assertSemanticWarning(2054, Signature.SIG_BOOLEAN, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID);
 
         list = assertSemanticWarning(2090, Signature.SIG_BOOLEAN, 1);
@@ -148,7 +149,7 @@ public class LessThanTestCase extends SingleJSPTestCase
 
     public void testErrorExprs() 
     {
-        List list = assertSemanticError(2666, null, 1);
+        List<IMessage> list = assertSemanticError(2666, null, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
 
         list = assertSemanticError(2705, null, 1);

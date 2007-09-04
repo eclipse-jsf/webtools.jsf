@@ -5,11 +5,12 @@ import java.util.List;
 
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
-import org.eclipse.jst.jsf.core.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.test.util.TestFileResource;
 import org.eclipse.jst.jsf.validation.el.tests.ELValidationTestPlugin;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
+import org.eclipse.wst.validation.internal.provisional.core.IMessage;
 
 /**
  * Tests the introduction of symbols through resource-bundle element the
@@ -24,7 +25,7 @@ public class ResourceBundleTestCase extends SingleJSPTestCase {
 
     public ResourceBundleTestCase() 
     {
-        super("/testdata/jsps/resourceBundleResolution.jsp.data", "/resourceBundle.jsp", IJSFCoreConstants.FACET_VERSION_1_2, FACES_CONFIG_FILE_NAME_1_2 );
+        super("/testdata/jsps/resourceBundleResolution.jsp.data", "/resourceBundle.jsp", JSFVersion.V1_2, FACES_CONFIG_FILE_NAME_1_2 );
     }
 
     
@@ -93,7 +94,7 @@ public class ResourceBundleTestCase extends SingleJSPTestCase {
 
     public void testWarningExprs() 
     {
-        List problems = assertSemanticWarning(1570, null, 1);
+        List<IMessage> problems = assertSemanticWarning(1570, null, 1);
         assertContainsProblem(problems, DiagnosticFactory.UNARY_OP_STRING_CONVERSION_NOT_GUARANTEED_ID);
 
         problems = assertSemanticWarning(1631, null, 1);

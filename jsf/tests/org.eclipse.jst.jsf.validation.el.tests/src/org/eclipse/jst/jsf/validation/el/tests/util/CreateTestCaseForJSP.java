@@ -98,7 +98,7 @@ public class CreateTestCaseForJSP extends TestCase
         {
             if (curNode.getFirstRegion().getType() == DOMRegionContext.XML_TAG_OPEN ) 
             {
-                Iterator regions = curNode.getRegions().iterator();
+                Iterator<?> regions = curNode.getRegions().iterator();
                 ITextRegion region = null;
 
                 while (regions.hasNext()) 

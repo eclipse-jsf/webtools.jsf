@@ -5,7 +5,7 @@ import java.text.MessageFormat;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jst.jsf.context.symbol.ISymbol;
-import org.eclipse.jst.jsf.core.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.designtime.DesignTimeApplicationManager;
 import org.eclipse.jst.jsf.designtime.context.DTFacesContext;
 import org.eclipse.jst.jsf.designtime.el.AbstractDTPropertyResolver;
@@ -27,7 +27,7 @@ public class StressTest extends JSPTestCase
 {
     public StressTest() 
     {
-        super(IJSFCoreConstants.FACET_VERSION_1_1, SingleJSPTestCase.FACES_CONFIG_FILE_NAME_1_1);
+        super(JSFVersion.V1_1, SingleJSPTestCase.FACES_CONFIG_FILE_NAME_1_1);
     }
 
     protected IFile _testJSP;

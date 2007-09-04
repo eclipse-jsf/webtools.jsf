@@ -3,15 +3,16 @@ package org.eclipse.jst.jsf.validation.el.tests.jsp;
 import java.util.List;
 
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
-import org.eclipse.jst.jsf.core.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
+import org.eclipse.wst.validation.internal.provisional.core.IMessage;
 
 public class DataTableResolutionTestCase extends SingleJSPTestCase 
 {
     public DataTableResolutionTestCase() 
     {
-        super("/testdata/jsps/dataTableResolution.jsp.data", "/dataTableResolution.jsp", IJSFCoreConstants.FACET_VERSION_1_1,FACES_CONFIG_FILE_NAME_1_1);
+        super("/testdata/jsps/dataTableResolution.jsp.data", "/dataTableResolution.jsp", JSFVersion.V1_1,FACES_CONFIG_FILE_NAME_1_1);
     }
 
     protected void setUp() throws Exception
@@ -38,7 +39,7 @@ public class DataTableResolutionTestCase extends SingleJSPTestCase
 
     public void testWarningExprs() 
     {
-        List problems = assertSemanticWarning(1606, null, 1);
+        List<IMessage> problems = assertSemanticWarning(1606, null, 1);
         assertContainsProblem(problems, DiagnosticFactory.VARIABLE_NOT_FOUND_ID);
         
         problems = assertSemanticWarning(1745, null, 1);

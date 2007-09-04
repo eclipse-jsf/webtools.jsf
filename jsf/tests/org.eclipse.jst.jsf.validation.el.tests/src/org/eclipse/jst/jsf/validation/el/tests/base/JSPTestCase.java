@@ -11,6 +11,7 @@
 package org.eclipse.jst.jsf.validation.el.tests.base;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
 import org.eclipse.jst.jsf.validation.el.tests.ELValidationTestPlugin;
 
@@ -22,10 +23,10 @@ public class JSPTestCase extends BaseTestCase
      * Test config
      */
     private MyConfiguration                 _myConfig;
-    private final       String              _defaultJSFVersion;
+    private final       JSFVersion              _defaultJSFVersion;
     private  final      String              _defaultFacesConfigFile; 
     
-    public JSPTestCase(final String defaultJSFVersion, final String defaultFacesConfigFile) 
+    public JSPTestCase(final JSFVersion defaultJSFVersion, final String defaultFacesConfigFile) 
     {
         super(defaultJSFVersion);
         _defaultJSFVersion = defaultJSFVersion;
@@ -53,7 +54,7 @@ public class JSPTestCase extends BaseTestCase
     protected JSFFacetedTestEnvironment configureJSFEnvironment() throws Exception
     {
         JSFFacetedTestEnvironment jsfFacedEnv = new JSFFacetedTestEnvironment(_testEnv);
-        jsfFacedEnv.initialize(_myConfig.getFacetVersion());
+        jsfFacedEnv.initialize(_myConfig.getFacetVersion().toString());
 
         _testEnv.loadResourceInWebRoot(ELValidationTestPlugin.getDefault().getBundle(),
                                       _myConfig.getFacesConfigFile(), 
@@ -70,10 +71,10 @@ public class JSPTestCase extends BaseTestCase
     
     protected static class MyConfiguration
     {
-        private final String        _facetVersion;
+        private final JSFVersion    _facetVersion;
         private final String        _facesConfigFile;
         
-        MyConfiguration(String facetVersion, String facesConfigFile) 
+        MyConfiguration(JSFVersion facetVersion, String facesConfigFile) 
         {
             super();
             _facetVersion = facetVersion;
@@ -82,11 +83,11 @@ public class JSPTestCase extends BaseTestCase
         
         MyConfiguration(TestConfiguration testConfiguration)
         {
-            _facetVersion = testConfiguration.get(BaseTestCase.JSF_FACET_VERSION);
+            _facetVersion = JSFVersion.valueOfString(testConfiguration.get(BaseTestCase.JSF_FACET_VERSION));
             _facesConfigFile = testConfiguration.get(FACES_CONFIG_FILE);
         }
 
-        public String getFacetVersion() {
+        public JSFVersion getFacetVersion() {
             return _facetVersion;
         }
 

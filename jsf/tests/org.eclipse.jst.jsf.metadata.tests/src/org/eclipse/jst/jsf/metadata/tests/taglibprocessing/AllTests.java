@@ -11,12 +11,13 @@
  ********************************************************************************/
 package org.eclipse.jst.jsf.metadata.tests.taglibprocessing;
 
-import org.eclipse.jst.jsf.metadata.tests.util.IJSFRuntimeRequiredV11;
-import org.eclipse.jst.jsf.metadata.tests.util.IJSFRuntimeRequiredV12;
-import org.eclipse.jst.jsf.test.util.JSFTestUtil;
-
 import junit.framework.Test;
 import junit.framework.TestSuite;
+
+import org.eclipse.jst.jsf.core.JSFVersion;
+import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
+import org.eclipse.jst.jsf.metadata.tests.util.IJSFRuntimeRequiredV11;
+import org.eclipse.jst.jsf.metadata.tests.util.IJSFRuntimeRequiredV12;
 
 public class AllTests {
 
@@ -62,10 +63,10 @@ public class AllTests {
 		//$JUnit-END$
 		return suite;
 	}
-	private static void addTestSuite(TestSuite suite, Class klass) {
+	private static void addTestSuite(TestSuite suite, Class<?> klass) {
 		if (!_inited) {
-			_jsfRuntimePresentV11 = JSFTestUtil.isJSFRuntimeJarsDirectoryPropertySet("1.1");
-			_jsfRuntimePresentV12 = JSFTestUtil.isJSFRuntimeJarsDirectoryPropertySet("1.2");
+			_jsfRuntimePresentV11 = JSFCoreUtilHelper.isJSFRuntimeJarsDirectoryPropertySet(JSFVersion.V1_1);
+			_jsfRuntimePresentV12 = JSFCoreUtilHelper.isJSFRuntimeJarsDirectoryPropertySet(JSFVersion.V1_2);
 			_inited = true;
 		}
 		if (IJSFRuntimeRequiredV11.class.isAssignableFrom(klass)){

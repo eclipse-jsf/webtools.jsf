@@ -17,7 +17,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.jface.preference.IPersistentPreferenceStore;
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.jst.jsf.core.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.validation.el.tests.base.JSPTestCase;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
@@ -33,7 +33,7 @@ public class EndToEndTestCase extends JSPTestCase
 {
     public EndToEndTestCase()
     {
-        super(IJSFCoreConstants.FACET_VERSION_1_1, SingleJSPTestCase.FACES_CONFIG_FILE_NAME_1_1);
+        super(JSFVersion.V1_1, SingleJSPTestCase.FACES_CONFIG_FILE_NAME_1_1);
     }
 
     protected IFile                 _testJSP;
@@ -145,18 +145,18 @@ public class EndToEndTestCase extends JSPTestCase
     {
         ELExpressionValidator validator = createELValidator(_structuredDocument, docPos, _testJSP);
         validator.validateXMLNode();
-        List syntaxProblems = validator.getSyntaxProblems();
+        List<IMessage> syntaxProblems = validator.getSyntaxProblems();
         
-        for (final Iterator it = syntaxProblems.iterator(); it.hasNext();)
+        for (final Iterator<IMessage> it = syntaxProblems.iterator(); it.hasNext();)
         {
-            IMessage message = (IMessage) it.next();
+            IMessage message = it.next();
             assertEquals(severity, message.getSeverity());
         }
 
-        List semanticProblems = validator.getSemanticValidator().getMessages();
-        for (final Iterator it = semanticProblems.iterator(); it.hasNext();)
+        List<IMessage> semanticProblems = validator.getSemanticValidator().getMessages();
+        for (final Iterator<IMessage> it = semanticProblems.iterator(); it.hasNext();)
         {
-            IMessage message = (IMessage) it.next();
+            IMessage message = it.next();
             assertEquals(severity, message.getSeverity());
         }
     }

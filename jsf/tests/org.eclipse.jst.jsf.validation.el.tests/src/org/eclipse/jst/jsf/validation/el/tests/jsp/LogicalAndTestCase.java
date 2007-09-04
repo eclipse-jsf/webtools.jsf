@@ -3,9 +3,10 @@ package org.eclipse.jst.jsf.validation.el.tests.jsp;
 import java.util.List;
 
 import org.eclipse.jdt.core.Signature;
-import org.eclipse.jst.jsf.core.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
+import org.eclipse.wst.validation.internal.provisional.core.IMessage;
 
 /**
  * Test cases for logical AND (and, &&)
@@ -16,7 +17,7 @@ public class LogicalAndTestCase extends SingleJSPTestCase
 {
 
     public LogicalAndTestCase() {
-        super("/testdata/jsps/logicalAND.jsp.data", "/logicalAND.jsp", IJSFCoreConstants.FACET_VERSION_1_1,FACES_CONFIG_FILE_NAME_1_1);
+        super("/testdata/jsps/logicalAND.jsp.data", "/logicalAND.jsp", JSFVersion.V1_1,FACES_CONFIG_FILE_NAME_1_1);
     }
 
     protected void setUp() throws Exception
@@ -65,7 +66,7 @@ public class LogicalAndTestCase extends SingleJSPTestCase
 
     public void testWarningExprs() 
     {
-        List list = assertSemanticWarning(1301, Signature.SIG_BOOLEAN, 1);
+        List<IMessage> list = assertSemanticWarning(1301, Signature.SIG_BOOLEAN, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_FIRST_ARGUMENT_SHORT_CIRCUITS_ID);
 
         list = assertSemanticWarning(1366, Signature.SIG_BOOLEAN, 1);
@@ -104,7 +105,7 @@ public class LogicalAndTestCase extends SingleJSPTestCase
 
     public void testErrorExprs() 
     {
-        List list = assertSemanticError(2084, null, 1);
+        List<IMessage> list = assertSemanticError(2084, null, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN_ID);
 
         list = assertSemanticError(2148, null, 1);

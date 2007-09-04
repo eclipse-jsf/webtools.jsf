@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.jst.jsf.common.standardMetaDataFiles">
+      <standardMetaDataFile
+            location="/metadata/test-metadata.xml"
+            uri="org.eclipse.jst.pagedesigner.tests.tagCreatorFactory1">
+      </standardMetaDataFile>
+   </extension>
+   <extension
+         point="org.eclipse.jst.pagedesigner.pageDesignerExtension">
+      <elementEditFactory
+            class="org.eclipse.jst.pagedesigner.tests.tagcreatorPlugin.TestCreationFactory"></elementEditFactory>
+   </extension>
+
+</plugin>

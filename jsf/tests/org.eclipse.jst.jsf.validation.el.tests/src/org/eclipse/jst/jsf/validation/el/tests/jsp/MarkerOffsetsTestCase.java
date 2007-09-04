@@ -2,9 +2,10 @@ package org.eclipse.jst.jsf.validation.el.tests.jsp;
 
 import java.util.List;
 
-import org.eclipse.jst.jsf.core.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
+import org.eclipse.wst.validation.internal.provisional.core.IMessage;
 
 /**
  * Used to verify that marker offset/lengths are calculated correctly
@@ -19,7 +20,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 public class MarkerOffsetsTestCase extends SingleJSPTestCase 
 {
     public MarkerOffsetsTestCase() {
-        super("/testdata/jsps/markerOffsets.jsp.data", "/markerOffsets.jsp", IJSFCoreConstants.FACET_VERSION_1_1,FACES_CONFIG_FILE_NAME_1_1);
+        super("/testdata/jsps/markerOffsets.jsp.data", "/markerOffsets.jsp", JSFVersion.V1_1,FACES_CONFIG_FILE_NAME_1_1);
     }
 
     protected void setUp() throws Exception
@@ -64,7 +65,7 @@ public class MarkerOffsetsTestCase extends SingleJSPTestCase
     }
     public void testWarningExprs() 
     {
-        List list = assertSemanticWarning(905, null, 1);
+        List<IMessage> list = assertSemanticWarning(905, null, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID, 905, 5);
 
         list = assertSemanticWarning(941, null, 1);
@@ -116,7 +117,7 @@ public class MarkerOffsetsTestCase extends SingleJSPTestCase
     
     public void testErrorExprs() 
     {
-        List list = assertSemanticError(2028, null, 1);
+        List<IMessage> list = assertSemanticError(2028, null, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_POSSIBLE_DIVISION_BY_ZERO_ID, 2028, 26);
 
         list = assertSemanticError(2085, null, 1);

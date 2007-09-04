@@ -16,7 +16,7 @@ import java.io.IOException;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jst.common.project.facet.JavaFacetUtils;
-import org.eclipse.jst.jsf.core.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
 import org.eclipse.jst.jsf.metadata.tests.MetadataTestsPlugin;
 import org.eclipse.jst.jsf.test.util.ConfigurableTestCase;
@@ -38,12 +38,12 @@ public abstract class BaseTestCase extends ConfigurableTestCase
     public static final String      PROXY_SETTING_PORT = "proxySettings_Port";
     public static final String      JSF_FACET_VERSION  = "jsfFacetVersion";    
     
-    private final String            _defaultJSFVersion;
+    private final JSFVersion            _defaultJSFVersion;
     
     /**
      * Default constructor
      */
-    public BaseTestCase(String defaultJSFVersion)
+    public BaseTestCase(JSFVersion defaultJSFVersion)
     {
         super();
         _defaultJSFVersion = defaultJSFVersion;
@@ -52,7 +52,7 @@ public abstract class BaseTestCase extends ConfigurableTestCase
 	/**
 	 * @param name
 	 */
-	public BaseTestCase(String name, String defaultJSFVersion) {
+	public BaseTestCase(String name, JSFVersion defaultJSFVersion) {
         super(name);
         _defaultJSFVersion = defaultJSFVersion;
     }
@@ -96,8 +96,8 @@ public abstract class BaseTestCase extends ConfigurableTestCase
 
         // if JSF 1.1, use web facet 2.4, if higher then use 2.5
         final String webProjVersion = 
-            (IJSFCoreConstants.FACET_VERSION_1_0.equals(_configuration.getJsfVersion())
-                    || IJSFCoreConstants.FACET_VERSION_1_1.equals(_configuration.getJsfVersion()))
+            (_configuration.getJsfVersion() == JSFVersion.V1_0
+                    || _configuration.getJsfVersion() == JSFVersion.V1_1)
                 ? "2.4" : "2.5";
         
         _testEnv = new WebProjectTestEnvironment
@@ -157,9 +157,9 @@ public abstract class BaseTestCase extends ConfigurableTestCase
     {
         private final String  _proxyHostName;
         private final String  _proxyPort;
-        private final String  _jsfVersion;
+        private final JSFVersion  _jsfVersion;
         
-        MyConfiguration(final String proxyHostName, final String proxyPort, final String jsfVersion)
+        MyConfiguration(final String proxyHostName, final String proxyPort, final JSFVersion jsfVersion)
         {
             _proxyHostName = proxyHostName;
             _proxyPort = proxyPort;
@@ -170,7 +170,7 @@ public abstract class BaseTestCase extends ConfigurableTestCase
         {
             _proxyHostName = configuration.get(BaseTestCase.PROXY_SETTING_HOST);
             _proxyPort = configuration.get(BaseTestCase.PROXY_SETTING_PORT);
-            _jsfVersion = configuration.get(BaseTestCase.JSF_FACET_VERSION);
+            _jsfVersion = JSFVersion.valueOfString(configuration.get(BaseTestCase.JSF_FACET_VERSION));
         }
         
         public boolean isProxyEnabled()
@@ -186,7 +186,7 @@ public abstract class BaseTestCase extends ConfigurableTestCase
             return _proxyPort;
         }
 
-        public String getJsfVersion() {
+        public JSFVersion getJsfVersion() {
             return _jsfVersion;
         }
         

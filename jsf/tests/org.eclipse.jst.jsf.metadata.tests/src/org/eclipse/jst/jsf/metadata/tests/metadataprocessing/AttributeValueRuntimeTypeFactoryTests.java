@@ -36,7 +36,7 @@ public class AttributeValueRuntimeTypeFactoryTests extends TestCase {
 		Assert.assertNotNull(atype.getTypeExtension().getClassName());
 		Assert.assertTrue(atype.getTypeExtension().getBundleID().equals(MetadataTestsPlugin.ID_BUNDLE));		
 		Assert.assertTrue(atype.getTypeExtension().getTypeID().equals(AttributeValueRuntimeTypesRegistryTests.BOOLEANTYPE_ID));
-		List features =  atype.getFeatureAdapters(IPossibleValues.class);
+		List<?> features =  atype.getFeatureAdapters(IPossibleValues.class);
 		Assert.assertNotNull(features);
 		Assert.assertFalse(features.isEmpty());
 		Assert.assertEquals(2, features.size());  //we expect MyBooleanType and MetaDataEnabledBarkProcessor  

@@ -3,9 +3,10 @@ package org.eclipse.jst.jsf.validation.el.tests.jsp;
 import java.util.List;
 
 import org.eclipse.jdt.core.Signature;
-import org.eclipse.jst.jsf.core.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
+import org.eclipse.wst.validation.internal.provisional.core.IMessage;
 
 /**
  * Test cases for logical not equals (ne, !=)
@@ -16,7 +17,7 @@ public class LogicalNotEqualsTestCase extends SingleJSPTestCase
 {
     public LogicalNotEqualsTestCase()
     {
-        super("/testdata/jsps/logicalNotEquals.jsp.data", "/logicalNotEquals.jsp", IJSFCoreConstants.FACET_VERSION_1_1,FACES_CONFIG_FILE_NAME_1_1);
+        super("/testdata/jsps/logicalNotEquals.jsp.data", "/logicalNotEquals.jsp", JSFVersion.V1_1,FACES_CONFIG_FILE_NAME_1_1);
     }
 
     protected void setUp() throws Exception
@@ -104,7 +105,7 @@ public class LogicalNotEqualsTestCase extends SingleJSPTestCase
 
     public void testWarningExprs() 
     {
-        List list = assertSemanticWarning(2175, Signature.SIG_BOOLEAN, 1);
+        List<IMessage> list = assertSemanticWarning(2175, Signature.SIG_BOOLEAN, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID);
         
         list = assertSemanticWarning(2212, Signature.SIG_BOOLEAN, 1);
@@ -160,7 +161,7 @@ public class LogicalNotEqualsTestCase extends SingleJSPTestCase
 
     public void testErrorExprs() 
     {
-        List list = assertSemanticError(3078, null, 1);
+        List<IMessage> list = assertSemanticError(3078, null, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
 
         list = assertSemanticError(3118, null, 1);

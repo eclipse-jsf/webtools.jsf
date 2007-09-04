@@ -4,9 +4,10 @@ import java.util.List;
 
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
-import org.eclipse.jst.jsf.core.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
+import org.eclipse.wst.validation.internal.provisional.core.IMessage;
 
 /**
  * Test cases for built-in (implicit) symbol resolution
@@ -18,7 +19,7 @@ public class BuiltInSymbolsTestCase extends SingleJSPTestCase
 {
     public BuiltInSymbolsTestCase() 
     {
-        super("/testdata/jsps/builtinSymbols.jsp.data", "/builtinSymbols.jsp", IJSFCoreConstants.FACET_VERSION_1_1,FACES_CONFIG_FILE_NAME_1_1);
+        super("/testdata/jsps/builtinSymbols.jsp.data", "/builtinSymbols.jsp", JSFVersion.V1_1,FACES_CONFIG_FILE_NAME_1_1);
     }
 
     protected void setUp() throws Exception
@@ -142,7 +143,7 @@ public class BuiltInSymbolsTestCase extends SingleJSPTestCase
     }
     public void testWarningExprs() 
     {
-        List list = assertSemanticWarning(3661,null,1);
+        List<IMessage> list = assertSemanticWarning(3661,null,1);
         assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
 
         list = assertSemanticWarning(3722,null,1);
@@ -186,7 +187,7 @@ public class BuiltInSymbolsTestCase extends SingleJSPTestCase
     }
     public void testErrorExprs() 
     {
-        List list = assertSemanticError(4507,null,1);
+        List<IMessage> list = assertSemanticError(4507,null,1);
         assertContainsProblem(list, DiagnosticFactory.UNARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN_ID);
     }
 }

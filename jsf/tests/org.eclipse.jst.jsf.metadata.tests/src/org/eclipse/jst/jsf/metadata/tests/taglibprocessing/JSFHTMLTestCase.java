@@ -15,7 +15,7 @@ import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.Trait;
 import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
 import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
-import org.eclipse.jst.jsf.core.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.metadata.tests.util.IJSFRuntimeRequiredV11;
 import org.eclipse.jst.jsf.metadata.tests.util.JSPTestCase;
 import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfo;
@@ -27,7 +27,7 @@ public class JSFHTMLTestCase extends JSPTestCase implements IJSFRuntimeRequiredV
 	private ITaglibDomainMetaDataModelContext _context;
 	
 	public JSFHTMLTestCase () {
-		super(	IJSFCoreConstants.FACET_VERSION_1_1,
+		super(	JSFVersion.V1_1,
 				"/testfiles/web/faces-config_1_1.xml.data");
 
 	}

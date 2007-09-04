@@ -11,12 +11,16 @@
 package org.eclipse.jst.jsf.core.tests.util;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
+import java.io.IOException;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jst.j2ee.internal.web.archive.operations.WebFacetProjectCreationDataModelProvider;
+import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryRegistryUtil;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.ArchiveFile;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
@@ -27,7 +31,11 @@ import org.eclipse.wst.common.componentcore.datamodel.properties.IFacetProjectCr
 import org.eclipse.wst.common.frameworks.datamodel.DataModelFactory;
 import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
 
-public class JSFCoreUtilHelper {
+public final class JSFCoreUtilHelper 
+{
+    private static final String JSFRUNTIMEJARSDIR = "jsfRuntimeJarsDirectoryV";
+    private static String JSF11Path = "";
+    private static String JSF12Path = "";
 
 	/**
 	 * Constructs jsfLib using this plugin's install path and "testfiles" subdirectory 
@@ -80,8 +88,7 @@ public class JSFCoreUtilHelper {
 		
 		return jsfLib;
 	}
-	
-	
+
 	/**
 	 * Create a Dynamic Web application with given name using default operation.
 	 * If project with given name already exists, then it returns that project.
@@ -99,7 +106,7 @@ public class JSFCoreUtilHelper {
 		}
 		return ResourcesPlugin.getWorkspace().getRoot().getProject(aProjectName);
 	}
-	
+
 	/**
 	 * If the JSF Library registry is empty, it will seed it with an Impl and non-Impl library
 	 */
@@ -195,6 +202,162 @@ public class JSFCoreUtilHelper {
 		return jsfLib;
 	}
 
+    /**
+     * @param jsfVersion
+     * @return Directory name for jsf runtime jars.  
+     * <br>Will be null if not set in JSFRUNTIMEJARSDIRV<b>X.X</b> system property
+     */
+    public static String getJSFRuntimeJarsDirectory(JSFVersion jsfVersion) {
+        String propertyName = JSFRUNTIMEJARSDIR+jsfVersion.toString();
+        String res = System.getProperty(propertyName);
+        if (res == null) {
+            //check env var also
+            res = System.getenv(propertyName);
+        }
+
+        // do some tracing the first time a new value is returned for 1.1 or 1.2
+        if (jsfVersion == JSFVersion.V1_1
+               && JSF11Path != res)
+        {
+            System.out.printf("Using jsf runtime path %s for propertyName %s\n", res, propertyName);
+            JSF11Path = res;
+        }
+        else if (jsfVersion == JSFVersion.V1_2
+                   && JSF12Path != res)
+        {
+              System.out.printf("Using jsf runtime path %s for propertyName %s\n", res, propertyName);
+              JSF12Path = res;
+        }
+
+        return res;
+    }
+
+    /**
+     * Returns true if the environment property holding the name of the directory that points at the 
+     * runtime jars exist.  
+     * <p>
+     * The expected property name is jsfRuntimeJarsDirectoryVXX where XX is the
+     * JSFVersion.  <br>i.e "jsfRuntimeJarsDirectoryV1.1", or "jsfRuntimeJarsDirectoryV1.2"
+     * <p>
+     * It <b>does</b> check for the existence of the directory.<br>
+     * It <b>does not</b> check for any jars within that directory.
+     * 
+     * @param jsfVersion as String.  ie. "1.1", or "1.2"
+     * @return true if the property is set
+     */
+    public static boolean isJSFRuntimeJarsDirectoryPropertySet(JSFVersion jsfVersion) {
+        String dirName = getJSFRuntimeJarsDirectory(jsfVersion);
+        if (dirName != null && dirName.trim().length() != 0)
+        {
+            File dir = new File(dirName);
+            
+            if (dir.exists() && dir.isDirectory())
+            {
+                return true;
+            }
+            else
+            {
+                System.err.printf("Dir: %s either doesn't exists or is not a directory\n",dirName);
+            }
+        }
+        else 
+        {
+            System.err.println("dirName is null");
+        }
+
+        return false;
+    }
+
+    public static boolean createRegistryAndAddReferences(JSFFacetedTestEnvironment jsfFacedEnv, String[] archiveFiles, JSFVersion jsfVersion) throws CoreException {
+        JSFLibraryRegistry jsfLibRegistry = 
+            JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry();
+
+       if (archiveFiles != null)
+        {
+            final String libIDandName = "_internalJSFRuntimeLibraryV" + jsfVersion + "_";
+            JSFLibrary jsfImpl = JSFCoreUtilHelper.
+                constructJSFLib(libIDandName, libIDandName,"", archiveFiles, true);
+            jsfLibRegistry.addJSFLibrary(jsfImpl);
+            jsfFacedEnv.addJSFLibraryReference(jsfImpl, true);
+            return true;
+        }
+       
+       return false;
+    }
+
+    public static String[] getJSFRuntimeJarNames(JSFVersion version) throws IOException
+    {
+        String[] jarNames = null;
+        String dirName = getJSFRuntimeJarsDirectory(version);
+        System.out.printf("Using dirName: %s\n", dirName);
+        if (dirName != null) {
+            File dir = new File(dirName);
+            if (dir.exists() && dir.isDirectory()) {
+                File[] jars = dir.listFiles();
+                if (jars != null && jars.length > 0) {
+                    jarNames = new String[jars.length];
+                    for (int i = 0; i < jars.length; i++) {
+                        jarNames[i] = jars[i].getAbsolutePath();
+                    }
+                }
+            }
+            else
+            {
+                throw new FileNotFoundException(dirName+" is either does not exist or is not a directory");
+            }
+        }
+        else
+        {
+            throw new FileNotFoundException("dirName is null");
+        }
+        return jarNames;
+    }
+
+    public static boolean isJSFRuntimeJarsDirectoryValid(JSFVersion jsfVersion)
+    {
+        try
+        {
+            return getJSFRuntimeJarNames(jsfVersion) != null;
+        }
+        catch (IOException e)
+        {
+            return false;
+        }
+    }
+
+    /**
+     * Attempts to create and initialize a JSF library for the jar files stored at the location
+     * pointed to by the standard env variable (@see getJSFRuntimeJarsDirectory)
+     * @param jsfVersion
+     * @param jsfFacetedTestEnv
+     * @return true if successful
+     * @throws Exception
+     */
+    public static boolean addJSFRuntimeJarsToClasspath(JSFVersion jsfVersion, JSFFacetedTestEnvironment jsfFacetedTestEnv) throws Exception 
+    {
+        final String[] jarNames = getJSFRuntimeJarNames(jsfVersion);
+        return createRegistryAndAddReferences(jsfFacetedTestEnv, jarNames, jsfVersion);
+    }
+
+    /**
+     * @param testClass
+     * @param jsfVersion
+     * @return a message informing a test suite runner that the environment variable
+     * isn't correct for finding JSF library jar files
+     */
+    public static String getTestRequiresJSFRuntimeMessage(Class<?> testClass, JSFVersion jsfVersion) {
+        StringBuffer sb = new StringBuffer();
+        sb.append("Unable to run test suite \"");
+        sb.append(testClass.getName());
+        sb.append("\"; JSF runtime (v");
+        sb.append(jsfVersion.toString());
+        sb.append(") is required but not present.\nSystem property or environment variable \"jsfRuntimeJarsDirectoryV");
+        sb.append(jsfVersion.toString());
+        sb.append("\" must be set to point to a directory containing JSF runtime (v");
+        sb.append(jsfVersion.toString());
+        sb.append(") JARs.");
+        return sb.toString();
+    }
 //	/**
 //	 * Creates a JSF Library from all the jars and zips found at the relative
 //	 * path from this plugin.

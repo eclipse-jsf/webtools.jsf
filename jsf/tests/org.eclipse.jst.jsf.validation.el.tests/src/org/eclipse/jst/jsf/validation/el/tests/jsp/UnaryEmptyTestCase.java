@@ -3,9 +3,10 @@ package org.eclipse.jst.jsf.validation.el.tests.jsp;
 import java.util.List;
 
 import org.eclipse.jdt.core.Signature;
-import org.eclipse.jst.jsf.core.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
+import org.eclipse.wst.validation.internal.provisional.core.IMessage;
 
 /**
  * Test cases for unary empty
@@ -16,7 +17,7 @@ public class UnaryEmptyTestCase extends SingleJSPTestCase
 {
     public UnaryEmptyTestCase()
     {
-        super("/testdata/jsps/emptyOperator.jsp.data", "/emptyOperator.jsp", IJSFCoreConstants.FACET_VERSION_1_1,FACES_CONFIG_FILE_NAME_1_1);
+        super("/testdata/jsps/emptyOperator.jsp.data", "/emptyOperator.jsp", JSFVersion.V1_1,FACES_CONFIG_FILE_NAME_1_1);
     }
 
     protected void setUp() throws Exception 
@@ -60,7 +61,7 @@ public class UnaryEmptyTestCase extends SingleJSPTestCase
 
     public void testWarningExprs() 
     {
-        List list = assertSemanticWarning(1283, Signature.SIG_BOOLEAN, 1);
+        List<IMessage> list = assertSemanticWarning(1283, Signature.SIG_BOOLEAN, 1);
         assertContainsProblem(list, DiagnosticFactory.UNARY_OP_EMPTY_ALWAYS_FALSE_ON_TYPE_ID);
 
         list = assertSemanticWarning(1321, Signature.SIG_BOOLEAN, 1);

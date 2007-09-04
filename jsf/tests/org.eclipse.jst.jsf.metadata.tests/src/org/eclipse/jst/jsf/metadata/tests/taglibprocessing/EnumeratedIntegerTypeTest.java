@@ -15,7 +15,6 @@ import junit.framework.Assert;
 
 import org.eclipse.jst.jsf.metadataprocessors.features.IDefaultValue;
 import org.eclipse.jst.jsf.metadataprocessors.features.IValidValues;
-import org.eclipse.jst.jsf.metadataprocessors.features.IValidationMessage;
 
 public class EnumeratedIntegerTypeTest extends TaglibProcessingTestCase {
 	
@@ -31,7 +30,8 @@ public class EnumeratedIntegerTypeTest extends TaglibProcessingTestCase {
 		vv.getValidationMessages().clear();
 		Assert.assertFalse(vv.isValidValue("6"));
 		Assert.assertFalse(vv.getValidationMessages().size()==0);
-		IValidationMessage msg = (IValidationMessage)vv.getValidationMessages().get(0);
+		// TODO: dead?
+		/*IValidationMessage msg = (IValidationMessage)*/vv.getValidationMessages().get(0);
 	}
 	
 	public void testDefaultValues(){		

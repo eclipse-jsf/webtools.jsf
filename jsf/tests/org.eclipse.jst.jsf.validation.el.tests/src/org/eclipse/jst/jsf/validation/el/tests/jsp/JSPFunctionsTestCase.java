@@ -2,9 +2,10 @@ package org.eclipse.jst.jsf.validation.el.tests.jsp;
 
 import java.util.List;
 
-import org.eclipse.jst.jsf.core.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
+import org.eclipse.wst.validation.internal.provisional.core.IMessage;
 
 /**
  * Test cases for functions
@@ -14,7 +15,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 public class JSPFunctionsTestCase extends SingleJSPTestCase 
 {
     public JSPFunctionsTestCase() {
-        super("/testdata/jsps/jspFunctions.jsp.data", "/jspFunctions.jsp", IJSFCoreConstants.FACET_VERSION_1_1,FACES_CONFIG_FILE_NAME_1_1);
+        super("/testdata/jsps/jspFunctions.jsp.data", "/jspFunctions.jsp", JSFVersion.V1_1,FACES_CONFIG_FILE_NAME_1_1);
     }
 
     protected void setUp() throws Exception
@@ -43,7 +44,7 @@ public class JSPFunctionsTestCase extends SingleJSPTestCase
     {
         // note: this will change to non-error when functions are properly supported
         // by the parser
-        List list = assertSyntaxWarning(1260, 1);
+        List<IMessage> list = assertSyntaxWarning(1260, 1);
         assertContainsProblem(list, DiagnosticFactory.GENERAL_SYNTAX_ERROR_ID);
 
         list = assertSyntaxWarning(1309, 1);

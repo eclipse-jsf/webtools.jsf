@@ -109,11 +109,11 @@ public abstract class AbstractBaseMetaDataTestCase extends TestCase {
 		if (debug_info){
 			printLine("Entity: "+entity.getId(),indent);
 			indent++;
-			for(Iterator it=entity.getTraits().iterator();it.hasNext();){
+			for(Iterator<?> it=entity.getTraits().iterator();it.hasNext();){
 				Trait t = (Trait)it.next();
 				printLine("Trait: "+t.getId()+"["+ getValue(t)+ "]", indent);
 			}
-			for (Iterator it=entity.getChildEntities().iterator();it.hasNext();){
+			for (Iterator<?> it=entity.getChildEntities().iterator();it.hasNext();){
 				dumpMDTree((Entity)it.next(), indent);
 			}
 		}
@@ -121,9 +121,9 @@ public abstract class AbstractBaseMetaDataTestCase extends TestCase {
 	
 	private String getValue(Trait trait) {
 		if (trait.getValue() instanceof ListOfValues){
-			List l = TraitValueHelper.getValueAsListOfStrings(trait);
+			List<?> l = TraitValueHelper.getValueAsListOfStrings(trait);
 			StringBuffer buf = new StringBuffer();
-			for (Iterator it=l.iterator();it.hasNext();){				
+			for (Iterator<?> it=l.iterator();it.hasNext();){
 				buf.append((String)it.next());
 				buf.append(", ");
 			}

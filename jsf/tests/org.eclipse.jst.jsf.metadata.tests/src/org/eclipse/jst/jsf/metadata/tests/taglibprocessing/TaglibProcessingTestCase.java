@@ -30,11 +30,11 @@ public abstract class TaglibProcessingTestCase extends AbstractBaseMetaDataTestC
 	protected String tag = "MyTag";
 	protected String attributeName;
 	
-	protected List possibleValueAdapters;
-	protected List validValuesAdapters;
-	protected List defaultValueAdapters;
-	protected List createValuesAdapters;
-	protected List validELValuesAdapters;
+	protected List<?> possibleValueAdapters;
+	protected List<?> validValuesAdapters;
+	protected List<?> defaultValueAdapters;
+	protected List<?> createValuesAdapters;
+	protected List<?> validELValuesAdapters;
 	
 	public void setUp() throws Exception{
 		super.setUp();
@@ -55,7 +55,7 @@ public abstract class TaglibProcessingTestCase extends AbstractBaseMetaDataTestC
         return attributeName;
 	}
 	
-	protected List getProcessorAdapters(Class featureClass) {
+	protected List<?> getProcessorAdapters(Class<?> featureClass) {
 		return MetaDataEnabledProcessingFactory.getInstance().
 			getAttributeValueRuntimeTypeFeatureProcessors(featureClass, docContext, 
 					uri, tag , getAttributeNameFromTest());

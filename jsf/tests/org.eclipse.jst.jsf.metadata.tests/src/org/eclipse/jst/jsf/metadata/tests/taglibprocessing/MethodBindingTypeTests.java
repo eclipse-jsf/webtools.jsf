@@ -13,7 +13,7 @@ package org.eclipse.jst.jsf.metadata.tests.taglibprocessing;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jst.jsf.common.internal.types.CompositeType;
-import org.eclipse.jst.jsf.core.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.metadata.tests.util.SingleJSPTestCase;
 import org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValues;
 import org.eclipse.jst.jsf.metadataprocessors.features.IValidELValues;
@@ -27,7 +27,7 @@ public class MethodBindingTypeTests extends SingleJSPTestCase {
 	public MethodBindingTypeTests() {
 		super(	"/testfiles/jsps/facesConfigValidatorIDType.jsp.data/", 
 				"/facesConfigValidatorIDType.jsp", 
-				IJSFCoreConstants.FACET_VERSION_1_1,
+				JSFVersion.V1_1,
 				"/testfiles/web/faces-config_1_1.xml.data");
 	}
 	protected void setUp() throws Exception {

@@ -25,7 +25,7 @@ public class AttributeValueRuntimeTypeExtensionsTests extends TestCase {
 	private String uri1 = "http://org.eclipse.jsf/metadataprocessing";
 	
 	public void testBarkerExt(){
-		List barkProcessors = MetaDataEnabledProcessingFactory.getInstance().
+		List<?> barkProcessors = MetaDataEnabledProcessingFactory.getInstance().
 		getAttributeValueRuntimeTypeFeatureProcessors(IBarker.class, null, uri1, 
 				"MyTag", "MyLongAttr");  //invalid 
 		
@@ -36,7 +36,7 @@ public class AttributeValueRuntimeTypeExtensionsTests extends TestCase {
 	}
 	
 	public void testGetPossibleValsWithExtensions(){
-		List processors	= MetaDataEnabledProcessingFactory.getInstance().
+		List<?> processors	= MetaDataEnabledProcessingFactory.getInstance().
 			getAttributeValueRuntimeTypeFeatureProcessors(IPossibleValues.class, null, uri1, 
 				"MyTag", "BooleanAttr");   
 		
@@ -51,7 +51,7 @@ public class AttributeValueRuntimeTypeExtensionsTests extends TestCase {
 	}
 	
 	public void testNonFeatureExt(){
-		List testProcessors = MetaDataEnabledProcessingFactory.getInstance().
+		List<?> testProcessors = MetaDataEnabledProcessingFactory.getInstance().
 		getAttributeValueRuntimeTypeFeatureProcessors(Test.class//invalid
 				,null, uri1, "MyTag", "BooleanAttr");  
 		

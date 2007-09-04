@@ -13,19 +13,14 @@ package org.eclipse.jst.jsf.metadata.tests.util;
 import java.io.File;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.ITextRegionContextResolver;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
-import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryRegistryUtil;
-import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
-import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistry;
+import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
 import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
 import org.eclipse.jst.jsf.metadata.tests.MetadataTestsPlugin;
-import org.eclipse.jst.jsf.test.util.JSFTestUtil;
-import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
 import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
 
 public class JSPTestCase extends BaseTestCase 
@@ -40,13 +35,13 @@ public class JSPTestCase extends BaseTestCase
      * Test config
      */
     private MyConfiguration                 _myConfig;
-    private final       String              _defaultJSFVersion;
+    private final       JSFVersion          _defaultJSFVersion;
     private  final      String              _defaultFacesConfigFile; 
     
     private 			String[] 			_runtimeJars;
 	
     
-    public JSPTestCase(final String defaultJSFVersion, final String defaultFacesConfigFile) 
+    public JSPTestCase(final JSFVersion defaultJSFVersion, final String defaultFacesConfigFile) 
     {
         super(defaultJSFVersion);
         _defaultJSFVersion = defaultJSFVersion;
@@ -73,12 +68,13 @@ public class JSPTestCase extends BaseTestCase
     @Override
     protected JSFFacetedTestEnvironment configureJSFEnvironment() throws Exception
     {
+        final JSFVersion version = _myConfig.getFacetVersion();
     	JSFFacetedTestEnvironment jsfFacedEnv = new JSFFacetedTestEnvironment(_testEnv);
-    	jsfFacedEnv.initialize(_myConfig.getFacetVersion());
+    	jsfFacedEnv.initialize(version.toString());
             
         try {
         	initializeJSFRuntime();
-        	createRegistryAndAddReferences(_testEnv, jsfFacedEnv, _runtimeJars);
+            JSFCoreUtilHelper.createRegistryAndAddReferences(jsfFacedEnv, _runtimeJars, version);
         } catch (NoJSFRuntimeFoundException e) {
         	//
 		}
@@ -90,20 +86,11 @@ public class JSPTestCase extends BaseTestCase
     }
     
 
-	private void createRegistryAndAddReferences(WebProjectTestEnvironment projectTestEnvironment, JSFFacetedTestEnvironment jsfFacedEnv, String[] archiveFiles) throws CoreException {
-		JSFLibraryRegistry jsfLibRegistry = JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry();
-		
-		if (archiveFiles != null){
-			JSFLibrary jsfImpl = JSFCoreUtilHelper.constructJSFLib("_internalJSFRuntimeLibrary_", "_internalJSFRuntimeLibrary_","", archiveFiles, true);
-			jsfLibRegistry.addJSFLibrary(jsfImpl);
-			jsfFacedEnv.addJSFLibraryReference(jsfImpl, true);
-		}
-	}
-
-    private String[] getArchiveFiles() {
-//    	getJsfImplEnv();
-		return null;
-	}
+	// dead?
+//    private String[] getArchiveFiles() {
+////    	getJsfImplEnv();
+//		return null;
+//	}
 
 	protected IFile loadJSP(final String srcFileName, final String destFileName) throws Exception
     {
@@ -137,10 +124,10 @@ public class JSPTestCase extends BaseTestCase
 
 	protected static class MyConfiguration
     {
-        private final String        _facetVersion;
+        private final JSFVersion    _facetVersion;
         private final String        _facesConfigFile;
         
-        MyConfiguration(String facetVersion, String facesConfigFile) 
+        MyConfiguration(JSFVersion facetVersion, String facesConfigFile) 
         {
             super();
             _facetVersion = facetVersion;
@@ -149,11 +136,11 @@ public class JSPTestCase extends BaseTestCase
         
         MyConfiguration(TestConfiguration testConfiguration)
         {
-            _facetVersion = testConfiguration.get(BaseTestCase.JSF_FACET_VERSION);
+            _facetVersion = JSFVersion.valueOfString(testConfiguration.get(BaseTestCase.JSF_FACET_VERSION));
             _facesConfigFile = testConfiguration.get(FACES_CONFIG_FILE);
         }
 
-        public String getFacetVersion() {
+        public JSFVersion getFacetVersion() {
             return _facetVersion;
         }
 
@@ -163,7 +150,7 @@ public class JSPTestCase extends BaseTestCase
     }
 	
 	protected void initializeJSFRuntime() throws NoJSFRuntimeFoundException{
-		String dir = JSFTestUtil.getJSFRuntimeJarsDirectory(_defaultJSFVersion);
+		String dir = JSFCoreUtilHelper.getJSFRuntimeJarsDirectory(_defaultJSFVersion);
 		if (dir == null || !jarsFound(dir) )
 			throw new NoJSFRuntimeFoundException();
 	}

@@ -32,7 +32,7 @@ import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocume
 import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.ITextRegionContextResolver;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
-import org.eclipse.jst.jsf.core.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigManager;
 import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
@@ -62,12 +62,12 @@ public abstract class BaseTestCase extends ConfigurableTestCase
     public static final String      PROXY_SETTING_PORT = "proxySettings_Port";
     public static final String      JSF_FACET_VERSION  = "jsfFacetVersion";    
     
-    private final String            _defaultJSFVersion;
+    private final JSFVersion            _defaultJSFVersion;
     
     /**
      * Default constructor
      */
-    public BaseTestCase(String defaultJSFVersion)
+    public BaseTestCase(JSFVersion defaultJSFVersion)
     {
         super();
         _defaultJSFVersion = defaultJSFVersion;
@@ -76,7 +76,7 @@ public abstract class BaseTestCase extends ConfigurableTestCase
 	/**
 	 * @param name
 	 */
-	public BaseTestCase(String name, String defaultJSFVersion) {
+	public BaseTestCase(String name, JSFVersion defaultJSFVersion) {
         super(name);
         _defaultJSFVersion = defaultJSFVersion;
     }
@@ -120,8 +120,8 @@ public abstract class BaseTestCase extends ConfigurableTestCase
 
         // if JSF 1.1, use web facet 2.4, if higher then use 2.5
         final String webProjVersion = 
-            (IJSFCoreConstants.FACET_VERSION_1_0.equals(_configuration.getJsfVersion())
-                    || IJSFCoreConstants.FACET_VERSION_1_1.equals(_configuration.getJsfVersion()))
+            (_configuration.getJsfVersion() == JSFVersion.V1_0
+                    || _configuration.getJsfVersion() == JSFVersion.V1_1)
                 ? "2.4" : "2.5";
         
         _testEnv = new WebProjectTestEnvironment
@@ -262,10 +262,10 @@ public abstract class BaseTestCase extends ConfigurableTestCase
                 JSFAppConfigManager.getInstance(_jdtTestEnv.getProjectEnvironment().getTestProject());
             assertNotNull(cfgManager);
             
-            List mbeans = cfgManager.getManagedBeans();
-            Map  nameTest = new HashMap();
+            List<?> mbeans = cfgManager.getManagedBeans();
+            Map<String, ManagedBeanType>  nameTest = new HashMap<String, ManagedBeanType>();
             
-            for (final Iterator it = mbeans.iterator(); it.hasNext();)
+            for (final Iterator<?> it = mbeans.iterator(); it.hasNext();)
             {
                 ManagedBeanType  mbean = (ManagedBeanType) it.next();
                 nameTest.put(mbean.getManagedBeanName().getTextContent(), mbean);
@@ -330,7 +330,7 @@ public abstract class BaseTestCase extends ConfigurableTestCase
      * @param expectedProblems
      * @return the list of found syntax problems
      */
-    protected List assertSyntaxError(IStructuredDocument document, 
+    protected List<IMessage> assertSyntaxError(IStructuredDocument document, 
             int docPos, 
             IFile file, 
             int expectedProblems)
@@ -348,7 +348,7 @@ public abstract class BaseTestCase extends ConfigurableTestCase
      * @param expectedProblems
      * @return the list of syntax problems
      */
-    protected List assertSyntaxWarning(IStructuredDocument document, 
+    protected List<IMessage> assertSyntaxWarning(IStructuredDocument document, 
                                           int docPos, 
                                           IFile file, 
                                           int expectedProblems)
@@ -369,7 +369,7 @@ public abstract class BaseTestCase extends ConfigurableTestCase
      * @param expectedMaxSeverity
      * @return the (possibly empty) list of problems
      */
-    protected List assertSyntaxProblems(IStructuredDocument document, 
+    protected List<IMessage> assertSyntaxProblems(IStructuredDocument document, 
                                           int docPos, 
                                           IFile file, 
                                           int expectedProblems,
@@ -379,13 +379,13 @@ public abstract class BaseTestCase extends ConfigurableTestCase
             createELValidator(document, docPos, file);
         validator.validateXMLNode();
         
-        final List problems = validator.getSyntaxProblems();
+        final List<IMessage> problems = validator.getSyntaxProblems();
         assertEquals(expectedProblems, problems.size());
         int worstSeverity = 0;
         
-        for (final Iterator it = problems.iterator(); it.hasNext();)
+        for (final Iterator<IMessage> it = problems.iterator(); it.hasNext();)
         {
-            IMessage message = (IMessage) it.next();
+            IMessage message = it.next();
             
             // for some reason, the number values are lower for higher severity
             // constants
@@ -455,7 +455,7 @@ public abstract class BaseTestCase extends ConfigurableTestCase
      * @param expectedProblems 
      * @return the list of semantic warnings
      */
-    protected List assertSemanticError(IStructuredDocument document, int docPos, IFile file, String expectedSignature, int expectedProblems)
+    protected List<IMessage> assertSemanticError(IStructuredDocument document, int docPos, IFile file, String expectedSignature, int expectedProblems)
     {
         return assertSemanticProblems(document, docPos, file, expectedSignature, expectedProblems, IMessage.HIGH_SEVERITY/* "high" is Error for some reason*/);
     }
@@ -473,7 +473,7 @@ public abstract class BaseTestCase extends ConfigurableTestCase
      * @param expectedProblems 
      * @return the list of semantic warnings
      */
-    protected List assertSemanticWarning(IStructuredDocument document, int docPos, IFile file, String expectedSignature, int expectedProblems)
+    protected List<IMessage> assertSemanticWarning(IStructuredDocument document, int docPos, IFile file, String expectedSignature, int expectedProblems)
     {
         return assertSemanticProblems(document, docPos, file, expectedSignature, expectedProblems, IMessage.NORMAL_SEVERITY/* "normal" is Warning for some reason*/);
     }
@@ -487,7 +487,7 @@ public abstract class BaseTestCase extends ConfigurableTestCase
      * @param expectedMaxSeverity
      * @return the list of semantic problems found
      */
-    protected List assertSemanticProblems(final IStructuredDocument document, 
+    protected List<IMessage> assertSemanticProblems(final IStructuredDocument document, 
                                           final int docPos, 
                                           final IFile file, 
                                           final String expectedSignature, 
@@ -505,13 +505,13 @@ public abstract class BaseTestCase extends ConfigurableTestCase
         }
 
         assertEquals(0, validator.getSyntaxProblems().size());
-        final List problems = validator.getSemanticValidator().getMessages();
+        final List<IMessage> problems = validator.getSemanticValidator().getMessages();
         assertEquals(expectedProblems, problems.size());
         int worstSeverity = 0;
 
-        for (final Iterator it = problems.iterator(); it.hasNext();)
+        for (final Iterator<IMessage> it = problems.iterator(); it.hasNext();)
         {
-            IMessage message = (IMessage) it.next();
+            IMessage message = it.next();
             
             // for some reason, the number values are lower for higher severity
             // constants
@@ -529,7 +529,7 @@ public abstract class BaseTestCase extends ConfigurableTestCase
      * @param problems
      * @param code
      */
-    protected void assertContainsProblem(List problems, int code)
+    protected void assertContainsProblem(List<IMessage> problems, int code)
     {
         assertContainsProblem(problems, code, -1, -1);
     }
@@ -544,13 +544,13 @@ public abstract class BaseTestCase extends ConfigurableTestCase
      * @param startPos
      * @param length
      */
-    protected void assertContainsProblem(List problems, int code, int startPos, int length)
+    protected void assertContainsProblem(List<IMessage> problems, int code, int startPos, int length)
     {
-        Set  probsFound = new HashSet();
+        Set<Integer>  probsFound = new HashSet<Integer>();
         
-        for (final Iterator it = problems.iterator(); it.hasNext();)
+        for (final Iterator<IMessage> it = problems.iterator(); it.hasNext();)
         {
-            Object probObj = it.next();
+            IMessage probObj = it.next();
             
             if (probObj instanceof IELLocalizedMessage)
             {
@@ -599,9 +599,9 @@ public abstract class BaseTestCase extends ConfigurableTestCase
     {
         private final String  _proxyHostName;
         private final String  _proxyPort;
-        private final String  _jsfVersion;
+        private final JSFVersion  _jsfVersion;
         
-        MyConfiguration(final String proxyHostName, final String proxyPort, final String jsfVersion)
+        MyConfiguration(final String proxyHostName, final String proxyPort, final JSFVersion jsfVersion)
         {
             _proxyHostName = proxyHostName;
             _proxyPort = proxyPort;
@@ -612,7 +612,7 @@ public abstract class BaseTestCase extends ConfigurableTestCase
         {
             _proxyHostName = configuration.get(BaseTestCase.PROXY_SETTING_HOST);
             _proxyPort = configuration.get(BaseTestCase.PROXY_SETTING_PORT);
-            _jsfVersion = configuration.get(BaseTestCase.JSF_FACET_VERSION);
+            _jsfVersion = JSFVersion.valueOfString(configuration.get(BaseTestCase.JSF_FACET_VERSION));
         }
         
         public boolean isProxyEnabled()
@@ -628,7 +628,7 @@ public abstract class BaseTestCase extends ConfigurableTestCase
             return _proxyPort;
         }
 
-        public String getJsfVersion() {
+        public JSFVersion getJsfVersion() {
             return _jsfVersion;
         }
         

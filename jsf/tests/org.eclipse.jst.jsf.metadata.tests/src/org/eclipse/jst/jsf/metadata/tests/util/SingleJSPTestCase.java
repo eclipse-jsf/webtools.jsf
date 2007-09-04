@@ -14,6 +14,7 @@ package org.eclipse.jst.jsf.metadata.tests.util;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.metadataprocessors.IMetaDataEnabledFeature;
 import org.eclipse.jst.jsf.metadataprocessors.MetaDataEnabledProcessingFactory;
 import org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValue;
@@ -51,7 +52,7 @@ public abstract class SingleJSPTestCase extends JSPTestCase
     protected final String                      _destFileName;
     
 
-    protected SingleJSPTestCase(final String srcFileName, final String destFileName, final String defaultJSFVersion, final String defaultFacesConfigFile)
+    protected SingleJSPTestCase(final String srcFileName, final String destFileName, final JSFVersion defaultJSFVersion, final String defaultFacesConfigFile)
     {
         super(defaultJSFVersion, defaultFacesConfigFile);
         _srcFileName = srcFileName;
@@ -78,8 +79,8 @@ public abstract class SingleJSPTestCase extends JSPTestCase
         }
     }
 	
-	protected IMetaDataEnabledFeature getProcessor(Class klass, String uri, String tagname, String attrName) {
-		List ret = MetaDataEnabledProcessingFactory.getInstance().
+	protected IMetaDataEnabledFeature getProcessor(Class<?> klass, String uri, String tagname, String attrName) {
+		List<?> ret = MetaDataEnabledProcessingFactory.getInstance().
 		getAttributeValueRuntimeTypeFeatureProcessors(klass, 
 				getStructuredDocumentContext(_structuredDocument, 1), //just need to establish the project; don't really care about offset.  should consider improving API
 				uri, 
@@ -93,7 +94,7 @@ public abstract class SingleJSPTestCase extends JSPTestCase
 					
 	}
 	
-	protected void assertPossibleValues(List possibleValues, String[] strings) {
+	protected void assertPossibleValues(List<?> possibleValues, String[] strings) {
 		
 		for (int i=0;i < strings.length;i++) {
 			boolean found = false;

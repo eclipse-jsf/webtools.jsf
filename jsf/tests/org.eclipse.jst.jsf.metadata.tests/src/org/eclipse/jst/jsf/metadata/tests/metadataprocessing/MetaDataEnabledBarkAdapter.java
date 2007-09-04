@@ -36,7 +36,7 @@ public class MetaDataEnabledBarkAdapter extends AbstractMetaDataEnabledFeature
 		return true;
 	}
 
-	public List getBarks() {
+	public List<?> getBarks() {
 		return getTraitValueAsListOfStrings("barks");
 //		//notice that we want to use the bundle id of the extender
 //		return CMAnnotationHelper.getCMAttributePropertyValues(MetadataTestsPlugin.ID_BUNDLE, getCMAnnotationContext().getUri(),
@@ -44,7 +44,7 @@ public class MetaDataEnabledBarkAdapter extends AbstractMetaDataEnabledFeature
 //					"barks");
 	}
 
-	public List getPossibleValues() {
+	public List<?> getPossibleValues() {
 		return getBarks();
 	}
 

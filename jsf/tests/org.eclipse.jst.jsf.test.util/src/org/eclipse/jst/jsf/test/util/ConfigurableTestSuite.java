@@ -26,11 +26,11 @@ public class ConfigurableTestSuite extends TestSuite
      * @param theClass
      * @param name
      */
-    public ConfigurableTestSuite(Class theClass, String name) {
+    public ConfigurableTestSuite(Class<?> theClass, String name) {
         super(theClass, name);
     }
 
-    public ConfigurableTestSuite(Class theClass)
+    public ConfigurableTestSuite(Class<?> theClass)
     {
         super(theClass);
     }

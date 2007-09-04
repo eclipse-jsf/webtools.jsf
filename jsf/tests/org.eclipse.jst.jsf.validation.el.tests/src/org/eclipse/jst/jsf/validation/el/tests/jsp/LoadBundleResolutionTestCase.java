@@ -5,11 +5,12 @@ import java.util.List;
 
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
-import org.eclipse.jst.jsf.core.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.test.util.TestFileResource;
 import org.eclipse.jst.jsf.validation.el.tests.ELValidationTestPlugin;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
+import org.eclipse.wst.validation.internal.provisional.core.IMessage;
 
 /**
  * Test cases for load bundle resolution
@@ -20,7 +21,7 @@ public class LoadBundleResolutionTestCase extends SingleJSPTestCase
 {
     public LoadBundleResolutionTestCase() 
     {
-        super("/testdata/jsps/loadBundleResolution.jsp.data", "/loadBundleResolution.jsp", IJSFCoreConstants.FACET_VERSION_1_1,FACES_CONFIG_FILE_NAME_1_1);
+        super("/testdata/jsps/loadBundleResolution.jsp.data", "/loadBundleResolution.jsp", JSFVersion.V1_1,FACES_CONFIG_FILE_NAME_1_1);
     }
 
     protected void setUp() throws Exception
@@ -70,7 +71,7 @@ public class LoadBundleResolutionTestCase extends SingleJSPTestCase
 
     public void testWarningExprs() 
     {
-        List list = assertSemanticWarning(1535, Signature.SIG_LONG, 1);
+        List<IMessage> list = assertSemanticWarning(1535, Signature.SIG_LONG, 1);
         assertContainsProblem(list, DiagnosticFactory.UNARY_OP_STRING_CONVERSION_NOT_GUARANTEED_ID);
 
         list = assertSemanticWarning(1588, null, 1);

@@ -4,9 +4,10 @@ import java.util.List;
 
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
-import org.eclipse.jst.jsf.core.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
+import org.eclipse.wst.validation.internal.provisional.core.IMessage;
 
 /**
  * Test cases for arithmetic multiply
@@ -18,7 +19,7 @@ public class ArithmeticMultiplyTestCase extends SingleJSPTestCase
 {
     public ArithmeticMultiplyTestCase() 
     {
-        super("/testdata/jsps/arithmeticMultiply.jsp.data", "/WEB-INF/arithmeticMultiply.jsp", IJSFCoreConstants.FACET_VERSION_1_1,FACES_CONFIG_FILE_NAME_1_1);
+        super("/testdata/jsps/arithmeticMultiply.jsp.data", "/WEB-INF/arithmeticMultiply.jsp", JSFVersion.V1_1,FACES_CONFIG_FILE_NAME_1_1);
     }
 
     protected void setUp() throws Exception 
@@ -66,7 +67,7 @@ public class ArithmeticMultiplyTestCase extends SingleJSPTestCase
     
     public void testWarningExprs()
     {
-        List list = assertSemanticWarning(1336, Signature.SIG_LONG, 1);
+        List<IMessage> list = assertSemanticWarning(1336, Signature.SIG_LONG, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID);
         
         list = assertSemanticWarning(1372, Signature.SIG_DOUBLE, 1);
@@ -87,7 +88,7 @@ public class ArithmeticMultiplyTestCase extends SingleJSPTestCase
     
     public void testErrorExprs()
     {
-        List list = assertSemanticError(1609, null, 1);
+        List<IMessage> list = assertSemanticError(1609, null, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
 
         list = assertSemanticError(1648, null, 1);

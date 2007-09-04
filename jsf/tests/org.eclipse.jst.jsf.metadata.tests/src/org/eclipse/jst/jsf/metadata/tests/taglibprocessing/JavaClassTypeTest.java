@@ -11,7 +11,7 @@
  ********************************************************************************/
 package org.eclipse.jst.jsf.metadata.tests.taglibprocessing;
 
-import org.eclipse.jst.jsf.core.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.metadata.tests.util.IJSFRuntimeRequiredV11;
 import org.eclipse.jst.jsf.metadata.tests.util.SingleJSPTestCase;
 import org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValues;
@@ -22,7 +22,7 @@ public class JavaClassTypeTest extends SingleJSPTestCase implements IJSFRuntimeR
 	public JavaClassTypeTest() {
 		super("/testfiles/jsps/javaClassType.jsp.data",
 				"/javaClassType.jsp",
-				IJSFCoreConstants.FACET_VERSION_1_1,
+				JSFVersion.V1_1,
 				"/testfiles/web/faces-config_1_1.xml.data");
 		
 

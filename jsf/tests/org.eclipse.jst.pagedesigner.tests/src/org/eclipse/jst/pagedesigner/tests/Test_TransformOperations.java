@@ -22,6 +22,8 @@ import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocume
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
 import org.eclipse.jst.jsf.core.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.JSFVersion;
+import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
 import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
@@ -69,7 +71,7 @@ public class Test_TransformOperations extends TestCase {
         		"/testdata/Test_TransformOperations.jsp.data",
         		"/Test_TransformOperations.jsp");
 
-        assertTrue(Utils.addJSFRuntimeJarsToClasspath("1.1", jsfFacetedTestEnv));
+        assertTrue(JSFCoreUtilHelper.addJSFRuntimeJarsToClasspath(JSFVersion.V1_1, jsfFacetedTestEnv));
 	}
 
 	/**
@@ -283,7 +285,7 @@ public class Test_TransformOperations extends TestCase {
             tagConverter.convertRefresh(null);
 
             //test tag converter to ensure correct child element was copied to child node list
-            List childNodes = tagConverter.getChildModeList();
+            List<?> childNodes = tagConverter.getChildModeList();
             assertTrue(childNodes.size() > 1);
             Node secondChildNode = (Node)childNodes.get(1);
             assertTrue(secondChildNode instanceof Element);

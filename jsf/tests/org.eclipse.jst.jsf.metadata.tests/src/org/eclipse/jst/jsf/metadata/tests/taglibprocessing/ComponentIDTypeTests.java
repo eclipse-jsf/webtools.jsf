@@ -11,7 +11,7 @@
  
 package org.eclipse.jst.jsf.metadata.tests.taglibprocessing;
 
-import org.eclipse.jst.jsf.core.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.metadata.tests.util.SingleJSPTestCase;
 import org.eclipse.jst.jsf.metadataprocessors.features.ELIsNotValidException;
 import org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValues;
@@ -25,7 +25,7 @@ public class ComponentIDTypeTests extends SingleJSPTestCase {
 	public ComponentIDTypeTests() {
 		super(	"/testfiles/jsps/facesConfigValidatorIDType.jsp.data/", 
 				"/facesConfigValidatorIDType.jsp", 
-				IJSFCoreConstants.FACET_VERSION_1_1,
+				JSFVersion.V1_1,
 				"/testfiles/web/faces-config_1_1.xml.data");
 	}
 	protected void setUp() throws Exception {

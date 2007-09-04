@@ -14,9 +14,10 @@ import java.util.List;
 
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
-import org.eclipse.jst.jsf.core.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
+import org.eclipse.wst.validation.internal.provisional.core.IMessage;
 
 /**
  * Main test cases for the bracket operator -- x['y']
@@ -27,7 +28,7 @@ public class BracketOperatorTestCase extends SingleJSPTestCase
 {
     public BracketOperatorTestCase() 
     {
-        super("/testdata/jsps/bracketOperator.jsp.data", "/bracketOperator.jsp", IJSFCoreConstants.FACET_VERSION_1_1,FACES_CONFIG_FILE_NAME_1_1);
+        super("/testdata/jsps/bracketOperator.jsp.data", "/bracketOperator.jsp", JSFVersion.V1_1,FACES_CONFIG_FILE_NAME_1_1);
     }
 
     protected void setUp() throws Exception
@@ -144,7 +145,7 @@ public class BracketOperatorTestCase extends SingleJSPTestCase
     public void testWarningExprs() 
     {
 
-        List list = assertSemanticWarning(3160, null, 1);
+        List<IMessage> list = assertSemanticWarning(3160, null, 1);
         assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
         
         list = assertSemanticWarning(3205, null, 1);
@@ -196,7 +197,7 @@ public class BracketOperatorTestCase extends SingleJSPTestCase
     
     public void testErrorExprs() 
     { 
-        List list = assertSemanticError(4260, null, 1);
+        List<IMessage> list = assertSemanticError(4260, null, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
 
         list = assertSemanticError(4344, null, 1);
