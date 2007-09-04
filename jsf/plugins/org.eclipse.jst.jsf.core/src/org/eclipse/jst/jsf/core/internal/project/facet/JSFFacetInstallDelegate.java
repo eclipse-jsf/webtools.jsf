@@ -294,11 +294,11 @@ public final class JSFFacetInstallDelegate implements IDelegate {
 			// create or update servlet ref
 			Servlet servlet = JSFUtils12.findJSFServlet(webApp);// check to see
 																// if already
-																// present
-			if (servlet != null) {
-				// remove old mappings
-				JSFUtils12.removeURLMappings(webApp, servlet);
-			}
+// No longer removing any old mappings on install - see 194919 															// present
+//			if (servlet != null) {
+//				// remove old mappings
+//				JSFUtils12.removeURLMappings(webApp, servlet);
+//			}
 			
 			servlet = JSFUtils12
 					.createOrUpdateServletRef(webApp, config, servlet);
@@ -326,10 +326,12 @@ public final class JSFFacetInstallDelegate implements IDelegate {
 			org.eclipse.jst.j2ee.webapplication.Servlet servlet = JSFUtils11.findJSFServlet(webApp);// check to see
 																// if already
 																// present
-			if (servlet != null) {
-				// remove old mappings
-				JSFUtils11.removeURLMappings(webApp, servlet);
-			}
+			
+// No longer removing any old mappings on install - see 194919 
+//			if (servlet != null) {
+//				// remove old mappings
+//				JSFUtils11.removeURLMappings(webApp, servlet);
+//			}
 			
 			servlet = JSFUtils11
 					.createOrUpdateServletRef(webApp, config, servlet);

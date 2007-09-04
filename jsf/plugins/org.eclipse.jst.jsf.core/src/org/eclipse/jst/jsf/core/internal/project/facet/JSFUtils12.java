@@ -175,18 +175,41 @@ public class JSFUtils12 extends JSFUtils{
 			Servlet servlet) {
 		
 		if (urlMappingList.size() > 0) {
-			ServletMapping mapping = WebFactory.eINSTANCE.createServletMapping();
-			mapping.setServletName(servlet.getServletName());
-			webApp.getServletMappings().add(mapping);
+			ServletMapping mapping = findServletMapping(webApp, servlet);
+			if (mapping == null){
+				mapping = WebFactory.eINSTANCE.createServletMapping();
+				mapping.setServletName(servlet.getServletName());
+				webApp.getServletMappings().add(mapping);
+			}
 			// Add patterns
 			Iterator it = urlMappingList.iterator();
 			while (it.hasNext()) {
 				String pattern = (String) it.next();
-				UrlPatternType urlPattern = JavaeeFactory.eINSTANCE.createUrlPatternType();
-				urlPattern.setValue(pattern);				
-				mapping.getUrlPatterns().add(urlPattern);							
+				if (!(doesServletMappingPatternExist(webApp, mapping, pattern))){
+					UrlPatternType urlPattern = JavaeeFactory.eINSTANCE.createUrlPatternType();
+					urlPattern.setValue(pattern);				
+					mapping.getUrlPatterns().add(urlPattern);
+				}
 			}
 		}
+	}
+	
+	private static ServletMapping findServletMapping(final WebApp webApp, final Servlet servlet) {
+		for (Iterator it=webApp.getServletMappings().iterator();it.hasNext();){
+			ServletMapping mapping = (ServletMapping)it.next();
+			if (mapping.getServletName().equals(servlet.getServletName()))
+				return mapping;
+		}
+		return null;
+	}
+
+	private static boolean doesServletMappingPatternExist(final WebApp webApp, final ServletMapping mapping,
+			final String pattern) {	
+		for (Iterator it=mapping.getUrlPatterns().iterator();it.hasNext();){
+			if(pattern.equals(((UrlPatternType)it.next()).getValue()))
+				return true;
+		}
+		return false;
 	}
 	
 	/**

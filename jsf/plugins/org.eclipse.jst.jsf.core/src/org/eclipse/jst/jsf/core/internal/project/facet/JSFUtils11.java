@@ -214,15 +214,37 @@ public class JSFUtils11 extends JSFUtils {
 		Iterator it = urlMappingList.iterator();
 		while (it.hasNext()) {
 			String pattern = (String) it.next();
-			ServletMapping mapping = WebapplicationFactory.eINSTANCE
-					.createServletMapping();
-			mapping.setServlet(servlet);
-			mapping.setName(servlet.getServletName());
-			mapping.setUrlPattern(pattern);
-			webApp.getServletMappings().add(mapping);
+			if (!(doesServletMappingExist(webApp, servlet, pattern))){
+				ServletMapping mapping = WebapplicationFactory.eINSTANCE
+						.createServletMapping();
+				mapping.setServlet(servlet);
+				mapping.setName(servlet.getServletName());
+				mapping.setUrlPattern(pattern);
+				webApp.getServletMappings().add(mapping);
+			}
 		}
 	}
 	
+
+	private static boolean doesServletMappingExist(final WebApp webApp, final Servlet servlet,
+			final String pattern) {	
+		
+		List mappings = webApp.getServletMappings();
+		String servletName = servlet.getServletName();
+		if (servletName != null) {
+			for (int i=mappings.size()-1;i>=0;--i){
+				ServletMapping mapping = (ServletMapping)mappings.get(i);
+				if (mapping != null && 
+						mapping.getServlet() != null && 
+						mapping.getServlet().getServletName() != null &&
+						mapping.getServlet().getServletName().equals(servletName) &&
+						mapping.getUrlPattern().equals(pattern)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 
 	/**
 	 * Removes servlet-mappings for servlet using servlet-name.
