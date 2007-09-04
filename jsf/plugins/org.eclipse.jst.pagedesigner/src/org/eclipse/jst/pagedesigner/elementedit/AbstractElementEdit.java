@@ -16,6 +16,9 @@ import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jst.jsf.common.dom.TagIdentifier;
 import org.eclipse.jst.jsf.core.internal.tld.CMUtil;
+import org.eclipse.jst.pagedesigner.itemcreation.ITagCreator;
+import org.eclipse.jst.pagedesigner.itemcreation.customizer.AbstractDropCustomizer;
+import org.eclipse.jst.pagedesigner.itemcreation.customizer.IDropCustomizer;
 import org.eclipse.jst.pagedesigner.parts.ElementEditPart;
 import org.eclipse.jst.pagedesigner.parts.NodeEditPart;
 import org.eclipse.jst.pagedesigner.viewer.IDropLocationStrategy;
@@ -23,6 +26,7 @@ import org.eclipse.wst.xml.core.internal.contentmodel.CMElementDeclaration;
 import org.w3c.dom.Element;
 
 /**
+ * <p><b>Provisional API - subject to change</b></p>
  * @author mengbo
  * @version 1.5
  */
@@ -78,7 +82,7 @@ public class AbstractElementEdit implements IElementEdit {
 	 * Also, the default ResizeCommand will adjust "style", so if child class
 	 * override this method, they should also use different command.
 	 * 
-	 * @see org.eclipse.jst.pagedesigner.editpolicies.ElementResizableEditPolicy#getResizeCommand(ChangeBoundsRequest)
+	 * @see org.eclipse.jst.pagedesigner.editpolicies.ElementResizableEditPolicy#getResizeCommand(org.eclipse.gef.requests.ChangeBoundsRequest)
 	 */
 	public boolean isResizable(Element ele) {
 		CMElementDeclaration decl = CMUtil.getElementDeclaration(ele);
@@ -97,6 +101,20 @@ public class AbstractElementEdit implements IElementEdit {
     public IDropLocationStrategy getDropRequestorLocationStrategy(TagIdentifier tag, EditPartViewer viewer) {
         return null;
     }
+
+    private final static IDropCustomizer   DEFAULT_DROP_CUSTOMIZER = 
+        new AbstractDropCustomizer(){/* do nothing; use defaults */};
     
-    
+    public IDropCustomizer getDropCustomizer(TagIdentifier tagId) 
+    {
+        return DEFAULT_DROP_CUSTOMIZER;
+    }
+
+    /* (non-Javadoc)
+     * @see org.eclipse.jst.pagedesigner.elementedit.IElementEdit#getTagCreator(org.eclipse.jst.jsf.common.dom.TagIdentifier)
+     */
+    public ITagCreator getTagCreator(TagIdentifier tagId) 
+    {
+        return null;
+    }
 }

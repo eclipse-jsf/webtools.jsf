@@ -76,7 +76,7 @@ public class JSPUtil {
 		if (prefix != null) {
 			return prefix;
 		}
-		
+
 		prefix = findUnusedPrefix(model, defaultPrefix);
 
 		//need proper API to determine xml type... this may need to change in future
@@ -142,6 +142,31 @@ public class JSPUtil {
 		TLDCMDocumentManager m = TaglibController.getTLDCMDocumentManager(model
 				.getStructuredDocument());
 		if (m == null) {
+		    // if the doc manager has nothing but the type is XML,
+		    // then see if the prefix is encoded as a namespace in
+		    // the doc root
+		    if (model.getDocument().isXMLType())
+		    {
+		        Element root = getRootElement(model);
+	            if (root != null){              
+	                NamedNodeMap attrs = root.getAttributes();
+	                for (int i=0;i<attrs.getLength();i++){
+	                    Attr a = (Attr)attrs.item(i);
+	                    //is the taglib uri already declared?
+	                    if (a.getValue().equals(uri)
+	                            && a.getName().startsWith("xmlns:"))
+	                    {
+	                        String prefix =  a.getNodeName().substring("xmlns:".length());
+	                        
+	                        if ("".equals(prefix))
+	                        {
+	                            prefix = null;
+	                        }
+	                        return prefix;
+	                    }
+	                }
+	            }
+		    }
 			return null;
 		}
 		List trackers = m.getTaglibTrackers();

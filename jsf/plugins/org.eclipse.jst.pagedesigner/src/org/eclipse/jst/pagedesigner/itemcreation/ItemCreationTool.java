@@ -11,11 +11,20 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.itemcreation;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.SharedCursors;
+import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.tools.TargetingTool;
+import org.eclipse.jst.jsf.common.dom.TagIdentifier;
+import org.eclipse.jst.jsf.core.internal.tld.TagIdentifierFactory;
+import org.eclipse.jst.pagedesigner.commands.CreateItemCommand;
 import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
+import org.eclipse.jst.pagedesigner.elementedit.ElementEditFactoryRegistry;
+import org.eclipse.jst.pagedesigner.elementedit.IElementEdit;
+import org.eclipse.jst.pagedesigner.itemcreation.customizer.IDropCustomizer;
 import org.eclipse.swt.graphics.Cursor;
 
 /**
@@ -136,17 +145,66 @@ public class ItemCreationTool extends TargetingTool {
 	 * 
 	 * @see org.eclipse.gef.tools.AbstractTool#handleButtonUp(int)
 	 */
-	protected boolean handleButtonUp(int button) {
-		if (stateTransition(STATE_DRAG | STATE_DRAG_IN_PROGRESS, STATE_TERMINAL)) {
+	protected boolean handleButtonUp(int button) 
+	{
+		if (stateTransition(STATE_DRAG | STATE_DRAG_IN_PROGRESS, STATE_TERMINAL)) 
+		{
 			eraseTargetFeedback();
 			unlockTargetEditPart();
-			performCreation(button);
+			
+			// customizer may cancel the drop
+			customizeDropAndMaybeExecute(button);
 		}
-
+		
 		setState(STATE_TERMINAL);
 		handleFinished();
 
 		return true;
+	}
+
+	/**
+	 * @param button
+	 */
+	protected void customizeDropAndMaybeExecute(final int button)
+	{
+        Command command = getCurrentCommand();
+        
+        int status = IStatus.OK;
+        if (command instanceof CreateItemCommand)
+        {
+            status = performCustomization((CreateItemCommand)command);
+        }
+        
+        if (status == IStatus.OK)
+        {
+            performCreation(button);
+        }
+	}
+
+	private int performCustomization(CreateItemCommand command)
+	{
+	    IStatus status = Status.OK_STATUS;
+	    TagIdentifier tagId = 
+	        TagIdentifierFactory.createJSPTagWrapper
+	            (_tagPaletteItem.getURI(), _tagPaletteItem.getTagName());
+	    
+	    IElementEdit elementEdit = ElementEditFactoryRegistry.getInstance().createElementEdit(tagId);
+
+	    if (elementEdit != null)
+	    {
+	        IDropCustomizer customizer = elementEdit.getDropCustomizer(tagId);
+    	    
+    	    if (customizer != null)
+    	    {
+        	    status = customizer.runCustomizer();
+        	    
+        	    if (status.getSeverity() == IStatus.OK)
+        	    {
+        	        command.setCustomizationData(customizer.getDropCustomizationData());
+        	    }
+    	    }
+	    }
+	    return status.getSeverity();
 	}
 
 	/**

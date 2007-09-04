@@ -11,6 +11,10 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner;
 
+import org.eclipse.jst.jsf.common.dom.TagIdentifier;
+import org.eclipse.jst.jsf.core.internal.tld.TagIdentifierFactory;
+import org.eclipse.wst.xml.core.internal.provisional.contentmodel.CMDocType;
+
 /**
  * @author mengbo
  */
@@ -235,7 +239,13 @@ public class IHTMLConstants {
 
 	public static final String TAG_VAR = "var"; // instance of a variable or
 
-	// program argument
+	/**
+	 * Tag identifier for an HTML form tag
+	 */
+	public static final TagIdentifier TAG_IDENTIFIER_HTML_FORM =
+	    TagIdentifierFactory.createJSPTagWrapper(CMDocType.HTML_DOC_TYPE, TAG_FORM);
+	
+    // program argument
 
 	public static final String ATTR_ABBR = "abbr";
 

@@ -18,6 +18,7 @@ import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
 
 /**
  * Tag tool item creation request class
+ * 
  * @author mengbo
  */
 public class ItemCreationRequest extends Request implements DropRequest {

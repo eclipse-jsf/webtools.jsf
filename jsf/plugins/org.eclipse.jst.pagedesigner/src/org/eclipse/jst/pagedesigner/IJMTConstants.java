@@ -49,4 +49,9 @@ public interface IJMTConstants {
 	public static final String ELEMENT_EDIT_FACTORY = "elementEditFactory"; //$NON-NLS-1$
 
 	public static final String LINK_CREATOR = "linkCreator"; //$NON-NLS-1$
+
+    public static final String TAG_CREATOR_FACTORY_EXT_NAME = "tagCreationFactories"; // $NON-NLS-1$
+
+    public static final Object TAG_CREATOR_FACTORY_ELEMENT_NAME = "tagCreatorFactory"; // $NON-NLS-1$
+    
 }

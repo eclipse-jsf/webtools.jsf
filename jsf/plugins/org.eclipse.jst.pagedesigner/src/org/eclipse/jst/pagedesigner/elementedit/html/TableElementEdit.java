@@ -218,6 +218,9 @@ public class TableElementEdit extends AbstractElementEdit {
 	static class TableResizePolicy extends TableResizableEditPolicy {
 		ElementEditPart _part;
 
+		/**
+		 * @param part
+		 */
 		public TableResizePolicy(ElementEditPart part) {
 			_part = part;
 		}

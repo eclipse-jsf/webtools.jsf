@@ -176,7 +176,7 @@ public class ELExpressionValidator
      * @return an unmodifiable list containing all the detected syntax errors
      * or an empty list if validate has not yet been called.
      */
-    public List getSyntaxProblems()
+    public List<IMessage> getSyntaxProblems()
     {
         return Collections.unmodifiableList(_syntaxProblems);
     }

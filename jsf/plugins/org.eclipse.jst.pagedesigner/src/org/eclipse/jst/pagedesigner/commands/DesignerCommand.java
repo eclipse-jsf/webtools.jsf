@@ -48,7 +48,7 @@ import org.w3c.dom.Node;
  * @author mengbo
  */
 public abstract class DesignerCommand extends Command {
-	private IDOMModel _model;
+	private final IDOMModel _model;
 
 	/**
 	 * the graphical viewer
@@ -74,24 +74,40 @@ public abstract class DesignerCommand extends Command {
 	 *            the node must be a node in the IHTMLGraphicalViewer.
 	 */
 	public DesignerCommand(String label, IDOMNode node) {
-		super(label);
-		this._model = node.getModel();
-		IDOMDocument doc = (IDOMDocument) node.getOwnerDocument();
-
-		EditPart part = (EditPart) doc.getAdapterFor(EditPart.class);
-		if (part != null) {
-			this._viewer = (IHTMLGraphicalViewer) part.getViewer();
-		}
+	    this(label, (IDOMDocument) node.getOwnerDocument());
 	}
 
+	/**
+	 * @param label
+	 * @param document
+	 */
+	public DesignerCommand(String label, IDOMDocument document)
+	{
+	    super(label);
+        this._model = document.getModel();
+        EditPart part = (EditPart) document.getAdapterFor(EditPart.class);
+        if (part != null) {
+            this._viewer = (IHTMLGraphicalViewer) part.getViewer();
+        }
+	}
+	/**
+	 * @return the GEF viewer this command is targeted for
+	 * @deprecated Should remove command coupling to non-model objects
+	 */
 	public IHTMLGraphicalViewer getViewer() {
 		return _viewer;
 	}
 
+	/**
+	 * @return the DOM model that this command will effect
+	 */
 	public IDOMModel getModel() {
 		return _model;
 	}
 
+	/**
+	 * @return the dom document for the model this command will effect
+	 */
 	public IDOMDocument getDocument() {
 		return getModel().getDocument();
 	}
@@ -128,6 +144,7 @@ public abstract class DesignerCommand extends Command {
 	 * prePreExecute and postPostExecute is a pair. prePreExecute() SHOULD NOT
 	 * throw any exception, if it throw any exception, it should catch itself
 	 * and return false to indicate not continue.
+	 * @return true if execution should continue, false if should not 
 	 */
 	protected boolean prePreExecute() {
 		int position = -1;
@@ -246,6 +263,10 @@ public abstract class DesignerCommand extends Command {
 	 */
 	protected abstract ISelection getAfterCommandDesignerSelection();
 
+	/**
+	 * @param range
+	 * @return a selection that contains the dom range or null if one doesn't exist
+	 */
 	protected ISelection toDesignRange(DOMRange range) {
 		try {
 			if (range == null) {
@@ -267,6 +288,10 @@ public abstract class DesignerCommand extends Command {
 
 	}
 
+	/**
+	 * @param node
+	 * @return a selection for the node
+	 */
 	protected IStructuredSelection toDesignSelection(Node node) {
 		if (node instanceof INodeNotifier) {
 			EditPart part = (EditPart) ((INodeNotifier) node)

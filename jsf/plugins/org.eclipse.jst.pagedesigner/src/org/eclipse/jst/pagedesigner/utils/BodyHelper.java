@@ -192,7 +192,7 @@ public class BodyHelper {
         // good, we find a body container and the new node should be header
         // of it.
         Node child = headerContainer.getFirstChild();
-        // TODO: dead? Node refNode = position.getNextSiblingNode();
+
         // if parent is different from headerContainer, then
         // child!=referenceHolder[0] will always be true
         while (child != null) // && child != refNode)
@@ -246,15 +246,16 @@ public class BodyHelper {
 	 * @param position
 	 * @param body
 	 * @param defaultPrefix
-	 * @return
+	 * @return the new dom position based on the insert.  May return null if
+	 * insert fails.
 	 */
 	public static IDOMPosition insertBody(IDOMPosition position, QName body,
 			String defaultPrefix) {
 		IBodyInfo bodyInfo = getBodyInfo((IDOMNode) position.getContainerNode());
 
 		Node node = position.getContainerNode();
-		Node originalContainer = node;
-		Node nextSibling = position.getNextSiblingNode();
+		final Node originalContainer = node;
+		final Node nextSibling = position.getNextSiblingNode();
 
 		// create the body element first.
 		Document ownerDoc;
@@ -267,9 +268,9 @@ public class BodyHelper {
 			return null; // should not happen
 		}
 
-		String prefix = JSPUtil.getOrCreatePrefix(((IDOMNode) node).getModel(),
+		final String prefix = JSPUtil.getOrCreatePrefix(((IDOMNode) node).getModel(),
 				body.getNamespaceURI(), defaultPrefix);
-		Element ele = ownerDoc.createElement((prefix == null ? ""
+		final Element ele = ownerDoc.createElement((prefix == null ? ""
 				: (prefix + ":"))
 				+ body.getLocalPart());
 
@@ -322,7 +323,8 @@ public class BodyHelper {
 	 * 
 	 * @param uri
 	 * @param tag
-	 * @return
+	 * @return true if tag is an element that should be moved in response to 
+	 * body insert.
 	 */
 	public static boolean shouldIgnoreAdjust(String uri, String tag) {
 		// FIXME:
@@ -331,6 +333,10 @@ public class BodyHelper {
 				|| (ITLDConstants.URI_JSP.equals(uri));
 	}
 
+	/**
+	 * @param node
+	 * @return the body info corresponding to node (should we use a node adapter?)
+	 */
 	public static IBodyInfo getBodyInfo(IDOMNode node) {
 		// TODO: in the future, when bodyinfo is no longer singleton, we'll use
 		// adapter mechanism.

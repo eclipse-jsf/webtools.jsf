@@ -147,7 +147,7 @@ public class PaletteElementTemplateHelper {
 		if (node != null && refNode != null) {
 			String uri = refNode.getAttribute(PREFIX_ATTRIBUTE); //$NON-NLS-1$
 			if (uri != null) {
-				String prefix = JSPUtil.getPrefix(model, uri);
+				String prefix = JSPUtil.getOrCreatePrefix(model, uri, null);
 				node.setPrefix(prefix);
 			}
 		}

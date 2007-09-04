@@ -48,11 +48,6 @@
 		<trait id="large-icon">
 			<value>large/JSF_ACTIONLISTENER.gif</value>
 		</trait>
-		<trait id="tag-create">
-			<value xsi:type="pi:TagCreationInfo">
-				<attribute id="type" />
-			</value>
-		</trait>
 	</entity>
 	<entity id="attribute" type="tag">
 		<trait id="small-icon">
@@ -60,12 +55,6 @@
 		</trait>
 		<trait id="large-icon">
 			<value>large/JSF_ATTRIBUTE.gif</value>
-		</trait>
-		<trait id="tag-create">
-			<value xsi:type="pi:TagCreationInfo">
-				<attribute id="type" />
-				<attribute id="value"/>
-			</value>
 		</trait>
 	</entity>	
 	<entity id="convertDateTime" type="tag">
@@ -91,11 +80,6 @@
 		<trait id="large-icon">
 			<value>large/JSF_CONVERTER.gif</value>
 		</trait>
-		<trait id="tag-create">
-			<value xsi:type="pi:TagCreationInfo">
-				<attribute id="converterId" />
-			</value>
-		</trait>
 	</entity>
 	<entity id="facet" type="tag">
 		<trait id="small-icon">
@@ -103,11 +87,6 @@
 		</trait>
 		<trait id="large-icon">
 			<value>large/JSF_FACET.gif</value>
-		</trait>
-		<trait id="tag-create">
-			<value xsi:type="pi:TagCreationInfo">
-				<attribute id="name" />
-			</value>
 		</trait>
 	</entity>
 	<entity id="loadBundle" type="tag">
@@ -117,12 +96,6 @@
 		<trait id="large-icon">
 			<value>large/JSF_LOADBUNDLE.gif</value>
 		</trait>
-		<trait id="tag-create">
-			<value xsi:type="pi:TagCreationInfo">
-				<attribute id="basename" />
-				<attribute id="var" />
-			</value>
-		</trait>
 	</entity>
 	<entity id="param" type="tag">
 		<trait id="small-icon">
@@ -130,7 +103,7 @@
 		</trait>
 		<trait id="large-icon">
 			<value>large/JSF_PARAM.gif</value>
-		</trait>	
+		</trait>
 	</entity>
 	<entity id="selectItem" type="tag">
 		<trait id="small-icon">

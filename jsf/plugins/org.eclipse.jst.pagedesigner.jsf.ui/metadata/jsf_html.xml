@@ -208,11 +208,6 @@
 		<trait id="large-icon">
 			<value>large/JSF_MESSAGE.gif</value>
 		</trait>
-		<trait id="tag-create">
-			<value xsi:type="pi:TagCreationInfo">
-				<attribute id="for" />
-			</value>
-		</trait>	
 	</entity>
 	<entity id="messages" type="tag">
 		<trait id="display-label">
@@ -246,11 +241,6 @@
 		<trait id="large-icon">
 			<value>large/JSF_OUTPUTLABEL.gif</value>
 		</trait>		
-		<trait id="tag-create">
-			<value xsi:type="pi:TagCreationInfo">
-				<attribute id="for" />
-			</value>
-		</trait>
 	</entity>
 	<entity id="outputLink" type="tag">
 		<trait id="display-label">

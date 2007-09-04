@@ -17,14 +17,16 @@ import org.eclipse.jst.jsf.common.dom.TagIdentifier;
 /**
  * @author mengbo
  * @version 1.5
+ * 
+ * Clients should not implement this interface.  Extend AbstractElementEditFactory instead.
  */
 public interface IElementEditFactory {
 	/**
 	 * 
-	 * @param element
+	 * @param tag
 	 * @return null if this factory don't support this element
 	 */
-	public IElementEdit createElementEdit(TagIdentifier tagWrapper);
+	public IElementEdit createElementEdit(TagIdentifier tag);
 
 	/**
 	 * get the URI namespace that this factory support. "null" means this

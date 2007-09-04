@@ -38,6 +38,9 @@ public class TaglibURIAction extends Action {
 
 	private Element element;
 
+	/**
+	 * Default constructor
+	 */
 	public TaglibURIAction() {
 		setText(PDPlugin.getResourceString("ElementEdit.Submenu.Taglib"));//$NON-NLS-1$
 	}

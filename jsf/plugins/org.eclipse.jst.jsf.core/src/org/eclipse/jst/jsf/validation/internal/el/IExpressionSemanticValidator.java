@@ -13,6 +13,7 @@ package org.eclipse.jst.jsf.validation.internal.el;
 import java.util.List;
 
 import org.eclipse.jst.jsf.common.internal.types.SignatureBasedType;
+import org.eclipse.wst.validation.internal.provisional.core.IMessage;
 
 /**
  * Exposes certain parts of the ASTSemanticValidator without exposing the whole class
@@ -31,7 +32,7 @@ public interface IExpressionSemanticValidator {
     /**
      * @return the list of generated message (may be empty if validate has not been called).
      */
-    public abstract List getMessages();
+    public abstract List<IMessage> getMessages();
 
     /**
      * @return the value type of fully resolved expression

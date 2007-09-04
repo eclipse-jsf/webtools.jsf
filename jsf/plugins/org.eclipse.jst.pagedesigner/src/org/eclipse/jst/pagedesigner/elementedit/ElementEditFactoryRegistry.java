@@ -45,13 +45,17 @@ public class ElementEditFactoryRegistry {
 		}
 	}
 
+	/**
+	 * Add a factory to list available.
+	 * 
+	 * @param fac
+	 */
 	public void addFactory(IElementEditFactory fac) {
 		_factories.add(fac);
 	}
 
     /**
-     * @param uri
-     * @param tagName
+     * @param tagIdentifier 
      * @return an IElementEdit constructed for the tag uniquely identified
      * by the ns uri (tag uri for JSP tags) and tagName (element name) or null
      * if the system can't create one.
@@ -97,6 +101,9 @@ public class ElementEditFactoryRegistry {
         return createElementEdit(tagIdentifier);
 	}
 
+	/**
+	 * @return the single instance of the factory registry
+	 */
 	public static ElementEditFactoryRegistry getInstance() {
 		if (_instance == null) {
 			_instance = new ElementEditFactoryRegistry();

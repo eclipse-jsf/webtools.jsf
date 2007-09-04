@@ -27,10 +27,8 @@ import org.eclipse.jst.pagedesigner.dom.DOMPosition;
 import org.eclipse.jst.pagedesigner.dom.DOMPositionHelper;
 import org.eclipse.jst.pagedesigner.dom.DOMRefPosition;
 import org.eclipse.jst.pagedesigner.dom.EditModelQuery;
-import org.eclipse.jst.pagedesigner.dom.IDOMPosition;
 import org.eclipse.jst.pagedesigner.parts.NodeEditPart;
 import org.eclipse.jst.pagedesigner.parts.TextEditPart;
-import org.eclipse.jst.pagedesigner.utils.BodyHelper;
 import org.eclipse.jst.pagedesigner.validation.caret.IMovementMediator;
 import org.eclipse.jst.pagedesigner.validation.caret.IPositionMediator;
 import org.eclipse.jst.pagedesigner.validation.caret.Target;
@@ -68,7 +66,7 @@ public class EditPartPositionHelper {
 	}
 
 	/**
-	 * @param endPosition
+	 * @param position 
 	 * @return null means failed to convert to rect.
 	 */
 	public static Rectangle convertToAbsoluteCaretRect(DesignPosition position) {
@@ -128,7 +126,8 @@ public class EditPartPositionHelper {
 	 * 
 	 * @param host
 	 * @param p
-	 * @return
+	 * @param validator 
+	 * @return the design position
 	 */
 	public static DesignPosition findEditPartPosition(EditPart host, Point p,
 			IPositionMediator validator) {
@@ -160,12 +159,13 @@ public class EditPartPositionHelper {
 	 * This function find the position, if there is one which is widget or text
 	 * and it contains p, or there is not such widget, then boxLine will returns
 	 * the widget that are in a sameline which contains p;
+	 * @param rootHost 
+	 * @param host 
 	 * 
 	 * @param p
-	 * @param result
-	 * @param tagName
-	 * @param skip
-	 * @return
+	 * @param boxLine 
+	 * @param validator 
+	 * @return the design position
 	 */
     //TODO: needs refactoring
 	public static DesignPosition innerFindEditPartPosition(EditPart rootHost,
@@ -285,7 +285,8 @@ public class EditPartPositionHelper {
 	 * 
 	 * @param host
 	 * @param p
-	 * @return
+	 * @param validator 
+	 * @return the design position
 	 */
 	public static DesignPosition findEditPartPositionConstrained(EditPart host,
 			Point p, IMovementMediator validator) {
@@ -315,11 +316,12 @@ public class EditPartPositionHelper {
 	 * This method is used for move up/down, except for using tactics to deal
 	 * with container, this method is similiar to findEditPartPosition.
 	 * 
+	 * @param rootHost 
+	 * @param host 
 	 * @param p
-	 * @param result
-	 * @param tagName
-	 * @param skip
-	 * @return
+	 * @param boxLine 
+	 * @param validator 
+	 * @return the design position
 	 */
     // TODO: needs refactoring
 	public static DesignPosition innerFindEditPartPositionConstrained(
@@ -492,8 +494,12 @@ public class EditPartPositionHelper {
 //	}
 
 	/**
+	 * If child is a GraphicalEditPart, a new copy of its bounding rectangle
+	 * will be returned translated to absolute bounds. If child is not a GraphicalEditPart
+	 * then the empty rectangle (0,0,0,0) is returned.
+	 * 
 	 * @param child
-	 * @return
+	 * @return the bounding rectangle or (0,0,0,0) if none.
 	 */
 	public static Rectangle getAbsoluteBounds(EditPart child) {
 		if (child instanceof GraphicalEditPart) {
@@ -579,7 +585,7 @@ public class EditPartPositionHelper {
 	 * 
 	 * @param position
 	 * @param forward
-	 * @return
+	 * @return the edit part at position which is non-whitespace ? TODO:
 	 */
 	public static EditPart getConcretePart(DesignPosition position,
 			boolean forward) {
@@ -595,6 +601,11 @@ public class EditPartPositionHelper {
 		return result;
 	}
 
+	/**
+	 * @param position
+	 * @param forward
+	 * @return the next concrete part.
+	 */
 	public static EditPart getNextConcretPart(DesignPosition position,
 			boolean forward) {
 		Node node;
@@ -663,20 +674,5 @@ public class EditPartPositionHelper {
 			System.out.println("No concrete part?");
 		}
 		return rect;
-	}
-
-	public static DesignPosition moveDesignPositionForInsert(
-			DesignPosition position, String uri, String tag) {
-		IDOMPosition domposition;
-		domposition = DOMPositionHelper.toDOMPosition(position);
-		if (domposition != null) {
-			domposition = BodyHelper
-					.adjustInsertPosition(uri, tag, domposition);
-		}
-        // TODO: huh?
-		if (domposition != null) {
-			return DOMPositionHelper.toDesignPosition(domposition);
-		}
-        return null;
 	}
 }

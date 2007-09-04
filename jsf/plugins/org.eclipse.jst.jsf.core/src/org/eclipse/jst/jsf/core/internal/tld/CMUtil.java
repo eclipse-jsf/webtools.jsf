@@ -11,6 +11,12 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.core.internal.tld;
 
+import java.util.Iterator;
+
+import org.eclipse.jface.text.IDocument;
+import org.eclipse.jst.jsp.core.internal.contentmodel.TaglibController;
+import org.eclipse.jst.jsp.core.internal.contentmodel.tld.TLDCMDocumentManager;
+import org.eclipse.jst.jsp.core.internal.contentmodel.tld.TaglibTracker;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDDocument;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDElementDeclaration;
 import org.eclipse.wst.html.core.internal.contentmodel.HTMLElementDeclaration;
@@ -111,6 +117,39 @@ public final class CMUtil {
 		}
         return null;
 	}
+	
+	/**
+	 * !!! NOTE: this function is intended to work around the problem that if your element
+	 * has not yet been added to an  IDOMModel, getElementDeclaration won't be able to find
+	 * it.  This method does nothing (unlike the ModelQuery-based approach in getElementDeclaration)
+	 * to ensure that the namespace "uri" provided is valid in the structured document provided.  It is
+	 * therefore only advisable to use this method in cases where your node is not already a member of a 
+	 * IDOMModel.
+	 * 
+	 * @param uri
+	 * @param elementName
+	 * @param document 
+	 * @return the TLDElementDeclaration for this required tag or null if there  is nothing appropriate
+	 */
+	public static CMElementDeclaration getTLDElementDeclaration(final String uri, final String elementName, IDocument document)
+	{
+	    TLDCMDocumentManager tldmgr = TaglibController.getTLDCMDocumentManager(document);
+	    
+	    if (tldmgr != null)
+	    {
+            for (Iterator it = tldmgr.getTaglibTrackers().iterator();it.hasNext();)
+            {
+                TaglibTracker  tracker = (TaglibTracker) it.next();
+                
+                if (tracker.getURI().equals(uri))
+                {
+                    return (CMElementDeclaration) tracker.getElements().getNamedItem(tracker.getPrefix()+":"+elementName);
+                }
+            }
+	    }
+        // fallthrough
+        return null;
+	}
 
 	/**
 	 * give an element, get its namespace URI.
@@ -119,9 +158,19 @@ public final class CMUtil {
 	 * @return the namespace URI
 	 */
 	public static String getElementNamespaceURI(Element element) {
-		CMElementDeclaration decl = getElementDeclaration(element);
+	    //System.out.printf("uri for %s is %s\n", element.toString(), element.getNamespaceURI());
+
+	    CMElementDeclaration decl = getElementDeclaration(element);
 		if (decl == null) {
-			return null;
+		    
+		    // if the content model has nothing, see if the element 
+		    // itself has an xml namespace
+		    // TODO: should only apply this if the source document
+		    // is a valid XML doc?
+		    final String uri = element.getNamespaceURI();
+		    
+		    // may be null which the default state
+			return uri;
 		}
 
 		if (isJSP(decl)) {

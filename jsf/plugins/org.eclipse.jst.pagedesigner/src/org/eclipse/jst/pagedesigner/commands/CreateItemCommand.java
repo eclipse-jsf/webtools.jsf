@@ -11,32 +11,33 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.commands;
 
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jst.pagedesigner.dom.IDOMPosition;
 import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
 import org.eclipse.jst.pagedesigner.utils.CommandUtil;
-import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
+import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.w3c.dom.Element;
 
 /**
  * @author mengbo
  */
 public class CreateItemCommand extends DesignerCommand {
-	IDOMPosition _position;
+	private final IDOMPosition _position;
 
-	TagToolPaletteEntry _tagItem;
-
-	Element _ele;
+	private final TagToolPaletteEntry _tagItem;
+	private Element _ele;
+	private IAdaptable _customizationData;
 
 	/**
 	 * @param label
-	 * @param viewer
+	 * @param model 
 	 * @param position 
 	 * @param tagItem 
 	 */
-	public CreateItemCommand(String label, IHTMLGraphicalViewer viewer,
+	public CreateItemCommand(String label, IDOMModel model,
 			IDOMPosition position, TagToolPaletteEntry tagItem) {
-		super(label, viewer);
+		super(label, model.getDocument());
 		this._position = position;
 		this._tagItem = tagItem;
 	}
@@ -48,14 +49,40 @@ public class CreateItemCommand extends DesignerCommand {
 	 */
 	protected void doExecute() {
 		Element element = CommandUtil.excuteInsertion(this._tagItem,
-				getViewer(), this._position);
+				getModel(), this._position, this._customizationData);
 		if (element != null) {
 			formatNode(element);
 		}
 		this._ele = element;
 	}
 
-	/*
+	@Override
+    protected void postPostExecute() 
+	{
+        // during JUnit testing, we may not have viewer.
+        // this will cause us not to have undo support,
+        // but should not effect testing for this command
+	    if (getViewer() != null)
+        {
+            super.postPostExecute();
+        }
+    }
+
+    @Override
+    protected boolean prePreExecute() 
+    {
+        // during JUnit testing, we may not have viewer.
+        // this will cause us not to have undo support,
+        // but should not effect testing for this command
+        if (getViewer() != null)
+        {
+            return super.prePreExecute();
+        }
+        
+        return true;
+    }
+
+    /*
 	 * (non-Javadoc)
 	 * 
 	 * @see org.eclipse.jst.pagedesigner.commands.DesignerCommand#getAfterCommandDesignerSelection()
@@ -64,4 +91,22 @@ public class CreateItemCommand extends DesignerCommand {
 		return toDesignSelection(_ele);
 	}
 
+    /**
+     * @param customizationData
+     */
+    public void setCustomizationData(IAdaptable customizationData) 
+    {
+        _customizationData = customizationData;
+    }
+    
+    /**
+     * This method is for test purposes and should generally not be 
+     * used by clients.
+     * 
+     * @return the customization data
+     */
+    protected final IAdaptable getCustomizationData()
+    {
+        return _customizationData;
+    }
 }

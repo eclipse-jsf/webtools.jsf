@@ -12,18 +12,20 @@
 package org.eclipse.jst.pagedesigner.commands;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
+import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
 import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.dnd.internal.SourceViewerDragDropHelper;
 import org.eclipse.jst.pagedesigner.dom.DOMPosition;
 import org.eclipse.jst.pagedesigner.dom.EditModelQuery;
 import org.eclipse.jst.pagedesigner.dom.IDOMPosition;
-import org.eclipse.jst.pagedesigner.dom.JSFValidatorSupport;
 import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
+import org.eclipse.jst.pagedesigner.itemcreation.command.SingletonContainerCreationCommand;
 import org.eclipse.jst.pagedesigner.utils.CommandUtil;
 import org.eclipse.wst.sse.ui.StructuredTextEditor;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
@@ -80,10 +82,23 @@ public class PaletteDropInsertCommand extends SourceViewerCommand {
 					&& //
 					!_tagItem.getURI().equalsIgnoreCase(
 							ITLDConstants.URI_JSP)) {
-				position = JSFValidatorSupport.prepareView(position);
+			    SingletonContainerCreationCommand command = 
+			        new SingletonContainerCreationCommand
+			            (position, IJSFConstants.TAG_IDENTIFIER_VIEW, null);
+			    command.execute();
+			    Iterator it = command.getResult().iterator();
+			    
+			    if (it.hasNext())
+			    {
+	                position = command.getResult().iterator().next();
+			    }
+			    else
+			    {
+			        throw new IllegalStateException("Expected result of command");
+			    }
 			}
 			_element = CommandUtil
-					.excuteInsertion(_tagItem, model, position);
+					.excuteInsertion(_tagItem, model, position, null);
 			if (_element != null) {
 				_nodesToFormat.add(_element);
 				SourceViewerDragDropHelper.getInstance().changeCaret(_editor,
