@@ -16,12 +16,12 @@ package org.eclipse.jst.jsf.common.metadata.internal;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import org.eclipse.core.runtime.FileLocator;
@@ -183,15 +183,15 @@ class StandardMetaDataFilesProvider implements IMetaDataSourceModelProvider {
 	/* (non-Javadoc)
 	 * @see org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider#getResourceBundle()
 	 */
-	private ResourceBundle internalGetResourceBundle() {
+	private ResourceBundle internalGetResourceBundle()throws IOException, MalformedURLException {
 		if (getFileLocator() != null){
-			try {
+//			try {
 				return fileLocator.getResourceBundle();
-			} catch (MissingResourceException e) {
-				//eat it
-			} catch (IOException e) {
-				//eat it			
-			}
+//			} catch (MissingResourceException e) {
+//				//eat it
+//			} catch (IOException e) {
+//				//eat it			
+//			}
 		}
 		return null;
 	}
@@ -232,7 +232,7 @@ class StandardMetaDataFilesProvider implements IMetaDataSourceModelProvider {
 		} else if (klass == IResourceBundleProvider.class) {
 			return new IResourceBundleProvider(){
 
-				public ResourceBundle getResourceBundle() {
+				public ResourceBundle getResourceBundle() throws IOException, MalformedURLException {
 					return mdp.internalGetResourceBundle();
 				}
 				

@@ -57,7 +57,7 @@ public class DomainLoadingStrategyRegistry{
 	/**
 	 * Loads registry with descriptors from the domainLoadingStrategies ext-pt.    
 	 */
-	synchronized void  init(){
+	synchronized final void  init(){
 		IExtensionRegistry extensionRegistry = Platform.getExtensionRegistry();
 		IExtensionPoint point = extensionRegistry.getExtensionPoint(JSFCommonPlugin.PLUGIN_ID, EXTENSION_POINT_ID );
 		if (point != null) {
