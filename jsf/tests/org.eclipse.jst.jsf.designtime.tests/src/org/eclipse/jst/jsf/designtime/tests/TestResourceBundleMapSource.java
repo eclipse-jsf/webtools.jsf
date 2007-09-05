@@ -49,7 +49,7 @@ public class TestResourceBundleMapSource extends TestCase
     private IProject   _project1;
     private IProject   _project2;
     private IFile      _bundle1;
-    private IFile      _bundle2;
+    //private IFile      _bundle2;
     
     
     protected void setUp() throws Exception 
@@ -67,7 +67,7 @@ public class TestResourceBundleMapSource extends TestCase
         resources = initProject("BundleResourceTestProject2", 
                                 "/testdata/bundle2.resources.data",
                                 BUNDLE1_PATH, BUNDLE1_NAME);
-        _bundle2 = (IFile) resources.get(0);
+        //_bundle2 = (IFile) resources.get(0);
         _project2 = (IProject) resources.get(1);
     }
 
@@ -176,6 +176,7 @@ public class TestResourceBundleMapSource extends TestCase
      * @throws IOException 
      * @throws JavaModelException 
      */
+    @SuppressWarnings("unchecked")
     public void testBundleDelete() throws JavaModelException, IOException, CoreException
     {
         // test the initial state, before outside meddling
