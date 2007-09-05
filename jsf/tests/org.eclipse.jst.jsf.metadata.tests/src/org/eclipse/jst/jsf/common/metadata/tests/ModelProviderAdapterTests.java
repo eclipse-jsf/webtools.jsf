@@ -11,8 +11,6 @@
 
 package org.eclipse.jst.jsf.common.metadata.tests;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ResourceBundle;
 
 import junit.framework.TestCase;
@@ -61,18 +59,12 @@ public class ModelProviderAdapterTests extends TestCase {
 		
 		IResourceBundleProvider bundleProvider = (IResourceBundleProvider)_trait.getSourceModelProvider().getAdapter(IResourceBundleProvider.class);
 		assertNotNull(bundleProvider);
-		ResourceBundle bundle;
-		try {
-			bundle = bundleProvider.getResourceBundle();
-			assertNotNull(bundle);
-			
-			assertNotNull(bundle.getString("JSFHTML.display-label"));
-			assertNotNull(bundle.getString("column.display-label"));
-		} catch (MalformedURLException e) {		
-			e.printStackTrace();
-		} catch (IOException e) {			 
-			e.printStackTrace();
-		}
+		
+		ResourceBundle bundle = bundleProvider.getResourceBundle();
+		assertNotNull(bundle);
+		
+		assertNotNull(bundle.getString("JSFHTML.display-label"));
+		assertNotNull(bundle.getString("column.display-label"));
 				
 	}
 	
