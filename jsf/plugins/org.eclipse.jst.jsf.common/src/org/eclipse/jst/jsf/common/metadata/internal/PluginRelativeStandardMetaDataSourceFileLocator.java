@@ -69,7 +69,7 @@ public class PluginRelativeStandardMetaDataSourceFileLocator extends StandardMet
 		IPath annotationPath = Path.fromOSString(fileInfo.getLocation()); 
 		IPath annotationFolder = annotationPath.removeLastSegments(1);
 		IPath propertiesLocation = annotationPath.removeFirstSegments(annotationPath.segmentCount() - 1).removeFileExtension();
-		// append location of propertiles file
+		// append location of properties file
 		IPath propertiesFile = annotationFolder.append(propertiesLocation);
 	
 		// append .properties extension if needed

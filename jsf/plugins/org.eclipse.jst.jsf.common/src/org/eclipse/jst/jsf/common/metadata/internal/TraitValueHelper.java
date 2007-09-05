@@ -11,8 +11,6 @@
  ********************************************************************************/
 package org.eclipse.jst.jsf.common.metadata.internal;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -162,10 +160,6 @@ public class TraitValueHelper {
 		} catch (MissingResourceException e){
 			//fall thru
 			JSFCommonPlugin.log(e,  NLS.bind(Messages.MissingResource_exception, new String[]{key}));
-		} catch (MalformedURLException e) {			
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 		return key + KEY_NOT_FOUND;
 	}

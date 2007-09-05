@@ -20,6 +20,8 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
 
 /**
  * ResourceBundleHelper
@@ -49,6 +51,13 @@ public class ResourceBundleHelper {
 		// we make the assumption that the resourceURI points to the local
 		// file system
 
+		//in case of linux, let's change back to a path...
+		IPath resourcePath = new Path(resourceURI);
+		//ensure we have at least 2 segments... 1 for bundle/device, and 1 for propfile
+		if (resourcePath.segmentCount() < 2)
+			throw new IllegalArgumentException("Invalid resourceURI"); //$NON-NLS-1$
+		
+/* OLD CODE
 		int index = resourceURI.lastIndexOf("/"); //$NON-NLS-1$
 		if (index == -1) {
 			throw new IllegalArgumentException("Invalid resourceURI"); //$NON-NLS-1$
@@ -60,9 +69,13 @@ public class ResourceBundleHelper {
 		// Otherwise, the URL is assumed
 		// to refer to a JAR file which will be opened as needed.
 		//
-		String resourceDirectory = resourceURI.substring(0, index + 1);
-		String resourceBundleName = resourceURI.substring(index + 1);
-
+//		String resourceDirectory = resourceURI.substring(0, index + 1);
+//		String resourceBundleName = resourceURI.substring(index + 1);
+ 
+*/
+		String resourceDirectory 	= resourcePath.removeLastSegments(1).toString();
+		String resourceBundleName 	= resourcePath.lastSegment();
+	
 		// create a class loader with a class path that points to the resource
 		// bundle's location
 		//         

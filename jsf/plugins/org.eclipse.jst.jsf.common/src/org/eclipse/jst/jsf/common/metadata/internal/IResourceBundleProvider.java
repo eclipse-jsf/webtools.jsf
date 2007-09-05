@@ -10,8 +10,6 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.common.metadata.internal;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ResourceBundle;
 
 /**
@@ -21,5 +19,5 @@ public interface IResourceBundleProvider {
 	/**
 	 * @return ResourceBundle - implementers should eat exceptions and return null whenever resourceBundle cannot be returned
 	 */
-	public ResourceBundle getResourceBundle() throws IOException, MalformedURLException;
+	public ResourceBundle getResourceBundle();
 }
