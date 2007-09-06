@@ -93,6 +93,7 @@ public class JSFFileURL implements FileURL {
 			Iterator mappings = servlet.getMappings().iterator();
 			ServletMapping map = null;
 			String foundFileExtension = null;
+			String foundPrefixMapping = null;
 			while (mappings.hasNext()){
 				map = (ServletMapping)mappings.next();
 				
@@ -100,14 +101,15 @@ public class JSFFileURL implements FileURL {
 				if (foundFileExtension != null && canUseExtensionMapping) {
 					return existingURL.removeFileExtension().addFileExtension(foundFileExtension);
 				}
-					
-				String foundPrefixMapping = JSFUtils11.getPrefixMapping(map);
-				if (foundPrefixMapping != null){						
-					return new Path(foundPrefixMapping).append(existingURL); 
+				
+				if (foundPrefixMapping == null){
+					foundPrefixMapping = JSFUtils11.getPrefixMapping(map);				
 				}
 				
 			}
-			
+			if (foundPrefixMapping != null)				
+				return new Path(foundPrefixMapping).append(existingURL); 
+				
 			if (! canUseExtensionMapping && foundFileExtension != null){
 				//we could prompt user that this may not work...
 				//for now we will return the extension mapping
