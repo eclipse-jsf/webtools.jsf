@@ -216,7 +216,8 @@ public class JSFLibraryRegistryTestCases extends TestCase {
 		Assert.assertEquals(0, jsfLibRegistry.getJSFLibraries().size());
 	}
 
-	public void testPluginProvidedJSFLibCreationFromExtPt() {
+	@SuppressWarnings("unchecked")
+    public void testPluginProvidedJSFLibCreationFromExtPt() {
 		//2 jar lib
  		JSFLibraryRegistry jsfLibRegistry = JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry();
 		List libs = jsfLibRegistry.getJSFLibrariesByName("TEST_PP_LIB_2");

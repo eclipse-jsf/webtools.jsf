@@ -57,7 +57,8 @@ public class JSFLibraryTestCases extends TestCase {
 	 * Test method for 'org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl.JSFLibraryImpl.getArchiveFiles()'
 	 * Probably not needed...
 	 */
-	public void testgetArchiveFiles() {
+	@SuppressWarnings("unchecked")
+    public void testgetArchiveFiles() {
 		EList el = jsfLib.getArchiveFiles();		
 		Assert.assertNotNull(el);
 		Assert.assertEquals(archivefiles.length, el.size());		
