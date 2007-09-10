@@ -48,7 +48,8 @@ public class JSFFacetInstallDataModelProviderTestCases extends TestCase {
 	/*
 	 * Test method for 'org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDataModelProvider.getPropertyNames()'
 	 */
-	public void testGetPropertyNames() {	
+	@SuppressWarnings("unchecked")
+    public void testGetPropertyNames() {	
 		Set names = dm.getPropertyNames();
 		Assert.assertNotNull(names);
 		Assert.assertTrue(names.contains(IJSFFacetInstallDataModelProperties.IMPLEMENTATION));
