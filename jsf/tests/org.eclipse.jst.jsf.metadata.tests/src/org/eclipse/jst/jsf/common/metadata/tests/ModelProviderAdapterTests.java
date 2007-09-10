@@ -55,21 +55,32 @@ public class ModelProviderAdapterTests extends TestCase {
 	}
 
 //Comment out till resourceBundleHelper issues on Linux is resolved: https://bugs.eclipse.org/bugs/show_bug.cgi?id=202537
-//	@SuppressWarnings("restriction")
-//	public void testResourceBundlerProvider() {
-//		
-//		IResourceBundleProvider bundleProvider = (IResourceBundleProvider)_trait.getSourceModelProvider().getAdapter(IResourceBundleProvider.class);
-//		assertNotNull(bundleProvider);
-//		
-//		ResourceBundle bundle = bundleProvider.getResourceBundle();
-//		assertNotNull(bundle);
-//		
-//		assertNotNull(bundle.getString("JSFHTML.display-label"));
-//		assertEquals("JSF HTML", bundle.getString("JSFHTML.display-label"));
-//		assertNotNull(bundle.getString("column.display-label"));
-//		assertEquals("Column", bundle.getString("column.display-label"));
-//				
-//	}
+	@SuppressWarnings("restriction")
+	public void testResourceBundlerProvider() {
+		
+		IResourceBundleProvider bundleProvider = (IResourceBundleProvider)_trait.getSourceModelProvider().getAdapter(IResourceBundleProvider.class);
+		assertNotNull(bundleProvider);
+		
+		ResourceBundle bundle = bundleProvider.getResourceBundle();
+		assertNotNull(bundle);
+		
+		assertNotNull(bundle.getString("JSFHTML.display-label"));
+		assertEquals("JSF HTML", bundle.getString("JSFHTML.display-label"));
+		assertNotNull(bundle.getString("column.display-label"));
+		assertEquals("Column", bundle.getString("column.display-label"));
+		
+		//
+		ITaglibDomainMetaDataModelContext context = TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(null, "RootOfPluginTest");
+		Model model = TaglibDomainMetaDataQueryHelper.getModel(context);
+		assertNotNull(model);
+		_trait = TaglibDomainMetaDataQueryHelper.getTrait(model, "T1");
+		assertNotNull(_trait);
+		bundleProvider = (IResourceBundleProvider)_trait.getSourceModelProvider().getAdapter(IResourceBundleProvider.class);
+		assertNotNull(bundleProvider);
+		bundle = bundleProvider.getResourceBundle();
+		assertNotNull(bundle.getString("NLS"));
+		assertEquals("This is externalized text", bundle.getString("NLS"));		
+	}
 	
 	@SuppressWarnings({ "restriction", "unchecked" })
 	public void testClassloaderProvider() {

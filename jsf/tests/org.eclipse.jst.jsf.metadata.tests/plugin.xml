@@ -32,7 +32,10 @@
             uri="http://org.eclipse.jsf/tinytest"/>
       <standardMetaDataFile
             location="testfiles/metadata/TinyIncludeTest.xml"
-            uri="TinyIncludeTest"/>          
+            uri="TinyIncludeTest"/>       
+      <standardMetaDataFile
+            location="./RootOfPluginTest.xml"
+            uri="RootOfPluginTest"/>                  
       <standardMetaDataFile
             location="/testfiles/metadata/traithelpertest.xml"
             locator="org.eclipse.jst.jsf.common.metadata.tests.MyMDLocator"

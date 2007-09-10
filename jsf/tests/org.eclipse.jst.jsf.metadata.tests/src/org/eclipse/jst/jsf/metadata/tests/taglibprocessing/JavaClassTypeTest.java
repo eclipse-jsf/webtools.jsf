@@ -17,7 +17,7 @@ import org.eclipse.jst.jsf.metadata.tests.util.SingleJSPTestCase;
 import org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValues;
 import org.eclipse.jst.jsf.metadataprocessors.features.IValidValues;
 
-public class JavaClassTypeTest extends SingleJSPTestCase implements IJSFRuntimeRequiredV11 {
+public class JavaClassTypeTest extends SingleJSPTestCase {//implements IJSFRuntimeRequiredV11 {
 
 	public JavaClassTypeTest() {
 		super("/testfiles/jsps/javaClassType.jsp.data",
@@ -47,15 +47,8 @@ public class JavaClassTypeTest extends SingleJSPTestCase implements IJSFRuntimeR
 //	}
 
 	public void testPossibleValues() {
-		IPossibleValues pv = (IPossibleValues)getProcessor(IPossibleValues.class, JSF_CORE_URI, "actionListener", "type");		
-		assertNotNull(pv);
-		
-		assertEquals(1, pv.getPossibleValues().size());
-		assertPossibleValues(pv.getPossibleValues(),
-				new String[]{
-					"com.sun.faces.application.ActionListenerImpl"});
-		
-		pv = (IPossibleValues)getProcessor(IPossibleValues.class, TAG_TEST_URI, TAG_TEST_TAG, "JavaClassType1");
+			
+		IPossibleValues pv = (IPossibleValues)getProcessor(IPossibleValues.class, TAG_TEST_URI, TAG_TEST_TAG, "JavaClassType1");
 		assertNotNull(pv.getPossibleValues());
 		assertTrue(pv.getPossibleValues().size() == 3);
 		// all classes implement 
@@ -102,7 +95,8 @@ public class JavaClassTypeTest extends SingleJSPTestCase implements IJSFRuntimeR
 				
 		assertNotNull(vv);
 		assertFalse(vv.isValidValue("foobar"));
-		assertTrue(vv.isValidValue("com.sun.faces.application.ActionListenerImpl"));
+		//below is valid only when using Sun impl
+		//assertTrue(vv.isValidValue("com.sun.faces.application.ActionListenerImpl"));
 		
 		//single interface
 		vv = (IValidValues)getProcessor(IValidValues.class, TAG_TEST_URI, TAG_TEST_TAG, "JavaClassType1");
