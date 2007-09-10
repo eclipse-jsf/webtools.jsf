@@ -193,6 +193,7 @@ public class TestTagCreationFactory extends BaseTestClass
         assertExpectedResult(jspFile, "jsp");
     }
 
+    @SuppressWarnings("unchecked")
     public void testDropCustomizationDataAcquistion() throws Exception
     {
         IFile jspFile = (IFile) _webProjectTestEnv.loadResourceInWebRoot(
