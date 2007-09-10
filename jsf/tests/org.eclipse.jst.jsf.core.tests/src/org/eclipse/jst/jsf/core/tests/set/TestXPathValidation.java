@@ -32,6 +32,7 @@ public class TestXPathValidation extends BaseTagMatcherTestCase {
         super.setUp();
    }
 
+    @SuppressWarnings("unchecked")
     public void testValidateParentMembership()
     {
         AxiomaticSet inputAncestors = getAncestorsOfInputText();

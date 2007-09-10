@@ -15,7 +15,8 @@ public class ConcreteAxiomaticSetTest extends TestCase
 	AxiomaticSet	_overlappingSet;
 	AxiomaticSet    _emptySet;
 	
-	@Override
+	@SuppressWarnings("unchecked")
+    @Override
 	protected void setUp() throws Exception 
 	{
 		super.setUp();

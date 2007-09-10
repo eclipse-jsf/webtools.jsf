@@ -122,6 +122,7 @@ public class TestMemberConstraint extends TestCase
         _constraintSet3 = createSet(items);
     }
 
+    @SuppressWarnings("unchecked")
     protected AxiomaticSet createSet(List<String> items) 
     {
         ConcreteAxiomaticSet  set = new ConcreteAxiomaticSet();

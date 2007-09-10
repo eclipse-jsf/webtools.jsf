@@ -99,8 +99,6 @@ public class TestJSPSemanticsValidator extends TestCase
 
 	public void testContainmentInJSP()
 	{
-		IDOMContextResolver  resolver = null;
-
 		// instantiate the validator once since this is how it would
 		// called against a single file.  This is critical to test
 		// that only the first instance of improper containment 
@@ -126,8 +124,6 @@ public class TestJSPSemanticsValidator extends TestCase
 	
 	public void testContainmentInJSPFrag()
 	{
-		IDOMContextResolver  resolver = null;
-
 		// instantiate the validator once since this is how it would
 		// called against a single file.  This is critical to test
 		// that only the first instance of improper containment 
@@ -188,7 +184,8 @@ public class TestJSPSemanticsValidator extends TestCase
 			throw new UnsupportedOperationException("This reporter is for specific test purposes only");
 		}
 
-		public List getMessages() {
+		@SuppressWarnings("unchecked")
+        public List getMessages() {
 			return messages;
 		}
 

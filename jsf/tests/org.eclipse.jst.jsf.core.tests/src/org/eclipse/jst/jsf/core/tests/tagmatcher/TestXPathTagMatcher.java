@@ -35,6 +35,7 @@ public class TestXPathTagMatcher extends BaseTagMatcherTestCase {
         super.setUp();
     }
 
+    @SuppressWarnings("unchecked")
     public void testSimpleMatches()
     {
         // get the view tag
