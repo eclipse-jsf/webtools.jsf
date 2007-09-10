@@ -47,7 +47,6 @@ import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.EnumeratedLongTypeTes
 import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.FacesConfigConverterIDTypeTests;
 import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.FacesConfigValidatorIDTypeTests;
 import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.IntegerTypeTest;
-import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.JSFCoreTestCase;
 import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.JSFHTMLTestCase;
 import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.JavaClassTypeTest;
 import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.LengthTypeTest;
