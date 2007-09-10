@@ -28,6 +28,10 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
+import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent;
+import org.eclipse.jst.jsf.common.internal.resource.IResourceLifecycleListener;
+import org.eclipse.jst.jsf.common.internal.resource.LifecycleListener;
+import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent.EventType;
 import org.eclipse.jst.jsf.common.metadata.Trait;
 import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
 import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
@@ -149,13 +153,14 @@ public class JSPModelProcessor
     private final IFile             _file;
     private final DOMModelForJSP    _model;
     private final ModelListener     _modelListener;
-    private boolean                 isDisposed;
+    private final LifecycleListener _resourceListener;
+    private boolean                 _isDisposed;
     private Map<Object, ISymbol>    _requestMap;
     private Map<Object, ISymbol>    _sessionMap;
     private Map<Object, ISymbol>    _applicationMap;
     private Map<Object, ISymbol>    _noneMap;
     private long                    _lastModificationStamp;
-    private AtomicInteger			_refCount = new AtomicInteger(0);
+    private AtomicInteger           _refCount = new AtomicInteger(0);
     
     // used to avoid infinite recursion in refresh.  Must never be null
     private final CountingMutex     _lastModificationStampMonitor = new CountingMutex();
@@ -171,12 +176,29 @@ public class JSPModelProcessor
         _modelListener = new ModelListener();
         _model.addModelLifecycleListener(_modelListener);
         _file = file;
-        // a negative value guarantees that refresh(false) will 
+        _resourceListener = new LifecycleListener(file);
+        _resourceListener.addListener(new IResourceLifecycleListener()
+        {
+            public EventResult acceptEvent(ResourceLifecycleEvent event)
+            {
+                EventResult result = new EventResult();
+
+                if (event.getEventType() == EventType.RESOURCE_INACCESSIBLE)
+                {
+                    dispose(_file);
+                    result.setDisposeAfterEvent(true);
+                }
+
+                return result;
+            }
+        });
+        // a negative value guarantees that refresh(false) will
         // force a refresh on the first run
         _lastModificationStamp = -1;
+        
     }
 
-    private DOMModelForJSP getModelForFile(final IFile file) 
+    private DOMModelForJSP getModelForFile(final IFile file)
             throws CoreException, IOException
     {
         final IModelManager modelManager = 
@@ -195,17 +217,22 @@ public class JSPModelProcessor
             model.releaseFromRead();
         }
         
-        throw new CoreException(new Status(IStatus.ERROR, "org.eclipse.blah", 0,  //$NON-NLS-1$
-                        "model not of expected type", new Throwable())); //$NON-NLS-1$
+        throw new CoreException
+            (new Status(IStatus.ERROR
+                        , "org.eclipse.blah"
+                        , 0  //$NON-NLS-1$
+                        ,"model not of expected type"
+                        , new Throwable())); //$NON-NLS-1$
     }
 
     private void dispose()
     {
-        if (!isDisposed)
+        if (!_isDisposed)
         {
         	_model.releaseFromRead();
             _model.removeModelLifecycleListener(_modelListener);
 
+            
             if (_requestMap != null)
             {
                 _requestMap.clear();
@@ -232,7 +259,7 @@ public class JSPModelProcessor
 
             _refCount.set(0);
             // mark as disposed
-            isDisposed = true;
+            _isDisposed = true;
         }
     }
 
@@ -240,9 +267,9 @@ public class JSPModelProcessor
      * @return true if this model processor has been disposed.  Disposed
      * processors should not be used.
      */
-    boolean isDisposed()
+    public boolean isDisposed()
     {
-        return isDisposed;
+        return _isDisposed;
     }
 
     /**
@@ -263,6 +290,13 @@ public class JSPModelProcessor
      */
     public void refresh(final boolean forceRefresh)
     {
+        if (isDisposed())
+        {
+            // TODO: should we throw exception?  return false?
+            JSFCorePlugin.log(IStatus.WARNING, "Attempt to refresh a disposed processor", new Throwable("Exception is only to get a stack trace, not an error"));
+            return;
+        }
+
         synchronized(_lastModificationStampMonitor)
         {
             if (_lastModificationStampMonitor.isSignalled())
