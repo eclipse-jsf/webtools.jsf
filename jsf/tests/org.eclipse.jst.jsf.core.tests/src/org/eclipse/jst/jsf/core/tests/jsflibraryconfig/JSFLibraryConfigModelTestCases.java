@@ -94,7 +94,8 @@ public class JSFLibraryConfigModelTestCases extends TestCase {
 		Assert.assertTrue(libReg.getDefaultImplementation().getID().equals(libImplRef.getID()));
 	}
 
-	public void testGetSavedJSFComponentLibraries() {
+	@SuppressWarnings("unchecked")
+    public void testGetSavedJSFComponentLibraries() {
 		JSFLibraryConfigModel model = JSFLibraryConfigModelFactory.createInstance(modelSrc);
 
 		/*JSFLibraryRegistry libReg = */JSFCoreUtilHelper.getJSFLibraryRegistryFromJSFLibraryHelper();
