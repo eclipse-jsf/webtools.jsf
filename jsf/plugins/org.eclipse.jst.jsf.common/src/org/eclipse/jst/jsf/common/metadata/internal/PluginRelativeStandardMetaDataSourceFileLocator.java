@@ -60,7 +60,7 @@ public class PluginRelativeStandardMetaDataSourceFileLocator extends StandardMet
 			if (bundleURL == null)
 				return null;
 			
-			resourceBundle = ResourceBundleHelper.getResourceBundle(getBaseNameURL(bundleURL));
+			resourceBundle = ResourceBundleHelper.getResourceBundle(bundleURL);
 		}
 		return resourceBundle;
 	}
@@ -80,48 +80,4 @@ public class PluginRelativeStandardMetaDataSourceFileLocator extends StandardMet
 				propertiesFile, null);
 	}
 
-	
-	private String getBaseNameURL(URL bundleURL) {
-		IPath url = new Path(bundleURL.toExternalForm());
-		if (url.getFileExtension() != null)
-			url = url.removeFileExtension();
-		return url.toString();
-	}
-	
-
-//	/* 
-//	 * Returns property resource bundle if it exists.  May return null.
-//	 * This implementation assumes that the basename of the bundle is the same 
-//	 * as the source file name and in the same directory.
-//	 * 
-//	 * @see org.eclipse.jst.jsf.contentmodel.annotation.ICMAnnotationSourceFileLocator#getResourceBundle()
-//	 */
-//	public ResourceBundle getResourceBundle() throws IOException, MalformedURLException {
-//		URL bundleURL = getAnnotationPropertiesFileBasenameURL();
-//		ResourceBundle resourceBundle = ResourceBundleHelper.getResourceBundle(getBaseNameURL(bundleURL));
-//		return resourceBundle;
-//	}
-//	
-//	private URL getAnnotationPropertiesFileBasenameURL()  {
-//		IPath annotationPath = Path.fromOSString(fileInfo.getAnnotationFileLocation()); 
-//		IPath annotationFolder = annotationPath.removeLastSegments(1);
-//		IPath propertiesLocation = annotationPath.removeFirstSegments(annotationPath.segmentCount() - 1).removeFileExtension();
-//		// append location of propertiles file
-//		IPath propertiesFile = annotationFolder.append(propertiesLocation);
-//	
-//		// append .properties extension if needed
-//		if (propertiesFile.getFileExtension() == null)
-//			propertiesFile = propertiesFile.addFileExtension("properties"); //$NON-NLS-1$
-//		// create a URL out of the properties file location
-//		return FileLocator.find(Platform.getBundle(fileInfo.getBundleId()),
-//				propertiesFile, null);
-//	}
-//
-//	
-//	private String getBaseNameURL(URL bundleURL) {
-//		IPath url = new Path(bundleURL.toExternalForm());
-//		if (url.getFileExtension() != null)
-//			url = url.removeFileExtension();
-//		return url.toString();
-//	}
 }
