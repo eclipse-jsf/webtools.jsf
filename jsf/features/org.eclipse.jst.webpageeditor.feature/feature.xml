@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.jst.webpageeditor.feature"
       label="%featureName"
-      version="1.0.0.qualifier"
+      version="1.0.1.qualifier"
       provider-name="%providerName"
       image="eclipse_update_120.jpg">
 
@@ -22,7 +22,7 @@
       <update label="%updateSiteName" url="http://download.eclipse.org/webtools/updates"/>
       <discovery label="Web Tools Platform (WTP) Updates" url="http://download.eclipse.org/webtools/updates"/>
    </url>
-   
+
    <requires>
       <import plugin="org.eclipse.core.runtime" version="3.2.0" match="compatible"/>
       <import plugin="org.eclipse.debug.ui" version="3.2.0" match="compatible"/>
