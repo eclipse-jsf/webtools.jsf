@@ -8,7 +8,7 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *     Jens Lukowski/Innoopract - initial renaming/restructuring
- *     Gerry Kessler/Oracle - copied from org.eclipse.wst.sse.core.internal.encoding.util and modified
+ *     Gerry Kessler/Oracle - copied from org.eclipse.wst.sse.core.internal.encoding.util and modified heavily
  *******************************************************************************/
 package org.eclipse.jst.jsf.common.metadata.internal;
 
@@ -30,60 +30,43 @@ import org.eclipse.core.runtime.Path;
 public class ResourceBundleHelper {
 
 	/**
-	 * @param resourceURI
+	 * @param resourceURL
 	 * @return ResourceBundle
 	 * @throws MalformedURLException - may return null
 	 * @throws IOException
 	 */
-	public static ResourceBundle getResourceBundle(String resourceURI) throws MalformedURLException, IOException {
-		return getResourceBundle(resourceURI, Locale.getDefault());
+	public static ResourceBundle getResourceBundle(URL resourceURL) throws MalformedURLException, IOException {
+		return getResourceBundle(resourceURL, Locale.getDefault());
 	}
 
 	/**
-	 * @param resourceURI
+	 * @param resourceURL
 	 * @param targetLocale
 	 * @return ResourceBundle - may return null
 	 * @throws MalformedURLException
 	 * @throws IOException
 	 */
-	public static ResourceBundle getResourceBundle(String resourceURI, Locale targetLocale) throws MalformedURLException, IOException {
-		// try to load bundle from the location specified in the resourceURI
-		// we make the assumption that the resourceURI points to the local
-		// file system
-
-		//in case of linux, let's change back to a path...
-		IPath resourcePath = new Path(resourceURI);
-		//ensure we have at least 2 segments... 1 for bundle/device, and 1 for propfile
-		if (resourcePath.segmentCount() < 2)
-			throw new IllegalArgumentException("Invalid resourceURI"); //$NON-NLS-1$
-		
-/* OLD CODE
-		int index = resourceURI.lastIndexOf("/"); //$NON-NLS-1$
-		if (index == -1) {
-			throw new IllegalArgumentException("Invalid resourceURI"); //$NON-NLS-1$
-		}
-
-		// Below we set 'resourceDirectory' so that it ends with a '/'.
-		// Here's an excerpt from the ClassLoader Javadoc ...
-		// Any URL that ends with a '/' is assumed to refer to a directory.
-		// Otherwise, the URL is assumed
-		// to refer to a JAR file which will be opened as needed.
+	public static ResourceBundle getResourceBundle(URL resourceURL, Locale targetLocale) throws MalformedURLException, IOException {
+		// try to load bundle from the location specified in the resourceURL
 		//
-//		String resourceDirectory = resourceURI.substring(0, index + 1);
-//		String resourceBundleName = resourceURI.substring(index + 1);
- 
-*/
-		String resourceDirectory 	= resourcePath.removeLastSegments(1).toString();
-		String resourceBundleName 	= resourcePath.lastSegment();
-	
+		String protocol	= resourceURL.getProtocol();
+		String host		= resourceURL.getHost();
+		String file		= resourceURL.getFile();
+		IPath path 		= new Path(file);
+		
+		String dir = "./";
+		String bundleName = path.removeFileExtension().segment(path.segmentCount() - 1);
+		if (path.segmentCount() > 1)
+			dir = path.removeLastSegments(1).toString();
+		
 		// create a class loader with a class path that points to the resource
 		// bundle's location
 		//         
 		URL[] classpath = new URL[1];
-		classpath[0] = FileLocator.resolve(new URL(resourceDirectory));
+		classpath[0] = FileLocator.resolve(new URL(protocol, host, dir));
 		ClassLoader resourceLoader = new URLClassLoader(classpath, null);
 
-		return ResourceBundle.getBundle(resourceBundleName, targetLocale, resourceLoader);
+		return ResourceBundle.getBundle(bundleName, targetLocale, resourceLoader);
 	}
 }
 
