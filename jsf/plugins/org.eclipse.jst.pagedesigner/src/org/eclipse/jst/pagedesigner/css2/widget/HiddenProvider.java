@@ -101,7 +101,7 @@ public class HiddenProvider extends ImageWidgetProvider {
 		g.setClip(rect);
 		int imageAreaWidth = Math.min(rect.width, _imageWidth);
 		int imageAreaHeight = Math.min(rect.height, _imageHeight);
-		if (_image != null) {
+		if (_image != null && !_image.isDisposed()) {
 			g.drawImage(_image, 0, 0, _imageWidth, _imageHeight, rect.x, rect.y
 					+ (rect.height - imageAreaHeight) / 2, imageAreaWidth,
 					imageAreaHeight);
