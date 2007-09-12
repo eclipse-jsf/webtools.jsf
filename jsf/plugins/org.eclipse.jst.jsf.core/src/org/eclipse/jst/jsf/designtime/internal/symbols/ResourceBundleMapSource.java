@@ -22,10 +22,15 @@ import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.QualifiedName;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jst.jsf.common.internal.resource.IResourceLifecycleListener;
+import org.eclipse.jst.jsf.common.internal.resource.LifecycleListener;
+import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent;
+import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent.EventType;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.tld.LoadBundleUtil;
 
@@ -42,13 +47,18 @@ class ResourceBundleMapSource extends AbstractMap
     {
         if (project != null)
         {
-            return (IFile) getBundleFileCache(project).get(baseName);
+            Map bundleFileCache = getBundleFileCache(project);
+            
+            if (bundleFileCache != null)
+            {
+                return (IFile) bundleFileCache.get(baseName);
+            }
         }
 
         return null;
     }
 
-    private static Map getBundleFileCache(IProject project)
+    private static Map getBundleFileCache(final IProject project)
     {
         synchronized(project)
         {
@@ -62,6 +72,34 @@ class ResourceBundleMapSource extends AbstractMap
                 if (bundleFileCache == null)
                 {
                     bundleFileCache = new HashMap();
+                    LifecycleListener listener = new LifecycleListener(project);
+                    listener.addListener(new IResourceLifecycleListener()
+                    {
+                        public EventResult acceptEvent(ResourceLifecycleEvent event) 
+                        {
+                            EventResult result = new EventResult();
+                            
+                            if (event.getEventType() == EventType.RESOURCE_INACCESSIBLE)
+                            {
+                                try
+                                {
+                                    Map bundleCache = 
+                                        (Map) project.getSessionProperty(SESSION_PROPERTY_KEY_PROJECT);
+                                    bundleCache.clear();
+                                    project.setSessionProperty(SESSION_PROPERTY_KEY_PROJECT, null);
+                                }
+                                catch (CoreException ce)
+                                {
+                                    JSFCorePlugin.log("Error clearing bundle file cache", ce); //$NON-NLS-1$
+                                }
+                                result.setDisposeAfterEvent(true);
+                            }
+                            
+                            return result;
+                        }
+                    }
+                    );
+
                     project.setSessionProperty(SESSION_PROPERTY_KEY_PROJECT, bundleFileCache);
                 }
             }
@@ -78,7 +116,8 @@ class ResourceBundleMapSource extends AbstractMap
                                                    final String  resourcePathStr)
                       throws IOException, CoreException
     {
-        IStorage storage = LoadBundleUtil.getLoadBundleResource(project, resourcePathStr);
+        IStorage storage = 
+            LoadBundleUtil.getLoadBundleResource(project, resourcePathStr);
 
         IFile bundleRes = null;
 
@@ -119,14 +158,17 @@ class ResourceBundleMapSource extends AbstractMap
     {
         if (_bundleFile.isAccessible())
         {
-            if (_resourceBundle == null
+            if (_resourceBundle == null  // doesn't exist yet
+                    // exists but ws is out of sync
+                    || !_bundleFile.isSynchronized(IResource.DEPTH_ZERO)
+                    // exists but user has changed in workspace
                     || _bundleFile.getModificationStamp() 
                             != _lastModificationStamp)
             {
                 InputStream  bundleStream = null;
                 try
                 {
-                	// force refresh if out of sync
+                    // force refresh if out of sync
                     bundleStream = _bundleFile.getContents(true);
                     _resourceBundle = new Properties();
                     _resourceBundle.load(bundleStream);
@@ -161,9 +203,15 @@ class ResourceBundleMapSource extends AbstractMap
             // bundle no longer exists so remove it
             Map bundleFileCache = getBundleFileCache(_bundleFile.getProject());
 
-            if (bundleFileCache.containsKey(_resourcePathStr))
+            if (bundleFileCache != null &&
+                    bundleFileCache.containsKey(_resourcePathStr))
             {
                 bundleFileCache.remove(_resourcePathStr);
+            }
+            // in either case, clear the bundle entry
+            if (_resourceBundle != null)
+            {
+                _resourceBundle.clear();
                 _resourceBundle = null;
             }
         }
