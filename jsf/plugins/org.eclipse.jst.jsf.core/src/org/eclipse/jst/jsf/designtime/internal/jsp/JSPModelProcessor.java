@@ -232,7 +232,9 @@ public class JSPModelProcessor
         	_model.releaseFromRead();
             _model.removeModelLifecycleListener(_modelListener);
 
-            
+            // ensure the resource listener is disposed
+            _resourceListener.dispose();
+
             if (_requestMap != null)
             {
                 _requestMap.clear();

@@ -51,10 +51,9 @@ public class LifecycleListener implements IResourceChangeListener, IResourceDelt
             // be triggered during the remainder of dispose
             ResourcesPlugin.getWorkspace().removeResourceChangeListener(this);
 
-            synchronized(_listeners)
-            {
-                _listeners.clear();
-            }
+            // don't clear the listener list currently because of 
+            // concurrent change problems.
+
             _isDisposed = true;
         }
     }
@@ -152,15 +151,28 @@ public class LifecycleListener implements IResourceChangeListener, IResourceDelt
 
             case IResourceChangeEvent.POST_CHANGE:
             {
-                IResourceDelta delta = event.getDelta();
-                try
+                // only bother continuing if the resource we are tracking
+                // is not a project since post-change events on projects 
+                // that we care about won't occur
+                if (_res.getType() != IResource.PROJECT)
                 {
-                    delta.accept(this);
-                }
-                catch (CoreException ce)
-                {
-                    // can't do anything but log
-                    JSFCommonPlugin.log(new Throwable(ce));
+                    IResourceDelta delta = event.getDelta();
+                    // only care about post change events to resources
+                    // that we are tracking
+                    delta = delta.findMember(_res.getFullPath());
+
+                    try
+                    {
+                        if (delta != null)
+                        {
+                            delta.accept(this);
+                        }
+                    }
+                    catch (CoreException ce)
+                    {
+                        // can't do anything but log
+                        JSFCommonPlugin.log(new Throwable(ce));
+                    }
                 }
             }
             break;
