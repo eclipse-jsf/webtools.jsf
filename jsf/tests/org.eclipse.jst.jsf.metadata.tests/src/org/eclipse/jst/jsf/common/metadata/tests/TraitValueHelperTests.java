@@ -11,6 +11,7 @@
 package org.eclipse.jst.jsf.common.metadata.tests;
 
 import java.util.List;
+import java.util.Locale;
 
 import junit.framework.Assert;
 
@@ -160,30 +161,35 @@ public class TraitValueHelperTests extends ConfigurableTestCase {
 		Assert.assertEquals("2", (String)vals.get(1));
 		Assert.assertEquals("3", (String)vals.get(2));
 	}
-//Comment out till resourceBundleHelper issues on Linux is resolved: https://bugs.eclipse.org/bugs/show_bug.cgi?id=202537
-//	@SuppressWarnings("restriction")
-//	public void testGetNLSValue() {
-//		//single NLS String
-//		Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(nlsEntity, "NLS");
-//		Assert.assertNotNull(trait);
-//		Assert.assertEquals("%NLS1", TraitValueHelper.getValue(trait));
-//		Assert.assertEquals("a day in the life(en_US)", TraitValueHelper.getValueAsString(trait));
-//		
-//		
-//		//multiple NLS Strings
-//		trait = TaglibDomainMetaDataQueryHelper.getTrait(nlsEntity, "multivalNLS");
-//		Assert.assertNotNull(trait);
-//		Assert.assertNotNull(trait.getValue());
-//		Assert.assertTrue(trait.getValue() instanceof ListOfValues);
-//		List<?> vals = TraitValueHelper.getValueAsListOfStrings(trait);
-//		Assert.assertEquals(2, vals.size());
-//		Assert.assertEquals("a day in the life(en_US)", vals.get(0));
-//		Assert.assertEquals("another string(en_US)", vals.get(1));
-//		
-//		trait = TaglibDomainMetaDataQueryHelper.getTrait(entity, "NullVal");
-//		Assert.assertNotNull(trait);
-//		Assert.assertEquals(null, TraitValueHelper.getValueAsString(trait));
-//	}
+
+	@SuppressWarnings("restriction")
+	public void testGetNLSValue() {
+		//single NLS String
+		Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(nlsEntity, "NLS");
+		Assert.assertNotNull(trait);
+		Assert.assertEquals("%NLS1", TraitValueHelper.getValue(trait));
+		if (Locale.getDefault().getCountry().equalsIgnoreCase("us") &&
+				Locale.getDefault().getLanguage().equalsIgnoreCase("en")) {
+			Assert.assertEquals("a day in the life(en_US)", TraitValueHelper.getValueAsString(trait));
+		}
+		
+		//multiple NLS Strings
+		trait = TaglibDomainMetaDataQueryHelper.getTrait(nlsEntity, "multivalNLS");
+		Assert.assertNotNull(trait);
+		Assert.assertNotNull(trait.getValue());
+		Assert.assertTrue(trait.getValue() instanceof ListOfValues);
+		List<?> vals = TraitValueHelper.getValueAsListOfStrings(trait);
+		Assert.assertEquals(2, vals.size());
+		if (Locale.getDefault().getCountry().equalsIgnoreCase("us") &&
+				Locale.getDefault().getLanguage().equalsIgnoreCase("en")) {
+			Assert.assertEquals("a day in the life(en_US)", vals.get(0));
+			Assert.assertEquals("another string(en_US)", vals.get(1));
+		} 
+		
+		trait = TaglibDomainMetaDataQueryHelper.getTrait(entity, "NullVal");
+		Assert.assertNotNull(trait);
+		Assert.assertEquals(null, TraitValueHelper.getValueAsString(trait));
+	}
 
 	@SuppressWarnings("restriction")
 	public void testGetValueAsBoolean() {
