@@ -80,7 +80,7 @@ public final class DesignTimeApplicationManager
         
     private static final String   DEFAULT_METHOD_RESOLVER_ID =
         "org.eclipse.jst.jsf.core.methodresolver.default"; //$NON-NLS-1$
-    
+
     /**
      * @param project
      * @return the app manager associated with project
@@ -96,16 +96,23 @@ public final class DesignTimeApplicationManager
         {
             synchronized(project)
             {
-                Object manager = 
-                    project.getSessionProperty(SESSION_PROPERTY_KEY_PROJECT);
-    
+                DesignTimeApplicationManager manager = 
+                    (DesignTimeApplicationManager) project.getSessionProperty(SESSION_PROPERTY_KEY_PROJECT);
+
                 if (manager == null)
                 {
                     manager = new DesignTimeApplicationManager(project);
                     project.setSessionProperty(SESSION_PROPERTY_KEY_PROJECT, manager);
                 }
-                
-                return (DesignTimeApplicationManager) manager;
+                // bug 147729: if project was renamed, the project param will be
+                // valid, but it will not be in sync with the one for _project
+                // unfortunately, since we are using session propertie
+                else if (!project.equals(manager._project))
+                {
+                    manager._project = project;
+                }
+
+                return manager;
             }
         }
         catch (CoreException ce)
@@ -117,7 +124,9 @@ public final class DesignTimeApplicationManager
     }
     
     // instance definition
-    private final IProject                              _project;
+    // _project must be writable in case the manager needs to be retargetted
+    // after a rename/move etc.
+    private IProject                                    _project;
     private final IExternalContextFactoryLocator        _locator;
     
     private DesignTimeApplicationManager(IProject project)
