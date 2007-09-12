@@ -24,7 +24,8 @@ Require-Bundle: org.eclipse.ui.ide;bundle-version="[3.2.0,4.0.0)",
  org.eclipse.ui.editors,
  org.eclipse.jst.common.project.facet.core,
  org.eclipse.wst.common.project.facet.core,
- org.eclipse.jst.common.frameworks
+ org.eclipse.jst.common.frameworks,
+ org.eclipse.jdt.ui
 Eclipse-LazyStart: true
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.jst.jsf.designtime.tests;x-internal:=true

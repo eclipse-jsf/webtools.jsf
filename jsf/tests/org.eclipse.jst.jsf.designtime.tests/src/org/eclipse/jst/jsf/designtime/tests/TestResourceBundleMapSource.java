@@ -48,6 +48,7 @@ public class TestResourceBundleMapSource extends TestCase
 
     private IProject   _project1;
     private IProject   _project2;
+    private IProject   _project3;
     private IFile      _bundle1;
     //private IFile      _bundle2;
     
@@ -69,6 +70,10 @@ public class TestResourceBundleMapSource extends TestCase
                                 BUNDLE1_PATH, BUNDLE1_NAME);
         //_bundle2 = (IFile) resources.get(0);
         _project2 = (IProject) resources.get(1);
+        
+        resources = initProject("BundleResourceTestProject3"
+                , "/testdata/bundle1.resources.data", BUNDLE1_PATH, BUNDLE1_NAME);
+        _project3 = (IProject) resources.get(1);
     }
 
     private List<IResource> initProject(final String projectName, final String dataFilePath,
@@ -84,14 +89,14 @@ public class TestResourceBundleMapSource extends TestCase
                    dataFilePath);
         resources.add(jdtTestEnv.addResourceFile("src", new ByteArrayInputStream(input.toBytes()), 
                                     bundlePath, bundleName));
-        
+
         IProject project = testEnv.getTestProject();
         assertNotNull(project);
         assertTrue(project.isAccessible());
         resources.add(project);
         return resources;
     }
-    
+
     /**
      * Basic sanity check that properties files can be loaded and contain
      * what's expected
@@ -104,7 +109,7 @@ public class TestResourceBundleMapSource extends TestCase
             Map  map = ResourceBundleMapSourceFactory.getResourceBundleMapSource(_project1, "bundles.bundle1");
             assertNotNull(map);
             assertEquals(map.size(), 3);
-            
+
             map = ResourceBundleMapSourceFactory.getResourceBundleMapSource(_project2, "bundles.bundle1");
             assertNotNull(map);
             assertEquals(map.size(), 3);
@@ -114,13 +119,14 @@ public class TestResourceBundleMapSource extends TestCase
             fail(e.getLocalizedMessage());
         }
     }
-    
+
     @Override
     protected void tearDown() throws Exception {
         super.tearDown();
-        
+
         _project1.delete(true, null);
         _project2.delete(true, null);
+        _project3.delete(true, null);
     }
 
     /**
@@ -144,7 +150,7 @@ public class TestResourceBundleMapSource extends TestCase
             fail(e.getLocalizedMessage());
         }
     }
-    
+
     /**
      * Verify the expected contents of bundle1 in project2
      */
@@ -187,16 +193,16 @@ public class TestResourceBundleMapSource extends TestCase
         assertEquals("blah1", map.get("one.dot"));
         assertTrue(map.containsKey("two.dot.property"));
         assertEquals("blah3", map.get("two.dot.property"));
-        
+
         // now fiddle with the file
         File bundleFile = _bundle1.getLocation().toFile();
         assertTrue(bundleFile.delete());
         _bundle1.refreshLocal(IResource.DEPTH_INFINITE, null);
-        
+
         // the condition we are testing for is that the file is no
         // longer accessible but the map tolerates this by becoming empty
         assertFalse(_bundle1.isAccessible());
-        
+
         // the map should now return empty and querying keys should
         // return null
         assertTrue(map.isEmpty());
@@ -216,9 +222,11 @@ public class TestResourceBundleMapSource extends TestCase
      * @throws IOException 
      * @throws JavaModelException 
      */
+    //TODO: can't get the file to become out of sync
+//    @SuppressWarnings("unchecked")
 //    public void testBundleSync() throws JavaModelException, IOException, CoreException
 //    {
-        // test the initial state, before outside meddling
+//        // test the initial state, before outside meddling
 //        Map  map = ResourceBundleMapSourceFactory.getResourceBundleMapSource(_project1, "bundles.bundle1");
 //        assertTrue(map.containsKey("prop1"));
 //        assertEquals("blah", map.get("prop1"));
@@ -226,7 +234,7 @@ public class TestResourceBundleMapSource extends TestCase
 //        assertEquals("blah1", map.get("one.dot"));
 //        assertTrue(map.containsKey("two.dot.property"));
 //        assertEquals("blah3", map.get("two.dot.property"));
-//        
+//
 //        // turn off automatic builds so the file we trying to
 //        // de-sync doesn't get auto-sync'd
 //        final boolean autoBuild = 
@@ -234,18 +242,19 @@ public class TestResourceBundleMapSource extends TestCase
 //        IWorkspaceDescription desc = 
 //            _project1.getWorkspace().getDescription();
 //        desc.setAutoBuilding(false);
-//        desc.set
+//        //desc.set
 //        _project1.getWorkspace().setDescription(desc);
-//        
+//
 //        // now fiddle with the file
 //        File bundleFile = _bundle1.getLocation().toFile();
-//        
+//
 //        FileOutputStream outStream = null;
-//        
+//
 //        try
 //        {
 //            outStream = new FileOutputStream(bundleFile,true);
-//            outStream.write("\nfiddleExternal=blah5".getBytes());
+//            outStream.write("\r\nfiddleExternal=blah5".getBytes());
+//            outStream.flush();
 //        }
 //        finally
 //        {
@@ -254,16 +263,16 @@ public class TestResourceBundleMapSource extends TestCase
 //                outStream.close();
 //            }
 //        }
-//        
+//
 //        // the condition we are testing for is that the file is now out
 //        // of sync with the workspace but is still accessible
 //        assertFalse(_bundle1.isSynchronized(IResource.DEPTH_ZERO));
 //        assertTrue(_bundle1.isAccessible());
-//        
+//
 //        // the map should now be updated to include the new key
 //        assertTrue(map.containsKey("fiddleExternal"));
 //        assertEquals("blah5", map.get("fiddleExternal"));
-//        
+//
 //        // as well as the original ones (we appended to the file)
 //        assertTrue(map.containsKey("prop1"));
 //        assertEquals("blah", map.get("prop1"));
@@ -271,10 +280,46 @@ public class TestResourceBundleMapSource extends TestCase
 //        assertEquals("blah1", map.get("one.dot"));
 //        assertTrue(map.containsKey("two.dot.property"));
 //        assertEquals("blah3", map.get("two.dot.property"));
-//        
+//
 //        // set auto-build back to it's initial state
 //        desc = _project1.getWorkspace().getDescription();
 //        desc.setAutoBuilding(autoBuild);
 //        _project1.getWorkspace().setDescription(desc);
 //    }
+
+    @SuppressWarnings("unchecked")
+    public void testProjectCloseCleanup() throws Exception
+    {
+        // test the initial state, before outside meddling
+        Map  map = ResourceBundleMapSourceFactory.getResourceBundleMapSource(_project3, "bundles.bundle1");
+        assertTrue(map.containsKey("prop1"));
+        assertEquals("blah", map.get("prop1"));
+        assertTrue(map.containsKey("one.dot"));
+        assertEquals("blah1", map.get("one.dot"));
+        assertTrue(map.containsKey("two.dot.property"));
+        assertEquals("blah3", map.get("two.dot.property"));
+
+        // now close the project
+        // this will trigger a NOT_ACCESSIBLE event on the project
+        _project3.close(null);
+        
+        // map should now be safely disposed
+        assertEquals(0, map.size());
+        
+        boolean expectedExceptionThrown = false;
+        
+        try
+        {
+            map = ResourceBundleMapSourceFactory.getResourceBundleMapSource(_project3, "bundles.bundle1");
+        }
+        catch (CoreException ce)
+        {
+            // this code should run since _project3 is closed
+            // and therefore inaccessible
+            expectedExceptionThrown = true;
+        }
+        
+        assertTrue(expectedExceptionThrown);
+
+    }
 }

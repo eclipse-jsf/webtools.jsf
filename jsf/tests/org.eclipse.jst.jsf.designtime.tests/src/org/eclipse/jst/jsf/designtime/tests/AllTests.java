@@ -39,6 +39,7 @@ public class AllTests
         suite.addTestSuite(TestJSPDefaultSymbolFactory.class);
         suite.addTestSuite(TestJSPModelProcessor.class);
         suite.addTestSuite(TestStartupHandler.class);
+        suite.addTestSuite(TestDesignTimeApplicationManager.class);
         //$JUnit-END$
         return suite;
     }
