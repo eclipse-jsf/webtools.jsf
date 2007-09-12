@@ -27,6 +27,7 @@ import org.eclipse.jst.jsf.core.tests.jsflibraryregistry.JSFLibraryTestCases;
 import org.eclipse.jst.jsf.core.tests.jsflibraryregistry.MaintainDefaultImplementationAdapterTestCases;
 import org.eclipse.jst.jsf.core.tests.jsflibraryregistry.migration.MigrationV1toV2Test;
 import org.eclipse.jst.jsf.core.tests.project.facet.JSFFacetInstallDataModelProviderTestCases;
+import org.eclipse.jst.jsf.core.tests.resource.TestLifecycleListener;
 import org.eclipse.jst.jsf.core.tests.set.ConcreteAxiomaticSetTest;
 import org.eclipse.jst.jsf.core.tests.set.NodeSetTest;
 import org.eclipse.jst.jsf.core.tests.set.TestMemberConstraint;
@@ -64,7 +65,9 @@ public class AllTests
 		suite.addTestSuite(ArchiveFileTestCases.class);
 		suite.addTestSuite(MaintainDefaultImplementationAdapterTestCases.class);
 		suite.addTestSuite(JSFLibraryRegistryPackageTestCases.class);
-		
+
+		suite.addTestSuite(TestLifecycleListener.class);
+
 		suite.addTestSuite(JSFFacetInstallDataModelProviderTestCases.class);
 
 		// test the jar file appconfig provider
