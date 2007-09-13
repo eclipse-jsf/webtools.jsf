@@ -17,15 +17,14 @@ import org.eclipse.jst.jsf.metadata.tests.util.SingleJSPTestCase;
 import org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValues;
 import org.eclipse.jst.jsf.metadataprocessors.features.IValidValues;
 
-public class JavaClassTypeTest extends SingleJSPTestCase {//implements IJSFRuntimeRequiredV11 {
+public class JavaClassTypeTest extends SingleJSPTestCase implements IJSFRuntimeRequiredV11 {
 
 	public JavaClassTypeTest() {
 		super("/testfiles/jsps/javaClassType.jsp.data",
 				"/javaClassType.jsp",
 				JSFVersion.V1_1,
 				"/testfiles/web/faces-config_1_1.xml.data");
-		
-
+	
 	}
 	
 	public void setUp() throws Exception {
@@ -50,7 +49,7 @@ public class JavaClassTypeTest extends SingleJSPTestCase {//implements IJSFRunti
 			
 		IPossibleValues pv = (IPossibleValues)getProcessor(IPossibleValues.class, TAG_TEST_URI, TAG_TEST_TAG, "JavaClassType1");
 		assertNotNull(pv.getPossibleValues());
-		assertTrue(pv.getPossibleValues().size() == 3);
+		assertEquals(3, pv.getPossibleValues().size());
 		// all classes implement 
 		assertPossibleValues(pv.getPossibleValues(),
 			new String[]{
@@ -71,7 +70,7 @@ public class JavaClassTypeTest extends SingleJSPTestCase {//implements IJSFRunti
 		
 		pv = (IPossibleValues)getProcessor(IPossibleValues.class, TAG_TEST_URI, TAG_TEST_TAG, "JavaClassType3");
 		assertNotNull(pv.getPossibleValues());
-		assertTrue(pv.getPossibleValues().size() == 3);
+		assertEquals(3, pv.getPossibleValues().size());
 		assertPossibleValues(pv.getPossibleValues(),
 			new String[]{
 				"com.foo.MyConverterSubclass2",
