@@ -42,7 +42,7 @@ public final class TypeComparator
         final String[] mustBeSatisfied = boxedFirstType.getSignatures();
         final String[] testSignatures = boxedSecondType.getSignatures();
         // TODO: need better user messages here
-        Diagnostic result = new BasicDiagnostic(Diagnostic.ERROR, "", 0,  //$NON-NLS-1$
+        Diagnostic result = new BasicDiagnostic(Diagnostic.WARNING, "", 0,  //$NON-NLS-1$
                 Messages.getString("TypeComparator.Expression.Doesnt.Match.Expected.Types"), null); //$NON-NLS-1$
         // now loop through each type in the first type and see
         // if there is a type satisfying it in the second
@@ -214,7 +214,7 @@ public final class TypeComparator
     {
         if (firstType.isRHS() && !secondType.isRHS())
         {
-            return new BasicDiagnostic(Diagnostic.ERROR, "", 0,  //$NON-NLS-1$
+            return new BasicDiagnostic(Diagnostic.WARNING, "", 0,  //$NON-NLS-1$
                             Messages.getString("TypeComparator.Expression.Not.Gettable"), null); //$NON-NLS-1$
         }
         
