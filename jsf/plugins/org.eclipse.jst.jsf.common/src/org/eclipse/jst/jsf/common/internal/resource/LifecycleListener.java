@@ -23,7 +23,7 @@ import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent.Reaso
  */
 public class LifecycleListener implements IResourceChangeListener
 {
-    private final static boolean                            ENABLE_TEST_TRACKING = true;
+    private final static boolean                            ENABLE_TEST_TRACKING = false;
     private static long                                     _seqId;
     
     private final List<IResource>                           _resources;
