@@ -86,13 +86,6 @@ public class JSPTagVariableSymbolSourceProvider extends
                 JSFCorePlugin.getDefault().getLog().log(new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID, 0, "Error acquiring model processor",e)); //$NON-NLS-1$
                 // fall-through to empty symbol array
             }
-            finally
-            {
-            	if (modelProcessor != null)
-            	{
-            		JSPModelProcessor.dispose(fileContext);
-            	}
-            }
         }
         
         return ISymbol.EMPTY_SYMBOL_ARRAY;

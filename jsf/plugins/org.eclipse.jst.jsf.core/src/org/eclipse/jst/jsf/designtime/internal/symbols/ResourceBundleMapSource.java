@@ -77,7 +77,7 @@ class ResourceBundleMapSource extends AbstractMap
                     {
                         public EventResult acceptEvent(ResourceLifecycleEvent event) 
                         {
-                            EventResult result = new EventResult();
+                            EventResult result = EventResult.getDefaultEventResult();
                             
                             if (event.getEventType() == EventType.RESOURCE_INACCESSIBLE)
                             {
@@ -92,7 +92,7 @@ class ResourceBundleMapSource extends AbstractMap
                                 {
                                     JSFCorePlugin.log("Error clearing bundle file cache", ce); //$NON-NLS-1$
                                 }
-                                result.setDisposeAfterEvent(true);
+                                result = EventResult.getDisposeAfterEventResult();
                             }
                             
                             return result;

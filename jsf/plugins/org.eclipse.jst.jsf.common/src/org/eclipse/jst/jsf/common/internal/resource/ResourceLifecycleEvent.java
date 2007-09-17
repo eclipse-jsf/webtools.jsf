@@ -18,7 +18,13 @@ public class ResourceLifecycleEvent
          * Indicates that the resource is no longer accessible (as testable with
          * IResource.isAccessible).  The reasonType will indicate why.
          */
-        RESOURCE_INACCESSIBLE;
+        RESOURCE_INACCESSIBLE,
+        
+        /**
+         * Indicates that the resource being tracked has changed in some
+         * way, use ReasonType to determine specifics
+         */
+        RESOURCE_CHANGED;
     }
     
     /**
@@ -43,9 +49,13 @@ public class ResourceLifecycleEvent
         /**
          * The resource's project was closed.  This event is pre-change
          */
-        RESOURCE_PROJECT_CLOSED
+        RESOURCE_PROJECT_CLOSED,
+        /**
+         * Occurs when the contents of a non-project resource has changed 
+         */
+        RESOURCE_CHANGED_CONTENTS
     }
-    
+
     private final IResource   _affectedResource;
     private final EventType   _eventType;
     private final ReasonType  _reasonType;

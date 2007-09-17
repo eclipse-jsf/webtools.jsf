@@ -18,7 +18,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
 
 import org.eclipse.core.resources.IFile;
@@ -28,10 +27,11 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
-import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent;
 import org.eclipse.jst.jsf.common.internal.resource.IResourceLifecycleListener;
 import org.eclipse.jst.jsf.common.internal.resource.LifecycleListener;
+import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent;
 import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent.EventType;
+import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent.ReasonType;
 import org.eclipse.jst.jsf.common.metadata.Trait;
 import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
 import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
@@ -50,8 +50,6 @@ import org.eclipse.jst.jsf.designtime.DesignTimeApplicationManager;
 import org.eclipse.jst.jsf.designtime.context.DTFacesContext;
 import org.eclipse.jst.jsp.core.internal.domdocument.DOMModelForJSP;
 import org.eclipse.wst.sse.core.StructuredModelManager;
-import org.eclipse.wst.sse.core.internal.model.ModelLifecycleEvent;
-import org.eclipse.wst.sse.core.internal.provisional.IModelLifecycleListener;
 import org.eclipse.wst.sse.core.internal.provisional.IModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMDocument;
@@ -70,98 +68,100 @@ import org.w3c.dom.NodeList;
 public class JSPModelProcessor
 {
     private final static Map<IFile, JSPModelProcessor>  RESOURCE_MAP = 
-    	new HashMap<IFile, JSPModelProcessor>();
+        new HashMap<IFile, JSPModelProcessor>();
     private final static java.util.concurrent.locks.Lock CRITICAL_SECTION =
-    	new  ReentrantLock();
-    
+        new  ReentrantLock();
+    private static LifecycleListener  LIFECYCLE_LISTENER;
+
     /**
      * @param file The file to get the model processor for  
      * @return the processor for a particular model, creating it if it does not
      *         already exist
      * @throws CoreException if an attempt to get the model associated with file
      *         fails due to reasons other than I/O problems
-     * @throws IOException if an attempt to get the model associated with file
-     *         fails due to I/O problems
      */
-    public static JSPModelProcessor get(IFile file) throws CoreException, IOException
+    public static JSPModelProcessor get(IFile file) throws CoreException
     {
-		CRITICAL_SECTION.lock();
-		try
-    	{
-			if (!file.isAccessible())
-			{
-				throw new CoreException(new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID, "File must be accessible"));
-			}
-			
-	        JSPModelProcessor processor = RESOURCE_MAP.get(file);
-	
-	        if (processor == null)
-	        {
-	            processor = new JSPModelProcessor(file);
-	            RESOURCE_MAP.put(file, processor);
-	            processor._refCount.set(1);
-	        }
-	        else
-	        {
-	        	// TODO: should lock refCount separately since this 
-	        	// static method does not have exclusive access
-	        	processor._refCount.incrementAndGet();
-	        }
-	        return processor;
-    	}
-    	finally
-    	{
-    		CRITICAL_SECTION.unlock();
-    	}
+        CRITICAL_SECTION.lock();
+        try
+        {
+            if (!file.isAccessible())
+            {
+                throw new CoreException(new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID, "File must be accessible"));
+            }
+
+            JSPModelProcessor processor = RESOURCE_MAP.get(file);
+
+            if (processor == null)
+            {
+                if (LIFECYCLE_LISTENER == null)
+                {
+                    LIFECYCLE_LISTENER = new LifecycleListener(file);
+                }
+                else
+                {
+                    LIFECYCLE_LISTENER.addResource(file);
+                }
+
+                processor = new JSPModelProcessor(file,LIFECYCLE_LISTENER);
+                RESOURCE_MAP.put(file, processor);
+            }
+
+            return processor;
+        }
+        finally
+        {
+            CRITICAL_SECTION.unlock();
+        }
     }
 
     /**
      * Disposes of the JSPModelProcessor associated with model
      * @param file the model processor to be disposed
      */
-    public static void dispose(IFile file)
+    private static void dispose(IFile file)
     {
-    	CRITICAL_SECTION.lock();
+        CRITICAL_SECTION.lock();
         try
         {
-        	JSPModelProcessor processor = RESOURCE_MAP.get(file);
-        	
-        	if (processor != null)
-        	{
-	            int refCount = processor._refCount.decrementAndGet();
-	
-	            // if either the ref count drops below zero 
-	            // or the file is no longer accessible, the dispose
-	            if (refCount < 1 
-	            		|| !file.isAccessible())
-	            {
-	                RESOURCE_MAP.remove(file);
-	                
-	                if (!processor.isDisposed())
-	                {
-	                	processor.dispose();
-	                }
-	            }
-        	}
+            JSPModelProcessor processor = RESOURCE_MAP.get(file);
+
+            if (processor != null)
+            {
+                RESOURCE_MAP.remove(file);
+                
+                if (!processor.isDisposed())
+                {
+                    processor.dispose();
+                    LIFECYCLE_LISTENER.removeResource(file);
+                }
+                
+            }
+
+            if (RESOURCE_MAP.size() == 0)
+            {
+                // if we no longer have any resources being tracked,
+                // then dispose the lifecycle listener
+                LIFECYCLE_LISTENER.dispose();
+                LIFECYCLE_LISTENER = null;
+            }
         }
         finally
         {
-        	CRITICAL_SECTION.unlock();
+            CRITICAL_SECTION.unlock();
         }
     }
 
     private final IFile             _file;
-    private final DOMModelForJSP    _model;
-    private final ModelListener     _modelListener;
-    private final LifecycleListener _resourceListener;
+    private LifecycleListener       _lifecycleListener;
+    private IResourceLifecycleListener  _resListener;
     private boolean                 _isDisposed;
     private Map<Object, ISymbol>    _requestMap;
     private Map<Object, ISymbol>    _sessionMap;
     private Map<Object, ISymbol>    _applicationMap;
     private Map<Object, ISymbol>    _noneMap;
     private long                    _lastModificationStamp;
-    private AtomicInteger           _refCount = new AtomicInteger(0);
-    
+
     // used to avoid infinite recursion in refresh.  Must never be null
     private final CountingMutex     _lastModificationStampMonitor = new CountingMutex();
 
@@ -170,32 +170,48 @@ public class JSPModelProcessor
      * 
      * @param model
      */
-    private JSPModelProcessor(final IFile  file) throws CoreException, IOException
+    private JSPModelProcessor(final IFile  file, final LifecycleListener lifecycleListener)
     {
-        _model = getModelForFile(file);
-        _modelListener = new ModelListener();
-        _model.addModelLifecycleListener(_modelListener);
+        //_model = getModelForFile(file);
+        //_modelListener = new ModelListener();
+        //_model.addModelLifecycleListener(_modelListener);
         _file = file;
-        _resourceListener = new LifecycleListener(file);
-        _resourceListener.addListener(new IResourceLifecycleListener()
+        _lifecycleListener = lifecycleListener;
+        _resListener = new IResourceLifecycleListener()
         {
             public EventResult acceptEvent(ResourceLifecycleEvent event)
             {
-                EventResult result = new EventResult();
+                final EventResult result = EventResult.getDefaultEventResult();
+
+                // not interested
+                if (!_file.equals(event.getAffectedResource()))
+                {
+                    return result; 
+                }
 
                 if (event.getEventType() == EventType.RESOURCE_INACCESSIBLE)
                 {
                     dispose(_file);
-                    result.setDisposeAfterEvent(true);
+                }
+                else if (event.getEventType() == EventType.RESOURCE_CHANGED)
+                {
+                    // if the file has changed contents on disk, then
+                    // invoke an unforced refresh of the JSP file
+                    if (event.getReasonType() == ReasonType.RESOURCE_CHANGED_CONTENTS)
+                    {
+                        refresh(false);
+                    }
                 }
 
                 return result;
             }
-        });
+        };
+
+        lifecycleListener.addListener(_resListener);
+        
         // a negative value guarantees that refresh(false) will
         // force a refresh on the first run
         _lastModificationStamp = -1;
-        
     }
 
     private DOMModelForJSP getModelForFile(final IFile file)
@@ -229,11 +245,10 @@ public class JSPModelProcessor
     {
         if (!_isDisposed)
         {
-        	_model.releaseFromRead();
-            _model.removeModelLifecycleListener(_modelListener);
-
             // ensure the resource listener is disposed
-            _resourceListener.dispose();
+            _lifecycleListener.removeListener(_resListener);
+            _resListener = null;
+            _lifecycleListener = null;
 
             if (_requestMap != null)
             {
@@ -259,7 +274,6 @@ public class JSPModelProcessor
                 _noneMap = null;
             }
 
-            _refCount.set(0);
             // mark as disposed
             _isDisposed = true;
         }
@@ -275,13 +289,15 @@ public class JSPModelProcessor
     }
 
     /**
-     * Mainly for test and diagnostic purposes.
-     * 
-     * @return the current number of undisposed references to this model processor
+     * If isModelDirty() returns true, then it means that a call
+     * to refresh(false) will trigger a reprocess of the underlying document.
+     *
+     * @return true if the underlying JSP model is considered to be dirty
      */
-    public int getRefCount()
+    public boolean isModelDirty()
     {
-    	return _refCount.get();
+        final long currentModificationStamp = _file.getModificationStamp();
+        return _lastModificationStamp != currentModificationStamp;
     }
     
     /**
@@ -289,14 +305,13 @@ public class JSPModelProcessor
      * @param forceRefresh -- if true, always refreshes, if false,
      * then it only refreshes if the file's modification has changed
      * since the last refresh
+     * @throws IllegalStateException if isDisposed() == true
      */
     public void refresh(final boolean forceRefresh)
     {
         if (isDisposed())
         {
-            // TODO: should we throw exception?  return false?
-            JSFCorePlugin.log(IStatus.WARNING, "Attempt to refresh a disposed processor", new Throwable("Exception is only to get a stack trace, not an error"));
-            return;
+            throw new IllegalStateException("Processor is disposed for file: "+_file.toString());
         }
 
         synchronized(_lastModificationStampMonitor)
@@ -309,22 +324,26 @@ public class JSPModelProcessor
                 return;
             }
 
+            DOMModelForJSP  model = null;
             try
             {
                 _lastModificationStampMonitor.setSignalled(true);
                 
-                long currentModificationStamp;
-                
-                currentModificationStamp = _file.getModificationStamp();
-    
+
                 // only refresh if forced or if the underlying file has changed
                 // since the last run
                 if (forceRefresh
-                        || _lastModificationStamp != currentModificationStamp)
+                        || isModelDirty())
                 {
-                    refreshInternal();
+                    model = getModelForFile(_file);
+                    refreshInternal(model);
                     _lastModificationStamp = _file.getModificationStamp();
                 }
+            }
+            catch (CoreException e) {
+               JSFCorePlugin.log(new RuntimeException(e), "Error refreshing internal model");
+            } catch (IOException e) {
+                JSFCorePlugin.log(new RuntimeException(e), "Error refreshing internal model");
             }
             // make sure that we unsignal the monitor before releasing the
             // mutex
@@ -335,23 +354,24 @@ public class JSPModelProcessor
         }
     }
     
-    private void refreshInternal()
+    private void refreshInternal(DOMModelForJSP model)
     {
         final IStructuredDocumentContext context = 
-            IStructuredDocumentContextFactory.INSTANCE.getContext(_model.getStructuredDocument(), -1);
+            IStructuredDocumentContextFactory.INSTANCE.getContext(model.getStructuredDocument(), -1);
         final ITaglibContextResolver taglibResolver =
             IStructuredDocumentContextResolverFactory.INSTANCE.getTaglibContextResolver(context);
-        IDOMDocument document = _model.getDocument();
+        IDOMDocument document = model.getDocument();
         getApplicationMap().clear();
         getRequestMap().clear();
         getSessionMap().clear();
         //long curTime = System.currentTimeMillis();
-        recurseChildNodes(document.getChildNodes(), taglibResolver);
+        recurseChildNodes(model, document.getChildNodes(), taglibResolver);
         //long netTime = System.currentTimeMillis() - curTime;
         //System.out.println("Net time to recurse document: "+netTime);
     }
-   
-    private void recurseChildNodes(final NodeList nodes, 
+
+    private void recurseChildNodes(final DOMModelForJSP model,
+                                   final NodeList nodes, 
                                     final ITaglibContextResolver taglibResolver)
     {
         for (int i = 0; i < nodes.getLength(); i++)
@@ -359,12 +379,12 @@ public class JSPModelProcessor
             final Node child = nodes.item(i);
             
             // process attributes at this node before recursing
-            processAttributes(child, taglibResolver);
-            recurseChildNodes(child.getChildNodes(), taglibResolver);
+            processAttributes(model, child, taglibResolver);
+            recurseChildNodes(model, child.getChildNodes(), taglibResolver);
         }
     }
-    
-    private void processAttributes(final Node node, 
+
+    private void processAttributes(final DOMModelForJSP model, final Node node, 
                                     final ITaglibContextResolver taglibResolver)
     {
         if (taglibResolver.hasTag(node))
@@ -377,13 +397,13 @@ public class JSPModelProcessor
             {
                 final Node attribute = node.getAttributes().item(i);
 
-                processSymbolContrib(uri, elementName, attribute);
+                processSymbolContrib(model, uri, elementName, attribute);
                 processSetsLocale(uri, elementName, attribute);
             }
         }
     }
 
-    private void processSymbolContrib(final String uri, final String elementName, Node attribute)
+    private void processSymbolContrib(final DOMModelForJSP model, final String uri, final String elementName, Node attribute)
     {
         final SymbolContribAggregator  aggregator =
             SymbolContribAggregator.
@@ -403,7 +423,7 @@ public class JSPModelProcessor
                     factory.create(symbolName, 
                                   ISymbolConstants.SYMBOL_SCOPE_REQUEST, //TODO:
                                   IStructuredDocumentContextFactory.INSTANCE.
-                                      getContext(_model.getStructuredDocument(), 
+                                      getContext(model.getStructuredDocument(), 
                                                  attribute),
                                   problems);
 
@@ -434,7 +454,7 @@ public class JSPModelProcessor
         {
             DesignTimeApplicationManager  dtAppMgr =
                 DesignTimeApplicationManager.getInstance(_file.getProject());
-            
+
             DTFacesContext facesContext = dtAppMgr.getFacesContext(_file);
             
             if (facesContext != null)
@@ -457,14 +477,14 @@ public class JSPModelProcessor
         {
             return Collections.unmodifiableMap(map);
         }
-        
+
         return Collections.EMPTY_MAP;
     }
-    
+
     private void updateMap(ISymbol symbol, String  scopeName)
     {
         final Map<Object, ISymbol> map = getMapForScopeInternal(scopeName);
-        
+
         if (map != null)
         {
             map.put(symbol.getName(), symbol);
@@ -540,32 +560,6 @@ public class JSPModelProcessor
     }
 
     /**
-     * Listens to the JSP model and reacts to changes
-     * @author cbateman
-     *
-     */
-    private class ModelListener implements IModelLifecycleListener
-    {
-        public void processPostModelEvent(ModelLifecycleEvent event)
-        {
-            // TODO: figure this event structure out seems like it is possibly
-            // broken...
-            if (((event.getType() & ModelLifecycleEvent.MODEL_DIRTY_STATE) != 0
-                    && !_model.isDirty()) // if the dirty state changed as now not dirty, then we have a save
-                )//|| (event.getType() & ModelLifecycleEvent.MODEL_REINITIALIZED) != 0)
-            {
-                // refresh if modified on disk
-                refresh(false);
-            }
-        }
-
-        public void processPreModelEvent(ModelLifecycleEvent arg0) {
-            // do nothing
-        }
-    }
-    
-    
-    /**
      * Aggregates the sets-locale meta-data
      * 
      * @author cbateman
@@ -577,8 +571,8 @@ public class JSPModelProcessor
         static LocaleSetAggregator create(IProject project, 
                                               final String uri, 
                                               final String elementName, final String attributeName)
-        {            
-        	final ITaglibDomainMetaDataModelContext mdContext = TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(project, uri);
+        {
+            final ITaglibDomainMetaDataModelContext mdContext = TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(project, uri);
             Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(mdContext, elementName+"/"+attributeName, SETS_LOCALE); //$NON-NLS-1$
 
             if (TraitValueHelper.getValueAsBoolean(trait))
@@ -609,12 +603,12 @@ public class JSPModelProcessor
          * @return a new instance only if attributeName is a symbol contributor
          */
         static SymbolContribAggregator create(final IProject project, 
-        									  final String uri, 
+                                              final String uri, 
                                               final String elementName, 
                                               final String attributeName)
         {
-        	final String entityKey = elementName+"/"+attributeName; //$NON-NLS-1$
-        	final ITaglibDomainMetaDataModelContext mdContext = TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(project, uri);
+            final String entityKey = elementName+"/"+attributeName; //$NON-NLS-1$
+            final ITaglibDomainMetaDataModelContext mdContext = TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(project, uri);
             Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(mdContext, entityKey, CONTRIBUTES_VALUE_BINDING);
 
             boolean contribsValueBindings = TraitValueHelper.getValueAsBoolean(trait);
@@ -629,8 +623,8 @@ public class JSPModelProcessor
 
                 if (scope != null && !scope.equals("")) //$NON-NLS-1$
                 {
-                	trait = TaglibDomainMetaDataQueryHelper.getTrait(mdContext, entityKey, VALUE_BINDING_SYMBOL_FACTORY);
-                	symbolFactory = TraitValueHelper.getValueAsString(trait);                      
+                    trait = TaglibDomainMetaDataQueryHelper.getTrait(mdContext, entityKey, VALUE_BINDING_SYMBOL_FACTORY);
+                    symbolFactory = TraitValueHelper.getValueAsString(trait);                      
                 }
 
                 return new SymbolContribAggregator(scope, symbolFactory);
