@@ -102,22 +102,15 @@ public class TestResourceBundleMapSource extends TestCase
      * what's expected
      */
     @SuppressWarnings("unchecked")
-    public void testSanity()
+    public void testSanity() throws Exception
     {
-        try
-        {
-            Map  map = ResourceBundleMapSourceFactory.getResourceBundleMapSource(_project1, "bundles.bundle1");
-            assertNotNull(map);
-            assertEquals(map.size(), 3);
+        Map  map = ResourceBundleMapSourceFactory.getResourceBundleMapSource(_project1, "bundles.bundle1");
+        assertNotNull(map);
+        assertEquals(map.size(), 3);
 
-            map = ResourceBundleMapSourceFactory.getResourceBundleMapSource(_project2, "bundles.bundle1");
-            assertNotNull(map);
-            assertEquals(map.size(), 3);
-        }
-        catch (Exception e)
-        {
-            fail(e.getLocalizedMessage());
-        }
+        map = ResourceBundleMapSourceFactory.getResourceBundleMapSource(_project2, "bundles.bundle1");
+        assertNotNull(map);
+        assertEquals(map.size(), 3);
     }
 
     @Override
@@ -133,44 +126,30 @@ public class TestResourceBundleMapSource extends TestCase
      * Verify the expected contents of bundle1 in project1
      */
     @SuppressWarnings("unchecked")
-    public void testContentsProject1Bundle1()
+    public void testContentsProject1Bundle1()  throws Exception
     {
-        try
-        {
-            Map  map = ResourceBundleMapSourceFactory.getResourceBundleMapSource(_project1, "bundles.bundle1");
-            assertTrue(map.containsKey("prop1"));
-            assertEquals("blah", map.get("prop1"));
-            assertTrue(map.containsKey("one.dot"));
-            assertEquals("blah1", map.get("one.dot"));
-            assertTrue(map.containsKey("two.dot.property"));
-            assertEquals("blah3", map.get("two.dot.property"));
-        }
-        catch (Exception e)
-        {
-            fail(e.getLocalizedMessage());
-        }
+        Map  map = ResourceBundleMapSourceFactory.getResourceBundleMapSource(_project1, "bundles.bundle1");
+        assertTrue(map.containsKey("prop1"));
+        assertEquals("blah", map.get("prop1"));
+        assertTrue(map.containsKey("one.dot"));
+        assertEquals("blah1", map.get("one.dot"));
+        assertTrue(map.containsKey("two.dot.property"));
+        assertEquals("blah3", map.get("two.dot.property"));
     }
 
     /**
      * Verify the expected contents of bundle1 in project2
      */
     @SuppressWarnings("unchecked")
-    public void testContentsProject2Bundle1()
+    public void testContentsProject2Bundle1() throws Exception
     {
-        try
-        {
-            Map  map = ResourceBundleMapSourceFactory.getResourceBundleMapSource(_project2, "bundles.bundle1");
-            assertTrue(map.containsKey("x_prop1"));
-            assertEquals("x_blah", map.get("x_prop1"));
-            assertTrue(map.containsKey("x_one.dot"));
-            assertEquals("x_blah1", map.get("x_one.dot"));
-            assertTrue(map.containsKey("x_two.dot.property"));
-            assertEquals("x_blah3", map.get("x_two.dot.property"));
-        }
-        catch (Exception e)
-        {
-            fail(e.getLocalizedMessage());
-        }
+        Map  map = ResourceBundleMapSourceFactory.getResourceBundleMapSource(_project2, "bundles.bundle1");
+        assertTrue(map.containsKey("x_prop1"));
+        assertEquals("x_blah", map.get("x_prop1"));
+        assertTrue(map.containsKey("x_one.dot"));
+        assertEquals("x_blah1", map.get("x_one.dot"));
+        assertTrue(map.containsKey("x_two.dot.property"));
+        assertEquals("x_blah3", map.get("x_two.dot.property"));
     }
 
     /**
@@ -211,8 +190,6 @@ public class TestResourceBundleMapSource extends TestCase
         assertNull(map.get("two.dot.property"));
     }
 
-    
-    
     /**
      * Regression test of https://bugs.eclipse.org/bugs/show_bug.cgi?id=196452.
      * 

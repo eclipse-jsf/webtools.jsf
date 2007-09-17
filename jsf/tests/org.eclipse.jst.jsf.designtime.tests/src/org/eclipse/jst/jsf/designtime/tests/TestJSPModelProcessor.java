@@ -1,12 +1,16 @@
 package org.eclipse.jst.jsf.designtime.tests;
 
 import java.io.ByteArrayInputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.Random;
+import java.util.Set;
+import java.util.TreeSet;
 
 import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IResource;
 import org.eclipse.jst.jsf.context.symbol.ISymbol;
 import org.eclipse.jst.jsf.context.symbol.source.ISymbolConstants;
 import org.eclipse.jst.jsf.core.IJSFCoreConstants;
@@ -19,7 +23,10 @@ import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
 
 public class TestJSPModelProcessor extends TestCase 
 {
+    private static final int NUM_JSPS = 25;
     private IFile _testJSP1;
+    private List<IFile> _jsps;
+    
     private JSFFacetedTestEnvironment _jsfFactedTestEnvironment;
 
     @Override
@@ -42,9 +49,15 @@ public class TestJSPModelProcessor extends TestCase
                 , new ByteArrayInputStream(input.toBytes())
                 , "bundles", "bundle1.properties");
         
-        IResource res = projectTestEnvironment.loadResourceInWebRoot(DesignTimeTestsPlugin.getDefault().getBundle()
+        _testJSP1 = (IFile) projectTestEnvironment.loadResourceInWebRoot(DesignTimeTestsPlugin.getDefault().getBundle()
                 , "/testdata/testdata1.jsp.data", "testdata1.jsp");
-        _testJSP1 = (IFile) res;
+
+        _jsps = new ArrayList<IFile>(NUM_JSPS);
+        for (int i = 0; i < NUM_JSPS; i++)
+        {
+            _jsps.add((IFile) projectTestEnvironment.loadResourceInWebRoot(DesignTimeTestsPlugin.getDefault().getBundle()
+                , "/testdata/testdata1.jsp.data", "testdata_"+i+".jsp"));
+        }
 
         _jsfFactedTestEnvironment = new JSFFacetedTestEnvironment(projectTestEnvironment);
         _jsfFactedTestEnvironment.initialize(IJSFCoreConstants.FACET_VERSION_1_1);    
@@ -54,55 +67,11 @@ public class TestJSPModelProcessor extends TestCase
     protected void tearDown() throws Exception {
     }
 
-    public void testGetAndDispose() throws Exception
+    public void testGet() throws Exception
     {
         JSPModelProcessor processor = JSPModelProcessor.get(_testJSP1);
         assertNotNull(processor);
-        assertEquals(1, processor.getRefCount());
-        JSPModelProcessor.dispose(_testJSP1);
-        assertEquals(0, processor.getRefCount());
-    }
-
-    public void testGetAndDisposeMultiple() throws Exception
-    {
-        JSPModelProcessor processor = JSPModelProcessor.get(_testJSP1);
-        assertNotNull(processor);
-        assertEquals(1, processor.getRefCount());
-
-        // get again
-        processor = JSPModelProcessor.get(_testJSP1);
-        assertEquals(2, processor.getRefCount());
-        // and again
-        processor = JSPModelProcessor.get(_testJSP1);
-        assertEquals(3, processor.getRefCount());
-        // and dispose once
-        JSPModelProcessor.dispose(_testJSP1);
-        assertEquals(2, processor.getRefCount());
-
-        // and reacquire
-        processor = JSPModelProcessor.get(_testJSP1);
-        assertEquals(3, processor.getRefCount());
-
-        // dispose twice
-        JSPModelProcessor.dispose(_testJSP1);
-        JSPModelProcessor.dispose(_testJSP1);
-        assertEquals(1, processor.getRefCount());
-
-        // one final dispose
-        JSPModelProcessor.dispose(_testJSP1);
-        assertEquals(0, processor.getRefCount());
-
-        // exceed by one
-        JSPModelProcessor.dispose(_testJSP1);
-        assertEquals(0, processor.getRefCount());
-
-        // acquire
-        processor = JSPModelProcessor.get(_testJSP1);
-        assertEquals(1, processor.getRefCount());
-
-        // dispose single reference
-        JSPModelProcessor.dispose(_testJSP1);
-        assertEquals(0, processor.getRefCount());
+        assertFalse(processor.isDisposed());
     }
 
     public void testGetMapForScope() throws Exception
@@ -111,29 +80,21 @@ public class TestJSPModelProcessor extends TestCase
         JSPModelProcessor processor = JSPModelProcessor.get(_testJSP1);
         assertNotNull(processor);
 
-        try
-        {
-            Map<Object, ISymbol> scopeMap = 
-                processor.getMapForScope(ISymbolConstants.SYMBOL_SCOPE_REQUEST_STRING);
-            assertTrue(scopeMap.isEmpty());
+         Map<Object, ISymbol> scopeMap = 
+            processor.getMapForScope(ISymbolConstants.SYMBOL_SCOPE_REQUEST_STRING);
+        assertTrue(scopeMap.isEmpty());
 
-            scopeMap = 
-                processor.getMapForScope(ISymbolConstants.SYMBOL_SCOPE_SESSION_STRING);
-            assertTrue(scopeMap.isEmpty());
+        scopeMap = 
+            processor.getMapForScope(ISymbolConstants.SYMBOL_SCOPE_SESSION_STRING);
+        assertTrue(scopeMap.isEmpty());
 
-            scopeMap = 
-                processor.getMapForScope(ISymbolConstants.SYMBOL_SCOPE_APPLICATION_STRING);
-            assertTrue(scopeMap.isEmpty());
+        scopeMap = 
+            processor.getMapForScope(ISymbolConstants.SYMBOL_SCOPE_APPLICATION_STRING);
+        assertTrue(scopeMap.isEmpty());
 
-            scopeMap = 
-                processor.getMapForScope(ISymbolConstants.SYMBOL_SCOPE_NONE_STRING);
-            assertTrue(scopeMap.isEmpty());
-        }
-        finally
-        {
-            JSPModelProcessor.dispose(_testJSP1);
-            assertEquals(0, processor.getRefCount());
-        }
+        scopeMap = 
+            processor.getMapForScope(ISymbolConstants.SYMBOL_SCOPE_NONE_STRING);
+        assertTrue(scopeMap.isEmpty());
     }
 
     public void testRefreshAndGet() throws Exception
@@ -142,25 +103,17 @@ public class TestJSPModelProcessor extends TestCase
         JSPModelProcessor processor = JSPModelProcessor.get(_testJSP1);
         assertNotNull(processor);
 
-        try
-        {
-            Map<Object, ISymbol> scopeMap = 
-                processor.getMapForScope(ISymbolConstants.SYMBOL_SCOPE_REQUEST_STRING);
-            assertTrue(scopeMap.isEmpty());
+        Map<Object, ISymbol> scopeMap = 
+            processor.getMapForScope(ISymbolConstants.SYMBOL_SCOPE_REQUEST_STRING);
+        assertTrue(scopeMap.isEmpty());
 
-            processor.refresh(false);
+        processor.refresh(false);
 
-            // after refresh we should have a symbol for the loadBundle and the dataTable
-            scopeMap = 
-                processor.getMapForScope(ISymbolConstants.SYMBOL_SCOPE_REQUEST_STRING);
-            assertFalse(scopeMap.isEmpty());
-            assertEquals(2, scopeMap.size());
-        }
-        finally
-        {
-            JSPModelProcessor.dispose(_testJSP1);
-            assertEquals(0, processor.getRefCount());
-        }
+        // after refresh we should have a symbol for the loadBundle and the dataTable
+        scopeMap = 
+            processor.getMapForScope(ISymbolConstants.SYMBOL_SCOPE_REQUEST_STRING);
+        assertFalse(scopeMap.isEmpty());
+        assertEquals(2, scopeMap.size());
     }
 
     public void testFileDeletion_RegressionBug199480() throws Exception
@@ -172,12 +125,114 @@ public class TestJSPModelProcessor extends TestCase
         // if we not refreshed yet, then should be no symbols
         JSPModelProcessor processor = JSPModelProcessor.get(_testJSP1);
         assertNotNull(processor);
+        assertFalse(processor.isDisposed());
 
         _testJSP1.delete(true, null);
         // file is deleted, so the processor should dispose itself on the 
         // resource change event
         assertTrue(processor.isDisposed());
-        assertEquals(0, processor.getRefCount());
-        processor.refresh(true);
+    }
+    
+    public void testProjectClosure() throws Exception
+    {
+        // ensure that if the enclosing project of the associated IFile
+        // is closed, then the processor gets disposed
+        JSPModelProcessor processor = JSPModelProcessor.get(_testJSP1);
+        assertNotNull(processor);
+        assertFalse(processor.isDisposed());
+
+        _testJSP1.getProject().close(null);
+
+        // file is deleted, so the processor should dispose itself on the 
+        // resource change event
+        assertTrue(processor.isDisposed());
+    }
+
+    public void testProjectDeletion() throws Exception
+    {
+        // ensure that if the enclosing project of the associated IFile
+        // is deleted, then the processor gets disposed
+        JSPModelProcessor processor = JSPModelProcessor.get(_testJSP1);
+        assertNotNull(processor);
+        assertFalse(processor.isDisposed());
+
+        _testJSP1.getProject().delete(true,null);
+
+        // file is deleted, so the processor should dispose itself on the 
+        // resource change event
+        assertTrue(processor.isDisposed());
+    }
+    
+    public void testChangeRefresh() throws Exception
+    {
+        // random order of access to the jsps, but always the same between runs
+        final int order[] = new int[] {6,19,10,16,14,4,13,11,24,2,3,23,20,15,17,9,1,5,22,12,21,8,18,0,7};
+        assertEquals(NUM_JSPS, order.length);
+        
+        for (int i = 0; i < order.length; i++)
+        {
+            final IFile file = _jsps.get(order[i]);
+            JSPModelProcessor processor = JSPModelProcessor.get(file);
+            // the processor model should start out dirty since it won't
+            // get refreshed unless the resource detects a change or if
+            // it is explicitly refreshed
+            assertTrue(processor.isModelDirty()); 
+
+            // this should trigger a change event and update the model
+            file.touch(null);
+            
+            assertFalse(processor.isModelDirty());
+
+            // now delete the file and ensure the processor is disposed
+            file.delete(true, null);
+
+            assertTrue(processor.isDisposed());
+        }
+    }
+
+    public void testExplicitRefresh() throws Exception
+    {
+        // random order of access to the jsps, but always the same between runs
+        final int order[] = new int[] {6,19,10,16,14,4,13,11,24,2,3,23,20,15,17,9,1,5,22,12,21,8,18,0,7};
+        assertEquals(NUM_JSPS, order.length);
+        
+        for (int i = 0; i < order.length; i++)
+        {
+            final IFile file = _jsps.get(order[i]);
+            JSPModelProcessor processor = JSPModelProcessor.get(file);
+            // the processor model should start out dirty since it won't
+            // get refreshed unless the resource detects a change or if
+            // it is explicitly refreshed
+            assertTrue(processor.isModelDirty()); 
+
+            // since the model is dirty this should trigger a refresh
+            processor.refresh(false);
+            
+            assertFalse(processor.isModelDirty());
+
+            // now delete the file and ensure the processor is disposed
+            file.delete(true, null);
+
+            assertTrue(processor.isDisposed());
+        }
+    }
+    
+    public static void main(String[] args)
+    {
+       Set<Integer> set = new TreeSet<Integer>();
+       
+       Random random = new Random();
+       
+       while(set.size() < NUM_JSPS)
+       {
+           Integer value = Integer.valueOf(Math.abs(random.nextInt()) % NUM_JSPS);
+           
+           if (!set.contains(value))
+           {
+               System.out.printf("%d,", value);
+               set.add(value);
+           }
+       }
     }
 }
+
