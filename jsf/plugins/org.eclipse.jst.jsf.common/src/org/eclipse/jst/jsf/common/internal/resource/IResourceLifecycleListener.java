@@ -22,6 +22,36 @@ public interface IResourceLifecycleListener
      */
     public static class EventResult
     {
+        private static EventResult DEFAULT;
+
+        /**
+         * @return an event result with defaults initialized
+         */
+        public static EventResult getDefaultEventResult()
+        {
+            if (DEFAULT == null)
+            {
+                DEFAULT = new EventResult();
+            }
+            return DEFAULT;
+        }
+
+        private static EventResult DISPOSE_AFTER_EVENT;
+
+        /**
+         * @return an event result with default except dispose after
+         * is set
+         */
+        public static EventResult getDisposeAfterEventResult()
+        {
+            if (DISPOSE_AFTER_EVENT == null)
+            {
+                DISPOSE_AFTER_EVENT = new EventResult();
+                DISPOSE_AFTER_EVENT.setDisposeAfterEvent(true);
+            }
+            return DISPOSE_AFTER_EVENT;
+        }
+
         /**
          * set to true if after the current event is finished firing, the source
          * should be disposed. If self-disposal is not applicable, the flag is ignored
@@ -39,7 +69,7 @@ public interface IResourceLifecycleListener
         /**
          * @param disposeAfterEvent
          */
-        public void setDisposeAfterEvent(boolean disposeAfterEvent) {
+        protected void setDisposeAfterEvent(boolean disposeAfterEvent) {
             _disposeAfterEvent = disposeAfterEvent;
         }
     }
