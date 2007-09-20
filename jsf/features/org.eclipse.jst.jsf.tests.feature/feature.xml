@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.jst.jsf.tests.feature"
       label="%feature.name"
-      version="1.0.0.qualifier"
+      version="1.0.1.qualifier"
       provider-name="%feature.provider">
 
    <description>
@@ -47,16 +47,16 @@
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
-   	     id="org.eclipse.jst.jsf.designtime.tests"
+         id="org.eclipse.jst.jsf.designtime.tests"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
-    <plugin
-   	     id="org.eclipse.jst.jsf.context.symbol.tests"
+
+   <plugin
+         id="org.eclipse.jst.jsf.context.symbol.tests"
          download-size="0"
          install-size="0"
          version="0.0.0"
