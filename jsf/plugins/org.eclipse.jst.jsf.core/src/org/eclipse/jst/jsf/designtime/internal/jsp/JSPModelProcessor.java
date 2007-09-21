@@ -349,6 +349,10 @@ public class JSPModelProcessor
             // mutex
             finally
             {
+                if (model != null)
+                {
+                    model.releaseFromRead();
+                }
                 _lastModificationStampMonitor.setSignalled(false);
             }
         }
