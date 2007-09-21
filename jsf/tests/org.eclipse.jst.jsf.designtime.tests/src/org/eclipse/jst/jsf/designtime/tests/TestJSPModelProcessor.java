@@ -20,6 +20,9 @@ import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.jst.jsf.test.util.TestFileResource;
 import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
+import org.eclipse.wst.sse.core.StructuredModelManager;
+import org.eclipse.wst.sse.core.internal.provisional.IModelManager;
+import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
 
 public class TestJSPModelProcessor extends TestCase 
 {
@@ -99,21 +102,49 @@ public class TestJSPModelProcessor extends TestCase
 
     public void testRefreshAndGet() throws Exception
     {
-        // if we not refreshed yet, then should be no symbols
-        JSPModelProcessor processor = JSPModelProcessor.get(_testJSP1);
-        assertNotNull(processor);
+        IModelManager modelManager = StructuredModelManager.getModelManager();
 
-        Map<Object, ISymbol> scopeMap = 
-            processor.getMapForScope(ISymbolConstants.SYMBOL_SCOPE_REQUEST_STRING);
-        assertTrue(scopeMap.isEmpty());
+        IStructuredModel model = null;
 
-        processor.refresh(false);
+        try
+        {
+            model = modelManager.getModelForRead(_testJSP1);
 
-        // after refresh we should have a symbol for the loadBundle and the dataTable
-        scopeMap = 
-            processor.getMapForScope(ISymbolConstants.SYMBOL_SCOPE_REQUEST_STRING);
-        assertFalse(scopeMap.isEmpty());
-        assertEquals(2, scopeMap.size());
+            // we should be the only one with a handle
+            assertFalse(model.isShared());
+
+            // if we not refreshed yet, then should be no symbols
+            JSPModelProcessor processor = JSPModelProcessor.get(_testJSP1);
+            assertNotNull(processor);
+            // we should be the only one with a handle
+            assertFalse(model.isShared());
+    
+            Map<Object, ISymbol> scopeMap = 
+                processor.getMapForScope(ISymbolConstants.SYMBOL_SCOPE_REQUEST_STRING);
+            assertTrue(scopeMap.isEmpty());
+            // we should be the only one with a handle
+            assertFalse(model.isShared());
+    
+            processor.refresh(false);
+            // we should be the only one with a handle
+            assertFalse(model.isShared());
+    
+            // after refresh we should have a symbol for the loadBundle and the dataTable
+            scopeMap = 
+                processor.getMapForScope(ISymbolConstants.SYMBOL_SCOPE_REQUEST_STRING);
+            assertFalse(scopeMap.isEmpty());
+            assertEquals(2, scopeMap.size());
+
+            // we should be the only one with a handle
+            assertFalse(model.isShared());
+        }
+        finally
+        {
+            if (model != null)
+            {
+                model.releaseFromRead();
+            }
+        }
     }
 
     public void testFileDeletion_RegressionBug199480() throws Exception
@@ -132,46 +163,98 @@ public class TestJSPModelProcessor extends TestCase
         // resource change event
         assertTrue(processor.isDisposed());
     }
-    
+
     public void testProjectClosure() throws Exception
     {
-        // ensure that if the enclosing project of the associated IFile
-        // is closed, then the processor gets disposed
-        JSPModelProcessor processor = JSPModelProcessor.get(_testJSP1);
-        assertNotNull(processor);
-        assertFalse(processor.isDisposed());
+        IModelManager modelManager = StructuredModelManager.getModelManager();
 
-        _testJSP1.getProject().close(null);
+        IStructuredModel model = null;
 
-        // file is deleted, so the processor should dispose itself on the 
-        // resource change event
-        assertTrue(processor.isDisposed());
+        try
+        {
+            model = modelManager.getModelForRead(_testJSP1);
+
+            // we should be the only one with a handle
+            assertFalse(model.isShared());
+
+            // ensure that if the enclosing project of the associated IFile
+            // is closed, then the processor gets disposed
+            JSPModelProcessor processor = JSPModelProcessor.get(_testJSP1);
+            assertFalse(model.isShared());
+            assertNotNull(processor);
+            // we should still be the only one with a handle since JSPModelProcessor
+            // doesn't hold it.
+            assertFalse(processor.isDisposed());
+            processor.refresh(false);
+            assertFalse(model.isShared());
+
+            _testJSP1.getProject().close(null);
+
+            // file is deleted, so the processor should dispose itself on the 
+            // resource change event
+            assertTrue(processor.isDisposed());
+            // final check, with processor disposed, still not shared
+            assertFalse(model.isShared());
+        }
+        finally
+        {
+            if (model != null)
+            {
+                model.releaseFromRead();
+            }
+        }
     }
 
     public void testProjectDeletion() throws Exception
     {
-        // ensure that if the enclosing project of the associated IFile
-        // is deleted, then the processor gets disposed
-        JSPModelProcessor processor = JSPModelProcessor.get(_testJSP1);
-        assertNotNull(processor);
-        assertFalse(processor.isDisposed());
+        IModelManager modelManager = StructuredModelManager.getModelManager();
 
-        _testJSP1.getProject().delete(true,null);
+        IStructuredModel model = null;
 
-        // file is deleted, so the processor should dispose itself on the 
-        // resource change event
-        assertTrue(processor.isDisposed());
-    }
+        try
+        {
+            model = modelManager.getModelForRead(_testJSP1);
+
+            // we should be the only one with a handle
+            assertFalse(model.isShared());
+
+            // ensure that if the enclosing project of the associated IFile
+            // is deleted, then the processor gets disposed
+            JSPModelProcessor processor = JSPModelProcessor.get(_testJSP1);
+            assertNotNull(processor);
+            assertFalse(processor.isDisposed());
+            assertFalse(model.isShared());
+            // we should still be the only one with a handle since JSPModelProcessor
+            // doesn't hold it.
+            processor.refresh(false);
+            assertFalse(model.isShared());
     
+            _testJSP1.getProject().delete(true,null);
+    
+            // file is deleted, so the processor should dispose itself on the 
+            // resource change event
+            assertTrue(processor.isDisposed());
+            assertFalse(model.isShared());
+        }
+        finally
+        {
+            if (model != null)
+            {
+                model.releaseFromRead();
+            }
+        }
+    }
+
     public void testChangeRefresh() throws Exception
     {
         // random order of access to the jsps, but always the same between runs
         final int order[] = new int[] {6,19,10,16,14,4,13,11,24,2,3,23,20,15,17,9,1,5,22,12,21,8,18,0,7};
         assertEquals(NUM_JSPS, order.length);
-        
+
         for (int i = 0; i < order.length; i++)
         {
             final IFile file = _jsps.get(order[i]);
+
             JSPModelProcessor processor = JSPModelProcessor.get(file);
             // the processor model should start out dirty since it won't
             // get refreshed unless the resource detects a change or if
@@ -195,19 +278,21 @@ public class TestJSPModelProcessor extends TestCase
         // random order of access to the jsps, but always the same between runs
         final int order[] = new int[] {6,19,10,16,14,4,13,11,24,2,3,23,20,15,17,9,1,5,22,12,21,8,18,0,7};
         assertEquals(NUM_JSPS, order.length);
-        
+
         for (int i = 0; i < order.length; i++)
         {
             final IFile file = _jsps.get(order[i]);
+
             JSPModelProcessor processor = JSPModelProcessor.get(file);
             // the processor model should start out dirty since it won't
             // get refreshed unless the resource detects a change or if
             // it is explicitly refreshed
             assertTrue(processor.isModelDirty()); 
+            // we should be the only one with a handle
 
             // since the model is dirty this should trigger a refresh
             processor.refresh(false);
-            
+
             assertFalse(processor.isModelDirty());
 
             // now delete the file and ensure the processor is disposed
@@ -216,7 +301,7 @@ public class TestJSPModelProcessor extends TestCase
             assertTrue(processor.isDisposed());
         }
     }
-    
+
     public static void main(String[] args)
     {
        Set<Integer> set = new TreeSet<Integer>();
