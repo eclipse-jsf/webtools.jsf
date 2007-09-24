@@ -80,7 +80,7 @@ final class Util
                         SymbolFactory.eINSTANCE.createIPropertySymbol();
 
                     // TODO: there is a possible problem here for non-string keyed maps
-                    propSymbol.setName(symbolName.toString());
+                    propSymbol.setName(symbolName);
                     propSymbol.setReadable(true);
                     
                     {
