@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IBoundedListTypeDescriptorImpl.java,v 1.4 2007/05/07 17:30:20 cbateman Exp $
+ * $Id: IBoundedListTypeDescriptorImpl.java,v 1.5 2007/09/24 23:23:34 cbateman Exp $
  */
 package org.eclipse.jst.jsf.context.symbol.internal.impl;
 
@@ -110,6 +110,10 @@ public class IBoundedListTypeDescriptorImpl extends IListTypeDescriptorImpl impl
 
     /**
      * <!-- begin-user-doc -->
+     * @param methodName 
+     * @param methodArguments 
+     * @param symbolName 
+     * @return a symbol representing the return value of the method 
      * <!-- end-user-doc -->
      * @generated NOT
      */
@@ -139,7 +143,7 @@ public class IBoundedListTypeDescriptorImpl extends IListTypeDescriptorImpl impl
                         SymbolFactory.eINSTANCE.createIPropertySymbol();
 
                     // TODO: there is a possible problem here for non-string keyed maps
-                    propSymbol.setName(symbolName.toString());
+                    propSymbol.setName(symbolName);
                     propSymbol.setReadable(true);
                     IJavaTypeDescriptor2 typeDesc = 
                         SymbolFactory.eINSTANCE.createIJavaTypeDescriptor2();
