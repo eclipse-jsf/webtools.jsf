@@ -88,8 +88,6 @@ public class JSFLibraryContainerWizardPage extends WizardPage implements
 	private boolean   _projectHaveV1JSFLibraries; // = false;
 	private IProject  _iproject;
 
-	private static final String IMPL_DESC = Messages.JSFLibrariesPreferencePage_IMPL_DESC;
-	
 	/**
 	 * Zero arg constructor
 	 */
@@ -507,7 +505,7 @@ public class JSFLibraryContainerWizardPage extends WizardPage implements
 		}
 	}
 	
-	private class JSFLibrariesListLabelProvider implements ILabelProvider{		
+	private static class JSFLibrariesListLabelProvider implements ILabelProvider{		
 		Image libImg;
 		public Image getImage(Object element) {
 			if (libImg == null){
@@ -521,7 +519,7 @@ public class JSFLibraryContainerWizardPage extends WizardPage implements
 			if (element instanceof JSFLibrary) {
 				JSFLibrary lib = (JSFLibrary)element;
 				if (lib.isImplementation()) {
-					return lib.getLabel() + " " + IMPL_DESC; //$NON-NLS-1$
+					return lib.getLabel() + " " + Messages.JSFLibrariesPreferencePage_IMPL_DESC; //$NON-NLS-1$
 				}
                 return lib.getLabel();
 			}
