@@ -86,26 +86,34 @@ public abstract class TagIdentifier
         
         final String uri = tagWrapper.getUri();
         
-        if (uri == null && getUri() != null)
+        if (uri == null)
         {
-            return false;
+            if (getUri() != null)
+            {
+                return false;
+            }
         }
         else if (uri.equals(getUri()))
         {
             final String tagName = tagWrapper.getTagName();
             
-            if (tagName == null && getTagName() != null)
+            if (tagName == null)
             {
-                return false;
+                if(getTagName() != null)
+                {
+                    return false;
+                }
             }
-
-            // uri and tag name must both the same for it to be the same type
-            // TODO: the ignore case thing is dependent on the type of container document
-            // Use toLower instead of equalsIgnoreCase to ensure that hashCode generates
-            // a hashCode that guarantees x.equals(y) => x.hashCode == y.hashCode
-            if (tagName.toLowerCase().equals((getTagName().toLowerCase())))
+            else
             {
-                return true;
+                // uri and tag name must both the same for it to be the same type
+                // TODO: the ignore case thing is dependent on the type of container document
+                // Use toLower instead of equalsIgnoreCase to ensure that hashCode generates
+                // a hashCode that guarantees x.equals(y) => x.hashCode == y.hashCode
+                if (tagName.toLowerCase().equals((getTagName().toLowerCase())))
+                {
+                    return true;
+                }
             }
         }
 
