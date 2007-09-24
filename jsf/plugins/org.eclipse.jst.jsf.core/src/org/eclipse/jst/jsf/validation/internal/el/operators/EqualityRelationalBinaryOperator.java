@@ -197,7 +197,8 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
         if (TypeCoercer.typeIsNull(firstArg.getSignature())
                 || TypeCoercer.typeIsNull(secondArg.getSignature()))
         {
-            final boolean result = doRealOperation(new Integer(4), null);
+            // TODO: this is a strange thing to do...
+            final boolean result = doRealOperation(Integer.valueOf(4), null);
             return _diagnosticFactory.create_BINARY_OP_EQUALITY_COMP_WITH_NULL_ALWAYS_EVAL_SAME(Boolean.toString(result));
         }
 

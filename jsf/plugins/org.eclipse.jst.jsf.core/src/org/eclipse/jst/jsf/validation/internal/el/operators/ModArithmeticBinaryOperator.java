@@ -41,7 +41,6 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
     ModArithmeticBinaryOperator(DiagnosticFactory diagnosticFactory) {
         super(diagnosticFactory);
-        // TODO Auto-generated constructor stub
     }
 
     public ValueType performOperation(ValueType firstArg, ValueType secondArg) 
@@ -225,8 +224,8 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
             if (firstValue != null && secondValue != null)
             {
                 return new IntegerLiteralType(
-                        doRealOperation(new Long(firstValue.longValue()), 
-                                        new Long(secondValue.longValue())).longValue());
+                        doRealOperation(Long.valueOf(firstValue.longValue()), 
+                                        Long.valueOf(secondValue.longValue())).longValue());
             }
 
             // if we get to here, the coercion is valid, so a Long will be
@@ -365,7 +364,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
     }
     
     protected Long doRealOperation(Long firstArg, Long secondArg) {
-        return new Long(firstArg.longValue() % secondArg.longValue());
+        return Long.valueOf(firstArg.longValue() % secondArg.longValue());
      }
 
      protected Double doRealOperation(Double firstArg, Double secondArg) {

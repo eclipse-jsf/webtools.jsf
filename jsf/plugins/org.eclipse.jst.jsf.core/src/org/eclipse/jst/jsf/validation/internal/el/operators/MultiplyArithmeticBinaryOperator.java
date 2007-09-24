@@ -35,7 +35,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
     protected Long doRealOperation(Long firstArg, Long secondArg) 
     {
-        return new Long(firstArg.longValue() * secondArg.longValue());
+        return Long.valueOf(firstArg.longValue() * secondArg.longValue());
     }
 
     protected Double doRealOperation(Double firstArg, Double secondArg) 
