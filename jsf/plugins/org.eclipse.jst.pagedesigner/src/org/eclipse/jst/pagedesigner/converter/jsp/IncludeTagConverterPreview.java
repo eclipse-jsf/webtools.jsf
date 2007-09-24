@@ -30,6 +30,7 @@ import org.eclipse.jst.pagedesigner.jsp.core.internal.pagevar.DocumentPageVariab
 import org.eclipse.jst.pagedesigner.jsp.core.pagevar.adapter.PageVariableAdapterFactory;
 import org.eclipse.jst.pagedesigner.preview.PageExpressionContext;
 import org.eclipse.jst.pagedesigner.preview.PreviewConvertContext;
+import org.eclipse.wst.sse.core.StructuredModelManager;
 import org.eclipse.wst.sse.core.internal.util.URIResolver;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMDocument;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
@@ -51,6 +52,7 @@ public class IncludeTagConverterPreview extends AbstractTagConverter {
 
 	/**
 	 * @param host
+	 * @param fileAttrname 
 	 */
 	public IncludeTagConverterPreview(Element host, String fileAttrname) {
 		super(host);
@@ -77,6 +79,10 @@ public class IncludeTagConverterPreview extends AbstractTagConverter {
         return previewFile(file);
 	}
 
+	/**
+	 * @param includedPath
+	 * @return the IFile corresponding to the IPath
+	 */
 	public IFile getFile(IPath includedPath) {
 		IWorkspaceRoot workspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
 		IProject[] projects = workspaceRoot.getProjects();
@@ -95,13 +101,17 @@ public class IncludeTagConverterPreview extends AbstractTagConverter {
 		return null;
 	}
 
+	/**
+	 * @param file
+	 * @return the Element
+	 */
 	public Element previewFile(IFile file) {
 		IDOMModel xmlModel = null;
 		DocumentPageVariableAdapter provider = null;
 		boolean pushedPageVarProvider = false;
 		try {
 
-			xmlModel = (IDOMModel) PDPlugin.getModelManager().getModelForRead(
+			xmlModel = (IDOMModel) StructuredModelManager.getModelManager().getModelForRead(
 					file);
 			if (xmlModel != null) {
 				IDOMDocument doc = xmlModel.getDocument();
