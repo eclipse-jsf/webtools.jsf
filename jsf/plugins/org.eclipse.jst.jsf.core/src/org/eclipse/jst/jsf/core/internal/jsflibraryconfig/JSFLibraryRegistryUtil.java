@@ -328,11 +328,10 @@ public class JSFLibraryRegistryUtil {
 	 * 
 	 * @param oldId
 	 * @param newId
-	 * @param removeAndAddBecauseOfRename
 	 * @param monitor
 	 * @throws JavaModelException
 	 */
-	public static void rebindClasspathContainerEntries(String oldId, String newId, boolean removeAndAddBecauseOfRename, IProgressMonitor monitor) throws JavaModelException {
+	public static void rebindClasspathContainerEntries(String oldId, String newId, IProgressMonitor monitor) throws JavaModelException {
 		IWorkspaceRoot root= ResourcesPlugin.getWorkspace().getRoot();
 		IJavaProject[] projects= JavaCore.create(root).getJavaProjects();
 		IPath containerPath= new Path(JSFLibraryConfigurationHelper.JSF_LIBRARY_CP_CONTAINER_ID).append(newId);
@@ -340,7 +339,7 @@ public class JSFLibraryRegistryUtil {
 		
 		JSFLibrary lib = JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry().getJSFLibraryByID(newId);
 		List affectedProjects= new ArrayList();
-		removeAndAddBecauseOfRename = (!oldId.equals(newId));
+		boolean removeAndAddBecauseOfRename = (!oldId.equals(newId));
 		// find all projects using the old container name...
 		for (int i= 0; i < projects.length; i++) {
 			IJavaProject project= projects[i];

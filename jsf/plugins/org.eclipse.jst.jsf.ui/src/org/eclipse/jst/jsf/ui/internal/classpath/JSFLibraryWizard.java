@@ -48,11 +48,11 @@ public class JSFLibraryWizard extends Wizard implements INewWizard {
 	/**
 	 * Implementation libaries to be included
 	 */
-	public static int IMPLS = 1;
+	public final static int IMPLS = 1;
 	/**
 	 * Non-Implementation libaries to be included
 	 */
-	public static int NONIMPLS = 2;
+	public final static int NONIMPLS = 2;
 	
 	private JSFLibraryEditControl jsfLibraryEditControl;
 	
@@ -63,9 +63,6 @@ public class JSFLibraryWizard extends Wizard implements INewWizard {
 	private JSFLibrary workingCopyLibrary;
 
 	private JSFLibraryWizardPage page;
-
-	private static final String DESCRIPTION = Messages.JSFLibraryWizard_DESCRIPTION;
-	private static final String IMPLS_ONLY_DESC = Messages.JSFLibraryWizard_IMPLS_ONLY_DESC;
 
 	private boolean _impls;	
 	private boolean _nonimpls;
@@ -211,7 +208,7 @@ public class JSFLibraryWizard extends Wizard implements INewWizard {
 		else {
 			curLibrary.updateValues(workingCopyLibrary);
 			try {
-				JSFLibraryRegistryUtil.rebindClasspathContainerEntries(originalID, workingCopyLibrary.getID(), false, null);
+				JSFLibraryRegistryUtil.rebindClasspathContainerEntries(originalID, workingCopyLibrary.getID(), null);
 			} catch (JavaModelException e) {
 				JSFUiPlugin.log(IStatus.ERROR, "Exception while updating JSF Library containers", e); //$NON-NLS-1$
 			}
@@ -243,7 +240,9 @@ public class JSFLibraryWizard extends Wizard implements INewWizard {
 		 */
 		protected JSFLibraryWizardPage(String pageName) {
 			super(pageName);
-			setDescription(isImplsOnly() ? IMPLS_ONLY_DESC : DESCRIPTION);
+			setDescription(isImplsOnly() 
+			        ? Messages.JSFLibraryWizard_IMPLS_ONLY_DESC
+			        : Messages.JSFLibraryWizard_DESCRIPTION);
 			setTitle(Messages.JSFLibraryWizard_JSFLibrary);
 		}
 
