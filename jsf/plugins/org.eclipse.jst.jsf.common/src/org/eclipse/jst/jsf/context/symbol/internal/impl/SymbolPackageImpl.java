@@ -1,7 +1,7 @@
 /**
  * Copyright 2006 Oracle
  *
- * $Id: SymbolPackageImpl.java,v 1.6 2007/05/15 22:00:27 cbateman Exp $
+ * $Id: SymbolPackageImpl.java,v 1.7 2007/09/24 23:25:39 cbateman Exp $
  */
 package org.eclipse.jst.jsf.context.symbol.internal.impl;
 
@@ -260,6 +260,7 @@ public class SymbolPackageImpl extends EPackageImpl implements SymbolPackage {
      * <p>Invocation of this method will not affect any packages that have
      * already been initialized.
      * <!-- begin-user-doc -->
+     * @return the symbols package 
      * <!-- end-user-doc -->
      * @see #eNS_URI
      * @see #createPackageContents()

@@ -379,6 +379,9 @@ public class SymbolFactoryImpl extends EFactoryImpl implements SymbolFactory {
 
     /**
      * <!-- begin-user-doc -->
+     * @param eDataType 
+     * @param initialValue 
+     * @return the value type for the data type 
      * <!-- end-user-doc -->
      * @generated
      */
@@ -388,6 +391,9 @@ public class SymbolFactoryImpl extends EFactoryImpl implements SymbolFactory {
 
     /**
      * <!-- begin-user-doc -->
+     * @param eDataType 
+     * @param instanceValue 
+     * @return the string for the value type 
      * <!-- end-user-doc -->
      * @generated
      */
