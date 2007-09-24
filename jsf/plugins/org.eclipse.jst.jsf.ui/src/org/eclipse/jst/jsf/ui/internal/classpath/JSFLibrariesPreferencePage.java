@@ -56,11 +56,8 @@ import org.eclipse.ui.IWorkbenchWizard;
  * 
  * @author Gerry Kessler - Oracle
  */
-public class JSFLibrariesPreferencePage extends PreferencePage implements IWorkbenchPreferencePage{
-	private static final String IMPL_DESC = Messages.JSFLibrariesPreferencePage_IMPL_DESC;
-	private static final String DEFAULT_IMPL_DESC = Messages.JSFLibrariesPreferencePage_DEFAULT_IMPL_DESC;
-	private static final String MISSING = Messages.JSFLibrariesPreferencePage_MISSING_DESC;
-	
+public class JSFLibrariesPreferencePage extends PreferencePage implements IWorkbenchPreferencePage
+{
 	private IWorkbench wb;
 
 	private TreeViewer tv;
@@ -340,19 +337,15 @@ public class JSFLibrariesPreferencePage extends PreferencePage implements IWorkb
 		return false;
 	}
 
-	private class TreeLabelProvider implements ILabelProvider {
-		Image libImg;
-		Image jarImg;
+	private static class TreeLabelProvider implements ILabelProvider {
+		private final Image libImg;
+		private final Image jarImg;
 
 		TreeLabelProvider(){
-			if (jarImg == null){
-				ImageDescriptor jarImgDesc = JSFUiPlugin.getImageDescriptor("obj16/jar_obj.gif"); //$NON-NLS-1$
-				jarImg = jarImgDesc.createImage();
-			}
-			if (libImg == null){
-				ImageDescriptor libImgDesc = JSFUiPlugin.getImageDescriptor("obj16/library_obj.gif"); //$NON-NLS-1$
-				libImg = libImgDesc.createImage();
-			}
+			ImageDescriptor jarImgDesc = JSFUiPlugin.getImageDescriptor("obj16/jar_obj.gif"); //$NON-NLS-1$
+			jarImg = jarImgDesc.createImage();
+			ImageDescriptor libImgDesc = JSFUiPlugin.getImageDescriptor("obj16/library_obj.gif"); //$NON-NLS-1$
+			libImg = libImgDesc.createImage();
 		}
 		
 		public Image getImage(Object element) {
@@ -370,9 +363,9 @@ public class JSFLibrariesPreferencePage extends PreferencePage implements IWorkb
 				labelBuf.append(lib.getLabel());
 				if (lib.isImplementation()) {
 					if (lib == JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry().getDefaultImplementation()) {
-						labelBuf.append(DEFAULT_IMPL_DESC);
+						labelBuf.append(Messages.JSFLibrariesPreferencePage_DEFAULT_IMPL_DESC);
 					} else {
-						labelBuf.append(IMPL_DESC);
+						labelBuf.append(Messages.JSFLibrariesPreferencePage_IMPL_DESC);
 					}
 				}
 			}
@@ -380,7 +373,7 @@ public class JSFLibrariesPreferencePage extends PreferencePage implements IWorkb
 				ArchiveFile jar = (ArchiveFile)element;
 				labelBuf.append(jar.getName());
 				if (!jar.exists())
-					labelBuf.append(MISSING);
+					labelBuf.append(Messages.JSFLibrariesPreferencePage_MISSING_DESC);
 				labelBuf.append(" - ").append(((ArchiveFile)element).getSourceLocation()); //$NON-NLS-1$
 			}
 			return labelBuf.toString();
