@@ -54,8 +54,8 @@ import org.eclipse.swt.widgets.Text;
 /**
  * Common control for adding JSF library instances
  */
-public class JSFLibraryEditControl extends Composite implements ModifyListener, SelectionListener {
-	private static final String MISSING = Messages.JSFLibrariesPreferencePage_MISSING_DESC;
+public class JSFLibraryEditControl extends Composite implements ModifyListener, SelectionListener 
+{
 	private Text txtName;
 	private Label lblName;
 	private CCombo cboVersions;
@@ -208,7 +208,7 @@ public class JSFLibraryEditControl extends Composite implements ModifyListener, 
 					ArchiveFile archive = (ArchiveFile) element;
 					labelBuf.append(archive.getName());	
 					if (!archive.exists())
-						labelBuf.append(MISSING); 
+						labelBuf.append(Messages.JSFLibrariesPreferencePage_MISSING_DESC); 
 					labelBuf.append(" - ").append(archive.getPath()); //$NON-NLS-1$
 				}
 				return labelBuf.toString();
