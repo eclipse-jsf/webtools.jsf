@@ -112,7 +112,7 @@ public class MaintainDefaultImplementationAdapter extends AdapterImpl {
 	 * 
 	 * @param library JSFLibrary instance
 	 */
-	protected void implementationFlagSet(JSFLibrary library) {
+	private void implementationFlagSet(JSFLibrary library) {
 		JSFLibraryRegistry jsfLibReg = JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry();
 		if (jsfLibReg != null) {
 			JSFLibrary defaultImpl = jsfLibReg.getDefaultImplementation();
@@ -123,8 +123,8 @@ public class MaintainDefaultImplementationAdapter extends AdapterImpl {
 				jsfLibReg.setDefaultImplementation(library);
 			} else if (
 					!library.isImplementation() &&
-					(defaultImpl != null && library.getID() == defaultImpl.getID())
-			) {
+					(defaultImpl != null && library.getID().equals(defaultImpl.getID())))
+			{
 				setNewDefaultImplementation();
 			}
 		}
