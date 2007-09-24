@@ -402,7 +402,7 @@ public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJa
             case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__BEAN_METHODS:
                 return getBeanMethods();
             case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__ARRAY_COUNT:
-                return new Integer(getArrayCount());
+                return Integer.valueOf(getArrayCount());
         }
         return super.eGet(featureID, resolve, coreType);
     }
@@ -566,15 +566,16 @@ public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJa
         final JDTBeanIntrospector  introspector = 
             new JDTBeanIntrospector(getType());
         
-		final Map properties = introspector.getProperties();
+		final Map<String, JDTBeanProperty> properties = introspector.getProperties();
+		
 		final Collection calculatedProps = new ArrayList(properties.size());
         
-		for (final Iterator it = properties.keySet().iterator(); it.hasNext();)
+		for (final Iterator<Map.Entry<String, JDTBeanProperty>> it = properties.entrySet().iterator(); it.hasNext();)
 		{
-		    final String propertyName = (String) it.next();
-            final JDTBeanProperty property = 
-                (JDTBeanProperty) properties.get(propertyName);
-			
+		    Map.Entry<String, JDTBeanProperty> entry = it.next();
+		    final String propertyName = entry.getKey();
+            final JDTBeanProperty property = entry.getValue();
+
 			final IBeanPropertySymbol workingCopy =
 			    SymbolFactory.eINSTANCE.createIBeanPropertySymbol();
 			workingCopy.setName(propertyName);
