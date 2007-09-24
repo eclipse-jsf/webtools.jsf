@@ -22,6 +22,7 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jst.jsf.context.symbol.ERuntimeSource;
 import org.eclipse.jst.jsf.context.symbol.IBeanInstanceSymbol;
 import org.eclipse.jst.jsf.context.symbol.IJavaTypeDescriptor2;
@@ -138,17 +139,18 @@ public class DefaultBeanSymbolSourceProvider
                     {
                         IJavaProject javaProject = JavaCore.create(iProject);
                         IType type = javaProject.findType(bean.getManagedBeanClass().getTextContent());
-                        
+
                         // don't bother setting a type descriptor if we
                         // can't find a type
                         if (type != null)
                         {
-                            IJavaTypeDescriptor2 javaTypeDescriptor = SymbolFactory.eINSTANCE.createIJavaTypeDescriptor2();
+                            IJavaTypeDescriptor2 javaTypeDescriptor = 
+                                SymbolFactory.eINSTANCE.createIJavaTypeDescriptor2();
                             javaTypeDescriptor.setType(type);
                             symbol.setJavaTypeDescriptor(javaTypeDescriptor);
                         }
                     }
-                    catch (Exception t)
+                    catch (JavaModelException t)
                     {
                         // do nothing; skip type info for this bean
                     }
