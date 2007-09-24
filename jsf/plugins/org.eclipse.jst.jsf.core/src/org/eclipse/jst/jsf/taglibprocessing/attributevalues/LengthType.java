@@ -28,7 +28,7 @@ public class LengthType extends IntegerType {
 		if (value == null) return true;
 		String aValue = stripPercentIfPresent(value);		
 		try {
-			int anInt = Integer.valueOf(aValue);
+			int anInt = Integer.valueOf(aValue).intValue();
 			if (anInt < 0)
 				addNewValidationMessage(INVALID_LENGTH);
 			
