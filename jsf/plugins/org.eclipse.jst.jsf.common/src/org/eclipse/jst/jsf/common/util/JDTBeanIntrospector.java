@@ -15,9 +15,9 @@ import java.beans.Introspector;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.Flags;
@@ -86,11 +86,10 @@ public class JDTBeanIntrospector
 
         final Map properties = new HashMap();
         
-        for (final Iterator it = propertiesWorkingCopy.keySet().iterator(); it.hasNext();)
+        for (Entry<String, JDTBeanProperty> entry : propertiesWorkingCopy.entrySet())
         {
-            final String key = (String) it.next();
-            JDTBeanPropertyWorkingCopy  wcopy = 
-                (JDTBeanPropertyWorkingCopy) propertiesWorkingCopy.get(key);
+            final String key = entry.getKey();
+            JDTBeanPropertyWorkingCopy  wcopy = (JDTBeanPropertyWorkingCopy) entry.getValue();
             properties.put(key, wcopy.toValueObject());
         }
 
