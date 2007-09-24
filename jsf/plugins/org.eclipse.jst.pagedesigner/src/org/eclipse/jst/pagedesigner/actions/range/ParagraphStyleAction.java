@@ -44,6 +44,12 @@ public class ParagraphStyleAction extends DesignerToolBarAction {
 		setImageDescriptor(image);
 	}
 
+	/**
+	 * @param text
+	 * @param node
+	 * @param image
+	 * @param style
+	 */
 	public ParagraphStyleAction(String text, Node node, ImageDescriptor image,
 			int style) {
 		super(text, style);
@@ -82,6 +88,10 @@ public class ParagraphStyleAction extends DesignerToolBarAction {
         return false;
 	}
 
+	/**
+	 * @param common
+	 * @return ??? 
+	 */
 	protected boolean containsTag(Node common) {
 		// the lowest common block parent is the container to apply style.
 		if (_applyingNode == null) {

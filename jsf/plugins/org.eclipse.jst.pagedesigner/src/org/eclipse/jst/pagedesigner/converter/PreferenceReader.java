@@ -16,12 +16,24 @@ package org.eclipse.jst.pagedesigner.converter;
  * @version 1.5
  */
 public class PreferenceReader {
+	/**
+	 * expression type
+	 */
 	public final static int FULL_EXPRESSION_TYPE = 0;
 
+    /**
+     * expression type
+     */
 	public final static int LAST_EXPRESSION_TYPE = 1;
 
+    /**
+     * expression type
+     */
 	public final static int REAL_VALUE_TYPE = 2;
 
+	/**
+	 * @return the map value type
+	 */
 	public static int getMapValueType() {
 		return LAST_EXPRESSION_TYPE;
 	}

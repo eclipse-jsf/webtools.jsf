@@ -35,6 +35,8 @@ public class HiddenTagConverter implements ITagConverter {
 	private int _mode;
 
 	/**
+	 * @param host 
+	 * @param labelProvider 
 	 * 
 	 */
 	public HiddenTagConverter(Element host, ILabelProvider labelProvider) {
@@ -153,6 +155,9 @@ public class HiddenTagConverter implements ITagConverter {
 		this._mode = mode;
 	}
 
+	/**
+	 * @return the mode
+	 */
 	public int getMode() {
 		return _mode;
 	}

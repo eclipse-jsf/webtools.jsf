@@ -20,11 +20,13 @@ import org.w3c.dom.Node;
  * @version 1.5
  */
 public class ConvertPosition {
-	Node _parentNode;
+	private final Node _parentNode;
 
-	int _index;
+	private final int _index;
 
 	/**
+	 * @param parent \
+	 * @param index 
 	 * 
 	 */
 	public ConvertPosition(Node parent, int index) {
@@ -32,10 +34,16 @@ public class ConvertPosition {
 		this._index = index;
 	}
 
+	/**
+	 * @return the parent node
+	 */
 	public Node getParentNode() {
 		return _parentNode;
 	}
 
+	/**
+	 * @return the index
+	 */
 	public int getIndex() {
 		return _index;
 	}

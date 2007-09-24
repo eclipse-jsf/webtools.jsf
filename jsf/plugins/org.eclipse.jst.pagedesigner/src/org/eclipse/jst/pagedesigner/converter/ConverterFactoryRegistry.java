@@ -41,18 +41,27 @@ public class ConverterFactoryRegistry {
 		_factories.add(new JSPConverterFactory());
 		_factories.add(new HTMLConverterFactory());
 
-		IConverterFactory facs[] = ConverterFacRegistryReader.getAllHandlers();
+		List<IConverterFactory> facs = ConverterFacRegistryReader.getAllHandlers();
 		if (facs != null) {
-			for (int i = 0; i < facs.length; i++) {
-				addFactory(facs[i]);
+			for (IConverterFactory fac : facs) {
+				addFactory(fac);
 			}
 		}
 	}
 
+	/**
+	 * @param fac
+	 */
 	public void addFactory(IConverterFactory fac) {
 		_factories.add(fac);
 	}
 
+	/**
+	 * @param ele
+	 * @param mode
+	 * @param targetDocument
+	 * @return the new btag converter
+	 */
 	public ITagConverter createTagConverter(Element ele, int mode,
 			IDOMDocument targetDocument) {
 		ITagConverter converter = internalCreateTagConverter(ele, mode);
@@ -62,7 +71,12 @@ public class ConverterFactoryRegistry {
 		return converter;
 	}
 
-	public ITagConverter internalCreateTagConverter(Element ele, int mode) {
+	/**
+	 * @param ele
+	 * @param mode
+	 * @return the new tag converter
+	 */
+	protected final ITagConverter internalCreateTagConverter(Element ele, int mode) {
 		String uri = CMUtil.getElementNamespaceURI(ele);
 		// first round, match uri
 		for (int i = 0, size = _factories.size(); i < size; i++) {
@@ -118,6 +132,9 @@ public class ConverterFactoryRegistry {
 				"palette/GENERIC/small/PD_Palette_Default.gif");
 	}
 
+	/**
+	 * @return the singleton instance of the registry
+	 */ 
 	public static ConverterFactoryRegistry getInstance() {
 		if (_instance == null) {
 			_instance = new ConverterFactoryRegistry();

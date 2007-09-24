@@ -66,12 +66,10 @@ public abstract class DesignerToolBarAction extends Action implements IUpdate,
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.texteditor.IUpdate#update()
+	/**
+	 * Update the status
 	 */
-	public void updateStatus() {
+	protected void updateStatus() {
 		DesignRange range = _viewer.getRangeSelection();
 		DOMRange domRange = null;
 		if (range != null) {
@@ -86,8 +84,16 @@ public abstract class DesignerToolBarAction extends Action implements IUpdate,
 		}
 	}
 
+	/**
+	 * @param range
+	 * @return ??
+	 */
 	protected abstract boolean isApplied(DOMRange range);
 
+	/**
+	 * @param viewer
+	 * @return true if this action can run
+	 */
 	protected boolean canRun(IHTMLGraphicalViewer viewer) {
 		if (viewer != null && viewer.isInRangeMode()
 				&& viewer.getModel().getDocument().hasChildNodes()) {
@@ -99,6 +105,9 @@ public abstract class DesignerToolBarAction extends Action implements IUpdate,
 		return false;
 	}
 
+	/**
+	 * @param viewer
+	 */
 	public void setViewer(IHTMLGraphicalViewer viewer) {
 		if (viewer == _viewer) {
 			return;
@@ -131,6 +140,9 @@ public abstract class DesignerToolBarAction extends Action implements IUpdate,
 		}
 	}
 
+	/**
+	 * @return the command for this action or null
+	 */
 	protected abstract Command getCommand();
 
 	/**

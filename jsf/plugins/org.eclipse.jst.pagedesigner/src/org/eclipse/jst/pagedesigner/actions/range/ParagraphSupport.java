@@ -47,12 +47,13 @@ public class ParagraphSupport {
 			PDPlugin.getResourceString("ParagraphSupport.CommandLabel.P"), PDPlugin.getResourceString("ParagraphSupport.CommandLabel.H1"), PDPlugin.getResourceString("ParagraphSupport.CommandLabel.H2"), PDPlugin.getResourceString("ParagraphSupport.CommandLabel.H3"), PDPlugin.getResourceString("ParagraphSupport.CommandLabel.H4"), PDPlugin.getResourceString("ParagraphSupport.CommandLabel.H5"), PDPlugin.getResourceString("ParagraphSupport.CommandLabel.H6"), PDPlugin.getResourceString("ParagraphSupport.CommandLabel.PRE") //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$
 	};
 
-	public static int getCurrentParagraphMode(DesignRange range) {
-		return 0;
-	}
-
+	/**
+	 * @param man
+	 * @param range
+	 * @param viewer
+	 */
 	public static void createParagraphActions(IMenuManager man,
-			DesignRange range, int currentMode, IHTMLGraphicalViewer viewer) {
+			DesignRange range, IHTMLGraphicalViewer viewer) {
 		ParagraphStyleAction action = new NoneParagraphStyleAction(
 				PDPlugin
 						.getResourceString("ParagraphSupport.CommandLabel.None"), tags, null, IAction.AS_CHECK_BOX); //$NON-NLS-1$

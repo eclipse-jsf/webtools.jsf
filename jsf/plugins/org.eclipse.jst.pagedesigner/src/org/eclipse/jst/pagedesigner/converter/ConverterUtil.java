@@ -83,6 +83,11 @@ public class ConverterUtil {
 		return true;
 	}
 
+	/**
+	 * @param document
+	 * @param text
+	 * @return the descripton element in the document containing text
+	 */
 	public static Element createDescriptionElement(IDOMDocument document,
 			String text) {
 		if (document == null) {

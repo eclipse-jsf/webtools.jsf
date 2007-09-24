@@ -23,7 +23,7 @@ import org.w3c.dom.Element;
  */
 public class AlignSupport {
 
-	public static final String[] ALIGN_VALUES = new String[] {
+	private static final String[] ALIGN_VALUES = new String[] {
 			PDPlugin.getResourceString("AlignSupport.ActionLabel.Left"), //$NON-NLS-1$
 			PDPlugin.getResourceString("AlignSupport.ActionLabel.Center"), //$NON-NLS-1$
 			PDPlugin.getResourceString("AlignSupport.ActionLabel.Right"), //$NON-NLS-1$
@@ -32,6 +32,10 @@ public class AlignSupport {
 
 	private static Element[] _nodes = null;
 
+	/**
+	 * @param menu
+	 * @param viewer
+	 */
 	public static void createAlignActions(IMenuManager menu,
 			IHTMLGraphicalViewer viewer) {
 		for (int i = 0; i < ALIGN_VALUES.length; i++) {
@@ -42,6 +46,9 @@ public class AlignSupport {
 		}
 	}
 
+	/**
+	 * @param nodes
+	 */
 	public static void setAlignNodes(Element[] nodes) {
 		if (_nodes != nodes) {
 			_nodes = nodes;

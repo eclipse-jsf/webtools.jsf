@@ -28,11 +28,13 @@ import org.w3c.dom.Node;
  * @author mengbo
  */
 public class ChangeStyleAction extends DesignerToolBarAction {
-	private String _expectedTag;
+	private final String _expectedTag;
 
 	/**
 	 * @param text
+	 * @param name 
 	 * @param image
+	 * @param style 
 	 */
 	public ChangeStyleAction(String text, String name, ImageDescriptor image,
 			int style) {
@@ -41,6 +43,13 @@ public class ChangeStyleAction extends DesignerToolBarAction {
 		this.setImageDescriptor(image);
 	}
 
+	/**
+	 * @param text
+	 * @param name
+	 * @param enabled
+	 * @param disabled
+	 * @param style
+	 */
 	public ChangeStyleAction(String text, String name, ImageDescriptor enabled,
 			ImageDescriptor disabled, int style) {
 		super(text, style);
@@ -49,13 +58,6 @@ public class ChangeStyleAction extends DesignerToolBarAction {
 		setDisabledImageDescriptor(disabled);
 	}
 
-	protected String getExpectedCSSProperty() {
-		return null;
-	}
-
-	protected String getExpectedCSSPropertyValue() {
-		return null;
-	}
 
 	protected boolean isApplied(DOMRange range) {
 		if (range == null) {

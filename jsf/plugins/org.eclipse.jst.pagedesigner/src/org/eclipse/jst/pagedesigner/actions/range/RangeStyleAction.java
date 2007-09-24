@@ -21,6 +21,10 @@ import org.eclipse.jst.pagedesigner.viewer.DesignRange;
 public class RangeStyleAction extends Action {
 	/**
 	 * @param text
+	 * @param range 
+	 * @param htmlTag 
+	 * @param cssProperty 
+	 * @param cssValue 
 	 */
 	public RangeStyleAction(String text, DesignRange range, String htmlTag,
 			String cssProperty, String cssValue) {

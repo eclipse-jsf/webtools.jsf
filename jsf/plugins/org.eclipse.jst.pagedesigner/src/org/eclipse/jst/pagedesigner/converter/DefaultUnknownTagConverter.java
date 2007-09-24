@@ -25,6 +25,7 @@ public class DefaultUnknownTagConverter extends AbstractTagConverter {
 
 	/**
 	 * @param host
+	 * @param mode 
 	 */
 	public DefaultUnknownTagConverter(Element host, int  mode) {
 		super(host);

@@ -20,13 +20,17 @@ import org.w3c.dom.Element;
  */
 public class DumTagConverter extends AbstractTagConverter {
 	/**
-	 * 
+	 * @param host 
+	 * @param needBorder 
 	 */
 	public DumTagConverter(Element host, boolean needBorder) {
 		this(host);
 		this.setNeedBorderDecorator(needBorder);
 	}
 
+	/**
+	 * @param host
+	 */
 	public DumTagConverter(Element host) {
 		super(host);
 	}

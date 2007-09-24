@@ -26,6 +26,7 @@ import org.w3c.dom.Node;
 public class InsertTagChangeStyleAction extends ChangeStyleAction {
 	/**
 	 * @param text
+	 * @param tag 
 	 * @param image
 	 * @param style
 	 */
@@ -44,36 +45,14 @@ public class InsertTagChangeStyleAction extends ChangeStyleAction {
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.texteditor.IUpdate#update()
-	 */
-	public void update() {
-		if (_viewer == null) {
-			this.setChecked(false);
-			this.setEnabled(false);
-			return;
-		}
-		if (!_viewer.isInRangeMode()) {
-			// XXX: later we may support in range mode.
-			this.setChecked(false);
-			this.setEnabled(false);
-			return;
-		}
-		DesignRange range = _viewer.getRangeSelection();
-		if (range == null || !range.isValid()) {
-			this.setChecked(false);
-			this.setEnabled(false);
-			return;
-		}
-		setEnabled(range);
-	}
+	@Override
+    protected void updateState() 
+	{
+        setEnabled(getDesignRange());
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.texteditor.IUpdate#update()
+	/**
+	 * @param range
 	 */
 	public void setEnabled(DesignRange range) {
 		DOMRange domRange = null;
@@ -90,7 +69,7 @@ public class InsertTagChangeStyleAction extends ChangeStyleAction {
 
 	private boolean canRun(DOMRange range) {
 		if (range != null) {
-			if (EditModelQuery.isSame(range) && !supportSingle()) {
+			if (EditModelQuery.isSame(range)) {
 				return false;
 			}
 			boolean ordered = range.isOrdered();
@@ -108,9 +87,5 @@ public class InsertTagChangeStyleAction extends ChangeStyleAction {
             return true;
 		}
         return false;
-	}
-
-	protected boolean supportSingle() {
-		return false;
 	}
 }

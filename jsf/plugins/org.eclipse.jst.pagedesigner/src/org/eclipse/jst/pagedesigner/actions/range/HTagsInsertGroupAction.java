@@ -24,7 +24,6 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jst.pagedesigner.IHTMLConstants;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.dom.DOMRange;
-import org.eclipse.jst.pagedesigner.viewer.DesignRange;
 import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Menu;
@@ -38,6 +37,10 @@ public class HTagsInsertGroupAction extends DesignerToolBarAction implements
 
 	private static Map _actions = new HashMap();
 
+	/**
+	 * @param image
+	 * @param style
+	 */
 	public HTagsInsertGroupAction(ImageDescriptor image, int style) {
 		super(
 				PDPlugin
@@ -74,6 +77,10 @@ public class HTagsInsertGroupAction extends DesignerToolBarAction implements
 		return null;
 	}
 
+	/**
+	 * @param parent
+	 * @param name
+	 */
 	protected void addActionToMenu(Menu parent, String name) {
 		DesignerToolBarAction action;
 		if (_actions.get(name) == null) {
@@ -114,28 +121,10 @@ public class HTagsInsertGroupAction extends DesignerToolBarAction implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.jst.pagedesigner.commands.range.InsertTagChangeStyleAction#supportSingle(org.eclipse.jst.pagedesigner.dom.DOMRange)
-	 */
-	protected boolean supportSingle() {
-		return true;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.jst.pagedesigner.editors.actions.DesignerToolBarAction#canRun(org.eclipse.jst.pagedesigner.dom.DOMRange)
 	 */
 	protected boolean isApplied(DOMRange range) {
 		return true;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.jst.pagedesigner.commands.range.InsertTagChangeStyleAction#setEnabled(org.eclipse.jst.pagedesigner.viewer.DesignRange)
-	 */
-	public void setStatus(DesignRange range) {
-		this.setEnabled(true);
 	}
 
 	/*

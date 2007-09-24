@@ -12,6 +12,7 @@
 package org.eclipse.jst.pagedesigner.converter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
@@ -27,18 +28,22 @@ import org.eclipse.jst.pagedesigner.PDPlugin;
  * @version 1.5
  */
 public class ConverterFacRegistryReader {
-	static IConverterFactory[] _handlers = null;
+	private static List<IConverterFactory> _handlers = null;
 
-	public static synchronized IConverterFactory[] getAllHandlers() {
+	/**
+	 * @return the list of handlers.  The list is not modifiable and will
+	 * throw exceptions if it is attempted.
+	 */
+	public static synchronized List<IConverterFactory> getAllHandlers() {
 		if (_handlers == null) {
 			_handlers = readAllHandlers();
 		}
-		return _handlers;
+		return Collections.unmodifiableList(_handlers);
 
 	}
 
-	private static IConverterFactory[] readAllHandlers() {
-		List result = new ArrayList();
+	private static List<IConverterFactory> readAllHandlers() {
+		List result = new ArrayList<IConverterFactory>();
 		IExtensionPoint extensionPoint = Platform.getExtensionRegistry()
 				.getExtensionPoint(PDPlugin.getPluginId(),
 						IJMTConstants.EXTENSION_POINT_PAGEDESIGNER);
@@ -68,9 +73,7 @@ public class ConverterFacRegistryReader {
 				}
 			}
 		}
-		IConverterFactory[] ret = new IConverterFactory[result.size()];
-		result.toArray(ret);
-		return ret;
+		return result;
 	}
 
 }

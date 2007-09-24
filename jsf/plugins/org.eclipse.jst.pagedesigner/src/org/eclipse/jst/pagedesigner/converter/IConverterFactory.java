@@ -18,13 +18,20 @@ import org.w3c.dom.Element;
  * @version 1.5
  */
 public interface IConverterFactory {
+	/**
+	 * indicates designer mode 
+	 */
 	public static final int MODE_DESIGNER = 0;
 
+	/**
+	 * indicates preview mode
+	 */
 	public static final int MODE_PREVIEW = 1;
 
 	/**
 	 * 
 	 * @param element
+	 * @param mode 
 	 * @return null if this factory don't support this element
 	 */
 	public ITagConverter createConverter(Element element, int mode);

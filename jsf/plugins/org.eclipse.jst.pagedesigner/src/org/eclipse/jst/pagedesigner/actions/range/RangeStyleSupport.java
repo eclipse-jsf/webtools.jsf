@@ -20,20 +20,24 @@ import org.eclipse.jst.pagedesigner.viewer.DesignRange;
  * @version 1.5
  */
 public class RangeStyleSupport {
-	public static final String[] ActionLabel = new String[] {
+	private static final String[] ActionLabel = new String[] {
 			PDPlugin.getResourceString("RangeStyleSupport.ActionLabel.Bold"),//$NON-NLS-1$
 			PDPlugin.getResourceString("RangeStyleSupport.ActionLabel.Italic"),//$NON-NLS-1$
 			PDPlugin
 					.getResourceString("RangeStyleSupport.ActionLabel.Underline"), }; //$NON-NLS-1$
 
-	public static final String[] HtmlTag = new String[] { "STRONG", "I", "U", }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	private static final String[] HtmlTag = new String[] { "STRONG", "I", "U", }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
-	public static final String[] CSSProperty = new String[] {
+	private static final String[] CSSProperty = new String[] {
 			"font-weight", "font-style", "text-decoration", }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
-	public static final String[] CSSValue = new String[] { "bolder", "italic",
+	private static final String[] CSSValue = new String[] { "bolder", "italic",
 			"underline", };
 
+	/**
+	 * @param menu
+	 * @param range
+	 */
 	public static void createRangeStyleActions(IMenuManager menu,
 			DesignRange range) {
 		for (int i = 0; i < ActionLabel.length; i++) {

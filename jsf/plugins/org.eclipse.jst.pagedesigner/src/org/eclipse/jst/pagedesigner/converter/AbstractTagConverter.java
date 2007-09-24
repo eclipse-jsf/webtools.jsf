@@ -56,6 +56,7 @@ public abstract class AbstractTagConverter implements ITagConverter,
 	private boolean _needBorderDecorator;
 
 	/**
+	 * @param host 
 	 * 
 	 */
 	public AbstractTagConverter(Element host) {
@@ -193,6 +194,10 @@ public abstract class AbstractTagConverter implements ITagConverter,
         // need to review this
 	}
 
+	/**
+	 * @param node
+	 * @return true if the node should be ignored for  conversion purposes
+	 */
 	protected boolean shouldIgnore(Node node) {
 		int nodeType = node.getNodeType();
 		switch (nodeType) {
@@ -209,6 +214,8 @@ public abstract class AbstractTagConverter implements ITagConverter,
 	/**
 	 * utility method for those converter that only converts the host tag's name
 	 * and directly copy children.
+	 * @param src 
+	 * @param dest 
 	 * 
 	 */
 	protected void copyChildren(Element src, Element dest) {
@@ -223,6 +230,8 @@ public abstract class AbstractTagConverter implements ITagConverter,
 
 	/**
 	 * utility method for those converter that directly copy children.
+	 * @param src 
+	 * @param dest 
 	 * 
 	 */
 	protected void dumCopyChildren(Element src, Element dest) {
@@ -271,6 +280,10 @@ public abstract class AbstractTagConverter implements ITagConverter,
 		return getDestDocument().createTextNode(text);
 	}
 
+	/**
+	 * @param original
+	 * @return the mapped String  TODO: currently does nothing
+	 */
 	protected String mapURL(String original) {
 		// TODO: how to map URL? such as original url look like:
 		// getContext().getPath()+...
@@ -279,6 +292,10 @@ public abstract class AbstractTagConverter implements ITagConverter,
 
 	// TODO: FIXME: XXX:
 	// if the value is expression, we may want to do something here!!!
+	/**
+	 * @param value
+	 * @return value mapped based on EL expression
+	 */
 	protected String mapValue(String value) {
 		if (value == null) {
 			return null;
@@ -362,6 +379,9 @@ public abstract class AbstractTagConverter implements ITagConverter,
 		return this._needBorderDecorator;
 	}
 
+	/**
+	 * @param b
+	 */
 	public void setNeedBorderDecorator(boolean b) {
 		this._needBorderDecorator = b;
 	}
@@ -394,14 +414,23 @@ public abstract class AbstractTagConverter implements ITagConverter,
 		this._mode = mode;
 	}
 
+	/**
+	 * @return true if the converter mode is preview
+	 */
 	public final boolean isPreviewMode() {
 		return this._mode == IConverterFactory.MODE_PREVIEW;
 	}
 
+	/**
+	 * @return true if the converter mode is designer
+	 */
 	public final boolean isDesignerMode() {
 		return this._mode == IConverterFactory.MODE_DESIGNER;
 	}
 
+	/**
+	 * @return the converter mode
+	 */
 	public final int getMode() {
 		return this._mode;
 	}
@@ -434,6 +463,9 @@ public abstract class AbstractTagConverter implements ITagConverter,
 		return this._minWidth;
 	}
 
+	/**
+	 * @param minWidth
+	 */
 	public void setMinWidth(int minWidth) {
 		this._minWidth = minWidth;
 	}
@@ -447,10 +479,18 @@ public abstract class AbstractTagConverter implements ITagConverter,
 		return this._minHeight;
 	}
 
+	/**
+	 * @param minHeight
+	 */
 	public void setMinHeight(int minHeight) {
 		this._minHeight = minHeight;
 	}
 
+	/**
+	 * @param element
+	 * @param attrname
+	 * @return the attribute on element with the name attrname
+	 */
 	public static boolean hasAttribute(Element element, String attrname) {
 		return element.hasAttribute(attrname);
 	}

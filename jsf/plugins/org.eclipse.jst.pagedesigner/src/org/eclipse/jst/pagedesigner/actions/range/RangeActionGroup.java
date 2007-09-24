@@ -193,14 +193,13 @@ public class RangeActionGroup extends ActionGroup {
 				.getResourceString("ActionGroup.Submenu.ParagraphFormat"));//$NON-NLS-1$
 		submenu.add(action);
 		// Add the submenu.
-		final int mode = ParagraphSupport.getCurrentParagraphMode(selection);
 
 		submenu.addMenuListener(new IMenuListener() {
 
 			public void menuAboutToShow(IMenuManager manager) {
 				submenu.removeAll();
 				ParagraphSupport.createParagraphActions(submenu, selection,
-						mode, viewer);
+						viewer);
 			}
 		});
 		menu.appendToGroup(PageDesignerActionConstants.GROUP_STYLE, submenu);

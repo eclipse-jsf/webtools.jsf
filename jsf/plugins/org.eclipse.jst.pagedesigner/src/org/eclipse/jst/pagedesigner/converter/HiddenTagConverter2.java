@@ -33,6 +33,10 @@ public class HiddenTagConverter2 extends AbstractTagConverter {
 
 	private Image _image;
 
+	/**
+	 * @param host
+	 * @param image
+	 */
 	public HiddenTagConverter2(Element host, Image image) {
 		super(host);
 		this._image = image;
