@@ -190,8 +190,8 @@ public class JARFileJSFAppConfigProvider extends AbstractJSFAppConfigProvider {
 				Resource resource = factory.createResource(URI.createFileURI(tempFile.getAbsolutePath()));
 				
 				try {
-					resource.load(Collections.EMPTY_MAP);
-					if (resource != null) {
+                    if (resource != null) {
+                        resource.load(Collections.EMPTY_MAP);
 						EList resourceContents = resource.getContents();
 						if (resourceContents != null && resourceContents.size() > 0) {
 							facesConfig = (FacesConfigType)resourceContents.get(0);
