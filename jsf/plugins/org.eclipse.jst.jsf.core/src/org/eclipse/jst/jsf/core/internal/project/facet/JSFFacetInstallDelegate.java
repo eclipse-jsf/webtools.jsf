@@ -36,6 +36,7 @@ import org.eclipse.jst.j2ee.model.IModelProvider;
 import org.eclipse.jst.j2ee.model.ModelProviderManager;
 import org.eclipse.jst.javaee.web.Servlet;
 import org.eclipse.jst.javaee.web.WebApp;
+import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryInternalReference;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryRegistryUtil;
@@ -237,11 +238,12 @@ public final class JSFFacetInstallDelegate implements IDelegate {
 						project.refreshLocal(IResource.DEPTH_INFINITE, monitor_inner);
 					}
 
-					private boolean shouldUseJ2EEConfig(final IProjectFacetVersion fv) {
-						if (fv.getVersionString().equals("1.1"))
+					private boolean shouldUseJ2EEConfig(final IProjectFacetVersion facetVersion) {
+						if (IJSFCoreConstants.FACET_VERSION_1_1.equals(facetVersion.getVersionString()))
+						{
 							return true;
-						else
-							return false;
+						}
+						return false;
 					}
 				};
 				op.run(monitor);
