@@ -11,6 +11,7 @@
  ********************************************************************************/
 package org.eclipse.jst.jsf.taglibprocessing.attributevalues;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -109,9 +110,13 @@ public class FacesConfigValidatorIDFeatures extends FacesConfigIdentifierFeature
 	/**
 	 * Validator id sorter - incomplete
 	 */
-	class ValidatorSorter implements Comparator {
+	private static class ValidatorSorter implements Comparator, Serializable {
+		/**
+         * 
+         */
+        private static final long serialVersionUID = -398026037193914126L;
 
-		public int compare(Object o1, Object o2) {		
+        public int compare(Object o1, Object o2) {		
 			//TODO
 			return 0;
 
