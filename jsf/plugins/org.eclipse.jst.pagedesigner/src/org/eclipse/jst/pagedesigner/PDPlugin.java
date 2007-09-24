@@ -45,8 +45,6 @@ import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.eclipse.wst.sse.core.StructuredModelManager;
-import org.eclipse.wst.sse.core.internal.provisional.IModelManager;
 import org.osgi.framework.BundleContext;
 
 /**
@@ -139,6 +137,7 @@ public class PDPlugin extends AbstractUIPlugin {
 
 	/**
 	 * Returns the shared instance.
+	 * @return the default plugin
 	 */
 	public static PDPlugin getDefault() {
 		return _plugin;
@@ -147,7 +146,7 @@ public class PDPlugin extends AbstractUIPlugin {
 	/**
 	 * get the alerts objects associated with this plugin for alerting the user.
 	 * 
-	 * @return
+	 * @return the Alerts object
 	 */
 	public static Alerts getAlerts() {
 		return _alerts;
@@ -155,6 +154,8 @@ public class PDPlugin extends AbstractUIPlugin {
 
 	/**
 	 * Returns a logger for the new class using this plugin for reference.
+	 * @param theClass
+	 * @return the Logger object associated with theClass
 	 */
 	public static Logger getLogger(Class theClass) {
 		if (getDefault() != null && getDefault().getRootLogger() != null) {
@@ -165,6 +166,7 @@ public class PDPlugin extends AbstractUIPlugin {
 
 	/**
 	 * Returns the plugin's root logger
+	 * @return the root logger
 	 */
 	public Logger getRootLogger() {
 		return _log;
@@ -172,22 +174,22 @@ public class PDPlugin extends AbstractUIPlugin {
 
 	/**
 	 * Returns this plugin's unique identifier
-	 * 
-	 * @retun this plugin's unique identifier
+	 * @return the plugin id
 	 */
 	public static String getPluginId() {
 		return getDefault().getBundle().getSymbolicName();
 	}
 
 	/**
-	 * Returns the plugin's resource bundle,
+	 * @return the plugin's resource bundle
 	 */
 	public ResourceBundle getResourceBundle() {
 		return _resourceBundle;
 	}
 
 	/**
-	 * Returns the string from the plugin's resource bundle, or 'key' if not
+	 * @param key 
+	 * @return the string from the plugin's resource bundle, or 'key' if not
 	 * found.
 	 */
 	public static String getResourceString(String key) {
@@ -200,14 +202,14 @@ public class PDPlugin extends AbstractUIPlugin {
 	}
 
 	/**
-	 * Returns the plugin's descriptor's resource bundle,
+	 * @return the plugin's descriptor's resource bundle,
 	 */
 	public ResourceBundle getPluginDecriptorBundle() {
 		return Platform.getResourceBundle(getDefault().getBundle());
 	}
 
 	/**
-	 * Returns the plugin's default properties. These are normally used for
+	 * @return the plugin's default properties. These are normally used for
 	 * default preferences.
 	 */
 	public Properties getProperties() {
@@ -215,7 +217,7 @@ public class PDPlugin extends AbstractUIPlugin {
 	}
 
 	/**
-	 * Returns the standard display to be used. The method first checks, if the
+	 * @return the standard display to be used. The method first checks, if the
 	 * thread calling this method has an associated dispaly. If so, this display
 	 * is returned. Otherwise the method returns the default display.
 	 */
@@ -229,7 +231,7 @@ public class PDPlugin extends AbstractUIPlugin {
 	}
 
 	/**
-	 * Returns the workspace instance.
+	 * @return the workspace instance.
 	 */
 	public static IWorkspace getWorkspace() {
 		return ResourcesPlugin.getWorkspace();
@@ -304,16 +306,30 @@ public class PDPlugin extends AbstractUIPlugin {
 	 * Read a file resource. The file should contain any partial path and the
 	 * filename from the plugin base. The caller is responsible for closing the
 	 * file.
+	 * @param file 
+	 * @return the input stream for the file
+	 * @throws MalformedURLException 
+	 * @throws IOException 
 	 */
 	public InputStream readFile(String file) throws MalformedURLException,
 			IOException {
 		return (new URL(_pluginBase, file)).openStream();
 	}
 
+	/**
+	 * @param file
+	 * @return the File associate with the name 'file'
+	 * @throws MalformedURLException
+	 * @throws IOException
+	 */
 	public File getFile(String file) throws MalformedURLException, IOException {
 		return new File((new URL(_pluginBase, file)).getPath());
 	}
 
+	/**
+	 * @return the plugin's install location with the leading "/" removed
+	 * and normalized to the the os string.
+	 */
 	public static Path getInstallLocation() {
 		try {
 			URL url = getDefault().getBundle().getEntry("/");
@@ -336,11 +352,7 @@ public class PDPlugin extends AbstractUIPlugin {
 		}
 	}
 
-	public static IModelManager getModelManager() {
-		return StructuredModelManager.getModelManager();
-	}
-
-	/**
+    /**
 	 * Returns the active workbench window.
 	 * 
 	 * @return the active workbench window. this can be null but I've never seen
@@ -379,10 +391,8 @@ public class PDPlugin extends AbstractUIPlugin {
 	}
 
 	/**
-	 * Returns the active workbench Shell. Used for some funciton need IShell
+	 * @return the active workbench Shell. Used for some funciton need IShell
 	 * Parameter.
-	 * 
-	 * @return
 	 */
 	public static Shell getActiveWorkbenchShell() {
 		IWorkbenchWindow window = getActiveWorkbenchWindow();
@@ -398,9 +408,7 @@ public class PDPlugin extends AbstractUIPlugin {
 	}
 
 	/**
-	 * Returns the active display.
-	 * 
-	 * @return
+	 * @return the active display.
 	 */
 	public static Display getDisplay() {
 		Shell shell = getActiveWorkbenchShell();
@@ -411,9 +419,7 @@ public class PDPlugin extends AbstractUIPlugin {
 	}
 
 	/**
-	 * Returns current active project.
-	 * 
-	 * @return
+	 * @return current active project.
 	 */
 	public static IProject getCurrentProject() {
 		IProject curProject = null;
@@ -428,6 +434,10 @@ public class PDPlugin extends AbstractUIPlugin {
 		return curProject;
 	}
 	
+	/**
+	 * Log status using the default plugin logger
+	 * @param status
+	 */
 	public static void log(IStatus status)
 	{
 	    ILog log = getDefault().getLog();
