@@ -51,7 +51,7 @@ public class JSFLibraryReferenceFacadeFactory {
 	private static JSFLibraryReference createReference(
 			final IClasspathEntry cpEntry) {
 		
-		String libID = cpEntry.getPath().segment(1).toString();
+		String libID = cpEntry.getPath().segment(1);
 		org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryInternalReference libRef = JSFLibraryRegistryUtil.getInstance().getJSFLibraryReferencebyID(libID);
 		if (libRef!= null){
 			boolean isDeployed = getJ2EEModuleDependency(cpEntry);
