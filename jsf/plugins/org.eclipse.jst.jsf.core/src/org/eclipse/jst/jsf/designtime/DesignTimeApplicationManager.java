@@ -99,6 +99,7 @@ public final class DesignTimeApplicationManager
                 DesignTimeApplicationManager manager = 
                     (DesignTimeApplicationManager) project.getSessionProperty(SESSION_PROPERTY_KEY_PROJECT);
 
+                
                 if (manager == null)
                 {
                     manager = new DesignTimeApplicationManager(project);
@@ -107,9 +108,15 @@ public final class DesignTimeApplicationManager
                 // bug 147729: if project was renamed, the project param will be
                 // valid, but it will not be in sync with the one for _project
                 // unfortunately, since we are using session propertie
-                else if (!project.equals(manager._project))
+                else
                 {
-                    manager._project = project;
+                    synchronized(manager)
+                    {
+                        if (!project.equals(manager._project))
+                        {
+                            manager._project = project;
+                        }
+                    }
                 }
 
                 return manager;
