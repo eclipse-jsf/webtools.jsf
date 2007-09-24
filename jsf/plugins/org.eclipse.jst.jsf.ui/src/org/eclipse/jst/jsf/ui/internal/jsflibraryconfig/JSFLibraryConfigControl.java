@@ -82,12 +82,9 @@ import org.eclipse.wst.common.frameworks.internal.datamodel.ui.DataModelSynchHel
  * @author Justin Chen
  */
 public class JSFLibraryConfigControl extends Composite { 
-	private static final String IMPL_DESC = Messages.JSFLibrariesPreferencePage_IMPL_DESC;
-	private static final String DEFAULT_IMPL_DESC = Messages.JSFLibrariesPreferencePage_DEFAULT_IMPL_DESC;
-	private static final String MISSING = Messages.JSFLibrariesPreferencePage_MISSING_DESC;
 
-	final private int COLUMN_DEPLOY = 0;
-	final private int COLUMN_LIB_NAME = 1;
+	final static private int COLUMN_DEPLOY = 0;
+	final static private int COLUMN_LIB_NAME = 1;
 
 	private JSFLibraryConfigModel workingCopyModel = null;
 	
@@ -376,8 +373,11 @@ public class JSFLibraryConfigControl extends Composite {
 				public void selectionChanged(SelectionChangedEvent event) {
 					StructuredSelection ss = (StructuredSelection) event.getSelection();
 					JSFLibraryInternalReference crtSelImplLib = (JSFLibraryInternalReference) ss.getFirstElement();
-					if (crtSelImplLib != null) btnDeployJars.setEnabled(true);
-					crtSelImplLib.setToBeDeployed(btnDeployJars.getSelection());
+					if (crtSelImplLib != null)
+					{
+					    btnDeployJars.setEnabled(true);
+	                    crtSelImplLib.setToBeDeployed(btnDeployJars.getSelection());
+					}
 					workingCopyModel.setCurrentJSFImplementationLibrarySelection(crtSelImplLib);
 					model.setProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION, crtSelImplLib);
 					fireChangedEvent(event);
@@ -777,7 +777,7 @@ public class JSFLibraryConfigControl extends Composite {
 	 * 	Inner Classes for filtering.
 	 *
 	 */
-	class CheckedTableViewerFilter extends ViewerFilter {
+	private static class CheckedTableViewerFilter extends ViewerFilter {
 		public boolean select(Viewer viewer, Object parentElement, Object element) {
 			if (element instanceof JSFLibraryInternalReference) {
 				return ((JSFLibraryInternalReference)element).isSelected();
@@ -785,7 +785,7 @@ public class JSFLibraryConfigControl extends Composite {
 			return false;
 		}
 	}
-	class TreeViewerFilter extends ViewerFilter {
+	private static class TreeViewerFilter extends ViewerFilter {
 
 		public boolean select(Viewer viewer, Object parentElement, Object element) {
 			if (element instanceof JSFLibraryInternalReference) {
@@ -795,7 +795,7 @@ public class JSFLibraryConfigControl extends Composite {
 		}
 	}
 
-	class CompLibCTVContentProvider implements IStructuredContentProvider {
+	private static class CompLibCTVContentProvider implements IStructuredContentProvider {
 		private List jsfComplLibs = new ArrayList(0);
 		
 		public Object[] getElements(Object inputElement) {						
@@ -812,7 +812,7 @@ public class JSFLibraryConfigControl extends Composite {
 			}
 		}
 	}
-	class ImplLibCVContentProvider implements IStructuredContentProvider {
+	private static class ImplLibCVContentProvider implements IStructuredContentProvider {
 		private List jsfImplLibs = new ArrayList(0);
 		
 		public Object[] getElements(Object inputElement) {
@@ -831,7 +831,7 @@ public class JSFLibraryConfigControl extends Composite {
 	}
 	
 	// Label Provider
-	class SelectedCompLibCTVLabelProvider extends LabelProvider implements ITableLabelProvider {
+	private static class SelectedCompLibCTVLabelProvider extends LabelProvider implements ITableLabelProvider {
 		public String getColumnText(Object element, int columnIndex) {
 			if (element instanceof JSFLibraryInternalReference){
 				
@@ -849,7 +849,7 @@ public class JSFLibraryConfigControl extends Composite {
 			return null;
 		}
 	}
-	class ImplLibCVListLabelProvider extends LabelProvider {
+	private static class ImplLibCVListLabelProvider extends LabelProvider {
 		private JSFLibrary defaultImpl = null;
 		
 		public String getText(Object element) {
@@ -875,7 +875,7 @@ public class JSFLibraryConfigControl extends Composite {
 	}
 	
 	// Sorter
-	class SelectedCompLibCTVSorter extends ViewerSorter {
+	private static class SelectedCompLibCTVSorter extends ViewerSorter {
 		public int compare(Viewer viewer, Object e1, Object e2) {
 			if (e1 instanceof JSFLibraryInternalReference && 
 					e2 instanceof JSFLibraryInternalReference) {
@@ -927,19 +927,16 @@ public class JSFLibraryConfigControl extends Composite {
 		
 	}
 	
-	private class TreeLabelProvider implements ILabelProvider {
-		Image libImg;
-		Image jarImg;
+	private static class TreeLabelProvider implements ILabelProvider {
+		private final Image libImg;
+		private final Image jarImg;
 
-		TreeLabelProvider(){
-			if (jarImg == null){
-				ImageDescriptor jarImgDesc = JSFUiPlugin.getImageDescriptor("obj16/jar_obj.gif"); //$NON-NLS-1$
-				jarImg = jarImgDesc.createImage();
-			}
-			if (libImg == null){
-				ImageDescriptor libImgDesc = JSFUiPlugin.getImageDescriptor("obj16/library_obj.gif"); //$NON-NLS-1$
-				libImg = libImgDesc.createImage();
-			}
+		TreeLabelProvider()
+		{
+			ImageDescriptor jarImgDesc = JSFUiPlugin.getImageDescriptor("obj16/jar_obj.gif"); //$NON-NLS-1$
+			jarImg = jarImgDesc.createImage();
+			ImageDescriptor libImgDesc = JSFUiPlugin.getImageDescriptor("obj16/library_obj.gif"); //$NON-NLS-1$
+			libImg = libImgDesc.createImage();
 		}
 		
 		public Image getImage(Object element) {
@@ -959,9 +956,9 @@ public class JSFLibraryConfigControl extends Composite {
 				if (lib.isImplementation()) {
 					labelBuf.append(" "); //$NON-NLS-1$
 					if (lib == JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry().getDefaultImplementation()) {
-						labelBuf.append(DEFAULT_IMPL_DESC); 
+						labelBuf.append(Messages.JSFLibrariesPreferencePage_DEFAULT_IMPL_DESC); 
 					} else {
-						labelBuf.append(IMPL_DESC); 
+						labelBuf.append(Messages.JSFLibrariesPreferencePage_IMPL_DESC); 
 					}
 				}
 			}
@@ -969,7 +966,7 @@ public class JSFLibraryConfigControl extends Composite {
 				ArchiveFile jar = (ArchiveFile)element;
 				labelBuf.append(jar.getName());
 				if (!jar.exists())
-					labelBuf.append(MISSING);
+					labelBuf.append(Messages.JSFLibrariesPreferencePage_MISSING_DESC);
 				labelBuf.append(" - ").append(((ArchiveFile)element).getSourceLocation()); //$NON-NLS-1$
 			}
 			return labelBuf.toString();
