@@ -180,13 +180,13 @@ public class JSFUtils11 extends JSFUtils {
 					.createServletType();
 			servletType.setClassName(className);
 			servlet.setWebType(servletType);
-			servlet.setLoadOnStartup(new Integer(1));
+			servlet.setLoadOnStartup(Integer.valueOf(1));
 			// Add the servlet to the web application model
 			webApp.getServlets().add(servlet);			
 		} else {
 			// update
 			servlet.setServletName(displayName);
-			servlet.setLoadOnStartup(new Integer(1));
+			servlet.setLoadOnStartup(Integer.valueOf(1));
 		}
 		return servlet;
 	}
@@ -301,7 +301,7 @@ public class JSFUtils11 extends JSFUtils {
 				if (cp.getParamValue().indexOf(config.getStringProperty(IJSFFacetInstallDataModelProperties.CONFIG_PATH)) < 0) {
 					String curVal = cp.getParamValue();
 					String val = config.getStringProperty(IJSFFacetInstallDataModelProperties.CONFIG_PATH);
-					if (curVal != null || !curVal.trim().equals("")) { //$NON-NLS-1$
+					if (curVal != null && !"".equals(curVal.trim())) { //$NON-NLS-1$
 						val = curVal + ",\n" + val; //$NON-NLS-1$
 					}
 					cp.setParamValue(val);
@@ -342,7 +342,7 @@ public class JSFUtils11 extends JSFUtils {
 				if (cp.getValue().indexOf(config.getStringProperty(IJSFFacetInstallDataModelProperties.CONFIG_PATH)) < 0) {
 					String curVal = cp.getValue();
 					String val = config.getStringProperty(IJSFFacetInstallDataModelProperties.CONFIG_PATH);
-					if (curVal != null || !curVal.trim().equals("")) { //$NON-NLS-1$
+					if (curVal != null && !"".equals(curVal.trim())) { //$NON-NLS-1$
 						val = curVal + ",\n" + val; //$NON-NLS-1$
 					}
 					cp.setValue(val);
