@@ -410,7 +410,7 @@ public class JavaClassType extends ObjectType implements IPossibleValues, IValid
 		return false;
 	}
 	
-	private class Searcher extends SearchRequestor{
+	private static class Searcher extends SearchRequestor{
 		private List results = new ArrayList();
 		public void acceptSearchMatch(SearchMatch match) throws CoreException {
 			results.add(match);
