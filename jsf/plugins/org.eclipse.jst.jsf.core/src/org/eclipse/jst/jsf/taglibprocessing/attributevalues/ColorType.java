@@ -25,6 +25,8 @@ import org.eclipse.swt.graphics.RGB;
  * Meta-data processing type representing a color.
  * A color is defined as in html spec http://www.w3.org/TR/html4/types.html#type-color
  * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
  * @author ykats
  */
 
@@ -34,7 +36,7 @@ public class ColorType extends EnumerationType implements IPossibleValues {
 	 * List of standard colors
 	 * See http://www.w3.org/TR/html4/types.html#type-color
 	 */
-	public static String[] COLORS = {"Black", "Silver", "Gray", "White", "Maroon", "Red", "Purple",
+	private final static String[] COLORS = {"Black", "Silver", "Gray", "White", "Maroon", "Red", "Purple",
 				"Fuchsia", "Green", "Lime", "Olive", "Yellow", "Navy", "Blue", "Teal","Aqua"};
 		//if ordering changes, must change RGB[] ordering
 
