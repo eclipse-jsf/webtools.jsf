@@ -229,6 +229,7 @@ public class ITypeDescriptorItemProvider
 	/**
      * This adds a property descriptor for the Type Parameter Signatures feature.
      * <!-- begin-user-doc -->
+     * @param object 
      * <!-- end-user-doc -->
      * @generated
      */
@@ -251,6 +252,7 @@ public class ITypeDescriptorItemProvider
     /**
      * This adds a property descriptor for the Jdt Context feature.
      * <!-- begin-user-doc -->
+     * @param object 
      * <!-- end-user-doc -->
      * @generated
      */
@@ -273,6 +275,7 @@ public class ITypeDescriptorItemProvider
     /**
      * This adds a property descriptor for the Enum Type feature.
      * <!-- begin-user-doc -->
+     * @param object 
      * <!-- end-user-doc -->
      * @generated
      */
