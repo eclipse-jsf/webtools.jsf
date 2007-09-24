@@ -21,6 +21,10 @@ import org.eclipse.osgi.util.NLS;
 public class Messages extends NLS {
 	private static final String BUNDLE_NAME = "org.eclipse.jst.jsf.ui.internal.messages"; //$NON-NLS-1$
 
+    static {
+        NLS.initializeMessages(BUNDLE_NAME, Messages.class);
+    }
+
 	/**
 	 * see messages.properties
 	 */
@@ -372,8 +376,4 @@ public class Messages extends NLS {
      * see messages.properties
      */
     public static String JSFPreferences_RootPage_Description;
-    
-    static {
-		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
-	}
 }
