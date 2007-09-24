@@ -115,7 +115,7 @@ public class ComponentValidatorVisitor extends EObjectValidationVisitor
                     String nameValue = name.getTextContent().trim();
 
                     // TODO: isJavaIdentifierStart seems broken...
-                    if (Character.isJavaIdentifierStart(nameValue.charAt(0)));
+                    if (Character.isJavaIdentifierStart(nameValue.charAt(0)))
                     {
                         isValid = true;
                         for (int i = 1; i < nameValue.length(); i++)
