@@ -17,15 +17,8 @@ import java.util.List;
 
 import org.eclipse.gef.EditPart;
 import org.eclipse.jst.pagedesigner.parts.DocumentEditPart;
-import org.eclipse.jst.pagedesigner.parts.TextEditPart;
 import org.eclipse.jst.pagedesigner.viewer.DesignPosition;
 import org.eclipse.jst.pagedesigner.viewer.DesignRange;
-import org.eclipse.jst.pagedesigner.viewer.TextPosition;
-import org.eclipse.wst.xml.core.internal.provisional.document.IDOMText;
-import org.w3c.dom.DocumentFragment;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.Text;
 
 /**
  * @author mengbo
@@ -38,19 +31,27 @@ public class RangeUtil {
 	 *            can't be null
 	 * @param reference
 	 *            can't be null
+	 * @return ??
 	 */
-	public static Node appendAfter(Node child, Node reference) {
-		Node next = reference.getNextSibling();
-		if (next == null)
-        {
-			return reference.getParentNode().appendChild(child);
-        }
-        return reference.getParentNode().insertBefore(child, next);
-	}
+    //TODO: dead
+//	private static Node appendAfter(Node child, Node reference) {
+//		Node next = reference.getNextSibling();
+//		if (next == null)
+//        {
+//			return reference.getParentNode().appendChild(child);
+//        }
+//        return reference.getParentNode().insertBefore(child, next);
+//	}
 
-	public static Node insertBefore(Node child, Node reference) {
-		return reference.getParentNode().insertBefore(child, reference);
-	}
+	/**
+	 * @param child
+	 * @param reference
+	 * @return ??
+	 */
+    // TODO: dead
+//	private static Node insertBefore(Node child, Node reference) {
+//		return reference.getParentNode().insertBefore(child, reference);
+//	}
 
 	/**
 	 * Insert a node into the specified position. The node can be an element or
@@ -59,38 +60,39 @@ public class RangeUtil {
 	 * @param node
 	 * @param position
 	 */
-	public static Node insertElement(DesignPosition position, Element node) {
-		EditPart containerEditPart = position.getContainerPart();
-		int offset = position.getOffset();
-
-		if (containerEditPart instanceof TextEditPart) {
-			TextEditPart textPart = (TextEditPart) containerEditPart;
-			String textData = textPart.getTextData();
-			Node textNode = (Node) textPart.getModel();
-			if (offset == 0)
-				return insertBefore(node, textNode);
-			else if (offset == textData.length())
-				return appendAfter(node, textNode);
-			else {
-				// inserting the element in the middle of text.
-				String before = textData.substring(0, offset);
-				String after = textData.substring(offset);
-
-				// XXX: don't know whether setNodeValue() will do all those
-				// escape or not.
-				textNode.setNodeValue(after);
-				Node newnode = insertBefore(node, textNode);
-
-				// XXX: don't know whether createTextNode() will do all those
-				// escape or not
-				Text t = textNode.getOwnerDocument().createTextNode(before);
-
-				insertBefore(t, newnode);
-				return newnode;
-			}
-		}
-        return insertIntoEditPart(containerEditPart, node, offset);
-	}
+	// TODO: dead
+//	private static Node insertElement(DesignPosition position, Element node) {
+//		EditPart containerEditPart = position.getContainerPart();
+//		int offset = position.getOffset();
+//
+//		if (containerEditPart instanceof TextEditPart) {
+//			TextEditPart textPart = (TextEditPart) containerEditPart;
+//			String textData = textPart.getTextData();
+//			Node textNode = (Node) textPart.getModel();
+//			if (offset == 0)
+//				return insertBefore(node, textNode);
+//			else if (offset == textData.length())
+//				return appendAfter(node, textNode);
+//			else {
+//				// inserting the element in the middle of text.
+//				String before = textData.substring(0, offset);
+//				String after = textData.substring(offset);
+//
+//				// XXX: don't know whether setNodeValue() will do all those
+//				// escape or not.
+//				textNode.setNodeValue(after);
+//				Node newnode = insertBefore(node, textNode);
+//
+//				// XXX: don't know whether createTextNode() will do all those
+//				// escape or not
+//				Text t = textNode.getOwnerDocument().createTextNode(before);
+//
+//				insertBefore(t, newnode);
+//				return newnode;
+//			}
+//		}
+//        return insertIntoEditPart(containerEditPart, node, offset);
+//	}
 
 	/**
 	 * @param containerEditPart
@@ -98,49 +100,51 @@ public class RangeUtil {
 	 * @param offset
 	 * @return
 	 */
-	private static Node insertIntoEditPart(EditPart containerEditPart,
-			Node node, int offset) {
-		Node parent = (Node) containerEditPart.getModel();
-		List childParts = containerEditPart.getChildren();
-		if (offset >= childParts.size()) {
-			// to the end of parent
-			return parent.appendChild(node);
-		}
-        Node child = (Node) ((EditPart) childParts.get(offset)).getModel();
-        return insertBefore(node, child);
-	}
+	// TODO: dead
+//	private static Node insertIntoEditPart(EditPart containerEditPart,
+//			Node node, int offset) {
+//		Node parent = (Node) containerEditPart.getModel();
+//		List childParts = containerEditPart.getChildren();
+//		if (offset >= childParts.size()) {
+//			// to the end of parent
+//			return parent.appendChild(node);
+//		}
+//        Node child = (Node) ((EditPart) childParts.get(offset)).getModel();
+//        return insertBefore(node, child);
+//	}
 
-	public static TextPosition insertText(DesignPosition position, String data) {
-		// TODO: never read EditPart containerEditPart = position.getContainerPart();
-
-		position = moveIntoText(position);
-		int offset = position.getOffset();
-
-		if (position.getContainerPart() instanceof TextEditPart) {
-			// it is guaranteeed that now the containing edit part is text node.
-			TextEditPart textPart = (TextEditPart) position.getContainerPart();
-			String textData = textPart.getTextData();
-			String before = textData.substring(0, offset);
-			String after = textData.substring(offset);
-			if (data.startsWith(" ") && before.endsWith(" ")) {
-				before = before.substring(0, before.length() - 1) + "&nbsp;";
-			}
-			if (after.startsWith(" ") && data.endsWith(" ")) {
-				data = data.substring(0, data.length() - 1) + (char) 160;
-			}
-			String nextData = before + data + after;
-			IDOMText text = (IDOMText) textPart.getModel();
-			text.setData(nextData);
-			return new TextPosition(text, offset + data.length());
-		}
-        // can't merge into a neighboring text node. So create a text node
-        // of it's own
-        EditPart part = position.getContainerPart();
-        Node parent = (Node) part.getModel();
-        Text text = parent.getOwnerDocument().createTextNode(data);
-        insertIntoEditPart(part, text, offset);
-        return new TextPosition((IDOMText) text, offset);
-	}
+	// TODO: dead
+//	private static TextPosition insertText(DesignPosition position, String data) {
+//		// TODO: never read EditPart containerEditPart = position.getContainerPart();
+//
+//		position = moveIntoText(position);
+//		int offset = position.getOffset();
+//
+//		if (position.getContainerPart() instanceof TextEditPart) {
+//			// it is guaranteeed that now the containing edit part is text node.
+//			TextEditPart textPart = (TextEditPart) position.getContainerPart();
+//			String textData = textPart.getTextData();
+//			String before = textData.substring(0, offset);
+//			String after = textData.substring(offset);
+//			if (data.startsWith(" ") && before.endsWith(" ")) {
+//				before = before.substring(0, before.length() - 1) + "&nbsp;";
+//			}
+//			if (after.startsWith(" ") && data.endsWith(" ")) {
+//				data = data.substring(0, data.length() - 1) + (char) 160;
+//			}
+//			String nextData = before + data + after;
+//			IDOMText text = (IDOMText) textPart.getModel();
+//			text.setData(nextData);
+//			return new TextPosition(text, offset + data.length());
+//		}
+//        // can't merge into a neighboring text node. So create a text node
+//        // of it's own
+//        EditPart part = position.getContainerPart();
+//        Node parent = (Node) part.getModel();
+//        Text text = parent.getOwnerDocument().createTextNode(data);
+//        insertIntoEditPart(part, text, offset);
+//        return new TextPosition((IDOMText) text, offset);
+//	}
 
 	/**
 	 * Try to make the position move into a text node.
@@ -148,27 +152,28 @@ public class RangeUtil {
 	 * @param position
 	 * @return
 	 */
-	public static DesignPosition moveIntoText(DesignPosition position) {
-		EditPart container = position.getContainerPart();
-		if (container instanceof TextEditPart)
-			return position;
-		if (position.getOffset() > 0) {
-			EditPart pre = (EditPart) container.getChildren().get(
-					position.getOffset() - 1);
-			if (pre instanceof TextEditPart) {
-				return new DesignPosition(pre, ((TextEditPart) pre)
-						.getTextData().length());
-			}
-		}
-		if (position.getOffset() < container.getChildren().size()) {
-			EditPart next = (EditPart) container.getChildren().get(
-					position.getOffset());
-			if (next instanceof TextEditPart) {
-				return new DesignPosition(next, 0);
-			}
-		}
-		return position;
-	}
+    // TODO: dead
+//	private static DesignPosition moveIntoText(DesignPosition position) {
+//		EditPart container = position.getContainerPart();
+//		if (container instanceof TextEditPart)
+//			return position;
+//		if (position.getOffset() > 0) {
+//			EditPart pre = (EditPart) container.getChildren().get(
+//					position.getOffset() - 1);
+//			if (pre instanceof TextEditPart) {
+//				return new DesignPosition(pre, ((TextEditPart) pre)
+//						.getTextData().length());
+//			}
+//		}
+//		if (position.getOffset() < container.getChildren().size()) {
+//			EditPart next = (EditPart) container.getChildren().get(
+//					position.getOffset());
+//			if (next instanceof TextEditPart) {
+//				return new DesignPosition(next, 0);
+//			}
+//		}
+//		return position;
+//	}
 
 	/**
 	 * try to move the position up to not inside a text. if the position is at 0
@@ -177,32 +182,34 @@ public class RangeUtil {
 	 * @param position
 	 * @return
 	 */
-	public static DesignPosition moveOutFromText(DesignPosition position) {
-		EditPart container = position.getContainerPart();
-		if (container instanceof TextEditPart) {
-			int offset = position.getOffset();
-			String text = ((TextEditPart) container).getTextData();
-			if (offset == 0) {
-				return new DesignPosition(container.getParent(), container
-						.getParent().getChildren().indexOf(container));
-			} else if (offset == text.length()) {
-				return new DesignPosition(container.getParent(), container
-						.getParent().getChildren().indexOf(container) + 1);
-			}
-		}
-		return position;
-	}
+    // TODO: dead
+//	private static DesignPosition moveOutFromText(DesignPosition position) {
+//		EditPart container = position.getContainerPart();
+//		if (container instanceof TextEditPart) {
+//			int offset = position.getOffset();
+//			String text = ((TextEditPart) container).getTextData();
+//			if (offset == 0) {
+//				return new DesignPosition(container.getParent(), container
+//						.getParent().getChildren().indexOf(container));
+//			} else if (offset == text.length()) {
+//				return new DesignPosition(container.getParent(), container
+//						.getParent().getChildren().indexOf(container) + 1);
+//			}
+//		}
+//		return position;
+//	}
 
-	public static void insertDocumentFragment(DesignPosition position,
-			DocumentFragment fragment) {
-		// FIXME: NOT DONE.
-	}
+//	private static void insertDocumentFragment(DesignPosition position,
+//			DocumentFragment fragment) {
+//		// FIXME: NOT DONE.
+//	}
 
 	/**
 	 * Test whether the range intersect with the part.
 	 * 
 	 * @param range
 	 * @param part
+	 * @return true if thereis an intersection
 	 */
 	public static boolean intersect(DesignRange range, EditPart part) {
 		if (range == null || !range.isValid())
@@ -231,7 +238,7 @@ public class RangeUtil {
 	 * without constructing a new one.
 	 * 
 	 * @param range
-	 * @return
+	 * @return the normalized range
 	 */
 	public static DesignRange normalize(DesignRange range) {
 		if (range == null || !range.isValid()) {
@@ -254,7 +261,7 @@ public class RangeUtil {
 	 * @return 0 means equal. 1 Means p1 is after p2. -1 means p1 is before p2.
 	 *         Integer.MIN_VALUE means some error and can't compare.
 	 */
-	public static int compareDesignPosition(DesignPosition p1, DesignPosition p2) {
+	private static int compareDesignPosition(DesignPosition p1, DesignPosition p2) {
 		if (!p1.isValid() || !p2.isValid())
 			return Integer.MIN_VALUE;
 		if (p1.equals(p2))
@@ -330,7 +337,7 @@ public class RangeUtil {
 	 * @param part2
 	 * @return
 	 */
-	public static EditPart findCommonAncester(EditPart part1, EditPart part2) {
+	private static EditPart findCommonAncester(EditPart part1, EditPart part2) {
 		if (part1 == part2) {
 			return part1;
 		}
@@ -355,6 +362,10 @@ public class RangeUtil {
 
 	}
 
+	/**
+	 * @param range
+	 * @return the common ancestor
+	 */
 	public static EditPart findCommonAncestor(DesignRange range) {
 		if (!range.isValid()) {
 			return null;
