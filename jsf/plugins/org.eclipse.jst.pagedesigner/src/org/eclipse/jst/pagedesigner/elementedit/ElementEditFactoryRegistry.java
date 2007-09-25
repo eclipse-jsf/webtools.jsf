@@ -36,11 +36,14 @@ public class ElementEditFactoryRegistry {
 		addFactory(new HTMLElementEditFactory());
         addFactory(new JSPElementEditFactory());
 
-		IElementEditFactory facs[] = ElementEditFacRegistryReader
-				.getAllHandlers();
-		if (facs != null) {
-			for (int i = 0; i < facs.length; i++) {
-				addFactory(facs[i]);
+		List<IElementEditFactory> facs = 
+		    ElementEditFacRegistryReader.getAllHandlers();
+
+		if (facs != null) 
+		{
+			for (IElementEditFactory fac : facs) 
+			{
+				addFactory(fac);
 			}
 		}
 	}

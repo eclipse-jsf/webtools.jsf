@@ -12,6 +12,7 @@
 package org.eclipse.jst.pagedesigner.elementedit;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
@@ -27,20 +28,20 @@ import org.eclipse.jst.pagedesigner.PDPlugin;
  * @version 1.5
  */
 public class ElementEditFacRegistryReader {
-	static IElementEditFactory[] _handlers = null;
+	private static List<IElementEditFactory> _handlers = null;
 
 	/**
-	 * @return all available handers for the ext-pt
+	 * @return all available handers for the ext-pt.  List is not
+	 * modifiable
 	 */
-	public static synchronized IElementEditFactory[] getAllHandlers() {
+	public static synchronized List<IElementEditFactory> getAllHandlers() {
 		if (_handlers == null) {
 			_handlers = readAllHandlers();
 		}
-		return _handlers;
-
+		return Collections.unmodifiableList(_handlers);
 	}
 
-	private static IElementEditFactory[] readAllHandlers() {
+	private static List<IElementEditFactory> readAllHandlers() {
 		List result = new ArrayList();
 		IExtensionPoint extensionPoint = Platform.getExtensionRegistry()
 				.getExtensionPoint(PDPlugin.getPluginId(),
@@ -71,9 +72,7 @@ public class ElementEditFacRegistryReader {
 				}
 			}
 		}
-		IElementEditFactory[] ret = new IElementEditFactory[result.size()];
-		result.toArray(ret);
-		return ret;
+		return result;
 	}
 
 }
