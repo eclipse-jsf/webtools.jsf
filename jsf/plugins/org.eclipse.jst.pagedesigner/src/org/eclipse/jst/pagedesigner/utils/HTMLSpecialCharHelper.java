@@ -34,260 +34,260 @@ public class HTMLSpecialCharHelper {
 	static {
 		_table = new Hashtable(256);
 
-		_table.put(new Integer(34), "&quot;"); //$NON-NLS-1$
-		_table.put(new Integer(38), "&amp;"); //$NON-NLS-1$
-		_table.put(new Integer(60), "&lt;"); //$NON-NLS-1$
-		_table.put(new Integer(62), "&gt;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(34), "&quot;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(38), "&amp;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(60), "&lt;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(62), "&gt;"); //$NON-NLS-1$
 
-		_table.put(new Integer(160), "&nbsp;"); //$NON-NLS-1$
-		_table.put(new Integer(161), "&iexcl;"); //$NON-NLS-1$
-		_table.put(new Integer(162), "&cent;"); //$NON-NLS-1$
-		_table.put(new Integer(163), "&pound;"); //$NON-NLS-1$
-		_table.put(new Integer(164), "&curren;"); //$NON-NLS-1$
-		_table.put(new Integer(165), "&yen;"); //$NON-NLS-1$
-		_table.put(new Integer(166), "&brvbar;"); //$NON-NLS-1$
-		_table.put(new Integer(167), "&sect;"); //$NON-NLS-1$
-		_table.put(new Integer(168), "&uml;"); //$NON-NLS-1$
-		_table.put(new Integer(169), "&copy;"); //$NON-NLS-1$
-		_table.put(new Integer(170), "&ordf;"); //$NON-NLS-1$
-		_table.put(new Integer(171), "&laquo;"); //$NON-NLS-1$
-		_table.put(new Integer(172), "&not;"); //$NON-NLS-1$
-		_table.put(new Integer(173), "&shy;"); //$NON-NLS-1$
-		_table.put(new Integer(174), "&reg;"); //$NON-NLS-1$
-		_table.put(new Integer(175), "&macr;"); //$NON-NLS-1$
-		_table.put(new Integer(176), "&deg;"); //$NON-NLS-1$
-		_table.put(new Integer(177), "&plusmn;"); //$NON-NLS-1$
-		_table.put(new Integer(178), "&sup2;"); //$NON-NLS-1$
-		_table.put(new Integer(179), "&sup3;"); //$NON-NLS-1$
-		_table.put(new Integer(180), "&acute;"); //$NON-NLS-1$
-		_table.put(new Integer(181), "&micro;"); //$NON-NLS-1$
-		_table.put(new Integer(182), "&para;"); //$NON-NLS-1$
-		_table.put(new Integer(183), "&middot;"); //$NON-NLS-1$
-		_table.put(new Integer(184), "&cedil;"); //$NON-NLS-1$
-		_table.put(new Integer(185), "&sup1;"); //$NON-NLS-1$
-		_table.put(new Integer(186), "&ordm;"); //$NON-NLS-1$
-		_table.put(new Integer(187), "&raquo;"); //$NON-NLS-1$
-		_table.put(new Integer(188), "&frac14;"); //$NON-NLS-1$
-		_table.put(new Integer(189), "&frac12;"); //$NON-NLS-1$
-		_table.put(new Integer(190), "&frac34;"); //$NON-NLS-1$
-		_table.put(new Integer(191), "&iquest;"); //$NON-NLS-1$
-		_table.put(new Integer(192), "&Agrave;"); //$NON-NLS-1$
-		_table.put(new Integer(193), "&Aacute;"); //$NON-NLS-1$
-		_table.put(new Integer(194), "&Acirc;"); //$NON-NLS-1$
-		_table.put(new Integer(195), "&Atilde;"); //$NON-NLS-1$
-		_table.put(new Integer(196), "&Auml;"); //$NON-NLS-1$
-		_table.put(new Integer(197), "&Aring;"); //$NON-NLS-1$
-		_table.put(new Integer(198), "&AElig;"); //$NON-NLS-1$
-		_table.put(new Integer(199), "&Ccedil;"); //$NON-NLS-1$
-		_table.put(new Integer(200), "&Egrave;"); //$NON-NLS-1$
-		_table.put(new Integer(201), "&Eacute;"); //$NON-NLS-1$
-		_table.put(new Integer(202), "&Ecirc;"); //$NON-NLS-1$
-		_table.put(new Integer(203), "&Euml;"); //$NON-NLS-1$
-		_table.put(new Integer(204), "&Igrave;"); //$NON-NLS-1$
-		_table.put(new Integer(205), "&Iacute;"); //$NON-NLS-1$
-		_table.put(new Integer(206), "&Icirc;"); //$NON-NLS-1$
-		_table.put(new Integer(207), "&Iuml;"); //$NON-NLS-1$
-		_table.put(new Integer(208), "&ETH;"); //$NON-NLS-1$
-		_table.put(new Integer(209), "&Ntilde;"); //$NON-NLS-1$
-		_table.put(new Integer(210), "&Ograve;"); //$NON-NLS-1$
-		_table.put(new Integer(211), "&Oacute;"); //$NON-NLS-1$
-		_table.put(new Integer(212), "&Ocirc;"); //$NON-NLS-1$
-		_table.put(new Integer(213), "&Otilde;"); //$NON-NLS-1$
-		_table.put(new Integer(214), "&Ouml;"); //$NON-NLS-1$
-		_table.put(new Integer(215), "&times;"); //$NON-NLS-1$
-		_table.put(new Integer(216), "&Oslash;"); //$NON-NLS-1$
-		_table.put(new Integer(217), "&Ugrave;"); //$NON-NLS-1$
-		_table.put(new Integer(218), "&Uacute;"); //$NON-NLS-1$
-		_table.put(new Integer(219), "&Ucirc;"); //$NON-NLS-1$
-		_table.put(new Integer(220), "&Uuml;"); //$NON-NLS-1$
-		_table.put(new Integer(221), "&Yacute;"); //$NON-NLS-1$
-		_table.put(new Integer(222), "&THORN;"); //$NON-NLS-1$
-		_table.put(new Integer(223), "&szlig;"); //$NON-NLS-1$
-		_table.put(new Integer(224), "&agrave;"); //$NON-NLS-1$
-		_table.put(new Integer(225), "&aacute;"); //$NON-NLS-1$
-		_table.put(new Integer(226), "&acirc;"); //$NON-NLS-1$
-		_table.put(new Integer(227), "&atilde;"); //$NON-NLS-1$
-		_table.put(new Integer(228), "&auml;"); //$NON-NLS-1$
-		_table.put(new Integer(229), "&aring;"); //$NON-NLS-1$
-		_table.put(new Integer(230), "&aelig;"); //$NON-NLS-1$
-		_table.put(new Integer(231), "&ccedil;"); //$NON-NLS-1$
-		_table.put(new Integer(232), "&egrave;"); //$NON-NLS-1$
-		_table.put(new Integer(233), "&eacute;"); //$NON-NLS-1$
-		_table.put(new Integer(234), "&ecirc;"); //$NON-NLS-1$
-		_table.put(new Integer(235), "&euml;"); //$NON-NLS-1$
-		_table.put(new Integer(236), "&igrave;"); //$NON-NLS-1$
-		_table.put(new Integer(237), "&iacute;"); //$NON-NLS-1$
-		_table.put(new Integer(238), "&icirc;"); //$NON-NLS-1$
-		_table.put(new Integer(239), "&iuml;"); //$NON-NLS-1$
-		_table.put(new Integer(240), "&eth;"); //$NON-NLS-1$
-		_table.put(new Integer(241), "&ntilde;"); //$NON-NLS-1$
-		_table.put(new Integer(242), "&ograve;"); //$NON-NLS-1$
-		_table.put(new Integer(243), "&oacute;"); //$NON-NLS-1$
-		_table.put(new Integer(244), "&ocirc;"); //$NON-NLS-1$
-		_table.put(new Integer(245), "&otilde;"); //$NON-NLS-1$
-		_table.put(new Integer(246), "&ouml;"); //$NON-NLS-1$
-		_table.put(new Integer(247), "&divide;"); //$NON-NLS-1$
-		_table.put(new Integer(248), "&oslash;"); //$NON-NLS-1$
-		_table.put(new Integer(249), "&ugrave;"); //$NON-NLS-1$
-		_table.put(new Integer(250), "&uacute;"); //$NON-NLS-1$
-		_table.put(new Integer(251), "&ucirc;"); //$NON-NLS-1$
-		_table.put(new Integer(252), "&uuml;"); //$NON-NLS-1$
-		_table.put(new Integer(253), "&yacute;"); //$NON-NLS-1$
-		_table.put(new Integer(254), "&thorn;"); //$NON-NLS-1$
-		_table.put(new Integer(255), "&yuml;"); //$NON-NLS-1$
-		_table.put(new Integer(402), "&fnof;"); //$NON-NLS-1$
-		_table.put(new Integer(913), "&Alpha;"); //$NON-NLS-1$
-		_table.put(new Integer(914), "&Beta;"); //$NON-NLS-1$
-		_table.put(new Integer(915), "&Gamma;"); //$NON-NLS-1$
-		_table.put(new Integer(916), "&Delta;"); //$NON-NLS-1$
-		_table.put(new Integer(917), "&Epsilon;"); //$NON-NLS-1$
-		_table.put(new Integer(918), "&Zeta;"); //$NON-NLS-1$
-		_table.put(new Integer(919), "&Eta;"); //$NON-NLS-1$
-		_table.put(new Integer(920), "&Theta;"); //$NON-NLS-1$
-		_table.put(new Integer(921), "&Iota;"); //$NON-NLS-1$
-		_table.put(new Integer(922), "&Kappa;"); //$NON-NLS-1$
-		_table.put(new Integer(923), "&Lambda;"); //$NON-NLS-1$
-		_table.put(new Integer(924), "&Mu;"); //$NON-NLS-1$
-		_table.put(new Integer(925), "&Nu;"); //$NON-NLS-1$
-		_table.put(new Integer(926), "&Xi;"); //$NON-NLS-1$
-		_table.put(new Integer(927), "&Omicron;"); //$NON-NLS-1$
-		_table.put(new Integer(928), "&Pi;"); //$NON-NLS-1$
-		_table.put(new Integer(929), "&Rho;"); //$NON-NLS-1$
-		_table.put(new Integer(931), "&Sigma;"); //$NON-NLS-1$
-		_table.put(new Integer(932), "&Tau;"); //$NON-NLS-1$
-		_table.put(new Integer(933), "&Upsilon;"); //$NON-NLS-1$
-		_table.put(new Integer(934), "&Phi;"); //$NON-NLS-1$
-		_table.put(new Integer(935), "&Chi;"); //$NON-NLS-1$
-		_table.put(new Integer(936), "&Psi;"); //$NON-NLS-1$
-		_table.put(new Integer(937), "&Omega;"); //$NON-NLS-1$
-		_table.put(new Integer(945), "&alpha;"); //$NON-NLS-1$
-		_table.put(new Integer(946), "&beta;"); //$NON-NLS-1$
-		_table.put(new Integer(947), "&gamma;"); //$NON-NLS-1$
-		_table.put(new Integer(948), "&delta;"); //$NON-NLS-1$
-		_table.put(new Integer(949), "&epsilon;"); //$NON-NLS-1$
-		_table.put(new Integer(950), "&zeta;"); //$NON-NLS-1$
-		_table.put(new Integer(951), "&eta;"); //$NON-NLS-1$
-		_table.put(new Integer(952), "&theta;"); //$NON-NLS-1$
-		_table.put(new Integer(953), "&iota;"); //$NON-NLS-1$
-		_table.put(new Integer(954), "&kappa;"); //$NON-NLS-1$
-		_table.put(new Integer(955), "&lambda;"); //$NON-NLS-1$
-		_table.put(new Integer(956), "&mu;"); //$NON-NLS-1$
-		_table.put(new Integer(957), "&nu;"); //$NON-NLS-1$
-		_table.put(new Integer(958), "&xi;"); //$NON-NLS-1$
-		_table.put(new Integer(959), "&omicron;"); //$NON-NLS-1$
-		_table.put(new Integer(960), "&pi;"); //$NON-NLS-1$
-		_table.put(new Integer(961), "&rho;"); //$NON-NLS-1$
-		_table.put(new Integer(962), "&sigmaf;"); //$NON-NLS-1$
-		_table.put(new Integer(963), "&sigma;"); //$NON-NLS-1$
-		_table.put(new Integer(964), "&tau;"); //$NON-NLS-1$
-		_table.put(new Integer(965), "&upsilon;"); //$NON-NLS-1$
-		_table.put(new Integer(966), "&phi;"); //$NON-NLS-1$
-		_table.put(new Integer(967), "&chi;"); //$NON-NLS-1$
-		_table.put(new Integer(968), "&psi;"); //$NON-NLS-1$
-		_table.put(new Integer(969), "&omega;"); //$NON-NLS-1$
-		_table.put(new Integer(977), "&thetasym;"); //$NON-NLS-1$
-		_table.put(new Integer(978), "&upsih;"); //$NON-NLS-1$
-		_table.put(new Integer(982), "&piv;"); //$NON-NLS-1$
-		_table.put(new Integer(8226), "&bull;"); //$NON-NLS-1$
-		_table.put(new Integer(8230), "&hellip;"); //$NON-NLS-1$
-		_table.put(new Integer(8242), "&prime;"); //$NON-NLS-1$
-		_table.put(new Integer(8243), "&Prime;"); //$NON-NLS-1$
-		_table.put(new Integer(8254), "&oline;"); //$NON-NLS-1$
-		_table.put(new Integer(8260), "&frasl;"); //$NON-NLS-1$
-		_table.put(new Integer(8472), "&weierp;"); //$NON-NLS-1$
-		_table.put(new Integer(8465), "&image;"); //$NON-NLS-1$
-		_table.put(new Integer(8476), "&real;"); //$NON-NLS-1$
-		_table.put(new Integer(8482), "&trade;"); //$NON-NLS-1$
-		_table.put(new Integer(8501), "&alefsym;"); //$NON-NLS-1$
-		_table.put(new Integer(8592), "&larr;"); //$NON-NLS-1$
-		_table.put(new Integer(8593), "&uarr;"); //$NON-NLS-1$
-		_table.put(new Integer(8594), "&rarr;"); //$NON-NLS-1$
-		_table.put(new Integer(8595), "&darr;"); //$NON-NLS-1$
-		_table.put(new Integer(8596), "&harr;"); //$NON-NLS-1$
-		_table.put(new Integer(8629), "&crarr;"); //$NON-NLS-1$
-		_table.put(new Integer(8656), "&lArr;"); //$NON-NLS-1$
-		_table.put(new Integer(8657), "&uArr;"); //$NON-NLS-1$
-		_table.put(new Integer(8658), "&rArr;"); //$NON-NLS-1$
-		_table.put(new Integer(8659), "&dArr;"); //$NON-NLS-1$
-		_table.put(new Integer(8660), "&hArr;"); //$NON-NLS-1$
-		_table.put(new Integer(8704), "&forall;"); //$NON-NLS-1$
-		_table.put(new Integer(8706), "&part;"); //$NON-NLS-1$
-		_table.put(new Integer(8707), "&exist;"); //$NON-NLS-1$
-		_table.put(new Integer(8709), "&empty;"); //$NON-NLS-1$
-		_table.put(new Integer(8711), "&nabla;"); //$NON-NLS-1$
-		_table.put(new Integer(8712), "&isin;"); //$NON-NLS-1$
-		_table.put(new Integer(8713), "&notin;"); //$NON-NLS-1$
-		_table.put(new Integer(8715), "&ni;"); //$NON-NLS-1$
-		_table.put(new Integer(8719), "&prod;"); //$NON-NLS-1$
-		_table.put(new Integer(8722), "&sum;"); //$NON-NLS-1$
-		_table.put(new Integer(8722), "&minus;"); //$NON-NLS-1$
-		_table.put(new Integer(8727), "&lowast;"); //$NON-NLS-1$
-		_table.put(new Integer(8730), "&radic;"); //$NON-NLS-1$
-		_table.put(new Integer(8733), "&prop;"); //$NON-NLS-1$
-		_table.put(new Integer(8734), "&infin;"); //$NON-NLS-1$
-		_table.put(new Integer(8736), "&ang;"); //$NON-NLS-1$
-		_table.put(new Integer(8869), "&and;"); //$NON-NLS-1$
-		_table.put(new Integer(8870), "&or;"); //$NON-NLS-1$
-		_table.put(new Integer(8745), "&cap;"); //$NON-NLS-1$
-		_table.put(new Integer(8746), "&cup;"); //$NON-NLS-1$
-		_table.put(new Integer(8747), "&int;"); //$NON-NLS-1$
-		_table.put(new Integer(8756), "&there4;"); //$NON-NLS-1$
-		_table.put(new Integer(8764), "&sim;"); //$NON-NLS-1$
-		_table.put(new Integer(8773), "&cong;"); //$NON-NLS-1$
-		_table.put(new Integer(8773), "&asymp;"); //$NON-NLS-1$
-		_table.put(new Integer(8800), "&ne;"); //$NON-NLS-1$
-		_table.put(new Integer(8801), "&equiv;"); //$NON-NLS-1$
-		_table.put(new Integer(8804), "&le;"); //$NON-NLS-1$
-		_table.put(new Integer(8805), "&ge;"); //$NON-NLS-1$
-		_table.put(new Integer(8834), "&sub;"); //$NON-NLS-1$
-		_table.put(new Integer(8835), "&sup;"); //$NON-NLS-1$
-		_table.put(new Integer(8836), "&nsub;"); //$NON-NLS-1$
-		_table.put(new Integer(8838), "&sube;"); //$NON-NLS-1$
-		_table.put(new Integer(8839), "&supe;"); //$NON-NLS-1$
-		_table.put(new Integer(8853), "&oplus;"); //$NON-NLS-1$
-		_table.put(new Integer(8855), "&otimes;"); //$NON-NLS-1$
-		_table.put(new Integer(8869), "&perp;"); //$NON-NLS-1$
-		_table.put(new Integer(8901), "&sdot;"); //$NON-NLS-1$
-		_table.put(new Integer(8968), "&lceil;"); //$NON-NLS-1$
-		_table.put(new Integer(8969), "&rceil;"); //$NON-NLS-1$
-		_table.put(new Integer(8970), "&lfloor;"); //$NON-NLS-1$
-		_table.put(new Integer(8971), "&rfloor;"); //$NON-NLS-1$
-		_table.put(new Integer(9001), "&lang;"); //$NON-NLS-1$
-		_table.put(new Integer(9002), "&rang;"); //$NON-NLS-1$
-		_table.put(new Integer(9674), "&loz;"); //$NON-NLS-1$
-		_table.put(new Integer(9824), "&spades;"); //$NON-NLS-1$
-		_table.put(new Integer(9827), "&clubs;"); //$NON-NLS-1$
-		_table.put(new Integer(9829), "&hearts;"); //$NON-NLS-1$
-		_table.put(new Integer(9830), "&diams;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(160), "&nbsp;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(161), "&iexcl;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(162), "&cent;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(163), "&pound;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(164), "&curren;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(165), "&yen;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(166), "&brvbar;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(167), "&sect;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(168), "&uml;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(169), "&copy;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(170), "&ordf;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(171), "&laquo;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(172), "&not;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(173), "&shy;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(174), "&reg;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(175), "&macr;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(176), "&deg;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(177), "&plusmn;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(178), "&sup2;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(179), "&sup3;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(180), "&acute;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(181), "&micro;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(182), "&para;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(183), "&middot;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(184), "&cedil;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(185), "&sup1;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(186), "&ordm;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(187), "&raquo;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(188), "&frac14;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(189), "&frac12;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(190), "&frac34;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(191), "&iquest;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(192), "&Agrave;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(193), "&Aacute;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(194), "&Acirc;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(195), "&Atilde;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(196), "&Auml;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(197), "&Aring;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(198), "&AElig;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(199), "&Ccedil;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(200), "&Egrave;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(201), "&Eacute;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(202), "&Ecirc;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(203), "&Euml;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(204), "&Igrave;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(205), "&Iacute;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(206), "&Icirc;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(207), "&Iuml;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(208), "&ETH;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(209), "&Ntilde;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(210), "&Ograve;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(211), "&Oacute;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(212), "&Ocirc;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(213), "&Otilde;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(214), "&Ouml;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(215), "&times;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(216), "&Oslash;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(217), "&Ugrave;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(218), "&Uacute;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(219), "&Ucirc;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(220), "&Uuml;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(221), "&Yacute;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(222), "&THORN;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(223), "&szlig;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(224), "&agrave;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(225), "&aacute;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(226), "&acirc;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(227), "&atilde;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(228), "&auml;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(229), "&aring;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(230), "&aelig;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(231), "&ccedil;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(232), "&egrave;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(233), "&eacute;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(234), "&ecirc;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(235), "&euml;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(236), "&igrave;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(237), "&iacute;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(238), "&icirc;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(239), "&iuml;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(240), "&eth;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(241), "&ntilde;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(242), "&ograve;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(243), "&oacute;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(244), "&ocirc;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(245), "&otilde;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(246), "&ouml;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(247), "&divide;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(248), "&oslash;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(249), "&ugrave;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(250), "&uacute;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(251), "&ucirc;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(252), "&uuml;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(253), "&yacute;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(254), "&thorn;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(255), "&yuml;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(402), "&fnof;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(913), "&Alpha;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(914), "&Beta;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(915), "&Gamma;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(916), "&Delta;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(917), "&Epsilon;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(918), "&Zeta;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(919), "&Eta;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(920), "&Theta;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(921), "&Iota;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(922), "&Kappa;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(923), "&Lambda;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(924), "&Mu;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(925), "&Nu;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(926), "&Xi;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(927), "&Omicron;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(928), "&Pi;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(929), "&Rho;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(931), "&Sigma;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(932), "&Tau;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(933), "&Upsilon;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(934), "&Phi;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(935), "&Chi;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(936), "&Psi;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(937), "&Omega;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(945), "&alpha;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(946), "&beta;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(947), "&gamma;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(948), "&delta;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(949), "&epsilon;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(950), "&zeta;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(951), "&eta;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(952), "&theta;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(953), "&iota;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(954), "&kappa;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(955), "&lambda;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(956), "&mu;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(957), "&nu;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(958), "&xi;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(959), "&omicron;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(960), "&pi;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(961), "&rho;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(962), "&sigmaf;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(963), "&sigma;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(964), "&tau;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(965), "&upsilon;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(966), "&phi;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(967), "&chi;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(968), "&psi;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(969), "&omega;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(977), "&thetasym;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(978), "&upsih;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(982), "&piv;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8226), "&bull;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8230), "&hellip;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8242), "&prime;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8243), "&Prime;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8254), "&oline;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8260), "&frasl;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8472), "&weierp;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8465), "&image;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8476), "&real;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8482), "&trade;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8501), "&alefsym;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8592), "&larr;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8593), "&uarr;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8594), "&rarr;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8595), "&darr;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8596), "&harr;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8629), "&crarr;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8656), "&lArr;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8657), "&uArr;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8658), "&rArr;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8659), "&dArr;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8660), "&hArr;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8704), "&forall;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8706), "&part;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8707), "&exist;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8709), "&empty;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8711), "&nabla;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8712), "&isin;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8713), "&notin;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8715), "&ni;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8719), "&prod;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8722), "&sum;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8722), "&minus;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8727), "&lowast;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8730), "&radic;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8733), "&prop;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8734), "&infin;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8736), "&ang;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8869), "&and;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8870), "&or;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8745), "&cap;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8746), "&cup;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8747), "&int;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8756), "&there4;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8764), "&sim;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8773), "&cong;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8773), "&asymp;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8800), "&ne;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8801), "&equiv;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8804), "&le;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8805), "&ge;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8834), "&sub;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8835), "&sup;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8836), "&nsub;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8838), "&sube;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8839), "&supe;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8853), "&oplus;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8855), "&otimes;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8869), "&perp;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8901), "&sdot;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8968), "&lceil;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8969), "&rceil;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8970), "&lfloor;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8971), "&rfloor;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(9001), "&lang;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(9002), "&rang;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(9674), "&loz;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(9824), "&spades;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(9827), "&clubs;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(9829), "&hearts;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(9830), "&diams;"); //$NON-NLS-1$
 
-		_table.put(new Integer(338), "&OElig;"); //$NON-NLS-1$
-		_table.put(new Integer(339), "&oelig;"); //$NON-NLS-1$
-		_table.put(new Integer(352), "&Scaron;"); //$NON-NLS-1$
-		_table.put(new Integer(353), "&scaron;"); //$NON-NLS-1$
-		_table.put(new Integer(376), "&Yuml;"); //$NON-NLS-1$
-		_table.put(new Integer(710), "&circ;"); //$NON-NLS-1$
-		_table.put(new Integer(732), "&tilde;"); //$NON-NLS-1$
-		_table.put(new Integer(8194), "&ensp;"); //$NON-NLS-1$
-		_table.put(new Integer(8195), "&emsp;"); //$NON-NLS-1$
-		_table.put(new Integer(8201), "&thinsp;"); //$NON-NLS-1$
-		_table.put(new Integer(8204), "&zwnj;"); //$NON-NLS-1$
-		_table.put(new Integer(8205), "&zwj;"); //$NON-NLS-1$
-		_table.put(new Integer(8206), "&lrm;"); //$NON-NLS-1$
-		_table.put(new Integer(8207), "&rlm;"); //$NON-NLS-1$
-		_table.put(new Integer(8211), "&ndash;"); //$NON-NLS-1$
-		_table.put(new Integer(151), "&mdash;"); //$NON-NLS-1$
-		_table.put(new Integer(8216), "&lsquo;"); //$NON-NLS-1$
-		_table.put(new Integer(8217), "&rsquo;"); //$NON-NLS-1$
-		_table.put(new Integer(8218), "&sbquo;"); //$NON-NLS-1$
-		_table.put(new Integer(8220), "&ldquo;"); //$NON-NLS-1$
-		_table.put(new Integer(8221), "&rdquo;"); //$NON-NLS-1$
-		_table.put(new Integer(8222), "&bdquo;"); //$NON-NLS-1$
-		_table.put(new Integer(8224), "&dagger;"); //$NON-NLS-1$
-		_table.put(new Integer(8225), "&Dagger;"); //$NON-NLS-1$
-		_table.put(new Integer(8240), "&permil;"); //$NON-NLS-1$
-		_table.put(new Integer(8249), "&lsaquo;"); //$NON-NLS-1$
-		_table.put(new Integer(8250), "&rsaquo;"); //$NON-NLS-1$
-		_table.put(new Integer(8364), "&euro;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(338), "&OElig;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(339), "&oelig;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(352), "&Scaron;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(353), "&scaron;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(376), "&Yuml;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(710), "&circ;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(732), "&tilde;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8194), "&ensp;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8195), "&emsp;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8201), "&thinsp;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8204), "&zwnj;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8205), "&zwj;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8206), "&lrm;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8207), "&rlm;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8211), "&ndash;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(151), "&mdash;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8216), "&lsquo;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8217), "&rsquo;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8218), "&sbquo;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8220), "&ldquo;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8221), "&rdquo;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8222), "&bdquo;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8224), "&dagger;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8225), "&Dagger;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8240), "&permil;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8249), "&lsaquo;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8250), "&rsaquo;"); //$NON-NLS-1$
+		_table.put(Integer.valueOf(8364), "&euro;"); //$NON-NLS-1$
 
 		_reverse = new Hashtable(256);
 		for (Enumeration e = _table.keys(); e.hasMoreElements();) {
@@ -300,12 +300,18 @@ public class HTMLSpecialCharHelper {
 	}
 
 	/**
+	 * @param ch 
 	 * @return if not in the special list
 	 */
 	public static String getSpecial(int ch) {
-		return (String) _table.get(new Integer(ch));
+		return (String) _table.get(Integer.valueOf(ch));
 	}
 
+	/**
+	 * @param str
+	 * @return the code value corresponding to the string or null
+	 * if string is unknown
+	 */
 	public static int getSpecial(String str) {
 		Integer result = (Integer) _reverse.get(str);
 		if (result == null) {
@@ -314,6 +320,13 @@ public class HTMLSpecialCharHelper {
         return result.intValue();
 	}
 
+	/**
+	 * @param str
+	 * @param start
+	 * @param end
+	 * @param writer
+	 * @throws IOException
+	 */
 	public static void encode(String str, int start, int end, Writer writer)
 			throws IOException {
 		for (int i = start; i < end; i++) {
@@ -333,10 +346,22 @@ public class HTMLSpecialCharHelper {
 		}
 	}
 
+	/**
+	 * @param str
+	 * @param result
+	 * @return the encoded string buffer
+	 */
 	public static StringBuffer encode(String str, StringBuffer result) {
 		return encode(str, 0, str.length(), result);
 	}
 
+	/**
+	 * @param str
+	 * @param start
+	 * @param end
+	 * @param result
+	 * @return the encoded string buffer
+	 */
 	public static StringBuffer encode(String str, int start, int end,
 			StringBuffer result) {
 		for (int i = start; i < end; i++) {
@@ -357,11 +382,25 @@ public class HTMLSpecialCharHelper {
 		return result;
 	}
 
+	/**
+	 * @param str
+	 * @param buffer
+	 * @return the decoded string buffer
+	 * @throws RuntimeException
+	 */
 	public static StringBuffer decode(String str, StringBuffer buffer)
 			throws RuntimeException {
 		return decode(str, 0, str.length(), buffer);
 	}
 
+	/**
+	 * @param str
+	 * @param start
+	 * @param end
+	 * @param buffer
+	 * @return the decoded string buffer
+	 * @throws RuntimeException
+	 */
 	public static StringBuffer decode(String str, int start, int end,
 			StringBuffer buffer) throws RuntimeException {
 		int pos = start;
@@ -398,6 +437,10 @@ public class HTMLSpecialCharHelper {
 		return buffer;
 	}
 
+	/**
+	 * @param entityRef
+	 * @return the code for the decoded entity reference
+	 */
 	public static int decodeEntity(String entityRef) {
 		Integer result = (Integer) _reverse.get(entityRef);
 		if (result != null) {
