@@ -83,7 +83,7 @@ public class DesignerPaletteViewerProvider extends PaletteViewerProvider {
 		return pViewer;
 	}
 	
-	private class HideTagLibAction extends Action {
+	private static class HideTagLibAction extends Action {
 		private DrawerEditPart tagLib;
 		
 		/**

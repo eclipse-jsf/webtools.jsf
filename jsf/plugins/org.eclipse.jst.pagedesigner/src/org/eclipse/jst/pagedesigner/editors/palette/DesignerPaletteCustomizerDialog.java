@@ -179,12 +179,12 @@ public class DesignerPaletteCustomizerDialog extends PaletteCustomizerDialog {
 		 */
 		public void update() {
 			//boolean enabled = false;
-			PaletteEntry entry = getSelectedPaletteEntry();
-			if (entry != null) {
+//			PaletteEntry entry = getSelectedPaletteEntry();
+//			if (entry != null) {
 				// if (getCustomizer() instanceof DesignerPaletteCustomizer)
 				// enabled = ((DesignerPaletteCustomizer)
 				// getCustomizer()).canExport(entry);
-			}
+//			}
 			setEnabled(true);
 		}
 
@@ -297,7 +297,7 @@ public class DesignerPaletteCustomizerDialog extends PaletteCustomizerDialog {
 	 * Content provider for dialog.
 	 * Displays only {@link TaglibPaletteDrawer}s
 	 */
-	private class DesignerPaletteContentProvider implements ITreeContentProvider {
+	private static class DesignerPaletteContentProvider implements ITreeContentProvider {
 
 		public Object[] getChildren(Object parentElement) {
 			if (parentElement instanceof DesignerPaletteRoot){
