@@ -27,6 +27,9 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface PaletteInfos extends EObject {
+	/**
+	 * the palette infos trait id
+	 */
 	public static final String TRAIT_ID				= "paletteInfos";
 	/**
 	 * <!-- begin-user-doc -->
@@ -54,6 +57,8 @@ public interface PaletteInfos extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @param id 
+     * @return the palette info by id 
 	 * <!-- end-user-doc -->
 	 * @model idRequired="true"
 	 * @generated

@@ -33,12 +33,33 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface PaletteInfo extends EObject {
+	/**
+	 * the trait id name
+	 */
 	public static final String TRAIT_ID				= "paletteInfo";
+	/**
+	 * the display label name
+	 */
 	public static final String TRAIT_DISPLAY_LABEL 	= "display-label";
+	/**
+	 * the trait description name
+	 */
 	public static final String TRAIT_DESCRIPTION 	= "description";
+	/**
+	 * the expert trait
+	 */
 	public static final String TRAIT_IS_EXPERT 		= "expert";
+	/**
+	 * the hiddent trait
+	 */
 	public static final String TRAIT_IS_HIDDEN 		= "hidden";
+	/**
+	 * the small icon trait
+	 */
 	public static final String TRAIT_SMALL_ICON 	= "small-icon";
+	/**
+	 * the large icon trait
+	 */
 	public static final String TRAIT_LARGE_ICON 	= "large-icon";
 
 	/**
@@ -284,6 +305,7 @@ public interface PaletteInfo extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @return true if the expert flag is set 
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
 	 * @generated
@@ -292,6 +314,7 @@ public interface PaletteInfo extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @return true if the hidden flag is set 
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
 	 * @generated

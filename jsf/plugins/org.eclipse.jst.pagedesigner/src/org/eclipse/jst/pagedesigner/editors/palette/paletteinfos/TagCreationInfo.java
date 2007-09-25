@@ -28,6 +28,9 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface TagCreationInfo extends EObject {
+	/**
+	 * the name of the trait id
+	 */
 	public static final String TRAIT_ID = "tag-create";
 	/**
 	 * <!-- begin-user-doc -->
