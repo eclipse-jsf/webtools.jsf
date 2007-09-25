@@ -133,8 +133,7 @@ public class ElementEditPart extends SubNodeEditPart {
 	}
 
 	/**
-	 * @param node
-	 * @return
+	 * @return the associated element edit
 	 */
 	public IElementEdit getElementEdit() {
 		// XXX: should we cache it?
@@ -186,16 +185,16 @@ public class ElementEditPart extends SubNodeEditPart {
 	 * @see org.eclipse.gef.editparts.AbstractEditPart#getModelChildren()
 	 */
 	protected List getModelChildren() {
-		List children = new ArrayList(_tagConverter.getChildModeList());
+		List children_ = new ArrayList(_tagConverter.getChildModeList());
         
         for (Iterator it = _tagConverter.getNonVisualChildren().iterator(); it.hasNext();)
         {
             Element nonVisualChild = (Element) it.next();
-            children.add(DTManager.getInstance().getTagConverter(nonVisualChild,
+            children_.add(DTManager.getInstance().getTagConverter(nonVisualChild,
                 IConverterFactory.MODE_DESIGNER,
                 this.getDestDocumentForDesign()));
         }
-        return children;
+        return children_;
 	}
 
 	/*
@@ -242,6 +241,7 @@ public class ElementEditPart extends SubNodeEditPart {
 
 	/**
 	 * called by the
+	 * @param recursive
 	 * 
 	 */
 	public void refreshModelChange(boolean recursive) {
@@ -261,6 +261,9 @@ public class ElementEditPart extends SubNodeEditPart {
 		refresh(false);
 	}
 
+	/**
+	 * @param recursive
+	 */
 	public void refresh(boolean recursive) {
 		if (!_tagConverter.isVisualByHTML()) {
 			_tagConverter.convertRefresh(null);
@@ -374,7 +377,8 @@ public class ElementEditPart extends SubNodeEditPart {
 	}
 
 	/**
-	 * @return
+	 * @return true if we are in range mode and this is in 
+	 * the selection range
 	 */
 	public boolean isRangeSelected() {
 		IHTMLGraphicalViewer viewer = (IHTMLGraphicalViewer) this.getViewer();
@@ -398,7 +402,7 @@ public class ElementEditPart extends SubNodeEditPart {
 	}
 
 	/**
-	 * @return
+	 * @return true if our model node can have direct text children
 	 */
 	public boolean canHaveDirectTextChild() {
 		return CMUtil.canHaveDirectTextChild(this._elementNode);
@@ -546,7 +550,7 @@ public class ElementEditPart extends SubNodeEditPart {
 	}
 
 	/**
-	 * @return
+	 * @return the associated tag converter
 	 */
 	public ITagConverter getTagConvert() {
 		return _tagConverter;
@@ -575,7 +579,7 @@ public class ElementEditPart extends SubNodeEditPart {
 	}
 
 	/**
-	 * @return
+	 * @return true this part's node has non whitespace child nodes
 	 */
 	public boolean haveNonWhitespaceTextChild() {
 		List children1 = this.getChildren();
@@ -600,6 +604,9 @@ public class ElementEditPart extends SubNodeEditPart {
         return _nonVisualElementBar;
     }
 
+    /**
+     * @return the element menu bar for this element
+     */
     public ElementMenuBar getElementMenuBar() {
         return getNonVisualElementBar();
     }
