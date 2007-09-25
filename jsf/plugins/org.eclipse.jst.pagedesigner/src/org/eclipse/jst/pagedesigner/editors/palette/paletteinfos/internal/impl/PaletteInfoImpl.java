@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PaletteInfoImpl.java,v 1.5 2007/04/16 19:55:08 itrimble Exp $
+ * $Id: PaletteInfoImpl.java,v 1.6 2007/09/25 00:31:41 cbateman Exp $
  */
 package org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl;
 
@@ -31,7 +31,7 @@ import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.TagCreationInfo
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl.PaletteInfoImpl#getId <em>Id</em>}</li>
- *   <li>{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl.PaletteInfoImpl#getTag <em>Tag</em>}</li>
+ *   <li>{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl.PaletteInfoImpl#getTag() <em>Tag</em>}</li>
  *   <li>{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl.PaletteInfoImpl#getDisplayLabel <em>Display Label</em>}</li>
  *   <li>{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl.PaletteInfoImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl.PaletteInfoImpl#getExpert <em>Expert</em>}</li>
@@ -322,9 +322,9 @@ public class PaletteInfoImpl extends EObjectImpl implements PaletteInfo {
 	 * @generated NOT
 	 */
 	private EObject getTagTraitValue(final String tagName, final String traitKey) {
-		Entity tag = getTag(tagName);
-		if (tag != null){
-			for (Iterator it=tag.getTraits().iterator();it.hasNext();){
+		Entity tag_ = getTag(tagName);
+		if (tag_ != null){
+			for (Iterator it=tag_.getTraits().iterator();it.hasNext();){
 				Trait trait = (Trait)it.next();
 				if (traitKey.equals(trait.getId()))
 					return trait.getValue(); 	
@@ -361,9 +361,9 @@ public class PaletteInfoImpl extends EObjectImpl implements PaletteInfo {
 	 */
 	private Entity findTag(Model model, String tagid) {
 		for (Iterator it=model.getChildEntities().iterator();it.hasNext();){
-			Entity tag = (Entity)it.next();
-			if (tagid.equals(tag.getId()))
-					return tag;
+			Entity tag_ = (Entity)it.next();
+			if (tagid.equals(tag_.getId()))
+					return tag_;
 		}
 		return null;
 	}
@@ -517,6 +517,7 @@ public class PaletteInfoImpl extends EObjectImpl implements PaletteInfo {
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @return the tag creation info 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
