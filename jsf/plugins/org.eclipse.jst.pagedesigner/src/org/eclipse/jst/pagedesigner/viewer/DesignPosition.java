@@ -21,6 +21,9 @@ import org.w3c.dom.Text;
  * @author mengbo
  */
 public class DesignPosition {
+	/**
+	 * a singleton that can be used as an invalid position
+	 */
 	public static final DesignPosition INVALID = new DesignPosition(null, -1);
 
 	private EditPart _containerPart;
@@ -41,12 +44,15 @@ public class DesignPosition {
 	/**
 	 * if _containerPart is null, means it is invalid
 	 * 
-	 * @return
+	 * @return the container edit part
 	 */
 	public EditPart getContainerPart() {
 		return _containerPart;
 	}
 
+	/**
+	 * @return the container node
+	 */
 	public Node getContainerNode() {
 		if (_containerPart != null) {
 			return (Node) _containerPart.getModel();
@@ -57,12 +63,15 @@ public class DesignPosition {
 	/**
 	 * if offset < 0, means it is invalid.
 	 * 
-	 * @return
+	 * @return the offset
 	 */
 	public int getOffset() {
 		return _offset;
 	}
 
+	/**
+	 * @return true if the design position is valid
+	 */
 	public boolean isValid() {
 		return (_containerPart != null) && (_offset >= 0);
 	}
@@ -71,7 +80,9 @@ public class DesignPosition {
 	 * This method should not be called when is text node.
 	 * 
 	 * @param forward
-	 * @return
+	 * @return the sibling part one to right in the tree if 
+	 * forward == true, one to the left if forward == false.  May
+	 * return null if position is invalid or there is no valid sibling.
 	 */
 	public EditPart getSiblingEditPart(boolean forward) {
 		if (!isValid()) {
@@ -92,7 +103,7 @@ public class DesignPosition {
 	 * factory method
 	 * 
 	 * @param part
-	 * @return
+	 * @return a design position one before part
 	 */
 	public static DesignPosition createPositionBeforePart(EditPart part) {
 		EditPart parent = part.getParent();
@@ -108,7 +119,7 @@ public class DesignPosition {
 	 * factory method
 	 * 
 	 * @param part
-	 * @return
+	 * @return the design position for one after part
 	 */
 	public static DesignPosition createPositionAfterPart(EditPart part) {
 		EditPart parent = part.getParent();
@@ -126,6 +137,11 @@ public class DesignPosition {
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	public boolean equals(Object obj) {
+	    if (obj == this)
+	    {
+	        return true;
+	    }
+	    
 		if (obj instanceof DesignPosition) {
 			DesignPosition p = (DesignPosition) obj;
 
@@ -136,10 +152,15 @@ public class DesignPosition {
 		return false;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
+	
+	@Override
+    public int hashCode() {
+	    return System.identityHashCode(_containerPart) ^ System.identityHashCode(Integer.valueOf(_offset));
+    }
+
+	/**
+	 * @param buffer
+	 * @return the buffer with the debug dump
 	 */
 	public StringBuffer debugDump(StringBuffer buffer) {
 //		try {
