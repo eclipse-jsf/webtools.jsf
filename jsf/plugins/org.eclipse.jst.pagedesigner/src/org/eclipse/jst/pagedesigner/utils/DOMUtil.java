@@ -26,6 +26,12 @@ import org.w3c.dom.Text;
  * @author mengbo
  */
 public class DOMUtil {
+	/**
+	 * @param parent
+	 * @param tag
+	 * @return the list of child elements  of parent that are Elements
+	 * and that have name 'tag' ignoring case
+	 */
 	public static List getChildElementsByTagIgnoreCase(Element parent,
 			String tag) {
 		List ret = new ArrayList();
@@ -44,7 +50,8 @@ public class DOMUtil {
 
 	/**
 	 * @param ele
-	 * @return
+	 * @return the element value of the TEXT_NODE children of element
+	 * concat'd together
 	 */
 	public static String getTextElementValue(Element ele) {
 		StringBuffer buffer = new StringBuffer();
@@ -63,7 +70,8 @@ public class DOMUtil {
 	/**
 	 * @param element
 	 * @param string
-	 * @return
+	 * @return the attribute named string on element ignoring case in the comparison
+	 * or null if not found
 	 */
 	public static String getAttributeIgnoreCase(Element element, String string) {
 		NamedNodeMap map = element.getAttributes();
@@ -77,9 +85,9 @@ public class DOMUtil {
 	}
 
 	/**
-	 * @param tr
-	 * @param strings
-	 * @return
+	 * @param parent
+	 * @param tags
+	 * @return the list of children of parent with name in tags ignoring case
 	 */
 	public static List getChildrenByTagsIgnoreCase(Element parent, String[] tags) {
 		List result = new ArrayList();
@@ -99,10 +107,17 @@ public class DOMUtil {
 		return result;
 	}
 
+	/**
+	 * @param ele
+	 */
 	public static void removeAllChildren(Element ele) {
 		((ElementImpl) ele).removeChildNodes();
 	}
 
+	/**
+	 * @param ele
+	 * @param value
+	 */
 	public static void setTextElementValue(Element ele, String value) {
 		removeAllChildren(ele);
 		Text txt = ele.getOwnerDocument().createTextNode(value);
@@ -110,10 +125,11 @@ public class DOMUtil {
 	}
 
 	/**
-	 * @param htmlElement
-	 * @param string
-	 * @param i
-	 * @return
+	 * @param ele 
+	 * @param attr 
+	 * @param defaultvalue 
+	 * @return the integer attribute of ele called attr.  Default value
+	 * is returned if the attribute is not found.
 	 */
 	public static int getIntAttributeIgnoreCase(Element ele, String attr,
 			int defaultvalue) {
@@ -135,7 +151,7 @@ public class DOMUtil {
 	 * get all child elements
 	 * 
 	 * @param ele
-	 * @return
+	 * @return the list of element children of type ELEMENT_NODE
 	 */
 	public static List getElementChildren(Element ele) {
 		List ret = new ArrayList();
@@ -154,7 +170,8 @@ public class DOMUtil {
 	 * 
 	 * @param ele
 	 * @param attrName
-	 * @return
+	 * @return true if element has attribute called attrName ignoring
+	 * case  in the comparison.
 	 */
 	public static boolean hasAttribute(Element ele, String attrName) {
 		NamedNodeMap map = ele.getAttributes();
@@ -167,6 +184,10 @@ public class DOMUtil {
 		return false;
 	}
 
+	/**
+	 * @param node
+	 * @param sb
+	 */
 	public static void nodeToString(Node node, StringBuffer sb) {
 		int type = node.getNodeType();
 		switch (type) {

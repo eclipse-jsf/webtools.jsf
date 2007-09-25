@@ -29,7 +29,7 @@ public class JavaUtil {
 	 * 
 	 * @param javaProject
 	 * @param parent
-	 * @return
+	 * @return the path in javaProject or new Path("") if not found on a class path
 	 * @author mengbo
 	 */
 	public static IPath getPathOnClasspath(IJavaProject javaProject,

@@ -24,7 +24,7 @@ public class HTMLUtil {
 	 * check whether a char is a HTML whitespace.
 	 * 
 	 * @param ch
-	 * @return
+	 * @return true if ch is considered to be HTML whitespace
 	 * @see <a href="http://www.w3.org/TR/html4/struct/text.html#h-9.1">white
 	 *      space </a>
 	 */
@@ -35,7 +35,7 @@ public class HTMLUtil {
 
 	/**
 	 * @param text
-	 * @return
+	 * @return true if the entire string is considered to be HTML whitespace
 	 */
 	public static boolean isHTMLWhitespaceString(String text) {
 		for (int i = 0, size = text.length(); i < size; i++) {
@@ -46,7 +46,10 @@ public class HTMLUtil {
 		return true;
 	}
 
-	public static final String[] HiddenTags = new String[] {
+	/**
+	 * the HTML tags considered to be hidden
+	 */
+	static final String[] HiddenTags = new String[] {
 			IHTMLConstants.TAG_APPLET, IHTMLConstants.TAG_AREA,
 			IHTMLConstants.TAG_BASE, IHTMLConstants.TAG_BASEFONT,
 			IHTMLConstants.TAG_HEAD, IHTMLConstants.TAG_IFRAME,
@@ -56,6 +59,10 @@ public class HTMLUtil {
 			IHTMLConstants.TAG_STYLE, IHTMLConstants.TAG_TITLE,
 			IHTMLConstants.TAG_PARAM };
 
+	/**
+	 * @param tag
+	 * @return true if the tag name is not in the list of hidden tags
+	 */
 	public static boolean isVisualHtmlElement(String tag) {
 		return !Arrays.asList(HiddenTags).contains(tag.toLowerCase());
 	}
@@ -66,10 +73,10 @@ public class HTMLUtil {
 	 * tag close.
 	 * <p>
 	 * For consequent whitespace, will compact them.
-	 * 
-	 * @param data
-	 * @return
-	 * @see http://www.w3.org/TR/html4/struct/text.html#h-9.1
+	 * @param textNode 
+	 * @param s 
+	 * @return the compacted string
+	 * see http://www.w3.org/TR/html4/struct/text.html#h-9.1
 	 */
 	// XXX: currently, the whitespace handling is in this class, in the future
 	// may consider move it

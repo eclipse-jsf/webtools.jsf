@@ -22,16 +22,26 @@ public class IntFlexArray {
 
 	int size = 0;
 
+	/**
+	 * Create a new flex array with default capacity
+	 */
 	public IntFlexArray() {
 		this(10);
 	}
 
+	/**
+	 * @param initCapacity
+	 */
 	public IntFlexArray(int initCapacity) {
 		if (initCapacity <= 0)
 			initCapacity = 10;
 		array = new int[initCapacity];
 	}
 
+	/**
+	 * @param idx
+	 * @param obj
+	 */
 	public void setAt(int idx, int obj) {
 		ensureCapacity(idx + 1);
 		array[idx] = obj;
@@ -39,12 +49,19 @@ public class IntFlexArray {
 			size = idx + 1;
 	}
 
+	/**
+	 * @param idx
+	 * @return the value at idx or 0 if idx is out of bounds
+	 */
 	public int getAt(int idx) {
 		if (idx < array.length)
 			return array[idx];
         return 0;
 	}
 
+	/**
+	 * @return the current size of the array
+	 */
 	public int getSize() {
 		return size;
 	}

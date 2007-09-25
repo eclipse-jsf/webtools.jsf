@@ -34,6 +34,10 @@ public class CacheManager {
 	// keep track of LRU
 	LinkedList _keys = new LinkedList();
 
+	/**
+	 * @param creator
+	 * @param maxSize
+	 */
 	public CacheManager(ICacheEntryCreator creator, int maxSize) {
 		_creator = creator;
 		_maxSize = maxSize;
@@ -42,6 +46,10 @@ public class CacheManager {
 		}
 	}
 
+	/**
+	 * @param key
+	 * @return the cache entry for key
+	 */
 	public Object getEntry(Object key) {
 		Object result = _map.get(key);
 		if (result == null) {
@@ -62,6 +70,9 @@ public class CacheManager {
         return result;
 	}
 
+	/**
+	 * Dispose the cache
+	 */
 	public void disposeAll() {
 		_keys.clear();
 		for (Iterator iter = _map.keySet().iterator(); iter.hasNext();) {

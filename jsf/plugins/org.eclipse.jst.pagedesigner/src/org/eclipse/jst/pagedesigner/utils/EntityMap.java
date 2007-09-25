@@ -20,6 +20,10 @@ import org.eclipse.jst.pagedesigner.PDPlugin;
 public class EntityMap {
 	private static Logger _log = PDPlugin.getLogger(EntityMap.class);
 
+	/**
+	 * @param s
+	 * @return s translated for HTML entities.
+	 */
 	public static String translate(String s) {
 		char[] array = s.toCharArray();
 		StringBuffer buffer = new StringBuffer();
@@ -64,6 +68,8 @@ public class EntityMap {
 	 * Translate entity maps and compact whitespace. For heading and training
 	 * space, will not trim, only compact (making multiple whitespace to become
 	 * a single ' ' char).
+	 * @param s 
+	 * @return the result string.
 	 */
 	public static String translateAndCompact(String s) {
 		char[] array = s.toCharArray();
@@ -121,6 +127,8 @@ public class EntityMap {
 	 * 
 	 * @param s
 	 *            the form &#number or &letterordigit without the trailing ";"
+	 * @param strBuf 
+	 * @return true  the translation can be done
 	 */
 	public static boolean translateEntity(String s, StringBuffer strBuf) {
 		int i = HTMLSpecialCharHelper.getSpecial(s); // HTMLSpecialCharHelper
@@ -160,7 +168,7 @@ public class EntityMap {
 	 * 
 	 * @param n
 	 * @return
-	 * @see http://www.w3.org/Talks/1999/0830-tutorial-unicode-mjd/slide27-0.html
+	 * see http://www.w3.org/Talks/1999/0830-tutorial-unicode-mjd/slide27-0.html
 	 */
 	private static char replaceBadEntity(char n) {
 		if (n < 132 || n > 156)
