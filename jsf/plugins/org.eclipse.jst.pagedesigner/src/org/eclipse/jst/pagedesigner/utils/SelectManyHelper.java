@@ -12,8 +12,10 @@
 package org.eclipse.jst.pagedesigner.utils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.jst.jsf.core.internal.tld.CMUtil;
 import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
@@ -31,37 +33,29 @@ import org.w3c.dom.NodeList;
  * @author mengbo
  */
 public class SelectManyHelper {
-//	private static final String OPTION_VISUAL_PREFIX = "option: "; //$NON-NLS-1$
-//
-//	private static final String OPTION_VISUAL_PREFIX_BINDING = "option(binding): "; //$NON-NLS-1$
-//
-//	private static final String OPTION_VISUAL_PREFIX_VALUE = "option(value): "; //$NON-NLS-1$
 
-	private static final String NO_VALUE = "<no value>"; //$NON-NLS-1$
+	private final static Set<String> JSF_SELECT_TAGS, HTML_SELECT_TAGS;
 
-	public static HashSet JSF_SELECT_TAGS, HTML_SELECT_TAGS;
-
-	public static HashSet HTML_SELECT_TAG_OPTIONS, JSF_SELECT_TAG_OPTIONS;
 
 	static {
-		HTML_SELECT_TAGS = new HashSet(10);
-		HTML_SELECT_TAGS.add(IHTMLConstants.TAG_SELECT);
-		HTML_SELECT_TAGS.add(IHTMLConstants.TAG_OPTGROUP);
-		HTML_SELECT_TAG_OPTIONS = new HashSet(10);
-		HTML_SELECT_TAG_OPTIONS.add(IHTMLConstants.TAG_OPTGROUP);
-		HTML_SELECT_TAG_OPTIONS.add(IHTMLConstants.TAG_OPTION);
-
-		JSF_SELECT_TAG_OPTIONS = new HashSet(10);
-		JSF_SELECT_TAG_OPTIONS.add(IJSFConstants.TAG_SELECTITEM);
-		JSF_SELECT_TAG_OPTIONS.add(IJSFConstants.TAG_SELECTITEMS);
-		JSF_SELECT_TAGS = new HashSet(10);
-		JSF_SELECT_TAGS.add(IJSFConstants.TAG_SELECTONELISTBOX);
-		JSF_SELECT_TAGS.add(IJSFConstants.TAG_SELECTONEMENU);
-		JSF_SELECT_TAGS.add(IJSFConstants.TAG_SELECTMANYLISTBOX);//
-		JSF_SELECT_TAGS.add(IJSFConstants.TAG_SELECTMANYMENU);//
-		JSF_SELECT_TAGS.add(IJSFConstants.TAG_SELECTMANYCHECKBOX);
+		Set<String> tempSet = new HashSet<String>(4);
+		tempSet.add(IHTMLConstants.TAG_SELECT);
+		tempSet.add(IHTMLConstants.TAG_OPTGROUP);
+		HTML_SELECT_TAGS = Collections.unmodifiableSet(tempSet);
+		
+		tempSet = new HashSet(8);
+		tempSet.add(IJSFConstants.TAG_SELECTONELISTBOX);
+		tempSet.add(IJSFConstants.TAG_SELECTONEMENU);
+		tempSet.add(IJSFConstants.TAG_SELECTMANYLISTBOX);//
+		tempSet.add(IJSFConstants.TAG_SELECTMANYMENU);//
+		tempSet.add(IJSFConstants.TAG_SELECTMANYCHECKBOX);
+		JSF_SELECT_TAGS = Collections.unmodifiableSet(tempSet);
 	}
 
+	/**
+	 * @param node
+	 * @return the select option children of node
+	 */
 	public static Object[] getSelectOptions(Element node) {
 		if (node == null) {
 			return null;
@@ -115,6 +109,10 @@ public class SelectManyHelper {
 		return null;
 	}
 
+	/**
+	 * @param node
+	 * @return the selection option children of node as strings
+	 */
 	public static String[] getSelectOptionsString(Element node) {
 		if (node == null) {
 			return null;
@@ -144,6 +142,10 @@ public class SelectManyHelper {
 		return (String[]) result.toArray(new String[] {});
 	}
 
+	/**
+	 * @param node
+	 * @return true if node has select option children
+	 */
 	public static boolean hasSelectOptions(Element node) {
 		if (node == null) {
 			return false;
@@ -177,6 +179,10 @@ public class SelectManyHelper {
 		return false;
 	}
 
+	/**
+	 * @param node
+	 * @return true if node is a core or HTML select tag
+	 */
 	public static boolean supportSections(Element node) {
 		String uri = CMUtil.getElementNamespaceURI(node);
 		if (ITLDConstants.URI_JSF_HTML.equals(uri)) {
@@ -186,25 +192,5 @@ public class SelectManyHelper {
 			return HTML_SELECT_TAGS.contains(node.getNodeName().toLowerCase());
 		}
 		return false;
-	}
-
-	public static String getJsfSelectionVisualLabel(Element element) {
-		/*
-		 * if (ele.getAttribute(ICSSPropertyID.ATTR_ITEMLABEL) != null) { return
-		 * OPTION_VISUAL_PREFIX +
-		 * ele.getAttribute(ICSSPropertyID.ATTR_ITEMLABEL); //$NON-NLS-1$ } else
-		 * if (ele.getAttribute(ICSSPropertyID.ATTR_BINDING) != null) { return
-		 * OPTION_VISUAL_PREFIX_BINDING +
-		 * ele.getAttribute(ICSSPropertyID.ATTR_BINDING); //$NON-NLS-1$ } else
-		 * if (ele.getAttribute(ICSSPropertyID.ATTR_ITEMVALUE) != null) { return
-		 * OPTION_VISUAL_PREFIX_VALUE +
-		 * ele.getAttribute(ICSSPropertyID.ATTR_ITEMVALUE); //$NON-NLS-1$ }
-		 * 
-		 * return NO_VALUE; //$NON-NLS-1$
-		 */
-		if (element != null) {
-			return element.getNodeName();
-		}
-        return NO_VALUE;
 	}
 }
