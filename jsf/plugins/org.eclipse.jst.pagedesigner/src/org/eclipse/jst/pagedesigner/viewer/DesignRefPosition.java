@@ -23,7 +23,7 @@ public class DesignRefPosition extends DesignPosition {
 
 	/**
 	 * @param part
-	 * @param offset
+	 * @param caretIsAfter
 	 */
 	public DesignRefPosition(EditPart part, boolean caretIsAfter) {
 		super(part.getParent(), 0);
@@ -33,6 +33,9 @@ public class DesignRefPosition extends DesignPosition {
 		_caretIsAtRight = caretIsAfter;
 	}
 
+	/**
+	 * @return the reference edit part
+	 */
 	public EditPart getRefPart() {
 		return _refPart;
 	}
