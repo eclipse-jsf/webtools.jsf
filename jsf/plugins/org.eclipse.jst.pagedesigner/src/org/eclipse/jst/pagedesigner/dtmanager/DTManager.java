@@ -29,7 +29,7 @@ import org.w3c.dom.Element;
 public class DTManager {
 
 	private static DTManager instance;
-	private IDTInfoFactory dtInfoFactory;
+	private IDTInfoFactory _dtInfoFactory;
 
 	private DTManager() {
         // no external instantiation
@@ -108,10 +108,10 @@ public class DTManager {
 	 * @return An IDTInfoFactory instance for the specified namespace URI.
 	 */
 	protected IDTInfoFactory getDTInfoFactory(String nsURI) {
-		if (dtInfoFactory == null) {
-			dtInfoFactory = new DefaultDTInfoFactory();
+		if (_dtInfoFactory == null) {
+			_dtInfoFactory = new DefaultDTInfoFactory();
 		}
-		return dtInfoFactory;
+		return _dtInfoFactory;
 	}
 
 }
