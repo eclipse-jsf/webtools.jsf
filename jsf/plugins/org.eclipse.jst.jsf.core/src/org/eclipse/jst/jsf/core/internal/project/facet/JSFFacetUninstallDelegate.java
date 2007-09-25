@@ -57,8 +57,11 @@ public final class JSFFacetUninstallDelegate implements IDelegate {
 
 			try {
 				// Remove JSF Libraries
-				removeJSFLibaries(project, fv, monitor);
-
+				removeJSFLibraries(project, fv, monitor);
+				
+				//Remove Runtime contributed JSF classpath entries
+				removeRuntimeContributedJSFClasspathEntries(project, fv, monitor);
+				
 				// remove servlet stuff from web.xml
 				uninstallJSFReferencesFromWebApp(project, monitor);
 
@@ -78,7 +81,7 @@ public final class JSFFacetUninstallDelegate implements IDelegate {
 	 * @param project
 	 * @param monitor
 	 */
-	private void removeJSFLibaries(final IProject project, final IProjectFacetVersion fv, final IProgressMonitor monitor) {
+	private void removeJSFLibraries(final IProject project, final IProjectFacetVersion fv, final IProgressMonitor monitor) {
 		 final IJavaProject jproj = JavaCore.create(project);
 		 List keptEntries = new ArrayList();
 		 try {
@@ -86,9 +89,7 @@ public final class JSFFacetUninstallDelegate implements IDelegate {
 			  keptEntries = new ArrayList();
 			 for (int i=0;i<entries.length;i++){
 				 IClasspathEntry entry = entries[i];
-				 if (entry.getEntryKind() == IClasspathEntry.CPE_CONTAINER && 
-						 ! entry.getPath().segment(0)
-						 	.equals(JSFLibraryConfigurationHelper.JSF_LIBRARY_CP_CONTAINER_ID))
+				 if ( !(JSFLibraryConfigurationHelper.isJSFLibraryContainer(entry)))
 					 keptEntries.add(entry);
 			 }
 		} catch (JavaModelException e) {
@@ -103,6 +104,10 @@ public final class JSFFacetUninstallDelegate implements IDelegate {
 			}
 		 }	
 		
+
+	}
+	
+	private void removeRuntimeContributedJSFClasspathEntries(final IProject project, final IProjectFacetVersion fv, final IProgressMonitor monitor) {
 		try {
 			ClasspathHelper.removeClasspathEntries(project, fv);				
 		} catch (CoreException e) {
