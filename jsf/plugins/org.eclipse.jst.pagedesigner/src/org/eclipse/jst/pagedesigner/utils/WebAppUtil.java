@@ -26,6 +26,11 @@ import org.eclipse.wst.common.componentcore.resources.IVirtualResource;
 public class WebAppUtil {
 	private final static String FACES_SERVLET_NAME = "javax.faces.webapp.FacesServlet";
 
+	/**
+	 * @param url
+	 * @param openedFile
+	 * @return the transformed url
+	 */
 	public static String transformJSPURL(String url, IFile openedFile) {
 		boolean canSupportJSF = JSPUtil.supportTaglib(
 				ITLDConstants.URI_JSF_HTML, openedFile);
