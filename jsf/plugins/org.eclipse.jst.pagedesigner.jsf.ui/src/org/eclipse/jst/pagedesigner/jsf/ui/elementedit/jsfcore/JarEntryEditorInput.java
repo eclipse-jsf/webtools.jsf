@@ -51,6 +51,15 @@ public class JarEntryEditorInput implements IStorageEditorInput
         return fJarEntryFile.equals(other.fJarEntryFile);
     }
 
+    
+    @Override
+    public int hashCode() 
+    {
+        // two editor inputs are equal if their fJarEntryFile's are
+        // equal.  Therefore use the same criteria for hashcodes
+        return fJarEntryFile.hashCode();
+    }
+
     /*
      * @see IEditorInput#getPersistable()
      */
