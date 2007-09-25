@@ -71,8 +71,8 @@ import org.w3c.dom.Node;
 		// CaretUpdater is not fully initialized yet, since this time the
 		// viewport is not
 		// initialized yet, and we need add listener to range model change.
+        _htmlViewerListeners = new ArrayList<IHTMLGraphicalViewerListener>();
 		_caretUpdater = new CaretUpdater(this);
-		_htmlViewerListeners = new ArrayList<IHTMLGraphicalViewerListener>();
 	}
 
 	/**
