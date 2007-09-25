@@ -72,7 +72,7 @@ public class PageFlowContributor implements IContextMenuItemContributor
         }
     }
 
-    class PageFlowAction extends Action
+    private static class PageFlowAction extends Action
     {
         /**
          * this action's id
