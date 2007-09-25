@@ -62,9 +62,9 @@ public class JSFHtmlDataTableColumnsSection extends BaseCustomSection
     private TableViewer            _columnsViewer;
     private Button                 _addButton, _removeButton, _moveUpButton, _moveDownButton;
 
-    final private String           DEFAULT_COLUMN_NAME = "column"; //$NON-NLS-1$
-    final private String           DEFAULT_FACET_NAME  = "header"; //$NON-NLS-1$
-    final private String           DEFAULT_TEXT_NAME   = "text"; //$NON-NLS-1$
+    final static private String           DEFAULT_COLUMN_NAME = "column"; //$NON-NLS-1$
+    final static private String           DEFAULT_FACET_NAME  = "header"; //$NON-NLS-1$
+    final static private String           DEFAULT_TEXT_NAME   = "text"; //$NON-NLS-1$
 
     class ColumnCotentLabelProvider implements IStructuredContentProvider, ITableLabelProvider
     {
@@ -169,6 +169,9 @@ public class JSFHtmlDataTableColumnsSection extends BaseCustomSection
 
     }
 
+    /**
+     * default constructor
+     */
     public JSFHtmlDataTableColumnsSection()
     {
         super();
