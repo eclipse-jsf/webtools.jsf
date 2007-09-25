@@ -28,22 +28,38 @@ import org.eclipse.gef.requests.DropRequest;
 import org.eclipse.jst.pagedesigner.parts.ElementEditPart;
 import org.eclipse.jst.pagedesigner.validation.caret.IPositionMediator;
 
+/**
+ * A default implementation of the drop location strategy
+ * @author cbateman
+ *
+ */
 public class DefaultDropLocationStrategy extends AbstractDropLocationStrategy 
 {
     // the amount of vertical offset below the mouse pointer to place
     // the upper left of the drop hint tooltip
     private static final int DROP_HINT_VERTICAL_OFFSET = 20;
 
+    /**
+     * @param viewer
+     */
     public DefaultDropLocationStrategy(EditPartViewer viewer) {
         super(viewer);
     }
 
+    /* (non-Javadoc)
+     * @see org.eclipse.jst.pagedesigner.viewer.AbstractDropLocationStrategy#calculateDesignPosition(org.eclipse.gef.EditPart, org.eclipse.draw2d.geometry.Point, org.eclipse.jst.pagedesigner.validation.caret.IPositionMediator)
+     */
+    @Override
     public DesignPosition calculateDesignPosition(EditPart host, Point p,
             IPositionMediator validator) {
         return EditPartPositionHelper.findEditPartPosition(
                 host, p, validator);
     }
 
+    /* (non-Javadoc)
+     * @see org.eclipse.jst.pagedesigner.viewer.AbstractDropLocationStrategy#showTargetFeedback(org.eclipse.gef.EditPart, org.eclipse.jst.pagedesigner.viewer.DesignPosition, org.eclipse.gef.requests.DropRequest)
+     */
+    @Override
     public List showTargetFeedback(EditPart host, DesignPosition position, DropRequest request) 
     {
         List feedback = new ArrayList(4);
@@ -55,6 +71,10 @@ public class DefaultDropLocationStrategy extends AbstractDropLocationStrategy
 
     
     
+    /**
+     * @param rect
+     * @return the default rectangle figure for the requested visual rectangle
+     */
     protected final RectangleFigure showFeedbackRect(Rectangle rect) {
         RectangleFigure pf = createFeedbackFigure();
         pf.translateToRelative(rect);
@@ -62,6 +82,11 @@ public class DefaultDropLocationStrategy extends AbstractDropLocationStrategy
         return pf;
     }
     
+    /**
+     * @param position
+     * @return the bounding rectangle for the caret at the current
+     * position in absolute coords
+     */
     protected Rectangle createCaretBounds(DesignPosition position)
     {
         Rectangle rect = EditPartPositionHelper
@@ -73,6 +98,9 @@ public class DefaultDropLocationStrategy extends AbstractDropLocationStrategy
         return rect;
     }
     
+    /**
+     * @return the newly created feedback figure
+     */
     protected RectangleFigure createFeedbackFigure() 
     {
         RectangleFigure feedbackFigure = new RectangleFigure();
@@ -90,6 +118,9 @@ public class DefaultDropLocationStrategy extends AbstractDropLocationStrategy
      * Shows a label in a position relative to the drop marker
      * that hints where the new component will be dropped in
      * respect of components already there
+     * @param mousePosition 
+     * @param position 
+     * @return the drop hint label
      */
     protected final Label showDropHintLabel(Point mousePosition, DesignPosition position)
     {
@@ -128,6 +159,10 @@ public class DefaultDropLocationStrategy extends AbstractDropLocationStrategy
         return dropHintLabel;
     }
     
+    /**
+     * @param position
+     * @return the drop hint text for the current position
+     */
     protected String getDropHintText(DesignPosition position)
     {
         StringBuffer buffer = new StringBuffer("Place");
