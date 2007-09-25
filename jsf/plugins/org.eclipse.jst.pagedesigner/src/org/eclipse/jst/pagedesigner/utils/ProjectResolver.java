@@ -45,6 +45,10 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+/**
+ * A URIResolver implementation
+ *
+ */
 public class ProjectResolver implements URIResolver {
 	private static final String TLD_TAG_URI = "uri";
 
@@ -66,12 +70,16 @@ public class ProjectResolver implements URIResolver {
 	 * project.getAdapter(URIResolver.class) to obtain a URIResolver aware of
 	 * the Project's special requirements. Note that a URIResolver may not be
 	 * returned at all so manually creating this object may still be required.
+	 * @param project
 	 */
 	public ProjectResolver(IProject project) {
 		super();
 		_project = project;
 	}
 
+	/**
+	 * @param path
+	 */
 	public void seekTld(IFolder path) {
 		if (path == null) {
 			return;
@@ -104,6 +112,9 @@ public class ProjectResolver implements URIResolver {
 		}
 	}
 
+	/**
+	 * @param path
+	 */
 	public void seekTld(File path) {
 		if (path == null || !path.isDirectory()) {
 			return;
@@ -140,12 +151,16 @@ public class ProjectResolver implements URIResolver {
 		}
 	}
 
+	/**
+	 * @param tldFile
+	 * @return the uri for the tld in tldFile or null
+	 */
 	public String getURIfromTLD(File tldFile) {
 
 		if (tldFile == null) {
 			return null;
 		}
-		IDOMModel tldModel;
+		IDOMModel tldModel = null;
 
 		InputStream in = null;
 		try {
@@ -156,7 +171,7 @@ public class ProjectResolver implements URIResolver {
 //		IDOMModel xmlModel = null;
 
 		try {
-			tldModel = (IDOMModel) PDPlugin.getModelManager().getModelForRead(
+			tldModel = (IDOMModel) StructuredModelManager.getModelManager().getModelForRead(
 					tldFile.getAbsolutePath(), in, null);
 			NodeList uriList = tldModel.getDocument().getElementsByTagName(
 					TLD_TAG_URI);
@@ -170,11 +185,20 @@ public class ProjectResolver implements URIResolver {
 			_log.error("RenderingTraverser.Error.IO", e1);
 		} finally {
 			ResourceUtils.ensureClosed(in);
+			
+			if (tldModel != null)
+			{
+			    tldModel.releaseFromRead();
+			}
 		}
 
 		return null;
 	}
 
+	/**
+	 * @param tldFile
+	 * @return the URI for the TLD in tldFile or null
+	 */
 	public String getURIfromTLD(IFile tldFile) {
 		if (tldFile == null) {
 			return null;
@@ -198,6 +222,9 @@ public class ProjectResolver implements URIResolver {
 		return null;
 	}
 
+	/**
+	 * initialize the map of tlds
+	 */
 	public void initTldMap() {
 		if (_uriMap == null) {
 			_uriMap = new HashMap();
@@ -424,7 +451,7 @@ public class ProjectResolver implements URIResolver {
 		// a.) if path has a device, and if it begins with IPath.SEPARATOR,
 		// remove it
 		final String device = path.getDevice();
-		if ((device != null) && (device.length() > 0)) {
+		if (device != null && device.length() > 0) {
 			if (device.charAt(0) == IPath.SEPARATOR) {
 				final String newDevice = device.substring(1);
 				newPath = path.setDevice(newDevice);
@@ -432,12 +459,17 @@ public class ProjectResolver implements URIResolver {
 		}
 		// b.) if it has a hostname, it is UNC name... Any java or eclipse api
 		// helps it ??
-		if (path != null && host != null && host.length() != 0) {
+		if (newPath != null && host != null && host.length() != 0) {
 			IPath uncPath = new Path(host);
 			uncPath = uncPath.append(path);
 			newPath = uncPath.makeUNC(true);
 		}
-		return newPath.toString();
+		
+		if (newPath != null)
+		{
+		    return newPath.toString();
+		}
+		return path.toString();
 	}
 
 	/**
