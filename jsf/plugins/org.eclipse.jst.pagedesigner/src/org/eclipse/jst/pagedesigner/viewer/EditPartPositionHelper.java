@@ -531,29 +531,29 @@ public class EditPartPositionHelper {
 	 * @return
 	 */
 	private static EditPart tryTwoWays(DesignPosition position,
-			List caretRefResult) {
+			List<Boolean> caretRefResult) {
 		EditPart result = null;
 		// Sibling first:
 		Node node = EditModelQuery.getInstance().getSibling(
 				DOMPositionHelper.toDOMPosition(position), true);
 		if (node != null && !EditModelQuery.isTransparentText(node)) {
 			result = Target.resolvePart(node);
-			caretRefResult.add(new Boolean(false));
+			caretRefResult.add(Boolean.FALSE);
 		} else {
 			node = EditModelQuery.getInstance().getSibling(
 					DOMPositionHelper.toDOMPosition(position), false);
 			if (node != null && !EditModelQuery.isTransparentText(node)) {
 				result = Target.resolvePart(node);
-				caretRefResult.add(new Boolean(true));
+				caretRefResult.add(Boolean.TRUE);
 			}
 		}
 		if (result == null) {
 			if (getConcretePart(position, false) != null) {
 				result = getConcretePart(position, false);
-				caretRefResult.add(new Boolean(true));
+				caretRefResult.add(Boolean.TRUE);
 			} else if (getConcretePart(position, true) != null) {
 				result = getConcretePart(position, true);
-				caretRefResult.add(new Boolean(false));
+				caretRefResult.add(Boolean.FALSE);
 			}
 		}
 		return result;
@@ -564,13 +564,13 @@ public class EditPartPositionHelper {
 	 * still need to improve whitespace tags's layout furthure more.
 	 */
 	private static EditPart getNextConcretPart(DesignPosition position,
-			List caretIsAtRightTest) {
+			List<Boolean> caretIsAtRightTest) {
 		EditPart result = null;
 		boolean caretIsAtRight = true;
 		if (position instanceof DesignRefPosition) {
 			caretIsAtRight = ((DesignRefPosition) position).caretIsAtRight();
 			result = ((DesignRefPosition) position).getRefPart();
-			caretIsAtRightTest.add(new Boolean(caretIsAtRight));
+			caretIsAtRightTest.add(Boolean.valueOf(caretIsAtRight));
 		}
 		if (result == null
 				|| EditModelQuery.isTransparentText(Target.resolveNode(result))) {
@@ -637,13 +637,13 @@ public class EditPartPositionHelper {
 	}
 
 	private static Rectangle getRefRect(DesignPosition position) {
-		List caretLocation = new ArrayList();
+		List<Boolean> caretLocation = new ArrayList<Boolean>();
 		EditPart part = getNextConcretPart(position, caretLocation);
 		LayoutPart layoutPart;
 		Rectangle rect = null;
 		if (part != null) {
 			layoutPart = new LayoutPart(part, null);
-			boolean caretIsAtRight = ((Boolean) caretLocation.get(0))
+			boolean caretIsAtRight = caretLocation.get(0)
 					.booleanValue();
 			final int CARET_OFFSET = 1;
 			Rectangle bounds = null;
