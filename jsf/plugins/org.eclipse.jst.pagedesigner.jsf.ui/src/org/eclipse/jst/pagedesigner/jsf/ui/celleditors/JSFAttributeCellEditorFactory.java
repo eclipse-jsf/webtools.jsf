@@ -46,33 +46,15 @@ public class JSFAttributeCellEditorFactory implements IAttributeCellEditorFactor
     public CellEditor createCellEditor(Composite parent, IAttributeDescriptor attr, Element element)
     {
         String type = attr.getValueType();
-        String[] results = null;
+
         if (type.equalsIgnoreCase(CONVERTERID))
         {
-        	// XXX
-            // results = FacesUtil.getRegisteredConverterIds(project);
             Map map = new HashMap();
-            if (results != null)
-            {
-                for (int i = 0; i < results.length; i++)
-                {
-                    map.put(results[i], results[i]);
-                }
-            }
             return LabeledComboBoxCellEditor.newInstance(parent, map, SWT.NONE);
         }
         else if (type.equalsIgnoreCase(VALIDATORID))
         {
-        	// XXX
-            // results = FacesUtil.getRegisteredValidatorIds(project);
             Map map = new HashMap();
-            if (results != null)
-            {
-                for (int i = 0; i < results.length; i++)
-                {
-                    map.put(results[i], results[i]);
-                }
-            }
             return LabeledComboBoxCellEditor.newInstance(parent, map, SWT.NONE);
         }
         return null;

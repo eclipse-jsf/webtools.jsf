@@ -11,8 +11,6 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.jsf.ui.celleditors;
 
-import java.util.Arrays;
-
 import org.eclipse.jst.jsf.common.ui.internal.dialogfield.ComboDialogField;
 import org.eclipse.jst.pagedesigner.properties.attrgroup.IElementContextable;
 import org.eclipse.swt.SWT;
@@ -40,25 +38,7 @@ public class ConverterValidatorIdDialogField extends ComboDialogField implements
      */
     public void setElementContext(IDOMNode ancester, IDOMElement element)
     {
-        String[] results = null;
-        if ("validator-id".equalsIgnoreCase(_elementId))
-        {
-            //results = FacesUtil.getRegisteredConverterIds(project);
-        	
-        }
-        else
-        {
-            // results = FacesUtil.getRegisteredValidatorIds(project);
-        }
-        if (results != null)
-        {
-            Arrays.sort(results);
-            setItems(results);
-        }
-        else
-        {
-            setItems(new String[0]);
-        }
+        setItems(new String[0]);
     }
 
     /**
