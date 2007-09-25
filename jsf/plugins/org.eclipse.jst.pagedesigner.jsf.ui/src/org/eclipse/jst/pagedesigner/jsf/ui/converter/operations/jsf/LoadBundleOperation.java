@@ -90,14 +90,14 @@ public class LoadBundleOperation extends AbstractTransformOperation {
 											inputStream = new BufferedInputStream(inputStream);
 											PropertyResourceBundle bundle = new PropertyResourceBundle(inputStream);
 											if (bundle != null) {
-												if (PreviewUtil.BUNDLE_MAP == null) {
-													PreviewUtil.BUNDLE_MAP = new HashMap();
+												if (PreviewUtil.getBUNDLE_MAP() == null) {
+													PreviewUtil.setBUNDLE_MAP(new HashMap());
 												} else {
-													PreviewUtil.BUNDLE_MAP.clear();
+													PreviewUtil.getBUNDLE_MAP().clear();
 												}
-												PreviewUtil.BUNDLE_MAP.put(var, bundle);
-												PreviewUtil.BUNDLE = bundle;
-												PreviewUtil.VAR = var;
+												PreviewUtil.getBUNDLE_MAP().put(var, bundle);
+												PreviewUtil.setBUNDLE(bundle);
+												PreviewUtil.setVAR(var);
 											}
 										}
 									} catch(IOException ioe) {

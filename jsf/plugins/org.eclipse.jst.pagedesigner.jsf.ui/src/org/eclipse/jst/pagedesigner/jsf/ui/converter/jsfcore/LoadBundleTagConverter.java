@@ -103,17 +103,17 @@ public class LoadBundleTagConverter extends HiddenTagConverter
                 PropertyResourceBundle bundle = new PropertyResourceBundle(ins);
                 if (bundle != null)
                 {
-                    if (PreviewUtil.BUNDLE_MAP == null)
+                    if (PreviewUtil.getBUNDLE_MAP() == null)
                     {
-                        PreviewUtil.BUNDLE_MAP = new HashMap();
+                        PreviewUtil.setBUNDLE_MAP(new HashMap());
                     }
                     else
                     {
-                        PreviewUtil.BUNDLE_MAP.clear();
+                        PreviewUtil.getBUNDLE_MAP().clear();
                     }
-                    PreviewUtil.BUNDLE_MAP.put(varString, bundle);
-                    PreviewUtil.BUNDLE = bundle;
-                    PreviewUtil.VAR = varString;
+                    PreviewUtil.getBUNDLE_MAP().put(varString, bundle);
+                    PreviewUtil.setBUNDLE(bundle);
+                    PreviewUtil.setVAR(varString);
                 }
             }
         }
