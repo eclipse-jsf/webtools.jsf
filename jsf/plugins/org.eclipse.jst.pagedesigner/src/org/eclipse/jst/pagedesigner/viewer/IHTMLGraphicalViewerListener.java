@@ -17,7 +17,14 @@ import org.eclipse.jface.viewers.ISelectionChangedListener;
  * @author mengbo
  */
 public interface IHTMLGraphicalViewerListener extends ISelectionChangedListener {
+	/**
+	 * Fired before selection changes
+	 */
 	public void selectionAboutToChange();
 
+	/**
+	 * Fired after selection changed listeners have all been processed
+	 * for a change
+	 */
 	public void selectionChangeFinished();
 }

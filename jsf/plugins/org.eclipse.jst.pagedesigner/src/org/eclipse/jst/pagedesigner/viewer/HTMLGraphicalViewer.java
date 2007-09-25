@@ -11,6 +11,7 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.viewer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.draw2d.FigureCanvas;
@@ -47,27 +48,22 @@ import org.w3c.dom.Node;
  * 
  * @author mengbo
  */
-public class HTMLGraphicalViewer extends ScrollingGraphicalViewer implements
+/*package*/ class HTMLGraphicalViewer extends ScrollingGraphicalViewer implements
 		IHTMLGraphicalViewer, CaretPositionTracker {
 	private IEditorPart _parentPart;
-
 	private Caret _caret;
-
 	// initially nothing selected, treat as object selectin mode.
 	private boolean _rangeMode = false;
-
 	private DesignRange _selectionRange = null;
-
 	private int _inBatch = 0;
-
-	private CaretUpdater _caretUpdater = null;
-
+	private final CaretUpdater _caretUpdater;
 	private int _xOffset;
-
+	private final List<IHTMLGraphicalViewerListener>  _htmlViewerListeners;
 	// private ListenerList _postSelectionChangedListeners = new
 	// ListenerList(1);
 
 	/**
+	 * @param parent 
 	 * 
 	 */
 	public HTMLGraphicalViewer(IEditorPart parent) {
@@ -76,13 +72,35 @@ public class HTMLGraphicalViewer extends ScrollingGraphicalViewer implements
 		// viewport is not
 		// initialized yet, and we need add listener to range model change.
 		_caretUpdater = new CaretUpdater(this);
+		_htmlViewerListeners = new ArrayList<IHTMLGraphicalViewerListener>();
 	}
 
 	/**
-	 * @return Returns the _caretUpdater.
+	 * Adds listener both as a selection changed listener and as an
+	 * {@link IHTMLGraphicalViewerListener}.  Callers of this method
+	 * need not call addSelectionChangedListener.
+	 * @param listener
 	 */
-	public CaretUpdater getCaretUpdater() {
-		return _caretUpdater;
+	public void addHTMLViewerListener(IHTMLGraphicalViewerListener listener)
+	{
+	    addSelectionChangedListener(listener);
+	    
+	    if (!_htmlViewerListeners.contains(listener))
+	    {
+	        _htmlViewerListeners.add(listener);
+	    }
+	}
+	
+	/**
+	 * Removes listener both as a selection changed listener and as an
+     * {@link IHTMLGraphicalViewerListener}.  Callers of this method
+     * need not call removeSelectionChangedListener.
+	 * @param listener
+	 */
+	public void removeHTMLViewerListener(IHTMLGraphicalViewerListener listener)
+	{
+	    removeSelectionChangedListener(listener);
+	    _htmlViewerListeners.remove(listener);
 	}
 
 	public Viewport getViewport() {
@@ -102,6 +120,9 @@ public class HTMLGraphicalViewer extends ScrollingGraphicalViewer implements
         return null;
 	}
 
+	/**
+	 * @return the status line manager
+	 */
 	public IStatusLineManager getStatusLineManager() {
 		if (_parentPart == null) {
 			return null;
@@ -127,7 +148,7 @@ public class HTMLGraphicalViewer extends ScrollingGraphicalViewer implements
 	/**
 	 * this method normally should only be called when in object selection mode.
 	 * 
-	 * @return
+	 * @return the edit part that has primary selection or null if none
 	 */
 	public EditPart getPrimarySelectedNode() {
 		List list = this.getSelectedEditParts();
@@ -218,26 +239,26 @@ public class HTMLGraphicalViewer extends ScrollingGraphicalViewer implements
 	 * 
 	 */
 	private void fireSelectionAboutToChange() {
-		Object listeners[] = selectionListeners.toArray();
-		for (int i = 0, n = selectionListeners.size(); i < n; i++) {
-			if (listeners[i] instanceof IHTMLGraphicalViewerListener) {
-				IHTMLGraphicalViewerListener l = (IHTMLGraphicalViewerListener) listeners[i];
-				l.selectionAboutToChange();
-			}
+		IHTMLGraphicalViewerListener listeners[] = 
+		    _htmlViewerListeners.toArray(new IHTMLGraphicalViewerListener[0]);
+
+		for (int i = 0; i < listeners.length; i++) 
+		{
+			listeners[i].selectionAboutToChange();
 		}
 	}
 
 	/**
 	 * 
 	 */
-	private void fireSelectionChangeFinished() {
-		Object listeners[] = selectionListeners.toArray();
-		for (int i = 0, n = selectionListeners.size(); i < n; i++) {
-			if (listeners[i] instanceof IHTMLGraphicalViewerListener) {
-				IHTMLGraphicalViewerListener l = (IHTMLGraphicalViewerListener) listeners[i];
-				l.selectionChangeFinished();
-			}
-		}
+	private void fireSelectionChangeFinished()
+	{
+        IHTMLGraphicalViewerListener listeners[] = 
+            _htmlViewerListeners.toArray(new IHTMLGraphicalViewerListener[0]);
+        for (int i = 0; i < listeners.length; i++) 
+        {
+            listeners[i].selectionChangeFinished();
+        }
 	}
 
 	/*
@@ -273,10 +294,9 @@ public class HTMLGraphicalViewer extends ScrollingGraphicalViewer implements
 		// else we don't support, ignore
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.gef.ui.parts.AbstractEditPartViewer#setSelection(org.eclipse.jface.viewers.ISelection)
+
+	/**
+	 * @param newSelection
 	 */
 	public void updateRangeSelection(ISelection newSelection) {
 		if (newSelection instanceof IStructuredSelection && //
@@ -474,6 +494,9 @@ public class HTMLGraphicalViewer extends ScrollingGraphicalViewer implements
 		this._xOffset = xoffset;
 	}
 
+	/**
+	 * 
+	 */
 	public void updateHorizontalPos() {
 		Caret caret = getCaret();
 		if (caret != null && !caret.isDisposed() && isInRangeMode()) {
