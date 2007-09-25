@@ -38,7 +38,7 @@ import org.w3c.dom.Node;
 /**
  * @author mengbo
  */
-public class LayoutPart {
+public final  class LayoutPart {
 	private final static int MAX_OFFSET_TO_EDGE = 10;
 
 	private EditPart _part;
@@ -96,8 +96,7 @@ public class LayoutPart {
 	/**
 	 * Try to get the closest flowbox absolute bounds.
 	 * 
-	 * @param point
-	 * @return
+	 * @return the bounding rectangle
 	 */
 	public Rectangle getAbsoluteBounds() {
 		Rectangle bounds = null;
@@ -111,8 +110,8 @@ public class LayoutPart {
 	/**
 	 * Get box's absolute bounds.
 	 * 
-	 * @param point
-	 * @return
+	 * @param box
+	 * @return the box's bounding rectangle
 	 */
 	public Rectangle getAbsoluteBounds(FlowBox box) {
 		if (box != null) {
@@ -180,12 +179,15 @@ public class LayoutPart {
 	 * The point is whitin the bounds of the figure.
 	 * 
 	 * @param point
-	 * @return
+	 * @return true if point is the absolute bounds of this
 	 */
 	public boolean contains(Point point) {
 		return getAbsoluteBounds().contains(point);
 	}
 
+	/**
+	 * @return the design position
+	 */
 	public DesignPosition resolveTextPosition() {
 		DesignPosition result = null;
 		if (_part instanceof TextEditPart
@@ -208,16 +210,18 @@ public class LayoutPart {
 		return result;
 	}
 
+	/**
+	 * @param validator
+	 * @return resolve the design position using validator
+	 */
 	public DesignPosition resolvePosition(IPositionMediator validator) {
 		DesignPosition result;
 		if ((result = resolveTextPosition()) == null) {
-			boolean atPointLeft = false;
-			boolean atPointRight = false;
-			atPointLeft = isBeforePoint(_point);
-			atPointRight = isAfterPoint(_point);
-			if (!(atPointLeft ^ atPointRight)) {
-			    // TODO: and...?
-			}
+			boolean atPointLeft = isBeforePoint(_point);
+//			boolean atPointRight = isAfterPoint(_point);
+//			if (atPointLeft == atPointRight) {
+//			    // TODO: and...?
+//			}
 			Target target = new Target(getPart());
 			if (validator.isValidPosition(new DOMRefPosition(target.getNode(),
 					atPointLeft))) {
@@ -242,7 +246,7 @@ public class LayoutPart {
 //		return ((GraphicalEditPart) _part).getFigure();
 //	}
 
-	public boolean isAfterPoint(Point point) {
+	private boolean isAfterPoint(Point point) {
 		boolean result = false;
 		FlowBox flowBox = getLine(0);
 		if (IHTMLConstants.TAG_BR.equalsIgnoreCase(Target.resolveNode(_part)
@@ -273,14 +277,7 @@ public class LayoutPart {
 
 	}
 
-	/**
-	 * EditPart is at point's left
-	 * 
-	 * @param part
-	 * @param point
-	 * @return
-	 */
-	public boolean isBeforePoint(Point point) {
+	/*package*/ boolean isBeforePoint(Point point) {
 		boolean result = false;
 		FlowBox flowBox = getLastLine();
 		if (flowBox != null) {
@@ -305,11 +302,11 @@ public class LayoutPart {
 		// return !isAfterPoint(point);
 	}
 
-	public boolean isBeforePoint() {
+	/*package*/ boolean isBeforePoint() {
 		return isBeforePoint(_point);
 	}
 
-	public boolean atLeftPart(Point point) {
+	/*package*/ boolean atLeftPart(Point point) {
 		FlowBox flowBox = getBox();
 		if (flowBox != null) {
 			Rectangle boxRect = getAbsoluteBounds(flowBox);
@@ -318,21 +315,22 @@ public class LayoutPart {
 		return true;
 	}
 
-	public boolean isAfterPoint() {
+	/*package*/ boolean isAfterPoint() {
 		return isAfterPoint(_point);
 	}
 
-	public boolean atSameLine(Point point) {
-		Rectangle bounds = getAbsoluteBounds();
-		return bounds.contains(bounds.getTop().x, point.y);
-	}
+	// TODO: dead but possibly useful?
+//	private boolean atSameLine(Point point) {
+//		Rectangle bounds = getAbsoluteBounds();
+//		return bounds.contains(bounds.getTop().x, point.y);
+//	}
 
-	public boolean atSameRow(Point point) {
+	/*package*/ boolean atSameRow(Point point) {
 		Rectangle bounds = getAbsoluteBounds();
 		return bounds.contains(point.x, bounds.getRight().y);
 	}
 
-	public static Rectangle getBounds(FlowBox box) {
+	/*package*/ static Rectangle getBounds(FlowBox box) {
 		return new Rectangle(box._x, box._y, box.getWidth(), box.getHeight());
 	}
 
@@ -383,13 +381,11 @@ public class LayoutPart {
 
 	/**
 	 * To search for none empty string, this is not final.
+	 * @param part 
+	 * @return the edit part
 	 * 
-	 * @param lineBox
-	 * @param host
-	 * @param rect
-	 * @param validator
 	 */
-	public static EditPart getConcretePart(EditPart part) {
+	/*package*/ static EditPart getConcretePart(EditPart part) {
 		if (part != null) {
 			Node node = Target.resolveNode(part);
 			Node child = node.getFirstChild();
@@ -407,16 +403,19 @@ public class LayoutPart {
 
 	/**
 	 * To search for none empty string, this is not final.
+	 * Equivalent to getConcretePart(getPart())
 	 * 
-	 * @param lineBox
-	 * @param host
-	 * @param rect
-	 * @param validator
+	 * @return the edit part
+	 * 
 	 */
 	public EditPart getConcretePart() {
 		return getConcretePart(_part);
 	}
 
+	/**
+	 * @param node
+	 * @return the node
+	 */
 	public static Node getConcreteNode(Node node) {
 		if (node != null) {
 			Node child = node.getFirstChild();
@@ -430,6 +429,9 @@ public class LayoutPart {
 		return null;
 	}
 
+	/**
+	 * @return true if is close to edge
+	 */
 	public boolean isCloseToEdgeFromOutSide() {
 		boolean result = false;
 		if (EditModelQuery.isBlockNode(Target.resolveNode(_part))) {
@@ -449,7 +451,10 @@ public class LayoutPart {
 		return getAbsoluteBounds().getTop().y >= _point.y;
 	}
 
-	public boolean isInline() {
+	/**
+	 * @return tru if getPart() is considered inline
+	 */
+	/*package*/ boolean isInline() {
 		return EditModelQuery.isInline(Target.resolveNode(_part));
 	}
 
