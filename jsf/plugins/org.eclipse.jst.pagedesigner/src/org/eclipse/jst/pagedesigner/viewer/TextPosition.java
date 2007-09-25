@@ -39,7 +39,7 @@ public class TextPosition {
 	/**
 	 * if _containerPart is null, means it is invalid
 	 * 
-	 * @return
+	 * @return the text node
 	 */
 	public IDOMText getTextNode() {
 		return _containerNode;
@@ -48,12 +48,15 @@ public class TextPosition {
 	/**
 	 * if offset < 0, means it is invalid.
 	 * 
-	 * @return
+	 * @return the offset
 	 */
 	public int getOffset() {
 		return _offset;
 	}
 
+	/**
+	 * @return if this position is considered valid
+	 */
 	public boolean isValid() {
 		return _containerNode != null && _offset >= 0;
 	}
@@ -71,4 +74,14 @@ public class TextPosition {
 		}
 		return false;
 	}
+
+    @Override
+    public int hashCode() 
+    {
+        // match hash code to equals criteria
+        return System.identityHashCode(getTextNode()) 
+                ^ System.identityHashCode(Integer.valueOf(getOffset()));
+    }
+	
+	
 }
