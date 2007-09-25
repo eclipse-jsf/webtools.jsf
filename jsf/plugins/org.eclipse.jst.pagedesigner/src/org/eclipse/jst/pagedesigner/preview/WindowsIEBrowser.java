@@ -18,26 +18,37 @@ import org.eclipse.swt.browser.ProgressEvent;
 import org.eclipse.swt.browser.ProgressListener;
 import org.eclipse.swt.widgets.Composite;
 
+/**
+ * Models the windows IE browser for preview
+ *
+ */
 public class WindowsIEBrowser implements ProgressListener {
 	private Browser _browser;
 
-	private File _file;
-
+	/**
+	 * @param composite
+	 * @param i
+	 */
 	public void create(Composite composite, int i) {
 		_browser = new Browser(composite, i);
 		_browser.addProgressListener(this);
 	}
 
+	/**
+	 * @param file
+	 */
 	public synchronized void loadFile(File file) {
 		if (_browser == null) {
 			return;
 		}
-        _file = file;
         String s = "file:" + file.getAbsolutePath();
         _browser.setUrl(s);
         return;
 	}
 
+	/**
+	 * dispose the instance
+	 */
 	public void dispose() {
 		if (_browser == null) {
 			return;
@@ -51,16 +62,12 @@ public class WindowsIEBrowser implements ProgressListener {
         // do nothing
 	}
 
-	public synchronized void completed(ProgressEvent progressevent) {
-		if (_file != null) {
-			// XXX: don't delete, for debug purpose.
-			// _file.delete();
-			// _file = null;
-		}
+	public void completed(ProgressEvent progressevent) {
+	    // do nothing
 	}
 
 	/**
-	 * 
+	 * @return the underlying swt Browser instance
 	 */
 	public Browser getBrowser() {
 		return _browser;
