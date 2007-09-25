@@ -14,6 +14,7 @@ package org.eclipse.jst.pagedesigner.viewer;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.draw2d.geometry.Point;
@@ -54,6 +55,11 @@ public class FlowBoxLine {
 
 	private Point _point;
 
+	/**
+	 * @param rect
+	 * @param validator
+	 * @param point
+	 */
 	public FlowBoxLine(Rectangle rect, IPositionMediator validator, Point point) {
 		_x = rect.x;
 		_y = rect.y;
@@ -91,14 +97,25 @@ public class FlowBoxLine {
 		return _y;
 	}
 
-	public HashMap getPartsList() {
+	/**
+	 * @return the part list
+	 */
+	public Map getPartsList() {
 		return _parts;
 	}
 
+	/**
+	 * @return the right bottom coordiate
+	 */
 	public Point getRightBottom() {
 		return new Point(_x + _width, _y + _height);
 	}
 
+	/**
+	 * @param part
+	 * @param point
+	 * @return layout part added
+	 */
 	public boolean addLayoutPart(EditPart part, Point point) {
 		Assert.isTrue(part != null && point != null);
 		Rectangle rect = null;
@@ -127,24 +144,45 @@ public class FlowBoxLine {
 		return true;
 	}
 
+	/**
+	 * @param lPart
+	 * @return true if layout part is within the right bottom corner of the line
+	 */
 	public boolean interact(LayoutPart lPart) {
 		Rectangle rect = lPart.getAbsoluteBounds();
 		return !(rect.getBottom().y <= _y || getRightBottom().y <= rect.y);
 	}
 
+	/**
+	 * @param part
+	 * @return true if the line contains part
+	 */
 	public boolean contains(EditPart part) {
 		return _parts.containsKey(part);
 	}
 
+	/**
+	 * @param part
+	 * @return true if the line contains part
+	 */
 	public boolean contains(LayoutPart part) {
 		return _parts.containsValue(part);
 	}
 
+	/**
+	 * @param part
+	 * @return the layout part for part
+	 */
 	public LayoutPart getLayoutPart(EditPart part) {
 		return (LayoutPart) _parts.get(part);
 	}
 
-	// For vertical movement, we need to see if there is part cover p.x.
+	// 
+	/**
+	 * For vertical movement, we need to see if there is part cover p.x.
+	 * 
+	 * @return the closest edit part
+	 */
 	public EditPart getClosestPart() {
 		if (_parts.isEmpty()) {
 			return null;
@@ -187,6 +225,9 @@ public class FlowBoxLine {
 		return lineYOffset > partYOffset;
 	}
 
+	/**
+	 * @return the bounding rectangle of the line
+	 */
 	public Rectangle getBounds() {
 		return new Rectangle(_x, _y, _width, _height);
 	}
