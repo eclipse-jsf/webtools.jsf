@@ -96,10 +96,9 @@ public class TextEditPart extends SubNodeEditPart implements ICSSTextProvider {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.jst.pagedesigner.css2.provider.ICSSTextProvider#getCSSStyle()
+
+	/**
+	 * @return the associated css style for this text node
 	 */
 	public ICSSStyle getCSSStyle() {
 		IFigure figure1 = this.getFigure();
@@ -124,7 +123,7 @@ public class TextEditPart extends SubNodeEditPart implements ICSSTextProvider {
 	 * This method return the really value that is going to be presented to
 	 * user. EditPartPosition's offset is referencing this value.
 	 * 
-	 * @return
+	 * @return the text data
 	 * @see org.eclipse.jst.pagedesigner.viewer.DesignPosition
 	 */
 	public String getTextData() {
@@ -139,7 +138,7 @@ public class TextEditPart extends SubNodeEditPart implements ICSSTextProvider {
 	/**
 	 * check what part of this text node is in the range selection.
 	 * 
-	 * @return
+	 * @return text node ranges
 	 */
 	public int[] getSelectedRange() {
 		IHTMLGraphicalViewer viewer = (IHTMLGraphicalViewer) this.getViewer();
