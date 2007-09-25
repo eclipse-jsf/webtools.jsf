@@ -34,6 +34,11 @@ public class CaretPositionResolver {
 
 	private static CaretPositionResolver _instance;
 
+	/**
+	 * @param validator
+	 * @param point
+	 * @return the singleton instance
+	 */
 	public static CaretPositionResolver getInstance(
 			IPositionMediator validator, Point point) {
 		if (_instance == null) {
@@ -268,7 +273,7 @@ public class CaretPositionResolver {
 	 * 
 	 * @param rect
 	 * @param point
-	 * @return
+	 * @return the X distance
 	 */
 	public static int getXDistance(Rectangle rect, Point point) {
 		if (rect.getRight().x <= point.x) {
@@ -287,7 +292,7 @@ public class CaretPositionResolver {
 	 * 
 	 * @param rect
 	 * @param point
-	 * @return
+	 * @return the X distance
 	 */
 	public static int toXMiddle(Rectangle rect, Point point) {
 		return (point.x - (rect.x + rect.getRight().x) / 2);
@@ -299,12 +304,17 @@ public class CaretPositionResolver {
 	 * 
 	 * @param rect
 	 * @param point
-	 * @return
+	 * @return the Y distance
 	 */
 	public static int toYMiddle(Rectangle rect, Point point) {
 		return (point.y - (rect.y + rect.getBottom().y) / 2);
 	}
 
+	/**
+	 * @param rect
+	 * @param point
+	 * @return the Y distance
+	 */
 	public static int getYDistance(Rectangle rect, Point point) {
 		if (rect.y + rect.height <= point.y) {
 			return point.y - (rect.y + rect.height);

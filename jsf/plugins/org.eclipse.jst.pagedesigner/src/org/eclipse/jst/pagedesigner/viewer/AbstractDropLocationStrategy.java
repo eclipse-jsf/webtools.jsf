@@ -33,6 +33,9 @@ public abstract class AbstractDropLocationStrategy  implements IDropLocationStra
 {
     private final EditPartViewer        _viewer;
     
+    /**
+     * @param viewer
+     */
     public AbstractDropLocationStrategy(EditPartViewer viewer)
     {
         _viewer = viewer;
