@@ -26,19 +26,22 @@ import org.w3c.dom.Node;
 public class NodeLocationComparator implements Comparator {
 	private final static Map orders = new HashMap();
 
-	private final static Integer DEFAULT_ORDER = new Integer(Integer.MAX_VALUE);
+	private final static Integer DEFAULT_ORDER = Integer.valueOf(Integer.MAX_VALUE);
 
 	private static NodeLocationComparator _instance = new NodeLocationComparator();
 	static {
-		orders.put("taglib", new Integer(0));
-		orders.put("directive.taglib", new Integer(0));
-		orders.put("head", new Integer(1));
+		orders.put("taglib", Integer.valueOf(0));
+		orders.put("directive.taglib", Integer.valueOf(0));
+		orders.put("head", Integer.valueOf(1));
 	}
 
 	private NodeLocationComparator() {
         // no external instantiation
 	}
 
+	/**
+	 * @return the singleton
+	 */
 	public static NodeLocationComparator getInstance() {
 		return _instance;
 	}
