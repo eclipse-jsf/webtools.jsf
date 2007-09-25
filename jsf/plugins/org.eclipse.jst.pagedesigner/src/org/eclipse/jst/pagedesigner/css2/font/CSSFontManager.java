@@ -64,27 +64,25 @@ public class CSSFontManager implements ICSSFontManager {
 	}
 
 	private CacheManager _cacheManager = new CacheManager(
-			new ICacheEntryCreator() {
-				public Object createEntry(Object key) {
+			new ICacheEntryCreator<CSSFont, Font>() {
+				public Font createEntry(CSSFont key) {
 					if (DEBUG) {
 						_totalFont++;
 						System.out.println("TotalFont++: " + _totalFont);
 					}
-					CSSFont cssfont = (CSSFont) key;
-
-					Font font = new Font(null, cssFontToLocalFont(cssfont
-							.getFontFamily()), (int) Math.round(cssfont
+					Font font = new Font(null, cssFontToLocalFont(key
+							.getFontFamily()), (int) Math.round(key
 							.getFontSize()
-							/ FONT_SCALE), cssfont.getSwtFontStyle());
+							/ FONT_SCALE), key.getSwtFontStyle());
 					return font;
 				}
 
-				public void dispose(Object key, Object entry) {
+				public void dispose(CSSFont key, Font entry) {
 					if (DEBUG) {
 						_totalFont--;
 						System.out.println("TotalFont--: " + _totalFont);
 					}
-					((Font) entry).dispose();
+					entry.dispose();
 
 				}
 			}, CACHESIZE);

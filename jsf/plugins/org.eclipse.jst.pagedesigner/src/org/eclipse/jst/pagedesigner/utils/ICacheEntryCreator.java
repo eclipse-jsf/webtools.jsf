@@ -11,8 +11,21 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.utils;
 
-public interface ICacheEntryCreator {
-	public Object createEntry(Object key);
+/**
+ * Identifies a factory/dispose advisor for cache entries
+ * @param <KEY> 
+ * @param <ENTRY> 
+ */
+public interface ICacheEntryCreator<KEY,ENTRY> {
+	/**
+	 * @param key
+	 * @return the created entry
+	 */
+	public ENTRY createEntry(KEY key);
 
-	public void dispose(Object key, Object entry);
+	/**
+	 * @param key
+	 * @param entry
+	 */
+	public void dispose(KEY key, ENTRY entry);
 }
