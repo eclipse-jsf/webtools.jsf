@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PaletteInfosSwitch.java,v 1.2 2007/04/16 19:55:16 itrimble Exp $
+ * $Id: PaletteInfosSwitch.java,v 1.3 2007/09/25 00:31:06 cbateman Exp $
  */
 package org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.util;
 
@@ -57,6 +57,7 @@ public class PaletteInfosSwitch {
 	/**
 	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
 	 * <!-- begin-user-doc -->
+     * @param theEObject 
 	 * <!-- end-user-doc -->
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
@@ -68,6 +69,8 @@ public class PaletteInfosSwitch {
 	/**
 	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
 	 * <!-- begin-user-doc -->
+     * @param theEClass 
+     * @param theEObject 
 	 * <!-- end-user-doc -->
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
@@ -76,18 +79,18 @@ public class PaletteInfosSwitch {
 		if (theEClass.eContainer() == modelPackage) {
 			return doSwitch(theEClass.getClassifierID(), theEObject);
 		}
-		else {
-			List eSuperTypes = theEClass.getESuperTypes();
-			return
-				eSuperTypes.isEmpty() ?
-					defaultCase(theEObject) :
-					doSwitch((EClass)eSuperTypes.get(0), theEObject);
-		}
+        List eSuperTypes = theEClass.getESuperTypes();
+        return
+        	eSuperTypes.isEmpty() ?
+        		defaultCase(theEObject) :
+        		doSwitch((EClass)eSuperTypes.get(0), theEObject);
 	}
 
 	/**
 	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
 	 * <!-- begin-user-doc -->
+     * @param classifierID 
+     * @param theEObject 
 	 * <!-- end-user-doc -->
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
