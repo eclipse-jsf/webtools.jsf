@@ -23,11 +23,16 @@ import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
+/**
+ * Represents a node that is non-visual in the runtime rendering
+ * but which may wish to have a meta-representation on the design canvas.
+ *
+ */
 public class NonVisualComponentEditPart extends NodeEditPart 
 {
     protected IFigure createFigure() 
     {
-        IFigure figure = new ImageFigure(getTagConverter().getVisualImage())
+        IFigure figure_ = new ImageFigure(getTagConverter().getVisualImage())
         {
 
             protected void paintFigure(Graphics graphics) {
@@ -42,8 +47,8 @@ public class NonVisualComponentEditPart extends NodeEditPart
             
         };
         
-        figure.setMinimumSize(new Dimension(0,0));
-        return figure;
+        figure_.setMinimumSize(new Dimension(0,0));
+        return figure_;
     }
 
     public void notifyChanged(INodeNotifier notifier, int eventType,
@@ -59,6 +64,9 @@ public class NonVisualComponentEditPart extends NodeEditPart
                 null);
     }
 
+    /**
+     * @return the tag converter
+     */
     protected ITagConverter getTagConverter()
     {
     	ITagConverter tagConverter = (ITagConverter)getModel();
@@ -69,6 +77,9 @@ public class NonVisualComponentEditPart extends NodeEditPart
     	return tagConverter;
     }
     
+    /**
+     * @return the host element for this edit part
+     */
     protected Element getModelElement()
     {
         return getTagConverter().getHostElement();
