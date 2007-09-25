@@ -56,6 +56,9 @@ public abstract class NodeEditPart extends AbstractGraphicalEditPart implements
 		this._destDocument = doc;
 	}
 
+	/**
+	 * @return to owner document of this part's model node
+	 */
 	public IDOMDocument getDestDocumentForDesign() {
 		if (this._destDocument == null) {
 			return (IDOMDocument) this.getIDOMNode().getOwnerDocument();
@@ -158,12 +161,15 @@ public abstract class NodeEditPart extends AbstractGraphicalEditPart implements
 	}
 
 	/**
-	 * @return
+	 * @return the model node as an IDOMNode
 	 */
 	public IDOMNode getIDOMNode() {
 		return ((IDOMNode) getModel());
 	}
 
+    /**
+     * @return the model node as a node
+     */
     public Node getDOMNode()
     {
         return ((Node)getModel());
@@ -189,7 +195,7 @@ public abstract class NodeEditPart extends AbstractGraphicalEditPart implements
 	 * if a EditPart don't support caret inside it, and don't can't have child
 	 * edit part, then we call it as a widget.
 	 * 
-	 * @return
+	 * @return true if this part represents a widget
 	 */
 	public boolean isWidget() {
 		return false; // child class must override.
@@ -199,30 +205,36 @@ public abstract class NodeEditPart extends AbstractGraphicalEditPart implements
 	 * whether this EditPart allow the selection range to have one edge in the
 	 * edit part and one edge outside the edit part.
 	 * 
-	 * @return
+	 * @return true if selection range across is allowed
 	 */
 	public boolean allowSelectionRangeAcross() {
 		return true;
 	}
 
 	/**
-	 * @return
+	 * @return true if this part is resizable
 	 */
 	public boolean isResizable() {
 		return false;
 	}
     
+    /**
+     * @return true if drag is active on this part
+     */
     public boolean isDragActive() {
         return _isDragActive;
     }
     
+    /**
+     * @param newValue
+     */
     public void setDragActive(boolean newValue)
     {
         _isDragActive = newValue;
     }
     
     /**
-     * @param defaultCursor
+     * @param mouseLocation
      * @return this edit part's cursor or null if this edit part
      * does not wish to specify a specific cursor (the default
      * should be used).  

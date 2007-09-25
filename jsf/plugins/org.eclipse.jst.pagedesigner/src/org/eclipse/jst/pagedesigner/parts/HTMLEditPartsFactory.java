@@ -25,6 +25,9 @@ import org.w3c.dom.Node;
 public class HTMLEditPartsFactory implements EditPartFactory {
 	private IDOMDocument _destDocument;
 
+	/**
+	 * @param destDoc
+	 */
 	public HTMLEditPartsFactory(IDOMDocument destDoc) {
 		this._destDocument = destDoc;
 	}

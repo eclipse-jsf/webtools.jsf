@@ -43,7 +43,7 @@ public class CSSStyleAdapterFactory extends AbstractAdapterFactory {
 	}
 
 	/**
-	 * @return
+	 * @return the factory instance
 	 */
 	public static CSSStyleAdapterFactory getInstance() {
         // TODO: this 'singleton' is broken

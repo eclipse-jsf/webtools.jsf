@@ -28,7 +28,7 @@ public class EditProxyAdapter implements INodeAdapter, IRangeSelectionProxy {
 	ElementEditPart _part;
 
 	/**
-	 * 
+	 * @param part 
 	 */
 	public EditProxyAdapter(ElementEditPart part) {
 		_part = part;
