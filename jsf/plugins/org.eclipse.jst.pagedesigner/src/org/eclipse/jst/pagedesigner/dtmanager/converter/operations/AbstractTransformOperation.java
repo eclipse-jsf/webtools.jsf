@@ -160,7 +160,7 @@ public abstract class AbstractTransformOperation implements ITransformOperation 
 			Node curNode = childNodes.item(i);
 			if (curNode.getNodeType() == Node.ELEMENT_NODE) {
 				String curNodeName = curNode.getLocalName();
-				if (curNode != null && curNodeName.equals(tagName)) {
+				if (curNodeName != null && curNodeName.equals(tagName)) {
 					childElements.add(curNode);
 				}
 			}
