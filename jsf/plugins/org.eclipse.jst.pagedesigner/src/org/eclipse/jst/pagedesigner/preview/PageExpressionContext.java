@@ -69,22 +69,38 @@ public class PageExpressionContext {
 		_prj = prj;
 	}
 
+	/**
+	 * reset the context.
+	 */
 	public static void reset() {
 		_current = null;
 	}
 
+	/**
+	 * Initialize the current context
+	 * @param prj
+	 */
 	public static void initialize(IProject prj) {
 		_current = new PageExpressionContext(prj);
 	}
 
+	/**
+	 * @return the current context
+	 */
 	public static PageExpressionContext getCurrent() {
 		return _current;
 	}
 
+	/**
+	 * @param provider
+	 */
 	public void pushPageVarProvider(IPageVariablesProvider provider) {
 		_pageVarProviders.add(provider);
 	}
 
+	/**
+	 * @param provider
+	 */
 	public void popPageVarProvider(IPageVariablesProvider provider) {
 		try {
 			_pageVarProviders.remove(_pageVarProviders.size() - 1);
@@ -99,12 +115,12 @@ public class PageExpressionContext {
 	 * handles
 	 * 
 	 * @param expression
-	 * @param pageVars
-	 * @param jspFile
+	 * @param expectedClass 
 	 * @param options
 	 *            XXX: not used today. In the future, we may support things like
 	 *            locale in options
-	 * @return
+	 * @return the result of evaluating the expression
+	 * @throws ELException 
 	 */
 	public Object evaluateExpression(String expression, Class expectedClass,
 			Map options) throws ELException {
