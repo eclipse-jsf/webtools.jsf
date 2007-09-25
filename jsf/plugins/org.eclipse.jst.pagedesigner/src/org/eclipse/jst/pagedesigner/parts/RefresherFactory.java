@@ -20,7 +20,7 @@ import org.eclipse.wst.sse.core.internal.provisional.INodeNotifier;
  * @version 1.5
  */
 public class RefresherFactory extends AbstractAdapterFactory {
-	Refresher refresher = new Refresher();
+	private final Refresher refresher = new Refresher();
 
 	RefresherFactory() {
 		super(Refresher.class, true);
@@ -36,6 +36,9 @@ public class RefresherFactory extends AbstractAdapterFactory {
 
 	static RefresherFactory _instance = new RefresherFactory();
 
+	/**
+	 * @return the factory singleton
+	 */
 	public static RefresherFactory getInstance() {
 		return _instance;
 	}
