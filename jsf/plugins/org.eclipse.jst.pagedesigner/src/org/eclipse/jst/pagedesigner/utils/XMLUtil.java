@@ -35,33 +35,23 @@ import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.w3c.dom.Document;
 
+/**
+ * 
+ *
+ */
 public class XMLUtil {
 	private static Logger _log = PDPlugin.getLogger(XMLUtil.class);
 
 	/**
 	 * Returns a DocumentBuilder capable of creating a DOM Document from input.
 	 * 
-	 * @return
+	 * @return a new instance of a document builder or null if an exception
+	 * occurs on creation
 	 */
 	public synchronized static DocumentBuilder getDocumentBuilder() {
 		DocumentBuilder result = null;
 		try {
 			result = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-		} catch (ParserConfigurationException e) {
-			// "Error in create documentBuilder"
-			_log.info("XMLUtil.Error.0", e); //$NON-NLS-1$
-		}
-		return result;
-	}
-
-	public synchronized static DocumentBuilder getDocumentBuilder(
-			boolean validating) {
-		DocumentBuilder result = null;
-		try {
-			DocumentBuilderFactory instance = DocumentBuilderFactory
-					.newInstance();
-			instance.setValidating(validating);
-			result = instance.newDocumentBuilder();
 		} catch (ParserConfigurationException e) {
 			// "Error in create documentBuilder"
 			_log.info("XMLUtil.Error.0", e); //$NON-NLS-1$
