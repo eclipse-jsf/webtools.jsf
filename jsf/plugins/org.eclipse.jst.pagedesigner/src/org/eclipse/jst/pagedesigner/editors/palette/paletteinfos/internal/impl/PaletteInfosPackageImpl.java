@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PaletteInfosPackageImpl.java,v 1.3 2007/04/16 19:55:08 itrimble Exp $
+ * $Id: PaletteInfosPackageImpl.java,v 1.4 2007/09/25 00:32:06 cbateman Exp $
  */
 package org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl;
 
@@ -112,6 +112,7 @@ public class PaletteInfosPackageImpl extends EPackageImpl implements PaletteInfo
 	 * <p>Invocation of this method will not affect any packages that have
 	 * already been initialized.
 	 * <!-- begin-user-doc -->
+     * @return the palette info package 
 	 * <!-- end-user-doc -->
 	 * @see #eNS_URI
 	 * @see #createPackageContents()
