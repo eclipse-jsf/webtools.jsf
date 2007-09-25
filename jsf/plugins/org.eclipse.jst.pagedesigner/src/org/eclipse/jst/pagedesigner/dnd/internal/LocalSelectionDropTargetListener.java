@@ -24,7 +24,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jst.jsf.common.ui.internal.guiutils.Alerts;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.dnd.LocalDropRequest;
-import org.eclipse.jst.pagedesigner.viewer.HTMLGraphicalViewer;
+import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
 import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.DropTargetEvent;
 import org.eclipse.ui.views.navigator.LocalSelectionTransfer;
@@ -107,7 +107,7 @@ public class LocalSelectionDropTargetListener extends
 	 * @see org.eclipse.swt.dnd.DropTargetListener#drop(org.eclipse.swt.dnd.DropTargetEvent)
 	 */
 	public void drop(DropTargetEvent event) {
-		String path = ((HTMLGraphicalViewer) getViewer()).getModel()
+		String path = ((IHTMLGraphicalViewer) getViewer()).getModel()
 				.getBaseLocation();
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		IWorkspaceRoot root = workspace.getRoot();

@@ -23,10 +23,22 @@ import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
  */
 
 public interface IContextMenuItemContributor {
+	/**
+	 * @param uri
+	 */
 	void setURI(String uri);
 
+	/**
+	 * @return the uri
+	 */
 	String getURI();
 
+	/**
+	 * @param manager
+	 * @param selection
+	 * @param model
+	 * @param parentUI
+	 */
 	void fillContextMenu(IMenuManager manager, ISelection selection,
 			IStructuredModel model, Control parentUI);
 }

@@ -36,7 +36,6 @@ import org.eclipse.jst.pagedesigner.editors.pagedesigner.PageDesignerResources;
 import org.eclipse.jst.pagedesigner.parts.DocumentEditPart;
 import org.eclipse.jst.pagedesigner.parts.NodeEditPart;
 import org.eclipse.jst.pagedesigner.requests.LocationModifierRequest;
-import org.eclipse.jst.pagedesigner.viewer.HTMLGraphicalViewer;
 import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
@@ -152,8 +151,8 @@ public class RangeSelectionTool extends SelectionTool
 						(IHTMLGraphicalViewer) this.getCurrentViewer());
 				e.doit = false;
 			} else {
-				if (getCurrentViewer() instanceof HTMLGraphicalViewer
-						&& ((HTMLGraphicalViewer) getCurrentViewer())
+				if (getCurrentViewer() instanceof IHTMLGraphicalViewer
+						&& ((IHTMLGraphicalViewer) getCurrentViewer())
 								.isInRangeMode()
 						&& (!Character.isIdentifierIgnorable(e.character) && !Character
 								.isISOControl(e.character))
@@ -174,8 +173,8 @@ public class RangeSelectionTool extends SelectionTool
 			command.execute();
 			e.doit = false;
 			if (command instanceof ICaretPositionMover) {
-				if (getCurrentViewer() instanceof HTMLGraphicalViewer) {
-					((HTMLGraphicalViewer) getCurrentViewer())
+				if (getCurrentViewer() instanceof IHTMLGraphicalViewer) {
+					((IHTMLGraphicalViewer) getCurrentViewer())
 							.updateHorizontalPos();
 				}
 			}

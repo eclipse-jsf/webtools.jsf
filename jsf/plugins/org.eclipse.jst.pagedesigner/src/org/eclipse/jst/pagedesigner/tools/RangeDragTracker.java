@@ -29,7 +29,6 @@ import org.eclipse.jst.pagedesigner.validation.caret.Target;
 import org.eclipse.jst.pagedesigner.viewer.DesignPosition;
 import org.eclipse.jst.pagedesigner.viewer.DesignRange;
 import org.eclipse.jst.pagedesigner.viewer.EditPartPositionHelper;
-import org.eclipse.jst.pagedesigner.viewer.HTMLGraphicalViewer;
 import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
 import org.eclipse.swt.graphics.Cursor;
 
@@ -261,6 +260,9 @@ public class RangeDragTracker extends TargetingTool implements DragTracker {
 		this.editpart = part;
 	}
 
+	/**
+	 * @return the html graphical viewer
+	 */
 	public IHTMLGraphicalViewer getHTMLGraphicalViewer() {
 		return (IHTMLGraphicalViewer) getCurrentViewer();
 	}
@@ -300,10 +302,7 @@ public class RangeDragTracker extends TargetingTool implements DragTracker {
 		} else {
 			getHTMLGraphicalViewer().setRange(position, position);
 		}
-		if (getHTMLGraphicalViewer() instanceof HTMLGraphicalViewer) {
-			((HTMLGraphicalViewer) getHTMLGraphicalViewer())
-					.updateHorizontalPos();
-		}
+		getHTMLGraphicalViewer().updateHorizontalPos();
 	}
 
     protected boolean handleHover() {

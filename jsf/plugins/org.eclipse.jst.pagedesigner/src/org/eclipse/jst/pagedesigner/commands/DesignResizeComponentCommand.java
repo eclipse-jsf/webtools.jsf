@@ -21,7 +21,7 @@ import org.eclipse.jface.text.ITextOperationTarget;
 import org.eclipse.jface.text.source.SourceViewer;
 import org.eclipse.jst.pagedesigner.css2.property.ICSSPropertyID;
 import org.eclipse.jst.pagedesigner.editors.HTMLEditor;
-import org.eclipse.jst.pagedesigner.viewer.HTMLGraphicalViewer;
+import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
 import org.w3c.dom.Element;
 
 /**
@@ -54,7 +54,7 @@ public class DesignResizeComponentCommand extends Command {
 		if (part != null) {
 			EditPartViewer viewer = ((ScalableRootEditPart) part.getParent())
 					.getViewer();
-			HTMLEditor editor = ((HTMLEditor) ((DefaultEditDomain) ((HTMLGraphicalViewer) viewer)
+			HTMLEditor editor = ((HTMLEditor) ((DefaultEditDomain) ((IHTMLGraphicalViewer) viewer)
 					.getEditDomain()).getEditorPart());
 			_viewer = editor.getTextEditor().getTextViewer();
 		}

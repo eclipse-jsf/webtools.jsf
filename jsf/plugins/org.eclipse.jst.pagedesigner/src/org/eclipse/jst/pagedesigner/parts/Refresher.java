@@ -13,7 +13,7 @@ package org.eclipse.jst.pagedesigner.parts;
 
 import org.eclipse.gef.EditPart;
 import org.eclipse.jst.pagedesigner.css2.ICSSStyle;
-import org.eclipse.jst.pagedesigner.viewer.HTMLGraphicalViewer;
+import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
 import org.eclipse.wst.sse.core.internal.provisional.INodeAdapter;
 import org.eclipse.wst.sse.core.internal.provisional.INodeNotifier;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
@@ -70,7 +70,7 @@ public class Refresher implements INodeAdapter {
 
 			part = (EditPart) node.getAdapterFor(EditPart.class);
 			if (part != null) {
-				((HTMLGraphicalViewer) part.getViewer()).clearSelectionRange();
+				((IHTMLGraphicalViewer) part.getViewer()).clearSelectionRange();
 			}
 		}
 	}

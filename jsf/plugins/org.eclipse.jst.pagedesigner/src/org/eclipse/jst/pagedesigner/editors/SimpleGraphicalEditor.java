@@ -52,8 +52,8 @@ import org.eclipse.jst.pagedesigner.editors.actions.ActionsMessages;
 import org.eclipse.jst.pagedesigner.editors.actions.DesignerUndoRedoAction;
 import org.eclipse.jst.pagedesigner.editors.actions.RelatedViewActionGroup;
 import org.eclipse.jst.pagedesigner.editors.palette.DesignerPaletteCustomizer;
-import org.eclipse.jst.pagedesigner.editors.palette.DesignerPaletteViewerProvider;
 import org.eclipse.jst.pagedesigner.editors.palette.DesignerPaletteRootFactory;
+import org.eclipse.jst.pagedesigner.editors.palette.DesignerPaletteViewerProvider;
 import org.eclipse.jst.pagedesigner.jsp.core.internal.pagevar.DocumentPageVariableAdapter;
 import org.eclipse.jst.pagedesigner.jsp.core.pagevar.adapter.PageVariableAdapterFactory;
 import org.eclipse.jst.pagedesigner.parts.CSSStyleAdapterFactory;
@@ -61,7 +61,6 @@ import org.eclipse.jst.pagedesigner.parts.DocumentEditPart;
 import org.eclipse.jst.pagedesigner.parts.HTMLEditPartsFactory;
 import org.eclipse.jst.pagedesigner.parts.RefresherFactory;
 import org.eclipse.jst.pagedesigner.utils.SelectionHelper;
-import org.eclipse.jst.pagedesigner.viewer.HTMLGraphicalViewer;
 import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
@@ -94,7 +93,7 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
 
     private HTMLEditor _delegate;
 
-	private HTMLGraphicalViewer _viewer;
+	private IHTMLGraphicalViewer _viewer;
 
 	private IStructuredModel _model;
 
@@ -143,7 +142,7 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
 	}
 
 	protected void createGraphicalViewer(Composite parent) {
-		_viewer = new HTMLGraphicalViewer(this);
+		_viewer = IHTMLGraphicalViewer.Factory.createGraphicalViewer(this);
 		Control control = _viewer.createControl(parent);
 		PlatformUI.getWorkbench().getHelpSystem().setHelp(control,
 				PDPlugin.getResourceString("SimpleGraphicalEditor.help.id"));
@@ -526,7 +525,7 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
 				updateActions(getSelectionActions());
 				if (selection instanceof IStructuredSelection && //
 						!(((IStructuredSelection) selection).getFirstElement() instanceof DocumentEditPart)) {
-					((HTMLGraphicalViewer) viewerViewer)
+					((IHTMLGraphicalViewer) viewerViewer)
 							.updateRangeSelection(selection);
 				}
 			}

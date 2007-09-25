@@ -16,7 +16,7 @@ import org.eclipse.gef.EditPartViewer;
 import org.eclipse.jface.action.IStatusLineManager;
 import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
 import org.eclipse.jst.pagedesigner.PDPlugin;
-import org.eclipse.jst.pagedesigner.viewer.HTMLGraphicalViewer;
+import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
 
 /**
  * @author mengbo
@@ -24,10 +24,14 @@ import org.eclipse.jst.pagedesigner.viewer.HTMLGraphicalViewer;
 public class PolicyHelper {
 	private static Logger _log = PDPlugin.getLogger(PolicyHelper.class);
 
+	/**
+	 * @param part
+	 * @return the current viewer's status line manager or null
+	 */
 	public static IStatusLineManager getStatusLineManager(EditPart part) {
 		EditPartViewer v = part.getViewer();
-		if (v instanceof HTMLGraphicalViewer) {
-			HTMLGraphicalViewer htmlviewer = (HTMLGraphicalViewer) v;
+		if (v instanceof IHTMLGraphicalViewer) {
+			IHTMLGraphicalViewer htmlviewer = (IHTMLGraphicalViewer) v;
 			IStatusLineManager m = htmlviewer.getStatusLineManager();
 			if (m == null) {
 				_log.info("Warn.PolicyHelper.0", (String) null); //$NON-NLS-1$

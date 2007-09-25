@@ -18,6 +18,7 @@ import org.eclipse.jst.pagedesigner.commands.DesignerCommand;
 import org.eclipse.jst.pagedesigner.commands.range.ApplyStyleCommand;
 import org.eclipse.jst.pagedesigner.range.RangeUtil;
 import org.eclipse.jst.pagedesigner.viewer.DesignRange;
+import org.eclipse.jst.pagedesigner.viewer.HTMLGraphicalViewerListenenerAdapter;
 import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
 import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewerListener;
 import org.eclipse.ui.texteditor.IUpdate;
@@ -26,24 +27,12 @@ import org.eclipse.ui.texteditor.IUpdate;
  * @author mengbo
  */
 public abstract class ChangeStyleAction extends Action implements IUpdate {
-	protected IHTMLGraphicalViewer _viewer;
+	private IHTMLGraphicalViewer _viewer;
 
-	String _expectedTag;
+	private String _expectedTag;
 
-	String _expectedCSSProperty;
-
-	String _expectedCSSPropertyValue;
-
-	IHTMLGraphicalViewerListener _listener = new IHTMLGraphicalViewerListener() {
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewerListener#selectionAboutToChange()
-		 */
-		public void selectionAboutToChange() {
-            // do nothing
-		}
-
+	private IHTMLGraphicalViewerListener _listener = new HTMLGraphicalViewerListenenerAdapter() 
+	{
 		/*
 		 * (non-Javadoc)
 		 * 
@@ -65,7 +54,9 @@ public abstract class ChangeStyleAction extends Action implements IUpdate {
 
 	/**
 	 * @param text
+	 * @param name 
 	 * @param image
+	 * @param style 
 	 */
 	public ChangeStyleAction(String text, String name, ImageDescriptor image,
 			int style) {
@@ -74,16 +65,19 @@ public abstract class ChangeStyleAction extends Action implements IUpdate {
 		this.setImageDescriptor(image);
 	}
 
+	/**
+	 * @param viewer
+	 */
 	public void setViewer(IHTMLGraphicalViewer viewer) {
 		if (viewer == _viewer) {
 			return;
 		}
 		if (_viewer != null) {
-			_viewer.removeSelectionChangedListener(_listener);
+			_viewer.removeHTMLViewerListener(_listener);
 		}
 		_viewer = viewer;
 		if (_viewer != null) {
-			_viewer.addSelectionChangedListener(_listener);
+			_viewer.addHTMLViewerListener(_listener);
 		}
 		update();
 	}
@@ -91,27 +85,59 @@ public abstract class ChangeStyleAction extends Action implements IUpdate {
 	/**
 	 * 
 	 */
-	public void update() {
-		if (_viewer == null) {
-			this.setChecked(false);
-			this.setEnabled(false);
-			return;
-		}
-		if (!_viewer.isInRangeMode()) {
-			// XXX: later we may support in range mode.
-			this.setChecked(false);
-			this.setEnabled(false);
-			return;
-		}
-		DesignRange range = _viewer.getRangeSelection();
-		if (range == null || !range.isValid()) {
-			this.setChecked(false);
-			this.setEnabled(false);
-			return;
-		}
-		updateStatus(RangeUtil.normalize(range));
+	public void update() 
+	{
+	    boolean update = checkForUpdateAndMaybeDisableState();
+	    
+	    if (update)
+	    {
+	        updateState();
+	    }
 	}
 
+   /**
+    * Update the state 
+    */
+	protected void updateState()
+    {
+       DesignRange range = _viewer.getRangeSelection();
+       updateStatus(RangeUtil.normalize(range));
+    }
+
+	/**
+	 * Update the checked/enabled state
+	 * @return true if we should update status
+	 */
+	protected final boolean checkForUpdateAndMaybeDisableState()
+	{
+        if (_viewer == null) {
+            this.setChecked(false);
+            this.setEnabled(false);
+            return false;
+        }
+        if (!_viewer.isInRangeMode()) {
+            // XXX: later we may support in range mode.
+            this.setChecked(false);
+            this.setEnabled(false);
+            return false;
+        }
+        DesignRange range = _viewer.getRangeSelection();
+        if (range == null || !range.isValid()) {
+            this.setChecked(false);
+            this.setEnabled(false);
+            return false;
+        }
+        return true;
+	}
+	
+
+	/**
+	 * @return the viewer's current design range
+	 */
+	protected final DesignRange getDesignRange()
+	{
+	    return _viewer.getRangeSelection();
+	}
 	/**
 	 * @param range
 	 */
@@ -162,17 +188,17 @@ public abstract class ChangeStyleAction extends Action implements IUpdate {
 	}
 
 	/**
-	 * @return
+	 * @return  the expected property value
 	 */
 	protected abstract String getExpectedCSSPropertyValue();
 
 	/**
-	 * @return
+	 * @return  the expected property
 	 */
 	protected abstract String getExpectedCSSProperty();
 
 	/**
-	 * @return
+	 * @return the expected tag
 	 */
 	protected String getExpectedTag() {
 		return _expectedTag;

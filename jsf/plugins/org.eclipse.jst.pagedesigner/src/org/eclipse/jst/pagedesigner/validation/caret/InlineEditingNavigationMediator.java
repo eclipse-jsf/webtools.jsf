@@ -24,7 +24,7 @@ import org.eclipse.jst.pagedesigner.dom.EditModelQuery;
 import org.eclipse.jst.pagedesigner.parts.DocumentEditPart;
 import org.eclipse.jst.pagedesigner.tools.ExposeHelper;
 import org.eclipse.jst.pagedesigner.viewer.DesignPosition;
-import org.eclipse.jst.pagedesigner.viewer.HTMLGraphicalViewer;
+import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
@@ -149,11 +149,11 @@ public class InlineEditingNavigationMediator extends
 	public EditPart getConstainedEditableContainer(DesignPosition position,
 			Point p, GraphicalViewer viewer) {
 		Rectangle rect = new Rectangle(p.x, p.y, 1, 1);
-		Viewport port = ((HTMLGraphicalViewer) viewer).getViewport();
+		Viewport port = ((IHTMLGraphicalViewer) viewer).getViewport();
 
 		Point viewLocation = port.getViewLocation();
 		Point lastLocation = viewLocation.getCopy();
-		new ExposeHelper((HTMLGraphicalViewer) viewer).exposeArea(rect);
+		new ExposeHelper((IHTMLGraphicalViewer) viewer).exposeArea(rect);
 		viewLocation = port.getViewLocation();
 		Dimension offset = lastLocation.getDifference(viewLocation);
 
