@@ -12,6 +12,7 @@
 package org.eclipse.jst.pagedesigner.actions.link;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
@@ -30,20 +31,24 @@ import org.eclipse.jst.pagedesigner.PDPlugin;
 public class ExtensionReader {
 	private static Logger _log = PDPlugin.getLogger(ExtensionReader.class);
 
-	private static ILinkCreator[] _handlers = null;
+	private static List<ILinkCreator> _handlers = null;
 
 	private static final String ATTR_CLASS = "class";
 
-	public static synchronized ILinkCreator[] getAllLinkHandlers() {
+	/** 
+	 * @return the ext-pts for the link handler
+	 * List is not modifiable
+	 */
+	public static synchronized List<ILinkCreator> getAllLinkHandlers() {
 		if (_handlers == null) {
 			_handlers = readAllLinkHandlers();
 		}
-		return _handlers;
+		return Collections.unmodifiableList(_handlers);
 
 	}
 
-	private static ILinkCreator[] readAllLinkHandlers() {
-		List result = new ArrayList();
+	private static List<ILinkCreator> readAllLinkHandlers() {
+	    List<ILinkCreator> result = new ArrayList<ILinkCreator>();
 		IExtensionPoint extensionPoint = Platform.getExtensionRegistry()
 				.getExtensionPoint(PDPlugin.getPluginId(),
 						IJMTConstants.EXTENSION_POINT_PAGEDESIGNER);
@@ -64,7 +69,7 @@ public class ExtensionReader {
 								.createExecutableExtension(ATTR_CLASS);
 
 						if (obj instanceof ILinkCreator) {
-							result.add(obj);
+							result.add((ILinkCreator)obj);
 						}
 					} catch (CoreException e) {
 						_log
@@ -73,8 +78,6 @@ public class ExtensionReader {
 				}
 			}
 		}
-		ILinkCreator[] ret = new ILinkCreator[result.size()];
-		result.toArray(ret);
-		return ret;
+		return result;
 	}
 }

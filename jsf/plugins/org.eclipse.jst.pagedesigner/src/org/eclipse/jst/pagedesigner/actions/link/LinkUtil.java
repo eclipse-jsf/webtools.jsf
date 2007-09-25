@@ -26,6 +26,11 @@ import org.w3c.dom.Text;
  * @version 1.5
  */
 public class LinkUtil {
+	/**
+	 * @param part
+	 * @param range
+	 * @return the select text if part is a text node or null.
+	 */
 	public static String getSelectedText(EditPart part, DesignRange range) {
 		if (part instanceof TextEditPart) {
 			TextEditPart textPart = (TextEditPart) part;
@@ -38,6 +43,11 @@ public class LinkUtil {
 		return null;
 	}
 
+	/**
+	 * @param part
+	 * @param range
+	 * @return the text from part split if it is a text node or null
+	 */
 	public static Text splitDomText(EditPart part, DesignRange range) {
 		if (part instanceof TextEditPart) {
 			Text textNode = (Text) part.getModel();

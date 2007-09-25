@@ -11,6 +11,8 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.actions.link;
 
+import java.util.List;
+
 import org.eclipse.gef.EditPart;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jst.pagedesigner.PDPlugin;
@@ -35,6 +37,12 @@ public class MakeLinkCommand extends DesignerCommand {
 
 	private Element _ele = null;
 
+	/**
+	 * @param identifier
+	 * @param viewer
+	 * @param part
+	 * @param range
+	 */
 	public MakeLinkCommand(String identifier, IHTMLGraphicalViewer viewer,
 			EditPart part, DesignRange range) {
 		super(identifier, viewer);
@@ -50,10 +58,9 @@ public class MakeLinkCommand extends DesignerCommand {
 	 * @see org.eclipse.gef.commands.Command#canExecute()
 	 */
 	public boolean canExecute() {
-		ILinkCreator[] creators = ExtensionReader.getAllLinkHandlers();
+		List<ILinkCreator> creators = ExtensionReader.getAllLinkHandlers();
 		if (creators != null) {
-			for (int i = 0, size = creators.length; i < size; i++) {
-				ILinkCreator linkCreator = creators[i];
+			for (ILinkCreator linkCreator : creators) {
 				String identifier = linkCreator.getLinkIdentifier();
 				if (this._identifier.equalsIgnoreCase(identifier)) {
 					this._linkcreator = linkCreator;

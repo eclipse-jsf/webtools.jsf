@@ -23,6 +23,10 @@ import org.eclipse.jst.pagedesigner.viewer.DesignRange;
 public abstract class AbstractLinkCreator implements ILinkCreator,
 		IExecutableExtension {
 	private String _identifier;
+    /**
+     * the link identifier attribute name
+     */
+    private static final String LINK_IDENTIFIER = "linkIdentifier";
 
 	/*
 	 * (non-Javadoc)
@@ -50,6 +54,6 @@ public abstract class AbstractLinkCreator implements ILinkCreator,
 	 */
 	public void setInitializationData(IConfigurationElement config,
 			String propertyName, Object data) throws CoreException {
-		this._identifier = config.getAttribute(ILinkCreator.LINK_IDENTIFIER);
+		this._identifier = config.getAttribute(LINK_IDENTIFIER);
 	}
 }

@@ -20,13 +20,30 @@ import org.w3c.dom.Element;
  * @version 1.5
  */
 public interface ILinkCreator {
-	public static final String LINK_IDENTIFIER = "linkIdentifier";
 
+	/**
+	 * @param part
+	 * @param range
+	 * @return the link element
+	 */
 	public Element makeLinkElement(EditPart part, DesignRange range);
 
+	/**
+	 * @return link identifier
+	 */
 	public String getLinkIdentifier();
 
+	/**
+	 * @param range
+	 * @return true if can call makeLinkElement
+	 */
 	public boolean canExecute(DesignRange range);
 
+	/**
+	 * @param part
+	 * @param range
+	 * @return a preview string that approximates the result
+	 * of makeLinkElement
+	 */
 	public String getSourcePreview(EditPart part, DesignRange range);
 }

@@ -35,7 +35,7 @@ import org.eclipse.swt.widgets.Label;
  * @author mengbo
  * @version 1.5
  */
-public class LinkWizardPage extends WizardPage {
+/*package*/ class LinkWizardPage extends WizardPage {
 	private static final String GROUP_TITLE = PDPlugin
 			.getResourceString("LinkWizardPage.GroupTitle");
 
@@ -44,16 +44,23 @@ public class LinkWizardPage extends WizardPage {
 
 	private StyledText _text = null;
 
-	private Map _linkMap = null;
+	private final Map<String, ILinkCreator> _linkMap;
 
 	private String _linkType = null;
 
-	private EditPart _part = null;
+	private final EditPart _part;
 
-	private DesignRange _range = null;
+	private final DesignRange _range;
 
+	/**
+	 * @param pageName
+	 * @param title
+	 * @param editPart
+	 * @param range
+	 * @param linkMap
+	 */
 	public LinkWizardPage(String pageName, String title, EditPart editPart,
-			DesignRange range, Map linkMap) {
+			DesignRange range, Map<String, ILinkCreator> linkMap) {
 		super(pageName, title, null);
 		this._part = editPart;
 		this._range = range;
@@ -83,13 +90,13 @@ public class LinkWizardPage extends WizardPage {
 		group.setLayoutData(data);
 
 		String defaultLink = "";
-		Set set = this._linkMap.keySet();
+		Set<String> set = this._linkMap.keySet();
 		int size = set.size();
 		String[] keys = new String[size];
-		Iterator itr = set.iterator();
+		Iterator<String> itr = set.iterator();
 		int i = 0;
 		while (itr.hasNext()) {
-			String key = (String) itr.next();
+			String key = itr.next();
 			keys[i++] = key;
 		}
 		Arrays.sort(keys);
@@ -113,7 +120,7 @@ public class LinkWizardPage extends WizardPage {
 		data.heightHint = 50;
 		_text.setLayoutData(data);
 
-		ILinkCreator creator = (ILinkCreator) _linkMap.get(defaultLink);
+		ILinkCreator creator = _linkMap.get(defaultLink);
 		_linkType = creator.getLinkIdentifier();
 		String previewText = creator.getSourcePreview(_part, _range);
 		previewText = previewText == null ? "" : previewText;
@@ -132,19 +139,25 @@ public class LinkWizardPage extends WizardPage {
 		return true;
 	}
 
+	/**
+	 * @return the link type
+	 */
 	public String getChosenLinkType() {
 		return this._linkType;
 	}
 
-	class SelectLinkListener extends SelectionAdapter {
+    class SelectLinkListener extends SelectionAdapter {
 		private String _key;
 
+		/**
+		 * @param key
+		 */
 		public SelectLinkListener(String key) {
 			this._key = key;
 		}
 
 		public void widgetSelected(SelectionEvent e) {
-			ILinkCreator creator = (ILinkCreator) _linkMap.get(this._key);
+			ILinkCreator creator = _linkMap.get(this._key);
 			_linkType = creator.getLinkIdentifier();
 			String previewText = creator.getSourcePreview(_part, _range);
 			previewText = previewText == null ? "" : previewText;

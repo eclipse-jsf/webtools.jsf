@@ -37,11 +37,16 @@ public class CreateLinkWizard extends Wizard {
 
 	private DesignRange _range;
 
-	private Map _linkMap;
+	private Map<String, ILinkCreator> _linkMap;
 
 	private String _linkType;
 
-	public CreateLinkWizard(EditPart part, DesignRange range, Map linkMap) {
+	/**
+	 * @param part
+	 * @param range
+	 * @param linkMap
+	 */
+	public CreateLinkWizard(EditPart part, DesignRange range, Map<String, ILinkCreator> linkMap) {
 		this._part = part;
 		this._range = range;
 		this._linkMap = linkMap;
@@ -77,11 +82,17 @@ public class CreateLinkWizard extends Wizard {
 		return true;
 	}
 
+	/**
+	 * @param pageTitle
+	 */
 	public void setPageTitle(String pageTitle) {
 		_pageTitle = pageTitle;
 		initializeDefaultPageImageDescriptor();
 	}
 
+	/**
+	 * 
+	 */
 	protected void initializeDefaultPageImageDescriptor() {
 		ImageDescriptor desc = PDPlugin.getDefault().getImageDescriptor(
 				INTIAL_DEFAULT_PAGE_IMAGE);
@@ -89,6 +100,9 @@ public class CreateLinkWizard extends Wizard {
 		setWindowTitle(WIZARD_TITLE);
 	}
 
+	/**
+	 * @return the link type
+	 */
 	public String getChosenLinkType() {
 		return this._linkType;
 	}

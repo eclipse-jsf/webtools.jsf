@@ -13,6 +13,7 @@ package org.eclipse.jst.pagedesigner.actions.link;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -64,7 +65,7 @@ public class MakeLinkAction extends Action {
 	 * @see org.eclipse.jface.action.Action#run()
 	 */
 	public void run() {
-		Map map = calAvailableLinkCreator();
+		Map<String, ILinkCreator> map = calAvailableLinkCreator();
 		if (map.size() > 1) {
 			CreateLinkWizard wizard = new CreateLinkWizard(_editPart, _range,
 					map);
@@ -78,10 +79,10 @@ public class MakeLinkAction extends Action {
 		}
 		// else must be html link
 		else if (map.size() == 1) {
-			Set set = map.entrySet();
-			Iterator itr = set.iterator();
+			Set<Map.Entry<String, ILinkCreator>> set = map.entrySet();
+			Iterator<Map.Entry<String,ILinkCreator>> itr = set.iterator();
 			while (itr.hasNext()) {
-				ILinkCreator creator = (ILinkCreator) itr.next();
+				ILinkCreator creator =  itr.next().getValue();
 				_linkType = creator.getLinkIdentifier();
 			}
 		}
@@ -199,14 +200,14 @@ public class MakeLinkAction extends Action {
 		return null;
 	}
 
-	private Map calAvailableLinkCreator() {
-		Map map = new HashMap();
-		ILinkCreator[] linkCreators = ExtensionReader.getAllLinkHandlers();
-		for (int i = 0, size = linkCreators.length; i < size; i++) {
-			String identifier = linkCreators[i].getLinkIdentifier();
-			boolean canExecute = linkCreators[i].canExecute(_range);
+	private Map<String, ILinkCreator> calAvailableLinkCreator() {
+		Map<String, ILinkCreator> map = new HashMap<String, ILinkCreator>();
+		List<ILinkCreator> linkCreators = ExtensionReader.getAllLinkHandlers();
+		for (ILinkCreator linkCreator : linkCreators) {
+			String identifier = linkCreator.getLinkIdentifier();
+			boolean canExecute = linkCreator.canExecute(_range);
 			if (canExecute) {
-				map.put(identifier, linkCreators[i]);
+				map.put(identifier, linkCreator);
 			}
 		}
 		return map;
