@@ -40,15 +40,7 @@ public class ExpressionAction extends Action
     private String          _action;
     private IProject        _project;
     private IFile           _file;
-    private int             _type;
 
-    /**
-     * @param type
-     */
-    public ExpressionAction(int type)
-    {
-        _type = type;
-    }
 
     /**
      * @param attribute
@@ -85,21 +77,7 @@ public class ExpressionAction extends Action
                 IPageVariablesProvider.class);
         pageVarProvider.refresh();
 
-        Object result = null;
-        if (_type == METHOD)
-        {
-//            result = VariableResolverUtils.resolveMethodBinding(_action, _project, IWebFrameworkResolver.ACTION_METHOD,                    true);
-        	result = null;
-        }
-        else
-        {
-//            result = VariableResolverUtils.resolveValueBinding(_action, _project, true);
-        	result = null;
-        }
-        if (result == null)
-        {
-            JSFUIPlugin.getAlerts().warning("Message.Warning.Title", "Message.Warning.InvalidateExpression");//$NON-NLS-1$ $NON-NLS-2$
-        }
+        JSFUIPlugin.getAlerts().warning("Message.Warning.Title", "Message.Warning.InvalidateExpression");//$NON-NLS-1$ $NON-NLS-2$
     }
 
     /**

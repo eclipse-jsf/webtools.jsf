@@ -69,11 +69,11 @@ public class JSFNavigationGroup
     {
         if (support.isActionSource())
         {
-            ExpressionAction action = new ExpressionAction(ExpressionAction.METHOD);
+            ExpressionAction action = new ExpressionAction();
             action.setText(JSFUIPlugin.getResourceString("ElementEdit.Submenu.JavaNavigation.Action"));//$NON-NLS-1$
-            action.setActionValue(ele.getAttribute(ICSSPropertyID.ATTR_ACTION));
             if (ele != null)
             {
+                action.setActionValue(ele.getAttribute(ICSSPropertyID.ATTR_ACTION));
                 IDOMModel model = ele.getModel();
                 action.setProject(StructuredModelUtil.getProjectFor(model));
                 action.setFile(StructuredModelUtil.getFileFor(model));
@@ -82,11 +82,11 @@ public class JSFNavigationGroup
         }
         if (support.isValueHolder())
         {
-            ExpressionAction action = new ExpressionAction(ExpressionAction.VARIABLE);
+            ExpressionAction action = new ExpressionAction();
             action.setText(JSFUIPlugin.getResourceString("ElementEdit.Submenu.JavaNavigation.Value"));//$NON-NLS-1$
-            action.setActionValue(ele.getAttribute(ICSSPropertyID.ATTR_VALUE));
             if (ele != null)
             {
+                action.setActionValue(ele.getAttribute(ICSSPropertyID.ATTR_VALUE));
                 IDOMModel model = ele.getModel();
                 action.setProject(StructuredModelUtil.getProjectFor(model));
                 action.setFile(StructuredModelUtil.getFileFor(model));
@@ -95,11 +95,11 @@ public class JSFNavigationGroup
         }
 
         {
-            ExpressionAction action = new ExpressionAction(ExpressionAction.VARIABLE);
+            ExpressionAction action = new ExpressionAction();
             action.setText(JSFUIPlugin.getResourceString("ElementEdit.Submenu.JavaNavigation.Binding"));//$NON-NLS-1$
-            action.setActionValue(ele.getAttribute(ICSSPropertyID.ATTR_BINDING));
             if (ele != null)
             {
+                action.setActionValue(ele.getAttribute(ICSSPropertyID.ATTR_BINDING));
                 IDOMModel model = ele.getModel();
                 action.setProject(StructuredModelUtil.getProjectFor(model));
                 action.setFile(StructuredModelUtil.getFileFor(model));
