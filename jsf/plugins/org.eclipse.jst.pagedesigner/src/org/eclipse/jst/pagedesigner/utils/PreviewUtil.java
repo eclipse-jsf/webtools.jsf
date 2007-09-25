@@ -20,6 +20,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.PropertyResourceBundle;
+import java.util.Map.Entry;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
@@ -47,26 +48,67 @@ public class PreviewUtil {
 			.getProperty("line.separator"); //$NON-NLS-1$
 
 	/** web root path */
-	public static String WEBROOT_PATH = null;
+	private final static String WEBROOT_PATH = null;
 
 	/** the file being previewed */
-	public static IFile CURRENT_FILE = null;
+	private static IFile CURRENT_FILE = null;
 
 	/** the property bundel */
-	public static PropertyResourceBundle BUNDLE = null;
+	private static PropertyResourceBundle BUNDLE = null;
 
 	/** the property bundel map used for loadbundle preview action */
-	public static Map BUNDLE_MAP = null;
+	private static Map BUNDLE_MAP = null;
 
 	/** the variable name used for loadbundel preview action */
-	public static String VAR = null;
+	private static String VAR = null;
 
 	/** key is prefix value is uri */
 	private static Map _taglibMap = new HashMap();
 
-	// TODO: dead? private static final String PAGE_EXTEND = "_jsppreview_.html"; //$NON-NLS-1$
 
 	/**
+	 * @return the current bundle
+	 */
+	public static final PropertyResourceBundle getBUNDLE() {
+        return BUNDLE;
+    }
+
+    /**
+     * @param bundle
+     */
+    public static final void setBUNDLE(PropertyResourceBundle bundle) {
+        BUNDLE = bundle;
+    }
+
+    /**
+     * @return the current bundle map
+     */
+    public static final Map getBUNDLE_MAP() {
+        return BUNDLE_MAP;
+    }
+
+    /**
+     * @param bundle_map
+     */
+    public static final void setBUNDLE_MAP(Map bundle_map) {
+        BUNDLE_MAP = bundle_map;
+    }
+
+    /**
+     * @return the current variable
+     */
+    public static final String getVAR() {
+        return VAR;
+    }
+
+    /**
+     * @param var
+     */
+    public static final void setVAR(String var) {
+        VAR = var;
+    }
+
+    /**
 	 * @return Returns the _taglibMap.
 	 */
 	public static Map getTaglibMap() {
@@ -86,6 +128,7 @@ public class PreviewUtil {
 	 * 
 	 * @param map
 	 *            tag attribute map
+	 * @return the attribute string
 	 */
 	public static String getAttributesAsString(Map map) {
 		return getAttributesAsString(map, true);
@@ -96,6 +139,7 @@ public class PreviewUtil {
 	 * 
 	 * @param uri
 	 *            taglib uri
+	 * @return the path as a string
 	 */
 	public static String getPathFromURI(String uri) {
 		if (uri == null) {
@@ -134,6 +178,7 @@ public class PreviewUtil {
 	 * 
 	 * @param attrValue
 	 *            expression
+	 * @return the value
 	 */
 	public static String getValueOFEP(String attrValue) {
 		if (attrValue != null) {
@@ -176,16 +221,18 @@ public class PreviewUtil {
 	 *            tag attribute map
 	 * @param flag
 	 *            state
+	 * @return the attributes as a single string
 	 */
-	public static String getAttributesAsString(Map map, boolean flag) {
+	private static String getAttributesAsString(Map<String, String> map, boolean flag) {
 		if (map == null) {
 			return null;
 		}
 
 		StringBuffer stringbuffer = new StringBuffer();
-		for (Iterator e = map.keySet().iterator(); e.hasNext();) {
-			String attrName = (String) e.next();
-			String attrValue = (String) map.get(attrName);
+		for (Iterator<Entry<String, String>> e = map.entrySet().iterator(); e.hasNext();) {
+		    Map.Entry<String,String> entry = e.next();
+			String attrName = entry.getKey();
+			String attrValue = entry.getValue();
 			attrValue = getValueOFEP(attrValue);
 			if (ICSSPropertyID.ATTR_SRC.equalsIgnoreCase(attrName)
 					|| ICSSPropertyID.ATTR_HREF.equalsIgnoreCase(attrName)
@@ -229,6 +276,7 @@ public class PreviewUtil {
 	 * 
 	 * @param nodeMap
 	 *            NamedNodeMap type
+	 * @return the map
 	 */
 	public static Map getAttributeMap(NamedNodeMap nodeMap) {
 		if (nodeMap != null) {
@@ -252,7 +300,7 @@ public class PreviewUtil {
 	/**
 	 * @param result
 	 * @param editorInput
-	 * @return
+	 * @return the file
 	 */
 	public static File toFile(StringBuffer result, IEditorInput editorInput) {
 		try {
