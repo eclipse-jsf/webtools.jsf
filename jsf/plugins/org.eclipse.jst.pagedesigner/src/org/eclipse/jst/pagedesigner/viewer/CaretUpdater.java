@@ -37,7 +37,7 @@ import org.eclipse.swt.widgets.Caret;
  * 
  * @author mengbo
  */
-public class CaretUpdater implements IHTMLGraphicalViewerListener,
+/*package*/ class CaretUpdater implements IHTMLGraphicalViewerListener,
 		FigureListener {
 //	private static final Logger _log = PDPlugin.getLogger(CaretUpdater.class);
 
@@ -45,6 +45,9 @@ public class CaretUpdater implements IHTMLGraphicalViewerListener,
 
 	private boolean _viewerBatchChanging = false;
 
+	/**
+	 * the width value of the caret in pixels
+	 */
 	public static final int CARET_WIDTH = 2;
 
 	/**
@@ -53,15 +56,19 @@ public class CaretUpdater implements IHTMLGraphicalViewerListener,
 	 */
 	private IFigure _trackFigure;
 
-	//TODO: dead? private Polyline _rangeStartCaret;
-
+	/**
+	 * @param viewer
+	 */
 	public CaretUpdater(IHTMLGraphicalViewer viewer) {
 		_viewer = viewer;
 		setup();
 	}
 
+	/**
+	 * set up the
+	 */
 	public void setup() {
-		_viewer.addSelectionChangedListener(this);
+		_viewer.addHTMLViewerListener(this);
 	}
 
 	/**
@@ -98,14 +105,15 @@ public class CaretUpdater implements IHTMLGraphicalViewerListener,
 		}
 	}
 
+	/**
+	 * dispose the instance
+	 */
 	public void dispose() {
-		_viewer.removeSelectionChangedListener(this);
+		_viewer.removeHTMLViewerListener(this);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.jface.viewers.ISelectionChangedListener#selectionChanged(org.eclipse.jface.viewers.SelectionChangedEvent)
+	/**
+	 * Update the selection
 	 */
 	public void updateSelection() {
 		setCaretVisible(false);
@@ -130,12 +138,14 @@ public class CaretUpdater implements IHTMLGraphicalViewerListener,
 	private void updateRangeSelection() {
 		// FIXME: optimization needed here. Normally should not repaint the
 		// whole page.
-		// TODO: dead?? DesignRange range = _viewer.getRangeSelection();
 		((GraphicalEditPart) _viewer.getRootEditPart()).getFigure().repaint();
 		((GraphicalEditPart) _viewer.getRootEditPart()).getFigure()
 				.getUpdateManager().performUpdate();
 	}
 
+	/**
+	 * update the caret
+	 */
 	public void updateCaret() {
 		if (_trackFigure != null) {
 			_trackFigure.removeFigureListener(this);
