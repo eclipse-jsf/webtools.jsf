@@ -230,6 +230,16 @@
 		<trait id="large-icon">
 			<value>large/JSF_OUTPUTFORMAT.gif</value>
 		</trait>	
+		<trait id="tag-create">
+			<value xsi:type="pi:TagCreationInfo">
+				<template><![CDATA[
+					<param value=""
+						_uri_="http://java.sun.com/jsf/core" />
+					]]>
+				</template>
+				<attribute id="value" value="outputFormat" />
+			</value>			
+		</trait>
 	</entity>
 	<entity id="outputLabel" type="tag">		
 		<trait id="display-label">
@@ -241,6 +251,12 @@
 		<trait id="large-icon">
 			<value>large/JSF_OUTPUTLABEL.gif</value>
 		</trait>		
+ 		<trait id="tag-create">
+ 			<value xsi:type="pi:TagCreationInfo">
+ 				<attribute id="for" />
+				<attribute id="value" value="outputLabel" />
+ 			</value>
+ 		</trait>
 	</entity>
 	<entity id="outputLink" type="tag">
 		<trait id="display-label">
@@ -255,7 +271,7 @@
 		<trait id="tag-create">
 			<value xsi:type="pi:TagCreationInfo">
 				<template><![CDATA[
-				<outputText value="OutputLink"
+				<outputText value="outputLink"
 					_$uri$="http://java.sun.com/jsf/html" />
 				]]></template>
 
@@ -272,6 +288,11 @@
 		<trait id="large-icon">
 			<value>large/JSF_OUTPUTTEXT.gif</value>
 		</trait>			
+		<trait id="tag-create">
+			<value xsi:type="pi:TagCreationInfo">
+				<attribute id="value" value="outputText" />
+			</value>
+		</trait>
 	</entity>
 	<entity id="panelGrid" type="tag">
 		<trait id="display-label">
