@@ -9,5 +9,5 @@
 </head>
 <body>
 
-<f:view><h:outputText></h:outputText></f:view></body>
+<f:view><h:outputText value="outputText"></h:outputText></f:view></body>
 </html>

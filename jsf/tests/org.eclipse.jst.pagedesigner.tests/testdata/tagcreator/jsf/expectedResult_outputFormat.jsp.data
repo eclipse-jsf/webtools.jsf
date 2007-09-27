@@ -9,5 +9,5 @@
 </head>
 <body>
 
-<f:view><h:outputFormat></h:outputFormat></f:view></body>
+<f:view><h:outputFormat value="outputFormat"><f:param value=""></f:param></h:outputFormat></f:view></body>
 </html>
