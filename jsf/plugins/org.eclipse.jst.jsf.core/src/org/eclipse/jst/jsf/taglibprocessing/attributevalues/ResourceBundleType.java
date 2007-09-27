@@ -1,5 +1,6 @@
 package org.eclipse.jst.jsf.taglibprocessing.attributevalues;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,7 +55,9 @@ public class ResourceBundleType extends AbstractRootTypeDescriptor implements IV
 			//error message is generated later
 		}
 		
-		_validationMsgs.add(new ValidationMessage( Messages.Bundle_not_found_rb, "", IStatus.ERROR));
+		final String message = 
+			MessageFormat.format(Messages.Bundle_not_found_rb, value); 
+		_validationMsgs.add(new ValidationMessage(message, "", IStatus.ERROR));
 		return false;
 	}
 	
