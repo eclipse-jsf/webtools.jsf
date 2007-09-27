@@ -63,13 +63,10 @@ class MetadataContextResolver implements IMetadataContextResolver
             
             final ITaglibDomainMetaDataModelContext mdContext = TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(project, uri);
             Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(mdContext, element.getLocalName()+"/"+attribute.getLocalName(), key); //$NON-NLS-1$
-            return TraitValueHelper.getValueAsListOfStrings(trait);
-//            return
-//                CMAnnotationHelper.
-//                    getCMAttributeProperties(uri, 
-//                                             element.getLocalName(), 
-//                                             attribute.getLocalName(),
-//                                             key);
+            if( trait != null )
+            {
+            	return TraitValueHelper.getValueAsListOfStrings(trait);
+            }
             
         }
         else if (curNode instanceof Element)
@@ -80,12 +77,10 @@ class MetadataContextResolver implements IMetadataContextResolver
             
             final ITaglibDomainMetaDataModelContext mdContext = TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(project, uri);
             Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(mdContext, element.getLocalName(), key);
-            return TraitValueHelper.getValueAsListOfStrings(trait);
-//            return
-//                CMAnnotationHelper.
-//                    getCMElementProperties(uri, 
-//                             element.getLocalName(), 
-//                             key);
+            if( trait != null )
+            {
+            	return TraitValueHelper.getValueAsListOfStrings(trait);
+            }
         }
         
         return Collections.EMPTY_LIST;
