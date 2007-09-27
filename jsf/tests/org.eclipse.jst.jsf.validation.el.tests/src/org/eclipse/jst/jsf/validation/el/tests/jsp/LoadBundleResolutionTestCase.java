@@ -1,16 +1,26 @@
 package org.eclipse.jst.jsf.validation.el.tests.jsp;
 
 import java.io.ByteArrayInputStream;
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.IDOMContextResolver;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
+import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
+import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
 import org.eclipse.jst.jsf.core.JSFVersion;
+import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
+import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
+import org.eclipse.jst.jsf.metadataprocessors.MetaDataEnabledProcessingFactory;
+import org.eclipse.jst.jsf.metadataprocessors.features.IValidValues;
 import org.eclipse.jst.jsf.test.util.TestFileResource;
 import org.eclipse.jst.jsf.validation.el.tests.ELValidationTestPlugin;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 import org.eclipse.wst.validation.internal.provisional.core.IMessage;
+import org.w3c.dom.Attr;
 
 /**
  * Test cases for load bundle resolution
@@ -67,6 +77,8 @@ public class LoadBundleResolutionTestCase extends SingleJSPTestCase
         //assertNoError(1375, TypeConstants.TYPE_STRING);
         assertNoError(1417, TypeConstants.TYPE_STRING);
         assertNoError(1458, TypeConstants.TYPE_STRING);
+        // see  https://bugs.eclipse.org/bugs/show_bug.cgi?id=190671
+        assertNoError(1640, TypeConstants.TYPE_JAVAOBJECT);
     }
 
     public void testWarningExprs() 
@@ -77,8 +89,14 @@ public class LoadBundleResolutionTestCase extends SingleJSPTestCase
         list = assertSemanticWarning(1588, null, 1);
         assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
 
-        list = assertSemanticWarning(1640, null, 1);
-        assertContainsProblem(list, DiagnosticFactory.VARIABLE_NOT_FOUND_ID);
+        // ensure that we are validating that the basename for the missing bundle
+        // is being validated since the related variable will not be flagged
+        // this check replaces a previous check at 1640 for a variable not 
+        // found warning. Rather than marking loadBundle variables bad when
+        // we can't find the variable, we now mark the basename bad instead
+        // of the variable
+        // see https://bugs.eclipse.org/bugs/show_bug.cgi?id=190671
+        ensureMissingBundleValidation();
         
         list = assertSemanticWarning(1677, null, 1);
         assertContainsProblem(list, DiagnosticFactory.MEMBER_IS_INTERMEDIATE_ID);
@@ -90,5 +108,45 @@ public class LoadBundleResolutionTestCase extends SingleJSPTestCase
     public void testErrorExprs() 
     {
         // no error
+    }
+    
+        
+    @SuppressWarnings("unchecked")
+	private void ensureMissingBundleValidation()
+    {
+        final IStructuredDocumentContext context = 
+            IStructuredDocumentContextFactory.INSTANCE.getContext(_structuredDocument, 872);
+
+        final IDOMContextResolver contextResolver =
+        	IStructuredDocumentContextResolverFactory.INSTANCE.getDOMContextResolver(context);
+        
+        final Attr attr = (Attr) contextResolver.getNode();
+        String attributeVal = attr.getValue();
+        assertEquals("TestMessages", attributeVal);
+        assertEquals(IJSFConstants.ATTR_BASENAME, attr.getLocalName());
+        
+        // verify that attribute value validation is picking up on missing bundles
+		List vv = 
+			MetaDataEnabledProcessingFactory.getInstance()
+				.getAttributeValueRuntimeTypeFeatureProcessors
+					(IValidValues.class, context, ITLDConstants.URI_JSF_CORE
+						, IJSFConstants.TAG_LOADBUNDLE, IJSFConstants.ATTR_BASENAME);
+
+		boolean validatesMissingBundle = false;
+		
+		for (Iterator it = vv.iterator();it.hasNext();)
+		{
+			IValidValues v = (IValidValues)it.next();
+			if (attributeVal == null) attributeVal = "";//ensure to be non-null
+			if (!v.isValidValue(attributeVal.trim())){	
+				if (v.getValidationMessages().size() > 0)
+				{
+					validatesMissingBundle = true;
+					break;
+				}
+			}
+		}
+		
+		assertTrue(validatesMissingBundle);
     }
 }
