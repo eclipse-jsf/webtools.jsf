@@ -38,12 +38,12 @@ public class JSFLibraryConfigDialogSettingData implements JSFLibraryConfiglModel
 	
 	
 	/**
-	 * Constructor where implementation type was chosen to be CLIENT_SUPPLIED.  Created for backwards compatibilty when server supplied was not an option.
+	 * Constructor where implementation type was chosen to be USER_SPECIFIED.  Created for backwards compatibilty when server supplied was not an option.
 	 * @param implLibDeployFlag
 	 * @param compLibs
 	 */
 	public JSFLibraryConfigDialogSettingData(boolean implLibDeployFlag, String[] compLibs) {
-		this(IMPLEMENTATION_TYPE.CLIENT_SUPPLIED, implLibDeployFlag, compLibs);		
+		this(IMPLEMENTATION_TYPE.USER_SPECIFIED, implLibDeployFlag, compLibs);		
 	}
 	
 	/**
@@ -84,7 +84,7 @@ public class JSFLibraryConfigDialogSettingData implements JSFLibraryConfiglModel
 	 */
 	public JSFLibraryInternalReference getJSFImplementationLibrary() {
 		if (selJSFLibImpl == null) {
-			// To instanciate a JSFLibraryReferenceUserDefined object from default impl lib as the saved library.  
+			// To instanciate a JSFLibraryReferenceUserSpecified object from default impl lib as the saved library.  
 			JSFLibraryInternalReference dftImplLib = jsfLibReg.getDefaultJSFImplementationLibrary(); 		
 			if (dftImplLib != null) {
 				selJSFLibImpl = new JSFLibraryInternalReference(dftImplLib.getLibrary(), 

@@ -112,7 +112,7 @@ public class JSFFacetInstallDataModelProvider extends
 			}
 		}
 		else if (name.equals(IMPLEMENTATION)) {
-			if (getProperty(IMPLEMENTATION_TYPE_PROPERTY_NAME) == IMPLEMENTATION_TYPE.CLIENT_SUPPLIED) {
+			if (getProperty(IMPLEMENTATION_TYPE_PROPERTY_NAME) == IMPLEMENTATION_TYPE.USER_SPECIFIED) {
 				JSFLibraryInternalReference lib = (JSFLibraryInternalReference)getProperty(IMPLEMENTATION);
 				IStatus status = validateImpl(lib.getLibrary());
 				if (!OK_STATUS.equals(status))
@@ -227,7 +227,7 @@ public class JSFFacetInstallDataModelProvider extends
 		IStatus status = null;
 		
 		JSFLibraryInternalReference ref = null;
-		if (getProperty(IMPLEMENTATION_TYPE_PROPERTY_NAME) == IMPLEMENTATION_TYPE.CLIENT_SUPPLIED) {
+		if (getProperty(IMPLEMENTATION_TYPE_PROPERTY_NAME) == IMPLEMENTATION_TYPE.USER_SPECIFIED) {
 			ref = ((JSFLibraryInternalReference)getProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION));
 			if (ref != null){
 				status = checkForDupeArchiveFiles(jars, ((JSFLibraryInternalReference)getProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION)).getLibrary());

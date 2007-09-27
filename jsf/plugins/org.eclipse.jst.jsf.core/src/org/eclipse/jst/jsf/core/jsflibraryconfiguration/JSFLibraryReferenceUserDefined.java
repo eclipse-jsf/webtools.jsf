@@ -12,7 +12,8 @@ package org.eclipse.jst.jsf.core.jsflibraryconfiguration;
 
 
 /**
- * Represents an reference to a user defined JSF Library
+ * Represents an reference to a user specified JSF Library
+ * @deprecated use JSFLibraryReferenceUserSpecified 
  */
 public interface JSFLibraryReferenceUserDefined extends JSFLibraryReference {
 	//

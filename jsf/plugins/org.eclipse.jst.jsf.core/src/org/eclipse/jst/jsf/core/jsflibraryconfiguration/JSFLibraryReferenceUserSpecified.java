@@ -10,14 +10,12 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.core.jsflibraryconfiguration;
 
+
 /**
- * A reference to a plugin-defined JSF Library
- *
+ * Represents an reference to a user specified JSF Library
+ * 
  * <p><b>Provisional API - subject to change</b></p>
  */
-public interface JSFLibraryReferencePluginProvided extends JSFLibraryReferenceUserSpecified, JSFLibraryReferenceUserDefined {
-	/**
-	 * @return plugin id.  May return null if plugin id cannot be determined.  
-	 */
-	public String getPluginId();
+public interface JSFLibraryReferenceUserSpecified extends JSFLibraryReference {
+	//
 }

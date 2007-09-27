@@ -12,17 +12,18 @@ package org.eclipse.jst.jsf.core.jsflibraryconfiguration.internal;
 
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryInternalReference;
 import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFLibraryReferenceUserDefined;
+import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFLibraryReferenceUserSpecified;
 
 /**
- * Implementation of a reference to a user defined JSF Library  
+ * Implementation of a reference to a user specified JSF Library  
  *
  */
-public class JSFLibraryReferenceUserDefinedImpl extends AbstractJSFLibraryReferenceImpl implements JSFLibraryReferenceUserDefined{
+public class JSFLibraryReferenceUserSpecifiedImpl extends AbstractJSFLibraryReferenceImpl implements JSFLibraryReferenceUserSpecified, JSFLibraryReferenceUserDefined{
 	/**
 	 * @param libRef of type {@link JSFLibraryInternalReference}
 	 * @param isDeployed
 	 */
-	public JSFLibraryReferenceUserDefinedImpl(
+	public JSFLibraryReferenceUserSpecifiedImpl(
 			JSFLibraryInternalReference libRef, boolean isDeployed) {
 
 		super(libRef, isDeployed);
@@ -32,7 +33,7 @@ public class JSFLibraryReferenceUserDefinedImpl extends AbstractJSFLibraryRefere
 	 * @see org.eclipse.jst.jsf.core.jsflibraryconfiguration.internal.AbstractJSFLibraryReferenceImpl#toString()
 	 */
 	public String toString() {
-		StringBuffer buf = new StringBuffer("UserDefined: (");
+		StringBuffer buf = new StringBuffer("UserSpecified: (");
 		buf.append(super.toString());
 		buf.append(")");
 		

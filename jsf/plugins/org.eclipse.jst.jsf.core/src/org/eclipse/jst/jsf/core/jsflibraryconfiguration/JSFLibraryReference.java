@@ -16,7 +16,8 @@ import org.eclipse.jdt.core.IClasspathEntry;
 
 /**
  * Represents a reference to a JSF Library on a project
- *
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  */
 public abstract interface JSFLibraryReference {
 	/**

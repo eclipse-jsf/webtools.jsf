@@ -89,7 +89,13 @@ public interface IJSFFacetInstallDataModelProperties extends
     	 */
     	SERVER_SUPPLIED,
     	/**
-    	 * Client supplied
+    	 * Not supplied by the server.  The user is specifiying.
+    	 */
+    	USER_SPECIFIED,
+    	
+    	/**
+    	 * Not supplied by the server.  The user is specifiying.  Same as USER_SPECIFIED.
+    	 * @deprecated use USER_SPECIFIED
     	 */
     	CLIENT_SUPPLIED;
     	
@@ -102,8 +108,8 @@ public interface IJSFFacetInstallDataModelProperties extends
     			return "UNKNOWN"; //$NON-NLS-1$
     		if (type ==  SERVER_SUPPLIED)
     			return "SERVER_SUPPLIED";//$NON-NLS-1$
-    		if (type == CLIENT_SUPPLIED)
-    			return "CLIENT_SUPPLIED";//$NON-NLS-1$
+    		if (type == USER_SPECIFIED || type ==CLIENT_SUPPLIED )
+    			return "USER_SPECIFIED";//$NON-NLS-1$
     		return "UNKNOWN"; //$NON-NLS-1$
     	}
     	
@@ -116,9 +122,10 @@ public interface IJSFFacetInstallDataModelProperties extends
     			return UNKNOWN;
     		if (type.equals("SERVER_SUPPLIED"))//$NON-NLS-1$
     			return SERVER_SUPPLIED;
-    		if (type.equals("CLIENT_SUPPLIED"))//$NON-NLS-1$
-    			return CLIENT_SUPPLIED;
+    		if (type.equals("USER_SPECIFIED") || type.equals("CLIENT_SUPPLIED"))//$NON-NLS-1$// $NON-NLS-2$
+    			return USER_SPECIFIED;
     		return UNKNOWN; 
     	}
+    	
     }
 }

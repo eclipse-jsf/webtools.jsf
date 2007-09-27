@@ -11,8 +11,10 @@
 package org.eclipse.jst.jsf.core.jsflibraryconfiguration;
 
 /**
- * @author gekessle
- *
+ * A reference to a JSF Library where the implementation library is presumed to be coming from the 
+ * server
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  */
 public interface JSFLibraryReferenceServerSupplied extends
 		JSFLibraryReference {

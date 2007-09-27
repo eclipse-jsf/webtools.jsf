@@ -24,14 +24,14 @@ import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFLibraryReferenceServe
  */
 public class JSFLibraryReferenceFacadeFactory {
 	/**
-	 * Returns a JSFLibraryReferenceUserDefined or JSFLibraryReferencePluginProvided instance.
+	 * Returns a JSFLibraryReferenceUserSpecified (or JSFLibraryReferenceUserDefined})  or JSFLibraryReferencePluginProvided instance.
 	 * Will not create a JSFLibraryReferenceServerSupplied as there is no cp entry.   Use createServerSuppliedJSFLibRef instead.
-	 * @param cpEntry
-	 * @return an instance of JSFLibraryInternalReference.  Null will be returned if the cpEntry is not a 
+	 * @param classpathEntry
+	 * @return an instance of JSFLibraryInternalReference.  Null will be returned if the cpEntry is not a JSF Library reference.
 	 */
-	public static JSFLibraryReference create(final IClasspathEntry cpEntry) {
-		if (JSFLibraryConfigurationHelper.isJSFLibraryContainer(cpEntry)){
-			return createReference(cpEntry);
+	public static JSFLibraryReference create(final IClasspathEntry classpathEntry) {
+		if (JSFLibraryConfigurationHelper.isJSFLibraryContainer(classpathEntry)){
+			return createReference(classpathEntry);
 		}
 		return null;
 	}
@@ -45,26 +45,26 @@ public class JSFLibraryReferenceFacadeFactory {
 
 
 	/**
-	 * @param cpEntry
+	 * @param classpathEntry
 	 * @return {@link JSFLibraryReference}
 	 */
 	private static JSFLibraryReference createReference(
-			final IClasspathEntry cpEntry) {
+			final IClasspathEntry classpathEntry) {
 		
-		String libID = cpEntry.getPath().segment(1);
+		String libID = classpathEntry.getPath().segment(1);
 		org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryInternalReference libRef = JSFLibraryRegistryUtil.getInstance().getJSFLibraryReferencebyID(libID);
 		if (libRef!= null){
-			boolean isDeployed = getJ2EEModuleDependency(cpEntry);
+			boolean isDeployed = getJ2EEModuleDependency(classpathEntry);
 			if (libRef.getLibrary() != null && libRef.getLibrary() instanceof PluginProvidedJSFLibrary)
 				return new JSFLibraryReferencePluginProvidedImpl(libRef, isDeployed);
 			
-			return new JSFLibraryReferenceUserDefinedImpl(libRef, isDeployed);
+			return new JSFLibraryReferenceUserSpecifiedImpl(libRef, isDeployed);
 		}
 		return null;
 	}
 
-	private static boolean getJ2EEModuleDependency(IClasspathEntry cpEntry) {
-		IClasspathAttribute[] attrs = cpEntry.getExtraAttributes();
+	private static boolean getJ2EEModuleDependency(IClasspathEntry classpathEntry) {
+		IClasspathAttribute[] attrs = classpathEntry.getExtraAttributes();
 		for (int i=0;i<attrs.length;i++){
 			IClasspathAttribute attr = attrs[i];
 			if (attr.getName().equals(IClasspathDependencyConstants.CLASSPATH_COMPONENT_DEPENDENCY)){

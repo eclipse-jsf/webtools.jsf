@@ -11,8 +11,9 @@
 package org.eclipse.jst.jsf.core.jsflibraryconfiguration;
 
 /**
- * @author gekessle
+ * Enumeration of JavaServer Faces Versions
  *
+ * <p><b>Provisional API - subject to change</b></p>
  */
 public enum JSFVersion {
 	
