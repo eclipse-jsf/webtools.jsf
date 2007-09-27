@@ -242,6 +242,9 @@ public class JSFHtmlOutputFormatParamsSection extends BaseCustomSection
         }
     }
 
+    /**
+     * Default constructor
+     */
     public JSFHtmlOutputFormatParamsSection()
     {
         super();

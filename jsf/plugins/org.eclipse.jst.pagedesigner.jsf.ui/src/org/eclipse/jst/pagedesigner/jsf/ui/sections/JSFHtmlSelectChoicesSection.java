@@ -168,6 +168,9 @@ public class JSFHtmlSelectChoicesSection extends BaseCustomSection
         }
     }
 
+    /**
+     * Default constructor
+     */
     public JSFHtmlSelectChoicesSection()
     {
         super();

@@ -169,6 +169,9 @@ public class JSFHtmlActionListenerSection extends BaseCustomSection
         }
     }
 
+    /**
+     * Default constructor
+     */
     public JSFHtmlActionListenerSection()
     {
         super();

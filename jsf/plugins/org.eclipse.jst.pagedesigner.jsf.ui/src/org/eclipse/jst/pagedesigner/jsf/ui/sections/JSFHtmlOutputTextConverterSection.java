@@ -171,6 +171,9 @@ public class JSFHtmlOutputTextConverterSection extends BaseCustomSection
 
     }
 
+    /**
+     * Default constructor
+     */
     public JSFHtmlOutputTextConverterSection()
     {
         super();

@@ -335,7 +335,10 @@ public class JSFHtmlDataTableColumnsSection extends BaseCustomSection
         );
     }
 
-    public void updateButtonStatus()
+    /**
+     * Update the button status
+     */
+    private void updateButtonStatus()
     {
         _removeButton.setEnabled(true);
         _moveUpButton.setEnabled(true);
