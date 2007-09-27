@@ -25,6 +25,8 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistry;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.PluginProvidedJSFLibrary;
 import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFLibraryConfigurationHelper;
 import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFLibraryReference;
+import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFLibraryReferenceUserDefined;
+import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFLibraryReferenceUserSpecified;
 import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFVersion;
 import org.eclipse.jst.jsf.core.jsflibraryconfiguration.internal.JSFLibraryReferenceFacadeFactory;
 import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
@@ -137,10 +139,14 @@ public class JSFLibraryReferenceTestCases extends TestCase {
 					String libID = getLibId(cpEntry);
 					Assert.assertNotNull(libID+": ref", ref);
 					if (libID.equals("JSFLIBIMPL_NAME")){
-						doAsserts(ref, "JSFLibraryReferenceUserDefinedImpl", "JSFLIBIMPL_NAME", "JSFLIBIMPL_NAME", "JSFLIBIMPL_NAME", false, true, JSFVersion.V1_1, 4 );						
+						doAsserts(ref, "JSFLibraryReferenceUserSpecifiedImpl", "JSFLIBIMPL_NAME", "JSFLIBIMPL_NAME", "JSFLIBIMPL_NAME", false, true, JSFVersion.V1_1, 4 );	
+						assertTrue(ref instanceof JSFLibraryReferenceUserDefined);
+						assertTrue(ref instanceof JSFLibraryReferenceUserSpecified);
 					}
 					else if (libID.equals("JSFLIBNONIMPL_NAME")){
-						doAsserts(ref, "JSFLibraryReferenceUserDefinedImpl", "JSFLIBNONIMPL_NAME", "JSFLIBNONIMPL_NAME", "JSFLIBNONIMPL_NAME", false,false, JSFVersion.V1_2, 3);	
+						doAsserts(ref, "JSFLibraryReferenceUserSpecifiedImpl", "JSFLIBNONIMPL_NAME", "JSFLIBNONIMPL_NAME", "JSFLIBNONIMPL_NAME", false,false, JSFVersion.V1_2, 3);
+						assertTrue(ref instanceof JSFLibraryReferenceUserDefined);
+						assertTrue(ref instanceof JSFLibraryReferenceUserSpecified);
 					}
 					else if (libID.equals("PluginProvidedLib$$PP-JSFLIBNONIMPL_NAME")){
 						doAsserts(ref, "JSFLibraryReferencePluginProvidedImpl", "PluginProvidedLib$$PP-JSFLIBNONIMPL_NAME", "PP-JSFLIBNONIMPL_NAME", "PluginProvidedLib", true, false, JSFVersion.V1_1, 8 );

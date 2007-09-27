@@ -174,7 +174,7 @@ public class JSFLibraryConfigModelTestCases extends TestCase {
 	public void testGetSavedImplementationType() {
 		JSFLibraryConfigModel model = JSFLibraryConfigModelFactory.createInstance(modelSrc);
 		Assert.assertNotNull(model.getImplementationType());		
-		Assert.assertTrue(model.getImplementationType() == IMPLEMENTATION_TYPE.CLIENT_SUPPLIED);
+		Assert.assertTrue(model.getImplementationType() == IMPLEMENTATION_TYPE.USER_SPECIFIED);
 		
 		model = JSFLibraryConfigModelFactory.createInstance(modelSrcWithServerSupplied);
 		Assert.assertNotNull(model.getImplementationType());		
