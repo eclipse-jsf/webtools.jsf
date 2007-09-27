@@ -131,4 +131,9 @@ public class Messages extends NLS {
      * see messages.properties
      */	
 	public static String ColorType_invalid_color;
+	
+	/**
+	 * see messages.properties
+	 */
+	public static String Bundle_not_found_rb;
 }

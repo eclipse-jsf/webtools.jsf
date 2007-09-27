@@ -192,6 +192,13 @@
 				<value>org.eclipse.jst.jsf.designtime.core.loadBundle</value>
 			</trait>
 		</entity>
+		<entity id="basename">
+			<trait id="attribute-value-runtime-type">
+				<value>
+					org.eclipse.jst.jsf.core.attributevalues.ResourceBundleType
+				</value>
+			</trait>
+		</entity>
 	</entity>
 	<entity id="param" type="tag"><include-entity-group id="common-core-attributes"/></entity>
 	<entity id="selectItem" type="tag">

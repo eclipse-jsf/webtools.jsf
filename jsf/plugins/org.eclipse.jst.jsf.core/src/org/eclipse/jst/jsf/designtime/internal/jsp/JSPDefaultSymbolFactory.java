@@ -22,11 +22,13 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IDOMContextResolver;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.ITaglibContextResolver;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IWorkspaceContextResolver;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
+import org.eclipse.jst.jsf.context.symbol.IBoundedJavaTypeDescriptor;
 import org.eclipse.jst.jsf.context.symbol.IComponentSymbol;
 import org.eclipse.jst.jsf.context.symbol.IMapTypeDescriptor;
 import org.eclipse.jst.jsf.context.symbol.ISymbol;
@@ -198,6 +200,15 @@ public class JSPDefaultSymbolFactory extends AbstractContextSymbolFactory
                 {
                     problems.add(new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID, 0,Messages.getString("JSPDefaultSymbolFactory.Problem.ErrorCreatingVariable"), ce)); //$NON-NLS-1$
                 }
+                
+                final IBoundedJavaTypeDescriptor typeDesc = SymbolFactory.eINSTANCE.createIBoundedJavaTypeDescriptor();
+                typeDesc.setTypeSignatureDelegate( TypeConstants.TYPE_JAVAOBJECT );
+                final IComponentSymbol symbol = SymbolFactory.eINSTANCE.createIComponentSymbol();
+                symbol.setName(symbolName);
+                symbol.setTypeDescriptor(typeDesc);
+                symbol.setDetailedDescription(Messages.getString("JSPDefaultSymbolFactory.Resource.bundle.map.detailedDescription")+baseNameNode.getNodeValue()+"</i>"); //$NON-NLS-1$ //$NON-NLS-2$
+                
+                return symbol;
             }
         }
         return null;

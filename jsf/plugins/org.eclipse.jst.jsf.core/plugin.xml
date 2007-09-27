@@ -210,7 +210,10 @@
             id="attributevalues.LengthType"/>           
       <attributeValueRuntimeType
             class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.ColorType"
-            id="attributevalues.ColorType"/>          
+            id="attributevalues.ColorType"/>
+      <attributeValueRuntimeType
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.ResourceBundleType"
+            id="attributevalues.ResourceBundleType"/>         
    </extension>
    
    <extension
