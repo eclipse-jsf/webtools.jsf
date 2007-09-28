@@ -67,7 +67,11 @@ public class JSFLibraryConfigModelTestCases extends TestCase {
 		JSFLibraryConfigModel model = JSFLibraryConfigModelFactory.createInstance(modelSrc);
 
 		Assert.assertNotNull(model);
-		Assert.assertTrue(model.getJSFImplementationLibraries().size() >= 2);		
+		// we should have at least as many impl libraries as we have added
+		// NOTE: this test case has  interactions with test cases in the same suite
+		// since JSF libs exist on a workspace basis which is normally not cleared
+		// between each TestCase being run
+		Assert.assertTrue(model.getJSFImplementationLibraries().size() >= numCompLibs);		
 	}
 
 	public void testGetJSFComponentLibraries() {
