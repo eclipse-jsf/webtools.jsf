@@ -144,7 +144,8 @@ public class Test_bug_149224 extends TestCase
      *      # { b u n d l e 1 . }
      *                         ^ 
      */
-    public void testCompletionAtCloseBrace()
+    @SuppressWarnings("unchecked")
+	public void testCompletionAtCloseBrace()
     {
         ContextWrapper wrapper = null;
 
@@ -201,7 +202,8 @@ public class Test_bug_149224 extends TestCase
      *      # { b u n d l e 1 . x }
      *                         ^ 
      */
-    public void testCompletionAtProperty()
+    @SuppressWarnings("unchecked")
+	public void testCompletionAtProperty()
     {
         ContextWrapper wrapper = null;
         

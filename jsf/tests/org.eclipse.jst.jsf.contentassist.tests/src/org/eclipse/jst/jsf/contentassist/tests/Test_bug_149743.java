@@ -133,7 +133,7 @@ public class Test_bug_149743 extends TestCase
                     (wrapper.getContext().getDocumentPosition() 
                             - resolver.getStartOffset() + 1, elText);
 
-            List proposals = strategy.getProposals(wrapper.getContext());
+            List<?> proposals = strategy.getProposals(wrapper.getContext());
             assertEquals(2, proposals.size());
             Set<String>  names = new HashSet<String>();
             
