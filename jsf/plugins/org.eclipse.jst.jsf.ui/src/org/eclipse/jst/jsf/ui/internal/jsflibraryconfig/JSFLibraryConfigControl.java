@@ -269,7 +269,7 @@ public class JSFLibraryConfigControl extends Composite {
 			btnServerSupplied.setSelection(true);
 			btnUserSupplied.setSelection(false);
 			enableUserSupplied(false);
-		} else if (implType == IMPLEMENTATION_TYPE.CLIENT_SUPPLIED) {
+		} else if (implType == IMPLEMENTATION_TYPE.USER_SPECIFIED) {
 			btnServerSupplied.setSelection(false);
 			btnUserSupplied.setSelection(true);
 			enableUserSupplied(true);
@@ -451,7 +451,7 @@ public class JSFLibraryConfigControl extends Composite {
 	
 	private void setUserSuppliedLibrarySelection(final EventObject e) {
 		btnUserSupplied.setSelection(true);
-		model.setProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION_TYPE_PROPERTY_NAME, IJSFFacetInstallDataModelProperties.IMPLEMENTATION_TYPE.CLIENT_SUPPLIED);
+		model.setProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION_TYPE_PROPERTY_NAME, IJSFFacetInstallDataModelProperties.IMPLEMENTATION_TYPE.USER_SPECIFIED);
 		enableUserSupplied(true);	
 		fireChangedEvent(e);
 	}

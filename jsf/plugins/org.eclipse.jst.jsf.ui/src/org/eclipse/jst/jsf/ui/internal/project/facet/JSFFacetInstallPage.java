@@ -307,7 +307,7 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 			// if the impl type is still unknown, check if the product provided a default
 			IPreferenceStore prefs = JSFUiPlugin.getDefault().getPreferenceStore();
 			if(prefs.getBoolean(DEFAULT_TO_CLIENT)) {			
-				implType = IMPLEMENTATION_TYPE.CLIENT_SUPPLIED;
+				implType = IMPLEMENTATION_TYPE.USER_SPECIFIED;
 			}
 			else if(prefs.getBoolean(DEFAULT_TO_SERVER)) {	
 				implType = IMPLEMENTATION_TYPE.SERVER_SUPPLIED;
@@ -592,7 +592,7 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 		IMPLEMENTATION_TYPE implType = (IMPLEMENTATION_TYPE)model.getProperty(IMPLEMENTATION_TYPE_PROPERTY_NAME);
 		if (implType == IMPLEMENTATION_TYPE.SERVER_SUPPLIED)
 			enableFinish = true;
-		else if (implType == IMPLEMENTATION_TYPE.CLIENT_SUPPLIED && 
+		else if (implType == IMPLEMENTATION_TYPE.USER_SPECIFIED && 
 				control != null && control instanceof JSFLibraryConfigControl) {
 			enableFinish = (((JSFLibraryConfigControl)control).getSelectedJSFLibImplementation() != null);
 		} //else must be unknown type and requires user interaction

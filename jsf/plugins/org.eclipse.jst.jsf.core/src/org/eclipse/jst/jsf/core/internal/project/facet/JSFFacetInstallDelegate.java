@@ -130,7 +130,7 @@ public final class JSFFacetInstallDelegate implements IDelegate {
 		
 		//Implementation
 		if (config.getProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION_TYPE_PROPERTY_NAME) 
-				== IJSFFacetInstallDataModelProperties.IMPLEMENTATION_TYPE.CLIENT_SUPPLIED){
+				== IJSFFacetInstallDataModelProperties.IMPLEMENTATION_TYPE.USER_SPECIFIED){
 			cp = new Path(JSFLibraryConfigurationHelper.JSF_LIBRARY_CP_CONTAINER_ID);		
 			libref = (JSFLibraryInternalReference)config.getProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION);
 			path = cp.append(new Path(libref.getID()));
