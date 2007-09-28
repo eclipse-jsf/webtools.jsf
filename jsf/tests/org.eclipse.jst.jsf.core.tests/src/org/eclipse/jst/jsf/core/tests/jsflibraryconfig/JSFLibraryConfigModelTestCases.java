@@ -143,7 +143,7 @@ public class JSFLibraryConfigModelTestCases extends TestCase {
 					JSFUtils.PP_JSF_IMPLEMENTATION_TYPE));
 			
 			Assert.assertNotNull(type);
-			Assert.assertEquals(IMPLEMENTATION_TYPE.getStringValue(IMPLEMENTATION_TYPE.CLIENT_SUPPLIED), type);
+			Assert.assertEquals(IMPLEMENTATION_TYPE.getStringValue(IMPLEMENTATION_TYPE.USER_SPECIFIED), type);
 		} catch (CoreException e) {
 			fail("Not expecting an exception.");
 		}
