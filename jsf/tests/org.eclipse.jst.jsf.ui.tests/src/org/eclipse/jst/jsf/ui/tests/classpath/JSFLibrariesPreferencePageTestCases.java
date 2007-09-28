@@ -53,6 +53,7 @@ public class JSFLibrariesPreferencePageTestCases extends TestCase {
 	 * enabled/visible appropriatly for the differnt kinds of 
 	 * JSF Library selections in the TreeViewer.
 	 */
+	@SuppressWarnings("unchecked")
 	public void testPreferencePage() {
 		PreferenceDialog dialog = JSFUITestHelper.getPreferenceDialog("org.eclipse.jst.jsf.ui.jsfLibraryPage");
 

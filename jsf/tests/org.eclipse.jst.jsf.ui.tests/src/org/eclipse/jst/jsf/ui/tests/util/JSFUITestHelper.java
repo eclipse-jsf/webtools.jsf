@@ -51,6 +51,7 @@ public class JSFUITestHelper {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public static PreferenceDialog getPreferenceDialog(String id) {
 		PreferenceDialogWrapper dialog = null;
 		PreferenceManager manager = WorkbenchPlugin.getDefault().getPreferenceManager();
@@ -71,6 +72,7 @@ public class JSFUITestHelper {
 		return dialog;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public static PropertyDialog getPropertyDialog(String id, IAdaptable element) {
 		PropertyDialogWrapper dialog = null;
 
