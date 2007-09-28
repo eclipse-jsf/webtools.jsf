@@ -1,6 +1,5 @@
 package org.eclipse.jst.jsf.context.symbol.tests;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -42,25 +41,16 @@ import org.eclipse.text.edits.TextEdit;
 public class TestIJavaTypeDescriptor2_ChangeStability extends ModelBaseTestCase 
 {
     private IBeanInstanceSymbol     _testBean1Symbol;
-    private IBeanInstanceSymbol     _testBean1SubclassSymbol;
     private IBeanInstanceSymbol     _testBean2Symbol;
-    private IBeanInstanceSymbol     _testBean2SubclassSymbol;
-    private IBeanInstanceSymbol     _testBeanWithGenericProperties;
 
     private Map<String, IPropertySymbol>               _beanProperties;
     private Map<String, IBeanMethodSymbol>             _bean1Methods;
-    private Map<String, IPropertySymbol>               _beanSubclassProperties;
     private Map<String, IBeanMethodSymbol>             _bean2Methods;
     private Map<String, IPropertySymbol>               _bean2Properties;
-    private Map<String, IBeanMethodSymbol>             _beanMethodsSubclass;     
-    private Map<String, IPropertySymbol>               _genericProperties;
 
     private final static String packageName1 = "com.test";
     private final static String testBeanName1 = "TestBean1";
-    private final static String testBean1Sig = "L"+packageName1+"."+testBeanName1+";";
-    private final static String testBeanSubclass1 = "TestBean1Subclass";
     private final static String testBeanName2 = "TestBean2";
-    private final static String testBean2Subclass = "TestBean2Subclass";
 
     protected void setUp() throws Exception 
     {
@@ -80,29 +70,12 @@ public class TestIJavaTypeDescriptor2_ChangeStability extends ModelBaseTestCase
                               testBeanName1, _beanProperties);
         _bean1Methods = new HashMap<String, IBeanMethodSymbol>();
         populateMethodMap(_bean1Methods, _testBean1Symbol);
-        
-        _beanSubclassProperties = new HashMap<String, IPropertySymbol>();
-        _testBean1SubclassSymbol =
-            setupBeanProperty(TestsPlugin.getDefault().getBundle(), 
-                              "/testfiles/TestBean1Subclass.java.data", packageName1, 
-                              testBeanSubclass1, _beanSubclassProperties);
-
-        _genericProperties = new HashMap<String, IPropertySymbol>();
-
-        _testBeanWithGenericProperties =
-            setupBeanProperty(ContextSymbolTestPlugin.getDefault().getBundle(),
-                    "/testdata/TestBeanWithGenericProperties.java.data", packageName1, 
-                    "TestBeanWithGenericProperties",_genericProperties);
 
         _bean2Methods = new HashMap<String, IBeanMethodSymbol>();
         _testBean2Symbol = 
             setupBeanMethods("/testdata/TestBean2.java.data", testBeanName2, _bean2Methods);
         _bean2Properties = new HashMap<String, IPropertySymbol>();
         populatePropertyMap(_testBean2Symbol, _bean2Properties);
-        
-        _beanMethodsSubclass = new HashMap<String, IBeanMethodSymbol>();
-        _testBean2SubclassSymbol = 
-            setupBeanMethods("/testdata/TestBean2Subclass.java.data", testBean2Subclass, _beanMethodsSubclass);
     }
 
     

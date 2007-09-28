@@ -114,7 +114,7 @@ public class TestIPropertySymbolItemProvider extends TestCase
     
     private class MyCompletionFactory extends ProposalCreationFactoryAdapter
     {
-        final List        _replacementText;
+        final List<String>        _replacementText;
         
         /**
          * 
@@ -122,7 +122,7 @@ public class TestIPropertySymbolItemProvider extends TestCase
         public MyCompletionFactory()
         {
             super(0, 0);
-            _replacementText = new ArrayList();
+            _replacementText = new ArrayList<String>();
         }
 
         public ICompletionProposal createProposal(String replacementText, String displayText, String additionalText, Image displayImage, Object targetObject) 

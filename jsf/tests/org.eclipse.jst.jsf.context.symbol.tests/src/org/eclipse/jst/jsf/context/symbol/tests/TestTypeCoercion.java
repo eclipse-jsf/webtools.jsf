@@ -52,12 +52,12 @@ public class TestTypeCoercion extends ModelBaseTestCase
         _testMapBeanSymbol =
             setupBeanProperty(ContextSymbolTestPlugin.getDefault().getBundle(),
                     "/testdata/TestBeanMap.java.data", packageName, 
-                    "TestBeanMap", new HashMap());
+                    "TestBeanMap", new HashMap<String, IPropertySymbol>());
         
         _testListBeanSymbol =
             setupBeanProperty(ContextSymbolTestPlugin.getDefault().getBundle(),
                     "/testdata/MyListBean.java.data", packageName, 
-                    "MyListBean", new HashMap());
+                    "MyListBean", new HashMap<String, IPropertySymbol>());
         
         _genericProperties = new HashMap<String, IPropertySymbol>();
         

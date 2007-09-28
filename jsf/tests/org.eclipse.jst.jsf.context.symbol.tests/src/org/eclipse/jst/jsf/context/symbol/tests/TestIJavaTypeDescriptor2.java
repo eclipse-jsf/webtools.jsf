@@ -42,7 +42,7 @@ public class TestIJavaTypeDescriptor2 extends ModelBaseTestCase
 {
     private Map                     _beanProperties;
     private Map                     _beanSubclassProperties;
-    private Map                     _beanMethods;
+    private Map<String, IBeanMethodSymbol>  _beanMethods;
     private Map                     _beanMethodsSubclass;     
     private Map<String, IPropertySymbol> _genericProperties;
     
@@ -50,7 +50,6 @@ public class TestIJavaTypeDescriptor2 extends ModelBaseTestCase
     private IBeanInstanceSymbol     _testBean1SubclassSymbol;
     private IBeanInstanceSymbol     _testBean2Symbol;
     private IBeanInstanceSymbol     _testBean2SubclassSymbol;
-    private IBeanInstanceSymbol     _testBeanWithGenericProperties;
     
     private final static String packageName1 = "com.test";
     private final static String testBeanName1 = "TestBean1";
@@ -61,7 +60,8 @@ public class TestIJavaTypeDescriptor2 extends ModelBaseTestCase
 
     private final static String overloadedMethodName = "overloadedMethod";
     
-    protected void setUp() throws Exception 
+    @SuppressWarnings("unchecked")
+	protected void setUp() throws Exception 
     {
         super.setUp();
 
@@ -86,8 +86,7 @@ public class TestIJavaTypeDescriptor2 extends ModelBaseTestCase
 
         _genericProperties = new HashMap<String, IPropertySymbol>();
         
-        _testBeanWithGenericProperties =
-            setupBeanProperty(ContextSymbolTestPlugin.getDefault().getBundle(),
+        setupBeanProperty(ContextSymbolTestPlugin.getDefault().getBundle(),
                     "/testdata/TestBeanWithGenericProperties.java.data", packageName1, 
                     "TestBeanWithGenericProperties",_genericProperties);
 
@@ -100,7 +99,7 @@ public class TestIJavaTypeDescriptor2 extends ModelBaseTestCase
             setupBeanMethods("/testdata/TestBean2Subclass.java.data", testBean2Subclass, _beanMethodsSubclass);
     }
 
-    private IBeanInstanceSymbol setupBeanMethods(String fileName, String beanClassName, Map methods) throws Exception
+    private IBeanInstanceSymbol setupBeanMethods(String fileName, String beanClassName, Map<String, IBeanMethodSymbol> methods) throws Exception
     {
         loadSourceClass(ContextSymbolTestPlugin.getDefault().getBundle(), fileName, packageName1, beanClassName);
 

@@ -105,10 +105,10 @@ public class ModelBaseTestCase extends TestCase
     
     protected void populatePropertyMap(IBeanInstanceSymbol bean, Map<String, IPropertySymbol> properties)
     {
-        List<IPropertySymbol> propertyList = bean.getProperties();
-        for(final Iterator<IPropertySymbol> it = propertyList.iterator(); it.hasNext();)
+        List<?> propertyList = bean.getProperties();
+        for(final Iterator<?> it = propertyList.iterator(); it.hasNext();)
         {
-            final IPropertySymbol  property = it.next();
+            final IPropertySymbol  property = (IPropertySymbol) it.next();
             properties.put(property.getName(), property);
         }
     }
