@@ -30,7 +30,7 @@ public class JSPUtilTest extends FacesConfigEditorTest {
 	public void testGetActionListInJSPFile() throws Exception {
 		TestUtil.copyFile(project, "WebContent", "page1.jsp");
 		
-		List actionNodes = JSPUtil.getActionListInJSPFile("/emptyjsfproject/WebContent/page1.jsp");
+		List<?> actionNodes = JSPUtil.getActionListInJSPFile("/emptyjsfproject/WebContent/page1.jsp");
 		assertEquals(3, actionNodes.size());
 	}
 

@@ -46,6 +46,7 @@ public class GEMPreferencesTest extends FacesConfigEditorTest {
 	 * Test method for
 	 * {@link org.eclipse.jst.jsf.facesconfig.ui.preference.GEMPreferences#GEMPreferences()}.
 	 */
+	@SuppressWarnings("unchecked")
 	public void testGEMPreferences() {
 
 		PreferenceDialog dialog = null;

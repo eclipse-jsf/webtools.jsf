@@ -28,6 +28,7 @@ public class ManagedBeanUtilTest extends FacesConfigEditorTest {
 	 * Test method for
 	 * {@link org.eclipse.jst.jsf.facesconfig.ui.util.ManagedBeanUtil#isBeanDuplicate(org.eclipse.core.resources.IProject, java.lang.String)}.
 	 */
+	@SuppressWarnings("unchecked")
 	public void testIsBeanDuplicate() {
 		String mbeanName = "testBean";
 		assertFalse(ManagedBeanUtil.isBeanDuplicate(project, mbeanName));
@@ -48,6 +49,7 @@ public class ManagedBeanUtilTest extends FacesConfigEditorTest {
 	 * Test method for
 	 * {@link org.eclipse.jst.jsf.facesconfig.ui.util.ManagedBeanUtil#getDefaultManagedBeanName(org.eclipse.core.resources.IProject, java.lang.String)}.
 	 */
+	@SuppressWarnings("unchecked")
 	public void testGetDefaultManagedBeanName() {
 		String mbeanName = "testBean";
 		assertEquals(mbeanName, ManagedBeanUtil.getDefaultManagedBeanName(
