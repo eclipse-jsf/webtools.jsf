@@ -15,6 +15,7 @@ package org.eclipse.jst.jsf.core.jsflibraryconfiguration;
  *
  * <p><b>Provisional API - subject to change</b></p>
  */
+@SuppressWarnings("deprecation")
 public interface JSFLibraryReferencePluginProvided extends JSFLibraryReferenceUserSpecified, JSFLibraryReferenceUserDefined {
 	/**
 	 * @return plugin id.  May return null if plugin id cannot be determined.  
