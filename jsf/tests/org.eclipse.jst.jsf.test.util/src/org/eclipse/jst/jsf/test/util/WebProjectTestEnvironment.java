@@ -45,6 +45,7 @@ import org.osgi.framework.Bundle;
  * @author cbateman
  *
  */
+@SuppressWarnings("deprecation")
 public class WebProjectTestEnvironment extends ProjectTestEnvironment {
 
     private final IProjectFacetVersion  _javaFacetVersion;
@@ -124,7 +125,8 @@ public class WebProjectTestEnvironment extends ProjectTestEnvironment {
         }
     }
     
-    private boolean hasFacets(IProject project) throws CoreException
+    @SuppressWarnings("unchecked")
+	private boolean hasFacets(IProject project) throws CoreException
     {
         boolean  javaInstalled = false;
         boolean  webInstalled = false;
