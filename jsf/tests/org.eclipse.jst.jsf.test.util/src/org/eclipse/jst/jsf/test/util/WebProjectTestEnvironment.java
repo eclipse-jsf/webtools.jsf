@@ -45,7 +45,6 @@ import org.osgi.framework.Bundle;
  * @author cbateman
  *
  */
-@SuppressWarnings("deprecation")
 public class WebProjectTestEnvironment extends ProjectTestEnvironment {
 
     private final IProjectFacetVersion  _javaFacetVersion;
