@@ -35,6 +35,7 @@ import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
 
+@SuppressWarnings("deprecation")
 public class JSFLibraryReferenceTestCases extends TestCase {
 	WebProjectTestEnvironment projectTestEnvironment;
 	JDTTestEnvironment jdtTestEnv;
