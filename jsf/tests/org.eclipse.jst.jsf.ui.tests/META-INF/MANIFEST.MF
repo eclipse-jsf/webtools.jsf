@@ -13,7 +13,7 @@ Require-Bundle: org.eclipse.jst.jsf.core;bundle-version="[1.0.0,1.1.0)",
  org.eclipse.jst.jsf.ui;bundle-version="[1.0.0,1.1.0)",
  org.junit;bundle-version="[3.8.1,4.0.0)",
  org.eclipse.emf.common;bundle-version="[2.2.0,2.4.0)",
- org.eclipse.emf.ecore;bundle-version="[2.2.0,2.4.0)"
+ org.eclipse.emf.ecore;bundle-version="[2.2.0,3.0.0)"
 Eclipse-LazyStart: true
 Export-Package: org.eclipse.jst.jsf.ui.tests;x-internal:=true,
  org.eclipse.jst.jsf.ui.tests.classpath;x-internal:=true,
