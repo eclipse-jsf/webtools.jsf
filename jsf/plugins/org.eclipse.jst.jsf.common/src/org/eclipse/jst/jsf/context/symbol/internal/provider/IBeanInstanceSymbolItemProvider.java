@@ -49,7 +49,8 @@ public class IBeanInstanceSymbolItemProvider
      * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public static final String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
+    @SuppressWarnings("hiding")
+	public static final String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
 	/**
 	 * This constructs an instance from a factory and a notifier.

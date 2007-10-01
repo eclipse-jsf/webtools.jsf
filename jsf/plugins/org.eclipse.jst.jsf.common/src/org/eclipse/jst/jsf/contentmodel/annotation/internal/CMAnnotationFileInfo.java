@@ -26,6 +26,12 @@ public final class CMAnnotationFileInfo implements ICMAnnotationSourceFileInfo{
 	private String bundleId;
 	private String parserClassname;
 
+	/**
+	 * @param annotationFileLocation
+	 * @param bundleId
+	 * @param parserClassname
+	 * @param annotationFileLocatorClassname
+	 */
 	public CMAnnotationFileInfo(String annotationFileLocation, String bundleId, String parserClassname, String annotationFileLocatorClassname) {
 		this.annotationFileLocation = annotationFileLocation.trim();
 		this.bundleId = bundleId.trim();

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraitTypesSwitch.java,v 1.5 2007/05/11 17:54:56 gkessler Exp $
+ * $Id: TraitTypesSwitch.java,v 1.6 2007/10/01 04:29:44 cbateman Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.util;
 
@@ -79,13 +79,11 @@ public class TraitTypesSwitch {
         if (theEClass.eContainer() == modelPackage) {
             return doSwitch(theEClass.getClassifierID(), theEObject);
         }
-        else {
-            List eSuperTypes = theEClass.getESuperTypes();
-            return
-                eSuperTypes.isEmpty() ?
-                    defaultCase(theEObject) :
-                    doSwitch((EClass)eSuperTypes.get(0), theEObject);
-        }
+		List eSuperTypes = theEClass.getESuperTypes();
+		return
+		    eSuperTypes.isEmpty() ?
+		        defaultCase(theEObject) :
+		        doSwitch((EClass)eSuperTypes.get(0), theEObject);
     }
 
     /**

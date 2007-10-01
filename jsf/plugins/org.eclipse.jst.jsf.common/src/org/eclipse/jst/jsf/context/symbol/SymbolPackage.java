@@ -1,7 +1,7 @@
 /**
  * Copyright 2006 Oracle
  *
- * $Id: SymbolPackage.java,v 1.8 2007/06/15 19:01:44 cbateman Exp $
+ * $Id: SymbolPackage.java,v 1.9 2007/10/01 04:29:43 cbateman Exp $
  */
 package org.eclipse.jst.jsf.context.symbol;
 
@@ -2205,6 +2205,7 @@ public interface SymbolPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
+    @SuppressWarnings("hiding")
     interface Literals {
         /**
          * The meta object literal for the '{@link org.eclipse.jst.jsf.context.symbol.internal.impl.IBeanInstanceSymbolImpl <em>IBean Instance Symbol</em>}' class.
@@ -2222,7 +2223,7 @@ public interface SymbolPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
-        EReference IBEAN_INSTANCE_SYMBOL__PROPERTIES = eINSTANCE.getIBeanInstanceSymbol_Properties();
+		EReference IBEAN_INSTANCE_SYMBOL__PROPERTIES = eINSTANCE.getIBeanInstanceSymbol_Properties();
 
         /**
          * The meta object literal for the '<em><b>Methods</b></em>' reference list feature.

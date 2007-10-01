@@ -54,6 +54,9 @@ public final class CMAnnotationFileRegistry {
 	
 	private static final boolean DISABLED = true;
 	
+	/**
+	 * @return return the singleton instance of the registry
+	 */
 	public static CMAnnotationFileRegistry getInstance() {
 		if (reg == null){
 			reg = new CMAnnotationFileRegistry();

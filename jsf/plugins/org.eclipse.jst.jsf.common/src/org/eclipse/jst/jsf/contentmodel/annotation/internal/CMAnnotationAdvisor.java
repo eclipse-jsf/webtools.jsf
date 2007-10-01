@@ -25,6 +25,9 @@ public final class CMAnnotationAdvisor implements ICMAnnotationAdvisor {
 
 	private CMAnnotationMap map;
 
+	/**
+	 * @param map
+	 */
 	public CMAnnotationAdvisor(CMAnnotationMap map) {
 		this.map = map;
 		setCaseSensitive(true);// default to case sensitive

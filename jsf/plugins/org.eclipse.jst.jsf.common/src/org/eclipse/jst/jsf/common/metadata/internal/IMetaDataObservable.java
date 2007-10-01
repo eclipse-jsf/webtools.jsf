@@ -17,6 +17,19 @@ package org.eclipse.jst.jsf.common.metadata.internal;
  *
  */
 public interface IMetaDataObservable {
+	/**
+	 * Add the observer to the set of observers.  Has no effect if
+	 * the same observer is already registered
+	 * 
+	 * @param observer
+	 */
 	public void addObserver(IMetaDataObserver observer);
+
+	/**
+	 * Remove the observer from the set of observers.  Has no effect
+	 * if observer was not already registered.
+	 * 
+	 * @param observer must not be null
+	 */
 	public void removeObserver(IMetaDataObserver observer);
 }

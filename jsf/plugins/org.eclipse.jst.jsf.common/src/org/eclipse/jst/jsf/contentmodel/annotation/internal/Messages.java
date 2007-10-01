@@ -20,29 +20,60 @@ import org.eclipse.osgi.util.NLS;
 public class Messages extends NLS {
 	private static final String BUNDLE_NAME = "org.eclipse.jst.jsf.contentmodel.annotation.internal.messages"; //$NON-NLS-1$
 
-	public static String CMAnnotationFileParserHelper_class_not_found;
-
-	public static String CMAnnotationFileParserHelper_illegal_access_exception;
-
-	public static String CMAnnotationFileParserHelper_instantiation_exception;
-
-	public static String CMAnnotationFileParserHelper_unable_to_find_bundleid;
-
-	public static String CMAnnotationFileParserHelper_unable_to_parse;
-
-	public static String CMAnnotationFileRegistry_load_error;
-
-	public static String CMAnnotationFileRegistryReader_problem;
-
-	public static String CMAnnotationMap_IOException;
-
-	public static String CMAnnotationMap_key_not_found;
-
-	public static String CMAnnotationMap_MissingResource_exception;
 	static {
 		// initialize resource bundle
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
 	}
+
+	/**
+	 * see message.properties
+	 */
+	public static String CMAnnotationFileParserHelper_class_not_found;
+
+	/**
+	 * see message.properties
+	 */
+	public static String CMAnnotationFileParserHelper_illegal_access_exception;
+
+	/**
+	 * see message.properties
+	 */
+	public static String CMAnnotationFileParserHelper_instantiation_exception;
+
+	/**
+	 * see message.properties
+	 */
+	public static String CMAnnotationFileParserHelper_unable_to_find_bundleid;
+
+	/**
+	 * see message.properties
+	 */
+	public static String CMAnnotationFileParserHelper_unable_to_parse;
+
+	/**
+	 * see message.properties
+	 */
+	public static String CMAnnotationFileRegistry_load_error;
+
+	/**
+	 * see message.properties
+	 */
+	public static String CMAnnotationFileRegistryReader_problem;
+
+	/**
+	 * see message.properties
+	 */
+	public static String CMAnnotationMap_IOException;
+
+	/**
+	 * see message.properties
+	 */
+	public static String CMAnnotationMap_key_not_found;
+
+	/**
+	 * see message.properties
+	 */
+	public static String CMAnnotationMap_MissingResource_exception;
 
 	private Messages() {
         // no external instantiation

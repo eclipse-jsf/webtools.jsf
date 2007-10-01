@@ -38,11 +38,11 @@ import org.xml.sax.helpers.DefaultHandler;
  */
 public class CMAnnotationFileParser implements ICMAnnotationFileParser {
 	
-	public static final String TAG_ID_ANNOTATIONS = "grammar-annotations"; //$NON-NLS-1$
-	public static final String TAG_ID_ELEMENT = "cm-element"; //$NON-NLS-1$
-	public static final String TAG_ID_ATTRIBUTE = "cm-attribute"; //$NON-NLS-1$
-	public static final String TAG_ID_PROPERTY = "property"; //$NON-NLS-1$
-	public static final String TAG_ID_PROPERTY_VALUE = "value"; //$NON-NLS-1$
+	private static final String TAG_ID_ANNOTATIONS = "grammar-annotations"; //$NON-NLS-1$
+	private static final String TAG_ID_ELEMENT = "cm-element"; //$NON-NLS-1$
+	private static final String TAG_ID_ATTRIBUTE = "cm-attribute"; //$NON-NLS-1$
+	private static final String TAG_ID_PROPERTY = "property"; //$NON-NLS-1$
+	private static final String TAG_ID_PROPERTY_VALUE = "value"; //$NON-NLS-1$
 
 	/**
 	 * This method is called to parse an annotation file and store the contents

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IListTypeDescriptorImpl.java,v 1.4 2007/05/07 17:30:20 cbateman Exp $
+ * $Id: IListTypeDescriptorImpl.java,v 1.5 2007/10/01 04:29:44 cbateman Exp $
  */
 package org.eclipse.jst.jsf.context.symbol.internal.impl;
 
@@ -39,7 +39,8 @@ public class IListTypeDescriptorImpl extends ITypeDescriptorImpl implements ILis
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final String copyright = "Copyright 2006 Oracle";  //$NON-NLS-1$
+    @SuppressWarnings("hiding")
+	public static final String copyright = "Copyright 2006 Oracle";  //$NON-NLS-1$
 
     /**
      * The default value of the '{@link #getListSource() <em>List Source</em>}' attribute.

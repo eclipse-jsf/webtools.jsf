@@ -27,10 +27,23 @@ import org.eclipse.core.runtime.FileLocator;
  */
 public class ResourceBundleHelper {
 
+	/**
+	 * @param resourceURI
+	 * @return the resource bundle in resourceURI using the default locale
+	 * @throws MalformedURLException
+	 * @throws IOException
+	 */
 	public static ResourceBundle getResourceBundle(String resourceURI) throws MalformedURLException, IOException {
 		return getResourceBundle(resourceURI, Locale.getDefault());
 	}
 
+	/**
+	 * @param resourceURI
+	 * @param targetLocale
+	 * @return the resource bundle in resourceURI using the target locale
+	 * @throws MalformedURLException
+	 * @throws IOException
+	 */
 	public static ResourceBundle getResourceBundle(String resourceURI, Locale targetLocale) throws MalformedURLException, IOException {
 		// try to load bundle from the location specified in the resourceURI
 		// we make the assumption that the resourceURI points to the local

@@ -67,7 +67,8 @@ public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJa
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final String copyright = "Copyright 2006 Oracle";  //$NON-NLS-1$
+    @SuppressWarnings("hiding")
+	public static final String copyright = "Copyright 2006 Oracle";  //$NON-NLS-1$
 
     /**
      * The default value of the '{@link #getType() <em>Type</em>}' attribute.
@@ -121,7 +122,8 @@ public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJa
      * @generated
      * @ordered
      */
-    protected static final IJavaElement JDT_CONTEXT_EDEFAULT = null;
+    @SuppressWarnings("hiding")
+	protected static final IJavaElement JDT_CONTEXT_EDEFAULT = null;
 
     /**
      * The cached value of the '{@link #getJdtContext() <em>Jdt Context</em>}' attribute.
@@ -131,7 +133,8 @@ public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJa
      * @generated
      * @ordered
      */
-    protected IJavaElement jdtContext = JDT_CONTEXT_EDEFAULT;
+    @SuppressWarnings("hiding")
+	protected IJavaElement jdtContext = JDT_CONTEXT_EDEFAULT;
 
     /**
      * <!-- begin-user-doc -->

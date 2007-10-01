@@ -54,7 +54,8 @@ public class IMapTypeDescriptorImpl extends ITypeDescriptorImpl implements IMapT
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
+    @SuppressWarnings("hiding")
+	public static final String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
     /**
      * The default value of the '{@link #getMapSource() <em>Map Source</em>}' attribute.

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IBoundedJavaTypeDescriptorItemProvider.java,v 1.6 2007/05/07 17:30:21 cbateman Exp $
+ * $Id: IBoundedJavaTypeDescriptorItemProvider.java,v 1.7 2007/10/01 04:29:43 cbateman Exp $
  */
 package org.eclipse.jst.jsf.context.symbol.internal.provider;
 
@@ -40,7 +40,8 @@ public class IBoundedJavaTypeDescriptorItemProvider
      * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public static final String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
+    @SuppressWarnings("hiding")
+	public static final String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
 	/**
 	 * This constructs an instance from a factory and a notifier.

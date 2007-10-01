@@ -46,7 +46,8 @@ public class SymbolItemProviderAdapterFactory extends SymbolAdapterFactory imple
      * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public static final String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
+    @SuppressWarnings("hiding")
+	public static final String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
 	/**
 	 * This keeps track of the root adapter factory that delegates to this adapter factory.

@@ -30,15 +30,18 @@ import org.eclipse.osgi.util.NLS;
  * @deprecated see common.metadata package
  */
 public class CMAnnotationFileRegistryReader {
-	protected static final String EXTENSION_POINT_ID = "annotationFiles"; //$NON-NLS-1$
-	protected static final String TAG_NAME = "annotationFile"; //$NON-NLS-1$
-	protected static final String ATT_URI = "uri"; //$NON-NLS-1$
-	protected static final String ATT_LOCATION = "location"; //$NON-NLS-1$
-	protected static final String ATT_LOCATOR = "locator"; //$NON-NLS-1$
-	protected static final String ATT_PARSER = "parser"; //$NON-NLS-1$
+	private static final String EXTENSION_POINT_ID = "annotationFiles"; //$NON-NLS-1$
+	private static final String TAG_NAME = "annotationFile"; //$NON-NLS-1$
+	private static final String ATT_URI = "uri"; //$NON-NLS-1$
+	private static final String ATT_LOCATION = "location"; //$NON-NLS-1$
+	private static final String ATT_LOCATOR = "locator"; //$NON-NLS-1$
+	private static final String ATT_PARSER = "parser"; //$NON-NLS-1$
 
 	private CMAnnotationFileRegistry annotationFileRegistry;
 
+	/**
+	 * @param annotationFileRegistry
+	 */
 	public CMAnnotationFileRegistryReader(CMAnnotationFileRegistry annotationFileRegistry) {
 		this.annotationFileRegistry = annotationFileRegistry;
 	}

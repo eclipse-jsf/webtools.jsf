@@ -53,6 +53,7 @@ public interface ICMAnnotationAdvisor {
 	 * to an attribute of an element in a particular content model defined by the ICMAnnotationSourceFileInfo.
 	 * 
 	 * @param elementName
+	 * @param attributeName 
 	 * @param propertyName
 	 * @param propertyValue
 	 * 

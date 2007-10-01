@@ -42,10 +42,12 @@ import org.eclipse.osgi.util.NLS;
  * @deprecated see common.metadata package
  */
 public class CMAnnotationMap {
-	//map of tag-element annotations keyed by tag name
+	/**
+	 * map of tag-element annotations keyed by tag name
+	 */
 	protected Map cmNodeToAnnotationMap = new Hashtable();
-	protected boolean isCaseSensitive = true;
-	protected ICMAnnotationSourceFileInfo fileInfo;
+	private boolean isCaseSensitive = true;
+	private ICMAnnotationSourceFileInfo fileInfo;
 	private ResourceBundle resourceBundle;
 	private CMAnnotationSourceFileLocator locator;
 
@@ -159,10 +161,12 @@ public class CMAnnotationMap {
 	 * Returns list of NLS fixed String values for a given property name of an attribute of a particular element.
 	 * 
 	 * @param elementName
+	 * @param attributeName 
 	 * @param propertyName
 	 * @return List of Strings - can be null
 	 */
 	public List getCMAttributePropertyValues(String elementName, String attributeName, String propertyName) {
+		
 		List result = null;
 		String key = getStringValueForCaseSensitivity(elementName);
 		String attrName = getStringValueForCaseSensitivity(attributeName);

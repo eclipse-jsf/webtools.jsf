@@ -46,7 +46,8 @@ public class IBeanInstanceSymbolImpl extends IInstanceSymbolImpl implements IBea
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
+    @SuppressWarnings("hiding")
+	public static final String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
 	/**
 	 * A detailed description (human readable) about this instance symbol

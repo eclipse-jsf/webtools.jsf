@@ -32,10 +32,16 @@ public class CMAnnotationFileParserHelper {
 	private static final String DEFAULT_PARSER_NAME = "org.eclipse.jst.jsf.contentmodel.annotation.internal.CMAnnotationFileParser"; //$NON-NLS-1$
 	private static final String DEFAULT_LOCATOR_NAME = "org.eclipse.jst.jsf.contentmodel.annotation.internal.CMPluginRelativeSourceFileLocator"; //$NON-NLS-1$
 	
+	/**
+	 * default constructor
+	 */
 	public CMAnnotationFileParserHelper() {
 		super();
 	}
 	
+	/**
+	 * @param map
+	 */
 	public void parse(CMAnnotationMap map){
 		ICMAnnotationFileParser parser = getParser(map.getFileInfo());
 		ICMAnnotationAdvisor advisor = new CMAnnotationAdvisor(map);

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IBoundedListTypeDescriptorImpl.java,v 1.5 2007/09/24 23:23:34 cbateman Exp $
+ * $Id: IBoundedListTypeDescriptorImpl.java,v 1.6 2007/10/01 04:29:44 cbateman Exp $
  */
 package org.eclipse.jst.jsf.context.symbol.internal.impl;
 
@@ -44,7 +44,8 @@ public class IBoundedListTypeDescriptorImpl extends IListTypeDescriptorImpl impl
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final String copyright = "Copyright 2006 Oracle";  //$NON-NLS-1$
+    @SuppressWarnings("hiding")
+	public static final String copyright = "Copyright 2006 Oracle";  //$NON-NLS-1$
 
     /**
      * <!-- begin-user-doc -->

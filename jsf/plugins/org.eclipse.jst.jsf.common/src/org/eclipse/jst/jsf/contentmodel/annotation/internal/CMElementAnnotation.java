@@ -25,7 +25,7 @@ import java.util.Map;
  * @deprecated see common.metadata package
  */
 public class CMElementAnnotation extends CMAnnotation {
-	protected Hashtable attributes = new Hashtable();
+	private final Hashtable attributes = new Hashtable();
 
 	/**
 	 * Constructor

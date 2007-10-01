@@ -24,8 +24,11 @@ import java.util.List;
  */
 public abstract class CMAnnotation {
 	private String _name;	
-	protected Hashtable props = new Hashtable(3);
+	private Hashtable props = new Hashtable(3);
 
+	/**
+	 * @param name
+	 */
 	public CMAnnotation(String name) {
 		setName(name.trim());
 	}
@@ -34,10 +37,17 @@ public abstract class CMAnnotation {
 		_name = name;
 	}
 
+	/**
+	 * @return the name
+	 */
 	public String getName() {
 		return _name;
 	}
 
+	/**
+	 * @param propertyName
+	 * @param propertyValue
+	 */
 	public void setProperty(String propertyName, String propertyValue) {
 		CMAnnotationProperty prop = getAnnotationProperty(propertyName);
 		if (prop == null){
@@ -49,6 +59,10 @@ public abstract class CMAnnotation {
 		}		
 	}
 
+	/**
+	 * @param propertyName
+	 * @return the annotation property
+	 */
 	public CMAnnotationProperty getAnnotationProperty(String propertyName){
 		if (props.containsKey(propertyName))
 			return (CMAnnotationProperty)props.get(propertyName);
@@ -59,23 +73,39 @@ public abstract class CMAnnotation {
 		private String propName;
 		private List propValues = new ArrayList(2);
 		
+		/**
+		 * @param propertyName
+		 */
 		public CMAnnotationProperty(String propertyName){
 			propName = propertyName;
 		}
 
+		/**
+		 * @param propertyName
+		 * @param propertyValue
+		 */
 		public CMAnnotationProperty(String propertyName, String propertyValue){
 			propName = propertyName;
 			propValues.add(propertyValue);
 		}
 		
+		/**
+		 * @param propertyValue
+		 */
 		public void setValue(String propertyValue) {
 			propValues.add(propertyValue);
 		}
 		
+		/**
+		 * @return the property name
+		 */
 		public String getPropertyName(){
 			return propName;
 		}
 		
+		/**
+		 * @return the property value
+		 */
 		public List getPropertyValues(){
 			return propValues;
 		}

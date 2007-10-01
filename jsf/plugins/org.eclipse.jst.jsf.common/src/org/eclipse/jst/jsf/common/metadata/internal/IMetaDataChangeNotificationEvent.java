@@ -17,11 +17,29 @@ package org.eclipse.jst.jsf.common.metadata.internal;
  */
 public interface IMetaDataChangeNotificationEvent {
 	//change to enums if we do Java5
+	/**
+	 *  TODO:
+	 */
 	public static final int ADDED = 1;
+	/**
+	 * TODO:
+	 */
 	public static final int REMOVED = 2;
+	/**
+	 * TODO:
+	 */
 	public static final int CHANGED = 3;
 	
+	/**
+	 * @return the uri
+	 */
 	public String getURI();
+	/**
+	 * @return when to the event types above
+	 */
 	public int getEventType();
+	/**
+	 * @return the meta-data locator
+	 */
 	public IMetaDataLocator getLocator();
 }
