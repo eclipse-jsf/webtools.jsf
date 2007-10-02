@@ -19,7 +19,6 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -36,21 +35,19 @@ import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
  * 
  * This class implements management of resource in a workspace.
  */
-public class WorkspaceUtil {
+public final class WorkspaceUtil {
 	/** log instance */
 	private static final Logger log = JSFUICommonPlugin
 			.getLogger(WorkspaceUtil.class);
 
-	public static IWorkspace getWorkspace() {
-		return ResourcesPlugin.getWorkspace();
-	}
-
-	public WorkspaceUtil() {
-	    // TODO: can we delete this?
+	private WorkspaceUtil() {
+	    // no external instantiation
 	}
 
 	/**
 	 * Create the given file in the workspace resource info tree.
+	 * @param resource 
+	 * @param contents 
 	 */
 	public static void ensureExistsInWorkspace(final IFile resource,
 			final InputStream contents) {
@@ -68,7 +65,7 @@ public class WorkspaceUtil {
 			}
 		};
 		try {
-			getWorkspace().run(body, null);
+			ResourcesPlugin.getWorkspace().run(body, null);
 		} catch (CoreException e) {
 			// Test.EclipseWorkspaceTest.Error.FileCreationInWorkspace = Fail in
 			// creating file:{0} in the workspace resource info tree.
@@ -80,6 +77,8 @@ public class WorkspaceUtil {
 
 	/**
 	 * Create the given file in the workspace resource info tree.
+	 * @param resource 
+	 * @param contents 
 	 */
 	public static void ensureExistsInWorkspace(IFile resource, String contents) {
 		// FIXME: We'll need some way for handing file encoding.
@@ -89,6 +88,8 @@ public class WorkspaceUtil {
 
 	/**
 	 * Create the given resource in the workspace resource info tree.
+	 * @param resource 
+	 * @param local 
 	 */
 	public static void ensureExistsInWorkspace(final IResource resource,
 			final boolean local) {
@@ -98,7 +99,7 @@ public class WorkspaceUtil {
 			}
 		};
 		try {
-			getWorkspace().run(body, null);
+			ResourcesPlugin.getWorkspace().run(body, null);
 		} catch (CoreException e) {
 			// Test.EclipseWorkspaceTest.Error.ResourceCreationInWorkspace =
 			// Fail in creating resource:{0} in the workspace resource info
