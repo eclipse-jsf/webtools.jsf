@@ -14,8 +14,16 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 import org.eclipse.wst.common.internal.emf.resource.Translator;
 
+/**
+ * Translator for converter id
+ *
+ */
 public class ConverterIdTranslator extends Translator {
 
+	/**
+	 * @param domNameAndPath
+	 * @param aFeature
+	 */
 	public ConverterIdTranslator(String domNameAndPath, EStructuralFeature aFeature) {
 		super(domNameAndPath, aFeature);
 	}

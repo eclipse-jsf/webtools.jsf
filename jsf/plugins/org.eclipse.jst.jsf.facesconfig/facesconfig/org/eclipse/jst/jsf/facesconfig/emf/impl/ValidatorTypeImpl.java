@@ -228,6 +228,9 @@ public class ValidatorTypeImpl extends EObjectImpl implements ValidatorType {
 
     /**
      * <!-- begin-user-doc -->
+     * @param newValidatorId 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -271,6 +274,9 @@ public class ValidatorTypeImpl extends EObjectImpl implements ValidatorType {
 
     /**
      * <!-- begin-user-doc -->
+     * @param newValidatorClass 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */

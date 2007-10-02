@@ -120,6 +120,9 @@ public class LocaleConfigTypeImpl extends EObjectImpl implements LocaleConfigTyp
 
     /**
      * <!-- begin-user-doc -->
+     * @param newDefaultLocale 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */

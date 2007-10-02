@@ -23,6 +23,10 @@ import org.eclipse.wst.common.internal.emf.resource.Translator;
  */
 public class NavigationHandlerTranslator extends Translator {
 
+	/**
+	 * @param domNameAndPath
+	 * @param aFeature
+	 */
 	public NavigationHandlerTranslator(String domNameAndPath, EStructuralFeature aFeature) {
 		super(domNameAndPath, aFeature);//$NON-NLS-1$
 	}

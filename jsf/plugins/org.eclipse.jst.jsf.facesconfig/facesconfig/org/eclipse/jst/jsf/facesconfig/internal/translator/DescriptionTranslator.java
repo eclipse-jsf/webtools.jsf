@@ -22,6 +22,10 @@ import org.eclipse.wst.common.internal.emf.resource.Translator;
  *
  */
 public class DescriptionTranslator extends Translator {
+	/**
+	 * @param domNameAndPath
+	 * @param aFeature
+	 */
 	public DescriptionTranslator(String domNameAndPath, EStructuralFeature aFeature) {
 		super(domNameAndPath, aFeature);
 	}

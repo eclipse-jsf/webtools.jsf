@@ -132,6 +132,9 @@ public class ListEntriesTypeImpl extends EObjectImpl implements ListEntriesType 
 
     /**
      * <!-- begin-user-doc -->
+     * @param newValueClass 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */

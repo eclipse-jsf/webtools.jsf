@@ -14,7 +14,15 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 import org.eclipse.wst.common.internal.emf.resource.Translator;
 
+/**
+ * The el-resolver translator
+ *
+ */
 public class ELResolverTypeTranslator extends Translator {
+    /**
+     * @param domNameAndPath
+     * @param aFeature
+     */
     public ELResolverTypeTranslator(String domNameAndPath, EStructuralFeature aFeature) {
         super(domNameAndPath, aFeature);
     }

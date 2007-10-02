@@ -14,8 +14,16 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 import org.eclipse.wst.common.internal.emf.resource.Translator;
 
+/**
+ * Translator for managed bean name
+ *
+ */
 public class ManagedBeanNameTranslator extends Translator {
 
+	/**
+	 * @param domNameAndPath
+	 * @param aFeature
+	 */
 	public ManagedBeanNameTranslator(String domNameAndPath, EStructuralFeature aFeature) {
 		super(domNameAndPath, aFeature);
 	}

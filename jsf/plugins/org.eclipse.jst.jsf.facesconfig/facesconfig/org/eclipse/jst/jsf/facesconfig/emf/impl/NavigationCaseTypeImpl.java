@@ -216,6 +216,9 @@ public class NavigationCaseTypeImpl extends EObjectImpl implements NavigationCas
 
     /**
      * <!-- begin-user-doc -->
+     * @param newFromAction 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -259,6 +262,9 @@ public class NavigationCaseTypeImpl extends EObjectImpl implements NavigationCas
 
     /**
      * <!-- begin-user-doc -->
+     * @param newFromOutcome 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -302,6 +308,9 @@ public class NavigationCaseTypeImpl extends EObjectImpl implements NavigationCas
 
     /**
      * <!-- begin-user-doc -->
+     * @param newToViewId 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -345,6 +354,9 @@ public class NavigationCaseTypeImpl extends EObjectImpl implements NavigationCas
 
     /**
      * <!-- begin-user-doc -->
+     * @param newRedirect 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */

@@ -38,8 +38,10 @@ import org.eclipse.jst.jsf.facesconfig.emf.PropertyType;
 /**
  * This is the item provider adapter for a {@link org.eclipse.jst.jsf.facesconfig.emf.PropertyType} object.
  * <!-- begin-user-doc -->
+ * @extends ITableItemLabelProvider
  * <!-- end-user-doc -->
  * 
+ * @gemerated
  */
 public class PropertyTypeItemProvider
 	extends ItemProviderAdapter
@@ -60,6 +62,7 @@ public class PropertyTypeItemProvider
     /**
      * This constructs an instance from a factory and a notifier.
      * <!-- begin-user-doc -->
+     * @param adapterFactory 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -89,6 +92,7 @@ public class PropertyTypeItemProvider
     /**
      * This adds a property descriptor for the Property Name feature.
      * <!-- begin-user-doc -->
+     * @param object 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -111,6 +115,7 @@ public class PropertyTypeItemProvider
     /**
      * This adds a property descriptor for the Property Class feature.
      * <!-- begin-user-doc -->
+     * @param object 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -133,6 +138,7 @@ public class PropertyTypeItemProvider
     /**
      * This adds a property descriptor for the Default Value feature.
      * <!-- begin-user-doc -->
+     * @param object 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -155,6 +161,7 @@ public class PropertyTypeItemProvider
     /**
      * This adds a property descriptor for the Suggested Value feature.
      * <!-- begin-user-doc -->
+     * @param object 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -177,6 +184,7 @@ public class PropertyTypeItemProvider
     /**
      * This adds a property descriptor for the Id feature.
      * <!-- begin-user-doc -->
+     * @param object 
 	 * <!-- end-user-doc -->
      * @generated
      */

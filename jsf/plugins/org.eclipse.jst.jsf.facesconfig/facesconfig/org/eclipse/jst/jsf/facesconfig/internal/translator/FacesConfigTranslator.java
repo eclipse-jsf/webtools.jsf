@@ -22,8 +22,14 @@ import org.eclipse.wst.common.internal.emf.resource.RootTranslator;
  */
 public class FacesConfigTranslator extends RootTranslator {
 	
+	/**
+	 * Instance of translator
+	 */
 	public static FacesConfigTranslator INSTANCE = new FacesConfigTranslator();
 
+    /**
+     * Default constructor
+     */
     public FacesConfigTranslator() {
 		super("faces-config", FacesConfigPackage.eINSTANCE.getFacesConfigType()); //$NON-NLS-1$
     }

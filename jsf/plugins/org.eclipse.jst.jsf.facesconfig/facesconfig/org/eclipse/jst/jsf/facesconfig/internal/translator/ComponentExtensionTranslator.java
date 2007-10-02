@@ -18,6 +18,10 @@ import org.eclipse.emf.ecore.EStructuralFeature;
  *
  */
 public class ComponentExtensionTranslator extends ExtensionTypeTranslator {
+	/**
+	 * @param domNameAndPath
+	 * @param aFeature
+	 */
 	public ComponentExtensionTranslator(String domNameAndPath, EStructuralFeature aFeature) {
 		super(domNameAndPath, aFeature);
 	}

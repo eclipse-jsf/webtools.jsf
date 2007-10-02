@@ -127,6 +127,9 @@ public class MapEntryTypeImpl extends EObjectImpl implements MapEntryType {
 
     /**
      * <!-- begin-user-doc -->
+     * @param newKey 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -170,6 +173,9 @@ public class MapEntryTypeImpl extends EObjectImpl implements MapEntryType {
 
     /**
      * <!-- begin-user-doc -->
+     * @param newNullValue 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -213,6 +219,9 @@ public class MapEntryTypeImpl extends EObjectImpl implements MapEntryType {
 
     /**
      * <!-- begin-user-doc -->
+     * @param newValue 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */

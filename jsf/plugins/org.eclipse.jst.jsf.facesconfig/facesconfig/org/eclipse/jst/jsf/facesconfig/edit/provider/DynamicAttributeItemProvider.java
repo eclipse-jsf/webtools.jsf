@@ -59,6 +59,7 @@ public class DynamicAttributeItemProvider
     /**
      * This constructs an instance from a factory and a notifier.
      * <!-- begin-user-doc -->
+     * @param adapterFactory 
      * <!-- end-user-doc -->
      * @generated
      */
@@ -85,6 +86,7 @@ public class DynamicAttributeItemProvider
     /**
      * This adds a property descriptor for the Name feature.
      * <!-- begin-user-doc -->
+     * @param object 
      * <!-- end-user-doc -->
      * @generated
      */
@@ -107,6 +109,7 @@ public class DynamicAttributeItemProvider
     /**
      * This adds a property descriptor for the Value feature.
      * <!-- begin-user-doc -->
+     * @param object 
      * <!-- end-user-doc -->
      * @generated
      */

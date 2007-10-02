@@ -58,6 +58,7 @@ public class ApplicationTypeItemProvider
     /**
      * This constructs an instance from a factory and a notifier.
      * <!-- begin-user-doc -->
+     * @param adapterFactory 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -86,6 +87,7 @@ public class ApplicationTypeItemProvider
     /**
      * This adds a property descriptor for the Id feature.
      * <!-- begin-user-doc -->
+     * @param object 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -108,6 +110,7 @@ public class ApplicationTypeItemProvider
     /**
      * This adds a property descriptor for the EL Resolver feature.
      * <!-- begin-user-doc -->
+     * @param object 
      * <!-- end-user-doc -->
      * @generated
      */
@@ -130,6 +133,7 @@ public class ApplicationTypeItemProvider
     /**
      * This adds a property descriptor for the Resource Bundle feature.
      * <!-- begin-user-doc -->
+     * @param object 
      * <!-- end-user-doc -->
      * @generated
      */
@@ -152,6 +156,7 @@ public class ApplicationTypeItemProvider
     /**
      * This adds a property descriptor for the Application Extension feature.
      * <!-- begin-user-doc -->
+     * @param object 
      * <!-- end-user-doc -->
      * @generated
      */

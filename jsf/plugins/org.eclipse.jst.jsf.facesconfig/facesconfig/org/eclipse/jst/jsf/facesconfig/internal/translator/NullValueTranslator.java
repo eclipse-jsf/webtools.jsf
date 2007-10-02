@@ -22,6 +22,10 @@ import org.eclipse.wst.common.internal.emf.resource.Translator;
  */
 public class NullValueTranslator extends Translator {
 
+	/**
+	 * @param domNameAndPath
+	 * @param aFeature
+	 */
 	public NullValueTranslator(String domNameAndPath, EStructuralFeature aFeature) {
 		super(domNameAndPath, aFeature, EMPTY_TAG|END_TAG_NO_INDENT);
 	}

@@ -12,8 +12,18 @@ package org.eclipse.jst.jsf.facesconfig.internal.translator;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+/**
+ * Transtor for application extensions
+ * 
+ * @author cbateman
+ *
+ */
 public class ApplicationExtensionTranslator extends ExtensionTypeTranslator {
 
+    /**
+     * @param domNameAndPath
+     * @param feature
+     */
     public ApplicationExtensionTranslator(String domNameAndPath,
             EStructuralFeature feature) {
         super(domNameAndPath, feature);

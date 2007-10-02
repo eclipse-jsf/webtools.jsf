@@ -23,6 +23,10 @@ import org.eclipse.wst.common.internal.emf.resource.Translator;
  */
 public class SupportedLocaleTranslator extends Translator {
 
+	/**
+	 * @param domNameAndPath
+	 * @param aFeature
+	 */
 	public SupportedLocaleTranslator(String domNameAndPath, EStructuralFeature aFeature) {
 		super(domNameAndPath, aFeature);
 	}

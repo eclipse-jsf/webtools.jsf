@@ -14,8 +14,18 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 import org.eclipse.wst.common.internal.emf.resource.Translator;
 
+/**
+ * Translator for the base name on a message bundle
+ * 
+ * @author cbateman
+ *
+ */
 public class BaseNameTranslator extends Translator {
 
+    /**
+     * @param domNameAndPath
+     * @param feature
+     */
     public BaseNameTranslator(String domNameAndPath, EStructuralFeature feature) {
         super(domNameAndPath, feature);
     }

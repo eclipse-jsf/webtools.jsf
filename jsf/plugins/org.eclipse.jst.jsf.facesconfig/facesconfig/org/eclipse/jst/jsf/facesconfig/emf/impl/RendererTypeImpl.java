@@ -240,6 +240,9 @@ public class RendererTypeImpl extends EObjectImpl implements RendererType {
 
     /**
      * <!-- begin-user-doc -->
+     * @param newComponentFamily 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -283,6 +286,9 @@ public class RendererTypeImpl extends EObjectImpl implements RendererType {
 
     /**
      * <!-- begin-user-doc -->
+     * @param newRendererType 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -326,6 +332,9 @@ public class RendererTypeImpl extends EObjectImpl implements RendererType {
 
     /**
      * <!-- begin-user-doc -->
+     * @param newRendererClass 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */

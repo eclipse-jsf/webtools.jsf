@@ -12,8 +12,16 @@ package org.eclipse.jst.jsf.facesconfig.internal.translator;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+/**
+ * Translator for managed bean extensions
+ *
+ */
 public class ManagedBeanExtensionTranslator extends ExtensionTypeTranslator {
 
+    /**
+     * @param domNameAndPath
+     * @param feature
+     */
     public ManagedBeanExtensionTranslator(String domNameAndPath,
             EStructuralFeature feature) {
         super(domNameAndPath, feature);

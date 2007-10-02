@@ -12,8 +12,16 @@ package org.eclipse.jst.jsf.facesconfig.internal.translator;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+/**
+ * Translator for the validator extension
+ *
+ */
 public class ValidatorExtensionTranslator extends ExtensionTypeTranslator 
 {
+    /**
+     * @param domNameAndPath
+     * @param feature
+     */
     public ValidatorExtensionTranslator(String domNameAndPath,
             EStructuralFeature feature) {
         super(domNameAndPath, feature);

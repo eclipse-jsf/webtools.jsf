@@ -24,6 +24,7 @@ import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
+import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
@@ -36,13 +37,14 @@ import org.eclipse.jst.jsf.facesconfig.emf.LocaleConfigType;
 /**
  * This is the item provider adapter for a {@link org.eclipse.jst.jsf.facesconfig.emf.LocaleConfigType} object.
  * <!-- begin-user-doc -->
+ * @extends ITableItemLabelProvider
  * <!-- end-user-doc -->
  * @generated
  */
 public class LocaleConfigTypeItemProvider
 	extends ItemProviderAdapter
 	implements	
-		IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+		IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource, ITableItemLabelProvider {
     /**
      * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -53,6 +55,7 @@ public class LocaleConfigTypeItemProvider
     /**
      * This constructs an instance from a factory and a notifier.
      * <!-- begin-user-doc -->
+     * @param adapterFactory 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -78,6 +81,7 @@ public class LocaleConfigTypeItemProvider
     /**
      * This adds a property descriptor for the Id feature.
      * <!-- begin-user-doc -->
+     * @param object 
 	 * <!-- end-user-doc -->
      * @generated
      */

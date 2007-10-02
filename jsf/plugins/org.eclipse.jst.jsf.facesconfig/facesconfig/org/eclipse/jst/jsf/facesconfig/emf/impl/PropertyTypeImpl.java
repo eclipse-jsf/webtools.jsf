@@ -228,6 +228,9 @@ public class PropertyTypeImpl extends EObjectImpl implements PropertyType {
 
     /**
      * <!-- begin-user-doc -->
+     * @param newPropertyName 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -271,6 +274,9 @@ public class PropertyTypeImpl extends EObjectImpl implements PropertyType {
 
     /**
      * <!-- begin-user-doc -->
+     * @param newPropertyClass 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -314,6 +320,9 @@ public class PropertyTypeImpl extends EObjectImpl implements PropertyType {
 
     /**
      * <!-- begin-user-doc -->
+     * @param newDefaultValue 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -357,6 +366,9 @@ public class PropertyTypeImpl extends EObjectImpl implements PropertyType {
 
     /**
      * <!-- begin-user-doc -->
+     * @param newSuggestedValue 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */

@@ -23,6 +23,10 @@ import org.eclipse.wst.common.internal.emf.resource.Translator;
  */
 public class RenderKitTranslator extends Translator {
 
+	/**
+	 * @param domNameAndPath
+	 * @param aFeature
+	 */
 	public RenderKitTranslator(String domNameAndPath, EStructuralFeature aFeature) {
 		super(domNameAndPath, aFeature);
 	}

@@ -39,6 +39,7 @@ public class FacesConfigFactoryImpl extends EFactoryImpl implements FacesConfigF
     /**
      * Creates the default factory implementation.
      * <!-- begin-user-doc -->
+     * @return the factory instance 
      * <!-- end-user-doc -->
      * @generated
      */
@@ -1144,6 +1145,7 @@ public class FacesConfigFactoryImpl extends EFactoryImpl implements FacesConfigF
 
     /**
      * <!-- begin-user-doc -->
+     * @return the package 
 	 * <!-- end-user-doc -->
      * @deprecated
      * @generated

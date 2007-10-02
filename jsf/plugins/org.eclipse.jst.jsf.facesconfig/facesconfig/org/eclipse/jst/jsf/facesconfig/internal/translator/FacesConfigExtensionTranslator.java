@@ -12,8 +12,16 @@ package org.eclipse.jst.jsf.facesconfig.internal.translator;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+/**
+ * Translator for FacesConfig extension data
+ *
+ */
 public class FacesConfigExtensionTranslator extends ExtensionTypeTranslator {
 
+    /**
+     * @param domNameAndPath
+     * @param feature
+     */
     public FacesConfigExtensionTranslator(String domNameAndPath,
             EStructuralFeature feature) {
         super(domNameAndPath, feature);

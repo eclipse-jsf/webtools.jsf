@@ -14,8 +14,16 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 import org.eclipse.wst.common.internal.emf.resource.Translator;
 
+/**
+ * Translator for extension types
+ *
+ */
 public abstract class ExtensionTypeTranslator extends Translator 
 {
+    /**
+     * @param domNameAndPath
+     * @param aFeature
+     */
     public ExtensionTypeTranslator(String domNameAndPath, EStructuralFeature aFeature) 
     {
         super(domNameAndPath, aFeature);

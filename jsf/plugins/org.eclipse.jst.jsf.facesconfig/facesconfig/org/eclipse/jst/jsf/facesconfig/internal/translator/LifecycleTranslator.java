@@ -22,6 +22,10 @@ import org.eclipse.wst.common.internal.emf.resource.Translator;
  */
 public class LifecycleTranslator extends Translator {
 
+	/**
+	 * @param domNameAndPath
+	 * @param aFeature
+	 */
 	public LifecycleTranslator(String domNameAndPath, EStructuralFeature aFeature) {
 		super(domNameAndPath, aFeature);
 	}

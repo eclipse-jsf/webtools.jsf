@@ -192,6 +192,9 @@ public class ReferencedBeanTypeImpl extends EObjectImpl implements ReferencedBea
 
     /**
      * <!-- begin-user-doc -->
+     * @param newReferencedBeanName 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -235,6 +238,9 @@ public class ReferencedBeanTypeImpl extends EObjectImpl implements ReferencedBea
 
     /**
      * <!-- begin-user-doc -->
+     * @param newReferencedBeanClass 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */

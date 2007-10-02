@@ -371,9 +371,8 @@ class DynamicElementTranslator extends Translator implements IAnyTranslator
             return super.isManagedByParent();
         }
 
-        public boolean isMapFor(Object feature, Object oldValue, Object newValue) {
-            // TODO Auto-generated method stub
-            return super.isMapFor(feature, oldValue, newValue);
+        public boolean isMapFor(Object feature1, Object oldValue, Object newValue) {
+            return super.isMapFor(feature1, oldValue, newValue);
         }
 
         public boolean isMultiValued() {

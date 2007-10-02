@@ -60,6 +60,7 @@ public class DynamicElementItemProvider
     /**
      * This constructs an instance from a factory and a notifier.
      * <!-- begin-user-doc -->
+     * @param adapterFactory 
      * <!-- end-user-doc -->
      * @generated
      */
@@ -87,6 +88,7 @@ public class DynamicElementItemProvider
     /**
      * This adds a property descriptor for the Attributes feature.
      * <!-- begin-user-doc -->
+     * @param object 
      * <!-- end-user-doc -->
      * @generated
      */
@@ -109,6 +111,7 @@ public class DynamicElementItemProvider
     /**
      * This adds a property descriptor for the Text Content feature.
      * <!-- begin-user-doc -->
+     * @param object 
      * <!-- end-user-doc -->
      * @generated
      */
@@ -131,6 +134,7 @@ public class DynamicElementItemProvider
     /**
      * This adds a property descriptor for the Name feature.
      * <!-- begin-user-doc -->
+     * @param object 
      * <!-- end-user-doc -->
      * @generated
      */

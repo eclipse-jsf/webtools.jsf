@@ -31,7 +31,8 @@ public class FacesConfigExtensionTypeImpl extends ExtensionTypeImpl implements F
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+    @SuppressWarnings("hiding")
+	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
 
     /**
      * <!-- begin-user-doc -->

@@ -23,6 +23,7 @@ import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
+import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
@@ -34,13 +35,15 @@ import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 
 /**
  * This is the item provider adapter for a
- * {@link org.eclipse.jst.jsf.facesconfig.emf.ComponentType} object. <!--
- * begin-user-doc --> <!-- end-user-doc -->
+ * {@link org.eclipse.jst.jsf.facesconfig.emf.ComponentType} object. 
+ * <!-- begin-user-doc --> 
+ * @extends ITableItemLabelProvider
+ * <!-- end-user-doc -->
  * 
  * @generated
  */
 public class ComponentTypeItemProvider extends ItemProviderAdapter implements
-		IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+		IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource, ITableItemLabelProvider {
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
@@ -50,6 +53,7 @@ public class ComponentTypeItemProvider extends ItemProviderAdapter implements
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
+	 * @param adapterFactory 
 	 * 
 	 * @generated
 	 */
@@ -58,8 +62,10 @@ public class ComponentTypeItemProvider extends ItemProviderAdapter implements
     }
 
 	/**
-	 * This returns the property descriptors for the adapted class. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * This returns the property descriptors for the adapted class. 
+	 * <!-- begin-user-doc --> 
+	 * 
+	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -72,6 +78,9 @@ public class ComponentTypeItemProvider extends ItemProviderAdapter implements
         return itemPropertyDescriptors;
     }
 
+	/**
+	 * @param object
+	 */
 	protected void addComponentClassPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
 				((ComposeableAdapterFactory) adapterFactory)
@@ -84,6 +93,9 @@ public class ComponentTypeItemProvider extends ItemProviderAdapter implements
 				null));
 	}
 	
+	/**
+	 * @param object
+	 */
 	protected void addComponentTypePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
 				((ComposeableAdapterFactory) adapterFactory)
@@ -99,8 +111,9 @@ public class ComponentTypeItemProvider extends ItemProviderAdapter implements
 
     /**
      * This adds a property descriptor for the Id feature.
-     * <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
+     * <!-- begin-user-doc --> 
+     * @param object 
+     * <!-- end-user-doc -->
      * @generated
      */
 	protected void addIdPropertyDescriptor(Object object) {

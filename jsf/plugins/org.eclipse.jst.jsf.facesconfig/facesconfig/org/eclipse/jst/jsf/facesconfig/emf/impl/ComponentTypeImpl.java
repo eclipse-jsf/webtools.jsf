@@ -240,6 +240,9 @@ public class ComponentTypeImpl extends EObjectImpl implements ComponentType {
 
     /**
      * <!-- begin-user-doc -->
+     * @param newComponentType 
+     * @param msgs 
+     * @return the notification chain
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -283,6 +286,9 @@ public class ComponentTypeImpl extends EObjectImpl implements ComponentType {
 
     /**
      * <!-- begin-user-doc -->
+     * @param newComponentClass 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */

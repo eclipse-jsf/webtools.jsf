@@ -14,8 +14,16 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 import org.eclipse.wst.common.internal.emf.resource.Translator;
 
+/**
+ * Translator for resource bundle element 
+ *
+ */
 public class ResourceBundleTranslator extends Translator {
 
+    /**
+     * @param domNameAndPath
+     * @param feature
+     */
     public ResourceBundleTranslator(String domNameAndPath,
             EStructuralFeature feature) {
         super(domNameAndPath, feature);

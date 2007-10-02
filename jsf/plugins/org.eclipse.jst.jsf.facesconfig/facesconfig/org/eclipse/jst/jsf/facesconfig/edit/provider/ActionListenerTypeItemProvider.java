@@ -22,6 +22,7 @@ import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
+import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
@@ -33,12 +34,14 @@ import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 /**
  * This is the item provider adapter for a
  * {@link org.eclipse.jst.jsf.facesconfig.emf.ActionListenerType} object. <!--
- * begin-user-doc --> <!-- end-user-doc -->
+ * begin-user-doc --> 
+ * @extends ITableItemLabelProvider
+ * <!-- end-user-doc -->
  * 
  * @generated
  */
 public class ActionListenerTypeItemProvider extends ItemProviderAdapter
-		implements IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+		implements IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource, ITableItemLabelProvider {
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
@@ -187,7 +190,6 @@ public class ActionListenerTypeItemProvider extends ItemProviderAdapter
 	 * @see org.eclipse.emf.edit.provider.ITableItemLabelProvider#getColumnImage(java.lang.Object, int)
 	 */
 	public Object getColumnImage(Object object, int columnIndex) {
-		// TODO Auto-generated method stub
 		if(columnIndex ==0)
 			return getImage(object);
 		return null;

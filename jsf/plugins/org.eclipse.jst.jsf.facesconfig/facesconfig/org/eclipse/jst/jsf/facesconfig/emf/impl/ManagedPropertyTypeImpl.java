@@ -240,6 +240,9 @@ public class ManagedPropertyTypeImpl extends EObjectImpl implements ManagedPrope
 
     /**
      * <!-- begin-user-doc -->
+     * @param newPropertyName 
+     * @param msgs 
+     * @return  the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -283,6 +286,9 @@ public class ManagedPropertyTypeImpl extends EObjectImpl implements ManagedPrope
 
     /**
      * <!-- begin-user-doc -->
+     * @param newPropertyClass 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -326,6 +332,9 @@ public class ManagedPropertyTypeImpl extends EObjectImpl implements ManagedPrope
 
     /**
      * <!-- begin-user-doc -->
+     * @param newMapEntries 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -369,6 +378,9 @@ public class ManagedPropertyTypeImpl extends EObjectImpl implements ManagedPrope
 
     /**
      * <!-- begin-user-doc -->
+     * @param newNullValue 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -412,6 +424,9 @@ public class ManagedPropertyTypeImpl extends EObjectImpl implements ManagedPrope
 
     /**
      * <!-- begin-user-doc -->
+     * @param newValue 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -455,6 +470,9 @@ public class ManagedPropertyTypeImpl extends EObjectImpl implements ManagedPrope
 
     /**
      * <!-- begin-user-doc -->
+     * @param newListEntries 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */

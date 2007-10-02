@@ -204,6 +204,7 @@ public class ResourceBundleTypeImpl extends EObjectImpl implements ResourceBundl
 
     /**
      * <!-- begin-user-doc -->
+     * @return the base name 
      * <!-- end-user-doc -->
      * @generated
      */
@@ -242,6 +243,7 @@ public class ResourceBundleTypeImpl extends EObjectImpl implements ResourceBundl
 
     /**
      * <!-- begin-user-doc -->
+     * @return the variable 
      * <!-- end-user-doc -->
      * @generated
      */

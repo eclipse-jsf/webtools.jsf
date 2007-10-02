@@ -18,6 +18,10 @@ import org.eclipse.emf.ecore.EStructuralFeature;
  *
  */
 public class AttributeExtensionTranslator extends ExtensionTypeTranslator {
+	/**
+	 * @param domNameAndPath
+	 * @param aFeature
+	 */
 	public AttributeExtensionTranslator(String domNameAndPath, EStructuralFeature aFeature) {
 		super(domNameAndPath, aFeature);//$NON-NLS-1$
 	}

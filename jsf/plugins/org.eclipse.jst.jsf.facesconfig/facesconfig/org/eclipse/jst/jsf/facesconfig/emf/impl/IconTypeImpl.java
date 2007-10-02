@@ -136,6 +136,9 @@ public class IconTypeImpl extends EObjectImpl implements IconType {
 
     /**
      * <!-- begin-user-doc -->
+     * @param newSmallIcon 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -179,6 +182,9 @@ public class IconTypeImpl extends EObjectImpl implements IconType {
 
     /**
      * <!-- begin-user-doc -->
+     * @param newLargeIcon 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */

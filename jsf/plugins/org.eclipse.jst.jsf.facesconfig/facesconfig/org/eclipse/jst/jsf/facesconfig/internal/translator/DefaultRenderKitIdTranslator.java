@@ -22,6 +22,10 @@ import org.eclipse.wst.common.internal.emf.resource.Translator;
  *
  */
 public class DefaultRenderKitIdTranslator extends Translator {
+	/**
+	 * @param domNameAndPath
+	 * @param aFeature
+	 */
 	public DefaultRenderKitIdTranslator(String domNameAndPath, EStructuralFeature aFeature) {
 		super(domNameAndPath, aFeature); //$NON-NLS-1$
 	}

@@ -55,6 +55,7 @@ public class ManagedPropertyTypeItemProvider
     /**
      * This constructs an instance from a factory and a notifier.
      * <!-- begin-user-doc -->
+     * @param adapterFactory 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -84,6 +85,7 @@ public class ManagedPropertyTypeItemProvider
     /**
      * This adds a property descriptor for the Property Name feature.
      * <!-- begin-user-doc -->
+     * @param object 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -106,6 +108,7 @@ public class ManagedPropertyTypeItemProvider
     /**
      * This adds a property descriptor for the Property Class feature.
      * <!-- begin-user-doc -->
+     * @param object 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -128,6 +131,7 @@ public class ManagedPropertyTypeItemProvider
     /**
      * This adds a property descriptor for the Null Value feature.
      * <!-- begin-user-doc -->
+     * @param object 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -150,7 +154,8 @@ public class ManagedPropertyTypeItemProvider
     /**
      * This adds a property descriptor for the Value feature.
      * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+     * @param object \
+     * <!-- end-user-doc -->
      * @generated
      */
 	protected void addValuePropertyDescriptor(Object object) {
@@ -172,6 +177,7 @@ public class ManagedPropertyTypeItemProvider
     /**
      * This adds a property descriptor for the Id feature.
      * <!-- begin-user-doc -->
+     * @param object 
 	 * <!-- end-user-doc -->
      * @generated
      */

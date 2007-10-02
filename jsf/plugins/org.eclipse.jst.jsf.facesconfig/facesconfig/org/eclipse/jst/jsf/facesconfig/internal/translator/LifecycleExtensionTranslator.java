@@ -12,8 +12,16 @@ package org.eclipse.jst.jsf.facesconfig.internal.translator;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+/**
+ * Translator for lifecycle extensions
+ *
+ */
 public class LifecycleExtensionTranslator extends ExtensionTypeTranslator {
 
+    /**
+     * @param domNameAndPath
+     * @param feature
+     */
     public LifecycleExtensionTranslator(String domNameAndPath,
             EStructuralFeature feature) {
         super(domNameAndPath, feature);

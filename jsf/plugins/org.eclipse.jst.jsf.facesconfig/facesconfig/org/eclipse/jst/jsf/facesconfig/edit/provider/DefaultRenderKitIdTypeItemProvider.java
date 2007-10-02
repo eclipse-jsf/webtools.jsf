@@ -22,6 +22,7 @@ import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
+import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
@@ -32,11 +33,13 @@ import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 
 /**
  * This is the item provider adapter for a {@link org.eclipse.jst.jsf.facesconfig.emf.DefaultRenderKitIdType} object.
- * <!-- begin-user-doc --> <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * @extends ITableItemLabelProvider
+ * <!-- end-user-doc -->
  * @generated
  */
 public class DefaultRenderKitIdTypeItemProvider extends ItemProviderAdapter
-		implements IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+		implements IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource, ITableItemLabelProvider {
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
@@ -44,9 +47,11 @@ public class DefaultRenderKitIdTypeItemProvider extends ItemProviderAdapter
 	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
 
 	/**
-	 * This constructs an instance from a factory and a notifier. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * This constructs an instance from a factory and a notifier. 
 	 * 
+	 * <!-- begin-user-doc --> 
+	 * @param adapterFactory
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public DefaultRenderKitIdTypeItemProvider(AdapterFactory adapterFactory) {
@@ -70,8 +75,12 @@ public class DefaultRenderKitIdTypeItemProvider extends ItemProviderAdapter
     }
 
 	/**
-	 * This adds a property descriptor for the Text Content feature. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * This adds a property descriptor for the Text Content feature. 
+	 * 
+	 * <!-- begin-user-doc -->
+	 * @param object
+	 * <!-- end-user-doc -->
+	 *  
 	 * 
 	 * @generated
 	 */
@@ -93,8 +102,9 @@ public class DefaultRenderKitIdTypeItemProvider extends ItemProviderAdapter
 
     /**
      * This adds a property descriptor for the Id feature.
-     * <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
+     * <!-- begin-user-doc --> 
+     * @param object 
+     * <!-- end-user-doc -->
      * @generated
      */
 	protected void addIdPropertyDescriptor(Object object) {
@@ -180,7 +190,6 @@ public class DefaultRenderKitIdTypeItemProvider extends ItemProviderAdapter
 	 * @see org.eclipse.emf.edit.provider.ITableItemLabelProvider#getColumnImage(java.lang.Object, int)
 	 */
 	public Object getColumnImage(Object object, int columnIndex) {
-		// TODO Auto-generated method stub
 		if(columnIndex ==0)
 			return getImage(object);
 		return null;

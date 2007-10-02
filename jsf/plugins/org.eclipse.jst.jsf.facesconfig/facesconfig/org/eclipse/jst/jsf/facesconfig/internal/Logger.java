@@ -37,15 +37,15 @@ public class Logger {
 
 	private static final String TRACEFILTER_LOCATION = "/debug/tracefilter"; //$NON-NLS-1$
 
-	public static final int OK = IStatus.OK; // 0
-	public static final int INFO = IStatus.INFO; // 1
-	public static final int WARNING = IStatus.WARNING; // 2
-	public static final int ERROR = IStatus.ERROR; // 4
+	private static final int OK = IStatus.OK; // 0
+	private static final int INFO = IStatus.INFO; // 1
+	private static final int WARNING = IStatus.WARNING; // 2
+	private static final int ERROR = IStatus.ERROR; // 4
 
-	public static final int OK_DEBUG = 200 + OK;
-	public static final int INFO_DEBUG = 200 + INFO;
-	public static final int WARNING_DEBUG = 200 + WARNING;
-	public static final int ERROR_DEBUG = 200 + ERROR;
+	private static final int OK_DEBUG = 200 + OK;
+	private static final int INFO_DEBUG = 200 + INFO;
+	private static final int WARNING_DEBUG = 200 + WARNING;
+	private static final int ERROR_DEBUG = 200 + ERROR;
 
 	/**
 	 * Adds message to log.
@@ -82,6 +82,7 @@ public class Logger {
 	 * Prints message to log if category matches /debug/tracefilter option.
 	 * @param message text to print
 	 * @param category category of the message, to be compared with /debug/tracefilter
+	 * @param exception 
 	 */
 	protected static void _trace(String category, String message, Throwable exception) {
 		if (isTracing(category)) {
@@ -120,26 +121,51 @@ public class Logger {
 		return false;
 	}
 
+	/**
+	 * @param level
+	 * @param message
+	 */
 	public static void log(int level, String message) {
 		_log(level, message, null);
 	}
 
+	/**
+	 * @param level
+	 * @param message
+	 * @param exception
+	 */
 	public static void log(int level, String message, Throwable exception) {
 		_log(level, message, exception);
 	}
 	
+	/**
+	 * @param source
+	 * @param message
+	 */
 	public static void log(Object source, String message) {
 		doLog(source, message, null);
 	}
 
+	/**
+	 * @param source
+	 * @param message
+	 * @param throwable
+	 */
 	public static void log(Object source, String message, Throwable throwable) {
 		doLog(source, message, throwable);
 	}
 
+	/**
+	 * @param source
+	 * @param throwable
+	 */
 	public static void log(Object source, Throwable throwable) {
 		doLog(source, null, throwable);
 	}
 	
+	/**
+	 * @param message
+	 */
 	public static void log(String message) {
 		doLog(message, null);
 	}
@@ -162,22 +188,42 @@ public class Logger {
 		return buffer.toString();
 	}
 
+	/**
+	 * @param message
+	 * @param exception
+	 */
 	public static void logException(String message, Throwable exception) {
 		_log(ERROR, message, exception);
 	}
 
+	/**
+	 * @param exception
+	 */
 	public static void logException(Throwable exception) {
 		_log(ERROR, exception.getMessage(), exception);
 	}
 
+	/**
+	 * @param category
+	 * @param message
+	 * @param exception
+	 */
 	public static void traceException(String category, String message, Throwable exception) {
 		_trace(category, message, exception);
 	}
 
+	/**
+	 * @param category
+	 * @param exception
+	 */
 	public static void traceException(String category, Throwable exception) {
 		_trace(category, exception.getMessage(), exception);
 	}
 
+	/**
+	 * @param category
+	 * @param message
+	 */
 	public static void trace(String category, String message) {
 		_trace(category, message, null);
 	}
@@ -186,7 +232,7 @@ public class Logger {
 		return FacesConfigPlugin.getPlugin();
 	}
 
-	public static Plugin getPlugin() {
+	private static Plugin getPlugin() {
 
 		if (fPlugin == null) {
 			fPlugin = getFacesPlugin();
@@ -194,7 +240,10 @@ public class Logger {
 		return fPlugin;
 	}
 
-	public static String getPluginId() {
+	/**
+	 * @return the plugin id
+	 */
+	private static String getPluginId() {
 
 		if (fPluginId == null) {
 			fPluginId = ((Plugin) (FacesConfigPlugin.getPlugin())).getBundle().getSymbolicName() ;
@@ -222,6 +271,11 @@ public class Logger {
 		}
 	}
 	
+	/**
+	 * @param category
+	 * @param source
+	 * @param message
+	 */
 	public static void trace(String category, Object source, String message) {
 		doTrace(category, source, message);
 	}

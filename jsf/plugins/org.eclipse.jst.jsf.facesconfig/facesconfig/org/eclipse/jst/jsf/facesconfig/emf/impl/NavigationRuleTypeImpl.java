@@ -204,6 +204,9 @@ public class NavigationRuleTypeImpl extends EObjectImpl implements NavigationRul
 
     /**
      * <!-- begin-user-doc -->
+     * @param newFromViewId 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */

@@ -21,6 +21,10 @@ import org.eclipse.wst.common.internal.emf.resource.Translator;
  *
  */
 public class ComponentTranslator extends Translator {
+	/**
+	 * @param domNameAndPath
+	 * @param aFeature
+	 */
 	public ComponentTranslator(String domNameAndPath, EStructuralFeature aFeature) {
 		super(domNameAndPath, aFeature);//$NON-NLS-1$
 	}

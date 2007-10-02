@@ -216,6 +216,9 @@ public class RenderKitTypeImpl extends EObjectImpl implements RenderKitType {
 
     /**
      * <!-- begin-user-doc -->
+     * @param newRenderKitId 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -259,6 +262,9 @@ public class RenderKitTypeImpl extends EObjectImpl implements RenderKitType {
 
     /**
      * <!-- begin-user-doc -->
+     * @param newRenderKitClass 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */

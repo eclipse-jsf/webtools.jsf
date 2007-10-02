@@ -23,6 +23,7 @@ import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
+import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
@@ -34,13 +35,16 @@ import org.eclipse.jst.jsf.facesconfig.emf.ValidatorType;
 
 /**
  * This is the item provider adapter for a
- * {@link org.eclipse.jst.jsf.facesconfig.emf.ValidatorType} object. <!--
- * begin-user-doc --> <!-- end-user-doc -->
+ * {@link org.eclipse.jst.jsf.facesconfig.emf.ValidatorType} object. 
+ * 
+ * <!-- begin-user-doc --> 
+ * @extends ITableItemLabelProvider
+ * <!-- end-user-doc -->
  * 
  * @generated
  */
 public class ValidatorTypeItemProvider extends ItemProviderAdapter implements
-		IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+		IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource, ITableItemLabelProvider {
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
@@ -48,8 +52,11 @@ public class ValidatorTypeItemProvider extends ItemProviderAdapter implements
 	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
 
 	/**
-	 * This constructs an instance from a factory and a notifier. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * This constructs an instance from a factory and a notifier. 
+	 * 
+	 * <!-- begin-user-doc --> 
+	 * @param adapterFactory 
+	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -75,8 +82,11 @@ public class ValidatorTypeItemProvider extends ItemProviderAdapter implements
     }
 
 	/**
-	 * This adds a property descriptor for the Validator Id feature. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * This adds a property descriptor for the Validator Id feature. 
+	 * 
+	 * <!-- begin-user-doc --> 
+	 * @param object
+	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -97,8 +107,11 @@ public class ValidatorTypeItemProvider extends ItemProviderAdapter implements
     }
 
 	/**
-	 * This adds a property descriptor for the Validator Class feature. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * This adds a property descriptor for the Validator Class feature. 
+	 * 
+	 * <!-- begin-user-doc --> 
+	 * @param object 
+	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -120,8 +133,9 @@ public class ValidatorTypeItemProvider extends ItemProviderAdapter implements
 
     /**
      * This adds a property descriptor for the Id feature.
-     * <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
+     * <!-- begin-user-doc --> 
+     * @param object 
+     * <!-- end-user-doc -->
      * @generated
      */
 	protected void addIdPropertyDescriptor(Object object) {

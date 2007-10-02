@@ -228,6 +228,9 @@ public class AttributeTypeImpl extends EObjectImpl implements AttributeType {
 
     /**
      * <!-- begin-user-doc -->
+     * @param newAttributeName 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -271,6 +274,9 @@ public class AttributeTypeImpl extends EObjectImpl implements AttributeType {
 
     /**
      * <!-- begin-user-doc -->
+     * @param newAttributeClass 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -314,6 +320,9 @@ public class AttributeTypeImpl extends EObjectImpl implements AttributeType {
 
     /**
      * <!-- begin-user-doc -->
+     * @param newDefaultValue 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -357,6 +366,9 @@ public class AttributeTypeImpl extends EObjectImpl implements AttributeType {
 
     /**
      * <!-- begin-user-doc -->
+     * @param newSuggestedValue 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */

@@ -132,6 +132,9 @@ public class MapEntriesTypeImpl extends EObjectImpl implements MapEntriesType {
 
     /**
      * <!-- begin-user-doc -->
+     * @param newKeyClass 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -175,6 +178,9 @@ public class MapEntriesTypeImpl extends EObjectImpl implements MapEntriesType {
 
     /**
      * <!-- begin-user-doc -->
+     * @param newValueClass 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */

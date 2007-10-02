@@ -31,6 +31,7 @@ public class ComponentExtensionTypeImpl extends ExtensionTypeImpl implements Com
 	 * <!-- end-user-doc -->
      * @generated
      */
+	@SuppressWarnings("hiding")
 	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
 
     /**

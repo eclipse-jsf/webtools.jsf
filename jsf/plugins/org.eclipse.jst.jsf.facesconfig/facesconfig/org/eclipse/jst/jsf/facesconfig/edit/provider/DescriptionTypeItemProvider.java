@@ -56,6 +56,7 @@ public class DescriptionTypeItemProvider
     /**
      * This constructs an instance from a factory and a notifier.
      * <!-- begin-user-doc -->
+     * @param adapterFactory 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -83,6 +84,7 @@ public class DescriptionTypeItemProvider
     /**
      * This adds a property descriptor for the Text Content feature.
      * <!-- begin-user-doc -->
+     * @param object 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -105,6 +107,7 @@ public class DescriptionTypeItemProvider
     /**
      * This adds a property descriptor for the Lang feature.
      * <!-- begin-user-doc -->
+     * @param object 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -127,6 +130,7 @@ public class DescriptionTypeItemProvider
     /**
      * This adds a property descriptor for the Id feature.
      * <!-- begin-user-doc -->
+     * @param object 
 	 * <!-- end-user-doc -->
      * @generated
      */

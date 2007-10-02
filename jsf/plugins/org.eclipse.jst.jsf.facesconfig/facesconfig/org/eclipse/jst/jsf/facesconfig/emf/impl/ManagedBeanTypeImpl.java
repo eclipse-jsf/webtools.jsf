@@ -252,6 +252,9 @@ public class ManagedBeanTypeImpl extends EObjectImpl implements ManagedBeanType 
 
     /**
      * <!-- begin-user-doc -->
+     * @param newManagedBeanName 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -295,6 +298,9 @@ public class ManagedBeanTypeImpl extends EObjectImpl implements ManagedBeanType 
 
     /**
      * <!-- begin-user-doc -->
+     * @param newManagedBeanClass 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -338,6 +344,9 @@ public class ManagedBeanTypeImpl extends EObjectImpl implements ManagedBeanType 
 
     /**
      * <!-- begin-user-doc -->
+     * @param newManagedBeanScope 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -393,6 +402,9 @@ public class ManagedBeanTypeImpl extends EObjectImpl implements ManagedBeanType 
 
     /**
      * <!-- begin-user-doc -->
+     * @param newMapEntries 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -436,6 +448,9 @@ public class ManagedBeanTypeImpl extends EObjectImpl implements ManagedBeanType 
 
     /**
      * <!-- begin-user-doc -->
+     * @param newListEntries 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */

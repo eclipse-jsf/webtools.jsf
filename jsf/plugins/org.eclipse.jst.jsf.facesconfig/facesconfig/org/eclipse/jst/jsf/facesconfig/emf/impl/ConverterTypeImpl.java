@@ -240,6 +240,9 @@ public class ConverterTypeImpl extends EObjectImpl implements ConverterType {
 
     /**
      * <!-- begin-user-doc -->
+     * @param newConverterId 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -283,6 +286,9 @@ public class ConverterTypeImpl extends EObjectImpl implements ConverterType {
 
     /**
      * <!-- begin-user-doc -->
+     * @param newConverterForClass 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -327,6 +333,9 @@ public class ConverterTypeImpl extends EObjectImpl implements ConverterType {
     /**
      * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+     * @param newConverterClass 
+     * @param msgs 
+     * @return the notification chain 
      * @generated
      */
 	public NotificationChain basicSetConverterClass(ConverterClassType newConverterClass, NotificationChain msgs) {

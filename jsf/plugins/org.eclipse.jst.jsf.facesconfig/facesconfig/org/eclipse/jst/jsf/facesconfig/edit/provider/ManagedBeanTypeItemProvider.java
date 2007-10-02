@@ -55,6 +55,7 @@ public class ManagedBeanTypeItemProvider
     /**
      * This constructs an instance from a factory and a notifier.
      * <!-- begin-user-doc -->
+     * @param adapterFactory 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -83,6 +84,7 @@ public class ManagedBeanTypeItemProvider
     /**
      * This adds a property descriptor for the Managed Bean Name feature.
      * <!-- begin-user-doc -->
+     * @param object 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -105,6 +107,7 @@ public class ManagedBeanTypeItemProvider
     /**
      * This adds a property descriptor for the Managed Bean Class feature.
      * <!-- begin-user-doc -->
+     * @param object 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -127,6 +130,7 @@ public class ManagedBeanTypeItemProvider
     /**
      * This adds a property descriptor for the Managed Bean Scope feature.
      * <!-- begin-user-doc -->
+     * @param object 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -149,6 +153,7 @@ public class ManagedBeanTypeItemProvider
     /**
      * This adds a property descriptor for the Id feature.
      * <!-- begin-user-doc -->
+     * @param object 
 	 * <!-- end-user-doc -->
      * @generated
      */

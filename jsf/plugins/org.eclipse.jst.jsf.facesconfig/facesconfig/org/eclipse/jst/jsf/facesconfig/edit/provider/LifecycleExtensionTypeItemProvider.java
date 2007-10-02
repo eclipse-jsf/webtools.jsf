@@ -49,11 +49,13 @@ public class LifecycleExtensionTypeItemProvider
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+    @SuppressWarnings("hiding")
+	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
 
     /**
      * This constructs an instance from a factory and a notifier.
      * <!-- begin-user-doc -->
+     * @param adapterFactory 
      * <!-- end-user-doc -->
      * @generated
      */

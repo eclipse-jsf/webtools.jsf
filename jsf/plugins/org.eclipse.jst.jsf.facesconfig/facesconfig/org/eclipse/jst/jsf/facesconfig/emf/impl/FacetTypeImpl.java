@@ -193,6 +193,9 @@ public class FacetTypeImpl extends EObjectImpl implements FacetType {
     /**
      * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+     * @param newFacetName 
+     * @param msgs 
+     * @return the notification chain 
      * @generated
      */
 	public NotificationChain basicSetFacetName(FacetNameType newFacetName, NotificationChain msgs) {

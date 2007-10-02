@@ -62,6 +62,7 @@ public class ResourceBundleTypeItemProvider
     /**
      * This constructs an instance from a factory and a notifier.
      * <!-- begin-user-doc -->
+     * @param adapterFactory 
      * <!-- end-user-doc -->
      * @generated
      */
@@ -89,6 +90,7 @@ public class ResourceBundleTypeItemProvider
     /**
      * This adds a property descriptor for the Base Name feature.
      * <!-- begin-user-doc -->
+     * @param object 
      * <!-- end-user-doc -->
      * @generated
      */
@@ -111,6 +113,7 @@ public class ResourceBundleTypeItemProvider
     /**
      * This adds a property descriptor for the Var feature.
      * <!-- begin-user-doc -->
+     * @param object 
      * <!-- end-user-doc -->
      * @generated
      */
@@ -133,6 +136,7 @@ public class ResourceBundleTypeItemProvider
     /**
      * This adds a property descriptor for the Id feature.
      * <!-- begin-user-doc -->
+     * @param object 
      * <!-- end-user-doc -->
      * @generated
      */

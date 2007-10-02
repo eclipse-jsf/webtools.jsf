@@ -755,6 +755,7 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
      * <p>Invocation of this method will not affect any packages that have
      * already been initialized.
      * <!-- begin-user-doc -->
+     * @return the package 
 	 * <!-- end-user-doc -->
      * @see #eNS_URI
      * @see #createPackageContents()

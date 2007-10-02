@@ -48,8 +48,11 @@ public class DefaultLocaleTypeItemProvider extends ItemProviderAdapter
 	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
 
 	/**
-	 * This constructs an instance from a factory and a notifier. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * This constructs an instance from a factory and a notifier. 
+	 * 
+	 * <!-- begin-user-doc --> 
+ 	 * @param adapterFactory 
+	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -74,8 +77,11 @@ public class DefaultLocaleTypeItemProvider extends ItemProviderAdapter
     }
 
 	/**
-	 * This adds a property descriptor for the Text Content feature. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * This adds a property descriptor for the Text Content feature. 
+	 * 
+	 * <!-- begin-user-doc --> 
+ 	 * @param object 
+	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -97,8 +103,9 @@ public class DefaultLocaleTypeItemProvider extends ItemProviderAdapter
 
     /**
      * This adds a property descriptor for the Id feature.
-     * <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
+     * <!-- begin-user-doc --> 
+     * @param object 
+     * <!-- end-user-doc -->
      * @generated
      */
 	protected void addIdPropertyDescriptor(Object object) {

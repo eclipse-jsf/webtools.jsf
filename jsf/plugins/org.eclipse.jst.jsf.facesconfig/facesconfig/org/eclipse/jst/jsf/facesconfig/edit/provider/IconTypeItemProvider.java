@@ -56,6 +56,7 @@ public class IconTypeItemProvider
     /**
      * This constructs an instance from a factory and a notifier.
      * <!-- begin-user-doc -->
+     * @param adapterFactory 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -84,6 +85,7 @@ public class IconTypeItemProvider
     /**
      * This adds a property descriptor for the Small Icon feature.
      * <!-- begin-user-doc -->
+     * @param object 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -106,6 +108,7 @@ public class IconTypeItemProvider
     /**
      * This adds a property descriptor for the Large Icon feature.
      * <!-- begin-user-doc -->
+     * @param object 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -128,6 +131,7 @@ public class IconTypeItemProvider
     /**
      * This adds a property descriptor for the Lang feature.
      * <!-- begin-user-doc -->
+     * @param object 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -150,6 +154,7 @@ public class IconTypeItemProvider
     /**
      * This adds a property descriptor for the Id feature.
      * <!-- begin-user-doc -->
+     * @param object 
 	 * <!-- end-user-doc -->
      * @generated
      */

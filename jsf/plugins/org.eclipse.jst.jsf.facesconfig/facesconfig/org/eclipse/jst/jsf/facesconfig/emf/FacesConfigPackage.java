@@ -10915,6 +10915,7 @@ public interface FacesConfigPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
+    @SuppressWarnings("hiding")
     interface Literals  {
         /**
          * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ActionListenerTypeImpl <em>Action Listener Type</em>}' class.
@@ -11304,7 +11305,7 @@ public interface FacesConfigPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
-        EReference COMPONENT_TYPE__DESCRIPTION = eINSTANCE.getComponentType_Description();
+		EReference COMPONENT_TYPE__DESCRIPTION = eINSTANCE.getComponentType_Description();
 
         /**
          * The meta object literal for the '<em><b>Display Name</b></em>' containment reference list feature.

@@ -40,8 +40,9 @@ import org.eclipse.jst.jsf.facesconfig.emf.FacetType;
 /**
  * This is the item provider adapter for a {@link org.eclipse.jst.jsf.facesconfig.emf.FacetType} object.
  * <!-- begin-user-doc -->
+ * @extends ITableItemLabelProvider
  * <!-- end-user-doc -->
- * 
+ * @generated
  */
 public class FacetTypeItemProvider
 	extends ItemProviderAdapter
@@ -62,6 +63,7 @@ public class FacetTypeItemProvider
     /**
      * This constructs an instance from a factory and a notifier.
      * <!-- begin-user-doc -->
+     * @param adapterFactory 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -87,6 +89,7 @@ public class FacetTypeItemProvider
     /**
      * This adds a property descriptor for the Id feature.
      * <!-- begin-user-doc -->
+     * @param object 
 	 * <!-- end-user-doc -->
      * @generated
      */
@@ -250,7 +253,6 @@ public class FacetTypeItemProvider
 	}
 
 	public Object getColumnImage(Object object, int columnIndex) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
