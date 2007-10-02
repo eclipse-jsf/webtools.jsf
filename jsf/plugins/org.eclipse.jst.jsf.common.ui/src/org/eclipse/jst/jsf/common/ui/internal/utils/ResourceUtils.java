@@ -27,8 +27,9 @@ import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
  */
 public abstract class ResourceUtils {
 	private static Logger _log = JSFUICommonPlugin.getLogger(ResourceUtils.class);
-
-	// This is the resource bundle.
+	/**
+	 * the resource bundle accessible by all children
+	 */
 	protected ResourceBundle _resources;
 
 	/**
@@ -57,13 +58,6 @@ public abstract class ResourceUtils {
 	}
 
 	/**
-	 * Get the static stored resource bundle for the TRP.
-	 */
-	public ResourceBundle getResourceBundle() {
-		return _resources;
-	}
-
-	/**
 	 * Get the property defined in the resource bundle for the given key. This
 	 * property should be an integer. If none is defined
 	 * (MissingResourceException), return the default.
@@ -72,6 +66,7 @@ public abstract class ResourceUtils {
 	 *            the key in the resource bundle.
 	 * @param defaultValue
 	 *            default int to return if no value is found for the key.
+	 * @return the integer value for key or defaultValue if none
 	 */
 	public int getValue(String key, int defaultValue) {
 		String stringValue = getString(key);
@@ -96,6 +91,7 @@ public abstract class ResourceUtils {
 	 *            the key in the resource bundle.
 	 * @param defaultValue
 	 *            default long to return if no value is found for the key.
+	 * @return the long value for key or defaultValue if none
 	 */
 	public long getValue(String key, long defaultValue) {
 		String stringValue = getString(key);
@@ -118,6 +114,7 @@ public abstract class ResourceUtils {
 	 * 
 	 * @param key
 	 *            the key in the resource bundle.
+	 * @return true if there is a resource corresponding to key
 	 */
 	public boolean isResource(String key) {
 		return getString(key).equals("" + true);
@@ -129,6 +126,7 @@ public abstract class ResourceUtils {
 	 * 
 	 * @param key
 	 *            the key in the resource bundle.
+	 * @return the string value for key or key if not found
 	 */
 	public String getString(String key) {
 		try {
@@ -269,6 +267,11 @@ public abstract class ResourceUtils {
 		return formatter.format(args);
 	}
 
+	/**
+	 * Use in the try-finally idiom for inputStream to ensure close
+	 * and suppress exceptions on close
+	 * @param inputStream
+	 */
 	public static void ensureClosed(InputStream inputStream) {
 		if (inputStream != null) {
 			try {
