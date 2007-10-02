@@ -12,13 +12,18 @@
 package org.eclipse.jst.jsf.common.ui.internal.utils;
 
 /**
+ * TODO: this class doesn't seem to be in use
  * @author mengbo
  * @version 1.5
  */
-public class UTF8Util {
+public final class UTF8Util {
 	private static final char[] HEX_DIGITS = { '0', '1', '2', '3', '4', '5',
 			'6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
 
+	/**
+	 * @param s
+	 * @return the unwound string
+	 */
 	public static String unwindEscapeChars(String s) {
 		StringBuffer sb = new StringBuffer(s.length());
 		int length = s.length();
@@ -77,4 +82,8 @@ public class UTF8Util {
 		return HEX_DIGITS[(halfByte & 0xF)];
 	}
 
+	private UTF8Util()
+	{
+		// no instantiation
+	}
 }
