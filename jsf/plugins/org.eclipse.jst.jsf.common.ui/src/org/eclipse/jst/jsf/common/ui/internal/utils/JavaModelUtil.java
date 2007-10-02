@@ -27,13 +27,11 @@ import org.eclipse.jdt.core.IClasspathContainer;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IField;
-import org.eclipse.jdt.core.IImportContainer;
 import org.eclipse.jdt.core.IImportDeclaration;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IMember;
 import org.eclipse.jdt.core.IMethod;
-import org.eclipse.jdt.core.IPackageDeclaration;
 import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.IType;
@@ -57,6 +55,7 @@ public final class JavaModelUtil {
 	 *            The fully qualified name (type name with enclosing type names
 	 *            and package (all separated by dots))
 	 * @return The type found, or null if not existing
+	 * @throws JavaModelException 
 	 */
 	public static IType findType(IJavaProject jproject,
 			String fullyQualifiedName) throws JavaModelException {
@@ -81,6 +80,8 @@ public final class JavaModelUtil {
 	 * referenced. This means it is own by a different project but is referenced
 	 * by the root's parent. Returns <code>false</code> if the given root
 	 * doesn't have an underlying resource.
+	 * @param root 
+	 * @return true if root is referenced
 	 */
 	public static boolean isReferenced(IPackageFragmentRoot root) {
 		IResource resource = root.getResource();
@@ -147,6 +148,7 @@ public final class JavaModelUtil {
 	 *            the type qualified name (type name with enclosing type names
 	 *            (separated by dots))
 	 * @return the type found, or null if not existing
+	 * @throws JavaModelException 
 	 * @deprecated Use IJavaProject.findType(String, String) instead
 	 */
 	public static IType findType(IJavaProject jproject, String pack,
@@ -163,6 +165,8 @@ public final class JavaModelUtil {
 	 *            The Java project defining the context to search
 	 * @param typeContainerName
 	 *            A dot separarted name of the type container
+	 * @return the java element
+	 * @throws JavaModelException 
 	 * @see #getTypeContainerName(IType)
 	 */
 	public static IJavaElement findTypeContainer(IJavaProject jproject,
@@ -191,6 +195,7 @@ public final class JavaModelUtil {
 	 *            the type qualified name (type name with enclosing type names
 	 *            (separated by dots))
 	 * @return the type found, or null if not existing
+	 * @throws JavaModelException 
 	 */
 	public static IType findTypeInCompilationUnit(ICompilationUnit cu,
 			String typeQualifiedName) throws JavaModelException {
@@ -248,6 +253,8 @@ public final class JavaModelUtil {
 	 * separators. This is a replace for IType.getTypeQualifiedName() which uses
 	 * '$' as separators. As '$' is also a valid character in an id this is
 	 * ambiguous. JavaCore PR: 1GCFUNT
+	 * @param type 
+	 * @return the type qualified name
 	 */
 	public static String getTypeQualifiedName(IType type) {
 		return type.getTypeQualifiedName('.');
@@ -258,6 +265,8 @@ public final class JavaModelUtil {
 	 * separators. This is a replace for IType.getFullyQualifiedTypeName which
 	 * uses '$' as separators. As '$' is also a valid character in an id this is
 	 * ambiguous. JavaCore PR: 1GCFUNT
+	 * @param type 
+	 * @return the fully qualified name using . as the separator
 	 */
 	public static String getFullyQualifiedName(IType type) {
 		return type.getFullyQualifiedName('.');
@@ -266,6 +275,8 @@ public final class JavaModelUtil {
 	/**
 	 * Returns the fully qualified name of a type's container. (package name or
 	 * enclosing type name)
+	 * @param type 
+	 * @return the container name
 	 */
 	public static String getTypeContainerName(IType type) {
 		IType outerType = type.getDeclaringType();
@@ -278,6 +289,9 @@ public final class JavaModelUtil {
 	/**
 	 * Concatenates two names. Uses a dot for separation. Both strings can be
 	 * empty or <code>null</code>.
+	 * @param name1 
+	 * @param name2 
+	 * @return name1 + name2
 	 */
 	public static String concatenateName(String name1, String name2) {
 		StringBuffer buf = new StringBuffer();
@@ -296,6 +310,9 @@ public final class JavaModelUtil {
 	/**
 	 * Concatenates two names. Uses a dot for separation. Both strings can be
 	 * empty or <code>null</code>.
+	 * @param name1 
+	 * @param name2 
+	 * @return name1 + name2
 	 */
 	public static String concatenateName(char[] name1, char[] name2) {
 		StringBuffer buf = new StringBuffer();
@@ -319,6 +336,8 @@ public final class JavaModelUtil {
 	 *            The member to test the visibility for
 	 * @param pack
 	 *            The package in focus
+	 * @return true if visible
+	 * @throws JavaModelException 
 	 */
 	public static boolean isVisible(IMember member, IPackageFragment pack)
 			throws JavaModelException {
@@ -354,6 +373,8 @@ public final class JavaModelUtil {
 	 *            The member to test the visibility for
 	 * @param pack
 	 *            The package of the focus element focus
+	 * @return true if is visible in hiearchy
+	 * @throws JavaModelException 
 	 */
 	public static boolean isVisibleInHierarchy(IMember member,
 			IPackageFragment pack) throws JavaModelException {
@@ -384,6 +405,8 @@ public final class JavaModelUtil {
 	 * Returns the package fragment root of <code>IJavaElement</code>. If the
 	 * given element is already a package fragment root, the element itself is
 	 * returned.
+	 * @param element 
+	 * @return the package fragment root
 	 */
 	public static IPackageFragmentRoot getPackageFragmentRoot(
 			IJavaElement element) {
@@ -397,7 +420,7 @@ public final class JavaModelUtil {
 	 * 
 	 * @deprecated Use element.getParent().getAncestor(kind);
 	 */
-	public static IJavaElement findParentOfKind(IJavaElement element, int kind) {
+	private static IJavaElement findParentOfKind(IJavaElement element, int kind) {
 		if (element != null && element.getParent() != null) {
 			return element.getParent().getAncestor(kind);
 		}
@@ -417,7 +440,9 @@ public final class JavaModelUtil {
 	 *            <code>{"QString;","I"}</code>
 	 * @param isConstructor
 	 *            If the method is a constructor
+	 * @param type 
 	 * @return The first found method or <code>null</code>, if nothing found
+	 * @throws JavaModelException 
 	 */
 	public static IMethod findMethod(String name, String[] paramTypes,
 			boolean isConstructor, IType type) throws JavaModelException {
@@ -440,6 +465,7 @@ public final class JavaModelUtil {
 	 * @param methods
 	 *            The methods to search in
 	 * @return The found method or <code>null</code>, if nothing found
+	 * @throws JavaModelException 
 	 */
 	public static IMethod findMethod(String name, String[] paramTypes,
 			boolean isConstructor, IMethod[] methods) throws JavaModelException {
@@ -459,6 +485,7 @@ public final class JavaModelUtil {
 	 * only compared by the simple name, no resolving for the fully qualified
 	 * type name is done. Constructors are only compared by parameters, not the
 	 * name.
+	 * @param hierarchy 
 	 * 
 	 * @param type
 	 *            Searches in this type's supertypes.
@@ -470,6 +497,7 @@ public final class JavaModelUtil {
 	 * @param isConstructor
 	 *            If the method is a constructor
 	 * @return The first method found or null, if nothing found
+	 * @throws JavaModelException 
 	 */
 	public static IMethod findMethodDeclarationInHierarchy(
 			ITypeHierarchy hierarchy, IType type, String name,
@@ -500,6 +528,7 @@ public final class JavaModelUtil {
 	 * with a name and signature. Parameter types are only compared by the
 	 * simple name, no resolving for the fully qualified type name is done.
 	 * Constructors are only compared by parameters, not the name.
+	 * @param hierarchy 
 	 * 
 	 * @param type
 	 *            Type to search the superclasses
@@ -511,6 +540,7 @@ public final class JavaModelUtil {
 	 * @param isConstructor
 	 *            If the method is a constructor
 	 * @return The first method found or null, if nothing found
+	 * @throws JavaModelException 
 	 */
 	public static IMethod findMethodImplementationInHierarchy(
 			ITypeHierarchy hierarchy, IType type, String name,
@@ -561,10 +591,16 @@ public final class JavaModelUtil {
 	/**
 	 * Finds the method that is defines/declares the given method. The search is
 	 * bottom-up, so this returns the nearest defining/declaring method.
+	 * @param typeHierarchy 
+	 * @param type 
+	 * @param methodName 
+	 * @param paramTypes 
+	 * @param isConstructor 
 	 * 
 	 * @param testVisibility
 	 *            If true the result is tested on visibility. Null is returned
 	 *            if the method is not visible.
+	 * @return the method or null
 	 * @throws JavaModelException
 	 */
 	public static IMethod findMethodDefininition(ITypeHierarchy typeHierarchy,
@@ -608,8 +644,10 @@ public final class JavaModelUtil {
 	 *            <code>{"QString;","I"}</code>
 	 * @param isConstructor
 	 *            Specifies if the method is a constructor
+	 * @param curr 
 	 * @return Returns <code>true</code> if the method has the given name and
 	 *         parameter types and constructor state.
+	 * @throws JavaModelException 
 	 */
 	public static boolean isSameMethodSignature(String name,
 			String[] paramTypes, boolean isConstructor, IMethod curr)
@@ -637,6 +675,8 @@ public final class JavaModelUtil {
 	/**
 	 * Tests if two <code>IPackageFragment</code>s represent the same logical
 	 * java package.
+	 * @param pack1 
+	 * @param pack2 
 	 * 
 	 * @return <code>true</code> if the package fragments' names are equal.
 	 */
@@ -647,6 +687,9 @@ public final class JavaModelUtil {
 
 	/**
 	 * Checks whether the given type has a valid main method or not.
+	 * @param type 
+	 * @return true if type has a main method
+	 * @throws JavaModelException 
 	 */
 	public static boolean hasMainMethod(IType type) throws JavaModelException {
 		IMethod[] methods = type.getMethods();
@@ -660,25 +703,20 @@ public final class JavaModelUtil {
 
 	/**
 	 * Checks if the field is boolean.
+	 * @param field 
+	 * @return true if the file is of primitive boolean type
+	 * @throws JavaModelException 
 	 */
 	public static boolean isBoolean(IField field) throws JavaModelException {
 		return field.getTypeSignature().equals(Signature.SIG_BOOLEAN);
 	}
 
 	/**
-	 * Returns true if the element is on the build path of the given project
-	 * 
-	 * @deprecated Use jproject.isOnClasspath(element);
-	 */
-	public static boolean isOnBuildPath(IJavaProject jproject,
-			IJavaElement element) {
-		return jproject.isOnClasspath(element);
-	}
-
-	/**
 	 * Tests if the given element is on the class path of its containing
 	 * project. Handles the case that the containing project isn't a Java
 	 * project.
+	 * @param element 
+	 * @return true if element in on the class path?
 	 */
 	public static boolean isOnClasspath(IJavaElement element) {
 		IJavaProject project = element.getJavaProject();
@@ -699,6 +737,7 @@ public final class JavaModelUtil {
 	 *            in)
 	 * @return returns the fully qualified type name or build-in-type name. if a
 	 *         unresoved type couldn't be resolved null is returned
+	 * @throws JavaModelException 
 	 */
 	public static String getResolvedTypeName(String refTypeSig,
 			IType declaringType) throws JavaModelException {
@@ -724,6 +763,8 @@ public final class JavaModelUtil {
 
 	/**
 	 * Returns if a CU can be edited.
+	 * @param cu 
+	 * @return true if cu is editable
 	 */
 	public static boolean isEditable(ICompilationUnit cu) {
 		IResource resource = toOriginal(cu).getResource();
@@ -733,6 +774,10 @@ public final class JavaModelUtil {
 
 	/**
 	 * Finds a qualified import for a type name.
+	 * @param cu 
+	 * @param simpleName 
+	 * @return the import declaration or null
+	 * @throws JavaModelException 
 	 */
 	public static IImportDeclaration findImport(ICompilationUnit cu,
 			String simpleName) throws JavaModelException {
@@ -753,6 +798,8 @@ public final class JavaModelUtil {
 	/**
 	 * Returns the original if the given member. If the member is already an
 	 * original the input is returned. The returned member might not exist
+	 * @param member 
+	 * @return the original IMember
 	 */
 	public static IMember toOriginal(IMember member) {
 		if (member instanceof IMethod) {
@@ -802,6 +849,8 @@ public final class JavaModelUtil {
 	 * Returns the original cu if the given cu is a working copy. If the cu is
 	 * already an original the input cu is returned. The returned cu might not
 	 * exist
+	 * @param cu 
+	 * @return the original compiliation unit
 	 */
 	public static ICompilationUnit toOriginal(ICompilationUnit cu) {
 		// To stay compatible with old version returned null
@@ -815,70 +864,31 @@ public final class JavaModelUtil {
 	 * Returns the original element if the given element is a working copy. If
 	 * the cu is already an original the input element is returned. The returned
 	 * element might not exist
+	 * @param element 
+	 * @return element's primary element
 	 */
 	public static IJavaElement toOriginal(IJavaElement element) {
 		return element.getPrimaryElement();
 	}
 
 	/**
-	 * @deprecated Inline this method.
-	 */
-	public static IMember toWorkingCopy(IMember member) {
-		return member;
-	}
-
-	/**
-	 * @deprecated Inline this method.
-	 */
-	public static IPackageDeclaration toWorkingCopy(
-			IPackageDeclaration declaration) {
-		return declaration;
-	}
-
-	/**
-	 * @deprecated Inline this method.
-	 */
-	public static IJavaElement toWorkingCopy(IJavaElement elem) {
-		return elem;
-	}
-
-	/**
-	 * @deprecated Inline this method.
-	 */
-	public static IImportContainer toWorkingCopy(IImportContainer container) {
-		return container;
-
-	}
-
-	/**
-	 * @deprecated Inline this method.
-	 */
-	public static IImportDeclaration toWorkingCopy(
-			IImportDeclaration importDeclaration) {
-		return importDeclaration;
-	}
-
-	/**
-	 * @deprecated Inline this method.
-	 */
-	public static ICompilationUnit toWorkingCopy(ICompilationUnit cu) {
-		return cu;
-	}
-
-	/**
 	 * Returns true if a cu is a primary cu (original or shared working copy)
+	 * @param cu 
+	 * @return true if cu  is primary
 	 */
 	public static boolean isPrimary(ICompilationUnit cu) {
 		return cu.getOwner() == null;
 	}
 
-	/*
+	/**
 	 * http://bugs.eclipse.org/bugs/show_bug.cgi?id=19253
 	 * 
 	 * Reconciling happens in a separate thread. This can cause a situation
 	 * where the Java element gets disposed after an exists test has been done.
 	 * So we should not log not present exceptions when they happen in working
 	 * copies.
+	 * @param exception 
+	 * @return true if filter not present
 	 */
 	public static boolean filterNotPresentException(CoreException exception) {
 		if (!(exception instanceof JavaModelException)) {
@@ -903,6 +913,12 @@ public final class JavaModelUtil {
 		return false;
 	}
 
+	/**
+	 * @param type
+	 * @param pm
+	 * @return all supertypes of type
+	 * @throws JavaModelException
+	 */
 	public static IType[] getAllSuperTypes(IType type, IProgressMonitor pm)
 			throws JavaModelException {
 		// workaround for 23656
@@ -915,6 +931,11 @@ public final class JavaModelUtil {
 		return (IType[]) types.toArray(new IType[types.size()]);
 	}
 
+	/**
+	 * @param resourcePath
+	 * @param exclusionPatterns
+	 * @return true if resourcePath is excluded by exclusion patterns
+	 */
 	public static boolean isExcludedPath(IPath resourcePath,
 			IPath[] exclusionPatterns) {
 		char[] path = resourcePath.toString().toCharArray();
@@ -928,10 +949,16 @@ public final class JavaModelUtil {
 	}
 
 	/*
+
+	 * @see IClasspathEntry#getExclusionPatterns
+	 */
+	/**
 	 * Returns whether the given resource path matches one of the exclusion
 	 * patterns.
 	 * 
-	 * @see IClasspathEntry#getExclusionPatterns
+	 * @param resourcePath
+	 * @param exclusionPatterns
+	 * @return true if resourcePath is excluded
 	 */
 	public static boolean isExcluded(IPath resourcePath,
 			char[][] exclusionPatterns) {
@@ -950,7 +977,7 @@ public final class JavaModelUtil {
 	private static Boolean fgIsJDTCore_1_5 = null;
 
 	/**
-	 * Return true if JRE 1.5 in enabled.
+	 * @return true if JRE 1.5 in enabled.
 	 */
 	public static boolean isJDTCore_1_5() {
 		if (fgIsJDTCore_1_5 == null) {
@@ -977,6 +1004,7 @@ public final class JavaModelUtil {
 	 *            The path of the library to be found
 	 * @return IClasspathEntry A classpath entry from the container of
 	 *         <code>null</code> if the container can not be modified.
+	 * @throws JavaModelException 
 	 */
 	public static IClasspathEntry getClasspathEntryToEdit(
 			IJavaProject jproject, IPath containerPath, IPath libPath)
