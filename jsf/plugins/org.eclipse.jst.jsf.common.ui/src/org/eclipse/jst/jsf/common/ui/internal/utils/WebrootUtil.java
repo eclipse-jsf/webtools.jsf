@@ -171,6 +171,10 @@ public class WebrootUtil {
 		return strWebrootPath;
 	}
 
+	/**
+	 * @param strWebPath
+	 * @return the page name
+	 */
 	public static String getPageNameFromWebPath(String strWebPath) {
 		String pageName = strWebPath;
 
