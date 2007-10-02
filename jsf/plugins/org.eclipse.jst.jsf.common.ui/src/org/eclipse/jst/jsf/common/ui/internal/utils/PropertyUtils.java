@@ -20,9 +20,9 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.MissingResourceException;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.StringTokenizer;
@@ -35,7 +35,7 @@ import org.eclipse.jst.jsf.common.ui.JSFUICommonPlugin;
  * 
  * @author mengbo
  */
-public class PropertyUtils {
+public final class PropertyUtils {
 	// WARNING: There can be NO static logging line here since the logger uses
 	// this class to figure out the preferences
 	// for the logging system. "Logging" an error here would be useless since
@@ -47,7 +47,7 @@ public class PropertyUtils {
 	// The prop-name will be prepended to this string....
 	private static final String NAME_PROPERTIES = ".props";
 
-	public static final String STR_BOUNDS_END = ".bounds"; // assumes the
+	private static final String STR_BOUNDS_END = ".bounds"; // assumes the
 
 	// window name or
 	// name list is
@@ -56,6 +56,12 @@ public class PropertyUtils {
 	// //////////////////////////////////////////////////////////////////////////
 	// Property get methods.
 	// //////////////////////////////////////////////////////////////////////////
+	/**
+	 * @param props
+	 * @param key
+	 * @param theDefault
+	 * @return the property
+	 */
 	public static String getProperty(Properties props, String key,
 			String theDefault) {
 		try {
@@ -75,6 +81,11 @@ public class PropertyUtils {
 		}
 	}
 
+	/**
+	 * @param props
+	 * @param key
+	 * @return the value for key in props, may return null
+	 */
 	public static String getProperty(Properties props, String key) {
 		try {
 			String value = props.getProperty(key);
@@ -87,16 +98,30 @@ public class PropertyUtils {
 		}
 	}
 
+	/**
+	 * @param props
+	 * @param key
+	 * @param defaultValue
+	 * @param minimumValue
+	 * @return the integer property value for key, or defaultValue
+	 * if none.  Enforces minimumValue in all cases
+	 */
 	public static int getPropertyValue(Properties props, String key,
-			int defaultValue, int minumumValue) {
+			int defaultValue, int minimumValue) {
 		int theValue = getPropertyValue(props, key, defaultValue);
 
-		if (theValue < minumumValue) {
-			theValue = minumumValue;
+		if (theValue < minimumValue) {
+			theValue = minimumValue;
 		}
 		return theValue;
 	}
 
+	/**
+	 * @param props
+	 * @param key
+	 * @param defaultValue
+	 * @return the integer value for key in props or defaultValue if none
+	 */
 	public static int getPropertyValue(Properties props, String key,
 			int defaultValue) {
 		String stringValue = getProperty(props, key);
@@ -112,6 +137,12 @@ public class PropertyUtils {
 		return defaultValue;
 	}
 
+	/**
+	 * @param props
+	 * @param key
+	 * @param defaultValue
+	 * @return the long value for key props or defaultValue if none
+	 */
 	public static long getPropertyLongValue(Properties props, String key,
 			long defaultValue) {
 		String stringValue = getProperty(props, key);
@@ -127,11 +158,23 @@ public class PropertyUtils {
 		return defaultValue;
 	}
 
+	/**
+	 * @param props
+	 * @param key
+	 * @param bDefault
+	 * @return true if props has a value for key
+	 */
 	public static boolean isProperty(Properties props, String key,
 			boolean bDefault) {
 		return getProperty(props, key, "" + bDefault).equals("" + true);
 	}
 
+	/**
+	 * @param props
+	 * @param key
+	 * @return the string values in props for key tokenized from
+	 * a comma-separated string
+	 */
 	public static String[] getPropertyStrings(Properties props, String key) {
 		String tokenString = getProperty(props, key);
 
@@ -150,6 +193,12 @@ public class PropertyUtils {
 	// //////////////////////////////////////////////////////////////////////////
 	// Resource bundle get methods.
 	// //////////////////////////////////////////////////////////////////////////
+	/**
+	 * @param bundle
+	 * @param key
+	 * @param theDefault
+	 * @return the string value from bundle for key or default if none
+	 */
 	public static String getResourceProperty(ResourceBundle bundle, String key,
 			String theDefault) {
 		try {
@@ -158,33 +207,74 @@ public class PropertyUtils {
 				value = theDefault;
 			}
 			return value;
-		} catch (Exception ee) {
+		} 
+		catch(NullPointerException npe)
+		{
+			return theDefault;
+		}
+		catch (MissingResourceException mre)
+		{
+			return theDefault;
+		}
+		catch (ClassCastException cce)
+		{
 			return theDefault;
 		}
 	}
 
+	/**
+	 * @param bundle
+	 * @param key
+	 * @return the value for key in bundle or null if none
+	 */
 	public static String getResourceProperty(ResourceBundle bundle, String key) {
-		try {
+		try 
+		{
 			String value = bundle.getString(key);
-			if ((value != null) && (value.length() == 0)) {
+			if ((value != null) && (value.length() == 0)) 
+			{
 				value = null;
 			}
-			return value;
-		} catch (Exception ee) {
+				return value;
+		}
+		catch(NullPointerException npe)
+		{
+			return null;
+		}
+		catch (MissingResourceException mre)
+		{
+			return null;
+		}
+		catch (ClassCastException cce)
+		{
 			return null;
 		}
 	}
 
+	/**
+	 * @param bundle
+	 * @param key
+	 * @param defaultValue
+	 * @param minimumValue
+	 * @return the integer value for key in bundle or defaultValue if none
+	 * Enforces minimum value in all cases
+	 */
 	public static int getResourcePropertyValue(ResourceBundle bundle,
-			String key, int defaultValue, int minumumValue) {
+			String key, int defaultValue, int minimumValue) {
 		int theValue = getResourcePropertyValue(bundle, key, defaultValue);
 
-		if (theValue < minumumValue) {
-			theValue = minumumValue;
+		if (theValue < minimumValue) {
+			theValue = minimumValue;
 		}
 		return theValue;
 	}
 
+	/**
+	 * @param bundle
+	 * @param key
+	 * @param defaultValue
+	 * @return the integer value for key in bundle or defaultValue if  none
+	 */
 	public static int getResourcePropertyValue(ResourceBundle bundle,
 			String key, int defaultValue) {
 		String stringValue = getResourceProperty(bundle, key);
@@ -200,6 +290,12 @@ public class PropertyUtils {
 		return defaultValue;
 	}
 
+	/**
+	 * @param bundle
+	 * @param key
+	 * @param defaultValue
+	 * @return the long value for key in bundle or default value if none
+	 */
 	public static long getResourcePropertyLongValue(ResourceBundle bundle,
 			String key, long defaultValue) {
 		String stringValue = getResourceProperty(bundle, key);
@@ -215,6 +311,12 @@ public class PropertyUtils {
 		return defaultValue;
 	}
 
+	/**
+	 * @param bundle
+	 * @param key
+	 * @param bDefault
+	 * @return true if bundle has a value for key
+	 */
 	public static boolean isResourceProperty(ResourceBundle bundle, String key,
 			boolean bDefault) {
 		return getResourceProperty(bundle, key, "" + bDefault)
@@ -224,6 +326,10 @@ public class PropertyUtils {
 	// ///////////////////////////////////////////////////////////////////////
 	// Property misc routines
 	// ///////////////////////////////////////////////////////////////////////
+	/**
+	 * @param theName
+	 * @return the encoded name
+	 */
 	public static String encodeName(String theName) {
 		int theSize = theName.length();
 		StringBuffer encoded = new StringBuffer(theSize);
@@ -264,6 +370,10 @@ public class PropertyUtils {
 		return encoded.toString();
 	}
 
+	/**
+	 * @param theName
+	 * @return the decoded name
+	 */
 	public static String decodeName(String theName) {
 		int theSize = theName.length();
 		int kk;
@@ -287,16 +397,37 @@ public class PropertyUtils {
 		return decoded.toString();
 	}
 
+	/**
+	 * @param propName
+	 * @return the properties
+	 * @throws IOException
+	 * @throws FileNotFoundException
+	 */
 	public static Properties openProperties(String propName)
 			throws IOException, FileNotFoundException {
 		return openProperties(propName, null, true);
 	}
 
+	/**
+	 * @param propName
+	 * @param propDefaults
+	 * @return the properties
+	 * @throws IOException
+	 * @throws FileNotFoundException
+	 */
 	public static Properties openProperties(String propName,
 			Properties propDefaults) throws IOException, FileNotFoundException {
 		return openProperties(propName, propDefaults, true);
 	}
 
+	/**
+	 * @param propName
+	 * @param propDefaults
+	 * @param bCreatePropertiesPathname
+	 * @return the properties
+	 * @throws IOException
+	 * @throws FileNotFoundException
+	 */
 	public static Properties openProperties(String propName,
 			Properties propDefaults, boolean bCreatePropertiesPathname)
 			throws IOException, FileNotFoundException {
@@ -321,9 +452,14 @@ public class PropertyUtils {
 		return theProperties;
 	}
 
-	/*
-	 * * Combines two properties objects, with the second one as the default
+	/**
+	 * Combines two properties objects, with the second one as the default
 	 * properties
+	 * 
+	 * @param localProperties
+	 * @param defaultProperties
+	 * @return the combined properties
+	 * @throws IOException
 	 */
 	public static Properties combineProperties(Properties localProperties,
 			Properties defaultProperties) throws IOException {
@@ -339,23 +475,10 @@ public class PropertyUtils {
 		return theNewProperties;
 	}
 
-	// This should only be called by the main interface on shutdown/close!!!
-	public static void saveProperties(String propName, Properties theProperties)
-			throws IOException, SecurityException {
-		saveProperties(propName, theProperties, true);
-	}
-
-	public static void saveProperties(String propName,
-			Properties theProperties, boolean bCreatePropertiesPathname)
-			throws IOException, SecurityException {
-		// write out the changed set of preferences...
-		String propertiesFilename = bCreatePropertiesPathname ? getPropertiesPathname(propName)
-				: propName;
-		FileOutputStream fout = new FileOutputStream(propertiesFilename);
-		theProperties.store(fout, "preferences");
-		fout.close();
-	}
-
+	/**
+	 * @param theFilename
+	 * @return the encoded file name
+	 */ 
 	public static String encodeFilename(String theFilename) {
 		// make theFilename legal on the local system....
 		String theSeparator = System.getProperty("file.separator");
@@ -368,6 +491,10 @@ public class PropertyUtils {
 		return theFilename;
 	}
 
+	/**
+	 * @param baseName
+	 * @return the properties path
+	 */
 	public static String getPropertiesPathname(String baseName) {
 		if (baseName.endsWith(NAME_PROPERTIES)) {
 			return System.getProperty("user.dir")
@@ -392,12 +519,23 @@ public class PropertyUtils {
 	 * The resulting name will be used to obtain the intial bounds value from
 	 * the properties file, which will be decoded and the specified component
 	 * will then be set to that value.
+	 * @param props 
+	 * @param theComponent 
+	 * @param names 
+	 * @param defaultValue 
 	 */
 	public static void setComponentBounds(Properties props,
 			Component theComponent, String names[], String defaultValue) {
 		setComponentBounds(props, theComponent, names, defaultValue, false);
 	}
 
+	/**
+	 * @param props
+	 * @param theComponent
+	 * @param names
+	 * @param defaultValue
+	 * @param bEnsureDesktopVisibility
+	 */
 	public static void setComponentBounds(Properties props,
 			Component theComponent, String names[], String defaultValue,
 			boolean bEnsureDesktopVisibility) {
@@ -406,12 +544,25 @@ public class PropertyUtils {
 				bEnsureDesktopVisibility);
 	}
 
+	/**
+	 * @param props
+	 * @param theComponent
+	 * @param thePropertyName
+	 * @param defaultValue
+	 */
 	public static void setComponentBounds(Properties props,
 			Component theComponent, String thePropertyName, String defaultValue) {
 		setComponentBounds(props, theComponent, thePropertyName, defaultValue,
 				false);
 	}
 
+	/**
+	 * @param props
+	 * @param theComponent
+	 * @param thePropertyName
+	 * @param defaultValue
+	 * @param bEnsureDesktopVisibility
+	 */
 	public static void setComponentBounds(Properties props,
 			Component theComponent, String thePropertyName,
 			String defaultValue, boolean bEnsureDesktopVisibility) {
@@ -433,12 +584,22 @@ public class PropertyUtils {
 		}
 	}
 
+	/**
+	 * @param props
+	 * @param theComponent
+	 * @param names
+	 */
 	public static void saveComponentBounds(Properties props,
 			Component theComponent, String names[]) {
 		String tmpString = getComponentPropertyName(names, STR_BOUNDS_END);
 		saveComponentBounds(props, theComponent, tmpString);
 	}
 
+	/**
+	 * @param props
+	 * @param theComponent
+	 * @param thePropertyName
+	 */
 	public static void saveComponentBounds(Properties props,
 			Component theComponent, String thePropertyName) {
 		Rectangle theBounds = theComponent.getBounds();
@@ -446,6 +607,11 @@ public class PropertyUtils {
 		props.put(thePropertyName, theValue);
 	}
 
+	/**
+	 * @param names
+	 * @param subsystemName
+	 * @return the component property name or ""
+	 */
 	public static String getComponentPropertyName(String names[],
 			String subsystemName) {
 		String tmpString = "";
@@ -465,6 +631,8 @@ public class PropertyUtils {
 	 * normally called to decode the location/size of a component which has been
 	 * saved into a Properties object. See encodeBounds(); Order of items in the
 	 * string is (x, y, w, h)
+	 * @param sBounds 
+	 * @return the rectangle
 	 */
 	public static Rectangle decodeBounds(String sBounds) {
 		int index;
@@ -502,6 +670,8 @@ public class PropertyUtils {
 	/**
 	 * * Encode the bounds of a component into a comma separated list * that is
 	 * appropriate for storing in a Properties object. * See decodeBounds();
+	 * @param rBounds 
+	 * @return the encoded bounds
 	 */
 	public static String encodeBounds(Rectangle rBounds) {
 		return "" + rBounds.x + "," + rBounds.y + "," + rBounds.width + ","
@@ -516,6 +686,9 @@ public class PropertyUtils {
 	 * necessary to turn a properties object into a string that has legal
 	 * "value" syntax (they actually do more than they need to, but its all
 	 * non-destructive).
+	 * @param thePropertyString 
+	 * @return the properties from the string
+	 * @throws IOException 
 	 */
 	public static Properties getPropertiesFromString(String thePropertyString)
 			throws IOException {
@@ -530,6 +703,11 @@ public class PropertyUtils {
 		return props;
 	}
 
+	/**
+	 * @param theEncodedPropertyString
+	 * @return the properties
+	 * @throws IOException
+	 */
 	public static Properties getPropertiesFromEncodedString(
 			String theEncodedPropertyString) throws IOException {
 		if (theEncodedPropertyString == null)
@@ -537,6 +715,10 @@ public class PropertyUtils {
 		return (getPropertiesFromString(decodeName(theEncodedPropertyString)));
 	}
 
+	/**
+	 * @param theEncodedPropertyString
+	 * @return the properties
+	 */
 	public static Properties encodedStringToProperties(
 			String theEncodedPropertyString) {
 		try {
@@ -546,6 +728,12 @@ public class PropertyUtils {
 		}
 	}
 
+	/**
+	 * @param props
+	 * @param comment
+	 * @return the string
+	 * @throws IOException
+	 */
 	public static String savePropertiesToString(Properties props, String comment)
 			throws IOException {
 		if (props == null)
@@ -557,6 +745,12 @@ public class PropertyUtils {
 		return tmpString;
 	}
 
+	/**
+	 * @param props
+	 * @param comment
+	 * @return the encoded string
+	 * @throws IOException
+	 */
 	public static String savePropertiesToEncodedString(Properties props,
 			String comment) throws IOException {
 		if (props == null)
@@ -564,6 +758,10 @@ public class PropertyUtils {
 		return encodeName(savePropertiesToString(props, comment));
 	}
 
+	/**
+	 * @param props
+	 * @return the encoded string
+	 */
 	public static String propertiesToEncodedString(Properties props) {
 		try {
 			return savePropertiesToEncodedString(props, "");
@@ -572,5 +770,10 @@ public class PropertyUtils {
             JSFUICommonPlugin.getLogger(PropertyUtils.class).error("saving properties", ee);
 		}
 		return null;
+	}
+	
+	private PropertyUtils()
+	{
+		// no instantiation
 	}
 }
