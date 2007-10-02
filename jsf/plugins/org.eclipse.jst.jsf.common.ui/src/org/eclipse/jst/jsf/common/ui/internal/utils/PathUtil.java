@@ -26,23 +26,25 @@ import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.internal.core.JarEntryFile;
 import org.eclipse.jst.jsf.common.ui.IFileFolderConstants;
-import org.eclipse.jst.jsf.common.ui.JSFUICommonPlugin;
 import org.eclipse.ui.IFileEditorInput;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PlatformUI;
 
 /**
  * Collection of helper methods to manage and convert links Originally part of
  * the LinksManager (com.ibm.iwt.parser.util)
  */
-public class PathUtil {
-	public static final String BACKWARD_SLASH = "\\"; //$NON-NLS-1$
+public final class PathUtil {
+	private static final String FORWARD_SLASH = "/"; //$NON-NLS-1$
 
-	public static final String FORWARD_SLASH = "/"; //$NON-NLS-1$
-
-	public static final String RELATIVE_PATH_SIGNAL = IFileFolderConstants.DOT
+	private static final String RELATIVE_PATH_SIGNAL = IFileFolderConstants.DOT
 			+ IFileFolderConstants.DOT + IFileFolderConstants.PATH_SEPARATOR;
 
 	/**
 	 * adjust relative path isside the absolute path
+	 * @param path 
+	 * @return the adjusted path
 	 */
 	public static String adjustPath(String path) {
 		int i = 0;
@@ -64,6 +66,8 @@ public class PathUtil {
 
 	/**
 	 * Append trailing url slash if needed
+	 * @param input 
+	 * @return the string
 	 */
 	public static String appendTrailingURLSlash(String input) {
 		// check to see already a slash
@@ -75,6 +79,9 @@ public class PathUtil {
 
 	/**
 	 * Convert to relative url based on base
+	 * @param input 
+	 * @param base 
+	 * @return the string
 	 */
 	public static String convertToRelativePath(String input, String base) {
 		// tokenize the strings
@@ -109,6 +116,12 @@ public class PathUtil {
 		return output;
 	}
 
+	/**
+	 * @param projectName
+	 * @param path
+	 * @return the path in the project converted to a path relative to the
+	 * web folder
+	 */
 	public static String convertToWebPath(String projectName, String path) {
 		String name = "";
 		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(
@@ -132,6 +145,7 @@ public class PathUtil {
 	 * 
 	 * @param uri
 	 *            the relative path
+	 * @param curFile 
 	 * @return absolute path in file system
 	 */
 	public static String convertToAbsolutePath(String uri, IFile curFile) {
@@ -142,7 +156,7 @@ public class PathUtil {
 		IFile jsp = curFile;
 		try {
 			if (jsp == null) {
-				jsp = ((IFileEditorInput) JSFUICommonPlugin.getActivePage()
+				jsp = ((IFileEditorInput) getActivePage()
 						.getActiveEditor().getEditorInput()).getFile();
 			}
 			if (jsp != null) {
@@ -180,6 +194,34 @@ public class PathUtil {
 		return uri;
 	}
 
+	/**
+	 * Returns the active workbench window.
+	 * 
+	 * @return the active workbench window. this can be null but I've never seen
+	 *         it.
+	 */
+	private static IWorkbenchWindow getActiveWorkbenchWindow() {
+		if (PlatformUI.getWorkbench() == null) {
+			return null;
+		}
+        return PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+	}
+
+	/**
+	 * Returns the active workbench page. Note that the active page may not be
+	 * the one that the user perceives as active in some situations so this
+	 * method of obtaining the activate page should only be used if no other
+	 * method is available.
+	 * 
+	 * @return the active workbench page
+	 */
+	private static IWorkbenchPage getActivePage() {
+		IWorkbenchWindow window = getActiveWorkbenchWindow();
+		if (window == null) {
+			return null;
+		}
+		return window.getActivePage();
+	}
 	/**
 	 * @param javaProject
 	 * @param parent
@@ -256,5 +298,10 @@ public class PathUtil {
 			return result;
 		}
 		return new Path("");
+	}
+	
+	private PathUtil()
+	{
+		// utility class, no instantiation
 	}
 }
