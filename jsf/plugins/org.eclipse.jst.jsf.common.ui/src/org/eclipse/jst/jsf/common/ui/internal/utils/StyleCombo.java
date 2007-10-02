@@ -1862,10 +1862,9 @@ public final class StyleCombo extends Composite {
 		}
 	}
 
-	public String getDefaultValue() {
-		return defaultValue;
-	}
-
+	/**
+	 * @param defaultValue
+	 */
 	public void setDefaultValue(String defaultValue) {
 		this.defaultValue = defaultValue;
 		int index = Arrays.asList(getTableItems()).indexOf(defaultValue);
