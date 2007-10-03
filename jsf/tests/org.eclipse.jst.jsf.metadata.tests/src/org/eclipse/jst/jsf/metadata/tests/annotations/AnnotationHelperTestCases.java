@@ -30,6 +30,7 @@ import org.eclipse.jst.jsf.contentmodel.annotation.CMAnnotationPropertyValue;
  * 
  * @author Gerry Kessler - Oracle
  */
+@SuppressWarnings("deprecation")
 public class AnnotationHelperTestCases extends TestCase implements ICMAnnotationTestCases {	
 	
 	public void testGetCMAttributePropertiesAll(){
@@ -65,7 +66,7 @@ public class AnnotationHelperTestCases extends TestCase implements ICMAnnotation
 		Assert.assertTrue(CMAnnotationHelper.getCMElementProperties(PUBLICID, TEST_ELEMENT_VALIDATOR, TEST_ATTR_PROPERTY_NAME_CONTENTASSIST).isEmpty());
 		Assert.assertEquals(CMAnnotationHelper.getCMElementProperties(PUBLICID, TEST_ELEMENT_NAME_NOATTRS, TEST_PROPERTY_NAME_A).size(), 1);
 		Assert.assertNotNull(CMAnnotationHelper.getCMElementProperties(PUBLICID, TEST_ELEMENT_NAME_NOATTRS, TEST_PROPERTY_NAME_A));
-		List propvals = CMAnnotationHelper.getCMElementProperties(PUBLICID, TEST_ELEMENT_NAME_NOATTRS, TEST_PROPERTY_NAME_A);
+		List<?> propvals = CMAnnotationHelper.getCMElementProperties(PUBLICID, TEST_ELEMENT_NAME_NOATTRS, TEST_PROPERTY_NAME_A);
 		Assert.assertEquals(propvals.size(), 1);
 		Object obj = propvals.get(0);
 		Assert.assertEquals(obj instanceof CMAnnotationPropertyValue, true);
@@ -83,7 +84,7 @@ public class AnnotationHelperTestCases extends TestCase implements ICMAnnotation
 		Assert.assertTrue(CMAnnotationHelper.getCMElementProperties(BUNDLEID, PUBLICID, TEST_ELEMENT_VALIDATOR, TEST_ATTR_PROPERTY_NAME_CONTENTASSIST).isEmpty());
 		Assert.assertEquals(CMAnnotationHelper.getCMElementProperties(BUNDLEID, PUBLICID, TEST_ELEMENT_NAME_NOATTRS, TEST_PROPERTY_NAME_A).size(), 1);
 		Assert.assertNotNull(CMAnnotationHelper.getCMElementProperties(BUNDLEID, PUBLICID, TEST_ELEMENT_NAME_NOATTRS, TEST_PROPERTY_NAME_A));
-		List propvals = CMAnnotationHelper.getCMElementProperties(BUNDLEID, PUBLICID, TEST_ELEMENT_NAME_NOATTRS, TEST_PROPERTY_NAME_A);
+		List<?> propvals = CMAnnotationHelper.getCMElementProperties(BUNDLEID, PUBLICID, TEST_ELEMENT_NAME_NOATTRS, TEST_PROPERTY_NAME_A);
 		Assert.assertEquals(propvals.size(), 1);
 		Object obj = propvals.get(0);
 		Assert.assertEquals(obj instanceof CMAnnotationPropertyValue, true);
@@ -120,7 +121,7 @@ public class AnnotationHelperTestCases extends TestCase implements ICMAnnotation
 	public void testGetCMAttributePropertyValues(){
 		//positive
 		Assert.assertEquals(CMAnnotationHelper.getCMAttributePropertyValues(BUNDLEID, PUBLICID, TEST_ELEMENT_NAME_LOADED, TEST_ATTR4_NAMEc, TEST_PROPERTY_MULTIVAL).size(), 3);
-		List list = new ArrayList(3);
+		List<String> list = new ArrayList<String>(3);
 		list.add("1");
 		list.add("2");
 		list.add("3");
@@ -160,7 +161,7 @@ public class AnnotationHelperTestCases extends TestCase implements ICMAnnotation
 		//positive
 		Assert.assertEquals(((String)CMAnnotationHelper.getCMElementPropertyValues(BUNDLEID, PUBLICID, TEST_ELEMENT_NAME_LOADED, TEST_PROPERTY_NAME_A).get(0)), TEST_PROPERTY_VALUE_a);
 		Assert.assertEquals(CMAnnotationHelper.getCMElementPropertyValues(BUNDLEID, PUBLICID, TEST_ELEMENT_NAME_LOADED, TEST_PROPERTY_MULTIVAL).size(), 3);
-		List list = new ArrayList(3);
+		List<String> list = new ArrayList<String>(3);
 		list.add("1");
 		list.add("2");
 		list.add("3");

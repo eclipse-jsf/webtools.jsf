@@ -22,6 +22,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.jst.jsf.contentmodel.annotation.CMAnnotationHelper;
 import org.eclipse.jst.jsf.metadataprocessors.MetaDataEnabledProcessingFactory;
 
+@SuppressWarnings("deprecation")
 public class DisableCMAnnotationFilesAPITest extends TestCase implements ILogListener {
 	private boolean errorLogged;
 	private ILog log;
@@ -38,6 +39,7 @@ public class DisableCMAnnotationFilesAPITest extends TestCase implements ILogLis
 		super.tearDown();
 	}
 	
+	@SuppressWarnings({ "deprecation", "unchecked" })
 	public void testDisablement(){
 		String uri = "http://java.sun.com/jsf/html";
 		String cmElementName = "inputText";

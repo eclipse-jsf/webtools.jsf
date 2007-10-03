@@ -9,7 +9,6 @@ import org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValue;
 import org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValues;
 import org.eclipse.jst.jsf.metadataprocessors.features.IValidELValues;
 import org.eclipse.jst.jsf.metadataprocessors.features.IValidValues;
-import org.eclipse.swt.graphics.RGB;
 
 public class ColorTypeTest extends TaglibProcessingTestCase {
 	public void testPossibleValues(){		

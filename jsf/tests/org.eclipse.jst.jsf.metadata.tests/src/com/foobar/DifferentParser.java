@@ -16,6 +16,7 @@ import junit.framework.Assert;
 
 import org.eclipse.jst.jsf.contentmodel.annotation.internal.CMAnnotationFileParser;
 
+@SuppressWarnings("deprecation")
 public class DifferentParser extends CMAnnotationFileParser {
 	public DifferentParser(){
 		super();

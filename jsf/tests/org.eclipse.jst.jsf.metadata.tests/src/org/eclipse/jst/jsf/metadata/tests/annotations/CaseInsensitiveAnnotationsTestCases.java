@@ -28,6 +28,7 @@ import org.eclipse.jst.jsf.contentmodel.annotation.CMAnnotationPropertyValue;
  * 
  * @author Gerry Kessler - Oracle
  */
+@SuppressWarnings("deprecation")
 public class CaseInsensitiveAnnotationsTestCases extends TestCase {
 	private String uri = "http://org.eclipse.jsf/caseInsensitiveTest";
 	private String cmElementName = "FoO";
@@ -35,6 +36,7 @@ public class CaseInsensitiveAnnotationsTestCases extends TestCase {
 	private String meta_prop_name = "TypE";
 	private String meta_prop_value = "String";
 
+	@SuppressWarnings("unchecked")
 	public void testCIElementAnnotations(){
 		Assert.assertEquals(CMAnnotationHelper.getCMElementProperties(uri, cmElementName, meta_prop_name).size(), 1);
 		List props = CMAnnotationHelper.getCMElementProperties(uri, cmElementName, meta_prop_name);
@@ -46,6 +48,7 @@ public class CaseInsensitiveAnnotationsTestCases extends TestCase {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void testCIDupeAttributeAnnotations(){
 		Assert.assertEquals(CMAnnotationHelper.getCMAttributeProperties(uri, cmElementName, cmAttributeName, meta_prop_name).size(), 1);
 		List props = CMAnnotationHelper.getCMAttributeProperties(uri, cmElementName, cmAttributeName, meta_prop_name);

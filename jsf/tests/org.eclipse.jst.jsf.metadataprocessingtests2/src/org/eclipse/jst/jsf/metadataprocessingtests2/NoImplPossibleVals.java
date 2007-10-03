@@ -15,7 +15,6 @@ package org.eclipse.jst.jsf.metadataprocessingtests2;
 
 import java.util.List;
 
-import org.eclipse.jst.jsf.contentmodel.annotation.CMAnnotationHelper;
 import org.eclipse.jst.jsf.metadataprocessors.AbstractMetaDataEnabledFeature;
 import org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValues;
 
@@ -26,10 +25,12 @@ public class NoImplPossibleVals extends AbstractMetaDataEnabledFeature implement
 		super();
 	}
 
+	@SuppressWarnings("unchecked")
 	public List getPossibleValues() {
 		return getPossibleVals();
 	}
 
+	@SuppressWarnings("unchecked")
 	private List getPossibleVals() {
 		return getTraitValueAsListOfStrings(IPossibleValues.POSSIBLE_VALUES_PROP_NAME);
 //		return CMAnnotationHelper.getCMAttributePropertyValues(getCMAnnotationContext().getBundleId(), getCMAnnotationContext().getUri(),

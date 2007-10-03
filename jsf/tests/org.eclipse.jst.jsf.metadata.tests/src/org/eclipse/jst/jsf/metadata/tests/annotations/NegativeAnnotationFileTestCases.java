@@ -25,6 +25,7 @@ import org.eclipse.jst.jsf.contentmodel.annotation.CMAnnotationHelper;
  * 
  * @author Gerry Kessler - Oracle
  */
+@SuppressWarnings("deprecation")
 public class NegativeAnnotationFileTestCases extends TestCase {
 	private String missing_uri = "http://org.eclipse.jsf/missing";
 	private String missing_file_uri = "http://org.eclipse.jsf/missingFile";

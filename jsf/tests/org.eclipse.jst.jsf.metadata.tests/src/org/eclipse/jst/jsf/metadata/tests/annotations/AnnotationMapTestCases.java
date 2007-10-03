@@ -30,8 +30,10 @@ import org.eclipse.jst.jsf.contentmodel.annotation.internal.CMAnnotationMap;
  * 
  * @author Gerry Kessler - Oracle
  */
+@SuppressWarnings("deprecation")
 public class AnnotationMapTestCases extends TestCase implements ICMAnnotationTestCases{ 
 	private CMAnnotationFileRegistry reg;
+	@SuppressWarnings("unchecked")
 	private List maps;
 	
 	public void setUp(){

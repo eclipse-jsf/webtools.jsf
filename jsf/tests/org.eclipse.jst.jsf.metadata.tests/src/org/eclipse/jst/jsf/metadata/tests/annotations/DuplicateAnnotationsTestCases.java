@@ -29,6 +29,7 @@ import org.eclipse.jst.jsf.contentmodel.annotation.CMAnnotationPropertyValue;
  * 
  * @author Gerry Kessler - Oracle
  */
+@SuppressWarnings("deprecation")
 public class DuplicateAnnotationsTestCases extends TestCase {
 	private String uri = "http://org.eclipse.jsf/dupeTest";
 	private String cmElementName = "Foo";
@@ -36,6 +37,7 @@ public class DuplicateAnnotationsTestCases extends TestCase {
 	private String meta_prop_name = "Type";
 	private String meta_prop_value = "String";
 
+	@SuppressWarnings("unchecked")
 	public void testDupeElementAnnotations(){
 		Assert.assertEquals(CMAnnotationHelper.getCMElementProperties(uri, cmElementName, meta_prop_name).size(), 2);
 		List props = CMAnnotationHelper.getCMElementProperties(uri, cmElementName, meta_prop_name);
@@ -47,6 +49,7 @@ public class DuplicateAnnotationsTestCases extends TestCase {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void testDupeAttributeAnnotations(){
 		Assert.assertEquals(CMAnnotationHelper.getCMAttributeProperties(uri, cmElementName, cmAttributeName, meta_prop_name).size(), 2);
 		List props = CMAnnotationHelper.getCMAttributeProperties(uri, cmElementName, cmAttributeName, meta_prop_name);
