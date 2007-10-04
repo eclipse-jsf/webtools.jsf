@@ -191,7 +191,7 @@ public class AddEditPropertyDialog extends Dialog {
 				shellSize.y);
 	}
 
-	protected IProject getProject() {
+	private IProject getProject() {
 		return project;
 	}
 
@@ -204,38 +204,65 @@ public class AddEditPropertyDialog extends Dialog {
 		super.okPressed();
 	}
 
+	/**
+	 * @return the default value
+	 */
 	public String getDefaultValue() {
 		return defaultValue;
 	}
 
+	/**
+	 * @param defaultValue
+	 */
 	public void setDefaultValue(String defaultValue) {
 		this.defaultValue = defaultValue;
 	}
 
+	/**
+	 * @return the property class
+	 */
 	public String getPropertyClass() {
 		return propertyClass;
 	}
 
+	/**
+	 * @param propertyClass
+	 */
 	public void setPropertyClass(String propertyClass) {
 		this.propertyClass = propertyClass;
 	}
 
+	/**
+	 * @return the property name
+	 */
 	public String getPropertyName() {
 		return propertyName;
 	}
 
+	/**
+	 * @param propertyName
+	 */
 	public void setPropertyName(String propertyName) {
 		this.propertyName = propertyName;
 	}
 
+	/**
+	 * @return the suggested value
+	 */
 	public String getSuggestedValue() {
 		return suggestedValue;
 	}
 
+	/**
+	 * @param suggestedValue
+	 */
 	public void setSuggestedValue(String suggestedValue) {
 		this.suggestedValue = suggestedValue;
 	}
 
+	/**
+	 * @param project
+	 */
 	public void setProject(IProject project) {
 		this.project = project;
 	}

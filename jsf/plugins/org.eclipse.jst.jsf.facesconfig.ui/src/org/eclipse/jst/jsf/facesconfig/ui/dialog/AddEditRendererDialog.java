@@ -231,38 +231,65 @@ public class AddEditRendererDialog extends Dialog {
 		super.okPressed();
 	}
 
+	/**
+	 * @return the renderer clas
+	 */
 	public String getRendererClass() {
 		return rendererClass;
 	}
 
+	/**
+	 * @param rendererClass
+	 */
 	public void setRendererClass(String rendererClass) {
 		this.rendererClass = rendererClass;
 	}
 
+	/**
+	 * @return the renderer name
+	 */
 	public String getRendererName() {
 		return rendererName;
 	}
 
+	/**
+	 * @param rendererName
+	 */
 	public void setRendererName(String rendererName) {
 		this.rendererName = rendererName;
 	}
 
+	/**
+	 * @return the component family
+	 */
 	public String getComponentFamily() {
 		return componentFamily;
 	}
 
+	/**
+	 * @param componentFamily
+	 */
 	public void setComponentFamily(String componentFamily) {
 		this.componentFamily = componentFamily;
 	}
 
+	/**
+	 * @return the renderer type
+	 */
 	public String getRendererType() {
 		return rendererType;
 	}
 
+	/**
+	 * @param rendererType
+	 */
 	public void setRendererType(String rendererType) {
 		this.rendererType = rendererType;
 	}
 
+	/**
+	 * @param project
+	 */
 	public void setProject(IProject project) {
 		this.project = project;
 	}

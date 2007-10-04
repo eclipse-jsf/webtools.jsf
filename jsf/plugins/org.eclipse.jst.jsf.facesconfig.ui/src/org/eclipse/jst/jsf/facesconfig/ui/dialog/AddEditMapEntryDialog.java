@@ -54,6 +54,10 @@ public class AddEditMapEntryDialog extends Dialog {
 
 	private boolean isNullValue;
 
+	/**
+	 * @param parentShell
+	 * @param isNew
+	 */
 	public AddEditMapEntryDialog(Shell parentShell, boolean isNew) {
 		super(parentShell);
 		this.isNew = isNew;
@@ -119,6 +123,9 @@ public class AddEditMapEntryDialog extends Dialog {
 		}
 	}
 
+	/**
+	 * @param parent
+	 */
 	public void layoutKeySection(Composite parent) {
 		keyField = new StringDialogField();
 		keyField.setLabelText(EditorMessages.MapEntryEditGroup_Key); //$NON-NLS-1$
@@ -140,10 +147,11 @@ public class AddEditMapEntryDialog extends Dialog {
 
 	}
 
+	/**
+	 * @param parent
+	 */
 	public void layoutValueSection(Composite parent) {
-		Composite
-
-		valueSection = SWTUtils.createComposite(parent, SWT.NONE);
+		Composite valueSection = SWTUtils.createComposite(parent, SWT.NONE);
 
 		GridData gd = new GridData(GridData.FILL_BOTH);
 		valueSection.setLayoutData(gd);
@@ -203,26 +211,44 @@ public class AddEditMapEntryDialog extends Dialog {
 		super.okPressed();
 	}
 
+	/**
+	 * @return true if is null
+	 */
 	public boolean isNullValue() {
 		return isNullValue;
 	}
 
+	/**
+	 * @param isNullValue
+	 */
 	public void setNullValue(boolean isNullValue) {
 		this.isNullValue = isNullValue;
 	}
 
+	/**
+	 * @return the key 
+	 */ 
 	public String getKey() {
 		return key;
 	}
 
+	/**
+	 * @param key
+	 */
 	public void setKey(String key) {
 		this.key = key;
 	}
 
+	/**
+	 * @return the value
+	 */
 	public String getValue() {
 		return value;
 	}
 
+	/**
+	 * @param value
+	 */
 	public void setValue(String value) {
 		this.value = value;
 	}

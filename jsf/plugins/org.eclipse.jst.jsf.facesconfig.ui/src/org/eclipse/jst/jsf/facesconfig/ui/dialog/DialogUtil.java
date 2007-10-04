@@ -34,8 +34,15 @@ import org.eclipse.ui.dialogs.SelectionDialog;
  * @author Zhi-peng Zhang
  * @version
  */
-public class DialogUtil {
+public final class DialogUtil {
 
+	/**
+	 * @param shell
+	 * @param project
+	 * @param superType
+	 * @param tyle
+	 * @return fully qualified class name or null
+	 */
 	public static String openClassDialog(Shell shell, IProject project,
 			String superType, int tyle) {
 		SelectionDialog dialog = JavaUIHelper
@@ -55,6 +62,11 @@ public class DialogUtil {
 		return null;
 	}
 
+	/**
+	 * @param shell
+	 * @param facesConfig
+	 * @return the name of the renderkit or null
+	 */
 	public static String openRenderKitDialog(Shell shell,
 			FacesConfigType facesConfig) {
 		if (facesConfig != null) {
@@ -85,6 +97,11 @@ public class DialogUtil {
 		return null;
 	}
 
+	/**
+	 * @param shell
+	 * @param existedLocaleList
+	 * @return the locale or null
+	 */
 	public static String openLocaleDialog(Shell shell, List existedLocaleList) {
 		LocaleDialog dialog = new LocaleDialog(shell, existedLocaleList);
 		if (dialog.open() == Window.OK) {
@@ -96,6 +113,12 @@ public class DialogUtil {
 		return null;
 	}
 
+	/**
+	 * @param shell
+	 * @param project
+	 * @param existedBundleList
+	 * @return the message bundle or null
+	 */
 	public static String openMessageBundleDialog(Shell shell, IProject project,
 			List existedBundleList) {
 		IJavaProject javaProject = null;
@@ -119,5 +142,10 @@ public class DialogUtil {
 			}
 		}
 		return null;
+	}
+	
+	private DialogUtil()
+	{
+		// no instantiation
 	}
 }

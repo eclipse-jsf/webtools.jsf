@@ -174,6 +174,9 @@ public class LocaleDialog extends StatusDialog {
 		return true;
 	}
 
+	/**
+	 * @return the result
+	 */
 	public String getResult()
 	{
 		return newLocale;

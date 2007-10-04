@@ -57,6 +57,10 @@ public class AddEditAttributeDialog extends Dialog {
 
 	private boolean isNew;
 
+	/**
+	 * @param parentShell
+	 * @param isNew
+	 */
 	public AddEditAttributeDialog(Shell parentShell, boolean isNew) {
 		super(parentShell);
 		this.isNew = isNew;
@@ -184,7 +188,7 @@ public class AddEditAttributeDialog extends Dialog {
 				shellSize.y);
 	}
 
-	public IProject getProject() {
+	private IProject getProject() {
 		return project;
 	}
 
@@ -200,38 +204,65 @@ public class AddEditAttributeDialog extends Dialog {
 		super.okPressed();
 	}
 
+	/**
+	 * @return the attribute class
+	 */
 	public String getAttributeClass() {
 		return attributeClass;
 	}
 
+	/**
+	 * @param attributeClass
+	 */
 	public void setAttributeClass(String attributeClass) {
 		this.attributeClass = attributeClass;
 	}
 
+	/**
+	 * @return the attribute name
+	 */
 	public String getAttributeName() {
 		return attributeName;
 	}
 
+	/**
+	 * @param attributeName
+	 */
 	public void setAttributeName(String attributeName) {
 		this.attributeName = attributeName;
 	}
 
+	/**
+	 * @return the default value
+	 */
 	public String getDefaultValue() {
 		return defaultValue;
 	}
 
+	/**
+	 * @param defaultValue
+	 */
 	public void setDefaultValue(String defaultValue) {
 		this.defaultValue = defaultValue;
 	}
 
+	/**
+	 * @return the suggested value
+	 */
 	public String getSuggestedValue() {
 		return suggestedValue;
 	}
 
+	/**
+	 * @param suggestedValue
+	 */
 	public void setSuggestedValue(String suggestedValue) {
 		this.suggestedValue = suggestedValue;
 	}
 
+	/**
+	 * @param project
+	 */
 	public void setProject(IProject project) {
 		this.project = project;
 	}

@@ -96,7 +96,7 @@ public class AddEditManagedPropertyDialog extends Dialog {
 
 	private Composite parent;
 
-	public static final String[] valueTypes = { IFacesConfigConstants.VALUE,
+	private static final String[] valueTypes = { IFacesConfigConstants.VALUE,
 			IFacesConfigConstants.NULL_VALUE,
 			IFacesConfigConstants.MAP_ENTRIES,
 			IFacesConfigConstants.LIST_ENTRIES };
@@ -110,6 +110,7 @@ public class AddEditManagedPropertyDialog extends Dialog {
 	 * 
 	 * @param parentShell
 	 * @param managedBean
+	 * @param section 
 	 */
 	public AddEditManagedPropertyDialog(Shell parentShell,
 			ManagedBeanType managedBean, AbstractFacesConfigSection section) {
@@ -123,6 +124,7 @@ public class AddEditManagedPropertyDialog extends Dialog {
 	 * 
 	 * @param parentShell
 	 * @param managedProperty
+	 * @param section
 	 */
 	public AddEditManagedPropertyDialog(Shell parentShell,
 			ManagedPropertyType managedProperty, AbstractFacesConfigSection section) {
@@ -439,6 +441,9 @@ public class AddEditManagedPropertyDialog extends Dialog {
 				shellSize.y);
 	}
 
+	/**
+	 * @return the project
+	 */
 	public IProject getProject() {
 		if (project == null) {
 			project = (IProject) section.getPage().getEditor().getAdapter(
@@ -458,38 +463,65 @@ public class AddEditManagedPropertyDialog extends Dialog {
 		super.okPressed();
 	}
 
+	/**
+	 * @return the property class
+	 */
 	public String getPropertyClass() {
 		return propertyClass;
 	}
 
+	/**
+	 * @param attributeClass
+	 */
 	public void setAttributeClass(String attributeClass) {
 		this.propertyClass = attributeClass;
 	}
 
+	/**
+	 * @return the property name
+	 */
 	public String getPropertyName() {
 		return propertyName;
 	}
 
+	/**
+	 * @param attributeName
+	 */
 	public void setAttributeName(String attributeName) {
 		this.propertyName = attributeName;
 	}
 
+	/**
+	 * @return the value type
+	 */
 	public String getValueType() {
 		return valueType;
 	}
 
+	/**
+	 * @param defaultValue
+	 */
 	public void setValueType(String defaultValue) {
 		this.valueType = defaultValue;
 	}
 
+	/**
+	 * @param project
+	 */
 	public void setProject(IProject project) {
 		this.project = project;
 	}
 
+	/**
+	 * @return the value object
+	 */
 	public Object getValueObject() {
 		return valueObject;
 	}
 
+	/**
+	 * @param valueObject
+	 */
 	public void setValueObject(Object valueObject) {
 		this.valueObject = valueObject;
 	}

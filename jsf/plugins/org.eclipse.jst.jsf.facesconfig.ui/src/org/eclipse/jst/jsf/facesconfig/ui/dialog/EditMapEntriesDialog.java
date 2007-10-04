@@ -89,6 +89,7 @@ public class EditMapEntriesDialog extends Dialog {
 	 * @param parentShell
 	 * @param mapEntries
 	 *            the map-entries element that working on.
+	 * @param section 
 	 */
 	public EditMapEntriesDialog(Shell parentShell, MapEntriesType mapEntries,
 			AbstractFacesConfigSection section) {
@@ -293,6 +294,9 @@ public class EditMapEntriesDialog extends Dialog {
 		removeButton.setEnabled(false);
 	}
 	
+	/**
+	 * @return the current project
+	 */
 	public IProject getProject() {
 		if (project == null) {
 			project = (IProject) section.getPage().getEditor().getAdapter(
@@ -384,6 +388,9 @@ public class EditMapEntriesDialog extends Dialog {
 		updateButtonsStatus();
 	}
 
+	/**
+	 * update the button status
+	 */
 	public void updateButtonsStatus() {
 		if (((IStructuredSelection) tableViewer.getSelection()).size() > 0) {
 			editButton.setEnabled(true);
@@ -419,14 +426,23 @@ public class EditMapEntriesDialog extends Dialog {
 				shellSize.y);
 	}
 
+	/**
+	 * @param project
+	 */
 	public void setProject(IProject project) {
 		this.project = project;
 	}
 
+	/**
+	 * @return the map entries
+	 */
 	public MapEntriesType getMapEntries() {
 		return mapEntries;
 	}
 
+	/**
+	 * @param mapEntries
+	 */
 	public void setMapEntries(MapEntriesType mapEntries) {
 		this.mapEntries = mapEntries;
 	}

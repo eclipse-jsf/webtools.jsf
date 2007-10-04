@@ -89,8 +89,14 @@ public abstract class StatusDialog extends Dialog {
 		return label;
 	}
 
+	/**
+	 * @return true if is status is valid
+	 */
 	protected abstract boolean isValid();
 
+	/**
+	 * update the status information
+	 */
 	protected void updateStatus() {
 		if (isValid()) {
 			statusImage.setVisible(false);
@@ -103,10 +109,16 @@ public abstract class StatusDialog extends Dialog {
 		}
 	}
 
+	/**
+	 * @return the current status message
+	 */
 	public String getStatusMessage() {
 		return statusMessage;
 	}
 
+	/**
+	 * @param statusMessage
+	 */
 	public void setStatusMessage(String statusMessage) {
 		this.statusMessage = statusMessage;
 	}

@@ -339,6 +339,9 @@ public class EditListEntriesDialog extends Dialog {
 		updateButtonsStatus();
 	}
 
+	/**
+	 * update the status buttons
+	 */
 	public void updateButtonsStatus() {
 		if (((IStructuredSelection) tableViewer.getSelection()).size() > 0) {
 			editButton.setEnabled(true);
@@ -376,6 +379,9 @@ public class EditListEntriesDialog extends Dialog {
 				shellSize.y);
 	}
 
+	/**
+	 * @return the current project
+	 */
 	public IProject getProject() {
 		if (project == null) {
 			project = (IProject) section.getPage().getEditor().getAdapter(
@@ -384,14 +390,23 @@ public class EditListEntriesDialog extends Dialog {
 		return project;
 	}
 
+	/**
+	 * @param project
+	 */
 	public void setProject(IProject project) {
 		this.project = project;
 	}
 
+	/**
+	 * @return the list entries
+	 */
 	public ListEntriesType getListEntries() {
 		return listEntries;
 	}
 
+	/**
+	 * @param listEntries
+	 */
 	public void setListEntries(ListEntriesType listEntries) {
 		this.listEntries = listEntries;
 	}

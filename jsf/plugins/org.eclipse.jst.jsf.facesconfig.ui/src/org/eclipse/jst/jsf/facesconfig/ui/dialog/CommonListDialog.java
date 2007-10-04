@@ -58,6 +58,13 @@ public class CommonListDialog extends Dialog implements
 	/** The mini width for the text control */
 	private static final int TEXT_MINI_WIDTH = 100;
 
+	/**
+	 * @param parentShell
+	 * @param page
+	 * @param input
+	 * @param caption
+	 * @param label
+	 */
 	protected CommonListDialog(Shell parentShell, IFacesConfigPage page,
 			Object input, String caption, String label) {
 		super(parentShell);
@@ -149,6 +156,7 @@ public class CommonListDialog extends Dialog implements
 
 	/**
 	 * get the input object of this section.
+	 * @return the input
 	 */
 	public Object getInput() {
 		return input;
@@ -156,6 +164,7 @@ public class CommonListDialog extends Dialog implements
 
 	/**
 	 * set input object for this section.
+	 * @param newInput 
 	 */
 	public void setInput(Object newInput) {
 		input = newInput;
@@ -214,9 +223,15 @@ public class CommonListDialog extends Dialog implements
 		return (EditingDomain) page.getEditor().getAdapter(EditingDomain.class);
 	}
 
+	/**
+	 * @return the value
+	 */
 	public String getValue() {
 		return value;
 	}
+	/**
+	 * @param value
+	 */
 	public void setValue(String value) {
 		this.value = value;
 		refresh();

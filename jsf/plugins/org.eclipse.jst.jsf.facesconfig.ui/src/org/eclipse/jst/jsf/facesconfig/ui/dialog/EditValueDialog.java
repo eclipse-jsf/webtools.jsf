@@ -52,16 +52,28 @@ public class EditValueDialog extends Dialog {
 
 	private Button nullValueTypeButton;
 
-	private boolean isNullButtonShown = false;
+	private boolean isNullButtonShown;
 
 	private boolean isNullValue;
 
+	/**
+	 * Equivilent to EditValueDialog(parentShell, false, false, value)
+	 * 
+	 * @param parentShell
+	 * @param value
+	 */
 	public EditValueDialog(Shell parentShell, String value) {
-		super(parentShell);
+		this(parentShell, false, false, value);
 		this.value = value;
 		this.isNullButtonShown = false;
 	}
 
+	/**
+	 * @param parentShell
+	 * @param isNullButtonShown
+	 * @param isNullValue
+	 * @param value
+	 */
 	public EditValueDialog(Shell parentShell, boolean isNullButtonShown,
 			boolean isNullValue, String value) {
 		super(parentShell);
@@ -198,10 +210,16 @@ public class EditValueDialog extends Dialog {
 		super.buttonPressed(buttonId);
 	}
 
+	/**
+	 * @return the result data
+	 */
 	public Object getResultData() {
 		return value;
 	}
 
+	/**
+	 * @return tru if isNullButtonShown and isNullValue are both true
+	 */
 	public boolean isNullValue() {
 		return this.isNullButtonShown && isNullValue;
 	}

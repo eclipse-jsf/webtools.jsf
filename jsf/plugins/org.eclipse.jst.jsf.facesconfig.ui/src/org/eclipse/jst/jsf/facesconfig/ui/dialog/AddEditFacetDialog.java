@@ -181,26 +181,44 @@ public class AddEditFacetDialog extends Dialog {
 		super.okPressed();
 	}
 
+	/**
+	 * @return the description
+	 */
 	public String getDescription() {
 		return description;
 	}
 
+	/**
+	 * @return the display name
+	 */
 	public String getDisplayName() {
 		return displayName;
 	}
 
+	/**
+	 * @return the facet name
+	 */
 	public String getFacetName() {
 		return facetName;
 	}
 
+	/**
+	 * @param description
+	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
+	/**
+	 * @param displayName
+	 */
 	public void setDisplayName(String displayName) {
 		this.displayName = displayName;
 	}
 
+	/**
+	 * @param facetName
+	 */
 	public void setFacetName(String facetName) {
 		this.facetName = facetName;
 	}

@@ -50,6 +50,13 @@ public class ComponentListDialog extends CommonListDialog {
 		}
 	}
 
+	/**
+	 * @param parentShell
+	 * @param page
+	 * @param input
+	 * @param caption
+	 * @param label
+	 */
 	protected ComponentListDialog(Shell parentShell, IFacesConfigPage page,
 			Object input, String caption, String label) {
 		super(parentShell, page, input, caption, label);

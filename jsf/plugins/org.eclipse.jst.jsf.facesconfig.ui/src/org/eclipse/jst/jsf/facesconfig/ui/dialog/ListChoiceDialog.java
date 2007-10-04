@@ -47,13 +47,15 @@ public class ListChoiceDialog extends Dialog {
 	
 	private String labelString;
 
+	/**
+	 * @param parentShell
+	 * @param items
+	 * @param labelString
+	 */
 	public ListChoiceDialog(Shell parentShell, String[] items, String labelString) {
 		super(parentShell);
-		this.items = items;
-		if(this.items == null)
-		{
-			this.items = new String[0];
-		}
+		// if passed null for items, make it an empty array of strings
+		this.items = items == null ? new String[0] : items;
 		this.labelString = labelString;
 		
 	}
@@ -109,6 +111,9 @@ public class ListChoiceDialog extends Dialog {
 				});
 	}
 	
+	/**
+	 * @return the result
+	 */
 	public String getResult()
 	{
 		return result;
