@@ -217,7 +217,7 @@ public class ManagedBeanPropertyPage extends WizardPage implements ISummaryDataS
 		initialize();
 	}
 
-	protected void initialize() {
+	private void initialize() {
 		if (defaultScope != null && defaultScope.length() > 0)
 			scopeCombo.setText(defaultScope);
 		else
@@ -277,10 +277,16 @@ public class ManagedBeanPropertyPage extends WizardPage implements ISummaryDataS
 		return data;
 	}
 
+	/**
+	 * @return the name of the managed bean
+	 */
 	public String getManagedBeanName() {
 		return this.managedBeanNameText.getText().trim();
 	}
 
+	/**
+	 * @return the managed bean class name
+	 */
 	public String getManagedBeanClass() {
 		if (this.getPreviousPage() instanceof ManagedBeanClassSelectionPage) {
 			return ((ManagedBeanClassSelectionPage) this.getPreviousPage()).getClassName();
@@ -299,10 +305,16 @@ public class ManagedBeanPropertyPage extends WizardPage implements ISummaryDataS
 		return "";//$NON-NLS-1$
 	}
 
+	/**
+	 * @return the managed bean scope
+	 */
 	public String getManagedBeanScope() {
 		return this.scopeCombo.getText().trim();
 	}
 
+	/**
+	 * @return the managed bean description
+	 */
 	public String getManagedBeanDescription() {
 		return this.managedBeanDescriptionText.getText().trim();
 	}

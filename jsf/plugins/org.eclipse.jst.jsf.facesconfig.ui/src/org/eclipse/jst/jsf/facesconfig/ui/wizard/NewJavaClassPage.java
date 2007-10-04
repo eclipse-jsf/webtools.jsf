@@ -30,15 +30,18 @@ import org.eclipse.jface.wizard.IWizardPage;
 public class NewJavaClassPage extends org.eclipse.jdt.ui.wizards.NewClassWizardPage
 		implements ISummaryDataSource {
 
-	private IProject currentProject;
+	private final IProject currentProject;
 
+	/**
+	 * @param project
+	 */
 	public NewJavaClassPage(IProject project) {
 		super();
 		currentProject = project;
 		setPageComplete(false);
 	}
 
-	public void initialize() {
+	private void initialize() {
 		if (getPackageFragmentRoot() == null
 				|| currentProject != getPackageFragmentRoot().getJavaProject()
 						.getProject()) {
