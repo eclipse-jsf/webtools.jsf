@@ -109,4 +109,13 @@ public class CreateItemCommand extends DesignerCommand {
     {
         return _customizationData;
     }
+    
+    /**
+     * @return the result of the command execution
+     * TODO: add Object getResult() method to DesignerCommand
+     */
+    protected Element getResult()
+    {
+        return this._ele;
+    }
 }

@@ -253,7 +253,6 @@
 		</trait>		
  		<trait id="tag-create">
  			<value xsi:type="pi:TagCreationInfo">
- 				<attribute id="for" />
 				<attribute id="value" value="outputLabel" />
  			</value>
  		</trait>
