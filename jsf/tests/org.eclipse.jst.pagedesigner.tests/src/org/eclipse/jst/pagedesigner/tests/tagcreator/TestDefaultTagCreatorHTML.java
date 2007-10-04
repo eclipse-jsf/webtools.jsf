@@ -30,7 +30,7 @@ public class TestDefaultTagCreatorHTML extends BaseTagCreatorTestCase
 
     public void testCreateButton() throws Exception
     {
-        doCreateTest(TagIdentifierFactory.createJSPTagWrapper(CMDocType.HTML_DOC_TYPE, "INPUT.BUTTON"), "html", "html", 358);
-        doCreateTest(TagIdentifierFactory.createJSPTagWrapper(CMDocType.HTML_DOC_TYPE, "INPUT.BUTTON"), "xhtml", "xhtml", 350);
+        doCreateTest(TagIdentifierFactory.createJSPTagWrapper(CMDocType.HTML_DOC_TYPE, "INPUT.BUTTON"), "html", "html", 358,false);
+        doCreateTest(TagIdentifierFactory.createJSPTagWrapper(CMDocType.HTML_DOC_TYPE, "INPUT.BUTTON"), "xhtml", "xhtml", 350,false);
     }
 }

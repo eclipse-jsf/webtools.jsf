@@ -9,5 +9,5 @@
 </head>
 <body>
 
-<f:view><h:outputLabel for="" value="outputLabel"></h:outputLabel></f:view></body>
+<f:view><h:outputLabel value="outputLabel"></h:outputLabel></f:view></body>
 </html>

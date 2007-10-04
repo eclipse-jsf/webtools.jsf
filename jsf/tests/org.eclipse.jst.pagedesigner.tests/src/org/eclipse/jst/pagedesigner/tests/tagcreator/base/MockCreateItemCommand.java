@@ -8,6 +8,7 @@ import org.eclipse.jst.pagedesigner.commands.CreateItemCommand;
 import org.eclipse.jst.pagedesigner.dom.IDOMPosition;
 import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 public class MockCreateItemCommand extends CreateItemCommand
@@ -26,5 +27,11 @@ public class MockCreateItemCommand extends CreateItemCommand
     public IAdaptable getCustomizationDataTesting()
     {
         return super.getCustomizationData();
+    }
+
+    @Override
+    public Element getResult() {
+        // just make super.getResult() accessible to the test
+        return super.getResult();
     }
 }

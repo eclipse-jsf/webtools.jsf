@@ -33,6 +33,7 @@ import org.eclipse.wst.html.core.internal.document.DOMStyleModelImpl;
 import org.eclipse.wst.sse.core.StructuredModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
+import org.eclipse.wst.xml.core.internal.document.ElementImpl;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.w3c.dom.Node;
 
@@ -223,5 +224,26 @@ public class BaseTestClass extends TestCase
         return tool;
     }
 
+    protected final void forceTagEmpty(ElementImpl element)
+    {
+        for (int i = 0; i < element.getChildNodes().getLength(); i++)
+        {
+            Node node = element.getChildNodes().item(i);
+            
+            if (node instanceof ElementImpl)
+            {
+                forceTagEmpty((ElementImpl) node);
+            }
+        }
+        
+        // if element has no children, force it to an empty tag
+        if (element.getChildNodes().getLength() == 0)
+        {
+            ((ElementImpl)element).setEmptyTag(true);
+            ((ElementImpl)element).removeChildNodes();
+            Node copy = ((ElementImpl)element).cloneNode(false);
+            element.getParentNode().replaceChild(copy, element);
+        }
+    }
 
 }

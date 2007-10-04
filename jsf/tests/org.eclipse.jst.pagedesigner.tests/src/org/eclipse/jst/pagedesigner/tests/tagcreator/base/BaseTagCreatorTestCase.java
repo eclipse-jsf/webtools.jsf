@@ -5,6 +5,7 @@ import org.eclipse.jst.jsf.common.dom.TagIdentifier;
 import org.eclipse.jst.pagedesigner.itemcreation.ITagCreator;
 import org.eclipse.jst.pagedesigner.itemcreation.internal.TagCreationFactory;
 import org.eclipse.jst.pagedesigner.tests.PageDesignerTestsPlugin;
+import org.eclipse.wst.xml.core.internal.document.ElementImpl;
 import org.w3c.dom.Element;
 
 public class BaseTagCreatorTestCase extends BaseTestClass 
@@ -24,7 +25,18 @@ public class BaseTagCreatorTestCase extends BaseTestClass
         super.tearDown();
     }
 
-    protected final void doCreateTest(final TagIdentifier tagId, final String inExt, final String outExt, int offset) throws Exception 
+    /**
+     * @param tagId
+     * @param inExt
+     * @param outExt
+     * @param offset
+     * @param forceResultTagEmpty this is a workaround flag due to the fact that some
+     * TLD body definitions differ between RI and MyFaces, causing some tags to be
+     * generated as <tag></tag> in RI and <tag/> in MyFaces.  NEVER SET TO TRUE ON A TAG ID
+     * whose instances may have child elements.
+     * @throws Exception
+     */
+    protected final void doCreateTest(final TagIdentifier tagId, final String inExt, final String outExt, int offset, boolean forceResultTagEmpty) throws Exception 
     {
         final String uri = tagId.getUri();
         final String tagName = tagId.getTagName();
@@ -39,6 +51,22 @@ public class BaseTagCreatorTestCase extends BaseTestClass
 
         Element element = tagCreator.createTag(getCreationData(uri, tagName,
                 _defaultPrefix, file, offset));
+        
+        // this is a hack that is required because we do a literal comparison
+        // between the modified source file and test data file on a character
+        // by character basis.  However, the MyFaces and RI (and possibly other)
+        // impls cause the tags to be generated differently (MyFaces with no
+        // end tag because body-content = empty and RI with an end tag because
+        // body-content = JSP), so if the caller sets forceResultTagEmpty, we force
+        // the tag to have no end tag.  This should not invalidate the test as long as
+        // the caller doesn't set forceResultTagEmpty on a tag that may have children.
+        // the tag name and attributes should be cloned.
+        if (forceResultTagEmpty &&
+                element instanceof ElementImpl)
+        {
+            forceTagEmpty((ElementImpl) element);
+        }
+
 
         System.out.println(element.toString());
 
