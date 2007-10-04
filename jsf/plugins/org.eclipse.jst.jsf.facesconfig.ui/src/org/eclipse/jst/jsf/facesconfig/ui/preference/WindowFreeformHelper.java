@@ -27,7 +27,7 @@ import org.eclipse.draw2d.geometry.Rectangle;
  * 
  * @author bbrodt
  */
-public class WindowFreeformHelper implements FreeformListener {
+/*package*/ class WindowFreeformHelper implements FreeformListener {
 	FreeformLayeredPane x;
 
 	class ChildTracker implements FigureListener {
@@ -42,10 +42,16 @@ public class WindowFreeformHelper implements FreeformListener {
 
 	private FigureListener figureListener = new ChildTracker();
 
+	/**
+	 * @param host
+	 */
 	public WindowFreeformHelper(FreeformFigure host) {
 		this.host = host;
 	}
 
+	/**
+	 * @return the freeform extent
+	 */
 	public Rectangle getFreeformExtent() {
 		if (freeformExtent != null)
 			return freeformExtent;
@@ -75,6 +81,9 @@ public class WindowFreeformHelper implements FreeformListener {
 		return freeformExtent;
 	}
 
+	/**
+	 * @param child
+	 */
 	public void hookChild(IFigure child) {
 		invalidate();
 		if (child instanceof FreeformFigure)
@@ -98,6 +107,9 @@ public class WindowFreeformHelper implements FreeformListener {
 		invalidate();
 	}
 
+	/**
+	 * @param bounds
+	 */
 	public void setFreeformBounds(Rectangle bounds) {
 		host.setBounds(bounds);
 		bounds = bounds.getCopy();
@@ -113,6 +125,9 @@ public class WindowFreeformHelper implements FreeformListener {
 		host.getLayoutManager().layout(host);
 	}
 
+	/**
+	 * @param child
+	 */
 	public void unhookChild(IFigure child) {
 		invalidate();
 		if (child instanceof FreeformFigure)

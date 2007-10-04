@@ -19,6 +19,10 @@ package org.eclipse.jst.jsf.facesconfig.ui.preference;
  * generated when a user presses a different tab (tabChanged event) or presses
  * one of the minimize/maximize/restore buttons (stateChanged event)
  */
-public interface CompoundFigureListener extends WindowFigureListener {
+/*package*/ interface CompoundFigureListener extends WindowFigureListener {
+	/**
+	 * @param oldState
+	 * @param newState
+	 */
 	void stateChanged(int oldState, int newState);
 }

@@ -33,7 +33,11 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.widgets.Composite;
 
-public class TabbedTitleBarBorder extends SchemeBorder {
+/**
+ * A border for the tabbed title bar
+ *
+ */
+/*package*/ class TabbedTitleBarBorder extends SchemeBorder {
 	// private int state = CompoundFigureListener.RESTORED;
 
 	private IFigure parent;
@@ -59,6 +63,7 @@ public class TabbedTitleBarBorder extends SchemeBorder {
 
 	/**
 	 * Constructs a TitleBarBorder with its label set to the name of this class.
+	 * @param parent 
 	 * 
 	 * @since 2.0
 	 */
@@ -101,17 +106,28 @@ public class TabbedTitleBarBorder extends SchemeBorder {
 		});
 	}
 
+	/**
+	 * @return the tab list
+	 */
 	protected List getTabList() {
 		if (tabList == null)
 			tabList = new ArrayList();
 		return tabList;
 	}
 
+	/**
+	 * Add a new tab with the text
+	 * @param text
+	 * @return the previous number of tabs
+	 */
 	public int addTab(String text) {
 		getTabList().add(new Tab(text));
 		return getTabList().size() - 1;
 	}
 
+	/**
+	 * @param index
+	 */
 	public void removeTab(int index) {
 		if (index >= 0 && index < getTabList().size()) {
 			tabList.remove(index);
@@ -121,6 +137,9 @@ public class TabbedTitleBarBorder extends SchemeBorder {
 		}
 	}
 
+	/**
+	 * @param newIndex
+	 */
 	public void setCurrentTab(int newIndex) {
 		if (newIndex >= 0 && newIndex < getTabList().size()) {
 			Tab newTab = (Tab) tabList.get(newIndex);
@@ -143,36 +162,61 @@ public class TabbedTitleBarBorder extends SchemeBorder {
 		}
 	}
 
+	/**
+	 * @return the index of the current tab
+	 */
 	public int getCurrentTab() {
 		return currentTab;
 	}
 
+	/**
+	 * @param index
+	 * @return the contents object of the tab at index
+	 * or null if  index is out of range
+	 */
 	public Object getContents(int index) {
 		if (index >= 0 && index < getTabList().size())
 			return ((Tab) tabList.get(index)).getContents();
 		return null;
 	}
 
+	/**
+	 * @param index
+	 * @param contents
+	 */
 	public void setContents(int index, Object contents) {
 		if (index >= 0 && index < getTabList().size())
 			((Tab) tabList.get(index)).setContents(contents);
 	}
 
+	/**
+	 * @param listener
+	 */
 	public void addTabbedWindowListener(WindowFigureListener listener) {
 		if (listenerList == null)
 			listenerList = new ListenerList(ListenerList.IDENTITY);
 		listenerList.add(listener);
 	}
 
+	/**
+	 * @param listener
+	 */
 	public void removeTabbedWindowListener(WindowFigureListener listener) {
 		if (listenerList != null)
 			listenerList.remove(listener);
 	}
 
+	/**
+	 * @return the listeners
+	 */
 	public Object[] getListeners() {
 		return listenerList.getListeners();
 	}
 
+	/**
+	 * @param oldIndex
+	 * @param newIndex
+	 */
 	protected void fireTabChanged(int oldIndex, int newIndex) {
 		Object l[] = listenerList.getListeners();
 		for (int i = 0; i < l.length; ++i) {
@@ -210,54 +254,92 @@ public class TabbedTitleBarBorder extends SchemeBorder {
 		return insets;
 	}
 
+	/**
+	 * @param c
+	 */
 	public void setTextColor(Color c) {
 		textColor = c;
 	}
 
+	/**
+	 * @return the text color
+	 */
 	public Color getTextColor() {
 		return textColor;
 	}
 
+	/**
+	 * @param c
+	 */
 	public void setBackgroundColor(Color c) {
 		bgColor = c;
 	}
 
+	/**
+	 * @return the background color
+	 */
 	public Color getBackgroundColor() {
 		return bgColor;
 	}
 
+	/**
+	 * @param p
+	 */
 	public void setPadding(Insets p) {
 		padding = p;
 		invalidate();
 	}
 
+	/**
+	 * @return the padding insets
+	 */
 	public Insets getPadding() {
 		return padding;
 	}
 
+	/**
+	 * @param text
+	 */
 	public void setLabel(String text) {
 		setLabel(currentTab, text);
 	}
 
+	/**
+	 * @param index
+	 * @param text
+	 */
 	public void setLabel(int index, String text) {
 		if (index >= 0 && index < getTabList().size())
 			((Tab) tabList.get(index)).setLabel(text);
 	}
 
+	/**
+	 * @return the label
+	 */
 	public String getLabel() {
 		return getLabel(currentTab);
 	}
 
+	/**
+	 * @param index
+	 * @return the label
+	 */
 	public String getLabel(int index) {
 		if (index >= 0 && index < getTabList().size())
 			return ((Tab) tabList.get(index)).getLabel();
 		return "";
 	}
 
+	/**
+	 * @return the parent figureb
+	 */
 	public IFigure getParent() {
 		return parent;
 	}
 
+	/**
+	 * validate each of the tabs
+	 */
 	public void invalidate() {
 		insets = null;
 		for (int i = 0; i < getTabList().size(); ++i) {
@@ -266,6 +348,10 @@ public class TabbedTitleBarBorder extends SchemeBorder {
 		}
 	}
 
+	/**
+	 * @param f
+	 * @return the text extends
+	 */
 	public Dimension getTextExtents(IFigure f) {
 		Dimension d = new Dimension(0, 0);
 		for (int i = 0; i < getTabList().size(); ++i) {
@@ -350,6 +436,11 @@ public class TabbedTitleBarBorder extends SchemeBorder {
 		g.setBackgroundColor(getBackgroundColor());
 	}
 
+	/**
+	 * @param wHint
+	 * @param hHint
+	 * @return the minimum size
+	 */
 	public Dimension getMinimumSize(int wHint, int hHint) {
 		Dimension d = getTextExtents(parent);
 		getInsets(parent);
@@ -368,30 +459,51 @@ public class TabbedTitleBarBorder extends SchemeBorder {
 
 		private boolean active;
 
+		/**
+		 * @param text
+		 */
 		public Tab(String text) {
 			this.label = text;
 		}
 
+		/**
+		 * @param contents
+		 */
 		public void setContents(Object contents) {
 			this.contents = contents;
 		}
 
+		/**
+		 * @return the contents
+		 */
 		public Object getContents() {
 			return contents;
 		}
 
+		/**
+		 * @param active
+		 */
 		public void setActive(boolean active) {
 			this.active = active;
 		}
 
+		/**
+		 * @return the active state
+		 */
 		public boolean isActive() {
 			return active;
 		}
 
+		/**
+		 * @return the label
+		 */
 		public String getLabel() {
 			return label;
 		}
 
+		/**
+		 * @param text
+		 */
 		public void setLabel(String text) {
 			if (text == null)
 				this.label = "";
@@ -400,6 +512,9 @@ public class TabbedTitleBarBorder extends SchemeBorder {
 			textExtents = null;
 		}
 
+		/**
+		 * @return the text extents
+		 */
 		public Dimension calculateTextExtents() {
 			textExtents = FigureUtilities.getTextExtents(label == null ? "W"
 					: label, getFont());
@@ -408,16 +523,29 @@ public class TabbedTitleBarBorder extends SchemeBorder {
 			return textExtents;
 		}
 
+		/**
+		 * @return the text extents.  A copy is returned based on what
+		 * is cached internall by calculateTextExtents
+		 */
 		public Dimension getTextExtents() {
 			if (textExtents == null)
 				calculateTextExtents();
 			return textExtents.getCopy();
 		}
 
+		/**
+		 * 
+		 */
 		public void invalidate() {
 			textExtents = null;
 		}
 
+		/**
+		 * @param g
+		 * @param f
+		 * @param x
+		 * @param y
+		 */
 		public void paint(Graphics g, IFigure f, int x, int y) {
 			if (contents instanceof Composite) {
 				return;

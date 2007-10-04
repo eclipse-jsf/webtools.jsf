@@ -43,25 +43,28 @@ import org.eclipse.swt.graphics.Image;
  * @author ddean
  * 
  */
-public class BaseNodeFigure extends Figure implements IBaseFigure {
-	protected IBaseFigure baseFigure;
+/*package*/ class BaseNodeFigure extends Figure implements IBaseFigure {
+	private IBaseFigure baseFigure;
 
-	protected boolean anchorsVisible = true;
+	private boolean anchorsVisible = true;
 
-	protected Hashtable connectionAnchors = new Hashtable(7);
+	private Hashtable connectionAnchors = new Hashtable(7);
 
-	protected Vector inputConnectionAnchors = new Vector(2, 2);
+	private Vector inputConnectionAnchors = new Vector(2, 2);
 
-	protected Vector outputConnectionAnchors = new Vector(2, 2);
+	private Vector outputConnectionAnchors = new Vector(2, 2);
 
-	protected Vector topConnectionAnchors = new Vector();
+	private Vector topConnectionAnchors = new Vector();
 
-	protected Vector bottomConnectionAnchors = new Vector();
+	private Vector bottomConnectionAnchors = new Vector();
 
-	protected Vector leftConnectionAnchors = new Vector();
+	private Vector leftConnectionAnchors = new Vector();
 
-	protected Vector rightConnectionAnchors = new Vector();
+	private Vector rightConnectionAnchors = new Vector();
 
+	/**
+	 * @param figure
+	 */
 	public BaseNodeFigure(IBaseFigure figure) {
 		setBaseFigure(figure);
 		ObserveVisibleXYLayout layout = new ObserveVisibleXYLayout();
@@ -69,6 +72,9 @@ public class BaseNodeFigure extends Figure implements IBaseFigure {
 		setLayoutManager(layout);
 	}
 
+	/**
+	 * @param figure
+	 */
 	public void setBaseFigure(IBaseFigure figure) {
 		setBaseFigure(figure, new Rectangle(0, 0, -1, -1));
 	}
@@ -80,6 +86,10 @@ public class BaseNodeFigure extends Figure implements IBaseFigure {
 		}
 	}
 
+	/**
+	 * @param figure
+	 * @param constraint
+	 */
 	public void setBaseFigure(IBaseFigure figure, Rectangle constraint) {
 		if (!getChildren().contains(figure)) {
 			if (getChildren().contains(baseFigure))
@@ -105,6 +115,9 @@ public class BaseNodeFigure extends Figure implements IBaseFigure {
 		}
 	}
 
+	/**
+	 * @return the base figure
+	 */
 	public IBaseFigure getBaseFigure() {
 		return baseFigure;
 	}
@@ -134,6 +147,7 @@ public class BaseNodeFigure extends Figure implements IBaseFigure {
 	 * 
 	 * @param portName
 	 *            unique name to refer to the port
+	 * @return the connection anchor
 	 */
 	public PortConnectionAnchor addOutput(String portName) {
 		OutputPortFigure outputPort = new OutputPortFigure();
@@ -301,6 +315,9 @@ public class BaseNodeFigure extends Figure implements IBaseFigure {
 		return null;
 	}
 
+	/**
+	 * @param visible
+	 */
 	public void setAnchorsVisible(boolean visible) {
 		if (anchorsVisible != visible) {
 			anchorsVisible = visible;
@@ -317,14 +334,14 @@ public class BaseNodeFigure extends Figure implements IBaseFigure {
 		}
 	}
 
-	/*
+	/**
 	 * Determine which side of the figure to place each anchor based on the
 	 * relative position (north, south, east or west) of the connection line's
 	 * opposite anchor. If the anchor is not connected to anything else, the
 	 * default is to place target (input) anchors on the left and source
 	 * (output) anchors on the right.
 	 */
-	protected void determineAnchorPositions() {
+	private void determineAnchorPositions() {
 		Iterator it;
 		topConnectionAnchors.clear();
 		bottomConnectionAnchors.clear();
@@ -523,7 +540,7 @@ public class BaseNodeFigure extends Figure implements IBaseFigure {
 		}
 	}
 
-	protected void placeAnchors() {
+	private void placeAnchors() {
 		determineAnchorPositions();
 		if (anchorsVisible) {
 			Iterator it;
@@ -634,7 +651,7 @@ public class BaseNodeFigure extends Figure implements IBaseFigure {
 	 * unreadable Anchor size is now dependent on icon size, not constant. Asks
 	 * the connection anchor for its size.
 	 */
-	public Dimension getAnchorSize() {
+	private Dimension getAnchorSize() {
 		Dimension d = new Dimension(FigureConstants.PORT_SIDE,
 				FigureConstants.PORT_SIDE);
 		if (!connectionAnchors.isEmpty()) {
@@ -645,7 +662,10 @@ public class BaseNodeFigure extends Figure implements IBaseFigure {
 		return d;
 	}
 
-	public Insets getAnchorInsets() {
+	/**
+	 * @return the anchor insets
+	 */
+	protected final Insets getAnchorInsets() {
 		Insets in = new Insets(0, 0, 0, 0);
 		// CR389070: Figures are abbreviating rule figures names and making them
 		// unreadable
@@ -797,12 +817,15 @@ public class BaseNodeFigure extends Figure implements IBaseFigure {
 		return size;
 	}
 
-	public static void moveToTop(IFigure parent, IFigure child) {
+	private static void moveToTop(IFigure parent, IFigure child) {
 		parent.getChildren().remove(child);
 		parent.getChildren().add(child);
 	}
 
-	public void moveToTop() {
+	/**
+	 * move to top layer
+	 */
+	protected final void moveToTop() {
 		IFigure parent = getParent();
 		IFigure child = this;
 		while (parent != null && !(parent instanceof Layer)) {

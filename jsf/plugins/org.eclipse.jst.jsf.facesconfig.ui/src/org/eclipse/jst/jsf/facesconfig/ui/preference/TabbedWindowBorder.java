@@ -23,7 +23,11 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.widgets.Composite;
 
-public class TabbedWindowBorder extends FrameBorder {
+/**
+ * A frame border for a tabbed window
+ *
+ */
+/*package*/ final class TabbedWindowBorder extends FrameBorder {
 	private boolean isVisible = true;
 
 	// CR392586: resource leaks
@@ -48,8 +52,16 @@ public class TabbedWindowBorder extends FrameBorder {
 							FigureUtilities
 									.lighter(ColorConstants.titleGradient) }));
 
-	public static class MySchemeBorder extends SchemeBorder {
-		public static class MyScheme extends SchemeBorder.Scheme {
+	/**
+	 * A border scheme
+	 *
+	 */
+	private static class MySchemeBorder extends SchemeBorder {
+		private static class MyScheme extends SchemeBorder.Scheme {
+			/**
+			 * @param highlight
+			 * @param shadow
+			 */
 			public MyScheme(Color[] highlight, Color[] shadow) {
 				super(highlight, shadow);
 			}
@@ -67,12 +79,18 @@ public class TabbedWindowBorder extends FrameBorder {
 			super(scheme);
 		}
 
+		/**
+		 * @return the scheme
+		 */
 		public MyScheme getMyScheme() {
 			return (MyScheme) super.getScheme();
 		}
 
 		/**
 		 * @see org.eclipse.draw2d.Border#paint(IFigure, Graphics, Insets)
+		 * @param comp
+		 * @param gc
+		 * @param insets
 		 */
 		public void paint(Composite comp, GC gc, Insets insets) {
 			Color[] tl = getMyScheme().getHighlight();
@@ -135,6 +153,9 @@ public class TabbedWindowBorder extends FrameBorder {
 		}
 	}
 
+	/**
+	 * @param parent
+	 */
 	public TabbedWindowBorder(IFigure parent) {
 		// apparently paint() gets called before createBorders() has had
 		// a chance to create the borders, so we just create them here
@@ -142,6 +163,9 @@ public class TabbedWindowBorder extends FrameBorder {
 		outer = normalBorder;
 	}
 
+	/**
+	 * @param flag
+	 */
 	public void setVisible(boolean flag) {
 		if (isVisible != flag) {
 			isVisible = flag;
@@ -151,6 +175,9 @@ public class TabbedWindowBorder extends FrameBorder {
 		}
 	}
 
+	/**
+	 * @param flag
+	 */
 	public void setHighlight(boolean flag) {
 		if (flag)
 			outer = highlightBorder;
@@ -176,6 +203,11 @@ public class TabbedWindowBorder extends FrameBorder {
 
 	private Composite comp;
 
+	/**
+	 * @param comp_
+	 * @param gc
+	 * @param insets
+	 */
 	public void paint(Composite comp_, GC gc, Insets insets) {
 		this.comp = comp_;
 		if (isVisible)

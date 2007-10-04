@@ -38,13 +38,13 @@ import org.eclipse.swt.graphics.Image;
  * 
  * @author bbrodt
  */
-public class IconFigure extends Label implements IBaseFigure {
-	public static int defaultTextPlacement = PositionConstants.SOUTH;
+/*package*/ class IconFigure extends Label implements IBaseFigure {
+	private static int defaultTextPlacement = PositionConstants.SOUTH;
 
-	public static Font defaultFont = JFaceResources.getFontRegistry().get(
+	static Font defaultFont = JFaceResources.getFontRegistry().get(
 			JFaceResources.DEFAULT_FONT);
 
-	public static Color defaultForegroundColor = ColorConstants.black;
+	static Color defaultForegroundColor = ColorConstants.black;
 
 	private ArrayList decorators;
 
@@ -59,12 +59,19 @@ public class IconFigure extends Label implements IBaseFigure {
 
 		private IconFigure host;
 
+		/**
+		 * @param host
+		 * @param text
+		 */
 		public IconLabel(IconFigure host, String text) {
 			super(text);
 			this.host = host;
 			locator = new LabelLocator(this);
 		}
 
+		/**
+		 * @return the icon figure
+		 */
 		public IconFigure getHost() {
 			return host;
 		}
@@ -93,6 +100,9 @@ public class IconFigure extends Label implements IBaseFigure {
 	private class LabelLocator implements AncestorListener {
 		IconLabel label;
 
+		/**
+		 * @param label
+		 */
 		public LabelLocator(IconLabel label) {
 			this.label = label;
 			label.getHost().addAncestorListener(this);
@@ -130,6 +140,9 @@ public class IconFigure extends Label implements IBaseFigure {
 				label.getParent().remove(label);
 		}
 
+		/**
+		 * 
+		 */
 		public void setConstraints() {
 			Layer layer = getParentLayer();
 			if (layer != null && layer.getLayoutManager() != null
@@ -172,6 +185,9 @@ public class IconFigure extends Label implements IBaseFigure {
 
 	// CR389070: Figures are abbreviating rule figures names and making them
 	// unreadable
+	/**
+	 * @return the label
+	 */
 	public Label getLabel() {
 		return iconLabel;
 	}

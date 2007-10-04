@@ -19,7 +19,7 @@ import org.eclipse.osgi.util.NLS;
  * The NLS message manager for PreferenceMessages
  * 
  */
-public final class PreferenceMessages extends NLS {
+/*package*/ final class PreferenceMessages extends NLS {
 
 	private static final String BUNDLE_NAME = "org.eclipse.jst.jsf.facesconfig.ui.preference.PreferenceMessages";
 
@@ -197,6 +197,9 @@ public final class PreferenceMessages extends NLS {
      */
     public static String EditorPreferences_LABEL_ShowIntroEditor;
 
+	/**
+	 * see PreferenceMessages.properties
+	 */
 	public static String GEMPreferences_description;
 
 }

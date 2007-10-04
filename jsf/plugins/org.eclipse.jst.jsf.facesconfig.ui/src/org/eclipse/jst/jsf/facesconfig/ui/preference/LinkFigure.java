@@ -32,26 +32,26 @@ import org.eclipse.swt.graphics.Image;
 
 /**
  * @author Bob
- * 
- * TODO To change the template for this generated type comment go to Window -
- * Preferences - Java - Code Style - Code Templates
  */
-public class LinkFigure extends PolylineConnection implements IBaseFigure {
-	public static Color defaultLineColor = ColorConstants.black;
+/*package*/ class LinkFigure extends PolylineConnection implements IBaseFigure {
+	private final static Color defaultLineColor = ColorConstants.black;
 
-	public static int defaultLineWidth = 1;
+	private final static int defaultLineWidth = 1;
 
-	public static boolean defaultLabelVisible = false;
+	private final static boolean defaultLabelVisible = false;
 
-	public static Color defaultLabelForeground = ColorConstants.black;
+	private final static Color defaultLabelForeground = ColorConstants.black;
 
-	public static Color defaultLabelBackground = ColorConstants.white;
+	private final static Color defaultLabelBackground = ColorConstants.white;
 
-	public static Font defaultFont = JFaceResources.getFontRegistry().get(
+	private final static Font defaultFont = JFaceResources.getFontRegistry().get(
 			JFaceResources.DEFAULT_FONT);
 
 	private LinkLabel label;
 
+	/**
+	 * Default constructor
+	 */
 	public LinkFigure() {
 		super();
 		setLineWidth(defaultLineWidth);
@@ -101,20 +101,6 @@ public class LinkFigure extends PolylineConnection implements IBaseFigure {
 			setForegroundColor(defaultLineColor);
 			// setLineWidth(defaultLineWidth);
 		}
-	}
-
-	public void setSelected(boolean flag) {
-		if (flag) {
-			// setForegroundColor(ColorConstants.titleBackground);
-			setLineWidth(defaultLineWidth * 2);
-		} else {
-			// setForegroundColor(defaultLineColor);
-			setLineWidth(defaultLineWidth);
-		}
-	}
-
-	public void setLabelVisible(boolean flag) {
-		getLabel().setVisible(flag);
 	}
 
 	/*
@@ -226,20 +212,12 @@ public class LinkFigure extends PolylineConnection implements IBaseFigure {
 		return list;
 	}
 
-	public LinkLabel getLabel() {
+	private LinkLabel getLabel() {
 		if (label == null) {
 			label = new LinkLabel();
 			add(label, new MidpointLocator(this, 0));
 		}
 		return label;
-	}
-
-	public void setLabelForeground(Color c) {
-		getLabel().setForegroundColor(c);
-	}
-
-	public void setLabelBackground(Color c) {
-		getLabel().setBackgroundColor(c);
 	}
 
 	public void setFont(Font f) {
@@ -267,7 +245,6 @@ public class LinkFigure extends PolylineConnection implements IBaseFigure {
 	 * @see org.eclipse.draw2d.Polyline#setPoints(org.eclipse.draw2d.geometry.PointList)
 	 */
 	public void setPoints(PointList points) {
-		// TODO Auto-generated method stub
 		super.setPoints(points);
 		if (label != null) {
 			int i = getPoints().size() / 2 - 1;
@@ -309,8 +286,8 @@ public class LinkFigure extends PolylineConnection implements IBaseFigure {
 	/*
 	 * Helper class for line labels.
 	 */
-	public class LinkLabel extends Label {
-		public LinkLabel() {
+	private static class LinkLabel extends Label {
+		LinkLabel() {
 			setBorder(new LineBorder());
 			setOpaque(true);
 			setForegroundColor(defaultLabelForeground);
@@ -322,11 +299,11 @@ public class LinkFigure extends PolylineConnection implements IBaseFigure {
 			setVisible(defaultLabelVisible);
 		}
 
-		public void setBorderWidth(int w) {
+		void setBorderWidth(int w) {
 			((LineBorder) getBorder()).setWidth(w);
 		}
 
-		public void setBorderColor(Color c) {
+		void setBorderColor(Color c) {
 			((LineBorder) getBorder()).setColor(c);
 		}
 

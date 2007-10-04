@@ -15,8 +15,6 @@ package org.eclipse.jst.jsf.facesconfig.ui.preference;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.draw2d.AncestorListener;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.ConnectionLayer;
@@ -39,13 +37,16 @@ import org.eclipse.gef.LayerConstants;
 import org.eclipse.gef.editparts.GridLayer;
 import org.eclipse.gef.editparts.GuideLayer;
 import org.eclipse.jface.resource.JFaceResources;
-import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 
-public class WindowFigure extends ScrollPane implements IContainerFigure,
+/**
+ * A ScollPane used as figure container
+ *
+ */
+/*package*/ class WindowFigure extends ScrollPane implements IContainerFigure,
 		LayerConstants, FreeformFigure {
 	private TabbedWindowBorder windowBorder;
 
@@ -63,32 +64,31 @@ public class WindowFigure extends ScrollPane implements IContainerFigure,
 
 	private FreeformLayer primaryLayer;
 
-	public static Font defaultFont = JFaceResources.getFontRegistry().get(
+	private final static Font defaultFont = JFaceResources.getFontRegistry().get(
 			JFaceResources.DEFAULT_FONT);
 
-	public static Color defaultForegroundColor = ColorConstants.black;
+	private final static Color defaultForegroundColor = ColorConstants.black;
 
-	public static Color defaultBackgroundColor = ColorConstants.white;
+	private final static Color defaultBackgroundColor = ColorConstants.white;
 
-	public static Color defaultGridColor = ColorConstants.lightGray;
+	private final static Color defaultGridColor = ColorConstants.lightGray;
 
-	public static Dimension defaultGridSpacing = null;
+	private final static Dimension defaultGridSpacing = null;
 
-	public static boolean defaultGridEnabled = false;
+	private final static boolean defaultGridEnabled = false;
 
 	// Line Routing is not used within the WindowFigure class; it just serves as
 	// a storage
 	// location for communicating between the GEMPreferences and EditParts that
 	// actually
 	// create the line routers.
-	public static int LINE_ROUTING_MANUAL = 0;
+	private final static int LINE_ROUTING_MANUAL = 0;
 
-	public static int LINE_ROUTING_MANHATTAN = 1;
-
-	public static int defaultLineRoutingStyle = LINE_ROUTING_MANUAL;
+	// TODO: should this really be static?
+	private static int defaultLineRoutingStyle = LINE_ROUTING_MANUAL;
 
 	private class MyGridLayer extends GridLayer {
-		public Point getOrigin() {
+		Point getOrigin() {
 			return origin.getCopy();
 		}
 	}
@@ -99,6 +99,9 @@ public class WindowFigure extends ScrollPane implements IContainerFigure,
 		}
 	}
 
+	/**
+	 * Default constructor
+	 */
 	public WindowFigure() {
 		super();
 
@@ -144,13 +147,7 @@ public class WindowFigure extends ScrollPane implements IContainerFigure,
 			}
 
 			public void ancestorRemoved(IFigure ancestor) {
-				// TODO: fix this - shouldn't be throwing an exception
-				try {
-					setVisible(false);
-				} catch (Exception e) {
-                    EditorPlugin.getDefault().getLog().log(
-                       new Status(IStatus.ERROR, EditorPlugin.getPluginId(), 0, "Error setting visible", e));
-				}
+				setVisible(false);
 			}
 		});
 	}
@@ -159,6 +156,9 @@ public class WindowFigure extends ScrollPane implements IContainerFigure,
 	// Layer management
 	// //////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * @param layeredPane
+	 */
 	protected void createLayers(LayeredPane layeredPane) {
 		layeredPane.add(getScaledLayers(), SCALABLE_LAYERS);
 		layeredPane.add(new FreeformLayer(), HANDLE_LAYER);
@@ -169,6 +169,9 @@ public class WindowFigure extends ScrollPane implements IContainerFigure,
 		layeredPane.add(new GuideLayer(), GUIDE_LAYER);
 	}
 
+	/**
+	 * @return the pane
+	 */
 	protected ScalableFreeformLayeredPane createScaledLayers() {
 		ScalableFreeformLayeredPane layers = new ScalableFreeformLayeredPane();
 		layers.add(createGridLayer(), GRID_LAYER);
@@ -180,12 +183,18 @@ public class WindowFigure extends ScrollPane implements IContainerFigure,
 		return layers;
 	}
 
+	/**
+	 * @return layered pane
+	 */
 	protected LayeredPane getScaledLayers() {
 		if (scaledLayers == null)
 			scaledLayers = createScaledLayers();
 		return scaledLayers;
 	}
 
+	/**
+	 * @return layered pane
+	 */
 	protected LayeredPane createPrintableLayers() {
 		FreeformLayeredPane layeredPane = new FreeformLayeredPane();
 
@@ -210,16 +219,25 @@ public class WindowFigure extends ScrollPane implements IContainerFigure,
 		return layeredPane;
 	}
 
+	/**
+	 * @return the layered pane
+	 */
 	protected LayeredPane getPrintableLayers() {
 		if (printableLayers == null)
 			printableLayers = createPrintableLayers();
 		return printableLayers;
 	}
 
+	/**
+	 * @return the grid layer
+	 */
 	protected GridLayer createGridLayer() {
 		return new MyGridLayer();
 	}
 
+	/**
+	 * @return the grid layer
+	 */
 	public GridLayer getGridLayer() {
 		return (GridLayer) getLayer(GRID_LAYER);
 	}
@@ -246,24 +264,39 @@ public class WindowFigure extends ScrollPane implements IContainerFigure,
 	// Properties
 	// //////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * @return the scroll position
+	 */
 	public Point getScrollPosition() {
 		int x = getHorizontalScrollBar().getRangeModel().getValue();
 		int y = getVerticalScrollBar().getRangeModel().getValue();
 		return new Point(x, y);
 	}
 
+	/**
+	 * @return the border
+	 */
 	public TabbedTitleBarBorder getTabbedTitleBarBorder() {
 		return titleBarBorder;
 	}
 
+	/**
+	 * @return the border
+	 */
 	public TabbedWindowBorder getTabbedWindowBorder() {
 		return windowBorder;
 	}
 
+	/**
+	 * @param listener
+	 */
 	public void addTabbedWindowListener(WindowFigureListener listener) {
 		titleBarBorder.addTabbedWindowListener(listener);
 	}
 
+	/**
+	 * @param listener
+	 */
 	public void removeTabbedWindowListener(WindowFigureListener listener) {
 		titleBarBorder.removeTabbedWindowListener(listener);
 	}
@@ -274,10 +307,17 @@ public class WindowFigure extends ScrollPane implements IContainerFigure,
 		return d;
 	}
 
+	/**
+	 * @param s
+	 * @return the previous number of tabs
+	 */
 	public int addTab(String s) {
 		return titleBarBorder.addTab(s);
 	}
 
+	/**
+	 * @param index
+	 */
 	public void removeTab(int index) {
 		titleBarBorder.removeTab(index);
 		internalSetCurrentTab(titleBarBorder.getCurrentTab());
@@ -289,11 +329,17 @@ public class WindowFigure extends ScrollPane implements IContainerFigure,
 		// setContents((IFigure) contents);
 	}
 
+	/**
+	 * @param index
+	 */
 	public void setCurrentTab(int index) {
 		internalSetCurrentTab(index);
 		titleBarBorder.setCurrentTab(index);
 	}
 
+	/**
+	 * @return the current tab index
+	 */
 	public int getCurrentTab() {
 		return titleBarBorder.getCurrentTab();
 	}
@@ -303,12 +349,20 @@ public class WindowFigure extends ScrollPane implements IContainerFigure,
 		super.setContents(figure);
 	}
 
+	/**
+	 * @param index
+	 * @param contents
+	 */
 	public void setContents(int index, Object contents) {
 		if (contents instanceof IFigure)
 			setContents((IFigure) contents);
 		titleBarBorder.setContents(index, contents);
 	}
 
+	/**
+	 * @param index
+	 * @return the content object of the index
+	 */
 	public Object getContents(int index) {
 		return titleBarBorder.getContents(index);
 	}
@@ -334,11 +388,17 @@ public class WindowFigure extends ScrollPane implements IContainerFigure,
 		titleBarBorder.setTextColor(c);
 	}
 
+	/**
+	 * @param style
+	 */
 	public void setLineRoutingStyle(int style) {
 		defaultLineRoutingStyle = style;
 		revalidate();
 	}
 
+	/**
+	 * @return the line routing style
+	 */
 	public int getLineRoutingStyle() {
 		return defaultLineRoutingStyle;
 	}
@@ -409,16 +469,6 @@ public class WindowFigure extends ScrollPane implements IContainerFigure,
 	 */
 	public void setText(String name) {
 		titleBarBorder.setLabel(name);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.sybase.stf.gem.diagram.editor.figures.basic.ITabbedWindow#setName(int,
-	 *      java.lang.String)
-	 */
-	public void setText(int index, String name) {
-		titleBarBorder.setLabel(index, name);
 	}
 
 	/*

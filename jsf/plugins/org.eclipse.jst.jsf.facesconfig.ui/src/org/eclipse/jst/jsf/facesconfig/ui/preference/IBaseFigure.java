@@ -20,37 +20,71 @@ import org.eclipse.swt.graphics.Image;
 
 /**
  * @author Bob
- * 
- * TODO To change the template for this generated type comment go to Window -
- * Preferences - Java - Code Style - Code Templates
  */
-public interface IBaseFigure extends IFigure {
+/*package*/ interface IBaseFigure extends IFigure 
+{
+	/**
+	 * @param text
+	 */
 	public abstract void setText(String text);
 
+	/**
+	 * @return the text
+	 */
 	public abstract String getText();
 
-	/*
+	/**
 	 * CR374981: Long activity labels do not get wrapped or truncated This
 	 * method was added to the IBaseFigure interface to support direct edit of
 	 * figure labels on the canvas.
+	 * @return the text bounds rectangle
 	 */
 	public abstract Rectangle getTextBounds();
 
+	/**
+	 * @param image
+	 */
 	public abstract void setIcon(Image image);
 
+	/**
+	 * @return the icon
+	 */
 	public abstract Image getIcon();
 
+	/**
+	 * @param text
+	 */
 	public abstract void setToolTipText(String text);
 
+	/**
+	 * @return the tool tip text
+	 */
 	public abstract String getToolTipText();
 
+	/**
+	 * @param flag
+	 */
 	public abstract void setHighlight(boolean flag);
 
+	/**
+	 * Add decorator.  May
+	 * cause the figure to become invalidated
+	 * @param decorator
+	 */
 	public abstract void addDecorator(BaseFigureDecorator decorator);
 
+	/**
+	 * Remove the decorator
+	 */
 	public abstract void removeDecorator();
 
+	/**
+	 * @param position
+	 */
 	public abstract void removeDecorator(int position);
 
+	/**
+	 * @return the list of decoractors
+	 */
 	public abstract List getDecorators();
 }

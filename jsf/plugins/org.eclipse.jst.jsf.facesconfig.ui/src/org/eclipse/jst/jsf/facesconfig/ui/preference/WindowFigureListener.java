@@ -18,6 +18,10 @@ package org.eclipse.jst.jsf.facesconfig.ui.preference;
  * Defines an interface for notifying listeners of page switches on a tabbed
  * window figure.
  */
-public interface WindowFigureListener {
+/*package*/ interface WindowFigureListener {
+	/**
+	 * @param oldIndex
+	 * @param newIndex
+	 */
 	void tabChanged(int oldIndex, int newIndex);
 }

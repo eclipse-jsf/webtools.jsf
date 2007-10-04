@@ -46,7 +46,7 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
  * preferences can be accessed directly via the preference store.
  */
 
-public class GEMPreferences extends FieldEditorPreferencePage implements
+public final class GEMPreferences extends FieldEditorPreferencePage implements
 		IWorkbenchPreferencePage {
 	// appearance
     /**
@@ -54,59 +54,133 @@ public class GEMPreferences extends FieldEditorPreferencePage implements
      */
     public final static String SHOW_INTRO_EDITOR = "ShowIntroEditor"; //$NON-NLS-1$
     
+	/**
+	 * use system colors preference
+	 */
 	public final static String USE_SYSTEM_COLORS = "UseSystemColors"; //$NON-NLS-1$
 
+	/**
+	 * canvas color preference
+	 */
 	public final static String CANVAS_COLOR = "CanvasColor"; //$NON-NLS-1$
 
+	/**
+	 * figure label font
+	 */
 	public final static String FIGURE_LABEL_FONT = "FigureLabelFont"; //$NON-NLS-1$
 
+	/**
+	 * 
+	 */
 	public final static String FIGURE_LABEL_FONT_COLOR = "FigureLabelFontColor"; //$NON-NLS-1$
 
+	/**
+	 * 
+	 */
 	public final static String LABEL_PLACEMENT = "LabelPlacement"; //$NON-NLS-1$
 
+	/**
+	 * 
+	 */
 	public final static String INPUT_PORT_COLOR = "InputPortColor"; //$NON-NLS-1$
 
+	/**
+	 * 
+	 */
 	public final static String OUTPUT_PORT_COLOR = "OutputPortColor"; //$NON-NLS-1$
 
+	/**
+	 * 
+	 */
 	public final static String SHOW_LINE_LABELS = "ShowLineLabels"; //$NON-NLS-1$
 
+	/**
+	 * 
+	 */
 	public final static String LINE_LABEL_FONT = "LineLabelFont"; //$NON-NLS-1$
 
+	/**
+	 * 
+	 */
 	public final static String LINE_LABEL_FONT_COLOR = "LineLabelFontColor"; //$NON-NLS-1$
 
+	/**
+	 * 
+	 */
 	public final static String LINE_LABEL_COLOR = "LineLabelColor"; //$NON-NLS-1$
 
+	/**
+	 * 
+	 */
 	public final static String LINE_WIDTH = "LineWidth"; //$NON-NLS-1$
 
+	/**
+	 * 
+	 */
 	public final static String LINE_COLOR = "LineColor"; //$NON-NLS-1$
 
+	/**
+	 * 
+	 */
 	public final static String LINE_ROUTING = "LineRouting"; //$NON-NLS-1$
 
+	/**
+	 * 
+	 */
 	public final static String SNAP_TO_GRID = "SnapToGrid"; //$NON-NLS-1$
 
+	/**
+	 * 
+	 */
 	public final static String SNAP_TO_GEOMETRY = "SnapToGeometry"; //$NON-NLS-1$
 
+	/**
+	 * 
+	 */
 	public final static String GRID_WIDTH = "GridWidth"; //$NON-NLS-1$
 
+	/**
+	 * 
+	 */
 	public final static String GRID_HEIGHT = "GridHeight"; //$NON-NLS-1$
 
+	/**
+	 * 
+	 */
 	public final static String GRID_COLOR = "GridColor"; //$NON-NLS-1$
 
+	/**
+	 * 
+	 */
 	public final static String LABEL_PLACEMENT_TOP = "Top"; //$NON-NLS-1$
 
+	/**
+	 * 
+	 */
 	public final static String LABEL_PLACEMENT_BOTTOM = "Bottom"; //$NON-NLS-1$
 
+	/**
+	 * 
+	 */
 	public final static String LABEL_PLACEMENT_LEFT = "Left"; //$NON-NLS-1$
 
+	/**
+	 * 
+	 */
 	public final static String LABEL_PLACEMENT_RIGHT = "Right"; //$NON-NLS-1$
 
-	// "Direct" routing was intended for connections lines without bendpoints;
-	// this has been removed because it is unnecessary.
-	// public final static String LINE_ROUTING_DIRECT = "Direct";
-	// "Manhattan" line routing creates orthogonal lines
+	// 
+	/**
+	 * "Direct" routing was intended for connections lines without bendpoints;
+	 * this has been removed because it is unnecessary.
+	 * public final static String LINE_ROUTING_DIRECT = "Direct";
+	 * "Manhattan" line routing creates orthogonal lines
+	 */
 	public final static String LINE_ROUTING_MANHATTAN = "Manhattan"; //$NON-NLS-1$
 
-	// "Manual" routing allows user to create bendpoints
+	/**
+	 * "Manual" routing allows user to create bendpoints
+	 */
 	public final static String LINE_ROUTING_MANUAL = "Manaul"; //$NON-NLS-1$
 
 	private final static String[][] m_lineRoutingLabels = {

@@ -33,7 +33,7 @@ import org.eclipse.draw2d.geometry.Rectangle;
  * 
  * @see org.eclipse.draw2d.AbstractLayout#isObservingVisibility()
  */
-public class ObserveVisibleXYLayout extends FreeformLayout {
+/*package*/ class ObserveVisibleXYLayout extends FreeformLayout {
 	protected Dimension calculatePreferredSize(IFigure f, int wHint, int hHint) {
 		Rectangle rect = new Rectangle();
 		ListIterator children = f.getChildren().listIterator();

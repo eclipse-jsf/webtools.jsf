@@ -28,27 +28,35 @@ import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.swt.graphics.Image;
 
-public class TitleBarButton extends Button {
-	boolean state = false;
+/**
+ * A title bar button
+ *
+ */
+/*package*/ final class TitleBarButton extends Button {
+	private boolean state = false;
 
-	Image uncheckedImage;
+	private Image uncheckedImage;
 
-	Image checkedImage;
+	private Image checkedImage;
 
-	Image uncheckedHiliteImage;
+	private Image uncheckedHiliteImage;
 
-	Image checkedHiliteImage;
+	private Image checkedHiliteImage;
 
-	RectangleList uncheckedRects;
+	private RectangleList uncheckedRects;
 
-	RectangleList checkedRects;
+	private RectangleList checkedRects;
 
-	boolean hilite = false;
+	private boolean hilite = false;
 
-	public TitleBarButton(Image image) {
-		this(image, null, null, null);
-	}
 
+
+	/**
+	 * @param unchecked
+	 * @param uncheckedHilite
+	 * @param checked
+	 * @param checkedHilite
+	 */
 	public TitleBarButton(Image unchecked, Image uncheckedHilite,
 			Image checked, Image checkedHilite) {
 		super();
@@ -68,12 +76,19 @@ public class TitleBarButton extends Button {
 		initialize();
 	}
 
+	/**
+	 * @param rects
+	 */
 	public TitleBarButton(RectangleList rects) {
 		super();
 		uncheckedRects = rects;
 		initialize();
 	}
 
+	/**
+	 * @param unchecked
+	 * @param checked
+	 */
 	public TitleBarButton(RectangleList unchecked, RectangleList checked) {
 		super();
 		uncheckedRects = unchecked;
@@ -81,10 +96,16 @@ public class TitleBarButton extends Button {
 		initialize();
 	}
 
+	/**
+	 * @return the state
+	 */
 	public boolean getState() {
 		return state;
 	}
 
+	/**
+	 * @param newState
+	 */
 	public void setState(boolean newState) {
 		state = newState;
 		hilite = false;
@@ -143,22 +164,25 @@ public class TitleBarButton extends Button {
 		});
 	}
 
+	/**
+	 * @return the preferred size dimensions
+	 */
 	public Dimension calculatePreferredSize() {
 		if (prefSize == null) {
 			Rectangle rect = new Rectangle(0, 0, 0, 0);
 			if (uncheckedRects != null) {
-				Iterator iter = uncheckedRects.getRectangles().iterator();
+				Iterator<Rectangle> iter = uncheckedRects.iterator();
 				while (iter.hasNext()) {
 					/*Point p =*/ getLocation();
-					Rectangle r = ((Rectangle) iter.next()).getCopy();
+					Rectangle r = iter.next().getCopy();
 					rect = rect.getUnion(r);
 				}
 			}
 			if (checkedRects != null) {
-				Iterator iter = checkedRects.getRectangles().iterator();
+				Iterator<Rectangle> iter = checkedRects.iterator();
 				while (iter.hasNext()) {
 					/*Point p =*/ getLocation();
-					Rectangle r = ((Rectangle) iter.next()).getCopy();
+					Rectangle r = iter.next().getCopy();
 					rect = rect.getUnion(r);
 				}
 			}
@@ -194,14 +218,14 @@ public class TitleBarButton extends Button {
 					graphics.drawImage(checkedImage, getLocation());
 			}
 		} else {
-			Iterator iter = null;
+			Iterator<Rectangle> iter = null;
 			if (state == false)
-				iter = uncheckedRects.getRectangles().iterator();
+				iter = uncheckedRects.iterator();
 			else
-				iter = checkedRects.getRectangles().iterator();
+				iter = checkedRects.iterator();
 			while (iter.hasNext()) {
 				Point p = getLocation();
-				Rectangle r = ((Rectangle) iter.next()).getCopy();
+				Rectangle r = iter.next().getCopy();
 				r = r.translate(p.x, p.y);
 				graphics.setForegroundColor(getForegroundColor());
 				if (hilite)

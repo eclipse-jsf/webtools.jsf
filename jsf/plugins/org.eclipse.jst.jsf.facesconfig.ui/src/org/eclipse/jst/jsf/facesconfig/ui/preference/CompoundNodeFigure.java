@@ -23,7 +23,6 @@ import org.eclipse.draw2d.Layer;
 import org.eclipse.draw2d.LayoutManager;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Insets;
-import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.swt.graphics.Color;
@@ -33,13 +32,13 @@ import org.eclipse.swt.graphics.Image;
 /**
  * The figure for Compound nodes
  */
-public class CompoundNodeFigure extends BaseNodeFigure implements
+/*package*/ class CompoundNodeFigure extends BaseNodeFigure implements
 		FreeformFigure, IContainerFigure {
-	public final static int MINIMIZED = 1;
+	private final static int MINIMIZED = 1;
 
-	public final static int RESTORED = 2;
+	final static int RESTORED = 2;
 
-	public final static int MAXIMIZED = 3;
+	private final static int MAXIMIZED = 3;
 
 	private int state = RESTORED;
 
@@ -73,6 +72,9 @@ public class CompoundNodeFigure extends BaseNodeFigure implements
 	private static Image restoreHiliteImage = EditorPlugin.getDefault()
 			.getImage("restore_hilite.gif");
 
+	/**
+	 * Default constructor
+	 */
 	public CompoundNodeFigure() {
 		// create all of the figures and adornments:
 		// the icon figure
@@ -236,6 +238,9 @@ public class CompoundNodeFigure extends BaseNodeFigure implements
 		iconFigure.removeDecorator(position);
 	}
 
+	/**
+	 * @param flag
+	 */
 	public void setHilight(boolean flag) {
 		windowFigure.setHighlight(flag);
 		if (flag)
@@ -290,11 +295,6 @@ public class CompoundNodeFigure extends BaseNodeFigure implements
 		}
 		super.validate();
 	}
-
-	public IconFigure getIconFigure() {
-		return iconFigure;
-	}
-
 	/**
 	 * @return the window figure
 	 */
@@ -317,10 +317,16 @@ public class CompoundNodeFigure extends BaseNodeFigure implements
 		windowFigure.setBackgroundColor(c);
 	}
 
+	/**
+	 * @return the state
+	 */
 	public int getState() {
 		return state;
 	}
 
+	/**
+	 * @param newState
+	 */
 	public void setState(int newState) {
 		int oldState = state;
 		state = newState;
@@ -354,59 +360,13 @@ public class CompoundNodeFigure extends BaseNodeFigure implements
 		fireStateChanged(oldState, newState);
 	}
 
-	protected void fireStateChanged(int oldState, int newState) {
+	private void fireStateChanged(int oldState, int newState) {
 		Object l[] = windowFigure.getTabbedTitleBarBorder().getListeners();
 		for (int i = 0; i < l.length; ++i) {
 			if (l[i] instanceof CompoundFigureListener)
 				((CompoundFigureListener) l[i])
 						.stateChanged(oldState, newState);
 		}
-	}
-
-	public Point getScrollPosition() {
-		return windowFigure.getScrollPosition();
-	}
-
-	public int addTab(String s) {
-		return windowFigure.addTab(s);
-	}
-
-	public void removeTab(int index) {
-		windowFigure.removeTab(index);
-	}
-
-	public void setCurrentTab(int index) {
-		windowFigure.setCurrentTab(index);
-	}
-
-	public int getCurrentTab() {
-		return windowFigure.getCurrentTab();
-	}
-
-	public void setContents(int index, Object contents) {
-		windowFigure.setContents(index, contents);
-	}
-
-	public Object getContents(int index) {
-		return windowFigure.getContents(index);
-	}
-
-	public Object getContents() {
-		return windowFigure.getContents();
-	}
-
-	public TabbedTitleBarBorder getTabbedTitleBarBorder() {
-		return windowFigure.getTabbedTitleBarBorder();
-	}
-
-	public void addCompoundFigureListener(CompoundFigureListener listener) {
-		windowFigure.getTabbedTitleBarBorder()
-				.addTabbedWindowListener(listener);
-	}
-
-	public void removeCompoundFigureListener(CompoundFigureListener listener) {
-		windowFigure.getTabbedTitleBarBorder().removeTabbedWindowListener(
-				listener);
 	}
 
 	public Dimension getMinimumSize(int wHint, int hHint) {

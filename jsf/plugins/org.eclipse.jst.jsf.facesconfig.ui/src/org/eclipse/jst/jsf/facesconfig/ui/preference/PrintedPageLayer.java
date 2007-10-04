@@ -33,12 +33,12 @@ import org.eclipse.gef.LayerConstants;
  * The reason this needs to be added to the printable layers is so that it will
  * show up in the content outline viewer.
  */
-public class PrintedPageLayer extends FreeformLayer {
+/*package*/ class PrintedPageLayer extends FreeformLayer {
 	// our layer name
-	public static final String PRINTED_PAGE_LAYER = "Printed Page";
+	static final String PRINTED_PAGE_LAYER = "Printed Page";
 
 	// the size of the page tiles (this should be the printer's resolution)
-	protected Dimension pageSize = new Dimension(850, 1100);
+	private Dimension pageSize = new Dimension(850, 1100);
 
 	// the WindowFigure that owns this layer
 	private final WindowFigure host;
@@ -49,7 +49,7 @@ public class PrintedPageLayer extends FreeformLayer {
 
 	// A simple page outline figure. We can get fancy later with turned-up
 	// dogears, page numbers, titles and whatnot...
-	class PrintedPageFigure extends RectangleFigure {
+	static class PrintedPageFigure extends RectangleFigure {
 		PrintedPageFigure() {
 			super();
 			setFill(false);
@@ -58,11 +58,19 @@ public class PrintedPageLayer extends FreeformLayer {
 		}
 	}
 
+	/**
+	 * @param figure
+	 */
 	public PrintedPageLayer(WindowFigure figure) {
 		super();
 		this.host = figure;
 	}
 
+	/**
+	 * @param x
+	 * @param y
+	 * @return the print page figure
+	 */
 	protected PrintedPageFigure createPage(int x, int y) {
 		PrintedPageFigure page = new PrintedPageFigure();
 		page.setBounds(new Rectangle(x, y, pageSize.width, pageSize.height));

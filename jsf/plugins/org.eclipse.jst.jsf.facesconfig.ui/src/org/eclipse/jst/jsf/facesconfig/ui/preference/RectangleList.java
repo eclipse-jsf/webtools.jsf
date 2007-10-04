@@ -13,23 +13,32 @@
 package org.eclipse.jst.jsf.facesconfig.ui.preference;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.geometry.Rectangle;
 
-public class RectangleList extends Figure {
-	protected List rectangles = new ArrayList();
+/**
+ * A List<Rectangle> implementation with a coordinate-based
+ * convenience method for adding rectangles.
+ *
+ */
+class RectangleList extends ArrayList<Rectangle>
+{
+	private static final long serialVersionUID = -4088355285820327890L;
 
+	/**
+	 * Default constructor
+	 */
 	public RectangleList() {
-        // ??
+		super();
 	}
 
+	/**
+	 * @param x1
+	 * @param y1
+	 * @param x2
+	 * @param y2
+	 */
 	public void addRectangle(int x1, int y1, int x2, int y2) {
-		rectangles.add(new Rectangle(x1, y1, x2 - x1, y2 - y1));
-	}
-
-	public List getRectangles() {
-		return rectangles;
+		add(new Rectangle(x1, y1, x2 - x1, y2 - y1));
 	}
 }
