@@ -39,15 +39,15 @@ import org.eclipse.ui.forms.widgets.Section;
 public abstract class CollapsableSection {
 	// internal fields needed for doing the section and computing the scrollbar
 	// on a collapse.
-	protected FormToolkit _toolkit;
+	private FormToolkit _toolkit;
 
-	protected Section _section;
+	private Section _section;
 
-	protected ScrolledComposite _scomp;
+	private ScrolledComposite _scomp;
 
-	protected String _title;
+	private String _title;
 
-	protected int _expansionStyle;
+	private int _expansionStyle;
 
 	/**
 	 * Creates a class to be used to build the control for a collapseable area.

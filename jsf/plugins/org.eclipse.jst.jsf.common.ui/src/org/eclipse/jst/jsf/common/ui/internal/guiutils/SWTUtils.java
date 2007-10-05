@@ -13,8 +13,6 @@ package org.eclipse.jst.jsf.common.ui.internal.guiutils;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
-import org.eclipse.swt.custom.TableTree;
-import org.eclipse.swt.custom.TableTreeEditor;
 import org.eclipse.swt.events.ControlEvent;
 import org.eclipse.swt.events.ControlListener;
 import org.eclipse.swt.graphics.Color;
@@ -41,13 +39,13 @@ import org.eclipse.swt.widgets.Text;
  */
 public class SWTUtils {
 	// Defaults of controls
-	public static final int DEFAULT_BUTTON_WIDTH = 70;
+	private static final int DEFAULT_BUTTON_WIDTH = 70;
 
-	public static final int DEFAULT_COMBO_WIDTH = 100;
+	private static final int DEFAULT_COMBO_WIDTH = 100;
 
-	public static final int DEFAULT_TEXTBOX_WIDTH = 100;
+	private static final int DEFAULT_TEXTBOX_WIDTH = 100;
 
-	public static final int DEFAULT_RADIO_FILL = GridData.HORIZONTAL_ALIGN_BEGINNING
+	private static final int DEFAULT_RADIO_FILL = GridData.HORIZONTAL_ALIGN_BEGINNING
 			| GridData.VERTICAL_ALIGN_CENTER;
 
 	/**
@@ -541,6 +539,7 @@ public class SWTUtils {
 	 *            the parent for the new button
 	 * @param label
 	 *            the label for the new button
+	 * @param gridDataFill 
 	 * @return the newly-created button
 	 */
 	public static Button createRadioButton(Composite parent, String label,
@@ -556,6 +555,7 @@ public class SWTUtils {
 	 *            the parent for the new button
 	 * @param label
 	 *            the label for the new button
+	 * @param gridDataFill 
 	 * @param horizontalSpan
 	 *            number of columns occupied by button
 	 * @return the newly-created button
@@ -619,32 +619,6 @@ public class SWTUtils {
 	}
 
 	/**
-	 * Create a table from a TableTree object
-	 * 
-	 * @param tableTree
-	 *            the TableTree this table is to be created from
-	 * @param columns
-	 *            A string array containing names of the columns in the order
-	 *            that they should be displayed in the table, or null if no
-	 *            columns need to be created.
-	 * @return the new table
-	 */
-	public static Table createTable(TableTree tableTree, String[] columns) {
-		Table table = tableTree.getTable();
-		table.setLayoutData(tableTree.getLayoutData());
-		table.setHeaderVisible(true);
-		table.setLinesVisible(true);
-
-		if (columns != null) {
-			for (int i = 0; i < columns.length; i++) {
-				/*(void)*/ createTableColumn(table, columns[i], i);
-			}
-		}
-
-		return table;
-	}
-
-	/**
 	 * Create a table from a Composite object
 	 * 
 	 * @param composite
@@ -656,6 +630,7 @@ public class SWTUtils {
 	 *            created.
 	 * @param tablewidth
 	 *            the minimum width for the table
+	 * @param tableHeight 
 	 * @return the new table
 	 */
 	public static Table createTable(Composite composite, String tokenString,
@@ -749,6 +724,7 @@ public class SWTUtils {
 	 *            the table that contains this column
 	 * @param image
 	 *            iamge for this column
+	 * @param index 
 	 * @return the new table column
 	 */
 	public static TableColumn createTableColumn(Table parent, Image image,
@@ -782,39 +758,6 @@ public class SWTUtils {
 	}
 
 	/**
-	 * Create a TableTree object
-	 * 
-	 * @param parent
-	 *            the composite that contains the TableTree
-	 * @return the new TableTree object
-	 */
-	public static TableTree createTableTree(Composite parent) {
-		int style = SWT.SINGLE | SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL
-				| SWT.FULL_SELECTION | SWT.HIDE_SELECTION;
-		TableTree tableTree = new TableTree(parent, style);
-		GridData gridData = new GridData(GridData.FILL_BOTH);
-		gridData.grabExcessVerticalSpace = true;
-		gridData.grabExcessHorizontalSpace = true;
-		tableTree.setLayoutData(gridData);
-		return tableTree;
-	}
-
-	/**
-	 * Create a TableTreeEditor object
-	 * 
-	 * @param tableTree
-	 *            the TableTree that this editor is for
-	 * @return the new TableTreeEditor object
-	 */
-	public static TableTreeEditor createTableTreeEditor(TableTree tableTree) {
-		TableTreeEditor editor = new TableTreeEditor(tableTree);
-		editor.horizontalAlignment = SWT.LEFT;
-		editor.grabHorizontal = true;
-		editor.minimumWidth = 50;
-		return editor;
-	}
-
-	/**
 	 * Create a text field
 	 * 
 	 * @param parent
@@ -830,6 +773,7 @@ public class SWTUtils {
 	 * 
 	 * @param parent
 	 *            the parent of the new text field
+	 * @param text 
 	 * @return the new text field
 	 */
 	public static Text createTextBox(Composite parent, String text) {
@@ -876,6 +820,7 @@ public class SWTUtils {
 	 *            number of columns the text box is to occupy
 	 * @param minWidth
 	 *            minimum width of text field
+	 * @param minHeight 
 	 * @return the new text field
 	 */
 	public static Text createTextBox(Composite parent, int numColumns,
@@ -1078,6 +1023,9 @@ public class SWTUtils {
 		}
 	};
 
+	/**
+	 * @param composite
+	 */
 	public static void workaroundResize(Composite composite) {
 		composite.addControlListener(_listener);
 	}

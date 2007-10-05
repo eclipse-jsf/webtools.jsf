@@ -19,7 +19,6 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
 
 /**
  * Brings up a simple text window.
@@ -27,15 +26,14 @@ import org.eclipse.swt.widgets.Text;
  * @author mengbo
  */
 public class TextWindow extends ApplicationWindow {
-	// this browser will be cleaned up when they close the window.
-	private Text _text;
-
 	private String _content;
 
 	private Point _size = new Point(600, 600);
 
 	/**
 	 * empty for passing from events.
+	 * @param parentShell 
+	 * @param content 
 	 */
 	public TextWindow(Shell parentShell, String content) {
 		super(parentShell);
@@ -44,10 +42,6 @@ public class TextWindow extends ApplicationWindow {
 		// addCoolBar(SWT.BORDER);
 		// addMenuBar();
 		// addToolBar(SWT.BORDER);
-	}
-
-	public Text getTextWidget() {
-		return _text;
 	}
 
 	protected Control createContents(Composite parent) {
@@ -62,9 +56,6 @@ public class TextWindow extends ApplicationWindow {
 		return tview.getControl();
 	}
 
-	public void setStartSize(Point pp) {
-		_size = pp;
-	}
 
 	protected Point getInitialSize() {
 		return _size;

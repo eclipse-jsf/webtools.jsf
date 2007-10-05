@@ -46,38 +46,36 @@ public class BrowserWindow extends ApplicationWindow {
 	/**
 	 * Command to send to the browser.
 	 */
-	public static final int BROWSER_CMD_BACK = 1;
+	private static final int BROWSER_CMD_BACK = 1;
 
-	public static final int BROWSER_CMD_FORWARD = 2;
+	private static final int BROWSER_CMD_FORWARD = 2;
 
-	public static final int BROWSER_CMD_STOP = 3;
+	private static final int BROWSER_CMD_STOP = 3;
 
-	public static final int BROWSER_CMD_REFRESH = 4;
+	private static final int BROWSER_CMD_REFRESH = 4;
 
-	public static final int BROWSER_CMD_RELOAD = 5;
+	private static final int BROWSER_CMD_RELOAD = 5;
 
-	protected boolean _bIncludeToolbar;
+	private boolean _bIncludeToolbar;
 
-	protected boolean _bPopups;
+	private boolean _bPopups;
 
-	protected String _title;
+	private String _title;
 
-	protected ScrolledComposite _scomp;
+	private ScrolledComposite _scomp;
 
-	protected Composite _browserComposite;
+	private Composite _browserComposite;
 
-	protected Browser _browser;
+	private Browser _browser;
 
-	protected String _startLocation;
+	private String _startLocation;
 
-	protected String _startContent;
-
-	protected Point _size = new Point(600, 600);
+	private String _startContent;
 
 	// these items are browser context sensitive.
-	protected ToolItem _backItem;
+	private ToolItem _backItem;
 
-	protected ToolItem _forwardItem;
+	private ToolItem _forwardItem;
 
 	/**
 	 * @param parentShell
@@ -134,20 +132,35 @@ public class BrowserWindow extends ApplicationWindow {
 		_bIncludeToolbar = bIncludeToolbar;
 	}
 
+	/**
+	 * @param title
+	 */
 	public void setTitle(String title) {
 		if ((title != null) && (super.getShell() != null)) {
 			super.getShell().setText(title);
 		}
 	}
 
+	/**
+	 * @param startLocation
+	 */
+	/**
+	 * @param startLocation
+	 */
 	public void setStartLocation(String startLocation) {
 		_startLocation = startLocation;
 	}
 
+	/**
+	 * @param startContent
+	 */
 	public void setStartContent(String startContent) {
 		_startContent = startContent;
 	}
 
+	/**
+	 * @return the browser object
+	 */
 	public Browser getBrowser() {
 		return _browser;
 	}
@@ -334,6 +347,7 @@ public class BrowserWindow extends ApplicationWindow {
 
 	/**
 	 * send the browser widget a command as defined by the cmd constant defines.
+	 * @param cmd
 	 * 
 	 * @return true if the command was successful.
 	 */
@@ -359,17 +373,5 @@ public class BrowserWindow extends ApplicationWindow {
 
 		}
 		return false;
-	}
-
-	public void setStartSize(Point pp) {
-		_size = pp;
-	}
-
-	public void setStartSize(int x, int y) {
-		_size = new Point(x, y);
-	}
-
-	protected Point getInitialSize() {
-		return _size;
 	}
 }

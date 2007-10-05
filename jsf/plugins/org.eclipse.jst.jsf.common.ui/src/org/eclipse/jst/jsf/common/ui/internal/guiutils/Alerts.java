@@ -42,7 +42,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 public class Alerts {
 	// this is used for junit testing to turn off all alerts and return the
 	// default on yes/no dialogs.
-	public static boolean _noAlerts = false;
+	private static boolean _noAlerts = false;
 
 	private ResourceBundle _rb;
 
@@ -660,8 +660,10 @@ public class Alerts {
 	 * Returns the standard display to be used. The method first checks, if the
 	 * thread calling this method has an associated dispaly. If so, this display
 	 * is returned. Otherwise the method returns the default display.
+	 * 
+	 * TODO: should probably use the workbench display
 	 */
-	public Display getStandardDisplay() {
+	private Display getStandardDisplay() {
 		Display display = Display.getCurrent();
 		if (display == null) {
 			display = Display.getDefault();
@@ -672,7 +674,7 @@ public class Alerts {
 	/**
 	 * Returns the string from the resource bundle, or 'key' if not found.
 	 */
-	public String getResourceString(String key) {
+	private String getResourceString(String key) {
 		if (key == null) {
 			return null;
 		}

@@ -20,7 +20,6 @@ import org.eclipse.jface.action.IAction;
 import org.eclipse.jst.jsf.common.ui.JSFUICommonPlugin;
 import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.PlatformUI;
@@ -56,8 +55,6 @@ public class OverviewSection extends SectionPart {
 	private String helpContextId;
 
 	private String helpTooltip;
-
-	protected FormEditor editor;
 
 	/**
 	 * @param editorId 
@@ -96,7 +93,7 @@ public class OverviewSection extends SectionPart {
 		init();
 
 		Composite client = this.toolkit.createComposite(getSection());
-		createClient(client, this.toolkit);
+		//createClient(client, this.toolkit);
 		getSection().setClient(client);
 	}
 
@@ -111,7 +108,6 @@ public class OverviewSection extends SectionPart {
 		super(managedForm.getForm().getBody(), toolkit,
 				ExpandableComposite.TITLE_BAR | style);
 		super.initialize(managedForm);
-		this.editor = editor;
 		this.toolkit = toolkit;
 
 		this.textClient = this.toolkit.createComposite(getSection(), SWT.NONE);
@@ -120,13 +116,20 @@ public class OverviewSection extends SectionPart {
 		init();
 	}
 
+	/**
+	 * @param editor
+	 * @param managedForm
+	 * @param toolkit
+	 * @param style
+	 * @param helpContextId
+	 * @param helpTooltip
+	 */
 	public OverviewSection(FormEditor editor, IManagedForm managedForm,
 			FormToolkit toolkit, int style, String helpContextId,
 			String helpTooltip) {
 		super(managedForm.getForm().getBody(), toolkit,
 				ExpandableComposite.TITLE_BAR | style);
 		super.initialize(managedForm);
-		this.editor = editor;
 		this.toolkit = toolkit;
 
 		this.textClient = toolkit.createComposite(getSection(), SWT.NONE);
@@ -136,9 +139,12 @@ public class OverviewSection extends SectionPart {
 		init();
 	}
 
+	/**
+	 * 
+	 */
 	public void initialize() {
 		Composite client = toolkit.createComposite(getSection());
-		createClient(client, toolkit);
+		//createClient(client, toolkit);
 		getSection().setClient(client);
 	}
 
@@ -182,26 +188,6 @@ public class OverviewSection extends SectionPart {
 		 * Composite client = _toolkit.createComposite(getSection());
 		 * createClient(client, _toolkit); getSection().setClient(client);
 		 */
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.update.ui.forms.internal.FormSection#createClient(org.eclipse.swt.widgets.Composite,
-	 *      org.eclipse.update.ui.forms.internal.FormWidgetFactory)
-	 */
-	public Composite createClient(Composite container, FormToolkit factory) {
-		return null;
-	}
-
-	protected Composite createClientContainer(Composite parent, int span,
-			FormToolkit toolkit_) {
-		Composite container = toolkit_.createComposite(parent);
-		GridLayout layout = new GridLayout();
-		layout.marginWidth = layout.marginHeight = 2;
-		layout.numColumns = span;
-		container.setLayout(layout);
-		return container;
 	}
 
 	/**
@@ -260,6 +246,8 @@ public class OverviewSection extends SectionPart {
 
 	/**
 	 * Get the extension elements for the Introduction pages
+	 * @param extensionPoint 
+	 * @return the configuration element
 	 */
 	public IConfigurationElement getExtensions(String extensionPoint) {
 		// find all service editor page extensions
@@ -286,50 +274,12 @@ public class OverviewSection extends SectionPart {
 		return element;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.sybase.stf.service.framework.forms.ISESection#setEditor()
-	 */
-	public void setEditor(FormEditor editor) {
-		this.editor = editor;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.sybase.stf.service.framework.forms.ISESection#getEditor()
-	 */
-	public FormEditor getEditor() {
-		return editor;
-	}
-
-	public void setText(String text) {
+	private void setText(String text) {
 		getSection().setText(text);
 	}
 
-	public void setDescription(String text) {
+	private void setDescription(String text) {
 		getSection().setDescription(text);
 
 	}
-
-	public void setLayoutData(Object layoutData) {
-		getSection().setLayoutData(layoutData);
-	}
-
-	public void setExpanded(boolean expanded) {
-		getSection().setExpanded(expanded);
-	}
-
-	/**
-	 * @return Returns the _helpImage.
-	 */
-	public ImageHyperlink getHelpImage() {
-		return helpImage;
-	}
-
-	public void setEditorID(String id) {
-		editorId = id;
-	}
-
 }

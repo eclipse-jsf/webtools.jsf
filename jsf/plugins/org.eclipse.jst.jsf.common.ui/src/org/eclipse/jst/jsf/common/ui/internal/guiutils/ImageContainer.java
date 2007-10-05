@@ -95,6 +95,7 @@ public class ImageContainer extends Composite {
 	/**
 	 * @param image
 	 *            The image to set.
+	 * @param bCleanupImage 
 	 */
 	public void setImage(Image image, boolean bCleanupImage) {
 		_image = image;

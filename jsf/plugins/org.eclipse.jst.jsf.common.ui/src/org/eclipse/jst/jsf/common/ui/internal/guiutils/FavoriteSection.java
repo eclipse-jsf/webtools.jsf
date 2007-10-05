@@ -35,10 +35,20 @@ public abstract class FavoriteSection {
 
 	private Combo _favoriteCombo;
 
+	/**
+	 * @param plugin
+	 * @param favoriteName
+	 */
 	public FavoriteSection(AbstractUIPlugin plugin, String favoriteName) {
 		_favorites = new FavoriteConfigurations(plugin, favoriteName);
 	}
 
+	/**
+	 * @param parent
+	 * @param horizontalSpan
+	 * @param comboMinWidth
+	 * @return the combo
+	 */
 	public Combo createFavoriteGroup(Composite parent, int horizontalSpan,
 			int comboMinWidth) {
 		Group favGroup = SWTUtils.createGroup(parent, JSFUICommonPlugin
