@@ -11,12 +11,16 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.meta.internal;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.xml.parsers.FactoryConfigurationError;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
@@ -32,6 +36,7 @@ import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.meta.ICMRegistry;
 import org.eclipse.jst.pagedesigner.meta.IElementDescriptor;
 import org.osgi.framework.Bundle;
+import org.xml.sax.SAXException;
 
 /**
  * XXX: temp implementation. In the future, will need add more things to allow
@@ -50,6 +55,9 @@ public class CMRegistry implements ICMRegistry {
 
 	private static CMRegistry _instance = null;
 
+	/**
+	 * @return the singleton instance
+	 */
 	public static ICMRegistry getInstance() {
 		if (_instance == null) {
 			_instance = new CMRegistry();
@@ -123,10 +131,15 @@ public class CMRegistry implements ICMRegistry {
 						SimpleCMRegistry reg = new SimpleCMRegistry(uri,
 								cmFileUrl);
 						_contributedRegistries.add(reg);
-					} catch (Exception ex) {
-						// will not happen. skip
-						ex.printStackTrace();
-					}
+					} catch (ParserConfigurationException e) {
+                        PDPlugin.getLogger(getClass()).error(new Throwable(e));
+                    } catch (FactoryConfigurationError e) {
+                        PDPlugin.getLogger(getClass()).error(new Throwable(e));                    
+                    } catch (SAXException e) {
+                        PDPlugin.getLogger(getClass()).error(new Throwable(e));
+                    } catch (IOException e) {
+                        PDPlugin.getLogger(getClass()).error(new Throwable(e));
+                    }
 				}
 				String className = eles[i].getAttribute("class");
 				if (className != null && className.length() > 0) {
@@ -137,8 +150,7 @@ public class CMRegistry implements ICMRegistry {
 							_contributedRegistries.add(obj);
 						}
 					} catch (CoreException e) {
-						// ignore the exception
-						e.printStackTrace();
+					    PDPlugin.getLogger(getClass()).error(new Throwable(e));
 					}
 				}
 			}
