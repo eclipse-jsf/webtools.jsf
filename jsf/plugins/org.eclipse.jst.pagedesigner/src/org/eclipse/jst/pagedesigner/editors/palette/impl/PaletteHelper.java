@@ -131,6 +131,28 @@ public class PaletteHelper {
 				String label1 = ((PaletteEntry)o1).getLabel();
 				String label2 = ((PaletteEntry)o2).getLabel();
 				
+				if (label1 == null)
+				{
+				    // if both null, then equal
+				    if (label2 == null)
+				    {
+				        return 0;
+				    }
+				    // otherwise, sort label 2 before
+			        return 1;
+				}
+				
+				
+				if (label2 == null)
+				{
+				    // if both null then equal
+				    if (label1 == null)
+				    {
+				        return 0;
+				    }
+				    // if label1 not null, then sort it first
+				    return -1;
+				}
 				return label1.compareTo(label2);
 			}
 			
