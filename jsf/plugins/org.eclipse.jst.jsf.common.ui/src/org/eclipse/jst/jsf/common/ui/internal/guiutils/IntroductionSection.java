@@ -16,7 +16,6 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.core.runtime.Plugin;
 import org.eclipse.help.HelpSystem;
 import org.eclipse.help.IContext;
 import org.eclipse.help.IHelpResource;
@@ -52,6 +51,9 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
  * workspace service editors intro page.
  * 
  * this was original written by Collinsc
+ * 
+ * TODO: Should this be moved into the facesconfig ui plugin since it is only
+ * really used there?
  * 
  * @author collinsc,jchoi
  */
@@ -209,39 +211,57 @@ public class IntroductionSection extends SectionPart {
 
 		if (iconPath != null && iconPath.length() > 0) {
 			// add an icon to the page
+			String iconName;
+			if (iconPath.indexOf(IPath.SEPARATOR) != -1) {
+				iconName = new Path(iconPath).lastSegment();
+			} else {
+				iconName = iconPath;
+			}
 
-			if (iconPath != null) {
-				String iconName;
-				if (iconPath.indexOf(IPath.SEPARATOR) != -1) {
-					iconName = new Path(iconPath).lastSegment();
-				} else {
-					iconName = iconPath;
-				}
-
-				Plugin plugin = Platform.getPlugin(element
-						.getDeclaringExtension().getContributor().getName());
-				if (plugin instanceof AbstractUIPlugin) {
-					ImageRegistry imageRegistry = ((AbstractUIPlugin) plugin)
-							.getImageRegistry();
-					Image image = imageRegistry.get(iconName);
-					if (image == null) {
-						ImageDescriptor imageDescriptor = AbstractUIPlugin
-								.imageDescriptorFromPlugin(
-										element.getDeclaringExtension()
-												.getContributor().getName(), iconPath);
-						imageRegistry.put(iconName, imageDescriptor);
-						image = imageRegistry.get(iconName);
+			ImageDescriptor imageDescriptor = AbstractUIPlugin
+					.imageDescriptorFromPlugin(
+							element.getDeclaringExtension()
+									.getContributor().getName(), iconPath);
+			
+			if (imageDescriptor != null)
+			{
+				ImageRegistry imageRegistry =
+					JSFUICommonPlugin.getDefault().getImageRegistry();
+				
+				
+				Image image = imageRegistry.get(iconName);
+				
+				if (image == null)
+				{
+					image = imageDescriptor.createImage();
+					
+					if (image != null)
+					{
+						imageRegistry.put(iconName, image);
 					}
-
+					else
+					{
+						image = ImageDescriptor.getMissingImageDescriptor().createImage();
+					}
+				}
+				
+				if (image != null)
+				{
 					ImageContainer img = new ImageContainer(parent);
 					img.setImage(image);
 					TableWrapData td = new TableWrapData();
 					td.rowspan = 2;
 					img.setLayoutData(td);
 				}
+				else
+				{
+					JSFUICommonPlugin.getLogger(this.getClass()).error(new Throwable("Image not created for "+element));
+				}
 			}
-
-			
+			else
+			{
+				JSFUICommonPlugin.getLogger(this.getClass()).error(new Throwable("Image Descriptor not found for "+element));
+			}
 		}
 
 		if (heading != null && heading.length() > 0) {
