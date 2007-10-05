@@ -43,6 +43,9 @@ public class FC2PFSynchronizer extends AdapterImpl {
 	private static final Logger logger = EditorPlugin
 			.getLogger(FC2PFSynchronizer.class);
 
+	/**
+	 * @param transformer
+	 */
 	public FC2PFSynchronizer(FC2PFTransformer transformer) {
 		this.transformer = transformer;
 	}

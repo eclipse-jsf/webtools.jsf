@@ -34,6 +34,8 @@ public class TransformUtil {
 
 	/**
 	 * To see if the faces-config element is on a valid hirachy.
+	 * @param object 
+	 * @return true if object's root ancestor is a facesConfig model
 	 */
 	public static boolean isValidFacesConfigElement(EObject object) {
 		EObject parent = EcoreUtil.getRootContainer(object);
@@ -43,6 +45,8 @@ public class TransformUtil {
 
 	/**
 	 * To see if the pageflow element is on a valid hirachy.
+	 * @param element 
+	 * @return true if element's root ancestor is a page flow element
 	 */
 	public static boolean isValidPageflowElement(EObject element) {
 		EObject root = EcoreUtil.getRootContainer(element);
@@ -50,11 +54,19 @@ public class TransformUtil {
 		return result;
 	}
 
+	/**
+	 * @param link
+	 * @return true the link is valid
+	 */
 	public static boolean isValidLink(PageflowLink link) {
 		return isValidPageflowElement(link) && link.getSource() != null
 				&& link.getTarget() != null;
 	}
 
+	/**
+	 * @param rule
+	 * @return gets the from-view-id from rule
+	 */
 	public static String getFromViewID(NavigationRuleType rule) {
 		String result = "*";
 		if (rule.getFromViewId() != null) {
@@ -63,6 +75,10 @@ public class TransformUtil {
 		return result;
 	}
 
+	/**
+	 * @param navCase
+	 * @return gets the to-view-id from navCase
+	 */
 	public static String getToViewID(NavigationCaseType navCase) {
 		String result = "*";
 		if (navCase.getToViewId() != null) {
@@ -71,6 +87,11 @@ public class TransformUtil {
 		return result;
 	}
 
+	/**
+	 * @param path
+	 * @param pageflow
+	 * @return get pageflowpage in pageflow corresponding to path
+	 */
 	public static PageflowPage findPage(String path, Pageflow pageflow) {
 		List nodes = pageflow.getNodes();
 		for (int i = 0; i < nodes.size(); i++) {
@@ -85,6 +106,12 @@ public class TransformUtil {
 		return null;
 	}
 
+	/**
+	 * @param action
+	 * @param outcome
+	 * @param pageflow
+	 * @return find the end case
+	 */
 	public static PageflowNode findCaseEnd(PageflowPage action,
 			FromOutcomeType outcome, Pageflow pageflow) {
 		// TODO: find a case end in pageflow model

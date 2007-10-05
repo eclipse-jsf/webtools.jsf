@@ -60,8 +60,14 @@ public class FC2PFTransformer extends AdapterImpl {
 	// For code debug.
 	private static final boolean DEBUG = false;
 
+	/**
+	 * the first notification event type after the defaults
+	 */
 	public static final int MY_NOTIFICATION_TYPE = Notification.EVENT_TYPE_COUNT + 1;
 
+	/**
+	 * the first notification event type after MY_NOTIFICATION_TYPE
+	 */
 	public static final int MY_NOTIFICATION_TYPE1 = MY_NOTIFICATION_TYPE + 1;
 
 	/**
@@ -98,11 +104,17 @@ public class FC2PFTransformer extends AdapterImpl {
 	 */
 	FacesConfigType facesConfig;
 
+	/**
+	 * Default constructor
+	 */
 	public FC2PFTransformer() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * @param listenToNotify
+	 */
 	public void setListenToNotify(boolean listenToNotify) {
 		this.listenToNotify = listenToNotify;
 	}
@@ -457,11 +469,17 @@ public class FC2PFTransformer extends AdapterImpl {
 		adapt(facesConfig);
 	}
 
+	/**
+	 * @param facesConfig
+	 */
 	public void setFacesConfig(FacesConfigType facesConfig) {
 		this.facesConfig = facesConfig;
 		refreshFCAdapter(facesConfig);
 	}
 
+	/**
+	 * @param pageflow
+	 */
 	public void setPageflow(Pageflow pageflow) {
 		this.pageflow = pageflow;
 		pageflow.eAdapters().add(this);
@@ -499,6 +517,10 @@ public class FC2PFTransformer extends AdapterImpl {
 		}
 	}
 
+	/**
+	 * @param object
+	 * @return true if this transformer adapts object
+	 */
 	public boolean isAdapted(EObject object) {
 		if (object != null) {
 			Iterator adapters = object.eAdapters().iterator();
@@ -513,6 +535,9 @@ public class FC2PFTransformer extends AdapterImpl {
 		return false;
 	}
 
+	/**
+	 * clear the internal maps
+	 */
 	public void clearCaches() {
 		mapPaths2PF.clear();
 		mapCases2Links.clear();
@@ -543,6 +568,10 @@ public class FC2PFTransformer extends AdapterImpl {
 	    // do nothing
 	}
 
+	/**
+	 * @param caseType
+	 * @return the from view id in caseType
+	 */
 	public static FromViewIdType getSource(NavigationCaseType caseType) {
 		if (caseType.eContainer() instanceof NavigationRuleType) {
 			NavigationRuleType rule = (NavigationRuleType) caseType
@@ -660,6 +689,9 @@ public class FC2PFTransformer extends AdapterImpl {
 
 	/**
 	 * Update pageflow model elements against faces-config navigation case.
+	 * @param pageflow_ 
+	 * @param caseFC 
+	 * @return true if the pageflow was changed
 	 */
 	public boolean updatePageflowElements(Pageflow pageflow_,
 			NavigationCaseType caseFC) {
@@ -797,27 +829,6 @@ public class FC2PFTransformer extends AdapterImpl {
 		return null;
 	}
 
-	public PageflowLink createPFLink(PageflowNode start, PageflowNode target_,
-			NavigationCaseType caseFC) {
-		PageflowLink link = null;
-		String fromOutcome = caseFC.getFromOutcome() != null ? caseFC
-				.getFromOutcome().getTextContent() : null;
-		String action = caseFC.getFromAction() != null ? caseFC.getFromAction()
-				.getTextContent() : null;
-		NavigationRuleType rule = (NavigationRuleType) caseFC.eContainer();
-		link = createPFLink(fromOutcome);
-		link.setFromaction(action);
-		link.setSource(start);
-		link.setTarget(target_);
-		start.getOutlinks().add(link);
-		target_.getInlinks().add(link);
-		// The reference.
-		link.getFCElements().add(caseFC);
-		start.getFCElements().add(rule.getFromViewId());
-		target_.getFCElements().add(caseFC.getToViewId());
-		return link;
-	}
-
 	/**
 	 * create a new PFLink object according to fromOutcome attribute
 	 * 
@@ -837,6 +848,9 @@ public class FC2PFTransformer extends AdapterImpl {
 
 	/**
 	 * create a new PFLink object according to fromOutcome attribute
+	 * @param start 
+	 * @param target_ 
+	 * @param action 
 	 * 
 	 * @param fromOutcome -
 	 *            PFLink's fromOutcome attribute
@@ -910,26 +924,46 @@ public class FC2PFTransformer extends AdapterImpl {
 		}
 	}
 
+	/**
+	 * @return true if is listening to notifications and not
+	 * currently in an event
+	 */
 	public boolean isListenToNotify() {
 		return listenToNotify && !isInEvent;
 	}
 
-	public boolean isInEvent() {
-		return isInEvent;
-	}
+	/**
+	 * @return true if in event
+	 */
+//	public boolean isInEvent() {
+//		return isInEvent;
+//	}
 
+	/**
+	 * @param isInEvent
+	 */
 	public void setInEvent(boolean isInEvent) {
 		this.isInEvent = isInEvent;
 	}
 
+	/**
+	 * @return the faces config model
+	 */
 	public FacesConfigType getFacesConfig() {
 		return facesConfig;
 	}
 
+	/**
+	 * @return the root page flow
+	 */
 	public Pageflow getPageflow() {
 		return pageflow;
 	}
 
+	/**
+	 * @param value
+	 * @return a new fromViewId with the text content set to value
+	 */
 	public static FromViewIdType createRLFromViewID(String value) {
 		FromViewIdType fromView = FacesConfigFactory.eINSTANCE
 				.createFromViewIdType();
@@ -937,6 +971,10 @@ public class FC2PFTransformer extends AdapterImpl {
 		return fromView;
 	}
 
+	/**
+	 * @param value
+	 * @return a new to view with the text content set to value
+	 */
 	public static ToViewIdType createFCToViewID(String value) {
 		ToViewIdType toView = FacesConfigFactory.eINSTANCE.createToViewIdType();
 		toView.setTextContent(value);

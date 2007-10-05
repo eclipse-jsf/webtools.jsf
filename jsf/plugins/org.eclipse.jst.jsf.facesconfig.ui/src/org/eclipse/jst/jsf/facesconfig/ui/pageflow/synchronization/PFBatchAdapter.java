@@ -24,22 +24,21 @@ public abstract class PFBatchAdapter extends AdapterImpl {
 
 	AbstractGraphicalEditPart editPart;
 
+	/**
+	 * @param msg
+	 * @return true postponement needed
+	 */
 	public boolean isNeedPostpone(Notification msg) {
 		return needPostpone
 				&& !(msg.getEventType() == FC2PFTransformer.MY_NOTIFICATION_TYPE || msg
 						.getEventType() == FC2PFTransformer.MY_NOTIFICATION_TYPE1);
 	}
 
+	/**
+	 * @param needPostpone
+	 */
 	public void setNeedPostpone(boolean needPostpone) {
 		this.needPostpone = needPostpone;
-	}
-
-	public AbstractGraphicalEditPart getEditPart() {
-		return editPart;
-	}
-
-	public void setEditPart(AbstractGraphicalEditPart editPart) {
-		this.editPart = editPart;
 	}
 
 	final public void notifyChanged(Notification msg) {
@@ -48,6 +47,9 @@ public abstract class PFBatchAdapter extends AdapterImpl {
 		}
 	}
 
+	/**
+	 * @param notification
+	 */
 	abstract public void doNotifyChanged(Notification notification);
 
 }
