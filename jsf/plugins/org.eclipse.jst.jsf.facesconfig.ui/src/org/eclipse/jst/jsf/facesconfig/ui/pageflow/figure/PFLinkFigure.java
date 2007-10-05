@@ -91,10 +91,16 @@ public class PFLinkFigure extends PolylineConnection {
 		}
 	}
 
+	/**
+	 * Set the icon image to null
+	 */
 	public void clearIcon() {
 		setImage(null);
 	}
 
+	/**
+	 * Set the label to empty string
+	 */
 	public void clearOutcome() {
 		setLabel("");
 	}
@@ -118,6 +124,9 @@ public class PFLinkFigure extends PolylineConnection {
 		textLabel.setIcon(image);
 	}
 
+	/**
+	 * Set the action image
+	 */
 	public void setActionImage() {
 		ImageDescriptor imageDescriptor = PageflowElementEditPart.IMG_ACTION;
 		Image image = EditorPlugin.getDefault().getImageRegistry().get(
@@ -131,6 +140,9 @@ public class PFLinkFigure extends PolylineConnection {
 		setImage(image);
 	}
 
+	/**
+	 * @return the icon image
+	 */
 	public Image getImage() {
 		if (textLabel != null)
         {
@@ -139,10 +151,9 @@ public class PFLinkFigure extends PolylineConnection {
         return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.sybase.stf.gem.diagram.editor.figures.IBaseFigure#setToolTipText()
+
+	/**
+	 * @param text
 	 */
 	public void setToolTipText(String text) {
 		Label toolTipLabel = null;
@@ -155,14 +166,14 @@ public class PFLinkFigure extends PolylineConnection {
 		super.setToolTip(toolTipLabel);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.sybase.stf.gem.diagram.editor.figures.IBaseFigure#getToolTipText()
+	/**
+	 * @return the tool tip text or null if none
 	 */
 	public String getToolTipText() {
 		if (getToolTip() != null)
+		{
 			return ((Label) getToolTip()).getText();
+		}
 		return null;
 	}
 

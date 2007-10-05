@@ -55,6 +55,9 @@ public class PageflowNodeFigure extends Figure {
 	/** the text placement for the label */
 	private int textPlacement = PositionConstants.SOUTH;
 
+	/**
+	 * Default constructor
+	 */
 	public PageflowNodeFigure() {
 		setLayoutManager(new FlowLayout());
 
@@ -348,10 +351,9 @@ public class PageflowNodeFigure extends Figure {
 			label.setTextPlacement(where);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.sybase.stf.gem.diagram.editor.figures.IBaseFigure#setToolTipText()
+
+	/**
+	 * @param text
 	 */
 	public void setToolTipText(String text) {
 		Label toolTipLabel = null;
@@ -363,11 +365,8 @@ public class PageflowNodeFigure extends Figure {
 
 		super.setToolTip(toolTipLabel);
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.sybase.stf.gem.diagram.editor.figures.IBaseFigure#getToolTipText()
+	/**
+	 * @return the figure's tool tip text or null if none
 	 */
 	public String getToolTipText() {
 		if (getToolTip() != null)
