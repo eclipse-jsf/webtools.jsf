@@ -46,6 +46,10 @@ import org.w3c.dom.stylesheets.StyleSheetList;
 public class CSSUtil {
 	private static StyleSheet _userAgentDefault;
 
+	/**
+	 * @param doc
+	 * @return the css classes
+	 */
 	public static String[] getCSSClasses(Document doc) {
 		Collection c = Collections.EMPTY_SET;
 		if (doc instanceof INodeNotifier) {
@@ -81,7 +85,7 @@ public class CSSUtil {
 	 * Get the css style of a node.
 	 * 
 	 * @param node
-	 * @return
+	 * @return the style
 	 */
 	public static ICSSStyle getCSSStyle(Element node) {
 		ICSSStyle style = null;
@@ -98,8 +102,8 @@ public class CSSUtil {
 	/**
 	 * Resolve the css style string from css style elements.
 	 * 
-	 * @param node
-	 * @return
+	 * @param style
+	 * @return the style string
 	 */
 	public static String resolveCSSStyle(ICSSStyle style) {
 		StringBuffer sb = new StringBuffer();
@@ -130,7 +134,7 @@ public class CSSUtil {
 	 *            the element.
 	 * @param pseudoName
 	 *            the pseudoname of the element
-	 * @return
+	 * @return the style declaration
 	 */
 	public static CSSStyleDeclaration getCSSDeclaration(Element element,
 			String pseudoName) {
@@ -180,7 +184,7 @@ public class CSSUtil {
 	 *            the element.
 	 * @param pseudoName
 	 *            the pseudoname of the element
-	 * @return
+	 * @return the style declaration
 	 */
 	public static CSSStyleDeclaration getDefaultCSSDeclaration(Element element,
 			String pseudoName) {
@@ -225,14 +229,21 @@ public class CSSUtil {
 	private static StyleSheet getUserAgentDefaultStyleSheet(Element element)
 			throws UnsupportedEncodingException, IOException {
 		if (_userAgentDefault == null) {
-			InputStream input = CSSUtil.class
+			InputStream input = null;
+			
+			try
+			{
+				input = CSSUtil.class
 					.getResourceAsStream(IJMTConstants.USERAGENT);
-			IStructuredModel model = StructuredModelManager.getModelManager()
-					.getModelForEdit(IJMTConstants.USERAGENT, input, null);
-			ICSSModel cssmodel = (ICSSModel) model;
-			_userAgentDefault = (StyleSheet) cssmodel.getDocument();
-
-			ResourceUtils.ensureClosed(input);
+				IStructuredModel model = StructuredModelManager.getModelManager()
+						.getModelForEdit(IJMTConstants.USERAGENT, input, null);
+				ICSSModel cssmodel = (ICSSModel) model;
+				_userAgentDefault = (StyleSheet) cssmodel.getDocument();
+			}
+			finally
+			{
+				ResourceUtils.ensureClosed(input);
+			}
 		}
 
 		return _userAgentDefault;

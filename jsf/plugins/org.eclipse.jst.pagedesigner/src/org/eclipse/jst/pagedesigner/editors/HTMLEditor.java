@@ -479,30 +479,32 @@ public class HTMLEditor extends PostSelectionMultiPageEditorPart implements
 			try {
 				contents = ((IStorageEditorInput) input).getStorage()
 						.getContents();
+				if (contents == null) {
+					throw new PartInitException("Editor could not be open on "
+							+ input.getName());
+				}
 			} catch (CoreException noStorageExc) {
 				// Error in geting storage contents
 				_log.error("Error.HTMLEditor.1", noStorageExc); //$NON-NLS-1$
 			}
-			if (contents == null) {
-				// throw new
-				// PartInitException(ResourceHandler.getString("32concat_EXC_",
-				// (new Object[] {
-				// input.getName()}))); //$NON-NLS-1$
-				throw new PartInitException("Editor could not be open on "
-						+ input.getName());
+			finally
+			{
+				ResourceUtils.ensureClosed(contents);
 			}
-            ResourceUtils.ensureClosed(contents);
 		}
 	}
 
-	/*
-	 * (non-Javadoc) Initializes the editor part with a site and input. <p>
+	/**
+	 * Initializes the editor part with a site and input. <p>
 	 * Subclasses of <code> EditorPart </code> must implement this method.
 	 * Within the implementation subclasses should verify that the input type is
 	 * acceptable and then save the site and input. Here is sample code: </p><pre>
 	 * if (!(input instanceof IFileEditorInput)) throw new
 	 * PartInitException("Invalid Input: Must be IFileEditorInput");
 	 * setSite(site); setInput(editorInput); </pre>
+	 * @param input 
+	 * @param coreException 
+	 * @return true if the input doesn't exist 
 	 */
 	protected boolean fileDoesNotExist(IFileEditorInput input,
 			Throwable[] coreException) {
@@ -511,18 +513,21 @@ public class HTMLEditor extends PostSelectionMultiPageEditorPart implements
 		if ((!(input.exists())) || (!(input.getFile().exists()))) {
 			result = true;
 		} else {
-			try {
+			try 
+			{
 				inStream = input.getFile().getContents(true);
-			} catch (CoreException e) {
+			} 
+			catch (CoreException e) 
+			{
 				// very likely to be file not found
 				result = true;
 				coreException[0] = e;
 				// The core has exception
 				_log.error("Error.HTMLEditor.3", e); //$NON-NLS-1$
-			} finally {
-				if (input != null) {
-					ResourceUtils.ensureClosed(inStream);
-				}
+			} 
+			finally 
+			{
+				ResourceUtils.ensureClosed(inStream);
 			}
 		}
 		return result;

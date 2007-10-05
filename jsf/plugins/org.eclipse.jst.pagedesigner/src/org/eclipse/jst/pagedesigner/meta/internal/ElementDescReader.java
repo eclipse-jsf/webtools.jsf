@@ -55,6 +55,9 @@ public class ElementDescReader {
 
 	private String[] _optimizedLocales = null;
 
+	/**
+	 * @param url
+	 */
 	public ElementDescReader(URL url) {
 		this._url = url;
 	}
@@ -62,8 +65,6 @@ public class ElementDescReader {
 	/**
 	 * Read xml information and fill the map
 	 * 
-	 * @param stream
-	 *            xml file stream
 	 * @param map
 	 * @throws ParserConfigurationException
 	 * @throws FactoryConfigurationError
@@ -74,9 +75,18 @@ public class ElementDescReader {
 			FactoryConfigurationError, SAXException, IOException {
 		DocumentBuilder builder = DocumentBuilderFactory.newInstance()
 				.newDocumentBuilder();
-		InputStream stream = this._url.openStream();
-		Document doc = builder.parse(stream);
-		ResourceUtils.ensureClosed(stream);
+		
+		InputStream stream = null; 
+		Document doc = null;
+		try
+		{
+			this._url.openStream();
+			doc = builder.parse(stream);
+		}
+		finally
+		{
+			ResourceUtils.ensureClosed(stream);
+		}
 
 		Element taglib = doc.getDocumentElement();
 		String nameSpace = taglib.getAttribute("uri");
