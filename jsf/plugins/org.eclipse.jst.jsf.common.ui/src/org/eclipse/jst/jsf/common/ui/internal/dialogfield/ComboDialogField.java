@@ -12,7 +12,6 @@
 package org.eclipse.jst.jsf.common.ui.internal.dialogfield;
 
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.Map.Entry;
 
 import org.eclipse.swt.SWT;
@@ -59,6 +58,9 @@ public class ComboDialogField extends DialogFieldBase implements
 
 	private Map _entryMap;
 
+	/**
+	 * @param flags
+	 */
 	public ComboDialogField(int flags) {
 		super();
 		_text = ""; //$NON-NLS-1$
@@ -95,7 +97,7 @@ public class ComboDialogField extends DialogFieldBase implements
 		return 3;
 	}
 
-	protected static GridData gridDataForCombo(int span) {
+	private static GridData gridDataForCombo(int span) {
 		GridData gd = new GridData();
 		gd.horizontalAlignment = GridData.FILL;
 		gd.grabExcessHorizontalSpace = false;
@@ -120,10 +122,12 @@ public class ComboDialogField extends DialogFieldBase implements
 
 	/**
 	 * Creates or returns the created combo control.
+	 * @param toolkit 
 	 * 
 	 * @param parent
 	 *            The parent composite or <code>null</code> when the widget
 	 *            has already been created.
+	 * @return the custom combo control
 	 */
 	public CCombo getComboControl(FormToolkit toolkit, Composite parent) {
 		if (_comboControl == null) {
@@ -173,7 +177,7 @@ public class ComboDialogField extends DialogFieldBase implements
 		return _comboControl;
 	}
 
-	protected void handleDefaultSelection(SelectionEvent e) {
+	private void handleDefaultSelection(SelectionEvent e) {
 		// commit value
 		if (_pending) {
 			_pending = false;
@@ -181,7 +185,7 @@ public class ComboDialogField extends DialogFieldBase implements
 		}
 	}
 
-	protected void doFocusLost(FocusEvent e) {
+	private void doFocusLost(FocusEvent e) {
 		if (_pending) {
 			_pending = false;
 			dialogFieldApplied();
@@ -221,15 +225,10 @@ public class ComboDialogField extends DialogFieldBase implements
 
 	// ------ text access
 
-	/**
-	 * Gets the combo items.
-	 */
-	public String[] getItems() {
-		return _items;
-	}
 
 	/**
 	 * Sets the combo items. Triggers a dialog-changed event.
+	 * @param items 
 	 */
 	public void setItems(String[] items) {
 		_items = items;
@@ -238,19 +237,6 @@ public class ComboDialogField extends DialogFieldBase implements
 		}
 		_pending = false;
 		// dialogFieldChangedAndApplied();
-	}
-
-	public void setEntryMap(Map map) {
-		_entryMap = map;
-		if (_entryMap == null) {
-			_entryMap = new TreeMap();
-		}
-		Entry[] entries = (Entry[]) _entryMap.entrySet().toArray(new Entry[0]);
-		String[] items = new String[entries.length];
-		for (int i = 0; i < entries.length; i++) {
-			items[i] = entries[i].getValue().toString();
-		}
-		setItems(items);
 	}
 
 	/**
@@ -271,6 +257,7 @@ public class ComboDialogField extends DialogFieldBase implements
 
 	/**
 	 * Selects an item.
+	 * @param index 
 	 */
 	public void selectItem(int index) {
 		if (isOkToUse(_comboControl)) {
@@ -282,10 +269,6 @@ public class ComboDialogField extends DialogFieldBase implements
 			}
 		}
 		dialogFieldChangedAndApplied();
-	}
-
-	public int getSelectionIndex() {
-		return _selectionIndex;
 	}
 
 	/**

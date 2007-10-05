@@ -34,6 +34,9 @@ public class StringButtonDialogField extends StringDialogField {
 
 	private boolean _buttonEnabled;
 
+	/**
+	 * @param adapter
+	 */
 	public StringButtonDialogField(IStringButtonAdapter adapter) {
 		_stringButtonAdapter = adapter;
 		_browseButtonLabel = JSFUICommonPlugin
@@ -43,6 +46,7 @@ public class StringButtonDialogField extends StringDialogField {
 
 	/**
 	 * Sets the label of the button.
+	 * @param label 
 	 */
 	public void setButtonLabel(String label) {
 		_browseButtonLabel = label;
@@ -87,6 +91,13 @@ public class StringButtonDialogField extends StringDialogField {
 		return 4;
 	}
 
+	/**
+	 * @param toolkit
+	 * @param button
+	 * @param text
+	 * @param span
+	 * @return the grid data for the button
+	 */
 	protected static GridData gridDataForButton(FormToolkit toolkit,
 			Button button, Text text, int span) {
 		GridData gd = new GridData();
@@ -103,10 +114,12 @@ public class StringButtonDialogField extends StringDialogField {
 
 	/**
 	 * Creates or returns the created buttom widget.
+	 * @param toolkit 
 	 * 
 	 * @param parent
 	 *            The parent composite or <code>null</code> if the widget has
 	 *            already been created.
+	 * @return the button
 	 */
 	public Button getChangeControl(FormToolkit toolkit, Composite parent) {
 		if (_browseButton == null) {
@@ -137,6 +150,7 @@ public class StringButtonDialogField extends StringDialogField {
 
 	/**
 	 * Sets the enable state of the button.
+	 * @param enable 
 	 */
 	public void enableButton(boolean enable) {
 		if (isOkToUse(_browseButton)) {

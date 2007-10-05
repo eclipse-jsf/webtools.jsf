@@ -30,10 +30,10 @@ import org.eclipse.jst.jsf.common.ui.IFileFolderConstants;
 /**
  * @author mengbo
  */
-public class JavaSearchScope implements IJavaSearchScope {
-	private IProject _project;
+/*package*/ class JavaSearchScope implements IJavaSearchScope {
+	private final IProject _project;
 
-	private String _superType;
+	private final String _superType;
 
 	private HashSet _allowedTypeSet;
 
@@ -41,6 +41,10 @@ public class JavaSearchScope implements IJavaSearchScope {
 
 	private IProject[] _relativeProjects;
 
+	/**
+	 * @param project
+	 * @param superType
+	 */
 	public JavaSearchScope(IProject project, String superType) {
 		this._project = project;
 		this._superType = superType;
@@ -213,13 +217,5 @@ public class JavaSearchScope implements IJavaSearchScope {
 	 */
 	public String getSuperType() {
 		return _superType;
-	}
-
-	/**
-	 * @param superType
-	 *            The superType to set.
-	 */
-	public void setSuperType(String superType) {
-		this._superType = superType;
 	}
 }

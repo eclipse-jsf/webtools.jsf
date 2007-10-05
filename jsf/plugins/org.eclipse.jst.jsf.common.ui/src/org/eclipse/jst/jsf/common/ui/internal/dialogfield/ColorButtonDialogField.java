@@ -71,6 +71,10 @@ public class ColorButtonDialogField extends StyleComboDialogField {
     
     private ColorPalette    _colorPalette;
 
+	/**
+	 * @param flags
+	 * @param colorPalette
+	 */
 	public ColorButtonDialogField(int flags, ColorPalette colorPalette) {
 		super(flags);
 		_buttonEnabled = true;
@@ -149,6 +153,7 @@ public class ColorButtonDialogField extends StyleComboDialogField {
 
 	/**
 	 * Sets the enable state of the button.
+	 * @param enable 
 	 */
 	public void enableButton(boolean enable) {
 		if (isOkToUse(_button)) {
@@ -159,10 +164,12 @@ public class ColorButtonDialogField extends StyleComboDialogField {
 
 	/**
 	 * Creates or returns the created buttom widget.
+	 * @param toolkit 
 	 * 
 	 * @param parent
 	 *            The parent composite or <code>null</code> if the widget has
 	 *            already been created.
+	 * @return  the button widget
 	 */
 	public Button getChangeControl(FormToolkit toolkit, Composite parent) {
 		if (_button == null) {
@@ -246,12 +253,7 @@ public class ColorButtonDialogField extends StyleComboDialogField {
 	public int getNumberOfControls() {
 		return 4;
 	}
-
-	public StyleCombo getTextControl(FormToolkit toolkit, Composite parent) {
-		return getComboControl(toolkit, parent);
-	}
-
-	protected GridData gridDataForButton(int span) {
+	private GridData gridDataForButton(int span) {
 		GridData gd = new GridData();
 		gd.horizontalAlignment = GridData.FILL;
 		gd.grabExcessHorizontalSpace = false;

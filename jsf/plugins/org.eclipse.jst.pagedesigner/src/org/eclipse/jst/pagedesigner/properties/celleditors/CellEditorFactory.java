@@ -28,7 +28,7 @@ import org.eclipse.jst.pagedesigner.jsp.core.IJSPCoreConstants;
 import org.eclipse.jst.pagedesigner.meta.IAttributeCellEditorFactory;
 import org.eclipse.jst.pagedesigner.meta.IAttributeDescriptor;
 import org.eclipse.jst.pagedesigner.meta.IValueType;
-import org.eclipse.jst.pagedesigner.ui.dialogfields.ContextableClasspathResourceButtonDialogField;
+import org.eclipse.jst.pagedesigner.ui.dialogfields.ClasspathResourceButtonDialogField;
 import org.eclipse.jst.pagedesigner.ui.dialogfields.ContextableResourceButtonDialogField;
 import org.eclipse.jst.pagedesigner.ui.dialogfields.StyleButtonDialogField;
 import org.eclipse.jst.pagedesigner.utils.StructuredModelUtil;
@@ -414,7 +414,7 @@ public class CellEditorFactory implements IAttributeCellEditorFactory {
 			field.setToolTip(attr.getDescription());
 			return field;
 		} else if (IValueType.CLASSPATH_RESOURCE.equals(type)) {
-			ContextableClasspathResourceButtonDialogField field = new ContextableClasspathResourceButtonDialogField();
+			ClasspathResourceButtonDialogField field = new ClasspathResourceButtonDialogField();
 			field.setRequired(attr.isRequired());
 			field.setToolTip(attr.getDescription());
 			return field;

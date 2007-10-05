@@ -23,7 +23,7 @@ import org.eclipse.jst.jsf.common.ui.internal.utils.ResourceUtils;
  * 
  * @author mengbo
  */
-public class DialogFieldResources extends ResourceUtils {
+/*package*/ class DialogFieldResources extends ResourceUtils {
 	/** Create the logger for this class */
 	private static Logger _log = JSFUICommonPlugin
 			.getLogger(DialogFieldResources.class);

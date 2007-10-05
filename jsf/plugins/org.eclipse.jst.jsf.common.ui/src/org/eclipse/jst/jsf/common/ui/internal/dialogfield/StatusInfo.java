@@ -19,11 +19,16 @@ import org.eclipse.jst.jsf.common.ui.JSFUICommonPlugin;
  * A settable IStatus. Can be an error, warning, info or ok. For error, info and
  * warning states, a message describes the problem.
  * 
+ * TODO: couldn't have sub-classed Status?
+ * 
  * @author mengbo
  * @version 1.5
  */
-public class StatusInfo implements IStatus {
+/*package*/ class StatusInfo implements IStatus {
 
+	/**
+	 * a default status info for IStatus.OK
+	 */
 	public static final IStatus OK_STATUS = new StatusInfo();
 
 	private String fStatusMessage;
@@ -60,6 +65,7 @@ public class StatusInfo implements IStatus {
 
 	/**
 	 * Returns if the status' severity is WARNING.
+	 * @return true if severity is IStatus.WARNING
 	 */
 	public boolean isWarning() {
 		return fSeverity == IStatus.WARNING;
@@ -67,6 +73,7 @@ public class StatusInfo implements IStatus {
 
 	/**
 	 * Returns if the status' severity is INFO.
+	 * @return true if severity is INFO
 	 */
 	public boolean isInfo() {
 		return fSeverity == IStatus.INFO;
@@ -74,6 +81,7 @@ public class StatusInfo implements IStatus {
 
 	/**
 	 * Returns if the status' severity is ERROR.
+	 * @return true if severity is error
 	 */
 	public boolean isError() {
 		return fSeverity == IStatus.ERROR;

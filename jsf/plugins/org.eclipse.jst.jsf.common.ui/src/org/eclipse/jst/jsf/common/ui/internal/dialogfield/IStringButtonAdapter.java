@@ -17,6 +17,8 @@ package org.eclipse.jst.jsf.common.ui.internal.dialogfield;
  */
 public interface IStringButtonAdapter {
 
+	/**
+	 * @param field
+	 */
 	void changeControlPressed(DialogField field);
-
 }

@@ -22,12 +22,16 @@ import org.eclipse.swt.widgets.Composite;
 public class DialogFieldGroupPage extends WizardPage {
 	private DialogFieldGroup _group;
 
-	IDialogFieldChangeListener _defaultChangeListener = new IDialogFieldChangeListener() {
+	private IDialogFieldChangeListener _defaultChangeListener = new IDialogFieldChangeListener() {
 		public void dialogFieldChanged(DialogField field) {
 			validate();
 		}
 	};
 
+	/**
+	 * @param pageName
+	 * @param section
+	 */
 	public DialogFieldGroupPage(String pageName, DialogFieldGroup section) {
 		super(pageName);
 		_group = section;
@@ -52,11 +56,18 @@ public class DialogFieldGroupPage extends WizardPage {
 		this.setControl(container);
 	}
 
+	/**
+	 * @return the dialog field group
+	 */
 	public DialogFieldGroup getDialogFieldGroup() {
 		return _group;
 	}
 
-	public void validate() {
+	/**
+	 * validate all the dialog fields.  Updates
+	 * status line and sets page completion if there are no errors
+	 */
+	private void validate() {
 		IStatus[] statuses = _group.validateDialogFields();
 		IStatus status = StatusUtil.getMostSevere(statuses);
 		StatusUtil.applyToStatusLine(this, status);

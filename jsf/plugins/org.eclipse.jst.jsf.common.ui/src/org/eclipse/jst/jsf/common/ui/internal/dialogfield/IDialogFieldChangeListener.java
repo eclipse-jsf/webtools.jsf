@@ -21,6 +21,7 @@ public interface IDialogFieldChangeListener {
 
 	/**
 	 * The dialog field has changed.
+	 * @param field
 	 */
 	void dialogFieldChanged(DialogField field);
 }

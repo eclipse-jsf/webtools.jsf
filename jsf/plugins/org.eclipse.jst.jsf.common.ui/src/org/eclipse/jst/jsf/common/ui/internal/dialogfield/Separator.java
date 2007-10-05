@@ -27,6 +27,9 @@ public class Separator extends DialogFieldBase {
 
 	private int _style;
 
+	/**
+	 * Default constructor
+	 */
 	public Separator() {
 		this(SWT.NONE);
 	}
@@ -44,9 +47,13 @@ public class Separator extends DialogFieldBase {
 
 	/**
 	 * Creates the separator and fills it in a MGridLayout.
+	 * @param toolkit 
+	 * @param parent 
+	 * @param nColumns 
 	 * 
 	 * @param height
 	 *            The heigth of the separator
+	 * @return the controls or empty array
 	 */
 	public Control[] doFillIntoGrid(FormToolkit toolkit, Composite parent,
 			int nColumns, int height) {
@@ -73,6 +80,11 @@ public class Separator extends DialogFieldBase {
 		return 1;
 	}
 
+	/**
+	 * @param span
+	 * @param height
+	 * @return the grid data
+	 */
 	protected static GridData gridDataForSeperator(int span, int height) {
 		GridData gd = new GridData();
 		gd.horizontalAlignment = GridData.FILL;
@@ -86,12 +98,14 @@ public class Separator extends DialogFieldBase {
 
 	/**
 	 * Creates or returns the created separator.
+	 * @param toolkit 
 	 * 
 	 * @param parent
 	 *            The parent composite or <code>null</code> if the widget has
 	 *            already been created.
+	 * @return  the separator
 	 */
-	public Control getSeparator(FormToolkit toolkit, Composite parent) {
+	private Control getSeparator(FormToolkit toolkit, Composite parent) {
 		if (_separator == null) {
 			assertCompositeNotNull(parent);
 			if (toolkit != null) {

@@ -24,7 +24,7 @@ import org.eclipse.ui.dialogs.ISelectionStatusValidator;
  * @author mengbo
  * @version 1.5
  */
-public class TypedElementSelectionValidator implements
+/*package*/ class TypedElementSelectionValidator implements
 		ISelectionStatusValidator {
 
 	private IStatus _fgErrorStatus = new StatusInfo(IStatus.ERROR, ""); //$NON-NLS-1$

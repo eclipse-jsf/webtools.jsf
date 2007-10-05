@@ -24,8 +24,8 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jdt.ui.JavaElementComparator;
 import org.eclipse.jdt.ui.JavaElementLabelProvider;
-import org.eclipse.jdt.ui.JavaElementSorter;
 import org.eclipse.jdt.ui.StandardJavaElementContentProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.Viewer;
@@ -200,7 +200,7 @@ public class SourceFolderButtonDialogField extends StringButtonDialogField {
 		ElementTreeSelectionDialog dialog = new ElementTreeSelectionDialog(
 				getShell(), labelProvider, provider);
 		dialog.setValidator(validator);
-		dialog.setSorter(new JavaElementSorter());
+		dialog.setComparator(new JavaElementComparator());
 		// HibernateWizardPage.ChooseSourceContainerDialog.Title = Folder
 		// Selection
 		dialog

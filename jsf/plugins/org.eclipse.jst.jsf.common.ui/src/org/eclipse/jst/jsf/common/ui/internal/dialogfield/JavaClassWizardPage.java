@@ -17,14 +17,9 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Path;
-import org.eclipse.jdt.core.IClassFile;
-import org.eclipse.jdt.core.ICompilationUnit;
-import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
-import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaConventions;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
@@ -33,12 +28,12 @@ import org.eclipse.jdt.ui.wizards.NewClassWizardPage;
 /**
  * @author mengbo
  */
-public class JavaClassWizardPage extends NewClassWizardPage {
+/*package*/ class JavaClassWizardPage extends NewClassWizardPage {
 	private String _className;
 
-	private IProject _project;
+	private final IProject _project;
 
-	private InitialClassProperties _initialValues;
+	private final InitialClassProperties _initialValues;
 
 	private IJavaProject _javaProject;
 
@@ -46,26 +41,23 @@ public class JavaClassWizardPage extends NewClassWizardPage {
 
 	private final static String  SOURCE_COMPLIANCE_1_3 = JavaCore.VERSION_1_3;
 	
-	class InitialClassProperties {
+	static class InitialClassProperties {
 		// populate new wizard page
-		IType superClassType;
+		private String superClassName;
 
-		String superClassName;
+		private List interfacesName;
 
-		List interfacesName;
+		private String className;
 
-		String className;
+		private String classArgs;
 
-		String classArgs;
+		private String packageName;
 
-		String packageName;
+		private IPackageFragmentRoot packageFragmentRoot;
 
-		IPackageFragmentRoot packageFragmentRoot;
+		private IPackageFragment packageFragment;
 
-		IPackageFragment packageFragment;
-
-		public InitialClassProperties() {
-			this.superClassType = null;
+		InitialClassProperties() {
 			this.superClassName = ""; //$NON-NLS-1$
 			this.interfacesName = null;
 			this.className = null;
@@ -76,6 +68,12 @@ public class JavaClassWizardPage extends NewClassWizardPage {
 		}
 	}
 
+	/**
+	 * @param project
+	 * @param className
+	 * @param superClassName
+	 * @param interfacesName
+	 */
 	public JavaClassWizardPage(IProject project, String className,
 			String superClassName, List interfacesName) {
 		super();
@@ -96,10 +94,17 @@ public class JavaClassWizardPage extends NewClassWizardPage {
 		_initialValues.interfacesName = interfacesName;
 	}
 
+	/**
+	 * @param project
+	 * @param className
+	 */
 	public JavaClassWizardPage(IProject project, String className) {
 		this(project, className, null, null);
 	}
 
+	/**
+	 * Call when page is added to wizard to initialize
+	 */
 	public void init() {
 		initializeExpectedValues();
 		initializeWizardPage();
@@ -167,12 +172,15 @@ public class JavaClassWizardPage extends NewClassWizardPage {
 			if (_initialValues.superClassName == null) {
 				_initialValues.superClassName = "java.lang.Object"; //$NON-NLS-1$
 			}
-			_initialValues.superClassType = findTypeForName(_initialValues.superClassName);
+//			_initialValues.superClassType = findTypeForName(_initialValues.superClassName);
 		} catch (JavaModelException e) {
 			e.printStackTrace();// PDEPlugin.logException(e);
 		}
 	}
 
+	/**
+	 * initialize the wizard page
+	 */
 	protected void initializeWizardPage() {
 		setPackageFragmentRoot(_initialValues.packageFragmentRoot, true);
 		setPackageFragment(_initialValues.packageFragment, true);
@@ -191,24 +199,24 @@ public class JavaClassWizardPage extends NewClassWizardPage {
 				|| hasSuperClass, true);
 	}
 
-	private IType findTypeForName(String typeName) throws JavaModelException {
-		if (typeName == null || typeName.length() == 0) {
-			return null;
-		}
-		IType type = null;
-		String fileName = typeName.replace('.', '/') + ".java"; //$NON-NLS-1$
-		IJavaElement element = _javaProject.findElement(new Path(fileName));
-		if (element == null) {
-			return null;
-		}
-		if (element instanceof IClassFile) {
-			type = ((IClassFile) element).getType();
-		} else if (element instanceof ICompilationUnit) {
-			IType[] types = ((ICompilationUnit) element).getTypes();
-			type = types[0];
-		}
-		return type;
-	}
+//	private IType findTypeForName(String typeName) throws JavaModelException {
+//		if (typeName == null || typeName.length() == 0) {
+//			return null;
+//		}
+//		IType type = null;
+//		String fileName = typeName.replace('.', '/') + ".java"; //$NON-NLS-1$
+//		IJavaElement element = _javaProject.findElement(new Path(fileName));
+//		if (element == null) {
+//			return null;
+//		}
+//		if (element instanceof IClassFile) {
+//			type = ((IClassFile) element).getType();
+//		} else if (element instanceof ICompilationUnit) {
+//			IType[] types = ((ICompilationUnit) element).getTypes();
+//			type = types[0];
+//		}
+//		return type;
+//	}
 
 	/*
 	 * (non-Javadoc)
@@ -228,6 +236,9 @@ public class JavaClassWizardPage extends NewClassWizardPage {
 		}
 	}
 
+	/**
+	 * @return the class arguments or "" if not set
+	 */
 	public String getClassArgs() {
 		if (_initialValues.classArgs == null) {
 			return ""; //$NON-NLS-1$

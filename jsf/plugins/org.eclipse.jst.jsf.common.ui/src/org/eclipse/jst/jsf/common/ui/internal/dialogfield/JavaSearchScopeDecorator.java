@@ -26,9 +26,13 @@ import org.eclipse.jdt.core.search.IJavaSearchScope;
  * @author mengbo
  * @version 1.5
  */
-public class JavaSearchScopeDecorator implements IJavaSearchScope {
+/*package*/ class JavaSearchScopeDecorator implements IJavaSearchScope {
 	JavaSearchScope[] _scopes = new JavaSearchScope[0];
 
+	/**
+	 * @param project
+	 * @param superTypes
+	 */
 	public JavaSearchScopeDecorator(IProject project, List superTypes) {
 		List scopeList = new ArrayList();
 		if (superTypes != null) {

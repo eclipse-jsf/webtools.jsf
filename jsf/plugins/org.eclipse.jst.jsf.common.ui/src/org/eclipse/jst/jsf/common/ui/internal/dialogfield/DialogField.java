@@ -13,6 +13,7 @@ package org.eclipse.jst.jsf.common.ui.internal.dialogfield;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.forms.events.IHyperlinkListener;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
@@ -35,38 +36,72 @@ public interface DialogField {
 
 	/**
 	 * Sets the label of the dialog field.
+	 * @param labeltext 
 	 */
 	public abstract void setLabelText(String labeltext);
 
 	// ------ change listener
+	/**
+	 * Listener that is notified on a field change
+	 * @param listener
+	 */
 	public abstract void setDialogFieldChangeListener(
 			IDialogFieldChangeListener listener);
 
+	/**
+	 * Listener  that is notified on a field apply
+	 * @param listener
+	 */
 	public abstract void setDialogFieldApplyListener(
 			IDialogFieldApplyListener listener);
 
 	// ------- focus management
+	/**
+	 * Tries to set the focus to the dialog field. Returns <code>true</code>
+	 * if the dialog field can take focus. To be reimplemented by dialog field
+	 * implementors.
+	 * @return true if dialog field can take focus
+	 */
 	public abstract boolean setFocus();
 
-	// ------- layout helpers
+	/**
+	 * Creates all controls of the dialog field and fills it to a composite. The
+	 * composite is assumed to have <code>MGridLayout</code> as layout. The
+	 * dialog field will adjust its controls' spans to the number of columns
+	 * given. To be reimplemented by dialog field implementors.
+	 * @param toolkit 
+	 * @param parent 
+	 * @param nColumns 
+	 * @return the controls
+	 */
 	public abstract Control[] doFillIntoGrid(FormToolkit toolkit,
 			Composite parent, int nColumns);
 
 	/**
 	 * Returns the number of columns of the dialog field. To be reimplemented by
 	 * dialog field implementors.
+	 * @return the number of columns
 	 */
 	public abstract int getNumberOfControls();
 
 	// ------- ui creation
+	/**
+	 * @param _formToolkit
+	 * @param parent
+	 * @return the label control
+	 */
 	public abstract Control getLabelControl(FormToolkit _formToolkit,
 			Composite parent);
 
 	// --------- enable / disable management
+	/**
+	 * @param enabled
+	 */
 	public abstract void setEnabled(boolean enabled);
 
 	/**
 	 * Gets the enable state of the dialog field.
+	 * @return true if enabled is set
 	 */
 	public abstract boolean isEnabled();
 
@@ -97,7 +132,18 @@ public interface DialogField {
 	 */
 	public abstract void handleGrabHorizontal();
 
+	/**
+	 * @return true if is required field
+	 */
 	public abstract boolean isRequired();
 
+	/**
+	 * @param toolTip
+	 */
 	public abstract void setToolTip(String toolTip);
+	
+	/**
+	 * @return the field's enclosing shell or null if none
+	 */
+	public Shell getShell();
 }

@@ -37,18 +37,25 @@ public class StringDialogField extends DialogFieldBase implements
 
 	private ModifyListener _modifyListener;
 
-	private int _numRows = 1;
+	private int _numRows;
 
 	/**
 	 * whether there is change in the UI but not fire applied event yet.
 	 */
 	private boolean _pending = false;
 
+	/**
+	 * default constructor
+	 * numRows == 1
+	 */
 	public StringDialogField() {
-		super();
+		this(1);
 		_text = ""; //$NON-NLS-1$
 	}
 
+	/**
+	 * @param numRows
+	 */
 	public StringDialogField(int numRows) {
 		super();
 		_text = ""; //$NON-NLS-1$
@@ -93,6 +100,11 @@ public class StringDialogField extends DialogFieldBase implements
 		return gd;
 	}
 
+	/**
+	 * @param span
+	 * @param heightHint
+	 * @return the grid data for text
+	 */
 	protected static GridData gridDataForText(int span, int heightHint) {
 		GridData gd = new GridData();
 		gd.horizontalAlignment = GridData.FILL;
@@ -103,6 +115,10 @@ public class StringDialogField extends DialogFieldBase implements
 		return gd;
 	}
 
+	/**
+	 * @param span
+	 * @return the grid data for text
+	 */
 	protected static GridData gridDataForText(int span) {
 		GridData gd = gridDataForText(span, -1);
 		return gd;
@@ -125,10 +141,12 @@ public class StringDialogField extends DialogFieldBase implements
 
 	/**
 	 * Creates or returns the created text control.
+	 * @param toolkit 
 	 * 
 	 * @param parent
 	 *            The parent composite or <code>null</code> when the widget
 	 *            has already been created.
+	 * @return the text control
 	 */
 	public Text getTextControl(FormToolkit toolkit, Composite parent) {
 		if (_textControl == null) {
@@ -178,6 +196,9 @@ public class StringDialogField extends DialogFieldBase implements
 		return _textControl;
 	}
 
+	/**
+	 * @param e
+	 */
 	protected void doKeyReleased(KeyEvent e) {
 		if (e.character == '\r') {
 			// commit value
@@ -188,6 +209,9 @@ public class StringDialogField extends DialogFieldBase implements
 		}
 	}
 
+	/**
+	 * @param e
+	 */
 	protected void doFocusLost(FocusEvent e) {
 		if (_pending) {
 			_pending = false;

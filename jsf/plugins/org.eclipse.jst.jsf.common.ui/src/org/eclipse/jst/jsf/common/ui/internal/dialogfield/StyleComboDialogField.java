@@ -36,6 +36,10 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.forms.FormColors;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
+/**
+ * A dialog field for style combos
+ *
+ */
 public class StyleComboDialogField extends DialogFieldBase implements
 		ISupportTextValue {
 	final static private int WIDTH_HINT = 10;
@@ -58,14 +62,17 @@ public class StyleComboDialogField extends DialogFieldBase implements
 
 	private String _defaultValue;
 
-	public String getDefaultValue() {
-		return _defaultValue;
-	}
 
+	/**
+	 * @param defaultValue
+	 */
 	public void setDefaultValue(String defaultValue) {
 		this._defaultValue = defaultValue;
 	}
 
+	/**
+	 * @param flags
+	 */
 	public StyleComboDialogField(int flags) {
 		super();
 		_text = ""; //$NON-NLS-1$
@@ -102,6 +109,10 @@ public class StyleComboDialogField extends DialogFieldBase implements
 		return 3;
 	}
 
+	/**
+	 * @param span
+	 * @return the grid data for the combo
+	 */
 	protected static GridData gridDataForCombo(int span) {
 		GridData gd = new GridData();
 		gd.horizontalAlignment = GridData.FILL;
@@ -127,10 +138,12 @@ public class StyleComboDialogField extends DialogFieldBase implements
 
 	/**
 	 * Creates or returns the created combo control.
+	 * @param toolkit 
 	 * 
 	 * @param parent
 	 *            The parent composite or <code>null</code> when the widget
 	 *            has already been created.
+	 * @return the combo control
 	 */
 	public StyleCombo getComboControl(FormToolkit toolkit,
 			final Composite parent) {
@@ -211,6 +224,9 @@ public class StyleComboDialogField extends DialogFieldBase implements
 		return _comboControl;
 	}
 
+	/**
+	 * @param e
+	 */
 	protected void handleDefaultSelection(SelectionEvent e) {
 		// commit value
 		if (_pending) {
@@ -219,6 +235,9 @@ public class StyleComboDialogField extends DialogFieldBase implements
 		}
 	}
 
+	/**
+	 * @param e
+	 */
 	protected void doFocusLost(FocusEvent e) {
 		if (_pending) {
 			_pending = false;
@@ -260,14 +279,8 @@ public class StyleComboDialogField extends DialogFieldBase implements
 	// ------ text access
 
 	/**
-	 * Gets the combo items.
-	 */
-	public String[] getItems() {
-		return _items;
-	}
-
-	/**
 	 * Sets the combo items. Triggers a dialog-changed event.
+	 * @param items 
 	 */
 	public void setItems(String[] items) {
 		_items = items;
@@ -278,6 +291,9 @@ public class StyleComboDialogField extends DialogFieldBase implements
 		// dialogFieldChangedAndApplied();
 	}
 
+	/**
+	 * @param map
+	 */
 	public void setEntryMap(Map map) {
 		this._entryMap = map;
 		if (_entryMap == null) {
@@ -309,6 +325,7 @@ public class StyleComboDialogField extends DialogFieldBase implements
 
 	/**
 	 * Selects an item.
+	 * @param index 
 	 */
 	public void selectItem(int index) {
 		if (isOkToUse(_comboControl)) {
@@ -322,6 +339,9 @@ public class StyleComboDialogField extends DialogFieldBase implements
 		dialogFieldChangedAndApplied();
 	}
 
+	/**
+	 * @return the selection index
+	 */
 	public int getSelectionIndex() {
 		return _selectionIndex;
 	}

@@ -27,6 +27,8 @@ public class StatusUtil {
 	 * returned: An error is more severe than a warning, and a warning is more
 	 * severe than ok. If the two stati have the same severity, the second is
 	 * returned.
+	 * @param s1 
+	 * @param s2 
 	 * 
 	 * @return Could be null.
 	 */
@@ -47,6 +49,7 @@ public class StatusUtil {
 	/**
 	 * Finds the most severe status from a array of stati. An error is more
 	 * severe than a warning, and a warning is more severe than ok.
+	 * @param status 
 	 * 
 	 * @return could be null
 	 */
@@ -76,6 +79,8 @@ public class StatusUtil {
 
 	/**
 	 * Applies the status to the status line of a dialog page.
+	 * @param page 
+	 * @param status 
 	 */
 	public static void applyToStatusLine(DialogPage page, IStatus status) {
 		if (status == null) {

@@ -22,7 +22,6 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.search.IJavaSearchScope;
 import org.eclipse.jdt.core.search.SearchEngine;
-import org.eclipse.jdt.ui.IJavaElementSearchConstants;
 import org.eclipse.jdt.ui.JavaUI;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jst.jsf.common.ui.JSFUICommonPlugin;
@@ -36,8 +35,12 @@ import org.eclipse.ui.ide.IDE;
 /**
  * @author mengbo
  */
-public class JavaUIHelper {
-	public static void doOpenClass(IProject project, String className) {
+public final class JavaUIHelper {
+	/**
+	 * @param project
+	 * @param className
+	 */
+	static void doOpenClass(IProject project, String className) {
 		String path = className.replace('.', '/') + ".java"; //$NON-NLS-1$
 		try {
 			if (project.hasNature(JavaCore.NATURE_ID)) {
@@ -61,7 +64,12 @@ public class JavaUIHelper {
 		}
 	}
 
-	public static boolean doesClassExist(IProject project, String className) {
+	/**
+	 * @param project
+	 * @param className
+	 * @return true if the class exists in project
+	 */
+	static boolean doesClassExist(IProject project, String className) {
 		String path = className.replace('.', '/') + ".java"; //$NON-NLS-1$
 		try {
 			if (project.hasNature(JavaCore.NATURE_ID)) {
@@ -79,7 +87,13 @@ public class JavaUIHelper {
 		}
 	}
 
-	public static SelectionDialog openSelectionDialog(Shell shell,
+	/**
+	 * @param shell
+	 * @param searchScope
+	 * @param typeFlag
+	 * @return the selection dialog
+	 */
+	static SelectionDialog openSelectionDialog(Shell shell,
 			IJavaSearchScope searchScope, int typeFlag) {
 		try {
 			return JavaUI.createTypeDialog(shell, new ProgressMonitorDialog(
@@ -90,20 +104,25 @@ public class JavaUIHelper {
 		}
 	}
 
+	/**
+	 * @param shell
+	 * @param project
+	 * @param superType
+	 * @param typeFlag
+	 * @return the selection  dialog
+	 */
 	public static SelectionDialog openSelectionDialog(Shell shell,
 			IProject project, String superType, int typeFlag) {
 		IJavaSearchScope searchScope = findSearchScope(project, superType);
 		return openSelectionDialog(shell, searchScope, typeFlag);
 	}
 
-	public static SelectionDialog openSelectionDialog(Shell shell,
-			IProject project, String superType) {
-		IJavaSearchScope searchScope = findSearchScope(project, superType);
-		return openSelectionDialog(shell, searchScope,
-				IJavaElementSearchConstants.CONSIDER_ALL_TYPES);
-	}
-
-	public static IJavaSearchScope findSearchScope(IProject project,
+	/**
+	 * @param project
+	 * @param superType
+	 * @return the search scope
+	 */
+	static IJavaSearchScope findSearchScope(IProject project,
 			String superType) {
 		if (project != null) {
 			if (superType == null || "".equals(superType)) {
@@ -112,5 +131,10 @@ public class JavaUIHelper {
 			return new JavaSearchScope(project, superType);
 		}
 		return SearchEngine.createWorkspaceScope();
+	}
+	
+	private JavaUIHelper()
+	{
+		// static helper, no instantiation
 	}
 }

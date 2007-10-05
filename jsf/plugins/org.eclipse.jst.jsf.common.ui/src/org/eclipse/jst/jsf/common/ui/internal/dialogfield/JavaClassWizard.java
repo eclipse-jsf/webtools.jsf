@@ -19,7 +19,6 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
@@ -38,7 +37,7 @@ import org.eclipse.ui.wizards.newresource.BasicNewResourceWizard;
 /**
  * @author mengbo
  */
-public class JavaClassWizard extends Wizard {
+/*package*/ class JavaClassWizard extends Wizard {
 	private static String STORE_SECTION = "JavaClassWizard"; //$NON-NLS-1$
 
 	private JavaClassWizardPage _mainPage;
@@ -53,14 +52,27 @@ public class JavaClassWizard extends Wizard {
 
 	private boolean _autoOpenResource = true;
 
+	/**
+	 * @param autoOpenResource
+	 */
 	public void setAutoOpenResource(boolean autoOpenResource) {
 		_autoOpenResource = autoOpenResource;
 	}
 
+	/**
+	 * @param project
+	 * @param className
+	 */
 	public JavaClassWizard(IProject project, String className) {
 		this(project, className, null, null);
 	}
 
+	/**
+	 * @param project
+	 * @param className
+	 * @param superClass
+	 * @param superInterfaces
+	 */
 	public JavaClassWizard(IProject project, String className,
 			String superClass, List superInterfaces) {
 		this._project = project;
@@ -146,7 +158,7 @@ public class JavaClassWizard extends Wizard {
 		return true;
 	}
 
-	protected void selectAndReveal(IResource newResource) {
+	private void selectAndReveal(IResource newResource) {
 		BasicNewResourceWizard.selectAndReveal(newResource,
 				getWorkbenchWindow());
 	}
@@ -155,14 +167,13 @@ public class JavaClassWizard extends Wizard {
 		return PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 	}
 
-	protected ISchedulingRule getSchedulingRule() {
-		return _mainPage.getModifiedResource();
-	}
-
-	public String getClassName() {
+	private String getClassName() {
 		return _className;
 	}
 
+	/**
+	 * @return the class name including args
+	 */
 	public String getClassNameWithArgs() {
 		if (_classArgs != null && _classArgs.length() > 0) {
 			StringBuffer buffer = new StringBuffer(_className);

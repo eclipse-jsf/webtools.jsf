@@ -36,7 +36,7 @@ import org.eclipse.ui.forms.events.HyperlinkEvent;
  * @author mengbo
  * @version 1.5
  */
-public abstract class AbstractClassButtonDialogField extends
+/*package*/ abstract class AbstractClassButtonDialogField extends
 		StringButtonDialogField {
 	private IProject _project;
 
@@ -50,10 +50,16 @@ public abstract class AbstractClassButtonDialogField extends
 
 	private boolean _autoOpenResource = true;
 
+	/**
+	 * @param autoOpenResource
+	 */
 	public void setAutoOpenResource(boolean autoOpenResource) {
 		_autoOpenResource = autoOpenResource;
 	}
 
+	/**
+	 * @param project
+	 */
 	public AbstractClassButtonDialogField(IProject project) {
 		super(null);
 		this._project = project;
@@ -107,8 +113,16 @@ public abstract class AbstractClassButtonDialogField extends
 		}
 	}
 
+	/**
+	 * @return the interfaces 
+	 * TODO: the contract seems inconsistent
+	 * as whether to return null or empty list when none
+	 */
 	protected abstract List getImplementInterfaces();
 
+	/**
+	 * @return the java search scope to be used.  Must not be null
+	 */
 	protected abstract IJavaSearchScope getJavaSearchScope();
 
 	private void browseButtonPressed() {
@@ -190,20 +204,14 @@ public abstract class AbstractClassButtonDialogField extends
 		return _interfacesList;
 	}
 
+	/**
+	 * Sets (replaces) the interface list
+	 * TODO: this list can have at most one element
+	 * @param interfaceName
+	 */
 	public void setInterface(String interfaceName) {
 		_interfacesList = new ArrayList();
 		_interfacesList.add(interfaceName);
-	}
-
-	/**
-	 * @param interfacesList
-	 *            The interfacesList to set.
-	 */
-	public void setInterfacesList(List interfacesList) {
-		// TODO:Now we can not find the IJavaSearchScope that support the
-		// Hierarchies for multi-types.
-		// We will support the multi-interfaces After resolve the problem.
-		this._interfacesList = interfacesList;
 	}
 
 	/**

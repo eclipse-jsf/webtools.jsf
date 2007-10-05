@@ -22,7 +22,7 @@ import org.eclipse.jface.viewers.ViewerFilter;
  * @author mengbo
  * @version 1.5
  */
-public class TypedViewerFilter extends ViewerFilter {
+/*package*/ class TypedViewerFilter extends ViewerFilter {
 
 	private Class[] _fAcceptedTypes;
 

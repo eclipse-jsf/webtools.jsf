@@ -64,7 +64,7 @@ public class DialogFieldBase implements DialogField {
 
 	private Label _requiredLabel;
 
-	protected String _labelText;
+	private String _labelText;
 
 	private IDialogFieldChangeListener _dialogFieldChangeListener;
 
@@ -84,6 +84,9 @@ public class DialogFieldBase implements DialogField {
 
 	private String toolTip;
 
+	/**
+	 * default constructor
+	 */
 	public DialogFieldBase() {
 		_enabled = true;
 		_label = null;
@@ -130,7 +133,10 @@ public class DialogFieldBase implements DialogField {
 		}
 	}
 
-	protected Shell getShell() {
+	/**
+	 * @return return the enclosing Shell or null if one cannot be determined
+	 */
+	public Shell getShell() {
 		if (_label != null && !_label.isDisposed()) {
 			return _label.getShell();
 		} else if (_hyperlink != null && !_hyperlink.isDisposed()) {
@@ -188,11 +194,7 @@ public class DialogFieldBase implements DialogField {
 
 	// ------- focus management
 
-	/**
-	 * Tries to set the focus to the dialog field. Returns <code>true</code>
-	 * if the dialog field can take focus. To be reimplemented by dialog field
-	 * implementors.
-	 */
+
 	public boolean setFocus() {
 		return false;
 	}
@@ -218,12 +220,6 @@ public class DialogFieldBase implements DialogField {
 
 	// ------- layout helpers
 
-	/**
-	 * Creates all controls of the dialog field and fills it to a composite. The
-	 * composite is assumed to have <code>MGridLayout</code> as layout. The
-	 * dialog field will adjust its controls' spans to the number of columns
-	 * given. To be reimplemented by dialog field implementors.
-	 */
 	public Control[] doFillIntoGrid(FormToolkit toolkit, Composite parent,
 			int nColumns) {
 		assertEnoughColumns(nColumns);
@@ -244,6 +240,7 @@ public class DialogFieldBase implements DialogField {
 	 * 
 	 * @param control
 	 *            a control from which to obtain the current font
+	 * @return the font metrics for control
 	 */
 	protected FontMetrics getDialogUnits(Control control) {
 		if (_fontMetrics == null) {
@@ -264,6 +261,10 @@ public class DialogFieldBase implements DialogField {
 		return 1;
 	}
 
+	/**
+	 * @param span
+	 * @return a new GridData for the horizontal 'span' value
+	 */
 	protected static GridData gridDataForLabel(int span) {
 		GridData gd = new GridData(GridData.HORIZONTAL_ALIGN_FILL);
 		gd.horizontalSpan = span;
@@ -322,6 +323,11 @@ public class DialogFieldBase implements DialogField {
 		return control;
 	}
 
+	/**
+	 * @param _formToolkit
+	 * @param parent
+	 * @return get the Label control for required
+	 */
 	public Control getRequiredLabelControl(FormToolkit _formToolkit,
 			Composite parent) {
 		if (_requiredLabel == null) {
@@ -394,9 +400,11 @@ public class DialogFieldBase implements DialogField {
 
 	/**
 	 * Creates a spacer control.
+	 * @param toolkit 
 	 * 
 	 * @param parent
 	 *            The parent composite
+	 * @return a spacer control
 	 */
 	public Control createEmptySpace(FormToolkit toolkit, Composite parent) {
 		return createEmptySpace(toolkit, parent, 1);
@@ -405,9 +413,12 @@ public class DialogFieldBase implements DialogField {
 	/**
 	 * Creates a spacer control with the given span. The composite is assumed to
 	 * have <code>MGridLayout</code> as layout.
+	 * @param toolkit 
 	 * 
 	 * @param parent
 	 *            The parent composite
+	 * @param span 
+	 * @return a label that creates empty space
 	 */
 	public Control createEmptySpace(FormToolkit toolkit, Composite parent,
 			int span) {
@@ -430,6 +441,8 @@ public class DialogFieldBase implements DialogField {
 
 	/**
 	 * Tests is the control is not <code>null</code> and not disposed.
+	 * @param control 
+	 * @return true if the control is valid for use
 	 */
 	protected final boolean isOkToUse(Control control) {
 		return (control != null) && !(control.isDisposed());
@@ -467,11 +480,17 @@ public class DialogFieldBase implements DialogField {
 		return _enabled;
 	}
 
+	/**
+	 * @param comp
+	 */
 	protected final void assertCompositeNotNull(Composite comp) {
 		Assert.isNotNull(comp,
 				"uncreated control requested with composite null"); //$NON-NLS-1$
 	}
 
+	/**
+	 * @param nColumns
+	 */
 	protected final void assertEnoughColumns(int nColumns) {
 		Assert.isTrue(nColumns >= getNumberOfControls(),
 				"given number of columns is too small"); //$NON-NLS-1$
@@ -520,10 +539,16 @@ public class DialogFieldBase implements DialogField {
 		return _isRequired;
 	}
 
+	/**
+	 * @param isRequired
+	 */
 	public void setRequired(boolean isRequired) {
 		this._isRequired = isRequired;
 	}
 
+	/**
+	 * @return gthe tool tip text
+	 */
 	protected String getToolTip() {
 		return toolTip;
 	}

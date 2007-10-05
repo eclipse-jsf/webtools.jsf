@@ -76,6 +76,13 @@ public class DialogFieldWrapper implements DialogField, ISupportTextValue,
 	private IBindingHandler _handler;
 
 	/**
+	 * @param field 
+	 * @param image 
+	 * @param disabledImage 
+	 * @param uri 
+	 * @param tagName 
+	 * @param attr 
+	 * @param handler 
 	 * 
 	 */
 	public DialogFieldWrapper(DialogField field, Image image,
@@ -407,5 +414,9 @@ public class DialogFieldWrapper implements DialogField, ISupportTextValue,
 
 	public void setToolTip(String toolTip) {
 		_wrapped.setToolTip(toolTip);
+	}
+
+	public Shell getShell() {
+		return _wrapped.getShell();
 	}
 }

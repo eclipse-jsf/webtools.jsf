@@ -89,6 +89,10 @@ public class RadiosDialogField extends DialogFieldBase {
 		return 3;
 	}
 
+	/**
+	 * @param span
+	 * @return the grid data
+	 */
 	protected static GridData gridDataForGroup(int span) {
 		GridData gd = new GridData();
 		gd.horizontalAlignment = GridData.FILL;
@@ -111,6 +115,11 @@ public class RadiosDialogField extends DialogFieldBase {
 
 	// ------- ui creation
 
+	/**
+	 * @param toolkit
+	 * @param parent
+	 * @return the group composite
+	 */
 	public Composite getGroup(FormToolkit toolkit, Composite parent) {
 		if (_group == null) {
 			assertCompositeNotNull(parent);
@@ -167,6 +176,7 @@ public class RadiosDialogField extends DialogFieldBase {
 
 	/**
 	 * Sets the text. Triggers a dialog-changed event.
+	 * @param index 
 	 */
 	public void setSelectedIndex(int index) {
 		_selectIndex = index;
@@ -186,6 +196,7 @@ public class RadiosDialogField extends DialogFieldBase {
 
 	/**
 	 * Sets the text without triggering a dialog-changed event.
+	 * @param index 
 	 */
 	public void setSelectedIndexWithoutUpdate(int index) {
 		_selectIndex = index;
@@ -204,6 +215,9 @@ public class RadiosDialogField extends DialogFieldBase {
 		}
 	}
 
+	/**
+	 * @return the index selected
+	 */
 	public int getSelectedIndex() {
 		return _selectIndex;
 	}

@@ -20,9 +20,18 @@ package org.eclipse.jst.jsf.common.ui.internal.dialogfield;
  * @version 1.5
  */
 public interface ISupportTextValue {
+	/**
+	 * @param value
+	 */
 	public void setTextWithoutUpdate(String value);
 
+	/**
+	 * @return the text
+	 */
 	public String getText();
 
+	/**
+	 * @param value
+	 */
 	public void setText(String value);
 }

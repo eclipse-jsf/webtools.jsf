@@ -19,7 +19,6 @@ import java.util.MissingResourceException;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
-import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
@@ -31,9 +30,6 @@ import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.jst.jsf.common.ui.internal.guiutils.Alerts;
 import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.Version;
@@ -41,10 +37,41 @@ import org.osgi.framework.Version;
 /**
  * The main plugin class to be used in the desktop.
  */
-public class JSFUICommonPlugin extends AbstractUIPlugin implements ICommonConstants {
+public class JSFUICommonPlugin extends AbstractUIPlugin {
 	// Properties contains general properties and defaults to preferences.
 	private static final String PROPERTIES = "default.properties";
+	// preferences will
+	// contain this string
+	// in the key.
 
+	private static final String P_CONSOLE_LOGGING = "console.logging.on";
+
+	private static final String P_CONSOLE_LOG_LEVEL = "console.logging.max.level";
+
+	private static final String P_ECLIPSE_LOGGING = "eclipse.logging.on";
+
+	private static final String P_ECLIPSE_LOG_LEVEL = "eclipse.logging.max.level";
+
+	private static final String P_FILE_LOGGING = "file.logging.on";
+
+	private static final String P_FILE_LOG_LEVEL = "file.logging.max.level";
+
+	private static final String P_FILE_PATH = "file.logging.path";
+
+	private static final String P_FILE_CLEAR = "file.logging.startup.clear";
+
+	private static final String P_FILE_ROLLOVER_FREQUENCY = "file.logging.rollover.frequency";
+
+	private static final int DEBUG_LEVEL = 0;
+
+	private static final int INFO_LEVEL = 1;
+
+	private static final int WARN_LEVEL = 2;
+
+	private static final int ERROR_LEVEL = 3;
+
+	private static final int FATAL_LEVEL = 4;
+	
 	// What version of the platform are we on.
 	private static boolean TWO_DOT_ONE;
 
@@ -152,6 +179,7 @@ public class JSFUICommonPlugin extends AbstractUIPlugin implements ICommonConsta
 
 	/**
 	 * Returns the shared instance.
+	 * @return the plugin instance
 	 */
 	public static JSFUICommonPlugin getDefault() {
 		return _plugin;
@@ -168,6 +196,8 @@ public class JSFUICommonPlugin extends AbstractUIPlugin implements ICommonConsta
 
 	/**
 	 * Returns a logger for the new class using this plugin for reference.
+	 * @param theClass 
+	 * @return the logger
 	 */
     // TODO: theClass is never used!!
 	public static Logger getLogger(Class theClass) {
@@ -176,6 +206,7 @@ public class JSFUICommonPlugin extends AbstractUIPlugin implements ICommonConsta
 
 	/**
 	 * Returns the plugin's root logger
+	 * @return the root logger
 	 */
 	public Logger getRootLogger() {
 		return _log;
@@ -184,7 +215,7 @@ public class JSFUICommonPlugin extends AbstractUIPlugin implements ICommonConsta
 	/**
 	 * Returns this plugin's unique identifier
 	 * 
-	 * @retun this plugin's unique identifier
+	 * @return this plugin's unique identifier
 	 * 
 	 */
 	public static String getPluginId() {
@@ -193,6 +224,7 @@ public class JSFUICommonPlugin extends AbstractUIPlugin implements ICommonConsta
 
 	/**
 	 * Returns the plugin's resource bundle,
+	 * @return the resource bundle
 	 */
 	public ResourceBundle getResourceBundle() {
 		return _resourceBundle;
@@ -201,6 +233,8 @@ public class JSFUICommonPlugin extends AbstractUIPlugin implements ICommonConsta
 	/**
 	 * Returns the string from the plugin's resource bundle, or 'key' if not
 	 * found.
+	 * @param key 
+	 * @return the resource string
 	 */
 	public static String getResourceString(String key) {
 		ResourceBundle bundle = JSFUICommonPlugin.getDefault().getResourceBundle();
@@ -213,6 +247,7 @@ public class JSFUICommonPlugin extends AbstractUIPlugin implements ICommonConsta
 
 	/**
 	 * Returns the plugin's descriptor's resource bundle,
+	 * @return the bundle
 	 */
 	public ResourceBundle getPluginDecriptorBundle() {
 		return Platform.getResourceBundle(getDefault().getBundle());
@@ -221,30 +256,10 @@ public class JSFUICommonPlugin extends AbstractUIPlugin implements ICommonConsta
 	/**
 	 * Returns the plugin's default properties. These are normally used for
 	 * default preferences.
+	 * @return the properties
 	 */
 	public Properties getProperties() {
 		return _properties;
-	}
-
-	/**
-	 * Returns the standard display to be used. The method first checks, if the
-	 * thread calling this method has an associated dispaly. If so, this display
-	 * is returned. Otherwise the method returns the default display.
-	 */
-	public static Display getStandardDisplay() {
-		Display display;
-		display = Display.getCurrent();
-		if (display == null) {
-			display = Display.getDefault();
-		}
-		return display;
-	}
-
-	/**
-	 * Returns the workspace instance.
-	 */
-	public static IWorkspace getWorkspace() {
-		return ResourcesPlugin.getWorkspace();
 	}
 
 	/**
@@ -314,16 +329,6 @@ public class JSFUICommonPlugin extends AbstractUIPlugin implements ICommonConsta
 	}
 
 	/**
-	 * Read a file resource. The file should contain any partial path and the
-	 * filename from the plugin base. The caller is responsible for closing the
-	 * file.
-	 */
-	public InputStream readFile(String file) throws MalformedURLException,
-			IOException {
-		return (new URL(_pluginBase, file)).openStream();
-	}
-
-	/**
 	 * Is this eclipse version 2.1
 	 * 
 	 * @return true if version is 2.1
@@ -350,34 +355,7 @@ public class JSFUICommonPlugin extends AbstractUIPlugin implements ICommonConsta
 		return _version;
 	}
 
-	/**
-	 * Returns the active workbench window.
-	 * 
-	 * @return the active workbench window. this can be null but I've never seen
-	 *         it.
-	 */
-	public static IWorkbenchWindow getActiveWorkbenchWindow() {
-		if (getDefault().getWorkbench() == null) {
-			return null;
-		}
-        return getDefault().getWorkbench().getActiveWorkbenchWindow();
-	}
 
-	/**
-	 * Returns the active workbench page. Note that the active page may not be
-	 * the one that the user perceives as active in some situations so this
-	 * method of obtaining the activate page should only be used if no other
-	 * method is available.
-	 * 
-	 * @return the active workbench page
-	 */
-	public static IWorkbenchPage getActivePage() {
-		IWorkbenchWindow window = getActiveWorkbenchWindow();
-		if (window == null) {
-			return null;
-		}
-		return window.getActivePage();
-	}
 
 	/**
 	 * Initializes the preference controls to the default values. These values
@@ -437,24 +415,4 @@ public class JSFUICommonPlugin extends AbstractUIPlugin implements ICommonConsta
 		return ERROR_LEVEL;
 	}
 
-	/**
-	 * Converts the rollover frequency from string to int. The frequency
-	 * defaults to DAILY.
-	 * 
-	 * @param str
-	 *            String representation of rollover frequency
-	 * @return integer representation of rollover frequency
-	 */
-	public int strToIntFrequency(String str) {
-		if (str == null) {
-			return DAILY_FREQ;
-		}
-		if (str.equalsIgnoreCase("WEEKLY")) {
-			return WEEKLY_FREQ;
-		}
-		if (str.equalsIgnoreCase("MONTHLY")) {
-			return MONTHLY_FREQ;
-		}
-		return DAILY_FREQ;
-	}
 }
