@@ -12,7 +12,6 @@
 package org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.jst.jsf.common.ui.internal.dialogs.CommonResourceDialog;
@@ -24,20 +23,23 @@ import org.eclipse.swt.widgets.Shell;
 
 public class ProjectWebPageSelectionDialog extends CommonResourceDialog {
 
+	/**
+	 * @param parentShell
+	 * @param project
+	 * @param style
+	 */
 	public ProjectWebPageSelectionDialog(Shell parentShell, IProject project,
 			int style) {
 		super(parentShell, project, style);
 		init();
 	}
 
+	/**
+	 * @param parentShell
+	 * @param project
+	 */
 	public ProjectWebPageSelectionDialog(Shell parentShell, IProject project) {
 		super(parentShell, project);
-		init();
-	}
-
-	public ProjectWebPageSelectionDialog(Shell parentShell, IFolder folder,
-			int style) {
-		super(parentShell, folder, style);
 		init();
 	}
 
@@ -46,6 +48,9 @@ public class ProjectWebPageSelectionDialog extends CommonResourceDialog {
 		setSuffixs(new String[] { "jsp", "jspx", "jsf", "html", "htm" });
 	}
 
+	/**
+	 * @return the rseult file path
+	 */
 	public String getResultFilePath() {
 		String result = "";
 		IFile selectedFile = (IFile) getResult()[0];

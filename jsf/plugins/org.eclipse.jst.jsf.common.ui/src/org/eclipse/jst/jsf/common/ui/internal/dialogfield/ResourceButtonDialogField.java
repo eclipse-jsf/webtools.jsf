@@ -54,6 +54,9 @@ public class ResourceButtonDialogField extends StringButtonDialogField {
 
 	private String _separator = "";
 
+	/**
+	 * @param project
+	 */
 	public ResourceButtonDialogField(IProject project) {
 		this(null, project);
 		setStringButtonAdapter(new IStringButtonAdapter() {
@@ -67,19 +70,26 @@ public class ResourceButtonDialogField extends StringButtonDialogField {
 		});
 	}
 
+	/**
+	 * @param adapter
+	 * @param project
+	 */
 	public ResourceButtonDialogField(IStringButtonAdapter adapter,
 			IProject project) {
 		super(adapter);
 		this._project = project;
 	}
 
+	/**
+	 * @return the string
+	 */
 	protected String browseButtonPressed() {
 		Shell shell = getShell();
 		CommonResourceDialog dialog = null;
 		int style = "".equals(_separator) ? SWT.NONE : SWT.MULTI | SWT.H_SCROLL
 				| SWT.V_SCROLL;
 		if (_folder != null) {
-			dialog = new CommonResourceDialog(shell, _folder, style);
+			dialog = new CommonResourceDialog(shell, _folder.getProject(), style);
 		} else {
 			dialog = new CommonResourceDialog(shell, _project, style);
 		}
@@ -205,14 +215,16 @@ public class ResourceButtonDialogField extends StringButtonDialogField {
 		this._isWebPath = isWebPath;
 	}
 
-	public boolean isWebPath() {
-		return _isWebPath;
-	}
-
+	/**
+	 * @return the separator string
+	 */
 	public String getSeparator() {
 		return _separator;
 	}
 
+	/**
+	 * @param separator
+	 */
 	public void setSeparator(String separator) {
 		this._separator = separator;
 	}
