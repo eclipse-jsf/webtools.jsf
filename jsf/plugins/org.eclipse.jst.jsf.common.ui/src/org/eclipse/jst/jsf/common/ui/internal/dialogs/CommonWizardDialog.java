@@ -17,8 +17,17 @@ import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 
+/**
+ * Wizard Dialog with a Finish set to OK if no previous
+ * or next buttons are needed
+ *
+ */
 public class CommonWizardDialog extends WizardDialog {
 
+	/**
+	 * @param parentShell
+	 * @param newWizard
+	 */
 	public CommonWizardDialog(Shell parentShell, IWizard newWizard) {
 		super(parentShell, newWizard);
 	}

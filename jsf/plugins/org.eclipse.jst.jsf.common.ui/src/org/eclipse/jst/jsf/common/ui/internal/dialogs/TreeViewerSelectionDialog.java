@@ -60,11 +60,11 @@ public abstract class TreeViewerSelectionDialog extends SelectionDialog {
 	/** Used to tag the image type */
 	public static final int STYLE_NONE = 0;
 
-	public static final int STYLE_INFORMATION = 1;
+	private static final int STYLE_INFORMATION = 1;
 
-	public static final int STYLE_ERROR = 2;
+	private static final int STYLE_ERROR = 2;
 
-	public static final int STYLE_WARNING = 3;
+	private static final int STYLE_WARNING = 3;
 
 	/** Sizi of the TreeViewer composite */
 	private static final int SIZING_SELECTION_PANE_HEIGHT = 300;
@@ -100,6 +100,8 @@ public abstract class TreeViewerSelectionDialog extends SelectionDialog {
 
 	/**
 	 * @param parentShell
+	 * @param statusMessage 
+	 * @param style 
 	 */
 	public TreeViewerSelectionDialog(Shell parentShell, String statusMessage,
 			int style) {
@@ -110,6 +112,12 @@ public abstract class TreeViewerSelectionDialog extends SelectionDialog {
 				| SWT.APPLICATION_MODAL | SWT.RESIZE);
 	}
 
+	/**
+	 * Convenience for TreeViewerSelectionDialog(parentShell, statusMessage, SWT.NONE)
+	 * 
+	 * @param parentShell
+	 * @param statusMessage
+	 */
 	public TreeViewerSelectionDialog(Shell parentShell, String statusMessage) {
 		this(parentShell, statusMessage, SWT.NONE);
 	}
@@ -174,8 +182,9 @@ public abstract class TreeViewerSelectionDialog extends SelectionDialog {
 
 	/**
 	 * Creates the contents of the composite.
+	 * @param parent 
 	 */
-	public void createTreeViewerComposite(Composite parent) {
+	protected void createTreeViewerComposite(Composite parent) {
 		Composite treeViewerComposite = new Composite(parent, SWT.NONE);
 		GridLayout layout = new GridLayout();
 		layout.marginWidth = 0;
@@ -277,6 +286,9 @@ public abstract class TreeViewerSelectionDialog extends SelectionDialog {
 		_viewerSorter = sorter;
 	}
 
+	/**
+	 * @param message
+	 */
 	public void setStatusMessage(String message) {
 		_statusMessage = message;
 	}
@@ -305,6 +317,7 @@ public abstract class TreeViewerSelectionDialog extends SelectionDialog {
 
 	/**
 	 * Get the different message according the message type.
+	 * @param imageType 
 	 * 
 	 * @return Image - the message image
 	 */
@@ -348,7 +361,15 @@ public abstract class TreeViewerSelectionDialog extends SelectionDialog {
 		return control;
 	}
 
+	/**
+	 * @param selection
+	 * @return true if selection is valid
+	 */
 	protected abstract boolean isValidSelection(Object selection);
 
+	/**
+	 * Used to set the input element on the tree viewer
+	 * @return the input element
+	 */
 	protected abstract Object findInputElement();
 }

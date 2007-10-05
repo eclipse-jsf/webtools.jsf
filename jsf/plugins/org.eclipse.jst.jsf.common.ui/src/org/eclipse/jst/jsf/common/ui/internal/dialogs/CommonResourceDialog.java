@@ -134,15 +134,13 @@ public class CommonResourceDialog extends TreeViewerSelectionDialog {
 
 	// The default resource filter
 	class CommonResourceFilter extends ViewerFilter {
-		private String _suffixs[] = null;
-
-		Logger _log = JSFUICommonPlugin.getLogger(CommonResourceFilter.class);
+		private String _filterSuffixs[] = null;
 
 		/**
 		 * @return Returns the _suffixs.
 		 */
 		public String[] getSuffixs() {
-			return _suffixs;
+			return _filterSuffixs;
 		}
 
 		/**
@@ -150,7 +148,7 @@ public class CommonResourceDialog extends TreeViewerSelectionDialog {
 		 *            The _suffixs to set.
 		 */
 		public void setSuffixs(String[] _suffixs) {
-			this._suffixs = _suffixs;
+			this._filterSuffixs = _suffixs;
 		}
 
 		/*
@@ -170,7 +168,7 @@ public class CommonResourceDialog extends TreeViewerSelectionDialog {
 					return true;
 				}
 				if (file.getFileExtension() != null) {
-					if (Arrays.asList(_suffixs).contains(
+					if (Arrays.asList(_filterSuffixs).contains(
 							file.getFileExtension().toLowerCase())) {
 						return true;
 					}
@@ -209,6 +207,7 @@ public class CommonResourceDialog extends TreeViewerSelectionDialog {
 	 * 
 	 * @param parentShell
 	 * @param project
+	 * @param style 
 	 */
 	public CommonResourceDialog(Shell parentShell, IProject project, int style) {
 		super(parentShell, "", style);
@@ -226,26 +225,17 @@ public class CommonResourceDialog extends TreeViewerSelectionDialog {
 		setStatusMessage(getStatusMessage());
 	}
 
+	/**
+	 * Same as CommonResourceDialog(parentShell, project, SWT.NONE)
+	 * 
+	 * @param parentShell
+	 * @param project
+	 */
 	public CommonResourceDialog(Shell parentShell, IProject project) {
 		this(parentShell, project, SWT.NONE);
 	}
 
-	/**
-	 * This is a dialog for common resource selection, the resouce supported
-	 * include IFolder, IProject, IFile, user can provide
-	 * 
-	 * @param parentShell
-	 * @param folder 
-	 * @param style 
-	 */
-	public CommonResourceDialog(Shell parentShell, IFolder folder, int style) {
-		this(parentShell, (folder == null ? null : folder.getProject()), style);
-
-		_folder = folder;
-
-	}
-
-	protected String getStatusMessage() {
+	private String getStatusMessage() {
 		if (_resourceDescription == null) {
 			return "";
 		}
@@ -337,11 +327,6 @@ public class CommonResourceDialog extends TreeViewerSelectionDialog {
 			return newSuffixs;
 		}
 		return null;
-	}
-
-	public void setFilter(String[] suffixs, String sourceDescription) {
-		setSuffixs(suffixs);
-		setResourceDescription(sourceDescription);
 	}
 
 	/**
