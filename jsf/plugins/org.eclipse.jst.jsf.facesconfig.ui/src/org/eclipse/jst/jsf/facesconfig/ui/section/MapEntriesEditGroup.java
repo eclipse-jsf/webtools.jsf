@@ -98,6 +98,7 @@ public class MapEntriesEditGroup extends DialogFieldGroup implements
 	private List selectionChangedListeners = new ArrayList();
 
 	/**
+	 * @param section 
 	 */
 	public MapEntriesEditGroup(AbstractFacesConfigSection section) {
 		super();
@@ -113,7 +114,7 @@ public class MapEntriesEditGroup extends DialogFieldGroup implements
         // TODO: initialize?
 	}
 
-	public void updateButtons() {
+	private void updateButtons() {
 		if (((IStructuredSelection) tableViewer.getSelection()).size() > 0) {
 			editButton.setEnabled(true);
 			removeButton.setEnabled(true);
@@ -415,7 +416,7 @@ public class MapEntriesEditGroup extends DialogFieldGroup implements
 		});
 	}
 
-	protected void addButtonSelected() {
+	private void addButtonSelected() {
 		AddEditMapEntryDialog dialog = new AddEditMapEntryDialog(EditorPlugin
 				.getActiveShell(), true);
 		if (dialog.open() == Dialog.OK) {
@@ -466,7 +467,7 @@ public class MapEntriesEditGroup extends DialogFieldGroup implements
 		}
 	}
 
-	protected void editButtonSelected() {
+	private void editButtonSelected() {
 		if (tableViewer.getSelection() == null
 				|| ((IStructuredSelection) tableViewer.getSelection())
 						.isEmpty()) {
@@ -552,7 +553,7 @@ public class MapEntriesEditGroup extends DialogFieldGroup implements
 
 	}
 
-	protected void removeButtonSelected() {
+	private void removeButtonSelected() {
 
 		MapEntryType mapEntry = (MapEntryType) ((IStructuredSelection) tableViewer
 				.getSelection()).getFirstElement();
@@ -577,10 +578,6 @@ public class MapEntriesEditGroup extends DialogFieldGroup implements
 		return currentProject;
 	}
 
-	public void setProject(IProject project) {
-		currentProject = project;
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -603,7 +600,7 @@ public class MapEntriesEditGroup extends DialogFieldGroup implements
 		}
 	}
 
-	public void refreshAll() {
+	/*package*/ void refreshAll() {
 		if (managedBean.getMapEntries() != null
 				&& managedBean.getMapEntries().getKeyClass() != null) {
 			this.keyClassField.setTextWithoutUpdate(managedBean.getMapEntries()

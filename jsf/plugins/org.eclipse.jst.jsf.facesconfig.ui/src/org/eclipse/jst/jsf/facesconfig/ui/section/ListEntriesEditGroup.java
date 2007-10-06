@@ -371,7 +371,7 @@ public class ListEntriesEditGroup extends DialogFieldGroup implements
 		});
 	}
 
-	protected void addButtonSelected() {
+	private void addButtonSelected() {
 		EditValueDialog dialog = new EditValueDialog(EditorPlugin
 				.getActiveShell(), true, false, null);
 		if (dialog.open() == Dialog.OK) {
@@ -423,7 +423,7 @@ public class ListEntriesEditGroup extends DialogFieldGroup implements
 		}
 	}
 
-	protected void editButtonSelected() {
+	private void editButtonSelected() {
 		Object select = ((IStructuredSelection) tableViewer.getSelection())
 				.getFirstElement();
 		boolean isNullValue;
@@ -485,7 +485,7 @@ public class ListEntriesEditGroup extends DialogFieldGroup implements
 		}
 	}
 
-	protected void removeButtonSelected() {
+	private void removeButtonSelected() {
 		Object select = ((IStructuredSelection) tableViewer.getSelection())
 				.getFirstElement();
 		ListEntriesType listEntries = managedBean.getListEntries();
@@ -552,11 +552,7 @@ public class ListEntriesEditGroup extends DialogFieldGroup implements
 		return currentProject;
 	}
 
-	public void setProject(IProject project) {
-		currentProject = project;
-	}
-
-	public void updateButtons() {
+	private void updateButtons() {
 		if (((IStructuredSelection) tableViewer.getSelection()).size() > 0) {
 			editButton.setEnabled(true);
 			removeButton.setEnabled(true);

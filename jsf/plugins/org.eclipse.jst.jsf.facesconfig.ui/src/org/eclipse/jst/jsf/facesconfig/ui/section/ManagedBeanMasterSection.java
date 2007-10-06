@@ -251,7 +251,7 @@ public class ManagedBeanMasterSection extends FacesConfigMasterSection {
 		}
 	}
 
-	protected ManagedBeanMasterSectionAdapter getManagedBeanMasterSectionAdapter() {
+	private ManagedBeanMasterSectionAdapter getManagedBeanMasterSectionAdapter() {
 		if (managedBeanMasterSectionAdapter == null) {
 			managedBeanMasterSectionAdapter = new ManagedBeanMasterSectionAdapter();
 		}

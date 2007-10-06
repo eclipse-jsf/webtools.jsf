@@ -282,7 +282,7 @@ public class ManagedBeanGeneralSection extends AbstractFacesConfigSection {
 		}
 	}
 
-	protected ManagedBeanGeneralSectionAdapter getManagedBeanGeneralSectionAdatper() {
+	private ManagedBeanGeneralSectionAdapter getManagedBeanGeneralSectionAdatper() {
 		if (managedBeanGeneralSectionAdapter == null) {
 			managedBeanGeneralSectionAdapter = new ManagedBeanGeneralSectionAdapter();
 		}

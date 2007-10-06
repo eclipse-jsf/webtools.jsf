@@ -55,6 +55,10 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
+/**
+ * Section for facets
+ *
+ */
 public class FacetSection extends AbstractFacesConfigSection {
 
 	private static final int TABLE_DEFAULT_HEIGHT = 160;

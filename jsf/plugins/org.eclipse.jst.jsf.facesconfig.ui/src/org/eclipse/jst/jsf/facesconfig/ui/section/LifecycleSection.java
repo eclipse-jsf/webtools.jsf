@@ -77,6 +77,9 @@ public class LifecycleSection extends OthersPageBaseSection {
 				null);
 	}
 
+	/**
+	 * @return the lifecycle child
+	 */
 	public EObject createLifecycleChildObject() {
 		String superType = ModelUtil.getSuperType(lifecycleChildClass);
 		IProject project = (IProject) this.getPage().getEditor().getAdapter(

@@ -284,7 +284,7 @@ public class OverviewNavigationSection extends AbstractOverviewSection {
 
 	}
 
-	protected void addOverviewNavigationSectionAdapter(EObject object) {
+	private void addOverviewNavigationSectionAdapter(EObject object) {
 		if (EcoreUtil.getExistingAdapter(object,
 				OverviewNavigationSection.class) == null) {
 			object.eAdapters().add(getOverviewNavigationSectionAdapter());
@@ -292,14 +292,14 @@ public class OverviewNavigationSection extends AbstractOverviewSection {
 
 	}
 
-	protected void removeOverviewNavigationSectionAdapter(EObject object) {
+	private void removeOverviewNavigationSectionAdapter(EObject object) {
 		if (EcoreUtil.getExistingAdapter(object,
 				OverviewNavigationSection.class) != null) {
 			object.eAdapters().remove(getOverviewNavigationSectionAdapter());
 		}
 	}
 
-	protected OverviewNavigationSectionAdapter getOverviewNavigationSectionAdapter() {
+	private OverviewNavigationSectionAdapter getOverviewNavigationSectionAdapter() {
 		if (overviewNavigationSectionAdapter == null)
 			overviewNavigationSectionAdapter = new OverviewNavigationSectionAdapter();
 		return overviewNavigationSectionAdapter;

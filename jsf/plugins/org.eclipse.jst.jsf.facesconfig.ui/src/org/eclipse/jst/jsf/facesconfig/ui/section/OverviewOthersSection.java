@@ -231,20 +231,20 @@ public class OverviewOthersSection extends AbstractOverviewSection {
 
 	}
 
-	protected void addOverviewOthersSectionAdapter(EObject object) {
+	private void addOverviewOthersSectionAdapter(EObject object) {
 		if (EcoreUtil.getExistingAdapter(object, OverviewOthersSection.class) == null) {
 			object.eAdapters().add(getOverviewOthersSectionAdapter());
 		}
 
 	}
 
-	protected void removeOverviewOthersSectionAdapter(EObject object) {
+	private void removeOverviewOthersSectionAdapter(EObject object) {
 		if (EcoreUtil.getExistingAdapter(object, OverviewOthersSection.class) != null) {
 			object.eAdapters().remove(getOverviewOthersSectionAdapter());
 		}
 	}
 
-	protected OverviewOthersSectionAdapter getOverviewOthersSectionAdapter() {
+	private OverviewOthersSectionAdapter getOverviewOthersSectionAdapter() {
 		if (overviewOthersSectionAdapter == null) {
 			overviewOthersSectionAdapter = new OverviewOthersSectionAdapter();
 		}

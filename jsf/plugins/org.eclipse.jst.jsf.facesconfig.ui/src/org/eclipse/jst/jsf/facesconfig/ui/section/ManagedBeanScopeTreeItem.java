@@ -25,6 +25,9 @@ import org.eclipse.jst.jsf.facesconfig.ui.IFacesConfigConstants;
  */
 public class ManagedBeanScopeTreeItem {
 
+	/**
+	 * Possible values for bean scope
+	 */
 	public static final String[] scopeItems = {
 			IFacesConfigConstants.MANAGED_BEAN_SCOPE_SESSION,
 			IFacesConfigConstants.MANAGED_BEAN_SCOPE_REQUEST,
@@ -48,18 +51,30 @@ public class ManagedBeanScopeTreeItem {
 		this.facesConfig = facesConfig;
 	}
 
+	/**
+	 * @return the parent object
+	 */
 	public Object getParent() {
 		return facesConfig;
 	}
 
+	/**
+	 * @return true if this node has children
+	 */
 	public boolean hasChildren() {
 		return !getChildren().isEmpty();
 	}
 
+	/**
+	 * @return the scope
+	 */
 	public String getScope() {
 		return scope;
 	}
 
+	/**
+	 * @return the list of children.  List may be empty.
+	 */
 	public List getChildren() {
 		List result = new ArrayList();
 		List managedBeans = facesConfig.getManagedBean();
