@@ -56,11 +56,14 @@ public class PageflowSwitch {
 
 	/**
 	 * Calls <code>caseXXX</code> for each class of the model until one
-	 * returns a non null result; it yields that result. <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * returns a non null result; it yields that result. 
+	 * 
+	 * <!-- begin-user-doc -->
+	 * @param theEObject 
 	 * 
 	 * @return the first non-null result returned by a <code>caseXXX</code>
 	 *         call.
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Object doSwitch(EObject theEObject) {
@@ -69,11 +72,16 @@ public class PageflowSwitch {
 
 	/**
 	 * Calls <code>caseXXX</code> for each class of the model until one
-	 * returns a non null result; it yields that result. <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * returns a non null result; it yields that result. 
+	 * 
+	 * <!-- begin-user-doc -->
+	 * @param theEClass 
+	 * @param theEObject 
 	 * 
 	 * @return the first non-null result returned by a <code>caseXXX</code>
 	 *         call.
+	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected Object doSwitch(EClass theEClass, EObject theEObject) {
@@ -87,11 +95,16 @@ public class PageflowSwitch {
 
 	/**
 	 * Calls <code>caseXXX</code> for each class of the model until one
-	 * returns a non null result; it yields that result. <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * returns a non null result; it yields that result. 
+	 * 
+	 * <!-- begin-user-doc -->
+	 * @param classifierID 
+	 * @param theEObject 
 	 * 
 	 * @return the first non-null result returned by a <code>caseXXX</code>
 	 *         call.
+	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected Object doSwitch(int classifierID, EObject theEObject) {

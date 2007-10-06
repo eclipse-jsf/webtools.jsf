@@ -26,6 +26,9 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowFactory;
 public class ModelCreationFactory implements CreationFactory {
 	private Class targetClass;
 
+	/**
+	 * @param targetClass
+	 */
 	public ModelCreationFactory(Class targetClass) {
 		this.targetClass = targetClass;
 	}

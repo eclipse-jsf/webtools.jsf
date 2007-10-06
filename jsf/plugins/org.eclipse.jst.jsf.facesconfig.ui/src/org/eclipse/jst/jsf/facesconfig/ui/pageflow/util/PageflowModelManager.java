@@ -85,7 +85,7 @@ public class PageflowModelManager {
 			pathPageflow = path;
 			ResourceSet resSet = getResourceSet();
 			resourcePageflow = resSet.getResource(URI.createPlatformResourceURI(path
-					.toString()), true);
+					.toString(), false), true);
 		}
 
 		return resourcePageflow;
@@ -121,7 +121,7 @@ public class PageflowModelManager {
 			pathPageflow = path;
 			ResourceSet resSet = getResourceSet();
 			resourcePageflow = resSet.createResource(URI.createPlatformResourceURI(path
-					.toString()));
+					.toString(), false));
 		}
 		return resourcePageflow;
 	}
@@ -209,11 +209,12 @@ public class PageflowModelManager {
 	 * Saves the content of the model to the file.
 	 * 
 	 * @param path
+	 * @throws IOException 
 	 */
 	public void save(final IPath path) throws IOException {
 		if (!pathPageflow.toString().equalsIgnoreCase(path.toString())) {
 			pathPageflow = path;
-			URI fileURI = URI.createPlatformResourceURI(path.toString());
+			URI fileURI = URI.createPlatformResourceURI(path.toString(), false);
 			resourcePageflow.setURI(fileURI);
 		}
 		resourcePageflow.save(defaultSaveOptions);

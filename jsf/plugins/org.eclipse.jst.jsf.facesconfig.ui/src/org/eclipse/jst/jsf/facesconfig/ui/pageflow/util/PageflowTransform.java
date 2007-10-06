@@ -36,6 +36,7 @@ public class PageflowTransform {
 
 	/**
 	 * Returns the shared singleton instance.
+	 * @return  the singleton transform instance
 	 */
 	public static PageflowTransform getInstance() {
 		if (transform == null) {

@@ -79,6 +79,7 @@ public class PageflowValidation {
 	 * there are five types of invalid pflinke for property source. 1. link
 	 * between page and action 2. the source of link is Begin or End node 3. the
 	 * target of link is Begin or End node.
+	 * @param link 
 	 * 
 	 * @return - valid link or not.
 	 * 
@@ -91,6 +92,7 @@ public class PageflowValidation {
 	 * determine the pflink is valid or not for face-config rule in our model,
 	 * there are four types of invalid pflinke. 1. the source of link is Begin
 	 * or End node 2. the target of link is Begin or End node.
+	 * @param link 
 	 * 
 	 * @return - valid link or not.
 	 * 
@@ -102,6 +104,7 @@ public class PageflowValidation {
 	/**
 	 * determine the pflink is valid or not for face-config rule in our model,
 	 * there are four types of invalid pflinke.
+	 * @param link 
 	 * 
 	 * @return - valid link or not.
 	 * 

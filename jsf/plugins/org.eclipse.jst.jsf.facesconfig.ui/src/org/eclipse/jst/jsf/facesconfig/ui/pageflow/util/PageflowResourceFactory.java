@@ -29,6 +29,9 @@ public class PageflowResourceFactory implements CreationFactory {
 	/** resource */
 	private IResource resource;
 
+	/**
+	 * @param resource
+	 */
 	public PageflowResourceFactory(IResource resource) {
 		this.resource = resource;
 	}
