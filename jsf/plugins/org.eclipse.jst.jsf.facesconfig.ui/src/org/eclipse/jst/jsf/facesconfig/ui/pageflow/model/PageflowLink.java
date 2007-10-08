@@ -85,8 +85,14 @@ public interface PageflowLink extends PageflowElement {
 	 */
 	PageflowNode getTarget();
 
+	/**
+	 * @param path
+	 */
 	void setTargetPath(String path);
 
+	/**
+	 * @param path
+	 */
 	void setSourcePath(String path);
 
 	/**
@@ -274,30 +280,42 @@ public interface PageflowLink extends PageflowElement {
 	EList getBendPoints();
 
 	/**
-	 * <!-- begin-user-doc --> insert a new bendpoint to the link <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc --> 
+	 * insert a new bendpoint to the link 
+	 * @param index 
+	 * @param point 
+	 * <!--end-user-doc -->
 	 * 
 	 * @generated NOT
 	 */
 	public void insertBendpoint(int index, PageflowLinkBendpoint point);
 
 	/**
-	 * <!-- begin-user-doc --> remove the current bendpoint <!-- end-user-doc
-	 * -->
+	 * <!-- begin-user-doc --> 
+	 * remove the current bendpoint 
+	 * @param index 
+	 * <!-- end-user-doc -->
 	 * 
 	 * @generated NOT
 	 */
 	public void removeBendpoint(int index);
 
 	/**
-	 * <!-- begin-user-doc --> Set the current bendpoint <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> 
+	 * Set the current bendpoint 
+	 * 
+	 * @param index 
+	 * @param point 
+	 * <!-- end-user-doc -->
 	 * 
 	 * @generated NOT
 	 */
 	public void setBendpoint(int index, PageflowLinkBendpoint point);
 
 	/**
-	 * <!-- begin-user-doc --> Set a group of bendpoints to reconstruct the link
+	 * <!-- begin-user-doc --> 
+	 * Set a group of bendpoints to reconstruct the link
+	 * @param points 
 	 * <!-- end-user-doc -->
 	 * 
 	 * @generated NOT

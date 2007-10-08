@@ -105,6 +105,8 @@ public interface PageflowNode extends PageflowElement {
 	EList getInlinks();
 
 	/**
+	 * @param target 
+	 * @return the page flow node
 	 * @generated NOT
 	 */
 	PageflowLink findLinkTo(PageflowNode target);

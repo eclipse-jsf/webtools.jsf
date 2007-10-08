@@ -40,6 +40,7 @@ public interface PageflowElement extends EObject {
 	/**
 	 * The pageflow model is based on faces-config model, its elements will
 	 * reference faces-config elements with ReferenceElement.
+	 * @return the ref element
 	 * 
 	 * @generated NOT
 	 */
@@ -270,6 +271,7 @@ public interface PageflowElement extends EObject {
 	void setReferenceLink(String value);
 
 	/**
+	 * @param nofitification 
 	 * @generated NOT
 	 */
 	void notifyModelChanged(Notification nofitification);

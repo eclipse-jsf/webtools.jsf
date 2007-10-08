@@ -206,21 +206,28 @@ public interface PageflowLinkBendpoint extends EObject {
 	void setLink(PageflowLink value);
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> 
+	 * @return the first relative dim 
+	 * <!-- end-user-doc -->
 	 * 
 	 * @generated NOT
 	 */
 	public Dimension getFirstRelativeDimension();
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> 
+	 * @return the second relative dim 
+	 * <!-- end-user-doc -->
 	 * 
 	 * @generated NOT
 	 */
 	public Dimension getSecondRelativeDimension();
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> 
+	 * @param dim1 
+	 * @param dim2 
+	 * <!-- end-user-doc -->
 	 * 
 	 * @generated NOT
 	 */

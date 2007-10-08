@@ -103,12 +103,17 @@ public interface Pageflow extends PageflowElement {
 
 	/**
 	 * 
+	 * @param source 
+	 * @param target 
+	 * @param link 
 	 * @generated NOT
 	 */
 	public void connect(PageflowNode source, PageflowNode target, PageflowLink link);
 
 	/**
 	 * 
+	 * @param nodeType 
+	 * @return the default node name
 	 * @generated NOT
 	 */
 	public String getDefaultNodeName(Class nodeType);
