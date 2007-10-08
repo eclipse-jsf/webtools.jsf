@@ -44,6 +44,7 @@ public abstract class ResourceTransferDropTargetListener extends
 	 * 
 	 * @param viewer -
 	 *            target pageflow editor view.
+	 * @param editor 
 	 */
 	public ResourceTransferDropTargetListener(EditPartViewer viewer,
 			IEditorPart editor) {

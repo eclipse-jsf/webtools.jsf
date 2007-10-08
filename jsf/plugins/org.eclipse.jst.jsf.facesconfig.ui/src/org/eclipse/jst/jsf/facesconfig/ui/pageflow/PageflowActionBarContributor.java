@@ -32,6 +32,10 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.actions.ActionFactory;
 
+/**
+ * The action bar contributor for the page flow editor
+ *
+ */
 public class PageflowActionBarContributor extends ActionBarContributor
 		implements INestedActionContributor {
 
@@ -66,6 +70,9 @@ public class PageflowActionBarContributor extends ActionBarContributor
 		// do nothing
 	}
 
+	/**
+	 * Update the action keys
+	 */
 	public void updateActionKeys() {
 		declareGlobalActionKeys();
 	}

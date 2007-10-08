@@ -147,6 +147,9 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 	/** the editor's action registry */
 	private ActionRegistry actionRegistry = null;
 
+	/**
+	 * The id of the editor page
+	 */
 	public static final String PAGE_ID = "org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowEditor";
 
 	/** the list of action ids that are to EditPart actions */
@@ -178,6 +181,9 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 
 	List stackActions = new ArrayList();
 
+	/**
+	 * @return the faces-config to pageflow model
+	 */
 	public FC2PFTransformer getModelsTransform() {
 		if (modelsTransform == null) {
 			modelsTransform = new FC2PFTransformer();
@@ -185,6 +191,9 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 		return modelsTransform;
 	}
 
+	/**
+	 * update the editor actions
+	 */
 	public void updateActions() {
 		updateActions(stackActions);
 		updateActions(editPartActionIDs);
@@ -473,12 +482,7 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 				.addPropertyChangeListener(this);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see FlowEditor#getResourceFactory(IResource, ICodeGenEditor)
-	 */
-	protected CreationFactory getResourceFactory(IResource resource) {
+	private CreationFactory getResourceFactory(IResource resource) {
 		return new PageflowResourceFactory(resource);
 	}
 
@@ -669,7 +673,9 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 		return pageflow;
 	}
 
-	/** get the pageflow manager for this page */
+	/** get the pageflow manager for this page 
+	 * @return  the model manager
+	 */
 	public PageflowModelManager getPageflowManager() {
 		if (pageflowManager == null) {
 			pageflowManager = new PageflowModelManager();
@@ -828,6 +834,9 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 		return viewer;
 	}
 
+	/**
+	 * @param contents
+	 */
 	public void setGraphicalViewerContents(Object contents) {
 		viewer.setContents(contents);
 		propertyChange(null);
