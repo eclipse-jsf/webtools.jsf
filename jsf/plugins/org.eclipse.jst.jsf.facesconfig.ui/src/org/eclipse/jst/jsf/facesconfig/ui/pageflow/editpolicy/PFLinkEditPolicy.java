@@ -19,8 +19,15 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.command.ConnectionCommand;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.command.DeleteConnectionCommand;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 
+/**
+ * Customize the connection edit policy for pageflow links
+ *
+ */
 public class PFLinkEditPolicy extends ConnectionEditPolicy {
 
+	/**
+	 * Default constructor
+	 */
 	public PFLinkEditPolicy() {
 		super();
 	}

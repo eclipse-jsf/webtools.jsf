@@ -27,6 +27,10 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowNodeEditPart
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
 
+/**
+ * Customize the layout policy for page flows
+ *
+ */
 public class PageflowXYLayoutEditPolicy extends XYLayoutEditPolicy {
 	/*
 	 * (non-Javadoc)

@@ -19,6 +19,10 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.preference.GEMPreferences;
 
+/**
+ * Customize the endpoint edit policy for pageflow links
+ *
+ */
 public class PFLinkEndpointEditPolicy extends ConnectionEndpointEditPolicy {
 	/**
 	 * 
@@ -39,12 +43,7 @@ public class PFLinkEndpointEditPolicy extends ConnectionEndpointEditPolicy {
 		getConnectionFigure().setLineWidth(connectionWidth + 1);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see ConnectionEndpointEditPolicy#getConnectionFigure
-	 */
-	protected PolylineConnection getConnectionFigure() {
+	private PolylineConnection getConnectionFigure() {
 		return (PolylineConnection) ((GraphicalEditPart) getHost()).getFigure();
 	}
 

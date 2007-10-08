@@ -18,6 +18,10 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.command.DeleteNodeCommand;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
 
+/**
+ * Customize component edit policies for page flows
+ *
+ */
 public class PageflowElementEditPolicy extends
 		org.eclipse.gef.editpolicies.ComponentEditPolicy {
 	/*

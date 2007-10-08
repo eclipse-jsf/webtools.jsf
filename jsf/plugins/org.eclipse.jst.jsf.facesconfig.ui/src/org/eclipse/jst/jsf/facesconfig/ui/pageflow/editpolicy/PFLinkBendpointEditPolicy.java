@@ -22,6 +22,10 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.command.DeleteBendpointComman
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.command.MoveBendpointCommand;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 
+/**
+ * Customize the bendpoint edit policy fro pageflow link connections
+ *
+ */
 public class PFLinkBendpointEditPolicy extends BendpointEditPolicy {
 
 	/*

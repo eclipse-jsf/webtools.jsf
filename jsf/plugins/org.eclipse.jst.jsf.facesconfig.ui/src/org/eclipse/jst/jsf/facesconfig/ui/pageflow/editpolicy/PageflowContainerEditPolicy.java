@@ -24,6 +24,10 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.command.OrphanChildCommand;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
 
+/**
+ * Customize the container policy for page flow containers
+ *
+ */
 public class PageflowContainerEditPolicy extends ContainerEditPolicy {
 	/*
 	 * (non-Javadoc)
