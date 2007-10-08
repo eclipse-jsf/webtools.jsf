@@ -18,7 +18,7 @@ package org.eclipse.jst.jsf.facesconfig.ui.pageflow.command;
  * 
  * 
  */
-public interface IPreExecuteCommand {
+/*package*/ interface IPreExecuteCommand {
 	/**
 	 * Do something pre-execution of the actual command execution.
 	 * 

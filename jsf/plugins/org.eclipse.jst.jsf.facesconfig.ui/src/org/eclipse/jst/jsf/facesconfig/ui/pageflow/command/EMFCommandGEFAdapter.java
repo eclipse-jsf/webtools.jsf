@@ -19,11 +19,11 @@ import org.eclipse.gef.commands.Command;
  * @author xgzhang
  * @version
  */
-public class EMFCommandGEFAdapter extends Command {
+/*package*/ class EMFCommandGEFAdapter extends Command {
 	private org.eclipse.emf.common.command.Command emfCommand;
 
 	/**
-	 * 
+	 * @param emfCommand 
 	 */
 	public EMFCommandGEFAdapter(
 			org.eclipse.emf.common.command.Command emfCommand) {
@@ -118,7 +118,7 @@ public class EMFCommandGEFAdapter extends Command {
 	/**
 	 * 
 	 */
-	public org.eclipse.emf.common.command.Command getEMFCommand() {
+	org.eclipse.emf.common.command.Command getEMFCommand() {
 		return emfCommand;
 	}
 }

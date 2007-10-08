@@ -25,6 +25,9 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage;
  * 
  */
 public class CreateBendpointCommand extends BendpointCommand {
+	/**
+	 * Default constructor
+	 */
 	public CreateBendpointCommand() {
 		// Pageflow.Commands.CreateBendpointCommand.Label = Create Bendpoint
 		super(PageflowMessages.Pageflow_Commands_CreateBendpointCommand_Label);

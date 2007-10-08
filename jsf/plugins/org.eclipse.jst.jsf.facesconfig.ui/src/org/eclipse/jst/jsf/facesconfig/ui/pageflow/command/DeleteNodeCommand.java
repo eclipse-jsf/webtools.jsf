@@ -48,6 +48,9 @@ public class DeleteNodeCommand extends AbstractBatchEditCommand {
 
 	private List targetConnectionTargets = new ArrayList();
 
+	/**
+	 * @param pageflow
+	 */
 	public DeleteNodeCommand(Pageflow pageflow) {
 		// Pageflow.Commands.DeleteNodeCommand.Label = Delete
 		super(pageflow, PageflowMessages.Pageflow_Commands_DeleteNodeCommand_Label);

@@ -21,7 +21,7 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
  * base class for bend point commands.
  * 
  */
-public abstract class BendpointCommand extends Command {
+/*package*/ abstract class BendpointCommand extends Command {
 	/** the index of the bend point */
 	protected int index;
 
@@ -37,6 +37,9 @@ public abstract class BendpointCommand extends Command {
 	/** relative dimension between the bendpoint with end point of the pflink */
 	private Dimension dimEnd;
 
+	/**
+	 * @param label
+	 */
 	public BendpointCommand(String label) {
 		super(label);
 	}

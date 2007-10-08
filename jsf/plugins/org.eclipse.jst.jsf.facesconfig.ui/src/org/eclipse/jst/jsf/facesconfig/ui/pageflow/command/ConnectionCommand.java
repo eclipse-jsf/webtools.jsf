@@ -39,6 +39,9 @@ public abstract class ConnectionCommand extends Command {
 	/** pageflow link */
 	protected PageflowLink link;
 
+	/**
+	 * Default constructor
+	 */
 	public ConnectionCommand() {
 		super(PageflowMessages.Pageflow_Commands_ConnectionCommand_Label);
 	}
@@ -52,6 +55,9 @@ public abstract class ConnectionCommand extends Command {
 		return TransformUtil.isValidPageflowElement(link);
 	}
 
+	/**
+	 * perform the main command execution.  Sub-classes should override.
+	 */
 	protected void doExecute() {
 	    // do nothing; sub-class can over-ride
 	}

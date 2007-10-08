@@ -23,6 +23,9 @@ public class DeleteBendpointCommand extends BendpointCommand {
 	/** the deleting bendpoint */
 	private PageflowLinkBendpoint bendpoint;
 
+	/**
+	 * Default constructor
+	 */
 	public DeleteBendpointCommand() {
 
 		// Pageflow.Commands.DeleteBendpointCommand.Label = Delete Bendpoint

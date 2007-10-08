@@ -31,6 +31,9 @@ public class AddNodeCommand extends Command {
 	/** index of pageflow nodes */
 	private int index = -1;
 
+	/**
+	 * Default constructor
+	 */
 	public AddNodeCommand() {
 		// Pageflow.Commands.AddNodeCommand.Label = add
 		super(PageflowMessages.Pageflow_Commands_AddNodeCommand_Label);
@@ -73,6 +76,7 @@ public class AddNodeCommand extends Command {
 
 	/**
 	 * get parent pageflow of the node.
+	 * @return the parent
 	 * 
 	 */
 	public Pageflow getParent() {

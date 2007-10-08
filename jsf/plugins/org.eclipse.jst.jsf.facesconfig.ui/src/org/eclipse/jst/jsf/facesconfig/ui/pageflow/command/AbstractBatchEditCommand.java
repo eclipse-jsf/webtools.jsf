@@ -26,19 +26,28 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.synchronization.FC2PFTransfor
  * @author hmeng
  */
 
-public abstract class AbstractBatchEditCommand extends Command {
+/*package*/ abstract class AbstractBatchEditCommand extends Command {
 	Pageflow pageflow;
 
+	/**
+	 * @param pageflow
+	 */
 	public AbstractBatchEditCommand(Pageflow pageflow) {
-		super();
-		this.pageflow = pageflow;
+		this(pageflow, null);
 	}
 
+	/**
+	 * @param pageflow
+	 * @param label
+	 */
 	public AbstractBatchEditCommand(Pageflow pageflow, String label) {
 		super(label);
 		this.pageflow = pageflow;
 	}
 
+	/**
+	 * @return the pageflow
+	 */
 	public Pageflow getPageflow() {
 		return pageflow;
 	}
@@ -62,8 +71,14 @@ public abstract class AbstractBatchEditCommand extends Command {
 		postExecute();
 	}
 
+	/**
+	 * 
+	 */
 	abstract public void doExecute();
 
+	/**
+	 * Do the customized redo
+	 */
 	public void doRedo() {
 		execute();
 	}
@@ -77,6 +92,9 @@ public abstract class AbstractBatchEditCommand extends Command {
 						PageflowPackage.PAGEFLOW, null, null));
 	}
 
+	/**
+	 * execute the post-execution handling
+	 */
 	final protected void postExecute() {
 		getPageflow().eNotify(
 				new ENotificationImpl((InternalEObject) getPageflow(),
@@ -85,6 +103,9 @@ public abstract class AbstractBatchEditCommand extends Command {
 		notifyPageflow(getPageflow());
 	}
 
+	/**
+	 * @param pageflow_
+	 */
 	protected void notifyPageflow(Pageflow pageflow_) {
 		pageflow_.notifyModelChanged(new ENotificationImpl(
 				(InternalEObject) pageflow_, Notification.ADD,

@@ -29,7 +29,7 @@ public class EMFCommandStackGEFAdapter extends CommandStack implements
 	private org.eclipse.emf.common.command.BasicCommandStack emfCommandStack;
 
 	/**
-	 * 
+	 * @param emfCommandStack 
 	 */
 	public EMFCommandStackGEFAdapter(
 			org.eclipse.emf.common.command.BasicCommandStack emfCommandStack) {

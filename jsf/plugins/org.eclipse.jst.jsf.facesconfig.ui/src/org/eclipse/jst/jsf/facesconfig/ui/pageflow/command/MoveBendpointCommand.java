@@ -29,6 +29,9 @@ public class MoveBendpointCommand extends BendpointCommand {
 	 */
 	private PageflowLinkBendpoint oldBendpoint;
 
+	/**
+	 * Default constructor
+	 */
 	public MoveBendpointCommand() {
 		// Pageflow.Commands.MoveBendpointCommand.Label = Move Bendpoint
 		super(PageflowMessages.Pageflow_Commands_MoveBendpointCommand_Label);

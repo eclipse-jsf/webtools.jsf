@@ -23,6 +23,10 @@ import org.eclipse.gef.RequestConstants;
  * 
  */
 public class ConnectionCommandFactory {
+	/**
+	 * @param request
+	 * @return the connection command for  the request
+	 */
 	public static ConnectionCommand createCommand(Request request) {
 		ConnectionCommand command = null;
 		if (request.getType() == RequestConstants.REQ_CONNECTION_START

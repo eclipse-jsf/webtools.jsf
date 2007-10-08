@@ -179,7 +179,7 @@ public class CreateNodeCommand extends Command implements IPreExecuteCommand {
 
 	/**
 	 * call the JSF wizard to create a new jsf page.
-	 * 
+	 * @return the parent
 	 * 
 	 */
 	public Pageflow getParent() {

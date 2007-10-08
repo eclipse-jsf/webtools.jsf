@@ -23,8 +23,11 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowValidation;
  */
 public class ReconnectConnectionCommand extends ConnectionCommand {
 
+	/**
+	 * Default constructor
+	 */
 	public ReconnectConnectionCommand() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
 	public boolean canExecute() {

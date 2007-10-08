@@ -24,7 +24,6 @@ import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PageflowNodeImpl;
 import org.eclipse.jst.jsf.facesconfig.ui.util.WebrootUtil;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorDescriptor;
@@ -41,8 +40,6 @@ import org.eclipse.ui.part.FileEditorInput;
  * @author Xiao-guang Zhang
  */
 public class OpenEditorCommand extends Command {
-	/** The selected object */
-	private PageflowNodeImpl child = null;
 
 	/** The edit part */
 	private EditPart part;
@@ -70,20 +67,6 @@ public class OpenEditorCommand extends Command {
 		// Pageflow.Commands.OpenEditorCommand.Label = Open Editor
 		super(PageflowMessages.Pageflow_Commands_OpenEditorCommand_Label);
 		this.part = part;
-	}
-
-	/**
-	 * Sets the selected object
-	 * 
-	 * @param child -
-	 *            the PFPageImpl
-	 */
-	public void setChild(PageflowNodeImpl child) {
-		this.child = child;
-	}
-
-	public PageflowNodeImpl getChild() {
-		return child;
 	}
 
 	/**

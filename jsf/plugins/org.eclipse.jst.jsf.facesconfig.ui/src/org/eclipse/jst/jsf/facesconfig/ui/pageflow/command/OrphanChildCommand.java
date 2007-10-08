@@ -38,6 +38,9 @@ public class OrphanChildCommand extends Command {
 	/** the index of pageflow nodes */
 	private int index;
 
+	/**
+	 * Default constructor
+	 */
 	public OrphanChildCommand() {
 		// Pageflow.Commands.OrphanChildCommand.Label = Orphan Child
 		super(PageflowMessages.Pageflow_Commands_OrphanChildCommand_Label);
