@@ -17,12 +17,12 @@ import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IElementChangedListener;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaElementDelta;
+import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.ITypeHierarchy;
 import org.eclipse.jdt.core.ITypeRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
-import org.eclipse.jdt.internal.core.PackageFragment;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 import org.eclipse.jst.jsf.context.symbol.IBeanMethodSymbol;
 import org.eclipse.jst.jsf.context.symbol.IBeanPropertySymbol;
@@ -428,7 +428,7 @@ public class TypeInfoCache implements IElementChangedListener {
                 updateChangedPackageFragmentRoot(delta, element);
                 break;
             case IJavaElement.PACKAGE_FRAGMENT:
-                updateChangedPackageFragment(delta, (PackageFragment) element);
+                updateChangedPackageFragment(delta, (IPackageFragment) element);
                 break;
             case IJavaElement.CLASS_FILE:
             case IJavaElement.COMPILATION_UNIT:
@@ -478,7 +478,7 @@ public class TypeInfoCache implements IElementChangedListener {
         }
     }
 
-   private void updateChangedPackageFragment(IJavaElementDelta delta, PackageFragment element) {
+   private void updateChangedPackageFragment(IJavaElementDelta delta, IPackageFragment element) {
         switch (delta.getKind()) {
             case IJavaElementDelta.ADDED :
                 // if the package fragment is in the projects being considered, this could

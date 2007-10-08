@@ -18,13 +18,11 @@ import java.util.Stack;
 import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.EntityGroup;
 import org.eclipse.jst.jsf.common.metadata.query.AbstractEntityQueryVisitor;
-import org.eclipse.jst.jsf.common.metadata.query.IEntityQueryVisitor;
 import org.eclipse.jst.jsf.common.metadata.query.IResultSet;
-import org.eclipse.jst.jsf.common.metadata.query.ITraitQueryVisitor;
 
 
 /**
- * A simple metadata query visitor implementing {@link IEntityQueryVisitor} and {@link ITraitQueryVisitor}.
+ * A simple metadata query visitor implementing {@link org.eclipse.jst.jsf.common.metadata.query.IEntityQueryVisitor} and {@link org.eclipse.jst.jsf.common.metadata.query.ITraitQueryVisitor}.
  * - simple find entity and traits by id only 	
  * - Does not allow for wild card searchs
  */

@@ -16,10 +16,9 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.jst.jsf.common.metadata.query.AbstractResultSet;
-import org.eclipse.jst.jsf.common.metadata.query.IResultSet;
 
 /**
- * Simple implementation of {@link IResultSet} by extending AbstractResultSet
+ * Simple implementation of {@link org.eclipse.jst.jsf.common.metadata.query.IResultSet} by extending AbstractResultSet
  *
  */
 public final class SimpleResultSet/*<T>*/ extends AbstractResultSet/*<T>*/ {	

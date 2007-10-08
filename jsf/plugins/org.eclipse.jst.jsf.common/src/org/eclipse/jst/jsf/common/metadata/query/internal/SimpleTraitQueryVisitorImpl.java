@@ -19,11 +19,10 @@ import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.Trait;
 import org.eclipse.jst.jsf.common.metadata.query.AbstractTraitQueryVisitor;
 import org.eclipse.jst.jsf.common.metadata.query.IResultSet;
-import org.eclipse.jst.jsf.common.metadata.query.ITraitQueryVisitor;
 
 
 /**
- * A simple metadata query visitor implementing {@link ITraitQueryVisitor}.
+ * A simple metadata query visitor implementing {@link org.eclipse.jst.jsf.common.metadata.query.ITraitQueryVisitor}.
  * - simple find traits by id only 	
  * - Does not allow for wild card searchs
  */
