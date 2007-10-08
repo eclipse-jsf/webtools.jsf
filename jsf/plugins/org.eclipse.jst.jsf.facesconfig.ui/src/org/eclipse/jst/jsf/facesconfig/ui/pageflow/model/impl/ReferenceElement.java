@@ -31,12 +31,22 @@ public abstract class ReferenceElement {
 
 	private List data = new ArrayList();
 
+	/**
+	 * the pageflow element
+	 */
 	protected PageflowElement pageflowElement;
 
+	/**
+	 * @param pageflowElement
+	 */
 	public ReferenceElement(PageflowElement pageflowElement) {
 		this.pageflowElement = pageflowElement;
 	}
 
+	/**
+	 * @param pageflowElement
+	 * @param facesConfigObject
+	 */
 	public ReferenceElement(PageflowElement pageflowElement,
 			EObject facesConfigObject) {
 		this(pageflowElement);
@@ -54,9 +64,6 @@ public abstract class ReferenceElement {
 		}
 	}
 
-	public boolean contains(EObject object) {
-		return data.contains(object);
-	}
 
 	/**
 	 * The fragment path of a node.
@@ -72,11 +79,6 @@ public abstract class ReferenceElement {
 			return uriTarget;
 		}
         return "";
-	}
-
-	public boolean remove(EObject object) {
-		boolean result = data.remove(object);
-		return result;
 	}
 
 	/**
@@ -118,16 +120,25 @@ public abstract class ReferenceElement {
 		return data;
 	}
 
+	/**
+	 * Clear the data
+	 */
 	public void clear() {
 		if (!data.isEmpty()) {
 			data.clear();
 		}
 	}
 
+	/**
+	 * @return true if the data is empty
+	 */
 	public boolean isEmpty() {
 		return data.isEmpty();
 	}
 
+	/**
+	 * Dispose the element
+	 */
 	public void dispose() {
 		clear();
 	}

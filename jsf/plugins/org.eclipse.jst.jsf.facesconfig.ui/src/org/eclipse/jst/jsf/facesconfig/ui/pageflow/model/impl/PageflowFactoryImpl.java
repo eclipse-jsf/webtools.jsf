@@ -108,16 +108,5 @@ public class PageflowFactoryImpl extends EFactoryImpl implements
 	public PageflowPackage getPageflowPackage() {
 		return (PageflowPackage) getEPackage();
 	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @deprecated
-	 * @generated
-	 */
-	public static PageflowPackage getPackage() {
-		return PageflowPackage.eINSTANCE;
-	}
-
 }
 // PageflowFactoryImpl

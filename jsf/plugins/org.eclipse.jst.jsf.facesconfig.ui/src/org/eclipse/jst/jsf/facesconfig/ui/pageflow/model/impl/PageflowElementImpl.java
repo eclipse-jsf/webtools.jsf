@@ -40,12 +40,21 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.synchronization.TransformUtil
  */
 public abstract class PageflowElementImpl extends EObjectImpl implements
 		PageflowElement {
-	protected static final String idPrefix = "pf";
+	private static final String idPrefix = "pf";
 
-	protected String id;
+	/**
+	 * @generated NOT
+	 */
+	private String id;
 
-	protected static int counter = 0;
+	/**
+	 * @generated NOT
+	 */
+	private static int counter = 0;
 
+	/**
+	 * the reference element
+	 */
 	protected ReferenceElement refElement;
 
 	/**

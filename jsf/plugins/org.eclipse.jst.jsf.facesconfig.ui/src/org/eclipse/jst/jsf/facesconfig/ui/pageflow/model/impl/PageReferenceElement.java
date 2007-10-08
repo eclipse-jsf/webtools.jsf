@@ -43,15 +43,20 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.synchronization.TransformUtil
 
 public class PageReferenceElement extends ReferenceElement {
 
+	/**
+	 * @param pageflowElement
+	 */
 	public PageReferenceElement(PageflowElement pageflowElement) {
 		super(pageflowElement);
-		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * @param pageflowElement
+	 * @param facesConfigObject
+	 */
 	public PageReferenceElement(PageflowElement pageflowElement,
 			EObject facesConfigObject) {
 		super(pageflowElement, facesConfigObject);
-		// TODO Auto-generated constructor stub
 	}
 
 	public void add(EObject object) {
@@ -200,14 +205,14 @@ public class PageReferenceElement extends ReferenceElement {
 		return result;
 	}
 
-	public NavigationRuleType resolveRuleFromFCElement(Object object) {
+	private NavigationRuleType resolveRuleFromFCElement(Object object) {
 		if (object instanceof FromViewIdType) {
 			return (NavigationRuleType) ((FromViewIdType) object).eContainer();
 		}
 		return null;
 	}
 
-	public NavigationRuleType resolveRuleFromPFElement(Object object) {
+	private NavigationRuleType resolveRuleFromPFElement(Object object) {
 		if (object instanceof PageflowLink) {
 			NavigationCaseType caseType = (NavigationCaseType) ((PageflowLink) object)
 					.getFCElements().getData().get(0);
@@ -381,6 +386,9 @@ public class PageReferenceElement extends ReferenceElement {
 		}
 	}
 
+	/**
+	 * @return true if none of the data are from view id's
+	 */
 	public boolean isEndOnly() {
 		for (int i = 0, n = getData().size(); i < n; i++) {
 			if (getData().get(i) instanceof FromViewIdType) {

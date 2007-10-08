@@ -115,7 +115,11 @@ public class PageflowPackageImpl extends EPackageImpl implements
 	 * package's meta-model objects may refer to those of another.
 	 * <p>
 	 * Invocation of this method will not affect any packages that have already
-	 * been initialized. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * been initialized. 
+	 * 
+	 * <!-- begin-user-doc --> 
+ 	 * @return the package 
+	 * <!-- end-user-doc -->
 	 * 
 	 * @see #eNS_URI
 	 * @see #createPackageContents()
@@ -280,7 +284,9 @@ public class PageflowPackageImpl extends EPackageImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> 
+	 * @return the small icon eattribute 
+	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -289,8 +295,9 @@ public class PageflowPackageImpl extends EPackageImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc --> 
+	 * @return the large icon attribute 
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EAttribute getPFLink_Largeicon() {
@@ -307,7 +314,9 @@ public class PageflowPackageImpl extends EPackageImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> 
+	 * @return the reference link eattribute 
+	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */

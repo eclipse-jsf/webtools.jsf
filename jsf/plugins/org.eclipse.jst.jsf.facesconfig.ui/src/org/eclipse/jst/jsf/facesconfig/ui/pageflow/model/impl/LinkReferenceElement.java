@@ -44,15 +44,20 @@ public class LinkReferenceElement extends ReferenceElement {
 		super.add(object);
 	}
 
+	/**
+	 * @param pageflowElement
+	 */
 	public LinkReferenceElement(PageflowElement pageflowElement) {
 		super(pageflowElement);
-		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * @param pageflowElement
+	 * @param facesConfigObject
+	 */
 	public LinkReferenceElement(PageflowElement pageflowElement,
 			EObject facesConfigObject) {
 		super(pageflowElement, facesConfigObject);
-		// TODO Auto-generated constructor stub
 	}
 
 	public void update() {

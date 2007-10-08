@@ -227,7 +227,10 @@ public class PageflowLinkImpl extends PageflowElementImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> 
+	 * @return the target
+	 * <!-- end-user-doc -->
+	 *  
 	 * 
 	 * @generated
 	 */
@@ -236,7 +239,11 @@ public class PageflowLinkImpl extends PageflowElementImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> 
+ 	 * @param newTarget 
+	 * @param msgs 
+	 * @return the notification chain 
+	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -299,7 +306,9 @@ public class PageflowLinkImpl extends PageflowElementImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> 
+	 * @return the pageflow node 
+	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -308,7 +317,11 @@ public class PageflowLinkImpl extends PageflowElementImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> 
+	 * @param newSource 
+	 * @param msgs 
+	 * @return the notification chain 
+	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
