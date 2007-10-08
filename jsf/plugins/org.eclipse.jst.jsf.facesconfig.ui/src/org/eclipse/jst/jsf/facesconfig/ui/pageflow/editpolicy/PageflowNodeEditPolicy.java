@@ -31,9 +31,12 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowNodeEditPart
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.figure.PageflowNodeFigure;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
-import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.impl.PageflowNodeImpl;
 import org.eclipse.jst.jsf.facesconfig.ui.preference.GEMPreferences;
 
+/**
+ * Customizes conntection policies
+ *
+ */
 public class PageflowNodeEditPolicy extends GraphicalNodeEditPolicy {
 	/*
 	 * (non-Javadoc)
@@ -142,11 +145,7 @@ public class PageflowNodeEditPolicy extends GraphicalNodeEditPolicy {
 	 */
 	public Command getCommand(Request request) {
 		if (OpenEditorAction.OPEN_EDITOR_REQUEST.equals(request.getType())) {
-			OpenEditorCommand command = new OpenEditorCommand(getHost());
-
-			command.setChild((PageflowNodeImpl) getHost().getModel());
-
-			return command;
+			return new OpenEditorCommand(getHost());
 		}
 
 		return super.getCommand(request);
