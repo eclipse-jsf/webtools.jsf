@@ -29,8 +29,14 @@ public final class EditorMessages extends NLS {
 		NLS.initializeMessages(BUNDLE_NAME, EditorMessages.class);
 	}
 
+	/**
+	 * see EditorMessages.properties
+	 */
 	public static String AddEditManagedPropertyDialog_Add;
 
+	/**
+	 * see EditorMessages.properties
+	 */
 	public static String AddEditManagedPropertyDialog_Edit;
 
 	/**

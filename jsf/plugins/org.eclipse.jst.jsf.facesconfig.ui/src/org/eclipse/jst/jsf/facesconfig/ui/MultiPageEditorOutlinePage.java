@@ -384,7 +384,7 @@ public class MultiPageEditorOutlinePage extends Page implements
 	/*
 	 * (non-Javadoc) Method declared on PageBookView.
 	 */
-	protected PageRec doCreatePage(IWorkbenchPart part) {
+	private PageRec doCreatePage(IWorkbenchPart part) {
 		// Try to get an outline page.
 		Object obj = part.getAdapter(IContentOutlinePage.class);
 		if (obj instanceof IContentOutlinePage) {

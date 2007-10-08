@@ -871,7 +871,7 @@ public class FacesConfigEditor extends FormEditor implements
 			IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
 			if (file != null) {
 				doSaveAs(URI.createPlatformResourceURI(file.getFullPath()
-						.toString()), new FileEditorInput(file));
+						.toString(), false), new FileEditorInput(file));
 			}
 		}
 	}

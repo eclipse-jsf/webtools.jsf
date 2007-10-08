@@ -27,7 +27,6 @@ import org.eclipse.jst.jsf.facesconfig.ui.preference.GEMPreferences;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
@@ -96,7 +95,7 @@ public class EditorPlugin extends AbstractUIPlugin {//implements IStartup {
 	}
 
 	/**
-	 * Returns the shared instance.
+	 * @return the shared instance.
 	 */
 	public static EditorPlugin getDefault() {
 		return plugin;
@@ -111,6 +110,8 @@ public class EditorPlugin extends AbstractUIPlugin {//implements IStartup {
 
 	/**
 	 * Returns a logger for the new class using this plugin for reference.
+	 * @param theClass 
+	 * @return the default root logger
 	 */
 	public static Logger getLogger(Class theClass) {
 		return getDefault().getRootLogger(); // .getLogger(theClass);
@@ -118,6 +119,7 @@ public class EditorPlugin extends AbstractUIPlugin {//implements IStartup {
 
 	/**
 	 * Returns the plugin's root logger
+	 * @return the root logger
 	 */
 	public Logger getRootLogger() {
 		return log;
@@ -125,6 +127,7 @@ public class EditorPlugin extends AbstractUIPlugin {//implements IStartup {
 
 	/**
 	 * Returns the plugin's resource bundle,
+	 * @return the resource bundle
 	 */
 	public ResourceBundle getResourceBundle() {
 		return resourceBundle;
@@ -133,6 +136,8 @@ public class EditorPlugin extends AbstractUIPlugin {//implements IStartup {
 	/**
 	 * Returns the string from the plugin's resource bundle, or 'key' if not
 	 * found.
+	 * @param key 
+	 * @return the resource bundle string for key
 	 */
 	public static String getResourceString(String key) {
 		ResourceBundle bundle = getDefault().getResourceBundle();
@@ -147,6 +152,7 @@ public class EditorPlugin extends AbstractUIPlugin {//implements IStartup {
 	 * Returns the standard display to be used. The method first checks, if the
 	 * thread calling this method has an associated dispaly. If so, this display
 	 * is returned. Otherwise the method returns the default display.
+	 * @return the standard display
 	 */
 	public static Display getStandardDisplay() {
 		Display display;
@@ -170,6 +176,9 @@ public class EditorPlugin extends AbstractUIPlugin {//implements IStartup {
         return getDefault().getWorkbench().getActiveWorkbenchWindow();
 	}
 
+	/**
+	 * @return the active shell
+	 */
 	public static Shell getActiveShell() {
 		Shell shell = null;
 		IWorkbenchWindow workbenchWindow = getActiveWorkbenchWindow();
@@ -179,22 +188,6 @@ public class EditorPlugin extends AbstractUIPlugin {//implements IStartup {
 			shell = new Shell();
 		}
 		return shell;
-	}
-
-	/**
-	 * Returns the active workbench page. Note that the active page may not be
-	 * the one that the user perceives as active in some situations so this
-	 * method of obtaining the activate page should only be used if no other
-	 * method is available.
-	 * 
-	 * @return the active workbench page
-	 */
-	public static IWorkbenchPage getActivePage() {
-		IWorkbenchWindow window = getActiveWorkbenchWindow();
-		if (window == null) {
-			return null;
-		}
-		return window.getActivePage();
 	}
 
 	/**
@@ -262,7 +255,7 @@ public class EditorPlugin extends AbstractUIPlugin {//implements IStartup {
 	/**
 	 * Returns this plugin's unique identifier
 	 * 
-	 * @retun this plugin's unique identifier
+	 * @return this plugin's unique identifier
 	 * 
 	 */
 	public static String getPluginId() {

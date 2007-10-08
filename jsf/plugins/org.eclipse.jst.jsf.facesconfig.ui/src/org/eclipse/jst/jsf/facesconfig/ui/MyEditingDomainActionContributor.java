@@ -27,6 +27,9 @@ import org.eclipse.ui.actions.ActionFactory;
  */
 public class MyEditingDomainActionContributor extends
 		EditingDomainActionBarContributor implements INestedActionContributor {
+	/**
+	 * Default constructor
+	 */
 	public MyEditingDomainActionContributor() {
 		super();
 	}

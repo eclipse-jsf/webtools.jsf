@@ -18,5 +18,8 @@ package org.eclipse.jst.jsf.facesconfig.ui;
  * required.
  */
 public interface INestedActionContributor {
+	/**
+	 * Updated nested actions
+	 */
 	void update();
 }

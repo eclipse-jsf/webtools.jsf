@@ -37,16 +37,17 @@ import org.eclipse.wst.xml.ui.internal.tabletree.SourcePageActionContributor;
 
 public class FacesConfigActionBarContributor extends
 		MultiPageEditorActionBarContributor {
-	protected SourcePageActionContributor sourceActionContributor = null;
+	private SourcePageActionContributor sourceActionContributor = null;
 
-	protected PageflowActionBarContributor pageflowActionContributor = null;
+	private PageflowActionBarContributor pageflowActionContributor = null;
 
-	protected EditingDomainActionBarContributor formbasedPageActionContributor = null;
+	private EditingDomainActionBarContributor formbasedPageActionContributor = null;
 
 	private IEditorPart activeNestedEditor;
 
-	//private IEditorPart targetEditor;
-
+	/**
+	 * Default constructor
+	 */
 	public FacesConfigActionBarContributor() {
 		super();
 	}
@@ -142,25 +143,21 @@ public class FacesConfigActionBarContributor extends
 		return activeContributor;
 	}
 
-	public SourcePageActionContributor getSourceActionContributor() {
+	private SourcePageActionContributor getSourceActionContributor() {
 		if (sourceActionContributor == null) {
 			sourceActionContributor = new SourcePageActionContributor();
 		}
 		return sourceActionContributor;
 	}
 
-	public EditingDomainActionBarContributor getFormbasedPageActionContributor() {
+	private EditingDomainActionBarContributor getFormbasedPageActionContributor() {
 		if (formbasedPageActionContributor == null) {
 			formbasedPageActionContributor = new MyEditingDomainActionContributor();
 		}
 		return formbasedPageActionContributor;
 	}
 
-//	protected void declareGlobalActionKeys() {
-//        // 
-//	}
-
-	public PageflowActionBarContributor getPageflowActionContributor() {
+	private PageflowActionBarContributor getPageflowActionContributor() {
 		if (pageflowActionContributor == null) {
 			pageflowActionContributor = new PageflowActionBarContributor();
 		}
@@ -168,6 +165,9 @@ public class FacesConfigActionBarContributor extends
 
 	}
 
+	/**
+	 * update the action bars
+	 */
 	public void updateActionBars() {
 		EditorActionBarContributor activeContributor = getActionContributor(activeNestedEditor);
 		if (activeContributor instanceof INestedActionContributor)
