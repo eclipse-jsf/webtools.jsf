@@ -41,7 +41,7 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
  * @author jchoi
  * @version
  */
-public class LinkGroup extends AbstractEditPartGroup {
+/*package*/ class LinkGroup extends AbstractEditPartGroup {
 	private StringButtonDialogField fromOutcomeField;
 
 	private StringDialogField fromActionField;
@@ -175,23 +175,38 @@ public class LinkGroup extends AbstractEditPartGroup {
 
 	}
 
+	/**
+	 * @param elem
+	 */
 	public void setPropertyProvider(PageflowLink elem) {
 		pfLink = elem;
 		this.refreshData();
 	}
 
+	/**
+	 * @return the outcome field
+	 */
 	public StringButtonDialogField getFromOutcomeField() {
 		return fromOutcomeField;
 	}
 
+	/**
+	 * @return the fromAction field
+	 */
 	public StringDialogField getFromActionField() {
 		return fromActionField;
 	}
 
+	/**
+	 * @return the redirect field
+	 */
 	public ComboDialogField getRedirectField() {
 		return redirectField;
 	}
 
+	/**
+	 * @return the redirect value
+	 */
 	public Integer getRedirectValue() {
 		if (redirectField.getText().equalsIgnoreCase(Boolean.TRUE.toString())) {
 			return LinkGroup.P_VALUE_TRUE;

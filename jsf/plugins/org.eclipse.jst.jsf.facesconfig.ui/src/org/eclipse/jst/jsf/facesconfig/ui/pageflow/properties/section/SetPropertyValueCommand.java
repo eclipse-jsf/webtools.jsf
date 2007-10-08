@@ -17,22 +17,21 @@ import org.eclipse.gef.commands.Command;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.PropertyMessages;
 import org.eclipse.ui.views.properties.IPropertySource;
 
-public class SetPropertyValueCommand extends Command {
+/*package*/ class SetPropertyValueCommand extends Command {
 
-	protected Object propertyValue;
+	private Object propertyValue;
 
-	protected Object propertyID;
+	private Object propertyID;
 
-	protected Object undoValue;
+	private Object undoValue;
 
-	protected boolean resetOnUndo;
+	private boolean resetOnUndo;
 
-	protected IPropertySource target;
+	private IPropertySource target;
 
-	public SetPropertyValueCommand() {
-		super(""); //$NON-NLS-1$
-	}
-
+	/**
+	 * @param propLabel
+	 */
 	public SetPropertyValueCommand(String propLabel) {
 		super(MessageFormat.format(
 				PropertyMessages.property_Command_SetValue,
@@ -60,11 +59,14 @@ public class SetPropertyValueCommand extends Command {
 		}
 	}
 
-	public IPropertySource getTarget() {
+	/**
+	 * @return the target
+	 */
+	private IPropertySource getTarget() {
 		return target;
 	}
 
-	public void setTarget(IPropertySource aTarget) {
+	void setTarget(IPropertySource aTarget) {
 		target = aTarget;
 	}
 
@@ -72,11 +74,11 @@ public class SetPropertyValueCommand extends Command {
 		execute();
 	}
 
-	public void setPropertyId(Object pName) {
+	void setPropertyId(Object pName) {
 		propertyID = pName;
 	}
 
-	public void setPropertyValue(Object val) {
+	void setPropertyValue(Object val) {
 		propertyValue = val;
 	}
 

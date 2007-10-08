@@ -37,7 +37,7 @@ import org.eclipse.wst.common.ui.properties.internal.provisional.AbstractPropert
  * 
  * @author jchoi, Xiao-guang Zhang
  */
-public abstract class AbstractEditPartSection extends AbstractPropertySection {
+/*package*/ abstract class AbstractEditPartSection extends AbstractPropertySection {
 
 	IDialogFieldChangeListener changeListener = new IDialogFieldChangeListener() {
 		public void dialogFieldChanged(DialogField field) {

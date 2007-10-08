@@ -23,7 +23,7 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
  * @author jchoi
  * @version
  */
-public abstract class AbstractEditPartGroup extends DialogFieldGroup {
+/*package*/ abstract class AbstractEditPartGroup extends DialogFieldGroup {
 
 	private StringDialogField descField;
 
@@ -46,29 +46,38 @@ public abstract class AbstractEditPartGroup extends DialogFieldGroup {
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.jst.jsf.facesconfig.ui.common.dialogfield.DialogFieldGroup#layoutDialogFields(org.eclipse.ui.forms.widgets.FormToolkit,
-	 *      org.eclipse.swt.widgets.Composite)
+
+	/**
+	 * @param toolkit
+	 * @param parent
+	 * @param col
 	 */
-	public void layoutDialogFields(FormToolkit toolkit, Composite parent,
+	protected void layoutDialogFields(FormToolkit toolkit, Composite parent,
 			int col) {
 		displayNameField.doFillIntoGrid(toolkit, parent, col);
 		descField.doFillIntoGrid(toolkit, parent, col);
 
 	}
 
+	/**
+	 * @param elem
+	 */
 	protected void refreshData(PageflowElement elem) {
 		descField.setTextWithoutUpdate(elem.getComment());
 		displayNameField.setTextWithoutUpdate(elem.getName());
 	}
 
-	public StringDialogField getDescField() {
+	/**
+	 * @return the description field
+	 */
+	protected StringDialogField getDescField() {
 		return descField;
 	}
 
-	public StringDialogField getDisplayNameField() {
+	/**
+	 * @return the display name field
+	 */
+	protected StringDialogField getDisplayNameField() {
 		return displayNameField;
 	}
 
@@ -86,9 +95,5 @@ public abstract class AbstractEditPartGroup extends DialogFieldGroup {
 	public IStatus[] validateDialogFields() {
 
 		return null;
-	}
-
-	protected String assertString(String value) {
-		return value == null ? "" : value;
 	}
 }

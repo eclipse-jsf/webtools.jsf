@@ -24,7 +24,7 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
  * @author jchoi
  * @version
  */
-public class EditorGroup extends AbstractEditPartGroup {
+/*package*/ class EditorGroup extends AbstractEditPartGroup {
 	private Pageflow pageflow = null;
 
 	/*

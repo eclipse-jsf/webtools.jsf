@@ -34,7 +34,7 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
  * @author jchoi
  * @version
  */
-public class PageGroup extends AbstractEditPartGroup {
+/*package*/ class PageGroup extends AbstractEditPartGroup {
 
 	private StringButtonDialogField fromViewField;
 
@@ -100,7 +100,13 @@ public class PageGroup extends AbstractEditPartGroup {
 		}
 
 	}
-
+	/**
+	 * @param value
+	 * @return the assertion string
+	 */
+	private static String assertString(String value) {
+		return value == null ? "" : value;
+	}
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -135,19 +141,31 @@ public class PageGroup extends AbstractEditPartGroup {
 		fromViewField.getChangeControl(toolkit, top).setLayoutData(data);
 	}
 
+	/**
+	 * @param elem
+	 */
 	public void setPropertyProvider(PageflowPage elem) {
 		pfPage = elem;
 		this.refreshData();
 	}
 
+	/**
+	 * @return the fromView field
+	 */
 	public StringButtonDialogField getFromViewField() {
 		return fromViewField;
 	}
 
+	/**
+	 * @return the large icon field
+	 */
 	public StringDialogField getLargeIconField() {
 		return largeIconField;
 	}
 
+	/**
+	 * @return the small icon field
+	 */
 	public StringDialogField getSmallIconField() {
 		return smallIconField;
 	}
