@@ -30,10 +30,10 @@ import org.eclipse.ui.views.properties.IPropertySource;
 public class PageflowElementTreeEditPart extends AbstractTreeEditPart implements
 		Adapter {
 	/** Image descriptor of tree item for the different edit parts */
-	public static final ImageDescriptor IMG_PAGE = EditorPlugin.getDefault()
+	private static final ImageDescriptor IMG_PAGE = EditorPlugin.getDefault()
 			.getImageDescriptor("facesconfig/Pageflow_Page16.gif"); //$NON-NLS-1$
 
-	public static final ImageDescriptor IMG_NODE = EditorPlugin.getDefault()
+	private static final ImageDescriptor IMG_NODE = EditorPlugin.getDefault()
 			.getImageDescriptor("facesconfig/FacesConfig_Pageflow16.gif"); //$NON-NLS-1$
 
 	/** Property resource for shared property view */
@@ -115,7 +115,7 @@ public class PageflowElementTreeEditPart extends AbstractTreeEditPart implements
 	 * 
 	 * @see PageflowElementEditPart#getPropertySource()
 	 */
-	protected IPropertySource getPropertySource() {
+	private IPropertySource getPropertySource() {
 		if (propertySource == null) {
 			propertySource = new PageflowElementPropertySource(
 					getPageflowElement());

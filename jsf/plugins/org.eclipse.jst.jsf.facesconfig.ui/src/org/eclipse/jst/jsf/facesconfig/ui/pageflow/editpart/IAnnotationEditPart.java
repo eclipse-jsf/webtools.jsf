@@ -24,7 +24,7 @@ import org.eclipse.jface.text.source.Annotation;
 public interface IAnnotationEditPart {
 	/**
 	 * decorate current Edit Part.
-	 * 
+	 * @param annotation 
 	 */
 	void addAnnotation(Annotation annotation);
 

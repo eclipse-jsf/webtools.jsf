@@ -32,15 +32,15 @@ import org.eclipse.swt.widgets.Text;
  * 
  * @author - Xiaoguang Zhang
  */
-public class PageflowDirectEditManager extends DirectEditManager {
+/*package*/ final class PageflowDirectEditManager extends DirectEditManager {
 	/** text font */
-	protected Font scaledFont;
+	private Font scaledFont;
 
 	/** verify listener for the text control */
-	protected VerifyListener verifyListener;
+	private VerifyListener verifyListener;
 
 	/** the direct editor's parent label. */
-	protected Label label;
+	private final Label label;
 
 	/**
 	 * Creates a new PageflowDirectEditManager with the given attributes.
@@ -51,6 +51,7 @@ public class PageflowDirectEditManager extends DirectEditManager {
 	 *            type of editor
 	 * @param locator
 	 *            the CellEditorLocator
+	 * @param label
 	 */
 	public PageflowDirectEditManager(GraphicalEditPart source,
 			Class editorType, CellEditorLocator locator, Label label) {

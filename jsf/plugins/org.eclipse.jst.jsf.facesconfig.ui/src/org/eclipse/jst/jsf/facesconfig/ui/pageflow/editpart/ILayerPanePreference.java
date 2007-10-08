@@ -22,8 +22,14 @@ import org.eclipse.swt.graphics.Color;
  * 
  */
 public interface ILayerPanePreference extends IFigurePreference {
+	/**
+	 * Use manual line router 
+	 */
 	public static int LINE_ROUTING_MANUAL = 0;
 
+	/**
+	 * Use manhattan line router
+	 */
 	public static int LINE_ROUTING_MANHATTAN = 1;
 
 	/**

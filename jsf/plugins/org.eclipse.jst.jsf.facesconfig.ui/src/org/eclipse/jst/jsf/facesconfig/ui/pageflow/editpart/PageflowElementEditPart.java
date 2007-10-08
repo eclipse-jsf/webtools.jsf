@@ -53,8 +53,11 @@ public abstract class PageflowElementEditPart extends AbstractGraphicalEditPart
 	public static final ImageDescriptor IMG_ACTION = EditorPlugin.getDefault()
 			.getImageDescriptor("facesconfig/Pageflow_Action16.gif"); //$NON-NLS-1$
 
-	protected Adapter adapter;
+	private Adapter adapter;
 
+	/**
+	 * @return the emf adapter
+	 */
 	public Adapter createEMFAdapter() {
 		return new PFBatchAdapter() {
 			/*
@@ -80,10 +83,10 @@ public abstract class PageflowElementEditPart extends AbstractGraphicalEditPart
 		};
 	}
 
-	public static final ImageDescriptor IMG_PAGE = EditorPlugin.getDefault()
+	private static final ImageDescriptor IMG_PAGE = EditorPlugin.getDefault()
 			.getImageDescriptor("facesconfig/Pageflow_Page.gif"); //$NON-NLS-1$
 
-	public static final ImageDescriptor IMG_NODE = EditorPlugin.getDefault()
+	private static final ImageDescriptor IMG_NODE = EditorPlugin.getDefault()
 			.getImageDescriptor("facesconfig/FacesConfig_Pageflow16.gif"); //$NON-NLS-1$
 
 	/** property source of the pageflow element */
@@ -91,6 +94,9 @@ public abstract class PageflowElementEditPart extends AbstractGraphicalEditPart
 
 	private Image image = null;
 
+	/**
+	 * @param element
+	 */
 	protected PageflowElementEditPart(PageflowElement element) {
 		setModel(element);
 	}
@@ -229,7 +235,7 @@ public abstract class PageflowElementEditPart extends AbstractGraphicalEditPart
 	 * 
 	 * @see PageflowElementEditPart#getPropertySource()
 	 */
-	protected IPropertySource getPropertySource() {
+	private IPropertySource getPropertySource() {
 		if (propertySource == null) {
 			propertySource = new PageflowElementPropertySource(
 					getPageflowElement());

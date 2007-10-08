@@ -22,7 +22,7 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
  * 
  * 
  */
-public class PageflowTreeEditPart extends PageflowElementTreeEditPart {
+/*package*/ class PageflowTreeEditPart extends PageflowElementTreeEditPart {
 
 	/**
 	 * Creates a new PageflowTreeEditPart instance.

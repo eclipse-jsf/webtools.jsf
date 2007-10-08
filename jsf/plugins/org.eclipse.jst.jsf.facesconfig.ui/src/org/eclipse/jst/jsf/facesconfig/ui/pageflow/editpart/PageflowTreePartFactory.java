@@ -17,6 +17,10 @@ import org.eclipse.gef.EditPartFactory;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
 
+/**
+ * Edit Part Factory for creation pageflow tree parts
+ *
+ */
 public class PageflowTreePartFactory implements EditPartFactory {
 	/*
 	 * (non-Javadoc)

@@ -116,7 +116,7 @@ public class PageflowLinkEditPart extends AbstractConnectionEditPart implements
 		return bendpointEditPolicy;
 	}
 
-	public PageflowLink getPFLink() {
+	private PageflowLink getPFLink() {
 		return (PageflowLink) getModel();
 	}
 
@@ -228,12 +228,7 @@ public class PageflowLinkEditPart extends AbstractConnectionEditPart implements
 		return super.getAdapter(key);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see PageflowElementEditPart#getPropertySource()
-	 */
-	protected IPropertySource getPropertySource() {
+	private IPropertySource getPropertySource() {
 		if (propertySource == null) {
 			propertySource = new PageflowLinkPropertySource(getPFLink());
 		}
@@ -379,7 +374,7 @@ public class PageflowLinkEditPart extends AbstractConnectionEditPart implements
 		});
 	}
 
-	public void resetLabel() {
+	private void resetLabel() {
 		StringBuffer tip = new StringBuffer();
 		if (needDrawingAction()) {
 			((PFLinkFigure) getFigure()).setActionImage();
@@ -419,7 +414,7 @@ public class PageflowLinkEditPart extends AbstractConnectionEditPart implements
 		return resource;
 	}
 
-	public static Image getImage(ImageDescriptor imageDescriptor) {
+	private static Image getImage(ImageDescriptor imageDescriptor) {
 		Image image = EditorPlugin.getDefault().getImageRegistry().get(
 				imageDescriptor.toString());
 		if (null == image) {
@@ -454,7 +449,7 @@ public class PageflowLinkEditPart extends AbstractConnectionEditPart implements
 	 * get the foreground color from preference
 	 * 
 	 */
-	public int getConnectionRouterStyle() {
+	private int getConnectionRouterStyle() {
 		if (this.connectionStyle == -1) {
 			IPreferenceStore store = EditorPlugin.getDefault()
 					.getPreferenceStore();

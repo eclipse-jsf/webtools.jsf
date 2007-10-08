@@ -24,7 +24,7 @@ import org.eclipse.swt.widgets.Text;
  * 
  * @author - Xiaoguang Zhang
  */
-public class DirectEditCellEditorLocator implements CellEditorLocator {
+/*package*/ class DirectEditCellEditorLocator implements CellEditorLocator {
 	/** the source label */
 	private Label label;
 

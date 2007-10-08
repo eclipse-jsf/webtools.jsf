@@ -428,6 +428,9 @@ public class PageflowNodeEditPart extends PageflowElementEditPart implements
 	 */
 	public void addAnnotation(final Annotation annotation) {
 		getViewer().getControl().getDisplay().asyncExec(new Runnable() {
+			/* (non-Javadoc)
+			 * @see java.lang.Runnable#run()
+			 */
 			public void run() {
 				getPageflowNodeFigure().setImage(
 						getDecoratedImage((PageflowElement) getModel()));

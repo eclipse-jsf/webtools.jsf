@@ -16,5 +16,8 @@ package org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart;
  */
 
 public interface PFValidator {
+	/**
+	 * Validate the current page flow
+	 */
 	void validate();
 }

@@ -24,7 +24,7 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.synchronization.PFBatchAdapte
 /**
  * abstract class for pageflow container.
  */
-abstract public class PageflowContainerEditPart extends PageflowElementEditPart {
+abstract class PageflowContainerEditPart extends PageflowElementEditPart {
 
 	/**
 	 * @param element -
