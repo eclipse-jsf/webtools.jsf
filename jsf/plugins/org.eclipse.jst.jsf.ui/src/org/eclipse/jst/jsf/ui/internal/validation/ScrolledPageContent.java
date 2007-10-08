@@ -14,11 +14,10 @@ package org.eclipse.jst.jsf.ui.internal.validation;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.forms.FormColors;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.SharedScrolledComposite;
-
-import org.eclipse.jdt.internal.ui.JavaPlugin;
 
 
 /**
@@ -44,7 +43,7 @@ import org.eclipse.jdt.internal.ui.JavaPlugin;
         
         setFont(parent.getFont());
         
-        fToolkit= JavaPlugin.getDefault().getDialogsFormToolkit();
+        initDialogsFormToolkit();
         
         setExpandHorizontal(true);
         setExpandVertical(true);
@@ -54,6 +53,16 @@ import org.eclipse.jdt.internal.ui.JavaPlugin;
         setContent(body);
     }
     
+    private FormToolkit initDialogsFormToolkit()
+    {
+        if (fToolkit == null) {
+            FormColors colors= new FormColors(Display.getCurrent());
+            colors.setBackground(null);
+            colors.setForeground(null); 
+            fToolkit= new FormToolkit(colors);
+        }
+        return fToolkit;
+    }
     
     /**
      * @param childControl

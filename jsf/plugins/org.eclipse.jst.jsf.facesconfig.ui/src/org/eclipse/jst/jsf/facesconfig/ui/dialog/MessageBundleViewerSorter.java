@@ -14,7 +14,6 @@ package org.eclipse.jst.jsf.facesconfig.ui.dialog;
 import java.text.Collator;
 
 import org.eclipse.jdt.core.IPackageFragmentRoot;
-import org.eclipse.jdt.internal.core.JarPackageFragmentRoot;
 import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.jst.jsf.common.ui.IFileFolderConstants;
 
@@ -45,7 +44,7 @@ public class MessageBundleViewerSorter extends ViewerSorter {
 	 */
 	public int category(Object element) {
 		if (element instanceof IPackageFragmentRoot
-				&& !(element instanceof JarPackageFragmentRoot)) {
+				&& !((IPackageFragmentRoot)element).isArchive()) {
 			IPackageFragmentRoot root = (IPackageFragmentRoot) element;
 			if (IFileFolderConstants.FOLDER_SOURCE
 					.equals(root.getElementName())) {
