@@ -32,6 +32,9 @@ import org.eclipse.swt.graphics.Image;
  */
 public class PageflowSectionLabelProvider extends LabelProvider {
 
+	/**
+	 * Default constructor
+	 */
 	public PageflowSectionLabelProvider() {
 		super();
 	}

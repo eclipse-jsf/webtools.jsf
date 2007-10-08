@@ -175,8 +175,10 @@ public class GeneralViewSection implements ISection,
 		return rec;
 	}
 
-	/*
-	 * (non-Javadoc) Method declared on PageBookView.
+
+	/**
+	 * @param part
+	 * @return PageRec for part
 	 */
 	protected PageRec doCreatePage(IWorkbenchPart part) {
 		// FIXME: Because the PropertySheetPage of StructuredTextEditor has a

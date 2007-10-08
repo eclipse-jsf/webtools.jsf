@@ -359,8 +359,10 @@ public class PageflowElementPropertySource implements IPropertySource {
 
 	/**
 	 * Get a translated string from the resource locator.
+	 * @param key 
+	 * @return the string for the key
 	 */
-	protected String getString(String key) {
+	protected final String getString(String key) {
 		if ("comment".equals(key)) {
 			return PageflowMessages.Pageflow_Model_Attributes_comment;
 		}

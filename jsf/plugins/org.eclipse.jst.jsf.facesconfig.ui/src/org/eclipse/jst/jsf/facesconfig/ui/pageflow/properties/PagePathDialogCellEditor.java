@@ -27,29 +27,26 @@ import org.eclipse.swt.widgets.Control;
 public class PagePathDialogCellEditor extends EditableDialogCellEditor {
 	PageflowPage element;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see DialogCellEditor#DialogCellEditor()
+	/**
+	 * Default constructor
 	 */
 	public PagePathDialogCellEditor() {
 		super();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see DialogCellEditor#DialogCellEditor(Composite parent)
+	/**
+	 * @param parent
+	 * @param element
 	 */
 	public PagePathDialogCellEditor(Composite parent, PageflowPage element) {
 		super(parent);
 		this.element = element;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see DialogCellEditor#DialogCellEditor(Composite parent, int style)
+
+	/**
+	 * @param parent
+	 * @param style
 	 */
 	public PagePathDialogCellEditor(Composite parent, int style) {
 		super(parent, style);

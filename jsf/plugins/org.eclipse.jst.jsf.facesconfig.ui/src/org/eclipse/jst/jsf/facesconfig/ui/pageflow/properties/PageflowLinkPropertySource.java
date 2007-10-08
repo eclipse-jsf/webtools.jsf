@@ -41,9 +41,11 @@ import org.eclipse.ui.views.properties.TextPropertyDescriptor;
 
 public class PageflowLinkPropertySource extends PageflowElementPropertySource {
 
+	/**
+	 * @param element
+	 */
 	public PageflowLinkPropertySource(PageflowElement element) {
 		super(element);
-		// TODO Auto-generated constructor stub
 	}
 
 	public Object getPropertyValue(Object id) {

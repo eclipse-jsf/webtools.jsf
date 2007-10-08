@@ -138,6 +138,9 @@ public abstract class EditableDialogCellEditor extends DialogCellEditor {
 		super.keyReleaseOccured(keyEvent);
 	}
 
+	/**
+	 * @return the default text
+	 */
 	public Text getDefaultText() {
 		return text;
 	}

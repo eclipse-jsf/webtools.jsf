@@ -23,6 +23,9 @@ import org.eclipse.wst.common.ui.properties.internal.provisional.ISectionDescrip
  */
 public class PageflowSectionDescriptorProvider implements
 		ISectionDescriptorProvider {
+	/**
+	 * Default constructor
+	 */
 	public PageflowSectionDescriptorProvider() {
 		super();
 	}

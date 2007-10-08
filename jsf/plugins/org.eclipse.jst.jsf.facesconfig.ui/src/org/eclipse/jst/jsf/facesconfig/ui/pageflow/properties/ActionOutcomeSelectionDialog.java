@@ -70,13 +70,18 @@ public class ActionOutcomeSelectionDialog extends Dialog {
 
 	private static final int DIALOG_DEFAULT_HEIGHT = 300;
 
-	public static String JSF_EL_LEFT_BRACE = "#{";
+	private static String JSF_EL_LEFT_BRACE = "#{";
 
-	public static String JSF_EL_RIGHT_BRACE = "}";
+	private static String JSF_EL_RIGHT_BRACE = "}";
 
 	/** the listener for the text modification */
 	private ModifyListener modifyListener;
 
+	/**
+	 * @param parentShell
+	 * @param outcome
+	 * @param jspName
+	 */
 	public ActionOutcomeSelectionDialog(Shell parentShell, String outcome,
 			String jspName) {
 		super(parentShell);
@@ -338,6 +343,10 @@ public class ActionOutcomeSelectionDialog extends Dialog {
 		}
 	}
 
+	/**
+	 * @param expressionString
+	 * @return true if expressionString is valid EL
+	 */
 	public static boolean isValidEL(String expressionString) {
 		if (expressionString == null || expressionString.length() == 0)
 			return true;

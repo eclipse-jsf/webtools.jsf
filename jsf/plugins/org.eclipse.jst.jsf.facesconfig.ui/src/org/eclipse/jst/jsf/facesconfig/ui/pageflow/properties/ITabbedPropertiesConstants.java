@@ -16,26 +16,44 @@ package org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties;
  * @version
  */
 public interface ITabbedPropertiesConstants {
+	/**
+	 * used to set grid data height hints on dialog fields
+	 */
 	public static int BROWSE_HEIGHT = 18;
 
+	/**
+	 * used to set grid data width hints on dialog fields
+	 */
 	public static int BROWSE_WIDTH = 20;
 
+	/**
+	 * the general tag id
+	 */
 	public static final String GENERAL_TAB_ID = "org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.general";
 
+	/**
+	 * the attribute tag id
+	 */
 	public static final String ATTRIBUTE_TAB_ID = "org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.attribute";
 
-	public static final String OPTIONAL_SECTION = "attribute.optional"; // 5
-
-	public static final String COMMON_SECTION = "attribute.optional"; // 5
-
+	/**
+	 * the link section id
+	 */
 	public static final String LINK_SECTION = "attribute.link"; // 4
 
+	/**
+	 * the page section id
+	 */
 	public static final String PAGE_SECTION = "attribute.page"; // 3
 
-	public static final String ACTION_SECTION = "attribute.action"; // 1
-
+	/**
+	 * the editor section id
+	 */
 	public static final String EDITOR_SECTION = "attribute.editor"; // 1
 
+	/**
+	 * the top section id
+	 */
 	public static final String TOP_SECTION = "top"; // 0
 
 }

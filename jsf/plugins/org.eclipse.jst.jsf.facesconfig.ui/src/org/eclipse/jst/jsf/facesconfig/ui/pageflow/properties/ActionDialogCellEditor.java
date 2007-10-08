@@ -23,28 +23,25 @@ import org.eclipse.swt.widgets.Control;
  */
 public class ActionDialogCellEditor extends EditableDialogCellEditor {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see DialogCellEditor#DialogCellEditor()
+
+	/**
+	 * Default constructor
 	 */
 	public ActionDialogCellEditor() {
 		super();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see DialogCellEditor#DialogCellEditor(Composite parent)
+
+	/**
+	 * @param parent
 	 */
 	public ActionDialogCellEditor(Composite parent) {
 		super(parent);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see DialogCellEditor#DialogCellEditor(Composite parent, int style)
+	/**
+	 * @param parent
+	 * @param style
 	 */
 	public ActionDialogCellEditor(Composite parent, int style) {
 		super(parent, style);

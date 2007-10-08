@@ -35,16 +35,25 @@ import org.eclipse.swt.widgets.Control;
 public class ExistingPagePathDialogCellEditor extends EditableDialogCellEditor {
 	Pageflow pageflow;
 
+	/**
+	 * 
+	 */
 	public ExistingPagePathDialogCellEditor() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * @param parent
+	 * @param style
+	 */
 	public ExistingPagePathDialogCellEditor(Composite parent, int style) {
 		super(parent, style);
-		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * @param parent
+	 * @param pageflow
+	 */
 	public ExistingPagePathDialogCellEditor(Composite parent, Pageflow pageflow) {
 		super(parent);
 		this.pageflow = pageflow;

@@ -31,20 +31,17 @@ public class ActionOutcomeDialogCellEditor extends EditableDialogCellEditor {
 	/** the source PFLink element */
 	PageflowElement element;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see DialogCellEditor#DialogCellEditor()
+	/**
+	 * @param element
 	 */
 	public ActionOutcomeDialogCellEditor(PageflowElement element) {
 		super();
 		this.element = element;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see DialogCellEditor#DialogCellEditor(Composite parent)
+	/**
+	 * @param parent
+	 * @param element
 	 */
 	public ActionOutcomeDialogCellEditor(Composite parent,
 			PageflowElement element) {
@@ -52,10 +49,11 @@ public class ActionOutcomeDialogCellEditor extends EditableDialogCellEditor {
 		this.element = element;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see DialogCellEditor#DialogCellEditor(Composite parent, int style)
+
+	/**
+	 * @param parent
+	 * @param style
+	 * @param element
 	 */
 	public ActionOutcomeDialogCellEditor(Composite parent, int style,
 			PageflowElement element) {

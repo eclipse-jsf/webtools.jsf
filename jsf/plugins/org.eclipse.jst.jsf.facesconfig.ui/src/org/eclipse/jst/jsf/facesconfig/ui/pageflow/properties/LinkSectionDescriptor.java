@@ -109,7 +109,6 @@ public class LinkSectionDescriptor implements ISectionDescriptor {
 	}
 
 	public int getEnablesFor() {
-		// TODO Auto-generated method stub
 		return ENABLES_FOR_ANY;
 	}
 
