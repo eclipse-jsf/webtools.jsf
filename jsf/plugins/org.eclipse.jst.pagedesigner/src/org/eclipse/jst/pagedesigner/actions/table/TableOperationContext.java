@@ -25,13 +25,17 @@ import org.eclipse.jst.pagedesigner.parts.ElementEditPart;
  * @author mengbo
  * @version 1.5
  */
-public class TableOperationContext {
-	public ElementEditPart _tablePart;
+/*package*/ class TableOperationContext {
+	private ElementEditPart _tablePart;
 
-	public int _rowIndex;
+	private int _rowIndex;
 
-	public int _columnIndex;
+	private int _columnIndex;
 
+	/**
+	 * @param part
+	 * @return the operation context for part
+	 */
 	public static TableOperationContext getTableOperationContext(EditPart part) {
 		EditPart originalPart = part;
 		ElementEditPart tablePart = null;
@@ -76,4 +80,18 @@ public class TableOperationContext {
 		}
 		return null;
 	}
+
+    ElementEditPart getTablePart() {
+        return _tablePart;
+    }
+
+    int getRowIndex() {
+        return _rowIndex;
+    }
+
+    int getColumnIndex() {
+        return _columnIndex;
+    }
+	
+	
 }

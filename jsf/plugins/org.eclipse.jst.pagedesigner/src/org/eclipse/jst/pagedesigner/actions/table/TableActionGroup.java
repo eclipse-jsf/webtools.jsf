@@ -36,7 +36,7 @@ import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
  * @author mengbo
  * @version 1.5
  */
-public class TableActionGroup extends ActionGroup {
+/*package*/ class TableActionGroup extends ActionGroup {
 	// TODO: I think there's a pattern emerging...
     private final static Action action = new Action() {
         // create an empty no-op
@@ -61,14 +61,14 @@ public class TableActionGroup extends ActionGroup {
 			return;
 		}
 
-		final ElementEditPart tablePart = context._tablePart;
+		final ElementEditPart tablePart = context.getTablePart();
 
 		if (tablePart == null || !supportTableActions(tablePart)) {
 			return;
 		}
 
-		final int cellRow = context._rowIndex;
-		final int cellColumn = context._columnIndex;
+		final int cellRow = context.getRowIndex();
+		final int cellColumn = context.getColumnIndex();
 
 		String tag = ((IDOMElement) tablePart.getIDOMNode()).getLocalName();
 		final IMenuManager tableMenu = new MenuManager(tag);
