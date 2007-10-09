@@ -38,6 +38,11 @@ public class TableInsertHeaderFooterCommand extends DesignerCommand {
 
 	private TableUtil _tableUtil;
 
+	/**
+	 * @param viewer
+	 * @param table
+	 * @param isHeader
+	 */
 	public TableInsertHeaderFooterCommand(IHTMLGraphicalViewer viewer,
 			Element table, boolean isHeader) {
 		super(

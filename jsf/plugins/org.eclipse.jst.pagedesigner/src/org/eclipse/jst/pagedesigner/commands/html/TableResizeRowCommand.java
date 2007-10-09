@@ -37,6 +37,12 @@ public class TableResizeRowCommand extends DesignerCommand {
 
 	private int _delta;
 
+	/**
+	 * @param viewer
+	 * @param table
+	 * @param rowIndex
+	 * @param delta
+	 */
 	public TableResizeRowCommand(IHTMLGraphicalViewer viewer, Element table,
 			int rowIndex, int delta) {
 		super(CommandResources

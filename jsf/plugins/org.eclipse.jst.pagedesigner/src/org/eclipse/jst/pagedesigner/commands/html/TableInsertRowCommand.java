@@ -41,6 +41,7 @@ public class TableInsertRowCommand extends DesignerCommand {
 	 * @param viewer
 	 * @param table
 	 * @param index
+	 * @param isBefore 
 	 */
 	public TableInsertRowCommand(IHTMLGraphicalViewer viewer, Element table,
 			int index, boolean isBefore) {

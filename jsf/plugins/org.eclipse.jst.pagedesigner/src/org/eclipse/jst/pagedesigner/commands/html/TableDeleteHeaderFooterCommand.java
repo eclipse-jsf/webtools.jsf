@@ -32,6 +32,11 @@ public class TableDeleteHeaderFooterCommand extends DesignerCommand {
 
 	private boolean _isHeader;
 
+	/**
+	 * @param viewer
+	 * @param table
+	 * @param isHeader
+	 */
 	public TableDeleteHeaderFooterCommand(IHTMLGraphicalViewer viewer,
 			Element table, boolean isHeader) {
 		super(

@@ -41,6 +41,12 @@ public class TableResizeColumnCommand extends DesignerCommand {
 
 	private int _delta;
 
+	/**
+	 * @param viewer
+	 * @param table
+	 * @param columnIndex
+	 * @param delta
+	 */
 	public TableResizeColumnCommand(IHTMLGraphicalViewer viewer, Element table,
 			int columnIndex, int delta) {
 		super(
