@@ -31,6 +31,9 @@ public class ChangeStylePropertyAction extends Action {
 
 	/**
 	 * @param text
+	 * @param ele 
+	 * @param cssProperty 
+	 * @param cssValue 
 	 */
 	public ChangeStylePropertyAction(String text, IDOMElement ele,
 			String cssProperty, String cssValue) {

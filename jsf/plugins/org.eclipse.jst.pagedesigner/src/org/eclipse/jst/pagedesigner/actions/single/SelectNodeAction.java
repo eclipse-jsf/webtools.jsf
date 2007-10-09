@@ -17,9 +17,8 @@ import org.w3c.dom.Node;
  */
 public abstract class SelectNodeAction extends SelectEditPartAction 
 {
-    protected final Node _node;
-    
-    
+    private final Node  _node;
+
     /**
      * @param text
      * @param curNode
@@ -28,5 +27,11 @@ public abstract class SelectNodeAction extends SelectEditPartAction
         super(text);
         _node = curNode;
     }
-   
+
+    /**
+     * @return the current node
+     */
+    protected Node getNode() {
+        return _node;
+    }
 }

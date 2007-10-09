@@ -23,7 +23,12 @@ import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
  * @author mengbo
  * @version 1.5
  */
-public class StyleSupport {
+public final class StyleSupport {
+	/**
+	 * @param menu
+	 * @param part
+	 * @param ele
+	 */
 	public static void createStyleAction(IMenuManager menu,
 			ElementEditPart part, IDOMElement ele) {
 		if (part == null) {
@@ -44,5 +49,10 @@ public class StyleSupport {
 			return true;
 		}
 		return false;
+	}
+	
+	private StyleSupport()
+	{
+		// util class; no instantiation
 	}
 }

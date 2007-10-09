@@ -21,8 +21,8 @@ import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
  * @author mengbo
  * @version 1.5
  */
-public class ColorSupport {
-	public static final String[] COLOR_VALUES = new String[] {
+/*package*/ class ColorSupport {
+	static final String[] COLOR_VALUES = new String[] {
 			PDPlugin.getResourceString("ColorSupport.CommandLabel.Aqua"), //$NON-NLS-1$
 			PDPlugin.getResourceString("ColorSupport.CommandLabel.Black"), //$NON-NLS-1$
 			PDPlugin.getResourceString("ColorSupport.CommandLabel.Blue"), //$NON-NLS-1$
@@ -49,7 +49,7 @@ public class ColorSupport {
 	 * @param cssProperty
 	 *            will be "color" or "background-color"
 	 */
-	public static void createColorActions(IMenuManager menu, IDOMElement ele,
+	static void createColorActions(IMenuManager menu, IDOMElement ele,
 			String cssProperty) {
 		boolean needAdditional = true;
 		String currentValue = DOMStyleUtil.getInlineStyleProperty(ele,

@@ -30,15 +30,19 @@ import org.w3c.dom.css.ElementCSSInlineStyle;
  * @version 1.5
  */
 public class ChangeStyleAction extends Action {
-	private static final String TEXT = PDPlugin
+	private static final String MY_TEXT = PDPlugin
 			.getResourceString("ChangeStyleAction.Text");
 
 	private ElementEditPart _editPart;
 
 	private IDOMElement _element;
 
+	/**
+	 * @param part
+	 * @param ele
+	 */
 	public ChangeStyleAction(ElementEditPart part, IDOMElement ele) {
-		super(TEXT);
+		super(MY_TEXT);
 		this._editPart = part;
 		this._element = ele;
 	}
