@@ -49,6 +49,12 @@ public class LocalDropEditPolicy extends GraphicalEditPolicy {
 	// indicate whether update is checked
 	private static boolean _checkUpdate = true;
 
+	/**
+	 * @param widgetEditPart
+	 * @param request
+	 * @param results
+	 * @return true if should update widget
+	 */
 	public boolean checkUpdateWidget(EditPart widgetEditPart,
 			LocalDropRequest request, Map results) {
 		if (!(widgetEditPart instanceof ElementEditPart)) {
@@ -67,6 +73,14 @@ public class LocalDropEditPolicy extends GraphicalEditPolicy {
 		return !results.isEmpty();
 	}
 
+	/**
+	 * @param request
+	 * @param host
+	 * @param results
+	 * @param dpHolder
+	 * @param position
+	 * @return true if should insert element
+	 */
 	public boolean checkInsertElement(LocalDropRequest request,
 			EditPart[] host, Map results, DesignPosition[] dpHolder,
 			IDOMPosition[] position) {
@@ -198,6 +212,9 @@ public class LocalDropEditPolicy extends GraphicalEditPolicy {
 		}
 	}
 
+	/**
+	 * @return the feedback figure
+	 */
 	protected RectangleFigure getFeedbackFigure() {
 		if (_feedbackFigure == null) {
 			_feedbackFigure = new RectangleFigure();
@@ -212,6 +229,9 @@ public class LocalDropEditPolicy extends GraphicalEditPolicy {
 		return _feedbackFigure;
 	}
 
+	/**
+	 * @param rect
+	 */
 	protected void showFeedbackRect(Rectangle rect) {
 		RectangleFigure pf = getFeedbackFigure();
 		pf.translateToRelative(rect);

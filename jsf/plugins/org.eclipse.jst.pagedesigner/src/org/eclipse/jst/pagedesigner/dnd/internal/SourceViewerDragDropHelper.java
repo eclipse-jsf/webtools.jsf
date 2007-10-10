@@ -43,9 +43,12 @@ import org.w3c.dom.Node;
  * 
  * @author mengbo
  */
-public class SourceViewerDragDropHelper {
+public final class SourceViewerDragDropHelper {
 	private static SourceViewerDragDropHelper _instance;
 
+	/**
+	 * @return the singleton instance
+	 */
 	public static SourceViewerDragDropHelper getInstance() {
 		if (_instance == null) {
 			_instance = new SourceViewerDragDropHelper();
@@ -53,6 +56,11 @@ public class SourceViewerDragDropHelper {
 		return _instance;
 	}
 
+	private SourceViewerDragDropHelper()
+	{
+	    // singleton, no external instantiation
+	}
+	
 	private Point toControl(TextViewer textViewer, Point point) {
 		return (textViewer != null ? textViewer.getTextWidget()
 				.toControl(point) : point);
@@ -102,6 +110,11 @@ public class SourceViewerDragDropHelper {
 		return offset;
 	}
 
+	/**
+	 * @param textEditor
+	 * @param location
+	 * @param caret
+	 */
 	public void updateCaret(StructuredTextEditor textEditor, Point location,
 			Point caret) {
 		TextViewer textViewer = textEditor.getTextViewer();
@@ -166,6 +179,10 @@ public class SourceViewerDragDropHelper {
 		}
 	}
 
+	/**
+	 * @param textEditor
+	 * @param location
+	 */
 	public void updateCaret(StructuredTextEditor textEditor, Point location) {
 		TextViewer textViewer = textEditor.getTextViewer();
 		if (textViewer != null) {
@@ -191,6 +208,11 @@ public class SourceViewerDragDropHelper {
 		}
 	}
 
+	/**
+	 * @param textEditor
+	 * @param location
+	 * @return the caret offset
+	 */
 	public int showCaret(StructuredTextEditor textEditor, int location) {
 		StyledText text = textEditor.getTextViewer().getTextWidget();
 		text.setCursor(SharedCursors.CURSOR_TREE_ADD);
@@ -201,6 +223,10 @@ public class SourceViewerDragDropHelper {
 		return text.getCaretOffset();
 	}
 
+	/**
+	 * @param node
+	 * @return the model query for the node or null if not available
+	 */
 	protected ModelQuery getModelQuery(Node node) {
 		if (node.getNodeType() == Node.DOCUMENT_NODE) {
 			return ModelQueryUtil.getModelQuery((Document) node);
@@ -208,6 +234,11 @@ public class SourceViewerDragDropHelper {
         return ModelQueryUtil.getModelQuery(node.getOwnerDocument());
 	}
 
+	/**
+	 * @param caretPos
+	 * @param element
+	 * @return the position 
+	 */
 	public IDOMPosition findPosition(int caretPos, Node element) {
 		EditValidateUtil.validNode(element);
 		IDOMPosition position = EditModelQuery.getInstance().createDomposition(
@@ -215,6 +246,10 @@ public class SourceViewerDragDropHelper {
 		return position;
 	}
 
+	/**
+	 * @param viewer
+	 * @param node
+	 */
 	public void format(TextViewer viewer, Node node) {
 		if (node == null) {
 			return;
@@ -239,6 +274,10 @@ public class SourceViewerDragDropHelper {
 		viewer.doOperation(ISourceViewer.FORMAT);
 	}
 
+	/**
+	 * @param textEditor
+	 * @param reset
+	 */
 	public void changeCaret(StructuredTextEditor textEditor, boolean reset) {
 		if (reset) {
 			StyledText text = textEditor.getTextViewer().getTextWidget();
@@ -246,6 +285,11 @@ public class SourceViewerDragDropHelper {
 		}
 	}
 
+	/**
+	 * @param textEditor
+	 * @param locationOffset
+	 * @return the location offset
+	 */
 	public int getValidLocation(StructuredTextEditor textEditor,
 			int locationOffset) {
 		Node node = getCaretNode(textEditor, locationOffset);
@@ -259,6 +303,11 @@ public class SourceViewerDragDropHelper {
 		return calculateCaretLocation(node, locationOffset);
 	}
 
+	/**
+	 * @param textEditor
+	 * @param location
+	 * @return the offset
+	 */
 	public int getOffset(StructuredTextEditor textEditor, Point location) {
 		StyledText text = textEditor.getTextViewer().getTextWidget();
 		return text.getOffsetAtLocation(location);
@@ -295,7 +344,9 @@ public class SourceViewerDragDropHelper {
 	// }
 
 	/**
-	 * IExtendedMarkupEditor method
+	 * @param textEditor
+	 * @param pos
+	 * @return the node
 	 */
 	public Node getCaretNode(StructuredTextEditor textEditor, int pos) {
         // TODO: getModel is deprecated
@@ -316,7 +367,7 @@ public class SourceViewerDragDropHelper {
 	 * 
 	 * @param node
 	 * @param location
-	 * @return
+	 * @return the location
 	 */
 	public int calculateCaretLocation(Node node, int location) {
 		int pos[][] = new int[2][2];

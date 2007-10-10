@@ -37,6 +37,10 @@ public class DesignerSourceMouseTrackAdapter extends
 
 	private EditDomain _domain;
 
+	/**
+	 * @param textEditor
+	 * @param domain
+	 */
 	public DesignerSourceMouseTrackAdapter(StructuredTextEditor textEditor,
 			EditDomain domain) {
 		super(false);
@@ -98,7 +102,7 @@ public class DesignerSourceMouseTrackAdapter extends
 	 * @see org.eclipse.gef.palette.PaletteListener#activeToolChanged(org.eclipse.gef.ui.palette.PaletteViewer,
 	 *      org.eclipse.gef.palette.ToolEntry)
 	 */
-	public Object getPaletteObject() {
+	private Object getPaletteObject() {
 		if (_domain.getPaletteViewer() != null) {
 			Object tool = _domain.getPaletteViewer().getActiveTool();
 			if (tool instanceof TagToolPaletteEntry) {

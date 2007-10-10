@@ -14,7 +14,11 @@ package org.eclipse.jst.pagedesigner.dnd.internal;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
-public class Messages {
+/**
+ * A message bundle for dnd
+ *
+ */
+/*package*/ class Messages {
 	private static final String BUNDLE_NAME = "org.eclipse.jst.pagedesigner.dnd.internal.messages"; //$NON-NLS-1$
 
 	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle
@@ -24,6 +28,10 @@ public class Messages {
         // no external instantiation
 	}
 
+	/**
+	 * @param key
+	 * @return the message for key
+	 */
 	public static String getString(String key) {
 		try {
 			return RESOURCE_BUNDLE.getString(key);

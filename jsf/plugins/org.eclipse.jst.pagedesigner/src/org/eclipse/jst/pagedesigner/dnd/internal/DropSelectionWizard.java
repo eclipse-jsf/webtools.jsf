@@ -56,7 +56,10 @@ public class DropSelectionWizard extends Wizard {
 	}
 
 	/**
-	 * 
+	 * @param viewer 
+	 * @param localData 
+	 * @param handlers 
+	 * @param widget 
 	 */
 	public DropSelectionWizard(IHTMLGraphicalViewer viewer, Object localData,
 			Map handlers, Node widget) {
@@ -67,6 +70,12 @@ public class DropSelectionWizard extends Wizard {
 		_firstPage.setWidget(widget);
 	}
 
+	/**
+	 * @param viewer
+	 * @param localData
+	 * @param handlers
+	 * @param position
+	 */
 	public DropSelectionWizard(IHTMLGraphicalViewer viewer, Object localData,
 			Map handlers, IDOMPosition position) {
 		this(viewer, localData, handlers);

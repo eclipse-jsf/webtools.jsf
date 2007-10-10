@@ -35,6 +35,9 @@ public class DesignerSourceDropTargetListener extends
 
 	private StructuredTextEditor _textEditor;
 
+	/**
+	 * @param textEditor
+	 */
 	public DesignerSourceDropTargetListener(StructuredTextEditor textEditor) {
 		super(false);
 		_textEditor = textEditor;

@@ -75,7 +75,9 @@ public class SimpleWizardSelectionPage extends WizardSelectionPage implements
 	// useWizard.
 
 	/**
-	 * @param pageName
+	 * @param viewer 
+	 * @param localData 
+	 * @param handlers 
 	 */
 	public SimpleWizardSelectionPage(IHTMLGraphicalViewer viewer,
 			Object localData, Map handlers) {
@@ -224,14 +226,14 @@ public class SimpleWizardSelectionPage extends WizardSelectionPage implements
 
 	/**
 	 * @param element
-	 * @return
+	 * @return the text
 	 */
 	protected String getText(Object element) {
 		return ((FeedBackInfo) element).getDescription();
 	}
 
 	/**
-	 * @return
+	 * @return the elements
 	 */
 	protected List getElements() {
 		return new ArrayList(this._feedbackToHandlers.keySet());
@@ -254,7 +256,7 @@ public class SimpleWizardSelectionPage extends WizardSelectionPage implements
 	}
 
 	/**
-	 * @return
+	 * @return the current handler
 	 */
 	public Object getCurrentHandler() {
 		return _currentHandler;

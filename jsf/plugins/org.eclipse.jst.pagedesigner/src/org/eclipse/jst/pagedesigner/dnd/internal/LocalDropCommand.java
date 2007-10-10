@@ -45,6 +45,9 @@ public class LocalDropCommand extends Command {
 
 	/**
 	 * constructor
+	 * @param viewer 
+	 * @param localObject 
+	 * @param feedbackHandlers 
 	 */
 	public LocalDropCommand(IHTMLGraphicalViewer viewer, Object localObject,
 			Map feedbackHandlers) {
@@ -53,10 +56,16 @@ public class LocalDropCommand extends Command {
 		_feedbackToHandlers = feedbackHandlers;
 	}
 
+	/**
+	 * @param widget
+	 */
 	public void setWidget(Node widget) {
 		_widget = widget;
 	}
 
+	/**
+	 * @param position
+	 */
 	public void setDOMPosition(IDOMPosition position) {
 		_position = position;
 	}

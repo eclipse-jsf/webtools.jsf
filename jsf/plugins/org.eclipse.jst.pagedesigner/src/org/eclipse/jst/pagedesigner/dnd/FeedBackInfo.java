@@ -20,7 +20,8 @@ public class FeedBackInfo {
 	private int _order;
 
 	/**
-	 * 
+	 * @param desc 
+	 * @param order 
 	 */
 	public FeedBackInfo(String desc, int order) {
 		this._description = desc;
@@ -30,7 +31,7 @@ public class FeedBackInfo {
 	 * the description may be used in tooltip or wizard dialog selection to tell
 	 * user the effect of the drop.
 	 * 
-	 * @return
+	 * @return the description
 	 */
 	public String getDescription() {
 		return _description;
@@ -42,7 +43,7 @@ public class FeedBackInfo {
 	 * 
 	 * range from 0-10, the bigger, the more important.
 	 * 
-	 * @return
+	 * @return the order
 	 */
 	public int getOrder() {
 		return _order;

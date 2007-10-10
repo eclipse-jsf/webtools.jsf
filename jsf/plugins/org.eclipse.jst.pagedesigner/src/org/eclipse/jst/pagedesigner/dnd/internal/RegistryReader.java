@@ -34,6 +34,9 @@ public class RegistryReader {
 
 	private static ILocalDropHandler[] _handlers = null;
 
+	/**
+	 * @return all registered drop handlers
+	 */
 	public static synchronized ILocalDropHandler[] getAllHandlers() {
 		if (_handlers == null) {
 			_handlers = readAllHandlers();

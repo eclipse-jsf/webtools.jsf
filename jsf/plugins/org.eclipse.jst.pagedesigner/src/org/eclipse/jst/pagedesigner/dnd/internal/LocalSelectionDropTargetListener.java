@@ -53,7 +53,10 @@ public class LocalSelectionDropTargetListener extends
 		return request;
 	}
 
-	public Object getCurrentLocalObject() {
+	/**
+	 * @return the current local object
+	 */
+	private Object getCurrentLocalObject() {
 		ISelection sel = LocalSelectionTransfer.getInstance().getSelection();
 		if (sel instanceof IStructuredSelection) {
 			return ((IStructuredSelection) sel).getFirstElement();

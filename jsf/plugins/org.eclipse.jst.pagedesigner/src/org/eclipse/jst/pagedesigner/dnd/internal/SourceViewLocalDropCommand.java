@@ -29,6 +29,9 @@ public class SourceViewLocalDropCommand extends SourceViewerCommand {
 	private Object _data;
 
 	/**
+	 * @param textEditor 
+	 * @param data 
+	 * @param location 
 	 * 
 	 */
 	public SourceViewLocalDropCommand(StructuredTextEditor textEditor,

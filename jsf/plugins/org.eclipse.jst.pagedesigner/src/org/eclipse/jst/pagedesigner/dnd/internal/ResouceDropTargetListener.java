@@ -28,6 +28,9 @@ import org.eclipse.swt.dnd.FileTransfer;
 public class ResouceDropTargetListener extends
 		AbstractTransferDropTargetListener {
 
+	/**
+	 * @param viewer
+	 */
 	public ResouceDropTargetListener(EditPartViewer viewer) {
 		super(viewer, FileTransfer.getInstance());
 	}
@@ -44,7 +47,7 @@ public class ResouceDropTargetListener extends
 		return request;
 	}
 
-	public Object getCurrentLocalObject() {
+	private Object getCurrentLocalObject() {
 		Object result = null;
 		try {
 			Object data = ((FileTransfer) getTransfer())

@@ -23,17 +23,22 @@ public interface ILocalDropHandler {
 	/**
 	 * whether this handler will use wizard for user to config detail
 	 * 
-	 * @return
+	 * @return true if should use wizard
 	 */
 	public boolean useWizard();
 
+	/**
+	 * @param localData
+	 * @param viewer
+	 * @return true if should use wizard
+	 */
 	public boolean useWizard(Object localData, IHTMLGraphicalViewer viewer);
 
 	/**
 	 * 
 	 * @param localData
 	 * @param widget
-	 * @return
+	 * @return the feed back info
 	 */
 	public FeedBackInfo supportUpdateWidget(Object localData, Node widget);
 
@@ -44,7 +49,7 @@ public interface ILocalDropHandler {
 	 * @param localData
 	 * @param widget
 	 * @param viewer
-	 * @return
+	 * @return the wizard
 	 */
 	public IWizard getWizard(Object localData, Node widget,
 			IHTMLGraphicalViewer viewer);
@@ -63,7 +68,7 @@ public interface ILocalDropHandler {
 	 * 
 	 * @param localData
 	 * @param position
-	 * @return
+	 * @return the feedback info
 	 */
 	public FeedBackInfo supportInsertElements(Object localData,
 			IDOMPosition position);
@@ -73,11 +78,16 @@ public interface ILocalDropHandler {
 	 * @param localData
 	 * @param position
 	 * @param viewer
-	 * @return
+	 * @return the wizard
 	 */
 	public IWizard getWizard(Object localData, IDOMPosition position,
 			IHTMLGraphicalViewer viewer);
 
+	/**
+	 * @param localData
+	 * @param position
+	 * @param viewer
+	 */
 	public void doInsertElements(Object localData, IDOMPosition position,
 			IHTMLGraphicalViewer viewer);
 }

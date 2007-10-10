@@ -20,6 +20,9 @@ import org.eclipse.gef.requests.DropRequest;
  */
 public class LocalDropRequest extends Request implements DropRequest {
 	// XXX: need move this constant to somewhere else.
+	/**
+	 * the request name for local drops
+	 */
 	public static final String REQ_LOCAL_DROP = "Local Drop";
 
 	private Point _location;
@@ -52,10 +55,16 @@ public class LocalDropRequest extends Request implements DropRequest {
 		this._location = location;
 	}
 
+	/**
+	 * @return the  local object
+	 */
 	public Object getLocalObject() {
 		return _localObject;
 	}
 
+	/**
+	 * @param local
+	 */
 	public void setLocalObject(Object local) {
 		this._localObject = local;
 	}
