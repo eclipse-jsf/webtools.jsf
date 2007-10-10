@@ -92,7 +92,7 @@ public abstract class DesignerCommand extends Command {
 	}
 	/**
 	 * @return the GEF viewer this command is targeted for
-	 * @deprecated Should remove command coupling to non-model objects
+	 * 
 	 */
 	public IHTMLGraphicalViewer getViewer() {
 		return _viewer;
