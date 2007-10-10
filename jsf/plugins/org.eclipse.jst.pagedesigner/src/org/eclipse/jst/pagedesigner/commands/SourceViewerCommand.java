@@ -30,14 +30,18 @@ import org.w3c.dom.Node;
  * @author mengbo
  */
 public abstract class SourceViewerCommand extends Command {
-	protected StructuredTextEditor _editor;
+	/**
+	 * the structured text editor containing the viewer
+	 */
+	protected final StructuredTextEditor _editor;
 
 	private Document _document;
 
 	private Logger _log = PDPlugin.getLogger(SourceViewerCommand.class);
 
 	/**
-	 * 
+	 * @param label 
+	 * @param editor 
 	 */
 	public SourceViewerCommand(String label, StructuredTextEditor editor) {
 		super();
@@ -46,6 +50,9 @@ public abstract class SourceViewerCommand extends Command {
 		_document = tools.getDOMDocument();
 	}
 
+	/**
+	 * @return the text tools
+	 */
 	protected IDOMSourceEditingTextTools getSourceEditingTextTools() {
 		IDOMSourceEditingTextTools tools = (IDOMSourceEditingTextTools) _editor
 				.getAdapter(ISourceEditingTextTools.class);
@@ -56,6 +63,7 @@ public abstract class SourceViewerCommand extends Command {
 	 * preExecute and postExecute is a pair. () SHOULD NOT throw any exception,
 	 * if it throw any exception, it should catch itself and return false to
 	 * indicate not continue.
+	 * @return true if preExec succeeded
 	 */
 	protected final boolean preExecute() {
 		int position = 0;
@@ -90,6 +98,9 @@ public abstract class SourceViewerCommand extends Command {
 		new HTMLFormatProcessorImpl().formatNode(node);
 	}
 
+	/**
+	 * @return the dom model
+	 */
 	protected IDOMModel getModel() {
 		Assert.isTrue(_document != null && _document instanceof IDOMNode);
 		return ((IDOMNode) _document).getModel();
@@ -109,7 +120,13 @@ public abstract class SourceViewerCommand extends Command {
 		}
 	}
 
+	/**
+	 * execute
+	 */
 	public abstract void doExecute();
 
+	/**
+	 * set the selection
+	 */
 	public abstract void setSelection();
 }
