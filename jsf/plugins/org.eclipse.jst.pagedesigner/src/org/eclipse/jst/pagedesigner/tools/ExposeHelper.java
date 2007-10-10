@@ -41,7 +41,7 @@ public class ExposeHelper {
 	IHTMLGraphicalViewer _viewer;
 
 	/**
-	 * @param owner
+	 * @param viewer 
 	 */
 	public ExposeHelper(IHTMLGraphicalViewer viewer) {
 		_viewer = viewer;
@@ -49,6 +49,7 @@ public class ExposeHelper {
 
 	/**
 	 * Expose rectangle. (non-Javadoc)
+	 * @param rect 
 	 * 
 	 * @see org.eclipse.gef.ExposeHelper#exposeDescendant(org.eclipse.gef.EditPart)
 	 */
@@ -225,6 +226,10 @@ public class ExposeHelper {
 		}
 	}
 
+	/**
+	 * @param selection
+	 * @param viewer
+	 */
 	public static void expose(ISelection selection,
 			ScrollingGraphicalViewer viewer) {
 		if (selection instanceof IStructuredSelection) {
@@ -238,6 +243,9 @@ public class ExposeHelper {
 		}
 	}
 
+	/**
+	 * @param p
+	 */
 	public void adjustVertical(Point p) {
 		int offset = 0;
 		if ((offset = getVerticalBoundsOffset(p, false)) < SCROLL_OFFSET) {
@@ -252,6 +260,9 @@ public class ExposeHelper {
 		}
 	}
 
+	/**
+	 * @return the location of the view port
+	 */
 	public Point getViewpostLocation() {
 		if (_viewer != null) {
 			Viewport port = _viewer.getViewport();
@@ -263,6 +274,11 @@ public class ExposeHelper {
 		return null;
 	}
 
+	/**
+	 * @param figure
+	 * @param p
+	 * @return the translated point
+	 */
 	public Point translateToViewport(IFigure figure, Point p) {
 		Point vp = getViewpostLocation();
 		return new Point(p.x - vp.x, p.y - vp.y);
@@ -300,7 +316,11 @@ public class ExposeHelper {
         return p.y;
 	}
 
-	public void exposeBorder(Rectangle rect, AbstractEditPolicy policy) {
+	/**
+	 * @param rect
+	 * @param policy
+	 */
+	void exposeBorder(Rectangle rect, AbstractEditPolicy policy) {
 		Point p = rect.getTopLeft();
 		p = translateToViewport(((GraphicalEditPart) policy.getHost())
 				.getFigure(), p);

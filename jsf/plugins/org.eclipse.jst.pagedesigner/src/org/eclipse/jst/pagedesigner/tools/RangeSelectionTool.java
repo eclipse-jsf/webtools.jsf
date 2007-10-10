@@ -222,30 +222,6 @@ public class RangeSelectionTool extends SelectionTool
 	// // when reach here, should be standard content keys.
 	// return handleRangeModeContentChar(content);
 	// }
-
-	/**
-	 * For inner debuging.
-	 * 
-	 * @param e
-	 */
-    
-    // TODO: dead?
-//	private void dumpKey(KeyEvent e) {
-//		String message = "code:" + Integer.toBinaryString(e.keyCode) + "char:" + e.character + "key:" + Integer.toBinaryString(e.stateMask); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-//		_log.info(message);
-//	}
-//
-//	/**
-//	 * @param content
-//	 */
-//	private boolean handleRangeModeContentChar(char content) {
-//		IHTMLGraphicalViewer viewer = (IHTMLGraphicalViewer) this
-//				.getCurrentViewer();
-//		ContentCommand c = new ContentCommand(viewer, content);
-//		c.execute();
-//		return true;
-//	}
-
 	/*
 	 * (non-Javadoc)
 	 * 

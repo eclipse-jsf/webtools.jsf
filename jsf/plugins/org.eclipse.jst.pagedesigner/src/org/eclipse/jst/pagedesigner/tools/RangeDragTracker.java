@@ -37,10 +37,7 @@ import org.eclipse.swt.graphics.Cursor;
  */
 public class RangeDragTracker extends TargetingTool implements DragTracker {
 	/** Flag to indicate selection has been performed. */
-	protected static final int FLAG_SELECTION_PERFORMED = TargetingTool.MAX_FLAG << 1;
-
-	/** Max flag */
-	protected static final int MAX_FLAG = FLAG_SELECTION_PERFORMED;
+	private static final int FLAG_SELECTION_PERFORMED = TargetingTool.MAX_FLAG << 1;
 
 	private EditPart editpart;
 
@@ -133,7 +130,7 @@ public class RangeDragTracker extends TargetingTool implements DragTracker {
 	}
 
 	/**
-	 * Calls {@link #performSelection()}if the source is not selected. If the
+	 * If the
 	 * source is selected and there are no modifier keys pressed (i.e. the user
 	 * isn't selecting multiple edit parts or deselecting edit parts), sets the
 	 * direct edit flag so that when the mouse is released, a direct edit will
@@ -167,10 +164,9 @@ public class RangeDragTracker extends TargetingTool implements DragTracker {
 	}
 
 	/**
-	 * If in the drag state, the tool selects the source edit part. If the edit
-	 * part was already selected, {@link #performDirectEdit()}is called. If the
+	 * If in the drag state, the tool selects the source edit part.  If the
 	 * edit part is newly selected and not completely visible,
-	 * {@link EditPartViewer#reveal(EditPart)}is called to show the selected
+	 * {@link org.eclipse.gef.EditPartViewer#reveal(EditPart)}is called to show the selected
 	 * edit part.
 	 * 
 	 * @see org.eclipse.gef.tools.AbstractTool#handleButtonUp(int)
@@ -231,7 +227,7 @@ public class RangeDragTracker extends TargetingTool implements DragTracker {
 
 	/**
 	 * Creates a {@link SelectionRequest}and sends it to the source edit part
-	 * via {@link EditPart#performRequest(Request)}. Possible uses are to open
+	 * via {@link EditPart#performRequest(org.eclipse.gef.Request)}. Possible uses are to open
 	 * the selected item in another editor or replace the current editor's
 	 * contents based on the selected item.
 	 */
