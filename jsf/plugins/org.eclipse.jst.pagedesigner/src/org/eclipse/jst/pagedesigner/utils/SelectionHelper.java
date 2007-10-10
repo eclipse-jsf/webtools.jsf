@@ -55,7 +55,7 @@ public class SelectionHelper {
 	 * 
 	 * @param model
 	 * @param textSel
-	 * @return
+	 * @return the node for the text selectin in model or null
 	 */
 	public static Node toNode(IStructuredModel model, ITextSelection textSel) {
 		// FIXME: currently always normalize to a single node. should also
@@ -73,7 +73,7 @@ public class SelectionHelper {
 	 * node.
 	 * 
 	 * @param selection
-	 * @return
+	 * @return the node for the selection or null
 	 */
 	public static Node toNode(IStructuredSelection selection) {
 		if (selection.isEmpty()) {
@@ -93,7 +93,7 @@ public class SelectionHelper {
 	 * convert a DesignRange into a single node.
 	 * 
 	 * @param range
-	 * @return
+	 * @return the node for the design range or null
 	 */
 	public static Node toNode(DesignRange range) {
 		if (range.isValid()) {
@@ -110,7 +110,7 @@ public class SelectionHelper {
 	 *            if null, then will calculate it using offset.
 	 * @param offset
 	 *            offset in source.
-	 * @return
+	 * @return a dom position for the region and offset
 	 */
 	public static IDOMPosition toDOMPosition(IDOMModel model,
 			IndexedRegion region, int offset) {
@@ -207,6 +207,7 @@ public class SelectionHelper {
 	 * @param graphicViewer
 	 * @param offset
 	 * @param length
+	 * @return a selection
 	 */
 	public static ISelection convertToDesignerSelection(
 			IHTMLGraphicalViewer graphicViewer, int offset, int length) {
@@ -315,7 +316,7 @@ public class SelectionHelper {
 	 * structured selection of Node
 	 * 
 	 * @param sel
-	 * @return
+	 * @return a structured selectino
 	 */
 	public static IStructuredSelection convertFromDesignSelection(
 			IStructuredSelection sel) {
@@ -333,10 +334,10 @@ public class SelectionHelper {
 
 	/**
 	 * 
-	 * @param selection
+	 * @param range
 	 *            selection from designer, could be IStructuredSelection of
 	 *            NodeEditPart, or DesignRange.
-	 * @return
+	 * @return a text selection
 	 */
 	public static ITextSelection convertFromDesignSelection(DesignRange range) {
 		if (range.isValid()) {
@@ -360,6 +361,11 @@ public class SelectionHelper {
         return new TextSelection(0, 0);
 	}
 
+	/**
+	 * @param selection
+	 * @return a text selection for the selection or TextSelection(0,0)
+	 * if nothing can be determined
+	 */
 	public static ITextSelection convertFromDesignSelectionToTextSelection(
 			ISelection selection) {
 		if (selection instanceof IStructuredSelection) {
