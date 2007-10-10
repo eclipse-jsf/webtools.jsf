@@ -49,12 +49,17 @@ public class DeleteEdit extends DesignEdit {
 	/**
 	 * @param range
 	 * @param viewer
+	 * @param forward 
 	 */
 	public DeleteEdit(DOMRange range, GraphicalViewer viewer, boolean forward) {
 		super(range, viewer);
 		_forward = forward;
 	}
 
+	/**
+	 * @param range
+	 * @param viewer
+	 */
 	public DeleteEdit(DOMRange range, GraphicalViewer viewer) {
 		super(range, viewer);
 	}
@@ -98,6 +103,9 @@ public class DeleteEdit extends DesignEdit {
         deleteRange();
 	}
 
+	/**
+	 * @return the stack
+	 */
 	protected Stack deleteRange() {
 		WorkNode root = getRootWorkNode();
 		Node rootNode = root.getNode();
@@ -120,7 +128,7 @@ public class DeleteEdit extends DesignEdit {
 		Node result = null;
 		if ((isTableComponents(node) || IHTMLConstants.TAG_TABLE
 				.equalsIgnoreCase(node.getNode().getNodeName())) //
-				&& new IETablePositionRule(null, null).isInValidTable(node
+				&& new IETablePositionRule(null).isInValidTable(node
 						.getNode())) {
 			result = node.getNode().cloneNode(false);
 		}
@@ -223,7 +231,7 @@ public class DeleteEdit extends DesignEdit {
 	protected Node processNode(WorkNode node) {
 		Node result = null;
 		if (!isTableComponents(node)
-				|| !new IETablePositionRule(null, null).isInValidTable(node
+				|| !new IETablePositionRule(null).isInValidTable(node
 						.getNode())) {
 			// it's not table components.
 			setOperationPosition(new DOMRefPosition(node.getNode(), false));
