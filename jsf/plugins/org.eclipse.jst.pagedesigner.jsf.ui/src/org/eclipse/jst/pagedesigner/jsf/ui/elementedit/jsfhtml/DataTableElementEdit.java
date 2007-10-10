@@ -438,7 +438,7 @@ public class DataTableElementEdit extends DefaultJSFHTMLElementEdit
                 DnDPositionValidator validator = 
                     new DnDPositionValidator(new DropActionData(
                             ActionData.COMPONENT_MOVE, dropData));
-                validator.addRule(new OnlyColumnsAndFacetsRule(validator, validator.getActionData()));
+                validator.addRule(new OnlyColumnsAndFacetsRule(validator.getActionData()));
                 return validator;
             }
             return null;
@@ -447,12 +447,10 @@ public class DataTableElementEdit extends DefaultJSFHTMLElementEdit
         private static class OnlyColumnsAndFacetsRule extends DefaultPositionRule
         {
             /**
-             * @param mediator
              * @param actionData
              */
-            public OnlyColumnsAndFacetsRule(IPositionMediator mediator,
-                    ActionData actionData) {
-                super(mediator, actionData);
+            public OnlyColumnsAndFacetsRule(ActionData actionData) {
+                super(actionData);
             }
 
             public boolean isEditable(Target target) {
