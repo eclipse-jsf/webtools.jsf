@@ -17,7 +17,7 @@ import org.w3c.dom.Node;
 /**
  * @author mengbo
  */
-public class BasicMovementRule extends DefaultMovementRule {
+/*package*/ class BasicMovementRule extends DefaultMovementRule {
 
 	/**
 	 * @param actionData

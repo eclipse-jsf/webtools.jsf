@@ -16,12 +16,12 @@ package org.eclipse.jst.pagedesigner.validation.caret;
  * 
  * @author mengbo
  */
-public class HeadDataPositionRule extends DefaultPositionRule {
+/*package*/ class HeadDataPositionRule extends DefaultPositionRule {
 
 	/**
 	 * @param data
 	 */
-	public HeadDataPositionRule(IPositionMediator mediator, ActionData data) {
-		super(mediator, data);
+	public HeadDataPositionRule(ActionData data) {
+		super(data);
 	}
 }

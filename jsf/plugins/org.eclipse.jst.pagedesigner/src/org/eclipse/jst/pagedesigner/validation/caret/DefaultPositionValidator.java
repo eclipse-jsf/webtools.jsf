@@ -28,9 +28,12 @@ import org.w3c.dom.Node;
 /**
  * @author mengbo
  */
-public class DefaultPositionValidator implements IPositionMediator {
-	private List _rules = new ArrayList();
+/*package*/ class DefaultPositionValidator implements IPositionMediator {
+	private List<IValidationRule> _rules = new ArrayList<IValidationRule>();
 
+	/**
+	 * the validator's action data
+	 */
 	protected final ActionData _actionData;
 
 	/**
@@ -41,20 +44,23 @@ public class DefaultPositionValidator implements IPositionMediator {
 	}
 
 	/**
-	 * 
+	 * @param actionData 
 	 */
 	protected DefaultPositionValidator(ActionData actionData) {
 		_actionData = actionData;
 		initRules();
 	}
 
+	/**
+	 * initialize the default rules
+	 */
 	protected void initRules() {
 		_rules.clear();
 		addRule(new BasicPositionRule(this, _actionData));
-        addRule(new IETablePositionRule(this, _actionData));
-        addRule(new RootContainerPositionRule(this, _actionData));
-        addRule(new JSFRootContainerPositionRule(this, _actionData));
-        addRule(new WhitespacePositionMoveRule(this, _actionData));
+        addRule(new IETablePositionRule(_actionData));
+        addRule(new RootContainerPositionRule(_actionData));
+        addRule(new JSFRootContainerPositionRule(_actionData));
+        addRule(new WhitespacePositionMoveRule(_actionData));
 	}
 
 	/**
@@ -64,6 +70,9 @@ public class DefaultPositionValidator implements IPositionMediator {
 		return Collections.unmodifiableList(_rules);
 	}
 
+	/**
+	 * @param rule
+	 */
 	protected void addRule(IValidationRule rule) {
 		_rules.add(rule);
 	}
@@ -180,8 +189,6 @@ public class DefaultPositionValidator implements IPositionMediator {
 
 	/**
 	 * Adjust the position to an editable area.
-	 * 
-	 * @see org.eclipse.jst.pagedesigner.caret.IValidator#getEditableContainer(org.eclipse.gef.EditPart)
 	 */
 	public EditPart getEditableContainer(Target target) {
 		EditPart part = target.getPart();

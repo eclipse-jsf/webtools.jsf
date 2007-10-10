@@ -17,11 +17,10 @@ package org.eclipse.jst.pagedesigner.validation.caret;
 public class NodeConstructionPositionRule extends DefaultPositionRule {
 
 	/**
-	 * 
+	 * @param actionData 
 	 */
-	public NodeConstructionPositionRule(IPositionMediator mediator,
-			ActionData actionData) {
-		super(mediator, actionData);
+	public NodeConstructionPositionRule(ActionData actionData) {
+		super(actionData);
 	}
 
 }

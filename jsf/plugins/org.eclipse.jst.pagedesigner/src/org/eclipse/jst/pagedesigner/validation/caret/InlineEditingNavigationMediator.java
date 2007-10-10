@@ -95,7 +95,8 @@ public class InlineEditingNavigationMediator extends
 	}
 
 	/**
-	 * @see org.eclipse.jst.pagedesigner.validation.caret.IMovementMediator#getConstainedEditableContainer(org.eclipse.jst.pagedesigner.caret.Target)
+	 * @param target 
+	 * @return ? 
 	 */
 	public EditPart getRootConstainedEditableContainer(Target target) {
 		// if (EditModelQuery.isDocument(target.getNode()))
@@ -122,7 +123,7 @@ public class InlineEditingNavigationMediator extends
 	}
 
 	/**
-	 * @see org.eclipse.jst.pagedesigner.validation.caret.IMovementMediator#getConstainedEditableContainer(org.eclipse.jst.pagedesigner.caret.Target)
+	 * @see org.eclipse.jst.pagedesigner.validation.caret.IMovementMediator#getConstainedEditableContainer(org.eclipse.jst.pagedesigner.validation.caret.Target)
 	 */
 	public EditPart getConstainedEditableContainer(Target target) {
 		EditPart part = target.getPart();
@@ -144,7 +145,11 @@ public class InlineEditingNavigationMediator extends
 	}
 
 	/**
-	 * @see org.eclipse.jst.pagedesigner.validation.caret.IMovementMediator#getConstainedEditableContainer(org.eclipse.jst.pagedesigner.caret.Target)
+	 * @param position 
+	 * @param p 
+	 * @param viewer 
+	 * @return the constrained editable container or null if none found for the arguments
+	 * @see org.eclipse.jst.pagedesigner.validation.caret.IMovementMediator#getConstainedEditableContainer(org.eclipse.jst.pagedesigner.validation.caret.Target)
 	 */
 	public EditPart getConstainedEditableContainer(DesignPosition position,
 			Point p, GraphicalViewer viewer) {

@@ -27,8 +27,8 @@ public interface IPositionMediator {
 	/**
 	 * To see if the node itself or its descendent is editable.
 	 * 
-	 * @param node
-	 * @return
+	 * @param target
+	 * @return true if the target has editable area
 	 */
 	public boolean hasEditableArea(Target target);
 
@@ -36,20 +36,29 @@ public interface IPositionMediator {
 	 * To see if the position is valid.
 	 * 
 	 * @param position
-	 * @return
+	 * @return true if position is  valid
 	 */
 	public boolean isValidPosition(IDOMPosition position);
 
+	/**
+	 * @param position
+	 * @return true if position is valid
+	 */
 	public boolean isValidPosition(DesignPosition position);
 
 	/**
 	 * To see if the node is editable.
 	 * 
-	 * @param node
-	 * @return
+	 * @param target
+	 * @return true if target is editable
 	 */
 	public boolean isEditable(Target target);
 
+	/**
+	 * @param target
+	 * @param atRight
+	 * @return true if can reference target
+	 */
 	public boolean canReference(Target target, boolean atRight);
 
 	/**

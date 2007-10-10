@@ -17,8 +17,16 @@ import org.eclipse.gef.EditPart;
  * @author mengbo
  */
 public interface IMovementMediator extends IPositionMediator {
+	/**
+	 * @param target
+	 * @return true if mediator allows movment in
+	 */
 	public boolean allowsMoveIn(Target target);
 
+	/**
+	 * @param target
+	 * @return true if mediator allows movement out
+	 */
 	public boolean allowsMoveOut(Target target);
 
 	/**

@@ -32,6 +32,6 @@ public class InlineEditingPositionMediator extends DefaultPositionValidator {
 	 */
 	protected void initRules() {
 		super.initRules();
-		addRule(new IEPanelgridPositionRule(this, _actionData));
+		addRule(new IEPanelgridPositionRule(_actionData));
 	}
 }

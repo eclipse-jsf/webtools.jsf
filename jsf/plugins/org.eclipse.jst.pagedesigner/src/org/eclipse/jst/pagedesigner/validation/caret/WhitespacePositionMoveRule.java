@@ -28,11 +28,10 @@ public class WhitespacePositionMoveRule extends DefaultPositionRule implements
 		IMovementRule {
 
 	/**
-	 * @param mediator
+	 * @param actionData
 	 */
-	public WhitespacePositionMoveRule(IPositionMediator mediator,
-			ActionData actionData) {
-		super(mediator, actionData);
+	public WhitespacePositionMoveRule(ActionData actionData) {
+		super(actionData);
 	}
 
 	/*

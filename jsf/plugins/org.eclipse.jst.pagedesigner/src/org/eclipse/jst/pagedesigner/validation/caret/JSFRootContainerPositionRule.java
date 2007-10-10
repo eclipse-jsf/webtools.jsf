@@ -32,15 +32,13 @@ public class JSFRootContainerPositionRule extends DefaultPositionRule {
 	 * TODO: this is not enough because it ignores the uri and keys on only
 	 * the name of the tag.
 	 */
-	public static final String[] JSF_ROOT_CONTAINERS = { "view", "subview" };
+	/*package*/ static final String[] JSF_ROOT_CONTAINERS = { "view", "subview" };
 
 	/**
-	 * @param mediator
 	 * @param actionData
 	 */
-	public JSFRootContainerPositionRule(IPositionMediator mediator,
-			ActionData actionData) {
-		super(mediator, actionData);
+	public JSFRootContainerPositionRule(ActionData actionData) {
+		super(actionData);
 	}
 
 	/*

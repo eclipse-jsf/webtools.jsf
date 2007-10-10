@@ -14,10 +14,11 @@ package org.eclipse.jst.pagedesigner.validation.caret;
 /**
  * @author mengbo
  */
-public class DefaultMovementRule implements IMovementRule {
+/*package*/ class DefaultMovementRule implements IMovementRule {
 	ActionData _actionData;
 
 	/**
+	 * @param actionData 
 	 * 
 	 */
 	public DefaultMovementRule(ActionData actionData) {

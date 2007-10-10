@@ -22,17 +22,16 @@ public interface IPositionRule extends IValidationRule {
 	 * can we input something into the target. For DnD, this means whether can
 	 * we drag and drop something into it.
 	 * 
-	 * @param node
-	 * @return
+	 * @param target
+	 * @return true if target is editable
 	 */
 	public boolean isEditable(Target target);
 
 	/**
 	 * To see if the node itself or its descendent is editable.
 	 * 
-	 * @see isEditable for other details.
-	 * @param node
-	 * @return
+	 * @param target
+	 * @return true if target is editable
 	 */
 	public boolean hasEditableArea(Target target);
 
@@ -44,7 +43,7 @@ public interface IPositionRule extends IValidationRule {
 	 * @param target
 	 * @param atRight
 	 *            TODO
-	 * @return
+	 * @return true if can reference target
 	 */
 	public boolean canReference(Target target, boolean atRight);
 
@@ -55,7 +54,7 @@ public interface IPositionRule extends IValidationRule {
 	 * and isEditable.
 	 * 
 	 * @param position
-	 * @return
+	 * @return true if position is valid
 	 */
 	public boolean isValidPosition(IDOMPosition position);
 }

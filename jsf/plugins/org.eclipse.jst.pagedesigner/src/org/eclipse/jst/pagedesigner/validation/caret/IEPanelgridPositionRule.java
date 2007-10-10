@@ -21,16 +21,18 @@ import org.w3c.dom.Node;
  * 
  * @author mengbo
  */
-public class IEPanelgridPositionRule extends DefaultPositionRule {
-	public IEPanelgridPositionRule(IPositionMediator mediator,
-			ActionData actionData) {
-		super(mediator, actionData);
+/*package*/ class IEPanelgridPositionRule extends DefaultPositionRule {
+	/**
+	 * @param actionData
+	 */
+	public IEPanelgridPositionRule(ActionData actionData) {
+		super(actionData);
 	}
 
 	/**
 	 * PanelGrid is not editable.
 	 * 
-	 * @see org.eclipse.jst.pagedesigner.caret.IPositionRule#isEditable(org.eclipse.gef.EditPart)
+	 * @see org.eclipse.jst.pagedesigner.validation.caret.IPositionRule#isEditable(Target)
 	 */
 	public boolean isEditable(Target target) {
 		Node node = target.getNode();

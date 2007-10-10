@@ -13,22 +13,41 @@ package org.eclipse.jst.pagedesigner.validation.caret;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * An action data for object drops
+ * @author cbateman
+ *
+ */
 public class DropActionData extends ActionData
 {
+    /**
+     * @param action
+     * @param data
+     */
     public DropActionData(int action, DropData data ) 
     {
         super(action, data);
     }
 
+    /**
+     * @return the drop data or  null if none
+     */
     public DropData getDropData()
     {
         return (DropData) getData();
     }
     
+    /**
+     * Encapsulates the tags to be dropped
+     *
+     */
     public static class DropData
     {
         private final List    _tagIds;
         
+        /**
+         * @param tagIds
+         */
         public DropData(List tagIds)
         {
             _tagIds = Collections.unmodifiableList(tagIds);

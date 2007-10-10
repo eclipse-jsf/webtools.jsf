@@ -20,13 +20,17 @@ import org.w3c.dom.Node;
  * 
  * @author mengbo
  */
-public class BasicPositionRule extends DefaultPositionRule {
+/*package*/ class BasicPositionRule extends DefaultPositionRule 
+{
+    private final IPositionMediator _mediator;
 
 	/**
 	 * @param mediator
+	 * @param actionData 
 	 */
 	public BasicPositionRule(IPositionMediator mediator, ActionData actionData) {
-		super(mediator, actionData);
+	    super(actionData);
+        _mediator = mediator;
 	}
 
 	/*

@@ -33,10 +33,10 @@ public class IETablePositionRule extends DefaultPositionRule {
 			IHTMLConstants.TAG_TBODY, IHTMLConstants.TAG_TFOOT };
 
 	/**
-	 * @param mediator
+	 * @param actionData 
 	 */
-	public IETablePositionRule(IPositionMediator mediator, ActionData actionData) {
-		super(mediator, actionData);
+	public IETablePositionRule(ActionData actionData) {
+		super(actionData);
 	}
 
 	/*
@@ -78,9 +78,10 @@ public class IETablePositionRule extends DefaultPositionRule {
 		return super.hasEditableArea(target);
 	}
 
-	/*
+	/**
 	 * Used to valid the structure of table, later will use dtd to do that.
-	 * @param node @return
+	 * @param container 
+	 * @return true if the table is valid
 	 */
 	public boolean isInValidTable(Node container) {
 		boolean result = false;
@@ -183,20 +184,4 @@ public class IETablePositionRule extends DefaultPositionRule {
 		}
 		return false;
 	}
-
-    // TODO: dead?
-//	private boolean isValidTrTd(List ancestors) {
-//		String name;
-//		int offset = ancestors.size();
-//		if (offset >= 2) {
-//			return IHTMLConstants.TAG_TR.equalsIgnoreCase(((Node) ancestors
-//					.get(offset - 1)).getLocalName())
-//					&& //
-//					(IHTMLConstants.TAG_TH.equalsIgnoreCase(((Node) ancestors
-//							.get(offset - 2)).getLocalName()) || //
-//					IHTMLConstants.TAG_TD.equalsIgnoreCase(((Node) ancestors
-//							.get(offset - 2)).getLocalName()));
-//		}
-//		return false;
-//	}
 }

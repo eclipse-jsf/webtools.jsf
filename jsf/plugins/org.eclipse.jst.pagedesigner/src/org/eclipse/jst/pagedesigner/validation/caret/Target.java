@@ -28,6 +28,9 @@ public class Target {
 
 	private Node _node;
 
+	/**
+	 * @param part
+	 */
 	public Target(EditPart part) {
 		_part = part;
         
@@ -45,6 +48,9 @@ public class Target {
         }
 	}
 
+	/**
+	 * @param node
+	 */
 	public Target(Node node) {
 		_node = node;
 		Assert.isTrue(node instanceof INodeNotifier);
@@ -82,6 +88,10 @@ public class Target {
         return null;
     }
     
+	/**
+	 * @param node
+	 * @return the edit part for node or null if none found
+	 */
 	public static EditPart resolvePart(Node node) {
 		if (node instanceof INodeNotifier
 				&& ((INodeNotifier) node).getAdapterFor(EditPart.class) != null) {
@@ -91,6 +101,10 @@ public class Target {
 		return null;
 	}
 
+	/**
+	 * @param part
+	 * @return the node for part
+	 */
 	public static Node resolveNode(EditPart part) {
 		return (Node) part.getModel();
 	}

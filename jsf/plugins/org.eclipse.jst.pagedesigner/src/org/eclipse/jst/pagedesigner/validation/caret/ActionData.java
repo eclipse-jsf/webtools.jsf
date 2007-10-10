@@ -19,26 +19,48 @@ package org.eclipse.jst.pagedesigner.validation.caret;
  * @author mengbo
  */
 public class ActionData {
+	/**
+	 * Action type for palette drag and drop
+	 */
 	public static final int PALETTE_DND = 1;
 
+	/**
+	 * Action type for databinding drag and drop
+	 */
 	public static final int DATABINDING_DND = 2;
 
+	/**
+	 * Action type for other drag and  drop
+	 */
 	public static final int OTHER_DND = 3;
 
+	/**
+	 * Action type for key board navigation
+	 */
 	public static final int KEYBOARD_NAVAGATION = 4;
 
+	/**
+	 * Action type for inline editing
+	 */
 	public static final int INLINE_EDIT = 5;
 
+	/**
+	 * Action type for component move
+	 */
 	public static final int COMPONENT_MOVE = 6;
 
+	/**
+	 * Unknown action type (?)
+	 */
 	public static final int UNKNOWN = 0;
 
-	private int _actionType;
+	private final int _actionType;
 
-	private Object _data;
+	private final Object _data;
 
 	/**
-	 * 
+	 * @param action 
+	 * @param data 
 	 */
 	public ActionData(int action, Object data) {
 		_actionType = action;

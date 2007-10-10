@@ -21,12 +21,12 @@ import org.w3c.dom.Node;
 /**
  * @author mengbo
  */
-public class ContainerMoveInAndOutRule extends DefaultMovementRule {
-	public final String[] HTML_CONTAINERS = { IHTMLConstants.TAG_TABLE };
+/*package*/ class ContainerMoveInAndOutRule extends DefaultMovementRule {
+	private static final String[] HTML_CONTAINERS = { IHTMLConstants.TAG_TABLE };
 
-	public final String[] NONE_HTML_CONTAINERS = {};
+	private static final String[] NONE_HTML_CONTAINERS = {};
 
-	public final String[] SPECIAL_HTML_CONTAINERS = {
+	private static final String[] SPECIAL_HTML_CONTAINERS = {
 			IJSFConstants.TAG_OUTPUTLINK, IJSFConstants.TAG_COMMANDLINK,
 			IJSFConstants.TAG_FACET, IJSFConstants.TAG_VERBATIM };
 

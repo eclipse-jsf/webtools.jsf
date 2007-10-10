@@ -15,7 +15,15 @@ package org.eclipse.jst.pagedesigner.validation.caret;
  * @author mengbo
  */
 public interface IMovementRule extends IValidationRule {
+	/**
+	 * @param target
+	 * @return true if allows move in
+	 */
 	public boolean allowsMoveIn(Target target);
 
+	/**
+	 * @param target
+	 * @return true allows move out
+	 */
 	public boolean allowsMoveOut(Target target);
 }

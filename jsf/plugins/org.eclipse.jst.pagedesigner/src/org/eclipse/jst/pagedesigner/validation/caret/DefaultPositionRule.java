@@ -21,16 +21,14 @@ import org.eclipse.jst.pagedesigner.parts.NodeEditPart;
  */
 public class DefaultPositionRule implements IPositionRule {
 
-	protected IPositionMediator _mediator;
-
 	private ActionData _actionData;
 
 	/**
+	 * @param actionData 
 	 * 
 	 */
-	public DefaultPositionRule(IPositionMediator mediator, ActionData actionData) {
+	public DefaultPositionRule(ActionData actionData) {
 		super();
-		_mediator = mediator;
 		if (actionData != null) {
 			_actionData = actionData;
 		} else {
@@ -38,6 +36,9 @@ public class DefaultPositionRule implements IPositionRule {
 		}
 	}
 
+    /**
+     * @return the action data
+     */
     protected final ActionData getActionData()
     {
         return _actionData;
@@ -74,8 +75,6 @@ public class DefaultPositionRule implements IPositionRule {
 	/**
 	 * If container is inEditable and can be referenced, the position is
 	 * invalid, otherwise as default the position is valid. (non-Javadoc)
-	 * 
-	 * @see org.eclipse.jst.pagedesigner.caret.IPositionRule#isValidPosition(org.eclipse.jst.pagedesigner.dom.IDOMPosition)
 	 */
 	public boolean isValidPosition(IDOMPosition position) {
 		boolean result = isEditable(new Target(position.getContainerNode()));
@@ -100,8 +99,7 @@ public class DefaultPositionRule implements IPositionRule {
     
     /**
      * @param host
-     * @param tagName
-     * @return
+     * @return true if the host edit part is a widget
      */
      public static boolean isWidget(EditPart host) {
         if (host instanceof NodeEditPart) {

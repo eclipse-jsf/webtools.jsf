@@ -24,14 +24,13 @@ import org.w3c.dom.Node;
  * @author mengbo
  */
 public class RootContainerPositionRule extends DefaultPositionRule {
-	public static final String[] HTML_ROOT_CONTAINERS = { "body" };
+	static final String[] HTML_ROOT_CONTAINERS = { "body" };
 
 	/**
-	 * @param mediator
+	 * @param actionData
 	 */
-	public RootContainerPositionRule(IPositionMediator mediator,
-			ActionData actionData) {
-		super(mediator, actionData);
+	public RootContainerPositionRule(ActionData actionData) {
+		super(actionData);
 	}
 
 	/**
@@ -39,7 +38,7 @@ public class RootContainerPositionRule extends DefaultPositionRule {
 	 * container. 2. If none of the containers exists, then target will be not
 	 * restricted.
 	 * 
-	 * @see org.eclipse.jst.pagedesigner.validation.caret.IPositionRule#hasEditableArea(org.eclipse.gef.EditPart)
+	 * @see org.eclipse.jst.pagedesigner.validation.caret.IPositionRule#hasEditableArea(org.eclipse.jst.pagedesigner.validation.caret.Target)
 	 */
 	public boolean hasEditableArea(Target target) {
 		EditPart part = target.getPart();
@@ -72,17 +71,21 @@ public class RootContainerPositionRule extends DefaultPositionRule {
 	 * second level.
 	 * 
 	 * @param document
-	 * @return
+	 * @return true if the document has basic containers
 	 */
 	public static boolean hasBasicContainers(Document document) {
 		return getBasicContainer(document) != null;
 
 	}
 
-	public static boolean isWithinkBasicContainer(Node node) {
+	private static boolean isWithinkBasicContainer(Node node) {
 		return EditModelQuery.isChild(HTML_ROOT_CONTAINERS, node, true, false);
 	}
 
+	/**
+	 * @param document
+	 * @return the basic root container for the document or null
+	 */
 	public static Node getBasicContainer(Document document) {
 		Node node = EditModelQuery.getChild(document, HTML_ROOT_CONTAINERS, 2,
 				false);
