@@ -45,6 +45,10 @@ public abstract class AbstractFigureHandler implements IFigureHandler {
         // TODO: anything?
 	}
 
+	/**
+	 * @param node
+	 * @return the css style on the node
+	 */
 	protected ICSSStyle getCSSStyle(Element node) {
 		ICSSStyle style = null;
 		if (node instanceof IDOMElement) {
@@ -58,6 +62,9 @@ public abstract class AbstractFigureHandler implements IFigureHandler {
         return style;
 	}
 
+	/**
+	 * @param oldFigure
+	 */
 	protected void setCurrentFigure(CSSFigure oldFigure) {
 		this._figure = oldFigure;
 	}

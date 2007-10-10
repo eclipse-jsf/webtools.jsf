@@ -20,7 +20,10 @@ import org.w3c.dom.Element;
 /**
  * @author mengbo
  */
-public class ImgFigureHandler extends WidgetFigureHandler {
+/*package*/ class ImgFigureHandler extends WidgetFigureHandler {
+	/**
+	 * the image provided for a widget
+	 */
 	protected Image _image;
 
 	/**

@@ -21,9 +21,12 @@ import org.w3c.dom.Element;
  * @author mengbo
  * @version 1.5
  */
-public class HiddenFigureHandler extends WidgetFigureHandler {
-	Image _image;
+/*package*/ class HiddenFigureHandler extends WidgetFigureHandler {
+	private Image _image;
 
+	/**
+	 * @param image
+	 */
 	public HiddenFigureHandler(Image image) {
 		_image = image;
 	}

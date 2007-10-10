@@ -24,8 +24,12 @@ import org.w3c.dom.Element;
 /**
  * @author mengbo
  */
-public class SelectFigureHandler extends WidgetFigureHandler {
+/*package*/ class SelectFigureHandler extends WidgetFigureHandler {
 
+	/**
+	 * @param node
+	 * @return the labels
+	 */
 	public String[] getOptionLabels(Element node) {
 		List options = DOMUtil.getChildElementsByTagIgnoreCase(node,
 				IHTMLConstants.TAG_OPTION);
@@ -37,6 +41,10 @@ public class SelectFigureHandler extends WidgetFigureHandler {
 		return ret;
 	}
 
+	/**
+	 * @param node
+	 * @return the label
+	 */
 	public String getSelectedLabels(Element node) {
 		List options = DOMUtil.getChildElementsByTagIgnoreCase(node,
 				IHTMLConstants.TAG_OPTION);
@@ -50,15 +58,19 @@ public class SelectFigureHandler extends WidgetFigureHandler {
 		return result;
 	}
 
-	protected boolean isMultiple(Element node) {
+	/**
+	 * @param node
+	 * @return true if is multiple
+	 */
+	private boolean isMultiple(Element node) {
 		return DOMUtil
 				.getAttributeIgnoreCase(node, ICSSPropertyID.VAL_MULTIPLE) != null;
 	}
 
 	/**
-	 * @return
+	 * @return the provider
 	 */
-	protected ICSSWidgetProvider initializeWidgetProvider(Element node) {
+	protected final ICSSWidgetProvider initializeWidgetProvider(Element node) {
 		String[] labels = getOptionLabels(node);
 		String rows = DOMUtil.getAttributeIgnoreCase(node,
 				IHTMLConstants.ATTR_SIZE);

@@ -20,7 +20,7 @@ import org.w3c.dom.Element;
  * @author mengbo
  * @version 1.5
  */
-public class TextareaFigureHandler extends WidgetFigureHandler {
+/*package*/ class TextareaFigureHandler extends WidgetFigureHandler {
 	protected ICSSWidgetProvider initializeWidgetProvider(Element node) {
 		TextAreaWidgetProvider provider = new TextAreaWidgetProvider(
 				getCSSStyle(node));

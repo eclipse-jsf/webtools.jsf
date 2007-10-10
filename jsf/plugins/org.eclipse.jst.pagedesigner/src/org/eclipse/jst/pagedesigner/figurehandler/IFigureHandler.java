@@ -23,11 +23,24 @@ import org.w3c.dom.Element;
  * @version 1.5
  */
 public interface IFigureHandler extends INodeAdapter {
+	/**
+	 * @param node
+	 * @param oldFigure
+	 */
 	public void updateFigure(Element node, CSSFigure oldFigure);
 
+	/**
+	 * 
+	 */
 	public void dispose();
 
+	/**
+	 * @return true if the node is deemed a widget
+	 */
 	public boolean isWidget();
 
+	/**
+	 * @return the figure
+	 */
 	public CSSFigure getFigure();
 }

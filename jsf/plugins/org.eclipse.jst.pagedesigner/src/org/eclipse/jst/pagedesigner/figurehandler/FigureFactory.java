@@ -31,23 +31,8 @@ import org.w3c.dom.Text;
  * @author mengbo
  * @version 1.5
  */
-public class FigureFactory {
-	// public static IFigure createFigure(Element ele, boolean deep)
-	// {
-	// IFigureHandler handler = createAndAdapt(ele);
-	// IFigure figure = handler.createFigure(ele);
-	//
-	// if (deep && !handler.isWidget())
-	// {
-	// NodeList children = ele.getChildNodes();
-	// for (int i = 0, size = children.getLength(); i < size; i++)
-	// {
-	// createFigureDeep(figure, children.item(i));
-	// }
-	// }
-	// return figure;
-	// }
-
+public final class FigureFactory 
+{
 	/**
 	 * @param figure
 	 * @param node
@@ -120,6 +105,12 @@ public class FigureFactory {
 		}
 	}
 
+	/**
+	 * @param ele
+	 * @param old
+	 * @param figure
+	 * @return the figure
+	 */
 	public static IFigure updateDeepFigure(Element ele, Element old,
 			CSSFigure figure) {
 		recursiveDisposeAndUnadapt(old);
@@ -139,15 +130,8 @@ public class FigureFactory {
 		return figure;
 	}
 
-	public static void updateNonDeepFigure(Element ele, CSSFigure figure) {
-		IFigureHandler handler = getHandler(ele);
-		if (handler == null) {
-			handler = createAndAdapt(ele);
-		}
-		handler.updateFigure(ele, figure);
-	}
 
-	static void recursiveDisposeAndUnadapt(Element ele) {
+	private static void recursiveDisposeAndUnadapt(Element ele) {
 		disposeAndUnadapt(ele);
 		NodeList nl = ele.getChildNodes();
 		for (int i = 0, size = nl.getLength(); i < size; i++) {
@@ -158,7 +142,7 @@ public class FigureFactory {
 		}
 	}
 
-	static void disposeAndUnadapt(Element ele) {
+	private static void disposeAndUnadapt(Element ele) {
 		IFigureHandler handler = getHandler(ele);
 		if (handler != null) {
 			handler.dispose();
@@ -166,7 +150,7 @@ public class FigureFactory {
 		}
 	}
 
-	static IFigureHandler getHandler(Element ele) {
+	private static IFigureHandler getHandler(Element ele) {
 		if (ele instanceof IDOMElement) {
 			IDOMElement xmlele = (IDOMElement) ele;
 			return (IFigureHandler) xmlele.getAdapterFor(IFigureHandler.class);
@@ -174,7 +158,7 @@ public class FigureFactory {
 		return null;
 	}
 
-	static IFigureHandler createAndAdapt(Element ele) {
+	private static IFigureHandler createAndAdapt(Element ele) {
 		IFigureHandler handler = createFigureHandler(ele);
 		if (ele instanceof IDOMElement) {
 			((IDOMElement) ele).addAdapter(handler);
@@ -182,7 +166,7 @@ public class FigureFactory {
 		return handler;
 	}
 
-	static IFigureHandler createFigureHandler(Element ele) {
+	private static IFigureHandler createFigureHandler(Element ele) {
 		String tag = ele.getTagName();
 		if ("input".equalsIgnoreCase(tag)) {
 			return new InputFigureHandler();
@@ -216,5 +200,10 @@ public class FigureFactory {
 					"palette/GENERIC/small/PD_Palette_Default.gif");
 		}
 		return image;
+	}
+	
+	private FigureFactory()
+	{
+	    // no external instantiation
 	}
 }

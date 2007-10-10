@@ -16,8 +16,15 @@ import org.eclipse.jst.pagedesigner.css2.layout.CSSWidgetLayout;
 import org.eclipse.jst.pagedesigner.css2.provider.ICSSWidgetProvider;
 import org.w3c.dom.Element;
 
-public abstract class WidgetFigureHandler extends AbstractFigureHandler {
+/**
+ * A widget figure handler
+ *
+ */
+abstract class WidgetFigureHandler extends AbstractFigureHandler {
 
+	/**
+	 * default constructor
+	 */
 	public WidgetFigureHandler() {
 		super();
 	}
@@ -30,6 +37,10 @@ public abstract class WidgetFigureHandler extends AbstractFigureHandler {
 				.setFixedLayoutManager(new CSSWidgetLayout(oldFigure, provider));
 	}
 
+	/**
+	 * @param ele
+	 * @return the widget provider
+	 */
 	protected abstract ICSSWidgetProvider initializeWidgetProvider(Element ele);
 
 	public boolean isWidget() {

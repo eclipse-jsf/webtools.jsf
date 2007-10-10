@@ -19,7 +19,7 @@ import org.w3c.dom.Element;
  * @author mengbo
  * @version 1.5
  */
-public class ObjectFigureHandler extends ImgFigureHandler {
+/*package*/ class ObjectFigureHandler extends ImgFigureHandler {
 
 	/*
 	 * (non-Javadoc)

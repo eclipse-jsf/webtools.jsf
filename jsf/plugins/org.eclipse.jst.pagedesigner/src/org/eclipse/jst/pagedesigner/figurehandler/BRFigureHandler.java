@@ -20,6 +20,10 @@ import org.w3c.dom.Element;
  * @author mengbo
  */
 public class BRFigureHandler extends AbstractFigureHandler {
+	/**
+	 * @param figure
+	 * @return the CSS layout for fixed layout
+	 */
 	protected CSSLayout getFixedCSSLayout(CSSFigure figure) {
 		return new CSSBrFlowLayout(figure);
 	}

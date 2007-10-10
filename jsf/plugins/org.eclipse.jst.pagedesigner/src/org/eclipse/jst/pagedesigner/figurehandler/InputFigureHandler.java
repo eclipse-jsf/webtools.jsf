@@ -29,7 +29,7 @@ import org.w3c.dom.Element;
 /**
  * @author mengbo
  */
-public class InputFigureHandler extends WidgetFigureHandler {
+/*package*/ class InputFigureHandler extends WidgetFigureHandler {
 	private Image _image;
 
 	void initializeImage(Element node) {
@@ -76,7 +76,7 @@ public class InputFigureHandler extends WidgetFigureHandler {
 	/**
 	 * should not return null
 	 * 
-	 * @return
+	 * @return the image
 	 */
 	protected Image getHiddenImage() {
 		return PDPlugin.getDefault().getImage(
@@ -137,7 +137,7 @@ public class InputFigureHandler extends WidgetFigureHandler {
 	}
 
 	/**
-	 * @return
+	 * @return the widget provider
 	 */
 	protected ICSSWidgetProvider initializeWidgetProvider(Element node) {
 		reset();
