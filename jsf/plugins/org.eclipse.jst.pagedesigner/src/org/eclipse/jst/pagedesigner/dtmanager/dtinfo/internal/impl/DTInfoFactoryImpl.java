@@ -33,6 +33,7 @@ public class DTInfoFactoryImpl extends EFactoryImpl implements DTInfoFactory {
 	/**
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc -->
+     * @return the factory 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -148,6 +149,7 @@ public class DTInfoFactoryImpl extends EFactoryImpl implements DTInfoFactory {
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @return  the package
 	 * <!-- end-user-doc -->
 	 * @deprecated
 	 * @generated

@@ -665,6 +665,7 @@ public interface DTInfoPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+    @SuppressWarnings("hiding")
 	interface Literals {
 		/**
 		 * The meta object literal for the '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.impl.DTInfoImpl <em>DT Info</em>}' class.
@@ -682,7 +683,7 @@ public interface DTInfoPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DT_INFO__TAG_CONVERT_INFO = eINSTANCE.getDTInfo_TagConvertInfo();
+        EReference DT_INFO__TAG_CONVERT_INFO = eINSTANCE.getDTInfo_TagConvertInfo();
 
 		/**
 		 * The meta object literal for the '<em><b>Tag Decorate Infos</b></em>' containment reference list feature.

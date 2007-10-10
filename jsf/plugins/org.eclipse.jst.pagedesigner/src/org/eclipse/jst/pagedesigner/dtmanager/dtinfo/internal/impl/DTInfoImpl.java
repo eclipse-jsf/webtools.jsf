@@ -98,6 +98,9 @@ public class DTInfoImpl extends EObjectImpl implements DTInfo {
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @param newTagConvertInfo 
+     * @param msgs 
+     * @return the notification chaing 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */

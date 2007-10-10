@@ -499,6 +499,9 @@ public class TagDecorateInfoImpl extends EObjectImpl implements TagDecorateInfo 
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @param newResolveAttributeValue 
+     * @param msgs 
+     * @return the notification chain 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
