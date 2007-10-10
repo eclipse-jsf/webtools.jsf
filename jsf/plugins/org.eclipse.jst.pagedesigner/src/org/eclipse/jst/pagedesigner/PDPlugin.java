@@ -443,4 +443,14 @@ public class PDPlugin extends AbstractUIPlugin {
 	    ILog log = getDefault().getLog();
 	    log.log(status);
 	}
+	
+	/**
+	 * @param message
+	 * @param excp
+	 */
+	public static void log(String message, Throwable excp)
+	{
+	    Status status = new Status(IStatus.ERROR, getPluginId(), message, excp);
+	    log(status);
+	}
 }
