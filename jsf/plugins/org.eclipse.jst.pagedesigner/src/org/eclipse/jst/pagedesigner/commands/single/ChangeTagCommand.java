@@ -29,17 +29,17 @@ import org.w3c.dom.NodeList;
  * @author mengbo
  */
 public class ChangeTagCommand extends SingleNodeCommand {
-	private IDOMElement _element;
+    private final IDOMElement _element;
 
-	private String _uri;
+    private final Map _attributes;
 
-	private String _localTag;
+    private final boolean _moveContent;
 
-	private Map _attributes;
+    private String _uri;
 
-	private boolean _moveContent;
+    private String _localTag;
 
-	private String _totalTag;
+    private  String _totalTag;
 
 	/**
 	 * @param label
@@ -53,24 +53,6 @@ public class ChangeTagCommand extends SingleNodeCommand {
 		super(label, node);
 		this._element = node;
 		this._totalTag = totaltag;
-		this._attributes = attributes;
-		this._moveContent = movecontent;
-	}
-
-	/**
-	 * @param label
-	 * @param node
-	 * @param uri 
-	 * @param tag 
-	 * @param attributes 
-	 * @param movecontent 
-	 */
-	public ChangeTagCommand(String label, IDOMElement node, String uri,
-			String tag, Map attributes, boolean movecontent) {
-		super(label, node);
-		this._element = node;
-		this._uri = uri;
-		this._localTag = tag;
 		this._attributes = attributes;
 		this._moveContent = movecontent;
 	}
@@ -127,6 +109,9 @@ public class ChangeTagCommand extends SingleNodeCommand {
 		setReplacedElement(replacement);
 	}
 
+	/**
+	 * @return the replacemd element
+	 */
 	public IDOMElement getNewElement() {
 		return getReplacedElment();
 	}

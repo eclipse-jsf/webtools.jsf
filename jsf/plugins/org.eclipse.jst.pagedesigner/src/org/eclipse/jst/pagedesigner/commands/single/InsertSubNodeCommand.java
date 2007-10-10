@@ -23,6 +23,8 @@ public class InsertSubNodeCommand extends SingleNodeCommand {
 	/**
 	 * @param label
 	 * @param parent
+	 * @param child 
+	 * @param refchild 
 	 */
 	public InsertSubNodeCommand(String label, IDOMElement parent,
 			IDOMElement child, IDOMElement refchild) {
@@ -39,9 +41,5 @@ public class InsertSubNodeCommand extends SingleNodeCommand {
 	 */
 	protected void doExecute() {
 		_parent.insertBefore(_child, _refchild);
-	}
-
-	public IDOMElement getChildNode() {
-		return _child;
 	}
 }

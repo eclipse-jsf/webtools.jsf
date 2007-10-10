@@ -22,17 +22,21 @@ import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
  * @version 1.5
  */
 public class AddSubNodeCommand extends SingleNodeCommand {
-	private IDOMElement _parent, _child;
+	private final IDOMElement _parent;
+	private IDOMElement _child;
 
-	private String _tagName;
+	private final String _tagName;
 
-	private String _url;
+	private final String _url;
 
-	private Map _attributes;
+	private final Map _attributes;
 
 	/**
 	 * @param label
 	 * @param node
+	 * @param name 
+	 * @param url 
+	 * @param attributs 
 	 */
 	public AddSubNodeCommand(String label, IDOMElement node, String name,
 			String url, Map attributs) {
@@ -62,6 +66,9 @@ public class AddSubNodeCommand extends SingleNodeCommand {
 		_parent.appendChild(_child);
 	}
 
+	/**
+	 * @return the child node
+	 */
 	public IDOMElement getChildNode() {
 		return _child;
 	}

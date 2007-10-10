@@ -50,6 +50,11 @@ public class ChangeAttributeCommand extends SingleNodeCommand {
 		_attributes = null;
 	}
 
+	/** TODO: can these two constructors be merged?
+	 * @param label
+	 * @param node
+	 * @param attributes
+	 */
 	public ChangeAttributeCommand(String label, IDOMElement node, Map attributes) {
 		super(label, node);
 		_element = node;
