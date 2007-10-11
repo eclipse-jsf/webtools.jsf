@@ -26,23 +26,39 @@ import org.eclipse.swt.widgets.Display;
  * @author mengbo
  * @version 1.5
  */
-public class BorderUtil {
+public final class BorderUtil {
+	/**
+	 * vertical bar style
+	 */
 	public final static int VERTICAL_BAR = 0;
 
+	/**
+	 * horizontal bar style
+	 */
 	public final static int HORIZONTAL_BAR = 1;
 
+	/**
+	 * both scroll bar style
+	 */
 	public final static int BOTH = 2;
 
+	/**
+	 * The scroll width
+	 */
 	public final static int SCROLL_WIDTH = 16;
 
+	/**
+	 * the border thickness
+	 */
 	public final static int BORDER_THICK = 2;
 
 	/**
 	 * draw a mask to a rectangle
 	 * 
-	 * @param Graphics
-	 * @param Rectangle
-	 * @param Color
+	 * @param g 
+	 * @param rect 
+	 * @param color 
+	 * 
 	 */
 	public static void maskRectangle(Graphics g, Rectangle rect, Color color) {
 		// set default if one not provided
@@ -67,6 +83,12 @@ public class BorderUtil {
 		g.setForegroundColor(foregroundColor);
 	}
 
+	/**
+	 * @param g
+	 * @param rect
+	 * @param thick
+	 * @param inset
+	 */
 	public static void drawBorder(Graphics g, Rectangle rect, int thick,
 			boolean inset) {
 		drawBorder(g, rect.x, rect.y, rect.width, rect.height, thick, inset);
@@ -117,11 +139,24 @@ public class BorderUtil {
 		}
 	}
 
+	/**
+	 * @param g
+	 * @param scrollWidth
+	 * @param rect
+	 * @param style
+	 */
 	public static void drawScrollBar(Graphics g, int scrollWidth,
 			Rectangle rect, int style) {
 		drawScrollBar(g, scrollWidth, BORDER_THICK, rect, style);
 	}
 
+	/**
+	 * @param g
+	 * @param scrollWidth
+	 * @param borderThick
+	 * @param rect
+	 * @param style
+	 */
 	public static void drawScrollBar(Graphics g, int scrollWidth,
 			int borderThick, Rectangle rect, int style) {
 		if (style == BOTH) {
@@ -230,6 +265,13 @@ public class BorderUtil {
 		}
 	}
 
+	/**
+	 * @param g
+	 * @param arrawWidth
+	 * @param arrawHeight
+	 * @param borderThick
+	 * @param rect
+	 */
 	public static void drawVertialBar(Graphics g, int arrawWidth,
 			int arrawHeight, int borderThick, Rectangle rect) {
 		drawScrollBar(g, arrawWidth, borderThick, rect, VERTICAL_BAR);
@@ -247,7 +289,7 @@ public class BorderUtil {
 		for (int i = 0, size = fragments.size(); i < size; i++) {
 			FlowBox box = (FlowBox) fragments.get(i);
 			// XXX: why -1?
-			graphics.drawRectangle(box._x, box._y, box.getWidth() - 1, box
+			graphics.drawRectangle(box.getX(), box.getY(), box.getWidth() - 1, box
 					.getHeight() - 1);
 		}
 		graphics.restoreState();
@@ -261,8 +303,13 @@ public class BorderUtil {
 		List fragments = figure.getFragmentsForRead();
 		for (int i = 0, size = fragments.size(); i < size; i++) {
 			FlowBox box = (FlowBox) fragments.get(i);
-			maskRectangle(g, new Rectangle(box._x, box._y, box.getWidth(), box
+			maskRectangle(g, new Rectangle(box.getX(), box.getY(), box.getWidth(), box
 					.getHeight()), null);
 		}
+	}
+	
+	private BorderUtil()
+	{
+	    // util class, no instantiation
 	}
 }
