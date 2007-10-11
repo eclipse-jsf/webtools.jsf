@@ -116,7 +116,7 @@ public final  class LayoutPart {
 	public Rectangle getAbsoluteBounds(FlowBox box) {
 		if (box != null) {
 			IFigure figure = ((GraphicalEditPart) _part).getFigure();
-			Rectangle rect = new Rectangle(box._x, box._y, box.getWidth(), box
+			Rectangle rect = new Rectangle(box.getX(), box.getY(), box.getWidth(), box
 					.getHeight());
 			figure.translateToAbsolute(rect);
 			return rect;
@@ -331,7 +331,7 @@ public final  class LayoutPart {
 	}
 
 	/*package*/ static Rectangle getBounds(FlowBox box) {
-		return new Rectangle(box._x, box._y, box.getWidth(), box.getHeight());
+		return new Rectangle(box.getX(), box.getY(), box.getWidth(), box.getHeight());
 	}
 
 	/**

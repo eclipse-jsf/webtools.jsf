@@ -31,13 +31,14 @@ import org.w3c.dom.Node;
 /**
  * @author mengbo
  */
-public class LocationHelper {
+public final class LocationHelper {
 	/**
+	 * @param host 
 	 * @param p
 	 * @param result
 	 * @param tagName
 	 * @param skip
-	 * @return
+	 * @return  true if insertion point is found
 	 */
 	public static boolean findInsertLocation(GraphicalEditPart host, Point p,
 			GraphicalEditPart[] result, String tagName, Node skip) {
@@ -114,10 +115,10 @@ public class LocationHelper {
 	/**
 	 * @param figure
 	 * @param box
-	 * @return
+	 * @return the bounding rectangle
 	 */
 	public static Rectangle getAbsoluteBounds(IFigure figure, FlowBox box) {
-		Rectangle r = new Rectangle(box._x, box._y, box.getWidth(), box
+		Rectangle r = new Rectangle(box.getX(), box.getY(), box.getWidth(), box
 				.getHeight());
 		figure.translateToAbsolute(r);
 		return r;
@@ -125,7 +126,7 @@ public class LocationHelper {
 
 	/**
 	 * @param child
-	 * @return
+	 * @return the bounding rectangle
 	 */
 	public static Rectangle getAbsoluteBounds(GraphicalEditPart child) {
 		Rectangle bounds = child.getFigure().getBounds().getCopy();
@@ -180,7 +181,7 @@ public class LocationHelper {
 		return false;
 	}
 
-	protected static ModelQuery getModelQuery(Node node) {
+	private static ModelQuery getModelQuery(Node node) {
         Document doc = node.getOwnerDocument();
         
 		if (node.getNodeType() == Node.DOCUMENT_NODE) {
@@ -189,4 +190,8 @@ public class LocationHelper {
         return ModelQueryUtil.getModelQuery(doc);
 	}
 
+	private LocationHelper()
+	{
+	    // util class, no external instantiation
+	}
 }

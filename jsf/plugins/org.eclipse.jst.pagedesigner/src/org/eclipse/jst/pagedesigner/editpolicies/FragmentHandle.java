@@ -35,6 +35,9 @@ import org.eclipse.jst.pagedesigner.css2.layout.FlowBox;
  * @version 1.5
  */
 public class FragmentHandle extends AbstractHandle implements Handle {
+	/**
+	 * @param owner
+	 */
 	public FragmentHandle(GraphicalEditPart owner) {
 		super(owner, new FragmentLocator());
 		this.setOpaque(false);
@@ -61,9 +64,7 @@ public class FragmentHandle extends AbstractHandle implements Handle {
 		return tracker;
 	}
 
-	public void refresh() {
-		// TODO: not ref Insets insets = getOwnerFigure().getInsets();
-		// TODO: not ref Rectangle bounds;
+	private void refresh() {
 
 		// set the bounds of this figure, so it could cover all children.
 		bounds = getOwnerFigure().getBounds();
@@ -83,7 +84,7 @@ public class FragmentHandle extends AbstractHandle implements Handle {
 			this.add(childFigure);
 
 			FlowBox box = (FlowBox) fragments.get(i);
-			Rectangle rect = new Rectangle(box._x, box._y, box.getWidth(), box
+			Rectangle rect = new Rectangle(box.getX(), box.getY(), box.getWidth(), box
 					.getHeight());
 			cssfigure.translateToAbsolute(rect);
 
@@ -151,8 +152,8 @@ public class FragmentHandle extends AbstractHandle implements Handle {
 		this.add(target);
 
 		// for corner small box.
-		Rectangle targetBounds = new Rectangle(referencebox._x,
-				referencebox._y, referencebox.getWidth(), referencebox
+		Rectangle targetBounds = new Rectangle(referencebox.getX(),
+				referencebox.getY(), referencebox.getWidth(), referencebox
 						.getHeight());
 		targetBounds = new PrecisionRectangle(targetBounds);
 		reference.translateToAbsolute(targetBounds);
@@ -167,7 +168,7 @@ public class FragmentHandle extends AbstractHandle implements Handle {
 		target.setBounds(targetBounds);
 	}
 
-	public static class FragmentLocator implements Locator {
+	static class FragmentLocator implements Locator {
 		/*
 		 * (non-Javadoc)
 		 * 
@@ -178,7 +179,10 @@ public class FragmentHandle extends AbstractHandle implements Handle {
 		}
 	}
 
-	public static class BorderFigure extends Figure {
+	static class BorderFigure extends Figure {
+		/**
+		 * the bounds padding
+		 */
 		public static final int INNER_PAD = 2;
 
 		/*
