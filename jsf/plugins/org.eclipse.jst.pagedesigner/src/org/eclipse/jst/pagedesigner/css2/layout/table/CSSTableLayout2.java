@@ -152,8 +152,8 @@ public class CSSTableLayout2 extends CSSBlockFlowLayout implements ICSSPainter {
 		}
 		// For caption, determine a maximum and minimum width from it.
 		int captionWidth = 0;
-		if (_tableInfo._caption != null) {
-			captionWidth = _tableInfo._caption.getDimension().width;
+		if (_tableInfo.getCaption() != null) {
+			captionWidth = _tableInfo.getCaption().getDimension().width;
 		}
 
 		// For each cell that spans more than one column, increase the
@@ -315,8 +315,8 @@ public class CSSTableLayout2 extends CSSBlockFlowLayout implements ICSSPainter {
 				: minHeight;
 
 		int captionHeight = 0;
-		if (_tableInfo._caption != null) {
-			_captionSize = _tableInfo._caption.getFigure().getPreferredSize(
+		if (_tableInfo.getCaption() != null) {
+			_captionSize = _tableInfo.getCaption().getFigure().getPreferredSize(
 					_internalTableWidth, SWT.DEFAULT);
 			captionHeight = _captionSize.height;
 		} else {
@@ -376,7 +376,7 @@ public class CSSTableLayout2 extends CSSBlockFlowLayout implements ICSSPainter {
 		int[] delta = new int[columnMinWidths.length];
 		int sigmaDelta = 0;
 		for (int i = 0; i < columnMinWidths.length && toDistribute > 0; i++) {
-			if (_tableInfo._widthSpecified[i]) {
+			if (_tableInfo.getWidthSpecified()[i]) {
 				delta[i] = 0;
 			} else {
 				delta[i] = columnMaxWidths[i] - columnMinWidths[i];
@@ -410,7 +410,7 @@ public class CSSTableLayout2 extends CSSBlockFlowLayout implements ICSSPainter {
 		}
 		ArrayList list = new ArrayList();
 		for (int i = 0; i < columnMinWidths.length; i++) {
-			if (!_tableInfo._widthSpecified[i]) {
+			if (!_tableInfo.getWidthSpecified()[i]) {
 				list.add(new Integer(i));
 			}
 		}
@@ -563,7 +563,7 @@ public class CSSTableLayout2 extends CSSBlockFlowLayout implements ICSSPainter {
 	 * @return the table caption info
 	 */
 	public TableCaptionInfo getCaptionInfo() {
-		return _tableInfo._caption;
+		return _tableInfo.getCaption();
 	}
 
 	/**

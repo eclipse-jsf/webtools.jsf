@@ -78,7 +78,7 @@ public class CSSTableCellLayout extends CachedTableCellLayout {
 		if (lines != null && !lines.isEmpty()) {
 			FlowBox bottomBox = ((FlowBox) lines.get(lines.size() - 1));
 			FlowBox topBox = ((FlowBox) lines.get(0));
-			linesHeight = bottomBox._y + bottomBox.getHeight() - topBox._y;
+			linesHeight = bottomBox.getY() + bottomBox.getHeight() - topBox.getY();
 		}
 		int movement = 0;
 		if (VerticalAlignMeta.BOTTOM.equals(verticalStyle)) {
@@ -105,10 +105,10 @@ public class CSSTableCellLayout extends CachedTableCellLayout {
 			for (int i = 0, n = lines.size(); i < n; i++) {
 				if (lines.get(i) instanceof LineBox) {
 					LineBox lineBox = (LineBox) lines.get(i);
-					int LineMovement = Math.max(lineBox._marginInsets
+					int LineMovement = Math.max(lineBox.getMarginInsets()
 							.getHeight(), movement);
-					lineBox._y = lineBox._y + LineMovement
-							- lineBox._marginInsets.getHeight();
+					lineBox.setY(lineBox.getY() + LineMovement
+							- lineBox.getMarginInsets().getHeight());
 				}
 			}
 		}

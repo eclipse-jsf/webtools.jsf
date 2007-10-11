@@ -23,7 +23,7 @@ import org.eclipse.jst.pagedesigner.css2.layout.ICSSFigure;
  * @author mengbo
  * @version 1.5
  */
-public class TableRowGroupInfo extends TableItemInfo {
+/*package*/ class TableRowGroupInfo extends TableItemInfo {
 	List _rowList = new ArrayList();
 
 	private int _rowIndex;
@@ -37,15 +37,15 @@ public class TableRowGroupInfo extends TableItemInfo {
 		super(figure);
 	}
 
-	public List getRowList() {
+	List getRowList() {
 		return _rowList;
 	}
 
-	public int getRowIndex() {
+	int getRowIndex() {
 		return _rowIndex;
 	}
 
-	public int getRowCount() {
+	int getRowCount() {
 		return this._rowCount;
 	}
 
@@ -89,7 +89,7 @@ public class TableRowGroupInfo extends TableItemInfo {
 
 	/**
 	 * @param figure
-	 * @return
+	 * @return the table row info
 	 */
 	public TableRowInfo findRowInfo(CSSFigure figure) {
 		for (int i = 0, size = _rowList.size(); i < size; i++) {

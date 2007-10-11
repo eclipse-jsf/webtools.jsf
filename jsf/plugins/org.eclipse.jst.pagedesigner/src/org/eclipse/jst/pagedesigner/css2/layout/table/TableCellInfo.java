@@ -163,7 +163,7 @@ public class TableCellInfo extends TableItemInfo {
 								+ style.getPaddingInsets().getWidth();
 					}
 					if (this.getColSpan() == 1) {
-						tableInfo._widthSpecified[this.getColumnIndex()] = true;
+						tableInfo.getWidthSpecified()[this.getColumnIndex()] = true;
 					}
 				}
 

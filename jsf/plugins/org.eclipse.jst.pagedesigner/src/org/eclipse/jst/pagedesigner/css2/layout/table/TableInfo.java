@@ -23,36 +23,34 @@ import org.eclipse.jst.pagedesigner.css2.layout.ICSSFigure;
  * @author mengbo
  * @version 1.5
  */
-public class TableInfo extends TableItemInfo {
-	List _tableHeaderGroups = new ArrayList();
+/*package*/ class TableInfo extends TableItemInfo {
+	private List _tableHeaderGroups = new ArrayList();
 
-	List _tableTRandTRGs = new ArrayList();
+	private List _tableTRandTRGs = new ArrayList();
 
-	List _tableFooterGroups = new ArrayList();
+	private List _tableFooterGroups = new ArrayList();
 
-	TableCaptionInfo _caption;
+	private TableCaptionInfo _caption;
 
-	int _columnCount;
+	private int _columnCount;
 
-	int _rowCount;
+	private int _rowCount;
 
-	List _cells = null;
+	private List _cells = null;
 
 	private List _rows = null;
 
-	int _tableWidth; // calculated table width, valid after calling to
+	private int _tableWidth; // calculated table width, valid after calling to
 
 	// calculateTableWidth
 
-	int _availableWidth;
-
-	int _tableHeight;
+	private int _tableHeight;
 
 	private int[] _widthPercentage;
 
 	private int[] _heightPercentage;
 
-	boolean[] _widthSpecified;
+	private boolean[] _widthSpecified;
 
 	/**
 	 * @param figure
@@ -61,27 +59,35 @@ public class TableInfo extends TableItemInfo {
 		super(figure);
 	}
 
-	public List getTableHeaderGroups() {
-		return _tableHeaderGroups;
-	}
 
-	public List getTRandTRGs() {
-		return _tableTRandTRGs;
-	}
-
-	public List getTableFooterGroups() {
-		return _tableFooterGroups;
-	}
-
+	/**
+	 * @return the column count
+	 */
 	public int getColumnCount() {
 		return _columnCount;
 	}
 
+	/**
+	 * @return the row count
+	 */
 	public int getRowCount() {
 		return _rowCount;
 	}
 
-	protected void constructTable() {
+	final TableCaptionInfo getCaption() {
+        return _caption;
+    }
+
+
+    /**
+     * @return width specified
+     */
+    final boolean[] getWidthSpecified() {
+        return _widthSpecified;
+    }
+
+
+    void constructTable() {
 		List child = getFigure().getChildren();
 		for (int i = 0, size = child.size(); i < size; i++) {
 			IFigure childfigure = (IFigure) child.get(i);
@@ -160,13 +166,17 @@ public class TableInfo extends TableItemInfo {
 		}
 	}
 
-	public void setWidthPercentage(int columnIndex, int percentageValue) {
+	/**
+	 * @param columnIndex
+	 * @param percentageValue
+	 */
+	void setWidthPercentage(int columnIndex, int percentageValue) {
 		if (percentageValue > this._widthPercentage[columnIndex]) {
 			this._widthPercentage[columnIndex] = percentageValue;
 		}
 	}
 
-	public void setHeightPercentage(int rowIndex, int percentageValue) {
+	void setHeightPercentage(int rowIndex, int percentageValue) {
 		if (percentageValue > this._heightPercentage[rowIndex]) {
 			this._heightPercentage[rowIndex] = percentageValue;
 		}
@@ -181,11 +191,11 @@ public class TableInfo extends TableItemInfo {
 		return this._widthPercentage;
 	}
 
-	public int[] getHeightPercentages() {
+	int[] getHeightPercentages() {
 		return this._heightPercentage;
 	}
 
-	public List getRows() {
+	List getRows() {
 		if (_rows == null) {
 			this._rows = new ArrayList();
 
@@ -213,7 +223,7 @@ public class TableInfo extends TableItemInfo {
 		return _rows;
 	}
 
-	public List getCells() {
+	List getCells() {
 		if (_cells == null) {
 			_cells = new ArrayList();
 
@@ -249,7 +259,7 @@ public class TableInfo extends TableItemInfo {
 	 */
 	public void calculateWidth(int contentWidth, int availableWidth) {
 		_tableWidth = contentWidth;
-		_availableWidth = availableWidth;
+		//_availableWidth = availableWidth;
 
 		// next calculate cell width
 		List cells = getCells();
@@ -259,7 +269,7 @@ public class TableInfo extends TableItemInfo {
 		}
 	}
 
-	public void calculateHeight(int contentHeight) {
+	void calculateHeight(int contentHeight) {
 		_tableHeight = contentHeight;
 
 		List rows = getRows();

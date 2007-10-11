@@ -19,7 +19,7 @@ import org.eclipse.jst.pagedesigner.utils.IntFlexArray;
  * @author mengbo
  * @version 1.5
  */
-public class TableInfoContext {
+/*package*/ class TableInfoContext {
 	static Logger _log = PDPlugin.getLogger(TableInfoContext.class);
 
 	int _currentCol = 0;
@@ -40,29 +40,35 @@ public class TableInfoContext {
 	}
 
 	/**
-	 * @return
+	 * @return the flex array
 	 */
 	public IntFlexArray getIntFlexArray() {
 		return _array;
 	}
 
 	/**
-	 * @return
+	 * @return the current column
 	 */
 	public int getCurrentCol() {
 		return _currentCol;
 	}
 
+	/**
+	 * @param currentcol
+	 */
 	public void setCurrentCol(int currentcol) {
 		_currentCol = currentcol;
 	}
 
+	/**
+	 * @return the current row
+	 */
 	public int getCurrentRow() {
 		return _currentRow;
 	}
 
 	/**
-	 * @return
+	 * @return the column count
 	 */
 	public int getColumnCount() {
 		return _colCount;
@@ -106,7 +112,7 @@ public class TableInfoContext {
 	}
 
 	/**
-	 * @return
+	 * @return the row count
 	 */
 	public int getRowCount() {
 		return _rowCount;

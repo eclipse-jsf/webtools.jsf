@@ -25,10 +25,11 @@ import org.eclipse.jst.pagedesigner.css2.layout.FlowFigure;
  * @author mengbo
  * @version 1.5
  */
-public abstract class CachedTableCellLayout extends CSSBlockFlowLayout {
-	protected Dimension _pageSize = new Dimension();
+public abstract class CachedTableCellLayout extends CSSBlockFlowLayout 
+{
+	private Dimension _pageSize = new Dimension();
 
-	protected boolean _calculatingSize = false;
+	private boolean _calculatingSize = false;
 
 	private int _pageSizeCacheKeys[] = new int[4];
 
@@ -103,9 +104,15 @@ public abstract class CachedTableCellLayout extends CSSBlockFlowLayout {
 		super.preLayout();
 	}
 
-	public abstract Rectangle getCellRect();
+	/**
+	 * @return the cell rectangle
+	 */
+	protected abstract Rectangle getCellRect();
 
-	public abstract boolean initializeTableInfo();
+	/**
+	 * @return true if initialized
+	 */
+	protected abstract boolean initializeTableInfo();
 
 	protected void setupBlock() {
 		if (_isTable) {
@@ -191,7 +198,7 @@ public abstract class CachedTableCellLayout extends CSSBlockFlowLayout {
 		}
 	}
 
-	public int getRecommendedWidth() {
+	private int getRecommendedWidth() {
 		return _recommendedWidth;
 	}
 
@@ -202,6 +209,12 @@ public abstract class CachedTableCellLayout extends CSSBlockFlowLayout {
 		_recommendedWidth = width;
 	}
 
+	/**
+	 * @param container
+	 * @param width
+	 * @param height
+	 * @return max width size
+	 */
 	public Dimension getMaxContentWidthSize(IFigure container, int width,
 			int height) {
 		try {

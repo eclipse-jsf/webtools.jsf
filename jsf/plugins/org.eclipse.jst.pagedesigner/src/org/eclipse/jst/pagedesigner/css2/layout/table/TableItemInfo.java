@@ -18,20 +18,27 @@ import org.eclipse.jst.pagedesigner.css2.layout.ICSSFigure;
  * @author mengbo
  * @version 1.5
  */
-public class TableItemInfo {
-	public ICSSFigure _figure;
+/*package*/ class TableItemInfo 
+{
+	private ICSSFigure _figure;
 
 	/**
-	 * 
+	 * @param figure 
 	 */
 	public TableItemInfo(ICSSFigure figure) {
 		_figure = figure;
 	}
 
+	/**
+	 * @return the figure
+	 */
 	public ICSSFigure getFigure() {
 		return _figure;
 	}
 
+	/**
+	 * @return the style
+	 */
 	public ICSSStyle getStyle() {
 		return _figure.getCSSStyle();
 	}

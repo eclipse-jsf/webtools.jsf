@@ -25,7 +25,7 @@ import org.eclipse.jst.pagedesigner.css2.value.Length;
  * @author mengbo
  * @version 1.5
  */
-public class TableRowInfo extends TableItemInfo {
+/*package*/ class TableRowInfo extends TableItemInfo {
 	List _cells = new ArrayList();
 
 	int _rowIndex;
@@ -39,15 +39,15 @@ public class TableRowInfo extends TableItemInfo {
 		super(figure);
 	}
 
-	public List getCells() {
+	List getCells() {
 		return _cells;
 	}
 
-	public int getRowIndex() {
+	int getRowIndex() {
 		return _rowIndex;
 	}
 
-	public int getSpecifiedRowHeight() {
+	int getSpecifiedRowHeight() {
 		return _rowHeight;
 	}
 
@@ -82,7 +82,7 @@ public class TableRowInfo extends TableItemInfo {
 	}
 
 	/**
-	 * @param _cells2
+	 * @param cells
 	 */
 	public void getCells(List cells) {
 		cells.addAll(this._cells);
@@ -90,7 +90,7 @@ public class TableRowInfo extends TableItemInfo {
 
 	/**
 	 * @param figure
-	 * @return
+	 * @return the table cell info
 	 */
 	public TableCellInfo getCellInfo(CSSFigure figure) {
 		for (int i = 0, size = _cells.size(); i < size; i++) {
@@ -104,7 +104,7 @@ public class TableRowInfo extends TableItemInfo {
 
 	/**
 	 * @param info
-	 * @param height
+	 * @param tableHeight
 	 */
 	public void calculateHeight(TableInfo info, int tableHeight) {
 		ICSSStyle style = this.getFigure().getCSSStyle();
