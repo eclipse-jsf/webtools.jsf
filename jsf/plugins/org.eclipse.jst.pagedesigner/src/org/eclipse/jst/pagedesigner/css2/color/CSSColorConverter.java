@@ -27,6 +27,9 @@ public class CSSColorConverter {
 
 	private static CSSColorConverter _instance = new CSSColorConverter();
 
+	/**
+	 * @return singleton instance
+	 */
 	public static CSSColorConverter getInstantce() {
 		if (_instance == null) {
 			_instance = new CSSColorConverter();
@@ -34,7 +37,7 @@ public class CSSColorConverter {
 		return _instance;
 	}
 
-	protected Object getCSSColor(String CSSText) {
+	Object getCSSColor(String CSSText) {
 		if (CSSText == null) {
 			return null;
 		}

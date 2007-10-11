@@ -35,10 +35,13 @@ public class CSSBorder extends AbstractBorder {
 
 	private static final String COLOR_QUERY_TEMPLETE = "border-{0}-color";
 
-	private ICSSStyle _style;
+	private final ICSSStyle _style;
 
-	protected Rectangle _innerRect = new Rectangle();
+	private final Rectangle _innerRect = new Rectangle();
 
+	/**
+	 * @param style
+	 */
 	public CSSBorder(ICSSStyle style) {
 		this._style = style;
 	}
@@ -227,6 +230,13 @@ public class CSSBorder extends AbstractBorder {
 				baseColor.blue) };
 	}
 
+	/**
+	 * @param graphics
+	 * @param rect
+	 * @param innerRect
+	 * @param edge
+	 * @param style
+	 */
 	public void paintEdge(Graphics graphics, Rectangle rect,
 			Rectangle innerRect, String edge, String style) {
 		if (!shouldDraw(style)) {
@@ -245,6 +255,12 @@ public class CSSBorder extends AbstractBorder {
 		}
 	}
 
+	/**
+	 * @param graphics
+	 * @param rect
+	 * @param innerRect
+	 * @param edge
+	 */
 	protected void paintEdge(Graphics graphics, Rectangle rect,
 			Rectangle innerRect, String edge) {
 		String property = MessageFormater.format(BODER_QUERY_TEMPLETE, edge);

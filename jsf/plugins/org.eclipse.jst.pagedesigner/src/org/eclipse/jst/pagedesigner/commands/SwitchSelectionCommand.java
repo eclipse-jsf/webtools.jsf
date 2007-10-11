@@ -28,9 +28,16 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.Text;
 
+/**
+ * A command to switch the selection
+ *
+ */
 public class SwitchSelectionCommand extends Command {
 	IHTMLGraphicalViewer _viewer;
 
+	/**
+	 * @param viewer
+	 */
 	public SwitchSelectionCommand(IHTMLGraphicalViewer viewer) {
 		_viewer = viewer;
 	}

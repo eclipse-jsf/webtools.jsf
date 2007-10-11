@@ -22,9 +22,9 @@ import org.eclipse.swt.widgets.Display;
  * @author mengbo
  */
 public class CSSColorDefaults {
-	public static final HashMap SYSTEM_DEFAULT_COLORS = new HashMap(20);
+	static final HashMap SYSTEM_DEFAULT_COLORS = new HashMap(20);
 
-	public static final HashMap EXTENDED_COLORS = new HashMap(20);
+	static final HashMap EXTENDED_COLORS = new HashMap(20);
 
     // TODO C.B.: there is overlap here between the default and extended
     // colors.  Also, for the custom colors, should use a ColorRegistry
