@@ -18,9 +18,13 @@ import org.eclipse.draw2d.geometry.Translatable;
  * @author mengbo
  * @version 1.5
  */
-public class FigureUtil {
-	// XXX:
-	// seemed Figure.translateToRelative is bug?
+public  final class FigureUtil {
+	/**
+	 * @param figure
+	 * @param t
+	 */
+    // XXX:
+    // seemed Figure.translateToRelative is bug?
 	public static final void translateToRelative(IFigure figure, Translatable t) {
 		if (figure.getParent() != null) {
 			translateToRelative(figure.getParent(), t);
@@ -29,8 +33,12 @@ public class FigureUtil {
 		}
 	}
 
-	// XXX:
-	// seemed Figure.translateToAbsolute is bug?
+	/**
+	 * @param figure
+	 * @param t
+	 */
+    // XXX:
+    // seemed Figure.translateToAbsolute is bug?
 	public static final void translateToAbsolute(IFigure figure, Translatable t) {
 		if (figure.getParent() != null) {
 			figure.translateToParent(t);
@@ -38,5 +46,10 @@ public class FigureUtil {
 			// figure.getParent().translateToAbsolute(t);
 		}
 
+	}
+	
+	private FigureUtil()
+	{
+	    // util class.  No instantiation
 	}
 }

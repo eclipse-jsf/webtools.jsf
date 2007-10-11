@@ -24,12 +24,12 @@ import org.eclipse.jst.pagedesigner.css2.property.PositionMeta;
 /**
  * @author mengbo
  */
-public class DisplayToLayout {
+public final class DisplayToLayout {
 	/**
 	 * @param figure
 	 * @param display
 	 * @param old
-	 * @return
+	 * @return the layout
 	 */
 	public static CSSLayout displayToLayout(CSSFigure figure, String display,
 			LayoutManager old) {
@@ -75,10 +75,8 @@ public class DisplayToLayout {
 	}
 
 	/**
-	 * @param figure
-	 * @param display
-	 * @param old
-	 * @return
+	 * @param display 
+	 * @return true if is inline
 	 */
 	public static boolean isInline(String display) {
 		return "inline".equalsIgnoreCase(display) //$NON-NLS-1$
@@ -87,7 +85,7 @@ public class DisplayToLayout {
 
 	/**
 	 * @param style
-	 * @return
+	 * @return true if is positioned
 	 */
 	public static boolean isPositioned(ICSSStyle style) {
 		Object position = style.getStyleProperty(ICSSPropertyID.ATTR_POSITION);
@@ -95,5 +93,10 @@ public class DisplayToLayout {
 			return false;
 		}
         return true;
+	}
+	
+	private DisplayToLayout()
+	{
+	    // util class, no instantiation
 	}
 }

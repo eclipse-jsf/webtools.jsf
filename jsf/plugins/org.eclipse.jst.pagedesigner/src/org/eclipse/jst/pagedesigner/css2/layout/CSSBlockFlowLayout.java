@@ -237,7 +237,7 @@ public class CSSBlockFlowLayout extends CSSLayout implements ICSSPainter2 {
 				_blockBox.setRecommendedHeight(h);
 			}
 		}
-		_blockBox._marginInsets = new Insets(style.getMarginInsets());
+		_blockBox.setMarginInsets(new Insets(style.getMarginInsets()));
 		if (handlingBorderForBlock()) {
 			BoxUtil.setupBorderPaddingMargin(_blockBox, getCSSStyle());
 		}
@@ -394,7 +394,7 @@ public class CSSBlockFlowLayout extends CSSLayout implements ICSSPainter2 {
 							&& _blockBox.getInternalContentHeight() >= 0
 							&& _userSpecifiedHeight < _blockBox
 									.getInternalContentHeight()
-									+ _blockBox._paddingInsets.getHeight()
+									+ _blockBox.getPaddingInsets().getHeight()
 									+ BorderUtil.SCROLL_WIDTH) {
 						_needVScroll = true;
 					}
@@ -404,7 +404,7 @@ public class CSSBlockFlowLayout extends CSSLayout implements ICSSPainter2 {
 							&& _blockBox.getInternalContentWidth() >= 0
 							&& _userSpecifiedWidth < _blockBox
 									.getInternalContentWidth()
-									+ _blockBox._paddingInsets.getWidth()
+									+ _blockBox.getPaddingInsets().getWidth()
 									+ BorderUtil.SCROLL_WIDTH) {
 						_needHScroll = true;
 					}
@@ -421,7 +421,7 @@ public class CSSBlockFlowLayout extends CSSLayout implements ICSSPainter2 {
 
 		if (getFlowContext().isCurrentLineOccupied()
 				&& getFlowContext().getCurrentLine().getAvailableWidth() < _blockBox._width
-						+ _blockBox._marginInsets.getWidth()) {
+						+ _blockBox.getMarginInsets().getWidth()) {
 			getFlowContext().endLine();
 		}
 		if (!isInlineBlock()) {
@@ -435,7 +435,7 @@ public class CSSBlockFlowLayout extends CSSLayout implements ICSSPainter2 {
 		} else {
 			getFlowContext().addToCurrentLine(_blockBox);
 		}
-		getFlowContext().getCurrentLine()._marginInsets.bottom = getCSSStyle()
+		getFlowContext().getCurrentLine().getMarginInsets().bottom = getCSSStyle()
 				.getMarginInsets().bottom;
 
 		if (!isInlineBlock()) {
@@ -572,7 +572,7 @@ public class CSSBlockFlowLayout extends CSSLayout implements ICSSPainter2 {
 		} else {
 			if (topMargin == Integer.MIN_VALUE) {
 				line._y = _previousLine._y + _previousLine.getHeight()
-						+ getLinePadding() + _previousLine._marginInsets.bottom; // XXX:
+						+ getLinePadding() + _previousLine.getMarginInsets().bottom; // XXX:
 				// should
 				// add
 				// previous
@@ -582,7 +582,7 @@ public class CSSBlockFlowLayout extends CSSLayout implements ICSSPainter2 {
 				line._y = _previousLine._y
 						+ _previousLine.getHeight()
 						+ Math.max(topMargin,
-								_previousLine._marginInsets.bottom);
+								_previousLine.getMarginInsets().bottom);
 			}
 		}
 		setFontinfoForLine(line);
@@ -726,7 +726,7 @@ public class CSSBlockFlowLayout extends CSSLayout implements ICSSPainter2 {
 
 					Rectangle rect = new Rectangle(0, 0, _blockBox.getWidth(),
 							_blockBox.getHeight());
-					rect.crop(_blockBox._borderInsets);
+					rect.crop(_blockBox.getBorderInsets());
 
 					if (this._needHScroll && this._needVScroll) {
 						BorderUtil.drawScrollBar(g, BorderUtil.SCROLL_WIDTH,

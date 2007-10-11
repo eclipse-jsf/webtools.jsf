@@ -18,11 +18,23 @@ package org.eclipse.jst.pagedesigner.css2.layout;
  * @version 1.5
  */
 public class Debug {
+	/**
+	 * Debug flag
+	 */
 	public static final boolean DEBUG_BASELINE = false;
 
+	/**
+	 * Debug flag
+	 */
 	public static final boolean DEBUG_BOX = false;
 
+	/**
+	 * Debug flag
+	 */
 	public static final boolean DEBUG_BORDERPADDING = false;
 
+	/**
+	 * Debug flag
+	 */
 	public static final boolean DEBUG_TEXTBORDER = false;
 }

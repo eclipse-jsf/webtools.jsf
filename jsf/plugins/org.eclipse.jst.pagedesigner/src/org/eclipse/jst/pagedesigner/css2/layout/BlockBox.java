@@ -59,11 +59,11 @@ public class BlockBox extends CompositeBox {
 				+ box._height);
 	}
 
-	public int getInternalContentWidth() {
+	int getInternalContentWidth() {
 		return _internalContentWidth;
 	}
 
-	public int getInternalContentHeight() {
+	int getInternalContentHeight() {
 		return _internalContentHeight;
 	}
 

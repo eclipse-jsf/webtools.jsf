@@ -27,7 +27,7 @@ import org.eclipse.draw2d.PositionConstants;
  * <P>
  * Only {@link FlowFigure}s can be added to a BlockFlow.
  */
-public class BlockFlow extends FlowFigure {
+/*package*/ class BlockFlow extends FlowFigure {
 
 	final BlockBox _blockBox;
 
@@ -46,7 +46,8 @@ public class BlockFlow extends FlowFigure {
 	}
 
 	/**
-	 * @see org.eclipse.jst.pagedesigner.css2.layout.FlowFigure#createDefaultFlowLayout()
+	 * @return the default flow layout
+	 * 
 	 */
 	protected FlowFigureLayout createDefaultFlowLayout() {
 		return new BlockFlowLayout(this);

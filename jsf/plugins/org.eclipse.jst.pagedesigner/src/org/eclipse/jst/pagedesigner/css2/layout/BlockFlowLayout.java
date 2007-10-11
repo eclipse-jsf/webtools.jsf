@@ -62,6 +62,7 @@ public class BlockFlowLayout extends FlowContainerLayout {
 	 * 
 	 * @param line
 	 *            the LineBox to set up
+	 * @param topMargin 
 	 */
 	protected void setupLine(LineBox line, int topMargin) {
 		line.clear();
@@ -82,7 +83,7 @@ public class BlockFlowLayout extends FlowContainerLayout {
 		} else {
 			if (topMargin == Integer.MIN_VALUE) {
 				line._y = _previousLine._y + _previousLine.getHeight()
-						+ getLinePadding() + _previousLine._marginInsets.bottom; // XXX:
+						+ getLinePadding() + _previousLine.getMarginInsets().bottom; // XXX:
 				// should
 				// add
 				// previous
@@ -92,7 +93,7 @@ public class BlockFlowLayout extends FlowContainerLayout {
 				line._y = _previousLine._y
 						+ _previousLine.getHeight()
 						+ Math.max(topMargin,
-								_previousLine._marginInsets.bottom);
+								_previousLine.getMarginInsets().bottom);
 			}
 		}
 		// line.validate();

@@ -33,7 +33,6 @@ public class CSSPageFlowLayout extends CSSBlockFlowLayout {
 
 	private Dimension _pageSizeCacheValues[] = new Dimension[4];
 
-	private Dimension _cacheMaxWidthSize = null;
 
 	/**
 	 * @param cssfigure
@@ -53,7 +52,6 @@ public class CSSPageFlowLayout extends CSSBlockFlowLayout {
 		_pageSizeCacheValues = new Dimension[4];
 		_pageSize = new Dimension();
 		_recommendedWidth = 0;
-		_cacheMaxWidthSize = null;
 	}
 
 	protected void endBlock() {
@@ -96,7 +94,7 @@ public class CSSPageFlowLayout extends CSSBlockFlowLayout {
 		_blockBox._x = 0;
 	}
 
-	public int getRecommendedWidth() {
+	private int getRecommendedWidth() {
 		return _recommendedWidth;
 	}
 
@@ -160,27 +158,5 @@ public class CSSPageFlowLayout extends CSSBlockFlowLayout {
 			container.getUpdateManager().addInvalidFigure(container);
 		}
 		return _pageSizeCacheValues[0];
-	}
-
-	public Dimension getMaxContentWidthSize(IFigure container) {
-		if (this._cacheMaxWidthSize == null) {
-			boolean b = getCalcuatingMaxWidth();
-			setCalculatingMaxWidth(true);
-
-			// Flowpage must temporarily layout to determine its preferred size
-			int oldWidth = getRecommendedWidth();
-			setRecommendedWidth(Integer.MAX_VALUE);
-			container.validate();
-			_cacheMaxWidthSize = _pageSize.getExpanded(container.getInsets()
-					.getWidth(), container.getInsets().getHeight());
-
-			if (0 != oldWidth) {
-				setRecommendedWidth(oldWidth);
-				container.getUpdateManager().addInvalidFigure(container);
-			}
-
-			setCalculatingMaxWidth(b);
-		}
-		return _cacheMaxWidthSize;
 	}
 }

@@ -25,14 +25,14 @@ public interface ICSSFigure extends IFigure {
 	 * Note, this method is for read only, caller should not change the returned
 	 * list and items in the returned list.
 	 * 
-	 * @return
+	 * @return the list of fragments
 	 */
 	public List getFragmentsForRead();
 
 	/**
 	 * get the CSSStyle of this CSS figure.
 	 * 
-	 * @return
+	 * @return the css style
 	 */
 	public ICSSStyle getCSSStyle();
 }

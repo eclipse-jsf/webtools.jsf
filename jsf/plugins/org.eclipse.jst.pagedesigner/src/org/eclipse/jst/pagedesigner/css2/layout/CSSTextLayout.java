@@ -42,6 +42,9 @@ public class CSSTextLayout extends FlowFigureLayout {
 	// public static final int WORD_WRAP_TRUNCATE = 2;
 	private int _wrappingStyle = WORD_WRAP_HARD;
 
+	/**
+	 * @param textfigure
+	 */
 	public CSSTextLayout(CSSTextFigure textfigure) {
 		super(textfigure);
 	}
@@ -149,7 +152,11 @@ public class CSSTextLayout extends FlowFigureLayout {
 		}
 	}
 
-	// XXX: maybe should move to TextSupport later.
+	/**
+	 * @param context
+	 * @return true if should trim leading whitespace
+	 */
+    // XXX: maybe should move to TextSupport later.
 	public boolean shouldTrimLeadingWhitespace(FlowContext context) {
 		if (!context.isCurrentLineOccupied()) {
 			return true;

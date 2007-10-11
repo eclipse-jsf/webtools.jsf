@@ -135,7 +135,7 @@ public class CSSListItemLayout extends CSSBlockFlowLayout implements
 		List list = _blockBox.getFragments();
 		Rectangle box = _blockBox.toRectangle().getCopy().expand(
 				_blockBox.getBorderPaddingInsets().getAdded(
-						_blockBox._marginInsets));
+						_blockBox.getMarginInsets()));
 		if (list != null && !list.isEmpty()) {
 			LineBox line = (LineBox) list.get(0);
 			y = line.getBaseline() - CIRCLE_DIAMETER;
@@ -156,7 +156,7 @@ public class CSSListItemLayout extends CSSBlockFlowLayout implements
 
 		Rectangle box = _blockBox.toRectangle().getCopy().expand(
 				_blockBox.getBorderPaddingInsets().getAdded(
-						_blockBox._marginInsets));
+						_blockBox.getMarginInsets()));
 
 		x = box.x - FigureUtilities.getTextWidth(displayString, font);
 		x = x

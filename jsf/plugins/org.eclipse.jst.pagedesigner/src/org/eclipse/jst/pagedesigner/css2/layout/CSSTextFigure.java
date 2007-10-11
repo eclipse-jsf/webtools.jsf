@@ -36,6 +36,9 @@ public class CSSTextFigure extends FlowFigure implements ICSSFigure {
 
 	private List _fragments = new ArrayList(1);
 
+	/**
+	 * @param provider
+	 */
 	public CSSTextFigure(ICSSTextProvider provider) {
 		_provider = provider;
 		this.setLayoutManager(createDefaultFlowLayout());
@@ -69,7 +72,8 @@ public class CSSTextFigure extends FlowFigure implements ICSSFigure {
 	}
 
 	/**
-	 * @see FlowFigure#createDefaultFlowLayout()
+	 * @return the default flow layout
+	 * 
 	 */
 	protected FlowFigureLayout createDefaultFlowLayout() {
 		return new CSSTextLayout(this);
@@ -93,6 +97,9 @@ public class CSSTextFigure extends FlowFigure implements ICSSFigure {
 		return getFragments();
 	}
 
+	/**
+	 * @return the text
+	 */
 	public String getText() {
 		return _provider.getTextData();
 	}
@@ -179,7 +186,7 @@ public class CSSTextFigure extends FlowFigure implements ICSSFigure {
 	 * which has closer x coordinate.
 	 * 
 	 * @param relative
-	 * @return
+	 * @return return the offset
 	 */
     // TODO: refactoring?
 	public int getNewInsertionOffset(Point relative) {
@@ -246,6 +253,10 @@ public class CSSTextFigure extends FlowFigure implements ICSSFigure {
         return -1;
 	}
 
+	/**
+	 * @param relative
+	 * @return the insertion offset
+	 */
 	public int getInsertionOffset(Point relative) {
 		for (int i = 0, n = _fragments.size(); i < n; i++) {
 			TextFragmentBox box = (TextFragmentBox) _fragments.get(i);
@@ -264,7 +275,7 @@ public class CSSTextFigure extends FlowFigure implements ICSSFigure {
 	 * the returned rectangle will be relative to this text figure.
 	 * 
 	 * @param offset
-	 * @return
+	 * @return the caret position
 	 */
 	public Rectangle calculateCaretPosition(int offset) {
 		// search reverse order, find the latest box that has _offset small than

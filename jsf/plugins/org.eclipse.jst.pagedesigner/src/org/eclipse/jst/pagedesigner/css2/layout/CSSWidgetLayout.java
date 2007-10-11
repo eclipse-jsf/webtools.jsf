@@ -27,6 +27,7 @@ public class CSSWidgetLayout extends CSSBlockFlowLayout implements ICSSPainter {
 
 	/**
 	 * @param flowfigure
+	 * @param provider 
 	 */
 	public CSSWidgetLayout(CSSFigure flowfigure, ICSSWidgetProvider provider) {
 		super(flowfigure);
@@ -42,6 +43,9 @@ public class CSSWidgetLayout extends CSSBlockFlowLayout implements ICSSPainter {
 		_provider = provider;
 	}
 
+	/**
+	 * @return the provider
+	 */
 	public ICSSWidgetProvider getProvider() {
 		// return ((CSSWidgetFigure)this.getFlowFigure()).getProvider();
 		return _provider;

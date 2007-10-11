@@ -26,7 +26,7 @@ public interface ICSSLayout extends LayoutManager {
 	/**
 	 * Each ICSSLayout is dedicated to a single CSSFigure.
 	 * 
-	 * @return
+	 * @return the figure
 	 */
 	public ICSSFigure getICSSFigure();
 

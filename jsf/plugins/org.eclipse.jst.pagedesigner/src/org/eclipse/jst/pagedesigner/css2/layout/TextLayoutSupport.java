@@ -73,6 +73,12 @@ public class TextLayoutSupport {
 	/**
 	 * this method will create a set of TextFragment. Each fragment will offset
 	 * to the original text (whole text for the text figure).
+	 * @param context 
+	 * @param text 
+	 * @param fragments 
+	 * @param font 
+	 * @param wrappingStyle 
+	 * @param trimLeading 
 	 */
 	public static void layoutNormal(FlowContext context, String text,
 			List fragments, Font font, int wrappingStyle, boolean trimLeading) {
@@ -147,6 +153,12 @@ public class TextLayoutSupport {
 		}
 	}
 
+	/**
+	 * @param context
+	 * @param text
+	 * @param fragments
+	 * @param font
+	 */
 	public static void layoutNoWrap(FlowContext context, String text,
 			List fragments, Font font) {
 		TextFragmentBox fragment;
@@ -187,11 +199,22 @@ public class TextLayoutSupport {
 		return result;
 	}
 
+	/**
+	 * @param g
+	 * @param fragments
+	 * @param font
+	 * @param textDecoration
+	 */
 	public static void paintTextFigure(Graphics g, List fragments, Font font,
 			int textDecoration) {
 		paintTextFigure(g, fragments, font, null, textDecoration);
 	}
 
+	/**
+	 * @param g
+	 * @param rect
+	 * @param textDecoration
+	 */
 	public static void paintTextDecoration(Graphics g, Rectangle rect,
 			int textDecoration) {
 		if ((textDecoration & TextDecorationMeta.UNDERLINE) != 0) {
@@ -207,6 +230,13 @@ public class TextLayoutSupport {
 		}
 	}
 
+	/**
+	 * @param g
+	 * @param fragments
+	 * @param font
+	 * @param color
+	 * @param textDecoration
+	 */
 	public static void paintTextFigure(Graphics g, List fragments, Font font,
 			Color color, int textDecoration) {
 		// FIXME: It happens there is problem in this method's parameters. what
@@ -359,6 +389,12 @@ public class TextLayoutSupport {
 		}
 	}
 
+	/**
+	 * @param textAlign
+	 * @param rect
+	 * @param textWidth
+	 * @return the x value
+	 */
 	public static int getBeginX(Object textAlign, Rectangle rect, int textWidth) {
 		int x = rect.x;
 		if (textAlign != null) {
@@ -382,5 +418,10 @@ public class TextLayoutSupport {
 			}
 		}
 		return x;
+	}
+	
+	private TextLayoutSupport()
+	{
+	    // no instantiation
 	}
 }

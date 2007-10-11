@@ -26,7 +26,7 @@ public class TextFragmentBox extends FlowBox {
 
 	// boolean _truncated;
 
-	public boolean _isLastCharWhitespace = false;
+	/*package*/ boolean _isLastCharWhitespace = false;
 
 	private String _textData;
 
@@ -76,10 +76,16 @@ public class TextFragmentBox extends FlowBox {
 		_width = w;
 	}
 
+	/**
+	 * @return the text data
+	 */
 	public String getTextData() {
 		return _textData;
 	}
 
+	/**
+	 * @param txt
+	 */
 	public void setTextData(String txt) {
 		_textData = txt;
 	}

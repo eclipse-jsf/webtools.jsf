@@ -19,6 +19,10 @@ import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontMetrics;
 
+/**
+ * A multi-line label
+ *
+ */
 public class MultiLineLabel extends Label {
 	private static String ELLIPSIS = "..."; //$NON-NLS-1$
 
@@ -63,7 +67,11 @@ public class MultiLineLabel extends Label {
 		return lines;
 	}
 
-	public String getSubStringText(String text) {
+	/**
+	 * @param text
+	 * @return the substring text
+	 */
+	private String getSubStringText(String text) {
 		String subStringText = text;
 
 		Font currentFont = getFont();

@@ -15,6 +15,10 @@ import org.eclipse.draw2d.AbstractLayout;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Dimension;
 
+/**
+ * Layout for flow figures
+ *
+ */
 public abstract class FlowFigureLayout extends AbstractLayout {
 
 	/**
@@ -94,14 +98,17 @@ public abstract class FlowFigureLayout extends AbstractLayout {
 		_context = flowContext;
 	}
 
-	public FlowContext getOriginalFlowContext() {
+	/**
+	 * @return the original flow context
+	 */
+	protected final FlowContext getOriginalFlowContext() {
 		return _context;
 	}
 
 	/**
 	 * get flow context.
 	 * 
-	 * @return
+	 * @return the flow context
 	 */
 	public FlowContext getFlowContext() {
 		return _context;
@@ -112,5 +119,8 @@ public abstract class FlowFigureLayout extends AbstractLayout {
 		return _flowFigure.toString();
 	}
 
+	/**
+	 * Called to dispose the layout
+	 */
 	abstract public void dispose();
 }

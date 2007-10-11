@@ -109,10 +109,6 @@ public abstract class FlowFigure extends Figure {
 				.setOriginalFlowContext(flowContext);
 	}
 
-	public void setDisplayString(String s) {
-		_displayString = s;
-	}
-
 	public String toString() {
 		if (_displayString == null)
         {
@@ -121,10 +117,10 @@ public abstract class FlowFigure extends Figure {
         return _displayString + " " + getClass().getName();
 	}
 
-	String _displayString; // for debug
+	private String _displayString; // for debug
 
 	/**
-	 * @return
+	 * @return the flow context
 	 */
 	public FlowContext getFlowContext() {
 		return ((FlowFigureLayout) getLayoutManager()).getFlowContext();

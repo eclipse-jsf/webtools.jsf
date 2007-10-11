@@ -17,7 +17,8 @@ import org.eclipse.draw2d.geometry.Rectangle;
 /**
  * This class represents the CSS box model. See chapter 8 of CSS2 spec.
  * 
- * @see http://www.w3.org/TR/REC-CSS2/box.html
+ * see http://www.w3.org/TR/REC-CSS2/box.html
+ * 
  */
 public class FlowBox {
 	private Object _verticalAlignData = null;
@@ -25,22 +26,22 @@ public class FlowBox {
 	/**
 	 * The x location
 	 */
-	public int _x;
+	protected int _x;
 
 	/**
 	 * The y location
 	 */
-	public int _y;
+	protected int _y;
 
 	int _width;
 
 	int _height;
 
-	public Insets _marginInsets = new Insets();
+	private Insets _marginInsets = new Insets();
 
-	public Insets _borderInsets = new Insets();
+	private Insets _borderInsets = new Insets();
 
-	public Insets _paddingInsets = new Insets();
+	private Insets _paddingInsets = new Insets();
 
 	/**
 	 * This method must be called on a block that is completely positioned and
@@ -66,6 +67,7 @@ public class FlowBox {
 	public int getAscent() {
 		return getHeight();
 	}
+
 
 	/**
 	 * By default, a simple FlowBox is all ascent, and no descent. Zero is
@@ -95,10 +97,16 @@ public class FlowBox {
 		return _width;
 	}
 
+	/**
+	 * @param w
+	 */
 	public void setWidth(int w) {
 		_width = w;
 	}
 
+	/**
+	 * @param h
+	 */
 	public void setHeight(int h) {
 		_height = h;
 	}
@@ -113,25 +121,31 @@ public class FlowBox {
 		_y = (value - getAscent());
 	}
 
+	/**
+	 * @return the border padding width
+	 */
 	public int getBorderPaddingWidth() {
 		return _borderInsets.getWidth() + _paddingInsets.getWidth();
 	}
 
 	/**
-	 * @return
+	 * @return the border padding height
 	 */
 	public int getBorderPaddingHeight() {
 		return _borderInsets.getHeight() + _paddingInsets.getHeight();
 	}
 
 	/**
-	 * @return
+	 * @return the border padding insets
 	 */
 	public Insets getBorderPaddingInsets() {
 		Insets temp = new Insets(_borderInsets);
 		return temp.add(_paddingInsets);
 	}
 
+	/**
+	 * @param rect
+	 */
 	public void setXYWidthHeight(Rectangle rect) {
 		this._x = rect.x;
 		this._y = rect.y;
@@ -154,8 +168,63 @@ public class FlowBox {
 		_verticalAlignData = alignData;
 	}
 
+	/**
+	 * @return a copy of the rectangle
+	 * TODO: use getCopy() ?
+	 */
 	public Rectangle getRectangle() {
 		return new Rectangle(this._x, this._y, this.getWidth(), this
 				.getHeight());
+	}
+
+    /**
+     * @return the x coordinate
+     */
+    public final int getX() {
+        return _x;
+    }
+
+    /**
+     * @return the y coordinate
+     */
+    public final int getY() {
+        return _y;
+    }
+
+    /**
+     * @param y
+     */
+    protected void setY(int y)
+    {
+        _y = y;
+    }
+    
+    /**
+     * @return the margin insets
+     */
+    public final Insets getMarginInsets() {
+        return _marginInsets;
+    }
+
+    final void setMarginInsets(Insets marginInsets) {
+        _marginInsets = marginInsets;
+    }
+
+    final Insets getBorderInsets() {
+        return _borderInsets;
+    }
+
+    final void setBorderInsets(Insets borderInsets)
+    {
+        _borderInsets = borderInsets;
+    }
+    
+    final Insets getPaddingInsets() {
+        return _paddingInsets;
+    }
+	
+	final void setPaddingInsets(Insets paddingInsets)
+	{
+	    _paddingInsets = paddingInsets;
 	}
 }

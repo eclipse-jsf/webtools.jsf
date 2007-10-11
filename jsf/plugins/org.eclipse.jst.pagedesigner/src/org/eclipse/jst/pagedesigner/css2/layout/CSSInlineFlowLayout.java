@@ -142,7 +142,7 @@ public class CSSInlineFlowLayout extends CSSLayout {
 		}
 
 		if (_currentLine != null /* && _currentLine.isOccupied() */) {
-			_currentLine._marginInsets.right = getCSSStyle().getMarginInsets().right;
+			_currentLine.getMarginInsets().right = getCSSStyle().getMarginInsets().right;
 			getFlowContext().addToCurrentLine(_currentLine);
 		}
 
@@ -192,6 +192,7 @@ public class CSSInlineFlowLayout extends CSSLayout {
 	 * 
 	 * @param line
 	 *            The LineBox to initialize.
+	 * @param firstline 
 	 */
 	protected void setupLine(LineBox line, boolean firstline) {
 		LineBox parent = getFlowContext().getCurrentLine();

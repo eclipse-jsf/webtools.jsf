@@ -24,18 +24,19 @@ import org.eclipse.jst.pagedesigner.css2.value.Length;
  * @version 1.5
  */
 public class BlockFlowContext implements FlowContext {
-	protected LineBox _currentLine;
+	private LineBox _currentLine;
 
 	private LineBox _previousLine = null;
 
-	protected BlockBox _blockBox;
+	BlockBox _blockBox;
 
-	protected FlowContext _originalContext;
+	private final FlowContext _originalContext;
 
-	protected ICSSStyle _style;
+	private final ICSSStyle _style;
 
 	/**
-	 * 
+	 * @param originalContext 
+	 * @param style 
 	 */
 	public BlockFlowContext(FlowContext originalContext, ICSSStyle style) {
 		this._originalContext = originalContext;
@@ -53,7 +54,10 @@ public class BlockFlowContext implements FlowContext {
 		return _originalContext.getContainerWidth();
 	}
 
-	public void setup() {
+	/**
+	 * Initialize the object
+	 */
+	private void setup() {
 		_blockBox = new BlockBox();
 		_blockBox.setRecommendedWidth(getRecommendedWidth());
 		_currentLine = this.getCurrentLine();
@@ -136,7 +140,7 @@ public class BlockFlowContext implements FlowContext {
 		createNewLine();
 	}
 
-	protected void createNewLine() {
+	private void createNewLine() {
 		_currentLine = new LineBox();
 		setupLine(_currentLine, Integer.MIN_VALUE);
 	}
@@ -146,13 +150,14 @@ public class BlockFlowContext implements FlowContext {
 	 * 
 	 * @param line
 	 *            the LineBox to set up
+	 * @param topMargin 
 	 */
 	protected void setupLine(LineBox line, int topMargin) {
 		line.clear();
 
 		// the caller of getCurrentLine() may add leftMargin and leftPadding and
 		// leftBorder to line.x
-		line._x = _blockBox._borderInsets.left + _blockBox._paddingInsets.left;
+		line._x = _blockBox.getBorderInsets().left + _blockBox.getPaddingInsets().left;
 
 		// FIXME: here should check the floating boxes, and minus the width of
 		// them from
@@ -166,14 +171,14 @@ public class BlockFlowContext implements FlowContext {
 		// space.
 		// line.setRecommendedWidth(_blockBox.getRecommendedContentWidth());
 		if (_previousLine == null) {
-			line._y = _blockBox._borderInsets.top
-					+ _blockBox._paddingInsets.top;
+			line._y = _blockBox.getBorderInsets().top
+					+ _blockBox.getPaddingInsets().top;
 			if (topMargin != Integer.MIN_VALUE)
 				line._y += topMargin;
 		} else {
 			if (topMargin == Integer.MIN_VALUE)
 				line._y = _previousLine._y + _previousLine.getHeight()
-						+ getLinePadding() + _previousLine._marginInsets.bottom; // XXX:
+						+ getLinePadding() + _previousLine.getMarginInsets().bottom; // XXX:
 			// should
 			// add
 			// previous
@@ -183,7 +188,7 @@ public class BlockFlowContext implements FlowContext {
 				line._y = _previousLine._y
 						+ _previousLine.getHeight()
 						+ Math.max(topMargin,
-								_previousLine._marginInsets.bottom);
+								_previousLine.getMarginInsets().bottom);
 		}
 		// line.validate();
 	}
@@ -219,7 +224,7 @@ public class BlockFlowContext implements FlowContext {
 		FlowBox box = (FlowBox) _currentLine.getFragments().get(
 				_currentLine.getFragments().size() - 1);
 		if (box != null) {
-			return box._marginInsets.right;
+			return box.getMarginInsets().right;
 		}
         return 0;
 	}
@@ -273,7 +278,7 @@ public class BlockFlowContext implements FlowContext {
 		_blockBox.add(_currentLine);
 	}
 
-	public void endBlock() {
+	void endBlock() {
 		endLine();
 	}
 

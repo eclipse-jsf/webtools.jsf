@@ -26,9 +26,9 @@ public class BoxUtil {
 	 * @param style
 	 */
 	public static void setupBorderPaddingMargin(FlowBox box, ICSSStyle style) {
-		box._marginInsets = new Insets(style.getMarginInsets());
-		box._borderInsets = new Insets(style.getBorderInsets());
-		box._paddingInsets = new Insets(style.getPaddingInsets());
+		box.setMarginInsets(new Insets(style.getMarginInsets()));
+		box.setBorderInsets(new Insets(style.getBorderInsets()));
+		box.setPaddingInsets(new Insets(style.getPaddingInsets()));
 
 		if (box.getBorderPaddingHeight() > box.getHeight()) {
 			box.setHeight(box.getBorderPaddingHeight());

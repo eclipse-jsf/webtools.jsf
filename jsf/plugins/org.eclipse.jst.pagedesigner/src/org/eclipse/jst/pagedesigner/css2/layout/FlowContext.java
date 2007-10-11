@@ -49,7 +49,7 @@ public interface FlowContext {
 	 * considering the new element's left margin.
 	 * 
 	 * @param topMargin
-	 * @return
+	 * @return the current line
 	 */
 	LineBox getCurrentLine(int topMargin);
 
@@ -66,7 +66,7 @@ public interface FlowContext {
 	boolean isCurrentLineOccupied();
 
 	/**
-	 * @return
+	 * @return the last margin right coord
 	 */
 	int getLastMarginRight();
 
@@ -77,14 +77,14 @@ public interface FlowContext {
 	 * block element we don't set the block element's size to be recommended
 	 * width. Please see CSSBlockFlowLayout
 	 * 
-	 * @return
+	 * @return true if is calculating max width
 	 */
 	boolean isCalculatingMaxWidth();
 
 	/**
 	 * when calculating percentage width, we need the container width
 	 * 
-	 * @return
+	 * @return container width
 	 */
 	int getContainerWidth();
 }

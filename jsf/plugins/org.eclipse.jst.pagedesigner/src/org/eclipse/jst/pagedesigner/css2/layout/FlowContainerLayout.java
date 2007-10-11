@@ -32,7 +32,7 @@ public abstract class FlowContainerLayout extends FlowFigureLayout implements
 	 */
 	protected LineBox _currentLine;
 
-	private boolean _calculatingMaxWidth = false;
+	private boolean _calculatingMaxWidth;
 
 	/**
 	 * @see org.eclipse.jst.pagedesigner.css2.layout.FlowFigureLayout#FlowFigureLayout(FlowFigure)
@@ -131,17 +131,9 @@ public abstract class FlowContainerLayout extends FlowFigureLayout implements
 		FlowBox box = (FlowBox) _currentLine.getFragments().get(
 				_currentLine.getFragments().size() - 1);
 		if (box != null) {
-			return box._marginInsets.right;
+			return box.getMarginInsets().right;
 		}
         return 0;
-	}
-
-	public void setCalculatingMaxWidth(boolean c) {
-		_calculatingMaxWidth = c;
-	}
-
-	public boolean getCalcuatingMaxWidth() {
-		return _calculatingMaxWidth;
 	}
 
 	/*

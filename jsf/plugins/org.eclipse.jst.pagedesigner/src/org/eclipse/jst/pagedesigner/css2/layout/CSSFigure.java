@@ -44,24 +44,25 @@ public class CSSFigure extends FlowFigure implements ICSSFigure {
 
 	private static final Rectangle PRIVATE_RECT = new Rectangle();
 
-	ICSSStyle _style;
-
-	// NOTE: here keep the element is only for debug use. CSSFigure shouldn't
-	// require an element.
-	// Element _element;
+	private ICSSStyle _style;
 
 	// if this field is set, then regetLayout() will still return this layout,
 	// without going through the CSS resolution
-	CSSLayout _fixedLayout;
+	private CSSLayout _fixedLayout;
 
+	/**
+	 * Default constructor 
+	 * Equivalent to CSSFigure(DefaultStyle.getInstance())
+	 */
 	public CSSFigure() {
-		_style = DefaultStyle.getInstance();
-		invalidateCSS();
+		this(DefaultStyle.getInstance());
 	}
 
+	/**
+	 * @param style
+	 */
 	public CSSFigure(ICSSStyle style) {
 		_style = style;
-		// _element = element;
 		invalidateCSS();
 	}
 
@@ -69,6 +70,9 @@ public class CSSFigure extends FlowFigure implements ICSSFigure {
 		return _style;
 	}
 
+	/**
+	 * @param style
+	 */
 	public void setCSSStyle(ICSSStyle style) {
 		_style = style;
 		invalidateCSS();
@@ -91,6 +95,9 @@ public class CSSFigure extends FlowFigure implements ICSSFigure {
 		this.setLayoutManager(layout);
 	}
 
+	/**
+	 * @param layout
+	 */
 	public void setFixedLayoutManager(CSSLayout layout) {
 		this._fixedLayout = layout;
 		this.setLayoutManager(regetLayout(getLayoutManager()));
@@ -128,6 +135,10 @@ public class CSSFigure extends FlowFigure implements ICSSFigure {
 		super.setLayoutManager(manager);
 	}
 
+	/**
+	 * @param old
+	 * @return the layout
+	 */
 	protected CSSLayout regetLayout(LayoutManager old) {
 		if (_fixedLayout != null) {
 			return _fixedLayout;
@@ -177,7 +188,7 @@ public class CSSFigure extends FlowFigure implements ICSSFigure {
 	/**
 	 * this method is a shortcut to getFragmentsForRead
 	 * 
-	 * @return
+	 * @return fragment bounds
 	 */
 	public Rectangle[] getFragmentsBounds() {
 		List list = getFragmentsForRead();
@@ -382,8 +393,8 @@ public class CSSFigure extends FlowFigure implements ICSSFigure {
 
 		if (Debug.DEBUG_BOX) {
 			CSSLayout csslayout = (CSSLayout) this.getLayoutManager();
-			if (csslayout._absoluteContext != null) {
-				BlockBox blockbox = csslayout._absoluteContext._blockBox;
+			if (csslayout.getAbsoluteContext() != null) {
+				BlockBox blockbox = csslayout.getAbsoluteContext()._blockBox;
 				g.setLineWidth(1);
 				g.setForegroundColor(ColorConstants.green);
 				g.drawRectangle(blockbox._x, blockbox._y, blockbox.getWidth(),
@@ -394,7 +405,7 @@ public class CSSFigure extends FlowFigure implements ICSSFigure {
 
 	/**
 	 * Paints this Figure's client area. The client area is typically defined as
-	 * the anything inside the Figure's {@link Border} or {@link Insets}, and
+	 * the anything inside the Figure's {@link org.eclipse.draw2d.Border} or {@link org.eclipse.draw2d.geometry.Insets}, and
 	 * by default includes the children of this Figure. On return, this method
 	 * must leave the given Graphics in its initial state.
 	 * 

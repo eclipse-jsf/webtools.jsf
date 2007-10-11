@@ -80,20 +80,6 @@ public abstract class CompositeBox extends FlowBox {
 	}
 
 	/**
-	 * Returns the recommended height for this compositebox.
-	 * 
-	 * @return
-	 */
-	public int getRecommendedHeight() {
-		return _recommendedHeight;
-	}
-
-	// public int getInnerTop() {
-	// validate();
-	// return y;
-	// }
-
-	/**
 	 * resets fields before unioning the data from the fragments.
 	 */
 	protected void resetInfo() {
@@ -110,6 +96,9 @@ public abstract class CompositeBox extends FlowBox {
 		_recommendedWidth = w;
 	}
 
+	/**
+	 * @param h
+	 */
 	public void setRecommendedHeight(int h) {
 		_recommendedHeight = h;
 	}
@@ -129,14 +118,23 @@ public abstract class CompositeBox extends FlowBox {
 		_height = bottom - _y;
 	}
 
+	/**
+	 * @return the content width
+	 */
 	public int getContentWidth() {
 		return getWidth() - getBorderPaddingWidth();
 	}
 
+	/**
+	 * @return the content height
+	 */
 	public int getContentHeight() {
 		return getHeight() - getBorderPaddingHeight();
 	}
 
+	/**
+	 * @return the recommended content width
+	 */
 	public int getRecommendedContentWidth() {
 		return Math.max(0, getRecommendedWidth() - getBorderPaddingWidth());
 	}

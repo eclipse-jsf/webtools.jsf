@@ -18,7 +18,7 @@ import org.eclipse.swt.graphics.FontMetrics;
 /**
  * A composite box representing a single line. LineBox calculates its ascent and
  * descent from the child boxes it contains. Clients can call
- * {@link #getAscent()}or {@link#getHeight()}at any time and expect valid
+ * {@link #getAscent()} at any time and expect valid
  * values. The child boxes that are added to a line have unspecied locations
  * until {@link #commit()}is called, at which time the child boxes are layed
  * out in left-to-right order, and their baselines are all aligned vertically.
@@ -78,8 +78,8 @@ public class LineBox extends CompositeBox {
 		int xLocation = _x;
 		for (int i = 0; i < _fragments.size(); i++) {
 			FlowBox block = (FlowBox) _fragments.get(i);
-			block._x = xLocation + block._marginInsets.left;
-			xLocation = block._x + block._width + block._marginInsets.right;
+			block._x = xLocation + block.getMarginInsets().left;
+			xLocation = block._x + block._width + block.getMarginInsets().right;
 
 			if (_fragments.size() > 1 && block instanceof TextFragmentBox) {
 				TextFragmentBox textBox = (TextFragmentBox) block;
@@ -131,7 +131,7 @@ public class LineBox extends CompositeBox {
 		}
 	}
 
-	protected int getVerticalAlignType(FlowBox box) {
+	private int getVerticalAlignType(FlowBox box) {
 		Object data = box.getVerticalAlignData();
 
 		if (data != null) {
@@ -278,7 +278,7 @@ public class LineBox extends CompositeBox {
 		}
 
 		_accumlatedWidth += blockInfo._width
-				+ blockInfo._marginInsets.getWidth();
+				+ blockInfo.getMarginInsets().getWidth();
 		if (_accumlatedWidth > _width) {
 			_width = _accumlatedWidth;
 		}
@@ -300,6 +300,7 @@ public class LineBox extends CompositeBox {
 	}
 
 	/**
+	 * @return true if is occupied
 	 * @see org.eclipse.draw2d.geometry.Rectangle#isEmpty()
 	 */
 	public boolean isOccupied() {
@@ -328,6 +329,9 @@ public class LineBox extends CompositeBox {
 		return true;
 	}
 
+	/**
+	 * @return true if is empty string line
+	 */
 	public boolean isEmptyStringLine() {
 		// if(this.getWidth() == 0)
 		// {
@@ -411,4 +415,10 @@ public class LineBox extends CompositeBox {
 	public void setHtmlInitData(Object htmlInitData) {
 		this._htmlInitData = htmlInitData;
 	}
+
+    @Override
+    public void setY(int y) {
+        // make set y public
+        super.setY(y);
+    }
 }

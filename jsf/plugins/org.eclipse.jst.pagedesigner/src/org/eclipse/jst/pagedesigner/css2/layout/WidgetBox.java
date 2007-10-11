@@ -27,12 +27,12 @@ public class WidgetBox extends FlowBox {
         return _ascent;
 	}
 
-	public void setAscent(int ascent) {
+	/*package*/ void setAscent(int ascent) {
 		_ascent = ascent;
 	}
 
 	/**
-	 * @return
+	 * @return true if supports ascent
 	 */
 	public boolean supportAscent() {
 		return _ascent > 0;

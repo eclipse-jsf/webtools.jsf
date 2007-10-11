@@ -30,7 +30,7 @@ import org.eclipse.jst.pagedesigner.css2.value.Length;
  * @author mengbo
  */
 public abstract class CSSLayout extends FlowFigureLayout implements FlowContext {
-	protected BlockFlowContext _absoluteContext;
+	private BlockFlowContext _absoluteContext;
 
 	// when doing absolute layout, and if top/left are both "auto", it will be
 	// relating to the normaly flow position. The following two fields try to
@@ -47,6 +47,7 @@ public abstract class CSSLayout extends FlowFigureLayout implements FlowContext 
 	private boolean _calculatingMaxWidth = false;
 
 	/**
+	 * @param flowFigure 
 	 * @see org.eclipse.jst.pagedesigner.css2.layout.FlowFigureLayout#FlowFigureLayout(FlowFigure)
 	 */
 	protected CSSLayout(CSSFigure flowFigure) {
@@ -56,13 +57,20 @@ public abstract class CSSLayout extends FlowFigureLayout implements FlowContext 
 	/**
 	 * a shortcut method to get the style associated with the figure.
 	 * 
-	 * @return
+	 * @return the css style
 	 */
 	public ICSSStyle getCSSStyle() {
 		return getCSSFigure().getCSSStyle();
 	}
 
 	/**
+	 * @return the absolute context
+	 */
+	protected final BlockFlowContext getAbsoluteContext() {
+        return _absoluteContext;
+    }
+
+    /**
 	 * @see org.eclipse.jst.pagedesigner.css2.layout.FlowContext#addToCurrentLine(FlowBox)
 	 */
 	public void addToCurrentLine(FlowBox block) {
@@ -129,7 +137,10 @@ public abstract class CSSLayout extends FlowFigureLayout implements FlowContext 
 		cleanup();
 	}
 
-	protected boolean isAbsolutePosition() {
+	/**
+	 * @return true if is absolute position
+	 */
+	protected final boolean isAbsolutePosition() {
 		ICSSStyle style = getCSSStyle();
 
 		// FIXME: Some layout don't support absolute, need check here
@@ -146,7 +157,7 @@ public abstract class CSSLayout extends FlowFigureLayout implements FlowContext 
 	/**
 	 * Child class could override this method.
 	 * 
-	 * @return
+	 * @return true if supports absolute position  
 	 */
 	protected boolean supportAbsolutePosition() {
 		if (findContainingPositionedFigure() == null) {
@@ -155,10 +166,8 @@ public abstract class CSSLayout extends FlowFigureLayout implements FlowContext 
 		return true;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.jst.pagedesigner.css2.layout.FlowContainerLayout#preLayout()
+	/**
+	 * Perform a prelayout
 	 */
 	protected void preLayout() {
 		ICSSStyle style = this.getCSSStyle();
@@ -192,11 +201,14 @@ public abstract class CSSLayout extends FlowFigureLayout implements FlowContext 
         return getOriginalFlowContext();
 	}
 
-	public FlowContext getParentFigureContext() {
+	/**
+	 * @return the flow context
+	 */
+	private FlowContext getParentFigureContext() {
 		return super.getFlowContext();
 	}
 
-	public void postValidateForAbsolute() {
+	final void postValidateForAbsolute() {
 		if (_absoluteContext != null) {
 			ICSSStyle style = this.getCSSStyle();
 
@@ -358,15 +370,21 @@ public abstract class CSSLayout extends FlowFigureLayout implements FlowContext 
 		FlowBox box = (FlowBox) _currentLine.getFragments().get(
 				_currentLine.getFragments().size() - 1);
 		if (box != null) {
-			return box._marginInsets.right;
+			return box.getMarginInsets().right;
 		}
         return 0;
 	}
 
+	/**
+	 * @param c
+	 */
 	public void setCalculatingMaxWidth(boolean c) {
 		_calculatingMaxWidth = c;
 	}
 
+	/**
+	 * @return the calculated maximum width
+	 */
 	public boolean getCalcuatingMaxWidth() {
 		return _calculatingMaxWidth;
 	}
@@ -399,13 +417,16 @@ public abstract class CSSLayout extends FlowFigureLayout implements FlowContext 
 
 	// ------------------------------------------------------------------------------------
 
-	public CSSFigure getCSSFigure() {
+	/**
+	 * @return the css figure
+	 */
+	protected final CSSFigure getCSSFigure() {
 		return (CSSFigure) getFlowFigure();
 	}
 
 	/**
 	 * 
-	 * @return
+	 * @return the fragments for read
 	 */
 	public abstract List getFragmentsForRead();
 
@@ -429,9 +450,9 @@ public abstract class CSSLayout extends FlowFigureLayout implements FlowContext 
 	/**
 	 * Child class can override this. Normally block figure will return true.
 	 * 
-	 * @return
+	 * @return true if should use local coordinates
 	 */
-	public boolean useLocalCoordinates() {
+	protected boolean useLocalCoordinates() {
 		return false;
 	}
 
@@ -440,9 +461,9 @@ public abstract class CSSLayout extends FlowFigureLayout implements FlowContext 
 	 * method will return true, else return false, for example,the input file
 	 * will return false.
 	 * 
-	 * @return
+	 * @return true if handling border block
 	 */
-	public boolean handlingBorderForBlock() {
+	protected boolean handlingBorderForBlock() {
 		return true;
 	}
 
@@ -450,7 +471,7 @@ public abstract class CSSLayout extends FlowFigureLayout implements FlowContext 
 	 * This method is called when the corresponding figure is revalidated.
 	 * 
 	 */
-	public void figureRevalidate() {
+	protected void figureRevalidate() {
 		// child class can override.
 	}
 }

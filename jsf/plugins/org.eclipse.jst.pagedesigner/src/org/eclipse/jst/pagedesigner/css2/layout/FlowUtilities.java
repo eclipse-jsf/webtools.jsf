@@ -22,7 +22,7 @@ import org.eclipse.swt.graphics.FontMetrics;
  * Utility class for FlowFigures.
  * 
  */
-public class FlowUtilities extends FigureUtilities {
+public final class FlowUtilities extends FigureUtilities {
 	/**
 	 * Returns the number of characters from the specified String that will fit
 	 * in the available amount of space. An average character width can be
@@ -61,7 +61,7 @@ public class FlowUtilities extends FigureUtilities {
 	 * @param availableWidth
 	 * @param avg
 	 * @param wrapping
-	 * @return
+	 * @return how much text can fit into
 	 */
 	public static int getTextForSpace(String string, Font font,
 			int availableWidth, float avg, int wrapping) {
@@ -205,6 +205,13 @@ public class FlowUtilities extends FigureUtilities {
 		return result;
 	}
 
+	/**
+	 * @param string
+	 * @param font
+	 * @param availableWidth
+	 * @param avg
+	 * @return the text width
+	 */
 	public static int getTextInWidth(String string, Font font,
 			int availableWidth, float avg) {
 		if (string.length() == 0) {
@@ -229,7 +236,7 @@ public class FlowUtilities extends FigureUtilities {
 	 * 
 	 * @param s
 	 * @param f
-	 * @return
+	 * @return the dimension
 	 */
 	public static Dimension getStringExtents2(String s, Font f) {
 		return new Dimension(getStringDimension(s, f));
@@ -257,4 +264,8 @@ public class FlowUtilities extends FigureUtilities {
 		frag.setWidth(d.width);
 	}
 
+	private FlowUtilities()
+	{
+	    // no instantiation
+	}
 }
