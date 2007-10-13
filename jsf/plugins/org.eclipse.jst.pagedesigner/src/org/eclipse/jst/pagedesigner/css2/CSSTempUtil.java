@@ -30,7 +30,7 @@ import org.w3c.dom.stylesheets.StyleSheetList;
  * @author mengbo
  * @version 1.5
  */
-public class CSSTempUtil {
+public final class CSSTempUtil {
 	/**
 	 * the default implementation of (IStyleSheetListAdapter)
 	 * docnotifier.getAdapterFor(IStyleSheetListAdapter.class) will only get
@@ -44,9 +44,9 @@ public class CSSTempUtil {
 	 * elements is not really adding into the document, so they can't be reached
 	 * from the document.
 	 * 
-	 * @param ele
-	 * @return
-	 * @see org.eclipse.wst.html.core.htmlcss.HTMLDocumentAdapter#addStyleSheet(org.w3c.dom.Element)
+	 * @param element
+	 * @return the list
+	 * see org.eclipse.wst.html.core.htmlcss.HTMLDocumentAdapter#addStyleSheet(org.w3c.dom.Element)
 	 */
 	public static List getStyleSheets(Element element) {
 		List styleSheets = new ArrayList();
@@ -142,5 +142,10 @@ public class CSSTempUtil {
 				addStyleSheet((Element) child, result);
 			}
 		}
+	}
+	
+	private CSSTempUtil()
+	{
+	    //  util class, no instantiation
 	}
 }

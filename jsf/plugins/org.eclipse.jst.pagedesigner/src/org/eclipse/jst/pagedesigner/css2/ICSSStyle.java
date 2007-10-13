@@ -34,56 +34,99 @@ public interface ICSSStyle extends INodeAdapter, IAdaptable {
     // TODO:  this should be set to a preference and probably also use an
     // algorithm to determine if the the current box style already has a large
     // enough separation offset (perhaps a threshold instead of an additive value)
+    /**
+     * the border offset
+     */
     public static final int ARTIFICIAL_BORDER_OFFSET = 4;
     
+    /**
+     * 
+     */
     public static final int INHERIT = Integer.MIN_VALUE;
     
+	/**
+	 * the top attribute vale
+	 */
 	public static final String TOP = "top";
 
+	/**
+	 * the right attribute value
+	 */
 	public static final String RIGHT = "right";
 
+	/**
+	 * the left attribute value
+	 */
 	public static final String LEFT = "left";
 
+	/**
+	 * the bottom attribute value
+	 */
 	public static final String BOTTOM = "bottom";
 
+	/**
+	 * 
+	 */
 	public void reset();
 
+	/**
+	 * @return the font
+	 */
 	public ICSSFont getCSSFont();
 
+	/**
+	 * @param property
+	 * @return the style property
+	 */
 	public Object getStyleProperty(String property);
 
+	/**
+	 * @return the margin insets
+	 */
 	public Insets getMarginInsets();
 
+	/**
+	 * @return the border insets
+	 */
 	public Insets getBorderInsets();
 
+	/**
+	 * @return the padding insets
+	 */
 	public Insets getPaddingInsets();
 
 	/**
 	 * shortcut method to get the CSS display.
 	 * 
-	 * @see http://www.w3.org/TR/REC-CSS2/visuren.html#propdef-display
-	 * @return
+	 * see http://www.w3.org/TR/REC-CSS2/visuren.html#propdef-display
+	 * @return the display string
 	 */
 	public String getDisplay();
 
 	/**
 	 * null means transparent.
 	 * 
-	 * @return
+	 * @return the background color
 	 */
 	public Object getBackgroundColor();
 
+	/**
+	 * @return the foreground color
+	 */
 	public Object getColor();
 
 	/**
-	 * @return
+	 * @return true if size includes border padding
 	 */
 	public boolean isSizeIncludeBorderPadding();
 
+	/**
+	 * 
+	 */
 	public void dispose();
 
 	/**
-	 * @return
+	 * @return the parent style
 	 */
 	public ICSSStyle getParentStyle();
 
@@ -91,7 +134,7 @@ public interface ICSSStyle extends INodeAdapter, IAdaptable {
 	 * Get counters declared on this style. the counters are either created by
 	 * counter-reset or refered by counter-increment
 	 * 
-	 * @return
+	 * @return the counters
 	 */
 	public Map getCounters();
 
@@ -100,7 +143,7 @@ public interface ICSSStyle extends INodeAdapter, IAdaptable {
 	 * 
 	 * @param name
 	 * @param must
-	 * @return
+	 * @return the generator
 	 */
 	public ICounterValueGenerator findCounter(String name, boolean must);
 
@@ -109,12 +152,12 @@ public interface ICSSStyle extends INodeAdapter, IAdaptable {
 	 * specification, it is expected in the future this two will be added as CSS
 	 * property, so we also include them into ICSSStyle
 	 * 
-	 * @return
+	 * @return the row span
 	 */
 	public int getRowSpan();
 
 	/**
-	 * @return
+	 * @return the column span
 	 */
 	public int getColSpan();
 
@@ -131,9 +174,13 @@ public interface ICSSStyle extends INodeAdapter, IAdaptable {
 	 * not a real CSS property. This is a shortcut method. implemented through
 	 * getAdapter() on IRangeSelectionProxy
 	 * 
-	 * @return
+	 * @return true if in selection
 	 */
 	public boolean isInSelection();
 
+	/**
+	 * @param propertyName
+	 * @return the element init value
+	 */
 	public Object getHTMLelementInitValue(String propertyName);
 }
