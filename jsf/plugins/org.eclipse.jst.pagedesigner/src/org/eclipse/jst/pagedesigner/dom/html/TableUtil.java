@@ -38,7 +38,7 @@ public class TableUtil {
 	 * 
 	 * @param tr
 	 *            TR element in a table
-	 * @return
+	 * @return true if there is rowspan>1 cell in the tr
 	 */
 	public static boolean hasRowSpanElement(Element tr) {
 		List list = DOMUtil.getElementChildren(tr);
@@ -62,7 +62,7 @@ public class TableUtil {
 	 * @param tr
 	 * @param index
 	 *            tr index in the DOM tree
-	 * @return
+	 * @return true if tr is affected by row span cell in the previous trs
 	 */
 	public static boolean isAffectedByRowSpan(List trList, Element tr, int index) {
 		Node parent = tr.getParentNode();
@@ -114,7 +114,7 @@ public class TableUtil {
 	 * 
 	 * @param table
 	 * @param displayIndex
-	 * @return
+	 * @return the row index
 	 */
 	public static int countRowIndexInDOMTree(Element table, int displayIndex) {
 
@@ -148,7 +148,7 @@ public class TableUtil {
 	 * @param table
 	 * @param sectionName
 	 *            child element name of table, like THEAD or TFOOT
-	 * @return
+	 * @return the row count in the section
 	 */
 	public static int countSectionRows(Element table, String sectionName) {
 		NodeList nodeList = table.getChildNodes();
@@ -182,7 +182,7 @@ public class TableUtil {
 	/**
 	 * get tr cells list
 	 * 
-	 * @return
+	 * @return the list of tr cells
 	 */
 	public List[] getTrCellLists() {
 		return this._trCellLists;
@@ -191,9 +191,9 @@ public class TableUtil {
 	/**
 	 * calculate row and column index for tr or td/th
 	 * 
-	 * @param element
+	 * @param node
 	 *            tr or td/th
-	 * @return
+	 * @return the position
 	 */
 	public TableChildElementPosition getPosition(Node node) {
 		TableChildElementPosition position = new TableChildElementPosition();
@@ -245,7 +245,7 @@ public class TableUtil {
 	/**
 	 * get column count
 	 * 
-	 * @return
+	 * @return the column count
 	 */
 	public int getColumnCount() {
 		List[] lists = this._trCellLists;
@@ -267,7 +267,7 @@ public class TableUtil {
 	 * 
 	 * @param columnIndex
 	 *            column index in a table
-	 * @return
+	 * @return true if there is columnspan>1 cell in the column
 	 */
 	public boolean hasColumnSpanElement(int columnIndex) {
 		List cells = getColumnCells(columnIndex);
@@ -290,7 +290,8 @@ public class TableUtil {
 	 * privious columns
 	 * 
 	 * @param columnIndex
-	 * @return
+	 * @return true if the column has cell affected by column span cell in
+     * privious columns 
 	 */
 	public boolean isAffectedByColSpan(int columnIndex) {
 		int index = columnIndex;
@@ -309,7 +310,7 @@ public class TableUtil {
 	 * get cells in the specified column of the table
 	 * 
 	 * @param columnIndex
-	 * @return
+	 * @return the column cells
 	 */
 	public List getColumnCells(int columnIndex) {
 		List list = new ArrayList();

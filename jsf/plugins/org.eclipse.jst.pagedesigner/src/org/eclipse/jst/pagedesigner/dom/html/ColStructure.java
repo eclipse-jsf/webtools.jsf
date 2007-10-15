@@ -15,30 +15,32 @@ package org.eclipse.jst.pagedesigner.dom.html;
  * @author mengbo
  * @version 1.5
  */
-public class ColStructure implements Comparable {
-	private int _column;
+/*package*/ class ColStructure implements Comparable {
+	private final int _column;
 
-	private int _colSpan;
+	private final int _colSpan;
 
+	/**
+	 * @param column
+	 * @param colSpan
+	 */
 	public ColStructure(int column, int colSpan) {
 		this._column = column;
 		this._colSpan = colSpan;
 	}
 
+	/**
+	 * @return the column span
+	 */
 	public int getColSpan() {
 		return _colSpan;
 	}
 
-	public void setColSpan(int colSpan) {
-		this._colSpan = colSpan;
-	}
-
+	/**
+	 * @return the column
+	 */
 	public int getColumn() {
 		return _column;
-	}
-
-	public void setColumn(int column) {
-		this._column = column;
 	}
 
 	public int compareTo(Object o) {
