@@ -23,6 +23,9 @@ public class CounterFactory {
 
 	private static CounterFactory _instance;
 
+	/**
+	 * @return the factory singelton
+	 */
 	public static CounterFactory getInstance() {
 		if (_instance == null) {
 			_instance = new CounterFactory();
@@ -30,6 +33,10 @@ public class CounterFactory {
 		return _instance;
 	}
 
+	/**
+	 * @param type
+	 * @return the counter for type
+	 */
 	public ICounter getCounter(int type) {
 		switch (type) {
 		case CSSHtmlListStyleData.LIST_T_DECIMAL:
@@ -48,5 +55,10 @@ public class CounterFactory {
 			return null;
 
 		}
+	}
+	
+	private CounterFactory()
+	{
+	    // singleton, no external instantiation
 	}
 }

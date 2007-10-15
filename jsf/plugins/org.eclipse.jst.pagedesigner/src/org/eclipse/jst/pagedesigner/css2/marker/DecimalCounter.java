@@ -16,9 +16,12 @@ import org.eclipse.jst.pagedesigner.css2.list.CSSHtmlListStyleData;
 /**
  * @author mengbo
  */
-public class DecimalCounter extends EnumerableCounter {
-	protected DecimalCounter() {
-	    // do nothing; restrict construction to child classes
+/*package*/ class DecimalCounter extends EnumerableCounter 
+{
+	
+    DecimalCounter() 
+    {
+	    // do nothing; only nee
 	}
 
 	/*
@@ -34,7 +37,7 @@ public class DecimalCounter extends EnumerableCounter {
 
 		case CSSHtmlListStyleData.LIST_T_DECIMAL_LEADING_ZERO:
 			StringBuffer sb = new StringBuffer();
-			int count = getChildrenCount();
+			int count = 1;
 			for (int i = sb.length(); i < count; i++) {
 				sb.append('0');
 			}
@@ -43,9 +46,5 @@ public class DecimalCounter extends EnumerableCounter {
 		default:
 			return null;
 		}
-	}
-
-	public int getChildrenCount() {
-		return 1;
 	}
 }

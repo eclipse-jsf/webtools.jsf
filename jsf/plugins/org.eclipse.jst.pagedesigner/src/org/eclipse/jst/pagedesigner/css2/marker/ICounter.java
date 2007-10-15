@@ -17,5 +17,10 @@ import org.w3c.dom.Element;
  * @author mengbo
  */
 public interface ICounter {
+	/**
+	 * @param element
+	 * @param type
+	 * @return the next object for element, type
+	 */
 	public Object getNextObject(Element element, int type);
 }

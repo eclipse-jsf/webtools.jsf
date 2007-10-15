@@ -16,9 +16,10 @@ import org.eclipse.jst.pagedesigner.css2.list.CSSHtmlListStyleData;
 /**
  * @author mengbo
  */
-public class RomanCounter extends EnumerableCounter {
-	protected RomanCounter() {
-	    // do nothing; restrict construction to sub-classes
+/*package*/ class RomanCounter extends EnumerableCounter {
+	RomanCounter() 
+	{
+	    // do nothing
 	}
 
 	/*
@@ -43,7 +44,7 @@ public class RomanCounter extends EnumerableCounter {
 	 * 
 	 * @see org.eclipse.jst.pagedesigner.css2.list.NumberCounter#getString(int)
 	 */
-	public String getString(int index) {
+	/*package*/ String getString(int index) {
 		// FIXME: Need to enhance more.
 		StringBuffer roman = new StringBuffer();
 		int a, b, c, d;

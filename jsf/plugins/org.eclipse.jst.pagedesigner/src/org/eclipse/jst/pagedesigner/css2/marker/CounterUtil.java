@@ -16,7 +16,12 @@ import org.eclipse.jst.pagedesigner.css2.list.CounterHelper;
 /**
  * @author mengbo
  */
-public class CounterUtil {
+public final class CounterUtil {
+	/**
+	 * @param count
+	 * @param type
+	 * @return the converter count
+	 */
 	public static String convertCount(int count, int type) {
 		// XXX: currently we only support style that IE supported.for type that
 		// does not
@@ -63,5 +68,10 @@ public class CounterUtil {
 			break;
 		}
 		return buffer.toString();
+	}
+	
+	private CounterUtil()
+	{
+	    // no instantiation
 	}
 }
