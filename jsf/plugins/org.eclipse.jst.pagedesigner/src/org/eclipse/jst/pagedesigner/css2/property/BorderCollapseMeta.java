@@ -19,8 +19,6 @@ public class BorderCollapseMeta extends CSSPropertyMeta {
 			ICSSPropertyID.VAL_SEPARATE };
 
 	/**
-	 * @param inherit
-	 * @param initvalue
 	 */
 	public BorderCollapseMeta() {
 		// XXX: the spec says COLLAPSE is initial value, but seemed that IE

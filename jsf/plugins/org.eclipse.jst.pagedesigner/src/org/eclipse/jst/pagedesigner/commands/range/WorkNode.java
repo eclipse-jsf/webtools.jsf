@@ -17,7 +17,7 @@ import org.w3c.dom.Node;
 /**
  * @author mengbo
  */
-public class WorkNode {
+public final class WorkNode {
 	private WorkNode parent;
 
 	private WorkNode previous;
@@ -26,10 +26,15 @@ public class WorkNode {
 
 	private Node node;
 
-	private int pos[];
+	private final int pos[];
 
 	private boolean isRoot;
 
+	/**
+	 * @param node
+	 * @param pos1
+	 * @param pos2
+	 */
 	public WorkNode(Node node, final int pos1, final int pos2) {
 		this.pos = resoveOffsets(node, pos1, pos2);
 		this.node = node;
@@ -50,7 +55,10 @@ public class WorkNode {
 		this.node = node;
 	}
 
-	public int[] getQualifiedOffsets() {
+	/**
+	 * @return the offsets
+	 */
+	int[] getQualifiedOffsets() {
 		int result[] = new int[] { getPosOffsets()[0], getPosOffsets()[1] };
 		result[0] = result[0] < 0 ? 0 : result[0];
 		int length = EditModelQuery.getNodeLenth(node);
@@ -143,7 +151,7 @@ public class WorkNode {
 		return sb.toString();
 	}
 
-	public boolean isWholeSelected() {
+	boolean isWholeSelected() {
 		int start = EditModelQuery.getNodeStartIndex(node);
 		int end = EditModelQuery.getNodeEndIndex(node);
 		return getQualifiedOffsets()[0] <= 0

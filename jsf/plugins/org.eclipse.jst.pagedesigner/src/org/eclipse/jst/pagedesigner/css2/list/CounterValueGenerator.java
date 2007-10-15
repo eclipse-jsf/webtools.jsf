@@ -30,9 +30,9 @@ import org.eclipse.jst.pagedesigner.css2.property.ICSSPropertyMeta;
 public class CounterValueGenerator implements ICounterValueGenerator {
 	private final static int DEFAULT_INITIAL_VALUE = 0;
 
-	public static final Set STRING_TYPES = new HashSet();
+	private static final Set STRING_TYPES = new HashSet();
 
-	public static final Set NON_STRING_TYPES = new HashSet();
+	static final Set NON_STRING_TYPES = new HashSet();
 	static {
 		NON_STRING_TYPES.add("disc");
 		NON_STRING_TYPES.add("circle");
@@ -74,6 +74,12 @@ public class CounterValueGenerator implements ICounterValueGenerator {
 
 	private ICSSStyle _style;
 
+	/**
+	 * @param identifier
+	 * @param styleType
+	 * @param seperator
+	 * @param style
+	 */
 	public CounterValueGenerator(String identifier, String styleType,
 			String seperator, ICSSStyle style) {
 		_identifier = identifier;
@@ -96,17 +102,16 @@ public class CounterValueGenerator implements ICounterValueGenerator {
 		return _identifier;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/**
+	 * @return the style  type 
 	 * @see org.w3c.dom.css.Counter#getListStyle()
 	 */
 	public String getListStyle() {
 		return _styleType;
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * @return the separator
 	 * 
 	 * @see org.w3c.dom.css.Counter#getSeparator()
 	 */

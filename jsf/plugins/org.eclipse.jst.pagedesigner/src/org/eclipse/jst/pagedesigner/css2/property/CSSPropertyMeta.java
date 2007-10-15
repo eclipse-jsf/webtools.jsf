@@ -19,12 +19,16 @@ import org.w3c.dom.css.CSSValue;
  * @author mengbo
  */
 public abstract class CSSPropertyMeta implements ICSSPropertyMeta {
-	public static final String[] EMPTY_KEYWORDS = new String[0];
+	static final String[] EMPTY_KEYWORDS = new String[0];
 
 	boolean _inherited;
 
 	Object _initialValue;
 
+	/**
+	 * @param inherit
+	 * @param initvalue
+	 */
 	public CSSPropertyMeta(boolean inherit, Object initvalue) {
 		this._inherited = inherit;
 		this._initialValue = initvalue;
@@ -84,7 +88,7 @@ public abstract class CSSPropertyMeta implements ICSSPropertyMeta {
 	/**
 	 * for many properties, they have a set of keyword property values.
 	 * 
-	 * @return
+	 * @return the keyword values
 	 */
 	protected abstract String[] getKeywordValues();
 

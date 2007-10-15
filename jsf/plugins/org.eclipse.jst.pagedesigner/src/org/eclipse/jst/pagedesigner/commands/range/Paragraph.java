@@ -22,10 +22,17 @@ import org.w3c.dom.Node;
 public class Paragraph {
 	private DOMRange _range;
 
+	/**
+	 * @param start
+	 * @param end
+	 */
 	public Paragraph(IDOMPosition start, IDOMPosition end) {
 		_range = new DOMRange(start, end);
 	}
 
+	/**
+	 * @return the lowest container node
+	 */
 	public Node getLowestContainer() {
 		return EditModelQuery.getInstance().getCommonAncestor(
 				_range.getStartPosition(), _range.getEndPosition());

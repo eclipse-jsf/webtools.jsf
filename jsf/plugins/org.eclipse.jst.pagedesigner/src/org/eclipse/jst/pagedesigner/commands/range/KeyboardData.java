@@ -30,6 +30,11 @@ public class KeyboardData implements IInputSourceProvider {
 
 	private GraphicalViewer _viewer;
 
+	/**
+	 * @param code
+	 * @param mask
+	 * @param viewer
+	 */
 	public KeyboardData(char code, int mask, GraphicalViewer viewer) {
 		if ((mask & SWT.SHIFT) != 0) {
 			_keyCode = new Character(Character.toUpperCase(code));
@@ -70,6 +75,10 @@ public class KeyboardData implements IInputSourceProvider {
 		this._stateMask = stateMask;
 	}
 
+	/**
+	 * @param keyCode
+	 * @return the node or null
+	 */
 	public Node getSpecialNode(KeyboardData keyCode) {
 		Object name;
 		EditDomain domain = _viewer.getEditDomain();
@@ -108,6 +117,9 @@ public class KeyboardData implements IInputSourceProvider {
 		return _keyCode;
 	}
 
+	/**
+	 * @return the char value of the key code
+	 */
 	public char getChar() {
 		return _keyCode.charValue();
 	}

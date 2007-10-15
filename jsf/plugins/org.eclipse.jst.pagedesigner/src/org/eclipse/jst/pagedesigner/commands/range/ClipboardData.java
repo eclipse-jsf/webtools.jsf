@@ -27,7 +27,7 @@ public class ClipboardData implements IInputSourceProvider {
 	private Control _control;
 
 	/**
-	 * 
+	 * @param control 
 	 */
 	public ClipboardData(Control control) {
 		super();
@@ -71,6 +71,9 @@ public class ClipboardData implements IInputSourceProvider {
 		return null;
 	}
 
+	/**
+	 * @return the clip board data
+	 */
 	public Object getClipboardData() {
 		Clipboard clipboard = new Clipboard(_control.getDisplay());
 

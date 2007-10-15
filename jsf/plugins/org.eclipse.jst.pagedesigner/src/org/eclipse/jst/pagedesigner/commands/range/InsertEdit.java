@@ -59,6 +59,7 @@ public class InsertEdit extends DeleteEdit {
 	/**
 	 * @param range
 	 * @param viewer
+	 * @param data 
 	 */
 	public InsertEdit(DOMRange range, GraphicalViewer viewer,
 			IInputSourceProvider data) {
@@ -66,6 +67,11 @@ public class InsertEdit extends DeleteEdit {
 		_data = data;
 	}
 
+	/**
+	 * @param position
+	 * @param viewer
+	 * @param data
+	 */
 	public InsertEdit(IDOMPosition position, GraphicalViewer viewer,
 			IInputSourceProvider data) {
 		super(new DOMRange(position, position), viewer);
@@ -73,6 +79,9 @@ public class InsertEdit extends DeleteEdit {
 		_data = data;
 	}
 
+	/**
+	 * @return ??
+	 */
 	public boolean insertChar() {
 		if (_data.getStringData() == null) {
 			return false;
@@ -85,7 +94,7 @@ public class InsertEdit extends DeleteEdit {
 			setOperationPosition(new DOMPosition(text, position.getOffset() + 1));
 		} else {
 			Node refNode = position.getNextSiblingNode();
-			Text text = _document.createTextNode(_data.getCharacterData()
+			Text text = getDocument().createTextNode(_data.getCharacterData()
 					.toString());
 			position.getContainerNode().insertBefore(text, refNode);
 			setOperationPosition(new DOMPosition(text, text.getLength()));
@@ -93,6 +102,9 @@ public class InsertEdit extends DeleteEdit {
 		return true;
 	}
 
+	/**
+	 * @return ????
+	 */
 	public boolean insertString() {
 		String content = _data.getStringData();
 		if (content != null) {
@@ -104,7 +116,7 @@ public class InsertEdit extends DeleteEdit {
 						+ content.length()));
 			} else {
 				Node refNode = position.getNextSiblingNode();
-				Text text = _document.createTextNode(content);
+				Text text = getDocument().createTextNode(content);
 				position.getContainerNode().insertBefore(text, refNode);
 				setOperationPosition(new DOMPosition(text, text.getLength()));
 			}
@@ -130,7 +142,7 @@ public class InsertEdit extends DeleteEdit {
 		Node parent = position.getContainerNode();
 		Node node = null;
 		for (int i = 0; i < nodes.length; i++) {
-			node = DOMUtil.cloneNodeDeep(_document, nodes[i]);
+			node = DOMUtil.cloneNodeDeep(getDocument(), nodes[i]);
 			String prefix = node.getPrefix();
 			String name = node.getLocalName();
 			if (name != null

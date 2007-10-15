@@ -26,6 +26,7 @@ public class InsertCommand extends RangeModeCommand implements
 	/**
 	 * @param label
 	 * @param viewer
+	 * @param data 
 	 */
 	public InsertCommand(String label, IHTMLGraphicalViewer viewer,
 			IInputSourceProvider data) {

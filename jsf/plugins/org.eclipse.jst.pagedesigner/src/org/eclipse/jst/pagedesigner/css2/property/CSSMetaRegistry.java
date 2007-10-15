@@ -26,7 +26,10 @@ public class CSSMetaRegistry {
 		initialize();
 	}
 
-	public void initialize() {
+	/**
+	 * class initiallizer
+	 */
+	private void initialize() {
 		_map.put(ICSSPropertyID.ATTR_DISPLAY, new DisplayMeta());
 		_map.put(ICSSPropertyID.ATTR_TEXTALIGN, new TextAlignMeta());
 		_map.put(ICSSPropertyID.ATTR_HORIZONTAL_ALIGN,
@@ -105,10 +108,17 @@ public class CSSMetaRegistry {
 		_map.put(ICSSPropertyID.ATTR_OVERFLOW, new OverflowMeta());
 	}
 
+	/**
+	 * @param property
+	 * @return the meta
+	 */
 	public ICSSPropertyMeta getMeta(String property) {
 		return (ICSSPropertyMeta) _map.get(property);
 	}
 
+	/**
+	 * @return the singleton instance
+	 */
 	public static final CSSMetaRegistry getInstance() {
 		if (_instance == null) {
 			_instance = new CSSMetaRegistry();

@@ -29,7 +29,6 @@ import org.eclipse.jst.pagedesigner.utils.DOMUtil;
 import org.eclipse.swt.dnd.Clipboard;
 import org.eclipse.swt.dnd.TextTransfer;
 import org.eclipse.swt.dnd.Transfer;
-import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -40,11 +39,8 @@ import org.w3c.dom.Text;
  * @author mengbo
  */
 public abstract class DesignEdit {
-	public static final int DELETE_OPERATION = 1;
 
-	public static final int INSERT_OPERATION = 2;
-
-	private Stack _selections;
+    private Stack _selections;
 
 	private DOMRange _range;
 
@@ -52,29 +48,56 @@ public abstract class DesignEdit {
 
 	private IDOMPosition _operationPosition;
 
-	protected Document _document;
+	private final Document _document;
 
-	protected IDOMModel _model;
+	private Stack _processedResult;
 
-	protected Stack _processedResult;
-
+	/**
+	 * @param range
+	 * @param viewer
+	 */
 	public DesignEdit(DOMRange range, GraphicalViewer viewer) {
 		setRange(range);
 		_viewer = viewer;
 		_operationPosition = getRange().getStartPosition();
 		_document = ((IDOMNode) _operationPosition.getContainerNode())
 				.getModel().getDocument();
-		_model = ((IDOMNode) _operationPosition.getContainerNode()).getModel();
 	}
 
-	protected abstract boolean operate();
+	
+	/**
+	 * @return the target document
+	 */
+	protected final Document getDocument() {
+        return _document;
+    }
 
+    /**
+     * @return the result
+     */
+    protected abstract boolean operate();
+
+	/**
+	 * @param node
+	 * @return the text
+	 */
 	protected abstract Text processText(WorkNode node);
 
+	/**
+	 * @param node
+	 * @return the node 
+	 */
 	protected abstract Node processNode(WorkNode node);
 
+	/**
+	 * @param node
+	 * @return the node
+	 */
 	protected abstract Node processContainer(WorkNode node);
 
+	/**
+	 * @return the dom range
+	 */ 
 	public DOMRange getRange() {
 		return _range;
 	}
@@ -88,10 +111,16 @@ public abstract class DesignEdit {
 		EditValidateUtil.validRange(range);
 	}
 
+	/**
+	 * @return the clipboard
+	 */
 	protected Clipboard getClipboard() {
 		return new Clipboard(_viewer.getControl().getDisplay());
 	}
 
+	/**
+	 * @return the position
+	 */
 	public IDOMPosition getOperationPosition() {
 		// try
 		// {
@@ -117,6 +146,9 @@ public abstract class DesignEdit {
 		return _operationPosition;
 	}
 
+	/**
+	 * @param position
+	 */
 	protected void setOperationPosition(IDOMPosition position) {
 		if (!EditValidateUtil.validPosition(position)) {
 			return;
@@ -125,6 +157,9 @@ public abstract class DesignEdit {
 		_operationPosition = position;
 	}
 
+	/**
+	 * @return the result of performing the edit
+	 */
 	public boolean perform() {
 		boolean result = false;
 
@@ -195,6 +230,9 @@ public abstract class DesignEdit {
 		return _selections;
 	}
 
+	/**
+	 * @return the result stack
+	 */
 	public Stack getProcessedResult() {
 		if (_processedResult == null) {
 			_processedResult = new Stack();
@@ -206,6 +244,9 @@ public abstract class DesignEdit {
 		return _processedResult;
 	}
 
+	/**
+	 * @return the root work node
+	 */
 	protected final WorkNode getRootWorkNode() {
 		WorkNode result = null;
 		if (getSelections().size() > 0) {
@@ -219,7 +260,12 @@ public abstract class DesignEdit {
 		return result;
 	}
 
-	protected final boolean processText(WorkNode node, Stack result) {
+	/**
+	 * @param node
+	 * @param result
+	 * @return true if node
+	 */
+	private final boolean processText(WorkNode node, Stack result) {
 		boolean done = false;
 		if (EditModelQuery.isText(node.getNode())) {
 			Node text = processText(node);
@@ -232,13 +278,21 @@ public abstract class DesignEdit {
 		return done;
 	}
 
-	protected final boolean processContainer(WorkNode node, Stack result) {
+	/**
+	 * @param node
+	 * @param result
+	 */
+	private final void processContainer(WorkNode node, Stack result) {
 		processContainer(node);
 		getSelections().remove(node);
-		return true;
 	}
 
-	protected final boolean processChildren(WorkNode node, Stack result) {
+	/**
+	 * @param node
+	 * @param result
+	 * @return true if done
+	 */
+	private final boolean processChildren(WorkNode node, Stack result) {
 		boolean done = false;
 		if (getFirstSelectedChild(node) != null) {
 			Stack myResult = new Stack();
@@ -259,7 +313,12 @@ public abstract class DesignEdit {
 		return done;
 	}
 
-	protected final boolean processChildren1(WorkNode node, Stack result) {
+	/**
+	 * @param node
+	 * @param result
+	 * @return true if done
+	 */
+	private final boolean processChildren1(WorkNode node, Stack result) {
 		boolean done = false;
 		if (node.getNode().hasChildNodes()) {
 			Stack myResult = new Stack();
@@ -324,6 +383,9 @@ public abstract class DesignEdit {
 		}
 	}
 
+	/**
+	 * @param result
+	 */
 	protected void setClipboard(Stack result) {
 		Node[] nodes = (Node[]) result.toArray(new Node[result.size()]);
 		StringBuffer sb = new StringBuffer();
@@ -353,7 +415,12 @@ public abstract class DesignEdit {
 		return null;
 	}
 
-	public Node collectStyleNodes(Node rootNode, Vector result) {
+	/**
+	 * @param rootNode
+	 * @param result
+	 * @return the node
+	 */
+	Node collectStyleNodes(Node rootNode, Vector result) {
 		Element element = null;
 		if (rootNode instanceof Element) {
 			element = (Element) rootNode;
@@ -374,7 +441,12 @@ public abstract class DesignEdit {
 		return node;
 	}
 
-	public Node collectOtherStyles(Node rootNode, Vector result) {
+	/**
+	 * @param rootNode
+	 * @param result 
+	 * @return the node
+	 */
+	protected final Node collectOtherStyles(Node rootNode, Vector result) {
 		Node cur = rootNode, prev = null, appendPoint = null;
 		if (EditValidateUtil.validNode(rootNode)) {
 			while (!EditModelQuery.isDocument(cur)) {

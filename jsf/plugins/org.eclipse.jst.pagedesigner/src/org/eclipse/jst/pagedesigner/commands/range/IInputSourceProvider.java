@@ -22,7 +22,13 @@ public interface IInputSourceProvider {
 	 */
 	public Node[] getNodes();
 
+	/**
+	 * @return the string data
+	 */
 	public String getStringData();
 
+	/**
+	 * @return the character data
+	 */
 	public Character getCharacterData();
 }

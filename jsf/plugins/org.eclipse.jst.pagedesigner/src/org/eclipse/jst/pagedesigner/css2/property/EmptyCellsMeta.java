@@ -16,15 +16,13 @@ package org.eclipse.jst.pagedesigner.css2.property;
  * @version 1.5
  */
 public class EmptyCellsMeta extends CSSPropertyMeta {
-	public static final String SHOW = "show";
+	private static final String SHOW = "show";
 
-	public static final String HIDE = "hide";
+	static final String HIDE = "hide";
 
-	public static final String[] _keywords = new String[] { SHOW, HIDE };
+	private static final String[] _keywords = new String[] { SHOW, HIDE };
 
 	/**
-	 * @param inherit
-	 * @param initvalue
 	 */
 	public EmptyCellsMeta() {
 		// FIXME: on CSS spec, initial value should be "show".

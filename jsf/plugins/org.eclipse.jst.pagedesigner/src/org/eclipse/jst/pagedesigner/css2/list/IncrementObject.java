@@ -19,6 +19,10 @@ public class IncrementObject {
 
 	private Integer _increment;
 
+	/**
+	 * @param name
+	 * @param increment
+	 */
 	public IncrementObject(String name, Integer increment) {
 		_counterName = name;
 		_increment = increment;

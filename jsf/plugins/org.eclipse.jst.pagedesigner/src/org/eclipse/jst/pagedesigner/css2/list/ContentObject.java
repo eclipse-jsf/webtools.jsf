@@ -28,7 +28,7 @@ public class ContentObject {
 	}
 
 	/**
-	 * @param _counter
+	 * @param counter
 	 *            The _counter to set.
 	 */
 	public void setCounter(ICounterValueGenerator counter) {

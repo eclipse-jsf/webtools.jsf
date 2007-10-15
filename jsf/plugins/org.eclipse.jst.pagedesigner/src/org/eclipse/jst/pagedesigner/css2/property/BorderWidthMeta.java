@@ -32,8 +32,6 @@ public class BorderWidthMeta extends LengthMeta {
 			ICSSPropertyID.VAL_THICK };
 
 	/**
-	 * @param inherit
-	 * @param initvalue
 	 */
 	public BorderWidthMeta() {
 		super(false, LENGTH_4); // medium length.
@@ -207,7 +205,7 @@ public class BorderWidthMeta extends LengthMeta {
 
 	/**
 	 * @param propertyName
-	 * @return
+	 * @return true if property name is a border width
 	 */
 	public static boolean isBorderWidth(String propertyName) {
 		return ICSSPropertyID.ATTR_BORDER_BOTTOM_WIDTH

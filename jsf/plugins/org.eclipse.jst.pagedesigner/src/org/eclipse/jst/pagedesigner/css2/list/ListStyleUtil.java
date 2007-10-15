@@ -14,7 +14,12 @@ package org.eclipse.jst.pagedesigner.css2.list;
 /**
  * @author mengbo
  */
-public class ListStyleUtil {
+/*package*/ final class ListStyleUtil {
+	/**
+	 * @param type
+	 * @param index
+	 * @return the type as a string
+	 */
 	public static String convertTypeToString(int type, int index) {
 		if (type == CSSHtmlListStyleData.LIST_T_LOWER_ROMAN
 				|| type == CSSHtmlListStyleData.LIST_T_UPPER_ROMAN) {
@@ -27,4 +32,8 @@ public class ListStyleUtil {
 		return null;
 	}
 
+	private ListStyleUtil()
+	{
+	    // no instantiation
+	}
 }

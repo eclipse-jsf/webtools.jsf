@@ -15,5 +15,9 @@ package org.eclipse.jst.pagedesigner.css2.list;
  * @author mengbo
  */
 public interface IIndexConverter {
+	/**
+	 * @param index
+	 * @return the string at index
+	 */
 	String getString(int index);
 }

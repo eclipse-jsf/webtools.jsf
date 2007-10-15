@@ -21,7 +21,7 @@ import org.w3c.dom.css.CSSPrimitiveValue;
  */
 public final class FloatInfo {
 	/**
-	 * 
+	 * @param text 
 	 */
 	public FloatInfo(String text) {
 		parse(text);
@@ -55,6 +55,7 @@ public final class FloatInfo {
 	}
 
 	/**
+	 * @return the value
 	 * 
 	 */
 	public float getValue() {
@@ -69,7 +70,7 @@ public final class FloatInfo {
 	}
 
 	/**
-	 * 
+	 * @return the value type
 	 */
 	public short getValueType() {
 		return _type;

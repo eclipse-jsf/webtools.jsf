@@ -16,8 +16,6 @@ package org.eclipse.jst.pagedesigner.css2.property;
  */
 public class ContentMeta extends CSSPropertyMeta {
 	/**
-	 * @param inherit
-	 * @param initvalue
 	 */
 	public ContentMeta() {
 		// why inherit this??
@@ -32,21 +30,4 @@ public class ContentMeta extends CSSPropertyMeta {
 	protected String[] getKeywordValues() {
 		return null;
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.jst.pagedesigner.css2.property.ICSSPropertyMeta#calculateCSSValueResult(org.w3c.dom.css.CSSValue,
-	 *      java.lang.String,
-	 *      org.eclipse.jst.pagedesigner.css2.style.AbstractStyle)
-	 */
-	/*
-	 * public Object calculateCSSValueResult(CSSValue value, String
-	 * propertyName, AbstractStyle style) { if (value instanceof Counter) {
-	 * Counter c = (Counter)value; ContentObject object = new ContentObject();
-	 * 
-	 * MyCounter counter = new MyCounter(c.getIdentifier(), c.getListStyle(),
-	 * c.getSeparator()); object.setCounter(counter); return object; } return
-	 * value; }
-	 */
 }

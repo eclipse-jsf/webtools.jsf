@@ -24,79 +24,76 @@ import org.w3c.dom.css.CSSPrimitiveValue;
 /**
  * @author mengbo
  */
-public class CounterHelper {
+public final class CounterHelper {
+	/**
+	 * Image
+	 */
 	public final static int LIST_T_IMAGE = 0;
 
+	/**
+	 * Disc
+	 */
 	public final static int LIST_T_DISC = 1;
 
+	/**
+	 * Circle
+	 */
 	public final static int LIST_T_CIRCLE = 2;
 
+	/**
+	 * Square
+	 */
 	public final static int LIST_T_SQUARE = 3;
 
+	/**
+	 * Decimal
+	 */
 	public final static int LIST_T_DECIMAL = 0x11;
 
+	/**
+	 * Leading-zero decimal
+	 */
 	public final static int LIST_T_DECIMAL_LEADING_ZERO = 0x12;
 
+	/**
+	 * Lower alpha
+	 */
 	public final static int LIST_T_LOWER_ALPHA = 0x13;
 
+	/**
+	 * Lower roman
+	 */
 	public final static int LIST_T_LOWER_ROMAN = 0x14;
 
+	/**
+	 * Upper alpha
+	 */
 	public final static int LIST_T_UPPER_ALPHA = 0x15;
 
+	/**
+	 * Upper roman
+	 */
 	public final static int LIST_T_UPPER_ROMAN = 0x16;
 
+	/**
+	 * Lower greek
+	 */
 	public final static int LIST_T_LOWER_GREEK = 0x21;
 
+	/**
+	 * Armenian
+	 */
 	public final static int LIST_T_ARMENIAN = 0x22;
 
+	/**
+	 * Georgian
+	 */
 	public final static int LIST_T_GEORGIAN = 0x23;
 
+	/**
+	 * None
+	 */
 	public final static int LIST_T_NONE = 0x24;
-
-	// /**
-	// * Collect counters declaration from node and its parents
-	// *
-	// * @param style
-	// * @param counters
-	// * @return
-	// */
-	// public static void getCounters(ICSSStyle style, HashMap counters)
-	// {
-	// processCounterReset(style, counters);
-	// Object content = style.getStyleProperty(ICSSPropertyID.ATTR_CONTENT);
-	// // content counter could be reference or creation of new one.
-	// if (content != null && content != ICSSPropertyMeta.NOT_SPECIFIED)
-	// {
-	// // XXX: what 's the content.
-	// ContentObject contentObject = null;
-	// Object counter = null;
-	// if (content instanceof List)
-	// {
-	// // TODO: we only deal with one currently.
-	// contentObject = (ContentObject) ((List) content).get(0);
-	// }
-	// else if (content instanceof ContentObject)
-	// {
-	// contentObject = (ContentObject) content;
-	// }
-	// if (style.getParentStyle() != null)
-	// {
-	// String identifier = contentObject.getCounter().getIdentifier();
-	// counter = style.getParentStyle().findCounter(identifier, false);
-	// if (counter == null)
-	// {
-	// // no reference, then create it.
-	// counter = contentObject.getCounter();
-	// }
-	// }
-	// Assert.isTrue(counter != null);
-	// ((Counter2) counter).regist(style);
-	// counters.put(((Counter2) counter).getIdentifier(), counter);
-	// }
-	// // counter-increment is reference.
-	// processCounterIncrement(style/* , counters */);
-	// }
-
 	/**
 	 * @param style
 	 * @param counters
@@ -154,12 +151,8 @@ public class CounterHelper {
 
 	/**
 	 * @param style
-	 * @param counters
 	 */
-	public static void processCounterIncrement(ICSSStyle style/*
-																 * , HashMap
-																 * counters
-																 */) {
+	public static void processCounterIncrement(ICSSStyle style) {
 		Object counterIncrements = style
 				.getStyleProperty(ICSSPropertyID.ATTR_COUNTER_INCREMENT);
 		if (counterIncrements != null
@@ -191,10 +184,10 @@ public class CounterHelper {
 		}
 	}
 
-	public static boolean isImage(ICSSStyle style) {
-		return false;
-	}
-
+	/**
+	 * @param style
+	 * @return true if the style is a text style
+	 */
 	public static boolean isText(ICSSStyle style) {
 		String display = style.getDisplay();
 		Object styleType = style
@@ -205,10 +198,11 @@ public class CounterHelper {
 		&& !CounterValueGenerator.NON_STRING_TYPES.contains(styleType));
 	}
 
-	public static boolean isNodeImage(ICSSStyle style) {
-		return false;
-	}
-
+	/**
+	 * @param style
+	 * @return the type of the style.  One of the LIST_T_* values, or -1 if the
+	 * style is unknown
+	 */
 	public static int getType(ICSSStyle style) {
 		Object type = style
 				.getStyleProperty(ICSSPropertyID.ATTR_LIST_STYLE_TYPE);
@@ -218,6 +212,10 @@ public class CounterHelper {
         return -1;
 	}
 
+	/**
+	 * @param type
+	 * @return the type enumeration for the  type string
+	 */
 	public static int toTypeInt(String type) {
 
 		if (type.equalsIgnoreCase(ICSSPropertyID.VAL_DECIMAL)) {
@@ -257,41 +255,26 @@ public class CounterHelper {
 		return 0;
 	}
 
-	// TODO: for future use we need a new ContentObject to hold other objects
-	// declares in css style.
-
-	// public static ContentObject getContentObject(ICSSStyle style)
-	// {
-	// // TODO: currently we only fetch first counter in case there are more
-	// than one counters.
-	// if (style.getStyleProperty(ICSSPropertyID.ATTR_CONTENT) !=
-	// ICSSPropertyMeta.NOT_SPECIFIED)
-	// {
-	// Object content = style.getStyleProperty(ICSSPropertyID.ATTR_CONTENT);
-	// Object object = null;
-	// if (content instanceof List)
-	// {
-	// object = ((List) content).get(0);
-	// }
-	// else if (content instanceof ContentObject)
-	// {
-	// object = content;
-	// }
-	// if (object instanceof ContentObject)
-	// {
-	// return (ContentObject) content;
-	// }
-	// }
-	// return null;
-	// }
-
+	/**
+	 * @param cssValue
+	 * @return true if the cssValue is an IDENT
+	 */
 	public static boolean isIdentifier(Object cssValue) {
 		return (cssValue instanceof ICSSPrimitiveValue)
 				&& ((ICSSPrimitiveValue) cssValue).getPrimitiveType() == CSSPrimitiveValue.CSS_IDENT;
 	}
 
+	/**
+	 * @param cssValue
+	 * @return true if the css value is a number
+	 */
 	public static boolean isNumber(Object cssValue) {
 		return cssValue instanceof ICSSPrimitiveValue
 				&& ((ICSSPrimitiveValue) cssValue).getPrimitiveType() == ICSSPrimitiveValue.CSS_INTEGER;
+	}
+	
+	private  CounterHelper()
+	{
+	    //  util class; no instantiation
 	}
 }

@@ -28,6 +28,9 @@ import org.w3c.dom.css.CSSValue;
  * @author mengbo
  */
 public class CounterIncrementMeta extends CSSPropertyMeta {
+	/**
+	 * 
+	 */
 	public CounterIncrementMeta() {
 		super(false, null);
 	}
@@ -54,6 +57,10 @@ public class CounterIncrementMeta extends CSSPropertyMeta {
 		return getCounter(value);
 	}
 
+	/**
+	 * @param value
+	 * @return the counter
+	 */
 	public List getCounter(CSSValue value) {
 		if (value == null) {
 			return null;

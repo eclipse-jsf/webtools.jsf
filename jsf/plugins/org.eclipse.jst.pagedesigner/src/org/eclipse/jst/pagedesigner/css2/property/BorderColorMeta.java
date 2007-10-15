@@ -26,8 +26,6 @@ public class BorderColorMeta extends CSSPropertyMeta {
 	private static final String[] _keywords = new String[] { ICSSPropertyID.VAL_TRANSPARENT };
 
 	/**
-	 * @param inherit
-	 * @param initvalue
 	 */
 	public BorderColorMeta() {
 		super(false, ICSSPropertyID.VAL_TRANSPARENT);

@@ -19,6 +19,10 @@ public class ResetObject {
 
 	private Integer _initial;
 
+	/**
+	 * @param name
+	 * @param initial
+	 */
 	public ResetObject(String name, Integer initial) {
 		_counterName = name;
 		_initial = initial;

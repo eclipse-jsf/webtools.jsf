@@ -273,7 +273,7 @@ public class ParagraphApplyStyleCommand extends ApplyStyleCommand {
 			}
 			if (condition) {
 				// if uncheck the align action
-				if (this._applyingNode
+				if (this.getApplyingNode()
 						.getAttribute(IHTMLConstants.ATTR_ALIGN)
 						.equals(
 								((Element) parentNode)
@@ -290,7 +290,7 @@ public class ParagraphApplyStyleCommand extends ApplyStyleCommand {
 				 * parentNode.getParentNode().replaceChild(this._applyingNode,
 				 * parentNode);
 				 */
-				String align = this._applyingNode
+				String align = this.getApplyingNode()
 						.getAttribute(IHTMLConstants.ATTR_ALIGN);
 				((Element) parentNode).setAttribute(IHTMLConstants.ATTR_ALIGN,
 						align);
@@ -304,7 +304,7 @@ public class ParagraphApplyStyleCommand extends ApplyStyleCommand {
 					&& parentNode.getNodeName().equalsIgnoreCase(
 							IHTMLConstants.TAG_P)
 					&& parentNode.getChildNodes().getLength() == len) {
-				if (this._applyingNode
+				if (this.getApplyingNode()
 						.getAttribute(IHTMLConstants.ATTR_ALIGN)
 						.equals(
 								((Element) parentNode)
@@ -326,7 +326,7 @@ public class ParagraphApplyStyleCommand extends ApplyStyleCommand {
 				 * parentNode.getParentNode().replaceChild(this._applyingNode,
 				 * parentNode);
 				 */
-				String align = this._applyingNode
+				String align = this.getApplyingNode()
 						.getAttribute(IHTMLConstants.ATTR_ALIGN);
 				((Element) parentNode).setAttribute(IHTMLConstants.ATTR_ALIGN,
 						align);

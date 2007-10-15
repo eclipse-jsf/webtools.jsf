@@ -23,7 +23,7 @@ import org.w3c.dom.Node;
  * 
  * @author mengbo
  */
-public class HTMLListInfoHelper {
+/*package*/ final class HTMLListInfoHelper {
 	/**
 	 * @return Returns the start.
 	 */
@@ -40,6 +40,10 @@ public class HTMLListInfoHelper {
 		return null;
 	}
 
+	/**
+	 * @param style
+	 * @return the start int
+	 */
 	public static Integer getStartInt(ICSSStyle style) {
 		try {
 			return new Integer(getStart(style));
@@ -61,11 +65,20 @@ public class HTMLListInfoHelper {
 		return null;
 	}
 
+	/**
+	 * @param style
+	 * @return the Integer value or null if not parsable
+	 */
 	public static Integer getValueInt(ICSSStyle style) {
 		try {
 			return Integer.valueOf(getValue(style));
 		} catch (NumberFormatException ex) {
 			return null;
 		}
+	}
+	
+	private HTMLListInfoHelper()
+	{
+	    // no external instantiation
 	}
 }

@@ -25,11 +25,9 @@ import org.w3c.dom.css.CSSValueList;
  * @author mengbo
  */
 public class BorderSpacingMeta extends CSSPropertyMeta {
-	public static final int[] INITIAL_SPACING = new int[] { 3, 3 };
+	private static final int[] INITIAL_SPACING = new int[] { 3, 3 };
 
 	/**
-	 * @param inherit
-	 * @param initvalue
 	 */
 	public BorderSpacingMeta() {
 		// the specification says "border-spacing" is inherited. But seemed
@@ -108,6 +106,11 @@ public class BorderSpacingMeta extends CSSPropertyMeta {
 				propertyName, style);
 	}
 
+	/**
+	 * @param valuetext
+	 * @param style
+	 * @return the integer value for value text
+	 */
 	protected int toIntValue(String valuetext, ICSSStyle style) {
 		Object length = LengthMeta.toLength(valuetext, style, PERCENTAGE_NONE,
 				style.getCSSFont());

@@ -33,7 +33,7 @@ public class ApplyStyleCommand extends RangeModeCommand {
 
 	private String _cssPropertyValue;
 
-	protected Element _applyingNode;
+	private final Element _applyingNode;
 
 	/**
 	 * @param viewer
@@ -49,8 +49,15 @@ public class ApplyStyleCommand extends RangeModeCommand {
 		this._tag = tag;
 		this._cssProperty = property;
 		this._cssPropertyValue = value;
+		this._applyingNode = null;
 	}
 
+	/**
+	 * @param viewer
+	 * @param node
+	 * @param property
+	 * @param value
+	 */
 	public ApplyStyleCommand(IHTMLGraphicalViewer viewer, Element node,
 			String property, String value) {
 		super(
@@ -59,7 +66,14 @@ public class ApplyStyleCommand extends RangeModeCommand {
 		this._applyingNode = node;
 	}
 
-	/*
+	/**
+	 * @return the applying node (may be null)
+	 */
+	protected final Element getApplyingNode() {
+        return _applyingNode;
+    }
+
+    /*
 	 * (non-Javadoc)
 	 * 
 	 * @see org.eclipse.jst.pagedesigner.commands.DesignerCommand#doExecute()

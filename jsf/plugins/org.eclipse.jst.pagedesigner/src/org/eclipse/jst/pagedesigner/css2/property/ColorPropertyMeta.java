@@ -18,7 +18,6 @@ import org.eclipse.jst.pagedesigner.IHTMLConstants;
 import org.eclipse.jst.pagedesigner.css2.ICSSStyle;
 import org.eclipse.jst.pagedesigner.css2.color.CSSColorManager;
 import org.eclipse.jst.pagedesigner.utils.DOMUtil;
-import org.eclipse.swt.graphics.Color;
 import org.w3c.dom.Element;
 import org.w3c.dom.css.CSSValue;
 
@@ -36,13 +35,7 @@ public class ColorPropertyMeta extends CSSPropertyMeta {
 			IHTMLConstants.TAG_H2, IHTMLConstants.TAG_H3,
 			IHTMLConstants.TAG_H4, IHTMLConstants.TAG_H5, IHTMLConstants.TAG_H6 };
 
-	public Color getDefaultColor() {
-		return null;
-	}
-
 	/**
-	 * @param inherit
-	 * @param initvalue
 	 */
 	public ColorPropertyMeta() {
 		super(true, DEFAULT_COLOR);

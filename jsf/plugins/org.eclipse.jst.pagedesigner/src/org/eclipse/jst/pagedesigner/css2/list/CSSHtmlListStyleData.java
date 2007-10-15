@@ -18,24 +18,54 @@ import org.eclipse.swt.graphics.Image;
  * @author mengbo
  */
 public class CSSHtmlListStyleData {
+	/**
+	 * Image
+	 */
 	public final static int LIST_T_IMAGE = 0;
 
+	/**
+	 * Disc
+	 */
 	public final static int LIST_T_DISC = 1;
 
+	/**
+	 * Circle
+	 */
 	public final static int LIST_T_CIRCLE = 2;
 
+	/**
+	 * Square
+	 */
 	public final static int LIST_T_SQUARE = 3;
 
+	/**
+	 * Decimal
+	 */
 	public final static int LIST_T_DECIMAL = 0x11;
 
+	/**
+	 * Decimial w/ leading zero
+	 */
 	public final static int LIST_T_DECIMAL_LEADING_ZERO = 0x12;
 
+	/**
+	 * Lower alpha
+	 */
 	public final static int LIST_T_LOWER_ALPHA = 0x13;
 
+	/**
+	 * Lower Roman
+	 */
 	public final static int LIST_T_LOWER_ROMAN = 0x14;
 
+	/**
+	 * Upper alpha
+	 */
 	public final static int LIST_T_UPPER_ALPHA = 0x15;
 
+	/**
+	 * Upper Roman
+	 */
 	public final static int LIST_T_UPPER_ROMAN = 0x16;
 
 	//private CSSMarkerStyleData _markerStyleData;
@@ -44,6 +74,9 @@ public class CSSHtmlListStyleData {
 
 	private int _type;
 
+	/**
+	 * @return if is a default picture type
+	 */
 	public boolean isDefaultPicture() {
 		return (_type & 0xf) != 0;
 	}
@@ -81,12 +114,16 @@ public class CSSHtmlListStyleData {
 		return _type;
 	}
 
+	/**
+	 * @param type
+	 */
 	public void setType(String type) {
 
 		this._type = toTypeInt(type);
 	}
 
 	/**
+	 * @param index 
 	 * @return Returns the markerString.
 	 */
 	public String getTextValue(int index) {
@@ -98,14 +135,24 @@ public class CSSHtmlListStyleData {
 
 	}
 
+	/**
+	 * @return true if is a text type
+	 */
 	public boolean isText() {
 		return (_type & 0xf0) != 0;
 	}
 
+	/**
+	 * @return true if is an image type
+	 */
 	public boolean isImage() {
 		return (_type == LIST_T_IMAGE);
 	}
 
+	/**
+	 * @param type
+	 * @return convert the 'type' String to one of LIST_T_*
+	 */
 	public static int toTypeInt(String type) {
 		if (type.equalsIgnoreCase(ICSSPropertyID.VAL_DECIMAL)) {
 			return LIST_T_DECIMAL;

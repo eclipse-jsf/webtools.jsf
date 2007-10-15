@@ -27,6 +27,9 @@ import org.w3c.dom.css.CSSValueList;
  * @author mengbo
  */
 public class FontFamilyMeta extends CSSPropertyMeta {
+	/**
+	 * the default font name
+	 */
 	public static final String DEFAULT_FONT = "Times New Roman";
 
 	private static FontData[] _FontData;
@@ -44,8 +47,6 @@ public class FontFamilyMeta extends CSSPropertyMeta {
 	}
 
 	/**
-	 * @param inherit
-	 * @param initvalue
 	 */
 	public FontFamilyMeta() {
 		super(true, DEFAULT_FONT);

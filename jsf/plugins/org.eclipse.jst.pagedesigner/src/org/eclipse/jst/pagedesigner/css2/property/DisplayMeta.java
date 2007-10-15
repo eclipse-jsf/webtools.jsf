@@ -32,8 +32,6 @@ public class DisplayMeta extends CSSPropertyMeta {
 			ICSSPropertyID.VAL_TABLE_CAPTION, ICSSPropertyID.VAL_NONE };
 
 	/**
-	 * @param inherit
-	 * @param initvalue
 	 */
 	public DisplayMeta() {
 		super(false, ICSSPropertyID.VAL_INLINE);

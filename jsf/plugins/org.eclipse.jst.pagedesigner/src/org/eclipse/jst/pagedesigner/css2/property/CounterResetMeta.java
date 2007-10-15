@@ -25,6 +25,9 @@ import org.w3c.dom.css.CSSValue;
  * @author mengbo
  */
 public class CounterResetMeta extends CSSPropertyMeta {
+	/**
+	 * 
+	 */
 	public CounterResetMeta() {
 		super(false, null);
 	}
@@ -51,6 +54,10 @@ public class CounterResetMeta extends CSSPropertyMeta {
 		return getCounter(value);
 	}
 
+	/**
+	 * @param value
+	 * @return the counter
+	 */
 	public List getCounter(CSSValue value) {
 		if (value == null) {
 			return null;

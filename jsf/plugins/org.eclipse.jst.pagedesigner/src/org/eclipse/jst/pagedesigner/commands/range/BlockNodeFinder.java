@@ -31,6 +31,10 @@ public class BlockNodeFinder {
 
 	private IDOMPosition _position;
 
+	/**
+	 * @param position
+	 * @param additionalTags
+	 */
 	public BlockNodeFinder(IDOMPosition position, String[] additionalTags) {
 		_position = position;
 		_additionalTags = additionalTags;

@@ -35,7 +35,7 @@ public class CSSMarkerStyleData {
 	}
 
 	/**
-	 * @param isOutside
+	 * @param position
 	 *            The isBefore to set.
 	 */
 	public void setPosition(String position) {
@@ -76,6 +76,10 @@ public class CSSMarkerStyleData {
 		_textContent = value;
 	}
 
+	/**
+	 * @return the next element.  removes it from the content vector.  Returns
+	 * null if the content is empty
+	 */
 	public Object getNextElement() {
 		if (_content == null || _content.size() == 0) {
 			return null;
@@ -83,6 +87,9 @@ public class CSSMarkerStyleData {
 		return _content.remove(0);
 	}
 
+	/**
+	 * @param content
+	 */
 	public void setContent(Vector content) {
 		_content = content;
 	}

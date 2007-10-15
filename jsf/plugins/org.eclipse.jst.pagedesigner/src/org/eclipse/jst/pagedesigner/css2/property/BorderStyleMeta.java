@@ -29,8 +29,6 @@ public class BorderStyleMeta extends CSSPropertyMeta {
 			ICSSPropertyID.VAL_OUTSET };
 
 	/**
-	 * @param inherit
-	 * @param initvalue
 	 */
 	public BorderStyleMeta() {
 		super(false, ICSSPropertyID.VAL_NONE);
@@ -168,7 +166,7 @@ public class BorderStyleMeta extends CSSPropertyMeta {
 
 	/**
 	 * @param propertyName
-	 * @return
+	 * @return true if property name is a border style
 	 */
 	public static boolean isBorderStyle(String propertyName) {
 		return ICSSPropertyID.ATTR_BORDER_BOTTOM_STYLE
