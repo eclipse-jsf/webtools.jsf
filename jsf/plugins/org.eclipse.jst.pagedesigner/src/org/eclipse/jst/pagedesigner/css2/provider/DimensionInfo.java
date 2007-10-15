@@ -20,9 +20,9 @@ import org.eclipse.draw2d.geometry.Dimension;
  * @version 1.5
  */
 public class DimensionInfo {
-	Dimension _dimension;
+	private final Dimension _dimension;
 
-	int _ascent;
+	private final int _ascent;
 
 	/**
 	 * 
@@ -44,10 +44,16 @@ public class DimensionInfo {
 		this(new Dimension(width, height), i);
 	}
 
+	/**
+	 * @return the dimension
+	 */
 	public Dimension getDimension() {
 		return _dimension;
 	}
 
+	/**
+	 * @return the ascent
+	 */
 	public int getAscent() {
 		return _ascent;
 	}

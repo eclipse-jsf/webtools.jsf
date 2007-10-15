@@ -38,12 +38,9 @@ import org.w3c.dom.css.CSSValue;
 /**
  * @author mengbo
  */
-public class AbstractStyle implements ICSSStyle {
-	public static final String ATTR_NAME = "name";
-
-	public static final String ATTR_ID = "id";
-
-	protected Element _element;
+public class AbstractStyle implements ICSSStyle 
+{
+	private final Element _element;
 
 	private Map _cachedValues = new HashMap();
 
@@ -63,10 +60,16 @@ public class AbstractStyle implements ICSSStyle {
 
 	private HashMap _counters = null;
 
+	/**
+	 * @return the element this style if for
+	 */
 	public Element getElement() {
 		return _element;
 	}
 
+	/**
+	 * @param element
+	 */
 	public AbstractStyle(Element element) {
 		_element = element;
 	}
@@ -106,7 +109,7 @@ public class AbstractStyle implements ICSSStyle {
 	 * get a style property value.
 	 * 
 	 * @param property
-	 * @return
+	 * @return the style property
 	 */
 	public Object getStyleProperty(String property) {
 		Object value = _cachedValues.get(property);
@@ -123,7 +126,7 @@ public class AbstractStyle implements ICSSStyle {
 	 * in this method, should first check the "style" attribute, then combine
 	 * that with document style.
 	 * 
-	 * @return
+	 * @return the style
 	 */
 	protected CSSStyleDeclaration calculateDeclaration() {
 		String name = getHtmlElement().getAttribute("id");
@@ -133,10 +136,16 @@ public class AbstractStyle implements ICSSStyle {
 		return CSSUtil.getCSSDeclaration(this.getHtmlElement(), name);
 	}
 
+	/**
+	 * @return the style
+	 */
 	protected CSSStyleDeclaration calculateDefaultDeclaration() {
 		return CSSUtil.getDefaultCSSDeclaration(this.getHtmlElement(), null);
 	}
 
+	/**
+	 * @return the style declaration
+	 */
 	public CSSStyleDeclaration getDeclaration() {
 		// FIXME:may need to be change, boolean variable is not a best way.
 		if (!_cssDeclareWasSearched) {
@@ -146,6 +155,9 @@ public class AbstractStyle implements ICSSStyle {
 		return _cache;
 	}
 
+	/**
+	 * @return the default declaration
+	 */
 	public CSSStyleDeclaration getDefaultDeclaration() {
 		// FIXME:may need to be change, boolean variable is not a best way.
 		if (!_cssDefaultDeclareWasSearched) {
@@ -155,6 +167,9 @@ public class AbstractStyle implements ICSSStyle {
 		return _defaultCache;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.jst.pagedesigner.css2.ICSSStyle#getHTMLelementInitValue(java.lang.String)
+	 */
 	public Object getHTMLelementInitValue(String propertyName) {
 		ICSSPropertyMeta meta = getPropertyMeta(propertyName);
 		if (meta != null) {
@@ -168,6 +183,10 @@ public class AbstractStyle implements ICSSStyle {
 		return ICSSPropertyMeta.NOT_SPECIFIED;
 	}
 
+	/**
+	 * @param propertyName
+	 * @return the property
+	 */
 	protected Object calculateProperty(String propertyName) {
 		ICSSPropertyMeta meta = getPropertyMeta(propertyName);
 		Object result = null;
@@ -218,7 +237,7 @@ public class AbstractStyle implements ICSSStyle {
 	 * get the corresponding HTML tag for this style. This is for certain HTML
 	 * tag can also provide style information.
 	 * 
-	 * @return
+	 * @return the html tag
 	 */
 	protected String getHTMLTag() {
 		return _element.getTagName();
@@ -226,7 +245,7 @@ public class AbstractStyle implements ICSSStyle {
 
 	/**
 	 * @param propertyName
-	 * @return
+	 * @return the property meta for property name
 	 */
 	protected ICSSPropertyMeta getPropertyMeta(String propertyName) {
 		return CSSMetaRegistry.getInstance().getMeta(propertyName);
@@ -235,6 +254,7 @@ public class AbstractStyle implements ICSSStyle {
 	/**
 	 * convert the CSSValue to the property type specified data result.
 	 * 
+	 * @param meta 
 	 * @param value
 	 * @param propertyName
 	 * @return should not return null.
@@ -255,6 +275,7 @@ public class AbstractStyle implements ICSSStyle {
 	 * you don't directly or indirectly call getStyleProperty() to avoid
 	 * deadloop.
 	 * 
+	 * @param meta 
 	 * @param propertyName
 	 * @return null means no style information in other attributes. Otherwise
 	 *         return property specific data result -- normally will use meta to
@@ -281,8 +302,9 @@ public class AbstractStyle implements ICSSStyle {
 	/**
 	 * This is only called when inherit value from parent.
 	 * 
+	 * @param meta 
 	 * @param propertyName
-	 * @return
+	 * @return the result value
 	 */
 	protected Object getParentResultValue(ICSSPropertyMeta meta,
 			String propertyName) {
@@ -290,6 +312,9 @@ public class AbstractStyle implements ICSSStyle {
 		return style.getStyleProperty(propertyName);
 	}
 
+	/**
+	 * @param parentStyle
+	 */
 	public void setParentStyle(ICSSStyle parentStyle) {
 		this._parentStyle = parentStyle;
 		reset();
@@ -314,7 +339,7 @@ public class AbstractStyle implements ICSSStyle {
 	/**
 	 * Will not return null
 	 * 
-	 * @return
+	 * @return the font
 	 */
 	public ICSSFont getCSSFont() {
 		if (_font == null) {
@@ -465,6 +490,9 @@ public class AbstractStyle implements ICSSStyle {
 		return _backgroundColor;
 	}
 
+	/**
+	 * @return the html element
+	 */
 	public Element getHtmlElement() {
 		// if (_element instanceof IDOMElement)
 		// {
@@ -533,7 +561,7 @@ public class AbstractStyle implements ICSSStyle {
 	/**
 	 * Get named counter from counters.
 	 * 
-	 * @see org.eclipse.jst.pagedesigner.css2.ICSSStyle#getCounter(java.lang.String)
+	 * see org.eclipse.jst.pagedesigner.css2.ICSSStyle#getCounter(java.lang.String)
 	 */
 	public ICounterValueGenerator findCounter(String name, boolean must) {
 		Map counters = getCounters();

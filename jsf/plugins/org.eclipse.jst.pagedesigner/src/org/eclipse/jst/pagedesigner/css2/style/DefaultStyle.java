@@ -24,6 +24,8 @@ import org.eclipse.wst.sse.core.internal.provisional.INodeNotifier;
 
 /**
  * @author mengbo
+ * 
+ * TODO: why doesn't this sub-class AbstractStyle
  */
 public class DefaultStyle implements ICSSStyle {
 
@@ -129,7 +131,7 @@ public class DefaultStyle implements ICSSStyle {
 	}
 
 	/**
-	 * @return
+	 * @return the singleton instance
 	 */
 	public static ICSSStyle getInstance() {
 		if (_instance == null) {

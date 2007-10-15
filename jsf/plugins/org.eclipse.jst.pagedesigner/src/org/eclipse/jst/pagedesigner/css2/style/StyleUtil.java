@@ -17,7 +17,11 @@ import org.eclipse.jst.pagedesigner.css2.ICSSStyle;
  * @author mengbo
  * @version 1.5
  */
-public class StyleUtil {
+public final class StyleUtil {
+	/**
+	 * @param style
+	 * @return true if the style is in a widget
+	 */
 	public static boolean isInWidget(ICSSStyle style) {
 		while (style != null && style != DefaultStyle.getInstance()) {
 			ITagEditInfo info = (ITagEditInfo) style
@@ -29,5 +33,10 @@ public class StyleUtil {
 			style = style.getParentStyle();
 		}
 		return false;
+	}
+	
+	private StyleUtil()
+	{
+	    // util class
 	}
 }

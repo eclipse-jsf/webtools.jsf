@@ -18,7 +18,7 @@ package org.eclipse.jst.pagedesigner.css2.style;
 public interface IRangeSelectionProxy {
 
 	/**
-	 * @return
+	 * @return true if the range is selected
 	 */
 	boolean isRangeSelected();
 

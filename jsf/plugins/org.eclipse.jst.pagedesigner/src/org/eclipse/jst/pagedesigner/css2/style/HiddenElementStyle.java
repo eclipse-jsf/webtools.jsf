@@ -15,6 +15,10 @@ import org.eclipse.jst.pagedesigner.parts.EditProxyAdapter;
 import org.eclipse.wst.sse.core.internal.provisional.INodeNotifier;
 import org.w3c.dom.Element;
 
+/**
+ * A style for hidden elements
+ *
+ */
 public class HiddenElementStyle extends DefaultStyle {
 	private EditProxyAdapter _editProxyAdapter;
 
@@ -43,10 +47,16 @@ public class HiddenElementStyle extends DefaultStyle {
 		}
 	};
 
+	/**
+	 * @param adapter
+	 */
 	public HiddenElementStyle(EditProxyAdapter adapter) {
 		this._editProxyAdapter = adapter;
 	}
 
+	/**
+	 * @param convertedElement
+	 */
 	public HiddenElementStyle(Element convertedElement) {
 		this._convertedElement = convertedElement;
 	}

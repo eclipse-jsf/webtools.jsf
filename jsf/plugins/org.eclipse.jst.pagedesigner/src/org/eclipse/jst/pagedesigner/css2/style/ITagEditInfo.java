@@ -12,14 +12,25 @@
 package org.eclipse.jst.pagedesigner.css2.style;
 
 /**
+ * TODO: TagConversion decorator should augment/replace
  * @author mengbo
  * @version 1.5
  */
-public interface ITagEditInfo {
+public interface ITagEditInfo 
+{
+	/**
+	 * @return true if is a widget
+	 */
 	public boolean isWidget();
 
+	/**
+	 * @return true if a border decorator is needed
+	 */
 	public boolean needBorderDecorator();
 
+	/**
+	 * @return true if a table decorator is needed
+	 */
 	public boolean needTableDecorator();
 
 	/**
@@ -30,5 +41,8 @@ public interface ITagEditInfo {
 	 */
 	public int getMinWidth();
 
+	/**
+	 * @return the minimum height
+	 */
 	public int getMinHeight();
 }

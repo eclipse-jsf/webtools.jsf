@@ -27,14 +27,14 @@ public interface ICSSTextProvider {
 	 * this is the final data to be displayed. There is no need for the
 	 * CSSTextFigure to normalize it.
 	 * 
-	 * @return
+	 * @return the text data
 	 */
 	public String getTextData();
 
 	/**
 	 * get the selected information.
 	 * 
-	 * @return
+	 * @return the selected range
 	 */
 	public int[] getSelectedRange();
 }

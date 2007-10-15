@@ -22,10 +22,13 @@ public interface ICSSWidgetProvider {
 	/**
 	 * can be null
 	 * 
-	 * @return
+	 * @return the style
 	 */
 	public ICSSStyle getCSSStyle();
 
+	/**
+	 * @return true if is handling border
+	 */
 	public boolean isHandlingBorder();
 
 	/**
@@ -36,7 +39,7 @@ public interface ICSSWidgetProvider {
 	 *            -1 means no suggested value
 	 * @param height
 	 *            -1 means no suggested value
-	 * @return
+	 * @return the dimension info
 	 */
 	public DimensionInfo getPreferredDimension(int width, int height);
 
@@ -46,13 +49,13 @@ public interface ICSSWidgetProvider {
 	 * 
 	 * If isHandlingBorder returns true, then "rect" include border, and this
 	 * method should also paint its own border.
-	 * 
+	 * @param g 
 	 * @param rect
 	 */
 	public void paintFigure(Graphics g, Rectangle rect);
 
 	/**
-	 * @return
+	 * @return true if is inline
 	 */
 	public boolean isInline();
 }
