@@ -25,7 +25,6 @@ import org.eclipse.jst.pagedesigner.validation.caret.IMovementMediator;
 import org.eclipse.jst.pagedesigner.validation.caret.InlineEditingNavigationMediator;
 import org.eclipse.jst.pagedesigner.viewer.DesignPosition;
 import org.eclipse.jst.pagedesigner.viewer.DesignRefPosition;
-import org.eclipse.wst.sse.core.internal.provisional.INodeNotifier;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -36,19 +35,22 @@ import org.w3c.dom.Text;
  * @author mengbo
  */
 public class EditHelper {
-	public final static boolean INNER_DEBUG = false;
+//	public final static boolean INNER_DEBUG = false;
 
-	public final static int OUT_OF_LEFT = 1;
+	private final static int OUT_OF_LEFT = 1;
 
-	public final static int LEFT_NAME = 2;
+	private final static int LEFT_NAME = 2;
 
+	/**
+	 * indicates a position in the middle
+	 */
 	public final static int IN_MIDDLE = 3;
 
-	public final static int RIGHT_NAME = 4;
+	private final static int RIGHT_NAME = 4;
 
-	public final static int OUT_OF_RIGHT = 5;
+	private final static int OUT_OF_RIGHT = 5;
 
-	public static final EditHelper _instance = new EditHelper();
+	private static final EditHelper _instance = new EditHelper();
 
 	//private static Logger _log = PDPlugin.getLogger(EditHelper.class);
 
@@ -64,7 +66,7 @@ public class EditHelper {
 	 * @param position
 	 * @param forward
 	 * @param forEmpty
-	 * @return
+	 * @return the offset
 	 */
 	public int getTextNextOffset(IDOMPosition position, boolean forward,
 			boolean forEmpty) {
@@ -89,6 +91,9 @@ public class EditHelper {
 
 	}
 
+	/**
+	 * @return the singleton instance
+	 */
 	public static EditHelper getInstance() {
 		return _instance;
 	}
@@ -102,7 +107,7 @@ public class EditHelper {
 	 * @param action
 	 * @param currentPosition
 	 * @param forward
-	 * @return
+	 * @return the dom position
 	 */
 	public static DesignPosition moveToNextEditPosition(int action,
 			DesignPosition currentPosition, boolean forward) {
@@ -124,11 +129,10 @@ public class EditHelper {
 	 * it based on operation ID and direction. We need to pack transparent
 	 * string.
 	 * 
-	 * @param operation
 	 * @param currentPosition
 	 * @param forward
 	 * @param validator
-	 * @return
+	 * @return the dom position
 	 */
 	public static IDOMPosition moveToNextEditPosition(
 			IDOMPosition currentPosition, boolean forward,
@@ -147,7 +151,7 @@ public class EditHelper {
 	 * Delete a node, in case it is 'body' or 'html', it won't perform delete.
 	 * 
 	 * @param node
-	 * @return
+	 * @return the node
 	 */
 	public static Node deleteNode(Node node) {
 		if (node == null || node.getNodeName() == null) {
@@ -176,7 +180,7 @@ public class EditHelper {
 	 * Order the IDOMPositions in a range in ascending order.
 	 * 
 	 * @param range
-	 * @return
+	 * @return the dom range
 	 */
 	public static DOMRange normal(DOMRange range) {
 		EditValidateUtil.validRange(range);
@@ -193,8 +197,9 @@ public class EditHelper {
 	 * Move position in to node from its outside, the node should be breakble.
 	 * 
 	 * @param node
+	 * @param validator 
 	 * @param forward
-	 * @return
+	 * @return the dom position
 	 */
 	public static IDOMPosition moveInto(Node node, IMovementMediator validator,
 			boolean forward) {
@@ -207,7 +212,7 @@ public class EditHelper {
 	 * Convert a DomRefPosition into DOMPosition.
 	 * 
 	 * @param position
-	 * @return
+	 * @return the dom position
 	 */
 	public static IDOMPosition ensureDOMPosition(IDOMPosition position) {
 		if (position instanceof DOMRefPosition) {
@@ -217,6 +222,13 @@ public class EditHelper {
 		return position;
 	}
 
+	/**
+	 * @param currentNode
+	 * @param pos1
+	 * @param pos2
+	 * @param top
+	 * @param workNode
+	 */
 	public void processText(Text currentNode, final int pos1, final int pos2,
 			Node top, Stack workNode) {
 		// the text could be tranparent, or 0 length.
@@ -233,6 +245,13 @@ public class EditHelper {
 		}
 	}
 
+	/**
+	 * @param currentNode
+	 * @param pos1
+	 * @param pos2
+	 * @param top
+	 * @param result
+	 */
 	public void collectNodes(Node currentNode, final int pos1, final int pos2,
 			Node top, Stack result) {
 		Assert.isTrue(pos1 <= pos2);
@@ -280,6 +299,12 @@ public class EditHelper {
 		}
 	}
 
+	/**
+	 * @param currentNode
+	 * @param pos
+	 * @param isOffset
+	 * @return the location
+	 */
 	public int getLocation(Node currentNode, int pos, boolean isOffset) {
 		if (EditModelQuery.getInstance().isSingleRegionNode(currentNode)) {
 			// if (EditModelQuery.isText(currentNode))
@@ -354,6 +379,11 @@ public class EditHelper {
 //		}
 //	}
 
+	/**
+	 * @param position
+	 * @param forward
+	 * @return the edit part for position
+	 */
 	public EditPart getEditPart(DesignPosition position, boolean forward) {
 		if (position instanceof DesignRefPosition) {
 			return ((DesignRefPosition) position).getRefPart();
@@ -381,6 +411,10 @@ public class EditHelper {
 		return null;
 	}
 
+	/**
+	 * @param position
+	 * @return the resulting dom position
+	 */
 	public static IDOMPosition splitNode(IDOMPosition position) {
 		if (EditValidateUtil.validPosition(position)) {
 			Node container = null;
@@ -446,8 +480,9 @@ public class EditHelper {
 		return position;
 	}
 
-	/*
-	 * Return the position of this 'position' in relative to it's container.
+	/**
+	 * @param position 
+	 * @return the position of this 'position' in relative to it's container.
 	 */
 	public static int getLocation(IDOMPosition position) {
 		if (position.getOffset() == 0) {
@@ -465,12 +500,5 @@ public class EditHelper {
         	return 1;
         }
         return 0;
-	}
-
-	public static EditPart getPart(Node node) {
-		if (node instanceof INodeNotifier) {
-			((INodeNotifier) node).getAdapterFor(EditPart.class);
-		}
-		return null;
 	}
 }

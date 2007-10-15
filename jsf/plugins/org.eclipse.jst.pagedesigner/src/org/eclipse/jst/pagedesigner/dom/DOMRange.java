@@ -22,29 +22,39 @@ public class DOMRange {
 	IDOMPosition _end;
 
 	/**
-	 * 
+	 * @param p1
+	 * @param p2
 	 */
 	public DOMRange(IDOMPosition p1, IDOMPosition p2) {
 		_start = p1;
 		_end = p2;
 	}
 
+	/**
+	 * @return the start position
+	 */
 	public IDOMPosition getStartPosition() {
 		return _start;
 	}
 
+	/**
+	 * @return the end position
+	 */
 	public IDOMPosition getEndPosition() {
 		return _end;
 	}
 
 	/**
-	 * @return
+	 * @return true if is empty
 	 */
 	public boolean isEmpty() {
 		return _start.getContainerNode() == _end.getContainerNode()
 				&& _start.getOffset() == _end.getOffset();
 	}
 
+	/**
+	 * @return true if is ordered
+	 */
 	public boolean isOrdered() {
 		Node common = DOMUtil.findCommonAncester(_start.getContainerNode(),
 				_end.getContainerNode());

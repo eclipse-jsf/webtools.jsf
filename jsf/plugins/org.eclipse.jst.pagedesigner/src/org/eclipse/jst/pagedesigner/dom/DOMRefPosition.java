@@ -136,6 +136,9 @@ public class DOMRefPosition implements IDOMRefPosition {
 		return _refNode;
 	}
 
+	/**
+	 * @return true if is forward
+	 */
 	public boolean isForward() {
 		return _forward;
 	}

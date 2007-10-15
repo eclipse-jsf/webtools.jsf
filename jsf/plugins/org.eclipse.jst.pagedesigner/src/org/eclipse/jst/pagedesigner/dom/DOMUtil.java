@@ -63,7 +63,7 @@ public class DOMUtil {
 	 * 
 	 * @param node1
 	 * @param node2
-	 * @return
+	 * @return the common ancestor
 	 */
 	public static Node findCommonAncester(Node node1, Node node2) {
 		List list1 = getAncesters(node1);
@@ -102,7 +102,7 @@ public class DOMUtil {
 	 * 
 	 * @param destDoc
 	 * @param sourceNode
-	 * @return
+	 * @return the node
 	 */
 	public static Node cloneNodeDeepIgnoreError(Document destDoc,
 			Node sourceNode) {
@@ -152,6 +152,11 @@ public class DOMUtil {
 		}
 	}
 
+	/**
+	 * @param destDoc
+	 * @param sourceNode
+	 * @return the node
+	 */
 	public static Node cloneNodeDeep(Document destDoc, Node sourceNode) {
 		switch (sourceNode.getNodeType()) {
 		case Node.ELEMENT_NODE:
@@ -195,7 +200,7 @@ public class DOMUtil {
 	 * 
 	 * @param ancester
 	 * @param child
-	 * @return
+	 * @return true if ancester is an ancestor of child
 	 */
 	public static boolean isAncester(Node ancester, Node child) {
 		while (child != null) {
@@ -210,8 +215,8 @@ public class DOMUtil {
 	/**
 	 * insert the node at specified position.
 	 * 
-	 * @param insertPosition
-	 * @param insert
+	 * @param domPosition 
+	 * @param node 
 	 * @return null if fail, otherwise return the inserted node.
 	 */
 	public static Node insertNode(IDOMPosition domPosition, Node node) {

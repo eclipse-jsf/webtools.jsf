@@ -18,7 +18,11 @@ import org.w3c.dom.Node;
 /**
  * @author mengbo
  */
-public class DOMRangeHelper {
+public final class DOMRangeHelper {
+	/**
+	 * @param range
+	 * @return the dom range
+	 */
 	public static DOMRange toDOMRange(DesignRange range) {
 		if (range.getStartPosition() == range.getEndPosition()) {
 			IDOMPosition dp = DOMPositionHelper.toDOMPosition(range
@@ -30,6 +34,10 @@ public class DOMRangeHelper {
         		.getEndPosition()));
 	}
 
+	/**
+	 * @param range
+	 * @return the design range
+	 */
 	public static DesignRange toDesignRange(DOMRange range) {
 		if (range.getStartPosition() == range.getEndPosition()) {
 			DesignPosition dp = DOMPositionHelper.toDesignPosition(range
@@ -41,6 +49,12 @@ public class DOMRangeHelper {
 				.getEndPosition()));
 	}
 
+	/**
+	 * @param range
+	 * @param original
+	 * @param replacement
+	 * @return the dom range
+	 */
 	public static DOMRange handleReplacement(DOMRange range, Node original,
 			Node replacement) {
 		if (range.getStartPosition() == range.getEndPosition()) {
@@ -51,5 +65,10 @@ public class DOMRangeHelper {
         return new DOMRange(range.getStartPosition().handleReplacement(
         		original, replacement), range.getEndPosition()
         		.handleReplacement(original, replacement));
+	}
+	
+	private DOMRangeHelper()
+	{
+	    // util class, no instantiation
 	}
 }

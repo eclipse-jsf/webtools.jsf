@@ -23,6 +23,10 @@ public class DOMPosition implements IDOMPosition {
 
 	int _offset;
 
+	/**
+	 * @param containerNode
+	 * @param offset
+	 */
 	public DOMPosition(Node containerNode, int offset) {
 		_containerNode = containerNode;
 		_offset = offset;
@@ -35,7 +39,7 @@ public class DOMPosition implements IDOMPosition {
 	 * when parent is not text node, then the offset is the index in
 	 * getIDOMNode().getChildNodes()
 	 * 
-	 * @return
+	 * @return the offset
 	 */
 	public int getOffset() {
 		return _offset;

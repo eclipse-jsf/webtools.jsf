@@ -26,7 +26,12 @@ import org.w3c.dom.css.ElementCSSInlineStyle;
  * @author mengbo
  * @version 1.5
  */
-public class DOMStyleUtil {
+public final class DOMStyleUtil {
+	/**
+	 * @param original
+	 * @param cssProperty
+	 * @return the inline style property
+	 */
 	public static String getInlineStyleProperty(Element original,
 			String cssProperty) {
 		if (original instanceof ElementCSSInlineStyle) {
@@ -159,7 +164,7 @@ public class DOMStyleUtil {
 
 	/**
 	 * @param ele
-	 * @return
+	 * @return true if supports the style attribute
 	 */
 	public static boolean supportStyleAttribute(IDOMElement ele) {
 		CMElementDeclaration decl = CMUtil.getElementDeclaration(ele);
@@ -167,6 +172,11 @@ public class DOMStyleUtil {
 			return true;
 		}
         return false;
+	}
+	
+	private DOMStyleUtil()
+	{
+	    // util class, no external instantiation
 	}
 
 }

@@ -39,7 +39,10 @@ public class CaretMoveIterator {
 	private boolean _forward;
 
 	/**
-	 * constructor
+	 * @param nodeIterator 
+	 * @param validator 
+	 * @param position 
+	 * @param forward 
 	 */
 	public CaretMoveIterator(NodeIterator nodeIterator,
 			IMovementMediator validator, IDOMPosition position, boolean forward) {
@@ -50,6 +53,9 @@ public class CaretMoveIterator {
 		_forward = forward;
 	}
 
+	/**
+	 * @return the node iterator
+	 */
 	public NodeIterator getNodeIterator() {
 		return _nodeIterator;
 	}
@@ -80,6 +86,10 @@ public class CaretMoveIterator {
 		return result;
 	}
 
+	/**
+	 * @param node
+	 * @return the dom position
+	 */
 	public IDOMPosition moveIn(Node node) {
 		IDOMPosition result = null;
 		if (INNER_DEBUG) {
@@ -236,11 +246,10 @@ public class CaretMoveIterator {
 	 * it based on operation ID and direction. We need to pack transparent
 	 * string.
 	 * 
-	 * @param operation
 	 * @param currentPosition
 	 * @param forward
 	 * @param validator
-	 * @return
+	 * @return the dom position
 	 */
 	public IDOMPosition moveToNextEditPosition(IDOMPosition currentPosition,
 			boolean forward, IMovementMediator validator) {

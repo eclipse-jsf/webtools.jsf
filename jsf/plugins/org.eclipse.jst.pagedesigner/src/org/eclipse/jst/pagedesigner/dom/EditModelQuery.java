@@ -50,28 +50,34 @@ import org.w3c.dom.Text;
 /**
  * @author mengbo
  */
-public class EditModelQuery {
+public final class EditModelQuery {
 	private static Logger _log = PDPlugin.getLogger(EditModelQuery.class);
 
 	private static EditModelQuery _instance;
 
-	public static final int START_INDEX_BEFORE_TAG = 1;
+	private static final int START_INDEX_BEFORE_TAG = 1;
 
-	public static final int END_INDEX_WITHIN_TAG = 2;
+	private static final int END_INDEX_WITHIN_TAG = 2;
 
-	public static final HashSet SPECIAL_EMPTY_CHARS = new HashSet();
+	private static final HashSet SPECIAL_EMPTY_CHARS = new HashSet();
 
+	/**
+	 * Maps unicode Characters to html equivalents
+	 */
 	public static final HashMap CHAR_NODE_MAP = new HashMap();
 
 	// Cursor can't go outside of these container.
-	public static final HashSet HTML_CONSTRAINED_CONTAINERS = new HashSet();
+	private static final HashSet HTML_CONSTRAINED_CONTAINERS = new HashSet();
 
+	/**
+	 * HTML tags that control style
+	 */
 	public static final HashSet HTML_STYLE_NODES = new HashSet();
 
-	public static final HashSet UNREMOVEBLE_TAGS = new HashSet();
+	static final HashSet UNREMOVEBLE_TAGS = new HashSet();
 
 	// Nodes that can hold other nodes.
-	public static final String[] HTML_CONTAINER_NODES = {
+	static final String[] HTML_CONTAINER_NODES = {
 	//
 			IHTMLConstants.TAG_BODY, //
 			IHTMLConstants.TAG_HTML, //
@@ -85,7 +91,7 @@ public class EditModelQuery {
 			IHTMLConstants.TAG_UL //
 	};
 
-	public static final String[] NON_HTML_CONTAINER_NODES = {
+	static final String[] NON_HTML_CONTAINER_NODES = {
 			IJSFConstants.TAG_VIEW, //
 			IJSFConstants.TAG_PANELGRID, //
 			IJSFConstants.TAG_PANELGROUP, //
@@ -129,6 +135,9 @@ public class EditModelQuery {
         // no  external instantiation
 	}
 
+	/**
+	 * @return the singleton instance
+	 */
 	public static EditModelQuery getInstance() {
 		if (_instance == null) {
 			_instance = new EditModelQuery();
@@ -140,7 +149,7 @@ public class EditModelQuery {
 	 * Get previous sibling, or if sibling is null then get previous neighbor.
 	 * 
 	 * @param node
-	 * @return
+	 * @return the node
 	 */
 	public Node getPreviousNeighbor(Node node) {
 		if (!EditValidateUtil.validNode(node)) {
@@ -160,7 +169,7 @@ public class EditModelQuery {
 	 * rightmost child, which is adjacent to 'node'.
 	 * 
 	 * @param node
-	 * @return
+	 * @return the node
 	 */
 	public Node getPreviousLeafNeighbor(Node node) {
 		return getLastLeafChild(getPreviousNeighbor(node));
@@ -170,7 +179,7 @@ public class EditModelQuery {
 	 * Get next sibling, or if sibling is null get next neighbor.
 	 * 
 	 * @param node
-	 * @return
+	 * @return the node
 	 */
 	public Node getNextNeighbor(Node node) {
 		if (!EditValidateUtil.validNode(node)) {
@@ -191,7 +200,7 @@ public class EditModelQuery {
 	 * child which will be adjacent to 'node'.
 	 * 
 	 * @param node
-	 * @return
+	 * @return the node
 	 */
 	public Node getNextLeafNeighbor(Node node) {
 		return getFirstLeafChild(getNextNeighbor(node));
@@ -201,7 +210,7 @@ public class EditModelQuery {
 	 * Get node's rightmost leaf child.
 	 * 
 	 * @param node
-	 * @return
+	 * @return the node
 	 */
 	private Node getLastLeafChild(Node node) {
 		if (node == null) {
@@ -217,9 +226,9 @@ public class EditModelQuery {
 	 * Get node's leftmost leaf child.
 	 * 
 	 * @param node
-	 * @return
+	 * @return the node
 	 */
-	protected Node getFirstLeafChild(Node node) {
+	private Node getFirstLeafChild(Node node) {
 		if (node == null) {
 			return null;
 		}
@@ -234,7 +243,7 @@ public class EditModelQuery {
 	 * To see if node is within a indexed region that is started from 'start',
 	 * ended at 'end'
 	 */
-	public static boolean within(int start, int end, Node theNode) {
+	static boolean within(int start, int end, Node theNode) {
 		return getNodeStartIndex(theNode) >= start
 				&& getNodeEndIndex(theNode) <= end;
 	}
@@ -247,7 +256,7 @@ public class EditModelQuery {
 	 * @param position
 	 * @return
 	 */
-	public boolean within(int start, int end, IDOMPosition position) {
+	 boolean within(int start, int end, IDOMPosition position) {
 		int pos = getIndexedRegionLocation(position);
 		return start <= pos && pos <= end;
 	}
@@ -260,7 +269,7 @@ public class EditModelQuery {
 	 * @param theNode
 	 * @return
 	 */
-	public static boolean outOf(int start, int end, Node theNode) {
+	static boolean outOf(int start, int end, Node theNode) {
 		if (getNodeLenth(theNode) > 0) {
 			return getNodeStartIndex(theNode) >= end
 					|| getNodeEndIndex(theNode) <= start;
@@ -272,12 +281,11 @@ public class EditModelQuery {
 	 * Determine whether the position is at node's edge. When the offset is at
 	 * edge, it is in the leftmost or rightmost offset of node's region.
 	 * 
-	 * @param node
-	 * @param offset
-	 * @param direction
-	 * @return
+	 * @param position 
+	 * @param forward 
+	 * @return true if at edge
 	 */
-	public boolean atEdge(IDOMPosition position, boolean forward) {
+	boolean atEdge(IDOMPosition position, boolean forward) {
 		Node node = position.getContainerNode();
 		int offset = position.getOffset();
 		if (forward) {
@@ -295,9 +303,9 @@ public class EditModelQuery {
 	 * 
 	 * @param node
 	 * @param forward
-	 * @return
+	 * @return the node
 	 */
-	public Node getNeighbor(Node node, boolean forward) {
+	Node getNeighbor(Node node, boolean forward) {
 		if (forward) {
 			return getNextNeighbor(node);
 		}
@@ -309,9 +317,9 @@ public class EditModelQuery {
 	 * 
 	 * @param node
 	 * @param root
-	 * @return
+	 * @return the node
 	 */
-	public Node getPreviousNeighbor(Node node, Node root) {
+	Node getPreviousNeighbor(Node node, Node root) {
 		if (!EditValidateUtil.validNode(node)) {
 			return null;
 		}
@@ -330,9 +338,9 @@ public class EditModelQuery {
 	 * 
 	 * @param node
 	 * @param root
-	 * @return
+	 * @return the node
 	 */
-	public Node getNextNeighbor(Node node, Node root) {
+	Node getNextNeighbor(Node node, Node root) {
 		if (!EditValidateUtil.validNode(node)) {
 			return null;
 		}
@@ -353,9 +361,9 @@ public class EditModelQuery {
 	 * @param node
 	 * @param forward
 	 * @param root
-	 * @return
+	 * @return the node
 	 */
-	public Node getNeighbor(Node node, boolean forward, Node root) {
+	 Node getNeighbor(Node node, boolean forward, Node root) {
 		Assert.isTrue(root != null);
 		if (forward) {
 			return getNextNeighbor(node, root);
@@ -369,9 +377,9 @@ public class EditModelQuery {
 	 * 
 	 * @param node
 	 * @param forward
-	 * @return
+	 * @return the node
 	 */
-	public Node getLeafNeighbor(Node node, boolean forward) {
+	Node getLeafNeighbor(Node node, boolean forward) {
 		if (node == null) {
 			return null;
 		}
@@ -387,9 +395,9 @@ public class EditModelQuery {
 	 * @param node
 	 * @param childIndex
 	 * @param forward
-	 * @return
+	 * @return the node
 	 */
-	public Node getLeafNeighbor(Node node, int childIndex, boolean forward) {
+	 Node getLeafNeighbor(Node node, int childIndex, boolean forward) {
 		if (node == null) {
 			return null;
 		}
@@ -409,9 +417,9 @@ public class EditModelQuery {
 	 * @param parent
 	 * @param childIndex
 	 * @param forward
-	 * @return
+	 * @return the node
 	 */
-	public Node getNeighbor(Node parent, int childIndex, boolean forward) {
+	 Node getNeighbor(Node parent, int childIndex, boolean forward) {
 		if (!EditValidateUtil.validNode(parent)) {
 			return null;
 		}
@@ -442,10 +450,9 @@ public class EditModelQuery {
 	 * 
 	 * @param model
 	 * @param textSelection
-	 * @param lookForChildren
-	 * @return
+	 * @return the node
 	 */
-	public static boolean isSame(IStructuredModel model,
+	 static boolean isSame(IStructuredModel model,
 			TextSelection textSelection) {
 		if (model != null && textSelection != null) {
 			int t1 = textSelection.getOffset();
@@ -461,9 +468,9 @@ public class EditModelQuery {
 	 * @param model
 	 * @param range
 	 * @param textSelection
-	 * @return
+	 * @return true if same
 	 */
-	public static boolean isSame(IStructuredModel model, DesignRange range,
+	static boolean isSame(IStructuredModel model, DesignRange range,
 			TextSelection textSelection) {
 		if (model != null && range != null && textSelection != null) {
 			int t1 = textSelection.getOffset();
@@ -484,11 +491,10 @@ public class EditModelQuery {
 	/**
 	 * To see whether the selection is single point.
 	 * 
-	 * @param model
 	 * @param textSelection
-	 * @return
+	 * @return true if same point
 	 */
-	public static boolean isSamePoint(TextSelection textSelection) {
+	 static boolean isSamePoint(TextSelection textSelection) {
 		return textSelection.getLength() == 0;
 	}
 
@@ -497,7 +503,7 @@ public class EditModelQuery {
 	 * 
 	 * @param p1
 	 * @param p2
-	 * @return
+	 * @return true if same
 	 */
 	public static boolean isSame(IDOMPosition p1, IDOMPosition p2) {
 		if (p1 == p2
@@ -513,17 +519,26 @@ public class EditModelQuery {
 	 * location.
 	 * 
 	 * @param range
-	 * @return
+	 * @return true if is same
 	 */
 	public static boolean isSame(DOMRange range) {
 		EditValidateUtil.validRange(range);
 		return isSame(range.getStartPosition(), range.getEndPosition());
 	}
 
+	/**
+	 * @param range
+	 * @return true if same
+	 */
 	public static boolean isSame(DesignRange range) {
 		return isSame(range.getStartPosition(), range.getEndPosition());
 	}
 
+	/**
+	 * @param p1
+	 * @param p2
+	 * @return true if same
+	 */
 	public static boolean isSame(DesignPosition p1, DesignPosition p2) {
 		if (p1 == p2) {
 			return true;
@@ -535,7 +550,12 @@ public class EditModelQuery {
 		return false;
 	}
 
-	public boolean isWithinSameText(IDOMPosition p1, IDOMPosition p2) {
+	/**
+	 * @param p1
+	 * @param p2
+	 * @return true if p1 and p2 are within same text node
+	 */
+	final boolean isWithinSameText(IDOMPosition p1, IDOMPosition p2) {
 		if (p1 == null || p2 == null) {
 			return false;
 		}
@@ -547,7 +567,7 @@ public class EditModelQuery {
 	 * Get the node absolute start location in its residing IStructuredModel.
 	 * 
 	 * @param p
-	 * @return
+	 * @return the location
 	 */
 	public static int getIndexedRegionLocation(IDOMPosition p) {
 		if (!EditValidateUtil.validPosition(p)) {
@@ -586,12 +606,13 @@ public class EditModelQuery {
 	/**
 	 * To determine whether the position is at the edge of a node. TODO: temp
 	 * func for later combination
+	 * @param nodePos 
 	 * 
-	 * @param node
 	 * @param position
-	 * @return
+	 * @param left 
+	 * @return true if linked
 	 */
-	public boolean isLinked(IDOMPosition nodePos, IDOMPosition position,
+	boolean isLinked(IDOMPosition nodePos, IDOMPosition position,
 			boolean left) {
 		int index = getIndexedRegionLocation(position);
 		if (left) {
@@ -619,13 +640,18 @@ public class EditModelQuery {
 	 * 
 	 * @param location
 	 * @param node
-	 * @return
+	 * @return true if at edge
 	 */
-	public boolean isAtNodeNameEdge(int location, Node node, int posType) {
+	boolean isAtNodeNameEdge(int location, Node node, int posType) {
 		int start = getNodeEndNameStartIndex(node);
 		return location == start;
 	}
 
+	/**
+	 * @param location
+	 * @param node
+	 * @return true if at edge
+	 */
 	public boolean isAtNodeNameEdge(int location, Node node) {
 		return isAtNodeNameEdge(location, node, START_INDEX_BEFORE_TAG)
 				|| isAtNodeNameEdge(location, node, END_INDEX_WITHIN_TAG);
@@ -636,9 +662,9 @@ public class EditModelQuery {
 	 * transparent.
 	 * 
 	 * @param node
-	 * @return
+	 * @return true if transparent text
 	 */
-	public static boolean isTransparentText(Node node) {
+	 public static boolean isTransparentText(Node node) {
 		// should valid non null?
 		Assert.isTrue(node != null);
 		if (node == null || !isText(node)) {
@@ -664,9 +690,9 @@ public class EditModelQuery {
 	 * Get node index in its parent's children.
 	 * 
 	 * @param node
-	 * @return
+	 * @return the node index or -1 if not found
 	 */
-	public static int getNodeIndex(Node node) {
+	 static int getNodeIndex(Node node) {
 		EditValidateUtil.validNode(node);
 		Node parent = node.getParentNode();
 		int index = 0;
@@ -686,9 +712,9 @@ public class EditModelQuery {
 	 * children list.
 	 * 
 	 * @param node
-	 * @return
+	 * @return the index
 	 */
-	public int getSameTypeNodeIndex(Node node) {
+	 public int getSameTypeNodeIndex(Node node) {
 		EditValidateUtil.validNode(node);
 		int i = 0;
 		while (node != null) {
@@ -709,9 +735,9 @@ public class EditModelQuery {
 	 * @param value
 	 * @param position
 	 * @param forward
-	 * @return
+	 * @return the position
 	 */
-	public int getNextConcretePosition(String value, int position,
+	 int getNextConcretePosition(String value, int position,
 			boolean forward) {
 		if (value == null) {
 			return -1;
@@ -743,9 +769,9 @@ public class EditModelQuery {
 	 * 
 	 * @param node1
 	 * @param node2
-	 * @return
+	 * @return the node
 	 */
-	public Node getCommonAncestor(Node node1, Node node2) {
+	 public Node getCommonAncestor(Node node1, Node node2) {
 		if (node1 == null || node2 == null) {
 			return null;
 		}
@@ -764,7 +790,7 @@ public class EditModelQuery {
 	 * 
 	 * @param p1
 	 * @param p2
-	 * @return
+	 * @return the nodeh
 	 */
 	public Node getCommonAncestor(IDOMPosition p1, IDOMPosition p2) {
 		Node n1 = p1.getContainerNode();
@@ -776,9 +802,9 @@ public class EditModelQuery {
 	 * Get lowest ancestor of a 'node' which is block type.
 	 * 
 	 * @param node
-	 * @return
+	 * @return the node
 	 */
-	public Node getBlockAncestor(Node node) {
+	 Node getBlockAncestor(Node node) {
 		if (!EditValidateUtil.validNode(node)) {
 			return null;
 		}
@@ -795,13 +821,17 @@ public class EditModelQuery {
 	 * To see whether a node is block type.
 	 * 
 	 * @param node
-	 * @return
+	 * @return true if is a block node
 	 */
 	public static boolean isBlockNode(Node node) {
 		return !isInline(node);
 	}
 
-	public static boolean isTableCell(Node node) {
+	/**
+	 * @param node
+	 * @return true if is table cell
+	 */
+	static boolean isTableCell(Node node) {
 		if (node instanceof INodeNotifier) {
 			Object adapter = ((INodeNotifier) node)
 					.getAdapterFor(ICSSStyle.class);
@@ -817,8 +847,8 @@ public class EditModelQuery {
 	/**
 	 * To see if a node's display type is inline.
 	 * 
-	 * @param node
-	 * @return
+	 * @param refNode 
+	 * @return true if is inline
 	 */
 	public static boolean isInline(Node refNode) {
 		Node node = refNode;
@@ -846,6 +876,10 @@ public class EditModelQuery {
 		return false;
 	}
 
+	/**
+	 * @param node
+	 * @return true if is list item
+	 */
 	public static boolean isListItem(Node node) {
 		if (node instanceof INodeNotifier) {
 			Object adapter = ((INodeNotifier) node)
@@ -918,7 +952,8 @@ public class EditModelQuery {
 	 * 
 	 * @param name
 	 * @param node
-	 * @return
+	 * @param ignoreCase 
+	 * @return true if is child
 	 */
 	public static boolean isChild(String name, Node node, boolean ignoreCase) {
 		if (node == null) {
@@ -942,7 +977,7 @@ public class EditModelQuery {
 	 * 
 	 * @param ancestor
 	 * @param node
-	 * @return
+	 * @return true if is child
 	 */
 	public static boolean isChild(Node ancestor, Node node) {
 		if (node == null || ancestor == null) {
@@ -968,9 +1003,9 @@ public class EditModelQuery {
 	 * Get next sibling node to position's container node.
 	 * 
 	 * @param position
-	 * @return
+	 * @return the node
 	 */
-	public Node getNextSibling(IDOMPosition position) {
+	Node getNextSibling(IDOMPosition position) {
 		if (position.isText()) {
 			return position.getContainerNode().getNextSibling();
 		}
@@ -981,9 +1016,9 @@ public class EditModelQuery {
 	 * Get previous sibling node to position's container node.
 	 * 
 	 * @param position
-	 * @return
+	 * @return the node
 	 */
-	public Node getPreviousSibling(IDOMPosition position) {
+	Node getPreviousSibling(IDOMPosition position) {
 		if (position.isText()) {
 			return position.getContainerNode().getPreviousSibling();
 		}
@@ -994,9 +1029,9 @@ public class EditModelQuery {
 	 * Get position's container node's parent.
 	 * 
 	 * @param position
-	 * @return
+	 * @return the parent node
 	 */
-	public Node getParent(IDOMPosition position) {
+	Node getParent(IDOMPosition position) {
 		if (position.isText()) {
 			return position.getContainerNode().getParentNode();
 		}
@@ -1008,7 +1043,7 @@ public class EditModelQuery {
 	 * 
 	 * @param node
 	 * @param forward
-	 * @return
+	 * @return the node
 	 */
 	public Node getSibling(Node node, boolean forward) {
 		EditValidateUtil.validNode(node);
@@ -1023,7 +1058,7 @@ public class EditModelQuery {
 	 * 
 	 * @param position
 	 * @param forward
-	 * @return
+	 * @return the node
 	 */
 	public Node getSibling(IDOMPosition position, boolean forward) {
 		if (forward) {
@@ -1037,9 +1072,9 @@ public class EditModelQuery {
 	 * functions for future use.
 	 * 
 	 * @param position
-	 * @return
+	 * @return the size
 	 */
-	public int getSize(IDOMPosition position) {
+	int getSize(IDOMPosition position) {
 		EditValidateUtil.validPosition(position);
 		if (position.isText()) {
 			return ((Text) position.getContainerNode()).getLength();
@@ -1054,7 +1089,7 @@ public class EditModelQuery {
 	 * Valid position and return text, if it contains text node.
 	 * 
 	 * @param position
-	 * @return
+	 * @return the text
 	 */
 	public Text getText(IDOMPosition position) {
 		if (position.isText()) {
@@ -1065,6 +1100,10 @@ public class EditModelQuery {
 		return null;
 	}
 
+	/**
+	 * @param node
+	 * @return the document for  node
+	 */
 	public static Document getDocumentNode(Node node) {
 		if (node != null) {
 			return isDocument(node) ? (Document) node : node.getOwnerDocument();
@@ -1077,9 +1116,9 @@ public class EditModelQuery {
 	 * it is empty, for delete operation, it could be deleted.
 	 * 
 	 * @param node
-	 * @return
+	 * @return true if node empty
 	 */
-	public static boolean isEmptyNode(Node node) {
+	static boolean isEmptyNode(Node node) {
 		if (node.getNodeType() == Node.TEXT_NODE) {
 			return isTransparentText(node);
 		}
@@ -1094,7 +1133,7 @@ public class EditModelQuery {
 	 * To see whther a node is text node.
 	 * 
 	 * @param node
-	 * @return
+	 * @return true if the node is a text node
 	 */
 	public static boolean isText(Node node) {
 		return node != null && node.getNodeType() == Node.TEXT_NODE;
@@ -1104,16 +1143,11 @@ public class EditModelQuery {
 	 * To see whether a node is Document node.
 	 * 
 	 * @param node
-	 * @return
+	 * @return true if the node is a doc node
 	 */
 	public static boolean isDocument(Node node) {
 		return node != null && node.getNodeType() == Node.DOCUMENT_NODE;
 	}
-
-    // TODO: dead?
-//	private static boolean isHead(Node node) {
-//		return node.getNodeName().equalsIgnoreCase(IHTMLConstants.TAG_HEAD);
-//	}
 
 	/**
 	 * Get style from parent node. from first paret 'firstF', we will traverse
@@ -1123,9 +1157,8 @@ public class EditModelQuery {
 	 * 
 	 * @param children
 	 * @param firstF
-	 * @return
 	 */
-	public void assignFather(Vector children, Node firstF) {
+	void assignFather(Vector children, Node firstF) {
 		if (children.size() == 0) {
 			return;
 		}
@@ -1148,9 +1181,9 @@ public class EditModelQuery {
 	 * 
 	 * @param model
 	 * @param pos
-	 * @return
+	 * @return the
 	 */
-	public Object getPosNode(IStructuredModel model, int pos) {
+	IndexedRegion getPosNode(IStructuredModel model, int pos) {
 		IndexedRegion inode = model.getIndexedRegion(pos);
 		return inode;
 	}
@@ -1158,11 +1191,11 @@ public class EditModelQuery {
 	/**
 	 * If the pos is at right edge within container.
 	 * 
-	 * @param model
+	 * @param node
 	 * @param pos
-	 * @return
+	 * @return true is at right edge
 	 */
-	public boolean isAtRightMostWithin(Node node, int pos) {
+	boolean isAtRightMostWithin(Node node, int pos) {
 		return getNodeEndNameStartIndex(node) == pos;
 	}
 
@@ -1173,10 +1206,10 @@ public class EditModelQuery {
 	 * 
 	 * @param container
 	 * @param refNode
-	 * @param forward
-	 * @return
+	 * @param forward  
+	 * @return the dom position
 	 */
-	public IDOMPosition createDomposition(Node container, Node refNode,
+	IDOMPosition createDomposition(Node container, Node refNode,
 			boolean forward) {
 		if (refNode == null) {
 			if (forward && container.hasChildNodes()) {
@@ -1193,7 +1226,12 @@ public class EditModelQuery {
         return new DOMPosition(container, index);
 	}
 
-	public static DesignRange convertToDesignRange(IStructuredModel fModel,
+	/**
+	 * @param fModel
+	 * @param textSelection
+	 * @return the design range
+	 */
+	static DesignRange convertToDesignRange(IStructuredModel fModel,
 			TextSelection textSelection) {
 		int start = textSelection.getOffset();
 		int end = textSelection.getLength() + start;
@@ -1223,9 +1261,10 @@ public class EditModelQuery {
 	 * otherwize, simply create position pointed to container's children list's
 	 * edge.
 	 * 
-	 * @param container
+	 * @param model
 	 * @param position
-	 * @return
+	 * @param adjust 
+	 * @return the dom position
 	 */
 	public IDOMPosition createDomposition(IDOMModel model, int position,
 			boolean adjust) {
@@ -1238,16 +1277,14 @@ public class EditModelQuery {
 	 * otherwize, simply create position pointed to container's children list's
 	 * edge.
 	 * 
-	 * @param container
+	 * @param model
 	 * @param position
-	 * @return
+	 * @param adjust 
+	 * @return the dom position
 	 */
 	public IDOMPosition createDomposition1(IDOMModel model, int position,
 			boolean adjust) {
 		try {
-            // TODO: never read
-//			IMovementMediator validator = new InlineEditingNavigationMediator(
-//					new ActionData(ActionData.INLINE_EDIT, null));
 			// get the container
 			Object object = getPosNode(model, position);
 			if (object == null && position > 0) {
@@ -1301,7 +1338,7 @@ public class EditModelQuery {
 	 * Calculate node's Indexed length in model.
 	 * 
 	 * @param node
-	 * @return
+	 * @return the node length
 	 */
 	public static int getNodeLenth(Node node) {
 		if (node != null
@@ -1317,7 +1354,7 @@ public class EditModelQuery {
 	 * indicated by '|'
 	 * 
 	 * @param node
-	 * @return
+	 * @return the start index
 	 */
 	public static int getNodeStartIndex(Node node) {
 		if (EditValidateUtil.validNode(node) && node instanceof IndexedRegion) {
@@ -1331,7 +1368,7 @@ public class EditModelQuery {
 	 * indicated by '|'
 	 * 
 	 * @param node
-	 * @return
+	 * @return the end index
 	 */
 	public static int getNodeEndIndex(Node node) {
 		if (EditValidateUtil.validNode(node) && node instanceof IndexedRegion) {
@@ -1343,10 +1380,11 @@ public class EditModelQuery {
 	/**
 	 * Get node at indexed position.
 	 * 
+	 * @param model 
 	 * @param position
-	 * @return
+	 * @return the node at position
 	 */
-	public static Node getNodeAt(IStructuredModel model, int position) {
+	static Node getNodeAt(IStructuredModel model, int position) {
 		try {
 			IndexedRegion region = model.getIndexedRegion(position);
 			if (region instanceof Node) {
@@ -1365,7 +1403,7 @@ public class EditModelQuery {
 	 * the position is indicated by '|'
 	 * 
 	 * @param node
-	 * @return
+	 * @return the index
 	 */
 	public static int getNodeStartNameEndIndex(Node node) {
 		if (isText(node)) {
@@ -1399,7 +1437,7 @@ public class EditModelQuery {
 	 * to pair with <a>, the function return -1.
 	 * 
 	 * @param node
-	 * @return
+	 * @return the start index
 	 */
 	public static int getNodeEndNameStartIndex(Node node) {
 		if (isText(node)) {
@@ -1426,7 +1464,7 @@ public class EditModelQuery {
 	 * To see if a node is <a/>style.
 	 * 
 	 * @param node
-	 * @return
+	 * @return the single region node
 	 */
 	public boolean isSingleRegionNode(Node node) {
 		if (getNodeEndNameStartIndex(node) == getNodeEndIndex(node)
@@ -1440,9 +1478,9 @@ public class EditModelQuery {
 	 * To see if a node has child that is not transparent child only.
 	 * 
 	 * @param node
-	 * @return
+	 * @return true if node has transparent children
 	 */
-	public boolean hasNonTransparentChild(Node node) {
+	boolean hasNonTransparentChild(Node node) {
         NodeList children = node.getChildNodes();
         for (int i = 0, n = children.getLength(); i < n; i++) {
         	Object child = children.item(i);
@@ -1461,7 +1499,8 @@ public class EditModelQuery {
 	 * To see if a node has child that is not transparent child only.
 	 * 
 	 * @param node
-	 * @return
+	 * @param excludes 
+	 * @return true if has transparent child
 	 */
 	public boolean hasNonTransparentChild(Node node, String[] excludes) {
 		if (!node.hasChildNodes()) {
@@ -1486,7 +1525,7 @@ public class EditModelQuery {
 	 * To see whether tag has whitespace char.
 	 * 
 	 * @param node
-	 * @return
+	 * @return true if has whitespace neighbor
 	 */
 	public boolean hasWhitespaceNeighbor(Node node) {
 		node = getNeighbor(node, true);
@@ -1500,7 +1539,7 @@ public class EditModelQuery {
 
 	/**
 	 * @param host
-	 * @return
+	 * @return true if host is a widget
 	 */
 	public static boolean isWidget(Object host) {
 		boolean result = false;
@@ -1525,15 +1564,22 @@ public class EditModelQuery {
 	 * To combind whitespace chars, only one whitespace string should be create.
 	 * 
 	 * @param node
-	 * @return
+	 * @return true if node is  redundant whitespace
 	 */
-	public boolean isRedundantWightspaces(Node node) {
+	boolean isRedundantWightspaces(Node node) {
 		if (isTransparentText(node) && hasWhitespaceNeighbor(node)) {
 			return true;
 		}
         return false;
 	}
 
+	/**
+	 * @param node
+	 * @param names
+	 * @param ignoreCase
+	 * @return true if node has ancestors in the name list
+	 * TODO: bad practice
+	 */
 	public static boolean hasAncestor(Node node, String names[],
 			boolean ignoreCase) {
 		Assert.isTrue(names != null);
@@ -1553,7 +1599,7 @@ public class EditModelQuery {
 	 * @param node
 	 * @param name
 	 * @param ignoreCase
-	 * @return
+	 * @return true if node has the named ancestor
 	 */
 	public static boolean hasAncestor(Node node, String name, boolean ignoreCase) {
 		Assert.isTrue(name != null);
@@ -1572,9 +1618,9 @@ public class EditModelQuery {
 	 * To see if 'node' has direct ancestors that has names listed in 'name[]'
 	 * 
 	 * @param node
-	 * @param name
+	 * @param top
 	 * @param ignoreCase
-	 * @return
+	 * @return the list of ancestors
 	 */
 	public static List getAncestors(Node node, String top, boolean ignoreCase) {
 		List result = new ArrayList();
@@ -1598,7 +1644,6 @@ public class EditModelQuery {
 	 * 
 	 * @param old
 	 * @param newNode
-	 * @return
 	 */
 	public static void copyChildren(Node old, Node newNode) {
 		Node child = old.getFirstChild();
@@ -1614,7 +1659,11 @@ public class EditModelQuery {
 		}
 	}
 
-	public static boolean isElement(Node node) {
+	/**
+	 * @param node
+	 * @return true if node is an element
+	 */
+	private static boolean isElement(Node node) {
 		return node.getNodeType() == Node.ELEMENT_NODE;
 	}
 
@@ -1624,10 +1673,10 @@ public class EditModelQuery {
 	 * 
 	 * @param ancestor
 	 * @param childrenNames
-	 * @param maxLevelToSearch:
+	 * @param maxLevelToSearch
 	 *            the max level from ancestor to the offspring in family tree.
 	 * @param ignoreCase
-	 * @return
+	 * @return the node
 	 */
 	public static Node getChild(Node ancestor, String childrenNames[],
 			int maxLevelToSearch, boolean ignoreCase) {
@@ -1660,12 +1709,12 @@ public class EditModelQuery {
 	 * 
 	 * @param ancestor
 	 * @param childrenNames
-	 * @param maxLevelToSearch:
+	 * @param maxLevelToSearch
 	 *            the max level from ancestor to the offspring in family tree.
 	 * @param ignoreCase
-	 * @return
+	 * @return the node
 	 */
-	public static Node getChildDeferredNode(Node ancestor,
+	static Node getChildDeferredNode(Node ancestor,
 			String childrenNames[], int maxLevelToSearch, boolean ignoreCase) {
 		if (ancestor == null || maxLevelToSearch < 0) {
 			return null;
@@ -1688,6 +1737,10 @@ public class EditModelQuery {
 		return null;
 	}
 
+	/**
+	 * @param node
+	 * @return if has tranparent node only
+	 */
 	public static boolean hasTransparentNodeOnly(Node node) {
 		NodeList children = node.getChildNodes();
 		for (int i = 0, n = children.getLength(); i < n; i++) {
@@ -1698,6 +1751,12 @@ public class EditModelQuery {
 		return true;
 	}
 
+	/**
+	 * @param name
+	 * @param node
+	 * @param ignoreCase
+	 * @return the node
+	 */
 	public static Node getParent(String name, Node node, boolean ignoreCase) {
 		if (node == null) {
 			return null;
@@ -1749,6 +1808,12 @@ public class EditModelQuery {
 		}
 	}
 
+	/**
+	 * @param tags
+	 * @param node
+	 * @param ignoreCase
+	 * @return the true if contains item
+	 */
 	public static boolean containItem(String[] tags, Node node,
 			boolean ignoreCase) {
 		if (ignoreCase) {

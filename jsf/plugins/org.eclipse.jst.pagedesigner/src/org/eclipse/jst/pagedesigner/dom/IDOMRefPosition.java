@@ -24,7 +24,7 @@ import org.w3c.dom.Node;
 public interface IDOMRefPosition extends IDOMPosition {
 	/**
 	 * 
-	 * @return
+	 * @return the reference (wrapped) node
 	 */
 	public Node getReferenceNode();
 }

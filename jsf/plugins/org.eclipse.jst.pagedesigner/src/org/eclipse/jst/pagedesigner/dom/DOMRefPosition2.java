@@ -26,8 +26,8 @@ public class DOMRefPosition2 implements IDOMRefPosition {
 	boolean _last;
 
 	/**
-	 * @param replacement
-	 * @param _last2
+	 * @param parent 
+	 * @param last 
 	 */
 	public DOMRefPosition2(Node parent, boolean last) {
 		_parentNode = parent;

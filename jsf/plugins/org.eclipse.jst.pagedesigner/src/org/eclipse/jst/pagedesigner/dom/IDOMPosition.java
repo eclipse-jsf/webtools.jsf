@@ -29,18 +29,33 @@ public interface IDOMPosition {
 	 * @param forward
 	 *            if true, same as getNextSiblingNode(), if false, same as
 	 *            getPreviousSiblingNode
-	 * @return
+	 * @return the sibling
 	 */
 	public Node getSibling(boolean forward);
 
+	/**
+	 * @return the next sibling node
+	 */
 	public Node getNextSiblingNode();
 
+	/**
+	 * @return the previous sibling node
+	 */
 	public Node getPreviousSiblingNode();
 
+	/**
+	 * @return the container node
+	 */
 	public Node getContainerNode();
 
+	/**
+	 * @return the offset
+	 */
 	public int getOffset();
 
+	/**
+	 * @return true if is text
+	 */
 	public boolean isText();
 
 	/**
@@ -52,7 +67,7 @@ public interface IDOMPosition {
 	 * 
 	 * @param original
 	 * @param replacement
-	 * @return
+	 * @return the dom position
 	 */
 	public IDOMPosition handleReplacement(Node original, Node replacement);
 }

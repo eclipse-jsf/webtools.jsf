@@ -28,6 +28,10 @@ import org.w3c.dom.Text;
  * @author mengbo
  */
 public class DOMPositionHelper {
+	/**
+	 * @param position
+	 * @return the design position
+	 */
 	public static DesignPosition toDesignRefPosition(DOMRefPosition position) {
 		Node node = position.getReferenceNode();
 		do {
@@ -89,7 +93,7 @@ public class DOMPositionHelper {
 	 * pos.
 	 * 
 	 * @param position
-	 * @return
+	 * @return the design position
 	 */
 	public static DesignPosition toDesignPosition1(IDOMPosition position) {
 		if (position instanceof DOMRefPosition) {
@@ -145,7 +149,7 @@ public class DOMPositionHelper {
 	 * convert a DesignPosition into DOMPosition.
 	 * 
 	 * @param position
-	 * @return
+	 * @return the dom position
 	 */
 	public static IDOMPosition toDOMRefPosition(DesignRefPosition position) {
 		// ok, it is not text.
@@ -163,7 +167,7 @@ public class DOMPositionHelper {
 	 * convert a DesignPosition into DOMPosition.
 	 * 
 	 * @param position
-	 * @return
+	 * @return the dom position
 	 */
 	public static IDOMPosition toDOMPosition(DesignPosition position) {
 		if (!EditValidateUtil.validPosition(position)) {
@@ -238,7 +242,7 @@ public class DOMPositionHelper {
 	 * Remove all the content in the range. And return the new position.
 	 * 
 	 * @param range
-	 * @return
+	 * @return the dom position
 	 */
 	public static IDOMPosition removeRange(DOMRange range) {
 		boolean ordered = range.isOrdered();
@@ -255,7 +259,7 @@ public class DOMPositionHelper {
 	 * try to merge the position in adjacent text node (if it is not already in)
 	 * 
 	 * @param position
-	 * @return
+	 * @return the dom position
 	 */
 	public static IDOMPosition mergeIntoText(IDOMPosition position) {
 		if (position.getContainerNode() instanceof Text)
@@ -275,7 +279,7 @@ public class DOMPositionHelper {
 	 * @param displayData
 	 * @param nodeData
 	 * @param offset
-	 * @return
+	 * @return the offset
 	 */
 	// FIXME: this method is still buggy
 	public static int displayOffsetToTextDataOffset(String displayData,
@@ -326,10 +330,10 @@ public class DOMPositionHelper {
 	}
 
 	/**
-	 * @param textData
+	 * @param nodeData 
 	 * @param displayData
 	 * @param offset
-	 * @return
+	 * @return the offset
 	 */
 	// FIXME: this method is still buggy
 	public static int textDataOffsetToDisplayOffset(String nodeData,

@@ -28,7 +28,7 @@ import org.w3c.dom.Text;
  * 
  * @author mengbo
  */
-public class EditValidateUtil {
+public final class EditValidateUtil {
 	private static final Logger _logger = PDPlugin
 			.getLogger(EditValidateUtil.class);
 
@@ -40,7 +40,7 @@ public class EditValidateUtil {
 	 * A valid position means container node, offset are all valid.
 	 * 
 	 * @param position
-	 * @return
+	 * @return true if the position is valid
 	 */
 	public static boolean validPosition(IDOMPosition position) {
 		try {
@@ -77,6 +77,10 @@ public class EditValidateUtil {
 		}
 	}
 
+	/**
+	 * @param position
+	 * @return true if position is valid
+	 */
 	public static boolean validPosition(DesignPosition position) {
 		try {
 			boolean result = true;
@@ -117,7 +121,7 @@ public class EditValidateUtil {
 	 * Valid node is TextNode and it's valid node.
 	 * 
 	 * @param node
-	 * @return
+	 * @return true if node is valid
 	 */
 	public static boolean validText(Node node) {
 		try {
@@ -146,7 +150,7 @@ public class EditValidateUtil {
 	 * A valid node is resided in the model tree
 	 * 
 	 * @param node
-	 * @return
+	 * @return true if node is valid
 	 */
 	public static boolean validNode(Node node) {
 		try {
@@ -177,7 +181,7 @@ public class EditValidateUtil {
 	 * util, it should be checked by some edit valid helper.
 	 * 
 	 * @param range
-	 * @return
+	 * @return true if range is valid
 	 */
 	public static boolean validRange(DOMRange range) {
 		try {
@@ -209,6 +213,11 @@ public class EditValidateUtil {
 		}
 	}
 
+	/**
+	 * @param text
+	 * @param index
+	 * @return true if the index is valid
+	 */
 	public static boolean validStringIndex(Node text, int index) {
 		try {
 			Assert.isTrue(index >= 0 && ((Text) text).getLength() >= index);
@@ -229,6 +238,12 @@ public class EditValidateUtil {
 		}
 	}
 
+	/**
+	 * @param text
+	 * @param index
+	 * @param offset
+	 * @return true if the index offset is valid
+	 */
 	public static boolean validStringIndexOffset(Node text, int index,
 			int offset) {
 		try {
@@ -252,8 +267,8 @@ public class EditValidateUtil {
 		}
 	}
 
-	public static void dumpPosition(String message, IDOMPosition position,
-			boolean forward) {
+//	private static void dumpPosition(String message, IDOMPosition position,
+//			boolean forward) {
 		// for future internal debug
 		// message(message);
 		// _logger.debug("vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv");
@@ -300,60 +315,45 @@ public class EditValidateUtil {
 		// }
 		// }
 		// _logger.debug("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
-	}
+//	}
 	
-    // TODO: dead?
-//	private static int getContainerLength(Node node) {
-//		if (node.getNodeType() == Node.TEXT_NODE) {
-//			return ((Text) node).getLength();
-//		} else {
-//			if (node.hasChildNodes()) {
-//				return node.getChildNodes().getLength();
-//			} else {
-//				return 0;
-//			}
-//		}
-//	}
-
-    //TODO: dead?
-//	private static void message(String text) {
-//		// internal debug
-//		_logger.info("+++++ message:" + text);
-//	}
-
+	/**
+	 * @param pos
+	 * @param forward
+	 * @return true if the position if vallid for editing relative to forward (true) or backward  (false)
+	 */
 	public static boolean isValidForEditing(IDOMPosition pos, boolean forward) {
-//		try {
-			if (pos == null) {
-				return false;
-			}
-			if (pos.isText()) {
-				return true;
-			}
-            Node container = pos.getContainerNode();
-            // only head can't be edited
-            if (EditModelQuery.isChild(IHTMLConstants.TAG_HEAD, container,
-            		true)) {
-            	return false;
-            }
-            Node sibling = EditModelQuery.getInstance().getSibling(pos,
-            		forward);
-            if (sibling != null) {
-            	if (EditModelQuery.isText(sibling)) {
-            		return true;
-            	}
-            	Assert.isTrue(sibling.getLocalName() != null);
-            	if (EditModelQuery.UNREMOVEBLE_TAGS.contains(sibling
-            			.getLocalName().toLowerCase())) {
-            		return false;
-            	}
-            }
-            return true;
-        // TODO: not sure what was being caught here
-//		} catch (Exception e) {
-//			return false;
-//		}
+		if (pos == null) {
+			return false;
+		}
+		if (pos.isText()) {
+			return true;
+		}
+        Node container = pos.getContainerNode();
+        // only head can't be edited
+        if (EditModelQuery.isChild(IHTMLConstants.TAG_HEAD, container,
+        		true)) {
+        	return false;
+        }
+        Node sibling = EditModelQuery.getInstance().getSibling(pos,
+        		forward);
+        if (sibling != null) {
+        	if (EditModelQuery.isText(sibling)) {
+        		return true;
+        	}
+        	Assert.isTrue(sibling.getLocalName() != null);
+        	if (EditModelQuery.UNREMOVEBLE_TAGS.contains(sibling
+        			.getLocalName().toLowerCase())) {
+        		return false;
+        	}
+        }
+        return true;
 	}
 
+	/**
+	 * @param node
+	 * @return true if node is valid for editing
+	 */
 	public static boolean isValidForEditing(Node node) {
 		if (EditModelQuery.isChild(IHTMLConstants.TAG_HEAD, node, true)) {
 			return false;
@@ -361,6 +361,10 @@ public class EditValidateUtil {
 		return true;
 	}
 
+	private EditValidateUtil()
+	{
+	    // do nothing
+	}
 	// Reserved for inner use.
 	//
 	// private static void errorNotice()
