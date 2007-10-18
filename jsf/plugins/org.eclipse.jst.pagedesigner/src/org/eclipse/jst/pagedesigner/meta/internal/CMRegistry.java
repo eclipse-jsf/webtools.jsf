@@ -172,7 +172,7 @@ public class CMRegistry implements ICMRegistry {
 			ElementDescReader reader = new ElementDescReader(url);
 			reader.readElements(map);
 		} catch (Exception e) {
-			_log.error("Error loading " + fileName + ": " + e.getMessage());
+			_log.error("Error loading: "+fileName, e);
 		}
 	}
 
