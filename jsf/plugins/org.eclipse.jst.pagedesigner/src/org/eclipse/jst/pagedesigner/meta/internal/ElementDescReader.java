@@ -80,7 +80,7 @@ public class ElementDescReader {
 		Document doc = null;
 		try
 		{
-			this._url.openStream();
+			stream = this._url.openStream();
 			doc = builder.parse(stream);
 		}
 		finally
