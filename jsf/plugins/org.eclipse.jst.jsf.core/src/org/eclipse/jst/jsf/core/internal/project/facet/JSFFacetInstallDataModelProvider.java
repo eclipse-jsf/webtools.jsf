@@ -261,6 +261,9 @@ public class JSFFacetInstallDataModelProvider extends
 
 	private IProject getProject(){
 		String projName = (String)getProperty(FACET_PROJECT_NAME);
+		if (projName == null || "".equals(projName))
+			return null;
+		
 		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(projName);
 		return project;
 	}
@@ -285,13 +288,14 @@ public class JSFFacetInstallDataModelProvider extends
 		return OK_STATUS;
 	}
 	
-	private IPath getProjectPath() {
-		String projName = (String)getProperty(FACET_PROJECT_NAME);
-		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(projName);
-		if (project.exists()){
+	private IPath getProjectPath() {		
+		IProject project = getProject();
+		if (project == null)
+			return null;
+		else if (project.exists())
 			return project.getLocation();
-		} 
 		
+		String projName = (String)getProperty(FACET_PROJECT_NAME);
 		IDataModel projModel = (IDataModel)getProperty(MASTER_PROJECT_DM);
 		if (projModel.getBooleanProperty(IProjectCreationPropertiesNew.USE_DEFAULT_LOCATION)){
 			return new Path(projModel.getStringProperty(IProjectCreationPropertiesNew.PROJECT_LOCATION)).append(projName);
