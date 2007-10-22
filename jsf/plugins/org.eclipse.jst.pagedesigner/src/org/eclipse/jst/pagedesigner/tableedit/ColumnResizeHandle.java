@@ -22,6 +22,8 @@ public class ColumnResizeHandle extends TableSideResizeHandle {
 	int _columnIndex;
 
 	/**
+	 * @param owner 
+	 * @param index 
 	 * 
 	 */
 	public ColumnResizeHandle(GraphicalEditPart owner, int index) {
@@ -29,6 +31,9 @@ public class ColumnResizeHandle extends TableSideResizeHandle {
 		_columnIndex = index;
 	}
 
+	/**
+	 * @return the column index
+	 */
 	public int getColumnIndex() {
 		return _columnIndex;
 	}

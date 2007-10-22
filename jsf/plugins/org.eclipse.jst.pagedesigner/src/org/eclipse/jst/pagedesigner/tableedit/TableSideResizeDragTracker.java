@@ -37,6 +37,8 @@ public class TableSideResizeDragTracker extends DragEditPartsTracker {
 
 	/**
 	 * @param sourceEditPart
+	 * @param isrow 
+	 * @param index 
 	 */
 	public TableSideResizeDragTracker(EditPart sourceEditPart, boolean isrow,
 			int index) {
@@ -127,7 +129,7 @@ public class TableSideResizeDragTracker extends DragEditPartsTracker {
 		}
 	}
 
-	protected MarqueeRectangleFigure getMarqueeRectangleFigure() {
+	private MarqueeRectangleFigure getMarqueeRectangleFigure() {
 		if (this._marqueeFigure == null) {
 			this._marqueeFigure = new MarqueeRectangleFigure();
 			addFeedback(this._marqueeFigure);

@@ -15,8 +15,14 @@ package org.eclipse.jst.pagedesigner.tableedit;
  * @author mengbo
  * @version 1.5
  */
-public interface TableEditConst {
+/*package*/ interface TableEditConst {
+	/**
+	 * height constant
+	 */
 	public static final int HEIGHT = 10;
 
+	/**
+	 * width constant
+	 */
 	public static final int WIDTH = 10;
 }

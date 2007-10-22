@@ -22,7 +22,8 @@ public class RowResizeHandle extends TableSideResizeHandle {
 	int _rowIndex;
 
 	/**
-	 * 
+	 * @param owner 
+	 * @param index 
 	 */
 	public RowResizeHandle(GraphicalEditPart owner, int index) {
 		super(owner, true, index);
@@ -30,6 +31,9 @@ public class RowResizeHandle extends TableSideResizeHandle {
 		_rowIndex = index;
 	}
 
+	/**
+	 * @return the row index
+	 */
 	public int getRowIndex() {
 		return _rowIndex;
 	}

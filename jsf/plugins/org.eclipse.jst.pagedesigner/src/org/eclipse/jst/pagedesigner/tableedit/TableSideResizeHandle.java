@@ -26,6 +26,9 @@ public class TableSideResizeHandle extends AbstractHandle {
 	private int _index;
 
 	/**
+	 * @param owner 
+	 * @param isrow 
+	 * @param index 
 	 * 
 	 */
 	public TableSideResizeHandle(GraphicalEditPart owner, boolean isrow,

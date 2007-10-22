@@ -16,10 +16,9 @@ package org.eclipse.jst.pagedesigner.tableedit;
  * @version 1.5
  */
 public class TableRowColumnDeleteRequest extends TableRowColumnRequest {
-	public static final String TABLE_ROWCOLUMN_DELETE = "Table RowColumn Delete";
+	private static final String TABLE_ROWCOLUMN_DELETE = "Table RowColumn Delete";
 
 	/**
-	 * @param type
 	 * @param row
 	 * @param index
 	 */

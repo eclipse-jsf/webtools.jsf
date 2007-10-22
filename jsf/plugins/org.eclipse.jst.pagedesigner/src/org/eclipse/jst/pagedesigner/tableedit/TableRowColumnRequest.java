@@ -24,6 +24,8 @@ public class TableRowColumnRequest extends Request {
 
 	/**
 	 * @param type
+	 * @param row 
+	 * @param index 
 	 */
 	public TableRowColumnRequest(Object type, boolean row, int index) {
 		super(type);
@@ -31,18 +33,30 @@ public class TableRowColumnRequest extends Request {
 		this._index = index;
 	}
 
+	/**
+	 * @return the index
+	 */
 	public int getIndex() {
 		return _index;
 	}
 
+	/**
+	 * @param index
+	 */
 	public void setIndex(int index) {
 		this._index = index;
 	}
 
+	/**
+	 * @return true if is row
+	 */
 	public boolean isRow() {
 		return _row;
 	}
 
+	/**
+	 * @param row
+	 */
 	public void setRow(boolean row) {
 		this._row = row;
 	}

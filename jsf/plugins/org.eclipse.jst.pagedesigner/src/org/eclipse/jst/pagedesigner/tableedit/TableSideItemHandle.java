@@ -29,6 +29,9 @@ public abstract class TableSideItemHandle extends AbstractHandle {
 	private int _index;
 
 	/**
+	 * @param owner 
+	 * @param isRow 
+	 * @param index 
 	 * 
 	 */
 	public TableSideItemHandle(GraphicalEditPart owner, boolean isRow, int index) {
@@ -68,10 +71,16 @@ public abstract class TableSideItemHandle extends AbstractHandle {
 		return new TableSideItemDragTracker(getOwner(), _isRow, _index);
 	}
 
+	/**
+	 * @return the index
+	 */
 	public int getIndex() {
 		return _index;
 	}
 
+	/**
+	 * @return true if is row
+	 */
 	public boolean isRow() {
 		return _isRow;
 	}

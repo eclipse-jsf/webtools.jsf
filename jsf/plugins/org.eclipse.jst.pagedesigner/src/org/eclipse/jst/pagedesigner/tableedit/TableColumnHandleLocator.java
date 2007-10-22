@@ -30,7 +30,7 @@ public class TableColumnHandleLocator extends MoveHandleLocator {
 	GraphicalEditPart _tablePart;
 
 	/**
-	 * @param ref
+	 * @param tablePart 
 	 */
 	public TableColumnHandleLocator(GraphicalEditPart tablePart) {
 		super(tablePart.getFigure());

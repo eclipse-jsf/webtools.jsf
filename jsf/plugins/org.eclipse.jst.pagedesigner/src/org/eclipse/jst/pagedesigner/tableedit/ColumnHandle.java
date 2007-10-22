@@ -21,7 +21,6 @@ public class ColumnHandle extends TableSideItemHandle {
 
 	/**
 	 * @param owner
-	 * @param isRow
 	 * @param index
 	 */
 	public ColumnHandle(GraphicalEditPart owner, int index) {

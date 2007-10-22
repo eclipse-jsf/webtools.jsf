@@ -24,6 +24,10 @@ public class InsertRowColumnAction extends Action {
 
 	/**
 	 * @param text
+	 * @param tablePart 
+	 * @param index 
+	 * @param isrow 
+	 * @param isbefore 
 	 */
 	public InsertRowColumnAction(String text, EditPart tablePart, int index,
 			boolean isrow, boolean isbefore) {

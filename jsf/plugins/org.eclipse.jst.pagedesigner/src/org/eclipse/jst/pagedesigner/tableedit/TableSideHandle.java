@@ -41,10 +41,16 @@ public class TableSideHandle extends AbstractHandle {
 		return null;
 	}
 
+	/**
+	 * @return the edit part
+	 */
 	public GraphicalEditPart getTableEditPart() {
 		return this.getOwner();
 	}
 
+	/**
+	 * @return the adapter
+	 */
 	public ITableEditAdapter getTableEditAdapter() {
 		return TableEditHelper.getTableEditAdapter(getOwner());
 	}

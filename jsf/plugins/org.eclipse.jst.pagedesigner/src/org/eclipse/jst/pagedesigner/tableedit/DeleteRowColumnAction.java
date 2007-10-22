@@ -24,6 +24,9 @@ public class DeleteRowColumnAction extends Action {
 
 	/**
 	 * @param text
+	 * @param tablePart 
+	 * @param index 
+	 * @param isrow 
 	 */
 	public DeleteRowColumnAction(String text, EditPart tablePart, int index,
 			boolean isrow) {

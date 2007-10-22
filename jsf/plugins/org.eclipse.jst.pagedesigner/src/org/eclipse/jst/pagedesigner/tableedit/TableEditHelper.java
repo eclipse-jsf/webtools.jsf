@@ -26,7 +26,7 @@ public class TableEditHelper {
 	 * This method will return null if the editpart is not a table.
 	 * 
 	 * @param tablePart
-	 * @return
+	 * @return the adapter
 	 */
 	public static ITableEditAdapter getTableEditAdapter(
 			GraphicalEditPart tablePart) {

@@ -16,11 +16,17 @@ package org.eclipse.jst.pagedesigner.tableedit;
  * @version 1.5
  */
 public class TableInsertRequest extends TableRowColumnRequest {
-	public static final String TABLE_INSERT_REQUEST = "Table Insert";
+	/**
+	 * 
+	 */
+	private static final String TABLE_INSERT_REQUEST = "Table Insert";
 
 	boolean _before;
 
 	/**
+	 * @param row 
+	 * @param index 
+	 * @param before 
 	 * 
 	 */
 	public TableInsertRequest(boolean row, int index, boolean before) {
@@ -28,10 +34,16 @@ public class TableInsertRequest extends TableRowColumnRequest {
 		this._before = before;
 	}
 
+	/**
+	 * @return true if is before
+	 */
 	public boolean isBefore() {
 		return _before;
 	}
 
+	/**
+	 * @param before
+	 */
 	public void setBefore(boolean before) {
 		this._before = before;
 	}

@@ -31,7 +31,7 @@ public class TableRowHandleLocator extends MoveHandleLocator {
 	GraphicalEditPart _tablePart;
 
 	/**
-	 * @param ref
+	 * @param tablePart
 	 */
 	public TableRowHandleLocator(GraphicalEditPart tablePart) {
 		super(tablePart.getFigure());

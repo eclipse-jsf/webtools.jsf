@@ -18,7 +18,7 @@ import org.eclipse.gef.Request;
  * @version 1.5
  */
 public class TableResizeRequest extends Request {
-	public static final String TABLE_RESIZE_REQ = "Table Resize";
+	private static final String TABLE_RESIZE_REQ = "Table Resize";
 
 	private boolean _row;
 
@@ -27,7 +27,8 @@ public class TableResizeRequest extends Request {
 	private int _delta;
 
 	/**
-	 * 
+	 * @param isrow 
+	 * @param index 
 	 */
 	public TableResizeRequest(boolean isrow, int index) {
 		super(TABLE_RESIZE_REQ);
@@ -35,26 +36,44 @@ public class TableResizeRequest extends Request {
 		this._index = index;
 	}
 
+	/**
+	 * @return the index
+	 */
 	public int getIndex() {
 		return _index;
 	}
 
+	/**
+	 * @param index
+	 */
 	public void setIndex(int index) {
 		this._index = index;
 	}
 
+	/**
+	 * @return true if is row
+	 */
 	public boolean isRow() {
 		return _row;
 	}
 
+	/**
+	 * @param row
+	 */
 	public void setRow(boolean row) {
 		this._row = row;
 	}
 
+	/**
+	 * @return the delta
+	 */
 	public int getDelta() {
 		return _delta;
 	}
 
+	/**
+	 * @param delta
+	 */
 	public void setDelta(int delta) {
 		this._delta = delta;
 	}
