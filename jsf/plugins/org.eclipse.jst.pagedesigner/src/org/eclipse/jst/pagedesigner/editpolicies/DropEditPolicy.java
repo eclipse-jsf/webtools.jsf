@@ -33,9 +33,13 @@ import org.eclipse.jst.pagedesigner.viewer.DefaultDropLocationStrategy;
 import org.eclipse.jst.pagedesigner.viewer.DesignPosition;
 import org.eclipse.jst.pagedesigner.viewer.IDropLocationStrategy;
 
+/**
+ * @author cbateman
+ *
+ */
 public abstract class DropEditPolicy extends GraphicalEditPolicy 
 {
-    protected List        _feedbackFigures;
+    private List        _feedbackFigures;
 
     /**
      * @param r
@@ -48,8 +52,16 @@ public abstract class DropEditPolicy extends GraphicalEditPolicy
         return null;
     }
     
+    /**
+     * @param r
+     * @return the appropriate design position for the drop request
+     */
     protected abstract DesignPosition findPosition(DropRequest r);
     
+    /**
+     * @param data
+     * @return a default validation mediator to be used if nothing custom is provided
+     */
     protected abstract IPositionMediator createDefaultDropChildValidator(DropData data);
     
     /**
@@ -75,6 +87,10 @@ public abstract class DropEditPolicy extends GraphicalEditPolicy
         return mediator;
     }
     
+    /**
+     * @param request
+     * @return the data about the drop request
+     */
     protected DropData createDropData(DropRequest request)
     {
         if (request instanceof GroupRequest)
@@ -112,6 +128,10 @@ public abstract class DropEditPolicy extends GraphicalEditPolicy
         return null;
     }
     
+    /**
+     * @param r
+     * @return the drop location strategy
+     */
     protected final IDropLocationStrategy createDropLocationStrategy(DropRequest r)
     {
         DropData dropData = createDropData(r);

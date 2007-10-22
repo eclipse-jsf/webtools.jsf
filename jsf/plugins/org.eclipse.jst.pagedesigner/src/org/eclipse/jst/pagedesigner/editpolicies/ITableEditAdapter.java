@@ -16,57 +16,69 @@ package org.eclipse.jst.pagedesigner.editpolicies;
  * @version 1.5
  */
 public interface ITableEditAdapter {
+	/**
+	 * @return the column count
+	 */
 	public int getColumnCount();
 
+	/**
+	 * @return the row count
+	 */
 	public int getRowCount();
 
+	/**
+	 * @param atPosition
+	 */
 	public void insertColumn(int atPosition);
 
+	/**
+	 * @param rowPosition
+	 */
 	public void insertRow(int rowPosition);
 
 	/**
 	 * @param columnIndex
-	 * @return
+	 * @return the starting point for resize
 	 */
 	public int getColumnResizeStart(int columnIndex);
 
 	/**
-	 * @return
+	 * @return the resize width
 	 */
 	public int getColumnResizeWidth();
 
 	/**
 	 * @param columnIndex
-	 * @return
+	 * @return column start
 	 */
 	public int getColumnStart(int columnIndex);
 
 	/**
 	 * @param columnIndex
-	 * @return
+	 * @return the column width
 	 */
 	public int getColumnWidth(int columnIndex);
 
 	/**
 	 * @param rowIndex
-	 * @return
+	 * @return the row start
 	 */
 	public int getRowStart(int rowIndex);
 
 	/**
 	 * @param rowIndex
-	 * @return
+	 * @return the row height
 	 */
 	public int getRowHeight(int rowIndex);
 
 	/**
 	 * @param rowIndex
-	 * @return
+	 * @return starting point of the row resize
 	 */
 	public int getRowResizeStart(int rowIndex);
 
 	/**
-	 * @return
+	 * @return the row resize width
 	 */
 	public int getRowResizeWidth();
 }

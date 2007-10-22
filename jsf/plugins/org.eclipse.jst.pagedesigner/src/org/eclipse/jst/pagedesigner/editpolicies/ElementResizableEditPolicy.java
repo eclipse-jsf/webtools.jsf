@@ -223,7 +223,7 @@ public class ElementResizableEditPolicy extends ResizableEditPolicy implements I
 
 	/**
 	 * @param request
-	 * @return
+	 * @return true if we should be using object mode for this request
 	 */
 	public boolean shouldUseObjectMode(Request request) {
 		ElementEditPart part = (ElementEditPart) this.getHost();
@@ -365,9 +365,10 @@ public class ElementResizableEditPolicy extends ResizableEditPolicy implements I
     /**
 	 * child class could override this method.
 	 * 
+     * @param element 
 	 * @param width
 	 * @param height
-	 * @return
+	 * @return the resize command or null  if none
 	 */
 	protected Command getResizeCommand(IDOMElement element, int width,
 			int height) {
@@ -464,10 +465,14 @@ public class ElementResizableEditPolicy extends ResizableEditPolicy implements I
         return null;
     }
 
+    /**
+     * by default, return null
+     * sub-classes should override to customize
+     * @param request
+     * @return the selectin tracker
+     */
     protected DragTracker getSelectionTracker(LocationRequest request)
     {
-        // by default, return null
-        // sub-classes should override to customize
         return null;
     }
     

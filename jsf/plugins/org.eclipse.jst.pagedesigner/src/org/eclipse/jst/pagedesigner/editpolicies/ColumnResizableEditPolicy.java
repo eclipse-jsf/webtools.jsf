@@ -92,6 +92,11 @@ public class ColumnResizableEditPolicy extends ElementResizableEditPolicy {
     private class ColumnHandleLocator extends CornerRelativeHandleLocator {
 		private GraphicalEditPart editPart;
 
+		/**
+		 * @param editPart
+		 * @param reference
+		 * @param location
+		 */
 		public ColumnHandleLocator(GraphicalEditPart editPart, IFigure reference, int location) {
             super(reference, location);
 			this.editPart = editPart;
@@ -119,7 +124,7 @@ public class ColumnResizableEditPolicy extends ElementResizableEditPolicy {
 		 * {@link PositionConstants} used as a convenient and readable way to
 		 * set both the relativeX and relativeY values.
 		 * 
-		 * @param reference
+		 * @param editPart
 		 *            the reference figure
 		 * @param location
 		 *            one of NORTH, NORTH_EAST, etc.
@@ -170,6 +175,9 @@ public class ColumnResizableEditPolicy extends ElementResizableEditPolicy {
     private class ColumnBorderHandleLocator implements Locator {
         private GraphicalEditPart editPart;
 
+        /**
+         * @param editPart
+         */
         public ColumnBorderHandleLocator(GraphicalEditPart editPart) {
             this.editPart = editPart;
         }
@@ -181,6 +189,10 @@ public class ColumnResizableEditPolicy extends ElementResizableEditPolicy {
     
     private static class MyMoveHandle extends SquareHandle
     {
+        /**
+         * @param owner
+         * @param loc
+         */
         public MyMoveHandle(GraphicalEditPart owner, Locator loc) {
             super(owner, loc);
             setCursor(SharedCursors.SIZEALL);

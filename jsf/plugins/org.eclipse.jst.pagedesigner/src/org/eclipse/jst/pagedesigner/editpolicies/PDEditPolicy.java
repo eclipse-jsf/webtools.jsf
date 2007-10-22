@@ -15,5 +15,8 @@ package org.eclipse.jst.pagedesigner.editpolicies;
  * @author mengbo
  */
 public interface PDEditPolicy {
+	/**
+	 * the edit policy for PD Drop
+	 */
 	String PDDROP_ROLE = "PDDropEditPolicy"; //$NON-NLS-1$
 }

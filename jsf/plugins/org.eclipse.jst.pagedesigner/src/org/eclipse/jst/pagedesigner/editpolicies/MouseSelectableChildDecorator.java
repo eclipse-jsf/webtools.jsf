@@ -33,6 +33,12 @@ import org.eclipse.jst.pagedesigner.parts.ElementEditPart;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 
+/**
+ * A child decorator that supports mouse selection
+ * 
+ * @author cbateman
+ *
+ */
 class MouseSelectableChildDecorator extends NonVisualChildDecorator
 {
     // no visual or affordance showing
@@ -56,9 +62,21 @@ class MouseSelectableChildDecorator extends NonVisualChildDecorator
     // the menu bar has primary selection
     private static final int           STATE_HANDLE_MENU_BAR_SELECTED = 6;
     
+    /**
+     * An event indicating the host received hover
+     */
     public static final int           EVENT_HOST_HOVER_RECEIVED = 31;
+    /**
+     * An event indicating the host lost hover
+     */
     public static final int           EVENT_HOST_HOVER_LOST = 32;
+    /**
+     * An event indicating the host received selection
+     */
     public static final int           EVENT_HOST_SELECTION_RECEIVED = 33;
+    /**
+     * An event indicating the host lost selection
+     */
     public static final int           EVENT_HOST_SELECTION_LOST = 34;
     private static final int          EVENT_HANDLE_HOVER_RECEIVED = 35;
     private static final int          EVENT_HANDLE_HOVER_LOST = 36;
@@ -164,7 +182,7 @@ class MouseSelectableChildDecorator extends NonVisualChildDecorator
     }
 
     /**
-     * @param newState
+     * @param event
      */
     public void updateState(int event)
     {
@@ -172,6 +190,9 @@ class MouseSelectableChildDecorator extends NonVisualChildDecorator
         updateVisual(oldState);
     }
     
+    /**
+     * @param oldState
+     */
     protected void updateVisual(int oldState)
     {
         // overriding all other considerations is whether the menu bar even has
@@ -264,6 +285,9 @@ class MouseSelectableChildDecorator extends NonVisualChildDecorator
         setPreferredSize(new Dimension(12, 12));
     }
     
+    /**
+     * 
+     */
     public void dispose()
     {
         hide(_elementMenuBar, false);
@@ -325,6 +349,10 @@ class MouseSelectableChildDecorator extends NonVisualChildDecorator
     {
         private int _curState = STATE_START;
         
+        /**
+         * @param event
+         * @return execute a state machine transition on event
+         */
         public int doTransition(int event)
         {
             final int     oldState = _curState;
@@ -430,11 +458,18 @@ class MouseSelectableChildDecorator extends NonVisualChildDecorator
             return oldState;
         }
 
+        /**
+         * @return true if the  menu should be showing in the  current state
+         */
         public boolean isMenuShowing()
         {
             return isMenuShowing(_curState);
         }
 
+        /**
+         * @param state
+         * @return true if state is one in which the menu should be showing
+         */ 
         public boolean isMenuShowing(int state)
         {
             return _curState == STATE_HANDLE_MENU_BAR_SHOWING 

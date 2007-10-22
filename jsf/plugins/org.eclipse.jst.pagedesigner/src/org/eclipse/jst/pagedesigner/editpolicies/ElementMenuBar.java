@@ -32,6 +32,12 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jst.pagedesigner.parts.ElementEditPart;
 import org.eclipse.jst.pagedesigner.parts.NonVisualComponentEditPart;
 
+/**
+ * A menu bar for a specific element edit part
+ * 
+ * @author cbateman
+ *
+ */
 public class ElementMenuBar extends Figure implements ISelectionProvider, ISelectionChangedListener
 {
     private ElementEditPart   _hostPart;
@@ -43,6 +49,9 @@ public class ElementMenuBar extends Figure implements ISelectionProvider, ISelec
     private List                    _selectionListeners;
     private IStructuredSelection    _selection;
 
+    /**
+     * @param hostPart
+     */
     public ElementMenuBar(ElementEditPart hostPart)
     {
         hostPart.getViewer().addSelectionChangedListener(this);
@@ -53,11 +62,17 @@ public class ElementMenuBar extends Figure implements ISelectionProvider, ISelec
         setLayoutManager(layout);
     }
 
+    /**
+     * @return true if there are child parts in the menu
+     */
     public boolean hasChildParts()
     {
         return _childParts != null &&_childParts.size() > 0;
     }
     
+    /**
+     * 
+     */
     public void dispose()
     {
         _hostPart.getViewer().removeSelectionChangedListener(this);
@@ -76,6 +91,9 @@ public class ElementMenuBar extends Figure implements ISelectionProvider, ISelec
         _selection = null;
     }
     
+    /**
+     * @param editpart
+     */
     public void addNonVisualChild(NonVisualComponentEditPart editpart)
     {
         add(editpart.getFigure());
@@ -100,6 +118,9 @@ public class ElementMenuBar extends Figure implements ISelectionProvider, ISelec
         }
     }
 
+    /**
+     * @return true if a member of the menu bar has edit part focus
+     */
     public boolean hasEditPartFocus()
     {
         for (Iterator it = getChildParts().iterator(); it.hasNext();)

@@ -56,7 +56,7 @@ public class ColumnHelper {
         return bounds;
     }
     
-	public static Rectangle getColumnBounds(GraphicalEditPart editPart,
+	static Rectangle getColumnBounds(GraphicalEditPart editPart,
 			IFigure target) {
 	    Rectangle bounds = getAdjustedColumnBoundingRectangle(editPart);
         target.translateToRelative(bounds);

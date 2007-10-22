@@ -26,7 +26,7 @@ public class MoveSupport {
 	 * Check whether the move operation only drags a single node.
 	 * 
 	 * @param request
-	 * @return
+	 * @return true if the request affects a single node
 	 */
 	public static boolean isSingleNode(ChangeBoundsRequest request) {
 		List parts = request.getEditParts();
@@ -41,7 +41,7 @@ public class MoveSupport {
 	 * this method must be called after isSingleNode
 	 * 
 	 * @param request
-	 * @return
+	 * @return the dragged part
 	 */
 	public static NodeEditPart getDraggedPart(ChangeBoundsRequest request) {
 		List parts = request.getEditParts();
@@ -53,7 +53,7 @@ public class MoveSupport {
 	 * this method must be called after isSingleNode
 	 * 
 	 * @param request
-	 * @return
+	 * @return the dragged node
 	 */
 	public static Node getDraggedNode(ChangeBoundsRequest request) {
 		return getDraggedPart(request).getIDOMNode();

@@ -27,6 +27,11 @@ import org.eclipse.jst.pagedesigner.parts.NonVisualComponentEditPart;
 import org.eclipse.swt.graphics.Color;
 import org.w3c.dom.Element;
 
+/**
+ * An edit policy for non visual child edit parts
+ * @author cbateman
+ *
+ */
 public class NonVisualChildGraphicalEditPolicy extends NonResizableEditPolicy 
 {
     // the number of pixels to offset the top left of tooltop feedback
@@ -35,8 +40,8 @@ public class NonVisualChildGraphicalEditPolicy extends NonResizableEditPolicy
     private final static Color HOVER_FEEDBACK_COLOR = ColorConstants.blue;
     
     
-    protected BasicLabelToolTip   _toolTip;
-    protected boolean             _showLabelFeedback;
+    private BasicLabelToolTip   _toolTip;
+    private boolean             _showLabelFeedback;
     private RectangleFigure _mouseOverBorder;
 
     public void showTargetFeedback(Request request) {
@@ -58,7 +63,10 @@ public class NonVisualChildGraphicalEditPolicy extends NonResizableEditPolicy
         removeMouseOverBorder();
     }
 
-    protected void showHoverFeedback(LocationRequest request)
+    /**
+     * @param request
+     */
+    private void showHoverFeedback(LocationRequest request)
     {
         if (_showLabelFeedback)
         {
@@ -76,13 +84,13 @@ public class NonVisualChildGraphicalEditPolicy extends NonResizableEditPolicy
         }
     }
     
-    protected String getTooltipText() {
+    private String getTooltipText() {
         Element element = (Element) ((NonVisualComponentEditPart)getHost()).getDOMNode();
         StringBuffer text = new StringBuffer(element.getTagName());
         return text.toString();
     }
     
-    protected void addMouseOverBorder()
+    private void addMouseOverBorder()
     {
         if (_mouseOverBorder == null)
         {
@@ -103,7 +111,10 @@ public class NonVisualChildGraphicalEditPolicy extends NonResizableEditPolicy
         _mouseOverBorder.setBounds(r);
     }
     
-    protected void removeMouseOverBorder()
+    /**
+     * 
+     */
+    private void removeMouseOverBorder()
     {
         if (_mouseOverBorder != null) {
             removeFeedback(_mouseOverBorder);
@@ -116,7 +127,10 @@ public class NonVisualChildGraphicalEditPolicy extends NonResizableEditPolicy
         return Collections.EMPTY_LIST;  
     }
 
-    protected void removeToolTipLabel()
+    /**
+     * 
+     */
+    private void removeToolTipLabel()
     {
         if (_toolTip != null) {
             removeFeedback(_toolTip);

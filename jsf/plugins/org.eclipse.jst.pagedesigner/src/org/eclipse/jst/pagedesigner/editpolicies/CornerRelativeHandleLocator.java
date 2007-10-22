@@ -20,13 +20,22 @@ import org.eclipse.draw2d.geometry.PrecisionRectangle;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.handles.RelativeHandleLocator;
 
+/**
+ * A locator for handles that attach to the corner of square figures
+ * @author cbateman
+ *
+ */
 class CornerRelativeHandleLocator extends RelativeHandleLocator
 {
-    protected double relativeX = 0;
-    protected double relativeY = 0;
-    protected double offsetXMultiplier = 0;
-    protected double offsetYMultiplier = 0;
+    private double relativeX = 0;
+    private double relativeY = 0;
+    private double offsetXMultiplier = 0;
+    private double offsetYMultiplier = 0;
     
+    /**
+     * @param reference
+     * @param location
+     */
     public CornerRelativeHandleLocator(IFigure reference, int location) {
         super(reference, location);
         
@@ -94,6 +103,10 @@ class CornerRelativeHandleLocator extends RelativeHandleLocator
         return targetBounds;
     }
     
+    /**
+     * @param relocateFigure
+     * @return the new target dimensions
+     */
     protected Dimension getNewTargetSize(IFigure relocateFigure)
     {
         return relocateFigure.getPreferredSize();

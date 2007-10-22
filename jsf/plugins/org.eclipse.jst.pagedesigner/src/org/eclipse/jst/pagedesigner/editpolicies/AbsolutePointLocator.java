@@ -16,6 +16,10 @@ import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 
+/**
+ * @author cbateman
+ *
+ */
 public class AbsolutePointLocator implements Locator 
 {
     private static AbsolutePointLocator   INSTANCE;
@@ -26,6 +30,9 @@ public class AbsolutePointLocator implements Locator
     private int    _yOffset = 0;
     private IFigure _intersectFigure;
     
+    /**
+     * @return the singleton instance
+     */
     public synchronized static AbsolutePointLocator getInstance()
     {
         if (INSTANCE == null)
@@ -64,6 +71,8 @@ public class AbsolutePointLocator implements Locator
      * to the reference point before final re-location.  If point is null
      * then the reference is set to (0,0)
      * @param point
+     * @param xoffset 
+     * @param yoffset 
      */
     public void setReferencePoint(Point point, int xoffset, int yoffset)
     {

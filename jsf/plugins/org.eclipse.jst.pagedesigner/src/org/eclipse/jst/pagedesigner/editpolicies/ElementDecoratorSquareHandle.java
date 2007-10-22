@@ -20,13 +20,27 @@ import org.eclipse.gef.handles.SquareHandle;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Cursor;
 
+/**
+ * A square handle for element decoration
+ * @author cbateman
+ *
+ */
 public class ElementDecoratorSquareHandle extends SquareHandle {
 
     
+    /**
+     * @param owner
+     * @param loc
+     * @param c
+     */
     public ElementDecoratorSquareHandle(GraphicalEditPart owner, Locator loc,
             Cursor c) {
         super(owner, loc, c);
     }
+    /**
+     * @param owner
+     * @param loc
+     */
     public ElementDecoratorSquareHandle(GraphicalEditPart owner, Locator loc) {
         super(owner, loc);
     }
@@ -42,6 +56,9 @@ public class ElementDecoratorSquareHandle extends SquareHandle {
         return ColorConstants.white;
     }
 
+    /**
+     * @return the transparency alpha channel (0-255)
+     */
     protected int getAlpha()
     {
         return 255;

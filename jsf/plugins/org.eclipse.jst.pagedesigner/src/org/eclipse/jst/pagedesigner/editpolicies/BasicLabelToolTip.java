@@ -18,23 +18,41 @@ import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.swt.graphics.Image;
 
+/**
+ * A tool tip based on a label
+ * @author cbateman
+ *
+ */
 public class BasicLabelToolTip extends Label
 {
+    /**
+     * @param i
+     */
     public BasicLabelToolTip(Image i) {
         super(i);
         initialize();
     }
 
+    /**
+     * @param s
+     * @param i
+     */
     public BasicLabelToolTip(String s, Image i) {
         super(s, i);
         initialize();
     }
 
+    /**
+     * @param s
+     */
     public BasicLabelToolTip(String s) {
         super(s);
         initialize();
     }
 
+    /**
+     * 
+     */
     protected void initialize()
     {
         setOpaque(true);

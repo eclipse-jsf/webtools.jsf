@@ -24,6 +24,9 @@ import org.w3c.dom.Element;
 public class JSFDropEditPolicy extends GraphicalEditPolicy {
 	String _attrName;
 
+	/**
+	 * @param attrname
+	 */
 	public JSFDropEditPolicy(String attrname) {
 		_attrName = attrname;
 	}

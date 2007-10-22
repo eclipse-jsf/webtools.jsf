@@ -23,6 +23,7 @@ import org.eclipse.swt.graphics.Cursor;
 public interface IEnhancedSelectionEditPolicy 
 {
     /**
+     * @param mouseLocation 
      * @return the cursor that should be displayed when a selection tool
      * enters the hit box (mouses over) of an edit part but no selection
      * or drag operations have occurred yet.  Null indicates the caller should
@@ -31,6 +32,7 @@ public interface IEnhancedSelectionEditPolicy
     Cursor getSelectionToolCursor(Point mouseLocation);
     
     /**
+     * @param request 
      * @param mouseLocator
      * @return a drag tracker to be used when the mouse moves over a certain
      * location and mouse state is in initial state or null if the policy
