@@ -22,7 +22,7 @@ import org.eclipse.jst.pagedesigner.properties.ITabbedPropertiesConstants;
 public class CategoryNameComparator implements Comparator {
 	static HashSet _pairs = new HashSet();
 
-	private static CategoryNameComparator _instance = new CategoryNameComparator();
+	private final static CategoryNameComparator _instance = new CategoryNameComparator();
 
 	static class Pair {
 		String s1;
@@ -47,6 +47,10 @@ public class CategoryNameComparator implements Comparator {
 		}
 	}
 
+	/**
+	 * @param s1
+	 * @param s2
+	 */
 	public static void addPair(String s1, String s2) {
 		_pairs.add(new Pair(s1, s2));
 	}
@@ -71,6 +75,9 @@ public class CategoryNameComparator implements Comparator {
 		return 1;
 	}
 
+	/**
+	 * @return the instance
+	 */
 	public static CategoryNameComparator getInstance() {
 		return _instance;
 	}

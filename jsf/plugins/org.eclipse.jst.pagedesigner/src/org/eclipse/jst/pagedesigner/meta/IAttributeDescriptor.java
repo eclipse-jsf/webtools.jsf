@@ -18,20 +18,35 @@ import java.util.Map;
  * @author mengbo
  */
 public interface IAttributeDescriptor {
-	public static final String PARAMETER_SUFFIX = "suffix";
+	/**
+	 * suffix
+	 */
+	final String PARAMETER_SUFFIX = "suffix";
 
-	public static final String PARAMETER_STYLE = "style";
+	/**
+	 * style
+	 */
+	final String PARAMETER_STYLE = "style";
 
-	public static final String PARAMETER_SUPER_TYPE = "superType";
+	/**
+	 * super type
+	 */
+	final String PARAMETER_SUPER_TYPE = "superType";
 
-	public static final String PARAMETER_SEPARATOR = "separator";
+	/**
+	 * separator
+	 */
+	final String PARAMETER_SEPARATOR = "separator";
 
-	public static final String PARAMETER_DEFAULT = "default";
+	/**
+	 * default
+	 */
+	final String PARAMETER_DEFAULT = "default";
 
 	/**
 	 * get the name of the attribute.
 	 * 
-	 * @return
+	 * @return the attribute name
 	 */
 	public String getAttributeName();
 
@@ -47,14 +62,14 @@ public interface IAttributeDescriptor {
 	/**
 	 * return the category for this attribute.
 	 * 
-	 * @return
+	 * @return the category
 	 */
 	public String getCategory();
 
 	/**
 	 * value type is used to construct the cell editor.
 	 * 
-	 * @return
+	 * @return the value type
 	 */
 	public String getValueType();
 
@@ -70,6 +85,10 @@ public interface IAttributeDescriptor {
 	 */
 	public String getTypeParameter();
 
+	/**
+	 * @param name
+	 * @return the parameter
+	 */
 	public String getParameterByName(String name);
 
 	/**
@@ -78,28 +97,28 @@ public interface IAttributeDescriptor {
 	 * 
 	 * The Map will be (key->display string)
 	 * 
-	 * @return
+	 * @return the options
 	 */
 	public Map getOptions();
 
 	/**
 	 * Gets the default value of Options
 	 * 
-	 * @return
+	 * @return the default value
 	 */
 	public String getDefaultValue();
 
 	/**
 	 * A human readable string as the label of the attribute.
 	 * 
-	 * @return
+	 * @return the label
 	 */
 	public String getLabelString();
 
 	/**
 	 * Indicate whether the attribute is required.
 	 * 
-	 * @return
+	 * @return true if is required
 	 */
 	public boolean isRequired();
 }

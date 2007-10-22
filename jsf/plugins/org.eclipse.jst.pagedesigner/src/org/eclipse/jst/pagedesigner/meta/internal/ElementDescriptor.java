@@ -72,14 +72,23 @@ public class ElementDescriptor implements IElementDescriptor {
 		return null;
 	}
 
+	/**
+	 * @param namespaceURI
+	 */
 	public void setNamespaceURI(String namespaceURI) {
 		this._namespaceURI = namespaceURI;
 	}
 
+	/**
+	 * @param tagName
+	 */
 	public void setTagName(String tagName) {
 		this._tagName = tagName;
 	}
 
+	/**
+	 * @param attrs
+	 */
 	public void setAttributeDescriptors(List attrs) {
 		if (attrs == null || attrs.isEmpty()) {
 			_attrs = new IAttributeDescriptor[0];
@@ -116,6 +125,9 @@ public class ElementDescriptor implements IElementDescriptor {
 		return _helpContextID;
 	}
 
+	/**
+	 * @param contextid
+	 */
 	public void setHelpContextID(String contextid) {
 		_helpContextID = contextid;
 	}

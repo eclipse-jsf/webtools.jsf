@@ -50,6 +50,9 @@ public class CellEditorFactoryRegistry {
 
 	private List _defaultFactories = new ArrayList();
 
+	/**
+	 * @return the singleton factory instance
+	 */
 	public static CellEditorFactoryRegistry getInstance() {
 		if (_instance == null) {
 			_instance = new CellEditorFactoryRegistry();
@@ -68,6 +71,9 @@ public class CellEditorFactoryRegistry {
 		addCellEditorFactory(new CellEditorFactory());
 	}
 
+	/**
+	 * @param fac
+	 */
 	public void addCellEditorFactory(IAttributeCellEditorFactory fac) {
 		String[] types = fac.getSupportedValueTypes();
 		if (types == null || types.length == 0) {
@@ -79,6 +85,12 @@ public class CellEditorFactoryRegistry {
 		}
 	}
 
+	/**
+	 * @param parent
+	 * @param attr
+	 * @param element
+	 * @return the cell editor
+	 */
 	public CellEditor createCellEditor(Composite parent,
 			IAttributeDescriptor attr, Element element) {
 		String type = attr.getValueType();
@@ -106,8 +118,6 @@ public class CellEditorFactoryRegistry {
 	/**
 	 * 
 	 * @param attr
-	 * @param context
-	 * @param ele
 	 * @return will never be null
 	 */
 	public DialogField createDialogField(IAttributeDescriptor attr) {
@@ -146,9 +156,7 @@ public class CellEditorFactoryRegistry {
 
 	/**
 	 * @param attr
-	 * @param context
-	 * @param ele
-	 * @return
+	 * @return the dialog field
 	 */
 	public DialogField createTextDialogField(IAttributeDescriptor attr) {
 		StringDialogField field = new StringDialogField();
@@ -161,7 +169,7 @@ public class CellEditorFactoryRegistry {
 	/**
 	 * This is NOT a product method. It should only be used by testing code.
 	 * 
-	 * @return
+	 * @return the list of all value types
 	 */
 	public String[] getAllValueTypes() {
 		Set valueTypes = new HashSet();

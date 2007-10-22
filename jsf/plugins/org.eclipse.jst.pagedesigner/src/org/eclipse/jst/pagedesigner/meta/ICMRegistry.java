@@ -28,7 +28,7 @@ public interface ICMRegistry {
 	 * 
 	 * @param uri
 	 * @param tagname
-	 * @return
+	 * @return the element descriptor
 	 */
 	public IElementDescriptor getElementDescriptor(String uri, String tagname);
 }

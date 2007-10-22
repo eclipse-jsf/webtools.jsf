@@ -48,18 +48,30 @@ public class AttributeDescriptor implements IAttributeDescriptor {
 		super();
 	}
 
+	/**
+	 * @param attrName
+	 */
 	public AttributeDescriptor(String attrName) {
 		this.setAttributeName(attrName);
 	}
 
+	/**
+	 * @param attributeName
+	 */
 	public void setAttributeName(String attributeName) {
 		this._attributeName = attributeName;
 	}
 
+	/**
+	 * @param category
+	 */
 	public void setCategory(String category) {
 		this._category = category;
 	}
 
+	/**
+	 * @param valueType
+	 */
 	public void setValueType(String valueType) {
 		this._valueType = valueType;
 	}
@@ -109,10 +121,17 @@ public class AttributeDescriptor implements IAttributeDescriptor {
 		return _options;
 	}
 
+	/**
+	 * @param description
+	 */
 	public void setDescription(String description) {
 		_description = description;
 	}
 
+	/**
+	 * @param map
+	 * @param defaultValue
+	 */
 	public void setOptions(Map map, String defaultValue) {
 		_options = map;
 		_defaultValue = defaultValue;
@@ -190,6 +209,9 @@ public class AttributeDescriptor implements IAttributeDescriptor {
 		return _defaultValue;
 	}
 
+	/**
+	 * @param value
+	 */
 	public void setDefaultValue(String value) {
 		_defaultValue = value;
 	}
@@ -198,6 +220,9 @@ public class AttributeDescriptor implements IAttributeDescriptor {
 		return _required;
 	}
 
+	/**
+	 * @param required
+	 */
 	public void setRequired(boolean required) {
 		this._required = required;
 	}

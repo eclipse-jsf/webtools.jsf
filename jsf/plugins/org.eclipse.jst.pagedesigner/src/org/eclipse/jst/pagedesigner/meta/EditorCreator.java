@@ -26,7 +26,15 @@ public abstract class EditorCreator {
 
 	static IBindingHandler _defaultHandler = new BindingHandlerDelegate();
 
-	public static interface CellEditorHolder {
+	/**
+	 * 
+	 *
+	 */
+	public interface CellEditorHolder {
+		/**
+		 * @param parent
+		 * @return the new cell editor
+		 */
 		public CellEditor createCellEditor(Composite parent);
 	}
 
@@ -35,7 +43,7 @@ public abstract class EditorCreator {
 	 * descriptor.
 	 * 
 	 * @param attr
-	 * @return
+	 * @return the dialog field
 	 */
 	public abstract DialogField createDialogField(IAttributeDescriptor attr);
 
@@ -51,7 +59,7 @@ public abstract class EditorCreator {
 	 * @param attr
 	 * @param handler
 	 *            if null, system default mechanism will be used.
-	 * @return
+	 * @return the dialog field
 	 */
 	public abstract DialogField createDialogFieldWithWrapper(String uri,
 			String tagName, IAttributeDescriptor attr, IBindingHandler handler);
@@ -62,7 +70,7 @@ public abstract class EditorCreator {
 	 * @param parent
 	 * @param attr
 	 * @param element
-	 * @return
+	 * @return the cell editor
 	 */
 	public abstract CellEditor createCellEditor(Composite parent,
 			IAttributeDescriptor attr, IDOMElement element);
@@ -75,7 +83,7 @@ public abstract class EditorCreator {
 	 * @param element
 	 * @param handler
 	 *            if null, system default mechanism will be used.
-	 * @return
+	 * @return the cell editor
 	 */
 	public abstract CellEditor createCellEditorWithWrapper(Composite parent,
 			IAttributeDescriptor attr, IDOMElement element,
@@ -93,12 +101,15 @@ public abstract class EditorCreator {
 	 * @param element
 	 * @param handler
 	 *            if null, system default mechanism will be used.
-	 * @return
+	 * @return the cell editor
 	 */
 	public abstract CellEditor createCellEditorWithWrapper(Composite parent,
 			IAttributeDescriptor attr, CellEditorHolder holder,
 			IDOMElement element, IBindingHandler handler);
 
+	/**
+	 * @return the singleton instance
+	 */
 	public static EditorCreator getInstance() {
 		if (_instance == null) {
 			_instance = new DefaultEditorCreator();
@@ -106,6 +117,9 @@ public abstract class EditorCreator {
 		return _instance;
 	}
 
+	/**
+	 * @return the binding handler
+	 */
 	public IBindingHandler getSystemDefaultBindingHandler() {
 		return _defaultHandler;
 	}

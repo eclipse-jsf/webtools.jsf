@@ -43,7 +43,7 @@ public interface IBindingHandler {
 	 * @param tagName
 	 * @param attr
 	 *            could be null.
-	 * @return
+	 * @return true if is enabled
 	 */
 	public boolean isEnabled(IDOMNode ancester, IDOMElement element,
 			String uri, String tagName, IAttributeDescriptor attr);
@@ -62,9 +62,12 @@ public interface IBindingHandler {
 	/**
 	 * Image used for the small button.
 	 * 
-	 * @return
+	 * @return the image
 	 */
 	public Image getImage();
 
+	/**
+	 * @return the image indicating disablement
+	 */
 	public Image getDisabledImage();
 }

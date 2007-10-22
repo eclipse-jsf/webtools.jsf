@@ -19,24 +19,28 @@ public interface IElementDescriptor {
 	/**
 	 * get the tagname
 	 * 
-	 * @return
+	 * @return the tag name
 	 */
 	public String getTagName();
 
 	/**
 	 * get the namespace URI
 	 * 
-	 * @return
+	 * @return te namespace
 	 */
 	public String getNamespaceURI();
 
 	/**
 	 * get all attribute descriptors
 	 * 
-	 * @return
+	 * @return the attribute descriptors
 	 */
 	public IAttributeDescriptor[] getAttributeDescriptors();
 
+	/**
+	 * @param attributeName
+	 * @return the attribute by name
+	 */
 	public IAttributeDescriptor getAttributeDescriptor(String attributeName);
 
 	/**
@@ -52,7 +56,7 @@ public interface IElementDescriptor {
 	 * &lt;input&gt;. So those attribute descriptor not provided by
 	 * &lt;h:inputText&gt; could still be provided by &lt;input&gt;.
 	 * 
-	 * @return
+	 * @return the reference
 	 */
 	public IElementDescriptor getReference();
 

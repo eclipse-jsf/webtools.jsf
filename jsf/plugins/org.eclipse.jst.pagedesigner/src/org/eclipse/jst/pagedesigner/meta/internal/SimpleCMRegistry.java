@@ -33,6 +33,8 @@ public class SimpleCMRegistry implements ICMRegistry {
 	Map _map = new HashMap();
 
 	/**
+	 * @param uri 
+	 * @param cmFileUrl 
 	 * @throws IOException
 	 * @throws SAXException
 	 * @throws FactoryConfigurationError

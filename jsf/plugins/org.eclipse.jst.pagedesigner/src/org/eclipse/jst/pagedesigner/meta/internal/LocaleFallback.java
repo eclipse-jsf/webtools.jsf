@@ -24,6 +24,10 @@ import java.util.Map;
 public class LocaleFallback {
 	private static Map map = new HashMap();
 
+	/**
+	 * @param locale
+	 * @return the list of local values
+	 */
 	public static synchronized String[] fallBack(Locale locale) {
 		if (map.get(locale) != null) {
 			return (String[]) map.get(locale);
