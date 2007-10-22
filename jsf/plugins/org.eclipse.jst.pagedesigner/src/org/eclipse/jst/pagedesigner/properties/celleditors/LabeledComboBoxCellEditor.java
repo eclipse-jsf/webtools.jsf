@@ -35,6 +35,12 @@ public class LabeledComboBoxCellEditor extends ComboBoxCellEditor {
 
 	private Object[] _values;
 
+	/**
+	 * @param parent
+	 * @param valueLabelMap
+	 * @param style
+	 * @return the new instance
+	 */
 	public static LabeledComboBoxCellEditor newInstance(Composite parent,
 			Map valueLabelMap, int style) {
 		// we'll sort according to label. since that is what being show to user.
@@ -63,7 +69,8 @@ public class LabeledComboBoxCellEditor extends ComboBoxCellEditor {
 
 	/**
 	 * @param parent
-	 * @param items
+	 * @param values 
+	 * @param labels 
 	 */
 	public LabeledComboBoxCellEditor(Composite parent, Object[] values,
 			String[] labels) {
@@ -72,7 +79,8 @@ public class LabeledComboBoxCellEditor extends ComboBoxCellEditor {
 
 	/**
 	 * @param parent
-	 * @param items
+	 * @param values 
+	 * @param labels 
 	 * @param style
 	 */
 	public LabeledComboBoxCellEditor(Composite parent, Object[] values,

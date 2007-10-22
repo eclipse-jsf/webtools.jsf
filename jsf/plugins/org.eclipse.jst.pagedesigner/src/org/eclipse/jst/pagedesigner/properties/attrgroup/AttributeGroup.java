@@ -54,9 +54,9 @@ public class AttributeGroup extends DialogFieldGroup {
 	private IDOMElement _ownerElement;
 
 	/**
-	 * @param pageName
-	 * @param title
-	 * @param titleImage
+	 * @param uri 
+	 * @param tagName 
+	 * @param attrNames 
 	 */
 	public AttributeGroup(String uri, String tagName, String[] attrNames) {
 		this._uri = uri;
@@ -64,12 +64,15 @@ public class AttributeGroup extends DialogFieldGroup {
 		this._attrs = prepareAttributeDescriptors(uri, tagName, attrNames);
 	}
 
+	/**
+	 * @return the tag name
+	 */
 	public String getTagName() {
 		return this._tagName;
 	}
 
 	/**
-	 * @return
+	 * @return the uri
 	 */
 	public String getURI() {
 		return this._uri;
@@ -111,6 +114,10 @@ public class AttributeGroup extends DialogFieldGroup {
 		return attrs;
 	}
 
+	/**
+	 * @param field
+	 * @return the descriptor
+	 */
 	public IAttributeDescriptor getAttributeDescriptor(DialogField field) {
 		Object obj = field.getAttachedData(KEY_ATTR);
 		if (obj instanceof IAttributeDescriptor) {
@@ -180,7 +187,7 @@ public class AttributeGroup extends DialogFieldGroup {
 	 * @param uri
 	 * @param tag
 	 * @param attr
-	 * @return
+	 * @return the listener
 	 */
 	public IDialogFieldApplyListener getDialogFieldApplyListener(String uri,
 			String tag, IAttributeDescriptor attr) {
@@ -193,7 +200,7 @@ public class AttributeGroup extends DialogFieldGroup {
 	 * @param uri
 	 * @param tag
 	 * @param attr
-	 * @return
+	 * @return the listener
 	 */
 	public IDialogFieldChangeListener getDialogFieldChangeListener(String uri,
 			String tag, IAttributeDescriptor attr) {
@@ -222,10 +229,17 @@ public class AttributeGroup extends DialogFieldGroup {
 		}
 	}
 
+	/**
+	 * @return the element
+	 */
 	public IDOMElement getElement() {
 		return _ownerElement;
 	}
 
+	/**
+	 * @param context
+	 * @param owner
+	 */
 	public void setElementContext(IDOMNode context, IDOMElement owner) {
 		initialize();
 		this._ownerElement = owner;
@@ -289,8 +303,8 @@ public class AttributeGroup extends DialogFieldGroup {
 	}
 
 	/**
-	 * @return
-	 */
+	 * @return the number of columns
+	 */ 
 	public int getNumColumns() {
 		int columns = 1;
 		initialize();
@@ -311,7 +325,7 @@ public class AttributeGroup extends DialogFieldGroup {
 	}
 
 	/**
-	 * @return
+	 * @return the dialog fields
 	 */
 	public DialogField[] getDialogFields() {
 		initialize();

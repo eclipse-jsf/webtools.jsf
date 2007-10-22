@@ -40,6 +40,9 @@ public class MyPropertySheetPage extends PropertySheetPage {
 		}
 	}
 
+	/**
+	 * Default constructor
+	 */
 	public MyPropertySheetPage() {
 		super();
 		setSorter(new MySorter());

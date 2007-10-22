@@ -39,6 +39,10 @@ public class AttributePropertySource implements IPropertySource {
 
 	private IPropertySource _innerSource;
 
+	/**
+	 * @param ele
+	 * @param source
+	 */
 	public AttributePropertySource(Element ele, IPropertySource source) {
 		_element = (IDOMElement) ele;
 		_innerSource = source;

@@ -22,11 +22,22 @@ import org.eclipse.jst.jsf.common.ui.internal.utils.StyleCombo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.wst.sse.ui.internal.Logger;
 
+/**
+ * A combo cell editor
+ *
+ */
 public class LabeledStyleComboCellEditor extends StyleComboCellEditor {
 	private boolean _fSettingValue = false;
 
 	private Object[] _values;
 
+	/**
+	 * @param parent
+	 * @param valueLabelMap
+	 * @param defaultValue
+	 * @param style
+	 * @return the new instance
+	 */
 	public static LabeledStyleComboCellEditor newInstance(Composite parent,
 			Map valueLabelMap, String defaultValue, int style) {
 		// we'll sort according to label. since that is what being show to user.
@@ -56,7 +67,9 @@ public class LabeledStyleComboCellEditor extends StyleComboCellEditor {
 
 	/**
 	 * @param parent
-	 * @param items
+	 * @param values 
+	 * @param labels 
+	 * @param defaultValue 
 	 * @param style
 	 */
 	public LabeledStyleComboCellEditor(Composite parent, Object[] values,

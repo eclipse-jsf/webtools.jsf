@@ -30,6 +30,7 @@ public class LoadbundleSelectionCellEditor extends EditableDialogCellEditor {
 
 	/**
 	 * @param parent
+	 * @param project 
 	 */
 	public LoadbundleSelectionCellEditor(Composite parent, IProject project) {
 		super(parent);

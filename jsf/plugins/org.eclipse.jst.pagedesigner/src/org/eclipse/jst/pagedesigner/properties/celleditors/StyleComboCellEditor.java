@@ -29,6 +29,10 @@ import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 
+/**
+ * Combo cell editor
+ *
+ */
 public class StyleComboCellEditor extends CellEditor {
 	/**
 	 * The list of items to present in the combo box.
@@ -50,14 +54,26 @@ public class StyleComboCellEditor extends CellEditor {
 	 */
 	private static final int defaultStyle = SWT.NONE;
 
+	/**
+	 * Default constructor
+	 */
 	public StyleComboCellEditor() {
 		setStyle(defaultStyle);
 	}
 
+	/**
+	 * @param parent
+	 * @param items
+	 */
 	public StyleComboCellEditor(Composite parent, String[] items) {
 		this(parent, items, defaultStyle);
 	}
 
+	/**
+	 * @param parent
+	 * @param items
+	 * @param style
+	 */
 	public StyleComboCellEditor(Composite parent, String[] items, int style) {
 		super(parent, style);
 		setItems(items);

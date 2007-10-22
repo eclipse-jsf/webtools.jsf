@@ -27,7 +27,6 @@ import org.eclipse.ui.part.IPageSite;
 import org.eclipse.ui.views.contentoutline.ContentOutline;
 import org.eclipse.wst.common.ui.properties.internal.provisional.ITabbedPropertySheetPageContributor;
 import org.eclipse.wst.common.ui.properties.internal.provisional.TabbedPropertySheetPage;
-import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
 import org.w3c.dom.Node;
 
 /**
@@ -50,10 +49,6 @@ public class DesignerTabbedPropertySheetPage extends TabbedPropertySheetPage {
 			HTMLEditor editor) {
 		super(tabbedPropertySheetPageContributor);
 		_htmlEditor = editor;
-	}
-
-	protected IStructuredModel getModel() {
-		return _htmlEditor.getModel();
 	}
 
 	/*
@@ -89,7 +84,7 @@ public class DesignerTabbedPropertySheetPage extends TabbedPropertySheetPage {
 	 * selection.
 	 * 
 	 * @param selectedNode
-	 * @param node
+	 * @param innerNode
 	 */
 	public void internalChangeSelection(Node selectedNode, Node innerNode) {
 		getEditor().setFocus();
@@ -98,6 +93,9 @@ public class DesignerTabbedPropertySheetPage extends TabbedPropertySheetPage {
 		super.selectionChanged(null, new StructuredSelection(selectedNode));
 	}
 
+	/**
+	 * @return the editor part
+	 */
 	public EditorPart getEditor() {
 		return this._htmlEditor;
 	}

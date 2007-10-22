@@ -34,10 +34,13 @@ public class AllPropertySection extends AbstractPropertySection {
 	// category.
 	private MyPropertySheetPage page;
 
-	protected IPropertySourceProvider _provider;
+	private IPropertySourceProvider _provider;
 
-	protected IDOMElement _element;
+	private IDOMElement _element;
 
+	/**
+	 * the adapter
+	 */
 	protected INodeAdapter _adapter = new INodeAdapter() {
 		public boolean isAdapterForType(Object type) {
 			return false;
@@ -57,7 +60,7 @@ public class AllPropertySection extends AbstractPropertySection {
 	}
 
 	/**
-	 * @see org.eclipse.wst.common.ui.properties.ITabbedPropertySection#createControls(org.eclipse.swt.widgets.Composite,
+	 * see org.eclipse.wst.common.ui.properties.ITabbedPropertySection#createControls(org.eclipse.swt.widgets.Composite,
 	 *      org.eclipse.wst.common.ui.properties.internal.provisional.TabbedPropertySheetPage)
 	 */
 	public void createControls(Composite parent,
@@ -105,7 +108,7 @@ public class AllPropertySection extends AbstractPropertySection {
 	}
 
 	/**
-	 * @see org.eclipse.wst.common.ui.properties.view.ISection#dispose()
+	 * see org.eclipse.wst.common.ui.properties.view.ISection#dispose()
 	 */
 	public void dispose() {
 		super.dispose();
@@ -120,19 +123,22 @@ public class AllPropertySection extends AbstractPropertySection {
 	}
 
 	/**
-	 * @see org.eclipse.wst.common.ui.properties.view.ISection#refresh()
+	 * see org.eclipse.wst.common.ui.properties.view.ISection#refresh()
 	 */
 	public void refresh() {
 		page.refresh();
 	}
 
 	/**
-	 * @see org.eclipse.wst.common.ui.properties.view.ISection#shouldUseExtraSpace()
+	 * see org.eclipse.wst.common.ui.properties.view.ISection#shouldUseExtraSpace()
 	 */
 	public boolean shouldUseExtraSpace() {
 		return true;
 	}
 
+	/**
+	 * @param provider
+	 */
 	public void setPropertySourceProvider(IPropertySourceProvider provider) {
 		_provider = provider;
 		if (page != null)

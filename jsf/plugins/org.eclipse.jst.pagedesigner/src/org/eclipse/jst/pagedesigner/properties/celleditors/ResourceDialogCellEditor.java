@@ -42,28 +42,24 @@ public class ResourceDialogCellEditor extends EditableDialogCellEditor {
 
 	private String _separator = "";
 
-	/*
-	 * (non-Javadoc)
+
+	/**
 	 * 
-	 * @see DialogCellEditor#DialogCellEditor()
 	 */
 	public ResourceDialogCellEditor() {
 		super();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see DialogCellEditor#DialogCellEditor(Composite parent)
-	 */
-	public ResourceDialogCellEditor(Composite parent) {
+    /**
+     * @param parent
+     */
+    public ResourceDialogCellEditor(Composite parent) {
 		super(parent);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see DialogCellEditor#DialogCellEditor(Composite parent, int style)
+	/**
+	 * @param parent
+	 * @param style
 	 */
 	public ResourceDialogCellEditor(Composite parent, int style) {
 		super(parent, style);
@@ -188,14 +184,23 @@ public class ResourceDialogCellEditor extends EditableDialogCellEditor {
 		this._isWebPath = isWebPath;
 	}
 
+	/**
+	 * @param needTransform
+	 */
 	public void setTransformJSPURL(boolean needTransform) {
 		this._needTransformJSPURL = needTransform;
 	}
 
+	/**
+	 * @return the separator
+	 */
 	public String getSeparator() {
 		return _separator;
 	}
 
+	/**
+	 * @param separator
+	 */
 	public void setSeparator(String separator) {
 		this._separator = separator;
 	}

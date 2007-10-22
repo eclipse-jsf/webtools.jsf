@@ -28,6 +28,10 @@ public class ResourceBoundle {
         // no external instantiation
 	}
 
+	/**
+	 * @param key
+	 * @return the value for the key or !!key!!
+	 */
 	public static String getString(String key) {
 		try {
 			return RESOURCE_BUNDLE.getString(key);

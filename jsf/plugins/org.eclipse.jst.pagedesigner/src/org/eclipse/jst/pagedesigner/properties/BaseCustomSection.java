@@ -36,6 +36,9 @@ import org.w3c.dom.Node;
  */
 public abstract class BaseCustomSection extends AbstractPropertySection {
 
+	/**
+	 * A ok status instance
+	 */
 	public static final Status OKSTATUS = new Status(IStatus.OK, PDPlugin
 			.getPluginId(), 0, "", null);
 
@@ -43,8 +46,14 @@ public abstract class BaseCustomSection extends AbstractPropertySection {
 
 	private boolean _visible = false;
 
+	/**
+	 * the dom element
+	 */
 	protected IDOMElement _element;
 
+	/**
+	 * the adapter
+	 */
 	protected INodeAdapter _adapter = new INodeAdapter() {
 		public boolean isAdapterForType(Object type) {
 			return false;
@@ -72,6 +81,14 @@ public abstract class BaseCustomSection extends AbstractPropertySection {
 		}
 	}
 
+	/**
+	 * @param notifier
+	 * @param eventType
+	 * @param changedFeature
+	 * @param oldValue
+	 * @param newValue
+	 * @param pos
+	 */
 	protected abstract void notifyChanged(INodeNotifier notifier,
 			int eventType, Object changedFeature, Object oldValue,
 			Object newValue, int pos);
@@ -102,10 +119,16 @@ public abstract class BaseCustomSection extends AbstractPropertySection {
 		}
 	}
 
+	/**
+	 * @param node
+	 */
 	public void gotoNode(Node node) {
 		_propertySheetPage.internalChangeSelection(node, node);
 	}
 
+	/**
+	 * @return the status  line manager
+	 */
 	public IStatusLineManager getStatusLineManager() {
 		if (_propertySheetPage != null) {
 			IActionBars bar = _propertySheetPage.getSite().getActionBars();
@@ -116,6 +139,9 @@ public abstract class BaseCustomSection extends AbstractPropertySection {
 		return null;
 	}
 
+	/**
+	 * @param status
+	 */
 	public void applyStatus(IStatus[] status) {
 		if (!_visible) {
 			return;
@@ -140,6 +166,9 @@ public abstract class BaseCustomSection extends AbstractPropertySection {
 		}
 	}
 
+	/**
+	 * @param message
+	 */
 	public void setErrorMessage(String message) {
 		IStatusLineManager s = getStatusLineManager();
 		if (s != null) {
@@ -147,6 +176,10 @@ public abstract class BaseCustomSection extends AbstractPropertySection {
 		}
 	}
 
+	/**
+	 * @param message
+	 * @return the error status
+	 */
 	public Status createErrorStatus(String message) {
 		return new Status(IStatus.ERROR, PDPlugin.getPluginId(), 0, message,
 				null);
@@ -163,6 +196,9 @@ public abstract class BaseCustomSection extends AbstractPropertySection {
 		_visible = true;
 	}
 
+	/**
+	 * @return the project
+	 */
 	public IProject getProject() {
 		if (_propertySheetPage != null) {
 			IEditorInput input = _propertySheetPage.getEditor()
@@ -181,6 +217,9 @@ public abstract class BaseCustomSection extends AbstractPropertySection {
 		}
 	}
 
+	/**
+	 * @return the file
+	 */
 	public IFile getFile() {
 		if (_propertySheetPage != null) {
 			IEditorInput input = _propertySheetPage.getEditor()

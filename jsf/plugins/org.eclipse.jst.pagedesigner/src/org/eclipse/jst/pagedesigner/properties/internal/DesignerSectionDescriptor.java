@@ -68,11 +68,11 @@ public class DesignerSectionDescriptor implements ISectionDescriptor {
 	private TagFilter[] _tagFilters;
 
 	private static class TagFilter {
-		public String uri;
+		private String uri;
 
-		public String tag;
+		private String tag;
 
-		public boolean caseSensitive = false;
+		private boolean caseSensitive = false;
 	}
 
 	/**
@@ -148,14 +148,14 @@ public class DesignerSectionDescriptor implements ISectionDescriptor {
 	}
 
 	/**
-	 * @see org.eclipse.wst.common.ui.properties.ITabbedPropertySectionDescriptor#getId()
+	 * see org.eclipse.wst.common.ui.properties.ITabbedPropertySectionDescriptor#getId()
 	 */
 	public String getId() {
 		return _id;
 	}
 
 	/**
-	 * @see org.eclipse.wst.common.ui.properties.ITabbedPropertySectionDescriptor#getTargetTab()
+	 * see org.eclipse.wst.common.ui.properties.ITabbedPropertySectionDescriptor#getTargetTab()
 	 */
 	public String getTargetTab() {
 		return _targetTab;
@@ -207,7 +207,7 @@ public class DesignerSectionDescriptor implements ISectionDescriptor {
 	}
 
 	/**
-	 * @see org.eclipse.wst.common.ui.properties.ITabbedPropertySectionDescriptor#getAfterSection()
+	 * see org.eclipse.wst.common.ui.properties.ITabbedPropertySectionDescriptor#getAfterSection()
 	 */
 	public String getAfterSection() {
 		return _afterSection;
@@ -216,7 +216,7 @@ public class DesignerSectionDescriptor implements ISectionDescriptor {
 	/**
 	 * Creates an instance of a section described by this descriptor
 	 * 
-	 * @see org.eclipse.wst.common.ui.properties.ITabbedPropertySectionDescriptor#getSectionClass()
+	 * see org.eclipse.wst.common.ui.properties.ITabbedPropertySectionDescriptor#getSectionClass()
 	 */
 	public ISection getSectionClass() {
 		ISection section = null;
@@ -238,7 +238,7 @@ public class DesignerSectionDescriptor implements ISectionDescriptor {
 	/**
 	 * Gets the input types that are valid for this section.
 	 * 
-	 * @see org.eclipse.wst.common.ui.properties.ITabbedPropertySectionDescriptor#getInputTypes()
+	 * see org.eclipse.wst.common.ui.properties.ITabbedPropertySectionDescriptor#getInputTypes()
 	 */
 	public List getInputTypes() {
 		return Collections.EMPTY_LIST;

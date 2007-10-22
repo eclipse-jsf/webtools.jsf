@@ -21,6 +21,9 @@ import org.w3c.dom.Element;
  * @author mengbo
  */
 public class AttributePropertySourceProvider implements IPropertySourceProvider {
+	/**
+	 * Default constructor
+	 */
 	public AttributePropertySourceProvider() {
         // do nothing?
 	}

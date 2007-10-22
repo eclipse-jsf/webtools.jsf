@@ -157,7 +157,7 @@ public abstract class CellEditorWrapper extends CellEditor {
 	 * class override this method to provide image. Rather than setting as
 	 * property.
 	 * 
-	 * @return
+	 * @return the binding image
 	 */
 	protected abstract Image getBindingImage();
 
@@ -174,6 +174,7 @@ public abstract class CellEditorWrapper extends CellEditor {
 	 * 
 	 * @param cell
 	 *            the control for this cell editor
+	 * @return the control
 	 */
 	protected Control createContents(Composite cell) {
 		_wrapped = createWrappedCellEditor(cell);
@@ -221,7 +222,7 @@ public abstract class CellEditorWrapper extends CellEditor {
 
 	/**
 	 * @param cell
-	 * @return
+	 * @return the cell editor
 	 */
 	protected abstract CellEditor createWrappedCellEditor(Composite cell);
 

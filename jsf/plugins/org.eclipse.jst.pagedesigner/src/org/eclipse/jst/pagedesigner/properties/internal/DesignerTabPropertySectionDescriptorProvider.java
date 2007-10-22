@@ -90,6 +90,9 @@ public class DesignerTabPropertySectionDescriptorProvider implements
 		return _descriptors;
 	}
 
+	/**
+	 * @return the providers
+	 */
 	protected List readAdditionalSectionDescriptorProviders() {
 		List result = new ArrayList();
 		IConfigurationElement[] extensions = getConfigurationElements(EXTPT_SECTIONDESCRIPTORPROVIDER);
@@ -111,6 +114,9 @@ public class DesignerTabPropertySectionDescriptorProvider implements
 		return result;
 	}
 
+	/**
+	 * @return the descriptors
+	 */
 	protected List readSectionDescriptors() {
 		List result = new ArrayList();
 		IConfigurationElement[] extensions = getConfigurationElements(EXTPT_SECTIONS);
@@ -128,6 +134,10 @@ public class DesignerTabPropertySectionDescriptorProvider implements
 		return result;
 	}
 
+	/**
+	 * @param extensionPointId
+	 * @return the configuration element
+	 */
 	public static IConfigurationElement[] getConfigurationElements(
 			String extensionPointId) {
 		IExtensionPoint extensionPoint = Platform.getExtensionRegistry()

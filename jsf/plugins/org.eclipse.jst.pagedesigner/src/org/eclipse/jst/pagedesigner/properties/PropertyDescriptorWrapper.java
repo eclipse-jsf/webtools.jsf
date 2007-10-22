@@ -33,7 +33,8 @@ public class PropertyDescriptorWrapper implements IPropertyDescriptor {
 	private IDOMElement _element;
 
 	/**
-	 * 
+	 * @param element 
+	 * @param innerDescriptor 
 	 */
 	public PropertyDescriptorWrapper(IDOMElement element,
 			IPropertyDescriptor innerDescriptor) {
@@ -141,6 +142,9 @@ public class PropertyDescriptorWrapper implements IPropertyDescriptor {
 		return _inner.isCompatibleWith(anotherProperty);
 	}
 
+	/**
+	 * @return the inner property descriptor
+	 */
 	public IPropertyDescriptor getInner() {
 		return _inner;
 	}

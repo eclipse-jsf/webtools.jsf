@@ -91,6 +91,9 @@ public class NavigationHiearchyAction extends Action {
 		}
 	}
 
+	/**
+	 * @param propertyPage
+	 */
 	public NavigationHiearchyAction(DesignerTabbedPropertySheetPage propertyPage) {
 		super("");
 		setEnabled(true);
@@ -98,6 +101,10 @@ public class NavigationHiearchyAction extends Action {
 		this._propertyPage = propertyPage;
 	}
 
+	/**
+	 * @param selectedNode
+	 * @param startNode
+	 */
 	protected void changeSelection(Node selectedNode, Node startNode) {
 		this._propertyPage.internalChangeSelection(selectedNode, startNode);
 		this._currentNode = selectedNode;
@@ -105,6 +112,10 @@ public class NavigationHiearchyAction extends Action {
 		this.setText(this._currentNode.getNodeName());
 	}
 
+	/**
+	 * @param currentNode
+	 * @param startNode
+	 */
 	protected void refresh(Node currentNode, Node startNode) {
 		this._currentNode = currentNode;
 		this._startNode = startNode;

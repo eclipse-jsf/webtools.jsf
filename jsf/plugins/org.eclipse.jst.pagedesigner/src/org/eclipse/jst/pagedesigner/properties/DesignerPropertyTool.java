@@ -56,6 +56,11 @@ import org.w3c.dom.Text;
  * @author mengbo
  */
 public class DesignerPropertyTool {
+	/**
+	 * @param fNode
+	 * @param attributeDesc
+	 * @return the attribute values
+	 */
 	public static String getAttributeValue(Element fNode, CMNode attributeDesc) {
 		if (attributeDesc == null) {
 			return ""; //$NON-NLS-1$
@@ -75,6 +80,11 @@ public class DesignerPropertyTool {
 		return returnedValue;
 	}
 
+	/**
+	 * @param fNode
+	 * @param filter
+	 * @return the attributes
+	 */
 	public static Object[] getElementReferedAttributes(Element fNode,
 			String[] filter) {
 		List result = new ArrayList();
@@ -88,6 +98,10 @@ public class DesignerPropertyTool {
 		return result.toArray(new CMNode[result.size()]);
 	}
 
+	/**
+	 * @param fNode
+	 * @return the declared attributes
+	 */
 	public static CMNamedNodeMap getElementDeclaredAttributes(Node fNode) {
 		IStructuredModel structModel = null;
 		if (fNode instanceof IDOMNode) {
@@ -117,9 +131,10 @@ public class DesignerPropertyTool {
 	 * ITextSelection 2. IStructuredSelection (Node) 3. IStructuredSelection
 	 * (EditPart) 4. DesignRange we want to normalize it to only #2. If the node
 	 * is ATTR or TEXT/CDATA_SECTION, will use it's parent node.
+	 * @param selectingPart 
 	 * 
-	 * @param part
 	 * @param selection
+	 * @param _htmlEditor 
 	 * @return null if can't normalize.
 	 */
 	public static Node normalizeSelectionToElement(
@@ -261,6 +276,10 @@ public class DesignerPropertyTool {
 	// }
 	// }
 
+	/**
+	 * @param node
+	 * @return the element node
+	 */
 	public static Element getElementNode(Object node) {
 		Object model;
 		Element element = null;
@@ -281,6 +300,11 @@ public class DesignerPropertyTool {
 		return element;
 	}
 
+	/**
+	 * @param element
+	 * @param filter
+	 * @return the name list
+	 */
 	public static List getNameList(Element element, String[] filter) {
 		List result = new ArrayList();
 		CMNamedNodeMap attributes = getElementDeclaredAttributes(element);
@@ -297,7 +321,7 @@ public class DesignerPropertyTool {
 	/**
 	 * @param selection
 	 *            should be a normalized selection
-	 * @return
+	 * @return the common parent of selection
 	 */
 	public static Node getCommonParent(ISelection selection) {
 		if (selection instanceof IStructuredSelection) {
@@ -319,7 +343,7 @@ public class DesignerPropertyTool {
 	 * 
 	 * @param selectingPart
 	 * @param selection
-	 * @return
+	 * @return the element
 	 */
 	public static Element getElement(IWorkbenchPart selectingPart,
 			ISelection selection) {
@@ -355,6 +379,10 @@ public class DesignerPropertyTool {
 	// logger.debug("----------------------------\n"); //$NON-NLS-1$
 	// }
 
+	/**
+	 * @param element
+	 * @return true if element is a multi selection
+	 */
 	public static boolean isMultiSelection(Element element) {
 		if (element.getNodeName().equalsIgnoreCase(IHTMLConstants.TAG_OPTION)) {
 			return element.getAttribute(ICSSPropertyID.ATTR_MULTIPLE) != null;
@@ -362,6 +390,10 @@ public class DesignerPropertyTool {
 		return false;
 	}
 
+	/**
+	 * @param element
+	 * @return the text source
+	 */
 	public static String getElementTextSource(Element element) {
 		if (element == null) {
 			return null;
@@ -372,6 +404,10 @@ public class DesignerPropertyTool {
 		return null;
 	}
 
+	/**
+	 * @param project
+	 * @return the java project for project
+	 */
 	public static IJavaProject getJavaProject(Object project) {
 		if (project == null) {
 			return null;
@@ -398,6 +434,10 @@ public class DesignerPropertyTool {
 		return null;
 	}
 
+	/**
+	 * @param project
+	 * @return the project
+	 */ 
 	public static IProject getProject(Object project) {
 		if (project instanceof IProject) {
 			return (IProject) project;

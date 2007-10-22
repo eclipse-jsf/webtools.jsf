@@ -24,11 +24,16 @@ import org.eclipse.wst.css.core.internal.util.declaration.CSSPropertyContext;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
 import org.w3c.dom.css.ElementCSSInlineStyle;
 
+/**
+ * A css dialog cell editor
+ *
+ */
 public class CSSDialogCellEditor extends EditableDialogCellEditor {
 	private IDOMElement _element;
 
 	/**
 	 * @param parent
+	 * @param element 
 	 */
 	public CSSDialogCellEditor(Composite parent, IDOMElement element) {
 		super(parent);

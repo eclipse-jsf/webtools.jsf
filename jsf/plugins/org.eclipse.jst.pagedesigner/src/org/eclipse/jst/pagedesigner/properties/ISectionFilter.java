@@ -21,7 +21,7 @@ public interface ISectionFilter {
 
 	/**
 	 * @param node
-	 * @return
+	 * @return true if the filter applies to node
 	 */
 	boolean appliesTo(Element node);
 

@@ -51,6 +51,9 @@ public class AttributeGroupSection extends BaseCustomSection {
 		}
 	};
 
+	/**
+	 * the attribute group
+	 */
 	protected AttributeGroup _group;
 
 	/**

@@ -30,6 +30,13 @@ public class NamedBooleanCellEditor extends LabeledComboBoxCellEditor {
 		super(parent, values, labels, style);
 	}
 
+	/**
+	 * @param parent
+	 * @param style
+	 * @param element
+	 * @param attribute
+	 * @return the new instance
+	 */
 	public static NamedBooleanCellEditor newInstance(Composite parent,
 			int style, IDOMElement element, IAttributeDescriptor attribute) {
 		String[] values = new String[] { "", attribute.getAttributeName() };
