@@ -80,6 +80,7 @@ public class SashEditorSelectionProvider implements IPostSelectionProvider {
 
 	/**
 	 * Returns the sash editor.
+	 * @return the sash editor part
 	 */
 	public SashEditorPart getSashEditor() {
 		return _sashEditor;

@@ -37,10 +37,16 @@ public class LocationModifierRequest extends LocationRequest {
 		super(type);
 	}
 
+	/**
+	 * @return true if the control key was pressed
+	 */
 	public boolean isControlKeyPressed() {
 		return _controlKeyDown;
 	}
 
+	/**
+	 * @param b
+	 */
 	public void setControlKeyPressed(boolean b) {
 		this._controlKeyDown = b;
 	}

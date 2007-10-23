@@ -41,9 +41,9 @@ import org.eclipse.ui.INestableKeyBindingService;
 import org.eclipse.ui.IPropertyListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
-//import org.eclipse.ui.internal.WorkbenchPlugin;
 import org.eclipse.ui.part.EditorPart;
 import org.eclipse.ui.part.MultiPageEditorActionBarContributor;
+import org.eclipse.ui.part.MultiPageEditorPart;
 import org.eclipse.ui.part.MultiPageEditorSite;
 
 /**
@@ -74,8 +74,6 @@ public abstract class SashEditorPart extends EditorPart {
 	 * multi-page editor. The page is added at the given index. This also hooks
 	 * a property change listener on the nested editor.
 	 * 
-	 * @param index
-	 *            the index at which to add the page (0-based)
 	 * @param editor
 	 *            the nested editor
 	 * @param input
@@ -123,6 +121,9 @@ public abstract class SashEditorPart extends EditorPart {
 		connectPage(editor);
 	}
 
+	/**
+	 * @param editor
+	 */
 	protected void connectPage(IEditorPart editor) {
 		ISelectionProvider editSelectionProvider = editor.getSite()
 				.getSelectionProvider();
@@ -167,6 +168,9 @@ public abstract class SashEditorPart extends EditorPart {
 		return newContainer;
 	}
 
+	/**
+	 * @throws PartInitException
+	 */
 	abstract protected void createPages() throws PartInitException;
 
 	/**
@@ -354,9 +358,8 @@ public abstract class SashEditorPart extends EditorPart {
 	 * <p>
 	 * Subclasses may extend this method.
 	 * </p>
+	 * @param activeEditor 
 	 * 
-	 * @param newPageIndex
-	 *            the index of the activated page
 	 */
 	protected void activeEditorChanged(IEditorPart activeEditor) {
 		setActiveEditor(activeEditor);
@@ -421,9 +424,8 @@ public abstract class SashEditorPart extends EditorPart {
 
 	/**
 	 * Sets the currently active page.
+	 * @param part
 	 * 
-	 * @param pageIndex
-	 *            the index of the page to be activated; the index must be valid
 	 */
 	protected void setActiveEditor(IEditorPart part) {
 		_activeEditor = part;
@@ -501,6 +503,9 @@ public abstract class SashEditorPart extends EditorPart {
 		return false;
 	}
 
+	/**
+	 * @param orientation
+	 */
 	public void setOrientation(int orientation) {
 		this._orientation = orientation;
 		if (_sashForm != null && !_sashForm.isDisposed()) {
@@ -509,6 +514,9 @@ public abstract class SashEditorPart extends EditorPart {
 		}
 	}
 
+	/**
+	 * @param part
+	 */
 	public void setMaximizedEditor(IEditorPart part) {
 		if (part != null) {
 			Composite c = (Composite) _editorToComposite.get(part);

@@ -74,9 +74,9 @@ public class SashEditorSite implements IEditorSite {
 	 * Creates a site for the given editor nested within the given multi-page
 	 * editor.
 	 * 
-	 * @param _sashEditor
+	 * @param sashEditor
 	 *            the multi-page editor
-	 * @param _editor
+	 * @param editor
 	 *            the nested editor
 	 */
 	public SashEditorSite(SashEditorPart sashEditor, IEditorPart editor) {
@@ -378,19 +378,16 @@ public class SashEditorSite implements IEditorSite {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.IWorkbenchPartSite#progressEnd()
+	/**
+	 * @param job
 	 */
 	public void progressEnd(Job job) {
 		// Do nothing
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.IWorkbenchPartSite#progressStart()
+
+	/**
+	 * @param job
 	 */
 	public void progressStart(Job job) {
 		// Do nothing

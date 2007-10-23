@@ -10,6 +10,10 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.requests;
 
+/**
+ * Page designer constants
+ *
+ */
 public final class PageDesignerRequestConstants 
 {
     /**

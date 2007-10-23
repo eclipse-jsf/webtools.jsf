@@ -32,14 +32,20 @@ import org.w3c.dom.Element;
  * @author mengbo
  */
 public class NodeCreationFactory implements CreationFactory {
-	String _tagName;
+	private final String _tagName;
 
-	String _uri;
+	private final String _uri;
 
-	String _suggestedPrefix;
+	private final String _suggestedPrefix;
 
-	Map _attributes;
+	private final Map _attributes;
 
+	/**
+	 * @param uri
+	 * @param tagname
+	 * @param suggestedPrefix
+	 * @param attributes
+	 */
 	public NodeCreationFactory(String uri, String tagname,
 			String suggestedPrefix, Map attributes) {
 		_tagName = tagname;
@@ -90,7 +96,7 @@ public class NodeCreationFactory implements CreationFactory {
 	 * XXX: need some better way for owner document. Maybe pass in from
 	 * constructor
 	 * 
-	 * @return
+	 * @return the owner document
 	 */
 	protected Document getOwnerDocument() {
 		IWorkbenchWindow active = PlatformUI.getWorkbench()
@@ -112,7 +118,7 @@ public class NodeCreationFactory implements CreationFactory {
 	 * 
 	 * @see org.eclipse.jst.pagedesigner.requests.NodeCreationFactory#getPrefix(int)
 	 */
-	public String getPrefix(String uri, IDOMModel model, String suggested) {
+	private String getPrefix(String uri, IDOMModel model, String suggested) {
 		if (ITLDConstants.URI_HTML.equals(uri)
 				|| ITLDConstants.URI_JSP.equals(uri))
 			return null;
