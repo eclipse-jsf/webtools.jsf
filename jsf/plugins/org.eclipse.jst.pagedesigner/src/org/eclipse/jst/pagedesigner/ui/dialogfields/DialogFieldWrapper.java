@@ -120,7 +120,7 @@ public class DialogFieldWrapper implements DialogField, ISupportTextValue,
 		});
 	}
 
-	public void setDatabindingPressedHandler(IStringButtonAdapter adapter) {
+	private void setDatabindingPressedHandler(IStringButtonAdapter adapter) {
 		this._adapter = adapter;
 		this.updateDatabindingControl();
 	}
@@ -323,14 +323,14 @@ public class DialogFieldWrapper implements DialogField, ISupportTextValue,
 		return _wrapped.getNumberOfControls() + 1;
 	}
 
+	/**
+	 * @param enabled
+	 */
 	public void setDatabindingEnabled(boolean enabled) {
 		this._databindingEnabled = enabled;
 		updateDatabindingControl();
 	}
 
-	public boolean isDatabindingEnabled() {
-		return _databindingEnabled;
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -381,7 +381,7 @@ public class DialogFieldWrapper implements DialogField, ISupportTextValue,
 		_wrapped.putAttachedData(key, value);
 	}
 
-	protected void databindingControlPressed() {
+	private void databindingControlPressed() {
 		if (_adapter != null) {
 			_adapter.changeControlPressed(this);
 		}
@@ -396,14 +396,17 @@ public class DialogFieldWrapper implements DialogField, ISupportTextValue,
 		_wrapped.handleGrabHorizontal();
 	}
 
-	public IDOMNode getAncester() {
+	private IDOMNode getAncester() {
 		return _ancester;
 	}
 
-	public IDOMElement getElement() {
+	private IDOMElement getElement() {
 		return _element;
 	}
 
+	/**
+	 * @return the wrapped field
+	 */
 	public DialogField getWrappedDialogField() {
 		return _wrapped;
 	}

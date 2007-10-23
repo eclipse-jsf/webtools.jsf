@@ -28,6 +28,10 @@ public class BoxPreferenceNode implements IPreferenceNode {
 
 	private CSSPropertyContext _styles;
 
+	/**
+	 * @param element
+	 * @param style
+	 */
 	public BoxPreferenceNode(IDOMElement element, CSSPropertyContext style) {
 		super();
 		_element = element;

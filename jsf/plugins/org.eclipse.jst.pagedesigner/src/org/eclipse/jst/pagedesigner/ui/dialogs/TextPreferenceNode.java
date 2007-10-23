@@ -28,6 +28,10 @@ public class TextPreferenceNode implements IPreferenceNode {
 
 	private IDOMElement _element;
 
+	/**
+	 * @param element
+	 * @param style
+	 */
 	public TextPreferenceNode(IDOMElement element, CSSPropertyContext style) {
 		super();
 		_element = element;

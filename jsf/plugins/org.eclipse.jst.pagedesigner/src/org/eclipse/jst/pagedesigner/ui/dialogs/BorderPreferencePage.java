@@ -46,6 +46,10 @@ public class BorderPreferencePage extends PreferencePage {
 	private ColorButtonDialogField _colorTopField, _colorRightField,
 			_colorBottomField, _colorLeftField;
 
+	/**
+	 * @param element
+	 * @param style
+	 */
 	public BorderPreferencePage(IDOMElement element, CSSPropertyContext style) {
 		super();
 		_style = style;

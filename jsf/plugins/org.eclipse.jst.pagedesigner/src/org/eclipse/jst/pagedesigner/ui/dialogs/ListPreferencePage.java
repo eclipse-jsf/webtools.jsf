@@ -32,6 +32,10 @@ public class ListPreferencePage extends PreferencePage {
 
 	private StyleCombo _typeCombo, _imageCombo, _positionCombo;
 
+	/**
+	 * @param element
+	 * @param style
+	 */
 	public ListPreferencePage(IDOMElement element, CSSPropertyContext style) {
 		super();
 		_style = style;

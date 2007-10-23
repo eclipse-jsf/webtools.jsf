@@ -28,6 +28,10 @@ public class PositioningPreferenceNode implements IPreferenceNode {
 
 	private CSSPropertyContext _style;
 
+	/**
+	 * @param element
+	 * @param style
+	 */
 	public PositioningPreferenceNode(IDOMElement element,
 			CSSPropertyContext style) {
 		super();

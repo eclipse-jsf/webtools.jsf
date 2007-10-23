@@ -51,19 +51,19 @@ import org.eclipse.ui.part.DrillDownComposite;
  * 
  * @author mengbo
  */
-public abstract class TreeViewerSelectionDialog extends SelectionDialog {
+abstract class TreeViewerSelectionDialog extends SelectionDialog {
 	// = "Select a file"
 	private static final String DEFAULT_TITLE = PageDesignerResources
 			.getInstance().getString("TreeViewerSelectionDialog.Title"); //$NON-NLS-1$
 
 	/** Used to tag the image type */
-	public static final int STYLE_NONE = 0;
+	static final int STYLE_NONE = 0;
 
-	public static final int STYLE_INFORMATION = 1;
+	static final int STYLE_INFORMATION = 1;
 
-	public static final int STYLE_ERROR = 2;
+	static final int STYLE_ERROR = 2;
 
-	public static final int STYLE_WARNING = 3;
+	static final int STYLE_WARNING = 3;
 
 	/** Sizi of the TreeViewer composite */
 	private static final int SIZING_SELECTION_PANE_HEIGHT = 300;
@@ -96,6 +96,7 @@ public abstract class TreeViewerSelectionDialog extends SelectionDialog {
 
 	/**
 	 * @param parentShell
+	 * @param statusMessage 
 	 */
 	public TreeViewerSelectionDialog(Shell parentShell, String statusMessage) {
 		super(parentShell);
@@ -106,9 +107,8 @@ public abstract class TreeViewerSelectionDialog extends SelectionDialog {
 
 	/**
 	 * Returns a new drill down viewer for this dialog.
+	 * @param parent 
 	 * 
-	 * @param heightHint -
-	 *            height hint for the drill down composite
 	 */
 	protected void createTreeViewer(Composite parent) {
 		// Create drill down
@@ -162,6 +162,7 @@ public abstract class TreeViewerSelectionDialog extends SelectionDialog {
 
 	/**
 	 * Creates the contents of the composite.
+	 * @param parent 
 	 */
 	public void createTreeViewerComposite(Composite parent) {
 		Composite treeViewerComposite = new Composite(parent, SWT.NONE);
@@ -181,7 +182,7 @@ public abstract class TreeViewerSelectionDialog extends SelectionDialog {
 	/**
 	 * Sets the selected existing container.
 	 * 
-	 * @param container -
+	 * @param selection -
 	 *            the current selected container.
 	 */
 	public void setSelectedElement(Object selection) {
@@ -251,9 +252,6 @@ public abstract class TreeViewerSelectionDialog extends SelectionDialog {
 		this._filter = filter;
 	}
 
-	public void setStatusMessage(String message) {
-		_statusMessage = message;
-	}
 
 	/**
 	 * Update the status message
@@ -272,6 +270,8 @@ public abstract class TreeViewerSelectionDialog extends SelectionDialog {
 
 	/**
 	 * Get the different message according the message type.
+	 * 
+	 * @param imageType 
 	 * 
 	 * @return Image - the message image
 	 */
@@ -315,7 +315,14 @@ public abstract class TreeViewerSelectionDialog extends SelectionDialog {
 		return control;
 	}
 
+	/**
+	 * @param selection
+	 * @return true if the selection is valid
+	 */
 	protected abstract boolean isValidSelection(Object selection);
 
+	/**
+	 * @return the input element
+	 */
 	protected abstract Object findInputElement();
 }

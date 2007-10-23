@@ -28,6 +28,10 @@ public class BlockPreferenceNode implements IPreferenceNode {
 
 	private CSSPropertyContext _style;
 
+	/**
+	 * @param element
+	 * @param style
+	 */
 	public BlockPreferenceNode(IDOMElement element, CSSPropertyContext style) {
 		super();
 		_element = element;

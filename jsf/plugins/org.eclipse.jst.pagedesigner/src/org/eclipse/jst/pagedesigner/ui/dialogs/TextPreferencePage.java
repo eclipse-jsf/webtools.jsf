@@ -47,6 +47,10 @@ public class TextPreferencePage extends PreferencePage {
 			_textDecorationOverlineButton, _textDecorationLineThroughButton,
 			_textDecorationBlinkButton, _textDecorationNoneButton;
 
+	/**
+	 * @param element
+	 * @param style
+	 */
 	public TextPreferencePage(IDOMElement element, CSSPropertyContext style) {
 		super();
 		_style = style;

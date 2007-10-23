@@ -28,6 +28,10 @@ public class ListPreferenceNode implements IPreferenceNode {
 
 	private CSSPropertyContext _style;
 
+	/**
+	 * @param element
+	 * @param style
+	 */
 	public ListPreferenceNode(IDOMElement element, CSSPropertyContext style) {
 		super();
 		_element = element;

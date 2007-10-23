@@ -39,6 +39,10 @@ public class BackgroundPreferencePage extends PreferencePage {
 
 	private ColorButtonDialogField _backgroundColorField;
 
+	/**
+	 * @param element
+	 * @param style
+	 */
 	public BackgroundPreferencePage(IDOMElement element,
 			CSSPropertyContext style) {
 		super();

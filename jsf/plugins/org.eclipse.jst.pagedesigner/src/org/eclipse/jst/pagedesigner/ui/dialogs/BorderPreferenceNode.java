@@ -28,6 +28,10 @@ public class BorderPreferenceNode implements IPreferenceNode {
 
 	private CSSPropertyContext _style;
 
+	/**
+	 * @param element
+	 * @param style
+	 */
 	public BorderPreferenceNode(IDOMElement element, CSSPropertyContext style) {
 		super();
 		_element = element;

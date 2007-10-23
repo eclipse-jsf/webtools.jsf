@@ -27,6 +27,9 @@ public abstract class PartActivationHandler extends ShellAdapter implements
 
 	private IWorkbenchPart _trace;
 
+	/**
+	 * @param part
+	 */
 	public PartActivationHandler(IWorkbenchPart part) {
 		_trace = part;
 	}

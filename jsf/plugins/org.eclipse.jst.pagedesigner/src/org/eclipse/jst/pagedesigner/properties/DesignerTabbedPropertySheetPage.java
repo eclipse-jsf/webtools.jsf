@@ -43,6 +43,7 @@ public class DesignerTabbedPropertySheetPage extends TabbedPropertySheetPage {
 
 	/**
 	 * @param tabbedPropertySheetPageContributor
+	 * @param editor 
 	 */
 	public DesignerTabbedPropertySheetPage(
 			ITabbedPropertySheetPageContributor tabbedPropertySheetPageContributor,

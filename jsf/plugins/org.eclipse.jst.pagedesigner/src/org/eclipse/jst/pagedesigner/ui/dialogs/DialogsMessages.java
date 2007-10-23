@@ -28,6 +28,10 @@ public class DialogsMessages {
         // no external instantiation
 	}
 
+	/**
+	 * @param key
+	 * @return the value for key or !!key!! if none
+	 */
 	public static String getString(String key) {
 		try {
 			return RESOURCE_BUNDLE.getString(key);

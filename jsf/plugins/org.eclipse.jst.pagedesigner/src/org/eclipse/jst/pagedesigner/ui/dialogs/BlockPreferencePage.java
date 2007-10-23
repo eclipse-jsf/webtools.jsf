@@ -39,6 +39,10 @@ public class BlockPreferencePage extends PreferencePage {
 
 	private Text _textIndentText;
 
+	/**
+	 * @param element
+	 * @param style
+	 */
 	public BlockPreferencePage(IDOMElement element, CSSPropertyContext style) {
 		super();
 		_style = style;

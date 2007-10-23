@@ -29,7 +29,7 @@ public class ContextableResourceButtonDialogField extends
 		ResourceButtonDialogField implements IElementContextable {
 
 	/**
-	 * @param project
+	 * Default constructor
 	 */
 	public ContextableResourceButtonDialogField() {
 		super(null);

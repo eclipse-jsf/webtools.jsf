@@ -503,7 +503,7 @@ public class ProjectResolver implements URIResolver {
 		return _project;
 	}
 
-	protected String getRootLocationString() {
+	private String getRootLocationString() {
 		return null;
 	}
 

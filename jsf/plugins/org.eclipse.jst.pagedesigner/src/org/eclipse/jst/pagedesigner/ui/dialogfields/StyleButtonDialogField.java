@@ -36,10 +36,16 @@ public class StyleButtonDialogField extends StringButtonDialogField implements
 		IElementContextable {
 	private IDOMElement _element;
 
+	/**
+	 * Equivalent to StyleButtonDialogField(null)
+	 */
 	public StyleButtonDialogField() {
 		this(null);
 	}
 
+	/**
+	 * @param element
+	 */
 	public StyleButtonDialogField(IDOMElement element) {
 		this(null, element);
 		setStringButtonAdapter(new IStringButtonAdapter() {
@@ -50,6 +56,10 @@ public class StyleButtonDialogField extends StringButtonDialogField implements
 		setButtonLabel(DialogsMessages.getString("StyleButtonDialogField.Edit"));//$NON-NLS-1$ 
 	}
 
+	/**
+	 * @param adapter
+	 * @param element
+	 */
 	public StyleButtonDialogField(IStringButtonAdapter adapter,
 			IDOMElement element) {
 		super(adapter);
@@ -91,9 +101,5 @@ public class StyleButtonDialogField extends StringButtonDialogField implements
 				setText(style);
 			}
 		}
-	}
-
-	public void setElement(IDOMElement element) {
-		_element = element;
 	}
 }

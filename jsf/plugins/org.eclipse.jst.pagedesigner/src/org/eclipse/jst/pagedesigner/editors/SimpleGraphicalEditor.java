@@ -135,6 +135,10 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
 		}
 	};
 
+	/**
+	 * @param delegate
+	 * @param editdomain
+	 */
 	public SimpleGraphicalEditor(HTMLEditor delegate,
 			DefaultEditDomain editdomain) {
 		_delegate = delegate;
@@ -210,6 +214,9 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
         super.initializeGraphicalViewer();
 	}
 
+	/**
+	 * 
+	 */
 	protected void initializeContextMenu() {
 		Control gviewer = _viewer.getControl();
 		MenuManager menuMgr = new MenuManager();
@@ -402,17 +409,11 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
 		}
 	}
 
+	/**
+	 * @return the selection synchronizer
+	 */
 	protected SelectionSynchronizer getSynchronizer() {
 		return _synchronizer;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.ibm.sse.model.INodeAdapter#isAdapterForType(java.lang.Object)
-	 */
-	public boolean isAdapterForType(Object type) {
-		return false;
 	}
 
 	/*
@@ -424,6 +425,10 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
 		super.updateActions(actionIds);
 	}
 
+	/**
+	 * @param id
+	 * @return the action for the id
+	 */
 	public IAction getAction(Object id) {
 		// lium: following lines commented out, see comments in
 		// DesignerUndoRedoAction
@@ -497,6 +502,9 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
 		return _viewer;
 	}
 
+	/**
+	 * @return the html editor delegate
+	 */
 	public HTMLEditor getHTMLEditor() {
 		return _delegate;
 	}

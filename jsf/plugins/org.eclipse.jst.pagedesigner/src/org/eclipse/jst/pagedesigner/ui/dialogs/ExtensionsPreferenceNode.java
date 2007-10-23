@@ -28,6 +28,10 @@ public class ExtensionsPreferenceNode implements IPreferenceNode {
 
 	private CSSPropertyContext _style;
 
+	/**
+	 * @param element
+	 * @param style
+	 */
 	public ExtensionsPreferenceNode(IDOMElement element,
 			CSSPropertyContext style) {
 		super();

@@ -19,7 +19,6 @@ import java.util.List;
 
 import org.eclipse.core.internal.resources.ResourceException;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
@@ -30,8 +29,6 @@ import org.eclipse.gef.palette.PaletteRoot;
 import org.eclipse.gef.ui.palette.PaletteViewerProvider;
 import org.eclipse.gef.ui.views.palette.PalettePage;
 import org.eclipse.gef.ui.views.palette.PaletteViewerPage;
-import org.eclipse.jface.text.BadLocationException;
-import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.TextSelection;
 import org.eclipse.jface.viewers.IPostSelectionProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -68,7 +65,6 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.contexts.IContextService;
-import org.eclipse.ui.ide.IGotoMarker;
 import org.eclipse.ui.part.MultiPageSelectionProvider;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
@@ -78,12 +74,10 @@ import org.eclipse.wst.common.ui.provisional.editors.PostMultiPageSelectionProvi
 import org.eclipse.wst.common.ui.provisional.editors.PostSelectionMultiPageEditorPart;
 import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
 import org.eclipse.wst.sse.ui.StructuredTextEditor;
-import org.eclipse.wst.sse.ui.internal.IExtendedMarkupEditor;
 import org.eclipse.wst.sse.ui.internal.provisional.extensions.ISourceEditingTextTools;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.eclipse.wst.xml.ui.internal.provisional.IDOMSourceEditingTextTools;
 import org.w3c.dom.Document;
-import org.w3c.dom.Node;
 
 /**
  * The HTMLEditor is a multi paged editor. It will use the StructuredTextEditor
@@ -91,19 +85,31 @@ import org.w3c.dom.Node;
  * 
  * @author mengbo
  */
-public class HTMLEditor extends PostSelectionMultiPageEditorPart implements
+public final class HTMLEditor extends PostSelectionMultiPageEditorPart implements
 		IPropertyListener, ITabbedPropertySheetPageContributor {
 	// private static final String PAGE_NAME_DESIGN = "Design"; //$NON-NLS-1$
 	// private static final String PAGE_NAME_SOURCE = "Source"; //$NON-NLS-1$
 	private final static String CONTRIBUTOR_ID = "org.eclipse.jst.pagedesigner.pageDesigner.tabPropertyContributor"; //$NON-NLS-1$
 
 	// four different modes for the designer when displayed in a sash editor.
+	/**
+	 * editor split is veritical
+	 */
 	public static final int MODE_SASH_VERTICAL = 0;
 
+	/**
+	 * editor split is horizontal
+	 */
 	public static final int MODE_SASH_HORIZONTAL = 1;
 
+	/**
+	 * no split, only designer canvas
+	 */
 	public static final int MODE_DESIGNER = 2;
 
+	/**
+	 * no split, only SSE source
+	 */
 	public static final int MODE_SOURCE = 3;
 
 	private Logger _log = PDPlugin.getLogger(HTMLEditor.class);
@@ -145,6 +151,9 @@ public class HTMLEditor extends PostSelectionMultiPageEditorPart implements
 //		}
 //	}
 
+	/**
+	 * Default constructor
+	 */
 	public HTMLEditor() {
 		super();
 	}
@@ -153,7 +162,7 @@ public class HTMLEditor extends PostSelectionMultiPageEditorPart implements
 	 * This method is just to make firePropertyChanged accessbible from some
 	 * (anonomous) inner classes.
 	 */
-	protected void _firePropertyChange(int property) {
+	private void _firePropertyChange(int property) {
 		super.firePropertyChange(property);
 	}
 
@@ -192,6 +201,7 @@ public class HTMLEditor extends PostSelectionMultiPageEditorPart implements
 
 	/**
 	 * Creates the source page of the multi-page editor.
+	 * @throws PartInitException 
 	 */
 	protected void sash_createAndAddDesignSourcePage() throws PartInitException {
 		// create source page
@@ -232,7 +242,7 @@ public class HTMLEditor extends PostSelectionMultiPageEditorPart implements
 		return new PostMultiPageEditorSite(this, editor);
 	}
 
-	protected void tabbed_createAndAddDesignSourcePage()
+	private void tabbed_createAndAddDesignSourcePage()
 			throws PartInitException {
 		// create source page
 		_textEditor = createTextEditor();
@@ -269,7 +279,7 @@ public class HTMLEditor extends PostSelectionMultiPageEditorPart implements
 		// TextInputListener());
 	}
 
-	protected void createAndAddPreviewPage() {
+	private void createAndAddPreviewPage() {
 		Composite composite = new Composite(getContainer(), 0);
 		FillLayout filllayout = new FillLayout();
 		composite.setLayout(filllayout);
@@ -400,7 +410,7 @@ public class HTMLEditor extends PostSelectionMultiPageEditorPart implements
 		return new DesignerStructuredTextEditorJSP();
 	}
 
-	protected void disconnectDesignPage() {
+	private void disconnectDesignPage() {
 		if (_designViewer != null) {
 			_designViewer.setModel(null);
 		}
@@ -569,61 +579,10 @@ public class HTMLEditor extends PostSelectionMultiPageEditorPart implements
 		return result;
 	}
 
-	/**
-	 * IExtendedMarkupEditor method XXX:No reference to the method.
-	 */
-	public Node getCaretNode() {
-		if (getTextEditor() == null) {
-			return null;
-		}
-
-		ISourceEditingTextTools adapter = (ISourceEditingTextTools) _textEditor
-				.getAdapter(ISourceEditingTextTools.class);
-		if (adapter instanceof IDOMSourceEditingTextTools) {
-			IDOMSourceEditingTextTools domTools = (IDOMSourceEditingTextTools) adapter;
-			try {
-				return domTools.getNode(domTools.getCaretOffset());
-			} catch (BadLocationException e) {
-				_log.error("BadLocationException", e);
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * IExtendedSimpleEditor method
-	 */
-	public int getCaretPosition() {
-		if (getTextEditor() == null) {
-			return -1;
-		}
-
-		// return getExtendedTextEditor().getCaretPosition();
-		Object apapter = _textEditor.getAdapter(ISourceEditingTextTools.class);
-		if (apapter != null) {
-			return ((ISourceEditingTextTools) apapter).getCaretOffset();
-		}
-		return -1;
-	}
-
-	/**
-	 * IExtendedSimpleEditor method
-	 */
-	public IDocument getDocument() {
-		if (getTextEditor() == null) {
-			return null;
-		}
-
-		Object apapter = _textEditor.getAdapter(ISourceEditingTextTools.class);
-		if (apapter != null) {
-			return ((ISourceEditingTextTools) apapter).getDocument();
-		}
-
-		return null;
-	}
 
 	/**
 	 * IExtendedMarkupEditor method
+	 * @return the dom document
 	 */
 	public Document getDOMDocument() {
 		if (getTextEditor() == null) {
@@ -639,11 +598,15 @@ public class HTMLEditor extends PostSelectionMultiPageEditorPart implements
 
 	/**
 	 * IExtendedSimpleEditor method
+	 * @return the editor part
 	 */
 	public IEditorPart getEditorPart() {
 		return this;
 	}
 
+	/**
+	 * @return the structured model
+	 */
 	public IStructuredModel getModel() {
 		IStructuredModel model = null;
 		if (_textEditor != null) {
@@ -652,27 +615,14 @@ public class HTMLEditor extends PostSelectionMultiPageEditorPart implements
 		return model;
 	}
 
-	/**
-	 * IExtendedMarkupEditor method
-	 */
-	public List getSelectedNodes() {
-		if (getTextEditor() == null) {
-			return null;
-		}
-		// FIXME: when designer as current view, what to return?
-		return getExtendedTextEditor().getSelectedNodes();
-	}
 
+	/**
+	 * @return the SSE editor delegate
+	 */
 	public StructuredTextEditor getTextEditor() {
 		return _textEditor;
 	}
 
-	public IExtendedMarkupEditor getExtendedTextEditor() {
-		if (_textEditor instanceof IExtendedMarkupEditor) {
-			return (IExtendedMarkupEditor) _textEditor;
-		}
-		return null;
-	}
 
 	/*
 	 * (non-Javadoc) Method declared on IWorkbenchPart.
@@ -690,23 +640,6 @@ public class HTMLEditor extends PostSelectionMultiPageEditorPart implements
 			title = getPartName();
 		}
 		return title;
-	}
-
-	/*
-	 * (non-Javadoc) Sets the cursor and selection state for this editor to the
-	 * passage defined by the given marker. <p> Subclasses may override. For
-	 * greater details, see <code> IEditorPart </code></p>
-	 * 
-	 * @see IEditorPart
-	 */
-	public void gotoMarker(IMarker marker) {
-		// (pa) 20020217 this was null when opening an editor that was
-		// already open
-		if (_textEditor != null) {
-			IGotoMarker markerGotoer = (IGotoMarker) _textEditor
-					.getAdapter(IGotoMarker.class);
-			markerGotoer.gotoMarker(marker);
-		}
 	}
 
 	public void init(IEditorSite site, IEditorInput input)
@@ -770,7 +703,7 @@ public class HTMLEditor extends PostSelectionMultiPageEditorPart implements
 	/**
 	 * Posts the update code "behind" the running operation.
 	 */
-	protected void postOnDisplayQue(Runnable runnable) {
+	private void postOnDisplayQue(Runnable runnable) {
 		IWorkbench workbench = PlatformUI.getWorkbench();
 		IWorkbenchWindow[] windows = workbench.getWorkbenchWindows();
 		if (windows != null && windows.length > 0) {
@@ -840,7 +773,7 @@ public class HTMLEditor extends PostSelectionMultiPageEditorPart implements
 
 	}
 
-	protected void safelySanityCheckState() {
+	private void safelySanityCheckState() {
 		// If we're called before editor is created, simply ignore since we
 		// delegate this function to our embedded TextEditor
 		if (getTextEditor() == null) {
@@ -880,12 +813,12 @@ public class HTMLEditor extends PostSelectionMultiPageEditorPart implements
 		return getTextEditor().isDirty();
 	}
 
-	protected IPropertySheetPage getPropertySheetPage() {
+	private IPropertySheetPage getPropertySheetPage() {
 		return new org.eclipse.jst.pagedesigner.properties.DesignerTabbedPropertySheetPage(
 				this, this);
 	}
 
-	protected PaletteViewerPage getPaletteViewerPage() {
+	private PaletteViewerPage getPaletteViewerPage() {
 		if (null == _paletteViewerPage) {
 			DefaultEditDomain editDomain = getEditDomain();
 			PaletteItemManager manager = PaletteItemManager
@@ -906,7 +839,7 @@ public class HTMLEditor extends PostSelectionMultiPageEditorPart implements
 	}
 
 	/**
-	 * @return
+	 * @return the edit domain
 	 */
 	public DefaultEditDomain getEditDomain() {
 		if (_editDomain == null) {
@@ -925,7 +858,7 @@ public class HTMLEditor extends PostSelectionMultiPageEditorPart implements
 		return _editDomain;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
 	 * 
 	 * @see org.eclipse.ui.part.MultiPageEditorPart#pageChange(int)
@@ -994,6 +927,9 @@ public class HTMLEditor extends PostSelectionMultiPageEditorPart implements
 		this._mode = mode;
 	}
 
+	/**
+	 * @return the current design mode
+	 */
 	public int getDesignerMode() {
 		return this._mode;
 	}

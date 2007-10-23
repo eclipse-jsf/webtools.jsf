@@ -176,6 +176,9 @@ public class DesignerStyleActionGroup {
 		toolbar.add(new Separator());
 	}
 
+	/**
+	 * dispose the action
+	 */
 	public void dispose() {
 		if (_htmlEditor != null) {
 			IKeyBindingService keyBindingService = _htmlEditor.getSite()

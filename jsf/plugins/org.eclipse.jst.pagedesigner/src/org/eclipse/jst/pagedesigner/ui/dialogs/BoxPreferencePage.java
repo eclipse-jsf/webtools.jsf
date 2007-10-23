@@ -47,6 +47,10 @@ public class BoxPreferencePage extends PreferencePage {
 	private StyleCombo _marginTopUnitCombo, _marginRightUnitCombo,
 			_marginBottomUnitCombo, _marginLeftUnitCombo;
 
+	/**
+	 * @param element
+	 * @param style
+	 */
 	public BoxPreferencePage(IDOMElement element, CSSPropertyContext style) {
 		super();
 		_style = style;

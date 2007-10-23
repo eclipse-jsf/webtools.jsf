@@ -116,10 +116,10 @@ public class TaglibURIAction extends Action {
 		return null;
 	}
 
-	private String getResolvedURL(Element element, String attrName) {
+	private String getResolvedURL(Element element_, String attrName) {
 		URIResolver resolver = null;
-		if (element instanceof IDOMNode) {
-			resolver = ((IDOMNode) element).getModel().getResolver();
+		if (element_ instanceof IDOMNode) {
+			resolver = ((IDOMNode) element_).getModel().getResolver();
 		}
 		if (null == resolver) {
 			return null;

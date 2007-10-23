@@ -29,6 +29,8 @@ public class StyleDialog extends PreferenceDialog {
 	/**
 	 * @param parentShell
 	 * @param manager
+	 * @param element 
+	 * @param style 
 	 */
 	public StyleDialog(Shell parentShell, PreferenceManager manager,
 			IDOMElement element, CSSPropertyContext style) {

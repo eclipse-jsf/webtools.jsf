@@ -48,6 +48,10 @@ public class PositioningPreferencePage extends PreferencePage {
 	private Combo _clipTopUnitCombo, _clipRightUnitCombo, _clipBottomUnitCombo,
 			_clipLeftUnitCombo;
 
+	/**
+	 * @param element
+	 * @param style
+	 */
 	public PositioningPreferencePage(IDOMElement element,
 			CSSPropertyContext style) {
 		super();

@@ -63,6 +63,9 @@ public class ResourceOnClasspathDialog extends TreeViewerSelectionDialog {
 	class ResourceOnClasspathFilter extends ViewerFilter {
 		StandardJavaElementContentProvider _javaContentProvider;
 
+		/**
+		 * @param contentProvider
+		 */
 		public ResourceOnClasspathFilter(
 				StandardJavaElementContentProvider contentProvider) {
 			_javaContentProvider = contentProvider;

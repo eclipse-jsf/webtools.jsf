@@ -42,9 +42,11 @@ import org.eclipse.ui.model.WorkbenchLabelProvider;
  * selection. The client can prvide the suffixs of files to filter when
  * candidates are shown on the tree,
  * 
+ * TODO: dead?
+ * 
  * @author mengbo
  */
-public class CommonResourceDialog extends TreeViewerSelectionDialog {
+class CommonResourceDialog extends TreeViewerSelectionDialog {
 	private static final int WEBROOT_FOLDER_DEPTH = 2;
 
 	// CommonResourceDialog.statusMessage = Please select an image file
@@ -142,7 +144,7 @@ public class CommonResourceDialog extends TreeViewerSelectionDialog {
 		}
 
 		/**
-		 * @see ITreeContentProvider#getElements
+		 * @see org.eclipse.jface.viewers.IStructuredContentProvider#getElements
 		 */
 		public Object[] getElements(Object element) {
 			return getChildren(element);
@@ -159,14 +161,14 @@ public class CommonResourceDialog extends TreeViewerSelectionDialog {
 		}
 
 		/**
-		 * @see ITreeContentProvider#hasChildren
+		 * @see org.eclipse.jface.viewers.ITreeContentProvider#hasChildren
 		 */
 		public boolean hasChildren(Object element) {
 			return getChildren(element).length > 0;
 		}
 
 		/**
-		 * @see IContentProvider#inputChanged
+		 * @see org.eclipse.jface.viewers.IContentProvider#inputChanged
 		 */
 		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
             // do nothing
@@ -175,10 +177,10 @@ public class CommonResourceDialog extends TreeViewerSelectionDialog {
 	}
 
 	// The default resource filter
-	class CommonResourceFilter extends ViewerFilter {
+	static class CommonResourceFilter extends ViewerFilter {
 		private String _suffixs[] = { IFileFolderConstants.EXT_PROPERTIES };
 
-		Logger _log = PDPlugin.getLogger(CommonResourceFilter.class);
+		private Logger _mylog = PDPlugin.getLogger(CommonResourceFilter.class);
 
 		private IProject _project;
 
@@ -197,12 +199,15 @@ public class CommonResourceDialog extends TreeViewerSelectionDialog {
 			this._suffixs = _suffixs;
 		}
 
+		/**
+		 * @param project
+		 */
 		public CommonResourceFilter(IProject project) {
 			_project = project;
 		}
 
 		/**
-		 * @param _project
+		 * @param project
 		 *            The _project to set.
 		 */
 		public void setProject(IProject project) {
@@ -264,7 +269,7 @@ public class CommonResourceDialog extends TreeViewerSelectionDialog {
 								.getAlerts()
 								.detailError(
 										"Error.ImgFileFilter.0", "Error.ImgFileFilter.2"); //$NON-NLS-2$
-						_log.error(
+						_mylog.error(
 								"Error.ProjectFileDialogContentProvider.0", e); //$NON-NLS-1$
 						return false;
 					}
@@ -368,7 +373,7 @@ public class CommonResourceDialog extends TreeViewerSelectionDialog {
 		return new Object[] { returnValue };
 	}
 
-	public IPath getContainerFullPath(Object _selectedElement) {
+	private IPath getContainerFullPath(Object _selectedElement) {
 		if (_selectedElement == null) {
 			return null;
 		} else if (_selectedElement instanceof IContainer) {
@@ -379,7 +384,7 @@ public class CommonResourceDialog extends TreeViewerSelectionDialog {
 		return null;
 	}
 
-	public IPath getWebRelatedPath(Object _selectedElement) {
+	private IPath getWebRelatedPath(Object _selectedElement) {
 		IPath result = null;
 		if (_selectedElement == null) {
 			return null;
@@ -394,14 +399,5 @@ public class CommonResourceDialog extends TreeViewerSelectionDialog {
 			}
 		}
 		return result;
-	}
-
-	/**
-	 * @param _suffixs
-	 *            The _suffixs to set.
-	 */
-	public void setSuffixs(String[] suffixs) {
-		this._suffixs = suffixs;
-		_filter.setSuffixs(suffixs);
 	}
 }

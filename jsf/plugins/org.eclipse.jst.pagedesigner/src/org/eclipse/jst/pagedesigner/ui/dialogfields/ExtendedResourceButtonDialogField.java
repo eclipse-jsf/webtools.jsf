@@ -21,6 +21,9 @@ import org.eclipse.jst.pagedesigner.utils.WebAppUtil;
  */
 public class ExtendedResourceButtonDialogField extends
 		ResourceButtonDialogField {
+	/**
+	 * @param project
+	 */
 	public ExtendedResourceButtonDialogField(IProject project) {
 		super(project);
 	}
