@@ -42,6 +42,9 @@ public class RelatedViewActionGroup extends ActionGroup
 {
     private final EditDomain  _editDomain;
     
+    /**
+     * @param editDomain
+     */
     public RelatedViewActionGroup(EditDomain editDomain)
     {
         _editDomain = editDomain;

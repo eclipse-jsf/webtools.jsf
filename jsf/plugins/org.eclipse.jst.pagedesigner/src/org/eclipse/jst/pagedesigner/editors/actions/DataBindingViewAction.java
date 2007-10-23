@@ -25,11 +25,13 @@ import org.eclipse.ui.PlatformUI;
  * @version 1.5
  */
 public class DataBindingViewAction extends Action {
-	public final static String ID = "org.eclipse.jst.pagedesigner.editors.actions.DataBindingViewAction"; //$NON-NLS-1$
 
 	private static Logger _log = PDPlugin
 			.getLogger(DataBindingViewAction.class);
 
+	/**
+	 * Default constructor
+	 */
 	public DataBindingViewAction() {
 		setText(ActionsMessages
 				.getString("DataBindingViewAction.Menu.DataBinding")); //$NON-NLS-1$

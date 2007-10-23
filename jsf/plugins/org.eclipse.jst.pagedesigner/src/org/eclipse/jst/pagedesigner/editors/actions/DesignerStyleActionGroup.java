@@ -69,6 +69,9 @@ public class DesignerStyleActionGroup {
 			_mode = mode;
 		}
 
+		/**
+		 * @return the mode
+		 */
 		public int getMode() {
 			return _mode;
 		}
@@ -131,12 +134,8 @@ public class DesignerStyleActionGroup {
 				_designAction, _sourceAction };
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.actions.ActionGroup#updateActionBars()
-	 */
-	public void updateActionBars() {
+
+	private void updateActionBars() {
 		if (_htmlEditor == null) {
 			for (int i = 0; i < _actions.length; i++) {
 				_actions[i].setEnabled(false);
@@ -150,6 +149,9 @@ public class DesignerStyleActionGroup {
 		}
 	}
 
+	/**
+	 * @param editor
+	 */
 	public void setHTMLEditor(HTMLEditor editor) {
 		this._htmlEditor = editor;
 		if (editor != null) {
@@ -162,10 +164,9 @@ public class DesignerStyleActionGroup {
 		updateActionBars();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.actions.ActionGroup#fillActionBars(org.eclipse.ui.IActionBars)
+
+	/**
+	 * @param actionBars
 	 */
 	public void fillActionBars(IActionBars actionBars) {
 		IToolBarManager toolbar = actionBars.getToolBarManager();

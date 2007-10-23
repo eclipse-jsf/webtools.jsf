@@ -534,6 +534,7 @@ public interface PaletteInfosPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+    @SuppressWarnings("hiding")
 	interface Literals {
 		/**
 		 * The meta object literal for the '{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl.PaletteInfoImpl <em>Palette Info</em>}' class.
@@ -551,7 +552,7 @@ public interface PaletteInfosPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute PALETTE_INFO__ID = eINSTANCE.getPaletteInfo_Id();
+        EAttribute PALETTE_INFO__ID = eINSTANCE.getPaletteInfo_Id();
 
 		/**
 		 * The meta object literal for the '<em><b>Tag</b></em>' attribute feature.

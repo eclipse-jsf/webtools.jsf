@@ -12,10 +12,20 @@ package org.eclipse.jst.pagedesigner.editors.actions;
 
 import org.eclipse.ui.IPageLayout;
 
+/**
+ * A show view action that shows the outline view
+ *
+ */
 public class OutlineViewAction extends ShowViewAction 
 {
+    /**
+     * the action id
+     */
     public final static String ID = "org.eclipse.jst.pagedesigner.editors.actions.OutlineViewAction"; //$NON-NLS-1$
 
+    /**
+     * Default constructor
+     */
     public OutlineViewAction() 
     {
         super(ActionsMessages

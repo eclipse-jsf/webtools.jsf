@@ -17,8 +17,14 @@ import org.eclipse.ui.IPageLayout;
  * @author mengbo
  */
 public class PropertiesViewAction extends ShowViewAction {
+	/**
+	 * the id
+	 */
 	public final static String ID = "org.eclipse.jst.pagedesigner.editors.actions.PropertiesViewAction"; //$NON-NLS-1$
 
+	/**
+	 * Default constructor
+	 */
 	public PropertiesViewAction() 
     {
 		super(ActionsMessages

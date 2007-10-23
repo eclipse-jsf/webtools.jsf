@@ -35,11 +35,11 @@ import org.eclipse.wst.sse.ui.internal.ISourceViewerActionBarContributor;
 public class PageDesignerActionBarContributor2 extends
 		NestedEditorActionBarContributor implements IExtendedContributor {
 
-	protected DesignPageActionContributor _designViewerActionBarContributor = null;
+	private DesignPageActionContributor _designViewerActionBarContributor = null;
 
-	protected ISourceViewerActionBarContributor _sourceViewerActionContributor = null;
+	private ISourceViewerActionBarContributor _sourceViewerActionContributor = null;
 
-	protected HTMLEditor _htmlEditor = null;
+	private HTMLEditor _htmlEditor = null;
 
 	// EditorExtension
 	private static final String EDITOR_ID = IJMTConstants.EDITORID_HTML;
@@ -48,14 +48,9 @@ public class PageDesignerActionBarContributor2 extends
 
 	DesignerStyleActionGroup _group = new DesignerStyleActionGroup();
 
-//	private IHTMLGraphicalViewer _viewer = null;
-//
-//	private IStructuredModel _model = null;
-
-//	private final static Action action = new Action() {
-//        
-//	};
-
+	/**
+	 * Default constructor
+	 */
 	public PageDesignerActionBarContributor2() {
 		super();
 
@@ -84,11 +79,17 @@ public class PageDesignerActionBarContributor2 extends
 		_group.fillActionBars(actionBars);
 	}
 
+	/**
+	 * @param actionBars
+	 */
 	protected void initDesignViewerActionBarContributor(IActionBars actionBars) {
 		if (_designViewerActionBarContributor != null)
 			_designViewerActionBarContributor.init(actionBars, getPage());
 	}
 
+	/**
+	 * @param actionBars
+	 */
 	protected void initSourceViewerActionContributor(IActionBars actionBars) {
 		if (_sourceViewerActionContributor != null)
 			_sourceViewerActionContributor.init(actionBars, getPage());
@@ -120,7 +121,7 @@ public class PageDesignerActionBarContributor2 extends
 			_extendedContributor.contributeToMenu(menu);
 	}
 
-	protected void addToMenu(IMenuManager menu) {
+	private void addToMenu(IMenuManager menu) {
 		// IMenuManager menuMgr = new MenuManager(PD_EDITOR_MENU_LABEL,
 		// IJMTConstants.PD_EDITOR_MENU_ID);
 		// menu.insertBefore(IWorkbenchActionConstants.M_NAVIGATE, menuMgr);
@@ -230,6 +231,7 @@ public class PageDesignerActionBarContributor2 extends
 	}
 
 	/**
+	 * @param activeEditor 
 	 * 
 	 */
 	protected void deactivateSourceAndDesignPage(IEditorPart activeEditor) {
@@ -245,6 +247,9 @@ public class PageDesignerActionBarContributor2 extends
 		}
 	}
 
+	/**
+	 * @param activeEditor
+	 */
 	protected void activateDesignPage(SimpleGraphicalEditor activeEditor) {
 
 		if (_sourceViewerActionContributor != null /*
@@ -270,6 +275,9 @@ public class PageDesignerActionBarContributor2 extends
 		}
 	}
 
+	/**
+	 * @param activeEditor
+	 */
 	protected void activateSourcePage(StructuredTextEditor activeEditor) {
 		if (_designViewerActionBarContributor != null /*
 														 * &&

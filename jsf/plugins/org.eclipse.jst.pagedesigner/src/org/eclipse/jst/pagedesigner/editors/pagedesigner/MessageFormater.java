@@ -19,16 +19,15 @@ import org.eclipse.jst.pagedesigner.PDPlugin;
 /**
  * @A tool class for message format
  */
-public class MessageFormater {
+public final class MessageFormater {
 	private static Logger _log = PDPlugin.getLogger(MessageFormater.class);
 
 	/**
-	 * *
 	 * 
-	 * @param message:
+	 * @param message
 	 *            the parts for filling is {number}
 	 * @param o1
-	 * @return
+	 * @return the formatted string
 	 */
 	public static String format(String message, Object o1) {
 		try {
@@ -41,6 +40,12 @@ public class MessageFormater {
 		}
 	}
 
+	/**
+	 * @param message
+	 * @param o1
+	 * @param o2
+	 * @return the formatted string
+	 */
 	public static String format(String message, Object o1, Object o2) {
 		try {
 			Object[] args = new Object[] { o1, o2 };
@@ -52,6 +57,13 @@ public class MessageFormater {
 		}
 	}
 
+	/**
+	 * @param message
+	 * @param o1
+	 * @param o2
+	 * @param o3
+	 * @return the formatted string
+	 */
 	public static String format(String message, Object o1, Object o2, Object o3) {
 		try {
 			Object[] args = new Object[] { o1, o2, o3 };
@@ -63,6 +75,11 @@ public class MessageFormater {
 		}
 	}
 
+	/**
+	 * @param message
+	 * @param o
+	 * @return the formatted string
+	 */
 	public static String format(String message, Object o[]) {
 		try {
 			MessageFormat formater = new MessageFormat(message);
@@ -71,5 +88,10 @@ public class MessageFormater {
 			_log.error("Log.Error.MessageFormater.Format0", e);
 			return "";
 		}
+	}
+	
+	private MessageFormater()
+	{
+	    // util class, no instantiation
 	}
 }

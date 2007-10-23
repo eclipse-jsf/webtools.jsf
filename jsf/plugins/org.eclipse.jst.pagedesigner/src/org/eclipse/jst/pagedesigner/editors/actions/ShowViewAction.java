@@ -28,6 +28,10 @@ public class ShowViewAction extends Action {
     private static Logger _log = PDPlugin.getLogger(PropertiesViewAction.class);
     private final String _viewId;
     
+    /**
+     * @param text
+     * @param viewId
+     */
     public ShowViewAction(String text, String viewId) 
     {
         _viewId = viewId;

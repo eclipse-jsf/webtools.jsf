@@ -28,6 +28,9 @@ public class DesignActionBarFactory {
         // no external instantiation
 	}
 
+	/**
+	 * @return get the factory singleton
+	 */
 	public static DesignActionBarFactory getInstance() {
 		if (_instance == null) {
 			_instance = new DesignActionBarFactory();
@@ -35,6 +38,10 @@ public class DesignActionBarFactory {
 		return _instance;
 	}
 
+	/**
+	 * @param name
+	 * @return the tool bar action
+	 */
 	public DesignerToolBarAction getStyleAction(String name) {
 		DesignerToolBarAction action = null;
 

@@ -28,6 +28,10 @@ public class ActionsMessages {
         // no external instantiation
 	}
 
+	/**
+	 * @param key
+	 * @return the resource for the key
+	 */
 	public static String getString(String key) {
 		try {
 			return RESOURCE_BUNDLE.getString(key);

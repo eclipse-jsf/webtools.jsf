@@ -45,6 +45,9 @@ public class PageDesignerResources extends ResourceUtils {
 		setBundle(_resources, IJMTConstants.PAGEDESIGNER_RESOURCE_BUNDLE_FILE);
 	}
 
+	/**
+	 * @return the singleton
+	 */
 	public static PageDesignerResources getInstance() {
 		if (_resource == null) {
 			_resource = new PageDesignerResources();

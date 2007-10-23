@@ -43,10 +43,17 @@ public class DesignPageActionContributor extends EditorActionBarContributor {
 	private static final Logger _log = PDPlugin
 			.getLogger(DesignPageActionContributor.class);
 
+	/**
+	 * paragraph
+	 */
 	public static final String PARAGRAPH_ACTION_ID = "paragraph";
 
-	protected IEditorPart _editorPart;
+	private IEditorPart _editorPart;
 
+	/**
+	 * @param manager
+	 * @param id
+	 */
 	protected void doRemove(IContributionManager manager, String id) {
 		try {
 			if (manager.find(id) != null) {
@@ -91,12 +98,20 @@ public class DesignPageActionContributor extends EditorActionBarContributor {
 		// toolbar.add(action);
 	}
 
+	/**
+	 * @param menuManager
+	 * @param action
+	 * @param id
+	 */
 	protected void addActionWithId(IMenuManager menuManager, Action action,
 			String id) {
 		action.setId(id);
 		menuManager.add(action);
 	}
 
+	/**
+	 * @param enabled
+	 */
 	public void setViewerSpecificContributionsEnabled(boolean enabled) {
 		HTMLEditor htmlEditor = null;
 		if (_editorPart instanceof HTMLEditor) {

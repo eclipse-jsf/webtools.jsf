@@ -33,9 +33,11 @@ import org.eclipse.wst.sse.core.internal.undo.IStructuredTextUndoManager;
 public class DesignerUndoRedoAction extends Action implements UpdateAction {
 	private boolean _undo = true; // if false means redo
 
-	private SimpleGraphicalEditor _designer;
+	private final SimpleGraphicalEditor _designer;
 
 	/**
+	 * @param undo 
+	 * @param designer 
 	 * 
 	 */
 	public DesignerUndoRedoAction(boolean undo, SimpleGraphicalEditor designer) {
