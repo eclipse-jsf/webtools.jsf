@@ -167,6 +167,7 @@ public class ProjectResolver implements URIResolver {
 			in = new FileInputStream(tldFile);
 		} catch (FileNotFoundException e) {
 			_log.error("RenderingTraverser.Error.FileNotFound", e);
+			return null;
 		}
 //		IDOMModel xmlModel = null;
 
