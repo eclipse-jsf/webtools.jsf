@@ -22,6 +22,10 @@ import org.eclipse.jst.jsp.ui.views.contentoutline.JSPContentOutlineConfiguratio
 import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
 import org.eclipse.wst.sse.core.internal.provisional.IndexedRegion;
 
+/**
+ * the HTML editor's outline view configuration
+ *
+ */
 public class OutlineConfiguration extends JSPContentOutlineConfiguration {
 	private Object[] _selections = new Object[0];
 

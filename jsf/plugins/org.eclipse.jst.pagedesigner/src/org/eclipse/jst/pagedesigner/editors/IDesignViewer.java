@@ -21,15 +21,21 @@ import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
  * @author mengbo
  */
 public interface IDesignViewer {
+	/**
+	 * @return the title
+	 */
 	String getTitle();
 
+	/**
+	 * @param model
+	 */
 	void setModel(IStructuredModel model);
 
 	// void setViewerSelectionManager(ViewerSelectionManager
 	// viewerSelectionManager);
 
 	/**
-	 * @return
+	 * @return the graphical viewer
 	 */
 	public IHTMLGraphicalViewer getGraphicViewer();
 }

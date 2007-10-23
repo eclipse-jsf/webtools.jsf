@@ -108,7 +108,7 @@ public class PageDesignerActionConstants
 
     /**
      * Add standard group separators for the Style sub-menu
-     * @param styleSubmenu
+     * @param menu
      */
     public static void addStandardStyleActionGroups(IMenuManager menu) 
     {

@@ -47,6 +47,9 @@ public class SelectionSynchronizer implements ISelectionChangedListener {
 		_editor = editor;
 	}
 
+	/**
+	 * @return true if the status check is okay
+	 */
 	protected boolean statusCheckOk() {
 		try {
 			StyledText text = _editor.getHTMLEditor().getTextEditor()
@@ -113,6 +116,8 @@ public class SelectionSynchronizer implements ISelectionChangedListener {
 	 * We are listening to the selection change in ViewerSelectionManager. The
 	 * original source of the event could be source view or the outline view or
 	 * other party that participate in the ViewerSelectionManager.
+	 * @param start 
+	 * @param end 
 	 */
 	public void textSelectionChanged(int start, int end) {
 		if (!_firingChange) {
