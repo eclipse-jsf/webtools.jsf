@@ -23,8 +23,7 @@ public class ListStyleTypeMeta extends CSSPropertyMeta {
 	private static final String INITIAL_VALUE = ICSSPropertyID.VAL_DISC;
 
 	/**
-	 * @param inherit
-	 * @param initvalue
+	 * Default constructor
 	 */
 	public ListStyleTypeMeta() {
 		super(true, INITIAL_VALUE);

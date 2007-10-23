@@ -21,8 +21,7 @@ import org.w3c.dom.Element;
  */
 public class WidthMeta extends LengthMeta {
 	/**
-	 * @param inherit
-	 * @param initvalue
+	 * Default constructor
 	 */
 	public WidthMeta() {
 		super(false, ICSSPropertyID.VAL_AUTO);

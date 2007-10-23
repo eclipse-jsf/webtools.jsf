@@ -77,6 +77,13 @@ public class LengthMeta extends CSSPropertyMeta {
 				getBaseFont(style));
 	}
 
+	/**
+	 * @param lengthStr
+	 * @param style
+	 * @param percenttype
+	 * @param font
+	 * @return the object
+	 */
 	public static Object toLength(String lengthStr, ICSSStyle style,
 			int percenttype, ICSSFont font) {
 		try {
@@ -91,11 +98,12 @@ public class LengthMeta extends CSSPropertyMeta {
 	/**
 	 * Will not calculate percentage value. Used for calculate the "width" and
 	 * "height" css property
-	 * 
-	 * @param value
-	 * @param parentValue
+	 * @param result 
+	 * @param unitType 
+	 * @param style 
+	 * @param percenttype 
 	 * @param font
-	 * @return
+	 * @return an object?
 	 */
 	public static Object toLength(float result, short unitType,
 			ICSSStyle style, int percenttype, ICSSFont font) {
@@ -143,7 +151,7 @@ public class LengthMeta extends CSSPropertyMeta {
 	 * parent style's font.
 	 * 
 	 * @param style
-	 * @return
+	 * @return the base font
 	 */
 	protected ICSSFont getBaseFont(ICSSStyle style) {
 		return style.getCSSFont();
@@ -195,6 +203,10 @@ public class LengthMeta extends CSSPropertyMeta {
 		return Display.getCurrent().getDPI().x;
 	}
 
+	/**
+	 * @param result
+	 * @return true if is auto
+	 */
 	public static boolean isAuto(Object result) {
 		if (result == ICSSPropertyID.VAL_AUTO) {
 			return true;

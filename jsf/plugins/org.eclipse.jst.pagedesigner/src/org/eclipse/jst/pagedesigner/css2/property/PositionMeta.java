@@ -16,20 +16,28 @@ package org.eclipse.jst.pagedesigner.css2.property;
  * @version 1.5
  */
 public class PositionMeta extends CSSPropertyMeta {
+	/**
+	 * static keyword
+	 */
 	public static final String STATIC = "static";
 
+	/**
+	 * absolute keyword
+	 */
 	public static final String ABSOLUTE = "absolute";
 
-	public static final String RELATIVE = "relative";
+	private static final String RELATIVE = "relative";
 
+	/**
+	 * fixed keyword
+	 */
 	public static final String FIXED = "fixed";
 
-	public static final String[] _keywords = new String[] { STATIC, ABSOLUTE,
+	private static final String[] _keywords = new String[] { STATIC, ABSOLUTE,
 			RELATIVE, FIXED };
 
 	/**
-	 * @param inherit
-	 * @param initvalue
+	 * Default constructor
 	 */
 	public PositionMeta() {
 		super(false, STATIC);

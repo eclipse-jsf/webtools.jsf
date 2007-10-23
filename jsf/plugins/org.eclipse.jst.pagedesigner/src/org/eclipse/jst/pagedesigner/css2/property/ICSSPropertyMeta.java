@@ -19,39 +19,64 @@ import org.w3c.dom.css.CSSValue;
  * @author mengbo
  */
 public interface ICSSPropertyMeta {
-	public static final int PERCENTAGE_NONE = 0;
+	/**
+	 * 
+	 */
+	static final int PERCENTAGE_NONE = 0;
 
-	public static final int PERCENTAGE_BOXSIZE = 1;
+	/**
+	 * 
+	 */
+	static final int PERCENTAGE_BOXSIZE = 1;
 
-	public static final int PERCENTAGE_HEIGHT_CONTAININGBLOCK = 2;
+	/**
+	 * 
+	 */
+	static final int PERCENTAGE_HEIGHT_CONTAININGBLOCK = 2;
 
-	public static final int PERCENTAGE_FONT = 3;
+	/**
+	 * 
+	 */
+	static final int PERCENTAGE_FONT = 3;
 
-	public static final int PERCENTAGE_WIDTH_CONTAININGBLOCK = 4;
+	/**
+	 * 
+	 */
+	static final int PERCENTAGE_WIDTH_CONTAININGBLOCK = 4;
 
-	public static final Object NOT_SPECIFIED = "NOT_SPECIFIED";
+	/**
+	 * 
+	 */
+	static final Object NOT_SPECIFIED = "NOT_SPECIFIED";
 
 	/**
 	 * whether default inherit.
 	 * 
-	 * @return
+	 * @return true if is inherited
 	 */
 	public boolean isInherited();
 
 	/**
-	 * initial value
+	 * @param propertyName 
+	 * @param style 
 	 * 
-	 * @return
+	 * @return the initial value object
 	 */
 	public Object getInitialValue(String propertyName, ICSSStyle style);
 
+	/**
+	 * @param element
+	 * @param htmltag
+	 * @param propertyName
+	 * @return the initial value object
+	 */
 	public Object getHTMLElementInitialValue(Element element, String htmltag,
 			String propertyName);
 
 	/**
 	 * what's percentage value based on.
 	 * 
-	 * @return
+	 * @return the percentage value
 	 */
 	public int getPercentageType();
 
@@ -78,7 +103,7 @@ public interface ICSSPropertyMeta {
 	 * @param value
 	 * @param propertyName
 	 * @param style
-	 * @return
+	 * @return the value result
 	 */
 	public Object calculateCSSValueResult(CSSValue value, String propertyName,
 			ICSSStyle style);

@@ -18,8 +18,7 @@ public class ListStylePositionMeta extends CSSPropertyMeta {
 	private static final String INITIAL_VALUE = ICSSPropertyID.VAL_OUTSIDE;
 
 	/**
-	 * @param inherit
-	 * @param initvalue
+	 * Default constructor
 	 */
 	public ListStylePositionMeta() {
 		super(true, INITIAL_VALUE);

@@ -26,6 +26,9 @@ import org.eclipse.swt.widgets.Display;
 public class CheckboxWidgetProvider extends AbstractWidgetProvider {
 	private boolean isChecked;
 
+	/**
+	 * @param style
+	 */
 	public CheckboxWidgetProvider(ICSSStyle style) {
 		super(style);
 	}
@@ -80,7 +83,10 @@ public class CheckboxWidgetProvider extends AbstractWidgetProvider {
 		}
 	}
 
-	public int getDefaultWidth() {
+	/**
+	 * @return the default width
+	 */
+	private int getDefaultWidth() {
 		// FIXME: don't know the how to define the default width yet.
 		return 15;
 	}
@@ -92,6 +98,9 @@ public class CheckboxWidgetProvider extends AbstractWidgetProvider {
 		return isChecked;
 	}
 
+	/**
+	 * @param checked
+	 */
 	public void setChecked(boolean checked) {
 		this.isChecked = checked;
 	}

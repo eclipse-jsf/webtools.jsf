@@ -43,6 +43,9 @@ public class ListWidgetProvider extends AbstractWidgetProvider {
 
 	private int _rows = DEFAULTSIZE;
 
+	/**
+	 * @param style
+	 */
 	public ListWidgetProvider(ICSSStyle style) {
 		super(style);
 	}
@@ -67,7 +70,7 @@ public class ListWidgetProvider extends AbstractWidgetProvider {
 	 * by default, the combo's width will be calculated from the longest option
 	 * value.
 	 * 
-	 * @return
+	 * @return the default width
 	 */
 	public int getDefaultWidth() {
 		int longestStringWidth = 0;
@@ -91,7 +94,7 @@ public class ListWidgetProvider extends AbstractWidgetProvider {
 
 	/**
 	 * 
-	 * @return
+	 * @return the default height
 	 * @see TextInputWidgetProvider#getDefaultHeight()
 	 */
 	public int getDefaultHeight() {

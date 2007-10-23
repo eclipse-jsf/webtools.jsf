@@ -27,7 +27,6 @@ import org.eclipse.swt.widgets.Display;
 
 /**
  * @author mengbo
- * @author mengbo
  * @version 1.5
  */
 public class ComboWidgetProvider extends AbstractWidgetProvider {
@@ -45,6 +44,9 @@ public class ComboWidgetProvider extends AbstractWidgetProvider {
 
 	private String _label;
 
+	/**
+	 * @param style
+	 */
 	public ComboWidgetProvider(ICSSStyle style) {
 		super(style);
 	}
@@ -70,9 +72,9 @@ public class ComboWidgetProvider extends AbstractWidgetProvider {
 	 * by default, the combo's width will be calculated from the longest option
 	 * value.
 	 * 
-	 * @return
+	 * @return the default width
 	 */
-	public int getDefaultWidth() {
+	private int getDefaultWidth() {
 		int textareaWidth;
 		if (this._longestString == null || this._longestString.length() == 0) {
 			textareaWidth = 20;
@@ -91,7 +93,7 @@ public class ComboWidgetProvider extends AbstractWidgetProvider {
 
 	/**
 	 * 
-	 * @return
+	 * @return the default height
 	 * @see TextInputWidgetProvider#getDefaultHeight()
 	 */
 	public int getDefaultHeight() {
@@ -194,6 +196,9 @@ public class ComboWidgetProvider extends AbstractWidgetProvider {
 		}
 	}
 
+	/**
+	 * @param label
+	 */
 	public void setSelectedLabel(String label) {
 		this._label = label;
 	}

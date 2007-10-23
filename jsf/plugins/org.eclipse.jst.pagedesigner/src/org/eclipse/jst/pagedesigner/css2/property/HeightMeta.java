@@ -20,8 +20,7 @@ import org.w3c.dom.Element;
  */
 public class HeightMeta extends LengthMeta {
 	/**
-	 * @param inherit
-	 * @param initvalue
+	 * Default constructor
 	 */
 	public HeightMeta() {
 		super(false, ICSSPropertyID.VAL_AUTO);

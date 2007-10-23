@@ -30,6 +30,11 @@ public class TableUtil {
 
 	static final String RIGHT = "right";
 
+	/**
+	 * @param edge
+	 * @param frame
+	 * @return true if there is a match
+	 */
 	public static boolean matchFrame(String edge, String frame) {
 		if ("above".equalsIgnoreCase(frame)) {
 			return TOP.equalsIgnoreCase(edge);
@@ -52,9 +57,9 @@ public class TableUtil {
 	}
 
 	/**
-	 * @param string
+	 * @param edge 
 	 * @param rules
-	 * @return
+	 * @return true if rules match
 	 */
 	public static boolean matchRules(String edge, String rules) {
 		// TODO: "groups" not supported.
@@ -73,8 +78,8 @@ public class TableUtil {
 
 	/**
 	 * @param element
-	 * @return
-	 * @see http://www.w3.org/TR/CSS21/tables.html#empty-cells
+	 * @return true if cell is empty
+	 * see http://www.w3.org/TR/CSS21/tables.html#empty-cells
 	 */
 	public static boolean isEmptyCell(Element element) {
 		NodeList children = element.getChildNodes();

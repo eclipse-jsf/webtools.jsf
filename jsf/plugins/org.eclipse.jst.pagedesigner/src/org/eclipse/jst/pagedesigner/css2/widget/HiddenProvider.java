@@ -38,12 +38,16 @@ public class HiddenProvider extends ImageWidgetProvider {
     
 	/**
 	 * @param image
-	 * @param style
+	 * @param convertedElement 
 	 */
 	public HiddenProvider(Image image, Element convertedElement) {
 		super(image, new HiddenElementStyle(convertedElement));
 	}
 
+	/**
+	 * @param image
+	 * @param editPart
+	 */
 	public HiddenProvider(Image image, ElementEditPart editPart) {
 		super(image, new HiddenElementStyle(new EditProxyAdapter(editPart)));
 	}
@@ -86,6 +90,9 @@ public class HiddenProvider extends ImageWidgetProvider {
 		return 0;
 	}
 
+	/**
+	 * @return the label width
+	 */
 	public int getLabelWidth() {
 		if (_labelVisible && _label != null && !_label.equals("")
 				&& _fontMetrics != null) {
@@ -121,18 +128,30 @@ public class HiddenProvider extends ImageWidgetProvider {
 		}
 	}
 
+	/**
+	 * @return the label text
+	 */
 	public String getLabel() {
 		return _label;
 	}
 
+	/**
+	 * @param label
+	 */
 	public void setLabel(String label) {
 		this._label = label;
 	}
 
+	/**
+	 * @return whether the label is visible
+	 */
 	public boolean isLabelVisible() {
 		return _labelVisible;
 	}
 
+	/**
+	 * @param labelVisible
+	 */
 	public void setLabelVisible(boolean labelVisible) {
 		this._labelVisible = labelVisible;
 	}

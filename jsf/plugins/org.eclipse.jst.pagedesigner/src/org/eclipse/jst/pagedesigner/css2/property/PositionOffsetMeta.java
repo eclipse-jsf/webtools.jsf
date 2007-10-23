@@ -17,8 +17,7 @@ package org.eclipse.jst.pagedesigner.css2.property;
  */
 public class PositionOffsetMeta extends LengthMeta {
 	/**
-	 * @param inherit
-	 * @param initvalue
+	 * Default constructor
 	 */
 	public PositionOffsetMeta() {
 		super(false, ICSSPropertyID.VAL_AUTO);

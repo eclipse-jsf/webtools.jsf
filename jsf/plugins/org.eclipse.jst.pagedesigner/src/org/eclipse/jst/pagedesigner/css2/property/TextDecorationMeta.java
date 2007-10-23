@@ -19,23 +19,31 @@ import org.w3c.dom.css.CSSValueList;
  * @author mengbo
  */
 public class TextDecorationMeta extends CSSPropertyMeta {
-	public static final int NONE = 0;
+	private static final int NONE = 0;
 
+	/**
+	 * 
+	 */
 	public static final int UNDERLINE = 1;
 
+	/**
+	 * 
+	 */
 	public static final int OVERLINE = 1 << 1;
 
+	/**
+	 * 
+	 */
 	public static final int LINETHROUGH = 1 << 2;
 
-	public static final int BLINK = 1 << 3;
+	private static final int BLINK = 1 << 3;
 
 	static final String[] KEYWORDS = new String[] { ICSSPropertyID.VAL_NONE,
 			ICSSPropertyID.VAL_UNDERLINE, ICSSPropertyID.VAL_OVERLINE,
 			ICSSPropertyID.VAL_LINETHROUGH, ICSSPropertyID.VAL_BLINK };
 
 	/**
-	 * @param inherit
-	 * @param initvalue
+	 * Default constructor
 	 */
 	public TextDecorationMeta() {
 		// the spec say text-decoration is not inherited. but the description

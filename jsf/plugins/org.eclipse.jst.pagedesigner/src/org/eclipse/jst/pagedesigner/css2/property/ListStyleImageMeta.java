@@ -22,8 +22,7 @@ public class ListStyleImageMeta extends CSSPropertyMeta {
 	private static final String INITIAL_VALUE = ICSSPropertyID.VAL_NONE;
 
 	/**
-	 * @param inherit
-	 * @param initvalue
+	 * Default constructor
 	 */
 	public ListStyleImageMeta() {
 		super(true, INITIAL_VALUE);

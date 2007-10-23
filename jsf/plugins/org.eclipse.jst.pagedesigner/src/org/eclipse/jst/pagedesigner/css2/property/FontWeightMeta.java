@@ -25,19 +25,21 @@ import org.w3c.dom.css.CSSValue;
  */
 public class FontWeightMeta extends CSSPropertyMeta {
 
+	/**
+	 * normal weight value
+	 */
 	public static final Integer NORMAL_WEIGHT = new Integer(400);
 
-	public static final Integer BOLD_WEIGHT = new Integer(700);
+	private static final Integer BOLD_WEIGHT = new Integer(700);
 
-	static final String[] KEYWORDS = new String[] { ICSSPropertyID.VAL_NORMAL,
+	private static final String[] KEYWORDS = new String[] { ICSSPropertyID.VAL_NORMAL,
 			ICSSPropertyID.VAL_BOLD, ICSSPropertyID.VAL_BOLDER,
 			ICSSPropertyID.VAL_LIGHTER };
 
 	private Logger _log = PDPlugin.getLogger(FontWeightMeta.class);
 
 	/**
-	 * @param inherit
-	 * @param initvalue
+	 * Default constructor
 	 */
 	public FontWeightMeta() {
 		super(true, NORMAL_WEIGHT);

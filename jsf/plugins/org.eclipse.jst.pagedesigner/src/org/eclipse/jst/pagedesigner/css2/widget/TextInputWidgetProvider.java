@@ -33,6 +33,9 @@ import org.eclipse.swt.widgets.Display;
 public class TextInputWidgetProvider extends AbstractWidgetProvider {
 	private static final int VERTICAL_INCREMENT = 2;
 
+	/**
+	 * password size
+	 */
 	public static final int PWD_SIZE = 18;
 
 	private int DEFAULTSIZE = 20;
@@ -41,10 +44,17 @@ public class TextInputWidgetProvider extends AbstractWidgetProvider {
 
 	private String _value;
 
+	/**
+	 * @param style
+	 */
 	public TextInputWidgetProvider(ICSSStyle style) {
 		this(style, 20);
 	}
 
+	/**
+	 * @param style
+	 * @param size
+	 */
 	public TextInputWidgetProvider(ICSSStyle style, int size) {
 		super(style);
 		DEFAULTSIZE = size;
@@ -81,6 +91,9 @@ public class TextInputWidgetProvider extends AbstractWidgetProvider {
 		return fontSize + VERTICAL_INCREMENT;
 	}
 
+	/**
+	 * @return the default width
+	 */
 	public int getDefaultWidth() {
 		ICSSStyle style = this.getCSSStyle();
 		if (style == null) {
@@ -149,6 +162,9 @@ public class TextInputWidgetProvider extends AbstractWidgetProvider {
 		this._value = value;
 	}
 
+	/**
+	 * @param size
+	 */
 	public void setSize(int size) {
 		this._size = (size <= 0 ? DEFAULTSIZE : size);
 	}
@@ -156,7 +172,7 @@ public class TextInputWidgetProvider extends AbstractWidgetProvider {
 	/**
 	 * get current value in this text input control
 	 * 
-	 * @return
+	 * @return the value
 	 */
 	public String getValue() {
 		return _value;

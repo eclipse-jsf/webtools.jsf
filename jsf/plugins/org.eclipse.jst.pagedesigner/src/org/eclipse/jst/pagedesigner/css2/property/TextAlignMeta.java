@@ -34,8 +34,7 @@ public class TextAlignMeta extends CSSPropertyMeta {
 			IHTMLConstants.TAG_CAPTION };
 
 	/**
-	 * @param inherit
-	 * @param initvalue
+	 * Default constructor
 	 */
 	public TextAlignMeta() {
 		super(true, NOT_SPECIFIED);

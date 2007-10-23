@@ -24,6 +24,9 @@ public class OverflowMeta extends CSSPropertyMeta {
 			ICSSPropertyID.VAL_HIDDEN, ICSSPropertyID.VAL_SCROLL,
 			ICSSPropertyID.VAL_AUTO };
 
+	/**
+	 * Default constructor
+	 */
 	public OverflowMeta() {
 		super(false, ICSSPropertyID.VAL_VISIBLE);
 	}

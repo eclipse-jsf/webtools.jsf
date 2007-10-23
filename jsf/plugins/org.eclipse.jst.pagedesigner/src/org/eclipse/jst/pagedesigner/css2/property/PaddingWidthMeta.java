@@ -26,8 +26,7 @@ public class PaddingWidthMeta extends LengthMeta {
     private static int MIN_PADDING_THRESHOLD = 4;
 
 	/**
-	 * @param inherit
-	 * @param initvalue
+	 * Default constructor
 	 */
 	public PaddingWidthMeta() {
 		super(false, ICSSPropertyID.VAL_AUTO);

@@ -48,13 +48,11 @@ public class ButtonWidgetProvider extends AbstractWidgetProvider {
 	// character height.
 	private final static double VERTICAL_PADDING_RATE = 0.36;
 
-	static final String[] DEFAULTLINES = new String[] { "  " };
+	private static final String[] DEFAULTLINES = new String[] { "  " };
 
 	private String _value = "";
 
 	private String[] _lines = DEFAULTLINES;
-
-//	private List _fragments = new ArrayList();
 
 	/**
 	 * @param style
@@ -83,7 +81,7 @@ public class ButtonWidgetProvider extends AbstractWidgetProvider {
 	 * by default, the combo's width will be calculated from the longest option
 	 * value.
 	 * 
-	 * @return
+	 * @return the default width value
 	 */
 	public int getDefaultWidth() {
 		int longestStringWidth = 0;
@@ -107,7 +105,7 @@ public class ButtonWidgetProvider extends AbstractWidgetProvider {
 
 	/**
 	 * 
-	 * @return
+	 * @return the default height value
 	 * @see TextInputWidgetProvider#getDefaultHeight()
 	 */
 	public int getDefaultHeight() {
@@ -174,6 +172,9 @@ public class ButtonWidgetProvider extends AbstractWidgetProvider {
 		}
 	}
 
+	/**
+	 * @param value
+	 */
 	public void setValue(String value) {
 		if (value == null) {
 			value = "";

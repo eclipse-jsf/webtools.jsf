@@ -24,8 +24,7 @@ public class WhiteSpaceMeta extends CSSPropertyMeta {
 			ICSSPropertyID.VAL_PRE, ICSSPropertyID.VAL_NOWRAP };
 
 	/**
-	 * @param inherit
-	 * @param initvalue
+	 * Default constructor
 	 */
 	public WhiteSpaceMeta() {
 		super(true, ICSSPropertyID.VAL_NORMAL);

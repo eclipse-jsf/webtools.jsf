@@ -37,24 +37,26 @@ public class FontSizeMeta extends LengthMeta {
 			ICSSPropertyID.VAL_X_LARGE, ICSSPropertyID.VAL_XX_LARGE,
 			ICSSPropertyID.VAL_LARGER, ICSSPropertyID.VAL_SMALLER };
 
+	/**
+	 * font size
+	 */
 	public static final double MEDIUM_VAL_INT = 16;
 
-	public static final double SCALING_FACTOR = 1.2;
+	private static final double SCALING_FACTOR = 1.2;
 
-	public static final double FACTORS[] = { 0.6, 0.89, 1, 1.2, 1.5, 2.0, 3.0 };
+	private static final double FACTORS[] = { 0.6, 0.89, 1, 1.2, 1.5, 2.0, 3.0 };
 
 	// The scaling factors in IE is different from CSS definition. Here we
 	// follow IE.
-	public static final double CSS_ABSOLUTE_FACTORS[] = { 0.63, 0.82, 1, 1.12,
+	private static final double CSS_ABSOLUTE_FACTORS[] = { 0.63, 0.82, 1, 1.12,
 			1.5, 2.0, 3.0 };
 
-	public static final int MIN_SIZE_FOR_SMALLER = 1;
+	private static final int MIN_SIZE_FOR_SMALLER = 1;
 
-	public static final int MIN_SIZE_FOR_LARGER = 9;
+	private static final int MIN_SIZE_FOR_LARGER = 9;
 
 	/**
-	 * @param inherit
-	 * @param initvalue
+	 * Default constructor
 	 */
 	public FontSizeMeta() {
 		super(true, new Length((int) MEDIUM_VAL_INT, false));
@@ -104,6 +106,11 @@ public class FontSizeMeta extends LengthMeta {
 		return convertKeyword(obj, style);
 	}
 
+	/**
+	 * @param fontsizeobj
+	 * @param style
+	 * @return the length
+	 */
 	protected Length convertKeyword(Object fontsizeobj, ICSSStyle style) {
 		int fontsize;
 		int parentfontsize = style.getParentStyle().getCSSFont().getFontSize();

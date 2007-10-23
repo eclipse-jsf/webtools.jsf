@@ -19,10 +19,13 @@ import org.eclipse.jst.pagedesigner.css2.provider.ICSSWidgetProvider;
  * @version 1.5
  */
 public abstract class AbstractWidgetProvider implements ICSSWidgetProvider {
-	public static int BORDERTHICK = 2;
+	final static int BORDERTHICK = 2;
 
-	ICSSStyle _style;
+	private final ICSSStyle _style;
 
+	/**
+	 * @param style
+	 */
 	public AbstractWidgetProvider(ICSSStyle style) {
 		_style = style;
 	}

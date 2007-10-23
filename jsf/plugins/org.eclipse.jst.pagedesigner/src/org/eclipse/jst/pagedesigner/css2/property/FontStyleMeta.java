@@ -19,8 +19,7 @@ public class FontStyleMeta extends CSSPropertyMeta {
 			ICSSPropertyID.VAL_ITALIC, ICSSPropertyID.VAL_OBLIQUE };
 
 	/**
-	 * @param inherit
-	 * @param initvalue
+	 * Default constructor
 	 */
 	public FontStyleMeta() {
 		super(true, ICSSPropertyID.VAL_NORMAL);

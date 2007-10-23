@@ -37,6 +37,8 @@ public class InputFileWidgetProvider extends AbstractWidgetProvider {
 
 	/**
 	 * @param style
+	 * @param sub1 
+	 * @param sub2 
 	 */
 	public InputFileWidgetProvider(ICSSStyle style, ICSSWidgetProvider sub1,
 			ICSSWidgetProvider sub2) {

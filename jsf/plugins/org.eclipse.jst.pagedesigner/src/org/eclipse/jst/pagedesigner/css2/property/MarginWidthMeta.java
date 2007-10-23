@@ -17,8 +17,7 @@ package org.eclipse.jst.pagedesigner.css2.property;
 public class MarginWidthMeta extends LengthMeta {
 
 	/**
-	 * @param inherit
-	 * @param initvalue
+	 * Default constructor
 	 */
 	public MarginWidthMeta() {
 		super(false, ICSSPropertyID.VAL_AUTO);
@@ -26,7 +25,7 @@ public class MarginWidthMeta extends LengthMeta {
 
 	/**
 	 * @param propertyName
-	 * @return
+	 * @return true if the property is the margin width
 	 */
 	public static boolean isMarginWidth(String propertyName) {
 		return ICSSPropertyID.ATTR_MARGIN_BOTTOM.equalsIgnoreCase(propertyName)

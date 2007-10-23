@@ -188,14 +188,23 @@ public class TextAreaWidgetProvider extends AbstractWidgetProvider {
 		return end;
 	}
 
+	/**
+	 * @param columns
+	 */
 	public void setColumns(int columns) {
 		this._columns = (columns > 0 ? columns : DEFAULTCOLUMN);
 	}
 
+	/**
+	 * @param rows
+	 */
 	public void setRows(int rows) {
 		this._rows = (rows > 0 ? rows : DEFAULTROWS);
 	}
 
+	/**
+	 * @param value
+	 */
 	public void setValue(String value) {
 		this._value = value;
 	}

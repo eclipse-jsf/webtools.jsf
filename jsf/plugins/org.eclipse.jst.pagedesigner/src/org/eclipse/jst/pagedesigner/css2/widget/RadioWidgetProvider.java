@@ -24,6 +24,9 @@ import org.eclipse.jst.pagedesigner.css2.provider.DimensionInfo;
 public class RadioWidgetProvider extends AbstractWidgetProvider {
 	private boolean isChecked;
 
+	/**
+	 * @param style
+	 */
 	public RadioWidgetProvider(ICSSStyle style) {
 		super(style);
 	}
@@ -89,7 +92,10 @@ public class RadioWidgetProvider extends AbstractWidgetProvider {
 		}
 	}
 
-	public int getDefaultWidth() {
+	/**
+	 * @return the default width
+	 */
+	public final int getDefaultWidth() {
 		// FIXME: don't know the how to define the default width yet.
 		return 15;
 	}
@@ -101,6 +107,9 @@ public class RadioWidgetProvider extends AbstractWidgetProvider {
 		return isChecked;
 	}
 
+	/**
+	 * @param checked
+	 */
 	public void setChecked(boolean checked) {
 		this.isChecked = checked;
 	}

@@ -20,24 +20,54 @@ import org.w3c.dom.Element;
  * @author mengbo
  */
 public class VerticalAlignMeta extends LengthMeta {
+	/**
+	 * baseline keyword
+	 */
 	public static final String BASELINE = "baseline"; //$NON-NLS-1$
 
+	/**
+	 * middle keyword
+	 */
 	public static final String MIDDLE = "middle"; //$NON-NLS-1$
 
+	/**
+	 * sub keyword
+	 */
 	public static final String SUB = "sub"; //$NON-NLS-1$
 
+	/**
+	 * super keyword
+	 */
 	public static final String SUPER = "super"; //$NON-NLS-1$
 
+	/**
+	 * text-top keyword
+	 */
 	public static final String TEXT_TOP = "text-top"; //$NON-NLS-1$
 
+	/**
+	 * text-bottom keyword
+	 */
 	public static final String TEXT_BOTTOM = "text-bottom"; //$NON-NLS-1$
 
+	/**
+	 * top keyword
+	 */
 	public static final String TOP = "top"; //$NON-NLS-1$
 
+	/**
+	 * bottom keyword
+	 */
 	public static final String BOTTOM = "bottom"; //$NON-NLS-1$
 
+	/**
+	 * center keyword
+	 */
 	public static final String CENTER = "center"; //$NON-NLS-1$
 
+	/**
+	 * default vertical align
+	 */
 	public static final String DEFAULT_VERTICAL_ALIGN = BASELINE;
 
 	private static final String[] KEYWORDS = new String[] { BASELINE, MIDDLE,
@@ -46,8 +76,7 @@ public class VerticalAlignMeta extends LengthMeta {
 	private static final String[] htmlAttributes = new String[] { IHTMLConstants.ATTR_VALIGN };
 
 	/**
-	 * @param inherit
-	 * @param initvalue
+	 * Default constructor
 	 */
 	public VerticalAlignMeta() {
 		super(true, DEFAULT_VERTICAL_ALIGN);

@@ -16,18 +16,26 @@ package org.eclipse.jst.pagedesigner.css2.property;
  * @version 1.5
  */
 public class VisibilityMeta extends CSSPropertyMeta {
+	/**
+	 * visible keyword
+	 */
 	public static final String VISIBLE = "visible";
 
+	/**
+	 * hidden keyword
+	 */
 	public static final String HIDDEN = "hidden";
 
+	/**
+	 * collapse keyword
+	 */
 	public static final String COLLAPSE = "collapse";
 
-	public static final String[] KEYWORDS = new String[] { VISIBLE, HIDDEN,
+	private static final String[] KEYWORDS = new String[] { VISIBLE, HIDDEN,
 			COLLAPSE };
 
 	/**
-	 * @param inherit
-	 * @param initvalue
+	 * Default constructor
 	 */
 	public VisibilityMeta() {
 		super(true, VISIBLE);

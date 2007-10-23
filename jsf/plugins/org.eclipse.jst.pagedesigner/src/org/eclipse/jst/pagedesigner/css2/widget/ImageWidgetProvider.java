@@ -31,12 +31,25 @@ public class ImageWidgetProvider extends AbstractWidgetProvider {
 
 	private static int _noPicHeight;
 
+	/**
+	 * the image
+	 */
 	protected Image _image;
 
+	/**
+	 * image width
+	 */
 	protected int _imageWidth;
 
+	/**
+	 * image height
+	 */
 	protected int _imageHeight;
 
+	/**
+	 * @param image
+	 * @param style
+	 */
 	public ImageWidgetProvider(Image image, ICSSStyle style) {
 		super(style);
 

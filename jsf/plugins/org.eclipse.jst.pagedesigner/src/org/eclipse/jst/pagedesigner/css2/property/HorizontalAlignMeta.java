@@ -32,8 +32,7 @@ public class HorizontalAlignMeta extends CSSPropertyMeta {
 	};
 
 	/**
-	 * @param inherit
-	 * @param initvalue
+	 * default constructor
 	 */
 	public HorizontalAlignMeta() {
 		super(true, NOT_SPECIFIED);
