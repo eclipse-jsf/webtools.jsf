@@ -55,7 +55,6 @@ public class TestJDTBeanIntrospector extends TestCase
     private final static String testBeanGenericName = "TestBeanGeneric";
 
     
-    @SuppressWarnings("unchecked")
     protected void setUp() throws Exception {
         super.setUp();
         
