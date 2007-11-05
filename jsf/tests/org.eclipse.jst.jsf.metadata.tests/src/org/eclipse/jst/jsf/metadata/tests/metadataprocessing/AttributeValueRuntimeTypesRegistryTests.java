@@ -26,7 +26,6 @@ public class AttributeValueRuntimeTypesRegistryTests extends TestCase {
 	/*
 	 * Test method for 'org.eclipse.jst.jsf.metadataprocessors.internal.AbstractMetaDataEnabledTypeRegistry.getTypes(String)'
 	 */
-	@SuppressWarnings("restriction")
 	public void testGetTypes() {
 		AttributeValueRuntimeTypeRegistry reg = AttributeValueRuntimeTypeRegistry.getInstance();
 		

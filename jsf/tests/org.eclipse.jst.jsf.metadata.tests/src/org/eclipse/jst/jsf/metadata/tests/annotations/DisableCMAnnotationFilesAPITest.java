@@ -39,7 +39,7 @@ public class DisableCMAnnotationFilesAPITest extends TestCase implements ILogLis
 		super.tearDown();
 	}
 	
-	@SuppressWarnings({ "deprecation", "unchecked" })
+	@SuppressWarnings({"unchecked" })
 	public void testDisablement(){
 		String uri = "http://java.sun.com/jsf/html";
 		String cmElementName = "inputText";

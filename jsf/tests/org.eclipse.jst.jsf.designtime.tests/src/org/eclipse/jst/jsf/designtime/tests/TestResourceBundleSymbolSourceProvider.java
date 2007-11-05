@@ -115,7 +115,7 @@ public class TestResourceBundleSymbolSourceProvider extends TestCase
 		assertContains(symbols, "resBundleProp2", testProps);
 	}
 
-	@SuppressWarnings({ "unchecked", "unchecked" })
+	@SuppressWarnings({ "unchecked"})
     private void assertContains(ISymbol[] symbols, final String varName,List<String> properties)
 	{
 	    List<String>  copyProperties = new ArrayList<String>(properties);

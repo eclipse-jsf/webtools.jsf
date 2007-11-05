@@ -36,7 +36,6 @@ public class PerfTracker {
         _times[_numTimesRecorded++] = time;
     }
 
-    @SuppressWarnings("boxing")
     public void printReport(PrintStream outStream) {
         outStream
                 .println("===================================================");

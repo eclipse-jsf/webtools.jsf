@@ -55,7 +55,6 @@ public class ModelProviderAdapterTests extends TestCase {
 	}
 
 //Comment out till resourceBundleHelper issues on Linux is resolved: https://bugs.eclipse.org/bugs/show_bug.cgi?id=202537
-	@SuppressWarnings("restriction")
 	public void testResourceBundlerProvider() {
 		
 		IResourceBundleProvider bundleProvider = (IResourceBundleProvider)_trait.getSourceModelProvider().getAdapter(IResourceBundleProvider.class);
@@ -82,7 +81,7 @@ public class ModelProviderAdapterTests extends TestCase {
 		assertEquals("This is externalized text", bundle.getString("NLS"));		
 	}
 	
-	@SuppressWarnings({ "restriction", "unchecked" })
+	@SuppressWarnings({"unchecked" })
 	public void testClassloaderProvider() {
 		
 		IClassLoaderProvider classLoaderProvider = (IClassLoaderProvider)_trait.getSourceModelProvider().getAdapter(IClassLoaderProvider.class);

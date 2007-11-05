@@ -20,7 +20,6 @@ import org.eclipse.jst.jsf.common.metadata.internal.PluginRelativeStandardMetaDa
  * Simple class extending PluginRelativeStandardMetaDataSourceFileLocator to test locator extension on ext-pt.
  *
  */
-@SuppressWarnings("restriction")
 public class MyMDLocator extends PluginRelativeStandardMetaDataSourceFileLocator {
 	public MyMDLocator(){
 		super();

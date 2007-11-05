@@ -45,7 +45,6 @@ public class TraitValueHelperTests extends ConfigurableTestCase {
 		Assert.assertNotNull(nlsEntity);
 	}
 
-	@SuppressWarnings("restriction")
 	public void testGetValueType() {		
 		//singleString
 		Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(entity, "singleString");
@@ -79,7 +78,6 @@ public class TraitValueHelperTests extends ConfigurableTestCase {
 		Assert.assertEquals("AnyType", TraitValueHelper.getValueType(trait).getName());
 	}
  
-	@SuppressWarnings("restriction")
 	public void testGetValue() {
 		//singleString
 		Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(entity, "singleString");
@@ -112,7 +110,6 @@ public class TraitValueHelperTests extends ConfigurableTestCase {
 		Assert.assertNull(TraitValueHelper.getValue(trait));
 	}
 
-	@SuppressWarnings("restriction")
 	public void testGetValueAsString() {
 		//singleString
 		Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(entity, "singleString");
@@ -137,7 +134,6 @@ public class TraitValueHelperTests extends ConfigurableTestCase {
 		Assert.assertEquals(null, TraitValueHelper.getValueAsString(trait));
 	}
 
-	@SuppressWarnings("restriction")
 	public void testGetValueAsListOfStrings() {
 		//multivalStrings
 		Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(entity, "multivalStrings");
@@ -162,7 +158,6 @@ public class TraitValueHelperTests extends ConfigurableTestCase {
 		Assert.assertEquals("3", (String)vals.get(2));
 	}
 
-	@SuppressWarnings("restriction")
 	public void testGetNLSValue() {
 		//single NLS String
 		Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(nlsEntity, "NLS");
@@ -191,7 +186,6 @@ public class TraitValueHelperTests extends ConfigurableTestCase {
 		Assert.assertEquals(null, TraitValueHelper.getValueAsString(trait));
 	}
 
-	@SuppressWarnings("restriction")
 	public void testGetValueAsBoolean() {
 		//valid true
 		Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(entity, "BooleanVal");
