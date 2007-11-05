@@ -39,7 +39,6 @@ public abstract class AbstractResultSet/*<T>*/ implements IResultSet/*<T>*/ {
 	 * Overridable method to close resultset.  This is called by close()
 	 * @throws MetaDataException
 	 */
-	@SuppressWarnings("unused")
 	protected void doClose() throws MetaDataException {
 		//subclasses to provide override
 	}

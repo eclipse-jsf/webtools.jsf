@@ -450,6 +450,7 @@ public class JSPModelProcessor
         }
     }
     
+    @SuppressWarnings("deprecation")
     private void processSetsLocale(final String uri, final String elementName, Node attribute)
     {
         LocaleSetAggregator  aggregator = LocaleSetAggregator.create(_file.getProject(), uri, elementName, attribute.getLocalName());
@@ -464,6 +465,7 @@ public class JSPModelProcessor
             if (facesContext != null)
             {
                 facesContext.setLocaleString(attribute.getNodeValue());
+                
             }
         }
     }
