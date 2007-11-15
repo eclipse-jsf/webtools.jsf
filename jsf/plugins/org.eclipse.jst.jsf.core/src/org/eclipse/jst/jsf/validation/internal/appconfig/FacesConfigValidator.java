@@ -92,6 +92,11 @@ public class FacesConfigValidator extends EObjectValidationVisitor
                 // no children
                 return NO_CHILDREN;
             }
+            @Override
+            protected boolean mustBeClass() {
+                // must be a class
+                return true;
+            }
         }
     }
 }

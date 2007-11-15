@@ -66,6 +66,11 @@ public class FactoryValidationVisitor extends EObjectValidationVisitor
             return "javax.faces.application.ApplicationFactory";
         }
 
+        @Override
+        protected boolean mustBeClass() {
+            return true;
+        }
+
         protected EObjectValidationVisitor[] getChildNodeValidators() {
             // none
             return NO_CHILDREN;
@@ -94,6 +99,13 @@ public class FactoryValidationVisitor extends EObjectValidationVisitor
             // none
             return NO_CHILDREN;
         }
+
+        @Override
+        protected boolean mustBeClass() 
+        {
+            // must be a class
+            return true;
+        }
         
     }
 
@@ -117,6 +129,12 @@ public class FactoryValidationVisitor extends EObjectValidationVisitor
         protected EObjectValidationVisitor[] getChildNodeValidators() {
             // none
             return NO_CHILDREN;
+        }
+
+        @Override
+        protected boolean mustBeClass() {
+            // must be a class
+            return true;
         }
         
     }
@@ -142,7 +160,11 @@ public class FactoryValidationVisitor extends EObjectValidationVisitor
             // none
             return NO_CHILDREN;
         }
-        
-    }
 
+        @Override
+        protected boolean mustBeClass() {
+            // must be a class
+            return true;
+        }
+    }
 }

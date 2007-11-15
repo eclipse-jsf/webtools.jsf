@@ -69,5 +69,11 @@ public class RendererValidationVisitor extends EObjectValidationVisitor {
         protected EObjectValidationVisitor[] getChildNodeValidators() {
             return NO_CHILDREN;
         }
+
+        @Override
+        protected boolean mustBeClass() {
+            // must be a class
+            return true;
+        }
     }
 }

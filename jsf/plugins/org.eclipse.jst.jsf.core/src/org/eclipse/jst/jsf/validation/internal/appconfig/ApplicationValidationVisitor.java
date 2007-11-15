@@ -139,7 +139,7 @@ public class ApplicationValidationVisitor extends EObjectValidationVisitor
          */
         public ActionListenerValidationVisitor(final String version) {
             super(FacesConfigPackage.eINSTANCE.getApplicationType_ActionListener(),
-                    version,"javax.faces.event.ActionListener");
+                    version,"javax.faces.event.ActionListener", true);
         }
     }
     
@@ -150,7 +150,7 @@ public class ApplicationValidationVisitor extends EObjectValidationVisitor
          */
         public NavigationHandlerValidationVisitor(final String version) {
             super(FacesConfigPackage.eINSTANCE.getApplicationType_NavigationHandler(),
-                    version,"javax.faces.application.NavigationHandler");
+                    version,"javax.faces.application.NavigationHandler", true);
         }
     }
     
@@ -159,7 +159,7 @@ public class ApplicationValidationVisitor extends EObjectValidationVisitor
         ViewHandlerValidationVisitor(final String version)
         {
             super(FacesConfigPackage.eINSTANCE.getApplicationType_ViewHandler(),
-                    version,"javax.faces.application.ViewHandler");
+                    version,"javax.faces.application.ViewHandler", true);
         }
     }
     
@@ -167,8 +167,10 @@ public class ApplicationValidationVisitor extends EObjectValidationVisitor
     {
         StateManagerValidationVisitior(final String version)
         {
+            // must a concrete class with a zero arg constructor:
+            //   JSF1.1_3.2.3.2 and JSF1.2_3.2.4.2
             super(FacesConfigPackage.eINSTANCE.getApplicationType_StateManager(),
-                    version,"javax.faces.application.StateManager");
+                    version,"javax.faces.application.StateManager", true);
         }    
     }
     
@@ -177,7 +179,7 @@ public class ApplicationValidationVisitor extends EObjectValidationVisitor
         PropertyResolverValidationVisitor(final String version)
         {
             super(FacesConfigPackage.eINSTANCE.getApplicationType_PropertyResolver(),
-                    version,"javax.faces.el.PropertyResolver");
+                    version,"javax.faces.el.PropertyResolver", true);
         }
 
         protected void doValidate(EObject object, List messages, IFile file) {
@@ -201,7 +203,7 @@ public class ApplicationValidationVisitor extends EObjectValidationVisitor
         VariableResolverValidationVisitor(final String version)
         {
             super(FacesConfigPackage.eINSTANCE.getApplicationType_VariableResolver(),
-                    version, "javax.faces.el.VariableResolver");
+                    version, "javax.faces.el.VariableResolver", true);
         }
 
         protected void doValidate(EObject object, List messages, IFile file) {
@@ -224,8 +226,10 @@ public class ApplicationValidationVisitor extends EObjectValidationVisitor
     {
         ELResolverValidationVisitor(final String version)
         {
+            // must be a class and have zero-arg constructor
+            //   JSF1.2_5.6.1.4
             super(FacesConfigPackage.eINSTANCE.getApplicationType_ELResolver(),
-                    version, "javax.el.ELResolver");
+               version, "javax.el.ELResolver", true);
         }
 
         protected void doValidate(EObject object, List messages, IFile file) {
@@ -249,16 +253,20 @@ public class ApplicationValidationVisitor extends EObjectValidationVisitor
     private abstract static class ApplicationClassNameBasedValidationVisitor extends ClassNameEObjectValidationVisitor
     {
         private final String _instanceOf;
+        private final boolean _mustBeClass;
         
         /**
          * @param feature 
          * @param version 
          * @param instanceOf 
+         * @param mustBeClass 
          */
         protected ApplicationClassNameBasedValidationVisitor(EStructuralFeature feature,
-                final String version, final String instanceOf) {
+                final String version, final String instanceOf, final boolean mustBeClass) 
+        {
             super(feature, version);
             _instanceOf = instanceOf;
+            _mustBeClass = mustBeClass;
         }
 
         protected String getFullyQualifiedName(EObject eobj) 
@@ -271,6 +279,11 @@ public class ApplicationValidationVisitor extends EObjectValidationVisitor
             }
             
             return null;
+        }
+
+        @Override
+        protected boolean mustBeClass() {
+            return _mustBeClass;
         }
 
         protected EObjectValidationVisitor[] getChildNodeValidators() {

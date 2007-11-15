@@ -72,6 +72,12 @@ public class ComponentValidatorVisitor extends EObjectValidationVisitor
         protected EObjectValidationVisitor[] getChildNodeValidators() {
             return NO_CHILDREN;
         }
+
+        @Override
+        protected boolean mustBeClass() {
+            // must a class
+            return true;
+        }
     }
     
     private static class ComponentFacetValidationVisitor extends EObjectValidationVisitor

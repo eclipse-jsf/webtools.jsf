@@ -68,8 +68,10 @@ public class ManagedBeanValidationVisitor extends EObjectValidationVisitor
             String classTypeValue = classType.getTextContent();
             addMessageInfo(messages
                 , AppConfigValidationUtil.validateClassName
-                    (classTypeValue == null ? "" : classTypeValue, 
-                            null, file.getProject()), classType, file);
+                    (classTypeValue == null ? "" : classTypeValue
+                            , null, true,   // a managed bean must be a class 
+                            file.getProject())
+                            , classType, file);
         }
     }
     

@@ -41,9 +41,8 @@ public abstract class ClassNameEObjectValidationVisitor extends
         fullyQualifiedName = fullyQualifiedName == null ? "" : fullyQualifiedName;
         addMessageInfo(messages,  
             AppConfigValidationUtil
-                .validateClassName(fullyQualifiedName, getInstanceOf(), 
-                        file.getProject())
-                        ,object, file);
+                .validateClassName(fullyQualifiedName, getInstanceOf()
+                        , false, file.getProject()),object, file);
     }
 
     /**
@@ -56,4 +55,10 @@ public abstract class ClassNameEObjectValidationVisitor extends
      * @return a fully-qualified 
      */
     protected abstract String getInstanceOf();
+    
+    /**
+     * @return true if the class being named must be a class
+     * and may not be an enum or interface
+     */
+    protected abstract boolean mustBeClass();
 }

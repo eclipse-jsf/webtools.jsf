@@ -142,7 +142,7 @@ public final class DiagnosticFactory
     {
         return new MyLocalizedMessage(IMessage.NORMAL_SEVERITY,
                 MessageFormat.format(Messages.CANNOT_FIND_CLASS_NAME_ID,new Object[]{className}),
-                null, SYNTAX_ERROR_IN_EL_ID);
+                null, CANNOT_FIND_CLASS_NAME_ID);
     }
     
     /**

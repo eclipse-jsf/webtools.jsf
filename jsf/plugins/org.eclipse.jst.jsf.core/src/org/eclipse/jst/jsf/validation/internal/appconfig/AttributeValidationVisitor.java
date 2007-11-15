@@ -71,6 +71,13 @@ public class AttributeValidationVisitor extends EObjectValidationVisitor {
         protected EObjectValidationVisitor[] getChildNodeValidators() {
             return NO_CHILDREN;
         }
+
+        @Override
+        protected boolean mustBeClass() 
+        {
+            // attribute could be a class or an enum
+            return false;
+        }
         
     }
 }

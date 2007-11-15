@@ -70,6 +70,12 @@ public class ConverterValidationVisitor extends EObjectValidationVisitor
         protected EObjectValidationVisitor[] getChildNodeValidators() {
             return NO_CHILDREN;
         }
+
+        @Override
+        protected boolean mustBeClass() {
+            // can't be an enum
+            return true;
+        }
     }
     
     private static class ConverterForClassValidationVisitor extends ClassNameEObjectValidationVisitor
@@ -92,6 +98,12 @@ public class ConverterValidationVisitor extends EObjectValidationVisitor
 
         protected EObjectValidationVisitor[] getChildNodeValidators() {
             return NO_CHILDREN;
+        }
+
+        @Override
+        protected boolean mustBeClass() {
+            // could be a converter for all instances of an enum type
+            return false;
         }
     }
 

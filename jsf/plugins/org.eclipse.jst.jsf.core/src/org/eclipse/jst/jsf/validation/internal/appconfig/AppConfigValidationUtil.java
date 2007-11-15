@@ -53,24 +53,26 @@ public final class AppConfigValidationUtil
      * 
      * @param fullyQualifiedName
      * @param instanceOf 
+     * @param mustBeAClass 
      * @param project 
      * @return null if no problems or a Message if problem found
      */
     public static IMessage validateClassName(final String fullyQualifiedName, 
                                              final String instanceOf,
+                                             final boolean mustBeAClass,
                                              final IProject project)
     {
         try
         {
             IType type = getType(project, fullyQualifiedName);
-            if (type == null)
+            if (type == null || !type.exists())
             {
                 return DiagnosticFactory
                         .create_CANNOT_FIND_CLASS_NAME(fullyQualifiedName);
             }
             
             // must be a class, not an interface or enum
-            if (!type.isClass())
+            if (mustBeAClass && !type.isClass())
             {
                 return DiagnosticFactory
                         .create_FULLY_QUALIFIED_NAME_MUST_BE_A_CLASS
