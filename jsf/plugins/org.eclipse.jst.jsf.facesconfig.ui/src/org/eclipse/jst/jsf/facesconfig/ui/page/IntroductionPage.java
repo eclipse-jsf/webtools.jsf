@@ -11,6 +11,9 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.facesconfig.ui.page;
 
+import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.util.IPropertyChangeListener;
+import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
@@ -19,6 +22,11 @@ import org.eclipse.jst.jsf.common.ui.internal.guiutils.IntroductionSection;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor;
+import org.eclipse.jst.jsf.facesconfig.ui.preference.GEMPreferences;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.editor.FormPage;
 import org.eclipse.ui.forms.widgets.FormToolkit;
@@ -31,7 +39,10 @@ import org.eclipse.ui.forms.widgets.TableWrapLayout;
  * 
  * @author jchoi
  */
-public class IntroductionPage extends FormPage implements IFacesConfigPage, ISelectionProvider{
+public class IntroductionPage extends FormPage implements IFacesConfigPage, ISelectionProvider, IPropertyChangeListener{
+	
+	private Button noIntroPageButton = null;
+
 	/**
 	 * @param facesConfigEditor
 	 */
@@ -57,18 +68,30 @@ public class IntroductionPage extends FormPage implements IFacesConfigPage, ISel
 		TableWrapLayout layout = new TableWrapLayout();
 		layout.numColumns = 1;
 		layout.makeColumnsEqualWidth = true;
+		layout.verticalSpacing = 20;
 		form.getBody().setLayout(layout);
 
 		IntroductionSection introPart = new IntroductionSection(
 				FacesConfigEditor.EDITOR_ID, managedForm, toolkit,
 				EditorMessages.editor_pageflow_page_intro_help_HelpContextID,
 				EditorMessages.editor_pageflow_page_intro_help_HelpToolTip);
-
+		
+		noIntroPageButton = toolkit.createButton(form.getBody(), EditorMessages.editor_pageflow_page_intro_NoIntroPage, SWT.CHECK);
+		noIntroPageButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				boolean selection = ((Button) e.widget).getSelection();
+				EditorPlugin.getDefault().getPreferenceStore().setValue(GEMPreferences.SHOW_INTRO_EDITOR, !selection);
+			}
+		});
 		TableWrapData td = new TableWrapData(TableWrapData.FILL_GRAB);
 		td.colspan = 1;
 		introPart.setLayoutData(td);
 
 		getSite().setSelectionProvider(this);
+		
+		IPreferenceStore preferenceStore = EditorPlugin.getDefault().getPreferenceStore();
+		preferenceStore.addPropertyChangeListener(this);
+		updatePrefenceControls(preferenceStore);
 	}
 
 	public void addSelectionChangedListener(ISelectionChangedListener listener) {
@@ -126,6 +149,26 @@ public class IntroductionPage extends FormPage implements IFacesConfigPage, ISel
 	public void setInput(Object input) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public void propertyChange(PropertyChangeEvent event) {
+		if (event != null) {
+			String property = event.getProperty();
+			if (property == null || property.equals(GEMPreferences.SHOW_INTRO_EDITOR)) {
+				//assume that we are in an ui thread, as other listeners assume this too:
+				updatePrefenceControls(EditorPlugin.getDefault().getPreferenceStore());
+			}
+		}
+	}
+
+	private void updatePrefenceControls(IPreferenceStore preferenceStore) {
+		boolean noIntroPage = !GEMPreferences.getShowIntroEditor();
+		noIntroPageButton.setSelection(noIntroPage);
+	}
+
+	public void dispose() {
+		EditorPlugin.getDefault().getPreferenceStore().removePropertyChangeListener(this);
+		super.dispose();
 	}
 
 }

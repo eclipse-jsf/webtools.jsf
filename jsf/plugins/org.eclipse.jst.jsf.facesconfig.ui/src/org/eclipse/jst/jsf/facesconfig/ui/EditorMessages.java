@@ -1544,4 +1544,9 @@ public final class EditorMessages extends NLS {
 	 */
 	public static String AlignmentAction_AlignTopAction_Tooltip;
 
+    /**
+     * User can turn off intro page in faces-config editor
+     */
+    public static String editor_pageflow_page_intro_NoIntroPage;
+
 }
