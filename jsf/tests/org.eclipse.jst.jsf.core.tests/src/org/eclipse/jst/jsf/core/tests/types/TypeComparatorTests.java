@@ -20,6 +20,7 @@ import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.internal.types.CompositeType;
 import org.eclipse.jst.jsf.common.internal.types.IAssignable;
 import org.eclipse.jst.jsf.common.internal.types.TypeComparator;
+import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
 
 /**
  * Unit tests for the composite type comparator.  Indirectly exercises
@@ -80,7 +81,50 @@ public class TypeComparatorTests extends TestCase
     private final CompositeType readWriteObject =
         new CompositeType("Ljava.lang.Object;",
                 IAssignable.ASSIGNMENT_TYPE_LHS | IAssignable.ASSIGNMENT_TYPE_RHS);
+    private final CompositeType writeOnlyObject =
+        new CompositeType("Ljava.lang.Object;",IAssignable.ASSIGNMENT_TYPE_LHS);
     
+    // method types
+    private final static String actionMethodSig = 
+        Signature.createMethodSignature(new String[0]
+                                      , "Ljava.lang.String;");
+    private final static String actionListenerSig = 
+        Signature.createMethodSignature
+            (new String[]{"Ljavax.faces.event.ActionEvent;"}
+                          , Signature.SIG_VOID);
+    private final static String hasReturnAndArgSig =
+        Signature.createMethodSignature
+            (new String[]{"Ljavax.faces.event.ActionEvent;"}
+                        , "Ljava.lang.String;");
+    private final static String sameNumArgsDiffTypeSig =
+        Signature.createMethodSignature
+        (new String[]{"Ljava.lang.String;"}
+                    , "Ljava.lang.String;");
+    
+    private final CompositeType actionMethod =
+        new CompositeType(actionMethodSig, 
+                IAssignable.ASSIGNMENT_TYPE_NONE);
+    private final CompositeType actionListener = 
+        new CompositeType(actionListenerSig, 
+                IAssignable.ASSIGNMENT_TYPE_NONE);
+    private final CompositeType hasReturnAndArg =
+        new CompositeType(hasReturnAndArgSig, 
+                IAssignable.ASSIGNMENT_TYPE_NONE);
+    
+    private final CompositeType actionAndActionListener =
+        new CompositeType(new String[] {actionMethodSig, actionListenerSig}
+                         , IAssignable.ASSIGNMENT_TYPE_NONE);
+    private final CompositeType sameNumArgsDiffType =
+        new CompositeType(new String[] {sameNumArgsDiffTypeSig}
+                         , IAssignable.ASSIGNMENT_TYPE_NONE);
+    
+    private final CompositeType takesUnboxedInt =
+        new CompositeType(Signature.createMethodSignature(new String[]{Signature.SIG_INT}, Signature.SIG_VOID)
+        , IAssignable.ASSIGNMENT_TYPE_NONE);
+    private final CompositeType takesBoxedInt =
+        new CompositeType(Signature.createMethodSignature(new String[]{TypeConstants.TYPE_BOXED_INTEGER}, Signature.SIG_VOID)
+        , IAssignable.ASSIGNMENT_TYPE_NONE);
+        
     /**
      * Sanity check on simple types
      */
@@ -177,6 +221,40 @@ public class TypeComparatorTests extends TestCase
         assertFalse(result.getSeverity() == Diagnostic.OK);
     }
 
+    public void testBooleanCoercions()
+    {
+        // noop: boolean should always coerce to boolean
+        Diagnostic result =
+            TypeComparator.calculateTypeCompatibility
+                (simpleBoolean, simpleBoolean);
+        assertTrue(result.getSeverity() == Diagnostic.OK);
+        
+        // noop: works also for boxed
+        result =
+            TypeComparator.calculateTypeCompatibility
+                (simpleBoolean, boxedBoolean);
+        assertTrue(result.getSeverity() == Diagnostic.OK);
+
+        // noop: works also for boxed
+        result =
+            TypeComparator.calculateTypeCompatibility
+                (boxedBoolean, simpleBoolean);
+        assertTrue(result.getSeverity() == Diagnostic.OK);
+
+        // always coerce strings to booleans
+        result =
+            TypeComparator.calculateTypeCompatibility
+                (simpleBoolean, simpleString);
+        assertTrue(result.getSeverity() == Diagnostic.OK);
+        
+        // no number -> boolean coercion
+        result =
+            TypeComparator.calculateTypeCompatibility
+                (simpleBoolean, simpleDouble);
+        assertFalse(result.getSeverity() == Diagnostic.OK);
+    }
+    
+    
     /**
      * test type compatibility coercing to double
      */
@@ -350,6 +428,95 @@ public class TypeComparatorTests extends TestCase
         result =
             TypeComparator.calculateTypeCompatibility(readWriteString, readWriteObject);
         assertFalse(result.getSeverity() == Diagnostic.OK);
+        
+        // this should fail because a readable object is expected, but one
+        // is not provided (i.e. "not gettable")
+        result =
+            TypeComparator.calculateTypeCompatibility(readWriteObject, writeOnlyObject);
+        assertFalse(result.getSeverity() == Diagnostic.OK);
     }
     
+    public void testMethodSignatures()
+    {
+        // compare a method to itself should always work; return type, no args
+        Diagnostic result = 
+            TypeComparator.calculateTypeCompatibility(actionMethod, actionMethod);
+        assertTrue(result.getSeverity() == Diagnostic.OK);
+        
+        // compare same when method has no return but args
+        result =
+            TypeComparator.calculateTypeCompatibility(actionListener, actionListener);
+        assertTrue(result.getSeverity() == Diagnostic.OK);
+        
+        // methods are not compatible
+        result =
+            TypeComparator.calculateTypeCompatibility(actionMethod, actionListener);
+        assertFalse(result.getSeverity() == Diagnostic.OK);
+
+        // reverse order makes no diff
+        result =
+            TypeComparator.calculateTypeCompatibility(actionListener,actionMethod);
+        assertFalse(result.getSeverity() == Diagnostic.OK);
+
+        // same signature must succeed
+        result =
+            TypeComparator.calculateTypeCompatibility(hasReturnAndArg,hasReturnAndArg);
+        assertTrue(result.getSeverity() == Diagnostic.OK);
+
+        // boxed vs. unboxed arguments should succeed for same type
+        result = TypeComparator.calculateTypeCompatibility(takesBoxedInt, takesUnboxedInt);
+        assertTrue(result.getSeverity() == Diagnostic.OK);
+
+        // and in reverse...
+        result = TypeComparator.calculateTypeCompatibility(takesUnboxedInt, takesBoxedInt);
+        assertTrue(result.getSeverity() == Diagnostic.OK);
+
+        // won't satify, event though return matches
+        result = TypeComparator.calculateTypeCompatibility(actionMethod, hasReturnAndArg);
+        assertFalse(result.getSeverity() == Diagnostic.OK);
+
+        // nor in reverse..
+        result = TypeComparator.calculateTypeCompatibility(hasReturnAndArg, actionMethod);
+        assertFalse(result.getSeverity() == Diagnostic.OK);
+
+        // won't satify, event though args matches
+        result = TypeComparator.calculateTypeCompatibility(actionListener, hasReturnAndArg);
+        assertFalse(result.getSeverity() == Diagnostic.OK);
+
+        // nor in reverse...
+        result = TypeComparator.calculateTypeCompatibility(hasReturnAndArg, actionListener);
+        assertFalse(result.getSeverity() == Diagnostic.OK);
+        
+        // check same return and arg count, diff arg
+        result = TypeComparator.calculateTypeCompatibility(hasReturnAndArg, sameNumArgsDiffType);
+        assertFalse(result.getSeverity() == Diagnostic.OK);
+
+        
+    // test multiple
+        
+        // this will succeed because actionMethod is in the list
+        result = TypeComparator.calculateTypeCompatibility(actionAndActionListener, actionMethod);
+        assertTrue(result.getSeverity() == Diagnostic.OK);
+        
+        // this will succeed because actionListener is in the list
+        result = TypeComparator.calculateTypeCompatibility(actionAndActionListener, actionListener);
+        assertTrue(result.getSeverity() == Diagnostic.OK);
+
+        // this will fail because hasReturnAndArg is not in the list
+        result = TypeComparator.calculateTypeCompatibility(actionAndActionListener, hasReturnAndArg);
+        assertFalse(result.getSeverity() == Diagnostic.OK);
+    }
+    
+    public void testValueMethodMix()
+    {
+        // a value binding will never be compatible with a method binding
+        Diagnostic result = 
+            TypeComparator.calculateTypeCompatibility(actionMethod, readWriteObject);
+        assertFalse(result.getSeverity() == Diagnostic.OK);
+        
+        // nor in reverse...
+        result = 
+            TypeComparator.calculateTypeCompatibility(readWriteObject,actionMethod);
+        assertFalse(result.getSeverity() == Diagnostic.OK);
+    }
 }
