@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.jst.jsf.tests.feature"
       label="%feature.name"
-      version="1.0.1.qualifier"
+      version="2.0.0.qualifier"
       provider-name="%feature.provider">
 
    <description>
