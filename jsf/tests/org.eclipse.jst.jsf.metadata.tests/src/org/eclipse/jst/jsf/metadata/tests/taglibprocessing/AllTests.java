@@ -39,15 +39,22 @@ public class AllTests {
 		addTestSuite(suite, DoubleTypeTest.class);
 		addTestSuite(suite, EnumeratedDoubleTypeTest.class);
 		
+		addTestSuite(suite, ColorTypeTest.class);
+		addTestSuite(suite, LanguageCodeTypeTest.class);
+		addTestSuite(suite, LocaleTypeTest.class);
+		addTestSuite(suite, CurrencyCodeTypeTest.class);
+		addTestSuite(suite, TimeZoneTypeTest.class);
+		addTestSuite(suite, LengthTypeTest.class);
+		addTestSuite(suite, NumberPatternTypeTest.class);
+//		addTestSuite(suite, RelativePathTypeTest.class);
+//		addTestSuite(suite, WebPathTypeTest.class);
+		addTestSuite(suite, CharacterTypeTest.class);
+//		addTestSuite(suite, ScriptTypeTest.class);
+		addTestSuite(suite, LinkTypeTest.class);
+		addTestSuite(suite, ContentTypeTest.class);
+//		addTestSuite(suite, URITypeTest.class);
+		
 		//Tests requiring JSF Implementation
-		addTestSuite(suite, StringTypeTest.class);
-		addTestSuite(suite, BooleanTypeTest.class);
-		addTestSuite(suite, IntegerTypeTest.class);
-		addTestSuite(suite, EnumeratedIntegerTypeTest.class);
-		addTestSuite(suite, LongTypeTest.class);
-		addTestSuite(suite, EnumeratedLongTypeTest.class);
-		addTestSuite(suite, DoubleTypeTest.class);
-		addTestSuite(suite, EnumeratedDoubleTypeTest.class);
 		addTestSuite(suite, JavaClassTypeTest.class);
 		addTestSuite(suite, FacesConfigConverterIDTypeTests.class);
 		addTestSuite(suite, FacesConfigValidatorIDTypeTests.class);
@@ -57,6 +64,9 @@ public class AllTests {
 		addTestSuite(suite, ValueBindingTypeTests.class);
 		addTestSuite(suite, ValueTypeTests.class);
 		addTestSuite(suite, ActionTypeTests.class);
+		
+		addTestSuite(suite, CSSClassTypeTests.class);
+		addTestSuite(suite, CSSStyleTypeTests.class);			
 		
 		addTestSuite(suite,JSFHTMLTestCase.class);
 		

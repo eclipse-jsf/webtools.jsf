@@ -35,11 +35,19 @@ import org.eclipse.jst.jsf.metadata.tests.metadataprocessing.AttributeValueRunti
 import org.eclipse.jst.jsf.metadata.tests.metadataprocessing.AttributeValueRuntimeTypeFactoryTests;
 import org.eclipse.jst.jsf.metadata.tests.metadataprocessing.AttributeValueRuntimeTypesRegistryTests;
 import org.eclipse.jst.jsf.metadata.tests.metadataprocessing.MetaDataProcessorsFactoryTests;
+import org.eclipse.jst.jsf.metadata.tests.pagedesigner.PropertyDescriptorTests;
+import org.eclipse.jst.jsf.metadata.tests.pagedesigner.QuickEditSectionsTests;
+import org.eclipse.jst.jsf.metadata.tests.sybaseMDTranslations.SybaseCMTranslationTests;
 import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.ActionTypeTests;
 import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.BooleanTypeTest;
+import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.CSSClassTypeTests;
+import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.CSSStyleTypeTests;
+import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.CharacterTypeTest;
 import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.ColorTypeTest;
 import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.ComponentBindingTypeTests;
 import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.ComponentIDTypeTests;
+import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.ContentTypeTest;
+import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.CurrencyCodeTypeTest;
 import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.DoubleTypeTest;
 import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.EnumeratedDoubleTypeTest;
 import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.EnumeratedIntegerTypeTest;
@@ -49,10 +57,15 @@ import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.FacesConfigValidatorI
 import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.IntegerTypeTest;
 import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.JSFHTMLTestCase;
 import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.JavaClassTypeTest;
+import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.LanguageCodeTypeTest;
 import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.LengthTypeTest;
+import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.LinkTypeTest;
+import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.LocaleTypeTest;
 import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.LongTypeTest;
 import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.MethodBindingTypeTests;
+import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.NumberPatternTypeTest;
 import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.StringTypeTest;
+import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.TimeZoneTypeTest;
 import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.ValueBindingTypeTests;
 import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.ValueTypeTests;
 import org.eclipse.jst.jsf.metadata.tests.util.IJSFRuntimeRequiredV11;
@@ -96,7 +109,15 @@ public class AllTests {
 		addTestSuite(suite, AttributeValueRuntimeTypesRegistryTests.class);
 		addTestSuite(suite, AttributeValueRuntimeTypeFactoryTests.class);
 		
+		//Sybase config translation test
+		addTestSuite(suite, SybaseCMTranslationTests.class);
+		
+		//PageDesigner Metadata tests
+		addTestSuite(suite, PropertyDescriptorTests.class);
+		addTestSuite(suite, QuickEditSectionsTests.class);
+		
 //		//taglib processing
+		//Tests NOT requiring JSF Implementation
 		addTestSuite(suite, StringTypeTest.class);
 		addTestSuite(suite, BooleanTypeTest.class);
 		addTestSuite(suite, IntegerTypeTest.class);
@@ -105,6 +126,23 @@ public class AllTests {
 		addTestSuite(suite, EnumeratedLongTypeTest.class);
 		addTestSuite(suite, DoubleTypeTest.class);
 		addTestSuite(suite, EnumeratedDoubleTypeTest.class);
+		
+		addTestSuite(suite, ColorTypeTest.class);
+		addTestSuite(suite, LanguageCodeTypeTest.class);
+		addTestSuite(suite, LocaleTypeTest.class);
+		addTestSuite(suite, CurrencyCodeTypeTest.class);
+		addTestSuite(suite, TimeZoneTypeTest.class);
+		addTestSuite(suite, LengthTypeTest.class);
+		addTestSuite(suite, NumberPatternTypeTest.class);
+//		addTestSuite(suite, RelativePathTypeTest.class);
+//		addTestSuite(suite, WebPathTypeTest.class);
+		addTestSuite(suite, CharacterTypeTest.class);
+//		addTestSuite(suite, ScriptTypeTest.class);
+		addTestSuite(suite, LinkTypeTest.class);
+		addTestSuite(suite, ContentTypeTest.class);
+//		addTestSuite(suite, URITypeTest.class);
+		
+		//Tests requiring JSF Implementation
 		addTestSuite(suite, JavaClassTypeTest.class);
 		addTestSuite(suite, FacesConfigConverterIDTypeTests.class);
 		addTestSuite(suite, FacesConfigValidatorIDTypeTests.class);
@@ -114,11 +152,14 @@ public class AllTests {
 		addTestSuite(suite, ValueBindingTypeTests.class);
 		addTestSuite(suite, ValueTypeTests.class);
 		addTestSuite(suite, ActionTypeTests.class);
-		addTestSuite(suite, LengthTypeTest.class);
-		addTestSuite(suite, ColorTypeTest.class);
+		
+		addTestSuite(suite, CSSClassTypeTests.class);
+		addTestSuite(suite, CSSStyleTypeTests.class);			
 		
 		addTestSuite(suite, JSFHTMLTestCase.class);
 //		addTestSuite(suite, JSFCoreTestCase.class);
+		
+		
 		//$JUnit-END$
 		return suite;
 	}

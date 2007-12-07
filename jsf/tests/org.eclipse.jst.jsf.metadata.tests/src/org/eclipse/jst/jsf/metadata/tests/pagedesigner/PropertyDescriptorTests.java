@@ -1,0 +1,117 @@
+/*******************************************************************************
+ * Copyright (c) 2006 Oracle Corporation.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Oracle - initial API and implementation
+ *    
+ ********************************************************************************/
+package org.eclipse.jst.jsf.metadata.tests.pagedesigner;
+
+import java.util.List;
+
+import org.eclipse.core.runtime.QualifiedName;
+import org.eclipse.jst.jsf.common.metadata.Entity;
+import org.eclipse.jst.jsf.common.metadata.Model;
+import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
+import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
+import org.eclipse.jst.jsf.core.JSFVersion;
+import org.eclipse.jst.jsf.metadata.tests.util.SingleJSPTestCase;
+import org.eclipse.jst.jsf.metadataprocessors.IMetaDataEnabledFeature;
+import org.eclipse.jst.jsf.metadataprocessors.MetaDataEnabledProcessingFactory;
+import org.eclipse.jst.pagedesigner.editors.properties.IPropertyPageDescriptor;
+import org.eclipse.jst.pagedesigner.properties.ITabbedPropertiesConstants;
+
+//TODO:   can use beefing up
+public class PropertyDescriptorTests extends SingleJSPTestCase {
+	
+	private static QualifiedName qn = new QualifiedName("test","model");
+	private String uri = "http://org.eclipse.jsf/propertyDescriptorTest";
+	private Model _model;
+	private int _offset = 423;
+	
+	
+	public PropertyDescriptorTests() {
+		super("/testfiles/jsps/propertyDescTests.jsp",
+			"/propertyDescTests.jsp",
+				JSFVersion.V1_1,
+			"/testfiles/web/faces-config_1_1.xml.data");
+	}
+	
+	public void setUp() throws Exception {
+		if (_model == null) {
+			super.setUp();
+			getModel();			
+		}
+	}
+	
+	private Model getModel() {
+		if (_model == null) {
+			ITaglibDomainMetaDataModelContext modelContext = TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(null, uri);
+			_model = TaglibDomainMetaDataQueryHelper.getModel(modelContext);
+		}
+
+		return _model;
+	}
+	
+	public void testBasics(){
+		assertNotNull(getModel());
+		assertEquals(1, getModel().getChildEntities().size());
+		
+		Entity tag = TaglibDomainMetaDataQueryHelper.getEntity(getModel(), "Tag");
+		assertNotNull(tag);
+		assertTrue(tag.getChildEntities().size() == 3);
+
+		testAttr1(tag);
+		testDefaultAttr(tag);
+			
+	}
+
+
+	private void testAttr1(Entity tag){	
+		Entity attr1 = TaglibDomainMetaDataQueryHelper.getEntity(tag, "Attr1");
+		assertNotNull(attr1);
+		assertTrue(attr1.getTraits().size() > 2);
+		
+		List<IMetaDataEnabledFeature> pds = MetaDataEnabledProcessingFactory.getInstance().getAttributeValueRuntimeTypeFeatureProcessors(IPropertyPageDescriptor.class, getStructuredDocumentContext(_structuredDocument, _offset), attr1);
+		assertNotNull(pds);
+		IPropertyPageDescriptor pd = (IPropertyPageDescriptor)pds.get(0);
+		assertNotNull(pd);
+		assertEquals("CategoryName", pd.getCategory());
+		assertEquals("This is a description.", pd.getDescription());
+		assertTrue(pd.isRequired());
+		assertEquals("MyAttr1", pd.getLabel());
+		
+	}
+	
+	private void testDefaultAttr(Entity tag){	
+		Entity attr1 = TaglibDomainMetaDataQueryHelper.getEntity(tag, "DefaultAttr");
+		assertNotNull(attr1);
+		
+		List<IMetaDataEnabledFeature> pds = MetaDataEnabledProcessingFactory.getInstance().getAttributeValueRuntimeTypeFeatureProcessors(IPropertyPageDescriptor.class, getStructuredDocumentContext(_structuredDocument, _offset), attr1);
+		assertNotNull(pds);
+		IPropertyPageDescriptor pd = (IPropertyPageDescriptor)pds.get(0);
+		assertNotNull(pd);
+		assertEquals(ITabbedPropertiesConstants.OTHER_CATEGORY, pd.getCategory());
+		assertNull(pd.getDescription());
+		assertFalse(pd.isRequired());
+		assertEquals("DefaultAttr", pd.getLabel());
+		
+	}
+	
+	
+	public void testLocatePropertyPageDescForBooleanTagAttr() {
+		Entity boolAttr = TaglibDomainMetaDataQueryHelper.getEntity(getModel(), "Tag/boolAttr");
+		assertNotNull(boolAttr);
+		
+		List<IMetaDataEnabledFeature> pds = MetaDataEnabledProcessingFactory.getInstance().getAttributeValueRuntimeTypeFeatureProcessors(IPropertyPageDescriptor.class, getStructuredDocumentContext(_structuredDocument, _offset), boolAttr);
+		assertNotNull(pds);
+		IPropertyPageDescriptor pd = (IPropertyPageDescriptor)pds.get(0);
+		assertNotNull(pd);
+
+	}
+
+}

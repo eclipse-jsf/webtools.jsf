@@ -15,12 +15,14 @@ import java.util.List;
 
 import org.eclipse.jst.jsf.common.metadata.tests.AbstractBaseMetaDataTestCase;
 import org.eclipse.jst.jsf.metadata.tests.MetadataTestsPlugin;
+import org.eclipse.jst.jsf.metadataprocessors.IMetaDataEnabledFeature;
 import org.eclipse.jst.jsf.metadataprocessors.MetaDataEnabledProcessingFactory;
 import org.eclipse.jst.jsf.metadataprocessors.features.ICreateValues;
 import org.eclipse.jst.jsf.metadataprocessors.features.IDefaultValue;
 import org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValues;
 import org.eclipse.jst.jsf.metadataprocessors.features.IValidELValues;
 import org.eclipse.jst.jsf.metadataprocessors.features.IValidValues;
+import org.eclipse.jst.pagedesigner.editors.properties.IPropertyPageDescriptor;
 
 public abstract class TaglibProcessingTestCase extends AbstractBaseMetaDataTestCase {
 //	protected IStructuredDocumentContext docContext;
@@ -35,6 +37,7 @@ public abstract class TaglibProcessingTestCase extends AbstractBaseMetaDataTestC
 	protected List<?> defaultValueAdapters;
 	protected List<?> createValuesAdapters;
 	protected List<?> validELValuesAdapters;
+	protected List<?> propertyPageDescriptorAdapters;
 	
 	public void setUp() throws Exception{
 		super.setUp();
@@ -44,6 +47,7 @@ public abstract class TaglibProcessingTestCase extends AbstractBaseMetaDataTestC
 		defaultValueAdapters = getProcessorAdapters(IDefaultValue.class);
 		createValuesAdapters = getProcessorAdapters(ICreateValues.class);
 		validELValuesAdapters = getProcessorAdapters(IValidELValues.class);
+		propertyPageDescriptorAdapters = getProcessorAdapters(IPropertyPageDescriptor.class);
 	}
 
 	private String getAttributeNameFromTest(){
@@ -55,7 +59,7 @@ public abstract class TaglibProcessingTestCase extends AbstractBaseMetaDataTestC
         return attributeName;
 	}
 	
-	protected List<?> getProcessorAdapters(Class<?> featureClass) {
+	protected List<? extends IMetaDataEnabledFeature> getProcessorAdapters(Class<?> featureClass) {
 		return MetaDataEnabledProcessingFactory.getInstance().
 			getAttributeValueRuntimeTypeFeatureProcessors(featureClass, docContext, 
 					uri, tag , getAttributeNameFromTest());

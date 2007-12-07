@@ -166,5 +166,86 @@
   		</trait>
   		<trait id="default-value"><value>Black</value></trait>
   	</entity>    
+  	<entity id="LanguageCodeType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.LanguageCodeType</value>
+  		</trait>
+  		<trait id="category">
+  			<value>ACategory</value>
+  		</trait>
+  	</entity>   
+  	<entity id="LocaleType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.LocaleType</value>
+  		</trait>
+  		<trait id="category">
+  			<value>ACategory</value>
+  		</trait>
+  	</entity> 
+  	<entity id="CurrencyCodeType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.CurrencyCodeType</value>
+  		</trait>
+  	</entity>
+  	<entity id="TimeZoneType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.TimeZoneType</value>
+  		</trait>
+  	</entity>   
+  	<entity id="RelativePathType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.RelativePathType</value>
+  		</trait>
+  	</entity>
+  	<entity id="WebPathType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.WebPathType</value>
+  		</trait>
+  	</entity>     	   		
+  	<entity id="JavaScriptType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.JavaScriptType</value>
+  		</trait>
+  	</entity> 
+  	<entity id="CSSClassType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.pagedesigner.attributevalues.CSSClassType</value>
+  		</trait>
+  	</entity> 
+  	<entity id="CSSStyleType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.pagedesigner.attributevalues.CSSStyleType</value>
+  		</trait>
+  	</entity> 
+  	<entity id="ComponentIDType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.ComponentIDType</value>
+  		</trait>
+  	</entity>
+  	<entity id="CharacterType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.CharacterType</value>
+  		</trait>
+  	</entity> 
+  	<entity id="ScriptType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
+  		</trait>
+  	</entity>    	 
+  	<entity id="LinkType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.LinkType</value>
+  		</trait>
+  	</entity>     
+  	<entity id="ContentType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.ContentType</value>
+  		</trait>
+  	</entity>     	
+  	<entity id="NumberPatternType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.NumberPatternType</value>
+  		</trait>
+  	</entity>    
   </entity>
  </md:metadatamodel>

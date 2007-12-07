@@ -40,7 +40,18 @@
             location="/testfiles/metadata/traithelpertest.xml"
             locator="org.eclipse.jst.jsf.common.metadata.tests.MyMDLocator"
             uri="http://org.eclipse.jsf/traithelpertest"/>
+      <standardMetaDataFile
+            location="/testfiles/metadata/quickEditSectionTest.xml"
+            uri="http://org.eclipse.jsf/quickEditSectionTest"/>
+      <standardMetaDataFile
+            location="/testfiles/metadata/propertyDescriptorTest.xml"
+            uri="http://org.eclipse.jsf/propertyDescriptorTest"/>            
+            
    </extension>
+   	<extension point="org.eclipse.jst.pagedesigner.cmRegistry">
+		<registry configFile="/testfiles/metadata/sybasejsfhtml.xml"
+			uri="http://SybaseMD.test.jsfhtml" />
+	</extension>
    <extension
          point="org.eclipse.jst.jsf.core.AttributeValueRuntimeTypes">
       <attributeValueRuntimeType
