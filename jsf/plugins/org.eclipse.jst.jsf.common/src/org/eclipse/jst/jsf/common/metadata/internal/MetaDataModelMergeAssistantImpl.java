@@ -102,6 +102,18 @@ public class MetaDataModelMergeAssistantImpl implements
 		return false;
 	}
 
+	public Entity getMergedEntity(Entity queryRoot, String entityKey){		
+		Entity ret = null;
+		SimpleResultSet rs = (SimpleResultSet)entityVisitor.findEntities(queryRoot, entityKey);
+		try {
+			if (! rs.getResults().isEmpty()) 
+				ret = (Entity)rs.getResults().get(0);				
+			rs.close();
+		} catch (MetaDataException e) {
+			JSFCommonPlugin.log(IStatus.ERROR, "Error in getMergedEntity()", e);
+		}
+		return ret;
+	}
 	private void addIncludeGroupsAsNecessary(final Entity mmEntity, final Entity entity) {
 		for (Iterator it=entity.getIncludeGroups().iterator();it.hasNext();){
 			IncludeEntityGroup grp = (IncludeEntityGroup)it.next();

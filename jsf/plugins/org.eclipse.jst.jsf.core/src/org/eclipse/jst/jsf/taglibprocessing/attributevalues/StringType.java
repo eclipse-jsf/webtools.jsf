@@ -44,7 +44,7 @@ public class StringType extends EnumerationType implements IValidValues,
 			return true;
 		
 		//if the value is empty but there is a default value, consider it valid		
-		if (getDefaultValue() != null  && (value == null || value.trim().equals("")))
+		if (getDefaultValue() != null  && (value == null || value.trim().equals(""))) //$NON-NLS-1$
 			return true;
 		
 		if(! vals.contains(value)){

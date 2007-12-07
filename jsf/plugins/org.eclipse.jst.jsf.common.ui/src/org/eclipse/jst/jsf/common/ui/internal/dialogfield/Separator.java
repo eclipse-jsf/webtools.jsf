@@ -106,7 +106,7 @@ public class Separator extends DialogFieldBase {
 	 * @return  the separator
 	 */
 	private Control getSeparator(FormToolkit toolkit, Composite parent) {
-		if (_separator == null) {
+		if (_separator == null || _separator.isDisposed()) {
 			assertCompositeNotNull(parent);
 			if (toolkit != null) {
 				_separator = toolkit.createSeparator(parent, _style);

@@ -90,6 +90,9 @@ public class ActionType extends MethodBindingType implements IPossibleValues{
 	 */
 	public List getPossibleValues() {
 		List ret = new ArrayList();
+		if (getStructuredDocumentContext() == null)
+			return ret;
+		
 		IWorkspaceContextResolver wr = IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver(getStructuredDocumentContext());
 		if (wr != null && JSFAppConfigManager.getInstance(wr.getProject()) != null) {//may not be JSF faceted project or know faces-config){			
 			IFile jsp = (IFile)wr.getResource();

@@ -194,10 +194,12 @@ public final class FigureFactory
 	private static Image getSharedHTMLImage(String tag) {
 		Image image = PDPlugin.getDefault().getImage(
 				"palette/HTML/small/HTML_" + tag.toUpperCase() + ".gif");
-		ImageData imageData = image.getImageData();
-		if (imageData.width < 16 || imageData.height < 16) {
-			return PDPlugin.getDefault().getImage(
-					"palette/GENERIC/small/PD_Palette_Default.gif");
+		if (image != null){
+			ImageData imageData = image.getImageData();
+			if (imageData.width < 16 || imageData.height < 16) {
+				return PDPlugin.getDefault().getImage(
+						"palette/GENERIC/small/PD_Palette_Default.gif");
+			}
 		}
 		return image;
 	}

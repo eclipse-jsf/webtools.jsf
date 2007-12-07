@@ -12,8 +12,8 @@
 
 package org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties;
 
-import org.eclipse.wst.common.ui.properties.internal.provisional.ISectionDescriptor;
-import org.eclipse.wst.common.ui.properties.internal.provisional.ISectionDescriptorProvider;
+import org.eclipse.ui.views.properties.tabbed.ISectionDescriptor;
+import org.eclipse.ui.views.properties.tabbed.ISectionDescriptorProvider;
 
 /**
  * this class defines all section descriptors for pageflow. Similar with

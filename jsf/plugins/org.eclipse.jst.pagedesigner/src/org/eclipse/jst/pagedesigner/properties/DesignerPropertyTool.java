@@ -40,7 +40,6 @@ import org.eclipse.wst.xml.core.internal.contentmodel.CMElementDeclaration;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMNamedNodeMap;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMNode;
 import org.eclipse.wst.xml.core.internal.contentmodel.modelquery.ModelQuery;
-import org.eclipse.wst.xml.core.internal.document.ElementImpl;
 import org.eclipse.wst.xml.core.internal.modelquery.ModelQueryUtil;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
 import org.w3c.dom.Attr;
@@ -56,10 +55,11 @@ import org.w3c.dom.Text;
  * @author mengbo
  */
 public class DesignerPropertyTool {
+	
 	/**
 	 * @param fNode
 	 * @param attributeDesc
-	 * @return the attribute values
+	 * @return attribute value
 	 */
 	public static String getAttributeValue(Element fNode, CMNode attributeDesc) {
 		if (attributeDesc == null) {
@@ -80,27 +80,28 @@ public class DesignerPropertyTool {
 		return returnedValue;
 	}
 
-	/**
-	 * @param fNode
-	 * @param filter
-	 * @return the attributes
-	 */
-	public static Object[] getElementReferedAttributes(Element fNode,
-			String[] filter) {
-		List result = new ArrayList();
-		CMNamedNodeMap cmnnm = getElementDeclaredAttributes(fNode);
-		for (int i = 0, n = cmnnm.getLength(); i < n; i++) {
-			String name = cmnnm.item(i).getNodeName();
-			if (Arrays.asList(filter).contains(name)) {
-				result.add(cmnnm.item(i));
-			}
-		}
-		return result.toArray(new CMNode[result.size()]);
-	}
+//	/**
+//	 * @param fNode
+//	 * @param filter
+//	 * @return array of attributes as objects
+//   * (unused)	
+//	 */
+//	public static Object[] getElementReferedAttributes(Element fNode,
+//			String[] filter) {
+//		List result = new ArrayList();
+//		CMNamedNodeMap cmnnm = getElementDeclaredAttributes(fNode);
+//		for (int i = 0, n = cmnnm.getLength(); i < n; i++) {
+//			String name = cmnnm.item(i).getNodeName();
+//			if (Arrays.asList(filter).contains(name)) {
+//				result.add(cmnnm.item(i));
+//			}
+//		}
+//		return result.toArray(new CMNode[result.size()]);
+//	}
 
 	/**
 	 * @param fNode
-	 * @return the declared attributes
+	 * @return CMNamedNodeMap
 	 */
 	public static CMNamedNodeMap getElementDeclaredAttributes(Node fNode) {
 		IStructuredModel structModel = null;
@@ -131,15 +132,16 @@ public class DesignerPropertyTool {
 	 * ITextSelection 2. IStructuredSelection (Node) 3. IStructuredSelection
 	 * (EditPart) 4. DesignRange we want to normalize it to only #2. If the node
 	 * is ATTR or TEXT/CDATA_SECTION, will use it's parent node.
-	 * @param selectingPart 
 	 * 
+	 * @param selectingPart
 	 * @param selection
-	 * @param _htmlEditor 
+	 * @param htmlEditor
 	 * @return null if can't normalize.
 	 */
 	public static Node normalizeSelectionToElement(
 			IWorkbenchPart selectingPart, ISelection selection,
-			HTMLEditor _htmlEditor) {
+			HTMLEditor htmlEditor) {
+		
 		Node node = null;
 		if (selectingPart instanceof HTMLEditor) {
 			IEditorPart part = ((HTMLEditor) selectingPart).getActiveEditor();
@@ -170,7 +172,7 @@ public class DesignerPropertyTool {
 							.getControl().isFocusControl()) {
 				node = SelectionHelper.toNode((IStructuredSelection) selection);
 				if (node == null) {
-					node = _htmlEditor.getDOMDocument();
+					node = htmlEditor.getDOMDocument();
 				}
 			}
 		}
@@ -178,107 +180,9 @@ public class DesignerPropertyTool {
 		return node;
 	}
 
-	// /**
-	// * the selection could be different kinds of selection, including:
-	// * 1. ITextSelection
-	// * 2. IStructuredSelection (Node)
-	// * 3. IStructuredSelection (EditPart)
-	// * 4. DesignRange
-	// * we want to normalize it to only #2 and #4.
-	// *
-	// * @param part
-	// * @param selection
-	// * @return null if can't normalize.
-	// */
-	// public static ISelection normalizeSelection(IWorkbenchPart selectingPart,
-	// ISelection selection)
-	// {
-	// // On Attr nodes, select the owner Element. On Text nodes, select the
-	// parent Element.
-	// ISelection preferredSelection = null;
-	// if (selection instanceof ITextSelection)
-	// {
-	// // FIXME: currently always normalize to a single node. should also
-	// consider change into DesignRange
-	// // on text selection, find the appropriate Node
-	// ITextSelection textSel = (ITextSelection) selection;
-	// IStructuredModel model = null;
-	// if (selectingPart instanceof HTMLEditor)
-	// {
-	// model = ((HTMLEditor) selectingPart).getModel();
-	//
-	// Object inode = model.getIndexedRegion(textSel.getOffset());
-	// if (inode instanceof Node)
-	// {
-	// Node node = (Node) inode;
-	// // replace Attribute Node with its owner
-	// if (node.getNodeType() == Node.ATTRIBUTE_NODE)
-	// inode = ((Attr) node).getOwnerElement();
-	// // replace Text Node with its parent
-	// else if ((node.getNodeType() == Node.TEXT_NODE || (node.getNodeType() ==
-	// Node.CDATA_SECTION_NODE)) && node.getParentNode() != null)
-	// {
-	// inode = node.getParentNode();
-	// }
-	// }
-	// if (inode != null)
-	// {
-	// return new StructuredSelection(inode);
-	// }
-	// else
-	// {
-	// return null;
-	// }
-	// }
-	// else
-	// {
-	// return null;
-	// }
-	// }
-	// else if (selection instanceof IStructuredSelection)
-	// {
-	// if (((IStructuredSelection) selection).isEmpty())
-	// {
-	// return null;
-	// }
-	//
-	// IStructuredSelection structuredSel = (IStructuredSelection) selection;
-	// List inputList = new ArrayList(structuredSel.size());
-	// for (Iterator iter = structuredSel.iterator(); iter.hasNext();)
-	// {
-	// Object inode = iter.next();
-	// if (inode instanceof NodeEditPart)
-	// {
-	// inode = ((NodeEditPart) inode).getModel();
-	// }
-	//
-	// if (inode instanceof Node)
-	// {
-	// inputList.add(inode);
-	// }
-	// }
-	// if (inputList.isEmpty())
-	// {
-	// return null;
-	// }
-	// else
-	// {
-	// return new StructuredSelection(inputList);
-	// }
-	// }
-	// else if (selection instanceof DesignRange)
-	// {
-	// return selection;
-	// }
-	// else
-	// {
-	// return null;
-	// }
-	// }
-
 	/**
-	 * @param node
-	 * @return the element node
+	 * @param node as Object
+	 * @return element 
 	 */
 	public static Element getElementNode(Object node) {
 		Object model;
@@ -303,7 +207,7 @@ public class DesignerPropertyTool {
 	/**
 	 * @param element
 	 * @param filter
-	 * @return the name list
+	 * @return list of attribute names
 	 */
 	public static List getNameList(Element element, String[] filter) {
 		List result = new ArrayList();
@@ -321,7 +225,7 @@ public class DesignerPropertyTool {
 	/**
 	 * @param selection
 	 *            should be a normalized selection
-	 * @return the common parent of selection
+	 * @return node
 	 */
 	public static Node getCommonParent(ISelection selection) {
 		if (selection instanceof IStructuredSelection) {
@@ -343,7 +247,7 @@ public class DesignerPropertyTool {
 	 * 
 	 * @param selectingPart
 	 * @param selection
-	 * @return the element
+	 * @return element
 	 */
 	public static Element getElement(IWorkbenchPart selectingPart,
 			ISelection selection) {
@@ -381,7 +285,8 @@ public class DesignerPropertyTool {
 
 	/**
 	 * @param element
-	 * @return true if element is a multi selection
+	 * @return bool
+	 *  (unused)
 	 */
 	public static boolean isMultiSelection(Element element) {
 		if (element.getNodeName().equalsIgnoreCase(IHTMLConstants.TAG_OPTION)) {
@@ -390,23 +295,24 @@ public class DesignerPropertyTool {
 		return false;
 	}
 
-	/**
-	 * @param element
-	 * @return the text source
-	 */
-	public static String getElementTextSource(Element element) {
-		if (element == null) {
-			return null;
-		}
-		if (element instanceof ElementImpl) {
-			return ((ElementImpl) element).getSource();
-		}
-		return null;
-	}
+//	/**
+//	 * @param element
+//	 * @return if elementImpl, return source, else null
+//	 * (unused)
+//	 */
+//	public static String getElementTextSource(Element element) {
+//		if (element == null) {
+//			return null;
+//		}
+//		if (element instanceof ElementImpl) {
+//			return ((ElementImpl) element).getSource();
+//		}
+//		return null;
+//	}
 
 	/**
 	 * @param project
-	 * @return the java project for project
+	 * @return IJavaProject
 	 */
 	public static IJavaProject getJavaProject(Object project) {
 		if (project == null) {
@@ -433,18 +339,18 @@ public class DesignerPropertyTool {
 		}
 		return null;
 	}
-
-	/**
-	 * @param project
-	 * @return the project
-	 */ 
-	public static IProject getProject(Object project) {
-		if (project instanceof IProject) {
-			return (IProject) project;
-		} else if (project instanceof IJavaProject) {
-			return ((IJavaProject) project).getProject();
-		}
-		return null;
-	}
+//
+//	/**
+//	 * @param project as Object
+//	 * @return IProject or null
+//	 */
+//	public static IProject getProject(Object project) {
+//		if (project instanceof IProject) {
+//			return (IProject) project;
+//		} else if (project instanceof IJavaProject) {
+//			return ((IJavaProject) project).getProject();
+//		}
+//		return null;
+//	}
 
 }

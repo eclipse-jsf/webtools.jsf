@@ -21,18 +21,14 @@ import org.w3c.dom.Element;
  * @author mengbo
  */
 public class AttributePropertySourceProvider implements IPropertySourceProvider {
+
 	/**
-	 * Default constructor
+	 * Constructor
 	 */
 	public AttributePropertySourceProvider() {
-        // do nothing?
+		//
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.views.properties.IPropertySourceProvider#getPropertySource(java.lang.Object)
-	 */
 	public IPropertySource getPropertySource(Object object) {
 		Element model = null;
 		IPropertySource source = null;
@@ -45,7 +41,7 @@ public class AttributePropertySourceProvider implements IPropertySourceProvider 
 			}
 		}
 		if (source != null) {
-			return new AttributePropertySource(model, source);
+			return new AttributePropertySource( model, source);
 		}
 		return source;
 	}

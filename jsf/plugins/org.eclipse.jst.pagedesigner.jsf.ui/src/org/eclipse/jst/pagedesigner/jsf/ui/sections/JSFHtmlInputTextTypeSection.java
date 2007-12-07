@@ -25,8 +25,8 @@ import org.eclipse.jst.pagedesigner.properties.BaseCustomSection;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.wst.common.ui.properties.internal.provisional.TabbedPropertySheetPage;
-import org.eclipse.wst.common.ui.properties.internal.provisional.TabbedPropertySheetWidgetFactory;
+import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
+import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetWidgetFactory;
 import org.eclipse.wst.sse.core.internal.provisional.INodeNotifier;
 
 /**

@@ -13,12 +13,13 @@ package org.eclipse.jst.pagedesigner.jsf.ui.sections;
 
 import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
 import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
-import org.eclipse.jst.pagedesigner.properties.attrgroup.AttributeGroupSection;
+import org.eclipse.jst.pagedesigner.properties.attrgroup.OLDAttributeGroupSection;
 
 /**
  * @author mengbo
+ * @deprecated
  */
-public class JSFCoreVerbatimSection extends AttributeGroupSection
+public class JSFCoreVerbatimSection extends OLDAttributeGroupSection
 {
     /**
      * The default constructor

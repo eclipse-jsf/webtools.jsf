@@ -45,8 +45,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.wst.common.ui.properties.internal.provisional.TabbedPropertySheetPage;
-import org.eclipse.wst.common.ui.properties.internal.provisional.TabbedPropertySheetWidgetFactory;
+import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
+import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetWidgetFactory;
 import org.eclipse.wst.sse.core.internal.provisional.INodeNotifier;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
 import org.w3c.dom.Node;
@@ -66,7 +66,7 @@ public class JSFHtmlActionListenerSection extends BaseCustomSection
     private CCombo                _listenTypeCombo;
     private Button                _listenAddButton, _listenRemoveButton;
 
-    private class ListenerCotentLabelProvider implements IStructuredContentProvider, ITableLabelProvider
+    private class ListenerContentLabelProvider implements IStructuredContentProvider, ITableLabelProvider
     {
 
         /* (non-Javadoc)
@@ -111,10 +111,10 @@ public class JSFHtmlActionListenerSection extends BaseCustomSection
         public String getColumnText(Object element, int columnIndex)
         {
             String result = null;
-            if (element instanceof IDOMElement)
+            if (element instanceof Node)
             {
-                IDOMElement node = (IDOMElement) element;
-                String nodeName = node.getNodeName();
+                Node node = (Node) element;
+                String nodeName = getTableNodeName(node, "type");
                 switch (columnIndex)
                 {
                     case 0:
@@ -131,7 +131,17 @@ public class JSFHtmlActionListenerSection extends BaseCustomSection
          * @see org.eclipse.jface.viewers.IContentProvider#dispose()
          */
 
-        public void dispose()
+        private String getTableNodeName(Node node, String ... attrNames) {
+        	for (String attrName : attrNames) {
+        		Node attr = node.getAttributes().getNamedItem(attrName);
+        		if (attr != null && attr.getNodeValue()!= null && 
+        				! attr.getNodeValue().trim().equals(""))
+        			return attr.getNodeValue().trim();
+        	}
+			return node.getNodeName();
+		}
+
+		public void dispose()
         {
             // nothing to dispose
         }
@@ -169,7 +179,7 @@ public class JSFHtmlActionListenerSection extends BaseCustomSection
         }
     }
 
-    /**
+     /**
      * Default constructor
      */
     public JSFHtmlActionListenerSection()
@@ -209,11 +219,11 @@ public class JSFHtmlActionListenerSection extends BaseCustomSection
 
         TableColumn listenColumn = new TableColumn(_listenersTable, SWT.NONE);
         listenColumn.setText(SectionResources.getString("JSFHtmlCommandButtonSection.Listeners")); //$NON-NLS-1$
-        listenColumn.setWidth(100);
+        listenColumn.setWidth(500);
 
         _listenersViewer = new TableViewer(_listenersTable);
-        _listenersViewer.setContentProvider(new ListenerCotentLabelProvider());
-        _listenersViewer.setLabelProvider(new ListenerCotentLabelProvider());
+        _listenersViewer.setContentProvider(new ListenerContentLabelProvider());
+        _listenersViewer.setLabelProvider(new ListenerContentLabelProvider());
         _listenersViewer.addDoubleClickListener(new IDoubleClickListener()
         {
             public void doubleClick(DoubleClickEvent event)
@@ -301,7 +311,8 @@ public class JSFHtmlActionListenerSection extends BaseCustomSection
     {
         super.setInput(part, selection);
         _element = (IDOMElement) DesignerPropertyTool.getElement(part, selection);
-        _listenersViewer.setInput(_element);
+        if (_listenersViewer != null)
+        	_listenersViewer.setInput(_element);
     }
 
     protected void notifyChanged(INodeNotifier notifier, int eventType, Object changedFeature, Object oldValue, Object newValue, int pos)

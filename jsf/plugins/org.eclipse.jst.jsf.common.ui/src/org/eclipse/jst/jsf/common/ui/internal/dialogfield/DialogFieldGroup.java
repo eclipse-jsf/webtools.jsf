@@ -103,4 +103,11 @@ public abstract class DialogFieldGroup {
 	 * @return could return null. or an array containing null elements.
 	 */
 	public abstract IStatus[] validateDialogFields();
+	
+	/**
+	 * Intended to allow subclasses to recreate controls.  Default implementation does nothing.
+	 */
+	public void reset(){
+		//do nothing by default	
+	}
 }

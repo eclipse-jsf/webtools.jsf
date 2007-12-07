@@ -12,10 +12,15 @@
 
 package org.eclipse.jst.jsf.metadataprocessors.internal;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.metadataprocessors.IMetaDataEnabledFeature;
+import org.eclipse.jst.jsf.metadataprocessors.IType;
+import org.eclipse.jst.jsf.metadataprocessors.ITypeDescriptor;
 import org.osgi.framework.Bundle;
 
 /**
@@ -27,7 +32,7 @@ import org.osgi.framework.Bundle;
  */
 public final class MetaDataEnabledFeatureAdapterFactory {
 	private static MetaDataEnabledFeatureAdapterFactory INSTANCE;
-	
+	private Map<String, Class> typesCache;
 	/**
 	 * @return singleton instance
 	 */
@@ -40,8 +45,10 @@ public final class MetaDataEnabledFeatureAdapterFactory {
 	
 	private MetaDataEnabledFeatureAdapterFactory(){
 		super();
+		typesCache = new HashMap<String, Class>();
 	}
 	
+
 	/**
 	 * Given the feature extension, create and return the {@link IMetaDataEnabledFeature} for a given processing feature
 	 * @param feature
@@ -55,25 +62,89 @@ public final class MetaDataEnabledFeatureAdapterFactory {
 		return null;
 	}
 
+	/**
+	 * Given the feature extension, create and return the {@link IMetaDataEnabledFeature} for a given processing feature if
+	 * that the type that the feature is bound to is a subclass of the the type
+	 * @param feature
+	 * @param processingFeature class
+	 * @param type
+	 * @return IMetaDataEnabledFeature.  <br>Will return null if the type that the feature extension is bound to, 
+	 * is not a subclass of the supplied type
+	 */
+	public IMetaDataEnabledFeature getFeatureAdapterForSubclass(IMetaDataEnabledFeatureExtension feature, Class processingFeature, IType type){ 
+		if (feature != null ){
+			ITypeDescriptor aType = AttributeValueRuntimeTypeFactory.getInstance().getType(feature.getTypeID());
+			Class klass = aType.getTypeExtension().getClass();
+			if (klass.asSubclass(type.getClass()) != null)
+				return createFeature(feature, processingFeature);			
+		}
+		return null;
+	}
+	
+//	private Class getOrCreateTypeClassFor(IMetaDataEnabledFeatureExtension featureExt){
+//		Class klass = null;
+//		String className;
+//		ITypeDescriptor type = AttributeValueRuntimeTypeFactory.getInstance().getType(featureExt.getTypeID());
+//		try {
+//			if (! typesCache.containsKey(featureExt.getTypeID())){
+//				Bundle bundle =Platform.getBundle(featureExt.getBundleID());
+//				if (bundle == null){
+//					JSFCorePlugin.log(IStatus.ERROR, featureExt.getBundleID() + " could not be created to load " + className);
+//					return null;
+//				}
+//				klass = bundle.loadClass(className);
+//				if (klass != null){
+//					typesCache.put(featureExt.getTypeID(), klass);
+//				}
+//			}
+//			else 
+//				klass = typesCache.get(featureExt.getTypeID());
+//			
+//			return klass;
+//			if (!IMetaDataEnabledFeature.class.isAssignableFrom(klass)){
+//				JSFCorePlugin.log(IStatus.INFO, className + " is not a IMetaDataEnabledFeature. " + featureExt.getBundleID() +" : " + featureExt.getTypeID());
+//			} 
+//			else if (klass != null && processingFeature.isAssignableFrom(klass)){
+//				IMetaDataEnabledFeature obj = (IMetaDataEnabledFeature)klass.newInstance();
+//				return obj;
+//			}
+//						
+//		} catch (ClassNotFoundException e) {
+//			JSFCorePlugin.log(IStatus.ERROR, className + " was not found in " + featureExt.getBundleID() +" for " + featureExt.getTypeID());
+//		} catch (InstantiationException e) {
+//			JSFCorePlugin.log(IStatus.ERROR, "InstantiationException: " + className + " in " + featureExt.getBundleID() +" for " + featureExt.getTypeID());
+//		} catch (IllegalAccessException e) {
+//			JSFCorePlugin.log(IStatus.ERROR,  "IllegalAccessException: " + className + " in " + featureExt.getBundleID() +" for " + featureExt.getTypeID());
+//		}
+//		return null;
+//	}
+	
 	private IMetaDataEnabledFeature createFeature(IMetaDataEnabledFeatureExtension featureExt, Class processingFeature){
 		String className = featureExt.getClassName();
+		Class klass = null;
 		try {
-			Bundle bundle =Platform.getBundle(featureExt.getBundleID());
-			if (bundle == null){
-				JSFCorePlugin.log(IStatus.ERROR, featureExt.getBundleID() + " could not be created to load " + className);
-				return null;
-			}
-			Class klass = bundle.loadClass(className);
-			if (klass != null){
-				if (!IMetaDataEnabledFeature.class.isAssignableFrom(klass)){
-					JSFCorePlugin.log(IStatus.INFO, className + " is not a IMetaDataEnabledFeature. " + featureExt.getBundleID() +" : " + featureExt.getTypeID());
-				} 
-				else if (processingFeature.isAssignableFrom(klass)){
-					IMetaDataEnabledFeature obj = (IMetaDataEnabledFeature)klass.newInstance();
-//					obj.setBundleID(featureExt.getBundleID());
-					return obj;
+			if (! typesCache.containsKey(featureExt.getTypeID())){
+				Bundle bundle =Platform.getBundle(featureExt.getBundleID());
+				if (bundle == null){
+					JSFCorePlugin.log(IStatus.ERROR, featureExt.getBundleID() + " could not be created to load " + className);
+					return null;
+				}
+				klass = bundle.loadClass(className);
+				if (klass != null){
+					typesCache.put(featureExt.getTypeID(), klass);
 				}
 			}
+			else 
+				klass = typesCache.get(featureExt.getTypeID());
+			
+			if (!IMetaDataEnabledFeature.class.isAssignableFrom(klass)){
+				JSFCorePlugin.log(IStatus.INFO, className + " is not a IMetaDataEnabledFeature. " + featureExt.getBundleID() +" : " + featureExt.getTypeID());
+			} 
+			else if (klass != null && processingFeature.isAssignableFrom(klass)){
+				IMetaDataEnabledFeature obj = (IMetaDataEnabledFeature)klass.newInstance();
+				return obj;
+			}
+						
 		} catch (ClassNotFoundException e) {
 			JSFCorePlugin.log(IStatus.ERROR, className + " was not found in " + featureExt.getBundleID() +" for " + featureExt.getTypeID());
 		} catch (InstantiationException e) {

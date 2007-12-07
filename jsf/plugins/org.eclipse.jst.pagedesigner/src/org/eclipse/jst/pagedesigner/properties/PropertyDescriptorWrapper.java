@@ -11,7 +11,9 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.properties;
 
+import org.eclipse.jface.action.IStatusLineManager;
 import org.eclipse.jface.viewers.CellEditor;
+import org.eclipse.jface.viewers.ICellEditorListener;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.jst.pagedesigner.meta.EditorCreator;
@@ -32,16 +34,32 @@ public class PropertyDescriptorWrapper implements IPropertyDescriptor {
 
 	private IDOMElement _element;
 
+	private IStatusLineManager _statusLineManager;
+
+//	/**
+//	 * Constructor
+//	 * @param element 
+//	 * @param innerDescriptor 
+//	 * @param statusLineManager 
+//	 * 
+//	 */
+//	public PropertyDescriptorWrapper(IDOMElement element,
+//			IPropertyDescriptor innerDescriptor, IStatusLineManager statusLineManager) {
+//		this._element = element;
+//		this._inner = innerDescriptor;
+//		this._statusLineManager = statusLineManager;
+//	}
+
 	/**
-	 * @param element 
-	 * @param innerDescriptor 
+	 * Constructor
+	 * @param element
+	 * @param innerDescriptor
 	 */
 	public PropertyDescriptorWrapper(IDOMElement element,
 			IPropertyDescriptor innerDescriptor) {
 		this._element = element;
 		this._inner = innerDescriptor;
 	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -55,10 +73,15 @@ public class PropertyDescriptorWrapper implements IPropertyDescriptor {
 			 * @see org.eclipse.jst.pagedesigner.meta.EditorCreator.CellEditorHolder#createCellEditor(org.eclipse.swt.widgets.Composite)
 			 */
 			public CellEditor createCellEditor(Composite parent1) {
-				if (_inner != null) {
-					return _inner.createPropertyEditor(parent1);
-				}
-                return new TextCellEditor(parent1);
+				CellEditor ed = null;
+				if (_inner != null) 
+					ed = _inner.createPropertyEditor(parent1);
+				else
+					ed = new TextCellEditor(parent1);
+				
+				if (_statusLineManager != null)
+					ed.addListener(new StatusBarUpdater(ed));
+				return ed;
 			}
 		};
 		return EditorCreator.getInstance().createCellEditorWithWrapper(parent,
@@ -71,7 +94,8 @@ public class PropertyDescriptorWrapper implements IPropertyDescriptor {
 	 * @see org.eclipse.ui.views.properties.IPropertyDescriptor#getCategory()
 	 */
 	public String getCategory() {
-		return ITabbedPropertiesConstants.OTHER_CATEGORY;
+		String cat = _inner.getCategory();
+		return cat != null ? cat : ITabbedPropertiesConstants.OTHER_CATEGORY;
 	}
 
 	/*
@@ -143,10 +167,31 @@ public class PropertyDescriptorWrapper implements IPropertyDescriptor {
 	}
 
 	/**
-	 * @return the inner property descriptor
+	 * @return IPropertyDescriptor
 	 */
 	public IPropertyDescriptor getInner() {
 		return _inner;
 	}
 
+	private class StatusBarUpdater implements ICellEditorListener {
+		private CellEditor ed;
+	
+		StatusBarUpdater(CellEditor ed) {
+			this.ed = ed;
+		}
+		public void applyEditorValue() {//
+		}
+		public void cancelEditor() {//
+		}
+
+		public void editorValueChanged(boolean oldValidState,
+				boolean newValidState) {
+			if (!newValidState)
+				_statusLineManager.setErrorMessage(ed.getErrorMessage());				
+			else
+				_statusLineManager.setErrorMessage(null);
+				
+		}
+		
+	}
 }

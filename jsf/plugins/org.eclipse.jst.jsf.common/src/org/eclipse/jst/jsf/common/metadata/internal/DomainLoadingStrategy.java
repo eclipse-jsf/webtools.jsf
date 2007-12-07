@@ -75,13 +75,14 @@ public class DomainLoadingStrategy implements IDomainLoadingStrategy, IMetaDataO
 	protected void mergeModel(MetaDataModel model, List/*<IMetaDataSourceModelProvider>*/ sources) {		
 		IMetaDataModelMergeAssistant assistant = createModelMergeAssistant(model);
 		for (Iterator/*<IMetaDataSourceModelProvider>*/ it = sources.iterator();it.hasNext();){
-			IMetaDataSourceModelProvider mds = (IMetaDataSourceModelProvider)it.next();
-//			assistant.setSourceModel(mds.getSourceModel());
-			assistant.setSourceModelProvider(mds);
+			IMetaDataSourceModelProvider mds = (IMetaDataSourceModelProvider)it.next();		
 			Iterator translators = mds.getLocator().getDomainSourceModelType().getTranslators().iterator();
 			while (translators.hasNext()){
 				IMetaDataTranslator translator = (IMetaDataTranslator)translators.next();
-				translator.translate(assistant);
+				if (translator.canTranslate(mds)){
+					assistant.setSourceModelProvider(mds);
+					translator.translate(assistant);
+				}				
 			}
 		}
 		assistant.setMergeComplete();

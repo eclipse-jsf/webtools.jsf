@@ -11,7 +11,10 @@
  ********************************************************************************/
 package org.eclipse.jst.jsf.common.metadata.query;
 
+import javax.xml.namespace.QName;
+
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 import org.eclipse.jst.jsf.common.metadata.Entity;
@@ -208,4 +211,13 @@ public final class TaglibDomainMetaDataQueryHelper{
 		}
 		return t;
 	}	
+	
+	/**
+	 * @param tagEntity
+	 * @return QName for tag entity
+	 */
+	public static QName getQNameForTagEntity(Entity tagEntity) {
+		Assert.isTrue(tagEntity != null);
+		return new QName(tagEntity.getModel().getCurrentModelContext().getUri(), tagEntity.getId());
+	}
 }

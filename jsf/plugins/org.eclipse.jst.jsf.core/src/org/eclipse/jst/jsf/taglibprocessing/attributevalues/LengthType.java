@@ -25,6 +25,8 @@ public class LengthType extends IntegerType {
 	 * @see org.eclipse.jst.jsf.metadataprocessors.features.IValidValues#isValidValue(java.lang.String)
 	 **/
 	public boolean isValidValue(String value) {	
+		//FIXME:  this is not right... px, em, etc. are also valid... and spaces between # and units are not
+		//see http://www.w3.org/TR/html401/types.html#h-6.6
 		if (value == null) return true;
 		String aValue = stripPercentIfPresent(value);		
 		try {
@@ -44,7 +46,7 @@ public class LengthType extends IntegerType {
 		//"%" is allowed at end
 		if (value.length() > 0
 			&& value.lastIndexOf('%') == value.length() - 1)
-				return value.replaceFirst("%","");
+				return value.replaceFirst("%",""); //$NON-NLS-1$ //$NON-NLS-2$
 		
 		return value;
 	}

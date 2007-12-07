@@ -44,6 +44,6 @@ public interface ITypeDescriptor {
 	 * @return List of <code>IMetaDataEnabledFeature</code>s that support the
 	 * specified processingFeature interface.  
 	 */
-	public List getFeatureAdapters(Class processingFeature);
+	public List<IMetaDataEnabledFeature> getFeatureAdapters(Class processingFeature);
 
 }

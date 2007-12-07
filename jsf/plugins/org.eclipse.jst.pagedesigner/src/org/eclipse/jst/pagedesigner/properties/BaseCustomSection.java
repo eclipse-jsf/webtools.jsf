@@ -24,8 +24,8 @@ import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.wst.common.ui.properties.internal.provisional.AbstractPropertySection;
-import org.eclipse.wst.common.ui.properties.internal.provisional.TabbedPropertySheetPage;
+import org.eclipse.ui.views.properties.tabbed.AbstractPropertySection;
+import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import org.eclipse.wst.sse.core.internal.provisional.INodeAdapter;
 import org.eclipse.wst.sse.core.internal.provisional.INodeNotifier;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
@@ -37,22 +37,22 @@ import org.w3c.dom.Node;
 public abstract class BaseCustomSection extends AbstractPropertySection {
 
 	/**
-	 * A ok status instance
+	 * Status that all is OK
 	 */
-	public static final Status OKSTATUS = new Status(IStatus.OK, PDPlugin
+	protected static final Status OKSTATUS = new Status(IStatus.OK, PDPlugin
 			.getPluginId(), 0, "", null);
 
-	private DesignerTabbedPropertySheetPage _propertySheetPage;
+	private WPETabbedPropertySheetPage _propertySheetPage;
 
 	private boolean _visible = false;
 
 	/**
-	 * the dom element
+	 * the tag IDOMElement
 	 */
 	protected IDOMElement _element;
 
 	/**
-	 * the adapter
+	 * the INodeAdapter used to receive notifications of model updates
 	 */
 	protected INodeAdapter _adapter = new INodeAdapter() {
 		public boolean isAdapterForType(Object type) {
@@ -82,6 +82,8 @@ public abstract class BaseCustomSection extends AbstractPropertySection {
 	}
 
 	/**
+	 * Method adapter will call when element has changed
+	 * 
 	 * @param notifier
 	 * @param eventType
 	 * @param changedFeature
@@ -96,7 +98,7 @@ public abstract class BaseCustomSection extends AbstractPropertySection {
 	public void createControls(Composite parent,
 			TabbedPropertySheetPage aTabbedPropertySheetPage) {
 		super.createControls(parent, aTabbedPropertySheetPage);
-		_propertySheetPage = (DesignerTabbedPropertySheetPage) aTabbedPropertySheetPage;
+		_propertySheetPage = (WPETabbedPropertySheetPage) aTabbedPropertySheetPage;
 	}
 
 	/**
@@ -105,7 +107,7 @@ public abstract class BaseCustomSection extends AbstractPropertySection {
 	 * case, we need do a total refresh.
 	 * 
 	 */
-	public void refreshPropertySheetPage() {
+	protected void refreshPropertySheetPage() {
 		if (_propertySheetPage != null) {
 			IWorkbenchPart part = getPart();
 			if (part != null) {
@@ -120,16 +122,17 @@ public abstract class BaseCustomSection extends AbstractPropertySection {
 	}
 
 	/**
+	 * Change selection
 	 * @param node
 	 */
-	public void gotoNode(Node node) {
+	protected void gotoNode(Node node) {
 		_propertySheetPage.internalChangeSelection(node, node);
 	}
 
 	/**
-	 * @return the status  line manager
+	 * @return IStatusLineManager to use for the property sheet page
 	 */
-	public IStatusLineManager getStatusLineManager() {
+	protected IStatusLineManager getStatusLineManager() {
 		if (_propertySheetPage != null) {
 			IActionBars bar = _propertySheetPage.getSite().getActionBars();
 			if (bar != null) {
@@ -140,9 +143,9 @@ public abstract class BaseCustomSection extends AbstractPropertySection {
 	}
 
 	/**
-	 * @param status
+	 * @param status to display on status line
 	 */
-	public void applyStatus(IStatus[] status) {
+	protected void applyStatus(IStatus[] status) {
 		if (!_visible) {
 			return;
 		}
@@ -169,7 +172,7 @@ public abstract class BaseCustomSection extends AbstractPropertySection {
 	/**
 	 * @param message
 	 */
-	public void setErrorMessage(String message) {
+	protected void setErrorMessage(String message) {
 		IStatusLineManager s = getStatusLineManager();
 		if (s != null) {
 			s.setErrorMessage(message);
@@ -178,9 +181,9 @@ public abstract class BaseCustomSection extends AbstractPropertySection {
 
 	/**
 	 * @param message
-	 * @return the error status
+	 * @return Status
 	 */
-	public Status createErrorStatus(String message) {
+	protected Status createErrorStatus(String message) {
 		return new Status(IStatus.ERROR, PDPlugin.getPluginId(), 0, message,
 				null);
 	}
@@ -188,18 +191,40 @@ public abstract class BaseCustomSection extends AbstractPropertySection {
 	public void aboutToBeHidden() {
 		applyStatus(null);
 		_visible = false;
+//		IDOMElement newEle = (IDOMElement) DesignerPropertyTool.getElement(
+//				part, selection);
+//		if (_element != newEle) {
+			if (_element != null) {
+				_element.removeAdapter(_adapter);
+			}
+//			_element = newEle;
+//			if (_element != null) {
+//				_element.addAdapter(_adapter);
+//			}
+//		}
 		super.aboutToBeHidden();
 	}
 
 	public void aboutToBeShown() {
 		super.aboutToBeShown();
+//		IDOMElement newEle = (IDOMElement) DesignerPropertyTool.getElement(
+//				part, selection);
+//		if (_element != newEle) {
+//			if (_element != null) {
+//				_element.removeAdapter(_adapter);
+//			}
+//			_element = newEle;
+			if (_element != null) {
+				_element.addAdapter(_adapter);
+			}
+//		}
 		_visible = true;
 	}
 
 	/**
-	 * @return the project
+	 * @return IProject for the WPE editing instance
 	 */
-	public IProject getProject() {
+	protected IProject getProject() {
 		if (_propertySheetPage != null) {
 			IEditorInput input = _propertySheetPage.getEditor()
 					.getEditorInput();
@@ -218,9 +243,9 @@ public abstract class BaseCustomSection extends AbstractPropertySection {
 	}
 
 	/**
-	 * @return the file
+	 * @return IFile for WPE editing instance
 	 */
-	public IFile getFile() {
+	protected IFile getFile() {
 		if (_propertySheetPage != null) {
 			IEditorInput input = _propertySheetPage.getEditor()
 					.getEditorInput();

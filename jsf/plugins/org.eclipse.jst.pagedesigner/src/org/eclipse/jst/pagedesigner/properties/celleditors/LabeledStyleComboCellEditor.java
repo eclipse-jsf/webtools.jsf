@@ -14,11 +14,16 @@ package org.eclipse.jst.pagedesigner.properties.celleditors;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jst.jsf.common.ui.internal.utils.StyleCombo;
+import org.eclipse.jst.jsf.metadataprocessors.features.IDefaultValue;
+import org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValue;
+import org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValues;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.wst.sse.ui.internal.Logger;
 
@@ -66,9 +71,11 @@ public class LabeledStyleComboCellEditor extends StyleComboCellEditor {
 	}
 
 	/**
+	 * Constructor
+	 * 
 	 * @param parent
-	 * @param values 
-	 * @param labels 
+	 * @param values
+	 * @param labels
 	 * @param defaultValue 
 	 * @param style
 	 */
@@ -76,7 +83,8 @@ public class LabeledStyleComboCellEditor extends StyleComboCellEditor {
 			String[] labels, String defaultValue, int style) {
 		super(parent, labels, style);
 		StyleCombo combo = (StyleCombo) getControl();
-		combo.setDefaultValue(defaultValue);
+		if (defaultValue != null)
+			combo.setDefaultValue(defaultValue);
 		_values = values;
 	}
 
@@ -144,5 +152,34 @@ public class LabeledStyleComboCellEditor extends StyleComboCellEditor {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Create CellEditor
+	 * @param parent
+	 * @param pvs
+	 * @param defaultValue
+	 * @param style
+	 * @return CellEditor
+	 */
+	public static CellEditor newInstance(Composite parent, IPossibleValues pvs,
+			IDefaultValue defaultValue, int style) {
+	
+		CellEditor ed = null;
+		if (pvs != null) {
+			Map map = getPossibleValueMap(pvs);
+			ed = newInstance(parent, map, defaultValue != null ? defaultValue.getDefaultValue() : null, style);
+		}
+		
+		return ed;
+	}
+
+	private static Map getPossibleValueMap(IPossibleValues pvs) {
+		Map<String, String> map = new HashMap<String, String>(pvs.getPossibleValues().size());
+		for (Iterator it = pvs.getPossibleValues().iterator();it.hasNext();){
+			IPossibleValue pv = (IPossibleValue)it.next();
+			map.put(pv.getValue(), pv.getDisplayValue());
+		}
+		return map;
 	}
 }

@@ -42,7 +42,9 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 /**
+ * Used by Sybase CMConfig model loader
  * @author mengbo
+ * @deprecated
  */
 public class ElementDescReader {
 	private static Logger _log = PDPlugin.getLogger(ElementDescReader.class);

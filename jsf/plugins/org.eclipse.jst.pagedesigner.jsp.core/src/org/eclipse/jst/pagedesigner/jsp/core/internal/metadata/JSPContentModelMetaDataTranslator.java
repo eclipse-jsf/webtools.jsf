@@ -13,15 +13,24 @@ package org.eclipse.jst.pagedesigner.jsp.core.internal.metadata;
 
 import org.eclipse.jst.jsf.common.metadata.internal.AbstractTagLibDomainContentModelMetaDataTranslator;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataModelMergeAssistant;
+import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataTranslator;
 import org.eclipse.wst.html.core.internal.contentmodel.JSPCMDocument;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMDocument;
+import org.eclipse.wst.xml.core.internal.contentmodel.CMElementDeclaration;
 
 /**
  * Translates the JSP CMDocument to standard metadata model entities and traits
  */
 public class JSPContentModelMetaDataTranslator extends AbstractTagLibDomainContentModelMetaDataTranslator implements IMetaDataTranslator {
 
+	public boolean canTranslate(IMetaDataSourceModelProvider modelProvider) {		
+		if (modelProvider.getSourceModel() != null && 
+				modelProvider.getSourceModel() instanceof JSPCMDocument)
+			return true;
+		return false;
+	}
+	
 	public void translate(final IMetaDataModelMergeAssistant assistant) {
 		setAssistant(assistant);
 		CMDocument doc = getSourceModel();
@@ -37,11 +46,15 @@ public class JSPContentModelMetaDataTranslator extends AbstractTagLibDomainConte
 		return "JSP Tags";
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.common.metadata.internal.AbstractTagLibDomainContentModelMetaDataTranslator#getURIDisplayLabel()
-	 */
+	@Override
 	protected String getURIDisplayLabel() {		
 		return "JSP";
+	}
+
+	@Override
+	protected String getTagNodeName(CMElementDeclaration tag) {
+		//strip "jsp:"
+		return tag.getNodeName().substring(4);
 	}
 
 }

@@ -17,6 +17,7 @@ import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.EntityGroup;
 import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.Trait;
+import org.eclipse.jst.jsf.common.metadata.internal.StandardMetaDataFileRegistry.StandardMetaDataFilesProvider;
 
 
 /**
@@ -25,6 +26,12 @@ import org.eclipse.jst.jsf.common.metadata.Trait;
  */
 public class StandardMetaDataFilesTranslator implements IMetaDataTranslator {
 
+	public boolean canTranslate(IMetaDataSourceModelProvider modelProvider) {
+		if (modelProvider instanceof StandardMetaDataFilesProvider)
+			return true;
+		return false;
+	}
+	
 	public void translate(IMetaDataModelMergeAssistant assistant) {//TODO: throw proper errors
 		//null translate - sourceModel object are already Entities and traits
 		//traverse the tree and add to model
@@ -70,4 +77,5 @@ public class StandardMetaDataFilesTranslator implements IMetaDataTranslator {
 		}
 		
 	}
+
 }

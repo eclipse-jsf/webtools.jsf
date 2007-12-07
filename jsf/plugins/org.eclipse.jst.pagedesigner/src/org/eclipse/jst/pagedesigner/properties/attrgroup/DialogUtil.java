@@ -45,7 +45,7 @@ public class DialogUtil {
 	 * @return true if success, false if user canceled.
 	 */
 	public static boolean createSubElement(Shell shell,
-			final IDOMElement parent, final AttributeGroup group) {
+			final IDOMElement parent, final OLDAttributeGroup group) {
 		group.setElementContext(parent, null);
 		final DialogFieldGroupPage page = new DialogFieldGroupPage("", group); //$NON-NLS-1$
 		page.setTitle(AttributeGroupMessages.getString(
@@ -114,7 +114,7 @@ public class DialogUtil {
 	public static boolean createSubElement(Shell shell,
 			final IDOMElement parent, final String uri, final String tagName,
 			final String[] attributes) {
-		final AttributeGroup group = new AttributeGroup(uri, tagName,
+		final OLDAttributeGroup group = new OLDAttributeGroup(uri, tagName,
 				attributes);
 		return createSubElement(shell, parent, group);
 	}

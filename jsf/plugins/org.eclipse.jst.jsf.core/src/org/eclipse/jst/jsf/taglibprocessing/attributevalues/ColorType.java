@@ -36,8 +36,8 @@ public class ColorType extends EnumerationType implements IPossibleValues {
 	 * List of standard colors
 	 * See http://www.w3.org/TR/html4/types.html#type-color
 	 */
-	private final static String[] COLORS = {"Black", "Silver", "Gray", "White", "Maroon", "Red", "Purple",
-				"Fuchsia", "Green", "Lime", "Olive", "Yellow", "Navy", "Blue", "Teal","Aqua"};
+	private final static String[] COLORS = {"Black", "Silver", "Gray", "White", "Maroon", "Red", "Purple", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
+				"Fuchsia", "Green", "Lime", "Olive", "Yellow", "Navy", "Blue", "Teal","Aqua"}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$ //$NON-NLS-9$
 		//if ordering changes, must change RGB[] ordering
 
 	private RGB[] _rgb;

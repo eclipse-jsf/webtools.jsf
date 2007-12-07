@@ -149,7 +149,7 @@ public class StringDialogField extends DialogFieldBase implements
 	 * @return the text control
 	 */
 	public Text getTextControl(FormToolkit toolkit, Composite parent) {
-		if (_textControl == null) {
+		if (_textControl == null || _textControl.isDisposed()) {
 			assertCompositeNotNull(parent);
 			_modifyListener = new ModifyListener() {
 				public void modifyText(ModifyEvent e) {

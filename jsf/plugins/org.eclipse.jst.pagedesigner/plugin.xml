@@ -11,7 +11,7 @@
 		<editor class="org.eclipse.jst.pagedesigner.editors.HTMLEditor"
 			contributorClass="org.eclipse.jst.pagedesigner.editors.actions.PageDesignerActionBarContributor2"
 			default="false"
-			extensions="jsp,jsf,html,htm,xhtml"
+			extensions="jsp,jspx,jsf,html,htm,xhtml"
 			icon="icons/PD_Plugin.gif"
 			id="org.eclipse.jst.pagedesigner.PageDesignerEditor"
 			name="%editor.name.0">
@@ -32,34 +32,28 @@
 		</factory>
 	</extension>
 
-	<extension point="org.eclipse.wst.common.ui.properties.propertyTabs">
+	 <extension
+       point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
 		<propertyTabs
-			contributorId="org.eclipse.jst.pagedesigner.pageDesigner.tabPropertyContributor">
+			contributorId="org.eclipse.jst.pagedesigner.tabPropertyContributor">
 			<propertyTab label="Quick Edit" category="Quick Edit" id="org.eclipse.jst.pagedesigner.tabQuickEdit" />
 			<propertyTab label="Attributes" category="Attributes" id="org.eclipse.jst.pagedesigner.tabAttributes" />
 		</propertyTabs>
-	</extension>
-
-	<extension
-		point="org.eclipse.wst.common.ui.properties.propertyContributor">
-		<propertyContributor
-			sectionDescriptorProvider="org.eclipse.jst.pagedesigner.properties.internal.DesignerTabPropertySectionDescriptorProvider"
-			contributorId="org.eclipse.jst.pagedesigner.pageDesigner.tabPropertyContributor">
-			<propertyCategory category="Quick Edit" />
-			<propertyCategory category="Attributes" />
-		</propertyContributor>
-	</extension>
-
-	<extension
-		point="org.eclipse.jst.pagedesigner.propertySections">
-		<propertySections>
-			<propertySection afterSection="top"
-				class="org.eclipse.jst.pagedesigner.properties.AllPropertySection"
-				tab="org.eclipse.jst.pagedesigner.tabAttributes"
-				id="section.allproperty" />
+ 	</extension>
+ 	
+  	<extension
+        point="org.eclipse.ui.views.properties.tabbed.propertySections">
+		<propertySections 
+			contributorId="org.eclipse.jst.pagedesigner.tabPropertyContributor">
+			<propertySection
+         		afterSection="top"
+         		class="org.eclipse.jst.pagedesigner.properties.AllPropertySection"
+         		id="section.allproperty"
+        	 	tab="org.eclipse.jst.pagedesigner.tabAttributes">
+  			 </propertySection>
 		</propertySections>
 	</extension>
-	
+
 	<extension point="org.eclipse.jst.pagedesigner.pageDesignerExtension">
 		<linkCreator class="org.eclipse.jst.pagedesigner.actions.link.HtmlLinkCreator" linkIdentifier="Html Link"/>
 	</extension>
@@ -115,6 +109,11 @@
           genModel="model/DTInfo.genmodel"
           uri="http://org.eclipse.jsf.pagedesigner/dtinfo.ecore">
     </package>
+    <package
+          class="org.eclipse.jst.pagedesigner.editors.properties.quickedittabsections.QuickEditTabSectionsPackage"
+          genModel="model/QuickEditTabSections.genmodel"
+          uri="http://org.eclipse.jsf.pagedesigner/QuickEditTabSections.ecore">
+    </package>
    </extension>
  <extension
        point="org.eclipse.jst.jsf.common.standardMetaDataFiles">
@@ -131,6 +130,22 @@
     </domainSourceModelTypeTranslator>
  </extension>
  <extension
+         point="org.eclipse.jst.jsf.common.domainSourceModelTypes">
+      <domainSourceModelTypes
+            domainId="TagLibraryDomain"
+            domainSourceModelTypeId="SybaseCMConfigContentModelHandler"
+            locator="org.eclipse.jst.pagedesigner.internal.metadata.SybaseCMConfigMetaDataLocator"
+            ordinal="0">
+     </domainSourceModelTypes>
+ </extension>
+ <extension
+       point="org.eclipse.jst.jsf.common.domainSourceModelTypeTranslators">
+    <domainSourceModelTypeTranslator
+          domainSourceModelTypeId="SybaseCMConfigContentModelHandler"
+          translatorClass="org.eclipse.jst.pagedesigner.internal.metadata.SybaseCMConfigMetaDataTranslator">
+    </domainSourceModelTypeTranslator>
+ </extension>
+ <extension
        point="org.eclipse.ui.contexts">
     <context
           description="%editor.binding.context.description"
@@ -138,5 +153,32 @@
           name="%editor.binding.context.name"
           parentId="org.eclipse.ui.textEditorScope">
     </context>
+ </extension>
+ <extension
+       point="org.eclipse.jst.jsf.core.MetaDataEnabledFeatures">
+    <MetaDataEnabledFeature
+          class="org.eclipse.jst.pagedesigner.editors.properties.internal.PropertyDescriptor"
+          typeid="org.eclipse.jst.jsf.core.attributevalues.BaseType">
+    </MetaDataEnabledFeature>
+ </extension>
+ <extension
+       point="org.eclipse.ui.views.properties.tabbed.propertyContributor">
+    <propertyContributor
+          contributorId="org.eclipse.jst.pagedesigner.tabPropertyContributor"
+          tabDescriptorProvider="org.eclipse.jst.pagedesigner.properties.internal.WPETabDescriptorProvider">
+       <propertyCategory></propertyCategory>
+    </propertyContributor>
+ </extension>
+ <extension
+       point="org.eclipse.jst.jsf.core.AttributeValueRuntimeTypes">
+     <attributeValueRuntimeType
+            class="org.eclipse.jst.pagedesigner.taglibprocessing.CSSClassType"
+            id="attributevalues.CSSClassType"/> 
+      <attributeValueRuntimeType
+            class="org.eclipse.jst.pagedesigner.taglibprocessing.CSSIdType"
+            id="attributevalues.CSSIdType"/>    
+      <attributeValueRuntimeType
+            class="org.eclipse.jst.pagedesigner.taglibprocessing.CSSStyleType"
+            id="attributevalues.CSSStyleType"/>   
  </extension>
 </plugin>

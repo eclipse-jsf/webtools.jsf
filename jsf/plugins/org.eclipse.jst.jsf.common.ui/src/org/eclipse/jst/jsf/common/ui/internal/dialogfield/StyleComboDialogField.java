@@ -68,6 +68,8 @@ public class StyleComboDialogField extends DialogFieldBase implements
 	 */
 	public void setDefaultValue(String defaultValue) {
 		this._defaultValue = defaultValue;
+		if (_comboControl != null && ! _comboControl.isDisposed())
+			_comboControl.setDefaultValue(_defaultValue);
 	}
 
 	/**
@@ -82,6 +84,7 @@ public class StyleComboDialogField extends DialogFieldBase implements
 	}
 
 	// ------- layout helpers
+
 
 	/*
 	 * @see DialogField#doFillIntoGrid
@@ -147,7 +150,7 @@ public class StyleComboDialogField extends DialogFieldBase implements
 	 */
 	public StyleCombo getComboControl(FormToolkit toolkit,
 			final Composite parent) {
-		if (_comboControl == null) {
+		if (_comboControl == null || _comboControl.isDisposed()) {
 			assertCompositeNotNull(parent);
 			_modifyListener = new ModifyListener() {
 				public void modifyText(ModifyEvent e) {

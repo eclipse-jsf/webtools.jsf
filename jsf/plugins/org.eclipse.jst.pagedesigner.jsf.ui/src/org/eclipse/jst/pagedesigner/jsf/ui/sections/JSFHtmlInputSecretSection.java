@@ -13,12 +13,12 @@ package org.eclipse.jst.pagedesigner.jsf.ui.sections;
 
 import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
 import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
-import org.eclipse.jst.pagedesigner.properties.attrgroup.AttributeGroupSection;
+import org.eclipse.jst.pagedesigner.properties.attrgroup.OLDAttributeGroupSection;
 
 /**
  * @author mengbo
  */
-public class JSFHtmlInputSecretSection extends AttributeGroupSection
+public class JSFHtmlInputSecretSection extends OLDAttributeGroupSection
 {
     /**
      * The default constructor

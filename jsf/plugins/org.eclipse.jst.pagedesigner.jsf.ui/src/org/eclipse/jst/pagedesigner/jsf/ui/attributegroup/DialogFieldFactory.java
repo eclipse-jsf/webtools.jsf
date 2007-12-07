@@ -12,20 +12,22 @@
 package org.eclipse.jst.pagedesigner.jsf.ui.attributegroup;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.jst.jsf.common.metadata.Entity;
+import org.eclipse.jst.jsf.common.metadata.Trait;
+import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
+import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
 import org.eclipse.jst.jsf.common.ui.internal.dialogfield.ClassButtonDialogField;
 import org.eclipse.jst.jsf.common.ui.internal.dialogfield.ComboDialogField;
 import org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogField;
 import org.eclipse.jst.jsf.common.ui.internal.dialogfield.RadiosDialogField;
 import org.eclipse.jst.jsf.common.ui.internal.dialogfield.StringDialogField;
-import org.eclipse.jst.pagedesigner.meta.IAttributeDescriptor;
-import org.eclipse.jst.pagedesigner.meta.ICMRegistry;
-import org.eclipse.jst.pagedesigner.meta.IElementDescriptor;
-import org.eclipse.jst.pagedesigner.meta.IValueType;
-import org.eclipse.jst.pagedesigner.meta.internal.CMRegistry;
+import org.eclipse.jst.jsf.metadataprocessors.MetaDataEnabledProcessingFactory;
+import org.eclipse.jst.pagedesigner.meta.IAttributeRuntimeValueType;
 
 /**
  * @author mengbo
  * @version 1.5
+ * @TODO - unused now
  */
 public class DialogFieldFactory
 {
@@ -35,14 +37,21 @@ public class DialogFieldFactory
      */
     public static DialogField getDialogField(AttributeData data)
     {
-        IAttributeDescriptor descriptor = getAttributeDescriptor(data.getUri(), data.getElementName(), data.getAttributeName());
-        if(descriptor != null)
+    	Object project = data.getParamMap().get(AttributeData.Project);
+    	Entity attrEntity = null;
+    	if (project != null && project instanceof IProject){
+    		attrEntity = TaglibDomainMetaDataQueryHelper.getEntity(TaglibDomainMetaDataQueryHelper.createMetaDataModelContext((IProject)project, data.getUri()), data.getElementName()+"/"+data.getAttributeName());
+    	}
+//    	IAttributeDescriptor descriptor = getAttributeDescriptor(data.getUri(), data.getElementName(), data.getAttributeName());
+        if(attrEntity != null)
         {
-            String type = descriptor.getValueType();
-            if (IValueType.CLASSNAME.equalsIgnoreCase(type))
+        	Trait t = TaglibDomainMetaDataQueryHelper.getTrait(attrEntity, MetaDataEnabledProcessingFactory.ATTRIBUTE_VALUE_RUNTIME_TYPE_PROP_NAME);
+            String type = TraitValueHelper.getValueAsString(t);
+            if (IAttributeRuntimeValueType.JAVACLASS.equals(type)) 
+        	//if (OLDIValueType.CLASSNAME.equalsIgnoreCase(type))
             {
                 ClassButtonDialogField field = new ClassButtonDialogField(null);
-                Object project = data.getParamMap().get(AttributeData.Project);
+//                Object project = data.getParamMap().get(AttributeData.Project);
                 if (project instanceof IProject)
                 {
                     field.setProject((IProject) project);
@@ -54,20 +63,22 @@ public class DialogFieldFactory
         }
         return new StringDialogField();
     }
-
-    private static IAttributeDescriptor getAttributeDescriptor(String uri, String elementName, String attributeName)
-    {
-        ICMRegistry registry = CMRegistry.getInstance();
-        IElementDescriptor elementDescriptor = registry.getElementDescriptor(uri, elementName);
-        return elementDescriptor.getAttributeDescriptor(attributeName);
-    }
-
+    
+ 
+//    private static IAttributeDescriptor getAttributeDescriptor(String uri, String elementName, String attributeName)
+//    {
+//        ICMRegistry registry = CMRegistry.getInstance();
+//        IElementDescriptor elementDescriptor = registry.getElementDescriptor(uri, elementName);
+//        return elementDescriptor.getAttributeDescriptor(attributeName);
+//    }
+    
+    
     /**
+     * Sets the initial value of dialog field
      * @param field
      * @param value
      */
-    public static void setDialogFiledValue(DialogField field, Object value)
-    {
+    public static void setDialogFieldValue(DialogField field, Object value){
         if (field instanceof StringDialogField)
         {
             ((StringDialogField) field).setTextWithoutUpdate(value == null ? "" : value.toString());//$NON-NLS-1$
@@ -84,12 +95,23 @@ public class DialogFieldFactory
             }
         }
     }
+    
+    /**
+     * @param field
+     * @param value
+     * @deprecated - use setDialogField method
+     */
+    public static void setDialogFiledValue(DialogField field, Object value)
+    {
+    	setDialogFieldValue(field, value);
+    }
 
     /**
+     * Sets value of field into AttributeData if it was a StringDialogField
      * @param field
      * @param pair
      */
-    public static void prepareDialogFiledValue(DialogField field, AttributeData pair)
+    public static void prepareDialogFieldValue(DialogField field, AttributeData pair)
     {
         if (field instanceof StringDialogField)
         {
@@ -97,6 +119,15 @@ public class DialogFieldFactory
         }
     }
 
+    /**
+     * @param field
+     * @param pair
+     * @deprecated - use prepareDialogFieldValue
+     */
+    public static void prepareDialogFiledValue(DialogField field, AttributeData pair)
+    {
+    	prepareDialogFieldValue(field, pair);
+    }
     /**
      * @param data
      * @return the dialog field label for data

@@ -29,9 +29,9 @@ import org.eclipse.ui.part.MultiPageEditorPart;
 import org.eclipse.ui.part.PageBook;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.PropertySheetPage;
-import org.eclipse.wst.common.ui.properties.internal.provisional.ISection;
-import org.eclipse.wst.common.ui.properties.internal.provisional.ITabbedPropertyConstants;
-import org.eclipse.wst.common.ui.properties.internal.provisional.TabbedPropertySheetPage;
+import org.eclipse.ui.views.properties.tabbed.ISection;
+import org.eclipse.ui.views.properties.tabbed.ITabbedPropertyConstants;
+import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import org.eclipse.wst.sse.ui.StructuredTextEditor;
 
 /**
@@ -175,7 +175,9 @@ public class GeneralViewSection implements ISection,
 		return rec;
 	}
 
-
+	/*
+	 * (non-Javadoc) Method declared on PageBookView.
+	 */
 	/**
 	 * @param part
 	 * @return PageRec for part

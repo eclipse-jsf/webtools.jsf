@@ -13,6 +13,7 @@ package org.eclipse.jst.pagedesigner.editors.palette.internal.metadata;
 
 import org.eclipse.jst.jsf.common.metadata.internal.AbstractTagLibDomainContentModelMetaDataTranslator;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataModelMergeAssistant;
+import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataTranslator;
 import org.eclipse.wst.html.core.internal.contentmodel.HTMLCMDocument;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMDocument;
@@ -22,6 +23,13 @@ import org.eclipse.wst.xml.core.internal.contentmodel.CMDocument;
  */
 public class HTMLContentModelMetaDataTranslator extends AbstractTagLibDomainContentModelMetaDataTranslator implements IMetaDataTranslator {
 
+	public boolean canTranslate(IMetaDataSourceModelProvider modelProvider) {		
+		if (modelProvider.getSourceModel() != null && 
+				modelProvider.getSourceModel() instanceof HTMLCMDocument)
+			return true;
+		return false;
+	}
+	
 	/* (non-Javadoc)
 	 * @see org.eclipse.jst.jsf.common.metadata.internal.IMetaDataTranslator#translate(org.eclipse.jst.jsf.common.metadata.internal.IMetaDataModelMergeAssistant)
 	 */

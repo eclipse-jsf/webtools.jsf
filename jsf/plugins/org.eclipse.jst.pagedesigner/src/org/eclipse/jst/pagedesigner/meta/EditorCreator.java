@@ -13,7 +13,7 @@ package org.eclipse.jst.pagedesigner.meta;
 
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogField;
-import org.eclipse.jst.pagedesigner.meta.internal.DefaultEditorCreator;
+import org.eclipse.jst.pagedesigner.editors.properties.IPropertyPageDescriptor;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
 
@@ -28,13 +28,8 @@ public abstract class EditorCreator {
 
 	/**
 	 * 
-	 *
 	 */
-	public interface CellEditorHolder {
-		/**
-		 * @param parent
-		 * @return the new cell editor
-		 */
+	public static interface CellEditorHolder {
 		public CellEditor createCellEditor(Composite parent);
 	}
 
@@ -43,9 +38,9 @@ public abstract class EditorCreator {
 	 * descriptor.
 	 * 
 	 * @param attr
-	 * @return the dialog field
+	 * @return DialogField
 	 */
-	public abstract DialogField createDialogField(IAttributeDescriptor attr);
+	public abstract DialogField createDialogField(IPropertyPageDescriptor attr);
 
 	/**
 	 * Create a dialog field that will have databinding support. Basically, this
@@ -59,21 +54,40 @@ public abstract class EditorCreator {
 	 * @param attr
 	 * @param handler
 	 *            if null, system default mechanism will be used.
-	 * @return the dialog field
+	 * @return DialogField
 	 */
 	public abstract DialogField createDialogFieldWithWrapper(String uri,
-			String tagName, IAttributeDescriptor attr, IBindingHandler handler);
+			String tagName, IPropertyPageDescriptor attr, IBindingHandler handler);
 
+
+	public abstract DialogField createDialogFieldWithWrapper(IPropertyPageDescriptor descriptor, IBindingHandler handler);
+//	
+//	/**
+//	 * Create a dialog field that will have databinding support. Basically, this
+//	 * method will create a normal dialog field using the attribute descriptor,
+//	 * then make a wrapper on it.
+//	 * 
+//	 * @param uri
+//	 *            the namespace uri
+//	 * @param tagName
+//	 *            the local tag name
+//	 * @param attrName
+//	 * @param handler
+//	 *            if null, system default mechanism will be used.
+//	 * @return DialogField
+//	 */
+//	public abstract DialogField createDialogFieldWithWrapper(String uri,
+//			String tagName, String attrName, IBindingHandler handler);
 	/**
 	 * Create a cell editor.
 	 * 
 	 * @param parent
 	 * @param attr
 	 * @param element
-	 * @return the cell editor
+	 * @return CellEditor
 	 */
 	public abstract CellEditor createCellEditor(Composite parent,
-			IAttributeDescriptor attr, IDOMElement element);
+			IPropertyPageDescriptor attr, IDOMElement element);
 
 	/**
 	 * Create a cell editor that will have databinding support.
@@ -83,10 +97,10 @@ public abstract class EditorCreator {
 	 * @param element
 	 * @param handler
 	 *            if null, system default mechanism will be used.
-	 * @return the cell editor
+	 * @return CellEditor
 	 */
 	public abstract CellEditor createCellEditorWithWrapper(Composite parent,
-			IAttributeDescriptor attr, IDOMElement element,
+			IPropertyPageDescriptor attr, IDOMElement element,
 			IBindingHandler handler);
 
 	/**
@@ -101,15 +115,12 @@ public abstract class EditorCreator {
 	 * @param element
 	 * @param handler
 	 *            if null, system default mechanism will be used.
-	 * @return the cell editor
+	 * @return CellEditor
 	 */
 	public abstract CellEditor createCellEditorWithWrapper(Composite parent,
-			IAttributeDescriptor attr, CellEditorHolder holder,
+			IPropertyPageDescriptor attr, CellEditorHolder holder,
 			IDOMElement element, IBindingHandler handler);
 
-	/**
-	 * @return the singleton instance
-	 */
 	public static EditorCreator getInstance() {
 		if (_instance == null) {
 			_instance = new DefaultEditorCreator();
@@ -117,9 +128,6 @@ public abstract class EditorCreator {
 		return _instance;
 	}
 
-	/**
-	 * @return the binding handler
-	 */
 	public IBindingHandler getSystemDefaultBindingHandler() {
 		return _defaultHandler;
 	}

@@ -13,6 +13,7 @@
 package org.eclipse.jst.jsf.metadataprocessors;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.resources.IProject;
@@ -26,91 +27,130 @@ import org.eclipse.jst.jsf.context.resolver.structureddocument.IWorkspaceContext
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.eclipse.jst.jsf.metadataprocessors.internal.AttributeValueRuntimeTypeFactory;
 
-
 /**
- * Singleton class that will produce <code>IMetaDataEnabledFeature</code>s that the
- * caller can use for processing.
- * <p><b>Provisional API - subject to change</b></p>
+ * Singleton class that will produce <code>IMetaDataEnabledFeature</code>s
+ * that the caller can use for processing.
+ * <p>
+ * <b>Provisional API - subject to change</b>
+ * </p>
+ * 
  * @author Gerry Kessler - Oracle
- *
+ * 
  */
 public final class MetaDataEnabledProcessingFactory {
 	private static MetaDataEnabledProcessingFactory INSTANCE;
-	
+
 	/**
-	 * Name of property in annotation file to use when applying a runtime type to an attribute value 
+	 * Name of property in annotation file to use when applying a runtime type
+	 * to an attribute value
 	 */
 	public static final String ATTRIBUTE_VALUE_RUNTIME_TYPE_PROP_NAME = "attribute-value-runtime-type";
-	
+
 	/**
 	 * @return singleton instance
 	 */
-	public static MetaDataEnabledProcessingFactory getInstance(){
-		if (INSTANCE == null){
-			INSTANCE = new MetaDataEnabledProcessingFactory();	
+	public static MetaDataEnabledProcessingFactory getInstance() {
+		if (INSTANCE == null) {
+			INSTANCE = new MetaDataEnabledProcessingFactory();
 		}
 		return INSTANCE;
 	}
-	
-	private MetaDataEnabledProcessingFactory(){
+
+	private MetaDataEnabledProcessingFactory() {
 		super();
 	}
-	
+
 	/**
-	 * Returns list of <code>IMetaDataEnabledFeature</code> adapters for the given Taglibrary attribute.  
+	 * Returns list of <code>IMetaDataEnabledFeature</code> adapters for the
+	 * given Taglibrary attribute.
 	 * 
-	 * Adapters will be scanned for first by uri, element, attribute and if not found,
-	 * 	uri, "*", attribute and if still not found by "*", "*", attribute.
-	 * @param featureType feature type.  eg. <code>IPossibleValues</code>, <code>IValidValues</code>, etc.  Must be subclass of IMetaDataEnabledFeature. 
-	 * @param sdContext 
-	 * @param uri annotation file uri
+	 * Adapters will be scanned for first by uri, element, attribute and if not
+	 * found, uri, "*", attribute and if still not found by "*", "*", attribute.
+	 * 
+	 * @param featureType
+	 *            feature type. eg. <code>IPossibleValues</code>,
+	 *            <code>IValidValues</code>, etc. Must be subclass of
+	 *            IMetaDataEnabledFeature.
+	 * @param sdContext
+	 * @param uri
+	 *            annotation file uri
 	 * @param elementName
 	 * @param attributeName
-	 * @return	returns null - if the metadata was not found 
-	 * 			<br>returns empty list - if not a <code>IMetaDataEnabledFeature</code> proccessor or is not valid or does not support the specified feature
+	 * @return returns null - if the metadata was not found <br>
+	 *         returns empty list - if not a
+	 *         <code>IMetaDataEnabledFeature</code> proccessor or is not valid
+	 *         or does not support the specified feature
 	 * 
 	 * @see MetaDataEnabledProcessingFactory#ATTRIBUTE_VALUE_RUNTIME_TYPE_PROP_NAME
 	 */
-	public List getAttributeValueRuntimeTypeFeatureProcessors(Class featureType, IStructuredDocumentContext sdContext, String uri, String elementName, String attributeName){
-		List retList = new ArrayList(2);		
-		//look up the attribute's runtime type from MD
-		IProject _project = null; 
-		if (sdContext !=null){
-			IWorkspaceContextResolver resolver = IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver(sdContext);
-			_project = resolver != null ? resolver.getProject() : null; 
+	public List<IMetaDataEnabledFeature> getAttributeValueRuntimeTypeFeatureProcessors(
+			Class featureType, IStructuredDocumentContext sdContext,
+			String uri, String elementName, String attributeName) {
+		
+		// look up the attribute's runtime type from MD
+		IProject _project = null;
+		if (sdContext != null) {
+			IWorkspaceContextResolver resolver = IStructuredDocumentContextResolverFactory.INSTANCE
+					.getWorkspaceContextResolver(sdContext);
+			_project = resolver != null ? resolver.getProject() : null;
 		}
 		String _elem = elementName + "/" + attributeName;
 		String _uri = uri;
-		ITaglibDomainMetaDataModelContext modelContext = TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(_project, _uri);
-		Entity entity = TaglibDomainMetaDataQueryHelper.getEntity(modelContext, _elem);
-		Trait trait = null;
-		if (entity != null){
-			trait = TaglibDomainMetaDataQueryHelper.getTrait(entity, ATTRIBUTE_VALUE_RUNTIME_TYPE_PROP_NAME);
-		}
+		ITaglibDomainMetaDataModelContext modelContext = TaglibDomainMetaDataQueryHelper
+				.createMetaDataModelContext(_project, _uri);
+		Entity attrEntity = TaglibDomainMetaDataQueryHelper.getEntity(modelContext,
+				_elem);
+
+		if (attrEntity != null) 
+			return getAttributeValueRuntimeTypeFeatureProcessors(featureType, sdContext, attrEntity);
 		
-		if (trait==null){
+		return Collections.EMPTY_LIST;
+
+	}
+
+	/**
+	 * @param featureType
+	 * @param sdContext
+	 * @param attrEntity
+	 * @return returns null - if the metadata was not found <br>
+	 *         returns empty list - if not a
+	 *         <code>IMetaDataEnabledFeature</code> proccessor or is not valid
+	 *         or does not support the specified feature
+	 */
+	public List<IMetaDataEnabledFeature> getAttributeValueRuntimeTypeFeatureProcessors(
+			Class featureType, IStructuredDocumentContext sdContext,
+			Entity attrEntity) {
+		
+		List<IMetaDataEnabledFeature> retList = new ArrayList<IMetaDataEnabledFeature>(2);
+		Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(attrEntity,
+				ATTRIBUTE_VALUE_RUNTIME_TYPE_PROP_NAME);
+
+		if (trait == null) {
 			return retList;
 		}
-		
+
 		String typeId = TraitValueHelper.getValueAsString(trait);
-		
-		//get the implementing class for the type
-		ITypeDescriptor type = AttributeValueRuntimeTypeFactory.getInstance().getType(typeId);
-		if (type != null){
-			TaglibMetadataContext context = new TaglibMetadataContext(uri, elementName, attributeName, entity, trait);
-			//get all the feature adapters (IMetaDataEnabledFeature) for this type
-			List aList = type.getFeatureAdapters(featureType);
-			for (int j=0;j<aList.size();j++){
-				//set the context in the feature
-				((IMetaDataEnabledFeature)aList.get(j)).setMetaDataContext(context);
-				((IMetaDataEnabledFeature)aList.get(j)).setStructuredDocumentContext(sdContext);
+
+		// get the implementing class for the type
+		ITypeDescriptor type = AttributeValueRuntimeTypeFactory.getInstance()
+				.getType(typeId);
+		if (type != null) {
+			TaglibMetadataContext context = new TaglibMetadataContext(attrEntity, trait);
+			// get all the feature adapters (IMetaDataEnabledFeature) for this
+			// type
+			List<IMetaDataEnabledFeature> aList = type.getFeatureAdapters(featureType);
+			for (int j = 0; j < aList.size(); j++) {
+				// set the context in the feature
+				((IMetaDataEnabledFeature) aList.get(j))
+						.setMetaDataContext(context);
+				((IMetaDataEnabledFeature) aList.get(j))
+						.setStructuredDocumentContext(sdContext);
 				retList.add(aList.get(j));
 			}
 
 		}
-		//return list of IMetaDataEnabledFeatures for this type
+		// return list of IMetaDataEnabledFeatures for this type
 		return retList;
-
 	}
 
 }

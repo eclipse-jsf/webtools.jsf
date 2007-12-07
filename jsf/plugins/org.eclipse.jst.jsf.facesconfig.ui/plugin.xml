@@ -54,8 +54,8 @@
 	</extension>
 	<!-- ********** End Introduction Page ************** -->
 		<!-- ************* properties view ************** -->
-	<extension point="org.eclipse.wst.common.ui.properties.propertyTabs">
-		<propertyTabs
+	<extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs"> 
+		<propertyTabs 
 			contributorId="org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor">
 			<propertyTab label="%propertyTab.attribute" category="attribute"
 				id="org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.attribute"/>
@@ -63,12 +63,12 @@
 				id="org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.general"/>
 		</propertyTabs>
 	</extension>
-		<extension point="org.eclipse.wst.common.ui.properties.propertyContributor">
+		<extension point="org.eclipse.ui.views.properties.tabbed.propertyContributor">
 		<propertyContributor
 			sectionDescriptorProvider="org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.PageflowSectionDescriptorProvider"
 			contributorId="org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor"
 			labelProvider="org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.PageflowSectionLabelProvider">
-			<propertyCategory category="attribute"/>
+			<propertyCategory category="attribute" />
 			<propertyCategory category="general"/>
 		</propertyContributor>
 	</extension>

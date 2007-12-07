@@ -161,6 +161,9 @@
          point="org.eclipse.jst.jsf.core.AttributeValueRuntimeTypes">
 
       <attributeValueRuntimeType
+            class="org.eclipse.jst.jsf.metadataprocessors.AbstractRootTypeDescriptor"
+            id="attributevalues.BaseType"/>
+      <attributeValueRuntimeType
             class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.StringType"
             id="attributevalues.StringType"/>
       <attributeValueRuntimeType
@@ -214,6 +217,45 @@
       <attributeValueRuntimeType
             class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.ResourceBundleType"
             id="attributevalues.ResourceBundleType"/>         
+      <attributeValueRuntimeType
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.LanguageCodeType"
+            id="attributevalues.LanguageCodeType"/>
+      <attributeValueRuntimeType
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.RelativePathType"
+            id="attributevalues.RelativePathType"/>    
+      <attributeValueRuntimeType
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.WebPathType"
+            id="attributevalues.WebPathType"/>                                    
+      <attributeValueRuntimeType
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.CurrencyCodeType"
+            id="attributevalues.CurrencyCodeType"/>
+      <attributeValueRuntimeType
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.LocaleType"
+            id="attributevalues.LocaleType"/>                                         
+      <attributeValueRuntimeType
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.TimeZoneType"
+            id="attributevalues.TimeZoneType"/>
+      <attributeValueRuntimeType
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.DateTimePatternType"
+            id="attributevalues.DateTimePatternType"/>  
+      <attributeValueRuntimeType
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.NumberPatternType"
+            id="attributevalues.NumberPatternType"/>                 
+      <attributeValueRuntimeType
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.ScriptType"
+            id="attributevalues.ScriptType"/>  
+      <attributeValueRuntimeType
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.CharacterType"
+            id="attributevalues.CharacterType"/>        
+      <attributeValueRuntimeType
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.LinkType"
+            id="attributevalues.LinkType"/> 
+      <attributeValueRuntimeType
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.ContentType"
+            id="attributevalues.ContentType"/>                  
+      <attributeValueRuntimeType
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.URIType"
+            id="attributevalues.URIType"/>                                 
    </extension>
    
    <extension

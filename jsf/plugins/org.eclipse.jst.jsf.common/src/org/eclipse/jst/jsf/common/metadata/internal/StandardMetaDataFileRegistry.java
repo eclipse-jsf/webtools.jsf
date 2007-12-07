@@ -153,17 +153,21 @@ class StandardMetaDataFilesProvider implements IMetaDataSourceModelProvider {
 		} catch (FileNotFoundException e){
 			JSFCommonPlugin.log(IStatus.ERROR, e.getLocalizedMessage());
 		} catch (IOException e) {
-			JSFCommonPlugin.log(IStatus.ERROR,"IOException(1): StandardMetaDataFilesProvider.getSourceModel()", e); //$NON-NLS-1$
+			JSFCommonPlugin.log(IStatus.ERROR,"IOException(1): StandardMetaDataFilesProvider.getSourceModel():"+getModelName(), e); //$NON-NLS-1$
 		} finally {
 			if (inputStream != null){
 				try {
 					inputStream.close();
 				} catch (IOException e) {
-					JSFCommonPlugin.log( IStatus.ERROR,"IOException (2): StandardMetaDataFilesProvider.getSourceModel()", e); //$NON-NLS-1$
+					JSFCommonPlugin.log( IStatus.ERROR,"IOException (2): StandardMetaDataFilesProvider.getSourceModel():"+getModelName(), e); //$NON-NLS-1$
 				}
 			}
 		}
 		return model;
+	}
+	
+	private String getModelName() {
+		return info.toString();
 	}
 
 	/* (non-Javadoc)

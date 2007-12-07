@@ -29,7 +29,7 @@ import org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogField;
 import org.eclipse.jst.jsf.common.ui.internal.dialogfield.IDialogFieldChangeListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.IPropertySource;
-import org.eclipse.wst.common.ui.properties.internal.provisional.AbstractPropertySection;
+import org.eclipse.ui.views.properties.tabbed.AbstractPropertySection;
 
 /**
  * This is base section, which support GEF command stack to redo/undo setting

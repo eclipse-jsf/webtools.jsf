@@ -17,14 +17,14 @@ import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.IPropertySourceProvider;
-import org.eclipse.wst.common.ui.properties.internal.provisional.AbstractPropertySection;
-import org.eclipse.wst.common.ui.properties.internal.provisional.TabbedPropertySheetPage;
+import org.eclipse.ui.views.properties.tabbed.AbstractPropertySection;
+import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import org.eclipse.wst.sse.core.internal.provisional.INodeAdapter;
 import org.eclipse.wst.sse.core.internal.provisional.INodeNotifier;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
 
 /**
- * mainly copied from AdvancedPropertySection. But extend it to allow setting
+ * Mainly copied from AdvancedPropertySection. But extend it to allow setting
  * PropertySourceProvider.
  * 
  * @author mengbo
@@ -32,14 +32,20 @@ import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
 public class AllPropertySection extends AbstractPropertySection {
 	// FIXME: workaround the eclipse properties view limitation of sorting
 	// category.
-	private MyPropertySheetPage page;
-
-	private IPropertySourceProvider _provider;
-
-	private IDOMElement _element;
+	private AttributePropertySheetPage page;
 
 	/**
-	 * the adapter
+	 * IPropertySourceProvider for this section
+	 */
+	protected IPropertySourceProvider _provider;
+
+	/**
+	 * selected tag IDOMElement 
+	 */
+	protected IDOMElement _element;
+
+	/**
+	 * The INodeAdapter to use for notification of model change
 	 */
 	protected INodeAdapter _adapter = new INodeAdapter() {
 		public boolean isAdapterForType(Object type) {
@@ -53,22 +59,21 @@ public class AllPropertySection extends AbstractPropertySection {
 	};
 
 	/**
-	 * 
+	 * Constructor
 	 */
 	public AllPropertySection() {
 		this.setPropertySourceProvider(new AttributePropertySourceProvider());
 	}
 
-	/**
-	 * see org.eclipse.wst.common.ui.properties.ITabbedPropertySection#createControls(org.eclipse.swt.widgets.Composite,
-	 *      org.eclipse.wst.common.ui.properties.internal.provisional.TabbedPropertySheetPage)
-	 */
+	@Override
 	public void createControls(Composite parent,
 			TabbedPropertySheetPage tabbedPropertySheetPage) {
 		super.createControls(parent, tabbedPropertySheetPage);
+		
+	
 		Composite composite = getWidgetFactory()
 				.createFlatFormComposite(parent);
-		page = new MyPropertySheetPage();
+		page = new AttributePropertySheetPage();
 		page.init(tabbedPropertySheetPage.getSite());
 
 		if (_provider != null) {
@@ -86,17 +91,14 @@ public class AllPropertySection extends AbstractPropertySection {
 		page.getControl().setLayoutData(data);
 	}
 
-	/**
-	 * @see org.eclipse.wst.common.ui.properties.internal.provisional.ISection#setInput(org.eclipse.ui.IWorkbenchPart,
-	 *      org.eclipse.jface.viewers.ISelection)
-	 */
+	@Override
 	public void setInput(IWorkbenchPart part, ISelection selection) {
-		super.setInput(part, selection);
-		page.selectionChanged(part, selection);
-
 		IDOMElement newEle = (IDOMElement) DesignerPropertyTool.getElement(
 				part, selection);
+
 		if (_element != newEle) {
+			super.setInput(part, selection);
+			page.selectionChanged(part, selection);
 			if (_element != null) {
 				_element.removeAdapter(_adapter);
 			}
@@ -107,9 +109,7 @@ public class AllPropertySection extends AbstractPropertySection {
 		}
 	}
 
-	/**
-	 * see org.eclipse.wst.common.ui.properties.view.ISection#dispose()
-	 */
+	@Override
 	public void dispose() {
 		super.dispose();
 
@@ -122,27 +122,26 @@ public class AllPropertySection extends AbstractPropertySection {
 		}
 	}
 
-	/**
-	 * see org.eclipse.wst.common.ui.properties.view.ISection#refresh()
-	 */
+	@Override
 	public void refresh() {
 		page.refresh();
 	}
 
-	/**
-	 * see org.eclipse.wst.common.ui.properties.view.ISection#shouldUseExtraSpace()
-	 */
+	@Override
 	public boolean shouldUseExtraSpace() {
 		return true;
 	}
 
 	/**
+	 * Set provider into tabbedPropertiesPage
 	 * @param provider
 	 */
 	public void setPropertySourceProvider(IPropertySourceProvider provider) {
 		_provider = provider;
-		if (page != null)
+		if (page != null){
 			page.setPropertySourceProvider(_provider);
+
+		}
 	}
 
 }

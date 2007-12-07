@@ -23,6 +23,7 @@ import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
 /**
  * @author mengbo
  * @version 1.5
+ * @deprecated
  */
 public class BindingHandlerDelegate implements IBindingHandler {
 	/*
@@ -69,6 +70,14 @@ public class BindingHandlerDelegate implements IBindingHandler {
 				uri, tagName, attr);
 	}
 
+//	public boolean isEnabled(IDOMNode ancester, IDOMElement element,
+//			IPropertyPageDescriptor attr) {
+//		IBindingHandler handler = getDelegatedHandler(ancester, element);
+//		return (handler == null) ? false : handler.isEnabled(ancester, element,
+//				attr);
+//	}
+	
+	
 	/*
 	 * (non-Javadoc)
 	 * 

@@ -130,7 +130,7 @@ public class ComboDialogField extends DialogFieldBase implements
 	 * @return the custom combo control
 	 */
 	public CCombo getComboControl(FormToolkit toolkit, Composite parent) {
-		if (_comboControl == null) {
+		if (_comboControl == null || _comboControl.isDisposed()) {
 			assertCompositeNotNull(parent);
 			_modifyListener = new ModifyListener() {
 				public void modifyText(ModifyEvent e) {

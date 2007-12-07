@@ -13,6 +13,7 @@ package org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties;
 
 import java.util.List;
 
+import org.eclipse.jface.viewers.IFilter;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpart.PageflowLinkEditPart;
@@ -20,9 +21,8 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.section.LinkSection;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowValidation;
 import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.wst.common.ui.properties.internal.provisional.ISection;
-import org.eclipse.wst.common.ui.properties.internal.provisional.ISectionDescriptor;
-import org.eclipse.wst.common.ui.properties.internal.provisional.ITypeMapper;
+import org.eclipse.ui.views.properties.tabbed.ISection;
+import org.eclipse.ui.views.properties.tabbed.ISectionDescriptor;
 
 /**
  * @author jchoi
@@ -37,15 +37,6 @@ public class LinkSectionDescriptor implements ISectionDescriptor {
 	 */
 	public String getId() {
 		return ITabbedPropertiesConstants.LINK_SECTION;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.wst.common.ui.properties.internal.provisional.ISectionDescriptor#getFilter()
-	 */
-	public ITypeMapper getFilter() {
-		return null;
 	}
 
 	/*
@@ -111,5 +102,10 @@ public class LinkSectionDescriptor implements ISectionDescriptor {
 	public int getEnablesFor() {
 		return ENABLES_FOR_ANY;
 	}
+
+	public IFilter getFilter() {
+		return null;
+	}
+
 
 }

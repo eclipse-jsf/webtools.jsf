@@ -20,6 +20,7 @@ import java.util.Map;
 /**
  * @author mengbo
  * @version 1.5
+ * @deprecated 
  */
 public class LocaleFallback {
 	private static Map map = new HashMap();

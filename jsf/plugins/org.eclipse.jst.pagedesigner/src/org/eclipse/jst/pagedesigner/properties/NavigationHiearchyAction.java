@@ -39,7 +39,7 @@ public class NavigationHiearchyAction extends Action {
 
 	private Node _currentNode;
 
-	private DesignerTabbedPropertySheetPage _propertyPage;
+	private WPETabbedPropertySheetPage _propertyPage;
 
 	private class MenuCreator implements IMenuCreator {
 		public void dispose() {
@@ -94,7 +94,7 @@ public class NavigationHiearchyAction extends Action {
 	/**
 	 * @param propertyPage
 	 */
-	public NavigationHiearchyAction(DesignerTabbedPropertySheetPage propertyPage) {
+	public NavigationHiearchyAction(WPETabbedPropertySheetPage propertyPage) {
 		super("");
 		setEnabled(true);
 		setMenuCreator(new MenuCreator());
@@ -129,9 +129,7 @@ public class NavigationHiearchyAction extends Action {
 		}
 	}
 
-	/*
-	 * (non-Javadoc) Method declared on IAction.
-	 */
+	@Override
 	public void run() {
 		this._propertyPage.internalChangeSelection(_currentNode, _startNode);
 	}

@@ -18,6 +18,7 @@ import org.eclipse.jst.pagedesigner.meta.IElementDescriptor;
 
 /**
  * @author mengbo
+ * @deprecated 
  */
 public class ElementDescriptor implements IElementDescriptor {
 	String _tagName;
@@ -130,5 +131,11 @@ public class ElementDescriptor implements IElementDescriptor {
 	 */
 	public void setHelpContextID(String contextid) {
 		_helpContextID = contextid;
+	}
+	
+	public String toString(){
+		StringBuffer buf = new StringBuffer("ElementDescriptor: ");
+		buf.append(this.getTagName()).append("(").append(this.getNamespaceURI()).append(")");
+		return buf.toString();
 	}
 }

@@ -1,693 +1,469 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-   <extension
-         point="org.eclipse.jst.pagedesigner.pageDesignerExtension">
-      <tagConverterFactory class="org.eclipse.jst.pagedesigner.jsf.ui.converter.jsfcore.JSFCoreConverterFactory"/>
-	  <attributeCellEditorFactory class="org.eclipse.jst.pagedesigner.jsf.ui.celleditors.JSFAttributeCellEditorFactory"/>
-      <tagConverterFactory class="org.eclipse.jst.pagedesigner.jsf.ui.converter.jsfhtml.JSFHTMLConverterFactory"/>
-      <elementEditFactory class="org.eclipse.jst.pagedesigner.jsf.ui.elementedit.jsfhtml.JSFHTMLElementEditFactory"/>
-      <elementEditFactory class="org.eclipse.jst.pagedesigner.jsf.ui.elementedit.jsfcore.JSFCoreElementEditFactory"/>
-      <linkCreator
-            class="org.eclipse.jst.pagedesigner.jsf.ui.actions.JSFCommandLinkCreator"
-            linkIdentifier="JSF CommandLink"/>
-      <linkCreator
-            class="org.eclipse.jst.pagedesigner.jsf.ui.actions.JSFOutputLinkCreator"
-            linkIdentifier="JSF OutputLink"/>
-   </extension>
-   
-   <extension point="org.eclipse.jst.pagedesigner.popupMenuContributor">
-	<menuItemContributor class="org.eclipse.jst.pagedesigner.jsf.ui.actions.PageFlowContributor" 
-	URI="http://java.sun.com/jsf/core"/>
-	</extension> 
-   
-   <!-- page variables -->
-   <extension
-         point="org.eclipse.jst.pagedesigner.jsp.core.pageVar">
-      <taglib uri="http://java.sun.com/jsf/html">
-            
-      	<tag
-            varTypeStringIsAttr="true"
-            varNameIsAttr="true"
-            varTypeMode="EXPRESSION_COLLECTION_ITEM"
-            varTypeString="value"
-            varName="var"
-            tagName="dataTable"/>
-       </taglib>
-       <taglib uri="http://java.sun.com/jsf/core">
-       	<tag
-            varTypeStringIsAttr="true"
-            varNameIsAttr="true"
-            varTypeMode="BUNDLE"
-            varTypeString="basename"
-            varName="var"
-            tagName="loadBundle"/>
-       </taglib>
-   </extension>
 
-   <!-- element and attribute meta data -->
-   <extension
-         point="org.eclipse.jst.pagedesigner.cmRegistry">
-      <registry
-            configFile="configs/cm/jsfcore.xml"
-            uri="http://java.sun.com/jsf/core"/>
-      <registry
-            configFile="configs/cm/jsfhtml.xml"
-            uri="http://java.sun.com/jsf/html"/>
-   </extension>
-   <extension
-         point="org.eclipse.jst.pagedesigner.propertySections">
-      <propertySections>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFCoreActionListenerSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.actionListener">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/core"
-                  tagName="actionListener"/>
-         </propertySection>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFCoreAttributeSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.attribute">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/core"
-                  tagName="attribute"/>
-         </propertySection>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFCoreConverterSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.converter">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/core"
-                  tagName="converter"/>
-         </propertySection>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFCoreFacetSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.facet">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/core"
-                  tagName="facet"/>
-         </propertySection>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFCoreLoadBundleSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.loadBundle">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/core"
-                  tagName="loadBundle"/>
-         </propertySection>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFCoreParamSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.param">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/core"
-                  tagName="param"/>
-         </propertySection>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFCoreSelectItemSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.selectItem">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/core"
-                  tagName="selectItem"/>
-         </propertySection>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFCoreSelectItemsSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.selectItems">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/core"
-                  tagName="selectItems"/>
-         </propertySection>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFCoreSubviewSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.subview">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/core"
-                  tagName="subview"/>
-         </propertySection>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFCoreValidateDoubleRangeSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.validateDoubleRange">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/core"
-                  tagName="validateDoubleRange"/>
-         </propertySection>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFCoreValidateLengthSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.validateLength">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/core"
-                  tagName="validateLength"/>
-         </propertySection>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFCoreValidateLongRangeSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.validateLongRange">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/core"
-                  tagName="validateLongRange"/>
-         </propertySection>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFCoreValidatorSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.validator">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/core"
-                  tagName="validator"/>
-         </propertySection>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFCoreValueChangeListenerSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.valueChangeListener">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/core"
-                  tagName="valueChangeListener"/>
-         </propertySection>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFCoreVerbatimSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.verbatim">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/core"
-                  tagName="verbatim"/>
-         </propertySection>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFCoreViewSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.view">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/core"
-                  tagName="view"/>
-         </propertySection>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlColumnSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.column">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="column"/>
-         </propertySection>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlCommandButtonSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.commandButton">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="commandButton"/>
-         </propertySection>
-         <propertySection
-               afterSection="section.general.commandButton"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlActionListenerSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.commandButton.listener">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="commandButton"/>
-         </propertySection>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlCommandLinkSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.commandLink">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="commandLink"/>
-         </propertySection>
-         <propertySection
-               afterSection="section.general.commandLink"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlActionListenerSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.commandLink.listener">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="commandLink"/>
-         </propertySection>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlDataTableSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.dataTable">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="dataTable"/>
-         </propertySection>
-         <propertySection
-               afterSection="section.general.dataTable"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlDataTableColumnsSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.dataTable.columns">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="dataTable"/>
-         </propertySection>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlFormSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.form">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="form"/>
-         </propertySection>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlGraphicImageSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.graphicImage">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="graphicImage"/>
-         </propertySection>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlInputHiddenSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.inputHidden">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="inputHidden"/>
-         </propertySection>
-         <propertySection
-               afterSection="section.general.inputHidden"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlInputHiddenTypeSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.inputHidden.type">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="inputHidden"/>
-         </propertySection>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlInputSecretSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.inputSecret">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="inputSecret"/>
-         </propertySection>
-         <propertySection
-               afterSection="section.general.inputSecret"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlInputSecretTypeSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.inputSecret.type">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="inputSecret"/>
-         </propertySection>
-         <propertySection
-               afterSection="section.general.inputSecret.type"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlInputOthersSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.inputText.others">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="inputSecret"/>
-         </propertySection>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlInputTextSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.inputText">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="inputText"/>
-         </propertySection>
-         <propertySection
-               afterSection="section.general.inputText"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlInputTextTypeSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.inputText.type">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="inputText"/>
-         </propertySection>
-         <propertySection
-               afterSection="section.general.inputText.type"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlInputOthersSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.inputText.others">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="inputText"/>
-         </propertySection>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlInputTextareaSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.inputTextarea">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="inputTextarea"/>
-         </propertySection>
-         <propertySection
-               afterSection="section.general.inputTextarea"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlInputTextareaTypeSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.inputTextarea.type">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="inputTextarea"/>
-         </propertySection>
-         <propertySection
-               afterSection="section.general.inputTextarea.type"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlInputOthersSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.inputTextarea.others">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="inputTextarea"/>
-         </propertySection>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlMessageSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.message">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="message"/>
-         </propertySection>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlMessagesSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.messages">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="messages"/>
-         </propertySection>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlOutputFormatSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.outputFormat">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="outputFormat"/>
-         </propertySection>
-         <propertySection
-               afterSection="section.general.outputFormat"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlOutputFormatParamsSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.outputFormat.params">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="outputFormat"/>
-         </propertySection>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlOutputLabelSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.outputLabel">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="outputLabel"/>
-         </propertySection>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlOutputLinkSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.outputLink">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="outputLink"/>
-         </propertySection>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlOutputTextSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.outputText">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="outputText"/>
-         </propertySection>
-         <propertySection
-               afterSection="section.general.outputText"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlOutputTextConverterSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.outputText.converter">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="outputText"/>
-         </propertySection>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlPanelGridSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.panelGrid">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="panelGrid"/>
-         </propertySection>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlPanelGroupSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.panelGroup">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="panelGroup"/>
-         </propertySection>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlSelectBooleanCheckboxSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.selectBooleanCheckbox">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="selectBooleanCheckbox"/>
-         </propertySection>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlSelectManyCheckboxSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.selectManyCheckbox">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="selectManyCheckbox"/>
-         </propertySection>
-         <propertySection
-               afterSection="section.general.selectManyCheckbox"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlSelectChoicesSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.selectManyCheckbox.choices">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="selectManyCheckbox"/>
-         </propertySection>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlSelectManyListboxSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.selectManyListbox">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="selectManyListbox"/>
-         </propertySection>
-         <propertySection
-               afterSection="section.general.selectManyListbox"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlSelectChoicesSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.selectManyListbox.choices">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="selectManyListbox"/>
-         </propertySection>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlSelectManyMenuSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.selectManyMenu">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="selectManyMenu"/>
-         </propertySection>
-         <propertySection
-               afterSection="section.general.selectManyMenu"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlSelectChoicesSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.selectManyMenu.choices">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="selectManyMenu"/>
-         </propertySection>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlSelectOneListboxSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.selectOneListbox">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="selectOneListbox"/>
-         </propertySection>
-         <propertySection
-               afterSection="section.general.selectOneListbox"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlSelectChoicesSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.selectOneListbox.choices">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="selectOneListbox"/>
-         </propertySection>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlSelectOneMenuSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.selectOneMenu">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="selectOneMenu"/>
-         </propertySection>
-         <propertySection
-               afterSection="section.general.selectOneMenu"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlSelectChoicesSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.selectOneMenu.choices">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="selectOneMenu"/>
-         </propertySection>
-         <propertySection
-               afterSection="top"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlSelectOneRadioSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.selectOneRadio">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="selectOneRadio"/>
-         </propertySection>
-         <propertySection
-               afterSection="section.general.selectOneRadio"
-               class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlSelectChoicesSection"
-               tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-               id="section.general.selectOneRadio.choices">
-            <tagFilter
-                  caseSensitive="true"
-                  uri="http://java.sun.com/jsf/html"
-                  tagName="selectOneRadio"/>
-         </propertySection>
-                   <propertySection
-                afterSection="top"
-                class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFCoreConvertDateTimeGroup"
-                tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-                id="section.general.convertDateTime">
-             <tagFilter
-                   caseSensitive="true"
-                   uri="http://java.sun.com/jsf/core"
-                   tagName="convertDateTime"/>
-          </propertySection>
-         <propertySection
-                afterSection="top"
-                class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFCoreConvertNumberGroup"
-                tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
-                id="section.general.convertNumber">
-             <tagFilter
-                   caseSensitive="true"
-                   uri="http://java.sun.com/jsf/core"
-                   tagName="convertNumber"/>
-          </propertySection>
-      </propertySections>
-   </extension>
-   
-   <extension
-         point="org.eclipse.jst.jsf.common.standardMetaDataFiles">
-      <standardMetaDataFile
-            location="/metadata/jsf_html.xml"
-            uri="http://java.sun.com/jsf/html">
-      </standardMetaDataFile>
-      <standardMetaDataFile
-            location="/metadata/jsf_core.xml"
-            uri="http://java.sun.com/jsf/core">
-      </standardMetaDataFile>
-            <standardMetaDataFile
-            location="/metadata/jsf_core_dti.xml"
-            uri="http://java.sun.com/jsf/core">
-      </standardMetaDataFile>
-      <standardMetaDataFile
-            location="/metadata/jsf_html_dti.xml"
-            uri="http://java.sun.com/jsf/html">
-      </standardMetaDataFile>      
-   </extension>
+	<!-- page variables -->
+	<extension point="org.eclipse.jst.pagedesigner.jsp.core.pageVar">
+		<taglib uri="http://java.sun.com/jsf/html">
+
+			<tag varTypeStringIsAttr="true" varNameIsAttr="true"
+				varTypeMode="EXPRESSION_COLLECTION_ITEM" varTypeString="value"
+				varName="var" tagName="dataTable" />
+		</taglib>
+		<taglib uri="http://java.sun.com/jsf/core">
+			<tag varTypeStringIsAttr="true" varNameIsAttr="true"
+				varTypeMode="BUNDLE" varTypeString="basename" varName="var"
+				tagName="loadBundle" />
+		</taglib>
+	</extension>
+
+	<!-- element and attribute meta data -->
+	<!-- DISABLE CMREGISTRY ITEMS
+	<extension point="org.eclipse.jst.pagedesigner.cmRegistry">
+		<registry configFile="configs/cm/jsfcore.xml"
+			uri="http://java.sun.com/jsf/core" />
+		<registry configFile="configs/cm/jsfhtml.xml"
+			uri="http://java.sun.com/jsf/html" />
+	</extension>
+	-->
+	
+	<extension point="org.eclipse.ui.views.properties.tabbed.propertySections">
+		<propertySections
+        contributorId="org.eclipse.jst.pagedesigner.tabPropertyContributor">
+        	<!-- Disable sections /delete later
+			<propertySection afterSection="top"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFCoreActionListenerSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.actionListener">
+				<tagFilter caseSensitive="true"
+					uri="http://java.sun.com/jsf/core" tagName="actionListener" />
+			</propertySection>
+			<propertySection afterSection="top"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFCoreAttributeSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.attribute">
+				<tagFilter caseSensitive="true"
+					uri="http://java.sun.com/jsf/core" tagName="attribute" />
+			</propertySection>
+			<propertySection afterSection="top"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFCoreConverterSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.converter">
+				<tagFilter caseSensitive="true"
+					uri="http://java.sun.com/jsf/core" tagName="converter" />
+			</propertySection>
+			<propertySection afterSection="top"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFCoreFacetSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.facet">
+				<tagFilter caseSensitive="true"
+					uri="http://java.sun.com/jsf/core" tagName="facet" />
+			</propertySection>
+			<propertySection afterSection="top"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFCoreLoadBundleSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.loadBundle">
+				<tagFilter caseSensitive="true"
+					uri="http://java.sun.com/jsf/core" tagName="loadBundle" />
+			</propertySection>
+			<propertySection afterSection="top"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFCoreParamSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.param">
+				<tagFilter caseSensitive="true"
+					uri="http://java.sun.com/jsf/core" tagName="param" />
+			</propertySection>
+			<propertySection afterSection="top"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFCoreSelectItemSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.selectItem">
+				<tagFilter caseSensitive="true"
+					uri="http://java.sun.com/jsf/core" tagName="selectItem" />
+			</propertySection>
+			<propertySection afterSection="top"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFCoreSelectItemsSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.selectItems">
+				<tagFilter caseSensitive="true"
+					uri="http://java.sun.com/jsf/core" tagName="selectItems" />
+			</propertySection>
+			<propertySection afterSection="top"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFCoreSubviewSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.subview">
+				<tagFilter caseSensitive="true"
+					uri="http://java.sun.com/jsf/core" tagName="subview" />
+			</propertySection>
+			<propertySection afterSection="top"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFCoreValidateDoubleRangeSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.validateDoubleRange">
+				<tagFilter caseSensitive="true"
+					uri="http://java.sun.com/jsf/core" tagName="validateDoubleRange" />
+			</propertySection>
+			<propertySection afterSection="top"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFCoreValidateLengthSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.validateLength">
+				<tagFilter caseSensitive="true"
+					uri="http://java.sun.com/jsf/core" tagName="validateLength" />
+			</propertySection>
+			<propertySection afterSection="top"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFCoreValidateLongRangeSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.validateLongRange">
+				<tagFilter caseSensitive="true"
+					uri="http://java.sun.com/jsf/core" tagName="validateLongRange" />
+			</propertySection>
+			<propertySection afterSection="top"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFCoreValidatorSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.validator">
+				<tagFilter caseSensitive="true"
+					uri="http://java.sun.com/jsf/core" tagName="validator" />
+			</propertySection>
+			<propertySection afterSection="top"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFCoreValueChangeListenerSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.valueChangeListener">
+				<tagFilter caseSensitive="true"
+					uri="http://java.sun.com/jsf/core" tagName="valueChangeListener" />
+			</propertySection>
+			<propertySection afterSection="top"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFCoreVerbatimSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.verbatim">
+				<tagFilter caseSensitive="true"
+					uri="http://java.sun.com/jsf/core" tagName="verbatim" />
+			</propertySection>
+			<propertySection afterSection="top"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFCoreViewSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.view">
+				<tagFilter caseSensitive="true"
+					uri="http://java.sun.com/jsf/core" tagName="view" />
+			</propertySection>
+			<propertySection afterSection="top"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlColumnSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.column">
+				<tagFilter caseSensitive="true"
+					uri="http://java.sun.com/jsf/html" tagName="column" />
+			</propertySection>
+			<propertySection afterSection="top"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlCommandButtonSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.commandButton">
+				<tagFilter caseSensitive="true"
+					uri="http://java.sun.com/jsf/html" tagName="commandButton" />
+			</propertySection>
+			<propertySection afterSection="top"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlCommandLinkSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.commandLink">
+				<tagFilter caseSensitive="true"
+					uri="http://java.sun.com/jsf/html" tagName="commandLink" />
+			</propertySection>
+			<propertySection afterSection="top"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlDataTableSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.dataTable">
+				<tagFilter caseSensitive="true"
+					uri="http://java.sun.com/jsf/html" tagName="dataTable" />
+			</propertySection>			
+			<propertySection afterSection="top"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlFormSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.form">
+				<tagFilter caseSensitive="true"
+					uri="http://java.sun.com/jsf/html" tagName="form" />
+			</propertySection>
+			<propertySection afterSection="top"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlGraphicImageSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.graphicImage">
+				<tagFilter caseSensitive="true"
+					uri="http://java.sun.com/jsf/html" tagName="graphicImage" />
+			</propertySection>
+			<propertySection afterSection="top"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlInputHiddenSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.inputHidden">
+				<tagFilter caseSensitive="true"
+					uri="http://java.sun.com/jsf/html" tagName="inputHidden" />
+			</propertySection>
+			<propertySection afterSection="top"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlMessageSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.message">
+				<tagFilter caseSensitive="true"
+					uri="http://java.sun.com/jsf/html" tagName="message" />
+			</propertySection>
+			<propertySection afterSection="top"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlMessagesSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.messages">
+				<tagFilter caseSensitive="true"
+					uri="http://java.sun.com/jsf/html" tagName="messages" />
+			</propertySection>
+			<propertySection afterSection="top"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlOutputFormatSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.outputFormat">
+				<input
+          			type="org.eclipse.jst.pagedesigner.jsf.ui.Input1">
+				</input>
+				<tagFilter caseSensitive="true"
+					uri="http://java.sun.com/jsf/html" tagName="outputFormat" />
+			</propertySection>
+			<propertySection afterSection="top"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlInputTextSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.inputText">
+				<tagFilter caseSensitive="true"
+					uri="http://java.sun.com/jsf/html" tagName="inputText" />
+			</propertySection>			
+			<propertySection afterSection="top"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlOutputLabelSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.outputLabel">
+				<tagFilter caseSensitive="true"
+					uri="http://java.sun.com/jsf/html" tagName="outputLabel" />
+			</propertySection>
+			<propertySection afterSection="top"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlOutputLinkSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.outputLink">
+				<tagFilter caseSensitive="true"
+					uri="http://java.sun.com/jsf/html" tagName="outputLink" />
+			</propertySection>
+			<propertySection afterSection="top"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlOutputTextSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.outputText">
+				<tagFilter caseSensitive="true"
+					uri="http://java.sun.com/jsf/html" tagName="outputText" />
+			</propertySection>
+			<propertySection
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlInputTextareaSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.inputTextarea">
+			</propertySection>
+			
+			<propertySection afterSection="top"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlPanelGridSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.panelGrid">
+				<tagFilter caseSensitive="true"
+					uri="http://java.sun.com/jsf/html" tagName="panelGrid" />
+			</propertySection>
+			<propertySection afterSection="top"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlPanelGroupSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.panelGroup">
+				<tagFilter caseSensitive="true"
+					uri="http://java.sun.com/jsf/html" tagName="panelGroup" />
+			</propertySection>
+			<propertySection afterSection="top"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlSelectBooleanCheckboxSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.selectBooleanCheckbox">
+				<tagFilter caseSensitive="true"
+					uri="http://java.sun.com/jsf/html" tagName="selectBooleanCheckbox" />
+			</propertySection>
+			<propertySection afterSection="top"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlSelectManyCheckboxSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.selectManyCheckbox">
+				<tagFilter caseSensitive="true"
+					uri="http://java.sun.com/jsf/html" tagName="selectManyCheckbox" />
+			</propertySection>
+			<propertySection afterSection="top"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlSelectManyListboxSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.selectManyListbox">
+				<tagFilter caseSensitive="true"
+					uri="http://java.sun.com/jsf/html" tagName="selectManyListbox" />
+			</propertySection>			
+			<propertySection afterSection="top"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlSelectManyMenuSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.selectManyMenu">
+				<tagFilter caseSensitive="true"
+					uri="http://java.sun.com/jsf/html" tagName="selectManyMenu" />
+			</propertySection>			
+			<propertySection afterSection="top"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlInputSecretSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.inputSecret">
+			</propertySection>
+			<propertySection afterSection="top"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlSelectOneListboxSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.selectOneListbox">
+				<tagFilter caseSensitive="true"
+					uri="http://java.sun.com/jsf/html" tagName="selectOneListbox" />
+			</propertySection>
+			<propertySection afterSection="top"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlSelectOneMenuSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.selectOneMenu">
+				<tagFilter caseSensitive="true"
+					uri="http://java.sun.com/jsf/html" tagName="selectOneMenu" />
+			</propertySection>
+			<propertySection afterSection="top"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlSelectOneRadioSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.selectOneRadio">
+				<tagFilter caseSensitive="true"
+					uri="http://java.sun.com/jsf/html" tagName="selectOneRadio" />
+			</propertySection>	
+			-->
+			<propertySection
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFCoreConvertDateTimeGroup"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.convertDateTime">
+			</propertySection>				
+			<propertySection
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFCoreConvertNumberGroup"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.convertNumber">
+			</propertySection>	
+			<propertySection
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlActionListenerSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.commandButton.listener">
+			</propertySection>
+			<propertySection
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlActionListenerSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.commandLink.listener">
+			</propertySection>
+			<propertySection 
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlDataTableColumnsSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.dataTable.columns">
+			</propertySection>
+			<propertySection 
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlInputHiddenTypeSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.inputHidden.type">
+			</propertySection>
+
+			<propertySection 
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlInputSecretTypeSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.inputSecret.type">
+			</propertySection>
+			<propertySection				
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlInputOthersSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.inputText.others">
+			</propertySection>
+			<propertySection 
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlInputTextTypeSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.inputText.type">
+			</propertySection>
+			<propertySection				
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlInputOthersSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.inputText.others">
+			</propertySection>
+			<propertySection
+				afterSection="section.general.inputTextarea"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlInputTextareaTypeSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.inputTextarea.type">
+			</propertySection>
+			<propertySection
+				afterSection="section.general.inputTextarea.type"
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlInputOthersSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.inputTextarea.others">
+			</propertySection>
+			<propertySection
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlOutputFormatParamsSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.outputFormat.params">
+			</propertySection>
+			<propertySection
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlOutputTextConverterSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.outputText.converter">
+			</propertySection>
+			<propertySection				
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlSelectChoicesSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.selectManyCheckbox.choices">
+			</propertySection>
+			<propertySection				
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlSelectChoicesSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.selectManyListbox.choices">
+			</propertySection>
+			<propertySection				
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlSelectChoicesSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.selectManyMenu.choices">
+			</propertySection>			
+			<propertySection				
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlSelectChoicesSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.selectOneListbox.choices">
+			</propertySection>			
+			<propertySection				
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlSelectChoicesSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.selectOneMenu.choices">
+			</propertySection>
+			<propertySection				
+				class="org.eclipse.jst.pagedesigner.jsf.ui.sections.JSFHtmlSelectChoicesSection"
+				tab="org.eclipse.jst.pagedesigner.tabQuickEdit"
+				id="section.general.selectOneRadio.choices">
+			</propertySection>			 
+		</propertySections>
+	</extension>
+
+	<extension
+		point="org.eclipse.jst.jsf.common.standardMetaDataFiles">
+		<standardMetaDataFile location="/metadata/jsf_html.xml"
+			uri="http://java.sun.com/jsf/html">
+		</standardMetaDataFile>
+		<standardMetaDataFile location="/metadata/jsf_core.xml"
+			uri="http://java.sun.com/jsf/core">
+		</standardMetaDataFile>
+		<standardMetaDataFile location="/metadata/jsf_core_dti.xml"
+			uri="http://java.sun.com/jsf/core">
+		</standardMetaDataFile>
+		<standardMetaDataFile location="/metadata/jsf_html_dti.xml"
+			uri="http://java.sun.com/jsf/html">
+		</standardMetaDataFile>
+	</extension>
+	<extension
+		point="org.eclipse.jst.pagedesigner.pageDesignerExtension">
+		<tagConverterFactory
+			class="org.eclipse.jst.pagedesigner.jsf.ui.converter.jsfcore.JSFCoreConverterFactory" />
+		<attributeCellEditorFactory
+			class="org.eclipse.jst.pagedesigner.jsf.ui.celleditors.JSFAttributeCellEditorFactory" />
+		<tagConverterFactory
+			class="org.eclipse.jst.pagedesigner.jsf.ui.converter.jsfhtml.JSFHTMLConverterFactory" />
+		<elementEditFactory
+			class="org.eclipse.jst.pagedesigner.jsf.ui.elementedit.jsfhtml.JSFHTMLElementEditFactory" />
+		<elementEditFactory
+			class="org.eclipse.jst.pagedesigner.jsf.ui.elementedit.jsfcore.JSFCoreElementEditFactory" />
+		<linkCreator
+			class="org.eclipse.jst.pagedesigner.jsf.ui.actions.JSFCommandLinkCreator"
+			linkIdentifier="JSF CommandLink" />
+		<linkCreator
+			class="org.eclipse.jst.pagedesigner.jsf.ui.actions.JSFOutputLinkCreator"
+			linkIdentifier="JSF OutputLink" />
+	</extension>
+
+	<extension
+		point="org.eclipse.jst.pagedesigner.popupMenuContributor">
+		<menuItemContributor
+			class="org.eclipse.jst.pagedesigner.jsf.ui.actions.PageFlowContributor"
+			URI="http://java.sun.com/jsf/core" />
+	</extension>
 </plugin>

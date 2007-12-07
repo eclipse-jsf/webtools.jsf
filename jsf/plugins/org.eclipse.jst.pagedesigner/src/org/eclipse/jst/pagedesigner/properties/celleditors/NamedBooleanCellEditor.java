@@ -18,6 +18,7 @@ import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
 /**
  * @author mengbo
  * @version 1.5
+ * Unused???
  */
 public class NamedBooleanCellEditor extends LabeledComboBoxCellEditor {
 	/**

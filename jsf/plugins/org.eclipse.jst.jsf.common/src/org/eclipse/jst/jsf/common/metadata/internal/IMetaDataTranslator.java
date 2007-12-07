@@ -20,4 +20,9 @@ public interface IMetaDataTranslator {
 	 * @param assistant perform translation using the IMetaDataModelMergeAssistant
 	 */
 	public void translate(IMetaDataModelMergeAssistant assistant);
+	/**
+	 * @param modelProvider
+	 * @return true if this translator can translate this model source
+	 */
+	public boolean canTranslate(IMetaDataSourceModelProvider modelProvider);
 }

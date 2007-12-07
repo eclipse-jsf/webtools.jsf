@@ -26,6 +26,7 @@ import org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogFieldGroup;
 /**
  * @author mengbo
  * @version 1.5
+ * @TODO - unused now?
  */
 public class CommonDialogFieldGroup extends DialogFieldGroup
 {

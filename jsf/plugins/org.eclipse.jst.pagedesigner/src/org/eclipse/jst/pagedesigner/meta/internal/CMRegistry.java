@@ -43,6 +43,7 @@ import org.xml.sax.SAXException;
  * other plugins to contribute things.
  * 
  * @author mengbo
+ * @deprecated
  */
 public class CMRegistry implements ICMRegistry {
 	static Logger _log = PDPlugin.getLogger(CMRegistry.class);
@@ -58,7 +59,7 @@ public class CMRegistry implements ICMRegistry {
 	/**
 	 * @return the singleton instance
 	 */
-	public static ICMRegistry getInstance() {
+	public static CMRegistry getInstance() {
 		if (_instance == null) {
 			_instance = new CMRegistry();
 		}
@@ -172,7 +173,7 @@ public class CMRegistry implements ICMRegistry {
 			ElementDescReader reader = new ElementDescReader(url);
 			reader.readElements(map);
 		} catch (Exception e) {
-			_log.error("Error loading: "+fileName, e);
+			_log.error("Error loading " + fileName + ": " + e.getMessage());
 		}
 	}
 
@@ -214,5 +215,18 @@ public class CMRegistry implements ICMRegistry {
 
 	private IElementDescriptor getJSPElementDescriptor(String tagname) {
 		return (IElementDescriptor) _jspMap.get(tagname.toLowerCase());
+	}
+	
+	public List<ICMRegistry> getRegistries() {
+		List<ICMRegistry> ret = new ArrayList<ICMRegistry>(_contributedRegistries);
+		ret.add(this);
+		return ret;
+	}
+	
+	/**
+	 * call to free up memory used
+	 */
+	public void unloadRegistry(){
+		_instance = null;
 	}
 }

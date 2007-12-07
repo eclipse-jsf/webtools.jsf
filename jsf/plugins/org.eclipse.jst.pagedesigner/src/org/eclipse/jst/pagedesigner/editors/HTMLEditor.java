@@ -29,6 +29,7 @@ import org.eclipse.gef.palette.PaletteRoot;
 import org.eclipse.gef.ui.palette.PaletteViewerProvider;
 import org.eclipse.gef.ui.views.palette.PalettePage;
 import org.eclipse.gef.ui.views.palette.PaletteViewerPage;
+import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.TextSelection;
 import org.eclipse.jface.viewers.IPostSelectionProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -68,7 +69,7 @@ import org.eclipse.ui.contexts.IContextService;
 import org.eclipse.ui.part.MultiPageSelectionProvider;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
-import org.eclipse.wst.common.ui.properties.internal.provisional.ITabbedPropertySheetPageContributor;
+import org.eclipse.ui.views.properties.tabbed.ITabbedPropertySheetPageContributor;
 import org.eclipse.wst.common.ui.provisional.editors.PostMultiPageEditorSite;
 import org.eclipse.wst.common.ui.provisional.editors.PostMultiPageSelectionProvider;
 import org.eclipse.wst.common.ui.provisional.editors.PostSelectionMultiPageEditorPart;
@@ -89,11 +90,11 @@ public final class HTMLEditor extends PostSelectionMultiPageEditorPart implement
 		IPropertyListener, ITabbedPropertySheetPageContributor {
 	// private static final String PAGE_NAME_DESIGN = "Design"; //$NON-NLS-1$
 	// private static final String PAGE_NAME_SOURCE = "Source"; //$NON-NLS-1$
-	private final static String CONTRIBUTOR_ID = "org.eclipse.jst.pagedesigner.pageDesigner.tabPropertyContributor"; //$NON-NLS-1$
+	public final static String TABBED_PROPERTIES_CONTRIBUTOR_ID = "org.eclipse.jst.pagedesigner.tabPropertyContributor"; //$NON-NLS-1$
 
 	// four different modes for the designer when displayed in a sash editor.
 	/**
-	 * editor split is veritical
+	 * editor split is vertical
 	 */
 	public static final int MODE_SASH_VERTICAL = 0;
 
@@ -172,7 +173,7 @@ public final class HTMLEditor extends PostSelectionMultiPageEditorPart implement
 	 * @see com.ibm.xtools.common.ui.properties.ITabbedPropertySheetPageContributor#getContributorId()
 	 */
 	public String getContributorId() {
-		return CONTRIBUTOR_ID;
+		return TABBED_PROPERTIES_CONTRIBUTOR_ID;
 	}
 
 	private void connectSashPage() {
@@ -581,6 +582,22 @@ public final class HTMLEditor extends PostSelectionMultiPageEditorPart implement
 
 
 	/**
+	 * IExtendedSimpleEditor method
+	 */
+	public IDocument getDocument() {
+		if (getTextEditor() == null) {
+			return null;
+		}
+
+		Object apapter = _textEditor.getAdapter(ISourceEditingTextTools.class);
+		if (apapter != null) {
+			return ((ISourceEditingTextTools) apapter).getDocument();
+		}
+
+		return null;
+	}
+
+	/**
 	 * IExtendedMarkupEditor method
 	 * @return the dom document
 	 */
@@ -814,7 +831,7 @@ public final class HTMLEditor extends PostSelectionMultiPageEditorPart implement
 	}
 
 	private IPropertySheetPage getPropertySheetPage() {
-		return new org.eclipse.jst.pagedesigner.properties.DesignerTabbedPropertySheetPage(
+		return new org.eclipse.jst.pagedesigner.properties.WPETabbedPropertySheetPage(
 				this, this);
 	}
 

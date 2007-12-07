@@ -16,12 +16,13 @@ import org.w3c.dom.Element;
 /**
  * @author mengbo
  * @version 1.5
+ * @deprecated  unused
  */
 public interface ISectionFilter {
 
 	/**
 	 * @param node
-	 * @return true if the filter applies to node
+	 * @return true if node applies
 	 */
 	boolean appliesTo(Element node);
 

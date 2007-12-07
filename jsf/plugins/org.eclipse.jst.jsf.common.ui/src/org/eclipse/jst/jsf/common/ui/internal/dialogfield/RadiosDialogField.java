@@ -121,7 +121,7 @@ public class RadiosDialogField extends DialogFieldBase {
 	 * @return the group composite
 	 */
 	public Composite getGroup(FormToolkit toolkit, Composite parent) {
-		if (_group == null) {
+		if (_group == null || _group.isDisposed()) {
 			assertCompositeNotNull(parent);
 			if (toolkit != null) {
 				_group = toolkit.createComposite(parent);

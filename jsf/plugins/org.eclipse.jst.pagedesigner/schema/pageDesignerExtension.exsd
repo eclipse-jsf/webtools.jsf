@@ -59,6 +59,11 @@
    </element>
 
    <element name="attributeCellEditorFactory">
+      <annotation>
+         <documentation>
+            deprecated - use tagAttributeCellEditorFactory
+         </documentation>
+      </annotation>
       <complexType>
          <attribute name="class" type="string">
             <annotation>
@@ -66,7 +71,27 @@
                   
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java"/>
+                  <meta.attribute kind="java" deprecated="true"/>
+               </appInfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="tagAttributeCellEditorFactory">
+      <annotation>
+         <documentation>
+            provides ability for 3rd parties to supply their own cell and dialog field editors for MD enabled tag library attributes in the WPE tabbed property sheets
+         </documentation>
+      </annotation>
+      <complexType>
+         <attribute name="class" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appInfo>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.jst.pagedesigner.meta.ITagAttributeCellEditorFactory"/>
                </appInfo>
             </annotation>
          </attribute>
@@ -133,6 +158,9 @@
          2.0
       </documentation>
    </annotation>
+
+
+
 
    <annotation>
       <appInfo>

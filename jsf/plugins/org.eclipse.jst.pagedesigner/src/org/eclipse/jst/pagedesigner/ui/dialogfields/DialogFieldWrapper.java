@@ -17,6 +17,7 @@ import org.eclipse.jst.jsf.common.ui.internal.dialogfield.IDialogFieldApplyListe
 import org.eclipse.jst.jsf.common.ui.internal.dialogfield.IDialogFieldChangeListener;
 import org.eclipse.jst.jsf.common.ui.internal.dialogfield.IStringButtonAdapter;
 import org.eclipse.jst.jsf.common.ui.internal.dialogfield.ISupportTextValue;
+import org.eclipse.jst.pagedesigner.editors.properties.IPropertyPageDescriptor;
 import org.eclipse.jst.pagedesigner.meta.IAttributeDescriptor;
 import org.eclipse.jst.pagedesigner.meta.IBindingHandler;
 import org.eclipse.jst.pagedesigner.properties.attrgroup.IElementContextable;
@@ -75,6 +76,8 @@ public class DialogFieldWrapper implements DialogField, ISupportTextValue,
 
 	private IBindingHandler _handler;
 
+	private IPropertyPageDescriptor _pdattr;
+
 	/**
 	 * @param field 
 	 * @param image 
@@ -99,6 +102,51 @@ public class DialogFieldWrapper implements DialogField, ISupportTextValue,
 		this._uri = uri;
 		this._tagName = tagName;
 		this._attr = attr;
+		this._handler = handler;
+
+		setDatabindingPressedHandler(new IStringButtonAdapter() {
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.eclipse.jst.jsf.common.ui.internal.dialogfield.IStringButtonAdapter#changeControlPressed(org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogField)
+			 */
+			public void changeControlPressed(DialogField field1) {
+				Shell shell = field1.getLabelControl(null, null).getShell();
+				DialogFieldWrapper wrapper = (DialogFieldWrapper) field1;
+				String result = _handler
+						.handleBinding(shell, wrapper.getAncester(), wrapper
+								.getElement(), wrapper.getText());
+				if (result != null) {
+					wrapper.setText(result);
+				}
+			}
+		});
+	}
+	
+	/**
+	 * @param field 
+	 * @param image 
+	 * @param disabledImage 
+	 * @param uri 
+	 * @param tagName 
+	 * @param attr 
+	 * @param handler 
+	 * 
+	 */
+	public DialogFieldWrapper(DialogField field, Image image,
+			Image disabledImage, String uri, String tagName,
+			IPropertyPageDescriptor attr, IBindingHandler handler) {
+		super();
+		if (!(field instanceof ISupportTextValue)) {
+			throw new IllegalArgumentException(
+					"Field must be ISupportTextValue");
+		}
+		_wrapped = field;
+		this._image = image;
+		this._disabledImage = disabledImage;
+		this._uri = uri;
+		this._tagName = tagName;
+		this._pdattr = attr;
 		this._handler = handler;
 
 		setDatabindingPressedHandler(new IStringButtonAdapter() {
@@ -166,8 +214,14 @@ public class DialogFieldWrapper implements DialogField, ISupportTextValue,
 		this._ancester = ancester;
 		this._element = element;
 
-		boolean bindingEnabled = _handler.isEnabled(_ancester, _element, _uri,
+		boolean bindingEnabled = false;
+		
+		if (_attr != null)
+			bindingEnabled = _handler.isEnabled(_ancester, _element, _uri,
 				_tagName, _attr);
+		else if (_pdattr != null)
+			bindingEnabled = false;//_handler.isEnabled(_ancester, _element, _pdattr);
+		
 		this.setDatabindingEnabled(bindingEnabled);
 	}
 
@@ -211,7 +265,7 @@ public class DialogFieldWrapper implements DialogField, ISupportTextValue,
 	 * @return
 	 */
 	private Control getDatabingingButton(FormToolkit toolkit, Composite parent) {
-		if (_databindingButton == null) {
+		if (_databindingButton == null || _databindingButton.isDisposed()) {
 			Assert.isNotNull(parent,
 					"uncreated control requested with composite null"); //$NON-NLS-1$
 			if (toolkit != null) {

@@ -20,6 +20,7 @@ import org.w3c.dom.Element;
  * Factory for creating CellEditors to edit element attributes.
  * 
  * @author mengbo
+ * @deprecated - not to be used.   use ITagAttributeCellEditorFactory
  */
 public interface IAttributeCellEditorFactory {
 	/**

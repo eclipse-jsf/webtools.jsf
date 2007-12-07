@@ -282,7 +282,7 @@ public class DialogFieldBase implements DialogField {
 	 */
 	public Control getLabelControl(FormToolkit _formToolkit, Composite parent) {
 		Control control = null;
-		if (_label == null && _hyperlink == null) {
+		if ((_label == null || _label.isDisposed()) && (_hyperlink == null  || _hyperlink.isDisposed())) {
 			assertCompositeNotNull(parent);
 
 			String label = null;
@@ -330,7 +330,7 @@ public class DialogFieldBase implements DialogField {
 	 */
 	public Control getRequiredLabelControl(FormToolkit _formToolkit,
 			Composite parent) {
-		if (_requiredLabel == null) {
+		if (_requiredLabel == null || _requiredLabel.isDisposed()) {
 			if (_formToolkit == null) {
 				_requiredLabel = new Label(parent, SWT.LEFT | SWT.WRAP);
 			} else {

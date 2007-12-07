@@ -44,32 +44,29 @@ public class ResourceDialogCellEditor extends EditableDialogCellEditor {
 
 
 	/**
-	 * 
+	 * Constructor
 	 */
 	public ResourceDialogCellEditor() {
 		super();
 	}
-
-    /**
-     * @param parent
-     */
-    public ResourceDialogCellEditor(Composite parent) {
+	
+	/**
+	 * Constructor
+	 * @param parent 
+	 */
+	public ResourceDialogCellEditor(Composite parent) {
 		super(parent);
 	}
-
+	
 	/**
-	 * @param parent
-	 * @param style
+	 * Constructor
+	 * @param parent 
+	 * @param style 
 	 */
 	public ResourceDialogCellEditor(Composite parent, int style) {
 		super(parent, style);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.jface.viewers.DialogCellEditor#openDialogBox(org.eclipse.swt.widgets.Control)
-	 */
 	protected Object openDialogBox(Control cellEditorWindow) {
 		Shell shell = cellEditorWindow.getShell();
 		int style = "".equals(_separator) ? SWT.NONE : SWT.MULTI | SWT.H_SCROLL
@@ -149,6 +146,15 @@ public class ResourceDialogCellEditor extends EditableDialogCellEditor {
 	 * @return Returns the resourceDescription.
 	 */
 	public String getResourceDescription() {
+		if (_resourceDescription == null) {
+			if ("".equalsIgnoreCase(getSeparator())) {
+				_resourceDescription = ResourceBoundle
+						.getString("FileCellEditor.Msg");
+			} else {
+				_resourceDescription = ResourceBoundle
+						.getString("FileCellEditor.Msg1");
+			}			
+		}
 		return _resourceDescription;
 	}
 
@@ -161,7 +167,7 @@ public class ResourceDialogCellEditor extends EditableDialogCellEditor {
 	}
 
 	/**
-	 * @return Returns the suffixs.
+	 * @return Returns the suffixes.
 	 */
 	public String[] getSuffixs() {
 		return _suffixs;
@@ -169,7 +175,7 @@ public class ResourceDialogCellEditor extends EditableDialogCellEditor {
 
 	/**
 	 * @param suffixs
-	 *            The suffixs to set.
+	 *            The suffixes to set.
 	 */
 	public void setSuffixs(String[] suffixs) {
 		this._suffixs = suffixs;
@@ -192,14 +198,14 @@ public class ResourceDialogCellEditor extends EditableDialogCellEditor {
 	}
 
 	/**
-	 * @return the separator
+	 * @return separator to use for between values
 	 */
 	public String getSeparator() {
 		return _separator;
 	}
 
 	/**
-	 * @param separator
+	 * @param separator to use for between values
 	 */
 	public void setSeparator(String separator) {
 		this._separator = separator;

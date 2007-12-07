@@ -17,12 +17,12 @@ package org.eclipse.jst.pagedesigner.properties;
  */
 public interface ITabbedPropertiesConstants {
 
-	// FIXME: when return null, will in fact using "Misc". This may not garantee
+	// FIXME: when return null, will in fact using "Misc". This may not guarantee
 	// it be the
 	// last category, since is sorted by string order.
 	/**
 	 * the other category
 	 */
-	static final String OTHER_CATEGORY = "Other";
+	static final String OTHER_CATEGORY = "Attributes";
 
 }

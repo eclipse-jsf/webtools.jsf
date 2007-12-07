@@ -12,21 +12,24 @@
 package org.eclipse.jst.pagedesigner.properties;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.gef.commands.Command;
-import org.eclipse.jst.jsf.core.internal.tld.CMUtil;
+import org.eclipse.jst.jsf.common.metadata.Entity;
+import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
+import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.ITaglibContextResolver;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.IWorkspaceContextResolver;
+import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
+import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
+import org.eclipse.jst.jsf.metadataprocessors.MetaDataEnabledProcessingFactory;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.commands.single.ChangeAttributeCommand;
-import org.eclipse.jst.pagedesigner.meta.IAttributeDescriptor;
-import org.eclipse.jst.pagedesigner.meta.ICMRegistry;
-import org.eclipse.jst.pagedesigner.meta.IElementDescriptor;
-import org.eclipse.jst.pagedesigner.meta.internal.CMRegistry;
+import org.eclipse.jst.pagedesigner.editors.properties.IPropertyPageDescriptor;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
 import org.eclipse.ui.views.properties.IPropertySource;
+import org.eclipse.ui.views.properties.PropertyDescriptor;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
 import org.w3c.dom.Element;
 
@@ -39,13 +42,50 @@ public class AttributePropertySource implements IPropertySource {
 
 	private IPropertySource _innerSource;
 
+	private Entity _tagEntity;
+
+	private IStructuredDocumentContext _context;
+
+	private IPropertyDescriptor[] _descriptors;
+
 	/**
+	 * Constructor
 	 * @param ele
 	 * @param source
 	 */
 	public AttributePropertySource(Element ele, IPropertySource source) {
 		_element = (IDOMElement) ele;
 		_innerSource = source;
+		_tagEntity = getTagEntity();
+	}
+
+	private Entity getTagEntity() {
+		_context = 
+				IStructuredDocumentContextFactory.INSTANCE.getContext(_element.getStructuredDocument(), _element);
+		if (_context == null) 
+			return null;
+		
+		IWorkspaceContextResolver wsresolver = 
+				IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver(_context);
+		if (wsresolver == null) 
+			return null;
+		
+		ITaglibContextResolver resolver = 
+				IStructuredDocumentContextResolverFactory.INSTANCE.getTaglibContextResolver(_context);
+		if (resolver == null) return null;
+		
+		String uri = resolver.getTagURIForNodeName(_element);
+		
+		//TODO: make below better
+		if (uri == null){
+			if (_element.getNamespaceURI() != null && _element.getNamespaceURI().equals("http://java.sun.com/JSP/Page"))
+				uri = "JSP11";
+			else
+				uri = "HTML";
+		}
+		ITaglibDomainMetaDataModelContext domainContext = 
+				TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(wsresolver.getProject(), uri);
+		return TaglibDomainMetaDataQueryHelper.getEntity(domainContext, _element.getLocalName());		
 	}
 
 	/*
@@ -120,66 +160,59 @@ public class AttributePropertySource implements IPropertySource {
 	 * the major job of this wrapper is to provide
 	 */
 	public IPropertyDescriptor[] getPropertyDescriptors() {
-		IElementDescriptor elementDescriptor = getElementDescriptor();
-		List result = new ArrayList();
-
-		if (elementDescriptor == null) {
-			IPropertyDescriptor[] original = _innerSource
-					.getPropertyDescriptors();
-			for (int i = 0; i < original.length; i++) {
-				result
-						.add(new PropertyDescriptorWrapper(_element,
-								original[i]));
-			}
-		} else {
-			// put the inner property descriptors into a map.
-			Map map = new HashMap();
-			IPropertyDescriptor[] descs = _innerSource.getPropertyDescriptors();
-			if (descs != null) {
-				for (int i = 0; i < descs.length; i++) {
-					map.put(descs[i].getId(), descs[i]);
+		if (_descriptors == null) {
+			List result = new ArrayList();
+	
+				IPropertyDescriptor[] descs = _innerSource.getPropertyDescriptors();
+				if (descs != null) {
+					for (int i = 0; i < descs.length; i++) {
+						IPropertyDescriptor pd = getAttrPropertyDescriptor((String)descs[i].getId());
+						if (pd != null)
+							result.add(new PropertyDescriptorWrapper(
+									_element,
+									pd));//, 
+									//getStatusLineManager()));
+						else {
+							if (descs[i] instanceof PropertyDescriptor)
+								((PropertyDescriptor)descs[i]).setCategory(ITabbedPropertiesConstants.OTHER_CATEGORY);
+							result.add(new PropertyDescriptorWrapper(
+									_element, 
+									descs[i]));//, 
+									//getStatusLineManager()));
+						}
+							
+					}
 				}
-			}
-
-			IAttributeDescriptor[] attrs = elementDescriptor
-					.getAttributeDescriptors();
-			if (attrs != null) {
-				for (int i = 0; i < attrs.length; i++) {
-					IPropertyDescriptor desc = (IPropertyDescriptor) map
-							.remove(attrs[i].getAttributeName());
-					result.add(new AttributePropertyDescriptor(_element,
-							attrs[i], desc));
-				}
-			}
-			// ok, we have handled all attributes declared in ElementDescriptor,
-			// let's see the remaining
-			for (Iterator iter = map.values().iterator(); iter.hasNext();) {
-				IPropertyDescriptor desc = (IPropertyDescriptor) iter.next();
-				IAttributeDescriptor attr = findReferencedAttribute(
-						elementDescriptor, desc);
-				if (attr != null) {
-					result.add(new AttributePropertyDescriptor(_element, attr,
-							desc));
-				} else {
-					result.add(new PropertyDescriptorWrapper(
-							_element, desc));
-				}
-			}
+	
+			_descriptors = new IPropertyDescriptor[result.size()];
+			result.toArray(_descriptors);
+			
 		}
-		IPropertyDescriptor[] ret = new IPropertyDescriptor[result.size()];
-		result.toArray(ret);
-		return ret;
+		return _descriptors;
 	}
 
-	private IAttributeDescriptor findReferencedAttribute(
-			IElementDescriptor elementDescriptor, IPropertyDescriptor desc) {
+//	private IAttributeDescriptor findReferencedAttribute(
+//			IElementDescriptor elementDescriptor, IPropertyDescriptor desc) {
+//		return null;
+//	}
+
+//	private IElementDescriptor getElementDescriptor() {
+//		ICMRegistry registry = CMRegistry.getInstance();
+//		String uri = CMUtil.getElementNamespaceURI(_element);
+//		return registry.getElementDescriptor(uri, _element.getLocalName());
+//	}
+
+	private IPropertyDescriptor getAttrPropertyDescriptor(String attrName){
+		Entity attrEntity = TaglibDomainMetaDataQueryHelper.getEntity(_tagEntity, attrName);
+		List ppds = MetaDataEnabledProcessingFactory.getInstance().getAttributeValueRuntimeTypeFeatureProcessors(IPropertyPageDescriptor.class, _context, attrEntity);
+		if (ppds.size() > 0)
+			return (IPropertyDescriptor)((IPropertyPageDescriptor)ppds.get(0)).getAdapter(IPropertyDescriptor.class);
+		
 		return null;
+			
 	}
-
-	private IElementDescriptor getElementDescriptor() {
-		ICMRegistry registry = CMRegistry.getInstance();
-		String uri = CMUtil.getElementNamespaceURI(_element);
-		return registry.getElementDescriptor(uri, _element.getLocalName());
-	}
-
+	
+//	private IStatusLineManager getStatusLineManager() {
+//		_page.getSite().getActionBars().getStatusLineManager();
+//	}
 }

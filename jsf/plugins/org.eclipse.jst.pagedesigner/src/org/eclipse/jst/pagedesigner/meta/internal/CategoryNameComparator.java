@@ -17,6 +17,7 @@ import java.util.HashSet;
 import org.eclipse.jst.pagedesigner.properties.ITabbedPropertiesConstants;
 
 /**
+ * Sorts categories and ensures that @see{ITabbedPropertiesConstants.OTHER_CATEGORY} comes last
  * @author mengbo
  */
 public class CategoryNameComparator implements Comparator {

@@ -62,6 +62,12 @@ public interface IMetaDataModelMergeAssistant {
 	 * @return {@link IMetaDataSourceModelProvider} for current operation
 	 */
 	public IMetaDataSourceModelProvider getSourceModelProvider();
-	
 
+	/**
+	 * @param queryRoot
+	 * @param entityKey - key relative to queryRoot
+	 * @return entity - will return null if not found
+	 */
+	public Entity getMergedEntity(Entity queryRoot, String entityKey);
+	
 }

@@ -12,7 +12,7 @@
 
 package org.eclipse.jst.jsf.metadataprocessors;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -27,17 +27,13 @@ import org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValues;
 
 /**
  * Simple abstract class that implementers of {@link IMetaDataEnabledFeature} can subclass in the <b>TagLibDomain</b> of metadata
- * <p><b>Provisional API - subject to change</b></p>
- * @author Gerry Kessler - Oracle
- * 
- *
+ * <p><b>Provisional API - subject to change</b></p>*
  */
 public abstract class AbstractMetaDataEnabledFeature implements IMetaDataEnabledFeature{
 	
 	private MetaDataContext mdContext;
 	private IStructuredDocumentContext sdContext;
-	
-	private static final List EMPTY_LIST = new ArrayList(0);
+
 	
 	/* (non-Javadoc)
 	 * @see org.eclipse.jst.jsf.metadataprocessors.IMetaDataEnabledFeature#setMetaDataContext(org.eclipse.jst.jsf.metadataprocessors.MetaDataContext)
@@ -79,11 +75,6 @@ public abstract class AbstractMetaDataEnabledFeature implements IMetaDataEnabled
 	/**
 	 * Return the single expected String value for a given property.
 	 * 
-	 * Since the MetaDataContext, where the type-id was found, 
-	 * may have come from a wild card, or the property being looked up now is,
-	 * we should first look for the named property on the specific element and
-	 * only if not found, look for it on the * element.
-	 * 
 	 * @param traitName property name
 	 * @return String value
 	 */
@@ -100,11 +91,6 @@ public abstract class AbstractMetaDataEnabledFeature implements IMetaDataEnabled
 	/**
 	 * Return the List of values for a given property.
 	 * 
-	 * Since the MetaDataContext, where the type-id was found, 
-	 * may have come from a wild card, or the property being looked up now is,
-	 * we should first look for the named property on the specific element and
-	 * only if not found, look for it on the * element.
-	 * 
 	 * @param traitName trait name
 	 * @return List of String values
 	 */
@@ -114,9 +100,24 @@ public abstract class AbstractMetaDataEnabledFeature implements IMetaDataEnabled
 			return TraitValueHelper.getValueAsListOfStrings(t);
 		}
 			
-		return EMPTY_LIST;
+		return Collections.EMPTY_LIST;
 	}
 
+	/**
+	 * Return a boolean value for the given named trait .
+	 * 
+	 * @param traitName property name
+	 * @return boolean value.  Returns false if trait was not located.
+	 */
+	protected boolean getTraitValueAsBoolean(final String traitName){	
+		Trait t = getTraitForEntityUsingContext(traitName);
+		if (t != null){
+			return TraitValueHelper.getValueAsBoolean(t);
+		}
+				
+		return false;
+
+	}
 	private Trait getTraitForEntityUsingContext(final String traitName) {
 		//look for trait on given entity
 		final Entity entity = ((TaglibMetadataContext)getMetaDataContext()).getEntity();

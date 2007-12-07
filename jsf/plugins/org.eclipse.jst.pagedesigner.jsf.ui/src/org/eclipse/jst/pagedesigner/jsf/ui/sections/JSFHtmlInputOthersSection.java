@@ -51,8 +51,8 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.wst.common.ui.properties.internal.provisional.TabbedPropertySheetPage;
-import org.eclipse.wst.common.ui.properties.internal.provisional.TabbedPropertySheetWidgetFactory;
+import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
+import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetWidgetFactory;
 import org.eclipse.wst.sse.core.internal.provisional.INodeNotifier;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
 import org.w3c.dom.Node;
@@ -80,7 +80,7 @@ public class JSFHtmlInputOthersSection extends BaseCustomSection
     final private static String[] VALIDATORS_COLUMN_NAMES = { IJSFConstants.TAG_VALIDATOR, IJSFConstants.ATTR_MINIMUM,
             IJSFConstants.ATTR_MAXIMUM                    };
 
-    private class ValidateCotentLabelProvider implements IStructuredContentProvider, ITableLabelProvider
+    private class ValidateContentLabelProvider implements IStructuredContentProvider, ITableLabelProvider
     {
 
         /* (non-Javadoc)
@@ -259,12 +259,13 @@ public class JSFHtmlInputOthersSection extends BaseCustomSection
                 default:
                     break;
             }
-            _validatorsViewer.setInput(_element);
+            _validatorsViewer.refresh();
+//            _validatorsViewer.setInput(_element);
             updateValidateButtonStatus();
         }
     }
 
-    private class ConvertCotentLabelProvider implements IStructuredContentProvider, ITableLabelProvider
+    private class ConvertContentLabelProvider implements IStructuredContentProvider, ITableLabelProvider
     {
 
         /* (non-Javadoc)
@@ -367,7 +368,7 @@ public class JSFHtmlInputOthersSection extends BaseCustomSection
         }
     }
 
-    private class ListenerCotentLabelProvider implements IStructuredContentProvider, ITableLabelProvider
+    private class ListenerContentLabelProvider implements IStructuredContentProvider, ITableLabelProvider
     {
 
         /* (non-Javadoc)
@@ -513,11 +514,11 @@ public class JSFHtmlInputOthersSection extends BaseCustomSection
 
         TableColumn convertColumn = new TableColumn(_convertorsTable, SWT.NONE);
         convertColumn.setText(SectionResources.getString("JSFHtmlInputTextSection.Converter")); //$NON-NLS-1$
-        convertColumn.setWidth(100);
+        convertColumn.setWidth(150);
 
         _convertorsViewer = new TableViewer(_convertorsTable);
-        _convertorsViewer.setContentProvider(new ConvertCotentLabelProvider());
-        _convertorsViewer.setLabelProvider(new ConvertCotentLabelProvider());
+        _convertorsViewer.setContentProvider(new ConvertContentLabelProvider());
+        _convertorsViewer.setLabelProvider(new ConvertContentLabelProvider());
         _convertorsViewer.addDoubleClickListener(new IDoubleClickListener()
         {
             public void doubleClick(DoubleClickEvent event)
@@ -604,11 +605,11 @@ public class JSFHtmlInputOthersSection extends BaseCustomSection
 
         TableColumn listenColumn = new TableColumn(_listenersTable, SWT.NONE);
         listenColumn.setText(SectionResources.getString("JSFHtmlInputTextSection.Listeners")); //$NON-NLS-1$
-        listenColumn.setWidth(100);
+        listenColumn.setWidth(150);
 
         _listenersViewer = new TableViewer(_listenersTable);
-        _listenersViewer.setContentProvider(new ListenerCotentLabelProvider());
-        _listenersViewer.setLabelProvider(new ListenerCotentLabelProvider());
+        _listenersViewer.setContentProvider(new ListenerContentLabelProvider());
+        _listenersViewer.setLabelProvider(new ListenerContentLabelProvider());
         _listenersViewer.addDoubleClickListener(new IDoubleClickListener()
         {
             public void doubleClick(DoubleClickEvent event)
@@ -696,15 +697,15 @@ public class JSFHtmlInputOthersSection extends BaseCustomSection
 
         TableColumn validateColumn = new TableColumn(_validatorsTable, SWT.NONE);
         validateColumn.setText(SectionResources.getString("JSFHtmlInputTextSection.Validators")); //$NON-NLS-1$
-        validateColumn.setWidth(50);
+        validateColumn.setWidth(150);
 
         TableColumn minColumn = new TableColumn(_validatorsTable, SWT.NONE);
         minColumn.setText(SectionResources.getString("JSFHtmlInputTextSection.Minimum")); //$NON-NLS-1$
-        minColumn.setWidth(50);
+        minColumn.setWidth(100);
 
         TableColumn maxColumn = new TableColumn(_validatorsTable, SWT.NONE);
         maxColumn.setText(SectionResources.getString("JSFHtmlInputTextSection.Maximum")); //$NON-NLS-1$
-        maxColumn.setWidth(50);
+        maxColumn.setWidth(100);
 
         _validatorsViewer = new TableViewer(_validatorsTable);
         _validatorsViewer.setColumnProperties(VALIDATORS_COLUMN_NAMES);
@@ -719,8 +720,8 @@ public class JSFHtmlInputOthersSection extends BaseCustomSection
 
         _validatorsViewer.setCellEditors(editors);
         _validatorsViewer.setCellModifier(new ValidateCellModifier());
-        _validatorsViewer.setContentProvider(new ValidateCotentLabelProvider());
-        _validatorsViewer.setLabelProvider(new ValidateCotentLabelProvider());
+        _validatorsViewer.setContentProvider(new ValidateContentLabelProvider());
+        _validatorsViewer.setLabelProvider(new ValidateContentLabelProvider());
         _validatorsViewer.addDoubleClickListener(new IDoubleClickListener()
         {
             public void doubleClick(DoubleClickEvent event)

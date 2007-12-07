@@ -14,6 +14,7 @@ package org.eclipse.jst.pagedesigner.meta;
 /**
  * 
  * @author mengbo
+ * @deprecated
  */
 public interface ICMRegistry {
 	/**

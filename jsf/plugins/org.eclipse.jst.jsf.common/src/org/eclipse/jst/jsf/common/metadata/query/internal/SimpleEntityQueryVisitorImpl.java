@@ -113,7 +113,9 @@ public class SimpleEntityQueryVisitorImpl extends AbstractEntityQueryVisitor  {
 	}
 
 	/**
-	 * Simple comparator that compares that an entity's id for with another
+	 * Simple comparator that compares that an entity's id for with another.
+	 * Case-insensitive compare
+	 *
 	 */
 	private class EntityQueryComparator implements Comparable/*<Entity>*/{
 
@@ -125,13 +127,13 @@ public class SimpleEntityQueryVisitorImpl extends AbstractEntityQueryVisitor  {
 		 * @param entityKey
 		 */
 		public EntityQueryComparator(String entityKey){
-			this.entityKey = entityKey;		
+			this.entityKey = entityKey.toUpperCase();		
 			stack = new EntityStack();
 		}
 		
 		public int compareTo(Object entity) {			
 			stack.push(entity);
-			return entityKey.compareTo(getRelativeId());			
+			return entityKey.compareTo(getRelativeId().toUpperCase());			
 		}
 		
 		/**

@@ -13,9 +13,12 @@ package org.eclipse.jst.pagedesigner.jsp.core.internal.metadata;
 
 import org.eclipse.jst.jsf.common.metadata.internal.AbstractTagLibDomainContentModelMetaDataTranslator;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataModelMergeAssistant;
+import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataTranslator;
+import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDAttributeDeclaration;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDDocument;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDElementDeclaration;
+import org.eclipse.wst.xml.core.internal.contentmodel.CMAttributeDeclaration;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMDocument;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMElementDeclaration;
 
@@ -25,6 +28,13 @@ import org.eclipse.wst.xml.core.internal.contentmodel.CMElementDeclaration;
  */
 public class TaglibMetaDataTLDTranslator extends AbstractTagLibDomainContentModelMetaDataTranslator implements IMetaDataTranslator {
 
+	public boolean canTranslate(IMetaDataSourceModelProvider modelProvider) {		
+		if (modelProvider.getSourceModel() != null && 
+				modelProvider.getSourceModel() instanceof TLDDocument)
+			return true;
+		return false;
+	}
+	
 	/* (non-Javadoc)
 	 * @see org.eclipse.jst.jsf.common.metadata.internal.IMetaDataTranslator#translate(org.eclipse.jst.jsf.common.metadata.internal.IMetaDataModelMergeAssistant)
 	 */
@@ -109,4 +119,25 @@ public class TaglibMetaDataTLDTranslator extends AbstractTagLibDomainContentMode
 		return (TLDDocument)getSourceModel();
 	}
 
+	@Override
+	protected String getTagAttributeDescription(CMAttributeDeclaration cmAttr) {
+		String desc = ((TLDAttributeDeclaration)cmAttr).getDescription();
+		if (desc == null)
+			desc = super.getTagAttributeDescription(cmAttr);
+		return desc;
+	}
+
+	@Override
+	protected boolean getTagAttributeIsRequired(CMAttributeDeclaration cmAttr) {
+		// TODO Auto-generated method stub
+		return super.getTagAttributeIsRequired(cmAttr);
+	}
+	
+	@Override
+	protected String getTagAttributeDefaultValue(CMAttributeDeclaration cmAttr) {
+		String val = ((TLDAttributeDeclaration)cmAttr).getAttrType().generateInstanceValue();
+		if (val == null)
+			val = super.getTagAttributeDefaultValue(cmAttr);
+		return val;
+	}
 }

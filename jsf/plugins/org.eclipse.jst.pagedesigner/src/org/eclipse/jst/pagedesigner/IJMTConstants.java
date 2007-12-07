@@ -69,10 +69,15 @@ public interface IJMTConstants {
 	public static final String TAG_CONVERTER_FACTORY = "tagConverterFactory"; //$NON-NLS-1$
 
 	/**
-	 * local name of attribute celleditor factory extension
+	 * local name of attribute cell editor factory extension
+	 * @deprecated and unused
 	 */
 	public static final String ATTRIBUTE_CELLEDITOR_FACTORY = "attributeCellEditorFactory"; //$NON-NLS-1$
 
+	/**
+	 * local name of tag attribute cell editor factory extension
+	 */
+	public static final String TAG_ATTRIBUTE_CELLEDITOR_FACTORY = "tagAttributeCellEditorFactory"; //$NON-NLS-1$
 	/**
 	 * local name of element edit factory extension
 	 */

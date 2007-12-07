@@ -122,7 +122,7 @@ public class StringButtonDialogField extends StringDialogField {
 	 * @return the button
 	 */
 	public Button getChangeControl(FormToolkit toolkit, Composite parent) {
-		if (_browseButton == null) {
+		if (_browseButton == null || _browseButton.isDisposed()) {
 			assertCompositeNotNull(parent);
 			if (toolkit != null) {
 				_browseButton = toolkit.createButton(parent,

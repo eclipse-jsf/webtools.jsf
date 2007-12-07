@@ -14,7 +14,6 @@ package org.eclipse.jst.pagedesigner.jsf.ui.sections;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.jst.jsf.common.ui.internal.dialogfield.ComboDialogField;
 import org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogField;
 import org.eclipse.jst.jsf.common.ui.internal.dialogfield.IDialogFieldApplyListener;
 import org.eclipse.jst.jsf.common.ui.internal.dialogfield.StringDialogField;
@@ -22,20 +21,20 @@ import org.eclipse.jst.jsf.common.ui.internal.dialogfield.StyleComboDialogField;
 import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
 import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.pagedesigner.commands.single.ChangeAttributeCommand;
+import org.eclipse.jst.pagedesigner.editors.properties.IPropertyPageDescriptor;
 import org.eclipse.jst.pagedesigner.meta.EditorCreator;
-import org.eclipse.jst.pagedesigner.meta.IAttributeDescriptor;
-import org.eclipse.jst.pagedesigner.properties.attrgroup.AttributeGroup;
+import org.eclipse.jst.pagedesigner.properties.internal.QuickEditAttributeGroup;
 import org.eclipse.jst.pagedesigner.ui.dialogfields.DialogFieldWrapper;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
 
 /**
  * @author mengbo
  */
-public class JSFCoreConvertNumberGroup extends AttributeGroup
+public class JSFCoreConvertNumberGroup extends QuickEditAttributeGroup
 {
     private StyleComboDialogField _typeField;
     private StyleComboDialogField _patternField;
-    private ComboDialogField      _currencyCodeField;
+    private StyleComboDialogField _currencyCodeField;
     private StringDialogField     _currencySymbolField;
 
     final private static String[] TYPES = { "number", "currency", "percentage", "custom" //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
@@ -50,35 +49,35 @@ public class JSFCoreConvertNumberGroup extends AttributeGroup
                 IJSFConstants.ATTR_CURRENCYCODE, IJSFConstants.ATTR_CURRENCYSYMBOL, IJSFConstants.ATTR_PATTERN});
     }
 
-    protected DialogField createDialogField(String uri, String tag, IAttributeDescriptor attr)
+    protected DialogField createDialogField(IPropertyPageDescriptor ppd)
     {
-        EditorCreator creator = EditorCreator.getInstance();
-        if (attr.getAttributeName().equals(IJSFConstants.ATTR_TYPE))
+    	EditorCreator creator = EditorCreator.getInstance();
+        if (ppd.getAttributeName().equals(IJSFConstants.ATTR_TYPE))
         {
             DialogFieldWrapper wrapper = (DialogFieldWrapper) creator
-                    .createDialogFieldWithWrapper(uri, tag, attr, null);
+            	.createDialogFieldWithWrapper(getURI(), getTagName(), ppd, null);
             _typeField = (StyleComboDialogField) wrapper.getWrappedDialogField();
                     _typeField.setItems(TYPES);
             return wrapper;
         }
-        else if (attr.getAttributeName().equals(IJSFConstants.ATTR_CURRENCYCODE))
+        else if (ppd.getAttributeName().equals(IJSFConstants.ATTR_CURRENCYCODE))
         {
             DialogFieldWrapper wrapper = (DialogFieldWrapper) creator
-                    .createDialogFieldWithWrapper(uri, tag, attr, null);
-            _currencyCodeField = (ComboDialogField) wrapper.getWrappedDialogField();
+            	.createDialogFieldWithWrapper(getURI(), getTagName(), ppd, null);
+            _currencyCodeField = (StyleComboDialogField) wrapper.getWrappedDialogField();
             return wrapper;
         }
-        else if (attr.getAttributeName().equals(IJSFConstants.ATTR_CURRENCYSYMBOL))
+        else if (ppd.getAttributeName().equals(IJSFConstants.ATTR_CURRENCYSYMBOL))
         {
             DialogFieldWrapper wrapper = (DialogFieldWrapper) creator
-                    .createDialogFieldWithWrapper(uri, tag, attr, null);
+            		.createDialogFieldWithWrapper(getURI(), getTagName(), ppd, null);
             _currencySymbolField = (StringDialogField) wrapper.getWrappedDialogField();
             return wrapper;
         }
-        else if (attr.getAttributeName().equals(IJSFConstants.ATTR_PATTERN))
+        else if (ppd.getAttributeName().equals(IJSFConstants.ATTR_PATTERN))
         {
             DialogFieldWrapper wrapper = (DialogFieldWrapper) creator
-                    .createDialogFieldWithWrapper(uri, tag, attr, null);
+            	.createDialogFieldWithWrapper(getURI(), getTagName(), ppd, null);
             _patternField = (StyleComboDialogField) wrapper.getWrappedDialogField();
             return wrapper;
         }
@@ -88,9 +87,9 @@ public class JSFCoreConvertNumberGroup extends AttributeGroup
         }
     }
 
-    public IDialogFieldApplyListener getDialogFieldApplyListener(String uri, String tag, IAttributeDescriptor attr)
+    public IDialogFieldApplyListener getDialogFieldApplyListener(IPropertyPageDescriptor ppd)
     {
-        String attribute = attr.getAttributeName();
+        String attribute = ppd.getAttributeName();
         if (attribute.equals(IJSFConstants.ATTR_CURRENCYCODE) || attribute.equals(IJSFConstants.ATTR_CURRENCYSYMBOL)
                 || attribute.equals(IJSFConstants.ATTR_PATTERN))
         {

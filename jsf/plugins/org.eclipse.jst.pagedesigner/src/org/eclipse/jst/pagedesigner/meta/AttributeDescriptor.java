@@ -19,6 +19,7 @@ import org.eclipse.jst.jsf.common.ui.internal.utils.StringUtil;
 
 /**
  * @author mengbo
+ * @deprecated
  */
 public class AttributeDescriptor implements IAttributeDescriptor {
 	private String _attributeName;
@@ -225,5 +226,11 @@ public class AttributeDescriptor implements IAttributeDescriptor {
 	 */
 	public void setRequired(boolean required) {
 		this._required = required;
+	}
+	
+	public String toString(){
+		StringBuffer buf = new StringBuffer("AttributeDescriptor: ");
+		buf.append(this.getAttributeName());
+		return buf.toString();
 	}
 }

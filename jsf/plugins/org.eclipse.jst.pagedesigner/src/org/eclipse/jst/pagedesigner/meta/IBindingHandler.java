@@ -19,6 +19,7 @@ import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
 /**
  * @author mengbo
  * @version 1.5
+ * @deprecated
  */
 public interface IBindingHandler {
 	/**
@@ -48,6 +49,10 @@ public interface IBindingHandler {
 	public boolean isEnabled(IDOMNode ancester, IDOMElement element,
 			String uri, String tagName, IAttributeDescriptor attr);
 
+	
+//	public boolean isEnabled(IDOMNode ancester, IDOMElement element,
+//			IPropertyPageDescriptor attr);
+	
 	/**
 	 * given the meta data of an attribute, to see whether should enable binding
 	 * handler for it.

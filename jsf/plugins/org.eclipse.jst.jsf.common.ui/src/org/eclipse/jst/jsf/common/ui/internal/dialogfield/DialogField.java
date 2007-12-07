@@ -25,7 +25,7 @@ public interface DialogField {
 	/**
 	 * this method must be called directly after constructor, in this case,
 	 * system will create a hyper link label, and when the hyper link is
-	 * clicked, the corresponding method on the listene will be called. A
+	 * clicked, the corresponding method on the listener will be called. A
 	 * RuntimeException will throw out if this method is called after the label
 	 * has been created.
 	 * 
@@ -58,7 +58,7 @@ public interface DialogField {
 	// ------- focus management
 	/**
 	 * Tries to set the focus to the dialog field. Returns <code>true</code>
-	 * if the dialog field can take focus. To be reimplemented by dialog field
+	 * if the dialog field can take focus. To be re-implemented by dialog field
 	 * implementors.
 	 * @return true if dialog field can take focus
 	 */

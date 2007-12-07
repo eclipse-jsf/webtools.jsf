@@ -70,5 +70,9 @@ public class SimpleCMRegistry implements ICMRegistry {
 		}
 		return null;
 	}
+	
+	public Map getMap(){
+		return _map;
+	}
 
 }

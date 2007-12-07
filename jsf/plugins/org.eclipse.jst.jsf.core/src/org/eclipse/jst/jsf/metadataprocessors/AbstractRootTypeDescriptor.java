@@ -13,7 +13,9 @@
 package org.eclipse.jst.jsf.metadataprocessors;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.jst.jsf.metadataprocessors.internal.IMetaDataEnabledFeatureExtension;
@@ -65,8 +67,8 @@ public abstract class AbstractRootTypeDescriptor extends AbstractMetaDataEnabled
 	 * @param processingFeature
 	 * @return list of <code>IMetaDataEnabledFeature</code>s
 	 */
-	protected final List findMetaDataEnabledFeaturesForThisType(Class processingFeature) {
-		List ret = new ArrayList(3); 
+	protected final List<IMetaDataEnabledFeature> findMetaDataEnabledFeaturesForThisType(Class processingFeature) {
+		Map <String, IMetaDataEnabledFeature> mapOfFeatures = new HashMap<String, IMetaDataEnabledFeature>(); 
 		List extensions = MetaDataEnabledFeatureRegistry.getInstance()
 							.getFeatures(getTypeExtension().getTypeID());
 
@@ -74,10 +76,15 @@ public abstract class AbstractRootTypeDescriptor extends AbstractMetaDataEnabled
 			for (int i=0;i<extensions.size();i++){
 				IMetaDataEnabledFeatureExtension aFeature = (IMetaDataEnabledFeatureExtension)extensions.get(i);
 				IMetaDataEnabledFeature feature = MetaDataEnabledFeatureAdapterFactory.getInstance().getFeatureAdapter(aFeature, processingFeature);
-				if (feature != null && processingFeature.isInstance(feature)){
-					ret.add(feature);				
+				if (feature != null && processingFeature.isInstance(feature)
+						&& ! mapOfFeatures.containsKey(aFeature.getClassName())){
+					mapOfFeatures.put(aFeature.getClassName(),feature);				
 				}
 			}
+		} 
+		List<IMetaDataEnabledFeature> ret = new ArrayList<IMetaDataEnabledFeature>(mapOfFeatures.size());
+		for (IMetaDataEnabledFeature feature: mapOfFeatures.values()){
+			ret.add(feature);
 		}
 		return ret;
 	}	
@@ -89,13 +96,13 @@ public abstract class AbstractRootTypeDescriptor extends AbstractMetaDataEnabled
 		return type;
 	}
 
+
 	/* (non-Javadoc)
 	 * @see org.eclipse.jst.jsf.metadataprocessors.ITypeDescriptor#setRuntimeType(org.eclipse.jst.jsf.metadataprocessors.internal.AbstractMetaDataEnabledType)
 	 */
 	public void setTypeExtension(IType type) {
 		this.type = type;
 	}
-
 	
 
 }

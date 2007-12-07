@@ -27,9 +27,9 @@ import org.eclipse.jst.jsf.common.ui.internal.dialogfield.ISupportTextValue;
 import org.eclipse.jst.jsf.common.ui.internal.dialogfield.StringDialogField;
 import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
 import org.eclipse.jst.pagedesigner.PDPlugin;
-import org.eclipse.jst.pagedesigner.meta.IAttributeCellEditorFactory;
-import org.eclipse.jst.pagedesigner.meta.IAttributeDescriptor;
-import org.eclipse.jst.pagedesigner.meta.IValueType;
+import org.eclipse.jst.pagedesigner.editors.properties.IPropertyPageDescriptor;
+import org.eclipse.jst.pagedesigner.meta.OLDIValueType;
+import org.eclipse.jst.pagedesigner.meta.ITagAttributeCellEditorFactory;
 import org.eclipse.jst.pagedesigner.properties.celleditors.CellEditorFactory;
 import org.eclipse.swt.widgets.Composite;
 import org.w3c.dom.Element;
@@ -38,7 +38,6 @@ import org.w3c.dom.Element;
  * CellEditorFactoryRegistry also read information from plugin.xml extension to
  * allow other plugins to contribute new kinds of cell editors.
  * 
- * @author mengbo
  */
 public class CellEditorFactoryRegistry {
 	private static final Logger _log = PDPlugin
@@ -50,9 +49,6 @@ public class CellEditorFactoryRegistry {
 
 	private List _defaultFactories = new ArrayList();
 
-	/**
-	 * @return the singleton factory instance
-	 */
 	public static CellEditorFactoryRegistry getInstance() {
 		if (_instance == null) {
 			_instance = new CellEditorFactoryRegistry();
@@ -61,7 +57,7 @@ public class CellEditorFactoryRegistry {
 	}
 
 	private CellEditorFactoryRegistry() {
-		IAttributeCellEditorFactory[] facs = CellEditorFacRegistryReader
+		ITagAttributeCellEditorFactory[] facs = CellEditorFacRegistryReader
 				.getAllFactories();
 		if (facs != null) {
 			for (int i = 0; i < facs.length; i++) {
@@ -74,7 +70,7 @@ public class CellEditorFactoryRegistry {
 	/**
 	 * @param fac
 	 */
-	public void addCellEditorFactory(IAttributeCellEditorFactory fac) {
+	public void addCellEditorFactory(ITagAttributeCellEditorFactory fac) {
 		String[] types = fac.getSupportedValueTypes();
 		if (types == null || types.length == 0) {
 			_defaultFactories.add(fac);
@@ -85,28 +81,22 @@ public class CellEditorFactoryRegistry {
 		}
 	}
 
-	/**
-	 * @param parent
-	 * @param attr
-	 * @param element
-	 * @return the cell editor
-	 */
 	public CellEditor createCellEditor(Composite parent,
-			IAttributeDescriptor attr, Element element) {
+			IPropertyPageDescriptor attr, Element element) {
 		String type = attr.getValueType();
 		if (type == null || type.length() == 0)
 			return null;
-		type = type.toUpperCase();
+//		type = type.toUpperCase();
 
 		CellEditor result = null;
-		IAttributeCellEditorFactory fac = (IAttributeCellEditorFactory) _factoryMap
+		ITagAttributeCellEditorFactory fac = (ITagAttributeCellEditorFactory) _factoryMap
 				.get(type);
 		if (fac != null) {
 			result = fac.createCellEditor(parent, attr, element);
 		}
 		if (result == null) {
 			for (int i = 0, size = _defaultFactories.size(); i < size; i++) {
-				result = ((IAttributeCellEditorFactory) _defaultFactories
+				result = ((ITagAttributeCellEditorFactory) _defaultFactories
 						.get(i)).createCellEditor(parent, attr, element);
 				if (result != null)
 					break;
@@ -116,28 +106,27 @@ public class CellEditorFactoryRegistry {
 	}
 
 	/**
-	 * 
 	 * @param attr
-	 * @return will never be null
+	 * @return DialogField
 	 */
-	public DialogField createDialogField(IAttributeDescriptor attr) {
+	public DialogField createDialogField(IPropertyPageDescriptor attr) {
 		String type = attr.getValueType();
 		if (type == null || type.length() == 0) {
 			DialogField result = createTextDialogField(attr);
-			result.setLabelText(attr.getLabelString() + ":"); //$NON-NLS-1$
+			result.setLabelText(attr.getLabel()); //labelProvider???
 			return result;
 		}
-		type = type.toUpperCase();
+//		type = type.toUpperCase();
 
 		DialogField result = null;
-		IAttributeCellEditorFactory fac = (IAttributeCellEditorFactory) _factoryMap
+		ITagAttributeCellEditorFactory fac = (ITagAttributeCellEditorFactory) _factoryMap
 				.get(type);
 		if (fac != null) {
 			result = fac.createDialogField(attr);
 		}
 		if (result == null) {
 			for (int i = 0, size = _defaultFactories.size(); i < size; i++) {
-				result = ((IAttributeCellEditorFactory) _defaultFactories
+				result = ((ITagAttributeCellEditorFactory) _defaultFactories
 						.get(i)).createDialogField(attr);
 				if (result != null) {
 					break;
@@ -150,31 +139,31 @@ public class CellEditorFactoryRegistry {
 		if (!(result instanceof ISupportTextValue)) {
 			result = createTextDialogField(attr);
 		}
-		result.setLabelText(attr.getLabelString() + ":"); //$NON-NLS-1$
+//		result.setLabelText(attr.getLabel() + ":"); //$NON-NLS-1$
 		return result;
 	}
 
 	/**
 	 * @param attr
-	 * @return the dialog field
+	 * @return DialogField
 	 */
-	public DialogField createTextDialogField(IAttributeDescriptor attr) {
+	public DialogField createTextDialogField(IPropertyPageDescriptor attr) {
 		StringDialogField field = new StringDialogField();
-		field.setLabelText(attr.getLabelString());
+		field.setLabelText(attr.getLabel());
 		field.setRequired(attr.isRequired());
 		field.setToolTip(attr.getDescription());
 		return field;
 	}
-
 	/**
 	 * This is NOT a product method. It should only be used by testing code.
 	 * 
-	 * @return the list of all value types
+	 * @return String[] of value types
 	 */
 	public String[] getAllValueTypes() {
+		//FIXME
 		Set valueTypes = new HashSet();
 		for (Iterator iter = _factoryMap.values().iterator(); iter.hasNext();) {
-			IAttributeCellEditorFactory fac = (IAttributeCellEditorFactory) iter
+			ITagAttributeCellEditorFactory fac = (ITagAttributeCellEditorFactory) iter
 					.next();
 			String[] supportedTypes = fac.getSupportedValueTypes();
 
@@ -185,7 +174,7 @@ public class CellEditorFactoryRegistry {
 			}
 		}
 		// add those default ones.
-		Field[] fields = IValueType.class.getFields();
+		Field[] fields = OLDIValueType.class.getFields();
 		for (int i = 0; i < fields.length; i++) {
 			int modifiers = fields[i].getModifiers();
 			if (Modifier.isStatic(modifiers) && Modifier.isFinal(modifiers)) {
@@ -206,4 +195,6 @@ public class CellEditorFactoryRegistry {
 		valueTypes.toArray(ret);
 		return ret;
 	}
+
+
 }

@@ -157,7 +157,7 @@ public abstract class CellEditorWrapper extends CellEditor {
 	 * class override this method to provide image. Rather than setting as
 	 * property.
 	 * 
-	 * @return the binding image
+	 * @return image
 	 */
 	protected abstract Image getBindingImage();
 
@@ -168,13 +168,13 @@ public abstract class CellEditorWrapper extends CellEditor {
 	 * widget, using the same font and background color as the parent control.
 	 * </p>
 	 * <p>
-	 * Subclasses may reimplement. If you reimplement this method, you should
-	 * also reimplement <code>updateContents</code>.
+	 * Subclasses may re-implement. If you re-implement this method, you should
+	 * also re-implement <code>updateContents</code>.
 	 * </p>
 	 * 
 	 * @param cell
 	 *            the control for this cell editor
-	 * @return the control
+	 * @return control
 	 */
 	protected Control createContents(Composite cell) {
 		_wrapped = createWrappedCellEditor(cell);
@@ -222,7 +222,7 @@ public abstract class CellEditorWrapper extends CellEditor {
 
 	/**
 	 * @param cell
-	 * @return the cell editor
+	 * @return CellEditor
 	 */
 	protected abstract CellEditor createWrappedCellEditor(Composite cell);
 

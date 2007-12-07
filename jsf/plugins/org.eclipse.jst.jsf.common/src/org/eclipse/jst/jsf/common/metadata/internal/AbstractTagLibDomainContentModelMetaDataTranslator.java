@@ -20,6 +20,7 @@ import org.eclipse.jst.jsf.common.metadata.MetadataFactory;
 import org.eclipse.jst.jsf.common.metadata.MetadataPackage;
 import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.Trait;
+import org.eclipse.wst.xml.core.internal.contentmodel.CMAttributeDeclaration;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMDocument;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMElementDeclaration;
 
@@ -134,6 +135,19 @@ public abstract class AbstractTagLibDomainContentModelMetaDataTranslator {
 	}
 
 	/**
+	 * @param tag
+	 * @param attributeName
+	 * @return Attribute entity for supplied attribute name and given Tag entity.  Will return null if not found.
+	 */
+	protected Entity findAttributeEntityForTagEntity(final Entity tag, final String attributeName) {
+		for (Iterator it=tag.getChildEntities().iterator();it.hasNext();){
+			Entity attr = (Entity)it.next();
+			if (attributeName.equals(attr.getId()))
+				return attr;
+		}
+		return null;
+	}
+	/**
 	 * Create entities for tags
 	 * @param doc
 	 */
@@ -143,7 +157,7 @@ public abstract class AbstractTagLibDomainContentModelMetaDataTranslator {
 			Entity entity = findTagEntity(tag.getNodeName());
 			if (entity == null){
 				entity = MetadataFactory.eINSTANCE.createEntity();
-				entity.setId(tag.getNodeName());
+				entity.setId(getTagNodeName(tag));
 				entity.setType("tag");
 				getMergedModel().getChildEntities().add(entity);
 			}
@@ -152,6 +166,14 @@ public abstract class AbstractTagLibDomainContentModelMetaDataTranslator {
 		
 	}
 	
+	/**
+	 * @param tag
+	 * @return tag node name
+	 */
+	protected String getTagNodeName(CMElementDeclaration tag) {
+		return tag.getNodeName();
+	}
+
 	/**
 	 * Sets the standard traits for a tag entity from the element declaration
 	 * @param tag
@@ -165,9 +187,60 @@ public abstract class AbstractTagLibDomainContentModelMetaDataTranslator {
 		createSimpleBooleanObjectEntityTraitIfNecessary(entity, "expert", getTagIsExpert(tag));
 		createSimpleBooleanObjectEntityTraitIfNecessary(entity, "hidden", getTagIsHidden(tag));
 		
-//		createRequiredAttrTraits(entity, tag);
+		createAttributeEntities(entity, tag);
 	}
 	
+	/**
+	 * @param tagEntity
+	 * @param tag
+	 */
+	protected void createAttributeEntities(Entity tagEntity,
+			CMElementDeclaration tag) {
+		
+		for (Iterator it=tag.getAttributes().iterator();it.hasNext();){
+			CMAttributeDeclaration cmAttr = (CMAttributeDeclaration)it.next();			
+			Entity attr = findAttributeEntityForTagEntity(tagEntity, cmAttr.getAttrName());
+			if (attr == null) {
+				attr = MetadataFactory.eINSTANCE.createEntity();
+				attr.setId(cmAttr.getAttrName());
+				tagEntity.getChildEntities().add(attr);
+			}
+			createAttributeTraits(attr, cmAttr);
+		}
+			
+		
+	}
+
+	/**
+	 * @param attr
+	 * @param cmAttr
+	 */
+	protected void createAttributeTraits(Entity attr,
+			CMAttributeDeclaration cmAttr) {
+		
+		createSimpleStringEntityTraitIfNecessary(attr, "description", getTagAttributeDescription(cmAttr));	
+		createSimpleBooleanObjectEntityTraitIfNecessary(attr, "required", getTagAttributeIsRequired(cmAttr));
+		createSimpleStringEntityTraitIfNecessary(attr, "default-value", getTagAttributeDefaultValue(cmAttr));
+	}
+	
+	/**
+	 * @param cmAttr
+	 * @return null.   subclass should override if CMAttributeDeclaration has the metadata.
+	 */
+	protected String getTagAttributeDescription(CMAttributeDeclaration cmAttr) {return null;}
+	
+	/**
+	 * @param cmAttr
+	 * @return false.   subclass should override if CMAttributeDeclaration has the metadata.
+	 */
+	protected boolean getTagAttributeIsRequired(CMAttributeDeclaration cmAttr) {return cmAttr.getUsage() == CMAttributeDeclaration.REQUIRED;}
+
+	/**
+	 * @param cmAttr
+	 * @return null.   subclass should override if CMAttributeDeclaration has the metadata.
+	 */
+	protected String getTagAttributeDefaultValue(CMAttributeDeclaration cmAttr) {return null;}
+
 	/**
 	 * @param tag
 	 * @return false.   subclass should override if CMElementDeclaration has the metadata.

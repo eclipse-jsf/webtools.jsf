@@ -21,7 +21,7 @@ import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jst.pagedesigner.IJMTConstants;
 import org.eclipse.jst.pagedesigner.PDPlugin;
-import org.eclipse.jst.pagedesigner.meta.IAttributeCellEditorFactory;
+import org.eclipse.jst.pagedesigner.meta.ITagAttributeCellEditorFactory;
 
 /**
  * Read the registry to find out all the CellEditorFactory.
@@ -29,12 +29,9 @@ import org.eclipse.jst.pagedesigner.meta.IAttributeCellEditorFactory;
  * @author mengbo
  */
 public class CellEditorFacRegistryReader {
-	static IAttributeCellEditorFactory[] _factories = null;
+	static ITagAttributeCellEditorFactory[] _factories = null;
 
-	/**
-	 * @return the factories
-	 */
-	public static synchronized IAttributeCellEditorFactory[] getAllFactories() {
+	public static synchronized ITagAttributeCellEditorFactory[] getAllFactories() {
 		if (_factories == null) {
 			_factories = readAllFactories();
 		}
@@ -42,7 +39,7 @@ public class CellEditorFacRegistryReader {
 
 	}
 
-	private static IAttributeCellEditorFactory[] readAllFactories() {
+	private static ITagAttributeCellEditorFactory[] readAllFactories() {
 		List result = new ArrayList();
 		IExtensionPoint extensionPoint = Platform.getExtensionRegistry()
 				.getExtensionPoint(PDPlugin.getPluginId(),
@@ -55,13 +52,12 @@ public class CellEditorFacRegistryReader {
 
 			for (int j = 0; j < facs.length; j++) {
 				if (facs[j].getName().equals(
-						IJMTConstants.ATTRIBUTE_CELLEDITOR_FACTORY)) {
-					facs[j].getAttribute("class");
+						IJMTConstants.TAG_ATTRIBUTE_CELLEDITOR_FACTORY)) {
 					Object obj;
 					try {
 						obj = facs[j].createExecutableExtension("class");
 
-						if (obj instanceof IAttributeCellEditorFactory) {
+						if (obj instanceof ITagAttributeCellEditorFactory) {
 							result.add(obj);
 						}
 					} catch (CoreException e) {
@@ -71,7 +67,7 @@ public class CellEditorFacRegistryReader {
 				}
 			}
 		}
-		IAttributeCellEditorFactory[] ret = new IAttributeCellEditorFactory[result
+		ITagAttributeCellEditorFactory[] ret = new ITagAttributeCellEditorFactory[result
 				.size()];
 		result.toArray(ret);
 		return ret;

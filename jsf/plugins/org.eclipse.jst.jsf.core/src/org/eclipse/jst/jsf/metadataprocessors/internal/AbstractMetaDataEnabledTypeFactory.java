@@ -50,7 +50,7 @@ public abstract class AbstractMetaDataEnabledTypeFactory {
 	
 	/**
 	 * @param type 
-	 * @return list of instances identified by the type id
+	 * @return instance of ITypeDescriptor identified by the type id
 	 */
 	public ITypeDescriptor getType(AbstractMetaDataEnabledType type){ 
 		
@@ -58,6 +58,15 @@ public abstract class AbstractMetaDataEnabledTypeFactory {
 
 	}
 
+	/**
+	 * @param type 
+	 * @return class identified by the type id
+	 */
+	public Class getClassForType(IType type){ 
+		return createTypeClass(type);
+
+	}
+	
 	/**
 	 * Creates instances of <code>ITypeDescriptor</code>s from 
 	 * <code>AbstractMetaDataEnabledType</code>s
@@ -67,7 +76,7 @@ public abstract class AbstractMetaDataEnabledTypeFactory {
 	 */
 	protected ITypeDescriptor createType(IType atype){
 		if (atype != null){
-			ITypeDescriptor desc = createDescriptor(atype);
+			ITypeDescriptor desc = createDescriptorInstance(atype);
 			if (desc != null){
 				desc.setTypeExtension(atype);
 				return desc;
@@ -77,7 +86,7 @@ public abstract class AbstractMetaDataEnabledTypeFactory {
 	}
 
 	
-	private ITypeDescriptor createDescriptor(IType type){
+	private Class createTypeClass(IType type){
 		String className = type.getClassName();
 		try {
 			Bundle bundle =Platform.getBundle(type.getBundleID());
@@ -90,12 +99,23 @@ public abstract class AbstractMetaDataEnabledTypeFactory {
 				//make sure the class can support the feature/extended interface
 				if (ITypeDescriptor.class.isAssignableFrom(klass))
                 {
-					return (ITypeDescriptor)klass.newInstance();
+					return klass;
                 }
                 JSFCorePlugin.log(IStatus.INFO, className + " was not found in " + type.getBundleID() +" for " + type.getTypeID());
 			}
 		} catch (ClassNotFoundException e) {
 			JSFCorePlugin.log(IStatus.ERROR, className + " was not found in " + type.getBundleID() +" for " + type.getTypeID());
+		}
+		return null;
+	}
+	
+	private ITypeDescriptor createDescriptorInstance(IType type){
+		String className = type.getClassName();
+		try {
+			Class klass = createTypeClass(type);
+			if (klass != null){
+				return (ITypeDescriptor)klass.newInstance();
+ 			}
 		} catch (InstantiationException e) {
 			JSFCorePlugin.log(IStatus.ERROR, "InstantiationException: " + className + " in " + type.getBundleID() +" for " + type.getTypeID());
 		} catch (IllegalAccessException e) {

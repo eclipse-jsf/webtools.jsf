@@ -14,6 +14,7 @@ package org.eclipse.jst.pagedesigner.jsf.ui.attributegroup;
 import java.util.HashMap;
 
 /**
+ * Information and value about a tag attribute
  * @author mengbo
  * @version 1.5
  */

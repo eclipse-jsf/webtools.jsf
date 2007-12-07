@@ -16,6 +16,7 @@ import java.util.Map;
 /**
  * 
  * @author mengbo
+ * @deprecated
  */
 public interface IAttributeDescriptor {
 	/**

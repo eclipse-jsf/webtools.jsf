@@ -46,8 +46,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.wst.common.ui.properties.internal.provisional.TabbedPropertySheetPage;
-import org.eclipse.wst.common.ui.properties.internal.provisional.TabbedPropertySheetWidgetFactory;
+import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
+import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetWidgetFactory;
 import org.eclipse.wst.sse.core.internal.provisional.INodeNotifier;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
 import org.w3c.dom.Node;
@@ -110,58 +110,54 @@ public class JSFHtmlSelectChoicesSection extends BaseCustomSection
         public String getColumnText(Object element, int columnIndex)
         {
             String result = null;
-            if (element instanceof IDOMElement)
-            {
-                IDOMElement node = (IDOMElement) element;
-                String nodeName = node.getNodeName();
+            if (element instanceof Node)
+            {            	
+                Node node = (Node) element; 
+                Node attrNode = null;
+                String attrName = null;
+                if (columnIndex == 1)
+                	attrName = "itemLabel";
+                else if (columnIndex == 2)
+                	attrName = "itemValue";
+                else if (columnIndex == 3)
+                	attrName = "id";
+                
                 switch (columnIndex)
                 {
                     case 0:
-                        result = nodeName;
+                        result = node.getNodeName();
                         break;
                     default:
-                        break;
-                }
+                    	attrNode = node.getAttributes().getNamedItem(attrName);
+                    	if (attrNode != null)
+                    		result = attrNode.getNodeValue()!=null ? attrNode.getNodeValue() : " - ";
+                    	else
+                    		result = " - ";
+                 }
             }
             return result != null ? result : ""; //$NON-NLS-1$
         }
-
-        /* (non-Javadoc)
-         * @see org.eclipse.jface.viewers.IContentProvider#dispose()
-         */
 
         public void dispose()
         {
             // do nothing
         }
 
-        /* (non-Javadoc)
-         * @see org.eclipse.jface.viewers.ITableLabelProvider#getColumnImage(java.lang.Object, int)
-         */
         public Image getColumnImage(Object element, int columnIndex)
         {
             return null;
         }
 
-        /* (non-Javadoc)
-         * @see org.eclipse.jface.viewers.IBaseLabelProvider#addListener(org.eclipse.jface.viewers.ILabelProviderListener)
-         */
         public void addListener(ILabelProviderListener listener)
         {
             // TODO: no support for listeners?
         }
 
-        /* (non-Javadoc)
-         * @see org.eclipse.jface.viewers.IBaseLabelProvider#isLabelProperty(java.lang.Object, java.lang.String)
-         */
         public boolean isLabelProperty(Object element, String property)
         {
             return false;
         }
 
-        /* (non-Javadoc)
-         * @see org.eclipse.jface.viewers.IBaseLabelProvider#removeListener(org.eclipse.jface.viewers.ILabelProviderListener)
-         */
         public void removeListener(ILabelProviderListener listener)
         {
             // TODO: no support for listeners?
@@ -208,6 +204,18 @@ public class JSFHtmlSelectChoicesSection extends BaseCustomSection
         TableColumn choiceColumn = new TableColumn(_choiceTable, SWT.NONE);
         choiceColumn.setText(SectionResources.getString("JSFHtmlSelectManyCheckboxSection.Choices")); //$NON-NLS-1$
         choiceColumn.setWidth(100);
+        
+        TableColumn labelColumn = new TableColumn(_choiceTable, SWT.NONE);
+        labelColumn.setText("itemLabel");
+        labelColumn.setWidth(100);
+        
+        TableColumn valueColumn = new TableColumn(_choiceTable, SWT.NONE);
+        valueColumn.setText("itemValue");
+        valueColumn.setWidth(100);
+        
+        TableColumn idColumn = new TableColumn(_choiceTable, SWT.NONE);
+        idColumn.setText("id");
+        idColumn.setWidth(100);
 
         _choiceViewer = new TableViewer(_choiceTable);
         _choiceViewer.setContentProvider(new ChoiceCotentLabelProvider());

@@ -38,6 +38,19 @@ public class TaglibMetadataContext extends MetaDataContext {
 		this.tagName = tagName;
 		this.attributeName = attributeName;
 	}
+	
+	/**
+	 * Constructor
+	 * 
+	 * @param tagAttrEntity - must be tag attribute entity
+	 * @param trait
+	 */
+	public TaglibMetadataContext(Entity tagAttrEntity, Trait trait){
+		super(tagAttrEntity, trait);
+		this.uri = tagAttrEntity.getModel().getCurrentModelContext().getUri();
+		this.tagName = ((Entity)tagAttrEntity.eContainer()).getId();
+		this.attributeName = tagAttrEntity.getId();
+	}
 
 	/**
 	 * @return URI
