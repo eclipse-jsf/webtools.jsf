@@ -15,6 +15,7 @@ package org.eclipse.jst.jsf.common.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.IField;
 import org.eclipse.jdt.core.IJavaProject;
@@ -40,6 +41,7 @@ public final class TypeUtil
     {
         // if type signature is already resolved then simply look it up
         if (typeSignature.charAt(0) == Signature.C_RESOLVED
+        		|| (Signature.getTypeSignatureKind(typeSignature) == Signature.BASE_TYPE_SIGNATURE)
         		|| (Signature.getTypeSignatureKind(typeSignature) == Signature.ARRAY_TYPE_SIGNATURE
         			&& Signature.getElementType(typeSignature).charAt(0) == Signature.C_RESOLVED))
         {
@@ -365,7 +367,19 @@ public final class TypeUtil
             for (int i = 0; i < superTypes.length; i++)
         {
             IType type = superTypes[i];
-            resolved = type.resolveType(fullyQualifiedName);
+            
+            // XXX: this is a partial workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=212225
+            // In certain cases, unresolved type names may cause resolveType to
+            // throw array out of bounds.
+            try
+            {
+            	resolved = type.resolveType(fullyQualifiedName);
+            }
+            catch (ArrayIndexOutOfBoundsException ae)
+            {
+            	resolved = null;
+            	JSFCommonPlugin.log(IStatus.WARNING, "Known issue detected.  See https://bugs.eclipse.org/bugs/show_bug.cgi?id=212225");
+            }
             
             if (resolved != null && resolved.length > 0)
             {
