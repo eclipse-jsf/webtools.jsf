@@ -190,10 +190,12 @@ public class CellEditorFactory implements ITagAttributeCellEditorFactory {
 			field.setToolTip(attr.getDescription());
 			return field;
 
-		} else if (IAttributeRuntimeValueType.CLASSPATH_RESOURCE.equals(type)) {
+		} else if (IAttributeRuntimeValueType.CLASSPATH_RESOURCE.equals(type) ||
+				IAttributeRuntimeValueType.RESOURCEBUNDLE.equals(type)) {
 			ClasspathResourceButtonDialogField field = new ClasspathResourceButtonDialogField();
 			field.setRequired(attr.isRequired());
 			field.setToolTip(attr.getDescription());
+			field.setLabelText(attr.getLabel());
 			return field;
 		} else if (IAttributeRuntimeValueType.CSSSTYLE.equalsIgnoreCase(type)) {
 //			String param = getParamterValue(attr, "style");
