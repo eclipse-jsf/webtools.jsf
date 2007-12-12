@@ -36,7 +36,7 @@ public class HTMLContentModelMetaDataTranslator extends AbstractTagLibDomainCont
 	public void translate(final IMetaDataModelMergeAssistant assistant) {
 		_assistant = assistant;
 		CMDocument doc = getSourceModel();
-		if (doc!= null && doc instanceof HTMLCMDocument){
+		if (doc instanceof HTMLCMDocument){
 			doTranslate(doc);			
 		}
 	}
