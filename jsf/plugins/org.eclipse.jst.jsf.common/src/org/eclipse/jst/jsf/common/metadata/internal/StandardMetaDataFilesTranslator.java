@@ -27,7 +27,8 @@ import org.eclipse.jst.jsf.common.metadata.internal.StandardMetaDataFileRegistry
 public class StandardMetaDataFilesTranslator implements IMetaDataTranslator {
 
 	public boolean canTranslate(IMetaDataSourceModelProvider modelProvider) {
-		if (modelProvider instanceof StandardMetaDataFilesProvider)
+		if (modelProvider != null &&
+				modelProvider instanceof StandardMetaDataFilesProvider)
 			return true;
 		return false;
 	}

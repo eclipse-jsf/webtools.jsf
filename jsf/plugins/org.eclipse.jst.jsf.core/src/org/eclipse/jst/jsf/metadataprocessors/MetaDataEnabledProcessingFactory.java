@@ -141,10 +141,8 @@ public final class MetaDataEnabledProcessingFactory {
 			List<IMetaDataEnabledFeature> aList = type.getFeatureAdapters(featureType);
 			for (int j = 0; j < aList.size(); j++) {
 				// set the context in the feature
-				((IMetaDataEnabledFeature) aList.get(j))
-						.setMetaDataContext(context);
-				((IMetaDataEnabledFeature) aList.get(j))
-						.setStructuredDocumentContext(sdContext);
+				aList.get(j).setMetaDataContext(context);
+				aList.get(j).setStructuredDocumentContext(sdContext);
 				retList.add(aList.get(j));
 			}
 

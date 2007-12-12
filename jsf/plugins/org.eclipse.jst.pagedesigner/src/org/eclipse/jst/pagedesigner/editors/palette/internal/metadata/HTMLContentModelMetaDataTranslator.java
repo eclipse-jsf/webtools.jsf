@@ -24,7 +24,8 @@ import org.eclipse.wst.xml.core.internal.contentmodel.CMDocument;
 public class HTMLContentModelMetaDataTranslator extends AbstractTagLibDomainContentModelMetaDataTranslator implements IMetaDataTranslator {
 
 	public boolean canTranslate(IMetaDataSourceModelProvider modelProvider) {		
-		if (modelProvider.getSourceModel() != null && 
+		if (modelProvider != null &&
+				modelProvider.getSourceModel() != null && 
 				modelProvider.getSourceModel() instanceof HTMLCMDocument)
 			return true;
 		return false;

@@ -21,7 +21,7 @@ public interface IMetaDataTranslator {
 	 */
 	public void translate(IMetaDataModelMergeAssistant assistant);
 	/**
-	 * @param modelProvider
+	 * @param modelProvider - cannot be null
 	 * @return true if this translator can translate this model source
 	 */
 	public boolean canTranslate(IMetaDataSourceModelProvider modelProvider);

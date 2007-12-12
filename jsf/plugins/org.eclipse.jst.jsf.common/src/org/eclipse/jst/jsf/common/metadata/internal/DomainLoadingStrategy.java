@@ -68,7 +68,7 @@ public class DomainLoadingStrategy implements IDomainLoadingStrategy, IMetaDataO
 	/**
 	 * Responsible for iterating through the sorted list of <code>IMetaDataSourceModelProvider</code>
 	 * and merging the models after first translating the source model as required, into a single mreged model of
-	 * standatd metadata Entities and Traits.
+	 * standard metadata Entities and Traits.
 	 * @param model 
 	 * @param sources
 	 */

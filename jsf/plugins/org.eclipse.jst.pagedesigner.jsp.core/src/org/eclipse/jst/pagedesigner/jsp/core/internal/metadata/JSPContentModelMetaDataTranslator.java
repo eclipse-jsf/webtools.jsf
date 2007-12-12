@@ -25,7 +25,8 @@ import org.eclipse.wst.xml.core.internal.contentmodel.CMElementDeclaration;
 public class JSPContentModelMetaDataTranslator extends AbstractTagLibDomainContentModelMetaDataTranslator implements IMetaDataTranslator {
 
 	public boolean canTranslate(IMetaDataSourceModelProvider modelProvider) {		
-		if (modelProvider.getSourceModel() != null && 
+		if (modelProvider != null &&
+				modelProvider.getSourceModel() != null && 
 				modelProvider.getSourceModel() instanceof JSPCMDocument)
 			return true;
 		return false;
@@ -54,7 +55,11 @@ public class JSPContentModelMetaDataTranslator extends AbstractTagLibDomainConte
 	@Override
 	protected String getTagNodeName(CMElementDeclaration tag) {
 		//strip "jsp:"
-		return tag.getNodeName().substring(4);
+		String tagName = tag.getNodeName();
+		if (tagName.indexOf(":")>0){
+			tagName = tagName.substring(tagName.indexOf(":")+1);
+		}
+		return tagName;
 	}
 
 }
