@@ -9,7 +9,7 @@ public class TimeZoneTypeTest extends TaglibProcessingTestCase {
 	public void testPossibleValues(){		
 		Assert.assertNotNull(possibleValueAdapters);
 		IPossibleValues pvs = (IPossibleValues)possibleValueAdapters.get(0);
-		Assert.assertEquals(585, pvs.getPossibleValues().size());
+		Assert.assertTrue( pvs.getPossibleValues().size() > 50);//there are a bunch and it depends on the env.
 	}
 	
 	public void testValidValues(){		
