@@ -1,5 +1,7 @@
 package org.eclipse.jst.jsf.metadata.tests.taglibprocessing;
 
+import java.util.Locale;
+
 import junit.framework.Assert;
 
 import org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValues;
@@ -18,7 +20,8 @@ public class TimeZoneTypeTest extends TaglibProcessingTestCase {
 		
 		IValidValues vv =(IValidValues)validValuesAdapters.get(0);
 		//positive tests
-		assertTrue(vv.isValidValue("America/Edmonton"));
+		if (Locale.getDefault().getDisplayLanguage().equals(Locale.ENGLISH.getDisplayLanguage()))
+			assertTrue(vv.isValidValue("America/Edmonton"));
 		//negative tests
 		vv.getValidationMessages().clear();
 		assertFalse(vv.isValidValue("xxx"));	
