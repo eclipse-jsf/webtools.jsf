@@ -55,7 +55,7 @@ public class JSFLibraryReferenceFacadeFactory {
 		org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryInternalReference libRef = JSFLibraryRegistryUtil.getInstance().getJSFLibraryReferencebyID(libID);
 		if (libRef!= null){
 			boolean isDeployed = getJ2EEModuleDependency(classpathEntry);
-			if (libRef.getLibrary() != null && libRef.getLibrary() instanceof PluginProvidedJSFLibrary)
+			if (libRef.getLibrary() instanceof PluginProvidedJSFLibrary)
 				return new JSFLibraryReferencePluginProvidedImpl(libRef, isDeployed);
 			
 			return new JSFLibraryReferenceUserSpecifiedImpl(libRef, isDeployed);

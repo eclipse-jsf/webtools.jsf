@@ -26,7 +26,6 @@ public class JSPContentModelMetaDataTranslator extends AbstractTagLibDomainConte
 
 	public boolean canTranslate(IMetaDataSourceModelProvider modelProvider) {		
 		if (modelProvider != null &&
-				modelProvider.getSourceModel() != null && 
 				modelProvider.getSourceModel() instanceof JSPCMDocument)
 			return true;
 		return false;
@@ -35,7 +34,7 @@ public class JSPContentModelMetaDataTranslator extends AbstractTagLibDomainConte
 	public void translate(final IMetaDataModelMergeAssistant assistant) {
 		setAssistant(assistant);
 		CMDocument doc = getSourceModel();
-		if (doc!= null && doc instanceof JSPCMDocument){
+		if (doc instanceof JSPCMDocument){
 			doTranslate(doc);			
 		}
 	}

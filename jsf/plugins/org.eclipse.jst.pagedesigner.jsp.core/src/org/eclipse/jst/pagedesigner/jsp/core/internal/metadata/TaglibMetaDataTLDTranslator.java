@@ -29,7 +29,7 @@ import org.eclipse.wst.xml.core.internal.contentmodel.CMElementDeclaration;
 public class TaglibMetaDataTLDTranslator extends AbstractTagLibDomainContentModelMetaDataTranslator implements IMetaDataTranslator {
 
 	public boolean canTranslate(IMetaDataSourceModelProvider modelProvider) {		
-		if (modelProvider.getSourceModel() != null && 
+		if (modelProvider != null && 
 				modelProvider.getSourceModel() instanceof TLDDocument)
 			return true;
 		return false;
@@ -41,7 +41,7 @@ public class TaglibMetaDataTLDTranslator extends AbstractTagLibDomainContentMode
 	public void translate(final IMetaDataModelMergeAssistant assistant) {
 		setAssistant(assistant);
 		CMDocument doc = getSourceModel();
-		if (doc != null && doc instanceof TLDDocument){
+		if (doc instanceof TLDDocument){
 			doTranslate(doc);
 			
 		}

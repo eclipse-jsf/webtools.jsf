@@ -366,7 +366,7 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 	 */
 	public boolean equals(Object object) {
 		boolean equal = false;
-		if (object != null && object instanceof ArchiveFile) {
+		if (object instanceof ArchiveFile) {
 			String resolvedSourceLocation = getResolvedSourceLocation();
 			String objResolvedSourceLocation = ((ArchiveFile)object).getResolvedSourceLocation();
 			if (resolvedSourceLocation == null && objResolvedSourceLocation == null) {

@@ -85,7 +85,7 @@ public class MetaDataModelManager implements IResourceChangeListener{
 		MetaDataModelManager repo = null;
 		try {
 			Object obj = project.getSessionProperty(KEY_SESSIONPROPERTY);
-			if (obj != null && obj instanceof MetaDataModelManager) {
+			if (obj instanceof MetaDataModelManager) {
 				repo = (MetaDataModelManager)obj;
 			}
 		} catch(CoreException ce) {

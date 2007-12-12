@@ -427,7 +427,7 @@ public class PDPlugin extends AbstractUIPlugin {
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 		IEditorInput input = editor.getEditorInput();
 		IFile inputFile = null;
-		if (input != null && input instanceof IFileEditorInput) {
+		if (input instanceof IFileEditorInput) {
 			inputFile = ((IFileEditorInput) input).getFile();
 			curProject = inputFile.getProject();
 		}

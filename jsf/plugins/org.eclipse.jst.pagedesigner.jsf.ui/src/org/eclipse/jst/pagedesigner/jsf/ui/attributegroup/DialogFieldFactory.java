@@ -39,16 +39,15 @@ public class DialogFieldFactory
     {
     	Object project = data.getParamMap().get(AttributeData.Project);
     	Entity attrEntity = null;
-    	if (project != null && project instanceof IProject){
+    	if (project instanceof IProject){
     		attrEntity = TaglibDomainMetaDataQueryHelper.getEntity(TaglibDomainMetaDataQueryHelper.createMetaDataModelContext((IProject)project, data.getUri()), data.getElementName()+"/"+data.getAttributeName());
     	}
-//    	IAttributeDescriptor descriptor = getAttributeDescriptor(data.getUri(), data.getElementName(), data.getAttributeName());
+
         if(attrEntity != null)
         {
         	Trait t = TaglibDomainMetaDataQueryHelper.getTrait(attrEntity, MetaDataEnabledProcessingFactory.ATTRIBUTE_VALUE_RUNTIME_TYPE_PROP_NAME);
             String type = TraitValueHelper.getValueAsString(t);
             if (IAttributeRuntimeValueType.JAVACLASS.equals(type)) 
-        	//if (OLDIValueType.CLASSNAME.equalsIgnoreCase(type))
             {
                 ClassButtonDialogField field = new ClassButtonDialogField(null);
 //                Object project = data.getParamMap().get(AttributeData.Project);
@@ -62,16 +61,7 @@ public class DialogFieldFactory
             }
         }
         return new StringDialogField();
-    }
-    
- 
-//    private static IAttributeDescriptor getAttributeDescriptor(String uri, String elementName, String attributeName)
-//    {
-//        ICMRegistry registry = CMRegistry.getInstance();
-//        IElementDescriptor elementDescriptor = registry.getElementDescriptor(uri, elementName);
-//        return elementDescriptor.getAttributeDescriptor(attributeName);
-//    }
-    
+    }   
     
     /**
      * Sets the initial value of dialog field

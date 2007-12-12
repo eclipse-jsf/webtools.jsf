@@ -341,7 +341,7 @@ public class PreviewUtil {
 		if (attrMap != null) {
 			for (int i = 0, n = attrMap.getLength(); i < n; i++) {
 				Node attrNode = attrMap.item(i);
-				if (attrNode != null && attrNode instanceof Attr) {
+				if (attrNode instanceof Attr) {
 					Attr attr = (Attr) attrNode;
 					attr.setNodeValue(getValueOFEP(attr.getNodeValue()));
 					attr.setNodeValue(PathUtil.convertToAbsolutePath(attr

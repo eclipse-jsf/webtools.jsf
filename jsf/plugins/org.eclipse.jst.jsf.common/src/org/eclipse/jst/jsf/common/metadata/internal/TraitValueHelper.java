@@ -85,7 +85,7 @@ public class TraitValueHelper {
 	 */
 	public static String getValueAsString(Trait trait){
 		Object val = getValue(trait);
-		if (val != null && val instanceof String){			
+		if (val instanceof String){			
 			String result = getNLSValue(trait, (String)val);
 			return result;
 		}

@@ -118,7 +118,7 @@ public class JSFAppConfigManager implements IResourceChangeListener {
 		JSFAppConfigManager manager = null;
 		try {
 			Object obj = project.getSessionProperty(KEY_SESSIONPROPERTY);
-			if (obj != null && obj instanceof JSFAppConfigManager) {
+			if (obj instanceof JSFAppConfigManager) {
 				manager = (JSFAppConfigManager)obj;
 			}
 		} catch(CoreException ce) {
@@ -269,7 +269,7 @@ public class JSFAppConfigManager implements IResourceChangeListener {
 					if (addedDeltas.length == 1) {
 						IResourceDelta addedDelta = addedDeltas[0];
 						IResource addedResource = addedDelta.getResource();
-						if (addedResource != null && addedResource instanceof IProject) {
+						if (addedResource instanceof IProject) {
 							changeProject((IProject)addedResource);
 						}
 					}
@@ -368,7 +368,7 @@ public class JSFAppConfigManager implements IResourceChangeListener {
 	 */
 	public void notifyFacesConfigChangeListeners(Notification notification) {
 		Object emfFeature = notification.getFeature();
-		if (emfFeature != null && emfFeature instanceof EStructuralFeature) {
+		if (emfFeature instanceof EStructuralFeature) {
 			Class emfClass = ((EStructuralFeature)emfFeature).getEType().getInstanceClass();
 			IFacesConfigChangeListener listener = (IFacesConfigChangeListener)facesConfigChangeListeners.get(emfClass);
 			if (listener != null) {

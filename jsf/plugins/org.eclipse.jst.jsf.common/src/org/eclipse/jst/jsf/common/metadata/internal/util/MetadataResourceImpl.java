@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MetadataResourceImpl.java,v 1.7 2007/05/11 17:54:56 gkessler Exp $
+ * $Id: MetadataResourceImpl.java,v 1.8 2007/12/12 22:11:48 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.util;
 
@@ -84,7 +84,7 @@ public class MetadataResourceImpl extends XMLResourceImpl implements XMLResource
 	public void postLoad(XMLResource resource, InputStream inputStream,
 			Map options) {
 		Object aRoot = resource.getContents().get(0);
-		if (aRoot != null && aRoot instanceof Model){			
+		if (aRoot instanceof Model){			
 			setModelKeyInTraits((Model)aRoot, (Model)aRoot);
 		}
 	}

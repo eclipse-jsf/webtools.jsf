@@ -92,7 +92,7 @@ public class ArtifactEditJSFAppConfigProvider extends AbstractJSFAppConfigProvid
 	 */
 	public boolean equals(Object otherObject) {
 		boolean equals = false;
-		if (otherObject != null && otherObject instanceof ArtifactEditJSFAppConfigProvider) {
+		if (otherObject instanceof ArtifactEditJSFAppConfigProvider) {
 			IFile otherAppConfigFile = ((ArtifactEditJSFAppConfigProvider)otherObject).appConfigFile;
 			if (appConfigFile != null) {
 				equals = appConfigFile.equals(otherAppConfigFile);

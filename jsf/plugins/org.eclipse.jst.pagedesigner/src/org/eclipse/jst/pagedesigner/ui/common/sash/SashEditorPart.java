@@ -369,8 +369,7 @@ public abstract class SashEditorPart extends EditorPart {
 		while (site != null) {
 			IEditorActionBarContributor contributor = site
 					.getActionBarContributor();
-			if (contributor != null
-					&& contributor instanceof MultiPageEditorActionBarContributor) {
+			if (contributor instanceof MultiPageEditorActionBarContributor) {
 				((MultiPageEditorActionBarContributor) contributor)
 						.setActivePage(activeEditor);
 			}

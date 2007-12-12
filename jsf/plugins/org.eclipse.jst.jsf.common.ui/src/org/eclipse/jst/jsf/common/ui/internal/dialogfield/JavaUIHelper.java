@@ -49,7 +49,7 @@ public final class JavaUIHelper {
 				JavaUI.openInEditor(result);
 			} else {
 				IResource resource = project.findMember(new Path(path));
-				if (resource != null && resource instanceof IFile) {
+				if (resource instanceof IFile) {
 					IWorkbenchPage page = PlatformUI.getWorkbench()
 							.getActiveWorkbenchWindow().getActivePage();
 					IDE.openEditor(page, (IFile) resource, true);
