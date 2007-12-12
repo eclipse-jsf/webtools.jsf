@@ -78,7 +78,7 @@ public final class MetaDataEnabledProcessingFactory {
 	 * @param attributeName
 	 * @return returns null - if the metadata was not found <br>
 	 *         returns empty list - if not a
-	 *         <code>IMetaDataEnabledFeature</code> proccessor or is not valid
+	 *         <code>IMetaDataEnabledFeature</code> processor or is not valid
 	 *         or does not support the specified feature
 	 * 
 	 * @see MetaDataEnabledProcessingFactory#ATTRIBUTE_VALUE_RUNTIME_TYPE_PROP_NAME
@@ -112,9 +112,9 @@ public final class MetaDataEnabledProcessingFactory {
 	 * @param featureType
 	 * @param sdContext
 	 * @param attrEntity
-	 * @return returns null - if the metadata was not found <br>
+	 * @return returns null - if the meta data was not found <br>
 	 *         returns empty list - if not a
-	 *         <code>IMetaDataEnabledFeature</code> proccessor or is not valid
+	 *         <code>IMetaDataEnabledFeature</code> processor or is not valid
 	 *         or does not support the specified feature
 	 */
 	public List<IMetaDataEnabledFeature> getAttributeValueRuntimeTypeFeatureProcessors(
@@ -135,15 +135,15 @@ public final class MetaDataEnabledProcessingFactory {
 		ITypeDescriptor type = AttributeValueRuntimeTypeFactory.getInstance()
 				.getType(typeId);
 		if (type != null) {
-			TaglibMetadataContext context = new TaglibMetadataContext(attrEntity, trait);
+			MetaDataContext context = new MetaDataContext(attrEntity, trait);
 			// get all the feature adapters (IMetaDataEnabledFeature) for this
 			// type
-			List<IMetaDataEnabledFeature> aList = type.getFeatureAdapters(featureType);
-			for (int j = 0; j < aList.size(); j++) {
+			List<IMetaDataEnabledFeature> featureAdapters = type.getFeatureAdapters(featureType);
+			for (int j = 0; j < featureAdapters.size(); j++) {
 				// set the context in the feature
-				aList.get(j).setMetaDataContext(context);
-				aList.get(j).setStructuredDocumentContext(sdContext);
-				retList.add(aList.get(j));
+				featureAdapters.get(j).setMetaDataContext(context);
+				featureAdapters.get(j).setStructuredDocumentContext(sdContext);
+				retList.add(featureAdapters.get(j));
 			}
 
 		}

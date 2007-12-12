@@ -17,6 +17,7 @@ import org.eclipse.jst.jsf.common.metadata.Trait;
 /**
  * Binds tag library context to the metadata context 
  * <p><b>Provisional API - subject to change</b></p>
+ * @deprecated - should not have been public, and no reason anyone should be using this class
  */
 public class TaglibMetadataContext extends MetaDataContext {
 

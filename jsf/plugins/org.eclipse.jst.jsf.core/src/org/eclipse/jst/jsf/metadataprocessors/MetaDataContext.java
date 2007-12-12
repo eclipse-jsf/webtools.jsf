@@ -17,9 +17,8 @@ import org.eclipse.jst.jsf.common.metadata.Trait;
 
 
 /**
- * The current metadata model context being used for processing. 
+ * The current meta data model context being used for processing. 
  * <p><b>Provisional API - subject to change</b></p>
- * @author Gerry Kessler - Oracle
  *
  */
 public class MetaDataContext {
@@ -37,7 +36,7 @@ public class MetaDataContext {
 	}
 	
 	/**
-	 * @return Entiry
+	 * @return Entity
 	 */
 	public Entity getEntity(){
 		return entity;

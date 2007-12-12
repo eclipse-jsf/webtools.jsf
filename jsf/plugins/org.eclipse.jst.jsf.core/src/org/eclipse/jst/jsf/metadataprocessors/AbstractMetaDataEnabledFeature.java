@@ -120,7 +120,7 @@ public abstract class AbstractMetaDataEnabledFeature implements IMetaDataEnabled
 	}
 	private Trait getTraitForEntityUsingContext(final String traitName) {
 		//look for trait on given entity
-		final Entity entity = ((TaglibMetadataContext)getMetaDataContext()).getEntity();
+		final Entity entity = getMetaDataContext().getEntity();
 		return TaglibDomainMetaDataQueryHelper.getTrait(entity, traitName);
 	}
 
