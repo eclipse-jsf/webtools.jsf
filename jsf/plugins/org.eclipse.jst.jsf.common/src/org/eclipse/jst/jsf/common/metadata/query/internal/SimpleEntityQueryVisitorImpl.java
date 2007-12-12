@@ -25,6 +25,8 @@ import org.eclipse.jst.jsf.common.metadata.query.IResultSet;
  * A simple metadata query visitor implementing {@link org.eclipse.jst.jsf.common.metadata.query.IEntityQueryVisitor} and {@link org.eclipse.jst.jsf.common.metadata.query.ITraitQueryVisitor}.
  * - simple find entity and traits by id only 	
  * - Does not allow for wild card searchs
+ * 
+ * 	TODO - fix for case-sensitivity   https://bugs.eclipse.org/bugs/show_bug.cgi?id=212794
  */
 public class SimpleEntityQueryVisitorImpl extends AbstractEntityQueryVisitor  {
 	private HierarchicalSearchControl control;

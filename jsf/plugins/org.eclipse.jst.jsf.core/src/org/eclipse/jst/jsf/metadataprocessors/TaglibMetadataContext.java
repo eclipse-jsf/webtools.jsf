@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.metadataprocessors;
 
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.Trait;
 
@@ -40,14 +41,19 @@ public class TaglibMetadataContext extends MetaDataContext {
 	}
 	
 	/**
-	 * Constructor
+	 * Package-private Constructor
 	 * 
-	 * @param tagAttrEntity - must be tag attribute entity
+	 * @param tagAttrEntity - must be tag attribute entity and not null
 	 * @param trait
 	 */
-	public TaglibMetadataContext(Entity tagAttrEntity, Trait trait){
+	/*package*/ TaglibMetadataContext(Entity tagAttrEntity, Trait trait){
 		super(tagAttrEntity, trait);
+		Assert.isNotNull(tagAttrEntity);
 		this.uri = tagAttrEntity.getModel().getCurrentModelContext().getUri();
+		if (!(tagAttrEntity.eContainer() instanceof Entity))
+		{
+		    throw new IllegalArgumentException("tagAttrEntity must be contained in a tag Entity to use this constructor");
+		}
 		this.tagName = ((Entity)tagAttrEntity.eContainer()).getId();
 		this.attributeName = tagAttrEntity.getId();
 	}

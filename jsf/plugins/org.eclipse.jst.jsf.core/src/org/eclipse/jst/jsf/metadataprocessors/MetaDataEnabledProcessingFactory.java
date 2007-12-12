@@ -120,15 +120,15 @@ public final class MetaDataEnabledProcessingFactory {
 	public List<IMetaDataEnabledFeature> getAttributeValueRuntimeTypeFeatureProcessors(
 			Class featureType, IStructuredDocumentContext sdContext,
 			Entity attrEntity) {
-		
-		List<IMetaDataEnabledFeature> retList = new ArrayList<IMetaDataEnabledFeature>(2);
+
 		Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(attrEntity,
 				ATTRIBUTE_VALUE_RUNTIME_TYPE_PROP_NAME);
 
 		if (trait == null) {
-			return retList;
+			return Collections.EMPTY_LIST;
 		}
-
+		
+		List<IMetaDataEnabledFeature> retList = new ArrayList<IMetaDataEnabledFeature>(2);
 		String typeId = TraitValueHelper.getValueAsString(trait);
 
 		// get the implementing class for the type
@@ -148,7 +148,7 @@ public final class MetaDataEnabledProcessingFactory {
 
 		}
 		// return list of IMetaDataEnabledFeatures for this type
-		return retList;
+		return Collections.unmodifiableList(retList);
 	}
 
 }
