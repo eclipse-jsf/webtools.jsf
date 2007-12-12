@@ -21,6 +21,9 @@ import org.eclipse.jst.jsf.metadataprocessors.IMetaDataEnabledFeature;
 public class URIType extends PathType implements IMetaDataEnabledFeature{
 	//TODO: add validation... refactor or WebPath, RelativePath, etc.
 	
+	/**
+	 * Constructor
+	 */
 	public URIType() {
 		//
 	}

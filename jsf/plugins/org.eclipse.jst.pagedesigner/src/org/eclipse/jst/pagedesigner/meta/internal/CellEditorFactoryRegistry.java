@@ -11,24 +11,16 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.meta.internal;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogField;
 import org.eclipse.jst.jsf.common.ui.internal.dialogfield.ISupportTextValue;
 import org.eclipse.jst.jsf.common.ui.internal.dialogfield.StringDialogField;
-import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
-import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.editors.properties.IPropertyPageDescriptor;
-import org.eclipse.jst.pagedesigner.meta.OLDIValueType;
 import org.eclipse.jst.pagedesigner.meta.ITagAttributeCellEditorFactory;
 import org.eclipse.jst.pagedesigner.properties.celleditors.CellEditorFactory;
 import org.eclipse.swt.widgets.Composite;
@@ -40,8 +32,8 @@ import org.w3c.dom.Element;
  * 
  */
 public class CellEditorFactoryRegistry {
-	private static final Logger _log = PDPlugin
-			.getLogger(CellEditorFactoryRegistry.class);
+//	private static final Logger _log = PDPlugin
+//			.getLogger(CellEditorFactoryRegistry.class);
 
 	private static CellEditorFactoryRegistry _instance;
 
@@ -49,6 +41,9 @@ public class CellEditorFactoryRegistry {
 
 	private List _defaultFactories = new ArrayList();
 
+	/**
+	 * @return singleton CellEditorFactoryRegistry
+	 */
 	public static CellEditorFactoryRegistry getInstance() {
 		if (_instance == null) {
 			_instance = new CellEditorFactoryRegistry();
@@ -81,6 +76,13 @@ public class CellEditorFactoryRegistry {
 		}
 	}
 
+	/**
+	 * Return cell editor for attribute based upon runtime value type
+	 * @param parent
+	 * @param attr
+	 * @param element
+	 * @return CellEditor
+	 */
 	public CellEditor createCellEditor(Composite parent,
 			IPropertyPageDescriptor attr, Element element) {
 		String type = attr.getValueType();
@@ -154,47 +156,47 @@ public class CellEditorFactoryRegistry {
 		field.setToolTip(attr.getDescription());
 		return field;
 	}
-	/**
-	 * This is NOT a product method. It should only be used by testing code.
-	 * 
-	 * @return String[] of value types
-	 */
-	public String[] getAllValueTypes() {
-		//FIXME
-		Set valueTypes = new HashSet();
-		for (Iterator iter = _factoryMap.values().iterator(); iter.hasNext();) {
-			ITagAttributeCellEditorFactory fac = (ITagAttributeCellEditorFactory) iter
-					.next();
-			String[] supportedTypes = fac.getSupportedValueTypes();
-
-			if (supportedTypes != null) {
-				for (int i = 0; i < supportedTypes.length; i++) {
-					valueTypes.add(supportedTypes[i]);
-				}
-			}
-		}
-		// add those default ones.
-		Field[] fields = OLDIValueType.class.getFields();
-		for (int i = 0; i < fields.length; i++) {
-			int modifiers = fields[i].getModifiers();
-			if (Modifier.isStatic(modifiers) && Modifier.isFinal(modifiers)) {
-				if (fields[i].getType() == String.class) {
-					try {
-						valueTypes.add(fields[i].get(null));
-					} catch (IllegalArgumentException ex) {
-						// "Error in fields retrieving:"
-						_log.info("CellEditorFactoryRegistry.Info.2", ex); //$NON-NLS-1$
-					} catch (IllegalAccessException ex) {
-						// "Error in fields retrieving:"
-						_log.info("CellEditorFactoryRegistry.Info.3", ex); //$NON-NLS-1$
-					}
-				}
-			}
-		}
-		String[] ret = new String[valueTypes.size()];
-		valueTypes.toArray(ret);
-		return ret;
-	}
+//	/**
+//	 * This is NOT a product method. It should only be used by testing code.
+//	 * 
+//	 * @return String[] of value types
+//	 */
+//	public String[] getAllValueTypes() {
+//		//FIXME
+//		Set valueTypes = new HashSet();
+//		for (Iterator iter = _factoryMap.values().iterator(); iter.hasNext();) {
+//			ITagAttributeCellEditorFactory fac = (ITagAttributeCellEditorFactory) iter
+//					.next();
+//			String[] supportedTypes = fac.getSupportedValueTypes();
+//
+//			if (supportedTypes != null) {
+//				for (int i = 0; i < supportedTypes.length; i++) {
+//					valueTypes.add(supportedTypes[i]);
+//				}
+//			}
+//		}
+//		// add those default ones.
+//		Field[] fields = OLDIValueType.class.getFields();
+//		for (int i = 0; i < fields.length; i++) {
+//			int modifiers = fields[i].getModifiers();
+//			if (Modifier.isStatic(modifiers) && Modifier.isFinal(modifiers)) {
+//				if (fields[i].getType() == String.class) {
+//					try {
+//						valueTypes.add(fields[i].get(null));
+//					} catch (IllegalArgumentException ex) {
+//						// "Error in fields retrieving:"
+//						_log.info("CellEditorFactoryRegistry.Info.2", ex); //$NON-NLS-1$
+//					} catch (IllegalAccessException ex) {
+//						// "Error in fields retrieving:"
+//						_log.info("CellEditorFactoryRegistry.Info.3", ex); //$NON-NLS-1$
+//					}
+//				}
+//			}
+//		}
+//		String[] ret = new String[valueTypes.size()];
+//		valueTypes.toArray(ret);
+//		return ret;
+//	}
 
 
 }

@@ -90,6 +90,9 @@ public final class HTMLEditor extends PostSelectionMultiPageEditorPart implement
 		IPropertyListener, ITabbedPropertySheetPageContributor {
 	// private static final String PAGE_NAME_DESIGN = "Design"; //$NON-NLS-1$
 	// private static final String PAGE_NAME_SOURCE = "Source"; //$NON-NLS-1$
+	/**
+	 * Tabbed property contributor id for WPE
+	 */
 	public final static String TABBED_PROPERTIES_CONTRIBUTOR_ID = "org.eclipse.jst.pagedesigner.tabPropertyContributor"; //$NON-NLS-1$
 
 	// four different modes for the designer when displayed in a sash editor.
@@ -583,6 +586,7 @@ public final class HTMLEditor extends PostSelectionMultiPageEditorPart implement
 
 	/**
 	 * IExtendedSimpleEditor method
+	 * @return IDocument
 	 */
 	public IDocument getDocument() {
 		if (getTextEditor() == null) {

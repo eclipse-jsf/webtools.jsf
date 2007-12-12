@@ -96,7 +96,6 @@ public class QuickEditTabSectionsManager {
 	/**
 	 * Manages the QuickEditTabSectionsManager instances.  Ensures one per project.	 *
 	 */
-	@SuppressWarnings("serial")
 	private static class QuickEditTabSectionsManagerMgr {		
 		private Map <IProject,QuickEditTabSectionsManager>_map = new HashMap<IProject,QuickEditTabSectionsManager>();
 		/**

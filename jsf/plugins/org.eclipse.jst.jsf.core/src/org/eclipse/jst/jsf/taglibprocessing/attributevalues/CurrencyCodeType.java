@@ -50,6 +50,9 @@ public class CurrencyCodeType extends EnumerationType implements IPossibleValues
 	}
 
 	private static class CurrencyCodeMap extends HashMap<String, String> {
+		
+		private static final long serialVersionUID = 1L;
+
 		CurrencyCodeMap(){
 			put("AED",Messages.CurrencyCodeType_2); //$NON-NLS-1$ 
 			put("AFA",Messages.CurrencyCodeType_3); //$NON-NLS-1$ 

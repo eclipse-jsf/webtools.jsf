@@ -31,6 +31,9 @@ import org.eclipse.jst.pagedesigner.meta.ITagAttributeCellEditorFactory;
 public class CellEditorFacRegistryReader {
 	static ITagAttributeCellEditorFactory[] _factories = null;
 
+	/**
+	 * @return ITagAttributeCellEditorFactory[]
+	 */
 	public static synchronized ITagAttributeCellEditorFactory[] getAllFactories() {
 		if (_factories == null) {
 			_factories = readAllFactories();

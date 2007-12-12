@@ -217,6 +217,9 @@ public class CMRegistry implements ICMRegistry {
 		return (IElementDescriptor) _jspMap.get(tagname.toLowerCase());
 	}
 	
+	/**
+	 * @return list of {@link ICMRegistry}
+	 */
 	public List<ICMRegistry> getRegistries() {
 		List<ICMRegistry> ret = new ArrayList<ICMRegistry>(_contributedRegistries);
 		ret.add(this);

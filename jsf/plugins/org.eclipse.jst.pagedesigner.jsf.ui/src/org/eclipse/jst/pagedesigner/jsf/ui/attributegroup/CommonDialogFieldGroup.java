@@ -59,7 +59,7 @@ public class CommonDialogFieldGroup extends DialogFieldGroup
             for (int i = 0; i < attributeData.length; i++)
             {
                 DialogField field = (DialogField) map.get(attributeData[i]);
-                DialogFieldFactory.prepareDialogFiledValue(field, attributeData[i]);
+                DialogFieldFactory.prepareDialogFieldValue(field, attributeData[i]);
             }
         }
     }
@@ -74,7 +74,7 @@ public class CommonDialogFieldGroup extends DialogFieldGroup
             for (int i = 0; i < attributeData.length; i++)
             {
                 DialogField field = (DialogField) map.get(attributeData[i]);
-                DialogFieldFactory.setDialogFiledValue(field, attributeData[i].getValue());
+                DialogFieldFactory.setDialogFieldValue(field, attributeData[i].getValue());
             }
         }
     }

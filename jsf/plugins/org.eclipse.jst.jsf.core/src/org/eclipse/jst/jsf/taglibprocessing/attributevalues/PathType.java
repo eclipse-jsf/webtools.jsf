@@ -29,10 +29,16 @@ public abstract class PathType extends AbstractRootTypeDescriptor {
 	private IProject _project = null;
 	private final List<IValidationMessage> _validationMsgs = new ArrayList<IValidationMessage>(1);
 
+	/**
+	 * Constructor
+	 */
 	public PathType() {
 		super();
 	}
 
+	/**
+	 * @return IProject
+	 */
 	protected IProject getProject() {
 		if( _project == null )
 		{
@@ -44,6 +50,9 @@ public abstract class PathType extends AbstractRootTypeDescriptor {
 		return _project;
 	}
 
+	/**
+	 * @return list of {@link IValidationMessage}
+	 */
 	public List<IValidationMessage> getValidationMessages() {
 		return _validationMsgs;
 	}

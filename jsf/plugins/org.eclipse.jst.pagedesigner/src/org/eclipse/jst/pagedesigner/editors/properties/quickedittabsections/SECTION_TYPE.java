@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2007 Oracle Corporation
  *
- * $Id: SECTION_TYPE.java,v 1.1 2007/12/07 23:43:40 gkessler Exp $
+ * $Id: SECTION_TYPE.java,v 1.2 2007/12/12 16:43:21 gkessler Exp $
  */
 package org.eclipse.jst.pagedesigner.editors.properties.quickedittabsections;
 
@@ -102,6 +102,8 @@ public enum SECTION_TYPE implements Enumerator {
 	 * Returns the '<em><b>SECTION TYPE</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param literal 
+	 * @return SECTION_TYPE
 	 * @generated
 	 */
 	public static SECTION_TYPE get(String literal) {
@@ -118,6 +120,8 @@ public enum SECTION_TYPE implements Enumerator {
 	 * Returns the '<em><b>SECTION TYPE</b></em>' literal with the specified name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param name 
+	 * @return SECTION_TYPE
 	 * @generated
 	 */
 	public static SECTION_TYPE getByName(String name) {
@@ -134,6 +138,8 @@ public enum SECTION_TYPE implements Enumerator {
 	 * Returns the '<em><b>SECTION TYPE</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param value 
+	 * @return SECTION_TYPE
 	 * @generated
 	 */
 	public static SECTION_TYPE get(int value) {

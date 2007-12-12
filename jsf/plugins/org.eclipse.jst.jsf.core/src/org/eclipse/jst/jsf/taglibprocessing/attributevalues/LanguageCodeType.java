@@ -59,6 +59,8 @@ public class LanguageCodeType extends EnumerationType implements IPossibleValues
 	 *
 	 */
 	private static class LanguageCodeMap extends HashMap<String, String> {
+		private static final long serialVersionUID = 1L;
+
 		LanguageCodeMap() {
 			put("af", Messages.LanguageCodeType_118); //$NON-NLS-1$
 			put("ar", Messages.LanguageCodeType_0); //$NON-NLS-1$

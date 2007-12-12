@@ -90,7 +90,7 @@ public class MetaDataEnabledFeatureRegistry{
 				featuresMap.put(typeId, list);
 			}
 			else {
-				List list = (List)featuresMap.get(typeId);
+				List list = featuresMap.get(typeId);
 				list.add(aFeature);
 			}
 		}
