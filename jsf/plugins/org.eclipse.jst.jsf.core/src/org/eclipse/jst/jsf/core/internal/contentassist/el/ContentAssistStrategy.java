@@ -74,9 +74,9 @@ public abstract class ContentAssistStrategy
     /**
      * @param context
      * @return the list of proposals for this strategy.  Contents of the list
-     * must be of type ICompletionProposal
+     * must be of type ICompletionProposal.  List should be considered immutable.
      */
-    public abstract List getProposals(IStructuredDocumentContext context);
+    public abstract List<ICompletionProposal> getProposals(IStructuredDocumentContext context);
 
 	/**
 	 * @return the part of the proposal which was already typed when user invoked autocomplete

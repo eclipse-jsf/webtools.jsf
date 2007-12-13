@@ -7,7 +7,7 @@
  *
  * Contributors:
  *    Cameron Bateman/Oracle - initial API and implementation
- *    
+ *
  ********************************************************************************/
 
 package org.eclipse.jst.jsf.ui.internal.contentassist.el;
@@ -33,37 +33,37 @@ import org.eclipse.wst.xml.ui.internal.contentassist.ProposalComparator;
 
 /**
  * The content assist processor for JSF EL partitions on attribute values.
- * 
+ *
  * @author cbateman
  *
  */
-public class JSFELContentAssistProcessor implements IContentAssistProcessor 
+public class JSFELContentAssistProcessor implements IContentAssistProcessor
 {
 	/**
 	 * @see org.eclipse.jface.text.contentassist.IContentAssistProcessor#computeCompletionProposals(org.eclipse.jface.text.ITextViewer, int)
 	 */
-	public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer,
-			int documentPosition) 
+	public ICompletionProposal[] computeCompletionProposals(final ITextViewer viewer,
+			final int documentPosition)
 	{
-		final List  proposals = new ArrayList();
-		final IStructuredDocumentContext context = 
+		List<ICompletionProposal>  proposals = new ArrayList<ICompletionProposal>();
+		final IStructuredDocumentContext context =
 			IStructuredDocumentContextFactory.INSTANCE.getContext(viewer, documentPosition);
-		
+
 		if (context != null)
 		{
-			ITextRegionContextResolver  resolver = 
+			ITextRegionContextResolver  resolver =
 				IStructuredDocumentContextResolverFactory.INSTANCE.getTextRegionResolver(context);
-			
+
 			if (resolver != null)
 			{
 				final String regionType = resolver.getRegionType();
-				
+
 				if (regionType != null
 						&& resolver.matchesRelative(new String[] {DOMRegionContext.XML_TAG_ATTRIBUTE_VALUE}))
 				{
-					
+
 					String elText = null;
-					
+
 					// if we are in the EL content, then get the current region text
 					if (DOMJSPRegionContexts.JSP_VBL_CONTENT.equals(regionType))
 					{
@@ -75,12 +75,12 @@ public class JSFELContentAssistProcessor implements IContentAssistProcessor
 					// TODO: this search algorithm may need improvement
 					else if (regionType.equals(DOMJSPRegionContexts.JSP_VBL_CLOSE))
 					{
-						IStructuredDocumentContext previousContext = 
+						final IStructuredDocumentContext previousContext =
 							resolver.getPreviousContext();
-						
-						ITextRegionContextResolver prevResolver =
+
+						final ITextRegionContextResolver prevResolver =
 							IStructuredDocumentContextResolverFactory.INSTANCE.getTextRegionResolver(previousContext);
-						
+
 						if (prevResolver != null)
 						{
                             if (DOMJSPRegionContexts.JSP_VBL_CONTENT.equals(prevResolver.getRegionType()))
@@ -94,24 +94,25 @@ public class JSFELContentAssistProcessor implements IContentAssistProcessor
                             }
 						}
 					}
-					
-                    
-					final ContentAssistStrategy strategy = 
+
+
+					final ContentAssistStrategy strategy =
                         ContentAssistParser.getPrefix(documentPosition - resolver.getStartOffset() + 1, elText);
-                    
-					if (strategy != null)
+
+					if (strategy != null) {
 						proposals.addAll(strategy.getProposals(context));
+					}
 				}
 			}
 		}
-		
+
         Collections.sort(proposals, new ProposalComparator());
-		return (ICompletionProposal[]) proposals.toArray(new ICompletionProposal[0]);
+		return proposals.toArray(new ICompletionProposal[0]);
 	}
 
 
-	public IContextInformation[] computeContextInformation(ITextViewer viewer,
-			int offset) {
+	public IContextInformation[] computeContextInformation(final ITextViewer viewer,
+			final int offset) {
 		// no context info
 		return null;
 	}

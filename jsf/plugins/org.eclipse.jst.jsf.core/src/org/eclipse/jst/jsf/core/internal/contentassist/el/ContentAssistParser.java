@@ -12,6 +12,9 @@
 
 package org.eclipse.jst.jsf.core.internal.contentassist.el;
 
+import org.eclipse.jface.text.Region;
+import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
+import org.eclipse.jst.jsf.context.symbol.ISymbol;
 import org.eclipse.jst.jsp.core.internal.java.jspel.ASTAddExpression;
 import org.eclipse.jst.jsp.core.internal.java.jspel.ASTAndExpression;
 import org.eclipse.jst.jsp.core.internal.java.jspel.ASTChoiceExpression;
@@ -53,12 +56,43 @@ public final class ContentAssistParser
         {
             return null;
         }
-        else if ("".equals(elText.trim()))
+        else if ("".equals(elText.trim())) //$NON-NLS-1$
         {
-            return new IdCompletionStrategy("", "");
+            return new IdCompletionStrategy("", "");  //$NON-NLS-1$//$NON-NLS-2$
         }
         
-        final java.io.StringReader reader = new java.io.StringReader(elText);
+        PrefixVisitor visitor = getVisitorForPosition(relativePosition, elText);
+        return visitor != null? visitor.getPrefix() : null;
+    }
+    
+    /**
+     * Get symbol and symbol region at given position in el string
+     * @param context - IStructuredDocumentContext
+     * @param relativePosition - position in el string
+     * @param elText - el string
+     * @return SymbolInfo. May be null.
+     */
+    public static SymbolInfo getSymbolInfo(IStructuredDocumentContext context, final int relativePosition, final String elText) {
+        if (elText == null || "".equals(elText.trim())) //$NON-NLS-1$
+        {
+            return null;
+        }
+        PrefixVisitor visitor = getVisitorForPosition(relativePosition, elText);
+        if (visitor != null) {
+            SymbolInfo symbolInfo = visitor.getSymbolInfo(context);
+            if (symbolInfo != null) {
+                Region r = symbolInfo.getRelativeRegion();
+                if (relativePosition > r.getOffset() && relativePosition <= r.getOffset() + r.getLength()) {
+                    return symbolInfo;
+                }
+            }
+        }
+        return null;
+    }
+
+	private static PrefixVisitor getVisitorForPosition(final int relativePosition,
+			final String elText) {
+		final java.io.StringReader reader = new java.io.StringReader(elText);
         final JSPELParser  parser = new JSPELParser(reader);
         
         try
@@ -66,14 +100,17 @@ public final class ContentAssistParser
             final ASTExpression expr = parser.Expression();
             final PrefixVisitor visitor = new PrefixVisitor(relativePosition, elText);
             expr.jjtAccept(visitor, null);
-            return visitor.getPrefix();
+            return visitor;
         }
         catch (ParseException pe)
         {
             // TODO: handle parser by using current and expected tokens
+        	return null;
         }
-        
-        return null;
+	}
+    
+    private static String substring(String s, Region r) {
+        return s.substring(r.getOffset(), r.getOffset() + r.getLength());
     }
     
     private static class PrefixVisitor implements JSPELParserVisitor
@@ -81,10 +118,11 @@ public final class ContentAssistParser
         private final int       _relativePos;
         private final String    _fullText;
         
-        private String          _curPrefix; // = null; initialized as tree is visited
+        private String          _symbolPrefix; // = null; initialized as tree is visited
         private int             _prefixType;
         private boolean         _prefixResolved;  // = false; set to true when the prefix is resolved
-        private String          _proposalStart = "";
+        private int             _symbolStartPos = 1; // first char has position 1
+        private int             _symbolEndPos = 0;
         
         PrefixVisitor(final int relativePos, final String fullText)
         {
@@ -102,13 +140,13 @@ public final class ContentAssistParser
                 switch(_prefixType)
                 {
                     case ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION:
-                        return new FunctionCompletionStrategy(_curPrefix, _proposalStart);
+                        return new FunctionCompletionStrategy(_symbolPrefix, getProposalStart());
                     
                     case ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION:
-                        return new IdCompletionStrategy(_curPrefix, _proposalStart);
+                        return new IdCompletionStrategy(_symbolPrefix, getProposalStart());
                     
                     case ContentAssistStrategy.PREFIX_TYPE_EMPTY_EXPRESSION:
-                        return new IdCompletionStrategy("", _proposalStart);
+                        return new IdCompletionStrategy("", getProposalStart()); //$NON-NLS-1$
                         
                     default:
                         // do nothing; fall-through to return null
@@ -118,12 +156,42 @@ public final class ContentAssistParser
             return null;
         }
         
+        /**
+         * @param context - IStructuredDocumentContext
+         * @return symbol and symbol region if resolved, null otherwise
+         */
+        public SymbolInfo getSymbolInfo(IStructuredDocumentContext context) {
+        	if (_prefixResolved && _symbolStartPos < _symbolEndPos) {
+        		Region region = new Region(_symbolStartPos - 1, _symbolEndPos - _symbolStartPos + 1);
+                ISymbol symbol = null;
+                switch (_prefixType) {
+                case ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION:
+                    symbol = SymbolResolveUtil.getSymbolForVariable(context, substring(_fullText, region));
+                    break;
+                case ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION:
+                    symbol = SymbolResolveUtil.getSymbolForVariableSuffixExpr(context, _symbolPrefix + "." + substring(_fullText, region), _symbolEndPos == _fullText.length()); //$NON-NLS-1$
+                    break;
+                }
+                if (symbol != null) {
+                    return new SymbolInfo(symbol, region);
+                }
+        	}
+        	return null;
+        }
+
+		private String getProposalStart() {
+            if (_symbolStartPos <= _relativePos) {
+                return _fullText.substring(_symbolStartPos - 1, _relativePos - 1);
+            }
+            return ""; //$NON-NLS-1$
+		}
+        
         public Object visit(ASTAddExpression node, Object data) 
         {
             return node.childrenAccept(this, data);
         }
 
-        public Object visit(ASTAndExpression node, Object data) 
+		public Object visit(ASTAndExpression node, Object data) 
         {
             return node.childrenAccept(this, data);
         }
@@ -191,7 +259,7 @@ public final class ContentAssistParser
                     && node.jjtGetNumChildren() == 0
                     && node.getFirstToken().kind == JSPELParserConstants.IDENTIFIER)
             {
-                _curPrefix = node.getFirstToken().image;
+                _symbolPrefix = node.getFirstToken().image;
                 
                 if (testContainsCursor(node))
                 {
@@ -199,8 +267,8 @@ public final class ContentAssistParser
                     // further since we know both the prefix -- the id -- and
                     // the type -- it's an id completion
                     _prefixType = ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION;
-                    int proposalLength = _relativePos - node.getFirstToken().beginColumn;
-					_proposalStart = node.getFirstToken().image.substring(0, proposalLength);
+                    _symbolStartPos = node.getFirstToken().beginColumn;
+                    _symbolEndPos = node.getFirstToken().endColumn;
                     _prefixResolved = true;
                 }
             }
@@ -225,7 +293,8 @@ public final class ContentAssistParser
                             if (proposalStartLength < 0) { // Cursor after firstToken start but before lastToken start?
                             	proposalStartLength = 0;
                             }
-							_proposalStart = lastToken.image.substring(0, proposalStartLength);
+                            _symbolStartPos = lastToken.beginColumn;
+                            _symbolEndPos = lastToken.endColumn;
                             _prefixResolved = true;
                         }
                         // only include this suffix on the path if the cursor is 
@@ -234,7 +303,7 @@ public final class ContentAssistParser
                         // resolve the prefix for
                         else
                         {
-                            _curPrefix += node.getFirstToken().image + lastToken.image;
+                            _symbolPrefix += node.getFirstToken().image + lastToken.image;
                         }
                     }
                     else if (lastToken == node.getFirstToken())
@@ -242,6 +311,8 @@ public final class ContentAssistParser
                         if (testCursorImmediatelyAfter(node))
                         {
                             _prefixType = ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION;
+                            _symbolStartPos = lastToken.endColumn + 1;
+                            _symbolEndPos = lastToken.endColumn;
                             _prefixResolved = true;
                         }
                     }
@@ -262,7 +333,7 @@ public final class ContentAssistParser
             {
                 // if we haven't resolved the prefix yet, then we need
                 // to append this suffix value
-                _curPrefix += _fullText.substring(node.getFirstToken().beginColumn-1, node.getLastToken().endColumn);
+                _symbolPrefix += _fullText.substring(node.getFirstToken().beginColumn-1, node.getLastToken().endColumn);
             }
             
             return retValue;

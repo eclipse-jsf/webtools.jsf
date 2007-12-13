@@ -13,6 +13,7 @@
 package org.eclipse.jst.jsf.core.internal.contentassist.el;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
@@ -57,9 +58,9 @@ class IdCompletionStrategy extends ContentAssistStrategy
     /**
      * @see org.eclipse.jst.jsf.core.internal.contentassist.el.ContentAssistStrategy#getProposals(org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext)
      */
-    public List getProposals(IStructuredDocumentContext context) 
+    public List<ICompletionProposal> getProposals(IStructuredDocumentContext context) 
     {
-        final List completionList = new ArrayList();
+        final List<ICompletionProposal> completionList = new ArrayList<ICompletionProposal>();
         final IWorkspaceContextResolver workspaceResolver = 
             IStructuredDocumentContextResolverFactory.INSTANCE.
                 getWorkspaceContextResolver(context);
@@ -104,7 +105,7 @@ class IdCompletionStrategy extends ContentAssistStrategy
             }
         }
 
-        return completionList;
+        return Collections.unmodifiableList(completionList);
     }
     
     private static class MyProposalFactory extends ProposalCreationFactoryAdapter
