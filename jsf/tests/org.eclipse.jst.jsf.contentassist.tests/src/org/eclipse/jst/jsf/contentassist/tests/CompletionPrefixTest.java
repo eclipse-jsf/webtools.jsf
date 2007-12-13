@@ -7,35 +7,35 @@
  *
  * Contributors:
  *    Cameron Bateman/Oracle - initial API and implementation
- *    
+ *
  ********************************************************************************/
 
 package org.eclipse.jst.jsf.contentassist.tests;
 
+import junit.framework.TestCase;
+
 import org.eclipse.jst.jsf.core.internal.contentassist.el.ContentAssistParser;
 import org.eclipse.jst.jsf.core.internal.contentassist.el.ContentAssistStrategy;
-
-import junit.framework.TestCase;
 
 /**
  * @author cbateman
  *
  */
-public class CompletionPrefixTest extends TestCase 
+public class CompletionPrefixTest extends TestCase
 {
     /* empty expresion */
     private final static String empty_ = " ";
-    
+
     /* simple value expressions */
     private final static String xxx = "xxx";
     private final static String xxxDot = "xxx.";
     private final static String xxxYYY = "xxx.yyy";
     private final static String xxxYYYZZZ = "xxx.yyy.zzz";
-    
+
     /* value expressions with comparisons */
     private final static String xxxLtYYY = "xxx < yyy";
     private final static String xxxDotYYYLtZZZ = "xxx.yyy < zzz";
-    
+
     /* expressions using the ['yyy'] map syntax */
     private final static String xxxMapYYY = "xxx['yyy']";
     private final static String xxxMapXXXExpr = "xxx[XXX]";
@@ -43,9 +43,9 @@ public class CompletionPrefixTest extends TestCase
     private final static String xxxMapXXXDotYYYExpr = "xxx[XXX.YYY]";
     private final static String xxxMapXXXDotYYYDotExpr = "xxx[XXX.YYY.]";
     private final static String xxxMapXXXDotYYYDotZZZExpr = "xxx[XXX.YYY.ZZZ]";
-    
-    
-    
+
+
+
     /**
      * Test passing null to the parser
      */
@@ -57,9 +57,9 @@ public class CompletionPrefixTest extends TestCase
             assertNull(prefix);
         }
     }
-    
+
     /**
-     * 
+     *
      */
     public void testPrefix_empty_()
     {
@@ -67,14 +67,14 @@ public class CompletionPrefixTest extends TestCase
         /*      ^        */
         {
             final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(1, empty_);
-            
+
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION
                     && "".equals(prefix.getValue()));
         }
     }
-    
+
     /**
-     * 
+     *
      */
     public void testPrefix_xxx()
     {
@@ -82,32 +82,32 @@ public class CompletionPrefixTest extends TestCase
         /*      ^        */
         {
             final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(1, xxx);
-            
+
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION
                     && "xxx".equals(prefix.getValue()));
         }
-        
+
         /* Test  x x x */
         /*        ^                    */
         {
             final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(2, xxx);
-            
+
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION
                     && "xxx".equals(prefix.getValue()));
         }
-        
+
         /* Test  x x x */
         /*            ^                */
         {
             final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(4, xxx);
-            
+
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION
                     && "xxx".equals(prefix.getValue()));
         }
     }
-    
+
     /**
-     * 
+     *
      */
     public void testPrefix_xxxDot()
     {
@@ -115,32 +115,32 @@ public class CompletionPrefixTest extends TestCase
         /*      ^        */
         {
             final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(1, xxxDot);
-            
+
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION
                     && "xxx".equals(prefix.getValue()));
         }
-        
+
         /* Test  x x x . */
         /*        ^                    */
         {
             final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(2, xxxDot);
-            
+
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION
                     && "xxx".equals(prefix.getValue()));
         }
-        
+
         /* Test  x x x .  */
         /*            ^                */
         {
             final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(4, xxxDot);
-            
+
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION
                     && "xxx".equals(prefix.getValue()));
         }
     }
-    
+
     /**
-     * 
+     *
      */
     public void testSuffix_xxxDot()
     {
@@ -148,14 +148,14 @@ public class CompletionPrefixTest extends TestCase
         /*              ^*/
         {
             final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(5, xxxDot);
-            
+
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION
                     && "xxx".equals(prefix.getValue()));
         }
     }
-    
+
     /**
-     * 
+     *
      */
     public void testPrefix_xxxYYY()
     {
@@ -163,40 +163,40 @@ public class CompletionPrefixTest extends TestCase
         /*      ^                      */
         {
             final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(1, xxxYYY);
-            
+
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION
                     && "xxx".equals(prefix.getValue()));
         }
-        
+
         /* Test  x x x . y y y . z z z */
         /*        ^                    */
         {
             final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(2, xxxYYY);
-            
+
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION
                     && "xxx".equals(prefix.getValue()));
         }
-        
+
         /* Test  x x x . y y y . z z z */
         /*            ^                */
         {
             final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(4, xxxYYY);
-            
+
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION
                     && "xxx".equals(prefix.getValue()));
         }
     }
-    
+
     /**
-     * 
+     *
      */
     public void testFirstSuffix_xxxYYY()
     {
         /* Test  x x x . y y y . z z z */
         /*              ^              */
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(5, xxxYYY);
-            
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(5, xxxYYY);
+
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION
                             && "xxx".equals(prefix.getValue()));
         }
@@ -204,17 +204,17 @@ public class CompletionPrefixTest extends TestCase
         /* Test  x x x . y y y . z z z */
         /*                ^            */
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(6, xxxYYY);
-            
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(6, xxxYYY);
+
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION
                             && "xxx".equals(prefix.getValue()));
         }
-        
+
         /* Test  x x x . y y y . z z z */
         /*                    ^        */
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(8, xxxYYY);
-            
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(8, xxxYYY);
+
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION
                             && "xxx".equals(prefix.getValue()));
         }
@@ -229,41 +229,41 @@ public class CompletionPrefixTest extends TestCase
         /*      ^                      */
         {
             final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(1, xxxYYYZZZ);
-            
+
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION
                     && "xxx".equals(prefix.getValue()));
         }
-        
+
         /* Test  x x x . y y y . z z z */
         /*        ^                    */
         {
             final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(2, xxxYYYZZZ);
-            
+
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION
                     && "xxx".equals(prefix.getValue()));
         }
-        
+
         /* Test  x x x . y y y . z z z */
         /*            ^                */
         {
             final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(4, xxxYYYZZZ);
-            
+
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION
                     && "xxx".equals(prefix.getValue()));
         }
     }
-    
+
 
     /**
-     * 
+     *
      */
     public void testFirstSuffix_xxxYYYZZZ()
     {
         /* Test  x x x . y y y . z z z */
         /*              ^              */
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(5, xxxYYYZZZ);
-            
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(5, xxxYYYZZZ);
+
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION
                             && "xxx".equals(prefix.getValue()));
         }
@@ -271,33 +271,33 @@ public class CompletionPrefixTest extends TestCase
         /* Test  x x x . y y y . z z z */
         /*                ^            */
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(6, xxxYYYZZZ);
-            
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(6, xxxYYYZZZ);
+
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION
                             && "xxx".equals(prefix.getValue()));
         }
-        
+
         /* Test  x x x . y y y . z z z */
         /*                    ^        */
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(8, xxxYYYZZZ);
-            
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(8, xxxYYYZZZ);
+
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION
                             && "xxx".equals(prefix.getValue()));
         }
     }
-    
-    
+
+
     /**
-     * 
+     *
      */
     public void testSecondSuffix_xxxYYYZZZ()
     {
         /* Test  x x x . y y y . z z z */
         /*                      ^      */
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(9, xxxYYYZZZ);
-            
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(9, xxxYYYZZZ);
+
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION
                             && "xxx.yyy".equals(prefix.getValue()));
         }
@@ -305,59 +305,59 @@ public class CompletionPrefixTest extends TestCase
         /* Test  x x x . y y y . z z z */
         /*                        ^    */
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(10, xxxYYYZZZ);
-            
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(10, xxxYYYZZZ);
+
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION
                             && "xxx.yyy".equals(prefix.getValue()));
         }
-        
+
         /* Test  x x x . y y y . z z z */
         /*                            ^*/
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(12, xxxYYYZZZ);
-            
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(12, xxxYYYZZZ);
+
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION
                             && "xxx.yyy".equals(prefix.getValue()));
         }
     }
-    
+
     /**
-     * 
+     *
      */
     public void testPrefix_xxxLtYYY()
     {
         /* Test  x x x  < y y y */
         /*      ^               */
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(1, xxxLtYYY);
-            
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(1, xxxLtYYY);
+
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION
                             && "xxx".equals(prefix.getValue()));
         }
-        
+
         /* Test  x x x  < y y y */
         /*        ^             */
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(2, xxxLtYYY);
-            
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(2, xxxLtYYY);
+
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION
                             && "xxx".equals(prefix.getValue()));
         }
-        
+
         /* Test  x x x  < y y y */
         /*            ^         */
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(4, xxxLtYYY);
-            
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(4, xxxLtYYY);
+
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION
                             && "xxx".equals(prefix.getValue()));
         }
-        
+
         /* Test  x x x  < y y y */
         /*               ^      */
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(7, xxxLtYYY);
-            
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(7, xxxLtYYY);
+
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION
                             && "yyy".equals(prefix.getValue()));
         }
@@ -365,32 +365,32 @@ public class CompletionPrefixTest extends TestCase
         /* Test  x x x  < y y y */
         /*                 ^    */
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(8, xxxLtYYY);
-            
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(8, xxxLtYYY);
+
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION
                             && "yyy".equals(prefix.getValue()));
         }
-        
+
         /* Test  x x x  < y y y */
         /*                 ^    */
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(10, xxxLtYYY);
-            
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(10, xxxLtYYY);
+
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION
                             && "yyy".equals(prefix.getValue()));
         }
     }
 
     /**
-     * 
+     *
      */
     public void testPrefix_xxxDotYYYLtZZZ()
     {
         /* Test  x x x . y y y < z z z */
         /*      ^                      */
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(1, xxxDotYYYLtZZZ);
-            
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(1, xxxDotYYYLtZZZ);
+
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION
                             && "xxx".equals(prefix.getValue()));
         }
@@ -398,8 +398,8 @@ public class CompletionPrefixTest extends TestCase
         /* Test  x x x . y y y < z z z */
         /*        ^                    */
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(2, xxxDotYYYLtZZZ);
-            
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(2, xxxDotYYYLtZZZ);
+
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION
                             && "xxx".equals(prefix.getValue()));
         }
@@ -407,8 +407,8 @@ public class CompletionPrefixTest extends TestCase
         /* Test  x x x . y y y < z z z */
         /*            ^                */
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(4, xxxDotYYYLtZZZ);
-            
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(4, xxxDotYYYLtZZZ);
+
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION
                             && "xxx".equals(prefix.getValue()));
         }
@@ -416,8 +416,8 @@ public class CompletionPrefixTest extends TestCase
         /* Test  x x x . y y y < z z z */
         /*              ^              */
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(5, xxxDotYYYLtZZZ);
-            
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(5, xxxDotYYYLtZZZ);
+
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION
                             && "xxx".equals(prefix.getValue()));
         }
@@ -425,8 +425,8 @@ public class CompletionPrefixTest extends TestCase
         /* Test  x x x . y y y < z z z */
         /*                ^            */
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(6, xxxDotYYYLtZZZ);
-            
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(6, xxxDotYYYLtZZZ);
+
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION
                             && "xxx".equals(prefix.getValue()));
         }
@@ -434,8 +434,8 @@ public class CompletionPrefixTest extends TestCase
         /* Test  x x x . y y y < z z z */
         /*                    ^        */
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(8, xxxDotYYYLtZZZ);
-            
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(8, xxxDotYYYLtZZZ);
+
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION
                             && "xxx".equals(prefix.getValue()));
         }
@@ -443,55 +443,55 @@ public class CompletionPrefixTest extends TestCase
         /* Test  x x x . y y y < z z z */
         /*                      ^      */
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(11, xxxDotYYYLtZZZ);
-            
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(11, xxxDotYYYLtZZZ);
+
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION
                             && "zzz".equals(prefix.getValue()));
         }
-        
+
         /* Test  x x x . y y y < z z z */
         /*                            ^*/
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(14, xxxDotYYYLtZZZ);
-            
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(14, xxxDotYYYLtZZZ);
+
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION
                             && "zzz".equals(prefix.getValue()));
         }
     }
-    
+
     /**
-     * 
+     *
      */
     public void testSuffix_xxxDotYYYLtZZZ()
     {
         /* Test  x x x . y y y < z z z . */
         /*                              ^*/
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(15, xxxDotYYYLtZZZ+".");
-            
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(15, xxxDotYYYLtZZZ+".");
+
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION
                             && "zzz".equals(prefix.getValue()));
         }
     }
-    
+
     /**
-     * 
+     *
      */
     public void testPrefix_xxxMapYYY()
     {
         /* Test  x x x [ ' y y y ' ] */
         /*      ^                    */
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(1, xxxMapYYY);
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(1, xxxMapYYY);
 
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION
                     && "xxx".equals(prefix.getValue()));
         }
-        
+
         /* Test  x x x [ ' y y y ' ] */
         /*        ^                  */
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(2, xxxMapYYY);
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(2, xxxMapYYY);
 
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION
                     && "xxx".equals(prefix.getValue()));
@@ -500,12 +500,12 @@ public class CompletionPrefixTest extends TestCase
         /* Test  x x x [ ' y y y ' ] */
         /*            ^              */
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(4, xxxMapYYY);
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(4, xxxMapYYY);
 
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION
                     && "xxx".equals(prefix.getValue()));
         }
-        
+
         /* Test x x x [ ' y y y ' ]  */
         /*                         ^ */
 //        {
@@ -515,18 +515,18 @@ public class CompletionPrefixTest extends TestCase
 //            assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION
 //                    && "xxx['yyy']".equals(prefix.getValue()));
 //        }
-        
+
         /* Test x x x [ ' y y y ' ] .  */
         /*                           ^ */
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(12, xxxMapYYY+".");
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(12, xxxMapYYY+".");
 
             System.out.println(prefix.getValue());
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION
                     && "xxx['yyy']".equals(prefix.getValue()));
         }
     }
-    
+
     /**
      * Test completion inside an array
      */
@@ -535,7 +535,7 @@ public class CompletionPrefixTest extends TestCase
         /* Test x x x [ X X X ] */
         /*             ^ */
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(5, xxxMapXXXExpr);
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(5, xxxMapXXXExpr);
 
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION
                     && "XXX".equals(prefix.getValue()));
@@ -544,7 +544,7 @@ public class CompletionPrefixTest extends TestCase
         /* Test x x x [ X X X ] */
         /*               ^ */
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(6, xxxMapXXXExpr);
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(6, xxxMapXXXExpr);
 
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION
                     && "XXX".equals(prefix.getValue()));
@@ -553,13 +553,13 @@ public class CompletionPrefixTest extends TestCase
         /* Test x x x [ X X X ] */
         /*                   ^*/
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(8, xxxMapXXXExpr);
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(8, xxxMapXXXExpr);
 
             assertTrue(prefix.getType() == ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION
                     && "XXX".equals(prefix.getValue()));
         }
     }
-    
+
     /**
      * Tests suffix completions on dots inside brackets
      */
@@ -568,22 +568,22 @@ public class CompletionPrefixTest extends TestCase
         /* Test x x x [ X X X . ] */
         /*                   ^*/
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(8, xxxMapXXXDotExpr);
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(8, xxxMapXXXDotExpr);
 
-            assertEquals(ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION, prefix.getType()); 
+            assertEquals(ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION, prefix.getType());
             assertEquals("XXX", prefix.getValue());
         }
-        
+
         /* Test x x x [ X X X . ] */
         /*                     ^*/
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(9, xxxMapXXXDotExpr);
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(9, xxxMapXXXDotExpr);
 
-            assertEquals(ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION, prefix.getType()); 
+            assertEquals(ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION, prefix.getType());
             assertEquals("XXX", prefix.getValue());
         }
     }
-    
+
     /**
      * Test dot completion inside an array expression
      */
@@ -592,49 +592,49 @@ public class CompletionPrefixTest extends TestCase
         /* Test x x x [ X X X . Y Y Y ] */
         /*                     ^*/
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(9, xxxMapXXXDotYYYExpr);
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(9, xxxMapXXXDotYYYExpr);
 
-            assertEquals(ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION, prefix.getType()); 
+            assertEquals(ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION, prefix.getType());
             assertEquals("XXX", prefix.getValue());
         }
 
         /* Test x x x [ X X X . Y Y Y ] */
         /*                       ^*/
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(10, xxxMapXXXDotYYYExpr);
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(10, xxxMapXXXDotYYYExpr);
 
-            assertEquals(ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION, prefix.getType()); 
+            assertEquals(ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION, prefix.getType());
             assertEquals("XXX", prefix.getValue());
         }
-        
+
         /* Test x x x [ X X X . Y Y Y ] */
         /*                           ^*/
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(12, xxxMapXXXDotYYYExpr);
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(12, xxxMapXXXDotYYYExpr);
 
-            assertEquals(ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION, prefix.getType()); 
+            assertEquals(ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION, prefix.getType());
             assertEquals("XXX", prefix.getValue());
         }
 
         /* Test x x x [ X X X . Y Y Y . ] */
         /*                           ^*/
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(12, xxxMapXXXDotYYYDotExpr);
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(12, xxxMapXXXDotYYYDotExpr);
 
-            assertEquals(ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION, prefix.getType()); 
+            assertEquals(ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION, prefix.getType());
             assertEquals("XXX", prefix.getValue());
         }
 
         /* Test x x x [ X X X . Y Y Y . ] */
         /*                             ^*/
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(13, xxxMapXXXDotYYYDotExpr);
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(13, xxxMapXXXDotYYYDotExpr);
 
-            assertEquals(ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION, prefix.getType()); 
+            assertEquals(ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION, prefix.getType());
             assertEquals("XXX.YYY", prefix.getValue());
         }
     }
-    
+
     /**
      * Test dot completion on XXX.YYY.ZZZ type expressions
      */
@@ -643,27 +643,27 @@ public class CompletionPrefixTest extends TestCase
         /* Test x x x [ X X X . Y Y Y . Z Z Z] */
         /*                             ^*/
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(13, xxxMapXXXDotYYYDotZZZExpr);
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(13, xxxMapXXXDotYYYDotZZZExpr);
 
-            assertEquals(ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION, prefix.getType()); 
+            assertEquals(ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION, prefix.getType());
             assertEquals("XXX.YYY", prefix.getValue());
         }
 
         /* Test x x x [ X X X . Y Y Y . Z Z Z] */
         /*                               ^*/
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(14, xxxMapXXXDotYYYDotZZZExpr);
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(14, xxxMapXXXDotYYYDotZZZExpr);
 
-            assertEquals(ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION, prefix.getType()); 
+            assertEquals(ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION, prefix.getType());
             assertEquals("XXX.YYY", prefix.getValue());
         }
 
         /* Test x x x [ X X X . Y Y Y . Z Z Z ] */
         /*                                   ^*/
         {
-            ContentAssistStrategy prefix = ContentAssistParser.getPrefix(16, xxxMapXXXDotYYYDotZZZExpr);
+            final ContentAssistStrategy prefix = ContentAssistParser.getPrefix(16, xxxMapXXXDotYYYDotZZZExpr);
 
-            assertEquals(ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION, prefix.getType()); 
+            assertEquals(ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION, prefix.getType());
             assertEquals("XXX.YYY", prefix.getValue());
         }
 

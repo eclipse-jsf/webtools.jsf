@@ -4,82 +4,65 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Oracle Corporation - initial API and implementation
  *******************************************************************************/
 package org.eclipse.jst.jsf.contentassist.tests;
 
 import java.io.ByteArrayInputStream;
-import java.util.Iterator;
 import java.util.List;
 
-import junit.framework.TestCase;
-
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
-import org.eclipse.jst.jsf.context.resolver.structureddocument.IDOMContextResolver;
-import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
-import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.ITextRegionContextResolver;
-import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
-import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
-import org.eclipse.jst.jsf.context.symbol.ISymbol;
 import org.eclipse.jst.jsf.core.IJSFCoreConstants;
-import org.eclipse.jst.jsf.core.internal.contentassist.el.ContentAssistParser;
-import org.eclipse.jst.jsf.core.internal.contentassist.el.ContentAssistStrategy;
 import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
-import org.eclipse.jst.jsf.designtime.resolver.ISymbolContextResolver;
-import org.eclipse.jst.jsf.designtime.resolver.StructuredDocumentSymbolResolverFactory;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.jst.jsf.test.util.TestFileResource;
 import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
-import org.eclipse.jst.jsp.core.internal.domdocument.DOMModelForJSP;
-import org.eclipse.wst.sse.core.StructuredModelManager;
-import org.eclipse.wst.sse.core.internal.provisional.IModelManager;
-import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
-import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
-import org.w3c.dom.Attr;
-import org.w3c.dom.Node;
 
 /**
  * Regression test for 149224 -- replace '.' on completion with [] style of
  * map
- * 
+ *
  * @author cbateman
  *
  */
-public class Test_bug_149224 extends TestCase 
+public class Test_bug_149224 extends BaseTestClass
 {
     private WebProjectTestEnvironment       _testEnv;
-    
-    protected void setUp() throws Exception 
+    private IFile							_jspFile;
+
+    @Override
+	protected void setUp() throws Exception
     {
         super.setUp();
 
         JSFTestUtil.setValidationEnabled(false);
-        
+
         _testEnv = new WebProjectTestEnvironment("Test_bug_149224_"+getName());
         _testEnv.createProject(false);
-        assertNotNull(_testEnv);       
+        assertNotNull(_testEnv);
         assertNotNull(_testEnv.getTestProject());
         assertTrue(_testEnv.getTestProject().isAccessible());
-        
-        JSFFacetedTestEnvironment jsfFacedEnv = new JSFFacetedTestEnvironment(_testEnv);
+
+        final JSFFacetedTestEnvironment jsfFacedEnv = new JSFFacetedTestEnvironment(_testEnv);
         jsfFacedEnv.initialize(IJSFCoreConstants.FACET_VERSION_1_1);
-        
-        _testEnv.loadResourceInWebRoot(ContentAssistTestsPlugin.getDefault().getBundle(),
+
+        _jspFile = (IFile) _testEnv.loadResourceInWebRoot(ContentAssistTestsPlugin.getDefault().getBundle(),
                                       "/testdata/bug_149224_1.jsp.data",
                                       "/bug_149224.jsp");
-        
+
+        assertNotNull(_jspFile);
+        assertTrue(_jspFile.isAccessible());
+
         final JDTTestEnvironment jdtTestEnv = new JDTTestEnvironment(_testEnv);
         TestFileResource resource = new TestFileResource();
-        resource.load(ContentAssistTestsPlugin.getDefault().getBundle(), 
+        resource.load(ContentAssistTestsPlugin.getDefault().getBundle(),
                       "/testdata/MyBean.java.data");
         jdtTestEnv.addSourceFile("src", "beans", "MyBean", resource.toString());
-        
+
         resource = new TestFileResource();
         resource.load(ContentAssistTestsPlugin.getDefault().getBundle(),
                       "/testdata/bug_149224.properties.data");
@@ -90,44 +73,15 @@ public class Test_bug_149224 extends TestCase
     /**
      * Sanity check
      */
-    public void testSanity()
+    public void testSanity() throws Exception
     {
-        ContextWrapper wrapper = null;
-        
+        final ContextWrapper wrapper = null;
+
         try
         {
-            wrapper = getDocumentContext("/WebContent/bug_149224.jsp", 589);
-            IStructuredDocumentContext context = wrapper.getContext();
-            IDOMContextResolver resolver =
-                IStructuredDocumentContextResolverFactory.INSTANCE.
-                    getDOMContextResolver(context);
-            Node node = resolver.getNode();
-            JSFTestUtil.getIndexedRegion((IStructuredDocument) context.getStructuredDocument(), 589);
-            assertTrue(node instanceof Attr);
-            assertEquals("value", ((Attr)node).getNodeName());
-            assertEquals("#{bundle1.}", ((Attr)node).getNodeValue());
-            wrapper.dispose();
-            
-            wrapper = getDocumentContext("/WebContent/bug_149224.jsp", 630);
-            context = wrapper.getContext();
-            resolver =
-                IStructuredDocumentContextResolverFactory.INSTANCE.
-                    getDOMContextResolver(context);
-            node = resolver.getNode();
-            assertTrue(node instanceof Attr);
-            assertEquals("value", ((Attr)node).getNodeName());
-            assertEquals("#{bundle1.x}", ((Attr)node).getNodeValue());
-            
-            ISymbolContextResolver symbolResolver = 
-                StructuredDocumentSymbolResolverFactory.getInstance().
-                    getSymbolContextResolver(context);
-            ISymbol bundleVar = symbolResolver.getVariable("bundle1");
-            assertNotNull(bundleVar);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            fail(e.getLocalizedMessage());
+        	assertELSanity(_jspFile, 589, "value", "#{bundle1.}");
+        	assertELSanity(_jspFile, 630, "value", "#{bundle1.x}");
+            assertELVariableSanity(_jspFile, "bundle1");
         }
         finally
         {
@@ -137,113 +91,67 @@ public class Test_bug_149224 extends TestCase
             }
         }
     }
-    
+
     /**
      * Test the completion:
-     * 
+     *
      *      # { b u n d l e 1 . }
-     *                         ^ 
+     *                         ^
      */
-    @SuppressWarnings("unchecked")
-	public void testCompletionAtCloseBrace()
+	public void testCompletionAtCloseBrace() throws Exception
     {
-        ContextWrapper wrapper = null;
+		final List<ICompletionProposal> proposals =
+			getProposals(_jspFile, 589, "bundle1.",9);
+		assertNotNull(proposals);
+        ICompletionProposal proposal = null;
 
-        try
+        FIND_ARRAY_PROPOSAL:
+            for (final ICompletionProposal findProp : proposals)
         {
-            wrapper = getDocumentContext("/WebContent/bug_149224.jsp", 589);
-            final IStructuredDocumentContext context = wrapper.getContext();
-            ITextRegionContextResolver resolver = 
-                IStructuredDocumentContextResolverFactory.INSTANCE.getTextRegionResolver(context);
-            final ContentAssistStrategy strategy = 
-                ContentAssistParser.getPrefix(9, "bundle1.");
-
-            assertNotNull(strategy);
-            List proposals = strategy.getProposals(context);
-
-            ICompletionProposal proposal = null;
-
-            FIND_ARRAY_PROPOSAL: 
-                for (final Iterator it = proposals.iterator(); it.hasNext();)
+            // TODO: this is a bit of a hack.  Would rather be able
+            // to query for the actual replacement text
+            if (findProp.getDisplayString().startsWith("['"))
             {
-                proposal = (ICompletionProposal) it.next();
-                // TODO: this is a bit of a hack.  Would rather be able 
-                // to query for the actual replacement text
-                if (proposal.getDisplayString().startsWith("['"))
-                {
-                    break FIND_ARRAY_PROPOSAL;
-                }
-            }
-
-            assertNotNull(proposal);
-
-            proposal.apply(wrapper.getContext().getStructuredDocument());
-
-            String newELText = resolver.getRegionText();
-            assertEquals("bundle1['prop.with.dots_x']", newELText);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            fail(e.getLocalizedMessage());
-        }
-        finally
-        {
-            if (wrapper != null)
-            {
-                wrapper.dispose();
+            	proposal = findProp;
+                break FIND_ARRAY_PROPOSAL;
             }
         }
+
+        assertNotNull(proposal);
+
+        applyAndCheck(_jspFile, 589, proposal, "bundle1['prop.with.dots_x']");
     }
 
     /**
      * Test the completion:
-     * 
+     *
      *      # { b u n d l e 1 . x }
-     *                         ^ 
+     *                         ^
      */
-    @SuppressWarnings("unchecked")
-	public void testCompletionAtProperty()
+	public void testCompletionAtProperty() throws Exception
     {
-        ContextWrapper wrapper = null;
-        
+        final ContextWrapper wrapper = null;
+
         try
         {
-            wrapper = getDocumentContext("/WebContent/bug_149224.jsp", 630);
-            final IStructuredDocumentContext context = wrapper.getContext();
-            ITextRegionContextResolver resolver = 
-                IStructuredDocumentContextResolverFactory.INSTANCE.getTextRegionResolver(context);
-            final ContentAssistStrategy strategy = 
-                ContentAssistParser.getPrefix(9, "bundle1.x");
-            
-            assertNotNull(strategy);
-            List proposals = strategy.getProposals(context);
-            
+            final List<ICompletionProposal> proposals =
+            	getProposals(_jspFile, 630, 9);
+
             ICompletionProposal proposal = null;
-            
-            FIND_ARRAY_PROPOSAL: 
-                for (final Iterator it = proposals.iterator(); it.hasNext();)
-            {
-                proposal = (ICompletionProposal) it.next();
-                // TODO: this is a bit of a hack.  Would rather be able 
-                // to query for the actual replacement text
-                if (proposal.getDisplayString().startsWith("['"))
-                {
-                    break FIND_ARRAY_PROPOSAL;
-                }
-            }
+
+            FIND_ARRAY_PROPOSAL:
+                for (final ICompletionProposal completionProposal : proposals) {
+				    proposal = completionProposal;
+				    // TODO: this is a bit of a hack.  Would rather be able
+				    // to query for the actual replacement text
+				    if (proposal.getDisplayString().startsWith("['"))
+				    {
+				        break FIND_ARRAY_PROPOSAL;
+				    }
+				}
 
             assertNotNull(proposal);
-
-            proposal.apply(wrapper.getContext().getStructuredDocument());
-
-            String newELText = resolver.getRegionText();
-            assertEquals("bundle1['prop.with.dots_x']x", newELText);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            fail(e.getLocalizedMessage());
+            applyAndCheck(_jspFile, 630, proposal, "bundle1['prop.with.dots_x']x");
         }
         finally
         {
@@ -251,49 +159,6 @@ public class Test_bug_149224 extends TestCase
             {
                 wrapper.dispose();
             }
-        }
-    }
-
-
-    private ContextWrapper getDocumentContext(String path, int offset) throws Exception
-    {
-        IProject project = _testEnv.getTestProject();
-        IFile jspFile = project.getFile(new Path(path));
-        assertTrue(jspFile.exists());
-        
-        final IModelManager modelManager = 
-            StructuredModelManager.getModelManager();
-
-        IStructuredModel model = null;
-        
-        model = modelManager.getModelForRead(jspFile);
-        assertTrue(model instanceof DOMModelForJSP);
-        final IStructuredDocumentContext context = 
-            IStructuredDocumentContextFactory.INSTANCE.
-                getContext(model.getStructuredDocument(), offset);
-        return new ContextWrapper(context, model);
-    }
-    
-    
-    private static class ContextWrapper
-    {
-        private final IStructuredDocumentContext _context;
-        private final IStructuredModel  _model;
-        
-        ContextWrapper(final IStructuredDocumentContext context, final IStructuredModel model) {
-            super();
-            _context = context;
-            _model = model;
-        }
-        IStructuredDocumentContext getContext() {
-            return _context;
-        }
-        IStructuredModel getModel() {
-            return _model;
-        }
-        void dispose()
-        {
-            _model.releaseFromRead();
         }
     }
 }

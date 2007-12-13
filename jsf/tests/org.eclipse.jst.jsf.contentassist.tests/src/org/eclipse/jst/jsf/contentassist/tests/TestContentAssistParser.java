@@ -1,44 +1,29 @@
-/*******************************************************************************
- * Copyright (c) 2001, 2007 Oracle Corporation and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *     Oracle Corporation - initial API and implementation
- *******************************************************************************/
 package org.eclipse.jst.jsf.contentassist.tests;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.jst.jsf.context.symbol.IBeanInstanceSymbol;
+import org.eclipse.jst.jsf.context.symbol.IBeanMethodSymbol;
+import org.eclipse.jst.jsf.context.symbol.IBeanPropertySymbol;
 import org.eclipse.jst.jsf.core.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.internal.contentassist.el.ContentAssistParser;
+import org.eclipse.jst.jsf.core.internal.contentassist.el.SymbolInfo;
 import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.jst.jsf.test.util.TestFileResource;
 import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
 
-/**
- * Basic unit test for class FunctionCompletionStrategy
- * @author cbateman
- *
- */
-public class TestFunctionCompletionStrategy extends BaseTestClass
+public class TestContentAssistParser extends BaseTestClass
 {
-    private WebProjectTestEnvironment       _testEnv;
-    private IFile							_jspFile;
-    private IType							_myBeanType;
+	private WebProjectTestEnvironment _testEnv;
+	private IFile _jspFile;
+	private IType _myBeanType;
 
-    @Override
+	@Override
 	protected void setUp() throws Exception
-    {
+	{
         super.setUp();
 
         JSFTestUtil.setValidationEnabled(false);
@@ -71,57 +56,53 @@ public class TestFunctionCompletionStrategy extends BaseTestClass
         assertTrue(_myBeanType.exists());
     }
 
-    /**
-     * Sanity check
-     */
-    public void testSanity() throws Exception
-    {
+	public void testSanity() throws Exception
+	{
+		assertELSanity(_jspFile, 518, "value", "#{}");
+		assertELSanity(_jspFile, 547, "value", "#{   }");
+		assertELSanity(_jspFile, 579, "value", "#{myBean}");
 		assertELSanity(_jspFile, 614, "value", "#{myBean.property}");
 		assertELSanity(_jspFile, 658, "value", "#{paramValues.foo}");
 		assertELSanity(_jspFile, 706, "action", "#{myBean.actionMethod}");
 
 		assertELVariableSanity(_jspFile, "myBean");
-    }
+	}
 
-    public void testFunctionCompletionStrategy() throws Exception
-    {
-    	// normal value binding only has properties
-    	List<ICompletionProposal>  proposals = getProposals(_jspFile, 614, 8);
 
-    	{
-	    	final Set<String> propNames = new HashSet<String>();
-	    	propNames.add("property");
-	    	propNames.add("class");
-	    	assertDisplayNamesMatch(propNames, proposals);
-    	}
+	public void testGetPrefix() {
+		// for now there's a enough coverage through TestIdCompletionStrategy
+	}
 
-    	// method binding includes methods and also properties
-    	proposals = getProposals(_jspFile, 706, 8);
+	public void testGetSymbolInfo() throws Exception
+	{
+		assertNull(ContentAssistParser.getSymbolInfo(getDocumentContext(_jspFile, 518).getContext(), 1, null));
+		assertNull(ContentAssistParser.getSymbolInfo(getDocumentContext(_jspFile, 518).getContext(), 1, ""));
+		assertNull(ContentAssistParser.getSymbolInfo(getDocumentContext(_jspFile, 547).getContext(), 1, "   "));
 
-    	{
-	    	final Set<String> propNames = new HashSet<String>();
-	    	propNames.add("property");
-	    	propNames.add("class");
-	    	propNames.add("getProperty");
-	    	propNames.add("actionMethod");
-	    	propNames.add("equals");
-	    	propNames.add("getClass");
-	    	propNames.add("hashCode");
-	    	propNames.add("notify");
-	    	propNames.add("notifyAll");
-	    	propNames.add("toString");
-	    	propNames.add("wait");
-	    	propNames.add("wait");
-	    	propNames.add("wait");
+		// variable test
+		SymbolInfo symbolInfo =
+			ContentAssistParser.getSymbolInfo(getDocumentContext(_jspFile, 579).getContext(), 1, "myBean");
+		assertNotNull(symbolInfo);
+		assertEquals("myBean", symbolInfo.getSymbol().getName());
+		assertTrue(symbolInfo.getSymbol() instanceof IBeanInstanceSymbol);
+		assertNotNull(symbolInfo.getRelativeRegion());
+		assertEquals(6, symbolInfo.getRelativeRegion().getLength());
 
-	    	assertEquals(13, proposals.size());
-	    	// have to loop through explicitly here because wait appears
-	    	// in the list thrice, but can only be in the set once
-	    	for (final ICompletionProposal prop : proposals)
-	    	{
-	    		assertTrue(propNames.contains(prop.getDisplayString()));
-	    	}
-    	}
-    }
+		// property test
+		symbolInfo =
+			ContentAssistParser.getSymbolInfo(getDocumentContext(_jspFile, 614).getContext(), 8, "myBean.property");
+		assertNotNull(symbolInfo);
+		assertEquals("property", symbolInfo.getSymbol().getName());
+		assertTrue(symbolInfo.getSymbol() instanceof IBeanPropertySymbol);
+		assertNotNull(symbolInfo.getRelativeRegion());
+
+		// method test
+		symbolInfo =
+			ContentAssistParser.getSymbolInfo(getDocumentContext(_jspFile, 706).getContext(), 8, "myBean.actionMethod");
+		assertNotNull(symbolInfo);
+		assertEquals("actionMethod", symbolInfo.getSymbol().getName());
+		assertTrue(symbolInfo.getSymbol() instanceof IBeanMethodSymbol);
+		assertNotNull(symbolInfo.getRelativeRegion());
+	}
 
 }

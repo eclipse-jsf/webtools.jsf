@@ -5,4 +5,9 @@ public class MyBean {
 	{
 		return new String[]{"blah"};
 	}
+
+	public String actionMethod()
+	{
+		return "foo";
+	}
 }

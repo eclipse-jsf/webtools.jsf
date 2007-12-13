@@ -7,7 +7,7 @@
  *
  * Contributors:
  *    Cameron Bateman/Oracle - initial API and implementation
- *    
+ *
  ********************************************************************************/
 package org.eclipse.jst.jsf.contentassist.tests;
 
@@ -15,69 +15,53 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import junit.framework.TestCase;
-
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
-import org.eclipse.jst.jsf.context.resolver.structureddocument.IDOMContextResolver;
-import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
-import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.ITextRegionContextResolver;
-import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
-import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
 import org.eclipse.jst.jsf.core.IJSFCoreConstants;
-import org.eclipse.jst.jsf.core.internal.contentassist.el.ContentAssistParser;
-import org.eclipse.jst.jsf.core.internal.contentassist.el.ContentAssistStrategy;
 import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.jst.jsf.test.util.TestFileResource;
 import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
-import org.eclipse.jst.jsp.core.internal.domdocument.DOMModelForJSP;
-import org.eclipse.wst.sse.core.StructuredModelManager;
-import org.eclipse.wst.sse.core.internal.provisional.IModelManager;
-import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
-import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
-import org.w3c.dom.Attr;
-import org.w3c.dom.Node;
 
 /**
- * Test a situation where no expected return type information is 
+ * Test a situation where no expected return type information is
  * available for a tag.
- * 
+ *
  * @author cbateman
  *
  */
-public class Test_bug_149743 extends TestCase 
+public class Test_bug_149743 extends BaseTestClass
 {
     private WebProjectTestEnvironment       _testEnv;
-    
-    protected void setUp() throws Exception 
+    private IFile							_jspFile;
+
+    @Override
+	protected void setUp() throws Exception
     {
         super.setUp();
 
         JSFTestUtil.setValidationEnabled(false);
-        
+
         _testEnv = new WebProjectTestEnvironment("Test_bug_149743_"+getName());
         _testEnv.createProject(false);
-        assertNotNull(_testEnv);       
+        assertNotNull(_testEnv);
         assertNotNull(_testEnv.getTestProject());
         assertTrue(_testEnv.getTestProject().isAccessible());
-        
-        JSFFacetedTestEnvironment jsfFacedEnv = new JSFFacetedTestEnvironment(_testEnv);
+
+        final JSFFacetedTestEnvironment jsfFacedEnv = new JSFFacetedTestEnvironment(_testEnv);
         jsfFacedEnv.initialize(IJSFCoreConstants.FACET_VERSION_1_1);
-        
+
         _testEnv.loadResourceInWebRoot(ContentAssistTestsPlugin.getDefault().getBundle(),
-                                      "/testdata/faces-config_bug149743.xml.data", 
+                                      "/testdata/faces-config_bug149743.xml.data",
                                       "/WEB-INF/faces-config.xml");
-        _testEnv.loadResourceInWebRoot(ContentAssistTestsPlugin.getDefault().getBundle(),
+        _jspFile = (IFile) _testEnv.loadResourceInWebRoot(ContentAssistTestsPlugin.getDefault().getBundle(),
                                       "/testdata/bug_149743.jsp.data",
                                       "/bug_149743.jsp");
-        
+
         final JDTTestEnvironment jdtTestEnv = new JDTTestEnvironment(_testEnv);
-        TestFileResource resource = new TestFileResource();
-        resource.load(ContentAssistTestsPlugin.getDefault().getBundle(), 
+        final TestFileResource resource = new TestFileResource();
+        resource.load(ContentAssistTestsPlugin.getDefault().getBundle(),
                       "/testdata/MyBean.java.data");
         jdtTestEnv.addSourceFile("src", "beans", "MyBean", resource.toString());
     }
@@ -87,110 +71,29 @@ public class Test_bug_149743 extends TestCase
      */
     public void testSanity() throws Exception
     {
-        ContextWrapper wrapper = null;
-        
-        try
-        {
-            wrapper = getDocumentContext();
-            final IStructuredDocumentContext context = wrapper.getContext();
-            final IDOMContextResolver resolver =
-                IStructuredDocumentContextResolverFactory.INSTANCE.
-                    getDOMContextResolver(context);
-            Node node = resolver.getNode();
-            JSFTestUtil.getIndexedRegion((IStructuredDocument) context.getStructuredDocument(), context.getDocumentPosition());
-            assertTrue(node instanceof Attr);
-            assertEquals("value", ((Attr)node).getNodeName());
-            assertEquals("#{myBean.property}", ((Attr)node).getNodeValue());
-        }
-        finally
-        {
-            if (wrapper != null)
-            {
-                wrapper.dispose();
-            }
-        }
+        assertELSanity(_jspFile, 529, "value" ,"#{myBean.property}");
+        assertELVariableSanity(_jspFile, "myBean");
     }
-    
+
     /**
      * Checks the scenario for Test_bug_149743
      */
     public void testCompletionProposalsForId() throws Exception
     {
-        ContextWrapper wrapper = null;
-        
-        try
+        final List<ICompletionProposal> proposals =
+        	getProposals(_jspFile, 529, 8);
+        assertEquals(2, proposals.size());
+        final Set<String>  names = new HashSet<String>();
+
+        for (final ICompletionProposal proposal : proposals)
         {
-            wrapper = getDocumentContext();
-            ITextRegionContextResolver  resolver = 
-                IStructuredDocumentContextResolverFactory.INSTANCE.
-                    getTextRegionResolver(wrapper.getContext());
-    
-            final String elText = resolver.getRegionText().trim();
-            assertNotNull(elText);
-
-            final ContentAssistStrategy strategy = 
-                ContentAssistParser.getPrefix
-                    (wrapper.getContext().getDocumentPosition() 
-                            - resolver.getStartOffset() + 1, elText);
-
-            List<?> proposals = strategy.getProposals(wrapper.getContext());
-            assertEquals(2, proposals.size());
-            Set<String>  names = new HashSet<String>();
-            
-            for (int i = 0; i < proposals.size(); i++)
-            {
-                names.add(((ICompletionProposal)proposals.get(i)).getDisplayString());
-            }
-            assertTrue(names.contains("class"));
-            assertTrue(names.contains("property"));
+            names.add(proposal.getDisplayString());
         }
-        finally
-        {
-            if (wrapper != null)
-            {
-                wrapper.dispose();
-            }
-        }
-    }
-    
-    private ContextWrapper getDocumentContext() throws Exception
-    {
-        IProject project = _testEnv.getTestProject();
-        IFile jspFile = project.getFile(new Path("/WebContent/bug_149743.jsp"));
-        assertTrue(jspFile.exists());
-        
-        final IModelManager modelManager = 
-            StructuredModelManager.getModelManager();
-
-        IStructuredModel model = null;
-        
-        model = modelManager.getModelForRead(jspFile);
-        assertTrue(model instanceof DOMModelForJSP);
-        final IStructuredDocumentContext context = 
-            IStructuredDocumentContextFactory.INSTANCE.
-                getContext(model.getStructuredDocument(), 529);
-        return new ContextWrapper(context, model);
+        assertTrue(names.contains("class"));
+        assertTrue(names.contains("property"));
     }
 
-    private static class ContextWrapper
-    {
-        private final IStructuredDocumentContext _context;
-        private final IStructuredModel  _model;
-        
-        ContextWrapper(final IStructuredDocumentContext context, final IStructuredModel model) {
-            super();
-            _context = context;
-            _model = model;
-        }
-        IStructuredDocumentContext getContext() {
-            return _context;
-        }
-        IStructuredModel getModel() {
-            return _model;
-        }
-        void dispose()
-        {
-            _model.releaseFromRead();
-        }
-    }
+
+
+
 }
