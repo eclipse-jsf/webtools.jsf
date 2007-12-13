@@ -13,7 +13,7 @@ import org.eclipse.wst.xml.core.internal.regions.DOMRegionContext;
 /**
  * Utility class to access EL symbols in jsp file.
  */
-final class JSPSourceUtil {
+public final class JSPSourceUtil {
 
     private JSPSourceUtil() {
         // utility class, no instances.

@@ -19,7 +19,7 @@ import org.eclipse.ui.IEditorPart;
  *  in order to defer determining the (access) method to link to until user actually clicks
  *  on the link, since determining takes too long.
  */
-class BeanSuffixHyperlink implements IHyperlink {
+class BeanSuffixHyperlink implements IHyperlink,ITestHyperlink {
 	private final IRegion _fRegion;
 	private final ISymbol _symbol;
 
@@ -66,7 +66,7 @@ class BeanSuffixHyperlink implements IHyperlink {
 	 * @see org.eclipse.jface.text.hyperlink.IHyperlink#open()
 	 */
 	public void open() {
-	    final IJavaElement element = determineJavaElement(_symbol);
+	    final IJavaElement element = determineJavaElement();
 	    if (element != null) {
 	        try {
 	            final IEditorPart editor = JavaUI.openInEditor(element);
@@ -80,7 +80,7 @@ class BeanSuffixHyperlink implements IHyperlink {
 	    }
 	}
 
-    private IJavaElement determineJavaElement(final ISymbol symbol2) {
+    public IJavaElement determineJavaElement() {
         if (_symbol instanceof IBeanPropertySymbol) {
             return determinePropertyElement((IBeanPropertySymbol) _symbol);
         }

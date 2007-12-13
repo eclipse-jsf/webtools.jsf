@@ -11,7 +11,7 @@ import org.eclipse.ui.IEditorPart;
 /**
  * Hyperlink for a IJavaElement to the corresponding java source
  */
-class JavaElementHyperlink implements IHyperlink {
+class JavaElementHyperlink implements IHyperlink, ITestHyperlink {
 	private final IRegion fRegion;
 	private final IJavaElement fElement;
 
@@ -67,4 +67,10 @@ class JavaElementHyperlink implements IHyperlink {
 		    JSFUiPlugin.log(IStatus.WARNING, e.getMessage(), e);
 		}
 	}
+
+	public IJavaElement determineJavaElement() {
+		return fElement;
+	}
+
+
 }
