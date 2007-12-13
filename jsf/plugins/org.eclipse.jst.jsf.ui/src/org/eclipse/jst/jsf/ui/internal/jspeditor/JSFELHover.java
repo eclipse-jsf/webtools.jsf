@@ -10,13 +10,13 @@ import org.eclipse.jst.jsf.context.symbol.IDescribedInDetail;
 import org.eclipse.jst.jsf.context.symbol.ISymbol;
 import org.eclipse.jst.jsf.core.internal.contentassist.el.SymbolInfo;
 
-/** This class creates hovers for ISymbols in an el expression that have a detailedDescription. 
+/** This class creates hovers for ISymbols in an el expression that have a detailedDescription.
  */
 public class JSFELHover implements ITextHover {
 
     private ISymbol hoveredSymbol = null;
 
-    public String getHoverInfo(ITextViewer textViewer, IRegion hoverRegion) {
+    public String getHoverInfo(final ITextViewer textViewer, final IRegion hoverRegion) {
         // hoveredSymbol set by getHoverRegion, which is called first
         if (hoveredSymbol instanceof IDescribedInDetail) {
             return ((IDescribedInDetail) hoveredSymbol).getDetailedDescription();
@@ -24,23 +24,23 @@ public class JSFELHover implements ITextHover {
         return null;
     }
 
-    public IRegion getHoverRegion(ITextViewer textViewer, int documentPosition) {
+    public IRegion getHoverRegion(final ITextViewer textViewer, final int documentPosition) {
         final IStructuredDocumentContext context = IStructuredDocumentContextFactory.INSTANCE.getContext(textViewer,
                 documentPosition);
         hoveredSymbol = null;
-        Region elRegion = JSPSourceUtil.findELRegion(context);
+        final Region elRegion = JSPSourceUtil.findELRegion(context);
         if (elRegion != null) {
-            SymbolInfo symbolInfo = JSPSourceUtil.determineSymbolInfo(context, elRegion, documentPosition);
+            final SymbolInfo symbolInfo = JSPSourceUtil.determineSymbolInfo(context, elRegion, documentPosition);
             if (symbolInfo == null) {
                 return null;
             }
             final Region relativeRegion = symbolInfo.getRelativeRegion();
-            Region symbolRegion = new Region(elRegion.getOffset()
+            final Region symbolRegion = new Region(elRegion.getOffset()
                     + relativeRegion.getOffset(), relativeRegion.getLength());
             hoveredSymbol = symbolInfo.getSymbol();
             return symbolRegion;
         }
         return null;
     }
-    
+
 }

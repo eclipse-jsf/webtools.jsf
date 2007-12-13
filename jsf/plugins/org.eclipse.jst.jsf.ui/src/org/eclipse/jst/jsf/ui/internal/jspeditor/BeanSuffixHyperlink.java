@@ -20,25 +20,17 @@ import org.eclipse.ui.IEditorPart;
  *  on the link, since determining takes too long.
  */
 class BeanSuffixHyperlink implements IHyperlink {
-	private final IRegion fRegion;
-	private final ISymbol symbol;
+	private final IRegion _fRegion;
+	private final ISymbol _symbol;
 
-    /**Creates a BeanSuffixHyperlink for a bean property symbol
+    /**
+     * Creates a BeanSuffixHyperlink for a symbol
      * @param region - the region of the hyperlink
      * @param symbol
      */
-    public BeanSuffixHyperlink(final IRegion region, final IBeanPropertySymbol symbol) {
-        fRegion = region;
-        this.symbol = symbol;
-    }
-
-    /**Creates a BeanSuffixHyperlink for a bean method symbol
-     * @param region - the region of the hyperlink
-     * @param symbol
-     */
-    public BeanSuffixHyperlink(final IRegion region, final IBeanMethodSymbol symbol) {
-        fRegion = region;
-        this.symbol = symbol;
+    public BeanSuffixHyperlink(final IRegion region, final ISymbol symbol) {
+        _fRegion = region;
+        _symbol = symbol;
     }
 
 	/*
@@ -47,7 +39,7 @@ class BeanSuffixHyperlink implements IHyperlink {
 	 * @see org.eclipse.jface.text.hyperlink.IHyperlink#getHyperlinkRegion()
 	 */
 	public IRegion getHyperlinkRegion() {
-		return fRegion;
+		return _fRegion;
 	}
 
 	/*
@@ -74,7 +66,7 @@ class BeanSuffixHyperlink implements IHyperlink {
 	 * @see org.eclipse.jface.text.hyperlink.IHyperlink#open()
 	 */
 	public void open() {
-	    final IJavaElement element = determineJavaElement(symbol);
+	    final IJavaElement element = determineJavaElement(_symbol);
 	    if (element != null) {
 	        try {
 	            final IEditorPart editor = JavaUI.openInEditor(element);
@@ -89,11 +81,11 @@ class BeanSuffixHyperlink implements IHyperlink {
 	}
 
     private IJavaElement determineJavaElement(final ISymbol symbol2) {
-        if (symbol instanceof IBeanPropertySymbol) {
-            return determinePropertyElement((IBeanPropertySymbol) symbol);
+        if (_symbol instanceof IBeanPropertySymbol) {
+            return determinePropertyElement((IBeanPropertySymbol) _symbol);
         }
-        if (symbol instanceof IBeanMethodSymbol) {
-            return JavaUtil.findCorrespondingMethod((IBeanMethodSymbol) symbol);
+        if (_symbol instanceof IBeanMethodSymbol) {
+            return JavaUtil.findCorrespondingMethod((IBeanMethodSymbol) _symbol);
         }
         return null;
     }

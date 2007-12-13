@@ -23,9 +23,9 @@ final class JSPSourceUtil {
      * @param context - the IStructuredDocumentContext
      * @return region of el expression, null if context doesn't point to an el expression
      */
-    public static Region findELRegion(IStructuredDocumentContext context) {
+    public static Region findELRegion(final IStructuredDocumentContext context) {
         if (context != null) {
-            ITextRegionContextResolver resolver = IStructuredDocumentContextResolverFactory.INSTANCE
+            final ITextRegionContextResolver resolver = IStructuredDocumentContextResolverFactory.INSTANCE
                     .getTextRegionResolver(context);
 
             if (resolver != null) {
@@ -45,22 +45,22 @@ final class JSPSourceUtil {
         return null;
     }
 
-    /**Determines symbol and symbol region at a given document position 
+    /**Determines symbol and symbol region at a given document position
      * @param context - the IStructuredDocumentContext
      * @param elRegion - the region of the el expression to consider
      * @param documentPosition - the document position to get the symbol for
      * @return SymbolInfo
      */
-    public static SymbolInfo determineSymbolInfo(IStructuredDocumentContext context, Region elRegion,
-            int documentPosition) {
+    public static SymbolInfo determineSymbolInfo(final IStructuredDocumentContext context, final Region elRegion,
+            final int documentPosition) {
         if (context != null && elRegion != null) {
             try {
                 String elText;
                 elText = context.getStructuredDocument().get(elRegion.getOffset(), elRegion.getLength());
-                SymbolInfo symbolInfo = ContentAssistParser.getSymbolInfo(context, documentPosition
+                final SymbolInfo symbolInfo = ContentAssistParser.getSymbolInfo(context, documentPosition
                         - elRegion.getOffset() + 1, elText);
                 return symbolInfo;
-            } catch (BadLocationException e) {
+            } catch (final BadLocationException e) {
                 // well, so we simply have no symbol, no reason to worry (or
                 // log...)
                 return null;
