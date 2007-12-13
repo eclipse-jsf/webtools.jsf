@@ -7,7 +7,7 @@
  *
  * Contributors:
  *    Oracle - initial API and implementation
- *******************************************************************************/ 
+ *******************************************************************************/
 package org.eclipse.jst.jsf.core.tests.util;
 
 import java.io.File;
@@ -15,11 +15,19 @@ import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
 import java.io.IOException;
 
+import junit.framework.Assert;
+
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jst.j2ee.internal.web.archive.operations.WebFacetProjectCreationDataModelProvider;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.IDOMContextResolver;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
+import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
+import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
+import org.eclipse.jst.jsf.context.symbol.ISymbol;
 import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryRegistryUtil;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.ArchiveFile;
@@ -27,18 +35,26 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistry;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryFactory;
 import org.eclipse.jst.jsf.core.tests.TestsPlugin;
+import org.eclipse.jst.jsf.designtime.resolver.ISymbolContextResolver;
+import org.eclipse.jst.jsf.designtime.resolver.StructuredDocumentSymbolResolverFactory;
+import org.eclipse.jst.jsp.core.internal.domdocument.DOMModelForJSP;
 import org.eclipse.wst.common.componentcore.datamodel.properties.IFacetProjectCreationDataModelProperties;
 import org.eclipse.wst.common.frameworks.datamodel.DataModelFactory;
 import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
+import org.eclipse.wst.sse.core.StructuredModelManager;
+import org.eclipse.wst.sse.core.internal.provisional.IModelManager;
+import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
+import org.w3c.dom.Attr;
+import org.w3c.dom.Node;
 
-public final class JSFCoreUtilHelper 
+public final class JSFCoreUtilHelper
 {
     private static final String JSFRUNTIMEJARSDIR = "jsfRuntimeJarsDirectoryV";
     private static String JSF11Path = "";
     private static String JSF12Path = "";
 
 	/**
-	 * Constructs jsfLib using this plugin's install path and "testfiles" subdirectory 
+	 * Constructs jsfLib using this plugin's install path and "testfiles" subdirectory
 	 * @param id
 	 * @param name
 	 * @param archivefiles
@@ -46,16 +62,16 @@ public final class JSFCoreUtilHelper
 	 * @return
 	 */
 	public static JSFLibrary constructJSFLib(
-			String id, 
-			String name,			
-			String[] archivefiles, 
-			boolean bImpl) {
-	
-		String pathTestFiles = TestsPlugin.getInstallLocation().getPath() + "testfiles/";
-		
+			final String id,
+			final String name,
+			final String[] archivefiles,
+			final boolean bImpl) {
+
+		final String pathTestFiles = TestsPlugin.getInstallLocation().getPath() + "testfiles/";
+
 		return constructJSFLib(id, name, pathTestFiles, archivefiles, bImpl);
 	}
-	
+
 	/**
 	 * @param id
 	 * @param name
@@ -65,42 +81,42 @@ public final class JSFCoreUtilHelper
 	 * @return JSF Library
 	 */
 	public static JSFLibrary constructJSFLib(
-			String id, 
-			String name,
-			String basePathToArchiveFiles,
-			String[] archivefiles, 
-			boolean bImpl) {
-		
-		ArchiveFile archiveFile = null;	
-		String testData;		
-		JSFLibrary jsfLib = JSFLibraryRegistryFactory.eINSTANCE.createJSFLibrary();
+			final String id,
+			final String name,
+			final String basePathToArchiveFiles,
+			final String[] archivefiles,
+			final boolean bImpl) {
+
+		ArchiveFile archiveFile = null;
+		String testData;
+		final JSFLibrary jsfLib = JSFLibraryRegistryFactory.eINSTANCE.createJSFLibrary();
 //		jsfLib.setID(id);
-		jsfLib.setName(name);	
+		jsfLib.setName(name);
 		jsfLib.setImplementation(bImpl);
-		
-		for (int i = 0; i < archivefiles.length; i++) {
-			testData = basePathToArchiveFiles + archivefiles[i];						
+
+		for (final String archivefile2 : archivefiles) {
+			testData = basePathToArchiveFiles + archivefile2;
 			archiveFile = JSFLibraryRegistryFactory.eINSTANCE.createArchiveFile();
 			archiveFile.setRelativeToWorkspace(false);
-			archiveFile.setSourceLocation(testData);			
-			archiveFile.setJSFLibrary(jsfLib);			
+			archiveFile.setSourceLocation(testData);
+			archiveFile.setJSFLibrary(jsfLib);
 		}
-		
+
 		return jsfLib;
 	}
 
 	/**
 	 * Create a Dynamic Web application with given name using default operation.
 	 * If project with given name already exists, then it returns that project.
-	 *   
+	 *
 	 * @param aProjectName Project name.
 	 * @return IProject instance.
 	 * @throws Exception on error.
 	 */
-	public static IProject createWebProject(String aProjectName) throws Exception {
-		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(aProjectName);
+	public static IProject createWebProject(final String aProjectName) throws Exception {
+		final IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(aProjectName);
 		if (!project.exists()) {
-			IDataModel dataModel = DataModelFactory.createDataModel(new WebFacetProjectCreationDataModelProvider());
+			final IDataModel dataModel = DataModelFactory.createDataModel(new WebFacetProjectCreationDataModelProvider());
 			dataModel.setProperty(IFacetProjectCreationDataModelProperties.FACET_PROJECT_NAME, aProjectName);
 			dataModel.getDefaultOperation().execute(new NullProgressMonitor(), null);
 		}
@@ -112,7 +128,7 @@ public final class JSFCoreUtilHelper
 	 */
 	public static void createJSFLibraryRegistry(){
 		if (JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry().getAllJSFLibraries().size() < 2){
-			//create Impl 
+			//create Impl
 			JSFLibrary lib = constructJSFLib("AN-IMPL-LIB", "/testfiles/JSFLib/", true, false);
 			JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry().addJSFLibrary(lib);
 			//create non-Impl.   Uses same jars but declares it to be non implementation
@@ -122,7 +138,7 @@ public final class JSFCoreUtilHelper
 			lib = constructJSFLib("AN-IMPL-LIB-PP", "/testfiles/JSFLib/", true, true);
 			JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry().addJSFLibrary(lib);
 			//create plugin-non impl
-			
+
 		}
 	}
 
@@ -131,7 +147,7 @@ public final class JSFCoreUtilHelper
 	 * Note that the returned instance is not associated with a resource and so
 	 * cannot be loaded or saved unless a resource is created and the returned
 	 * instance is set in the resource contents.
-	 * 
+	 *
 	 * @return JSFLibraryRegistry instance.
 	 */
 	public static JSFLibraryRegistry getNewJSFLibraryRegistry() {
@@ -139,64 +155,65 @@ public final class JSFCoreUtilHelper
 	}
 
 	/**
-	 * Convenience method to get the JSFLibraryRegistry instance 
+	 * Convenience method to get the JSFLibraryRegistry instance
 	 * (which will cause the loadJSFLibraryRegistry() and
 	 * loadJSFLibraryExtensions() methods to be called and will
 	 * subsequently allow saveJSFLibraryRegistry() to be called,
 	 * if desired).
-	 * 
+	 *
 	 * @return JSFLibraryRegistry instance from JSFCorePlugin.
 	 */
 	public static JSFLibraryRegistry getJSFLibraryRegistryFromJSFLibraryHelper() {
-		return JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry(); 
+		return JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry();
 	}
-	
+
 	/**
 	 * Creates a JSF Library from all the jars and zips found at the relative path from this plugin
-	 * 
+	 *
 	 * @param name
 	 * @param relPathToArchives
 	 * @param isImpl
-	 * @param isFakedPlugginLib 
+	 * @param isFakedPlugginLib
 	 * @return JSFLibrary
 	 */
 	public static JSFLibrary constructJSFLib(
-			String name,			
-			String relPathToArchives, 
-			boolean isImpl,
-			boolean isFakedPlugginLib) {		
-		
+			final String name,
+			final String relPathToArchives,
+			final boolean isImpl,
+			final boolean isFakedPlugginLib) {
+
 		JSFLibrary jsfLib = null;
 		if (isFakedPlugginLib){
 			jsfLib = JSFLibraryRegistryFactory.eINSTANCE.createPluginProvidedJSFLibrary();
 //			jsfLib.setID("fakePluginLib_"+name);
-		}
-		else
+		} else {
 			jsfLib = JSFLibraryRegistryFactory.eINSTANCE.createJSFLibrary();
-		
-		jsfLib.setName(name);	
+		}
+
+		jsfLib.setName(name);
 		jsfLib.setImplementation(isImpl);
-		
-		File pathTestFiles = new File(TestsPlugin.getInstallLocation().getPath() 
+
+		final File pathTestFiles = new File(TestsPlugin.getInstallLocation().getPath()
 								+ File.separator + relPathToArchives);
-		FilenameFilter jars = new FilenameFilter(){
+		final FilenameFilter jars = new FilenameFilter(){
 			public boolean accept(File dir, String name_) {
 				if (name_.length() >=5){
 					String lastChars = name_.toLowerCase().substring(name_.length() - 4);
-					if (lastChars.equals(".jar") || lastChars.equals(".zip"))
+					if (lastChars.equals(".jar") || lastChars.equals(".zip")) {
 						return true;
+					}
 				}
 				return false;
-			}			
+			}
 		};
-		
-		String[] fileNames = pathTestFiles.list(jars);
-		for(int i=0;i < fileNames.length ;i++){
-			String fileName = pathTestFiles.getAbsolutePath().concat(File.separator).concat(fileNames[i]);
-			ArchiveFile archiveFile = JSFLibraryRegistryFactory.eINSTANCE.createArchiveFile();
+
+		final String[] fileNames = pathTestFiles.list(jars);
+		for (final String fileName2 : fileNames) {
+			final String fileName = pathTestFiles.getAbsolutePath().concat(File.separator).concat(fileName2);
+			final ArchiveFile archiveFile = JSFLibraryRegistryFactory.eINSTANCE.createArchiveFile();
 			archiveFile.setRelativeToWorkspace(false);
-			archiveFile.setSourceLocation(fileName);			
-			archiveFile.setJSFLibrary(jsfLib);		
+			archiveFile.setSourceLocation(fileName);
+			archiveFile.setJSFLibrary(jsfLib);
 		}
 
 		return jsfLib;
@@ -204,11 +221,11 @@ public final class JSFCoreUtilHelper
 
     /**
      * @param jsfVersion
-     * @return Directory name for jsf runtime jars.  
+     * @return Directory name for jsf runtime jars.
      * <br>Will be null if not set in JSFRUNTIMEJARSDIRV<b>X.X</b> system property
      */
-    public static String getJSFRuntimeJarsDirectory(JSFVersion jsfVersion) {
-        String propertyName = JSFRUNTIMEJARSDIR+jsfVersion.toString();
+    public static String getJSFRuntimeJarsDirectory(final JSFVersion jsfVersion) {
+        final String propertyName = JSFRUNTIMEJARSDIR+jsfVersion.toString();
         String res = System.getProperty(propertyName);
         if (res == null) {
             //check env var also
@@ -233,24 +250,24 @@ public final class JSFCoreUtilHelper
     }
 
     /**
-     * Returns true if the environment property holding the name of the directory that points at the 
-     * runtime jars exist.  
+     * Returns true if the environment property holding the name of the directory that points at the
+     * runtime jars exist.
      * <p>
      * The expected property name is jsfRuntimeJarsDirectoryVXX where XX is the
      * JSFVersion.  <br>i.e "jsfRuntimeJarsDirectoryV1.1", or "jsfRuntimeJarsDirectoryV1.2"
      * <p>
      * It <b>does</b> check for the existence of the directory.<br>
      * It <b>does not</b> check for any jars within that directory.
-     * 
+     *
      * @param jsfVersion as String.  ie. "1.1", or "1.2"
      * @return true if the property is set
      */
-    public static boolean isJSFRuntimeJarsDirectoryPropertySet(JSFVersion jsfVersion) {
-        String dirName = getJSFRuntimeJarsDirectory(jsfVersion);
+    public static boolean isJSFRuntimeJarsDirectoryPropertySet(final JSFVersion jsfVersion) {
+        final String dirName = getJSFRuntimeJarsDirectory(jsfVersion);
         if (dirName != null && dirName.trim().length() != 0)
         {
-            File dir = new File(dirName);
-            
+            final File dir = new File(dirName);
+
             if (dir.exists() && dir.isDirectory())
             {
                 return true;
@@ -260,7 +277,7 @@ public final class JSFCoreUtilHelper
                 System.err.printf("Dir: %s either doesn't exists or is not a directory\n",dirName);
             }
         }
-        else 
+        else
         {
             System.err.println("dirName is null");
         }
@@ -268,32 +285,32 @@ public final class JSFCoreUtilHelper
         return false;
     }
 
-    public static boolean createRegistryAndAddReferences(JSFFacetedTestEnvironment jsfFacedEnv, String[] archiveFiles, JSFVersion jsfVersion) throws CoreException {
-        JSFLibraryRegistry jsfLibRegistry = 
+    public static boolean createRegistryAndAddReferences(final JSFFacetedTestEnvironment jsfFacedEnv, final String[] archiveFiles, final JSFVersion jsfVersion) throws CoreException {
+        final JSFLibraryRegistry jsfLibRegistry =
             JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry();
 
        if (archiveFiles != null)
         {
             final String libIDandName = "_internalJSFRuntimeLibraryV" + jsfVersion + "_";
-            JSFLibrary jsfImpl = JSFCoreUtilHelper.
+            final JSFLibrary jsfImpl = JSFCoreUtilHelper.
                 constructJSFLib(libIDandName, libIDandName,"", archiveFiles, true);
             jsfLibRegistry.addJSFLibrary(jsfImpl);
             jsfFacedEnv.addJSFLibraryReference(jsfImpl, true);
             return true;
         }
-       
+
        return false;
     }
 
-    public static String[] getJSFRuntimeJarNames(JSFVersion version) throws IOException
+    public static String[] getJSFRuntimeJarNames(final JSFVersion version) throws IOException
     {
         String[] jarNames = null;
-        String dirName = getJSFRuntimeJarsDirectory(version);
+        final String dirName = getJSFRuntimeJarsDirectory(version);
         System.out.printf("Using dirName: %s\n", dirName);
         if (dirName != null) {
-            File dir = new File(dirName);
+            final File dir = new File(dirName);
             if (dir.exists() && dir.isDirectory()) {
-                File[] jars = dir.listFiles();
+                final File[] jars = dir.listFiles();
                 if (jars != null && jars.length > 0) {
                     jarNames = new String[jars.length];
                     for (int i = 0; i < jars.length; i++) {
@@ -313,13 +330,13 @@ public final class JSFCoreUtilHelper
         return jarNames;
     }
 
-    public static boolean isJSFRuntimeJarsDirectoryValid(JSFVersion jsfVersion)
+    public static boolean isJSFRuntimeJarsDirectoryValid(final JSFVersion jsfVersion)
     {
         try
         {
             return getJSFRuntimeJarNames(jsfVersion) != null;
         }
-        catch (IOException e)
+        catch (final IOException e)
         {
             return false;
         }
@@ -333,7 +350,7 @@ public final class JSFCoreUtilHelper
      * @return true if successful
      * @throws Exception
      */
-    public static boolean addJSFRuntimeJarsToClasspath(JSFVersion jsfVersion, JSFFacetedTestEnvironment jsfFacetedTestEnv) throws Exception 
+    public static boolean addJSFRuntimeJarsToClasspath(final JSFVersion jsfVersion, final JSFFacetedTestEnvironment jsfFacetedTestEnv) throws Exception
     {
         final String[] jarNames = getJSFRuntimeJarNames(jsfVersion);
         return createRegistryAndAddReferences(jsfFacetedTestEnv, jarNames, jsfVersion);
@@ -345,8 +362,8 @@ public final class JSFCoreUtilHelper
      * @return a message informing a test suite runner that the environment variable
      * isn't correct for finding JSF library jar files
      */
-    public static String getTestRequiresJSFRuntimeMessage(Class<?> testClass, JSFVersion jsfVersion) {
-        StringBuffer sb = new StringBuffer();
+    public static String getTestRequiresJSFRuntimeMessage(final Class<?> testClass, final JSFVersion jsfVersion) {
+        final StringBuffer sb = new StringBuffer();
         sb.append("Unable to run test suite \"");
         sb.append(testClass.getName());
         sb.append("\"; JSF runtime (v");
@@ -361,18 +378,18 @@ public final class JSFCoreUtilHelper
 //	/**
 //	 * Creates a JSF Library from all the jars and zips found at the relative
 //	 * path from this plugin.
-//	 * 
+//	 *
 //	 * @param ID
 //	 * @param name
 //	 * @param relPathToArchives
 //	 * @param isImpl
-//	 * @param isFakedPlugginLib 
+//	 * @param isFakedPlugginLib
 //	 * @return JSFLibrary
 //	 */
 //	public static JSFLibrary constructJSFLib(
 //			String ID,
-//			String name,			
-//			String relPathToArchives, 
+//			String name,
+//			String relPathToArchives,
 //			boolean isImpl,
 //			boolean isFakedPlugginLib) {
 //
@@ -381,4 +398,88 @@ public final class JSFCoreUtilHelper
 //		return jsfLib;
 //	}
 
+	/**
+	 * @param jspFile
+	 * @param offset
+	 * @return the context wrapper. Caller must ensure dispose is called so
+	 *         model is released when finished.
+	 * @throws Exception
+	 */
+	public static void assertELSanity(final IFile jspFile, final int offset,
+			final String attrName, final String elExpr) throws Exception {
+		ContextWrapper wrapper = null;
+		try {
+			wrapper = JSFCoreUtilHelper.getDocumentContext(jspFile, offset);
+			final IStructuredDocumentContext context = wrapper.getContext();
+			final IDOMContextResolver resolver = IStructuredDocumentContextResolverFactory.INSTANCE
+					.getDOMContextResolver(context);
+			final Node node = resolver.getNode();
+			// bJSFTestUtil.getIndexedRegion((IStructuredDocument)
+			// context.getStructuredDocument(), 589);
+			Assert.assertTrue(node instanceof Attr);
+			Assert.assertEquals(attrName, ((Attr) node).getNodeName());
+			Assert.assertEquals(elExpr, ((Attr) node).getNodeValue());
+		} finally {
+			if (wrapper != null) {
+				wrapper.dispose();
+			}
+		}
+	}
+
+	public static void assertELVariableSanity(final IFile jspFile,
+			final String varName) throws Exception {
+		ContextWrapper contextWrapper = null;
+
+		try {
+			contextWrapper = JSFCoreUtilHelper.getDocumentContext(jspFile, -1);
+			final ISymbolContextResolver symbolResolver = StructuredDocumentSymbolResolverFactory
+					.getInstance().getSymbolContextResolver(
+							contextWrapper.getContext());
+			final ISymbol bundleVar = symbolResolver.getVariable(varName);
+			Assert.assertNotNull(bundleVar);
+		} finally {
+			if (contextWrapper != null) {
+				contextWrapper.dispose();
+			}
+		}
+	}
+
+
+	public static ContextWrapper getDocumentContext(final IFile jspFile,
+			final int offset) throws Exception {
+		final IModelManager modelManager = StructuredModelManager
+				.getModelManager();
+
+		IStructuredModel model = null;
+
+		model = modelManager.getModelForRead(jspFile);
+		Assert.assertTrue(model instanceof DOMModelForJSP);
+		final IStructuredDocumentContext context = IStructuredDocumentContextFactory.INSTANCE
+				.getContext(model.getStructuredDocument(), offset);
+		return new ContextWrapper(context, model);
+	}
+
+    public static class ContextWrapper {
+		private final IStructuredDocumentContext _context;
+		private final IStructuredModel _model;
+
+		public ContextWrapper(final IStructuredDocumentContext context,
+				final IStructuredModel model) {
+			super();
+			_context = context;
+			_model = model;
+		}
+
+		public IStructuredDocumentContext getContext() {
+			return _context;
+		}
+
+		public IStructuredModel getModel() {
+			return _model;
+		}
+
+		public void dispose() {
+			_model.releaseFromRead();
+		}
+	}
 }

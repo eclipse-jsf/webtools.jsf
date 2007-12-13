@@ -9,6 +9,7 @@ import org.eclipse.jst.jsf.context.symbol.IBeanPropertySymbol;
 import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.core.internal.contentassist.el.ContentAssistParser;
 import org.eclipse.jst.jsf.core.internal.contentassist.el.SymbolInfo;
+import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
 import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
@@ -58,14 +59,14 @@ public class TestContentAssistParser extends BaseTestClass
 
 	public void testSanity() throws Exception
 	{
-		assertELSanity(_jspFile, 518, "value", "#{}");
-		assertELSanity(_jspFile, 547, "value", "#{   }");
-		assertELSanity(_jspFile, 579, "value", "#{myBean}");
-		assertELSanity(_jspFile, 614, "value", "#{myBean.property}");
-		assertELSanity(_jspFile, 658, "value", "#{paramValues.foo}");
-		assertELSanity(_jspFile, 706, "action", "#{myBean.actionMethod}");
+		JSFCoreUtilHelper.assertELSanity(_jspFile, 518, "value", "#{}");
+		JSFCoreUtilHelper.assertELSanity(_jspFile, 547, "value", "#{   }");
+		JSFCoreUtilHelper.assertELSanity(_jspFile, 579, "value", "#{myBean}");
+		JSFCoreUtilHelper.assertELSanity(_jspFile, 614, "value", "#{myBean.property}");
+		JSFCoreUtilHelper.assertELSanity(_jspFile, 658, "value", "#{paramValues.foo}");
+		JSFCoreUtilHelper.assertELSanity(_jspFile, 706, "action", "#{myBean.actionMethod}");
 
-		assertELVariableSanity(_jspFile, "myBean");
+		JSFCoreUtilHelper.assertELVariableSanity(_jspFile, "myBean");
 	}
 
 
@@ -75,13 +76,13 @@ public class TestContentAssistParser extends BaseTestClass
 
 	public void testGetSymbolInfo() throws Exception
 	{
-		assertNull(ContentAssistParser.getSymbolInfo(getDocumentContext(_jspFile, 518).getContext(), 1, null));
-		assertNull(ContentAssistParser.getSymbolInfo(getDocumentContext(_jspFile, 518).getContext(), 1, ""));
-		assertNull(ContentAssistParser.getSymbolInfo(getDocumentContext(_jspFile, 547).getContext(), 1, "   "));
+		assertNull(ContentAssistParser.getSymbolInfo(JSFCoreUtilHelper.getDocumentContext(_jspFile, 518).getContext(), 1, null));
+		assertNull(ContentAssistParser.getSymbolInfo(JSFCoreUtilHelper.getDocumentContext(_jspFile, 518).getContext(), 1, ""));
+		assertNull(ContentAssistParser.getSymbolInfo(JSFCoreUtilHelper.getDocumentContext(_jspFile, 547).getContext(), 1, "   "));
 
 		// variable test
 		SymbolInfo symbolInfo =
-			ContentAssistParser.getSymbolInfo(getDocumentContext(_jspFile, 579).getContext(), 1, "myBean");
+			ContentAssistParser.getSymbolInfo(JSFCoreUtilHelper.getDocumentContext(_jspFile, 579).getContext(), 1, "myBean");
 		assertNotNull(symbolInfo);
 		assertEquals("myBean", symbolInfo.getSymbol().getName());
 		assertTrue(symbolInfo.getSymbol() instanceof IBeanInstanceSymbol);
@@ -90,7 +91,7 @@ public class TestContentAssistParser extends BaseTestClass
 
 		// property test
 		symbolInfo =
-			ContentAssistParser.getSymbolInfo(getDocumentContext(_jspFile, 614).getContext(), 8, "myBean.property");
+			ContentAssistParser.getSymbolInfo(JSFCoreUtilHelper.getDocumentContext(_jspFile, 614).getContext(), 8, "myBean.property");
 		assertNotNull(symbolInfo);
 		assertEquals("property", symbolInfo.getSymbol().getName());
 		assertTrue(symbolInfo.getSymbol() instanceof IBeanPropertySymbol);
@@ -98,7 +99,7 @@ public class TestContentAssistParser extends BaseTestClass
 
 		// method test
 		symbolInfo =
-			ContentAssistParser.getSymbolInfo(getDocumentContext(_jspFile, 706).getContext(), 8, "myBean.actionMethod");
+			ContentAssistParser.getSymbolInfo(JSFCoreUtilHelper.getDocumentContext(_jspFile, 706).getContext(), 8, "myBean.actionMethod");
 		assertNotNull(symbolInfo);
 		assertEquals("actionMethod", symbolInfo.getSymbol().getName());
 		assertTrue(symbolInfo.getSymbol() instanceof IBeanMethodSymbol);

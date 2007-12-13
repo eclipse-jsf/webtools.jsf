@@ -18,6 +18,7 @@ import java.util.Set;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jst.jsf.core.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
 import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
@@ -71,8 +72,8 @@ public class Test_bug_149743 extends BaseTestClass
      */
     public void testSanity() throws Exception
     {
-        assertELSanity(_jspFile, 529, "value" ,"#{myBean.property}");
-        assertELVariableSanity(_jspFile, "myBean");
+    	JSFCoreUtilHelper.assertELSanity(_jspFile, 529, "value" ,"#{myBean.property}");
+    	JSFCoreUtilHelper.assertELVariableSanity(_jspFile, "myBean");
     }
 
     /**

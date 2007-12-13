@@ -7,26 +7,29 @@
  *
  * Contributors:
  *    Oracle - initial API and implementation
- *    
+ *
  ********************************************************************************/
 package org.eclipse.jst.jsf.ui.tests;
-
-import org.eclipse.jst.jsf.ui.tests.classpath.JSFLibrariesPreferencePageTestCases;
-import org.eclipse.jst.jsf.ui.tests.classpath.JSFLibraryWizardTestCases;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
+import org.eclipse.jst.jsf.ui.tests.classpath.JSFLibrariesPreferencePageTestCases;
+import org.eclipse.jst.jsf.ui.tests.classpath.JSFLibraryWizardTestCases;
+import org.eclipse.jst.jsf.ui.tests.jspeditor.TestELHyperlinkDetector;
+import org.eclipse.jst.jsf.ui.tests.jspeditor.TestJSFELHover;
+
 public class JSFUIAllTests {
 
 	public static Test suite() {
-		TestSuite suite = new TestSuite("Test for org.eclipse.jst.jsf.ui.tests");
+		final TestSuite suite = new TestSuite("Test for org.eclipse.jst.jsf.ui.tests");
 		//$JUnit-BEGIN$
 		suite.addTestSuite(JSFLibrariesPreferencePageTestCases.class);
 		suite.addTestSuite(JSFLibraryWizardTestCases.class);
-				
+		suite.addTestSuite(TestELHyperlinkDetector.class);
+		suite.addTestSuite(TestJSFELHover.class);
 		//$JUnit-END$
 		return suite;
-	}	
-	
+	}
+
 }

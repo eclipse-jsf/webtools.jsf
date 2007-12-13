@@ -8,6 +8,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jst.jsf.core.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
 import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
@@ -77,11 +78,11 @@ public class TestIdCompletionStrategy extends BaseTestClass
 
 	public void testSanity() throws Exception
 	{
-		assertELSanity(_jspFile, 518, "value", "#{}");
-		assertELSanity(_jspFile, 547, "value", "#{   }");
-		assertELSanity(_jspFile, 579, "value", "#{myBean}");
-		assertELSanity(_jspFile, 614, "value", "#{myBean.property}");
-		assertELSanity(_jspFile, 658, "value", "#{paramValues.foo}");
+		JSFCoreUtilHelper.assertELSanity(_jspFile, 518, "value", "#{}");
+		JSFCoreUtilHelper.assertELSanity(_jspFile, 547, "value", "#{   }");
+		JSFCoreUtilHelper.assertELSanity(_jspFile, 579, "value", "#{myBean}");
+		JSFCoreUtilHelper.assertELSanity(_jspFile, 614, "value", "#{myBean.property}");
+		JSFCoreUtilHelper.assertELSanity(_jspFile, 658, "value", "#{paramValues.foo}");
 
 		assertEquals(12, DISPLAY_NAMES.size());
 	}

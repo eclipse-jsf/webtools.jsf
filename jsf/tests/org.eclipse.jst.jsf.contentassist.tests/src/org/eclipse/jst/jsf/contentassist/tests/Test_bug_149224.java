@@ -16,7 +16,9 @@ import java.util.List;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jst.jsf.core.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
 import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
+import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper.ContextWrapper;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.jst.jsf.test.util.TestFileResource;
@@ -79,9 +81,9 @@ public class Test_bug_149224 extends BaseTestClass
 
         try
         {
-        	assertELSanity(_jspFile, 589, "value", "#{bundle1.}");
-        	assertELSanity(_jspFile, 630, "value", "#{bundle1.x}");
-            assertELVariableSanity(_jspFile, "bundle1");
+        	JSFCoreUtilHelper.assertELSanity(_jspFile, 589, "value", "#{bundle1.}");
+        	JSFCoreUtilHelper.assertELSanity(_jspFile, 630, "value", "#{bundle1.x}");
+        	JSFCoreUtilHelper.assertELVariableSanity(_jspFile, "bundle1");
         }
         finally
         {

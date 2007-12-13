@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Oracle Corporation - initial API and implementation
  *******************************************************************************/
@@ -41,31 +41,31 @@ import org.w3c.dom.Node;
 
 /**
  * Test utility methods
- * 
+ *
  * @author cbateman
  *
  */
-public class JSFTestUtil
+public final class JSFTestUtil
 {
     /**
      * Used to turn off build validation to speed up testing
-     * 
+     *
      * @param isEnabled
-     * @throws InvocationTargetException 
+     * @throws InvocationTargetException
      * @throws InvocationTargetException
      */
-    public static void setValidationEnabled(boolean isEnabled) throws InvocationTargetException
+    public static void setValidationEnabled(final boolean isEnabled) throws InvocationTargetException
     {
         final GlobalConfiguration config = new GlobalConfiguration(ConfigurationManager.getManager().getGlobalConfiguration());
         config.setDisableAllValidation(!isEnabled);
         config.passivate();
         config.store();
     }
-    
+
     /**
-     * @param proxied 
-     * @param proxyHostName 
-     * @param proxyPort 
+     * @param proxied
+     * @param proxyHostName
+     * @param proxyPort
      */
     public static void setInternetProxyPreferences(final boolean proxied, final String proxyHostName, final String proxyPort)
     {
@@ -94,11 +94,11 @@ public class JSFTestUtil
 //            proxy.setProxiesEnabled(false);
 //        }
     }
-    
+
     /**
      * Loads the source file in bundle called fileName into the jdtTestEnvironment
      * under srcFolderName/packageName.beanClassName
-     * 
+     *
      * @param bundle
      * @param fileName
      * @param beanClassName
@@ -107,47 +107,47 @@ public class JSFTestUtil
      * @param jdtTestEnvironment
      * @throws Exception
      */
-    public static void loadSourceClass(final Bundle bundle, 
-                                       final String fileName, 
+    public static void loadSourceClass(final Bundle bundle,
+                                       final String fileName,
                                        final String beanClassName,
                                        final String srcFolderName,
                                        final String packageName,
                                        final JDTTestEnvironment jdtTestEnvironment) throws Exception
     {
-        TestFileResource codeRes = new TestFileResource();
+        final TestFileResource codeRes = new TestFileResource();
         codeRes.load(bundle, fileName);
-        String code = codeRes.toString();
+        final String code = codeRes.toString();
         jdtTestEnvironment.addSourceFile(srcFolderName, packageName, beanClassName, code);
     }
-    
-    public static URI getPlatformAbsPath(String relativePath) throws MalformedURLException, URISyntaxException
+
+    public static URI getPlatformAbsPath(final String relativePath) throws MalformedURLException, URISyntaxException
     {
-        URL url = new URL(Platform.getInstanceLocation().getURL(), relativePath);
+        final URL url = new URL(Platform.getInstanceLocation().getURL(), relativePath);
         return url.toURI();
     }
-    
-    public static IPath getAbsolutePath(Bundle bundle, String relativePath) throws IOException, URISyntaxException
+
+    public static IPath getAbsolutePath(final Bundle bundle, final String relativePath) throws IOException, URISyntaxException
     {
-        URL url = FileLocator.resolve(bundle.getEntry(relativePath));
+        final URL url = FileLocator.resolve(bundle.getEntry(relativePath));
         return new Path(new File(url.toURI()).getAbsolutePath());//url.toExternalForm();
     }
-    
-    public static void savePlatformRelative(TestFileResource testFile, String relativePath) throws IOException, URISyntaxException
+
+    public static void savePlatformRelative(final TestFileResource testFile, final String relativePath) throws IOException, URISyntaxException
     {
         saveToFileSystem(testFile, getPlatformAbsPath(relativePath));
     }
-    
-    public static void saveToFileSystem(TestFileResource testFile, URI absPath) throws IOException
+
+    public static void saveToFileSystem(final TestFileResource testFile, final URI absPath) throws IOException
     {
         saveToFileSystem(testFile.toBytes(), absPath);
     }
-    
-    public static void saveToFileSystem(byte[] buffer, URI absPath) throws IOException
+
+    public static void saveToFileSystem(final byte[] buffer, final URI absPath) throws IOException
     {
         final File file = new File(absPath);
-        
+
         FileOutputStream  outFile = null;
-        
+
         try
         {
             outFile=new FileOutputStream(file);
@@ -162,23 +162,23 @@ public class JSFTestUtil
         }
 
     }
-    
+
     /**
      * @param testFile
      * @param absPath
      * @return true if the contents of testFile and the contents of what absPath point to
      * are the same based on a byte for byte comparison (Arrays.equal(byte[], byte[]).
-     * 
+     *
      * @throws IOException
      */
-    public static boolean areEqual(TestFileResource testFile, URI absPath) throws IOException
+    public static boolean areEqual(final TestFileResource testFile, final URI absPath) throws IOException
     {
         final File file = new File(absPath);
-            
+
         return Arrays.equals(loadFromFile(file).toByteArray(), testFile.toBytes());
     }
-    
-    public static ByteArrayOutputStream loadFromFile(File file) throws IOException
+
+    public static ByteArrayOutputStream loadFromFile(final File file) throws IOException
     {
         FileInputStream  inFile = null;
         ByteArrayOutputStream buffer = null;
@@ -186,9 +186,9 @@ public class JSFTestUtil
         try
         {
             inFile=new FileInputStream(file);
-            
+
             buffer = new ByteArrayOutputStream();
-            byte[]  inBuffer = new byte[1024];
+            final byte[]  inBuffer = new byte[1024];
             int bytesRead;
             int curPos = 0;
             while ((bytesRead = inFile.read(inBuffer)) != -1)
@@ -196,7 +196,7 @@ public class JSFTestUtil
                 buffer.write(inBuffer,0,bytesRead);
                 curPos+=bytesRead;
             }
-            
+
             return buffer;
         }
         finally
@@ -207,14 +207,14 @@ public class JSFTestUtil
             }
         }
     }
-    
-    
+
+
     public static IndexedRegion getIndexedRegion(final IStructuredDocument document, final int documentOffset)
     {
         // C.B: most of this logic was copied from ContentAssistUtils.getNodeAt
         // I chose to copy rather than just call that because ContentAssistUtils is
         // internal
-        IStructuredModel model = getStructuredModel(document);
+        final IStructuredModel model = getStructuredModel(document);
         IndexedRegion             region = null;
         if (model != null)
         {
@@ -228,25 +228,25 @@ public class JSFTestUtil
                     region = model.getIndexedRegion(lastOffset);
                     trace("Iterating on region: "+region.toString());
                 }
-                
+
                 trace("Finished with: "+region.toString()+", Class: "+region.getClass());
-                
+
                 // now we assume we have an element.  But our context may be
                 // on an attribute in that node, so we need to check
                 if (region instanceof IDOMElement)
                 {
                     trace("Region is an IDOMElement");
-                    IDOMElement domElement = (IDOMElement) region;
-                    
-                    NamedNodeMap attributes = domElement.getAttributes();
-                    
+                    final IDOMElement domElement = (IDOMElement) region;
+
+                    final NamedNodeMap attributes = domElement.getAttributes();
+
                     for (int i = 0; i < attributes.getLength(); i++)
                     {
-                        Node  attrNode = attributes.item(i);
-                        
+                        final Node  attrNode = attributes.item(i);
+
                         if (attrNode instanceof IDOMAttr)
                         {
-                            IDOMAttr attr = (IDOMAttr) attrNode;
+                            final IDOMAttr attr = (IDOMAttr) attrNode;
                             trace("Examining attribute: "+attr.toString());
 
                             if (documentOffset >= attr.getStartOffset()
@@ -271,26 +271,31 @@ public class JSFTestUtil
         return region;
     }
 
-    private static void trace(String message)
+    private static void trace(final String message)
     {
     	System.out.println("getIndexedRegion: "+message);
     }
-    
+
     /**
      * @param document
      * @return a structured model or null if one cannot be opened for document.
      * Note: the caller is responsible for releasing the instance of structured
      * model that gets returned.
      */
-    private static IStructuredModel getStructuredModel(IStructuredDocument document)
+    private static IStructuredModel getStructuredModel(final IStructuredDocument document)
     {
-        IModelManager modelManager = StructuredModelManager.getModelManager();
-        
+        final IModelManager modelManager = StructuredModelManager.getModelManager();
+
         if (modelManager != null)
         {
-            return StructuredModelManager.getModelManager().getModelForRead(document); 
+            return StructuredModelManager.getModelManager().getModelForRead(document);
         }
-        
+
         return null;
+    }
+
+    private JSFTestUtil()
+    {
+    	// no instantiation
     }
 }

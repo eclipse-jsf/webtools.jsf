@@ -19,6 +19,7 @@ import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jst.jsf.core.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
 import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
@@ -76,11 +77,11 @@ public class TestFunctionCompletionStrategy extends BaseTestClass
      */
     public void testSanity() throws Exception
     {
-		assertELSanity(_jspFile, 614, "value", "#{myBean.property}");
-		assertELSanity(_jspFile, 658, "value", "#{paramValues.foo}");
-		assertELSanity(_jspFile, 706, "action", "#{myBean.actionMethod}");
+    	JSFCoreUtilHelper.assertELSanity(_jspFile, 614, "value", "#{myBean.property}");
+    	JSFCoreUtilHelper.assertELSanity(_jspFile, 658, "value", "#{paramValues.foo}");
+    	JSFCoreUtilHelper.assertELSanity(_jspFile, 706, "action", "#{myBean.actionMethod}");
 
-		assertELVariableSanity(_jspFile, "myBean");
+    	JSFCoreUtilHelper.assertELVariableSanity(_jspFile, "myBean");
     }
 
     public void testFunctionCompletionStrategy() throws Exception
