@@ -23,7 +23,6 @@ import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocume
 import org.eclipse.jst.jsf.metadataprocessors.AbstractMetaDataEnabledFeature;
 import org.eclipse.jst.jsf.metadataprocessors.IMetaDataEnabledFeature;
 import org.eclipse.jst.jsf.metadataprocessors.MetaDataEnabledProcessingFactory;
-import org.eclipse.jst.jsf.metadataprocessors.TaglibMetadataContext;
 import org.eclipse.jst.jsf.metadataprocessors.features.IDefaultValue;
 import org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValues;
 import org.eclipse.jst.jsf.metadataprocessors.features.IValidValues;
@@ -128,7 +127,7 @@ public class PropertyDescriptor extends AbstractMetaDataEnabledFeature
 	}
 
 	public String getUri() {
-		return ((TaglibMetadataContext)getMetaDataContext()).getUri();
+		return getMetaDataContext().getEntity().getModel().getCurrentModelContext().getUri();
 	}
 	
 	public String getValueType() {
@@ -136,7 +135,7 @@ public class PropertyDescriptor extends AbstractMetaDataEnabledFeature
 	}
 
 	public String getAttributeName() {
-		return ((TaglibMetadataContext)getMetaDataContext()).getAttributeName();
+		return getMetaDataContext().getEntity().getId();
 	}
 
 	public Object getAdapter(Class adapter) {
