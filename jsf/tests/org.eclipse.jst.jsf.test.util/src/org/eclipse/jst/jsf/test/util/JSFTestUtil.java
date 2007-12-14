@@ -129,7 +129,7 @@ public final class JSFTestUtil
     public static IPath getAbsolutePath(final Bundle bundle, final String relativePath) throws IOException, URISyntaxException
     {
         final URL url = FileLocator.resolve(bundle.getEntry(relativePath));
-        return new Path(new File(url.toURI()).getAbsolutePath());//url.toExternalForm();
+        return new Path(new File(url.getFile()).getAbsolutePath());
     }
 
     public static void savePlatformRelative(final TestFileResource testFile, final String relativePath) throws IOException, URISyntaxException
