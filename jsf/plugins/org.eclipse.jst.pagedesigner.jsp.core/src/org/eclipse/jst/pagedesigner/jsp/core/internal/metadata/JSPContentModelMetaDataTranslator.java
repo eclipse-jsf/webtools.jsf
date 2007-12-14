@@ -17,7 +17,6 @@ import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataTranslator;
 import org.eclipse.wst.html.core.internal.contentmodel.JSPCMDocument;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMDocument;
-import org.eclipse.wst.xml.core.internal.contentmodel.CMElementDeclaration;
 
 /**
  * Translates the JSP CMDocument to standard metadata model entities and traits
@@ -49,16 +48,6 @@ public class JSPContentModelMetaDataTranslator extends AbstractTagLibDomainConte
 	@Override
 	protected String getURIDisplayLabel() {		
 		return "JSP";
-	}
-
-	@Override
-	protected String getTagNodeName(CMElementDeclaration tag) {
-		//strip "jsp:"
-		String tagName = tag.getNodeName();
-		if (tagName.indexOf(":")>0){
-			tagName = tagName.substring(tagName.indexOf(":")+1);
-		}
-		return tagName;
 	}
 
 }

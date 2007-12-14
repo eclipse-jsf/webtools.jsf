@@ -2,30 +2,29 @@
 <md:metadatamodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" 
 	xmlns:md="http://org.eclipse.jst.jsf.common.metadata/metadata.ecore"
-	xmlns:mdt="http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore"
 	xmlns:pi="http://org.eclipse.jsf.pagedesigner/paletteInfos.ecore"
 	id="jsp11"
 	type="tagFile">
 	
 	<trait id="paletteInfos">
 		<value xsi:type="pi:PaletteInfos">
-			<item id="directive.include"/>
-			<item id="directive.taglib"/>
-			<item id="expression"/>
-			<item id="declaration"/>
-			<item id="useBean"/>
-			<item id="getProperty"/>
-			<item id="setProperty"/>
-			<item id="include"/>
-			<item id="text"/>
-			<item id="root"/>
-			<item id="forward"/>
-			<item id="param"/>
-			<item id="params"/>
-			<item id="plugin"/>
-			<item id="fallback"/>
-			<item id="scriptlet"/>
-			<item id="directive.page"/>			
+			<item id="jsp:directive.include"/>
+			<item id="jsp:directive.taglib"/>
+			<item id="jsp:expression"/>
+			<item id="jsp:declaration"/>
+			<item id="jsp:useBean"/>
+			<item id="jsp:getProperty"/>
+			<item id="jsp:setProperty"/>
+			<item id="jsp:include"/>
+			<item id="jsp:text"/>
+			<item id="jsp:root"/>
+			<item id="jsp:forward"/>
+			<item id="jsp:param"/>
+			<item id="jsp:params"/>
+			<item id="jsp:plugin"/>
+			<item id="jsp:fallback"/>
+			<item id="jsp:scriptlet"/>
+			<item id="jsp:directive.page"/>			
 		</value>
 	</trait>
 
@@ -37,7 +36,7 @@
 		<value>JSP</value>
 	</trait>
 	
-	<entity id="directive.include">
+	<entity id="jsp:directive.include">
 		<trait id="display-label">
 			<value>%directive.include.display-label</value>
 		</trait>
@@ -51,7 +50,7 @@
 			<value>large/JSP_DIRECTIVE.INCLUDE.gif</value>
 		</trait>
 	</entity>
-	<entity id="directive.page">
+	<entity id="jsp:directive.page">
 		<trait id="display-label">
 			<value>%directive.page.display-label</value>
 		</trait>
@@ -66,7 +65,7 @@
 		</trait>
 	</entity>	
 
-	<entity id="directive.taglib">
+	<entity id="jsp:directive.taglib">
 		<trait id="display-label">
 			<value>%directive.taglib.display-label</value>
 		</trait>
@@ -80,7 +79,7 @@
 			<value>large/JSP_DIRECTIVE.TAGLIB.gif</value>
 		</trait>
 	</entity>	
-	<entity id="expression">
+	<entity id="jsp:expression">
 		<trait id="display-label">
 			<value>%expression.display-label</value>
 		</trait>
@@ -94,7 +93,7 @@
 			<value>large/JSP_EXPRESSION.gif</value>
 		</trait>
 	</entity>	
-	<entity id="declaration">
+	<entity id="jsp:declaration">
 		<trait id="display-label">
 			<value>%declaration.display-label</value>
 		</trait>
@@ -108,7 +107,7 @@
 			<value>large/JSP_DECLARATION.gif</value>
 		</trait>
 	</entity>	
-	<entity id="useBean">
+	<entity id="jsp:useBean">
 		<trait id="display-label">
 			<value>%useBean.display-label</value>
 		</trait>
@@ -123,7 +122,7 @@
 		</trait>
 	</entity>	
 		
-	<entity id="getProperty">
+	<entity id="jsp:getProperty">
 		<trait id="display-label">
 			<value>%getProperty.display-label</value>
 		</trait>
@@ -138,7 +137,7 @@
 		</trait>
 	</entity>	
 
-	<entity id="setProperty">
+	<entity id="jsp:setProperty">
 		<trait id="display-label">
 			<value>%setProperty.display-label</value>
 		</trait>
@@ -152,8 +151,7 @@
 			<value>large/JSP_SETPROPERTY.gif</value>
 		</trait>
 	</entity>	
-	<entity id="include">
-		<include-entity-group id="page-attribute"/>
+	<entity id="jsp:include">
 		<trait id="display-label">
 			<value>%include.display-label</value>
 		</trait>
@@ -168,7 +166,7 @@
 		</trait>
 	</entity>	
 	
-	<entity id="text">
+	<entity id="jsp:text">
 		<trait id="display-label">
 			<value>%text.display-label</value>
 		</trait>
@@ -182,7 +180,7 @@
 			<value>large/JSP_TEXT.gif</value>
 		</trait>
 	</entity>	
-	<entity id="root">
+	<entity id="jsp:root">
 		<trait id="display-label">
 			<value>%root.display-label</value>
 		</trait>
@@ -196,8 +194,7 @@
 			<value>large/JSP_ROOT.gif</value>
 		</trait>
 	</entity>	
-	<entity id="forward">
-		<include-entity-group id="page-attribute"/>
+	<entity id="jsp:forward">
 		<trait id="display-label">
 			<value>%forward.display-label</value>
 		</trait>
@@ -210,8 +207,9 @@
 		<trait id="large-icon">
 			<value>large/JSP_FORWARD.gif</value>
 		</trait>
-	</entity>		
-	<entity id="param">
+	</entity>	
+	
+	<entity id="jsp:param">
 		<trait id="display-label">
 			<value>%param.display-label</value>
 		</trait>
@@ -225,7 +223,7 @@
 			<value>large/JSP_PARAM.gif</value>
 		</trait>
 	</entity>	
-	<entity id="params">
+	<entity id="jsp:params">
 		<trait id="display-label">
 			<value>%params.display-label</value>
 		</trait>
@@ -239,7 +237,7 @@
 			<value>large/JSP_PARAMS.gif</value>
 		</trait>
 	</entity>		
-	<entity id="plugin">
+	<entity id="jsp:plugin">
 		<trait id="display-label">
 			<value>%plugin.display-label</value>
 		</trait>
@@ -253,7 +251,7 @@
 			<value>large/JSP_PLUGIN.gif</value>
 		</trait>
 	</entity>	
-	<entity id="fallback">
+	<entity id="jsp:fallback">
 		<trait id="display-label">
 			<value>%fallback.display-label</value>
 		</trait>
@@ -267,7 +265,7 @@
 			<value>large/JSP_FALLBACK.gif</value>
 		</trait>
 	</entity>
-	<entity id="scriptlet">
+	<entity id="jsp:scriptlet">
 		<trait id="display-label">
 			<value>%scriptlet.display-label</value>
 		</trait>
@@ -281,19 +279,4 @@
 			<value>large/JSP_SCRIPTLET.gif</value>
 		</trait>
 	</entity>	
-	<entityGroup id="page-attribute">
-		<entity id="page">
-			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.WebPathType</value>
-			</trait>
-			<trait id="file-extensions" >
-				<value xsi:type="mdt:ListOfValues">
-					<item>jsp</item>
-					<item>jspx</item>
-					<item>html</item>
-					<item>xhtml</item>								
-				</value>
-			</trait>
-		</entity>
-	</entityGroup>
 </md:metadatamodel>
