@@ -97,7 +97,7 @@ public class SybaseCMTranslationTests extends AbstractBaseMetaDataTestCase imple
 	public void testBooleanValueTypeTranslation() {
 		assertEquals(IAttributeRuntimeValueType.BOOLEAN, getAttrValRuntimeType(getModel(), "inputText/immediate"));
 		Entity attr = TaglibDomainMetaDataQueryHelper.getEntity(getModel(), "commandButton/rendered");
-		List list = MetaDataEnabledProcessingFactory.getInstance().getAttributeValueRuntimeTypeFeatureProcessors(IPropertyPageDescriptor.class, null , attr);
+		List<?> list = MetaDataEnabledProcessingFactory.getInstance().getAttributeValueRuntimeTypeFeatureProcessors(IPropertyPageDescriptor.class, null , attr);
 		assertNotNull(list);
 		assertTrue(list.size() > 0);
 	}
@@ -145,7 +145,7 @@ public class SybaseCMTranslationTests extends AbstractBaseMetaDataTestCase imple
 		Trait t = getTrait(getModel(), "inputText/validator", "runtime-param-types");
 		assertNotNull(t);
 		assertTrue(t.getValue() instanceof ListOfValues);
-		List vals = TraitValueHelper.getValueAsListOfStrings(t);
+		List<?> vals = TraitValueHelper.getValueAsListOfStrings(t);
 		assertEquals(3, vals.size());
 		assertEquals("java.lang.Object", vals.get(2));
 		
@@ -271,7 +271,7 @@ public class SybaseCMTranslationTests extends AbstractBaseMetaDataTestCase imple
 	
 	private void testPossibleValues(Model model){
 		//form/dir
-		List pvsList = MetaDataEnabledProcessingFactory.getInstance().getAttributeValueRuntimeTypeFeatureProcessors(IPossibleValues.class, null, uri, "form", "dir");
+		List<?> pvsList = MetaDataEnabledProcessingFactory.getInstance().getAttributeValueRuntimeTypeFeatureProcessors(IPossibleValues.class, null, uri, "form", "dir");
 		assertNotNull(pvsList);
 		assertEquals(1, pvsList.size());
 		assertTrue(pvsList.get(0) instanceof IPossibleValues);
@@ -287,9 +287,10 @@ public class SybaseCMTranslationTests extends AbstractBaseMetaDataTestCase imple
 		assertEquals(58, pvs.getPossibleValues().size());
 	}
 	
-	private List getProcessorAdapters(Class featureClass, String tag, String attrName) {
-		return MetaDataEnabledProcessingFactory.getInstance().
-			getAttributeValueRuntimeTypeFeatureProcessors(featureClass, docContext, 
-					uri, tag , attrName);
-	}
+	// unused
+	//	private List getProcessorAdapters(Class featureClass, String tag, String attrName) {
+//		return MetaDataEnabledProcessingFactory.getInstance().
+//			getAttributeValueRuntimeTypeFeatureProcessors(featureClass, docContext, 
+//					uri, tag , attrName);
+//	}
 }

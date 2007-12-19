@@ -13,7 +13,6 @@ package org.eclipse.jst.jsf.metadata.tests.pagedesigner;
 
 import java.util.List;
 
-import org.eclipse.core.runtime.QualifiedName;
 import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
@@ -28,7 +27,7 @@ import org.eclipse.jst.pagedesigner.properties.ITabbedPropertiesConstants;
 //TODO:   can use beefing up
 public class PropertyDescriptorTests extends SingleJSPTestCase {
 	
-	private static QualifiedName qn = new QualifiedName("test","model");
+	// unused private static QualifiedName qn = new QualifiedName("test","model");
 	private String uri = "http://org.eclipse.jsf/propertyDescriptorTest";
 	private Model _model;
 	private int _offset = 423;
