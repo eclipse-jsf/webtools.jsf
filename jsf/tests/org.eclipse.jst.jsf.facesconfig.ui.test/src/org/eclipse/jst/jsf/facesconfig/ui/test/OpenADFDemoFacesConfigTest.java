@@ -12,6 +12,8 @@
 
 package org.eclipse.jst.jsf.facesconfig.ui.test;
 
+import java.util.Enumeration;
+
 import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IFile;
@@ -19,12 +21,14 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor;
 import org.eclipse.jst.jsf.facesconfig.ui.test.util.TestUtil;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
+import org.osgi.framework.Bundle;
 
 /**
  * @author sfshi
@@ -44,6 +48,17 @@ public class OpenADFDemoFacesConfigTest extends TestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		JSFTestUtil.setInternetProxyPreferences(true, "www-proxy.us.oracle.com", "80");
+		
+		System.out.println("OpenADFDemoFacesConfigTest->Bundle.getEntryPaths(/)");
+		Enumeration e = EditorPlugin.getDefault().getBundle().getEntryPaths("/");
+		while (e.hasMoreElements())
+			System.out.println((String)e.nextElement());
+		
+		System.out.println("OpenADFDemoFacesConfigTest->Bundle.getEntryPaths(../)");
+		e = EditorPlugin.getDefault().getBundle().getEntryPaths("../");
+		while (e.hasMoreElements())
+			System.out.println((String)e.nextElement());
+		
 		project = TestUtil.createProjectFromZip("adfDemoProject",
 				"adfDemoProject.zip");
 	}
