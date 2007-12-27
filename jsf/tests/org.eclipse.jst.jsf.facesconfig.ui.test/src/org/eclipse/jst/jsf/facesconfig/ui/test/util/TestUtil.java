@@ -29,6 +29,7 @@ import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
@@ -44,8 +45,8 @@ import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
  * @version
  */
 public class TestUtil {
-	private static final String TEST_FILE_FOLDER = "../org.eclipse.jst.jsf.facesconfig.ui.test/test-file/";
-
+	//private static final String TEST_FILE_FOLDER = "../org.eclipse.jst.jsf.facesconfig.ui.test/test-file/";
+	private static final String TEST_FILE_FOLDER = "/test-file/";
 	/**
 	 * 
 	 * @param prjname
@@ -56,8 +57,9 @@ public class TestUtil {
 	 */
 	public static IProject createProjectFromZip(String prjname, String path)
 			throws Exception {
-		URL url = EditorPlugin.getDefault().getBundle().getEntry(
-				TEST_FILE_FOLDER + path);
+	
+		URL url = FileLocator.find(EditorPlugin.getDefault().getBundle(), new Path(TEST_FILE_FOLDER + path), null);
+
 		InputStream stream = url.openStream();
 		return createProjectFromZip(prjname, stream);
 	}
@@ -181,8 +183,8 @@ public class TestUtil {
 	 */
 	public static IFile copyFile(IProject project, String targetPath,
 			String sourcePath) throws Exception {
-		URL url = EditorPlugin.getDefault().getBundle().getEntry(
-				TEST_FILE_FOLDER + sourcePath);
+
+		URL url = FileLocator.find(EditorPlugin.getDefault().getBundle(), new Path(TEST_FILE_FOLDER + sourcePath), null);
 		InputStream stream = url.openStream();
 
 		IFile file = null;
@@ -233,8 +235,8 @@ public class TestUtil {
 	 * @throws Exception
 	 */
 	public static String getFileAsString(String path) throws Exception {
-		URL url = EditorPlugin.getDefault().getBundle().getEntry(
-				TEST_FILE_FOLDER + path);
+
+		URL url = FileLocator.find(EditorPlugin.getDefault().getBundle(), new Path(TEST_FILE_FOLDER + path), null);
 		InputStream stream = url.openStream();
 		BufferedReader reader = new BufferedReader(
 				new InputStreamReader(stream));
