@@ -40,7 +40,7 @@ public class NamedBooleanCellEditor extends LabeledComboBoxCellEditor {
 	 */
 	public static NamedBooleanCellEditor newInstance(Composite parent,
 			int style, IDOMElement element, IAttributeDescriptor attribute) {
-		String[] values = new String[] { "", attribute.getAttributeName() };
+		String[] values = new String[] { "", attribute.getAttributeName() }; //$NON-NLS-1$
 		return new NamedBooleanCellEditor(parent, values, values, style);
 	}
 }

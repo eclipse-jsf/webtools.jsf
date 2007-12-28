@@ -34,9 +34,8 @@ import org.eclipse.wst.sse.core.internal.provisional.INodeNotifier;
  * @author mengbo
  * @version 1.5
  */
-public class QuickEditAttributeGroupSection extends BaseCustomSection {
+public class AttributeGroupSection extends BaseCustomSection {
 	private static final Object KEY_ATTR = "KEY_ATTR"; //$NON-NLS-1$
-
 	private IDialogFieldApplyListener _fieldApplyListener = new IDialogFieldApplyListener() {
 		/*
 		 * (non-Javadoc)
@@ -55,7 +54,7 @@ public class QuickEditAttributeGroupSection extends BaseCustomSection {
 		}
 	};
 
-	private QuickEditAttributeGroup _group;
+	private AttributeGroup _group;
 
 	/**
 	 * Constructor.  Create the section with a default AttributeGroup. In default
@@ -64,8 +63,8 @@ public class QuickEditAttributeGroupSection extends BaseCustomSection {
 	 * @param tagEntity
 	 * @param attrNames
 	 */
-	public QuickEditAttributeGroupSection(Entity tagEntity, List<String> attrNames) {
-		this(new QuickEditAttributeGroup(tagEntity, attrNames));
+	public AttributeGroupSection(Entity tagEntity, List<String> attrNames) {
+		this(new AttributeGroup(tagEntity, attrNames));
 	}
 
 	/**
@@ -74,7 +73,7 @@ public class QuickEditAttributeGroupSection extends BaseCustomSection {
 	 * 
 	 * @param group
 	 */
-	public QuickEditAttributeGroupSection(QuickEditAttributeGroup group) {
+	public AttributeGroupSection(AttributeGroup group) {
 		_group = group;
 		_group.setDefaultApplyListener(_fieldApplyListener);
 //		_group.initialize();
@@ -104,5 +103,13 @@ public class QuickEditAttributeGroupSection extends BaseCustomSection {
 	public void dispose() {
 		super.dispose();
 		_group.reset();
+	}
+	
+	/**
+	 * NOT API - for JUnit testing only
+	 * @return @link{AttributeGroup}
+	 */
+	public AttributeGroup getAttributeGroup() {		
+		return _group;
 	}
 }

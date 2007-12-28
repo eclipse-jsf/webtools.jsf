@@ -81,7 +81,7 @@ public class QuickEditTabSectionsDescriptor {
 	}
 
 	private void createAttributeGroup(List<String> attrNames) {
-		ISection section = new QuickEditAttributeGroupSection(_tagEntity, attrNames);
+		ISection section = new AttributeGroupSection(_tagEntity, attrNames);
 		if (section != null){		
 			_sectionClasses.add(section);
 		}

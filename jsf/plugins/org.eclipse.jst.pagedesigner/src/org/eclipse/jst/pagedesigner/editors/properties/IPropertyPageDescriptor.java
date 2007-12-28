@@ -18,7 +18,10 @@ import org.eclipse.jst.jsf.metadataprocessors.IMetaDataEnabledFeature;
 import org.eclipse.swt.widgets.Composite;
 
 /**
- * Property descriptor for metadata enabled tag attributes in the WPE property pages
+ * Property descriptor for metadata enabled tag attributes in the WPE property pages.
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * Not intended to be implemented by clients. 
  */
 public interface IPropertyPageDescriptor extends IMetaDataEnabledFeature, IAdaptable{
 	/**

@@ -72,7 +72,7 @@ public class DefaultPropertyPageDescriptor implements IPropertyPageDescriptor {
 	}
 
 	public String getLabel() {
-		return getAttributeName();
+		return getAttributeName()+ ":";
 	}
 
 	public String getTagName() {
@@ -112,6 +112,6 @@ public class DefaultPropertyPageDescriptor implements IPropertyPageDescriptor {
 	}
 
 	public String toString() {
-		return getUri()+"/"+getTagName()+"/"+getAttributeName()+" (Default Descriptor)";
+		return getUri()+"/"+getTagName()+"/"+getAttributeName()+" (Default Descriptor)"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 }

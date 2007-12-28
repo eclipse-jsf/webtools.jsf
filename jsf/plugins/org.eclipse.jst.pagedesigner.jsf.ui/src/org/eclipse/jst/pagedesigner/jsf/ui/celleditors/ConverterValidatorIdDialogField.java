@@ -20,6 +20,7 @@ import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
 /**
  * @author mengbo
  * @version 1.5
+ * @deprecated
  */
 public class ConverterValidatorIdDialogField extends ComboDialogField implements IElementContextable
 {

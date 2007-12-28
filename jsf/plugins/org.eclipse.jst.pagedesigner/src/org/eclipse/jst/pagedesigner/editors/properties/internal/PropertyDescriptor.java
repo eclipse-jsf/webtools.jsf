@@ -89,7 +89,7 @@ public class PropertyDescriptor extends AbstractMetaDataEnabledFeature
 		if (label == null) {
 			label = getMetaDataContext().getEntity().getId();
 		}
-		return label;
+		return label + ":";
 	}
 
 	public boolean isRequired() {

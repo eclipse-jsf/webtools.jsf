@@ -40,7 +40,7 @@ public class ResourceDialogCellEditor extends EditableDialogCellEditor {
 
 	private boolean _needTransformJSPURL = true;
 
-	private String _separator = "";
+	private String _separator = ""; //$NON-NLS-1$
 
 
 	/**
@@ -69,11 +69,11 @@ public class ResourceDialogCellEditor extends EditableDialogCellEditor {
 
 	protected Object openDialogBox(Control cellEditorWindow) {
 		Shell shell = cellEditorWindow.getShell();
-		int style = "".equals(_separator) ? SWT.NONE : SWT.MULTI | SWT.H_SCROLL
+		int style = "".equals(_separator) ? SWT.NONE : SWT.MULTI | SWT.H_SCROLL //$NON-NLS-1$
 				| SWT.V_SCROLL;
 		CommonResourceDialog dialog = new CommonResourceDialog(shell, _project,
 				style);
-		dialog.setTitle(ResourceBoundle.getString("FileCellEditor.Title"));
+		dialog.setTitle(ResourceBoundle.getString("FileCellEditor.Title")); //$NON-NLS-1$
 		dialog.setSuffixs(_suffixs);
 		dialog.setResourceDescription(_resourceDescription);
 		if (dialog.open() == Window.OK) {
@@ -147,12 +147,12 @@ public class ResourceDialogCellEditor extends EditableDialogCellEditor {
 	 */
 	public String getResourceDescription() {
 		if (_resourceDescription == null) {
-			if ("".equalsIgnoreCase(getSeparator())) {
+			if ("".equalsIgnoreCase(getSeparator())) { //$NON-NLS-1$
 				_resourceDescription = ResourceBoundle
-						.getString("FileCellEditor.Msg");
+						.getString("FileCellEditor.Msg"); //$NON-NLS-1$
 			} else {
 				_resourceDescription = ResourceBoundle
-						.getString("FileCellEditor.Msg1");
+						.getString("FileCellEditor.Msg1"); //$NON-NLS-1$
 			}			
 		}
 		return _resourceDescription;

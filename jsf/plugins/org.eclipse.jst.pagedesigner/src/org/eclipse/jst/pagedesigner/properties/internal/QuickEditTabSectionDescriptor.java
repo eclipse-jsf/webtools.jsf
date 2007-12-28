@@ -62,9 +62,9 @@ public class QuickEditTabSectionDescriptor extends SectionDescriptor {
 					.createExecutableExtension(ATT_CLASS);
 			if (secOrGroup instanceof ISection) {
 				section = (ISection) secOrGroup;
-			} else if (secOrGroup instanceof QuickEditAttributeGroup) {
-				((QuickEditAttributeGroup) secOrGroup).setTagEntity(_tagEntity);
-				section = new QuickEditAttributeGroupSection((QuickEditAttributeGroup) secOrGroup);		
+			} else if (secOrGroup instanceof AttributeGroup) {
+				((AttributeGroup) secOrGroup).setTagEntity(_tagEntity);
+				section = new AttributeGroupSection((AttributeGroup) secOrGroup);		
 			}
 		} catch (CoreException exception) {
 			handleSectionError(exception);
@@ -82,7 +82,7 @@ public class QuickEditTabSectionDescriptor extends SectionDescriptor {
 	 *            an optional CoreException
 	 */
 	private void handleSectionError(CoreException exception) {
-		PDPlugin.getLogger(QuickEditTabSectionDescriptor.class).error("error",
+		PDPlugin.getLogger(QuickEditTabSectionDescriptor.class).error("error", //$NON-NLS-1$
 				exception);
 		exception.printStackTrace();
 	}

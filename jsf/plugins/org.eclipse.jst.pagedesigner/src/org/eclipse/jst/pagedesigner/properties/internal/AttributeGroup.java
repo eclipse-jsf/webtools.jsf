@@ -31,6 +31,7 @@ import org.eclipse.jst.jsf.metadataprocessors.MetaDataEnabledProcessingFactory;
 import org.eclipse.jst.pagedesigner.editors.properties.IPropertyPageDescriptor;
 import org.eclipse.jst.pagedesigner.properties.attrgroup.IElementContextable;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.forms.widgets.FormToolkit;
@@ -43,7 +44,7 @@ import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
  * 
  * TODO: cleanup up constructors
  */
-public class QuickEditAttributeGroup extends DialogFieldGroup {
+public class AttributeGroup extends DialogFieldGroup {
 	private static final Object KEY_ATTR = "KEY_ATTR"; //$NON-NLS-1$
 
 //	private String _helpContextId;
@@ -62,7 +63,7 @@ public class QuickEditAttributeGroup extends DialogFieldGroup {
 	 * @param tagEntity - may not be null
 	 * @param attrNames - may not be null.  Attribute names must be valid for the tag, and have attribute-value-runtime-type trait info
 	 */
-	public QuickEditAttributeGroup(Entity tagEntity, List<String> attrNames) {
+	public AttributeGroup(Entity tagEntity, List<String> attrNames) {
 		_tagEntity = tagEntity;
 		_attrNames = attrNames;		
 	}
@@ -73,11 +74,14 @@ public class QuickEditAttributeGroup extends DialogFieldGroup {
 	 * @param tagName - may be null
 	 * @param attributeNames - may not be null.  Attribute names must be valid for the tag, and have attribute-value-runtime-type trait info
 	 */
-	public QuickEditAttributeGroup(String uri,
+	public AttributeGroup(String uri,
 			String tagName, String[] attributeNames) {
 		_uri = uri;
 		_tagName = tagName;
-		_attrNames = Arrays.asList(attributeNames);
+		if (attributeNames != null)
+			_attrNames = Arrays.asList(attributeNames);
+		else 
+			_attrNames = new ArrayList();
 	}
 	
 	private List<IPropertyPageDescriptor> prepareDescriptors(Entity tagEntity,
@@ -109,7 +113,7 @@ public class QuickEditAttributeGroup extends DialogFieldGroup {
 //	/**
 //	 * Constructor
 //	 */
-//	public QuickEditAttributeGroup() {
+//	public AttributeGroup() {
 //		//
 //	}
 
@@ -282,8 +286,10 @@ public class QuickEditAttributeGroup extends DialogFieldGroup {
 
 	public void layoutDialogFields(FormToolkit toolkit, Composite parent) {
 		Composite top;
-		if (toolkit == null) {
+		if (toolkit == null) {//when being displayed by DialogFieldGroupPage  (wizard)
 			top = new Composite(parent, SWT.NONE);
+			FillLayout fillLayout = new FillLayout(SWT.VERTICAL);
+			parent.setLayout(fillLayout);
 		} else {
 			top = toolkit.createComposite(parent, SWT.NONE);
 		}
@@ -401,14 +407,14 @@ public class QuickEditAttributeGroup extends DialogFieldGroup {
 	}
 
 	public String toString(){
-		StringBuffer buf = new StringBuffer("QuickEditAttributeGroup: uri=");
-		buf.append("\r\r").append(getURI()).append("\r\rtag=").append(getTagName());
-		buf.append("\r\rAttrs: ");
+		StringBuffer buf = new StringBuffer("AttributeGroup: uri="); //$NON-NLS-1$
+		buf.append("\r\r").append(getURI()).append("\r\rtag=").append(getTagName()); //$NON-NLS-1$ //$NON-NLS-2$
+		buf.append("\r\rAttrs: "); //$NON-NLS-1$
 		for (int i=0;i<_attrNames.size();i++) {
 			String attr = _attrNames.get(i);
 			buf.append(attr);
 			if (i<_attrNames.size())
-				buf.append(", ");
+				buf.append(", "); //$NON-NLS-1$
 		}
 		return buf.toString();
 	}

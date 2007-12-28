@@ -44,7 +44,7 @@ import org.w3c.dom.Element;
  * @deprecated
  */
 public class OLDCellEditorFactory implements IAttributeCellEditorFactory {
-	private static String[] CURRENCYCODES = { "AED", // United Arab Emirates,
+	private static String[] CURRENCYCODES = { "AED", // United Arab Emirates, //$NON-NLS-1$
 			// Dirhams //$NON-NLS-1$
 			"AFA", // Afghanistan, Afghanis //$NON-NLS-1$
 			"ALL", // Albania, Leke //$NON-NLS-1$
@@ -205,14 +205,14 @@ public class OLDCellEditorFactory implements IAttributeCellEditorFactory {
 			"VND", // Viet Nam, Dong //$NON-NLS-1$
 			"VUV", // Vanuatu, Vatu //$NON-NLS-1$
 			"WST", // Samoa, Tala //$NON-NLS-1$
-			"XAF", // Communaut�� Financi��re Africaine BEAC, Francs
+			"XAF", // Communaut�� Financi��re Africaine BEAC, Francs //$NON-NLS-1$
 			// //$NON-NLS-1$
 			"XAG", // Silver, Ounces //$NON-NLS-1$
 			"XAU", // Gold, Ounces //$NON-NLS-1$
 			"XCD", // East Caribbean Dollars //$NON-NLS-1$
-			"XDR", // International Monetary Fund (IMF) Special Drawing Rights
+			"XDR", // International Monetary Fund (IMF) Special Drawing Rights //$NON-NLS-1$
 			// //$NON-NLS-1$
-			"XOF", // Communaut�� Financi��re Africaine BCEAO, Francs
+			"XOF", // Communaut�� Financi��re Africaine BCEAO, Francs //$NON-NLS-1$
 			// //$NON-NLS-1$
 			"XPD", // Palladium Ounces //$NON-NLS-1$
 			"XPF", // Comptoirs Fran?ais du Pacifique Francs //$NON-NLS-1$
@@ -257,18 +257,18 @@ public class OLDCellEditorFactory implements IAttributeCellEditorFactory {
 				ResourceDialogCellEditor cellEditor = new ResourceDialogCellEditor(
 						parent);
 				cellEditor.setSuffixs(attr.getParameterByName(
-						IAttributeDescriptor.PARAMETER_SUFFIX).split(";"));
+						IAttributeDescriptor.PARAMETER_SUFFIX).split(";")); //$NON-NLS-1$
 				cellEditor
 						.setSeparator(attr
 								.getParameterByName(IAttributeDescriptor.PARAMETER_SEPARATOR));
 				cellEditor.setProject(project);
 				cellEditor.setReferredFile(getFile(element));
-				if ("".equalsIgnoreCase(cellEditor.getSeparator())) {
+				if ("".equalsIgnoreCase(cellEditor.getSeparator())) { //$NON-NLS-1$
 					cellEditor.setResourceDescription(ResourceBoundle
-							.getString("FileCellEditor.Msg"));
+							.getString("FileCellEditor.Msg")); //$NON-NLS-1$
 				} else {
 					cellEditor.setResourceDescription(ResourceBoundle
-							.getString("FileCellEditor.Msg1"));
+							.getString("FileCellEditor.Msg1")); //$NON-NLS-1$
 				}
 				if (OLDIValueType.WEBPATH.equalsIgnoreCase(type)) {
 					cellEditor.setWebPath(true);
@@ -312,7 +312,7 @@ public class OLDCellEditorFactory implements IAttributeCellEditorFactory {
 		} else if (OLDIValueType.CSSSTYLE.equalsIgnoreCase(type)) {
 			String param = attr
 					.getParameterByName(IAttributeDescriptor.PARAMETER_STYLE);
-			if (!param.equalsIgnoreCase("STYLE")) {
+			if (!param.equalsIgnoreCase("STYLE")) { //$NON-NLS-1$
 				return null;
 			}
 			CSSDialogCellEditor cellEditor = new CSSDialogCellEditor(parent,
@@ -364,7 +364,7 @@ public class OLDCellEditorFactory implements IAttributeCellEditorFactory {
 			}
 			if (map != null && !map.isEmpty()) {
 				String defaultValue = attr.getDefaultValue();
-				if (defaultValue == null || "".equals(defaultValue)) {
+				if (defaultValue == null || "".equals(defaultValue)) { //$NON-NLS-1$
 					attr
 							.getParameterByName(IAttributeDescriptor.PARAMETER_DEFAULT);
 				}
@@ -384,10 +384,10 @@ public class OLDCellEditorFactory implements IAttributeCellEditorFactory {
 			field.setLabelText(attr.getLabelString());
 			if (param != null) {
 				field.setSuffixs(attr.getParameterByName(
-						IAttributeDescriptor.PARAMETER_SUFFIX).split(";"));
+						IAttributeDescriptor.PARAMETER_SUFFIX).split(";")); //$NON-NLS-1$
 			}
 			field.setResourceDescription(ResourceBoundle
-					.getString("FileCellEditor.Msg"));
+					.getString("FileCellEditor.Msg")); //$NON-NLS-1$
 			field.setRequired(attr.isRequired());
 			field.setToolTip(attr.getDescription());
 			return field;
@@ -397,17 +397,17 @@ public class OLDCellEditorFactory implements IAttributeCellEditorFactory {
 			field.setLabelText(attr.getLabelString());
 			if (param != null) {
 				field.setSuffixs(attr.getParameterByName(
-						IAttributeDescriptor.PARAMETER_SUFFIX).split(";"));
+						IAttributeDescriptor.PARAMETER_SUFFIX).split(";")); //$NON-NLS-1$
 				field
 						.setSeparator(attr
 								.getParameterByName(IAttributeDescriptor.PARAMETER_SEPARATOR));
 			}
-			if ("".equalsIgnoreCase(field.getSeparator())) {
+			if ("".equalsIgnoreCase(field.getSeparator())) { //$NON-NLS-1$
 				field.setResourceDescription(ResourceBoundle
-						.getString("FileCellEditor.Msg"));
+						.getString("FileCellEditor.Msg")); //$NON-NLS-1$
 			} else {
 				field.setResourceDescription(ResourceBoundle
-						.getString("FileCellEditor.Msg1"));
+						.getString("FileCellEditor.Msg1")); //$NON-NLS-1$
 			}
 			field.setWebPath(true);
 			field.setRequired(attr.isRequired());
@@ -423,7 +423,7 @@ public class OLDCellEditorFactory implements IAttributeCellEditorFactory {
 					.getParameterByName(IAttributeDescriptor.PARAMETER_DEFAULT);
 			StyleComboDialogField field = new StyleComboDialogField(SWT.NONE);
 			TreeMap map = new TreeMap();
-			map.put("", "");
+			map.put("", ""); //$NON-NLS-1$ //$NON-NLS-2$
 			map.put(Boolean.FALSE.toString(), Boolean.FALSE.toString());
 			map.put(Boolean.TRUE.toString(), Boolean.TRUE.toString());
 			field.setEntryMap(map);
@@ -435,7 +435,7 @@ public class OLDCellEditorFactory implements IAttributeCellEditorFactory {
 		} else if (OLDIValueType.CSSSTYLE.equalsIgnoreCase(type)) {
 			String param = attr
 					.getParameterByName(IAttributeDescriptor.PARAMETER_STYLE);
-			if (!"STYLE".equalsIgnoreCase(param)) {
+			if (!"STYLE".equalsIgnoreCase(param)) { //$NON-NLS-1$
 				return null;
 			}
 			StyleButtonDialogField field = new StyleButtonDialogField();

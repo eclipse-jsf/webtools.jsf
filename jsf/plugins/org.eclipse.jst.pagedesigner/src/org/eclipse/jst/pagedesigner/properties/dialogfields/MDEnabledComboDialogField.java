@@ -9,7 +9,7 @@
  *    Oracle - initial API and implementation
  *
  ********************************************************************************/
-package org.eclipse.jst.pagedesigner.properties.celleditors;
+package org.eclipse.jst.pagedesigner.properties.dialogfields;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -42,7 +42,7 @@ public class MDEnabledComboDialogField extends StyleComboDialogField implements 
 
 	public void setElementContext(IDOMNode ancester, IDOMElement element) {
 		IStructuredDocumentContext sdContext =IStructuredDocumentContextFactory.INSTANCE.getContext(element.getStructuredDocument(), element);
-		IPropertyPageDescriptor ppd = (IPropertyPageDescriptor)getAttachedData("KEY_ATTR");//FIXME use constant
+		IPropertyPageDescriptor ppd = (IPropertyPageDescriptor)getAttachedData("KEY_ATTR");//FIXME use constant //$NON-NLS-1$
 		ppd.setStructuredDocumentContext(sdContext);
 		IPossibleValues pvs = (IPossibleValues)ppd.getAdapter(IPossibleValues.class);
 		IDefaultValue def = (IDefaultValue)ppd.getAdapter(IDefaultValue.class);

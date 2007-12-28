@@ -22,17 +22,16 @@ public class QuickEditTabSectionsManager {
 	 * @param project
 	 * @return instance of QuickEditTabSectionsManager
 	 */
-	public static QuickEditTabSectionsManager acquireInstance(IProject project){
+	public static synchronized QuickEditTabSectionsManager acquireInstance(IProject project){
 		QuickEditTabSectionsManager instance = _mgrInstance.getSectionsManager(project);
 		instance.clientCount++;
-		instance._project = project;
 		return instance;	
 	}
 	
 	/**
 	 * Releases instance of QuickEditTabSectionsManager and removes from the QuickEditSectionGroupsManagerMgr if it is the last reference
 	 */
-	public void releaseInstance(){
+	public synchronized void releaseInstance(){
 		int refCount = --clientCount;
 		if (refCount == 0){
 			_mgrInstance.removeSectionsManager(_project);
@@ -86,15 +85,7 @@ public class QuickEditTabSectionsManager {
 	}
 
 	/**
-	 * Dispose of manager
-	 */
-	public void dispose() {
-		map.clear();
-		map = null;
-	}
-
-	/**
-	 * Manages the QuickEditTabSectionsManager instances.  Ensures one per project.	 *
+	 * Manages the QuickEditTabSectionsManager instances.  Ensures one per project.	 
 	 */
 	private static class QuickEditTabSectionsManagerMgr {		
 		private Map <IProject,QuickEditTabSectionsManager>_map = new HashMap<IProject,QuickEditTabSectionsManager>();
@@ -107,6 +98,7 @@ public class QuickEditTabSectionsManager {
 				return _map.get(project);
 
 			QuickEditTabSectionsManager instance = new QuickEditTabSectionsManager();
+			instance._project = project;
 			_map.put(project, instance);
 			return instance;
 		}

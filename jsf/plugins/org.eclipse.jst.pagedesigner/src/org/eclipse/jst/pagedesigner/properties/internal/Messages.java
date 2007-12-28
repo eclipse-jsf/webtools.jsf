@@ -10,36 +10,28 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.properties.internal;
 
-import org.eclipse.ui.views.properties.tabbed.AbstractTabDescriptor;
+import org.eclipse.osgi.util.NLS;
 
 /**
- * Quick Edit Tab Descriptor
+ * Externalized strings
+ *
  */
-public class QuickEditTabDescriptor extends AbstractTabDescriptor {
-
+public class Messages extends NLS {
+	private static final String BUNDLE_NAME = "org.eclipse.jst.pagedesigner.properties.internal.messages"; //$NON-NLS-1$
 	/**
-	 * Quick Edit tab id
+	 * 
 	 */
-	public static final String TAB_ID = "jst.pagedesigner.tabbed.properties.quickedit"; //$NON-NLS-1$
-	
+	public static String AttributesTabDescriptor_label;
 	/**
-	 * Constructor
+	 * 
 	 */
-	public QuickEditTabDescriptor(){
-		super();
-		getSectionDescriptors().add(new MDQuickEditTabSectionDescriptor());
-	}
-	
-	public String getCategory() {
-		return "quickedit"; //$NON-NLS-1$
+	public static String QuickEditTabDescriptor_label;
+	static {
+		// initialize resource bundle
+		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
 	}
 
-	public String getId() {
-		return TAB_ID;
+	private Messages() {
+		//
 	}
-
-	public String getLabel() {
-		return Messages.QuickEditTabDescriptor_label;
-	}
-
 }

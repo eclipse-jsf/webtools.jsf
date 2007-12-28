@@ -17,7 +17,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.ICellModifier;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ISelection;
@@ -27,10 +29,12 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
 import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.pagedesigner.commands.single.AddSubNodeCommand;
+import org.eclipse.jst.pagedesigner.commands.single.ChangeAttributeCommand;
 import org.eclipse.jst.pagedesigner.commands.single.InsertSubNodeCommand;
 import org.eclipse.jst.pagedesigner.commands.single.RemoveSubNodeCommand;
 import org.eclipse.jst.pagedesigner.properties.BaseCustomSection;
@@ -45,6 +49,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetWidgetFactory;
@@ -64,6 +69,7 @@ public class JSFHtmlSelectChoicesSection extends BaseCustomSection
     private TableViewer           _choiceViewer;
     private CCombo                _choiceTypeCombo;
     private Button                _choiceAddButton, _choiceRemoveButton, _choiceMoveUpButton, _choiceMoveDownButton;
+	private static final String[] COLUMN_NAMES = new String[] {"choices","itemLabel", "itemValue", "id"};
 
     private class ChoiceCotentLabelProvider implements IStructuredContentProvider, ITableLabelProvider
     {
@@ -218,6 +224,50 @@ public class JSFHtmlSelectChoicesSection extends BaseCustomSection
         idColumn.setWidth(100);
 
         _choiceViewer = new TableViewer(_choiceTable);
+        _choiceViewer.setColumnProperties(COLUMN_NAMES );
+        CellEditor[] editors = new CellEditor[4];
+        TextCellEditor textEditor = new TextCellEditor(_choiceTable);
+        editors[0] = textEditor;
+        textEditor = new TextCellEditor(_choiceTable);
+        editors[1] = textEditor;
+        textEditor = new TextCellEditor(_choiceTable);
+        editors[2] = textEditor;
+        textEditor = new TextCellEditor(_choiceTable);
+        editors[3] = textEditor;
+
+        _choiceViewer.setCellEditors(editors);
+        _choiceViewer.setCellModifier(new ICellModifier(){
+
+			public boolean canModify(Object element, String property) {				
+				IDOMElement node = (IDOMElement)element;
+				if (node.getLocalName().equals("selectItem"))
+					return ! property.equals("choices");
+				else
+					return property.equals("id");
+			}
+
+			public Object getValue(Object element, String property) {	
+				IDOMElement node = (IDOMElement) element;
+				String val = node.getAttribute(property) != null ? node.getAttribute(property) : "";
+				return val;
+			}
+			
+			public void modify(Object element, String property, Object value) {
+
+	            TableItem item = (TableItem) element;
+	            IDOMElement node = (IDOMElement) item.getData();
+	            String valueString;
+	            ChangeAttributeCommand c;
+
+                valueString = ((String) value).trim();
+                c = new ChangeAttributeCommand(
+                        SectionResources.getString("JSFHtmlInputTextSection.CommandLabel.ChangeAttribute"), node, property, valueString); //$NON-NLS-1$
+                c.execute();	   
+                
+                _choiceViewer.refresh();
+			}
+        	
+        });
         _choiceViewer.setContentProvider(new ChoiceCotentLabelProvider());
         _choiceViewer.setLabelProvider(new ChoiceCotentLabelProvider());
         _choiceViewer.addDoubleClickListener(new IDoubleClickListener()

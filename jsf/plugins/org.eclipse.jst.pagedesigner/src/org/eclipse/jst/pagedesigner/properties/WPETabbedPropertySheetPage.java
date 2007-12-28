@@ -44,6 +44,8 @@ public class WPETabbedPropertySheetPage extends TabbedPropertySheetPage {
 	
 	private QuickEditTabManager manager;
 
+	private ISelectionListener _selListener;
+
 	/**
 	 * Constructor
 	 * @param tabbedPropertySheetPageContributor
@@ -111,14 +113,21 @@ public class WPETabbedPropertySheetPage extends TabbedPropertySheetPage {
 
 	private void setSelectionListener() {
 		this.getSite().getWorkbenchWindow().getSelectionService()
-				.addPostSelectionListener(new ISelectionListener() {
-					public void selectionChanged(IWorkbenchPart part,
-							ISelection selection) {
-						if (getEditor() == part)//only fire if the selection applies to this tabbed prop sheet instance
-							WPETabbedPropertySheetPage.this.selectionChanged(
-								part, selection);
-					}
-				});
+				.addPostSelectionListener(getSelectionListener());
+	}
+
+	private ISelectionListener getSelectionListener() {
+		if (_selListener == null){
+			_selListener = new ISelectionListener() {
+				public void selectionChanged(IWorkbenchPart part,
+						ISelection selection) {
+					if (getEditor() == part)//only fire if the selection applies to this tabbed prop sheet instance
+						WPETabbedPropertySheetPage.this.selectionChanged(
+							part, selection);
+				}
+			};
+		}
+		return _selListener;
 	}
 
 	private void setSelectionProvider() {
@@ -173,7 +182,7 @@ public class WPETabbedPropertySheetPage extends TabbedPropertySheetPage {
 				.setHelp(
 						getControl(),
 						PDPlugin
-								.getResourceString("WPETabbedPropertySheetPage.help.id"));
+								.getResourceString("WPETabbedPropertySheetPage.help.id")); //$NON-NLS-1$
 	}
 
 	/**
@@ -188,8 +197,13 @@ public class WPETabbedPropertySheetPage extends TabbedPropertySheetPage {
 
 	@Override
 	public void dispose() {
+		this.getSite().getWorkbenchWindow().getSelectionService().removePostSelectionListener(getSelectionListener());
+		this.getSite().setSelectionProvider(null);
 		manager.releaseInstance();
+		manager.dispose();
 		manager = null;
+		_selListener = null;
+		_htmlEditor = null;
 		super.dispose();
 	}
 	

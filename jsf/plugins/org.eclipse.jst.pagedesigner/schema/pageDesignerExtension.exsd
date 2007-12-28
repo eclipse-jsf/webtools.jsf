@@ -18,6 +18,7 @@
             <element ref="tagConverterFactory" minOccurs="0" maxOccurs="unbounded"/>
             <element ref="elementEditFactory" minOccurs="0" maxOccurs="unbounded"/>
             <element ref="linkCreator" minOccurs="0" maxOccurs="unbounded"/>
+            <element ref="tagAttributeCellEditorFactory" minOccurs="0" maxOccurs="unbounded"/>
          </sequence>
          <attribute name="point" type="string" use="required">
             <annotation>

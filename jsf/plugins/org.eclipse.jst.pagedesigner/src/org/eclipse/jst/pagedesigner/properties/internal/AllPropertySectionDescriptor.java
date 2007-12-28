@@ -21,7 +21,7 @@ public class AllPropertySectionDescriptor extends AbstractSectionDescriptor {
 	/**
 	 * Id for the WPE AllPropertySectionDescriptor
 	 */
-	public static final String ID = "AllPropertySectionDescriptor";
+	public static final String ID = "AllPropertySectionDescriptor"; //$NON-NLS-1$
 
 	private ISection section;
 

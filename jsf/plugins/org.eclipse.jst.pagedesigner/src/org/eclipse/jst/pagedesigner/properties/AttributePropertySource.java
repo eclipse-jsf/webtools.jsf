@@ -78,10 +78,10 @@ public class AttributePropertySource implements IPropertySource {
 		
 		//TODO: make below better
 		if (uri == null){
-			if (_element.getNamespaceURI() != null && _element.getNamespaceURI().equals("http://java.sun.com/JSP/Page"))
-				uri = "JSP11";
+			if (_element.getNamespaceURI() != null && _element.getNamespaceURI().equals("http://java.sun.com/JSP/Page")) //$NON-NLS-1$
+				uri = "JSP11"; //$NON-NLS-1$
 			else
-				uri = "HTML";
+				uri = "HTML"; //$NON-NLS-1$
 		}
 		ITaglibDomainMetaDataModelContext domainContext = 
 				TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(wsresolver.getProject(), uri);

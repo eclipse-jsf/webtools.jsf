@@ -33,13 +33,13 @@ import org.w3c.dom.Element;
 
 /**
  * One-to-one with {@link WPETabbedPropertySheetPage} that manages the current sections for the current selection.
- * <br>
+ * <p>
  * The QuickEditTabManager has a shared instance of a {@link QuickEditTabSectionsManager} for the project.
- * <br>
+ * <p>
  * When a WPETabbedPropertySheetPage is created, it must acquire a QuickEditTabManager using the static acquireInstance method,
  * and then release the instance when it is disposed.  This ensures that the QuickEditTabSectionsManager shared instance (per project) is released appropriately.
- * 
- * selectionChanged must be called prior to calling createControls on the sections for this tab group call
+ * <p>
+ * selectionChanged method must be called prior to calling createControls on the sections for this tab group call.
  */
 public class QuickEditTabManager {
 	private QuickEditTabSectionsManager _groupsManager;
@@ -70,8 +70,8 @@ public class QuickEditTabManager {
 	/**
 	 * Releases this instance, but does not dispose.  Ensures that the {@link QuickEditTabSectionsManager} is released.
 	 */
-	public void releaseInstance() {
-		this._groupsManager.releaseInstance();				
+	public synchronized void releaseInstance() {
+		this._groupsManager.releaseInstance();			
 	}
 	
 	/**
@@ -201,6 +201,14 @@ public class QuickEditTabManager {
 			_nullQuickEditTabGroup.calculateSections();
 		}
 		return _nullQuickEditTabGroup;
+	}
+
+	/**
+	 * NOT API - for JUnit testing only
+	 * @return {@link QuickEditTabSectionsManager} 
+	 */	
+	public QuickEditTabSectionsManager getQuickEditTabSectionsManager() {
+		return _groupsManager;
 	}
 
 	

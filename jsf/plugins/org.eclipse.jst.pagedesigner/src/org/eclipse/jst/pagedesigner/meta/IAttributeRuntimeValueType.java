@@ -155,12 +155,12 @@ public interface IAttributeRuntimeValueType {
 	/**
 	 * 
 	 */
-	public static final String FACESCONFIGVALIDATOR = prefix1+"FacesConfigValidatorType";
+	public static final String FACESCONFIGVALIDATORID = prefix1+"FacesConfigValidatorIDType";
 	
 	/**
 	 * 
 	 */
-	public static final String FACESCONFIGCONVERTER = prefix1+"FacesConfigConverterType";
+	public static final String FACESCONFIGCONVERTERID = prefix1+"FacesConfigConverterIDType";
 	
 	/**
 	 * 

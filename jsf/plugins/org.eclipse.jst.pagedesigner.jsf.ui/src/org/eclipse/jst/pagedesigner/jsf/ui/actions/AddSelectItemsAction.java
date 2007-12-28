@@ -12,7 +12,8 @@
 package org.eclipse.jst.pagedesigner.jsf.ui.actions;
 
 import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
-import org.eclipse.jst.pagedesigner.jsf.ui.commands.jsfhtml.AddJSFCoreChildCommand;
+import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
+import org.eclipse.jst.pagedesigner.properties.attrgroup.DialogUtil;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
 
 
@@ -35,9 +36,12 @@ public class AddSelectItemsAction extends JSFAddChildAction
      * @see org.eclipse.jface.action.Action#run()
      */
     public void run()
-    {
-        AddJSFCoreChildCommand command = new AddJSFCoreChildCommand(this.getParentElement(),
-            IJSFConstants.TAG_SELECTITEMS, null);
-        command.execute();
+    { 
+//        AddJSFCoreChildCommand command = new AddJSFCoreChildCommand(this.getParentElement(),
+//            IJSFConstants.TAG_SELECTITEMS, attributes);
+//        command.execute();
+        DialogUtil.createSubElement(getShell(), getParentElement(), ITLDConstants.URI_JSF_CORE,
+                IJSFConstants.TAG_SELECTITEMS, new String[] { IJSFConstants.ATTR_ID, IJSFConstants.ATTR_BINDING, IJSFConstants.ATTR_VALUE});
+
     }
 }

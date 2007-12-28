@@ -40,7 +40,7 @@ public abstract class BaseCustomSection extends AbstractPropertySection {
 	 * Status that all is OK
 	 */
 	protected static final Status OKSTATUS = new Status(IStatus.OK, PDPlugin
-			.getPluginId(), 0, "", null);
+			.getPluginId(), 0, "", null); //$NON-NLS-1$
 
 	private WPETabbedPropertySheetPage _propertySheetPage;
 
@@ -116,7 +116,7 @@ public abstract class BaseCustomSection extends AbstractPropertySection {
 				_propertySheetPage.selectionChanged(part, sel);
 			} else {
 				// XXX: will else happen?
-				System.out.println("AbstractCustomSection --> What to do?");
+				System.out.println("AbstractCustomSection --> What to do?"); //$NON-NLS-1$
 			}
 		}
 	}

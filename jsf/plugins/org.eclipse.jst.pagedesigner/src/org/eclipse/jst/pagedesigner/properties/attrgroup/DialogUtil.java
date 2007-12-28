@@ -11,6 +11,7 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.properties.attrgroup;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,7 +23,8 @@ import org.eclipse.jst.jsf.common.ui.internal.dialogfield.ISupportTextValue;
 import org.eclipse.jst.jsf.common.ui.internal.dialogs.CommonWizardDialog;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.commands.single.AddSubNodeCommand;
-import org.eclipse.jst.pagedesigner.meta.IAttributeDescriptor;
+import org.eclipse.jst.pagedesigner.editors.properties.IPropertyPageDescriptor;
+import org.eclipse.jst.pagedesigner.properties.internal.AttributeGroup;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
 
@@ -45,8 +47,15 @@ public class DialogUtil {
 	 * @return true if success, false if user canceled.
 	 */
 	public static boolean createSubElement(Shell shell,
-			final IDOMElement parent, final OLDAttributeGroup group) {
-		group.setElementContext(parent, null);
+			final IDOMElement parent, final AttributeGroup group) {
+		group.setElementContext(parent, parent);//2ndParam seems to need to be parent most of the time... don't know why it WAS null... changed 12/19/07
+		
+		if (group.getDialogFields().length == 0){
+			//don't show dialog
+			createSubNode(group, parent, Collections.EMPTY_MAP);
+			return true;
+		}
+		
 		final DialogFieldGroupPage page = new DialogFieldGroupPage("", group); //$NON-NLS-1$
 		page.setTitle(AttributeGroupMessages.getString(
 				"DialogUtil.createTitle", group.getTagName())); //$NON-NLS-1$
@@ -64,8 +73,8 @@ public class DialogUtil {
 				DialogField[] fields = group.getDialogFields();
 				Map map = new HashMap();
 				for (int i = 0; i < fields.length; i++) {
-					IAttributeDescriptor desc = group
-							.getAttributeDescriptor(fields[i]);
+					IPropertyPageDescriptor desc = group
+							.getPropertyDescriptor(fields[i]);
 					if (desc != null && fields[i] instanceof ISupportTextValue) {
 						String value = ((ISupportTextValue) fields[i])
 								.getText();
@@ -74,11 +83,7 @@ public class DialogUtil {
 						}
 					}
 				}
-				AddSubNodeCommand addSubCommand = new AddSubNodeCommand(
-						AttributeGroupMessages
-								.getString(
-										"DialogUtil.createCommandLabel", group.getTagName()), parent, group.getTagName(), group.getURI(), map); //$NON-NLS-1$
-				addSubCommand.execute();
+				createSubNode(group, parent, map);
 				return true;
 			}
 		};
@@ -89,6 +94,15 @@ public class DialogUtil {
 		CommonWizardDialog dialog = new CommonWizardDialog(shell, wizard);
 
 		return dialog.open() == Window.OK;
+	}
+
+	private static void createSubNode(final AttributeGroup group, final IDOMElement parent, final Map mapOfAttributeValues) {
+		AddSubNodeCommand addSubCommand = new AddSubNodeCommand(
+				AttributeGroupMessages
+						.getString(
+								"DialogUtil.createCommandLabel", group.getTagName()), parent, group.getTagName(), group.getURI(), mapOfAttributeValues); //$NON-NLS-1$
+		addSubCommand.execute();
+		
 	}
 
 	/**
@@ -114,8 +128,10 @@ public class DialogUtil {
 	public static boolean createSubElement(Shell shell,
 			final IDOMElement parent, final String uri, final String tagName,
 			final String[] attributes) {
-		final OLDAttributeGroup group = new OLDAttributeGroup(uri, tagName,
+		
+		final 	AttributeGroup group = new AttributeGroup(uri, tagName,
 				attributes);
+
 		return createSubElement(shell, parent, group);
 	}
 }

@@ -43,7 +43,7 @@ public class MDQuickEditTabSectionDescriptor extends AbstractSectionDescriptor {
 	}
 
 	public String getId() {
-		return "mdQuickEditTabSections";
+		return "mdQuickEditTabSections"; //$NON-NLS-1$
 	}
 	
 }

@@ -25,7 +25,7 @@ public class AttributesTabDescriptor extends AbstractTabDescriptor {
 	/**
 	 * Attributes tab id 
 	 */
-	public static final String TAB_ID = "jst.pagedesigner.tabbed.properties.attributes";
+	public static final String TAB_ID = "jst.pagedesigner.tabbed.properties.attributes"; //$NON-NLS-1$
 
 	private Vector<ISectionDescriptor> descriptors;
 	
@@ -44,7 +44,7 @@ public class AttributesTabDescriptor extends AbstractTabDescriptor {
 	}
 
 	public String getCategory() {
-		return "attributes";
+		return "attributes"; //$NON-NLS-1$
 	}
 
 	public String getId() {
@@ -52,7 +52,7 @@ public class AttributesTabDescriptor extends AbstractTabDescriptor {
 	}
 
 	public String getLabel() {
-		return "Attributes";
+		return Messages.AttributesTabDescriptor_label;
 	}
 
 }

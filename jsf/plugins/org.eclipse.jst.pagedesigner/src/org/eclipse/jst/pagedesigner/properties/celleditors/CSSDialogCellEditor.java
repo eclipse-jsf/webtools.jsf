@@ -63,6 +63,6 @@ public class CSSDialogCellEditor extends EditableDialogCellEditor {
 
 		String style = (_element == null ? null : _element
 				.getAttribute(IJSFConstants.ATTR_STYLE));
-		return style == null ? "" : style;
+		return style == null ? "" : style; //$NON-NLS-1$
 	}
 }

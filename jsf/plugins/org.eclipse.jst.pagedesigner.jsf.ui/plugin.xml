@@ -444,8 +444,6 @@
 		point="org.eclipse.jst.pagedesigner.pageDesignerExtension">
 		<tagConverterFactory
 			class="org.eclipse.jst.pagedesigner.jsf.ui.converter.jsfcore.JSFCoreConverterFactory" />
-		<attributeCellEditorFactory
-			class="org.eclipse.jst.pagedesigner.jsf.ui.celleditors.JSFAttributeCellEditorFactory" />
 		<tagConverterFactory
 			class="org.eclipse.jst.pagedesigner.jsf.ui.converter.jsfhtml.JSFHTMLConverterFactory" />
 		<elementEditFactory

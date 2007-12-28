@@ -27,6 +27,7 @@ import org.eclipse.jst.pagedesigner.editors.properties.IPropertyPageDescriptor;
 import org.eclipse.jst.pagedesigner.jsp.core.IJSPCoreConstants;
 import org.eclipse.jst.pagedesigner.meta.ITagAttributeCellEditorFactory;
 import org.eclipse.jst.pagedesigner.meta.IAttributeRuntimeValueType;
+import org.eclipse.jst.pagedesigner.properties.dialogfields.MDEnabledComboDialogField;
 import org.eclipse.jst.pagedesigner.ui.dialogfields.ClasspathResourceButtonDialogField;
 import org.eclipse.jst.pagedesigner.ui.dialogfields.ContextableResourceButtonDialogField;
 import org.eclipse.jst.pagedesigner.ui.dialogfields.StyleButtonDialogField;
@@ -57,8 +58,8 @@ public class CellEditorFactory implements ITagAttributeCellEditorFactory {
 //				String typeParam = TraitValueHelper.getValueAsString(TaglibDomainMetaDataQueryHelper.getTrait(attr.getMetaDataContext().getEntity(),"type-param"));
 				ResourceDialogCellEditor cellEditor = new ResourceDialogCellEditor(
 						parent);
-				Trait fileExt = TaglibDomainMetaDataQueryHelper.getTrait(attr.getMetaDataContext().getEntity(), "file-extensions");
-				Trait separator = TaglibDomainMetaDataQueryHelper.getTrait(attr.getMetaDataContext().getEntity(), "separator");
+				Trait fileExt = TaglibDomainMetaDataQueryHelper.getTrait(attr.getMetaDataContext().getEntity(), "file-extensions"); //$NON-NLS-1$
+				Trait separator = TaglibDomainMetaDataQueryHelper.getTrait(attr.getMetaDataContext().getEntity(), "separator"); //$NON-NLS-1$
 				String[] fileExts = null;
 				if (fileExt != null){
 					List exts = TraitValueHelper.getValueAsListOfStrings(fileExt);
@@ -155,8 +156,8 @@ public class CellEditorFactory implements ITagAttributeCellEditorFactory {
 
 		if (IAttributeRuntimeValueType.RELATIVEPATH.equals(type) ||
 				IAttributeRuntimeValueType.WEBPATH.equals(type)) {
-			Trait fileExt = TaglibDomainMetaDataQueryHelper.getTrait(attr.getMetaDataContext().getEntity(), "file-extensions");
-			Trait seperator = TaglibDomainMetaDataQueryHelper.getTrait(attr.getMetaDataContext().getEntity(), "separator");
+			Trait fileExt = TaglibDomainMetaDataQueryHelper.getTrait(attr.getMetaDataContext().getEntity(), "file-extensions"); //$NON-NLS-1$
+			Trait seperator = TaglibDomainMetaDataQueryHelper.getTrait(attr.getMetaDataContext().getEntity(), "separator"); //$NON-NLS-1$
 			
 			String[] fileExts = null;
 			if (fileExt != null){
@@ -178,12 +179,12 @@ public class CellEditorFactory implements ITagAttributeCellEditorFactory {
 				field.setSeparator(sep);
 			}
 			
-			if ("".equalsIgnoreCase(field.getSeparator())) {
+			if ("".equalsIgnoreCase(field.getSeparator())) { //$NON-NLS-1$
 				field.setResourceDescription(ResourceBoundle
-						.getString("FileCellEditor.Msg"));
+						.getString("FileCellEditor.Msg")); //$NON-NLS-1$
 			} else {
 				field.setResourceDescription(ResourceBoundle
-						.getString("FileCellEditor.Msg1"));
+						.getString("FileCellEditor.Msg1")); //$NON-NLS-1$
 			}
 			field.setWebPath(IAttributeRuntimeValueType.WEBPATH.equals(type));
 			field.setRequired(attr.isRequired());

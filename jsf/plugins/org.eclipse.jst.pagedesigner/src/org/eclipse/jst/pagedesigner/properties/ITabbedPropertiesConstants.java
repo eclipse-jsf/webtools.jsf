@@ -23,6 +23,6 @@ public interface ITabbedPropertiesConstants {
 	/**
 	 * the other category
 	 */
-	static final String OTHER_CATEGORY = "Attributes";
+	static final String OTHER_CATEGORY = Messages.ITabbedPropertiesConstants_other_category;
 
 }

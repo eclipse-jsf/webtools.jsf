@@ -95,7 +95,7 @@ public class NavigationHiearchyAction extends Action {
 	 * @param propertyPage
 	 */
 	public NavigationHiearchyAction(WPETabbedPropertySheetPage propertyPage) {
-		super("");
+		super(""); //$NON-NLS-1$
 		setEnabled(true);
 		setMenuCreator(new MenuCreator());
 		this._propertyPage = propertyPage;
@@ -121,7 +121,7 @@ public class NavigationHiearchyAction extends Action {
 		this._startNode = startNode;
 		if (!(_currentNode instanceof Text)
 				&& !(_currentNode instanceof Element)) {
-			this.setText("---");
+			this.setText("---"); //$NON-NLS-1$
 			this.setEnabled(false);
 		} else {
 			this.setText(_currentNode.getNodeName());

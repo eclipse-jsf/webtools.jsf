@@ -18,7 +18,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.w3c.dom.Element;
 
 /**
- * Factory for creating CellEditors to edit element attributes.
+ * Factory for creating CellEditors and DialogFields to edit element attributes.
  */
 public interface ITagAttributeCellEditorFactory {
 	/**
@@ -59,7 +59,7 @@ public interface ITagAttributeCellEditorFactory {
 	public DialogField createDialogField(IPropertyPageDescriptor attr);
 
 	/**
-	 * The value types supported by this factory.
+	 * The attribute runtime value types supported by this factory.
 	 * 
 	 * @return null means this factory can behave as default factory.
 	 */

@@ -23,14 +23,14 @@ import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.pagedesigner.commands.single.ChangeAttributeCommand;
 import org.eclipse.jst.pagedesigner.editors.properties.IPropertyPageDescriptor;
 import org.eclipse.jst.pagedesigner.meta.EditorCreator;
-import org.eclipse.jst.pagedesigner.properties.internal.QuickEditAttributeGroup;
+import org.eclipse.jst.pagedesigner.properties.internal.AttributeGroup;
 import org.eclipse.jst.pagedesigner.ui.dialogfields.DialogFieldWrapper;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
 
 /**
  * @author mengbo
  */
-public class JSFCoreConvertNumberGroup extends QuickEditAttributeGroup
+public class JSFCoreConvertNumberGroup extends AttributeGroup
 {
     private StyleComboDialogField _typeField;
     private StyleComboDialogField _patternField;

@@ -46,6 +46,7 @@ import org.eclipse.jst.pagedesigner.jsp.core.pagevar.adapter.IDocumentPageVariab
 import org.eclipse.jst.pagedesigner.parts.DocumentEditPart;
 import org.eclipse.jst.pagedesigner.preview.PreviewHandlerNew;
 import org.eclipse.jst.pagedesigner.preview.WindowsIEBrowser;
+import org.eclipse.jst.pagedesigner.properties.WPETabbedPropertySheetPage;
 import org.eclipse.jst.pagedesigner.tools.RangeSelectionTool;
 import org.eclipse.jst.pagedesigner.ui.common.PartActivationHandler;
 import org.eclipse.jst.pagedesigner.ui.common.sash.SashEditorPart;
@@ -142,6 +143,10 @@ public final class HTMLEditor extends PostSelectionMultiPageEditorPart implement
 
 	private List PREVIEW_FILES_LIST = new ArrayList();
 
+	private WPETabbedPropertySheetPage _tabbedPropSheet;
+
+	private ISelectionChangedListener _selChangedListener;
+
     // TODO:This class is never used locally
 //	private class TextInputListener implements ITextInputListener {
 //		public void inputDocumentAboutToBeChanged(IDocument oldInput,
@@ -184,23 +189,47 @@ public final class HTMLEditor extends PostSelectionMultiPageEditorPart implement
 				.getSelectionProvider();
 		if (selectionProvider instanceof IPostSelectionProvider) {
 			((IPostSelectionProvider) selectionProvider)
-					.addPostSelectionChangedListener(new ISelectionChangedListener() {
-						public void selectionChanged(SelectionChangedEvent event) {
-							((PostMultiPageSelectionProvider) getSite()
+					.addPostSelectionChangedListener(getSelectionChangedListener(selectionProvider));
+		} else {
+			selectionProvider
+					.addSelectionChangedListener(getSelectionChangedListener(selectionProvider));
+		}
+	}
+	
+	private void disconnectSashPage() {
+		ISelectionProvider selectionProvider = _sashEditorPart.getSite()
+				.getSelectionProvider();
+		if (selectionProvider instanceof IPostSelectionProvider) {
+			((IPostSelectionProvider) selectionProvider)
+					.removePostSelectionChangedListener(getSelectionChangedListener(selectionProvider));
+		} else {
+			selectionProvider
+					.removeSelectionChangedListener(getSelectionChangedListener(selectionProvider));
+		}
+	}
+
+	private ISelectionChangedListener getSelectionChangedListener(ISelectionProvider selectionProvider) {
+		if (_selChangedListener  == null) {
+			if (selectionProvider instanceof IPostSelectionProvider) {
+				_selChangedListener =  new ISelectionChangedListener() {
+				public void selectionChanged(SelectionChangedEvent event) {
+						((PostMultiPageSelectionProvider) getSite()
+								.getSelectionProvider())
+								.firePostSelectionChanged(event);
+					}
+				};
+			}
+			else {
+				_selChangedListener =  new ISelectionChangedListener() {
+					public void selectionChanged(SelectionChangedEvent event) {
+							((MultiPageSelectionProvider) getSite()
 									.getSelectionProvider())
 									.firePostSelectionChanged(event);
 						}
-					});
-		} else {
-			selectionProvider
-					.addSelectionChangedListener(new ISelectionChangedListener() {
-						public void selectionChanged(SelectionChangedEvent event) {
-							((MultiPageSelectionProvider) getSite()
-									.getSelectionProvider())
-									.fireSelectionChanged(event);
-						}
-					});
+					};
+			}
 		}
+		return _selChangedListener;
 	}
 
 	/**
@@ -417,15 +446,17 @@ public final class HTMLEditor extends PostSelectionMultiPageEditorPart implement
 	private void disconnectDesignPage() {
 		if (_designViewer != null) {
 			_designViewer.setModel(null);
+			_designViewer.dispose();
 		}
 	}
 
 	public void dispose() {
-
+		//System.out.println("dispose of HTML Editor");
 		deletePreviewFiles();
 
 		disconnectDesignPage();
-
+		disconnectSashPage();
+		
 		IWorkbenchWindow window = getSite().getWorkbenchWindow();
 		window.getPartService().removePartListener(_partListener);
 		window.getShell().removeShellListener(_partListener);
@@ -433,11 +464,23 @@ public final class HTMLEditor extends PostSelectionMultiPageEditorPart implement
 
 		if (_textEditor != null) {
 			_textEditor.removePropertyListener(this);
+			_textEditor.setEditorPart(null);
+			_textEditor.dispose();
 		}
-
+		
 		// moved to last when added window ... seems like
 		// we'd be in danger of losing some data, like site,
 		// or something.
+		_sashEditorPart = null;
+		_tabbedPropSheet = null;
+		_partListener = null;
+		_editDomain = null;
+		_designViewer = null;
+		_paletteViewerPage = null;
+		_log = null;
+		_selChangedListener = null;
+		_textEditor = null;
+		
 		super.dispose();
 		
 	}
@@ -835,8 +878,11 @@ public final class HTMLEditor extends PostSelectionMultiPageEditorPart implement
 	}
 
 	private IPropertySheetPage getPropertySheetPage() {
-		return new org.eclipse.jst.pagedesigner.properties.WPETabbedPropertySheetPage(
-				this, this);
+		if (_tabbedPropSheet == null){
+			_tabbedPropSheet = new org.eclipse.jst.pagedesigner.properties.WPETabbedPropertySheetPage(
+					this, this);
+		}
+		return _tabbedPropSheet;
 	}
 
 	private PaletteViewerPage getPaletteViewerPage() {

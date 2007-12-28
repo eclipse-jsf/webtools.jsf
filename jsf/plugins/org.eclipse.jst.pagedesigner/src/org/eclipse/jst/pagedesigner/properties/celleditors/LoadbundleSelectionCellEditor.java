@@ -46,7 +46,7 @@ public class LoadbundleSelectionCellEditor extends EditableDialogCellEditor {
 		ResourceOnClasspathDialog dialog = new ResourceOnClasspathDialog(
 				cellEditorWindow.getShell(), DesignerPropertyTool
 						.getJavaProject(_project));
-		dialog.setTitle(ResourceBoundle.getString("FileCellEditor.Title"));
+		dialog.setTitle(ResourceBoundle.getString("FileCellEditor.Title")); //$NON-NLS-1$
 		dialog.setSuffixs(PROPERTIES_FILES_SUFFIXS);
 		dialog.open();
 		if (dialog.getResult() != null) {

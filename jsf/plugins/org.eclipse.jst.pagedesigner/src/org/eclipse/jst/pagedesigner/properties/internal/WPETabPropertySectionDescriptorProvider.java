@@ -84,7 +84,7 @@ public class WPETabPropertySectionDescriptorProvider implements
 		IConfigurationElement[] extensions = getConfigurationElements(EXTPT_SECTIONS);
 		for (int i = 0; i < extensions.length; i++) {
 			IConfigurationElement extension = extensions[i];
-			if (extension.getAttribute("contributorId").equals(HTMLEditor.TABBED_PROPERTIES_CONTRIBUTOR_ID)){
+			if (extension.getAttribute("contributorId").equals(HTMLEditor.TABBED_PROPERTIES_CONTRIBUTOR_ID)){ //$NON-NLS-1$
 				IConfigurationElement[] sections = extension
 						.getChildren(ELEMENT_SECTION);
 				for (int j = 0; j < sections.length; j++) {
@@ -105,7 +105,7 @@ public class WPETabPropertySectionDescriptorProvider implements
 	private static IConfigurationElement[] getConfigurationElements(
 			String extensionPointId) {
 		IExtensionPoint extensionPoint = Platform.getExtensionRegistry()
-				.getExtensionPoint("org.eclipse.ui.views.properties.tabbed", extensionPointId);
+				.getExtensionPoint("org.eclipse.ui.views.properties.tabbed", extensionPointId); //$NON-NLS-1$
 		if (extensionPoint == null) {
 			return null;
 		}

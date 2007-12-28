@@ -71,7 +71,7 @@ public class CellEditorFactoryRegistry {
 			_defaultFactories.add(fac);
 		} else {
 			for (int i = 0; i < types.length; i++) {
-				_factoryMap.put(types[i].toUpperCase(), fac);
+				_factoryMap.put(types[i], fac);
 			}
 		}
 	}
@@ -88,11 +88,11 @@ public class CellEditorFactoryRegistry {
 		String type = attr.getValueType();
 		if (type == null || type.length() == 0)
 			return null;
-//		type = type.toUpperCase();
 
 		CellEditor result = null;
 		ITagAttributeCellEditorFactory fac = (ITagAttributeCellEditorFactory) _factoryMap
 				.get(type);
+		
 		if (fac != null) {
 			result = fac.createCellEditor(parent, attr, element);
 		}
