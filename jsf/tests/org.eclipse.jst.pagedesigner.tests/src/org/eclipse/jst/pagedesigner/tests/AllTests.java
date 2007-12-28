@@ -15,6 +15,7 @@ import junit.framework.TestSuite;
 
 import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
+import org.eclipse.jst.pagedesigner.tests.tabbed.properties.sections.BasicTabbedPropertyPageTests;
 import org.eclipse.jst.pagedesigner.tests.tagcreator.TestDefaultTagCreatorForJSFCore;
 import org.eclipse.jst.pagedesigner.tests.tagcreator.TestDefaultTagCreatorForJSFHTML;
 import org.eclipse.jst.pagedesigner.tests.tagcreator.TestDefaultTagCreatorHTML;
@@ -56,6 +57,9 @@ public class AllTests {
         
         addTestRequiringJSFRuntime(suite, TestTagCreationFactory.class, JSFVersion.V1_1);
         
+        
+        //Tabbed Property Tests - do not require JSF Runtime
+        suite.addTestSuite(BasicTabbedPropertyPageTests.class);
 		//$JUnit-END$
 		return suite;
 	}

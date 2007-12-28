@@ -82,7 +82,7 @@ public class PropertyDescriptorTests extends SingleJSPTestCase {
 		assertEquals("CategoryName", pd.getCategory());
 		assertEquals("This is a description.", pd.getDescription());
 		assertTrue(pd.isRequired());
-		assertEquals("MyAttr1", pd.getLabel());
+		assertEquals("MyAttr1:", pd.getLabel());
 		
 	}
 	
@@ -97,7 +97,7 @@ public class PropertyDescriptorTests extends SingleJSPTestCase {
 		assertEquals(ITabbedPropertiesConstants.OTHER_CATEGORY, pd.getCategory());
 		assertNull(pd.getDescription());
 		assertFalse(pd.isRequired());
-		assertEquals("DefaultAttr", pd.getLabel());
+		assertEquals("DefaultAttr:", pd.getLabel());
 		
 	}
 	

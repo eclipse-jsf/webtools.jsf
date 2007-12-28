@@ -122,8 +122,9 @@ public final class JSFTestUtil
 
     public static URI getPlatformAbsPath(final String relativePath) throws MalformedURLException, URISyntaxException
     {
-        final URL url = new URL(Platform.getInstanceLocation().getURL(), relativePath);
-        return url.toURI();
+    	
+        final File file = new File(Platform.getInstanceLocation().getURL().getFile() + File.separator + relativePath);
+        return file.toURI();
     }
 
     public static IPath getAbsolutePath(final Bundle bundle, final String relativePath) throws IOException, URISyntaxException
