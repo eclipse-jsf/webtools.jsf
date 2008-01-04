@@ -70,10 +70,10 @@ public class CategoryNameComparator implements Comparator {
 		if (ITabbedPropertiesConstants.OTHER_CATEGORY.equals(o2))
 			return -1;
 
-		Pair p = new Pair((String) o1, (String) o2);
-		if (_pairs.contains(p))
-			return -1;
-		return 1;
+//		Pair p = new Pair((String) o1, (String) o2);
+//		if (_pairs.contains(p))
+//			return -1;
+		return ((String)o1).compareTo(((String)o2));
 	}
 
 	/**
