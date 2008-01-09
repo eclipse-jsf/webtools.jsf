@@ -19,34 +19,37 @@ import org.w3c.dom.Element;
 
 /**
  * A command to customize a new tag element
- * <p><b>Provisional API - subject to change</b></p>
+ * <p>
+ * <b>Provisional API - subject to change</b>
+ * </p>
  * 
  * Clients may sub-class.
  * 
  * @author cbateman
- *
+ * 
  */
-public class ElementCustomizationCommand extends AbstractCreationCommand 
+public class ElementCustomizationCommand extends AbstractCreationCommand
 {
     /**
      * the dom model where the element will be added
      */
-    protected final IDOMModel  _model;
+    protected final IDOMModel _model;
     /**
      * the element to be customized
      */
-    protected final Element    _element;
+    protected final Element _element;
     /**
      * the creation data for the new tag
      */
     protected final CreationData _creationData;
-    
+
     /**
      * @param model
      * @param element
      * @param creationData
      */
-    public ElementCustomizationCommand(final IDOMModel model, final Element element, CreationData creationData)
+    public ElementCustomizationCommand(final IDOMModel model,
+            final Element element, final CreationData creationData)
     {
         _model = model;
         _element = element;
@@ -54,14 +57,14 @@ public class ElementCustomizationCommand extends AbstractCreationCommand
     }
 
     @Override
-    public void execute() 
+    public void execute()
     {
-       applyChildElementCustomization();
-       applyAttributeCustomization();
+        applyChildElementCustomization();
+        applyAttributeCustomization();
     }
 
     @Override
-    protected boolean prepare() 
+    protected boolean prepare()
     {
         // do nothing by default; return true to indicate can execute
         return true;
@@ -70,75 +73,90 @@ public class ElementCustomizationCommand extends AbstractCreationCommand
     /**
      * Override to customize the children of the tag being created
      * 
-     * Default implementation uses meta-data to load a template.
-     * This is the prefered method for static child values (i.e. those
-     * that are not calculated dynamically at runtime).
+     * Default implementation uses meta-data to load a template. This is the
+     * prefered method for static child values (i.e. those that are not
+     * calculated dynamically at runtime).
      */
     protected void applyChildElementCustomization()
     {
-        TagCreationInfo tagCreationInfo = _creationData.getTagCreationInfo();
+        final TagCreationInfo tagCreationInfo = _creationData.getTagCreationInfo();
         if (tagCreationInfo != null)
         {
-            PaletteElementTemplateHelper.applyTemplate(_model, _element, _creationData.getTagEntry(), tagCreationInfo);
+            PaletteElementTemplateHelper.applyTemplate(_model, _element,
+                    _creationData.getTagEntry(), tagCreationInfo);
         }
     }
-    
+
     /**
-     * Add required attributes and default values, if set, to the created tag element
+     * Add required attributes and default values, if set, to the created tag
+     * element
      * 
      * To customize the attributes that get added, use TagCreationInfo metadata
      * 
-     * This method is provided as a utility for clients.  It is not used by default
+     * This method is provided as a utility for clients. It is not used by
+     * default
      * 
      * @param element
-     * @param creationData 
+     * @param creationData
      */
-    protected final void ensureRequiredAttrs(final Element element, final CreationData creationData) 
+    protected final void ensureRequiredAttrs(final Element element,
+            final CreationData creationData)
     {
-        CMElementDeclaration ed = CMUtil.getTLDElementDeclaration(creationData.getUri(), creationData.getTagName(), creationData.getModel().getDocument().getStructuredDocument());
+        final CMElementDeclaration ed = CMUtil.getTLDElementDeclaration(creationData
+                .getUri(), creationData.getTagName(), creationData.getModel()
+                .getDocument().getStructuredDocument());
 
         if (ed != null)
         {
-            for (Iterator it=ed.getAttributes().iterator();it.hasNext();){
-                CMAttributeDeclaration attr = (CMAttributeDeclaration)it.next();
+            for (final Iterator it = ed.getAttributes().iterator(); it.hasNext();)
+            {
+                final CMAttributeDeclaration attr = (CMAttributeDeclaration) it
+                        .next();
                 if (attr.getUsage() == CMAttributeDeclaration.REQUIRED
                         && element.getAttribute(attr.getAttrName()) == null)
                 {
-                    element.setAttribute(attr.getAttrName(), attr.getDefaultValue());
+                    element.setAttribute(attr.getAttrName(), attr
+                            .getDefaultValue());
                 }
             }
         }
     }
-    
+
     /**
      * Override to customize the attributes of the tag being created
      * 
-     * Default implementation uses meta-data to set the attribut values.
-     * This is the prefered method for static attribute values (i.e. those
-     * that are not calculated dynamically at runtime).
+     * Default implementation uses meta-data to set the attribut values. This is
+     * the prefered method for static attribute values (i.e. those that are not
+     * calculated dynamically at runtime).
      * 
      */
     protected void applyAttributeCustomization()
     {
-        TagCreationInfo info = _creationData.getTagCreationInfo();
-        if (info != null){
-            EList list = info.getAttributes();
-            if (list != null) {
-                for (Iterator it = list.iterator(); it.hasNext();) {
-                    TagCreationAttribute attr = (TagCreationAttribute)it.next();
-                    _element.setAttribute(attr.getId(), (attr.getValue() == null ? "" : attr.getValue()));
+        final TagCreationInfo info = _creationData.getTagCreationInfo();
+        if (info != null)
+        {
+            final EList list = info.getAttributes();
+            if (list != null)
+            {
+                for (final Iterator it = list.iterator(); it.hasNext();)
+                {
+                    final TagCreationAttribute attr = (TagCreationAttribute) it
+                            .next();
+                    _element.setAttribute(attr.getId(),
+                            (attr.getValue() == null ? "" : attr.getValue()));
                 }
             }
         }
     }
-    
+
     @Override
-    public final Command chain(Command command) {
+    public final Command chain(final Command command)
+    {
         return super.chain(command);
     }
 
     @Override
-    public final Collection<Element> getResult() 
+    public final Collection<Element> getResult()
     {
         return Collections.singletonList(_element);
     }
