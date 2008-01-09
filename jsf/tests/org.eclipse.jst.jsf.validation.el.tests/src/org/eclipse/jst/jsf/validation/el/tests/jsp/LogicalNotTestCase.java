@@ -15,109 +15,114 @@ import org.eclipse.wst.validation.internal.provisional.core.IMessage;
  */
 public class LogicalNotTestCase extends SingleJSPTestCase {
 
-    public LogicalNotTestCase() 
+    public LogicalNotTestCase()
     {
         super("/testdata/jsps/logicalNOT.jsp.data", "/logicalNOT.jsp", JSFVersion.V1_1,FACES_CONFIG_FILE_NAME_1_1);
     }
 
+    @Override
     protected void setUp() throws Exception
     {
         super.setUp();
     }
 
+    @Override
     public void testSanity()
     {
-        assertEquals("!myBean.booleanProperty", getELText(_structuredDocument,853));
-        assertEquals("not myBean.booleanProperty", getELText(_structuredDocument,910));
-        assertEquals("!myBean.stringProperty", getELText(_structuredDocument,967));
-        assertEquals("not myBean.stringProperty", getELText(_structuredDocument,1020));
+        assertEquals("!myBean.booleanProperty", getELText(_structuredDocument,829));
+        assertEquals("not myBean.booleanProperty", getELText(_structuredDocument,885));
+        assertEquals("!myBean.stringProperty", getELText(_structuredDocument,941));
+        assertEquals("not myBean.stringProperty", getELText(_structuredDocument,993));
 
-        assertEquals("!true", getELText(_structuredDocument,1105));
-        assertEquals("not true", getELText(_structuredDocument,1144));
-        assertEquals("!false", getELText(_structuredDocument,1186));
-        assertEquals("not false", getELText(_structuredDocument,1226));
-        assertEquals("! 'true'", getELText(_structuredDocument,1269));
-        assertEquals("not 'true'", getELText(_structuredDocument,1311));
-        assertEquals("! 'notTrue'", getELText(_structuredDocument,1355));
-        assertEquals("not 'notTrue'", getELText(_structuredDocument,1400));
+        assertEquals("!true", getELText(_structuredDocument,1075));
+        assertEquals("not true", getELText(_structuredDocument,1113));
+        assertEquals("!false", getELText(_structuredDocument,1154));
+        assertEquals("not false", getELText(_structuredDocument,1193));
+        assertEquals("! 'true'", getELText(_structuredDocument,1235));
+        assertEquals("not 'true'", getELText(_structuredDocument,1276));
+        assertEquals("! 'notTrue'", getELText(_structuredDocument,1319));
+        assertEquals("not 'notTrue'", getELText(_structuredDocument,1363));
 
-        assertEquals("!5", getELText(_structuredDocument,1470));
-        assertEquals("not 5", getELText(_structuredDocument,1503));
-        assertEquals("!myBean.integerProperty", getELText(_structuredDocument,1539));
-        assertEquals("not myBean.integerProperty", getELText(_structuredDocument,1593));
-        assertEquals("!myBean.collectionProperty", getELText(_structuredDocument,1650));
-        assertEquals("not myBean.collectionProperty", getELText(_structuredDocument,1707));
-        assertEquals("!myBean.stringArrayProperty", getELText(_structuredDocument,1767));
-        assertEquals("not myBean.stringArrayProperty", getELText(_structuredDocument,1825));
-        assertEquals("!myBean.mapProperty", getELText(_structuredDocument,1886));
-        assertEquals("not myBean.mapProperty", getELText(_structuredDocument,1936));
+        assertEquals("!5", getELText(_structuredDocument,1430));
+        assertEquals("not 5", getELText(_structuredDocument,1462));
+        assertEquals("!myBean.integerProperty", getELText(_structuredDocument,1497));
+        assertEquals("not myBean.integerProperty", getELText(_structuredDocument,1550));
+        assertEquals("!myBean.collectionProperty", getELText(_structuredDocument,1606));
+        assertEquals("not myBean.collectionProperty", getELText(_structuredDocument,1662));
+        assertEquals("!myBean.stringArrayProperty", getELText(_structuredDocument,1721));
+        assertEquals("not myBean.stringArrayProperty", getELText(_structuredDocument,1778));
+        assertEquals("!myBean.mapProperty", getELText(_structuredDocument,1838));
+        assertEquals("not myBean.mapProperty", getELText(_structuredDocument,1887));
     }
 
-    public void testNoErrorExprs() 
+    @Override
+    public void testNoErrorExprs()
     {
-        assertNoError(853, Signature.SIG_BOOLEAN);
-        assertNoError(910, Signature.SIG_BOOLEAN);
-        assertNoError(967, Signature.SIG_BOOLEAN);
-        assertNoError(1020, Signature.SIG_BOOLEAN);
+        assertNoError(829, Signature.SIG_BOOLEAN);
+        assertNoError(885, Signature.SIG_BOOLEAN);
+        assertNoError(941, Signature.SIG_BOOLEAN);
+        assertNoError(993, Signature.SIG_BOOLEAN);
     }
 
-    public void testWarningExprs() 
+    @Override
+    public void testWarningExprs()
     {
-        List<IMessage> list = assertSemanticWarning(1105, Signature.SIG_BOOLEAN, 1);
+        List<IMessage> list = assertSemanticWarning(1075, Signature.SIG_BOOLEAN, 1);
         assertContainsProblem(list, DiagnosticFactory.UNARY_OP_CONSTANT_EXPRESSION_EVAL_SAME_ID);
 
-        list = assertSemanticWarning(1144, Signature.SIG_BOOLEAN, 1);
+        list = assertSemanticWarning(1113, Signature.SIG_BOOLEAN, 1);
         assertContainsProblem(list, DiagnosticFactory.UNARY_OP_CONSTANT_EXPRESSION_EVAL_SAME_ID);
 
-        list = assertSemanticWarning(1186, Signature.SIG_BOOLEAN, 1);
+        list = assertSemanticWarning(1154, Signature.SIG_BOOLEAN, 1);
         assertContainsProblem(list, DiagnosticFactory.UNARY_OP_CONSTANT_EXPRESSION_EVAL_SAME_ID);
 
-        list = assertSemanticWarning(1226, Signature.SIG_BOOLEAN, 1);
+        list = assertSemanticWarning(1193, Signature.SIG_BOOLEAN, 1);
         assertContainsProblem(list, DiagnosticFactory.UNARY_OP_CONSTANT_EXPRESSION_EVAL_SAME_ID);
 
-        list = assertSemanticWarning(1269, Signature.SIG_BOOLEAN, 1);
+        list = assertSemanticWarning(1235, Signature.SIG_BOOLEAN, 1);
         assertContainsProblem(list, DiagnosticFactory.UNARY_OP_CONSTANT_EXPRESSION_EVAL_SAME_ID);
 
-        list = assertSemanticWarning(1311, Signature.SIG_BOOLEAN, 1);
+        list = assertSemanticWarning(1276, Signature.SIG_BOOLEAN, 1);
         assertContainsProblem(list, DiagnosticFactory.UNARY_OP_CONSTANT_EXPRESSION_EVAL_SAME_ID);
 
-        list = assertSemanticWarning(1355, Signature.SIG_BOOLEAN, 1);
+        list = assertSemanticWarning(1319, Signature.SIG_BOOLEAN, 1);
         assertContainsProblem(list, DiagnosticFactory.UNARY_OP_CONSTANT_EXPRESSION_EVAL_SAME_ID);
 
-        list = assertSemanticWarning(1400, Signature.SIG_BOOLEAN, 1);
+        list = assertSemanticWarning(1363, Signature.SIG_BOOLEAN, 1);
         assertContainsProblem(list, DiagnosticFactory.UNARY_OP_CONSTANT_EXPRESSION_EVAL_SAME_ID);
     }
 
-    public void testErrorExprs() 
+    @Override
+    public void testErrorExprs()
     {
-        List<IMessage> list = assertSemanticError(1470, null, 1);
-        assertContainsProblem(list, DiagnosticFactory.UNARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN_ID);
-        
-        list = assertSemanticError(1503, null, 1);
+        List<IMessage> list = assertSemanticError(1430, null, 1);
         assertContainsProblem(list, DiagnosticFactory.UNARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN_ID);
 
-        list = assertSemanticError(1539, null, 1);
+        list = assertSemanticError(1462, null, 1);
         assertContainsProblem(list, DiagnosticFactory.UNARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN_ID);
 
-        list = assertSemanticError(1593, null, 1);
+        list = assertSemanticError(1497, null, 1);
         assertContainsProblem(list, DiagnosticFactory.UNARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN_ID);
 
-        list = assertSemanticError(1650, null, 1);
+        list = assertSemanticError(1550, null, 1);
         assertContainsProblem(list, DiagnosticFactory.UNARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN_ID);
 
-        list = assertSemanticError(1707, null, 1);
+        list = assertSemanticError(1606, null, 1);
         assertContainsProblem(list, DiagnosticFactory.UNARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN_ID);
 
-        list = assertSemanticError(1767, null, 1);
+        list = assertSemanticError(1662, null, 1);
         assertContainsProblem(list, DiagnosticFactory.UNARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN_ID);
 
-        list = assertSemanticError(1825, null, 1);
+        list = assertSemanticError(1721, null, 1);
         assertContainsProblem(list, DiagnosticFactory.UNARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN_ID);
 
-        list = assertSemanticError(1886, null, 1);
+        list = assertSemanticError(1778, null, 1);
         assertContainsProblem(list, DiagnosticFactory.UNARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN_ID);
 
-        list = assertSemanticError(1936, null, 1);
+        list = assertSemanticError(1838, null, 1);
+        assertContainsProblem(list, DiagnosticFactory.UNARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN_ID);
+
+        list = assertSemanticError(1887, null, 1);
         assertContainsProblem(list, DiagnosticFactory.UNARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN_ID);
     }
 

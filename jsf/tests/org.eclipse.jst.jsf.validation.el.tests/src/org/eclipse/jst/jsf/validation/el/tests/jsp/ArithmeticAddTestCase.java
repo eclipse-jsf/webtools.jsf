@@ -16,94 +16,99 @@ import org.eclipse.wst.validation.internal.provisional.core.IMessage;
  * @author cbateman
  *
  */
-public class ArithmeticAddTestCase extends SingleJSPTestCase 
+public class ArithmeticAddTestCase extends SingleJSPTestCase
 {
     public ArithmeticAddTestCase()
     {
         super("/testdata/jsps/arithmeticAdd.jsp.data", "/arithmeticAdd.jsp", JSFVersion.V1_1, FACES_CONFIG_FILE_NAME_1_1);
     }
-    protected void setUp() throws Exception 
+    @Override
+    protected void setUp() throws Exception
     {
         super.setUp();
     }
 
+    @Override
     public void testSanity()
     {
         super.testSanity();
-        
-        assertEquals("myBean.integerProperty  + 3", getELText(_structuredDocument,900));
-        assertEquals("myBean.stringProperty + 3", getELText(_structuredDocument,961));
-        assertEquals("myBean.integerProperty + myBean.integerProperty", getELText(_structuredDocument,1020));
-        assertEquals("myBean.bigIntegerProperty + 4", getELText(_structuredDocument,1101));
-        assertEquals("myBean.bigIntegerProperty + 5.5", getELText(_structuredDocument,1164));
-        assertEquals("myBean.bigDoubleProperty + 5.5", getELText(_structuredDocument,1229));
-        assertEquals("myBean.doubleProperty + 5", getELText(_structuredDocument,1293));
 
-        assertEquals("5 + 3", getELText(_structuredDocument,1381));
-        assertEquals("5.5 + 4", getELText(_structuredDocument,1417));
-        assertEquals("5.5 + null", getELText(_structuredDocument,1455));
-        assertEquals("'5' + '4'", getELText(_structuredDocument,1499));
-        assertEquals("null + null", getELText(_structuredDocument,1542));
-        assertEquals("5.5 + 3.5", getELText(_structuredDocument,1588));
+        assertEquals("myBean.integerProperty  + 3", getELText(_structuredDocument,874));
+        assertEquals("myBean.stringProperty + 3", getELText(_structuredDocument,934));
+        assertEquals("myBean.integerProperty + myBean.integerProperty", getELText(_structuredDocument,992));
+        assertEquals("myBean.bigIntegerProperty + 4", getELText(_structuredDocument,1072));
+        assertEquals("myBean.bigIntegerProperty + 5.5", getELText(_structuredDocument,1134));
+        assertEquals("myBean.bigDoubleProperty + 5.5", getELText(_structuredDocument,1198));
+        assertEquals("myBean.doubleProperty + 5", getELText(_structuredDocument,1261));
 
-        assertEquals("5 + true", getELText(_structuredDocument,1651));
-        assertEquals("myBean.integerProperty + myBean.booleanProperty", getELText(_structuredDocument,1690));
-        assertEquals("myBean.stringArrayProperty + myBean.booleanProperty", getELText(_structuredDocument,1768));
-        assertEquals("myBean.integerProperty + true ", getELText(_structuredDocument,1853));
-        assertEquals("'a' + 'b'", getELText(_structuredDocument,1917));
-        assertEquals("myBean.bigIntegerProperty + true", getELText(_structuredDocument,1960));
+        assertEquals("5 + 3", getELText(_structuredDocument,1343));
+        assertEquals("5.5 + 4", getELText(_structuredDocument,1378));
+        assertEquals("5.5 + null", getELText(_structuredDocument,1415));
+        assertEquals("'5' + '4'", getELText(_structuredDocument,1458));
+        assertEquals("null + null", getELText(_structuredDocument,1500));
+        assertEquals("5.5 + 3.5", getELText(_structuredDocument,1545));
+
+        assertEquals("5 + true", getELText(_structuredDocument,1605));
+        assertEquals("myBean.integerProperty + myBean.booleanProperty", getELText(_structuredDocument,1643));
+        assertEquals("myBean.stringArrayProperty + myBean.booleanProperty", getELText(_structuredDocument,1720));
+        assertEquals("myBean.integerProperty + true ", getELText(_structuredDocument,1804));
+        assertEquals("'a' + 'b'", getELText(_structuredDocument,1867));
+        assertEquals("myBean.bigIntegerProperty + true", getELText(_structuredDocument,1909));
     }
-    
+
+    @Override
     public void testNoErrorExprs()
     {
-        assertNoError(900, Signature.SIG_LONG);
-        assertNoError(961, Signature.SIG_LONG);
-        assertNoError(1020, Signature.SIG_LONG);
-        assertNoError(1101, TypeConstants.TYPE_BIG_INTEGER);
-        assertNoError(1164, TypeConstants.TYPE_BIG_DOUBLE);
-        assertNoError(1229, TypeConstants.TYPE_BIG_DOUBLE);
-        assertNoError(1293, Signature.SIG_DOUBLE);
+        assertNoError(874, Signature.SIG_LONG);
+        assertNoError(934, Signature.SIG_LONG);
+        assertNoError(992, Signature.SIG_LONG);
+        assertNoError(1072, TypeConstants.TYPE_BIG_INTEGER);
+        assertNoError(1134, TypeConstants.TYPE_BIG_DOUBLE);
+        assertNoError(1198, TypeConstants.TYPE_BIG_DOUBLE);
+        assertNoError(1261, Signature.SIG_DOUBLE);
     }
 
+    @Override
     public void testWarningExprs()
     {
-        List<IMessage> list = assertSemanticWarning(1381, Signature.SIG_LONG, 1);
+        List<IMessage> list = assertSemanticWarning(1343, Signature.SIG_LONG, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID);
 
-        list = assertSemanticWarning(1417, Signature.SIG_DOUBLE,  1);
+        list = assertSemanticWarning(1378, Signature.SIG_DOUBLE,  1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID);
-        
-        list = assertSemanticWarning(1455, Signature.SIG_DOUBLE, 1);
+
+        list = assertSemanticWarning(1415, Signature.SIG_DOUBLE, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID);
-        
-        list = assertSemanticWarning(1499, Signature.SIG_LONG,  1);
+
+        list = assertSemanticWarning(1458, Signature.SIG_LONG,  1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID);
-        
-        list = assertSemanticWarning(1542, Signature.SIG_LONG,  1);
+
+        list = assertSemanticWarning(1500, Signature.SIG_LONG,  1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_BOTH_OPERANDS_NULL_ID);
-        
-        list = assertSemanticWarning(1588, Signature.SIG_DOUBLE, 1);
+
+        list = assertSemanticWarning(1545, Signature.SIG_DOUBLE, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID);
     }
-    
+
+    @Override
     public void testErrorExprs()
     {
-        List<IMessage> list = assertSemanticError(1651, null, 1);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
-        
-        list = assertSemanticError(1690, null, 1);
+        List<IMessage> list = assertSemanticError(1605, null, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
 
-        list = assertSemanticError(1768, null, 1);
+        list = assertSemanticError(1643, null, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
-       
-        list = assertSemanticError(1853, null, 1);
+
+        list = assertSemanticError(1720, null, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
-        
-        list = assertSemanticError(1917, null, 1);
+
+        list = assertSemanticError(1804, null, 1);
+        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
+
+        list = assertSemanticError(1867, null, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_COERCE_LITERALS_TO_NUMBERS_ID);
 
-        list = assertSemanticError(1960, null, 1);
+        list = assertSemanticError(1909, null, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
     }
 }

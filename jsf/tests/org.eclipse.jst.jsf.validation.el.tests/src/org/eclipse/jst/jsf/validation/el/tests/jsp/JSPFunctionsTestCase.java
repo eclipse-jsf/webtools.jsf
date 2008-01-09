@@ -12,49 +12,55 @@ import org.eclipse.wst.validation.internal.provisional.core.IMessage;
  * 
  * @author cbateman
  */
-public class JSPFunctionsTestCase extends SingleJSPTestCase 
+public class JSPFunctionsTestCase extends SingleJSPTestCase
 {
     public JSPFunctionsTestCase() {
         super("/testdata/jsps/jspFunctions.jsp.data", "/jspFunctions.jsp", JSFVersion.V1_1,FACES_CONFIG_FILE_NAME_1_1);
     }
 
+    @Override
     protected void setUp() throws Exception
     {
         super.setUp();
     }
 
+    @Override
     public void testSanity()
     {
-        assertEquals("f:someFunc(6) > 8", getELText(_structuredDocument,967));
-        assertEquals("f:someFunc(6)", getELText(_structuredDocument,1018));
-        assertEquals("f:someFunc(true)", getELText(_structuredDocument,1065));
-        assertEquals("someFunc(6) > 8", getELText(_structuredDocument,1260));
-        assertEquals("someFunc(6)", getELText(_structuredDocument,1309));
-        assertEquals("someFunc(true)", getELText(_structuredDocument,1354));
+        assertEquals("f:someFunc(6) > 8", getELText(_structuredDocument,940));
+        assertEquals("f:someFunc(6)", getELText(_structuredDocument,990));
+        assertEquals("f:someFunc(true)", getELText(_structuredDocument,1036));
+
+        assertEquals("someFunc(6) > 8", getELText(_structuredDocument,1226));
+        assertEquals("someFunc(6)", getELText(_structuredDocument,1274));
+        assertEquals("someFunc(true)", getELText(_structuredDocument,1318));
     }
 
-    public void testNoErrorExprs() 
+    @Override
+    public void testNoErrorExprs()
     {
-        assertNoError(967, null);
-        assertNoError(1018, null);
-        assertNoError(1065, null);
+        assertNoError(940, null);
+        assertNoError(990, null);
+        assertNoError(1036, null);
     }
 
-    public void testWarningExprs() 
+    @Override
+    public void testWarningExprs()
     {
         // note: this will change to non-error when functions are properly supported
         // by the parser
-        List<IMessage> list = assertSyntaxWarning(1260, 1);
+        List<IMessage> list = assertSyntaxWarning(1226, 1);
         assertContainsProblem(list, DiagnosticFactory.GENERAL_SYNTAX_ERROR_ID);
 
-        list = assertSyntaxWarning(1309, 1);
+        list = assertSyntaxWarning(1274, 1);
         assertContainsProblem(list, DiagnosticFactory.GENERAL_SYNTAX_ERROR_ID);
-        
-        list = assertSyntaxWarning(1354, 1);
+
+        list = assertSyntaxWarning(1318, 1);
         assertContainsProblem(list, DiagnosticFactory.GENERAL_SYNTAX_ERROR_ID);
     }
-    
-    public void testErrorExprs() 
+
+    @Override
+    public void testErrorExprs()
     {
         // no error cases
     }

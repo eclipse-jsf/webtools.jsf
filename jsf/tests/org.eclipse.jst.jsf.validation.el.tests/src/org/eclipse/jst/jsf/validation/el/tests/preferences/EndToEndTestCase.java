@@ -7,10 +7,9 @@
  *
  * Contributors:
  *    Cameron Bateman - initial implementation
- *******************************************************************************/ 
+ *******************************************************************************/
 package org.eclipse.jst.jsf.validation.el.tests.preferences;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
@@ -40,25 +39,25 @@ public class EndToEndTestCase extends JSPTestCase
     private IStructuredModel        _structuredModel;
     private IStructuredDocument     _structuredDocument;
     private ELValidationPreferences _prefs;
-    
-    
+
+
     @Override
-    protected void setUp() throws Exception 
+    protected void setUp() throws Exception
     {
         super.setUp();
-        
+
         _testJSP = loadJSP("/testdata/jsps/preferenceTest1.jsp.data", "/preferenceTest1.jsp");
-        
+
         _structuredModel = StructuredModelManager.getModelManager().getModelForRead(_testJSP);
         _structuredDocument = _structuredModel.getStructuredDocument();
-        
+
         _prefs = new ELValidationPreferences();
         _prefs.load(JSFCorePlugin.getDefault().getPreferenceStore());
         PrefTestUtil.assertExpectedDefaults(_prefs);
     }
 
     @Override
-    protected void tearDown() throws Exception 
+    protected void tearDown() throws Exception
     {
         super.tearDown();
 
@@ -74,89 +73,89 @@ public class EndToEndTestCase extends JSPTestCase
         ((IPersistentPreferenceStore)JSFCorePlugin.getDefault().getPreferenceStore()).save();
     }
 
+    @Override
     public void testSanity()
     {
-        assertEquals("5+3", getELText(_structuredDocument,823));
-        assertEquals("null+null", getELText(_structuredDocument,856));
-        assertEquals("5 + true", getELText(_structuredDocument,902));
-        assertEquals("'a' + 'b'", getELText(_structuredDocument,947));
-        assertEquals("5 / 0", getELText(_structuredDocument,986));
-        assertEquals("myBean.subClassStringProperty", getELText(_structuredDocument,1058));
-        assertEquals("myBean1", getELText(_structuredDocument,1124));
-        assertEquals("listBean[-1]", getELText(_structuredDocument,1161));
-        assertEquals("myBean.stringArrayProperty > myBean.booleanProperty", getELText(_structuredDocument,1210));
-        assertEquals("myBean.coins > myBean.colors", getELText(_structuredDocument,1298));
-        assertEquals("false && myBean.booleanProperty", getELText(_structuredDocument,1363));
-        assertEquals("myBean.booleanProperty && false", getELText(_structuredDocument,1431));
-        assertEquals("5 == true", getELText(_structuredDocument,1499));
-        assertEquals("!false", getELText(_structuredDocument,1545));
-        assertEquals("!5", getELText(_structuredDocument,1588));
-        assertEquals("myBean.doubleProperty + myBean.getIntegerProperty", getELText(_structuredDocument,1627));
+        assertEquals("5+3", getELText(_structuredDocument,799));
+        assertEquals("null+null", getELText(_structuredDocument,831));
+        assertEquals("5 + true", getELText(_structuredDocument,876));
+        assertEquals("'a' + 'b'", getELText(_structuredDocument,920));
+        assertEquals("5 / 0", getELText(_structuredDocument,958));
+        assertEquals("myBean.subClassStringProperty", getELText(_structuredDocument,1028));
+        assertEquals("myBean1", getELText(_structuredDocument,1093));
+        assertEquals("listBean[-1]", getELText(_structuredDocument,1129));
+        assertEquals("myBean.stringArrayProperty > myBean.booleanProperty", getELText(_structuredDocument,1177));
+        assertEquals("myBean.coins > myBean.colors", getELText(_structuredDocument,1264));
+        assertEquals("false && myBean.booleanProperty", getELText(_structuredDocument,1328));
+        assertEquals("myBean.booleanProperty && false", getELText(_structuredDocument,1395));
+        assertEquals("5 == true", getELText(_structuredDocument,1462));
+        assertEquals("!false", getELText(_structuredDocument,1507));
+        assertEquals("!5", getELText(_structuredDocument,1549));
+        assertEquals("myBean.doubleProperty + myBean.getIntegerProperty", getELText(_structuredDocument,1587));
+
     }
-    
+
     public void testIgnoreAll() throws Exception
     {
         testSeverityAll(Diagnostic.OK, 0);
     }
-    
+
     public void testWarningsAll() throws Exception
     {
         testSeverityAll(Diagnostic.WARNING, IMessage.NORMAL_SEVERITY);
     }
-    
+
     public void testErrorAll() throws Exception
     {
         testSeverityAll(Diagnostic.ERROR, IMessage.HIGH_SEVERITY);
     }
-    
-    
-    private void testSeverityAll(int diagSeverity, int messageSeverity) throws Exception
+
+
+    private void testSeverityAll(final int diagSeverity, final int messageSeverity) throws Exception
     {
-        final Severity severity = 
+        final Severity severity =
             ELValidationPreferences.mapDiagToSeverity(diagSeverity);
         PrefTestUtil.setByKey(severity, _prefs);
         PrefTestUtil.assertSetByKey(severity, _prefs);
-        
-        final  IPreferenceStore  prefStore = 
+
+        final  IPreferenceStore  prefStore =
             JSFCorePlugin.getDefault().getPreferenceStore();
         _prefs.commit(prefStore);
         ((IPersistentPreferenceStore)prefStore).save();
         _prefs.load(prefStore);
-        
-        assertErrorLevel(823, messageSeverity);
-        assertErrorLevel(856, messageSeverity);
-        assertErrorLevel(902, messageSeverity);
-        assertErrorLevel(947, messageSeverity);
-        assertErrorLevel(986, messageSeverity);
-        assertErrorLevel(1058, messageSeverity);
-        assertErrorLevel(1124, messageSeverity);
-        assertErrorLevel(1161, messageSeverity);
-        assertErrorLevel(1210, messageSeverity);
-        assertErrorLevel(1298, messageSeverity);
-        assertErrorLevel(1363, messageSeverity);
-        assertErrorLevel(1431, messageSeverity);
-        assertErrorLevel(1499, messageSeverity);
-        assertErrorLevel(1545, messageSeverity);
-        assertErrorLevel(1588, messageSeverity);
-        assertErrorLevel(1627, messageSeverity);
+
+        assertErrorLevel(799, messageSeverity);
+        assertErrorLevel(831, messageSeverity);
+        assertErrorLevel(876, messageSeverity);
+        assertErrorLevel(920, messageSeverity);
+        assertErrorLevel(958, messageSeverity);
+        assertErrorLevel(1028, messageSeverity);
+        assertErrorLevel(1093, messageSeverity);
+        assertErrorLevel(1129, messageSeverity);
+        assertErrorLevel(1177, messageSeverity);
+        assertErrorLevel(1264, messageSeverity);
+        assertErrorLevel(1328, messageSeverity);
+        assertErrorLevel(1395, messageSeverity);
+        assertErrorLevel(1462, messageSeverity);
+        assertErrorLevel(1507, messageSeverity);
+        assertErrorLevel(1549, messageSeverity);
+        assertErrorLevel(1587, messageSeverity);
     }
-    
+
     private void assertErrorLevel(final int docPos, final int severity)
     {
-        ELExpressionValidator validator = createELValidator(_structuredDocument, docPos, _testJSP);
+        final ELExpressionValidator validator = createELValidator(_structuredDocument, docPos, _testJSP);
         validator.validateXMLNode();
-        List<IMessage> syntaxProblems = validator.getSyntaxProblems();
-        
-        for (final Iterator<IMessage> it = syntaxProblems.iterator(); it.hasNext();)
+        final List<IMessage> syntaxProblems = validator.getSyntaxProblems();
+
+        for (final IMessage message : syntaxProblems)
         {
-            IMessage message = it.next();
             assertEquals(severity, message.getSeverity());
         }
 
-        List<IMessage> semanticProblems = validator.getSemanticValidator().getMessages();
-        for (final Iterator<IMessage> it = semanticProblems.iterator(); it.hasNext();)
+        final List<IMessage> semanticProblems = validator.getSemanticValidator().getMessages();
+        for (final IMessage message : semanticProblems)
         {
-            IMessage message = it.next();
             assertEquals(severity, message.getSeverity());
         }
     }

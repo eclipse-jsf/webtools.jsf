@@ -4,12 +4,12 @@ import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.JSPSemanticsValidator;
 
-public class SyntaxCheckTestCase extends SingleJSPTestCase 
+public class SyntaxCheckTestCase extends SingleJSPTestCase
 {
     private final JSPSemanticsValidator validator;
-    
-    protected SyntaxCheckTestCase(String srcFileName, String destFileName,
-            String defaultJSFVersion, String defaultFacesConfigFile) 
+
+    protected SyntaxCheckTestCase(final String srcFileName, final String destFileName,
+            final String defaultJSFVersion, final String defaultFacesConfigFile)
     {
         super("/testdata/jsps/syntaxCheck.jsp.data", "/syntaxCheck.jsp", JSFVersion.V1_1, FACES_CONFIG_FILE_NAME_1_1);
         validator = new JSPSemanticsValidator();
@@ -27,28 +27,28 @@ public class SyntaxCheckTestCase extends SingleJSPTestCase
     }
 
     @Override
-    public void testWarningExprs() 
+    public void testWarningExprs()
     {
-//        IStructuredDocumentContext context = 
-//            IStructuredDocumentContextFactory.INSTANCE.getContext(_structuredDocument, 877);
-//        ITextRegionContextResolver resolver =
-//            IStructuredDocumentContextResolverFactory.INSTANCE.getTextRegionResolver(context);
+        //        IStructuredDocumentContext context =
+        //            IStructuredDocumentContextFactory.INSTANCE.getContext(_structuredDocument, 877);
+        //        ITextRegionContextResolver resolver =
+        //            IStructuredDocumentContextResolverFactory.INSTANCE.getTextRegionResolver(context);
 
-    
+
     }
 
     @Override
     public void testErrorExprs() {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void testNoErrorExprs()
     {
         // do nothing
-        
+
     }
 
-    
+
 }

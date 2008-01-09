@@ -17,93 +17,98 @@ import org.eclipse.wst.validation.internal.provisional.core.IMessage;
  */
 public class ArithmeticMinusTestCase extends SingleJSPTestCase
 {
-    public ArithmeticMinusTestCase() 
+    public ArithmeticMinusTestCase()
     {
         super("/testdata/jsps/arithmeticMinus.jsp.data", "/WEB-INF/arithmeticMinus.jsp", JSFVersion.V1_1, FACES_CONFIG_FILE_NAME_1_1);
     }
 
-    protected void setUp() throws Exception 
+    @Override
+    protected void setUp() throws Exception
     {
         super.setUp();
     }
 
+    @Override
     public void testSanity()
     {
         super.testSanity();
-        
-        assertEquals("myBean.integerProperty - 3", getELText(_structuredDocument,852));
-        assertEquals("myBean.stringProperty - 3", getELText(_structuredDocument,912));
-        assertEquals("myBean.integerProperty - myBean.integerProperty", getELText(_structuredDocument,971));
-        assertEquals("myBean.bigIntegerProperty - 4", getELText(_structuredDocument,1052));
-        assertEquals("myBean.bigIntegerProperty - 5.5", getELText(_structuredDocument,1115));
-        assertEquals("myBean.bigDoubleProperty - 5.5", getELText(_structuredDocument,1180));
-        assertEquals("myBean.doubleProperty - 5", getELText(_structuredDocument,1244));
 
-        assertEquals("5 - 3", getELText(_structuredDocument,1336));
-        assertEquals("5.5 - 4", getELText(_structuredDocument,1372));
-        assertEquals("5.5 - null", getELText(_structuredDocument,1410));
-        assertEquals("'5' - '4'", getELText(_structuredDocument,1454));
-        assertEquals("null - null", getELText(_structuredDocument,1497));
-        assertEquals("5.5 - 3.5", getELText(_structuredDocument,1543));
+        assertEquals("myBean.integerProperty - 3", getELText(_structuredDocument,828));
+        assertEquals("myBean.stringProperty - 3", getELText(_structuredDocument,887));
+        assertEquals("myBean.integerProperty - myBean.integerProperty", getELText(_structuredDocument,945));
+        assertEquals("myBean.bigIntegerProperty - 4", getELText(_structuredDocument,1025));
+        assertEquals("myBean.bigIntegerProperty - 5.5", getELText(_structuredDocument,1087));
+        assertEquals("myBean.bigDoubleProperty - 5.5", getELText(_structuredDocument,1151));
+        assertEquals("myBean.doubleProperty - 5", getELText(_structuredDocument,1214));
 
-        assertEquals("5 - true", getELText(_structuredDocument,1606));
-        assertEquals("myBean.integerProperty - myBean.booleanProperty", getELText(_structuredDocument,1645));
-        assertEquals("myBean.stringArrayProperty - myBean.booleanProperty", getELText(_structuredDocument,1723));
-        assertEquals("myBean.integerProperty - true ", getELText(_structuredDocument,1808));
-        assertEquals("'a' - 'b'", getELText(_structuredDocument,1872));
-        assertEquals("myBean.bigIntegerProperty - true", getELText(_structuredDocument,1915));
+        assertEquals("5 - 3", getELText(_structuredDocument,1302));
+        assertEquals("5.5 - 4", getELText(_structuredDocument,1337));
+        assertEquals("5.5 - null", getELText(_structuredDocument,1374));
+        assertEquals("'5' - '4'", getELText(_structuredDocument,1417));
+        assertEquals("null - null", getELText(_structuredDocument,1459));
+        assertEquals("5.5 - 3.5", getELText(_structuredDocument,1504));
+
+        assertEquals("5 - true", getELText(_structuredDocument,1564));
+        assertEquals("myBean.integerProperty - myBean.booleanProperty", getELText(_structuredDocument,1602));
+        assertEquals("myBean.stringArrayProperty - myBean.booleanProperty", getELText(_structuredDocument,1679));
+        assertEquals("myBean.integerProperty - true ", getELText(_structuredDocument,1763));
+        assertEquals("'a' - 'b'", getELText(_structuredDocument,1826));
+        assertEquals("myBean.bigIntegerProperty - true", getELText(_structuredDocument,1868));
     }
-    
+
+    @Override
     public void testNoErrorExprs()
     {
-        assertNoError(852, Signature.SIG_LONG);
-        assertNoError(912, Signature.SIG_LONG);
-        assertNoError(971, Signature.SIG_LONG);
-        assertNoError(1052, TypeConstants.TYPE_BIG_INTEGER);
-        assertNoError(1115, TypeConstants.TYPE_BIG_DOUBLE);
-        assertNoError(1180, TypeConstants.TYPE_BIG_DOUBLE);
-        assertNoError(1244, Signature.SIG_DOUBLE);
+        assertNoError(828, Signature.SIG_LONG);
+        assertNoError(887, Signature.SIG_LONG);
+        assertNoError(945, Signature.SIG_LONG);
+        assertNoError(1025, TypeConstants.TYPE_BIG_INTEGER);
+        assertNoError(1087, TypeConstants.TYPE_BIG_DOUBLE);
+        assertNoError(1151, TypeConstants.TYPE_BIG_DOUBLE);
+        assertNoError(1214, Signature.SIG_DOUBLE);
     }
-    
+
+    @Override
     public void testWarningExprs()
     {
-        List<IMessage> list = assertSemanticWarning(1336, Signature.SIG_LONG, 1);
+        List<IMessage> list = assertSemanticWarning(1302, Signature.SIG_LONG, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID);
 
-        list = assertSemanticWarning(1372, Signature.SIG_DOUBLE, 1);
+        list = assertSemanticWarning(1337, Signature.SIG_DOUBLE, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID);
 
-        list = assertSemanticWarning(1410, Signature.SIG_DOUBLE, 1);
+        list = assertSemanticWarning(1374, Signature.SIG_DOUBLE, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID);
 
-        list = assertSemanticWarning(1454, Signature.SIG_LONG, 1);
+        list = assertSemanticWarning(1417, Signature.SIG_LONG, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID);
 
-        list = assertSemanticWarning(1497, Signature.SIG_LONG, 1);
+        list = assertSemanticWarning(1459, Signature.SIG_LONG, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_BOTH_OPERANDS_NULL_ID);
-        
-        list = assertSemanticWarning(1543, Signature.SIG_DOUBLE, 1);
+
+        list = assertSemanticWarning(1504, Signature.SIG_DOUBLE, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID);
     }
-    
+
+    @Override
     public void testErrorExprs()
     {
-        List<IMessage> list = assertSemanticError(1606, null, 1);
+        List<IMessage> list = assertSemanticError(1564, null, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
 
-        list = assertSemanticError(1645, null, 1);
+        list = assertSemanticError(1602, null, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
 
-        list = assertSemanticError(1723, null, 1);
+        list = assertSemanticError(1679, null, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
 
-        list = assertSemanticError(1808, null, 1);
+        list = assertSemanticError(1763, null, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
 
-        list = assertSemanticError(1872, null, 1);
+        list = assertSemanticError(1826, null, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_COERCE_LITERALS_TO_NUMBERS_ID);
-        
-        list = assertSemanticError(1915, null, 1);
+
+        list = assertSemanticError(1868, null, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
     }
 }

@@ -17,129 +17,145 @@ import org.eclipse.wst.validation.internal.provisional.core.IMessage;
  * @author cbateman
  *
  */
-public class MarkerOffsetsTestCase extends SingleJSPTestCase 
+public class MarkerOffsetsTestCase extends SingleJSPTestCase
 {
     public MarkerOffsetsTestCase() {
         super("/testdata/jsps/markerOffsets.jsp.data", "/markerOffsets.jsp", JSFVersion.V1_1,FACES_CONFIG_FILE_NAME_1_1);
     }
 
+    @Override
     protected void setUp() throws Exception
     {
         super.setUp();
     }
 
+    @Override
     public void testSanity()
     {
-        assertEquals("5 + 3", getELText(_structuredDocument,905));
-        assertEquals("null / null", getELText(_structuredDocument,941));
-        assertEquals("myBean.integerProperty == null", getELText(_structuredDocument,983));
-        assertEquals("false && myBean.booleanProperty", getELText(_structuredDocument,1043));
-        assertEquals("myBean.booleanProperty && false", getELText(_structuredDocument,1104));
-        assertEquals("!false", getELText(_structuredDocument,1165));
-        assertEquals("empty 5", getELText(_structuredDocument,1202));
-        assertEquals("-null", getELText(_structuredDocument,1240));
-        assertEquals("-myBean.stringProperty", getELText(_structuredDocument,1276));
-        assertEquals("myBean.integerProperty - (5 + 3)", getELText(_structuredDocument,1412));
-        assertEquals("myBean.booleanProperty && myBean.integerProperty + 5 == null", getELText(_structuredDocument,1475));
-        assertEquals("notABean.stringProperty", getELText(_structuredDocument,1609));
-        assertEquals("myBean.notAProperty", getELText(_structuredDocument,1663));
-        assertEquals("myBean.integerProperty + 5 + myBean.notAProperty", getELText(_structuredDocument,1713));
-        assertEquals("myBean.integerProperty++", getELText(_structuredDocument,1814));
-        assertEquals("myBean.", getELText(_structuredDocument,1869));
-        assertEquals(" ", getELText(_structuredDocument,1907));
-        
-        assertEquals("myBean.integerProperty / 0", getELText(_structuredDocument,2028));
-        assertEquals("myBean.integerProperty + myBean.booleanProperty", getELText(_structuredDocument,2085));
-        assertEquals("myBean.integerProperty && myBean.booleanProperty", getELText(_structuredDocument,2163));
-        assertEquals("myBean.booleanProperty >= myBean.collectionProperty", getELText(_structuredDocument,2242));
-        assertEquals("5 + 'noNumberConversion'", getELText(_structuredDocument,2324));
-        assertEquals("-true", getELText(_structuredDocument,2379));
-        assertEquals("!5", getELText(_structuredDocument,2415));
-        assertEquals("myBean.doubleProperty + myBean.getIntegerProperty", getELText(_structuredDocument,2477));
+        assertEquals("5 + 3", getELText(_structuredDocument,880));
+        assertEquals("null / null", getELText(_structuredDocument,915));
+        assertEquals("myBean.integerProperty == null", getELText(_structuredDocument,956));
+        assertEquals("false && myBean.booleanProperty", getELText(_structuredDocument,1015));
+        assertEquals("myBean.booleanProperty && false", getELText(_structuredDocument,1075));
+        assertEquals("!false", getELText(_structuredDocument,1135));
+        assertEquals("empty 5", getELText(_structuredDocument,1171));
+        assertEquals("-null", getELText(_structuredDocument,1208));
+        assertEquals("-myBean.stringProperty", getELText(_structuredDocument,1243));
+        assertEquals("myBean.integerProperty - (5 + 3)", getELText(_structuredDocument,1376));
+        assertEquals("myBean.booleanProperty && myBean.integerProperty + 5 == null", getELText(_structuredDocument,1438));
+        assertEquals("notABean.stringProperty", getELText(_structuredDocument,1569));
+        assertEquals("myBean.notAProperty", getELText(_structuredDocument,1622));
+        assertEquals("myBean.integerProperty + 5 + myBean.notAProperty", getELText(_structuredDocument,1671));
+        assertEquals("myBean.integerProperty++", getELText(_structuredDocument,1769));
+        assertEquals("myBean.", getELText(_structuredDocument,1823));
+        assertEquals(" ", getELText(_structuredDocument,1860));
+
+        assertEquals("myBean.integerProperty / 0", getELText(_structuredDocument,1978));
+        assertEquals("myBean.integerProperty + myBean.booleanProperty", getELText(_structuredDocument,2034));
+        assertEquals("myBean.integerProperty && myBean.booleanProperty", getELText(_structuredDocument,2111));
+        assertEquals("myBean.booleanProperty >= myBean.collectionProperty", getELText(_structuredDocument,2189));
+        assertEquals("5 + 'noNumberConversion'", getELText(_structuredDocument,2270));
+        assertEquals("-true", getELText(_structuredDocument,2324));
+        assertEquals("!5", getELText(_structuredDocument,2359));
+        assertEquals("myBean.doubleProperty + myBean.getIntegerProperty", getELText(_structuredDocument,2418));
+
     }
 
-    public void testNoErrorExprs() 
+    @Override
+    public void testNoErrorExprs()
     {
         // marker offset tests are only meaningful for validation warnings and errors
         // since we are testing the length and offset values for their corresponding markers
     }
-    public void testWarningExprs() 
+    @Override
+    public void testWarningExprs()
     {
-        List<IMessage> list = assertSemanticWarning(905, null, 1);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID, 905, 5);
+        // UPDATE REMINDER!  The third argument in assertContainsProblem is the start
+        // offset (absolute) of the marker expected.  Before updating the assertSemanticWarning
+        // make a note to the difference
+        List<IMessage> list = assertSemanticWarning(880, null, 1);
+        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID, 880, 5);
 
-        list = assertSemanticWarning(941, null, 1);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_BOTH_OPERANDS_NULL_ID, 941, 11);
-        
-        list = assertSemanticWarning(983, null, 1);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_EQUALITY_COMP_WITH_NULL_ALWAYS_EVAL_SAME_ID, 983, 30);
+        list = assertSemanticWarning(915, null, 1);
+        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_BOTH_OPERANDS_NULL_ID, 915, 11);
 
-        list = assertSemanticWarning(1043, null, 1);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_FIRST_ARGUMENT_SHORT_CIRCUITS_ID, 1043, 31);
+        list = assertSemanticWarning(956, null, 1);
+        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_EQUALITY_COMP_WITH_NULL_ALWAYS_EVAL_SAME_ID, 956, 30);
 
-        list = assertSemanticWarning(1104, null, 1);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_SECOND_ARGUMENT_ALWAYS_EVAL_SAME_ID, 1104, 31);
+        list = assertSemanticWarning(1015, null, 1);
+        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_FIRST_ARGUMENT_SHORT_CIRCUITS_ID, 1015, 31);
 
-        list = assertSemanticWarning(1165, null, 1);
-        assertContainsProblem(list, DiagnosticFactory.UNARY_OP_CONSTANT_EXPRESSION_EVAL_SAME_ID, 1165, 6);
+        list = assertSemanticWarning(1075, null, 1);
+        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_SECOND_ARGUMENT_ALWAYS_EVAL_SAME_ID, 1075, 31);
 
-        list = assertSemanticWarning(1202, null, 1);
-        assertContainsProblem(list, DiagnosticFactory.UNARY_OP_EMPTY_ALWAYS_FALSE_ON_TYPE_ID, 1202, 7);
+        list = assertSemanticWarning(1135, null, 1);
+        assertContainsProblem(list, DiagnosticFactory.UNARY_OP_CONSTANT_EXPRESSION_EVAL_SAME_ID, 1135, 6);
 
-        list = assertSemanticWarning(1240, null, 1);
-        assertContainsProblem(list, DiagnosticFactory.UNARY_OP_MINUS_ON_NULL_ALWAYS_ZERO_ID, 1240, 5);
+        list = assertSemanticWarning(1171, null, 1);
+        assertContainsProblem(list, DiagnosticFactory.UNARY_OP_EMPTY_ALWAYS_FALSE_ON_TYPE_ID, 1171, 7);
 
-        list = assertSemanticWarning(1412, null, 1);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID, 1438, 5);
+        list = assertSemanticWarning(1208, null, 1);
+        assertContainsProblem(list, DiagnosticFactory.UNARY_OP_MINUS_ON_NULL_ALWAYS_ZERO_ID, 1208, 5);
 
-        list = assertSemanticWarning(1475, null, 2);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_EQUALITY_COMP_WITH_NULL_ALWAYS_EVAL_SAME_ID, 1501, 34);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_SECOND_ARGUMENT_ALWAYS_EVAL_SAME_ID, 1475, 60);
+        list = assertSemanticWarning(1243, null, 1);
+        assertContainsProblem(list, DiagnosticFactory.UNARY_OP_STRING_CONVERSION_NOT_GUARANTEED_ID, 1243, 22);
 
-        list = assertSemanticWarning(1609, null, 1);
-        assertContainsProblem(list, DiagnosticFactory.VARIABLE_NOT_FOUND_ID, 1609, 8);
+        list = assertSemanticWarning(1376, null, 1);
+        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID, 1402, 5);
 
-        list = assertSemanticWarning(1663, null, 1);
-        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID, 1670, 12);
+        list = assertSemanticWarning(1438, null, 2);
+        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_EQUALITY_COMP_WITH_NULL_ALWAYS_EVAL_SAME_ID, 1464, 34);
+        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_SECOND_ARGUMENT_ALWAYS_EVAL_SAME_ID, 1438, 60);
 
-        list = assertSemanticWarning(1713, null, 1);
-        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID, 1749, 12);
+        list = assertSemanticWarning(1569, null, 1);
+        assertContainsProblem(list, DiagnosticFactory.VARIABLE_NOT_FOUND_ID, 1569, 8);
 
-        list = assertSyntaxWarning(1814, 1);
-        assertContainsProblem(list, DiagnosticFactory.GENERAL_SYNTAX_ERROR_ID, 1837, 1);
+        list = assertSemanticWarning(1622, null, 1);
+        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID, 1629, 12);
 
-        list = assertSemanticWarning(1869, null, 1);
-        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID, 1875, 1);
+        list = assertSemanticWarning(1671, null, 1);
+        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID, 1707, 12);
 
-        list = assertSyntaxWarning(1907, 1);
-        assertContainsProblem(list, DiagnosticFactory.GENERAL_SYNTAX_ERROR_ID, 1907, 1);
+        list = assertSyntaxWarning(1769, 1);
+        assertContainsProblem(list, DiagnosticFactory.GENERAL_SYNTAX_ERROR_ID, 1792, 1);
+
+        // Is really correct to have the property offset start on the dot?
+        list = assertSemanticWarning(1823, null, 1);
+        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID, 1829, 1);
+
+        list = assertSyntaxWarning(1860, 1);
+        assertContainsProblem(list, DiagnosticFactory.GENERAL_SYNTAX_ERROR_ID, 1860, 1);
     }
-    
-    public void testErrorExprs() 
+
+    @Override
+    public void testErrorExprs()
     {
-        List<IMessage> list = assertSemanticError(2028, null, 1);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_POSSIBLE_DIVISION_BY_ZERO_ID, 2028, 26);
+        // UPDATE REMINDER!  The third argument in assertContainsProblem is the start
+        // offset (absolute) of the marker expected.  Before updating the assertSemanticWarning
+        // make a note to the difference
+        List<IMessage> list = assertSemanticError(1978, null, 1);
+        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_POSSIBLE_DIVISION_BY_ZERO_ID, 1978, 26);
 
-        list = assertSemanticError(2085, null, 1);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID, 2085, 47);
+        list = assertSemanticError(2034, null, 1);
+        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID, 2034, 47);
 
-        list = assertSemanticError(2163, null, 1);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN_ID, 2163, 48);
+        list = assertSemanticError(2111, null, 1);
+        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN_ID, 2111, 48);
 
-        list = assertSemanticError(2242, null, 1);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_NO_AVAILABLE_TYPE_COERCION_ID, 2242, 51);
+        list = assertSemanticError(2189, null, 1);
+        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_NO_AVAILABLE_TYPE_COERCION_ID, 2189, 51);
+
+        list = assertSemanticError(2270, null, 1);
+        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_COERCE_LITERALS_TO_NUMBERS_ID, 2270, 24);
 
         list = assertSemanticError(2324, null, 1);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_COERCE_LITERALS_TO_NUMBERS_ID, 2324, 24);
+        assertContainsProblem(list, DiagnosticFactory.UNARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID, 2324, 5);
 
-        list = assertSemanticError(2379, null, 1);
-        assertContainsProblem(list, DiagnosticFactory.UNARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID, 2379, 5);
+        list = assertSemanticError(2359, null, 1);
+        assertContainsProblem(list, DiagnosticFactory.UNARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN_ID, 2359, 2);
 
-        list = assertSemanticError(2415, null, 1);
-        assertContainsProblem(list, DiagnosticFactory.UNARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN_ID, 2415, 2);
-
-        list = assertSemanticError(2477, null, 1);
-        assertContainsProblem(list, DiagnosticFactory.CANNOT_APPLY_OPERATOR_TO_METHOD_BINDING_ID, 2501, 25);
+        list = assertSemanticError(2418, null, 1);
+        assertContainsProblem(list, DiagnosticFactory.CANNOT_APPLY_OPERATOR_TO_METHOD_BINDING_ID, 2442, 25);
     }
 
 }

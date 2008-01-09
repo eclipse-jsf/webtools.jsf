@@ -14,84 +14,89 @@ import org.eclipse.wst.validation.internal.provisional.core.IMessage;
  * 
  * @author cbateman
  */
-public class UnaryMinusTestCase extends SingleJSPTestCase 
+public class UnaryMinusTestCase extends SingleJSPTestCase
 {
     public UnaryMinusTestCase()
     {
         super("/testdata/jsps/unaryMinus.jsp.data", "/unaryMinus.jsp", JSFVersion.V1_1,FACES_CONFIG_FILE_NAME_1_1);
     }
 
+    @Override
     protected void setUp() throws Exception
     {
         super.setUp();
     }
 
+    @Override
     public void testSanity()
     {
-        assertEquals("-myBean.integerProperty", getELText(_structuredDocument,852));
-        assertEquals("-myBean.doubleProperty", getELText(_structuredDocument,906));
-        assertEquals("-myBean.bigDoubleProperty", getELText(_structuredDocument,959));
-        assertEquals("-myBean.bigIntegerProperty", getELText(_structuredDocument,1015));
+        assertEquals("-myBean.integerProperty", getELText(_structuredDocument,828));
+        assertEquals("-myBean.doubleProperty", getELText(_structuredDocument,881));
+        assertEquals("-myBean.bigDoubleProperty", getELText(_structuredDocument,933));
+        assertEquals("-myBean.bigIntegerProperty", getELText(_structuredDocument,988));
+        assertEquals("-5", getELText(_structuredDocument,1127));
+        assertEquals("-5.5", getELText(_structuredDocument,1162));
+        assertEquals("-'5'", getELText(_structuredDocument,1199));
+        assertEquals("-'5.5'", getELText(_structuredDocument,1236));
 
-        assertEquals("-myBean.stringProperty", getELText(_structuredDocument,1102));
-        assertEquals("-5", getELText(_structuredDocument,1158));
-        assertEquals("-5.5", getELText(_structuredDocument,1194));
-        assertEquals("-'5'", getELText(_structuredDocument,1232));
-        assertEquals("-'5.5'", getELText(_structuredDocument,1270));
-        assertEquals("-null", getELText(_structuredDocument,1310));
+        assertEquals("-myBean.stringProperty", getELText(_structuredDocument,1072));
+        assertEquals("-null", getELText(_structuredDocument,1275));
 
-        assertEquals("-false", getELText(_structuredDocument,1370));
-        assertEquals("-true", getELText(_structuredDocument,1407));
-        assertEquals("-myBean.booleanProperty", getELText(_structuredDocument,1443));
-        assertEquals("-myBean.collectionProperty", getELText(_structuredDocument,1497));
-        assertEquals("-myBean.mapProperty", getELText(_structuredDocument,1554));
-        assertEquals("-myBean.stringArrayProperty", getELText(_structuredDocument,1604));
-        assertEquals("-'notANumber'", getELText(_structuredDocument,1662));
-    }
-    
-    public void testNoErrorExprs() 
-    {
-        assertNoError(852, Signature.SIG_INT);
-        assertNoError(906, Signature.SIG_DOUBLE);
-        assertNoError(959, TypeConstants.TYPE_BIG_DOUBLE);
-        assertNoError(1015, TypeConstants.TYPE_BIG_INTEGER);
-        assertNoError(1158, Signature.SIG_LONG);
-        assertNoError(1194, Signature.SIG_DOUBLE);
-        assertNoError(1232, Signature.SIG_LONG);
-        assertNoError(1270, Signature.SIG_DOUBLE);
-
+        assertEquals("-false", getELText(_structuredDocument,1332));
+        assertEquals("-true", getELText(_structuredDocument,1368));
+        assertEquals("-myBean.booleanProperty", getELText(_structuredDocument,1403));
+        assertEquals("-myBean.collectionProperty", getELText(_structuredDocument,1456));
+        assertEquals("-myBean.mapProperty", getELText(_structuredDocument,1512));
+        assertEquals("-myBean.stringArrayProperty", getELText(_structuredDocument,1561));
+        assertEquals("-'notANumber'", getELText(_structuredDocument,1618));
     }
 
-    public void testWarningExprs() 
+    @Override
+    public void testNoErrorExprs()
     {
-        List<IMessage> list = assertSemanticWarning(1102, Signature.SIG_LONG, 1);
+        assertNoError(828, Signature.SIG_INT);
+        assertNoError(881, Signature.SIG_DOUBLE);
+        assertNoError(933, TypeConstants.TYPE_BIG_DOUBLE);
+        assertNoError(988, TypeConstants.TYPE_BIG_INTEGER);
+        assertNoError(1127, Signature.SIG_LONG);
+        assertNoError(1162, Signature.SIG_DOUBLE);
+        assertNoError(1199, Signature.SIG_LONG);
+        assertNoError(1236, Signature.SIG_DOUBLE);
+
+    }
+
+    @Override
+    public void testWarningExprs()
+    {
+        List<IMessage> list = assertSemanticWarning(1072, Signature.SIG_LONG, 1);
         assertContainsProblem(list, DiagnosticFactory.UNARY_OP_STRING_CONVERSION_NOT_GUARANTEED_ID);
 
-        list = assertSemanticWarning(1310, Signature.SIG_LONG, 1);
+        list = assertSemanticWarning(1275, Signature.SIG_LONG, 1);
         assertContainsProblem(list, DiagnosticFactory.UNARY_OP_MINUS_ON_NULL_ALWAYS_ZERO_ID);
     }
-    
-    public void testErrorExprs() 
+
+    @Override
+    public void testErrorExprs()
     {
-        List<IMessage> list = assertSemanticError(1370, null, 1);
+        List<IMessage> list = assertSemanticError(1332, null, 1);
         assertContainsProblem(list, DiagnosticFactory.UNARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
 
-        list = assertSemanticError(1407, null, 1);
+        list = assertSemanticError(1368, null, 1);
         assertContainsProblem(list, DiagnosticFactory.UNARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
 
-        list = assertSemanticError(1443, null, 1);
+        list = assertSemanticError(1403, null, 1);
         assertContainsProblem(list, DiagnosticFactory.UNARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
 
-        list = assertSemanticError(1497, null, 1);
+        list = assertSemanticError(1456, null, 1);
         assertContainsProblem(list, DiagnosticFactory.UNARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
 
-        list = assertSemanticError(1554, null, 1);
+        list = assertSemanticError(1512, null, 1);
         assertContainsProblem(list, DiagnosticFactory.UNARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
 
-        list = assertSemanticError(1604, null, 1);
+        list = assertSemanticError(1561, null, 1);
         assertContainsProblem(list, DiagnosticFactory.UNARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
 
-        list = assertSemanticError(1662, null, 1);
+        list = assertSemanticError(1618, null, 1);
         assertContainsProblem(list, DiagnosticFactory.UNARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
     }
 

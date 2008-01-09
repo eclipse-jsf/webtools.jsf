@@ -13,55 +13,61 @@ import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
  * @author cbateman
  *
  */
-public class PropertiesOfMapsTestCase extends SingleJSPTestCase 
+public class PropertiesOfMapsTestCase extends SingleJSPTestCase
 {
     public PropertiesOfMapsTestCase()
     {
         super("/testdata/jsps/propertiesOfMaps.jsp.data", "/propertiesOfMaps.jsp", JSFVersion.V1_1,FACES_CONFIG_FILE_NAME_1_1);
     }
 
+    @Override
     protected void setUp() throws Exception
     {
         super.setUp();
     }
 
+    @Override
     public void testSanity()
     {
-        assertEquals("beanWithMapProperties.integerProperty", getELText(_structuredDocument,906));
-        assertEquals("bundle.bundleProp1", getELText(_structuredDocument,982));
-        assertEquals("bundle.x.y", getELText(_structuredDocument,1034));
-        assertEquals("beanWithMapProperties.treeMap.foo", getELText(_structuredDocument,1078));
-        assertEquals("beanWithMapProperties.treeMap.foo.x", getELText(_structuredDocument,1145));
-        assertEquals("beanWithMapProperties.mapProperty.foo", getELText(_structuredDocument,1214));
-        assertEquals("beanWithMapProperties.mapProperty.foo.x", getELText(_structuredDocument,1285));
-        assertEquals("mapBean.foo", getELText(_structuredDocument,1358));
-        assertEquals("mapBean.foo.x", getELText(_structuredDocument,1403));
-        assertEquals("mapBean.getIgnoredIntProperty", getELText(_structuredDocument,1450));
-        assertEquals("bundle.y", getELText(_structuredDocument,1515));
-        assertEquals("bundle.bundleProp1.z", getELText(_structuredDocument,1557));
-    }
-    
-    public void testNoErrorExprs() 
-    {
-        assertNoError(906, Signature.SIG_INT);
-        assertNoError(982, TypeConstants.TYPE_STRING);
-        assertNoError(1034, TypeConstants.TYPE_STRING);
-        assertNoError(1078, TypeConstants.TYPE_JAVAOBJECT);
-        assertNoError(1145, TypeConstants.TYPE_JAVAOBJECT);
-        assertNoError(1214, TypeConstants.TYPE_JAVAOBJECT);
-        assertNoError(1285, TypeConstants.TYPE_JAVAOBJECT);
-        assertNoError(1358, TypeConstants.TYPE_JAVAOBJECT);
-        assertNoError(1403, TypeConstants.TYPE_JAVAOBJECT);
-        assertNoError(1450, TypeConstants.TYPE_JAVAOBJECT);
+        assertEquals("beanWithMapProperties.integerProperty", getELText(_structuredDocument,880));
+        assertEquals("bundle.bundleProp1", getELText(_structuredDocument,955));
+        assertEquals("bundle.x.y", getELText(_structuredDocument,1006));
+        assertEquals("beanWithMapProperties.treeMap.foo", getELText(_structuredDocument,1049));
+        assertEquals("beanWithMapProperties.treeMap.foo.x", getELText(_structuredDocument,1115));
+        assertEquals("beanWithMapProperties.mapProperty.foo", getELText(_structuredDocument,1183));
+        assertEquals("beanWithMapProperties.mapProperty.foo.x", getELText(_structuredDocument,1253));
+        assertEquals("mapBean.foo", getELText(_structuredDocument,1325));
+        assertEquals("mapBean.foo.x", getELText(_structuredDocument,1369));
+        assertEquals("mapBean.getIgnoredIntProperty", getELText(_structuredDocument,1415));
+
+        assertEquals("bundle.y", getELText(_structuredDocument,1478));
+        assertEquals("bundle.bundleProp1.z", getELText(_structuredDocument,1519));
     }
 
-    public void testWarningExprs() 
+    @Override
+    public void testNoErrorExprs()
     {
-        assertSemanticWarning(1515, null, 1);
-        assertSemanticWarning(1557, null, 1);
+        assertNoError(880, Signature.SIG_INT);
+        assertNoError(955, TypeConstants.TYPE_STRING);
+        assertNoError(1006, TypeConstants.TYPE_STRING);
+        assertNoError(1049, TypeConstants.TYPE_JAVAOBJECT);
+        assertNoError(1115, TypeConstants.TYPE_JAVAOBJECT);
+        assertNoError(1183, TypeConstants.TYPE_JAVAOBJECT);
+        assertNoError(1253, TypeConstants.TYPE_JAVAOBJECT);
+        assertNoError(1325, TypeConstants.TYPE_JAVAOBJECT);
+        assertNoError(1369, TypeConstants.TYPE_JAVAOBJECT);
+        assertNoError(1415, TypeConstants.TYPE_JAVAOBJECT);
     }
 
-    public void testErrorExprs() 
+    @Override
+    public void testWarningExprs()
+    {
+        assertSemanticWarning(1478, null, 1);
+        assertSemanticWarning(1519, null, 1);
+    }
+
+    @Override
+    public void testErrorExprs()
     {
         // do nothing; no error cases
     }

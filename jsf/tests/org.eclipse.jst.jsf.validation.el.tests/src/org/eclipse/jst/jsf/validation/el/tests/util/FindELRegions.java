@@ -28,7 +28,6 @@ public class FindELRegions extends TestCase
         , "arithmeticMultiply"
         , "assignability"
         , "badSyntax"
-        , "beanScoping"
         , "beansProperties"
         , "beanSubClass"
         , "builtinSymbols"
@@ -54,45 +53,47 @@ public class FindELRegions extends TestCase
         , "unaryMinus"
         , "variableNaming"
     };
-    
+
     private final static IFile[]  files = new IFile[jspFiles.length];
     private final static IStructuredModel[]  models = new IStructuredModel[jspFiles.length];
 
-    
+
     private WebProjectTestEnvironment  _testEnv;
-    
-  
+
+
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
 
         _testEnv = new WebProjectTestEnvironment("ELValidationTest_"+getName());
         _testEnv.createProject(false);
-        assertNotNull(_testEnv);       
+        assertNotNull(_testEnv);
         assertNotNull(_testEnv.getTestProject());
         assertTrue(_testEnv.getTestProject().isAccessible());
 
         for (int i = 0; i < jspFiles.length; i++)
         {
-            files[i] = 
-                (IFile) 
+            files[i] =
+                (IFile)
                 _testEnv.loadResourceInWebRoot(ELValidationTestPlugin.getDefault().getBundle(),
-                    "/testdata/jsps/"+jspFiles[i]+".jsp.data", 
-                    "/WEB-INF/"+jspFiles[i]+".jsp");
-            
+                        "/testdata/jsps/"+jspFiles[i]+".jsp.data",
+                        "/WEB-INF/"+jspFiles[i]+".jsp");
+
             models[i] = StructuredModelManager.getModelManager().getModelForRead(files[i]);
         }
     }
 
-    protected void tearDown() throws Exception 
+    @Override
+    protected void tearDown() throws Exception
     {
         super.tearDown();
-        
+
         for (int i = 0; i < jspFiles.length; i++)
         {
             models[i].releaseFromRead();
         }
     }
-    
+
     /**
      * Prints assertions for all regions in all models
      */
@@ -103,19 +104,19 @@ public class FindELRegions extends TestCase
             printRegionsForModel(i);
         }
     }
-    
-    
-    
-    private void printRegionsForModel(int i)
+
+
+
+    private void printRegionsForModel(final int i)
     {
-        IStructuredDocument document = models[i].getStructuredDocument();
-        
-        ELRegionHandler handler = new ELRegionHandler()
+        final IStructuredDocument document = models[i].getStructuredDocument();
+
+        final ELRegionHandler handler = new ELRegionHandler()
         {
             public void handleRegion(ITextRegionCollection parentRegion, ITextRegion elRegion) {
-                final int contentStart = 
+                final int contentStart =
                     parentRegion.getStartOffset(elRegion);
-                
+
                 final String elTextStr = "\""+parentRegion.getText(elRegion)+ "\"";
                 System.out.println("assertEquals("+elTextStr+", getELText(_structuredDocument,"+contentStart+"));");
 

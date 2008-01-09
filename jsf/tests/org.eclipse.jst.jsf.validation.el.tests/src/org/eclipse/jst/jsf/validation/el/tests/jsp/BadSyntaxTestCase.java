@@ -13,17 +13,19 @@ import org.eclipse.wst.validation.internal.provisional.core.IMessage;
  * @author cbateman
  *
  */
-public class BadSyntaxTestCase extends SingleJSPTestCase 
+public class BadSyntaxTestCase extends SingleJSPTestCase
 {
     public BadSyntaxTestCase() {
         super("/testdata/jsps/badSyntax.jsp.data", "/badSyntax.jsp", JSFVersion.V1_1,FACES_CONFIG_FILE_NAME_1_1);
     }
 
+    @Override
     protected void setUp() throws Exception
     {
         super.setUp();
     }
 
+    @Override
     public void testSanity()
     {
         assertEquals(" ", getELText(_structuredDocument,870));
@@ -34,19 +36,21 @@ public class BadSyntaxTestCase extends SingleJSPTestCase
     }
 
 
+    @Override
     public void testNoErrorExprs() {
         // no non-error cases
     }
 
 
-    public void testWarningExprs() 
+    @Override
+    public void testWarningExprs()
     {
         List<IMessage> list = assertSyntaxWarning(870,1);
         assertContainsProblem(list, DiagnosticFactory.GENERAL_SYNTAX_ERROR_ID);
-        
+
         list = assertSyntaxWarning(902,1);
         assertContainsProblem(list, DiagnosticFactory.GENERAL_SYNTAX_ERROR_ID);
-        
+
         list = assertSyntaxWarning(958,1);
         assertContainsProblem(list, DiagnosticFactory.GENERAL_SYNTAX_ERROR_ID);
 
@@ -57,7 +61,8 @@ public class BadSyntaxTestCase extends SingleJSPTestCase
         assertContainsProblem(list, DiagnosticFactory.GENERAL_SYNTAX_ERROR_ID);
     }
 
-    public void testErrorExprs() 
+    @Override
+    public void testErrorExprs()
     {
         // no error cases
     }

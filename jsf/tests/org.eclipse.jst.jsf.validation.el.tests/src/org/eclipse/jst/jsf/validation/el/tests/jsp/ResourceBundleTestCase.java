@@ -23,100 +23,106 @@ import org.eclipse.wst.validation.internal.provisional.core.IMessage;
  */
 public class ResourceBundleTestCase extends SingleJSPTestCase {
 
-    public ResourceBundleTestCase() 
+    public ResourceBundleTestCase()
     {
         super("/testdata/jsps/resourceBundleResolution.jsp.data", "/resourceBundle.jsp", JSFVersion.V1_2, FACES_CONFIG_FILE_NAME_1_2 );
     }
 
-    
+
+    @Override
     protected void doStandaloneSetup() {
         super.doStandaloneSetup();
     }
 
 
-    protected void setUp() throws Exception 
+    @Override
+    protected void setUp() throws Exception
     {
         super.setUp();
-        
+
         // add a resource bundle to the default package to test regression on bug 144525
         TestFileResource resource = new TestFileResource();
-        resource.load(ELValidationTestPlugin.getDefault().getBundle(), 
-                      "/testdata/classes/Bundle.properties.data");
-        _jdtTestEnv.addResourceFile("src", new ByteArrayInputStream(resource.toBytes()), 
-                      "", "Bundle.properties");
+        resource.load(ELValidationTestPlugin.getDefault().getBundle(),
+        "/testdata/classes/Bundle.properties.data");
+        _jdtTestEnv.addResourceFile("src", new ByteArrayInputStream(resource.toBytes()),
+                "", "Bundle.properties");
 
         // add a second res bundle to ensure that res bundle is not somehow being
         // confused by a loadBundle variable
         resource = new TestFileResource();
-        resource.load(ELValidationTestPlugin.getDefault().getBundle(), 
-                      "/testdata/classes/Bundle2.properties.data");
-        _jdtTestEnv.addResourceFile("src", new ByteArrayInputStream(resource.toBytes()), 
-                      "beans", "Bundle2.properties");
+        resource.load(ELValidationTestPlugin.getDefault().getBundle(),
+        "/testdata/classes/Bundle2.properties.data");
+        _jdtTestEnv.addResourceFile("src", new ByteArrayInputStream(resource.toBytes()),
+                "beans", "Bundle2.properties");
     }
 
+    @Override
     public void testSanity()
     {
-        assertEquals("resBundleProp1.bundleProp2", getELText(_structuredDocument,913));
-        assertEquals("noPackageBundle.bundleProp2", getELText(_structuredDocument,970));
-        assertEquals("resBundleProp1.bundleProp1 && myBean.stringProperty", getELText(_structuredDocument,1031));
-        assertEquals("empty resBundleProp1", getELText(_structuredDocument,1116));
-        assertEquals("empty resBundleProp1.bundleProp2", getELText(_structuredDocument,1170));
-        assertEquals("resBundleProp1.bundleProp2 + 5", getELText(_structuredDocument,1236));
-        assertEquals("bundleProp2", getELText(_structuredDocument,1297));
-        assertEquals("resBundleProp1.x.y", getELText(_structuredDocument,1339));
-        assertEquals("noPackageBundle.x.y", getELText(_structuredDocument,1388));
-        assertEquals("resBundleProp2.name", getELText(_structuredDocument,1442));
-        assertEquals("resBundleProp2.movie", getELText(_structuredDocument,1492));
-        
-        assertEquals("-resBundleProp1.bundleProp1", getELText(_structuredDocument,1570));
-        assertEquals("resBundleProp1.bundleProp3", getELText(_structuredDocument,1631));
-        assertEquals("msg", getELText(_structuredDocument,1691));
-        assertEquals("resBundleProp1.x", getELText(_structuredDocument,1728));
-        assertEquals("noPackageBundle.notAProperty", getELText(_structuredDocument,1775));
-        assertEquals("resBundleProp2.bundleProp2", getELText(_structuredDocument,1838));
-        assertEquals("resBundleProp2.notAPropAtAll", getELText(_structuredDocument,1895));
+        assertEquals("resBundleProp1.bundleProp2", getELText(_structuredDocument,887));
+        assertEquals("noPackageBundle.bundleProp2", getELText(_structuredDocument,943));
+        assertEquals("resBundleProp1.bundleProp1 && myBean.stringProperty", getELText(_structuredDocument,1003));
+        assertEquals("empty resBundleProp1", getELText(_structuredDocument,1087));
+        assertEquals("empty resBundleProp1.bundleProp2", getELText(_structuredDocument,1140));
+        assertEquals("resBundleProp1.bundleProp2 + 5", getELText(_structuredDocument,1205));
+        assertEquals("bundleProp2", getELText(_structuredDocument,1265));
+        assertEquals("resBundleProp1.x.y", getELText(_structuredDocument,1306));
+        assertEquals("noPackageBundle.x.y", getELText(_structuredDocument,1354));
+        assertEquals("resBundleProp2.name", getELText(_structuredDocument,1406));
+        assertEquals("resBundleProp2.movie", getELText(_structuredDocument,1455));
+
+        assertEquals("-resBundleProp1.bundleProp1", getELText(_structuredDocument,1530));
+        assertEquals("resBundleProp1.bundleProp3", getELText(_structuredDocument,1590));
+        assertEquals("msg", getELText(_structuredDocument,1649));
+        assertEquals("resBundleProp1.x", getELText(_structuredDocument,1685));
+        assertEquals("noPackageBundle.notAProperty", getELText(_structuredDocument,1731));
+        assertEquals("resBundleProp2.bundleProp2", getELText(_structuredDocument,1792));
+        assertEquals("resBundleProp2.notAPropAtAll", getELText(_structuredDocument,1848));
     }
 
-    public void testNoErrorExprs() 
+    @Override
+    public void testNoErrorExprs()
     {
-        assertNoError(913, TypeConstants.TYPE_STRING);
-        assertNoError(970, TypeConstants.TYPE_STRING);
-        assertNoError(1031, Signature.SIG_BOOLEAN);
-        assertNoError(1116, Signature.SIG_BOOLEAN);
-        assertNoError(1170, Signature.SIG_BOOLEAN);
-        assertNoError(1236, Signature.SIG_LONG);
-        //assertNoError(1297, TypeConstants.TYPE_MAP);
-        assertNoError(1339, TypeConstants.TYPE_STRING);
-        assertNoError(1388, TypeConstants.TYPE_STRING);
-        assertNoError(1442, TypeConstants.TYPE_STRING);
-        assertNoError(1492, TypeConstants.TYPE_STRING);
+        assertNoError(887, TypeConstants.TYPE_STRING);
+        assertNoError(943, TypeConstants.TYPE_STRING);
+        assertNoError(1003, Signature.SIG_BOOLEAN);
+        assertNoError(1087, Signature.SIG_BOOLEAN);
+        assertNoError(1140, Signature.SIG_BOOLEAN);
+        assertNoError(1205, Signature.SIG_LONG);
+        //assertNoError(1265, TypeConstants.TYPE_MAP);
+        assertNoError(1306, TypeConstants.TYPE_STRING);
+        assertNoError(1354, TypeConstants.TYPE_STRING);
+        assertNoError(1406, TypeConstants.TYPE_STRING);
+        assertNoError(1455, TypeConstants.TYPE_STRING);
     }
 
-    public void testWarningExprs() 
+    @Override
+    public void testWarningExprs()
     {
-        List<IMessage> problems = assertSemanticWarning(1570, null, 1);
+        List<IMessage> problems = assertSemanticWarning(1530, null, 1);
         assertContainsProblem(problems, DiagnosticFactory.UNARY_OP_STRING_CONVERSION_NOT_GUARANTEED_ID);
 
-        problems = assertSemanticWarning(1631, null, 1);
+        problems = assertSemanticWarning(1590, null, 1);
         assertContainsProblem(problems, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
 
-        problems = assertSemanticWarning(1691, null, 1);
+        problems = assertSemanticWarning(1649, null, 1);
         assertContainsProblem(problems, DiagnosticFactory.VARIABLE_NOT_FOUND_ID);
 
-        problems = assertSemanticWarning(1728, null, 1);
+        problems = assertSemanticWarning(1685, null, 1);
         assertContainsProblem(problems, DiagnosticFactory.MEMBER_IS_INTERMEDIATE_ID);
 
-        problems = assertSemanticWarning(1775, null, 1);
+        problems = assertSemanticWarning(1731, null, 1);
         assertContainsProblem(problems, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
 
-        problems = assertSemanticWarning(1838, null, 1);
+        problems = assertSemanticWarning(1792, null, 1);
         assertContainsProblem(problems, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
 
-        problems = assertSemanticWarning(1895, null, 1);
+        problems = assertSemanticWarning(1848, null, 1);
         assertContainsProblem(problems, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
     }
 
-    public void testErrorExprs() 
+    @Override
+    public void testErrorExprs()
     {
         // no errors
     }
