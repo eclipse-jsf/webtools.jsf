@@ -8,6 +8,12 @@ import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ConverterDeco
 import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ValidatorDecorator;
 import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ValueChangeListenerDecorator;
 
+/**
+ * Implementation of the IEditableValueHolderInfo
+ * 
+ * @author cbateman
+ *
+ */
 public class EditableValueHolderInfo extends ValueHolderInfo implements
         IEditableValueHolderInfo 
 {
@@ -26,6 +32,18 @@ public class EditableValueHolderInfo extends ValueHolderInfo implements
     private List                _validators;
     private List                _valueChangeListeners;
     
+    /**
+     * @param converterDecorator
+     * @param localValue
+     * @param value
+     * @param isImmediate
+     * @param isRequired
+     * @param isValid
+     * @param localSetValue
+     * @param submittedValue
+     * @param validator
+     * @param valueChangeListener
+     */
     public EditableValueHolderInfo(final ConverterDecorator converterDecorator,
             final Object localValue, final Object value, final boolean isImmediate,
             final boolean isRequired, final boolean isValid, final boolean localSetValue,

@@ -7,5 +7,5 @@ package org.eclipse.jst.jsf.common.runtime.internal.model.event;
  */
 public interface IActionListenerInfo extends IFacesListenerInfo 
 {
-
+    // TODO:
 }

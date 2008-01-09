@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.jst.jsf.common.runtime.internal.debug.RenderNode;
 import org.eclipse.jst.jsf.common.runtime.internal.model.ViewObject;
 import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.FacetDecorator;
 
@@ -26,12 +25,29 @@ public class ComponentInfo extends ViewObject implements Serializable
     
     private final static int            DEFAULT_ARRAY_SIZE = 4;
     
+    /**
+     * the component id
+     */
     protected final String              _id;
+    /**
+     * the component's parent or null if none
+     */
     protected final ComponentInfo       _parent;
+    /**
+     * the type info for this component
+     */
     protected final ComponentTypeInfo   _componentTypeInfo;
+    /**
+     * the rendered flage
+     */
     protected final boolean             _isRendered;
-    protected RenderNode                _rootRenderedNode; // may be null if we don't have it
 
+    /**
+     * @param id
+     * @param parent
+     * @param componentTypeInfo
+     * @param isRendered
+     */
     protected ComponentInfo(final String id, final ComponentInfo parent, final ComponentTypeInfo componentTypeInfo, final boolean isRendered)
     {
         _id = translateForNull(id);
@@ -52,10 +68,16 @@ public class ComponentInfo extends ViewObject implements Serializable
     
     private List/*<ComponentInfo>*/    _children;
     
+    /**
+     * @return the id
+     */
     public final String getId() {
         return _id;
     }
 
+    /**
+     * @return the component type info
+     */
     public final ComponentTypeInfo getComponentTypeInfo() {
         return _componentTypeInfo;
     }
@@ -74,7 +96,7 @@ public class ComponentInfo extends ViewObject implements Serializable
 
     /**
      * Get the sub-set of {@link #getChildren()} that are facets.
-     * This is a convenience method for {@link #getDecorators(FacetDecorator.class)}
+     * This is a convenience method for {@link #getDecorators(Class)}
      * 
      * @return all component children that are facets
      */
@@ -105,6 +127,11 @@ public class ComponentInfo extends ViewObject implements Serializable
         addDecorator(new FacetDecorator(name, facetComponent));
     }
     
+    /**
+     * @param component
+     * @return if component corresponds to a facet of this component, returns
+     * the name of that facet.  Returns null if not found.
+     */
     public final String getFacetName(final ComponentInfo component)
     {
         if (component == null) return null;
@@ -124,6 +151,11 @@ public class ComponentInfo extends ViewObject implements Serializable
         return null;
     }
     
+    /**
+     * @param name
+     * @return if this has a facet called name, then returns it's single root
+     * component.
+     */
     public final ComponentInfo getFacet(final String name)
     {
         if (name == null) return null;
@@ -152,25 +184,24 @@ public class ComponentInfo extends ViewObject implements Serializable
                 + _componentTypeInfo.getRenderFamily();
     }
     
+    /**
+     * @return used for toString.  Clients should not use.
+     */
     public String getMostSpecificComponentName()
     {
         return "Component";
     }
 
-    public final void setRenderNode(final RenderNode rootNode)
-    {
-        _rootRenderedNode = rootNode;
-    }
-    
-    public final RenderNode getRenderNode()
-    {
-        return _rootRenderedNode;
-    }
-
+    /**
+     * @return the parent of this component or null.
+     */
     public final ComponentInfo getParent() {
         return _parent;
     }
 
+    /**
+     * @return the rendered flag
+     */
     public final boolean isRendered() {
         return _isRendered;
     }

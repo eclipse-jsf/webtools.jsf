@@ -3,6 +3,12 @@ package org.eclipse.jst.jsf.common.runtime.internal.debug;
 import org.eclipse.jst.jsf.common.runtime.internal.model.component.ComponentInfo;
 
 
+/**
+ * Represents a component tree in message for that can be serialized.
+ * 
+ * @author cbateman
+ *
+ */
 public class ComponentTreeMessage extends JSFMonitorMessage 
 {
     /**
@@ -14,19 +20,31 @@ public class ComponentTreeMessage extends JSFMonitorMessage
     private RenderNode                          _renderRoot;
    // private HashMap<String, ComponentInfo>      _idIndex;
     
+    /**
+     * default constructor
+     */
     public ComponentTreeMessage()
     {
         //_idIndex = new HashMap<String, ComponentInfo>();
     }
     
+    /**
+     * @return the view id
+     */
     public final String getViewId() {
         return _viewId;
     }
 
+    /**
+     * @return the componentinfo at the root of the component tree
+     */
     public final ComponentInfo getTreeRoot() {
         return _treeRoot;
     }
 
+    /**
+     * @return the rendered root node
+     */
     public final RenderNode getRenderRoot() {
         return _renderRoot;
     }

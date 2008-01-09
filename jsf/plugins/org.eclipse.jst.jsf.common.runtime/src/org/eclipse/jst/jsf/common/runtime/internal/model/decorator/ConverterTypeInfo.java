@@ -24,7 +24,7 @@ public class ConverterTypeInfo extends TypeInfo implements IClassTypeInfo
      * 
      * @param className
      * @param converterId
-     * @throws #{@link IllegalArgumentException} if both className and
+     * @throws java.lang.IllegalArgumentException if both className and
      * converterId are null.
      * 
      */
@@ -40,6 +40,10 @@ public class ConverterTypeInfo extends TypeInfo implements IClassTypeInfo
         _converterId = converterId;
     }
    
+    /**
+     * Use when the converter's information unknown such as occurs when
+     * using the f:converter tag.
+     */
     public static final ConverterTypeInfo  UNKNOWN = 
         new ConverterTypeInfo((Object)null);
     
@@ -62,6 +66,9 @@ public class ConverterTypeInfo extends TypeInfo implements IClassTypeInfo
     }
 
 
+    /**
+     * @return the converter's id.
+     */
     public final String getConverterId()
     {
         return _converterId;

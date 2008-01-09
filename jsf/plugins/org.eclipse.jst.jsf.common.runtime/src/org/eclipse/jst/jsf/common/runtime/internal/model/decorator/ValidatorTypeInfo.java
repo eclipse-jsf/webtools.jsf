@@ -3,6 +3,11 @@ package org.eclipse.jst.jsf.common.runtime.internal.model.decorator;
 import org.eclipse.jst.jsf.common.runtime.internal.model.types.IClassTypeInfo;
 import org.eclipse.jst.jsf.common.runtime.internal.model.types.TypeInfo;
 
+/**
+ * Type information about validator decorator.
+ * @author cbateman
+ *
+ */
 public class ValidatorTypeInfo extends TypeInfo implements IClassTypeInfo
 {
     /**
@@ -18,7 +23,7 @@ public class ValidatorTypeInfo extends TypeInfo implements IClassTypeInfo
      * 
      * @param validatorClass
      * @param validatorId
-     * @throws #{@link IllegalArgumentException} if both className and
+     * @throws java.lang.IllegalArgumentException if both className and
      * converterId are null.
      * 
      */
@@ -34,6 +39,9 @@ public class ValidatorTypeInfo extends TypeInfo implements IClassTypeInfo
         _validatorId = validatorId;
     }
 
+    /**
+     * Use when a validator's type info information is unknown.
+     */
     public static final ValidatorTypeInfo  UNKNOWN = 
         new ValidatorTypeInfo((Object)null);
     
@@ -50,6 +58,9 @@ public class ValidatorTypeInfo extends TypeInfo implements IClassTypeInfo
         _className = _validatorId = null;
     }
 
+    /**
+     * @return the validator id (may be null if unknown).
+     */
     public final String getValidatorId()
     {
         return _validatorId;

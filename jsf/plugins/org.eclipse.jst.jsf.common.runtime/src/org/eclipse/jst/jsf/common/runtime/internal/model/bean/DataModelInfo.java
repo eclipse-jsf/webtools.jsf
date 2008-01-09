@@ -21,6 +21,13 @@ public class DataModelInfo implements Serializable
     private final int                   _rowIndex;
     private final SerializableObject    _wrappedData;
 
+    /**
+     * @param rowAvailable
+     * @param rowCount
+     * @param rowData
+     * @param rowIndex
+     * @param wrappedData
+     */
     public DataModelInfo(boolean rowAvailable, int rowCount, Object rowData,
             int rowIndex, Object wrappedData) {
         super();
@@ -31,18 +38,34 @@ public class DataModelInfo implements Serializable
         _wrappedData = new SerializableObject(wrappedData);
     }
 
+    /**
+     * @return true if the current row is available
+     */
     public final boolean isRowAvailable() {
         return _rowAvailable;
     }
+    /**
+     * @return the row count of this model
+     */
     public final int getRowCount() {
         return _rowCount;
     }
+    /**
+     * @return the row data
+     */
     public final Object getRowData() {
         return _rowData.getMaybeSerializable();
     }
+    /**
+     * @return the row index
+     */
     public final int getRowIndex() {
         return _rowIndex;
     }
+    /**
+     * @return the wrapped data.  may be null if wrapped object was not
+     * serializable.
+     */
     public final Object getWrappedData() {
         return _wrappedData.getMaybeSerializable();
     }

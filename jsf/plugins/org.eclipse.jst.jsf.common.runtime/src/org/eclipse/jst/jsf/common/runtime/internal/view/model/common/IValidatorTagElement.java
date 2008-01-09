@@ -10,5 +10,8 @@ import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ValidatorType
  */
 public interface IValidatorTagElement extends IJSFTagElement
 {
+    /**
+     * @return the type info about the validator.
+     */
     ValidatorTypeInfo getValidator();
 }

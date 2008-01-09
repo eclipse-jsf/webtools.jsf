@@ -10,5 +10,8 @@ import org.eclipse.jst.jsf.common.runtime.internal.model.component.ComponentType
  */
 public interface IComponentTagElement extends IJSFTagElement 
 {
+    /**
+     * @return the comopnent's type info.
+     */
     ComponentTypeInfo getComponent();
 }

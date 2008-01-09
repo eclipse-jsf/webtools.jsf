@@ -5,15 +5,34 @@ import java.util.List;
 import org.eclipse.jst.jsf.common.runtime.internal.model.behavioural.IValueHolderInfo;
 import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ConverterDecorator;
 
+/**
+ * A design-time analog for the UIOutput
+ * 
+ * @author cbateman
+ *
+ */
 public class UIOutputInfo extends ComponentInfo implements IValueHolderInfo {
     /**
      * serializable uid
      */
     private static final long serialVersionUID = 9096297578991706150L;
 
+    /**
+     * the value
+     */
     protected final Object _value;
+    /**
+     * the value before any EL evaluation
+     */
     protected final Object _localValue;
 
+    /**
+     * @param id
+     * @param parent
+     * @param typeInfo
+     * @param valueHolderInfo
+     * @param isRendered
+     */
     protected UIOutputInfo(final String id, final ComponentInfo parent,
             final ComponentTypeInfo typeInfo,
             final IValueHolderInfo valueHolderInfo, final boolean isRendered) {

@@ -15,6 +15,9 @@ public class ActionListenerDecorator extends ComponentDecorator {
      */
     private static final long serialVersionUID = 3806862878381550874L;
 
+    /**
+     * @param decorates
+     */
     public ActionListenerDecorator(ComponentInfo decorates) {
         super(decorates);
     }

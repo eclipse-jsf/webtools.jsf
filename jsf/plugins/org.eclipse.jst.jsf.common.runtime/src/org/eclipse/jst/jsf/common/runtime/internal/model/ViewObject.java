@@ -62,9 +62,8 @@ public abstract class ViewObject implements Serializable /* IAdaptable? */
 
         if (decorators == null) {
             return Collections.EMPTY_LIST;
-        } else {
-            return Collections.unmodifiableList(decorators);
         }
+        return Collections.unmodifiableList(decorators);
     }
 
     /**

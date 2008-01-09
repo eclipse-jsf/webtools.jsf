@@ -4,8 +4,20 @@ import java.io.Serializable;
 
 import org.eclipse.jst.jsf.common.runtime.internal.model.types.TypeInfo;
 
+/**
+ * Generic tag handler that has effect when processed by the JSF ViewHandler.
+ * 
+ * @author cbateman
+ *
+ */
 public interface IHandlerTagElement extends IJSFTagElement
 {
+    /**
+     * Enumerates known types of built-in tag handlers.
+     * 
+     * @author cbateman
+     *
+     */
     static class TagHandlerType extends TypeInfo implements Serializable
     {
         /**

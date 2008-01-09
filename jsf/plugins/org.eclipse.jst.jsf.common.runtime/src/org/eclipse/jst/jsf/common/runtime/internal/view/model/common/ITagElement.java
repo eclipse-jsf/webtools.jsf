@@ -1,5 +1,11 @@
 package org.eclipse.jst.jsf.common.runtime.internal.view.model.common;
 
+/**
+ * Super-interface of all JSF tag elements.
+ * 
+ * @author cbateman
+ *
+ */
 public interface ITagElement {
 
     /**

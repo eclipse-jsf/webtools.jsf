@@ -10,6 +10,12 @@ import java.io.Serializable;
  */
 public interface IJSFTagElement extends ITagElement
 {
+    /**
+     * An enumeration of different kinds of tags.
+     * 
+     * @author cbateman
+     *
+     */
     static class TagType implements Serializable
     {
         /**

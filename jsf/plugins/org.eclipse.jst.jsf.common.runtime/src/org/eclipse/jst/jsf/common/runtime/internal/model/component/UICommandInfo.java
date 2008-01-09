@@ -7,6 +7,11 @@ import org.eclipse.jst.jsf.common.runtime.internal.model.behavioural.IActionSour
 import org.eclipse.jst.jsf.common.runtime.internal.model.behavioural.IActionSourceInfo;
 import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ActionListenerDecorator;
 
+/**
+ * An design time analog of the standard UICommand.
+ * @author cbateman
+ *
+ */
 public class UICommandInfo extends ComponentInfo implements IActionSource2Info {
     private final String _actionExpression;
     private final String _actionListener;
@@ -17,6 +22,13 @@ public class UICommandInfo extends ComponentInfo implements IActionSource2Info {
      */
     private static final long serialVersionUID = -9025172832535840949L;
 
+    /**
+     * @param id
+     * @param parent
+     * @param componentTypeInfo
+     * @param isRendered
+     * @param actionSourceInfo
+     */
     protected UICommandInfo(final String id, final ComponentInfo parent,
             final ComponentTypeInfo componentTypeInfo,
             final boolean isRendered, final IActionSourceInfo actionSourceInfo) {

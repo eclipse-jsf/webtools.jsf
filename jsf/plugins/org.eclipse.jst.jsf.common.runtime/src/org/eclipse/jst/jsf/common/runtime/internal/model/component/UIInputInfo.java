@@ -7,6 +7,11 @@ import org.eclipse.jst.jsf.common.runtime.internal.model.behavioural.IEditableVa
 import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ValidatorDecorator;
 import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ValueChangeListenerDecorator;
 
+/**
+ * A design-time analog of the standard UIInput. 
+ * @author cbateman
+ *
+ */
 public class UIInputInfo extends UIOutputInfo implements
         IEditableValueHolderInfo {
     /**
@@ -21,6 +26,13 @@ public class UIInputInfo extends UIOutputInfo implements
     private final String _valueChangeListener;
     private final boolean _localSetValue;
 
+    /**
+     * @param id
+     * @param parent
+     * @param typeInfo
+     * @param editableValueHolderInfo
+     * @param isRendered
+     */
     protected UIInputInfo(final String id, final ComponentInfo parent,
             final ComponentTypeInfo typeInfo,
             final IEditableValueHolderInfo editableValueHolderInfo,

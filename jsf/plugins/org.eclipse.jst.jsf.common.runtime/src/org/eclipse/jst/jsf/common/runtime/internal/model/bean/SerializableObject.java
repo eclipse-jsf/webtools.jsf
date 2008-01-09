@@ -20,6 +20,9 @@ public class SerializableObject implements Serializable
     private static final long serialVersionUID = 9133733048469500692L;
     private Object      _maybeSerializable;
     
+    /**
+     * @param maybeSerializable
+     */
     public SerializableObject(Object maybeSerializable)
     {
         _maybeSerializable = maybeSerializable;
@@ -35,6 +38,9 @@ public class SerializableObject implements Serializable
 //        _maybeSerializable = null;
 //    }
     
+    /**
+     * @return the actual value
+     */
     public final Object getMaybeSerializable() {
         return _maybeSerializable;
     }

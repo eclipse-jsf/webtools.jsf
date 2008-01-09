@@ -17,6 +17,14 @@ public class UIFormInfo extends ComponentInfo implements INamingContainerInfo
     private final boolean _prependId;
     private final boolean _submitted;
     
+    /**
+     * @param id
+     * @param parent
+     * @param componentTypeInfo
+     * @param isRendered
+     * @param prependId
+     * @param submitted
+     */
     protected UIFormInfo(final String id, final ComponentInfo parent,
             final ComponentTypeInfo componentTypeInfo, final boolean isRendered
             , final boolean prependId, final boolean submitted) {

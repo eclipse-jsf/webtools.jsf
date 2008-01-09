@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * A rendered XML node.
+ * 
+ * @author cbateman
+ *
+ */
 public class RenderNode extends JSFMonitorMessage 
 {
     /**
@@ -16,6 +22,10 @@ public class RenderNode extends JSFMonitorMessage
     private final List/*<RenderedAttribute>*/        _renderedAttributes; // attributes
     private final List        _children;          // the rendered children of renderedNode based
                                                   // on the output document hiearchy
+    /**
+     * @param componentId
+     * @param renderedNodeName
+     */
     public RenderNode(String componentId, String renderedNodeName) {
         super();
         _componentId = componentId;
@@ -24,15 +34,27 @@ public class RenderNode extends JSFMonitorMessage
         _children = new ArrayList();
         _renderedAttributes = new ArrayList();
     }
+    /**
+     * @return the corresponding component's id
+     */
     public final String getComponentId() {
         return _componentId;
     }
+    /**
+     * @return the node's children
+     */
     public final List getChildren() {
         return _children;
     }
+    /**
+     * @return the name of the rendered node (element)
+     */
     public final String getRenderedNodeName() {
         return _renderedNodeName;
     }
+    /**
+     * @return the attributes of this node as rendered.
+     */
     public final List getRenderedAttributes() {
         return _renderedAttributes;
     }

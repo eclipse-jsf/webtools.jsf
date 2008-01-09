@@ -6,6 +6,12 @@ import java.util.List;
 
 import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ActionListenerDecorator;
 
+/**
+ * Implementation of the ActionSourceInfo.
+ * 
+ * @author cbateman
+ *
+ */
 public class ActionSourceInfo implements IActionSourceInfo 
 {
     /**
@@ -18,6 +24,11 @@ public class ActionSourceInfo implements IActionSourceInfo
     private final boolean                                   _immediate;
     private List/*<ActionListenerDecorator>*/               _actionListeners;
     
+    /**
+     * @param action
+     * @param actionListener
+     * @param immediate
+     */
     public ActionSourceInfo(final String action, final String actionListener,
             final boolean immediate) 
     {

@@ -1,5 +1,10 @@
 package org.eclipse.jst.jsf.common.runtime.internal.model.types;
 
+/**
+ * A type info that has an associate Java class.
+ * @author cbateman
+ *
+ */
 public interface IClassTypeInfo
 {
     /**
