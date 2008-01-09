@@ -140,7 +140,8 @@ public class SybaseCMTranslationTests extends AbstractBaseMetaDataTestCase imple
 		assertEquals(IAttributeRuntimeValueType.LOCALE, getAttrValRuntimeType(getModel(), "column/fakeLocale"));
 	}
 	
-	public void testMethodBindingTypeTranslation() {
+	@SuppressWarnings("unchecked")
+    public void testMethodBindingTypeTranslation() {
 		//validator
 		assertEquals(IAttributeRuntimeValueType.METHODBINDING, getAttrValRuntimeType(getModel(), "inputText/validator"));
 		Trait t = getTrait(getModel(), "inputText/validator", "runtime-param-types");
