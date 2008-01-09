@@ -69,7 +69,7 @@ public class JSFHtmlSelectChoicesSection extends BaseCustomSection
     private TableViewer           _choiceViewer;
     private CCombo                _choiceTypeCombo;
     private Button                _choiceAddButton, _choiceRemoveButton, _choiceMoveUpButton, _choiceMoveDownButton;
-	private static final String[] COLUMN_NAMES = new String[] {"choices","itemLabel", "itemValue", "id"};
+    private static final String[] COLUMN_NAMES = new String[] {"choices","itemLabel", "itemValue", "id"};
 
     private class ChoiceCotentLabelProvider implements IStructuredContentProvider, ITableLabelProvider
     {
@@ -77,19 +77,19 @@ public class JSFHtmlSelectChoicesSection extends BaseCustomSection
         /* (non-Javadoc)
          * @see org.eclipse.jface.viewers.IStructuredContentProvider#getElements(java.lang.Object)
          */
-        public Object[] getElements(Object inputElement)
+        public Object[] getElements(final Object inputElement)
         {
-            IDOMElement root = _element;
-            List result = new ArrayList();
+            final IDOMElement root = _element;
+            final List result = new ArrayList();
 
-            NodeList children = root.getChildNodes();
+            final NodeList children = root.getChildNodes();
             for (int i = 0, n = children.getLength(); i < n; i++)
             {
-                Node child = children.item(i);
+                final Node child = children.item(i);
                 if (child.getNodeType() == Node.ELEMENT_NODE)
                 {
-                    IDOMElement element = (IDOMElement) child;
-                    String nodeName = element.getNodeName();
+                    final IDOMElement element = (IDOMElement) child;
+                    final String nodeName = element.getNodeName();
                     if (nodeName.indexOf("select") != -1) //$NON-NLS-1$
                     {
                         result.add(child);
@@ -108,38 +108,50 @@ public class JSFHtmlSelectChoicesSection extends BaseCustomSection
         /* (non-Javadoc)
          * @see org.eclipse.jface.viewers.IContentProvider#inputChanged(org.eclipse.jface.viewers.Viewer, java.lang.Object, java.lang.Object)
          */
-        public void inputChanged(Viewer viewer, Object oldInput, Object newInput)
+        public void inputChanged(final Viewer viewer, final Object oldInput, final Object newInput)
         {
             // do nothing
         }
 
-        public String getColumnText(Object element, int columnIndex)
+        public String getColumnText(final Object element, final int columnIndex)
         {
             String result = null;
             if (element instanceof Node)
-            {            	
-                Node node = (Node) element; 
+            {
+                final Node node = (Node) element;
                 Node attrNode = null;
                 String attrName = null;
                 if (columnIndex == 1)
-                	attrName = "itemLabel";
+                {
+                    attrName = "itemLabel";
+                }
                 else if (columnIndex == 2)
-                	attrName = "itemValue";
+                {
+                    attrName = "itemValue";
+                }
                 else if (columnIndex == 3)
-                	attrName = "id";
-                
+                {
+                    attrName = "id";
+                }
+
                 switch (columnIndex)
                 {
                     case 0:
                         result = node.getNodeName();
                         break;
                     default:
-                    	attrNode = node.getAttributes().getNamedItem(attrName);
-                    	if (attrNode != null)
-                    		result = attrNode.getNodeValue()!=null ? attrNode.getNodeValue() : " - ";
-                    	else
-                    		result = " - ";
-                 }
+                    {
+                        attrNode = node.getAttributes().getNamedItem(attrName);
+                        if (attrNode != null)
+                        {
+                            result = attrNode.getNodeValue()!=null ? attrNode.getNodeValue() : " - ";
+                        }
+                        else
+                        {
+                            result = " - ";
+                        }
+                    }
+                }
             }
             return result != null ? result : ""; //$NON-NLS-1$
         }
@@ -149,22 +161,22 @@ public class JSFHtmlSelectChoicesSection extends BaseCustomSection
             // do nothing
         }
 
-        public Image getColumnImage(Object element, int columnIndex)
+        public Image getColumnImage(final Object element, final int columnIndex)
         {
             return null;
         }
 
-        public void addListener(ILabelProviderListener listener)
+        public void addListener(final ILabelProviderListener listener)
         {
             // TODO: no support for listeners?
         }
 
-        public boolean isLabelProperty(Object element, String property)
+        public boolean isLabelProperty(final Object element, final String property)
         {
             return false;
         }
 
-        public void removeListener(ILabelProviderListener listener)
+        public void removeListener(final ILabelProviderListener listener)
         {
             // TODO: no support for listeners?
         }
@@ -178,13 +190,14 @@ public class JSFHtmlSelectChoicesSection extends BaseCustomSection
         super();
     }
 
-    public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage)
+    @Override
+    public void createControls(final Composite parent, final TabbedPropertySheetPage aTabbedPropertySheetPage)
     {
         super.createControls(parent, aTabbedPropertySheetPage);
-        TabbedPropertySheetWidgetFactory factory = aTabbedPropertySheetPage.getWidgetFactory();
-        Composite top = factory.createFlatFormComposite(parent);
+        final TabbedPropertySheetWidgetFactory factory = aTabbedPropertySheetPage.getWidgetFactory();
+        final Composite top = factory.createFlatFormComposite(parent);
 
-        GridLayout layout = new GridLayout();
+        final GridLayout layout = new GridLayout();
         layout.numColumns = 4;
         top.setLayout(layout);
 
@@ -195,7 +208,7 @@ public class JSFHtmlSelectChoicesSection extends BaseCustomSection
      * @param factory
      * @param other
      */
-    private void createChoicePart(TabbedPropertySheetWidgetFactory factory, Composite other)
+    private void createChoicePart(final TabbedPropertySheetWidgetFactory factory, final Composite other)
     {
         GridData data;
         _choiceTable = factory.createTable(other, SWT.FULL_SELECTION | SWT.MULTI);
@@ -207,25 +220,25 @@ public class JSFHtmlSelectChoicesSection extends BaseCustomSection
         _choiceTable.setLayoutData(data);
         _choiceTable.setLinesVisible(true);
 
-        TableColumn choiceColumn = new TableColumn(_choiceTable, SWT.NONE);
+        final TableColumn choiceColumn = new TableColumn(_choiceTable, SWT.NONE);
         choiceColumn.setText(SectionResources.getString("JSFHtmlSelectManyCheckboxSection.Choices")); //$NON-NLS-1$
         choiceColumn.setWidth(100);
-        
-        TableColumn labelColumn = new TableColumn(_choiceTable, SWT.NONE);
+
+        final TableColumn labelColumn = new TableColumn(_choiceTable, SWT.NONE);
         labelColumn.setText("itemLabel");
         labelColumn.setWidth(100);
-        
-        TableColumn valueColumn = new TableColumn(_choiceTable, SWT.NONE);
+
+        final TableColumn valueColumn = new TableColumn(_choiceTable, SWT.NONE);
         valueColumn.setText("itemValue");
         valueColumn.setWidth(100);
-        
-        TableColumn idColumn = new TableColumn(_choiceTable, SWT.NONE);
+
+        final TableColumn idColumn = new TableColumn(_choiceTable, SWT.NONE);
         idColumn.setText("id");
         idColumn.setWidth(100);
 
         _choiceViewer = new TableViewer(_choiceTable);
         _choiceViewer.setColumnProperties(COLUMN_NAMES );
-        CellEditor[] editors = new CellEditor[4];
+        final CellEditor[] editors = new CellEditor[4];
         TextCellEditor textEditor = new TextCellEditor(_choiceTable);
         editors[0] = textEditor;
         textEditor = new TextCellEditor(_choiceTable);
@@ -238,53 +251,55 @@ public class JSFHtmlSelectChoicesSection extends BaseCustomSection
         _choiceViewer.setCellEditors(editors);
         _choiceViewer.setCellModifier(new ICellModifier(){
 
-			public boolean canModify(Object element, String property) {				
-				IDOMElement node = (IDOMElement)element;
-				if (node.getLocalName().equals("selectItem"))
-					return ! property.equals("choices");
-				else
-					return property.equals("id");
-			}
+            public boolean canModify(final Object element, final String property) {
+                final IDOMElement node = (IDOMElement)element;
+                if (node.getLocalName().equals("selectItem"))
+                {
+                    return ! property.equals("choices");
+                }
 
-			public Object getValue(Object element, String property) {	
-				IDOMElement node = (IDOMElement) element;
-				String val = node.getAttribute(property) != null ? node.getAttribute(property) : "";
-				return val;
-			}
-			
-			public void modify(Object element, String property, Object value) {
+                return property.equals("id");
+            }
 
-	            TableItem item = (TableItem) element;
-	            IDOMElement node = (IDOMElement) item.getData();
-	            String valueString;
-	            ChangeAttributeCommand c;
+            public Object getValue(final Object element, final String property) {
+                final IDOMElement node = (IDOMElement) element;
+                final String val = node.getAttribute(property) != null ? node.getAttribute(property) : "";
+                return val;
+            }
+
+            public void modify(final Object element, final String property, final Object value) {
+
+                final TableItem item = (TableItem) element;
+                final IDOMElement node = (IDOMElement) item.getData();
+                String valueString;
+                ChangeAttributeCommand c;
 
                 valueString = ((String) value).trim();
                 c = new ChangeAttributeCommand(
                         SectionResources.getString("JSFHtmlInputTextSection.CommandLabel.ChangeAttribute"), node, property, valueString); //$NON-NLS-1$
-                c.execute();	   
-                
+                c.execute();
+
                 _choiceViewer.refresh();
-			}
-        	
+            }
+
         });
         _choiceViewer.setContentProvider(new ChoiceCotentLabelProvider());
         _choiceViewer.setLabelProvider(new ChoiceCotentLabelProvider());
         _choiceViewer.addDoubleClickListener(new IDoubleClickListener()
         {
-            public void doubleClick(DoubleClickEvent event)
+            public void doubleClick(final DoubleClickEvent event)
             {
-                IStructuredSelection selection = (IStructuredSelection) event.getSelection();
+                final IStructuredSelection selection = (IStructuredSelection) event.getSelection();
                 if (selection != null)
                 {
-                    IDOMElement node = (IDOMElement) selection.getFirstElement();
+                    final IDOMElement node = (IDOMElement) selection.getFirstElement();
                     gotoNode(node);
                 }
             }
         });
         _choiceViewer.addSelectionChangedListener(new ISelectionChangedListener()
         {
-            public void selectionChanged(SelectionChangedEvent event)
+            public void selectionChanged(final SelectionChangedEvent event)
             {
                 updateChoiceButtonStatus();
             }
@@ -302,10 +317,11 @@ public class JSFHtmlSelectChoicesSection extends BaseCustomSection
         _choiceAddButton.setLayoutData(data);
         _choiceAddButton.addSelectionListener(new SelectionAdapter()
         {
-            public void widgetSelected(SelectionEvent e)
+            @Override
+            public void widgetSelected(final SelectionEvent e)
             {
-                Map attributes = new HashMap();
-                AddSubNodeCommand c = new AddSubNodeCommand(
+                final Map attributes = new HashMap();
+                final AddSubNodeCommand c = new AddSubNodeCommand(
                         SectionResources.getString("JSFHtmlSelectManyCheckboxSection.CommandLabel.AddSubTag"), _element, _choiceTypeCombo.getText(), //$NON-NLS-1$
                         ITLDConstants.URI_JSF_CORE, attributes);
                 c.execute();
@@ -319,17 +335,18 @@ public class JSFHtmlSelectChoicesSection extends BaseCustomSection
         _choiceRemoveButton.setLayoutData(data);
         _choiceRemoveButton.addSelectionListener(new SelectionAdapter()
         {
-            public void widgetSelected(SelectionEvent e)
+            @Override
+            public void widgetSelected(final SelectionEvent e)
             {
-                IStructuredSelection selection = (IStructuredSelection) _choiceViewer.getSelection();
+                final IStructuredSelection selection = (IStructuredSelection) _choiceViewer.getSelection();
                 if (selection != null)
                 {
-                    for (Iterator i = selection.iterator(); i.hasNext();)
+                    for (final Iterator i = selection.iterator(); i.hasNext();)
                     {
-                        IDOMElement node = (IDOMElement) i.next();
-                        RemoveSubNodeCommand c = new RemoveSubNodeCommand(
+                        final IDOMElement node = (IDOMElement) i.next();
+                        final RemoveSubNodeCommand c = new RemoveSubNodeCommand(
                                 SectionResources
-                                        .getString("JSFHtmlSelectManyCheckboxSection.CommandLabel.RemoveSubTag"), _element, node); //$NON-NLS-1$
+                                .getString("JSFHtmlSelectManyCheckboxSection.CommandLabel.RemoveSubTag"), _element, node); //$NON-NLS-1$
                         c.execute();
                     }
                     _choiceViewer.refresh();
@@ -343,15 +360,16 @@ public class JSFHtmlSelectChoicesSection extends BaseCustomSection
         _choiceMoveUpButton.setLayoutData(data);
         _choiceMoveUpButton.addSelectionListener(new SelectionAdapter()
         {
-            public void widgetSelected(SelectionEvent e)
+            @Override
+            public void widgetSelected(final SelectionEvent e)
             {
-                int index = _choiceTable.getSelectionIndex();
-                IDOMElement child = (IDOMElement) _choiceTable.getItem(index).getData();
-                IDOMElement refchild = (IDOMElement) _choiceTable.getItem(index - 1).getData();
-                RemoveSubNodeCommand remove = new RemoveSubNodeCommand(SectionResources
+                final int index = _choiceTable.getSelectionIndex();
+                final IDOMElement child = (IDOMElement) _choiceTable.getItem(index).getData();
+                final IDOMElement refchild = (IDOMElement) _choiceTable.getItem(index - 1).getData();
+                final RemoveSubNodeCommand remove = new RemoveSubNodeCommand(SectionResources
                         .getString("JSFHtmlSelectManyCheckboxSection.CommandLabel.RemoveSubTag"), _element, child); //$NON-NLS-1$
                 remove.execute();
-                InsertSubNodeCommand insert = new InsertSubNodeCommand(
+                final InsertSubNodeCommand insert = new InsertSubNodeCommand(
                         SectionResources.getString("JSFHtmlSelectManyCheckboxSection.CommandLabel.InsertSubTag"), _element, child, refchild); //$NON-NLS-1$
                 insert.execute();
                 _choiceViewer.refresh();
@@ -365,15 +383,16 @@ public class JSFHtmlSelectChoicesSection extends BaseCustomSection
         _choiceMoveDownButton.setLayoutData(data);
         _choiceMoveDownButton.addSelectionListener(new SelectionAdapter()
         {
-            public void widgetSelected(SelectionEvent e)
+            @Override
+            public void widgetSelected(final SelectionEvent e)
             {
-                int index = _choiceTable.getSelectionIndex();
-                IDOMElement child = (IDOMElement) _choiceTable.getItem(index).getData();
-                IDOMElement refchild = (IDOMElement) _choiceTable.getItem(index + 1).getData();
-                RemoveSubNodeCommand remove = new RemoveSubNodeCommand(SectionResources
+                final int index = _choiceTable.getSelectionIndex();
+                final IDOMElement child = (IDOMElement) _choiceTable.getItem(index).getData();
+                final IDOMElement refchild = (IDOMElement) _choiceTable.getItem(index + 1).getData();
+                final RemoveSubNodeCommand remove = new RemoveSubNodeCommand(SectionResources
                         .getString("JSFHtmlSelectManyCheckboxSection.CommandLabel.RemoveSubTag"), _element, refchild); //$NON-NLS-1$
                 remove.execute();
-                InsertSubNodeCommand insert = new InsertSubNodeCommand(
+                final InsertSubNodeCommand insert = new InsertSubNodeCommand(
                         SectionResources.getString("JSFHtmlSelectManyCheckboxSection.CommandLabel.InsertSubTag"), _element, refchild, child); //$NON-NLS-1$
                 insert.execute();
                 _choiceViewer.refresh();
@@ -388,7 +407,7 @@ public class JSFHtmlSelectChoicesSection extends BaseCustomSection
         _choiceRemoveButton.setEnabled(true);
         _choiceMoveUpButton.setEnabled(true);
         _choiceMoveDownButton.setEnabled(true);
-        ISelection selection = _choiceViewer.getSelection();
+        final ISelection selection = _choiceViewer.getSelection();
         if (selection.isEmpty())
         {
             _choiceRemoveButton.setEnabled(false);
@@ -416,7 +435,8 @@ public class JSFHtmlSelectChoicesSection extends BaseCustomSection
         }
     }
 
-    public void setInput(IWorkbenchPart part, ISelection selection)
+    @Override
+    public void setInput(final IWorkbenchPart part, final ISelection selection)
     {
         super.setInput(part, selection);
 
@@ -424,8 +444,9 @@ public class JSFHtmlSelectChoicesSection extends BaseCustomSection
         updateChoiceButtonStatus();
     }
 
-    protected void notifyChanged(INodeNotifier notifier, int eventType, Object changedFeature, Object oldValue,
-            Object newValue, int pos)
+    @Override
+    protected void notifyChanged(final INodeNotifier notifier, final int eventType, final Object changedFeature, final Object oldValue,
+            final Object newValue, final int pos)
     {
         if (_choiceViewer != null && !_choiceViewer.getControl().isDisposed())
         {
