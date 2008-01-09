@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2007 Oracle Corporation
  *
- * $Id: QuickEditTabSectionsPackageImpl.java,v 1.1 2007/12/07 23:43:47 gkessler Exp $
+ * $Id: QuickEditTabSectionsPackageImpl.java,v 1.2 2008/01/09 19:40:28 cbateman Exp $
  */
 package org.eclipse.jst.pagedesigner.editors.properties.quickedittabsections.internal.impl;
 
@@ -93,6 +93,7 @@ public class QuickEditTabSectionsPackageImpl extends EPackageImpl implements Qui
 	 * <p>Invocation of this method will not affect any packages that have
 	 * already been initialized.
 	 * <!-- begin-user-doc -->
+     * @return the initialized package 
 	 * <!-- end-user-doc -->
 	 * @see #eNS_URI
 	 * @see #createPackageContents()

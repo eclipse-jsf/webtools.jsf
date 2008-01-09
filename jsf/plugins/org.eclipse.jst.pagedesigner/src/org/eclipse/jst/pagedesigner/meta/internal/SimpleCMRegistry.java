@@ -13,6 +13,7 @@ package org.eclipse.jst.pagedesigner.meta.internal;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -71,8 +72,11 @@ public class SimpleCMRegistry implements ICMRegistry {
 		return null;
 	}
 	
+	/**
+	 * @return an unmodifiable map of the registry
+	 */
 	public Map getMap(){
-		return _map;
+		return Collections.unmodifiableMap(_map);
 	}
 
 }

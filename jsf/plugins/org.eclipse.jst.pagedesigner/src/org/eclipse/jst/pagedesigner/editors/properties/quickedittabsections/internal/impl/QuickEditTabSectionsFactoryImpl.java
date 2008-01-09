@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2007 Oracle Corporation
  *
- * $Id: QuickEditTabSectionsFactoryImpl.java,v 1.1 2007/12/07 23:43:47 gkessler Exp $
+ * $Id: QuickEditTabSectionsFactoryImpl.java,v 1.2 2008/01/09 19:40:28 cbateman Exp $
  */
 package org.eclipse.jst.pagedesigner.editors.properties.quickedittabsections.internal.impl;
 
@@ -34,6 +34,7 @@ public class QuickEditTabSectionsFactoryImpl extends EFactoryImpl implements Qui
 	/**
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc -->
+     * @return the factory 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -127,6 +128,9 @@ public class QuickEditTabSectionsFactoryImpl extends EFactoryImpl implements Qui
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @param eDataType 
+     * @param initialValue 
+     * @return the SECTION_TYPE enumerator 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -138,6 +142,9 @@ public class QuickEditTabSectionsFactoryImpl extends EFactoryImpl implements Qui
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @param eDataType 
+     * @param instanceValue 
+     * @return the String version of the section type 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -156,6 +163,7 @@ public class QuickEditTabSectionsFactoryImpl extends EFactoryImpl implements Qui
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @return the package 
 	 * <!-- end-user-doc -->
 	 * @deprecated
 	 * @generated

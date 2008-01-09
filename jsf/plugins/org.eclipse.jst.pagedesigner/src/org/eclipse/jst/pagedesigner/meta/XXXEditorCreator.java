@@ -29,7 +29,15 @@ public abstract class XXXEditorCreator {
 
 	static IBindingHandler _defaultHandler = new BindingHandlerDelegate();
 
+	/**
+	 * Cell editor holder
+	 *
+	 */
 	public static interface CellEditorHolder {
+		/**
+		 * @param parent
+		 * @return the cell editor
+		 */
 		public CellEditor createCellEditor(Composite parent);
 	}
 
@@ -59,6 +67,11 @@ public abstract class XXXEditorCreator {
 	public abstract DialogField createDialogFieldWithWrapper(String uri,
 			String tagName, IAttributeDescriptor attr, IBindingHandler handler);
 
+	/**
+	 * @param descriptor
+	 * @param handler
+	 * @return the dialog field
+	 */
 	public abstract DialogField createDialogFieldWithWrapper(IPropertyPageDescriptor descriptor, IBindingHandler handler);
 //	
 //	/**
@@ -120,6 +133,9 @@ public abstract class XXXEditorCreator {
 			IAttributeDescriptor attr, CellEditorHolder holder,
 			IDOMElement element, IBindingHandler handler);
 
+	/**
+	 * @return the singleton instance
+	 */
 	public static XXXEditorCreator getInstance() {
 		if (_instance == null) {
 			_instance = new XXXDefaultEditorCreator();
@@ -127,6 +143,9 @@ public abstract class XXXEditorCreator {
 		return _instance;
 	}
 
+	/**
+	 * @return the binding handler
+	 */
 	public IBindingHandler getSystemDefaultBindingHandler() {
 		return _defaultHandler;
 	}

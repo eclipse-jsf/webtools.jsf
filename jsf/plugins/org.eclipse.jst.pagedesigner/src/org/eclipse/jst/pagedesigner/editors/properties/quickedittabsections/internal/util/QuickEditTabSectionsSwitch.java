@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2007 Oracle Corporation
  *
- * $Id: QuickEditTabSectionsSwitch.java,v 1.1 2007/12/07 23:43:50 gkessler Exp $
+ * $Id: QuickEditTabSectionsSwitch.java,v 1.2 2008/01/09 19:40:28 cbateman Exp $
  */
 package org.eclipse.jst.pagedesigner.editors.properties.quickedittabsections.internal.util;
 
@@ -21,6 +21,8 @@ import org.eclipse.jst.pagedesigner.editors.properties.quickedittabsections.*;
  * and proceeding up the inheritance hierarchy
  * until a non-null result is returned,
  * which is the result of the switch.
+ * 
+ * @param <T> 
  * <!-- end-user-doc -->
  * @see org.eclipse.jst.pagedesigner.editors.properties.quickedittabsections.QuickEditTabSectionsPackage
  * @generated
@@ -56,6 +58,7 @@ public class QuickEditTabSectionsSwitch<T> {
 	/**
 	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
 	 * <!-- begin-user-doc -->
+     * @param theEObject 
 	 * <!-- end-user-doc -->
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
@@ -67,6 +70,8 @@ public class QuickEditTabSectionsSwitch<T> {
 	/**
 	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
 	 * <!-- begin-user-doc -->
+     * @param theEClass 
+     * @param theEObject 
 	 * <!-- end-user-doc -->
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
@@ -75,18 +80,18 @@ public class QuickEditTabSectionsSwitch<T> {
 		if (theEClass.eContainer() == modelPackage) {
 			return doSwitch(theEClass.getClassifierID(), theEObject);
 		}
-		else {
-			List<EClass> eSuperTypes = theEClass.getESuperTypes();
-			return
-				eSuperTypes.isEmpty() ?
-					defaultCase(theEObject) :
-					doSwitch(eSuperTypes.get(0), theEObject);
-		}
+        List<EClass> eSuperTypes = theEClass.getESuperTypes();
+        return
+        	eSuperTypes.isEmpty() ?
+        		defaultCase(theEObject) :
+        		doSwitch(eSuperTypes.get(0), theEObject);
 	}
 
 	/**
 	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
 	 * <!-- begin-user-doc -->
+     * @param classifierID 
+     * @param theEObject 
 	 * <!-- end-user-doc -->
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated

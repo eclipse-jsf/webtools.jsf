@@ -53,6 +53,9 @@ public class XXXCellEditorFactoryRegistry {
 
 	private List _defaultFactories = new ArrayList();
 
+	/**
+	 * @return the singleton registry instance
+	 */
 	public static XXXCellEditorFactoryRegistry getInstance() {
 		if (_instance == null) {
 			_instance = new XXXCellEditorFactoryRegistry();
@@ -85,6 +88,12 @@ public class XXXCellEditorFactoryRegistry {
 		}
 	}
 
+	/**
+	 * @param parent
+	 * @param attr
+	 * @param element
+	 * @return the cell editor
+	 */
 	public CellEditor createCellEditor(Composite parent,
 			IAttributeDescriptor attr, Element element) {
 		String type = attr.getValueType();
@@ -109,6 +118,12 @@ public class XXXCellEditorFactoryRegistry {
 		return result;
 	}
 	
+	/**
+	 * @param parent
+	 * @param attr
+	 * @param element
+	 * @return the cell editor
+	 */
 	public CellEditor createCellEditor(Composite parent,
 			IPropertyPageDescriptor attr, Element element) {
 //		String type = attr.getValueType();
@@ -172,6 +187,10 @@ public class XXXCellEditorFactoryRegistry {
 		return result;
 	}
 
+	/**
+	 * @param attr
+	 * @return the dialog field
+	 */
 	public DialogField createDialogField(IPropertyPageDescriptor attr) {
 		String type = attr.getValueType();
 		if (type == null || type.length() == 0) {

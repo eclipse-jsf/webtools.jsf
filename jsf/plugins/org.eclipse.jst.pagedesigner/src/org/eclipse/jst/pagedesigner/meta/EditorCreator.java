@@ -30,6 +30,10 @@ public abstract class EditorCreator {
 	 * 
 	 */
 	public static interface CellEditorHolder {
+		/**
+		 * @param parent
+		 * @return the cell editor
+		 */
 		public CellEditor createCellEditor(Composite parent);
 	}
 
@@ -60,13 +64,18 @@ public abstract class EditorCreator {
 			String tagName, IPropertyPageDescriptor attr, IBindingHandler handler);
 
 
+	/**
+	 * @param descriptor
+	 * @param handler
+	 * @return the dialog field
+	 */
 	public abstract DialogField createDialogFieldWithWrapper(IPropertyPageDescriptor descriptor, IBindingHandler handler);
 //	
 //	/**
 //	 * Create a dialog field that will have databinding support. Basically, this
 //	 * method will create a normal dialog field using the attribute descriptor,
 //	 * then make a wrapper on it.
-//	 * 
+//	 *
 //	 * @param uri
 //	 *            the namespace uri
 //	 * @param tagName
@@ -121,6 +130,9 @@ public abstract class EditorCreator {
 			IPropertyPageDescriptor attr, CellEditorHolder holder,
 			IDOMElement element, IBindingHandler handler);
 
+	/**
+	 * @return the singleton instance
+	 */
 	public static EditorCreator getInstance() {
 		if (_instance == null) {
 			_instance = new DefaultEditorCreator();
@@ -128,6 +140,9 @@ public abstract class EditorCreator {
 		return _instance;
 	}
 
+	/**
+	 * @return the binding handler
+	 */
 	public IBindingHandler getSystemDefaultBindingHandler() {
 		return _defaultHandler;
 	}

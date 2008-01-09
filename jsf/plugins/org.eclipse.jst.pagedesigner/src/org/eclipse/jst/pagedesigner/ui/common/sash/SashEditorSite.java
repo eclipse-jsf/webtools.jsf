@@ -413,23 +413,22 @@ public class SashEditorSite implements IEditorSite {
 
 	public void registerContextMenu(MenuManager menuManager,
 			ISelectionProvider selectionProvider, boolean includeEditorInput) {
-		// TODO Auto-generated method stub
-
+	    // do nothing
 	}
 
 	public void registerContextMenu(String menuId, MenuManager menuManager,
 			ISelectionProvider selectionProvider, boolean includeEditorInput) {
-		// TODO Auto-generated method stub
+		// do nothing
 
 	}
 
 	public Object getService(Class api) {
-		// TODO Auto-generated method stub
+		// return null
 		return null;
 	}
 
 	public boolean hasService(Class api) {
-		// TODO Auto-generated method stub
+		// no service
 		return false;
 	}
 

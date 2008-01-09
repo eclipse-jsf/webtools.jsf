@@ -61,6 +61,10 @@ public class XXXDefaultEditorCreator extends XXXEditorCreator {
 		return XXXCellEditorFactoryRegistry.getInstance().createDialogField(attr);
 	}
 	
+	/**
+	 * @param attr
+	 * @return the dialog field
+	 */
 	public DialogField createDialogField(IPropertyPageDescriptor attr) {
 		return XXXCellEditorFactoryRegistry.getInstance().createDialogField(attr);
 	}
