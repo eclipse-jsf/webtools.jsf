@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Runtime Test Plugin
+Bundle-SymbolicName: org.eclipse.jst.jsf.common.runtime.tests
+Bundle-Version: 1.0.0
+Bundle-Activator: org.eclipse.jst.jsf.common.runtime.tests.RuntimeTestPlugin
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.jst.jsf.common.runtime,
+ org.junit
+Eclipse-LazyStart: true
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: org.eclipse.jst.jsf.common.runtime.tests.model
