@@ -30,7 +30,6 @@ import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.Decorator;
 import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.FacetDecorator;
 import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ValidatorDecorator;
 import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ValidatorTypeInfo;
-import org.eclipse.jst.jsf.common.runtime.tests.debug.TestRenderNode;
 
 public final class RuntimeTestUtil extends Assert
 {
@@ -303,7 +302,7 @@ public final class RuntimeTestUtil extends Assert
         assertEquals(truth.getMostSpecificComponentName(), check
                 .getMostSpecificComponentName());
         // assertEquals(truth.getParent(), t);
-        TestRenderNode.verifySame(truth.getRenderNode(), check.getRenderNode());
+        //TestRenderNode.verifySame(truth.getRenderNode(), check.getRenderNode());
 
         assertEquals(truth.getChildren().size(), check.getChildren().size());
 

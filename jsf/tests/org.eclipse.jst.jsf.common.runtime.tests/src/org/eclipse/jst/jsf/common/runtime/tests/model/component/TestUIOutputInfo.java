@@ -5,6 +5,7 @@ import org.eclipse.jst.jsf.common.runtime.internal.model.component.ComponentFact
 import org.eclipse.jst.jsf.common.runtime.internal.model.component.ComponentInfo;
 import org.eclipse.jst.jsf.common.runtime.internal.model.component.UIOutputInfo;
 import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ConverterDecorator;
+import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ConverterTypeInfo;
 import org.eclipse.jst.jsf.common.runtime.tests.model.RuntimeTestUtil;
 
 public class TestUIOutputInfo extends TestComponentInfo {
@@ -13,6 +14,7 @@ public class TestUIOutputInfo extends TestComponentInfo {
     private ValueHolderInfo _valueHolder;
     private ValueHolderInfo _valueHolder2;
     private ConverterDecorator _converter;
+    private ConverterTypeInfo  _converterTypeInfo;
     private UIOutputInfo _uiOutputInfo_NoValueHolderAtConstruction;
 
     @Override
@@ -23,7 +25,8 @@ public class TestUIOutputInfo extends TestComponentInfo {
         _uiOutputInfo = ComponentFactory.createUIOutputInfo("id", null,
                 _componentTypeInfo, _valueHolder, true);
 
-        _converter = new ConverterDecorator(null);
+        _converterTypeInfo = ConverterTypeInfo.UNKNOWN; 
+        _converter = new ConverterDecorator(null, _converterTypeInfo);
         _valueHolder2 = new ValueHolderInfo(_converter, "value2", "value2");
         _uiOutputInfo2 = ComponentFactory.createUIOutputInfo("id2", null,
                 _componentTypeInfo, _valueHolder2, true);
@@ -47,6 +50,8 @@ public class TestUIOutputInfo extends TestComponentInfo {
         assertEquals(_converter, _uiOutputInfo2.getConverter());
         assertEquals(_converter, _uiOutputInfo2.getDecorators(
                 ComponentFactory.CONVERTER).get(0));
+        assertEquals(_converterTypeInfo, ((ConverterDecorator)_uiOutputInfo2.getDecorators(
+                ComponentFactory.CONVERTER).get(0)).getTypeInfo());
     }
 
     public void testGetLocalValue() {

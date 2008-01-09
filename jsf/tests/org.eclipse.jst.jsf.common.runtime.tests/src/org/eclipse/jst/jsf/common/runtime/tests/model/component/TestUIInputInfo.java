@@ -5,6 +5,7 @@ import org.eclipse.jst.jsf.common.runtime.internal.model.component.ComponentFact
 import org.eclipse.jst.jsf.common.runtime.internal.model.component.ComponentInfo;
 import org.eclipse.jst.jsf.common.runtime.internal.model.component.UIInputInfo;
 import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ValidatorDecorator;
+import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ValidatorTypeInfo;
 import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ValueChangeListenerDecorator;
 import org.eclipse.jst.jsf.common.runtime.tests.model.RuntimeTestUtil;
 
@@ -34,7 +35,7 @@ public class TestUIInputInfo extends TestUIOutputInfo {
 
         _editableValueHolder2 = new EditableValueHolderInfo(null, "value2",
                 "value2", true, true, false, true, null, null, null);
-        _validator = new ValidatorDecorator(null);
+        _validator = new ValidatorDecorator(null, ValidatorTypeInfo.UNKNOWN);
         _editableValueHolder2.addValidator(_validator);
         _valueChangeListener = new ValueChangeListenerDecorator(null);
         _editableValueHolder2.addValueChangeListener(_valueChangeListener);
@@ -76,7 +77,7 @@ public class TestUIInputInfo extends TestUIOutputInfo {
                 ComponentFactory.VALIDATOR).contains(_validator));
 
         final ValidatorDecorator validator = new ValidatorDecorator(
-                _uiComponentInfo1);
+                _uiComponentInfo1,ValidatorTypeInfo.UNKNOWN);
         _uiComponentInfo1.addValidator(validator);
 
         assertEquals(1, _uiComponentInfo1.getValidators().size());
