@@ -2,7 +2,6 @@ package org.eclipse.jst.pagedesigner.tests.tabbed.properties.sections;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;

@@ -5,12 +5,9 @@ import java.io.IOException;
 import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.jst.jsf.common.internal.ITestTracker;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IDOMContextResolver;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
@@ -215,13 +212,13 @@ public class BaseTestCase extends TestCase {
 	        }
 	    }
 		
-		private class LifecycleListener implements ITestTracker {
-
-			public void fireEvent(Event event, long seqId, String eventLabel) {
-				
-				
-			}
-			
-		}
+//		private class LifecycleListener implements ITestTracker {
+//
+//			public void fireEvent(Event event, long seqId, String eventLabel) {
+//				
+//				
+//			}
+//			
+//		}
 		
 }
