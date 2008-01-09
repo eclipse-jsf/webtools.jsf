@@ -203,7 +203,6 @@ public class TestTagCreationFactory extends BaseTestClass
 
         IAdaptable adaptable = new IAdaptable()
         {
-            @SuppressWarnings("unchecked")
             public Object getAdapter(Class adapter) {
                 if (Map.class == adapter)
                 {

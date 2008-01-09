@@ -37,105 +37,102 @@ import org.eclipse.wst.xml.core.internal.document.ElementImpl;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.w3c.dom.Node;
 
-public class BaseTestClass extends TestCase 
-{
-    protected WebProjectTestEnvironment             _webProjectTestEnv;
-    protected PaletteItemManager                    _manager;
-    protected final  String                         _compareDataSubDir;
+public class BaseTestClass extends TestCase {
+    protected WebProjectTestEnvironment _webProjectTestEnv;
+    protected PaletteItemManager _manager;
+    protected final String _compareDataSubDir;
 
-    public BaseTestClass(String compareDataSubDir)
-    {
+    public BaseTestClass(final String compareDataSubDir) {
         _compareDataSubDir = compareDataSubDir;
     }
 
     @Override
-    protected void setUp() throws Exception
-    {
+    protected void setUp() throws Exception {
         super.setUp();
-        
+
         JSFTestUtil.setValidationEnabled(false);
 
-        _webProjectTestEnv = new WebProjectTestEnvironment(
-                getClass().getName()+"_" + getName());
+        _webProjectTestEnv = new WebProjectTestEnvironment(getClass().getName()
+                + "_" + getName());
         _webProjectTestEnv.createProject(false);
         assertNotNull(_webProjectTestEnv);
         assertNotNull(_webProjectTestEnv.getTestProject());
         assertTrue(_webProjectTestEnv.getTestProject().isAccessible());
 
-        JSFFacetedTestEnvironment jsfFacetedTestEnv = 
-            new JSFFacetedTestEnvironment(_webProjectTestEnv);
+        final JSFFacetedTestEnvironment jsfFacetedTestEnv = new JSFFacetedTestEnvironment(
+                _webProjectTestEnv);
         jsfFacetedTestEnv.initialize(IJSFCoreConstants.FACET_VERSION_1_1);
 
-        assertTrue(JSFCoreUtilHelper.addJSFRuntimeJarsToClasspath(JSFVersion.V1_1,
-                jsfFacetedTestEnv));
+        assertTrue(JSFCoreUtilHelper.addJSFRuntimeJarsToClasspath(
+                JSFVersion.V1_1, jsfFacetedTestEnv));
 
         // ensure this gets called so that the getCurrentInstance
-        _manager = PaletteItemManager.getInstance(_webProjectTestEnv.getTestProject());
+        _manager = PaletteItemManager.getInstance(_webProjectTestEnv
+                .getTestProject());
     }
 
     protected CreationData getCreationData(final String uri,
-            final String tagName, final String defaultPrefix, IFile file, int offset) throws Exception 
-    {
+            final String tagName, final String defaultPrefix, final IFile file,
+            final int offset) throws Exception {
         final ITaglibDomainMetaDataModelContext modelContext = TaglibDomainMetaDataQueryHelper
                 .createMetaDataModelContext(
                         _webProjectTestEnv.getTestProject(), uri);
 
-        TagToolPaletteEntry entry = createNonNullPaletteEntry(uri, tagName);
+        final TagToolPaletteEntry entry = createNonNullPaletteEntry(uri,
+                tagName);
 
-        ContextWrapper context = getDocumentContext(offset, file);
-        IDOMContextResolver resolver = IStructuredDocumentContextResolverFactory.INSTANCE
+        final ContextWrapper context = getDocumentContext(offset, file);
+        final IDOMContextResolver resolver = IStructuredDocumentContextResolverFactory.INSTANCE
                 .getDOMContextResolver(context.getContext());
         // we want to simulate a drop inside the the body after the text node
-        Node node = resolver.getNode();
+        final Node node = resolver.getNode();
         assertEquals(Node.TEXT_NODE, node.getNodeType());
 
-        DOMPosition domPosition = new DOMPosition(node, 0);
+        final DOMPosition domPosition = new DOMPosition(node, 0);
 
         return new CreationData(entry, (IDOMModel) context.getModel(),
                 domPosition, modelContext, null);
     }
-    
-    protected TagToolPaletteEntry createPaletteEntry(final String uri, final String tagName)
-    {
-        TaglibPaletteDrawer drawer = 
-            _manager.getTaglibPalletteDrawer(uri);
+
+    protected TagToolPaletteEntry createPaletteEntry(final String uri,
+            final String tagName) {
+        final TaglibPaletteDrawer drawer = _manager
+                .getTaglibPalletteDrawer(uri);
         TagToolPaletteEntry entry = drawer.getTagPaletteEntryByTagName(tagName);
-        
+
         // covers case for HTML where the id is what's important because
         // the tag name is over loaded (i.e. input).
-        if (entry == null)
-        {
+        if (entry == null) {
             entry = drawer.getTagPaletteEntryById(tagName);
         }
 
         return entry;
     }
-    
-    protected TagToolPaletteEntry createNonNullPaletteEntry(final String uri, final String tagName)
-    {
-        TagToolPaletteEntry entry = createPaletteEntry(uri, tagName);
+
+    protected TagToolPaletteEntry createNonNullPaletteEntry(final String uri,
+            final String tagName) {
+        final TagToolPaletteEntry entry = createPaletteEntry(uri, tagName);
         assertNotNull(entry);
         return entry;
     }
 
-    protected ContextWrapper getDocumentContext(int offset, IFile jspFile) throws Exception
-    {
-        
+    protected ContextWrapper getDocumentContext(final int offset,
+            final IFile jspFile) throws Exception {
+
         assertTrue(jspFile.exists());
         final IModelManager modelManager = StructuredModelManager
                 .getModelManager();
         IStructuredModel model = null;
         model = modelManager.getModelForRead(jspFile);
         // jsp, jspx or xhtml
-        assertTrue(model instanceof DOMModelForJSP || model instanceof DOMStyleModelImpl);
-        final IStructuredDocumentContext context = 
-            IStructuredDocumentContextFactory.INSTANCE
+        assertTrue(model instanceof DOMModelForJSP
+                || model instanceof DOMStyleModelImpl);
+        final IStructuredDocumentContext context = IStructuredDocumentContextFactory.INSTANCE
                 .getContext(model.getStructuredDocument(), offset);
         return new ContextWrapper(context, model);
     }
 
-    public static class ContextWrapper 
-    {
+    public static class ContextWrapper {
         private final IStructuredDocumentContext context;
         private final IStructuredModel model;
 
@@ -145,7 +142,7 @@ public class BaseTestClass extends TestCase
             this.context = context;
             this.model = model;
         }
-        
+
         public IStructuredDocumentContext getContext() {
             return context;
         }
@@ -154,69 +151,65 @@ public class BaseTestClass extends TestCase
             return model;
         }
 
-        void dispose() 
-        {
+        void dispose() {
             model.releaseFromRead();
         }
     }
 
-    protected String getExpectedResult(final IPath path) throws IOException
-    {
+    protected String getExpectedResult(final IPath path) throws IOException {
         return JSFTestUtil.loadFromFile(path.toFile()).toString();
     }
 
-    protected final String getExpectedResult(String tagName, String outExt)
-            throws Exception
-    {
-        String ext = outExt == null ? "" : "."+outExt;
-        final String fileName = 
-            "expectedResult_" + tagName.replaceAll(":", "_") + ext +".data";
-        final String pathStr = 
-            "/testdata/tagcreator/"+ _compareDataSubDir + "/" + fileName;
+    protected final String getExpectedResult(final String tagName,
+            final String outExt) throws Exception {
+        final String ext = outExt == null ? "" : "." + outExt;
+        final String fileName = "expectedResult_"
+                + tagName.replaceAll(":", "_") + ext + ".data";
+        final String pathStr = "/testdata/tagcreator/" + _compareDataSubDir
+                + "/" + fileName;
         return getExpectedResult(pathStr);
     }
 
-    protected final String getExpectedResult(final String pathStr) throws Exception
-    {
+    protected final String getExpectedResult(final String pathStr)
+            throws Exception {
         final IPath expectedPath = JSFTestUtil.getAbsolutePath(
-                PageDesignerTestsPlugin.getDefault().getBundle(),
-                pathStr);
+                PageDesignerTestsPlugin.getDefault().getBundle(), pathStr);
         return getExpectedResult(expectedPath);
     }
-    
-    protected final void assertExpectedResult(IFile file, String tagName, String outExt) throws Exception
-    {
+
+    protected final void assertExpectedResult(final IFile file,
+            final String tagName, final String outExt) throws Exception {
         final ByteArrayOutputStream resultStream = new ByteArrayOutputStream();
         getDocumentContext(0, file).getModel().save(resultStream);
-    
+
         final String expected = getExpectedResult(tagName, outExt).trim();
         final String result = resultStream.toString("ISO-8859-1").trim();
 
         assertEquals(expected, result);
     }
 
-    protected MockItemCreationTool createMockItemCreationTool(IFile file, int offset, TagIdentifier tagId) throws Exception
-    {
+    protected MockItemCreationTool createMockItemCreationTool(final IFile file,
+            final int offset, final TagIdentifier tagId) throws Exception {
         return createMockItemCreationTool(file, offset, tagId, IStatus.OK);
     }
 
-    protected MockItemCreationTool createMockItemCreationTool(IFile file, int offset, TagIdentifier tagId, int expectedResult) throws Exception
-    {
-        TagToolPaletteEntry toolEntry = createNonNullPaletteEntry(tagId.getUri(), tagId.getTagName());
+    protected MockItemCreationTool createMockItemCreationTool(final IFile file,
+            final int offset, final TagIdentifier tagId,
+            final int expectedResult) throws Exception {
+        final TagToolPaletteEntry toolEntry = createNonNullPaletteEntry(tagId
+                .getUri(), tagId.getTagName());
 
-        MockItemCreationTool tool = new MockItemCreationTool(toolEntry);
+        final MockItemCreationTool tool = new MockItemCreationTool(toolEntry);
 
-        ContextWrapper wrapper = getDocumentContext(offset, file);
-        IDOMContextResolver resolver = 
-            IStructuredDocumentContextResolverFactory.INSTANCE
+        final ContextWrapper wrapper = getDocumentContext(offset, file);
+        final IDOMContextResolver resolver = IStructuredDocumentContextResolverFactory.INSTANCE
                 .getDOMContextResolver(wrapper.getContext());
         final IStructuredModel model = wrapper.getModel();
 
         final DOMPosition domPosition = new DOMPosition(resolver.getNode(), 0);
-        
-        final MockCreateItemCommand command = 
-            new MockCreateItemCommand("Test Command", (IDOMModel) model, 
-                                                domPosition, toolEntry);
+
+        final MockCreateItemCommand command = new MockCreateItemCommand(
+                "Test Command", (IDOMModel) model, domPosition, toolEntry);
 
         tool.setEditDomain(new EditDomain());
         tool.setCurrentCommand(command);
@@ -224,24 +217,20 @@ public class BaseTestClass extends TestCase
         return tool;
     }
 
-    protected final void forceTagEmpty(ElementImpl element)
-    {
-        for (int i = 0; i < element.getChildNodes().getLength(); i++)
-        {
-            Node node = element.getChildNodes().item(i);
-            
-            if (node instanceof ElementImpl)
-            {
+    protected final void forceTagEmpty(final ElementImpl element) {
+        for (int i = 0; i < element.getChildNodes().getLength(); i++) {
+            final Node node = element.getChildNodes().item(i);
+
+            if (node instanceof ElementImpl) {
                 forceTagEmpty((ElementImpl) node);
             }
         }
-        
+
         // if element has no children, force it to an empty tag
-        if (element.getChildNodes().getLength() == 0)
-        {
-            ((ElementImpl)element).setEmptyTag(true);
-            ((ElementImpl)element).removeChildNodes();
-            Node copy = ((ElementImpl)element).cloneNode(false);
+        if (element.getChildNodes().getLength() == 0) {
+            (element).setEmptyTag(true);
+            (element).removeChildNodes();
+            final Node copy = (element).cloneNode(false);
             element.getParentNode().replaceChild(copy, element);
         }
     }
