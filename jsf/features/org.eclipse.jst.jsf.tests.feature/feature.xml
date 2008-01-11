@@ -82,7 +82,12 @@
          download-size="0"
          install-size="0"
          version="0.0.0"
-         fragment="true"
-         />
+         fragment="true"/>
+
+   <plugin
+         id="org.eclipse.jst.pagedesigner.tests"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
 
 </feature>
