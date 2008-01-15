@@ -1,11 +1,13 @@
 package org.eclipse.jst.pagedesigner.tests.tagcreator.base;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.gef.EditDomain;
@@ -30,6 +32,7 @@ import org.eclipse.jst.pagedesigner.editors.palette.impl.TaglibPaletteDrawer;
 import org.eclipse.jst.pagedesigner.itemcreation.CreationData;
 import org.eclipse.jst.pagedesigner.tests.PageDesignerTestsPlugin;
 import org.eclipse.wst.html.core.internal.document.DOMStyleModelImpl;
+import org.eclipse.wst.html.core.internal.format.HTMLFormatProcessorImpl;
 import org.eclipse.wst.sse.core.StructuredModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
@@ -37,17 +40,20 @@ import org.eclipse.wst.xml.core.internal.document.ElementImpl;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.w3c.dom.Node;
 
-public class BaseTestClass extends TestCase {
+public class BaseTestClass extends TestCase
+{
     protected WebProjectTestEnvironment _webProjectTestEnv;
     protected PaletteItemManager _manager;
     protected final String _compareDataSubDir;
 
-    public BaseTestClass(final String compareDataSubDir) {
+    public BaseTestClass(final String compareDataSubDir)
+    {
         _compareDataSubDir = compareDataSubDir;
     }
 
     @Override
-    protected void setUp() throws Exception {
+    protected void setUp() throws Exception
+    {
         super.setUp();
 
         JSFTestUtil.setValidationEnabled(false);
@@ -73,7 +79,8 @@ public class BaseTestClass extends TestCase {
 
     protected CreationData getCreationData(final String uri,
             final String tagName, final String defaultPrefix, final IFile file,
-            final int offset) throws Exception {
+            final int offset) throws Exception
+    {
         final ITaglibDomainMetaDataModelContext modelContext = TaglibDomainMetaDataQueryHelper
                 .createMetaDataModelContext(
                         _webProjectTestEnv.getTestProject(), uri);
@@ -95,14 +102,18 @@ public class BaseTestClass extends TestCase {
     }
 
     protected TagToolPaletteEntry createPaletteEntry(final String uri,
-            final String tagName) {
+            final String tagName)
+    {
         final TaglibPaletteDrawer drawer = _manager
                 .getTaglibPalletteDrawer(uri);
+        assertNotNull(String.format("Uri: %s, tagName: %s", uri, tagName),
+                drawer);
         TagToolPaletteEntry entry = drawer.getTagPaletteEntryByTagName(tagName);
 
         // covers case for HTML where the id is what's important because
         // the tag name is over loaded (i.e. input).
-        if (entry == null) {
+        if (entry == null)
+        {
             entry = drawer.getTagPaletteEntryById(tagName);
         }
 
@@ -110,14 +121,16 @@ public class BaseTestClass extends TestCase {
     }
 
     protected TagToolPaletteEntry createNonNullPaletteEntry(final String uri,
-            final String tagName) {
+            final String tagName)
+    {
         final TagToolPaletteEntry entry = createPaletteEntry(uri, tagName);
         assertNotNull(entry);
         return entry;
     }
 
     protected ContextWrapper getDocumentContext(final int offset,
-            final IFile jspFile) throws Exception {
+            final IFile jspFile) throws Exception
+    {
 
         assertTrue(jspFile.exists());
         final IModelManager modelManager = StructuredModelManager
@@ -132,36 +145,43 @@ public class BaseTestClass extends TestCase {
         return new ContextWrapper(context, model);
     }
 
-    public static class ContextWrapper {
+    public static class ContextWrapper
+    {
         private final IStructuredDocumentContext context;
         private final IStructuredModel model;
 
         public ContextWrapper(final IStructuredDocumentContext context,
-                final IStructuredModel model) {
+                final IStructuredModel model)
+        {
             super();
             this.context = context;
             this.model = model;
         }
 
-        public IStructuredDocumentContext getContext() {
+        public IStructuredDocumentContext getContext()
+        {
             return context;
         }
 
-        public IStructuredModel getModel() {
+        public IStructuredModel getModel()
+        {
             return model;
         }
 
-        void dispose() {
+        void dispose()
+        {
             model.releaseFromRead();
         }
     }
 
-    protected String getExpectedResult(final IPath path) throws IOException {
+    protected String getExpectedResult(final IPath path) throws IOException
+    {
         return JSFTestUtil.loadFromFile(path.toFile()).toString();
     }
 
     protected final String getExpectedResult(final String tagName,
-            final String outExt) throws Exception {
+            final String outExt) throws Exception
+    {
         final String ext = outExt == null ? "" : "." + outExt;
         final String fileName = "expectedResult_"
                 + tagName.replaceAll(":", "_") + ext + ".data";
@@ -171,31 +191,79 @@ public class BaseTestClass extends TestCase {
     }
 
     protected final String getExpectedResult(final String pathStr)
-            throws Exception {
+            throws Exception
+    {
         final IPath expectedPath = JSFTestUtil.getAbsolutePath(
                 PageDesignerTestsPlugin.getDefault().getBundle(), pathStr);
         return getExpectedResult(expectedPath);
     }
 
     protected final void assertExpectedResult(final IFile file,
-            final String tagName, final String outExt) throws Exception {
-        final ByteArrayOutputStream resultStream = new ByteArrayOutputStream();
-        getDocumentContext(0, file).getModel().save(resultStream);
-
-        final String expected = getExpectedResult(tagName, outExt).trim();
-        final String result = resultStream.toString("ISO-8859-1").trim();
+            final String tagName, final String outExt) throws Exception
+    {
+        final String expected = getExpectedString(file, tagName, outExt);
+        final String result = getResultString(file);
 
         assertEquals(expected, result);
     }
 
+    private String getResultString(final IFile file) throws Exception
+    {
+        final ByteArrayOutputStream resultStream = new ByteArrayOutputStream();
+        new HTMLFormatProcessorImpl()
+                .formatDocument(getDocumentContext(0, file).getModel()
+                        .getStructuredDocument());
+        getDocumentContext(0, file).getModel().save(resultStream);
+        return resultStream.toString("ISO-8859-1").trim();
+    }
+
+    private final String getExpectedString(final IFile file, String tagName,
+            String outExt) throws Exception
+    {
+        final String expectedUnformatted = getExpectedResult(tagName, outExt)
+                .trim();
+
+        final IPath path = file.getProjectRelativePath().removeLastSegments(1)
+                .append("/expected/");
+        final IFolder folder = file.getProject().getFolder(path);
+
+        if (!folder.exists())
+        {
+            folder.create(true, true, null);
+        }
+
+        assertTrue(folder.isAccessible());
+
+        // need to format
+        final IFile tempFile = file.getProject().getFile(
+                path.append(file.getName()));
+        assertFalse(tempFile.exists());
+        tempFile.create(
+                new ByteArrayInputStream(expectedUnformatted.getBytes()), true,
+                null);
+
+        assertTrue(tempFile.isAccessible());
+        final IModelManager modelManager = StructuredModelManager
+                .getModelManager();
+        IStructuredModel model = null;
+        model = modelManager.getModelForRead(tempFile);
+        new HTMLFormatProcessorImpl().formatDocument(model
+                .getStructuredDocument());
+        final ByteArrayOutputStream expectedStream = new ByteArrayOutputStream();
+        model.save(expectedStream);
+        return expectedStream.toString("ISO-8859-1").trim();
+    }
+
     protected MockItemCreationTool createMockItemCreationTool(final IFile file,
-            final int offset, final TagIdentifier tagId) throws Exception {
+            final int offset, final TagIdentifier tagId) throws Exception
+    {
         return createMockItemCreationTool(file, offset, tagId, IStatus.OK);
     }
 
     protected MockItemCreationTool createMockItemCreationTool(final IFile file,
             final int offset, final TagIdentifier tagId,
-            final int expectedResult) throws Exception {
+            final int expectedResult) throws Exception
+    {
         final TagToolPaletteEntry toolEntry = createNonNullPaletteEntry(tagId
                 .getUri(), tagId.getTagName());
 
@@ -217,17 +285,21 @@ public class BaseTestClass extends TestCase {
         return tool;
     }
 
-    protected final void forceTagEmpty(final ElementImpl element) {
-        for (int i = 0; i < element.getChildNodes().getLength(); i++) {
+    protected final void forceTagEmpty(final ElementImpl element)
+    {
+        for (int i = 0; i < element.getChildNodes().getLength(); i++)
+        {
             final Node node = element.getChildNodes().item(i);
 
-            if (node instanceof ElementImpl) {
+            if (node instanceof ElementImpl)
+            {
                 forceTagEmpty((ElementImpl) node);
             }
         }
 
         // if element has no children, force it to an empty tag
-        if (element.getChildNodes().getLength() == 0) {
+        if (element.getChildNodes().getLength() == 0)
+        {
             (element).setEmptyTag(true);
             (element).removeChildNodes();
             final Node copy = (element).cloneNode(false);
