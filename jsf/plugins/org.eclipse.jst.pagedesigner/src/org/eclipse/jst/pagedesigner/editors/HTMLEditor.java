@@ -140,6 +140,8 @@ public final class HTMLEditor extends PostSelectionMultiPageEditorPart implement
 	private DefaultEditDomain _editDomain;
 
 	private WindowsIEBrowser _browser;
+	
+	private Composite _previewComposite;
 
 	private List PREVIEW_FILES_LIST = new ArrayList();
 
@@ -313,19 +315,27 @@ public final class HTMLEditor extends PostSelectionMultiPageEditorPart implement
 	}
 
 	private void createAndAddPreviewPage() {
-		Composite composite = new Composite(getContainer(), 0);
+		_previewComposite = new Composite(getContainer(), 0);
 		FillLayout filllayout = new FillLayout();
-		composite.setLayout(filllayout);
-		_browser = new WindowsIEBrowser();
-		if (_browser != null) {
-			_browser.create(composite, SWT.NONE);
-			_previewPageIndex = addPage(composite);
-			// JSPSourceEditor.Page.Preview.PageText=Preview
-			setPageText(_previewPageIndex, PageDesignerResources.getInstance()
-					.getString("JSPSourceEditor.Page.Preview.PageText")); //$NON-NLS-1$
-		}
+		_previewComposite.setLayout(filllayout);
+
+		_previewPageIndex = addPage(_previewComposite);
+		// JSPSourceEditor.Page.Preview.PageText=Preview
+		setPageText(_previewPageIndex, PageDesignerResources.getInstance()
+				.getString("JSPSourceEditor.Page.Preview.PageText")); //$NON-NLS-1$
+		
 	}
 
+	private WindowsIEBrowser getPreviewBrowser() {
+		if (_browser == null) {
+			_browser = new WindowsIEBrowser();
+			if (_browser != null) {
+				_browser.create(_previewComposite, SWT.NONE);
+				_previewComposite.layout();
+			}
+		}
+		return _browser;
+	}
 	/**
 	 * Connects the design viewer with the viewer selection manager. Should be
 	 * done after createSourcePage() is done because we need to get the
@@ -476,6 +486,8 @@ public final class HTMLEditor extends PostSelectionMultiPageEditorPart implement
 		_partListener = null;
 		_editDomain = null;
 		_designViewer = null;
+		_browser = null;
+		_previewComposite = null;
 		_paletteViewerPage = null;
 		_log = null;
 		_selChangedListener = null;
@@ -957,9 +969,9 @@ public final class HTMLEditor extends PostSelectionMultiPageEditorPart implement
 			File file = PreviewUtil.toFile(result, getEditorInput());
 			if (file != null) {
 				PREVIEW_FILES_LIST.add(file);
-				_browser.loadFile(file);
+				getPreviewBrowser().loadFile(file);
 			} else {
-				_browser.getBrowser().setUrl("about:blank"); //$NON-NLS-1$
+				getPreviewBrowser().getBrowser().setUrl("about:blank"); //$NON-NLS-1$
 			}
 		}
 	}
