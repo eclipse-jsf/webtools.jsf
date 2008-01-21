@@ -13,10 +13,9 @@ package org.eclipse.jst.pagedesigner.itemcreation.internal;
 import org.eclipse.jst.pagedesigner.itemcreation.AbstractTagCreator;
 import org.eclipse.jst.pagedesigner.itemcreation.CreationData;
 import org.eclipse.jst.pagedesigner.itemcreation.ITagCreationAdvisor;
-import org.eclipse.jst.pagedesigner.itemcreation.ITagCreator;
 
 /**
- * {@link ITagCreator} used by the Web Page Editor palette. 
+ * {@link org.eclipse.jst.pagedesigner.itemcreation.ITagCreator} used by the Web Page Editor palette. 
  * 
  * Uses org.eclipse.jst.jsf.common.metadata 
  */

@@ -12,72 +12,81 @@ package org.eclipse.jst.pagedesigner.itemcreation.internal;
 
 import org.eclipse.jst.jsf.common.dom.TagIdentifier;
 import org.eclipse.jst.pagedesigner.PDPlugin;
-import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
 import org.eclipse.jst.pagedesigner.elementedit.ElementEditFactoryRegistry;
 import org.eclipse.jst.pagedesigner.elementedit.IElementEdit;
 import org.eclipse.jst.pagedesigner.itemcreation.AbstractTagCreator;
 import org.eclipse.jst.pagedesigner.itemcreation.ITagCreator;
 
 /**
- * Creates instances of {@link ITagCreator}s for a the given {@link TagToolPaletteEntry}
- * (Eventually) Will use TagCreavtorFactories registered using org.eclipse.jst.jsf.pagedesigner.tagcreationfactories ext-pt.  
- * Currently only using DefaultTagCreator.
+ * Creates instances of
+ * {@link org.eclipse.jst.pagedesigner.itemcreation.ITagCreator}s for a the
+ * given
+ * {@link org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry}
+ * (Eventually) Will use TagCreavtorFactories registered using
+ * org.eclipse.jst.jsf.pagedesigner.tagcreationfactories ext-pt. Currently only
+ * using DefaultTagCreator.
  */
-public class TagCreationFactory {
-	private static TagCreationFactory INSTANCE = null;
-	
-	/**
-	 * @return singleton instance
-	 */
-	public synchronized static TagCreationFactory getInstance(){
-		if (INSTANCE == null){
-			INSTANCE = new TagCreationFactory();
-		}
-		return INSTANCE;
-	}
+public class TagCreationFactory
+{
+    private static TagCreationFactory INSTANCE = null;
 
-	/**
-	 * Using the TagToolPaletteEntry, locate the factory to use for tag creation
-	 * @param tagId 
-	 * 
-	 * @return ITagCreator
-	 */
-	public ITagCreator createTagCreator(final TagIdentifier tagId) 
-	{
-	    
-	    IElementEdit elementEdit = ElementEditFactoryRegistry.getInstance().createElementEdit(tagId);
+    /**
+     * @return singleton instance
+     */
+    public synchronized static TagCreationFactory getInstance()
+    {
+        if (INSTANCE == null)
+        {
+            INSTANCE = new TagCreationFactory();
+        }
+        return INSTANCE;
+    }
 
-	    if (elementEdit != null)
-	    {
-//    	    for (ITagCreatorFactory factory : factories)
-//    	    {
-    	        ITagCreator tagCreator = null;
-    	        try
-    	        {
-    	            tagCreator = elementEdit.getTagCreator(tagId);
-    	        }
-    	        catch (Exception e)
-    	        {
-    	            PDPlugin.getLogger(getClass()).error
-    	                ("Error.ProblemLoadingTagCreatorFactory"
-    	                 ,elementEdit.getClass().toString(), e);  
-    	        }
-    	        
-    	        if (tagCreator != null)
-    	        {
-    	            if (tagCreator instanceof AbstractTagCreator)
-    	            {
-    	                return tagCreator;
-    	            }
-    	            // if non-null, skipped, log the issue
-	                PDPlugin.getLogger(getClass()).error
-	                   ("Error.ProblemLoadingTagCreatorFactory",
-	                   "Tag creator must extend AbstractTagCreator", new Throwable());
-	        }
-	    }
-	    
-	    // all else fails, use the internal default
-		return new DefaultTagCreator();	
-	}
+    /**
+     * Using the TagToolPaletteEntry, locate the factory to use for tag creation
+     * 
+     * @param tagId
+     * 
+     * @return ITagCreator
+     */
+    public ITagCreator createTagCreator(final TagIdentifier tagId)
+    {
+
+        IElementEdit elementEdit = ElementEditFactoryRegistry.getInstance()
+                .createElementEdit(tagId);
+
+        if (elementEdit != null)
+        {
+            // for (ITagCreatorFactory factory : factories)
+            // {
+            ITagCreator tagCreator = null;
+            try
+            {
+                tagCreator = elementEdit.getTagCreator(tagId);
+            }
+            catch (Exception e)
+            {
+                PDPlugin.getLogger(getClass()).error(
+                        "Error.ProblemLoadingTagCreatorFactory",
+                        elementEdit.getClass().toString(), e);
+            }
+
+            if (tagCreator != null)
+            {
+                if (tagCreator instanceof AbstractTagCreator)
+                {
+                    return tagCreator;
+                }
+                // if non-null, skipped, log the issue
+                PDPlugin.getLogger(getClass()).error(
+                        "Error.ProblemLoadingTagCreatorFactory",
+                        "Tag creator must extend AbstractTagCreator",
+                        new Throwable());
+            }
+        }
+
+        // all else fails, use the internal default
+        return new DefaultTagCreator();
+    }
 
 }

@@ -16,7 +16,6 @@ import org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogField;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.eclipse.jst.jsf.metadataprocessors.MetaDataContext;
-import org.eclipse.jst.jsf.taglibprocessing.attributevalues.StringType;
 import org.eclipse.jst.pagedesigner.editors.properties.IPropertyPageDescriptor;
 import org.eclipse.jst.pagedesigner.meta.EditorCreator;
 import org.eclipse.jst.pagedesigner.meta.IAttributeRuntimeValueType;
@@ -26,92 +25,116 @@ import org.eclipse.swt.widgets.Composite;
 import org.w3c.dom.Element;
 
 /**
- * Property descriptor implementation for when meta data is available,
- * but the meta data type is not adaptable to a {@link IPropertyPageDescriptor}.
+ * Property descriptor implementation for when meta data is available, but the
+ * meta data type is not adaptable to a {@link IPropertyPageDescriptor}.
  * 
- * It is assumed that the  value type is {@link StringType}.
+ * It is assumed that the value type is
+ * {@link org.eclipse.jst.jsf.taglibprocessing.attributevalues.StringType}.
  */
-public class DefaultPropertyPageDescriptor implements IPropertyPageDescriptor {
-	private Entity _tagEntity;
-	private Entity _attrEntity;
-	
-	private IStructuredDocumentContext 	_sdContext;
-	private MetaDataContext 			_mdContext;
-	
-	/**
-	 * Constructor
-	 * @param tagEntity
-	 * @param attrEntity
-	 */
-	public DefaultPropertyPageDescriptor(Entity tagEntity, Entity attrEntity) {
-		_tagEntity 	= tagEntity;
-		_attrEntity = attrEntity;
-	}
+public class DefaultPropertyPageDescriptor implements IPropertyPageDescriptor
+{
+    private Entity _tagEntity;
+    private Entity _attrEntity;
 
-	public String getAttributeName() {
-		return _attrEntity.getId();
-	}
+    private IStructuredDocumentContext _sdContext;
+    private MetaDataContext _mdContext;
 
-	public String getCategory() {
-		return ITabbedPropertiesConstants.OTHER_CATEGORY;
-	}
+    /**
+     * Constructor
+     * 
+     * @param tagEntity
+     * @param attrEntity
+     */
+    public DefaultPropertyPageDescriptor(Entity tagEntity, Entity attrEntity)
+    {
+        _tagEntity = tagEntity;
+        _attrEntity = attrEntity;
+    }
 
-	public CellEditor getCellEditor(Composite parent) {
-		Element element = (Element)IStructuredDocumentContextResolverFactory.INSTANCE.getDOMContextResolver(getStructuredDocumentContext()).getNode();		
-		return CellEditorFactoryRegistry.getInstance().createCellEditor(parent, this, element);
-	}
+    public String getAttributeName()
+    {
+        return _attrEntity.getId();
+    }
 
-	public String getDescription() {
-		return null;
-	}
+    public String getCategory()
+    {
+        return ITabbedPropertiesConstants.OTHER_CATEGORY;
+    }
 
-	public DialogField getDialogFieldEditor() {
-		EditorCreator creator = EditorCreator.getInstance();
-		return creator.createDialogFieldWithWrapper(getUri(),
-				getTagName(),this, null);
-	}
+    public CellEditor getCellEditor(Composite parent)
+    {
+        Element element = (Element) IStructuredDocumentContextResolverFactory.INSTANCE
+                .getDOMContextResolver(getStructuredDocumentContext())
+                .getNode();
+        return CellEditorFactoryRegistry.getInstance().createCellEditor(parent,
+                this, element);
+    }
 
-	public String getLabel() {
-		return getAttributeName()+ ":";
-	}
+    public String getDescription()
+    {
+        return null;
+    }
 
-	public String getTagName() {
-		return _tagEntity.getId();
-	}
+    public DialogField getDialogFieldEditor()
+    {
+        EditorCreator creator = EditorCreator.getInstance();
+        return creator.createDialogFieldWithWrapper(getUri(), getTagName(),
+                this, null);
+    }
 
-	public String getUri() {
-		return _tagEntity.getModel().getCurrentModelContext().getUri();
-	}
+    public String getLabel()
+    {
+        return getAttributeName() + ":";
+    }
 
-	public String getValueType() {
-		return IAttributeRuntimeValueType.STRING;
-	}
+    public String getTagName()
+    {
+        return _tagEntity.getId();
+    }
 
-	public boolean isRequired() {
-		return false;
-	}
+    public String getUri()
+    {
+        return _tagEntity.getModel().getCurrentModelContext().getUri();
+    }
 
-	public MetaDataContext getMetaDataContext() {
-		return _mdContext;
-	}
+    public String getValueType()
+    {
+        return IAttributeRuntimeValueType.STRING;
+    }
 
-	public IStructuredDocumentContext getStructuredDocumentContext() {
-		return _sdContext;
-	}
+    public boolean isRequired()
+    {
+        return false;
+    }
 
-	public void setMetaDataContext(MetaDataContext context) {
-		_mdContext = context;
-	}
+    public MetaDataContext getMetaDataContext()
+    {
+        return _mdContext;
+    }
 
-	public void setStructuredDocumentContext(IStructuredDocumentContext context) {
-		_sdContext = context;
-	}
+    public IStructuredDocumentContext getStructuredDocumentContext()
+    {
+        return _sdContext;
+    }
 
-	public Object getAdapter(Class adapter) {
-		return null;
-	}
+    public void setMetaDataContext(MetaDataContext context)
+    {
+        _mdContext = context;
+    }
 
-	public String toString() {
-		return getUri()+"/"+getTagName()+"/"+getAttributeName()+" (Default Descriptor)"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-	}
+    public void setStructuredDocumentContext(IStructuredDocumentContext context)
+    {
+        _sdContext = context;
+    }
+
+    public Object getAdapter(Class adapter)
+    {
+        return null;
+    }
+
+    public String toString()
+    {
+        return getUri()
+                + "/" + getTagName() + "/" + getAttributeName() + " (Default Descriptor)"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+    }
 }

@@ -13,7 +13,6 @@ package org.eclipse.jst.pagedesigner.itemcreation;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.gef.EditPart;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.SharedCursors;
 import org.eclipse.gef.commands.Command;
@@ -115,7 +114,7 @@ public class ItemCreationTool extends TargetingTool {
 	 * button in a right-handed world). If any other button is pressed, the tool
 	 * goes into an invalid state. Otherwise, it goes into the drag state,
 	 * updates the request's location and calls
-	 * {@link TargetingTool#lockTargetEditPart(EditPart)}with the edit part
+	 * {@link TargetingTool#lockTargetEditPart(org.eclipse.gef.EditPart)}with the edit part
 	 * that was just clicked on.
 	 * 
 	 * @see org.eclipse.gef.tools.AbstractTool#handleButtonDown(int)

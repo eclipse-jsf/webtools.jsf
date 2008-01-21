@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.core.internal.resources.ResourceException;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -521,8 +520,11 @@ public final class HTMLEditor extends PostSelectionMultiPageEditorPart implement
 			if (fileDoesNotExist((IFileEditorInput) input, coreExceptionArray)) {
 				// todo use message formatter for {0}
 				Throwable coreException = coreExceptionArray[0];
-				// FIXME: WTF?
-				if (coreException instanceof ResourceException) {
+
+				// C.B: this is a strange piece of logic.  It was referenceing
+				// the internal sub-class of CoreException, ResourceException.
+				// need to review fileDoesNotExist.
+				if (coreException instanceof CoreException) {
 					// I'm assuming this is always 'does not exist'
 					// we'll refresh local go mimic behavior of default
 					// editor, where the
