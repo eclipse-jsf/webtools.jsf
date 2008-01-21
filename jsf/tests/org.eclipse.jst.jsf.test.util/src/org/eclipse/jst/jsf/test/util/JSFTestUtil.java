@@ -22,6 +22,8 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Arrays;
 
+import junit.framework.Assert;
+
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
@@ -129,7 +131,9 @@ public final class JSFTestUtil
 
     public static IPath getAbsolutePath(final Bundle bundle, final String relativePath) throws IOException, URISyntaxException
     {
-        final URL url = FileLocator.resolve(bundle.getEntry(relativePath));
+        final URL bundleUrl = bundle.getEntry(relativePath);
+        Assert.assertNotNull(bundleUrl);
+        final URL url = FileLocator.resolve(bundleUrl);
         return new Path(new File(url.getFile()).getAbsolutePath());
     }
 
