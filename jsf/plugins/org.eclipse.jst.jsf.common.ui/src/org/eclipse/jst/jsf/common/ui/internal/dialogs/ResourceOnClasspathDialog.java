@@ -20,10 +20,10 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jdt.internal.core.JarEntryFile;
 import org.eclipse.jdt.ui.JavaElementLabelProvider;
 import org.eclipse.jdt.ui.StandardJavaElementContentProvider;
 import org.eclipse.jface.viewers.Viewer;
@@ -127,9 +127,9 @@ public class ResourceOnClasspathDialog extends TreeViewerSelectionDialog {
 				}
 				return false;
 			}
-			// XXX: JarEntryFile is for internal use.
-			if (element instanceof JarEntryFile) {
-				String ext = ((JarEntryFile) element).getFullPath()
+
+			if (element instanceof IJarEntryResource) {
+				String ext = ((IJarEntryResource) element).getFullPath()
 						.getFileExtension();
 				if (ext != null && Arrays.asList(_suffixs).contains(ext)) {
 					return true;

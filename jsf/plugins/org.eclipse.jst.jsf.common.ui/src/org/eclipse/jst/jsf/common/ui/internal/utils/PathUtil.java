@@ -22,9 +22,9 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jdt.core.IClasspathEntry;
+import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.jdt.internal.core.JarEntryFile;
 import org.eclipse.jst.jsf.common.ui.IFileFolderConstants;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.IWorkbenchPage;
@@ -287,8 +287,8 @@ public final class PathUtil {
 					}
 				}
 			}
-		} else if (parent instanceof JarEntryFile) {
-			IPath elementPath = ((JarEntryFile) parent).getFullPath();
+		} else if (parent instanceof IJarEntryResource) {
+			IPath elementPath = ((IJarEntryResource) parent).getFullPath();
 			if (elementPath.getFileExtension().equalsIgnoreCase(
 					IFileFolderConstants.EXT_PROPERTIES)) {
 				result = elementPath;
