@@ -2,6 +2,7 @@ package org.eclipse.jst.jsf.common.internal.resource;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -23,11 +24,12 @@ import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent.Reaso
  */
 public class LifecycleListener implements IResourceChangeListener
 {
-    private final static boolean                            ENABLE_TEST_TRACKING = false;
+    private final static boolean                            ENABLE_TEST_TRACKING
+                                                                = false;
     private static long                                     _seqId;
     
     private final List<IResource>                           _resources;
-    private final List<IResourceLifecycleListener>          _listeners;
+    private final CopyOnWriteArrayList<IResourceLifecycleListener>  _listeners;
     private boolean                                         _isDisposed = false;
     private ITestTracker                                    _testTracker; // == null; initialized by setter injection
 
@@ -40,14 +42,14 @@ public class LifecycleListener implements IResourceChangeListener
     public LifecycleListener()
     {
         _resources = new ArrayList<IResource>();
-        _listeners = new ArrayList<IResourceLifecycleListener>(1);
+        _listeners = new CopyOnWriteArrayList<IResourceLifecycleListener>();
     }
 
     /**
      * Create a new lifecycle listener for the res
      * @param res
      */
-    public LifecycleListener(IResource res)
+    public LifecycleListener(final IResource res)
     {
         this();
         _resources.add(res);
@@ -57,7 +59,7 @@ public class LifecycleListener implements IResourceChangeListener
     /**
      * @param resources
      */
-    public LifecycleListener(List<IResource> resources)
+    public LifecycleListener(final List<IResource> resources)
     {
         this();
         _resources.addAll(resources);
@@ -68,7 +70,7 @@ public class LifecycleListener implements IResourceChangeListener
     /**
      * @param testTracker
      */
-    public final void setTestTracker(ITestTracker testTracker)
+    public final void setTestTracker(final ITestTracker testTracker)
     {
         _testTracker = testTracker;
     }
@@ -80,7 +82,7 @@ public class LifecycleListener implements IResourceChangeListener
     {
         synchronized(_resources)
         {
-            int preSize = _resources.size();
+            final int preSize = _resources.size();
             if (!_resources.contains(res))
             {
                 _resources.add(res);
@@ -150,20 +152,13 @@ public class LifecycleListener implements IResourceChangeListener
      * 
      * @param listener
      */
-    public void addListener(IResourceLifecycleListener listener)
+    public void addListener(final IResourceLifecycleListener listener)
     {
         if (isDisposed())
         {
             throw new IllegalStateException();
         }
-
-        synchronized(_listeners)
-        {
-            if (!_listeners.contains(listener))
-            {
-                _listeners.add(listener);
-            }
-        }
+        _listeners.addIfAbsent(listener);
     }
 
     /**
@@ -175,22 +170,18 @@ public class LifecycleListener implements IResourceChangeListener
      *
      * @param listener
      */
-    public void removeListener(IResourceLifecycleListener listener)
+    public void removeListener(final IResourceLifecycleListener listener)
     {
         if (isDisposed())
         {
             throw new IllegalStateException();
         }
-
-        synchronized(_listeners)
-        {
-            _listeners.remove(listener);
-        }
+        _listeners.remove(listener);
     }
 
-    public void resourceChanged(IResourceChangeEvent event) 
+    public void resourceChanged(final IResourceChangeEvent event) 
     {
-        long seqId = _seqId++;
+        final long seqId = _seqId++;
         
         if (ENABLE_TEST_TRACKING && _testTracker != null)
         {
@@ -222,7 +213,7 @@ public class LifecycleListener implements IResourceChangeListener
 
             case IResourceChangeEvent.PRE_DELETE:
             {
-                IProject proj = (IProject) event.getResource();
+                final IProject proj = (IProject) event.getResource();
 
                 synchronized(_resources)
                 {
@@ -300,29 +291,21 @@ public class LifecycleListener implements IResourceChangeListener
     {
         synchronized(_resources)
         {
-            List<IResource>  resList = new ArrayList<IResource>(_resources.size());
+            final List<IResource>  resList = new ArrayList<IResource>(_resources.size());
             resList.addAll(_resources);
             return resList;
         }
     }
 
-    private void fireLifecycleEvent(ResourceLifecycleEvent event)
+    private void fireLifecycleEvent(final ResourceLifecycleEvent event)
     {
-       List<IResourceLifecycleListener>                copyListeners
-           = new ArrayList(_listeners.size());
-
-        // copy the listeners to avoid concurrent modification problems
-        // if a listeners removes itself due to an event
-        synchronized(_listeners)
-        {
-            copyListeners.addAll(_listeners);
-        }
-
         boolean  disposeAfter = false;
 
-        for (final IResourceLifecycleListener listener : copyListeners)
+        // NOTE: must use iterator through _listeners so that 
+        // CopyOnWriteArrayList protects us from concurrent modification
+        for (final IResourceLifecycleListener listener : _listeners)
         {
-           EventResult result = listener.acceptEvent(event);
+           final EventResult result = listener.acceptEvent(event);
            disposeAfter |= result.getDisposeAfterEvent();
         }
 
@@ -332,7 +315,7 @@ public class LifecycleListener implements IResourceChangeListener
         }
     }
 
-    private void visit(IResourceDelta delta) 
+    private void visit(final IResourceDelta delta) 
     {
         assert(!isDisposed());
 
