@@ -1,5 +1,7 @@
 package org.eclipse.jst.jsf.common.runtime.internal.model.component;
 
+import java.util.Map;
+
 import org.eclipse.jst.jsf.common.runtime.internal.model.behavioural.INamingContainerInfo;
 
 /**
@@ -34,6 +36,24 @@ public class UIFormInfo extends ComponentInfo implements INamingContainerInfo
     }
     
     /**
+     * @param parent
+     * @param componentTypeInfo
+     * @param attributes
+     */
+    protected UIFormInfo(final ComponentInfo parent, ComponentTypeInfo componentTypeInfo,
+            Map attributes)
+    {
+        this(getStringProperty("id", attributes, true),
+                parent,
+                componentTypeInfo,
+                getBooleanProperty("rendered", attributes),
+                getBooleanProperty("prependId", attributes),
+                getBooleanProperty("submitted", attributes));
+    }
+    
+    /**
+     * JSF 1.2 only
+     * 
      * @return true if the form allows its id to be prepended to its 
      * descendent's ids.
      */
@@ -48,4 +68,9 @@ public class UIFormInfo extends ComponentInfo implements INamingContainerInfo
     public final boolean isSubmitted() {
         return _submitted;
     }
+
+    protected String getMostSpecificComponentName()
+    {
+        return "UIForm";
+    } 
 }

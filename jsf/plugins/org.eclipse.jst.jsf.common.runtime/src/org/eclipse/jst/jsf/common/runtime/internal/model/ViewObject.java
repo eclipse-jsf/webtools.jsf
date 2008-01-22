@@ -20,7 +20,8 @@ import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.Decorator;
 public abstract class ViewObject implements Serializable /* IAdaptable? */
 {
     private Map/* <Class, List<Decorator>> */_decorators;
-    private Map/* <Class, Object */_adapters;
+    private Map/* <Class, Object> */_adapters;
+    
     /**
      * 
      */
@@ -172,12 +173,20 @@ public abstract class ViewObject implements Serializable /* IAdaptable? */
      * Adds the interface adapter object under adapterType key. There can be at
      * most one adapter registered for each class key.
      * 
+     * It is an error (throws exception) to try to add an adapter for adapterType
+     * which this is already instance.  This restriction is necessary because
+     * otherwise local getters/setters would need to be aware of the adapter
+     * mechanism and verify inheritance hierarchies on every calls.  This 
+     * mechanism is intended only for adding interfaces to view object impls
+     * that don't already have them.
+     * 
      * @param adapterType
      * @param adapter
      * @throws IllegalArgumentException
      *             if adapterType or adapter is null or if casting adapter to
      *             adapterType would * cause a ClassCastException (i.e. if
      *             !(adapter instanceof adapterType))
+     *             OR if this is already an instance of adapterType.
      */
     public void addAdapter(final Class adapterType, final Object adapter) {
         if (adapterType == null || adapter == null) {
@@ -187,6 +196,11 @@ public abstract class ViewObject implements Serializable /* IAdaptable? */
         if (!adapterType.isInstance(adapter)) {
             throw new IllegalArgumentException("adapter: " + adapter
                     + " must be cast compatible to class: " + adapterType);
+        }
+        else if (adapterType.isInstance(this))
+        {
+            throw new IllegalArgumentException("this: " + this
+                    + " must not already be an instance of class: " + adapterType);
         }
         getAdapterMap().put(adapterType, adapter);
     }
@@ -262,7 +276,7 @@ public abstract class ViewObject implements Serializable /* IAdaptable? */
      * constructed.
      * </p>
      * 
-     * @return the map containing lists of decorators keyed by class.
+     * @return the map containing lists of adapters keyed by class.
      * 
      */
     protected Map getAdapterMap() {

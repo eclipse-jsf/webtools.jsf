@@ -2,6 +2,7 @@ package org.eclipse.jst.jsf.common.runtime.internal.model.component;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.jst.jsf.common.runtime.internal.model.behavioural.IActionSource2Info;
 import org.eclipse.jst.jsf.common.runtime.internal.model.behavioural.IActionSourceInfo;
@@ -54,6 +55,27 @@ public class UICommandInfo extends ComponentInfo implements IActionSource2Info {
         }
     }
 
+    /**
+     * @param parent
+     * @param componentTypeInfo
+     * @param attributes
+     */
+    protected UICommandInfo(final ComponentInfo parent, final ComponentTypeInfo componentTypeInfo,
+            Map attributes)
+    {
+        this(getStringProperty("id", attributes, true),
+                parent, componentTypeInfo,
+                getBooleanProperty("rendered", attributes),
+                getActionSourceInfo("$actionSourceInfo", attributes)
+                );
+    }
+    
+    private static IActionSourceInfo getActionSourceInfo(String key,
+            Map attributes)
+    {
+        return (IActionSourceInfo) attributes.get(key);
+    }
+
     public String getActionExpression() {
         return _actionExpression;
     }
@@ -76,5 +98,10 @@ public class UICommandInfo extends ComponentInfo implements IActionSource2Info {
 
     public final boolean isImmediate() {
         return _isImmediate;
+    }
+
+    protected String getMostSpecificComponentName()
+    {
+        return "UICommand";
     }
 }

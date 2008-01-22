@@ -1,5 +1,7 @@
 package org.eclipse.jst.jsf.common.runtime.internal.model.component;
 
+import java.util.Map;
+
 import org.eclipse.jst.jsf.common.runtime.internal.model.bean.DataModelInfo;
 import org.eclipse.jst.jsf.common.runtime.internal.model.behavioural.IActionSource2Info;
 import org.eclipse.jst.jsf.common.runtime.internal.model.behavioural.IActionSourceInfo;
@@ -16,9 +18,10 @@ import org.eclipse.jst.jsf.common.runtime.internal.model.event.IValueChangeListe
  * Factory for creating component related objects.
  * 
  * @author cbateman
- *
+ * 
  */
-public class ComponentFactory {
+public class ComponentFactory
+{
 
     /**
      * The key for the standard ValueHolder adapter interface
@@ -41,7 +44,6 @@ public class ComponentFactory {
      */
     public final static Class NAMING_CONTAINER = INamingContainerInfo.class;
 
-    
     /**
      * The key for the standard Converter decorator
      */
@@ -64,6 +66,48 @@ public class ComponentFactory {
     public final static Class ACTION_LISTENER = IActionListenerInfo.class;
 
     /**
+     * Base class name for UIInput's
+     */
+    public final static String BASE_CLASS_UIINPUT = "javax.faces.component.UIInput";
+    /**
+     * Base class name for UIOutput's
+     */
+    public final static String BASE_CLASS_UIOUTPUT = "javax.faces.component.UIOutput";
+    /**
+     * Base class name for UICommand's
+     */
+    public final static String BASE_CLASS_UICOMMAND = "javax.faces.component.UICommand";
+    /**
+     * Base class name for UIData's
+     */
+    public final static String BASE_CLASS_UIDATA = "javax.faces.component.UIData";
+    /**
+     * Base class name for UIForm's
+     */
+    public final static String BASE_CLASS_UIFORM = "javax.faces.component.UIForm";
+
+    /**
+     * Interface name for ValueHolder's
+     */
+    public final static String INTERFACE_VALUEHOLDER = "javax.faces.component.ValueHolder";
+    /**
+     * Interface name for EditableValueHolder's
+     */
+    public final static String INTERFACE_EDITABLEVALUEHOLDER = "javax.faces.component.EditableValueHolder";
+    /**
+     * Interface name for ActionSource's
+     */
+    public final static String INTERFACE_ACTIONSOURCE = "javax.faces.component.ActionSource";
+    /**
+     * Interface name for ActionSource2's
+     */
+    public final static String INTERFACE_ACTIONSOURCE2 = "javax.faces.component.ActionSource2";
+    /**
+     * Interface name for NamingContainer's
+     */
+    public final static String INTERFACE_NAMINGCONTAINER = "javax.faces.component.NamingContainer";
+
+    /**
      * @param id
      * @param parent
      * @param typeInfo
@@ -72,8 +116,35 @@ public class ComponentFactory {
      */
     public static ComponentInfo createComponentInfo(final String id,
             final ComponentInfo parent, final ComponentTypeInfo typeInfo,
-            final boolean isRendered) {
+            final boolean isRendered)
+    {
         return new ComponentInfo(id, parent, typeInfo, isRendered);
+    }
+
+    /**
+     * If the rendered attribute isn't set, defaults it.
+     * 
+     * @param attributes
+     */
+    public static void maybeDefaultRendered(final Map attributes)
+    {
+        if (!(attributes.get("rendered") instanceof Boolean))
+        {
+            attributes.put("rendered", Boolean.TRUE);
+        }
+    }
+
+    /**
+     * @param parent
+     * @param componentTypeInfo
+     * @param attributes
+     * @return a new component info
+     */
+    public static ComponentInfo createComponentInfo(final ComponentInfo parent,
+            final ComponentTypeInfo componentTypeInfo, final Map attributes)
+    {
+        maybeDefaultRendered(attributes);
+        return new ComponentInfo(parent, componentTypeInfo, attributes);
     }
 
     /**
@@ -87,9 +158,23 @@ public class ComponentFactory {
     public static UIInputInfo createUIInputInfo(final String id,
             final ComponentInfo parent, final ComponentTypeInfo typeInfo,
             final IEditableValueHolderInfo editableValueHolder,
-            final boolean isRendered) {
+            final boolean isRendered)
+    {
         return new UIInputInfo(id, parent, typeInfo, editableValueHolder,
                 isRendered);
+    }
+
+    /**
+     * @param parent
+     * @param typeInfo
+     * @param attributes
+     * @return a new UIInputInfo
+     */
+    public static UIInputInfo createUIInputInfo(final ComponentInfo parent,
+            final ComponentTypeInfo typeInfo, final Map attributes)
+    {
+        maybeDefaultRendered(attributes);
+        return new UIInputInfo(parent, typeInfo, attributes);
     }
 
     /**
@@ -102,9 +187,23 @@ public class ComponentFactory {
      */
     public static UIOutputInfo createUIOutputInfo(final String id,
             final ComponentInfo parent, final ComponentTypeInfo typeInfo,
-            final IValueHolderInfo valueHolderInfo, final boolean isRendered) {
+            final IValueHolderInfo valueHolderInfo, final boolean isRendered)
+    {
         return new UIOutputInfo(id, parent, typeInfo, valueHolderInfo,
                 isRendered);
+    }
+
+    /**
+     * @param parent
+     * @param typeInfo
+     * @param attributes
+     * @return a new UIOutputInfo
+     */
+    public static UIOutputInfo createUIOutputInfo(final ComponentInfo parent,
+            final ComponentTypeInfo typeInfo, final Map attributes)
+    {
+        maybeDefaultRendered(attributes);
+        return new UIOutputInfo(parent, typeInfo, attributes);
     }
 
     /**
@@ -117,9 +216,23 @@ public class ComponentFactory {
      */
     public static UICommandInfo createUICommandInfo(final String id,
             final ComponentInfo parent, final ComponentTypeInfo typeInfo,
-            final IActionSourceInfo actionSourceInfo, final boolean isRendered) {
+            final IActionSourceInfo actionSourceInfo, final boolean isRendered)
+    {
         return new UICommandInfo(id, parent, typeInfo, isRendered,
                 actionSourceInfo);
+    }
+
+    /**
+     * @param parent
+     * @param typeInfo
+     * @param attributes
+     * @return a new UICommandInfo
+     */
+    public static UICommandInfo createUICommandInfo(final ComponentInfo parent,
+            final ComponentTypeInfo typeInfo, final Map attributes)
+    {
+        maybeDefaultRendered(attributes);
+        return new UICommandInfo(parent, typeInfo, attributes);
     }
 
     /**
@@ -134,9 +247,41 @@ public class ComponentFactory {
     public static UIFormInfo createUIFormInfo(final String id,
             final ComponentInfo parent, final ComponentTypeInfo typeInfo,
             final boolean isRendered, final boolean prependId,
-            final boolean submitted) {
+            final boolean submitted)
+    {
         return new UIFormInfo(id, parent, typeInfo, isRendered, prependId,
                 submitted);
+    }
+
+    /**
+     * @param parent
+     * @param typeInfo
+     * @param attributes
+     * @return a new UIFormInfo
+     */
+    public static UIFormInfo createUIFormInfo(final ComponentInfo parent,
+            final ComponentTypeInfo typeInfo, final Map attributes)
+    {
+        maybeDefaultRendered(attributes);
+        maybeDefaultPrependId(attributes);
+        maybeDefaultSubmitted(attributes);
+        return new UIFormInfo(parent, typeInfo, attributes);
+    }
+
+    private static void maybeDefaultSubmitted(Map attributes)
+    {
+        if (!(attributes.get("submitted") instanceof Boolean))
+        {
+            attributes.put("submitted", Boolean.FALSE);
+        }
+    }
+
+    private static void maybeDefaultPrependId(Map attributes)
+    {
+        if (!(attributes.get("prependId") instanceof Boolean))
+        {
+            attributes.put("prependId", Boolean.FALSE);
+        }
     }
 
     /**
@@ -164,9 +309,81 @@ public class ComponentFactory {
             final ComponentInfo header, final int rowCount,
             final boolean rowAvailable, final Object rowData,
             final int rowIndex, final int rows, final Object value,
-            final String var) {
+            final String var)
+    {
         return new UIDataInfo(id, parent, typeInfo, isRendered, dataModel,
                 first, footer, header, rowCount, rowAvailable, rowData,
                 rowIndex, rows, value, var);
+    }
+
+    /**
+     * @param parent
+     * @param typeInfo
+     * @param attributes
+     * @return the UIDataInfo
+     */
+    public static UIDataInfo createUIDataInfo(final ComponentInfo parent,
+            final ComponentTypeInfo typeInfo, final Map attributes)
+    {
+        maybeDefaultRendered(attributes);
+        maybeDefaultFirst(attributes);
+        maybeDefaultRowCount(attributes);
+        maybeDefaultRowAvailable(attributes);
+        maybeDefaultRowIndex(attributes);
+        maybeDefaultRows(attributes);
+        maybeDefaultVar(attributes);
+        return new UIDataInfo(parent, typeInfo, attributes);
+    }
+
+
+    private static final Integer ZERO = new Integer(0);
+    private static final Integer MINUS_ONE = new Integer(-1);
+
+    private static void maybeDefaultFirst(Map attributes)
+    {
+        if (!(attributes.get("first") instanceof Integer))
+        {
+            attributes.put("first", ZERO);
+        }
+    }
+
+    private static void maybeDefaultRowCount(Map attributes)
+    {
+        if (!(attributes.get("rowCount") instanceof Integer))
+        {
+            attributes.put("rowCount", MINUS_ONE);
+        }
+    }
+
+    private static void maybeDefaultRowAvailable(Map attributes)
+    {
+        if (! (attributes.get("rowAvailable") instanceof Boolean))
+        {
+            attributes.put("rowAvailable", Boolean.FALSE);
+        }
+    }
+
+    private static void maybeDefaultRowIndex(Map attributes)
+    {
+        if (! (attributes.get("rowIndex") instanceof Integer))
+        {
+            attributes.put("rowIndex", MINUS_ONE);
+        }
+    }
+
+    private static void maybeDefaultRows(Map attributes)
+    {
+        if (! (attributes.get("rows") instanceof Integer))
+        {
+            attributes.put("rows", ZERO);
+        }
+    }
+
+    private static void maybeDefaultVar(Map attributes)
+    {
+        if (! (attributes.get("var") instanceof String))
+        {
+            attributes.put("var", "** default variable **");
+        }
     }
 }

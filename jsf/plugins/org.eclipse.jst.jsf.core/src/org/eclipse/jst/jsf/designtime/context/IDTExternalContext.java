@@ -34,7 +34,7 @@ public interface IDTExternalContext
      * 
      * Map is unmodifiable (throws exception on mutation operations)
      */
-    public abstract Map<String, ISymbol> getMapForScope(int scopeMask);
+    Map<String, ISymbol> getMapForScope(int scopeMask);
 
     /**
      * @return a map of ISymbols representing the currently available
@@ -42,26 +42,42 @@ public interface IDTExternalContext
      * 
      * Map is unmodifiable (throws exception on mutation operations)
      */
-    public abstract Map<String, ISymbol> getRequestMap();
+    Map<String, ISymbol> getRequestMap();
 
     /**
      * @return a map of ISymbols representing the currently available
      * session scope variables.  Never null, empty if no symbols
      * Map is unmodifiable (throws exception on mutation operations)
      */
-    public abstract Map<String, ISymbol> getSessionMap();
+    Map<String, ISymbol> getSessionMap();
 
     /**
      * @return a map of ISymbols representing the currently available
      * application scope variables.  Never null, empty if no symbols
      * Map is unmodifiable (throws exception on mutation operations)
      */
-    public abstract Map<String, ISymbol> getApplicationMap();
+    Map<String, ISymbol> getApplicationMap();
     
     /**
      * @return a map of ISymbols representing the currently available
      * none scope variables.  Never null, empty if no symbols
      * Map is unmodifiable (throws exception on mutation operations)
      */
-    public abstract Map<String, ISymbol> getNoneMap();
+    Map<String, ISymbol> getNoneMap();
+    
+    /**
+     * Servlet 2.3_SRV.4.4: The context path of the application. 
+     * 
+     * @return the request context path
+     */
+    String getRequestContextPath();
+
+    /**
+     * Find all of the possible url-pattern's in the container that 
+     * could match the underlying resource.  Normally this will be single
+     * element list.  It will only 
+     * 
+     * @return
+     */
+//    List<String> getAllContainerMappings();
 }

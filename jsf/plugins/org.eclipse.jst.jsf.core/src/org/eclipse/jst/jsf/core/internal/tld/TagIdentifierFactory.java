@@ -11,6 +11,8 @@
 package org.eclipse.jst.jsf.core.internal.tld;
 
 import org.eclipse.jst.jsf.common.dom.TagIdentifier;
+import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDDocument;
+import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDElementDeclaration;
 import org.w3c.dom.Element;
 
 /**
@@ -40,6 +42,19 @@ public final class TagIdentifierFactory
     public static TagIdentifier createDocumentTagWrapper(final Element element)
     {
         return new DocumentTagIdentifier(element);
+    }
+    
+    /**
+     * @param elementDecl
+     * @return a tag identifier that bridges a TLDElementDeclaration
+     */
+    public static TagIdentifier createTLDTagWrapper(final TLDElementDeclaration elementDecl)
+    {
+        if (!(elementDecl.getOwnerDocument() instanceof TLDDocument))
+        {
+            throw new IllegalArgumentException("Element decl must have a tlddoc for a parent: "+elementDecl.toString());
+        }
+        return new TLDTagIdentifier(elementDecl);
     }
     
     private TagIdentifierFactory()

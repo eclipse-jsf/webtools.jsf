@@ -13,6 +13,12 @@ public abstract class TagElement implements ITagElement
      */
     public abstract String getName();
 
+    
+    /* (non-Javadoc)
+     * @see org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagElement#getUri()
+     */
+    public abstract String getUri();
+
     /* (non-Javadoc)
      * @see org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagElement#getTagHandlerClassName()
      */

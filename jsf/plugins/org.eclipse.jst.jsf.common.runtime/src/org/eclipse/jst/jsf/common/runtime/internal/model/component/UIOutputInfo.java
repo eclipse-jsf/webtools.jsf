@@ -1,6 +1,7 @@
 package org.eclipse.jst.jsf.common.runtime.internal.model.component;
 
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.jst.jsf.common.runtime.internal.model.behavioural.IValueHolderInfo;
 import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ConverterDecorator;
@@ -52,12 +53,34 @@ public class UIOutputInfo extends ComponentInfo implements IValueHolderInfo {
         }
     }
 
-    public String toString() {
-        return super.toString() + ", isRendered=" + _isRendered;
+    /**
+     * @param parent
+     * @param typeInfo
+     * @param attributes
+     */
+    protected UIOutputInfo(final ComponentInfo parent, final ComponentTypeInfo typeInfo,
+            final Map attributes)
+    {
+        this(getStringProperty("id", attributes, true),
+                parent,
+                typeInfo,
+                getValueHolderInfo("$valueHolderInfo", attributes),
+                getBooleanProperty("rendered", attributes));
     }
-
+    
+    /**
+     * @param key
+     * @param attributes
+     * @return the non-standard value holder info that encapsulates the
+     * ValueHolder properties.  This is never mandatory.
+     */
+    protected static IValueHolderInfo getValueHolderInfo(String key, Map attributes)
+    {
+        return (IValueHolderInfo) attributes.get(key);
+    }
+    
     // @Override
-    public String getMostSpecificComponentName() {
+    protected String getMostSpecificComponentName() {
         return "UIOutput";
     }
 

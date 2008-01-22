@@ -19,6 +19,7 @@ import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.jst.j2ee.web.componentcore.util.WebArtifactEdit;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 import org.eclipse.jst.jsf.context.symbol.ISymbol;
 import org.eclipse.jst.jsf.context.symbol.source.ISymbolConstants;
@@ -119,4 +120,54 @@ public class DTJSPExternalContext extends AbstractDTExternalContext
             }
         }
     }
+
+    @Override
+    public String getRequestContextPath() 
+    {
+        WebArtifactEdit  artifactEdit = null;
+        String path = null;
+        
+        try
+        {
+            // TODO: EARs?
+            artifactEdit = 
+                WebArtifactEdit.getWebArtifactEditForRead(_jspFile.getProject());
+            path = artifactEdit.getServerContextRoot();
+        }
+        finally
+        {
+            if (artifactEdit != null)
+            {
+                artifactEdit.dispose();
+            }
+        }
+        return path;
+    }
+
+//    @Override
+//    public String getRequestPathInfo() {
+//        // TODO Auto-generated method stub
+//        return super.getRequestPathInfo();
+//    }
+//
+//    @Override
+//    public String getRequestServletPath() {
+//        // TODO Auto-generated method stub
+//        return super.getRequestServletPath();
+//    }
+
+//    private void getWebApp()
+//    {
+//        final IProject project = _jspFile.getProject();
+//
+//        final IModelProvider provider = 
+//            ModelProviderManager.getModelProvider(project);
+//        Object webAppObj = provider.getModelObject();
+//        
+//        if (webAppObj != null)
+//        {
+//            //
+//        }
+//        
+//    }
 }

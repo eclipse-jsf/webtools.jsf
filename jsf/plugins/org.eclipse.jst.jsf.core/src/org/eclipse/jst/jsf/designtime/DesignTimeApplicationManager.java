@@ -28,12 +28,15 @@ import org.eclipse.jst.jsf.designtime.context.IExternalContextFactoryLocator;
 import org.eclipse.jst.jsf.designtime.el.AbstractDTMethodResolver;
 import org.eclipse.jst.jsf.designtime.el.AbstractDTPropertyResolver;
 import org.eclipse.jst.jsf.designtime.el.AbstractDTVariableResolver;
+import org.eclipse.jst.jsf.designtime.internal.view.DefaultDTViewHandler;
+import org.eclipse.jst.jsf.designtime.internal.view.IDTViewHandler;
 
 
 /**
  * Per-web-application manager that manages design time information for a corresponding
  * project.
  * 
+ * TODO: migrate to managed singleton
  * @author cbateman
  *
  */
@@ -135,6 +138,7 @@ public final class DesignTimeApplicationManager
     // after a rename/move etc.
     private IProject                                    _project;
     private final IExternalContextFactoryLocator        _locator;
+    private IDTViewHandler                              _viewHandler;
     
     private DesignTimeApplicationManager(IProject project)
     {
@@ -158,7 +162,7 @@ public final class DesignTimeApplicationManager
                 
                 if (context == null)
                 {
-                    context = new DTFacesContext(_locator);
+                    context = new DTFacesContext(file, _locator);
                     file.setSessionProperty(SESSION_PROPERTY_KEY_PROJECT, context);
                 }
                 
@@ -175,6 +179,20 @@ public final class DesignTimeApplicationManager
         }
         
         return null;
+    }
+    
+    /**
+     * @return the design time view handler for this project
+     */
+    public synchronized IDTViewHandler getViewHandler()
+    {
+        // TODO: lifecycle issues; extensibility.
+        if (_viewHandler == null)
+        {
+            _viewHandler = new DefaultDTViewHandler();
+        }
+        
+        return _viewHandler;
     }
     
     /**
@@ -230,6 +248,15 @@ public final class DesignTimeApplicationManager
                              DEFAULT_VARIABLE_RESOLVER_ID);
     }
     
+    /**
+     * @return the default property resolver that will be used if no other
+     * is provided.  The default property resolver is intended to match the
+     * similar resolver used by the runtime.
+     */
+    public synchronized AbstractDTPropertyResolver getDefaultPropertyResolver()
+    {
+        return JSFCorePlugin.getPropertyResolvers().get(DEFAULT_PROPERTY_RESOLVER_ID);
+    }
     
     /**
      * @return the designtime property resolver for this application 

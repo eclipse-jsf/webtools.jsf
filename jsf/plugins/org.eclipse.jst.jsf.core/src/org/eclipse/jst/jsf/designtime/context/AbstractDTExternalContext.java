@@ -87,4 +87,13 @@ public abstract class AbstractDTExternalContext implements IDTExternalContext
     {
         return getMapForScope(ISymbolConstants.SYMBOL_SCOPE_NONE);
     }
+
+    /* (non-Javadoc)
+     * @see org.eclipse.jst.jsf.designtime.context.IDTExternalContext#getRequestContextPath()
+     */
+    public String getRequestContextPath() 
+    {
+        // API: do we need to support default behaviour here?
+        return null;
+    }
 }

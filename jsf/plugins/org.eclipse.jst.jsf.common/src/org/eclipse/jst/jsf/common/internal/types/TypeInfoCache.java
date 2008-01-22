@@ -37,24 +37,71 @@ public class TypeInfoCache implements IElementChangedListener {
     
     private static TypeInfoCache instance = null;
     
-    /**Returns the TypeInfoCache instance.
+    /**Returns the TypeInfoCache instance.  This instance is considered
+     * protected and must not be disposded with disposeInstance.
      * 
      * @return the TypeInfoCache instance
      */
     public static synchronized TypeInfoCache getInstance() {
         if (instance == null) {
-            instance = new TypeInfoCache();
-            JavaCore.addElementChangedListener(instance, ElementChangedEvent.POST_CHANGE);
+            instance = createNewInstance();
         }
         return instance;
     }
     
-    private final Map /*<IType, TypeInfo>*/ cachedInfo;
-    private final Map /*<ITypeRoot, Set<IType>>*/ cachedTypesByAffectingTypeRoot;
-    private final Map /*<String, Set<IType>>*/ cachedTypesByMissingSupertypename;
+    /**
+     * Create a new instance of the type cache.
+     * 
+     * @return a new instance of the type info cache.
+     */
+    public static TypeInfoCache createNewInstance()
+    {
+        final TypeInfoCache newCache = new TypeInfoCache();
+        JavaCore.addElementChangedListener(newCache, ElementChangedEvent.POST_CHANGE);
+        return newCache;
+    }
+    
+    /**
+     * If cache is not the singleton instance acquired with {@link #getInstance()}
+     * then the cache will be disposed and should not be used.  If cache is
+     * protected instance, then nothing will happen (the singleton instance
+     * cannot be disposed).
+     * 
+     * @param cache
+     */
+    public static void disposeInstance(final TypeInfoCache cache)
+    {
+        if (cache != null 
+                && cache != instance)        
+        {
+            JavaCore.removeElementChangedListener(cache);
+            
+            synchronized(cache)
+            {
+                if (cache.cachedInfo != null)
+                {
+                    cache.cachedInfo.clear();
+                }
+                
+                if (cache.cachedTypesByAffectingTypeRoot != null)
+                {
+                    cache.cachedTypesByAffectingTypeRoot.clear();
+                }
+                
+                if (cache.cachedTypesByMissingSupertypename != null)
+                {
+                    cache.cachedTypesByMissingSupertypename.clear();
+                }
+            }
+        }
+    }
+    
+    private final Map<IType, TypeInfo> cachedInfo;
+    private final Map<ITypeRoot, Set<IType>> cachedTypesByAffectingTypeRoot;
+    private final Map<String, Set<IType>> cachedTypesByMissingSupertypename;
     
     private TypeInfoCache() {
-        cachedInfo = new HashMap();
+        cachedInfo = new HashMap<IType, TypeInfo>();
         cachedTypesByAffectingTypeRoot = new HashMap();
         cachedTypesByMissingSupertypename = new HashMap(10);
     }
@@ -74,7 +121,7 @@ public class TypeInfoCache implements IElementChangedListener {
         TypeInfo info = null;
         if (type != null)
         {
-            info = (TypeInfo) cachedInfo.get(type);
+            info = cachedInfo.get(type);
         }
         return info;
     }
@@ -318,7 +365,7 @@ public class TypeInfoCache implements IElementChangedListener {
     }
 
     private void registerTypeForTypeRoot(IType type, ITypeRoot typeRoot) {
-        Set dependentTypes = (Set) cachedTypesByAffectingTypeRoot.get(typeRoot);
+        Set dependentTypes = cachedTypesByAffectingTypeRoot.get(typeRoot);
         if (dependentTypes == null) {
             dependentTypes = new HashSet(5);
             cachedTypesByAffectingTypeRoot.put(typeRoot, dependentTypes);
@@ -327,7 +374,7 @@ public class TypeInfoCache implements IElementChangedListener {
     }
 
     private void registerTypeForMissingSupertype(IType type, String supertype) {
-        Set dependentTypes = (Set) cachedTypesByMissingSupertypename.get(supertype);
+        Set dependentTypes = cachedTypesByMissingSupertypename.get(supertype);
         if (dependentTypes == null) {
             dependentTypes = new HashSet(5);
             cachedTypesByMissingSupertypename.put(supertype, dependentTypes);
@@ -354,7 +401,7 @@ public class TypeInfoCache implements IElementChangedListener {
     }
 
     private void unregisterTypeForTypeRoot(IType type, ITypeRoot typeRoot) {
-        Set dependentTypes = (Set) cachedTypesByAffectingTypeRoot.get(typeRoot);
+        Set dependentTypes = cachedTypesByAffectingTypeRoot.get(typeRoot);
         if (dependentTypes != null) {
             dependentTypes.remove(type);
             if (dependentTypes.isEmpty()) {
@@ -364,7 +411,7 @@ public class TypeInfoCache implements IElementChangedListener {
     }
     
     private void unregisterTypeForMissingSupertype(IType type, String supertype) {
-        Set dependentTypes = (Set) cachedTypesByMissingSupertypename.get(supertype);
+        Set dependentTypes = cachedTypesByMissingSupertypename.get(supertype);
         if (dependentTypes != null) {
             dependentTypes.remove(type);
             if (dependentTypes.isEmpty()) {
@@ -385,12 +432,12 @@ public class TypeInfoCache implements IElementChangedListener {
      * @param typeRoot
      */
     protected synchronized void uncacheAffectedTypes(ITypeRoot typeRoot) {
-        Collection affectedTypes = (Collection) cachedTypesByAffectingTypeRoot.get(typeRoot);
+        Collection affectedTypes = cachedTypesByAffectingTypeRoot.get(typeRoot);
         if (affectedTypes != null && !affectedTypes.isEmpty()) {
             List affectedTypesCopy = new ArrayList(affectedTypes);
             for (Iterator it = affectedTypesCopy.iterator(); it.hasNext(); ) {
                 IType cachedType = (IType) it.next();
-                TypeInfo typeInfo = (TypeInfo) cachedInfo.remove(cachedType);
+                TypeInfo typeInfo = cachedInfo.remove(cachedType);
                 unregisterCachedType(cachedType, typeInfo);
             }
         }
@@ -401,12 +448,12 @@ public class TypeInfoCache implements IElementChangedListener {
      * @param supertypename - the missing supertype name. May be qualified or not
      */
     protected synchronized void uncacheTypesWithMissingSupertype(String supertypename) {
-        Collection affectedTypes = (Collection) cachedTypesByMissingSupertypename.get(shortTypename(supertypename));
+        Collection affectedTypes = cachedTypesByMissingSupertypename.get(shortTypename(supertypename));
         if (affectedTypes != null && !affectedTypes.isEmpty()) {
             List affectedTypesCopy = new ArrayList(affectedTypes);
             for (Iterator it = affectedTypesCopy.iterator(); it.hasNext(); ) {
                 IType cachedType = (IType) it.next();
-                TypeInfo typeInfo = (TypeInfo) cachedInfo.remove(cachedType);
+                TypeInfo typeInfo = cachedInfo.remove(cachedType);
                 unregisterCachedType(cachedType, typeInfo);
             }
         }

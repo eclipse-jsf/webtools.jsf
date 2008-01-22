@@ -1,0 +1,8 @@
+# Debugging options for the org.eclipse.jst.jsf.core
+
+# Turn on general debugging for the org.eclipse.jsf.core plugin.
+org.eclipse.jst.jsf.core/debug=false
+
+org.eclipse.jst.jsf.core/designtime/view/jsptagregistry=false
+
+org.eclipse.jst.jsf.core/designtime/view/jsptagintrospection=false

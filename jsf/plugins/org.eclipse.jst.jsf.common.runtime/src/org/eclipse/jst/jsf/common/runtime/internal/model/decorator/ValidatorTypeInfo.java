@@ -1,22 +1,19 @@
 package org.eclipse.jst.jsf.common.runtime.internal.model.decorator;
 
-import org.eclipse.jst.jsf.common.runtime.internal.model.types.IClassTypeInfo;
-import org.eclipse.jst.jsf.common.runtime.internal.model.types.TypeInfo;
+import org.eclipse.jst.jsf.common.runtime.internal.model.types.ClassTypeInfo;
 
 /**
  * Type information about validator decorator.
  * @author cbateman
  *
  */
-public class ValidatorTypeInfo extends TypeInfo implements IClassTypeInfo
+public class ValidatorTypeInfo extends ClassTypeInfo
 {
     /**
      * 
      */
     private static final long serialVersionUID = 7512992316792276160L;
     private final String    _validatorId;
-    private final String    _className;
-
 
     /**
      * For unknown validators, use the UNKNOWN constant.
@@ -29,13 +26,34 @@ public class ValidatorTypeInfo extends TypeInfo implements IClassTypeInfo
      */
     public ValidatorTypeInfo(String validatorClass, String validatorId)
     {
-        super();
+        super(validatorClass, new String[0], new String[0]);
         
         if (validatorClass == null && validatorId == null)
         {
             throw new IllegalArgumentException("validatorClass and validatorId must not both be null.  For unknown validator use the UNKNOWN constant");
         }
-        _className = validatorClass;
+        _validatorId = validatorId;
+    }
+
+    /**
+     * For unknown validators, use the UNKNOWN constant.
+     * 
+     * @param validatorClass
+     * @param superClasses 
+     * @param interfaces 
+     * @param validatorId
+     * @throws java.lang.IllegalArgumentException if both className and
+     * converterId are null.
+     * 
+     */
+    public ValidatorTypeInfo(String validatorClass, String[] superClasses, String[] interfaces, String validatorId)
+    {
+        super(validatorClass, superClasses, interfaces);
+        
+        if (validatorClass == null && validatorId == null)
+        {
+            throw new IllegalArgumentException("validatorClass and validatorId must not both be null.  For unknown validator use the UNKNOWN constant");
+        }
         _validatorId = validatorId;
     }
 
@@ -55,7 +73,8 @@ public class ValidatorTypeInfo extends TypeInfo implements IClassTypeInfo
      */
     private ValidatorTypeInfo(Object unresolved)
     {
-        _className = _validatorId = null;
+        super(null, new String[0], new String[0]);
+        _validatorId = null;
     }
 
     /**
@@ -65,10 +84,4 @@ public class ValidatorTypeInfo extends TypeInfo implements IClassTypeInfo
     {
         return _validatorId;
     }
-
-    public String getClassName()
-    {
-        return _className;
-    }
-
 }

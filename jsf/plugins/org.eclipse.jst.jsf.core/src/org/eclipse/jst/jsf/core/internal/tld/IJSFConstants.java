@@ -59,6 +59,11 @@ public interface IJSFConstants
 	 */
 	final static public String TAG_PARAM = "param";
 
+    /**
+     * phaseListener tagname
+     */
+	final static public String TAG_PHASELISTENER = "phaseListener";
+	
 	/**
 	 * selectItem tagname
 	 */
@@ -69,6 +74,11 @@ public interface IJSFConstants
 	 */
 	final static public String TAG_SELECTITEMS = "selectItems";
 
+	/**
+	 * setPropertyActionListener tagname
+	 */
+	final static public String TAG_SETPROPERTYACTIONLISTENER = "setPropertyActionListener";
+	
 	/**
 	 * subview tagname
 	 */
@@ -356,6 +366,12 @@ public interface IJSFConstants
         TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_HTML, TAG_OUTPUTFORMAT);
 
     /**
+     * TagIdentifier for TAG_OUTPUTLINK
+     */
+    final static TagIdentifier TAG_IDENTIFIER_OUTPUTLINK =
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_HTML, TAG_OUTPUTLINK);
+
+    /**
      * TagIdentifier for TAG_PANELGROUP
      */
     final static TagIdentifier TAG_IDENTIFIER_PANEL_GROUP =
@@ -440,6 +456,12 @@ public interface IJSFConstants
         TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_CORE, TAG_PARAM);
 
     /**
+     * TagIdentifier for TAG_PHASELISTENER
+     */
+    final static TagIdentifier TAG_IDENTIFIER_PHASELISTENER =
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_CORE, TAG_PHASELISTENER);
+
+    /**
      * TagIdentifier for TAG_SELECTITEM
      */
     final static TagIdentifier TAG_IDENTIFIER_SELECTITEM = 
@@ -450,6 +472,12 @@ public interface IJSFConstants
      */
     final static TagIdentifier TAG_IDENTIFIER_SELECTITEMS =
         TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_CORE, TAG_SELECTITEMS);
+
+    /**
+     * TagIdentifier for TAG_SETPROPERTYACTIONLISTENER
+     */
+    final static TagIdentifier TAG_IDENTIFIER_SETPROPERTYACTIONLISTENER =
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_CORE, TAG_SETPROPERTYACTIONLISTENER);
 
     /**
      * TagIdentifier for TAG_SUBVIEW

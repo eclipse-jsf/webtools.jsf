@@ -2,18 +2,21 @@ package org.eclipse.jst.jsf.common.runtime.internal.model.component;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.jst.jsf.common.runtime.internal.model.behavioural.IEditableValueHolderInfo;
 import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ValidatorDecorator;
 import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ValueChangeListenerDecorator;
 
 /**
- * A design-time analog of the standard UIInput. 
+ * A design-time analog of the standard UIInput.
+ * 
  * @author cbateman
- *
+ * 
  */
 public class UIInputInfo extends UIOutputInfo implements
-        IEditableValueHolderInfo {
+        IEditableValueHolderInfo
+{
     /**
      * serializable uid
      */
@@ -36,10 +39,12 @@ public class UIInputInfo extends UIOutputInfo implements
     protected UIInputInfo(final String id, final ComponentInfo parent,
             final ComponentTypeInfo typeInfo,
             final IEditableValueHolderInfo editableValueHolderInfo,
-            final boolean isRendered) {
+            final boolean isRendered)
+    {
         super(id, parent, typeInfo, editableValueHolderInfo, isRendered);
 
-        if (editableValueHolderInfo == null) {
+        if (editableValueHolderInfo == null)
+        {
             _isValid = true;
             _isImmediate = false;
             _isRequired = false;
@@ -47,7 +52,9 @@ public class UIInputInfo extends UIOutputInfo implements
             _submittedValue = null;
             _validator = null;
             _valueChangeListener = null;
-        } else {
+        }
+        else
+        {
             _isValid = editableValueHolderInfo.isValid();
             _isImmediate = editableValueHolderInfo.isImmediate();
             _isRequired = editableValueHolderInfo.isRequired();
@@ -58,75 +65,108 @@ public class UIInputInfo extends UIOutputInfo implements
                     .getValueChangeListener();
 
             for (final Iterator it = editableValueHolderInfo.getValidators()
-                    .iterator(); it.hasNext();) {
+                    .iterator(); it.hasNext();)
+            {
                 final ValidatorDecorator validator = (ValidatorDecorator) it
                         .next();
                 addValidator(validator);
             }
 
             for (final Iterator it = editableValueHolderInfo
-                    .getValueChangeListeners().iterator(); it.hasNext();) {
-                final ValueChangeListenerDecorator valueChangeListener = 
-                    (ValueChangeListenerDecorator) it.next();
+                    .getValueChangeListeners().iterator(); it.hasNext();)
+            {
+                final ValueChangeListenerDecorator valueChangeListener = (ValueChangeListenerDecorator) it
+                        .next();
                 addValueChangeListener(valueChangeListener);
             }
         }
     }
 
-    public String toString() {
-        final String toString = super.toString();
-        return toString + ", isValid=" + _isValid + ", isImmediate="
-                + _isImmediate + ", isRequired=" + _isRequired;
+    /**
+     * @param parent
+     * @param typeInfo
+     * @param attributes
+     */
+    protected UIInputInfo(final ComponentInfo parent,
+            final ComponentTypeInfo typeInfo, Map attributes)
+    {
+        this(getStringProperty("id", attributes, true), parent, typeInfo,
+                getEditableValueHolderInfo("$editableValueHolderInfo",
+                        attributes), getBooleanProperty("rendered", attributes));
     }
 
+    private static IEditableValueHolderInfo getEditableValueHolderInfo(
+            String key, Map attributes)
+    {
+        return (IEditableValueHolderInfo) attributes.get(key);
+    }
+
+    // public String toString() {
+    // final String toString = super.toString();
+    // return toString + ", isValid=" + _isValid + ", isImmediate="
+    // + _isImmediate + ", isRequired=" + _isRequired;
+    // }
+
     // @Override
-    public String getMostSpecificComponentName() {
+    protected String getMostSpecificComponentName()
+    {
         return "UIInput";
     }
 
-    public final boolean isValid() {
+    public final boolean isValid()
+    {
         return _isValid;
     }
 
-    public final boolean isImmediate() {
+    public final boolean isImmediate()
+    {
         return _isImmediate;
     }
 
-    public final boolean isRequired() {
+    public final boolean isRequired()
+    {
         return _isRequired;
     }
 
-    public final Object getSubmittedValue() {
+    public final Object getSubmittedValue()
+    {
         return _submittedValue;
     }
 
-    public final String getValidator() {
+    public final String getValidator()
+    {
         return _validator;
     }
 
-    public final String getValueChangeListener() {
+    public final String getValueChangeListener()
+    {
         return _valueChangeListener;
     }
 
-    public final boolean isLocalSetValue() {
+    public final boolean isLocalSetValue()
+    {
         return _localSetValue;
     }
 
-    public final void addValidator(final ValidatorDecorator validator) {
+    public final void addValidator(final ValidatorDecorator validator)
+    {
         addDecorator(validator, ComponentFactory.VALIDATOR);
     }
 
     public final void addValueChangeListener(
-            final ValueChangeListenerDecorator valueChangeListenerInfo) {
+            final ValueChangeListenerDecorator valueChangeListenerInfo)
+    {
         addDecorator(valueChangeListenerInfo,
                 ComponentFactory.VALUE_CHANGE_LISTENER);
     }
 
-    public final List getValidators() {
+    public final List getValidators()
+    {
         return getDecorators(ComponentFactory.VALIDATOR);
     }
 
-    public final List getValueChangeListeners() {
+    public final List getValueChangeListeners()
+    {
         return getDecorators(ComponentFactory.VALUE_CHANGE_LISTENER);
     }
 }
