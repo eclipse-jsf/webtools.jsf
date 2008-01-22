@@ -40,7 +40,7 @@ import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
  * 
  * @author Gerry Kessler - Oracle
  */
-public class JSFUtils12 extends JSFUtils{
+public class JSFUtils12 extends JSFUtils {
 
 	/**
 	 * @param webApp

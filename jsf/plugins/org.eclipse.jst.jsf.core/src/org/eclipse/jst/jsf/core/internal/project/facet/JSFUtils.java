@@ -12,6 +12,7 @@
 package org.eclipse.jst.jsf.core.internal.project.facet;
 
 import java.util.Iterator;
+import java.util.List;
 
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
@@ -28,7 +29,7 @@ import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
 /**
  * 
  */
-public class JSFUtils {
+public abstract class JSFUtils {
 	/**
 	 * The default name for the Faces servlet
 	 */
@@ -164,4 +165,159 @@ public class JSFUtils {
 			className = JSF_SERVLET_CLASS;
 		return className;
 	}
+	
+	/**
+	 * Servlet 2.3_SRV.11.2: a string that begins with a "/" and ends
+	 * with "/*" is a prefix mapping
+	 * 
+	 * @param mapping
+	 * @return true if the mapping string represents a prefix mapping
+	 */
+	public static boolean isPrefixMapping(final String mapping)
+	{
+	    if (mapping == null || mapping.length() < 4)
+	    {
+	        return false;
+	    }
+	    
+	    return mapping.charAt(0) == '/' && mapping.endsWith("/*");
+	}
+	
+	/**
+	 * Servlet 2.3_SRV.11.2: a string that begins with "*." 
+	 * is an extension mapping
+     * 
+	 * @param mapping
+	 * @return true if mapping is an extension mapping
+	 */
+	public static boolean isExtensionMapping(final String mapping)
+	{
+	    if (mapping == null)
+	    {
+	        return false;
+	    }
+	    
+	    return mapping.startsWith("*.");
+	}
+	
+	/**
+	 * Search the list of servlet-mappings for the first extension and prefix mappings.  The contents
+	 * of mappings is assumed to be all url-pattern's.  
+	 * 
+	 * If prefExtMapping is not null, it is an extension mapping and
+     * it is in mappings, then it is returned.  Otherwise, the first extension
+     * mapping in mappings is returned.  Returns null if mappings does not
+     * contain an extension mapping.  The same algorithm holds for prefPrefixMapping and
+     * corresponding prefix mapping.
+     * 
+     * See isExtensionMapping and isPrefixMapping for more information on url patterns.
+	 * 
+	 * @param mappings
+	 * @param prefExtMapping
+	 * @param prefPrefixMapping
+	 * @return the result
+	 */
+	public static MappingSearchResult searchServletMappings(final  List<String> mappings, String prefExtMapping, String prefPrefixMapping)
+	{
+	    String firstExtFound = null;
+	    String firstPrefixFound = null;
+	    boolean foundExtMapping = false;
+	    boolean foundPrefixMapping = false;
+	    
+	    // if the caller has no preferredMapping, then
+        // set it to something guaranteed to be non-null
+        // and which is guaranteed not to match anything
+        // that pass isExtensionMapping
+	    if (prefExtMapping == null)
+	    {
+	        prefExtMapping = "NOTANEXTENSIONMAPPING";
+	    }
+	    
+	    // similarly, guarantee that if the caller has no
+	    // preferred prefix mapping, that we set a non-null
+	    // comp mapping
+	    if (prefPrefixMapping == null)
+	    {
+	        prefPrefixMapping = "NOTAPREFIXMAPPING";
+	    }
+
+        SEARCH_LOOP:for (String mapping : mappings)
+        {
+            if (isExtensionMapping(mapping))
+            {
+                // can assum that mapping is non-null since
+                // it is an ext mapping
+                if (prefExtMapping.equals(mapping.trim()))
+                {
+                    firstExtFound = prefExtMapping;
+                    continue;
+                }
+
+                if (firstExtFound == null)
+                {
+                    firstExtFound = mapping.trim();
+                }
+            }
+            else if (isPrefixMapping(mapping))
+            {
+                if (prefPrefixMapping.equals(mapping.trim()))
+                {
+                    firstPrefixFound = prefPrefixMapping;
+                    continue;
+                }
+                
+                if (firstPrefixFound == null)
+                {
+                    firstPrefixFound = mapping.trim();
+                }
+            }
+            
+            if (foundExtMapping && foundPrefixMapping)
+            {
+                break SEARCH_LOOP;
+            }
+        }
+	    
+	    return new MappingSearchResult(firstExtFound, firstPrefixFound);
+	}
+	
+    /**
+     * The result of a servlet mapping search
+     *
+     */
+    public static class MappingSearchResult
+    {
+        private final String  _extensionMapping; // may be null;
+        private final String  _prefixMapping;    // may be null
+        
+        MappingSearchResult(final String extensionMapping, final String prefixMapping)
+        {
+            _extensionMapping = extensionMapping;
+            _prefixMapping = prefixMapping;
+        }
+
+        /**
+         * @return true if the search yielded a valid result
+         */
+        public boolean isResult()
+        {
+            return _extensionMapping != null || _prefixMapping != null;
+        }
+
+        /**
+         * @return the first extension mapping matching search criteria or null
+         * if none
+         */
+        public final String getExtensionMapping() {
+            return _extensionMapping;
+        }
+
+        /**
+         * @return the first prefix mapping matching search criteria or null
+         * if none
+         */
+        public final String getPrefixMapping() {
+            return _prefixMapping;
+        }
+    }
 }
