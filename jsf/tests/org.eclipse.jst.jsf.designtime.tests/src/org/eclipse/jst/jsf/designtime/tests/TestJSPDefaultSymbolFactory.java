@@ -30,7 +30,8 @@ public class TestJSPDefaultSymbolFactory extends TestCase
 	private IStructuredModel 			_structuredModel;
 	private IStructuredDocument 		_structuredDocument;
 
-	protected void setUp() throws Exception 
+	@Override
+    protected void setUp() throws Exception 
 	{
         super.setUp();
         JSFTestUtil.setValidationEnabled(false);
@@ -63,7 +64,8 @@ public class TestJSPDefaultSymbolFactory extends TestCase
 
     }
 
-	protected void tearDown() throws Exception 
+	@Override
+    protected void tearDown() throws Exception 
 	{
 		super.tearDown();
 		_structuredModel.releaseFromRead();
@@ -71,7 +73,7 @@ public class TestJSPDefaultSymbolFactory extends TestCase
 
 	public void testSupports()
 	{
-		JSPDefaultSymbolFactory factory = new JSPDefaultSymbolFactory();
+		final JSPDefaultSymbolFactory factory = new JSPDefaultSymbolFactory();
 
 		// must be a structured document context
 		assertFalse(factory.supports(_testJSP));

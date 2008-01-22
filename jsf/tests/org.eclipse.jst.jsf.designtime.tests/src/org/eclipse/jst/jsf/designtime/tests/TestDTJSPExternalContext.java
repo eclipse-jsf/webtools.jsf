@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import junit.framework.TestCase;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IAdaptable;
@@ -22,24 +24,23 @@ import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.jst.jsf.test.util.TestFileResource;
 import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
 
-import junit.framework.TestCase;
-
 public class TestDTJSPExternalContext extends TestCase 
 {
 	private IFile _testJSP1;
 	private JSFFacetedTestEnvironment _jsfFactedTestEnvironment;
 
-	protected void setUp() throws Exception 
+	@Override
+    protected void setUp() throws Exception 
 	{
         super.setUp();
         JSFTestUtil.setValidationEnabled(false);
         JSFTestUtil.setInternetProxyPreferences(true, "www-proxy.us.oracle.com","80");
 
         final WebProjectTestEnvironment  projectTestEnvironment = 
-            new WebProjectTestEnvironment("TestDTJSPExternalContext"+getName());
+            new WebProjectTestEnvironment(getProjectName());
         projectTestEnvironment.createProject(false);
 
-        JDTTestEnvironment jdtTestEnvironment = 
+        final JDTTestEnvironment jdtTestEnvironment = 
         	new JDTTestEnvironment(projectTestEnvironment);
 
         final TestFileResource input = new TestFileResource();
@@ -49,7 +50,7 @@ public class TestDTJSPExternalContext extends TestCase
         		, new ByteArrayInputStream(input.toBytes())
         		, "bundles", "bundle1.properties");
         
-        IResource res = projectTestEnvironment.loadResourceInWebRoot(DesignTimeTestsPlugin.getDefault().getBundle()
+        final IResource res = projectTestEnvironment.loadResourceInWebRoot(DesignTimeTestsPlugin.getDefault().getBundle()
         		, "/testdata/testdata1.jsp.data", "testdata1.jsp");
         _testJSP1 = (IFile) res;
 
@@ -57,7 +58,8 @@ public class TestDTJSPExternalContext extends TestCase
         _jsfFactedTestEnvironment.initialize(IJSFCoreConstants.FACET_VERSION_1_1);	
     }
 
-	protected void tearDown() throws Exception 
+	@Override
+    protected void tearDown() throws Exception 
 	{
 		super.tearDown();
 	}
@@ -71,8 +73,8 @@ public class TestDTJSPExternalContext extends TestCase
 			final IDTExternalContext externalContext = 
 				manager.getFacesContext(_testJSP1).getDTExternalContext(_testJSP1);
 	
-			Map<String, ISymbol> requestMap = externalContext.getRequestMap();
-			Collection<ISymbol> symbols = requestMap.values();
+			final Map<String, ISymbol> requestMap = externalContext.getRequestMap();
+			final Collection<ISymbol> symbols = requestMap.values();
 			// there is a bundle defined in the test JSP
 			// also a data table row variable
 			assertEquals(2, symbols.size());
@@ -84,22 +86,22 @@ public class TestDTJSPExternalContext extends TestCase
 			final TestableDTJSPExternalContext externalContext =
 				new TestableDTJSPExternalContext(_testJSP1);
 		
-			Map<String, ISymbol> requestMap = externalContext.getRequestMap();
+			final Map<String, ISymbol> requestMap = externalContext.getRequestMap();
 			Collection<ISymbol> symbols = requestMap.values();
 			assertEquals(1, symbols.size());
 			assertContainsVariable(symbols,"requestSymbol");
 
-			Map<String, ISymbol> sessionMap = externalContext.getSessionMap();
+			final Map<String, ISymbol> sessionMap = externalContext.getSessionMap();
 			symbols = sessionMap.values();
 			assertEquals(1, symbols.size());
 			assertContainsVariable(symbols,"sessionSymbol");
 
-			Map<String, ISymbol> applicationMap = externalContext.getApplicationMap();
+			final Map<String, ISymbol> applicationMap = externalContext.getApplicationMap();
 			symbols = applicationMap.values();
 			assertEquals(1, symbols.size());
 			assertContainsVariable(symbols,"applicationSymbol");
 
-			Map<String, ISymbol> noneMap = externalContext.getNoneMap();
+			final Map<String, ISymbol> noneMap = externalContext.getNoneMap();
 			symbols = noneMap.values();
 			assertEquals(1, symbols.size());
 			assertContainsVariable(symbols,"noneSymbol");
@@ -108,10 +110,18 @@ public class TestDTJSPExternalContext extends TestCase
 		}
 	}
 
-
-	private void assertContainsVariable(Collection<ISymbol> variables, String name)
+	public void testGetRequestContextPath()
 	{
-		for (ISymbol variable : variables)
+       final DesignTimeApplicationManager manager = 
+            DesignTimeApplicationManager.getInstance(_testJSP1.getProject());
+       final IDTExternalContext externalContext = 
+                manager.getFacesContext(_testJSP1).getDTExternalContext(_testJSP1);
+       assertTrue(externalContext instanceof DTJSPExternalContext);
+       assertEquals(getProjectName(), externalContext.getRequestContextPath());
+	}
+	private void assertContainsVariable(final Collection<ISymbol> variables, final String name)
+	{
+		for (final ISymbol variable : variables)
 		{
 			if (name.equals(variable.getName()))
 			{
@@ -123,15 +133,20 @@ public class TestDTJSPExternalContext extends TestCase
 		fail("Expected variable not found: "+name);
 	}
 	
+	private String getProjectName()
+	{
+	    return "TestDTJSPExternalContext"+getName();
+	}
+	
 	private class TestableDTJSPExternalContext extends DTJSPExternalContext
 	{
-		protected TestableDTJSPExternalContext(IAdaptable jspFile) 
+		protected TestableDTJSPExternalContext(final IAdaptable jspFile) 
 		{
 			super(jspFile);
 		}
 
 		@Override
-		protected Map<String, ISymbol> doGetMapForScope(int scopeMask) 
+		protected Map<String, ISymbol> doGetMapForScope(final int scopeMask) 
 		{
 			switch(scopeMask)
 			{
@@ -154,7 +169,7 @@ public class TestDTJSPExternalContext extends TestCase
 		private Map<String, ISymbol> initRequestMap()
 		{
 			final Map<String, ISymbol> map = new HashMap<String, ISymbol>();
-			ISymbol  symbol = SymbolFactory.eINSTANCE.createIComponentSymbol();
+			final ISymbol  symbol = SymbolFactory.eINSTANCE.createIComponentSymbol();
 			symbol.setName("requestSymbol");
 			map.put("requestSymbol", symbol);
 			
@@ -165,7 +180,7 @@ public class TestDTJSPExternalContext extends TestCase
 		{
 			final Map<String, ISymbol> map = new HashMap<String, ISymbol>();
 
-			ISymbol  symbol = SymbolFactory.eINSTANCE.createIComponentSymbol();
+			final ISymbol  symbol = SymbolFactory.eINSTANCE.createIComponentSymbol();
 			symbol.setName("sessionSymbol");
 			map.put("sessionSymbol", symbol);
 			
@@ -176,7 +191,7 @@ public class TestDTJSPExternalContext extends TestCase
 		{
 			final Map<String, ISymbol> map = new HashMap<String, ISymbol>();
 
-			ISymbol  symbol = SymbolFactory.eINSTANCE.createIComponentSymbol();
+			final ISymbol  symbol = SymbolFactory.eINSTANCE.createIComponentSymbol();
 			symbol.setName("applicationSymbol");
 			map.put("applicationSymbol", symbol);
 			
@@ -187,7 +202,7 @@ public class TestDTJSPExternalContext extends TestCase
 		{
 			final Map<String, ISymbol> map = new HashMap<String, ISymbol>();
 
-			ISymbol  symbol = SymbolFactory.eINSTANCE.createIComponentSymbol();
+			final ISymbol  symbol = SymbolFactory.eINSTANCE.createIComponentSymbol();
 			symbol.setName("noneSymbol");
 			map.put("noneSymbol", symbol);
 			

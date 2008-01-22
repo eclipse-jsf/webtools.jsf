@@ -42,7 +42,7 @@ public class TestJSPModelProcessor extends TestCase
             new WebProjectTestEnvironment("TestJSPModelProcessor_"+getName());
         projectTestEnvironment.createProject(false);
 
-        JDTTestEnvironment jdtTestEnvironment = 
+        final JDTTestEnvironment jdtTestEnvironment = 
             new JDTTestEnvironment(projectTestEnvironment);
 
         final TestFileResource input = new TestFileResource();
@@ -72,7 +72,7 @@ public class TestJSPModelProcessor extends TestCase
 
     public void testGet() throws Exception
     {
-        JSPModelProcessor processor = JSPModelProcessor.get(_testJSP1);
+        final JSPModelProcessor processor = JSPModelProcessor.get(_testJSP1);
         assertNotNull(processor);
         assertFalse(processor.isDisposed());
     }
@@ -80,7 +80,7 @@ public class TestJSPModelProcessor extends TestCase
     public void testGetMapForScope() throws Exception
     {
         // if we not refreshed yet, then should be no symbols
-        JSPModelProcessor processor = JSPModelProcessor.get(_testJSP1);
+        final JSPModelProcessor processor = JSPModelProcessor.get(_testJSP1);
         assertNotNull(processor);
 
          Map<Object, ISymbol> scopeMap = 
@@ -102,7 +102,7 @@ public class TestJSPModelProcessor extends TestCase
 
     public void testRefreshAndGet() throws Exception
     {
-        IModelManager modelManager = StructuredModelManager.getModelManager();
+        final IModelManager modelManager = StructuredModelManager.getModelManager();
 
         IStructuredModel model = null;
 
@@ -114,7 +114,7 @@ public class TestJSPModelProcessor extends TestCase
             assertFalse(model.isShared());
 
             // if we not refreshed yet, then should be no symbols
-            JSPModelProcessor processor = JSPModelProcessor.get(_testJSP1);
+            final JSPModelProcessor processor = JSPModelProcessor.get(_testJSP1);
             assertNotNull(processor);
             // we should be the only one with a handle
             assertFalse(model.isShared());
@@ -154,7 +154,7 @@ public class TestJSPModelProcessor extends TestCase
         // on it without an editor close event is still disposed of due
         // to the resource change event.
         // if we not refreshed yet, then should be no symbols
-        JSPModelProcessor processor = JSPModelProcessor.get(_testJSP1);
+        final JSPModelProcessor processor = JSPModelProcessor.get(_testJSP1);
         assertNotNull(processor);
         assertFalse(processor.isDisposed());
 
@@ -166,7 +166,7 @@ public class TestJSPModelProcessor extends TestCase
 
     public void testProjectClosure() throws Exception
     {
-        IModelManager modelManager = StructuredModelManager.getModelManager();
+        final IModelManager modelManager = StructuredModelManager.getModelManager();
 
         IStructuredModel model = null;
 
@@ -179,7 +179,7 @@ public class TestJSPModelProcessor extends TestCase
 
             // ensure that if the enclosing project of the associated IFile
             // is closed, then the processor gets disposed
-            JSPModelProcessor processor = JSPModelProcessor.get(_testJSP1);
+            final JSPModelProcessor processor = JSPModelProcessor.get(_testJSP1);
             assertFalse(model.isShared());
             assertNotNull(processor);
             // we should still be the only one with a handle since JSPModelProcessor
@@ -207,7 +207,7 @@ public class TestJSPModelProcessor extends TestCase
 
     public void testProjectDeletion() throws Exception
     {
-        IModelManager modelManager = StructuredModelManager.getModelManager();
+        final IModelManager modelManager = StructuredModelManager.getModelManager();
 
         IStructuredModel model = null;
 
@@ -220,7 +220,7 @@ public class TestJSPModelProcessor extends TestCase
 
             // ensure that if the enclosing project of the associated IFile
             // is deleted, then the processor gets disposed
-            JSPModelProcessor processor = JSPModelProcessor.get(_testJSP1);
+            final JSPModelProcessor processor = JSPModelProcessor.get(_testJSP1);
             assertNotNull(processor);
             assertFalse(processor.isDisposed());
             assertFalse(model.isShared());
@@ -251,11 +251,11 @@ public class TestJSPModelProcessor extends TestCase
         final int order[] = new int[] {6,19,10,16,14,4,13,11,24,2,3,23,20,15,17,9,1,5,22,12,21,8,18,0,7};
         assertEquals(NUM_JSPS, order.length);
 
-        for (int i = 0; i < order.length; i++)
+        for (final int element : order)
         {
-            final IFile file = _jsps.get(order[i]);
+            final IFile file = _jsps.get(element);
 
-            JSPModelProcessor processor = JSPModelProcessor.get(file);
+            final JSPModelProcessor processor = JSPModelProcessor.get(file);
             // the processor model should start out dirty since it won't
             // get refreshed unless the resource detects a change or if
             // it is explicitly refreshed
@@ -279,11 +279,11 @@ public class TestJSPModelProcessor extends TestCase
         final int order[] = new int[] {6,19,10,16,14,4,13,11,24,2,3,23,20,15,17,9,1,5,22,12,21,8,18,0,7};
         assertEquals(NUM_JSPS, order.length);
 
-        for (int i = 0; i < order.length; i++)
+        for (final int element : order)
         {
-            final IFile file = _jsps.get(order[i]);
+            final IFile file = _jsps.get(element);
 
-            JSPModelProcessor processor = JSPModelProcessor.get(file);
+            final JSPModelProcessor processor = JSPModelProcessor.get(file);
             // the processor model should start out dirty since it won't
             // get refreshed unless the resource detects a change or if
             // it is explicitly refreshed
@@ -302,15 +302,15 @@ public class TestJSPModelProcessor extends TestCase
         }
     }
 
-    public static void main(String[] args)
+    public static void main(final String[] args)
     {
-       Set<Integer> set = new TreeSet<Integer>();
+       final Set<Integer> set = new TreeSet<Integer>();
        
-       Random random = new Random();
+       final Random random = new Random();
        
        while(set.size() < NUM_JSPS)
        {
-           Integer value = Integer.valueOf(Math.abs(random.nextInt()) % NUM_JSPS);
+           final Integer value = Integer.valueOf(Math.abs(random.nextInt()) % NUM_JSPS);
            
            if (!set.contains(value))
            {

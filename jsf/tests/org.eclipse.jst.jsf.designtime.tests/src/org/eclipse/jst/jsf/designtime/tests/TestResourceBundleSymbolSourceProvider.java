@@ -3,7 +3,6 @@ package org.eclipse.jst.jsf.designtime.tests;
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 import junit.framework.TestCase;
@@ -94,11 +93,11 @@ public class TestResourceBundleSymbolSourceProvider extends TestCase
 		final ResourceBundleSymbolSourceProvider  sourceProvider =
 			new ResourceBundleSymbolSourceProvider();
 		
-		ISymbol[]  symbols = 
+		final ISymbol[]  symbols = 
 			sourceProvider.getSymbols(_testJSP, ISymbolConstants.SYMBOL_SCOPE_ALL);
 		assertEquals(2, symbols.length);
 		
-		List<String>  testProps = new ArrayList<String>();
+		final List<String>  testProps = new ArrayList<String>();
 		testProps.add("prop1");
 		// these two are dotted and so only the first segment is used in the base property
         testProps.add("one");
@@ -116,26 +115,26 @@ public class TestResourceBundleSymbolSourceProvider extends TestCase
 	}
 
 	@SuppressWarnings({ "unchecked"})
-    private void assertContains(ISymbol[] symbols, final String varName,List<String> properties)
+    private void assertContains(final ISymbol[] symbols, final String varName,final List<String> properties)
 	{
-	    List<String>  copyProperties = new ArrayList<String>(properties);
-	    List<String>  propsNotFound = new ArrayList<String>();
+	    final List<String>  copyProperties = new ArrayList<String>(properties);
+	    final List<String>  propsNotFound = new ArrayList<String>();
 	    
 	    boolean  foundSymbol = false;
 	    
-	    for (ISymbol symbol : symbols)
+	    for (final ISymbol symbol : symbols)
 	    {
 	        if (varName.equals(symbol.getName()))
 	        {
 	            foundSymbol = true;
 	            assertTrue(symbol instanceof IInstanceSymbol);
-	            IInstanceSymbol varSymbol = (IInstanceSymbol) symbol;
-	            List<IPropertySymbol> props = 
+	            final IInstanceSymbol varSymbol = (IInstanceSymbol) symbol;
+	            final List<IPropertySymbol> props = 
 	                varSymbol.getTypeDescriptor().getProperties();
 
-	            for (Iterator it = props.iterator(); it.hasNext();)
-	            {
-	                IPropertySymbol prop = (IPropertySymbol) it.next();
+	            for (final Object element : props)
+                {
+	                final IPropertySymbol prop = (IPropertySymbol) element;
 	                if (copyProperties.contains(prop.getName()))
 	                {
 	                    copyProperties.remove(prop.getName());

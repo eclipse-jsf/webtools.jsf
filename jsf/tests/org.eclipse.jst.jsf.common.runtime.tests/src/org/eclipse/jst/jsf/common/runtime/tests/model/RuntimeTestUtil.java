@@ -5,7 +5,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import junit.framework.Assert;
 
@@ -36,36 +38,77 @@ public final class RuntimeTestUtil extends Assert
     // expected type info for jsf/core components
     public static final ComponentTypeInfo COMPINFO_PARAM = new ComponentTypeInfo(
             "javax.faces.Parameter", "javax.faces.component.UIParameter",
-            "javax.faces.Parameter", null);
+            new String[]
+            { "javax.faces.component.UIComponentBase",
+                    "javax.faces.component.UIComponent", "java.lang.Object", },
+            new String[]
+            { "javax.faces.component.StateHolder", }, "javax.faces.Parameter",
+            null);
 
     public static final ComponentTypeInfo COMPINFO_SELECTITEM = new ComponentTypeInfo(
             "javax.faces.SelectItem", "javax.faces.component.UISelectItem",
-            "javax.faces.SelectItem", null);
+            new String[]
+            { "javax.faces.component.UIComponentBase",
+                    "javax.faces.component.UIComponent", "java.lang.Object", },
+            new String[]
+            { "javax.faces.component.StateHolder", }, "javax.faces.SelectItem",
+            null);
 
     public static final ComponentTypeInfo COMPINFO_SELECTITEMS = new ComponentTypeInfo(
             "javax.faces.SelectItems", "javax.faces.component.UISelectItems",
+            new String[]
+            { "javax.faces.component.UIComponentBase",
+                    "javax.faces.component.UIComponent", "java.lang.Object", },
+            new String[]
+            { "javax.faces.component.StateHolder", },
             "javax.faces.SelectItems", null);
 
     public static final ComponentTypeInfo COMPINFO_SUBVIEW = new ComponentTypeInfo(
             "javax.faces.NamingContainer",
-            "javax.faces.component.UINamingContainer",
+            "javax.faces.component.UINamingContainer", new String[]
+            { "javax.faces.component.UIComponentBase",
+                    "javax.faces.component.UIComponent", "java.lang.Object", },
+            new String[]
+            { "javax.faces.component.NamingContainer",
+                    "javax.faces.component.StateHolder", },
             "javax.faces.NamingContainer", null);
 
     public static final ComponentTypeInfo COMPINFO_VERBATIM = new ComponentTypeInfo(
             "javax.faces.Output", "javax.faces.component.UIOutput",
+            new String[]
+            { "javax.faces.component.UIComponentBase",
+                    "javax.faces.component.UIComponent", "java.lang.Object", },
+            new String[]
+            { "javax.faces.component.ValueHolder",
+                    "javax.faces.component.StateHolder", },
             "javax.faces.Output", "javax.faces.Text");
 
     public static final ComponentTypeInfo COMPINFO_VIEW = new ComponentTypeInfo(
             "javax.faces.ViewRoot", "javax.faces.component.UIViewRoot",
-            "javax.faces.ViewRoot", null);
+            new String[]
+            { "javax.faces.component.UIComponentBase",
+                    "javax.faces.component.UIComponent", "java.lang.Object", },
+            new String[]
+            { "javax.faces.component.StateHolder", }, "javax.faces.ViewRoot",
+            null);
 
     // expected type info for jsf/html components
     public static final ComponentTypeInfo COMPINFO_COLUMN = new ComponentTypeInfo(
             "javax.faces.Column", "javax.faces.component.UIColumn",
-            "javax.faces.Column", null);
+            new String[]
+            { "javax.faces.component.UIComponentBase",
+                    "javax.faces.component.UIComponent", "java.lang.Object" },
+            new String[]
+            { "javax.faces.component.StateHolder" }, "javax.faces.Column", null);
     public static final ComponentTypeInfo COMPINFO_COMMAND = new ComponentTypeInfo(
             "javax.faces.HtmlCommandButton",
-            "javax.faces.component.html.HtmlCommandButton",
+            "javax.faces.component.html.HtmlCommandButton", new String[]
+            { "javax.faces.component.UICommand",
+                    "javax.faces.component.UIComponentBase",
+                    "javax.faces.component.UIComponent", "java.lang.Object" },
+            new String[]
+            { "javax.faces.component.ActionSource",
+                    "javax.faces.component.StateHolder" },
             "javax.faces.Command", "javax.faces.Button");
     public static final ComponentTypeInfo COMPINFO_COMMANDLINK = new ComponentTypeInfo(
             "javax.faces.HtmlCommandLink",
@@ -73,93 +116,250 @@ public final class RuntimeTestUtil extends Assert
             "javax.faces.Command", "javax.faces.Link");
     public static final ComponentTypeInfo COMPINFO_DATATABLE = new ComponentTypeInfo(
             "javax.faces.HtmlDataTable",
-            "javax.faces.component.html.HtmlDataTable",
-            "javax.faces.Data", "javax.faces.Table");
+            "javax.faces.component.html.HtmlDataTable", new String[]
+            { "javax.faces.component.UIData",
+                    "javax.faces.component.UIComponentBase",
+                    "javax.faces.component.UIComponent", "java.lang.Object" },
+            new String[]
+            { "javax.faces.component.NamingContainer",
+                    "javax.faces.component.StateHolder", }, "javax.faces.Data",
+            "javax.faces.Table");
     public static final ComponentTypeInfo COMPINFO_FORM = new ComponentTypeInfo(
-            "javax.faces.HtmlForm",
-            "javax.faces.component.html.HtmlForm",
-            "javax.faces.Form", "javax.faces.Form");
+            "javax.faces.HtmlForm", "javax.faces.component.html.HtmlForm",
+            new String[]
+            { "javax.faces.component.UIForm",
+                    "javax.faces.component.UIComponentBase",
+                    "javax.faces.component.UIComponent", "java.lang.Object" },
+            new String[]
+            { "javax.faces.component.NamingContainer",
+                    "javax.faces.component.StateHolder" }, "javax.faces.Form",
+            "javax.faces.Form");
     public static final ComponentTypeInfo COMPINFO_GRAPHIC = new ComponentTypeInfo(
             "javax.faces.HtmlGraphicImage",
-            "javax.faces.component.html.HtmlGraphicImage",
-            "javax.faces.Graphic", "javax.faces.Image");
+            "javax.faces.component.html.HtmlGraphicImage", new String[]
+            { "javax.faces.component.UIGraphic",
+                    "javax.faces.component.UIComponentBase",
+                    "javax.faces.component.UIComponent", "java.lang.Object", },
+            new String[]
+            { "javax.faces.component.StateHolder", }, "javax.faces.Graphic",
+            "javax.faces.Image");
     public static final ComponentTypeInfo COMPINFO_HIDDEN = new ComponentTypeInfo(
             "javax.faces.HtmlInputHidden",
-            "javax.faces.component.html.HtmlInputHidden",
+            "javax.faces.component.html.HtmlInputHidden", new String[]
+            { "javax.faces.component.UIInput",
+                    "javax.faces.component.UIOutput",
+                    "javax.faces.component.UIComponentBase",
+                    "javax.faces.component.UIComponent", "java.lang.Object", },
+            new String[]
+            { "javax.faces.component.EditableValueHolder",
+                    "javax.faces.component.ValueHolder",
+                    "javax.faces.component.StateHolder", },
             "javax.faces.Input", "javax.faces.Hidden");
     public static final ComponentTypeInfo COMPINFO_SECRET = new ComponentTypeInfo(
             "javax.faces.HtmlInputSecret",
-            "javax.faces.component.html.HtmlInputSecret",
-            "javax.faces.Input", "javax.faces.Secret");
+            "javax.faces.component.html.HtmlInputSecret", new String[]
+            { "javax.faces.component.UIInput",
+                    "javax.faces.component.UIOutput",
+                    "javax.faces.component.UIComponentBase",
+                    "javax.faces.component.UIComponent", "java.lang.Object", },
+            new String[]
+            { "javax.faces.component.EditableValueHolder",
+                    "javax.faces.component.ValueHolder",
+                    "javax.faces.component.StateHolder" }, "javax.faces.Input",
+            "javax.faces.Secret");
     public static final ComponentTypeInfo COMPINFO_INPUTTEXT = new ComponentTypeInfo(
             "javax.faces.HtmlInputText",
-            "javax.faces.component.html.HtmlInputText",
-            "javax.faces.Input", "javax.faces.Text");
+            "javax.faces.component.html.HtmlInputText", new String[]
+            { "javax.faces.component.UIInput",
+                    "javax.faces.component.UIOutput",
+                    "javax.faces.component.UIComponentBase",
+                    "javax.faces.component.UIComponent", "java.lang.Object" },
+            new String[]
+            { "javax.faces.component.EditableValueHolder",
+                    "javax.faces.component.ValueHolder",
+                    "javax.faces.component.StateHolder" }, "javax.faces.Input",
+            "javax.faces.Text");
     public static final ComponentTypeInfo COMPINFO_INPUTTEXTAREA = new ComponentTypeInfo(
             "javax.faces.HtmlInputTextarea",
-            "javax.faces.component.html.HtmlInputTextarea",
+            "javax.faces.component.html.HtmlInputTextarea", new String[]
+            { "javax.faces.component.UIInput",
+                    "javax.faces.component.UIOutput",
+                    "javax.faces.component.UIComponentBase",
+                    "javax.faces.component.UIComponent", "java.lang.Object", },
+            new String[]
+            { "javax.faces.component.EditableValueHolder",
+                    "javax.faces.component.ValueHolder",
+                    "javax.faces.component.StateHolder", },
             "javax.faces.Input", "javax.faces.Textarea");
     public static final ComponentTypeInfo COMPINFO_MESSAGE = new ComponentTypeInfo(
             "javax.faces.HtmlMessage",
-            "javax.faces.component.html.HtmlMessage",
-            "javax.faces.Message", "javax.faces.Message");
+            "javax.faces.component.html.HtmlMessage", new String[]
+            { "javax.faces.component.UIMessage",
+                    "javax.faces.component.UIComponentBase",
+                    "javax.faces.component.UIComponent", "java.lang.Object", },
+            new String[]
+            { "javax.faces.component.StateHolder", }, "javax.faces.Message",
+            "javax.faces.Message");
     public static final ComponentTypeInfo COMPINFO_MESSAGES = new ComponentTypeInfo(
             "javax.faces.HtmlMessages",
-            "javax.faces.component.html.HtmlMessages",
-            "javax.faces.Messages", "javax.faces.Messages");
+            "javax.faces.component.html.HtmlMessages", new String[]
+            { "javax.faces.component.UIMessages",
+                    "javax.faces.component.UIComponentBase",
+                    "javax.faces.component.UIComponent", "java.lang.Object", },
+            new String[]
+            { "javax.faces.component.StateHolder", }, "javax.faces.Messages",
+            "javax.faces.Messages");
     public static final ComponentTypeInfo COMPINFO_OUTPUTFORMAT = new ComponentTypeInfo(
             "javax.faces.HtmlOutputFormat",
-            "javax.faces.component.html.HtmlOutputFormat",
+            "javax.faces.component.html.HtmlOutputFormat", new String[]
+            { "javax.faces.component.UIOutput",
+                    "javax.faces.component.UIComponentBase",
+                    "javax.faces.component.UIComponent", "java.lang.Object", },
+            new String[]
+            { "javax.faces.component.ValueHolder",
+                    "javax.faces.component.StateHolder", },
             "javax.faces.Output", "javax.faces.Format");
     public static final ComponentTypeInfo COMPINFO_OUTPUTLABEL = new ComponentTypeInfo(
             "javax.faces.HtmlOutputLabel",
-            "javax.faces.component.html.HtmlOutputLabel",
+            "javax.faces.component.html.HtmlOutputLabel", new String[]
+            { "javax.faces.component.UIOutput",
+                    "javax.faces.component.UIComponentBase",
+                    "javax.faces.component.UIComponent", "java.lang.Object", },
+            new String[]
+            { "javax.faces.component.ValueHolder",
+                    "javax.faces.component.StateHolder", },
             "javax.faces.Output", "javax.faces.Label");
     public static final ComponentTypeInfo COMPINFO_OUTPUTLINK = new ComponentTypeInfo(
             "javax.faces.HtmlOutputLink",
-            "javax.faces.component.html.HtmlOutputLink",
+            "javax.faces.component.html.HtmlOutputLink", new String[]
+            { "javax.faces.component.UIOutput",
+                    "javax.faces.component.UIComponentBase",
+                    "javax.faces.component.UIComponent", "java.lang.Object", },
+            new String[]
+            { "javax.faces.component.ValueHolder",
+                    "javax.faces.component.StateHolder", },
             "javax.faces.Output", "javax.faces.Link");
     public static final ComponentTypeInfo COMPINFO_OUTPUTTEXT = new ComponentTypeInfo(
             "javax.faces.HtmlOutputText",
-            "javax.faces.component.html.HtmlOutputText",
+            "javax.faces.component.html.HtmlOutputText", new String[]
+            { "javax.faces.component.UIOutput",
+                    "javax.faces.component.UIComponentBase",
+                    "javax.faces.component.UIComponent", "java.lang.Object", },
+            new String[]
+            { "javax.faces.component.ValueHolder",
+                    "javax.faces.component.StateHolder", },
             "javax.faces.Output", "javax.faces.Text");
     public static final ComponentTypeInfo COMPINFO_PANELGRID = new ComponentTypeInfo(
             "javax.faces.HtmlPanelGrid",
-            "javax.faces.component.html.HtmlPanelGrid",
-            "javax.faces.Panel", "javax.faces.Grid");
+            "javax.faces.component.html.HtmlPanelGrid", new String[]
+            { "javax.faces.component.UIPanel",
+                    "javax.faces.component.UIComponentBase",
+                    "javax.faces.component.UIComponent", "java.lang.Object", },
+            new String[]
+            { "javax.faces.component.StateHolder", }, "javax.faces.Panel",
+            "javax.faces.Grid");
     public static final ComponentTypeInfo COMPINFO_PANELGROUP = new ComponentTypeInfo(
             "javax.faces.HtmlPanelGroup",
-            "javax.faces.component.html.HtmlPanelGroup",
-            "javax.faces.Panel", "javax.faces.Group");
+            "javax.faces.component.html.HtmlPanelGroup", new String[]
+            { "javax.faces.component.UIPanel",
+                    "javax.faces.component.UIComponentBase",
+                    "javax.faces.component.UIComponent", "java.lang.Object", },
+            new String[]
+            { "javax.faces.component.StateHolder", }, "javax.faces.Panel",
+            "javax.faces.Group");
     public static final ComponentTypeInfo COMPINFO_SELECTBOOLEANCHECKBOX = new ComponentTypeInfo(
             "javax.faces.HtmlSelectBooleanCheckbox",
             "javax.faces.component.html.HtmlSelectBooleanCheckbox",
+            new String[]
+            { "javax.faces.component.UISelectBoolean",
+                    "javax.faces.component.UIInput",
+                    "javax.faces.component.UIOutput",
+                    "javax.faces.component.UIComponentBase",
+                    "javax.faces.component.UIComponent", "java.lang.Object", },
+            new String[]
+            { "javax.faces.component.EditableValueHolder",
+                    "javax.faces.component.ValueHolder",
+                    "javax.faces.component.StateHolder", },
             "javax.faces.SelectBoolean", "javax.faces.Checkbox");
     public static final ComponentTypeInfo COMPINFO_SELECTMANYCHECKBOX = new ComponentTypeInfo(
             "javax.faces.HtmlSelectManyCheckbox",
-            "javax.faces.component.html.HtmlSelectManyCheckbox",
+            "javax.faces.component.html.HtmlSelectManyCheckbox", new String[]
+            { "javax.faces.component.UISelectMany",
+                    "javax.faces.component.UIInput",
+                    "javax.faces.component.UIOutput",
+                    "javax.faces.component.UIComponentBase",
+                    "javax.faces.component.UIComponent", "java.lang.Object", },
+            new String[]
+            { "javax.faces.component.EditableValueHolder",
+                    "javax.faces.component.ValueHolder",
+                    "javax.faces.component.StateHolder", },
             "javax.faces.SelectMany", "javax.faces.Checkbox");
     public static final ComponentTypeInfo COMPINFO_SELECTMANYLISTBOX = new ComponentTypeInfo(
             "javax.faces.HtmlSelectManyListbox",
-            "javax.faces.component.html.HtmlSelectManyListbox",
+            "javax.faces.component.html.HtmlSelectManyListbox", new String[]
+            { "javax.faces.component.UISelectMany",
+                    "javax.faces.component.UIInput",
+                    "javax.faces.component.UIOutput",
+                    "javax.faces.component.UIComponentBase",
+                    "javax.faces.component.UIComponent", "java.lang.Object", },
+            new String[]
+            { "javax.faces.component.EditableValueHolder",
+                    "javax.faces.component.ValueHolder",
+                    "javax.faces.component.StateHolder", },
             "javax.faces.SelectMany", "javax.faces.Listbox");
     public static final ComponentTypeInfo COMPINFO_SELECTMANYMENU = new ComponentTypeInfo(
             "javax.faces.HtmlSelectManyMenu",
-            "javax.faces.component.html.HtmlSelectManyMenu",
+            "javax.faces.component.html.HtmlSelectManyMenu", new String[]
+            { "javax.faces.component.UISelectMany",
+                    "javax.faces.component.UIInput",
+                    "javax.faces.component.UIOutput",
+                    "javax.faces.component.UIComponentBase",
+                    "javax.faces.component.UIComponent", "java.lang.Object", },
+            new String[]
+            { "javax.faces.component.EditableValueHolder",
+                    "javax.faces.component.ValueHolder",
+                    "javax.faces.component.StateHolder", },
             "javax.faces.SelectMany", "javax.faces.Menu");
     public static final ComponentTypeInfo COMPINFO_SELECTONELISTBOX = new ComponentTypeInfo(
             "javax.faces.HtmlSelectOneListbox",
-            "javax.faces.component.html.HtmlSelectOneListbox",
+            "javax.faces.component.html.HtmlSelectOneListbox", new String[]
+            { "javax.faces.component.UISelectOne",
+                    "javax.faces.component.UIInput",
+                    "javax.faces.component.UIOutput",
+                    "javax.faces.component.UIComponentBase",
+                    "javax.faces.component.UIComponent", "java.lang.Object", },
+            new String[]
+            { "javax.faces.component.EditableValueHolder",
+                    "javax.faces.component.ValueHolder",
+                    "javax.faces.component.StateHolder", },
             "javax.faces.SelectOne", "javax.faces.Listbox");
     public static final ComponentTypeInfo COMPINFO_SELECTONEMENU = new ComponentTypeInfo(
             "javax.faces.HtmlSelectOneMenu",
-            "javax.faces.component.html.HtmlSelectOneMenu",
+            "javax.faces.component.html.HtmlSelectOneMenu", new String[]
+            { "javax.faces.component.UISelectOne",
+                    "javax.faces.component.UIInput",
+                    "javax.faces.component.UIOutput",
+                    "javax.faces.component.UIComponentBase",
+                    "javax.faces.component.UIComponent", "java.lang.Object", },
+            new String[]
+            { "javax.faces.component.EditableValueHolder",
+                    "javax.faces.component.ValueHolder",
+                    "javax.faces.component.StateHolder", },
             "javax.faces.SelectOne", "javax.faces.Menu");
     public static final ComponentTypeInfo COMPINFO_SELECTONERADIO = new ComponentTypeInfo(
             "javax.faces.HtmlSelectOneRadio",
-            "javax.faces.component.html.HtmlSelectOneRadio",
+            "javax.faces.component.html.HtmlSelectOneRadio", new String[]
+            { "javax.faces.component.UISelectOne",
+                    "javax.faces.component.UIInput",
+                    "javax.faces.component.UIOutput",
+                    "javax.faces.component.UIComponentBase",
+                    "javax.faces.component.UIComponent", "java.lang.Object", },
+            new String[]
+            { "javax.faces.component.EditableValueHolder",
+                    "javax.faces.component.ValueHolder",
+                    "javax.faces.component.StateHolder", },
             "javax.faces.SelectOne", "javax.faces.Radio");
-    
+
     // default converters
     public static final ConverterTypeInfo CONVERTERINFO_DATETIME = new ConverterTypeInfo(
             "javax.faces.convert.DateTimeConverter", "javax.faces.DateTime");
@@ -205,10 +405,21 @@ public final class RuntimeTestUtil extends Assert
             final Class adapterType, final Object explicitAdapter)
     {
         assertEquals(check, check.getAdapter(adapterType));
-        // assert override by explicit adapter
-        check.addAdapter(adapterType, explicitAdapter);
-        assertEquals(explicitAdapter, check.getAdapter(adapterType));
-        assertEquals(explicitAdapter, check.removeAdapter(adapterType));
+        // cannot add explicit adapter if check is already that type
+        boolean caughtException = false;
+        
+        try
+        {
+            check.addAdapter(adapterType, explicitAdapter);
+        }
+        catch (IllegalArgumentException iae)
+        {
+            caughtException = true;
+        }
+        
+        assertTrue(caughtException);
+
+        // should be unaffected by the attempt
         assertEquals(check, check.getAdapter(adapterType));
     }
 
@@ -229,8 +440,28 @@ public final class RuntimeTestUtil extends Assert
         assertEquals(truth.getComponentFamily(), check.getComponentFamily());
         assertEquals(truth.getComponentType(), check.getComponentType());
         assertEquals(truth.getRenderFamily(), check.getRenderFamily());
+        
+        verifyArraysSame(truth.getInterfaces(), check.getInterfaces());
+        verifyArraysSame(truth.getSuperClasses(), check.getSuperClasses());
     }
 
+    public static <T> void verifyArraysSame(T[]  expected, T[] check)
+    {
+        assertEquals("Arrays must be same size", expected.length, check.length);
+        
+        Set<T>  expectedValues = new HashSet<T>();
+        
+        for (final T e : expected)
+        {
+            expectedValues.add(e);
+        }
+        
+        for (final T e : check)
+        {
+            assertTrue("Must contain "+e,expectedValues.contains(e));
+        }
+    }
+    
     public static void verifySame(final DataModelInfo truth,
             final DataModelInfo check)
     {
@@ -299,10 +530,11 @@ public final class RuntimeTestUtil extends Assert
 
         assertEquals(truth.getId(), check.getId());
         assertEquals(truth.isRendered(), check.isRendered());
-        assertEquals(truth.getMostSpecificComponentName(), check
-                .getMostSpecificComponentName());
+//        assertEquals(truth.getMostSpecificComponentName(), check
+//                .getMostSpecificComponentName());
         // assertEquals(truth.getParent(), t);
-        //TestRenderNode.verifySame(truth.getRenderNode(), check.getRenderNode());
+        // TestRenderNode.verifySame(truth.getRenderNode(),
+        // check.getRenderNode());
 
         assertEquals(truth.getChildren().size(), check.getChildren().size());
 

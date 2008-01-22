@@ -34,6 +34,7 @@ public class TestStartupHandler extends TestCase
 	private WebProjectTestEnvironment _projectTestEnvironment;
     private JSFFacetedTestEnvironment _jsfFactedTestEnvironment;
 
+    @Override
     protected void setUp() throws Exception 
     {
         super.setUp();
@@ -44,7 +45,7 @@ public class TestStartupHandler extends TestCase
             new WebProjectTestEnvironment("TestStartupHandler_"+getName());
         _projectTestEnvironment.createProject(false);
 
-        JDTTestEnvironment jdtTestEnvironment = 
+        final JDTTestEnvironment jdtTestEnvironment = 
             new JDTTestEnvironment(_projectTestEnvironment);
 
         final TestFileResource input = new TestFileResource();
@@ -54,7 +55,7 @@ public class TestStartupHandler extends TestCase
                 , new ByteArrayInputStream(input.toBytes())
                 , "bundles", "bundle1.properties");
         
-        IResource res = _projectTestEnvironment.loadResourceInWebRoot(DesignTimeTestsPlugin.getDefault().getBundle()
+        final IResource res = _projectTestEnvironment.loadResourceInWebRoot(DesignTimeTestsPlugin.getDefault().getBundle()
                 , "/testdata/testdata1.jsp.data", "testdata1.jsp");
         _testJSP1 = (IFile) res;
 
@@ -62,6 +63,7 @@ public class TestStartupHandler extends TestCase
         _jsfFactedTestEnvironment.initialize(IJSFCoreConstants.FACET_VERSION_1_1);    
     }
 
+    @Override
     protected void tearDown() throws Exception 
     {
         super.tearDown();
@@ -79,7 +81,7 @@ public class TestStartupHandler extends TestCase
         final IEditorPart foundEditor = ResourceUtil.findEditor(curPage, _testJSP1);
         assertEquals(editor, foundEditor);
         
-        JSPModelProcessor  processor = JSPModelProcessor.get(_testJSP1);
+        final JSPModelProcessor  processor = JSPModelProcessor.get(_testJSP1);
         // should have a second reference due to the open editor
         assertNotNull(processor);
         assertFalse(processor.isDisposed());
@@ -88,7 +90,7 @@ public class TestStartupHandler extends TestCase
         // closing the editor part should have no effect on the processor
         // being disposed
         assertFalse(processor.isDisposed());
-        JSPModelProcessor notDuplicate = JSPModelProcessor.get(_testJSP1);
+        final JSPModelProcessor notDuplicate = JSPModelProcessor.get(_testJSP1);
         assertEquals(processor, notDuplicate);
     }
 

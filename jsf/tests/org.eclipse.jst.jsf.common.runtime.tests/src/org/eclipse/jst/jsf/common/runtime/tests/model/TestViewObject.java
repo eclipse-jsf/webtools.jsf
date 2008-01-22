@@ -14,7 +14,8 @@ import junit.framework.TestCase;
 import org.eclipse.jst.jsf.common.runtime.internal.model.ViewObject;
 import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.Decorator;
 
-public class TestViewObject extends TestCase {
+public class TestViewObject extends TestCase
+{
 
     private MockAdapter _adapter1;
     private MockAdapter _adapter2;
@@ -23,7 +24,8 @@ public class TestViewObject extends TestCase {
     private ViewObject _viewObject1;
 
     @Override
-    protected void setUp() throws Exception {
+    protected void setUp() throws Exception
+    {
         super.setUp();
 
         _decorator1 = new MockDecorator();
@@ -34,18 +36,19 @@ public class TestViewObject extends TestCase {
     }
 
     @Override
-    protected void tearDown() throws Exception {
+    protected void tearDown() throws Exception
+    {
         super.tearDown();
     }
 
     @SuppressWarnings("unchecked")
-    public void testGetAllDecorators() {
+    public void testGetAllDecorators()
+    {
         // we have not added anything so we should get an empty
         // immutable list
         List allDecorators = _viewObject1.getAllDecorators();
         assertSizeAndImmutable(allDecorators, 0);
-        
-        
+
         // add the decorators; use different keys
         _viewObject1.addDecorator(_decorator1, Decorator.class);
         _viewObject1.addDecorator(_decorator2, String.class);
@@ -57,7 +60,7 @@ public class TestViewObject extends TestCase {
         assertTrue(allDecorators.contains(_decorator1));
         assertTrue(allDecorators.contains(_decorator2));
     }
-    
+
     @SuppressWarnings("unchecked")
     public void testGetAllAdapters()
     {
@@ -65,73 +68,76 @@ public class TestViewObject extends TestCase {
         // immutable list
         Map allAdapters = _viewObject1.getAllAdapters();
         assertSizeAndImmutable(allAdapters, 0);
-        
-        
+
         // add the decorators; use different keys
-        _viewObject1.addAdapter(Object.class, _adapter1);
+        // _viewObject1.addAdapter(Object.class, _adapter1);
         _viewObject1.addAdapter(MockAdapter.class, _adapter2);
 
         allAdapters = _viewObject1.getAllAdapters();
 
-        assertSizeAndImmutable(allAdapters, 2);
+        assertSizeAndImmutable(allAdapters, 1);
 
-        assertEquals(_adapter1, allAdapters.get(Object.class));
+        //assertEquals(_adapter1, allAdapters.get(Object.class));
         assertEquals(_adapter2, allAdapters.get(MockAdapter.class));
     }
 
     @SuppressWarnings("unchecked")
-    public void testGetDecorators() 
+    public void testGetDecorators()
     {
         // haven't added anything yet, so all should be empty immutable
         assertSizeAndImmutable(_viewObject1.getDecorators(Decorator.class), 0);
-        assertSizeAndImmutable(_viewObject1.getDecorators(MockDecorator.class), 0);
+        assertSizeAndImmutable(_viewObject1.getDecorators(MockDecorator.class),
+                0);
         assertSizeAndImmutable(_viewObject1.getDecorators(String.class), 0);
-        
+
         // just add using self class key
         _viewObject1.addDecorator(_decorator1);
         _viewObject1.addDecorator(_decorator2);
-        
+
         List decorators = _viewObject1.getDecorators(_decorator1.getClass());
-        assertSizeAndImmutable(decorators,2);
+        assertSizeAndImmutable(decorators, 2);
         assertTrue(decorators.contains(_decorator1));
         assertTrue(decorators.contains(_decorator2));
-        
+
         // wrong key
         assertFalse(_viewObject1.removeDecorator(_decorator1, Decorator.class));
-        assertSizeAndImmutable(decorators,2);
+        assertSizeAndImmutable(decorators, 2);
 
-        //right keys
-        assertTrue(_viewObject1.removeDecorator(_decorator1, _decorator1.getClass()));
-        assertTrue(_viewObject1.removeDecorator(_decorator2, _decorator1.getClass()));
-        assertSizeAndImmutable(decorators,0);
+        // right keys
+        assertTrue(_viewObject1.removeDecorator(_decorator1, _decorator1
+                .getClass()));
+        assertTrue(_viewObject1.removeDecorator(_decorator2, _decorator1
+                .getClass()));
+        assertSizeAndImmutable(decorators, 0);
 
         // reset view Object and do the same with direct class keys
         _viewObject1 = new MockViewObject();
-        
+
         _viewObject1.addDecorator(_decorator1, MockDecorator.class);
         _viewObject1.addDecorator(_decorator2, MockDecorator.class);
-        
+
         decorators = _viewObject1.getDecorators(_decorator1.getClass());
-        assertSizeAndImmutable(decorators,2);
+        assertSizeAndImmutable(decorators, 2);
         assertTrue(decorators.contains(_decorator1));
         assertTrue(decorators.contains(_decorator2));
-        
-        assertTrue(_viewObject1.removeDecorator(_decorator1, _decorator1.getClass()));
-        assertTrue(_viewObject1.removeDecorator(_decorator2, _decorator1.getClass()));
-        assertSizeAndImmutable(decorators,0);
 
-        
+        assertTrue(_viewObject1.removeDecorator(_decorator1, _decorator1
+                .getClass()));
+        assertTrue(_viewObject1.removeDecorator(_decorator2, _decorator1
+                .getClass()));
+        assertSizeAndImmutable(decorators, 0);
+
         // store under different keys
         _viewObject1 = new MockViewObject();
-        
+
         _viewObject1.addDecorator(_decorator1, Decorator.class);
         _viewObject1.addDecorator(_decorator2);
-        
+
         // should only be on since _decorator2 was added under its own class
         decorators = _viewObject1.getDecorators(Decorator.class);
         assertSizeAndImmutable(decorators, 1);
         assertTrue(decorators.contains(_decorator1));
-        
+
         decorators = _viewObject1.getDecorators(MockDecorator.class);
         assertSizeAndImmutable(decorators, 1);
         assertTrue(decorators.contains(_decorator2));
@@ -140,80 +146,81 @@ public class TestViewObject extends TestCase {
     public void testNullDecoratorArgs()
     {
         boolean isOk = false;
-     // try to add a null decorator        
+        // try to add a null decorator
         try
         {
             _viewObject1.addDecorator(null);
         }
-        catch (IllegalArgumentException iae)
+        catch (final IllegalArgumentException iae)
         {
             isOk = true;
         }
         assertTrue(isOk);
         assertTrue(_viewObject1.getDecorators(null).isEmpty());
-        
-    // try to add a decorator with a null class
+
+        // try to add a decorator with a null class
         isOk = false;
         try
         {
             _viewObject1.addDecorator(_decorator1, null);
         }
-        catch (IllegalArgumentException iae)
+        catch (final IllegalArgumentException iae)
         {
             isOk = true;
         }
         assertTrue(isOk);
         assertTrue(_viewObject1.getDecorators(null).isEmpty());
-        
-    // try to remove null decorator
+
+        // try to remove null decorator
         isOk = false;
         try
         {
             _viewObject1.removeDecorator(null, Decorator.class);
         }
-        catch (IllegalArgumentException iae)
+        catch (final IllegalArgumentException iae)
         {
             isOk = true;
         }
         assertTrue(isOk);
-    // try to remove decorator with null key
+        // try to remove decorator with null key
         isOk = false;
         try
         {
             _viewObject1.removeDecorator(_decorator1, null);
         }
-        catch (IllegalArgumentException iae)
+        catch (final IllegalArgumentException iae)
         {
             isOk = true;
         }
         assertTrue(isOk);
     }
-    
-    
-    public void testGetAdapter() {
+
+    public void testGetAdapter()
+    {
         // should have no adapters
         assertNull(_viewObject1.getAdapter(MockAdapter.class));
         assertNull(_viewObject1.getAdapter(String.class));
         assertNull(_viewObject1.getAdapter(MockDecorator.class));
-        
+
         // now add the adapters under the same keys
         _viewObject1.addAdapter(MockAdapter.class, _adapter1);
         assertEquals(_adapter1, _viewObject1.getAdapter(MockAdapter.class));
         _viewObject1.addAdapter(MockAdapter.class, _adapter2);
         assertEquals(_adapter2, _viewObject1.getAdapter(MockAdapter.class));
-        
+
         // now try class and sub-class
         _viewObject1.addAdapter(MockDecorator.class, _decorator1);
         assertEquals(_decorator1, _viewObject1.getAdapter(MockDecorator.class));
         assertNull(_viewObject1.getAdapter(Decorator.class));
-        assertEquals(_decorator1, _viewObject1.removeAdapter(MockDecorator.class));
+        assertEquals(_decorator1, _viewObject1
+                .removeAdapter(MockDecorator.class));
         // ok to add as a decorator because MockDecorator -> Decorator
         _viewObject1.addAdapter(Decorator.class, _decorator1);
         assertEquals(_decorator1, _viewObject1.getAdapter(Decorator.class));
         // this was removed above and should have been readded
         assertNull(_viewObject1.getAdapter(MockDecorator.class));
         assertEquals(_decorator1, _viewObject1.removeAdapter(Decorator.class));
-        
+
         // test assertion conditions
         boolean assertionOk = false;
         try
@@ -221,14 +228,14 @@ public class TestViewObject extends TestCase {
             // try to use a null class
             _viewObject1.addAdapter(null, _decorator1);
         }
-        catch(final IllegalArgumentException iae)
+        catch (final IllegalArgumentException iae)
         {
             assertionOk = true;
         }
-        
+
         assertTrue(assertionOk);
         assertNull(_viewObject1.getAdapter(null));
-        
+
         assertionOk = false;
         // try to use null object
         try
@@ -251,7 +258,7 @@ public class TestViewObject extends TestCase {
         {
             assertionOk = true;
         }
-        
+
         assertTrue(assertionOk);
     }
 
@@ -265,62 +272,74 @@ public class TestViewObject extends TestCase {
         final ViewObject listViewObject1 = new MockViewObjectImplementsList();
 
         final List listAdapter = new ArrayList();
- 
-        // with the non-list, get adapter will return something only if it is added
+
+        // with the non-list, get adapter will return something only if it is
+        // added
         assertNull(viewObject1.getAdapter(List.class));
         viewObject1.addAdapter(List.class, listAdapter);
         assertEquals(listAdapter, viewObject1.getAdapter(List.class));
         assertEquals(listAdapter, viewObject1.removeAdapter(List.class));
         assertNull(viewObject1.getAdapter(List.class));
-        
+
         // however, with the viewObject that is a list...
         assertEquals(listViewObject1, listViewObject1.getAdapter(List.class));
-        listViewObject1.addAdapter(List.class, listAdapter);
-        // we will get the explicit adapter back
-        assertEquals(listAdapter, listViewObject1.getAdapter(List.class));
-        assertEquals(listAdapter, listViewObject1.removeAdapter(List.class));
-        // but even once removed, this listViewObject1 is still its own
-        // adapter for List
+
+        boolean caughtException = false;
+        // can't add an interface to an object already of that type
+        try
+        {
+            listViewObject1.addAdapter(List.class, listAdapter);
+        }
+        catch (final IllegalArgumentException iae)
+        {
+            caughtException = true;
+        }
+
+        assertTrue(caughtException);
+        // should be unaffected
         assertEquals(listViewObject1, listViewObject1.getAdapter(List.class));
     }
 
     @SuppressWarnings("unchecked")
-    public void testGetDecoratorMap() {
+    public void testGetDecoratorMap()
+    {
         // check contract: getDecoratorMap should never return null
         // and should always return the same map
-        final Map  map = ((MockViewObject)_viewObject1).getDecoratorMap();
+        final Map map = ((MockViewObject) _viewObject1).getDecoratorMap();
         assertNotNull(map);
-        assertEquals(map, ((MockViewObject)_viewObject1).getDecoratorMap());
-        assertEquals(map, ((MockViewObject)_viewObject1).getDecoratorMap());
-        assertEquals(map, ((MockViewObject)_viewObject1).getDecoratorMap());
+        assertEquals(map, ((MockViewObject) _viewObject1).getDecoratorMap());
+        assertEquals(map, ((MockViewObject) _viewObject1).getDecoratorMap());
+        assertEquals(map, ((MockViewObject) _viewObject1).getDecoratorMap());
     }
 
     @SuppressWarnings("unchecked")
-    public void testGetAdapterMap() {
+    public void testGetAdapterMap()
+    {
         // check contract: getAdapterMap should never return null
         // and should always return the same map
-        final Map  map = ((MockViewObject)_viewObject1).getAdapterMap();
+        final Map map = ((MockViewObject) _viewObject1).getAdapterMap();
         assertNotNull(map);
-        assertEquals(map, ((MockViewObject)_viewObject1).getAdapterMap());
-        assertEquals(map, ((MockViewObject)_viewObject1).getAdapterMap());
-        assertEquals(map, ((MockViewObject)_viewObject1).getAdapterMap());
+        assertEquals(map, ((MockViewObject) _viewObject1).getAdapterMap());
+        assertEquals(map, ((MockViewObject) _viewObject1).getAdapterMap());
+        assertEquals(map, ((MockViewObject) _viewObject1).getAdapterMap());
 
     }
-    
-    public void testSerializable() throws Exception {
+
+    public void testSerializable() throws Exception
+    {
         _viewObject1.addDecorator(_decorator1);
         _viewObject1.addDecorator(_decorator2, Decorator.class);
         _viewObject1.addAdapter(MockAdapter.class, _adapter1);
-        
-        final ViewObject   deserialized = 
-            RuntimeTestUtil.serializeDeserialize(_viewObject1);
 
-        
+        final ViewObject deserialized = RuntimeTestUtil
+        .serializeDeserialize(_viewObject1);
+
         RuntimeTestUtil.verifySame(_viewObject1, deserialized);
     }
 
     @SuppressWarnings("unchecked")
-    private void assertSizeAndImmutable(final List list, final int size) {
+    private void assertSizeAndImmutable(final List list, final int size)
+    {
         assertEquals(size, list.size());
         // in the default case, the list should throw an exception
         // on modification
@@ -335,12 +354,13 @@ public class TestViewObject extends TestCase {
             isListImmutable = true;
         }
         assertTrue(isListImmutable);
-        // since immutable, should not have changed 
+        // since immutable, should not have changed
         assertEquals(size, list.size());
     }
 
     @SuppressWarnings("unchecked")
-    private void assertSizeAndImmutable(final Map map, final int size) {
+    private void assertSizeAndImmutable(final Map map, final int size)
+    {
         assertEquals(size, map.size());
         // in the default case, the list should throw an exception
         // on modification
@@ -355,11 +375,12 @@ public class TestViewObject extends TestCase {
             isMapImmutable = true;
         }
         assertTrue(isMapImmutable);
-        // since immutable, should not have changed 
+        // since immutable, should not have changed
         assertEquals(size, map.size());
     }
-    
-    public static class MockViewObject extends ViewObject {
+
+    public static class MockViewObject extends ViewObject
+    {
         /**
          * 
          */
@@ -367,119 +388,147 @@ public class TestViewObject extends TestCase {
 
         @SuppressWarnings("unchecked")
         @Override
-        public Map getAdapterMap() {
+        public Map getAdapterMap()
+        {
             return super.getAdapterMap();
         }
 
         @SuppressWarnings("unchecked")
         @Override
-        public Map getDecoratorMap() {
+        public Map getDecoratorMap()
+        {
             return super.getDecoratorMap();
         }
     }
 
     @SuppressWarnings("unchecked")
-    public static class MockViewObjectImplementsList extends ViewObject implements List
+    public static class MockViewObjectImplementsList extends ViewObject
+    implements List
     {
         /**
          * 
          */
         private static final long serialVersionUID = -6379202834709723049L;
 
-        public boolean add(final Object o) {
+        public boolean add(final Object o)
+        {
             return false;
         }
 
-        public void add(final int index, final Object element) {
-            
+        public void add(final int index, final Object element)
+        {
+
         }
 
-        public boolean addAll(final Collection c) {
+        public boolean addAll(final Collection c)
+        {
             return false;
         }
 
-        public boolean addAll(final int index, final Collection c) {
+        public boolean addAll(final int index, final Collection c)
+        {
             return false;
         }
 
-        public void clear() {
-            
+        public void clear()
+        {
+
         }
 
-        public boolean contains(final Object o) {
+        public boolean contains(final Object o)
+        {
             return false;
         }
 
-        public boolean containsAll(final Collection c) {
+        public boolean containsAll(final Collection c)
+        {
             return false;
         }
 
-        public Object get(final int index) {
+        public Object get(final int index)
+        {
             return null;
         }
 
-        public int indexOf(final Object o) {
+        public int indexOf(final Object o)
+        {
             return 0;
         }
 
-        public boolean isEmpty() {
+        public boolean isEmpty()
+        {
             return false;
         }
 
-        public Iterator iterator() {
+        public Iterator iterator()
+        {
             return null;
         }
 
-        public int lastIndexOf(final Object o) {
+        public int lastIndexOf(final Object o)
+        {
             return 0;
         }
 
-        public ListIterator listIterator() {
+        public ListIterator listIterator()
+        {
             return null;
         }
 
-        public ListIterator listIterator(final int index) {
+        public ListIterator listIterator(final int index)
+        {
             return null;
         }
 
-        public boolean remove(final Object o) {
+        public boolean remove(final Object o)
+        {
             return false;
         }
 
-        public Object remove(final int index) {
+        public Object remove(final int index)
+        {
             return null;
         }
 
-        public boolean removeAll(final Collection c) {
+        public boolean removeAll(final Collection c)
+        {
             return false;
         }
 
-        public boolean retainAll(final Collection c) {
+        public boolean retainAll(final Collection c)
+        {
             return false;
         }
 
-        public Object set(final int index, final Object element) {
+        public Object set(final int index, final Object element)
+        {
             return null;
         }
 
-        public int size() {
+        public int size()
+        {
             return 0;
         }
 
-        public List subList(final int fromIndex, final int toIndex) {
+        public List subList(final int fromIndex, final int toIndex)
+        {
             return null;
         }
 
-        public Object[] toArray() {
+        public Object[] toArray()
+        {
             return null;
         }
 
-        public Object[] toArray(final Object[] a) {
+        public Object[] toArray(final Object[] a)
+        {
             return null;
         }
-        
+
     }
-    public static class MockDecorator extends Decorator {
+
+    public static class MockDecorator extends Decorator
+    {
 
         /**
          * 
@@ -488,27 +537,30 @@ public class TestViewObject extends TestCase {
 
     }
 
-    public static class MockAdapter implements Serializable {
+    public static class MockAdapter implements Serializable
+    {
 
         /**
          * 
          */
         private static final long serialVersionUID = 424297135847238931L;
     }
-    
+
     @SuppressWarnings("unchecked")
     public static class MockAdapterImplementsList extends AbstractList
     {
 
         @Override
-        public Object get(final int index) {
+        public Object get(final int index)
+        {
             return null;
         }
 
         @Override
-        public int size() {
+        public int size()
+        {
             return 0;
         }
-        
+
     }
 }

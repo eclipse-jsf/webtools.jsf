@@ -53,6 +53,7 @@ public class TestResourceBundleMapSource extends TestCase
     //private IFile      _bundle2;
     
     
+    @Override
     protected void setUp() throws Exception 
     {
         super.setUp();
@@ -90,7 +91,7 @@ public class TestResourceBundleMapSource extends TestCase
         resources.add(jdtTestEnv.addResourceFile("src", new ByteArrayInputStream(input.toBytes()), 
                                     bundlePath, bundleName));
 
-        IProject project = testEnv.getTestProject();
+        final IProject project = testEnv.getTestProject();
         assertNotNull(project);
         assertTrue(project.isAccessible());
         resources.add(project);
@@ -128,7 +129,7 @@ public class TestResourceBundleMapSource extends TestCase
     @SuppressWarnings("unchecked")
     public void testContentsProject1Bundle1()  throws Exception
     {
-        Map  map = ResourceBundleMapSourceFactory.getResourceBundleMapSource(_project1, "bundles.bundle1");
+        final Map  map = ResourceBundleMapSourceFactory.getResourceBundleMapSource(_project1, "bundles.bundle1");
         assertTrue(map.containsKey("prop1"));
         assertEquals("blah", map.get("prop1"));
         assertTrue(map.containsKey("one.dot"));
@@ -143,7 +144,7 @@ public class TestResourceBundleMapSource extends TestCase
     @SuppressWarnings("unchecked")
     public void testContentsProject2Bundle1() throws Exception
     {
-        Map  map = ResourceBundleMapSourceFactory.getResourceBundleMapSource(_project2, "bundles.bundle1");
+        final Map  map = ResourceBundleMapSourceFactory.getResourceBundleMapSource(_project2, "bundles.bundle1");
         assertTrue(map.containsKey("x_prop1"));
         assertEquals("x_blah", map.get("x_prop1"));
         assertTrue(map.containsKey("x_one.dot"));
@@ -165,7 +166,7 @@ public class TestResourceBundleMapSource extends TestCase
     public void testBundleDelete() throws JavaModelException, IOException, CoreException
     {
         // test the initial state, before outside meddling
-        Map  map = ResourceBundleMapSourceFactory.getResourceBundleMapSource(_project1, "bundles.bundle1");
+        final Map  map = ResourceBundleMapSourceFactory.getResourceBundleMapSource(_project1, "bundles.bundle1");
         assertTrue(map.containsKey("prop1"));
         assertEquals("blah", map.get("prop1"));
         assertTrue(map.containsKey("one.dot"));
@@ -174,7 +175,7 @@ public class TestResourceBundleMapSource extends TestCase
         assertEquals("blah3", map.get("two.dot.property"));
 
         // now fiddle with the file
-        File bundleFile = _bundle1.getLocation().toFile();
+        final File bundleFile = _bundle1.getLocation().toFile();
         assertTrue(bundleFile.delete());
         _bundle1.refreshLocal(IResource.DEPTH_INFINITE, null);
 
@@ -289,7 +290,7 @@ public class TestResourceBundleMapSource extends TestCase
         {
             map = ResourceBundleMapSourceFactory.getResourceBundleMapSource(_project3, "bundles.bundle1");
         }
-        catch (CoreException ce)
+        catch (final CoreException ce)
         {
             // this code should run since _project3 is closed
             // and therefore inaccessible

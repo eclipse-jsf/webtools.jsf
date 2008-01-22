@@ -295,6 +295,7 @@ public final class JSFCoreUtilHelper
             final JSFLibrary jsfImpl = JSFCoreUtilHelper.
                 constructJSFLib(libIDandName, libIDandName,"", archiveFiles, true);
             jsfLibRegistry.addJSFLibrary(jsfImpl);
+            JSFLibraryRegistryUtil.getInstance().saveJSFLibraryRegistry();
             jsfFacedEnv.addJSFLibraryReference(jsfImpl, true);
             return true;
         }

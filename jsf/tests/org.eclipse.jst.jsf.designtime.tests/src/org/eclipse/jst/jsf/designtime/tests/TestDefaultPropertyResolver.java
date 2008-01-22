@@ -71,6 +71,7 @@ public class TestDefaultPropertyResolver extends TestCase
     private final static String     BEANWITHLISTPROP_NAME = "BeanWithListProp";
     private final static String     BEANWITHGENERICPROP_NAME = "TestBeanWithGenericProperties";
     
+    @Override
     protected void setUp() throws Exception 
     {
         super.setUp();
@@ -210,17 +211,17 @@ public class TestDefaultPropertyResolver extends TestCase
      */
     public void testBeanInstanceSymbol()
     {
-        IBeanInstanceSymbol symbol = SymbolFactory.eINSTANCE.createIBeanInstanceSymbol();
+        final IBeanInstanceSymbol symbol = SymbolFactory.eINSTANCE.createIBeanInstanceSymbol();
         symbol.setName("myBean");
-        IJavaTypeDescriptor2 typeDesc = SymbolFactory.eINSTANCE.createIJavaTypeDescriptor2();
+        final IJavaTypeDescriptor2 typeDesc = SymbolFactory.eINSTANCE.createIJavaTypeDescriptor2();
         typeDesc.setType(_testBean1Type);
         symbol.setTypeDescriptor(typeDesc);
         
-        DefaultDTPropertyResolver propResolver = new DefaultDTPropertyResolver();
-        ISymbol[]  properties = propResolver.getAllProperties(symbol);
+        final DefaultDTPropertyResolver propResolver = new DefaultDTPropertyResolver();
+        final ISymbol[]  properties = propResolver.getAllProperties(symbol);
         assertEquals(NUM_PROPERTIES_TEST_BEAN_1, properties.length);
-        Map<String, ISymbol>  checkProps = new HashMap<String, ISymbol>();
-        for (ISymbol propSymbol : properties)
+        final Map<String, ISymbol>  checkProps = new HashMap<String, ISymbol>();
+        for (final ISymbol propSymbol : properties)
         {
             checkProps.put(propSymbol.getName(), propSymbol);
         }
@@ -229,21 +230,21 @@ public class TestDefaultPropertyResolver extends TestCase
         assertTrue(checkProps.containsKey("booleanIsProp1"));
         
         {
-            ISymbol stringProp1 = propResolver.getProperty(symbol, "stringProp1");
+            final ISymbol stringProp1 = propResolver.getProperty(symbol, "stringProp1");
             assertNotNull(stringProp1);
             assertTrue(stringProp1 instanceof IPropertySymbol);
             assertTrue(((IPropertySymbol)stringProp1).getTypeDescriptor().getTypeSignature().equals(TypeConstants.TYPE_STRING));
-            IPropertySymbol mapStringProp1 = (IPropertySymbol) checkProps.get("stringProp1");
+            final IPropertySymbol mapStringProp1 = (IPropertySymbol) checkProps.get("stringProp1");
             assertEquals(((IPropertySymbol)stringProp1).getTypeDescriptor().getTypeSignature(), 
                             mapStringProp1.getTypeDescriptor().getTypeSignature());
         }
         
         {
-            ISymbol booleanIsProp = propResolver.getProperty(symbol, "booleanIsProp1");
+            final ISymbol booleanIsProp = propResolver.getProperty(symbol, "booleanIsProp1");
             assertNotNull(booleanIsProp);
             assertTrue(booleanIsProp instanceof IPropertySymbol);
             assertTrue(((IPropertySymbol)booleanIsProp).getTypeDescriptor().getTypeSignature().equals(Signature.SIG_BOOLEAN));
-            IPropertySymbol mapBooleanProp = (IPropertySymbol) checkProps.get("booleanIsProp1");
+            final IPropertySymbol mapBooleanProp = (IPropertySymbol) checkProps.get("booleanIsProp1");
             assertEquals(((IPropertySymbol)booleanIsProp).getTypeDescriptor().getTypeSignature(), 
                          mapBooleanProp.getTypeDescriptor().getTypeSignature());
         }
@@ -254,14 +255,14 @@ public class TestDefaultPropertyResolver extends TestCase
      */
     public void testMapBeanInstanceSymbol()
     {
-        IBeanInstanceSymbol symbol = SymbolFactory.eINSTANCE.createIBeanInstanceSymbol();
+        final IBeanInstanceSymbol symbol = SymbolFactory.eINSTANCE.createIBeanInstanceSymbol();
         symbol.setName("myMapBean");
-        IJavaTypeDescriptor2 typeDesc = SymbolFactory.eINSTANCE.createIJavaTypeDescriptor2();
+        final IJavaTypeDescriptor2 typeDesc = SymbolFactory.eINSTANCE.createIJavaTypeDescriptor2();
         typeDesc.setType(_testMapBean1Type);
         symbol.setTypeDescriptor(typeDesc);
 
-        DefaultDTPropertyResolver propResolver = new DefaultDTPropertyResolver();
-        ISymbol[]  properties = propResolver.getAllProperties(symbol);
+        final DefaultDTPropertyResolver propResolver = new DefaultDTPropertyResolver();
+        final ISymbol[]  properties = propResolver.getAllProperties(symbol);
         // there no design-time identifiable properties
         // note that this is different that what JDTBeanIntrospector returns
         // since the default property resolver first coerces to a Map
@@ -273,7 +274,7 @@ public class TestDefaultPropertyResolver extends TestCase
         for (int i = 0; i < 25; i++)
         {
             final String unconstrainedPropName = "someName"+i*7+"withNonSequentialNumber"+i*11;
-            ISymbol someProperty1 = propResolver.getProperty(symbol, unconstrainedPropName);
+            final ISymbol someProperty1 = propResolver.getProperty(symbol, unconstrainedPropName);
             assertNotNull(someProperty1);
             assertEquals(unconstrainedPropName, someProperty1.getName());
             assertTrue(someProperty1 instanceof IPropertySymbol);
@@ -297,8 +298,8 @@ public class TestDefaultPropertyResolver extends TestCase
         typeDesc.setMapSource(mapSource);
         symbol.setTypeDescriptor(typeDesc);
         
-        DefaultDTPropertyResolver propResolver = new DefaultDTPropertyResolver();
-        ISymbol[]  properties = propResolver.getAllProperties(symbol);
+        final DefaultDTPropertyResolver propResolver = new DefaultDTPropertyResolver();
+        final ISymbol[]  properties = propResolver.getAllProperties(symbol);
 
         // should have three properties
         assertEquals(3, properties.length);
@@ -311,18 +312,18 @@ public class TestDefaultPropertyResolver extends TestCase
             // should have properties from mapSource above
             // these should all be equivalent to those returned by getProperty
             // since the object is a map first and foremost (e.g. not a bean cast to a Map)
-            for (int i = 0; i < properties.length; i++)
+            for (final ISymbol propertie : properties)
             {
                 // make sure the property's name matches a value in map source
                 // for the dotted one, we make an exception
-                assertTrue(mapSource.containsKey(properties[i].getName())
-                            || (properties[i].getName().startsWith("dotted")));
+                assertTrue(mapSource.containsKey(propertie.getName())
+                            || (propertie.getName().startsWith("dotted")));
                 // should be a property symbol
-                assertTrue(properties[i] instanceof IPropertySymbol);
-                final IPropertySymbol propSymbol = (IPropertySymbol) properties[i];
+                assertTrue(propertie instanceof IPropertySymbol);
+                final IPropertySymbol propSymbol = (IPropertySymbol) propertie;
                 
                 // get the symbol by name
-                ISymbol  symbolById = propResolver.getProperty(symbol, propSymbol.getName());
+                final ISymbol  symbolById = propResolver.getProperty(symbol, propSymbol.getName());
                 // should have the same name whether in getAll or get
                 assertEquals(propSymbol.getName(), symbolById.getName());
                 // we don't have an absolute "equals" for symbols, but can at least
@@ -334,10 +335,10 @@ public class TestDefaultPropertyResolver extends TestCase
         
         // verify that the dotted property is intermediate and that 
         // dotted.property is there
-        ISymbol symbolById = propResolver.getProperty(symbol, "dotted");
+        final ISymbol symbolById = propResolver.getProperty(symbol, "dotted");
         assertNotNull(symbolById);
         assertTrue(((IPropertySymbol)symbolById).isIntermediate());
-        ISymbol dottedProp = propResolver.getProperty(symbolById, "property");
+        final ISymbol dottedProp = propResolver.getProperty(symbolById, "property");
         assertTrue(dottedProp instanceof IPropertySymbol);
         assertEquals(TypeConstants.TYPE_STRING, ((IPropertySymbol)dottedProp).getTypeDescriptor().getTypeSignature());
     }
@@ -362,9 +363,9 @@ public class TestDefaultPropertyResolver extends TestCase
             // check props
             final Map<String, IPropertySymbol>  gotProps  = new HashMap<String, IPropertySymbol>();
             
-            for (int i = 0; i < properties.length; i++)
+            for (final ISymbol propertie : properties)
             {
-                IPropertySymbol propSymbol = (IPropertySymbol) properties[i];
+                final IPropertySymbol propSymbol = (IPropertySymbol) propertie;
                 assertEquals(propSymbol.getTypeDescriptor().getTypeSignature(),
                         ((IObjectSymbol)propResolver.getProperty(symbol,propSymbol.getName()))
                                                     .getTypeDescriptor().getTypeSignature());
@@ -413,7 +414,7 @@ public class TestDefaultPropertyResolver extends TestCase
         typeDesc.setType(_testBeanWithMapProp);
         symbol.setTypeDescriptor(typeDesc);
         
-        DefaultDTPropertyResolver propResolver = new DefaultDTPropertyResolver();
+        final DefaultDTPropertyResolver propResolver = new DefaultDTPropertyResolver();
         ISymbol[]  properties = propResolver.getAllProperties(symbol);
 
         // should be two properties: mapProp and class
@@ -422,13 +423,13 @@ public class TestDefaultPropertyResolver extends TestCase
         assertEquals(findSymbol("mapProp",properties).getName(),
                      propResolver.getProperty(symbol, "mapProp").getName());
         
-        IPropertySymbol  mapProp = (IPropertySymbol) propResolver.getProperty(symbol, "mapProp");
+        final IPropertySymbol  mapProp = (IPropertySymbol) propResolver.getProperty(symbol, "mapProp");
         assertEquals("Lcom.test.MapBean;", mapProp.getTypeDescriptor().getTypeSignature());
         
         properties = propResolver.getAllProperties(mapProp);
         assertEquals(0, properties.length);
         
-        IPropertySymbol unboundedProp = (IPropertySymbol) propResolver.getProperty(mapProp, "foo");
+        final IPropertySymbol unboundedProp = (IPropertySymbol) propResolver.getProperty(mapProp, "foo");
         assertEquals(TypeConstants.TYPE_JAVAOBJECT, unboundedProp.getTypeDescriptor().getTypeSignature());
     }
     
@@ -444,7 +445,7 @@ public class TestDefaultPropertyResolver extends TestCase
         typeDesc.setType(_testBean1Type);
         symbol.setTypeDescriptor(typeDesc);
         
-        DefaultDTPropertyResolver propResolver = new DefaultDTPropertyResolver();
+        final DefaultDTPropertyResolver propResolver = new DefaultDTPropertyResolver();
 
         // test array of strings property
         {
@@ -533,17 +534,17 @@ public class TestDefaultPropertyResolver extends TestCase
      */
     public void testListBeanInstanceSymbol()
     {
-        IBeanInstanceSymbol symbol = 
+        final IBeanInstanceSymbol symbol = 
             SymbolFactory.eINSTANCE.createIBeanInstanceSymbol();
         symbol.setName("myListBean");
-        IJavaTypeDescriptor2 typeDesc = 
+        final IJavaTypeDescriptor2 typeDesc = 
             SymbolFactory.eINSTANCE.createIJavaTypeDescriptor2();
         typeDesc.setType(_testListBeanType);
         symbol.setTypeDescriptor(typeDesc);
         
-        DefaultDTPropertyResolver propResolver = 
+        final DefaultDTPropertyResolver propResolver = 
             new DefaultDTPropertyResolver();
-        ISymbol[]  properties = propResolver.getAllProperties(symbol);
+        final ISymbol[]  properties = propResolver.getAllProperties(symbol);
 
         // should have no properties since a list won't be treated like
         // anything but a list
@@ -553,7 +554,7 @@ public class TestDefaultPropertyResolver extends TestCase
         // of arbitrary "unconstrained" properties a different indices
         for (int i = 0; i < 25; i++)
         {
-            ISymbol someProperty1 = propResolver.getProperty(symbol, i);
+            final ISymbol someProperty1 = propResolver.getProperty(symbol, i);
             assertNotNull(someProperty1);
             assertTrue(someProperty1 instanceof IPropertySymbol);
             // completely unconstrained properties should come back as java object
@@ -573,7 +574,7 @@ public class TestDefaultPropertyResolver extends TestCase
         typeDesc.setType(_testBeanWithListPropType);
         symbol.setTypeDescriptor(typeDesc);
         
-        DefaultDTPropertyResolver propResolver = new DefaultDTPropertyResolver();
+        final DefaultDTPropertyResolver propResolver = new DefaultDTPropertyResolver();
         ISymbol[]  properties = propResolver.getAllProperties(symbol);
 
         // should be just one property plus Object.class
@@ -582,7 +583,7 @@ public class TestDefaultPropertyResolver extends TestCase
         assertEquals(findSymbol("listProp", properties).getName(),
                 propResolver.getProperty(symbol, "listProp").getName());
         
-        IPropertySymbol  listProp = (IPropertySymbol) propResolver.getProperty(symbol, "listProp");
+        final IPropertySymbol  listProp = (IPropertySymbol) propResolver.getProperty(symbol, "listProp");
         assertEquals("Lcom.test.ListBean;", listProp.getTypeDescriptor().getTypeSignature());
         
         properties = propResolver.getAllProperties(listProp);
@@ -590,7 +591,7 @@ public class TestDefaultPropertyResolver extends TestCase
         // has isEmpty and one bean props
         assertEquals(0, properties.length);
         
-        IPropertySymbol unboundedProp = (IPropertySymbol) propResolver.getProperty(listProp, 0);
+        final IPropertySymbol unboundedProp = (IPropertySymbol) propResolver.getProperty(listProp, 0);
         assertEquals(TypeConstants.TYPE_JAVAOBJECT, unboundedProp.getTypeDescriptor().getTypeSignature());
         
         // list base symbols do not have non-numeric keys
@@ -605,7 +606,7 @@ public class TestDefaultPropertyResolver extends TestCase
         typeDesc.setType(_testBeanWithGenericProperties);
         symbol.setTypeDescriptor(typeDesc);
         
-        DefaultDTPropertyResolver propResolver = new DefaultDTPropertyResolver();
+        final DefaultDTPropertyResolver propResolver = new DefaultDTPropertyResolver();
         ISymbol[]  properties = propResolver.getAllProperties(symbol);
 
         // should be just one property plus Object.class
@@ -614,7 +615,7 @@ public class TestDefaultPropertyResolver extends TestCase
         assertEquals(findSymbol("listOfStrings", properties).getName(),
                 propResolver.getProperty(symbol, "listOfStrings").getName());
         
-        IPropertySymbol  listProp = (IPropertySymbol) propResolver.getProperty(symbol, "listOfStrings");
+        final IPropertySymbol  listProp = (IPropertySymbol) propResolver.getProperty(symbol, "listOfStrings");
         assertEquals(TypeConstants.TYPE_LIST, listProp.getTypeDescriptor().getTypeSignature());
         
         properties = propResolver.getAllProperties(listProp);
@@ -622,7 +623,7 @@ public class TestDefaultPropertyResolver extends TestCase
         // has isEmpty and one bean props
         assertEquals(0, properties.length);
         
-        IPropertySymbol unboundedProp = (IPropertySymbol) propResolver.getProperty(listProp, 0);
+        final IPropertySymbol unboundedProp = (IPropertySymbol) propResolver.getProperty(listProp, 0);
         assertEquals(TypeConstants.TYPE_STRING, unboundedProp.getTypeDescriptor().getTypeSignature());
     }
     
@@ -636,8 +637,8 @@ public class TestDefaultPropertyResolver extends TestCase
         typeDesc.setMapSource(new HashMap<String, String>());
         symbol.setTypeDescriptor(typeDesc);
         
-        DefaultDTPropertyResolver propResolver = new DefaultDTPropertyResolver();
-        ISymbol propSymbol = propResolver.getProperty(symbol, "anyProp");
+        final DefaultDTPropertyResolver propResolver = new DefaultDTPropertyResolver();
+        final ISymbol propSymbol = propResolver.getProperty(symbol, "anyProp");
         
         assertNotNull(propSymbol);
         assertTrue(propSymbol instanceof IPropertySymbol);
@@ -654,7 +655,7 @@ public class TestDefaultPropertyResolver extends TestCase
     @SuppressWarnings("unchecked")
     private void checkDottedBundleNames() throws Exception
     {
-        Map map = 
+        final Map map = 
         	ResourceBundleMapSourceFactory.getResourceBundleMapSource
         		(_jdtTestEnvironment.getProjectEnvironment().getTestProject()
         				, "bundles.bundle1");
@@ -669,7 +670,7 @@ public class TestDefaultPropertyResolver extends TestCase
         symbol.setName("dottedMapSource");
         symbol.setTypeDescriptor(typeDesc);
 
-        DefaultDTPropertyResolver propResolver = new DefaultDTPropertyResolver();
+        final DefaultDTPropertyResolver propResolver = new DefaultDTPropertyResolver();
         {
 	        ISymbol oneDot = propResolver.getProperty(symbol, "one");
 	        assertNotNull(oneDot);
@@ -701,9 +702,9 @@ public class TestDefaultPropertyResolver extends TestCase
         }
     }
     
-    private ISymbol findSymbol(final String name, ISymbol[] symbols)
+    private ISymbol findSymbol(final String name, final ISymbol[] symbols)
     {
-        for (ISymbol symbol : symbols)
+        for (final ISymbol symbol : symbols)
         {
             if (symbol.getName().equals(name))
             {

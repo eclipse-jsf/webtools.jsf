@@ -26,6 +26,7 @@ public class TestDesignTimeApplicationManager extends TestCase {
     private WebProjectTestEnvironment _webProjectTestEnv;
     private JDTTestEnvironment        _jdtTestEnv;
     
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         JSFTestUtil.setValidationEnabled(false);
@@ -55,6 +56,7 @@ public class TestDesignTimeApplicationManager extends TestCase {
                 .initialize(IJSFCoreConstants.FACET_VERSION_1_1);
     }
 
+    @Override
     protected void tearDown() throws Exception {
         super.tearDown();
     }
@@ -84,12 +86,12 @@ public class TestDesignTimeApplicationManager extends TestCase {
         manager.setPropertyResolverProvider("my.test.blah");
         assertEquals("my.test.blah", manager.getPropertyResolverProvider());
 
-        RenameSupport renameSupport =
+        final RenameSupport renameSupport =
             RenameSupport.create(_jdtTestEnv.getJavaProject(), "RenamedProject"+getName(), RenameSupport.UPDATE_REFERENCES);
         renameSupport.perform(new Shell(), PlatformUI.getWorkbench().getActiveWorkbenchWindow());
 
         assertFalse(_jdtTestEnv.getJavaProject().getProject().isAccessible());
-        IProject project = 
+        final IProject project = 
             ResourcesPlugin.getWorkspace().getRoot().getProject("RenamedProject"+getName());
         
         assertTrue(project.isAccessible());

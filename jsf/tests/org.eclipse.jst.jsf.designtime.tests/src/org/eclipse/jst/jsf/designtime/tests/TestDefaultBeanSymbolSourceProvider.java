@@ -39,6 +39,7 @@ public class TestDefaultBeanSymbolSourceProvider extends TestCase
     private final static String     SRC_FOLDER_NAME = "src";
     private final static String     PACKAGE_NAME = "com.test";
     
+    @Override
     protected void setUp() throws Exception 
     {
         super.setUp();
@@ -63,6 +64,7 @@ public class TestDefaultBeanSymbolSourceProvider extends TestCase
                     "/testfiles/TestBean1.java.data", "TestBean1", SRC_FOLDER_NAME, PACKAGE_NAME, _jdtTestEnvironment);
     }
 
+    @Override
     protected void tearDown() throws Exception 
     {
         super.tearDown();
@@ -73,10 +75,10 @@ public class TestDefaultBeanSymbolSourceProvider extends TestCase
      */
     public void testSanity()
     {
-        DefaultBeanSymbolSourceProvider  provider =
+        final DefaultBeanSymbolSourceProvider  provider =
             DefaultBeanSymbolSourceProvider.getInstance();
         
-        ISymbol[] symbol =
+        final ISymbol[] symbol =
             provider.getSymbols(_facesConfigFile, ISymbolConstants.SYMBOL_SCOPE_ALL);
         
         assertNotNull(symbol);
@@ -127,12 +129,12 @@ public class TestDefaultBeanSymbolSourceProvider extends TestCase
         testScopeBeans(ISymbolConstants.SYMBOL_SCOPE_NONE, names.length, names);
     }
 
-    private void testScopeBeans(int scope, int expectedSize, String[] expectedNames)
+    private void testScopeBeans(final int scope, final int expectedSize, final String[] expectedNames)
     {
-        DefaultBeanSymbolSourceProvider  provider =
+        final DefaultBeanSymbolSourceProvider  provider =
             DefaultBeanSymbolSourceProvider.getInstance();
         
-        ISymbol[] symbols =
+        final ISymbol[] symbols =
             provider.getSymbols(_facesConfigFile, scope);
         
         assertEquals(expectedSize, symbols.length);
@@ -162,10 +164,10 @@ public class TestDefaultBeanSymbolSourceProvider extends TestCase
      */
     public void testPrefixSearch()
     {
-        DefaultBeanSymbolSourceProvider  provider =
+        final DefaultBeanSymbolSourceProvider  provider =
             DefaultBeanSymbolSourceProvider.getInstance();
         
-        ISymbol[] symbols =
+        final ISymbol[] symbols =
             provider.getSymbols("myBean_n", _facesConfigFile, ISymbolConstants.SYMBOL_SCOPE_ALL);
 
         assertEquals(1, symbols.length);
@@ -185,10 +187,10 @@ public class TestDefaultBeanSymbolSourceProvider extends TestCase
     
     private void testGetSymbolByName(final String expectedName)
     {
-        DefaultBeanSymbolSourceProvider  provider =
+        final DefaultBeanSymbolSourceProvider  provider =
             DefaultBeanSymbolSourceProvider.getInstance();
 
-        ISymbol symbol = 
+        final ISymbol symbol = 
             provider.getSymbol(expectedName, _facesConfigFile, 
                                 ISymbolConstants.SYMBOL_SCOPE_ALL);
         

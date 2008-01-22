@@ -43,7 +43,8 @@ public class TestDefaultDTVariableResolver extends TestCase
     private final static String     TESTBEAN1_NAME = "TestBean1";
 
 	
-	@SuppressWarnings("unchecked")
+	@Override
+    @SuppressWarnings("unchecked")
     protected void setUp() throws Exception 
 	{
         super.setUp();
@@ -54,7 +55,7 @@ public class TestDefaultDTVariableResolver extends TestCase
             new WebProjectTestEnvironment("TestDefaultPropertyResolver"+getName());
         projectTestEnvironment.createProject(false);
 
-        IResource res = projectTestEnvironment.loadResourceInWebRoot(DesignTimeTestsPlugin.getDefault().getBundle()
+        final IResource res = projectTestEnvironment.loadResourceInWebRoot(DesignTimeTestsPlugin.getDefault().getBundle()
         		, "/testdata/testdata1.jsp.data", "testdata1.jsp");
         _testJSP1 = (IFile) res;
         
@@ -69,17 +70,17 @@ public class TestDefaultDTVariableResolver extends TestCase
         {
         	edit = FacesConfigArtifactEdit.getFacesConfigArtifactEditForWrite(project, null);
         
-        	FacesConfigType model = edit.getFacesConfig();
-        	ManagedBeanClassType beanClass = FacesConfigFactory.eINSTANCE.createManagedBeanClassType();
+        	final FacesConfigType model = edit.getFacesConfig();
+        	final ManagedBeanClassType beanClass = FacesConfigFactory.eINSTANCE.createManagedBeanClassType();
         	beanClass.setTextContent("com.test.TestBean1");
 
-        	ManagedBeanNameType beanName = FacesConfigFactory.eINSTANCE.createManagedBeanNameType();
+        	final ManagedBeanNameType beanName = FacesConfigFactory.eINSTANCE.createManagedBeanNameType();
         	beanName.setTextContent("testBean1");
         	
-        	ManagedBeanScopeType beanScope = FacesConfigFactory.eINSTANCE.createManagedBeanScopeType();
+        	final ManagedBeanScopeType beanScope = FacesConfigFactory.eINSTANCE.createManagedBeanScopeType();
         	beanScope.setTextContent("session");
         	
-        	ManagedBeanType bean = FacesConfigFactory.eINSTANCE.createManagedBeanType();
+        	final ManagedBeanType bean = FacesConfigFactory.eINSTANCE.createManagedBeanType();
         	bean.setManagedBeanClass(beanClass);
         	bean.setManagedBeanName(beanName);
         	bean.setManagedBeanScope(beanScope);
@@ -112,7 +113,8 @@ public class TestDefaultDTVariableResolver extends TestCase
         assertNotNull(_testBean1Type);
 	}
 
-	protected void tearDown() throws Exception 
+	@Override
+    protected void tearDown() throws Exception 
 	{
 		super.tearDown();
 	}
@@ -130,8 +132,8 @@ public class TestDefaultDTVariableResolver extends TestCase
         	DesignTimeApplicationManager.getInstance
         		(_jdtTestEnvironment.getProjectEnvironment().getTestProject());
 
-		DefaultDTVariableResolver  variableResolver = new DefaultDTVariableResolver();
-		ISymbol symbol = variableResolver.resolveVariable
+		final DefaultDTVariableResolver  variableResolver = new DefaultDTVariableResolver();
+		final ISymbol symbol = variableResolver.resolveVariable
 			(manager.getFacesContext(_testJSP1), "applicationScope", _testJSP1);
 		assertNotNull(symbol);
 	}
@@ -142,15 +144,15 @@ public class TestDefaultDTVariableResolver extends TestCase
         	DesignTimeApplicationManager.getInstance
         		(_jdtTestEnvironment.getProjectEnvironment().getTestProject());
 
-		DefaultDTVariableResolver  variableResolver = new DefaultDTVariableResolver();
-		ISymbol symbol = variableResolver.resolveVariable
+		final DefaultDTVariableResolver  variableResolver = new DefaultDTVariableResolver();
+		final ISymbol symbol = variableResolver.resolveVariable
 			(manager.getFacesContext(_testJSP1), "bundle", _testJSP1);
 		assertNotNull(symbol);
 		assertTrue(symbol instanceof IComponentSymbol);
 		
-		IComponentSymbol compSymbol = (IComponentSymbol) symbol;
+		final IComponentSymbol compSymbol = (IComponentSymbol) symbol;
 		assertEquals("bundle", compSymbol.getName());
-		ITypeDescriptor typeDesc = compSymbol.getTypeDescriptor();
+		final ITypeDescriptor typeDesc = compSymbol.getTypeDescriptor();
 		assertTrue(typeDesc instanceof IMapTypeDescriptor);
 	}
 	
@@ -160,15 +162,15 @@ public class TestDefaultDTVariableResolver extends TestCase
         	DesignTimeApplicationManager.getInstance
         		(_jdtTestEnvironment.getProjectEnvironment().getTestProject());
 
-		DefaultDTVariableResolver  variableResolver = new DefaultDTVariableResolver();
-		ISymbol symbol = variableResolver.resolveVariable
+		final DefaultDTVariableResolver  variableResolver = new DefaultDTVariableResolver();
+		final ISymbol symbol = variableResolver.resolveVariable
 			(manager.getFacesContext(_testJSP1), "testBean1", _testJSP1);
 		assertNotNull(symbol);
 		assertTrue(symbol instanceof IBeanInstanceSymbol);
 		
-		IBeanInstanceSymbol compSymbol = (IBeanInstanceSymbol) symbol;
+		final IBeanInstanceSymbol compSymbol = (IBeanInstanceSymbol) symbol;
 		assertEquals("testBean1", compSymbol.getName());
-		ITypeDescriptor typeDesc = compSymbol.getTypeDescriptor();
+		final ITypeDescriptor typeDesc = compSymbol.getTypeDescriptor();
 		assertTrue(typeDesc instanceof IJavaTypeDescriptor2);
 		assertEquals("Lcom.test.TestBean1;", typeDesc.getTypeSignature());
 	}
@@ -179,9 +181,9 @@ public class TestDefaultDTVariableResolver extends TestCase
         	DesignTimeApplicationManager.getInstance
         		(_jdtTestEnvironment.getProjectEnvironment().getTestProject());
 
-		DefaultDTVariableResolver  variableResolver = new DefaultDTVariableResolver();
+		final DefaultDTVariableResolver  variableResolver = new DefaultDTVariableResolver();
 		
-		ISymbol[] variables = variableResolver.getAllVariables
+		final ISymbol[] variables = variableResolver.getAllVariables
 			(manager.getFacesContext(_testJSP1), _testJSP1);
 		
 		assertContainsVariable(variables, "applicationScope");
@@ -199,9 +201,9 @@ public class TestDefaultDTVariableResolver extends TestCase
 		assertContainsVariable(variables, "bundle");
 	}
 
-	private void assertContainsVariable(ISymbol[] variables, String name)
+	private void assertContainsVariable(final ISymbol[] variables, final String name)
 	{
-		for (ISymbol variable : variables)
+		for (final ISymbol variable : variables)
 		{
 			if (name.equals(variable.getName()))
 			{

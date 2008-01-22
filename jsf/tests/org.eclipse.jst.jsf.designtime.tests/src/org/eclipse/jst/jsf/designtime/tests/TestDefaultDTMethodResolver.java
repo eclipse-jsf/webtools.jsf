@@ -66,7 +66,7 @@ public class TestDefaultDTMethodResolver extends TestCase
         typeDesc.setType(_methodBeanType);
         symbol.setTypeDescriptor(typeDesc);
 
-        DefaultDTMethodResolver  methodResolver = new DefaultDTMethodResolver();
+        final DefaultDTMethodResolver  methodResolver = new DefaultDTMethodResolver();
         
         IMethodSymbol methodSymbol = methodResolver.getMethod(symbol, "actionMethod");
         assertNotNull(methodSymbol);
@@ -91,23 +91,21 @@ public class TestDefaultDTMethodResolver extends TestCase
         typeDesc.setType(_methodBeanType);
         symbol.setTypeDescriptor(typeDesc);
 
-        DefaultDTMethodResolver  methodResolver = new DefaultDTMethodResolver();
+        final DefaultDTMethodResolver  methodResolver = new DefaultDTMethodResolver();
 
-        ISymbol[] symbols = methodResolver.getMethods(symbol);
+        final ISymbol[] symbols = methodResolver.getMethods(symbol);
         assertNotNull(symbols);
         assertEquals(11, symbols.length);
         assertContains(symbols, "actionMethod", "()Ljava.lang.String;");
         assertContains(symbols, "actionMethodWithParam", "(Ljava.lang.String;)Ljava.lang.String;");
 	}
 
-	private void assertContains(ISymbol[] methods, String name, String signature)
+	private void assertContains(final ISymbol[] methods, final String name, final String signature)
 	{
 		IMethodSymbol methodSymbol = null;
 		
-		for (int i = 0; i < methods.length; i++)
-		{
-			ISymbol symbol = methods[i];
-			
+		for (final ISymbol symbol : methods)
+        {
 			if (name.equals(symbol.getName()))
 			{
 				assertTrue(symbol instanceof IMethodSymbol);
