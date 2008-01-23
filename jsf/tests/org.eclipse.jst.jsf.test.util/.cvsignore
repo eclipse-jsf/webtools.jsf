@@ -1,5 +1,4 @@
-bin
-@dot
 temp.folder
+@dot
 build.xml
 javaCompiler...args
