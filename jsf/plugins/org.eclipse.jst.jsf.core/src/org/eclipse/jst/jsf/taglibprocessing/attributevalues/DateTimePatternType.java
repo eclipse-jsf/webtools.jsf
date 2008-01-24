@@ -19,7 +19,7 @@ import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocume
 import org.eclipse.jst.jsf.metadataprocessors.AbstractRootTypeDescriptor;
 import org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValues;
 import org.eclipse.jst.jsf.metadataprocessors.features.PossibleValue;
-import org.w3c.dom.Attr;
+import org.eclipse.wst.xml.core.internal.provisional.document.IDOMAttr;
 import org.w3c.dom.Node;
 
 /**
@@ -63,16 +63,18 @@ public class DateTimePatternType extends AbstractRootTypeDescriptor implements I
 		}
 		return ret;
 	}
-
+	
 	private String getTypeValue() {
 		if (getStructuredDocumentContext() != null){
 			IDOMContextResolver resolver = IStructuredDocumentContextResolverFactory.INSTANCE.getDOMContextResolver(getStructuredDocumentContext());
 			if (resolver != null){
-				Node tagNode = resolver.getNode();
-				Attr typeNode = (Attr)tagNode.getAttributes().getNamedItem("type"); //$NON-NLS-1$
-				if (typeNode != null)
-					return typeNode.getValue();
-				
+				Node aNode = resolver.getNode();
+				if (aNode instanceof IDOMAttr) {
+					Node tagNode = ((IDOMAttr)aNode).getOwnerElement();
+					IDOMAttr typeNode = (IDOMAttr) tagNode.getAttributes().getNamedItem("type"); //$NON-NLS-1$
+					if (typeNode != null)
+						return typeNode.getValue();
+				}				
 			}
 		}
 		return ""; //$NON-NLS-1$
