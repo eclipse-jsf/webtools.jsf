@@ -12,11 +12,7 @@
 package org.eclipse.jst.jsf.designtime.tests;
 
 import junit.framework.Test;
-import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.eclipse.jst.jsf.core.JSFVersion;
-import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
 
 /**
  * The test suite for all tests on jsf.designtime
@@ -25,53 +21,40 @@ import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
  * 
  */
 public class AllTests {
-    public static final class ErrorTestCase extends TestCase {
-        public ErrorTestCase() {
-            // do nothing
-        }
-
-        /**
-         * 
-         */
-        public void testRuntimeNotFound() {
-            fail("Either the 1.1 or 1.2 runtime environment variable must be set and point to a JSF runtime implementation");
-        }
-    }
-
-    private static boolean _inited;
-    private static boolean _jsfRuntimePresentV11;
-    private static boolean _jsfRuntimePresentV12;
+//    private static boolean _inited;
+//    private static boolean _jsfRuntimePresentV11;
+//    private static boolean _jsfRuntimePresentV12;
 
     /**
      * @return the all tests suite
      */
     public static Test suite() {
         // tests tied to runtimes
-        if (!_inited) {
-            _jsfRuntimePresentV11 = JSFCoreUtilHelper
-                    .isJSFRuntimeJarsDirectoryPropertySet(JSFVersion.V1_1);
-            _jsfRuntimePresentV12 = JSFCoreUtilHelper
-                    .isJSFRuntimeJarsDirectoryPropertySet(JSFVersion.V1_2);
-            final boolean oneIsPresent = 
-                (_jsfRuntimePresentV11 || _jsfRuntimePresentV12);
-            final boolean bothArePresent = 
-                (_jsfRuntimePresentV11 && _jsfRuntimePresentV12);
-
-            if (!oneIsPresent) {
-                final TestSuite suite = new TestSuite(
-                        "Error: JSF runtimes not found");
-
-                suite.addTestSuite(ErrorTestCase.class);
-
-                return suite;
-            }
-
-            if (!bothArePresent) {
-                System.err.println
-                  ("Warning: only one of JSF 1.1 and 1.2 runtimes are present");
-            }
-            _inited = true;
-        }
+//        if (!_inited) {
+//            _jsfRuntimePresentV11 = JSFCoreUtilHelper
+//                    .isJSFRuntimeJarsDirectoryPropertySet(JSFVersion.V1_1);
+//            _jsfRuntimePresentV12 = JSFCoreUtilHelper
+//                    .isJSFRuntimeJarsDirectoryPropertySet(JSFVersion.V1_2);
+//            final boolean oneIsPresent = 
+//                (_jsfRuntimePresentV11 || _jsfRuntimePresentV12);
+//            final boolean bothArePresent = 
+//                (_jsfRuntimePresentV11 && _jsfRuntimePresentV12);
+//
+//            if (!oneIsPresent) {
+//                final TestSuite suite = new TestSuite(
+//                        "Error: JSF runtimes not found");
+//
+//                suite.addTestSuite(ErrorTestCase.class);
+//
+//                return suite;
+//            }
+//
+//            if (!bothArePresent) {
+//                System.err.println
+//                  ("Warning: only one of JSF 1.1 and 1.2 runtimes are present");
+//            }
+//            _inited = true;
+//        }
 
         final TestSuite suite = new TestSuite(
                 "Test for org.eclipse.jst.jsf.designtime.tests");
