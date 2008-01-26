@@ -38,7 +38,7 @@ public class TestJSPDefaultSymbolFactory extends TestCase
         JSFTestUtil.setInternetProxyPreferences(true, "www-proxy.us.oracle.com","80");
 
         final WebProjectTestEnvironment  projectTestEnvironment = 
-            new WebProjectTestEnvironment("TestJSPDefaultSymbolFactory"+getName());
+            new WebProjectTestEnvironment("TestJSPDefaultSymbolFactory_"+getName());
         projectTestEnvironment.createProject(false);
 
         final JDTTestEnvironment jdtTestEnvironment = 

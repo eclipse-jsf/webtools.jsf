@@ -39,7 +39,7 @@ public class TestResourceBundleSymbolSourceProvider extends TestCase
 
         _projectTestEnvironment = 
             new WebProjectTestEnvironment(
-                    "TestResourceBundleSymbolSourceProvider"+getName()
+                    "TestResourceBundleSymbolSourceProvider_"+getName()
                     , JavaFacetUtils.JAVA_50
                     , ProjectFacetsManager.getProjectFacet( "jst.web" ).getVersion("2.5")
                     );

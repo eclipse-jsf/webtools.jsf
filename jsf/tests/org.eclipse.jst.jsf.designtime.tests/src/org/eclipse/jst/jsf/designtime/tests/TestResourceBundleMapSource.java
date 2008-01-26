@@ -60,19 +60,19 @@ public class TestResourceBundleMapSource extends TestCase
         
         JSFTestUtil.setValidationEnabled(false);
         
-        List<IResource> resources = initProject("BundleResourceTestProject1", 
+        List<IResource> resources = initProject("BundleResourceTestProject1_"+getName(), 
                                 "/testdata/bundle1.resources.data",
                                 BUNDLE1_PATH, BUNDLE1_NAME);
         _bundle1 = (IFile) resources.get(0);
         _project1 = (IProject) resources.get(1);
         
-        resources = initProject("BundleResourceTestProject2", 
+        resources = initProject("BundleResourceTestProject2_"+getName(), 
                                 "/testdata/bundle2.resources.data",
                                 BUNDLE1_PATH, BUNDLE1_NAME);
         //_bundle2 = (IFile) resources.get(0);
         _project2 = (IProject) resources.get(1);
         
-        resources = initProject("BundleResourceTestProject3"
+        resources = initProject("BundleResourceTestProject3_"+getName()
                 , "/testdata/bundle1.resources.data", BUNDLE1_PATH, BUNDLE1_NAME);
         _project3 = (IProject) resources.get(1);
     }

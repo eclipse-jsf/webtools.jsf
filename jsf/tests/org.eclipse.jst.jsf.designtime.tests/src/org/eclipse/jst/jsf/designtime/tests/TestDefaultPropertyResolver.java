@@ -79,7 +79,7 @@ public class TestDefaultPropertyResolver extends TestCase
         JSFTestUtil.setInternetProxyPreferences(true, "www-proxy.uk.oracle.com","80");
 
         final WebProjectTestEnvironment  projectTestEnvironment = 
-            new WebProjectTestEnvironment("TestDefaultPropertyResolver"+getName());
+            new WebProjectTestEnvironment("TestDefaultPropertyResolver_"+getName());
         projectTestEnvironment.createProject(false);
 
         _jsfFactedTestEnvironment = new JSFFacetedTestEnvironment(projectTestEnvironment);

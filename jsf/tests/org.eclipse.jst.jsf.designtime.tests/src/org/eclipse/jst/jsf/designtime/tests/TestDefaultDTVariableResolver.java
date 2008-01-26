@@ -52,7 +52,7 @@ public class TestDefaultDTVariableResolver extends TestCase
         JSFTestUtil.setInternetProxyPreferences(true, "www-proxy.us.oracle.com","80");
 
         final WebProjectTestEnvironment  projectTestEnvironment = 
-            new WebProjectTestEnvironment("TestDefaultPropertyResolver"+getName());
+            new WebProjectTestEnvironment("TestDefaultPropertyResolver_"+getName());
         projectTestEnvironment.createProject(false);
 
         final IResource res = projectTestEnvironment.loadResourceInWebRoot(DesignTimeTestsPlugin.getDefault().getBundle()

@@ -34,7 +34,7 @@ public class TestDefaultDTMethodResolver extends TestCase
         JSFTestUtil.setInternetProxyPreferences(true, "www-proxy.us.oracle.com","80");
 
         final WebProjectTestEnvironment  projectTestEnvironment = 
-            new WebProjectTestEnvironment("TestDefaultMethodResolver"+getName());
+            new WebProjectTestEnvironment("TestDefaultMethodResolver_"+getName());
         projectTestEnvironment.createProject(false);
 
         _jsfFactedTestEnvironment = new JSFFacetedTestEnvironment(projectTestEnvironment);
