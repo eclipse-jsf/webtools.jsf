@@ -27,6 +27,9 @@ import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
 public class TestJSPModelProcessor extends TestCase 
 {
     private static final int NUM_JSPS = 25;
+    private static final int WAIT_ITERATIONS = 50;
+    private static final int WAIT_SLEEP_TIME_MS = 100;
+    
     private IFile _testJSP1;
     private List<IFile> _jsps;
     
@@ -159,6 +162,13 @@ public class TestJSPModelProcessor extends TestCase
         assertFalse(processor.isDisposed());
 
         _testJSP1.delete(true, null);
+
+        int i = 0; 
+        
+        while (i++ < WAIT_ITERATIONS && !processor.isDisposed())
+        {
+        	Thread.sleep(WAIT_SLEEP_TIME_MS);
+        }
         // file is deleted, so the processor should dispose itself on the 
         // resource change event
         assertTrue(processor.isDisposed());
@@ -189,6 +199,13 @@ public class TestJSPModelProcessor extends TestCase
             assertFalse(model.isShared());
 
             _testJSP1.getProject().close(null);
+
+            int i = 0; 
+            
+            while (i++ < WAIT_ITERATIONS && !processor.isDisposed())
+            {
+                Thread.sleep(WAIT_SLEEP_TIME_MS);
+            }
 
             // file is deleted, so the processor should dispose itself on the 
             // resource change event
@@ -231,6 +248,13 @@ public class TestJSPModelProcessor extends TestCase
     
             _testJSP1.getProject().delete(true,null);
     
+            int i = 0; 
+            
+            while (i++ < WAIT_ITERATIONS && !processor.isDisposed())
+            {
+                Thread.sleep(WAIT_SLEEP_TIME_MS);
+            }
+
             // file is deleted, so the processor should dispose itself on the 
             // resource change event
             assertTrue(processor.isDisposed());
@@ -269,6 +293,14 @@ public class TestJSPModelProcessor extends TestCase
             // now delete the file and ensure the processor is disposed
             file.delete(true, null);
 
+            int i = 0; 
+            
+            while (i++ < WAIT_ITERATIONS && !processor.isDisposed())
+            {
+                Thread.sleep(WAIT_SLEEP_TIME_MS);
+            }
+            // file is deleted, so the processor should dispose itself on the 
+            // resource change event
             assertTrue(processor.isDisposed());
         }
     }
@@ -298,6 +330,14 @@ public class TestJSPModelProcessor extends TestCase
             // now delete the file and ensure the processor is disposed
             file.delete(true, null);
 
+            int i = 0; 
+            
+            while (i++ < WAIT_ITERATIONS && !processor.isDisposed())
+            {
+                Thread.sleep(WAIT_SLEEP_TIME_MS);
+            }
+            // file is deleted, so the processor should dispose itself on the 
+            // resource change event
             assertTrue(processor.isDisposed());
         }
     }
