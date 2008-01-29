@@ -6,6 +6,8 @@ package org.eclipse.jst.jsf.common.dom;
  * immutable and idempotent.  Factories may cache copies as transparent 
  * singletons for unique TagIdentifier/attribute.
  * 
+ * THIS CLASS IS NOT API AND SHOULD NOT BE USED
+ * 
  * @author cbateman
  *
  */
