@@ -46,7 +46,7 @@ public class TestJDTBeanPropertyWorkingCopy extends TestCase {
 		JSFTestUtil.setInternetProxyPreferences(true, "www-proxy.us.oracle.com", "80");
 
 		final WebProjectTestEnvironment  projectTestEnvironment = 
-			new WebProjectTestEnvironment("TestJDTBeanPropertyWorkingCopyProject");
+			new WebProjectTestEnvironment("TestJDTBeanPropertyWorkingCopy"+getClass().getName()+"_"+getName());
 		projectTestEnvironment.createProject(true);
 		
 		_jdtTestEnvironment = new JDTTestEnvironment(projectTestEnvironment);

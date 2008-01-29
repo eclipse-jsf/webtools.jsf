@@ -62,7 +62,7 @@ public class TestJDTBeanIntrospector extends TestCase
         JSFTestUtil.setInternetProxyPreferences(true, "www-proxy.us.oracle.com", "80");
         
         final WebProjectTestEnvironment  projectTestEnvironment = 
-            new WebProjectTestEnvironment("TestJDTBeanIntrospectorProject");
+            new WebProjectTestEnvironment("TestJDTBeanIntrospector_"+getClass().getName()+"_"+getName());
         projectTestEnvironment.createProject(true);
         
         _jdtTestEnvironment = new JDTTestEnvironment(projectTestEnvironment);
