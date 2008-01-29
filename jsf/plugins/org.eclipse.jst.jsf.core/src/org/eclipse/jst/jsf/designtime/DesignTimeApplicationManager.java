@@ -22,6 +22,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.QualifiedName;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
+import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigUtils;
 import org.eclipse.jst.jsf.designtime.context.AbstractDTExternalContextFactory;
 import org.eclipse.jst.jsf.designtime.context.DTFacesContext;
 import org.eclipse.jst.jsf.designtime.context.IExternalContextFactoryLocator;
@@ -90,7 +91,7 @@ public final class DesignTimeApplicationManager
      */
     public final static DesignTimeApplicationManager getInstance(IProject project)
     {
-        if (project == null)
+        if (!hasJSFDesignTime(project))
         {
             return null;
         }
@@ -133,6 +134,24 @@ public final class DesignTimeApplicationManager
         return null;
     }
     
+    /**
+     * The criteria for a project having a JSF design time are:
+     * 
+     * - project is non-null.
+     * - project is accessible (project.isAccessible() == true)
+     * - project has a JSF facet (this implies that it's dependent facets are also present).
+     * 
+     * @param project
+     * @return true if project can have a JSF DesignTimeApplicationManager
+     * associated with it.  getInstance(project) uses this determine if should
+     * construct an instance for a project.
+     */
+    public static boolean hasJSFDesignTime(final IProject project)
+    {
+        return project != null && project.isAccessible() &&
+            JSFAppConfigUtils.isValidJSFProject(project);
+    }
+    
     // instance definition
     // _project must be writable in case the manager needs to be retargetted
     // after a rename/move etc.
@@ -152,7 +171,10 @@ public final class DesignTimeApplicationManager
      */
     public DTFacesContext getFacesContext(IFile file)
     {
-        assert file != null;
+        if (!hasDTFacesContext(file))
+        {
+            return null;
+        }
         
         try
         {
@@ -182,7 +204,35 @@ public final class DesignTimeApplicationManager
     }
     
     /**
-     * @return the design time view handler for this project
+     * Only files for which a runtime request context will be generated
+     * have a corresponding design time context.  This is generally confined
+     * to view definition files such as JSP's.
+     * 
+     * General criteria for a file to have a design time faces context are:
+     * 
+     * - the file is non-null and isAccessible()
+     * - the file has designtime view handler (getViewHandler(file) != null)
+     * and it supports the content type of file.
+     *
+     * getFacesContext uses this to decide whether to generate a context
+     * for an IFile.
+     * 
+     * @param file
+     * @return true if file has a design time faces context
+     */
+    public boolean hasDTFacesContext(final IFile file)
+    {
+        IDTViewHandler viewHandler = getViewHandler();
+        
+        if (file != null && file.isAccessible()&&
+                viewHandler != null && viewHandler.supportsViewDefinition(file))
+        {
+            return true;
+        }
+        return false;
+    }
+    /**
+     * @return the design time view handler for this webap (project).
      */
     public synchronized IDTViewHandler getViewHandler()
     {
