@@ -24,15 +24,15 @@ import org.eclipse.wst.sse.core.StructuredModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
 
-public class TestJSPModelProcessor extends TestCase 
+public class TestJSPModelProcessor extends TestCase
 {
     private static final int NUM_JSPS = 25;
     private static final int WAIT_ITERATIONS = 50;
     private static final int WAIT_SLEEP_TIME_MS = 100;
-    
+
     private IFile _testJSP1;
     private List<IFile> _jsps;
-    
+
     private JSFFacetedTestEnvironment _jsfFactedTestEnvironment;
 
     @Override
@@ -41,20 +41,20 @@ public class TestJSPModelProcessor extends TestCase
         JSFTestUtil.setValidationEnabled(false);
         JSFTestUtil.setInternetProxyPreferences(true, "www-proxy.us.oracle.com","80");
 
-        final WebProjectTestEnvironment  projectTestEnvironment = 
+        final WebProjectTestEnvironment  projectTestEnvironment =
             new WebProjectTestEnvironment("TestJSPModelProcessor_"+getName());
         projectTestEnvironment.createProject(false);
 
-        final JDTTestEnvironment jdtTestEnvironment = 
+        final JDTTestEnvironment jdtTestEnvironment =
             new JDTTestEnvironment(projectTestEnvironment);
 
         final TestFileResource input = new TestFileResource();
-        input.load(DesignTimeTestsPlugin.getDefault().getBundle(), 
-                "/testdata/bundle1.resources.data");
+        input.load(DesignTimeTestsPlugin.getDefault().getBundle(),
+        "/testdata/bundle1.resources.data");
         jdtTestEnvironment.addResourceFile("src"
                 , new ByteArrayInputStream(input.toBytes())
                 , "bundles", "bundle1.properties");
-        
+
         _testJSP1 = (IFile) projectTestEnvironment.loadResourceInWebRoot(DesignTimeTestsPlugin.getDefault().getBundle()
                 , "/testdata/testdata1.jsp.data", "testdata1.jsp");
 
@@ -62,11 +62,11 @@ public class TestJSPModelProcessor extends TestCase
         for (int i = 0; i < NUM_JSPS; i++)
         {
             _jsps.add((IFile) projectTestEnvironment.loadResourceInWebRoot(DesignTimeTestsPlugin.getDefault().getBundle()
-                , "/testdata/testdata1.jsp.data", "testdata_"+i+".jsp"));
+                    , "/testdata/testdata1.jsp.data", "testdata_"+i+".jsp"));
         }
 
         _jsfFactedTestEnvironment = new JSFFacetedTestEnvironment(projectTestEnvironment);
-        _jsfFactedTestEnvironment.initialize(IJSFCoreConstants.FACET_VERSION_1_1);    
+        _jsfFactedTestEnvironment.initialize(IJSFCoreConstants.FACET_VERSION_1_1);
     }
 
     @Override
@@ -86,19 +86,19 @@ public class TestJSPModelProcessor extends TestCase
         final JSPModelProcessor processor = JSPModelProcessor.get(_testJSP1);
         assertNotNull(processor);
 
-         Map<Object, ISymbol> scopeMap = 
+        Map<Object, ISymbol> scopeMap =
             processor.getMapForScope(ISymbolConstants.SYMBOL_SCOPE_REQUEST_STRING);
         assertTrue(scopeMap.isEmpty());
 
-        scopeMap = 
+        scopeMap =
             processor.getMapForScope(ISymbolConstants.SYMBOL_SCOPE_SESSION_STRING);
         assertTrue(scopeMap.isEmpty());
 
-        scopeMap = 
+        scopeMap =
             processor.getMapForScope(ISymbolConstants.SYMBOL_SCOPE_APPLICATION_STRING);
         assertTrue(scopeMap.isEmpty());
 
-        scopeMap = 
+        scopeMap =
             processor.getMapForScope(ISymbolConstants.SYMBOL_SCOPE_NONE_STRING);
         assertTrue(scopeMap.isEmpty());
     }
@@ -121,19 +121,19 @@ public class TestJSPModelProcessor extends TestCase
             assertNotNull(processor);
             // we should be the only one with a handle
             assertFalse(model.isShared());
-    
-            Map<Object, ISymbol> scopeMap = 
+
+            Map<Object, ISymbol> scopeMap =
                 processor.getMapForScope(ISymbolConstants.SYMBOL_SCOPE_REQUEST_STRING);
             assertTrue(scopeMap.isEmpty());
             // we should be the only one with a handle
             assertFalse(model.isShared());
-    
+
             processor.refresh(false);
             // we should be the only one with a handle
             assertFalse(model.isShared());
-    
+
             // after refresh we should have a symbol for the loadBundle and the dataTable
-            scopeMap = 
+            scopeMap =
                 processor.getMapForScope(ISymbolConstants.SYMBOL_SCOPE_REQUEST_STRING);
             assertFalse(scopeMap.isEmpty());
             assertEquals(2, scopeMap.size());
@@ -163,15 +163,9 @@ public class TestJSPModelProcessor extends TestCase
 
         _testJSP1.delete(true, null);
 
-        int i = 0; 
-        
-        while (i++ < WAIT_ITERATIONS && !processor.isDisposed())
-        {
-        	Thread.sleep(WAIT_SLEEP_TIME_MS);
-        }
-        // file is deleted, so the processor should dispose itself on the 
+        // file is deleted, so the processor should dispose itself on the
         // resource change event
-        assertTrue(processor.isDisposed());
+        waitForAndAssertProcessorDisposed(processor, true);
     }
 
     public void testProjectClosure() throws Exception
@@ -200,16 +194,9 @@ public class TestJSPModelProcessor extends TestCase
 
             _testJSP1.getProject().close(null);
 
-            int i = 0; 
-            
-            while (i++ < WAIT_ITERATIONS && !processor.isDisposed())
-            {
-                Thread.sleep(WAIT_SLEEP_TIME_MS);
-            }
-
-            // file is deleted, so the processor should dispose itself on the 
+            // file is deleted, so the processor should dispose itself on the
             // resource change event
-            assertTrue(processor.isDisposed());
+            waitForAndAssertProcessorDisposed(processor, true);
             // final check, with processor disposed, still not shared
             assertFalse(model.isShared());
         }
@@ -245,19 +232,12 @@ public class TestJSPModelProcessor extends TestCase
             // doesn't hold it.
             processor.refresh(false);
             assertFalse(model.isShared());
-    
-            _testJSP1.getProject().delete(true,null);
-    
-            int i = 0; 
-            
-            while (i++ < WAIT_ITERATIONS && !processor.isDisposed())
-            {
-                Thread.sleep(WAIT_SLEEP_TIME_MS);
-            }
 
-            // file is deleted, so the processor should dispose itself on the 
+            _testJSP1.getProject().delete(true,null);
+
+            // file is deleted, so the processor should dispose itself on the
             // resource change event
-            assertTrue(processor.isDisposed());
+            waitForAndAssertProcessorDisposed(processor, true);
             assertFalse(model.isShared());
         }
         finally
@@ -283,25 +263,19 @@ public class TestJSPModelProcessor extends TestCase
             // the processor model should start out dirty since it won't
             // get refreshed unless the resource detects a change or if
             // it is explicitly refreshed
-            assertTrue(processor.isModelDirty()); 
+            assertTrue(processor.isModelDirty());
 
             // this should trigger a change event and update the model
             file.touch(null);
-            
+
             assertFalse(processor.isModelDirty());
 
             // now delete the file and ensure the processor is disposed
             file.delete(true, null);
 
-            int i = 0; 
-            
-            while (i++ < WAIT_ITERATIONS && !processor.isDisposed())
-            {
-                Thread.sleep(WAIT_SLEEP_TIME_MS);
-            }
-            // file is deleted, so the processor should dispose itself on the 
+            // file is deleted, so the processor should dispose itself on the
             // resource change event
-            assertTrue(processor.isDisposed());
+            waitForAndAssertProcessorDisposed(processor, true);
         }
     }
 
@@ -319,45 +293,63 @@ public class TestJSPModelProcessor extends TestCase
             // the processor model should start out dirty since it won't
             // get refreshed unless the resource detects a change or if
             // it is explicitly refreshed
-            assertTrue(processor.isModelDirty()); 
             // we should be the only one with a handle
+            waitForAndAssertProcessorDirty(processor, true);
 
             // since the model is dirty this should trigger a refresh
             processor.refresh(false);
 
-            assertFalse(processor.isModelDirty());
+            waitForAndAssertProcessorDirty(processor, false);
 
             // now delete the file and ensure the processor is disposed
             file.delete(true, null);
 
-            int i = 0; 
-            
-            while (i++ < WAIT_ITERATIONS && !processor.isDisposed())
-            {
-                Thread.sleep(WAIT_SLEEP_TIME_MS);
-            }
-            // file is deleted, so the processor should dispose itself on the 
-            // resource change event
-            assertTrue(processor.isDisposed());
+            waitForAndAssertProcessorDisposed(processor, true);
         }
+    }
+
+    private void waitForAndAssertProcessorDirty(final JSPModelProcessor processor,
+            final boolean expectedValue) throws Exception
+            {
+        int i = 0;
+
+        while (i++ < WAIT_ITERATIONS && (processor.isModelDirty() != expectedValue))
+        {
+            Thread.sleep(WAIT_SLEEP_TIME_MS);
+        }
+        assertEquals(expectedValue, processor.isModelDirty());
+            }
+
+    private void waitForAndAssertProcessorDisposed(final JSPModelProcessor processor, final boolean expectedValue)
+    throws Exception
+    {
+        int i = 0;
+
+        while (i++ < WAIT_ITERATIONS && (processor.isDisposed() != expectedValue))
+        {
+            Thread.sleep(WAIT_SLEEP_TIME_MS);
+        }
+        // file is deleted, so the processor should dispose itself on the
+        // resource change event
+        assertEquals(expectedValue, processor.isDisposed());
     }
 
     public static void main(final String[] args)
     {
-       final Set<Integer> set = new TreeSet<Integer>();
-       
-       final Random random = new Random();
-       
-       while(set.size() < NUM_JSPS)
-       {
-           final Integer value = Integer.valueOf(Math.abs(random.nextInt()) % NUM_JSPS);
-           
-           if (!set.contains(value))
-           {
-               System.out.printf("%d,", value);
-               set.add(value);
-           }
-       }
+        final Set<Integer> set = new TreeSet<Integer>();
+
+        final Random random = new Random();
+
+        while(set.size() < NUM_JSPS)
+        {
+            final Integer value = Integer.valueOf(Math.abs(random.nextInt()) % NUM_JSPS);
+
+            if (!set.contains(value))
+            {
+                System.out.printf("%d,", value);
+                set.add(value);
+            }
+        }
     }
 }
 
