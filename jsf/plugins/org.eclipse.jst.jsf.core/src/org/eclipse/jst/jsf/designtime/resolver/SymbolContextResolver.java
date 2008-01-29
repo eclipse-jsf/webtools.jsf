@@ -53,10 +53,13 @@ import org.eclipse.jst.jsf.designtime.context.DTFacesContext;
             final DesignTimeApplicationManager manager =
                 DesignTimeApplicationManager.getInstance(file.getProject());
             
-            final DTFacesContext facesContext = manager.getFacesContext(file);
-    
-            return manager.getVariableResolver().
-                resolveVariable(facesContext, name, file);
+            if (manager != null)
+            {
+                final DTFacesContext facesContext = manager.getFacesContext(file);
+        
+                return manager.getVariableResolver().
+                    resolveVariable(facesContext, name, file);
+            }
         }
         
         return null;
@@ -71,12 +74,15 @@ import org.eclipse.jst.jsf.designtime.context.DTFacesContext;
             final DesignTimeApplicationManager manager =
                 DesignTimeApplicationManager.getInstance(file.getProject());
             
-            final DTFacesContext facesContext = manager.getFacesContext(file);
-            
-            if (facesContext != null)
+            if (manager != null)
             {
-                return manager.getVariableResolver().
-                        getAllVariables(facesContext, file);
+                final DTFacesContext facesContext = manager.getFacesContext(file);
+                
+                if (facesContext != null)
+                {
+                    return manager.getVariableResolver().
+                            getAllVariables(facesContext, file);
+                }
             }
         }
         
@@ -91,7 +97,11 @@ import org.eclipse.jst.jsf.designtime.context.DTFacesContext;
         {
             final DesignTimeApplicationManager manager =
                 DesignTimeApplicationManager.getInstance(file.getProject());
-            return manager.getPropertyResolver().getProperty(symbol, propertyName);
+            
+            if (manager != null)
+            {
+                return manager.getPropertyResolver().getProperty(symbol, propertyName);
+            }
         }
         
         return null;
@@ -105,7 +115,11 @@ import org.eclipse.jst.jsf.designtime.context.DTFacesContext;
         {
             final DesignTimeApplicationManager manager =
                 DesignTimeApplicationManager.getInstance(file.getProject());
-            return manager.getPropertyResolver().getAllProperties(symbol);
+            
+            if (manager != null)
+            {
+                return manager.getPropertyResolver().getAllProperties(symbol);
+            }
         }
         return ISymbol.EMPTY_SYMBOL_ARRAY;
     }
@@ -118,7 +132,11 @@ import org.eclipse.jst.jsf.designtime.context.DTFacesContext;
         {
             final DesignTimeApplicationManager manager =
                 DesignTimeApplicationManager.getInstance(file.getProject());
-            return manager.getMethodResolver().getMethod(base, methodName);
+             
+            if (manager != null)
+            {
+                return manager.getMethodResolver().getMethod(base, methodName);
+            }
         }
         
         return null;
@@ -132,7 +150,11 @@ import org.eclipse.jst.jsf.designtime.context.DTFacesContext;
         {
             final DesignTimeApplicationManager manager =
                 DesignTimeApplicationManager.getInstance(file.getProject());
-            return manager.getMethodResolver().getMethods(base);
+            
+            if (manager != null)
+            {
+                return manager.getMethodResolver().getMethods(base);
+            }
         }
         
         return new IMethodSymbol[0];
