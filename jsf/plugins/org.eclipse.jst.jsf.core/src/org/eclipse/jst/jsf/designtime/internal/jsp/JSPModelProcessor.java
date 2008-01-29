@@ -460,12 +460,14 @@ public class JSPModelProcessor
             DesignTimeApplicationManager  dtAppMgr =
                 DesignTimeApplicationManager.getInstance(_file.getProject());
 
-            DTFacesContext facesContext = dtAppMgr.getFacesContext(_file);
-            
-            if (facesContext != null)
+            if (dtAppMgr != null)
             {
-                facesContext.setLocaleString(attribute.getNodeValue());
+                DTFacesContext facesContext = dtAppMgr.getFacesContext(_file);
                 
+                if (facesContext != null)
+                {
+                    facesContext.setLocaleString(attribute.getNodeValue());
+                }
             }
         }
     }
