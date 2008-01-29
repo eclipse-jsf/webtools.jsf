@@ -1,9 +1,9 @@
 package org.eclipse.jst.jsf.designtime.internal.view;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.jst.jsf.context.IModelContext;
 import org.eclipse.jst.jsf.designtime.context.DTFacesContext;
 import org.eclipse.wst.common.componentcore.ComponentCore;
 
@@ -43,16 +43,17 @@ public abstract class AbstractDTViewHandler implements IDTViewHandler
     public abstract IPath getActionURL(DTFacesContext context, IResource resource,
             IPath requestPath) throws ViewHandlerException;
 
-    public abstract String getELExpression(IModelContext context) throws ViewHandlerException;
-
     public abstract IPath getRelativeActionPath(DTFacesContext context,
         String relativeToViewId, String uri) throws ViewHandlerException;
 
     public abstract IViewDefnAdapterFactory getViewMetadataAdapterFactory(
         DTFacesContext context) throws ViewHandlerException;
 
+
 //    public abstract IDTUIViewRoot populateView(DTFacesContext context,
 //        IDTUIViewRoot viewRoot) throws ViewHandlerException;
+
+    public abstract boolean supportsViewDefinition(IFile file);
 
     public String getViewId(final DTFacesContext context,final IResource res) 
     {

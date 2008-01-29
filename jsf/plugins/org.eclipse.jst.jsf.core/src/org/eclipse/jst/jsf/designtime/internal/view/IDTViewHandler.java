@@ -1,8 +1,8 @@
 package org.eclipse.jst.jsf.designtime.internal.view;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.jst.jsf.context.IModelContext;
 import org.eclipse.jst.jsf.designtime.context.DTFacesContext;
 
 /**
@@ -54,26 +54,6 @@ public interface IDTViewHandler
      * @throws ViewHandlerException 
      */
 //    IDTUIViewRoot populateView(DTFacesContext context, IDTUIViewRoot viewRoot)throws ViewHandlerException;
-
-
-    /**
-     * The view handler must be able to extract all EL expressions from a
-     * view definition.  Given a model context that points into the view definition
-     * it must return the EL expression in that context.  If the model context
-     * provided does not refer to a valid view definition for this view handler,
-     * then ViewHandlerException(EL_NOT_FOUND) should be thrown.  If an exception
-     * occurs while trying to extract the EL expression at context, then
-     * ViewHandlerException(caughtException, EL_EXCEPTION_CAUGHT_WHILE_PARSING)
-     * should be thrown.  Note that any reference to parsing here means extraction
-     * from the document and not building an AST for the expression itself.
-     * 
-     * @param context
-     * @return the text (stripped of any escaping such as #{} in JSP)
-     * of the EL expression referred to by context or null if there is no
-     * valid EL expression at context.
-     * @throws ViewHandlerException 
-     */
-    String getELExpression(IModelContext context) throws  ViewHandlerException;
 
     /**
      * Calculate the locale for the current view context.  The return string must
@@ -144,6 +124,14 @@ public interface IDTViewHandler
     IViewDefnAdapterFactory getViewMetadataAdapterFactory(DTFacesContext context) throws ViewHandlerException;
 
 
+    /**
+     * @param file
+     * @return true if the contents of the file is of a format that this
+     * view handler supports.  Generally, this is decided by a combination
+     * of content type and, in the case of XML formats, schema.
+     */
+    boolean supportsViewDefinition(final IFile file);
+    
     /**
      * General exception class for problems that a custom view handler
      * wants to propagate to the framework in a well-defined way.
