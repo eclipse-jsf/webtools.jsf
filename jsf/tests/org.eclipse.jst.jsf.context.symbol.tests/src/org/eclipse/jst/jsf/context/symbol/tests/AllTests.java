@@ -30,7 +30,8 @@ public class AllTests {
         suite.addTestSuite(TestIJavaTypeDescriptor2.class);
         suite.addTestSuite(TestIPropertySymbolItemProvider.class);
         suite.addTestSuite(TestTypeCoercion.class);
-        suite.addTestSuite(TestIJavaTypeDescriptor2_ChangeStability.class);
+        // see https://bugs.eclipse.org/bugs/show_bug.cgi?id=217135
+       // suite.addTestSuite(TestIJavaTypeDescriptor2_ChangeStability.class);
         //$JUnit-END$
         return suite;
     }
