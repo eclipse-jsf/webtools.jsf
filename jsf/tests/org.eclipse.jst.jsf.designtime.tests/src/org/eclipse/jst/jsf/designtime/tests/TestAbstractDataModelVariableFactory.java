@@ -13,6 +13,8 @@ package org.eclipse.jst.jsf.designtime.tests;
 
 import junit.framework.TestCase;
 
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.internal.types.IAssignable;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
@@ -59,7 +61,16 @@ public class TestAbstractDataModelVariableFactory extends TestCase
     protected void tearDown() throws Exception {
         super.tearDown();
         
-        _jdtTestEnvironment.getJavaProject().getProject().delete(true, null);
+        try
+        {
+            final IProject project = _jdtTestEnvironment.getJavaProject().getProject();
+            project.close(null);
+            project.delete(true, null);
+        }
+        catch (CoreException ce)
+        {
+            ce.printStackTrace(System.err);
+        }
     }
 
     public final void testCreateArraySymbol() 
