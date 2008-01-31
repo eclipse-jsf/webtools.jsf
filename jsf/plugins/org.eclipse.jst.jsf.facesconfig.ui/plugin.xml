@@ -4,7 +4,7 @@
   <extension
         point="org.eclipse.ui.preferencePages">
      <page
-           category="org.eclipse.wst.sse.ui.internal.provisional.preferences/org.eclipse.jst.jsf.ui.JSFRootPage"
+           category="org.eclipse.jst.jsf.ui.JSFRootPage"
            class="org.eclipse.jst.jsf.facesconfig.ui.preference.GEMPreferences"
            id="org.eclipse.jst.jsf.facesconfig.ui.preference.GEMPreferences"
            name="%preferencepage.jsffacesconfigui.name"/>
