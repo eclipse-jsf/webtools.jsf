@@ -665,7 +665,7 @@ public interface DTInfoPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-//    @SuppressWarnings("hiding")
+    @SuppressWarnings("hiding")
 	interface Literals {
 		/**
 		 * The meta object literal for the '{@link org.eclipse.jst.pagedesigner.dtmanager.dtinfo.internal.impl.DTInfoImpl <em>DT Info</em>}' class.

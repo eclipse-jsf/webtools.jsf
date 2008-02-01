@@ -31,6 +31,7 @@ import org.eclipse.emf.ecore.EReference;
  * @model kind="package"
  * @generated
  */
+@SuppressWarnings("hiding")
 public interface JSFLibraryRegistryPackage extends EPackage{
 	/**
 	 * <!-- begin-user-doc -->

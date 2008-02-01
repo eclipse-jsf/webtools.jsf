@@ -115,6 +115,7 @@ import org.eclipse.emf.ecore.EReference;
  *        extendedMetaData="qualified='false'"
  * @generated
  */
+@SuppressWarnings("hiding")
 public interface FacesConfigPackage extends EPackage {
     /**
      * <!-- begin-user-doc -->

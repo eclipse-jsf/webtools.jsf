@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2007 Oracle Corporation
  *
- * $Id: QuickEditTabSectionsPackage.java,v 1.3 2008/02/01 20:20:20 gkessler Exp $
+ * $Id: QuickEditTabSectionsPackage.java,v 1.4 2008/02/01 21:52:33 gkessler Exp $
  */
 package org.eclipse.jst.pagedesigner.editors.properties.quickedittabsections;
 
@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EReference;
  * @model kind="package"
  * @generated
  */
+@SuppressWarnings("hiding")
 public interface QuickEditTabSectionsPackage extends EPackage {
 	/**
 	 * <!-- begin-user-doc -->

@@ -202,10 +202,10 @@ public class FacesConfigEditor extends FormEditor implements
 						protected ResourceSet resourceSet = editingDomain
 								.getResourceSet();
 
-//						@SuppressWarnings("hiding") //$NON-NLS-1$
+						@SuppressWarnings("hiding") //$NON-NLS-1$
                         protected Collection changedResources = new ArrayList();
 
-//						@SuppressWarnings("hiding") //$NON-NLS-1$
+						@SuppressWarnings("hiding") //$NON-NLS-1$
                         protected Collection removedResources = new ArrayList();
 
 						public boolean visit(IResourceDelta delta_) {

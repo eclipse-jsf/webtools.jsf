@@ -41,7 +41,7 @@ public class PluginProvidedJSFLibraryImpl extends JSFLibraryImpl implements Plug
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-//    @SuppressWarnings("hiding")
+    @SuppressWarnings("hiding")
 	public static final String copyright = "Copyright (c) 2005 Oracle Corporation";
 
 	/**

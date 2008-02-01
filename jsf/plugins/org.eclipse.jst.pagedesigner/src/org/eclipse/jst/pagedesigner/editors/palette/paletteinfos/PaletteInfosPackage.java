@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EReference;
  * @model kind="package"
  * @generated
  */
+@SuppressWarnings("hiding")
 public interface PaletteInfosPackage extends EPackage {
 	/**
 	 * <!-- begin-user-doc -->

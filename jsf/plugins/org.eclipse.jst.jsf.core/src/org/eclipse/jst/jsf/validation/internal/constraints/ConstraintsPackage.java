@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConstraintsPackage.java,v 1.3 2008/02/01 20:19:58 gkessler Exp $
+ * $Id: ConstraintsPackage.java,v 1.4 2008/02/01 21:52:24 gkessler Exp $
  */
 package org.eclipse.jst.jsf.validation.internal.constraints;
 
@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EReference;
  * @model kind="package"
  * @generated
  */
+@SuppressWarnings("hiding")
 public interface ConstraintsPackage extends EPackage {
     /**
      * The package name.
