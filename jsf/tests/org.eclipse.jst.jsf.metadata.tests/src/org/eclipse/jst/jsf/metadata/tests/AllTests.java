@@ -23,6 +23,7 @@ import org.eclipse.jst.jsf.common.metadata.tests.IncludeEntityGroupImplTests;
 import org.eclipse.jst.jsf.common.metadata.tests.MergeTests;
 import org.eclipse.jst.jsf.common.metadata.tests.MetaDataExceptionTest;
 import org.eclipse.jst.jsf.common.metadata.tests.MetaDataQueryHelperTests;
+import org.eclipse.jst.jsf.common.metadata.tests.MissingMDExtensionModelTests;
 import org.eclipse.jst.jsf.common.metadata.tests.ModelImplTests;
 import org.eclipse.jst.jsf.common.metadata.tests.ModelProviderAdapterTests;
 import org.eclipse.jst.jsf.common.metadata.tests.TinyTestTests;
@@ -92,6 +93,8 @@ public class AllTests {
 		addTestSuite(suite, ModelImplTests.class);
 		addTestSuite(suite, MergeTests.class);
 		addTestSuite(suite, TinyTestTests.class);
+		
+		addTestSuite(suite, MissingMDExtensionModelTests.class);
 
 //		//query + main API
 		addTestSuite(suite, EmptyResultSetTest.class);

@@ -45,8 +45,11 @@
             uri="http://org.eclipse.jsf/quickEditSectionTest"/>
       <standardMetaDataFile
             location="/testfiles/metadata/propertyDescriptorTest.xml"
-            uri="http://org.eclipse.jsf/propertyDescriptorTest"/>            
-            
+            uri="http://org.eclipse.jsf/propertyDescriptorTest"/>  
+      <standardMetaDataFile
+            location="/testfiles/metadata/missingMDModelTest.xml"
+            uri="http://org.eclipse.jsf/missingMDModelTest"/>  
+                                             
    </extension>
    	<extension point="org.eclipse.jst.pagedesigner.cmRegistry">
 		<registry configFile="/testfiles/metadata/sybasejsfhtml.xml"

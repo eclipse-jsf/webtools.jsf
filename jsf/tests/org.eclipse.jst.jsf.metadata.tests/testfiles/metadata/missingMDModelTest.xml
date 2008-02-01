@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadatamodel 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" 
+	xmlns:mdt="http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore"  
+	xmlns:bogus="http://org.eclipse.jsf/bogus.ecore"
+	id="http://org.eclipse.jsf/missingMDModelTest"
+	type="tagFile">
+	
+	<entity id="Tag">
+		<entity id="Attr1">
+	 		<trait id="attribute-value-runtime-type">
+	  			<value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+	  		</trait>
+	  		<trait id="bogusTrait">
+	  			<value xsi:type="bogus:foobars">
+		  			<item>A</item>
+		  			<item>B</item>
+		  			<item>C</item>
+	  				<item>D</item>
+	  			</value>
+	  		</trait>
+	  		<trait id="reallybogusTrait">
+	  			<value xsi:type="bogiss:foobars">
+		  			<item>A</item>
+		  			<item>B</item>
+		  			<item>C</item>
+	  				<item>D</item>
+	  			</value>
+	  		</trait>
+	  		<trait id="valid-values">
+	  			<value xsi:type="mdt:ListOfValues">
+		  			<item>A</item>
+		  			<item>B</item>
+		  			<item>C</item>
+	  				<item>D</item>
+	  			</value>
+	  		</trait>
+	  		<trait id="displayed-values">
+	  			<value xsi:type="mdt:ListOfValues">
+		  			<item>A FirstVal</item>
+		  			<item>B SecondVal</item>
+		  			<item>C ThirdVal</item>
+		  			<item>D FourthVal</item>
+	  			</value>
+	  		</trait>  	
+	  		<trait id="display-label">
+	  			<value>MyAttr1</value>
+	  		</trait>	
+	  		<trait id="description">
+	  			<value>This is a description.</value>
+	  		</trait>
+	  		<trait id="category">
+	  			<value>CategoryName</value>
+	  		</trait>
+	  		<trait id="small-icon">
+	  			<value>/testfiles/icons/attr_val.gif</value>
+	  		</trait>
+	  		<trait id="default-value">
+	  			<value>A</value>
+	  		</trait>
+	  		<trait id="required">
+	  			<value>true</value>
+	  		</trait>
+		</entity>
+		<entity id="DefaultAttr">
+			<trait id="attribute-value-runtime-type">
+	  			<value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+	  		</trait>
+	  		<trait id="cell-editor">
+	  			<value>org.eclipse.jface.viewers.TextCellEditor</value>
+	  		</trait>
+	  		<trait id="bogusTrait">
+	  			<value xsi:type="bogus:foobars">
+		  			<item>A</item>
+		  			<item>B</item>
+		  			<item>C</item>
+	  				<item>D</item>
+	  			</value>
+	  		</trait>
+		</entity>
+		<entity id="boolAttr">
+			<trait id="attribute-value-runtime-type">
+	  			<value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
+	  		</trait>
+		</entity>
+	</entity>
+</metadatamodel>

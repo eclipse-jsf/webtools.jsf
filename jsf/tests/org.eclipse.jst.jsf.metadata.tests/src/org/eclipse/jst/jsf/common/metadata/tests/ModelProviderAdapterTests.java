@@ -88,8 +88,10 @@ public class ModelProviderAdapterTests extends TestCase {
 		assertNotNull(classLoaderProvider);
 		Class klass = classLoaderProvider.loadClass("java.lang.String");
 		assertNotNull(klass);
-		klass = classLoaderProvider.loadClass("org.eclipse.jst.pagedesigner.jsf.ui.util.JSFUIPluginResourcesUtil");
-		assertNotNull(klass);
+		
+		// when all MD was moved from WPE to tagsupport plugin, there was no longer a plugin specific class to load here.    FIX ME later.
+//		klass = classLoaderProvider.loadClass("org.eclipse.jst.pagedesigner.jsf.ui.util.JSFUIPluginResourcesUtil");
+//		assertNotNull(klass);
 	}
 	
 }
