@@ -10,118 +10,115 @@
  *******************************************************************************/ 
 package org.eclipse.jst.pagedesigner.dtmanager.converter.operations;
 
-import org.eclipse.jst.jsf.common.metadata.Trait;
-import org.eclipse.jst.jsf.common.metadata.internal.IClassLoaderProvider;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExtension;
+import org.eclipse.core.runtime.IExtensionPoint;
+import org.eclipse.core.runtime.InvalidRegistryObjectException;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
+import org.eclipse.jst.pagedesigner.IJMTConstants;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.ITransformOperation;
-import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.AppendChildElementOperation;
-import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.AppendChildTextFromXPathOperation;
-import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.AppendChildTextOperation;
-import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.ConvertAttributeToTextOperation;
-import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.CopyAllAttributesOperation;
-import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.CopyAttributeOperation;
-import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.CopyChildrenOperation;
-import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.CreateAttributeFromXPathOperation;
-import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.CreateAttributeOperation;
-import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.CreateElementOperation;
-import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.IfNotOperation;
-import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.IfOperation;
-import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.IterateOverElementsOperation;
-import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.MakeParentElementCurrentOperation;
-import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.RemoveAttributeOperation;
-import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.RenameAttributeOperation;
+import org.osgi.framework.Bundle;
 
 /**
- * Factory responsible for producing ITransformOperation instances from a known
- * set.
- * 
+ * Factory responsible for producing {@link org.eclipse.jst.pagedesigner.dtmanager.converter.ITransformOperation} instances from the <br>
+ * <code>org.eclipse.jst.pagedesigner.pageDesignerExtension.tagTransformOperation</code> extensions 
+ * <br>
  * <p><b>Provisional API - subject to change</b></p>
  * 
  * @author Ian Trimble - Oracle
  */
-public class TransformOperationFactory {
-
+public final class TransformOperationFactory {
 	/**
 	 * AppendChildElementOperation
 	 */
-	public static final String OP_AppendChildElementOperation = "AppendChildElementOperation";
+	public static final String OP_AppendChildElementOperation = PDPlugin.getPluginId()+".AppendChildElementOperation"; //$NON-NLS-1$
 	/**
 	 * AppendChildTextFromXPathOperation
 	 */
-	public static final String OP_AppendChildTextFromXPathOperation = "AppendChildTextFromXPathOperation";
+	public static final String OP_AppendChildTextFromXPathOperation = PDPlugin.getPluginId()+".AppendChildTextFromXPathOperation"; //$NON-NLS-1$
 	/**
 	 * AppendChildTextOperation
 	 */
-	public static final String OP_AppendChildTextOperation = "AppendChildTextOperation";
+	public static final String OP_AppendChildTextOperation = PDPlugin.getPluginId()+".AppendChildTextOperation"; //$NON-NLS-1$
 	/**
 	 * ConvertAttributeToTextOperation
 	 */
-	public static final String OP_ConvertAttributeToTextOperation = "ConvertAttributeToTextOperation";
+	public static final String OP_ConvertAttributeToTextOperation = PDPlugin.getPluginId()+".ConvertAttributeToTextOperation"; //$NON-NLS-1$
 	/**
 	 * CopyAllAttributesOperation
 	 */
-	public static final String OP_CopyAllAttributesOperation = "CopyAllAttributesOperation";
+	public static final String OP_CopyAllAttributesOperation = PDPlugin.getPluginId()+".CopyAllAttributesOperation"; //$NON-NLS-1$
 	/**
 	 * CopyAttributeOperation
 	 */
-	public static final String OP_CopyAttributeOperation = "CopyAttributeOperation";
+	public static final String OP_CopyAttributeOperation = PDPlugin.getPluginId()+".CopyAttributeOperation"; //$NON-NLS-1$
 	/**
 	 * CopyChildrenOperation
 	 */
-	public static final String OP_CopyChildrenOperation = "CopyChildrenOperation";
+	public static final String OP_CopyChildrenOperation = PDPlugin.getPluginId()+".CopyChildrenOperation"; //$NON-NLS-1$
 	/**
 	 * CreateAttributeFromXPathOperation
 	 */
-	public static final String OP_CreateAttributeFromXPathOperation = "CreateAttributeFromXPathOperation";
+	public static final String OP_CreateAttributeFromXPathOperation = PDPlugin.getPluginId()+".CreateAttributeFromXPathOperation"; //$NON-NLS-1$
 	/**
 	 * CreateAttributeOperation
 	 */
-	public static final String OP_CreateAttributeOperation = "CreateAttributeOperation";
+	public static final String OP_CreateAttributeOperation = PDPlugin.getPluginId()+".CreateAttributeOperation"; //$NON-NLS-1$
 	/**
 	 * CreateElementOperation
 	 */
-	public static final String OP_CreateElementOperation = "CreateElementOperation";
+	public static final String OP_CreateElementOperation = PDPlugin.getPluginId()+".CreateElementOperation"; //$NON-NLS-1$
 	/**
 	 * CustomTransformOperation
 	 */
-	public static final String OP_CustomTransformOperation = "CustomTransformOperation";
+	public static final String OP_CustomTransformOperation = PDPlugin.getPluginId()+".CustomTransformOperation"; //$NON-NLS-1$
 	/**
 	 * IfNotOperation
 	 */
-	public static final String OP_IfNotOperation = "IfNotOperation";
+	public static final String OP_IfNotOperation = PDPlugin.getPluginId()+".IfNotOperation"; //$NON-NLS-1$
 	/**
 	 * IfOperation
 	 */
-	public static final String OP_IfOperation = "IfOperation";
+	public static final String OP_IfOperation = PDPlugin.getPluginId()+".IfOperation"; //$NON-NLS-1$
 	/**
 	 * IterateOverElementsOperation
 	 */
-	public static final String OP_IterateOverElementsOperation = "IterateOverElementsOperation";
+	public static final String OP_IterateOverElementsOperation = PDPlugin.getPluginId()+".IterateOverElementsOperation"; //$NON-NLS-1$
 	/**
 	 * MakeParentElementCurrentOperation
 	 */
-	public static final String OP_MakeParentElementCurrentOperation = "MakeParentElementCurrentOperation";
+	public static final String OP_MakeParentElementCurrentOperation = PDPlugin.getPluginId()+".MakeParentElementCurrentOperation"; //$NON-NLS-1$
 	/**
 	 * RemoveAttributeOperation
 	 */
-	public static final String OP_RemoveAttributeOperation = "RemoveAttributeOperation";
+	public static final String OP_RemoveAttributeOperation = PDPlugin.getPluginId()+".RemoveAttributeOperation"; //$NON-NLS-1$
 	/**
 	 * RenameAttributeOperation
 	 */
-	public static final String OP_RenameAttributeOperation = "RenameAttributeOperation";
+	public static final String OP_RenameAttributeOperation = PDPlugin.getPluginId()+".RenameAttributeOperation"; //$NON-NLS-1$
 
 	private static TransformOperationFactory instance;
 
 	private Logger log = PDPlugin.getLogger(TransformOperationFactory.class);
+	
+	private Map<String, Class> _tagTransformOpsRegistry;
 
 	/**
-	 * Instaniates an instance.
+	 * Instantiates an instance.
 	 */
 	private TransformOperationFactory() {
 		//no external instantiation
+		
+		//read extensions
+		readAllTagTransformOperations();
 	}
 
+	
 	/**
 	 * Gets the singleton instance.
 	 * 
@@ -138,172 +135,72 @@ public class TransformOperationFactory {
 	 * Gets an ITransformOperation instance for the specified operation ID and
 	 * parameters.
 	 * 
-	 * @param opID Operation ID.
-	 * @param params Parameter array.
-	 * @return ITransformOperation instance (may be null).
+	 * @param opID - the plugin-qualified Operation extension ID.
+	 * @param params - array of String parameters
+	 * @return ITransformOperation
 	 */
 	public ITransformOperation getTransformOperation(String opID, String[] params) {
-		return getTransformOperation(opID, params, null);
+		Class opClass = null;
+		try {
+			opClass = _tagTransformOpsRegistry.get(opID);
+			if (opClass != null) {
+				Object opObject = opClass.newInstance();
+				if (opObject instanceof AbstractTransformOperation) {
+					((AbstractTransformOperation)opObject).setParameters(params);
+					((AbstractTransformOperation)opObject).setTransformOperationID(opID);			
+					return (AbstractTransformOperation)opObject;
+				}
+				log.error("Warning.TransformOperationFactory.NotAbstractTransformOperation", opClass.getName()); //$NON-NLS-1$
+			} else {
+				log.error("Warning.TransformOperationFactory.ExtensionNotFound", opID); //$NON-NLS-1$
+			}		
+		} catch(IllegalAccessException iae) {
+			log.error("Warning.TransformOperationFactory.IllegalAccess", opClass.getName(), iae); //$NON-NLS-1$
+		} catch(InstantiationException ie) {
+			log.error("Warning.TransformOperationFactory.Instantiation", opClass.getName(), ie); //$NON-NLS-1$
+		}
+		return null;
 	}
-
+	
 	/**
-	 * Gets an ITransformOperation instance for the specified operation ID and
-	 * parameters.
-	 * 
-	 * @param opID Operation ID.
-	 * @param params Parameter array.
-	 * @param trait Trait instance used for classloading of custom operations.
-	 * @return ITransformOperation instance (may be null).
+	 * Reads the custom tag transform operations from WPE registry
 	 */
-	public ITransformOperation getTransformOperation(String opID, String[] params, Trait trait) {
-		ITransformOperation operation = null;
-		if (opID.equals(OP_AppendChildElementOperation)) {
-			if (params.length < 1) {
-				log.error("Warning.TransformOperationFactory.TooFewParameters", opID);
-			} else if (params.length < 2) {
-				String elementName = params[0];
-				operation = new AppendChildElementOperation(elementName);
-			} else {
-				String elementName = params[0];
-				boolean makeChildCurrent = Boolean.valueOf(params[1]).booleanValue();
-				operation = new AppendChildElementOperation(elementName, makeChildCurrent);
-			}
-		} else if (opID.equals(OP_AppendChildTextFromXPathOperation)) {
-			if (params.length < 1) {
-				log.error("Warning.TransformOperationFactory.TooFewParameters", opID);
-			} else {
-				String xPathExpression = params[0];
-				operation = new AppendChildTextFromXPathOperation(xPathExpression);
-			}
-		} else if (opID.equals(OP_AppendChildTextOperation)) {
-			if (params.length < 1) {
-				log.error("Warning.TransformOperationFactory.TooFewParameters", opID);
-			} else {
-				String content = params[0];
-				operation = new AppendChildTextOperation(content);
-			}
-		} else if (opID.equals(OP_ConvertAttributeToTextOperation)) {
-			if (params.length < 1) {
-				log.error("Warning.TransformOperationFactory.TooFewParameters", opID);
-			} else if (params.length < 2) {
-				String attrName = params[0];
-				operation = new ConvertAttributeToTextOperation(attrName);
-			} else {
-				String attrName = params[0];
-				boolean removeAttr = Boolean.valueOf(params[1]).booleanValue();
-				operation = new ConvertAttributeToTextOperation(attrName, removeAttr);
-			}
-		} else if (opID.equals(OP_CopyAllAttributesOperation)) {
-			operation = new CopyAllAttributesOperation();
-		} else if (opID.equals(OP_CopyAttributeOperation)) {
-			if (params.length < 1) {
-				log.error("Warning.TransformOperationFactory.TooFewParameters", opID);
-			} else if (params.length < 3) {
-				String attrName = params[0];
-				operation = new CopyAttributeOperation(attrName);
-			} else {
-				String attrName = params[0];
-				boolean create = Boolean.valueOf(params[1]).booleanValue();
-				String newAttrValue = params[2];
-				operation = new CopyAttributeOperation(attrName, create, newAttrValue);
-			}
-		} else if (opID.equals(OP_CopyChildrenOperation)) {
-			operation = new CopyChildrenOperation();
-		} else if (opID.equals(OP_CreateAttributeFromXPathOperation)) {
-			if (params.length < 2) {
-				log.error("Warning.TransformOperationFactory.TooFewParameters", opID);
-			} else {
-				String attrName = params[0];
-				String xPathExpression = params[1];
-				operation = new CreateAttributeFromXPathOperation(attrName, xPathExpression);
-			}
-		} else if (opID.equals(OP_CreateAttributeOperation)) {
-			if (params.length < 2) {
-				log.error("Warning.TransformOperationFactory.TooFewParameters", opID);
-			} else {
-				String attrName = params[0];
-				String attrValue = params[1];
-				operation = new CreateAttributeOperation(attrName, attrValue);
-			}
-		} else if (opID.equals(OP_CreateElementOperation)) {
-			if (params.length < 1) {
-				log.error("Warning.TransformOperationFactory.TooFewParameters", opID);
-			} else {
-				String elementName = params[0];
-				operation = new CreateElementOperation(elementName);
-			}
-		} else if (opID.equals(OP_CustomTransformOperation)) {
-			if (params.length < 1) {
-				log.error("Warning.TransformOperationFactory.TooFewParameters", opID);
-			} else {
-				String className = params[0];
-				if (trait == null) {
-					log.error("Warning.TransformOperationFactory.ClassNotFound", className);
-				} else {
-					try {
-						IClassLoaderProvider classLoaderProvider = (IClassLoaderProvider)trait.getSourceModelProvider().getAdapter(IClassLoaderProvider.class);
-						if (classLoaderProvider != null) {
-							Class opClass = classLoaderProvider.loadClass(className);
-							if (opClass != null) {
-								Object opObject = opClass.newInstance();
-								if (opObject instanceof ITransformOperation) {
-									operation = (ITransformOperation)opObject;
-								} else {
-									log.error("Warning.TransformOperationFactory.NotITransformOperation", className);
-								}
-							} else {
-								log.error("Warning.TransformOperationFactory.ClassNotFound", className);
-							}
-						}
-					} catch(IllegalAccessException iae) {
-						log.error("Warning.TransformOperationFactory.IllegalAccess", className, iae);
-					} catch(InstantiationException ie) {
-						log.error("Warning.TransformOperationFactory.Instantiation", className, ie);
-					}
+	private void readAllTagTransformOperations() {
+		try {
+			_tagTransformOpsRegistry = new HashMap<String, Class>();
+			IExtensionPoint point = Platform.getExtensionRegistry().getExtensionPoint(PDPlugin.getPluginId(), IJMTConstants.EXTENSION_POINT_PAGEDESIGNER);
+			IExtension[] extensions = point.getExtensions();
+			for (int i=0;i < extensions.length;i++){
+				IExtension ext = extensions[i];
+				for (int j=0;j < ext.getConfigurationElements().length;j++){
+					if (ext.getConfigurationElements()[j].getName()
+							.equals(IJMTConstants.TAG_TRANSFORM_OPERATION)) {							
+						registerTransformOperation(ext.getConfigurationElements()[j]);					
+					}				
 				}
 			}
-		} else if (opID.equals(OP_IfNotOperation)) {
-			if (params.length < 1) {
-				log.error("Warning.TransformOperationFactory.TooFewParameters", opID);
-			} else {
-				String xPathExpression = params[0];
-				operation = new IfNotOperation(xPathExpression);
-			}
-		} else if (opID.equals(OP_IfOperation)) {
-			if (params.length < 1) {
-				log.error("Warning.TransformOperationFactory.TooFewParameters", opID);
-			} else {
-				String xPathExpression = params[0];
-				operation = new IfOperation(xPathExpression);
-			}
-		} else if (opID.equals(OP_IterateOverElementsOperation)) {
-			if (params.length < 1) {
-				log.error("Warning.TransformOperationFactory.TooFewParameters", opID);
-			} else {
-				String xPathExpression = params[0];
-				operation = new IterateOverElementsOperation(xPathExpression);
-			}
-		} else if (opID.equals(OP_MakeParentElementCurrentOperation)) {
-			operation = new MakeParentElementCurrentOperation();
-		} else if (opID.equals(OP_RemoveAttributeOperation)) {
-			if (params.length < 1) {
-				log.error("Warning.TransformOperationFactory.TooFewParameters", opID);
-			} else {
-				String attrName = params[0];
-				operation = new RemoveAttributeOperation(attrName);
-			}
-		} else if (opID.equals(OP_RenameAttributeOperation)) {
-			if (params.length < 2) {
-				log.error("Warning.TransformOperationFactory.TooFewParameters", opID);
-			} else {
-				String oldAttrName = params[0];
-				String newAttrName = params[1];
-				operation = new RenameAttributeOperation(oldAttrName, newAttrName);
-			}
-		} else {
-			log.error("Warning.TransformOperationFactory.UnknownOperationID", opID);
+		} catch (InvalidRegistryObjectException e) {
+			log.error("Warning.TransformOperationFactory.RegistryError", PDPlugin.getPluginId()+IJMTConstants.EXTENSION_POINT_PAGEDESIGNER+"."+IJMTConstants.TAG_TRANSFORM_OPERATION, e); //$NON-NLS-1$ //$NON-NLS-2$
 		}
-		return operation;
 	}
 
+	private void registerTransformOperation(final IConfigurationElement element) {
+	
+		final Bundle bundle = Platform.getBundle(element.getContributor().getName());        
+		final String id = element.getContributor().getName()+"."+element.getAttribute("id"); //$NON-NLS-1$ //$NON-NLS-2$
+        if (bundle != null) {
+            try {
+                final Class transformClass = bundle.loadClass(element.getAttribute("class"));                 //$NON-NLS-1$
+                // Not checking instance type here.  Class gets checked as ITransformOperation at 
+                //instantiation time...  
+                //best to log error then rather than now.
+                _tagTransformOpsRegistry.put(id, transformClass);
+            }
+            catch (Exception e) {
+                log.error("Warning.TransformOperationFactory.CannotLoadOpClass",id,  e);  //$NON-NLS-1$
+            }
+        }		
+	}
+	
+	
 }

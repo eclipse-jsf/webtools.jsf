@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelImpl.java,v 1.5 2007/05/16 23:51:15 gkessler Exp $
+ * $Id: ModelImpl.java,v 1.6 2008/02/01 20:20:47 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.impl;
 
@@ -35,13 +35,13 @@ import org.eclipse.jst.jsf.common.metadata.query.IEntityVisitor;
  *
  * @generated
  */
+@SuppressWarnings("hiding")
 public class ModelImpl extends EntityImpl implements Model {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("hiding")
 	public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
 
 	/**

@@ -14,6 +14,7 @@ package org.eclipse.jst.jsf.common.metadata.internal;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
@@ -23,6 +24,8 @@ import java.util.ResourceBundle;
  * meta-data file and the URL to the resource bundle for a properties file, if any.
  * 
  * Implementors must provide a zero-argument constructor.
+ * 
+ * CURRENTLY INTERNAL... WILL BE MADE API AT SOME POINT
  *
  */ 
 public abstract class StandardMetaDataSourceFileLocator {
@@ -47,11 +50,18 @@ public abstract class StandardMetaDataSourceFileLocator {
 	}
 	/**
 	 * Return InputStream to the meta-data source file.  
-	 * Callers are responsble for closing the stream.
+	 * Callers are responsible for closing the stream.
 	 * @return InputStream
 	 * @throws IOException
 	 */
 	public abstract InputStream getInputStream() throws IOException;
+	
+	/**
+	 * Return URL to the meta-data source file.  
+	 * Must not be null.
+	 * @return URL
+	 */
+	public abstract URL getURL();
 	
 	/**
 	 * Return ResourceBundle for the property files if there are any.  Return null if not.

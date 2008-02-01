@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConstraintsPackage.java,v 1.2 2007/04/16 17:50:08 cbateman Exp $
+ * $Id: ConstraintsPackage.java,v 1.3 2008/02/01 20:19:58 gkessler Exp $
  */
 package org.eclipse.jst.jsf.validation.internal.constraints;
 
@@ -277,7 +277,7 @@ public interface ConstraintsPackage extends EPackage {
          * @see org.eclipse.jst.jsf.validation.internal.constraints.impl.ConstraintsPackageImpl#getTagId()
          * @generated
          */
-        @SuppressWarnings("hiding")
+ //       @SuppressWarnings("hiding")
         EClass TAG_ID = eINSTANCE.getTagId();
 
         /**
@@ -286,7 +286,7 @@ public interface ConstraintsPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
-        @SuppressWarnings("hiding")
+ //       @SuppressWarnings("hiding")
         EAttribute TAG_ID__URI = eINSTANCE.getTagId_Uri();
 
         /**
@@ -295,7 +295,7 @@ public interface ConstraintsPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
-        @SuppressWarnings("hiding")
+ //       @SuppressWarnings("hiding")
         EAttribute TAG_ID__NAME = eINSTANCE.getTagId_Name();
 
         /**
@@ -306,7 +306,7 @@ public interface ConstraintsPackage extends EPackage {
          * @see org.eclipse.jst.jsf.validation.internal.constraints.impl.ConstraintsPackageImpl#getTagSet()
          * @generated
          */
-        @SuppressWarnings("hiding")
+ //       @SuppressWarnings("hiding")
         EClass TAG_SET = eINSTANCE.getTagSet();
 
         /**
@@ -315,7 +315,7 @@ public interface ConstraintsPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
-        @SuppressWarnings("hiding")
+ //       @SuppressWarnings("hiding")
         EReference TAG_SET__TAGS = eINSTANCE.getTagSet_Tags();
 
         /**
@@ -326,7 +326,7 @@ public interface ConstraintsPackage extends EPackage {
          * @see org.eclipse.jst.jsf.validation.internal.constraints.impl.ConstraintsPackageImpl#getContainsTagConstraint()
          * @generated
          */
-        @SuppressWarnings("hiding")
+ //       @SuppressWarnings("hiding")
         EClass CONTAINS_TAG_CONSTRAINT = eINSTANCE.getContainsTagConstraint();
 
         /**
@@ -335,7 +335,7 @@ public interface ConstraintsPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
-        @SuppressWarnings("hiding")
+ //       @SuppressWarnings("hiding")
         EReference CONTAINS_TAG_CONSTRAINT__SET_GENERATOR = eINSTANCE.getContainsTagConstraint_SetGenerator();
 
         /**
@@ -344,7 +344,7 @@ public interface ConstraintsPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
-        @SuppressWarnings("hiding")
+ //       @SuppressWarnings("hiding")
         EReference CONTAINS_TAG_CONSTRAINT__SATISFIES_SET = eINSTANCE.getContainsTagConstraint_SatisfiesSet();
 
     }

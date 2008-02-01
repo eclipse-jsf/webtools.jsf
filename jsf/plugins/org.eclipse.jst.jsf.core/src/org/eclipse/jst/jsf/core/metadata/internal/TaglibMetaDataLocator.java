@@ -9,7 +9,7 @@
  *    Oracle - initial API and implementation
  *    
  ********************************************************************************/
-package org.eclipse.jst.pagedesigner.jsp.core.internal.metadata;
+package org.eclipse.jst.jsf.core.metadata.internal;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -10,6 +10,7 @@
  *******************************************************************************/ 
 package org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal;
 
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.AbstractTransformOperation;
 import org.w3c.dom.Element;
 
@@ -23,20 +24,19 @@ public class RemoveAttributeOperation extends AbstractTransformOperation {
 
 	private String attributeName;
 
-	/**
-	 * Constructs an instance with the specified attribute name.
-	 * 
-	 * @param attributeName Name of attribute to be removed.
-	 */
-	public RemoveAttributeOperation(String attributeName) {
-		this.attributeName = attributeName;
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.AbstractTransformOperation#transform(org.w3c.dom.Element, org.w3c.dom.Element)
 	 */
 	public Element transform(Element srcElement, Element curElement) {
+		if (getParameters().length < 1) {
+			getLog().error("Warning.TransformOperationFactory.TooFewParameters", getTransformOperationID()); //$NON-NLS-1$
+			return null;
+		}
+		
+		attributeName = getParameters()[0];
+		Assert.isNotNull(attributeName);
+		
 		if (curElement != null) {
 			curElement.removeAttribute(attributeName);
 		}

@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.EReference;
  * @model kind="package"
  * @generated
  */
+@SuppressWarnings("hiding")
 public interface TraitTypesPackage extends EPackage {
 	/**
 	 * <!-- begin-user-doc -->
@@ -218,7 +219,6 @@ public interface TraitTypesPackage extends EPackage {
 		 * @see org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.impl.TraitTypesPackageImpl#getListOfValues()
 		 * @generated
 		 */
-		@SuppressWarnings("hiding")
 		EClass LIST_OF_VALUES = eINSTANCE.getListOfValues();
 
 		/**
@@ -227,7 +227,6 @@ public interface TraitTypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		@SuppressWarnings("hiding")
 		EReference LIST_OF_VALUES__ENTRIES = eINSTANCE.getListOfValues_Entries();
 
         /**
@@ -238,7 +237,6 @@ public interface TraitTypesPackage extends EPackage {
          * @see org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.impl.TraitTypesPackageImpl#getSetGenerator()
          * @generated
          */
-        @SuppressWarnings("hiding")
 		EClass SET_GENERATOR = eINSTANCE.getSetGenerator();
 
         /**
@@ -247,7 +245,6 @@ public interface TraitTypesPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
-        @SuppressWarnings("hiding")
 		EAttribute SET_GENERATOR__ALGORITHM = eINSTANCE.getSetGenerator_Algorithm();
 
         /**
@@ -256,7 +253,6 @@ public interface TraitTypesPackage extends EPackage {
          * <!-- end-user-doc -->
          * @generated
          */
-        @SuppressWarnings("hiding")
 		EAttribute SET_GENERATOR__EXPRESSION = eINSTANCE.getSetGenerator_Expression();
 
 	}

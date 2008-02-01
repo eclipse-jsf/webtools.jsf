@@ -57,6 +57,7 @@ public class CSSBrFlowLayout extends CSSInlineFlowLayout implements ICSSPainter 
 	}
 
 	private static Image getSharedHTMLImage() {
-		return PDPlugin.getDefault().getImage("palette/HTML/small/HTML_BR.gif");
+		
+		return PDPlugin.getDefault().getImage("LineBreak.gif");
 	}
 }

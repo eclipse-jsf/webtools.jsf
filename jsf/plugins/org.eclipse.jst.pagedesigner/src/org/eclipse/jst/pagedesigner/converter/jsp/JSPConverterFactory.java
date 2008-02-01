@@ -12,12 +12,16 @@
 package org.eclipse.jst.pagedesigner.converter.jsp;
 
 import org.eclipse.jface.viewers.ILabelProvider;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.IWorkspaceContextResolver;
+import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
+import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory2;
 import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
-import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.converter.HiddenTagConverter;
 import org.eclipse.jst.pagedesigner.converter.IConverterFactory;
 import org.eclipse.jst.pagedesigner.converter.ITagConverter;
 import org.eclipse.jst.pagedesigner.converter.TagConverterToDumBlock;
+import org.eclipse.jst.pagedesigner.editors.palette.TagImageManager;
 import org.eclipse.jst.pagedesigner.jsp.core.IJSPCoreConstants;
 import org.eclipse.swt.graphics.Image;
 import org.w3c.dom.Element;
@@ -84,23 +88,18 @@ public class JSPConverterFactory implements IConverterFactory {
             if (element instanceof ITagConverter)
             {
                 final Element hostElement = ((ITagConverter)element).getHostElement();
-                final String tagName = hostElement.getLocalName();
-                return getJSPSharedImage(tagName);
+                IStructuredDocumentContext context = IStructuredDocumentContextFactory2.INSTANCE.getContext(hostElement);
+                if (context != null){                	
+                	IWorkspaceContextResolver wsResolver  = IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver(context);
+                	if (wsResolver != null){
+                		return TagImageManager.getInstance().getSmallIconImage(wsResolver.getProject(),"JSP11", ITLDConstants.URI_JSP + ":"+hostElement.getLocalName());
+                	}
+                }
             }
             
             return null;
         }
     }
-
-	/**
-	 * @param tagName
-	 * @return
-	 */
-	private static Image getJSPSharedImage(String tagName) {
-		Image image = PDPlugin.getDefault().getImage(
-				"palette/JSP/small/JSP_" + tagName.toUpperCase() + ".gif");
-		return image;
-	}
 
 	/*
 	 * (non-Javadoc)

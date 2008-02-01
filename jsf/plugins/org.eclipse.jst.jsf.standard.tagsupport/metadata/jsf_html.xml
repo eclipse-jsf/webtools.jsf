@@ -395,6 +395,7 @@
 		<trait id="quick-edit-tab">
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="id"/>
+				<section id="value"/>
 				<section id="for"/>
 				<section id="style"/>			
 			</value>

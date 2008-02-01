@@ -14,13 +14,17 @@ package org.eclipse.jst.pagedesigner.figurehandler;
 import java.util.List;
 
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.IWorkspaceContextResolver;
+import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
+import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory2;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.css2.layout.CSSFigure;
 import org.eclipse.jst.pagedesigner.css2.layout.CSSTextFigure;
 import org.eclipse.jst.pagedesigner.css2.provider.ICSSTextProvider;
+import org.eclipse.jst.pagedesigner.editors.palette.TagImageManager;
 import org.eclipse.jst.pagedesigner.utils.HTMLUtil;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -181,7 +185,7 @@ public final class FigureFactory
 		} else if ("br".equalsIgnoreCase(tag)) {
 			return new BRFigureHandler();
 		} else if (!HTMLUtil.isVisualHtmlElement(tag)) {
-			return new HiddenFigureHandler(getSharedHTMLImage(tag));
+			return new HiddenFigureHandler(getSharedHTMLImage(ele));
 		} else {
 			return new DefaultFigureHandler();
 		}
@@ -191,17 +195,18 @@ public final class FigureFactory
 	 * @param tag
 	 * @return
 	 */
-	private static Image getSharedHTMLImage(String tag) {
-		Image image = PDPlugin.getDefault().getImage(
-				"palette/HTML/small/HTML_" + tag.toUpperCase() + ".gif");
-		if (image != null){
-			ImageData imageData = image.getImageData();
-			if (imageData.width < 16 || imageData.height < 16) {
-				return PDPlugin.getDefault().getImage(
-						"palette/GENERIC/small/PD_Palette_Default.gif");
-			}
-		}
-		return image;
+	private static Image getSharedHTMLImage(Element element) {
+		Image image = null;
+		
+        IStructuredDocumentContext context = IStructuredDocumentContextFactory2.INSTANCE.getContext(element);
+        if (context != null){   
+        	IWorkspaceContextResolver wsResolver  = IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver(context);
+        	if (wsResolver != null){
+        		image = TagImageManager.getInstance().getSmallIconImage(wsResolver.getProject(),"HTML", element.getLocalName());
+        	}
+        }
+		return image != null ? image : PDPlugin.getDefault().getImage(
+			"palette/GENERIC/small/PD_Palette_Default.gif");	
 	}
 	
 	private FigureFactory()

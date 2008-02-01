@@ -15,6 +15,7 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.AbstractTransformOperation;
 import org.w3c.dom.Element;
 
@@ -29,23 +30,22 @@ public class CreateAttributeFromXPathOperation extends AbstractTransformOperatio
 	private String attributeName;
 	private String xPathExpression;
 
-	/**
-	 * Constructs an instance with the specified XPath expression.
-	 * 
-	 * @param attributeName Name of attribute to be created.
-	 * @param xPathExpression XPath expression to be evaluated against the
-	 * source Element instance.
-	 */
-	public CreateAttributeFromXPathOperation(String attributeName, String xPathExpression) {
-		this.attributeName = attributeName;
-		this.xPathExpression = xPathExpression;
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.AbstractTransformOperation#transform(org.w3c.dom.Element, org.w3c.dom.Element)
 	 */
 	public Element transform(Element srcElement, Element curElement) {
+		
+		if (getParameters().length < 2) {
+			getLog().error("Warning.TransformOperationFactory.TooFewParameters", getTransformOperationID()); //$NON-NLS-1$
+			return null;
+		}
+		
+		attributeName = getParameters()[0];
+		xPathExpression = getParameters()[1];				
+		Assert.isNotNull(attributeName);
+		Assert.isNotNull(xPathExpression);
+	
 		if (srcElement != null) {
 			XPath xPath = XPathFactory.newInstance().newXPath();
 			try {

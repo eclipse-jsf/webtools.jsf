@@ -9,45 +9,50 @@
  *    Oracle - initial API and implementation
  *    
  ********************************************************************************/
-package org.eclipse.jst.pagedesigner.jsp.core.internal.metadata;
+package org.eclipse.jst.jsf.core.metadata.internal;
 
 import org.eclipse.jst.jsf.common.metadata.internal.AbstractTagLibDomainContentModelMetaDataTranslator;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataModelMergeAssistant;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataTranslator;
-import org.eclipse.wst.html.core.internal.contentmodel.JSPCMDocument;
+import org.eclipse.wst.html.core.internal.contentmodel.HTMLCMDocument;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMDocument;
 
 /**
- * Translates the JSP CMDocument to standard metadata model entities and traits
+ * Translates the HTML CMDocument to standard metadata model entities and traits
  */
-public class JSPContentModelMetaDataTranslator extends AbstractTagLibDomainContentModelMetaDataTranslator implements IMetaDataTranslator {
+public class HTMLContentModelMetaDataTranslator extends AbstractTagLibDomainContentModelMetaDataTranslator implements IMetaDataTranslator {
 
 	public boolean canTranslate(IMetaDataSourceModelProvider modelProvider) {		
-		if (modelProvider != null &&
-				modelProvider.getSourceModel() instanceof JSPCMDocument)
+		if (modelProvider != null &&			
+				modelProvider.getSourceModel() instanceof HTMLCMDocument)
 			return true;
 		return false;
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.eclipse.jst.jsf.common.metadata.internal.IMetaDataTranslator#translate(org.eclipse.jst.jsf.common.metadata.internal.IMetaDataModelMergeAssistant)
+	 */
 	public void translate(final IMetaDataModelMergeAssistant assistant) {
-		setAssistant(assistant);
+		_assistant = assistant;
 		CMDocument doc = getSourceModel();
-		if (doc instanceof JSPCMDocument){
+		if (doc instanceof HTMLCMDocument){
 			doTranslate(doc);			
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.common.metadata.internal.AbstractTagLibDomainContentModelMetaDataTranslator#getURIDescription()
+	/**
+	 *  @return getURIDisplayLabel()
 	 */
-	protected String getURIDescription() {		
-		return "JSP Tags";
+	protected String getURIDescription() {
+		return getURIDisplayLabel();
 	}
 
-	@Override
-	protected String getURIDisplayLabel() {		
-		return "JSP";
+	/**
+	 * return "HTML 4.0"
+	 */
+	protected String getURIDisplayLabel() {
+		return "HTML 4.0";
 	}
 
 }

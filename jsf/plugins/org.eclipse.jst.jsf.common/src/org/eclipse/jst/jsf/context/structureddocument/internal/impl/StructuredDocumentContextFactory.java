@@ -20,10 +20,13 @@ import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jst.jsf.context.structureddocument.AbstractStructuredDocumentContextFactory;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
+import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory2;
 import org.eclipse.wst.sse.core.internal.provisional.IndexedRegion;
 import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
 import org.eclipse.wst.sse.ui.internal.StructuredTextViewer;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMAttr;
+import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 /**
@@ -31,7 +34,7 @@ import org.w3c.dom.Node;
  *
  */
 public class StructuredDocumentContextFactory extends AbstractStructuredDocumentContextFactory
-			 implements IStructuredDocumentContextFactory
+			 implements IStructuredDocumentContextFactory, IStructuredDocumentContextFactory2
 {
 	/* static attributes */
 	private static StructuredDocumentContextFactory  INSTANCE;
@@ -173,7 +176,9 @@ public class StructuredDocumentContextFactory extends AbstractStructuredDocument
 
     }
     
-    private IStructuredDocumentContext internalGetContext(IDocument document, Node node)
+
+
+	private IStructuredDocumentContext internalGetContext(IDocument document, Node node)
     {
         if (document instanceof IStructuredDocument)
         {
@@ -212,4 +217,54 @@ public class StructuredDocumentContextFactory extends AbstractStructuredDocument
             return null;
         }
     }
+    
+    public IStructuredDocumentContext getContext(Element element) 
+    {
+        // first see if I know how to make one
+        IStructuredDocumentContext  context = internalGetContext(element);
+        
+        // if I don't know, ask my delegates
+        if (context == null)
+        {
+            context = delegateGetContext(element);
+        }
+        
+        return context;
+
+    }
+    
+	private IStructuredDocumentContext internalGetContext(Element element) {
+		if (element instanceof IDOMNode){
+			final IDOMNode node = (IDOMNode)element;
+			final IStructuredDocument sDoc = node.getStructuredDocument();
+            final int position = node.getStartOffset();
+            
+            return new DefaultStructuredDocumentContext(sDoc, position);            
+        }
+		
+		return null;
+	}
+	
+    private IStructuredDocumentContext delegateGetContext(Element element) {
+        synchronized(_delegates)
+        {
+            for (final Iterator it = _delegates.iterator(); it.hasNext();)
+            {
+                IStructuredDocumentContextFactory2 delegateFactory = (IStructuredDocumentContextFactory2) ((IAdaptable) it.next()).getAdapter(IStructuredDocumentContextFactory2.class);
+                if (delegateFactory != null)
+                {
+	                IStructuredDocumentContext context = delegateFactory.getContext(element);
+	                
+	                if (context != null)
+	                {
+	                    return context;
+	                }
+                }
+            }
+            
+            return null;
+        }
+	}
+
+
 }

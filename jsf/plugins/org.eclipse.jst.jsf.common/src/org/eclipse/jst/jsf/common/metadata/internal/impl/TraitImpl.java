@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraitImpl.java,v 1.5 2007/06/11 20:55:58 gkessler Exp $
+ * $Id: TraitImpl.java,v 1.6 2008/02/01 20:20:47 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.impl;
 
@@ -26,16 +26,11 @@ import org.eclipse.jst.jsf.common.metadata.query.ITraitVisitor;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.foo.model.metadata.impl.TraitImpl#getType <em>Type</em>}</li>
- *   <li>{@link com.foo.model.metadata.impl.TraitImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link TraitImpl#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
- */
-/**
- * @author Owner
- *
  */
 public class TraitImpl extends EObjectImpl implements Trait {
 	/**
@@ -315,7 +310,7 @@ public class TraitImpl extends EObjectImpl implements Trait {
 		return result.toString();
 	}
 
-	public boolean equals(@SuppressWarnings("hiding")Object value){
+	public boolean equals(Object value){
 		if (!(value instanceof String))
 			return super.equals(value);
 		

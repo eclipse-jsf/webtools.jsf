@@ -114,7 +114,7 @@ public class JSPSemanticsValidator extends JSPValidator implements ISourceValida
 			    prefs.load();
 			    DiagnosticFactory diagnosticFactory = new DiagnosticFactory();
 
-				// zero the containment validation count for each mondel
+				// zero the containment validation count for each model
 				containmentValidationCount = 0;
     			DOMModelForJSP jspModel = (DOMModelForJSP) model;
     			IStructuredDocument structuredDoc = jspModel.getStructuredDocument();

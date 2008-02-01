@@ -40,7 +40,7 @@ final class FacesRendererFactory extends EMF2DOMSSERendererFactory
     /**
      * The singleton factory instance.
      */
-    @SuppressWarnings("hiding")
+//    @SuppressWarnings("hiding")
     public static  FacesRendererFactory INSTANCE = new FacesRendererFactory();
     
     private FacesRendererFactory() {

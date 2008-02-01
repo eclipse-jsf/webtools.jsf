@@ -39,12 +39,19 @@ public class PluginRelativeStandardMetaDataSourceFileLocator extends StandardMet
 	 * 	 
 	 */
 	public InputStream getInputStream() throws IOException {
-		URL url = FileLocator.find(Platform.getBundle(fileInfo.getBundleId()), Path.fromOSString(fileInfo.getLocation()), null);
+		URL url = getURL();
 		if (url != null) 
 			return url.openStream();
 		
         String  fileName = Path.fromOSString(fileInfo.getLocation()).toString() + " (Plugin: " + fileInfo.getBundleId()+")" ;
         throw new FileNotFoundException("Metadata file not found: "+ fileName);
+	}
+	
+	/**
+	 * @return URL to metadata source.   Must not be null.
+	 */
+	public URL getURL() {
+		return FileLocator.find(Platform.getBundle(fileInfo.getBundleId()), Path.fromOSString(fileInfo.getLocation()), null);
 	}
 
 	

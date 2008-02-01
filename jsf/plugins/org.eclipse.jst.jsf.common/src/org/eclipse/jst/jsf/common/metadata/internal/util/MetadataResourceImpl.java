@@ -2,10 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MetadataResourceImpl.java,v 1.8 2007/12/12 22:11:48 gkessler Exp $
+ * $Id: MetadataResourceImpl.java,v 1.9 2008/02/01 20:20:47 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.util;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Map;
@@ -13,8 +14,10 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.xmi.XMLHelper;
+import org.eclipse.emf.ecore.xmi.XMLLoad;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMLHelperImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMLLoadImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
 import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.MetadataPackage;
@@ -69,12 +72,20 @@ public class MetadataResourceImpl extends XMLResourceImpl implements XMLResource
 		super();
 		_provider = provider;
 	}
+	
+	/**
+	 * @generated NOT
+	 */
+	protected XMLLoad createXMLLoad() {
+		return new MetadataXMLLoad(createXMLHelper());
+	}
 	/**
 	* Override createXMLHelper so that MetadataPackage.eINSTANCE is used for the NoNamespace package
 	* @generated NOT
 	*/
 	protected XMLHelper createXMLHelper() {
 		return new XMLHelperImpl(){
+			@Override
 			public EPackage getNoNamespacePackage() {
 				return MetadataPackage.eINSTANCE;
 			}
@@ -109,20 +120,34 @@ public class MetadataResourceImpl extends XMLResourceImpl implements XMLResource
 
 	public void postSave(XMLResource resource, OutputStream outputStream,
 			Map options) {
-		// TODO Auto-generated method stub
-		
+		// do nothing		
 	}
 
 	public void preLoad(XMLResource resource, InputStream inputStream,
 			Map options) {
-		// TODO Auto-generated method stub
-		
+		// do nothing		
 	}
 
 	public void preSave(XMLResource resource, OutputStream outputStream,
 			Map options) {
-		// TODO Auto-generated method stub
-		
+		// do nothing		
 	}
 
+	/**
+	 * Override the handleErrors() method so that resource will load gracefully, and errors reported later
+	 * when appropriate
+	 *
+	 */
+	private class MetadataXMLLoad extends XMLLoadImpl {
+
+		public MetadataXMLLoad(XMLHelper helper) {
+			super(helper);
+		}
+
+		@Override
+		protected void handleErrors() throws IOException {
+			//by doing nothing here, this allows the list of non-fatal errors (res.getErrors()) to be returned
+		}
+		
+	}
 } //MetadataResourceImpl

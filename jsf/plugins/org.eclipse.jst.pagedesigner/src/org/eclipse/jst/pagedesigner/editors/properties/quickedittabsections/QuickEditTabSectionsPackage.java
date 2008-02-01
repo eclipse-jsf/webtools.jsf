@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2007 Oracle Corporation
  *
- * $Id: QuickEditTabSectionsPackage.java,v 1.2 2008/01/09 19:40:28 cbateman Exp $
+ * $Id: QuickEditTabSectionsPackage.java,v 1.3 2008/02/01 20:20:20 gkessler Exp $
  */
 package org.eclipse.jst.pagedesigner.editors.properties.quickedittabsections;
 
@@ -226,7 +226,7 @@ public interface QuickEditTabSectionsPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @SuppressWarnings("hiding")
+//    @SuppressWarnings("hiding")
 	interface Literals {
 		/**
 		 * The meta object literal for the '{@link org.eclipse.jst.pagedesigner.editors.properties.quickedittabsections.internal.impl.QuickEditTabSectionsImpl <em>Quick Edit Tab Sections</em>}' class.

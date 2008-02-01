@@ -10,6 +10,7 @@
  *******************************************************************************/ 
 package org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal;
 
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.AbstractTransformOperation;
 import org.w3c.dom.Element;
 
@@ -26,20 +27,19 @@ public class CreateElementOperation extends AbstractTransformOperation {
 
 	private String tagName;
 
-	/**
-	 * Constructs an instance with the specified Element name.
-	 * 
-	 * @param tagName Name of Element to be created.
-	 */
-	public CreateElementOperation(String tagName) {
-		this.tagName = tagName;
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.AbstractTransformOperation#transform(org.w3c.dom.Element, org.w3c.dom.Element)
 	 */
 	public Element transform(Element srcElement, Element curElement) {
+		if (getParameters().length < 1) {
+			getLog().error("Warning.TransformOperationFactory.TooFewParameters", getTransformOperationID()); //$NON-NLS-1$
+			return null;
+		} 
+		
+		tagName = getParameters()[0];
+		Assert.isNotNull(tagName);
+		
 		Element element = null;
 		if (tagConverterContext != null && tagName != null && tagName.length() > 0) {
 			element = tagConverterContext.createElement(tagName);

@@ -534,7 +534,7 @@ public interface PaletteInfosPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @SuppressWarnings("hiding")
+//    @SuppressWarnings("hiding")
 	interface Literals {
 		/**
 		 * The meta object literal for the '{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl.PaletteInfoImpl <em>Palette Info</em>}' class.

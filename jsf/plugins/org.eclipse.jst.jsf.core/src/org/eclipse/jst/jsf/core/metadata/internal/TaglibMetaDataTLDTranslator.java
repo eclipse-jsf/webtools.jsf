@@ -9,7 +9,7 @@
  *    Oracle - initial API and implementation
  *    
  ********************************************************************************/
-package org.eclipse.jst.pagedesigner.jsp.core.internal.metadata;
+package org.eclipse.jst.jsf.core.metadata.internal;
 
 import org.eclipse.jst.jsf.common.metadata.internal.AbstractTagLibDomainContentModelMetaDataTranslator;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataModelMergeAssistant;

@@ -327,9 +327,14 @@ public class MetaDataModelMergeAssistantImpl implements
 		);
 		
 		Model externalModel = TaglibDomainMetaDataQueryHelper.getModel(modelContext);
-		EntityGroup entityGroup = externalModel.findIncludeGroup(include.getId());
-		
-		addIncludeRefs(entity, entityGroup);
+		if (externalModel != null){
+			EntityGroup entityGroup = externalModel.findIncludeGroup(include.getId());		
+			addIncludeRefs(entity, entityGroup);
+		}
+		else {
+			JSFCommonPlugin.log(IStatus.ERROR, "Unable to load external metadata model refs for "+modelContext.getURI()
+					+ " into "+ entity.getModel().getCurrentModelContext().getUri());
+		}
 	}
 
 	/*

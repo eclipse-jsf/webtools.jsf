@@ -84,7 +84,7 @@ public class DTHTMLOutputRenderer implements IOutputRenderer {
 			String opID = operation.getId();
 			String[] params = getParamsArray(operation);
 			currentTransformOperation =
-				TransformOperationFactory.getInstance().getTransformOperation(opID, params, dtInfo.getTrait());
+				TransformOperationFactory.getInstance().getTransformOperation(opID, params);
 			if (currentTransformOperation != null) {
 				transformer.appendTransformOperation(currentTransformOperation);
 				EList childOperations = operation.getOperations();
@@ -108,7 +108,7 @@ public class DTHTMLOutputRenderer implements IOutputRenderer {
 			String opID = operation.getId();
 			String[] params = getParamsArray(operation);
 			currentTransformOperation =
-				TransformOperationFactory.getInstance().getTransformOperation(opID, params, dtInfo.getTrait());
+				TransformOperationFactory.getInstance().getTransformOperation(opID, params);
 			if (currentTransformOperation != null) {
 				parentOperation.appendChildOperation(currentTransformOperation);
 				EList childOperations = operation.getOperations();

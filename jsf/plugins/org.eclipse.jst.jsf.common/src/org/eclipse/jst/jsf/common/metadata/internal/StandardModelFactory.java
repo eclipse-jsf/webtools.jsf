@@ -13,30 +13,41 @@ package org.eclipse.jst.jsf.common.metadata.internal;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Iterator;
 import java.util.Map;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.BasicExtendedMetaData;
 import org.eclipse.emf.ecore.util.ExtendedMetaData;
+import org.eclipse.emf.ecore.xmi.ClassNotFoundException;
+import org.eclipse.emf.ecore.xmi.FeatureNotFoundException;
+import org.eclipse.emf.ecore.xmi.IllegalValueException;
+import org.eclipse.emf.ecore.xmi.PackageNotFoundException;
+import org.eclipse.emf.ecore.xmi.UnresolvedReferenceException;
+import org.eclipse.emf.ecore.xmi.XMIException;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceFactoryImpl;
+import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 import org.eclipse.jst.jsf.common.metadata.internal.util.MetadataResourceImpl;
 import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
 
 /**
- * Singelton that produces and loads standard metadata models.  
+ * Singleton that produces and loads standard metadata models.  
  * All models are loaded into the same ResourceSet 
  *
  * see Model
  */
 public class StandardModelFactory {
 	private static StandardModelFactory INSTANCE;
+	private static boolean DEBUG_MD_LOAD = false;
 	private ExtendedMetaData extendedMetaData;
 	private ResourceSet resourceSet;
-	
+
 	
 	/**
 	 * @return singleton instance of the metadata model factory
@@ -44,17 +55,21 @@ public class StandardModelFactory {
 	public synchronized static StandardModelFactory getInstance(){
 		if (INSTANCE == null){
 			INSTANCE = new StandardModelFactory();
-			INSTANCE.init();			
+			INSTANCE.init();	
+			
+			if (JSFCommonPlugin.getPlugin().isDebugging()){
+				DEBUG_MD_LOAD = Boolean.valueOf(Platform.getDebugOption(JSFCommonPlugin.PLUGIN_ID+"/debug/metadataload")).booleanValue();
+			}
 		}
 		return INSTANCE;
 	}
-
+	
 	private void init() {
 		resourceSet = new ResourceSetImpl();
 		
 	    extendedMetaData = new BasicExtendedMetaData(resourceSet.getPackageRegistry());
 		
-		// Register the appropriate resource factory to handle all file extentions.
+		// Register the appropriate resource factory to handle all file extensions.
 		//
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put
 			(Resource.Factory.Registry.DEFAULT_EXTENSION, 
@@ -62,13 +77,6 @@ public class StandardModelFactory {
 
 		//relying on the org.eclipse.emf.ecore.generated_package ext-pt to register traits
 	}
-
-//	private void registerTraitTypes(Registry packageRegistry) {
-//		for(Iterator/*<EPackage>*/ it=TraitTypeRegistry.getInstance().getEPackages().iterator();it.hasNext();){
-//			EPackage pkg = (EPackage)it.next();
-//			packageRegistry.put(pkg.getNsURI(), pkg);
-//		}
-//	}
 
 	private StandardModelFactory() {		
 		super();
@@ -99,29 +107,83 @@ public class StandardModelFactory {
 	 * @return the root of the standard model from the resource as an EList
 	 * @throws IOException
 	 */
-	public EList loadStandardFileResource(InputStream inputStream, IMetaDataSourceModelProvider provider) throws IOException {
-		XMLResource res = new MetadataResourceImpl(provider); 
+	public EList loadStandardFileResource(final InputStream inputStream, final IMetaDataSourceModelProvider provider, final org.eclipse.emf.common.util.URI uri) throws IOException {
+		final XMLResource res = new MetadataResourceImpl(provider); 		
+		res.setURI(uri);
 		resourceSet.getResources().add(res);
 		setLoadOptions(res);
 		res.load(inputStream, null);
-		EList root = res.getContents();		
+		if (DEBUG_MD_LOAD)
+			reportErrors(res);
+		final EList root = res.getContents();		
 		return root;	
 	}
 
+	private void reportErrors(Resource res) {
+		EList<Resource.Diagnostic> errs = res.getErrors();
+		if (! errs.isEmpty()){
+			for (Iterator<Resource.Diagnostic> it= errs.iterator();it.hasNext();){				
+				StandardModelErrorMessageFactory.logErrorMessage(it.next());
+			}		
+		}
+	}
 	/**
 	 * Sets default load options for the resource
 	 * @param resource 
 	 */
 	protected void setLoadOptions(XMLResource resource) {
 		Map options = resource.getDefaultLoadOptions();
-//		options.put(XMLResource.OPTION_SAVE_TYPE_INFORMATION, true);				
+//		options.put(XMLResource.OPTION_SAVE_TYPE_INFORMATION, true);
 		options.put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
 		options.put(XMLResource.OPTION_EXTENDED_META_DATA, extendedMetaData);
 		options.put(XMLResource.OPTION_RESOURCE_HANDLER, resource);
 		options.put(XMLResource.OPTION_LAX_FEATURE_PROCESSING, Boolean.TRUE);
-		options.put(XMLResource.OPTION_RECORD_UNKNOWN_FEATURE, Boolean.TRUE);
+		options.put(XMLResource.OPTION_RECORD_UNKNOWN_FEATURE, Boolean.FALSE);//turning this off so that res.getErrors() has values to check!  bizarre that I should need to do this.
 //		options.put(XMLResource.OPTION_DOM_USE_NAMESPACES_IN_SCOPE, Boolean.TRUE);
 	}
 
 
+	static class StandardModelErrorMessageFactory {
+		
+		/**
+		 * Simply logs all messages against JSFCommonPlugin, for now.
+		 * @param diagnostic
+		 */
+		public static void logErrorMessage(Resource.Diagnostic diagnostic) {	
+			//should be XMIException
+			if (diagnostic instanceof XMIException) {
+				XMIException ex = (XMIException)diagnostic;				
+				String msg = createMessage(ex);
+				JSFCommonPlugin.log(IStatus.ERROR, msg);
+//				System.out.println(msg);
+			}
+			else {
+				JSFCommonPlugin.log(IStatus.ERROR, diagnostic.toString());//do better???
+//				System.out.println(diagnostic.toString());	
+			}
+		}
+
+		private static String createMessage(XMIException ex) {
+			
+			StringBuffer buf = new StringBuffer("Metadata Load Error: ")
+				.append(ex.getClass().getSimpleName()).append(": ");
+			
+			if (ex instanceof PackageNotFoundException)
+				buf.append(((PackageNotFoundException)ex).uri());			
+			else if (ex instanceof ClassNotFoundException)
+				buf.append(((ClassNotFoundException)ex).getName());
+			else if (ex instanceof FeatureNotFoundException)
+				buf.append(((FeatureNotFoundException)ex).getName());
+			else if (ex instanceof IllegalValueException)
+				buf.append(((IllegalValueException)ex).getValue().toString());
+			else if (ex instanceof UnresolvedReferenceException)
+				buf.append(((UnresolvedReferenceException)ex).getReference());	
+			else
+				buf.append(ex.getMessage());
+			
+			buf.append(" in ").append(ex.getLocation()).append(": Line = ")
+				.append(ex.getLine()).append(": Column = ").append(ex.getColumn());
+			return buf.toString();
+		}
+	}
 }

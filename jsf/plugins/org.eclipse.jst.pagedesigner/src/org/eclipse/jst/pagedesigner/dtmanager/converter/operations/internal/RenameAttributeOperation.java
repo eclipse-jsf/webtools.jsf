@@ -10,6 +10,7 @@
  *******************************************************************************/ 
 package org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal;
 
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.AbstractTransformOperation;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
@@ -22,25 +23,21 @@ import org.w3c.dom.Element;
  */
 public class RenameAttributeOperation extends AbstractTransformOperation {
 
-	private String oldAttributeName;
-	private String newAttributeName;
-
-	/**
-	 * Constructs an instance with the specified old and new attribute names.
-	 * 
-	 * @param oldAttributeName Old name of the attribute to be renamed.
-	 * @param newAttributeName New name of the attribute to be renamed.
-	 */
-	public RenameAttributeOperation(String oldAttributeName, String newAttributeName) {
-		this.oldAttributeName = oldAttributeName;
-		this.newAttributeName = newAttributeName;
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.AbstractTransformOperation#transform(org.w3c.dom.Element, org.w3c.dom.Element)
 	 */
 	public Element transform(Element srcElement, Element curElement) {
+		if (getParameters().length < 2) {
+			getLog().error("Warning.TransformOperationFactory.TooFewParameters", getTransformOperationID()); //$NON-NLS-1$
+			return null;
+		}
+		
+		String oldAttributeName = getParameters()[0];
+		String newAttributeName = getParameters()[1];
+		Assert.isNotNull(oldAttributeName);
+		Assert.isNotNull(newAttributeName);
+		
 		if (curElement != null) {
 			Attr oldAttribute = curElement.getAttributeNode(oldAttributeName);
 			if (oldAttribute != null) {

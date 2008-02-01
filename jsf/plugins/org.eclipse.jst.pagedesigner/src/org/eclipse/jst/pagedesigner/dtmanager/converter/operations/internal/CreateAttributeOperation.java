@@ -10,6 +10,7 @@
  *******************************************************************************/ 
 package org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal;
 
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.AbstractTransformOperation;
 import org.w3c.dom.Element;
 
@@ -24,22 +25,21 @@ public class CreateAttributeOperation extends AbstractTransformOperation {
 	private String attributeName;
 	private String attributeValue;
 
-	/**
-	 * Constructs an instance with the specified attribute name and value.
-	 * 
-	 * @param attributeName Name of attribute to be created.
-	 * @param attributeValue Value of attribute to be set.
-	 */
-	public CreateAttributeOperation(String attributeName, String attributeValue) {
-		this.attributeName = attributeName;
-		this.attributeValue = attributeValue;
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.AbstractTransformOperation#transform(org.w3c.dom.Element, org.w3c.dom.Element)
 	 */
 	public Element transform(Element srcElement, Element curElement) {
+		if (getParameters().length < 2) {
+			getLog().error("Warning.TransformOperationFactory.TooFewParameters", getTransformOperationID()); //$NON-NLS-1$
+			return null;
+		}
+		
+		attributeName = getParameters()[0];
+		attributeValue = getParameters()[1];		
+		Assert.isNotNull(attributeName);
+		Assert.isNotNull(attributeValue);
+	
 		if (curElement != null) {
 			curElement.setAttribute(attributeName, attributeValue);
 		}

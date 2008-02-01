@@ -15,6 +15,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.jface.viewers.ILabelProvider;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.IWorkspaceContextResolver;
+import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
+import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory2;
 import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
 import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.pagedesigner.converter.AbstractTagConverter;
@@ -23,7 +27,7 @@ import org.eclipse.jst.pagedesigner.converter.IConverterFactory;
 import org.eclipse.jst.pagedesigner.converter.ITagConverter;
 import org.eclipse.jst.pagedesigner.converter.TagConverterToInlineBlock;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.internal.DTTagConverter;
-import org.eclipse.jst.pagedesigner.jsf.ui.JSFUIPlugin;
+import org.eclipse.jst.pagedesigner.editors.palette.TagImageManager;
 import org.eclipse.swt.graphics.Image;
 import org.w3c.dom.Element;
 
@@ -108,24 +112,19 @@ public class JSFCoreConverterFactory implements IConverterFactory
             if (element instanceof ITagConverter)
             {
                 final Element hostElement = ((ITagConverter)element).getHostElement();
-                final String tagName = hostElement.getLocalName();
-                return getJSFCoreSharedImage(tagName);
+                IStructuredDocumentContext context = IStructuredDocumentContextFactory2.INSTANCE.getContext(hostElement);
+                if (context != null){   
+                	IWorkspaceContextResolver wsResolver  = IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver(context);
+                	if (wsResolver != null){
+                		return TagImageManager.getInstance().getSmallIconImage(wsResolver.getProject(),ITLDConstants.URI_JSF_CORE, hostElement.getLocalName());
+                	}
+                }
             }
             
             return null;
         }
     }
     
-    /**
-     * @param tagName
-     * @return
-     */
-    private static Image getJSFCoreSharedImage(String tagName)
-    {
-        Image image = JSFUIPlugin.getDefault().getImage("palette/JSFCORE/small/JSF_" + tagName.toUpperCase() + ".gif");
-        return image;
-    }
-
     /* (non-Javadoc)
      * @see org.eclipse.jst.pagedesigner.converter.IConverterFactory#getSupportedURI()
      */

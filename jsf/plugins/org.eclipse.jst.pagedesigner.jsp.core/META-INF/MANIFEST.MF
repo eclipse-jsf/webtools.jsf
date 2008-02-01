@@ -20,7 +20,6 @@ Eclipse-LazyStart: true
 Bundle-ManifestVersion: 2
 Export-Package: org.eclipse.jst.pagedesigner.jsp.core;x-internal:=true,
  org.eclipse.jst.pagedesigner.jsp.core.el;x-internal:=true,
- org.eclipse.jst.pagedesigner.jsp.core.internal.metadata;x-internal:=true,
  org.eclipse.jst.pagedesigner.jsp.core.internal.pagevar;x-internal:=true,
  org.eclipse.jst.pagedesigner.jsp.core.pagevar;x-internal:=true,
  org.eclipse.jst.pagedesigner.jsp.core.pagevar.adapter;x-internal:=true,

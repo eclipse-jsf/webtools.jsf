@@ -29,7 +29,7 @@ public interface IMetaDataLocator {
 	 */
 	public void startLocating();
 	/**
-	 * Stop looking for instances of metadata model sources.  An opporttunity to cleanup. 
+	 * Stop looking for instances of metadata model sources.  An opportunity to cleanup. 
 	 */
 	public void stopLocating();
 

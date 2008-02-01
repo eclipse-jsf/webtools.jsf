@@ -10915,7 +10915,7 @@ public interface FacesConfigPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    @SuppressWarnings("hiding")
+//    @SuppressWarnings("hiding")
     interface Literals  {
         /**
          * The meta object literal for the '{@link org.eclipse.jst.jsf.facesconfig.emf.impl.ActionListenerTypeImpl <em>Action Listener Type</em>}' class.

@@ -10,6 +10,7 @@
  *******************************************************************************/ 
 package org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal;
 
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.AbstractTransformOperation;
 import org.w3c.dom.Element;
 
@@ -26,35 +27,24 @@ import org.w3c.dom.Element;
 public class AppendChildElementOperation extends AbstractTransformOperation {
 
 	private String tagName;
-	private boolean makeChildCurrent;
-
-	/**
-	 * Constructs an instance with the specified tag name, and defaults to
-	 * making the new child Element current.
-	 * 
-	 * @param tagName Name of child Element to be created.
-	 */
-	public AppendChildElementOperation(String tagName) {
-		this(tagName, true);
-	}
-
-	/**
-	 * Constructs an instance with the specified tag name and optionally makes
-	 * the new child Element current.
-	 * 
-	 * @param tagName Name of child Element to be created.
-	 * @param makeChildCurrent If true, make new child Element current.
-	 */
-	public AppendChildElementOperation(String tagName, boolean makeChildCurrent) {
-		this.tagName = tagName;
-		this.makeChildCurrent = makeChildCurrent;
-	}
+	private boolean makeChildCurrent = true;
 
 	/*
 	 * (non-Javadoc)
 	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.AbstractTransformOperation#transform(org.w3c.dom.Element, org.w3c.dom.Element)
 	 */
 	public Element transform(Element srcElement, Element curElement) {
+		if (getParameters().length < 1) {
+			getLog().error("Warning.TransformOperationFactory.TooFewParameters", getTransformOperationID()); //$NON-NLS-1$
+			return null;
+		} else if (getParameters().length < 2) {
+			tagName = getParameters()[0];
+		} else {
+			tagName = getParameters()[0];
+			makeChildCurrent = Boolean.valueOf(getParameters()[1]).booleanValue();			
+		}
+		
+		Assert.isNotNull(tagName);
 		Element element = null;
 		if (tagConverterContext != null && curElement != null && tagName != null && tagName.length() > 0) {
 			Element childElement = tagConverterContext.createElement(tagName);

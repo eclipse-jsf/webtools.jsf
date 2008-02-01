@@ -100,8 +100,12 @@ public class MetaDataEnabledFeatureRegistry{
 	private boolean canCreateTypeForFeatureExtension(IMetaDataEnabledFeatureExtension feature) {
 		if (! typeCacheMap.containsKey(feature.getTypeID())){
 			IType type = AttributeValueRuntimeTypeRegistry.getInstance().getType(feature.getTypeID());
-			Class typeClass = AttributeValueRuntimeTypeFactory.getInstance().getClassForType(type);
-			typeCacheMap.put(feature.getTypeID(), typeClass);
+			if (type != null){
+				Class typeClass = AttributeValueRuntimeTypeFactory.getInstance().getClassForType(type);
+				typeCacheMap.put(feature.getTypeID(), typeClass);
+			}
+			else
+				return false;
 		}
 		return typeCacheMap.get(feature.getTypeID()) != null;
 	}

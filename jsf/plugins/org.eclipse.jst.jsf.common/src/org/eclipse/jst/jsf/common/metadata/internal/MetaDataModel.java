@@ -113,5 +113,11 @@ public class MetaDataModel {
 		root = null;
 		modelKeyDescriptor = null;
 	}
+	
+	public String toString() {
+		StringBuffer buf = new StringBuffer("MetaDataModel: ");
+		buf.append(getModelKey());
+		return buf.toString();
+	}
 
 }

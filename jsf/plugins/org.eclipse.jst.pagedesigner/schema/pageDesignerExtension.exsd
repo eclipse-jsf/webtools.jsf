@@ -19,6 +19,7 @@
             <element ref="elementEditFactory" minOccurs="0" maxOccurs="unbounded"/>
             <element ref="linkCreator" minOccurs="0" maxOccurs="unbounded"/>
             <element ref="tagAttributeCellEditorFactory" minOccurs="0" maxOccurs="unbounded"/>
+            <element ref="tagTransformOperation" minOccurs="0" maxOccurs="unbounded"/>
          </sequence>
          <attribute name="point" type="string" use="required">
             <annotation>
@@ -146,6 +147,38 @@
                <documentation>
                   
                </documentation>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="tagTransformOperation">
+      <annotation>
+         <documentation>
+            define a tag transformation operation class
+         </documentation>
+      </annotation>
+      <complexType>
+         <attribute name="id" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The transform operation id.    Referencers will use plugin-qualified references.   i.e if the plugin extending this was &lt;code&gt;org.foo.bar&lt;/code&gt;,  then the meta data instance that referenced this operation would specify:
+	&lt;pre&gt;
+		&lt;operation id=&quot;org.foo.bar.MyTransformId&quot;/&gt;
+	&lt;/pre&gt;
+	
+The exception to this rule is that if the reference is not plugin-qualified, then the reference is assumed to be a &lt;i&gt;core&lt;/i&gt; transformation and uses the &lt;code&gt;org.eclipse.jst.pagedesigner&lt;/code&gt; prefix.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="class" type="string" use="required">
+            <annotation>
+               <documentation>
+                  class extending the &lt;code&gt;org.eclipse.jst.pagedesigner.dtmanager.converter.operations.AbstractTransformOperation&lt;/code&gt;
+               </documentation>
+               <appInfo>
+                  <meta.attribute kind="java" basedOn="org.eclipse.jst.pagedesigner.dtmanager.converter.operations.AbstractTransformOperation:"/>
+               </appInfo>
             </annotation>
          </attribute>
       </complexType>

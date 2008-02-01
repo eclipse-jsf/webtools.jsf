@@ -56,6 +56,70 @@
 
 	<extension point="org.eclipse.jst.pagedesigner.pageDesignerExtension">
 		<linkCreator class="org.eclipse.jst.pagedesigner.actions.link.HtmlLinkCreator" linkIdentifier="Html Link"/>
+  <tagTransformOperation
+        class="org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.AppendChildElementOperation"
+        id="AppendChildElementOperation">
+  </tagTransformOperation>
+    <tagTransformOperation
+        class="org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.AppendChildTextFromXPathOperation"
+        id="AppendChildTextFromXPathOperation">
+  </tagTransformOperation>
+    <tagTransformOperation
+        class="org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.AppendChildTextOperation"
+        id="AppendChildTextOperation">
+  </tagTransformOperation>
+    <tagTransformOperation
+        class="org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.ConvertAttributeToTextOperation"
+        id="ConvertAttributeToTextOperation">
+  </tagTransformOperation>
+    <tagTransformOperation
+        class="org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.CopyAllAttributesOperation"
+        id="CopyAllAttributesOperation">
+  </tagTransformOperation>
+    <tagTransformOperation
+        class="org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.CopyAttributeOperation"
+        id="CopyAttributeOperation">
+  </tagTransformOperation>
+    <tagTransformOperation
+        class="org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.CopyChildrenOperation"
+        id="CopyChildrenOperation">
+  </tagTransformOperation>
+    <tagTransformOperation
+        class="org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.CreateAttributeFromXPathOperation"
+        id="CreateAttributeFromXPathOperation">
+  </tagTransformOperation>
+    <tagTransformOperation
+        class="org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.CreateAttributeOperation"
+        id="CreateAttributeOperation">
+  </tagTransformOperation>
+      <tagTransformOperation
+        class="org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.CreateElementOperation"
+        id="CreateElementOperation">
+  </tagTransformOperation>
+      <tagTransformOperation
+        class="org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.IfNotOperation"
+        id="IfNotOperation">
+  </tagTransformOperation>
+      <tagTransformOperation
+        class="org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.IfOperation"
+        id="IfOperation">
+  </tagTransformOperation>
+      <tagTransformOperation
+        class="org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.IterateOverElementsOperation"
+        id="IterateOverElementsOperation">
+  </tagTransformOperation>
+      <tagTransformOperation
+        class="org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.MakeParentElementCurrentOperation"
+        id="MakeParentElementCurrentOperation">
+  </tagTransformOperation>
+      <tagTransformOperation
+        class="org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.RemoveAttributeOperation"
+        id="RemoveAttributeOperation">
+  </tagTransformOperation>
+      <tagTransformOperation
+        class="org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.RenameAttributeOperation"
+        id="RenameAttributeOperation">
+  </tagTransformOperation>
 	</extension>
 	
 	<extension id="org.eclipse.jst.pagedesigner.commands" point="org.eclipse.ui.commands">
@@ -115,20 +179,7 @@
           uri="http://org.eclipse.jsf.pagedesigner/QuickEditTabSections.ecore">
     </package>
    </extension>
- <extension
-       point="org.eclipse.jst.jsf.common.standardMetaDataFiles">
-    <standardMetaDataFile
-          location="$nl$/metadata/html.xml"
-          uri="HTML">
-    </standardMetaDataFile>
- </extension>
- <extension
-       point="org.eclipse.jst.jsf.common.domainSourceModelTypeTranslators">
-    <domainSourceModelTypeTranslator
-          domainSourceModelTypeId="TaglibContentModelHandler"
-          translatorClass="org.eclipse.jst.pagedesigner.editors.palette.internal.metadata.HTMLContentModelMetaDataTranslator">
-    </domainSourceModelTypeTranslator>
- </extension>
+
  <extension
          point="org.eclipse.jst.jsf.common.domainSourceModelTypes">
       <domainSourceModelTypes

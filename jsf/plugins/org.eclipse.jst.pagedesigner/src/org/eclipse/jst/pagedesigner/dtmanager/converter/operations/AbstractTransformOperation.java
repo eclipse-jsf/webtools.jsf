@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
+import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.ITagConverterContext;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.ITransformOperation;
 import org.w3c.dom.Element;
@@ -40,6 +42,56 @@ public abstract class AbstractTransformOperation implements ITransformOperation 
 	 */
 	protected List childOperations;
 
+	private String[] params;
+
+	private String id = "<not set>";
+	
+	/**
+	 * Zero-argument constructor
+	 */
+	public AbstractTransformOperation(){
+		//
+	}
+	
+	/**
+	 * Called by TransformOperationFactory
+	 * @param params for the operation
+	 */
+	void setParameters(String[] params) {
+		if (params != null) {
+			this.params = new String[params.length];
+			System.arraycopy(params, 0, this.params, 0, params.length);
+		}
+	}
+	
+	/**
+	 * @return parameters for the operation
+	 */
+	protected String[] getParameters(){
+		return params;
+	}
+	
+	/**
+	 * Called by TransformOperationFactory
+	 * @param id for the operation
+	 */
+	void setTransformOperationID(String id){
+		this.id = id;
+	}
+	
+	/**
+	 * @return id for the operation
+	 */
+	protected String getTransformOperationID(){
+		return id;
+	}
+	
+	/**
+	 * @return Logger
+	 */
+	protected Logger getLog() {
+		return PDPlugin.getLogger(TransformOperationFactory.class);
+	}
 	/*
 	 * (non-Javadoc)
 	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.ITransformOperation#transform(org.w3c.dom.Element, org.w3c.dom.Element)

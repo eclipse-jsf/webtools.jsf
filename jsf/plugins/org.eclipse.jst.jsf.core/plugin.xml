@@ -334,7 +334,31 @@
           factory="org.eclipse.jst.jsf.designtime.internal.symbols.ResourceBundleSymbolSourceProvider">
     </symbolSourceId>
  </extension>
-   
+   <extension
+         point="org.eclipse.jst.jsf.common.domainSourceModelTypes">
+      <domainSourceModelTypes
+            domainId="TagLibraryDomain"
+            domainSourceModelTypeId="TaglibContentModelHandler"
+            locator="org.eclipse.jst.jsf.core.metadata.internal.TaglibMetaDataLocator"
+            ordinal="0">
+      </domainSourceModelTypes>
+   </extension> 
+  <extension
+       point="org.eclipse.jst.jsf.common.domainSourceModelTypeTranslators">
+    <domainSourceModelTypeTranslator
+          domainSourceModelTypeId="TaglibContentModelHandler"
+          translatorClass="org.eclipse.jst.jsf.core.metadata.internal.HTMLContentModelMetaDataTranslator">
+    </domainSourceModelTypeTranslator>
+    <domainSourceModelTypeTranslator
+          domainSourceModelTypeId="TaglibContentModelHandler"
+          translatorClass="org.eclipse.jst.jsf.core.metadata.internal.JSPContentModelMetaDataTranslator">
+    </domainSourceModelTypeTranslator>
+    <domainSourceModelTypeTranslator
+          domainSourceModelTypeId="TaglibContentModelHandler"
+          translatorClass="org.eclipse.jst.jsf.core.metadata.internal.TaglibMetaDataTLDTranslator">
+    </domainSourceModelTypeTranslator>      
+ </extension>
+
   <extension point="org.eclipse.jdt.core.classpathContainerInitializer">
     <classpathContainerInitializer
       class="org.eclipse.jst.jsf.core.internal.JSFLibrariesContainerInitializer"

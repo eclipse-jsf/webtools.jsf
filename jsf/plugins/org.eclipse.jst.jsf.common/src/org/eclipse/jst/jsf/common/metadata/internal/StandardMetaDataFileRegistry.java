@@ -16,6 +16,7 @@ package org.eclipse.jst.jsf.common.metadata.internal;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,6 +30,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 import org.eclipse.jst.jsf.common.metadata.Model;
@@ -80,7 +82,7 @@ public final class StandardMetaDataFileRegistry {
 			providers = new ArrayList/*<IStandardMetaDataSourceInfo>*/();
 			mdFilesMap.put(uri, providers);
 		}
-		providers.add(new StandardMetaDataFilesProvider(fileInfo, uri));
+		providers.add(new StandardMetaDataFilesProvider(fileInfo));
 	}	
 	
 /**
@@ -97,9 +99,8 @@ class StandardMetaDataFilesProvider implements IMetaDataSourceModelProvider {
 	/**
 	 * Constructor
 	 * @param info
-	 * @param uri
 	 */
-	StandardMetaDataFilesProvider(IStandardMetaDataSourceInfo info, String uri){
+	StandardMetaDataFilesProvider(IStandardMetaDataSourceInfo info){
 		this.info = info;
 	}
 	
@@ -131,6 +132,15 @@ class StandardMetaDataFilesProvider implements IMetaDataSourceModelProvider {
 		return null;
 		
 	}
+	
+	private URI getMDFileURI(){
+		try {
+			return URI.createURI(getFileLocator().getURL().toURI().toString());
+		} catch (URISyntaxException e) {
+			JSFCommonPlugin.log(IStatus.ERROR, "Metadata File Load Error: "+getFileLocator().getFileInfo().toString()+": URISyntaxException: "+e.getMessage());
+		}
+		return null;
+	}
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider#getSourceModel()
@@ -141,11 +151,13 @@ class StandardMetaDataFilesProvider implements IMetaDataSourceModelProvider {
 		
 		InputStream inputStream = null;
 		try {
+			URI uri = getMDFileURI();
 			inputStream = getInputStream();
 			if (inputStream != null){
-				EList contents = StandardModelFactory.getInstance().loadStandardFileResource(inputStream, this);
+				EList contents = StandardModelFactory.getInstance().loadStandardFileResource(inputStream, this, uri);
 				//check to see if this is a Model
-				if (contents != null && contents.get(0) instanceof Model){				
+				if (contents != null && !contents.isEmpty() &&
+						contents.get(0) instanceof Model){				
 					model = contents.get(0);
 					((Model)model).setSourceModelProvider(this);
 				}
@@ -153,7 +165,7 @@ class StandardMetaDataFilesProvider implements IMetaDataSourceModelProvider {
 		} catch (FileNotFoundException e){
 			JSFCommonPlugin.log(IStatus.ERROR, e.getLocalizedMessage());
 		} catch (IOException e) {
-			JSFCommonPlugin.log(IStatus.ERROR,"IOException(1): StandardMetaDataFilesProvider.getSourceModel():"+getModelName(), e); //$NON-NLS-1$
+			JSFCommonPlugin.log(IStatus.ERROR,"IOException(1): StandardMetaDataFilesProvider.getSourceModel():"+getModelName(), e); //$NON-NLS-1$			
 		} finally {
 			if (inputStream != null){
 				try {
@@ -165,7 +177,7 @@ class StandardMetaDataFilesProvider implements IMetaDataSourceModelProvider {
 		}
 		return model;
 	}
-	
+
 	private String getModelName() {
 		return info.toString();
 	}

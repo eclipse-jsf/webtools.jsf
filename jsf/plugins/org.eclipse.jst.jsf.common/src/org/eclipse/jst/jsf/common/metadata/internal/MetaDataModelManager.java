@@ -114,6 +114,7 @@ public class MetaDataModelManager implements IResourceChangeListener{
 	 */
 	protected void removeAsSessionProperty(IProject aProject){
 		try {
+			ResourcesPlugin.getWorkspace().removeResourceChangeListener(this);
 			aProject.setSessionProperty(KEY_SESSIONPROPERTY, null);
 		} catch (CoreException e) {
             JSFCommonPlugin.log(e, "Error removing session property"); //$NON-NLS-1$
@@ -178,6 +179,7 @@ public class MetaDataModelManager implements IResourceChangeListener{
 					public void run() throws Exception {
 						for (Iterator it=models.getModels().iterator();it.hasNext();){
 							MetaDataModel model = (MetaDataModel)it.next();
+//							System.out.println("kill mmModel: "+model.toString());
 							models.remove(model);
 							model.cleanup();					
 						}

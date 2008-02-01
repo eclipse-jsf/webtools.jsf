@@ -10,6 +10,7 @@
  *******************************************************************************/ 
 package org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal;
 
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.AbstractTransformOperation;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
@@ -27,39 +28,24 @@ public class CopyAttributeOperation extends AbstractTransformOperation {
 	private boolean create;
 	private String newAttributeValue;
 
-	/**
-	 * Constructs an instance with the specified attribute name, and defaults
-	 * to not creating an attribute unless the named attribute exists on the
-	 * source Element instance.
-	 * 
-	 * @param attributeName Name of attribute to be copied.
-	 */
-	public CopyAttributeOperation(String attributeName) {
-		this(attributeName, false, null);
-	}
-
-	/**
-	 * Constructs an instance with the specified attribute name and optionally
-	 * forces creation of a new attribute on the current Element even if the
-	 * named attribute does not exist on the source Element instance.
-	 * 
-	 * @param attributeName Name of attribute to be copied.
-	 * @param create If true, create attribute on the current Element even if
-	 * the named attribute does not exist on the source Element.
-	 * @param newAttributeValue Value to set for the new attribute if not found
-	 * on the source Element. 
-	 */
-	public CopyAttributeOperation(String attributeName, boolean create, String newAttributeValue) {
-		this.attributeName = attributeName;
-		this.create = create;
-		this.newAttributeValue = newAttributeValue;
-	}
 
 	/*
 	 * (non-Javadoc)
 	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.AbstractTransformOperation#transform(org.w3c.dom.Element, org.w3c.dom.Element)
 	 */
 	public Element transform(Element srcElement, Element curElement) {
+		if (getParameters().length < 1) {
+			getLog().error("Warning.TransformOperationFactory.TooFewParameters", getTransformOperationID()); //$NON-NLS-1$
+			return null;
+		} else if (getParameters().length < 3) {
+			attributeName = getParameters()[0];			
+		} else {
+			attributeName = getParameters()[0];
+			create = Boolean.valueOf(getParameters()[1]).booleanValue();
+			newAttributeValue = getParameters()[2];		
+		}
+		
+		Assert.isNotNull(attributeName);
 		if (srcElement != null && curElement != null) {
 			Attr attribute = srcElement.getAttributeNode(attributeName);
 			if (attribute != null) {

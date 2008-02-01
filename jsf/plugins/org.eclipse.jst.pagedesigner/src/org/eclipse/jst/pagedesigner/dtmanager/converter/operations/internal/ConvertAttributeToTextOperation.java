@@ -10,6 +10,7 @@
  *******************************************************************************/ 
 package org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal;
 
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.AbstractTransformOperation;
 import org.w3c.dom.Element;
 import org.w3c.dom.Text;
@@ -27,38 +28,24 @@ import org.w3c.dom.Text;
 public class ConvertAttributeToTextOperation extends AbstractTransformOperation {
 
 	private String attributeName;
-	private boolean removeAttribute;
-
-	/**
-	 * Constructs an instance with the specified attribute name, and defaults
-	 * to removing the attribute.
-	 * 
-	 * @param attributeName Name of attribute to be converted to a child Text
-	 * Node.
-	 */
-	public ConvertAttributeToTextOperation(String attributeName) {
-		this(attributeName, true);
-	}
-
-	/**
-	 * Constructs an instance with the specified attribute name and optionally
-	 * removes the attribute.
-	 * 
-	 * @param attributeName Name of attribute to be converted to a child Text
-	 * Node.
-	 * @param removeAttribute It true, attribute is removed after child Text
-	 * Node is created.
-	 */
-	public ConvertAttributeToTextOperation(String attributeName, boolean removeAttribute) {
-		this.attributeName = attributeName;
-		this.removeAttribute = removeAttribute;
-	}
+	private boolean removeAttribute = true;
 
 	/*
 	 * (non-Javadoc)
 	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.provisional.AbstractTransformOperation#transform(org.w3c.dom.Element, org.w3c.dom.Element)
 	 */
 	public Element transform(Element srcElement, Element curElement) {
+		if (getParameters().length < 1) {
+			getLog().error("Warning.TransformOperationFactory.TooFewParameters", getTransformOperationID()); //$NON-NLS-1$
+			return null;
+		} else if (getParameters().length < 2) {
+			attributeName = getParameters()[0];
+		} else {
+			attributeName = getParameters()[0];
+			removeAttribute = Boolean.valueOf(getParameters()[1]).booleanValue();
+		}		
+		
+		Assert.isNotNull(attributeName);
 		if (tagConverterContext != null && srcElement != null && curElement != null) {
 			String content = srcElement.getAttribute(attributeName);
 			if (content != null && content.length() > 0) {

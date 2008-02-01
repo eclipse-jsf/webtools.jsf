@@ -4,11 +4,29 @@
    <extension
          point="org.eclipse.jst.jsf.common.standardMetaDataFiles">
       <standardMetaDataFile
+          location="$nl$/metadata/html.xml"
+          uri="HTML"/>            
+      <standardMetaDataFile
+          location="$nl$/metadata/jsp11.xml"
+          uri="JSP11"/>         
+      <standardMetaDataFile
             location="/metadata/jsf_html.xml"
             uri="http://java.sun.com/jsf/html"/>
       <standardMetaDataFile
+            location="/metadata/jsf_html_pi.xml"
+            uri="http://java.sun.com/jsf/html"/>  
+      <standardMetaDataFile
+            location="/metadata/jsf_html_dti.xml"
+            uri="http://java.sun.com/jsf/html"/>                       
+      <standardMetaDataFile
             location="/metadata/jsf_core.xml"
             uri="http://java.sun.com/jsf/core"/>
+      <standardMetaDataFile
+            location="/metadata/jsf_core_pi.xml"
+            uri="http://java.sun.com/jsf/core"/>      
+      <standardMetaDataFile
+            location="/metadata/jsf_core_dti.xml"
+            uri="http://java.sun.com/jsf/core"/>                   
       <standardMetaDataFile
             location="/metadata/symbolInfoMetadata.xml"
             uri="http://java.sun.com/jsf/core"/>

@@ -10,9 +10,7 @@
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
 				<tag-convert-info>
-					<operation id="CustomTransformOperation">
-						<parameter value="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.ColumnOperation"/>
-					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.jsf.ui.ColumnOperation"/>										
 				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
 					multiLevel="true"
@@ -25,36 +23,36 @@
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
 				<tag-convert-info>
-					<operation id="CreateElementOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CreateElementOperation">
 						<parameter value="input"/>
 					</operation>
-					<operation id="CopyAllAttributesOperation"/>
-					<operation id="RenameAttributeOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CopyAllAttributesOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.RenameAttributeOperation">
 						<parameter value="styleClass"/>
 						<parameter value="class"/>
 					</operation>
 					<!-- if image attribute exists -->
-					<operation id="IfOperation">
+					<operation id="org.eclipse.jst.pagedesigner.IfOperation">
 						<parameter value="@image"/>
-						<operation id="CreateAttributeOperation">
+						<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
 							<parameter value="type"/>
 							<parameter value="image"/>
 						</operation>
-						<operation id="RenameAttributeOperation">
+						<operation id="org.eclipse.jst.pagedesigner.RenameAttributeOperation">
 							<parameter value="image"/>
 							<parameter value="src"/>
 						</operation>
 					</operation>
 					<!-- if image attribute does not exist -->
-					<operation id="IfNotOperation">
+					<operation id="org.eclipse.jst.pagedesigner.IfNotOperation">
 						<parameter value="@image"/>
 						<!-- create default type attribute (submit) -->
-						<operation id="CreateAttributeOperation">
+						<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
 							<parameter value="type"/>
 							<parameter value="submit"/>
 						</operation>
 						<!-- override default if type attribute is set (e.g. reset) -->
-						<operation id="CopyAttributeOperation">
+						<operation id="org.eclipse.jst.pagedesigner.CopyAttributeOperation">
 							<parameter value="type"/>
 						</operation>
 					</operation>
@@ -75,22 +73,22 @@
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
 				<tag-convert-info>
-					<operation id="CreateElementOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CreateElementOperation">
 						<parameter value="a"/>
 					</operation>
-					<operation id="CopyAllAttributesOperation"/>
-					<operation id="RenameAttributeOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CopyAllAttributesOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.RenameAttributeOperation">
 						<parameter value="styleClass"/>
 						<parameter value="class"/>
 					</operation>
-					<operation id="CreateAttributeOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
 						<parameter value="href"/>
 						<parameter value="#"/>
 					</operation>
-					<operation id="ConvertAttributeToTextOperation">
+					<operation id="org.eclipse.jst.pagedesigner.ConvertAttributeToTextOperation">
 						<parameter value="value"/>
 					</operation>
-					<operation id="CopyChildrenOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.CopyChildrenOperation"/>
 				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
 					multiLevel="true"
@@ -107,9 +105,7 @@
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
 				<tag-convert-info>
-					<operation id="CustomTransformOperation">
-						<parameter value="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.DataTableOperation"/>
-					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.jsf.ui.DataTableOperation"/>
 				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
 					multiLevel="true"
@@ -124,15 +120,15 @@
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
 				<tag-convert-info>
-					<operation id="CreateElementOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CreateElementOperation">
 						<parameter value="form"/>
 					</operation>
-					<operation id="CopyAllAttributesOperation"/>
-					<operation id="RenameAttributeOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CopyAllAttributesOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.RenameAttributeOperation">
 						<parameter value="styleClass"/>
 						<parameter value="class"/>
 					</operation>
-					<operation id="CopyChildrenOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.CopyChildrenOperation"/>
 				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
 					needBorderDecorator="true"
@@ -145,15 +141,15 @@
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
 				<tag-convert-info>
-					<operation id="CreateElementOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CreateElementOperation">
 						<parameter value="img"/>
 					</operation>
-					<operation id="CopyAllAttributesOperation"/>
-					<operation id="RenameAttributeOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CopyAllAttributesOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.RenameAttributeOperation">
 						<parameter value="styleClass"/>
 						<parameter value="class"/>
 					</operation>
-					<operation id="RenameAttributeOperation">
+					<operation id="org.eclipse.jst.pagedesigner.RenameAttributeOperation">
 						<parameter value="url"/>
 						<parameter value="src"/>
 					</operation>
@@ -161,7 +157,7 @@
 						if both "value" and "url" source attributes exist,
 						"value" overrides "url" as destination "src" attribute
 					-->
-					<operation id="RenameAttributeOperation">
+					<operation id="org.eclipse.jst.pagedesigner.RenameAttributeOperation">
 						<parameter value="value"/>
 						<parameter value="src"/>
 					</operation>
@@ -198,15 +194,15 @@
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
 				<tag-convert-info>
-					<operation id="CreateElementOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CreateElementOperation">
 						<parameter value="input"/>
 					</operation>
-					<operation id="CopyAllAttributesOperation"/>
-					<operation id="RenameAttributeOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CopyAllAttributesOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.RenameAttributeOperation">
 						<parameter value="styleClass"/>
 						<parameter value="class"/>
 					</operation>
-					<operation id="CreateAttributeOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
 						<parameter value="type"/>
 						<parameter value="password"/>
 					</operation>
@@ -227,15 +223,15 @@
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
 				<tag-convert-info>
-					<operation id="CreateElementOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CreateElementOperation">
 						<parameter value="input"/>
 					</operation>
-					<operation id="CopyAllAttributesOperation"/>
-					<operation id="RenameAttributeOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CopyAllAttributesOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.RenameAttributeOperation">
 						<parameter value="styleClass"/>
 						<parameter value="class"/>
 					</operation>
-					<operation id="CreateAttributeOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
 						<parameter value="type"/>
 						<parameter value="text"/>
 					</operation>
@@ -256,15 +252,15 @@
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
 				<tag-convert-info>
-					<operation id="CreateElementOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CreateElementOperation">
 						<parameter value="textarea"/>
 					</operation>
-					<operation id="CopyAllAttributesOperation"/>
-					<operation id="RenameAttributeOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CopyAllAttributesOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.RenameAttributeOperation">
 						<parameter value="styleClass"/>
 						<parameter value="class"/>
 					</operation>
-					<operation id="ConvertAttributeToTextOperation">
+					<operation id="org.eclipse.jst.pagedesigner.ConvertAttributeToTextOperation">
 						<parameter value="value"/>
 					</operation>
 				</tag-convert-info>
@@ -314,15 +310,15 @@
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
 				<tag-convert-info>
-					<operation id="CreateElementOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CreateElementOperation">
 						<parameter value="span"/>
 					</operation>
-					<operation id="CopyAllAttributesOperation"/>
-					<operation id="RenameAttributeOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CopyAllAttributesOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.RenameAttributeOperation">
 						<parameter value="styleClass"/>
 						<parameter value="class"/>
 					</operation>
-					<operation id="ConvertAttributeToTextOperation">
+					<operation id="org.eclipse.jst.pagedesigner.ConvertAttributeToTextOperation">
 						<parameter value="value"/>
 					</operation>
 				</tag-convert-info>
@@ -343,15 +339,15 @@
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
 				<tag-convert-info>
-					<operation id="CreateElementOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CreateElementOperation">
 						<parameter value="label"/>
 					</operation>
-					<operation id="CopyAllAttributesOperation"/>
-					<operation id="RenameAttributeOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CopyAllAttributesOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.RenameAttributeOperation">
 						<parameter value="styleClass"/>
 						<parameter value="class"/>
 					</operation>
-					<operation id="ConvertAttributeToTextOperation">
+					<operation id="org.eclipse.jst.pagedesigner.ConvertAttributeToTextOperation">
 						<parameter value="value"/>
 					</operation>
 				</tag-convert-info>
@@ -372,23 +368,23 @@
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
 				<tag-convert-info>
-					<operation id="CreateElementOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CreateElementOperation">
 						<parameter value="a"/>
 					</operation>
-					<operation id="CopyAllAttributesOperation"/>
-					<operation id="RenameAttributeOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CopyAllAttributesOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.RenameAttributeOperation">
 						<parameter value="styleClass"/>
 						<parameter value="class"/>
 					</operation>
-					<operation id="CreateAttributeOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
 						<parameter value="href"/>
 						<parameter value="#"/>
 					</operation>
-					<operation id="RenameAttributeOperation">
+					<operation id="org.eclipse.jst.pagedesigner.RenameAttributeOperation">
 						<parameter value="value"/>
 						<parameter value="href"/>
 					</operation>
-					<operation id="CopyChildrenOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.CopyChildrenOperation"/>
 				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
 					multiLevel="true"
@@ -402,15 +398,15 @@
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
 				<tag-convert-info>
-					<operation id="CreateElementOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CreateElementOperation">
 						<parameter value="span"/>
 					</operation>
-					<operation id="CopyAllAttributesOperation"/>
-					<operation id="RenameAttributeOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CopyAllAttributesOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.RenameAttributeOperation">
 						<parameter value="styleClass"/>
 						<parameter value="class"/>
 					</operation>
-					<operation id="ConvertAttributeToTextOperation">
+					<operation id="org.eclipse.jst.pagedesigner.ConvertAttributeToTextOperation">
 						<parameter value="value"/>
 					</operation>
 				</tag-convert-info>
@@ -431,9 +427,7 @@
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
 				<tag-convert-info>
-					<operation id="CustomTransformOperation">
-						<parameter value="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.PanelGridOperation"/>
-					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.jsf.ui.PanelGridOperation"/>
 				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
 					multiLevel="true"
@@ -448,15 +442,15 @@
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
 				<tag-convert-info>
-					<operation id="CreateElementOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CreateElementOperation">
 						<parameter value="div"/>
 					</operation>
-					<operation id="CopyAllAttributesOperation"/>
-					<operation id="RenameAttributeOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CopyAllAttributesOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.RenameAttributeOperation">
 						<parameter value="styleClass"/>
 						<parameter value="class"/>
 					</operation>
-					<operation id="CopyChildrenOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.CopyChildrenOperation"/>
 				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
 					multiLevel="true"
@@ -470,22 +464,22 @@
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
 				<tag-convert-info>
-					<operation id="CreateElementOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CreateElementOperation">
 						<parameter value="input"/>
 					</operation>
-					<operation id="CopyAllAttributesOperation"/>
-					<operation id="RenameAttributeOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CopyAllAttributesOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.RenameAttributeOperation">
 						<parameter value="styleClass"/>
 						<parameter value="class"/>
 					</operation>
-					<operation id="CreateAttributeOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
 						<parameter value="type"/>
 						<parameter value="checkbox"/>
 					</operation>
 					<!-- if value attribute exists and is "true" -->
-					<operation id="IfOperation">
+					<operation id="org.eclipse.jst.pagedesigner.IfOperation">
 						<parameter value="self::node()[@value='true']"/>
-						<operation id="CreateAttributeOperation">
+						<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
 							<parameter value="checked"/>
 							<parameter value="checked"/>
 						</operation>
@@ -503,9 +497,7 @@
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
 				<tag-convert-info>
-					<operation id="CustomTransformOperation">
-						<parameter value="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.SelectManyCheckboxOperation"/>
-					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.jsf.ui.SelectManyCheckboxOperation"/>						
 				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
 					multiLevel="true"
@@ -520,75 +512,75 @@
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
 				<tag-convert-info>
-					<operation id="CreateElementOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CreateElementOperation">
 						<parameter value="select"/>
 					</operation>
-					<operation id="CopyAllAttributesOperation"/>
-					<operation id="RenameAttributeOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CopyAllAttributesOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.RenameAttributeOperation">
 						<parameter value="styleClass"/>
 						<parameter value="class"/>
 					</operation>
-					<operation id="RenameAttributeOperation">
+					<operation id="org.eclipse.jst.pagedesigner.RenameAttributeOperation">
 						<parameter value="id"/>
 						<parameter value="name"/>
 					</operation>
 					<!-- multiple select allowed -->
-					<operation id="CreateAttributeOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
 						<parameter value="multiple"/>
 						<parameter value="multiple"/>
 					</operation>
 					<!-- if no "size" attribute -->
-					<operation id="IfNotOperation">
+					<operation id="org.eclipse.jst.pagedesigner.IfNotOperation">
 						<parameter value="@size"/>
-						<operation id="CreateAttributeFromXPathOperation">
+						<operation id="org.eclipse.jst.pagedesigner.CreateAttributeFromXPathOperation">
 							<parameter value="size"/>
 							<parameter value="count(selectItem)"/>
 						</operation>
 					</operation>
 					<!-- iterate over "selectItem" children -->
-					<operation id="IterateOverElementsOperation">
+					<operation id="org.eclipse.jst.pagedesigner.IterateOverElementsOperation">
 						<parameter value="selectItem"/>
-						<operation id="AppendChildElementOperation">
+						<operation id="org.eclipse.jst.pagedesigner.AppendChildElementOperation">
 							<parameter value="option"/>
 						</operation>
-						<operation id="CopyAttributeOperation">
+						<operation id="org.eclipse.jst.pagedesigner.CopyAttributeOperation">
 							<parameter value="itemValue"/>
 						</operation>
-						<operation id="RenameAttributeOperation">
+						<operation id="org.eclipse.jst.pagedesigner.RenameAttributeOperation">
 							<parameter value="itemValue"/>
 							<parameter value="value"/>
 						</operation>
-						<operation id="IfOperation">
+						<operation id="org.eclipse.jst.pagedesigner.IfOperation">
 							<parameter value="@itemLabel"/>
-							<operation id="AppendChildTextFromXPathOperation">
+							<operation id="org.eclipse.jst.pagedesigner.AppendChildTextFromXPathOperation">
 								<parameter value="@itemLabel"/>
 							</operation>
 						</operation>
-						<operation id="IfNotOperation">
+						<operation id="org.eclipse.jst.pagedesigner.IfNotOperation">
 							<parameter value="@itemLabel"/>
-							<operation id="IfOperation">
+							<operation id="org.eclipse.jst.pagedesigner.IfOperation">
 								<parameter value="@value"/>
-								<operation id="AppendChildTextFromXPathOperation">
+								<operation id="org.eclipse.jst.pagedesigner.AppendChildTextFromXPathOperation">
 									<parameter value="@value"/>
 								</operation>
 							</operation>
-							<operation id="IfNotOperation">
+							<operation id="org.eclipse.jst.pagedesigner.IfNotOperation">
 								<parameter value="@value"/>
-								<operation id="IfOperation">
+								<operation id="org.eclipse.jst.pagedesigner.IfOperation">
 									<parameter value="@itemValue"/>
-									<operation id="AppendChildTextFromXPathOperation">
+									<operation id="org.eclipse.jst.pagedesigner.AppendChildTextFromXPathOperation">
 										<parameter value="@itemValue"/>
 									</operation>
 								</operation>
-								<operation id="IfNotOperation">
+								<operation id="org.eclipse.jst.pagedesigner.IfNotOperation">
 									<parameter value="@itemValue"/>
-									<operation id="AppendChildTextOperation">
+									<operation id="org.eclipse.jst.pagedesigner.AppendChildTextOperation">
 										<parameter value="selectItem"/>
 									</operation>
 								</operation>
 							</operation>
 						</operation>
-						<operation id="MakeParentElementCurrentOperation"/>
+						<operation id="org.eclipse.jst.pagedesigner.MakeParentElementCurrentOperation"/>
 					</operation>
 				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
@@ -603,72 +595,72 @@
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
 				<tag-convert-info>
-					<operation id="CreateElementOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CreateElementOperation">
 						<parameter value="select"/>
 					</operation>
-					<operation id="CopyAllAttributesOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.CopyAllAttributesOperation"/>
 					<operation id="RenameAttributeOperation">
 						<parameter value="styleClass"/>
 						<parameter value="class"/>
 					</operation>
-					<operation id="RenameAttributeOperation">
+					<operation id="org.eclipse.jst.pagedesigner.RenameAttributeOperation">
 						<parameter value="id"/>
 						<parameter value="name"/>
 					</operation>
 					<!-- multiple select allowed -->
-					<operation id="CreateAttributeOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
 						<parameter value="multiple"/>
 						<parameter value="multiple"/>
 					</operation>
 					<!-- size fixed at 1 -->
-					<operation id="CreateAttributeOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
 						<parameter value="size"/>
 						<parameter value="1"/>
 					</operation>
 					<!-- iterate over "selectItem" children -->
-					<operation id="IterateOverElementsOperation">
+					<operation id="org.eclipse.jst.pagedesigner.IterateOverElementsOperation">
 						<parameter value="selectItem"/>
-						<operation id="AppendChildElementOperation">
+						<operation id="org.eclipse.jst.pagedesigner.AppendChildElementOperation">
 							<parameter value="option"/>
 						</operation>
-						<operation id="CopyAttributeOperation">
+						<operation id="org.eclipse.jst.pagedesigner.CopyAttributeOperation">
 							<parameter value="itemValue"/>
 						</operation>
-						<operation id="RenameAttributeOperation">
+						<operation id="org.eclipse.jst.pagedesigner.RenameAttributeOperation">
 							<parameter value="itemValue"/>
 							<parameter value="value"/>
 						</operation>
-						<operation id="IfOperation">
+						<operation id="org.eclipse.jst.pagedesigner.IfOperation">
 							<parameter value="@itemLabel"/>
-							<operation id="AppendChildTextFromXPathOperation">
+							<operation id="org.eclipse.jst.pagedesigner.AppendChildTextFromXPathOperation">
 								<parameter value="@itemLabel"/>
 							</operation>
 						</operation>
-						<operation id="IfNotOperation">
+						<operation id="org.eclipse.jst.pagedesigner.IfNotOperation">
 							<parameter value="@itemLabel"/>
-							<operation id="IfOperation">
+							<operation id="org.eclipse.jst.pagedesigner.IfOperation">
 								<parameter value="@value"/>
-								<operation id="AppendChildTextFromXPathOperation">
+								<operation id="org.eclipse.jst.pagedesigner.AppendChildTextFromXPathOperation">
 									<parameter value="@value"/>
 								</operation>
 							</operation>
-							<operation id="IfNotOperation">
+							<operation id="org.eclipse.jst.pagedesigner.IfNotOperation">
 								<parameter value="@value"/>
-								<operation id="IfOperation">
+								<operation id="org.eclipse.jst.pagedesigner.IfOperation">
 									<parameter value="@itemValue"/>
-									<operation id="AppendChildTextFromXPathOperation">
+									<operation id="org.eclipse.jst.pagedesigner.AppendChildTextFromXPathOperation">
 										<parameter value="@itemValue"/>
 									</operation>
 								</operation>
-								<operation id="IfNotOperation">
+								<operation id="org.eclipse.jst.pagedesigner.IfNotOperation">
 									<parameter value="@itemValue"/>
-									<operation id="AppendChildTextOperation">
+									<operation id="org.eclipse.jst.pagedesigner.AppendChildTextOperation">
 										<parameter value="selectItem"/>
 									</operation>
 								</operation>
 							</operation>
 						</operation>
-						<operation id="MakeParentElementCurrentOperation"/>
+						<operation id="org.eclipse.jst.pagedesigner.MakeParentElementCurrentOperation"/>
 					</operation>
 				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
@@ -683,70 +675,70 @@
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
 				<tag-convert-info>
-					<operation id="CreateElementOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CreateElementOperation">
 						<parameter value="select"/>
 					</operation>
-					<operation id="CopyAllAttributesOperation"/>
-					<operation id="RenameAttributeOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CopyAllAttributesOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.RenameAttributeOperation">
 						<parameter value="styleClass"/>
 						<parameter value="class"/>
 					</operation>
-					<operation id="RenameAttributeOperation">
+					<operation id="org.eclipse.jst.pagedesigner.RenameAttributeOperation">
 						<parameter value="id"/>
 						<parameter value="name"/>
 					</operation>
 					<!-- if no "size" attribute -->
-					<operation id="IfNotOperation">
+					<operation id="org.eclipse.jst.pagedesigner.IfNotOperation">
 						<parameter value="@size"/>
-						<operation id="CreateAttributeFromXPathOperation">
+						<operation id="org.eclipse.jst.pagedesigner.CreateAttributeFromXPathOperation">
 							<parameter value="size"/>
 							<parameter value="count(selectItem)"/>
 						</operation>
 					</operation>
 					<!-- iterate over "selectItem" children -->
-					<operation id="IterateOverElementsOperation">
+					<operation id="org.eclipse.jst.pagedesigner.IterateOverElementsOperation">
 						<parameter value="selectItem"/>
-						<operation id="AppendChildElementOperation">
+						<operation id="org.eclipse.jst.pagedesigner.AppendChildElementOperation">
 							<parameter value="option"/>
 						</operation>
-						<operation id="CopyAttributeOperation">
+						<operation id="org.eclipse.jst.pagedesigner.CopyAttributeOperation">
 							<parameter value="itemValue"/>
 						</operation>
-						<operation id="RenameAttributeOperation">
+						<operation id="org.eclipse.jst.pagedesigner.RenameAttributeOperation">
 							<parameter value="itemValue"/>
 							<parameter value="value"/>
 						</operation>
-						<operation id="IfOperation">
+						<operation id="org.eclipse.jst.pagedesigner.IfOperation">
 							<parameter value="@itemLabel"/>
-							<operation id="AppendChildTextFromXPathOperation">
+							<operation id="org.eclipse.jst.pagedesigner.AppendChildTextFromXPathOperation">
 								<parameter value="@itemLabel"/>
 							</operation>
 						</operation>
-						<operation id="IfNotOperation">
+						<operation id="org.eclipse.jst.pagedesigner.IfNotOperation">
 							<parameter value="@itemLabel"/>
-							<operation id="IfOperation">
+							<operation id="org.eclipse.jst.pagedesigner.IfOperation">
 								<parameter value="@value"/>
-								<operation id="AppendChildTextFromXPathOperation">
+								<operation id="org.eclipse.jst.pagedesigner.AppendChildTextFromXPathOperation">
 									<parameter value="@value"/>
 								</operation>
 							</operation>
-							<operation id="IfNotOperation">
+							<operation id="org.eclipse.jst.pagedesigner.IfNotOperation">
 								<parameter value="@value"/>
-								<operation id="IfOperation">
+								<operation id="org.eclipse.jst.pagedesigner.IfOperation">
 									<parameter value="@itemValue"/>
-									<operation id="AppendChildTextFromXPathOperation">
+									<operation id="org.eclipse.jst.pagedesigner.AppendChildTextFromXPathOperation">
 										<parameter value="@itemValue"/>
 									</operation>
 								</operation>
-								<operation id="IfNotOperation">
+								<operation id="org.eclipse.jst.pagedesigner.IfNotOperation">
 									<parameter value="@itemValue"/>
-									<operation id="AppendChildTextOperation">
+									<operation id="org.eclipse.jst.pagedesigner.AppendChildTextOperation">
 										<parameter value="selectItem"/>
 									</operation>
 								</operation>
 							</operation>
 						</operation>
-						<operation id="MakeParentElementCurrentOperation"/>
+						<operation id="org.eclipse.jst.pagedesigner.MakeParentElementCurrentOperation"/>
 					</operation>
 				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
@@ -761,67 +753,67 @@
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
 				<tag-convert-info>
-					<operation id="CreateElementOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CreateElementOperation">
 						<parameter value="select"/>
 					</operation>
-					<operation id="CopyAllAttributesOperation"/>
-					<operation id="RenameAttributeOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CopyAllAttributesOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.RenameAttributeOperation">
 						<parameter value="styleClass"/>
 						<parameter value="class"/>
 					</operation>
-					<operation id="RenameAttributeOperation">
+					<operation id="org.eclipse.jst.pagedesigner.RenameAttributeOperation">
 						<parameter value="id"/>
 						<parameter value="name"/>
 					</operation>
 					<!-- size fixed at 1 -->
-					<operation id="CreateAttributeOperation">
+					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
 						<parameter value="size"/>
 						<parameter value="1"/>
 					</operation>
 					<!-- iterate over "selectItem" children -->
-					<operation id="IterateOverElementsOperation">
+					<operation id="org.eclipse.jst.pagedesigner.IterateOverElementsOperation">
 						<parameter value="selectItem"/>
-						<operation id="AppendChildElementOperation">
+						<operation id="org.eclipse.jst.pagedesigner.AppendChildElementOperation">
 							<parameter value="option"/>
 						</operation>
-						<operation id="CopyAttributeOperation">
+						<operation id="org.eclipse.jst.pagedesigner.CopyAttributeOperation">
 							<parameter value="itemValue"/>
 						</operation>
-						<operation id="RenameAttributeOperation">
+						<operation id="org.eclipse.jst.pagedesigner.RenameAttributeOperation">
 							<parameter value="itemValue"/>
 							<parameter value="value"/>
 						</operation>
-						<operation id="IfOperation">
+						<operation id="org.eclipse.jst.pagedesigner.IfOperation">
 							<parameter value="@itemLabel"/>
-							<operation id="AppendChildTextFromXPathOperation">
+							<operation id="org.eclipse.jst.pagedesigner.AppendChildTextFromXPathOperation">
 								<parameter value="@itemLabel"/>
 							</operation>
 						</operation>
-						<operation id="IfNotOperation">
+						<operation id="org.eclipse.jst.pagedesigner.IfNotOperation">
 							<parameter value="@itemLabel"/>
-							<operation id="IfOperation">
+							<operation id="org.eclipse.jst.pagedesigner.IfOperation">
 								<parameter value="@value"/>
-								<operation id="AppendChildTextFromXPathOperation">
+								<operation id="org.eclipse.jst.pagedesigner.AppendChildTextFromXPathOperation">
 									<parameter value="@value"/>
 								</operation>
 							</operation>
-							<operation id="IfNotOperation">
+							<operation id="org.eclipse.jst.pagedesigner.IfNotOperation">
 								<parameter value="@value"/>
-								<operation id="IfOperation">
+								<operation id="org.eclipse.jst.pagedesigner.IfOperation">
 									<parameter value="@itemValue"/>
-									<operation id="AppendChildTextFromXPathOperation">
+									<operation id="org.eclipse.jst.pagedesigner.AppendChildTextFromXPathOperation">
 										<parameter value="@itemValue"/>
 									</operation>
 								</operation>
-								<operation id="IfNotOperation">
+								<operation id="org.eclipse.jst.pagedesigner.IfNotOperation">
 									<parameter value="@itemValue"/>
-									<operation id="AppendChildTextOperation">
+									<operation id="org.eclipse.jst.pagedesigner.AppendChildTextOperation">
 										<parameter value="selectItem"/>
 									</operation>
 								</operation>
 							</operation>
 						</operation>
-						<operation id="MakeParentElementCurrentOperation"/>
+						<operation id="org.eclipse.jst.pagedesigner.MakeParentElementCurrentOperation"/>
 					</operation>
 				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
@@ -836,9 +828,7 @@
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
 				<tag-convert-info>
-					<operation id="CustomTransformOperation">
-						<parameter value="org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.SelectOneRadioOperation"/>
-					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.jsf.ui.SelectOneRadioOperation"/>
 				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
 					multiLevel="true"
