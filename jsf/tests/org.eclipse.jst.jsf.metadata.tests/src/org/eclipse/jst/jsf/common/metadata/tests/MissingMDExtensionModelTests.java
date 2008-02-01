@@ -105,9 +105,9 @@ public class MissingMDExtensionModelTests extends AbstractBaseMetaDataTestCase {
 	
 	class LogListener implements ILogListener {
 
-		private List statusMsgs;
+		private List<IStatus> statusMsgs;
 		public LogListener(){
-			this.statusMsgs = new ArrayList(1);
+			this.statusMsgs = new ArrayList<IStatus>();
 		}
 		public void logging(IStatus status, String plugin) {
 			statusMsgs.add(status);			
