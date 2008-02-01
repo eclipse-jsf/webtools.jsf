@@ -21,25 +21,7 @@
            name="%preferencepage.jsf.name">
      </page>
   </extension>
-  <extension
-        point="org.eclipse.ui.newWizards">
-     <category
-           id="org.eclipse.jst.jsf.ui.jsfcategory"
-           name="%newwizard.jsf.category.name"/>
-     <wizard
-           canFinishEarly="false"
-           category="org.eclipse.jst.jsf.ui.jsfcategory"
-           class="org.eclipse.jst.jsf.ui.internal.classpath.JSFLibraryWizard"
-           hasPages="true"
-           icon="icons/obj16/library_obj.gif"
-           id="org.eclipse.jst.jsf.ui.jsfLibraryWizard"
-           name="%newwizard.jsflibrary.name"
-           preferredPerspectives="org.eclipse.jst.j2ee.J2EEPerspective">
-        <description>
-           %newwizard.jsflibrary.description
-        </description>
-     </wizard>
-  </extension>
+
   <extension 
         point="org.eclipse.wst.common.project.facet.ui.wizardPages">
      <wizard-pages action="jst.jsf.v11.install">
