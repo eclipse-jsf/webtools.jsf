@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraitImpl.java,v 1.6 2008/02/01 20:20:47 gkessler Exp $
+ * $Id: TraitImpl.java,v 1.7 2008/02/01 22:16:42 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.impl;
 
@@ -310,7 +310,7 @@ public class TraitImpl extends EObjectImpl implements Trait {
 		return result.toString();
 	}
 
-	public boolean equals(Object value){
+	public boolean equals(@SuppressWarnings("hiding") Object value){
 		if (!(value instanceof String))
 			return super.equals(value);
 		

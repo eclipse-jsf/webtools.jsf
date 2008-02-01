@@ -104,6 +104,7 @@ public class StandardModelFactory {
 	/**
 	 * @param inputStream
 	 * @param provider
+	 * @param uri 
 	 * @return the root of the standard model from the resource as an EList
 	 * @throws IOException
 	 */
