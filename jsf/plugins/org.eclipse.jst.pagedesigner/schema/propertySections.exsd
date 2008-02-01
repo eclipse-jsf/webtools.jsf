@@ -3,10 +3,10 @@
 <schema targetNamespace="org.eclipse.jst.pagedesigner">
 <annotation>
       <appInfo>
-         <meta.schema plugin="org.eclipse.jst.pagedesigner" id="propertySections" name="Property Sections" since="2.0"/>
+         <meta.schema plugin="org.eclipse.jst.pagedesigner" id="propertySections" name="Property Sections"/>
       </appInfo>
       <documentation>
-         &lt;p&gt;&lt;b&gt;This extension point is provisional and subject to change&lt;/b&gt;&lt;/p&gt;
+         &lt;p&gt;&lt;b&gt;This extension point is deprecated and will be removed before WTP 3.0GA.&lt;/b&gt;&lt;/p&gt;
       </documentation>
    </annotation>
 
@@ -26,6 +26,14 @@
    </element>
 
    <element name="propertySections">
+      <annotation>
+         <appInfo>
+            <meta.element deprecated="true"/>
+         </appInfo>
+         <documentation>
+            see http://wiki.eclipse.org/Enhancements_to_WPE_Property_Pages
+         </documentation>
+      </annotation>
       <complexType>
          <sequence>
             <element ref="propertySection" minOccurs="1" maxOccurs="unbounded"/>
@@ -115,6 +123,16 @@ Or, the class could extends &lt;code&gt;AttributeGroup&lt;/code&gt;, in that cas
       </appInfo>
       <documentation>
          2.0
+      </documentation>
+   </annotation>
+
+
+   <annotation>
+      <appInfo>
+         <meta.section type="apiInfo"/>
+      </appInfo>
+      <documentation>
+         deprecated and unused
       </documentation>
    </annotation>
 
