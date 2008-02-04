@@ -21,6 +21,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.zip.ZipFile;
 
 import junit.framework.Assert;
 
@@ -49,6 +50,19 @@ import org.w3c.dom.Node;
  */
 public final class JSFTestUtil
 {
+    private static boolean     _enableTrace = false;
+    
+    /**
+     * Setting to true enables internal tracing in this class.  The default
+     * is false.  There is no thread safety.
+     * 
+     * @param enableTrace
+     */
+    public static void setEnableTrace(final boolean enableTrace)
+    {
+        _enableTrace = enableTrace;
+    }
+    
     /**
      * Used to turn off build validation to speed up testing
      *
@@ -120,6 +134,11 @@ public final class JSFTestUtil
         codeRes.load(bundle, fileName);
         final String code = codeRes.toString();
         jdtTestEnvironment.addSourceFile(srcFolderName, packageName, beanClassName, code);
+    }
+    
+    public static ZipFile createZipFile(final Bundle bundle, final String entryName) throws IOException, URISyntaxException
+    {
+        return new ZipFile(new File(getAbsolutePath(bundle, entryName).toOSString()));
     }
 
     public static URI getPlatformAbsPath(final String relativePath) throws MalformedURLException, URISyntaxException
@@ -278,7 +297,10 @@ public final class JSFTestUtil
 
     private static void trace(final String message)
     {
-    	System.out.println("getIndexedRegion: "+message);
+        if (_enableTrace)
+        {
+            System.out.println("getIndexedRegion: "+message);
+        }
     }
 
     /**

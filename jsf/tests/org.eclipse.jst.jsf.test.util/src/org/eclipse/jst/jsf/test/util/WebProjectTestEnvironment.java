@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
+import junit.framework.TestCase;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -68,6 +70,22 @@ public class WebProjectTestEnvironment extends ProjectTestEnvironment {
         _webFacetVersion = webVersion;
     }
     
+
+    /**
+     * Use forCase to try and create a project name unique to the current
+     * class and test name being run.
+     * 
+     * @param forCase
+     * @param javaVersion
+     * @param webVersion
+     */
+    public WebProjectTestEnvironment(TestCase forCase,
+            IProjectFacetVersion javaVersion, IProjectFacetVersion webVersion)
+    {
+        this(forCase.getClass().getName() + "_" + forCase.getName(),
+                javaVersion, webVersion);
+    }
+ 
     /**
      * NOTE: behaviour override compared to super.  This method doesn't 
      * delete existing
@@ -82,7 +100,7 @@ public class WebProjectTestEnvironment extends ProjectTestEnvironment {
      * 
      * @param ignoreProjectExists -- only has impact if _projectName already
      * exists in the workspace.  In this case, if set to true, then createProject
-     * will return without error if the project exists and is properly facted, but
+     * will return without error if the project exists and is properly faceted, but
      * throw a RuntimeException if faceting doesn't match what is expected.
      * 
      * If set to false and the project exists, a runtime exception will be thrown
