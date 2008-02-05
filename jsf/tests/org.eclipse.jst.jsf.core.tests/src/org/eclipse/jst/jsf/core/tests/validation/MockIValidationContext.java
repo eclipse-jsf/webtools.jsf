@@ -3,20 +3,27 @@ package org.eclipse.jst.jsf.core.tests.validation;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.wst.validation.internal.provisional.core.IValidationContext;
 
 public class MockIValidationContext implements IValidationContext
 {
-    private final ArrayList<String> _uris;
+    private final List<IFile> 			_files;
 
-    public MockIValidationContext(final List<String> uris)
+    public MockIValidationContext(final List<IFile> files)
     {
-        _uris = new ArrayList<String>(uris);
+    	_files = files;
     }
-
+    
     public String[] getURIs()
     {
-        return _uris.toArray(new String[0]);
+        final List<String>  uris = new ArrayList<String>();
+        
+        for (final IFile file : _files)
+        {
+        	uris.add(file.getFullPath().toString());
+        }
+        return uris.toArray(new String[uris.size()]);
     }
 
     public Object loadModel(String symbolicName)

@@ -30,7 +30,7 @@ import org.w3c.dom.Node;
  * @author cbateman
  *
  */
-public class TestJSPSemanticsValidator extends TestCase
+public class TestJSPSemanticsValidator_Containment extends TestCase
 {
     private WebProjectTestEnvironment 	_testEnv;
     private IFile					  	_jspFile;

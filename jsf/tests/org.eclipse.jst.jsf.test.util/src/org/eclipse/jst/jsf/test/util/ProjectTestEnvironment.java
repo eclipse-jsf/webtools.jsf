@@ -138,6 +138,7 @@ public class ProjectTestEnvironment
     public final void createFromZip(final ZipFile projectZip,
             final boolean ignoreProjectExists) throws InvocationTargetException, InterruptedException
     {
+    	// TODO: assert that the faceting in the zip matches what was set in the constructor.
         createProject(ignoreProjectExists);
         ZipFileStructureProvider zipFileStructureProvider =
             new ZipFileStructureProvider(
