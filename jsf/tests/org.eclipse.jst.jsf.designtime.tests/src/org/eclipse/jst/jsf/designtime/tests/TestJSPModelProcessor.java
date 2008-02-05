@@ -114,23 +114,27 @@ public class TestJSPModelProcessor extends TestCase
             model = modelManager.getModelForRead(_testJSP1);
 
             // we should be the only one with a handle
-            assertFalse(model.isShared());
+            System.out.println(model.getReferenceCountForRead());
+            assertFalse(model.isSharedForRead());
 
             // if we not refreshed yet, then should be no symbols
             final JSPModelProcessor processor = JSPModelProcessor.get(_testJSP1);
             assertNotNull(processor);
+            System.out.println(model.getReferenceCountForRead());
             // we should be the only one with a handle
-            assertFalse(model.isShared());
+            assertFalse(model.isSharedForRead());
 
             Map<Object, ISymbol> scopeMap =
                 processor.getMapForScope(ISymbolConstants.SYMBOL_SCOPE_REQUEST_STRING);
             assertTrue(scopeMap.isEmpty());
+            System.out.println(model.getReferenceCountForRead());
             // we should be the only one with a handle
-            assertFalse(model.isShared());
+            assertFalse(model.isSharedForRead());
 
             processor.refresh(false);
+            System.out.println(model.getReferenceCountForRead());
             // we should be the only one with a handle
-            assertFalse(model.isShared());
+            assertFalse(model.isSharedForRead());
 
             // after refresh we should have a symbol for the loadBundle and the dataTable
             scopeMap =
@@ -139,7 +143,8 @@ public class TestJSPModelProcessor extends TestCase
             assertEquals(2, scopeMap.size());
 
             // we should be the only one with a handle
-            assertFalse(model.isShared());
+            System.out.println(model.getReferenceCountForRead());
+            assertFalse(model.isSharedForRead());
         }
         finally
         {
@@ -179,18 +184,18 @@ public class TestJSPModelProcessor extends TestCase
             model = modelManager.getModelForRead(_testJSP1);
 
             // we should be the only one with a handle
-            assertFalse(model.isShared());
+            assertFalse(model.isSharedForRead());
 
             // ensure that if the enclosing project of the associated IFile
             // is closed, then the processor gets disposed
             final JSPModelProcessor processor = JSPModelProcessor.get(_testJSP1);
-            assertFalse(model.isShared());
+            assertFalse(model.isSharedForRead());
             assertNotNull(processor);
             // we should still be the only one with a handle since JSPModelProcessor
             // doesn't hold it.
             assertFalse(processor.isDisposed());
             processor.refresh(false);
-            assertFalse(model.isShared());
+            assertFalse(model.isSharedForRead());
 
             _testJSP1.getProject().close(null);
 
@@ -198,7 +203,7 @@ public class TestJSPModelProcessor extends TestCase
             // resource change event
             waitForAndAssertProcessorDisposed(processor, true);
             // final check, with processor disposed, still not shared
-            assertFalse(model.isShared());
+            assertFalse(model.isSharedForRead());
         }
         finally
         {
@@ -220,25 +225,25 @@ public class TestJSPModelProcessor extends TestCase
             model = modelManager.getModelForRead(_testJSP1);
 
             // we should be the only one with a handle
-            assertFalse(model.isShared());
+            assertFalse(model.isSharedForRead());
 
             // ensure that if the enclosing project of the associated IFile
             // is deleted, then the processor gets disposed
             final JSPModelProcessor processor = JSPModelProcessor.get(_testJSP1);
             assertNotNull(processor);
             assertFalse(processor.isDisposed());
-            assertFalse(model.isShared());
+            assertFalse(model.isSharedForRead());
             // we should still be the only one with a handle since JSPModelProcessor
             // doesn't hold it.
             processor.refresh(false);
-            assertFalse(model.isShared());
+            assertFalse(model.isSharedForRead());
 
             _testJSP1.getProject().delete(true,null);
 
             // file is deleted, so the processor should dispose itself on the
             // resource change event
             waitForAndAssertProcessorDisposed(processor, true);
-            assertFalse(model.isShared());
+            assertFalse(model.isSharedForRead());
         }
         finally
         {
