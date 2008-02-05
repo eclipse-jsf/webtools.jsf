@@ -289,7 +289,7 @@ public class JSPSemanticsValidator extends JSPValidator implements ISourceValida
                 // look for attribute pattern "#{}"
                 // TODO: need to generalize this for RValue concatenation
                 final ITextRegionList  regionList = parentRegion.getRegions();
-                if (regionList.size() >= 4)
+                if (regionList.size() >= 3)
                 {
                     ITextRegion  openQuote = regionList.get(0);
                     ITextRegion  openVBLQuote = regionList.get(1);
@@ -355,7 +355,7 @@ public class JSPSemanticsValidator extends JSPValidator implements ISourceValida
                           
                         if (!foundClosingQuote)
                         {
-                            int offset = context.getDocumentPosition()+1;
+                            int offset = context.getDocumentPosition();
                             int length = parentRegion.getText().length();
 
                             reportFinding(reporter, 
