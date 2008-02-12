@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
 import org.eclipse.jst.jsf.core.JSFVersion;
+import org.eclipse.jst.jsf.core.tests.validation.MockValidationReporter.ReportedProblem;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
-import org.eclipse.wst.validation.internal.provisional.core.IMessage;
 
 public class DataTableResolutionTestCase extends SingleJSPTestCase
 {
@@ -45,7 +45,7 @@ public class DataTableResolutionTestCase extends SingleJSPTestCase
     @Override
     public void testWarningExprs()
     {
-        List<IMessage> problems = assertSemanticWarning(1554, null, 1);
+        List<ReportedProblem> problems = assertSemanticWarning(1554, null, 1);
         assertContainsProblem(problems, DiagnosticFactory.VARIABLE_NOT_FOUND_ID);
 
         problems = assertSemanticWarning(1687, null, 1);

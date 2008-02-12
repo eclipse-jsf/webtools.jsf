@@ -3,9 +3,9 @@ package org.eclipse.jst.jsf.validation.el.tests.jsp;
 import java.util.List;
 
 import org.eclipse.jst.jsf.core.JSFVersion;
+import org.eclipse.jst.jsf.core.tests.validation.MockValidationReporter.ReportedProblem;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
-import org.eclipse.wst.validation.internal.provisional.core.IMessage;
 
 /**
  * Test cases for bean variable resolution
@@ -55,7 +55,7 @@ public class BeanVariableResolutionTestCase extends SingleJSPTestCase
     @Override
     public void testWarningExprs()
     {
-        List<IMessage> list = assertSemanticWarning(851, null, 1);
+        List<ReportedProblem> list = assertSemanticWarning(851, null, 1);
         assertContainsProblem(list,DiagnosticFactory.VARIABLE_NOT_FOUND_ID);
 
         list = assertSemanticWarning(891, null, 1);

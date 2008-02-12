@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.core.JSFVersion;
+import org.eclipse.jst.jsf.core.tests.validation.MockValidationReporter.ReportedProblem;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
-import org.eclipse.wst.validation.internal.provisional.core.IMessage;
 
 /**
  * Test cases for logical OR (or, ||)
@@ -77,7 +77,7 @@ public class LogicalOrTestCase extends SingleJSPTestCase
     @Override
     public void testWarningExprs()
     {
-        List<IMessage> list = assertSemanticWarning(1738, Signature.SIG_BOOLEAN, 1);
+        List<ReportedProblem> list = assertSemanticWarning(1738, Signature.SIG_BOOLEAN, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_FIRST_ARGUMENT_SHORT_CIRCUITS_ID);
 
         list = assertSemanticWarning(1804, Signature.SIG_BOOLEAN, 1);
@@ -102,7 +102,7 @@ public class LogicalOrTestCase extends SingleJSPTestCase
     @Override
     public void testErrorExprs()
     {
-        final List<IMessage> list = assertSemanticError(2161, null,1);
+        final List<ReportedProblem> list = assertSemanticError(2161, null,1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN_ID);
 
         assertSemanticError(2225, null,1);

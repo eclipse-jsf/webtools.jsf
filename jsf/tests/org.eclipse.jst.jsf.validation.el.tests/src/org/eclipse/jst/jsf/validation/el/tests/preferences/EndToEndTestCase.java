@@ -13,12 +13,15 @@ package org.eclipse.jst.jsf.validation.el.tests.preferences;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.jface.preference.IPersistentPreferenceStore;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
+import org.eclipse.jst.jsf.core.tests.validation.MockValidationReporter.ReportedProblem;
 import org.eclipse.jst.jsf.validation.el.tests.base.JSPTestCase;
+import org.eclipse.jst.jsf.validation.el.tests.base.MockELValidationReporter;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.ELValidationPreferences;
 import org.eclipse.jst.jsf.validation.internal.ELValidationPreferences.Severity;
@@ -144,19 +147,49 @@ public class EndToEndTestCase extends JSPTestCase
 
     private void assertErrorLevel(final int docPos, final int severity)
     {
-        final ELExpressionValidator validator = createELValidator(_structuredDocument, docPos, _testJSP);
+        final MyMockValidationReporter reporter = new MyMockValidationReporter();
+        final ELExpressionValidator validator = 
+            createELValidator(_structuredDocument, docPos, _testJSP, reporter);
         validator.validateXMLNode();
-        final List<IMessage> syntaxProblems = validator.getSyntaxProblems();
+        final List<ReportedProblem> syntaxProblems = reporter.getSyntaxProblems();
 
-        for (final IMessage message : syntaxProblems)
+        for (final ReportedProblem message : syntaxProblems)
         {
             assertEquals(severity, message.getSeverity());
         }
 
-        final List<IMessage> semanticProblems = validator.getSemanticValidator().getMessages();
-        for (final IMessage message : semanticProblems)
+        final List<ReportedProblem> semanticProblems = reporter.getSemanticProblems();
+        for (final ReportedProblem message : semanticProblems)
         {
             assertEquals(severity, message.getSeverity());
+        }
+    }
+    
+    private class MyMockValidationReporter extends MockELValidationReporter
+    {
+        @Override
+        public void report(Diagnostic problem, int start, int length)
+        {
+            Diagnostic modifiedProblem =
+                new SeverityModifiableDiagnostic(problem);
+            super.report(modifiedProblem, start, length);
+        }
+        
+        private class SeverityModifiableDiagnostic extends BasicDiagnostic
+        {
+
+            /**
+             * @param severity
+             * @param source
+             * @param code
+             * @param message
+             * @param data
+             */
+            private SeverityModifiableDiagnostic(final Diagnostic sourceDiag)
+            {
+                super(_prefs.getDiagnosticSeverity(sourceDiag.getCode()), sourceDiag.getSource(), 
+                        sourceDiag.getCode(), sourceDiag.getMessage(), sourceDiag.getData().toArray());
+            }
         }
     }
 }

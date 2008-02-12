@@ -28,6 +28,7 @@ import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jst.common.project.facet.JavaFacetUtils;
+import org.eclipse.jst.jsf.context.IModelContext;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.ITextRegionContextResolver;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
@@ -36,6 +37,11 @@ import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigManager;
 import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
+import org.eclipse.jst.jsf.core.tests.validation.MockValidationReporter.ReportedProblem;
+import org.eclipse.jst.jsf.designtime.resolver.AbstractStructuredDocumentSymbolResolverFactory;
+import org.eclipse.jst.jsf.designtime.resolver.CachingSymbolContextResolver;
+import org.eclipse.jst.jsf.designtime.resolver.IStructuredDocumentSymbolResolverFactory;
+import org.eclipse.jst.jsf.designtime.resolver.ISymbolContextResolver;
 import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanType;
 import org.eclipse.jst.jsf.test.util.ConfigurableTestCase;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
@@ -45,7 +51,6 @@ import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
 import org.eclipse.jst.jsf.validation.el.tests.ELValidationTestPlugin;
 import org.eclipse.jst.jsf.validation.internal.ValidationPreferences;
 import org.eclipse.jst.jsf.validation.internal.el.ELExpressionValidator;
-import org.eclipse.jst.jsf.validation.internal.el.diagnostics.IELLocalizedMessage;
 import org.eclipse.wst.common.project.facet.core.ProjectFacetsManager;
 import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
 import org.eclipse.wst.validation.internal.provisional.core.IMessage;
@@ -60,10 +65,12 @@ public abstract class BaseTestCase extends ConfigurableTestCase
 {
     public static final String      PROXY_SETTING_HOST = "proxySettings_Host";
     public static final String      PROXY_SETTING_PORT = "proxySettings_Port";
-    public static final String      JSF_FACET_VERSION  = "jsfFacetVersion";    
+    public static final String      JSF_FACET_VERSION  = "jsfFacetVersion";
     
     private final JSFVersion            _defaultJSFVersion;
-    
+    private IStructuredDocumentSymbolResolverFactory _symbolResolverFactory
+        = new MySymbolResolverFactory();;
+
     /**
      * Default constructor
      */
@@ -92,7 +99,6 @@ public abstract class BaseTestCase extends ConfigurableTestCase
     
 	private MyConfiguration              _configuration;
 
-	
 	protected void doStandaloneSetup() 
 	{
 	    super.doStandaloneSetup();
@@ -309,7 +315,8 @@ public abstract class BaseTestCase extends ConfigurableTestCase
      * @param file
      * @return a new expression validator for docPos in the document
      */
-    protected ELExpressionValidator createELValidator(IStructuredDocument document, int docPos, IFile file)
+    protected ELExpressionValidator createELValidator(
+            IStructuredDocument document, int docPos, IFile file, MockELValidationReporter reporter)
     {
         final String elText = getELText(document, docPos);
         final IStructuredDocumentContext context = 
@@ -317,8 +324,31 @@ public abstract class BaseTestCase extends ConfigurableTestCase
         final ValidationPreferences prefs =
             new ValidationPreferences(JSFCorePlugin.getDefault().getPreferenceStore());
         prefs.load();
+        
+        return new ELExpressionValidator(context, elText, _symbolResolverFactory, reporter);
+    }
+    
+    private static class MySymbolResolverFactory extends AbstractStructuredDocumentSymbolResolverFactory
+    {
+        private ISymbolContextResolver      _resolver;
 
-        return new ELExpressionValidator(context, elText, file, prefs.getElPrefs());
+        @Override
+        public ISymbolContextResolver getSymbolContextResolver(
+                IModelContext context)
+        {
+            if (_resolver == null)
+            {
+                _resolver = new CachingSymbolContextResolver((IStructuredDocumentContext) context);
+            }
+            else
+            {
+                if (!_resolver.hasSameResolution(context))
+                {
+                    _resolver = new CachingSymbolContextResolver((IStructuredDocumentContext) context);
+                }
+            }
+            return _resolver;
+        }
     }
     
     /**
@@ -330,7 +360,7 @@ public abstract class BaseTestCase extends ConfigurableTestCase
      * @param expectedProblems
      * @return the list of found syntax problems
      */
-    protected List<IMessage> assertSyntaxError(IStructuredDocument document, 
+    protected List<ReportedProblem> assertSyntaxError(IStructuredDocument document, 
             int docPos, 
             IFile file, 
             int expectedProblems)
@@ -348,7 +378,7 @@ public abstract class BaseTestCase extends ConfigurableTestCase
      * @param expectedProblems
      * @return the list of syntax problems
      */
-    protected List<IMessage> assertSyntaxWarning(IStructuredDocument document, 
+    protected List<ReportedProblem> assertSyntaxWarning(IStructuredDocument document, 
                                           int docPos, 
                                           IFile file, 
                                           int expectedProblems)
@@ -369,27 +399,27 @@ public abstract class BaseTestCase extends ConfigurableTestCase
      * @param expectedMaxSeverity
      * @return the (possibly empty) list of problems
      */
-    protected List<IMessage> assertSyntaxProblems(IStructuredDocument document, 
+    protected List<ReportedProblem> assertSyntaxProblems(IStructuredDocument document, 
                                           int docPos, 
                                           IFile file, 
                                           int expectedProblems,
                                           int expectedMaxSeverity)
     {
+        final MockELValidationReporter reporter = new MockELValidationReporter();
+
         final ELExpressionValidator validator = 
-            createELValidator(document, docPos, file);
+            createELValidator(document, docPos, file, reporter);
         validator.validateXMLNode();
-        
-        final List<IMessage> problems = validator.getSyntaxProblems();
+
+        final List<ReportedProblem> problems = reporter.getSyntaxProblems();
         assertEquals(expectedProblems, problems.size());
         int worstSeverity = 0;
-        
-        for (final Iterator<IMessage> it = problems.iterator(); it.hasNext();)
+
+        for (final ReportedProblem problem : problems)
         {
-            IMessage message = it.next();
-            
             // for some reason, the number values are lower for higher severity
             // constants
-            worstSeverity = maxSeverity(worstSeverity, message.getSeverity());
+            worstSeverity = maxSeverity(worstSeverity, problem.getSeverity());
         }
     
         
@@ -425,10 +455,12 @@ public abstract class BaseTestCase extends ConfigurableTestCase
      */
     protected void assertNoError(IStructuredDocument document, int docPos, IFile file, String expectedSignature, int assignability)
     {
-        ELExpressionValidator validator = createELValidator(document, docPos, file);
+        final MockELValidationReporter reporter = new MockELValidationReporter();
+
+        ELExpressionValidator validator = createELValidator(document, docPos, file, reporter);
         validator.validateXMLNode();
-        assertEquals(0, validator.getSyntaxProblems().size());
-        assertEquals(0, validator.getSemanticValidator().getMessages().size());
+        assertEquals(0, reporter.getSyntaxProblems().size());
+        assertEquals(0, reporter.getSemanticProblems().size());
 
         if (expectedSignature != null)
         {
@@ -455,7 +487,7 @@ public abstract class BaseTestCase extends ConfigurableTestCase
      * @param expectedProblems 
      * @return the list of semantic warnings
      */
-    protected List<IMessage> assertSemanticError(IStructuredDocument document, int docPos, IFile file, String expectedSignature, int expectedProblems)
+    protected List<ReportedProblem> assertSemanticError(IStructuredDocument document, int docPos, IFile file, String expectedSignature, int expectedProblems)
     {
         return assertSemanticProblems(document, docPos, file, expectedSignature, expectedProblems, IMessage.HIGH_SEVERITY/* "high" is Error for some reason*/);
     }
@@ -473,7 +505,7 @@ public abstract class BaseTestCase extends ConfigurableTestCase
      * @param expectedProblems 
      * @return the list of semantic warnings
      */
-    protected List<IMessage> assertSemanticWarning(IStructuredDocument document, int docPos, IFile file, String expectedSignature, int expectedProblems)
+    protected List<ReportedProblem> assertSemanticWarning(IStructuredDocument document, int docPos, IFile file, String expectedSignature, int expectedProblems)
     {
         return assertSemanticProblems(document, docPos, file, expectedSignature, expectedProblems, IMessage.NORMAL_SEVERITY/* "normal" is Warning for some reason*/);
     }
@@ -487,15 +519,17 @@ public abstract class BaseTestCase extends ConfigurableTestCase
      * @param expectedMaxSeverity
      * @return the list of semantic problems found
      */
-    protected List<IMessage> assertSemanticProblems(final IStructuredDocument document, 
+    protected List<ReportedProblem> assertSemanticProblems(final IStructuredDocument document, 
                                           final int docPos, 
                                           final IFile file, 
                                           final String expectedSignature, 
                                           final int expectedProblems,
                                           final int expectedMaxSeverity)
     {
+        final MockELValidationReporter reporter = new MockELValidationReporter();
+
         final ELExpressionValidator validator = 
-                createELValidator(document, docPos, file);
+                createELValidator(document, docPos, file, reporter);
         validator.validateXMLNode();
 
         if (expectedSignature != null
@@ -504,18 +538,16 @@ public abstract class BaseTestCase extends ConfigurableTestCase
             assertEquals(expectedSignature, validator.getExpressionType().getSignatures()[0]);
         }
 
-        assertEquals(0, validator.getSyntaxProblems().size());
-        final List<IMessage> problems = validator.getSemanticValidator().getMessages();
+        assertEquals(0, reporter.getSyntaxProblems().size());
+        final List<ReportedProblem> problems = reporter.getSemanticProblems();
         assertEquals(expectedProblems, problems.size());
         int worstSeverity = 0;
 
-        for (final Iterator<IMessage> it = problems.iterator(); it.hasNext();)
+        for (final ReportedProblem problem : problems)
         {
-            IMessage message = it.next();
-            
             // for some reason, the number values are lower for higher severity
             // constants
-            worstSeverity = maxSeverity(worstSeverity, message.getSeverity());
+            worstSeverity = maxSeverity(worstSeverity, problem.getSeverity());
         }
 
         assertEquals(expectedMaxSeverity, worstSeverity);
@@ -529,7 +561,7 @@ public abstract class BaseTestCase extends ConfigurableTestCase
      * @param problems
      * @param code
      */
-    protected void assertContainsProblem(List<IMessage> problems, int code)
+    protected void assertContainsProblem(List<ReportedProblem> problems, int code)
     {
         assertContainsProblem(problems, code, -1, -1);
     }
@@ -544,33 +576,27 @@ public abstract class BaseTestCase extends ConfigurableTestCase
      * @param startPos
      * @param length
      */
-    protected void assertContainsProblem(List<IMessage> problems, int code, int startPos, int length)
+    protected void assertContainsProblem(List<ReportedProblem> problems, int code, int startPos, int length)
     {
-        Set<Integer>  probsFound = new HashSet<Integer>();
+        final Set<Integer>  probsFound = new HashSet<Integer>();
         
-        for (final Iterator<IMessage> it = problems.iterator(); it.hasNext();)
+        for (final ReportedProblem problem : problems)
         {
-            IMessage probObj = it.next();
-            
-            if (probObj instanceof IELLocalizedMessage)
+            probsFound.add(new Integer(problem.getErrorCode()));
+            if (problem.getErrorCode() == code)
             {
-                final IELLocalizedMessage localizedMsg = (IELLocalizedMessage) probObj;
-                probsFound.add(new Integer(localizedMsg.getErrorCode()));
-                if (localizedMsg.getErrorCode() == code)
+                assertTrue("Offset of message must be >= 0", problem.getOffset()>=0);
+                assertTrue("Length of message marker must be >=0", problem.getLength()>=0);
+                
+                if (startPos >= 0)
                 {
-                    assertTrue("Offset of message must be >= 0", localizedMsg.getOffset()>=0);
-                    assertTrue("Length of message marker must be >=0", localizedMsg.getLength()>=0);
-                    
-                    if (startPos >= 0)
-                    {
-                        assertEquals("Offset must be == startPos", startPos, localizedMsg.getOffset());
-                        assertEquals("Length must be == length", localizedMsg.getLength(), length);
-                    }
-
-                    // found the required code, so exit without throwing
-                    // any error assertions
-                    return;
+                    assertEquals("Offset must be == startPos", startPos, problem.getOffset());
+                    assertEquals("Length must be == length", problem.getLength(), length);
                 }
+
+                // found the required code, so exit without throwing
+                // any error assertions
+                return;
             }
         }
         // if we reach this point then we have not found the asserted

@@ -5,9 +5,9 @@ import java.util.List;
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
 import org.eclipse.jst.jsf.core.JSFVersion;
+import org.eclipse.jst.jsf.core.tests.validation.MockValidationReporter.ReportedProblem;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
-import org.eclipse.wst.validation.internal.provisional.core.IMessage;
 
 /**
  * Test cases for method bindings
@@ -124,7 +124,7 @@ public class MethodBindingTestCase extends SingleJSPTestCase
     @Override
     public void testErrorExprs()
     {
-        List<IMessage> list = assertSemanticError(3272, null, 1);
+        List<ReportedProblem> list = assertSemanticError(3272, null, 1);
         assertContainsProblem(list, DiagnosticFactory.CANNOT_APPLY_OPERATOR_TO_METHOD_BINDING_ID);
 
         list = assertSemanticError(3320, null, 2);

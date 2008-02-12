@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.core.JSFVersion;
+import org.eclipse.jst.jsf.core.tests.validation.MockValidationReporter.ReportedProblem;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
-import org.eclipse.wst.validation.internal.provisional.core.IMessage;
 
 /**
  * Test cases for logical not (not, !)
@@ -67,7 +67,7 @@ public class LogicalNotTestCase extends SingleJSPTestCase {
     @Override
     public void testWarningExprs()
     {
-        List<IMessage> list = assertSemanticWarning(1075, Signature.SIG_BOOLEAN, 1);
+        List<ReportedProblem> list = assertSemanticWarning(1075, Signature.SIG_BOOLEAN, 1);
         assertContainsProblem(list, DiagnosticFactory.UNARY_OP_CONSTANT_EXPRESSION_EVAL_SAME_ID);
 
         list = assertSemanticWarning(1113, Signature.SIG_BOOLEAN, 1);
@@ -95,7 +95,7 @@ public class LogicalNotTestCase extends SingleJSPTestCase {
     @Override
     public void testErrorExprs()
     {
-        List<IMessage> list = assertSemanticError(1430, null, 1);
+        List<ReportedProblem> list = assertSemanticError(1430, null, 1);
         assertContainsProblem(list, DiagnosticFactory.UNARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN_ID);
 
         list = assertSemanticError(1462, null, 1);

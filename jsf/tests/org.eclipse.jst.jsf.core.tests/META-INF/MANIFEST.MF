@@ -28,8 +28,9 @@ Require-Bundle: org.eclipse.jst.jsf.core;bundle-version="[1.0.0,1.1.0)",
  org.eclipse.core.net,
  org.eclipse.jst.jsp.core,
  org.eclipse.wst.html.core,
+ org.eclipse.ui.ide;bundle-version="3.4.0",
  org.eclipse.jst.common.frameworks;bundle-version="1.1.102"
-Eclipse-LazyStart: true
+Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.jst.jsf.core.tests;x-friends:="org.eclipse.jst.jsf.ui.tests,org.eclipse.jst.jsf.context.symbol.tests,org.eclipse.jst.jsf.designtime.tests",
  org.eclipse.jst.jsf.core.tests.appconfig.provider;x-internal:=true,
  org.eclipse.jst.jsf.core.tests.appconfig.validation;x-internal:=true,
@@ -42,6 +43,12 @@ Export-Package: org.eclipse.jst.jsf.core.tests;x-friends:="org.eclipse.jst.jsf.u
  org.eclipse.jst.jsf.core.tests.set;x-internal:=true,
  org.eclipse.jst.jsf.core.tests.tagmatcher;x-internal:=true,
  org.eclipse.jst.jsf.core.tests.types;x-internal:=true,
- org.eclipse.jst.jsf.core.tests.util;x-friends:="org.eclipse.jst.jsf.contentassist.tests,org.eclipse.jst.jsf.designtime.tests,org.eclipse.jst.jsf.validation.el.tests,org.eclipse.jst.jsf.ui.tests,org.eclipse.jst.pagedesigner.tests"
+ org.eclipse.jst.jsf.core.tests.util;
+  x-friends:="org.eclipse.jst.jsf.contentassist.tests,
+   org.eclipse.jst.jsf.designtime.tests,
+   org.eclipse.jst.jsf.validation.el.tests,
+   org.eclipse.jst.jsf.ui.tests,
+   org.eclipse.jst.pagedesigner.tests",
+ org.eclipse.jst.jsf.core.tests.validation
 Plugin-Class: org.eclipse.jst.jsf.core.tests.TestsPlugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

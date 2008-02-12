@@ -5,9 +5,9 @@ import java.util.List;
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
 import org.eclipse.jst.jsf.core.JSFVersion;
+import org.eclipse.jst.jsf.core.tests.validation.MockValidationReporter.ReportedProblem;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
-import org.eclipse.wst.validation.internal.provisional.core.IMessage;
 
 /**
  * Test suite for arithmetic subtract.
@@ -71,7 +71,7 @@ public class ArithmeticMinusTestCase extends SingleJSPTestCase
     @Override
     public void testWarningExprs()
     {
-        List<IMessage> list = assertSemanticWarning(1302, Signature.SIG_LONG, 1);
+        List<ReportedProblem> list = assertSemanticWarning(1302, Signature.SIG_LONG, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID);
 
         list = assertSemanticWarning(1337, Signature.SIG_DOUBLE, 1);
@@ -93,7 +93,7 @@ public class ArithmeticMinusTestCase extends SingleJSPTestCase
     @Override
     public void testErrorExprs()
     {
-        List<IMessage> list = assertSemanticError(1564, null, 1);
+        List<ReportedProblem> list = assertSemanticError(1564, null, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
 
         list = assertSemanticError(1602, null, 1);

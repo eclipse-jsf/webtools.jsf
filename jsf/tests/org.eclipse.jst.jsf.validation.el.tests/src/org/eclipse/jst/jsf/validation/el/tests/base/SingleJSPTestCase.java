@@ -15,10 +15,10 @@ import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jst.jsf.core.JSFVersion;
+import org.eclipse.jst.jsf.core.tests.validation.MockValidationReporter.ReportedProblem;
 import org.eclipse.wst.sse.core.StructuredModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
 import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
-import org.eclipse.wst.validation.internal.provisional.core.IMessage;
 
 public abstract class SingleJSPTestCase extends JSPTestCase 
 {
@@ -126,7 +126,7 @@ public abstract class SingleJSPTestCase extends JSPTestCase
      * @param expectedProblems
      * @return the list of syntax errors (may be empty)
      */
-    protected List<IMessage> assertSyntaxError(int docPos, int expectedProblems)
+    protected List<ReportedProblem> assertSyntaxError(int docPos, int expectedProblems)
     {
         return super.assertSyntaxError(_structuredDocument, docPos, _testJSP, 
                 expectedProblems);
@@ -140,7 +140,7 @@ public abstract class SingleJSPTestCase extends JSPTestCase
      * @param expectedProblems
      * @return the list of syntax warnings found (may be empty)
      */
-    protected List<IMessage> assertSyntaxWarning(int docPos, int expectedProblems)
+    protected List<ReportedProblem> assertSyntaxWarning(int docPos, int expectedProblems)
     {
         return super.assertSyntaxWarning(_structuredDocument, docPos, _testJSP, 
                 expectedProblems);
@@ -155,7 +155,7 @@ public abstract class SingleJSPTestCase extends JSPTestCase
      * @param expectedProblems
      * @return the list of errors found
      */
-    protected List<IMessage> assertSemanticError(int docPos, String expectedSignature, int expectedProblems) {
+    protected List<ReportedProblem> assertSemanticError(int docPos, String expectedSignature, int expectedProblems) {
         return super.assertSemanticError(_structuredDocument, docPos, _testJSP, expectedSignature,
                 expectedProblems);
     }
@@ -169,7 +169,7 @@ public abstract class SingleJSPTestCase extends JSPTestCase
      * @param expectedProblems
      * @return the list of errors found
      */
-    protected List<IMessage> assertSemanticWarning(int docPos, String expectedSignature, int expectedProblems) {
+    protected List<ReportedProblem> assertSemanticWarning(int docPos, String expectedSignature, int expectedProblems) {
         return super.assertSemanticWarning(_structuredDocument, docPos, _testJSP, expectedSignature,
                 expectedProblems);
     }

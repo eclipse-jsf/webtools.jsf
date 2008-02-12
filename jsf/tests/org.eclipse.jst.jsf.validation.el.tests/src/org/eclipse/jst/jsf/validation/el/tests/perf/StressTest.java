@@ -10,6 +10,7 @@ import org.eclipse.jst.jsf.designtime.el.AbstractDTPropertyResolver;
 import org.eclipse.jst.jsf.designtime.el.AbstractDTVariableResolver;
 import org.eclipse.jst.jsf.test.util.PerfTracker;
 import org.eclipse.jst.jsf.validation.el.tests.base.JSPTestCase;
+import org.eclipse.jst.jsf.validation.el.tests.base.MockELValidationReporter;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.ELExpressionValidator;
 import org.eclipse.wst.sse.core.StructuredModelManager;
@@ -114,7 +115,7 @@ public class StressTest extends JSPTestCase
     public void testStressSimpleValueBindingValidation()
     {
         final int      numTimes = 1000;
-        final int      elOffset = 819;
+        final int      elOffset = 795;
         assertEquals("myBean.stringProperty", getELText(_structuredDocument,elOffset));
 
         final PerfTracker perfTracker = 
@@ -123,8 +124,10 @@ public class StressTest extends JSPTestCase
         // resolve the same variable 100K times
         for (int x = 0; x < numTimes; x++)
         {
+            final MockELValidationReporter reporter =
+                new MockELValidationReporter();
             final ELExpressionValidator validator = 
-                createELValidator(_structuredDocument, elOffset, _testJSP);
+                createELValidator(_structuredDocument, elOffset, _testJSP, reporter);
 
             final long startTime = System.nanoTime();
             

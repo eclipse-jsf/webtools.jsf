@@ -3,9 +3,9 @@ package org.eclipse.jst.jsf.validation.el.tests.jsp;
 import java.util.List;
 
 import org.eclipse.jst.jsf.core.JSFVersion;
+import org.eclipse.jst.jsf.core.tests.validation.MockValidationReporter.ReportedProblem;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
-import org.eclipse.wst.validation.internal.provisional.core.IMessage;
 
 /**
  * Used to verify that marker offset/lengths are calculated correctly
@@ -73,7 +73,7 @@ public class MarkerOffsetsTestCase extends SingleJSPTestCase
         // UPDATE REMINDER!  The third argument in assertContainsProblem is the start
         // offset (absolute) of the marker expected.  Before updating the assertSemanticWarning
         // make a note to the difference
-        List<IMessage> list = assertSemanticWarning(880, null, 1);
+        List<ReportedProblem> list = assertSemanticWarning(880, null, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID, 880, 5);
 
         list = assertSemanticWarning(915, null, 1);
@@ -133,7 +133,7 @@ public class MarkerOffsetsTestCase extends SingleJSPTestCase
         // UPDATE REMINDER!  The third argument in assertContainsProblem is the start
         // offset (absolute) of the marker expected.  Before updating the assertSemanticWarning
         // make a note to the difference
-        List<IMessage> list = assertSemanticError(1978, null, 1);
+        List<ReportedProblem> list = assertSemanticError(1978, null, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_POSSIBLE_DIVISION_BY_ZERO_ID, 1978, 26);
 
         list = assertSemanticError(2034, null, 1);

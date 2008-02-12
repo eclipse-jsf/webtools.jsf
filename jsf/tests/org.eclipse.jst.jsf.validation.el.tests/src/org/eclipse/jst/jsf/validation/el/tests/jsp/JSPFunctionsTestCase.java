@@ -3,9 +3,9 @@ package org.eclipse.jst.jsf.validation.el.tests.jsp;
 import java.util.List;
 
 import org.eclipse.jst.jsf.core.JSFVersion;
+import org.eclipse.jst.jsf.core.tests.validation.MockValidationReporter.ReportedProblem;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
-import org.eclipse.wst.validation.internal.provisional.core.IMessage;
 
 /**
  * Test cases for functions
@@ -49,7 +49,7 @@ public class JSPFunctionsTestCase extends SingleJSPTestCase
     {
         // note: this will change to non-error when functions are properly supported
         // by the parser
-        List<IMessage> list = assertSyntaxWarning(1226, 1);
+        List<ReportedProblem> list = assertSyntaxWarning(1226, 1);
         assertContainsProblem(list, DiagnosticFactory.GENERAL_SYNTAX_ERROR_ID);
 
         list = assertSyntaxWarning(1274, 1);

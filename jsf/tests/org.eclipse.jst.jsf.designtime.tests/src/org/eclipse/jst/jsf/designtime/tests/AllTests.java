@@ -11,6 +11,8 @@
  ********************************************************************************/
 package org.eclipse.jst.jsf.designtime.tests;
 
+import org.eclipse.jst.jsf.designtime.tests.views.TestJSPViewDefnAdapter;
+
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
@@ -70,6 +72,7 @@ public class AllTests {
         suite.addTestSuite(TestJSPModelProcessor.class);
         suite.addTestSuite(TestStartupHandler.class);
         suite.addTestSuite(TestDesignTimeApplicationManager.class);
+        suite.addTestSuite(TestJSPViewDefnAdapter.class);
 
         //addTestSuite(suite, JSPViewSuite.class);
 

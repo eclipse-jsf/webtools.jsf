@@ -30,4 +30,4 @@ Require-Bundle: org.junit;bundle-version="[3.8.1,4.0.0)",
 Export-Package: org.eclipse.jst.pagedesigner.tests;x-internal:=true
 Bundle-ClassPath: pagedesignertests.jar
 Bundle-Activator: org.eclipse.jst.pagedesigner.tests.PageDesignerTestsPlugin
-Eclipse-LazyStart: true
+Bundle-ActivationPolicy: lazy

@@ -117,7 +117,7 @@ public class TestStartupHandler extends TestCase
         // close project with with user action
         final CloseResourceAction action =
             new CloseResourceAction(
-                    PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell())
+                    PlatformUI.getWorkbench().getActiveWorkbenchWindow())
             {
                 public void superRun()
                 {

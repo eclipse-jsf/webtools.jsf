@@ -37,6 +37,7 @@ import org.eclipse.jst.jsf.core.tests.types.TypeTransformerTests;
 import org.eclipse.jst.jsf.core.tests.util.TestJDTBeanIntrospector;
 import org.eclipse.jst.jsf.core.tests.util.TestJDTBeanPropertyWorkingCopy;
 import org.eclipse.jst.jsf.core.tests.util.TestTypeUtil;
+import org.eclipse.jst.jsf.core.tests.validation.TestJSPSemanticsValidator_AttributeValues;
 import org.eclipse.jst.jsf.core.tests.validation.TestJSPSemanticsValidator_Containment;
 
 /**
@@ -79,6 +80,7 @@ public class AllTests
 		suite.addTestSuite(JSFLibraryRegistryUtilTestCases.class);
 
 		suite.addTestSuite(TestJSPSemanticsValidator_Containment.class);
+        suite.addTestSuite(TestJSPSemanticsValidator_AttributeValues.class);
 		suite.addTestSuite(AppConfigValidationUtilTestCase.class);
 		suite.addTestSuite(TestMemberConstraint.class);
 		suite.addTestSuite(TestXPathValidation.class);

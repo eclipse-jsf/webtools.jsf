@@ -30,7 +30,7 @@ Require-Bundle: org.eclipse.ui.ide;bundle-version="[3.2.0,4.0.0)",
  org.eclipse.jst.jsp.core,
  org.eclipse.wst.xml.core,
  org.eclipse.jst.jsf.common.runtime.tests
-Eclipse-LazyStart: true
+Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.jst.jsf.designtime.tests;x-internal:=true
 Bundle-Vendor: %Bundle-Vendor.0

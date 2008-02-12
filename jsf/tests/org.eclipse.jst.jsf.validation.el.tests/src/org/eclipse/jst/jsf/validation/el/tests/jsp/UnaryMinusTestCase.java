@@ -5,9 +5,9 @@ import java.util.List;
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
 import org.eclipse.jst.jsf.core.JSFVersion;
+import org.eclipse.jst.jsf.core.tests.validation.MockValidationReporter.ReportedProblem;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
-import org.eclipse.wst.validation.internal.provisional.core.IMessage;
 
 /**
  * Test cases for unary minus
@@ -68,7 +68,7 @@ public class UnaryMinusTestCase extends SingleJSPTestCase
     @Override
     public void testWarningExprs()
     {
-        List<IMessage> list = assertSemanticWarning(1072, Signature.SIG_LONG, 1);
+        List<ReportedProblem> list = assertSemanticWarning(1072, Signature.SIG_LONG, 1);
         assertContainsProblem(list, DiagnosticFactory.UNARY_OP_STRING_CONVERSION_NOT_GUARANTEED_ID);
 
         list = assertSemanticWarning(1275, Signature.SIG_LONG, 1);
@@ -78,7 +78,7 @@ public class UnaryMinusTestCase extends SingleJSPTestCase
     @Override
     public void testErrorExprs()
     {
-        List<IMessage> list = assertSemanticError(1332, null, 1);
+        List<ReportedProblem> list = assertSemanticError(1332, null, 1);
         assertContainsProblem(list, DiagnosticFactory.UNARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
 
         list = assertSemanticError(1368, null, 1);

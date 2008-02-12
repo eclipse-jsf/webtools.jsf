@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.core.JSFVersion;
+import org.eclipse.jst.jsf.core.tests.validation.MockValidationReporter.ReportedProblem;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
-import org.eclipse.wst.validation.internal.provisional.core.IMessage;
 
 /**
  * Test cases for greater than or equal (ge, >=)
@@ -107,7 +107,7 @@ public class GreaterThanEqTestCase extends SingleJSPTestCase {
     @Override
     public void testWarningExprs()
     {
-        List<IMessage> list = assertSemanticWarning(2026, Signature.SIG_BOOLEAN, 1);
+        List<ReportedProblem> list = assertSemanticWarning(2026, Signature.SIG_BOOLEAN, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID);
 
         list = assertSemanticWarning(2062, Signature.SIG_BOOLEAN, 1);
@@ -154,7 +154,7 @@ public class GreaterThanEqTestCase extends SingleJSPTestCase {
     @Override
     public void testErrorExprs()
     {
-        List<IMessage> list = assertSemanticError(2629, null, 1);
+        List<ReportedProblem> list = assertSemanticError(2629, null, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
 
         list = assertSemanticError(2668, null, 1);
