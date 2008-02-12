@@ -85,6 +85,7 @@ public class JSFValidator extends JSPValidator implements ISourceValidator
                         .createDefaultXMLValidator();
                 final ValidationPreferences prefs = new ValidationPreferences(
                         JSFCorePlugin.getDefault().getPreferenceStore());
+                prefs.load();
 
                 final ValidationReporter jsfReporter = new ValidationReporter(
                         this, reporter, file, prefs);
@@ -117,6 +118,7 @@ public class JSFValidator extends JSPValidator implements ISourceValidator
                 .createDefaultXMLValidator();
         final ValidationPreferences prefs = new ValidationPreferences(
                 JSFCorePlugin.getDefault().getPreferenceStore());
+        prefs.load();
 
         final ValidationReporter jsfReporter = new ValidationReporter(this,
                 reporter, file, prefs);
