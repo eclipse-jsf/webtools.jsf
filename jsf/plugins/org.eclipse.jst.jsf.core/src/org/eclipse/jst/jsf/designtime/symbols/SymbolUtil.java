@@ -60,8 +60,7 @@ public final class SymbolUtil
             }
         }
         
-        return (ISymbol[])
-            filteredSymbols.toArray(ISymbol.EMPTY_SYMBOL_ARRAY);
+        return (ISymbol[]) filteredSymbols.toArray(ISymbol.EMPTY_SYMBOL_ARRAY);
     }
     
     private SymbolUtil()

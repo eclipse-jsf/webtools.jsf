@@ -43,6 +43,7 @@ import org.w3c.dom.Element;
  * @author mengbo
  * will be deleted
  */
+@SuppressWarnings("deprecation")
 public class XXXCellEditorFactoryRegistry {
 	private static final Logger _log = PDPlugin
 			.getLogger(XXXCellEditorFactoryRegistry.class);

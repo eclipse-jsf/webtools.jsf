@@ -46,9 +46,9 @@ public class DefaultDTVariableResolver extends AbstractDTVariableResolver
         // check implicits first
         final DefaultBuiltInSymbolProvider builtins =
             DefaultBuiltInSymbolProvider.getInstance();
-        
+
         ISymbol  symbol = builtins.getSymbol(name, externalContextKey, ISymbolConstants.SYMBOL_SCOPE_ALL);
-        
+
         if (symbol != null)
         {
             return symbol;

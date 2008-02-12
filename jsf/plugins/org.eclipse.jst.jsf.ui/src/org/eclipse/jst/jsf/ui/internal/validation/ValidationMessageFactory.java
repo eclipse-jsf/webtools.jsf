@@ -7,14 +7,15 @@
  *
  * Contributors:
  *    Cameron Bateman/Oracle - initial API and implementation
- *    
+ * 
  ********************************************************************************/
 
-package org.eclipse.jst.jsf.validation.internal.el.diagnostics;
+package org.eclipse.jst.jsf.ui.internal.validation;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.jst.jsf.validation.internal.ELValidationPreferences;
+import org.eclipse.jst.jsf.validation.internal.ValidationPreferences;
 import org.eclipse.wst.validation.internal.core.Message;
 import org.eclipse.wst.validation.internal.provisional.core.IMessage;
 
@@ -24,39 +25,42 @@ import org.eclipse.wst.validation.internal.provisional.core.IMessage;
  * @author cbateman
  *
  */
-public final class ValidationMessageFactory 
+public final class ValidationMessageFactory
 {
     /**
      * @param diagnostic
      * @param offset
      * @param length
      * @param file
-     * @param prefs 
+     * @param prefs
      * @return a configured message
      */
-    public static Message createFromDiagnostic(final Diagnostic diagnostic, int offset, int length, IFile file, ELValidationPreferences prefs)
+    public static Message createFromDiagnostic(final Diagnostic diagnostic, final int offset, final int length, final IFile file, final ValidationPreferences prefs)
     {
-        final int severity = 
-            prefs.getDiagnosticSeverity(diagnostic.getCode()); 
+        final ELValidationPreferences elPrefs =
+            prefs.getElPrefs();
+
+        final int severity =
+            elPrefs.getDiagnosticSeverity(diagnostic.getCode());
 
         final Message message =
             new MyLocalizedMessage(
-                    convertSeverity(severity), 
-                    diagnostic.getMessage(), 
-                    file, 
+                    convertSeverity(severity),
+                    diagnostic.getMessage(),
+                    file,
                     diagnostic.getCode());
-        
+
         message.setOffset(offset);
         message.setLength(length);
-        
+
         return message;
     }
-    
+
     /**
-     * @param diagnostic
+     * @param severity
      * @return a Message severity equivilent to diagnostic.getSeverity()
      */
-    private static int convertSeverity(int severity)
+    private static int convertSeverity(final int severity)
     {
         switch (severity)
         {
@@ -72,10 +76,10 @@ public final class ValidationMessageFactory
                 return 0;
         }
     }
-    
+
     private ValidationMessageFactory()
     {
         // no external instantiation
     }
-}    
+}
 

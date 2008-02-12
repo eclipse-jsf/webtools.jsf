@@ -1,5 +1,6 @@
 package org.eclipse.jst.jsf.designtime.internal.view.model.jsp;
 
+import org.eclipse.jst.jsf.common.internal.policy.IIdentifiable;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagElement;
 
 /**

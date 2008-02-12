@@ -28,6 +28,11 @@ public final class JSFCoreTraceOptions
      */
     public static final boolean TRACE_JSPTAGREGISTRY;
 
+    /**
+     * True if handling of JSP TagIndex changes are being traced
+     */
+    public static final boolean TRACE_JSPTAGREGISTRY_CHANGES;
+    
     private static final String KEY_DEBUG_ENABLED = "/debug";
     private static final String KEY_DESIGNTIME = "/designtime";
     private static final String KEY_DESIGNTIME_VIEW = KEY_DESIGNTIME + "/view";
@@ -35,6 +40,9 @@ public final class JSFCoreTraceOptions
             + "/jsptagintrospection";
     private static final String KEY_VIEW_JSPTAGREGISTRY = KEY_DESIGNTIME_VIEW
             + "/jsptagregistry";
+    private static final String KEY_VIEW_JSPTAGREGISTRY_CHANGES =
+        KEY_VIEW_JSPTAGREGISTRY + "/changes";
+    
     static
     {
         final DebugOptions debugOptions = FrameworkDebugOptions.getDefault();
@@ -49,11 +57,14 @@ public final class JSFCoreTraceOptions
                     JSFCorePlugin.PLUGIN_ID + KEY_VIEW_JSPTAGINTROSPECTOR, false);
             TRACE_JSPTAGREGISTRY = debugOptions.getBooleanOption(
                     JSFCorePlugin.PLUGIN_ID + KEY_VIEW_JSPTAGREGISTRY, false);
+            TRACE_JSPTAGREGISTRY_CHANGES = debugOptions.getBooleanOption(
+                    JSFCorePlugin.PLUGIN_ID + KEY_VIEW_JSPTAGREGISTRY_CHANGES, false);
         }
         else
         {
             TRACE_JSPTAGINTROSPECTOR = false;
             TRACE_JSPTAGREGISTRY = false;
+            TRACE_JSPTAGREGISTRY_CHANGES = false;
         }
     }
 

@@ -24,7 +24,8 @@ import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
 public abstract class EditorCreator {
 	static EditorCreator _instance;
 
-	static IBindingHandler _defaultHandler = new BindingHandlerDelegate();
+	@SuppressWarnings("deprecation")
+    static IBindingHandler _defaultHandler = new BindingHandlerDelegate();
 
 	/**
 	 * 
@@ -60,7 +61,8 @@ public abstract class EditorCreator {
 	 *            if null, system default mechanism will be used.
 	 * @return DialogField
 	 */
-	public abstract DialogField createDialogFieldWithWrapper(String uri,
+	@SuppressWarnings("deprecation")
+    public abstract DialogField createDialogFieldWithWrapper(String uri,
 			String tagName, IPropertyPageDescriptor attr, IBindingHandler handler);
 
 
@@ -69,7 +71,8 @@ public abstract class EditorCreator {
 	 * @param handler
 	 * @return the dialog field
 	 */
-	public abstract DialogField createDialogFieldWithWrapper(IPropertyPageDescriptor descriptor, IBindingHandler handler);
+	@SuppressWarnings("deprecation")
+    public abstract DialogField createDialogFieldWithWrapper(IPropertyPageDescriptor descriptor, IBindingHandler handler);
 //	
 //	/**
 //	 * Create a dialog field that will have databinding support. Basically, this
@@ -108,7 +111,8 @@ public abstract class EditorCreator {
 	 *            if null, system default mechanism will be used.
 	 * @return CellEditor
 	 */
-	public abstract CellEditor createCellEditorWithWrapper(Composite parent,
+	@SuppressWarnings("deprecation")
+    public abstract CellEditor createCellEditorWithWrapper(Composite parent,
 			IPropertyPageDescriptor attr, IDOMElement element,
 			IBindingHandler handler);
 
@@ -126,7 +130,8 @@ public abstract class EditorCreator {
 	 *            if null, system default mechanism will be used.
 	 * @return CellEditor
 	 */
-	public abstract CellEditor createCellEditorWithWrapper(Composite parent,
+	@SuppressWarnings("deprecation")
+    public abstract CellEditor createCellEditorWithWrapper(Composite parent,
 			IPropertyPageDescriptor attr, CellEditorHolder holder,
 			IDOMElement element, IBindingHandler handler);
 
@@ -143,7 +148,8 @@ public abstract class EditorCreator {
 	/**
 	 * @return the binding handler
 	 */
-	public IBindingHandler getSystemDefaultBindingHandler() {
+	@SuppressWarnings("deprecation")
+    public IBindingHandler getSystemDefaultBindingHandler() {
 		return _defaultHandler;
 	}
 }

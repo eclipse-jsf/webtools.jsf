@@ -30,7 +30,9 @@ import org.eclipse.jst.jsf.context.symbol.ISymbol;
 import org.eclipse.jst.jsf.context.symbol.SymbolFactory;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
-import org.eclipse.jst.jsf.validation.internal.ValidationPreferences;
+import org.eclipse.jst.jsf.designtime.resolver.StructuredDocumentSymbolResolverFactory;
+import org.eclipse.jst.jsf.validation.internal.IJSFViewValidator.IValidationReporter;
+import org.eclipse.jst.jsf.validation.internal.IJSFViewValidator.ReporterAdapter;
 import org.eclipse.jst.jsf.validation.internal.appconfig.AppConfigValidationUtil;
 import org.eclipse.jst.jsf.validation.internal.el.ELExpressionValidator;
 import org.eclipse.jst.jsf.validation.internal.el.IExpressionSemanticValidator;
@@ -58,12 +60,12 @@ public abstract class AbstractDataModelVariableFactory
         assert elContext != null;
         assert file != null;
 
-        final ValidationPreferences prefs = 
-            new ValidationPreferences(JSFCorePlugin.getDefault().getPreferenceStore());
-        prefs.load();
-
+        final IValidationReporter  reporter = new ReporterAdapter();
+        
         final ELExpressionValidator validator = 
-            new ELExpressionValidator(elContext, elText, file, prefs.getElPrefs());
+            new ELExpressionValidator(elContext, elText 
+                    ,StructuredDocumentSymbolResolverFactory.getInstance()
+                    , reporter);
         validator.validateXMLNode();
         final IExpressionSemanticValidator semValidator = 
             validator.getSemanticValidator();

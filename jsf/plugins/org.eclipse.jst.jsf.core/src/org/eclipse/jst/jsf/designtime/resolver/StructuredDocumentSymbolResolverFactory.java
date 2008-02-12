@@ -26,7 +26,7 @@ import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
  *
  */
 public final class StructuredDocumentSymbolResolverFactory extends
-        AbstractDelegatingFactory 
+        AbstractDelegatingFactory implements IStructuredDocumentSymbolResolverFactory
 {
     private static StructuredDocumentSymbolResolverFactory INSTANCE;
     

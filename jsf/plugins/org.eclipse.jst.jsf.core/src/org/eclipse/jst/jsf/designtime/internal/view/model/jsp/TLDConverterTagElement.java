@@ -37,4 +37,10 @@ public class TLDConverterTagElement extends TLDJSFTagElement implements IConvert
     {
         return _converterTypeInfo;
     }
+    
+    @Override
+    public String toString()
+    {
+        return _converterTypeInfo.toString();
+    }
 }

@@ -24,7 +24,7 @@ import org.w3c.dom.NodeList;
 public class XMLComponentTreeConstructionStrategy extends
         ComponentTreeConstructionStrategy<Node, IDocument>
 {
-    private final XMLViewDefnAdapter _adapter;
+    private final XMLViewDefnAdapter                _adapter;
     private final XMLViewObjectConstructionStrategy _objectConstructionStrategy;
 
     /**
@@ -35,16 +35,17 @@ public class XMLComponentTreeConstructionStrategy extends
             final XMLViewDefnAdapter adapter, final IProject project)
     {
         _adapter = adapter;
-        _objectConstructionStrategy = new XMLViewObjectConstructionStrategy(
-                adapter, new ComponentConstructionData(0, null, project));
+        _objectConstructionStrategy =
+                new XMLViewObjectConstructionStrategy(adapter,
+                        new ComponentConstructionData(0, null, project));
     }
 
     @Override
     public ComponentInfo createComponentTree(final DTFacesContext context,
             final DTUIViewRoot viewRoot)
     {
-        final IDocument container = _adapter.getContainer(context, viewRoot
-                .getViewId());
+        final IDocument container =
+                _adapter.getContainer(context, viewRoot.getViewId());
         final List<Node> roots = _adapter.getViewDefnRoots(container);
 
         if (roots.size() > 0)
@@ -60,8 +61,8 @@ public class XMLComponentTreeConstructionStrategy extends
     private ComponentInfo buildComponentTree(final Node root,
             final DTUIViewRoot viewRoot, final IDocument document)
     {
-        final ComponentInfo dummyRoot = ComponentFactory.createComponentInfo(
-                null, null, null, true);
+        final ComponentInfo dummyRoot =
+                ComponentFactory.createComponentInfo(null, null, null, true);
         recurseDOMModel(root, dummyRoot, document);
 
         ComponentInfo foundRoot = null;
@@ -73,8 +74,8 @@ public class XMLComponentTreeConstructionStrategy extends
         // 3) Invalid case: any definition and has more than one view root
         // 4) Invalid case: any definition and has component siblings to the
         // view root
-        FIND_VIEWROOT: for (final Iterator it = dummyRoot.getChildren()
-                .iterator(); it.hasNext();)
+        FIND_VIEWROOT: for (final Iterator it =
+                dummyRoot.getChildren().iterator(); it.hasNext();)
         {
             final ComponentInfo topLevelChild = (ComponentInfo) it.next();
 
@@ -117,8 +118,9 @@ public class XMLComponentTreeConstructionStrategy extends
 
         _objectConstructionStrategy.getConstructionData().setParent(parent);
 
-        mappedObject = _adapter.mapToViewObject(node,
-                _objectConstructionStrategy, document);
+        mappedObject =
+                _adapter.mapToViewObject(node, _objectConstructionStrategy,
+                        document);
 
         ComponentInfo newParent = parent;
 

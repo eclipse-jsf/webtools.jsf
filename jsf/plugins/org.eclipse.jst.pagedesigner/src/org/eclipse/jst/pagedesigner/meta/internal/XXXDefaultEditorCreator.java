@@ -30,6 +30,7 @@ import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
  * @version 1.5
  * will be deleted
  */
+@SuppressWarnings("deprecation")
 public class XXXDefaultEditorCreator extends XXXEditorCreator {
 	static IAttributeDescriptor _staticAttr;
 

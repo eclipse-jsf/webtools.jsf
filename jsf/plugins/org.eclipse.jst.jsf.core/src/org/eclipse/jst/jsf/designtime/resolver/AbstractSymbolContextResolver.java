@@ -38,4 +38,16 @@ public abstract class AbstractSymbolContextResolver implements ISymbolContextRes
     public abstract ISymbol getVariable(String name);
 
     public abstract boolean canResolveContext(IModelContext modelContext);
+
+    /**
+     * Default implementation
+     * 
+     * We should avoid returning true unless we are positive that changing
+     * to this context won't change the way symbols are resolved.
+     */
+    public boolean hasSameResolution(IModelContext modelContext)
+    {
+        return false;
+    }
+    
 }

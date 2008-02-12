@@ -3,10 +3,9 @@ package org.eclipse.jst.jsf.designtime.internal.view;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.jst.jsf.common.internal.RunOnCompletionPattern;
 import org.eclipse.jst.jsf.common.runtime.internal.model.component.ComponentTypeInfo;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.designtime.context.DTFacesContext;
@@ -85,35 +84,8 @@ class DefaultDTUIViewRoot extends DTUIViewRoot
 
         final Job refreshTreeJob = new RefreshTreeJob(_constructionStrategy,
                 _context, this);
-
-        if (runAfter != null)
-        {
-            refreshTreeJob.addJobChangeListener(new JobChangeAdapter()
-            {
-                @Override
-                public void done(final IJobChangeEvent event)
-                {
-                    if (event.getResult().isOK())
-                    {
-                        runAfter.run();
-                    }
-                }
-            });
-        }
-
-        refreshTreeJob.schedule();
-
-        if (runAfter == null)
-        {
-            try
-            {
-                refreshTreeJob.join();
-            }
-            catch (final InterruptedException e)
-            {
-                JSFCorePlugin.log(e, "Joining on tree refresh job");
-            }
-        }
+        
+        new RunOnCompletionPattern(refreshTreeJob, runAfter).run();
     }
 
     private static class RefreshTreeJob extends Job

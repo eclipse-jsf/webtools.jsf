@@ -64,253 +64,306 @@ public class DefaultBuiltInSymbolProvider
         return INSTANCE;
     }
 
-    private static final String APPLICATION_SCOPE                   =
-        "applicationScope";                //$NON-NLS-1$
-        private static final String SESSION_SCOPE                       =
-            "sessionScope";                    //$NON-NLS-1$
-            private static final String REQUEST_SCOPE                       =
-                "requestScope";                    //$NON-NLS-1$
-            private static final String COOKIE_IMPLICIT_OBJ                 = "cookie";                                //$NON-NLS-1$
-            private static final String FACES_CONTEXT_IMPLICIT_OBJ          =
-                "facesContext";                    //$NON-NLS-1$
-            private static final String HEADER_IMPLICIT_OBJ                 = "header";                                //$NON-NLS-1$
-            private static final String HEADER_VALUES_IMPLICIT_OBJ          =
-                "headerValues";                    //$NON-NLS-1$
-            private static final String INIT_PARAM_IMPLICIT_OBJ             =
-                "initParam";                       //$NON-NLS-1$
-            private static final String PARAM_IMPLICIT_OBJ                  = "param";                                 //$NON-NLS-1$
-            private static final String PARAM_VALUES_IMPLICIT_OBJ           =
-                "paramValues";                     //$NON-NLS-1$
-            private static final String VIEW_IMPLICIT_OBJ                   = "view";                                  //$NON-NLS-1$
+    private static final String APPLICATION_SCOPE                   = "applicationScope";                //$NON-NLS-1$
+    private static final String SESSION_SCOPE                       = "sessionScope";                    //$NON-NLS-1$
+    private static final String REQUEST_SCOPE                       = "requestScope";                    //$NON-NLS-1$
+    private static final String COOKIE_IMPLICIT_OBJ                 = "cookie";                          //$NON-NLS-1$
+    private static final String FACES_CONTEXT_IMPLICIT_OBJ          = "facesContext";                    //$NON-NLS-1$
+    private static final String HEADER_IMPLICIT_OBJ                 = "header";                          //$NON-NLS-1$
+    private static final String HEADER_VALUES_IMPLICIT_OBJ          = "headerValues";                    //$NON-NLS-1$
+    private static final String INIT_PARAM_IMPLICIT_OBJ             = "initParam";                       //$NON-NLS-1$
+    private static final String PARAM_IMPLICIT_OBJ                  = "param";                           //$NON-NLS-1$
+    private static final String PARAM_VALUES_IMPLICIT_OBJ           = "paramValues";                     //$NON-NLS-1$
+    private static final String VIEW_IMPLICIT_OBJ                   = "view";                            //$NON-NLS-1$
 
-            private static final String FACES_CONTEXT_FULLY_QUALIFIED_CLASS =
-                "javax.faces.context.FacesContext"; //$NON-NLS-1$
-            private static final String VIEW_FULLY_QUALIFIED_CLASS          =
-                "javax.faces.component.UIViewRoot"; //$NON-NLS-1$
+    private static final String FACES_CONTEXT_FULLY_QUALIFIED_CLASS = "javax.faces.context.FacesContext"; //$NON-NLS-1$
+    private static final String VIEW_FULLY_QUALIFIED_CLASS          = "javax.faces.component.UIViewRoot"; //$NON-NLS-1$
 
-                /**
-                 * Now direct instantiation -- use getInstance
-                 * 
-                 * Made protected to allow sub-classing
-                 */
-            protected DefaultBuiltInSymbolProvider()
-            {/* empty; do nothing */
-            }
+    private static final ISymbol SYMBOL_COOKIE_IMPLICIT_OBJ;
+    private static final ISymbol SYMBOL_HEADER_IMPLICIT_OBJ;
+    private static final ISymbol SYMBOL_HEADER_VALUES_IMPLICIT_OBJ;
+    private static final ISymbol SYMBOL_PARAM_IMPLICIT_OBJ;
+    private static final ISymbol SYMBOL_PARAM_VALUES_IMPLICIT_OBJ;
+    private static final ISymbol SYMBOL_INIT_PARAM_IMPLICIT_OBJ;
+    
+    static
+    {
+        // invariant request scope variables
+        SYMBOL_COOKIE_IMPLICIT_OBJ = createUnresolvedMapSymbol(COOKIE_IMPLICIT_OBJ);
+        SYMBOL_HEADER_IMPLICIT_OBJ = createUnresolvedMapSymbol(HEADER_IMPLICIT_OBJ);
+        SYMBOL_HEADER_VALUES_IMPLICIT_OBJ = createUnresolvedMapSymbol(HEADER_VALUES_IMPLICIT_OBJ);
+        SYMBOL_PARAM_IMPLICIT_OBJ = createUnresolvedMapSymbol(PARAM_IMPLICIT_OBJ);
+        SYMBOL_PARAM_VALUES_IMPLICIT_OBJ = createUnresolvedMapSymbol(PARAM_VALUES_IMPLICIT_OBJ); 
+        
+        // invariant application scope variables
+        SYMBOL_INIT_PARAM_IMPLICIT_OBJ = createUnresolvedMapSymbol(INIT_PARAM_IMPLICIT_OBJ);
+    }
+    
 
-            /**
-             * @param context
-             * @param symbolScopeMask
-             * @return all symbols for context in scopes matching symbolScopeMask
-             */
-            public ISymbol[] getSymbols(final IAdaptable context, final int symbolScopeMask)
-            {
-                final IFile fileContext =
-                    FileContextUtil.deriveIFileFromContext(context);
-                return (ISymbol[]) getSymbolsForScope(fileContext, symbolScopeMask)
+    /**
+     * Now direct instantiation -- use getInstance
+     * 
+     * Made protected to allow sub-classing
+     */
+    protected DefaultBuiltInSymbolProvider()
+    {/* empty; do nothing */
+    }
+
+    /**
+     * @param context
+     * @param symbolScopeMask
+     * @return all symbols for context in scopes matching symbolScopeMask
+     */
+    public ISymbol[] getSymbols(final IAdaptable context,
+            final int symbolScopeMask)
+    {
+        final IFile fileContext = FileContextUtil
+                .deriveIFileFromContext(context);
+        return (ISymbol[]) getSymbolsForScope(fileContext, symbolScopeMask)
                 .toArray(ISymbol.EMPTY_SYMBOL_ARRAY);
-            }
+    }
 
-            /**
-             * @param name
-             * @param context
-             * @param symbolScopeMask
-             * @return the symbol in context matching name or null if not found
-             */
-            public ISymbol getSymbol(final String name, final IAdaptable context,
-                    final int symbolScopeMask)
+    /**
+     * @param name
+     * @param context
+     * @param symbolScopeMask
+     * @return the symbol in context matching name or null if not found
+     */
+    public ISymbol getSymbol(final String name, final IAdaptable context,
+            final int symbolScopeMask)
+    {
+        final IFile file = FileContextUtil.deriveIFileFromContext(context);
+
+        ISymbol symbol = null;
+        if ((symbolScopeMask & ISymbolConstants.SYMBOL_SCOPE_REQUEST) != 0)
+        {
+            symbol = getRequestScopeSymbols(file).get(name);
+        }
+        if ((symbolScopeMask & ISymbolConstants.SYMBOL_SCOPE_SESSION) != 0
+                && symbol == null)
+        {
+            symbol = getSessionScopeSymbols(file).get(name);
+        }
+        if ((symbolScopeMask & ISymbolConstants.SYMBOL_SCOPE_APPLICATION) != 0
+                && symbol == null)
+        {
+            symbol = getApplicationScopeSymbols(file).get(name);
+        }
+
+        return symbol;
+    }
+
+    /**
+     * @param prefix
+     * @param context
+     * @param symbolScopeMask
+     * @return all implicit symbols for context starting with prefix in scopes
+     *         matching symbolScopeMask
+     */
+    public ISymbol[] getSymbols(final String prefix, final IAdaptable context,
+            final int symbolScopeMask)
+    {
+        final IFile file = FileContextUtil.deriveIFileFromContext(context);
+
+        final List<ISymbol> symbols = new ArrayList<ISymbol>();
+        if ((symbolScopeMask & ISymbolConstants.SYMBOL_SCOPE_REQUEST) != 0)
+        {
+            symbols.addAll(getRequestScopeSymbols(file).values());
+        }
+        if ((symbolScopeMask & ISymbolConstants.SYMBOL_SCOPE_SESSION) != 0)
+        {
+            symbols.addAll(getSessionScopeSymbols(file).values());
+        }
+        if ((symbolScopeMask & ISymbolConstants.SYMBOL_SCOPE_APPLICATION) != 0)
+        {
+            symbols.addAll(getApplicationScopeSymbols(file).values());
+        }
+        return symbols.toArray(ISymbol.EMPTY_SYMBOL_ARRAY);
+    }
+
+    private List getSymbolsForScope(final IFile file, final int symbolScopeMask)
+    {
+        final List symbols = new ArrayList();
+        if ((symbolScopeMask & ISymbolConstants.SYMBOL_SCOPE_REQUEST) != 0)
+        {
+            symbols.addAll(getRequestScopeSymbols(file).values());
+        }
+        if ((symbolScopeMask & ISymbolConstants.SYMBOL_SCOPE_SESSION) != 0)
+        {
+            symbols.addAll(getSessionScopeSymbols(file).values());
+        }
+        if ((symbolScopeMask & ISymbolConstants.SYMBOL_SCOPE_APPLICATION) != 0)
+        {
+            symbols.addAll(getApplicationScopeSymbols(file).values());
+        }
+
+        return symbols;
+    }
+
+    private Map<String, ISymbol> getRequestScopeSymbols(final IFile file)
+    {
+        final Map<String, ISymbol> requestSymbols = new HashMap<String, ISymbol>();
+
+        ISymbol symbol = createScopeSymbol(file,
+                ISymbolConstants.SYMBOL_SCOPE_REQUEST, REQUEST_SCOPE);
+        requestSymbols.put(symbol.getName(), symbol);
+        
+        requestSymbols.put(SYMBOL_COOKIE_IMPLICIT_OBJ.getName(), SYMBOL_COOKIE_IMPLICIT_OBJ);
+        requestSymbols.put(SYMBOL_HEADER_IMPLICIT_OBJ.getName(), SYMBOL_HEADER_IMPLICIT_OBJ);
+        requestSymbols.put(SYMBOL_HEADER_VALUES_IMPLICIT_OBJ.getName(), SYMBOL_HEADER_VALUES_IMPLICIT_OBJ);
+        requestSymbols.put(SYMBOL_PARAM_IMPLICIT_OBJ.getName(), SYMBOL_PARAM_IMPLICIT_OBJ);
+        requestSymbols.put(SYMBOL_PARAM_VALUES_IMPLICIT_OBJ.getName(), SYMBOL_PARAM_VALUES_IMPLICIT_OBJ);
+
+        // TODO: these aren't maps; need to find way to handle
+        symbol = createJavaInstanceSymbol(file.getProject(),
+                FACES_CONTEXT_FULLY_QUALIFIED_CLASS,
+                FACES_CONTEXT_IMPLICIT_OBJ);
+        requestSymbols.put(symbol.getName(), symbol);
+        
+        symbol = createJavaInstanceSymbol(file.getProject(),
+                VIEW_FULLY_QUALIFIED_CLASS, VIEW_IMPLICIT_OBJ);
+        requestSymbols.put(symbol.getName(), symbol);
+        
+        return Collections.unmodifiableMap(requestSymbols);
+    }
+
+    private Map<String,ISymbol> getSessionScopeSymbols(final IFile file)
+    {
+        ISymbol symbol = createScopeSymbol(file,
+                ISymbolConstants.SYMBOL_SCOPE_SESSION, SESSION_SCOPE);
+
+        return Collections.unmodifiableMap
+            (Collections.singletonMap(symbol.getName(), symbol));
+    }
+
+    private Map<String,ISymbol> getApplicationScopeSymbols(final IFile file)
+    {
+        final Map<String,ISymbol> symbols = new HashMap<String, ISymbol>();
+
+        // TODO: may be able to resolve this one based on web.xml
+        symbols.put(SYMBOL_INIT_PARAM_IMPLICIT_OBJ.getName(), SYMBOL_INIT_PARAM_IMPLICIT_OBJ);
+        
+        ISymbol symbol = createScopeSymbol(file,
+                ISymbolConstants.SYMBOL_SCOPE_APPLICATION, APPLICATION_SCOPE);
+        symbols.put(symbol.getName(), symbol);
+        
+        return Collections.unmodifiableMap(symbols);
+    }
+
+    private ISymbol createScopeSymbol(final IFile file, final int scopeMask,
+            final String name)
+    {
+        final Map mapSource = new ScopeMap(file, scopeMask);
+        final IMapTypeDescriptor typeDesc = SymbolFactory.eINSTANCE
+                .createIMapTypeDescriptor();
+        typeDesc.setMapSource(mapSource);
+        typeDesc.setImmutable(false); // scope maps are mutable
+        final IInstanceSymbol symbol = SymbolFactory.eINSTANCE
+                .createIInstanceSymbol();
+        symbol.setName(name);
+        symbol.setRuntimeSource(ERuntimeSource.BUILT_IN_SYMBOL_LITERAL);
+        symbol.setTypeDescriptor(typeDesc);
+        // TODO:symbol.setDetailedDescription("A Map of the application scope
+        // attribute values, keyed by attribute name");
+
+        return symbol;
+    }
+
+    // TODO: this one may be able to be factored up to the symbols plugin
+    private static ISymbol createUnresolvedMapSymbol(final String name)
+    {
+        final IMapTypeDescriptor typeDesc = SymbolFactory.eINSTANCE
+                .createIMapTypeDescriptor();
+        typeDesc.setMapSource(Collections.EMPTY_MAP);
+        final IInstanceSymbol symbol = SymbolFactory.eINSTANCE
+                .createIInstanceSymbol();
+        symbol.setName(name);
+        symbol.setRuntimeSource(ERuntimeSource.BUILT_IN_SYMBOL_LITERAL);
+        symbol.setTypeDescriptor(typeDesc);
+
+        return symbol;
+    }
+
+    private ISymbol createJavaInstanceSymbol(final IProject project,
+            final String fullyQualifiedClass, final String symbolName)
+    {
+        final IJavaProject javaProject = JavaCore.create(project);
+        try
+        {
+            final IType type = javaProject.findType(fullyQualifiedClass);
+
+            // TODO: this is a high-bred since it consists of a java instance
+            // but also has properties we can populate at designtime such as
+            // the maps. Need to add the second part
+            if (type != null)
             {
-                return SymbolUtil.findSymbolByName(
-                        getSymbols(context, symbolScopeMask), name);
+                final IJavaTypeDescriptor2 typeDesc = SymbolFactory.eINSTANCE
+                        .createIJavaTypeDescriptor2();
+                typeDesc.setType(type);
+                final IBeanInstanceSymbol facesContextVar = SymbolFactory.eINSTANCE
+                        .createIBeanInstanceSymbol();
+                facesContextVar.setTypeDescriptor(typeDesc);
+                facesContextVar.setName(symbolName);
+                return facesContextVar;
             }
+        }
+        catch (final JavaModelException jme)
+        {
+            // fall-through and fail with unresolved map
+        }
 
-            /**
-             * @param prefix
-             * @param context
-             * @param symbolScopeMask
-             * @return all implicit symbols for context starting with prefix in scopes
-             *         matching symbolScopeMask
-             */
-            public ISymbol[] getSymbols(final String prefix, final IAdaptable context,
-                    final int symbolScopeMask)
-            {
-                return SymbolUtil.filterSymbolsByPrefix(getSymbols(context,
-                        symbolScopeMask), prefix);
-            }
-
-            private List getSymbolsForScope(final IFile file, final int symbolScopeMask)
-            {
-                final List symbols = new ArrayList();
-                if ((symbolScopeMask & ISymbolConstants.SYMBOL_SCOPE_REQUEST) != 0)
-                {
-                    symbols.addAll(getRequestScopeSymbols(file));
-                }
-                if ((symbolScopeMask & ISymbolConstants.SYMBOL_SCOPE_SESSION) != 0)
-                {
-                    symbols.addAll(getSessionScopeSymbols(file));
-                }
-                if ((symbolScopeMask & ISymbolConstants.SYMBOL_SCOPE_APPLICATION) != 0)
-                {
-                    symbols.addAll(getApplicationScopeSymbols(file));
-                }
-
-                return symbols;
-            }
-
-            private List getRequestScopeSymbols(final IFile file)
-            {
-                final List symbols = new ArrayList();
-
-                symbols.add(createScopeSymbol(file,
-                        ISymbolConstants.SYMBOL_SCOPE_REQUEST, REQUEST_SCOPE));
-                symbols.add(createUnresolvedMapSymbol(COOKIE_IMPLICIT_OBJ));
-                symbols.add(createUnresolvedMapSymbol(HEADER_IMPLICIT_OBJ));
-                symbols.add(createUnresolvedMapSymbol(HEADER_VALUES_IMPLICIT_OBJ));
-                symbols.add(createUnresolvedMapSymbol(PARAM_IMPLICIT_OBJ));
-                symbols.add(createUnresolvedMapSymbol(PARAM_VALUES_IMPLICIT_OBJ));
-                // TODO: these aren't maps; need to find way to handle
-                symbols
-                .add(createJavaInstanceSymbol(file.getProject(),
-                        FACES_CONTEXT_FULLY_QUALIFIED_CLASS,
-                        FACES_CONTEXT_IMPLICIT_OBJ));
-                symbols.add(createJavaInstanceSymbol(file.getProject(),
-                        VIEW_FULLY_QUALIFIED_CLASS, VIEW_IMPLICIT_OBJ));
-
-                return symbols;
-            }
-
-            private List getSessionScopeSymbols(final IFile file)
-            {
-                return Collections.singletonList(createScopeSymbol(file,
-                        ISymbolConstants.SYMBOL_SCOPE_SESSION, SESSION_SCOPE));
-            }
-
-            private List getApplicationScopeSymbols(final IFile file)
-            {
-                final List symbols = new ArrayList();
-
-                // TODO: may be able to resolve this one based on web.xml
-                symbols.add(createUnresolvedMapSymbol(INIT_PARAM_IMPLICIT_OBJ));
-                symbols.add(createScopeSymbol(file,
-                        ISymbolConstants.SYMBOL_SCOPE_APPLICATION, APPLICATION_SCOPE));
-
-                return symbols;
-            }
-
-            private ISymbol createScopeSymbol(final IFile file, final int scopeMask,
-                    final String name)
-            {
-                final Map mapSource = new ScopeMap(file, scopeMask);
-                final IMapTypeDescriptor typeDesc =
-                    SymbolFactory.eINSTANCE.createIMapTypeDescriptor();
-                typeDesc.setMapSource(mapSource);
-                typeDesc.setImmutable(false); // scope maps are mutable
-                final IInstanceSymbol symbol =
-                    SymbolFactory.eINSTANCE.createIInstanceSymbol();
-                symbol.setName(name);
-                symbol.setRuntimeSource(ERuntimeSource.BUILT_IN_SYMBOL_LITERAL);
-                symbol.setTypeDescriptor(typeDesc);
-                // TODO:symbol.setDetailedDescription("A Map of the application scope
-                // attribute values, keyed by attribute name");
-
-                return symbol;
-            }
-
-            // TODO: this one may be able to be factored up to the symbols plugin
-            private ISymbol createUnresolvedMapSymbol(final String name)
-            {
-                final IMapTypeDescriptor typeDesc =
-                    SymbolFactory.eINSTANCE.createIMapTypeDescriptor();
-                typeDesc.setMapSource(Collections.EMPTY_MAP);
-                final IInstanceSymbol symbol =
-                    SymbolFactory.eINSTANCE.createIInstanceSymbol();
-                symbol.setName(name);
-                symbol.setRuntimeSource(ERuntimeSource.BUILT_IN_SYMBOL_LITERAL);
-                symbol.setTypeDescriptor(typeDesc);
-
-                return symbol;
-            }
-
-            private ISymbol createJavaInstanceSymbol(final IProject project,
-                    final String fullyQualifiedClass, final String symbolName)
-            {
-                final IJavaProject javaProject = JavaCore.create(project);
-                try
-                {
-                    final IType type = javaProject.findType(fullyQualifiedClass);
-
-                    // TODO: this is a high-bred since it consists of a java instance
-                    // but also has properties we can populate at designtime such as
-                    // the maps. Need to add the second part
-                    if (type != null)
-                    {
-                        final IJavaTypeDescriptor2 typeDesc =
-                            SymbolFactory.eINSTANCE.createIJavaTypeDescriptor2();
-                        typeDesc.setType(type);
-                        final IBeanInstanceSymbol facesContextVar =
-                            SymbolFactory.eINSTANCE.createIBeanInstanceSymbol();
-                        facesContextVar.setTypeDescriptor(typeDesc);
-                        facesContextVar.setName(symbolName);
-                        return facesContextVar;
-                    }
-                }
-                catch (final JavaModelException jme)
-                {
-                    // fall-through and fail with unresolved map
-                }
-
-                final ISymbol symbol = createUnresolvedMapSymbol(symbolName);
-                ((IInstanceSymbol) symbol)
+        final ISymbol symbol = createUnresolvedMapSymbol(symbolName);
+        ((IInstanceSymbol) symbol)
                 .getTypeDescriptor()
                 .setTypeSignatureDelegate(
                         Signature
-                        .createTypeSignature(fullyQualifiedClass, true));
+                                .createTypeSignature(fullyQualifiedClass, true));
 
-                return symbol;
-            }
+        return symbol;
+    }
 
-            private static class ScopeMap extends AbstractMap
+    private static class ScopeMap extends AbstractMap
+    {
+        private final IFile _externalContextKey;
+        private final int   _scopeMask;
+
+        ScopeMap(final IFile externalContextKey, final int scopeMask)
+        {
+            _externalContextKey = externalContextKey;
+            _scopeMask = scopeMask;
+        }
+
+        @Override
+        public Set entrySet()
+        {
+            final Map scopeMap = new HashMap();
+            // do beans first so in case of name collision, beans are hidden
+            final DefaultBeanSymbolSourceProvider beanProvider = DefaultBeanSymbolSourceProvider
+                    .getInstance();
+
+            final ISymbol beanSymbols[] = beanProvider.getSymbols(
+                    _externalContextKey, _scopeMask);
+
+            for (final ISymbol beanSymbol : beanSymbols)
             {
-                private final IFile _externalContextKey;
-                private final int   _scopeMask;
-
-                ScopeMap(final IFile externalContextKey, final int scopeMask)
-                {
-                    _externalContextKey = externalContextKey;
-                    _scopeMask = scopeMask;
-                }
-
-                @Override
-                public Set entrySet()
-                {
-                    final Map scopeMap = new HashMap();
-                    // do beans first so in case of name collision, beans are hidden
-                    final DefaultBeanSymbolSourceProvider beanProvider =
-                        DefaultBeanSymbolSourceProvider.getInstance();
-
-                    final ISymbol beanSymbols[] =
-                        beanProvider.getSymbols(_externalContextKey, _scopeMask);
-
-                    for (final ISymbol beanSymbol : beanSymbols)
-                    {
-                        scopeMap.put(beanSymbol.getName(), beanSymbol);
-                    }
-
-                    final DesignTimeApplicationManager manager =
-                        DesignTimeApplicationManager
-                        .getInstance(_externalContextKey.getProject());
-
-                    if (manager != null)
-                    {
-
-                        final IDTExternalContext externalContext =
-                            manager.getFacesContext(_externalContextKey)
-                            .getDTExternalContext(_externalContextKey);
-
-                        scopeMap.putAll(externalContext.getMapForScope(_scopeMask));
-                    }
-
-                    return scopeMap.entrySet();
-
-                }
+                scopeMap.put(beanSymbol.getName(), beanSymbol);
             }
+
+            final DesignTimeApplicationManager manager = DesignTimeApplicationManager
+                    .getInstance(_externalContextKey.getProject());
+
+            if (manager != null)
+            {
+
+                final IDTExternalContext externalContext = manager
+                        .getFacesContext(_externalContextKey)
+                        .getDTExternalContext(_externalContextKey);
+
+                scopeMap.putAll(externalContext.getMapForScope(_scopeMask));
+            }
+
+            return scopeMap.entrySet();
+
+        }
+    }
 }

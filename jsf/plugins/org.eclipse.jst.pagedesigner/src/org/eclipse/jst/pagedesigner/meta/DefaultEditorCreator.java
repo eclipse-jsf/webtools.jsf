@@ -28,7 +28,7 @@ public class DefaultEditorCreator extends EditorCreator {
 
 	static IDOMElement _staticElement;
 
-	static IBindingHandler _staticHandler;
+	//static IBindingHandler _staticHandler;
 
 	static CellEditorHolder _staticHolder;
 
@@ -63,7 +63,8 @@ public class DefaultEditorCreator extends EditorCreator {
 	 *      org.eclipse.jst.pagedesigner.meta.IBindingHandler,
 	 *      org.eclipse.swt.graphics.Image)
 	 */
-	public CellEditor createCellEditorWithWrapper(Composite parent,
+	@SuppressWarnings("deprecation")
+    public CellEditor createCellEditorWithWrapper(Composite parent,
 			IPropertyPageDescriptor attr, final IDOMElement element,
 			IBindingHandler handler1) {
 //		final IBindingHandler handler = (handler1 == null ? getSystemDefaultBindingHandler()
@@ -133,7 +134,8 @@ public class DefaultEditorCreator extends EditorCreator {
 	 *      org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement,
 	 *      org.eclipse.jst.pagedesigner.meta.IBindingHandler)
 	 */
-	public CellEditor createCellEditorWithWrapper(Composite parent,
+	@SuppressWarnings("deprecation")
+    public CellEditor createCellEditorWithWrapper(Composite parent,
 			IPropertyPageDescriptor attr, CellEditorHolder holder,
 			final IDOMElement element, IBindingHandler handler1) {
 //		final IBindingHandler handler = (handler1 == null ? getSystemDefaultBindingHandler()
@@ -201,7 +203,8 @@ public class DefaultEditorCreator extends EditorCreator {
 	 *      org.eclipse.jst.pagedesigner.meta.IPropertyPageDescriptor,
 	 *      org.eclipse.jst.pagedesigner.meta.IBindingHandler)
 	 */
-	public DialogField createDialogFieldWithWrapper(String uri, String tagName,
+	@SuppressWarnings("deprecation")
+    public DialogField createDialogFieldWithWrapper(String uri, String tagName,
 			IPropertyPageDescriptor attr, IBindingHandler handler1) {
 		final IBindingHandler handler = (handler1 == null ? getSystemDefaultBindingHandler()
 				: handler1);
@@ -226,7 +229,8 @@ public class DefaultEditorCreator extends EditorCreator {
 //        return value.toString();
 //	}
 
-	@Override
+	@SuppressWarnings("deprecation")
+    @Override
 	public DialogField createDialogFieldWithWrapper(
 			IPropertyPageDescriptor attr, IBindingHandler handler1) {
 		final IBindingHandler handler = (handler1 == null ? getSystemDefaultBindingHandler()

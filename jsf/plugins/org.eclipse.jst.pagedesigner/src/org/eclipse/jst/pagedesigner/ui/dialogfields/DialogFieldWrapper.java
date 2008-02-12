@@ -50,6 +50,7 @@ import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
 // NOTE: currently this class is dedicated to page designer by using the
 // IElementContextable interface.
 // It should be very easy to make it standard alone and reused in other places.
+@SuppressWarnings("deprecation")
 public class DialogFieldWrapper implements DialogField, ISupportTextValue,
 		IElementContextable {
 	private DialogField _wrapped;
@@ -72,9 +73,9 @@ public class DialogFieldWrapper implements DialogField, ISupportTextValue,
 
 	private String _tagName;
 
-	private IAttributeDescriptor _attr;
+    private IAttributeDescriptor _attr;
 
-	private IBindingHandler _handler;
+    private IBindingHandler _handler;
 
 	private IPropertyPageDescriptor _pdattr;
 
@@ -88,7 +89,7 @@ public class DialogFieldWrapper implements DialogField, ISupportTextValue,
 	 * @param handler 
 	 * 
 	 */
-	public DialogFieldWrapper(DialogField field, Image image,
+    public DialogFieldWrapper(DialogField field, Image image,
 			Image disabledImage, String uri, String tagName,
 			IAttributeDescriptor attr, IBindingHandler handler) {
 		super();
@@ -110,7 +111,7 @@ public class DialogFieldWrapper implements DialogField, ISupportTextValue,
 			 * 
 			 * @see org.eclipse.jst.jsf.common.ui.internal.dialogfield.IStringButtonAdapter#changeControlPressed(org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogField)
 			 */
-			public void changeControlPressed(DialogField field1) {
+            public void changeControlPressed(DialogField field1) {
 				Shell shell = field1.getLabelControl(null, null).getShell();
 				DialogFieldWrapper wrapper = (DialogFieldWrapper) field1;
 				String result = _handler
@@ -133,7 +134,7 @@ public class DialogFieldWrapper implements DialogField, ISupportTextValue,
 	 * @param handler 
 	 * 
 	 */
-	public DialogFieldWrapper(DialogField field, Image image,
+    public DialogFieldWrapper(DialogField field, Image image,
 			Image disabledImage, String uri, String tagName,
 			IPropertyPageDescriptor attr, IBindingHandler handler) {
 		super();
@@ -206,7 +207,7 @@ public class DialogFieldWrapper implements DialogField, ISupportTextValue,
 	 * @see org.eclipse.jst.pagedesigner.properties.attrgroup.IElementContextable#setElementContext(org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode,
 	 *      org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement)
 	 */
-	public void setElementContext(IDOMNode ancester, IDOMElement element) {
+    public void setElementContext(IDOMNode ancester, IDOMElement element) {
 		if (_wrapped instanceof IElementContextable) {
 			((IElementContextable) _wrapped).setElementContext(ancester,
 					element);

@@ -41,25 +41,47 @@ public class TLDNamespace extends Namespace
         _tagMapReadWriteLock = Job.getJobManager().newLock();
     }
 
-    /**
-     * Initialize the tag definitions inn the namespace
-     */
-    private final Map<String, ITagElement> initializeTags()
+    @Override
+    public final String getDisplayName()
     {
-        final CMNamedNodeMap elementMap = _tldDoc.getElements();
-        // if we create the table with this call, bias the table size
-        // to be 1 bigger than the number of tags, since we know if it's
-        // smaller, it'll cause at least one buffer resize
-        final Map<String, ITagElement> tags = getOrCreateMap(elementMap
-                .getLength());
+        return _tldDoc.getDisplayName();
+    }
 
-        for (int i = 0; i < elementMap.getLength(); i++)
-        {
-            final CMNode cmNode = elementMap.item(i);
-            getOrCreateTagElement(cmNode.getNodeName(), tags);
-        }
+    @Override
+    public final String getNSUri()
+    {
+        return _tldDoc.getUri();
+    }
+
+    
+    @Override
+    public boolean isInitialized()
+    {
+        int numTags = _tldDoc.getElements().getLength();
+        int tagMapSize = getOrCreateMap(3).size();
         
-        return tags;
+        // we are only initialized if the tag map is the equal in size
+        // to the number of tags in the tld.
+        return numTags == tagMapSize;
+    }
+
+    /**
+     * mapSizeHint will be used
+     * 
+     * @param mapSizeHint
+     * @return the map
+     */
+    private synchronized Map<String, ITagElement> getOrCreateMap(
+            final int mapSizeHint)
+    {
+        if (_tags == null)
+        {
+            final float loadFactor = 0.75f;
+            final int initSize = ((int) (mapSizeHint / loadFactor)) + 1;
+            _tags = Collections
+                    .synchronizedMap(new HashMap<String, ITagElement>(initSize));
+        }
+        return _tags;
     }
 
     private ITagElement getOrCreateTagElement(final String name,
@@ -111,39 +133,35 @@ public class TLDNamespace extends Namespace
     }
 
     @Override
-    public final String getNSUri()
-    {
-        return _tldDoc.getUri();
-    }
-
-    @Override
-    public final String getDisplayName()
-    {
-        return _tldDoc.getDisplayName();
-    }
-
-    @Override
     public final Collection<? extends ITagElement> getViewElements()
     {
         return Collections.unmodifiableCollection(initializeTags().values());
     }
 
-    /**
-     * mapSizeHint will be used
-     * 
-     * @param mapSizeHint
-     * @return the map
-     */
-    private synchronized Map<String, ITagElement> getOrCreateMap(
-            final int mapSizeHint)
+    @Override
+    public final boolean hasViewElements()
     {
-        if (_tags == null)
+        return _tldDoc.getElements().getLength() > 0;
+    }
+
+    /**
+     * Initialize the tag definitions inn the namespace
+     */
+    private final Map<String, ITagElement> initializeTags()
+    {
+        final CMNamedNodeMap elementMap = _tldDoc.getElements();
+        // if we create the table with this call, bias the table size
+        // to be 1 bigger than the number of tags, since we know if it's
+        // smaller, it'll cause at least one buffer resize
+        final Map<String, ITagElement> tags = getOrCreateMap(elementMap
+                .getLength());
+
+        for (int i = 0; i < elementMap.getLength(); i++)
         {
-            final float loadFactor = 0.75f;
-            final int initSize = ((int) (mapSizeHint / loadFactor)) + 1;
-            _tags = Collections
-                    .synchronizedMap(new HashMap<String, ITagElement>(initSize));
+            final CMNode cmNode = elementMap.item(i);
+            getOrCreateTagElement(cmNode.getNodeName(), tags);
         }
-        return _tags;
+        
+        return tags;
     }
 }

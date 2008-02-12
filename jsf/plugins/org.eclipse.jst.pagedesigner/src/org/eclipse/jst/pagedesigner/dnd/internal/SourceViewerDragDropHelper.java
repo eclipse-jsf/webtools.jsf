@@ -148,7 +148,7 @@ public final class SourceViewerDragDropHelper {
 			Point size = ct.getSize();
 
 			GC gc = new GC(st);
-			gc.setXORMode(true);
+			//gc.setXORMode(true);
 			gc.setLineWidth(size.x);
 
 			// erase old caret

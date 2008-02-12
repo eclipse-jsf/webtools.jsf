@@ -90,4 +90,9 @@ public class ConverterTypeInfo extends ClassTypeInfo
     {
         return _converterId;
     }
+
+    public String toString()
+    {
+        return "Converter Type Info: type = " + _converterId + ", "+super.toString();
+    }
 }

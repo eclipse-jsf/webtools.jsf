@@ -377,8 +377,8 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 		addAction(zoomIn);
 		addAction(zoomOut);
 
-		getSite().getKeyBindingService().registerAction(zoomIn);
-		getSite().getKeyBindingService().registerAction(zoomOut);
+//		getSite().getKeyBindingService().registerAction(zoomIn);
+//		getSite().getKeyBindingService().registerAction(zoomOut);
 	}
 
 	/**

@@ -101,4 +101,31 @@ public abstract class ClassTypeInfo extends TypeInfo implements IClassTypeInfo
         return _className;
     }
 
+    public String toString()
+    {
+        String supers = "[";
+        
+        for (int i = 0; i < _superClasses.length; i++)
+        {
+            supers += _superClasses[i];
+            
+            if (i < _superClasses.length-1)
+            {
+                supers += ",";
+            }
+        }
+        
+        for (int i = 0; i < _interfaces.length; i++)
+        {
+            supers += _interfaces[i];
+            
+            if (i < _interfaces.length-1)
+            {
+                supers += ",";
+            }
+        }
+        supers +="]";
+        
+        return "class= "+getClassName()+ ", supers="+ supers;
+    }
 }

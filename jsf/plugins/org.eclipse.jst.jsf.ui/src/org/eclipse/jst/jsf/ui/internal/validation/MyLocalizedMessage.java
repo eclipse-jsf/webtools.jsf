@@ -10,7 +10,7 @@
  *    
  ********************************************************************************/
 
-package org.eclipse.jst.jsf.validation.internal.el.diagnostics;
+package org.eclipse.jst.jsf.ui.internal.validation;
 
 import java.util.Locale;
 
@@ -23,7 +23,7 @@ import org.eclipse.wst.validation.internal.core.Message;
  * @author cbateman
  *
  */
-class MyLocalizedMessage extends Message implements IELLocalizedMessage
+class MyLocalizedMessage extends Message
 {
 	private final String _message;
 	private final int	 _errorCode;

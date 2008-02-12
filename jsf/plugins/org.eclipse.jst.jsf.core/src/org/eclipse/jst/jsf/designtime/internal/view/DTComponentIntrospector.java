@@ -201,12 +201,22 @@ public final class DTComponentIntrospector
         for (final Iterator it = converters.iterator(); it.hasNext();)
         {
             final ConverterType converter = (ConverterType) it.next();
-            final String type = converter.getConverterId().getTextContent()
-                    .trim();
 
-            if (converterId.equals(type))
+            if (converter != null && converter.getConverterId() != null
+                    && converter.getConverterId().getTextContent() != null)
             {
-                return converter.getConverterClass().getTextContent().trim();
+                final String type = converter.getConverterId().getTextContent()
+                        .trim();
+
+                if (converterId.equals(type))
+                {
+                    if (converter.getConverterClass() != null && converter.getConverterClass().getTextContent()!=null)
+                    {
+                        return converter.getConverterClass().getTextContent()
+                                .trim();
+                    }
+                    return null;
+                }
             }
         }
         return null;
@@ -228,12 +238,18 @@ public final class DTComponentIntrospector
         for (final Iterator it = converters.iterator(); it.hasNext();)
         {
             final ValidatorType validatorType = (ValidatorType) it.next();
-            final String type = validatorType.getValidatorId().getTextContent()
-                    .trim();
-
-            if (validatorId.equals(type))
+            
+            if (validatorType != null && validatorType.getValidatorId() != null && 
+                    validatorType.getValidatorId().getTextContent() != null)
             {
-                return validatorType.getValidatorClass().getTextContent().trim();
+                final String type = validatorType.getValidatorId().getTextContent()
+                        .trim();
+    
+                if (validatorId.equals(type))
+                {
+                    return validatorType.getValidatorClass().getTextContent()
+                            .trim();
+                }
             }
         }
         return null;
@@ -284,7 +300,7 @@ public final class DTComponentIntrospector
      * @param typeInfo
      * @param project
      * @return a list of all bean properties (using the POJO method) on
-     * typeInfo.  List may be empty, never null.
+     *         typeInfo. List may be empty, never null.
      */
     public static Map<String, JDTBeanProperty> getBeanProperties(
             final ComponentTypeInfo typeInfo, final IProject project)

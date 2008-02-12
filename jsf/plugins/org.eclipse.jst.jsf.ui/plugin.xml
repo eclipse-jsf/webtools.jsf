@@ -104,4 +104,74 @@
             id="org.eclipse.jst.jsf.ui.tagregistry.TagRegistryView">
       </view>
    </extension>
+   
+   <extension
+        id="JSPSemanticsValidatorMarker"
+        name="%JSPSemanticsValidatorMarker"
+        point="org.eclipse.core.resources.markers">
+      <super
+            type="org.eclipse.wst.validation.problemmarker">
+      </super>
+    </extension>
+
+   <extension
+        point="org.eclipse.wst.validation.validator"
+        id="JSFNonELAttributeValueValidator"
+        name="%JSFNonELAttributeValueValidator">
+        <validator>
+            <projectNature id="org.eclipse.wst.common.modulecore.ModuleCoreNature" />
+            <projectNature id="org.eclipse.jdt.core.javanature" />
+            <enablement>
+                <and>
+                    <test property="org.eclipse.wst.common.project.facet.core.projectFacet" value="jst.java"/>
+                    <test property="org.eclipse.wst.common.project.facet.core.projectFacet" value="jst.web"/>
+                    <test property="org.eclipse.wst.common.project.facet.core.projectFacet" value="jst.jsf"/>
+                </and>
+            </enablement> 
+            
+            <markerId
+               markerIdValue="JSPSemanticsValidatorMarker">
+            </markerId>
+            <helper 
+                class="org.eclipse.wst.validation.internal.operations.WorkbenchContext">
+            </helper>
+            <run
+                class="org.eclipse.jst.jsf.validation.internal.JSPSemanticsValidator"
+                incremental="true"
+                fullBuild="true"
+            />
+   <contentTypeBinding
+         contentTypeId="org.eclipse.jst.jsp.core.jspsource">
+   </contentTypeBinding>
+   <contentTypeBinding
+         contentTypeId="org.eclipse.jst.jsp.core.jspfragmentsource">
+   </contentTypeBinding>
+        </validator>
+        </extension>
+        
+    <extension
+        point="org.eclipse.wst.validation.validator"
+        id="JSFAppConfigValidator"
+        name="%JSFAppConfigValidator">
+        <validator>
+            <projectNature id="org.eclipse.wst.common.modulecore.ModuleCoreNature" />
+            <projectNature id="org.eclipse.jdt.core.javanature" />
+            <filter
+                objectClass="org.eclipse.core.resources.IFile"
+                nameFilter="faces-config.xml">
+            </filter>
+            <markerId
+               markerIdValue="JSPSemanticsValidatorMarker">
+            </markerId>
+            <helper 
+                class="org.eclipse.wst.validation.internal.operations.WorkbenchContext">
+            </helper>
+            <run
+                class="org.eclipse.jst.jsf.validation.internal.appconfig.AppConfigValidator"
+                incremental="true"
+                fullBuild="true"
+            />
+        </validator>
+    </extension>
+        
 </plugin>

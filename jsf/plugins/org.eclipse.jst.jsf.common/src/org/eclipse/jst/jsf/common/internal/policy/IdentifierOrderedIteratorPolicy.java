@@ -1,4 +1,4 @@
-package org.eclipse.jst.jsf.designtime.internal.view.model.jsp;
+package org.eclipse.jst.jsf.common.internal.policy;
 
 import java.util.ArrayList;
 import java.util.Collection;

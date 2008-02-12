@@ -29,6 +29,7 @@ import org.eclipse.jst.pagedesigner.meta.IAttributeCellEditorFactory;
  * @author mengbo
  * will be deleted
  */
+@SuppressWarnings("deprecation")
 public class XXXCellEditorFacRegistryReader {
 	static IAttributeCellEditorFactory[] _factories = null;
 

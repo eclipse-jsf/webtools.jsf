@@ -84,4 +84,10 @@ public class ValidatorTypeInfo extends ClassTypeInfo
     {
         return _validatorId;
     }
+    
+    public String toString()
+    {
+        return "Validator Type Info: type = " + _validatorId + ", "+super.toString();
+    }
+
 }

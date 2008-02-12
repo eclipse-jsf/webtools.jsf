@@ -33,16 +33,16 @@ import org.eclipse.jst.jsf.designtime.context.DTFacesContext;
  */
 /*package*/ final class SymbolContextResolver extends AbstractSymbolContextResolver 
 {
-    private final IStructuredDocumentContext		_context;
+    private final IStructuredDocumentContext        _context;
     private IWorkspaceContextResolver               _wkspResolver; // = null; lazy created through getWorkspaceResolver
 
 	/**
-	 * @param context
-	 */
-	/*package*/ SymbolContextResolver(IStructuredDocumentContext context)
-	{
-		_context = context;
-	}
+     * @param context
+     */
+    /* package */SymbolContextResolver(IStructuredDocumentContext context)
+    {
+        _context = context;
+    }
 
     public ISymbol getVariable(String name) 
     {
@@ -173,19 +173,28 @@ import org.eclipse.jst.jsf.designtime.context.DTFacesContext;
     {
         if (_wkspResolver == null)
         {
-            _wkspResolver = IStructuredDocumentContextResolverFactory.
-                                INSTANCE.getWorkspaceContextResolver(_context);
+            _wkspResolver = getWorkspaceResolver(_context);
         }
         
         return _wkspResolver;
     }
     
+    private IWorkspaceContextResolver getWorkspaceResolver(final IStructuredDocumentContext context)
+    {
+        return IStructuredDocumentContextResolverFactory.INSTANCE
+                .getWorkspaceContextResolver(context);
+    }
+
     /**
      * @return the underlying IFile for my context or null if can't be determined
      */
     protected final IFile getFile()
     {
-        final IWorkspaceContextResolver  resolver = getWorkspaceResolver();
+        return getFile(getWorkspaceResolver());
+    }
+
+    private IFile getFile(final IWorkspaceContextResolver  resolver)
+    {
         
         if (resolver != null)
         {
@@ -198,5 +207,19 @@ import org.eclipse.jst.jsf.designtime.context.DTFacesContext;
         }
         
         return null;
+        
+    }
+
+    @Override
+    public boolean hasSameResolution(IModelContext modelContext)
+    {
+        if (canResolveContext(modelContext))
+        {
+            return getFile().equals(getFile(getWorkspaceResolver((IStructuredDocumentContext) modelContext)));
+        }
+
+        // if we can't even resolve the context, then we certainly don't have
+        // the same resolution
+        return false;
     }
 }

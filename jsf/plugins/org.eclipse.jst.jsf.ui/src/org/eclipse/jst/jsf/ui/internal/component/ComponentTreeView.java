@@ -1,5 +1,6 @@
 package org.eclipse.jst.jsf.ui.internal.component;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -8,8 +9,11 @@ import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.Decorator;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.ResolverUtil;
+import org.eclipse.jst.jsf.designtime.DesignTimeApplicationManager;
 import org.eclipse.jst.jsf.ui.internal.component.ComponentDetailTableProvider.ComponentProperty;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
@@ -197,7 +201,26 @@ public class ComponentTreeView extends PageBookView
     @Override
     protected boolean isImportant(final IWorkbenchPart part)
     {
-        return getDocumentFromPart(part) != null;
+        final IDocument  document = getDocumentFromPart(part);
+        
+        if (document != null)
+        {
+            IFile file = ResolverUtil.getFileForDocument(document);
+            
+            if (file != null)
+            {
+                DesignTimeApplicationManager manager =
+                    DesignTimeApplicationManager.getInstance(file.getProject());
+                
+                if (manager != null)
+                {
+                    return manager.hasDTFacesContext(file);
+                }
+            }
+        }
+        
+        // fall through, then no, not important.
+        return false;
     }
 
     private static class ComponentPage extends Page
@@ -345,6 +368,13 @@ public class ComponentTreeView extends PageBookView
 
     private static class ComponentTreeSorter extends ViewerSorter
     {
+        
+        @Override
+        public int compare(Viewer viewer, Object e1, Object e2)
+        {
+            return 0;
+        }
+
         @Override
         public int category(final Object element)
         {

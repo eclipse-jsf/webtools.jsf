@@ -68,11 +68,19 @@ public class DTJSFViewModel
     {
         final DesignTimeApplicationManager manager = 
             DesignTimeApplicationManager.getInstance(_project);
-        final DTFacesContext facesContext = manager.getFacesContext(_file);
-        _treeRoot = facesContext.getViewRoot();
-        _treeRoot.refresh(runnable);
+        
+        if (manager != null)
+        {
+            final DTFacesContext facesContext = manager.getFacesContext(_file);
+            
+            if (facesContext != null)
+            {
+                _treeRoot = facesContext.getViewRoot();
+                _treeRoot.refresh(runnable);
+            }
+        }
     }
-
+    
     /**
      * @return the design time view root
      */

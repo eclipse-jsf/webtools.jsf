@@ -24,14 +24,20 @@ public class TLDValidatorTagElement extends TLDJSFTagElement implements IValidat
         _validator = validatorTypeInfo;
     }
 
-    public ValidatorTypeInfo getValidator()
+    public final ValidatorTypeInfo getValidator()
     {
         return _validator;
     }
 
     @Override
-    public TagType getType()
+    public final TagType getType()
     {
        return TagType.VALIDATOR;
+    }
+
+    @Override
+    public String toString()
+    {
+        return _validator.toString();
     }
 }

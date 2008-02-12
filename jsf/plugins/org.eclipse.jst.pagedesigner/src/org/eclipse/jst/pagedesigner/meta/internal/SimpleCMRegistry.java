@@ -28,6 +28,7 @@ import org.xml.sax.SAXException;
  * @author mengbo
  * @version 1.5
  */
+@SuppressWarnings("deprecation")
 public class SimpleCMRegistry implements ICMRegistry {
 	String _uri;
 

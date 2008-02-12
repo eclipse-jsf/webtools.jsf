@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.eclipse.jst.jsf.common.internal.policy.IdentifierOrderedIteratorPolicy;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagElement;
 
 /**

@@ -38,9 +38,9 @@ import org.w3c.dom.Element;
 public class XMLViewObjectConstructionStrategy extends
         ViewObjectConstructionStrategy<Element>
 {
-    private static final String GENERATED_ID = "_generatedId";
+    private static final String             GENERATED_ID = "_generatedId";
     private final ComponentConstructionData _constructionData;
-    private final XMLViewDefnAdapter _adapter;
+    private final XMLViewDefnAdapter        _adapter;
 
     /**
      * @param adapter
@@ -196,16 +196,20 @@ public class XMLViewObjectConstructionStrategy extends
         Object result = null;
         switch (Signature.getTypeSignatureKind(signature))
         {
-            case Signature.BASE_TYPE_SIGNATURE:
-                result = convertFromBaseType(convertValue, signature);
-                break;
+        case Signature.BASE_TYPE_SIGNATURE:
+            result = convertFromBaseType(convertValue, signature);
+            break;
 
-            case Signature.CLASS_TYPE_SIGNATURE:
-                if (TypeConstants.TYPE_STRING.equals(signature))
-                {
-                    result = convertValue;
-                }
-                break;
+        case Signature.CLASS_TYPE_SIGNATURE:
+            if (TypeConstants.TYPE_STRING.equals(signature))
+            {
+                result = convertValue;
+            }
+            else if (TypeConstants.TYPE_JAVAOBJECT.equals(signature))
+            {
+                result = convertValue;
+            }
+            break;
         }
 
         return result;

@@ -16,124 +16,109 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.text.contentassist.IContextInformationValidator;
-import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
-import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.ITextRegionContextResolver;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
 import org.eclipse.jst.jsf.core.internal.contentassist.el.ContentAssistParser;
 import org.eclipse.jst.jsf.core.internal.contentassist.el.ContentAssistStrategy;
-import org.eclipse.jst.jsp.core.internal.regions.DOMJSPRegionContexts;
-import org.eclipse.wst.xml.core.internal.regions.DOMRegionContext;
+import org.eclipse.jst.jsf.designtime.DTAppManagerUtil;
+import org.eclipse.jst.jsf.designtime.internal.view.XMLViewDefnAdapter;
+import org.eclipse.jst.jsf.designtime.internal.view.IDTViewHandler.ViewHandlerException;
+import org.eclipse.jst.jsf.designtime.internal.view.XMLViewDefnAdapter.DTELExpression;
+import org.eclipse.jst.jsf.ui.internal.JSFUiPlugin;
 import org.eclipse.wst.xml.ui.internal.contentassist.ProposalComparator;
 
 /**
  * The content assist processor for JSF EL partitions on attribute values.
- *
+ * 
  * @author cbateman
- *
+ * 
  */
 public class JSFELContentAssistProcessor implements IContentAssistProcessor
 {
-	/**
-	 * @see org.eclipse.jface.text.contentassist.IContentAssistProcessor#computeCompletionProposals(org.eclipse.jface.text.ITextViewer, int)
-	 */
-	public ICompletionProposal[] computeCompletionProposals(final ITextViewer viewer,
-			final int documentPosition)
-	{
-		List<ICompletionProposal>  proposals = new ArrayList<ICompletionProposal>();
-		final IStructuredDocumentContext context =
-			IStructuredDocumentContextFactory.INSTANCE.getContext(viewer, documentPosition);
+    /**
+     * @see org.eclipse.jface.text.contentassist.IContentAssistProcessor#computeCompletionProposals(org.eclipse.jface.text.ITextViewer,
+     *      int)
+     */
+    public ICompletionProposal[] computeCompletionProposals(
+            final ITextViewer viewer, final int documentPosition)
+    {
+        final List<ICompletionProposal> proposals =
+                new ArrayList<ICompletionProposal>();
+        final IStructuredDocumentContext context =
+                IStructuredDocumentContextFactory.INSTANCE.getContext(viewer,
+                        documentPosition);
+        if (context != null)
+        {
+            final XMLViewDefnAdapter viewAdapter =
+                    DTAppManagerUtil.getXMLViewDefnAdapter(context);
 
-		if (context != null)
-		{
-			ITextRegionContextResolver  resolver =
-				IStructuredDocumentContextResolverFactory.INSTANCE.getTextRegionResolver(context);
+            if (viewAdapter != null)
+            {
+                try
+                {
+                    final DTELExpression elExpression =
+                            viewAdapter.getELExpression(context);
 
-			if (resolver != null)
-			{
-				final String regionType = resolver.getRegionType();
+                    if (elExpression != null)
+                    {
+                        final ContentAssistStrategy strategy =
+                                ContentAssistParser.getPrefix(documentPosition
+                                        - elExpression.getDocumentContext()
+                                                .getDocumentPosition() + 1,
+                                        elExpression.getText());
 
-				if (regionType != null
-						&& resolver.matchesRelative(new String[] {DOMRegionContext.XML_TAG_ATTRIBUTE_VALUE}))
-				{
+                        if (strategy != null)
+                        {
+                            proposals.addAll(strategy.getProposals(context));
+                        }
+                        Collections.sort(proposals, new ProposalComparator());
+                    }
+                }
+                catch (ViewHandlerException e)
+                {
+                    JSFUiPlugin.log(IStatus.ERROR, "During el resolution", e);
+                }
+            }
+        }
 
-					String elText = null;
+        return proposals.toArray(new ICompletionProposal[0]);
+    }
 
-					// if we are in the EL content, then get the current region text
-					if (DOMJSPRegionContexts.JSP_VBL_CONTENT.equals(regionType))
-					{
-						elText = resolver.getRegionText().trim();
-					}
-					// otherwise, we may be at the end of a content region but at
-					// the beginning of a closing brace so check to see if the previous
-					// region was a VBL_CONTENT
-					// TODO: this search algorithm may need improvement
-					else if (regionType.equals(DOMJSPRegionContexts.JSP_VBL_CLOSE))
-					{
-						final IStructuredDocumentContext previousContext =
-							resolver.getPreviousContext();
+    public IContextInformation[] computeContextInformation(
+            final ITextViewer viewer, final int offset)
+    {
+        // no context info
+        return null;
+    }
 
-						final ITextRegionContextResolver prevResolver =
-							IStructuredDocumentContextResolverFactory.INSTANCE.getTextRegionResolver(previousContext);
+    public char[] getCompletionProposalAutoActivationCharacters()
+    {
+        // auto activate when user hits a '.'
+        return new char[]
+        { '.' };
+    }
 
-						if (prevResolver != null)
-						{
-                            if (DOMJSPRegionContexts.JSP_VBL_CONTENT.equals(prevResolver.getRegionType()))
-                            {
-    							resolver = prevResolver;
-    							elText = prevResolver.getRegionText().trim();
-                            }
-                            else if (DOMJSPRegionContexts.JSP_VBL_OPEN.equals(prevResolver.getRegionType()))
-                            {
-                                elText = ""; //$NON-NLS-1$
-                            }
-						}
-					}
+    public char[] getContextInformationAutoActivationCharacters()
+    {
+        // no auto-activation for context info
+        return null;
+    }
 
+    public String getErrorMessage()
+    {
+        // don't flag errors
+        return null;
+    }
 
-					final ContentAssistStrategy strategy =
-                        ContentAssistParser.getPrefix(documentPosition - resolver.getStartOffset() + 1, elText);
-
-					if (strategy != null) {
-						proposals.addAll(strategy.getProposals(context));
-					}
-				}
-			}
-		}
-
-        Collections.sort(proposals, new ProposalComparator());
-		return proposals.toArray(new ICompletionProposal[0]);
-	}
-
-
-	public IContextInformation[] computeContextInformation(final ITextViewer viewer,
-			final int offset) {
-		// no context info
-		return null;
-	}
-
-	public char[] getCompletionProposalAutoActivationCharacters() {
-		// auto activate when user hits a '.'
-		return new char[] {'.'};
-	}
-
-	public char[] getContextInformationAutoActivationCharacters() {
-		// no auto-activation for context info
-		return null;
-	}
-
-	public String getErrorMessage() {
-		// don't flag errors
-		return null;
-	}
-
-	public IContextInformationValidator getContextInformationValidator() {
-		// don't validate context information
-		return null;
-	}
+    public IContextInformationValidator getContextInformationValidator()
+    {
+        // don't validate context information
+        return null;
+    }
 }

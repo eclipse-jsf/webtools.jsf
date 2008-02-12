@@ -98,7 +98,7 @@ public class JSFContentAssistProcessor implements IContentAssistProcessor {
 							Node tagElement = attr.getOwnerElement();
 							if (tagElement != null) {
 								String uri = tlResolver.getTagURIForNodeName(tagElement);
-								if (uri != null) {									
+								if (uri != null) {
 									proposals = createProposals(context, uri, tagElement, attr);
 								}
 							}

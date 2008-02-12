@@ -17,6 +17,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.jst.jsf.common.dom.AttributeIdentifier;
 import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.Trait;
 import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
@@ -108,6 +109,28 @@ public final class MetaDataEnabledProcessingFactory {
 
 	}
 
+	/**
+	 * A convience method fully equivalent to:
+	 * 
+	 *     getAttributeValueRuntimeTypeFeatureProcessors
+     *      (featureType, sdContext, attributeId.getTagIdentifier().getUri()
+     *           , attributeId.getTagIdentifier().getTagName(), 
+     *           attributeId.getName())
+	 * @param featureType
+	 * @param sdContext
+	 * @param attributeId
+	 * @return the meta-data enabled feature
+	 */
+	public List<IMetaDataEnabledFeature> getAttributeValueRuntimeTypeFeatureProcessors(
+            Class featureType, IStructuredDocumentContext sdContext,
+            AttributeIdentifier attributeId)
+    {
+	    return getAttributeValueRuntimeTypeFeatureProcessors
+	    (featureType, sdContext, attributeId.getTagIdentifier().getUri()
+	            , attributeId.getTagIdentifier().getTagName(), 
+	            attributeId.getName());
+    }
+	
 	/**
 	 * @param featureType
 	 * @param sdContext

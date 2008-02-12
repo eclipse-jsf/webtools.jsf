@@ -8,8 +8,14 @@ Bundle-Localization: plugin
 Export-Package: org.eclipse.jst.jsf.common;x-internal:=true,
  org.eclipse.jst.jsf.common.dom,
  org.eclipse.jst.jsf.common.internal;x-friends:="org.eclipse.jst.jsf.core",
- org.eclipse.jst.jsf.common.internal.types;x-friends:="org.eclipse.jst.jsf.core,org.eclipse.jst.jsf.core.tests,org.eclipse.jst.jsf.validation.el.tests,org.eclipse.jst.jsf.designtime.tests,org.eclipse.jst.jsf.context.symbol.tests",
+ org.eclipse.jst.jsf.common.internal.policy,
  org.eclipse.jst.jsf.common.internal.resource;x-friends:="org.eclipse.jst.jsf.core.tests",
+ org.eclipse.jst.jsf.common.internal.types;
+  x-friends:="org.eclipse.jst.jsf.core,
+   org.eclipse.jst.jsf.core.tests,
+   org.eclipse.jst.jsf.validation.el.tests,
+   org.eclipse.jst.jsf.designtime.tests,
+   org.eclipse.jst.jsf.context.symbol.tests",
  org.eclipse.jst.jsf.common.metadata,
  org.eclipse.jst.jsf.common.metadata.internal;x-friends:="org.eclipse.jst.jsf.metadata.tests",
  org.eclipse.jst.jsf.common.metadata.internal.impl;x-internal:=true,
@@ -49,6 +55,6 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.2.0,4.0.0)",
  org.eclipse.emf.edit.ui;bundle-version="[2.2.0,3.0.0)",
  org.eclipse.emf.ecore.xmi;bundle-version="[2.2.0,3.0.0)",
  org.eclipse.jdt.ui;bundle-version="[3.2.0,4.0.0)"
-Eclipse-LazyStart: true
+Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %plugin.provider
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

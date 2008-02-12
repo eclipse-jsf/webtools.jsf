@@ -36,6 +36,10 @@ public class TLDComponentTagElement extends TLDJSFTagElement implements
     {
         return TagType.COMPONENT;
     }
-    
-    
+
+    @Override
+    public String toString()
+    {
+        return _componentTypeInfo.toString();
+    }
 }
