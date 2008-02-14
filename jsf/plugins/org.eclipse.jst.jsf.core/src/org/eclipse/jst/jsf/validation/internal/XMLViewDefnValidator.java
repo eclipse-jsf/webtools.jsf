@@ -142,7 +142,7 @@ public class XMLViewDefnValidator implements IJSFViewValidator
             IStructuredDocumentRegion[] regions, IValidationReporter reporter)
     {
         final JSFValidationContext jsfValidationContext =
-            createValidationContext(false, viewFile, reporter);
+            createValidationContext(true, viewFile, reporter);
 
         if (jsfValidationContext == null)
         {

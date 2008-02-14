@@ -4,7 +4,9 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.jst.jsf.common.dom.AttrDOMAdapter;
 import org.eclipse.jst.jsf.common.dom.AttributeIdentifier;
@@ -26,8 +28,6 @@ import org.eclipse.jst.jsp.core.internal.regions.DOMJSPRegionContexts;
 import org.eclipse.wst.sse.core.internal.provisional.text.ITextRegion;
 import org.eclipse.wst.sse.core.internal.provisional.text.ITextRegionCollection;
 import org.eclipse.wst.sse.core.internal.provisional.text.ITextRegionList;
-import org.eclipse.wst.validation.internal.operations.LocalizedMessage;
-import org.eclipse.wst.validation.internal.provisional.core.IMessage;
 import org.eclipse.wst.xml.core.internal.regions.DOMRegionContext;
 
 /**
@@ -257,10 +257,11 @@ public class AttributeValidatingStrategy extends
                 }
                 catch (final ELIsNotValidException e)
                 {
-                    IMessage message = createValidationMessage(context, attributeVal,
-                            IMessage.NORMAL_SEVERITY, e.getMessage(),
-                            _validationContext.getFile());
-                    _validationContext.reportFinding(message);
+                    reportValidationMessage(
+                            createValidationMessage(context, attributeVal,
+                                    IStatus.WARNING, e.getMessage(),
+                                    _validationContext.getFile()), context,
+                            attributeVal);
                 }
             }
         }
@@ -322,15 +323,10 @@ public class AttributeValidatingStrategy extends
                     {
                         final IValidationMessage msg = (IValidationMessage) msgs
                                 .next();
-                        final IMessage message = createValidationMessage(
-                                context, attributeValue, JSFValidationContext
-                                        .getSeverity(msg.getSeverity()), msg
+                        reportValidationMessage(createValidationMessage
+                                (context, attributeValue, msg.getSeverity(), msg
                                         .getMessage(), _validationContext
-                                        .getFile());
-                        if (message != null)
-                        {
-                            _validationContext.reportFinding(message);
-                        }
+                                        .getFile()), context, attributeValue);
                     }
                 }
                 else if (DEBUG)
@@ -355,21 +351,15 @@ public class AttributeValidatingStrategy extends
         _validationContext.getReporter().report(problem, start, length);
     }
 
-    private IMessage createValidationMessage(
+    private Diagnostic createValidationMessage(
             final IStructuredDocumentContext context,
             final String attributeValue, final int severity, final String msg,
             final IFile file)
     {
-        final IMessage message = new LocalizedMessage(severity, msg, file);
-        if (message != null)
-        {
-            final int start = context.getDocumentPosition() + 1;
-            final int length = attributeValue.length();
-
-            message.setOffset(start);
-            message.setLength(length);
-        }
-        return message;
+        // TODO: need factory
+        final Diagnostic diagnostic =
+            new BasicDiagnostic(severity, "", -1, msg, null);
+        return diagnostic;
     }
 
     private String addDebugSpacer(final int count)

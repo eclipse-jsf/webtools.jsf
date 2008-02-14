@@ -37,11 +37,21 @@ public final class ValidationMessageFactory
      */
     public static Message createFromDiagnostic(final Diagnostic diagnostic, final int offset, final int length, final IFile file, final ValidationPreferences prefs)
     {
-        final ELValidationPreferences elPrefs =
-            prefs.getElPrefs();
 
-        final int severity =
-            elPrefs.getDiagnosticSeverity(diagnostic.getCode());
+        final int code = diagnostic.getCode();
+        
+        int severity = diagnostic.getSeverity();
+
+        // XXX: this is a temporary solution.  We need a way to allow 
+        // severity overrides from default that is decoupled from the
+        // factory or code value for a diagnostic
+        if (code >= 0)
+        {
+            final ELValidationPreferences elPrefs =
+                prefs.getElPrefs();
+            severity =
+                elPrefs.getDiagnosticSeverity(code);
+        }
 
         final Message message =
             new MyLocalizedMessage(

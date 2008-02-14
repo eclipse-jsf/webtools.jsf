@@ -1,12 +1,10 @@
 package org.eclipse.jst.jsf.validation.internal;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jst.jsf.designtime.internal.view.IDTViewHandler;
 import org.eclipse.jst.jsf.designtime.resolver.IStructuredDocumentSymbolResolverFactory;
 import org.eclipse.jst.jsf.validation.internal.IJSFViewValidator.IValidationReporter;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
-import org.eclipse.wst.validation.internal.provisional.core.IMessage;
 
 /**
  * A context object used pass JSF validation information around. Not related to
@@ -24,30 +22,6 @@ public final class JSFValidationContext
     private final IFile                 _file;
     private final IValidationReporter   _reporter;
     private final IStructuredDocumentSymbolResolverFactory _symbolResolverFactory;
-
-    /**
-     * TODO: don't know if this belongs here.
-     * 
-     * Maps IStatus codes to IMessage severity
-     * 
-     * @param severity
-     *            codesseverity
-     * @return IMessage severity
-     */
-    public static int getSeverity(final int severity)
-    {
-
-        switch (severity)
-        {
-            case IStatus.ERROR:
-                return IMessage.HIGH_SEVERITY;
-            case IStatus.WARNING:
-                return IMessage.NORMAL_SEVERITY;
-            case IStatus.INFO:
-                return IMessage.LOW_SEVERITY;
-        }
-        return IMessage.NORMAL_SEVERITY;
-    }
 
     /**
      * @param isIncremental --
@@ -92,17 +66,6 @@ public final class JSFValidationContext
         return _prefs.getElPrefs().isEnableBuildValidation();
     }
 
-    /**
-     * @param message
-     * @deprecated internal deprecation.  Must all be moved to IValidation-based
-     */
-    public final void reportFinding(final IMessage message)
-    {
-        if ((message.getSeverity() & IMessage.ALL_MESSAGES) != 0)
-        {
-            _reporter.report(message);
-        }
-    }
 
     /**
      * @return the view handler

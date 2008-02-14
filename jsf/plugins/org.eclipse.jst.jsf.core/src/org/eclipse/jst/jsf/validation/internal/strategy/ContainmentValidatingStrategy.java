@@ -181,7 +181,7 @@ public class ContainmentValidatingStrategy extends
                                 .next();
 
                         reportContainmentProblem(context, node.getNodeName(),
-                                Diagnostic.WARNING, node.getNodeName(),
+                                Diagnostic.WARNING, 
                                 missingParent.getTagName(), missingParent
                                         .getUri());
                     }
@@ -196,18 +196,20 @@ public class ContainmentValidatingStrategy extends
     // TODO: need a diagnostic factory
     private void reportContainmentProblem(
             final IStructuredDocumentContext context,
-            final String attributeValue, final int severity, 
-            final String nodeName, final String tagName, final String uri)
+            final String nodeName, final int severity, 
+             final String tagName, final String uri)
     {
 
         final String msg = MessageFormat.format(
                 MESSAGE_PATTERN, new Object[]
                                            {nodeName, tagName, uri});
-            
+
         final Diagnostic problem = 
             new BasicDiagnostic(severity, "", -1, msg, null);
-        final int start = context.getDocumentPosition();
-        final int length = attributeValue.length();
+        // add one so that the start offset is at the node name, rather
+        // than the opening brace.
+        final int start = context.getDocumentPosition()+1;
+        final int length = nodeName.length();
 
        _jsfValidationContext.getReporter().report(problem, start, length);
     }
