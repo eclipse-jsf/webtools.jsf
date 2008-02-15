@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<md:metadatamodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" 
+	xmlns:md="http://org.eclipse.jst.jsf.common.metadata/metadata.ecore"
+	xmlns:dti="http://org.eclipse.jsf.pagedesigner/dtinfo.ecore"
+	id="http://myfaces.apache.org/trinidad/html"
+	type="tagFile">
+
+	<entity id="body" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info>
+					<operation id="org.eclipse.jst.pagedesigner.CreateElementOperation">
+						<parameter value="body"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CopyAttributeWithRenameOperation">
+						<parameter value="styleClass"/>
+						<parameter value="class"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CopyAttributeWithRenameOperation">
+						<parameter value="inlineStyle"/>
+						<parameter value="style"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.IfNotOperation">
+						<parameter value="@styleClass"/>
+						<operation id="org.eclipse.jst.pagedesigner.IfNotOperation">
+							<parameter value="@inlineStyle"/>
+							<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
+								<parameter value="style"/>
+								<parameter value="background-color:#ffffff;font-family:Arial,Helvetica,Geneva,sans-serif;"/>
+							</operation>
+						</operation>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CopyChildrenOperation"/>
+				</tag-convert-info>
+				<tag-decorate-info id="vpd-decorate-design"
+					needBorderDecorator="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="head" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info>
+					<operation id="org.eclipse.jst.pagedesigner.CreateElementOperation">
+						<parameter value="head"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.IfOperation">
+						<parameter value="@title"/>
+						<operation id="org.eclipse.jst.pagedesigner.AppendChildElementOperation">
+							<parameter value="title"/>
+						</operation>
+						<operation id="org.eclipse.jst.pagedesigner.AppendChildTextFromXPathOperation">
+							<parameter value="@title"/>
+						</operation>
+						<operation id="org.eclipse.jst.pagedesigner.MakeParentElementCurrentOperation"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CopyChildrenOperation"/>
+				</tag-convert-info>
+				<tag-decorate-info id="vpd-decorate-design"
+					needBorderDecorator="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="html" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info>
+					<operation id="org.eclipse.jst.pagedesigner.CreateElementOperation">
+						<parameter value="html"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CopyChildrenOperation"/>
+				</tag-convert-info>
+				<tag-decorate-info id="vpd-decorate-design"
+					needBorderDecorator="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="styleSheet" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-decorate-info id="vpd-decorate-design"
+					nonVisual="true"
+					nonVisualImagePath="icons/small/styleSheet.gif"
+					widget="true"
+				/>
+				<tag-decorate-info id="vpd-decorate-preview"
+					nonVisual="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+</md:metadatamodel>

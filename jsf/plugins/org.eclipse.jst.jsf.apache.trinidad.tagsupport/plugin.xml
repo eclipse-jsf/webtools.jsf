@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.jst.jsf.common.standardMetaDataFiles">
+      <standardMetaDataFile
+            location="/metadata/trinidad_dti.xml"
+            uri="http://myfaces.apache.org/trinidad">
+      </standardMetaDataFile>
+      <standardMetaDataFile
+            location="/metadata/trinidad_html_dti.xml"
+            uri="http://myfaces.apache.org/trinidad/html">
+      </standardMetaDataFile>
+   </extension>
+
+</plugin>
