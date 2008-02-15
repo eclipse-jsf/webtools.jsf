@@ -58,6 +58,10 @@ public final class TransformOperationFactory {
 	 */
 	public static final String OP_CopyAttributeOperation = PDPlugin.getPluginId()+".CopyAttributeOperation"; //$NON-NLS-1$
 	/**
+	 * CopyAttributeWithRenameOperation
+	 */
+	public static final String OP_CopyAttributeWithRenameOperation = PDPlugin.getPluginId()+".CopyAttributeWithRenameOperation"; //$NON-NLS-1$
+	/**
 	 * CopyChildrenOperation
 	 */
 	public static final String OP_CopyChildrenOperation = PDPlugin.getPluginId()+".CopyChildrenOperation"; //$NON-NLS-1$

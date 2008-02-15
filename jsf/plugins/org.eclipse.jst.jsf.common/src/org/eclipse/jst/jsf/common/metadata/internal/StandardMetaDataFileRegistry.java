@@ -267,6 +267,21 @@ class StandardMetaDataFilesProvider implements IMetaDataSourceModelProvider {
 				}
 				
 			};
+		} else if (klass == IResourceURLProvider.class) {
+			return new IResourceURLProvider() {
+
+				public URL getResourceURL(String resourcePath) {
+					URL resourceURL = null;
+					String bundleID = mdp.getFileLocator().getFileInfo().getBundleId();
+					try {
+						resourceURL = FileLocator.resolve(Platform.getBundle(bundleID).getResource(resourcePath));
+					} catch (IOException ioe) {
+						//do nothing, will return null resourceURL
+					}
+					return resourceURL;
+				}
+
+			};
 		}
 		return null;
 	}

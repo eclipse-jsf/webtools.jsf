@@ -10,9 +10,13 @@
  *******************************************************************************/ 
 package org.eclipse.jst.pagedesigner.dtmanager.converter.internal;
 
+import java.net.URL;
+
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jst.jsf.common.metadata.Trait;
 import org.eclipse.jst.jsf.common.metadata.internal.IImageDescriptorProvider;
+import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider;
+import org.eclipse.jst.jsf.common.metadata.internal.IResourceURLProvider;
 import org.eclipse.jst.pagedesigner.converter.IConverterFactory;
 import org.eclipse.jst.pagedesigner.converter.ITagConverter;
 import org.eclipse.jst.pagedesigner.dtmanager.DTManager;
@@ -35,6 +39,7 @@ public class DTTagConverterDecorator implements ITagConverterDecorator {
 
 	private static final String DECORATE_INFO_ID_DESIGN = "vpd-decorate-design";
 	private static final String DECORATE_INFO_ID_PREVIEW = "vpd-decorate-preview";
+	private static final String MD_PLUGIN_LOCATION = "$metadata-plugin-location$";
 
 	/*
 	 * (non-Javadoc)
@@ -79,7 +84,7 @@ public class DTTagConverterDecorator implements ITagConverterDecorator {
 					setNonVisual(dtTagConverter, dtInfo, tdInfo.getNonVisualImagePath());
 				}
 				if (tdInfo.isResolveChildText()) {
-					resolveChildText(dtTagConverter.getResultElement());
+					resolveChildText(dtTagConverter.getResultElement(), dtInfo);
 				}
 				if (tdInfo.isSetNonVisualChildElements()) {
 					setNonVisualChildElements(dtTagConverter, srcElement);
@@ -91,7 +96,7 @@ public class DTTagConverterDecorator implements ITagConverterDecorator {
 				if (resAttrValue != null) {
 					String attributeName = resAttrValue.getAttributeName();
 					if (attributeName != null && attributeName.length() > 0) {
-						resolveAttributeValue(dtTagConverter.getResultElement(), attributeName);
+						resolveAttributeValue(dtTagConverter.getResultElement(), attributeName, dtInfo);
 					}
 				}
 			}
@@ -136,8 +141,9 @@ public class DTTagConverterDecorator implements ITagConverterDecorator {
 	 * 
 	 * @param srcElement Source Element for which child Text Node EL resolution
 	 * is to be performed.
+	 * @param dtInfo IDTInfo instance.
 	 */
-	protected void resolveChildText(Element srcElement) {
+	protected void resolveChildText(Element srcElement, IDTInfo dtInfo) {
 		if (srcElement != null) {
 			NodeList childNodes = srcElement.getChildNodes();
 			for (int i = 0; i < childNodes.getLength(); i++) {
@@ -146,8 +152,17 @@ public class DTTagConverterDecorator implements ITagConverterDecorator {
 					Text textNode = (Text)childNode;
 					String textNodeValue = textNode.getNodeValue();
 					try {
-						String newTextNodeValue = (String)PageExpressionContext.getCurrent().evaluateExpression(textNodeValue, String.class, null);
-						if (!textNodeValue.equals(newTextNodeValue)) {
+						String newTextNodeValue;
+						if (textNodeValue.startsWith(MD_PLUGIN_LOCATION)) {
+							Trait trait = dtInfo.getTrait();
+							IMetaDataSourceModelProvider mdSourceModelProvider = trait.getSourceModelProvider();
+							IResourceURLProvider resourceURLProvider = (IResourceURLProvider)mdSourceModelProvider.getAdapter(IResourceURLProvider.class);
+							URL url = resourceURLProvider.getResourceURL((textNodeValue.substring(MD_PLUGIN_LOCATION.length())));
+							newTextNodeValue = url.toExternalForm();
+						} else {
+							newTextNodeValue = (String)PageExpressionContext.getCurrent().evaluateExpression(textNodeValue, String.class, null);
+						}
+						if (newTextNodeValue != null && !textNodeValue.equals(newTextNodeValue)) {
 							textNode.setNodeValue(newTextNodeValue);
 						}
 					} catch(Exception ex) {
@@ -165,14 +180,24 @@ public class DTTagConverterDecorator implements ITagConverterDecorator {
 	 * @param srcElement Source Element instance.
 	 * @param attributeName Name of attribute for which the value should be
 	 * resolved.
+	 * @param dtInfo IDTInfo instance.
 	 */
-	protected void resolveAttributeValue(Element srcElement, String attributeName) {
+	protected void resolveAttributeValue(Element srcElement, String attributeName, IDTInfo dtInfo) {
 		if (srcElement != null) {
 			String oldAttributeValue = srcElement.getAttribute(attributeName);
 			if (oldAttributeValue != null && oldAttributeValue.length() > 0) {
 				try {
-					String newAttributeValue = (String)PageExpressionContext.getCurrent().evaluateExpression(oldAttributeValue, String.class, null);
-					if (!oldAttributeValue.equals(newAttributeValue)) {
+					String newAttributeValue;
+					if (oldAttributeValue.startsWith(MD_PLUGIN_LOCATION)) {
+						Trait trait = dtInfo.getTrait();
+						IMetaDataSourceModelProvider mdSourceModelProvider = trait.getSourceModelProvider();
+						IResourceURLProvider resourceURLProvider = (IResourceURLProvider)mdSourceModelProvider.getAdapter(IResourceURLProvider.class);
+						URL url = resourceURLProvider.getResourceURL((oldAttributeValue.substring(MD_PLUGIN_LOCATION.length())));
+						newAttributeValue = url.toExternalForm();
+					} else {
+						newAttributeValue = (String)PageExpressionContext.getCurrent().evaluateExpression(oldAttributeValue, String.class, null);
+					}
+					if (newAttributeValue != null && !oldAttributeValue.equals(newAttributeValue)) {
 						srcElement.setAttribute(attributeName, newAttributeValue);
 					}
 				} catch(Exception ex) {

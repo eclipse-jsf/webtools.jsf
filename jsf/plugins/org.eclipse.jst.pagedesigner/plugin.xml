@@ -81,6 +81,10 @@
         id="CopyAttributeOperation">
   </tagTransformOperation>
     <tagTransformOperation
+          class="org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.CopyAttributeWithRenameOperation"
+          id="CopyAttributeWithRenameOperation">
+    </tagTransformOperation>
+    <tagTransformOperation
         class="org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.CopyChildrenOperation"
         id="CopyChildrenOperation">
   </tagTransformOperation>
