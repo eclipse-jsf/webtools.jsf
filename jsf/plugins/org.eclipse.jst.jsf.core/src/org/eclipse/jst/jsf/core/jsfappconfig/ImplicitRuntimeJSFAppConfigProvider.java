@@ -95,7 +95,6 @@ public class ImplicitRuntimeJSFAppConfigProvider extends AbstractJSFAppConfigPro
 		components.add(createUIComponent("Input")); //$NON-NLS-1$
 		components.add(createUIComponent("Message")); //$NON-NLS-1$
 		components.add(createUIComponent("Messages")); //$NON-NLS-1$
-        components.add(createUIComponent("NamingContainer")); //$NON-NLS-1$
 		components.add(createUIComponent("Output")); //$NON-NLS-1$
 		components.add(createUIComponent("Panel")); //$NON-NLS-1$
 		components.add(createUIComponent("Parameter")); //$NON-NLS-1$
