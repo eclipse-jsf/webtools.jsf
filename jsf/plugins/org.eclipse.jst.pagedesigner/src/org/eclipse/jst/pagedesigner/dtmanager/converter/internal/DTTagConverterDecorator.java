@@ -6,11 +6,16 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *    Ian Trimble - initial API and implementation
+ *    Oracle Corporation - initial API and implementation
  *******************************************************************************/ 
 package org.eclipse.jst.pagedesigner.dtmanager.converter.internal;
 
 import java.net.URL;
+
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jst.jsf.common.metadata.Trait;
@@ -37,17 +42,17 @@ import org.w3c.dom.Text;
  */
 public class DTTagConverterDecorator implements ITagConverterDecorator {
 
-	private static final String DECORATE_INFO_ID_DESIGN = "vpd-decorate-design";
-	private static final String DECORATE_INFO_ID_PREVIEW = "vpd-decorate-preview";
-	private static final String MD_PLUGIN_LOCATION = "$metadata-plugin-location$";
+	private static final String DECORATE_INFO_ID_DESIGN = "vpd-decorate-design"; //$NON-NLS-1$
+	private static final String DECORATE_INFO_ID_PREVIEW = "vpd-decorate-preview"; //$NON-NLS-1$
+	private static final String MD_PLUGIN_LOCATION = "$metadata-plugin-location$"; //$NON-NLS-1$
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.internal.provisional.ITagConverterDecorator#decorate(org.eclipse.jst.pagedesigner.converter.ITagConverter)
+	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.ITagConverterDecorator#decorate(org.eclipse.jst.pagedesigner.converter.ITagConverter)
 	 */
 	public void decorate(ITagConverter tagConverter) {
 		if (!(tagConverter instanceof DTTagConverter)) {
-			throw new IllegalArgumentException("ITagConverter argument must be an instance of DTTagConverter");
+			throw new IllegalArgumentException("ITagConverter argument must be an instance of DTTagConverter"); //$NON-NLS-1$
 		}
 		DTTagConverter dtTagConverter = (DTTagConverter)tagConverter;
 
@@ -109,9 +114,9 @@ public class DTTagConverterDecorator implements ITagConverterDecorator {
 	 * @param dtTagConverter DTTagConverter instance.
 	 */
 	protected void createUnknownTagRepresentation(DTTagConverter dtTagConverter) {
-		Element element = dtTagConverter.createElement("span");
-		element.setAttribute("style", "color:red;font-weight:bold;");
-		Text text = dtTagConverter.createText("<" + dtTagConverter.getHostElement().getTagName() + "/>");
+		Element element = dtTagConverter.createElement("span"); //$NON-NLS-1$
+		element.setAttribute("style", "color:red;font-weight:bold;"); //$NON-NLS-1$ //$NON-NLS-2$
+		Text text = dtTagConverter.createText("<" + dtTagConverter.getHostElement().getTagName() + "/>"); //$NON-NLS-1$ //$NON-NLS-2$
 		element.appendChild(text);
 		dtTagConverter.setResultElement(element);
 		dtTagConverter.setWidget(true);
@@ -153,12 +158,8 @@ public class DTTagConverterDecorator implements ITagConverterDecorator {
 					String textNodeValue = textNode.getNodeValue();
 					try {
 						String newTextNodeValue;
-						if (textNodeValue.startsWith(MD_PLUGIN_LOCATION)) {
-							Trait trait = dtInfo.getTrait();
-							IMetaDataSourceModelProvider mdSourceModelProvider = trait.getSourceModelProvider();
-							IResourceURLProvider resourceURLProvider = (IResourceURLProvider)mdSourceModelProvider.getAdapter(IResourceURLProvider.class);
-							URL url = resourceURLProvider.getResourceURL((textNodeValue.substring(MD_PLUGIN_LOCATION.length())));
-							newTextNodeValue = url.toExternalForm();
+						if (textNodeValue.contains(MD_PLUGIN_LOCATION)) {
+							newTextNodeValue = resolveMDPluginLocation(textNodeValue, dtInfo);
 						} else {
 							newTextNodeValue = (String)PageExpressionContext.getCurrent().evaluateExpression(textNodeValue, String.class, null);
 						}
@@ -184,21 +185,34 @@ public class DTTagConverterDecorator implements ITagConverterDecorator {
 	 */
 	protected void resolveAttributeValue(Element srcElement, String attributeName, IDTInfo dtInfo) {
 		if (srcElement != null) {
-			String oldAttributeValue = srcElement.getAttribute(attributeName);
+			Element targetElement = srcElement;
+			String targetAttributeName = attributeName;
+			//determine if attributeName is XPath and re-target as appropriate
+			if (attributeName.contains("/")) { //$NON-NLS-1$
+				int lastSlashPos = attributeName.lastIndexOf("/"); //$NON-NLS-1$
+				String xPathExpression = attributeName.substring(0, lastSlashPos);
+				XPath xPath = XPathFactory.newInstance().newXPath();
+				try {
+					Object resultObject = xPath.evaluate(xPathExpression, srcElement, XPathConstants.NODE);
+					if (resultObject instanceof Element) {
+						targetElement = (Element)resultObject;
+						targetAttributeName = attributeName.substring(lastSlashPos + 1);
+					}
+				} catch(XPathExpressionException xee) {
+					//could not evaluate - leave targetElement and targetAttributeName unchanged
+				}
+			}
+			String oldAttributeValue = targetElement.getAttribute(targetAttributeName);
 			if (oldAttributeValue != null && oldAttributeValue.length() > 0) {
 				try {
 					String newAttributeValue;
-					if (oldAttributeValue.startsWith(MD_PLUGIN_LOCATION)) {
-						Trait trait = dtInfo.getTrait();
-						IMetaDataSourceModelProvider mdSourceModelProvider = trait.getSourceModelProvider();
-						IResourceURLProvider resourceURLProvider = (IResourceURLProvider)mdSourceModelProvider.getAdapter(IResourceURLProvider.class);
-						URL url = resourceURLProvider.getResourceURL((oldAttributeValue.substring(MD_PLUGIN_LOCATION.length())));
-						newAttributeValue = url.toExternalForm();
+					if (oldAttributeValue.contains(MD_PLUGIN_LOCATION)) {
+						newAttributeValue = resolveMDPluginLocation(oldAttributeValue, dtInfo);
 					} else {
 						newAttributeValue = (String)PageExpressionContext.getCurrent().evaluateExpression(oldAttributeValue, String.class, null);
 					}
 					if (newAttributeValue != null && !oldAttributeValue.equals(newAttributeValue)) {
-						srcElement.setAttribute(attributeName, newAttributeValue);
+						targetElement.setAttribute(targetAttributeName, newAttributeValue);
 					}
 				} catch(Exception ex) {
 					//ignore - could not resolve, do not change existing value
@@ -208,13 +222,38 @@ public class DTTagConverterDecorator implements ITagConverterDecorator {
 	}
 
 	/**
+	 * Resolves any instance of MD_PLUGIN_LOCATION in input String.
+	 * 
+	 * @param input Input String.
+	 * @param dtInfo IDTInfo instance.
+	 * @return Input String with any instance of MD_PLUGIN_LOCATION resolved.
+	 */
+	protected String resolveMDPluginLocation(String input, IDTInfo dtInfo) {
+		String output = input;
+		if (input != null && input.contains(MD_PLUGIN_LOCATION)) {
+			int tokenStart = input.indexOf(MD_PLUGIN_LOCATION);
+			int tokenEnd = tokenStart + MD_PLUGIN_LOCATION.length();
+			String prefix = input.substring(0, tokenStart);
+			String suffix = input.substring(tokenEnd);
+			Trait trait = dtInfo.getTrait();
+			IMetaDataSourceModelProvider mdSourceModelProvider = trait.getSourceModelProvider();
+			IResourceURLProvider resourceURLProvider = (IResourceURLProvider)mdSourceModelProvider.getAdapter(IResourceURLProvider.class);
+			URL url = resourceURLProvider.getResourceURL("/META-INF/"); //$NON-NLS-1$
+			String resolvedToken = url.toExternalForm();
+			resolvedToken = resolvedToken.substring(0, resolvedToken.length() - 10);
+			output = prefix + resolvedToken + suffix;
+		}
+		return output;
+	}
+
+	/**
 	 * Sets DTTagConverter instance as non-visual as HTML and sets the
 	 * ImageDescriptor instance that DTTagConverter will use to return an Image
 	 * for rendering.
 	 * 
 	 * @param dtTagConverter DTTagConverter instance.
 	 * @param dtInfo IDTInfo instance.
-	 * @param imagePath Image path, relative to declaring plugin.
+	 * @param imagePath Image path, relative to declaring plug-in.
 	 */
 	protected void setNonVisual(DTTagConverter dtTagConverter, IDTInfo dtInfo, String imagePath) {
 		dtTagConverter.setVisualByHTML(false);
