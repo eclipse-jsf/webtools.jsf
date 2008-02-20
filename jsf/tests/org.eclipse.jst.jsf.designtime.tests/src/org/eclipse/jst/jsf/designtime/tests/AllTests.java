@@ -69,7 +69,8 @@ public class AllTests {
         suite.addTestSuite(TestDefaultDTVariableResolver.class);
         suite.addTestSuite(TestDTJSPExternalContext.class);
         suite.addTestSuite(TestJSPDefaultSymbolFactory.class);
-        suite.addTestSuite(TestJSPModelProcessor.class);
+        // see https://bugs.eclipse.org/bugs/show_bug.cgi?id=219215
+        //        suite.addTestSuite(TestJSPModelProcessor.class);
         suite.addTestSuite(TestStartupHandler.class);
         suite.addTestSuite(TestDesignTimeApplicationManager.class);
         suite.addTestSuite(TestJSPViewDefnAdapter.class);
