@@ -335,7 +335,7 @@ public class JSFAppConfigUtils {
 								String libraryPathString = libraryPath.toString();
 								JarFile jarFile = null;
 								try {
-									jarFile = new JarFile(libraryPathString);
+									jarFile = new JarFile(libraryPathString, false);
 									if (jarFile != null) {
 										JarEntry jarEntry = jarFile.getJarEntry(FACES_CONFIG_IN_JAR_PATH);
 										if (jarEntry != null) {

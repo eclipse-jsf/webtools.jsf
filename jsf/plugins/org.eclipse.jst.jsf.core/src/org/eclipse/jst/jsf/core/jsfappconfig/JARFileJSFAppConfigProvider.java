@@ -164,7 +164,7 @@ public class JARFileJSFAppConfigProvider extends AbstractJSFAppConfigProvider {
 
 		try
 		{
-			jarFile = new JarFile(filename);
+			jarFile = new JarFile(filename, false);
 			ZipEntry entry = jarFile.getEntry("META-INF/faces-config.xml");
 
 			if (entry != null)
