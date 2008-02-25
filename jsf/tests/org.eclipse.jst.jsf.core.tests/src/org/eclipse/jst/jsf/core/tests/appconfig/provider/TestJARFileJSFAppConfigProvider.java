@@ -262,7 +262,7 @@ public class TestJARFileJSFAppConfigProvider extends TestCase
 
             try
             {
-                jarFile = new JarFile(libraryPathString);
+                jarFile = new JarFile(libraryPathString, false);
                 if (jarFile != null)
                 {
                     final JarEntry jarEntry =
