@@ -204,8 +204,8 @@ public final class JSFFacetUninstallDelegate implements IDelegate {
 		private void removeJSFContextParams(final org.eclipse.jst.j2ee.webapplication.WebApp webApp, final org.eclipse.jst.j2ee.webapplication.Servlet servlet) {
 			Iterator it = webApp.getContextParams().iterator();
 			while (it.hasNext()) {
-				ParamValue cp = (ParamValue) it.next();
-				if (cp.getParamName().equals(JSFUtils.JSF_CONFIG_CONTEXT_PARAM)) {
+				org.eclipse.jst.j2ee.common.ParamValue cp = (org.eclipse.jst.j2ee.common.ParamValue) it.next();
+				if (cp.getName().equals(JSFUtils.JSF_CONFIG_CONTEXT_PARAM)) {
 					webApp.getContextParams().remove(cp);
 					break;
 				}
