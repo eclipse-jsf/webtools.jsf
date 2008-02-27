@@ -12,5 +12,12 @@
             uri="http://myfaces.apache.org/trinidad/html">
       </standardMetaDataFile>
    </extension>
+   <extension
+         point="org.eclipse.jst.pagedesigner.pageDesignerExtension">
+      <tagTransformOperation
+            class="org.eclipse.jst.jsf.apache.trinidad.tagsupport.converter.operations.PanelTabbedOperation"
+            id="PanelTabbedOperation">
+      </tagTransformOperation>
+   </extension>
 
 </plugin>

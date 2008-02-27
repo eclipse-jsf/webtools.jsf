@@ -380,6 +380,22 @@
 		</trait>
 	</entity>
 
+	<entity id="panelTabbed" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info>
+					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.PanelTabbedOperation"/>
+				</tag-convert-info>
+				<tag-decorate-info id="vpd-decorate-design"
+					multiLevel="true"
+					needBorderDecorator="true"
+					needTableDecorator="true"
+					widget="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
 	<entity id="separator" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
