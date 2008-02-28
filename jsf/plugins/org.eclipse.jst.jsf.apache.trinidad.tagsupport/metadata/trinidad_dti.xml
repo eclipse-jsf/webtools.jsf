@@ -388,8 +388,6 @@
 				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
 					multiLevel="true"
-					needBorderDecorator="true"
-					needTableDecorator="true"
 					widget="true"
 				/>
 			</value>
@@ -414,6 +412,19 @@
 				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
 					widget="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="showDetailItem" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info>
+					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.ShowDetailItemOperation"/>
+				</tag-convert-info>
+				<tag-decorate-info id="vpd-decorate-design"
+					needBorderDecorator="true"					
 				/>
 			</value>
 		</trait>

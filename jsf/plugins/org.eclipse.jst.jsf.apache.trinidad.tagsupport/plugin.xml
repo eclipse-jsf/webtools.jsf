@@ -18,6 +18,10 @@
             class="org.eclipse.jst.jsf.apache.trinidad.tagsupport.converter.operations.PanelTabbedOperation"
             id="PanelTabbedOperation">
       </tagTransformOperation>
+      <tagTransformOperation
+            class="org.eclipse.jst.jsf.apache.trinidad.tagsupport.converter.operations.ShowDetailItemOperation"
+            id="ShowDetailItemOperation">
+      </tagTransformOperation>
    </extension>
 
 </plugin>

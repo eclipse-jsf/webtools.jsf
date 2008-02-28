@@ -13,6 +13,7 @@ package org.eclipse.jst.jsf.apache.trinidad.tagsupport.converter.operations;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.jst.pagedesigner.converter.ConvertPosition;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.ITransformOperation;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.AbstractTransformOperation;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.TransformOperationFactory;
@@ -66,16 +67,17 @@ public class PanelTabbedOperation extends AbstractTransformOperation {
 				tabsPosition = "both"; //$NON-NLS-1$
 			}
 
+			//need to track where showDetailItem is in relation to "tabs"
+			int showDetailItemConvertPosition = 0;
+
 			//write tabs "above" if specified
 			if ("above".equalsIgnoreCase(tabsPosition) || //$NON-NLS-1$
 					"both".equalsIgnoreCase(tabsPosition)) { //$NON-NLS-1$
 				appendTabs(showDetailItems, spanElement, true);
+				showDetailItemConvertPosition++;
 			}
 
-			//append div for children
-			Element divElement = appendChildElement("div", spanElement); //$NON-NLS-1$
-
-			//copy "disclosed" showDetailItem's children
+			//copy "disclosed" child showDetailItem
 			int disclosedItem = calculateDisclosedShowDetailItem(showDetailItems);
 			int curItem = 0;
 			Iterator<Node> itItems = showDetailItems.iterator();
@@ -84,7 +86,12 @@ public class PanelTabbedOperation extends AbstractTransformOperation {
 				if (disclosedItem == curItem) {
 					if (nodeItem instanceof Element) {
 						Element elemItem = (Element)nodeItem;
-						tagConverterContext.copyChildren(elemItem, divElement);
+						tagConverterContext.addChild(
+								elemItem,
+								new ConvertPosition(
+										spanElement,
+										showDetailItemConvertPosition));
+						break;
 					}
 				}
 				curItem++;
