@@ -10,6 +10,9 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.apache.trinidad.tagsupport;
 
+import org.eclipse.core.runtime.ILog;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -58,6 +61,16 @@ public class TrinidadTagSupportActivator extends AbstractUIPlugin {
 	 */
 	public static TrinidadTagSupportActivator getDefault() {
 		return plugin;
+	}
+
+	/**
+	 * Writes an informational message to this plug-in's log.
+	 * 
+	 * @param message Informational message to be written.
+	 */
+	public static void logInfo(String message) {
+		ILog log = getDefault().getLog();
+		log.log(new Status(IStatus.INFO, PLUGIN_ID, message));
 	}
 
 }

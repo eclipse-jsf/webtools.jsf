@@ -38,6 +38,9 @@
             class="org.eclipse.jst.jsf.apache.trinidad.tagsupport.converter.operations.ShowDetailItemOperation"
             id="ShowDetailItemOperation">
       </tagTransformOperation>
+      <elementEditFactory
+            class="org.eclipse.jst.jsf.apache.trinidad.tagsupport.elementedit.TrinidadCoreElementEditFactory">
+      </elementEditFactory>
    </extension>
 
 </plugin>

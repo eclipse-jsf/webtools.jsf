@@ -34,4 +34,9 @@ public interface ITrinidadConstants {
 	 */
 	public static final String TAG_PANELTABBED = "panelTabbed"; //$NON-NLS-1$
 
+	/**
+	 * Tag name for "showDetailItem".
+	 */
+	public static final String TAG_SHOWDETAILITEM = "showDetailItem"; //$NON-NLS-1$
+
 }

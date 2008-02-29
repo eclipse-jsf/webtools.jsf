@@ -33,6 +33,16 @@ public class ShowDetailItemOperation extends AbstractTransformOperation {
 	@Override
 	public Element transform(Element srcElement, Element curElement) {
 
+		/*
+		 * We need to represent showDetailItem as a container on the design
+		 * canvas, so we need to return a top-level element to contain converted
+		 * child elements. However, at runtime, it is the parent that renders
+		 * the container element for showDetailItem's children. Therefore, we
+		 * need to determine the parent element in order to know what top-level
+		 * element it will render at runtime. There's no obvious way to do this
+		 * using generic operations alone; hence, we need this specialization.
+		 */
+
 		Element topElement = null;
 
 		/*
@@ -71,10 +81,10 @@ public class ShowDetailItemOperation extends AbstractTransformOperation {
 	private static boolean representsTag(
 			Element element, String uri, String tagName) {
 		boolean ret = false;
-		if (element != null) {
+		if (element != null && uri != null && tagName != null) {
 			ret =
-				element.getNamespaceURI().equalsIgnoreCase(uri) &&
-				element.getLocalName().equalsIgnoreCase(tagName);
+				uri.equalsIgnoreCase(element.getNamespaceURI()) &&
+				tagName.equalsIgnoreCase(element.getLocalName());
 		}
 		return ret;
 	}
