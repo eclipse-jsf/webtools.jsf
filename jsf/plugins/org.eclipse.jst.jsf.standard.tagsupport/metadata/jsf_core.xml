@@ -181,7 +181,7 @@
 				<value xsi:type="mdt:ListOfValues">
 					<item>number</item>
 					<item>currency</item>
-					<item>percentage</item>
+					<item>percent</item>
 				</value>
 			</trait>
 			<trait id="default-value">
