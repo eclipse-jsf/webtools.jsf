@@ -5,17 +5,11 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:md="http://org.eclipse.jst.jsf.common.metadata/metadata.ecore"
     xmlns:mdt="http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <trait id="images-base-path">
-    	<value>[IMPLJAR]!org/apache/myfaces/trinidadinternal/metadata/icons</value>
-    </trait>
     <entity id="body" type="tag">
  		<include-entity-group id="common-core-attributes" uri="http://myfaces.apache.org/trinidad"/>
  		<include-entity-group id="common-trinidadh-attributes"/> 
  		<include-entity-group id="common-partialTrigger-attribute"/>
  		<include-entity-group id="common-event-attributes" uri="http://myfaces.apache.org/trinidad"/>
- 		<trait id="small-icon">
- 			<value>body.gif</value>
- 		</trait>
         <entity id="firstClickPassed">
             <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
