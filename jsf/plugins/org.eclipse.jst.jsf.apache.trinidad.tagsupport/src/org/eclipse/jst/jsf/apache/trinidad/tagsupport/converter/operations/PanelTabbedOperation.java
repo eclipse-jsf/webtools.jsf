@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.jst.jsf.apache.trinidad.tagsupport.Messages;
+import org.eclipse.jst.jsf.apache.trinidad.tagsupport.TrinidadUtils;
 import org.eclipse.jst.pagedesigner.converter.ConvertPosition;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.ITransformOperation;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.AbstractTransformOperation;
@@ -57,7 +58,8 @@ public class PanelTabbedOperation extends AbstractTransformOperation {
 
 		//get child showDetailItem elements
 		@SuppressWarnings("unchecked")
-		List<Node> showDetailItems = getChildElements(srcElement, "showDetailItem"); //$NON-NLS-1$
+		List<Node> showDetailItems = getChildElements(
+				srcElement, "showDetailItem"); //$NON-NLS-1$
 		if (showDetailItems.size() > 0) {
 
 			//determine tabs position ("both", "above", or "below" - default "both")
@@ -79,7 +81,8 @@ public class PanelTabbedOperation extends AbstractTransformOperation {
 			}
 
 			//copy "disclosed" child showDetailItem
-			int disclosedItem = calculateDisclosedShowDetailItem(showDetailItems);
+			int disclosedItem =
+				calculateDisclosedShowDetailItem(srcElement, showDetailItems);
 			int curItem = 0;
 			Iterator<Node> itItems = showDetailItems.iterator();
 			while (itItems.hasNext()) {
@@ -144,7 +147,8 @@ public class PanelTabbedOperation extends AbstractTransformOperation {
 			Node nodeItem = itItems.next();
 			if (nodeItem instanceof Element) {
 				Element elemItem = (Element)nodeItem;
-				appendShowDetailItemTD(trElement, elemItem, disclosedItem == curItem);
+				appendShowDetailItemTD(
+						trElement, elemItem, disclosedItem == curItem);
 				if (curItem < showDetailItems.size() - 1) {
 					appendSeparatorTD(trElement);
 				}
@@ -234,6 +238,16 @@ public class PanelTabbedOperation extends AbstractTransformOperation {
 		}
 	}
 
+	private int calculateDisclosedShowDetailItem(
+			Element srcElement, List<Node> showDetailItems) {
+		int disclosedItem = TrinidadUtils.getDisclosedChildIndex(srcElement);
+		if (disclosedItem == -1) {
+			disclosedItem = calculateDisclosedShowDetailItem(showDetailItems);
+			TrinidadUtils.setDisclosedChildIndex(srcElement, disclosedItem);
+		}
+		return disclosedItem;
+	}
+
 	private int calculateDisclosedShowDetailItem(List<Node> showDetailItems) {
 		int disclosedItem = -1;
 		int curItem = 0;
@@ -243,14 +257,15 @@ public class PanelTabbedOperation extends AbstractTransformOperation {
 			if (item instanceof Element) {
 				Element elemItem = (Element)item;
 				String attrDisclosedVal = elemItem.getAttribute("disclosed"); //$NON-NLS-1$
-				if (Boolean.TRUE.toString().equalsIgnoreCase(attrDisclosedVal)) {
+				if (Boolean.TRUE.toString().equalsIgnoreCase(
+						attrDisclosedVal)) {
 					disclosedItem = curItem;
 					break;
 				}
 			}
 			curItem++;
 		}
-		//if none explicitly disclosed, consider first non-disabled tab "disclosed"
+		//if none explicitly disclosed, consider first non-disabled tab disclosed
 		if (disclosedItem == -1) {
 			curItem = 0;
 			itItems = showDetailItems.iterator();
@@ -267,7 +282,7 @@ public class PanelTabbedOperation extends AbstractTransformOperation {
 				curItem++;
 			}
 		}
-		//if none explicitly disclosed and all disabled, consider first tab "disclosed"
+		//if none explicitly disclosed and all disabled, consider first tab disclosed
 		if (disclosedItem == -1) {
 			disclosedItem = 0;
 		}

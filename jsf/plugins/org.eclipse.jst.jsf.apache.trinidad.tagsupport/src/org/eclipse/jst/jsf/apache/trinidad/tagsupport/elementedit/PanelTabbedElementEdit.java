@@ -13,11 +13,12 @@ package org.eclipse.jst.jsf.apache.trinidad.tagsupport.elementedit;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.gef.DragTracker;
+import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.requests.LocationRequest;
 import org.eclipse.jst.jsf.apache.trinidad.tagsupport.ITrinidadConstants;
-import org.eclipse.jst.jsf.apache.trinidad.tagsupport.TrinidadTagSupportActivator;
+import org.eclipse.jst.jsf.apache.trinidad.tagsupport.TrinidadUtils;
 import org.eclipse.jst.jsf.core.internal.tld.TagIdentifierFactory;
 import org.eclipse.jst.pagedesigner.editpolicies.ElementResizableEditPolicy;
 import org.eclipse.jst.pagedesigner.parts.ElementEditPart;
@@ -64,9 +65,14 @@ public class PanelTabbedElementEdit extends DefaultTrinidadCoreElementEdit {
 					ObjectModeDragTracker dragTracker = new ObjectModeDragTracker(getHost()) {
 						protected boolean handleButtonDown(int button) {
 							if (button == 1) {
-								TrinidadTagSupportActivator.logInfo(
-										"Tab clicked: index == " +
-										String.valueOf(getTabIndex(getLocation())));
+								int tabIndex = getTabIndex(getLocation());
+								EditPart editPart = getSourceEditPart();
+								if (editPart instanceof ElementEditPart) {
+									Node node = ((ElementEditPart)part).getDOMNode();
+									if (TrinidadUtils.setDisclosedChildIndex(node, tabIndex)) {
+										((ElementEditPart)part).refresh(true);
+									}
+								}
 							}
 							return super.handleButtonDown(button);
 						}
@@ -113,6 +119,7 @@ public class PanelTabbedElementEdit extends DefaultTrinidadCoreElementEdit {
 			}
 			return count;
 		}
+
 	}
 
 }
