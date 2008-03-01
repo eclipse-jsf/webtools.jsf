@@ -11,6 +11,7 @@
 package org.eclipse.jst.jsf.apache.trinidad.tagsupport.converter.operations;
 
 import org.eclipse.jst.jsf.apache.trinidad.tagsupport.ITrinidadConstants;
+import org.eclipse.jst.jsf.core.internal.tld.TagIdentifierFactory;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.AbstractTransformOperation;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -50,10 +51,8 @@ public class ShowDetailItemOperation extends AbstractTransformOperation {
 		 * element
 		 */
 		Element parentSrcElement = getParentElement(srcElement);
-		if (representsTag(
-				parentSrcElement,
-				ITrinidadConstants.TLD_CORE_URI,
-				ITrinidadConstants.TAG_PANELTABBED)) {
+		if (ITrinidadConstants.TAG_IDENTIFIER_PANELTABBED.isSameTagType(
+				TagIdentifierFactory.createDocumentTagWrapper(parentSrcElement))) {
 			topElement = createElement("div"); //$NON-NLS-1$
 		} else {
 			//default to div element
@@ -76,17 +75,6 @@ public class ShowDetailItemOperation extends AbstractTransformOperation {
 			}
 		}
 		return parentElement;
-	}
-
-	private static boolean representsTag(
-			Element element, String uri, String tagName) {
-		boolean ret = false;
-		if (element != null && uri != null && tagName != null) {
-			ret =
-				uri.equalsIgnoreCase(element.getNamespaceURI()) &&
-				tagName.equalsIgnoreCase(element.getLocalName());
-		}
-		return ret;
 	}
 
 }

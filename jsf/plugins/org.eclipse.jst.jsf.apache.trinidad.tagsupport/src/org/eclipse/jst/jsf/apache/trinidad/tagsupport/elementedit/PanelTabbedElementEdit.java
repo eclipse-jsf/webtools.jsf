@@ -18,6 +18,7 @@ import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.requests.LocationRequest;
 import org.eclipse.jst.jsf.apache.trinidad.tagsupport.ITrinidadConstants;
 import org.eclipse.jst.jsf.apache.trinidad.tagsupport.TrinidadTagSupportActivator;
+import org.eclipse.jst.jsf.core.internal.tld.TagIdentifierFactory;
 import org.eclipse.jst.pagedesigner.editpolicies.ElementResizableEditPolicy;
 import org.eclipse.jst.pagedesigner.parts.ElementEditPart;
 import org.eclipse.jst.pagedesigner.parts.NodeEditPart;
@@ -56,84 +57,55 @@ public class PanelTabbedElementEdit extends DefaultTrinidadCoreElementEdit {
 		 */
 		@Override
 		protected DragTracker getSelectionTracker(LocationRequest request) {
-			if (getTabIndex(request.getLocation()) > -1) {
-				ObjectModeDragTracker dragTracker = new ObjectModeDragTracker(getHost()) {
-					protected boolean handleButtonDown(int button) {
-						if (button == 1) {
-							TrinidadTagSupportActivator.logInfo(
-									"Tab clicked: index == " +
-									String.valueOf(getTabIndex(getLocation())));
+			final GraphicalEditPart part = (GraphicalEditPart)getHost();
+			if (part instanceof NodeEditPart) {
+				Node node = ((NodeEditPart)part).getDOMNode();
+				if (getShowDetailItemCount(node) > 0) {
+					ObjectModeDragTracker dragTracker = new ObjectModeDragTracker(getHost()) {
+						protected boolean handleButtonDown(int button) {
+							if (button == 1) {
+								TrinidadTagSupportActivator.logInfo(
+										"Tab clicked: index == " +
+										String.valueOf(getTabIndex(getLocation())));
+							}
+							return super.handleButtonDown(button);
 						}
-						return super.handleButtonDown(button);
-					}
-				};
-				return dragTracker;
+					};
+					return dragTracker;
+				}
 			}
-			return super.getSelectionTracker(request);
+			return new ObjectModeDragTracker(getHost());
 		}
 
 		private int getTabIndex(Point location) {
 			int tabIndex = -1;
-
 			final GraphicalEditPart part = (GraphicalEditPart)getHost();
-
-			//determine if tabs are visible above and/or below
-			boolean tabsAbove = false;
-			boolean tabsBelow = false;
 			if (part instanceof NodeEditPart) {
-				Node node = ((NodeEditPart)part).getDOMNode();
-				int showDetailItemCount = getShowDetailItemCount(node);
+				final Node node = ((NodeEditPart)part).getDOMNode();
+				final IFigure figure = part.getFigure();
+				Point relLocation = location.getCopy();
+				figure.translateToRelative(relLocation);
+				final int showDetailItemCount = getShowDetailItemCount(node);
 				if (showDetailItemCount > 0) {
-					if (node instanceof Element) {
-						Element element = (Element)node;
-						String attrPosition = element.getAttribute("position"); //$NON-NLS-1$
-						if (attrPosition != null) {
-							if (attrPosition.equalsIgnoreCase("above")) { //$NON-NLS-1$
-								tabsAbove = true;
-							} else if (attrPosition.equalsIgnoreCase("below")) { //$NON-NLS-1$
-								tabsBelow = true;
-							} else {
-								tabsAbove = true;
-								tabsBelow = true;
-							}
-						} else {
-							tabsAbove = true;
-							tabsBelow = true;
-						}
+					final int tabWidth = figure.getBounds().width / showDetailItemCount;
+					tabIndex = relLocation.x / tabWidth;
+					if (tabIndex > showDetailItemCount - 1) {
+						tabIndex = showDetailItemCount - 1;
 					}
-
-					//determine which tab was clicked (if any)
-					final IFigure figure = part.getFigure();
-					Point relLocation = location.getCopy();
-					figure.translateToRelative(relLocation);
-					if (
-							(tabsAbove && relLocation.y <= 10) ||
-							(tabsBelow && figure.getBounds().height - relLocation.y <= 10)) {
-						//a tab was clicked - now determine which one
-						int tabWidth = figure.getBounds().width / showDetailItemCount;
-						tabIndex = relLocation.x / tabWidth;
-						if (tabIndex > showDetailItemCount - 1) {
-							tabIndex = showDetailItemCount - 1;
-						}
-					}
-
 				}
 			}
-
 			return tabIndex;
 		}
 
-		private int getShowDetailItemCount(Node panelTabbedNode) {
+		private int getShowDetailItemCount(Node node) {
 			int count = 0;
-			if (panelTabbedNode != null) {
-				NodeList childNodes = panelTabbedNode.getChildNodes();
+			if (node != null) {
+				NodeList childNodes = node.getChildNodes();
 				for (int i = 0; i < childNodes.getLength(); i++) {
 					Node childNode = childNodes.item(i);
 					if (childNode instanceof Element) {
-						Element childElement = (Element)childNode;
-						if (
-								childElement.getNamespaceURI().equalsIgnoreCase(ITrinidadConstants.TLD_CORE_URI) &&
-								childElement.getLocalName().equalsIgnoreCase(ITrinidadConstants.TAG_SHOWDETAILITEM)) {
+						if (ITrinidadConstants.TAG_IDENTIFIER_SHOWDETAILITEM.isSameTagType(
+								TagIdentifierFactory.createDocumentTagWrapper((Element)childNode))) {
 							count++;
 						}
 					}

@@ -25,8 +25,8 @@ public class TrinidadCoreElementEditFactory implements IElementEditFactory {
 	/* (non-Javadoc)
 	 * @see org.eclipse.jst.pagedesigner.elementedit.IElementEditFactory#createElementEdit(org.eclipse.jst.jsf.common.dom.TagIdentifier)
 	 */
-	public IElementEdit createElementEdit(TagIdentifier tag) {
-		if (representsTag(tag, ITrinidadConstants.TAG_PANELTABBED)) {
+	public IElementEdit createElementEdit(final TagIdentifier tagIdentifier) {
+		if (ITrinidadConstants.TAG_IDENTIFIER_PANELTABBED.isSameTagType(tagIdentifier)) {
 			return new PanelTabbedElementEdit();
 		} else {
 			return new DefaultTrinidadCoreElementEdit();
@@ -37,18 +37,7 @@ public class TrinidadCoreElementEditFactory implements IElementEditFactory {
 	 * @see org.eclipse.jst.pagedesigner.elementedit.IElementEditFactory#getSupportedURI()
 	 */
 	public String getSupportedURI() {
-		return ITrinidadConstants.TLD_CORE_URI;
-	}
-
-	private static boolean representsTag(
-			TagIdentifier tagIdentifier, String tagName) {
-		boolean ret = false;
-		if (tagIdentifier != null && tagName != null) {
-			ret =
-				ITrinidadConstants.TLD_CORE_URI.equalsIgnoreCase(tagIdentifier.getUri()) &&
-				tagName.equalsIgnoreCase(tagIdentifier.getTagName());
-		}
-		return ret;
+		return ITrinidadConstants.URI_CORE;
 	}
 
 }

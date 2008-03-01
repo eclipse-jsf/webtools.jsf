@@ -10,6 +10,9 @@
  */
 package org.eclipse.jst.jsf.apache.trinidad.tagsupport;
 
+import org.eclipse.jst.jsf.common.dom.TagIdentifier;
+import org.eclipse.jst.jsf.core.internal.tld.TagIdentifierFactory;
+
 /**
  * Trinidad-related constants.
  *
@@ -20,13 +23,13 @@ public interface ITrinidadConstants {
 	/**
 	 * Trinidad "core" URI.
 	 */
-	public static final String TLD_CORE_URI =
+	public static final String URI_CORE =
 		"http://myfaces.apache.org/trinidad"; //$NON-NLS-1$
 
 	/**
 	 * Trinidad "html" URI.
 	 */
-	public static final String TLD_HTML_URI =
+	public static final String URI_HTML =
 		"http://myfaces.apache.org/trinidad/html"; //$NON-NLS-1$
 
 	/**
@@ -38,5 +41,17 @@ public interface ITrinidadConstants {
 	 * Tag name for "showDetailItem".
 	 */
 	public static final String TAG_SHOWDETAILITEM = "showDetailItem"; //$NON-NLS-1$
+
+	/**
+	 * TagIdentifier for "tr:panelTabbed".
+	 */
+	public static final TagIdentifier TAG_IDENTIFIER_PANELTABBED =
+		TagIdentifierFactory.createJSPTagWrapper(URI_CORE, TAG_PANELTABBED);
+
+	/**
+	 * TagIdentifier for "tr:showDetailItem".
+	 */
+	public static final TagIdentifier TAG_IDENTIFIER_SHOWDETAILITEM =
+		TagIdentifierFactory.createJSPTagWrapper(URI_CORE, TAG_SHOWDETAILITEM);
 
 }

@@ -13,6 +13,7 @@ package org.eclipse.jst.jsf.apache.trinidad.tagsupport.converter.operations;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.jst.jsf.apache.trinidad.tagsupport.Messages;
 import org.eclipse.jst.pagedesigner.converter.ConvertPosition;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.ITransformOperation;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.AbstractTransformOperation;
@@ -102,6 +103,14 @@ public class PanelTabbedOperation extends AbstractTransformOperation {
 					"both".equalsIgnoreCase(tabsPosition)) { //$NON-NLS-1$
 				appendTabs(showDetailItems, spanElement, false);
 			}
+		} else {
+			appendAttribute(
+					spanElement,
+					"style", //$NON-NLS-1$
+					"color:silver;font-family:Arial,Helvetica,Geneva,sans-serif;font-size:8pt;"); //$NON-NLS-1$
+			appendChildText(
+					Messages.PanelTabbedOperation_EmptyPanelTabbedTag,
+					spanElement);
 		}
 			
 		return spanElement;
