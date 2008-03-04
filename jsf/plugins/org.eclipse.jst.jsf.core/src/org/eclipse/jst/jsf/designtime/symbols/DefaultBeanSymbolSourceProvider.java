@@ -166,7 +166,7 @@ public class DefaultBeanSymbolSourceProvider
     {
         StringBuffer additionalInfo = new StringBuffer("<p><b>"); //$NON-NLS-1$
         additionalInfo.append(Messages.getString("DefaultBeanSymbolSourceProvider.AdditionalInformation.Name")); //$NON-NLS-1$
-        additionalInfo.append("</b>"); //$NON-NLS-1$
+        additionalInfo.append(" </b>"); //$NON-NLS-1$
         additionalInfo.append(beanType.getManagedBeanName().getTextContent());
         additionalInfo.append("</p><p><b>"); //$NON-NLS-1$
         additionalInfo.append(Messages.getString("DefaultBeanSymbolSourceProvider.AdditionalInformation.Type")); //$NON-NLS-1$
@@ -174,7 +174,7 @@ public class DefaultBeanSymbolSourceProvider
         additionalInfo.append(beanType.getManagedBeanClass().getTextContent());
         additionalInfo.append("</p><p><b>"); //$NON-NLS-1$
         additionalInfo.append(Messages.getString("DefaultBeanSymbolSourceProvider.AdditionalInformation.Scope")); //$NON-NLS-1$
-        additionalInfo.append("</b>"); //$NON-NLS-1$
+        additionalInfo.append(" </b>"); //$NON-NLS-1$
         additionalInfo.append(beanType.getManagedBeanScope().getTextContent());
         additionalInfo.append("</p>"); //$NON-NLS-1$
         
