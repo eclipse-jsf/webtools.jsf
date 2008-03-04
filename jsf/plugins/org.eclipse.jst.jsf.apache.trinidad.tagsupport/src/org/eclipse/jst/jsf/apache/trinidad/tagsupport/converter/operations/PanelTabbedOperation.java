@@ -76,18 +76,18 @@ public class PanelTabbedOperation extends AbstractTransformOperation {
 			//write tabs "above" if specified
 			if ("above".equalsIgnoreCase(tabsPosition) || //$NON-NLS-1$
 					"both".equalsIgnoreCase(tabsPosition)) { //$NON-NLS-1$
-				appendTabs(showDetailItems, spanElement, true);
+				appendTabs(srcElement, showDetailItems, spanElement, true);
 				showDetailItemConvertPosition++;
 			}
 
-			//copy "disclosed" child showDetailItem
-			int disclosedItem =
-				calculateDisclosedShowDetailItem(srcElement, showDetailItems);
+			//copy current child showDetailItem
+			int currentEditorItem =
+				getCurrentShowDetailItem(srcElement, showDetailItems);
 			int curItem = 0;
 			Iterator<Node> itItems = showDetailItems.iterator();
 			while (itItems.hasNext()) {
 				Node nodeItem = itItems.next();
-				if (disclosedItem == curItem) {
+				if (currentEditorItem == curItem) {
 					if (nodeItem instanceof Element) {
 						Element elemItem = (Element)nodeItem;
 						tagConverterContext.addChild(
@@ -104,7 +104,7 @@ public class PanelTabbedOperation extends AbstractTransformOperation {
 			//write tabs "below" if specified
 			if ("below".equalsIgnoreCase(tabsPosition) || //$NON-NLS-1$
 					"both".equalsIgnoreCase(tabsPosition)) { //$NON-NLS-1$
-				appendTabs(showDetailItems, spanElement, false);
+				appendTabs(srcElement, showDetailItems, spanElement, false);
 			}
 		} else {
 			appendAttribute(
@@ -119,7 +119,7 @@ public class PanelTabbedOperation extends AbstractTransformOperation {
 		return spanElement;
 	}
 
-	private void appendTabs(List<Node> showDetailItems, Element spanElement, boolean above) {
+	private void appendTabs(Element srcElement, List<Node> showDetailItems, Element spanElement, boolean above) {
 		Element tableElement = appendChildElement("table", spanElement); //$NON-NLS-1$
 		String tableStyle;
 		if (above) {
@@ -138,6 +138,7 @@ public class PanelTabbedOperation extends AbstractTransformOperation {
 		//append first separator
 		appendSeparatorTD(trElement, SEP_POS_START);
 
+		int currentItem = getCurrentShowDetailItem(srcElement, showDetailItems);
 		int disclosedItem = calculateDisclosedShowDetailItem(showDetailItems);
 		int curItem = 0;
 
@@ -148,7 +149,10 @@ public class PanelTabbedOperation extends AbstractTransformOperation {
 			if (nodeItem instanceof Element) {
 				Element elemItem = (Element)nodeItem;
 				appendShowDetailItemTD(
-						trElement, elemItem, disclosedItem == curItem);
+						trElement,
+						elemItem,
+						currentItem == curItem,
+						disclosedItem == curItem);
 				if (curItem < showDetailItems.size() - 1) {
 					appendSeparatorTD(trElement);
 				}
@@ -184,7 +188,7 @@ public class PanelTabbedOperation extends AbstractTransformOperation {
 		appendSeparatorTD(trElement, SEP_POS_BETWEEN);
 	}
 
-	private void appendShowDetailItemTD(Element trElement, Element showDetailItem, boolean isDisclosed) {
+	private void appendShowDetailItemTD(Element trElement, Element showDetailItem, boolean isCurrent, boolean isDisclosed) {
 		boolean isDisabled = false;
 		String attrShowDetailItemDisabled = showDetailItem.getAttribute("disabled"); //$NON-NLS-1$
 		if (Boolean.TRUE.toString().equalsIgnoreCase(attrShowDetailItemDisabled)) {
@@ -213,10 +217,13 @@ public class PanelTabbedOperation extends AbstractTransformOperation {
 				aStyle = "color:#003333;"; //$NON-NLS-1$
 			}
 		}
+		if (isCurrent) {
+			aStyle += "border:1px solid #99cc99;padding:2px;"; //$NON-NLS-1$
+		}
 		String attrShowDetailItemInlineStyle = showDetailItem.getAttribute("inlineStyle"); //$NON-NLS-1$
 		if (attrShowDetailItemInlineStyle != null &&
 				attrShowDetailItemInlineStyle.length() > 0) {
-			aStyle = aStyle + attrShowDetailItemInlineStyle;
+			aStyle += attrShowDetailItemInlineStyle;
 		}
 		if (aStyle.length() > 0) {
 			appendAttribute(aElement, "style", aStyle); //$NON-NLS-1$
@@ -238,7 +245,7 @@ public class PanelTabbedOperation extends AbstractTransformOperation {
 		}
 	}
 
-	private int calculateDisclosedShowDetailItem(
+	private int getCurrentShowDetailItem(
 			Element srcElement, List<Node> showDetailItems) {
 		int disclosedItem = TrinidadUtils.getDisclosedChildIndex(srcElement);
 		if (disclosedItem == -1) {

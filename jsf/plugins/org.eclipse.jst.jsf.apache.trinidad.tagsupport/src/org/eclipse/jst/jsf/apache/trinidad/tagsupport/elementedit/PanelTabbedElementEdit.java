@@ -60,17 +60,17 @@ public class PanelTabbedElementEdit extends DefaultTrinidadCoreElementEdit {
 		protected DragTracker getSelectionTracker(LocationRequest request) {
 			final GraphicalEditPart part = (GraphicalEditPart)getHost();
 			if (part instanceof NodeEditPart) {
-				Node node = ((NodeEditPart)part).getDOMNode();
+				final Node node = ((NodeEditPart)part).getDOMNode();
 				if (getShowDetailItemCount(node) > 0) {
 					ObjectModeDragTracker dragTracker = new ObjectModeDragTracker(getHost()) {
 						protected boolean handleButtonDown(int button) {
 							if (button == 1) {
-								int tabIndex = getTabIndex(getLocation());
-								EditPart editPart = getSourceEditPart();
+								final int tabIndex = getTabIndex(getLocation());
+								final EditPart editPart = getSourceEditPart();
 								if (editPart instanceof ElementEditPart) {
-									Node node = ((ElementEditPart)part).getDOMNode();
+									final Node node = ((ElementEditPart)editPart).getDOMNode();
 									if (TrinidadUtils.setDisclosedChildIndex(node, tabIndex)) {
-										((ElementEditPart)part).refresh(true);
+										((ElementEditPart)editPart).refresh(true);
 									}
 								}
 							}
