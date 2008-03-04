@@ -17,7 +17,6 @@ import org.eclipse.jst.jsf.apache.trinidad.tagsupport.Messages;
 import org.eclipse.jst.jsf.apache.trinidad.tagsupport.TrinidadUtils;
 import org.eclipse.jst.pagedesigner.converter.ConvertPosition;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.ITransformOperation;
-import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.AbstractTransformOperation;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.TransformOperationFactory;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -32,7 +31,7 @@ import org.w3c.dom.Node;
  * 
  * @author Ian Trimble - Oracle
  */
-public class PanelTabbedOperation extends AbstractTransformOperation {
+public class PanelTabbedOperation extends AbstractTrinidadTransformOperation {
 
 	private static final int SEP_POS_BETWEEN = -1;
 	private static final int SEP_POS_START = 0;
@@ -164,15 +163,6 @@ public class PanelTabbedOperation extends AbstractTransformOperation {
 		appendSeparatorTD(trElement, SEP_POS_END);
 	}
 
-	private void appendAttribute(
-			Element element, String attributeName, String attributeValue) {
-		ITransformOperation operation =
-			TransformOperationFactory.getInstance().getTransformOperation(
-					TransformOperationFactory.OP_CreateAttributeOperation,
-					new String[]{attributeName, attributeValue});
-		operation.transform(null, element);
-	}
-
 	private void appendSeparatorTD(Element trElement, int sepPosition) {
 		Element tdElement = appendChildElement("td", trElement); //$NON-NLS-1$
 		if (sepPosition == SEP_POS_START) {
@@ -247,10 +237,10 @@ public class PanelTabbedOperation extends AbstractTransformOperation {
 
 	private int getCurrentShowDetailItem(
 			Element srcElement, List<Node> showDetailItems) {
-		int disclosedItem = TrinidadUtils.getDisclosedChildIndex(srcElement);
+		int disclosedItem = TrinidadUtils.getCurrentChildIndex(srcElement);
 		if (disclosedItem == -1) {
 			disclosedItem = calculateDisclosedShowDetailItem(showDetailItems);
-			TrinidadUtils.setDisclosedChildIndex(srcElement, disclosedItem);
+			TrinidadUtils.setCurrentChildIndex(srcElement, disclosedItem);
 		}
 		return disclosedItem;
 	}

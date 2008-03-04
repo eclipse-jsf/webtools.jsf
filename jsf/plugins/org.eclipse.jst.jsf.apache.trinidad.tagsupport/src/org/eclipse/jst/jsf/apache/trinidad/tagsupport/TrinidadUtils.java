@@ -19,24 +19,24 @@ import org.w3c.dom.Node;
  */
 public class TrinidadUtils {
 
-	private static final String KEY_DISCLOSED_CHILD_INDEX =
-		"KEY_DISCLOSED_CHILD_INDEX";
+	private static final String KEY_CURRENT_CHILD_INDEX =
+		"KEY_CURRENT_CHILD_INDEX";
 
 	/**
-	 * Sets the index of the Node instance's "disclosed" child as user data on
+	 * Sets the index of the Node instance's "current" child as user data on
 	 * the Node instance.
 	 * 
 	 * @param node Node instance on which to set index.
-	 * @param index Index of node's "disclosed" child.
+	 * @param index Index of node's "current" child.
 	 * @return true if index has changed, else false.
 	 */
-	public static boolean setDisclosedChildIndex(Node node, int index) {
+	public static boolean setCurrentChildIndex(Node node, int index) {
 		boolean indexChanged = false;
 		if (node != null) {
-			int currentIndex = getDisclosedChildIndex(node);
+			int currentIndex = getCurrentChildIndex(node);
 			if (currentIndex != index) {
 				node.setUserData(
-						KEY_DISCLOSED_CHILD_INDEX,
+						KEY_CURRENT_CHILD_INDEX,
 						new Integer(index),
 						null);
 				indexChanged = true;
@@ -46,17 +46,17 @@ public class TrinidadUtils {
 	}
 
 	/**
-	 * Gets the index of the Node instance's "disclosed child from user data on
+	 * Gets the index of the Node instance's "current" child from user data on
 	 * the Node instance.
 	 * 
 	 * @param node Node instance from which to get index.
-	 * @return Index of node's "disclosed" child. A value of -1 indicates
+	 * @return Index of node's "current" child. A value of -1 indicates
 	 * inability to get index from node.
 	 */
-	public static int getDisclosedChildIndex(Node node) {
+	public static int getCurrentChildIndex(Node node) {
 		int index = -1;
 		if (node != null) {
-			Object obj = node.getUserData(KEY_DISCLOSED_CHILD_INDEX);
+			Object obj = node.getUserData(KEY_CURRENT_CHILD_INDEX);
 			if (obj instanceof Integer) {
 				index = ((Integer)obj).intValue();
 			}

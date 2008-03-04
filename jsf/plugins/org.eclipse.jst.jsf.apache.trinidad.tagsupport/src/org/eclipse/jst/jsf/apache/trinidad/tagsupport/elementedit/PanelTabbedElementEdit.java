@@ -69,7 +69,7 @@ public class PanelTabbedElementEdit extends DefaultTrinidadCoreElementEdit {
 								final EditPart editPart = getSourceEditPart();
 								if (editPart instanceof ElementEditPart) {
 									final Node node = ((ElementEditPart)editPart).getDOMNode();
-									if (TrinidadUtils.setDisclosedChildIndex(node, tabIndex)) {
+									if (TrinidadUtils.setCurrentChildIndex(node, tabIndex)) {
 										((ElementEditPart)editPart).refresh(true);
 									}
 								}

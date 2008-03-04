@@ -12,7 +12,6 @@ package org.eclipse.jst.jsf.apache.trinidad.tagsupport.converter.operations;
 
 import org.eclipse.jst.jsf.apache.trinidad.tagsupport.ITrinidadConstants;
 import org.eclipse.jst.jsf.core.internal.tld.TagIdentifierFactory;
-import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.AbstractTransformOperation;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
@@ -26,7 +25,7 @@ import org.w3c.dom.Node;
  * 
  * @author Ian Trimble - Oracle
  */
-public class ShowDetailItemOperation extends AbstractTransformOperation {
+public class ShowDetailItemOperation extends AbstractTrinidadTransformOperation {
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.operations.AbstractTransformOperation#transform(org.w3c.dom.Element, org.w3c.dom.Element)

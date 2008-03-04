@@ -12,18 +12,27 @@ package org.eclipse.jst.jsf.apache.trinidad.tagsupport.elementedit;
 
 import org.eclipse.jst.jsf.apache.trinidad.tagsupport.ITrinidadConstants;
 import org.eclipse.jst.jsf.common.dom.TagIdentifier;
+import org.eclipse.jst.pagedesigner.elementedit.AbstractElementEditFactory;
 import org.eclipse.jst.pagedesigner.elementedit.IElementEdit;
-import org.eclipse.jst.pagedesigner.elementedit.IElementEditFactory;
 
 /**
- * IElementEditFactory implementation for Trinidad core tag library.
+ * AbstractElementEditFactory extension for Trinidad core tag library.
  * 
  * @author Ian Trimble - Oracle
  */
-public class TrinidadCoreElementEditFactory implements IElementEditFactory {
+public class TrinidadCoreElementEditFactory extends AbstractElementEditFactory {
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.jst.pagedesigner.elementedit.IElementEditFactory#createElementEdit(org.eclipse.jst.jsf.common.dom.TagIdentifier)
+	/**
+	 * Instantiates an instance, with ITrinidadConstants.URI_CORE as the
+	 * supported URI.
+	 */
+	public TrinidadCoreElementEditFactory() {
+		super(ITrinidadConstants.URI_CORE);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.jst.pagedesigner.elementedit.AbstractElementEditFactory#createElementEdit(org.eclipse.jst.jsf.common.dom.TagIdentifier)
 	 */
 	public IElementEdit createElementEdit(final TagIdentifier tagIdentifier) {
 		if (ITrinidadConstants.TAG_IDENTIFIER_PANELTABBED.isSameTagType(tagIdentifier)) {
@@ -31,13 +40,6 @@ public class TrinidadCoreElementEditFactory implements IElementEditFactory {
 		} else {
 			return new DefaultTrinidadCoreElementEdit();
 		}
-	}
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.jst.pagedesigner.elementedit.IElementEditFactory#getSupportedURI()
-	 */
-	public String getSupportedURI() {
-		return ITrinidadConstants.URI_CORE;
 	}
 
 }
