@@ -64,6 +64,19 @@ public class NonVisualComponentEditPart extends NodeEditPart
                 null);
     }
 
+    @Override
+    public void deactivate()
+    {
+        ITagConverter tagConverter = (ITagConverter) getModel();
+        if (tagConverter != null)
+        {
+            tagConverter.dispose();
+        }
+        
+        // always do super stuff
+        super.deactivate();
+    }
+
     /**
      * @return the tag converter
      */
