@@ -31,7 +31,7 @@ import org.eclipse.swt.graphics.Image;
 /**
  * Locates and creates Images for tags using the common metadata framework.
  * 
- * No caching is of images is occurring at this time.  
+ * Images are cached in the PDPlugin's ImageRegistry.  
  * 
  * Some code is being duplicated in palette helper.   PaletteHelper should be re-factored to use this code
  * 
@@ -62,6 +62,7 @@ public class TagImageManager {
 	}	
 	
 	/**
+	 * Returns small image using metadata and may be null.  Caller should NOT dispose the image, but should call TagImageManager's dispose(image)
 	 * @param project
 	 * @param nsUri
 	 * @param tagName
@@ -72,13 +73,12 @@ public class TagImageManager {
 		Model model = getModel(project, nsUri);
 		if (model != null){
 			ImageDescriptor imgDesc = getSmallIconImageDescriptor(model, tagName);
-			if (imgDesc != null)
-				image = imgDesc.createImage();
+			image = getOrCreateImage(imgDesc);
 		}
 		
 		return image;
 	}
-	
+
 	/**
 	 * @param project
 	 * @param nsUri
@@ -90,10 +90,25 @@ public class TagImageManager {
 		Model model = getModel(project, nsUri);
 		if (model != null){
 			ImageDescriptor imgDesc = getLargeIconImageDescriptor(model, nsUri);
-			if (imgDesc != null)
-				image = imgDesc.createImage();
+			image = getOrCreateImage(imgDesc);	
 		}
 		
+		return image;
+	}
+	
+	private Image getOrCreateImage(ImageDescriptor imgDesc) {
+		Image image = null;
+		if (imgDesc != null){
+			image = PDPlugin.getDefault().getImageRegistry().get(imgDesc.toString());
+			if (image == null ){
+				image = imgDesc.createImage();
+				PDPlugin.getDefault().getImageRegistry().put(imgDesc.toString(), image);
+			} else if (image.isDisposed()){ //should not occur, but handling just in case				
+				PDPlugin.getDefault().getImageRegistry().remove(imgDesc.toString());
+				image = imgDesc.createImage();
+				PDPlugin.getDefault().getImageRegistry().put(imgDesc.toString(), image);
+			}
+		}
 		return image;
 	}
 	
