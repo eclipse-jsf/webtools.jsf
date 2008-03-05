@@ -37,6 +37,8 @@ public class TrinidadCoreElementEditFactory extends AbstractElementEditFactory {
 	public IElementEdit createElementEdit(final TagIdentifier tagIdentifier) {
 		if (ITrinidadConstants.TAG_IDENTIFIER_PANELTABBED.isSameTagType(tagIdentifier)) {
 			return new PanelTabbedElementEdit();
+		} else if (ITrinidadConstants.TAG_IDENTIFIER_SHOWDETAILITEM.isSameTagType(tagIdentifier)) {
+			return new ShowDetailItemElementEdit();
 		} else {
 			return new DefaultTrinidadCoreElementEdit();
 		}

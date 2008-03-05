@@ -101,7 +101,13 @@
     <entity id="separator" type="tag"/>
     <entity id="showDetail" type="tag"/>
     <entity id="showDetailHeader" type="tag"/>
-    <entity id="showDetailItem" type="tag"/>
+    <entity id="showDetailItem" type="tag">
+ 		<trait id="tag-create">
+ 			<value xsi:type="pi:TagCreationInfo">
+				<attribute id="text" value="Tab" />
+ 			</value>
+ 		</trait>
+    </entity>
     <entity id="singleStepButtonBar" type="tag"/>
     <entity id="spacer" type="tag"/>
     <entity id="statusIndicator" type="tag"/>

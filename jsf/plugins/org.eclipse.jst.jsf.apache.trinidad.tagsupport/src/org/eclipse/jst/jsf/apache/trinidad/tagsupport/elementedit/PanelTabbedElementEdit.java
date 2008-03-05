@@ -16,14 +16,24 @@ import org.eclipse.gef.DragTracker;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.GraphicalEditPart;
+import org.eclipse.gef.requests.DropRequest;
 import org.eclipse.gef.requests.LocationRequest;
 import org.eclipse.jst.jsf.apache.trinidad.tagsupport.ITrinidadConstants;
 import org.eclipse.jst.jsf.apache.trinidad.tagsupport.TrinidadUtils;
+import org.eclipse.jst.jsf.common.dom.TagIdentifier;
 import org.eclipse.jst.jsf.core.internal.tld.TagIdentifierFactory;
+import org.eclipse.jst.pagedesigner.editpolicies.DragMoveEditPolicy;
 import org.eclipse.jst.pagedesigner.editpolicies.ElementResizableEditPolicy;
 import org.eclipse.jst.pagedesigner.parts.ElementEditPart;
 import org.eclipse.jst.pagedesigner.parts.NodeEditPart;
 import org.eclipse.jst.pagedesigner.tools.ObjectModeDragTracker;
+import org.eclipse.jst.pagedesigner.validation.caret.ActionData;
+import org.eclipse.jst.pagedesigner.validation.caret.DefaultPositionRule;
+import org.eclipse.jst.pagedesigner.validation.caret.DnDPositionValidator;
+import org.eclipse.jst.pagedesigner.validation.caret.DropActionData;
+import org.eclipse.jst.pagedesigner.validation.caret.IPositionMediator;
+import org.eclipse.jst.pagedesigner.validation.caret.Target;
+import org.eclipse.jst.pagedesigner.validation.caret.DropActionData.DropData;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -40,10 +50,16 @@ public class PanelTabbedElementEdit extends DefaultTrinidadCoreElementEdit {
 	 */
 	@Override
 	public void createEditPolicies(ElementEditPart part) {
-		part.installEditPolicy(EditPolicy.SELECTION_FEEDBACK_ROLE, new PanelTabbedResizePolicy());
+		part.installEditPolicy(EditPolicy.SELECTION_FEEDBACK_ROLE, new PanelTabbedElementResizableEditPolicy());
+		part.installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new PanelTabbedDragMoveEditPolicy());
 	}
 
-	static class PanelTabbedResizePolicy extends ElementResizableEditPolicy {
+	/**
+	 * Extends ElementResizableEditPolicy.
+	 * 
+	 * @author Ian Trimble - Oracle
+	 */
+	public static class PanelTabbedElementResizableEditPolicy extends ElementResizableEditPolicy {
 
 		/* (non-Javadoc)
 		 * @see org.eclipse.jst.pagedesigner.editpolicies.ElementResizableEditPolicy#getSelectionDragTracker(org.eclipse.gef.requests.LocationRequest)
@@ -120,6 +136,70 @@ public class PanelTabbedElementEdit extends DefaultTrinidadCoreElementEdit {
 			return count;
 		}
 
+	}
+
+	/**
+	 * Extends DragMoveEditPolicy.
+	 * 
+	 * @author Ian Trimble - Oracle
+	 */
+	public static class PanelTabbedDragMoveEditPolicy extends DragMoveEditPolicy {
+
+		/*
+		 * (non-Javadoc)
+		 * @see org.eclipse.jst.pagedesigner.editpolicies.DropEditPolicy#createDropChildValidator(org.eclipse.gef.requests.DropRequest)
+		 */
+		@Override
+		protected IPositionMediator createDropChildValidator(DropRequest r) {
+			DropData dropData = createDropData(r);
+			if (dropData != null) {
+				DnDPositionValidator validator = 
+					new DnDPositionValidator(new DropActionData(
+							ActionData.COMPONENT_MOVE, dropData));
+				validator.addRule(new OnlyShowDetailItemsRule(validator.getActionData()));
+				return validator;
+			}
+			return null;
+		}
+
+		private static class OnlyShowDetailItemsRule extends DefaultPositionRule {
+
+			/**
+			 * Instantiates an instance.
+			 * 
+			 * @param actionData ActionData instance.
+			 */
+			public OnlyShowDetailItemsRule(ActionData actionData) {
+				super(actionData);
+			}
+
+			/*
+			 * (non-Javadoc)
+			 * @see org.eclipse.jst.pagedesigner.validation.caret.DefaultPositionRule#isEditable(org.eclipse.jst.pagedesigner.validation.caret.Target)
+			 */
+			@Override
+			public boolean isEditable(Target target) {
+				if (ITrinidadConstants.TAG_IDENTIFIER_PANELTABBED.isSameTagType(
+						target.getTagWrapper())) {
+					return isDataDroppable();
+				}
+				return true;
+			}
+
+			private boolean isDataDroppable() {
+				ActionData actionData = getActionData();
+				if (actionData instanceof DropActionData) {
+					DropActionData dropActionData = (DropActionData)actionData;
+					TagIdentifier tagIdentifier = 
+						(TagIdentifier)dropActionData.getDropData().getTagIdentifiers().get(0);
+					if (ITrinidadConstants.TAG_IDENTIFIER_SHOWDETAILITEM.isSameTagType(
+							tagIdentifier)) {
+						return true;
+					}
+				}
+				return false;
+			}
+		}
 	}
 
 }
