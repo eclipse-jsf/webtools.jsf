@@ -74,11 +74,11 @@ public class TestJSFELHover extends TestCase {
 
 	public void testGetHoverInfo() throws Exception {
 		// hyperlink from MyBean
-		testJavaHoverHelp(579, "MyBean.java", "<p><b>Name:</b>myBean</p><p><b>Type: </b>beans.MyBean</p><p><b>Scope:</b>none</p>");
+		testJavaHoverHelp(579, "MyBean.java", "<p><b>Name: </b>myBean</p><p><b>Type: </b>beans.MyBean</p><p><b>Scope: </b>none</p>");
 		// hyperlink from MyBean
-		testJavaHoverHelp(614, "MyBean.java", "<p><b>Name:</b>myBean</p><p><b>Type: </b>beans.MyBean</p><p><b>Scope:</b>none</p>");
+		testJavaHoverHelp(614, "MyBean.java", "<p><b>Name: </b>myBean</p><p><b>Type: </b>beans.MyBean</p><p><b>Scope: </b>none</p>");
 		// hyperlink from MyBean
-		testJavaHoverHelp(706, "MyBean.java", "<p><b>Name:</b>myBean</p><p><b>Type: </b>beans.MyBean</p><p><b>Scope:</b>none</p>");
+		testJavaHoverHelp(706, "MyBean.java", "<p><b>Name: </b>myBean</p><p><b>Type: </b>beans.MyBean</p><p><b>Scope: </b>none</p>");
 
 		// hyperlink from property
 		testJavaHoverHelp(622, "MyBean.java", "");
