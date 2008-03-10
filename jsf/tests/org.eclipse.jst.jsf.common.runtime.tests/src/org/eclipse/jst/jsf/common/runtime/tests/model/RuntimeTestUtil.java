@@ -113,7 +113,14 @@ public final class RuntimeTestUtil extends Assert
     public static final ComponentTypeInfo COMPINFO_COMMANDLINK = new ComponentTypeInfo(
             "javax.faces.HtmlCommandLink",
             "javax.faces.component.html.HtmlCommandLink",
-            "javax.faces.Command", "javax.faces.Link");
+            new String[]
+                       { "javax.faces.component.UICommand",
+                               "javax.faces.component.UIComponentBase",
+                               "javax.faces.component.UIComponent", "java.lang.Object" },
+                       new String[]
+                       { "javax.faces.component.ActionSource",
+                               "javax.faces.component.StateHolder" },
+                       "javax.faces.Command", "javax.faces.Link");
     public static final ComponentTypeInfo COMPINFO_DATATABLE = new ComponentTypeInfo(
             "javax.faces.HtmlDataTable",
             "javax.faces.component.html.HtmlDataTable", new String[]
