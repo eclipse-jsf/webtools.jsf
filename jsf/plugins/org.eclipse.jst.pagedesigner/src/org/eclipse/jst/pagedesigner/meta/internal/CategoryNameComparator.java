@@ -14,8 +14,6 @@ package org.eclipse.jst.pagedesigner.meta.internal;
 import java.util.Comparator;
 import java.util.HashSet;
 
-import org.eclipse.jst.pagedesigner.properties.ITabbedPropertiesConstants;
-
 /**
  * Sorts categories and ensures that @see{ITabbedPropertiesConstants.OTHER_CATEGORY} comes last
  * @author mengbo
@@ -65,10 +63,12 @@ public class CategoryNameComparator implements Comparator {
 		if (o1.equals(o2))
 			return 0;
 
-		if (ITabbedPropertiesConstants.OTHER_CATEGORY.equals(o1))
-			return 1;
-		if (ITabbedPropertiesConstants.OTHER_CATEGORY.equals(o2))
-			return -1;
+		//Below code sorted OTHER category ("Attributes") to the bottom
+		//Commenting out as it just looks strange
+//		if (ITabbedPropertiesConstants.OTHER_CATEGORY.equals(o1))
+//			return 1;
+//		if (ITabbedPropertiesConstants.OTHER_CATEGORY.equals(o2))
+//			return -1;
 
 //		Pair p = new Pair((String) o1, (String) o2);
 //		if (_pairs.contains(p))

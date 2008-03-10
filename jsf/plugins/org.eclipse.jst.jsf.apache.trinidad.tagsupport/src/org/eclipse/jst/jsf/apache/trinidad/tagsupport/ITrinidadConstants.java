@@ -1241,4 +1241,1311 @@ public interface ITrinidadConstants {
 	 */
 	public static final TagIdentifier TAG_IDENTIFIER_TABLELAYOUT = TagIdentifierFactory
 			.createJSPTagWrapper(URI_HTML, TAG_TABLELAYOUT);
+
+//Attributes
+	/**
+	* "summary" tag attribute name
+	*/
+	public static final String ATTR_SUMMARY = "summary"; //$NON-NLS-1$
+
+	/**
+	* "initialFocusId" tag attribute name
+	*/
+	public static final String ATTR_INITIALFOCUSID = "initialFocusId"; //$NON-NLS-1$
+
+	/**
+	* "accessKey" tag attribute name
+	*/
+	public static final String ATTR_ACCESSKEY = "accessKey"; //$NON-NLS-1$
+
+	/**
+	* "colorData" tag attribute name
+	*/
+	public static final String ATTR_COLORDATA = "colorData"; //$NON-NLS-1$
+
+	/**
+	* "messageDetailConvertBoth" tag attribute name
+	*/
+	public static final String ATTR_MESSAGEDETAILCONVERTBOTH = "messageDetailConvertBoth"; //$NON-NLS-1$
+
+	/**
+	* "defaultSortOrder" tag attribute name
+	*/
+	public static final String ATTR_DEFAULTSORTORDER = "defaultSortOrder"; //$NON-NLS-1$
+
+	/**
+	* "columns" tag attribute name
+	*/
+	public static final String ATTR_COLUMNS = "columns"; //$NON-NLS-1$
+
+	/**
+	* "chromeType" tag attribute name
+	*/
+	public static final String ATTR_CHROMETYPE = "chromeType"; //$NON-NLS-1$
+
+	/**
+	* "rowHeader" tag attribute name
+	*/
+	public static final String ATTR_ROWHEADER = "rowHeader"; //$NON-NLS-1$
+
+	/**
+	* "transparentAllowed" tag attribute name
+	*/
+	public static final String ATTR_TRANSPARENTALLOWED = "transparentAllowed"; //$NON-NLS-1$
+
+	/**
+	* "rootNodeRendered" tag attribute name
+	*/
+	public static final String ATTR_ROOTNODERENDERED = "rootNodeRendered"; //$NON-NLS-1$
+
+	/**
+	* "rangeChangeListener" tag attribute name
+	*/
+	public static final String ATTR_RANGECHANGELISTENER = "rangeChangeListener"; //$NON-NLS-1$
+
+	/**
+	* "messageDetailConvertCurrency" tag attribute name
+	*/
+	public static final String ATTR_MESSAGEDETAILCONVERTCURRENCY = "messageDetailConvertCurrency"; //$NON-NLS-1$
+
+	/**
+	* "patterns" tag attribute name
+	*/
+	public static final String ATTR_PATTERNS = "patterns"; //$NON-NLS-1$
+
+	/**
+	* "disclosedRowKeys" tag attribute name
+	*/
+	public static final String ATTR_DISCLOSEDROWKEYS = "disclosedRowKeys"; //$NON-NLS-1$
+
+	/**
+	* "ondblclick" tag attribute name
+	*/
+	public static final String ATTR_ONDBLCLICK = "ondblclick"; //$NON-NLS-1$
+
+	/**
+	* "windowWidth" tag attribute name
+	*/
+	public static final String ATTR_WINDOWWIDTH = "windowWidth"; //$NON-NLS-1$
+
+	/**
+	* "rendered" tag attribute name
+	*/
+	public static final String ATTR_RENDERED = "rendered"; //$NON-NLS-1$
+
+	/**
+	* "invalidDays" tag attribute name
+	*/
+	public static final String ATTR_INVALIDDAYS = "invalidDays"; //$NON-NLS-1$
+
+	/**
+	* "styleUsage" tag attribute name
+	*/
+	public static final String ATTR_STYLEUSAGE = "styleUsage"; //$NON-NLS-1$
+
+	/**
+	* "blocking" tag attribute name
+	*/
+	public static final String ATTR_BLOCKING = "blocking"; //$NON-NLS-1$
+
+	/**
+	* "gradientsUsed" tag attribute name
+	*/
+	public static final String ATTR_GRADIENTSUSED = "gradientsUsed"; //$NON-NLS-1$
+
+	/**
+	* "legendPosition" tag attribute name
+	*/
+	public static final String ATTR_LEGENDPOSITION = "legendPosition"; //$NON-NLS-1$
+
+	/**
+	* "rowDisclosureListener" tag attribute name
+	*/
+	public static final String ATTR_ROWDISCLOSURELISTENER = "rowDisclosureListener"; //$NON-NLS-1$
+
+	/**
+	* "binding" tag attribute name
+	*/
+	public static final String ATTR_BINDING = "binding"; //$NON-NLS-1$
+
+	/**
+	* "disclosureListener" tag attribute name
+	*/
+	public static final String ATTR_DISCLOSURELISTENER = "disclosureListener"; //$NON-NLS-1$
+
+	/**
+	* "separatorClass" tag attribute name
+	*/
+	public static final String ATTR_SEPARATORCLASS = "separatorClass"; //$NON-NLS-1$
+
+	/**
+	* "showRequired" tag attribute name
+	*/
+	public static final String ATTR_SHOWREQUIRED = "showRequired"; //$NON-NLS-1$
+
+	/**
+	* "messageDetailInvalidDaysOfWeek" tag attribute name
+	*/
+	public static final String ATTR_MESSAGEDETAILINVALIDDAYSOFWEEK = "messageDetailInvalidDaysOfWeek"; //$NON-NLS-1$
+
+	/**
+	* "minimum" tag attribute name
+	*/
+	public static final String ATTR_MINIMUM = "minimum"; //$NON-NLS-1$
+
+	/**
+	* "simple" tag attribute name
+	*/
+	public static final String ATTR_SIMPLE = "simple"; //$NON-NLS-1$
+
+	/**
+	* "sortable" tag attribute name
+	*/
+	public static final String ATTR_SORTABLE = "sortable"; //$NON-NLS-1$
+
+	/**
+	* "discloseMany" tag attribute name
+	*/
+	public static final String ATTR_DISCLOSEMANY = "discloseMany"; //$NON-NLS-1$
+
+	/**
+	* "maximumLength" tag attribute name
+	*/
+	public static final String ATTR_MAXIMUMLENGTH = "maximumLength"; //$NON-NLS-1$
+
+	/**
+	* "visited" tag attribute name
+	*/
+	public static final String ATTR_VISITED = "visited"; //$NON-NLS-1$
+
+	/**
+	* "truncateAt" tag attribute name
+	*/
+	public static final String ATTR_TRUNCATEAT = "truncateAt"; //$NON-NLS-1$
+
+	/**
+	* "auxiliary1Size" tag attribute name
+	*/
+	public static final String ATTR_AUXILIARY1SIZE = "auxiliary1Size"; //$NON-NLS-1$
+
+	/**
+	* "converter" tag attribute name
+	*/
+	public static final String ATTR_CONVERTER = "converter"; //$NON-NLS-1$
+
+	/**
+	* "reorderOnly" tag attribute name
+	*/
+	public static final String ATTR_REORDERONLY = "reorderOnly"; //$NON-NLS-1$
+
+	/**
+	* "maxValue" tag attribute name
+	*/
+	public static final String ATTR_MAXVALUE = "maxValue"; //$NON-NLS-1$
+
+	/**
+	* "rowSelection" tag attribute name
+	*/
+	public static final String ATTR_ROWSELECTION = "rowSelection"; //$NON-NLS-1$
+
+	/**
+	* "tooltipsVisible" tag attribute name
+	*/
+	public static final String ATTR_TOOLTIPSVISIBLE = "tooltipsVisible"; //$NON-NLS-1$
+
+	/**
+	* "sortProperty" tag attribute name
+	*/
+	public static final String ATTR_SORTPROPERTY = "sortProperty"; //$NON-NLS-1$
+
+	/**
+	* "YMajorGridLineCount" tag attribute name
+	*/
+	public static final String ATTR_YMAJORGRIDLINECOUNT = "YMajorGridLineCount"; //$NON-NLS-1$
+
+	/**
+	* "yoffset" tag attribute name
+	*/
+	public static final String ATTR_YOFFSET = "yoffset"; //$NON-NLS-1$
+
+	/**
+	* "shortDesc" tag attribute name
+	*/
+	public static final String ATTR_SHORTDESC = "shortDesc"; //$NON-NLS-1$
+
+	/**
+	* "messageDetailConvertNumber" tag attribute name
+	*/
+	public static final String ATTR_MESSAGEDETAILCONVERTNUMBER = "messageDetailConvertNumber"; //$NON-NLS-1$
+
+	/**
+	* "listStyle" tag attribute name
+	*/
+	public static final String ATTR_LISTSTYLE = "listStyle"; //$NON-NLS-1$
+
+	/**
+	* "readOnly" tag attribute name
+	*/
+	public static final String ATTR_READONLY = "readOnly"; //$NON-NLS-1$
+
+	/**
+	* "pattern" tag attribute name
+	*/
+	public static final String ATTR_PATTERN = "pattern"; //$NON-NLS-1$
+
+	/**
+	* "background" tag attribute name
+	*/
+	public static final String ATTR_BACKGROUND = "background"; //$NON-NLS-1$
+
+	/**
+	* "animationDuration" tag attribute name
+	*/
+	public static final String ATTR_ANIMATIONDURATION = "animationDuration"; //$NON-NLS-1$
+
+	/**
+	* "labelAndAccessKey" tag attribute name
+	*/
+	public static final String ATTR_LABELANDACCESSKEY = "labelAndAccessKey"; //$NON-NLS-1$
+
+	/**
+	* "titleClass" tag attribute name
+	*/
+	public static final String ATTR_TITLECLASS = "titleClass"; //$NON-NLS-1$
+
+	/**
+	* "minFractionDigits" tag attribute name
+	*/
+	public static final String ATTR_MINFRACTIONDIGITS = "minFractionDigits"; //$NON-NLS-1$
+
+	/**
+	* "to" tag attribute name
+	*/
+	public static final String ATTR_TO = "to"; //$NON-NLS-1$
+
+	/**
+	* "player" tag attribute name
+	*/
+	public static final String ATTR_PLAYER = "player"; //$NON-NLS-1$
+
+	/**
+	* "globalOnly" tag attribute name
+	*/
+	public static final String ATTR_GLOBALONLY = "globalOnly"; //$NON-NLS-1$
+
+	/**
+	* "messageDetailInvalidMonths" tag attribute name
+	*/
+	public static final String ATTR_MESSAGEDETAILINVALIDMONTHS = "messageDetailInvalidMonths"; //$NON-NLS-1$
+
+	/**
+	* "secondaryPattern" tag attribute name
+	*/
+	public static final String ATTR_SECONDARYPATTERN = "secondaryPattern"; //$NON-NLS-1$
+
+	/**
+	* "previousAction" tag attribute name
+	*/
+	public static final String ATTR_PREVIOUSACTION = "previousAction"; //$NON-NLS-1$
+
+	/**
+	* "columnBandingInterval" tag attribute name
+	*/
+	public static final String ATTR_COLUMNBANDINGINTERVAL = "columnBandingInterval"; //$NON-NLS-1$
+
+	/**
+	* "noWrap" tag attribute name
+	*/
+	public static final String ATTR_NOWRAP = "noWrap"; //$NON-NLS-1$
+
+	/**
+	* "startLevel" tag attribute name
+	*/
+	public static final String ATTR_STARTLEVEL = "startLevel"; //$NON-NLS-1$
+
+	/**
+	* "valueChangeListener" tag attribute name
+	*/
+	public static final String ATTR_VALUECHANGELISTENER = "valueChangeListener"; //$NON-NLS-1$
+
+	/**
+	* "compact" tag attribute name
+	*/
+	public static final String ATTR_COMPACT = "compact"; //$NON-NLS-1$
+
+	/**
+	* "autoSubmit" tag attribute name
+	*/
+	public static final String ATTR_AUTOSUBMIT = "autoSubmit"; //$NON-NLS-1$
+
+	/**
+	* "height" tag attribute name
+	*/
+	public static final String ATTR_HEIGHT = "height"; //$NON-NLS-1$
+
+	/**
+	* "horizontalGridVisible" tag attribute name
+	*/
+	public static final String ATTR_HORIZONTALGRIDVISIBLE = "horizontalGridVisible"; //$NON-NLS-1$
+
+	/**
+	* "YMinorGridLineCount" tag attribute name
+	*/
+	public static final String ATTR_YMINORGRIDLINECOUNT = "YMinorGridLineCount"; //$NON-NLS-1$
+
+	/**
+	* "description" tag attribute name
+	*/
+	public static final String ATTR_DESCRIPTION = "description"; //$NON-NLS-1$
+
+	/**
+	* "onblur" tag attribute name
+	*/
+	public static final String ATTR_ONBLUR = "onblur"; //$NON-NLS-1$
+
+	/**
+	* "longDesc" tag attribute name
+	*/
+	public static final String ATTR_LONGDESC = "longDesc"; //$NON-NLS-1$
+
+	/**
+	* "perspective" tag attribute name
+	*/
+	public static final String ATTR_PERSPECTIVE = "perspective"; //$NON-NLS-1$
+
+	/**
+	* "trailingHeader" tag attribute name
+	*/
+	public static final String ATTR_TRAILINGHEADER = "trailingHeader"; //$NON-NLS-1$
+
+	/**
+	* "text" tag attribute name
+	*/
+	public static final String ATTR_TEXT = "text"; //$NON-NLS-1$
+
+	/**
+	* "messageDetailConvert" tag attribute name
+	*/
+	public static final String ATTR_MESSAGEDETAILCONVERT = "messageDetailConvert"; //$NON-NLS-1$
+
+	/**
+	* "onmouseout" tag attribute name
+	*/
+	public static final String ATTR_ONMOUSEOUT = "onmouseout"; //$NON-NLS-1$
+
+	/**
+	* "partialSubmit" tag attribute name
+	*/
+	public static final String ATTR_PARTIALSUBMIT = "partialSubmit"; //$NON-NLS-1$
+
+	/**
+	* "align" tag attribute name
+	*/
+	public static final String ATTR_ALIGN = "align"; //$NON-NLS-1$
+
+	/**
+	* "width" tag attribute name
+	*/
+	public static final String ATTR_WIDTH = "width"; //$NON-NLS-1$
+
+	/**
+	* "onkeyup" tag attribute name
+	*/
+	public static final String ATTR_ONKEYUP = "onkeyup"; //$NON-NLS-1$
+
+	/**
+	* "onfocus" tag attribute name
+	*/
+	public static final String ATTR_ONFOCUS = "onfocus"; //$NON-NLS-1$
+
+	/**
+	* "label" tag attribute name
+	*/
+	public static final String ATTR_LABEL = "label"; //$NON-NLS-1$
+
+	/**
+	* "componentType" tag attribute name
+	*/
+	public static final String ATTR_COMPONENTTYPE = "componentType"; //$NON-NLS-1$
+
+	/**
+	* "autostart" tag attribute name
+	*/
+	public static final String ATTR_AUTOSTART = "autostart"; //$NON-NLS-1$
+
+	/**
+	* "discloseNone" tag attribute name
+	*/
+	public static final String ATTR_DISCLOSENONE = "discloseNone"; //$NON-NLS-1$
+
+	/**
+	* "size" tag attribute name
+	*/
+	public static final String ATTR_SIZE = "size"; //$NON-NLS-1$
+
+	/**
+	* "standbyText" tag attribute name
+	*/
+	public static final String ATTR_STANDBYTEXT = "standbyText"; //$NON-NLS-1$
+
+	/**
+	* "onselect" tag attribute name
+	*/
+	public static final String ATTR_ONSELECT = "onselect"; //$NON-NLS-1$
+
+	/**
+	* "items" tag attribute name
+	*/
+	public static final String ATTR_ITEMS = "items"; //$NON-NLS-1$
+
+	/**
+	* "names" tag attribute name
+	*/
+	public static final String ATTR_NAMES = "names"; //$NON-NLS-1$
+
+	/**
+	* "maximum" tag attribute name
+	*/
+	public static final String ATTR_MAXIMUM = "maximum"; //$NON-NLS-1$
+
+	/**
+	* "disclosed" tag attribute name
+	*/
+	public static final String ATTR_DISCLOSED = "disclosed"; //$NON-NLS-1$
+
+	/**
+	* "rowsByDepth" tag attribute name
+	*/
+	public static final String ATTR_ROWSBYDEPTH = "rowsByDepth"; //$NON-NLS-1$
+
+	/**
+	* "maxStep" tag attribute name
+	*/
+	public static final String ATTR_MAXSTEP = "maxStep"; //$NON-NLS-1$
+
+	/**
+	* "var" tag attribute name
+	*/
+	public static final String ATTR_VAR = "var"; //$NON-NLS-1$
+
+	/**
+	* "focusRowKey" tag attribute name
+	*/
+	public static final String ATTR_FOCUSROWKEY = "focusRowKey"; //$NON-NLS-1$
+
+	/**
+	* "unselectedLabel" tag attribute name
+	*/
+	public static final String ATTR_UNSELECTEDLABEL = "unselectedLabel"; //$NON-NLS-1$
+
+	/**
+	* "searchDesc" tag attribute name
+	*/
+	public static final String ATTR_SEARCHDESC = "searchDesc"; //$NON-NLS-1$
+
+	/**
+	* "pollListener" tag attribute name
+	*/
+	public static final String ATTR_POLLLISTENER = "pollListener"; //$NON-NLS-1$
+
+	/**
+	* "name" tag attribute name
+	*/
+	public static final String ATTR_NAME = "name"; //$NON-NLS-1$
+
+	/**
+	* "valueAndAccessKey" tag attribute name
+	*/
+	public static final String ATTR_VALUEANDACCESSKEY = "valueAndAccessKey"; //$NON-NLS-1$
+
+	/**
+	* "XMajorGridLineCount" tag attribute name
+	*/
+	public static final String ATTR_XMAJORGRIDLINECOUNT = "XMajorGridLineCount"; //$NON-NLS-1$
+
+	/**
+	* "nextActionListener" tag attribute name
+	*/
+	public static final String ATTR_NEXTACTIONLISTENER = "nextActionListener"; //$NON-NLS-1$
+
+	/**
+	* "maxIntegerDigits" tag attribute name
+	*/
+	public static final String ATTR_MAXINTEGERDIGITS = "maxIntegerDigits"; //$NON-NLS-1$
+
+	/**
+	* "messageDetailConvertTime" tag attribute name
+	*/
+	public static final String ATTR_MESSAGEDETAILCONVERTTIME = "messageDetailConvertTime"; //$NON-NLS-1$
+
+	/**
+	* "icon" tag attribute name
+	*/
+	public static final String ATTR_ICON = "icon"; //$NON-NLS-1$
+
+	/**
+	* "undisclosedText" tag attribute name
+	*/
+	public static final String ATTR_UNDISCLOSEDTEXT = "undisclosedText"; //$NON-NLS-1$
+
+	/**
+	* "disclosedText" tag attribute name
+	*/
+	public static final String ATTR_DISCLOSEDTEXT = "disclosedText"; //$NON-NLS-1$
+
+	/**
+	* "onmouseover" tag attribute name
+	*/
+	public static final String ATTR_ONMOUSEOVER = "onmouseover"; //$NON-NLS-1$
+
+	/**
+	* "messageDetailConvertPattern" tag attribute name
+	*/
+	public static final String ATTR_MESSAGEDETAILCONVERTPATTERN = "messageDetailConvertPattern"; //$NON-NLS-1$
+
+	/**
+	* "message" tag attribute name
+	*/
+	public static final String ATTR_MESSAGE = "message"; //$NON-NLS-1$
+
+	/**
+	* "immediate" tag attribute name
+	*/
+	public static final String ATTR_IMMEDIATE = "immediate"; //$NON-NLS-1$
+
+	/**
+	* "messageDetailNoMatch" tag attribute name
+	*/
+	public static final String ATTR_MESSAGEDETAILNOMATCH = "messageDetailNoMatch"; //$NON-NLS-1$
+
+	/**
+	* "source" tag attribute name
+	*/
+	public static final String ATTR_SOURCE = "source"; //$NON-NLS-1$
+
+	/**
+	* "usesUpload" tag attribute name
+	*/
+	public static final String ATTR_USESUPLOAD = "usesUpload"; //$NON-NLS-1$
+
+	/**
+	* "onclick" tag attribute name
+	*/
+	public static final String ATTR_ONCLICK = "onclick"; //$NON-NLS-1$
+
+	/**
+	* "valign" tag attribute name
+	*/
+	public static final String ATTR_VALIGN = "valign"; //$NON-NLS-1$
+
+	/**
+	* "disabled" tag attribute name
+	*/
+	public static final String ATTR_DISABLED = "disabled"; //$NON-NLS-1$
+
+	/**
+	* "nextAction" tag attribute name
+	*/
+	public static final String ATTR_NEXTACTION = "nextAction"; //$NON-NLS-1$
+
+	/**
+	* "facetName" tag attribute name
+	*/
+	public static final String ATTR_FACETNAME = "facetName"; //$NON-NLS-1$
+
+	/**
+	* "for" tag attribute name
+	*/
+	public static final String ATTR_FOR = "for"; //$NON-NLS-1$
+
+	/**
+	* "defaultFacet" tag attribute name
+	*/
+	public static final String ATTR_DEFAULTFACET = "defaultFacet"; //$NON-NLS-1$
+
+	/**
+	* "defaultCommand" tag attribute name
+	*/
+	public static final String ATTR_DEFAULTCOMMAND = "defaultCommand"; //$NON-NLS-1$
+
+	/**
+	* "minValue" tag attribute name
+	*/
+	public static final String ATTR_MINVALUE = "minValue"; //$NON-NLS-1$
+
+	/**
+	* "labelStyle" tag attribute name
+	*/
+	public static final String ATTR_LABELSTYLE = "labelStyle"; //$NON-NLS-1$
+
+	/**
+	* "textAndAccessKey" tag attribute name
+	*/
+	public static final String ATTR_TEXTANDACCESSKEY = "textAndAccessKey"; //$NON-NLS-1$
+
+	/**
+	* "messageDetailConvertPercent" tag attribute name
+	*/
+	public static final String ATTR_MESSAGEDETAILCONVERTPERCENT = "messageDetailConvertPercent"; //$NON-NLS-1$
+
+	/**
+	* "valuePassThru" tag attribute name
+	*/
+	public static final String ATTR_VALUEPASSTHRU = "valuePassThru"; //$NON-NLS-1$
+
+	/**
+	* "imageMapType" tag attribute name
+	*/
+	public static final String ATTR_IMAGEMAPTYPE = "imageMapType"; //$NON-NLS-1$
+
+	/**
+	* "chartDrillDownListener" tag attribute name
+	*/
+	public static final String ATTR_CHARTDRILLDOWNLISTENER = "chartDrillDownListener"; //$NON-NLS-1$
+
+	/**
+	* "fieldWidth" tag attribute name
+	*/
+	public static final String ATTR_FIELDWIDTH = "fieldWidth"; //$NON-NLS-1$
+
+	/**
+	* "auxiliaryGlobalSize" tag attribute name
+	*/
+	public static final String ATTR_AUXILIARYGLOBALSIZE = "auxiliaryGlobalSize"; //$NON-NLS-1$
+
+	/**
+	* "triggerType" tag attribute name
+	*/
+	public static final String ATTR_TRIGGERTYPE = "triggerType"; //$NON-NLS-1$
+
+	/**
+	* "orientation" tag attribute name
+	*/
+	public static final String ATTR_ORIENTATION = "orientation"; //$NON-NLS-1$
+
+	/**
+	* "inlineStyle" tag attribute name
+	*/
+	public static final String ATTR_INLINESTYLE = "inlineStyle"; //$NON-NLS-1$
+
+	/**
+	* "timeStyle" tag attribute name
+	*/
+	public static final String ATTR_TIMESTYLE = "timeStyle"; //$NON-NLS-1$
+
+	/**
+	* "flex" tag attribute name
+	*/
+	public static final String ATTR_FLEX = "flex"; //$NON-NLS-1$
+
+	/**
+	* "destination" tag attribute name
+	*/
+	public static final String ATTR_DESTINATION = "destination"; //$NON-NLS-1$
+
+	/**
+	* "innerWidth" tag attribute name
+	*/
+	public static final String ATTR_INNERWIDTH = "innerWidth"; //$NON-NLS-1$
+
+	/**
+	* "useWindow" tag attribute name
+	*/
+	public static final String ATTR_USEWINDOW = "useWindow"; //$NON-NLS-1$
+
+	/**
+	* "verticalGridVisible" tag attribute name
+	*/
+	public static final String ATTR_VERTICALGRIDVISIBLE = "verticalGridVisible"; //$NON-NLS-1$
+
+	/**
+	* "onmousedown" tag attribute name
+	*/
+	public static final String ATTR_ONMOUSEDOWN = "onmousedown"; //$NON-NLS-1$
+
+	/**
+	* "invalidDaysOfWeek" tag attribute name
+	*/
+	public static final String ATTR_INVALIDDAYSOFWEEK = "invalidDaysOfWeek"; //$NON-NLS-1$
+
+	/**
+	* "headerNoWrap" tag attribute name
+	*/
+	public static final String ATTR_HEADERNOWRAP = "headerNoWrap"; //$NON-NLS-1$
+
+	/**
+	* "invalidMonths" tag attribute name
+	*/
+	public static final String ATTR_INVALIDMONTHS = "invalidMonths"; //$NON-NLS-1$
+
+	/**
+	* "headerText" tag attribute name
+	*/
+	public static final String ATTR_HEADERTEXT = "headerText"; //$NON-NLS-1$
+
+	/**
+	* "actionListener" tag attribute name
+	*/
+	public static final String ATTR_ACTIONLISTENER = "actionListener"; //$NON-NLS-1$
+
+	/**
+	* "attributeChangeListener" tag attribute name
+	*/
+	public static final String ATTR_ATTRIBUTECHANGELISTENER = "attributeChangeListener"; //$NON-NLS-1$
+
+	/**
+	* "position" tag attribute name
+	*/
+	public static final String ATTR_POSITION = "position"; //$NON-NLS-1$
+
+	/**
+	* "previousActionListener" tag attribute name
+	*/
+	public static final String ATTR_PREVIOUSACTIONLISTENER = "previousActionListener"; //$NON-NLS-1$
+
+	/**
+	* "interval" tag attribute name
+	*/
+	public static final String ATTR_INTERVAL = "interval"; //$NON-NLS-1$
+
+	/**
+	* "allDetailsEnabled" tag attribute name
+	*/
+	public static final String ATTR_ALLDETAILSENABLED = "allDetailsEnabled"; //$NON-NLS-1$
+
+	/**
+	* "validator" tag attribute name
+	*/
+	public static final String ATTR_VALIDATOR = "validator"; //$NON-NLS-1$
+
+	/**
+	* "onunload" tag attribute name
+	*/
+	public static final String ATTR_ONUNLOAD = "onunload"; //$NON-NLS-1$
+
+	/**
+	* "maxFractionDigits" tag attribute name
+	*/
+	public static final String ATTR_MAXFRACTIONDIGITS = "maxFractionDigits"; //$NON-NLS-1$
+
+	/**
+	* "leadingDescShown" tag attribute name
+	*/
+	public static final String ATTR_LEADINGDESCSHOWN = "leadingDescShown"; //$NON-NLS-1$
+
+	/**
+	* "emptyText" tag attribute name
+	*/
+	public static final String ATTR_EMPTYTEXT = "emptyText"; //$NON-NLS-1$
+
+	/**
+	* "trailingDescShown" tag attribute name
+	*/
+	public static final String ATTR_TRAILINGDESCSHOWN = "trailingDescShown"; //$NON-NLS-1$
+
+	/**
+	* "escape" tag attribute name
+	*/
+	public static final String ATTR_ESCAPE = "escape"; //$NON-NLS-1$
+
+	/**
+	* "mode" tag attribute name
+	*/
+	public static final String ATTR_MODE = "mode"; //$NON-NLS-1$
+
+	/**
+	* "messageDetailInvalidDays" tag attribute name
+	*/
+	public static final String ATTR_MESSAGEDETAILINVALIDDAYS = "messageDetailInvalidDays"; //$NON-NLS-1$
+
+	/**
+	* "title" tag attribute name
+	*/
+	public static final String ATTR_TITLE = "title"; //$NON-NLS-1$
+
+	/**
+	* "captionText" tag attribute name
+	*/
+	public static final String ATTR_CAPTIONTEXT = "captionText"; //$NON-NLS-1$
+
+	/**
+	* "stepSize" tag attribute name
+	*/
+	public static final String ATTR_STEPSIZE = "stepSize"; //$NON-NLS-1$
+
+	/**
+	* "encoding" tag attribute name
+	*/
+	public static final String ATTR_ENCODING = "encoding"; //$NON-NLS-1$
+
+	/**
+	* "modal" tag attribute name
+	*/
+	public static final String ATTR_MODAL = "modal"; //$NON-NLS-1$
+
+	/**
+	* "end" tag attribute name
+	*/
+	public static final String ATTR_END = "end"; //$NON-NLS-1$
+
+	/**
+	* "onkeypress" tag attribute name
+	*/
+	public static final String ATTR_ONKEYPRESS = "onkeypress"; //$NON-NLS-1$
+
+	/**
+	* "onkeydown" tag attribute name
+	*/
+	public static final String ATTR_ONKEYDOWN = "onkeydown"; //$NON-NLS-1$
+
+	/**
+	* "innerHeight" tag attribute name
+	*/
+	public static final String ATTR_INNERHEIGHT = "innerHeight"; //$NON-NLS-1$
+
+	/**
+	* "messageType" tag attribute name
+	*/
+	public static final String ATTR_MESSAGETYPE = "messageType"; //$NON-NLS-1$
+
+	/**
+	* "onsubmit" tag attribute name
+	*/
+	public static final String ATTR_ONSUBMIT = "onsubmit"; //$NON-NLS-1$
+
+	/**
+	* "selectedStep" tag attribute name
+	*/
+	public static final String ATTR_SELECTEDSTEP = "selectedStep"; //$NON-NLS-1$
+
+	/**
+	* "rowBandingInterval" tag attribute name
+	*/
+	public static final String ATTR_ROWBANDINGINTERVAL = "rowBandingInterval"; //$NON-NLS-1$
+
+	/**
+	* "varStatus" tag attribute name
+	*/
+	public static final String ATTR_VARSTATUS = "varStatus"; //$NON-NLS-1$
+
+	/**
+	* "xoffset" tag attribute name
+	*/
+	public static final String ATTR_XOFFSET = "xoffset"; //$NON-NLS-1$
+
+	/**
+	* "currencySymbol" tag attribute name
+	*/
+	public static final String ATTR_CURRENCYSYMBOL = "currencySymbol"; //$NON-NLS-1$
+
+	/**
+	* "selectedRowKeys" tag attribute name
+	*/
+	public static final String ATTR_SELECTEDROWKEYS = "selectedRowKeys"; //$NON-NLS-1$
+
+	/**
+	* "method" tag attribute name
+	*/
+	public static final String ATTR_METHOD = "method"; //$NON-NLS-1$
+
+	/**
+	* "messageDetailExact" tag attribute name
+	*/
+	public static final String ATTR_MESSAGEDETAILEXACT = "messageDetailExact"; //$NON-NLS-1$
+
+	/**
+	* "messageDetailNotInRange" tag attribute name
+	*/
+	public static final String ATTR_MESSAGEDETAILNOTINRANGE = "messageDetailNotInRange"; //$NON-NLS-1$
+
+	/**
+	* "launchListener" tag attribute name
+	*/
+	public static final String ATTR_LAUNCHLISTENER = "launchListener"; //$NON-NLS-1$
+
+	/**
+	* "templateSource" tag attribute name
+	*/
+	public static final String ATTR_TEMPLATESOURCE = "templateSource"; //$NON-NLS-1$
+
+	/**
+	* "maxPrecision" tag attribute name
+	*/
+	public static final String ATTR_MAXPRECISION = "maxPrecision"; //$NON-NLS-1$
+
+	/**
+	* "targetFrame" tag attribute name
+	*/
+	public static final String ATTR_TARGETFRAME = "targetFrame"; //$NON-NLS-1$
+
+	/**
+	* "messageDetailConvertDate" tag attribute name
+	*/
+	public static final String ATTR_MESSAGEDETAILCONVERTDATE = "messageDetailConvertDate"; //$NON-NLS-1$
+
+	/**
+	* "focusListener" tag attribute name
+	*/
+	public static final String ATTR_FOCUSLISTENER = "focusListener"; //$NON-NLS-1$
+
+	/**
+	* "contentType" tag attribute name
+	*/
+	public static final String ATTR_CONTENTTYPE = "contentType"; //$NON-NLS-1$
+
+	/**
+	* "type" tag attribute name
+	*/
+	public static final String ATTR_TYPE = "type"; //$NON-NLS-1$
+
+	/**
+	* "initiallyExpanded" tag attribute name
+	*/
+	public static final String ATTR_INITIALLYEXPANDED = "initiallyExpanded"; //$NON-NLS-1$
+
+	/**
+	* "selectionListener" tag attribute name
+	*/
+	public static final String ATTR_SELECTIONLISTENER = "selectionListener"; //$NON-NLS-1$
+
+	/**
+	* "level" tag attribute name
+	*/
+	public static final String ATTR_LEVEL = "level"; //$NON-NLS-1$
+
+	/**
+	* "action" tag attribute name
+	*/
+	public static final String ATTR_ACTION = "action"; //$NON-NLS-1$
+
+	/**
+	* "value" tag attribute name
+	*/
+	public static final String ATTR_VALUE = "value"; //$NON-NLS-1$
+
+	/**
+	* "auxiliary2Size" tag attribute name
+	*/
+	public static final String ATTR_AUXILIARY2SIZE = "auxiliary2Size"; //$NON-NLS-1$
+
+	/**
+	* "required" tag attribute name
+	*/
+	public static final String ATTR_REQUIRED = "required"; //$NON-NLS-1$
+
+	/**
+	* "integerOnly" tag attribute name
+	*/
+	public static final String ATTR_INTEGERONLY = "integerOnly"; //$NON-NLS-1$
+
+	/**
+	* "wrap" tag attribute name
+	*/
+	public static final String ATTR_WRAP = "wrap"; //$NON-NLS-1$
+
+	/**
+	* "chooseId" tag attribute name
+	*/
+	public static final String ATTR_CHOOSEID = "chooseId"; //$NON-NLS-1$
+
+	/**
+	* "requiredMessageDetail" tag attribute name
+	*/
+	public static final String ATTR_REQUIREDMESSAGEDETAIL = "requiredMessageDetail"; //$NON-NLS-1$
+
+	/**
+	* "styleClass" tag attribute name
+	*/
+	public static final String ATTR_STYLECLASS = "styleClass"; //$NON-NLS-1$
+
+	/**
+	* "customColorData" tag attribute name
+	*/
+	public static final String ATTR_CUSTOMCOLORDATA = "customColorData"; //$NON-NLS-1$
+
+	/**
+	* "rows" tag attribute name
+	*/
+	public static final String ATTR_ROWS = "rows"; //$NON-NLS-1$
+
+	/**
+	* "groupingUsed" tag attribute name
+	*/
+	public static final String ATTR_GROUPINGUSED = "groupingUsed"; //$NON-NLS-1$
+
+	/**
+	* "playCount" tag attribute name
+	*/
+	public static final String ATTR_PLAYCOUNT = "playCount"; //$NON-NLS-1$
+
+	/**
+	* "default" tag attribute name
+	*/
+	public static final String ATTR_DEFAULT = "default"; //$NON-NLS-1$
+
+	/**
+	* "contentStyle" tag attribute name
+	*/
+	public static final String ATTR_CONTENTSTYLE = "contentStyle"; //$NON-NLS-1$
+
+	/**
+	* "maxColumns" tag attribute name
+	*/
+	public static final String ATTR_MAXCOLUMNS = "maxColumns"; //$NON-NLS-1$
+
+	/**
+	* "alignment" tag attribute name
+	*/
+	public static final String ATTR_ALIGNMENT = "alignment"; //$NON-NLS-1$
+
+	/**
+	* "leadingHeader" tag attribute name
+	*/
+	public static final String ATTR_LEADINGHEADER = "leadingHeader"; //$NON-NLS-1$
+
+	/**
+	* "locale" tag attribute name
+	*/
+	public static final String ATTR_LOCALE = "locale"; //$NON-NLS-1$
+
+	/**
+	* "messageDetailMaximum" tag attribute name
+	*/
+	public static final String ATTR_MESSAGEDETAILMAXIMUM = "messageDetailMaximum"; //$NON-NLS-1$
+
+	/**
+	* "windowHeight" tag attribute name
+	*/
+	public static final String ATTR_WINDOWHEIGHT = "windowHeight"; //$NON-NLS-1$
+
+	/**
+	* "timeZone" tag attribute name
+	*/
+	public static final String ATTR_TIMEZONE = "timeZone"; //$NON-NLS-1$
+
+	/**
+	* "from" tag attribute name
+	*/
+	public static final String ATTR_FROM = "from"; //$NON-NLS-1$
+
+	/**
+	* "messageDetailMinimum" tag attribute name
+	*/
+	public static final String ATTR_MESSAGEDETAILMINIMUM = "messageDetailMinimum"; //$NON-NLS-1$
+
+	/**
+	* "id" tag attribute name
+	*/
+	public static final String ATTR_ID = "id"; //$NON-NLS-1$
+
+	/**
+	* "returnListener" tag attribute name
+	*/
+	public static final String ATTR_RETURNLISTENER = "returnListener"; //$NON-NLS-1$
+
+	/**
+	* "controls" tag attribute name
+	*/
+	public static final String ATTR_CONTROLS = "controls"; //$NON-NLS-1$
+
+	/**
+	* "disclosedTransient" tag attribute name
+	*/
+	public static final String ATTR_DISCLOSEDTRANSIENT = "disclosedTransient"; //$NON-NLS-1$
+
+	/**
+	* "selected" tag attribute name
+	*/
+	public static final String ATTR_SELECTED = "selected"; //$NON-NLS-1$
+
+	/**
+	* "dateStyle" tag attribute name
+	*/
+	public static final String ATTR_DATESTYLE = "dateStyle"; //$NON-NLS-1$
+
+	/**
+	* "minIntegerDigits" tag attribute name
+	*/
+	public static final String ATTR_MININTEGERDIGITS = "minIntegerDigits"; //$NON-NLS-1$
+
+	/**
+	* "onmouseup" tag attribute name
+	*/
+	public static final String ATTR_ONMOUSEUP = "onmouseup"; //$NON-NLS-1$
+
+	/**
+	* "layout" tag attribute name
+	*/
+	public static final String ATTR_LAYOUT = "layout"; //$NON-NLS-1$
+
+	/**
+	* "expandAllEnabled" tag attribute name
+	*/
+	public static final String ATTR_EXPANDALLENABLED = "expandAllEnabled"; //$NON-NLS-1$
+
+	/**
+	* "onmousemove" tag attribute name
+	*/
+	public static final String ATTR_ONMOUSEMOVE = "onmousemove"; //$NON-NLS-1$
+
+	/**
+	* "halign" tag attribute name
+	*/
+	public static final String ATTR_HALIGN = "halign"; //$NON-NLS-1$
+
+	/**
+	* "labelWidth" tag attribute name
+	*/
+	public static final String ATTR_LABELWIDTH = "labelWidth"; //$NON-NLS-1$
+
+	/**
+	* "currencyCode" tag attribute name
+	*/
+	public static final String ATTR_CURRENCYCODE = "currencyCode"; //$NON-NLS-1$
+
+	/**
+	* "partialTriggers" tag attribute name
+	*/
+	public static final String ATTR_PARTIALTRIGGERS = "partialTriggers"; //$NON-NLS-1$
+
+	/**
+	* "separateRows" tag attribute name
+	*/
+	public static final String ATTR_SEPARATEROWS = "separateRows"; //$NON-NLS-1$
+
+	/**
+	* "hint" tag attribute name
+	*/
+	public static final String ATTR_HINT = "hint"; //$NON-NLS-1$
+
+	/**
+	* "onchange" tag attribute name
+	*/
+	public static final String ATTR_ONCHANGE = "onchange"; //$NON-NLS-1$
+
+	/**
+	* "begin" tag attribute name
+	*/
+	public static final String ATTR_BEGIN = "begin"; //$NON-NLS-1$
+
+	/**
+	* "longDescURL" tag attribute name
+	*/
+	public static final String ATTR_LONGDESCURL = "longDescURL"; //$NON-NLS-1$
+
+	/**
+	* "onload" tag attribute name
+	*/
+	public static final String ATTR_ONLOAD = "onload"; //$NON-NLS-1$
+
+	/**
+	* "sortListener" tag attribute name
+	*/
+	public static final String ATTR_SORTLISTENER = "sortListener"; //$NON-NLS-1$
+
+	/**
+	* "filename" tag attribute name
+	*/
+	public static final String ATTR_FILENAME = "filename"; //$NON-NLS-1$
+
+	/**
+	* "secret" tag attribute name
+	*/
+	public static final String ATTR_SECRET = "secret"; //$NON-NLS-1$
+
+	/**
+	* "group" tag attribute name
+	*/
+	public static final String ATTR_GROUP = "group"; //$NON-NLS-1$
+
+	/**
+	* "first" tag attribute name
+	*/
+	public static final String ATTR_FIRST = "first"; //$NON-NLS-1$
+
+	/**
+	* "step" tag attribute name
+	*/
+	public static final String ATTR_STEP = "step"; //$NON-NLS-1$
+
+	/**
+	* "headers" tag attribute name
+	*/
+	public static final String ATTR_HEADERS = "headers"; //$NON-NLS-1$
+
+	/**
+	* "generatesContent" tag attribute name
+	*/
+	public static final String ATTR_GENERATESCONTENT = "generatesContent"; //$NON-NLS-1$
+
+	/**
+	* "marginHeight" tag attribute name
+	*/
+	public static final String ATTR_MARGINHEIGHT = "marginHeight"; //$NON-NLS-1$
+
+	/**
+	* "cellPadding" tag attribute name
+	*/
+	public static final String ATTR_CELLPADDING = "cellPadding"; //$NON-NLS-1$
+
+	/**
+	* "wrappingDisabled" tag attribute name
+	*/
+	public static final String ATTR_WRAPPINGDISABLED = "wrappingDisabled"; //$NON-NLS-1$
+
+	/**
+	* "rowSpan" tag attribute name
+	*/
+	public static final String ATTR_ROWSPAN = "rowSpan"; //$NON-NLS-1$
+
+	/**
+	* "columnSpan" tag attribute name
+	*/
+	public static final String ATTR_COLUMNSPAN = "columnSpan"; //$NON-NLS-1$
+
+	/**
+	* "frameSpacing" tag attribute name
+	*/
+	public static final String ATTR_FRAMESPACING = "frameSpacing"; //$NON-NLS-1$
+
+	/**
+	* "cellSpacing" tag attribute name
+	*/
+	public static final String ATTR_CELLSPACING = "cellSpacing"; //$NON-NLS-1$
+
+	/**
+	* "header" tag attribute name
+	*/
+	public static final String ATTR_HEADER = "header"; //$NON-NLS-1$
+
+	/**
+	* "scrolling" tag attribute name
+	*/
+	public static final String ATTR_SCROLLING = "scrolling"; //$NON-NLS-1$
+
+	/**
+	* "borderWidth" tag attribute name
+	*/
+	public static final String ATTR_BORDERWIDTH = "borderWidth"; //$NON-NLS-1$
+
+	/**
+	* "frameBorderWidth" tag attribute name
+	*/
+	public static final String ATTR_FRAMEBORDERWIDTH = "frameBorderWidth"; //$NON-NLS-1$
+
+	/**
+	* "shortText" tag attribute name
+	*/
+	public static final String ATTR_SHORTTEXT = "shortText"; //$NON-NLS-1$
+
+	/**
+	* "marginWidth" tag attribute name
+	*/
+	public static final String ATTR_MARGINWIDTH = "marginWidth"; //$NON-NLS-1$
+
+	/**
+	* "firstClickPassed" tag attribute name
+	*/
+	public static final String ATTR_FIRSTCLICKPASSED = "firstClickPassed"; //$NON-NLS-1$
+
 }

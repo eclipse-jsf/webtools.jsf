@@ -110,7 +110,7 @@ public final class MetaDataEnabledProcessingFactory {
 	}
 
 	/**
-	 * A convience method fully equivalent to:
+	 * A convenience method fully equivalent to:
 	 * 
 	 *     getAttributeValueRuntimeTypeFeatureProcessors
      *      (featureType, sdContext, attributeId.getTagIdentifier().getUri()

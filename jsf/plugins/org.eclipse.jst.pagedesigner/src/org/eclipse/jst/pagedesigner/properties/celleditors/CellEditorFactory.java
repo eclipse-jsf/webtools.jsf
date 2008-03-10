@@ -212,7 +212,7 @@ public class CellEditorFactory implements ITagAttributeCellEditorFactory {
 //		// if there is no type or type unknown, then we just return null. and
 //		// system will
 //		// create default (text cell editor).
-		} else if (pvs != null) {
+		} else if (pvs != null && pvs.getPossibleValues().size() > 0) {
 			MDEnabledComboDialogField field = new MDEnabledComboDialogField(SWT.None);
 			field.setLabelText(attr.getLabel());
 			field.setToolTip(attr.getDescription());

@@ -96,7 +96,7 @@ public class AllPropertySection extends AbstractPropertySection {
 		IDOMElement newEle = (IDOMElement) DesignerPropertyTool.getElement(
 				part, selection);
 
-		if (_element != newEle) {
+		if (_element != newEle && page != null) {
 			super.setInput(part, selection);
 			page.selectionChanged(part, selection);
 			if (_element != null) {
@@ -124,7 +124,8 @@ public class AllPropertySection extends AbstractPropertySection {
 
 	@Override
 	public void refresh() {
-		page.refresh();
+		if (page != null)
+			page.refresh();
 	}
 
 	@Override

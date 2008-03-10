@@ -4,27 +4,27 @@
    <extension
          point="org.eclipse.jst.jsf.common.standardMetaDataFiles">
       <standardMetaDataFile
-            location="/metadata/trinidad.xml"
+            location="$nl$/metadata/trinidad.xml"
             uri="http://myfaces.apache.org/trinidad">
       </standardMetaDataFile>  
       <standardMetaDataFile
-            location="/metadata/trinidad_pi.xml"
+            location="$nl$/metadata/trinidad_pi.xml"
             uri="http://myfaces.apache.org/trinidad">
       </standardMetaDataFile>    
       <standardMetaDataFile
-            location="/metadata/trinidad_dti.xml"
+            location="$nl$/metadata/trinidad_dti.xml"
             uri="http://myfaces.apache.org/trinidad">
       </standardMetaDataFile>
       <standardMetaDataFile
-            location="/metadata/trinidad_html.xml"
+            location="$nl$/metadata/trinidad_html.xml"
             uri="http://myfaces.apache.org/trinidad/html">
       </standardMetaDataFile>
       <standardMetaDataFile
-            location="/metadata/trinidad_html_pi.xml"
-            uri="http://myfaces.apache.org/trinidad">
+            location="$nl$/metadata/trinidad_html_pi.xml"
+            uri="http://myfaces.apache.org/trinidad/html">
       </standardMetaDataFile> 
       <standardMetaDataFile
-            location="/metadata/trinidad_html_dti.xml"
+            location="$nl$/metadata/trinidad_html_dti.xml"
             uri="http://myfaces.apache.org/trinidad/html">
       </standardMetaDataFile>
    </extension>

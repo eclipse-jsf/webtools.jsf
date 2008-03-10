@@ -28,8 +28,7 @@
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="id"/>
 				<section id="value"/>
-				<section id="action"/>
-				<section id="actionListener"/>
+				<section id="action"/>				
 				<section id="type"/>
 				<section id="style"/>
 				<section id="section.general.commandButton.listener" type="SECTION"/>
@@ -91,8 +90,7 @@
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="id"/>
 				<section id="value"/>
-				<section id="action"/>
-				<section id="actionListener"/>
+				<section id="action"/>				
 				<section id="style"/>	
 				<section id="section.general.commandLink.listener" type="SECTION"/>			
 			</value>
@@ -169,16 +167,7 @@
 				<section id="id"/>
 				<section id="style"/>			
 			</value>
-		</trait>
-		<trait id="quick-edit-tab">
-			<value xsi:type="qe:QuickEditTabSections">
-				<section id="id"/>
-				<section id="value"/>
-				<section id="action"/>
-				<section id="actionListener"/>
-				<section id="style"/>				
-			</value>
-		</trait>		
+		</trait>	
 	</entity>
 	<entity id="graphicImage" type="tag">
 		<include-entity-group id="basic-jsf-html-attributes"/>
@@ -903,7 +892,7 @@
 			<trait id="category">
 				<value>%property.category.jsf</value>
 			</trait>			
-		</entity>
+		</entity>		
 		<entity id="immediate">
 			<trait id="attribute-value-runtime-type">
 				<value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
@@ -911,7 +900,7 @@
 			<trait id="category">
 				<value>%property.category.jsf</value>
 			</trait>				
-		</entity>
+		</entity>	
 		<entity id="readonly">
 			<trait id="attribute-value-runtime-type">
 				<value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>

@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <md:metadatamodel id="http://myfaces.apache.org/trinidad" type="tagFile"
-    xmlns:cnst="http://org.eclipse.jst.jsf.core/constraints.ecore"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:md="http://org.eclipse.jst.jsf.common.metadata/metadata.ecore"
     xmlns:mdt="http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:qe="http://org.eclipse.jsf.pagedesigner/QuickEditTabSections.ecore">
+    xmlns:qe="http://org.eclipse.jsf.pagedesigner/QuickEditTabSections.ecore"
+    xmlns:cnst="http://org.eclipse.jst.jsf.core/constraints.ecore"
+ 	>
     <entity id="forEach" type="tag">
+    	<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="items"/>
+				<section id="var"/>
+				<section id="begin"/>
+				<section id="end"/>
+				<section id="step"/>							
+			</value>
+		</trait>
         <entity id="items"/>
         <entity id="var"/>
         <entity id="varStatus"/>
@@ -26,10 +36,23 @@
         </entity>
     </entity>
     <entity id="setActionListener" type="tag">
+       <trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="to"/>
+				<section id="from"/>			
+			</value>
+		</trait>
         <entity id="to"/>
         <entity id="from"/>
     </entity>
     <entity id="fileDownloadActionListener" type="tag">
+    	<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="method"/>				
+				<section id="filename"/>
+				<section id="contentType"/>
+			</value>
+		</trait>    
         <entity id="contentType">
             <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.ContentType</value>
@@ -49,6 +72,11 @@
         </entity>
     </entity>
     <entity id="returnActionListener" type="tag">
+    	<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="value"/>
+			</value>
+		</trait>        
         <entity id="value">
             <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.ValueBindingType</value>
@@ -63,6 +91,12 @@
     </entity>
     <entity id="resetActionListener" type="tag"/>
     <entity id="componentRef" type="tag">
+        <trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="componentType"/>
+			</value>
+		</trait>    
         <entity id="componentType"/>
         <entity id="id">
             <trait id="attribute-value-runtime-type">
@@ -84,9 +118,19 @@
         </entity>
     </entity>
     <entity id="componentDef" type="tag">
+        <trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="var"/>				
+			</value>
+		</trait>   
         <entity id="var"/>
     </entity>
     <entity id="facetRef" type="tag">
+        <trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="facetName"/>				
+			</value>
+		</trait>       
         <entity id="facetName"/>
     </entity>
     <entity id="breadCrumbs" type="tag">
@@ -97,7 +141,14 @@
 			<value xsi:type="mdt:ListOfValues">
 				<item>nodeStamp</item>					
 			</value> 	
-   		</trait>    	
+   		</trait> 
+        <trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="orientation"/>
+			</value>
+		</trait>      		   	
         <entity id="var"/>
         <entity id="value">
             <trait id="attribute-value-runtime-type">
@@ -123,6 +174,13 @@
     <entity id="chart" type="tag">
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="type"/>
+			</value>
+		</trait>     	
         <entity id="value">
             <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.ValueBindingType</value>
@@ -220,6 +278,13 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="colorData"/>
+			</value>
+		</trait>     	
         <entity id="colorData"/>
         <entity id="customColorData"/>
         <entity id="width">
@@ -235,6 +300,13 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="shortDesc"/>
+			</value>
+		</trait>     	
         <entity id="minValue"/>
         <entity id="maxValue"/>
     </entity>
@@ -248,6 +320,16 @@
 				<item>footer</item>					
 			</value> 	
    		</trait>    	
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="sortable"/>
+				<section id="align"/>
+				<section id="separateRows"/>
+				<section id="headerNoWrap"/>
+			</value>
+		</trait>    		
         <entity id="sortProperty"/>
         <entity id="align">
             <trait id="attribute-value-runtime-type">
@@ -306,6 +388,16 @@
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
     	<include-entity-group id="common-command-attributes"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="text"/>
+				<section id="action"/>
+				<section id="accessKey"/>
+				<section id="immediate"/>
+			</value>
+		</trait>     	
         <entity id="blocking">
              <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
@@ -318,7 +410,16 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
-		<include-entity-group id="common-command-attributes"/>    	
+		<include-entity-group id="common-command-attributes"/>   
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="text"/>				
+				<section id="action"/>
+				<section id="immediate"/>
+			</value>
+		</trait> 		 	
         <entity id="blocking">
              <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
@@ -330,6 +431,15 @@
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
 		<include-entity-group id="common-command-attributes"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="text"/>				
+				<section id="action"/>
+				<section id="immediate"/>
+			</value>
+		</trait> 		
         <entity id="destination"/>
         <entity id="icon"/>   
     	<entity id="selected">
@@ -337,7 +447,11 @@
                 <value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
             </trait>
     	</entity>
-        <entity id="visited"/>
+        <entity id="visited">
+            <trait id="attribute-value-runtime-type">
+                <value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
+            </trait>        
+        </entity>
         <entity id="targetFrame"/>
     </entity>
     <entity id="document" type="tag">
@@ -349,16 +463,67 @@
 				<item>metaContainer</item>					
 			</value> 	
    		</trait>
-        <entity id="title"/>
-        <entity id="mode"/>
-        <entity id="onload"/>
-        <entity id="onunload"/>
-        <entity id="initialFocusId"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="mode"/>
+				<section id="initialFocusId"/>				
+			</value>
+		</trait>    		
+        <entity id="title">
+            <trait id="attribute-value-runtime-type">
+                <value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+            </trait>
+        </entity>
+        <entity id="mode">
+            <trait id="attribute-value-runtime-type">
+                <value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+            </trait>
+            <trait id="valid-values">
+				<value xsi:type="mdt:ListOfValues">
+					<item>default</item>
+					<item>strict</item>
+					<item>quirks</item>
+				</value>            
+            </trait>
+           	<trait id="default-value">
+           		<value>default</value>
+           	</trait>
+        </entity>        	
+        <entity id="onload">
+        	<trait id="attribute-value-runtime-type">
+				<value>org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
+			</trait>
+        	<trait id="category">
+           		<value>%property.category.event</value>
+           	</trait>
+        </entity>
+        <entity id="onunload">
+        	<trait id="attribute-value-runtime-type">
+				<value>org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
+			</trait>
+        	<trait id="category">
+           		<value>%property.category.event</value>
+           	</trait>
+        </entity>
+        <entity id="initialFocusId">
+        	<trait id="attribute-value-runtime-type">
+				<value>org.eclipse.jst.jsf.core.attributevalues.ComponentIDReferenceType</value>
+			</trait>
+        </entity>
     </entity>
     <entity id="form" type="tag">
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="defaultCommand"/>				
+			</value>
+		</trait>     	
         <entity id="targetFrame"/>
         <entity id="usesUpload">
             <trait id="attribute-value-runtime-type">
@@ -366,12 +531,28 @@
             </trait>        
         </entity>
         <entity id="defaultCommand"/>
-        <entity id="onsubmit"/>
+        <entity id="onsubmit">
+                	<trait id="attribute-value-runtime-type">
+				<value>org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
+			</trait>
+        	<trait id="category">
+           		<value>%property.category.event</value>
+           	</trait>
+        </entity>
     </entity>
     <entity id="goButton" type="tag">
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="text"/>	
+				<section id="textAndAccessKey"/>	
+				<section id="destination"/>								
+			</value>
+		</trait>       	
         <entity id="destination"/>
         <entity id="text"/>
         <entity id="disabled">
@@ -392,6 +573,15 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="text"/>	
+				<section id="textAndAccessKey"/>	
+				<section id="destination"/>								
+			</value>
+		</trait>      	
         <entity id="destination"/>
         <entity id="text"/>
         <entity id="disabled">
@@ -411,12 +601,27 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
+    	<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="name"/>								
+			</value>
+		</trait>  
         <entity id="name"/>
     </entity>
     <entity id="image" type="tag">
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
+    	<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="source"/>		
+				<section id="shortDesc"/>						
+			</value>
+		</trait>      	
         <entity id="source"/>
         <entity id="longDescURL"/>
         <entity id="imageMapType">
@@ -433,6 +638,13 @@
     </entity>
     <entity id="importScript" type="tag">
     	<include-entity-group id="common-trinidad-attributes"/>
+    	<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="names"/>								
+			</value>
+		</trait>      	
         <entity id="names"/>
     </entity>
     <entity id="inputColor" type="tag">
@@ -443,6 +655,14 @@
     	<include-entity-group id="common-input-tag-attributes"/>
     	<include-entity-group id="common-text-attributes"/>
     	<include-entity-group id="common-label-attributes"/>  
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="value"/>
+				<section id="label"/>								
+			</value>
+		</trait>      	
     	<trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>help</item>					
@@ -480,7 +700,7 @@
 				<value>org.eclipse.jst.pagedesigner.attributevalues.CSSStyleType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.???</value>
+				<value>%property.category.css</value>
 			</trait>	      
         </entity>
         <entity id="compact">
@@ -512,6 +732,14 @@
 				<item>help</item>					
 			</value> 	
    		</trait> 
+   		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="value"/>
+				<section id="label"/>									
+			</value>
+		</trait>  
         <entity id="action">
             <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.ActionType</value>
@@ -544,7 +772,7 @@
 				<value>org.eclipse.jst.pagedesigner.attributevalues.CSSStyleType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.???</value>
+				<value>%property.category.css</value>
 			</trait>	       
 	    </entity>
         <entity id="chooseId"/>
@@ -571,13 +799,21 @@
 			<value xsi:type="mdt:ListOfValues">
 				<item>help</item>					
 			</value> 	
-   		</trait>     	
+   		</trait> 
+   		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="value"/>
+				<section id="label"/>									
+			</value>
+		</trait>    		    	
         <entity id="contentStyle">
         	<trait id="attribute-value-runtime-type">
 				<value>org.eclipse.jst.pagedesigner.attributevalues.CSSStyleType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.???</value>
+				<value>%property.category.css</value>
 			</trait>	       
         </entity>
         <entity id="columns">
@@ -590,7 +826,14 @@
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
     	<include-entity-group id="common-value-holder-attributes"/>
-    	<include-entity-group id="common-input-tag-attributes"/>    	
+    	<include-entity-group id="common-input-tag-attributes"/>   
+   		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="value"/>											
+			</value>
+		</trait>     	 	
     </entity>
     <entity id="inputListOfValues" type="tag">
     	<include-entity-group id="common-core-attributes"/>
@@ -604,7 +847,18 @@
 			<value xsi:type="mdt:ListOfValues">
 				<item>help</item>					
 			</value> 	
-   		</trait>      	
+   		</trait>
+   		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="value"/>
+				<section id="label"/>
+				<section id="action"/>
+				<section id="searchDesc"/>
+				<section id="columns"/>									
+			</value>
+		</trait>      	
         <entity id="action">
             <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.ActionType</value>
@@ -634,7 +888,7 @@
 				<value>org.eclipse.jst.pagedesigner.attributevalues.CSSStyleType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.???</value>
+				<value>%property.category.css</value>
 			</trait>	       
        </entity>
         <entity id="searchDesc"/>
@@ -671,14 +925,26 @@
     	<trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>help</item>					
-			</value> 	
+			</value> 			
    		</trait>  	
+   		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="value"/>
+				<section id="label"/>
+				<section id="minimum"/>
+				<section id="maximum"/>
+				<section id="stepSize"/>
+				<section id="onclick"/>									
+			</value>
+		</trait>      	   		
         <entity id="contentStyle">
         	<trait id="attribute-value-runtime-type">
 				<value>org.eclipse.jst.pagedesigner.attributevalues.CSSStyleType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.???</value>
+				<value>%property.category.css</value>
 			</trait>	       
         </entity>
         <entity id="columns">
@@ -726,13 +992,25 @@
 			<value xsi:type="mdt:ListOfValues">
 				<item>help</item>					
 			</value> 	
-   		</trait>     	    	
+   		</trait> 
+   		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="value"/>
+				<section id="label"/>
+				<section id="showRequired"/>
+				<section id="secret"/>				
+				<section id="autoSubmit"/>
+				<section id="immediate"/>
+			</value>
+		</trait>   		    	    	
        	<entity id="contentStyle">
         	<trait id="attribute-value-runtime-type">
 				<value>org.eclipse.jst.pagedesigner.attributevalues.CSSStyleType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.???</value>
+				<value>%property.category.css</value>
 			</trait>	       
        	</entity>
         <entity id="rows">
@@ -794,6 +1072,13 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
+    	<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="name"/>
+			</value>
+		</trait>  
         <entity id="name">
         	<trait id="attribute-value-runtime-type">
 				<value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
@@ -812,8 +1097,29 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
-        <entity id="width"/>
-        <entity id="height"/>
+    	<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="source"/>
+				<section id="shortDesc"/>
+				<section id="innerWidth"/>
+				<section id="innerHeight"/>				
+				<section id="autoStart"/>
+				<section id="controls"/>
+				<section id="player"/>
+			</value>
+		</trait>  
+        <entity id="width">
+            <trait id="attribute-value-runtime-type">
+				<value>org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
+			</trait>   
+		</entity>
+        <entity id="height">
+            <trait id="attribute-value-runtime-type">
+				<value>org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
+			</trait>   
+		</entity>
         <entity id="innerWidth">
             <trait id="attribute-value-runtime-type">
 				<value>org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
@@ -825,7 +1131,11 @@
 			</trait>   
 		</entity>
         <entity id="source"/>
-        <entity id="autostart"/>
+        <entity id="autostart">
+            <trait id="attribute-value-runtime-type">
+				<value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
+			</trait>   
+		</entity>
         <entity id="playCount">
             <trait id="attribute-value-runtime-type">
 				<value>org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
@@ -876,7 +1186,15 @@
 			<value xsi:type="mdt:ListOfValues">
 				<item>help</item>					
 			</value> 	
-   		</trait>       	
+   		</trait>   
+     	<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="for"/>
+				<section id="binding"/>
+				<section id="messageType"/>
+				<section id="inlineStyle"/>		
+			</value>
+		</trait>   		    	
         <entity id="for"/>
         <entity id="message"/>
         <entity id="messageType">
@@ -899,6 +1217,14 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
+    	<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>				
+				<section id="inlineStyle"/>
+				<section id="layout"/>			
+			</value>
+		</trait>  
         <entity id="message"/>
         <entity id="text"/>
         <entity id="globalOnly">
@@ -915,14 +1241,21 @@
 			<value xsi:type="mdt:ListOfValues">
 				<item>nodeStamp</item>					
 			</value> 	
-   		</trait>     	
+   		</trait> 
+    	<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>				
+				<section id="hint"/>		
+			</value>
+		</trait>     		    	
         <entity id="var"/>
         <entity id="value">
             <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.ValueBindingType</value>
             </trait>
             <trait id="runtime-return-type">
-                <value>java.lang.String</value>
+                <value>org.apache.myfaces.trinidad.model.MenuModel</value>
             </trait>
         </entity>
         <entity id="level">
@@ -963,7 +1296,15 @@
 			<value xsi:type="mdt:ListOfValues">
 				<item>nodeStamp</item>					
 			</value> 	
-   		</trait>     	
+   		</trait>
+   		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>				
+				<section id="value"/>
+				<section id="var"/>			
+			</value>
+		</trait>       	
         <entity id="var"/>
         <entity id="rowDisclosureListener">            
         	<trait id="attribute-value-runtime-type">
@@ -1004,7 +1345,14 @@
 			<value xsi:type="mdt:ListOfValues">
 				<item>nodeStamp</item>					
 			</value> 	
-   		</trait>      	
+   		</trait>
+    	<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>				
+				<section id="value"/>				
+			</value>
+		</trait>     		      	
         <entity id="titleClass">
             <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.pagedesigner.attributevalues.CSSStyleType</value>
@@ -1021,6 +1369,14 @@
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
     	<include-entity-group id="common-value-holder-attributes"/>
+    	<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>				
+				<section id="value"/>
+				<section id="styleUsage"/>			
+			</value>
+		</trait>      	
         <entity id="styleUsage">        	
 			<trait id="attribute-value-runtime-type">
 				<value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
@@ -1033,7 +1389,7 @@
 				</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.???</value>
+				<value>%property.category.css</value>
 			</trait>					
         </entity>
     </entity>
@@ -1042,6 +1398,14 @@
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
     	<include-entity-group id="common-value-holder-attributes"/>
+    	<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>				
+				<section id="value"/>
+				<section id="for"/>			
+			</value>
+		</trait>      	
         <entity id="accessKey">
             <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.CharacterType</value>
@@ -1060,6 +1424,13 @@
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
     	<include-entity-group id="common-value-holder-attributes"/>
+    	<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>				
+				<section id="value"/>					
+			</value>
+		</trait>      	
         <entity id="truncateAt"/>
         <entity id="description"/>
         <entity id="escape">
@@ -1093,7 +1464,15 @@
 				<item>nodeStamp</item>
 				<item>search</item>	
 			</value> 	
-   		</trait>       	
+   		</trait>  
+    	<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>				
+				<section id="value"/>
+				<section id="var"/>			
+			</value>
+		</trait>     		     	
         <entity id="var"/>
         <entity id="rowDisclosureListener">            
         	<trait id="attribute-value-runtime-type">
@@ -1134,6 +1513,14 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
+    	<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>				
+				<section id="discloseNone"/>
+				<section id="discloseMany"/>
+			</value>
+		</trait>      	
         <entity id="discloseNone">
             <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
@@ -1164,21 +1551,47 @@
 				<item>start</item>
 				<item>top</item>
 			</value> 	
-   		</trait>     	        
+   		</trait>   
+    	<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>						
+			</value>
+		</trait>     		  	        
     </entity>
     <entity id="panelBox" type="tag">
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
+    	<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>				
+				<section id="text"/>
+				<section id="background"/>			
+			</value>
+		</trait>      	
         <entity id="text"/>
-        <entity id="background"/>
+        <entity id="background">
+            <trait id="attribute-value-runtime-type">
+                <value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+            </trait>
+			<trait id="valid-values">
+			 	<value xsi:type="mdt:ListOfValues">
+					<item>light</item>
+					<item>medium</item>
+					<item>dark</item>
+					<item>transparent</item>							
+				</value>
+			</trait>
+        </entity>
         <entity id="icon"/>
        	<entity id="contentStyle">
         	<trait id="attribute-value-runtime-type">
 				<value>org.eclipse.jst.pagedesigner.attributevalues.CSSStyleType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.???</value>
+				<value>%property.category.css</value>
 			</trait>	       
        	</entity>
     </entity>
@@ -1186,6 +1599,13 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
+    	<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>								
+				<section id="halign"/>			
+			</value>
+		</trait>      	
         <entity id="halign">
             <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
@@ -1210,13 +1630,28 @@
 				<item>caption</item>
 			</value>
 		</trait>     	
+    	<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>				
+				<section id="captionText"/>						
+			</value>
+		</trait>  		
         <entity id="captionText"/>
     </entity>
     <entity id="panelChoice" type="tag">
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
-   
+    	<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>				
+				<section id="label"/>
+				<section id="labelAndAccessKey"/>
+				<section id="position"/>			
+			</value>
+		</trait>     
         <entity id="label"/>
         <entity id="accessKey">
             <trait id="attribute-value-runtime-type">
@@ -1264,9 +1699,26 @@
 			<value xsi:type="mdt:ListOfValues">
 				<item>footer</item>
 			</value>
-		</trait>     	
-        <entity id="fieldWidth"/>
-        <entity id="labelWidth"/>
+		</trait>
+    	<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>								
+				<section id="labelWidth"/>		
+				<section id="fieldWidth"/>
+				<section id="rows"/>	
+			</value>
+		</trait>  		     	
+        <entity id="fieldWidth">
+            <trait id="attribute-value-runtime-type">
+                <value>org.eclipse.jst.jsf.core.attributevalues.LengthType</value>
+            </trait>
+        </entity>
+        <entity id="labelWidth">
+            <trait id="attribute-value-runtime-type">
+                <value>org.eclipse.jst.jsf.core.attributevalues.LengthType</value>
+            </trait>
+        </entity>
         <entity id="maxColumns">
             <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
@@ -1287,6 +1739,13 @@
 				<item>separator</item>
 			</value>
 		</trait>        	
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>				
+				<section id="layout"/>
+			</value>
+		</trait>
         <entity id="layout">
         	<trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
@@ -1303,7 +1762,14 @@
     <entity id="panelHeader" type="tag">
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
-    	<include-entity-group id="common-event-attributes"/>    	
+    	<include-entity-group id="common-event-attributes"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>				
+				<section id="text"/>
+			</value>
+		</trait>    	
         <entity id="text"/>
         <entity id="icon"/>
         <entity id="messageType">
@@ -1337,7 +1803,15 @@
 			<value xsi:type="mdt:ListOfValues">
 				<item>separator</item>
 			</value>
-		</trait>        	
+		</trait>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>				
+				<section id="halign"/>
+				<section id="valign"/>
+			</value>
+		</trait>       	
         <entity id="valign">
             <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
@@ -1375,7 +1849,16 @@
 				<item>end</item>
 				<item>help</item>
 			</value>
-		</trait>      	
+		</trait> 
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>			
+				<section id="for"/>	
+				<section id="label"/>
+				<section id="message"/>
+			</value>
+		</trait>     	
         <entity id="showRequired">
             <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
@@ -1399,6 +1882,14 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
+     	<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>				
+				<section id="rows"/>
+				<section id="maxColumns"/>		
+			</value>
+		</trait>      	
         <entity id="listStyle"/>
         <entity id="rows">
             <trait id="attribute-value-runtime-type">
@@ -1440,7 +1931,13 @@
 				<item>toolbar2</item>
 				<item>toolbarGlobal</item>
 			</value> 	
-   		</trait>     	
+   		</trait> 
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+			</value>
+		</trait>  
         <entity id="auxiliary1Size">
             <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
@@ -1472,7 +1969,14 @@
 				<item>navigationGlobal</item>
 				<item>search</item>	
 			</value> 	
-   		</trait>     	 	
+   		</trait> 
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="chromeType"/>				
+			</value>
+		</trait>     		    	 	
         <entity id="chromeType">
          	<trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
@@ -1493,7 +1997,19 @@
 			<value xsi:type="mdt:ListOfValues">
 				<item>trigger</item>
 			</value>
-		</trait>    	
+		</trait>   
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="text"/>
+				<section id="triggerType"/>	
+				<section id="position"/>
+				<section id="modal"/>	
+				<section id="height"/>
+				<section id="width"/>	
+			</value>
+		</trait>  	
         <entity id="triggerType">
          	<trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
@@ -1539,7 +2055,7 @@
 				<value>org.eclipse.jst.pagedesigner.attributevalues.CSSStyleType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.???</value>
+				<value>%property.category.css</value>
 			</trait>	       
        </entity>
         <entity id="width">
@@ -1557,6 +2073,15 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="label"/>
+				<section id="alignment"/>	
+				<section id="position"/>	
+			</value>
+		</trait>      	
         <entity id="position">
          	<trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
@@ -1594,7 +2119,14 @@
 			<value xsi:type="mdt:ListOfValues">
 				<item>filter</item>
 			</value> 	
-   		</trait>      	
+   		</trait> 
+   		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="width"/>	
+			</value>
+		</trait>  
         <entity id="width">
             <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.LengthType</value>
@@ -1605,6 +2137,13 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
+    	<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="position"/>
+			</value>
+		</trait>
         <entity id="position">
          	<trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
@@ -1625,9 +2164,23 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
+    	<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+			</value>
+		</trait>  
     </entity>
     <entity id="poll" type="tag">
     	<include-entity-group id="common-core-attributes"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="interval"/>
+				<section id="pollListener"/>						
+			</value>
+		</trait>      	
         <entity id="immediate">
             <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
@@ -1661,7 +2214,16 @@
 			<value xsi:type="mdt:ListOfValues">
 				<item>nodeStamp</item>					
 			</value> 	
-   		</trait>     	
+   		</trait> 
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="value"/>
+				<section id="var"/>	
+				<section id="shortDesc"/>	
+			</value>
+		</trait>     		    	
         <entity id="var"/>
         <entity id="value">
             <trait id="attribute-value-runtime-type">
@@ -1677,6 +2239,14 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="value"/>
+				<section id="action"/>					
+			</value>
+		</trait>      	
         <entity id="value">
             <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.ValueBindingType</value>
@@ -1714,6 +2284,15 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="text"/>
+				<section id="accessKey"/>	
+				<section id="disabled"/>	
+			</value>
+		</trait>      	
         <entity id="text"/>
         <entity id="disabled">
             <trait id="attribute-value-runtime-type">
@@ -1734,6 +2313,15 @@
     	<include-entity-group id="common-value-holder-attributes"/>
     	<include-entity-group id="common-input-tag-attributes"/>
     	<include-entity-group id="common-select-tag-attributes"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="value"/>
+				<section id="text"/>	
+				<section id="label"/>	
+			</value>
+		</trait>      	
     	<trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>help</item>
@@ -1756,7 +2344,18 @@
 			<value xsi:type="mdt:ListOfValues">
 				<item>help</item>
 			</value> 	
-   		</trait>       	
+   		</trait> 
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="value"/>
+				<section id="text"/>	
+				<section id="label"/>	
+				<section id="selected"/>
+				<section id="group"/>
+			</value>
+		</trait>    		      	
     	<entity id="selected">
             <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
@@ -1765,7 +2364,15 @@
         <entity id="group"/>
     </entity>
     <entity id="selectItem" type="tag">
-    	<include-entity-group id="common-core-attributes"/>    	
+    	<include-entity-group id="common-core-attributes"/>  
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="value"/>
+				<section id="label"/>					
+			</value>
+		</trait>     	  	
         <entity id="value">
             <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.ValueBindingType</value>
@@ -1795,7 +2402,16 @@
 			<value xsi:type="mdt:ListOfValues">
 				<item>help</item>
 			</value> 	
-   		</trait>      	
+   		</trait>
+   		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="value"/>
+				<section id="label"/>	
+				<section id="valueChangeListener"/>	
+			</value>
+		</trait>       	
         <entity id="layout">
         	<trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
@@ -1820,7 +2436,16 @@
 			<value xsi:type="mdt:ListOfValues">
 				<item>help</item>
 			</value> 	
-   		</trait>      	
+   		</trait>
+   		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="value"/>
+				<section id="label"/>	
+				<section id="valueChangeListener"/>	
+			</value>
+		</trait>       	
         <entity id="size">
             <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
@@ -1844,7 +2469,18 @@
 				<item>leadingFooter</item>
 				<item>trailingFooter</item>
 			</value> 	
-   		</trait>     	
+   		</trait>
+   		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="value"/>
+				<section id="label"/>
+				<section id="leadingHeader"/>
+				<section id="trailingHeader"/>		
+				<section id="valueChangeListener"/>	
+			</value>
+		</trait>       	     	
         <entity id="size">
             <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
@@ -1881,7 +2517,16 @@
 			<value xsi:type="mdt:ListOfValues">
 				<item>help</item>
 			</value> 	
-   		</trait>      	
+   		</trait> 
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="label"/>
+				<section id="unselectedLabel"/>	
+				<section id="valueChangeListener"/>	
+			</value>
+		</trait>    		     	
     </entity>
     <entity id="selectOneListbox" type="tag">
     	<include-entity-group id="common-core-attributes"/>
@@ -1896,7 +2541,16 @@
 			<value xsi:type="mdt:ListOfValues">
 				<item>help</item>
 			</value> 	
-   		</trait>      	     
+   		</trait> 
+   		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="label"/>
+				<section id="unselectedLabel"/>	
+				<section id="valueChangeListener"/>	
+			</value>
+		</trait>      	     
     </entity>
     <entity id="selectOneRadio" type="tag">
     	<include-entity-group id="common-core-attributes"/>
@@ -1911,7 +2565,16 @@
 			<value xsi:type="mdt:ListOfValues">
 				<item>help</item>
 			</value> 	
-   		</trait>  
+   		</trait>
+   		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="label"/>
+				<section id="unselectedLabel"/>	
+				<section id="valueChangeListener"/>	
+			</value>
+		</trait>   
         <entity id="layout">
         	<trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
@@ -1938,7 +2601,19 @@
 				<item>leadingFooter</item>
 				<item>trailingFooter</item>
 			</value> 	
-   		</trait>    	
+   		</trait>
+   		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="value"/>
+				<section id="label"/>
+				<section id="leadingHeader"/>
+				<section id="trailingHeader"/>		
+				<section id="valueChangeListener"/>	
+			</value>
+		</trait>       	     	
+
     	<entity id="reorderOnly">
             <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
@@ -1973,7 +2648,18 @@
 			<value xsi:type="mdt:ListOfValues">
 				<item>rangeLabel</item>
 			</value> 	
-   		</trait>      	
+   		</trait>
+   		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="value"/>
+				<section id="label"/>
+				<section id="first"/>
+				<section id="rows"/>		
+				<section id="var"/>	
+			</value>
+		</trait>       	     	   		      	
         <entity id="var"/>
         <entity id="immediate">
             <trait id="attribute-value-runtime-type">
@@ -2020,6 +2706,12 @@
     </entity>
     <entity id="separator" type="tag">
     	<include-entity-group id="common-core-attributes"/>
+    	<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+			</value>
+		</trait>       	     	    	
     </entity>
     <entity id="showDetail" type="tag">
     	<include-entity-group id="common-core-attributes"/>
@@ -2030,7 +2722,17 @@
 			<value xsi:type="mdt:ListOfValues">
 				<item>prompt</item>
 			</value> 	
-   		</trait>   		
+   		</trait>
+   		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>				
+				<section id="disclosedText"/>
+				<section id="undisclosedText"/>
+				<section id="discloseListener"/>
+				<section id="partialTriggers"/>				
+			</value>
+		</trait>       	     	   		   		
         <entity id="disclosedText"/>
         <entity id="undisclosedText"/>
     </entity>
@@ -2038,7 +2740,16 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
-		<include-entity-group id="common-show-tag-attributes"/>		
+		<include-entity-group id="common-show-tag-attributes"/>	
+   		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>				
+				<section id="text"/>
+				<section id="discloseListener"/>
+				<section id="partialTriggers"/>				
+			</value>
+		</trait>      	     				
         <entity id="text"/>
         <entity id="icon"/>
         <entity id="messageType">
@@ -2066,6 +2777,16 @@
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
     	<include-entity-group id="common-show-tag-attributes"/>
+    	<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="text"/>
+				<section id="textAndAccessKey"/>
+				<section id="disclosed"/>
+				<section id="disabled"/>
+			</value>
+		</trait>
     	<trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>toolbar</item>
@@ -2076,8 +2797,16 @@
                 <value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
             </trait>
         </entity>
-        <entity id="text"/>
-        <entity id="textAndAccessKey"/>
+        <entity id="text">
+        	<trait id="attribute-value-runtime-type">
+                <value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+            </trait>
+        </entity>
+        <entity id="textAndAccessKey">
+            <trait id="attribute-value-runtime-type">
+                <value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+            </trait>
+        </entity>
         <entity id="accessKey">
             <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.CharacterType</value>
@@ -2093,6 +2822,16 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>				
+				<section id="selectedStep"/>
+				<section id="maxStep"/>
+				<section id="nextAction"/>
+				<section id="previousAction"/>					
+			</value>
+		</trait>    	
         <entity id="selectedStep">
             <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
@@ -2143,10 +2882,24 @@
     <entity id="spacer" type="tag">
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
-        <entity id="width">
+    	<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="height"/>
+				<section id="width"/>
+			</value>
+		</trait>
+       <entity id="width">
+            <trait id="attribute-value-runtime-type">
+                <value>org.eclipse.jst.jsf.core.attributevalues.LengthType</value>
+            </trait>        
         </entity>
         <entity id="height">
-        </entity>             
+            <trait id="attribute-value-runtime-type">
+                <value>org.eclipse.jst.jsf.core.attributevalues.LengthType</value>
+            </trait>        
+        </entity>  
     </entity>
     <entity id="statusIndicator" type="tag">
     	<include-entity-group id="common-core-attributes"/>
@@ -2157,19 +2910,40 @@
 				<item>busy</item>
 				<item>ready</item>
 			</value> 	
-   		</trait>    	
+   		</trait>
+   		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+			</value>
+		</trait>    	
     </entity>
     <entity id="subform" type="tag">
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="default"/>				
+			</value>
+		</trait>         
         <entity id="default">
             <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
             </trait>        
-        </entity>
+        </entity>       
     </entity>
     <entity id="switcher" type="tag">
     	<include-entity-group id="common-core-attributes"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="defaultFacet"/>
+				<section id="facetName"/>				
+			</value>
+		</trait>     	
     	<entity id="defaultFacet"/>
     	<entity id="facetName"/>
     </entity>
@@ -2184,15 +2958,35 @@
 				<item>footer</item>
 				<item>header</item>				
 			</value> 	
-   		</trait>      	    	
+   		</trait>
+   		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="value"/>
+				<section id="var"/>
+				<section id="rows"/>
+				<section id="rowBandingInterval"/>
+				<section id="emptyText"/>
+				<section id="summary"/>
+				<section id="allDetailsEnabled"/>					
+			</value>
+		</trait>        	    	
         <entity id="var"/>
         <entity id="varStatus"/>
         <entity id="value">
             <trait id="attribute-value-runtime-type">
-                <value>org.eclipse.jst.jsf.core.attributevalues.ValueBindingType</value>
+                <value>org.eclipse.jst.jsf.core.attributevalues.MultiSignatureValueBindingType</value>
             </trait>
-            <trait id="runtime-return-type">
-                <value>java.lang.Object</value>
+            <trait id="runtime-return-types">
+            	<value xsi:type="mdt:ListOfValues">					
+	                <item>org.apache.myfaces.trinidad.model.CollectionModel</item>
+	                <item>java.util.List</item>
+	                <item>java.util.Set</item>
+	                <item>java.util.Map</item>
+	                <item>javax.faces.model.DataModel</item>
+	                <item>java.lang.Object[]</item>
+                </value>
             </trait>
         </entity>
         <entity id="rows">
@@ -2314,7 +3108,15 @@
 			<value xsi:type="mdt:ListOfValues">				
 				<item>nodeStamp</item>
 			</value> 	
-   		</trait>      	
+   		</trait> 
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="value"/>
+				<section id="var"/>					
+			</value>
+		</trait>   		     	
         <entity id="var"/>
         <entity id="value">
             <trait id="attribute-value-runtime-type">
@@ -2334,7 +3136,16 @@
 			<value xsi:type="mdt:ListOfValues">				
 				<item>nodeStamp</item>
 			</value> 	
-   		</trait>       	
+   		</trait>
+   		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="value"/>
+				<section id="var"/>
+				<section id="initiallyExpanded"/>					
+			</value>
+		</trait>       	
         <entity id="var"/>
         <entity id="selectedRowKeys"/>
         <entity id="immediate">
@@ -2362,13 +3173,10 @@
         <entity id="varStatus"/>
         <entity id="value">
             <trait id="attribute-value-runtime-type">
-                <value>org.eclipse.jst.jsf.core.attributevalues.MultiSignatureValueBindingType</value>
+                <value>org.eclipse.jst.jsf.core.attributevalues.ValueBindingType</value>
             </trait>
-            <trait id="runtime-return-types">
-            	<value xsi:type="mdt:ListOfValues">	
-                	<item>org.apache.myfaces.trinidad.model.TreeModel</item>
-                	<item>java.util.List</item>
-                </value>
+            <trait id="runtime-return-type">
+            	<value>org.apache.myfaces.trinidad.model.TreeModel</value>
             </trait>
         </entity>
         <entity id="focusRowKey"/>
@@ -2398,7 +3206,17 @@
 				<item>nodeStamp</item>
 				<item>pathStamp</item>				
 			</value> 	
-   		</trait>       	
+   		</trait>
+   		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="value"/>
+				<section id="summary"/>
+				<section id="emptyText"/>
+				<section id="rowByDepth"/>					
+			</value>
+		</trait>       	
         <entity id="var"/>
         <entity id="selectedRowKeys"/>
         <entity id="immediate">
@@ -2486,7 +3304,18 @@
                 <value>org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
             </trait>
         </entity>
-        <entity id="rowSelection"/>
+        <entity id="rowSelection">			
+        	<trait id="attribute-value-runtime-type">
+        		<value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+        	</trait>
+        	<trait id="valid-values">
+	        	<value xsi:type="mdt:ListOfValues">				
+					<item>none</item>
+					<item>single</item>
+					<item>multiple</item>
+				</value> 
+			</trait>
+		</entity>
         <entity id="autoSubmit">
         	<trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
@@ -2506,17 +3335,41 @@
     </entity>
     <entity id="group" type="tag">
     	<include-entity-group id="common-core-attributes"/>
+    	<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>					
+			</value>
+		</trait>
     </entity>
     <entity id="iterator" type="tag">
 		<include-entity-group id="common-core-attributes"/>    	
+   		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="binding"/>
+				<section id="value"/>
+				<section id="var"/>
+				<section id="varStat"/>
+				<section id="first"/>				
+				<section id="rows"/>				
+			</value>
+		</trait>  		
         <entity id="var"/>
         <entity id="varStatus"/>
         <entity id="value">
             <trait id="attribute-value-runtime-type">
-                <value>org.eclipse.jst.jsf.core.attributevalues.ValueBindingType</value>
+                <value>org.eclipse.jst.jsf.core.attributevalues.MultiSignatureValueBindingType</value>
             </trait>
-            <trait id="runtime-return-type">
-                <value>java.lang.Object</value>
+            <trait id="runtime-return-types">
+            	<value xsi:type="mdt:ListOfValues">					
+	                <item>org.apache.myfaces.trinidad.model.CollectionModel</item>
+	                <item>java.util.List</item>
+	                <item>java.util.Set</item>
+	                <item>java.util.Map</item>
+	                <item>javax.faces.model.DataModel</item>
+	                <item>java.lang.Object[]</item>
+                </value>
             </trait>
         </entity>
         <entity id="rows">
@@ -2536,12 +3389,15 @@
             </trait>
         </entity>
     </entity>
-    <entity id="switcher" type="tag">
-		<include-entity-group id="common-core-attributes"/>    	
-        <entity id="facetName"/>
-        <entity id="defaultFacet"/>
-    </entity>
     <entity id="convertColor" type="tag">
+   	 	<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="patterns"/>
+				<section id="messageDetailConvert"/>
+				<section id="transparentAllowed"/>					
+			</value>
+		</trait>
         <entity id="id">
             <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.ComponentIDType</value>
@@ -2739,6 +3595,13 @@
 		</entity>
     </entity>
     <entity id="validateByteLength" type="tag">
+    	<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="maximum"/>
+				<section id="messageDetailMaximum"/>							
+			</value>
+		</trait>
         <entity id="id">
             <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.ComponentIDType</value>
@@ -2756,6 +3619,11 @@
         <entity id="messageDetailMaximum"/>
     </entity>
     <entity id="validateDateRestriction" type="tag">
+    	<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>					
+			</value>
+		</trait>
         <entity id="id">
             <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.ComponentIDType</value>
@@ -2769,6 +3637,15 @@
         <entity id="messageDetailInvalidDays"/>
     </entity>
     <entity id="validateDateTimeRange" type="tag">
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="minimum"/>
+				<section id="messageDetailMinimum"/>
+				<section id="maximum"/>
+				<section id="messageDetailMaximum"/>							
+			</value>
+		</trait>    
         <entity id="id">
             <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.ComponentIDType</value>
@@ -2781,6 +3658,15 @@
         <entity id="messageDetailNotInRange"/>
     </entity>
     <entity id="validateDoubleRange" type="tag">
+    	<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="minimum"/>
+				<section id="messageDetailMinimum"/>
+				<section id="maximum"/>
+				<section id="messageDetailMaximum"/>							
+			</value>
+		</trait>
         <entity id="id">
             <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.ComponentIDType</value>
@@ -2801,6 +3687,15 @@
         <entity id="messageDetailNotInRange"/>
     </entity>
     <entity id="validateLength" type="tag">
+    	<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="minimum"/>
+				<section id="messageDetailMinimum"/>
+				<section id="maximum"/>
+				<section id="messageDetailMaximum"/>							
+			</value>
+		</trait>
         <entity id="id">
             <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.ComponentIDType</value>
@@ -2822,6 +3717,15 @@
         <entity id="messageDetailExact"/>
     </entity>
     <entity id="validateLongRange" type="tag">
+    	<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="minimum"/>
+				<section id="messageDetailMinimum"/>
+				<section id="maximum"/>
+				<section id="messageDetailMaximum"/>							
+			</value>
+		</trait>
         <entity id="id">
             <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.ComponentIDType</value>
@@ -2842,6 +3746,13 @@
         <entity id="messageDetailNotInRange"/>
     </entity>
     <entity id="validateRegExp" type="tag">
+    	<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="pattern"/>
+				<section id="messageDetailNoMatch"/>							
+			</value>
+		</trait>
         <entity id="id">
             <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.ComponentIDType</value>
@@ -2855,11 +3766,17 @@
             <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.ComponentIDType</value>
             </trait>
+            <trait id="category">
+				<value>%property.category.core</value>
+			</trait>	
         </entity>
         <entity id="rendered">
             <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
             </trait>
+            <trait id="category">
+				<value>%property.category.core</value>
+			</trait>	
         </entity>
         <entity id="binding">
             <trait id="attribute-value-runtime-type">
@@ -2867,7 +3784,9 @@
             </trait>
             <trait id="runtime-return-type">
                 <value>javax.faces.component.UIComponent</value>
-            </trait>
+            </trait><trait id="category">
+				<value>%property.category.core</value>
+			</trait>	
         </entity>
         <entity id="attributeChangeListener">
             <trait id="attribute-value-runtime-type">
@@ -2880,7 +3799,10 @@
                 <value xsi:type="mdt:ListOfValues">
                     <item>org.apache.myfaces.trinidad.event.AttributeChangeEvent</item>
                 </value>
-            </trait>        
+            </trait>    
+            <trait id="category">
+				<value>%property.category.core</value>
+			</trait>	    
         </entity>
     </entityGroup>
     <entityGroup id="common-trinidad-attributes">
@@ -2897,11 +3819,25 @@
 				<value>org.eclipse.jst.pagedesigner.attributevalues.CSSClassType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value>%property.category.core</value>
 			</trait>				
         </entity>
-        <entity id="shortDesc"/>
-        <entity id="partialTriggers"/>
+        <entity id="shortDesc">
+			<trait id="attribute-value-runtime-type">
+				<value>org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
+			</trait>        
+        	<trait id="category">
+				<value>%property.category.core</value>
+			</trait>	
+        </entity>
+        <entity id="partialTriggers">
+			<trait id="attribute-value-runtime-type">
+				<value>org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
+			</trait>        
+        	<trait id="category">
+				<value>%property.category.core</value>
+			</trait>	
+        </entity>
     </entityGroup>
 	<entityGroup id="common-event-attributes"> 
 		<entity id="onclick">
@@ -3179,7 +4115,7 @@
 				<value>org.eclipse.jst.pagedesigner.attributevalues.CSSStyleType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.???</value>
+				<value>%property.category.css</value>
 			</trait>	       
        </entity>
        <entity id="valuePassThru">
