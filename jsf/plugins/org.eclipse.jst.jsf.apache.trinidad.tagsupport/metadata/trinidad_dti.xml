@@ -294,6 +294,26 @@
 		</trait>
 	</entity>
 
+	<entity id="outputFormatted" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info>
+					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.OutputFormattedOperation">
+					</operation>
+				</tag-convert-info>
+				<tag-decorate-info id="vpd-decorate-design"
+					needBorderDecorator="true"
+					multiLevel="true"
+					widget="true"
+					setNonVisualChildElements="true"
+				/>
+				<tag-decorate-info id="vpd-decorate-preview"
+					resolveChildText="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
 	<entity id="outputLabel" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">

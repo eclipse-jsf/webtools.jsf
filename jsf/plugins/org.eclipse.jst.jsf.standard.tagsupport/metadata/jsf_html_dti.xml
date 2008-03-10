@@ -599,7 +599,7 @@
 						<parameter value="select"/>
 					</operation>
 					<operation id="org.eclipse.jst.pagedesigner.CopyAllAttributesOperation"/>
-					<operation id="RenameAttributeOperation">
+					<operation id="org.eclipse.jst.pagedesigner.RenameAttributeOperation">
 						<parameter value="styleClass"/>
 						<parameter value="class"/>
 					</operation>

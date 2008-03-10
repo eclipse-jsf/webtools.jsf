@@ -13,8 +13,13 @@ package org.eclipse.jst.pagedesigner.css2.layout;
 
 import java.util.List;
 
+import org.eclipse.draw2d.IFigure;
+import org.eclipse.jst.pagedesigner.IHTMLConstants;
+import org.eclipse.jst.pagedesigner.css2.ICSSStyle;
 import org.eclipse.jst.pagedesigner.css2.property.ICSSPropertyID;
+import org.eclipse.jst.pagedesigner.css2.style.AbstractStyle;
 import org.eclipse.swt.graphics.Font;
+import org.w3c.dom.Element;
 
 /**
  * @author mengbo
@@ -145,7 +150,26 @@ public class CSSTextLayout extends FlowFigureLayout {
 			if (text == null || text.length() == 0)
 				layoutEmptyString(fragments, font);
 			else {
-				boolean trimLeadingChar = (text.charAt(0) == ' ' && shouldTrimLeadingWhitespace(getFlowContext()));
+				//fix for bug #221629 - BEGIN
+				boolean useShouldTrimLeadingWSInlineMethod = false;
+				IFigure parentFigure = flowFigure.getParent();
+				if (parentFigure instanceof CSSFigure) {
+					ICSSStyle style = ((CSSFigure)parentFigure).getCSSStyle();
+					if (style instanceof AbstractStyle) {
+						Element element = ((AbstractStyle)style).getElement();
+						if (element != null &&
+								element.getNodeName().equals(IHTMLConstants.TAG_SPAN)) {
+							useShouldTrimLeadingWSInlineMethod = true;
+						}
+					}
+				}
+				boolean trimLeadingChar;
+				if (!useShouldTrimLeadingWSInlineMethod) {
+					trimLeadingChar = (text.charAt(0) == ' ' && shouldTrimLeadingWhitespace(getFlowContext()));
+				} else {
+					trimLeadingChar = (text.charAt(0) == ' ' && shouldTrimLeadingWhitespaceInline(getFlowContext()));
+				}
+				//fix for bug #221629 - END
 				TextLayoutSupport.layoutNormal(getFlowContext(), text,
 						fragments, font, _wrappingStyle, trimLeadingChar);
 			}
@@ -163,6 +187,31 @@ public class CSSTextLayout extends FlowFigureLayout {
 		}
 		while (context instanceof CSSInlineFlowLayout) {
 			context = ((CSSInlineFlowLayout) context).getFlowContext();
+		}
+		LineBox line = context.getCurrentLine();
+		if (line == null || !line.isOccupied()) {
+			return true;
+		}
+		FlowBox lastNoneLinebox = findLastNonLineBox(line);
+		if (lastNoneLinebox == null || lastNoneLinebox.getWidth() == 0) {
+			return true;
+		} else if (lastNoneLinebox instanceof TextFragmentBox) {
+			return ((TextFragmentBox) lastNoneLinebox)._isLastCharWhitespace;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * Used instead of shouldTrimLeadingWhitespace(FlowContext) if parent
+	 * figure's style is for an appropriate in-line element, such as "span".
+	 * 
+	 * @param context FlowContext instance.
+	 * @return true if should trim leading whitespace, else false.
+	 */
+	private boolean shouldTrimLeadingWhitespaceInline(FlowContext context) {
+		if (!context.isCurrentLineOccupied()) {
+			return true;
 		}
 		LineBox line = context.getCurrentLine();
 		if (line == null || !line.isOccupied()) {

@@ -30,6 +30,9 @@
    </extension>
    <extension
          point="org.eclipse.jst.pagedesigner.pageDesignerExtension">
+      <elementEditFactory
+            class="org.eclipse.jst.jsf.apache.trinidad.tagsupport.elementedit.TrinidadCoreElementEditFactory">
+      </elementEditFactory>
       <tagTransformOperation
             class="org.eclipse.jst.jsf.apache.trinidad.tagsupport.converter.operations.PanelTabbedOperation"
             id="PanelTabbedOperation">
@@ -38,9 +41,10 @@
             class="org.eclipse.jst.jsf.apache.trinidad.tagsupport.converter.operations.ShowDetailItemOperation"
             id="ShowDetailItemOperation">
       </tagTransformOperation>
-      <elementEditFactory
-            class="org.eclipse.jst.jsf.apache.trinidad.tagsupport.elementedit.TrinidadCoreElementEditFactory">
-      </elementEditFactory>
+      <tagTransformOperation
+            class="org.eclipse.jst.jsf.apache.trinidad.tagsupport.converter.operations.OutputFormattedTransformOperation"
+            id="OutputFormattedOperation">
+      </tagTransformOperation>
    </extension>
 
 </plugin>
