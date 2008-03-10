@@ -107,14 +107,14 @@ public class TestJSPSemanticsValidator_AttributeValues extends TestCase
         assertEquals(9, mockReporter.getReportedProblems().size());
 
         assertExpectedMessage(mockReporter, 603, 2, IMessage.NORMAL_SEVERITY);
-        assertExpectedMessage(mockReporter, 649, 1, IMessage.NORMAL_SEVERITY);
+        assertExpectedMessage(mockReporter, 648, 4, IMessage.NORMAL_SEVERITY);
         assertExpectedMessage(mockReporter, 696, 5, IMessage.NORMAL_SEVERITY);
         assertExpectedMessage(mockReporter, 753, 6, IMessage.NORMAL_SEVERITY);
         assertExpectedMessage(mockReporter, 802, 4, IMessage.HIGH_SEVERITY);
 
         // two on this one: syntax error and missing bracket
         assertExpectedMessage(mockReporter, 846, 5, IMessage.HIGH_SEVERITY);
-        assertExpectedMessage(mockReporter, 848, 1, IMessage.NORMAL_SEVERITY);
+        assertExpectedMessage(mockReporter, 847, 3, IMessage.NORMAL_SEVERITY);
 
         assertExpectedMessage(mockReporter, 963, 40, IMessage.HIGH_SEVERITY);
     }

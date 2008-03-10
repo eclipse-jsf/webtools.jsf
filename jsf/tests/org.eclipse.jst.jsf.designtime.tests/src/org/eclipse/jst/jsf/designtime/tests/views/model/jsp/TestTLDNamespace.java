@@ -25,20 +25,19 @@ public class TestTLDNamespace extends BaseTestClass
     {
         super.setUp();
 
-        final CompositeTagResolvingStrategy<TLDElementDeclaration> compStrategy =
-            new CompositeTagResolvingStrategy<TLDElementDeclaration>();
-
-        compStrategy.addStrategy(new TagIntrospectingStrategy(
-                _webProjectTestEnv.getTestProject()));
-        compStrategy.addStrategy(new DefaultJSPTagResolver(_webProjectTestEnv
-                .getTestProject()));
-
         final List<String> policies = new ArrayList<String>();
         policies.add(DefaultJSPTagResolver.ID);
         policies.add(TagIntrospectingStrategy.ID);
         final IdentifierOrderedIteratorPolicy<String>  idOrderedPolicy =
             new IdentifierOrderedIteratorPolicy<String>(policies);
-        compStrategy.setOrderingPolicy(idOrderedPolicy);
+
+        final CompositeTagResolvingStrategy<TLDElementDeclaration> compStrategy =
+            new CompositeTagResolvingStrategy<TLDElementDeclaration>(idOrderedPolicy);
+
+        compStrategy.addStrategy(new TagIntrospectingStrategy(
+                _webProjectTestEnv.getTestProject()));
+        compStrategy.addStrategy(new DefaultJSPTagResolver(_webProjectTestEnv
+                .getTestProject()));
 
         final TLDDocument coreDoc = TestUtil.getDocument(_tagRecords
                 .get(ITLDConstants.URI_JSF_CORE));

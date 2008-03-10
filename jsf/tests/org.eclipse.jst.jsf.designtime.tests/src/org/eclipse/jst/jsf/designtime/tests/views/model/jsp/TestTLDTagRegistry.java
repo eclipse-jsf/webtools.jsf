@@ -8,7 +8,9 @@ import java.util.Map;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagElement;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.Namespace;
 import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
-import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.registry.TLDTagRegistry;
+import org.eclipse.jst.jsf.designtime.internal.view.model.ITagRegistry;
+import org.eclipse.jst.jsf.designtime.internal.view.model.TagRegistryFactory.TagRegistryFactoryException;
+import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.registry.TLDRegistryManager.MyRegistryFactory;
 import org.eclipse.jst.jsf.designtime.tests.views.model.jsp.VerifyRegistryUtil.CompositeVerifier;
 
 public class TestTLDTagRegistry extends BaseTestClass
@@ -26,18 +28,18 @@ public class TestTLDTagRegistry extends BaseTestClass
         super.tearDown();
     }
 
-    public void testGetRegistry()
+    public void testGetRegistry() throws TagRegistryFactoryException
     {
-        final TLDTagRegistry registry = TLDTagRegistry
-                .getRegistry(_webProjectTestEnv.getTestProject());
+        final ITagRegistry registry = new MyRegistryFactory()
+                .createTagRegistry(_webProjectTestEnv.getTestProject());
 
         assertNotNull(registry);
     }
 
-    public void testGetAllTagLibraries()
+    public void testGetAllTagLibraries() throws TagRegistryFactoryException
     {
-        final TLDTagRegistry registry = TLDTagRegistry
-                .getRegistry(_webProjectTestEnv.getTestProject());
+        final ITagRegistry registry = new MyRegistryFactory()
+                .createTagRegistry(_webProjectTestEnv.getTestProject());
 
         assertNotNull(registry);
 
